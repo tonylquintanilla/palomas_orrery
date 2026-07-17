@@ -6,7 +6,7 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Skill version: 1.0 | Cut from palomas_orrery @ b29ad3f8 | July 1, 2026
+Skill version: 1.1 | Cut from palomas_orrery @ 2991a0c7 | July 17, 2026
 Sources: LEDGER_CONSOLIDATED.md header, ledger_index.py at HEAD, handoff
 v28 (consolidation) and v29 (cleanup), food insecurity handoffs.
 
@@ -41,10 +41,20 @@ rows.
 - Body: context, decisions, constraints. Bullets are fine here.
 **Tony:** async comments from Tony to the next session -- address before
 building.
+**Note:** or **Claude:** -- Claude's own annotations (proposed RICE
+scores, verification results, corrections, open questions for Tony).
 **Gap:** what remains to close the item.
 **Ref:** related files, handoffs, cross-linked L-handles.
 ```
 
+- **Tony:** is reserved EXCLUSIVELY for Tony's own hand-written comments --
+  never a label Claude applies to its own text, even when proposing
+  something for Tony to react to (a RICE score, a verification result).
+  Claude's own annotations use **Note:** or **Claude:** instead.
+  Mislabeling a Claude-authored proposal as **Tony:** makes a draft read
+  as if Tony already said something he didn't -- caught in this project's
+  own ledger drafts (L-126/L-127, July 2026) before they were pasted in,
+  not after.
 - Header regex: `#### [L-NNN] title` (an optional `| #tag` after the
   number is supported). The metadata comment's L number MUST match the
   header -- the indexer flags disagreement.

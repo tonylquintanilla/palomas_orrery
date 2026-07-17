@@ -1,28 +1,55 @@
 """
 module_atlas.py - Codebase encyclopedia generator for Paloma's Orrery
 
-Scans every .py file in the project directory and produces MODULE_ATLAS.md
-containing:
-  - Module purpose (docstring or leading comment)
-  - Public functions with their docstrings
-  - Line count
-  - Role tag (data / cache / computation / rendering / gui / pipeline / utility)
-  - Dependencies (what this module imports from the project)
-  - Consumers (what imports this module)
+Scans every .py file in the project directory ONCE and produces TWO files
+from that single scan, so they can never diverge from each other again
+(L-127, July 2026 -- MODULE_INDEX.md was previously hand-maintained and
+drifted 4 months out of date with its own wrong module/line counts,
+independent of MODULE_ATLAS.md's own auto-regeneration):
+
+  MODULE_ATLAS.md -- the full reference (deep, for AI upload):
+    - Module purpose (docstring or leading comment), full text
+    - Public functions with their docstrings
+    - Line count, role tag, dependencies, consumers
+    - Alphabetical quick-reference index
+
+  MODULE_INDEX.md -- the human-browsable index (light, for GitHub):
+    - Same role-based grouping, friendlier section titles
+    - One row per module: name + docstring-derived description + lines
+    - No function lists / dependency graphs -- that's the atlas's job
+
+Both are MECHANICAL extractions only (no AI synthesis step) -- the index
+reads only as good as each module's own docstring. That's a deliberate
+tradeoff (L-127): thin docstrings get thin index entries, which is a
+visible incentive to improve the docstring rather than hand-patch the
+index around it.
+
+Both outputs write to the repo ROOT by default, matching where
+MODULE_ATLAS.md already lived and fixing README.md's existing
+[MODULE_INDEX.md](MODULE_INDEX.md) link at its root cause (the file used
+to live in documentation/, where that root-relative link couldn't reach
+it).
 
 Usage:
-    python module_atlas.py                     # scan current directory
+    python module_atlas.py                     # scan current directory,
+                                                # write both files to it
     python module_atlas.py /path/to/project    # scan specific directory
-    python module_atlas.py --output atlas.md   # custom output filename
+    python module_atlas.py --output atlas.md   # custom atlas filename
+    python module_atlas.py --index-output idx.md  # custom index filename
+    python module_atlas.py --atlas-only        # skip MODULE_INDEX.md
+    python module_atlas.py --index-only        # skip MODULE_ATLAS.md
 
-The output is designed to be uploaded to a Claude session as a reference
+The atlas is designed to be uploaded to a Claude session as a reference
 artifact. Ask Claude natural-language questions and it searches the atlas.
+The index is designed to be read directly on GitHub.
 
 Note: Scans only the top-level directory (no subdirectories).
       Run from your clean project directory to avoid picking up
       old copies or virtual environment files.
 
-Module updated: April 2026 with Anthropic's Claude Opus 4.6
+Module updated: July 2026 with Anthropic's Claude Sonnet 5 (L-127: single
+scan now feeds both MODULE_ATLAS.md and the newly-mechanical
+MODULE_INDEX.md; both write to repo root).
 """
 
 import ast
@@ -187,6 +214,27 @@ ROLE_DESCRIPTIONS = {
     'devtool':          'Developer tools (dependency tracing, atlas)',
     'legacy':           'Archived / superseded modules',
     'other':            'Uncategorized',
+}
+
+# MODULE_INDEX.md section titles -- the same role tags as above, reworded
+# for a human skimming the index rather than an AI querying the atlas
+# (L-127 Gap item 1: reconcile ROLE_MAP against MODULE_INDEX's existing
+# thematic groupings). Deliberately reuses ROLE_MAP as the grouping key
+# rather than inventing a second classification scheme -- one source of
+# truth for "what kind of module is this," two ways of labeling it.
+ROLE_SECTION_TITLES = {
+    'gui':              'Core Applications',
+    'rendering':        'Visualization Modules',
+    'rendering/shells': 'Planetary & Solar Shell Visualizations',
+    'computation':      'Orbital Mechanics & Calculations',
+    'data':             'Data Catalogs & Constants',
+    'cache':            'Cache Management',
+    'pipeline':         'Save, Export & Pipeline Utilities',
+    'scenario':         'Earth System Scenarios',
+    'utility':          'Utility & Helper Modules',
+    'devtool':          'Developer Tools',
+    'legacy':           'Legacy / Archived Modules',
+    'other':            'Other Modules',
 }
 
 
@@ -370,16 +418,19 @@ def build_dependency_graph(project_dir):
 
 
 # ============================================================
-# ATLAS GENERATION
+# SCAN -- shared by both generators, run exactly once per invocation
 # ============================================================
 
-def generate_atlas(project_dir, output_path):
-    """Generate the MODULE_ATLAS.md file."""
-
+def scan_modules(project_dir):
+    """Scan every .py file in project_dir once and return the list of
+    per-module info dicts that both generate_atlas() and generate_index()
+    read from. This is the single source of truth both outputs share --
+    running this once and handing the same result to both writers is what
+    actually prevents the two files from diverging, not just a naming
+    convention."""
     print(f"Scanning {project_dir}...")
     deps, consumers, local_modules = build_dependency_graph(project_dir)
 
-    # Collect module info
     modules = []
     for mod in sorted(local_modules):
         fpath = os.path.join(project_dir, mod + '.py')
@@ -398,18 +449,29 @@ def generate_atlas(project_dir, output_path):
         }
         modules.append(info)
 
+    return modules
+
+
+ROLE_ORDER = [
+    'gui', 'rendering', 'rendering/shells', 'computation',
+    'data', 'cache', 'pipeline', 'scenario', 'utility',
+    'devtool', 'legacy', 'other'
+]
+
+
+# ============================================================
+# ATLAS GENERATION
+# ============================================================
+
+def generate_atlas(modules, output_path):
+    """Write MODULE_ATLAS.md from an already-scanned modules list
+    (see scan_modules)."""
+
     # Group by role
     by_role = {}
     for mod in modules:
         role = mod['role']
         by_role.setdefault(role, []).append(mod)
-
-    # Role display order
-    role_order = [
-        'gui', 'rendering', 'rendering/shells', 'computation',
-        'data', 'cache', 'pipeline', 'scenario', 'utility',
-        'devtool', 'legacy', 'other'
-    ]
 
     # Count totals
     total_lines = sum(m['lines'] for m in modules)
@@ -441,6 +503,9 @@ def generate_atlas(project_dir, output_path):
     lines.append("Claude searches this atlas, reads relevant source files,")
     lines.append("and explains in context.")
     lines.append("")
+    lines.append("For a lighter, human-browsable version of this same scan, see")
+    lines.append("MODULE_INDEX.md (also generated by this script).")
+    lines.append("")
     lines.append("---")
     lines.append("")
 
@@ -449,7 +514,7 @@ def generate_atlas(project_dir, output_path):
     lines.append("")
     lines.append("| Role | Count | Description |")
     lines.append("|------|-------|-------------|")
-    for role in role_order:
+    for role in ROLE_ORDER:
         if role in by_role:
             desc = ROLE_DESCRIPTIONS.get(role, '')
             count = len(by_role[role])
@@ -459,7 +524,7 @@ def generate_atlas(project_dir, output_path):
     lines.append("")
 
     # Module entries grouped by role
-    for role in role_order:
+    for role in ROLE_ORDER:
         if role not in by_role:
             continue
 
@@ -539,10 +604,101 @@ def generate_atlas(project_dir, output_path):
 
     # Print role summary
     print("\nRole summary:")
-    for role in role_order:
+    for role in ROLE_ORDER:
         if role in by_role:
             count = len(by_role[role])
             print(f"  {role:20s} {count:3d} modules")
+
+
+# ============================================================
+# INDEX GENERATION (L-127: mechanical, same scan as the atlas)
+# ============================================================
+
+def _index_description(mod):
+    """The docstring text for an index row, with a redundant leading
+    'modulename.py - ' prefix stripped (many docstrings restate the
+    filename as their first words -- harmless in the atlas's blockquote
+    format, repetitive next to a Module column that already says it)."""
+    doc = mod['docstring']
+    prefix_patterns = [
+        mod['name'] + '.py - ', mod['name'] + '.py -',
+        mod['name'] + '.py: ', mod['name'] + '.py ',
+        mod['name'] + ' - ', mod['name'] + ' -',
+    ]
+    for p in prefix_patterns:
+        if doc.startswith(p):
+            doc = doc[len(p):].lstrip()
+            break
+    return doc[:1].upper() + doc[1:] if doc else doc
+
+
+def generate_index(modules, output_path):
+    """Write MODULE_INDEX.md from the SAME already-scanned modules list
+    generate_atlas() uses -- a lighter, human-browsable companion, not an
+    independent document. Mechanical only: each module's description is
+    its own docstring (via scan_modules -> get_module_docstring), not an
+    AI-synthesized summary. A thin docstring makes a thin index entry --
+    deliberate, per L-127: that's a visible incentive to improve the
+    docstring, not a reason to hand-patch the index around it."""
+
+    by_role = {}
+    for mod in modules:
+        by_role.setdefault(mod['role'], []).append(mod)
+
+    total_lines = sum(m['lines'] for m in modules)
+    total_functions = sum(len(m['functions']) for m in modules)
+
+    lines = []
+    now = datetime.now().strftime('%B %d, %Y')
+
+    lines.append("# Paloma's Orrery - Module Index")
+    lines.append("")
+    lines.append(f"**Generated:** {now} by `module_atlas.py`  ")
+    lines.append("**Repository:** Paloma's Orrery - Solar System Visualization Suite  ")
+    lines.append("**Philosophy:** Data Preservation is Climate Action")
+    lines.append("")
+    lines.append("This file and `MODULE_ATLAS.md` are generated from the SAME scan")
+    lines.append("(see `module_atlas.py`) -- they cannot diverge from each other the")
+    lines.append("way the old hand-maintained MODULE_INDEX.md did. This is the light,")
+    lines.append("human-browsable view; `MODULE_ATLAS.md` is the deep reference")
+    lines.append("(functions, dependencies, consumers) meant for AI-assisted queries.")
+    lines.append("")
+    lines.append(f"**Total Python Files:** {len(modules)}  ")
+    lines.append(f"**Total Lines of Code (non-blank):** {total_lines:,}  ")
+    lines.append(f"**Total Public Functions/Classes:** {total_functions:,}")
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    for role in ROLE_ORDER:
+        if role not in by_role:
+            continue
+        title = ROLE_SECTION_TITLES.get(role, role.title())
+        role_modules = sorted(by_role[role], key=lambda m: m['name'])
+
+        lines.append(f"## {title}")
+        lines.append("")
+        lines.append("| Module | Description |")
+        lines.append("|--------|-------------|")
+        for mod in role_modules:
+            desc = _index_description(mod).replace('|', '\\|')
+            lines.append(
+                f"| `{mod['name']}.py` | {desc} ({mod['lines']:,} lines) |"
+            )
+        lines.append("")
+        lines.append("---")
+        lines.append("")
+
+    lines.append("*Generated by `module_atlas.py` -- Paloma's Orrery Developer Tools. "
+                 "For function-level detail, dependencies, and consumers, see "
+                 "`MODULE_ATLAS.md`.*")
+    lines.append("")
+
+    content = '\n'.join(lines)
+    with open(output_path, 'w', encoding='utf-8') as f:
+        f.write(content)
+
+    print(f"Index written to {output_path}")
 
 
 # ============================================================
@@ -551,14 +707,26 @@ def generate_atlas(project_dir, output_path):
 
 def main():
     project_dir = '.'
-    output_path = 'MODULE_ATLAS.md'
+    atlas_path = 'MODULE_ATLAS.md'
+    index_path = 'MODULE_INDEX.md'
+    do_atlas = True
+    do_index = True
 
     args = sys.argv[1:]
     i = 0
     while i < len(args):
         if args[i] == '--output' and i + 1 < len(args):
-            output_path = args[i + 1]
+            atlas_path = args[i + 1]
             i += 2
+        elif args[i] == '--index-output' and i + 1 < len(args):
+            index_path = args[i + 1]
+            i += 2
+        elif args[i] == '--atlas-only':
+            do_index = False
+            i += 1
+        elif args[i] == '--index-only':
+            do_atlas = False
+            i += 1
         elif not args[i].startswith('-'):
             project_dir = args[i]
             i += 1
@@ -569,7 +737,12 @@ def main():
         print(f"ERROR: '{project_dir}' is not a directory")
         sys.exit(1)
 
-    generate_atlas(project_dir, output_path)
+    modules = scan_modules(project_dir)
+
+    if do_atlas:
+        generate_atlas(modules, atlas_path)
+    if do_index:
+        generate_index(modules, index_path)
 
 
 if __name__ == '__main__':

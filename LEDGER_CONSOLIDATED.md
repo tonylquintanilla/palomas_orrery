@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*74 live items; 63 need attention (`!`); 74 RICE-scored; 46 closed (section C + W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*75 live items; 64 need attention (`!`); 75 RICE-scored; 46 closed (section C + W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -350,6 +350,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### W.Deferred -- Web Publication deferred (captured)
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-126 | Close-approach/encounter anchor mechanism -- general principle (NEOs, comets, spacecraft), not Apophis-specific | OPEN | 1.7 | 2026-07-17 |
 |  | L-091 | Option E: unified front end | DEFERRED | 1.0 | 2026-07-03 |
 |  | L-092 | Embeddable scenes for educators | DEFERRED | 1.0 | 2026-07-03 |
 |  | L-093 | Educational guided explorations (specs as curriculum) | DEFERRED | 1.0 | 2026-07-03 |
@@ -523,7 +524,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 **Ref:** ENSO_chart_spec.md v2 (design spec, this session); cross-ref L-001 (Food Insecurity, same Earth System track); energy_imbalance.py (Phase 2 target).
 
 #### [L-062] README refresh -- fold in handoff + ledger developments
-<!-- L:062 status:OPEN upd:2026-06-21 section:A flag: rice:2/1/75/1 -->
+<!-- L:062 status:OPEN upd:2026-07-17 section:A flag: rice:3/2/85/1 -->
 - **README review/refresh.** Review the repo README against its last update and
   fold in developments captured since in the handoffs and this ledger (Movement
   track complete, animation engine, item-19.3 axis control, shell-consolidation
@@ -531,7 +532,76 @@ as an archive of the prioritization thinking -- no cleanup on close.
   current public-facing description matching what the code actually does. Paired
   with L-063 (in-GUI Note) -- both are user-facing text that has drifted from
   project state.
-**Gap:** read current README at HEAD; draft a refresh from the handoff/ledger record; Tony reviews + commits. Scope-light, mostly assembly not design.
+- **Staged scope, decided 2026-07-17 (Tony + Sonnet 5), because Tony noticed
+  the drift firsthand on the live GitHub page.** Split into a do-now half
+  and a defer half, not one pass:
+  - **Do now, no gallery dependency:** date/version stamp, module/LOC
+    stats (verified stale below), a visible Requirements section, every
+    doc cross-reference link (verified BROKEN below), and folding in
+    non-gallery feature/capability drift since May.
+  - **Defer until the interactive gallery goes live:** the "Web Gallery"
+    section's architecture description ONLY. It should still describe the
+    CURRENT, publicly-linked gallery (palomasorrery.com, the
+    HTML-export -> json_converter.py -> GitHub Pages pipeline) as it
+    exists today -- not omit gallery coverage entirely. What's deferred is
+    the in-progress Phase 2 Solar System Assembler / interactive rework
+    (L-098 onward, this week's M1/M2) -- unreleased, not publicly linked,
+    still changing week to week; documenting it now risks a second
+    rewrite almost immediately.
+  - **Audience reframing (Tony, 2026-07-17):** primary audience shifts to
+    the DEVELOPER, even though the repo is public -- away from the
+    current beginner/end-user hand-holding tone (the multi-page
+    "Step-by-Step Installation Guide for Beginners" walkthrough reads for
+    a non-technical download-and-click audience). Five purposes, in
+    order, Tony's own framing: (1) general project information; (2)
+    pointers to key organizational structure and documents -- focused on
+    the orrery, may mention the gallery, written for a developer reader;
+    (3) orientation on cloning/using the repo, especially that the
+    released data files are NOT in the active repo (gitignored, obtained
+    from Releases); (4) the gallery as it currently, publicly exists --
+    not the unreleased interactive work; (5) a brief mention of data
+    sources and citation discipline (-> PROVENANCE_AUDIT.md).
+- **Concrete staleness findings, this session (verified against live HEAD
+  `2991a0c7`, not assumed):**
+  - Module/LOC claim wrong: README says "75+ Python modules, over 78,000
+    lines of code" -- actual count at HEAD is 121 Python files, 106,476
+    lines.
+  - Last-updated stamp: May 4/May 2026 (v2.9.0) vs. today -- 2+ months,
+    and the entire Phase 2 gallery-cache-builder track (L-098 through
+    L-126, including this week's M1/M2 trust-measurement work) missing
+    from the changelog line.
+  - **Every doc cross-reference link in the README is broken.**
+    `MODULE_INDEX.md`, `climate_readme.md`, `social_media_readme.md`,
+    `web_gallery_handoff.md`, `wet_bulb_temperature_readme.md` are all
+    linked repo-root-relative, but all five actually live under
+    `documentation/` -- confirmed by direct path check. 404 on GitHub
+    today, independent of anything gallery-related.
+  - No visible Requirements citation (Tony's original observation):
+    `requirements.txt` carries real, carefully-maintained content
+    invisible from the README -- pinned-version rationale (kaleido
+    locked at 0.2.1, with the reason why), a full Python 3.14
+    compatibility section (which packages break, which don't, what to
+    monitor), and the Plotly 6.x/kaleido 1.0 upgrade path. The README
+    only says "pip install -r requirements.txt" and a sample `pip list`
+    -- none of this surfaces.
+- **Routing decided:** the do-now half goes to Fable as a manifest-style
+  task (broad-first surface-and-organize, real latitude, not a design
+  session) -- see FABLE_TASK_README_REFRESH.md. Tony reviews the diff
+  before merging, same as any Fable deliverable.
+**Gap:** (1) send the Fable prompt, get the diff back; (2) Tony + Sonnet
+review against the 5 purposes and the concrete findings above; (3) commit;
+(4) revisit the Web Gallery section specifically once the interactive
+assembler is publicly linked (separate future pass, not blocked on
+anything else in this item).
+**Ref:** L-063 (paired, in-GUI Note); L-098 (Phase 2 parent, why the
+gallery section is deferred); FABLE_TASK_README_REFRESH.md (this
+session's Fable prompt); requirements.txt; PROVENANCE_AUDIT.md.
+**Tony:** RICE proposed 3/2/85/1 (reach raised -- this is the repo's
+public front door, not an internal doc; impact ticks up, broken links
+and wrong stats are a real credibility/usability issue, not purely
+cosmetic; confidence high, concrete claims verified directly this
+session rather than assumed; effort stays low, Fable-suited assembly
+work) -- yours to finalize.
 
 #### [L-063] Orrery GUI Note text update
 <!-- L:063 status:OPEN upd:2026-06-21 section:A flag: rice:2/1/50/0.5 -->
@@ -2366,9 +2436,79 @@ regenerate `PROVENANCE_AUDIT.md` with the new disclosure visible.
 **Ref:** L-124 (the separate, deferred wishlist for an actual
 color-accuracy pass, if one is ever undertaken); `_make_dict_unit`,
 `generate_report()` in `provenance_scanner.py`.
-**Tony:** RICE proposed 2/2/95/1 (fixes a real overclaim risk codebase-
+**Claude:** RICE proposed 2/2/95/1 (fixes a real overclaim risk codebase-
 wide, high confidence, small effort -- documentation only) -- yours to
 finalize.
+
+#### [L-127] module_atlas.py generates MODULE_INDEX.md too -- single source, eliminate divergence
+<!-- L:127 status:OPEN upd:2026-07-17 section:D.Structural flag: rice:2/2/80/1 -->
+- **The ask (Tony, 2026-07-17):** one script run produces BOTH
+  MODULE_ATLAS.md (full report, existing) and MODULE_INDEX.md (current
+  thematic/prose style, current data) -- same pattern as L-097
+  (skills_index.py auto-generating the Skill Manifest table): kill a
+  hand-maintained sibling by generating it from the same scan as its
+  always-current relative, rather than hoping two files stay in sync by
+  discipline alone.
+- **Real design fork, not just an implementation detail:**
+  (a) Mechanical-only -- module_atlas.py already extracts docstrings,
+  functions, role tags, deps/consumers per module. MODULE_INDEX.md gets
+  formatted straight from that data. Fully deterministic, no new
+  dependency, same philosophy as the existing script. Honest cost: the
+  current MODULE_INDEX.md's synthesized narrative ("Core visualization
+  functions: plot_objects() generates...") isn't a docstring dump -- it
+  reads like curated prose. Some modules' docstrings won't support that
+  quality yet, so some entries will read thinner on day one. That's a
+  healthy pressure toward better docstrings, not a bug, but it's a real
+  step down for a few modules until they catch up.
+  (b) AI-assisted -- script does the scan, a Claude pass writes the
+  prose from it each time. Closer to today's quality; no longer one
+  deterministic script run, so less "automated" in the sense Tony asked
+  for.
+  Leaning (a) for consistency with the project's existing devtool
+  philosophy (ledger_index.py, skills_index.py) -- Tony's call to
+  finalize, not decided here.
+- **Grouping reconciliation needed either way:** MODULE_INDEX.md's
+  current sections (Core Applications, Orbital Mechanics & Calculations,
+  Cache Management, Stellar Visualization Pipeline, etc.) don't map 1:1
+  onto module_atlas.py's existing ROLE_MAP tags (gui, rendering,
+  rendering/shells, computation, data, cache, pipeline, scenario,
+  utility, devtool, other). Extend ROLE_MAP with the finer categories, or
+  adopt the coarser existing tags as MODULE_INDEX's new section headers
+  -- an actual decision the implementation has to make, not a detail to
+  paper over.
+- **Not urgent, not blocking.** The immediate need (accurate numbers in
+  the README, right now) is already handled -- MODULE_ATLAS.md was
+  regenerated fresh this session (121 modules, 953 functions, 91,851
+  lines, July 17) and the Fable README prompt was corrected to source
+  from that instead of the stale MODULE_INDEX.md. This item is the
+  structural fix so this class of drift can't recur, not a blocker on
+  anything in flight.
+**Gap:** (1) reconcile ROLE_MAP against MODULE_INDEX's current thematic
+groupings; (2) extend module_atlas.py to emit MODULE_INDEX.md from the
+same AST scan pass, as a proper generated index (mechanical-only,
+settled 2026-07-17) -- same marker-based-zone pattern as
+ledger_index.py/skills_index.py where practical; (3) BOTH outputs write
+to repo ROOT, not documentation/ -- matching where MODULE_ATLAS.md
+already lives, matching the root/documentation split already in force in
+this repo (11 current-reference files at root vs. 506 historical files
+in documentation/), and fixing the README's existing MODULE_INDEX.md
+link at its root cause rather than just correcting the link syntax; (4)
+Tony renames the existing hand-curated documentation/MODULE_INDEX.md to
+an archival copy (matching the _superseded convention already used for
+LEDGER_orrery_consolidated_superseded.md) before the new generated
+version takes its place at root.
+- **Done (Tony, 2026-07-17):** orphaned stale documentation/MODULE_ATLAS.md
+  duplicate (April 14, 86,139 lines) removed.
+**Ref:** module_atlas.py; documentation/MODULE_ATLAS.md;
+documentation/MODULE_INDEX.md; L-097 (skills_index.py, same pattern,
+precedent RICE); ledger_index.py (original precedent); add_docstrings.py
+(existing docstring-batch tool, may be relevant to the docstring-quality
+dependency in option (a)).
+**Claude:** RICE proposed 2/2/80/1, matching L-097's precedent for this
+class of devtool/process work (modest reach -- internal tooling, not
+user-facing; real but not huge impact; high confidence, same proven
+pattern as two existing scripts; low effort, extends existing code
+rather than building new) -- yours to finalize.
 
 ### D.Feature -- Bucket A (near-term)
 
@@ -3347,6 +3487,75 @@ for you or Opus to make, not resolved here.
   500/1000 pts). Reference exists desktop-side. Needed for comets / interstellar
   objects (3I/ATLAS) in the interactive. Served data already ready (elements +
   orbit_type + Tp + max_distance).
+
+#### [L-126] Close-approach/encounter anchor mechanism -- general principle (NEOs, comets, spacecraft), not Apophis-specific
+<!-- L:126 status:OPEN upd:2026-07-17 section:W.Deferred flag: rice:2/2/85/2 -->
+- **General principle (Tony, 2026-07-17):** this is not an Apophis special
+  case. ANY body with a close-approach/encounter event -- a near-Earth
+  object's predicted flyby, a comet's perihelion passage, a spacecraft's
+  encounter with a planet or moon -- needs its encounter-specific VIEW
+  anchored at the encounter epoch, not "today" or the plot's default date.
+  Apophis is the flagship worked example, not the scope boundary.
+- **Already proven, already shipping, on the DESKTOP side** -- verified
+  directly against current code, not recalled from a past session summary:
+  - `idealized_orbits.py` `plot_hyperbolic_osculating_orbit` -- its own
+    docstring: "date (datetime): Plot start date (used as fallback epoch
+    only)"; the `approach` dict (CAD perigee epoch) takes precedence when
+    available. This is exactly the close-approach VIEW anchor, already
+    built, for any small body with CAD data -- not asteroid-specific
+    even on the desktop.
+  - `spacecraft_encounters.py` `resolve_encounter_time` /
+    `get_encounter_preset` -- the spacecraft analog. Concrete evidence
+    this matters: the April 2026 Artemis II HypOsc bug -- the full
+    mission plot (GUI epoch) showed q=83,203 km; the "Go: Closest
+    Approach" preset (derived encounter epoch) showed the correct
+    q=8,318 km. Same principle, same failure mode when it's missed, on a
+    completely different body class (spacecraft, not a NEO).
+- **Not yet ported to the GALLERY serving side, unevenly:**
+  - Comets: `overrides.comet.anchor: "Tp"` exists (`resolve_comet_conic`)
+    -- but it anchors the WHOLE served baseline block, not just a view.
+  - NEOs (Apophis): nothing built yet (this item's original scope).
+  - Spacecraft: nothing built yet -- Voyager 1 in the gallery currently
+    serves only a full-trajectory arc; there is no "Voyager at Jupiter" /
+    "Voyager at Saturn" encounter view at all on the gallery side, even
+    though the desktop already has the proven mechanism for this class.
+- **Settled scope (Apophis case, still holds generally):** the anchor
+  applies ONLY to the close-approach/encounter view. Baseline/full-orbit
+  serving -- and F1a's trust measurement -- stays on its own natural
+  epoch ("today" for NEOs; unaffected for a spacecraft's full arc). This
+  is consistent with the desktop's already-proven pattern for both small
+  bodies and spacecraft.
+- **Open question, NOT resolved here:** the comet case currently anchors
+  the served BASELINE block at Tp, not just a view -- is that a
+  deliberate, legitimate exception (comets may not have a meaningful
+  "baseline away from perihelion" view the way a planet or NEO does), or
+  should it be reconciled with the view-only principle now that the
+  principle has been stated explicitly? Flagging for Tony's judgment, not
+  assuming either answer.
+**Gap:** (1) Apophis: overrides.asteroid.anchor config entry +
+resolve_comet_conic-style builder branch, scoped to a close-approach view
+per the settlement above; (2) generalize the mechanism's naming/schema so
+it isn't asteroid-specific -- likely a category-agnostic key rather than
+overrides.asteroid.anchor by itself, since NEOs and spacecraft both need
+it; (3) port the spacecraft encounter-view mechanism to the gallery
+serving side (currently absent entirely) -- Voyager 1 is the natural
+first case, following spacecraft_encounters.py's proven pattern; (4)
+reconcile or explicitly ratify the comet baseline-anchoring exception
+against the general view-only principle.
+**Ref:** PHASE2_F1_FEATURE_SERVING_DESIGN_HANDOFF_v0.4.md SS6.6;
+PHASE2_F1_BUILD_MANIFEST_v2_2.md sec 1 + sec 8; gallery
+tools/gallery_cache_builder.py resolve_comet_conic; close_approach_data.py;
+orrery idealized_orbits.py plot_hyperbolic_osculating_orbit (CAD-perigee
+anchor, verified live); orrery spacecraft_encounters.py
+resolve_encounter_time / get_encounter_preset / SPACECRAFT_ENCOUNTERS; the
+April 2026 Artemis II HypOsc epoch-timing fix (q=83,203 km vs q=8,318 km);
+L-118 (F1 parent); M2_IMPLEMENTATION_REPORT.md.
+**Tony:** RICE proposed 2/2/85/2 (reach raised from the Apophis-only draft
+-- this now covers any future NEO close approach and any spacecraft
+encounter added to the gallery, not one object; confidence stays high,
+grounded in mechanisms already proven and shipping on the desktop side;
+effort ticks up slightly for the naming generalization, still small per
+object once the pattern is set) -- yours to finalize.
 
 ### W.Done -- closed items, kept with the track
 

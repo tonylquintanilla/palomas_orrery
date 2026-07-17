@@ -1,11 +1,13 @@
 # Paloma's Orrery -- Provenance Audit
 
-Generated: July 16, 2026
-Files scanned: 120
-Total findings: 675
-Constants: 74 | Dicts: 38 | Display strings: 563
+Generated: July 17, 2026
+Files scanned: 121
+Total findings: 676
+Constants: 74 | Dicts: 39 | Display strings: 563
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
+
+**Color values are excluded from this audit.** RGB/color fields are never scored as claims (see _make_dict_unit), and a dict's block `# Source:` citation should never be read as covering that dict's `color` field(s), even when it covers everything else in the same unit. This does not mean color choices have no basis at all -- some are loosely informed by real imagery or composition data -- but color selection across this codebase is inconsistent in method: sometimes evidence-informed, sometimes chosen purely for visual contrast or distinction, sometimes arbitrary. Treat every color value as a developer/AI judgment call, not a measured or verified quantity, regardless of what citation sits nearby. (Tony's call, July 16, 2026; a low-priority wishlist item for a real, systematic color-accuracy pass is tracked at LEDGER_CONSOLIDATED.md L-124.)
 
 ---
 
@@ -36,7 +38,7 @@ Unit of provenance: the smallest thing with a coherent source citation. A dict w
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 104 |
+| 1 | 16-20 | FIX NOW | 105 |
 | 2 | 10-15 | ALL ACCEPTED RESIDUALS -- see note below | 153 |
 | 3 | 5-9 | ALREADY CITED OR LOW RISK -- no action required | 398 |
 | 4 | 1-4 | NO ACTION NEEDED | 20 |
@@ -65,7 +67,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `uranus_visualization_shells.py` | orrery | 0 | 2 | 22 | 0 | 24 |
 | `comet_visualization_shells.py` | orrery | 0 | 4 | 19 | 0 | 23 |
 | `planet_visualization_utilities.py` | orrery | 7 | 1 | 11 | 0 | 19 |
-| `jupiter_visualization_shells.py` | orrery | 0 | 0 | 18 | 0 | 18 |
+| `jupiter_visualization_shells.py` | orrery | 1 | 0 | 17 | 0 | 18 |
 | `paleoclimate_wet_bulb_full.py` | earth_science | 11 | 0 | 5 | 0 | 16 |
 | `paleoclimate_human_origins_full.py` | earth_science | 9 | 0 | 2 | 0 | 11 |
 | `sgr_a_grand_tour.py` | orrery | 6 | 1 | 4 | 0 | 11 |
@@ -94,6 +96,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `coordinate_system_guide.py` | orrery | 2 | 0 | 1 | 0 | 3 |
 | `paleoclimate_visualization.py` | earth_science | 3 | 0 | 0 | 0 | 3 |
 | `scenarios_coral_bleaching.py` | earth_science | 1 | 0 | 1 | 1 | 3 |
+| `module_atlas.py` | dev_tools | 0 | 1 | 2 | 0 | 3 |
 | `dep_trace.py` | dev_tools | 0 | 0 | 2 | 1 | 3 |
 | `food_insecurity_generator.py` | earth_science | 0 | 0 | 1 | 2 | 3 |
 | `ledger_index.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
@@ -105,7 +108,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `earth_system_generator.py` | earth_science | 2 | 0 | 0 | 0 | 2 |
 | `object_type_analyzer.py` | orrery | 1 | 0 | 1 | 0 | 2 |
 | `paleoclimate_dual_scale.py` | earth_science | 2 | 0 | 0 | 0 | 2 |
-| `module_atlas.py` | dev_tools | 0 | 1 | 1 | 0 | 2 |
 | `close_approach_data.py` | orrery | 0 | 0 | 1 | 1 | 2 |
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `data_acquisition.py` | orrery | 1 | 0 | 0 | 0 | 1 |
@@ -134,10 +136,10 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 36 | 54 | 129 | 308 | 7 | 498 |
+| Orrery (solar system + orbital mechanics) | 36 | 55 | 129 | 307 | 7 | 498 |
 | Earth System | 13 | 41 | 6 | 43 | 3 | 93 |
 | Stars (stellar neighborhood) | 9 | 8 | 17 | 20 | 6 | 51 |
-| Dev Tools (audit, diagnostics, one-shot scripts) | 12 | 0 | 1 | 27 | 4 | 32 |
+| Dev Tools (audit, diagnostics, one-shot scripts) | 12 | 0 | 1 | 28 | 4 | 33 |
 | Utilities (cross-domain shared helpers) | 1 | 1 | 0 | 0 | 0 | 1 |
 | Gallery | 0 | 0 | 0 | 0 | 0 | 0 |
 
@@ -291,6 +293,12 @@ is planned for a future session.
 | 4649 | string | display string @ line 4649 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 4683 | string | display string @ line 4683 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 5909 | string | display string @ line 5909 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+
+### jupiter_visualization_shells.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 956 | string | display string @ line 956 | (3 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 
 ### object_type_analyzer.py
 
@@ -593,7 +601,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 43 | dict | ROLE_MAP[...] | (94 entries) | 4 | 3 | **12** | No source citation (recalled) | Imported by 1 module(s) |
+| 70 | dict | ROLE_MAP[...] | (94 entries) | 4 | 3 | **12** | No source citation (recalled) | Imported by 1 module(s) |
 
 ### neptune_visualization_shells.py
 
@@ -965,11 +973,10 @@ is planned for a future session.
 | 699 | string | display string @ line 699 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 | 789 | string | display string @ line 789 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 | 803 | string | display string @ line 803 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 907 | string | display string @ line 907 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 922 | string | display string @ line 922 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 937 | string | display string @ line 937 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 951 | string | display string @ line 951 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1019 | string | display string @ line 1019 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 912 | string | display string @ line 912 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 927 | string | display string @ line 927 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 942 | string | display string @ line 942 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1024 | string | display string @ line 1024 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 
 ### ledger_index.py
 
@@ -1011,7 +1018,8 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 177 | dict | ROLE_DESCRIPTIONS[...] | (12 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 204 | dict | ROLE_DESCRIPTIONS[...] | (12 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 225 | dict | ROLE_SECTION_TITLES[...] | (12 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
 
 ### moon_visualization_shells.py
 
@@ -1146,16 +1154,16 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 256 | constant | V_FETCHED | 1 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
-| 257 | constant | V_SOURCED | 2 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
-| 258 | constant | V_STALE | 3 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
-| 259 | constant | V_RECALLED | 4 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
-| 262 | constant | C_COSMETIC | 1 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
-| 263 | constant | C_INTERNAL | 2 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
-| 264 | constant | C_LOADBEARING | 3 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
-| 265 | constant | C_PUBLIC | 4 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
-| 266 | constant | C_PROPAGATING | 5 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
-| 320 | dict | MODULE_DOMAIN_MAP[...] | (100 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 281 | constant | V_FETCHED | 1 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 282 | constant | V_SOURCED | 2 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 283 | constant | V_STALE | 3 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 284 | constant | V_RECALLED | 4 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 287 | constant | C_COSMETIC | 1 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 288 | constant | C_INTERNAL | 2 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 289 | constant | C_LOADBEARING | 3 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 290 | constant | C_PUBLIC | 4 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 291 | constant | C_PROPAGATING | 5 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 345 | dict | MODULE_DOMAIN_MAP[...] | (100 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
 
 ### saturn_visualization_shells.py
 
@@ -1169,7 +1177,7 @@ is planned for a future session.
 | 767 | string | display string @ line 767 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 | 929 | string | display string @ line 929 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 | 949 | string | display string @ line 949 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1222 | string | display string @ line 1222 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1228 | string | display string @ line 1228 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 
 ### scenarios_coral_bleaching.py
 
@@ -1414,7 +1422,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 311 | dict | DOMAIN_LABELS[...] | (6 entries) | 4 | 1 | **4** | No source citation (recalled) | Cosmetic dictionary (DOMAIN_LABELS) |
+| 336 | dict | DOMAIN_LABELS[...] | (6 entries) | 4 | 1 | **4** | No source citation (recalled) | Cosmetic dictionary (DOMAIN_LABELS) |
 
 ### scenarios_coral_bleaching.py
 

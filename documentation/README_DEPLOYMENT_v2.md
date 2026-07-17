@@ -133,16 +133,16 @@ Review order and steps:
       Fable extracted it; this is your verification that nothing was
       lost or distorted.
 - [ ] Rename MAPPING_TABLE.md to MAPPING_TABLE_L002.md in documentation/
-      (currently at the plain name in the repo).
+      (currently at the plain name in the repo). -- done
 - [ ] Paste version history block into LEDGER_CONSOLIDATED.md (below the
-      cut line in LEDGER_version_history_block.md).
-- [ ] Run ledger_index.py -- confirm zero new problems.
+      cut line in LEDGER_version_history_block.md). -- done
+- [ ] Run ledger_index.py -- confirm zero new problems. -- correct
 - [ ] Write L-002 closing entry in the ledger (status -> DONE, note the
-      SHAs, credit the relay).
-- [ ] Run provenance_scanner.py -- confirm Tier-1 = 0.
-- [ ] Install 8 skills to claude.ai account (Settings -> Skills).
-- [ ] Replace v3.29 with v3.30 in project settings.
-- [ ] Commit and push.
+      SHAs, credit the relay). -- done
+- [ ] Run provenance_scanner.py -- confirm Tier-1 = 0. -- new provenance scanner has not converged to zero
+- [ ] Install 8 skills to claude.ai account (Settings -> Skills). -- done
+- [ ] Replace v3.29 with v3.30 in project settings. -- done
+- [ ] Commit and push. -- done
 - [ ] Next session: confirm SHA round trip against new HEAD.
 
 ### Follow-up items (post-deploy, not blocking)
