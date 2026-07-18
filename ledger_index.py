@@ -159,6 +159,8 @@ CLOSED_STATUSES = {'DONE'}
 SECTION_ORDER = ['A', 'B', 'D.Movement', 'D.Priority', 'D.Structural',
                  'D.Cosmetic', 'D.Feature-A', 'D.Feature-B', 'D.Feature-C',
                  'D.Parked', 'D.LooseEnd', 'E', 'G', 'H',
+                 'O.Comets', 'O.Asteroids', 'O.Moons', 'O.Exoplanets',
+                 'O.Spacecraft', 'O.Presets',
                  'W.Prep', 'W.Active', 'W.Deferred', 'C']
 
 # Tag aliases: normalize legacy/variant section tags to the canonical letter.
@@ -182,6 +184,13 @@ SECTION_TITLES = {
     'E': 'E. AU-Convention Compliance',
     'G': 'G. Open Questions / Tony Calls',
     'H': 'H. Gallery / Studio Track',
+    'O.Comets': 'O.Comets -- candidate comet objects',
+    'O.Asteroids': 'O.Asteroids -- candidate asteroid objects',
+    'O.Moons': 'O.Moons -- candidate moon objects',
+    'O.Exoplanets': 'O.Exoplanets -- candidate exoplanet systems',
+    'O.Spacecraft': 'O.Spacecraft -- candidate spacecraft objects',
+    'O.Presets': 'O.Presets -- candidate gallery/studio presets',
+    'O.Done': 'O.Done -- Object Candidates track, closed items',    
     'W.Prep': 'W.Prep -- Web Publication prep (before Phase 0)',
     'W.Active': 'W.Active -- Web Publication active phase',
     'W.Deferred': 'W.Deferred -- Web Publication deferred (captured)',
@@ -222,6 +231,10 @@ TRACK_DONE_BUCKETS = {
     'W.Done': {
         'track_header': '## W. WEB PUBLICATION TRACK',
         'done_header': '### W.Done -- closed items, kept with the track',
+    },
+    'O.Done': {
+        'track_header': '## O. OBJECT CANDIDATES TRACK',
+        'done_header': '### O.Done -- closed items, kept with the track',
     },
 }
 

@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*87 live items; 75 need attention (`!`); 87 RICE-scored; 46 closed (section C + W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*94 live items; 82 need attention (`!`); 94 RICE-scored; 47 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -299,7 +299,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-130 | Restore six-elements + M0@J2000 plotting mode (educational, alt) | OPEN | 1.0 | 2026-07-17 |
 | ! | L-131 | Zodiacal dust solar shell | OPEN | 1.0 | 2026-07-17 |
 | ! | L-136 | Solar "scattered disk" shell | OPEN | 1.0 | 2026-07-17 |
-| ! | L-138 | Candidate objects & presets for the Objects menu (running list) | OPEN | 1.0 | 2026-07-17 |
 | ! | L-045 (#N14) | Miranda inclination tooltip | OPEN | 0.9 | 2026-06-23 |
 
 ### D.Feature-C -- Bucket C (architecture)
@@ -338,6 +337,22 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-104 | Gallery Studio preset generator | OPEN | 1.0 | 2026-07-13 |
 | ! | L-132 | Studio landscape preset: links icon covers fly-to buttons | OPEN | 1.0 | 2026-07-17 |
 | ! | L-074 | Cull unused raw *_teaser.json in the gallery dir | OPEN | 0.9 | 2026-06-26 |
+
+### O.Asteroids -- candidate asteroid objects
+| Gap | L# | Item | Disposition | Score | Updated |
+|:---:|----|------|-------------|:-----:|---------|
+| ! | L-139 | Pallas (candidate asteroid) | OPEN | 3.0 | 2026-07-17 |
+| ! | L-140 | Hygiea (candidate asteroid) | OPEN | 3.0 | 2026-07-17 |
+| ! | L-141 | Interamnia (candidate asteroid) | OPEN | 3.0 | 2026-07-17 |
+| ! | L-142 | Davida (candidate asteroid) | OPEN | 3.0 | 2026-07-17 |
+| ! | L-143 | Sylvia (candidate asteroid) | OPEN | 3.0 | 2026-07-17 |
+| ! | L-144 | Eunomia (candidate asteroid) | OPEN | 3.0 | 2026-07-17 |
+| ! | L-145 | Euphrosyne (candidate asteroid) | OPEN | 3.0 | 2026-07-17 |
+
+### O.Exoplanets -- candidate exoplanet systems
+| Gap | L# | Item | Disposition | Score | Updated |
+|:---:|----|------|-------------|:-----:|---------|
+| ! | L-146 | HR 8799 (candidate exoplanet system) | OPEN | 3.0 | 2026-07-17 |
 
 ### W.Prep -- Web Publication prep (before Phase 0)
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -397,6 +412,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | DONE | 1.5 | 2026-06-23 |
 |  | L-047 (#N10) | Note-composition structural refactor (behind N6) | DONE | 1.0 | 2026-06-23 |
 |  | L-050 (#N9) | white -> red orbit-marker switch (osculating marker intentionally stays white) | DONE | 1.0 | 2026-06-23 |
+|  | L-138 | Candidate objects & presets for the Objects menu (running list) -- superseded | DONE | 1.0 | 2026-07-17 |
 |  | L-020 (#26) | CUSTOM_SHELLS tooltip verification | DONE | 0.9 | 2026-06-22 |
 |  | L-049 (#N8) | Comet info-marker superposition cluster | DONE | 0.5 | 2026-06-23 |
 |  | L-004 | Apply C2 fix pass + run ANIMATION_TEST_PROTOCOL_v4_1, push | DONE | -- | 2026-06-17 |
@@ -2110,16 +2126,16 @@ the still-historical section-3a schema sub-block beyond the reconciliation note.
 **Ref:** MASTER_PLAN_INTERACTIVE_GALLERY.md v10 (sections 3a, 5); GALLERY_DATA_SOURCE_HANDOFF v0.4; GALLERY_BUILD_HANDOFF v0.1; L-098 (parent).
 **Gap:** none -- move to section C
 
-#### [L-137] Heliocentric -> solar barycentric coordinates -- decided against
-<!-- L:137 status:PARKED upd:2026-07-17 section:G flag: rice:2/2/50/2 -->
-- **Decision (Tony + Claude, discussed 4/16/26, pre-ledger note).**
-  Switching the orrery's coordinate basis from heliocentric to
-  solar-barycentric was discussed and judged unlikely to produce
-  meaningful visual/educational results. Captured so it isn't
-  re-proposed without the context of why it was set aside.
-**Gap:** none -- parked by decision, not missing information. Reopen only
-if a specific use case surfaces that heliocentric can't serve.
-**Ref:** to_do_ideas.md (pre-ledger, 4/16/26). 
+#### [L-138] Candidate objects & presets for the Objects menu (running list) -- superseded
+<!-- L:138 status:DONE upd:2026-07-17 section:C flag: rice:2/2/50/2 -->
+- **Superseded (2026-07-17).** Split into the new O.* section family, one
+  L-handle per candidate, per Tony's design call. Seed content carried
+  forward to L-139 (Pallas), L-140 (Hygiea), L-141 (Interamnia), L-142
+  (Davida), L-143 (Sylvia), L-144 (Eunomia), L-145 (Euphrosyne), L-146
+  (HR 8799). "Europa" and Psyche from the original note were already
+  present in celestial_objects.py -- not carried forward.
+**Gap:** none -- superseded, not itself actionable.
+**Ref:** to_do_ideas.md (pre-ledger); successor items above.
 
 ## D. RECONCILED LEDGER -- OPEN
 
@@ -2845,31 +2861,6 @@ profile, data source).
 **Gap:** not scoped -- design conversation needed.
 **Ref:** to_do_ideas.md (pre-ledger, 4/18/26).
 
-#### [L-138] Candidate objects & presets for the Objects menu (running list)
-<!-- L:138 status:OPEN upd:2026-07-17 section:D.Feature-B flag: rice:2/2/50/2 -->
-- **What this is.** A standing, editable list of candidate objects/presets
-  for the Objects menu -- not a single scoped task. Add/remove entries in
-  place as items get implemented or dropped; this block IS the backlog,
-  no per-object L-handle.
-- **Seed: notable main-belt asteroids.** Ceres, Vesta, Psyche already in
-  celestial_objects.py [verified @6064728b]. Not yet present: Pallas
-  (~204,000 x10^18 kg, ~7% of belt mass, tilted orbit), Hygiea (~86,000,
-  ~3%, largest C-type), Interamnia (large, lower density), Davida (C-type,
-  very dark), Sylvia (two moons: Romulus and Remus), Eunomia (S-type,
-  stony), Euphrosyne (C-type). Note: "Europa" in the source note is
-  Jupiter's moon (id 502, already present) -- NOT asteroid 52 Europa;
-  confirm which was actually meant if it belongs on this list.
-- **Seed: HR 8799 (exoplanet system).** Four confirmed super-Jupiters
-  orbiting one star -- candidate alongside the existing TRAPPIST-1,
-  TOI-1338, and Proxima Centauri systems (celestial_objects.py ~L1158+).
-  Would follow the same host-star + per-planet entry pattern already
-  established there.
-**Gap:** none singular -- ongoing/living list. Next: pick which
-asteroids/presets to prioritize; add HR 8799 following the TRAPPIST-1
-entry pattern when ready.
-**Ref:** to_do_ideas.md (pre-ledger, undated asteroid table + HR 8799
-note); celestial_objects.py @6064728b.
-
 ### D.Feature -- Bucket C (architecture; design-before-code)
 
 #### [L-014 | #2] Asteroid-belt migration decision
@@ -3035,6 +3026,17 @@ apsidal_markers.py em-dashes (-> platform-neutrality, L-027). No Mode-5 needed h
   interactive-side shell). Own design pass; do not guess. Flows through
   feature_configs.json. Ref: GALLERY_DATA_SOURCE_HANDOFF.md v0.3.
 
+#### [L-137] Heliocentric -> solar barycentric coordinates -- decided against
+<!-- L:137 status:PARKED upd:2026-07-17 section:G flag: rice:2/2/50/2 -->
+- **Decision (Tony + Claude, discussed 4/16/26, pre-ledger note).**
+  Switching the orrery's coordinate basis from heliocentric to
+  solar-barycentric was discussed and judged unlikely to produce
+  meaningful visual/educational results. Captured so it isn't
+  re-proposed without the context of why it was set aside.
+**Gap:** none -- parked by decision, not missing information. Reopen only
+if a specific use case surfaces that heliocentric can't serve.
+**Ref:** to_do_ideas.md (pre-ledger, 4/16/26). 
+
 ## H. GALLERY / STUDIO TRACK (website repo; low-activity)
 
 (Unchanged this pass; carried verbatim from the June-10 edition.)
@@ -3199,6 +3201,87 @@ render (Mode 5) remains the authority over both AI reviewers.
 **Gap:** not reproduced/scoped this session -- verify still present at
 current HEAD (Studio layout has moved since 4/17) before fixing.
 **Ref:** to_do_ideas.md (pre-ledger, 4/17/26).
+
+## O. OBJECT CANDIDATES TRACK
+
+Standing wishlist for new selectable objects and gallery/studio presets --
+add entries as they occur to Tony, retag to O.Done as they ship. Each entry
+is its own L-handle (a "brief item"), scored rice:2/2/C/E, with C/E judged
+per item; 2/2/75/1 is the default starting point (Tony's call, 2026-07-17).
+
+### O.Comets
+
+### O.Asteroids
+
+#### [L-139] Pallas (candidate asteroid)
+<!-- L:139 status:OPEN upd:2026-07-17 section:O.Asteroids flag: rice:2/2/75/1 -->
+- ~204,000 x10^18 kg (~7% of belt mass) -- has a very tilted (inclined)
+  orbit. Not yet in celestial_objects.py [verified @6064728b].
+**Gap:** look up Horizons small-body ID, pick symbol/color, add entry
+(pattern: existing Ceres/Vesta entries).
+**Ref:** to_do_ideas.md (pre-ledger); split from L-138.
+
+#### [L-140] Hygiea (candidate asteroid)
+<!-- L:140 status:OPEN upd:2026-07-17 section:O.Asteroids flag: rice:2/2/75/1 -->
+- ~86,000 x10^18 kg (~3% of belt mass) -- largest carbon-rich (C-type)
+  asteroid. Not yet in celestial_objects.py.
+**Gap:** look up Horizons small-body ID, pick symbol/color, add entry.
+**Ref:** to_do_ideas.md (pre-ledger); split from L-138.
+
+#### [L-141] Interamnia (candidate asteroid)
+<!-- L:141 status:OPEN upd:2026-07-17 section:O.Asteroids flag: rice:2/2/75/1 -->
+- Large, but lower density than its size suggests. Mass/rank not in the
+  source note -- look up alongside the ID. Not yet in celestial_objects.py.
+**Gap:** source mass/rank, look up Horizons ID, add entry.
+**Ref:** to_do_ideas.md (pre-ledger); split from L-138.
+
+#### [L-142] Davida (candidate asteroid)
+<!-- L:142 status:OPEN upd:2026-07-17 section:O.Asteroids flag: rice:2/2/75/1 -->
+- C-type, very dark. Mass/rank not in the source note. Not yet in
+  celestial_objects.py.
+**Gap:** source mass/rank, look up Horizons ID, add entry.
+**Ref:** to_do_ideas.md (pre-ledger); split from L-138.
+
+#### [L-143] Sylvia (candidate asteroid)
+<!-- L:143 status:OPEN upd:2026-07-17 section:O.Asteroids flag: rice:2/2/75/1 -->
+- Notable for having two moons (Romulus and Remus) -- a good storytelling
+  hook. Mass/rank not in the source note. Not yet in celestial_objects.py.
+**Gap:** source mass/rank, look up Horizons ID, add entry.
+**Ref:** to_do_ideas.md (pre-ledger); split from L-138.
+
+#### [L-144] Eunomia (candidate asteroid)
+<!-- L:144 status:OPEN upd:2026-07-17 section:O.Asteroids flag: rice:2/2/75/1 -->
+- S-type, stony. Mass/rank not in the source note. Not yet in
+  celestial_objects.py.
+**Gap:** source mass/rank, look up Horizons ID, add entry.
+**Ref:** to_do_ideas.md (pre-ledger); split from L-138.
+
+#### [L-145] Euphrosyne (candidate asteroid)
+<!-- L:145 status:OPEN upd:2026-07-17 section:O.Asteroids flag: rice:2/2/75/1 -->
+- C-type. Mass/rank not in the source note. Not yet in celestial_objects.py.
+**Gap:** source mass/rank, look up Horizons ID, add entry.
+**Ref:** to_do_ideas.md (pre-ledger); split from L-138.
+
+### O.Moons
+
+### O.Exoplanets
+
+#### [L-146] HR 8799 (candidate exoplanet system)
+<!-- L:146 status:OPEN upd:2026-07-17 section:O.Exoplanets flag: rice:2/2/75/1 -->
+- Four confirmed super-Jupiters orbiting a single star -- a strong
+  storytelling candidate (multi-planet system, directly imaged). Not yet
+  in celestial_objects.py [verified @6064728b]; would be host-star + 4
+  planet entries, mirroring the existing TRAPPIST-1 pattern (~L1158+:
+  id_type='host_star'/'exoplanet', system_id, mission_url).
+**Gap:** more entries than a single asteroid (5 vs. 1) -- still likely
+one session given the established pattern to copy; flag if it runs long.
+**Ref:** to_do_ideas.md (pre-ledger); split from L-138.
+
+### O.Spacecraft
+
+### O.Presets
+
+### O.Done -- closed items, kept with the track
 
 ## W. WEB PUBLICATION TRACK
 
