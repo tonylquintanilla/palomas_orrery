@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*85 live items; 74 need attention (`!`); 85 RICE-scored; 47 closed (section C + W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*86 live items; 75 need attention (`!`); 86 RICE-scored; 47 closed (section C + W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -299,6 +299,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-130 | Restore six-elements + M0@J2000 plotting mode (educational, alt) | OPEN | 1.0 | 2026-07-17 |
 | ! | L-131 | Zodiacal dust solar shell | OPEN | 1.0 | 2026-07-17 |
 | ! | L-136 | Solar "scattered disk" shell | OPEN | 1.0 | 2026-07-17 |
+| ! | L-138 | Candidate objects & presets for the Objects menu (running list) | OPEN | 1.0 | 2026-07-17 |
 | ! | L-045 (#N14) | Miranda inclination tooltip | OPEN | 0.9 | 2026-06-23 |
 
 ### D.Feature-C -- Bucket C (architecture)
@@ -2836,6 +2837,31 @@ profile, data source).
 - **Cross-ref:** groups with L-128, L-131.
 **Gap:** not scoped -- design conversation needed.
 **Ref:** to_do_ideas.md (pre-ledger, 4/18/26).
+
+#### [L-138] Candidate objects & presets for the Objects menu (running list)
+<!-- L:138 status:OPEN upd:2026-07-17 section:D.Feature-B flag: rice:2/2/50/2 -->
+- **What this is.** A standing, editable list of candidate objects/presets
+  for the Objects menu -- not a single scoped task. Add/remove entries in
+  place as items get implemented or dropped; this block IS the backlog,
+  no per-object L-handle.
+- **Seed: notable main-belt asteroids.** Ceres, Vesta, Psyche already in
+  celestial_objects.py [verified @6064728b]. Not yet present: Pallas
+  (~204,000 x10^18 kg, ~7% of belt mass, tilted orbit), Hygiea (~86,000,
+  ~3%, largest C-type), Interamnia (large, lower density), Davida (C-type,
+  very dark), Sylvia (two moons: Romulus and Remus), Eunomia (S-type,
+  stony), Euphrosyne (C-type). Note: "Europa" in the source note is
+  Jupiter's moon (id 502, already present) -- NOT asteroid 52 Europa;
+  confirm which was actually meant if it belongs on this list.
+- **Seed: HR 8799 (exoplanet system).** Four confirmed super-Jupiters
+  orbiting one star -- candidate alongside the existing TRAPPIST-1,
+  TOI-1338, and Proxima Centauri systems (celestial_objects.py ~L1158+).
+  Would follow the same host-star + per-planet entry pattern already
+  established there.
+**Gap:** none singular -- ongoing/living list. Next: pick which
+asteroids/presets to prioritize; add HR 8799 following the TRAPPIST-1
+entry pattern when ready.
+**Ref:** to_do_ideas.md (pre-ledger, undated asteroid table + HR 8799
+note); celestial_objects.py @6064728b.
 
 ### D.Feature -- Bucket C (architecture; design-before-code)
 
