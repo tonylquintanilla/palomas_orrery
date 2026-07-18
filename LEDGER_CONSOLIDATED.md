@@ -86,7 +86,7 @@ what the project still needs to know, each at its own level of abstraction.
 
 **Structure.** DETAIL blocks are the single source of truth. The INDEX below
 is generated from them by `ledger_index.py` -- edit a block, re-run the tool.
-Handles are append-only (L-###, next is L-062); a closed item keeps its handle
+Handles are append-only (L-###); a closed item keeps its handle
 and moves to section C. Section layout:
 
 - **A** -- cross-cutting / strategic items
@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*76 live items; 65 need attention (`!`); 76 RICE-scored; 46 closed (section C + W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*85 live items; 74 need attention (`!`); 85 RICE-scored; 47 closed (section C + W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -231,6 +231,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-063 | Orrery GUI Note text update | OPEN | 2.0 | 2026-06-21 |
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
+| ! | L-129 | Cometary structure constants -- periodic maintenance sweep | OPEN | 1.0 | 2026-07-17 |
+| ! | L-134 | Dashboard developer-tools audit | OPEN | 1.0 | 2026-07-17 |
 | ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 0.9 | 2026-07-16 |
 | ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-06-24 |
 
@@ -259,6 +261,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-025 (#N7) | Reduced to custom-geometry inline markers only | OPEN | 1.5 | 2026-06-18 |
 | ! | L-068 | Static/animation pipeline consolidation -- remaining residuals (umbrella) | OPEN | 1.5 | 2026-06-23 |
 | ! | L-028 | ASCII em-dash violation, comet_visualization_shells.py L257/505/519 | OPEN | 1.0 | 2026-06-11 |
+| ! | L-133 | Codebase-wide CRLF sweep (beyond L-026) | OPEN | 1.0 | 2026-07-17 |
+| ! | L-135 | Basic-plot file-size bloat (non-shell) -- Mercury-alone example | OPEN | 1.0 | 2026-07-17 |
 | ! | L-015 (#5) | _info import cleanup (~89+87 imports, 2 files) | OPEN | 0.9 | 2026-06-18 |
 | ! | L-016 (#6) | Archive dead shell functions | OPEN | 0.9 | 2026-06-18 |
 
@@ -291,6 +295,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-044 (#22) | Satellite (and minor-body) internal-structure shells | OPEN | 2.7 | 2026-06-21 |
+| ! | L-128 | Comet sublimation shell(s) -- solar-distance chemistry zones | OPEN | 1.0 | 2026-07-17 |
+| ! | L-130 | Restore six-elements + M0@J2000 plotting mode (educational, alt) | OPEN | 1.0 | 2026-07-17 |
+| ! | L-131 | Zodiacal dust solar shell | OPEN | 1.0 | 2026-07-17 |
+| ! | L-136 | Solar "scattered disk" shell | OPEN | 1.0 | 2026-07-17 |
 | ! | L-045 (#N14) | Miranda inclination tooltip | OPEN | 0.9 | 2026-06-23 |
 
 ### D.Feature-C -- Bucket C (architecture)
@@ -326,6 +334,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-073 | Gallery export-emits-JSON -- fold the manual json_converter run into Export | OPEN | 1.6 | 2026-06-26 |
 | ! | L-058 | Open Studio items (May-5 handoff, checked @2f40d9d) | OPEN | 1.5 | 2026-06-08 |
 | ! | L-104 | Gallery Studio preset generator | OPEN | 1.0 | 2026-07-13 |
+| ! | L-132 | Studio landscape preset: links icon covers fly-to buttons | OPEN | 1.0 | 2026-07-17 |
 | ! | L-074 | Cull unused raw *_teaser.json in the gallery dir | OPEN | 0.9 | 2026-06-26 |
 
 ### W.Prep -- Web Publication prep (before Phase 0)
@@ -386,6 +395,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | DONE | 1.5 | 2026-06-23 |
 |  | L-047 (#N10) | Note-composition structural refactor (behind N6) | DONE | 1.0 | 2026-06-23 |
 |  | L-050 (#N9) | white -> red orbit-marker switch (osculating marker intentionally stays white) | DONE | 1.0 | 2026-06-23 |
+|  | L-137 | Heliocentric -> solar barycentric coordinates -- decided against | PARKED | 1.0 | 2026-07-17 |
 |  | L-020 (#26) | CUSTOM_SHELLS tooltip verification | DONE | 0.9 | 2026-06-22 |
 |  | L-049 (#N8) | Comet info-marker superposition cluster | DONE | 0.5 | 2026-06-23 |
 |  | L-004 | Apply C2 fix pass + run ANIMATION_TEST_PROTOCOL_v4_1, push | DONE | -- | 2026-06-17 |
@@ -842,6 +852,30 @@ provenance-discipline/SKILL.md v1.1; documentation/provenance_audit_handoff_v4.m
   to prevent recurrence. Low priority (legacy cache is desktop-only now; the
   gallery no longer reads it) -- but it is the root-cause fix.
 
+#### [L-129] Cometary structure constants -- periodic maintenance sweep
+<!-- L:129 status:OPEN upd:2026-07-17 section:A flag: rice:2/2/50/2 -->
+- **Idea (Tony, 4/16/26, pre-ledger note).** Comet structural constants
+  (tail composition, dust/gas ratios, etc.) are a standing maintenance
+  item, not a one-time fix -- as observations of active comets accumulate,
+  known structural data should be periodically re-checked. Recurring,
+  low-urgency, character similar to L-078 (provenance scanner coverage).
+**Gap:** no cadence or trigger defined yet -- decide how often (per
+apparition? per session?) and which comets are in scope.
+**Ref:** to_do_ideas.md (pre-ledger, 4/16/26); horizons-orbital-mechanics
+skill (comet record pinning).
+
+#### [L-134] Dashboard developer-tools audit
+<!-- L:134 status:OPEN upd:2026-07-17 section:A flag: rice:2/2/50/2 -->
+- **Idea (Tony, 4/17/26, pre-ledger note).** Review
+  palomas_orrery_dashboard.py against all currently-available developer
+  tools/launchers -- update to reflect what's current, or remove stale
+  entries. Pairs with L-062 (README refresh) and L-063 (GUI Note text
+  update) as interface-currency work.
+**Gap:** not scoped -- inventory current dashboard buttons vs. what
+actually exists now (a lot has shipped since 4/17), then keep/remove
+per entry.
+**Ref:** to_do_ideas.md (pre-ledger, 4/17/26).
+
 ## PENDING ACTION (Tony-side)
 
 ## C. RECONCILED LEDGER -- DONE (closed; for the record, do not re-do)
@@ -1079,6 +1113,17 @@ Closed SINCE v23 (Movement chain + verified):
   MAPS tail non-animation is BY DESIGN (excluded per ADDENDUM_phase4
   decision 1). Moving to C this pass.
 **Gap:** none -- move to section C.
+
+#### [L-026 | #9] palomas_orrery_helpers.py CRLF -> LF
+<!-- L:026 status:DONE upd:2026-07-15 section:C flag: rice:3/2/75/2 -->
+File confirmed CRLF (verified this session @7964193). Functional no-op
+to convert, but the diff touches every line, so best as a standalone
+commit with no other changes.
+**Gap:** convert CRLF -> LF (binary-mode script or dos2unix). Do as
+isolated commit. Low risk but noisy diff.
+**Platform neutrality (the larger goal):** part of a general codebase LF-conversion sweep;
+keeps the project platform-neutral across Windows / macOS / Linux. Pairs with L-027.
+**Tony:** Done. 
 
 #### [L-055] O14/O15 verdicts arrive with the v4 gate (comet legend churn; sodium particle count)
 <!-- L:055 status:DONE upd:2026-06-17 section:C flag: -->
@@ -2063,19 +2108,18 @@ new non-ASCII. REMAINING (optional, low priority): bullet-by-bullet cleanup of
 the still-historical section-3a schema sub-block beyond the reconciliation note.
 **Ref:** MASTER_PLAN_INTERACTIVE_GALLERY.md v10 (sections 3a, 5); GALLERY_DATA_SOURCE_HANDOFF v0.4; GALLERY_BUILD_HANDOFF v0.1; L-098 (parent).
 **Gap:** none -- move to section C
----
 
+#### [L-137] Heliocentric -> solar barycentric coordinates -- decided against
+<!-- L:137 status:PARKED upd:2026-07-17 section:C flag: rice:2/2/50/2 -->
+- **Decision (Tony + Claude, discussed 4/16/26, pre-ledger note).**
+  Switching the orrery's coordinate basis from heliocentric to
+  solar-barycentric was discussed and judged unlikely to produce
+  meaningful visual/educational results. Captured so it isn't
+  re-proposed without the context of why it was set aside.
+**Gap:** none -- parked by decision, not missing information. Reopen only
+if a specific use case surfaces that heliocentric can't serve.
+**Ref:** to_do_ideas.md (pre-ledger, 4/16/26). 
 
-#### [L-026 | #9] palomas_orrery_helpers.py CRLF -> LF
-<!-- L:026 status:DONE upd:2026-07-15 section:C flag: rice:3/2/75/2 -->
-File confirmed CRLF (verified this session @7964193). Functional no-op
-to convert, but the diff touches every line, so best as a standalone
-commit with no other changes.
-**Gap:** convert CRLF -> LF (binary-mode script or dos2unix). Do as
-isolated commit. Low risk but noisy diff.
-**Platform neutrality (the larger goal):** part of a general codebase LF-conversion sweep;
-keeps the project platform-neutral across Windows / macOS / Linux. Pairs with L-027.
-**Tony:** Done. 
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
@@ -2300,6 +2344,15 @@ color-name half (SystemButtonFace -> hex literal / sys.platform detection / ttk)
 Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
 **Gap:** fix on next touch (binary-mode).
 
+#### [L-133] Codebase-wide CRLF sweep (beyond L-026)
+<!-- L:133 status:OPEN upd:2026-07-17 section:D.Structural flag: rice:2/2/50/2 -->
+- **Idea (Tony, 4/17/26, pre-ledger note).** Review the codebase for any
+  remaining CRLF endings beyond palomas_orrery_helpers.py (L-026, DONE
+  2026-07-15). LF is the project standard.
+**Gap:** no full-codebase CRLF audit run yet -- scan all .py files, convert
+any found via Python binary-mode (not sed).
+**Ref:** to_do_ideas.md (pre-ledger, 4/17/26); companion to L-026, L-087.
+
 ### D.Cosmetic -- polish (bundle when convenient)
 
 **Tony:** the `[per chain]` notes require development. probably a mode 5 pass and rice updates. 
@@ -2511,6 +2564,23 @@ user-facing; real but not huge impact; high confidence, same proven
 pattern as two existing scripts; low effort, extends existing code
 rather than building new) -- yours to finalize.
 
+#### [L-135] Basic-plot file-size bloat (non-shell) -- Mercury-alone example
+<!-- L:135 status:OPEN upd:2026-07-17 section:D.Structural flag: rice:2/2/50/2 -->
+- **Bug/idea (Tony, 4/17/26, pre-ledger note -- two entries merged).**
+  Basic plots run unexpectedly large: orbit of Mercury alone ~450 KB,
+  Studio preview ~600 KB. Companion note suggested applying the solar-shell
+  hovertext-reduction approach more broadly.
+- **Flagging, not assuming closed.** The single-info-marker pattern
+  refactor (v3.22, May 12 2026 -- 141 conversions, 9-13 MB/render savings)
+  already applied this exact technique to SHELL traces. A bare Mercury
+  orbit has no shells, so if the bloat is still there it likely comes from
+  a different source (per-point hover on the orbit/marker trace itself).
+  Numbers are 3 months stale.
+**Gap:** re-measure current file size for a minimal single-planet plot;
+confirm whether single-info-marker already covers this or whether basic
+orbit/marker traces need the same treatment.
+**Ref:** to_do_ideas.md (pre-ledger, 4/17/26 x2); cross-ref v3.22 refactor.
+
 ### D.Feature -- Bucket A (near-term)
 
 #### [L-066] MAPS per-frame comet-tail animation wiring
@@ -2721,6 +2791,51 @@ itself); L-112 (the remediation pass that verified DP flyby preservation).
   (~4.3 deg, the highest among Uranus's major moons), so the visible tilt of its
   orbit in the render is explained. Single-info-marker pattern; km + AU where
   distances appear. `[per chain]`
+
+#### [L-128] Comet sublimation shell(s) -- solar-distance chemistry zones
+<!-- L:128 status:OPEN upd:2026-07-17 section:D.Feature-B flag: rice:2/2/50/2 -->
+- **Idea (Tony, 4/16/26, pre-ledger note).** Add a solar shell (or set of
+  concentric shells) marking heliocentric distances at which different
+  comet ices begin to sublimate (CO/CO2 far out, water ice closer in) --
+  showing where different comet types start forming visible tails and
+  what the ice chemistry implies. Educational/storytelling value.
+- **Cross-ref:** groups with L-131 (zodiacal dust) and L-136 (scattered
+  disk) as new solar-context shell additions -- not planet-relative, so
+  these extend SHELL_CONFIGS/CUSTOM_SHELLS beyond the current per-body
+  pattern.
+**Gap:** not scoped -- design conversation needed (which species'
+sublimation distances, single vs. multi-shell, data source).
+**Ref:** to_do_ideas.md (pre-ledger, 4/16/26).
+
+#### [L-130] Restore six-elements + M0@J2000 plotting mode (educational, alt)
+<!-- L:130 status:OPEN upd:2026-07-17 section:D.Feature-B flag: rice:2/2/50/2 -->
+- **Idea (Tony, 4/16/26, pre-ledger note).** Restore, as an alternative
+  mode, drawing an orbit directly from the six classical elements + mean
+  anomaly (M0) at epoch J2000 -- rather than always fetching a Horizons
+  ephemeris trace. Makes the Keplerian-ellipse-from-elements relationship
+  visible and teachable. Surfaced while looking at the 9/9/24 pre-refactor
+  version, which apparently had this.
+**Gap:** not scoped -- check whether the 9/9/24 approach is recoverable
+from git history or needs rebuilding; decide where it lives.
+**Ref:** to_do_ideas.md (pre-ledger, 4/16/26).
+
+#### [L-131] Zodiacal dust solar shell
+<!-- L:131 status:OPEN upd:2026-07-17 section:D.Feature-B flag: rice:2/2/50/2 -->
+- **Idea (Tony, 4/17/26, pre-ledger note).** Add a solar shell for the
+  zodiacal dust cloud (interplanetary dust concentrated near the ecliptic).
+- **Cross-ref:** groups with L-128, L-136.
+**Gap:** not scoped -- design conversation needed (extent, density
+profile, data source).
+**Ref:** to_do_ideas.md (pre-ledger, 4/17/26).
+
+#### [L-136] Solar "scattered disk" shell
+<!-- L:136 status:OPEN upd:2026-07-17 section:D.Feature-B flag: rice:2/2/50/2 -->
+- **Idea (Tony, 4/18/26, pre-ledger note).** Add a shell/region for the
+  scattered disk (dynamically excited trans-Neptunian population, distinct
+  from the classical Kuiper Belt).
+- **Cross-ref:** groups with L-128, L-131.
+**Gap:** not scoped -- design conversation needed.
+**Ref:** to_do_ideas.md (pre-ledger, 4/18/26).
 
 ### D.Feature -- Bucket C (architecture; design-before-code)
 
@@ -2934,8 +3049,6 @@ apsidal_markers.py em-dashes (-> platform-neutrality, L-027). No Mode-5 needed h
   intermediates; manifest serves `_gallery`/`_desktop` exports). Candidate
   cull/archive. Confirm none are needed as converter inputs before removing.
 
----
-
 #### [L-104] Gallery Studio preset generator
 <!-- L:104 status:OPEN upd:2026-07-13 section:H flag: rice:2/2/50/2 -->
 - NET-NEW. Author an event window (object, center, {start,end,cadence}, label)
@@ -3044,6 +3157,15 @@ tools/gallery_cache_builder.py; L-098 (parent).
 **Note:** GPT 5.5 produced the cross-check (L-110) that surfaced Q2's teeth; the
 render (Mode 5) remains the authority over both AI reviewers.
 **Ref:** GALLERY_BUILD_HANDOFF v0.1 (open-items section); TESTING_PROTOCOL.md; L-109; L-110; L-098 (parent).
+
+#### [L-132] Studio landscape preset: links icon covers fly-to buttons
+<!-- L:132 status:OPEN upd:2026-07-17 section:H flag: rice:2/2/50/2 -->
+- **Bug (Tony, 4/17/26, pre-ledger note).** In Gallery Studio's landscape
+  preset, the links icon overlaps the fly-to navigation buttons -- layout
+  collision, needs repositioning.
+**Gap:** not reproduced/scoped this session -- verify still present at
+current HEAD (Studio layout has moved since 4/17) before fixing.
+**Ref:** to_do_ideas.md (pre-ledger, 4/17/26).
 
 ## W. WEB PUBLICATION TRACK
 
