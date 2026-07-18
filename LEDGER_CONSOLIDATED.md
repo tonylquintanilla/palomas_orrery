@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*87 live items; 76 need attention (`!`); 87 RICE-scored; 47 closed (section C + W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*87 live items; 75 need attention (`!`); 87 RICE-scored; 46 closed (section C + W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -261,7 +261,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-025 (#N7) | Reduced to custom-geometry inline markers only | OPEN | 1.5 | 2026-06-18 |
 | ! | L-068 | Static/animation pipeline consolidation -- remaining residuals (umbrella) | OPEN | 1.5 | 2026-06-23 |
 | ! | L-028 | ASCII em-dash violation, comet_visualization_shells.py L257/505/519 | OPEN | 1.0 | 2026-06-11 |
-| ! | L-133 | Codebase-wide CRLF sweep (beyond L-026) | OPEN | 1.0 | 2026-07-17 |
 | ! | L-133 | Codebase-wide CRLF sweep (beyond L-026) | OPEN | 1.0 | 2026-07-17 |
 | ! | L-135 | Basic-plot file-size bloat (non-shell) -- Mercury-alone example | OPEN | 1.0 | 2026-07-17 |
 | ! | L-015 (#5) | _info import cleanup (~89+87 imports, 2 files) | OPEN | 0.9 | 2026-06-18 |
@@ -325,6 +324,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-100 | Gallery feature-render surface: shells gallery-side vs interactive-side (OPEN QUESTION) | OPEN | 1.0 | 2026-07-08 |
+|  | L-137 | Heliocentric -> solar barycentric coordinates -- decided against | PARKED | 1.0 | 2026-07-17 |
 | ! | L-053 | AU-convention sweep (section E): keep open, revisit | OPEN | 0.8 | 2026-06-07 |
 | ! | L-056 | Phase 4 residuals: stale O2/O3 console wording; apsidal_markers em-dashes (MAPS per-frame wiring -> L-066) | OPEN | 0.5 | 2026-06-23 |
 
@@ -397,7 +397,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | DONE | 1.5 | 2026-06-23 |
 |  | L-047 (#N10) | Note-composition structural refactor (behind N6) | DONE | 1.0 | 2026-06-23 |
 |  | L-050 (#N9) | white -> red orbit-marker switch (osculating marker intentionally stays white) | DONE | 1.0 | 2026-06-23 |
-|  | L-137 | Heliocentric -> solar barycentric coordinates -- decided against | PARKED | 1.0 | 2026-07-17 |
 |  | L-020 (#26) | CUSTOM_SHELLS tooltip verification | DONE | 0.9 | 2026-06-22 |
 |  | L-049 (#N8) | Comet info-marker superposition cluster | DONE | 0.5 | 2026-06-23 |
 |  | L-004 | Apply C2 fix pass + run ANIMATION_TEST_PROTOCOL_v4_1, push | DONE | -- | 2026-06-17 |
@@ -2112,7 +2111,7 @@ the still-historical section-3a schema sub-block beyond the reconciliation note.
 **Gap:** none -- move to section C
 
 #### [L-137] Heliocentric -> solar barycentric coordinates -- decided against
-<!-- L:137 status:PARKED upd:2026-07-17 section:C flag: rice:2/2/50/2 -->
+<!-- L:137 status:PARKED upd:2026-07-17 section:G flag: rice:2/2/50/2 -->
 - **Decision (Tony + Claude, discussed 4/16/26, pre-ledger note).**
   Switching the orrery's coordinate basis from heliocentric to
   solar-barycentric was discussed and judged unlikely to produce
@@ -2345,15 +2344,6 @@ color-name half (SystemButtonFace -> hex literal / sys.platform detection / ttk)
 <!-- L:028 status:OPEN upd:2026-06-11 section:D.Structural flag: rice:1/1/100/1 -->
 Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
 **Gap:** fix on next touch (binary-mode).
-
-#### [L-133] Codebase-wide CRLF sweep (beyond L-026)
-<!-- L:133 status:OPEN upd:2026-07-17 section:D.Structural flag: rice:2/2/50/2 -->
-- **Idea (Tony, 4/17/26, pre-ledger note).** Review the codebase for any
-  remaining CRLF endings beyond palomas_orrery_helpers.py (L-026, DONE
-  2026-07-15). LF is the project standard.
-**Gap:** no full-codebase CRLF audit run yet -- scan all .py files, convert
-any found via Python binary-mode (not sed).
-**Ref:** to_do_ideas.md (pre-ledger, 4/17/26); companion to L-026, L-087.
 
 ### D.Cosmetic -- polish (bundle when convenient)
 
