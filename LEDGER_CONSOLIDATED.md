@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*86 live items; 75 need attention (`!`); 86 RICE-scored; 47 closed (section C + W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*87 live items; 76 need attention (`!`); 87 RICE-scored; 47 closed (section C + W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -261,6 +261,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-025 (#N7) | Reduced to custom-geometry inline markers only | OPEN | 1.5 | 2026-06-18 |
 | ! | L-068 | Static/animation pipeline consolidation -- remaining residuals (umbrella) | OPEN | 1.5 | 2026-06-23 |
 | ! | L-028 | ASCII em-dash violation, comet_visualization_shells.py L257/505/519 | OPEN | 1.0 | 2026-06-11 |
+| ! | L-133 | Codebase-wide CRLF sweep (beyond L-026) | OPEN | 1.0 | 2026-07-17 |
 | ! | L-133 | Codebase-wide CRLF sweep (beyond L-026) | OPEN | 1.0 | 2026-07-17 |
 | ! | L-135 | Basic-plot file-size bloat (non-shell) -- Mercury-alone example | OPEN | 1.0 | 2026-07-17 |
 | ! | L-015 (#5) | _info import cleanup (~89+87 imports, 2 files) | OPEN | 0.9 | 2026-06-18 |
@@ -2581,6 +2582,22 @@ rather than building new) -- yours to finalize.
 confirm whether single-info-marker already covers this or whether basic
 orbit/marker traces need the same treatment.
 **Ref:** to_do_ideas.md (pre-ledger, 4/17/26 x2); cross-ref v3.22 refactor.
+
+#### [L-133] Codebase-wide CRLF sweep (beyond L-026)
+<!-- L:133 status:OPEN upd:2026-07-17 section:D.Structural flag: rice:2/2/50/2 -->
+- **Idea (Tony, 4/17/26, pre-ledger note).** Review the codebase for any
+  remaining CRLF endings beyond palomas_orrery_helpers.py (L-026, DONE
+  2026-07-15). LF is the project standard.
+- **Note (Claude, 2026-07-17):** .gitattributes (`* text=auto eol=lf`)
+  added at repo root -- normalizes CRLF to LF automatically on `git add`
+  going forward (root cause: text pasted from chat/browser lands as
+  CRLF; without a git-level rule, a single pasted chunk could flip a
+  whole file's save-time EOL). This closes the recurring-drift half of
+  the problem.
+**Gap:** narrower now -- a one-time sweep of files already CRLF in the
+repo from before this rule existed (the .gitattributes fix doesn't
+retroactively touch files it hasn't seen re-added).
+**Ref:** to_do_ideas.md (pre-ledger, 4/17/26); companion to L-026, L-087.
 
 ### D.Feature -- Bucket A (near-term)
 
