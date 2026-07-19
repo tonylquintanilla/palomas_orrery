@@ -15,12 +15,213 @@ paste your own Windows run below to triple-confirm, same as M1's pattern.
 
 **tony**:
 ```
-[paste your python (not python3) run here]
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/tools/test_gallery_cache_builder_offline.py
+[warn] voyager_1: DP thin glide 2549 -> 2 points (tol=0.02 AU)
+[done] run 20260709T000000Z (first-build): 12 objects
+  ok  first-build structural validation passes (pass)
+  ok  clean fakes -> no guard warnings
+  ok  12 objects served (12)
+  ok  attribution present
+  ok  served_window field present
+  ok  earth has parity/addition field 'name'
+  ok  earth has parity/addition field 'horizons_id'
+  ok  earth has parity/addition field 'category'
+  ok  earth has parity/addition field 'availability'
+  ok  earth has parity/addition field 'parent'
+  ok  earth has parity/addition field 'stored_center'
+  ok  earth has parity/addition field 'canonical_frame'
+  ok  earth has parity/addition field 'trajectory_of'
+  ok  earth has parity/addition field 'osculating'
+  ok  earth has parity/addition field 'positions'
+  ok  earth has parity/addition field 'presets'
+  ok  earth has parity/addition field 'features'
+  ok  earth has parity/addition field 'orbit_type'
+  ok  earth has parity/addition field 'as_of_today'
+  ok  earth has parity/addition field 'event_link'
+  ok  earth.osculating has 'center'
+  ok  earth.osculating has 'epoch_jd'
+  ok  earth.osculating has 'a_au'
+  ok  earth.osculating has 'e'
+  ok  earth.osculating has 'i_deg'
+  ok  earth.osculating has 'node_deg'
+  ok  earth.osculating has 'peri_deg'
+  ok  earth.osculating has 'M0_deg'
+  ok  earth.osculating has 'source'
+  ok  voyager_1: osculating null, positions present
+  ok  voyager_1 position file on disk
+  ok  position file unit km
+  ok  B-3: serving_base + scene_features restored for v0.6 parity
+  ok  B-3: positions block carries step_hours
+  ok  earth as_of_today is km-scale (|r|=1.5e+08)
+  ok  encke serves Tp_jd + solution_Tp_jd
+  ok  encke orbit_type elliptical (e<1)
+  ok  halley serves Tp_jd + solution_Tp_jd
+  ok  halley orbit_type elliptical (e<1)
+  ok  pluto/charon centered on pluto_barycenter
+  ok  raw vectors written
+  ok  elements JSONL history written
+  ok  run manifest written
+  ok  M1: feature_configs schema_version present
+  ok  M1: feature_configs has all 12 object slugs
+  ok  M1: every served feature entry is a dict (no lists survive)
+  ok  M1: earth has van_allen_belts + atmosphere_shell
+  ok  M1: earth van_allen_belts.inner_belt_distance == 1.5
+  ok  M1: earth atmosphere_shell has atmosphere + upper_atmosphere
+  ok  M1: jupiter has radiation_belts and NOT magnetosphere
+  ok  M1: jupiter ring_system has all four ring slugs
+  ok  M1: saturn ring_system has all seven ring slugs
+  ok  M1: encke/halley present with empty {}
+  ok  M1: inverted ring (inner >= outer) ABORTS
+  ok  M1: malformed color string ABORTS
+  ok  M1: malformed colors-list entry ABORTS
+  ok  M1: a surviving features list (post-migration) ABORTS in derive_served
+  ok  M2: earth serves a trust block
+  ok  M2: earth trust method == two_body_rate_v1
+  ok  M2: earth has a finite positive window_days
+  ok  M2: jupiter serves a trust block
+  ok  M2: jupiter trust method == two_body_rate_v1
+  ok  M2: jupiter has a finite positive window_days
+  ok  M2: saturn serves a trust block
+  ok  M2: saturn trust method == two_body_rate_v1
+  ok  M2: saturn has a finite positive window_days
+  ok  M2: moon serves a trust block
+  ok  M2: moon trust method == two_body_rate_v1
+  ok  M2: moon has a finite positive window_days
+  ok  M2: io serves a trust block
+  ok  M2: io trust method == two_body_rate_v1
+  ok  M2: io has a finite positive window_days
+  ok  M2: titan serves a trust block
+  ok  M2: titan trust method == two_body_rate_v1
+  ok  M2: titan has a finite positive window_days
+  ok  M2: pluto serves a trust block
+  ok  M2: pluto trust method == two_body_rate_v1
+  ok  M2: pluto has a finite positive window_days
+  ok  M2: charon serves a trust block
+  ok  M2: charon trust method == two_body_rate_v1
+  ok  M2: charon has a finite positive window_days
+  ok  M2: apophis serves a trust block
+  ok  M2: apophis trust method == two_body_rate_v1
+  ok  M2: apophis has a finite positive window_days
+  ok  M2: voyager_1 serves a trust block
+  ok  M2: voyager_1 trust method == fetched_positions
+  ok  M2: voyager_1 trust window is null
+  ok  M2: encke serves a trust block
+  ok  M2: encke trust method == two_body_rate_v1
+  ok  M2: encke has a finite positive window_days
+  ok  M2: halley serves a trust block
+  ok  M2: halley trust method == two_body_rate_v1
+  ok  M2: halley has a finite positive window_days
+  ok  M2: top-level served_window is non-null
+  ok  M2: served_window brackets as_of (start < as_of < end)
+  ok  M2: earth's window == its period cap (planet, cap=P)
+  ok  M2: moon's window == P/8 (moon cap)
+  ok  M2: halley's window == P/2 (comet cap)
+[warn] jupiter: trust measurement failed (simulated check-vector outage); served null window
+[warn] voyager_1: DP thin glide 2549 -> 2 points (tol=0.02 AU)
+[warn] served_window: null -- trust measurement missing/failed for ['jupiter'] (FLAG-3: null-on-any-failure is the conservative default)
+[done] run 20260709T000000Z (first-build): 12 objects
+  ok  M2: forced check-vector failure -> jupiter trust carries 'error'
+  ok  M2: forced check-vector failure -> served_window null (FLAG-3, exercised)
+[done] run 20260709T000000Z (nightly): 12 objects
+  ok  nightly structural validation passes
+  ok  nightly did not shrink earth
+  ok  frozen past point unchanged byte-for-byte
+  ok  guard: clean charon point -> no warning
+  ok  guard: 35.7 AU point -> exactly one warning
+  ok  guard: outer-bound trip tagged likely-contamination
+  ok  guard KEPT the point (monitor, not reject)
+  ok  guard: spacecraft |r|>200 AU -> sanity warning
+[warn] voyager_1: DP thin glide 2549 -> 2 points (tol=0.02 AU)
+[done] run 20260709T000000Z (first-build): 12 objects
+[RECOVER] restoring C:\Users\tonyq\AppData\Local\Temp\tmpog_iz718\data\solar-system from C:\Users\tonyq\AppData\Local\Temp\tmpog_iz718\data\solar-system.prev (crash mid-swap)
+[done] run 20260709T000000Z (nightly): 12 objects
+  ok  A-1/N1: nightly recovered the whole generation from .prev after a crash
+  ok  A-1: archive not thinned by recovery (4106 >= 4106)
+  ok  A-1: recovered nightly validates
+[ABORT] fail: nightly run but no live raw archive (possible unrecovered crash) -- refusing to build a thin cache
+  ok  A-1: nightly with no generation ABORTS instead of committing thin
+  ok  A-2: main() exits nonzero on structural abort
+  ok  A-2: main() exits 0 on pass
+  ok  A-4: majorbody/id -> None
+  ok  A-4: smallbody/None pass through unchanged
+  ok  DP: straight line -> 2 endpoints
+  ok  DP: keeps the bend
+[warn] voyager_1: DP thin glide 2549 -> 2 points (tol=0.02 AU)
+[done] run 20260709T000000Z (first-build): 12 objects
+[warn] titan: FETCH FAILED (simulated Horizons outage); served last-good orbit, as_of_today nulled
+[done] run 20260709T000000Z (nightly): 12 objects
+  ok  A-3: failed Titan still SERVED (not vanished)
+  ok  A-3: Titan conic served from last-good
+  ok  A-3: Titan as_of_today NULLED (no stale marker)
+  ok  A-3: run validates with a stale object
+  ok  N4/#B3: correct km conversion passes
+  ok  N4/#B3: un-converted (AU-valued) served point ABORTS
+[warn] voyager_1: DP thin glide 2549 -> 2 points (tol=0.02 AU)
+[done] run 20260709T000000Z (first-build): 12 objects
+[ABORT] fail: N3 object(s) dropped from a served set: ['titan']
+  ok  N3: dropping a served object (titan) ABORTS the publication
+[warn] voyager_1: DP thin glide 2549 -> 2 points (tol=0.02 AU)
+[done] run 20260709T000000Z (first-build): 12 objects
+[warn] encke: FETCH FAILED (solution-TP request_failed for encke); served last-good orbit, as_of_today nulled
+[warn] halley: FETCH FAILED (solution-TP request_failed for halley); served last-good orbit, as_of_today nulled
+[warn] served_window: null -- trust measurement missing/failed for ['encke', 'halley'] (FLAG-3: null-on-any-failure is the conservative default)
+[done] run 20260709T000000Z (nightly): 12 objects
+  ok  N5: solution-TP request failure serves last-good (not silent today-anchor)
+[master (root-commit) 003988a] data: nightly 2026-07-10
+ 1 file changed, 1 insertion(+)
+ create mode 100644 data/f.txt
+fatal: No configured push destination.
+Either specify the URL from the command-line or configure a remote repository using
+
+    git remote add <name> <url>
+
+and then push using the remote name
+
+    git push <name>
+
+[commit] PUSH FAILED (Command '['git', '-C', 'C:\\Users\\tonyq\\AppData\\Local\\Temp\\tmpzv36lf3y', 'push']' returned non-zero exit status 128.) -- committed locally only; remote is STALE
+  ok  N2: local commit succeeds but no-remote push is NOT reported as pushed
+[warn] voyager_1: DP thin glide 2549 -> 2 points (tol=0.02 AU)
+[done] run 20260709T000000Z (first-build): 12 objects
+[dry-run] validated; wrote nothing outside C:\Users\tonyq\AppData\Local\Temp\tmpjel8tggo\data\.staging_solar-system_20260709T000000Z
+  ok  P2-2: --dry-run --object clears N3 + no-raw against an existing generation
+[dry-run] validated; wrote nothing outside C:\Users\tonyq\AppData\Local\Temp\tmpghprojr2\data\.staging_solar-system_20260709T000000Z
+  ok  P2-2: --dry-run --object works on a clean machine (no raw archive)
+[warn] voyager_1: DP thin glide 2548 -> 2 points (tol=0.02 AU)
+[done] run 20260703T000000Z (first-build): 12 objects
+  ok  P2-1: spacecraft first-build passes #T (arc ends today, not a stale stride point)
+  ok  P2-1: spacecraft as_of_today is fresh regardless of stride phase
+  ok  #B3: correct per-component conversion passes
+  ok  #B3: swapped axes (magnitude-preserving) ABORTS component-wise
+[warn] voyager_1: DP thin glide 2549 -> 2 points (tol=0.02 AU)
+[done] run 20260709T000000Z (first-build): 12 objects
+[warn] encke: FETCH FAILED (solution-TP request_failed for encke); served last-good orbit, as_of_today nulled
+[warn] halley: FETCH FAILED (solution-TP request_failed for halley); served last-good orbit, as_of_today nulled
+[warn] served_window: null -- trust measurement missing/failed for ['encke', 'halley'] (FLAG-3: null-on-any-failure is the conservative default)
+[done] run 20260709T000000Z (nightly): 12 objects
+  ok  P2-9: stale comet carries its comet block forward (not nulled)
+
+PASS (134 checks, 0 failures)
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools> 
 ```
 
 **Claude**:
-[fill in after Tony's run]
+**Confirmed — Layer 1 passes exactly as expected.**
 
+`PASS (134 checks, 0 failures)` — matches precisely: 87 pre-existing + 4 M1 shape-validator + 43 M2 checks, all green.
+
+A few things worth pointing out so you're not second-guessing any of the noise in there:
+
+- The repeated `[warn] voyager_1: DP thin glide 2549 -> 2 points` is expected — normal spacecraft thinning behavior, fires each time the suite builds, not a problem.
+- `[warn] jupiter: trust measurement failed (simulated check-vector outage)` and the `served_window: null` warning right after it are the **intentional** forced-failure test (FLAG-3) — that's supposed to happen, and the two `ok` lines right after confirm it worked correctly.
+- The `[RECOVER]`, `[ABORT]`, and `PUSH FAILED` lines are all deliberately-simulated failure scenarios (crash mid-swap, no-remote-configured, dropped object) that other pre-existing tests are checking the *handling* of — not real problems with your machine or git setup.
+- All 12 M2 trust-block checks passed, plus the three FLAG-6 determinism checks (earth/moon/halley window == cap).
+
+This is a clean, complete match to what I verified independently in my own sandbox all session. Nothing here needs a second look.
+
+**Ready for step 2** whenever — the five dry-runs (earth, moon, pluto, apophis, halley). Same as before: run them, paste me the `trust` block from each staged `coverage_index.json`, and I'll check the shape.
+
+**Notes:**
 What Layer 1 proves for M2 (logic, statically reasoned):
 - `fetch_elements` captures Horizons' `n`; `n_deg_per_day` flows through
   `build_osculating_block`, the A-3 history/fallback path, and into
@@ -44,6 +245,27 @@ What Layer 1 **cannot** prove (Layer 2's job):
 - Whether the measured error rates are *physically* the shape the design
   expects (see step 1 below) -- Layer 1's mock proves the wiring, not the
   physics.
+
+**Claude:**
+ Two issues, one real and one just a precision nit. Went back through the actual code behavior and the test output to check each claim rather than taking the addendum's own wording at face value.
+
+**Real issue — bullet 1 overclaims the A-3 path:**
+
+> "`n_deg_per_day` flows through `build_osculating_block`, the A-3 history/fallback path, and into `measure_trust`."
+
+This isn't quite what the code does. For a stale object (A-3, `serve_last_good`), `measure_trust` is never called at all — it gets a hardcoded null trust block instead (`"error": "stale generation (last-good elements served; trust not re-measured this run)"`). That was a deliberate call in the M2 build: re-attempting a check-vector fetch during an outage that already triggered A-3 seemed unlikely to succeed, so it doesn't try.
+
+What *is* true: `n_deg_per_day` does flow through the A-3 path as far as the served `osc_block` (via `last_good_elements`/`build_osculating_block` — that's real and needed for a stale object's conic to render at all). It just stops there — it never reaches `measure_trust` for a stale object. The wording bundles those into one chain when they're actually two separate, disconnected facts. Should read something like:
+
+> "`n_deg_per_day` flows through `build_osculating_block` (including the A-3 history/fallback path, so a stale object's served conic still carries it) and, for a freshly-measured object, into `measure_trust`."
+
+**Minor — bullet 2 slightly overstates directness:**
+
+> "confirmed deterministic (`window_days == cap`) for all 11 non-spacecraft objects"
+
+Checking the actual test output: only 3 of the 11 get a direct equality assertion — earth (planet/dwarf_planet/asteroid divisor), moon (moon divisor), halley (comet divisor), one per cap category. The other 8 (jupiter, saturn, pluto, charon, io, titan, apophis, encke) only get the generic "finite positive `window_days`" check — not a direct `== cap` assertion each. Since error rate is 0.0 by construction for all 11 under the same mock, `window_days == cap` almost certainly holds for all of them too — but that's an inference from shared construction, not something independently tested per object. Small thing, but worth not blurring "confirmed" and "reasonably inferred."
+
+Everything else — the FLAG-3 bullet, and the whole "what Layer 1 cannot prove" section — checks out exactly as written, no changes needed there. 
 
 ## Layer 2 -- Live dry-run sequence (Tony's hardware)
 
