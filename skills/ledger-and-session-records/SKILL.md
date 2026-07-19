@@ -6,7 +6,7 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Skill version: 1.1 | Cut from palomas_orrery @ 2991a0c7 | July 17, 2026
+Skill version: 1.2 | Cut from palomas_orrery @ 079a0ec5c6a72f83fa7904e469cd359912746221 | July 19, 2026
 Sources: LEDGER_CONSOLIDATED.md header, ledger_index.py at HEAD, handoff
 v28 (consolidation) and v29 (cleanup), food insecurity handoffs.
 
@@ -25,8 +25,9 @@ protocol -> ledger -> handoff -> manifest -> code -> repo -> ledger.
   facts. Design-session handoffs (zero code) are first-class outputs: the
   reasoning trail for WHY the design is what it is.
 - Manifest: the executable build contract, written against HEAD at build
-  time (never on an un-pushed base). If handoff and manifest disagree,
-  that is a flag to raise, not a thing to silently resolve.
+  time (never on an un-pushed base); opens with the anchor (built on
+  <SHA> at <URL>) per the requirement below. If handoff and manifest
+  disagree, that is a flag to raise, not a thing to silently resolve.
 
 ## Ledger Block Format
 
@@ -76,17 +77,27 @@ scores, verification results, corrections, open questions for Tony).
   [per chain] vs [render-gated] -- the ledger states which of its own
   claims are checked vs carried.
 
+## Anchor Requirement (all outbound documents)
+
+Any document that leaves the live session -- handoff, manifest,
+as-built, review request, or a prompt/audit carried to another AI
+(Mode 7 relay) -- opens with: built on <SHA> at <URL>, and after a
+push, pushed at <new SHA>. Multi-repo work pins EACH repo's SHA+URL
+separately (orrery and gallery move independently):
+  - orrery: https://github.com/tonylquintanilla/palomas_orrery
+  - gallery: https://github.com/tonylquintanilla/tonyquintanilla.github.io
+This is the document-layer form of the protocol's SHA Round Trip
+CRITICAL gate -- applies uniformly regardless of document type or
+audience.
+
 ## Handoff Structure (the load-bearing lines)
 
 Every handoff opens with:
-- Base SHA ("built on <SHA>") and, after the session's push, the new SHA
-  ("pushed at <SHA>"). The SHA chain is the round-trip record.
+- Base SHA and URL per the Anchor Requirement above.
 - Type declaration: BUILD / DESIGN SESSION (zero code) / DOCUMENTATION.
 - Supersedes / companion lines (what this replaces; which manifest pairs
   with it). Superseded handoffs remain authoritative AS SESSION RECORDS
   by reference; their embedded ledgers do not.
-- For multi-repo sessions, pin EACH repo's SHA separately (orrery and
-  gallery move independently).
 Body: what was done (verified vs claimed), discrepancies surfaced,
 open decisions for Tony, next-session scoping. Close with the credit
 line ("Session/entry written [Month Year] with Anthropic's Claude
