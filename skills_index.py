@@ -28,10 +28,12 @@ Claude skill loader (which reads name/description) but read by this tool,
 so Tony keeps editorial control of the manifest without hand-editing the
 protocol file.
 
-Target file resolution: the protocol filename is versioned
-(project_instructions_v3_30.md, _v3_31.md, ...), so with no argument the
-tool targets the HIGHEST-versioned project_instructions_v*.md found next
-to this script. Pass a path to override.
+Target file resolution: with no argument, the tool targets
+PROJECT_INSTRUCTIONS.md next to this script -- the single, standard-named
+file that is always the current, live protocol. Versioned archival copies
+(documentation/project_instructions_v3_31.md, ...) are historical record
+only; this tool never reads or writes them by default. Pass a path to
+target something else.
 
 The manifest zone markers must already exist in the protocol file:
 
@@ -50,8 +52,8 @@ CRLF-convert the protocol file -- a second deliberate divergence from the
 recipe, noted here so it is not "fixed" away.
 
 Usage:
-    python3 skills_index.py                              # highest project_instructions_v*.md, rewrite in place
-    python3 skills_index.py project_instructions_v3_31.md
+    python3 skills_index.py                              # PROJECT_INSTRUCTIONS.md, rewrite in place
+    python3 skills_index.py documentation/project_instructions_v3_31.md
     python3 skills_index.py --check                      # report only, exit 1 on problems, no write
 
 Module created: July 2026 with Anthropic's Claude Fable 5 (L-097,
@@ -68,8 +70,7 @@ START = ('<!-- SKILL-MANIFEST:START '
 END = '<!-- SKILL-MANIFEST:END -->'
 
 VERSION_RE = re.compile(r'^Skill version:\s*([0-9][0-9.]*)\b')
-PROTOCOL_GLOB = 'project_instructions_v*.md'
-PROTOCOL_VER_RE = re.compile(r'project_instructions_v(\d+)_(\d+)\.md$')
+PROTOCOL_DEFAULT_NAME = 'PROJECT_INSTRUCTIONS.md'
 
 # Manifest display order (mirrors SECTION_ORDER in ledger_index.py):
 # the v3.30 manifest reads in workflow order, not alphabetical order.
@@ -222,16 +223,13 @@ def build_manifest(records):
 
 
 def find_default_protocol(folder):
-    """Highest-versioned project_instructions_v*.md next to this script."""
-    best, best_key = None, None
-    for p in folder.glob(PROTOCOL_GLOB):
-        m = PROTOCOL_VER_RE.search(p.name)
-        if not m:
-            continue
-        key = (int(m.group(1)), int(m.group(2)))
-        if best_key is None or key > best_key:
-            best, best_key = p, key
-    return best
+    """The standard-named, currently-live protocol file next to this
+    script. Versioned archival copies (documentation/project_instructions_
+    v3_31.md, ...) are historical record only -- this tool never targets
+    them by default; pass one explicitly if you ever need to regenerate
+    an archived copy's manifest for some reason."""
+    candidate = folder / PROTOCOL_DEFAULT_NAME
+    return candidate if candidate.is_file() else None
 
 
 def main():
@@ -244,8 +242,8 @@ def main():
     else:
         target = find_default_protocol(here)
         if target is None:
-            print(f"ERROR: no {PROTOCOL_GLOB} found next to skills_index.py; "
-                  "pass the protocol file path explicitly.")
+            print(f"ERROR: {PROTOCOL_DEFAULT_NAME} not found next to "
+                  "skills_index.py; pass the protocol file path explicitly.")
             sys.exit(2)
 
     skills_dir = here / SKILLS_DIRNAME
