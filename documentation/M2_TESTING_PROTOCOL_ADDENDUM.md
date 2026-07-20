@@ -331,7 +331,31 @@ Change how the resolver consumes served_window (per-object bound instead of one 
 **Tony:** Yes, #1. 
 
 python tools/gallery_cache_builder.py --dry-run --object apophis
+
+**Claude:**
+Apophis checks out cleanly, no surprises, exactly the "boring in a good way" result the addendum expected.
+
+Period matches the real thing. n_deg_per_day: 1.1127 → period 360/1.1127 ≈ 323.5 days — that's Apophis's actual, well-known ~323.6-day orbital period. Second object in a row where the raw mean-motion number lines up with the textbook value.
+
+Even cleaner than Earth. error_rate_deg_per_day: 3.7e-06 — smaller than Earth's 2.8e-04, which makes sense: this is Apophis measured on an ordinary day, far from any close encounter, so two-body is about as good a fit as it gets. And like Earth (and unlike Moon/Pluto), the cap binds at the full period (window_days == cap_applied == 323.5) rather than the measured rate — the rate alone would allow a window in the tens of thousands of days, but the P/1 structural ceiling for asteroid category catches it first. Exactly the "planet-like, not comet-like" shape predicted, no inversions.
+
+One thing worth actually checking rather than shrugging off: the top-level served_window (start 2460918.577...) doesn't exactly match Apophis's own trust.window (start 2460917.953...) — a ~0.624-day gap. Same kind of small gap showed up on Earth's run too (~0.058 days), a different size each time. I went back to the code rather than assume it's noise: the per-object window is anchored to element_epoch_jd (midnight UTC, fixed for the day), but the global served_window is deliberately centered on as_of_jd = right now — actual wall-clock time when the build runs, line 1029/1046. And it checks out numerically both times: Apophis ran at 14:59:08 UTC (≈0.624 of a day past midnight — matches its gap exactly), Earth ran at 01:24:06 UTC (≈0.058 of a day past midnight — matches its gap exactly). So this is two different reference points doing two different jobs correctly, not a bug — per-object math anchors to when the elements were fetched, the site-wide bound anchors to the actual present moment. Good one to have caught and confirmed rather than waved off.
+
 python tools/gallery_cache_builder.py --dry-run --object halley
+
+**Claude:**
+Good — that completes the five, but the number doesn't match what I predicted, and I want to own that rather than talk around it.
+
+error_rate_deg_per_day: 6.4e-06 — that's smaller than Earth's (2.8e-04), far smaller than Moon's or Pluto's, and barely bigger than Apophis's (3.7e-06). I predicted Halley would show the largest rate of the five, reasoning "near perihelion = fast = should diverge fastest." That reasoning was wrong, or at least incomplete — here's what's actually going on, traced through the numbers rather than guessed at:
+
+delta_days is capped at a flat 30 days, and that cap doesn't scale with period. delta_days = min(period/8, 30). For Moon (period ≈ 27d) and Pluto (mutual period ≈ 6.4d), period/8 is well under 30, so the check window scales down with the object — Pluto got delta_days ≈ 0.8 days, a fair slice of its own tiny orbit. But Earth, Apophis, and Halley all have period/8 > 30, so all three get clamped to the same flat 30-day window regardless of how much longer their real period is. For Earth (365d) and Apophis (323d), 30 days is still a meaningful ~8-9% bite out of the orbit. For Halley (period ≈ 27,761 days, ~76 years — matches the real value almost exactly), 30 days is about 0.1% of the orbit — a genuinely tiny slice, even though it's centered at the fastest point. Perturbation away from the tangent two-body ellipse builds up with elapsed time from the anchor epoch, so an absolutely-tiny window, even at perihelion, just hasn't had much chance to show it yet. That's a real property of a flat time cap on a wildly different timescale, not a bug.
+
+And it turns out not to matter anyway — same as Earth and Apophis, the category structural cap wins here, not the measured rate. The rate alone would justify a window around 39,000 days; the comet P/2 cap clamps it to 13,880.67 regardless (cap_applied == window_days, confirmed). So the unusually clean rate is close to moot for what actually gets served.
+
+The part of the prediction that mattered more, and did land clean: this is the first real, live-Horizons confirmation that the Tp-anchor fix actually works end to end. epoch_jd: 2446469.97 — 1986, not today — and the two samples are at offset_days: -30.0 / +30.0 from that epoch, not from "now." That's exactly the mechanism the mock bug used to get wrong. It's correct against the real API.
+
+Five for five, Step 1 done. Quick recap of what it proved: mean-motion column resolves correctly on live queries, list-form epoch vectors work, the comet Tp-anchor fix holds against real data, and every rate/cap relationship lined up with known real physics except this one surprise, which explained itself once traced through the code rather than assumed.
+
 ```
 
 A dry-run validates and writes nothing outside `.staging` -- same pattern

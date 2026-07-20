@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*92 live items; 80 need attention (`!`); 92 RICE-scored; 50 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*94 live items; 82 need attention (`!`); 94 RICE-scored; 50 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -329,9 +329,11 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-107 | Gallery builder copy-with-provenance sync register | OPEN | 3.6 | 2026-07-09 |
+| ! | L-148 | Staging folder names carry no object identifier -- hard to locate manually (gallery-cache-builder) | OPEN | 1.8 | 2026-07-20 |
 | ! | L-111 | Gallery builder Pass 5 -- operability + deferred hardening | OPEN | 1.7 | 2026-07-10 |
 | ! | L-073 | Gallery export-emits-JSON -- fold the manual json_converter run into Export | OPEN | 1.6 | 2026-06-26 |
 | ! | L-058 | Open Studio items (May-5 handoff, checked @2f40d9d) | OPEN | 1.5 | 2026-06-08 |
+| ! | L-149 | Global served_window trust participation should key off canonical_frame, not category (gallery-cache-builder) | OPEN | 1.2 | 2026-07-20 |
 | ! | L-104 | Gallery Studio preset generator | OPEN | 1.0 | 2026-07-13 |
 | ! | L-132 | Studio landscape preset: links icon covers fly-to buttons | OPEN | 1.0 | 2026-07-17 |
 | ! | L-074 | Cull unused raw *_teaser.json in the gallery dir | OPEN | 0.9 | 2026-06-26 |
@@ -3271,6 +3273,46 @@ render (Mode 5) remains the authority over both AI reviewers.
 **Gap:** not reproduced/scoped this session -- verify still present at
 current HEAD (Studio layout has moved since 4/17) before fixing.
 **Ref:** to_do_ideas.md (pre-ledger, 4/17/26).
+
+#### [L-148] Staging folder names carry no object identifier -- hard to locate manually (gallery-cache-builder)
+<!-- L:148 status:OPEN upd:2026-07-20 section:H flag: rice:1/2/90/1 -->
+- **What.** run_build's staging dir name is `.staging_<out_dir.name>_<run_id>` -- timestamp
+  only, no object slug -- even for a single-object `--dry-run --object <slug>` run. Surfaced
+  during M2 Layer 2 manual verification (L-118): finding one object's trust block after a
+  dry-run means sorting File Explorer by date and guessing which .staging_solar-system_*
+  folder is the right one. Tony, mid-test: "with 11 objects it's hard, with all the objects
+  extremely hard."
+- **Proposed fix (not built, flagging only):** when only_slug is set, fold the slug into the
+  staging dirname, e.g. `.staging_solar-system_earth_<run_id>`. Multi-object runs
+  (--first-build/--nightly) keep the timestamp-only name -- no single object to name it after.
+**Note:** small, isolated change (one f-string in run_build's staging= line, ~1289).
+_sweep_siblings' glob (`.staging_%s_*` % out_dir.name) still prefix-matches the new shape
+unchanged -- no consumer break expected, worth a quick confirm before landing. Not yet
+RICE-scored.
+**Gap:** add slug to staging dirname when only_slug is set; confirm _sweep_siblings still
+reaps it; Layer 1 offline-suite check if any test asserts the exact staging dirname shape.
+**Ref:** gallery tools/gallery_cache_builder.py run_build (staging=... ~line 1289);
+_sweep_siblings; L-118 (parent -- discovered during its Layer 2 acceptance).
+
+#### [L-149] Global served_window trust participation should key off canonical_frame, not category (gallery-cache-builder)
+<!-- L:149 status:OPEN upd:2026-07-20 section:H flag: rice:2/2/60/2 -->
+- **What.** TRUST_WINDOW_EXCLUDED_CATEGORIES = {'moon', 'spacecraft'} excludes by category
+  label. Surfaced during M2 Layer 2 (L-118): Pluto (dwarf_planet) is centered on
+  pluto_barycenter -- same physical situation as Charon (moon), same barycenter -- but isn't
+  excluded, so Pluto's real ~6.4-day mutual-orbit window becomes the GLOBAL served_window's
+  controlling bound. resolver.py's resolve() checks served_window as one gate for the whole
+  scene regardless of which objects are requested -- confirmed live -- so this would reject
+  e.g. "Jupiter, 10 days out" even though Jupiter's own window is ~4,336 days.
+- **Decided (Tony, 2026-07-20):** exclude by canonical_frame != 'heliocentric', not category.
+  Generalizes to future barycenter-relative onboards -- Orcus/Vanth (20090482/920090482/
+  120090482) and Patroclus/Menoetius (20000617/920000617/120000617) both confirmed live as
+  real Horizons system-barycenter IDs, the general 20XXXXXX pattern, distinct from Pluto's
+  legacy single-digit @9.
+**Gap:** replace the category check in derive_served's participant loop with a
+canonical_frame check; Layer-1 offline-suite update; re-run Layer 2 Step 2/3 after the change.
+**Ref:** gallery tools/gallery_cache_builder.py derive_served (~1023-1048),
+TRUST_WINDOW_EXCLUDED_CATEGORIES (~353); resolver.py resolve() (~91-106);
+data/objects_config.json; L-118 (parent).
 
 ## O. OBJECT CANDIDATES TRACK
 
