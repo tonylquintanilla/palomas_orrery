@@ -294,7 +294,42 @@ The -30/+30 errors aren't symmetric (0.0020° vs 0.0083°) — that's normal. Re
 The top-level served_window in this file (the one at the very top of the JSON) is Earth's window alone, since this run only touched one object — it's not the real multi-object answer. That comes in Step 2, and it'll almost certainly be tighter than this, set by whichever comet or fast-mover has the smallest window, not by Earth.
 
 python tools/gallery_cache_builder.py --dry-run --object moon
+
+**Claude:**
+Moon's numbers came back exactly where the physics says they should, though not quite in the specific way the addendum guessed — worth walking through, since it's a good illustration of the cap logic actually doing its job.
+The rate itself: right direction, right rough size. error_rate_deg_per_day: 0.0331 vs Earth's 0.000277 — about 120x larger, matching the prediction that the Sun's perturbation on the Earth-Moon two-body ellipse would dominate the way other-planet perturbations don't for Earth. And as a sanity check: n_deg_per_day: 13.39 implies a period of 360/13.39 ≈ 26.9 days — close to the real 27.3-day sidereal month (the gap is just today's instantaneous osculating fit, not an error).
+But the cap bound, not the rate — opposite of what the addendum guessed, and that's fine. The addendum expected cap_applied: null (rate binds). What actually happened: the tolerance math alone would allow a ~7.55-day window before Moon's real trajectory drifts 0.5° from the two-body prediction — genuinely decent for a two-body approximation. But moon's structural cap (P/8 ≈ 3.36 days) is tighter than that, so the cap wins anyway. window_days, cap_applied, and delta_days are all showing the same number (3.3607...) for a reason, not a glitch: delta_days and moon's cap divisor both happen to be period/8 in this code, so for moon specifically all three collapse to one value. Nothing stuck or duplicated — just two independent formulas sharing a divisor for this one category. The takeaway: moon's rate is actually decent; the P/8 structural ceiling is just deliberately tighter than what the rate alone would justify. Correct behavior, wrong guess about which branch would fire — not a bug.
+served_window: null at the top is expected here too, not a failure. Moon is one of the two categories (moon, spacecraft) excluded from the global served_window entirely — this run only had one object, and it's the excluded one, so there were zero eligible participants. That's a different, silent code path from the "measurement failed" warning case — no warning printed because nothing failed. Real served_window shows up in Step 2 once all 11 non-excluded objects are in the same build.
+[RECOVER] fired again, same file, same non-blocking story as before — nothing new there.
+
 python tools/gallery_cache_builder.py --dry-run --object pluto
+
+**Claude:**
+Now the bigger thing — Pluto's numbers are internally correct, but they're not measuring what the addendum assumed, and it matters.
+Look at a_au: 1.424e-05. That's not Pluto's real ~39.5 AU distance from the Sun — that's ~2,130 km, which is Pluto's wobble radius around the Pluto-Charon barycenter. The osculating block confirms it: "center": "pluto_barycenter", "canonical_frame": "barycenter-relative". That's a deliberate, already-settled serving choice from the Pluto/Charon design work, not new to M2 — but it means the trust check just measured the mutual Pluto-Charon orbit, not Pluto's solar orbit.
+And the number checks out as real physics, not an error: 360 / 56.39 deg/day = 6.384 days — that's essentially exactly the textbook Pluto-Charon mutual orbital period (~6.39 days). So there's no bug in the arithmetic. The problem is one level up:
+
+dwarf_planet isn't in the excluded-participant set ({'moon', 'spacecraft'}) — only moon and spacecraft are excluded from the global served_window.
+Charon does the exact same motion (same barycenter, same ~6.4-day period) and is excluded — but only because its category label happens to be moon, not because anything actually checks whether an object is barycenter-anchored.
+Pluto is doing the identical kind of fast local orbit, but keeps its dwarf_planet label, so it isn't caught.
+
+I checked how this actually gets used before flagging it — resolver.py's resolve() checks the requested date against served_window as one single gate for the entire scene, before it even looks at which objects are in that scene:
+pythonserved_window = cache.served_window()
+...
+if not (lo <= resolved_jd <= hi):
+    raise OutOfServedWindowError(...)
+So if Pluto's ~6.4-day window ends up controlling the global minimum in Step 2 (and it will — every other participant we've measured so far is in the hundreds of days, comets will be in the thousands), a request for something as ordinary as "Jupiter, 10 days from now" gets rejected — even though Jupiter's own window is ~4,336 days and Pluto isn't even in that scene.
+This is exactly the "if it still is [the tightest window], that's worth a second look" checkpoint the addendum already built in for Step 2 — it's just showing up now, for a real and legitimate reason instead of the mock's placeholder.
+Three ways to handle it, your call:
+
+Reframe the exclusion rule around the serving frame, not the category label — anything barycenter/parent-relative gets excluded, which would catch Pluto the same way it already (accidentally) catches Charon, and generalizes to any future object served the same way.
+Leave it as-is — accept that the whole site's date range is genuinely bounded to about a week until this is revisited.
+Change how the resolver consumes served_window (per-object bound instead of one global minimum) — bigger change, and outside M2's declared scope (the implementation report confirmed resolver.py has zero edits).
+
+(1) fits the pattern the codebase already uses for Charon, for what that's worth, but I don't want to assume it for you.
+
+**Tony:** Yes, #1. 
+
 python tools/gallery_cache_builder.py --dry-run --object apophis
 python tools/gallery_cache_builder.py --dry-run --object halley
 ```
