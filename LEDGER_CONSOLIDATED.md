@@ -3786,6 +3786,23 @@ Skill Manifest.
 **Ref:** L-149, L-150 (motivating work); master plan §3; render_orbits.py, resolver.py,
 cache_reader.py.
 
+#### [L-152] ledger-and-session-records skill bumped to 1.2 -- retroactive ledger entry
+<!-- L:152 status:DONE upd:2026-07-20 section:W.Active flag: rice:1/1/95/0.5 -->
+- **What.** ledger-and-session-records was updated to v1.2 (cut at orrery @
+  079a0ec5c6a72f83fa7904e469cd359912746221, July 19, 2026) -- generalized
+  "Handoff Structure" into a shared "Anchor Requirement (all outbound
+  documents)" covering handoffs, manifests, as-builts, review requests, and
+  Mode-7 relay prompts under one built on <SHA> at <URL> format, plus a new
+  "The Document Stack" section. No ledger entry was written at the time --
+  this entry closes that gap per the protocol's own convention.
+- **Note:** discovered via version drift -- the resident protocol's Skill
+  Manifest still showed 1.0 while the repo was at 1.2, and a Claude draft
+  this session nearly re-generalized something already generalized, before
+  the mismatch was caught. Skill version drift is a real failure class,
+  same shape as an unpushed SHA.
+**Gap:** none -- documentation only. Skill Manifest table bumped to 1.2 alongside.
+**Ref:** skills/ledger-and-session-records/SKILL.md @ 1.2; L-149/L-150/L-151.
+
 ### W.Deferred -- captured, not yet actionable
 
 #### [L-091] Option E: unified front end

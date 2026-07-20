@@ -297,15 +297,15 @@ agentic-pre-test             1.1  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
 horizons-orbital-mechanics   1.1  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning
-provenance-discipline        1.0  Scanner runs, audits, citations, constants,
+provenance-discipline        1.1  Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0)
 earth-system-pipeline        1.1  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY
                                   human-cost visualization or text
 gallery-pipeline             1.1  Gallery Studio, json_converter, index.html
                                   viewer, gallery cards
-ledger-and-session-records   1.0  Ledger edits, ledger_index.py, RICE,
+ledger-and-session-records   1.2  Ledger edits, ledger_index.py, RICE,
                                   handoffs, manifests, atlas, dep_trace
-gallery-cache-builder        1.0  Nightly builder, atomic swap, coverage_index,
+gallery-cache-builder        1.1  Nightly builder, atomic swap, coverage_index,
                                   serving cache, objects_config,
                                   dry-run/first-build/nightly, builder testing
                                   layers
