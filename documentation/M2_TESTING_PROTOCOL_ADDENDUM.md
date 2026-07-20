@@ -279,6 +279,20 @@ first pass).
 
 ```
 python tools/gallery_cache_builder.py --dry-run --object earth
+
+**Claude:**:
+This is a clean pass — and it actually answers both of the open questions Layer 1 flagged as unknowable until real Horizons was involved.
+What it confirms:
+
+n_deg_per_day: 0.9851... is present and populated — Horizons' mean-motion column really is named n (or your fallback list found it), for a real planet query. Open question #1, settled.
+Two real samples came back (offset_days: -30 and +30), each with a real error_deg — the epochs=[jd1, jd2] list-form query works for .vectors() against the live API, same as it already did for .elements(). Open question #2, settled.
+The physics is exactly what the addendum predicted: error_rate_deg_per_day is tiny (0.000277 — two-body is a near-perfect stand-in for Earth's real orbit at this timescale), and cap_applied (365.43) equals window_days (365.43) — the ~365-day period cap is what's binding here, not the measured rate. If you work the math backward, the measured rate alone would've earned Earth a ~904-day window — the cap pulled it down to the period. That's the exact "cap binds, not the rate" case the addendum called out as the expected earth behavior.
+
+Two small things worth understanding, not worrying about:
+
+The -30/+30 errors aren't symmetric (0.0020° vs 0.0083°) — that's normal. Real Horizons includes actual perturbations from the other planets; a pure two-body propagation won't drift identically in both time directions. The code takes the worse of the two on purpose, which is what happened.
+The top-level served_window in this file (the one at the very top of the JSON) is Earth's window alone, since this run only touched one object — it's not the real multi-object answer. That comes in Step 2, and it'll almost certainly be tighter than this, set by whichever comet or fast-mover has the smallest window, not by Earth.
+
 python tools/gallery_cache_builder.py --dry-run --object moon
 python tools/gallery_cache_builder.py --dry-run --object pluto
 python tools/gallery_cache_builder.py --dry-run --object apophis
