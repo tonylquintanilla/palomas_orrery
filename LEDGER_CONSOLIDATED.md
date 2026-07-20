@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*94 live items; 82 need attention (`!`); 94 RICE-scored; 50 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*93 live items; 81 need attention (`!`); 93 RICE-scored; 51 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -367,7 +367,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-121 | Slim plotly wheel not deployed anywhere (F4, ships-nothing gate) | OPEN | 2.2 | 2026-07-15 |
 | ! | L-122 | Stray data/solar-system.prev_old/ committed to the repo (F6, non-blocking) | OPEN | 1.9 | 2026-07-15 |
 | ! | L-123 | Object info card -- serve info_dictionary.py as JSON, click-to-open (rides with F1) | OPEN | 1.8 | 2026-07-15 |
-| ! | L-148 | Staging folder names carry no object identifier -- hard to locate manually (gallery-cache-builder) | OPEN | 1.8 | 2026-07-20 |
 | ! | L-080 | Characterization harness (scene equivalence gate) | OPEN | 1.6 | 2026-07-14 |
 | ! | L-079 | Shared assembler architecture (keystone — redefined) | OPEN | 1.5 | 2026-07-07 |
 |  | L-089 | Scene-spec shared skeleton + solar system vocabulary (Phase 1) | PROPOSED | 1.5 | 2026-07-03 |
@@ -444,6 +443,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-085 | LICENSE to repo root | DONE | 4.0 | 2026-07-03 |
 |  | L-088 | Gallery integration test (Phase 0) | DONE | 4.0 | 2026-07-06 |
 |  | L-099 | Solar System Explorer interactive exhibit | DONE | 3.2 | 2026-07-06 |
+|  | L-148 | Staging folder names carry no object identifier -- hard to locate manually (gallery-cache-builder) | DONE | 1.8 | 2026-07-20 |
 |  | L-098 | Data serving pipeline (Phase 1b) | DONE | 1.5 | 2026-07-12 |
 
 <!-- INDEX:END -->
@@ -3713,26 +3713,6 @@ for the new served field.
 S9 (info card, deferred) and S12 (ledger recommendations); L-118 (F1,
 shared serving pipeline); L-098 (parent, Phase 1b).
 
-#### [L-148] Staging folder names carry no object identifier -- hard to locate manually (gallery-cache-builder)
-<!-- L:148 status:OPEN upd:2026-07-20 section:W.Active flag: rice:1/2/90/1 -->
-- **What.** run_build's staging dir name is `.staging_<out_dir.name>_<run_id>` -- timestamp
-  only, no object slug -- even for a single-object `--dry-run --object <slug>` run. Surfaced
-  during M2 Layer 2 manual verification (L-118): finding one object's trust block after a
-  dry-run means sorting File Explorer by date and guessing which .staging_solar-system_*
-  folder is the right one. Tony, mid-test: "with 11 objects it's hard, with all the objects
-  extremely hard."
-- **Proposed fix (not built, flagging only):** when only_slug is set, fold the slug into the
-  staging dirname, e.g. `.staging_solar-system_earth_<run_id>`. Multi-object runs
-  (--first-build/--nightly) keep the timestamp-only name -- no single object to name it after.
-**Note:** small, isolated change (one f-string in run_build's staging= line, ~1289).
-_sweep_siblings' glob (`.staging_%s_*` % out_dir.name) still prefix-matches the new shape
-unchanged -- no consumer break expected, worth a quick confirm before landing. Not yet
-RICE-scored.
-**Gap:** add slug to staging dirname when only_slug is set; confirm _sweep_siblings still
-reaps it; Layer 1 offline-suite check if any test asserts the exact staging dirname shape.
-**Ref:** gallery tools/gallery_cache_builder.py run_build (staging=... ~line 1289);
-_sweep_siblings; L-118 (parent -- discovered during its Layer 2 acceptance).
-
 #### [L-149] Global served_window trust participation should key off canonical_frame, not category (gallery-cache-builder)
 <!-- L:149 status:OPEN upd:2026-07-20 section:W.Active flag: rice:2/2/60/2 -->
 - **What.** TRUST_WINDOW_EXCLUDED_CATEGORIES = {'moon', 'spacecraft'} excludes by category
@@ -4102,6 +4082,26 @@ deferred), L-107 (provenance register), L-111 (unattended-nightly, follow-on).
 - **Next iteration:** Plot refinements (Mercury color contrast, scale presets,
   outer planet zoom, additional controls).
 **Ref:** Master plan v10 §2a, §5 Phase 0; gallery @ `a85a4fa`.
+
+#### [L-148] Staging folder names carry no object identifier -- hard to locate manually (gallery-cache-builder)
+<!-- L:148 status:DONE upd:2026-07-20 section:W.Done flag: rice:1/2/90/1 -->
+- **What.** run_build's staging dir name is `.staging_<out_dir.name>_<run_id>` -- timestamp
+  only, no object slug -- even for a single-object `--dry-run --object <slug>` run. Surfaced
+  during M2 Layer 2 manual verification (L-118): finding one object's trust block after a
+  dry-run means sorting File Explorer by date and guessing which .staging_solar-system_*
+  folder is the right one. Tony, mid-test: "with 11 objects it's hard, with all the objects
+  extremely hard."
+- **Proposed fix (not built, flagging only):** when only_slug is set, fold the slug into the
+  staging dirname, e.g. `.staging_solar-system_earth_<run_id>`. Multi-object runs
+  (--first-build/--nightly) keep the timestamp-only name -- no single object to name it after.
+**Note:** small, isolated change (one f-string in run_build's staging= line, ~1289).
+_sweep_siblings' glob (`.staging_%s_*` % out_dir.name) still prefix-matches the new shape
+unchanged -- no consumer break expected, worth a quick confirm before landing. Not yet
+RICE-scored.
+**Gap:** add slug to staging dirname when only_slug is set; confirm _sweep_siblings still
+reaps it; Layer 1 offline-suite check if any test asserts the exact staging dirname shape.
+**Ref:** gallery tools/gallery_cache_builder.py run_build (staging=... ~line 1289);
+_sweep_siblings; L-118 (parent -- discovered during its Layer 2 acceptance).
 ### W.Cross-references -- existing items that interact with the web track
 
 - **L-026** -- CRLF to LF on `palomas_orrery_helpers.py`. Companion to L-087.
