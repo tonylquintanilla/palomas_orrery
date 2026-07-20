@@ -263,7 +263,27 @@ Created `300ac30c`, updated `a85a4fa` (July 6, 2026).
 **The assembler is new code.** The original desktop code is the recipe reference.
 The assembler is written fresh against the scene-spec vocabulary (delivered by
 Fable 5, July 4 2026), calling the shared computation engines. The original
-code is archived for reference or reconstruction.
+code is archived for reference or reconstruction.The relationship with the
+desktop orrery is inheritance of knowledge, not inheritance of machinery: orbital
+mechanics, Horizons conventions, the established visual language (single-info-
+marker pattern, AU-hover convention, barycenter-outside-primary rule) all carry
+over and already show up verbatim in assembler code (render_orbits.py's info
+marker matches the orrery's pattern exactly). What does NOT carry over is the
+orrery's live-Horizons access -- Pyodide in the browser has no network, so the
+assembler must cache a recipe once and reconstruct it later without help. Nearly
+everything that has no orrery equivalent -- the staging/atomic-swap machinery,
+client-side Kepler propagation, and trust measurement itself (there is no orrery
+concept of "how long can we trust this snapshot," because the orrery is never
+working from a snapshot) -- exists specifically because of that one constraint.
+This is why the interactive gallery is worth building at all: it does something
+the orrery structurally cannot -- make the project usable by anyone, without the
+Python barrier.
+
+**Rule:** new objects are authored in celestial_objects.py FIRST, then ported to
+objects_config.json. Never invented fresh in the assembler. (Encke, added to the
+assembler for M1/M2 comet-path testing ahead of the orrery -- confirmed absent
+from celestial_objects.py as of July 20 -- is the known, deliberate exception;
+closing that gap will double as a live test of the porting pipeline.) 
 
 **Scene-spec vocabulary: DELIVERED.** `PHASE1_SCENE_SPEC_VOCABULARY.md` (Fable 5,
 `fdb66ca`). Shared skeleton (5 fields) + solar system payload (9 field groups)
@@ -391,6 +411,22 @@ held as optimization). Deferred to Phase 3.
 > Where a bullet conflicts with osculating-primary + fetch-fresh,
 > GALLERY_DATA_SOURCE_HANDOFF v0.4 and the shipped gallery_cache_builder.py are
 > authoritative. Full section-3a rewrite tracked as L-108.
+
+- OQ-F: Canonical frame — helio / parent-relative / arc-natural. The v4 model correction
+  RETIRED subtraction (catastrophic cancellation + aliasing); osculating-primary
+  now. The builder fetches FRESH from Horizons at each object's canonical center
+  (it DOES re-query); no co-sampling for the orbit. **Settled (v0.4).**
+
+> **Addendum (July 20):** OQ-F's frame list above is missing a fourth, real case
+> -- barycenter-relative (Pluto/Charon; future Orcus/Vanth, Patroclus/Menoetius).
+> The "fetch FRESH at each object's own center, no composition" ruling already
+> covers it correctly: a near-equal-mass binary needing both a wide (heliocentric)
+> and close (barycentric) view means TWO independent fetches, never one derived
+> from the other -- same principle that retired subtraction for moons, extended
+> to binary pairs. "Pluto/Charon two-view" already names this correctly: two
+> self-contained scenes, not one composed scene.
+
+- OQ-G: Wire format — JSON for v1, column-oriented. **Settled.**
 
 - Osculating elements carry explicit `center` field (prevents Charon@9 class
   errors). One orbit shape per object, no `valid_until` (science museum, not
@@ -1127,6 +1163,16 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
 - Manifest handed to Opus for the actual F1 build July 16, 2026
   (`OPUS_BUILD_PROMPT_F1_v1.md`); orrery re-pinned `13acfcf4`, gallery
   unchanged `953c650e`.
+
+- **Sonnet 5 + Tony, Layer 2 live-Horizons testing** (July 20, 2026): M2 (F1a
+  trust/served_window) verified against real Horizons for 5 objects. Surfaced
+  and resolved: Pluto's category-based trust-participation bug (L-149, decided:
+  key off canonical_frame); the general multi-orbit requirement for near-equal-
+  mass binaries (L-150); confirmed no test coverage of participant-set
+  membership existed before tonight. Design discussion clarified the orrery/
+  assembler boundary and corrected an initial mis-framing of the fix as
+  requiring frame composition -- it doesn't; independent per-center fetch was
+  already the settled v0.4 principle. gallery-assembler skill decided (L-151).   
 
 *Superseded:*
 - ~~Export script reads the desktop cache~~ -> fetch fresh from Horizons (v0.4)

@@ -538,6 +538,21 @@ In relationship there is only the moment. The conversation proceeds at its
 natural pace. Conversation pierces the illusion of scale. Real dialogue
 doesn't scale -- and that's why it matters.
 
+The Orrery and the Assembler
+Two instruments, one body of understanding underneath them. The orrery solves
+"ask Horizons the right question, live" -- there is no local math to get wrong,
+because there is no local math. The assembler solves a problem the orrery never
+faces: no live connection, so it must cache a recipe once and reconstruct it
+correctly, later, alone. Nearly everything distinguishing the two -- caching,
+client-side propagation, trust measurement itself -- exists because of that one
+difference. What transfers is knowledge (orbital mechanics, Horizons convention,
+the visual language); what doesn't is the machinery. Forgetting this both ways
+is a failure mode: porting orrery code into the assembler expecting orrery
+behavior, or "fixing" the assembler by translating between frames it was
+deliberately built never to translate between (subtraction was tried and
+retired for cause -- catastrophic cancellation, real numbers, not a style
+preference). The assembler exists because the orrery's Python requirement is
+a wall between the work and everyone who isn't Tony.
 
 PART 5: REFERENCE
 
@@ -573,6 +588,7 @@ Quotables (selected)
 "The snapshot can be stale; the index can be haunted; the repo at HEAD is neither." -- June 2026
 "Our work is not just right -- it's beautiful." -- Tony, June 2026
 "The SHA is the round trip: a matching remote HEAD confirms commit, push, and sync in one unforgeable check." -- June 2026
+"We are not translating the orrery. We are using it as a base, but we are in fact creating a new orrery." -- July 2026
 
 Lessons Archive
 

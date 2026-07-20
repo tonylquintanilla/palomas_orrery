@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*94 live items; 82 need attention (`!`); 94 RICE-scored; 51 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*95 live items; 83 need attention (`!`); 94 RICE-scored; 51 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -373,6 +373,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-089 | Scene-spec shared skeleton + solar system vocabulary (Phase 1) | PROPOSED | 1.5 | 2026-07-03 |
 | ! | L-149 | Global served_window trust participation should key off canonical_frame, not category (gallery-cache-builder) | OPEN | 1.2 | 2026-07-20 |
 |  | L-090 | Star cache inventory + wire format decision | PROPOSED | 0.5 | 2026-07-03 |
+| ! | L-151 | Create gallery-assembler skill -- technical home for the new-mechanism assembler | OPEN | -- | 2026-07-20 |
 
 ### W.Deferred -- Web Publication deferred (captured)
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -3763,6 +3764,27 @@ whole-system view and a close-up binary view should compute served_window (resol
 checks one global bound regardless of scene composition -- same limitation noted under L-149).
 **Ref:** L-149 (sibling, surfaced during its design discussion); objects_config.json
 (pluto/charon, barycentric-only today); "Pluto/Charon two-view" golden artifact.
+
+#### [L-151] Create gallery-assembler skill -- technical home for the new-mechanism assembler
+<!-- L:151 status:OPEN upd:2026-07-20 section:W.Active flag: rice:?/?/?/? -->
+- **What.** No skill documents the assembler itself -- render_orbits.py, resolver.py,
+  cache_reader.py, Kepler propagation, the trust/served_window system, the golden-artifact
+  build+Mode-5 process. gallery-cache-builder covers only the nightly builder/staging/
+  serving-cache side; gallery-pipeline covers the older Studio/converter/viewer curation
+  chain. Neither is the right home for "how the new mechanism itself works."
+- **Decided (Tony, 2026-07-20):** create gallery-assembler as that home.
+- **Must carry, once written (corrected tonight, not the first-pass framing):**
+  - Orrery-vs-assembler boundary: shared knowledge, not shared machinery (see master plan §3).
+  - No composition between frames -- retired by design (v4, catastrophic cancellation +
+    aliasing). Each orbit is an independent fetch at its own center; a binary pair needing
+    two views means two independent caches, never one derived from the other.
+  - render_orbits.py's Kepler math is frame-agnostic and fine as-is; the open question is at
+    scene/artifact assembly -- does it know which of an object's caches belongs in which view.
+  - Orrery-first authoring rule, with Encke as the confirmed, deliberate exception.
+**Gap:** write the skill; migrate the field notes above into it; add fires_when to the
+Skill Manifest.
+**Ref:** L-149, L-150 (motivating work); master plan §3; render_orbits.py, resolver.py,
+cache_reader.py.
 
 ### W.Deferred -- captured, not yet actionable
 
