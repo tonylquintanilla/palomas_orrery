@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*94 live items; 82 need attention (`!`); 94 RICE-scored; 47 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*92 live items; 80 need attention (`!`); 92 RICE-scored; 50 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -229,10 +229,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
-| ! | L-063 | Orrery GUI Note text update | OPEN | 2.0 | 2026-06-21 |
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
 | ! | L-129 | Cometary structure constants -- periodic maintenance sweep | OPEN | 1.0 | 2026-07-17 |
-| ! | L-134 | Dashboard developer-tools audit | OPEN | 1.0 | 2026-07-17 |
 | ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 0.9 | 2026-07-16 |
 | ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-06-24 |
 
@@ -406,12 +404,15 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-110 | GPT competitive cross-check remediation (builder Pass 4) | DONE | 2.7 | 2026-07-10 |
 |  | L-116 | New skill: gallery-cache-builder (Move 2 of the skills update) | DONE | 2.5 | 2026-07-12 |
 |  | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | DONE | 2.2 | 2026-07-15 |
+|  | L-063 | Orrery GUI Note text update | DONE | 2.0 | 2026-07-17 |
 |  | L-072 | Gallery Studio WYSIWYG preview -- render through the real index.html viewer | DONE | 2.0 | 2026-06-26 |
 |  | L-108 | Master plan v10 -> v11: Phase 1b fetch-fresh pivot reconciliation | DONE | 1.8 | 2026-07-12 |
 |  | L-002 | Protocol -> Skills refactor (process/tooling) | DONE | 1.5 | 2026-07-04 |
 |  | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | DONE | 1.5 | 2026-06-23 |
+|  | L-147 | Embed dashboard launcher in orrery GUI third column | DONE | 1.5 | 2026-07-17 |
 |  | L-047 (#N10) | Note-composition structural refactor (behind N6) | DONE | 1.0 | 2026-06-23 |
 |  | L-050 (#N9) | white -> red orbit-marker switch (osculating marker intentionally stays white) | DONE | 1.0 | 2026-06-23 |
+|  | L-134 | Dashboard developer-tools audit | DONE | 1.0 | 2026-07-17 |
 |  | L-138 | Candidate objects & presets for the Objects menu (running list) -- superseded | DONE | 1.0 | 2026-07-17 |
 |  | L-020 (#26) | CUSTOM_SHELLS tooltip verification | DONE | 0.9 | 2026-06-22 |
 |  | L-049 (#N8) | Comet info-marker superposition cluster | DONE | 0.5 | 2026-06-23 |
@@ -630,14 +631,6 @@ and wrong stats are a real credibility/usability issue, not purely
 cosmetic; confidence high, concrete claims verified directly this
 session rather than assumed; effort stays low, Fable-suited assembly
 work) -- yours to finalize.
-
-#### [L-063] Orrery GUI Note text update
-<!-- L:063 status:OPEN upd:2026-06-21 section:A flag: rice:2/1/50/0.5 -->
-- **Update the Note in the orrery GUI.** The in-app Note text (palomas_orrery.py)
-  has drifted from current project state; refresh it to reflect current scope.
-  Paired with L-062 as the user-facing text refresh. Small Mode-1 edit once the
-  new wording is decided.
-**Gap:** decide the new Note wording (light design -- what should it say now?), then a Mode-1 snippet into palomas_orrery.py (grep the current Note string first). Could alternatively live in D.Cosmetic; kept in A, paired with L-062.
 
 #### [L-070] Food Insecurity -- regional multi-country assembly (Sudan crisis shed)
 <!-- L:070 status:OPEN upd:2026-06-24 section:A flag: rice:2/3/45/3 -->
@@ -880,18 +873,6 @@ provenance-discipline/SKILL.md v1.1; documentation/provenance_audit_handoff_v4.m
 apparition? per session?) and which comets are in scope.
 **Ref:** to_do_ideas.md (pre-ledger, 4/16/26); horizons-orbital-mechanics
 skill (comet record pinning).
-
-#### [L-134] Dashboard developer-tools audit
-<!-- L:134 status:OPEN upd:2026-07-17 section:A flag: rice:2/2/50/2 -->
-- **Idea (Tony, 4/17/26, pre-ledger note).** Review
-  palomas_orrery_dashboard.py against all currently-available developer
-  tools/launchers -- update to reflect what's current, or remove stale
-  entries. Pairs with L-062 (README refresh) and L-063 (GUI Note text
-  update) as interface-currency work.
-**Gap:** not scoped -- inventory current dashboard buttons vs. what
-actually exists now (a lot has shipped since 4/17), then keep/remove
-per entry.
-**Ref:** to_do_ideas.md (pre-ledger, 4/17/26).
 
 ## PENDING ACTION (Tony-side)
 
@@ -2137,6 +2118,95 @@ the still-historical section-3a schema sub-block beyond the reconciliation note.
 **Gap:** none -- superseded, not itself actionable.
 **Ref:** to_do_ideas.md (pre-ledger); successor items above.
 
+
+#### [L-063] Orrery GUI Note text update
+<!-- L:063 status:DONE upd:2026-07-17 section:C flag: rice:2/1/50/0.5 -->
+- **Update the Note in the orrery GUI.** The in-app Note text (palomas_orrery.py)
+  has drifted from current project state; refresh it to reflect current scope.
+  Paired with L-062 as the user-facing text refresh. Small Mode-1 edit once the
+  new wording is decided.
+**Note:** Resolved by a bigger move than originally scoped: rather than
+refresh the static Note wording, the whole Note panel (third GUI column)
+was REPLACED by the live, embedded palomas_orrery_dashboard.py launcher
+-- see L-147. The wording-drift problem this item tracked no longer
+applies; there's no static text left to go stale.
+**Ref:** L-147 (dashboard embed); L-062 (README refresh -- still open,
+now unrelated to this one).
+
+#### [L-134] Dashboard developer-tools audit
+<!-- L:134 status:DONE upd:2026-07-17 section:C flag: rice:2/2/50/2 -->
+- **Idea (Tony, 4/17/26, pre-ledger note).** Review
+  palomas_orrery_dashboard.py against all currently-available developer
+  tools/launchers -- update to reflect what's current, or remove stale
+  entries. Pairs with L-062 (README refresh) and L-063 (GUI Note text
+  update) as interface-currency work.
+**Note:** Audited LAUNCH_GROUPS against both repos at HEAD (orrery
+d427adf8, gallery 3d4a2aec). Added 13 entries: 5 gallery-repo tools from
+tools/ (Gallery Cache Builder, Inspect Staging, Debug Encke TP, Gallery
+Cleanup, Gallery Builder Offline Tests) and 8 root-level orrery devtools
+that were live but unlisted (Test Orbit Cache, Export Orbit Cache, Test
+Reset Completeness, Create Ephemeris Database, Climate Cache Manager,
+VOT Cache Manager, Osculating Cache Manager, SIMBAD Query Manager).
+Left out on purpose -- flagged for Tony to override any of these calls:
+one-off historical diagnostics with hardcoded paths (diagnose_bcodmo.py,
+convert_hot_ph_to_json.py, examine_hot_csv.py, barycenter_cache_check.py);
+narrow phase-specific verification scripts (smoke_dipole_cone.py,
+smoke_rotation_axis.py, smoke_phase4.py, measure_perframe_elements.py);
+a demo-only __main__ (object_type_analyzer.py); already reachable via
+another GUI's own button (energy_imbalance.py via Earth System GUI,
+coordinate_system_guide.py via Orbital Construction); and a library
+module with no __main__ (incremental_cache_manager.py). All 35 final
+entries validated to resolve to real files against the actual sibling
+repo layout, not just read from source.
+**Ref:** to_do_ideas.md (pre-ledger, 4/17/26); L-147 (dashboard embed,
+same session).
+
+#### [L-147] Embed dashboard launcher in orrery GUI third column
+<!-- L:147 status:DONE upd:2026-07-17 section:C flag: rice:1/3/100/2 -->
+- **Replaced the static "Note" panel (third GUI column of palomas_orrery.py)
+  with a live, embedded palomas_orrery_dashboard.py launcher**, so the same
+  launch-card UI serves both standalone (`python palomas_orrery_dashboard.py`)
+  and embedded contexts from one source instead of two. Split the monolithic
+  `PalomasOrreryDashboard(ctk.CTk)` into `PalomasOrreryDashboardFrame(ctk.CTkFrame)`
+  (the actual UI, takes a parent widget) plus a thin `PalomasOrreryDashboard(ctk.CTk)`
+  standalone-window wrapper around it. palomas_orrery.py gets a Mode 1
+  snippet (import + `PalomasOrreryDashboardFrame(note_frame, status_position="bottom")`
+  in place of the old note_frame block); `note_text` and its `scrolledtext`
+  import both dropped as dead once the static panel was gone.
+- **status_position parameter:** "right" (default) keeps the original
+  960px standalone layout unchanged (status log as a fixed-width vertical
+  panel); "bottom" -- used for the embed -- puts it as a fixed-height
+  strip under the launch cards instead, since the narrow third-column
+  pane can't fit the roomy standalone design as-is.
+- **Bug found + fixed:** the status panel's fixed size (width OR height)
+  wasn't actually being honored. `grid_propagate(False)` only locks a
+  widget's size within its PARENT's grid cell; the panel's own children
+  (header/divider/textbox) are pack-managed, and `pack_propagate(False)`
+  was the missing call for that. This was a LATENT bug in the ORIGINAL
+  standalone design too (the fixed-width right panel was never actually
+  pinned at 270px) -- not something this session introduced, just found
+  along the way. Verified by measuring actual rendered pixel dimensions
+  under xvfb (90px/270px exactly, both orientations), not just reading
+  the code.
+- **Mouse wheel:** CustomTkinter's CTkScrollableFrame already handles
+  Windows/Mac `<MouseWheel>` correctly -- ancestor-aware (only scrolls
+  when the event's target widget is a descendant of its own canvas),
+  verified pixel-for-pixel on a nested launch-card button -- but has no
+  Linux Button-4/Button-5 binding at all. Added that, reusing the frame's
+  own ancestor-check helper, matching columns 1 and 2's existing
+  cross-platform coverage in palomas_orrery.py. Windows/Mac behavior was
+  left untouched (already correct; duplicating it risked a double-scroll
+  conflict).
+- Also closes L-134 (dashboard devtools audit, same session) and L-063
+  (GUI Note text update -- superseded by this replacement).
+**Note:** Built across session start db5a2e5a -> Tony's integration push
+(d4b7eca/d427adf8) -> this session's scroll-fix + launch-groups increment,
+pushed as 6064728 -> current HEAD 6b1c8d904f. Verified at each step:
+py_compile + ASCII/LF gates, xvfb live-dispatch smoke tests (standalone
+AND embedded, both status_position values), a full run of the real
+palomas_orrery.py with the dashboard embedded reaching mainloop clean.
+**Ref:** palomas_orrery_dashboard.py; palomas_orrery.py (note_frame
+block, ~line 11046); L-134; L-063.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
