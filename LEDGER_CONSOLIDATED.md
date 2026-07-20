@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*93 live items; 81 need attention (`!`); 93 RICE-scored; 51 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*94 live items; 82 need attention (`!`); 94 RICE-scored; 51 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -365,6 +365,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-120 | Halley configured but not yet in the served index (F3, gates artifact 4) | OPEN | 7.6 | 2026-07-15 |
 | ! | L-119 | event_link hardcoded None in the builder (F2, gates artifact 7) | OPEN | 3.6 | 2026-07-15 |
 | ! | L-121 | Slim plotly wheel not deployed anywhere (F4, ships-nothing gate) | OPEN | 2.2 | 2026-07-15 |
+| ! | L-150 | Multi-orbit trust model for near-equal-mass binaries (Pluto/Charon and future onboards) | OPEN | 2.2 | 2026-07-20 |
 | ! | L-122 | Stray data/solar-system.prev_old/ committed to the repo (F6, non-blocking) | OPEN | 1.9 | 2026-07-15 |
 | ! | L-123 | Object info card -- serve info_dictionary.py as JSON, click-to-open (rides with F1) | OPEN | 1.8 | 2026-07-15 |
 | ! | L-080 | Characterization harness (scene equivalence gate) | OPEN | 1.6 | 2026-07-14 |
@@ -3732,6 +3733,36 @@ canonical_frame check; Layer-1 offline-suite update; re-run Layer 2 Step 2/3 aft
 **Ref:** gallery tools/gallery_cache_builder.py derive_served (~1023-1048),
 TRUST_WINDOW_EXCLUDED_CATEGORIES (~353); resolver.py resolve() (~91-106);
 data/objects_config.json; L-118 (parent).
+
+#### [L-150] Multi-orbit trust model for near-equal-mass binaries (Pluto/Charon and future onboards)
+<!-- L:150 status:OPEN upd:2026-07-20 section:W.Active flag: rice:2/3/75/2 -->
+- **Decided (Tony, 2026-07-20), during L-149 discussion:** when a served body is a genuine
+  near-equal-mass binary -- barycenter falls OUTSIDE the primary, per the project's existing
+  barycenter rule -- it needs TWO served orbits, not one: heliocentric (whole-system views)
+  and barycenter-relative (close-up views), each trust-measured, each voting only in whatever
+  served_window governs its own scale of view. Ordinary planet-moon systems (barycenter
+  inside the primary -- Earth/Moon, Jupiter/any moon) are NOT this case and keep single-orbit
+  representation; the Moon's existing parent-relative orbit already IS its complete picture.
+- **Candidates discussed tonight -- not exhaustive; the code is the reference, not this list:**
+  - Pluto/Charon -- barycentric already served (~6.4-day mutual period); heliocentric not
+    served anywhere yet. Ties to the still-open "Pluto/Charon two-view" golden artifact.
+  - Orcus/Vanth -- not yet onboarded. Horizons IDs confirmed live: 20090482 (barycenter),
+    920090482 (Orcus), 120090482 (Vanth).
+  - Patroclus/Menoetius -- not yet onboarded. Horizons IDs confirmed live: 20000617
+    (barycenter), 920000617 (Patroclus), 120000617 (Menoetius). Menoetius ~22% of system
+    mass, ~680 km separation -> barycenter ~150 km from Patroclus's ~57 km-radius center,
+    clearly clear of the surface. Caveat: Patroclus is a Jupiter Trojan (L5 libration), so
+    its heliocentric orbit isn't a clean two-body case either -- measure its real trust
+    number, don't assume it's clean by analogy to Pluto. Also a Lucy flyby target (2033).
+- **Depends on:** the actual gap this rides on -- trust/served_window is keyed per OBJECT
+  today (one orbit per slug); needs to be keyed per ORBIT (object + center), since one body
+  can have two served orbits with unrelated accuracy characteristics. This entry records
+  WHICH objects need that and WHY, so it doesn't get re-derived from scratch later.
+**Gap:** design the per-(object,center) trust schema; decide how a scene mixing a
+whole-system view and a close-up binary view should compute served_window (resolver.py
+checks one global bound regardless of scene composition -- same limitation noted under L-149).
+**Ref:** L-149 (sibling, surfaced during its design discussion); objects_config.json
+(pluto/charon, barycentric-only today); "Pluto/Charon two-view" golden artifact.
 
 ### W.Deferred -- captured, not yet actionable
 
