@@ -17,16 +17,18 @@ Phase 2's assembler design (Fable + GPT independent manifests, comparative
 review, reconciled into PHASE2_F1_BUILD_MANIFEST_v2.md) -- catching a real,
 high-impact bug (planetocentric mean-motion in `propagate_marker`) GPT's
 manifest missed entirely. See "New in v14" below.
-Next: F1 build itself (Opus, orrery config edits + gallery builder change)
--- manifest handed off July 16, 2026; the config-shape decision (inline in
-objects_config.json, ported not hand-authored) was already closed in v13
-and still stands.
+Next: F1a (M2) Layer 2 live-Horizons verification -- done for 5 objects;
+Layer 2 Step 2 (multi-object --first-build) still pending, held until the
+L-149 fix lands. F1's remaining serving-pipeline work otherwise stands as
+handed off July 16, 2026.
 **Base:** orrery @ `c10a424`, gallery @ `e864fd42` (design ratified here;
 Artifact 1 built+pushed at orrery `6fc52b9a` / gallery `f89d83c4`; current
-HEAD orrery `13acfcf4` / gallery `953c650e`, F1 manifest + provenance-
-citation documentation work only)
+HEAD orrery `3c65750e` / gallery `d3ca3710` -- M2 Layer 2 live-Horizons
+testing (5 objects); L-149 (trust participation, canonical_frame not
+category) built, tested, pushed; L-150 (multi-orbit binaries) and L-151
+(gallery-assembler skill) decided, not yet built)
 **Date begun:** July 3, 2026
-**Last updated:** July 16, 2026
+**Last updated:** July 20, 2026
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
 Claude Fable 5, Claude Sonnet 5, GPT
 
@@ -263,7 +265,7 @@ Created `300ac30c`, updated `a85a4fa` (July 6, 2026).
 **The assembler is new code.** The original desktop code is the recipe reference.
 The assembler is written fresh against the scene-spec vocabulary (delivered by
 Fable 5, July 4 2026), calling the shared computation engines. The original
-code is archived for reference or reconstruction.The relationship with the
+code is archived for reference or reconstruction. The relationship with the
 desktop orrery is inheritance of knowledge, not inheritance of machinery: orbital
 mechanics, Horizons conventions, the established visual language (single-info-
 marker pattern, AU-hover convention, barycenter-outside-primary rule) all carry
@@ -1211,8 +1213,9 @@ prompts.
 
 ---
 
-Base: orrery @ `ca5c052` / gallery @ `4b086a6` (remediated builder pending re-push).
+Base: orrery @ `3c65750e` / gallery @ `d3ca3710`.
 Phase 0 closed. Phase 1a vocabulary delivered. A/B fork resolved: B′.
-Phase 1b design converged v0.4; builder built + offline-verified (L-098).
-Next: live dry-runs + first build. Solar System Explorer live at
-palomasorrery.com/interactive.html.
+Phase 1b builder built, offline-verified (L-098), and Layer 2 live-Horizons
+tested (5 objects) -- L-149 fixed, L-150/L-151 decided.
+Next: Layer 2 Step 2 (multi-object --first-build), held until L-149 lands.
+Solar System Explorer live at palomasorrery.com/interactive.html.

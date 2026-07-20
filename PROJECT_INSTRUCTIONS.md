@@ -323,7 +323,7 @@ At session start, for any build:
 2. Build on the repo pull or a fresh upload -- NEVER on /mnt/project. Mid-session
    edits are HEAD-plus-deltas, ahead of the repo until the post-session push;
    uploads cover them, as cross-check not base.
-3. Carry the SHA in the handoff ("built on 079a0ec5c6a72f83fa7904e469cd359912746221").
+3. Carry the anchor in the handoff ("built on <SHA> at <URL>; pushed at <new SHA>").
 Gallery work has its own repo
 (https://github.com/tonylquintanilla/tonyquintanilla.github.io) -- pin
 each repo's SHA separately.
@@ -672,5 +672,21 @@ v3.31 (July 4, 2026): Project-knowledge sync removed (L-002 follow-on);
 Context Priority simplified to 7 tiers; skills_index.py devtool (L-097)
 auto-generates the Skill Manifest table; fires_when frontmatter field
 added to all 8 skills.
+
+v3.32 (July 19-20, 2026): Two additions, one still open. (1) The anchor
+requirement generalized from handoffs to any document leaving a session --
+audit prompts, review requests, relay manifests, as-builts -- each opens
+with "built on <SHA> at <URL>"; an un-anchored document is unverifiable by
+a receiving AI with no repo access of its own (Part 1 Key Principles, Part
+3 SHA Round Trip). (2) The Orrery and the Assembler added to Foundation,
+plus a matching quotable: the assembler inherits knowledge (orbital
+mechanics, Horizons convention, visual language) from the orrery, not
+machinery -- it exists to solve a problem the orrery never has (no live
+Horizons in the browser) -- surfaced via M2 Layer 2 live-Horizons testing
+(L-149, L-150, L-151). Open at push: ledger-and-session-records' Handoff
+Structure section still describes only handoffs, in the pre-(1) format (no
+URL) -- needs generalizing before Part 3's pointer to it is accurate; and
+line 326's own worked example needs the fix above before it demonstrates
+the pattern it's citing.
 
 Functional for Claude, readable for human, signal preserved.
