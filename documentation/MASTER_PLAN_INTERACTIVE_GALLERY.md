@@ -414,11 +414,6 @@ held as optimization). Deferred to Phase 3.
 > GALLERY_DATA_SOURCE_HANDOFF v0.4 and the shipped gallery_cache_builder.py are
 > authoritative. Full section-3a rewrite tracked as L-108.
 
-- OQ-F: Canonical frame — helio / parent-relative / arc-natural. The v4 model correction
-  RETIRED subtraction (catastrophic cancellation + aliasing); osculating-primary
-  now. The builder fetches FRESH from Horizons at each object's canonical center
-  (it DOES re-query); no co-sampling for the orbit. **Settled (v0.4).**
-
 > **Addendum (July 20):** OQ-F's frame list above is missing a fourth, real case
 > -- barycenter-relative (Pluto/Charon; future Orcus/Vanth, Patroclus/Menoetius).
 > The "fetch FRESH at each object's own center, no composition" ruling already
@@ -427,8 +422,6 @@ held as optimization). Deferred to Phase 3.
 > from the other -- same principle that retired subtraction for moons, extended
 > to binary pairs. "Pluto/Charon two-view" already names this correctly: two
 > self-contained scenes, not one composed scene.
-
-- OQ-G: Wire format — JSON for v1, column-oriented. **Settled.**
 
 - Osculating elements carry explicit `center` field (prevents Charon@9 class
   errors). One orbit shape per object, no `valid_until` (science museum, not
