@@ -277,6 +277,40 @@ first pass).
 
 ### Step 1 -- dry-run per representative object; eyeball physical plausibility
 
+A dry-run validates and writes nothing outside `.staging` -- same pattern
+as M1's Layer 2 step 1. After each, the staged `coverage_index.json`'s
+`trust` block for that object is what to inspect (`tools\inspect_staging.py
+<staging-dir>` if that tool has a view for it, otherwise read the JSON
+directly).
+
+**What "looks right" means here** -- this is physical, not just structural,
+so eyeballing matters (per manifest sec 5.7 point 2, quoted directly:
+*"planet rates tiny; Moon's rate visibly larger; comet rates largest"*):
+
+- **earth**: two-body Kepler is an excellent approximation of Earth's real
+  orbit over a 30-day bracket (other-planet perturbations are a tiny
+  effect at this timescale) -- expect `error_rate_deg_per_day` very small,
+  `cap_applied` likely equal to `window_days` (the ~365-day period cap
+  binds, not the measured rate).
+- **moon**: the Sun's perturbation on the Earth-Moon two-body ellipse is
+  large relative to Earth's solar perturbations -- expect a materially
+  larger `error_rate_deg_per_day` than earth's, and plausibly
+  `cap_applied: null` with `window_days` well under the P/8 cap (the
+  measured rate binds instead of the cap -- this is the interesting case
+  to check, since Layer 1's mock can only ever show `cap_applied` bound).
+- **pluto**: still a planet-cap object; expect small rate, similar
+  character to earth (dwarf_planet uses the same P-divisor as planet).
+- **apophis**: today-anchored (see the answer above this protocol) --
+  ordinary asteroid two-body behavior at "today", not flyby geometry;
+  expect planet-like smallness, not comet-like largeness.
+- **halley**: measured at its Tp-anchor epoch (near perihelion, the fast
+  part of a very eccentric orbit) -- expect the largest rate of the five,
+  plausibly `cap_applied: null` here too.
+
+If any of these come back inverted (e.g. earth's rate larger than
+halley's) that's a real bug to chase before going further, not a rounding
+concern.
+
 ```
 python tools/gallery_cache_builder.py --dry-run --object earth
 
@@ -358,49 +392,40 @@ Five for five, Step 1 done. Quick recap of what it proved: mean-motion column re
 
 ```
 
-A dry-run validates and writes nothing outside `.staging` -- same pattern
-as M1's Layer 2 step 1. After each, the staged `coverage_index.json`'s
-`trust` block for that object is what to inspect (`tools\inspect_staging.py
-<staging-dir>` if that tool has a view for it, otherwise read the JSON
-directly).
-
-**What "looks right" means here** -- this is physical, not just structural,
-so eyeballing matters (per manifest sec 5.7 point 2, quoted directly:
-*"planet rates tiny; Moon's rate visibly larger; comet rates largest"*):
-
-- **earth**: two-body Kepler is an excellent approximation of Earth's real
-  orbit over a 30-day bracket (other-planet perturbations are a tiny
-  effect at this timescale) -- expect `error_rate_deg_per_day` very small,
-  `cap_applied` likely equal to `window_days` (the ~365-day period cap
-  binds, not the measured rate).
-- **moon**: the Sun's perturbation on the Earth-Moon two-body ellipse is
-  large relative to Earth's solar perturbations -- expect a materially
-  larger `error_rate_deg_per_day` than earth's, and plausibly
-  `cap_applied: null` with `window_days` well under the P/8 cap (the
-  measured rate binds instead of the cap -- this is the interesting case
-  to check, since Layer 1's mock can only ever show `cap_applied` bound).
-- **pluto**: still a planet-cap object; expect small rate, similar
-  character to earth (dwarf_planet uses the same P-divisor as planet).
-- **apophis**: today-anchored (see the answer above this protocol) --
-  ordinary asteroid two-body behavior at "today", not flyby geometry;
-  expect planet-like smallness, not comet-like largeness.
-- **halley**: measured at its Tp-anchor epoch (near perihelion, the fast
-  part of a very eccentric orbit) -- expect the largest rate of the five,
-  plausibly `cap_applied: null` here too.
-
-If any of these come back inverted (e.g. earth's rate larger than
-halley's) that's a real bug to chase before going further, not a rounding
-concern.
-
-**tony**:
-```
-[paste dry-run output + trust block excerpts here]
-```
-
-**Claude**:
-[fill in after Tony's run]
-
 ### Step 2 -- real --first-build; inspect the swapped coverage_index
+
+**Claude:**
+## What's still needed — summary
+
+**For L-149 to close**, its own Gap says exactly two things remain, both live (not mock):
+1. **Step 2** — real `--first-build`
+2. **Step 3** — real `--nightly`
+
+Once those two run clean, L-149 goes from OPEN to DONE. Everything else about it (the code fix, the offline tests proving it) is already done and verified.
+
+**For the overall M2 addendum**, Steps 4 and 5 are also still open, but they're not part of L-149's own gap — they're general M2 acceptance, not tied to this specific bug:
+- **Step 4** — resolver date-picker check (dev render page)
+- **Step 5** — fetch-cost/throttling note
+
+**Not blocking any of this:**
+- **L-150** (Pluto/Charon two-view design) — decided, not built, rides with a future golden artifact
+- **L-151** (gallery-assembler skill) — looks done in the repo, ledger status just hasn't been flipped
+
+## One thing to flag before you run Step 2
+
+The addendum's own "Confirm" checklist for Step 2 was written *before* the L-149 fix, so one line in it is now stale:
+
+> "the controller should be one of earth/jupiter/saturn/**pluto**/apophis/halley/encke... if Pluto is still the tightest, that's worth a second look"
+
+That's outdated — Pluto is now structurally excluded from voting (barycenter-relative, not heliocentric), so it can't be the controller at all anymore. The updated version of that check is:
+
+- **Trust blocks:** still 11 measured (`two_body_rate_v1`) + Voyager 1 (`fetched_positions`) — unchanged, every object still gets measured individually.
+- **Global `served_window` controller:** must be one of exactly 6 — **earth, jupiter, saturn, apophis, halley, encke.** Moon/Io/Titan (parent-relative) and Pluto/Charon (barycenter-relative) should show a `trust` block but take no part in the global minimum.
+- If Pluto or Charon *does* still show up as the controller, that's now a real regression, not a "worth a second look" — the fix isn't working.
+
+Step 4, when you get to it, is actually the cleanest real-world proof of the fix: try a scene like "Jupiter, 10 days out" on the dev render page. Before the fix that would've wrongly hit `OutOfServedWindowError` because of Pluto's ~6.4-day window; now it shouldn't.
+
+Want me to update the addendum doc itself with this corrected Step 2 checklist before you run it, or just run it as-is and we'll reconcile after you paste the output?
 
 ```
 python tools/gallery_cache_builder.py --first-build
