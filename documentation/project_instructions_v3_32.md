@@ -305,6 +305,10 @@ gallery-pipeline             1.1  Gallery Studio, json_converter, index.html
                                   viewer, gallery cards
 ledger-and-session-records   1.2  Ledger edits, ledger_index.py, RICE,
                                   handoffs, manifests, atlas, dep_trace
+gallery-assembler            1.0  render_orbits.py, resolver.py,
+                                  cache_reader.py, propagation math, golden
+                                  artifact builds, Mode 5 acceptance,
+                                  orrery/assembler boundary questions
 gallery-cache-builder        1.1  Nightly builder, atomic swap, coverage_index,
                                   serving cache, objects_config,
                                   dry-run/first-build/nightly, builder testing
@@ -673,20 +677,22 @@ Context Priority simplified to 7 tiers; skills_index.py devtool (L-097)
 auto-generates the Skill Manifest table; fires_when frontmatter field
 added to all 8 skills.
 
-v3.32 (July 19-20, 2026): Two additions, one still open. (1) The anchor
-requirement generalized from handoffs to any document leaving a session --
-audit prompts, review requests, relay manifests, as-builts -- each opens
-with "built on <SHA> at <URL>"; an un-anchored document is unverifiable by
-a receiving AI with no repo access of its own (Part 1 Key Principles, Part
-3 SHA Round Trip). (2) The Orrery and the Assembler added to Foundation,
-plus a matching quotable: the assembler inherits knowledge (orbital
-mechanics, Horizons convention, visual language) from the orrery, not
-machinery -- it exists to solve a problem the orrery never has (no live
-Horizons in the browser) -- surfaced via M2 Layer 2 live-Horizons testing
-(L-149, L-150, L-151). Open at push: ledger-and-session-records' Handoff
-Structure section still describes only handoffs, in the pre-(1) format (no
-URL) -- needs generalizing before Part 3's pointer to it is accurate; and
-line 326's own worked example needs the fix above before it demonstrates
-the pattern it's citing.
+v3.32 (July 19-20, 2026): Two additions. (1) The anchor requirement
+generalized from handoffs to any document leaving a session -- audit
+prompts, review requests, relay manifests, as-builts -- each opens with
+"built on <SHA> at <URL>"; an un-anchored document is unverifiable by a
+receiving AI with no repo access of its own (Part 1 Key Principles, Part 3
+SHA Round Trip; line 326 corrected to match). (2) The Orrery and the
+Assembler added to Foundation, plus a matching quotable: the assembler
+inherits knowledge from the orrery, not machinery -- it exists to solve a
+problem the orrery never has -- surfaced via M2 Layer 2 live-Horizons
+testing (L-149, L-150, L-151). Corrected mid-push: ledger-and-session-
+records was already at 1.2 (July 19) when this version was drafted; the
+Skill Manifest table was still showing 1.0, and this entry's own first
+draft nearly re-generalized already-generalized content before the
+mismatch was caught (L-152, retroactive entry). Skill Manifest bumped to
+1.2/1.1/1.1 (ledger-and-session-records / provenance-discipline /
+gallery-cache-builder) to match actual repo state, and a new row added
+for gallery-assembler (L-151).
 
 Functional for Claude, readable for human, signal preserved.
