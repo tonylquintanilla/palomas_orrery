@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*95 live items; 83 need attention (`!`); 94 RICE-scored; 51 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*95 live items; 83 need attention (`!`); 94 RICE-scored; 53 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -394,6 +394,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |:---:|----|------|-------------|:-----:|---------|
 |  | L-117 | Offline suite red at HEAD: Encke id drift (2P -> 90000091) not mirrored in the mock | DONE | 34.2 | 2026-07-12 |
 |  | L-003 | Protocol amendment candidates (for v3.29) | DONE | 5.4 | 2026-06-22 |
+|  | L-153 | Restore "Who Tony Is" framing into resident protocol (protocol) | DONE | 5.1 | 2026-07-21 |
 |  | L-065 | European heat wave heat map (Earth System track) | DONE | 4.8 | 2026-06-25 |
 |  | L-064 | Provenance-scanner format sweep -- Earth System family | DONE | 4.5 | 2026-06-30 |
 |  | L-075 | KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine) | DONE | 4.3 | 2026-06-30 |
@@ -445,6 +446,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-085 | LICENSE to repo root | DONE | 4.0 | 2026-07-03 |
 |  | L-088 | Gallery integration test (Phase 0) | DONE | 4.0 | 2026-07-06 |
 |  | L-099 | Solar System Explorer interactive exhibit | DONE | 3.2 | 2026-07-06 |
+|  | L-152 | ledger-and-session-records skill bumped to 1.2 -- retroactive ledger entry | DONE | 1.9 | 2026-07-20 |
 |  | L-148 | Staging folder names carry no object identifier -- hard to locate manually (gallery-cache-builder) | DONE | 1.8 | 2026-07-20 |
 |  | L-098 | Data serving pipeline (Phase 1b) | DONE | 1.5 | 2026-07-12 |
 
@@ -2211,6 +2213,34 @@ AND embedded, both status_position values), a full run of the real
 palomas_orrery.py with the dashboard embedded reaching mainloop clean.
 **Ref:** palomas_orrery_dashboard.py; palomas_orrery.py (note_frame
 block, ~line 11046); L-134; L-063.
+
+#### [L-153] Restore "Who Tony Is" framing into resident protocol (protocol)
+<!-- L:153 status:DONE upd:2026-07-21 section:C flag: rice:3/2/85/1 -->
+- Context: Tony flagged on 2026-07-12 that his non-programmer/non-astronomer
+  background used to be documented in the project instructions and had been
+  removed in an editing pass. That flag was never captured as a ledger item
+  and floated away -- same failure class as L-152.
+- Verification [fetched @eb7f05dd, orrery HEAD]: grepped all versioned
+  project_instructions_v*.md (v1 through v3_32) and both working_protocol*.md
+  files -- zero matches for the bio framing at any version. It was never IN
+  the chat protocol. It DOES exist in documentation/CLAUDE.md ("Claude Code
+  Handoff", Feb 2026, "Who You Are Working With"): engineer/vibe-coder
+  framing only, no artist/anthropologist -- and that file is Code-only,
+  never ported to PROJECT_INSTRUCTIONS.md.
+- Correction to 2026-07-12 framing: not "removed" -- "written once for Code,
+  never carried to the document that reaches chat sessions and Mode 7 relay
+  partners." Net effect on Tony is the same.
+**Note (2026-07-20, consolidated):** Final round of additions to the
+ownership paragraph: inter-model orchestration (the Mode 7 relay work
+itself, distinct from the artifacts it produces) and the framing that
+all of it traces to Tony's professional engineering/ops-manager
+background -- the same source already cited for Procedural Criticality
+in Part 2. Cross-referencing that existing section rather than
+introducing a second unlinked claim about the same background.
+**Gap:** None.
+**Tony:** See PROJECT_ORIGIN.md in the root directory. PROJECT_INSTRUCTION.md 
+updated. Claude.md is for use in Claude Code and is obsolete.
+**Ref:** documentation/CLAUDE.md @ eb7f05dd; L-152 (same failure class).
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
@@ -3786,23 +3816,6 @@ Skill Manifest.
 **Ref:** L-149, L-150 (motivating work); master plan §3; render_orbits.py, resolver.py,
 cache_reader.py.
 
-#### [L-152] ledger-and-session-records skill bumped to 1.2 -- retroactive ledger entry
-<!-- L:152 status:DONE upd:2026-07-20 section:W.Active flag: rice:1/1/95/0.5 -->
-- **What.** ledger-and-session-records was updated to v1.2 (cut at orrery @
-  079a0ec5c6a72f83fa7904e469cd359912746221, July 19, 2026) -- generalized
-  "Handoff Structure" into a shared "Anchor Requirement (all outbound
-  documents)" covering handoffs, manifests, as-builts, review requests, and
-  Mode-7 relay prompts under one built on <SHA> at <URL> format, plus a new
-  "The Document Stack" section. No ledger entry was written at the time --
-  this entry closes that gap per the protocol's own convention.
-- **Note:** discovered via version drift -- the resident protocol's Skill
-  Manifest still showed 1.0 while the repo was at 1.2, and a Claude draft
-  this session nearly re-generalized something already generalized, before
-  the mismatch was caught. Skill version drift is a real failure class,
-  same shape as an unpushed SHA.
-**Gap:** none -- documentation only. Skill Manifest table bumped to 1.2 alongside.
-**Ref:** skills/ledger-and-session-records/SKILL.md @ 1.2; L-149/L-150/L-151.
-
 ### W.Deferred -- captured, not yet actionable
 
 #### [L-091] Option E: unified front end
@@ -4172,6 +4185,23 @@ RICE-scored.
 reaps it; Layer 1 offline-suite check if any test asserts the exact staging dirname shape.
 **Ref:** gallery tools/gallery_cache_builder.py run_build (staging=... ~line 1289);
 _sweep_siblings; L-118 (parent -- discovered during its Layer 2 acceptance).
+
+#### [L-152] ledger-and-session-records skill bumped to 1.2 -- retroactive ledger entry
+<!-- L:152 status:DONE upd:2026-07-20 section:W.Done flag: rice:1/1/95/0.5 -->
+- **What.** ledger-and-session-records was updated to v1.2 (cut at orrery @
+  079a0ec5c6a72f83fa7904e469cd359912746221, July 19, 2026) -- generalized
+  "Handoff Structure" into a shared "Anchor Requirement (all outbound
+  documents)" covering handoffs, manifests, as-builts, review requests, and
+  Mode-7 relay prompts under one built on <SHA> at <URL> format, plus a new
+  "The Document Stack" section. No ledger entry was written at the time --
+  this entry closes that gap per the protocol's own convention.
+- **Note:** discovered via version drift -- the resident protocol's Skill
+  Manifest still showed 1.0 while the repo was at 1.2, and a Claude draft
+  this session nearly re-generalized something already generalized, before
+  the mismatch was caught. Skill version drift is a real failure class,
+  same shape as an unpushed SHA.
+**Gap:** none -- documentation only. Skill Manifest table bumped to 1.2 alongside.
+**Ref:** skills/ledger-and-session-records/SKILL.md @ 1.2; L-149/L-150/L-151.
 ### W.Cross-references -- existing items that interact with the web track
 
 - **L-026** -- CRLF to LF on `palomas_orrery_helpers.py`. Companion to L-087.
