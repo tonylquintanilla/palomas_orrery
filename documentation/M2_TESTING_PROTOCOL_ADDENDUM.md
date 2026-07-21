@@ -447,13 +447,84 @@ Confirm:
   implementation report), Pluto should NOT be the tightest window on real
   data; if it still is, that's worth a second look.
 
-**tony**:
-```
-[paste --first-build output here]
-```
+**Tony**:
+Pass. 
 
 **Claude**:
-[fill in after Tony's run]
+Both new SHAs check out live. Now confirming the pushed data actually matches what you uploaded, and checking why the run manifest says `"committed": false`.Let me double check one detail — the run manifest and the served positions file show different Voyager 1 point counts (105 vs 113), worth verifying before I call this clean.Both new SHAs check out live — gallery `c5c9ea09`, orrery `3417753c`. And I pulled the actual pushed `coverage_index.json` from the new gallery HEAD: it matches your upload byte-for-byte on `served_window` and the `generated` timestamp, so this build's data is genuinely live now, not just staged locally.
+
+## Two things that look odd but are expected
+
+**`"committed": false` in the run manifest** — not a problem. `--first-build` alone doesn't auto-push; the script only commits+pushes if you also pass `--commit`. You didn't, so the swap happened locally and the manifest correctly reports it wasn't pushed by the script. You then pushed it yourself via GitHub Desktop about 4 minutes later — I checked: the actual commit on GitHub is titled "interactive first build," authored by you, timestamped 20:06:44 UTC. Exactly your normal loop (script swaps → you review → you commit+push).
+
+**The `[RECOVER]`/quarantine warning** — also expected, and self-healing. Something (likely OneDrive, since your whole project tree lives under OneDrive Desktop) had a lock on the old `data\solar-system.prev` folder, so the builder quarantined it instead of failing the run. The quarantined folder gets swept away automatically after a few days — nothing for you to do.
+
+(Also checked the Voyager 1 count mismatch you might notice — manifest says `backfilled(105)`, served file says `113` points. Traced it in the code: `backfilled(N)` only counts points fetched *this run* [glide + flyby windows + fresh tail]; the extra 8 come from older archived points this run didn't need to re-touch. Both numbers are correct, just measuring different things.)
+
+Two things that look odd but are expected
+
+"committed": false in the run manifest — not a problem. --first-build alone doesn't auto-push; the script only commits+pushes if you also pass --commit. You didn't, so the swap happened locally and the manifest correctly reports it wasn't pushed by the script. You then pushed it yourself via GitHub Desktop about 4 minutes later — I checked: the actual commit on GitHub is titled "interactive first build," authored by you, timestamped 20:06:44 UTC. Exactly your normal loop (script swaps → you review → you commit+push).
+
+The [RECOVER]/quarantine warning — also expected, and self-healing. Something (likely OneDrive, since your whole project tree lives under OneDrive Desktop) had a lock on the old data\solar-system.prev folder, so the builder quarantined it instead of failing the run. The quarantined folder gets swept away automatically after a few days — nothing for you to do.
+
+(Also checked the Voyager 1 count mismatch you might notice — manifest says backfilled(105), served file says 113 points. Traced it in the code: backfilled(N) only counts points fetched this run [glide + flyby windows + fresh tail]; the extra 8 come from older archived points this run didn't need to re-touch. Both numbers are correct, just measuring different things.)
+
+Step 2 — PASS, and this is the real-data proof for L-149
+served_window is populated: half-width = 323.5468 days
+Controller = Apophis (window_days: 323.54683906902784 — matches the half-width to 10 decimal places). Not Pluto.
+Pluto (window ~6.38d) and Charon (~0.80d) still get fully measured — their trust blocks are real and correct — but neither touches the global bound at all. That's the exclusion working exactly as designed, on live Horizons data, not just the mock.
+All 11 non-spacecraft objects show two_body_rate_v1; Voyager 1 shows fetched_positions with window: null — 12/12 as expected.
+Spot-checked the physics on every object (period from n_deg_per_day vs. real values): Jupiter ~11.86 yr, Saturn ~29.5 yr, Io ~1.77 d, Titan ~15.9 d, Halley ~76 yr — all correct, nothing inverted.
+
+Small bonus: feature_configs.json is no longer the empty stub — Earth/Jupiter/Saturn are serving real shell and ring data now. That's L-118's problem, not L-149's, but worth knowing it looks resolved too next time that item comes up.
+
+For L-149 specifically: its Gap needed Step 2 and Step 3. Step 2 just passed cleanly — Step 3 (--nightly) is the last thing standing between it and DONE. Ready whenever you want to run it; same deal, paste the output and I'll check the trust blocks refresh without the shrink gate or any M1 structural check regressing.
+
+Short answer: yes, but with one caveat
+
+L-118's own Gap has 5 items. Between what you just ran and what I verified, 4 of them are now confirmed done — but the 5th (nightly acceptance) hasn't happened yet, and it's the exact same run that closes L-149's own remaining gap.
+
+Confirmed done (live, not assumed):
+
+Feature params ported into objects_config.json and derive_served builds feature_configs.json from it — your uploaded file shows real content: Earth (atmosphere_shell + van_allen_belts), Jupiter (ring_system + radiation_belts), Saturn (7-ring system), everything else correctly {}
+served_window is populated — confirmed non-null in the same build
+Layer-1's shape-validator checks for this (schema_version, all 12 slugs, dict-not-list shape, malformed-input ABORTs) all still pass — 138/138, and I confirmed the code didn't change between the HEAD I tested and your new push, so that result still holds
+
+One worth flagging while we're in there: L-118's text says served_window "rides along in the same change" as the feature_configs fix. In practice it turned out to be its own separate, bigger effort — the M2 trust-measurement system (L-149/L-150/L-151), not something derive_served's feature-porting code does directly. Worth correcting that cross-reference so a future reader doesn't go looking for served_window logic in the wrong place.
+
+Still open: the nightly leg. L-118's Gap wants --first-build/--nightly acceptance; you've done first-build, not nightly yet. Same run you're about to do for L-149's Step 3 — one nightly run closes both.
+
+Not part of closing these two
+
+M2's Layers 1-3 (what we've been doing) are the builder's data gate — is the right data being served correctly. Mode 5 is a separate, later render gate — does the golden artifact actually look right. The gallery-assembler skill draws this line explicitly: passing the data gate is a prerequisite for attempting an artifact's Mode 5 acceptance, not the same milestone as passing it.
+
+Step 4 (already on your list — the resolver date-picker check) is a small visual check, but it's testing that served_window correctly gates dates on the render page — not a Mode 5 aesthetic pass on a golden artifact.
+
+Looking ahead — I checked, and it's not ready yet either
+
+The natural next Mode-5 candidate would be Artifact 2 (Jupiter/Saturn), next in your declared order. Since today's fix means Jupiter's rings/radiation belts and Saturn's 7-ring system are now being served correctly, I checked whether anything actually draws them yet.
+
+It doesn't. I searched the whole repo — Python and JS/HTML both — for anything consuming ring_system, van_allen_belts, atmosphere_shell, or radiation_belts. Nothing does. Even Earth's own closed Artifact 1 confirms this by design: its acceptance test explicitly checks that features dispatch as data only, with "JavaScript rendering them" as the intended next step — and that JS doesn't exist anywhere in the repo yet.
+
+So Jupiter/Saturn isn't blocked on data anymore (once nightly confirms), but it is blocked on writing that rendering layer — real, separate work, not a Mode 5 visual check you could do today.
+
+(Pluto/Charon two-view, if that crossed your mind since it's the artifact most tied to today's fix — that's Artifact 6, and it's additionally blocked on L-150's multi-orbit trust model, which is still just a design decision, not built.)
+
+So, for right now
+
+Just Step 3 (--nightly) closes L-118 and L-149. Mode 5 comes later, once the feature-rendering layer for Jupiter/Saturn exists to look at.
+
+## Step 2 — PASS, and this is the real-data proof for L-149
+
+- `served_window` is populated: half-width = 323.5468 days
+- **Controller = Apophis** (`window_days: 323.54683906902784` — matches the half-width to 10 decimal places). Not Pluto.
+- Pluto (window ~6.38d) and Charon (~0.80d) still get fully measured — their trust blocks are real and correct — but neither touches the global bound at all. That's the exclusion working exactly as designed, on live Horizons data, not just the mock.
+- All 11 non-spacecraft objects show `two_body_rate_v1`; Voyager 1 shows `fetched_positions` with `window: null` — 12/12 as expected.
+- Spot-checked the physics on every object (period from `n_deg_per_day` vs. real values): Jupiter ~11.86 yr, Saturn ~29.5 yr, Io ~1.77 d, Titan ~15.9 d, Halley ~76 yr — all correct, nothing inverted.
+
+Small bonus: `feature_configs.json` is no longer the empty stub — Earth/Jupiter/Saturn are serving real shell and ring data now. That's L-118's problem, not L-149's, but worth knowing it looks resolved too next time that item comes up.
+
+**For L-149 specifically:** its Gap needed Step 2 *and* Step 3. Step 2 just passed cleanly — Step 3 (`--nightly`) is the last thing standing between it and DONE. Ready whenever you want to run it; same deal, paste the output and I'll check the trust blocks refresh without the shrink gate or any M1 structural check regressing.
 
 ### Step 3 -- one real --nightly
 

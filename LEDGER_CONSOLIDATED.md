@@ -3558,7 +3558,7 @@ decision follows L-088 (Phase 0).
 **Ref:** Fable 5 review of v4 (finding 1); master plan S4b.
 
 #### [L-118] feature_configs.json served empty every build (F1, gates artifact 2)
-<!-- L:118 status:OPEN upd:2026-07-15 section:W.Active flag: rice:3/3/90/1 -->
+<!-- L:118 status:PENDING-GATE upd:2026-07-21 section:W.Active flag: rice:3/3/90/1 -->
 - **What.** `derive_served` (gallery_cache_builder.py, line ~749-750) writes
   `feature_configs.json` unconditionally empty
   (`{'schema_version': ..., 'features': {}}`) into staging on every build.
@@ -3602,6 +3602,13 @@ decision follows L-088 (Phase 0).
 - **Verified live 2026-07-15** [verified @953c650e/@73c67bed]:
   `feature_configs.json` still `{"features": {}}`; `served_window` still
   `null`. Nothing has drifted since the artifact-1 as-built was written.
+- **Claude:** [verified @c5c9ea09, 2026-07-21] The 2026-07-15 "still empty" note is
+  stale, superseded by this run. Live --first-build output confirms feature_configs.json
+  now derives from objects_config.json as designed -- earth/jupiter/saturn populated
+  with the ported shell_configs.py/CUSTOM_SHELLS values, the other 9 objects correctly
+  {}. Layer-1's M1 shape-validator checks all still pass (138/138 at HEAD). served_window
+  is also populated now, but via the separate M2 trust system (L-149/L-150/L-151), not
+  literally "the same change" as originally scoped here. 
 - **Naming caution.** The gallery-cache-builder skill's field notes use "F1"
   for a DIFFERENT, already-closed issue (L-114's config-path stranding). This
   L-118 is the Phase 2 synthesis manifest's F1 (feature_configs.json
@@ -3611,24 +3618,16 @@ feature layer it unlocks gates most of the remaining golden artifacts
 transitively; effort is a scoped builder change under the existing layered
 gate) -- yours to finalize. Config-shape decision closed (inline); no
 further decision blocks starting this.
-**Gap:** (1) add feature params to objects_config.json per object,
-PORTED from shell_configs.py (SHELL_CONFIGS for simple shells,
-CUSTOM_SHELLS + the relevant *_visualization_shells.py generator for
-custom geometry) rather than freshly authored; (2) `derive_served` builds
-`feature_configs.json` from config instead of the empty literal; (3)
-populate `served_window`; (4) Layer-1 offline-suite updates for the new
-config shape; (5) offline suite from a clean checkout, `--dry-run`, then a
-real `--first-build`/`--nightly` as acceptance (gallery-cache-builder
-skill's three-layer gate). L-123 (info card) rides the same
-serving-pipeline change but is separately scoped -- sequence after this
-Gap, not inside it.
+**Gap:** items 1-4 of the original 5 are done. Only the nightly leg of acceptance
+remains -- confirm feature_configs.json re-derives correctly (not stale, not dropped)
+on a real --nightly run. Same run that closes L-149's remaining gap.
 **Ref:** gallery `tools/gallery_cache_builder.py` (`derive_served` ~line
 710-751); `data/objects_config.json`; `data/solar-system/feature_configs.json`;
 orrery `shell_configs.py` (`SHELL_CONFIGS`/`CUSTOM_SHELLS`, Earth block);
 orrery `earth_visualization_shells.py` (`create_earth_magnetosphere_shell`);
 PHASE2_SYNTHESIS_MANIFEST_v2.md S4/S9; PHASE2_ARTIFACT1_AS_BUILT.md S8/S9;
 L-098 (parent, Phase 1b); L-114 (related but distinct -- see naming caution);
-L-123 (info card, rides with this).
+L-123 (info card, rides with this). L-149 (served_window ended up here, not in this item's own code)
 
 #### [L-119] event_link hardcoded None in the builder (F2, gates artifact 7)
 <!-- L:119 status:OPEN upd:2026-07-15 section:W.Active flag: rice:2/2/90/1 -->
@@ -3746,7 +3745,7 @@ S9 (info card, deferred) and S12 (ledger recommendations); L-118 (F1,
 shared serving pipeline); L-098 (parent, Phase 1b).
 
 #### [L-149] Global served_window trust participation should key off canonical_frame, not category (gallery-cache-builder)
-<!-- L:149 status:OPEN upd:2026-07-20 section:W.Active flag: rice:2/2/60/2 -->
+<!-- L:149 status:PENDING-GATE upd:2026-07-21 section:W.Active flag: rice:2/2/60/2 -->
 - **What.** TRUST_WINDOW_EXCLUDED_CATEGORIES = {'moon', 'spacecraft'} excludes by category
   label. Surfaced during M2 Layer 2 (L-118): Pluto (dwarf_planet) is centered on
   pluto_barycenter -- same physical situation as Charon (moon), same barycenter -- but isn't
@@ -3759,11 +3758,22 @@ shared serving pipeline); L-098 (parent, Phase 1b).
   120090482) and Patroclus/Menoetius (20000617/920000617/120000617) both confirmed live as
   real Horizons system-barycenter IDs, the general 20XXXXXX pattern, distinct from Pluto's
   legacy single-digit @9.
-**Gap:** replace the category check in derive_served's participant loop with a
-canonical_frame check; Layer-1 offline-suite update; re-run Layer 2 Step 2/3 after the change.
+- **Claude:** [verified @c5c9ea09, 2026-07-21] The canonical_frame fix is live and
+  proven on real data, not just the mock. Code: derive_served's participant loop now
+  checks `canonical_frame != TRUST_WINDOW_PARTICIPANT_FRAME` ('heliocentric'), replacing
+  the old category check. Layer-1: 4 new L-149-specific checks added and passing
+  (138/138 total) -- including a forced-failure test proving pluto's own check-vector
+  outage can no longer null the global served_window, since it's excluded from voting.
+  Layer 2 Step 2 (--first-build): served_window's half-width (323.5468 d) matches
+  Apophis's window_days exactly -- Apophis controls, not Pluto. Pluto (~6.38 d) and
+  Charon (~0.80 d) still get full trust blocks but correctly take no part in the
+  global bound.  
+**Gap:** code fix, Layer-1 update, and Layer 2 Step 2 are all done and verified live.
+Only Step 3 (--nightly) remains -- same run that closes L-118's own remaining gap.
 **Ref:** gallery tools/gallery_cache_builder.py derive_served (~1023-1048),
-TRUST_WINDOW_EXCLUDED_CATEGORIES (~353); resolver.py resolve() (~91-106);
-data/objects_config.json; L-118 (parent).
+TRUST_WINDOW_PARTICIPANT_FRAME (~360, replaces the retired TRUST_WINDOW_EXCLUDED_CATEGORIES);
+resolver.py resolve() (~91-106); data/objects_config.json; L-118 (parent);
+M2_TESTING_PROTOCOL_ADDENDUM.md (Layer 2 steps).
 
 #### [L-150] Multi-orbit trust model for near-equal-mass binaries (Pluto/Charon and future onboards)
 <!-- L:150 status:OPEN upd:2026-07-20 section:W.Active flag: rice:2/3/75/2 -->
