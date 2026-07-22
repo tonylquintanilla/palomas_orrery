@@ -3608,7 +3608,7 @@ gallery-cache-builder skill ("Adding a new object" section); L-098 (parent).
 - **What.** The B' architecture (two-tier: frozen-A exhibits + data-backed B'
   exhibits, L-088) calls for a slim self-hosted plotly wheel (~3.9 MB); none is
   deployed anywhere in the gallery repo tree -- confirmed via full tree
-  listing. The current dev bridge (`solar_system_earth_test.html`, artifact 1)
+  listing. The current dev bridge (`solar_system_earth_test2.html`, artifact 1)
   uses `micropip.install` against the live Pyodide CDN, which is a dev
   convenience, not production architecture.
 - **Gates:** shipping ANY golden artifact publicly. Artifact 1 is currently

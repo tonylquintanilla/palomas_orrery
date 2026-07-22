@@ -6,14 +6,55 @@ Appends to: documentation/TESTING_PROTOCOL.md (M1's Layer 1/2/3 above cover the
 original 11-object tranche; this section is M2-specific, same three-layer
 structure, same rule -- "runs without errors" is not the gate).
 
-## Layer 1 -- Offline suite (done, reproduced)
+Anchor: gallery @af3a2c8611293bc865b62c23f61334a2c2941e45 (post-nightly) --
+orrery (this doc's home repo) @e2c4f238add2b19390235abd5f6189ff30ff424f
+
+**Status as of 2026-07-21: Layers 1 and 2 both PASS, all five steps closed.**
+This closes the testing gap for L-149 (canonical_frame participant fix) and
+L-118 (feature_configs.json / served_window population) -- ledger updated
+separately, not duplicated here. Layer 3 (enabling the nightly Task
+Scheduler job) is the only thing left open, whenever Tony is ready.
+
+Revision note: this replaces an earlier version of this file that had a raw,
+unformatted chat transcript pasted into the middle of Step 2, an unfilled
+`[paste ... here]` template surviving in Step 3 alongside the real Step 3
+result written elsewhere, and a stale pre-fix Step 2 checklist sitting next
+to the corrected one. Content is unchanged in substance; this pass
+de-duplicates, fills in the evidence that was missing, and corrects a couple
+of counts that were true when first written and are no longer current.
+
+---
+
+## Layer 1 -- Offline suite
 
 Run: `python3 tools/test_gallery_cache_builder_offline.py`
-State: **134 checks, 0 failures** (87 pre-existing + 4 M1 shape-validator + 43
-M2), from a clean checkout. Independently reproduced in the build sandbox;
-paste your own Windows run below to triple-confirm, same as M1's pattern.
 
-**tony**:
+**Original state (before the L-149 fix): 134 checks, 0 failures** (87
+pre-existing + 4 M1 shape-validator + 43 M2), from a clean checkout.
+
+**Current state (after the L-149 fix landed): 138 checks, 0 failures.**
+Four new checks were added alongside the canonical_frame fix
+(tools/test_gallery_cache_builder_offline.py, ~lines 315-379):
+- served_window's half-width equals the minimum `window_days` among
+  heliocentric-frame participants only
+- pluto's own (barycentric) `window_days` is smaller than the controlling
+  half-width -- proving the exclusion isn't vacuous, i.e. it's actually
+  doing something rather than just never mattering
+- a forced pluto check-vector failure leaves pluto's own trust block
+  carrying an `error`
+- that same forced failure does NOT null the global `served_window` --
+  since pluto no longer participates, its failure can't take the whole
+  site down anymore (this is the direct fix for the bug Step 1 found)
+
+**Claude:** [verified @32671a19, sandbox re-run] Ran the suite fresh myself
+against gallery HEAD after confirming the L-149 fix was present in that
+commit: `PASS (138 checks, 0 failures)`. Also confirmed `gallery_cache_builder.py`
+and `test_gallery_cache_builder_offline.py` were byte-identical between that
+commit and the later `--first-build`/`--nightly` pushes (c5c9ea09, af3a2c86)
+-- those were data-only commits, so this 138/138 result still holds at
+current HEAD without needing a re-run.
+
+**tony**: (original 134-check run, pre-fix, from a clean checkout)
 ```
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/tools/test_gallery_cache_builder_offline.py
 [warn] voyager_1: DP thin glide 2549 -> 2 points (tol=0.02 AU)
@@ -202,70 +243,58 @@ and then push using the remote name
   ok  P2-9: stale comet carries its comet block forward (not nulled)
 
 PASS (134 checks, 0 failures)
-PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools> 
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools>
 ```
 
-**Claude**:
-**Confirmed — Layer 1 passes exactly as expected.**
+**Claude:** Confirmed -- Layer 1 passes exactly as expected. `PASS (134
+checks, 0 failures)` -- matches precisely: 87 pre-existing + 4 M1
+shape-validator + 43 M2 checks, all green.
 
-`PASS (134 checks, 0 failures)` — matches precisely: 87 pre-existing + 4 M1 shape-validator + 43 M2 checks, all green.
+A few things worth pointing out so the noise doesn't cause second-guessing:
 
-A few things worth pointing out so you're not second-guessing any of the noise in there:
+- The repeated `[warn] voyager_1: DP thin glide 2549 -> 2 points` is
+  expected -- normal spacecraft thinning behavior on synthetic mock data,
+  fires each time the suite builds, not a problem.
+- `[warn] jupiter: trust measurement failed (simulated check-vector
+  outage)` and the `served_window: null` warning right after it are the
+  **intentional** forced-failure test (FLAG-3) -- that's supposed to
+  happen, and the two `ok` lines right after confirm it worked correctly.
+- The `[RECOVER]`, `[ABORT]`, and `PUSH FAILED` lines are all
+  deliberately-simulated failure scenarios (crash mid-swap,
+  no-remote-configured, dropped object) that other pre-existing tests are
+  checking the *handling* of -- not real problems with the machine or git
+  setup.
+- All 12 M2 trust-block checks passed, plus the three FLAG-6 determinism
+  checks (earth/moon/halley window == cap).
 
-- The repeated `[warn] voyager_1: DP thin glide 2549 -> 2 points` is expected — normal spacecraft thinning behavior, fires each time the suite builds, not a problem.
-- `[warn] jupiter: trust measurement failed (simulated check-vector outage)` and the `served_window: null` warning right after it are the **intentional** forced-failure test (FLAG-3) — that's supposed to happen, and the two `ok` lines right after confirm it worked correctly.
-- The `[RECOVER]`, `[ABORT]`, and `PUSH FAILED` lines are all deliberately-simulated failure scenarios (crash mid-swap, no-remote-configured, dropped object) that other pre-existing tests are checking the *handling* of — not real problems with your machine or git setup.
-- All 12 M2 trust-block checks passed, plus the three FLAG-6 determinism checks (earth/moon/halley window == cap).
-
-This is a clean, complete match to what I verified independently in my own sandbox all session. Nothing here needs a second look.
-
-**Ready for step 2** whenever — the five dry-runs (earth, moon, pluto, apophis, halley). Same as before: run them, paste me the `trust` block from each staged `coverage_index.json`, and I'll check the shape.
-
-**Notes:**
-What Layer 1 proves for M2 (logic, statically reasoned):
+**Notes -- what Layer 1 proves for M2 (logic, statically reasoned):**
 - `fetch_elements` captures Horizons' `n`; `n_deg_per_day` flows through
-  `build_osculating_block`, the A-3 history/fallback path, and into
-  `measure_trust`.
+  `build_osculating_block` (including the A-3 history/fallback path, so a
+  stale object's served conic still carries it) and, for a freshly-measured
+  object, into `measure_trust`.
 - The FLAG-2 wrapper (own `n`, not solar `K_GAUSS`) is wired correctly for
-  every category -- confirmed deterministic (`window_days == cap`) for all
-  11 non-spacecraft objects under a mocked-but-genuinely-Kepler-consistent
-  check vector.
+  every category -- directly confirmed deterministic (`window_days == cap`)
+  for earth, moon, and halley (one per cap-divisor category); the other 8
+  objects only get a "finite positive `window_days`" check, so their
+  `== cap` holding too is a reasonable inference from shared construction
+  (error rate is 0.0 for all 11 under the same mock), not something
+  independently asserted per object.
 - FLAG-3 (served_window null on any participant failure) fires through the
   real dispatch, not just in the abstract -- forced one object's
   check-vector fetch to fail and confirmed both the per-object `error` and
   the global null.
 - FLAG-5/6 cap table and zero-rate handling.
 
-What Layer 1 **cannot** prove (Layer 2's job):
+**What Layer 1 cannot prove (Layer 2's job) -- all three settled by Step 1,
+see "Known Layer-1-only assumptions" at the bottom of this doc:**
 - Whether Horizons' mean-motion column is really named `n`/`N` for these
   object types, and whether it's present for every category in scope.
 - Whether the `epochs=[jd1, jd2]` list-form query works for `.vectors()`
-  the way it already does for `.elements()` -- untested against the live
-  API from this sandbox (no network access to ssd.jpl.nasa.gov).
+  the way it already does for `.elements()`.
 - Whether the measured error rates are *physically* the shape the design
-  expects (see step 1 below) -- Layer 1's mock proves the wiring, not the
-  physics.
+  expects.
 
-**Claude:**
- Two issues, one real and one just a precision nit. Went back through the actual code behavior and the test output to check each claim rather than taking the addendum's own wording at face value.
-
-**Real issue — bullet 1 overclaims the A-3 path:**
-
-> "`n_deg_per_day` flows through `build_osculating_block`, the A-3 history/fallback path, and into `measure_trust`."
-
-This isn't quite what the code does. For a stale object (A-3, `serve_last_good`), `measure_trust` is never called at all — it gets a hardcoded null trust block instead (`"error": "stale generation (last-good elements served; trust not re-measured this run)"`). That was a deliberate call in the M2 build: re-attempting a check-vector fetch during an outage that already triggered A-3 seemed unlikely to succeed, so it doesn't try.
-
-What *is* true: `n_deg_per_day` does flow through the A-3 path as far as the served `osc_block` (via `last_good_elements`/`build_osculating_block` — that's real and needed for a stale object's conic to render at all). It just stops there — it never reaches `measure_trust` for a stale object. The wording bundles those into one chain when they're actually two separate, disconnected facts. Should read something like:
-
-> "`n_deg_per_day` flows through `build_osculating_block` (including the A-3 history/fallback path, so a stale object's served conic still carries it) and, for a freshly-measured object, into `measure_trust`."
-
-**Minor — bullet 2 slightly overstates directness:**
-
-> "confirmed deterministic (`window_days == cap`) for all 11 non-spacecraft objects"
-
-Checking the actual test output: only 3 of the 11 get a direct equality assertion — earth (planet/dwarf_planet/asteroid divisor), moon (moon divisor), halley (comet divisor), one per cap category. The other 8 (jupiter, saturn, pluto, charon, io, titan, apophis, encke) only get the generic "finite positive `window_days`" check — not a direct `== cap` assertion each. Since error rate is 0.0 by construction for all 11 under the same mock, `window_days == cap` almost certainly holds for all of them too — but that's an inference from shared construction, not something independently tested per object. Small thing, but worth not blurring "confirmed" and "reasonably inferred."
-
-Everything else — the FLAG-3 bullet, and the whole "what Layer 1 cannot prove" section — checks out exactly as written, no changes needed there. 
+---
 
 ## Layer 2 -- Live dry-run sequence (Tony's hardware)
 
@@ -279,273 +308,303 @@ first pass).
 
 A dry-run validates and writes nothing outside `.staging` -- same pattern
 as M1's Layer 2 step 1. After each, the staged `coverage_index.json`'s
-`trust` block for that object is what to inspect (`tools\inspect_staging.py
-<staging-dir>` if that tool has a view for it, otherwise read the JSON
-directly).
+`trust` block for that object is what to inspect.
 
 **What "looks right" means here** -- this is physical, not just structural,
 so eyeballing matters (per manifest sec 5.7 point 2, quoted directly:
 *"planet rates tiny; Moon's rate visibly larger; comet rates largest"*):
 
 - **earth**: two-body Kepler is an excellent approximation of Earth's real
-  orbit over a 30-day bracket (other-planet perturbations are a tiny
-  effect at this timescale) -- expect `error_rate_deg_per_day` very small,
-  `cap_applied` likely equal to `window_days` (the ~365-day period cap
-  binds, not the measured rate).
+  orbit over a 30-day bracket -- expect `error_rate_deg_per_day` very
+  small, `cap_applied` likely equal to `window_days` (the ~365-day period
+  cap binds, not the measured rate).
 - **moon**: the Sun's perturbation on the Earth-Moon two-body ellipse is
-  large relative to Earth's solar perturbations -- expect a materially
-  larger `error_rate_deg_per_day` than earth's, and plausibly
-  `cap_applied: null` with `window_days` well under the P/8 cap (the
-  measured rate binds instead of the cap -- this is the interesting case
-  to check, since Layer 1's mock can only ever show `cap_applied` bound).
+  large -- expect a materially larger `error_rate_deg_per_day` than
+  earth's, and plausibly `cap_applied: null` with `window_days` well under
+  the P/8 cap.
 - **pluto**: still a planet-cap object; expect small rate, similar
   character to earth (dwarf_planet uses the same P-divisor as planet).
-- **apophis**: today-anchored (see the answer above this protocol) --
-  ordinary asteroid two-body behavior at "today", not flyby geometry;
+- **apophis**: today-anchored, ordinary asteroid two-body behavior --
   expect planet-like smallness, not comet-like largeness.
-- **halley**: measured at its Tp-anchor epoch (near perihelion, the fast
-  part of a very eccentric orbit) -- expect the largest rate of the five,
-  plausibly `cap_applied: null` here too.
+- **halley**: measured at its Tp-anchor epoch (near perihelion) -- expect
+  the largest rate of the five, plausibly `cap_applied: null` here too.
 
 If any of these come back inverted (e.g. earth's rate larger than
 halley's) that's a real bug to chase before going further, not a rounding
 concern.
 
-```
-python tools/gallery_cache_builder.py --dry-run --object earth
+**`python tools/gallery_cache_builder.py --dry-run --object earth`**
 
-**Claude:**:
-This is a clean pass — and it actually answers both of the open questions Layer 1 flagged as unknowable until real Horizons was involved.
-What it confirms:
+Clean pass, and it answers both open questions from Layer 1. `n_deg_per_day:
+0.9851...` is present -- Horizons' mean-motion column really is named `n`
+for a real planet query. Two real samples came back (`offset_days: -30` and
+`+30`), each with a real `error_deg` -- the `epochs=[jd1, jd2]` list-form
+query works for `.vectors()` against the live API. The physics matched
+prediction exactly: `error_rate_deg_per_day` tiny (0.000277), `cap_applied`
+(365.43) equals `window_days` (365.43) -- the ~365-day period cap binds,
+not the measured rate (the rate alone would've earned Earth a ~904-day
+window). The -30/+30 errors aren't symmetric (0.0020 deg vs 0.0083 deg) --
+normal, real Horizons includes actual planetary perturbations a pure
+two-body propagation won't drift identically for. The top-level
+`served_window` in this file is Earth's window alone (single-object dry
+run); the real multi-object answer comes in Step 2.
 
-n_deg_per_day: 0.9851... is present and populated — Horizons' mean-motion column really is named n (or your fallback list found it), for a real planet query. Open question #1, settled.
-Two real samples came back (offset_days: -30 and +30), each with a real error_deg — the epochs=[jd1, jd2] list-form query works for .vectors() against the live API, same as it already did for .elements(). Open question #2, settled.
-The physics is exactly what the addendum predicted: error_rate_deg_per_day is tiny (0.000277 — two-body is a near-perfect stand-in for Earth's real orbit at this timescale), and cap_applied (365.43) equals window_days (365.43) — the ~365-day period cap is what's binding here, not the measured rate. If you work the math backward, the measured rate alone would've earned Earth a ~904-day window — the cap pulled it down to the period. That's the exact "cap binds, not the rate" case the addendum called out as the expected earth behavior.
+**`python tools/gallery_cache_builder.py --dry-run --object moon`**
 
-Two small things worth understanding, not worrying about:
+Moon's numbers landed where the physics says they should, though not quite
+in the way predicted -- a good illustration of the cap logic doing its job.
+`error_rate_deg_per_day: 0.0331` vs Earth's 0.000277 -- about 120x larger,
+matching the prediction that the Sun's perturbation on the Earth-Moon
+two-body ellipse dominates. `n_deg_per_day: 13.39` implies a period of
+360/13.39 ~= 26.9 days -- close to the real 27.3-day sidereal month (the
+gap is just today's instantaneous osculating fit). But the cap bound, not
+the rate -- opposite of the prediction. The tolerance math alone would
+allow a ~7.55-day window before Moon's real trajectory drifts 0.5 deg from
+the two-body prediction; but moon's structural cap (P/8 ~= 3.36 days) is
+tighter, so the cap wins. `window_days`, `cap_applied`, and `delta_days`
+all show the same number (3.3607...) because `delta_days` and moon's cap
+divisor both happen to be period/8 for this category -- two independent
+formulas sharing a divisor, not a glitch. `served_window: null` at the top
+is also expected: moon is one of the two categories (`moon`, `spacecraft`)
+excluded from the global `served_window` entirely, and this single-object
+run had zero eligible participants.
 
-The -30/+30 errors aren't symmetric (0.0020° vs 0.0083°) — that's normal. Real Horizons includes actual perturbations from the other planets; a pure two-body propagation won't drift identically in both time directions. The code takes the worse of the two on purpose, which is what happened.
-The top-level served_window in this file (the one at the very top of the JSON) is Earth's window alone, since this run only touched one object — it's not the real multi-object answer. That comes in Step 2, and it'll almost certainly be tighter than this, set by whichever comet or fast-mover has the smallest window, not by Earth.
+**`python tools/gallery_cache_builder.py --dry-run --object pluto`**
 
-python tools/gallery_cache_builder.py --dry-run --object moon
+Pluto's numbers are internally correct, but they weren't measuring what
+was assumed, and this is where the real bug surfaced. `a_au: 1.424e-05` is
+not Pluto's real ~39.5 AU distance from the Sun -- that's ~2,130 km,
+Pluto's wobble radius around the Pluto-Charon barycenter. `"center":
+"pluto_barycenter"`, `"canonical_frame": "barycenter-relative"` confirm it
+-- an already-settled serving choice from the Pluto/Charon design work, not
+new to M2, but it meant the trust check measured the mutual Pluto-Charon
+orbit, not Pluto's solar orbit. The number checks out as real physics: 360
+/ 56.39 deg/day = 6.384 days -- essentially the textbook Pluto-Charon
+mutual period (~6.39 days). The problem is one level up: `dwarf_planet`
+wasn't in the excluded-participant set (`{'moon', 'spacecraft'}`) -- only
+category label was checked, not serving frame. Charon does the identical
+motion and was excluded, but only because its category label happens to be
+`moon`. Since `resolver.py`'s `resolve()` gates the entire scene against
+one global `served_window` before even looking at which objects are in
+scene, Pluto's ~6.4-day window controlling the site-wide minimum would mean
+a request for something as ordinary as "Jupiter, 10 days from now" gets
+wrongly rejected.
 
-**Claude:**
-Moon's numbers came back exactly where the physics says they should, though not quite in the specific way the addendum guessed — worth walking through, since it's a good illustration of the cap logic actually doing its job.
-The rate itself: right direction, right rough size. error_rate_deg_per_day: 0.0331 vs Earth's 0.000277 — about 120x larger, matching the prediction that the Sun's perturbation on the Earth-Moon two-body ellipse would dominate the way other-planet perturbations don't for Earth. And as a sanity check: n_deg_per_day: 13.39 implies a period of 360/13.39 ≈ 26.9 days — close to the real 27.3-day sidereal month (the gap is just today's instantaneous osculating fit, not an error).
-But the cap bound, not the rate — opposite of what the addendum guessed, and that's fine. The addendum expected cap_applied: null (rate binds). What actually happened: the tolerance math alone would allow a ~7.55-day window before Moon's real trajectory drifts 0.5° from the two-body prediction — genuinely decent for a two-body approximation. But moon's structural cap (P/8 ≈ 3.36 days) is tighter than that, so the cap wins anyway. window_days, cap_applied, and delta_days are all showing the same number (3.3607...) for a reason, not a glitch: delta_days and moon's cap divisor both happen to be period/8 in this code, so for moon specifically all three collapse to one value. Nothing stuck or duplicated — just two independent formulas sharing a divisor for this one category. The takeaway: moon's rate is actually decent; the P/8 structural ceiling is just deliberately tighter than what the rate alone would justify. Correct behavior, wrong guess about which branch would fire — not a bug.
-served_window: null at the top is expected here too, not a failure. Moon is one of the two categories (moon, spacecraft) excluded from the global served_window entirely — this run only had one object, and it's the excluded one, so there were zero eligible participants. That's a different, silent code path from the "measurement failed" warning case — no warning printed because nothing failed. Real served_window shows up in Step 2 once all 11 non-excluded objects are in the same build.
-[RECOVER] fired again, same file, same non-blocking story as before — nothing new there.
+Three options were raised: (1) reframe the exclusion rule around serving
+frame (`canonical_frame`) rather than category label -- generalizes and
+matches the pattern already used for Charon; (2) leave it as-is, accept a
+~week-wide site-wide date range; (3) change how the resolver consumes
+`served_window` (per-object bound instead of one global minimum) -- bigger
+change, outside M2's declared scope.
 
-python tools/gallery_cache_builder.py --dry-run --object pluto
+**Tony:** Yes, #1.
 
-**Claude:**
-Now the bigger thing — Pluto's numbers are internally correct, but they're not measuring what the addendum assumed, and it matters.
-Look at a_au: 1.424e-05. That's not Pluto's real ~39.5 AU distance from the Sun — that's ~2,130 km, which is Pluto's wobble radius around the Pluto-Charon barycenter. The osculating block confirms it: "center": "pluto_barycenter", "canonical_frame": "barycenter-relative". That's a deliberate, already-settled serving choice from the Pluto/Charon design work, not new to M2 — but it means the trust check just measured the mutual Pluto-Charon orbit, not Pluto's solar orbit.
-And the number checks out as real physics, not an error: 360 / 56.39 deg/day = 6.384 days — that's essentially exactly the textbook Pluto-Charon mutual orbital period (~6.39 days). So there's no bug in the arithmetic. The problem is one level up:
+**`python tools/gallery_cache_builder.py --dry-run --object apophis`**
 
-dwarf_planet isn't in the excluded-participant set ({'moon', 'spacecraft'}) — only moon and spacecraft are excluded from the global served_window.
-Charon does the exact same motion (same barycenter, same ~6.4-day period) and is excluded — but only because its category label happens to be moon, not because anything actually checks whether an object is barycenter-anchored.
-Pluto is doing the identical kind of fast local orbit, but keeps its dwarf_planet label, so it isn't caught.
+Clean, no surprises -- exactly the "boring in a good way" result expected.
+`n_deg_per_day: 1.1127` -> period ~323.5 days, matching Apophis's actual
+~323.6-day orbital period. `error_rate_deg_per_day: 3.7e-06` -- even
+cleaner than Earth's, since this is Apophis on an ordinary day, far from
+any close encounter. Cap binds at the full period (`window_days ==
+cap_applied == 323.5`), same shape as Earth. One thing checked rather than
+shrugged off: the top-level `served_window` start doesn't exactly match
+Apophis's own `trust.window` start (~0.624-day gap, vs ~0.058 days on
+Earth's run -- different size each time). Traced to the code: the
+per-object window anchors to `element_epoch_jd` (midnight UTC, fixed for
+the day), but the global `served_window` centers on `as_of_jd` = actual
+wall-clock time when the build runs. Checks out numerically both times
+(Apophis ran at 14:59:08 UTC, ~0.624 of a day past midnight; Earth ran at
+01:24:06 UTC, ~0.058 of a day past midnight) -- two different reference
+points doing two different jobs correctly, not a bug.
 
-I checked how this actually gets used before flagging it — resolver.py's resolve() checks the requested date against served_window as one single gate for the entire scene, before it even looks at which objects are in that scene:
-pythonserved_window = cache.served_window()
-...
-if not (lo <= resolved_jd <= hi):
-    raise OutOfServedWindowError(...)
-So if Pluto's ~6.4-day window ends up controlling the global minimum in Step 2 (and it will — every other participant we've measured so far is in the hundreds of days, comets will be in the thousands), a request for something as ordinary as "Jupiter, 10 days from now" gets rejected — even though Jupiter's own window is ~4,336 days and Pluto isn't even in that scene.
-This is exactly the "if it still is [the tightest window], that's worth a second look" checkpoint the addendum already built in for Step 2 — it's just showing up now, for a real and legitimate reason instead of the mock's placeholder.
-Three ways to handle it, your call:
+**`python tools/gallery_cache_builder.py --dry-run --object halley`**
 
-Reframe the exclusion rule around the serving frame, not the category label — anything barycenter/parent-relative gets excluded, which would catch Pluto the same way it already (accidentally) catches Charon, and generalizes to any future object served the same way.
-Leave it as-is — accept that the whole site's date range is genuinely bounded to about a week until this is revisited.
-Change how the resolver consumes served_window (per-object bound instead of one global minimum) — bigger change, and outside M2's declared scope (the implementation report confirmed resolver.py has zero edits).
+Completes the five, but the number didn't match the prediction, worth
+owning rather than talking around. `error_rate_deg_per_day: 6.4e-06` --
+smaller than Earth's, far smaller than Moon's or Pluto's, barely bigger
+than Apophis's. The prediction ("near perihelion = fast = should diverge
+fastest") was wrong, or at least incomplete. `delta_days` is capped at a
+flat 30 days that doesn't scale with period: for Moon and Pluto,
+period/8 is well under 30, so the check window scales down with the
+object; for Earth, Apophis, and Halley, period/8 exceeds 30, so all three
+get clamped to the same flat 30-day window. For Halley (period ~27,761
+days, ~76 years -- matches the real value closely), 30 days is ~0.1% of
+the orbit -- a genuinely tiny slice even centered at the fastest point.
+Perturbation away from the tangent two-body ellipse builds up with elapsed
+time from the anchor epoch, so a tiny window just hasn't had much chance to
+show it yet -- a real property of a flat time cap on a wildly different
+timescale, not a bug. And it turns out not to matter anyway: same as Earth
+and Apophis, the category structural cap wins (comet P/2 = 13,880.67,
+clamping a rate-implied ~39,000-day window). What mattered more, and landed
+clean: this is the first real, live-Horizons confirmation that the
+Tp-anchor fix works end to end -- `epoch_jd: 2446469.97` (1986, not today),
+samples at `offset_days: -30.0 / +30.0` from that epoch, not from "now."
 
-(1) fits the pattern the codebase already uses for Charon, for what that's worth, but I don't want to assume it for you.
-
-**Tony:** Yes, #1. 
-
-python tools/gallery_cache_builder.py --dry-run --object apophis
-
-**Claude:**
-Apophis checks out cleanly, no surprises, exactly the "boring in a good way" result the addendum expected.
-
-Period matches the real thing. n_deg_per_day: 1.1127 → period 360/1.1127 ≈ 323.5 days — that's Apophis's actual, well-known ~323.6-day orbital period. Second object in a row where the raw mean-motion number lines up with the textbook value.
-
-Even cleaner than Earth. error_rate_deg_per_day: 3.7e-06 — smaller than Earth's 2.8e-04, which makes sense: this is Apophis measured on an ordinary day, far from any close encounter, so two-body is about as good a fit as it gets. And like Earth (and unlike Moon/Pluto), the cap binds at the full period (window_days == cap_applied == 323.5) rather than the measured rate — the rate alone would allow a window in the tens of thousands of days, but the P/1 structural ceiling for asteroid category catches it first. Exactly the "planet-like, not comet-like" shape predicted, no inversions.
-
-One thing worth actually checking rather than shrugging off: the top-level served_window (start 2460918.577...) doesn't exactly match Apophis's own trust.window (start 2460917.953...) — a ~0.624-day gap. Same kind of small gap showed up on Earth's run too (~0.058 days), a different size each time. I went back to the code rather than assume it's noise: the per-object window is anchored to element_epoch_jd (midnight UTC, fixed for the day), but the global served_window is deliberately centered on as_of_jd = right now — actual wall-clock time when the build runs, line 1029/1046. And it checks out numerically both times: Apophis ran at 14:59:08 UTC (≈0.624 of a day past midnight — matches its gap exactly), Earth ran at 01:24:06 UTC (≈0.058 of a day past midnight — matches its gap exactly). So this is two different reference points doing two different jobs correctly, not a bug — per-object math anchors to when the elements were fetched, the site-wide bound anchors to the actual present moment. Good one to have caught and confirmed rather than waved off.
-
-python tools/gallery_cache_builder.py --dry-run --object halley
-
-**Claude:**
-Good — that completes the five, but the number doesn't match what I predicted, and I want to own that rather than talk around it.
-
-error_rate_deg_per_day: 6.4e-06 — that's smaller than Earth's (2.8e-04), far smaller than Moon's or Pluto's, and barely bigger than Apophis's (3.7e-06). I predicted Halley would show the largest rate of the five, reasoning "near perihelion = fast = should diverge fastest." That reasoning was wrong, or at least incomplete — here's what's actually going on, traced through the numbers rather than guessed at:
-
-delta_days is capped at a flat 30 days, and that cap doesn't scale with period. delta_days = min(period/8, 30). For Moon (period ≈ 27d) and Pluto (mutual period ≈ 6.4d), period/8 is well under 30, so the check window scales down with the object — Pluto got delta_days ≈ 0.8 days, a fair slice of its own tiny orbit. But Earth, Apophis, and Halley all have period/8 > 30, so all three get clamped to the same flat 30-day window regardless of how much longer their real period is. For Earth (365d) and Apophis (323d), 30 days is still a meaningful ~8-9% bite out of the orbit. For Halley (period ≈ 27,761 days, ~76 years — matches the real value almost exactly), 30 days is about 0.1% of the orbit — a genuinely tiny slice, even though it's centered at the fastest point. Perturbation away from the tangent two-body ellipse builds up with elapsed time from the anchor epoch, so an absolutely-tiny window, even at perihelion, just hasn't had much chance to show it yet. That's a real property of a flat time cap on a wildly different timescale, not a bug.
-
-And it turns out not to matter anyway — same as Earth and Apophis, the category structural cap wins here, not the measured rate. The rate alone would justify a window around 39,000 days; the comet P/2 cap clamps it to 13,880.67 regardless (cap_applied == window_days, confirmed). So the unusually clean rate is close to moot for what actually gets served.
-
-The part of the prediction that mattered more, and did land clean: this is the first real, live-Horizons confirmation that the Tp-anchor fix actually works end to end. epoch_jd: 2446469.97 — 1986, not today — and the two samples are at offset_days: -30.0 / +30.0 from that epoch, not from "now." That's exactly the mechanism the mock bug used to get wrong. It's correct against the real API.
-
-Five for five, Step 1 done. Quick recap of what it proved: mean-motion column resolves correctly on live queries, list-form epoch vectors work, the comet Tp-anchor fix holds against real data, and every rate/cap relationship lined up with known real physics except this one surprise, which explained itself once traced through the code rather than assumed.
-
-```
+**Step 1 outcome:** five for five. Mean-motion column resolves correctly on
+live queries, list-form epoch vectors work, the comet Tp-anchor fix holds
+against real data, every rate/cap relationship matched known physics except
+the Halley delta_days surprise (explained, not a bug) -- and Pluto's run
+surfaced a real bug (L-149), now fixed per Tony's decision.
 
 ### Step 2 -- real --first-build; inspect the swapped coverage_index
 
-**Claude:**
-## What's still needed — summary
-
-**For L-149 to close**, its own Gap says exactly two things remain, both live (not mock):
-1. **Step 2** — real `--first-build`
-2. **Step 3** — real `--nightly`
-
-Once those two run clean, L-149 goes from OPEN to DONE. Everything else about it (the code fix, the offline tests proving it) is already done and verified.
-
-**For the overall M2 addendum**, Steps 4 and 5 are also still open, but they're not part of L-149's own gap — they're general M2 acceptance, not tied to this specific bug:
-- **Step 4** — resolver date-picker check (dev render page)
-- **Step 5** — fetch-cost/throttling note
-
-**Not blocking any of this:**
-- **L-150** (Pluto/Charon two-view design) — decided, not built, rides with a future golden artifact
-- **L-151** (gallery-assembler skill) — looks done in the repo, ledger status just hasn't been flipped
-
-## One thing to flag before you run Step 2
-
-The addendum's own "Confirm" checklist for Step 2 was written *before* the L-149 fix, so one line in it is now stale:
-
-> "the controller should be one of earth/jupiter/saturn/**pluto**/apophis/halley/encke... if Pluto is still the tightest, that's worth a second look"
-
-That's outdated — Pluto is now structurally excluded from voting (barycenter-relative, not heliocentric), so it can't be the controller at all anymore. The updated version of that check is:
-
-- **Trust blocks:** still 11 measured (`two_body_rate_v1`) + Voyager 1 (`fetched_positions`) — unchanged, every object still gets measured individually.
-- **Global `served_window` controller:** must be one of exactly 6 — **earth, jupiter, saturn, apophis, halley, encke.** Moon/Io/Titan (parent-relative) and Pluto/Charon (barycenter-relative) should show a `trust` block but take no part in the global minimum.
-- If Pluto or Charon *does* still show up as the controller, that's now a real regression, not a "worth a second look" — the fix isn't working.
-
-Step 4, when you get to it, is actually the cleanest real-world proof of the fix: try a scene like "Jupiter, 10 days out" on the dev render page. Before the fix that would've wrongly hit `OutOfServedWindowError` because of Pluto's ~6.4-day window; now it shouldn't.
-
-Want me to update the addendum doc itself with this corrected Step 2 checklist before you run it, or just run it as-is and we'll reconcile after you paste the output?
-
-```
-python tools/gallery_cache_builder.py --first-build
-```
-
-Confirm:
+**Confirm (corrected -- see note below):**
 - `served_window` is populated (non-null) -- or, if null, that the warning
   names exactly the objects whose measurement failed, not a silent
   swallow.
 - 11 measured `trust` blocks (`method: "two_body_rate_v1"`) + voyager_1's
-  `method: "fetched_positions"`.
-- The controlling object (the one whose `window_days` sets the global
-  minimum) is physically plausible given step 1's rates -- likely one of
-  the comets or the Moon-class bodies... except moons don't participate
-  (FLAG-3/5.5 excludes `moon`/`spacecraft` from the global window by
-  design), so the controller should be one of earth/jupiter/saturn/pluto/
-  apophis/halley/encke. If Pluto's real `a` behaves like a normal ~39.5 AU
-  semi-major axis (unlike the Layer-1 mock's placeholder value -- see the
-  implementation report), Pluto should NOT be the tightest window on real
-  data; if it still is, that's worth a second look.
+  `method: "fetched_positions"`. Unchanged, every object still gets
+  measured individually.
+- **Global `served_window` controller must be one of exactly 6:** earth,
+  jupiter, saturn, apophis, halley, encke (the heliocentric-frame
+  objects). Moon/Io/Titan (parent-relative) and Pluto/Charon
+  (barycenter-relative) must show a `trust` block but take no part in the
+  global minimum. If Pluto or Charon shows up as controller, that's a real
+  regression, not a "worth a second look."
 
-**Tony**:
-Pass. 
+Note: this checklist originally named Pluto as a plausible controller,
+written before the L-149 fix. That version is stale and has been replaced
+above -- once the fix landed, Pluto is structurally excluded from voting
+and cannot be the controller.
 
-**Claude**:
-Both new SHAs check out live. Now confirming the pushed data actually matches what you uploaded, and checking why the run manifest says `"committed": false`.Let me double check one detail — the run manifest and the served positions file show different Voyager 1 point counts (105 vs 113), worth verifying before I call this clean.Both new SHAs check out live — gallery `c5c9ea09`, orrery `3417753c`. And I pulled the actual pushed `coverage_index.json` from the new gallery HEAD: it matches your upload byte-for-byte on `served_window` and the `generated` timestamp, so this build's data is genuinely live now, not just staged locally.
+**tony:**
+```
+python tools/gallery_cache_builder.py --first-build
+```
+Terminal tail:
+```
+[RECOVER] could not remove retained data\solar-system.prev ([WinError 5] Access is denied: 'data\\solar-system.prev\\raw\\elements'); swap will quarantine it
+[SWAP] stale data\solar-system.prev (suspected file lock) -> quarantining as data\solar-system.quarantine_20260721T200207Z
+[warn] voyager_1: DP thin glide 2551 -> 29 points (tol=0.02 AU)
+[done] run 20260721T200207Z (first-build): 12 objects
 
-## Two things that look odd but are expected
+gallery head is at c5c9ea093233f1a8fe37483301c0d427460e95ac
+orrery head is at 3417753c1d0b23635b96dc9de37b1d6f0b1e2ee4
+```
+Plus the run manifest, `feature_configs.json`, `coverage_index.json`,
+`voyager_1.json`, and `pluto.jsonl` from that run, uploaded for review.
 
-**`"committed": false` in the run manifest** — not a problem. `--first-build` alone doesn't auto-push; the script only commits+pushes if you also pass `--commit`. You didn't, so the swap happened locally and the manifest correctly reports it wasn't pushed by the script. You then pushed it yourself via GitHub Desktop about 4 minutes later — I checked: the actual commit on GitHub is titled "interactive first build," authored by you, timestamped 20:06:44 UTC. Exactly your normal loop (script swaps → you review → you commit+push).
+**Claude:** PASS. Full evidence below.
 
-**The `[RECOVER]`/quarantine warning** — also expected, and self-healing. Something (likely OneDrive, since your whole project tree lives under OneDrive Desktop) had a lock on the old `data\solar-system.prev` folder, so the builder quarantined it instead of failing the run. The quarantined folder gets swept away automatically after a few days — nothing for you to do.
+**Run manifest (`20260721T200207Z.json`):**
+```json
+{
+  "run_id": "20260721T200207Z",
+  "started": "2026-07-21T20:02:07.902467+00:00",
+  "mode": "first-build",
+  "objects": {
+    "earth": "backfilled(366)", "jupiter": "backfilled(366)",
+    "saturn": "backfilled(366)", "moon": "backfilled(366)",
+    "io": "backfilled(366)", "titan": "backfilled(366)",
+    "pluto": "backfilled(366)", "charon": "backfilled(366)",
+    "apophis": "backfilled(366)", "voyager_1": "backfilled(105)",
+    "encke": "backfilled(366)", "halley": "backfilled(366)"
+  },
+  "guard_warnings": [],
+  "structural_validation": "pass",
+  "committed": false,
+  "finished": "2026-07-21T20:02:31.352115+00:00"
+}
+```
 
-(Also checked the Voyager 1 count mismatch you might notice — manifest says `backfilled(105)`, served file says `113` points. Traced it in the code: `backfilled(N)` only counts points fetched *this run* [glide + flyby windows + fresh tail]; the extra 8 come from older archived points this run didn't need to re-touch. Both numbers are correct, just measuring different things.)
+**`served_window`:** `{start_jd: 2460919.788243763, end_jd: 2461566.8819219014}`
+-- half-width = 323.5468390692 days, matching Apophis's `window_days`
+(323.54683906902784) to 10 decimal places. **Controller = Apophis, not
+Pluto.** Pluto (~6.38d) and Charon (~0.80d) both got fully measured but
+took no part in the global bound -- the fix working exactly as designed on
+live data, not just the mock.
 
-Two things that look odd but are expected
+**All 12 trust blocks, spot-checked against real orbital physics
+(period = 360 / n_deg_per_day):**
 
-"committed": false in the run manifest — not a problem. --first-build alone doesn't auto-push; the script only commits+pushes if you also pass --commit. You didn't, so the swap happened locally and the manifest correctly reports it wasn't pushed by the script. You then pushed it yourself via GitHub Desktop about 4 minutes later — I checked: the actual commit on GitHub is titled "interactive first build," authored by you, timestamped 20:06:44 UTC. Exactly your normal loop (script swaps → you review → you commit+push).
+| object    | frame               | method              | window_days     | period check |
+|-----------|---------------------|----------------------|------------------|---------------|
+| earth     | heliocentric        | two_body_rate_v1    | 365.33 (=cap)    | 365.33d, matches ~365.25d real |
+| jupiter   | heliocentric        | two_body_rate_v1    | 4331.38 (=cap)   | 11.86 yr, matches real |
+| saturn    | heliocentric        | two_body_rate_v1    | 10764.60 (=cap)  | 29.47 yr, matches real |
+| moon      | parent-relative     | two_body_rate_v1    | 3.35 (=cap, P/8) | 26.83d, close to real 27.3d sidereal |
+| io        | parent-relative     | two_body_rate_v1    | 0.221 (=cap, P/8)| 1.77d, matches real |
+| titan     | parent-relative     | two_body_rate_v1    | 1.99 (=cap, P/8) | 15.95d, matches real |
+| pluto     | barycenter-relative | two_body_rate_v1    | 6.38 (=cap)      | 6.38d mutual period, matches real |
+| charon    | barycenter-relative | two_body_rate_v1    | 0.798 (=cap, P/8)| same mutual period, moon-category cap |
+| **apophis** | **heliocentric**  | two_body_rate_v1    | **323.55 (=cap, CONTROLLER)** | 323.55d, matches real |
+| voyager_1 | arc-natural         | fetched_positions    | null             | n/a |
+| encke     | heliocentric        | two_body_rate_v1    | 603.52 (=cap, P/2, Tp-anchored) | 1207.04d full period |
+| halley    | heliocentric        | two_body_rate_v1    | 13880.67 (=cap, P/2, Tp-anchored) | 76.03 yr, matches real |
 
-The [RECOVER]/quarantine warning — also expected, and self-healing. Something (likely OneDrive, since your whole project tree lives under OneDrive Desktop) had a lock on the old data\solar-system.prev folder, so the builder quarantined it instead of failing the run. The quarantined folder gets swept away automatically after a few days — nothing for you to do.
+Nothing inverted, nothing physically implausible.
 
-(Also checked the Voyager 1 count mismatch you might notice — manifest says backfilled(105), served file says 113 points. Traced it in the code: backfilled(N) only counts points fetched this run [glide + flyby windows + fresh tail]; the extra 8 come from older archived points this run didn't need to re-touch. Both numbers are correct, just measuring different things.)
+**`feature_configs.json`** is no longer the empty stub -- earth
+(`atmosphere_shell` + `van_allen_belts`), jupiter (`ring_system` + 4-ring
+`radiation_belts`), saturn (7-ring `ring_system`) are all populated with
+real ported values; the other 9 objects correctly serve `{}`. This is
+L-118's problem, not L-149's, but it's resolved in the same push -- worth
+knowing next time that item comes up.
 
-Step 2 — PASS, and this is the real-data proof for L-149
-served_window is populated: half-width = 323.5468 days
-Controller = Apophis (window_days: 323.54683906902784 — matches the half-width to 10 decimal places). Not Pluto.
-Pluto (window ~6.38d) and Charon (~0.80d) still get fully measured — their trust blocks are real and correct — but neither touches the global bound at all. That's the exclusion working exactly as designed, on live Horizons data, not just the mock.
-All 11 non-spacecraft objects show two_body_rate_v1; Voyager 1 shows fetched_positions with window: null — 12/12 as expected.
-Spot-checked the physics on every object (period from n_deg_per_day vs. real values): Jupiter ~11.86 yr, Saturn ~29.5 yr, Io ~1.77 d, Titan ~15.9 d, Halley ~76 yr — all correct, nothing inverted.
+**Two things that look odd but are expected:**
 
-Small bonus: feature_configs.json is no longer the empty stub — Earth/Jupiter/Saturn are serving real shell and ring data now. That's L-118's problem, not L-149's, but worth knowing it looks resolved too next time that item comes up.
+- `"committed": false` in the run manifest is not a problem.
+  `--first-build` alone doesn't auto-push -- the script only commits+pushes
+  with `--commit`, which wasn't passed. The swap happened locally; Tony
+  pushed manually via GitHub Desktop about 4 minutes later (commit
+  "interactive first build," author Tony Quintanilla, 20:06:44 UTC --
+  confirmed via the GitHub API). Fetching the pushed `coverage_index.json`
+  from the new HEAD matched the upload byte-for-byte on `served_window`
+  and `generated`, confirming this build's data is genuinely live, not
+  just staged.
+- The `[RECOVER]`/quarantine warning is expected and self-healing.
+  Something (likely OneDrive, since the whole project tree lives under
+  OneDrive Desktop) held a lock on the old `data\solar-system.prev`
+  folder, so the builder quarantined it instead of failing the run. The
+  quarantined folder is auto-swept after a few days; nothing to do.
 
-For L-149 specifically: its Gap needed Step 2 and Step 3. Step 2 just passed cleanly — Step 3 (--nightly) is the last thing standing between it and DONE. Ready whenever you want to run it; same deal, paste the output and I'll check the trust blocks refresh without the shrink gate or any M1 structural check regressing.
-
-Short answer: yes, but with one caveat
-
-L-118's own Gap has 5 items. Between what you just ran and what I verified, 4 of them are now confirmed done — but the 5th (nightly acceptance) hasn't happened yet, and it's the exact same run that closes L-149's own remaining gap.
-
-Confirmed done (live, not assumed):
-
-Feature params ported into objects_config.json and derive_served builds feature_configs.json from it — your uploaded file shows real content: Earth (atmosphere_shell + van_allen_belts), Jupiter (ring_system + radiation_belts), Saturn (7-ring system), everything else correctly {}
-served_window is populated — confirmed non-null in the same build
-Layer-1's shape-validator checks for this (schema_version, all 12 slugs, dict-not-list shape, malformed-input ABORTs) all still pass — 138/138, and I confirmed the code didn't change between the HEAD I tested and your new push, so that result still holds
-
-One worth flagging while we're in there: L-118's text says served_window "rides along in the same change" as the feature_configs fix. In practice it turned out to be its own separate, bigger effort — the M2 trust-measurement system (L-149/L-150/L-151), not something derive_served's feature-porting code does directly. Worth correcting that cross-reference so a future reader doesn't go looking for served_window logic in the wrong place.
-
-Still open: the nightly leg. L-118's Gap wants --first-build/--nightly acceptance; you've done first-build, not nightly yet. Same run you're about to do for L-149's Step 3 — one nightly run closes both.
-
-Not part of closing these two
-
-M2's Layers 1-3 (what we've been doing) are the builder's data gate — is the right data being served correctly. Mode 5 is a separate, later render gate — does the golden artifact actually look right. The gallery-assembler skill draws this line explicitly: passing the data gate is a prerequisite for attempting an artifact's Mode 5 acceptance, not the same milestone as passing it.
-
-Step 4 (already on your list — the resolver date-picker check) is a small visual check, but it's testing that served_window correctly gates dates on the render page — not a Mode 5 aesthetic pass on a golden artifact.
-
-Looking ahead — I checked, and it's not ready yet either
-
-The natural next Mode-5 candidate would be Artifact 2 (Jupiter/Saturn), next in your declared order. Since today's fix means Jupiter's rings/radiation belts and Saturn's 7-ring system are now being served correctly, I checked whether anything actually draws them yet.
-
-It doesn't. I searched the whole repo — Python and JS/HTML both — for anything consuming ring_system, van_allen_belts, atmosphere_shell, or radiation_belts. Nothing does. Even Earth's own closed Artifact 1 confirms this by design: its acceptance test explicitly checks that features dispatch as data only, with "JavaScript rendering them" as the intended next step — and that JS doesn't exist anywhere in the repo yet.
-
-So Jupiter/Saturn isn't blocked on data anymore (once nightly confirms), but it is blocked on writing that rendering layer — real, separate work, not a Mode 5 visual check you could do today.
-
-(Pluto/Charon two-view, if that crossed your mind since it's the artifact most tied to today's fix — that's Artifact 6, and it's additionally blocked on L-150's multi-orbit trust model, which is still just a design decision, not built.)
-
-So, for right now
-
-Just Step 3 (--nightly) closes L-118 and L-149. Mode 5 comes later, once the feature-rendering layer for Jupiter/Saturn exists to look at.
-
-## Step 2 — PASS, and this is the real-data proof for L-149
-
-- `served_window` is populated: half-width = 323.5468 days
-- **Controller = Apophis** (`window_days: 323.54683906902784` — matches the half-width to 10 decimal places). Not Pluto.
-- Pluto (window ~6.38d) and Charon (~0.80d) still get fully measured — their trust blocks are real and correct — but neither touches the global bound at all. That's the exclusion working exactly as designed, on live Horizons data, not just the mock.
-- All 11 non-spacecraft objects show `two_body_rate_v1`; Voyager 1 shows `fetched_positions` with `window: null` — 12/12 as expected.
-- Spot-checked the physics on every object (period from `n_deg_per_day` vs. real values): Jupiter ~11.86 yr, Saturn ~29.5 yr, Io ~1.77 d, Titan ~15.9 d, Halley ~76 yr — all correct, nothing inverted.
-
-Small bonus: `feature_configs.json` is no longer the empty stub — Earth/Jupiter/Saturn are serving real shell and ring data now. That's L-118's problem, not L-149's, but worth knowing it looks resolved too next time that item comes up.
-
-**For L-149 specifically:** its Gap needed Step 2 *and* Step 3. Step 2 just passed cleanly — Step 3 (`--nightly`) is the last thing standing between it and DONE. Ready whenever you want to run it; same deal, paste the output and I'll check the trust blocks refresh without the shrink gate or any M1 structural check regressing.
+**Voyager point-count discrepancy, resolved:** the run manifest says
+`backfilled(105)`, the served positions file says `n_points: 113`. Traced
+in the code (`run_build`, ~lines 760-815): `backfilled(N)` only counts
+points fetched *this run* (thinned glide + flyby dense windows + fresh
+daily tail = the `new` dict). The final served file is `points.update(new)`
+against whatever was already archived -- the extra 8 are older archived
+points this run didn't need to re-touch. Both numbers are correct; they're
+measuring different things, not disagreeing.
 
 ### Step 3 -- one real --nightly
 
+**tony:**
 ```
 python tools/gallery_cache_builder.py --nightly
 ```
-
-Confirm trust blocks refresh (new `element_epoch_jd`/samples) without the
-shrink gate or any M1 structural check regressing.
-
-**tony**:
+Terminal output:
 ```
-[paste --nightly output here]
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python tools/gallery_cache_builder.py --nightly
+[RECOVER] could not remove retained data\solar-system.prev ([WinError 5] Access is denied: 'data\\solar-system.prev\\raw\\elements'); swap will quarantine it
+[SWAP] stale data\solar-system.prev (suspected file lock) -> quarantining as data\solar-system.quarantine_20260721T211338Z
+[done] run 20260721T211338Z (nightly): 12 objects
+
+gallery head at af3a2c8611293bc865b62c23f61334a2c2941e45
 ```
 
-**Claude**:
-The nightly run — clean pass, no regressions
+**Claude:** Clean pass, no regressions. `served_window` refreshed
+correctly to `{start_jd: 2460919.837711381, end_jd: 2461566.931389519}`
+(generated 2026-07-21T21:13:45 UTC) -- re-centered on the new build time
+(start/end both shifted ~71 minutes forward, matching the real gap between
+the 20:02 and 21:13 UTC runs), while the half-width stayed pinned to
+Apophis's `window_days` (323.5468d), unchanged from Step 2. Every other
+object's `window_days` also matched Step 2 bit-for-bit -- expected, not
+stale: element epochs are anchored to midnight UTC of the calendar day, and
+this nightly ran within the same UTC day as the first-build, so Horizons
+legitimately returns identical elements for both queries. Apophis still
+controls; Pluto/Charon still correctly excluded. All 12 objects present, no
+`[ABORT]`, no fetch-failure warnings.
 
-served_window refreshed correctly: it re-centered on the new build time (start/end both shifted ~71 minutes forward from the first-build run — exactly matching the real gap between 20:02 and 21:13 UTC), while the half-width stayed pinned to Apophis's window_days (323.5468 d), unchanged from Step 2. That's expected, not stale data: element epochs are anchored to midnight UTC of the calendar day, and this nightly ran within the same UTC day as the first-build — so Horizons legitimately returns the same elements, and every object's window_days matches Step 2 bit-for-bit. Apophis still controls; Pluto/Charon still excluded correctly. All 12 objects present, no [ABORT], no fetch-failure warnings. This is the nightly-refresh proof both L-118 and L-149 were waiting on.
+Same `[RECOVER]`/quarantine pattern as Step 2, second time in a row -- same
+benign, self-healing story, most likely OneDrive holding a brief lock on
+`.prev` right after the previous run touched it (the two runs were only
+~71 minutes apart). Not blocking anything; safe to leave the quarantine
+folders for the automatic sweep, or delete by hand if desired -- `.prev`
+itself should be left alone (it's the intentional one-generation rollback).
 
-Both gaps are now fully closed.
+**This is the nightly-refresh proof both L-118 and L-149 were waiting on.
+Both are closed as of this run** (ledger updated separately).
 
 ### Step 4 -- resolver behavior via the dev render page date picker
 
@@ -554,66 +613,150 @@ inside `served_window` renders; a date far outside raises
 `OutOfServedWindowError`. This exercises the EXISTING resolver/cache_reader
 consumer against the newly populated field -- zero resolver code changes,
 so this step is really confirming M2 wired the field resolver already
-knows how to read, not testing new resolver logic.
+knows how to read, not testing new resolver logic. It also happens to
+reuse the same Earth dev harness that closed Artifact 1 -- that's fine and
+expected, not a re-litigation of Earth's Mode 5 acceptance.
 
-1
-Open a terminal in VS Code
-With the tonyquintanilla.github.io folder open in VS Code, go to Terminal > New Terminal (or Ctrl+`). This opens a command line already sitting in your repo's root folder -- no navigating needed.
-2
-Start a local web server
-Type python -m http.server 8000 and press Enter. This just serves your repo's own files to a browser at localhost:8000 -- it doesn't modify or send anything anywhere. It won't print much after starting; that's normal, not a hang. Leave this terminal running while you test -- closing it, or pressing Ctrl+C, stops the server.
-3
-Open the correct test page
-In your browser, go to http://localhost:8000/gallery/solar_system_earth_test2.html -- note the '2'. The page's own header comment tells you to open solar_system_earth_test.html (no '2'), but that's a leftover from before the date picker was added to make test2. Only test2.html actually has the date box wired to the resolver.
-4
-Test a date inside the window
-Set the date box to anything between Sep 2025 and Jun 2027 -- today, 2026-07-21, works fine. Click 'Render Earth'. You should see Earth's orbit plotted normally, with a green 'Rendered. This is the Mode 5 gate...' line at the bottom of the page.
-5
-Test a date far outside the window
-Change the date to something clearly outside that range -- 2020-01-01 or 2030-01-01 both work. Click 'Render Earth' again. This time, instead of a plot, you should see a red 'ERROR: OutOfServedWindowError...' line. That red error IS the pass condition -- it means the resolver is correctly reading served_window and refusing to render outside it.
+**How to run it:**
+1. In VS Code (with the tonyquintanilla.github.io folder open), open a
+   terminal: Terminal > New Terminal (or Ctrl+`). Starts already in the
+   repo root.
+2. Type `python -m http.server 8000` and press Enter. Serves the repo's
+   own files to a browser at localhost:8000; modifies nothing. Leave it
+   running; Ctrl+C or closing the terminal stops it.
+3. In a browser, go to
+   `http://localhost:8000/gallery/solar_system_earth_test2.html` -- note
+   the "2". The page's own header comment still says to open
+   `solar_system_earth_test.html` (no "2"); that's a leftover from before
+   the date picker was added and should be fixed (see Housekeeping below).
+   Only `test2.html` has the date box wired to the resolver.
+4. Set the date box to a date inside `served_window` (roughly Sep 2025 --
+   Jun 2027 as of this build; it shifts slightly every run) and click
+   "Render Earth." Expect a normal plot and a green "Rendered. This is the
+   Mode 5 gate..." log line.
+5. Set the date box to something clearly outside that range (e.g.
+   2020-01-01 or 2030-01-01) and click "Render Earth" again. Expect a red
+   "ERROR: OutOfServedWindowError..." log line instead of a plot -- that
+   red error IS the pass condition.
 
-
-**tony**:
+**tony:** page log
 ```
-[paste render-page check notes/screenshots here]
+Loading Pyodide runtime (from CDN)...
+Pyodide ready.
+Fetching assembler package (14 files)...
+Assembler written to Pyodide FS.
+Fetching served cache (../data/) ...
+Served cache loaded.
+Running assemble_scene(earth, 2026-07-13T00:00:00Z) in the browser...
+Assembly complete: 5 traces.
+Rendered. This is the Mode 5 gate - your eyes decide.
+Running assemble_scene(earth, 2020-07-13T00:00:00Z) in the browser...
+ERROR: Traceback (most recent call last):
+  File "/lib/python314.zip/_pyodide/_base.py", line 597, in eval_code_async
+    await CodeRunner(
+    ...<9 lines>...
+    .run_async(globals, locals)
+  File "/lib/python314.zip/_pyodide/_base.py", line 411, in run_async
+    coroutine = eval(self.code, globals, locals)
+  File "<exec>", line 18, in <module>
+  File "/home/pyodide/assembler/assemble.py", line 37, in assemble_scene
+    ctx = resolve(scene_spec, catalog, cache)
+  File "/home/pyodide/assembler/resolver.py", line 103, in resolve
+    raise OutOfServedWindowError(
+    ...<2 lines>...
+    )
+assembler.errors.OutOfServedWindowError: Requested epoch (JD 2459043.5000) is outside the served_window [2460919.8377, 2461566.9314].
+If this is a fetch/CORS error, serve over http (python -m http.server) rather than opening the file directly.
+```
+Local server terminal (excerpt):
+```
+Serving HTTP on :: port 8000 (http://[::]:8000/) ...
+::1 - - [21/Jul/2026 22:29:39] "GET / HTTP/1.1" 200 -
+::1 - - [21/Jul/2026 22:29:54] "GET /gallery/solar_system_earth_test2.html HTTP/1.1" 304 -
+::1 - - [21/Jul/2026 22:31:13] "GET /gallery/assembler/__init__.py HTTP/1.1" 304 -
+  [... 13 more assembler files, all 200/304 ...]
+::1 - - [21/Jul/2026 22:31:13] "GET /data/solar-system/coverage_index.json HTTP/1.1" 200 -
+::1 - - [21/Jul/2026 22:31:13] "GET /data/objects_config.json HTTP/1.1" 200 -
 ```
 
-**Claude**:
-[fill in after Tony's check]
+**Claude:** PASS on both halves.
+- Inside the window (2026-07-13): rendered normally, 5 traces, green
+  "Mode 5 gate" message.
+- Outside the window (2020-07-13): correctly refused --
+  `OutOfServedWindowError: Requested epoch (JD 2459043.5000) is outside
+  the served_window [2460919.8377, 2461566.9314]`.
+
+The trailing "If this is a fetch/CORS error..." line always prints after
+*any* caught error in the page's `catch` block, generic boilerplate, not a
+sign of an actual CORS problem -- the successful first render already
+proved fetch/CORS was fine. The `served_window` bounds in the error --
+`[2460919.8377, 2461566.9314]` -- match exactly what was pulled from the
+pushed `coverage_index.json` after the nightly run, confirming the dev page
+is reading the real, current served cache. The server log shows only
+200s/304s, no errors, and the assembler files + served cache were fetched
+once (22:31:13) and reused across both date clicks -- the page caches the
+Pyodide runtime after the first click, no re-fetch needed on rerender.
 
 ### Step 5 -- fetch-cost / throttling note
 
-Each non-spacecraft object now costs one additional `fetch_vectors_range`
-call per build (both check epochs via the new `epoch_jds` list mode, one
-call) -- projected +11 Horizons calls per nightly run. Confirm against the
-real `--first-build`/`--nightly` timing/log above; note if Horizons
-throttles or slows noticeably. If it ever bites, the manifest names the
-sanctioned optimization: batch further (unlikely needed at 11 objects).
+Each non-spacecraft object costs one additional `fetch_vectors_range` call
+per build (both check epochs via the new `epoch_jds` list mode, one call)
+-- projected +11 Horizons calls per nightly run.
 
-**tony**:
-```
-[paste timing/throttling observations here]
-```
+**Observed:** `--first-build` ~23 seconds for all 12 objects (includes
+Voyager's larger historical backfill); `--nightly` ~7 seconds. No throttle
+warnings in either console output.
 
-**Claude**:
-[fill in after Tony's observations]
+**Tony:** No delays observed.
+
+**Claude:** Logged as the Step 5 note. Two data points isn't enough to
+claim Horizons "never" slows down -- that's better confirmed by watching a
+few real nightlies over the coming days than by manufacturing a test for
+it now. If it ever does bite, the manifest already names the sanctioned
+optimization (batch further -- unlikely needed at 11 objects).
+
+---
 
 ## Layer 3 -- Schedule
 
 Unchanged from M1: only after Layers 1-2 pass, enable the nightly Task
-Scheduler job. M2 adds no new Layer-3 concerns (no new scheduling modes,
-no new CLI flags beyond what --first-build/--nightly already cover).
+Scheduler job. **Layers 1 and 2 have now both passed (2026-07-21).** M2
+adds no new Layer-3 concerns (no new scheduling modes, no new CLI flags
+beyond what --first-build/--nightly already cover). Enabling the scheduled
+job is the natural next move whenever Tony is ready -- no other gate
+standing in front of it.
 
-## Known Layer-1-only assumptions Layer 2 must settle
+---
 
-Carried forward from the M2 implementation report, repeated here since
-this is the document that tracks the live-verification gate specifically:
+## Known Layer-1-only assumptions -- all settled by Step 1
 
-1. `Horizons(..., epochs=[jd1, jd2])` for `.vectors()` -- assumed to behave
-   like the already-proven `.elements()` list-epoch pattern; unverified
-   live.
-2. Mean-motion column name (`n` vs `N`) and presence, per object category.
-3. Pluto's real semi-major axis will produce a very different (much
-   larger, much more plausible) window than the Layer-1 mock's placeholder
-   `a` -- expected, not a regression if the real number looks completely
-   different from the mocked `1.89e-05` days.
+1. `Horizons(..., epochs=[jd1, jd2])` for `.vectors()` -- **SETTLED.**
+   Confirmed working against the live API on every Step 1 dry-run (real
+   `-30`/`+30` day samples came back for earth, moon, pluto, apophis, and
+   halley alike).
+2. Mean-motion column name (`n` vs `N`) and presence, per object category
+   -- **SETTLED.** `n` resolved correctly on every live query across all
+   five Step 1 objects and all 12 objects in Step 2/3.
+3. Pluto's real semi-major axis producing a very different window than the
+   Layer-1 mock's placeholder -- **SETTLED, and more consequential than
+   expected.** The real number wasn't just "different as expected" -- it
+   revealed that Pluto's served orbit is barycenter-relative, which is
+   what surfaced the L-149 participant-exclusion bug in the first place.
+   Fixed per Tony's decision in Step 1; proven on live data in Steps 2-3.
+
+---
+
+## Housekeeping (not blocking, not forgotten)
+
+- `gallery/solar_system_earth_test2.html`'s header comment still points to
+  `solar_system_earth_test.html` (no "2") as the URL to open. Cosmetic --
+  worth a one-line fix to the comment so a future session isn't sent to
+  the wrong file.
+**Tony:** Done.
+
+- This addendum's Layer 1 evidence block above is Tony's original 134-check
+  run, kept verbatim as the historical record; the current 138-check state
+  is Claude's sandbox verification, clearly labeled as such above it. If a
+  fresh Tony-run of the offline suite happens on Windows at some point,
+  worth pasting that in to replace the sandbox-verification note with a
+  first-party one.
