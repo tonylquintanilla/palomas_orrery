@@ -9,26 +9,36 @@ of mutual review; synthesis v2 incorporates both.
 Voyager 1, Pluto/Charon, Halley+event_link. **Artifact 1 (Earth alone)
 CLOSED** -- L-080 harness live, golden fingerprint `abbd01094852b57f`
 locked, Mode 5 confirmed. F1-F4 (+ F6, non-blocking) now have ledger
-handles: L-118 (F1), L-119 (F2), L-120 (F3), L-121 (F4), L-122 (F6) -- all
-OPEN, none built yet.
+handles: L-118 (F1), L-119 (F2), L-120 (F3), L-121 (F4), L-122 (F6) --
+L-118 (F1) now DONE (feature_configs.json serves real ported values,
+served_window populated, both proven live over --first-build AND --nightly
+July 21-22); L-119/L-120/L-121/L-122 still OPEN, none built yet.
 F1's own design handoff (PHASE2_F1_FEATURE_SERVING_DESIGN_HANDOFF_v0.4.md)
 CONVERGED July 16, 2026, via the same competitive cross-check pattern as
 Phase 2's assembler design (Fable + GPT independent manifests, comparative
 review, reconciled into PHASE2_F1_BUILD_MANIFEST_v2.md) -- catching a real,
 high-impact bug (planetocentric mean-motion in `propagate_marker`) GPT's
 manifest missed entirely. See "New in v14" below.
-Next: F1a (M2) Layer 2 live-Horizons verification -- done for 5 objects;
-Layer 2 Step 2 (multi-object --first-build) still pending, held until the
-L-149 fix lands. F1's remaining serving-pipeline work otherwise stands as
-handed off July 16, 2026.
+F1a (M2, trust/served_window) fully closed July 21-22: L-149 built, tested
+offline (138/138) AND live -- Layer 2 Steps 1-5 all passed (five dry-runs,
+--first-build, --nightly, resolver date-picker, fetch-cost note). L-118
+closed in the same session.
+**Next: F1's data layer is done, but nothing renders it yet.** A repo-wide
+search (Python and JS/HTML) for anything consuming `ring_system`,
+`van_allen_belts`, `atmosphere_shell`, or `radiation_belts` found nothing.
+Artifact 1 (Earth)'s own acceptance test confirms this by design: features
+dispatch as data only, with "JavaScript rendering them" as the intended
+next step -- and that JS was never written. Writing that feature-rendering
+layer is the real next gate before Artifact 2 (Jupiter/Saturn) can attempt
+Mode 5. Independently: Layer 3 (nightly Task Scheduler) has no gate left
+and can be enabled anytime.
 **Base:** orrery @ `c10a424`, gallery @ `e864fd42` (design ratified here;
 Artifact 1 built+pushed at orrery `6fc52b9a` / gallery `f89d83c4`; current
-HEAD orrery `3c65750e` / gallery `d3ca3710` -- M2 Layer 2 live-Horizons
-testing (5 objects); L-149 (trust participation, canonical_frame not
-category) built, tested, pushed; L-150 (multi-orbit binaries) and L-151
-(gallery-assembler skill) decided, not yet built)
+HEAD orrery `e8d6dd5e` / gallery `af3a2c86` -- F1a (M2) fully closed: L-149
+and L-118 both DONE, Layer 2 Steps 1-5 passed live; L-150 (multi-orbit
+binaries) and L-151 (gallery-assembler skill) still decided, not yet built)
 **Date begun:** July 3, 2026
-**Last updated:** July 20, 2026
+**Last updated:** July 21-22, 2026
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
 Claude Fable 5, Claude Sonnet 5, GPT
 
@@ -1169,14 +1179,22 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
   requiring frame composition -- it doesn't; independent per-center fetch was
   already the settled v0.4 principle. gallery-assembler skill decided (L-151).   
 
-*Superseded:*
-- ~~Export script reads the desktop cache~~ -> fetch fresh from Horizons (v0.4)
-- ~~Subtraction / parent-composition for moon frames~~ -> osculating-primary (v4)
-- ~~Monthly cadence + 90-day forward padding~~ -> nightly, horizon=0 (v0.4)
-- ~~Web GUI is a fork, not a replacement~~ → gallery extension (§2)
-- ~~Phase 0 is two-sided pilot: Dash + Pyodide~~ → one-sided gallery test (§5)
-- ~~Two hosting substrates~~ → one: GitHub Pages, static (§1)
-- ~~Per-domain desktop migration tails~~ → deferred, not on critical path (§2)
+- **Sonnet 5 + Tony, F1a (M2) full closure** (July 21-22, 2026): L-149 fix
+  proven end to end -- offline suite grew to 138/138 (4 new checks, including
+  a forced-failure test proving Pluto's exclusion isn't vacuous), then
+  confirmed on real Horizons data across a full --first-build AND --nightly
+  (Apophis controls the global served_window at 323.55 days; Pluto/Charon
+  measured but correctly take no part). Step 4 confirmed the existing
+  resolver reads the newly-populated field correctly both directions.
+  L-118 closed the same session: feature_configs.json confirmed serving
+  real ported values (Earth atmosphere/Van Allen, Jupiter rings/radiation
+  belts, Saturn's 7-ring system) instead of the empty stub. Both L-118 and
+  L-149 flipped to DONE. Testing record consolidated into a clean
+  M2_TESTING_PROTOCOL_ADDENDUM.md. New finding, not yet ledgerized: the
+  feature-rendering JS side of F1 doesn't exist anywhere in the repo --
+  data is served correctly but nothing draws it, so Artifact 2
+  (Jupiter/Saturn) is blocked on that rendering work, not on data, going
+  into the next session.
 
 ---
 
@@ -1206,9 +1224,13 @@ prompts.
 
 ---
 
-Base: orrery @ `3c65750e` / gallery @ `d3ca3710`.
+Base: orrery @ `e8d6dd5e` / gallery @ `af3a2c86`.
 Phase 0 closed. Phase 1a vocabulary delivered. A/B fork resolved: B′.
 Phase 1b builder built, offline-verified (L-098), and Layer 2 live-Horizons
-tested (5 objects) -- L-149 fixed, L-150/L-151 decided.
-Next: Layer 2 Step 2 (multi-object --first-build), held until L-149 lands.
+fully tested and closed -- L-149 and L-118 both DONE; L-150/L-151 still
+decided, not built.
+Next: write the feature-rendering JS layer (ring/shell/belt consumers) --
+that's what actually stands between here and attempting Artifact 2
+(Jupiter/Saturn) Mode 5. Independently, Layer 3 (nightly Task Scheduler)
+can be enabled anytime, no gate left in front of it.
 Solar System Explorer live at palomasorrery.com/interactive.html.
