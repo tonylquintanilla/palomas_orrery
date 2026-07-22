@@ -556,6 +556,23 @@ consumer against the newly populated field -- zero resolver code changes,
 so this step is really confirming M2 wired the field resolver already
 knows how to read, not testing new resolver logic.
 
+1
+Open a terminal in VS Code
+With the tonyquintanilla.github.io folder open in VS Code, go to Terminal > New Terminal (or Ctrl+`). This opens a command line already sitting in your repo's root folder -- no navigating needed.
+2
+Start a local web server
+Type python -m http.server 8000 and press Enter. This just serves your repo's own files to a browser at localhost:8000 -- it doesn't modify or send anything anywhere. It won't print much after starting; that's normal, not a hang. Leave this terminal running while you test -- closing it, or pressing Ctrl+C, stops the server.
+3
+Open the correct test page
+In your browser, go to http://localhost:8000/gallery/solar_system_earth_test2.html -- note the '2'. The page's own header comment tells you to open solar_system_earth_test.html (no '2'), but that's a leftover from before the date picker was added to make test2. Only test2.html actually has the date box wired to the resolver.
+4
+Test a date inside the window
+Set the date box to anything between Sep 2025 and Jun 2027 -- today, 2026-07-21, works fine. Click 'Render Earth'. You should see Earth's orbit plotted normally, with a green 'Rendered. This is the Mode 5 gate...' line at the bottom of the page.
+5
+Test a date far outside the window
+Change the date to something clearly outside that range -- 2020-01-01 or 2030-01-01 both work. Click 'Render Earth' again. This time, instead of a plot, you should see a red 'ERROR: OutOfServedWindowError...' line. That red error IS the pass condition -- it means the resolver is correctly reading served_window and refusing to render outside it.
+
+
 **tony**:
 ```
 [paste render-page check notes/screenshots here]
