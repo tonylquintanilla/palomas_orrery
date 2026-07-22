@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*95 live items; 83 need attention (`!`); 94 RICE-scored; 53 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*93 live items; 81 need attention (`!`); 92 RICE-scored; 55 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -361,7 +361,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### W.Active -- Web Publication active phase
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-118 | feature_configs.json served empty every build (F1, gates artifact 2) | OPEN | 8.1 | 2026-07-15 |
 | ! | L-120 | Halley configured but not yet in the served index (F3, gates artifact 4) | OPEN | 7.6 | 2026-07-15 |
 | ! | L-119 | event_link hardcoded None in the builder (F2, gates artifact 7) | OPEN | 3.6 | 2026-07-15 |
 | ! | L-121 | Slim plotly wheel not deployed anywhere (F4, ships-nothing gate) | OPEN | 2.2 | 2026-07-15 |
@@ -371,7 +370,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-080 | Characterization harness (scene equivalence gate) | OPEN | 1.6 | 2026-07-14 |
 | ! | L-079 | Shared assembler architecture (keystone — redefined) | OPEN | 1.5 | 2026-07-07 |
 |  | L-089 | Scene-spec shared skeleton + solar system vocabulary (Phase 1) | PROPOSED | 1.5 | 2026-07-03 |
-| ! | L-149 | Global served_window trust participation should key off canonical_frame, not category (gallery-cache-builder) | OPEN | 1.2 | 2026-07-20 |
 |  | L-090 | Star cache inventory + wire format decision | PROPOSED | 0.5 | 2026-07-03 |
 | ! | L-151 | Create gallery-assembler skill -- technical home for the new-mechanism assembler | OPEN | -- | 2026-07-20 |
 
@@ -443,12 +441,14 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+|  | L-118 | feature_configs.json served empty every build (F1, gates artifact 2) | DONE | 8.1 | 2026-07-21 |
 |  | L-085 | LICENSE to repo root | DONE | 4.0 | 2026-07-03 |
 |  | L-088 | Gallery integration test (Phase 0) | DONE | 4.0 | 2026-07-06 |
 |  | L-099 | Solar System Explorer interactive exhibit | DONE | 3.2 | 2026-07-06 |
 |  | L-152 | ledger-and-session-records skill bumped to 1.2 -- retroactive ledger entry | DONE | 1.9 | 2026-07-20 |
 |  | L-148 | Staging folder names carry no object identifier -- hard to locate manually (gallery-cache-builder) | DONE | 1.8 | 2026-07-20 |
 |  | L-098 | Data serving pipeline (Phase 1b) | DONE | 1.5 | 2026-07-12 |
+|  | L-149 | Global served_window trust participation should key off canonical_frame, not category (gallery-cache-builder) | DONE | 1.2 | 2026-07-21 |
 
 <!-- INDEX:END -->
 
@@ -3557,78 +3557,6 @@ equivalence criteria reviewed and stable before any assembler build.
 decision follows L-088 (Phase 0).
 **Ref:** Fable 5 review of v4 (finding 1); master plan S4b.
 
-#### [L-118] feature_configs.json served empty every build (F1, gates artifact 2)
-<!-- L:118 status:PENDING-GATE upd:2026-07-21 section:W.Active flag: rice:3/3/90/1 -->
-- **What.** `derive_served` (gallery_cache_builder.py, line ~749-750) writes
-  `feature_configs.json` unconditionally empty
-  (`{'schema_version': ..., 'features': {}}`) into staging on every build.
-  `data/solar-system/` is replaced wholesale by the atomic swap, so any
-  feature-renderer params (shell radii, colors, ring geometry) placed in
-  the served file are silently destroyed by the next nightly. Same failure
-  class as L-114 (a producer inside the swap blast radius), one file over
-  -- the swap doesn't strand it here, the builder just never populates it.
-- **Config shape: DECIDED, inline.** Feature params move OUTSIDE the blast
-  radius into `objects_config.json`, per-object, alongside the existing
-  `features: [...]` dispatch-key list (which becomes a dict keyed by
-  feature name, each value carrying that feature's params) -- not a
-  sibling file. Rationale (Tony, 2026-07-15): a sibling file is the exact
-  two-files-must-stay-in-sync failure shape behind L-114 and the Halley
-  offline-suite miss; one file removes that class of drift by
-  construction. `derive_served` then DERIVES `feature_configs.json` from
-  config instead of writing it empty. `served_window` population
-  (currently `null`) rides along in the same change (manifest deviation 2
-  / as-built S8).
-- **Values are PORTED, not hand-authored.** [Correction, 2026-07-15] The
-  feature params are not new data to invent -- they already exist,
-  provenance-audited, in the desktop codebase:
-  - **Simple sphere shells** (e.g. Earth's `atmosphere_shell`): a direct
-    numeric port from `SHELL_CONFIGS['Earth']['atmosphere']` /
-    `['upper_atmosphere']` in `shell_configs.py` (`radius_fraction`,
-    `color`, `opacity` -- April 2026 provenance audit, NOAA/NASA sourced).
-    Nothing to invent; copy the numbers.
-  - **Custom-geometry shells** (e.g. Earth's `van_allen_belts`): the
-    params exist too (`CUSTOM_SHELLS['Earth']['magnetosphere']` ->
-    `earth_visualization_shells.create_earth_magnetosphere_shell`: inner
-    belt 1.5 R_E, outer 4.5 R_E, thickness 0.5 R_E, NASA Van Allen Probes
-    sourced) but the belts are generated PROCEDURALLY (5 rings x 80
-    points, sinusoidal z-flattening `z = 0.2*radius*sin(2*angle)`), not a
-    static radius pair. Porting this feature means porting the small
-    generation algorithm to JS alongside its params, not just three
-    numbers. (The belts themselves don't depend on Sun position --
-    `needs_sun_position` on that builder is for the magnetosphere/bow-shock
-    traces in the same function, not the belts.) This distinction will
-    recur for rings and comet comae/tails later -- budget custom-geometry
-    features as algorithm ports, simple shells as data ports.
-- **Verified live 2026-07-15** [verified @953c650e/@73c67bed]:
-  `feature_configs.json` still `{"features": {}}`; `served_window` still
-  `null`. Nothing has drifted since the artifact-1 as-built was written.
-- **Claude:** [verified @c5c9ea09, 2026-07-21] The 2026-07-15 "still empty" note is
-  stale, superseded by this run. Live --first-build output confirms feature_configs.json
-  now derives from objects_config.json as designed -- earth/jupiter/saturn populated
-  with the ported shell_configs.py/CUSTOM_SHELLS values, the other 9 objects correctly
-  {}. Layer-1's M1 shape-validator checks all still pass (138/138 at HEAD). served_window
-  is also populated now, but via the separate M2 trust system (L-149/L-150/L-151), not
-  literally "the same change" as originally scoped here. 
-- **Naming caution.** The gallery-cache-builder skill's field notes use "F1"
-  for a DIFFERENT, already-closed issue (L-114's config-path stranding). This
-  L-118 is the Phase 2 synthesis manifest's F1 (feature_configs.json
-  empty-write trap). Unrelated to L-114; do not conflate when grepping "F1".
-**Tony:** RICE proposed 3/3/90/1 (blocks artifact 2 directly, and the JS
-feature layer it unlocks gates most of the remaining golden artifacts
-transitively; effort is a scoped builder change under the existing layered
-gate) -- yours to finalize. Config-shape decision closed (inline); no
-further decision blocks starting this.
-**Gap:** items 1-4 of the original 5 are done. Only the nightly leg of acceptance
-remains -- confirm feature_configs.json re-derives correctly (not stale, not dropped)
-on a real --nightly run. Same run that closes L-149's remaining gap.
-**Ref:** gallery `tools/gallery_cache_builder.py` (`derive_served` ~line
-710-751); `data/objects_config.json`; `data/solar-system/feature_configs.json`;
-orrery `shell_configs.py` (`SHELL_CONFIGS`/`CUSTOM_SHELLS`, Earth block);
-orrery `earth_visualization_shells.py` (`create_earth_magnetosphere_shell`);
-PHASE2_SYNTHESIS_MANIFEST_v2.md S4/S9; PHASE2_ARTIFACT1_AS_BUILT.md S8/S9;
-L-098 (parent, Phase 1b); L-114 (related but distinct -- see naming caution);
-L-123 (info card, rides with this). L-149 (served_window ended up here, not in this item's own code)
-
 #### [L-119] event_link hardcoded None in the builder (F2, gates artifact 7)
 <!-- L:119 status:OPEN upd:2026-07-15 section:W.Active flag: rice:2/2/90/1 -->
 - **What.** `derive_served` (line ~727) hardcodes `'event_link': None` for
@@ -3743,37 +3671,6 @@ for the new served field.
 **Ref:** `info_dictionary.py` (`INFO` dict); PHASE2_ARTIFACT1_AS_BUILT.md
 S9 (info card, deferred) and S12 (ledger recommendations); L-118 (F1,
 shared serving pipeline); L-098 (parent, Phase 1b).
-
-#### [L-149] Global served_window trust participation should key off canonical_frame, not category (gallery-cache-builder)
-<!-- L:149 status:PENDING-GATE upd:2026-07-21 section:W.Active flag: rice:2/2/60/2 -->
-- **What.** TRUST_WINDOW_EXCLUDED_CATEGORIES = {'moon', 'spacecraft'} excludes by category
-  label. Surfaced during M2 Layer 2 (L-118): Pluto (dwarf_planet) is centered on
-  pluto_barycenter -- same physical situation as Charon (moon), same barycenter -- but isn't
-  excluded, so Pluto's real ~6.4-day mutual-orbit window becomes the GLOBAL served_window's
-  controlling bound. resolver.py's resolve() checks served_window as one gate for the whole
-  scene regardless of which objects are requested -- confirmed live -- so this would reject
-  e.g. "Jupiter, 10 days out" even though Jupiter's own window is ~4,336 days.
-- **Decided (Tony, 2026-07-20):** exclude by canonical_frame != 'heliocentric', not category.
-  Generalizes to future barycenter-relative onboards -- Orcus/Vanth (20090482/920090482/
-  120090482) and Patroclus/Menoetius (20000617/920000617/120000617) both confirmed live as
-  real Horizons system-barycenter IDs, the general 20XXXXXX pattern, distinct from Pluto's
-  legacy single-digit @9.
-- **Claude:** [verified @c5c9ea09, 2026-07-21] The canonical_frame fix is live and
-  proven on real data, not just the mock. Code: derive_served's participant loop now
-  checks `canonical_frame != TRUST_WINDOW_PARTICIPANT_FRAME` ('heliocentric'), replacing
-  the old category check. Layer-1: 4 new L-149-specific checks added and passing
-  (138/138 total) -- including a forced-failure test proving pluto's own check-vector
-  outage can no longer null the global served_window, since it's excluded from voting.
-  Layer 2 Step 2 (--first-build): served_window's half-width (323.5468 d) matches
-  Apophis's window_days exactly -- Apophis controls, not Pluto. Pluto (~6.38 d) and
-  Charon (~0.80 d) still get full trust blocks but correctly take no part in the
-  global bound.  
-**Gap:** code fix, Layer-1 update, and Layer 2 Step 2 are all done and verified live.
-Only Step 3 (--nightly) remains -- same run that closes L-118's own remaining gap.
-**Ref:** gallery tools/gallery_cache_builder.py derive_served (~1023-1048),
-TRUST_WINDOW_PARTICIPANT_FRAME (~360, replaces the retired TRUST_WINDOW_EXCLUDED_CATEGORIES);
-resolver.py resolve() (~91-106); data/objects_config.json; L-118 (parent);
-M2_TESTING_PROTOCOL_ADDENDUM.md (Layer 2 steps).
 
 #### [L-150] Multi-orbit trust model for near-equal-mass binaries (Pluto/Charon and future onboards)
 <!-- L:150 status:OPEN upd:2026-07-20 section:W.Active flag: rice:2/3/75/2 -->
@@ -4212,6 +4109,110 @@ _sweep_siblings; L-118 (parent -- discovered during its Layer 2 acceptance).
   same shape as an unpushed SHA.
 **Gap:** none -- documentation only. Skill Manifest table bumped to 1.2 alongside.
 **Ref:** skills/ledger-and-session-records/SKILL.md @ 1.2; L-149/L-150/L-151.
+
+#### [L-118] feature_configs.json served empty every build (F1, gates artifact 2)
+<!-- L:118 status:DONE upd:2026-07-21 section:W.Done flag: rice:3/3/90/1 -->
+- **What.** `derive_served` (gallery_cache_builder.py, line ~749-750) writes
+  `feature_configs.json` unconditionally empty
+  (`{'schema_version': ..., 'features': {}}`) into staging on every build.
+  `data/solar-system/` is replaced wholesale by the atomic swap, so any
+  feature-renderer params (shell radii, colors, ring geometry) placed in
+  the served file are silently destroyed by the next nightly. Same failure
+  class as L-114 (a producer inside the swap blast radius), one file over
+  -- the swap doesn't strand it here, the builder just never populates it.
+- **Config shape: DECIDED, inline.** Feature params move OUTSIDE the blast
+  radius into `objects_config.json`, per-object, alongside the existing
+  `features: [...]` dispatch-key list (which becomes a dict keyed by
+  feature name, each value carrying that feature's params) -- not a
+  sibling file. Rationale (Tony, 2026-07-15): a sibling file is the exact
+  two-files-must-stay-in-sync failure shape behind L-114 and the Halley
+  offline-suite miss; one file removes that class of drift by
+  construction. `derive_served` then DERIVES `feature_configs.json` from
+  config instead of writing it empty. `served_window` population
+  (currently `null`) rides along in the same change (manifest deviation 2
+  / as-built S8).
+- **Values are PORTED, not hand-authored.** [Correction, 2026-07-15] The
+  feature params are not new data to invent -- they already exist,
+  provenance-audited, in the desktop codebase:
+  - **Simple sphere shells** (e.g. Earth's `atmosphere_shell`): a direct
+    numeric port from `SHELL_CONFIGS['Earth']['atmosphere']` /
+    `['upper_atmosphere']` in `shell_configs.py` (`radius_fraction`,
+    `color`, `opacity` -- April 2026 provenance audit, NOAA/NASA sourced).
+    Nothing to invent; copy the numbers.
+  - **Custom-geometry shells** (e.g. Earth's `van_allen_belts`): the
+    params exist too (`CUSTOM_SHELLS['Earth']['magnetosphere']` ->
+    `earth_visualization_shells.create_earth_magnetosphere_shell`: inner
+    belt 1.5 R_E, outer 4.5 R_E, thickness 0.5 R_E, NASA Van Allen Probes
+    sourced) but the belts are generated PROCEDURALLY (5 rings x 80
+    points, sinusoidal z-flattening `z = 0.2*radius*sin(2*angle)`), not a
+    static radius pair. Porting this feature means porting the small
+    generation algorithm to JS alongside its params, not just three
+    numbers. (The belts themselves don't depend on Sun position --
+    `needs_sun_position` on that builder is for the magnetosphere/bow-shock
+    traces in the same function, not the belts.) This distinction will
+    recur for rings and comet comae/tails later -- budget custom-geometry
+    features as algorithm ports, simple shells as data ports.
+- **Verified live 2026-07-15** [verified @953c650e/@73c67bed]:
+  `feature_configs.json` still `{"features": {}}`; `served_window` still
+  `null`. Nothing has drifted since the artifact-1 as-built was written.
+- **Claude:** [verified @c5c9ea09, 2026-07-21] The 2026-07-15 "still empty" note is
+  stale, superseded by this run. Live --first-build output confirms feature_configs.json
+  now derives from objects_config.json as designed -- earth/jupiter/saturn populated
+  with the ported shell_configs.py/CUSTOM_SHELLS values, the other 9 objects correctly
+  {}. Layer-1's M1 shape-validator checks all still pass (138/138 at HEAD). served_window
+  is also populated now, but via the separate M2 trust system (L-149/L-150/L-151), not
+  literally "the same change" as originally scoped here. 
+- **Naming caution.** The gallery-cache-builder skill's field notes use "F1"
+  for a DIFFERENT, already-closed issue (L-114's config-path stranding). This
+  L-118 is the Phase 2 synthesis manifest's F1 (feature_configs.json
+  empty-write trap). Unrelated to L-114; do not conflate when grepping "F1".
+**Tony:** Done.
+**Claude:** [verified @af3a2c86, 2026-07-21] --nightly ran clean: 12 objects, no
+  ABORT, feature_configs.json and served_window both survived the refresh intact.
+  All 5 Gap items closed.
+**Gap:** items 1-5 of the original 5 are done. 
+**Ref:** gallery `tools/gallery_cache_builder.py` (`derive_served` ~line
+710-751); `data/objects_config.json`; `data/solar-system/feature_configs.json`;
+orrery `shell_configs.py` (`SHELL_CONFIGS`/`CUSTOM_SHELLS`, Earth block);
+orrery `earth_visualization_shells.py` (`create_earth_magnetosphere_shell`);
+PHASE2_SYNTHESIS_MANIFEST_v2.md S4/S9; PHASE2_ARTIFACT1_AS_BUILT.md S8/S9;
+L-098 (parent, Phase 1b); L-114 (related but distinct -- see naming caution);
+L-123 (info card, rides with this). L-149 (served_window ended up here, not in this item's own code)
+
+#### [L-149] Global served_window trust participation should key off canonical_frame, not category (gallery-cache-builder)
+<!-- L:149 status:DONE upd:2026-07-21 section:W.Done flag: rice:2/2/60/2 -->
+- **What.** TRUST_WINDOW_EXCLUDED_CATEGORIES = {'moon', 'spacecraft'} excludes by category
+  label. Surfaced during M2 Layer 2 (L-118): Pluto (dwarf_planet) is centered on
+  pluto_barycenter -- same physical situation as Charon (moon), same barycenter -- but isn't
+  excluded, so Pluto's real ~6.4-day mutual-orbit window becomes the GLOBAL served_window's
+  controlling bound. resolver.py's resolve() checks served_window as one gate for the whole
+  scene regardless of which objects are requested -- confirmed live -- so this would reject
+  e.g. "Jupiter, 10 days out" even though Jupiter's own window is ~4,336 days.
+- **Decided (Tony, 2026-07-20):** exclude by canonical_frame != 'heliocentric', not category.
+  Generalizes to future barycenter-relative onboards -- Orcus/Vanth (20090482/920090482/
+  120090482) and Patroclus/Menoetius (20000617/920000617/120000617) both confirmed live as
+  real Horizons system-barycenter IDs, the general 20XXXXXX pattern, distinct from Pluto's
+  legacy single-digit @9.
+- **Claude:** [verified @c5c9ea09, 2026-07-21] The canonical_frame fix is live and
+  proven on real data, not just the mock. Code: derive_served's participant loop now
+  checks `canonical_frame != TRUST_WINDOW_PARTICIPANT_FRAME` ('heliocentric'), replacing
+  the old category check. Layer-1: 4 new L-149-specific checks added and passing
+  (138/138 total) -- including a forced-failure test proving pluto's own check-vector
+  outage can no longer null the global served_window, since it's excluded from voting.
+  Layer 2 Step 2 (--first-build): served_window's half-width (323.5468 d) matches
+  Apophis's window_days exactly -- Apophis controls, not Pluto. Pluto (~6.38 d) and
+  Charon (~0.80 d) still get full trust blocks but correctly take no part in the
+  global bound.  
+- **Claude:** [verified @af3a2c86, 2026-07-21] --nightly confirms the fix holds across
+  a refresh, not just first-build: served_window re-centered on the new as_of time
+  while its half-width stayed correctly pinned to Apophis (heliocentric), not Pluto.
+  Gap fully closed.
+**Gap:** code fix, Layer-1 update, and Layer 2 Step 2 are all done and verified live.
+Only Step 3 (--nightly) done -- same run that closes L-118's own remaining gap.
+**Ref:** gallery tools/gallery_cache_builder.py derive_served (~1023-1048),
+TRUST_WINDOW_PARTICIPANT_FRAME (~360, replaces the retired TRUST_WINDOW_EXCLUDED_CATEGORIES);
+resolver.py resolve() (~91-106); data/objects_config.json; L-118 (parent);
+M2_TESTING_PROTOCOL_ADDENDUM.md (Layer 2 steps).
 ### W.Cross-references -- existing items that interact with the web track
 
 - **L-026** -- CRLF to LF on `palomas_orrery_helpers.py`. Companion to L-087.

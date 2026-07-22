@@ -541,7 +541,11 @@ shrink gate or any M1 structural check regressing.
 ```
 
 **Claude**:
-[fill in after Tony's run]
+The nightly run — clean pass, no regressions
+
+served_window refreshed correctly: it re-centered on the new build time (start/end both shifted ~71 minutes forward from the first-build run — exactly matching the real gap between 20:02 and 21:13 UTC), while the half-width stayed pinned to Apophis's window_days (323.5468 d), unchanged from Step 2. That's expected, not stale data: element epochs are anchored to midnight UTC of the calendar day, and this nightly ran within the same UTC day as the first-build — so Horizons legitimately returns the same elements, and every object's window_days matches Step 2 bit-for-bit. Apophis still controls; Pluto/Charon still excluded correctly. All 12 objects present, no [ABORT], no fetch-failure warnings. This is the nightly-refresh proof both L-118 and L-149 were waiting on.
+
+Both gaps are now fully closed.
 
 ### Step 4 -- resolver behavior via the dev render page date picker
 
