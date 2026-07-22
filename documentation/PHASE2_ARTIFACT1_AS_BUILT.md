@@ -57,7 +57,7 @@ or network. ASCII-only, LF, credit-lined.
 | `tests/test_artifact1_earth.py` | End-to-end CPython test against the real served cache. |
 | `__init__.py` x3 | Package markers (assembler, harness, tests). |
 
-Dev render page: `gallery/solar_system_earth_test.html` (sibling to assembler/,
+Dev render page: `gallery/solar_system_earth_test2.html` (sibling to assembler/,
 in the served gallery/ folder).
 
 ---
@@ -152,7 +152,7 @@ in the ledger and commit message (manifest S8).
 
 ## 7. Dev render page
 
-`gallery/solar_system_earth_test.html` -- THROWAWAY dev harness, not the shipped
+`gallery/solar_system_earth_test2.html` -- THROWAWAY dev harness, not the shipped
 exhibit. Loads Pyodide (v314.0.2, lazily on the button = the S5/S7 consent gate),
 writes the assembler package into the Pyodide FS, fetches the real served cache,
 calls assemble_scene, and renders the figure dict with Plotly.js (2.35.2). Shows
@@ -165,7 +165,7 @@ date visibly walks Earth around its orbit -- the Kepler engine, live).
 cd <gallery repo root>
 python -m http.server 8000
 ```
-then open `http://localhost:8000/gallery/solar_system_earth_test.html`.
+then open `http://localhost:8000/gallery/solar_system_earth_test2.html`.
 
 **Run the CPython test:**
 ```
