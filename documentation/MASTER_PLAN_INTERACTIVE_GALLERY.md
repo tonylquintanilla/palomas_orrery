@@ -38,7 +38,7 @@ HEAD orrery `e8d6dd5e` / gallery `af3a2c86` -- F1a (M2) fully closed: L-149
 and L-118 both DONE, Layer 2 Steps 1-5 passed live; L-150 (multi-orbit
 binaries) and L-151 (gallery-assembler skill) still decided, not yet built)
 **Date begun:** July 3, 2026
-**Last updated:** July 21-22, 2026
+**Last updated:** July 21-24, 2026
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
 Claude Fable 5, Claude Sonnet 5, GPT
 
@@ -751,22 +751,33 @@ Phase 1b design review (July 7, 2026: caught invariant #4 self-contradiction,
 `stored_center` overload, grid nesting). Fable access extended to July 12,
 2026. Available for: provenance Tier-1 triage, Phase 2 broad-first design.
 
-**Opus 4.8** — verification, convergence, restraint. Phase 1b design review
+**Opus 4.8 and Opus 5** — verification, convergence, restraint. Phase 1b design review
 (July 7, 2026: caught osculating center gap, validation invariants, parent
 dependency). Attribution page (fetch license terms). Vocabulary DD/OQ review
 at Phase 2 start. Phase 5 restraint discipline on human-cost content.
 
-**Opus 4.6** — daily conversational partner, iterative build. Phase 1b design
-led and converged. Phase 1b build (CORS check, export script, coverage index).
-Helpers split, all assembler and interactive page builds.
+**Sonnet 5** — predesign discovery for L-154 (the resolver bug, the
+physical-radius source question) that surfaced the provenance scoring
+problem; independent design review of Fable 5's provenance fix (verified
+every factual claim by rerunning the tool and regrepping both repos rather
+than trusting the summary -- caught the Tier-2 flood size, the
+CENTER_BODY_RADII visibility gap, and two design refinements). Also
+handling L-162 (CENTER_BODY_RADII cleanup) as a dedicated prep session.
 
 ### Next Step
 
-Phase 1b build UNDERWAY. The standalone `gallery_cache_builder.py` +
-`objects_config.json` + an offline smoke test are built and offline-verified
-(47 checks, py_compile clean; provenance to orrery `4e2629c`). NEXT: live dry-
-runs on Tony's hardware (manifest v2 S10 -- voyager_1 ephemeris start, encke
-solution-Tp + Mode-5 Tp match), first full build, schedule nightly + backup.
+Phase 1b DONE. Nightly cache builder live; M2 (F1a trust/served_window)
+tested and closed (2026-07-21) -- see documentation/TESTING_PROTOCOL.md
+addendum. Phase 2 Artifact 1 (Earth) built and Mode-5 accepted; Artifact 2
+(Jupiter/Saturn, rings + radiation belts) is next in the artifact order but
+BLOCKED: the client-side feature-rendering JS layer it needs (L-154) is
+gated behind a provenance/scoring detour that opened while scoping it (see
+§6 for the full dependency chain). NEXT: close the provenance work
+(L-155/156/157/158/159/160/161, L-162), then resume L-154's own open
+design questions (geometry-building approach, legend behavior, artifact
+sequencing -- captured separately in
+HANDOFF_gallery_feature_layer_L154_resume.md so they aren't lost under the
+detour), then build Artifact 2.
 
 ---
 
@@ -791,6 +802,28 @@ publicly reachable interactive page.
 from tkinter GUI helpers. Computation the assembler needs:
 `calculate_planet9_position_on_orbit`, `rotate_points2`,
 `calculate_axis_range`. Required before Phase 2.
+
+**L-162 — CENTER_BODY_RADII de-duplication.** ○ Not started, scoped.
+Promote 15 remaining bodies (Mercury, Venus, Moon, Mars, Phobos, Saturn,
+Uranus, Neptune, Pluto, Bennu, Eris, Haumea, Makemake, Arrokoth -- Planet 9
+excluded, speculative not measured) to named constants in
+`constants_new.py`, matching Sun/Earth/Jupiter's existing pattern. Values
+already Gemini-verified (April 2026) -- this is restructuring, not
+re-verification. Independent, can start now. Best landed before the
+provenance scanner's Phase 3 pinning engine is built (L-155/156), so
+pinning references named constants directly rather than needing dict-path
+extraction for 15 of 18 bodies.
+
+**L-155/156/157/158/159/160/161 — Provenance scoring model fix.**
+○ Design done (Fable 5), reviewed (Sonnet 5, this session), amendments
+sent back. Not a gallery-track item originally -- surfaced while scoping
+L-154's feature-rendering JS layer and now gates it. Full detail in
+PREDESIGN_HANDOFF_provenance_scoring_and_gallery_scanner.md and
+DESIGN_REVIEW_provenance_scoring_and_pinning.md. Sequencing: scoring fix
+(L-156) and in-scanner pinning (L-155/L-160) build first; L-157 (shell
+config Gemini cross-check) and L-161 (display-string Gemini sweep) follow,
+sequentially through the same Mode 7 relay channel rather than as parallel
+threads. L-154 unblocks once these close.
 
 ---
 

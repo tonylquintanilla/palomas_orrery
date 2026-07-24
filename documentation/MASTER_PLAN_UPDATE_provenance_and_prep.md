@@ -79,6 +79,10 @@ from tkinter GUI helpers. Computation the assembler needs:
 
 **Add directly after it:**
 ```
+**`palomas_orrery_helpers.py` split** — ○ Not started. Separate computation
+from tkinter GUI helpers. Computation the assembler needs:
+`calculate_planet9_position_on_orbit`, `rotate_points2`,
+`calculate_axis_range`. Required before Phase 2.
 
 **L-162 — CENTER_BODY_RADII de-duplication.** ○ Not started, scoped.
 Promote 15 remaining bodies (Mercury, Venus, Moon, Mars, Phobos, Saturn,

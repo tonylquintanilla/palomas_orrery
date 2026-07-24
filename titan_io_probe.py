@@ -1,1 +1,0 @@
-[k for k in cache if k.startswith(('Io_','Titan_'))]

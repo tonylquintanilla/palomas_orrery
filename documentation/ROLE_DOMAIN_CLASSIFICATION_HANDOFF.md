@@ -42,8 +42,9 @@ covering 121 root modules) that has drifted:
   own atlas there (`gallery_studio`, `gallery_editor`,
   `gallery_json_fixer`, `json_converter`, `json_gallery`) -- simple
   deletion from this repo's `ROLE_MAP`, no sweep action needed. The
-  other 2 are NOT gallery-related: `orrery_integration` (disposition
-  unclear -- no matching file, no context found; flag for Tony) and
+  other 2 are NOT gallery-related: `orrery_integration` (RESOLVED in
+  Phase 0 reconciliation, Section 19 -- born stale, delete only, no
+  archival needed) and
   `star_visualization_gui_before_pyinstaller_refactor` (confirmed
   superseded -- matches the exact "_before_" pattern surfaced in
   Section 4 below; the file is already gone, only the ghost `ROLE_MAP`
@@ -682,6 +683,87 @@ attach this document.)*
 >
 > Deliverable per phase: a short as-built note (changed, verified, still
 > open), pushed with the standard SHA round trip.
+
+## 19. Phase 0 reconciliation (Opus 5, builder session) -- verified
+
+Builder session (Opus 5, not Sonnet -- Section 18's model assumption
+was wrong, noted and proceeded anyway) ran Phase 0 before Phase 1: pull
+fresh, confirm SHAs, re-verify every claim rather than trust the
+handoff. Findings below independently re-checked against a fresh
+unshallowed clone before being accepted here, not taken on the report
+alone.
+
+**SHA drift, confirmed benign.** Orrery `bdab167` -> `df74778`: 3 files,
+zero code -- the L-163 ledger block, this handoff, and Fable's review,
+all checked in as expected. Gallery `c2a323b` -> `81c2ee1`: 26 files
+under `data/solar-system/`, a routine nightly cache-builder run, zero
+`.py` touched. Neither drift affects any file this build reads.
+
+**Gap found: the Section 14 master-plan entry never landed.** The
+ledger block was pasted; the matching `MASTER_PLAN_UPDATE_provenance_
+and_prep.md` Section 6 entry was not, confirmed by diff. Action item for
+Tony -- see this session's chat for the entry text.
+
+**Stale skill, confirmed and diffed directly (not just reported).**
+`ledger-and-session-records` installed at 1.1 (cut @ `2991a0c7`, July
+17); repo HEAD carries 1.2 (cut @ `079a0ec5`, July 19). Diffed the two
+directly: the delta is the "Anchor Requirement (all outbound documents)"
+section -- the same v3.32 generalization already present in the
+resident protocol, so nothing drafted in this handoff needs correcting
+(it already anchored every outbound document per that rule). The skill
+*file* was still stale under this design session throughout, though --
+confirmed by checking this session's own installed copy, same 1.1.
+Phase 4's version bump target is now 1.2 -> 1.3, not 1.1 -> 1.2 (would
+have collided with the version already in the repo).
+
+**`orrery_integration`, resolved with git evidence, independently
+re-verified.** Commit `8c691de` ("various," Tony, April 15 2026) both
+added `module_atlas.py` (its first version, 566 lines -- `ROLE_MAP`
+included from birth) and deleted `orrery_integration.py` (395 lines) in
+the same commit. Confirmed directly: `git show 8c691de --name-status`
+shows `A module_atlas.py` / `D orrery_integration.py` side by side. The
+ghost entry was born stale. Same disposition as
+`star_visualization_gui_before_pyinstaller_refactor`: delete the entry,
+no archival needed -- resolved Section 1 above accordingly. Blob
+recoverable from `ba1c52d` if a local copy is ever wanted.
+
+**Tony's to-do list to close Phase 1 -- consolidated, one place, tagged
+per the new `Tony-action` convention (see chat for the skill-text
+addition; bumps `ledger-and-session-records` to 1.3 independent of
+L-163, so Phase 4's target becomes 1.3 -> 1.4, not 1.2 -> 1.3):**
+
+1. **Tony-action (decide):** check `titan_io_probe.py` yourself for a
+   fuller version outside the repo (Section 4 flagged this specifically). -- **Tony:** file deleted from the repo; obsolete
+2. **Tony-action (decide):** confirm the 7 archive candidates (Section 4).
+
+**Archive candidates (zero live references, confirmed one-time or
+orphaned):** -- **Tony:** all of these files were short term diagnostic tools. removed from the repo. obsolete. 
+
+| File | Evidence |
+|---|---|
+| `provenance_scanner_color_patch.py` | Docstring: "run this once" (July 16, 2026). Zero references anywhere. |
+| `smoke_phase4.py` | Zero references anywhere, not even in classification dicts. |
+| `smoke_dipole_cone.py` | Only classification-dict mentions, no functional callers. Tied to "Movement 2, June 2026" build verification. |
+| `smoke_rotation_axis.py` | Same as above; cross-referenced only by `smoke_dipole_cone.py`'s own docstring, not by any functional caller. |
+| `titan_io_probe.py` | Single bare list-comprehension line, no docstring, no function wrapper, zero references. Would produce no output if run. Contrary to the initial hypothesis that this one might be active -- evidence points the other way. Flagged for Tony's own verification in case a fuller version exists elsewhere. |
+| `color_map.py` | Zero real callers. The 12 apparent references were a naming collision with an unrelated `color_map` function imported from `constants_new.py`. Matches Tony's own preference for the graphic file over running this script. |
+| `barycenter_cache_check.py` | Tiny ad hoc diagnostic (loads `orbit_paths.json`, prints barycenter key info). Zero references, no docstring. |
+
+3. **Tony-action (do):** move the confirmed candidates to local archive -- **Tony:** done
+   via GitHub Desktop.
+4. **Tony-action (decide):** confirm the `orrery_integration` `ROLE_MAP`
+   entry can be deleted (evidence above). -- **Tony:** this file has been removed from the repo. remove from the role map. 
+5. **Tony-action (do):** paste the `MASTER_PLAN_UPDATE_provenance_and_
+   prep.md` Section 6 entry -- drafted earlier, never landed. -- **Tony:** done
+6. **Tony-action (do):** re-install `ledger-and-session-records` (now
+   1.3, once you've pasted the tag addition above). -- **Tony:** done
+7. **Tony-action (do):** push. Send Opus the new SHA plus exactly which
+   of the 7 candidates were actually archived -- Opus needs the list to
+   know which `ROLE_MAP` entries to delete, not just that "some" were.
+
+Nothing here is a judgment call for Opus to make -- every item is
+either Tony's own hands or a confirmation only Tony can give, now
+visibly split by which kind.
 
 ---
 
