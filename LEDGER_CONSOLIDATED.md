@@ -2676,6 +2676,22 @@ user-facing; real but not huge impact; high confidence, same proven
 pattern as two existing scripts; low effort, extends existing code
 rather than building new) -- yours to finalize.
 
+#### [L-133] Codebase-wide CRLF sweep (beyond L-026)
+<!-- L:133 status:OPEN upd:2026-07-17 section:D.Structural flag: rice:2/2/50/2 -->
+- **Idea (Tony, 4/17/26, pre-ledger note).** Review the codebase for any
+  remaining CRLF endings beyond palomas_orrery_helpers.py (L-026, DONE
+  2026-07-15). LF is the project standard.
+- **Note (Claude, 2026-07-17):** .gitattributes (`* text=auto eol=lf`)
+  added at repo root -- normalizes CRLF to LF automatically on `git add`
+  going forward (root cause: text pasted from chat/browser lands as
+  CRLF; without a git-level rule, a single pasted chunk could flip a
+  whole file's save-time EOL). This closes the recurring-drift half of
+  the problem.
+**Gap:** narrower now -- a one-time sweep of files already CRLF in the
+repo from before this rule existed (the .gitattributes fix doesn't
+retroactively touch files it hasn't seen re-added).
+**Ref:** to_do_ideas.md (pre-ledger, 4/17/26); companion to L-026, L-087.
+
 #### [L-135] Basic-plot file-size bloat (non-shell) -- Mercury-alone example
 <!-- L:135 status:OPEN upd:2026-07-17 section:D.Structural flag: rice:2/2/50/2 -->
 - **Bug/idea (Tony, 4/17/26, pre-ledger note -- two entries merged).**
@@ -2693,21 +2709,89 @@ confirm whether single-info-marker already covers this or whether basic
 orbit/marker traces need the same treatment.
 **Ref:** to_do_ideas.md (pre-ledger, 4/17/26 x2); cross-ref v3.22 refactor.
 
-#### [L-133] Codebase-wide CRLF sweep (beyond L-026)
-<!-- L:133 status:OPEN upd:2026-07-17 section:D.Structural flag: rice:2/2/50/2 -->
-- **Idea (Tony, 4/17/26, pre-ledger note).** Review the codebase for any
-  remaining CRLF endings beyond palomas_orrery_helpers.py (L-026, DONE
-  2026-07-15). LF is the project standard.
-- **Note (Claude, 2026-07-17):** .gitattributes (`* text=auto eol=lf`)
-  added at repo root -- normalizes CRLF to LF automatically on `git add`
-  going forward (root cause: text pasted from chat/browser lands as
-  CRLF; without a git-level rule, a single pasted chunk could flip a
-  whole file's save-time EOL). This closes the recurring-drift half of
-  the problem.
-**Gap:** narrower now -- a one-time sweep of files already CRLF in the
-repo from before this rule existed (the .gitattributes fix doesn't
-retroactively touch files it hasn't seen re-added).
-**Ref:** to_do_ideas.md (pre-ledger, 4/17/26); companion to L-026, L-087.
+#### [L-163] Module role/domain classification redesign (ROLE_MAP + MODULE_DOMAIN_MAP)
+<!-- L:163 status:OPEN upd:2026-07-23 section:D.Structural flag: rice:2/2/85/4 -->
+- **What.** `ROLE_MAP` in `module_atlas.py` (94 hand-maintained entries)
+  has drifted: 19 of 121 orrery modules silently classify as `'other'`,
+  5 already have unscanned claim-shaped content per `PROVENANCE_AUDIT.md`
+  (`shell_configs.py` alone: 91 strings). 3 real consumers import it
+  (`module_atlas.py`, `provenance_scanner.py`, `dep_trace.py`), not 1.
+  A second, orthogonal hand-maintained dict (`MODULE_DOMAIN_MAP`, in
+  `provenance_scanner.py`) shares the same staleness risk on a
+  different axis (subject-matter domain, not functional role).
+- **Design (full detail in ROLE_DOMAIN_CLASSIFICATION_HANDOFF.md).**
+  Both maps become mechanically regenerated from an explicit
+  `Role:`/`Domain:` line in each module's own docstring -- same pattern
+  `ledger_index.py` already uses for its INDEX zone. Missing/invalid tag
+  -> `'undetermined'` sentinel (distinct from the legitimate `'other'`
+  bucket), flagged not guessed. Filename heuristics (`_shells` suffix,
+  proposed `scenarios_*`/`smoke_*`/`test_*`/`measure_*`) demoted to
+  suggestion-only. `__init__.py` exempted from classification;
+  `errors.py`-type modules fold into `utility`. Role code ships this
+  build; Domain code (retiring `MODULE_DOMAIN_MAP`) deferred to the
+  L-156 cluster below.
+- **File-disposition sweep (verified this session, repo-wide reference
+  checks, not docstring framing alone).** Archive to local, remove from
+  repo: `provenance_scanner_color_patch.py`, `smoke_phase4.py`,
+  `smoke_dipole_cone.py`, `smoke_rotation_axis.py`, `titan_io_probe.py`,
+  `color_map.py`, `barycenter_cache_check.py` -- all zero live
+  references. `test_constants_provenance.py` explicitly NOT archived:
+  its L-160 absorption target doesn't exist in `provenance_scanner.py`
+  yet (checked at HEAD -- no `PINNING_MAP`, credit line still April
+  2026), so the standalone file is the only working copy of that pinning
+  logic until L-155/156/160 ship.
+- **Gallery repo.** `module_atlas.py` copied to gallery repo root, gains
+  an explicit `SCAN_PATHS` list (`tools/`, `gallery/assembler/` +
+  `harness/`/`tests/` subdirs -- no root-level `.py` files exist there)
+  rather than recursion. Gallery gets its own 4-value domain vocabulary
+  (`gallery_pipeline`, `cache_builder`, `assembler`, `dev_tools`),
+  mirroring the existing gallery-pipeline/cache-builder/assembler skill
+  boundaries -- NOT because it feeds L-155 (checked; L-155 is a named-
+  value pinning table, doesn't consume module classification), but
+  standalone value while every docstring is already being touched.
+- **`dep_trace.py`.** Stays separate (different job), already correctly
+  single-sourced when the `module_atlas` import succeeds. One real gap
+  found: its import-failure fallback has its own hardcoded `_shells`
+  heuristic and silent `'other'` default -- duplicated logic, folded
+  into this build's scope, not deferred.
+**Note:** Reviewed by Fable 5 (its own cluster, since it authored
+DESIGN_HANDOFF_provenance_scoring_and_pinning.md) -- build-ready, land
+before L-154-162 as proposed. Two amendments independently verified
+against live HEAD, not just accepted on read:
+(1) the deferred MODULE_DOMAIN_MAP retirement had no landing phase in
+the L-156 cluster's actual Phase 1-4 text -- confirmed true; assign it
+to that cluster's Phase 3, gated on "L-163 sweep complete" (Phase 3
+already touches MODULE_DOMAIN_MAP for D10's narrow cleanup, so this
+folds into one edit instead of two).
+(2) sequence the full L-163 sweep before L-157's Gemini worksheet is
+drafted -- confirmed as the same precedent D8's item 3 already states
+for vocabulary extensions (new claim-shaped content, e.g.
+shell_configs.py's 91 strings, needs to land in the worksheet, not as
+fresh Tier-1 noise once the sweep widens what's scannable).
+Open: `undetermined` (this item) and the L-156 cluster's amended
+`UNCLASSIFIED` are the same design, converged independently on two
+axes -- pick one shared term across both reports. Fable's lean:
+`undetermined`, since this item ships first. Needs Tony's call, not
+decided here.
+**Gap:** exact `Role:`/`Domain:` tag placement relative to the existing
+credit line not yet locked; full 121+22-module sweep not yet executed
+(needs Tony's confirmation on the 7 archive candidates first); classifier
+code (parser, `classify_role()` rewrite, regenerated marker-zone,
+UNCATEGORIZED report section, `SCAN_PATHS` multi-path merge, 3
+call-site updates) not yet built; `ledger-and-session-records` skill's
+Codebase Tooling section needs updating once it ships; coordinate
+timing with L-156 (shares `ROLE_MAP`/`MODULE_DOMAIN_MAP` as edit sites
+for D10's `test_constants_provenance.py` cleanup, and L-156 cites the
+existing role/domain coverage-gap pattern as its own precedent -- this
+item should land first).
+**Ref:** `ROLE_DOMAIN_CLASSIFICATION_HANDOFF.md` (full design);
+`module_atlas.py`, `provenance_scanner.py`, `dep_trace.py`,
+`ledger_index.py` (pattern precedent), `add_docstrings.py` (sweep
+execution tool); `PROVENANCE_AUDIT.md` (July 17, coverage-gap evidence);
+`MASTER_PLAN_UPDATE_provenance_and_prep.md` Section 6 (companion entry);
+L-078 (role-driven coverage-widening track); L-154/155/156/157/158/159/
+160/161/162 (provenance scoring refactor cluster -- see Gap above for
+the coordination points).
 
 ### D.Feature -- Bucket A (near-term)
 
