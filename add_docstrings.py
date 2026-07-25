@@ -755,7 +755,7 @@ MODULE_TAGS = {
     'diagnose_bcodmo.py':                       ('devtool', 'dev_tools'),
     'earth_system_common.py':                   ('utility', 'earth_science'),   # NEW/NEW
     'earth_system_controller.py':               ('gui', 'earth_science'),   # MAP/NEW
-    'earth_system_generator.py':                ('computation', 'earth_science'),
+    'earth_system_generator.py':                ('devtool', 'earth_science'),   # CHANGED (was computation)
     'earth_system_visualization_gui.py':        ('gui', 'earth_science'),   # MAP/NEW
     'earth_visualization_shells.py':            ('rendering/shells', 'earth_science'),   # HEUR/MAP
     'energy_imbalance.py':                      ('computation', 'earth_science'),
@@ -768,7 +768,7 @@ MODULE_TAGS = {
     'export_orbit_cache.py':                    ('devtool', 'dev_tools'),   # NEW/MAP
     'fetch_climate_data.py':                    ('computation', 'earth_science'),
     'fetch_paleoclimate_data.py':               ('computation', 'earth_science'),
-    'food_insecurity_generator.py':             ('computation', 'earth_science'),   # NEW/MAP
+    'food_insecurity_generator.py':             ('devtool', 'earth_science'),   # NEW/MAP, CHANGED (was computation)
     'formatting_utils.py':                      ('utility', 'utilities'),
     'hr_diagram_apparent_magnitude.py':         ('rendering', 'stars'),
     'hr_diagram_distance.py':                   ('rendering', 'stars'),
