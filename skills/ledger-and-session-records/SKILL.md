@@ -6,8 +6,7 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Skill version: 1.3 | Cut from palomas_orrery @ [PENDING -- paste the new
-HEAD SHA here once this file is committed and pushed] | July 24, 2026
+Skill version: 1.3 | Cut from palomas_orrery @ 728361c3c451e19ce0cc025b2ed29f6ee30054e9 | July 25, 2026
 Sources: LEDGER_CONSOLIDATED.md header, ledger_index.py at HEAD, handoff
 v28 (consolidation) and v29 (cleanup), food insecurity handoffs. v1.3
 adds the Tony-action (do)/(decide) tag convention and its rollup rule,
