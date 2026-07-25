@@ -862,6 +862,26 @@ config Gemini cross-check) and L-161 (display-string Gemini sweep) follow,
 sequentially through the same Mode 7 relay channel rather than as parallel
 threads. L-154 unblocks once these close.
 
+**L-163 — Module role/domain classification redesign (ROLE_MAP + MODULE_DOMAIN_MAP).**
+○ Phase 1 of 4 CLOSED (Opus 5, July 24-25 2026) -- archival + repo
+hygiene. Design (Sonnet 5) reviewed by Fable 5, both confirmed
+build-ready; full detail in ROLE_DOMAIN_CLASSIFICATION_HANDOFF.md and
+AS_BUILT_L163_phase1.md. Retires ROLE_MAP and MODULE_DOMAIN_MAP as
+hand-maintained dicts -- both become mechanically regenerated from an
+explicit Role:/Domain: line in each module's own docstring
+(ledger_index.py's INDEX-zone pattern, extended). Phase 1 verified: 7
+one-time/superseded modules archived (root count 121 -> 114);
+ROLE_MAP's 7 ghost entries deleted (94 -> 87); Phase 2's sweep scope
+recomputed at 12 remaining uncategorized (down from 19). dep_trace.py's
+fallback-logic fix carried to Phase 3, not done yet. Phases 2-4
+(content sweep, classifier code, skill documentation) not started --
+Phase 2 opens on locking the Role:/Domain: tag-placement format against
+the credit-line convention. Shares real touchpoints with the L-156
+cluster above: both edit ROLE_MAP/MODULE_DOMAIN_MAP for
+test_constants_provenance.py's pending retirement, and L-156 cites this
+design's coverage-gap pattern as its own precedent -- landing first
+keeps that precedent correct.
+
 ---
 
 ## §7 — Open Decisions
