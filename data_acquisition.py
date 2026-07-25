@@ -11,7 +11,7 @@ Key points:
 - If you still get random connection closures for big queries, try chunking or raising timeout.
 
 Role: computation
-Domain: orrery
+Domain: stars
 """
 
 import os

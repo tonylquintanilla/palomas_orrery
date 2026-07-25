@@ -480,31 +480,32 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\U
   Scan paths: tools, gallery/assembler, gallery/assembler/harness, gallery/assembler/tests
 ==============================================================
 
-  ADDED    tools/debug_encke_tp.py                          devtool / dev_tools
-  ADDED    tools/gallery_cache_builder.py                   cache / cache_builder
-  ADDED    tools/gallery_cleanup.py                         devtool / cache_builder
-  ADDED    tools/gallery_editor.py                          gui / gallery_pipeline
-  ADDED    tools/gallery_json_fixer.py                      pipeline / gallery_pipeline
-  ADDED    tools/gallery_studio.py                          gui / gallery_pipeline
-  ADDED    tools/inspect_staging.py                         devtool / dev_tools
-  ADDED    tools/json_converter.py                          pipeline / gallery_pipeline
-  ADDED    tools/test_gallery_cache_builder_offline.py      devtool / dev_tools
-  ADDED    gallery/assembler/assemble.py                    pipeline / assembler
-  ADDED    gallery/assembler/cache_reader.py                cache / assembler
-  ADDED    gallery/assembler/catalog.py                     data / assembler
-  ADDED    gallery/assembler/errors.py                      utility / assembler
-  ADDED    gallery/assembler/models.py                      data / assembler
-  ADDED    gallery/assembler/presentation.py                rendering / assembler
-  ADDED    gallery/assembler/render_events.py               rendering / assembler
-  ADDED    gallery/assembler/render_objects.py              rendering / assembler
-  ADDED    gallery/assembler/render_orbits.py               rendering / assembler
-  ADDED    gallery/assembler/render_spacecraft.py           rendering / assembler
-  ADDED    gallery/assembler/resolver.py                    computation / assembler
-  ADDED    gallery/assembler/harness/fingerprint.py         devtool / dev_tools
-  ADDED    gallery/assembler/tests/test_artifact1_earth.py  devtool / dev_tools
+  SAME     tools/debug_encke_tp.py                         
+  SAME     tools/gallery_cache_builder.py                  
+  SAME     tools/gallery_cleanup.py                        
+  UPDATED  tools/gallery_editor.py                          devtool / gallery_pipeline
+  UPDATED  tools/gallery_json_fixer.py                      devtool / gallery_pipeline
+  UPDATED  tools/gallery_studio.py                          devtool / gallery_pipeline
+  SAME     tools/inspect_staging.py                        
+  UPDATED  tools/json_converter.py                          devtool / gallery_pipeline
+  SAME     tools/test_gallery_cache_builder_offline.py     
+  SAME     gallery/assembler/assemble.py                   
+  SAME     gallery/assembler/cache_reader.py               
+  SAME     gallery/assembler/catalog.py                    
+  SAME     gallery/assembler/errors.py                     
+  SAME     gallery/assembler/models.py                     
+  SAME     gallery/assembler/presentation.py               
+  SAME     gallery/assembler/render_events.py              
+  SAME     gallery/assembler/render_objects.py             
+  SAME     gallery/assembler/render_orbits.py              
+  SAME     gallery/assembler/render_spacecraft.py          
+  SAME     gallery/assembler/resolver.py                   
+  SAME     gallery/assembler/harness/fingerprint.py        
+  SAME     gallery/assembler/tests/test_artifact1_earth.py 
 
 --------------------------------------------------------------
-  added        22
+  unchanged    18
+  updated      4
   total        22
 
   CHANGELOG (2) -- more than one credit line. Per the
@@ -525,31 +526,32 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\U
   Scan paths: tools, gallery/assembler, gallery/assembler/harness, gallery/assembler/tests
 ==============================================================
 
-  ADDED    tools/debug_encke_tp.py                          devtool / dev_tools
-  ADDED    tools/gallery_cache_builder.py                   cache / cache_builder
-  ADDED    tools/gallery_cleanup.py                         devtool / cache_builder
-  ADDED    tools/gallery_editor.py                          gui / gallery_pipeline
-  ADDED    tools/gallery_json_fixer.py                      pipeline / gallery_pipeline
-  ADDED    tools/gallery_studio.py                          gui / gallery_pipeline
-  ADDED    tools/inspect_staging.py                         devtool / dev_tools
-  ADDED    tools/json_converter.py                          pipeline / gallery_pipeline
-  ADDED    tools/test_gallery_cache_builder_offline.py      devtool / dev_tools
-  ADDED    gallery/assembler/assemble.py                    pipeline / assembler
-  ADDED    gallery/assembler/cache_reader.py                cache / assembler
-  ADDED    gallery/assembler/catalog.py                     data / assembler
-  ADDED    gallery/assembler/errors.py                      utility / assembler
-  ADDED    gallery/assembler/models.py                      data / assembler
-  ADDED    gallery/assembler/presentation.py                rendering / assembler
-  ADDED    gallery/assembler/render_events.py               rendering / assembler
-  ADDED    gallery/assembler/render_objects.py              rendering / assembler
-  ADDED    gallery/assembler/render_orbits.py               rendering / assembler
-  ADDED    gallery/assembler/render_spacecraft.py           rendering / assembler
-  ADDED    gallery/assembler/resolver.py                    computation / assembler
-  ADDED    gallery/assembler/harness/fingerprint.py         devtool / dev_tools
-  ADDED    gallery/assembler/tests/test_artifact1_earth.py  devtool / dev_tools
+  SAME     tools/debug_encke_tp.py                         
+  SAME     tools/gallery_cache_builder.py                  
+  SAME     tools/gallery_cleanup.py                        
+  UPDATED  tools/gallery_editor.py                          devtool / gallery_pipeline
+  UPDATED  tools/gallery_json_fixer.py                      devtool / gallery_pipeline
+  UPDATED  tools/gallery_studio.py                          devtool / gallery_pipeline
+  SAME     tools/inspect_staging.py                        
+  UPDATED  tools/json_converter.py                          devtool / gallery_pipeline
+  SAME     tools/test_gallery_cache_builder_offline.py     
+  SAME     gallery/assembler/assemble.py                   
+  SAME     gallery/assembler/cache_reader.py               
+  SAME     gallery/assembler/catalog.py                    
+  SAME     gallery/assembler/errors.py                     
+  SAME     gallery/assembler/models.py                     
+  SAME     gallery/assembler/presentation.py               
+  SAME     gallery/assembler/render_events.py              
+  SAME     gallery/assembler/render_objects.py             
+  SAME     gallery/assembler/render_orbits.py              
+  SAME     gallery/assembler/render_spacecraft.py          
+  SAME     gallery/assembler/resolver.py                   
+  SAME     gallery/assembler/harness/fingerprint.py        
+  SAME     gallery/assembler/tests/test_artifact1_earth.py 
 
 --------------------------------------------------------------
-  added        22
+  unchanged    18
+  updated      4
   total        22
 
   CHANGELOG (2) -- more than one credit line. Per the
@@ -572,124 +574,125 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\U
   Scan paths: .
 ==============================================================
 
-  UPDATED  add_docstrings.py                                devtool / dev_tools
-  ADDED    apsidal_markers.py                               computation / orrery
-  ADDED    asteroid_belt_visualization_shells.py            rendering/shells / orrery
-  ADDED    catalog_selection.py                             computation / stars
-  ADDED    celestial_coordinates.py                         computation / orrery
-  ADDED    celestial_objects.py                             data / orrery
-  ADDED    climate_cache_manager.py                         cache / earth_science
-  ADDED    close_approach_data.py                           data / orrery
-  ADDED    comet_visualization_shells.py                    rendering/shells / orrery
-  ADDED    constants_new.py                                 data / orrery
-  ADDED    convert_hot_ph_to_json.py                        devtool / dev_tools
-  ADDED    coordinate_system_guide.py                       computation / orrery
-  ADDED    create_cache_backups.py                          devtool / dev_tools
-  ADDED    create_ephemeris_database.py                     devtool / dev_tools
-  ADDED    data_acquisition.py                              computation / orrery
-  ADDED    data_acquisition_distance.py                     computation / orrery
-  ADDED    data_inventory.py                                devtool / dev_tools
-  ADDED    data_processing.py                               computation / stars
-  ADDED    dep_trace.py                                     devtool / dev_tools
-  ADDED    diagnose_bcodmo.py                               devtool / dev_tools
-  ADDED    earth_system_common.py                           utility / earth_science
-  ADDED    earth_system_controller.py                       gui / earth_science
-  ADDED    earth_system_generator.py                        devtool / earth_science
-  ADDED    earth_system_visualization_gui.py                gui / earth_science
-  ADDED    earth_visualization_shells.py                    rendering/shells / earth_science
-  ADDED    energy_imbalance.py                              computation / earth_science
-  ADDED    eris_visualization_shells.py                     rendering/shells / orrery
-  ADDED    examine_hot_csv.py                               devtool / dev_tools
-  ADDED    exoplanet_coordinates.py                         data / stars
-  ADDED    exoplanet_orbits.py                              rendering / stars
-  ADDED    exoplanet_stellar_properties.py                  data / stars
-  ADDED    exoplanet_systems.py                             data / stars
-  ADDED    export_orbit_cache.py                            devtool / dev_tools
-  ADDED    fetch_climate_data.py                            computation / earth_science
-  ADDED    fetch_paleoclimate_data.py                       computation / earth_science
-  ADDED    food_insecurity_generator.py                     devtool / earth_science
-  ADDED    formatting_utils.py                              utility / utilities
-  ADDED    hr_diagram_apparent_magnitude.py                 rendering / stars
-  ADDED    hr_diagram_distance.py                           rendering / stars
-  ADDED    idealized_orbits.py                              computation / orrery
-  ADDED    incremental_cache_manager.py                     cache / stars
-  ADDED    info_dictionary.py                               data / orrery
-  ADDED    jupiter_visualization_shells.py                  rendering/shells / orrery
-  ADDED    ledger_index.py                                  devtool / dev_tools
-  ADDED    mars_visualization_shells.py                     rendering/shells / orrery
-  ADDED    measure_animation_html.py                        devtool / dev_tools
-  ADDED    measure_perframe_elements.py                     devtool / dev_tools
-  ADDED    mercury_visualization_shells.py                  rendering/shells / orrery
-  ADDED    messier_catalog.py                               data / stars
-  ADDED    messier_object_data_handler.py                   pipeline / stars
-  ADDED    module_atlas.py                                  devtool / dev_tools
-  ADDED    moon_visualization_shells.py                     rendering/shells / orrery
-  ADDED    neptune_visualization_shells.py                  rendering/shells / orrery
-  ADDED    object_type_analyzer.py                          computation / orrery
-  ADDED    orbit_data_manager.py                            cache / orrery
-  ADDED    orbital_elements.py                              computation / orrery
-  ADDED    orbital_param_viz.py                             gui / orrery
-  ADDED    orrery_rendering.py                              rendering / orrery
-  ADDED    osculating_cache_manager.py                      cache / orrery
-  ADDED    paleoclimate_dual_scale.py                       rendering / earth_science
-  ADDED    paleoclimate_human_origins_full.py               rendering / earth_science
-  ADDED    paleoclimate_visualization.py                    rendering / earth_science
-  ADDED    paleoclimate_visualization_full.py               rendering / earth_science
-  ADDED    paleoclimate_wet_bulb_full.py                    rendering / earth_science
-  ADDED    palomas_orrery.py                                gui / orrery
-  ADDED    palomas_orrery_dashboard.py                      gui / orrery
-  ADDED    palomas_orrery_helpers.py                        utility / orrery
-  ADDED    planet9_visualization_shells.py                  rendering/shells / orrery
-  ADDED    planet_visualization.py                          rendering / orrery
-  ADDED    planet_visualization_utilities.py                rendering / orrery
-  ADDED    planetarium_apparent_magnitude.py                rendering / stars
-  ADDED    planetarium_distance.py                          rendering / stars
-  ADDED    plot_data_exchange.py                            pipeline / utilities
-  ADDED    plot_data_report_widget.py                       rendering / utilities
-  ADDED    pluto_visualization_shells.py                    rendering/shells / orrery
-  ADDED    provenance_scanner.py                            devtool / dev_tools
-  ADDED    report_manager.py                                utility / utilities
-  ADDED    saturn_visualization_shells.py                   rendering/shells / orrery
-  ADDED    save_utils.py                                    pipeline / utilities
-  ADDED    scenarios_coral_bleaching.py                     scenario / earth_science
-  ADDED    scenarios_food_insecurity.py                     scenario / earth_science
-  ADDED    scenarios_heatwaves.py                           scenario / earth_science
-  ADDED    scenarios_western_heatwave_march_2026.py         scenario / earth_science
-  ADDED    sgr_a_grand_tour.py                              rendering / orrery
-  ADDED    sgr_a_star_data.py                               data / orrery
-  ADDED    sgr_a_visualization_animation.py                 rendering / orrery
-  ADDED    sgr_a_visualization_core.py                      rendering / orrery
-  ADDED    sgr_a_visualization_core_arcs.py                 pipeline / orrery
-  ADDED    sgr_a_visualization_precession.py                rendering / orrery
-  ADDED    shared_utilities.py                              utility / utilities
-  ADDED    shell_configs.py                                 data / orrery
-  ADDED    shutdown_handler.py                              utility / utilities
-  ADDED    simbad_manager.py                                computation / stars
-  ADDED    skills_index.py                                  devtool / dev_tools
-  ADDED    social_media_export.py                           pipeline / gallery
-  ADDED    solar_visualization_shells.py                    rendering/shells / orrery
-  ADDED    spacecraft_encounters.py                         data / orrery
-  ADDED    star_notes.py                                    data / stars
-  ADDED    star_properties.py                               data / stars
-  ADDED    star_sphere_builder.py                           rendering / stars
-  ADDED    star_visualization_gui.py                        gui / stars
-  ADDED    stellar_data_patches.py                          data / stars
-  ADDED    stellar_parameters.py                            data / stars
-  ADDED    test_constants_provenance.py                     devtool / dev_tools
-  ADDED    test_orbit_cache.py                              devtool / dev_tools
-  ADDED    test_reset_completeness.py                       devtool / dev_tools
-  ADDED    uranus_visualization_shells.py                   rendering/shells / orrery
-  ADDED    venus_visualization_shells.py                    rendering/shells / orrery
-  ADDED    verify_orbit_cache.py                            devtool / dev_tools
-  ADDED    visualization_2d.py                              rendering / stars
-  ADDED    visualization_3d.py                              rendering / stars
-  ADDED    visualization_core.py                            rendering / stars
-  ADDED    visualization_utils.py                           rendering / stars
-  ADDED    vot_cache_manager.py                             cache / stars
+  ADDED    add_docstrings.py                                devtool / dev_tools
+  SAME     apsidal_markers.py                              
+  SAME     asteroid_belt_visualization_shells.py           
+  SAME     catalog_selection.py                            
+  SAME     celestial_coordinates.py                        
+  SAME     celestial_objects.py                            
+  SAME     climate_cache_manager.py                        
+  SAME     close_approach_data.py                          
+  SAME     comet_visualization_shells.py                   
+  SAME     constants_new.py                                
+  SAME     convert_hot_ph_to_json.py                       
+  SAME     coordinate_system_guide.py                      
+  SAME     create_cache_backups.py                         
+  SAME     create_ephemeris_database.py                    
+  UPDATED  data_acquisition.py                              computation / stars
+  UPDATED  data_acquisition_distance.py                     computation / stars
+  SAME     data_inventory.py                               
+  SAME     data_processing.py                              
+  SAME     dep_trace.py                                    
+  SAME     diagnose_bcodmo.py                              
+  SAME     earth_system_common.py                          
+  SAME     earth_system_controller.py                      
+  SAME     earth_system_generator.py                       
+  SAME     earth_system_visualization_gui.py               
+  SAME     earth_visualization_shells.py                   
+  SAME     energy_imbalance.py                             
+  SAME     eris_visualization_shells.py                    
+  SAME     examine_hot_csv.py                              
+  SAME     exoplanet_coordinates.py                        
+  SAME     exoplanet_orbits.py                             
+  SAME     exoplanet_stellar_properties.py                 
+  SAME     exoplanet_systems.py                            
+  SAME     export_orbit_cache.py                           
+  SAME     fetch_climate_data.py                           
+  SAME     fetch_paleoclimate_data.py                      
+  SAME     food_insecurity_generator.py                    
+  SAME     formatting_utils.py                             
+  SAME     hr_diagram_apparent_magnitude.py                
+  SAME     hr_diagram_distance.py                          
+  SAME     idealized_orbits.py                             
+  SAME     incremental_cache_manager.py                    
+  SAME     info_dictionary.py                              
+  SAME     jupiter_visualization_shells.py                 
+  SAME     ledger_index.py                                 
+  SAME     mars_visualization_shells.py                    
+  SAME     measure_animation_html.py                       
+  SAME     measure_perframe_elements.py                    
+  SAME     mercury_visualization_shells.py                 
+  SAME     messier_catalog.py                              
+  SAME     messier_object_data_handler.py                  
+  SAME     module_atlas.py                                 
+  SAME     moon_visualization_shells.py                    
+  SAME     neptune_visualization_shells.py                 
+  SAME     object_type_analyzer.py                         
+  SAME     orbit_data_manager.py                           
+  SAME     orbital_elements.py                             
+  SAME     orbital_param_viz.py                            
+  SAME     orrery_rendering.py                             
+  SAME     osculating_cache_manager.py                     
+  SAME     paleoclimate_dual_scale.py                      
+  SAME     paleoclimate_human_origins_full.py              
+  SAME     paleoclimate_visualization.py                   
+  SAME     paleoclimate_visualization_full.py              
+  SAME     paleoclimate_wet_bulb_full.py                   
+  SAME     palomas_orrery.py                               
+  SAME     palomas_orrery_dashboard.py                     
+  SAME     palomas_orrery_helpers.py                       
+  SAME     planet9_visualization_shells.py                 
+  SAME     planet_visualization.py                         
+  SAME     planet_visualization_utilities.py               
+  SAME     planetarium_apparent_magnitude.py               
+  SAME     planetarium_distance.py                         
+  SAME     plot_data_exchange.py                           
+  SAME     plot_data_report_widget.py                      
+  SAME     pluto_visualization_shells.py                   
+  SAME     provenance_scanner.py                           
+  SAME     report_manager.py                               
+  SAME     saturn_visualization_shells.py                  
+  SAME     save_utils.py                                   
+  SAME     scenarios_coral_bleaching.py                    
+  SAME     scenarios_food_insecurity.py                    
+  SAME     scenarios_heatwaves.py                          
+  SAME     scenarios_western_heatwave_march_2026.py        
+  SAME     sgr_a_grand_tour.py                             
+  SAME     sgr_a_star_data.py                              
+  SAME     sgr_a_visualization_animation.py                
+  SAME     sgr_a_visualization_core.py                     
+  SAME     sgr_a_visualization_core_arcs.py                
+  SAME     sgr_a_visualization_precession.py               
+  SAME     shared_utilities.py                             
+  SAME     shell_configs.py                                
+  SAME     shutdown_handler.py                             
+  SAME     simbad_manager.py                               
+  SAME     skills_index.py                                 
+  SAME     social_media_export.py                          
+  SAME     solar_visualization_shells.py                   
+  SAME     spacecraft_encounters.py                        
+  SAME     star_notes.py                                   
+  SAME     star_properties.py                              
+  SAME     star_sphere_builder.py                          
+  SAME     star_visualization_gui.py                       
+  SAME     stellar_data_patches.py                         
+  SAME     stellar_parameters.py                           
+  SAME     test_constants_provenance.py                    
+  SAME     test_orbit_cache.py                             
+  SAME     test_reset_completeness.py                      
+  SAME     uranus_visualization_shells.py                  
+  SAME     venus_visualization_shells.py                   
+  SAME     verify_orbit_cache.py                           
+  SAME     visualization_2d.py                             
+  SAME     visualization_3d.py                             
+  SAME     visualization_core.py                           
+  SAME     visualization_utils.py                          
+  SAME     vot_cache_manager.py                            
 
 --------------------------------------------------------------
-  added        113
-  updated      1
+  added        1
+  unchanged    111
+  updated      2
   total        114
 
   CHANGELOG (6) -- more than one credit line. Per the
@@ -714,124 +717,125 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\U
   Scan paths: .
 ==============================================================
 
-  UPDATED  add_docstrings.py                                devtool / dev_tools
-  ADDED    apsidal_markers.py                               computation / orrery
-  ADDED    asteroid_belt_visualization_shells.py            rendering/shells / orrery
-  ADDED    catalog_selection.py                             computation / stars
-  ADDED    celestial_coordinates.py                         computation / orrery
-  ADDED    celestial_objects.py                             data / orrery
-  ADDED    climate_cache_manager.py                         cache / earth_science
-  ADDED    close_approach_data.py                           data / orrery
-  ADDED    comet_visualization_shells.py                    rendering/shells / orrery
-  ADDED    constants_new.py                                 data / orrery
-  ADDED    convert_hot_ph_to_json.py                        devtool / dev_tools
-  ADDED    coordinate_system_guide.py                       computation / orrery
-  ADDED    create_cache_backups.py                          devtool / dev_tools
-  ADDED    create_ephemeris_database.py                     devtool / dev_tools
-  ADDED    data_acquisition.py                              computation / orrery
-  ADDED    data_acquisition_distance.py                     computation / orrery
-  ADDED    data_inventory.py                                devtool / dev_tools
-  ADDED    data_processing.py                               computation / stars
-  ADDED    dep_trace.py                                     devtool / dev_tools
-  ADDED    diagnose_bcodmo.py                               devtool / dev_tools
-  ADDED    earth_system_common.py                           utility / earth_science
-  ADDED    earth_system_controller.py                       gui / earth_science
-  ADDED    earth_system_generator.py                        devtool / earth_science
-  ADDED    earth_system_visualization_gui.py                gui / earth_science
-  ADDED    earth_visualization_shells.py                    rendering/shells / earth_science
-  ADDED    energy_imbalance.py                              computation / earth_science
-  ADDED    eris_visualization_shells.py                     rendering/shells / orrery
-  ADDED    examine_hot_csv.py                               devtool / dev_tools
-  ADDED    exoplanet_coordinates.py                         data / stars
-  ADDED    exoplanet_orbits.py                              rendering / stars
-  ADDED    exoplanet_stellar_properties.py                  data / stars
-  ADDED    exoplanet_systems.py                             data / stars
-  ADDED    export_orbit_cache.py                            devtool / dev_tools
-  ADDED    fetch_climate_data.py                            computation / earth_science
-  ADDED    fetch_paleoclimate_data.py                       computation / earth_science
-  ADDED    food_insecurity_generator.py                     devtool / earth_science
-  ADDED    formatting_utils.py                              utility / utilities
-  ADDED    hr_diagram_apparent_magnitude.py                 rendering / stars
-  ADDED    hr_diagram_distance.py                           rendering / stars
-  ADDED    idealized_orbits.py                              computation / orrery
-  ADDED    incremental_cache_manager.py                     cache / stars
-  ADDED    info_dictionary.py                               data / orrery
-  ADDED    jupiter_visualization_shells.py                  rendering/shells / orrery
-  ADDED    ledger_index.py                                  devtool / dev_tools
-  ADDED    mars_visualization_shells.py                     rendering/shells / orrery
-  ADDED    measure_animation_html.py                        devtool / dev_tools
-  ADDED    measure_perframe_elements.py                     devtool / dev_tools
-  ADDED    mercury_visualization_shells.py                  rendering/shells / orrery
-  ADDED    messier_catalog.py                               data / stars
-  ADDED    messier_object_data_handler.py                   pipeline / stars
-  ADDED    module_atlas.py                                  devtool / dev_tools
-  ADDED    moon_visualization_shells.py                     rendering/shells / orrery
-  ADDED    neptune_visualization_shells.py                  rendering/shells / orrery
-  ADDED    object_type_analyzer.py                          computation / orrery
-  ADDED    orbit_data_manager.py                            cache / orrery
-  ADDED    orbital_elements.py                              computation / orrery
-  ADDED    orbital_param_viz.py                             gui / orrery
-  ADDED    orrery_rendering.py                              rendering / orrery
-  ADDED    osculating_cache_manager.py                      cache / orrery
-  ADDED    paleoclimate_dual_scale.py                       rendering / earth_science
-  ADDED    paleoclimate_human_origins_full.py               rendering / earth_science
-  ADDED    paleoclimate_visualization.py                    rendering / earth_science
-  ADDED    paleoclimate_visualization_full.py               rendering / earth_science
-  ADDED    paleoclimate_wet_bulb_full.py                    rendering / earth_science
-  ADDED    palomas_orrery.py                                gui / orrery
-  ADDED    palomas_orrery_dashboard.py                      gui / orrery
-  ADDED    palomas_orrery_helpers.py                        utility / orrery
-  ADDED    planet9_visualization_shells.py                  rendering/shells / orrery
-  ADDED    planet_visualization.py                          rendering / orrery
-  ADDED    planet_visualization_utilities.py                rendering / orrery
-  ADDED    planetarium_apparent_magnitude.py                rendering / stars
-  ADDED    planetarium_distance.py                          rendering / stars
-  ADDED    plot_data_exchange.py                            pipeline / utilities
-  ADDED    plot_data_report_widget.py                       rendering / utilities
-  ADDED    pluto_visualization_shells.py                    rendering/shells / orrery
-  ADDED    provenance_scanner.py                            devtool / dev_tools
-  ADDED    report_manager.py                                utility / utilities
-  ADDED    saturn_visualization_shells.py                   rendering/shells / orrery
-  ADDED    save_utils.py                                    pipeline / utilities
-  ADDED    scenarios_coral_bleaching.py                     scenario / earth_science
-  ADDED    scenarios_food_insecurity.py                     scenario / earth_science
-  ADDED    scenarios_heatwaves.py                           scenario / earth_science
-  ADDED    scenarios_western_heatwave_march_2026.py         scenario / earth_science
-  ADDED    sgr_a_grand_tour.py                              rendering / orrery
-  ADDED    sgr_a_star_data.py                               data / orrery
-  ADDED    sgr_a_visualization_animation.py                 rendering / orrery
-  ADDED    sgr_a_visualization_core.py                      rendering / orrery
-  ADDED    sgr_a_visualization_core_arcs.py                 pipeline / orrery
-  ADDED    sgr_a_visualization_precession.py                rendering / orrery
-  ADDED    shared_utilities.py                              utility / utilities
-  ADDED    shell_configs.py                                 data / orrery
-  ADDED    shutdown_handler.py                              utility / utilities
-  ADDED    simbad_manager.py                                computation / stars
-  ADDED    skills_index.py                                  devtool / dev_tools
-  ADDED    social_media_export.py                           pipeline / gallery
-  ADDED    solar_visualization_shells.py                    rendering/shells / orrery
-  ADDED    spacecraft_encounters.py                         data / orrery
-  ADDED    star_notes.py                                    data / stars
-  ADDED    star_properties.py                               data / stars
-  ADDED    star_sphere_builder.py                           rendering / stars
-  ADDED    star_visualization_gui.py                        gui / stars
-  ADDED    stellar_data_patches.py                          data / stars
-  ADDED    stellar_parameters.py                            data / stars
-  ADDED    test_constants_provenance.py                     devtool / dev_tools
-  ADDED    test_orbit_cache.py                              devtool / dev_tools
-  ADDED    test_reset_completeness.py                       devtool / dev_tools
-  ADDED    uranus_visualization_shells.py                   rendering/shells / orrery
-  ADDED    venus_visualization_shells.py                    rendering/shells / orrery
-  ADDED    verify_orbit_cache.py                            devtool / dev_tools
-  ADDED    visualization_2d.py                              rendering / stars
-  ADDED    visualization_3d.py                              rendering / stars
-  ADDED    visualization_core.py                            rendering / stars
-  ADDED    visualization_utils.py                           rendering / stars
-  ADDED    vot_cache_manager.py                             cache / stars
+  ADDED    add_docstrings.py                                devtool / dev_tools
+  SAME     apsidal_markers.py                              
+  SAME     asteroid_belt_visualization_shells.py           
+  SAME     catalog_selection.py                            
+  SAME     celestial_coordinates.py                        
+  SAME     celestial_objects.py                            
+  SAME     climate_cache_manager.py                        
+  SAME     close_approach_data.py                          
+  SAME     comet_visualization_shells.py                   
+  SAME     constants_new.py                                
+  SAME     convert_hot_ph_to_json.py                       
+  SAME     coordinate_system_guide.py                      
+  SAME     create_cache_backups.py                         
+  SAME     create_ephemeris_database.py                    
+  UPDATED  data_acquisition.py                              computation / stars
+  UPDATED  data_acquisition_distance.py                     computation / stars
+  SAME     data_inventory.py                               
+  SAME     data_processing.py                              
+  SAME     dep_trace.py                                    
+  SAME     diagnose_bcodmo.py                              
+  SAME     earth_system_common.py                          
+  SAME     earth_system_controller.py                      
+  SAME     earth_system_generator.py                       
+  SAME     earth_system_visualization_gui.py               
+  SAME     earth_visualization_shells.py                   
+  SAME     energy_imbalance.py                             
+  SAME     eris_visualization_shells.py                    
+  SAME     examine_hot_csv.py                              
+  SAME     exoplanet_coordinates.py                        
+  SAME     exoplanet_orbits.py                             
+  SAME     exoplanet_stellar_properties.py                 
+  SAME     exoplanet_systems.py                            
+  SAME     export_orbit_cache.py                           
+  SAME     fetch_climate_data.py                           
+  SAME     fetch_paleoclimate_data.py                      
+  SAME     food_insecurity_generator.py                    
+  SAME     formatting_utils.py                             
+  SAME     hr_diagram_apparent_magnitude.py                
+  SAME     hr_diagram_distance.py                          
+  SAME     idealized_orbits.py                             
+  SAME     incremental_cache_manager.py                    
+  SAME     info_dictionary.py                              
+  SAME     jupiter_visualization_shells.py                 
+  SAME     ledger_index.py                                 
+  SAME     mars_visualization_shells.py                    
+  SAME     measure_animation_html.py                       
+  SAME     measure_perframe_elements.py                    
+  SAME     mercury_visualization_shells.py                 
+  SAME     messier_catalog.py                              
+  SAME     messier_object_data_handler.py                  
+  SAME     module_atlas.py                                 
+  SAME     moon_visualization_shells.py                    
+  SAME     neptune_visualization_shells.py                 
+  SAME     object_type_analyzer.py                         
+  SAME     orbit_data_manager.py                           
+  SAME     orbital_elements.py                             
+  SAME     orbital_param_viz.py                            
+  SAME     orrery_rendering.py                             
+  SAME     osculating_cache_manager.py                     
+  SAME     paleoclimate_dual_scale.py                      
+  SAME     paleoclimate_human_origins_full.py              
+  SAME     paleoclimate_visualization.py                   
+  SAME     paleoclimate_visualization_full.py              
+  SAME     paleoclimate_wet_bulb_full.py                   
+  SAME     palomas_orrery.py                               
+  SAME     palomas_orrery_dashboard.py                     
+  SAME     palomas_orrery_helpers.py                       
+  SAME     planet9_visualization_shells.py                 
+  SAME     planet_visualization.py                         
+  SAME     planet_visualization_utilities.py               
+  SAME     planetarium_apparent_magnitude.py               
+  SAME     planetarium_distance.py                         
+  SAME     plot_data_exchange.py                           
+  SAME     plot_data_report_widget.py                      
+  SAME     pluto_visualization_shells.py                   
+  SAME     provenance_scanner.py                           
+  SAME     report_manager.py                               
+  SAME     saturn_visualization_shells.py                  
+  SAME     save_utils.py                                   
+  SAME     scenarios_coral_bleaching.py                    
+  SAME     scenarios_food_insecurity.py                    
+  SAME     scenarios_heatwaves.py                          
+  SAME     scenarios_western_heatwave_march_2026.py        
+  SAME     sgr_a_grand_tour.py                             
+  SAME     sgr_a_star_data.py                              
+  SAME     sgr_a_visualization_animation.py                
+  SAME     sgr_a_visualization_core.py                     
+  SAME     sgr_a_visualization_core_arcs.py                
+  SAME     sgr_a_visualization_precession.py               
+  SAME     shared_utilities.py                             
+  SAME     shell_configs.py                                
+  SAME     shutdown_handler.py                             
+  SAME     simbad_manager.py                               
+  SAME     skills_index.py                                 
+  SAME     social_media_export.py                          
+  SAME     solar_visualization_shells.py                   
+  SAME     spacecraft_encounters.py                        
+  SAME     star_notes.py                                   
+  SAME     star_properties.py                              
+  SAME     star_sphere_builder.py                          
+  SAME     star_visualization_gui.py                       
+  SAME     stellar_data_patches.py                         
+  SAME     stellar_parameters.py                           
+  SAME     test_constants_provenance.py                    
+  SAME     test_orbit_cache.py                             
+  SAME     test_reset_completeness.py                      
+  SAME     uranus_visualization_shells.py                  
+  SAME     venus_visualization_shells.py                   
+  SAME     verify_orbit_cache.py                           
+  SAME     visualization_2d.py                             
+  SAME     visualization_3d.py                             
+  SAME     visualization_core.py                           
+  SAME     visualization_utils.py                          
+  SAME     vot_cache_manager.py                            
 
 --------------------------------------------------------------
-  added        113
-  updated      1
+  added        1
+  unchanged    111
+  updated      2
   total        114
 
   CHANGELOG (6) -- more than one credit line. Per the

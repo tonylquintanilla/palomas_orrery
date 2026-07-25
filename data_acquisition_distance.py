@@ -1,7 +1,7 @@
 """data_acquisition_distance.py - Module for fetching stellar data based on distance.
 
 Role: computation
-Domain: orrery
+Domain: stars
 """
 
 import numpy as np

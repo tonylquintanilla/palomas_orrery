@@ -81,7 +81,9 @@ Reads each module name in the DOCSTRINGS dict below, inserts a full
 triple-quoted docstring before the first import or code line (or below
 any shebang/comment header). Uses Python binary mode to preserve line
 endings (CRLF/LF). For a module that already has a docstring, prefer
-hand-editing it directly, or the tag sweep above for just the Role:/
+hand-editing it directly, or use the tag sweep above to add just the
+two classification lines -- this legacy mode replaces the WHOLE
+docstring.
 
 Role: devtool
 Domain: dev_tools
@@ -824,8 +826,8 @@ MODULE_TAGS = {
     'coordinate_system_guide.py':               ('computation', 'orrery'),
     'create_cache_backups.py':                  ('devtool', 'dev_tools'),
     'create_ephemeris_database.py':             ('devtool', 'dev_tools'),
-    'data_acquisition.py':                      ('computation', 'orrery'),
-    'data_acquisition_distance.py':             ('computation', 'orrery'),
+    'data_acquisition.py':                      ('computation', 'stars'),   # CHANGED (was orrery)
+    'data_acquisition_distance.py':             ('computation', 'stars'),   # CHANGED (was orrery)
     'data_inventory.py':                        ('devtool', 'dev_tools'),   # NEW/MAP
     'data_processing.py':                       ('computation', 'stars'),   # MAP/NEW
     'dep_trace.py':                             ('devtool', 'dev_tools'),
@@ -943,11 +945,11 @@ MODULE_TAGS = {
     'tools/debug_encke_tp.py':                         ('devtool', 'dev_tools'),   # NEW/S11
     'tools/gallery_cache_builder.py':                  ('cache', 'cache_builder'),   # NEW/S11
     'tools/gallery_cleanup.py':                        ('devtool', 'cache_builder'),   # NEW/S11
-    'tools/gallery_editor.py':                         ('gui', 'gallery_pipeline'),   # NEW/S11
-    'tools/gallery_json_fixer.py':                     ('pipeline', 'gallery_pipeline'),   # NEW/S11
-    'tools/gallery_studio.py':                         ('gui', 'gallery_pipeline'),   # NEW/S11
+    'tools/gallery_editor.py':                         ('devtool', 'gallery_pipeline'),   # CHANGED (was gui)
+    'tools/gallery_json_fixer.py':                     ('devtool', 'gallery_pipeline'),   # CHANGED (was pipeline)
+    'tools/gallery_studio.py':                         ('devtool', 'gallery_pipeline'),   # CHANGED (was gui)
     'tools/inspect_staging.py':                        ('devtool', 'dev_tools'),   # NEW/S11
-    'tools/json_converter.py':                         ('pipeline', 'gallery_pipeline'),   # NEW/S11
+    'tools/json_converter.py':                         ('devtool', 'gallery_pipeline'),   # CHANGED (was pipeline)
     'tools/test_gallery_cache_builder_offline.py':     ('devtool', 'dev_tools'),   # NEW/S11
 }
 
@@ -1006,21 +1008,46 @@ def find_insert_point(lines, start, end):
 
 
 def strip_existing_tags(lines, start, end):
-    """Remove any Role:/Domain: lines already inside the docstring.
+    """Remove an existing Role:/Domain: PAIR already inside the docstring.
 
     Makes the sweep idempotent: a second run updates the block in place
     instead of stacking a second copy underneath the first.
+
+    Deliberately strict: strips only two ADJACENT lines shaped exactly
+    like 'Role: <x>' immediately followed by 'Domain: <y>' -- the pair
+    this script always writes together -- never a single line that
+    merely starts with the word "Role:" or "Domain:" on its own. A lone
+    such line can be ordinary prose (documentation ABOUT the tag format,
+    for instance) and must be left alone.
+
+    Bug found in the wild (July 2026): this file's own docstring had a
+    wrapped sentence starting "Domain: lines -- this legacy mode..." --
+    plain prose, not a tag. The earlier single-line version of this
+    function matched that line in isolation and deleted it. Requiring
+    the adjacent pair fixes this: a lone Role:-or-Domain:-looking line
+    with no matching partner right next to it is never touched.
     """
     keep = []
     removed = 0
     seam = None
-    for i, line in enumerate(lines):
-        if start <= i <= end and TAG_RE.match(line):
+    i = start
+    for j in range(0, start):
+        keep.append(lines[j])
+    while i <= end:
+        line = lines[i]
+        is_pair = (i < end
+                   and re.match(r'^\s*Role:\s', line)
+                   and re.match(r'^\s*Domain:\s', lines[i + 1]))
+        if is_pair:
             if seam is None:
                 seam = len(keep)
-            removed += 1
+            removed += 2
+            i += 2
             continue
         keep.append(line)
+        i += 1
+    for j in range(end + 1, len(lines)):
+        keep.append(lines[j])
     if removed and seam is not None and 0 < seam < len(keep):
         # Taking the block out can leave the blank line above it sitting
         # directly on the blank line below it. Collapse that one seam --
@@ -1238,6 +1265,7 @@ def confirm_write():
     except EOFError:
         answer = ''
     return answer in ('y', 'yes')
+
 
 def main():
     write_mode = '--write' in sys.argv
