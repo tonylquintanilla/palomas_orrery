@@ -16,6 +16,9 @@ Hub suppression: modules with many consumers (constants_new, shared_utilities,
 palomas_orrery) are shown as boundary nodes -- not expanded through.
 This keeps the graph focused on the neighborhood that matters.
 
+Role: devtool
+Domain: dev_tools
+
 Module updated: April 2026 with Anthropic's Claude Sonnet 4.6
 """
 

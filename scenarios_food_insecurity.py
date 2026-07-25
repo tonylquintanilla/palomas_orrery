@@ -13,6 +13,9 @@ controller's --preload food_insecurity glob.
 Stance carries over from food_insecurity_generator.py: synthesize nothing,
 transcribe everything, attribute to IPC.
 
+Role: scenario
+Domain: earth_science
+
 Module updated: June 2026 with Anthropic's Claude Opus 4.8
 """
 import os

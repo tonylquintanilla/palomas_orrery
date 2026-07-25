@@ -156,6 +156,9 @@ mode; celestial_objects.py Pluto 999 vs barycenter 9; osculating_cache_manager
 keys/fields; constants_new KM_PER_AU / KNOWN_ORBITAL_PERIODS;
 PHASE1B_DATA_SERVING_DESIGN_HANDOFF.md v0.6 schema).
 
+Role: devtool
+Domain: dev_tools
+
 Module updated: July 2026 with Anthropic's Claude Opus 4.8
 (Stage 2 build: v4 osculating-primary model; coverage index reconciled to
 design handoff v0.6; subtraction path retired).

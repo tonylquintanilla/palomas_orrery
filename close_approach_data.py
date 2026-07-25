@@ -29,6 +29,9 @@ Consumed by: palomas_orrery.py (Apophis and other close-approach plots)
 Part of Paloma's Orrery - Data Preservation is Climate Action
 Created: March 2026
 
+Role: data
+Domain: orrery
+
 Module updated: April 17, 2026 with Anthropic's Claude Opus 4.7
 (provenance audit; local AU conversion and radii dict replaced with imports
 from constants_new.py. The previous local radii dict had pre-April-16

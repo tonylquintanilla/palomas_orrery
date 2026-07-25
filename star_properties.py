@@ -9,6 +9,9 @@ Key functions:
     query_simbad_for_star_properties() - Batch query with cache
     load_existing_properties() - Load from local pickle cache
 
+Role: data
+Domain: stars
+
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 """
 import os

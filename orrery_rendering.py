@@ -14,6 +14,9 @@ Key functions:
 Consumed by: planet_visualization.py (dispatch loop),
              *_visualization_shells.py (custom geometry info markers)
 
+Role: rendering
+Domain: orrery
+
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
 May 28, 2026: Info-marker contrast fix at the real control point (Opus 4.7).
     create_info_marker() gained fill_color/border_color params;

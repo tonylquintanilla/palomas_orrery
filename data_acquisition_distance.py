@@ -1,4 +1,8 @@
-"""data_acquisition_distance.py - Module for fetching stellar data based on distance."""
+"""data_acquisition_distance.py - Module for fetching stellar data based on distance.
+
+Role: computation
+Domain: orrery
+"""
 
 import numpy as np
 from astropy.table import Table, vstack

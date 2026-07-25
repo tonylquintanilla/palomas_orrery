@@ -58,6 +58,9 @@ Usage:
 
 Module created: July 2026 with Anthropic's Claude Fable 5 (L-097,
 collegial relay; spec by Claude Opus 4.6, integrated by Tony).
+
+Role: devtool
+Domain: dev_tools
 """
 import re
 import sys

@@ -21,6 +21,9 @@ To add a new body:
 Source citations are preserved as comments above each body block. The
 provenance audit (April 2026) verified all values - do not modify.
 
+Role: data
+Domain: orrery
+
 Module updated: May 2026 with Anthropic's Claude Opus 4.6
 """
 

@@ -6,6 +6,9 @@ Shows the relationship between Earth's energy imbalance (cause) and
 temperature change (effect) - revealing climate inertia and committed warming.
 
 Data Preservation is Climate Action
+
+Role: computation
+Domain: earth_science
 """
 
 import json

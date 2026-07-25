@@ -25,6 +25,9 @@ Usage:
     export_social_html(fig, output_path='my_orrery_social.html')
 
 Author: Tony Quintanilla / Paloma's Orrery
+
+Role: pipeline
+Domain: gallery
 """
 
 import json

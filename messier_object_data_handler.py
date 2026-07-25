@@ -6,6 +6,9 @@ Converts Messier catalog entries from RA/Dec to Cartesian coordinates for
 Adds hover text with observing notes from star_notes.py. Produces pandas
 DataFrames consumed by visualization_3d.py for planetarium rendering.
 
+Role: pipeline
+Domain: stars
+
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 """
 # messier_object_data_handler.py

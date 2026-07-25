@@ -10,6 +10,9 @@ When the body is at origin (body-centered view), the indicator is suppressed -
 the Sun is visible in the plot and there is no single sunward direction from
 the coordinate center.
 
+Role: utility
+Domain: utilities
+
 Module updated: May 2026 with Anthropic's Claude Opus 4.6
                 Anthropic's Claude Opus 4.7 (D3.1 follow-up: body_name parameter
                 for distinct multi-body Sun Direction indicators)

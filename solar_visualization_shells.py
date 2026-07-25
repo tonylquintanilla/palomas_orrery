@@ -11,6 +11,9 @@ added for the MAPS comet coronal journey.
 Consumed by: planet_visualization.py (routing dispatcher),
              palomas_orrery.py (hover_text_sun import)
 
+Role: rendering/shells
+Domain: orrery
+
 Module updated: May 2026 with Anthropic's Claude Opus 4.6
     D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
 May 27, 2026: Stage 3 info-marker standard sweep (Opus 4.7). 9 info

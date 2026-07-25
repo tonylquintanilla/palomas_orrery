@@ -10,6 +10,9 @@ Key functions:
     create_3d_visualization() - Main 3D star field figure builder
     prepare_3d_data() - Coordinate transforms and data preparation
 
+Role: rendering
+Domain: stars
+
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 """
 # visualization_3d.py

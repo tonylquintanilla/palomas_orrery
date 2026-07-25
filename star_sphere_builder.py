@@ -16,6 +16,9 @@ No network access required -- reads only local cache files.
 # Module created: April 2026 with Anthropic's Claude Opus 4.6
 # Renderer added: April 13, 2026 with Anthropic's Claude Opus 4.6
 # Part of Paloma's Orrery celestial sphere feature
+
+Role: rendering
+Domain: stars
 """
 
 import os

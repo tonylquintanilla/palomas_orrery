@@ -125,6 +125,9 @@ Exit codes: 0 = clean; 1 = consistency problems remain (the file is still
 written when not run with --check -- problems are reported, not silently
 dropped); 2 = no path given and no default file found next to the script.
 
+Role: devtool
+Domain: dev_tools
+
 Module updated: July 2026 with Anthropic's Claude Sonnet 5 (status/section
 consistency checks across all statuses; every DONE-item closed-bucket
 mismatch is fully auto-fixed via a two-level model -- a coarse track span

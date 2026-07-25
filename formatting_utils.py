@@ -1,4 +1,8 @@
-"""formatting_utils.py - Basic formatting utilities used by both palomas_orrery.py and visualization_utils.py."""
+"""formatting_utils.py - Basic formatting utilities used by both palomas_orrery.py and visualization_utils.py.
+
+Role: utility
+Domain: utilities
+"""
 
 def format_maybe_float(value):
     """

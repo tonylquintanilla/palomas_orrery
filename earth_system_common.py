@@ -19,6 +19,9 @@ Key functions:
 
 Consumed by: earth_system_generator.py, food_insecurity_generator.py
 
+Role: utility
+Domain: earth_science
+
 Module updated: June 2026 with Anthropic's Claude Opus 4.8
 """
 import re

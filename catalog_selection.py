@@ -8,6 +8,9 @@ Returns combined astropy Table with star counts by source category.
 Key functions:
     select_stars() - Select and merge stars by magnitude or distance limit
 
+Role: computation
+Domain: stars
+
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 """
 import numpy as np

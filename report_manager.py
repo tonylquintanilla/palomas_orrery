@@ -2,6 +2,9 @@
 """
 Scientific Report Manager for Astronomical Data Analysis
 Manages generation, storage, and retrieval of analysis reports.
+
+Role: utility
+Domain: utilities
 """
 
 import json

@@ -18,6 +18,9 @@ Key functions:
 
 Consumed by: palomas_orrery.py (plot_objects, animate_objects)
 
+Role: rendering/shells
+Domain: orrery
+
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
 May 28, 2026: Phase 1 re-pipe (Opus 4.7). 6 live inline info markers
     routed through orrery_rendering.create_info_marker() factory:

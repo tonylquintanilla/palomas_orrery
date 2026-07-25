@@ -19,6 +19,9 @@ Coordinate system for exoplanet visualization:
 
 Created: October 21, 2025
 Author: Tony Quintanilla with Claude AI
+
+Role: data
+Domain: stars
 """
 
 import numpy as np

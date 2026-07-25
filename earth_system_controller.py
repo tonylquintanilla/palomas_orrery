@@ -10,6 +10,9 @@ Module updated: June 2026 with Anthropic's Claude Opus 4.8 -- optional
 "--preload <prefix>" auto-loads data/<prefix>_*_blockbuster.kmz (e.g.
 food_insecurity) so the food family opens pre-selected. One picker, no
 duplicate controller; no flag = generic empty-list behavior unchanged.
+
+Role: gui
+Domain: earth_science
 """
 import tkinter as tk
 from tkinter import filedialog, messagebox

@@ -5,6 +5,9 @@ This script combines:
 1. Orbital parameters from idealized_orbits.py
 2. Updated data from JPL Horizons ephemeris files (when available)
 3. A framework for adding more satellites as you download their ephemerides
+
+Role: devtool
+Domain: dev_tools
 """
 
 import json

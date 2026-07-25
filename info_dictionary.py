@@ -19,6 +19,9 @@ Consumed by: palomas_orrery, palomas_orrery_helpers, gallery_studio,
     object_type_analyzer, star_visualization_gui, visualization_2d,
     visualization_3d, visualization_core, exoplanet_stellar_properties
 
+Role: data
+Domain: orrery
+
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 April 2026: provenance audit source citations added, Gemini fact-check applied.
 Corrections: Polymele (size/type/rotation), Leucus (size/sequence), Charon/Vanth/

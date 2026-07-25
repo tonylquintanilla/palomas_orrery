@@ -3,6 +3,9 @@ Paleoclimate Data Fetcher for Paloma's Orrery
 Fetches and caches paleoclimate proxy data from authoritative sources
 
 Data Preservation is Climate Action
+
+Role: computation
+Domain: earth_science
 """
 
 import requests

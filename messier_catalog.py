@@ -6,6 +6,9 @@ bright planetary nebulae, and bright emission nebulae. Each entry includes
 name, type, visual magnitude, distance, coordinates, and observing notes.
 Data source for the star visualization 3D planetarium views.
 
+Role: data
+Domain: stars
+
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 """
 # messier_catalog.py

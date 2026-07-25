@@ -23,6 +23,9 @@ Key functions:
 Consumed by: Earth System GUI (registration snippet in the build handoff);
 runnable standalone via __main__.
 
+Role: devtool
+Domain: earth_science
+
 Module updated: June 2026 with Anthropic's Claude Opus 4.8
 """
 import os

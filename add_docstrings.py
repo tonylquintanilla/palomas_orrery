@@ -1,15 +1,92 @@
 """
-add_docstrings.py - Add or improve module-level docstrings across the codebase.
+add_docstrings.py - Two related tools for module-level docstrings.
 
-Reads each target module, inserts a triple-quoted docstring before the first
-import or code line. Uses Python binary mode to preserve line endings (CRLF/LF).
-Touches NO code -- only adds or replaces the module docstring.
+(1) The Role:/Domain: tag sweep (L-163, the DEFAULT mode when you just
+    run this file). Inserts or refreshes a two-line classification block
+    inside a module's EXISTING docstring. Touches nothing else.
+(2) The original whole-docstring inserter (--docstrings flag, LEGACY
+    mode). Replaces a module's entire docstring from the hand-authored
+    DOCSTRINGS dict below. Still useful for a brand-new module that has
+    no docstring at all yet.
 
-Run from the project directory:
-    python add_docstrings.py          # preview mode (prints, doesn't write)
-    python add_docstrings.py --write  # actually writes files
+=====================================================================
+HOW TO RUN IT (both modes)
+=====================================================================
+From VS Code: open this file and click Run. It always starts in PREVIEW
+-- nothing is written to any file yet, it only prints what it WOULD do.
 
-Module updated: April 2026 with Anthropic's Claude Opus 4.6
+If the preview finds no problems, it then asks:
+
+    Write these changes? [y/n]:
+
+Click into the terminal panel, type y and press Enter to actually save
+the changes, or press Enter (or type n) to stop without writing
+anything -- anything other than y/yes is treated as "don't write," so
+a blank answer or a typo can never accidentally write. If the preview
+finds PROBLEMS, it will not ask -- fix those first (usually a module
+missing from MODULE_TAGS, or a role/domain not in the approved list
+below) and run it again.
+
+Advanced, not needed for normal use: `python add_docstrings.py --write`
+from a terminal writes immediately, skipping the preview and the
+question. The y/n prompt above does the same thing more safely, so
+there's normally no reason to use this.
+
+=====================================================================
+WHEN TO RUN THE TAG SWEEP (mode 1, the default)
+=====================================================================
+Run it any time a module's Role:/Domain: tag needs adding or fixing:
+  - A new module was added and has no tag yet.
+  - An existing tag looks wrong and needs correcting.
+For a single module, it's just as easy to type the two lines by hand
+directly into that module's own docstring (see placement rule below).
+This script earns its keep for BULK changes -- many modules at once --
+or when you want the placement rule applied consistently without doing
+it by hand every time.
+
+HOW TO ADD OR CHANGE A CLASSIFICATION:
+  1. Find (or add) the module's entry in MODULE_TAGS below, keyed by
+     its path relative to the repo root (e.g. 'my_module.py' for the
+     orrery repo root, or 'gallery/assembler/errors.py' for the
+     gallery repo).
+  2. Set the value to (role, domain). role must be one of ROLE_VOCAB,
+     domain one of DOMAIN_VOCAB (both defined below) -- anything else
+     is reported as a PROBLEM and never written, so a typo gets caught
+     instead of silently landing in a file.
+  3. Run this script as described above.
+
+PLACEMENT RULE the sweep applies: the two-line block goes directly
+above the module's 'Module updated:' credit line, blank-line separated.
+No credit line, OR more than one (a changelog docstring with several
+'Module updated:' entries) -> the block goes at the very end of the
+docstring instead, after all of it (decided in chat, July 2026 --
+wedging it between two changelog entries read worse than putting it
+after the whole history).
+
+IS ROLE_MAP UPDATED AUTOMATICALLY? Not yet, as of this writing (Phase 2,
+July 2026). This script only writes tags INTO each module's docstring --
+module_atlas.py's ROLE_MAP dictionary is still a separate, hand-maintained
+table and does not read these tags yet. Phase 3 of this redesign will
+change that: module_atlas.py will read the Role:/Domain: lines straight
+out of each module's docstring and build ROLE_MAP from them automatically,
+every time it runs. Once that lands, editing a module's docstring (by
+hand or with this script) is enough -- ROLE_MAP updates itself the next
+time module_atlas.py runs, with no separate dictionary to keep in sync.
+This paragraph should be updated once Phase 3 ships.
+
+=====================================================================
+LEGACY MODE (--docstrings): adding a docstring to a module with none
+=====================================================================
+Reads each module name in the DOCSTRINGS dict below, inserts a full
+triple-quoted docstring before the first import or code line (or below
+any shebang/comment header). Uses Python binary mode to preserve line
+endings (CRLF/LF). For a module that already has a docstring, prefer
+hand-editing it directly, or the tag sweep above for just the Role:/
+
+Role: devtool
+Domain: dev_tools
+
+Module updated: July 2026 with Anthropic's Claude Sonnet 5
 """
 
 import os
@@ -912,18 +989,18 @@ def find_insert_point(lines, start, end):
     """Decide where the tag block goes inside an existing docstring.
 
     Returns (index, needs_blank_before). The rule, per the Phase 2
-    decision: directly above the 'Module updated:' credit line when one
-    exists, otherwise at the end of the docstring, just above its
-    closing quotes.
+    decision: directly above the credit line when there is EXACTLY ONE
+    'Module updated:' line. Zero credit lines, or more than one (a
+    changelog docstring), both go at the very end of the docstring,
+    just above its closing quotes -- Tony's call (chat, July 2026):
+    wedging the block between two changelog entries read worse than
+    putting it after the whole history, so a changelog is treated the
+    same as having no credit line at all.
     """
     hits = [i for i in range(start, end + 1)
             if lines[i].lstrip().startswith(CREDIT_PREFIX)]
-    if hits:
-        # Anchor on the LAST credit line, not the first. Six orrery
-        # modules keep a changelog of several 'Module updated:' entries
-        # inside one docstring; anchoring on the first would wedge the
-        # tag block into the middle of that history.
-        i = hits[-1]
+    if len(hits) == 1:
+        i = hits[0]
         return i, lines[i - 1].strip() != ''
     return end, lines[end - 1].strip() != ''
 
@@ -1111,10 +1188,10 @@ def run_tag_sweep(project_dir, write=False):
     print('  %-12s %d' % ('total', sum(counts.values())))
 
     if review:
-        print('\n  REVIEW (%d) -- more than one credit line, so "above the'
+        print('\n  CHANGELOG (%d) -- more than one credit line. Per the'
               % len(review))
-        print('  credit line" is ambiguous. Anchored on the LAST one;')
-        print('  confirm that reads right before any write run:')
+        print('  Phase 2 placement decision, the tag goes at the very end')
+        print('  of the docstring instead of above any single entry:')
         for item in review:
             print('    - %s' % item)
 
@@ -1149,6 +1226,19 @@ def _belongs_to_this_repo(rel_path):
 # MAIN
 # ============================================================
 
+def confirm_write():
+    """Ask whether to actually write the just-previewed changes.
+
+    Only an explicit y/yes answer returns True. A blank Enter, 'n',
+    a typo, or even a read error (EOFError) all return False -- silence
+    defaults to the safe choice, never to writing.
+    """
+    try:
+        answer = input('\n  Write these changes? [y/n]: ').strip().lower()
+    except EOFError:
+        answer = ''
+    return answer in ('y', 'yes')
+
 def main():
     write_mode = '--write' in sys.argv
     legacy_mode = '--docstrings' in sys.argv
@@ -1160,29 +1250,54 @@ def main():
             project_dir = arg
 
     if not legacy_mode:
-        # Default job is now the L-163 Phase 2 tag sweep. The original
-        # whole-docstring mode still runs, behind --docstrings, so the
-        # DOCSTRINGS table below stays usable for new modules.
-        sys.exit(run_tag_sweep(project_dir, write=write_mode))
+        # Default job is the L-163 Phase 2 tag sweep. --write skips the
+        # question and writes immediately (advanced/scripted use); the
+        # normal path previews, then asks before writing anything.
+        if write_mode:
+            sys.exit(run_tag_sweep(project_dir, write=True))
+        result = run_tag_sweep(project_dir, write=False)
+        if result != 0:
+            print('  Fix the problems above, then run again before writing.\n')
+            sys.exit(result)
+        if confirm_write():
+            print()
+            sys.exit(run_tag_sweep(project_dir, write=True))
+        print('\n  No changes written.\n')
+        sys.exit(0)
 
-    mode_label = "WRITING" if write_mode else "PREVIEW (use --write to apply)"
-    print(f"\n{'='*60}")
-    print(f"  Module Docstring Update -- {mode_label}")
-    print(f"  Target: {os.path.abspath(project_dir)}")
-    print(f"  Modules to update: {len(DOCSTRINGS)}")
-    print(f"{'='*60}\n")
+    # Legacy whole-docstring mode (--docstrings), same preview-then-ask
+    # shape as above; --write still skips straight to writing.
+    def run_legacy(write):
+        mode_label = "WRITING" if write else "PREVIEW (use --write to apply)"
+        print(f"\n{'='*60}")
+        print(f"  Module Docstring Update -- {mode_label}")
+        print(f"  Target: {os.path.abspath(project_dir)}")
+        print(f"  Modules to update: {len(DOCSTRINGS)}")
+        print(f"{'='*60}\n")
 
-    updated = 0
-    skipped = 0
-    for module_name, docstring_text in sorted(DOCSTRINGS.items()):
-        if process_module(project_dir, module_name, docstring_text, write=write_mode):
-            updated += 1
-        else:
-            skipped += 1
+        updated = 0
+        skipped = 0
+        for module_name, docstring_text in sorted(DOCSTRINGS.items()):
+            if process_module(project_dir, module_name, docstring_text, write=write):
+                updated += 1
+            else:
+                skipped += 1
 
-    print(f"\n  {'Updated' if write_mode else 'Would update'}: {updated}")
-    print(f"  Skipped: {skipped}")
-    print()
+        print(f"\n  {'Updated' if write else 'Would update'}: {updated}")
+        print(f"  Skipped: {skipped}")
+        print()
+        return updated
+
+    if write_mode:
+        run_legacy(True)
+        return
+
+    updated = run_legacy(False)
+    if updated > 0 and confirm_write():
+        print()
+        run_legacy(True)
+    else:
+        print('  No changes written.\n')
 
 
 if __name__ == '__main__':

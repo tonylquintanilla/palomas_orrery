@@ -7,6 +7,9 @@ wet bulb temperature scale. The survivability threshold (31-35 degC Tw) contextu
 why even small global warming translates to lethal local conditions.
 
 Data Preservation is Climate Action
+
+Role: rendering
+Domain: earth_science
 """
 
 import json

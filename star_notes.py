@@ -6,6 +6,9 @@ for ~200 notable stars. Includes historical names, physical properties,
 binary/multiple system notes, and cultural significance. Displayed as
 hover text in HR diagrams and 3D star visualizations.
 
+Role: data
+Domain: stars
+
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 """
     # Define unique_notes dictionary

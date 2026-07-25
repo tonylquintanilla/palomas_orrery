@@ -47,6 +47,9 @@ Note: Scans only the top-level directory (no subdirectories).
       Run from your clean project directory to avoid picking up
       old copies or virtual environment files.
 
+Role: devtool
+Domain: dev_tools
+
 Module updated: July 2026 with Anthropic's Claude Sonnet 5 (L-127: single
 scan now feeds both MODULE_ATLAS.md and the newly-mechanical
 MODULE_INDEX.md; both write to repo root).

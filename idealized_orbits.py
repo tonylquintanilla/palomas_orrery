@@ -16,6 +16,9 @@ Module updated: June 2026 with Anthropic's Claude Sonnet 4.6
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
 (provenance audit; 45 hardcoded AU-in-km values replaced with KM_PER_AU
 import from constants_new.py)
+
+Role: computation
+Domain: orrery
 """
 # idealized_orbits.py
 import numpy as np

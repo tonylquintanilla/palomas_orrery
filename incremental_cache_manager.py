@@ -2,6 +2,9 @@
 """
 Smart incremental cache manager for VizieR catalog data and SIMBAD properties.
 Handles incremental fetching when query parameters change, avoiding redundant queries.
+
+Role: cache
+Domain: stars
 """
 
 import os

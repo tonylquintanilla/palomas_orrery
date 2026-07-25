@@ -11,6 +11,9 @@ Key functions:
     add_url_buttons() - Plotly updatemenus for JPL/NASA links
     get_default_camera() - Standard camera position dict
 
+Role: utility
+Domain: orrery
+
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 """
 #Paloma's Orrery - Solar System Visualization Tool

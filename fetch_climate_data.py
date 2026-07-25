@@ -3,6 +3,9 @@ Climate Data Fetcher - Paloma's Orrery
 Preserves critical climate datasets for future reference
 
 Data preservation is climate action.
+
+Role: computation
+Domain: earth_science
 """
 
 import urllib.request

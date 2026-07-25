@@ -5,6 +5,9 @@ Manages thread cleanup on application exit and provides show_figure_safely(),
 which opens Plotly figures in the browser with proper temp file handling
 and optional save-to-file dialog. Wraps save_utils.show_and_save().
 
+Role: utility
+Domain: utilities
+
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 """
 # shutdown_handler.py

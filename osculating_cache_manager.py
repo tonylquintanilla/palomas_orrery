@@ -12,6 +12,9 @@ Design Philosophy:
 
 Part of Paloma's Orrery - Tony's astronomical visualization suite.
 Created: November 18, 2025
+
+Role: cache
+Domain: orrery
 """
 
 import json

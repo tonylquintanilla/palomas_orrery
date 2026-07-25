@@ -12,6 +12,9 @@ Mercury's core is proportionally the largest of any planet (~85% of its radius).
 Consumed by: planet_visualization.py (dispatch loop via CUSTOM_SHELLS lazy import),
              palomas_orrery.py (_info strings via globals() for build_shell_checkboxes)
 
+Role: rendering/shells
+Domain: orrery
+
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
     D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
     April 17, 2026: provenance audit source citations added, Gemini fact-check applied.

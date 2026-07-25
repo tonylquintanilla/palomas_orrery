@@ -7,6 +7,9 @@ fully archivable once shell_configs.py migration is complete.
 
 Consumed by: planet_visualization.py (routing dispatcher)
 
+Role: rendering/shells
+Domain: orrery
+
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
     D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
 April 18, 2026: provenance audit source citations added, Gemini fact-check applied.

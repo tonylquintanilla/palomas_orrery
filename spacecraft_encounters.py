@@ -29,6 +29,9 @@ Note: heliocentric speed after launch ~43 km/s (code) vs ~45 km/s (Gemini) --
 both are valid approximations depending on Earth orbital velocity assumed.
 Provenance audit identified by Anthropic's Claude Opus 4.7.
 
+Role: data
+Domain: orrery
+
 Module updated: May 30, 2026 with Anthropic's Claude 4.8
 
 """

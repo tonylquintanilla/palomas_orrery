@@ -10,6 +10,9 @@ bleaching threshold (1C above max monthly mean SST), measured in C-weeks.
  12 DHW = Severe mass bleaching and widespread mortality
 
 Fetch logic adapted from biosphere_coral_generator.py (Gemini POC).
+
+Role: scenario
+Domain: earth_science
 """
 import os
 import csv

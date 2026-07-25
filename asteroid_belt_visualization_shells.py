@@ -6,6 +6,9 @@ Includes Main Belt, Hildas, Trojans, and Greeks.
 Also includes helper functions for dynamic Trojan positioning based on Jupiter's location.
 
 
+Role: rendering/shells
+Domain: orrery
+
 Module updated: May 2026 with Anthropic's Claude Opus 4.6
     D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
 May 27, 2026: Stage 3 info-marker standard sweep + Sun Direction cleanup

@@ -3,6 +3,9 @@
 Object Type Analysis and Report Generation Module
 Provides comprehensive analysis of astronomical data including object types,
 data quality metrics, and full report generation.
+
+Role: computation
+Domain: orrery
 """
 
 from typing import Dict, List, Tuple, Optional, Any

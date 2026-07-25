@@ -3,6 +3,9 @@ orbit_data_manager.py - Advanced orbit data caching and management
 
 This module handles the efficient storage and retrieval of orbital path data,
 using an incremental approach to minimize API calls and processing time.
+
+Role: cache
+Domain: orrery
 """
 
 import json

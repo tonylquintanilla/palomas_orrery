@@ -2,6 +2,9 @@
 Paloma's Orrery: Heatwave Scenario Definitions
 Provides fetch function + SCENARIOS list for the earth_system_generator engine.
 Data Source: ERA5 via Open-Meteo Archive API
+
+Role: scenario
+Domain: earth_science
 """
 import os
 import json

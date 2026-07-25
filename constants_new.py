@@ -32,6 +32,9 @@ Revised 2026-04-16 by Anthropic's Claude Opus 4.6 and Google Gemini:
 Lesson: Verification by the same AI that generated the value is not
 verification. Cross-AI review (Mode 7) is load-bearing for facts.
 
+Role: data
+Domain: orrery
+
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 Reviewed: April 2026 by Google Gemini (Mode 7 cross-verification)
 """

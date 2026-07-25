@@ -3,6 +3,9 @@ Earth System Visualization GUI for Paloma's Orrery
 Hub window with climate data visualizations
 
 Data Preservation is Climate Action
+
+Role: gui
+Domain: earth_science
 """
 
 import tkinter as tk

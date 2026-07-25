@@ -6,6 +6,9 @@ Fetches stars within a distance limit, processes through data_processing.py,
 builds 3D stellar neighborhood visualization via visualization_3d.py.
 Results passed back via plot_data_exchange.py.
 
+Role: rendering
+Domain: stars
+
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 """
 # planetarium_distance.py

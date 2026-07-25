@@ -214,6 +214,10 @@ Known limitations and accepted residuals:
 Module rewritten: April 17, 2026 with Anthropic's Claude Opus 4.7
     (replaces earlier line-granular scanner that produced ~2000
     false-positive Tier-1 findings.)
+
+Role: devtool
+Domain: dev_tools
+
 Module updated: April 2026 with Anthropic's Claude Sonnet 4.6
     (Options A/B, lookback=60, exceptions loading, audit completion.)
 Updated with Opus 4.8 for food insecurity provenance, June 26, 2026.

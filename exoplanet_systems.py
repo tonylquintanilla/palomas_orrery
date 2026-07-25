@@ -16,6 +16,9 @@ Phase 1 systems:
 
 Created: October 21, 2025
 Author: Tony Quintanilla with Claude AI
+
+Role: data
+Domain: stars
 """
 
 from datetime import datetime, timezone

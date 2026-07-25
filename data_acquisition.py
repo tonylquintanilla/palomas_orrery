@@ -9,6 +9,9 @@ Key points:
 - We remove strict "file size" and "bright star" thresholds to avoid repeated downloads.
 - We request only columns that are actually needed, so we don't overload VizieR on large queries.
 - If you still get random connection closures for big queries, try chunking or raising timeout.
+
+Role: computation
+Domain: orrery
 """
 
 import os

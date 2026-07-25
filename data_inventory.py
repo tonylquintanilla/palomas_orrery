@@ -12,6 +12,9 @@ Usage:
     python data_inventory.py                    # orrery data only (default)
     python data_inventory.py --gallery PATH     # include gallery repo inventory
 
+Role: devtool
+Domain: dev_tools
+
 Module updated: July 2026 with Anthropic's Claude Opus 4.6
 """
 

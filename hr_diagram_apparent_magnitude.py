@@ -6,6 +6,9 @@ Fetches stars from Hipparcos and Gaia by apparent magnitude limit,
 processes through data_processing.py, builds 2D HR diagram via
 visualization_2d.py. Results passed back via plot_data_exchange.py.
 
+Role: rendering
+Domain: stars
+
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 """
 # hr_diagram_apparent_magnitude.py

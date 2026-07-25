@@ -25,6 +25,9 @@ Updated 5/20/26 with Claude 4.6
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
 (D3.1 follow-up: Sun Direction indicator fixes -- custom-only fallback for
 outermost_radius_au, body_name passed for distinct multi-body indicators)
+
+Role: rendering
+Domain: orrery
 """
 
 import math

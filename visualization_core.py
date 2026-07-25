@@ -6,6 +6,9 @@ temperature-to-color mapping, star count analysis, magnitude distribution
 statistics, and hover text formatting. Extracted to avoid duplication
 between the 2D and 3D pipelines.
 
+Role: rendering
+Domain: stars
+
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 """
 # visualization_core.py

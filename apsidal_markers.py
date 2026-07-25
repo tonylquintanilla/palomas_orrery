@@ -28,6 +28,9 @@ point hover labels to prevent overflow beyond plot boundaries)
 
 Module updated: May 8, 2026 with Anthropic's Claude 4.6 and 4.7
 - trace_qualifier parameter, deconflicted labels
+
+Role: computation
+Domain: orrery
 """
 
 import numpy as np

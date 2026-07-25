@@ -7,6 +7,9 @@ modern/future climate projections, with the ability to draw connections
 between the two timescales.
 
 Data Preservation is Climate Action
+
+Role: rendering
+Domain: earth_science
 """
 
 import json

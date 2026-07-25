@@ -12,6 +12,9 @@ Key functions:
     create_eccentricity_demo_window() - Interactive e slider demonstration
     create_orbital_viz_window() - Main GUI window with object selector
 
+Role: gui
+Domain: orrery
+
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 """
 import numpy as np

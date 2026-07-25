@@ -18,6 +18,9 @@ Key functions:
 
 Consumed by: ANIMATION_TEST_PROTOCOL (Mode-5 animation testing)
 
+Role: devtool
+Domain: dev_tools
+
 Module updated: June 2026 with Anthropic's Claude Fable 5
 """
 

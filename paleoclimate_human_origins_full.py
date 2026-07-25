@@ -7,6 +7,9 @@ to explore details from the Phanerozoic "double hump" down to ice ages and
 the remarkable stability of the Holocene.
 
 Data Preservation is Climate Action
+
+Role: rendering
+Domain: earth_science
 """
 
 import json

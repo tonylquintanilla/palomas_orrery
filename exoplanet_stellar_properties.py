@@ -20,6 +20,9 @@ Reuses proven functions from:
 
 Created: October 23, 2025
 Author: Tony Quintanilla with Claude AI
+
+Role: data
+Domain: stars
 """
 
 import numpy as np

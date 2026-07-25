@@ -3,6 +3,9 @@ Climate Cache Manager for Paloma's Orrery
 Manages safe updates of climate data caches with validation and rollback.
 
 Updated December 2025 - Fixed API calls to match fetch_climate_data.py
+
+Role: cache
+Domain: earth_science
 """
 
 import os

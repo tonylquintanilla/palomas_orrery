@@ -8,6 +8,9 @@ and slow down at apoapsis, exactly as Kepler's Second Law dictates.
 
 Collaboration: Tony + Claude Opus 4.5 + Gemini 3 Pro
 Part of Paloma's Orrery - Data Preservation is Climate Action
+
+Role: rendering
+Domain: orrery
 """
 
 import numpy as np

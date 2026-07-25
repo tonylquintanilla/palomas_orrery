@@ -8,6 +8,9 @@ making its magnetosphere geometry unique.
 
 Consumed by: planet_visualization.py (routing dispatcher)
 
+Role: rendering/shells
+Domain: orrery
+
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
     D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
 Source: NASA Uranus Fact Sheet; Ness et al. (1986) Science (magnetosphere/radiation belts);

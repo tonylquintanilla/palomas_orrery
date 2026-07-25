@@ -1,6 +1,9 @@
 """
 Convert HOT ocean pH data to JSON format
 Manual converter for ocean acidification visualization
+
+Role: devtool
+Domain: dev_tools
 """
 import json
 import csv

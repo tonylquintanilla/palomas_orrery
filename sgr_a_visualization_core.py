@@ -8,6 +8,9 @@ Stage 3: Relativistic precession (rosette pattern).
 Stage 4: Multiple stars, historical events.
 
 Part of Paloma's Orrery - Data Preservation is Climate Action
+
+Role: rendering
+Domain: orrery
 """
 
 import numpy as np

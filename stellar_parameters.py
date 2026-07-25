@@ -11,6 +11,9 @@ Key functions:
     calculate_bv_temperature() - B-V color to Teff fallback
     select_best_temperature() - Pick best available Teff source
 
+Role: data
+Domain: stars
+
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 """
 # stellar_parameters.py

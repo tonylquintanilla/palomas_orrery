@@ -16,6 +16,9 @@ Key functions:
 
 Consumed by: palomas_orrery.py (object selection, GUI checkboxes)
 
+Role: data
+Domain: orrery
+
 Module updated: April 2026 with Anthropic's Claude Sonnet 4.6 with Gemini 3.5 Pro review
 """
 

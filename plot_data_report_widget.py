@@ -6,6 +6,9 @@ class breakdowns, and processing times after an HR diagram is generated.
 Reads data from plot_data_exchange.py. Includes object type analysis via
 ObjectTypeAnalyzer when available.
 
+Role: rendering
+Domain: utilities
+
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 """
 import tkinter as tk

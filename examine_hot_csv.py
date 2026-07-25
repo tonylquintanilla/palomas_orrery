@@ -1,5 +1,8 @@
 """
 Examine the HOT CSV file structure
+
+Role: devtool
+Domain: dev_tools
 """
 import csv
 

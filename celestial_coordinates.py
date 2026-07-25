@@ -2,6 +2,9 @@
 celestial_coordinates.py
 Module for calculating and formatting Right Ascension and Declination coordinates
 for celestial objects in Paloma's Orrery.
+
+Role: computation
+Domain: orrery
 """
 
 import numpy as np

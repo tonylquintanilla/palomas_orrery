@@ -8,6 +8,9 @@ This script will:
 3. Report any issues found
 4. Optionally repair corrupted entries
 5. Show statistics about your orbit cache
+
+Role: devtool
+Domain: dev_tools
 """
 
 import json

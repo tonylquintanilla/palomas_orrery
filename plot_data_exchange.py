@@ -6,6 +6,9 @@ file that the main GUI reads to populate the report widget. Bridge between
 standalone HR diagram scripts (which run as subprocesses) and the star
 visualization GUI.
 
+Role: pipeline
+Domain: utilities
+
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 """
 import json

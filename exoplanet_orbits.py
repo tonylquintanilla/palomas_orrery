@@ -15,6 +15,9 @@ Mathematics based on:
 
 Created: October 21, 2025
 Author: Tony Quintanilla with Claude AI
+
+Role: rendering
+Domain: stars
 """
 
 import numpy as np

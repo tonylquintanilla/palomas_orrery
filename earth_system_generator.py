@@ -12,6 +12,9 @@ Usage:
     from scenarios_heatwaves import SCENARIOS
     run_scenario(SCENARIOS[0])
 
+Role: devtool
+Domain: earth_science
+
 Module updated: June 2026 with Anthropic's Claude Opus 4.8
 - KMZ intel card -> compact always-on header + tappable info balloon
   (create_info_placemark). Population-exposure key folded into the balloon;

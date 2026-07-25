@@ -7,6 +7,9 @@ JWST observations (D/H ratio, 2023/2024), and thermal models (Glein et al. 2024)
 
 Consumed by: planet_visualization.py (routing dispatcher)
 
+Role: rendering/shells
+Domain: orrery
+
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
     D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
     April 17, 2026: provenance audit source citations added, Gemini fact-check applied.

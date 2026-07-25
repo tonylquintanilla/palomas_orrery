@@ -7,6 +7,9 @@ subprocesses, displays results via plot_data_report_widget.py. Supports
 magnitude-based and distance-based queries with lazy-loaded star property
 details.
 
+Role: gui
+Domain: stars
+
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 """
 # star_visualization_gui.py - Final version with enhanced pickle file support

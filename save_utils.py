@@ -16,6 +16,10 @@ Key functions:
 Consumed by: palomas_orrery.py, all visualization modules, gallery_studio.py
 
 Author: Tony Quintanilla / Paloma's Orrery
+
+Role: pipeline
+Domain: utilities
+
 Module updated: May 2026 with Anthropic's Claude Opus 4.6
 """
 

@@ -11,6 +11,9 @@ Key functions:
     align_coordinate_systems() - ICRS/Hipparcos frame alignment
     select_stars_by_magnitude() - Apply magnitude/distance cuts
 
+Role: computation
+Domain: stars
+
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 """
 # data_processing.py

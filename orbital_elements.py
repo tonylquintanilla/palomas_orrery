@@ -11,6 +11,9 @@ This module provides:
 
 Part of Paloma's Orrery
 Created: November 18, 2025 (Extracted from idealized_orbits.py to fix import chain)
+
+Role: computation
+Domain: orrery
 """
 
 planetary_params = {

@@ -29,6 +29,9 @@ Module updated: May 11, 2026 by Claude Opus 4.6 and 4.7 and Tony. (Sphere marker
 
 Module updated: June 2026 with Anthropic's Claude Opus 4.8
 (shared create_bow_shock_shape extracted from 4 inline copies; conic-section model)
+
+Role: rendering
+Domain: orrery
 """
 
 import math

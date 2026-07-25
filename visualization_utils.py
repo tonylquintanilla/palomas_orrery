@@ -18,6 +18,9 @@ Module updated: June 2026 with Anthropic's Claude Opus 4.8. Added
     build_scene/build_scene_axes/build_scene_axis -- single source of truth
     for the static and animation main scene dicts (item 19.3 Phase 1);
     Phase 2 adds auto_dtick + autorange suppression for close-approach grids.
+
+Role: rendering
+Domain: stars
 """
 
 import plotly.graph_objects as go

@@ -1,5 +1,8 @@
 """
 Diagnostic script to examine BCO-DMO pH data structure
+
+Role: devtool
+Domain: dev_tools
 """
 import requests
 

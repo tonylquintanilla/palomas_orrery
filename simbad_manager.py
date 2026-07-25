@@ -2,6 +2,9 @@
 """
 Enhanced SIMBAD Query Manager with configurable rate limiting and retry logic.
 This module replaces simbad_test.py and provides robust SIMBAD querying capabilities.
+
+Role: computation
+Domain: stars
 """
 
 import os

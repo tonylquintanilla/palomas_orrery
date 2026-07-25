@@ -8,6 +8,9 @@ Scatter3d traces positioned relative to a center_position in AU.
 
 Consumed by: planet_visualization.py (routing dispatcher)
 
+Role: rendering/shells
+Domain: earth_science
+
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
     April 17, 2026: provenance audit source citations added, Gemini fact-check applied.
     Stratopause/tropopause temperature label corrected. LEO satellite/debris

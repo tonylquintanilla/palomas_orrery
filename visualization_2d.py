@@ -10,6 +10,9 @@ Key functions:
     create_hr_diagram() - Main HR diagram figure builder
     prepare_2d_data() - Data preparation and filtering
 
+Role: rendering
+Domain: stars
+
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 """
 # visualization_2d.py

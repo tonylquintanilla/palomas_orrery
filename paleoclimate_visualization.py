@@ -6,6 +6,9 @@ Shows the "big picture" of Earth's climate history with Plotly's zoom capability
 to explore details from ice ages down to the remarkable stability of the Holocene.
 
 Data Preservation is Climate Action
+
+Role: rendering
+Domain: earth_science
 """
 
 import json

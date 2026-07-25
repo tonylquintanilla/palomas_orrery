@@ -2,6 +2,9 @@
 """
 VOT Cache Manager - Safe management of VizieR VOT cache files
 Similar protection protocols as PKL files in simbad_manager.py
+
+Role: cache
+Domain: stars
 """
 
 import os

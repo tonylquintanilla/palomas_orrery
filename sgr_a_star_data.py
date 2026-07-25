@@ -23,6 +23,9 @@ Sources:
 
 Part of Paloma's Orrery - Data Preservation is Climate Action
 
+Role: data
+Domain: orrery
+
 Module updated: April 15, 2026 with Anthropic's Claude Opus 4.6
 """
 

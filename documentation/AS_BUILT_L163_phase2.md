@@ -469,6 +469,384 @@ Two small extras, not urgent: the commit also added documentation/prompt_to_opus
 
 Once the gallery file is moved and both previews check out, and you've settled the generators question, you're clear to run the real write.
 
+**Tony:**
+
+gallery write:
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/add_docstrings.py
+
+==============================================================
+  Role / Domain Tag Sweep -- PREVIEW (nothing written)
+  Target: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io
+  Scan paths: tools, gallery/assembler, gallery/assembler/harness, gallery/assembler/tests
+==============================================================
+
+  ADDED    tools/debug_encke_tp.py                          devtool / dev_tools
+  ADDED    tools/gallery_cache_builder.py                   cache / cache_builder
+  ADDED    tools/gallery_cleanup.py                         devtool / cache_builder
+  ADDED    tools/gallery_editor.py                          gui / gallery_pipeline
+  ADDED    tools/gallery_json_fixer.py                      pipeline / gallery_pipeline
+  ADDED    tools/gallery_studio.py                          gui / gallery_pipeline
+  ADDED    tools/inspect_staging.py                         devtool / dev_tools
+  ADDED    tools/json_converter.py                          pipeline / gallery_pipeline
+  ADDED    tools/test_gallery_cache_builder_offline.py      devtool / dev_tools
+  ADDED    gallery/assembler/assemble.py                    pipeline / assembler
+  ADDED    gallery/assembler/cache_reader.py                cache / assembler
+  ADDED    gallery/assembler/catalog.py                     data / assembler
+  ADDED    gallery/assembler/errors.py                      utility / assembler
+  ADDED    gallery/assembler/models.py                      data / assembler
+  ADDED    gallery/assembler/presentation.py                rendering / assembler
+  ADDED    gallery/assembler/render_events.py               rendering / assembler
+  ADDED    gallery/assembler/render_objects.py              rendering / assembler
+  ADDED    gallery/assembler/render_orbits.py               rendering / assembler
+  ADDED    gallery/assembler/render_spacecraft.py           rendering / assembler
+  ADDED    gallery/assembler/resolver.py                    computation / assembler
+  ADDED    gallery/assembler/harness/fingerprint.py         devtool / dev_tools
+  ADDED    gallery/assembler/tests/test_artifact1_earth.py  devtool / dev_tools
+
+--------------------------------------------------------------
+  added        22
+  total        22
+
+  CHANGELOG (2) -- more than one credit line. Per the
+  Phase 2 placement decision, the tag goes at the very end
+  of the docstring instead of above any single entry:
+    - tools/gallery_cache_builder.py: 3 credit lines (changelog docstring)
+    - tools/gallery_studio.py: 3 credit lines (changelog docstring)
+
+  No problems. Every module in scope carries both tags.
+
+
+  Write these changes? [y/n]: y
+
+
+==============================================================
+  Role / Domain Tag Sweep -- WRITING
+  Target: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io
+  Scan paths: tools, gallery/assembler, gallery/assembler/harness, gallery/assembler/tests
+==============================================================
+
+  ADDED    tools/debug_encke_tp.py                          devtool / dev_tools
+  ADDED    tools/gallery_cache_builder.py                   cache / cache_builder
+  ADDED    tools/gallery_cleanup.py                         devtool / cache_builder
+  ADDED    tools/gallery_editor.py                          gui / gallery_pipeline
+  ADDED    tools/gallery_json_fixer.py                      pipeline / gallery_pipeline
+  ADDED    tools/gallery_studio.py                          gui / gallery_pipeline
+  ADDED    tools/inspect_staging.py                         devtool / dev_tools
+  ADDED    tools/json_converter.py                          pipeline / gallery_pipeline
+  ADDED    tools/test_gallery_cache_builder_offline.py      devtool / dev_tools
+  ADDED    gallery/assembler/assemble.py                    pipeline / assembler
+  ADDED    gallery/assembler/cache_reader.py                cache / assembler
+  ADDED    gallery/assembler/catalog.py                     data / assembler
+  ADDED    gallery/assembler/errors.py                      utility / assembler
+  ADDED    gallery/assembler/models.py                      data / assembler
+  ADDED    gallery/assembler/presentation.py                rendering / assembler
+  ADDED    gallery/assembler/render_events.py               rendering / assembler
+  ADDED    gallery/assembler/render_objects.py              rendering / assembler
+  ADDED    gallery/assembler/render_orbits.py               rendering / assembler
+  ADDED    gallery/assembler/render_spacecraft.py           rendering / assembler
+  ADDED    gallery/assembler/resolver.py                    computation / assembler
+  ADDED    gallery/assembler/harness/fingerprint.py         devtool / dev_tools
+  ADDED    gallery/assembler/tests/test_artifact1_earth.py  devtool / dev_tools
+
+--------------------------------------------------------------
+  added        22
+  total        22
+
+  CHANGELOG (2) -- more than one credit line. Per the
+  Phase 2 placement decision, the tag goes at the very end
+  of the docstring instead of above any single entry:
+    - tools/gallery_cache_builder.py: 3 credit lines (changelog docstring)
+    - tools/gallery_studio.py: 3 credit lines (changelog docstring)
+
+  No problems. Every module in scope carries both tags.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+**Tony:**
+orrery write: 
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/add_docstrings.py
+
+==============================================================
+  Role / Domain Tag Sweep -- PREVIEW (nothing written)
+  Target: C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github
+  Scan paths: .
+==============================================================
+
+  UPDATED  add_docstrings.py                                devtool / dev_tools
+  ADDED    apsidal_markers.py                               computation / orrery
+  ADDED    asteroid_belt_visualization_shells.py            rendering/shells / orrery
+  ADDED    catalog_selection.py                             computation / stars
+  ADDED    celestial_coordinates.py                         computation / orrery
+  ADDED    celestial_objects.py                             data / orrery
+  ADDED    climate_cache_manager.py                         cache / earth_science
+  ADDED    close_approach_data.py                           data / orrery
+  ADDED    comet_visualization_shells.py                    rendering/shells / orrery
+  ADDED    constants_new.py                                 data / orrery
+  ADDED    convert_hot_ph_to_json.py                        devtool / dev_tools
+  ADDED    coordinate_system_guide.py                       computation / orrery
+  ADDED    create_cache_backups.py                          devtool / dev_tools
+  ADDED    create_ephemeris_database.py                     devtool / dev_tools
+  ADDED    data_acquisition.py                              computation / orrery
+  ADDED    data_acquisition_distance.py                     computation / orrery
+  ADDED    data_inventory.py                                devtool / dev_tools
+  ADDED    data_processing.py                               computation / stars
+  ADDED    dep_trace.py                                     devtool / dev_tools
+  ADDED    diagnose_bcodmo.py                               devtool / dev_tools
+  ADDED    earth_system_common.py                           utility / earth_science
+  ADDED    earth_system_controller.py                       gui / earth_science
+  ADDED    earth_system_generator.py                        devtool / earth_science
+  ADDED    earth_system_visualization_gui.py                gui / earth_science
+  ADDED    earth_visualization_shells.py                    rendering/shells / earth_science
+  ADDED    energy_imbalance.py                              computation / earth_science
+  ADDED    eris_visualization_shells.py                     rendering/shells / orrery
+  ADDED    examine_hot_csv.py                               devtool / dev_tools
+  ADDED    exoplanet_coordinates.py                         data / stars
+  ADDED    exoplanet_orbits.py                              rendering / stars
+  ADDED    exoplanet_stellar_properties.py                  data / stars
+  ADDED    exoplanet_systems.py                             data / stars
+  ADDED    export_orbit_cache.py                            devtool / dev_tools
+  ADDED    fetch_climate_data.py                            computation / earth_science
+  ADDED    fetch_paleoclimate_data.py                       computation / earth_science
+  ADDED    food_insecurity_generator.py                     devtool / earth_science
+  ADDED    formatting_utils.py                              utility / utilities
+  ADDED    hr_diagram_apparent_magnitude.py                 rendering / stars
+  ADDED    hr_diagram_distance.py                           rendering / stars
+  ADDED    idealized_orbits.py                              computation / orrery
+  ADDED    incremental_cache_manager.py                     cache / stars
+  ADDED    info_dictionary.py                               data / orrery
+  ADDED    jupiter_visualization_shells.py                  rendering/shells / orrery
+  ADDED    ledger_index.py                                  devtool / dev_tools
+  ADDED    mars_visualization_shells.py                     rendering/shells / orrery
+  ADDED    measure_animation_html.py                        devtool / dev_tools
+  ADDED    measure_perframe_elements.py                     devtool / dev_tools
+  ADDED    mercury_visualization_shells.py                  rendering/shells / orrery
+  ADDED    messier_catalog.py                               data / stars
+  ADDED    messier_object_data_handler.py                   pipeline / stars
+  ADDED    module_atlas.py                                  devtool / dev_tools
+  ADDED    moon_visualization_shells.py                     rendering/shells / orrery
+  ADDED    neptune_visualization_shells.py                  rendering/shells / orrery
+  ADDED    object_type_analyzer.py                          computation / orrery
+  ADDED    orbit_data_manager.py                            cache / orrery
+  ADDED    orbital_elements.py                              computation / orrery
+  ADDED    orbital_param_viz.py                             gui / orrery
+  ADDED    orrery_rendering.py                              rendering / orrery
+  ADDED    osculating_cache_manager.py                      cache / orrery
+  ADDED    paleoclimate_dual_scale.py                       rendering / earth_science
+  ADDED    paleoclimate_human_origins_full.py               rendering / earth_science
+  ADDED    paleoclimate_visualization.py                    rendering / earth_science
+  ADDED    paleoclimate_visualization_full.py               rendering / earth_science
+  ADDED    paleoclimate_wet_bulb_full.py                    rendering / earth_science
+  ADDED    palomas_orrery.py                                gui / orrery
+  ADDED    palomas_orrery_dashboard.py                      gui / orrery
+  ADDED    palomas_orrery_helpers.py                        utility / orrery
+  ADDED    planet9_visualization_shells.py                  rendering/shells / orrery
+  ADDED    planet_visualization.py                          rendering / orrery
+  ADDED    planet_visualization_utilities.py                rendering / orrery
+  ADDED    planetarium_apparent_magnitude.py                rendering / stars
+  ADDED    planetarium_distance.py                          rendering / stars
+  ADDED    plot_data_exchange.py                            pipeline / utilities
+  ADDED    plot_data_report_widget.py                       rendering / utilities
+  ADDED    pluto_visualization_shells.py                    rendering/shells / orrery
+  ADDED    provenance_scanner.py                            devtool / dev_tools
+  ADDED    report_manager.py                                utility / utilities
+  ADDED    saturn_visualization_shells.py                   rendering/shells / orrery
+  ADDED    save_utils.py                                    pipeline / utilities
+  ADDED    scenarios_coral_bleaching.py                     scenario / earth_science
+  ADDED    scenarios_food_insecurity.py                     scenario / earth_science
+  ADDED    scenarios_heatwaves.py                           scenario / earth_science
+  ADDED    scenarios_western_heatwave_march_2026.py         scenario / earth_science
+  ADDED    sgr_a_grand_tour.py                              rendering / orrery
+  ADDED    sgr_a_star_data.py                               data / orrery
+  ADDED    sgr_a_visualization_animation.py                 rendering / orrery
+  ADDED    sgr_a_visualization_core.py                      rendering / orrery
+  ADDED    sgr_a_visualization_core_arcs.py                 pipeline / orrery
+  ADDED    sgr_a_visualization_precession.py                rendering / orrery
+  ADDED    shared_utilities.py                              utility / utilities
+  ADDED    shell_configs.py                                 data / orrery
+  ADDED    shutdown_handler.py                              utility / utilities
+  ADDED    simbad_manager.py                                computation / stars
+  ADDED    skills_index.py                                  devtool / dev_tools
+  ADDED    social_media_export.py                           pipeline / gallery
+  ADDED    solar_visualization_shells.py                    rendering/shells / orrery
+  ADDED    spacecraft_encounters.py                         data / orrery
+  ADDED    star_notes.py                                    data / stars
+  ADDED    star_properties.py                               data / stars
+  ADDED    star_sphere_builder.py                           rendering / stars
+  ADDED    star_visualization_gui.py                        gui / stars
+  ADDED    stellar_data_patches.py                          data / stars
+  ADDED    stellar_parameters.py                            data / stars
+  ADDED    test_constants_provenance.py                     devtool / dev_tools
+  ADDED    test_orbit_cache.py                              devtool / dev_tools
+  ADDED    test_reset_completeness.py                       devtool / dev_tools
+  ADDED    uranus_visualization_shells.py                   rendering/shells / orrery
+  ADDED    venus_visualization_shells.py                    rendering/shells / orrery
+  ADDED    verify_orbit_cache.py                            devtool / dev_tools
+  ADDED    visualization_2d.py                              rendering / stars
+  ADDED    visualization_3d.py                              rendering / stars
+  ADDED    visualization_core.py                            rendering / stars
+  ADDED    visualization_utils.py                           rendering / stars
+  ADDED    vot_cache_manager.py                             cache / stars
+
+--------------------------------------------------------------
+  added        113
+  updated      1
+  total        114
+
+  CHANGELOG (6) -- more than one credit line. Per the
+  Phase 2 placement decision, the tag goes at the very end
+  of the docstring instead of above any single entry:
+    - apsidal_markers.py: 4 credit lines (changelog docstring)
+    - earth_system_controller.py: 2 credit lines (changelog docstring)
+    - idealized_orbits.py: 2 credit lines (changelog docstring)
+    - planet_visualization.py: 2 credit lines (changelog docstring)
+    - planet_visualization_utilities.py: 4 credit lines (changelog docstring)
+    - visualization_utils.py: 2 credit lines (changelog docstring)
+
+  No problems. Every module in scope carries both tags.
+
+
+  Write these changes? [y/n]: y
+
+
+==============================================================
+  Role / Domain Tag Sweep -- WRITING
+  Target: C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github
+  Scan paths: .
+==============================================================
+
+  UPDATED  add_docstrings.py                                devtool / dev_tools
+  ADDED    apsidal_markers.py                               computation / orrery
+  ADDED    asteroid_belt_visualization_shells.py            rendering/shells / orrery
+  ADDED    catalog_selection.py                             computation / stars
+  ADDED    celestial_coordinates.py                         computation / orrery
+  ADDED    celestial_objects.py                             data / orrery
+  ADDED    climate_cache_manager.py                         cache / earth_science
+  ADDED    close_approach_data.py                           data / orrery
+  ADDED    comet_visualization_shells.py                    rendering/shells / orrery
+  ADDED    constants_new.py                                 data / orrery
+  ADDED    convert_hot_ph_to_json.py                        devtool / dev_tools
+  ADDED    coordinate_system_guide.py                       computation / orrery
+  ADDED    create_cache_backups.py                          devtool / dev_tools
+  ADDED    create_ephemeris_database.py                     devtool / dev_tools
+  ADDED    data_acquisition.py                              computation / orrery
+  ADDED    data_acquisition_distance.py                     computation / orrery
+  ADDED    data_inventory.py                                devtool / dev_tools
+  ADDED    data_processing.py                               computation / stars
+  ADDED    dep_trace.py                                     devtool / dev_tools
+  ADDED    diagnose_bcodmo.py                               devtool / dev_tools
+  ADDED    earth_system_common.py                           utility / earth_science
+  ADDED    earth_system_controller.py                       gui / earth_science
+  ADDED    earth_system_generator.py                        devtool / earth_science
+  ADDED    earth_system_visualization_gui.py                gui / earth_science
+  ADDED    earth_visualization_shells.py                    rendering/shells / earth_science
+  ADDED    energy_imbalance.py                              computation / earth_science
+  ADDED    eris_visualization_shells.py                     rendering/shells / orrery
+  ADDED    examine_hot_csv.py                               devtool / dev_tools
+  ADDED    exoplanet_coordinates.py                         data / stars
+  ADDED    exoplanet_orbits.py                              rendering / stars
+  ADDED    exoplanet_stellar_properties.py                  data / stars
+  ADDED    exoplanet_systems.py                             data / stars
+  ADDED    export_orbit_cache.py                            devtool / dev_tools
+  ADDED    fetch_climate_data.py                            computation / earth_science
+  ADDED    fetch_paleoclimate_data.py                       computation / earth_science
+  ADDED    food_insecurity_generator.py                     devtool / earth_science
+  ADDED    formatting_utils.py                              utility / utilities
+  ADDED    hr_diagram_apparent_magnitude.py                 rendering / stars
+  ADDED    hr_diagram_distance.py                           rendering / stars
+  ADDED    idealized_orbits.py                              computation / orrery
+  ADDED    incremental_cache_manager.py                     cache / stars
+  ADDED    info_dictionary.py                               data / orrery
+  ADDED    jupiter_visualization_shells.py                  rendering/shells / orrery
+  ADDED    ledger_index.py                                  devtool / dev_tools
+  ADDED    mars_visualization_shells.py                     rendering/shells / orrery
+  ADDED    measure_animation_html.py                        devtool / dev_tools
+  ADDED    measure_perframe_elements.py                     devtool / dev_tools
+  ADDED    mercury_visualization_shells.py                  rendering/shells / orrery
+  ADDED    messier_catalog.py                               data / stars
+  ADDED    messier_object_data_handler.py                   pipeline / stars
+  ADDED    module_atlas.py                                  devtool / dev_tools
+  ADDED    moon_visualization_shells.py                     rendering/shells / orrery
+  ADDED    neptune_visualization_shells.py                  rendering/shells / orrery
+  ADDED    object_type_analyzer.py                          computation / orrery
+  ADDED    orbit_data_manager.py                            cache / orrery
+  ADDED    orbital_elements.py                              computation / orrery
+  ADDED    orbital_param_viz.py                             gui / orrery
+  ADDED    orrery_rendering.py                              rendering / orrery
+  ADDED    osculating_cache_manager.py                      cache / orrery
+  ADDED    paleoclimate_dual_scale.py                       rendering / earth_science
+  ADDED    paleoclimate_human_origins_full.py               rendering / earth_science
+  ADDED    paleoclimate_visualization.py                    rendering / earth_science
+  ADDED    paleoclimate_visualization_full.py               rendering / earth_science
+  ADDED    paleoclimate_wet_bulb_full.py                    rendering / earth_science
+  ADDED    palomas_orrery.py                                gui / orrery
+  ADDED    palomas_orrery_dashboard.py                      gui / orrery
+  ADDED    palomas_orrery_helpers.py                        utility / orrery
+  ADDED    planet9_visualization_shells.py                  rendering/shells / orrery
+  ADDED    planet_visualization.py                          rendering / orrery
+  ADDED    planet_visualization_utilities.py                rendering / orrery
+  ADDED    planetarium_apparent_magnitude.py                rendering / stars
+  ADDED    planetarium_distance.py                          rendering / stars
+  ADDED    plot_data_exchange.py                            pipeline / utilities
+  ADDED    plot_data_report_widget.py                       rendering / utilities
+  ADDED    pluto_visualization_shells.py                    rendering/shells / orrery
+  ADDED    provenance_scanner.py                            devtool / dev_tools
+  ADDED    report_manager.py                                utility / utilities
+  ADDED    saturn_visualization_shells.py                   rendering/shells / orrery
+  ADDED    save_utils.py                                    pipeline / utilities
+  ADDED    scenarios_coral_bleaching.py                     scenario / earth_science
+  ADDED    scenarios_food_insecurity.py                     scenario / earth_science
+  ADDED    scenarios_heatwaves.py                           scenario / earth_science
+  ADDED    scenarios_western_heatwave_march_2026.py         scenario / earth_science
+  ADDED    sgr_a_grand_tour.py                              rendering / orrery
+  ADDED    sgr_a_star_data.py                               data / orrery
+  ADDED    sgr_a_visualization_animation.py                 rendering / orrery
+  ADDED    sgr_a_visualization_core.py                      rendering / orrery
+  ADDED    sgr_a_visualization_core_arcs.py                 pipeline / orrery
+  ADDED    sgr_a_visualization_precession.py                rendering / orrery
+  ADDED    shared_utilities.py                              utility / utilities
+  ADDED    shell_configs.py                                 data / orrery
+  ADDED    shutdown_handler.py                              utility / utilities
+  ADDED    simbad_manager.py                                computation / stars
+  ADDED    skills_index.py                                  devtool / dev_tools
+  ADDED    social_media_export.py                           pipeline / gallery
+  ADDED    solar_visualization_shells.py                    rendering/shells / orrery
+  ADDED    spacecraft_encounters.py                         data / orrery
+  ADDED    star_notes.py                                    data / stars
+  ADDED    star_properties.py                               data / stars
+  ADDED    star_sphere_builder.py                           rendering / stars
+  ADDED    star_visualization_gui.py                        gui / stars
+  ADDED    stellar_data_patches.py                          data / stars
+  ADDED    stellar_parameters.py                            data / stars
+  ADDED    test_constants_provenance.py                     devtool / dev_tools
+  ADDED    test_orbit_cache.py                              devtool / dev_tools
+  ADDED    test_reset_completeness.py                       devtool / dev_tools
+  ADDED    uranus_visualization_shells.py                   rendering/shells / orrery
+  ADDED    venus_visualization_shells.py                    rendering/shells / orrery
+  ADDED    verify_orbit_cache.py                            devtool / dev_tools
+  ADDED    visualization_2d.py                              rendering / stars
+  ADDED    visualization_3d.py                              rendering / stars
+  ADDED    visualization_core.py                            rendering / stars
+  ADDED    visualization_utils.py                           rendering / stars
+  ADDED    vot_cache_manager.py                             cache / stars
+
+--------------------------------------------------------------
+  added        113
+  updated      1
+  total        114
+
+  CHANGELOG (6) -- more than one credit line. Per the
+  Phase 2 placement decision, the tag goes at the very end
+  of the docstring instead of above any single entry:
+    - apsidal_markers.py: 4 credit lines (changelog docstring)
+    - earth_system_controller.py: 2 credit lines (changelog docstring)
+    - idealized_orbits.py: 2 credit lines (changelog docstring)
+    - planet_visualization.py: 2 credit lines (changelog docstring)
+    - planet_visualization_utilities.py: 4 credit lines (changelog docstring)
+    - visualization_utils.py: 2 credit lines (changelog docstring)
+
+  No problems. Every module in scope carries both tags.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 **Gate:** Phase 3 is gated on the write run actually completing, not on
 this preview. The classifier has nothing to read until the tags exist in

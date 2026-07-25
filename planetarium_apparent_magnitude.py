@@ -1,4 +1,8 @@
-"""planetarium_apparent_magnitude.py - Create 3D visualization for stars brighter than specified apparent magnitude."""
+"""planetarium_apparent_magnitude.py - Create 3D visualization for stars brighter than specified apparent magnitude.
+
+Role: rendering
+Domain: stars
+"""
 
 import warnings
 from astropy.units import UnitsWarning

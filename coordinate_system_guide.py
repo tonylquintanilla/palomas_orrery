@@ -2,6 +2,9 @@
 coordinate_system_guide.py - Educational reference for J2000 Ecliptic Coordinate System
 
 This module creates an interactive HTML visualization with embedded reference text.
+
+Role: computation
+Domain: orrery
 """
 
 import plotly.graph_objects as go

@@ -9,6 +9,9 @@ This is what the GRAVITY Collaboration spent 27 years measuring to prove Einstei
 
 Collaboration: Tony + Claude Opus 4.5 + Gemini 3 Pro
 Part of Paloma's Orrery - Data Preservation is Climate Action
+
+Role: rendering
+Domain: orrery
 """
 
 import numpy as np

@@ -14,6 +14,9 @@ At ~8,600 lines this is the project monolith. Key internal functions:
     fetch_position() - JPL Horizons position query (~line 1531)
     calculate_axis_range_from_orbits() - Scale-aware axis fitting (~line 602)
 
+Role: gui
+Domain: orrery
+
 Module updated: June 10, 2026 with Anthropic's Claude Fable 5 (RIP), Sonnet 4.6 and Tony
 Updated June 15, 2026 with Opus 4.8.
 Updated June 15, 2026 with Opus 4.8: item 19.3 Phase A -- user-settable grid

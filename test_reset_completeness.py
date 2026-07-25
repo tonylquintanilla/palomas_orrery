@@ -15,6 +15,9 @@ confirm dialog auto-confirms.
     Run:  xvfb-run -a python3 test_reset_completeness.py
 
 Module created: June 2026 with Anthropic's Claude Opus 4.8.
+
+Role: devtool
+Domain: dev_tools
 """
 import os
 import sys

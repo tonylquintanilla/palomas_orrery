@@ -32,6 +32,9 @@ Gemini, and integrated by Tony. See constants_new.py docstring for the full
 verification process.
 
 Module created: April 17, 2026 with Anthropic's Claude Opus 4.7
+
+Role: devtool
+Domain: dev_tools
 """
 
 import sys

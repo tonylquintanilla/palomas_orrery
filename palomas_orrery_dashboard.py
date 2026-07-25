@@ -20,6 +20,9 @@ Classes:
     PalomasOrreryDashboard - standalone root window wrapper around
         PalomasOrreryDashboardFrame. Used when this file is run directly.
 
+Role: gui
+Domain: orrery
+
 Module updated: July 2026 with Anthropic's Claude Sonnet 5.
 July 2026: split the monolithic ctk.CTk dashboard into an embeddable
 CTkFrame plus a thin standalone-window wrapper, so palomas_orrery.py can

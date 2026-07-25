@@ -11,6 +11,9 @@ This module tests the orbit data manager's caching functionality including:
 - Edge cases and error handling
 
 Run this module periodically to ensure cache functionality remains robust.
+
+Role: devtool
+Domain: dev_tools
 """
 import json
 import os

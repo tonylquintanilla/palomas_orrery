@@ -42,6 +42,9 @@ USAGE:
   # Generate all 5
   for scenario in SCENARIOS:
       run_scenario(scenario)
+
+Role: scenario
+Domain: earth_science
 """
 
 import os
