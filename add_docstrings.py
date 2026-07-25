@@ -15,6 +15,12 @@ Module updated: April 2026 with Anthropic's Claude Opus 4.6
 import os
 import sys
 import re
+import ast
+
+# Docstring credit line the tag block anchors to, and the tag pattern the
+# sweep uses to find (and refresh) a block it wrote on an earlier run.
+CREDIT_PREFIX = 'Module updated:'
+TAG_RE = re.compile(r'^\s*(Role|Domain):\s')
 
 # ============================================================
 # DOCSTRINGS TO ADD
@@ -611,39 +617,46 @@ def has_leading_comment(content_bytes):
 
 
 def insert_docstring(content_bytes, docstring_text, line_ending):
-    """Insert docstring at the top of a file, before any existing content."""
+    """Insert or replace the module docstring.
+
+    Two fixes over the original, both found during L-163 Phase 1:
+
+    1. An existing docstring is located by PARSING (find_docstring_lines)
+       rather than by scanning for the first literal triple-quote. The
+       old scan could not tell a real module docstring from a quoted
+       string sitting in a comment above it.
+    2. When there is no docstring, the new one now goes BELOW any shebang
+       or leading comment block -- has_leading_comment() existed for
+       exactly this and was never called, so a shebang-first module like
+       ledger_index.py would have had the docstring inserted ABOVE
+       `#!/usr/bin/env python3`, silently disabling it.
+    """
     nl = line_ending
-    doc_bytes = ('"""\n' + docstring_text + '\n"""').encode('utf-8')
-    # Normalize newlines in the docstring to match the file
-    doc_bytes = doc_bytes.replace(b'\r\n', b'\n').replace(b'\n', nl)
+    text = _decode_source(content_bytes)
+    lines = text.split('\n')
+    doc_lines = ('"""\n' + docstring_text + '\n"""').split('\n')
 
-    stripped = content_bytes.lstrip()
-
-    if has_existing_docstring(content_bytes):
-        # Replace existing docstring
-        # Find the closing triple-quote
-        if stripped.startswith(b'"""'):
-            quote = b'"""'
-        else:
-            quote = b"'''"
-
-        # Find opening quote position in original content
-        start = content_bytes.index(quote)
-        # Find closing quote (skip the opening one)
-        end = content_bytes.index(quote, start + 3) + 3
-
-        # Check if there's a newline after the closing quote
-        rest_start = end
-        if rest_start < len(content_bytes) and content_bytes[rest_start:rest_start+2] == b'\r\n':
-            rest_start += 2
-        elif rest_start < len(content_bytes) and content_bytes[rest_start:rest_start+1] == b'\n':
-            rest_start += 1
-
-        return doc_bytes + nl + content_bytes[rest_start:]
-
+    span = find_docstring_lines(text)
+    if span is not None:
+        start, end, _ = span
+        lines = lines[:start] + doc_lines + lines[end + 1:]
+    elif has_leading_comment(content_bytes):
+        # Walk past the shebang / comment header, then back off any blank
+        # lines so the docstring sits directly under it.
+        at = 0
+        while at < len(lines) and (lines[at].lstrip().startswith('#')
+                                   or lines[at].strip() == ''):
+            at += 1
+        while at > 0 and lines[at - 1].strip() == '':
+            at -= 1
+        lines = lines[:at] + [''] + doc_lines + lines[at:]
     else:
-        # Insert before existing content
-        return doc_bytes + nl + content_bytes
+        lines = doc_lines + lines
+
+    out = '\n'.join(lines)
+    if nl != b'\n':
+        out = out.replace('\n', nl.decode('ascii'))
+    return out.encode('utf-8')
 
 
 def process_module(project_dir, module_name, docstring_text, write=False):
@@ -676,17 +689,481 @@ def process_module(project_dir, module_name, docstring_text, write=False):
 
 
 # ============================================================
+# ROLE / DOMAIN TAG SWEEP  (L-163 Phase 2)
+# ============================================================
+# Inserts an explicit two-line metadata block into each module's
+# EXISTING docstring -- it does not rewrite the docstring:
+#
+#     Role: <one of ROLE_VOCAB>
+#     Domain: <one of the repo's domain vocabulary>
+#
+# Placement: directly above the 'Module updated:' credit line, blank-
+# line separated. Modules with no credit line get the block at the end
+# of the docstring instead. Re-running updates an existing block in
+# place rather than adding a second one.
+#
+# Keys are repo-relative paths, so the orrery's flat modules and the
+# gallery's nested ones share one table with no collision risk.
+# __init__.py package markers are exempt (design Section 3).
+
+ROLE_VOCAB = (
+    'gui', 'rendering', 'rendering/shells', 'computation', 'data',
+    'cache', 'pipeline', 'scenario', 'utility', 'devtool', 'legacy',
+    'other',
+)
+
+DOMAIN_VOCAB = (
+    # orrery repo
+    'orrery', 'earth_science', 'gallery', 'stars', 'utilities',
+    'dev_tools',
+    # gallery repo
+    'gallery_pipeline', 'cache_builder', 'assembler',
+)
+
+# Which directories to sweep, relative to the repo root.
+# Orrery copy: ['.']  Gallery copy: the four module directories.
+SCAN_PATHS = ['.']
+# SCAN_PATHS = ['tools', 'gallery/assembler',
+#               'gallery/assembler/harness', 'gallery/assembler/tests']
+
+MODULE_TAGS = {
+
+    # ---------- orrery repo (114 modules) ----------
+    # Source: MAP = migrated from the existing ROLE_MAP /
+    # MODULE_DOMAIN_MAP; HEUR = the _shells suffix heuristic, now made
+    # explicit; NEW = classified this session, listed in the Phase 2
+    # as-built for Tony's review.
+    'add_docstrings.py':                        ('devtool', 'dev_tools'),
+    'apsidal_markers.py':                       ('computation', 'orrery'),
+    'asteroid_belt_visualization_shells.py':    ('rendering/shells', 'orrery'),   # HEUR/MAP
+    'catalog_selection.py':                     ('computation', 'stars'),   # MAP/NEW
+    'celestial_coordinates.py':                 ('computation', 'orrery'),
+    'celestial_objects.py':                     ('data', 'orrery'),
+    'climate_cache_manager.py':                 ('cache', 'earth_science'),
+    'close_approach_data.py':                   ('data', 'orrery'),
+    'comet_visualization_shells.py':            ('rendering/shells', 'orrery'),   # HEUR/MAP
+    'constants_new.py':                         ('data', 'orrery'),
+    'convert_hot_ph_to_json.py':                ('devtool', 'dev_tools'),
+    'coordinate_system_guide.py':               ('computation', 'orrery'),
+    'create_cache_backups.py':                  ('devtool', 'dev_tools'),
+    'create_ephemeris_database.py':             ('devtool', 'dev_tools'),
+    'data_acquisition.py':                      ('computation', 'orrery'),
+    'data_acquisition_distance.py':             ('computation', 'orrery'),
+    'data_inventory.py':                        ('devtool', 'dev_tools'),   # NEW/MAP
+    'data_processing.py':                       ('computation', 'stars'),   # MAP/NEW
+    'dep_trace.py':                             ('devtool', 'dev_tools'),
+    'diagnose_bcodmo.py':                       ('devtool', 'dev_tools'),
+    'earth_system_common.py':                   ('utility', 'earth_science'),   # NEW/NEW
+    'earth_system_controller.py':               ('gui', 'earth_science'),   # MAP/NEW
+    'earth_system_generator.py':                ('computation', 'earth_science'),
+    'earth_system_visualization_gui.py':        ('gui', 'earth_science'),   # MAP/NEW
+    'earth_visualization_shells.py':            ('rendering/shells', 'earth_science'),   # HEUR/MAP
+    'energy_imbalance.py':                      ('computation', 'earth_science'),
+    'eris_visualization_shells.py':             ('rendering/shells', 'orrery'),   # HEUR/MAP
+    'examine_hot_csv.py':                       ('devtool', 'dev_tools'),
+    'exoplanet_coordinates.py':                 ('data', 'stars'),
+    'exoplanet_orbits.py':                      ('rendering', 'stars'),
+    'exoplanet_stellar_properties.py':          ('data', 'stars'),
+    'exoplanet_systems.py':                     ('data', 'stars'),
+    'export_orbit_cache.py':                    ('devtool', 'dev_tools'),   # NEW/MAP
+    'fetch_climate_data.py':                    ('computation', 'earth_science'),
+    'fetch_paleoclimate_data.py':               ('computation', 'earth_science'),
+    'food_insecurity_generator.py':             ('computation', 'earth_science'),   # NEW/MAP
+    'formatting_utils.py':                      ('utility', 'utilities'),
+    'hr_diagram_apparent_magnitude.py':         ('rendering', 'stars'),
+    'hr_diagram_distance.py':                   ('rendering', 'stars'),
+    'idealized_orbits.py':                      ('computation', 'orrery'),
+    'incremental_cache_manager.py':             ('cache', 'stars'),   # MAP/NEW
+    'info_dictionary.py':                       ('data', 'orrery'),
+    'jupiter_visualization_shells.py':          ('rendering/shells', 'orrery'),   # HEUR/MAP
+    'ledger_index.py':                          ('devtool', 'dev_tools'),   # NEW/MAP
+    'mars_visualization_shells.py':             ('rendering/shells', 'orrery'),   # HEUR/MAP
+    'measure_animation_html.py':                ('devtool', 'dev_tools'),   # NEW/NEW
+    'measure_perframe_elements.py':             ('devtool', 'dev_tools'),   # NEW/MAP
+    'mercury_visualization_shells.py':          ('rendering/shells', 'orrery'),   # HEUR/MAP
+    'messier_catalog.py':                       ('data', 'stars'),
+    'messier_object_data_handler.py':           ('pipeline', 'stars'),
+    'module_atlas.py':                          ('devtool', 'dev_tools'),
+    'moon_visualization_shells.py':             ('rendering/shells', 'orrery'),   # HEUR/MAP
+    'neptune_visualization_shells.py':          ('rendering/shells', 'orrery'),   # HEUR/MAP
+    'object_type_analyzer.py':                  ('computation', 'orrery'),
+    'orbit_data_manager.py':                    ('cache', 'orrery'),
+    'orbital_elements.py':                      ('computation', 'orrery'),
+    'orbital_param_viz.py':                     ('gui', 'orrery'),   # MAP/NEW
+    'orrery_rendering.py':                      ('rendering', 'orrery'),   # NEW/NEW
+    'osculating_cache_manager.py':              ('cache', 'orrery'),
+    'paleoclimate_dual_scale.py':               ('rendering', 'earth_science'),
+    'paleoclimate_human_origins_full.py':       ('rendering', 'earth_science'),
+    'paleoclimate_visualization.py':            ('rendering', 'earth_science'),
+    'paleoclimate_visualization_full.py':       ('rendering', 'earth_science'),
+    'paleoclimate_wet_bulb_full.py':            ('rendering', 'earth_science'),
+    'palomas_orrery.py':                        ('gui', 'orrery'),
+    'palomas_orrery_dashboard.py':              ('gui', 'orrery'),
+    'palomas_orrery_helpers.py':                ('utility', 'orrery'),   # MAP/NEW
+    'planet9_visualization_shells.py':          ('rendering/shells', 'orrery'),   # HEUR/MAP
+    'planet_visualization.py':                  ('rendering', 'orrery'),   # MAP/NEW
+    'planet_visualization_utilities.py':        ('rendering', 'orrery'),
+    'planetarium_apparent_magnitude.py':        ('rendering', 'stars'),
+    'planetarium_distance.py':                  ('rendering', 'stars'),
+    'plot_data_exchange.py':                    ('pipeline', 'utilities'),
+    'plot_data_report_widget.py':               ('rendering', 'utilities'),
+    'pluto_visualization_shells.py':            ('rendering/shells', 'orrery'),   # HEUR/MAP
+    'provenance_scanner.py':                    ('devtool', 'dev_tools'),
+    'report_manager.py':                        ('utility', 'utilities'),
+    'saturn_visualization_shells.py':           ('rendering/shells', 'orrery'),   # HEUR/MAP
+    'save_utils.py':                            ('pipeline', 'utilities'),
+    'scenarios_coral_bleaching.py':             ('scenario', 'earth_science'),
+    'scenarios_food_insecurity.py':             ('scenario', 'earth_science'),   # NEW/NEW
+    'scenarios_heatwaves.py':                   ('scenario', 'earth_science'),
+    'scenarios_western_heatwave_march_2026.py': ('scenario', 'earth_science'),
+    'sgr_a_grand_tour.py':                      ('rendering', 'orrery'),
+    'sgr_a_star_data.py':                       ('data', 'orrery'),
+    'sgr_a_visualization_animation.py':         ('rendering', 'orrery'),
+    'sgr_a_visualization_core.py':              ('rendering', 'orrery'),
+    'sgr_a_visualization_core_arcs.py':         ('pipeline', 'orrery'),
+    'sgr_a_visualization_precession.py':        ('rendering', 'orrery'),
+    'shared_utilities.py':                      ('utility', 'utilities'),
+    'shell_configs.py':                         ('data', 'orrery'),   # NEW/NEW
+    'shutdown_handler.py':                      ('utility', 'utilities'),   # MAP/NEW
+    'simbad_manager.py':                        ('computation', 'stars'),
+    'skills_index.py':                          ('devtool', 'dev_tools'),   # NEW/MAP
+    'social_media_export.py':                   ('pipeline', 'gallery'),
+    'solar_visualization_shells.py':            ('rendering/shells', 'orrery'),   # HEUR/MAP
+    'spacecraft_encounters.py':                 ('data', 'orrery'),
+    'star_notes.py':                            ('data', 'stars'),
+    'star_properties.py':                       ('data', 'stars'),
+    'star_sphere_builder.py':                   ('rendering', 'stars'),
+    'star_visualization_gui.py':                ('gui', 'stars'),   # MAP/NEW
+    'stellar_data_patches.py':                  ('data', 'stars'),
+    'stellar_parameters.py':                    ('data', 'stars'),
+    'test_constants_provenance.py':             ('devtool', 'dev_tools'),
+    'test_orbit_cache.py':                      ('devtool', 'dev_tools'),
+    'test_reset_completeness.py':               ('devtool', 'dev_tools'),   # NEW/MAP
+    'uranus_visualization_shells.py':           ('rendering/shells', 'orrery'),   # HEUR/MAP
+    'venus_visualization_shells.py':            ('rendering/shells', 'orrery'),   # HEUR/MAP
+    'verify_orbit_cache.py':                    ('devtool', 'dev_tools'),
+    'visualization_2d.py':                      ('rendering', 'stars'),
+    'visualization_3d.py':                      ('rendering', 'stars'),
+    'visualization_core.py':                    ('rendering', 'stars'),
+    'visualization_utils.py':                   ('rendering', 'stars'),
+    'vot_cache_manager.py':                     ('cache', 'stars'),   # MAP/NEW
+
+    # ---------- gallery repo (22 modules) ----------
+    # Roles classified this session; domains from design Section 11.
+    'gallery/assembler/assemble.py':                   ('pipeline', 'assembler'),   # NEW/S11
+    'gallery/assembler/cache_reader.py':               ('cache', 'assembler'),   # NEW/S11
+    'gallery/assembler/catalog.py':                    ('data', 'assembler'),   # NEW/S11
+    'gallery/assembler/errors.py':                     ('utility', 'assembler'),   # NEW/S11
+    'gallery/assembler/harness/fingerprint.py':        ('devtool', 'dev_tools'),   # NEW/S11
+    'gallery/assembler/models.py':                     ('data', 'assembler'),   # NEW/S11
+    'gallery/assembler/presentation.py':               ('rendering', 'assembler'),   # NEW/S11
+    'gallery/assembler/render_events.py':              ('rendering', 'assembler'),   # NEW/S11
+    'gallery/assembler/render_objects.py':             ('rendering', 'assembler'),   # NEW/S11
+    'gallery/assembler/render_orbits.py':              ('rendering', 'assembler'),   # NEW/S11
+    'gallery/assembler/render_spacecraft.py':          ('rendering', 'assembler'),   # NEW/S11
+    'gallery/assembler/resolver.py':                   ('computation', 'assembler'),   # NEW/S11
+    'gallery/assembler/tests/test_artifact1_earth.py': ('devtool', 'dev_tools'),   # NEW/S11
+    'tools/debug_encke_tp.py':                         ('devtool', 'dev_tools'),   # NEW/S11
+    'tools/gallery_cache_builder.py':                  ('cache', 'cache_builder'),   # NEW/S11
+    'tools/gallery_cleanup.py':                        ('devtool', 'cache_builder'),   # NEW/S11
+    'tools/gallery_editor.py':                         ('gui', 'gallery_pipeline'),   # NEW/S11
+    'tools/gallery_json_fixer.py':                     ('pipeline', 'gallery_pipeline'),   # NEW/S11
+    'tools/gallery_studio.py':                         ('gui', 'gallery_pipeline'),   # NEW/S11
+    'tools/inspect_staging.py':                        ('devtool', 'dev_tools'),   # NEW/S11
+    'tools/json_converter.py':                         ('pipeline', 'gallery_pipeline'),   # NEW/S11
+    'tools/test_gallery_cache_builder_offline.py':     ('devtool', 'dev_tools'),   # NEW/S11
+}
+
+
+def _decode_source(content_bytes):
+    """Decode a module to text with LF endings for line-wise editing."""
+    text = content_bytes.decode('utf-8')
+    return text.replace('\r\n', '\n')
+
+
+def find_docstring_lines(text):
+    """Locate the module docstring by PARSING, not by scanning for quotes.
+
+    Returns (start_index, end_index, quote) as 0-based line indexes into
+    text.split('\n'), or None if the module has no docstring. Parsing is
+    what makes this correct for shebang-first and comment-first modules --
+    the old scan-for-the-first-triple-quote approach could not tell a
+    module docstring from a string appearing earlier in a comment.
+    """
+    try:
+        tree = ast.parse(text)
+    except SyntaxError:
+        return None
+    if not tree.body:
+        return None
+    node = tree.body[0]
+    if not isinstance(node, ast.Expr):
+        return None
+    value = node.value
+    if not isinstance(value, ast.Constant) or not isinstance(value.value, str):
+        return None
+    lines = text.split('\n')
+    opener = lines[value.lineno - 1]
+    quote = '"""' if '"""' in opener else "'''"
+    return (value.lineno - 1, value.end_lineno - 1, quote)
+
+
+def find_insert_point(lines, start, end):
+    """Decide where the tag block goes inside an existing docstring.
+
+    Returns (index, needs_blank_before). The rule, per the Phase 2
+    decision: directly above the 'Module updated:' credit line when one
+    exists, otherwise at the end of the docstring, just above its
+    closing quotes.
+    """
+    hits = [i for i in range(start, end + 1)
+            if lines[i].lstrip().startswith(CREDIT_PREFIX)]
+    if hits:
+        # Anchor on the LAST credit line, not the first. Six orrery
+        # modules keep a changelog of several 'Module updated:' entries
+        # inside one docstring; anchoring on the first would wedge the
+        # tag block into the middle of that history.
+        i = hits[-1]
+        return i, lines[i - 1].strip() != ''
+    return end, lines[end - 1].strip() != ''
+
+
+def strip_existing_tags(lines, start, end):
+    """Remove any Role:/Domain: lines already inside the docstring.
+
+    Makes the sweep idempotent: a second run updates the block in place
+    instead of stacking a second copy underneath the first.
+    """
+    keep = []
+    removed = 0
+    seam = None
+    for i, line in enumerate(lines):
+        if start <= i <= end and TAG_RE.match(line):
+            if seam is None:
+                seam = len(keep)
+            removed += 1
+            continue
+        keep.append(line)
+    if removed and seam is not None and 0 < seam < len(keep):
+        # Taking the block out can leave the blank line above it sitting
+        # directly on the blank line below it. Collapse that one seam --
+        # and only that seam -- so a re-run reproduces the file byte for
+        # byte instead of growing a blank line each time.
+        if keep[seam - 1].strip() == '' and keep[seam].strip() == '':
+            del keep[seam]
+    return keep, removed
+
+
+def expand_single_line_docstring(lines, start, quote):
+    """Convert \"\"\"one-liner.\"\"\" into an openable multi-line docstring.
+
+    Three modules use the one-line form. Rather than skip them, give them
+    the same shape as everything else so the tag block lands consistently.
+    """
+    body = lines[start].strip()
+    inner = body[len(quote):-len(quote)]
+    indent = lines[start][:len(lines[start]) - len(lines[start].lstrip())]
+    return [indent + quote + inner, indent + quote]
+
+
+def insert_tags(content_bytes, role, domain, line_ending):
+    """Insert or refresh the Role:/Domain: block inside the docstring.
+
+    Everything outside the docstring is left byte-identical; inside it,
+    only the tag block and its blank-line separator are touched.
+    """
+    text = _decode_source(content_bytes)
+    span = find_docstring_lines(text)
+    if span is None:
+        return None, 'no docstring'
+    start, end, quote = span
+    lines = text.split('\n')
+
+    if start == end:
+        expanded = expand_single_line_docstring(lines, start, quote)
+        lines = lines[:start] + expanded + lines[start + 1:]
+        end = start + 1
+
+    lines, removed = strip_existing_tags(lines, start, end)
+    end -= removed
+
+    point, needs_blank = find_insert_point(lines, start, end)
+    block = ['Role: ' + role, 'Domain: ' + domain]
+    if needs_blank:
+        block = [''] + block
+    if lines[point].lstrip().startswith(CREDIT_PREFIX):
+        block = block + ['']
+
+    lines = lines[:point] + block + lines[point:]
+    out = '\n'.join(lines)
+    if line_ending != b'\n':
+        out = out.replace('\n', line_ending.decode('ascii'))
+    action = 'updated' if removed else 'added'
+    return out.encode('utf-8'), action
+
+
+def iter_tag_targets(project_dir):
+    """Yield (relative_path, absolute_path) for every module to sweep.
+
+    Walks only SCAN_PATHS -- no recursion -- so the gallery copy reaches
+    its four module directories without dragging in anything else.
+    __init__.py package markers are skipped by design.
+    """
+    for scan in SCAN_PATHS:
+        directory = os.path.join(project_dir, scan)
+        if not os.path.isdir(directory):
+            print("  WARNING: SCAN_PATHS entry not found: %s" % scan)
+            continue
+        for name in sorted(os.listdir(directory)):
+            if not name.endswith('.py') or name == '__init__.py':
+                continue
+            full = os.path.join(directory, name)
+            if not os.path.isfile(full):
+                continue
+            rel = name if scan == '.' else scan + '/' + name
+            yield rel, full
+
+
+def count_credit_lines(content_bytes):
+    """How many 'Module updated:' lines the docstring carries.
+
+    More than one means a changelog-style docstring, where 'above the
+    credit line' is ambiguous. Reported, never silently resolved.
+    """
+    text = _decode_source(content_bytes)
+    span = find_docstring_lines(text)
+    if span is None:
+        return 0
+    start, end, _ = span
+    lines = text.split('\n')
+    return sum(1 for i in range(start, end + 1)
+               if lines[i].lstrip().startswith(CREDIT_PREFIX))
+
+
+def process_module_tags(rel_path, full_path, write=False):
+    """Sweep one module. Returns (status, detail)."""
+    tags = MODULE_TAGS.get(rel_path)
+    if tags is None:
+        return 'unmapped', 'no MODULE_TAGS entry'
+    role, domain = tags
+    if role not in ROLE_VOCAB:
+        return 'bad-role', role
+    if domain not in DOMAIN_VOCAB:
+        return 'bad-domain', domain
+
+    with open(full_path, 'rb') as handle:
+        content = handle.read()
+    line_ending = detect_line_ending(content)
+    new_content, action = insert_tags(content, role, domain, line_ending)
+    if new_content is None:
+        return 'no-docstring', action
+    if new_content == content:
+        return 'unchanged', ''
+    if write:
+        with open(full_path, 'wb') as handle:
+            handle.write(new_content)
+    return action, '%s / %s' % (role, domain)
+
+
+def run_tag_sweep(project_dir, write=False):
+    """Phase 2 sweep across SCAN_PATHS. Preview unless write=True.
+
+    Reports the way ledger_index.py does: fix what is mechanically
+    knowable, collect everything else into a problems list, and exit
+    non-zero so a bad run cannot pass quietly in the VS Code panel.
+    """
+    label = 'WRITING' if write else 'PREVIEW (nothing written)'
+    print('\n' + '=' * 62)
+    print('  Role / Domain Tag Sweep -- %s' % label)
+    print('  Target: %s' % os.path.abspath(project_dir))
+    print('  Scan paths: %s' % ', '.join(SCAN_PATHS))
+    print('=' * 62 + '\n')
+
+    counts = {}
+    problems = []
+    review = []
+    seen = set()
+    for rel, full in iter_tag_targets(project_dir):
+        seen.add(rel)
+        with open(full, 'rb') as handle:
+            credits = count_credit_lines(handle.read())
+        if credits > 1:
+            review.append('%s: %d credit lines (changelog docstring)'
+                          % (rel, credits))
+        status, detail = process_module_tags(rel, full, write=write)
+        counts[status] = counts.get(status, 0) + 1
+        if status in ('added', 'updated'):
+            print('  %-8s %-48s %s' % (status.upper(), rel, detail))
+        elif status == 'unchanged':
+            print('  %-8s %-48s' % ('SAME', rel))
+        else:
+            print('  %-8s %-48s %s' % ('PROBLEM', rel, detail))
+            problems.append('%s: %s (%s)' % (rel, status, detail))
+
+    expected = set(k for k in MODULE_TAGS if _belongs_to_this_repo(k))
+    missing_file = sorted(expected - seen)
+    for rel in missing_file:
+        problems.append('%s: MODULE_TAGS entry has no file' % rel)
+
+    print('\n' + '-' * 62)
+    for key in sorted(counts):
+        print('  %-12s %d' % (key, counts[key]))
+    print('  %-12s %d' % ('total', sum(counts.values())))
+
+    if review:
+        print('\n  REVIEW (%d) -- more than one credit line, so "above the'
+              % len(review))
+        print('  credit line" is ambiguous. Anchored on the LAST one;')
+        print('  confirm that reads right before any write run:')
+        for item in review:
+            print('    - %s' % item)
+
+    if problems:
+        print('\n  PROBLEMS (%d) -- nothing guessed, each needs a decision:' % len(problems))
+        for item in problems:
+            print('    - %s' % item)
+        print()
+        return 1
+    print('\n  No problems. Every module in scope carries both tags.\n')
+    return 0
+
+
+def _belongs_to_this_repo(rel_path):
+    """True if a MODULE_TAGS key is in scope for the current SCAN_PATHS.
+
+    The table holds both repos so the two copies stay identical; this is
+    what keeps the orrery run from reporting every gallery entry as a
+    missing file, and vice versa.
+    """
+    for scan in SCAN_PATHS:
+        if scan == '.':
+            if '/' not in rel_path:
+                return True
+        elif rel_path.startswith(scan + '/'):
+            if rel_path[len(scan) + 1:].count('/') == 0:
+                return True
+    return False
+
+
+# ============================================================
 # MAIN
 # ============================================================
 
 def main():
     write_mode = '--write' in sys.argv
+    legacy_mode = '--docstrings' in sys.argv
     project_dir = '.'
 
     # Check for directory argument
     for arg in sys.argv[1:]:
         if arg != '--write' and os.path.isdir(arg):
             project_dir = arg
+
+    if not legacy_mode:
+        # Default job is now the L-163 Phase 2 tag sweep. The original
+        # whole-docstring mode still runs, behind --docstrings, so the
+        # DOCSTRINGS table below stays usable for new modules.
+        sys.exit(run_tag_sweep(project_dir, write=write_mode))
 
     mode_label = "WRITING" if write_mode else "PREVIEW (use --write to apply)"
     print(f"\n{'='*60}")
