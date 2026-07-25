@@ -30,13 +30,18 @@ Artifact 1 (Earth)'s own acceptance test confirms this by design: features
 dispatch as data only, with "JavaScript rendering them" as the intended
 next step -- and that JS was never written. Writing that feature-rendering
 layer is the real next gate before Artifact 2 (Jupiter/Saturn) can attempt
-Mode 5. Independently: Layer 3 (nightly Task Scheduler) has no gate left
-and can be enabled anytime.
+Mode 5. Independently: Layer 3 (nightly Task Scheduler) is ENABLED and its
+core mechanism is proven -- unattended trigger, Horizons fetch, and data
+assembly all confirmed working end to end -- but the final promotion step
+has a known intermittent failure under the scheduler's execution context
+(see S3a addendum, July 24). Watch a few more cycles before trusting it
+fully hands-off.
 **Base:** orrery @ `c10a424`, gallery @ `e864fd42` (design ratified here;
 Artifact 1 built+pushed at orrery `6fc52b9a` / gallery `f89d83c4`; current
-HEAD orrery `e8d6dd5e` / gallery `af3a2c86` -- F1a (M2) fully closed: L-149
-and L-118 both DONE, Layer 2 Steps 1-5 passed live; L-150 (multi-orbit
-binaries) and L-151 (gallery-assembler skill) still decided, not yet built)
+HEAD orrery `17913aef` / gallery `22c947c9` -- F1a (M2) fully closed: L-149
+and L-118 both DONE, Layer 2 Steps 1-5 passed live; Layer 3 enabled with a
+known open issue; L-150 (multi-orbit binaries) and L-151 (gallery-assembler
+skill) still decided, not yet built)
 **Date begun:** July 3, 2026
 **Last updated:** July 21-24, 2026
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
@@ -403,6 +408,38 @@ held as optimization). Deferred to Phase 3.
   today nightly (NOT write-once). **Settled (v0.4).**
 - OQ-C: Update cadence — NIGHTLY batch (v0.3 pivot), no forward padding --
   `horizon=0`, the conic covers the future. **Settled (v0.4).**
+
+> **Addendum (July 24) — Layer 3 operational config and a known failure
+> mode.** For reproducibility: Windows Task Scheduler, account `tonyq`,
+> "Run whether user is logged on or not" (needs the real account password
+> -- confirmed a Windows Hello PIN cannot be used for this option). Action:
+> `python.exe tools/gallery_cache_builder.py --nightly --commit`, start-in
+> = repo root. Concurrency: "Do not start a new instance." Daily trigger,
+> time chosen for when the machine is reliably on and logged in.
+>
+> Known failure mode, not yet root-caused: the atomic swap (move old data
+> aside, move new data in) can fail to complete its second half specifically
+> under the scheduler's batch-logon execution context, even though the same
+> swap has never failed running interactively. The Horizons fetch and full
+> data assembly complete correctly -- a complete, valid, correctly-computed
+> `coverage_index.json` was found sitting in an unpromoted `.staging_*`
+> folder from a run that otherwise looked like a total failure -- only the
+> final promotion into the live `data/solar-system` path doesn't land. The
+> visible symptom: `data/solar-system` sits empty locally, which git reports
+> as a mass deletion of every served file, indistinguishable at a glance
+> from a real accidental deletion. This already happened once -- committed
+> and pushed as "automatic," reverted after the fact.
+>
+> **The rule this establishes:** never commit a mass deletion under
+> `data/solar-system` as a first response. Run the builder again first --
+> its own startup recovery is built to detect and clean up exactly this
+> crashed-mid-swap state, and a successful rerun makes the phantom deletion
+> disappear from git's view on its own. Only investigate further if
+> rerunning does NOT clear it. Suspected but unconfirmed cause: the same
+> OneDrive file-lock pattern seen (and safely self-healed) in every
+> interactive run this week, possibly behaving differently under the
+> scheduler's account context.
+
 - OQ-D: Moon step size — 6h default; per-object `step_hours` from day one.
   Io may want 2h. Mode 5 decides. **Positioned, Mode 5.**
 - OQ-E: Serving home — H2 subfolder in gallery repo (`data/`). Gallery
@@ -1257,13 +1294,16 @@ prompts.
 
 ---
 
-Base: orrery @ `e8d6dd5e` / gallery @ `af3a2c86`.
+Base: orrery @ `17913aef` / gallery @ `22c947c9`.
 Phase 0 closed. Phase 1a vocabulary delivered. A/B fork resolved: B′.
 Phase 1b builder built, offline-verified (L-098), and Layer 2 live-Horizons
 fully tested and closed -- L-149 and L-118 both DONE; L-150/L-151 still
 decided, not built.
 Next: write the feature-rendering JS layer (ring/shell/belt consumers) --
 that's what actually stands between here and attempting Artifact 2
-(Jupiter/Saturn) Mode 5. Independently, Layer 3 (nightly Task Scheduler)
-can be enabled anytime, no gate left in front of it.
+(Jupiter/Saturn) Mode 5. Independently, Layer 3 (nightly Task Scheduler) is
+enabled and its core mechanism proven, but has a known intermittent
+promotion-step failure under unattended execution (S3a addendum, July 24)
+-- worth watching a few more nightly cycles before trusting it fully
+hands-off.
 Solar System Explorer live at palomasorrery.com/interactive.html.

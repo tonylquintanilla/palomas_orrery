@@ -730,36 +730,64 @@ recoverable from `ba1c52d` if a local copy is ever wanted.
 **Tony's to-do list to close Phase 1 -- consolidated, one place, tagged
 per the new `Tony-action` convention (see chat for the skill-text
 addition; bumps `ledger-and-session-records` to 1.3 independent of
-L-163, so Phase 4's target becomes 1.3 -> 1.4, not 1.2 -> 1.3):**
+L-163, so Phase 4's target becomes 1.3 -> 1.4, not 1.2 -> 1.3). Status
+of each on its own line below the item -- nothing buried in a wrap.
 
 1. **Tony-action (decide):** check `titan_io_probe.py` yourself for a
-   fuller version outside the repo (Section 4 flagged this specifically). -- **Tony:** file deleted from the repo; obsolete
-2. **Tony-action (decide):** confirm the 7 archive candidates (Section 4).
+   fuller version outside the repo (Section 4 flagged this specifically).
+   → **Status:** file deleted from the repo; obsolete.
 
-**Archive candidates (zero live references, confirmed one-time or
-orphaned):** -- **Tony:** all of these files were short term diagnostic tools. removed from the repo. obsolete. 
+2. **Tony-action (decide):** confirm the 7 archive candidates
+   (Archive candidates table, Section 4).
+   → **Status:** all 7 confirmed and archived -- short-term diagnostic
+   tools, removed from the repo.
 
-| File | Evidence |
-|---|---|
-| `provenance_scanner_color_patch.py` | Docstring: "run this once" (July 16, 2026). Zero references anywhere. |
-| `smoke_phase4.py` | Zero references anywhere, not even in classification dicts. |
-| `smoke_dipole_cone.py` | Only classification-dict mentions, no functional callers. Tied to "Movement 2, June 2026" build verification. |
-| `smoke_rotation_axis.py` | Same as above; cross-referenced only by `smoke_dipole_cone.py`'s own docstring, not by any functional caller. |
-| `titan_io_probe.py` | Single bare list-comprehension line, no docstring, no function wrapper, zero references. Would produce no output if run. Contrary to the initial hypothesis that this one might be active -- evidence points the other way. Flagged for Tony's own verification in case a fuller version exists elsewhere. |
-| `color_map.py` | Zero real callers. The 12 apparent references were a naming collision with an unrelated `color_map` function imported from `constants_new.py`. Matches Tony's own preference for the graphic file over running this script. |
-| `barycenter_cache_check.py` | Tiny ad hoc diagnostic (loads `orbit_paths.json`, prints barycenter key info). Zero references, no docstring. |
+   | File | Evidence |
+   |---|---|
+   | `provenance_scanner_color_patch.py` | Docstring: "run this once" (July 16, 2026). Zero references anywhere. |
+   | `smoke_phase4.py` | Zero references anywhere, not even in classification dicts. |
+   | `smoke_dipole_cone.py` | Only classification-dict mentions, no functional callers. Tied to "Movement 2, June 2026" build verification. |
+   | `smoke_rotation_axis.py` | Same as above; cross-referenced only by `smoke_dipole_cone.py`'s own docstring, not by any functional caller. |
+   | `titan_io_probe.py` | Single bare list-comprehension line, no docstring, no function wrapper, zero references. Would produce no output if run. |
+   | `color_map.py` | Zero real callers -- the 12 apparent references were a naming collision with an unrelated `color_map` function in `constants_new.py`. |
+   | `barycenter_cache_check.py` | Tiny ad hoc diagnostic (loads `orbit_paths.json`, prints barycenter key info). Zero references, no docstring. |
 
-3. **Tony-action (do):** move the confirmed candidates to local archive -- **Tony:** done
+3. **Tony-action (do):** move the confirmed candidates to local archive
    via GitHub Desktop.
+   → **Status:** done.
+
 4. **Tony-action (decide):** confirm the `orrery_integration` `ROLE_MAP`
-   entry can be deleted (evidence above). -- **Tony:** this file has been removed from the repo. remove from the role map. 
+   entry can be deleted (evidence above).
+   → **Status:** confirmed -- file already removed from the repo,
+   delete the `ROLE_MAP` entry.
+
 5. **Tony-action (do):** paste the `MASTER_PLAN_UPDATE_provenance_and_
-   prep.md` Section 6 entry -- drafted earlier, never landed. -- **Tony:** done
+   prep.md` Section 6 entry -- drafted earlier, never landed.
+   → **Status:** done.
+
 6. **Tony-action (do):** re-install `ledger-and-session-records` (now
-   1.3, once you've pasted the tag addition above). -- **Tony:** done
+   1.3, once you've pasted the tag addition above).
+   → **Status:** done.
+
 7. **Tony-action (do):** push. Send Opus the new SHA plus exactly which
    of the 7 candidates were actually archived -- Opus needs the list to
    know which `ROLE_MAP` entries to delete, not just that "some" were.
+   → **Status:** all 7 archived -- still needs the push + SHA to Opus.
+
+**Note (Claude):** scope clarification for Opus, worth passing along.
+All 7 archived files were part of the original 19 "falls through to
+`'other'`" list in Section 1 -- unmapped, never explicit `ROLE_MAP`
+entries. Deleting them needs no `ROLE_MAP` edit at all; the next
+`module_atlas.py` scan simply won't find them. Phase 1's `ROLE_MAP`
+cleanup is still only the original 7 ghost entries (5 gallery names,
+`orrery_integration`, `star_visualization_gui_before_pyinstaller_
+refactor`) -- now all 7 confirmed, none still open. Phase 2's sweep
+scope also shrinks: 19 -> 12 remaining uncategorized modules. One
+coverage-gap count shifts too -- `smoke_rotation_axis.py`'s 1
+claim-shaped string (Section 1, PROVENANCE_AUDIT.md) leaves the gap by
+removing the file, not by being scanned. Worth one line in the Phase 1
+as-built so the count change reads as explained, not silent (Fable's
+review, Section 16, flagged this exact case in advance).
 
 Nothing here is a judgment call for Opus to make -- every item is
 either Tony's own hands or a confirmation only Tony can give, now
