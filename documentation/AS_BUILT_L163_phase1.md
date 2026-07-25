@@ -1,7 +1,7 @@
 Built on:
 - orrery: 745106dc47c61ff2936fb8460fb58ad5b8910dc1 at https://github.com/tonylquintanilla/palomas_orrery
 - gallery: 22c947c993a0d3e5f1aa9390288c28bcd2710275 at https://github.com/tonylquintanilla/tonyquintanilla.github.io
-- pushed at: [PHASE 1 CLOSE -- paste the new orrery HEAD SHA after committing the module_atlas.py edit]
+- pushed at: 877822db58be485e44b0a2a28c0b3697b043d1ee
 
 Ledger handle: L-163
 Phase: 1 of 4 -- Archival and repo hygiene (content, no code)
@@ -82,39 +82,56 @@ and `orrery_rendering.py` (1 each). Fable's review (Section 16) flagged
 this class of count shift in advance; recorded here so the next
 PROVENANCE_AUDIT.md delta reads as accounted for.
 
-## Still open
+## Closed out
 
-**Tony-action (do):** commit the `module_atlas.py` ghost-entry deletion
-and push; record the resulting SHA in this note's anchor.
+All Phase 1 actions completed and verified at HEAD `877822db`:
 
-**Tony-action (do):** fill the placeholder in
-`skills/ledger-and-session-records/SKILL.md`. Its version line currently
-reads `Cut from palomas_orrery @ [PENDING -- paste the new HEAD SHA here
-once this file is committed and pushed]`. It has now been committed and
-pushed; the stamp should be a real SHA. A skill carrying an unfilled
-anchor is the exact failure the Anchor Requirement -- documented inside
-that same skill -- exists to prevent.
+- `module_atlas.py` ghost-entry deletion committed at `728361c3`.
+  Re-verified independently at HEAD: 87 entries, zero ghosts,
+  `py_compile` clean, `classify_role()` correct across mapped names, the
+  `_shells` heuristic, and unmapped names. Byte-identical to the version
+  verified before delivery apart from one trailing space on line 77
+  (cosmetic, left as-is).
+- `skills/ledger-and-session-records/SKILL.md` placeholder replaced with
+  `728361c3c451e19ce0cc025b2ed29f6ee30054e9`. Verified as a real,
+  reachable ancestor of HEAD carrying the 1.3 content -- a true
+  provenance claim, not a filled-in-to-clear stamp. Stamping the
+  immediately-preceding commit is the correct resolution of the
+  chicken-and-egg problem the placeholder named.
+- `documentation/ledger-and-session-records_SKILL_v1.3.md` deleted
+  (confirmed 404 at HEAD). One authoritative store restored.
+- L-163 entry added to `MASTER_PLAN_INTERACTIVE_GALLERY.md` Section 6.
+  Note for later readers: the handoff's Section 14 named
+  `MASTER_PLAN_UPDATE_provenance_and_prep.md` as the destination, but
+  that document holds *proposed edits* to the master plan, not the plan
+  itself. The entry landed in the applied plan, which is correct.
 
-**Tony-action (decide):** `documentation/ledger-and-session-records_
-SKILL_v1.3.md` is a byte-for-byte duplicate of
-`skills/ledger-and-session-records/SKILL.md`. Two copies of one document
-in one repo is the duplicate-store failure class; `skills/` is
-authoritative (`skills_index.py` reads its frontmatter). Recommend
-deleting the `documentation/` copy unless it was intended as a
-paste buffer, in which case it has served its purpose.
-
-**Observation, no action:** the copy of `ledger-and-session-records`
-installed to this session's account still reads 1.1 (`2991a0c7`,
-July 17). Most likely the account mount does not refresh mid-session
-rather than a failed reinstall; worth confirming at the start of the
-next session. This session worked from the repo text at HEAD, not the
-installed copy.
+**Standing observation:** the `ledger-and-session-records` copy installed
+to the account still read 1.1 in this session after two separate
+reinstalls by Tony. Both times the repo copy was correct. This is
+consistent with the account skill mount not refreshing mid-session
+rather than a failed reinstall -- no further action; confirm at the next
+session's start. All Phase 1 work used the repo text at HEAD.
 
 **Carried forward:** Phase 4's version bump target for
-`ledger-and-session-records` is now **1.3 -> 1.4**. The 1.3 bump landed
-in Phase 1 and its content (the Tony-action tag convention) is
-unrelated to Phase 4's planned Codebase Tooling rewrite, so Phase 4's
-scope is unchanged -- only its starting version moved.
+`ledger-and-session-records` is **1.3 -> 1.4**. The 1.3 bump landed in
+Phase 1 and its content (the Tony-action tag convention) is unrelated to
+Phase 4's planned Codebase Tooling rewrite, so Phase 4's scope is
+unchanged -- only its starting version moved.
+
+**Handed to Phase 2:** `add_docstrings.py` cannot execute the sweep in
+its current form. It replaces a module's entire docstring with
+hand-authored text from a `DOCSTRINGS` dict; the sweep needs to insert
+one or two lines into ~136 mostly-existing docstrings without disturbing
+the rest. Section 13's read ("the right existing tool to extend") holds,
+but the extension is a new insertion mode, not new dict entries. Its
+binary-mode I/O, per-file line-ending detection, and preview/`--write`
+split are all worth keeping. Two defects to address while there:
+`has_leading_comment()` is defined but never called, so a shebang-first
+module such as `ledger_index.py` would have a docstring inserted above
+its shebang; and `insert_docstring()` locates the docstring by first
+literal triple-quote rather than by parsing, which the Section 3 parser
+(`ast.get_docstring`) does correctly.
 
 ## Gate
 
