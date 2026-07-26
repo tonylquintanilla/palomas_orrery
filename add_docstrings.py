@@ -1064,6 +1064,14 @@ def strip_existing_tags(lines, start, end):
         # byte instead of growing a blank line each time.
         if keep[seam - 1].strip() == '' and keep[seam].strip() == '':
             del keep[seam]
+            # Count it. The caller does `end -= removed` to keep its
+            # docstring-end index valid, so every line taken out here has
+            # to be in that number. Leaving this one uncounted put `end`
+            # one line PAST the closing quotes, and the end-of-docstring
+            # placement branch then wrote the tag block into module scope
+            # -- where `Role: devtool` is a legal variable annotation, so
+            # py_compile passed and the module only failed on import.
+            removed += 1
     return keep, removed
 
 
