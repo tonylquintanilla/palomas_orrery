@@ -863,20 +863,37 @@ sequentially through the same Mode 7 relay channel rather than as parallel
 threads. L-154 unblocks once these close.
 
 **L-163 — Module role/domain classification redesign (ROLE_MAP + MODULE_DOMAIN_MAP).**
-○ Phase 1 of 4 CLOSED (Opus 5, July 24-25 2026) -- archival + repo
-hygiene. Design (Sonnet 5) reviewed by Fable 5, both confirmed
-build-ready; full detail in ROLE_DOMAIN_CLASSIFICATION_HANDOFF.md and
-AS_BUILT_L163_phase1.md. Retires ROLE_MAP and MODULE_DOMAIN_MAP as
+○ Phases 1-2 of 4 CLOSED (Opus 5 + Sonnet 5, July 24-25 2026). Design
+(Sonnet 5) reviewed by Fable 5, both confirmed build-ready; full detail
+in ROLE_DOMAIN_CLASSIFICATION_HANDOFF.md, AS_BUILT_L163_phase1.md,
+AS_BUILT_L163_phase2.md. Retires ROLE_MAP and MODULE_DOMAIN_MAP as
 hand-maintained dicts -- both become mechanically regenerated from an
 explicit Role:/Domain: line in each module's own docstring
-(ledger_index.py's INDEX-zone pattern, extended). Phase 1 verified: 7
-one-time/superseded modules archived (root count 121 -> 114);
-ROLE_MAP's 7 ghost entries deleted (94 -> 87); Phase 2's sweep scope
-recomputed at 12 remaining uncategorized (down from 19). dep_trace.py's
-fallback-logic fix carried to Phase 3, not done yet. Phases 2-4
-(content sweep, classifier code, skill documentation) not started --
-Phase 2 opens on locking the Role:/Domain: tag-placement format against
-the credit-line convention. Shares real touchpoints with the L-156
+(ledger_index.py's INDEX-zone pattern, extended).
+
+Phase 1 verified: 7 one-time/superseded modules archived (root count
+121 -> 114); ROLE_MAP's 7 ghost entries deleted (94 -> 87); Phase 2's
+sweep scope recomputed at 12 remaining uncategorized (down from 19).
+
+Phase 2 verified: all 114 orrery + 22 gallery modules now carry a
+Role:/Domain: line, independently re-confirmed against live HEAD.
+Changelog-style docstrings (8 modules) resolved to the end-of-docstring
+placement, not wedged mid-history. Two close-out gaps surfaced only by
+checking the written files against every decision, not by re-reading
+the as-built: a real bug in the tag-refresh logic (matched "Role:"/
+"Domain:" as individual lines rather than a pair, silently deleting a
+wrapped prose sentence in add_docstrings.py's own docstring) and three
+confirmed decisions that hadn't reached the code (data_acquisition*'s
+domain, four gallery modules' roles) -- both found, fixed, re-verified.
+Gallery's scan widened to include its own repo root (so add_docstrings.py,
+sitting there, gets classified too), with a small allowlist added to
+keep the shared MODULE_TAGS table unambiguous now that both repos scan
+'.'.
+
+Phases 3-4 (classifier code, skill documentation) not started -- Phase
+3 opens now that the tags it reads actually exist in the files. Naming
+call decided (undetermined, not the L-156 cluster's UNCLASSIFIED) but
+not yet written into code. Shares real touchpoints with the L-156
 cluster above: both edit ROLE_MAP/MODULE_DOMAIN_MAP for
 test_constants_provenance.py's pending retirement, and L-156 cites this
 design's coverage-gap pattern as its own precedent -- landing first

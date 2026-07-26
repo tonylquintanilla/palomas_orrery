@@ -802,8 +802,17 @@ DOMAIN_VOCAB = (
 # Which directories to sweep, relative to the repo root.
 # Orrery copy: ['.']  Gallery copy: the four module directories.
 SCAN_PATHS = ['.']
-# SCAN_PATHS = ['tools', 'gallery/assembler',
+# SCAN_PATHS = ['.', 'tools', 'gallery/assembler',
 #               'gallery/assembler/harness', 'gallery/assembler/tests']
+
+# Bare (no-slash) MODULE_TAGS keys that belong to the GALLERY repo's root
+# scan specifically. Needed because both copies now scan '.', and the
+# orrery repo is entirely flat (every bare key belongs to it, no list
+# needed) -- without this, every one of the orrery's ~114 bare-name
+# entries would falsely appear to "belong" to the gallery root too,
+# since both copies share one MODULE_TAGS table. Add to this set (and
+# to MODULE_TAGS) if another root-level gallery tool is added later.
+GALLERY_ROOT_FILES = {'add_docstrings.py'}
 
 MODULE_TAGS = {
 
@@ -1237,12 +1246,19 @@ def _belongs_to_this_repo(rel_path):
 
     The table holds both repos so the two copies stay identical; this is
     what keeps the orrery run from reporting every gallery entry as a
-    missing file, and vice versa.
+    missing file, and vice versa. Now that both copies scan '.', a bare
+    (no-slash) key needs a further check: the orrery repo is flat, so
+    every bare key genuinely belongs to it (SCAN_PATHS == ['.'] exactly
+    identifies that copy). The gallery copy also scans '.', but only for
+    its own small GALLERY_ROOT_FILES set -- otherwise every orrery
+    bare-name entry would falsely appear to belong here too.
     """
     for scan in SCAN_PATHS:
         if scan == '.':
             if '/' not in rel_path:
-                return True
+                if SCAN_PATHS == ['.']:
+                    return True
+                return rel_path in GALLERY_ROOT_FILES
         elif rel_path.startswith(scan + '/'):
             if rel_path[len(scan) + 1:].count('/') == 0:
                 return True
