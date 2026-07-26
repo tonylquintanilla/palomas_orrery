@@ -107,6 +107,101 @@ decline, so any such use needs stdin closed or `--write` passed.
 the VS Code Run button and answer `y`. One file changes. Commit, push,
 and send the new gallery SHA.
 
+**Tony:** here is the add docstring output: 
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/add_docstrings.py
+
+==============================================================
+  Role / Domain Tag Sweep -- PREVIEW (nothing written)
+  Target: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io
+  Scan paths: ., tools, gallery/assembler, gallery/assembler/harness, gallery/assembler/tests
+==============================================================
+
+  ADDED    add_docstrings.py                                devtool / dev_tools
+  SAME     tools/debug_encke_tp.py                         
+  SAME     tools/gallery_cache_builder.py                  
+  SAME     tools/gallery_cleanup.py                        
+  SAME     tools/gallery_editor.py                         
+  SAME     tools/gallery_json_fixer.py                     
+  SAME     tools/gallery_studio.py                         
+  SAME     tools/inspect_staging.py                        
+  SAME     tools/json_converter.py                         
+  SAME     tools/test_gallery_cache_builder_offline.py     
+  SAME     gallery/assembler/assemble.py                   
+  SAME     gallery/assembler/cache_reader.py               
+  SAME     gallery/assembler/catalog.py                    
+  SAME     gallery/assembler/errors.py                     
+  SAME     gallery/assembler/models.py                     
+  SAME     gallery/assembler/presentation.py               
+  SAME     gallery/assembler/render_events.py              
+  SAME     gallery/assembler/render_objects.py             
+  SAME     gallery/assembler/render_orbits.py              
+  SAME     gallery/assembler/render_spacecraft.py          
+  SAME     gallery/assembler/resolver.py                   
+  SAME     gallery/assembler/harness/fingerprint.py        
+  SAME     gallery/assembler/tests/test_artifact1_earth.py 
+
+--------------------------------------------------------------
+  added        1
+  unchanged    22
+  total        23
+
+  CHANGELOG (2) -- more than one credit line. Per the
+  Phase 2 placement decision, the tag goes at the very end
+  of the docstring instead of above any single entry:
+    - tools/gallery_cache_builder.py: 3 credit lines (changelog docstring)
+    - tools/gallery_studio.py: 3 credit lines (changelog docstring)
+
+  No problems. Every module in scope carries both tags.
+
+
+  Write these changes? [y/n]: y
+
+
+==============================================================
+  Role / Domain Tag Sweep -- WRITING
+  Target: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io
+  Scan paths: ., tools, gallery/assembler, gallery/assembler/harness, gallery/assembler/tests
+==============================================================
+
+  ADDED    add_docstrings.py                                devtool / dev_tools
+  SAME     tools/debug_encke_tp.py                         
+  SAME     tools/gallery_cache_builder.py                  
+  SAME     tools/gallery_cleanup.py                        
+  SAME     tools/gallery_editor.py                         
+  SAME     tools/gallery_json_fixer.py                     
+  SAME     tools/gallery_studio.py                         
+  SAME     tools/inspect_staging.py                        
+  SAME     tools/json_converter.py                         
+  SAME     tools/test_gallery_cache_builder_offline.py     
+  SAME     gallery/assembler/assemble.py                   
+  SAME     gallery/assembler/cache_reader.py               
+  SAME     gallery/assembler/catalog.py                    
+  SAME     gallery/assembler/errors.py                     
+  SAME     gallery/assembler/models.py                     
+  SAME     gallery/assembler/presentation.py               
+  SAME     gallery/assembler/render_events.py              
+  SAME     gallery/assembler/render_objects.py             
+  SAME     gallery/assembler/render_orbits.py              
+  SAME     gallery/assembler/render_spacecraft.py          
+  SAME     gallery/assembler/resolver.py                   
+  SAME     gallery/assembler/harness/fingerprint.py        
+  SAME     gallery/assembler/tests/test_artifact1_earth.py 
+
+--------------------------------------------------------------
+  added        1
+  unchanged    22
+  total        23
+
+  CHANGELOG (2) -- more than one credit line. Per the
+  Phase 2 placement decision, the tag goes at the very end
+  of the docstring instead of above any single entry:
+    - tools/gallery_cache_builder.py: 3 credit lines (changelog docstring)
+    - tools/gallery_studio.py: 3 credit lines (changelog docstring)
+
+  No problems. Every module in scope carries both tags.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
 **Gate:** Phase 3b (classifier code) opens on that push. Nothing in 3b
 was started this session.
 
