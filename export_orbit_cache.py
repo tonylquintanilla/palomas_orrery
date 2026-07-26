@@ -46,8 +46,10 @@ Operational order (the double-helix loop): (1) --preflight-only and read it;
 (2) export to the scratch default and INSPECT (positions/*.json km+JD, the
 coverage index, the invariant line); (3) Mode 5 -- open the render, Tony's eyes
 are the gate on the ~6.4-pt Pluto/Charon hexagons and the Moon/Titan traces;
-(4) provenance scan Tier-1 = 0 (add a ROLE_MAP entry for this module so the
-coverage-gap check can classify it); (5) DEPLOY -- re-run with --output-dir set
+(4) provenance scan Tier-1 = 0 (this module declares its own Role: tag in the
+docstring above, which is what the coverage-gap check classifies it by --
+ROLE_MAP is a regenerated mirror now, not a place to hand-add entries);
+(5) DEPLOY -- re-run with --output-dir set
 to the gallery data path (or copy _export_out/ across), commit, push, and
 record the pushed SHA in the handoff.
 
@@ -156,12 +158,15 @@ mode; celestial_objects.py Pluto 999 vs barycenter 9; osculating_cache_manager
 keys/fields; constants_new KM_PER_AU / KNOWN_ORBITAL_PERIODS;
 PHASE1B_DATA_SERVING_DESIGN_HANDOFF.md v0.6 schema).
 
-Role: devtool
-Domain: dev_tools
-
 Module updated: July 2026 with Anthropic's Claude Opus 4.8
 (Stage 2 build: v4 osculating-primary model; coverage index reconciled to
 design handoff v0.6; subtraction path retired).
+
+Module updated: July 2026 with Anthropic's Claude Opus 5 (L-163 Phase 3:
+corrected stale 'add a ROLE_MAP entry' step -- roles are docstring tags now).
+
+Role: devtool
+Domain: dev_tools
 """
 
 import argparse

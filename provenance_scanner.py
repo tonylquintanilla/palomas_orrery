@@ -215,9 +215,6 @@ Module rewritten: April 17, 2026 with Anthropic's Claude Opus 4.7
     (replaces earlier line-granular scanner that produced ~2000
     false-positive Tier-1 findings.)
 
-Role: devtool
-Domain: dev_tools
-
 Module updated: April 2026 with Anthropic's Claude Sonnet 4.6
     (Options A/B, lookback=60, exceptions loading, audit completion.)
 Updated with Opus 4.8 for food insecurity provenance, June 26, 2026.
@@ -264,6 +261,13 @@ Updated with Claude Sonnet 5, July 16, 2026: documented the color/RGB
     direct call that color citations across the codebase have been
     uneven and some effectively overclaimed -- this documents the
     scanner's existing skip behavior rather than changing any scoring.
+
+Module updated: July 2026 with Anthropic's Claude Opus 5 (L-163 Phase 3:
+classify_role() now takes the filepath this loop already has, so the role
+comes from the module's own docstring tag).
+
+Role: devtool
+Domain: dev_tools
 """
 
 import ast
@@ -1374,7 +1378,10 @@ def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
             continue
         filepath = os.path.join(project_dir, fname)
         module_name = fname[:-3]
-        role = classify_role(module_name)
+        # Pass the path we already have: classify_role() reads the module's
+        # docstring Role: tag now (L-163 Phase 3), so handing it the file
+        # skips a name-to-path resolution that could pick the wrong tree.
+        role = classify_role(module_name, filepath)
 
         units = extract_units_from_file(filepath, module_name, role)
         for u in units:

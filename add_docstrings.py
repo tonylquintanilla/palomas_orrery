@@ -85,10 +85,12 @@ hand-editing it directly, or use the tag sweep above to add just the
 two classification lines -- this legacy mode replaces the WHOLE
 docstring.
 
+Module updated: July 2026 with Anthropic's Claude Sonnet 5
+Module updated: July 2026 with Anthropic's Claude Opus 5 (L-163 Phase 3:
+module_atlas.py added to GALLERY_ROOT_FILES).
+
 Role: devtool
 Domain: dev_tools
-
-Module updated: July 2026 with Anthropic's Claude Sonnet 5
 """
 
 import os
@@ -812,7 +814,7 @@ SCAN_PATHS = ['.']
 # entries would falsely appear to "belong" to the gallery root too,
 # since both copies share one MODULE_TAGS table. Add to this set (and
 # to MODULE_TAGS) if another root-level gallery tool is added later.
-GALLERY_ROOT_FILES = {'add_docstrings.py'}
+GALLERY_ROOT_FILES = {'add_docstrings.py', 'module_atlas.py'}
 
 MODULE_TAGS = {
 

@@ -16,10 +16,15 @@ Hub suppression: modules with many consumers (constants_new, shared_utilities,
 palomas_orrery) are shown as boundary nodes -- not expanded through.
 This keeps the graph focused on the neighborhood that matters.
 
+Module updated: April 2026 with Anthropic's Claude Sonnet 4.6
+
+Module updated: July 2026 with Anthropic's Claude Opus 5 (L-163 Phase 3:
+import-failure fallback cascade removed -- duplicated _shells heuristic,
+silent 'other' default, and an unreachable ROLE_MAP branch -- replaced by
+a visible one-time warning).
+
 Role: devtool
 Domain: dev_tools
-
-Module updated: April 2026 with Anthropic's Claude Sonnet 4.6
 """
 
 import ast
@@ -34,14 +39,14 @@ from pathlib import Path
 # Modules with many consumers - shown as boundary nodes, never expanded through
 HUB_THRESHOLD = 8  # consumer count above which a module becomes a hub
 
-# Visual categories derived from module_atlas.py ROLE_MAP (single source of truth)
+# Visual categories derived from each module's docstring Role: tag, read
+# through module_atlas.classify_role() (single source of truth, L-163)
 # dep_trace uses fewer visual categories than the atlas roles for cleaner graphs
 try:
-    from module_atlas import ROLE_MAP, classify_role
+    from module_atlas import classify_role, set_tag_source_dir
     _ATLAS_AVAILABLE = True
 except ImportError:
     _ATLAS_AVAILABLE = False
-    ROLE_MAP = {}
 
 # Map atlas roles -> dep_trace visual categories
 _ROLE_TO_VISUAL = {
@@ -157,17 +162,32 @@ def find_neighborhood(target, deps, consumers, hops=2):
     return neighborhood, edges, hubs_encountered
 
 
+_ATLAS_WARNED = False
+
+
 def get_category(mod):
-    """Get visual category for a module, using module_atlas ROLE_MAP as source."""
-    if _ATLAS_AVAILABLE:
-        role = classify_role(mod)
-    elif mod in ROLE_MAP:
-        role = ROLE_MAP[mod]
-    elif mod.endswith('_visualization_shells') or mod.endswith('_shells'):
-        role = 'rendering/shells'
-    else:
-        role = 'other'
-    return _ROLE_TO_VISUAL.get(role, 'other')
+    """Get visual category for a module. module_atlas is the only source.
+
+    The old fallback cascade is gone (L-163 Phase 3). It re-derived roles
+    locally when the import failed -- its own copy of the _shells
+    heuristic and a silent 'other' default -- so a broken import produced
+    a plausible-looking graph instead of an obviously wrong one. A fourth
+    branch, `elif mod in ROLE_MAP`, could never fire at all: the except
+    path set ROLE_MAP to an empty dict.
+
+    Now an unavailable atlas says so, once, and everything renders as
+    'other' -- visibly uncategorized rather than quietly mislabeled.
+    """
+    global _ATLAS_WARNED
+    if not _ATLAS_AVAILABLE:
+        if not _ATLAS_WARNED:
+            print("  WARNING: module_atlas.py not importable -- every node "
+                  "will render as 'other'. Categories come from module "
+                  "docstring Role: tags via module_atlas; there is no "
+                  "local fallback.")
+            _ATLAS_WARNED = True
+        return 'other'
+    return _ROLE_TO_VISUAL.get(classify_role(mod), 'other')
 
 
 def get_module_description(filepath):
@@ -442,6 +462,10 @@ def main():
         sys.exit(1)
 
     print(f"Building dependency graph (hops={hops}, hub_threshold={HUB_THRESHOLD})...")
+    if _ATLAS_AVAILABLE:
+        # Point module_atlas's name-only lookups at the tree being traced.
+        set_tag_source_dir(project_dir)
+
     deps, consumers, local_mods = build_graph(project_dir)
 
     if target not in local_mods:
