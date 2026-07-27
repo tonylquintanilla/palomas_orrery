@@ -2830,29 +2830,63 @@ orbit/marker traces need the same treatment.
   Dashboard ready.`, 182 object variables wired, sash positions set) --
   matched exactly, including the specific 182 count. Full detail:
   `AS_BUILT_L163_phase3a.md`.
+- **Phase 3b (classifier build + close verification) -- CLOSED.**
+  [verified @23de11ee (orrery), @0f8e62eb (gallery)] Opus 5 builder
+  session, July 26 2026; independently re-verified against fresh
+  clones of both repos at HEAD, not taken on the as-built alone.
+  Classifier code shipped as scoped: `classify_role()`/
+  `classify_module()` rewrite, regenerated `ROLE_MAP` marker-zone
+  (mirror, never hand-edited), `SCAN_PATHS` multi-path merge, 3
+  call-site updates, `dep_trace.py`'s duplicated fallback cascade
+  dropped -- including the confirmed-dead `elif mod in ROLE_MAP:`
+  branch. 114/114 orrery + 24/24 gallery modules classify with
+  `role_source == 'tag'`, zero `undetermined`, zero tag leakage
+  across all 141 `.py` files in both repos (114 + 27, 3 gallery
+  `__init__.py` files correctly exempted from tagging).
+  `module_atlas.py` idempotent in place; `dep_trace.py` and
+  `provenance_scanner.py` both run clean through the new
+  `classify_role(module_name, filepath)` signature. Full detail:
+  `AS_BUILT_L163_phase3b.md`, `AS_BUILT_L163_phase3b_close.md`.
 **Note:** Reviewed by Fable 5 (its own cluster) -- build-ready, land
 before L-154-162 as proposed; two amendments folded in (domain
 retirement joins the L-156 cluster's Phase 3, gated on this sweep
 completing; sequence this sweep before L-157's Gemini worksheet).
-**Gap:** Classifier code (parser, `classify_role()` rewrite, regenerated
-marker-zone, UNCATEGORIZED report section, `SCAN_PATHS` multi-path
-merge mirroring the widened gallery root scope, 3 call-site updates,
-dropping `dep_trace.py`'s duplicated fallback cascade -- including its
-now-confirmed-dead `elif mod in ROLE_MAP:` branch) not yet built --
-Phase 3b, gated open now that Phase 3a's re-verification is clean and
-the tags it reads genuinely exist in every file. `ledger-and-session-records`'s
-Codebase Tooling section and `provenance-discipline`'s
-role-driven-inclusion bullet need updating once Phase 3b ships, not
-before. **Decided: `undetermined`** (confirmed by Tony in chat) --
-matches Fable's lean since this item ships first; the L-156 cluster's
-`UNCLASSIFIED` should conform to this name, not the other way around.
-Coordinate timing with L-156 (shares `ROLE_MAP`/`MODULE_DOMAIN_MAP` as
-edit sites for D10's `test_constants_provenance.py` cleanup, and L-156
-cites this item's coverage-gap pattern as its own precedent -- this item
-lands first).
+**Gap:** Phase 4 (do) -- `ledger-and-session-records`'s Codebase
+Tooling bullet and `provenance-discipline`'s role-driven-inclusion
+bullet both still describe the retired hand-maintained `ROLE_MAP`
+and need rewriting to the auto-regenerated-from-docstring-tags
+model; `provenance-discipline`'s version/source-SHA line bumps
+1.1 -> 1.2. Unblocked now that Phase 3b's classifier is verified
+against live HEAD. Same pass runs `skills_index.py`: the live
+Skill Manifest table in `PROJECT_INSTRUCTIONS.md` already shows
+`ledger-and-session-records` at 1.2 even though the skill file has
+been at 1.3 since Phase 1 -- `skills_index.py` wasn't run (or
+wasn't committed) after that bump, so this is a pre-existing drift
+Phase 4 fixes as a side effect, not something Phase 4 introduces.
+
+The Tier-1 findings jump this phase surfaced (105 -> 145 in-
+sandbox, neither number authoritative -- see
+`AS_BUILT_L163_phase3b_close.md`) is the intended effect:
+`classify_role` now returns a real role for modules that used to
+fall through to `'other'`, which is the L-078 coverage-widening
+this track exists to enable, not a new problem. Reconciling
+Tony's actual local Tier-1 baseline against this widened scope is
+intentionally sequenced behind the L-154-162 provenance-scoring-
+refactor cluster -- (decide, confirmed by Tony in chat, July 26
+2026) this is NOT an orphaned action item and does not gate Phase
+4 or any push of Phase 4's doc-only changes.
+
+**Decided: `undetermined`** (confirmed by Tony in chat) -- matches
+Fable's lean since this item shipped first; the L-156 cluster's
+`UNCLASSIFIED` conforms to this name, not the other way around.
+Coordinate timing with L-156 (shares `ROLE_MAP`/`MODULE_DOMAIN_MAP`
+as edit sites for D10's `test_constants_provenance.py` cleanup,
+and L-156 cites this item's coverage-gap pattern as its own
+precedent -- this item landed first).
 **Ref:** `ROLE_DOMAIN_CLASSIFICATION_HANDOFF.md` (full design, Sections
 1, 4, 16, 17, 19), `AS_BUILT_L163_phase1.md`, `AS_BUILT_L163_phase2.md`,
-`AS_BUILT_L163_phase3a.md`, `module_atlas.py`, `provenance_scanner.py`,
+`AS_BUILT_L163_phase3a.md`, `AS_BUILT_L163_phase3b.md`,
+`AS_BUILT_L163_phase3b_close.md`, `module_atlas.py`, `provenance_scanner.py`,
 `dep_trace.py`, `ledger_index.py` (pattern precedent),
 `add_docstrings.py` (sweep tool, now fully closed out both repos),
 `PROVENANCE_AUDIT.md` (July 17, coverage-gap evidence),

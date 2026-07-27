@@ -6,14 +6,18 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0)
 
 # Provenance Discipline
 
-Skill version: 1.1 | Cut from palomas_orrery @ be6376bb93a3f6fdfa2c0ff5b75a7398e60ea6ce | July 16, 2026
+Skill version: 1.2 | Cut from palomas_orrery @ ca9c706e7c68dec724bbcd242e0b0048c5392dfb | July 26, 2026
 Source: project_instructions_v3_29.md Part 3 (Provenance Audit, Fetched vs
 Recalled) + food insecurity build handoff + scanner source at HEAD. v1.1
 adds the report domain-classification mechanics, the Review-Repair
 Protocol (promoted from documentation/provenance_audit_handoff_v4.md),
 and field notes from the F1 provenance-cleanup groundwork session (July
 2026): the by-file/by-file-type report breakdown, a self-referential
-scanning quirk, and a stale-audit-doc near-miss.
+scanning quirk, and a stale-audit-doc near-miss. v1.2 updates the
+role-driven-inclusion bullet for L-163 Phase 3: a coverage gap is
+resolved by tagging the module's own docstring, since ROLE_MAP is now a
+regenerated mirror rather than a hand-maintained dict. MODULE_DOMAIN_MAP
+and classify_domain() are unaffected and remain hand-maintained.
 
 The resident protocol carries the two governing principles as CRITICAL
 gates: Fetched-vs-Recalled (a citation is a provenance claim that must be
@@ -85,8 +89,11 @@ phase1_v17.md` and related handoffs. The originating rationale:
   name is in the legacy narrative_files allow-list, OR it is a
   *_visualization_shells file. The allow-list is additive (a safety net)
   until ROLE_MAP is complete. A coverage-gap check reports modules the
-  gate cannot classify -- resolve those by adding ROLE_MAP entries, not by
-  editing the scanner.
+  gate cannot classify -- resolve those by adding the Role:/Domain: tag to
+  the module's own docstring, not by editing the scanner and not by
+  hand-adding a ROLE_MAP entry (since L-163 Phase 3, ROLE_MAP is a
+  generated mirror of those tags; the next module_atlas.py run overwrites
+  anything hand-added).
 - Loads data/provenance_exceptions.json for accepted residuals
   (suppression checks both context_text and raw_value). Run from a tree
   WITHOUT that file (e.g. a bare /mnt/project/ snapshot) and the count

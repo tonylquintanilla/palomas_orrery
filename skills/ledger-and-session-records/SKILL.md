@@ -6,14 +6,18 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Skill version: 1.3 | Cut from palomas_orrery @ 728361c3c451e19ce0cc025b2ed29f6ee30054e9 | July 25, 2026
+Skill version: 1.4 | Cut from palomas_orrery @ ca9c706e7c68dec724bbcd242e0b0048c5392dfb | July 26, 2026
 Sources: LEDGER_CONSOLIDATED.md header, ledger_index.py at HEAD, handoff
 v28 (consolidation) and v29 (cleanup), food insecurity handoffs. v1.3
 adds the Tony-action (do)/(decide) tag convention and its rollup rule,
 surfaced during the L-163 build-prep session (July 24, 2026) when a
 handoff's Tony-only to-do items were found scattered across its body
 with no consistent tag, discovered only because a builder session
-(Opus 5) had to hunt for them by reading the whole document.
+(Opus 5) had to hunt for them by reading the whole document. v1.4
+rewrites the Codebase Tooling ROLE_MAP bullet for L-163 Phase 3: a new
+module is classified by tagging its own docstring, not by hand-adding a
+ROLE_MAP entry, because ROLE_MAP became a regenerated mirror that the
+next module_atlas.py run overwrites.
 
 Note: READING the ledger at session start is resident Part-1 behavior,
 not this skill's job. This skill carries the maintenance mechanics.
@@ -140,9 +144,13 @@ skill, the same way a SHA mismatch is reconciled before a build.
 ## Codebase Tooling
 
 - module_atlas.py generates MODULE_ATLAS.md (roles, functions,
-  dependency graph). ROLE_MAP classifications feed the provenance
-  scanner's role-driven gate -- new modules need ROLE_MAP entries
-  (coverage-gap findings point at the missing ones).
+  dependency graph). Role classifications feed the provenance scanner's
+  role-driven gate. A new module is picked up by adding a Role:/Domain:
+  tag to its OWN docstring -- ROLE_MAP is a generated mirror since L-163
+  Phase 3, rebuilt from those tags by regenerate_role_map() into a
+  START/END marker zone (the pattern ledger_index.py uses for its INDEX).
+  Hand-editing ROLE_MAP does nothing: the next module_atlas.py run
+  overwrites it. Coverage-gap findings point at modules missing a tag.
 - add_docstrings.py batch-inserts the module docstring standard.
 - dep_trace.py builds the interactive dependency graph -- use it before
   multi-file changes to map touchpoints.
