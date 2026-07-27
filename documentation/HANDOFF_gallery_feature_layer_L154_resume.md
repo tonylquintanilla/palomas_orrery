@@ -15,6 +15,13 @@ handoff exists so the *original* thread doesn't get lost underneath it.
 you're picking this up, the provenance work should already be done or in
 build. This document only covers L-154 itself.
 
+**Correction (2026-07-27, Fable 5 review + Sonnet 5 independent
+verification):** Section 1 below originally claimed two things as
+already-true that were not, as of this date -- see L-154's ledger entry
+for the full record. Both are corrected in place below. Re-verify against
+HEAD before resuming regardless; this handoff's own history is now the
+cautionary example for why.
+
 ---
 
 ## 1. What L-154 actually is
@@ -30,11 +37,19 @@ Artifact 2 (Jupiter/Saturn) in the interactive gallery assembler.
   from a synthesis error). Python resolves and reports which features
   apply and to which object; it never builds shell/ring trace geometry.
 - The resolver bug (params silently dropped by `tuple(dict)` in
-  `resolver.py`) is fixed and settled -- small, targeted, not an
-  architecture question. (This was the loose thread that, while tracing
-  where the params actually come from, led into the provenance detour.)
-- Physical radius source: `constants_new.py`'s `CENTER_BODY_RADII`
-  (now with all bodies individually named, per L-162) -- ported into
+  `resolver.py`) is DESIGNED but NOT YET APPLIED -- confirmed still
+  present at gallery HEAD `0f8e62e` (2026-07-27): line 133 still reads
+  `tuple(rec.get("features") or ())`, and `objects_config.json`'s
+  `features` values are genuinely nested dicts, so every parameter is
+  still dropped to bare keys. The fix itself is small and settled --
+  land it in the first gallery session that resumes this item, before
+  anything else here is acted on. (This was the loose thread that, while
+  tracing where the params actually come from, led into the provenance
+  detour.)
+- Physical radius source: `constants_new.py`'s `CENTER_BODY_RADII` --
+  once L-162 lands (all bodies individually named; NOT yet done as of
+  2026-07-27, still dict-only with good inline citations but zero
+  promoted constants beyond Sun/Earth/Jupiter) -- ported into
   `objects_config.json` as data, not a separate JS constants table.
 
 ---

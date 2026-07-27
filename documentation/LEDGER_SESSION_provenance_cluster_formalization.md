@@ -3,8 +3,14 @@
 Tony Quintanilla, PE | Claude Sonnet 5 | July 27, 2026
 
 **Built on:**
-- orrery (palomas_orrery) @ `1ef4f82a7b51888aacd858e3740e54b96a2d3eae`
+- orrery (palomas_orrery) @ `dd628b155e1bebea70fd9dee84ed6f43991eed75`
+  (re-verified 2026-07-27: HEAD had advanced from this document's original
+  anchor, `1ef4f82a`, via an unrelated one-item ledger addition; every
+  find/replace target below was re-checked byte-exact against the new
+  HEAD before this revision -- still a clean match, nothing below needed
+  changing because of the move)
 - gallery (tonyquintanilla.github.io) @ `0f8e62ebf5fef86a134dfbbfbc2788bee894e51a`
+  (unchanged throughout)
 
 **Type:** LEDGER + RECORD HYGIENE (Fable 5's revised sequencing, step 1 --
 see `documentation/REVIEW_provenance_refactor_cluster_scoping.md` section
@@ -15,8 +21,12 @@ below via find/replace or paste in your editor, in the order given.
 vs-radius, retire-vs-wrapper, L-114, L-120), all three of Fable's
 independently-verified findings that needed a ledger-side fix (L-154's
 resume-handoff correction, L-163's stale Gap text, L-114/L-120's stale
-status), and formalizes the nine floating items (L-154 through L-162)
-that have lived only in handoff documents since July 22.
+status), formalizes the nine floating items (L-154 through L-162) that
+have lived only in handoff documents since July 22, **and** the full D3
+vulnerability-ladder calibration (Gemini 3.1 Pro + GPT 5.5 + Fable 5 +
+Sonnet 5 synthesis, closed 2026-07-27) -- folded into L-156 and L-158
+below, which are now updated past what those items looked like when this
+session was first drafted.
 
 ---
 
@@ -100,8 +110,9 @@ L-149/L-150/L-151 (M2 track); L-155-L-162.
 **Gap:** finalize the explicit key-path mapping (gallery config key ->
 orrery source location) as a table, not name-matching; design where this
 lives inside `provenance_scanner.py` (new function alongside
-`find_cross_file_issues`); build (Opus 5, Phase 3 per the amended design),
-gated on D3 (L-156) returning clean from Gemini.
+`find_cross_file_issues`); build (Opus 5, Phase 3 per the amended design)
+-- D3 itself is closed (see L-156), so what actually gates this now is
+L-156's Phases 1-2 landing in code, not any further calibration round.
 **Ref:** `test_constants_provenance.py` (direct precedent, including its
 motivating bug: `close_approach_data.py`'s stale `CENTER_BODY_RADII` copy);
 `provenance_scanner.py` `main()`; `constants_new.py`; `data/objects_config.json`;
@@ -138,9 +149,54 @@ motivating bug: `close_approach_data.py`'s stale `CENTER_BODY_RADII` copy);
     as the design review's D2 amendment literally wrote it (that text
     predates L-163's naming decision). Whoever builds Phase 1 implements
     the D2 concept under this name.
-  - **Vulnerability ladder (D3): gated on Gemini calibration, not yet
-    run** -- see L-155's Gap and the calibration worksheet carried
-    alongside this session (`D3_calibration_worksheet_vulnerability_ladder.md`).
+  - **Vulnerability ladder (D3): decided,** via a three-AI calibration
+    round (Gemini 3.1 Pro, GPT 5.5, Fable 5) plus Sonnet 5 synthesis,
+    closed 2026-07-27. Four rungs, same count as today -- no Tier score
+    recalibration needed:
+    - **V1 FETCHED** -- live pipeline query at runtime. Unchanged.
+    - **V2 CROSS-CHECKED** -- never auto-promotable to V1, at any rigor
+      level (all three AIs converged on this against my initial draft,
+      which had proposed a conditional path to V1; the scanner can't
+      observe whether a check was actually rigorous, only a claim that
+      it was -- the same cite-to-clear risk as a `# Source:` tag over
+      recalled data). Requires a structured, dated annotation: who/what
+      checked, against which authority, when, **and whether the check
+      was blind (no anchoring)** -- the last field added directly from
+      this project's own history (see below), not from the panel.
+    - **V3 SOURCED** -- cited but never independently cross-checked,
+      *and* anything decayed from V2 over time. **Tony (2026-07-27):
+      merged, not split** -- the recency/staleness distinction a split
+      would have preserved isn't lost, it lives in the dated field on
+      the V2 annotation; it just stops being double-counted as its own
+      score tier. Matches Fable's calibration principle (rungs
+      distinguished by required action, not by how a value came to be
+      wrong) over the split GPT and I had initially favored.
+    - **V4 RECALLED** -- no citation at all. Unchanged.
+    - **Evidence base (verified against project history, not just the
+      two cases the worksheet opened with):** Arrokoth (~1000x radius
+      error, sourced not cross-checked) and Parker Solar Probe (surface-
+      vs-center convention error, introduced *during* a claimed
+      verification) motivated the original ask. Two more, found on a
+      follow-up pass, changed the answer: a near-miss where Claude's own
+      draft Gemini prompt included its own numbers before Tony caught
+      the anchoring risk (`ADDENDUM_v23_design_session_narrative.md`),
+      and a session where Gemini's *own* cross-check output was wrong on
+      three counts against the primary source
+      (`HANDOFF_addendum_phase1_and_uranus_cleanup.md` /
+      `HANDOFF_provenance_phase1_v17.md` onward) -- direct evidence that
+      cross-checking is itself an interpretation-laden, fallible act,
+      not a passive validator. A positive counter-case exists too
+      (`MANIFEST_bow_shock_and_dipole_cone_v1.md`, blind pass, 7/8
+      agreement) -- the mitigation isn't hypothetical.
+    - **Derived values:** not a separate rung (this cluster's original
+      framing, and L-158's own title, were wrong on this point) -- an
+      *inheritance rule* instead. A value derived at runtime from
+      tracked inputs inherits its weakest input's rung, once the
+      derivation logic itself has cleared one cross-check. A value
+      derived once and then hardcoded as a literal inherits nothing --
+      it's a copy, not a derivation, and lands in plain V3 with the
+      derivation comment as its citation. See L-158, retitled
+      accordingly.
   - **Tier-1 never gets an auto-exit gate, at any threshold** (D7, review
     amendment) -- permanent banner, human judgment, indefinitely. The only
     hard exit-code gate in the cluster is L-155's pinning checks.
@@ -149,15 +205,18 @@ motivating bug: `close_approach_data.py`'s stale `CENTER_BODY_RADII` copy);
   detector's same-file/dict-kind blind spots; missing magnetosphere unit
   vocabulary; the comet accepted-residual that contradicts the new scheme;
   "Option A" retired.
-**Gap:** (1) carry the D3 calibration worksheet to Gemini -- **(do)**,
-Tony, once this session is pasted; (2) fix the `CENTER_BODY_RADII`
-duplication per L-162 (separate dedicated session); (3) resolve the five
-comprehensive-sweep items; (4) build Phases 1-2 (Opus 5), gated on (1)
-returning clean.
+**Gap:** (1) fix the `CENTER_BODY_RADII` duplication per L-162 (separate
+dedicated session); (2) resolve the five comprehensive-sweep items;
+(3) build Phases 1-3 (Opus 5) against the decided ladder above -- the D3
+gate is clear, nothing further blocks the build.
 **Ref:** `provenance_scanner.py` (`find_cross_file_issues`,
 `CONCEPT_ALIASES`, `NUMERIC_CLAIM_RE`); `constants_new.py`;
 `data/provenance_exceptions.json`; `documentation/provenance_audit_handoff_v1.md`
-(Arrokoth/Parker precedent); `DESIGN_HANDOFF_provenance_scoring_and_pinning.md`;
+(Arrokoth/Parker precedent); `ADDENDUM_v23_design_session_narrative.md`
+(anchoring near-miss); `HANDOFF_addendum_phase1_and_uranus_cleanup.md`,
+`HANDOFF_provenance_phase1_v17.md` (Gemini cross-check itself wrong);
+`MANIFEST_bow_shock_and_dipole_cone_v1.md` (blind-pass positive case);
+`DESIGN_HANDOFF_provenance_scoring_and_pinning.md`;
 `DESIGN_REVIEW_provenance_scoring_and_pinning.md`; L-163 (naming precedent);
 L-155; L-157; L-158; L-159; L-161; L-162.
 
@@ -177,28 +236,55 @@ L-155; L-157; L-158; L-159; L-161; L-162.
   not as a parallel thread -- after Phase 1-2 (L-156) ships, so results can
   be annotated in a form the scanner can actually see.
 **Gap:** draft the worksheet (per `worksheet_jupiter_visualization.md`
-template, scoped to config values not narrative strings); carry to Gemini;
-integrate corrections; apply the cross-checked annotation once L-156
-defines its form.
+template, scoped to config values not narrative strings) **blind -- no
+Claude-derived figures included**, per the near-miss already caught once
+in this project (`ADDENDUM_v23_design_session_narrative.md`: an anchored
+draft prompt was rewritten to ask de novo after Tony flagged the
+rubber-stamp risk); carry to Gemini; integrate corrections; apply the
+cross-checked annotation (with the blind/anchored field, per L-156) once
+L-156's build defines its form.
 **Ref:** `provenance_audit_handoff_v1.md`; `MODE7_gemini_crosscheck_magnetosphere.md`;
-`worksheet_jupiter_visualization.md`; L-155; L-156; L-161.
+`worksheet_jupiter_visualization.md`; `ADDENDUM_v23_design_session_narrative.md`
+(blind-worksheet precedent); L-155; L-156; L-161.
 
 ---
 
-#### [L-158] Derived-constant Vulnerability rung (structurally can't independently drift)
+#### [L-158] Derived-constant vulnerability inheritance rule (revised from a proposed rung, 2026-07-27)
 <!-- L:158 status:OPEN upd:2026-07-27 section:W.Active flag: rice:4/2/70/1 -->
 - **What.** Values computed from already-tracked primaries (e.g.
   `SOLAR_RADIUS_AU = SUN_RADIUS_KM / KM_PER_AU`) don't fit the criticality
-  question at all -- it's a Vulnerability question. A derived value can't
-  drift on its own; if it's wrong, an input was wrong, and that gets
-  caught at the input.
-- **Decided (D9, design + review):** derived rung = V1, via a two-factor
-  structural check -- a `# Derived:` comment AND AST confirmation it's
-  actually computed, both required; a mismatch is itself a finding
-  (ambiguous defaults toward NOT claiming safety, same direction as L-156's
-  `undetermined` sentinel).
-**Gap:** build -- rides Phase 1 of L-156's scanner build.
-**Ref:** `constants_new.py` derived-constants section; L-156.
+  question at all -- it's a Vulnerability question.
+- **Superseded (D9's original framing, and this item's own original
+  title, were wrong):** "derived rung = V1" treated a derived value as
+  structurally immune to drift. Both Fable 5 and GPT 5.5's D3 calibration
+  passes rejected that premise independently -- the formula, the units, or
+  a wrong parent reference are their own error surface (Fable's cited
+  precedent: Mars Climate Orbiter, a real mission lost to exactly this
+  class of bug), and a value computed once and then hardcoded as a
+  literal isn't protected by its original derivation at all.
+- **Decided (2026-07-27, folded into L-156's ladder as a rule, not a
+  rung):** two cases, not one tier --
+  - **Derived at runtime** (formula lives in the code, evaluates from the
+    tracked primary every call): inherits its weakest input's V-rung,
+    but only once the derivation logic itself -- the formula, the units,
+    the parent reference -- has cleared one independent cross-check.
+    Until that check happens, treat as unverified regardless of the
+    input's own rung.
+  - **Derived once, then frozen as a literal** (a hardcoded number with a
+    "computed from X" comment): not actually derived any more -- it's a
+    copy, and copies drift by exactly the mechanism this item's original
+    premise claimed was impossible (the primary updates, the frozen
+    literal doesn't). No special handling: plain V3 (sourced-unchecked),
+    with the derivation comment serving as its citation.
+  - The two-factor structural check (`# Derived:` comment + AST
+    confirmation it's actually computed) still stands as the mechanism
+    for telling the two cases apart -- it just no longer implies an
+    automatic V1 grant on its own.
+**Gap:** build -- rides Phase 1 of L-156's scanner build; identify which
+existing `# Derived:` comments in `constants_new.py` are runtime formulas
+vs. frozen literals before assigning either treatment.
+**Ref:** `constants_new.py` derived-constants section; L-156 (holds the
+full ladder this rule attaches to).
 
 ---
 
@@ -256,12 +342,19 @@ line 695; L-155; L-156.
 
 #### [L-161] Gemini sweep -- clear the display-string Tier-2 backlog
 <!-- L:161 status:OPEN upd:2026-07-27 section:W.Active flag: rice:3/3/70/2 -->
-- **What.** Once D3 ships, ~330 currently-C=4/V=2 display-string citations
-  move from Tier 3 to Tier 2 (sampled all 330: all hover-text claims, none
-  newly re-scored by D1/D2 -- purely the V-ladder effect). ~130 were
-  already Gemini-verified by the April 2026 worksheets and just need a
-  backfill annotation (mechanical). The remainder need a genuinely new
-  sweep.
+- **What.** ~330 display-string citations, currently C=4/V=2 under
+  *today's* meaning of V2 (SOURCED). **Re-read against the closed
+  ladder, not the old one** (exactly the D1/D7 re-read L-156's Fable 5
+  round flagged as needed): under the new scheme, V2 now means
+  CROSS-CHECKED, a stronger bar. Only the subset with a genuine,
+  independent, dated (and blind-checked) annotation backfills to the new
+  V2; everything else -- including anything merely cited -- lands at the
+  new V3 (merged sourced+stale). ~130 were already Gemini-verified by the
+  April 2026 worksheets: **check those worksheets against the new blind-
+  check bar before backfilling** (per `ADDENDUM_v23`'s anchoring near-
+  miss, an anchored pass doesn't qualify even if it happened) -- if they
+  don't clear it, they need redoing, not just re-tagging. The remainder
+  need a genuinely new sweep regardless.
 - **File concentration, confirmed empirically:** 84% of the 330 sit in 15
   files. `celestial_objects.py` alone is 50 findings with zero prior
   worksheet coverage. Neptune, Uranus, Solar, Saturn, Pluto,
@@ -273,10 +366,12 @@ line 695; L-155; L-156.
 - **Practical note:** consider the same Mode 7 relay channel as L-157
   (sequentially, not merged in scope) rather than a second separate
   Gemini engagement.
-**Gap:** draft first worksheet (`celestial_objects.py`); confirm backfill
-list against the April worksheets' actual coverage before assuming which
-~130 are already clear.
-**Ref:** L-156; L-157; L-160; `worksheet_*.md` set.
+**Gap:** draft first worksheet (`celestial_objects.py`) **blind**, same
+requirement as L-157; confirm the April worksheets' actual coverage
+against the new blind-check bar, not just their topic coverage, before
+assuming which ~130 are already clear.
+**Ref:** L-156; L-157; L-160; `worksheet_*.md` set;
+`ADDENDUM_v23_design_session_narrative.md` (blind-worksheet precedent).
 
 ---
 
@@ -297,8 +392,9 @@ list against the April worksheets' actual coverage before assuming which
   body scores as its own scanner row instead of one undifferentiated dict.
 - **Why now, not "eventually":** simplifies L-155's Phase 3 pinning engine
   -- pins against 18 named constants directly instead of dict-path AST
-  extraction for 15 of them. Can run in parallel with the D3 Gemini
-  calibration (independent of its answer).
+  extraction for 15 of them. D3 is closed (see L-156), so nothing about
+  this item's timing depends on it any more -- it can run whenever a
+  dedicated session is free.
 **Gap:** dedicated Sonnet session -- fresh SHA pull, safe-file-editing
 discipline (bottom-up, ASCII, py_compile clean), credit line, rewrite
 `CENTER_BODY_RADII` to reference the new names instead of literals.
@@ -506,8 +602,12 @@ cautionary example for why.
   Part 3 describes.
 - **(do)** Commit + push via GitHub Desktop; paste the new HEAD SHA back
   into this thread.
-- **(do)** Carry `D3_calibration_worksheet_vulnerability_ladder.md`
-  (companion file) to Gemini; carry the result back when it returns.
+
+**Already closed, reflected in L-156/L-158 above:** the D3 calibration
+worksheet went to Gemini 3.1 Pro, GPT 5.5, and Fable 5; all three
+returned, Sonnet 5 synthesized, and you closed the one remaining fork
+(Q2, merge over split) on 2026-07-27. No further panel round needed
+before Opus 5 builds Phase 1 against the ladder in L-156.
 
 Nothing here requires an operation outside your known working set -- every
 item is a paste/edit, a script run via VS Code's Run button, or a GitHub

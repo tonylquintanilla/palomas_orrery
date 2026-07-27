@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*95 live items; 83 need attention (`!`); 93 RICE-scored; 56 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*102 live items; 90 need attention (`!`); 100 RICE-scored; 58 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -247,7 +247,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### D.Priority -- Real bugs
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-114 | objects_config.json stranded by the atomic swap; also blocks crash-recovery (gallery builder) | OPEN | 16.2 | 2026-07-12 |
 | ! | L-012 | Osculating pre-fetch false-provenance messages | OPEN [CRIT] | 3.6 | 2026-06-21 |
 |  | L-013 | Mercury 2019-epoch anomaly | DEFERRED | 0.1 | 2026-06-15 |
 
@@ -362,15 +361,23 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### W.Active -- Web Publication active phase
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-120 | Halley configured but not yet in the served index (F3, gates artifact 4) | OPEN | 7.6 | 2026-07-15 |
+| ! | L-160 | test_constants_provenance.py -- retire once fully absorbed, not before | OPEN | 8.1 | 2026-07-27 |
+| ! | L-162 | CENTER_BODY_RADII full de-duplication -- dedicated Sonnet session | OPEN | 8.1 | 2026-07-27 |
+| ! | L-158 | Derived-constant vulnerability inheritance rule (revised from a proposed rung, 2026-07-27) | OPEN | 5.6 | 2026-07-27 |
+| ! | L-156 | Provenance scanner scoring model fix -- criticality (category-based) + vulnerability recalibration + comprehensive sweep | OPEN | 5.3 | 2026-07-27 |
+| ! | L-155 | Cross-repo constants/geometry pinning checks -- built INTO provenance_scanner.py, not a standalone script | PENDING-GATE | 4.5 | 2026-07-27 |
 | ! | L-119 | event_link hardcoded None in the builder (F2, gates artifact 7) | OPEN | 3.6 | 2026-07-15 |
+| ! | L-161 | Gemini sweep -- clear the display-string Tier-2 backlog | OPEN | 3.1 | 2026-07-27 |
+| ! | L-157 | Gemini cross-check of shell config ring/belt/atmosphere geometry values | OPEN | 2.5 | 2026-07-27 |
 | ! | L-121 | Slim plotly wheel not deployed anywhere (F4, ships-nothing gate) | OPEN | 2.2 | 2026-07-15 |
 | ! | L-150 | Multi-orbit trust model for near-equal-mass binaries (Pluto/Charon and future onboards) | OPEN | 2.2 | 2026-07-20 |
+| ! | L-154 | Gallery feature-rendering JS layer (shells, rings, radiation belts -- Artifact 2 prerequisite) | BLOCKED | 2.1 | 2026-07-27 |
 | ! | L-122 | Stray data/solar-system.prev_old/ committed to the repo (F6, non-blocking) | OPEN | 1.9 | 2026-07-15 |
 | ! | L-123 | Object info card -- serve info_dictionary.py as JSON, click-to-open (rides with F1) | OPEN | 1.8 | 2026-07-15 |
 | ! | L-080 | Characterization harness (scene equivalence gate) | OPEN | 1.6 | 2026-07-14 |
 | ! | L-079 | Shared assembler architecture (keystone — redefined) | OPEN | 1.5 | 2026-07-07 |
 |  | L-089 | Scene-spec shared skeleton + solar system vocabulary (Phase 1) | PROPOSED | 1.5 | 2026-07-03 |
+| ! | L-159 | Disclosed-approximation check (Envelope of the Unknowable, scanner-level) | OPEN | 1.2 | 2026-07-27 |
 |  | L-090 | Star cache inventory + wire format decision | PROPOSED | 0.5 | 2026-07-03 |
 | ! | L-151 | Create gallery-assembler skill -- technical home for the new-mechanism assembler | OPEN | -- | 2026-07-20 |
 | ! | L-165 | Site continuity if there is no active administrator (succession / legacy planning) | OPEN | -- | 2026-07-27 |
@@ -393,6 +400,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 |  | L-117 | Offline suite red at HEAD: Encke id drift (2P -> 90000091) not mirrored in the mock | DONE | 34.2 | 2026-07-12 |
+|  | L-114 | objects_config.json stranded by the atomic swap; also blocks crash-recovery (gallery builder) | DONE | 16.2 | 2026-07-27 |
 |  | L-003 | Protocol amendment candidates (for v3.29) | DONE | 5.4 | 2026-06-22 |
 |  | L-153 | Restore "Who Tony Is" framing into resident protocol (protocol) | DONE | 5.1 | 2026-07-21 |
 |  | L-065 | European heat wave heat map (Earth System track) | DONE | 4.8 | 2026-06-25 |
@@ -445,6 +453,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 |  | L-118 | feature_configs.json served empty every build (F1, gates artifact 2) | DONE | 8.1 | 2026-07-21 |
+|  | L-120 | Halley configured but not yet in the served index (F3, gates artifact 4) | DONE | 7.6 | 2026-07-27 |
 |  | L-085 | LICENSE to repo root | DONE | 4.0 | 2026-07-03 |
 |  | L-088 | Gallery integration test (Phase 0) | DONE | 4.0 | 2026-07-06 |
 |  | L-099 | Solar System Explorer interactive exhibit | DONE | 3.2 | 2026-07-06 |
@@ -2386,18 +2395,15 @@ updated. Claude.md is for use in Claude Code and is obsolete.
 before L-154-162 as proposed; two amendments folded in (domain
 retirement joins the L-156 cluster's Phase 3, gated on this sweep
 completing; sequence this sweep before L-157's Gemini worksheet).
-**Gap:** Phase 4 (do) -- `ledger-and-session-records`'s Codebase
-Tooling bullet and `provenance-discipline`'s role-driven-inclusion
-bullet both still describe the retired hand-maintained `ROLE_MAP`
-and need rewriting to the auto-regenerated-from-docstring-tags
-model; `provenance-discipline`'s version/source-SHA line bumps
-1.1 -> 1.2. Unblocked now that Phase 3b's classifier is verified
-against live HEAD. Same pass runs `skills_index.py`: the live
-Skill Manifest table in `PROJECT_INSTRUCTIONS.md` already shows
-`ledger-and-session-records` at 1.2 even though the skill file has
-been at 1.3 since Phase 1 -- `skills_index.py` wasn't run (or
-wasn't committed) after that bump, so this is a pre-existing drift
-Phase 4 fixes as a side effect, not something Phase 4 introduces.
+**Gap:** None remaining. **Correction (2026-07-27, Fable 5 review,
+finding 6):** this paragraph described Phase 4 as pending; it's actually
+CLOSED -- `AS_BUILT_L163_phase4.md` documents all four edits applied,
+`provenance-discipline` reads v1.2 and `ledger-and-session-records` reads
+v1.4 at HEAD, and the Skill Manifest table in `PROJECT_INSTRUCTIONS.md`
+matches. This Gap paragraph was simply never rewritten when Phase 4
+closed -- a DONE item's own Gap field describing finished work as
+outstanding. Left here struck-through rather than deleted, per the
+project's own breadcrumb convention.
 
 The Tier-1 findings jump this phase surfaced (105 -> 145 in-
 sandbox, neither number authoritative -- see
@@ -2429,6 +2435,58 @@ precedent -- this item landed first).
 L-078 (role-driven coverage-widening track);
 L-154/155/156/157/158/159/160/161/162 (provenance scoring refactor
 cluster).
+
+#### [L-114] objects_config.json stranded by the atomic swap; also blocks crash-recovery (gallery builder)
+<!-- L:114 status:DONE upd:2026-07-27 section:C flag: rice:3/3/90/0.5 -->
+- **What.** In gallery_cache_builder.py (GALLERY repo) the config was read from
+  inside data/solar-system/ -- the exact directory the whole-generation atomic
+  swap (atomic_swap_dir) replaces wholesale. It is only ever READ there, never
+  copied into staging like coverage_index.json / feature_configs.json are, so
+  every successful real (non-dry-run) build silently swapped it away into
+  data/solar-system.prev/, invisible until the next command hit
+  FileNotFoundError. Found live 2026-07-11 (Sonnet 5 live-gate) on the real
+  --first-build.
+- **Compounding failure.** main() calls load_config() BEFORE run_build(), hence
+  before recover_incomplete_swap(). A real crash mid-swap leaves the live dir
+  missing (only .prev holds the config), so load_config() dies before the
+  self-healing recovery can run -- no built-in path back. Reproduced live.
+- **Fix (chosen: move OUT, not copy in).** Relocate the config to
+  data/objects_config.json, a sibling outside the swap blast radius. Closes
+  BOTH failure modes at once -- the swap can't strand it, and load_config() no
+  longer depends on a directory a crash may have left mid-swap. atomic_swap_dir
+  and cleanup_stale_siblings only touch dirs named after out_dir, so a sibling
+  file is never in scope (verified by reading both).
+- **State at gallery HEAD 661cddb [verified @661cddb].**
+    - DONE + committed: the config file now lives at data/objects_config.json
+      (Encke 90000091 fix included); data/solar-system/objects_config.json is
+      gone (404).
+    - NOT yet applied: gallery_cache_builder.py still DEFAULTS --config to the
+      OLD path (line ~1085), so a bare --nightly / --first-build at HEAD
+      FileNotFoundErrors on the default -- only explicit
+      --config data/objects_config.json works. HEAD is half-fixed (file moved,
+      code not); that is why status is OPEN, not DONE.
+- **Gap.** Apply FOUR edits and push, then re-run the offline suite from a clean
+  clone as the acceptance check: (1) gallery_cache_builder.py argparse --config
+  default -> 'data/objects_config.json'; (2) its module docstring (new config home
+  + operational notes); (3) test_gallery_cache_builder_offline.py:79 ->
+  data/objects_config.json (+ the line-77 comment); (4) orrery
+  documentation/TESTING_PROTOCOL.md:25 config-path prose. The moved config had
+  FOUR consumers -- builder default, offline-test primary path, offline-test
+  comment, TESTING_PROTOCOL prose; the first fix swept two, Fable's F1 caught the
+  other two. Acceptance = the offline suite passes from a clean checkout (that
+  green run IS the proof every consumer moved). All four drafted + verified
+  2026-07-12; on push, flip to DONE and re-pin the gallery SHA.
+**Tony:** RICE proposed 3/3/90/0.5 (hits every real build; tiny effort, file
+already moved) -- yours to finalize.
+**Ref:** GALLERY tools/gallery_cache_builder.py (argparse --config default;
+load_config; atomic_swap_dir; recover_incomplete_swap; main() call order).
+L-098 (parent). Found 2026-07-11 (Sonnet 5); fixed 2026-07-12 (Opus 4.8).
+**Closed 2026-07-27:** all four Gap edits confirmed at gallery HEAD
+`0f8e62e` (Fable 5 review + Sonnet 5 independent re-run of the offline
+suite from a fresh clone -- PASS, 138 checks, 0 failures, matching the
+entry's own stated acceptance check). Tony confirmed no local un-pushed
+edits remain. `ledger_index.py` will retag this to section C and move it
+into the general archive on next run -- expected, not an error.  
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
@@ -2525,52 +2583,6 @@ cluster).
   inference dressed as fact; Tony's domain knowledge overrode it (Observation
   Override).
   **Tony:** this was a one-time observation. i do not know what caused it. pending better definition. 
-
-#### [L-114] objects_config.json stranded by the atomic swap; also blocks crash-recovery (gallery builder)
-<!-- L:114 status:OPEN upd:2026-07-12 section:D.Priority flag: rice:3/3/90/0.5 -->
-- **What.** In gallery_cache_builder.py (GALLERY repo) the config was read from
-  inside data/solar-system/ -- the exact directory the whole-generation atomic
-  swap (atomic_swap_dir) replaces wholesale. It is only ever READ there, never
-  copied into staging like coverage_index.json / feature_configs.json are, so
-  every successful real (non-dry-run) build silently swapped it away into
-  data/solar-system.prev/, invisible until the next command hit
-  FileNotFoundError. Found live 2026-07-11 (Sonnet 5 live-gate) on the real
-  --first-build.
-- **Compounding failure.** main() calls load_config() BEFORE run_build(), hence
-  before recover_incomplete_swap(). A real crash mid-swap leaves the live dir
-  missing (only .prev holds the config), so load_config() dies before the
-  self-healing recovery can run -- no built-in path back. Reproduced live.
-- **Fix (chosen: move OUT, not copy in).** Relocate the config to
-  data/objects_config.json, a sibling outside the swap blast radius. Closes
-  BOTH failure modes at once -- the swap can't strand it, and load_config() no
-  longer depends on a directory a crash may have left mid-swap. atomic_swap_dir
-  and cleanup_stale_siblings only touch dirs named after out_dir, so a sibling
-  file is never in scope (verified by reading both).
-- **State at gallery HEAD 661cddb [verified @661cddb].**
-    - DONE + committed: the config file now lives at data/objects_config.json
-      (Encke 90000091 fix included); data/solar-system/objects_config.json is
-      gone (404).
-    - NOT yet applied: gallery_cache_builder.py still DEFAULTS --config to the
-      OLD path (line ~1085), so a bare --nightly / --first-build at HEAD
-      FileNotFoundErrors on the default -- only explicit
-      --config data/objects_config.json works. HEAD is half-fixed (file moved,
-      code not); that is why status is OPEN, not DONE.
-- **Gap.** Apply FOUR edits and push, then re-run the offline suite from a clean
-  clone as the acceptance check: (1) gallery_cache_builder.py argparse --config
-  default -> 'data/objects_config.json'; (2) its module docstring (new config home
-  + operational notes); (3) test_gallery_cache_builder_offline.py:79 ->
-  data/objects_config.json (+ the line-77 comment); (4) orrery
-  documentation/TESTING_PROTOCOL.md:25 config-path prose. The moved config had
-  FOUR consumers -- builder default, offline-test primary path, offline-test
-  comment, TESTING_PROTOCOL prose; the first fix swept two, Fable's F1 caught the
-  other two. Acceptance = the offline suite passes from a clean checkout (that
-  green run IS the proof every consumer moved). All four drafted + verified
-  2026-07-12; on push, flip to DONE and re-pin the gallery SHA.
-**Tony:** RICE proposed 3/3/90/0.5 (hits every real build; tiny effort, file
-already moved) -- yours to finalize.
-**Ref:** GALLERY tools/gallery_cache_builder.py (argparse --config default;
-load_config; atomic_swap_dir; recover_incomplete_swap; main() call order).
-L-098 (parent). Found 2026-07-11 (Sonnet 5); fixed 2026-07-12 (Opus 4.8).  
 
 ### D.Structural -- dead-code / honest shell files (Phase 3)
 
@@ -3792,26 +3804,6 @@ authoring), which is gated on L-046, not on this.
 `data/objects_config.json`; PHASE2_SYNTHESIS_MANIFEST_v2.md S4; L-098 (parent);
 L-104 (downstream consumer).
 
-#### [L-120] Halley configured but not yet in the served index (F3, gates artifact 4)
-<!-- L:120 status:OPEN upd:2026-07-15 section:W.Active flag: rice:2/2/95/0.5 -->
-- **What.** `objects_config.json` has 12 objects (Halley included, pinned to
-  record `90000030`); the live `coverage_index.json` has 11 -- no `halley` key
-  (the index predates the config addition). No code change needed: the
-  offline suite already asserts 12 and has Halley-specific mock checks (Layer
-  1 is consistent with config already). What's missing is the Layer-2
-  `--first-build` run on Tony's hardware.
-- **Verified live 2026-07-15** [verified @953c650e]: served index objects =
-  earth, jupiter, saturn, moon, io, titan, pluto, charon, apophis, voyager_1,
-  encke -- no halley.
-**Tony:** RICE proposed 2/2/95/0.5 (no code change, just a build run; high
-confidence since Layer 1 already passes with 12) -- yours to finalize.
-**Gap:** run `--first-build` (not `--nightly` -- a new non-spacecraft object
-needs the full 365-day backfill window + the N3 floor check, per
-gallery-cache-builder skill). Prerequisite for any Halley render (artifact 4)
-and for L-119/F2's Halley-first event_link.
-**Ref:** `data/objects_config.json`; `data/solar-system/coverage_index.json`;
-gallery-cache-builder skill ("Adding a new object" section); L-098 (parent).
-
 #### [L-121] Slim plotly wheel not deployed anywhere (F4, ships-nothing gate)
 <!-- L:121 status:OPEN upd:2026-07-15 section:W.Active flag: rice:3/3/75/3 -->
 - **What.** The B' architecture (two-tier: frozen-A exhibits + data-backed B'
@@ -3931,6 +3923,364 @@ checks one global bound regardless of scene composition -- same limitation noted
 Skill Manifest.
 **Ref:** L-149, L-150 (motivating work); master plan §3; render_orbits.py, resolver.py,
 cache_reader.py.
+
+#### [L-154] Gallery feature-rendering JS layer (shells, rings, radiation belts -- Artifact 2 prerequisite)
+<!-- L:154 status:BLOCKED upd:2026-07-27 section:W.Active flag: rice:3/3/70/3 -->
+- **What.** The client-side JS that reads `ring_system`, `van_allen_belts`,
+  `atmosphere_shell`, and `radiation_belts` out of the served cache and
+  actually draws them. `assemble.py` already resolves and reports the
+  feature dispatch as data; nothing draws it yet.
+- **Blocked on:** the L-155-162 provenance-scoring cluster below (data/
+  scoring settled before this gets built, not the other way around).
+- **Correction (2026-07-27, Fable 5 review + Sonnet 5 independent
+  verification, both against live HEAD):**
+  `documentation/HANDOFF_gallery_feature_layer_L154_resume.md` claimed the
+  resolver bug (params dropped by `tuple(dict)` in `resolver.py`) was
+  "fixed and settled." It is NOT -- `resolver.py` line 133 still reads
+  `tuple(rec.get("features") or ())`, and `objects_config.json`'s
+  `features` values are genuinely nested dicts (Earth's atmosphere
+  fractions, Jupiter's ring radii, all present), so the line still drops
+  every parameter to bare category-name keys. The resume handoff is
+  corrected in place (Part 3 below) -- this entry is the ledger-side
+  record so the claim can't resurface from a stale copy of that handoff.
+- **Open design questions once unblocked:** geometry-building approach
+  (port the orrery's shell/belt/ring math into JS literally, or design
+  fresh JS-native trace builders -- "knowledge transfers, not code");
+  legend behavior (shared legendgroup vs. independently-toggleable rows);
+  sequencing (validate on Earth's already-closed Mode-5 harness first, or
+  build straight into Jupiter/Saturn since that's what's gating Artifact 2).
+**Gap:** wait on the cluster below; land the one-line resolver fix in the
+first gallery session that resumes this item -- before anything else in
+the resume handoff is acted on; then a design session for the three open
+questions above; then build (Opus 5) + Mode 5 acceptance.
+**Ref:** `assemble.py`, `resolver.py`, `render_objects.py`, `presentation.py`;
+`data/solar-system/feature_configs.json`; `data/objects_config.json`;
+`documentation/HANDOFF_gallery_feature_layer_L154_resume.md`;
+`documentation/REVIEW_provenance_refactor_cluster_scoping.md` (section 5);
+L-149/L-150/L-151 (M2 track); L-155-L-162.
+
+---
+
+#### [L-155] Cross-repo constants/geometry pinning checks -- built INTO provenance_scanner.py, not a standalone script
+<!-- L:155 status:PENDING-GATE upd:2026-07-27 section:W.Active flag: rice:3/4/75/2 -->
+- **What.** Pinning-test logic ("did this specific value drift," binary
+  asserts -- the `test_constants_provenance.py` pattern, not the open-ended
+  scanner pattern) that reads `objects_config.json`'s `features` values in
+  the gallery repo and asserts each equals its named source in the orrery:
+  `CENTER_BODY_RADII[x]` for physical radius, the specific dict literal in
+  `earth/jupiter/saturn_visualization_shells.py` for ring/belt/atmosphere
+  geometry.
+- **Design (settled, per `DESIGN_HANDOFF_provenance_scoring_and_pinning.md`
+  D6, confirmed on review D6d):** lives inside `provenance_scanner.py`'s own
+  run via relative path (`../tonyquintanilla.github.io/...`) -- no separate
+  script, no network. Absorbs `test_constants_provenance.py`'s existing
+  logic too, one pinning mechanism not two. Fails loud: nonzero exit code
+  on any pinning failure (the only hard exit-code gate in the whole
+  cluster -- see L-156's D7 for why Tier-1 never gets one).
+- **Explicitly out of scope:** `coverage_index.json` / `feature_configs.json`
+  (gallery-cache-builder's own test suite's job); anything JS-side.
+- **Gated on L-156** (scoring must be correct first) **and effectively on
+  L-162** (pinning against 18 named constants is simpler than 3 named + 15
+  dict-path lookups -- worth L-162 landing first per its own note, though
+  not a hard blocker).
+- **Confirmed 2026-07-27 (Sonnet 5, live HEAD):** nothing built yet --
+  `provenance_scanner.py` has zero occurrences of `run_pinning_checks` or
+  `PINNING_MAP`.
+**Gap:** finalize the explicit key-path mapping (gallery config key ->
+orrery source location) as a table, not name-matching; design where this
+lives inside `provenance_scanner.py` (new function alongside
+`find_cross_file_issues`); build (Opus 5, Phase 3 per the amended design)
+-- D3 itself is closed (see L-156), so what actually gates this now is
+L-156's Phases 1-2 landing in code, not any further calibration round.
+**Ref:** `test_constants_provenance.py` (direct precedent, including its
+motivating bug: `close_approach_data.py`'s stale `CENTER_BODY_RADII` copy);
+`provenance_scanner.py` `main()`; `constants_new.py`; `data/objects_config.json`;
+`DESIGN_HANDOFF_provenance_scoring_and_pinning.md`;
+`DESIGN_REVIEW_provenance_scoring_and_pinning.md`; L-154; L-156; L-157; L-160; L-162.
+
+---
+
+#### [L-156] Provenance scanner scoring model fix -- criticality (category-based) + vulnerability recalibration + comprehensive sweep
+<!-- L:156 status:OPEN upd:2026-07-27 section:W.Active flag: rice:5/4/80/3 -->
+- **What.** `provenance_scanner.py`'s scoring currently mis-prioritizes
+  exactly the data this cluster depends on: `SUN_RADIUS_KM` /
+  `EARTH_EQUATORIAL_RADIUS_KM` / `JUPITER_EQUATORIAL_RADIUS_KM` score 6
+  (Tier 3, "no action required"); `KM_PER_AU` / `CENTER_BODY_RADII` score
+  10 (Tier 2). Root cause: criticality is resolved by direct-import-count
+  of the exact symbol name, so a foundational constant consumed
+  indirectly (via a derived dict) scores as if barely used.
+- **Decided (Tony, design + review, confirmed again in chat 2026-07-27):**
+  - **Two criticality categories: MEASURED (C=5) and RELATIONAL (C=4).**
+    Not consumer-count-based -- a category judgment, brought in line with
+    how display strings already score.
+  - **Ring geometry sits in MEASURED, the top tier.** Tony's own reasoning
+    (2026-07-27): "in general planetary shells are less certain [but] the
+    rings are better defined" -- consistent with the design's own boundary
+    (independently-measured vs. derived-from-something-tracked), not a
+    blast-radius argument.
+  - **Orbital period and radius share the top tier despite different
+    failure shapes.** Tony (2026-07-27): "these are fundamental data."
+  - **Explicit `undetermined` sentinel** for anything that can't be
+    confidently placed in cosmetic/MEASURED/RELATIONAL -- gets its own
+    banner, same visibility as the Tier-1 banner. **Naming conformance
+    (Fable 5, this review):** use `undetermined`, matching L-163's already-
+    decided sentinel name for the same shape of problem, NOT `UNCLASSIFIED`
+    as the design review's D2 amendment literally wrote it (that text
+    predates L-163's naming decision). Whoever builds Phase 1 implements
+    the D2 concept under this name.
+  - **Vulnerability ladder (D3): decided,** via a three-AI calibration
+    round (Gemini 3.1 Pro, GPT 5.5, Fable 5) plus Sonnet 5 synthesis,
+    closed 2026-07-27. Four rungs, same count as today -- no Tier score
+    recalibration needed:
+    - **V1 FETCHED** -- live pipeline query at runtime. Unchanged.
+    - **V2 CROSS-CHECKED** -- never auto-promotable to V1, at any rigor
+      level (all three AIs converged on this against my initial draft,
+      which had proposed a conditional path to V1; the scanner can't
+      observe whether a check was actually rigorous, only a claim that
+      it was -- the same cite-to-clear risk as a `# Source:` tag over
+      recalled data). Requires a structured, dated annotation: who/what
+      checked, against which authority, when, **and whether the check
+      was blind (no anchoring)** -- the last field added directly from
+      this project's own history (see below), not from the panel.
+    - **V3 SOURCED** -- cited but never independently cross-checked,
+      *and* anything decayed from V2 over time. **Tony (2026-07-27):
+      merged, not split** -- the recency/staleness distinction a split
+      would have preserved isn't lost, it lives in the dated field on
+      the V2 annotation; it just stops being double-counted as its own
+      score tier. Matches Fable's calibration principle (rungs
+      distinguished by required action, not by how a value came to be
+      wrong) over the split GPT and I had initially favored.
+    - **V4 RECALLED** -- no citation at all. Unchanged.
+    - **Evidence base (verified against project history, not just the
+      two cases the worksheet opened with):** Arrokoth (~1000x radius
+      error, sourced not cross-checked) and Parker Solar Probe (surface-
+      vs-center convention error, introduced *during* a claimed
+      verification) motivated the original ask. Two more, found on a
+      follow-up pass, changed the answer: a near-miss where Claude's own
+      draft Gemini prompt included its own numbers before Tony caught
+      the anchoring risk (`ADDENDUM_v23_design_session_narrative.md`),
+      and a session where Gemini's *own* cross-check output was wrong on
+      three counts against the primary source
+      (`HANDOFF_addendum_phase1_and_uranus_cleanup.md` /
+      `HANDOFF_provenance_phase1_v17.md` onward) -- direct evidence that
+      cross-checking is itself an interpretation-laden, fallible act,
+      not a passive validator. A positive counter-case exists too
+      (`MANIFEST_bow_shock_and_dipole_cone_v1.md`, blind pass, 7/8
+      agreement) -- the mitigation isn't hypothetical.
+    - **Derived values:** not a separate rung (this cluster's original
+      framing, and L-158's own title, were wrong on this point) -- an
+      *inheritance rule* instead. A value derived at runtime from
+      tracked inputs inherits its weakest input's rung, once the
+      derivation logic itself has cleared one cross-check. A value
+      derived once and then hardcoded as a literal inherits nothing --
+      it's a copy, not a derivation, and lands in plain V3 with the
+      derivation comment as its citation. See L-158, retitled
+      accordingly.
+  - **Tier-1 never gets an auto-exit gate, at any threshold** (D7, review
+    amendment) -- permanent banner, human judgment, indefinitely. The only
+    hard exit-code gate in the cluster is L-155's pinning checks.
+- **Full comprehensive-sweep findings folded in** (design section 3): the
+  never-fixed inline `'source':` dict-value pattern; the duplicate-
+  detector's same-file/dict-kind blind spots; missing magnetosphere unit
+  vocabulary; the comet accepted-residual that contradicts the new scheme;
+  "Option A" retired.
+**Gap:** (1) fix the `CENTER_BODY_RADII` duplication per L-162 (separate
+dedicated session); (2) resolve the five comprehensive-sweep items;
+(3) build Phases 1-3 (Opus 5) against the decided ladder above -- the D3
+gate is clear, nothing further blocks the build.
+**Ref:** `provenance_scanner.py` (`find_cross_file_issues`,
+`CONCEPT_ALIASES`, `NUMERIC_CLAIM_RE`); `constants_new.py`;
+`data/provenance_exceptions.json`; `documentation/provenance_audit_handoff_v1.md`
+(Arrokoth/Parker precedent); `ADDENDUM_v23_design_session_narrative.md`
+(anchoring near-miss); `HANDOFF_addendum_phase1_and_uranus_cleanup.md`,
+`HANDOFF_provenance_phase1_v17.md` (Gemini cross-check itself wrong);
+`MANIFEST_bow_shock_and_dipole_cone_v1.md` (blind-pass positive case);
+`DESIGN_HANDOFF_provenance_scoring_and_pinning.md`;
+`DESIGN_REVIEW_provenance_scoring_and_pinning.md`; L-163 (naming precedent);
+L-155; L-157; L-158; L-159; L-161; L-162.
+
+---
+
+#### [L-157] Gemini cross-check of shell config ring/belt/atmosphere geometry values
+<!-- L:157 status:OPEN upd:2026-07-27 section:W.Active flag: rice:2/3/85/2 -->
+- **What.** Run the proven April 2026 methodology (Claude drafts a
+  fact-check worksheet, Gemini cross-checks against authoritative sources,
+  Tony integrates) against the raw geometry dicts in
+  `earth_visualization_shells.py`, `jupiter_visualization_shells.py`,
+  `saturn_visualization_shells.py` (`ring_system`, `van_allen_belts`,
+  `radiation_belts`, `atmosphere_shell`) -- confirmed these specific
+  values have never been through this process.
+- **Sequencing (confirmed, review section 5):** runs sequentially through
+  the same Mode 7 relay channel as the D3 calibration and L-161's sweep,
+  not as a parallel thread -- after Phase 1-2 (L-156) ships, so results can
+  be annotated in a form the scanner can actually see.
+**Gap:** draft the worksheet (per `worksheet_jupiter_visualization.md`
+template, scoped to config values not narrative strings) **blind -- no
+Claude-derived figures included**, per the near-miss already caught once
+in this project (`ADDENDUM_v23_design_session_narrative.md`: an anchored
+draft prompt was rewritten to ask de novo after Tony flagged the
+rubber-stamp risk); carry to Gemini; integrate corrections; apply the
+cross-checked annotation (with the blind/anchored field, per L-156) once
+L-156's build defines its form.
+**Ref:** `provenance_audit_handoff_v1.md`; `MODE7_gemini_crosscheck_magnetosphere.md`;
+`worksheet_jupiter_visualization.md`; `ADDENDUM_v23_design_session_narrative.md`
+(blind-worksheet precedent); L-155; L-156; L-161.
+
+---
+
+#### [L-158] Derived-constant vulnerability inheritance rule (revised from a proposed rung, 2026-07-27)
+<!-- L:158 status:OPEN upd:2026-07-27 section:W.Active flag: rice:4/2/70/1 -->
+- **What.** Values computed from already-tracked primaries (e.g.
+  `SOLAR_RADIUS_AU = SUN_RADIUS_KM / KM_PER_AU`) don't fit the criticality
+  question at all -- it's a Vulnerability question.
+- **Superseded (D9's original framing, and this item's own original
+  title, were wrong):** "derived rung = V1" treated a derived value as
+  structurally immune to drift. Both Fable 5 and GPT 5.5's D3 calibration
+  passes rejected that premise independently -- the formula, the units, or
+  a wrong parent reference are their own error surface (Fable's cited
+  precedent: Mars Climate Orbiter, a real mission lost to exactly this
+  class of bug), and a value computed once and then hardcoded as a
+  literal isn't protected by its original derivation at all.
+- **Decided (2026-07-27, folded into L-156's ladder as a rule, not a
+  rung):** two cases, not one tier --
+  - **Derived at runtime** (formula lives in the code, evaluates from the
+    tracked primary every call): inherits its weakest input's V-rung,
+    but only once the derivation logic itself -- the formula, the units,
+    the parent reference -- has cleared one independent cross-check.
+    Until that check happens, treat as unverified regardless of the
+    input's own rung.
+  - **Derived once, then frozen as a literal** (a hardcoded number with a
+    "computed from X" comment): not actually derived any more -- it's a
+    copy, and copies drift by exactly the mechanism this item's original
+    premise claimed was impossible (the primary updates, the frozen
+    literal doesn't). No special handling: plain V3 (sourced-unchecked),
+    with the derivation comment serving as its citation.
+  - The two-factor structural check (`# Derived:` comment + AST
+    confirmation it's actually computed) still stands as the mechanism
+    for telling the two cases apart -- it just no longer implies an
+    automatic V1 grant on its own.
+**Gap:** build -- rides Phase 1 of L-156's scanner build; identify which
+existing `# Derived:` comments in `constants_new.py` are runtime formulas
+vs. frozen literals before assigning either treatment.
+**Ref:** `constants_new.py` derived-constants section; L-156 (holds the
+full ladder this rule attaches to).
+
+---
+
+#### [L-159] Disclosed-approximation check (Envelope of the Unknowable, scanner-level)
+<!-- L:159 status:OPEN upd:2026-07-27 section:W.Active flag: rice:2/2/60/2 -->
+- **What.** Illustrative/stylized values (Mercury's magnetosphere flaring
+  parameter, a shared bow-shock eccentricity applied uniformly for
+  simplicity) don't fit either criticality tier. Ties to the resident
+  protocol's "Show the Envelope of the Unknowable" -- not currently checked
+  for anywhere in the scanner. The real question: is the approximation
+  disclosed as one, or presented silently as if precise?
+- **Decided (D9, review):** annotation convention named -- `# Illustrative:`.
+  Planet 9's radius (a model estimate, never directly observed -- see
+  L-162) attaches to this item as a case, per the design review.
+- **Deliberately deferred:** the ENFORCEMENT check (does the rendered
+  hover actually disclose what the comment discloses) is genuinely hard
+  and stays open past this cluster closing.
+**Gap:** design pass on detection mechanics, once the rest of the cluster
+lands.
+**Ref:** resident protocol Part 3, "Show the Envelope of the Unknowable";
+`MODE7_gemini_crosscheck_magnetosphere.md`; L-156; L-162.
+
+---
+
+#### [L-160] test_constants_provenance.py -- retire once fully absorbed, not before
+<!-- L:160 status:OPEN upd:2026-07-27 section:W.Active flag: rice:3/3/90/1 -->
+- **What.** Tony confirmed directly: "I never run it, I only run the
+  scanner." Correct logic, dashboard-listed, zero code path calling or
+  importing it anywhere in the repo. A second, independently-triggered
+  entry point that evidence shows doesn't get pulled.
+- **Decided (Tony, 2026-07-27):** "if we have fully integrated the
+  constants provenance, we can retire the stand-alone file" -- retire is
+  confirmed, but **conditional on the integration actually landing first**,
+  not a green light to delete it now. This matches the design's own
+  sequencing exactly: D10's retirement was always scoped inside Phase 3,
+  alongside L-155's pinning engine that replaces what this file checks.
+  **Do not delete this file before L-155's pinning checks are built and
+  verified to cover the same ground.**
+- **On retirement, five reference sites to clear (grepped, not assumed):**
+  the file itself; `palomas_orrery_dashboard.py`'s menu entry (~line 227);
+  `module_atlas.py`'s ROLE_MAP entry; the scanner's own MODULE_DOMAIN_MAP
+  entry and report mention; the comment in
+  `comet_visualization_shells.py` line 695 (reword to point at the
+  scanner's pinning section instead). The file's docstring institutional
+  memory (the motivating bug, the April verification history) migrates
+  into the new pinning section's docstring.
+**Gap:** **(decide)** none remaining -- retire-vs-wrapper is settled;
+**(do)** execute the five-site cleanup as part of L-155's Phase 3 build,
+not before.
+**Ref:** `test_constants_provenance.py`; `palomas_orrery_dashboard.py`;
+`module_atlas.py`; `provenance_scanner.py`; `comet_visualization_shells.py`
+line 695; L-155; L-156.
+
+---
+
+#### [L-161] Gemini sweep -- clear the display-string Tier-2 backlog
+<!-- L:161 status:OPEN upd:2026-07-27 section:W.Active flag: rice:3/3/70/2 -->
+- **What.** ~330 display-string citations, currently C=4/V=2 under
+  *today's* meaning of V2 (SOURCED). **Re-read against the closed
+  ladder, not the old one** (exactly the D1/D7 re-read L-156's Fable 5
+  round flagged as needed): under the new scheme, V2 now means
+  CROSS-CHECKED, a stronger bar. Only the subset with a genuine,
+  independent, dated (and blind-checked) annotation backfills to the new
+  V2; everything else -- including anything merely cited -- lands at the
+  new V3 (merged sourced+stale). ~130 were already Gemini-verified by the
+  April 2026 worksheets: **check those worksheets against the new blind-
+  check bar before backfilling** (per `ADDENDUM_v23`'s anchoring near-
+  miss, an anchored pass doesn't qualify even if it happened) -- if they
+  don't clear it, they need redoing, not just re-tagging. The remainder
+  need a genuinely new sweep regardless.
+- **File concentration, confirmed empirically:** 84% of the 330 sit in 15
+  files. `celestial_objects.py` alone is 50 findings with zero prior
+  worksheet coverage. Neptune, Uranus, Solar, Saturn, Pluto,
+  `idealized_orbits.py`, `planet_visualization_utilities.py` also never
+  had a Gemini pass.
+- **Sequencing (revised on review):** runs AFTER L-156's build ships, not
+  parallel with it -- the urgency doesn't exist until the V-ladder change
+  actually lands.
+- **Practical note:** consider the same Mode 7 relay channel as L-157
+  (sequentially, not merged in scope) rather than a second separate
+  Gemini engagement.
+**Gap:** draft first worksheet (`celestial_objects.py`) **blind**, same
+requirement as L-157; confirm the April worksheets' actual coverage
+against the new blind-check bar, not just their topic coverage, before
+assuming which ~130 are already clear.
+**Ref:** L-156; L-157; L-160; `worksheet_*.md` set;
+`ADDENDUM_v23_design_session_narrative.md` (blind-worksheet precedent).
+
+---
+
+#### [L-162] CENTER_BODY_RADII full de-duplication -- dedicated Sonnet session
+<!-- L:162 status:OPEN upd:2026-07-27 section:W.Active flag: rice:3/3/90/1 -->
+- **What.** Promote all 15 remaining `CENTER_BODY_RADII` bodies (Mercury,
+  Venus, Moon, Mars, Phobos, Saturn, Uranus, Neptune, Pluto, Bennu, Eris,
+  Haumea, Makemake, Arrokoth) to named module-level constants in
+  `constants_new.py`, each keeping its existing citation. **Excludes
+  Planet 9** (model estimate, never directly observed -- carries to L-159
+  instead).
+- **Confirmed 2026-07-27 (Sonnet 5, live HEAD): not started.** Only
+  Sun/Earth/Jupiter are named; `CENTER_BODY_RADII` still hardcodes all
+  three as raw literals (695700, 6378.137, 71492) rather than referencing
+  the names -- so even the original 3-body-minimum hasn't landed. Every
+  dict entry does carry a good inline citation already; that's not what's
+  missing. What's missing is promotion to its own named constant so each
+  body scores as its own scanner row instead of one undifferentiated dict.
+- **Why now, not "eventually":** simplifies L-155's Phase 3 pinning engine
+  -- pins against 18 named constants directly instead of dict-path AST
+  extraction for 15 of them. D3 is closed (see L-156), so nothing about
+  this item's timing depends on it any more -- it can run whenever a
+  dedicated session is free.
+**Gap:** dedicated Sonnet session -- fresh SHA pull, safe-file-editing
+discipline (bottom-up, ASCII, py_compile clean), credit line, rewrite
+`CENTER_BODY_RADII` to reference the new names instead of literals.
+**Ref:** `constants_new.py`; `DESIGN_REVIEW_provenance_scoring_and_pinning.md`
+section 3a; L-155; L-156; L-159 (Planet 9 case).
+
+---
 
 ### W.Deferred -- captured, not yet actionable
 
@@ -4462,6 +4812,34 @@ M2_TESTING_PROTOCOL_ADDENDUM.md (Layer 2 steps).
 **Gap:** none -- documentation only. Skill Manifest table bumped to 1.2 alongside.
 **Ref:** skills/ledger-and-session-records/SKILL.md @ 1.2; L-149/L-150/L-151.
 
+
+#### [L-120] Halley configured but not yet in the served index (F3, gates artifact 4)
+<!-- L:120 status:DONE upd:2026-07-27 section:W.Done flag: rice:2/2/95/0.5 -->
+- **What.** `objects_config.json` has 12 objects (Halley included, pinned to
+  record `90000030`); the live `coverage_index.json` has 11 -- no `halley` key
+  (the index predates the config addition). No code change needed: the
+  offline suite already asserts 12 and has Halley-specific mock checks (Layer
+  1 is consistent with config already). What's missing is the Layer-2
+  `--first-build` run on Tony's hardware.
+- **Verified live 2026-07-15** [verified @953c650e]: served index objects =
+  earth, jupiter, saturn, moon, io, titan, pluto, charon, apophis, voyager_1,
+  encke -- no halley.
+**Tony:** RICE proposed 2/2/95/0.5 (no code change, just a build run; high
+confidence since Layer 1 already passes with 12) -- yours to finalize.
+**Gap:** run `--first-build` (not `--nightly` -- a new non-spacecraft object
+needs the full 365-day backfill window + the N3 floor check, per
+gallery-cache-builder skill). Prerequisite for any Halley render (artifact 4)
+and for L-119/F2's Halley-first event_link.
+**Ref:** `data/objects_config.json`; `data/solar-system/coverage_index.json`;
+gallery-cache-builder skill ("Adding a new object" section); L-098 (parent).
+**Closed 2026-07-27:** confirmed at gallery HEAD `0f8e62e` -- `halley` and
+`encke` are both in `coverage_index.json`'s 12 served objects, with
+`served_window` populated (not null). Tony (2026-07-27): "probably we can
+close. we have not done any mode 5 checks yet in the interactive
+development, except for earth. all are procedural so far. artifact 4 is
+the render" -- the Halley visual/Mode-5 check belongs to Artifact 4's own
+build, not to this item, which was only ever about the object being
+served. Closing outright, no residual carried forward.
 ### W.Cross-references -- existing items that interact with the web track
 
 - **L-026** -- CRLF to LF on `palomas_orrery_helpers.py`. Companion to L-087.
