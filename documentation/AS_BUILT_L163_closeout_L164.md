@@ -72,6 +72,28 @@ loose thread is captured rather than left floating -- which was the
 point: it had been flagged in two as-builts without ever becoming an
 item.
 
+**Tony:** pushed. see Claude Sonnet 5's final wrap-up below.
+
+**Claude:**
+Matches. Let's pull fresh and trace the full chain from my last anchor through to now.Confirmed — yes, fully done. Same discipline as every step before: pulled fresh, traced the actual commit chain, checked every specific claim against real bytes.
+
+**One thing worth noting first:** the SHA chain shows something good happening automatically. My last prompt anchored on `5c5fd6ef`, but between then and Opus's session, your master-plan push landed (`70d9261`) — and Opus's as-built correctly says "Built on: 70d9261," not my stale anchor. It re-verified against live HEAD rather than trusting what I'd handed it. Exactly the round-trip discipline working as designed.
+
+**Master plan (`70d9261`):** diffed it against my proposed text — word-for-word match, applied clean.
+
+**Closeout (`70d9261` → `91a1beb`):** every specific number checks out —
+- `LEDGER_CONSOLIDATED.md`: 208 insertions / 186 deletions, exact.
+- L-163 now at line 2247: `status:DONE`, `section:C`, physically under `## C. RECONCILED LEDGER -- DONE`. Whole block moved, not just the tag.
+- L-164 at line 2899: `status:OPEN`, `section:D.Structural`, physically under `## D. RECONCILED LEDGER -- OPEN`, content intact, properly bracketed by the surrounding unrelated items with correct blank-line spacing on both sides — confirmed the whitespace judgment call didn't clip anything.
+- `ledger_index.py`: `OK: 150 L-blocks parsed, no consistency problems` in both check mode and a full re-run; re-running a second time produces zero further diff — settled, not oscillating.
+- 94 live items, confirmed by actually running it, not just reading the printed count.
+- Summary rows: L-164 OPEN (0.9), L-163 DONE (0.8) — exact.
+- Encoding: 76 non-ASCII bytes, unchanged from HEAD; zero CRLF; L-164's own block — a ledger item *about* non-ASCII bytes — contributes none of its own.
+
+The one thing the as-built didn't account for is the same benign pattern as last time: the real commit touched 2 files, not "exactly one" — `LEDGER_CONSOLIDATED.md` plus `documentation/AS_BUILT_L163_closeout_L164.md` (the as-built itself, 83 lines, pure addition). Given you confirmed last round that's you bundling the as-built into the same push, I'm not flagging it as an open question this time — just noting the pattern held.
+
+**So: L-163 is closed, all four phases, independently reverified at every phase rather than taken on any single as-built.** The one loose thread it kept surfacing twice without becoming anything is now L-164, sitting where it belongs. L-156 stays its own separate thread, as you said. Nothing outstanding on this one — the only remaining decision is whenever you want to actually fix L-164's 8 divider lines, no urgency there.
+
 ## Ref
 
 `LEDGER_CONSOLIDATED.md` (L-163, L-164), `ledger_index.py`,
