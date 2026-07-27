@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*94 live items; 82 need attention (`!`); 93 RICE-scored; 56 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*95 live items; 83 need attention (`!`); 93 RICE-scored; 56 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -373,6 +373,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-089 | Scene-spec shared skeleton + solar system vocabulary (Phase 1) | PROPOSED | 1.5 | 2026-07-03 |
 |  | L-090 | Star cache inventory + wire format decision | PROPOSED | 0.5 | 2026-07-03 |
 | ! | L-151 | Create gallery-assembler skill -- technical home for the new-mechanism assembler | OPEN | -- | 2026-07-20 |
+| ! | L-165 | Site continuity if there is no active administrator (succession / legacy planning) | OPEN | -- | 2026-07-27 |
 
 ### W.Deferred -- Web Publication deferred (captured)
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -4086,8 +4087,47 @@ grounded in mechanisms already proven and shipping on the desktop side;
 effort ticks up slightly for the naming generalization, still small per
 object once the pattern is set) -- yours to finalize.
 
-### W.Done -- closed items, kept with the track
+#### [L-165] Site continuity if there is no active administrator (succession / legacy planning)
+<!-- L:165 status:OPEN upd:2026-07-27 section:W.Active flag: rice:?/?/?/? -->
+- Origin: Tony raised the real scenario -- not vacation, not a dead
+  laptop for a week, but permanently indisposed -- and asked what should
+  happen to the site with no administrator, ever, again. Alerting an
+  administrator is the wrong solve for "there may not be one"; this item
+  reframes around structural survivability instead.
+- **Good news, already true, no build needed:** the served_window/trust
+  system (L-149/L-118, M2) means the site does not corrupt or drift if
+  fetches stop forever -- it freezes at the last good window and the
+  resolver correctly refuses dates outside it (OutOfServedWindowError)
+  rather than rendering wrong positions. A permanently-abandoned site is
+  a frozen, correct snapshot, not a broken one. GitHub Pages serves that
+  frozen state indefinitely at zero cost/maintenance as long as the
+  GitHub account exists.
+- **Real structural dependency, confirmed:** palomasorrery.com is a real,
+  paid custom domain (verified via the repo's own CNAME file). Domain
+  registrations lapse without renewal and, unlike everything else here,
+  an unpaid domain does not fail gracefully -- it goes dark. This needs a
+  deliberate, non-technical decision: pre-pay the registration for a long
+  runway (many registrars allow ~10 years at once), and/or explicitly
+  accept the free `tonyquintanilla.github.io` URL as a permanent fallback
+  identity if the custom domain ever lapses.
+- **Open architectural question, only if continued fetching (not just a
+  correct frozen snapshot) matters as part of the legacy:** the nightly
+  fetch currently runs on Tony's personal laptop, which is not durable
+  infrastructure over a long horizon. Standard fix: migrate the nightly
+  builder from local Task Scheduler to GitHub Actions (free for public
+  repos, runs in GitHub's own infrastructure, no personal machine
+  dependency). Real migration project, not a small tweak.
+**Tony:** revisit when there's focus time for it. Not urgent -- the site
+does not degrade in the meantime either way.
+**Gap:** (1) decide domain-renewal approach; (2) decide whether continued
+fetching matters enough to justify the GitHub Actions migration, or
+whether a correct frozen snapshot is an acceptable legacy on its own; (3)
+if migrating, design session first -- credential storage for the push
+step is the main new wrinkle, given the repo is public.
+**Ref:** L-149/L-118 (served_window/trust), CNAME (confirms the domain),
+M2 testing protocol addendum (Layer 3 background).
 
+### W.Done -- closed items, kept with the track
 
 #### [L-085] LICENSE to repo root
 <!-- L:085 status:DONE upd:2026-07-03 section:W.Done flag: rice:2/2/100/1 -->
@@ -4281,43 +4321,6 @@ deferred), L-107 (provenance register), L-111 (unattended-nightly, follow-on).
   outer planet zoom, additional controls).
 **Ref:** Master plan v10 §2a, §5 Phase 0; gallery @ `a85a4fa`.
 
-#### [L-148] Staging folder names carry no object identifier -- hard to locate manually (gallery-cache-builder)
-<!-- L:148 status:DONE upd:2026-07-20 section:W.Done flag: rice:1/2/90/1 -->
-- **What.** run_build's staging dir name is `.staging_<out_dir.name>_<run_id>` -- timestamp
-  only, no object slug -- even for a single-object `--dry-run --object <slug>` run. Surfaced
-  during M2 Layer 2 manual verification (L-118): finding one object's trust block after a
-  dry-run means sorting File Explorer by date and guessing which .staging_solar-system_*
-  folder is the right one. Tony, mid-test: "with 11 objects it's hard, with all the objects
-  extremely hard."
-- **Proposed fix (not built, flagging only):** when only_slug is set, fold the slug into the
-  staging dirname, e.g. `.staging_solar-system_earth_<run_id>`. Multi-object runs
-  (--first-build/--nightly) keep the timestamp-only name -- no single object to name it after.
-**Note:** small, isolated change (one f-string in run_build's staging= line, ~1289).
-_sweep_siblings' glob (`.staging_%s_*` % out_dir.name) still prefix-matches the new shape
-unchanged -- no consumer break expected, worth a quick confirm before landing. Not yet
-RICE-scored.
-**Gap:** add slug to staging dirname when only_slug is set; confirm _sweep_siblings still
-reaps it; Layer 1 offline-suite check if any test asserts the exact staging dirname shape.
-**Ref:** gallery tools/gallery_cache_builder.py run_build (staging=... ~line 1289);
-_sweep_siblings; L-118 (parent -- discovered during its Layer 2 acceptance).
-
-#### [L-152] ledger-and-session-records skill bumped to 1.2 -- retroactive ledger entry
-<!-- L:152 status:DONE upd:2026-07-20 section:W.Done flag: rice:1/1/95/0.5 -->
-- **What.** ledger-and-session-records was updated to v1.2 (cut at orrery @
-  079a0ec5c6a72f83fa7904e469cd359912746221, July 19, 2026) -- generalized
-  "Handoff Structure" into a shared "Anchor Requirement (all outbound
-  documents)" covering handoffs, manifests, as-builts, review requests, and
-  Mode-7 relay prompts under one built on <SHA> at <URL> format, plus a new
-  "The Document Stack" section. No ledger entry was written at the time --
-  this entry closes that gap per the protocol's own convention.
-- **Note:** discovered via version drift -- the resident protocol's Skill
-  Manifest still showed 1.0 while the repo was at 1.2, and a Claude draft
-  this session nearly re-generalized something already generalized, before
-  the mismatch was caught. Skill version drift is a real failure class,
-  same shape as an unpushed SHA.
-**Gap:** none -- documentation only. Skill Manifest table bumped to 1.2 alongside.
-**Ref:** skills/ledger-and-session-records/SKILL.md @ 1.2; L-149/L-150/L-151.
-
 #### [L-118] feature_configs.json served empty every build (F1, gates artifact 2)
 <!-- L:118 status:DONE upd:2026-07-21 section:W.Done flag: rice:3/3/90/1 -->
 - **What.** `derive_served` (gallery_cache_builder.py, line ~749-750) writes
@@ -4387,6 +4390,26 @@ PHASE2_SYNTHESIS_MANIFEST_v2.md S4/S9; PHASE2_ARTIFACT1_AS_BUILT.md S8/S9;
 L-098 (parent, Phase 1b); L-114 (related but distinct -- see naming caution);
 L-123 (info card, rides with this). L-149 (served_window ended up here, not in this item's own code)
 
+#### [L-148] Staging folder names carry no object identifier -- hard to locate manually (gallery-cache-builder)
+<!-- L:148 status:DONE upd:2026-07-20 section:W.Done flag: rice:1/2/90/1 -->
+- **What.** run_build's staging dir name is `.staging_<out_dir.name>_<run_id>` -- timestamp
+  only, no object slug -- even for a single-object `--dry-run --object <slug>` run. Surfaced
+  during M2 Layer 2 manual verification (L-118): finding one object's trust block after a
+  dry-run means sorting File Explorer by date and guessing which .staging_solar-system_*
+  folder is the right one. Tony, mid-test: "with 11 objects it's hard, with all the objects
+  extremely hard."
+- **Proposed fix (not built, flagging only):** when only_slug is set, fold the slug into the
+  staging dirname, e.g. `.staging_solar-system_earth_<run_id>`. Multi-object runs
+  (--first-build/--nightly) keep the timestamp-only name -- no single object to name it after.
+**Note:** small, isolated change (one f-string in run_build's staging= line, ~1289).
+_sweep_siblings' glob (`.staging_%s_*` % out_dir.name) still prefix-matches the new shape
+unchanged -- no consumer break expected, worth a quick confirm before landing. Not yet
+RICE-scored.
+**Gap:** add slug to staging dirname when only_slug is set; confirm _sweep_siblings still
+reaps it; Layer 1 offline-suite check if any test asserts the exact staging dirname shape.
+**Ref:** gallery tools/gallery_cache_builder.py run_build (staging=... ~line 1289);
+_sweep_siblings; L-118 (parent -- discovered during its Layer 2 acceptance).
+
 #### [L-149] Global served_window trust participation should key off canonical_frame, not category (gallery-cache-builder)
 <!-- L:149 status:DONE upd:2026-07-21 section:W.Done flag: rice:2/2/60/2 -->
 - **What.** TRUST_WINDOW_EXCLUDED_CATEGORIES = {'moon', 'spacecraft'} excludes by category
@@ -4421,6 +4444,24 @@ Only Step 3 (--nightly) done -- same run that closes L-118's own remaining gap.
 TRUST_WINDOW_PARTICIPANT_FRAME (~360, replaces the retired TRUST_WINDOW_EXCLUDED_CATEGORIES);
 resolver.py resolve() (~91-106); data/objects_config.json; L-118 (parent);
 M2_TESTING_PROTOCOL_ADDENDUM.md (Layer 2 steps).
+
+#### [L-152] ledger-and-session-records skill bumped to 1.2 -- retroactive ledger entry
+<!-- L:152 status:DONE upd:2026-07-20 section:W.Done flag: rice:1/1/95/0.5 -->
+- **What.** ledger-and-session-records was updated to v1.2 (cut at orrery @
+  079a0ec5c6a72f83fa7904e469cd359912746221, July 19, 2026) -- generalized
+  "Handoff Structure" into a shared "Anchor Requirement (all outbound
+  documents)" covering handoffs, manifests, as-builts, review requests, and
+  Mode-7 relay prompts under one built on <SHA> at <URL> format, plus a new
+  "The Document Stack" section. No ledger entry was written at the time --
+  this entry closes that gap per the protocol's own convention.
+- **Note:** discovered via version drift -- the resident protocol's Skill
+  Manifest still showed 1.0 while the repo was at 1.2, and a Claude draft
+  this session nearly re-generalized something already generalized, before
+  the mismatch was caught. Skill version drift is a real failure class,
+  same shape as an unpushed SHA.
+**Gap:** none -- documentation only. Skill Manifest table bumped to 1.2 alongside.
+**Ref:** skills/ledger-and-session-records/SKILL.md @ 1.2; L-149/L-150/L-151.
+
 ### W.Cross-references -- existing items that interact with the web track
 
 - **L-026** -- CRLF to LF on `palomas_orrery_helpers.py`. Companion to L-087.
