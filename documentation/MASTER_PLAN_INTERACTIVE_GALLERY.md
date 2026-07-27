@@ -863,41 +863,27 @@ sequentially through the same Mode 7 relay channel rather than as parallel
 threads. L-154 unblocks once these close.
 
 **L-163 — Module role/domain classification redesign (ROLE_MAP + MODULE_DOMAIN_MAP).**
-○ Phases 1-2 of 4 CLOSED (Opus 5 + Sonnet 5, July 24-25 2026). Design
-(Sonnet 5) reviewed by Fable 5, both confirmed build-ready; full detail
-in ROLE_DOMAIN_CLASSIFICATION_HANDOFF.md, AS_BUILT_L163_phase1.md,
-AS_BUILT_L163_phase2.md. Retires ROLE_MAP and MODULE_DOMAIN_MAP as
-hand-maintained dicts -- both become mechanically regenerated from an
+✓ Role-side CLOSED, all 4 phases (Opus 5 + Sonnet 5, July 24-26 2026).
+Design (Sonnet 5) reviewed by Fable 5, both confirmed build-ready; full
+detail in ROLE_DOMAIN_CLASSIFICATION_HANDOFF.md and
+AS_BUILT_L163_phase1.md through AS_BUILT_L163_phase4.md. ROLE_MAP
+retired as a hand-maintained dict -- mechanically regenerated from an
 explicit Role:/Domain: line in each module's own docstring
 (ledger_index.py's INDEX-zone pattern, extended).
 
-Phase 1 verified: 7 one-time/superseded modules archived (root count
-121 -> 114); ROLE_MAP's 7 ghost entries deleted (94 -> 87); Phase 2's
-sweep scope recomputed at 12 remaining uncategorized (down from 19).
+Phase 1: 7 one-time/superseded modules archived (root count 121 ->
+114); ROLE_MAP's 7 ghost entries deleted (94 -> 87). Phase 2: all
+orrery + gallery modules tagged, independently re-confirmed against
+live HEAD. Phase 3/3a/3b: classifier code shipped and verified --
+114/114 orrery + 24/24 gallery modules classify with role_source ==
+'tag', zero undetermined, zero tag leakage across all 141 .py files in
+both repos. Phase 4: ledger-and-session-records (-> 1.4) and
+provenance-discipline (-> 1.2) rewritten off the retired hand-maintained
+ROLE_MAP language; Skill Manifest and ledger index regenerated.
 
-Phase 2 verified: all 114 orrery + 22 gallery modules now carry a
-Role:/Domain: line, independently re-confirmed against live HEAD.
-Changelog-style docstrings (8 modules) resolved to the end-of-docstring
-placement, not wedged mid-history. Two close-out gaps surfaced only by
-checking the written files against every decision, not by re-reading
-the as-built: a real bug in the tag-refresh logic (matched "Role:"/
-"Domain:" as individual lines rather than a pair, silently deleting a
-wrapped prose sentence in add_docstrings.py's own docstring) and three
-confirmed decisions that hadn't reached the code (data_acquisition*'s
-domain, four gallery modules' roles) -- both found, fixed, re-verified.
-Gallery's scan widened to include its own repo root (so add_docstrings.py,
-sitting there, gets classified too), with a small allowlist added to
-keep the shared MODULE_TAGS table unambiguous now that both repos scan
-'.'.
-
-Phases 3-4 (classifier code, skill documentation) not started -- Phase
-3 opens now that the tags it reads actually exist in the files. Naming
-call decided (undetermined, not the L-156 cluster's UNCLASSIFIED) but
-not yet written into code. Shares real touchpoints with the L-156
-cluster above: both edit ROLE_MAP/MODULE_DOMAIN_MAP for
-test_constants_provenance.py's pending retirement, and L-156 cites this
-design's coverage-gap pattern as its own precedent -- landing first
-keeps that precedent correct.
+MODULE_DOMAIN_MAP retirement (the Domain half of this item's title) is
+NOT part of the above -- deliberately deferred to the L-156 cluster,
+which cites this item's coverage-gap pattern as its own precedent.
 
 ---
 
