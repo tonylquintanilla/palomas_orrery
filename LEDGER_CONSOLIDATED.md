@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*94 live items; 82 need attention (`!`); 93 RICE-scored; 55 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*94 live items; 82 need attention (`!`); 93 RICE-scored; 56 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -263,7 +263,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-135 | Basic-plot file-size bloat (non-shell) -- Mercury-alone example | OPEN | 1.0 | 2026-07-17 |
 | ! | L-015 (#5) | _info import cleanup (~89+87 imports, 2 files) | OPEN | 0.9 | 2026-06-18 |
 | ! | L-016 (#6) | Archive dead shell functions | OPEN | 0.9 | 2026-06-18 |
-| ! | L-163 | Module role/domain classification redesign (ROLE_MAP + MODULE_DOMAIN_MAP) | OPEN | 0.8 | 2026-07-26 |
+| ! | L-164 | dep_trace.py section-divider non-ASCII bytes | OPEN | 0.9 | 2026-07-26 |
 
 ### D.Cosmetic -- Polish
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -418,6 +418,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-134 | Dashboard developer-tools audit | DONE | 1.0 | 2026-07-17 |
 |  | L-138 | Candidate objects & presets for the Objects menu (running list) -- superseded | DONE | 1.0 | 2026-07-17 |
 |  | L-020 (#26) | CUSTOM_SHELLS tooltip verification | DONE | 0.9 | 2026-06-22 |
+|  | L-163 | Module role/domain classification redesign (ROLE_MAP + MODULE_DOMAIN_MAP) | DONE | 0.8 | 2026-07-26 |
 |  | L-049 (#N8) | Comet info-marker superposition cluster | DONE | 0.5 | 2026-06-23 |
 |  | L-004 | Apply C2 fix pass + run ANIMATION_TEST_PROTOCOL_v4_1, push | DONE | -- | 2026-06-17 |
 |  | L-005 | Commit protocol v3.28 (or v3.29) to repo root | DONE | -- | 2026-06-17 |
@@ -2242,6 +2243,191 @@ introducing a second unlinked claim about the same background.
 **Tony:** See PROJECT_ORIGIN.md in the root directory. PROJECT_INSTRUCTION.md 
 updated. Claude.md is for use in Claude Code and is obsolete.
 **Ref:** documentation/CLAUDE.md @ eb7f05dd; L-152 (same failure class).
+
+#### [L-163] Module role/domain classification redesign (ROLE_MAP + MODULE_DOMAIN_MAP)
+<!-- L:163 status:DONE upd:2026-07-26 section:C flag: rice:2/2/85/4 -->
+- **What.** `ROLE_MAP` in `module_atlas.py` (94 hand-maintained entries)
+  had drifted: 19 of 121 orrery modules silently classified as `'other'`,
+  5 already carrying unscanned claim-shaped content per
+  `PROVENANCE_AUDIT.md` (`shell_configs.py` alone: 91 strings). 3 real
+  consumers import it (`module_atlas.py`, `provenance_scanner.py`,
+  `dep_trace.py`), not 1. A second, orthogonal hand-maintained dict
+  (`MODULE_DOMAIN_MAP`, in `provenance_scanner.py`) shares the same
+  staleness risk on a different axis (domain, not role).
+- **Design (full detail in ROLE_DOMAIN_CLASSIFICATION_HANDOFF.md).** Both
+  maps become mechanically regenerated from an explicit `Role:`/`Domain:`
+  line in each module's own docstring -- same pattern `ledger_index.py`
+  already uses for its INDEX zone. Missing/invalid tag -> `'undetermined'`
+  sentinel (distinct from the legitimate `'other'` bucket), flagged not
+  guessed. Filename heuristics demoted to suggestion-only. `__init__.py`
+  exempted; `errors.py`-type modules fold into `utility`. Role code ships
+  this build; Domain code (retiring `MODULE_DOMAIN_MAP`) deferred to the
+  L-156 cluster.
+- **Tag placement -- decided.** Footer block: `Role:`/`Domain:` on their
+  own lines, blank-line separated, directly above the credit line; for
+  credit-less modules, at the end of the docstring. Confirmed by Tony
+  (chat review of the Phase 1 as-built, July 24 2026) -- rationale:
+  `MODULE_ATLAS.md`/`MODULE_INDEX.md` already serve as the at-a-glance
+  surface (Section 6), so the docstring itself stays optimized for
+  uninterrupted prose rather than doubling as the quick-scan view.
+- **Phase 1 (archival + repo hygiene) -- CLOSED.** [verified @7ede8a2f]
+  Opus 5 builder session, July 24-25 2026; independently re-verified
+  against live HEAD in chat review, not taken on the as-built alone. All
+  7 archive candidates (`provenance_scanner_color_patch.py`,
+  `smoke_phase4.py`, `smoke_dipole_cone.py`, `smoke_rotation_axis.py`,
+  `titan_io_probe.py`, `color_map.py`, `barycenter_cache_check.py`)
+  confirmed and moved to local archive; root module count 121 -> 114.
+  All 7 ghost `ROLE_MAP` entries deleted (94 -> 87), zero ghosts remain.
+  Phase 2 sweep scope recomputed at HEAD: 12 modules still fall through
+  to `'other'` (down from 19) -- `data_inventory`, `earth_system_common`,
+  `export_orbit_cache`, `food_insecurity_generator`, `ledger_index`,
+  `measure_animation_html`, `measure_perframe_elements`,
+  `orrery_rendering`, `scenarios_food_insecurity`, `shell_configs`,
+  `skills_index`, `test_reset_completeness`. Accounting closes: 87 + 12
+  + 15 (shells heuristic) = 114. `test_constants_provenance.py`
+  deliberately NOT archived -- its L-160 absorption target doesn't exist
+  yet. Both downstream consumers (`provenance_scanner.py`, `dep_trace.py`
+  import paths) smoke-tested clean against the edited `module_atlas.py`.
+  `ledger-and-session-records` bumped to 1.3 (Tony-action tag
+  convention) as a side effect of this build-prep, independent of
+  L-163's own content. Full detail: `AS_BUILT_L163_phase1.md`.
+- **Gallery repo.** `module_atlas.py` copied to gallery repo root, gains
+  an explicit `SCAN_PATHS` list (`tools/`, `gallery/assembler/` +
+  `harness/`/`tests/` subdirs) rather than recursion. Own 4-value domain
+  vocabulary (`gallery_pipeline`, `cache_builder`, `assembler`,
+  `dev_tools`), mirroring the existing skill boundaries. Not yet built
+  (Phase 3).
+- **`dep_trace.py`.** Stays separate (different job), already correctly
+  single-sourced when the `module_atlas` import succeeds. One real gap:
+  its import-failure fallback has its own hardcoded `_shells` heuristic
+  and silent `'other'` default -- duplicated logic, folded into Phase 3,
+  not deferred.
+- **Phase 2 (content sweep) -- CLOSED.** [verified @61e4232e (orrery),
+  @57aa7592 (gallery)] Opus 5 built the tag-insertion mode; the write
+  ran for real across both repos -- all 114 orrery + 22 gallery modules
+  now carry a `Role:`/`Domain:` line, independently re-confirmed against
+  live HEAD, not taken on the as-built. Changelog placement (8 modules)
+  resolved to Tony's decision: block at the very end of the docstring,
+  not wedged between entries -- confirmed on `apsidal_markers.py` (lands
+  after the May 8 entry) and both gallery changelog files. Idempotent:
+  re-running against the live files a second and third time changes
+  nothing.
+- **Two rounds of close-out gaps, both caught only by checking the
+  actual written files against every decision, not by re-reading the
+  as-built.** (1) A real bug: `strip_existing_tags()` matched a `Role:`
+  or `Domain:` line individually rather than as an adjacent pair, so a
+  wrapped sentence in `add_docstrings.py`'s own new docstring --
+  starting "Domain: lines -- this legacy mode..." -- was silently
+  deleted as if it were a stale tag. Fixed: strip now requires the
+  literal adjacent pair; content restored and reworded so no line
+  starts with either word as prose. (2) Three decisions confirmed in
+  chat had not actually reached `MODULE_TAGS`: `data_acquisition`/
+  `data_acquisition_distance` domain (`orrery` -> `stars`),
+  `gallery_studio`/`gallery_editor` role (`gui` -> `devtool`),
+  `json_converter`/`gallery_json_fixer` role (`pipeline` -> `devtool`).
+  All three confirmed correct at HEAD after the fix; every one of the
+  ~50 session classifications re-checked against the written files, not
+  just the ones most recently mentioned. Full detail:
+  `AS_BUILT_L163_phase2.md`.
+- **Gallery root scope widened.** Tony's call: gallery's `SCAN_PATHS`
+  now includes `'.'` alongside the four module directories, so
+  root-level gallery tools (currently just `add_docstrings.py` itself)
+  get classified too, matching the orrery side. Needed a real fix, not
+  just the wider path: both copies share one `MODULE_TAGS` table, so
+  naively adding `'.'` made gallery's drift-check think every one of the
+  orrery's ~114 bare-name entries belonged to it too. Fixed with a small
+  explicit `GALLERY_ROOT_FILES` allowlist plus a `SCAN_PATHS == ['.']`
+  check to tell the two copies apart -- caught by testing the naive
+  version first, not by reasoning it through in advance.
+- **Phase 3a (re-verification before classifier code) -- CLOSED.**
+  [verified @76fc9155 (orrery), @d1be9e63 (gallery)] Opus 5 builder
+  session, July 26 2026; independently re-verified against live HEAD,
+  including replicating the GUI-launch check myself rather than taking
+  it on the as-built. One gap found: gallery's own `add_docstrings.py`
+  had never actually been written (the scope-widening code was in place
+  and pushed, but the write itself hadn't been run for that one file).
+  Not a tool defect -- confirmed by running the preview, which correctly
+  reported the single pending change. Tony ran the real write, confirmed
+  by his own pasted console output (`added 1, unchanged 22, total 23`)
+  and independently re-confirmed here after the push: all 137 modules
+  across both repos (114 orrery + 23 gallery, gallery now including its
+  own `add_docstrings.py`) carry exactly one `Role:` and one `Domain:`
+  line; re-running the gallery tool a further time reports
+  `unchanged 23, total 23` -- fully idempotent. `compileall` clean on
+  both repos. Prose-integrity re-check (pre-sweep tree vs. current HEAD,
+  every non-blank docstring line) came back 113/114 orrery clean + 22/22
+  gallery clean, the one orrery exception being `add_docstrings.py`'s
+  own deliberate Phase 2 rewrite -- confirmed intentional, not damage.
+  GUI-launch check independently replicated: `palomas_orrery.py` under
+  `xvfb` against the fully-tagged tree reached the same milestones Opus
+  reported (center-body registration through Eris/Dysnomia, `[DASHBOARD]
+  Dashboard ready.`, 182 object variables wired, sash positions set) --
+  matched exactly, including the specific 182 count. Full detail:
+  `AS_BUILT_L163_phase3a.md`.
+- **Phase 3b (classifier build + close verification) -- CLOSED.**
+  [verified @23de11ee (orrery), @0f8e62eb (gallery)] Opus 5 builder
+  session, July 26 2026; independently re-verified against fresh
+  clones of both repos at HEAD, not taken on the as-built alone.
+  Classifier code shipped as scoped: `classify_role()`/
+  `classify_module()` rewrite, regenerated `ROLE_MAP` marker-zone
+  (mirror, never hand-edited), `SCAN_PATHS` multi-path merge, 3
+  call-site updates, `dep_trace.py`'s duplicated fallback cascade
+  dropped -- including the confirmed-dead `elif mod in ROLE_MAP:`
+  branch. 114/114 orrery + 24/24 gallery modules classify with
+  `role_source == 'tag'`, zero `undetermined`, zero tag leakage
+  across all 141 `.py` files in both repos (114 + 27, 3 gallery
+  `__init__.py` files correctly exempted from tagging).
+  `module_atlas.py` idempotent in place; `dep_trace.py` and
+  `provenance_scanner.py` both run clean through the new
+  `classify_role(module_name, filepath)` signature. Full detail:
+  `AS_BUILT_L163_phase3b.md`, `AS_BUILT_L163_phase3b_close.md`.
+**Note:** Reviewed by Fable 5 (its own cluster) -- build-ready, land
+before L-154-162 as proposed; two amendments folded in (domain
+retirement joins the L-156 cluster's Phase 3, gated on this sweep
+completing; sequence this sweep before L-157's Gemini worksheet).
+**Gap:** Phase 4 (do) -- `ledger-and-session-records`'s Codebase
+Tooling bullet and `provenance-discipline`'s role-driven-inclusion
+bullet both still describe the retired hand-maintained `ROLE_MAP`
+and need rewriting to the auto-regenerated-from-docstring-tags
+model; `provenance-discipline`'s version/source-SHA line bumps
+1.1 -> 1.2. Unblocked now that Phase 3b's classifier is verified
+against live HEAD. Same pass runs `skills_index.py`: the live
+Skill Manifest table in `PROJECT_INSTRUCTIONS.md` already shows
+`ledger-and-session-records` at 1.2 even though the skill file has
+been at 1.3 since Phase 1 -- `skills_index.py` wasn't run (or
+wasn't committed) after that bump, so this is a pre-existing drift
+Phase 4 fixes as a side effect, not something Phase 4 introduces.
+
+The Tier-1 findings jump this phase surfaced (105 -> 145 in-
+sandbox, neither number authoritative -- see
+`AS_BUILT_L163_phase3b_close.md`) is the intended effect:
+`classify_role` now returns a real role for modules that used to
+fall through to `'other'`, which is the L-078 coverage-widening
+this track exists to enable, not a new problem. Reconciling
+Tony's actual local Tier-1 baseline against this widened scope is
+intentionally sequenced behind the L-154-162 provenance-scoring-
+refactor cluster -- (decide, confirmed by Tony in chat, July 26
+2026) this is NOT an orphaned action item and does not gate Phase
+4 or any push of Phase 4's doc-only changes.
+
+**Decided: `undetermined`** (confirmed by Tony in chat) -- matches
+Fable's lean since this item shipped first; the L-156 cluster's
+`UNCLASSIFIED` conforms to this name, not the other way around.
+Coordinate timing with L-156 (shares `ROLE_MAP`/`MODULE_DOMAIN_MAP`
+as edit sites for D10's `test_constants_provenance.py` cleanup,
+and L-156 cites this item's coverage-gap pattern as its own
+precedent -- this item landed first).
+**Ref:** `ROLE_DOMAIN_CLASSIFICATION_HANDOFF.md` (full design, Sections
+1, 4, 16, 17, 19), `AS_BUILT_L163_phase1.md`, `AS_BUILT_L163_phase2.md`,
+`AS_BUILT_L163_phase3a.md`, `AS_BUILT_L163_phase3b.md`,
+`AS_BUILT_L163_phase3b_close.md`, `module_atlas.py`, `provenance_scanner.py`,
+`dep_trace.py`, `ledger_index.py` (pattern precedent),
+`add_docstrings.py` (sweep tool, now fully closed out both repos),
+`PROVENANCE_AUDIT.md` (July 17, coverage-gap evidence),
+`MASTER_PLAN_INTERACTIVE_GALLERY.md` Section 6 (companion entry);
+L-078 (role-driven coverage-widening track);
+L-154/155/156/157/158/159/160/161/162 (provenance scoring refactor
+cluster).
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
@@ -2710,190 +2896,26 @@ confirm whether single-info-marker already covers this or whether basic
 orbit/marker traces need the same treatment.
 **Ref:** to_do_ideas.md (pre-ledger, 4/17/26 x2); cross-ref v3.22 refactor.
 
-#### [L-163] Module role/domain classification redesign (ROLE_MAP + MODULE_DOMAIN_MAP)
-<!-- L:163 status:OPEN upd:2026-07-26 section:D.Structural flag: rice:2/2/85/4 -->
-- **What.** `ROLE_MAP` in `module_atlas.py` (94 hand-maintained entries)
-  had drifted: 19 of 121 orrery modules silently classified as `'other'`,
-  5 already carrying unscanned claim-shaped content per
-  `PROVENANCE_AUDIT.md` (`shell_configs.py` alone: 91 strings). 3 real
-  consumers import it (`module_atlas.py`, `provenance_scanner.py`,
-  `dep_trace.py`), not 1. A second, orthogonal hand-maintained dict
-  (`MODULE_DOMAIN_MAP`, in `provenance_scanner.py`) shares the same
-  staleness risk on a different axis (domain, not role).
-- **Design (full detail in ROLE_DOMAIN_CLASSIFICATION_HANDOFF.md).** Both
-  maps become mechanically regenerated from an explicit `Role:`/`Domain:`
-  line in each module's own docstring -- same pattern `ledger_index.py`
-  already uses for its INDEX zone. Missing/invalid tag -> `'undetermined'`
-  sentinel (distinct from the legitimate `'other'` bucket), flagged not
-  guessed. Filename heuristics demoted to suggestion-only. `__init__.py`
-  exempted; `errors.py`-type modules fold into `utility`. Role code ships
-  this build; Domain code (retiring `MODULE_DOMAIN_MAP`) deferred to the
-  L-156 cluster.
-- **Tag placement -- decided.** Footer block: `Role:`/`Domain:` on their
-  own lines, blank-line separated, directly above the credit line; for
-  credit-less modules, at the end of the docstring. Confirmed by Tony
-  (chat review of the Phase 1 as-built, July 24 2026) -- rationale:
-  `MODULE_ATLAS.md`/`MODULE_INDEX.md` already serve as the at-a-glance
-  surface (Section 6), so the docstring itself stays optimized for
-  uninterrupted prose rather than doubling as the quick-scan view.
-- **Phase 1 (archival + repo hygiene) -- CLOSED.** [verified @7ede8a2f]
-  Opus 5 builder session, July 24-25 2026; independently re-verified
-  against live HEAD in chat review, not taken on the as-built alone. All
-  7 archive candidates (`provenance_scanner_color_patch.py`,
-  `smoke_phase4.py`, `smoke_dipole_cone.py`, `smoke_rotation_axis.py`,
-  `titan_io_probe.py`, `color_map.py`, `barycenter_cache_check.py`)
-  confirmed and moved to local archive; root module count 121 -> 114.
-  All 7 ghost `ROLE_MAP` entries deleted (94 -> 87), zero ghosts remain.
-  Phase 2 sweep scope recomputed at HEAD: 12 modules still fall through
-  to `'other'` (down from 19) -- `data_inventory`, `earth_system_common`,
-  `export_orbit_cache`, `food_insecurity_generator`, `ledger_index`,
-  `measure_animation_html`, `measure_perframe_elements`,
-  `orrery_rendering`, `scenarios_food_insecurity`, `shell_configs`,
-  `skills_index`, `test_reset_completeness`. Accounting closes: 87 + 12
-  + 15 (shells heuristic) = 114. `test_constants_provenance.py`
-  deliberately NOT archived -- its L-160 absorption target doesn't exist
-  yet. Both downstream consumers (`provenance_scanner.py`, `dep_trace.py`
-  import paths) smoke-tested clean against the edited `module_atlas.py`.
-  `ledger-and-session-records` bumped to 1.3 (Tony-action tag
-  convention) as a side effect of this build-prep, independent of
-  L-163's own content. Full detail: `AS_BUILT_L163_phase1.md`.
-- **Gallery repo.** `module_atlas.py` copied to gallery repo root, gains
-  an explicit `SCAN_PATHS` list (`tools/`, `gallery/assembler/` +
-  `harness/`/`tests/` subdirs) rather than recursion. Own 4-value domain
-  vocabulary (`gallery_pipeline`, `cache_builder`, `assembler`,
-  `dev_tools`), mirroring the existing skill boundaries. Not yet built
-  (Phase 3).
-- **`dep_trace.py`.** Stays separate (different job), already correctly
-  single-sourced when the `module_atlas` import succeeds. One real gap:
-  its import-failure fallback has its own hardcoded `_shells` heuristic
-  and silent `'other'` default -- duplicated logic, folded into Phase 3,
-  not deferred.
-- **Phase 2 (content sweep) -- CLOSED.** [verified @61e4232e (orrery),
-  @57aa7592 (gallery)] Opus 5 built the tag-insertion mode; the write
-  ran for real across both repos -- all 114 orrery + 22 gallery modules
-  now carry a `Role:`/`Domain:` line, independently re-confirmed against
-  live HEAD, not taken on the as-built. Changelog placement (8 modules)
-  resolved to Tony's decision: block at the very end of the docstring,
-  not wedged between entries -- confirmed on `apsidal_markers.py` (lands
-  after the May 8 entry) and both gallery changelog files. Idempotent:
-  re-running against the live files a second and third time changes
-  nothing.
-- **Two rounds of close-out gaps, both caught only by checking the
-  actual written files against every decision, not by re-reading the
-  as-built.** (1) A real bug: `strip_existing_tags()` matched a `Role:`
-  or `Domain:` line individually rather than as an adjacent pair, so a
-  wrapped sentence in `add_docstrings.py`'s own new docstring --
-  starting "Domain: lines -- this legacy mode..." -- was silently
-  deleted as if it were a stale tag. Fixed: strip now requires the
-  literal adjacent pair; content restored and reworded so no line
-  starts with either word as prose. (2) Three decisions confirmed in
-  chat had not actually reached `MODULE_TAGS`: `data_acquisition`/
-  `data_acquisition_distance` domain (`orrery` -> `stars`),
-  `gallery_studio`/`gallery_editor` role (`gui` -> `devtool`),
-  `json_converter`/`gallery_json_fixer` role (`pipeline` -> `devtool`).
-  All three confirmed correct at HEAD after the fix; every one of the
-  ~50 session classifications re-checked against the written files, not
-  just the ones most recently mentioned. Full detail:
-  `AS_BUILT_L163_phase2.md`.
-- **Gallery root scope widened.** Tony's call: gallery's `SCAN_PATHS`
-  now includes `'.'` alongside the four module directories, so
-  root-level gallery tools (currently just `add_docstrings.py` itself)
-  get classified too, matching the orrery side. Needed a real fix, not
-  just the wider path: both copies share one `MODULE_TAGS` table, so
-  naively adding `'.'` made gallery's drift-check think every one of the
-  orrery's ~114 bare-name entries belonged to it too. Fixed with a small
-  explicit `GALLERY_ROOT_FILES` allowlist plus a `SCAN_PATHS == ['.']`
-  check to tell the two copies apart -- caught by testing the naive
-  version first, not by reasoning it through in advance.
-- **Phase 3a (re-verification before classifier code) -- CLOSED.**
-  [verified @76fc9155 (orrery), @d1be9e63 (gallery)] Opus 5 builder
-  session, July 26 2026; independently re-verified against live HEAD,
-  including replicating the GUI-launch check myself rather than taking
-  it on the as-built. One gap found: gallery's own `add_docstrings.py`
-  had never actually been written (the scope-widening code was in place
-  and pushed, but the write itself hadn't been run for that one file).
-  Not a tool defect -- confirmed by running the preview, which correctly
-  reported the single pending change. Tony ran the real write, confirmed
-  by his own pasted console output (`added 1, unchanged 22, total 23`)
-  and independently re-confirmed here after the push: all 137 modules
-  across both repos (114 orrery + 23 gallery, gallery now including its
-  own `add_docstrings.py`) carry exactly one `Role:` and one `Domain:`
-  line; re-running the gallery tool a further time reports
-  `unchanged 23, total 23` -- fully idempotent. `compileall` clean on
-  both repos. Prose-integrity re-check (pre-sweep tree vs. current HEAD,
-  every non-blank docstring line) came back 113/114 orrery clean + 22/22
-  gallery clean, the one orrery exception being `add_docstrings.py`'s
-  own deliberate Phase 2 rewrite -- confirmed intentional, not damage.
-  GUI-launch check independently replicated: `palomas_orrery.py` under
-  `xvfb` against the fully-tagged tree reached the same milestones Opus
-  reported (center-body registration through Eris/Dysnomia, `[DASHBOARD]
-  Dashboard ready.`, 182 object variables wired, sash positions set) --
-  matched exactly, including the specific 182 count. Full detail:
-  `AS_BUILT_L163_phase3a.md`.
-- **Phase 3b (classifier build + close verification) -- CLOSED.**
-  [verified @23de11ee (orrery), @0f8e62eb (gallery)] Opus 5 builder
-  session, July 26 2026; independently re-verified against fresh
-  clones of both repos at HEAD, not taken on the as-built alone.
-  Classifier code shipped as scoped: `classify_role()`/
-  `classify_module()` rewrite, regenerated `ROLE_MAP` marker-zone
-  (mirror, never hand-edited), `SCAN_PATHS` multi-path merge, 3
-  call-site updates, `dep_trace.py`'s duplicated fallback cascade
-  dropped -- including the confirmed-dead `elif mod in ROLE_MAP:`
-  branch. 114/114 orrery + 24/24 gallery modules classify with
-  `role_source == 'tag'`, zero `undetermined`, zero tag leakage
-  across all 141 `.py` files in both repos (114 + 27, 3 gallery
-  `__init__.py` files correctly exempted from tagging).
-  `module_atlas.py` idempotent in place; `dep_trace.py` and
-  `provenance_scanner.py` both run clean through the new
-  `classify_role(module_name, filepath)` signature. Full detail:
-  `AS_BUILT_L163_phase3b.md`, `AS_BUILT_L163_phase3b_close.md`.
-**Note:** Reviewed by Fable 5 (its own cluster) -- build-ready, land
-before L-154-162 as proposed; two amendments folded in (domain
-retirement joins the L-156 cluster's Phase 3, gated on this sweep
-completing; sequence this sweep before L-157's Gemini worksheet).
-**Gap:** Phase 4 (do) -- `ledger-and-session-records`'s Codebase
-Tooling bullet and `provenance-discipline`'s role-driven-inclusion
-bullet both still describe the retired hand-maintained `ROLE_MAP`
-and need rewriting to the auto-regenerated-from-docstring-tags
-model; `provenance-discipline`'s version/source-SHA line bumps
-1.1 -> 1.2. Unblocked now that Phase 3b's classifier is verified
-against live HEAD. Same pass runs `skills_index.py`: the live
-Skill Manifest table in `PROJECT_INSTRUCTIONS.md` already shows
-`ledger-and-session-records` at 1.2 even though the skill file has
-been at 1.3 since Phase 1 -- `skills_index.py` wasn't run (or
-wasn't committed) after that bump, so this is a pre-existing drift
-Phase 4 fixes as a side effect, not something Phase 4 introduces.
-
-The Tier-1 findings jump this phase surfaced (105 -> 145 in-
-sandbox, neither number authoritative -- see
-`AS_BUILT_L163_phase3b_close.md`) is the intended effect:
-`classify_role` now returns a real role for modules that used to
-fall through to `'other'`, which is the L-078 coverage-widening
-this track exists to enable, not a new problem. Reconciling
-Tony's actual local Tier-1 baseline against this widened scope is
-intentionally sequenced behind the L-154-162 provenance-scoring-
-refactor cluster -- (decide, confirmed by Tony in chat, July 26
-2026) this is NOT an orphaned action item and does not gate Phase
-4 or any push of Phase 4's doc-only changes.
-
-**Decided: `undetermined`** (confirmed by Tony in chat) -- matches
-Fable's lean since this item shipped first; the L-156 cluster's
-`UNCLASSIFIED` conforms to this name, not the other way around.
-Coordinate timing with L-156 (shares `ROLE_MAP`/`MODULE_DOMAIN_MAP`
-as edit sites for D10's `test_constants_provenance.py` cleanup,
-and L-156 cites this item's coverage-gap pattern as its own
-precedent -- this item landed first).
-**Ref:** `ROLE_DOMAIN_CLASSIFICATION_HANDOFF.md` (full design, Sections
-1, 4, 16, 17, 19), `AS_BUILT_L163_phase1.md`, `AS_BUILT_L163_phase2.md`,
-`AS_BUILT_L163_phase3a.md`, `AS_BUILT_L163_phase3b.md`,
-`AS_BUILT_L163_phase3b_close.md`, `module_atlas.py`, `provenance_scanner.py`,
-`dep_trace.py`, `ledger_index.py` (pattern precedent),
-`add_docstrings.py` (sweep tool, now fully closed out both repos),
-`PROVENANCE_AUDIT.md` (July 17, coverage-gap evidence),
-`MASTER_PLAN_INTERACTIVE_GALLERY.md` Section 6 (companion entry);
-L-078 (role-driven coverage-widening track);
-L-154/155/156/157/158/159/160/161/162 (provenance scoring refactor
-cluster).
+#### [L-164] dep_trace.py section-divider non-ASCII bytes
+<!-- L:164 status:OPEN upd:2026-07-26 section:D.Structural flag: rice:1/1/90/1 -->
+- **What.** dep_trace.py's section-divider comments use the Unicode
+  box-drawing character (U+2500), e.g. `# -- Configuration --...--`,
+  instead of ASCII. 1279 non-ASCII bytes across 8 divider lines,
+  confirmed by byte-level scan (independently reverified against
+  live HEAD at both Phase 3b close and Phase 4 -- byte count
+  unchanged both times, so pre-existing and not introduced by
+  L-163). Violates the protocol's ASCII-only convention (Windows
+  mangles Unicode in generated/edited files; Tony works exclusively
+  through GitHub Desktop and VS Code's Run button on Windows).
+**Note:** proposed rice:1/1/90/1 (low reach/impact -- cosmetic,
+Windows-safety only, nothing currently broken; high confidence;
+trivial effort) -- adjust if you'd score it differently.
+**Gap:** Replace the 8 divider lines with ASCII equivalents
+(binary-mode patch per safe-file-editing skill, not sed). Small,
+mechanical, no behavior change.
+**Ref:** dep_trace.py; AS_BUILT_L163_phase3b_close.md,
+AS_BUILT_L163_phase4.md (both flagged this without capturing it --
+third mention, now captured).
 
 ### D.Feature -- Bucket A (near-term)
 
