@@ -363,7 +363,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-160 | test_constants_provenance.py -- retire once fully absorbed, not before | OPEN | 8.1 | 2026-07-27 |
 | ! | L-162 | CENTER_BODY_RADII full de-duplication -- dedicated Sonnet session | OPEN | 8.1 | 2026-07-27 |
 | ! | L-158 | Derived-constant vulnerability inheritance rule (revised from a proposed rung, 2026-07-27) | OPEN | 5.6 | 2026-07-27 |
-| ! | L-156 | Provenance scanner scoring model fix -- criticality (category-based) + vulnerability recalibration + comprehensive sweep | OPEN | 5.3 | 2026-07-27 |
+| ! | L-156 | Provenance scanner scoring model fix -- criticality (category-based) + vulnerability recalibration + comprehensive sweep | OPEN | 5.3 | 2026-07-28 |
 | ! | L-155 | Cross-repo constants/geometry pinning checks -- built INTO provenance_scanner.py, not a standalone script | PENDING-GATE | 4.5 | 2026-07-27 |
 | ! | L-119 | event_link hardcoded None in the builder (F2, gates artifact 7) | OPEN | 3.6 | 2026-07-15 |
 | ! | L-161 | Gemini sweep -- clear the display-string Tier-2 backlog | OPEN | 3.1 | 2026-07-27 |
@@ -3995,7 +3995,7 @@ motivating bug: `close_approach_data.py`'s stale `CENTER_BODY_RADII` copy);
 ---
 
 #### [L-156] Provenance scanner scoring model fix -- criticality (category-based) + vulnerability recalibration + comprehensive sweep
-<!-- L:156 status:OPEN upd:2026-07-27 section:W.Active flag: rice:5/4/80/3 -->
+<!-- L:156 status:OPEN upd:2026-07-28 section:W.Active flag: rice:5/4/80/3 -->
 - **What.** `provenance_scanner.py`'s scoring currently mis-prioritizes
   exactly the data this cluster depends on: `SUN_RADIUS_KM` /
   `EARTH_EQUATORIAL_RADIUS_KM` / `JUPITER_EQUATORIAL_RADIUS_KM` score 6
@@ -4081,7 +4081,12 @@ motivating bug: `close_approach_data.py`'s stale `CENTER_BODY_RADII` copy);
 **Gap:** (1) fix the `CENTER_BODY_RADII` duplication per L-162 (separate
 dedicated session); (2) resolve the five comprehensive-sweep items;
 (3) build Phases 1-3 (Opus 5) against the decided ladder above -- the D3
-gate is clear, nothing further blocks the build.
+gate is clear, nothing further blocks the build; (4) Phase 3 also retires
+`MODULE_DOMAIN_MAP`/`DOMAIN_LABELS` in `provenance_scanner.py` and imports
+domain from `module_atlas.py` instead (L-163 review amendment, Fable 5;
+gate was L-163's sweep, now closed -- recorded here so the work item lives
+in the open item a build session reads, not only in L-163's archived
+block and the master plan).
 **Ref:** `provenance_scanner.py` (`find_cross_file_issues`,
 `CONCEPT_ALIASES`, `NUMERIC_CLAIM_RE`); `constants_new.py`;
 `data/provenance_exceptions.json`; `documentation/provenance_audit_handoff_v1.md`
