@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*102 live items; 90 need attention (`!`); 100 RICE-scored; 58 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*101 live items; 89 need attention (`!`); 100 RICE-scored; 59 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -329,7 +329,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-107 | Gallery builder copy-with-provenance sync register | OPEN | 3.6 | 2026-07-09 |
-| ! | L-111 | Gallery builder Pass 5 -- operability + deferred hardening | OPEN | 1.7 | 2026-07-10 |
 | ! | L-073 | Gallery export-emits-JSON -- fold the manual json_converter run into Export | OPEN | 1.6 | 2026-06-26 |
 | ! | L-058 | Open Studio items (May-5 handoff, checked @2f40d9d) | OPEN | 1.5 | 2026-06-08 |
 | ! | L-104 | Gallery Studio preset generator | OPEN | 1.0 | 2026-07-13 |
@@ -378,8 +377,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-079 | Shared assembler architecture (keystone — redefined) | OPEN | 1.5 | 2026-07-07 |
 |  | L-089 | Scene-spec shared skeleton + solar system vocabulary (Phase 1) | PROPOSED | 1.5 | 2026-07-03 |
 | ! | L-159 | Disclosed-approximation check (Envelope of the Unknowable, scanner-level) | OPEN | 1.2 | 2026-07-27 |
+| ! | L-111 | Gallery builder Pass 5 -- operability + deferred hardening | OPEN | 1.0 | 2026-07-27 |
 |  | L-090 | Star cache inventory + wire format decision | PROPOSED | 0.5 | 2026-07-03 |
-| ! | L-151 | Create gallery-assembler skill -- technical home for the new-mechanism assembler | OPEN | -- | 2026-07-20 |
 | ! | L-165 | Site continuity if there is no active administrator (succession / legacy planning) | OPEN | -- | 2026-07-27 |
 
 ### W.Deferred -- Web Publication deferred (captured)
@@ -461,6 +460,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-148 | Staging folder names carry no object identifier -- hard to locate manually (gallery-cache-builder) | DONE | 1.8 | 2026-07-20 |
 |  | L-098 | Data serving pipeline (Phase 1b) | DONE | 1.5 | 2026-07-12 |
 |  | L-149 | Global served_window trust participation should key off canonical_frame, not category (gallery-cache-builder) | DONE | 1.2 | 2026-07-21 |
+|  | L-151 | Create gallery-assembler skill -- technical home for the new-mechanism assembler | DONE | -- | 2026-07-27 |
 
 <!-- INDEX:END -->
 
@@ -3500,6 +3500,10 @@ this caught.
   fetches recently-refined spacecraft points (planets/moons are stable); it is NOT
   a stopping point. Missed PUSHES are harmless (increments accumulate locally,
   commits queue, one push catches up); missed RUNS are the case this fixes.
+  (Framing note, 2026-07-27: unattended scheduling is already live per the
+  revision above. This gap was accepted as an open risk rather than fixed
+  first -- tracked in L-165's succession-planning discussion, not resolved
+  here.) 
 - **Pass 5 (operability -- do before UNATTENDED scheduling).** (Q1) `--add-object
   <slug>` one-time backfill so a newly-added config object is onboarded without
   re-running the whole first-build. (Q2) a `_health.md` summary written EVERY run
@@ -3507,6 +3511,9 @@ this caught.
   count, and an explicit PUSH / DO-NOT-PUSH verdict) -- NO email or phone
   notification (Tony's call: the summary file is enough). Likely-contamination
   sets the verdict to DO-NOT-PUSH rather than the builder refusing (push is manual).
+  (Framing note, 2026-07-27: the Q2 manual-review approach here was not
+  adopted -- L-165's lighter automated post-swap guard was built instead.
+  Q1, the --add-object backfill, remains open and unrelated.)  
 - **Deferred hardening.** N7 -- make date arithmetic UTC-ONLY (fetch
   epochs, date keys, and the 'today' anchor all in UTC) so DST never enters the
   data path; DST-immune and subsumes the 69 s Time(jd) boundary wobble. Schedule
@@ -3910,27 +3917,6 @@ whole-system view and a close-up binary view should compute served_window (resol
 checks one global bound regardless of scene composition -- same limitation noted under L-149).
 **Ref:** L-149 (sibling, surfaced during its design discussion); objects_config.json
 (pluto/charon, barycentric-only today); "Pluto/Charon two-view" golden artifact.
-
-#### [L-151] Create gallery-assembler skill -- technical home for the new-mechanism assembler
-<!-- L:151 status:DONE upd:2026-07-27 section:C flag: rice:?/?/?/? -->
-- **What.** No skill documents the assembler itself -- render_orbits.py, resolver.py,
-  cache_reader.py, Kepler propagation, the trust/served_window system, the golden-artifact
-  build+Mode-5 process. gallery-cache-builder covers only the nightly builder/staging/
-  serving-cache side; gallery-pipeline covers the older Studio/converter/viewer curation
-  chain. Neither is the right home for "how the new mechanism itself works."
-- **Decided (Tony, 2026-07-20):** create gallery-assembler as that home.
-- **Must carry, once written (corrected tonight, not the first-pass framing):**
-  - Orrery-vs-assembler boundary: shared knowledge, not shared machinery (see master plan §3).
-  - No composition between frames -- retired by design (v4, catastrophic cancellation +
-    aliasing). Each orbit is an independent fetch at its own center; a binary pair needing
-    two views means two independent caches, never one derived from the other.
-  - render_orbits.py's Kepler math is frame-agnostic and fine as-is; the open question is at
-    scene/artifact assembly -- does it know which of an object's caches belongs in which view.
-  - Orrery-first authoring rule, with Encke as the confirmed, deliberate exception.
-**Gap:** write the skill; migrate the field notes above into it; add fires_when to the
-Skill Manifest.
-**Ref:** L-149, L-150 (motivating work); master plan §3; render_orbits.py, resolver.py,
-cache_reader.py.
 
 #### [L-154] Gallery feature-rendering JS layer (shells, rings, radiation belts -- Artifact 2 prerequisite)
 <!-- L:154 status:BLOCKED upd:2026-07-27 section:W.Active flag: rice:3/3/70/3 -->
@@ -4848,6 +4834,27 @@ development, except for earth. all are procedural so far. artifact 4 is
 the render" -- the Halley visual/Mode-5 check belongs to Artifact 4's own
 build, not to this item, which was only ever about the object being
 served. Closing outright, no residual carried forward.
+
+#### [L-151] Create gallery-assembler skill -- technical home for the new-mechanism assembler
+<!-- L:151 status:DONE upd:2026-07-27 section:W.Done flag: rice:?/?/?/? -->
+- **What.** No skill documents the assembler itself -- render_orbits.py, resolver.py,
+  cache_reader.py, Kepler propagation, the trust/served_window system, the golden-artifact
+  build+Mode-5 process. gallery-cache-builder covers only the nightly builder/staging/
+  serving-cache side; gallery-pipeline covers the older Studio/converter/viewer curation
+  chain. Neither is the right home for "how the new mechanism itself works."
+- **Decided (Tony, 2026-07-20):** create gallery-assembler as that home.
+- **Must carry, once written (corrected tonight, not the first-pass framing):**
+  - Orrery-vs-assembler boundary: shared knowledge, not shared machinery (see master plan §3).
+  - No composition between frames -- retired by design (v4, catastrophic cancellation +
+    aliasing). Each orbit is an independent fetch at its own center; a binary pair needing
+    two views means two independent caches, never one derived from the other.
+  - render_orbits.py's Kepler math is frame-agnostic and fine as-is; the open question is at
+    scene/artifact assembly -- does it know which of an object's caches belongs in which view.
+  - Orrery-first authoring rule, with Encke as the confirmed, deliberate exception.
+**Gap:** write the skill; migrate the field notes above into it; add fires_when to the
+Skill Manifest.
+**Ref:** L-149, L-150 (motivating work); master plan §3; render_orbits.py, resolver.py,
+cache_reader.py.
 ### W.Cross-references -- existing items that interact with the web track
 
 - **L-026** -- CRLF to LF on `palomas_orrery_helpers.py`. Companion to L-087.
