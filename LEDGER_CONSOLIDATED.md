@@ -219,12 +219,11 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*101 live items; 89 need attention (`!`); 100 RICE-scored; 59 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*99 live items; 87 need attention (`!`); 98 RICE-scored; 61 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-062 | README refresh -- fold in handoff + ledger developments | OPEN | 5.1 | 2026-07-17 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
@@ -253,7 +252,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### D.Structural -- Dead code / honest shells
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-127 | module_atlas.py generates MODULE_INDEX.md too -- single source, eliminate divergence | OPEN | 3.2 | 2026-07-17 |
 | ! | L-027 (#61) | Platform Neutrality (SystemButtonFace) | OPEN | 2.2 | 2026-06-18 |
 | ! | L-025 (#N7) | Reduced to custom-geometry inline markers only | OPEN | 1.5 | 2026-06-18 |
 | ! | L-068 | Static/animation pipeline consolidation -- remaining residuals (umbrella) | OPEN | 1.5 | 2026-06-23 |
@@ -370,7 +368,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-157 | Gemini cross-check of shell config ring/belt/atmosphere geometry values | OPEN | 2.5 | 2026-07-27 |
 | ! | L-121 | Slim plotly wheel not deployed anywhere (F4, ships-nothing gate) | OPEN | 2.2 | 2026-07-15 |
 | ! | L-150 | Multi-orbit trust model for near-equal-mass binaries (Pluto/Charon and future onboards) | OPEN | 2.2 | 2026-07-20 |
-| ! | L-154 | Gallery feature-rendering JS layer (shells, rings, radiation belts -- Artifact 2 prerequisite) | BLOCKED | 2.1 | 2026-07-27 |
+| ! | L-154 | Gallery feature-rendering JS layer (shells, rings, radiation belts -- Artifact 2 prerequisite) | BLOCKED | 2.1 | 2026-07-28 |
 | ! | L-122 | Stray data/solar-system.prev_old/ committed to the repo (F6, non-blocking) | OPEN | 1.9 | 2026-07-15 |
 | ! | L-123 | Object info card -- serve info_dictionary.py as JSON, click-to-open (rides with F1) | OPEN | 1.8 | 2026-07-15 |
 | ! | L-080 | Characterization harness (scene equivalence gate) | OPEN | 1.6 | 2026-07-14 |
@@ -401,6 +399,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-117 | Offline suite red at HEAD: Encke id drift (2P -> 90000091) not mirrored in the mock | DONE | 34.2 | 2026-07-12 |
 |  | L-114 | objects_config.json stranded by the atomic swap; also blocks crash-recovery (gallery builder) | DONE | 16.2 | 2026-07-27 |
 |  | L-003 | Protocol amendment candidates (for v3.29) | DONE | 5.4 | 2026-06-22 |
+|  | L-062 | README refresh -- fold in handoff + ledger developments | DONE | 5.1 | 2026-07-28 |
 |  | L-153 | Restore "Who Tony Is" framing into resident protocol (protocol) | DONE | 5.1 | 2026-07-21 |
 |  | L-065 | European heat wave heat map (Earth System track) | DONE | 4.8 | 2026-06-25 |
 |  | L-064 | Provenance-scanner format sweep -- Earth System family | DONE | 4.5 | 2026-06-30 |
@@ -409,6 +408,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-106 | Gallery-cache backup + gitignore discipline | DONE | 3.6 | 2026-07-12 |
 |  | L-115 | Skills v1.1 batch: accuracy fixes + two seed blocks (Fable Mode 7) | DONE | 3.6 | 2026-07-12 |
 |  | L-097 | skills_index.py -- Skill Manifest auto-generation (process/tooling) | DONE | 3.2 | 2026-07-04 |
+|  | L-127 | module_atlas.py generates MODULE_INDEX.md too -- single source, eliminate divergence | DONE | 3.2 | 2026-07-28 |
 |  | L-069 | Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan) | DONE | 2.8 | 2026-06-24 |
 |  | L-109 | Fable 5 adversarial review remediation (builder Pass 1+2) | DONE | 2.8 | 2026-07-10 |
 |  | L-112 | Gallery builder Pass 5: two-reviewer Pass-2 remediation | DONE | 2.8 | 2026-07-10 |
@@ -569,86 +569,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
   it risks leaking when L-060 closes.
 **Gap:** build next session. One genuine open call left (build, not design): confirm ONI file URL + IRI plume parse / skill-calibration params at HEAD before hardcoding (cached-CSV fallback if scrape unstable; model-spread band fallback if calibration params unavailable). Provenance-scan new module (Tier-1=0) before push. Resolved: plume=calibrated Gaussian envelope; schematic=Plotly; 2026 band=provisional-now; no extra traces.
 **Ref:** ENSO_chart_spec.md v2 (design spec, this session); cross-ref L-001 (Food Insecurity, same Earth System track); energy_imbalance.py (Phase 2 target).
-
-#### [L-062] README refresh -- fold in handoff + ledger developments
-<!-- L:062 status:OPEN upd:2026-07-17 section:A flag: rice:3/2/85/1 -->
-- **README review/refresh.** Review the repo README against its last update and
-  fold in developments captured since in the handoffs and this ledger (Movement
-  track complete, animation engine, item-19.3 axis control, shell-consolidation
-  refactor complete, Gallery/Studio round trip, Earth System track). Goal: a
-  current public-facing description matching what the code actually does. Paired
-  with L-063 (in-GUI Note) -- both are user-facing text that has drifted from
-  project state.
-- **Staged scope, decided 2026-07-17 (Tony + Sonnet 5), because Tony noticed
-  the drift firsthand on the live GitHub page.** Split into a do-now half
-  and a defer half, not one pass:
-  - **Do now, no gallery dependency:** date/version stamp, module/LOC
-    stats (verified stale below), a visible Requirements section, every
-    doc cross-reference link (verified BROKEN below), and folding in
-    non-gallery feature/capability drift since May.
-  - **Defer until the interactive gallery goes live:** the "Web Gallery"
-    section's architecture description ONLY. It should still describe the
-    CURRENT, publicly-linked gallery (palomasorrery.com, the
-    HTML-export -> json_converter.py -> GitHub Pages pipeline) as it
-    exists today -- not omit gallery coverage entirely. What's deferred is
-    the in-progress Phase 2 Solar System Assembler / interactive rework
-    (L-098 onward, this week's M1/M2) -- unreleased, not publicly linked,
-    still changing week to week; documenting it now risks a second
-    rewrite almost immediately.
-  - **Audience reframing (Tony, 2026-07-17):** primary audience shifts to
-    the DEVELOPER, even though the repo is public -- away from the
-    current beginner/end-user hand-holding tone (the multi-page
-    "Step-by-Step Installation Guide for Beginners" walkthrough reads for
-    a non-technical download-and-click audience). Five purposes, in
-    order, Tony's own framing: (1) general project information; (2)
-    pointers to key organizational structure and documents -- focused on
-    the orrery, may mention the gallery, written for a developer reader;
-    (3) orientation on cloning/using the repo, especially that the
-    released data files are NOT in the active repo (gitignored, obtained
-    from Releases); (4) the gallery as it currently, publicly exists --
-    not the unreleased interactive work; (5) a brief mention of data
-    sources and citation discipline (-> PROVENANCE_AUDIT.md).
-- **Concrete staleness findings, this session (verified against live HEAD
-  `2991a0c7`, not assumed):**
-  - Module/LOC claim wrong: README says "75+ Python modules, over 78,000
-    lines of code" -- actual count at HEAD is 121 Python files, 106,476
-    lines.
-  - Last-updated stamp: May 4/May 2026 (v2.9.0) vs. today -- 2+ months,
-    and the entire Phase 2 gallery-cache-builder track (L-098 through
-    L-126, including this week's M1/M2 trust-measurement work) missing
-    from the changelog line.
-  - **Every doc cross-reference link in the README is broken.**
-    `MODULE_INDEX.md`, `climate_readme.md`, `social_media_readme.md`,
-    `web_gallery_handoff.md`, `wet_bulb_temperature_readme.md` are all
-    linked repo-root-relative, but all five actually live under
-    `documentation/` -- confirmed by direct path check. 404 on GitHub
-    today, independent of anything gallery-related.
-  - No visible Requirements citation (Tony's original observation):
-    `requirements.txt` carries real, carefully-maintained content
-    invisible from the README -- pinned-version rationale (kaleido
-    locked at 0.2.1, with the reason why), a full Python 3.14
-    compatibility section (which packages break, which don't, what to
-    monitor), and the Plotly 6.x/kaleido 1.0 upgrade path. The README
-    only says "pip install -r requirements.txt" and a sample `pip list`
-    -- none of this surfaces.
-- **Routing decided:** the do-now half goes to Fable as a manifest-style
-  task (broad-first surface-and-organize, real latitude, not a design
-  session) -- see FABLE_TASK_README_REFRESH.md. Tony reviews the diff
-  before merging, same as any Fable deliverable.
-**Gap:** (1) send the Fable prompt, get the diff back; (2) Tony + Sonnet
-review against the 5 purposes and the concrete findings above; (3) commit;
-(4) revisit the Web Gallery section specifically once the interactive
-assembler is publicly linked (separate future pass, not blocked on
-anything else in this item).
-**Ref:** L-063 (paired, in-GUI Note); L-098 (Phase 2 parent, why the
-gallery section is deferred); FABLE_TASK_README_REFRESH.md (this
-session's Fable prompt); requirements.txt; PROVENANCE_AUDIT.md.
-**Claude:** RICE proposed 3/2/85/1 (reach raised -- this is the repo's
-public front door, not an internal doc; impact ticks up, broken links
-and wrong stats are a real credibility/usability issue, not purely
-cosmetic; confidence high, concrete claims verified directly this
-session rather than assumed; effort stays low, Fable-suited assembly
-work) -- yours to finalize.
 
 #### [L-070] Food Insecurity -- regional multi-country assembly (Sudan crisis shed)
 <!-- L:070 status:OPEN upd:2026-06-24 section:A flag: rice:2/3/45/3 -->
@@ -2487,6 +2407,180 @@ suite from a fresh clone -- PASS, 138 checks, 0 failures, matching the
 entry's own stated acceptance check). Tony confirmed no local un-pushed
 edits remain. `ledger_index.py` will retag this to section C and move it
 into the general archive on next run -- expected, not an error.  
+
+#### [L-062] README refresh -- fold in handoff + ledger developments
+<!-- L:062 status:DONE upd:2026-07-28 section:C flag: rice:3/2/85/1 -->
+- **README review/refresh.** Review the repo README against its last update and
+  fold in developments captured since in the handoffs and this ledger (Movement
+  track complete, animation engine, item-19.3 axis control, shell-consolidation
+  refactor complete, Gallery/Studio round trip, Earth System track). Goal: a
+  current public-facing description matching what the code actually does. Paired
+  with L-063 (in-GUI Note) -- both are user-facing text that has drifted from
+  project state.
+- **Staged scope, decided 2026-07-17 (Tony + Sonnet 5), because Tony noticed
+  the drift firsthand on the live GitHub page.** Split into a do-now half
+  and a defer half, not one pass:
+  - **Do now, no gallery dependency:** date/version stamp, module/LOC
+    stats (verified stale below), a visible Requirements section, every
+    doc cross-reference link (verified BROKEN below), and folding in
+    non-gallery feature/capability drift since May.
+  - **Defer until the interactive gallery goes live:** the "Web Gallery"
+    section's architecture description ONLY. It should still describe the
+    CURRENT, publicly-linked gallery (palomasorrery.com, the
+    HTML-export -> json_converter.py -> GitHub Pages pipeline) as it
+    exists today -- not omit gallery coverage entirely. What's deferred is
+    the in-progress Phase 2 Solar System Assembler / interactive rework
+    (L-098 onward, this week's M1/M2) -- unreleased, not publicly linked,
+    still changing week to week; documenting it now risks a second
+    rewrite almost immediately.
+  - **Audience reframing (Tony, 2026-07-17):** primary audience shifts to
+    the DEVELOPER, even though the repo is public -- away from the
+    current beginner/end-user hand-holding tone (the multi-page
+    "Step-by-Step Installation Guide for Beginners" walkthrough reads for
+    a non-technical download-and-click audience). Five purposes, in
+    order, Tony's own framing: (1) general project information; (2)
+    pointers to key organizational structure and documents -- focused on
+    the orrery, may mention the gallery, written for a developer reader;
+    (3) orientation on cloning/using the repo, especially that the
+    released data files are NOT in the active repo (gitignored, obtained
+    from Releases); (4) the gallery as it currently, publicly exists --
+    not the unreleased interactive work; (5) a brief mention of data
+    sources and citation discipline (-> PROVENANCE_AUDIT.md).
+- **Concrete staleness findings, this session (verified against live HEAD
+  `2991a0c7`, not assumed):**
+  - Module/LOC claim wrong: README says "75+ Python modules, over 78,000
+    lines of code" -- actual count at HEAD is 121 Python files, 106,476
+    lines.
+  - Last-updated stamp: May 4/May 2026 (v2.9.0) vs. today -- 2+ months,
+    and the entire Phase 2 gallery-cache-builder track (L-098 through
+    L-126, including this week's M1/M2 trust-measurement work) missing
+    from the changelog line.
+  - **Every doc cross-reference link in the README is broken.**
+    `MODULE_INDEX.md`, `climate_readme.md`, `social_media_readme.md`,
+    `web_gallery_handoff.md`, `wet_bulb_temperature_readme.md` are all
+    linked repo-root-relative, but all five actually live under
+    `documentation/` -- confirmed by direct path check. 404 on GitHub
+    today, independent of anything gallery-related.
+  - No visible Requirements citation (Tony's original observation):
+    `requirements.txt` carries real, carefully-maintained content
+    invisible from the README -- pinned-version rationale (kaleido
+    locked at 0.2.1, with the reason why), a full Python 3.14
+    compatibility section (which packages break, which don't, what to
+    monitor), and the Plotly 6.x/kaleido 1.0 upgrade path. The README
+    only says "pip install -r requirements.txt" and a sample `pip list`
+    -- none of this surfaces.
+- **Routing decided:** the do-now half goes to Fable as a manifest-style
+  task (broad-first surface-and-organize, real latitude, not a design
+  session) -- see FABLE_TASK_README_REFRESH.md. Tony reviews the diff
+  before merging, same as any Fable deliverable.
+ **Claude:** [verified 2026-07-28, live HEAD] Done. `README.md` (535 lines)
+built by Fable, reviewed independently against live HEAD (not just
+trusted): all 12 relative links resolve, ASCII/LF clean, module/LOC
+stats sourced from the regenerated atlas rather than hardcoded, the
+corrected throughline in place (personal tool first; the gallery is the
+sharing vehicle, not a parallel intended audience). Old README archived
+to `documentation/README_5_4_26.md`. One follow-on found during Fable's
+own re-verification pass -- root's stale `ORBITAL_MECHANICS_README_v3_1.md`
+-- has since been removed (2026-07-28). Fable's remaining "open questions"
+list (beginner-content disposition, whether four documentation/ readmes
+move to root, three unlinked root docs, docs/ folder purpose) is recorded
+in `documentation/README_CHANGE_NOTE.md`, left pending -- a separate
+future pass if wanted, not part of this item's close. 
+**Gap:** (1) send the Fable prompt, get the diff back; (2) Tony + Sonnet
+review against the 5 purposes and the concrete findings above; (3) commit;
+(4) revisit the Web Gallery section specifically once the interactive
+assembler is publicly linked (separate future pass, not blocked on
+anything else in this item).
+**Ref:** L-063 (paired, in-GUI Note); L-098 (Phase 2 parent, why the
+gallery section is deferred); FABLE_TASK_README_REFRESH.md (this
+session's Fable prompt); requirements.txt; PROVENANCE_AUDIT.md.
+**Claude:** RICE proposed 3/2/85/1 (reach raised -- this is the repo's
+public front door, not an internal doc; impact ticks up, broken links
+and wrong stats are a real credibility/usability issue, not purely
+cosmetic; confidence high, concrete claims verified directly this
+session rather than assumed; effort stays low, Fable-suited assembly
+work) -- yours to finalize.
+
+#### [L-127] module_atlas.py generates MODULE_INDEX.md too -- single source, eliminate divergence
+<!-- L:127 status:DONE upd:2026-07-28 section:C flag: rice:2/2/80/1 -->
+- **The ask (Tony, 2026-07-17):** one script run produces BOTH
+  MODULE_ATLAS.md (full report, existing) and MODULE_INDEX.md (current
+  thematic/prose style, current data) -- same pattern as L-097
+  (skills_index.py auto-generating the Skill Manifest table): kill a
+  hand-maintained sibling by generating it from the same scan as its
+  always-current relative, rather than hoping two files stay in sync by
+  discipline alone.
+- **Real design fork, not just an implementation detail:**
+  (a) Mechanical-only -- module_atlas.py already extracts docstrings,
+  functions, role tags, deps/consumers per module. MODULE_INDEX.md gets
+  formatted straight from that data. Fully deterministic, no new
+  dependency, same philosophy as the existing script. Honest cost: the
+  current MODULE_INDEX.md's synthesized narrative ("Core visualization
+  functions: plot_objects() generates...") isn't a docstring dump -- it
+  reads like curated prose. Some modules' docstrings won't support that
+  quality yet, so some entries will read thinner on day one. That's a
+  healthy pressure toward better docstrings, not a bug, but it's a real
+  step down for a few modules until they catch up.
+  (b) AI-assisted -- script does the scan, a Claude pass writes the
+  prose from it each time. Closer to today's quality; no longer one
+  deterministic script run, so less "automated" in the sense Tony asked
+  for.
+  Leaning (a) for consistency with the project's existing devtool
+  philosophy (ledger_index.py, skills_index.py) -- Tony's call to
+  finalize, not decided here.
+- **Grouping reconciliation needed either way:** MODULE_INDEX.md's
+  current sections (Core Applications, Orbital Mechanics & Calculations,
+  Cache Management, Stellar Visualization Pipeline, etc.) don't map 1:1
+  onto module_atlas.py's existing ROLE_MAP tags (gui, rendering,
+  rendering/shells, computation, data, cache, pipeline, scenario,
+  utility, devtool, other). Extend ROLE_MAP with the finer categories, or
+  adopt the coarser existing tags as MODULE_INDEX's new section headers
+  -- an actual decision the implementation has to make, not a detail to
+  paper over.
+- **Not urgent, not blocking.** The immediate need (accurate numbers in
+  the README, right now) is already handled -- MODULE_ATLAS.md was
+  regenerated fresh this session (121 modules, 953 functions, 91,851
+  lines, July 17) and the Fable README prompt was corrected to source
+  from that instead of the stale MODULE_INDEX.md. This item is the
+  structural fix so this class of drift can't recur, not a blocker on
+  anything in flight.
+**Gap:** (1) reconcile ROLE_MAP against MODULE_INDEX's current thematic
+groupings; (2) extend module_atlas.py to emit MODULE_INDEX.md from the
+same AST scan pass, as a proper generated index (mechanical-only,
+settled 2026-07-17) -- same marker-based-zone pattern as
+ledger_index.py/skills_index.py where practical; (3) BOTH outputs write
+to repo ROOT, not documentation/ -- matching where MODULE_ATLAS.md
+already lives, matching the root/documentation split already in force in
+this repo (11 current-reference files at root vs. 506 historical files
+in documentation/), and fixing the README's existing MODULE_INDEX.md
+link at its root cause rather than just correcting the link syntax; (4)
+Tony renames the existing hand-curated documentation/MODULE_INDEX.md to
+an archival copy (matching the _superseded convention already used for
+LEDGER_orrery_consolidated_superseded.md) before the new generated
+version takes its place at root.
+- **Done (Tony, 2026-07-17):** orphaned stale documentation/MODULE_ATLAS.md
+  duplicate (April 14, 86,139 lines) removed.
+**Claude:** [verified 2026-07-28, live HEAD] Done, in full. All four Gap
+items closed: `module_atlas.py` now generates both `MODULE_ATLAS.md` and
+`MODULE_INDEX.md` from one scan (mechanical-only, fork (a) chosen); both
+write to repo root; the hand-curated `documentation/MODULE_INDEX.md` was
+renamed to `documentation/MODULE_INDEX_old.md` before the generated
+version took its place. ROLE_MAP reconciliation (Gap item 1) went further
+than this item's own scope -- see L-163 (DONE, 2026-07-26), which
+redressed 19/121 modules silently misclassified as 'other' and added a
+docstring-tag-driven MODULE_DOMAIN_MAP on top of the infrastructure this
+item built. Confirmed live: current MODULE_INDEX.md header reads
+"Generated: July 26, 2026 by module_atlas.py".
+**Ref:** module_atlas.py; documentation/MODULE_ATLAS.md;
+documentation/MODULE_INDEX.md; L-097 (skills_index.py, same pattern,
+precedent RICE); ledger_index.py (original precedent); add_docstrings.py
+(existing docstring-batch tool, may be relevant to the docstring-quality
+dependency in option (a)).
+**Claude:** RICE proposed 2/2/80/1, matching L-097's precedent for this
+class of devtool/process work (modest reach -- internal tooling, not
+user-facing; real but not huge impact; high confidence, same proven
+pattern as two existing scripts; low effort, extends existing code
+rather than building new) -- yours to finalize.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
@@ -2805,76 +2899,6 @@ color-accuracy pass, if one is ever undertaken); `_make_dict_unit`,
 **Claude:** RICE proposed 2/2/95/1 (fixes a real overclaim risk codebase-
 wide, high confidence, small effort -- documentation only) -- yours to
 finalize.
-
-#### [L-127] module_atlas.py generates MODULE_INDEX.md too -- single source, eliminate divergence
-<!-- L:127 status:OPEN upd:2026-07-17 section:D.Structural flag: rice:2/2/80/1 -->
-- **The ask (Tony, 2026-07-17):** one script run produces BOTH
-  MODULE_ATLAS.md (full report, existing) and MODULE_INDEX.md (current
-  thematic/prose style, current data) -- same pattern as L-097
-  (skills_index.py auto-generating the Skill Manifest table): kill a
-  hand-maintained sibling by generating it from the same scan as its
-  always-current relative, rather than hoping two files stay in sync by
-  discipline alone.
-- **Real design fork, not just an implementation detail:**
-  (a) Mechanical-only -- module_atlas.py already extracts docstrings,
-  functions, role tags, deps/consumers per module. MODULE_INDEX.md gets
-  formatted straight from that data. Fully deterministic, no new
-  dependency, same philosophy as the existing script. Honest cost: the
-  current MODULE_INDEX.md's synthesized narrative ("Core visualization
-  functions: plot_objects() generates...") isn't a docstring dump -- it
-  reads like curated prose. Some modules' docstrings won't support that
-  quality yet, so some entries will read thinner on day one. That's a
-  healthy pressure toward better docstrings, not a bug, but it's a real
-  step down for a few modules until they catch up.
-  (b) AI-assisted -- script does the scan, a Claude pass writes the
-  prose from it each time. Closer to today's quality; no longer one
-  deterministic script run, so less "automated" in the sense Tony asked
-  for.
-  Leaning (a) for consistency with the project's existing devtool
-  philosophy (ledger_index.py, skills_index.py) -- Tony's call to
-  finalize, not decided here.
-- **Grouping reconciliation needed either way:** MODULE_INDEX.md's
-  current sections (Core Applications, Orbital Mechanics & Calculations,
-  Cache Management, Stellar Visualization Pipeline, etc.) don't map 1:1
-  onto module_atlas.py's existing ROLE_MAP tags (gui, rendering,
-  rendering/shells, computation, data, cache, pipeline, scenario,
-  utility, devtool, other). Extend ROLE_MAP with the finer categories, or
-  adopt the coarser existing tags as MODULE_INDEX's new section headers
-  -- an actual decision the implementation has to make, not a detail to
-  paper over.
-- **Not urgent, not blocking.** The immediate need (accurate numbers in
-  the README, right now) is already handled -- MODULE_ATLAS.md was
-  regenerated fresh this session (121 modules, 953 functions, 91,851
-  lines, July 17) and the Fable README prompt was corrected to source
-  from that instead of the stale MODULE_INDEX.md. This item is the
-  structural fix so this class of drift can't recur, not a blocker on
-  anything in flight.
-**Gap:** (1) reconcile ROLE_MAP against MODULE_INDEX's current thematic
-groupings; (2) extend module_atlas.py to emit MODULE_INDEX.md from the
-same AST scan pass, as a proper generated index (mechanical-only,
-settled 2026-07-17) -- same marker-based-zone pattern as
-ledger_index.py/skills_index.py where practical; (3) BOTH outputs write
-to repo ROOT, not documentation/ -- matching where MODULE_ATLAS.md
-already lives, matching the root/documentation split already in force in
-this repo (11 current-reference files at root vs. 506 historical files
-in documentation/), and fixing the README's existing MODULE_INDEX.md
-link at its root cause rather than just correcting the link syntax; (4)
-Tony renames the existing hand-curated documentation/MODULE_INDEX.md to
-an archival copy (matching the _superseded convention already used for
-LEDGER_orrery_consolidated_superseded.md) before the new generated
-version takes its place at root.
-- **Done (Tony, 2026-07-17):** orphaned stale documentation/MODULE_ATLAS.md
-  duplicate (April 14, 86,139 lines) removed.
-**Ref:** module_atlas.py; documentation/MODULE_ATLAS.md;
-documentation/MODULE_INDEX.md; L-097 (skills_index.py, same pattern,
-precedent RICE); ledger_index.py (original precedent); add_docstrings.py
-(existing docstring-batch tool, may be relevant to the docstring-quality
-dependency in option (a)).
-**Claude:** RICE proposed 2/2/80/1, matching L-097's precedent for this
-class of devtool/process work (modest reach -- internal tooling, not
-user-facing; real but not huge impact; high confidence, same proven
-pattern as two existing scripts; low effort, extends existing code
-rather than building new) -- yours to finalize.
 
 #### [L-133] Codebase-wide CRLF sweep (beyond L-026)
 <!-- L:133 status:OPEN upd:2026-07-17 section:D.Structural flag: rice:2/2/50/2 -->
@@ -3919,7 +3943,7 @@ checks one global bound regardless of scene composition -- same limitation noted
 (pluto/charon, barycentric-only today); "Pluto/Charon two-view" golden artifact.
 
 #### [L-154] Gallery feature-rendering JS layer (shells, rings, radiation belts -- Artifact 2 prerequisite)
-<!-- L:154 status:BLOCKED upd:2026-07-27 section:W.Active flag: rice:3/3/70/3 -->
+<!-- L:154 status:BLOCKED upd:2026-07-28 section:W.Active flag: rice:3/3/70/3 -->
 - **What.** The client-side JS that reads `ring_system`, `van_allen_belts`,
   `atmosphere_shell`, and `radiation_belts` out of the served cache and
   actually draws them. `assemble.py` already resolves and reports the
@@ -3937,6 +3961,16 @@ checks one global bound regardless of scene composition -- same limitation noted
   every parameter to bare category-name keys. The resume handoff is
   corrected in place (Part 3 below) -- this entry is the ledger-side
   record so the claim can't resurface from a stale copy of that handoff.
+**Claude:** [re-verified 2026-07-28, live HEAD, independently of the
+2026-07-27 correction above] Confirmed still accurate, not stale.
+`gallery/assembler/resolver.py` line 133 is still exactly
+`features = tuple(rec.get("features") or ())` -- reproduced the failure
+mode directly: `tuple()` on a dict yields only its keys, so a real nested
+value like `{'ring_system': {'main_ring': {'inner_radius_km': 122500}}}`
+collapses to `('ring_system',)`, every parameter lost. Also checked
+whether the blocking cluster had cleared since: L-155 through L-162 are
+still open or pending-gate, L-156 touched as recently as today
+(2026-07-28). BLOCKED remains the correct status on both counts.
 - **Open design questions once unblocked:** geometry-building approach
   (port the orrery's shell/belt/ring math into JS literally, or design
   fresh JS-native trace builders -- "knowledge transfers, not code");
