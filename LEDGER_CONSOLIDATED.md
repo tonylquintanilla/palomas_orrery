@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*99 live items; 87 need attention (`!`); 98 RICE-scored; 61 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*100 live items; 89 need attention (`!`); 99 RICE-scored; 62 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -326,6 +326,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### H. Gallery / Studio Track
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-167 | Artifact-1 field notes -- orrery-coding-conventions still missing three entries | OPEN | 3.8 | 2026-07-29 |
 | ! | L-107 | Gallery builder copy-with-provenance sync register | OPEN | 3.6 | 2026-07-09 |
 | ! | L-073 | Gallery export-emits-JSON -- fold the manual json_converter run into Export | OPEN | 1.6 | 2026-06-26 |
 | ! | L-058 | Open Studio items (May-5 handoff, checked @2f40d9d) | OPEN | 1.5 | 2026-06-08 |
@@ -353,7 +354,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 |  | L-086 | Attribution / credits page | PROPOSED | 2.8 | 2026-07-03 |
-|  | L-087 | palomas_orrery_helpers.py computation/GUI split | PROPOSED | 2.0 | 2026-07-03 |
 
 ### W.Active -- Web Publication active phase
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -366,6 +366,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-119 | event_link hardcoded None in the builder (F2, gates artifact 7) | OPEN | 3.6 | 2026-07-15 |
 | ! | L-161 | Gemini sweep -- clear the display-string Tier-2 backlog | OPEN | 3.1 | 2026-07-27 |
 | ! | L-157 | Gemini cross-check of shell config ring/belt/atmosphere geometry values | OPEN | 2.5 | 2026-07-27 |
+| ! | L-166 | F1b: per-object trust enforcement + soft-edge trust UX (resolver/client consumption of served trust blocks) | OPEN | 2.4 | 2026-07-28 |
 | ! | L-121 | Slim plotly wheel not deployed anywhere (F4, ships-nothing gate) | OPEN | 2.2 | 2026-07-15 |
 | ! | L-150 | Multi-orbit trust model for near-equal-mass binaries (Pluto/Charon and future onboards) | OPEN | 2.2 | 2026-07-20 |
 | ! | L-154 | Gallery feature-rendering JS layer (shells, rings, radiation belts -- Artifact 2 prerequisite) | BLOCKED | 2.1 | 2026-07-28 |
@@ -456,6 +457,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-085 | LICENSE to repo root | DONE | 4.0 | 2026-07-03 |
 |  | L-088 | Gallery integration test (Phase 0) | DONE | 4.0 | 2026-07-06 |
 |  | L-099 | Solar System Explorer interactive exhibit | DONE | 3.2 | 2026-07-06 |
+|  | L-087 | palomas_orrery_helpers.py computation/GUI split | DONE | 2.0 | 2026-07-15 |
 |  | L-152 | ledger-and-session-records skill bumped to 1.2 -- retroactive ledger entry | DONE | 1.9 | 2026-07-20 |
 |  | L-148 | Staging folder names carry no object identifier -- hard to locate manually (gallery-cache-builder) | DONE | 1.8 | 2026-07-20 |
 |  | L-098 | Data serving pipeline (Phase 1b) | DONE | 1.5 | 2026-07-12 |
@@ -3566,6 +3568,27 @@ render (Mode 5) remains the authority over both AI reviewers.
 current HEAD (Studio layout has moved since 4/17) before fixing.
 **Ref:** to_do_ideas.md (pre-ledger, 4/17/26).
 
+#### [L-167] Artifact-1 field notes -- orrery-coding-conventions still missing three entries
+<!-- L:167 status:OPEN upd:2026-07-29 section:H flag: rice:1/2/95/0.5 -->
+- **What.** Opus 4.8's artifact-1 as-built (PHASE2_ARTIFACT1_AS_BUILT.md S10)
+  recommended three rendering gotchas land in orrery-coding-conventions.
+  Checked directly: skill is still at v1.1 (cut 2026-07-12), none present.
+- **The three notes:**
+  1. `aspectmode: "cube"` (equal axis ranges) is required for solar-system
+     scenes -- `aspectmode: "data"` collapses a near-planar orbit into an
+     invisible sliver + axis line. The orrery's own `build_scene` already
+     does this; the web assembler had to rediscover it the hard way on
+     Earth alone.
+  2. `scatter3d` traces have no `dash` line-style attribute (2D-only in
+     Plotly). Distinguish mean vs. osculating orbit traces by line width,
+     not dash.
+  3. Text/label traces default to black -- invisible against the dark
+     theme. Set `textfont.color` explicitly on every label trace.
+**Gap:** add these three as field notes, bump skill to v1.2, re-cut/SHA-stamp.
+Small, no urgency, but cheap to repeat on artifacts 2-7 if never fixed.
+**Ref:** PHASE2_ARTIFACT1_AS_BUILT.md S10/S12; orrery-coding-conventions
+skill (current v1.1).
+
 ## O. OBJECT CANDIDATES TRACK
 
 Standing wishlist for new selectable objects and gallery/studio presets --
@@ -3676,22 +3699,6 @@ redistribution terms for Copernicus and IPC. Gates any wide release including
 the Phase 0 pilot if publicly reachable.
 **Ref:** Fable 5 survey (Front 2), master plan S6.
 
-#### [L-087] palomas_orrery_helpers.py computation/GUI split
-<!-- L:087 status:PROPOSED upd:2026-07-03 section:W.Prep flag: rice:2/2/75/1.5 -->
-- **What.** `palomas_orrery_helpers.py` imports tkinter directly (tk, ttk,
-  messagebox, scrolledtext, lines 19-22) and carries three computation functions
-  the assembler will need: `calculate_planet9_position_on_orbit` (@217),
-  `rotate_points2` (@265), `calculate_axis_range` (@313). The computation
-  functions themselves do not use tkinter.
-- **Fix:** split computation functions into an import-clean module; leave GUI
-  helpers in place. Or lazy-import tkinter so the module can be imported without
-  a live Tk root.
-- **Natural companion to L-026** (CRLF to LF on the same file, already open).
-  Do both in one pass.
-**Gap:** decide split strategy (new module vs lazy-import), implement, verify
-no callers break. Closes the second seam identified in master plan S2.
-**Ref:** Fable 5 review of v2 (finding 3), master plan S2/S6.
-
 ### W.Active -- current phase
 
 #### [L-079] Shared assembler architecture (keystone — redefined)
@@ -3729,11 +3736,11 @@ no callers break. Closes the second seam identified in master plan S2.
   at 2.1-3.3 s on iPhone WiFi (July 6, 2026). Two-tier model: frozen A
   exhibits + data-backed B′ exhibits.
 - **Progress:** Phase 0 closed (L-088, July 6). Phase 1a vocabulary delivered
-  (L-089, Fable 5, July 4). A/B fork resolved: B′. Phase 1b data serving
-  design converged v0.3 (three-model review: 4.6/4.8/Fable, July 7) — 14
-  settled decisions, 8 validation invariants, coverage index schema, feature
-  rendering architecture. Next: Phase 1b build (CORS check, export script).
-  Master plan at v10.
+  (L-089, Fable 5, July 4). A/B fork resolved: B′. Phase 1b (L-098) built and
+  CLOSED (July 12). Phase 2 design closed: handoff v0.1 -> v0.3, competitive
+  manifest cross-check (Fable + GPT), synthesis v1 -> v2, both second-pass
+  reviewed. Artifact 1 (Earth alone) built and Mode-5 confirmed (Opus 4.8,
+  July 14). Artifacts 2-7 in progress. Master plan at v14.
 **Gap:** the master plan IS the gap document. Current phase: Phase 2.
 **Ref:** MASTER_PLAN_INTERACTIVE_GALLERY.md v10; PHASE1_SCENE_SPEC_VOCABULARY.md;
 DATA_SERVING_BROAD_ANALYSIS.md; PHASE1B_DATA_SERVING_DESIGN_HANDOFF.md v0.3;
@@ -4922,6 +4929,26 @@ served. Closing outright, no residual carried forward.
 Skill Manifest.
 **Ref:** L-149, L-150 (motivating work); master plan §3; render_orbits.py, resolver.py,
 cache_reader.py.
+
+#### [L-087] palomas_orrery_helpers.py computation/GUI split
+<!-- L:087 status:DONE upd:2026-07-15 section:W.Done flag: rice:2/2/75/1.5 -->
+- **What.** `palomas_orrery_helpers.py` imported tkinter directly (tk, ttk,
+  messagebox, scrolledtext, lines 19-22) alongside three computation functions
+  the assembler needed: `calculate_planet9_position_on_orbit` (@217),
+  `rotate_points2` (@265), `calculate_axis_range` (@313).
+- **Finding, not a design decision.** Grepped the full 913-line file for
+  `tk.`/`ttk.`/`messagebox.`/`scrolledtext.` usage: zero matches anywhere in
+  any function body. The four import lines were dead code, not a real split
+  question. Confirmed from both directions: the sole consumer,
+  `palomas_orrery.py`, imports exactly the 11 real functions the module
+  defines, none of them tkinter names.
+- **Resolution:** Tony deleted the four dead import lines directly (no split,
+  no lazy-import needed). File is now 909 lines, zero tkinter references --
+  independently reverified multiple times, including in Opus 4.8's artifact-1
+  as-built (Phase 2 assembler build, 2026-07-14).
+- **Done alongside L-026** (CRLF to LF, same file, same session).
+**Ref:** Fable 5 review of v2 (finding 3), master plan S2/S6; Phase 2 handoff
+v0.2 S6 (verification); PHASE2_ARTIFACT1_AS_BUILT.md (re-confirmation).
 ### W.Cross-references -- existing items that interact with the web track
 
 - **L-026** -- CRLF to LF on `palomas_orrery_helpers.py`. Companion to L-087.
