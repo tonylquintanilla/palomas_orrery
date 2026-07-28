@@ -3474,15 +3474,23 @@ test. A periodic automated diff check is a possible follow-on (deferred).
 tools/gallery_cache_builder.py; L-098 (parent).
 
 #### [L-111] Gallery builder Pass 5 -- operability + deferred hardening
-<!-- L:111 status:OPEN upd:2026-07-10 section:H flag: rice:2/2/85/2 -->
+<!-- L:111 status:OPEN upd:2026-07-27 section:W.Active flag: rice:2/2/50/2 -->
 - **What.** Open items after Passes 1-4, captured from Tony's questions and the
   un-actioned remainder of both reviews. Full detail in GALLERY_BUILD_HANDOFF
   v0.1 "Open items and deferred work"; this is the tracked handle.
-- **Deployment model (DECIDED July 10).** Automatic FETCH, manual PUSH: Task
-  Scheduler runs the builder nightly WITHOUT --commit (fetch + validate + swap the
-  new generation into the LOCAL tree + write the summary); Tony reads the summary
-  and pushes by hand. Keeps commit authority with Tony (standing rule); N2 push
-  verification becomes advisory (Tony is the eyes-on confirm that caught a2b7435).
+**Deployment model (REVISED 2026-07-27, supersedes the July 10 decision
+below):** full automatic FETCH and PUSH -- Task Scheduler runs
+`--nightly --commit` directly, no manual review step. Adopted after a
+week of real testing (2 clean nights out of 3; the one failure diagnosed,
+understood, and now guarded against by L-165's post-swap verification).
+Trades the manual-review safety net for full hands-off operation --
+deliberate, not an oversight. The gap-aware catch-up correctness issue
+below remains open and is unrelated to this choice.
+
+Original (superseded): automatic FETCH, manual PUSH -- Task Scheduler runs
+the builder nightly WITHOUT --commit... Tony reads the summary and pushes
+by hand. Kept commit authority with Tony; cited a2b7435 as a real incident
+this caught.
 - **Gap-aware catch-up (CORRECTNESS -- do before unattended).** The nightly fetches
   a FIXED trailing window `[today - freeze, today]` anchored to TODAY, so if the
   builder is dark longer than `freeze` (machine off, travel) the gap days are
@@ -3904,7 +3912,7 @@ checks one global bound regardless of scene composition -- same limitation noted
 (pluto/charon, barycentric-only today); "Pluto/Charon two-view" golden artifact.
 
 #### [L-151] Create gallery-assembler skill -- technical home for the new-mechanism assembler
-<!-- L:151 status:OPEN upd:2026-07-20 section:W.Active flag: rice:?/?/?/? -->
+<!-- L:151 status:DONE upd:2026-07-27 section:C flag: rice:?/?/?/? -->
 - **What.** No skill documents the assembler itself -- render_orbits.py, resolver.py,
   cache_reader.py, Kepler propagation, the trust/served_window system, the golden-artifact
   build+Mode-5 process. gallery-cache-builder covers only the nightly builder/staging/
