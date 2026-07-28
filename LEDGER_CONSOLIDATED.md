@@ -4510,6 +4510,34 @@ step is the main new wrinkle, given the repo is public.
 **Ref:** L-149/L-118 (served_window/trust), CNAME (confirms the domain),
 M2 testing protocol addendum (Layer 3 background).
 
+#### [L-166] F1b: per-object trust enforcement + soft-edge trust UX (resolver/client consumption of served trust blocks)
+<!-- L:166 status:OPEN upd:2026-07-28 section:W.Active flag: rice:2/3/80/2 -->
+- **What.** F1a (M2) serves per-object trust blocks nightly, dormant -- nothing
+  consumes them. F1b is the consumption side: resolver.py/cache_reader.py read
+  per-object windows instead of the one global gate (L-149 limitation note;
+  L-150 gap, binaries-scoped line); global served_window demoted to an outer
+  sanity bound. Touches locked code: deliberate golden-fingerprint re-open
+  (L-080 harness), one small reviewed diff, not absorbed silently.
+- **UX design (converged in the July 2026 Mode 7 trust-bound relay, Sonnet 5 +
+  Fable 5; Tony's stated preference: indicator, not hard block):** shaded
+  high-confidence band on the date picker; per-object degradation past each
+  object's own window (fast moons ghost first -- teaches perturbation);
+  along-track uncertainty arc rendered from the served error rate
+  (Show-the-Envelope convention, made literal); positive framing ("range we
+  can vouch for"); hard OutOfServedWindowError reserved for an outer sanity
+  cap only. Client cost is O(1) arithmetic per scrub tick -- rate is served.
+- **Riders, capture-not-decide:** (1) tolerance_deg=0.5 adopted as a global
+  constant; whether tolerance eventually belongs to the VIEW (scene-scale vs
+  close-up) is open -- adjacent to L-150's scale-of-view voting. (2) Trust
+  window must not span a known close encounter (two-body invalid across it);
+  moot for Apophis today (323.5 d window vs 2029), stops being moot as 2029
+  approaches -- cross-note with L-126.
+**Gap:** design session first (fingerprint re-open scope + UX wiring), then
+build. Sequence relative to L-154 (feature JS layer) is Tony's call.
+**Ref:** L-118/L-149 (F1a, closed), L-150, L-126, L-080 (fingerprint),
+M2_IMPLEMENTATION_REPORT.md, FABLE_PROMPT_served_window_trust_bound_v0_1.md
+and its response (July 2026 relay); resolver.py resolve() (~91-106).
+
 ### W.Done -- closed items, kept with the track
 
 #### [L-085] LICENSE to repo root

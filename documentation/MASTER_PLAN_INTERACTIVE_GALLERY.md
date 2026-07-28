@@ -30,7 +30,10 @@ Artifact 1 (Earth)'s own acceptance test confirms this by design: features
 dispatch as data only, with "JavaScript rendering them" as the intended
 next step -- and that JS was never written. Writing that feature-rendering
 layer is the real next gate before Artifact 2 (Jupiter/Saturn) can attempt
-Mode 5. Independently: Layer 3 (nightly Task Scheduler) is ENABLED and its
+Mode 5. Alongside it, the trust system's consumption side is now tracked as L-166
+(F1b: per-object trust enforcement in the resolver + soft-edge date-picker
+UX -- a deliberate golden-fingerprint re-open when it lands; the per-object
+trust blocks are already served nightly, dormant). Independently: Layer 3 (nightly Task Scheduler) is ENABLED and its
 core mechanism is proven -- unattended trigger, Horizons fetch, and data
 assembly all confirmed working end to end -- but the final promotion step
 has a known intermittent failure under the scheduler's execution context
