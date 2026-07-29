@@ -3530,7 +3530,10 @@ this caught.
   (Framing note, 2026-07-27: unattended scheduling is already live per the
   revision above. This gap was accepted as an open risk rather than fixed
   first -- tracked in L-165's succession-planning discussion, not resolved
-  here.) 
+  here.)
+  (Framing note, 2026-07-27: the Q2 manual-review approach here was not
+  adopted -- L-165's lighter automated post-swap guard was built instead.
+  Q1, the --add-object backfill, remains open and unrelated.)  
 - **Pass 5 (operability -- do before UNATTENDED scheduling).** (Q1) `--add-object
   <slug>` one-time backfill so a newly-added config object is onboarded without
   re-running the whole first-build. (Q2) a `_health.md` summary written EVERY run
