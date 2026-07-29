@@ -12,8 +12,15 @@ this continuation; HEAD had not moved since Part 1):
 **Type:** DESIGN SESSION (zero code)
 
 **Companion:** Part 1 of this handoff (same session, L-162 gap resolution and
-naming recommendation); `OPUS5_PROMPT_provenance_refactor_completion_plan.md`
-(Sonnet 5, Jul 28) and the chain it names.
+naming recommendation) -- **never filed as a separate document; content
+below is captured in the ledger, not here.** Part 1's naming grounds,
+ownership call, and alias-layer hazard live in ledger `[L-162]`'s Note;
+the `comet_visualization_shells.py` scanner-visibility question lives in
+`[L-158]`'s Note; the Planet 9 pinning exclusion lives in master plan
+section 6. Every "Part 1 SX" reference below should be read against those
+three locations, not a document that exists.
+`OPUS5_PROMPT_provenance_refactor_completion_plan.md` (Sonnet 5, Jul 28)
+and the chain it names.
 
 **Covers:** asks 4 (phased build plan), 5 (L-078 lens), 6 (priority cleanup).
 Part 1 covered asks 1-3 and held ask 7 pending Tony's decisions.

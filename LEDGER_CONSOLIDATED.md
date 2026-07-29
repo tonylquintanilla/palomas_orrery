@@ -4122,9 +4122,9 @@ L-149/L-150/L-151 (M2 track); L-155-L-162.
 - **Explicitly out of scope:** `coverage_index.json` / `feature_configs.json`
   (gallery-cache-builder's own test suite's job); anything JS-side.
 - **Gated on L-156** (scoring must be correct first) **and effectively on
-  L-162** (pinning against 18 named constants is simpler than 3 named + 15
-  dict-path lookups -- worth L-162 landing first per its own note, though
-  not a hard blocker).
+  L-162** (pinning against 17 named constants -- Planet 9 excluded entirely,
+  so zero dict-path lookups remain, not 15 -- worth L-162 landing first per
+  its own note, though not a hard blocker).
 - **Confirmed 2026-07-27 (Sonnet 5, live HEAD):** nothing built yet --
   `provenance_scanner.py` has zero occurrences of `run_pinning_checks` or
   `PINNING_MAP`.
@@ -4483,8 +4483,10 @@ assuming which ~130 are already clear.
   missing. What's missing is promotion to its own named constant so each
   body scores as its own scanner row instead of one undifferentiated dict.
 - **Why now, not "eventually":** simplifies L-155's Phase 3 pinning engine
-  -- pins against 18 named constants directly instead of dict-path AST
-  extraction for 15 of them. D3 is closed (see L-156), so nothing about
+  -- pins against all 17 named constants directly. Planet 9's pinning
+  exclusion (decided; master plan section 6) means zero dict-path AST
+  extraction remains, not 15 -- simpler than originally scoped. D3 is
+  closed (see L-156), so nothing about
   this item's timing depends on it any more -- it can run whenever a
   dedicated session is free.
 **Note (2026-07-29, decided by Tony):** Both scope gaps from
@@ -4817,7 +4819,10 @@ item 9; L-156 (Phase 1, banner).
      credits the shell-config ring/belt/atmosphere cross-check to
      "L-161"; that work is L-157's.
   3. Carry the 15 -> 14 correction into this ledger's own prose wherever
-     "15 remaining bodies" still appears, and into master plan sectio.
+     "15 remaining bodies" still appears, and into master plan section 6.
+     Widen this to the 18/15 figures wherever they appear, not just that
+     exact phrase -- two more sites already found and fixed directly
+     (L-155, L-162 above); check for others before closing this item.
   4. Reinstall `gallery-assembler` SKILL.md from the repo copy -- installed
      copy carries CRLF line endings (118 confirmed, 0 bare LF),
      byte-identical content otherwise; came from a Windows path that
