@@ -6,6 +6,25 @@ Tony Quintanilla, PE | Claude Fable 5 | July 22, 2026
 - orrery (palomas_orrery) @ `9b4571851184e599f72de928cada16d30c9010f6`
 - gallery (tonyquintanilla.github.io) @ `79710968241f21c8e6e1836bb1ad35219f1a31f0`
 
+> **SUPERSEDED IN PART (2026-07-28).** This document remains the
+> definition of the build phases (section 3) and the pinning mechanics
+> (D6), but five decisions were amended after review and the three-AI
+> calibration round; the versions below do NOT govern:
+> **D2** replaced -- explicit `undetermined` sentinel (naming per L-163),
+> not a filter-ordering fix. **D3** recalibrated -- CROSS-CHECKED is V2,
+> never auto-promotable to V1 at any rigor level; SOURCED and STALE
+> merged at V3. **D5** expanded -- all 15 remaining bodies promoted to
+> named constants (L-162), not the 3-body minimum. **D7** corrected --
+> Tier-1 never gets an auto-exit gate, at any threshold; banner plus
+> human judgment, permanently. **D9** overturned -- derived values take
+> the inheritance rule (weakest input's rung; frozen literals are plain
+> V3), not a V1 STRUCTURAL rung (L-158).
+> The governing versions are in
+> DESIGN_REVIEW_provenance_scoring_and_pinning.md and ledger blocks
+> L-156 / L-158, which control wherever they differ from this document.
+> Note added per the stale-erratum discipline (same class as L-154's
+> corrected resume handoff).
+
 **Type:** DESIGN SESSION (zero code) -- decision document for L-155, L-156,
 L-158, L-160, and the section-2 open item from the predesign handoff.
 
