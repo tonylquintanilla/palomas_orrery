@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*104 live items; 93 need attention (`!`); 103 RICE-scored; 63 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*103 live items; 92 need attention (`!`); 102 RICE-scored; 64 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -361,7 +361,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-160 | test_constants_provenance.py -- retire once fully absorbed, not before | OPEN | 8.1 | 2026-07-27 |
 | ! | L-162 | CENTER_BODY_RADII full de-duplication -- dedicated Sonnet session | OPEN | 8.1 | 2026-07-27 |
-| ! | L-170 | Tier-1 exit-code flip -- capture so it doesn't float | OPEN | 7.2 | 2026-07-29 |
 | ! | L-172 | Phase 0 record-hygiene batch (provenance cluster prep) | OPEN | 5.7 | 2026-07-29 |
 | ! | L-158 | Derived-constant vulnerability inheritance rule (revised from a proposed rung, 2026-07-27) | OPEN | 5.6 | 2026-07-27 |
 | ! | L-156 | Provenance scanner scoring model fix -- criticality (category-based) + vulnerability recalibration + comprehensive sweep | OPEN | 5.3 | 2026-07-28 |
@@ -459,6 +458,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |:---:|----|------|-------------|:-----:|---------|
 |  | L-118 | feature_configs.json served empty every build (F1, gates artifact 2) | DONE | 8.1 | 2026-07-21 |
 |  | L-120 | Halley configured but not yet in the served index (F3, gates artifact 4) | DONE | 7.6 | 2026-07-27 |
+|  | L-170 | Tier-1 exit-code flip -- capture so it doesn't float | DONE | 7.2 | 2026-07-29 |
 |  | L-085 | LICENSE to repo root | DONE | 4.0 | 2026-07-03 |
 |  | L-088 | Gallery integration test (Phase 0) | DONE | 4.0 | 2026-07-06 |
 |  | L-099 | Solar System Explorer interactive exhibit | DONE | 3.2 | 2026-07-06 |
@@ -4791,21 +4791,6 @@ orrery-coding-conventions still missing three entries" -- unrelated
 Plotly-rendering topic, assigned in the same window; pure numbering
 coincidence). Anchored: built on orrery 0d13fbb9 / gallery f4ce24cb.
 
-#### [L-170] Tier-1 exit-code flip -- capture so it doesn't float
-<!-- L:170 status:OPEN upd:2026-07-29 section:W.Active flag: rice:2/2/90/0.5 -->
-- **What.** D7 (`DESIGN_HANDOFF_provenance_scoring_and_pinning.md`) wired
-  the Tier-1 nonzero exit code but switched it off, "recorded as its own
-  small ledger item so the flip doesn't float." It floated -- no such item
-  existed until this one. The console banner ships with Phase 1; the
-  exit-code flip itself is a one-line change, thrown the first time a live
-  run reaches Tier-1 = 0.
-**Gap:** flip the exit code on when Tier-1 first reaches 0 in a real run.
-Not gated on anything else in this cluster -- a "remember to do this later"
-placeholder.
-**Ref:** `DESIGN_HANDOFF_provenance_scoring_and_pinning.md` D7;
-`PRELIM_DESIGN_HANDOFF_provenance_cluster_completion_part2.md` section 6
-item 9; L-156 (Phase 1, banner).
-
 #### [L-172] Phase 0 record-hygiene batch (provenance cluster prep)
 <!-- L:172 status:OPEN upd:2026-07-29 section:W.Active flag: rice:3/2/95/1 -->
 - **What.** Small, independent, unblocked corrections a later session
@@ -5251,6 +5236,34 @@ cache_reader.py.
 - **Done alongside L-026** (CRLF to LF, same file, same session).
 **Ref:** Fable 5 review of v2 (finding 3), master plan S2/S6; Phase 2 handoff
 v0.2 S6 (verification); PHASE2_ARTIFACT1_AS_BUILT.md (re-confirmation).
+
+#### [L-170] Tier-1 exit-code flip -- capture so it doesn't float
+<!-- L:170 status:DONE upd:2026-07-29 section:W.Done flag: rice:2/2/90/0.5 -->
+- **What.** D7 (`DESIGN_HANDOFF_provenance_scoring_and_pinning.md`) wired
+  the Tier-1 nonzero exit code but switched it off, "recorded as its own
+  small ledger item so the flip doesn't float." It floated -- no such item
+  existed until this one. The console banner ships with Phase 1; the
+  exit-code flip itself is a one-line change, thrown the first time a live
+  run reaches Tier-1 = 0.
+**RETIRED (2026-07-29, Tony):** this is exactly the mechanism
+`DESIGN_REVIEW_provenance_scoring_and_pinning.md` section 3c already
+rejected -- titled, verbatim, "D7 -- Tier-1 never gets an auto-exit gate
+(supersedes the deferred-flip recommendation)." The amendment: "Tier-1
+gets a permanent, prominent banner and never an auto-exit gate, at any
+threshold, ever" -- a count-based trigger (zero-hit, or the ratchet
+alternative, also considered and also rejected) judges by a number
+instead of by what the findings actually are, the same flaw D1 already
+corrected one level down (criticality by volume, not by type). This item
+was opened from a reading of the original D7 recommendation without
+cross-checking that the review had already superseded it -- caught on a
+later audit pass, before anything was built. No mechanism to build; the
+permanent banner (already scoped into Phase 1 elsewhere) is the design as
+it actually stands.
+**Gap:** none -- move to section C.
+**Ref:** `DESIGN_HANDOFF_provenance_scoring_and_pinning.md` D7 (original,
+superseded); `DESIGN_REVIEW_provenance_scoring_and_pinning.md` section 3c
+(the amendment that actually governs); L-156 (Phase 1, the permanent
+banner this item mistakenly proposed replacing with an exit gate).
 ### W.Cross-references -- existing items that interact with the web track
 
 - **L-026** -- CRLF to LF on `palomas_orrery_helpers.py`. Companion to L-087.
