@@ -4817,8 +4817,7 @@ item 9; L-156 (Phase 1, banner).
      credits the shell-config ring/belt/atmosphere cross-check to
      "L-161"; that work is L-157's.
   3. Carry the 15 -> 14 correction into this ledger's own prose wherever
-     "15 remaining bodies" still appears, and into master plan section 6
-     (see Section 3 below).
+     "15 remaining bodies" still appears, and into master plan sectio.
   4. Reinstall `gallery-assembler` SKILL.md from the repo copy -- installed
      copy carries CRLF line endings (118 confirmed, 0 bare LF),
      byte-identical content otherwise; came from a Windows path that
