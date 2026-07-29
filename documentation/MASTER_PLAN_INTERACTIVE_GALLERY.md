@@ -915,6 +915,34 @@ worksheet be drafted blind (no Claude-derived figures included), a
 requirement added directly from a near-miss already caught once in this
 project's own history. L-154 unblocks once the build closes.
 
+**Decisions locked 2026-07-29 (Tony).** All remaining open forks in the
+cluster are resolved: L-162 naming (plain form) and scope (owns the
+Sun/Earth/Jupiter fix too); the `planet_visualization_utilities.py` alias
+layer (re-point to `constants_new.py`, superseding an unrecorded "v3.20
+Option B"); Planet 9 excluded from pinning entirely; and the April 2026
+constants verification accepted as sufficiently verified, with formal
+annotation deferred to the regular Gemini sweep rather than treated as a
+separate task or a Phase 2 blocker. A genuine gap was also found and
+folded in: `L-158`'s frozen-literal detector is blind to copies that don't
+self-announce (confirmed live in `comet_visualization_shells.py`), fixed
+alongside the Phase 1 build. Three new prep items opened: `L-170`
+(Tier-1 exit-code flip, previously undocumented despite D7 asking for it),
+`L-171` (a `L-163` regression -- `patch_ledger_index_retired_handles.py`
+landed untagged), `L-172` (a small record-hygiene batch). Nothing further
+blocks a build session. **Correction:** "15 remaining bodies" reads 14
+throughout this section (18 dict keys - 3 done - Planet 9 excluded = 14).
+
+**Second correction, same day.** 66 of the cluster's 145 Tier-1 findings
+turned out to be a scanner-mechanics artifact, not real citation gaps --
+the scanner's 60-line lookback doesn't reach `shell_configs.py`'s
+per-body-block citations (41 findings) or one two-line miss in
+`jupiter_visualization_shells.py`. Fix folded into L-156's Phase 1 (string
+units inherit their enclosing block's citation, landing at V3, not
+automatic clearance). Post-Phase-1 Tier-1 is predicted at ~103, not 145 --
+a reclassification, not new work. The Gemini worksheet L-078/L-161 sequence
+now starts with the paleoclimate and sgr_a families instead of
+`shell_configs.py`. Full detail: L-156 Gap item 6, L-078's note.
+
 **L-163 — Module role/domain classification redesign (ROLE_MAP + MODULE_DOMAIN_MAP).**
 ✓ Role-side CLOSED, all 4 phases (Opus 5 + Sonnet 5, July 24-26 2026).
 Design (Sonnet 5) reviewed by Fable 5, both confirmed build-ready; full

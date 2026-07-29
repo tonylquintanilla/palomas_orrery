@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*101 live items; 90 need attention (`!`); 100 RICE-scored; 63 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*104 live items; 93 need attention (`!`); 103 RICE-scored; 63 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -253,6 +253,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-027 (#61) | Platform Neutrality (SystemButtonFace) | OPEN | 2.2 | 2026-06-18 |
+| ! | L-171 | patch_ledger_index_retired_handles.py breaks L-163's zero-undetermined close | OPEN | 1.8 | 2026-07-29 |
 | ! | L-025 (#N7) | Reduced to custom-geometry inline markers only | OPEN | 1.5 | 2026-06-18 |
 | ! | L-068 | Static/animation pipeline consolidation -- remaining residuals (umbrella) | OPEN | 1.5 | 2026-06-23 |
 | ! | L-028 | ASCII em-dash violation, comet_visualization_shells.py L257/505/519 | OPEN | 1.0 | 2026-06-11 |
@@ -360,6 +361,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-160 | test_constants_provenance.py -- retire once fully absorbed, not before | OPEN | 8.1 | 2026-07-27 |
 | ! | L-162 | CENTER_BODY_RADII full de-duplication -- dedicated Sonnet session | OPEN | 8.1 | 2026-07-27 |
+| ! | L-170 | Tier-1 exit-code flip -- capture so it doesn't float | OPEN | 7.2 | 2026-07-29 |
+| ! | L-172 | Phase 0 record-hygiene batch (provenance cluster prep) | OPEN | 5.7 | 2026-07-29 |
 | ! | L-158 | Derived-constant vulnerability inheritance rule (revised from a proposed rung, 2026-07-27) | OPEN | 5.6 | 2026-07-27 |
 | ! | L-156 | Provenance scanner scoring model fix -- criticality (category-based) + vulnerability recalibration + comprehensive sweep | OPEN | 5.3 | 2026-07-28 |
 | ! | L-155 | Cross-repo constants/geometry pinning checks -- built INTO provenance_scanner.py, not a standalone script | PENDING-GATE | 4.5 | 2026-07-27 |
@@ -776,16 +779,47 @@ parent), L-060 (El Nino context, no causal claim).
   environments; report STRUCTURE (by-file, by-file-type, domain sums
   reconciling against totals) was verified in the sandbox before push, then
   confirmed rendering correctly against Tony's real post-push numbers.
-**Gap:** step (1) done; report tooling (by-file, by-file-type) done. Remaining:
-(a) triage the ~104 Tier-1 findings across 26 modules -- cite, remove-and-note,
-or add to provenance_exceptions.json per the three-outcome rule, now with a
-domain-tagged file table to triage from. Fable 5 recommended for bulk triage
-manifest, then 4.6 + Tony execute. (b) resolve the 4 COVERAGE GAP modules (add
-to ROLE_MAP or narrative_files) -- plus export_orbit_cache.py, the new Phase 1b
-data-serving devtool, which needs a ROLE_MAP entry (devtool role; see L-098);
-(c) step (2) near-miss vocabulary detector (design converged on hook point,
-tuning NOT done); (d) step (3) F/C bare-degree fix to NUMERIC_CLAIM_RE. Triage
-(a) is the heavy lift; (b-d) are mechanical once (a) establishes the baseline.
+**Note (2026-07-29, verified live at HEAD):** Triage backlog is 145, not
+104 (the July 16 figure) -- confirmed by a live scanner run against a
+clean clone with the real exceptions file loaded. Every file besides
+`shell_configs.py` matches the July 4/16 figures within +/-1; the entire
+41-finding delta is `shell_configs.py` alone, newly in scanned scope from
+L-163's role-widening.
+**Correction (2026-07-29, same day, re-measured):** those 41 are NOT a real
+citation gap -- see L-156 Gap item (6). `shell_configs.py` has a genuine
+`# Source:` comment for every body block; the scanner's 60-line lookback
+just doesn't reach it. Once L-156's inheritance fix lands, these 41 drop
+out of Tier-1 (V3, not V1/V2 -- still worth a look, just not "uncited").
+The genuinely uncited population -- the actual (a) triage target -- is the
+paleoclimate family (32 across 5 files: `paleoclimate_wet_bulb_full.py`,
+`paleoclimate_human_origins_full.py`, `paleoclimate_visualization_full.py`,
+`paleoclimate_visualization.py`, `paleoclimate_dual_scale.py`) and the
+sgr_a family (13 across 3: `sgr_a_grand_tour.py`,
+`sgr_a_visualization_core.py`, `sgr_a_visualization_precession.py`), plus
+`idealized_orbits.py`'s genuinely-distant remainder (24 -- real gap, not a
+lookback artifact) and the rest of the July 4/16 baseline. All score
+V4xC4=16 (uncited display strings), same object type as L-161's sweep, not
+geometry -- so (a) still merges into L-161 rather than running separately;
+only the starting file changes.
+**(b) is DONE, closed as a side effect of L-163, and its old instruction is
+now actively wrong.** The live audit has no role-coverage-gap section at
+all (only the domain one) -- L-163 Phase 3's docstring tags classify
+114/115 modules with `role_source == 'tag'`. "Add to ROLE_MAP or
+narrative_files" does nothing since L-163 Phase 3: `ROLE_MAP` is a
+regenerated mirror, overwritten by the next `module_atlas.py` run. One of
+the four originally-named modules (`smoke_rotation_axis.py`) was also
+deleted outright in L-163 Phase 1. The two files that DO still need a home
+are domain-coverage-gap, not role -- see L-172.
+**Gap:** (a) merge into L-161's Gemini relay, one worksheet per file,
+covering that file's uncited (this item) and re-read (L-161) claims
+together -- start with the paleoclimate family (32 findings, never
+worksheeted) and the sgr_a family (13, never worksheeted), NOT
+`shell_configs.py` (that's L-156's Phase 1 fix, not a worksheet target)
+and not L-161's originally proposed `celestial_objects.py` either. (b)
+DONE -- see Note above, no further action. (c)
+near-miss vocabulary detector -- stays open, separate, own session after
+this cluster, corpus tuning not started. (d) F/C bare-degree fix -- folds
+into L-156's Phase 1 build.
 **Ref:** provenance_scanner.py (_extract_string_units ~L711-721, narrative_files
 ~L623, NARRATIVE_ROLES ~L635, classify_role import ~L216, coverage-gap report
 ~L1271-1283, MODULE_DOMAIN_MAP/classify_domain ~L245-421, Findings by File /
@@ -3016,6 +3050,20 @@ mechanical, no behavior change.
 AS_BUILT_L163_phase4.md (both flagged this without capturing it --
 third mention, now captured).
 
+#### [L-171] patch_ledger_index_retired_handles.py breaks L-163's zero-undetermined close
+<!-- L:171 status:OPEN upd:2026-07-29 section:D.Structural flag: rice:1/1/90/0.5 -->
+- **What.** Landed July 28 with no `Role:`/`Domain:` docstring tags.
+  `classify_role('patch_ledger_index_retired_handles', ...)` returns
+  `undetermined` -- confirmed by calling the live function directly.
+  Breaks L-163 Phase 3b's "zero undetermined" close two days after it
+  closed. Also a one-shot patch script, the exact class L-163 Phase 1
+  archived.
+**Gap:** add `Role:`/`Domain:` tags to its docstring, or archive it
+alongside the seven already-archived one-shot scripts. Either closes this;
+archiving is probably cleaner given the class match.
+**Ref:** `patch_ledger_index_retired_handles.py`; `module_atlas.py`
+(`classify_role`); L-163 (Phase 1, Phase 3b); `AS_BUILT_L163_phase1.md`.
+
 ### D.Feature -- Bucket A (near-term)
 
 #### [L-066] MAPS per-frame comet-tail animation wiring
@@ -4037,6 +4085,16 @@ still open or pending-gate, L-156 touched as recently as today
 first gallery session that resumes this item -- before anything else in
 the resume handoff is acted on; then a design session for the three open
 questions above; then build (Opus 5) + Mode 5 acceptance.
+**Note (2026-07-29, Tony's explicit sequencing call):** "the cluster
+below" means the WHOLE thing, Phase 4 included -- not just Phases 1-3.
+Once the scanner build ships, this item's own technical blocker (the
+resolver bug, the pinning engine) is gone, and it would be defensible to
+call L-154 "unblocked" at that point. Tony's call is stricter than
+defensible: no interactive/Artifact-2 work resumes until both Gemini
+worksheets (L-157, then L-161+L-078a) are also closed. Deliberate, not an
+oversight -- avoid interleaving data-integrity work with visual-feature
+work; finish one before starting the other. Do not read "Phase 3 shipped"
+as a green light on its own.
 **Ref:** `assemble.py`, `resolver.py`, `render_objects.py`, `presentation.py`;
 `data/solar-system/feature_configs.json`; `data/objects_config.json`;
 `documentation/HANDOFF_gallery_feature_layer_L154_resume.md`;
@@ -4176,7 +4234,50 @@ gate is clear, nothing further blocks the build; (4) Phase 3 also retires
 domain from `module_atlas.py` instead (L-163 review amendment, Fable 5;
 gate was L-163's sweep, now closed -- recorded here so the work item lives
 in the open item a build session reads, not only in L-163's archived
-block and the master plan).
+block and the master plan). (5) widen `build_pinned_values()`/scoring so a bare numeric literal that
+merely matches an already-cited pinned value is flagged
+("possible frozen copy -- verify import") rather than silently granted
+V_SOURCED. This is the actual fix that closes L-158's gap (see L-158's own
+note) -- the inheritance-rule wording alone doesn't catch it. Two confirmed
+live instances to fix alongside it: `comet_visualization_shells.py` lines
+492-493 and 602 (see L-158).
+(6) **Citation-window inheritance fix (verified 2026-07-29 -- independently
+re-measured, exact match).** 66 of the 145 Tier-1 findings (46%) have a
+real block-level `# Source:` citation the scanner's 60-line lookback simply
+doesn't reach -- concentrated in `shell_configs.py` (41; one citation per
+~170-line body block, gap 64-821 lines) and `jupiter_visualization_shells.py`
+(1; a two-line miss). Root cause: `_extract_string_units` walks every
+string constant independently with its own 60-line window, blind to any
+enclosing dict's block citation -- and for `shell_configs.py` specifically,
+`_make_dict_unit` never applies at all, since `SHELL_CONFIGS`/
+`CUSTOM_SHELLS` are single top-level dicts whose values are nested dicts,
+which `_make_dict_unit` explicitly skips. Fix: a string unit nested inside
+a block-cited dict inherits that citation, but inheritance is not
+clearance -- it lands at V3 SOURCED, same pattern as L-158's inheritance
+rule. Must land before Phase 4's worksheets are drafted; it determines
+which findings actually need Gemini. `idealized_orbits.py`'s 24 "beyond
+window" findings do NOT get this treatment -- median gap 2418 lines,
+genuinely distant citations, not the same phenomenon; they stay Tier-1 and
+need the worksheet like any other genuinely uncited claim.
+**Updated Tier prediction** (supersedes `PRELIM_DESIGN_HANDOFF_...part2.md`
+section 3's table; total conserved at 764):
+
+| | Live at HEAD | Predicted after Phase 1 |
+|---|---:|---:|
+| Tier 1 | 145 | **~103** |
+| Tier 2 | 158 | **~532** |
+| Tier 3 | 442 | ~110 |
+| Tier 4 | 19 | ~19 |
+**Note (2026-07-29, decided by Tony):** April 2026 constants verification
+(Claude sourced, Gemini reviewed) accepted as sufficiently verified as-is
+-- it caught two real errors (Arrokoth, Parker) and that's the working bar.
+**Not** promoted to a formal `# Cross-checked:` V2 annotation now; that
+annotation, if ever added, rides the regular Gemini sweep when it reaches
+`constants_new.py` (same as any other file, via L-161's relay) -- not a
+separate task, not a Phase 2 blocker. D6's pinning-engine staging premise
+stands as originally written; Phase 2 is not gated on this question.
+L-078(d)'s F/C bare-degree regex fix folds into this Phase 1 build (same
+`NUMERIC_CLAIM_RE` edit as D8's magnetosphere vocabulary addition).
 **Ref:** `provenance_scanner.py` (`find_cross_file_issues`,
 `CONCEPT_ALIASES`, `NUMERIC_CLAIM_RE`); `constants_new.py`;
 `data/provenance_exceptions.json`; `documentation/provenance_audit_handoff_v1.md`
@@ -4248,9 +4349,32 @@ L-156's build defines its form.
     confirmation it's actually computed) still stands as the mechanism
     for telling the two cases apart -- it just no longer implies an
     automatic V1 grant on its own.
-**Gap:** build -- rides Phase 1 of L-156's scanner build; identify which
-existing `# Derived:` comments in `constants_new.py` are runtime formulas
-vs. frozen literals before assigning either treatment.
+**Note (2026-07-29):** Verified live -- exactly four `# Derived:` comments
+exist repo-wide, all in `constants_new.py` (lines ~100, 104, 126, 130):
+`SOLAR_RADIUS_AU`, `LIGHT_MINUTES_PER_AU`, `CORE_AU`, `RADIATIVE_ZONE_AU`.
+All four are genuine runtime formulas; zero frozen literals are annotated.
+**The inversion:** this item's two-factor detector (comment + AST check)
+can only catch a frozen copy that announces itself. The dangerous ones
+don't -- `CENTER_BODY_RADII['Sun'] = 695700` is a frozen copy of
+`SUN_RADIUS_KM` with no `# Derived:` comment anywhere near it, invisible to
+the mechanism as specified. Same failure class as the
+`close_approach_data.py` stale-copy bug that originally motivated
+`test_constants_provenance.py`. Confirmed live in the wild:
+`comet_visualization_shells.py` lines 492-493 (`SUN_RADIUS_KM = 695700.0`,
+`KM_PER_AU = 149597870.7`, hardcoded, no `# Source:` nearby, despite
+`KM_PER_AU` already being imported at line 42) and line 602
+(`SUN_RADIUS_AU = 695700.0 / 149597870.7`). Neither shows as Tier-1 today
+because `build_pinned_values()` treats any value match against an
+already-cited `constants_new.py` constant as V_SOURCED, whether the match
+is a real import or a bare hand-typed copy.
+**Gap:** rides Phase 1 of L-156's scanner build (unchanged). Two concrete
+pieces, not one: (1) widen `build_pinned_values()`/scoring per L-156's Gap
+item 5 -- the actual fix; (2) separately, fix the two live instances
+directly: delete the local shadow constants in
+`comet_visualization_shells.py` lines 492-493 and 602, import
+`SUN_RADIUS_KM` through the `planet_visualization_utilities` shim alongside
+the existing `KM_PER_AU` import (line 42). Small, mechanical, no
+dependency on (1) -- can land anytime.
 **Ref:** `constants_new.py` derived-constants section; L-156 (holds the
 full ladder this rule attaches to).
 
@@ -4363,11 +4487,40 @@ assuming which ~130 are already clear.
   extraction for 15 of them. D3 is closed (see L-156), so nothing about
   this item's timing depends on it any more -- it can run whenever a
   dedicated session is free.
-**Gap:** dedicated Sonnet session -- fresh SHA pull, safe-file-editing
-discipline (bottom-up, ASCII, py_compile clean), credit line, rewrite
-`CENTER_BODY_RADII` to reference the new names instead of literals.
-**Ref:** `constants_new.py`; `DESIGN_REVIEW_provenance_scoring_and_pinning.md`
-section 3a; L-155; L-156; L-159 (Planet 9 case).
+**Note (2026-07-29, decided by Tony):** Both scope gaps from
+`HANDOFF_L162_scope_gaps.md` resolved. (1) Naming: plain form
+(`MARS_RADIUS_KM`), not type-labeled -- matches the 12 existing live
+aliases in `planet_visualization_utilities.py` and `CONCEPT_ALIASES`'s own
+canonical-key convention. (2) Ownership: this item owns the
+Sun/Earth/Jupiter literal-duplication fix in the same edit -- `L-156`'s Gap
+line stands as written, needs no tightening. (3) Alias layer: re-point
+`planet_visualization_utilities.py`'s 12 existing aliases
+(`MARS_RADIUS_KM = CENTER_BODY_RADII['Mars']`, etc.) to import directly
+from `constants_new.py` instead, explicitly superseding the unrecorded
+"v3.20 Option B" comment (grepped: appears nowhere else in the repo or
+ledger). Without this, 12 same-named cross-file pairs land invisible to
+`find_cross_file_issues()`'s `CONCEPT_ALIASES` lookup -- L-162 would
+silently recreate the duplication problem it exists to fix.
+**Correction:** "15 remaining bodies" reads 14 everywhere in prior docs (18
+dict keys - 3 done - Planet 9 excluded = 14); the named list was always
+right, only the count label was off by one.
+**Gap:** dedicated Sonnet-class session, Phase A (per
+`PRELIM_DESIGN_HANDOFF_provenance_cluster_completion_part2.md` Phase A):
+(1) 14 new plain-form named constants in `constants_new.py`, each keeping
+its existing citation; (2) rewire `CENTER_BODY_RADII` to reference all 17
+names (Sun/Earth/Jupiter included); (3) re-point
+`planet_visualization_utilities.py`'s 12 aliases to import from
+`constants_new.py`; (4) add `CONCEPT_ALIASES` entries for all 14 new names
+-- hard requirement, not optional; (5) pre-flight grep for f-string
+formatting of `CENTER_BODY_RADII[...]` (Sun/Jupiter values change int ->
+float); (6) `py_compile` + ASCII/LF gate + credit line + as-built anchored
+to push SHA. Must land before Phase 3 (pinning engine). Independent of
+Phase 0 and Phase 1.
+**Ref:** `constants_new.py`; `planet_visualization_utilities.py`;
+`DESIGN_REVIEW_provenance_scoring_and_pinning.md` section 3a;
+`HANDOFF_L162_scope_gaps.md`;
+`PRELIM_DESIGN_HANDOFF_provenance_cluster_completion_part2.md` Phase A;
+L-155; L-156; L-159 (Planet 9 case).
 
 ---
 
@@ -4635,6 +4788,49 @@ phase). NOT to be confused with L-167 ("Artifact-1 field notes --
 orrery-coding-conventions still missing three entries" -- unrelated
 Plotly-rendering topic, assigned in the same window; pure numbering
 coincidence). Anchored: built on orrery 0d13fbb9 / gallery f4ce24cb.
+
+#### [L-170] Tier-1 exit-code flip -- capture so it doesn't float
+<!-- L:170 status:OPEN upd:2026-07-29 section:W.Active flag: rice:2/2/90/0.5 -->
+- **What.** D7 (`DESIGN_HANDOFF_provenance_scoring_and_pinning.md`) wired
+  the Tier-1 nonzero exit code but switched it off, "recorded as its own
+  small ledger item so the flip doesn't float." It floated -- no such item
+  existed until this one. The console banner ships with Phase 1; the
+  exit-code flip itself is a one-line change, thrown the first time a live
+  run reaches Tier-1 = 0.
+**Gap:** flip the exit code on when Tier-1 first reaches 0 in a real run.
+Not gated on anything else in this cluster -- a "remember to do this later"
+placeholder.
+**Ref:** `DESIGN_HANDOFF_provenance_scoring_and_pinning.md` D7;
+`PRELIM_DESIGN_HANDOFF_provenance_cluster_completion_part2.md` section 6
+item 9; L-156 (Phase 1, banner).
+
+#### [L-172] Phase 0 record-hygiene batch (provenance cluster prep)
+<!-- L:172 status:OPEN upd:2026-07-29 section:W.Active flag: rice:3/2/95/1 -->
+- **What.** Small, independent, unblocked corrections a later session
+  would otherwise trust as-is. Bundled as one checklist since none
+  individually needs its own future reference:
+  1. `MODULE_DOMAIN_MAP` entries for `orrery_rendering.py` and
+     `shell_configs.py` (both currently silent-defaulting to `orrery` in
+     the domain-coverage-gap report).
+  2. Fix the L-157/L-161 swap in
+     `HANDOFF_gallery_feature_layer_L154_resume.md` section 3 -- it
+     credits the shell-config ring/belt/atmosphere cross-check to
+     "L-161"; that work is L-157's.
+  3. Carry the 15 -> 14 correction into this ledger's own prose wherever
+     "15 remaining bodies" still appears, and into master plan section 6
+     (see Section 3 below).
+  4. Reinstall `gallery-assembler` SKILL.md from the repo copy -- installed
+     copy carries CRLF line endings (118 confirmed, 0 bare LF),
+     byte-identical content otherwise; came from a Windows path that
+     bypassed the LF gate.
+  5. Correct `MASTER_PLAN_INTERACTIVE_GALLERY.md`'s path in any reused
+     prompt template -- it lives at `documentation/MASTER_PLAN_...`, not
+     repo root.
+**Gap:** all five are mechanical, no design decision needed, no dependency
+on Phases A/1/2/3. Land in the same session as L-164 (dep_trace.py ASCII
+bytes) -- same shape of work.
+**Ref:** `PRELIM_DESIGN_HANDOFF_provenance_cluster_completion_part2.md`
+Tony-action rollup; L-163; L-164.
 
 ### W.Done -- closed items, kept with the track
 
