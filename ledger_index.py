@@ -524,6 +524,39 @@ def fmt_id(b):
     return f"L-{b['L']} (#{b['alias']})" if b['alias'] else f"L-{b['L']}"
 
 
+def find_retired_handles(blocks):
+    """Handle numbers with no block, between 1 and the highest handle in
+    use. Under the append-only convention (nothing is ever renumbered),
+    these are almost always a draft handle assigned to something that
+    was superseded before it ever landed -- never reuse them. Reported
+    here so the live+closed count and the max handle number don't look
+    like an unexplained mismatch (L-166/167/168 renumbering saga,
+    July 2026)."""
+    used = {int(b['L']) for b in blocks}
+    if not used:
+        return []
+    return [n for n in range(1, max(used) + 1) if n not in used]
+
+
+def fmt_retired(nums):
+    """Render a sorted list of ints as zero-padded, range-collapsed
+    handles, e.g. [59, 81, 82, 83, 84] -> 'L-059, L-081-084'."""
+    if not nums:
+        return ''
+    ranges = []
+    start = prev = nums[0]
+    for n in nums[1:]:
+        if n == prev + 1:
+            prev = n
+            continue
+        ranges.append((start, prev))
+        start = prev = n
+    ranges.append((start, prev))
+    parts = [f"L-{lo:03d}" if lo == hi else f"L-{lo:03d}-{hi:03d}"
+             for lo, hi in ranges]
+    return ', '.join(parts)
+
+
 def build_index(blocks):
     # Group ALL blocks (including section C) by their canonical section,
     # normalizing tag aliases (e.g. PENDING -> B).
@@ -547,8 +580,12 @@ def build_index(blocks):
     total = len(open_blocks)
     gaps = sum(1 for b in open_blocks if b['status'] in GAP_STATUS)
     scored = sum(1 for b in open_blocks if compute_score(b['rice']) is not None)
+    retired = find_retired_handles(blocks)
+    retired_clause = (f" {len(retired)} retired (never reused): {fmt_retired(retired)}."
+                       if retired else "")
     out.append(f"*{total} live items; {gaps} need attention (`!`); {scored} RICE-scored; "
-               f"{closed_n} closed (section C + {'/'.join(sorted(TRACK_DONE_BUCKETS))}). "
+               f"{closed_n} closed (section C + {'/'.join(sorted(TRACK_DONE_BUCKETS))});"
+               f"{retired_clause} "
                "Find an `L-0NN` handle (Ctrl+F in VS Code) "
                "to jump to any item; search `| ! |` to list every gap. See \"Using and maintaining this "
                "ledger\" above for details.*")
