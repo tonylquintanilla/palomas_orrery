@@ -419,7 +419,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | DONE | 2.2 | 2026-07-15 |
 |  | L-063 | Orrery GUI Note text update | DONE | 2.0 | 2026-07-17 |
 |  | L-072 | Gallery Studio WYSIWYG preview -- render through the real index.html viewer | DONE | 2.0 | 2026-06-26 |
-|  | L-166 | Gallery/Studio track -- repo structure reference | DONE | 1.9 | 2026-07-28 |
+|  | L-169 | Gallery/Studio track -- repo structure reference | DONE | 1.9 | 2026-07-28 |
 |  | L-108 | Master plan v10 -> v11: Phase 1b fetch-fresh pivot reconciliation | DONE | 1.8 | 2026-07-12 |
 |  | L-002 | Protocol -> Skills refactor (process/tooling) | DONE | 1.5 | 2026-07-04 |
 |  | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | DONE | 1.5 | 2026-06-23 |
@@ -2586,8 +2586,8 @@ user-facing; real but not huge impact; high confidence, same proven
 pattern as two existing scripts; low effort, extends existing code
 rather than building new) -- yours to finalize.
 
-#### [L-166] Gallery/Studio track -- repo structure reference
-<!-- L:166 status:DONE upd:2026-07-28 section:C flag: rice:1/1/95/0.5 -->
+#### [L-169] Gallery/Studio track -- repo structure reference
+<!-- L:169 status:DONE upd:2026-07-28 section:C flag: rice:1/1/95/0.5 -->
 - **What.** This reference sat as unlabeled prose under the "## H."
   header since the June-10 consolidation -- Tony flagged it ("needs
   L-number, header, and update") but it was never converted. Closing
@@ -3450,7 +3450,7 @@ if a specific use case surfaces that heliocentric can't serve.
 
 ## H. GALLERY / STUDIO TRACK (website repo; low-activity)
 
-**See L-166** for this section's repo-structure reference (converted
+**See L-169** for this section's repo-structure reference (converted
 from long-standing unlabeled preamble, 2026-07-28).
 
 #### [L-058] Open Studio items (May-5 handoff, checked @2f40d9d)
