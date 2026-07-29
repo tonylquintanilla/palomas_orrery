@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*100 live items; 89 need attention (`!`); 99 RICE-scored; 62 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*101 live items; 90 need attention (`!`); 100 RICE-scored; 62 closed (section C + O.Done/W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -364,6 +364,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-156 | Provenance scanner scoring model fix -- criticality (category-based) + vulnerability recalibration + comprehensive sweep | OPEN | 5.3 | 2026-07-28 |
 | ! | L-155 | Cross-repo constants/geometry pinning checks -- built INTO provenance_scanner.py, not a standalone script | PENDING-GATE | 4.5 | 2026-07-27 |
 | ! | L-119 | event_link hardcoded None in the builder (F2, gates artifact 7) | OPEN | 3.6 | 2026-07-15 |
+| ! | L-168 | propagate_marker uses solar K_GAUSS mean-motion -- wrong for planetocentric moon markers (FLAG-2; caught in F1 design, avoided in serving, source fix still open) | OPEN | 3.6 | 2026-07-28 |
 | ! | L-161 | Gemini sweep -- clear the display-string Tier-2 backlog | OPEN | 3.1 | 2026-07-27 |
 | ! | L-157 | Gemini cross-check of shell config ring/belt/atmosphere geometry values | OPEN | 2.5 | 2026-07-27 |
 | ! | L-166 | F1b: per-object trust enforcement + soft-edge trust UX (resolver/client consumption of served trust blocks) | OPEN | 2.4 | 2026-07-28 |
@@ -4544,6 +4545,76 @@ build. Sequence relative to L-154 (feature JS layer) is Tony's call.
 **Ref:** L-118/L-149 (F1a, closed), L-150, L-126, L-080 (fingerprint),
 M2_IMPLEMENTATION_REPORT.md, FABLE_PROMPT_served_window_trust_bound_v0_1.md
 and its response (July 2026 relay); resolver.py resolve() (~91-106).
+
+#### [L-168] propagate_marker uses solar K_GAUSS mean-motion -- wrong for planetocentric moon markers (FLAG-2; caught in F1 design, avoided in serving, source fix still open)
+<!-- L:168 status:OPEN upd:2026-07-28 section:W.Active flag: rice:3/3/80/2 -->
+- **What.** `gallery/assembler/render_orbits.py` `propagate_marker()`
+  computes mean motion as `n = K_GAUSS / (a ** 1.5)` (line 90 @ gallery
+  f4ce24cb), where `K_GAUSS = sqrt(GM_sun)`. Correct ONLY for heliocentric
+  bodies. For a planetocentric moon -- served from its OWN osculating conic
+  in the parent-relative frame, so `a` is the tiny moon-parent semi-major
+  axis in AU -- solar GM is the wrong gravitational parameter, and the
+  propagated as-of-today marker lands wrong by ~3 orders of magnitude.
+  [verified @f4ce24cb]
+- **Worked number.** Moon a ~ 0.00257 AU -> n = 0.01720209895 / 0.00257^1.5
+  ~ 132 rad/day -> implied period ~ 68 minutes, versus the real 27.32-day
+  sidereal month. Independently re-derived. This is the same catch GPT's F1
+  manifest missed and the Fable/GPT competitive cross-check surfaced (see
+  MASTER_PLAN_INTERACTIVE_GALLERY.md, "New in v14").
+- **Caught != fixed.** F1/M2 (L-118 / L-149) was DESIGNED to avoid this: the
+  serving pipeline captures Horizons' own `n` and emits `n_deg_per_day`, and
+  the builder never calls `propagate_marker` (FLAG-2 comments at
+  gallery_cache_builder.py lines 67, 341, and the derivation note ~372-380).
+  But avoiding it in the serving path did not change `propagate_marker`
+  itself -- render_orbits.py was correctly out of M2's edit scope, so the
+  wrong formula is still at HEAD and `propagate_marker` is on a LIVE
+  dispatch path: `gallery/assembler/assemble.py:62` calls it to place the
+  position marker for every object that has osculating elements.
+  [verified @f4ce24cb]
+- **Dormant, not benign.** Only Artifact 1 (Earth, heliocentric) is built
+  and Mode-5 accepted in the interactive assembler today, so the live path
+  only ever feeds a heliocentric body, where the formula is correct. It
+  becomes a visibly wrong marker the moment a planetocentric moon renders --
+  Artifact 2 (Jupiter/Saturn) and Artifact 3 (Moon/Io/Titan), the objects
+  L-154's feature-rendering layer unblocks. The trigger for this bug and the
+  trigger for L-154 are the same event.
+- **Fix approach (not built; design choice for its session).** The correct
+  `n` is already in the served data (`n_deg_per_day` on the osculating
+  block). Preferred: thread the served `n` into `propagate_marker` and use
+  it directly instead of deriving from `a` ("fetched, not recalled" -- use
+  Horizons' measured mean motion); alternative: pass the correct
+  central-body GM per frame. Either removes the solar-GM assumption. Small,
+  targeted change to one function plus the `obj.osculating` payload that
+  reaches it; guard the no-`n` case (WARN/skip, never a silent solar-GM
+  fallback). Confirm on Earth's existing Mode-5 harness (no heliocentric
+  regression) before a moon artifact.
+
+**Tony:** documentation-only capture (repo moved twice since the original
+F1 build; no code touched this session). Gives the caught-but-unfixed bug
+a handle so it cannot fall through when L-154 / Artifact 2 resumes.
+Renumbered twice on the way in -- L-166 draft -> L-167 draft -> this L-168
+-- purely from handle collisions as other sessions landed unrelated items
+in the same window; the underlying finding never changed.
+
+**Gap:** land the `propagate_marker` fix (use served `n`, drop solar-GM
+derivation, guard no-`n`) BEFORE or WITH the L-154 JS feature-rendering
+layer, so the first Jupiter/Saturn/moon render carries correct marker
+positions; re-run Earth Mode-5 as the no-regression gate.
+
+**Ref:** `gallery/assembler/render_orbits.py` (propagate_marker, line 90 @
+f4ce24cb); `gallery/assembler/assemble.py:62` (live call site);
+`gallery/assembler/tests/test_artifact1_earth.py:81` (test call site);
+`tools/gallery_cache_builder.py` FLAG-2 comments (67, 341, ~372-380);
+`documentation/M2_IMPLEMENTATION_REPORT.md`;
+`documentation/PHASE2_F1_BUILD_MANIFEST_v2_2.md` (FLAG-2 origin);
+MASTER_PLAN_INTERACTIVE_GALLERY.md ("New in v14"). Coupled to L-154 (same
+trigger; DISTINCT bug -- L-154's resolver `tuple(dict)` drops feature
+PARAMETERS; this drops marker POSITION accuracy). Sibling to L-166 (F1b
+trust consumption -- distinct concern, same assembler / pre-Artifact-2
+phase). NOT to be confused with L-167 ("Artifact-1 field notes --
+orrery-coding-conventions still missing three entries" -- unrelated
+Plotly-rendering topic, assigned in the same window; pure numbering
+coincidence). Anchored: built on orrery 0d13fbb9 / gallery f4ce24cb.
 
 ### W.Done -- closed items, kept with the track
 

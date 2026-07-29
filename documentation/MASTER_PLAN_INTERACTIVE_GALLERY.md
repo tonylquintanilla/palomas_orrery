@@ -18,7 +18,11 @@ CONVERGED July 16, 2026, via the same competitive cross-check pattern as
 Phase 2's assembler design (Fable + GPT independent manifests, comparative
 review, reconciled into PHASE2_F1_BUILD_MANIFEST_v2.md) -- catching a real,
 high-impact bug (planetocentric mean-motion in `propagate_marker`) GPT's
-manifest missed entirely. See "New in v14" below.
+manifest missed entirely. Purpose: the existing text reads as
+"handled"; this makes the caught-vs-fixed distinction explicit and
+points to the handle. (Distinct from L-166, the trust-consumption item
+referenced later in this section, and from L-167, an unrelated
+rendering-conventions item.) See "New in v14" below.
 F1a (M2, trust/served_window) fully closed July 21-22: L-149 built, tested
 offline (138/138) AND live -- Layer 2 Steps 1-5 all passed (five dry-runs,
 --first-build, --nightly, resolver date-picker, fetch-cost note). L-118
