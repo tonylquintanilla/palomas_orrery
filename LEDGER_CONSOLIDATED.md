@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*101 live items; 90 need attention (`!`); 100 RICE-scored; 62 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*101 live items; 90 need attention (`!`); 100 RICE-scored; 63 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -419,6 +419,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | DONE | 2.2 | 2026-07-15 |
 |  | L-063 | Orrery GUI Note text update | DONE | 2.0 | 2026-07-17 |
 |  | L-072 | Gallery Studio WYSIWYG preview -- render through the real index.html viewer | DONE | 2.0 | 2026-06-26 |
+|  | L-166 | Gallery/Studio track -- repo structure reference | DONE | 1.9 | 2026-07-28 |
 |  | L-108 | Master plan v10 -> v11: Phase 1b fetch-fresh pivot reconciliation | DONE | 1.8 | 2026-07-12 |
 |  | L-002 | Protocol -> Skills refactor (process/tooling) | DONE | 1.5 | 2026-07-04 |
 |  | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | DONE | 1.5 | 2026-06-23 |
@@ -2584,6 +2585,64 @@ class of devtool/process work (modest reach -- internal tooling, not
 user-facing; real but not huge impact; high confidence, same proven
 pattern as two existing scripts; low effort, extends existing code
 rather than building new) -- yours to finalize.
+
+#### [L-166] Gallery/Studio track -- repo structure reference
+<!-- L:166 status:DONE upd:2026-07-28 section:C flag: rice:1/1/95/0.5 -->
+- **What.** This reference sat as unlabeled prose under the "## H."
+  header since the June-10 consolidation -- Tony flagged it ("needs
+  L-number, header, and update") but it was never converted. Closing
+  that gap, and re-verifying every claim fresh rather than just wrapping
+  the old prose as-is.
+- **Repo source.** https://github.com/tonylquintanilla/tonyquintanilla.github.io
+  -- owner WITH the 'l', repo name WITHOUT; branch main; public; custom
+  domain palomasorrery.com. Studio file confirmed still at
+  `tools/gallery_studio.py` (NOT root) [verified 2026-07-28 @d49fd0b3].
+- **Docs split**, both sides re-confirmed present [verified 2026-07-28]:
+  gallery repo `documentation/` holds `web_gallery_handoff.md` +
+  `3d_axis_control_handoff.md`; orrery repo `documentation/` holds the
+  encounter-export design set incl. `ENCOUNTER_EXPORT_HANDOFF_v3.md`.
+- **"Low-activity" framing in the section title is now stale.** True as
+  of June 10; not true today -- gallery-cache-builder/gallery-assembler
+  work (L-098, L-149-151) and the interactive-gallery Phase 2 push have
+  made this repo an active track. Section title left untouched
+  (structural, not this item's call); flagging so a future session
+  doesn't inherit a stale "low-activity" assumption.
+- **No Studio running ledger** by design -- still holds; stand one up
+  only if Studio-specific (not builder/assembler) work resumes in volume.
+- **Joined items already correctly cross-referenced, not orphaned:** N6
+  = L-046 (OPEN), item 19 = L-040 (OPEN) -- both carry proper L-handles
+  and live in their own sections; this was always a pointer, not a
+  duplicate home.
+**Gap:** none -- reference/structure note, not an action item.
+**Ref:** L-046, L-040, L-098, L-149, L-150, L-151.
+
+#### [L-166] F1b: per-object trust enforcement + soft-edge trust UX (resolver/client consumption of served trust blocks)
+<!-- L:166 status:OPEN upd:2026-07-28 section:W.Active flag: rice:2/3/80/2 -->
+- **What.** F1a (M2) serves per-object trust blocks nightly, dormant -- nothing
+  consumes them. F1b is the consumption side: resolver.py/cache_reader.py read
+  per-object windows instead of the one global gate (L-149 limitation note;
+  L-150 gap, binaries-scoped line); global served_window demoted to an outer
+  sanity bound. Touches locked code: deliberate golden-fingerprint re-open
+  (L-080 harness), one small reviewed diff, not absorbed silently.
+- **UX design (converged in the July 2026 Mode 7 trust-bound relay, Sonnet 5 +
+  Fable 5; Tony's stated preference: indicator, not hard block):** shaded
+  high-confidence band on the date picker; per-object degradation past each
+  object's own window (fast moons ghost first -- teaches perturbation);
+  along-track uncertainty arc rendered from the served error rate
+  (Show-the-Envelope convention, made literal); positive framing ("range we
+  can vouch for"); hard OutOfServedWindowError reserved for an outer sanity
+  cap only. Client cost is O(1) arithmetic per scrub tick -- rate is served.
+- **Riders, capture-not-decide:** (1) tolerance_deg=0.5 adopted as a global
+  constant; whether tolerance eventually belongs to the VIEW (scene-scale vs
+  close-up) is open -- adjacent to L-150's scale-of-view voting. (2) Trust
+  window must not span a known close encounter (two-body invalid across it);
+  moot for Apophis today (323.5 d window vs 2029), stops being moot as 2029
+  approaches -- cross-note with L-126.
+**Gap:** design session first (fingerprint re-open scope + UX wiring), then
+build. Sequence relative to L-154 (feature JS layer) is Tony's call.
+**Ref:** L-118/L-149 (F1a, closed), L-150, L-126, L-080 (fingerprint),
+M2_IMPLEMENTATION_REPORT.md, FABLE_PROMPT_served_window_trust_bound_v0_1.md
+and its response (July 2026 relay); resolver.py resolve() (~91-106).
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
@@ -3391,22 +3450,8 @@ if a specific use case surfaces that heliocentric can't serve.
 
 ## H. GALLERY / STUDIO TRACK (website repo; low-activity)
 
-(Unchanged this pass; carried verbatim from the June-10 edition.)
-
-- **Repo source.** https://github.com/tonylquintanilla/tonyquintanilla.github.io
-  -- owner WITH the 'l', repo name WITHOUT; branch main; public; HEAD
-  verified June 8 == `2f40d9d`; custom domain palomasorrery.com; Studio file
-  tools/gallery_studio.py (NOT root). Uploaded Studio byte-identical
-  @2f40d9d.
-- **Docs split:** WEBSITE repo documentation/ holds web_gallery_handoff.md +
-  3d_axis_control_handoff.md `[verified @2f40d9d]`; ORRERY repo
-  documentation/ holds the encounter-export design set incl.
-  ENCOUNTER_EXPORT_HANDOFF_v3.md `[verified @730b2bf]`.
-- **No Studio running ledger** by design (stand one up only if Studio work
-  resumes in volume).
-- **Joined items:** N6 (Bucket C) and item 19 (Bucket A) -- tracked in their
-  orrery homes, cross-referenced here.
-**Tony:** needs L-number, header, and update. 
+**See L-166** for this section's repo-structure reference (converted
+from long-standing unlabeled preamble, 2026-07-28).
 
 #### [L-058] Open Studio items (May-5 handoff, checked @2f40d9d)
 <!-- L:058 status:OPEN upd:2026-06-08 section:H flag: rice:3/3/50/3 -->
@@ -4521,34 +4566,6 @@ step is the main new wrinkle, given the repo is public.
 **Ref:** L-149/L-118 (served_window/trust), CNAME (confirms the domain),
 M2 testing protocol addendum (Layer 3 background).
 
-#### [L-166] F1b: per-object trust enforcement + soft-edge trust UX (resolver/client consumption of served trust blocks)
-<!-- L:166 status:OPEN upd:2026-07-28 section:W.Active flag: rice:2/3/80/2 -->
-- **What.** F1a (M2) serves per-object trust blocks nightly, dormant -- nothing
-  consumes them. F1b is the consumption side: resolver.py/cache_reader.py read
-  per-object windows instead of the one global gate (L-149 limitation note;
-  L-150 gap, binaries-scoped line); global served_window demoted to an outer
-  sanity bound. Touches locked code: deliberate golden-fingerprint re-open
-  (L-080 harness), one small reviewed diff, not absorbed silently.
-- **UX design (converged in the July 2026 Mode 7 trust-bound relay, Sonnet 5 +
-  Fable 5; Tony's stated preference: indicator, not hard block):** shaded
-  high-confidence band on the date picker; per-object degradation past each
-  object's own window (fast moons ghost first -- teaches perturbation);
-  along-track uncertainty arc rendered from the served error rate
-  (Show-the-Envelope convention, made literal); positive framing ("range we
-  can vouch for"); hard OutOfServedWindowError reserved for an outer sanity
-  cap only. Client cost is O(1) arithmetic per scrub tick -- rate is served.
-- **Riders, capture-not-decide:** (1) tolerance_deg=0.5 adopted as a global
-  constant; whether tolerance eventually belongs to the VIEW (scene-scale vs
-  close-up) is open -- adjacent to L-150's scale-of-view voting. (2) Trust
-  window must not span a known close encounter (two-body invalid across it);
-  moot for Apophis today (323.5 d window vs 2029), stops being moot as 2029
-  approaches -- cross-note with L-126.
-**Gap:** design session first (fingerprint re-open scope + UX wiring), then
-build. Sequence relative to L-154 (feature JS layer) is Tony's call.
-**Ref:** L-118/L-149 (F1a, closed), L-150, L-126, L-080 (fingerprint),
-M2_IMPLEMENTATION_REPORT.md, FABLE_PROMPT_served_window_trust_bound_v0_1.md
-and its response (July 2026 relay); resolver.py resolve() (~91-106).
-
 #### [L-168] propagate_marker uses solar K_GAUSS mean-motion -- wrong for planetocentric moon markers (FLAG-2; caught in F1 design, avoided in serving, source fix still open)
 <!-- L:168 status:OPEN upd:2026-07-28 section:W.Active flag: rice:3/3/80/2 -->
 - **What.** `gallery/assembler/render_orbits.py` `propagate_marker()`
@@ -4952,8 +4969,19 @@ M2_TESTING_PROTOCOL_ADDENDUM.md (Layer 2 steps).
   the mismatch was caught. Skill version drift is a real failure class,
   same shape as an unpushed SHA.
 **Gap:** none -- documentation only. Skill Manifest table bumped to 1.2 alongside.
+**Note (2026-07-28, addendum):** Same gap recurred twice more, closing
+both here rather than opening new handles for what's the same tracked
+fact (this skill's version history). **v1.3** [cut @ae803766, July 24
+2026]: adds the Tony-action (do)/(decide) tag convention and its rollup
+rule, surfaced during the L-163 build-prep session when a builder
+session had to hunt Tony-only to-dos scattered through a handoff with
+no consistent tag. **v1.4** [cut @ca9c706e, July 26 2026]: rewrites the
+Codebase Tooling ROLE_MAP bullet for L-163 Phase 3 -- a new module is
+now classified by tagging its own docstring, not by hand-adding a
+ROLE_MAP entry, since ROLE_MAP became a regenerated mirror. Both were
+already self-documented in the skill file's own header changelog; nothing
+factual was missing, just this ledger-side pointer.
 **Ref:** skills/ledger-and-session-records/SKILL.md @ 1.2; L-149/L-150/L-151.
-
 
 #### [L-120] Halley configured but not yet in the served index (F3, gates artifact 4)
 <!-- L:120 status:DONE upd:2026-07-27 section:W.Done flag: rice:2/2/95/0.5 -->
