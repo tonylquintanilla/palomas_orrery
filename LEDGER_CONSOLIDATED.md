@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*103 live items; 92 need attention (`!`); 102 RICE-scored; 64 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*102 live items; 91 need attention (`!`); 101 RICE-scored; 65 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -360,7 +360,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-160 | test_constants_provenance.py -- retire once fully absorbed, not before | OPEN | 8.1 | 2026-07-27 |
-| ! | L-162 | CENTER_BODY_RADII full de-duplication -- dedicated Sonnet session | OPEN | 8.1 | 2026-07-27 |
 | ! | L-172 | Phase 0 record-hygiene batch (provenance cluster prep) | OPEN | 5.7 | 2026-07-29 |
 | ! | L-158 | Derived-constant vulnerability inheritance rule (revised from a proposed rung, 2026-07-27) | OPEN | 5.6 | 2026-07-27 |
 | ! | L-156 | Provenance scanner scoring model fix -- criticality (category-based) + vulnerability recalibration + comprehensive sweep | OPEN | 5.3 | 2026-07-28 |
@@ -457,6 +456,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 |  | L-118 | feature_configs.json served empty every build (F1, gates artifact 2) | DONE | 8.1 | 2026-07-21 |
+|  | L-162 | CENTER_BODY_RADII full de-duplication -- dedicated Sonnet session | DONE | 8.1 | 2026-07-29 |
 |  | L-120 | Halley configured but not yet in the served index (F3, gates artifact 4) | DONE | 7.6 | 2026-07-27 |
 |  | L-170 | Tier-1 exit-code flip -- capture so it doesn't float | DONE | 7.2 | 2026-07-29 |
 |  | L-085 | LICENSE to repo root | DONE | 4.0 | 2026-07-03 |
@@ -4467,65 +4467,6 @@ assuming which ~130 are already clear.
 
 ---
 
-#### [L-162] CENTER_BODY_RADII full de-duplication -- dedicated Sonnet session
-<!-- L:162 status:OPEN upd:2026-07-27 section:W.Active flag: rice:3/3/90/1 -->
-- **What.** Promote all 15 remaining `CENTER_BODY_RADII` bodies (Mercury,
-  Venus, Moon, Mars, Phobos, Saturn, Uranus, Neptune, Pluto, Bennu, Eris,
-  Haumea, Makemake, Arrokoth) to named module-level constants in
-  `constants_new.py`, each keeping its existing citation. **Excludes
-  Planet 9** (model estimate, never directly observed -- carries to L-159
-  instead).
-- **Confirmed 2026-07-27 (Sonnet 5, live HEAD): not started.** Only
-  Sun/Earth/Jupiter are named; `CENTER_BODY_RADII` still hardcodes all
-  three as raw literals (695700, 6378.137, 71492) rather than referencing
-  the names -- so even the original 3-body-minimum hasn't landed. Every
-  dict entry does carry a good inline citation already; that's not what's
-  missing. What's missing is promotion to its own named constant so each
-  body scores as its own scanner row instead of one undifferentiated dict.
-- **Why now, not "eventually":** simplifies L-155's Phase 3 pinning engine
-  -- pins against all 17 named constants directly. Planet 9's pinning
-  exclusion (decided; master plan section 6) means zero dict-path AST
-  extraction remains, not 15 -- simpler than originally scoped. D3 is
-  closed (see L-156), so nothing about
-  this item's timing depends on it any more -- it can run whenever a
-  dedicated session is free.
-**Note (2026-07-29, decided by Tony):** Both scope gaps from
-`HANDOFF_L162_scope_gaps.md` resolved. (1) Naming: plain form
-(`MARS_RADIUS_KM`), not type-labeled -- matches the 12 existing live
-aliases in `planet_visualization_utilities.py` and `CONCEPT_ALIASES`'s own
-canonical-key convention. (2) Ownership: this item owns the
-Sun/Earth/Jupiter literal-duplication fix in the same edit -- `L-156`'s Gap
-line stands as written, needs no tightening. (3) Alias layer: re-point
-`planet_visualization_utilities.py`'s 12 existing aliases
-(`MARS_RADIUS_KM = CENTER_BODY_RADII['Mars']`, etc.) to import directly
-from `constants_new.py` instead, explicitly superseding the unrecorded
-"v3.20 Option B" comment (grepped: appears nowhere else in the repo or
-ledger). Without this, 12 same-named cross-file pairs land invisible to
-`find_cross_file_issues()`'s `CONCEPT_ALIASES` lookup -- L-162 would
-silently recreate the duplication problem it exists to fix.
-**Correction:** "15 remaining bodies" reads 14 everywhere in prior docs (18
-dict keys - 3 done - Planet 9 excluded = 14); the named list was always
-right, only the count label was off by one.
-**Gap:** dedicated Sonnet-class session, Phase A (per
-`PRELIM_DESIGN_HANDOFF_provenance_cluster_completion_part2.md` Phase A):
-(1) 14 new plain-form named constants in `constants_new.py`, each keeping
-its existing citation; (2) rewire `CENTER_BODY_RADII` to reference all 17
-names (Sun/Earth/Jupiter included); (3) re-point
-`planet_visualization_utilities.py`'s 12 aliases to import from
-`constants_new.py`; (4) add `CONCEPT_ALIASES` entries for all 14 new names
--- hard requirement, not optional; (5) pre-flight grep for f-string
-formatting of `CENTER_BODY_RADII[...]` (Sun/Jupiter values change int ->
-float); (6) `py_compile` + ASCII/LF gate + credit line + as-built anchored
-to push SHA. Must land before Phase 3 (pinning engine). Independent of
-Phase 0 and Phase 1.
-**Ref:** `constants_new.py`; `planet_visualization_utilities.py`;
-`DESIGN_REVIEW_provenance_scoring_and_pinning.md` section 3a;
-`HANDOFF_L162_scope_gaps.md`;
-`PRELIM_DESIGN_HANDOFF_provenance_cluster_completion_part2.md` Phase A;
-L-155; L-156; L-159 (Planet 9 case).
-
----
-
 ### W.Deferred -- captured, not yet actionable
 
 #### [L-091] Option E: unified front end
@@ -5264,6 +5205,76 @@ it actually stands.
 superseded); `DESIGN_REVIEW_provenance_scoring_and_pinning.md` section 3c
 (the amendment that actually governs); L-156 (Phase 1, the permanent
 banner this item mistakenly proposed replacing with an exit gate).
+
+#### [L-162] CENTER_BODY_RADII full de-duplication -- dedicated Sonnet session
+<!-- L:162 status:DONE upd:2026-07-29 section:W.Done flag: rice:3/3/90/1 -->
+- **What.** Promote all 15 remaining `CENTER_BODY_RADII` bodies (Mercury,
+  Venus, Moon, Mars, Phobos, Saturn, Uranus, Neptune, Pluto, Bennu, Eris,
+  Haumea, Makemake, Arrokoth) to named module-level constants in
+  `constants_new.py`, each keeping its existing citation. **Excludes
+  Planet 9** (model estimate, never directly observed -- carries to L-159
+  instead).
+- **Confirmed 2026-07-27 (Sonnet 5, live HEAD): not started.** Only
+  Sun/Earth/Jupiter are named; `CENTER_BODY_RADII` still hardcodes all
+  three as raw literals (695700, 6378.137, 71492) rather than referencing
+  the names -- so even the original 3-body-minimum hasn't landed. Every
+  dict entry does carry a good inline citation already; that's not what's
+  missing. What's missing is promotion to its own named constant so each
+  body scores as its own scanner row instead of one undifferentiated dict.
+- **Why now, not "eventually":** simplifies L-155's Phase 3 pinning engine
+  -- pins against all 17 named constants directly. Planet 9's pinning
+  exclusion (decided; master plan section 6) means zero dict-path AST
+  extraction remains, not 15 -- simpler than originally scoped. D3 is
+  closed (see L-156), so nothing about
+  this item's timing depends on it any more -- it can run whenever a
+  dedicated session is free.
+**Note (2026-07-29, decided by Tony):** Both scope gaps from
+`HANDOFF_L162_scope_gaps.md` resolved. (1) Naming: plain form
+(`MARS_RADIUS_KM`), not type-labeled -- matches the 12 existing live
+aliases in `planet_visualization_utilities.py` and `CONCEPT_ALIASES`'s own
+canonical-key convention. (2) Ownership: this item owns the
+Sun/Earth/Jupiter literal-duplication fix in the same edit -- `L-156`'s Gap
+line stands as written, needs no tightening. (3) Alias layer: re-point
+`planet_visualization_utilities.py`'s 12 existing aliases
+(`MARS_RADIUS_KM = CENTER_BODY_RADII['Mars']`, etc.) to import directly
+from `constants_new.py` instead, explicitly superseding the unrecorded
+"v3.20 Option B" comment (grepped: appears nowhere else in the repo or
+ledger). Without this, 12 same-named cross-file pairs land invisible to
+`find_cross_file_issues()`'s `CONCEPT_ALIASES` lookup -- L-162 would
+silently recreate the duplication problem it exists to fix.
+**Correction:** "15 remaining bodies" reads 14 everywhere in prior docs (18
+dict keys - 3 done - Planet 9 excluded = 14); the named list was always
+right, only the count label was off by one.
+**Gap:** dedicated Sonnet-class session, Phase A (per
+`PRELIM_DESIGN_HANDOFF_provenance_cluster_completion_part2.md` Phase A):
+(1) 14 new plain-form named constants in `constants_new.py`, each keeping
+its existing citation; (2) rewire `CENTER_BODY_RADII` to reference all 17
+names (Sun/Earth/Jupiter included); (3) re-point
+`planet_visualization_utilities.py`'s 12 aliases to import from
+`constants_new.py`; (4) add `CONCEPT_ALIASES` entries for all 14 new names
+-- hard requirement, not optional; (5) pre-flight grep for f-string
+formatting of `CENTER_BODY_RADII[...]` (Sun/Jupiter values change int ->
+float); (6) `py_compile` + ASCII/LF gate + credit line + as-built anchored
+to push SHA. Must land before Phase 3 (pinning engine). Independent of
+Phase 0 and Phase 1.
+**Ref:** `constants_new.py`; `planet_visualization_utilities.py`;
+`DESIGN_REVIEW_provenance_scoring_and_pinning.md` section 3a;
+`HANDOFF_L162_scope_gaps.md`;
+`PRELIM_DESIGN_HANDOFF_provenance_cluster_completion_part2.md` Phase A;
+L-155; L-156; L-159 (Planet 9 case).
+**As-built (2026-07-29, Sonnet 5):** Built and verified against
+`90d022e`. All 6 Gap items landed: 14 named constants, `CENTER_BODY_RADII`
+rewired to all 17 names, 9 aliases re-pointed in
+`planet_visualization_utilities.py`, 14 `CONCEPT_ALIASES` entries added,
+pre-flight int/float check done (Sun + Jupiter only, no consumer at
+risk), `py_compile` + ASCII/LF clean. `test_constants_provenance.py`:
+73/73 passed. Scanner re-run: 764 -> 778 findings (+14, exactly the new
+constants), Tier 1 unchanged at 145, zero new inconsistencies. Full
+diffs: `AS_BUILT_L162_phaseA.md` + three `.patch` files. Ready to push;
+credit lines added to `constants_new.py`, `planet_visualization_utilities.py`,
+`provenance_scanner.py`.
+
+---
 ### W.Cross-references -- existing items that interact with the web track
 
 - **L-026** -- CRLF to LF on `palomas_orrery_helpers.py`. Companion to L-087.
