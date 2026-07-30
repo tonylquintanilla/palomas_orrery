@@ -4360,6 +4360,7 @@ separate task, not a Phase 2 blocker. D6's pinning-engine staging premise
 stands as originally written; Phase 2 is not gated on this question.
 L-078(d)'s F/C bare-degree regex fix folds into this Phase 1 build (same
 `NUMERIC_CLAIM_RE` edit as D8's magnetosphere vocabulary addition).
+Note (2026-07-30, 1b landed): Built on ac07419, pushed at bf36743 [verified @bf36743 — remote HEAD match, reason-string re-execution confirmed]. Tier 1 = 156 (unchanged — invariant held, highest reachable score on the changed path is 15, one below the Tier-1 floor of 16). Tier 2 = 181→563, Tier 3 = 430→60, Tier 4 = 14→2, total 781 conserved. Carried one 1a follow-up: CRIT_ABSOLUTE_OVERRIDE emptied (CENTER_BODY_RADII now holds only the Planet 9 raw literal post-Phase-A, confirmed in constants_new.py). Gap item (3): 1b DONE; 1c next.
 **Ref:** `provenance_scanner.py` (`find_cross_file_issues`,
 `CONCEPT_ALIASES`, `NUMERIC_CLAIM_RE`); `constants_new.py`;
 `data/provenance_exceptions.json`; `documentation/provenance_audit_handoff_v1.md`
