@@ -290,10 +290,27 @@ from module_atlas import build_dependency_graph, classify_role
 # ============================================================
 
 # Vulnerability: how likely is this fact to be wrong?
-V_FETCHED  = 1   # From authoritative pipeline at runtime
-V_SOURCED  = 2   # Hardcoded but has citation
-V_STALE    = 3   # Was sourced but may have changed
-V_RECALLED = 4   # From LLM training data, no citation
+# The four-rung ladder settled in L-156 after three-AI calibration.
+V_FETCHED       = 1   # From an authoritative pipeline at runtime
+V_CROSS_CHECKED = 2   # Independently cross-checked against dated evidence,
+                      # blind (the checker was not shown our value). NEVER
+                      # auto-promotable to V_FETCHED at any rigor level --
+                      # the scanner can observe that a check is claimed, not
+                      # that it was rigorous.
+                      # NOTHING SETS THIS YET. Population arrives with the
+                      # `# Cross-checked:` annotation recognition in D4;
+                      # until then this rung is intentionally empty rather
+                      # than dead code.
+V_SOURCED       = 3   # Cited, but never independently cross-checked.
+                      # Absorbs the former V_STALE rung -- see the reason
+                      # strings in score_unit for the retained distinction.
+V_RECALLED      = 4   # From model training data, no citation
+
+# Retained alias. V_STALE and V_SOURCED are the same rung as of L-156; the
+# name is kept because the accepted-residuals prose and the exceptions file
+# both still speak of "V_STALE staleness flags", and silently deleting the
+# name would make that vocabulary unresolvable rather than merged.
+V_STALE = V_SOURCED
 
 # Criticality: what's the impact if it IS wrong?
 C_COSMETIC    = 1   # Colors, label positions, descriptive text
@@ -358,13 +375,16 @@ CRIT_INTERNAL_ROLES = ('devtool', 'gui', 'cache')
 CRIT_PHYSICAL_ROLES = ('data', 'computation')
 
 # Names whose suffix reads relational but whose values are absolute.
-# CENTER_BODY_RADII stores kilometres, not multiples of a base radius, so
-# the '_radii' stem would misfile the project's central radius dict.
-# NOTE: this becomes moot once L-162 (Phase A) rewires the dict to
-# reference named *_RADIUS_KM constants -- the values become Name nodes,
-# the dict yields no numeric entries, and the named constants are scored
-# directly instead. Re-check after Phase A lands.
-CRIT_ABSOLUTE_OVERRIDE = ('CENTER_BODY_RADII',)
+# Empty as of Phase A (L-162). CENTER_BODY_RADII needed the override while
+# it held 17 raw kilometre literals -- the '_radii' stem would have
+# misfiled the project's central radius dict as RELATIONAL. Phase A moved
+# those 17 to named *_RADIUS_KM constants, which the '_km' suffix scores
+# MEASURED directly. The dict now yields exactly ONE numeric entry --
+# Planet 9, deliberately left a raw literal as a model estimate excluded
+# from pinning per L-159 -- so forcing MEASURED on it would assert
+# catalogued-fact criticality over an explicitly illustrative value.
+# Re-checked after Phase A landed, per the note this comment replaces.
+CRIT_ABSOLUTE_OVERRIDE = ()
 
 
 def action_tier(score):
@@ -1262,14 +1282,19 @@ def score_unit(unit, imported_names, pinned_values=None):
             cited = True
             unit.vuln_reason = "Cited via pinned constant in constants_new.py"
 
+    # D3 ladder (L-156). STALE is no longer a rung of its own: a cited
+    # value that has never been independently cross-checked carries the
+    # same vulnerability whether or not it also looks date-sensitive, so
+    # both land on V_SOURCED. The distinction is preserved in the REASON,
+    # which is where it was always the useful information.
     if cited and stale:
-        unit.vuln = V_STALE
-        unit.vuln_reason = "Sourced but potentially stale"
+        unit.vuln = V_SOURCED
+        unit.vuln_reason = "Cited, not cross-checked; date-sensitive"
     elif cited:
         unit.vuln = V_SOURCED
-        unit.vuln_reason = "Has source citation"
+        unit.vuln_reason = "Cited, not independently cross-checked"
     elif stale:
-        unit.vuln = V_STALE
+        unit.vuln = V_SOURCED
         unit.vuln_reason = "No source, contains date-sensitive claims"
     else:
         unit.vuln = V_RECALLED
