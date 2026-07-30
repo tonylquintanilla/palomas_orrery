@@ -943,6 +943,24 @@ a reclassification, not new work. The Gemini worksheet L-078/L-161 sequence
 now starts with the paleoclimate and sgr_a families instead of
 `shell_configs.py`. Full detail: L-156 Gap item 6, L-078's note.
 
+**Build progress, 2026-07-29: 1a landed.** Phase 1 is sub-stepped 1a-1f
+for clean attribution (each step gets its own audit diff before the next
+starts). 1a (D1/D2 criticality classification) is built and verified
+against live HEAD `bdaaa0c`: Tier 1 rose to 156 (up from 145) -- correct,
+not a regression; raising criticality can promote a previously-buried
+uncited fact into Tier 1 for the first time. Two things surfaced during
+the build: a role-veto amendment (ratified -- prevents devtool/gui/cache
+config from misfiring as physical facts) and a third recognition gap,
+distinct from the citation-window issue above -- the scanner doesn't
+recognize a bare author-year citation as a citation at all, only
+`# Source:`-style keywords. This makes 1d (not yet built) look like
+Phase 1's largest single Tier-1 reducer, and undercuts starting the
+Gemini worksheet with paleoclimate -- several of those findings are
+already correctly cited. 1b is next (not 1d pulled forward -- reordering
+doesn't change the final Phase 1 outcome, only invalidates predictions
+already on record for no gain). Full detail: L-156's Note, this same
+date.
+
 **L-163 — Module role/domain classification redesign (ROLE_MAP + MODULE_DOMAIN_MAP).**
 ✓ Role-side CLOSED, all 4 phases (Opus 5 + Sonnet 5, July 24-26 2026).
 Design (Sonnet 5) reviewed by Fable 5, both confirmed build-ready; full

@@ -362,7 +362,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-160 | test_constants_provenance.py -- retire once fully absorbed, not before | OPEN | 8.1 | 2026-07-27 |
 | ! | L-172 | Phase 0 record-hygiene batch (provenance cluster prep) | OPEN | 5.7 | 2026-07-29 |
 | ! | L-158 | Derived-constant vulnerability inheritance rule (revised from a proposed rung, 2026-07-27) | OPEN | 5.6 | 2026-07-27 |
-| ! | L-156 | Provenance scanner scoring model fix -- criticality (category-based) + vulnerability recalibration + comprehensive sweep | OPEN | 5.3 | 2026-07-28 |
+| ! | L-156 | Provenance scanner scoring model fix -- criticality (category-based) + vulnerability recalibration + comprehensive sweep | OPEN | 5.3 | 2026-07-29 |
 | ! | L-155 | Cross-repo constants/geometry pinning checks -- built INTO provenance_scanner.py, not a standalone script | PENDING-GATE | 4.5 | 2026-07-27 |
 | ! | L-119 | event_link hardcoded None in the builder (F2, gates artifact 7) | OPEN | 3.6 | 2026-07-15 |
 | ! | L-168 | propagate_marker uses solar K_GAUSS mean-motion -- wrong for planetocentric moon markers (FLAG-2; caught in F1 design, avoided in serving, source fix still open) | OPEN | 3.6 | 2026-07-28 |
@@ -4143,7 +4143,7 @@ motivating bug: `close_approach_data.py`'s stale `CENTER_BODY_RADII` copy);
 ---
 
 #### [L-156] Provenance scanner scoring model fix -- criticality (category-based) + vulnerability recalibration + comprehensive sweep
-<!-- L:156 status:OPEN upd:2026-07-28 section:W.Active flag: rice:5/4/80/3 -->
+<!-- L:156 status:OPEN upd:2026-07-29 section:W.Active flag: rice:5/4/80/3 -->
 - **What.** `provenance_scanner.py`'s scoring currently mis-prioritizes
   exactly the data this cluster depends on: `SUN_RADIUS_KM` /
   `EARTH_EQUATORIAL_RADIUS_KM` / `JUPITER_EQUATORIAL_RADIUS_KM` score 6
@@ -4227,8 +4227,14 @@ motivating bug: `close_approach_data.py`'s stale `CENTER_BODY_RADII` copy);
   vocabulary; the comet accepted-residual that contradicts the new scheme;
   "Option A" retired.
 **Gap:** (1) fix the `CENTER_BODY_RADII` duplication per L-162 (separate
-dedicated session); (2) resolve the five comprehensive-sweep items;
-(3) build Phases 1-3 (Opus 5) against the decided ladder above -- the D3
+dedicated session) -- **DONE, L-162 closed 2026-07-29;** (2) resolve the
+five comprehensive-sweep items; (3) build Phases 1-3 (Opus 5) against the
+decided ladder above, sub-stepped 1a-1f for clean attribution --
+**1a DONE (2026-07-29, see Note below); 1b next.** 1c-1f remain: 1c
+citation-window inheritance (Gap item 6), 1d citation-recognition regexes
++ D8 vocab + L-078(d) (Gap item 5, now also carrying the citation-form
+gap, item 7 below), 1e banners/labels/Tier-2 sub-band, 1f the D9
+structural check (see L-158); (4) Phase 3 also retires -- the D3
 gate is clear, nothing further blocks the build; (4) Phase 3 also retires
 `MODULE_DOMAIN_MAP`/`DOMAIN_LABELS` in `provenance_scanner.py` and imports
 domain from `module_atlas.py` instead (L-163 review amendment, Fable 5;
@@ -4259,6 +4265,15 @@ which findings actually need Gemini. `idealized_orbits.py`'s 24 "beyond
 window" findings do NOT get this treatment -- median gap 2418 lines,
 genuinely distant citations, not the same phenomenon; they stay Tier-1 and
 need the worksheet like any other genuinely uncited claim.
+**Updated Tier prediction** genuinely distant citations, not the same phenomenon; they stay Tier-1 and
+need the worksheet like any other genuinely uncited claim.
+(7) **Citation-form recognition gap (found 2026-07-29, during 1a).**
+`has_citation`/`SOURCE_PATTERNS` doesn't recognize a bare author-year
+parenthetical as a citation -- only `# Source:`/`# Verified:` keywords or
+a URL. Real, verified instances exist (`TW_SURVIVABILITY_BIOLOGICAL`,
+`TW_SURVIVABILITY_THEORETICAL`); measured at ~54 of 156 Tier-1 findings
+but not independently confirmed at that precision -- re-measure when 1d
+actually lands. Belongs in 1d alongside item (5)'s D4 regex work.
 **Updated Tier prediction** (supersedes `PRELIM_DESIGN_HANDOFF_...part2.md`
 section 3's table; total conserved at 764):
 
@@ -4268,6 +4283,73 @@ section 3's table; total conserved at 764):
 | Tier 2 | 158 | **~532** |
 | Tier 3 | 442 | ~110 |
 | Tier 4 | 19 | ~19 |
+
+**1a built and verified (2026-07-29).** Landed against HEAD `459fecd1`
+(pre-Phase-A baseline), independently re-verified by me against the
+actual pushed state at `bdaaa0c` after a first attempt silently failed to
+execute (caught by a scanner re-run; see `safe-file-editing` skill v1.1
+Field Notes for the process lesson). Result on the combined
+Phase-A-plus-1a state: 781 findings, **Tier 1 = 156** (up from 145 -- see
+below), Tier 2 = 181, Tier 3 = 430, Tier 4 = 14. `undetermined` count:
+**5**, not the 62 (D2-as-written) or 40 (widened vocabulary alone) the
+design discussion estimated -- role as a classification input (per
+Tony's approval) closed the rest: `comet_visualization_info`,
+`TW_SURVIVABILITY_BIOLOGICAL`, `TW_SURVIVABILITY_THEORETICAL`,
+`ROTATION_AXIS_OMITTED`, `REFERENCE_YEAR`.
+
+**Tier 1 growing is correct, not a regression.** The cluster's own
+earlier prediction (Tier 1 stays flat through 1a, since all current
+Tier-1 findings are strings) was wrong -- raising a constant's
+criticality from low to MEASURED can promote a previously-buried,
+uncited physical fact *into* Tier 1 for the first time. Verified
+directly: `COMET_NUCLEUS_SIZES`, `planet_tilts`,
+`BASELINE_ABSOLUTE_TEMP`, `B_STAR_TEMPERATURES` and others were sitting
+in Tier 2/3 specifically because volume-based scoring undercounted them
+-- D1 working as designed. The "Updated Tier prediction" table above is
+superseded by this; a corrected end-of-Phase-1 prediction should wait
+until 1d lands (see below), since 1d now looks like a bigger mover than
+1b/1c.
+
+**Role-veto amendment -- ratified (2026-07-29).** Breaks the earlier
+approval that role would only fill in where a name match was absent,
+never override one. Necessary: without it, `HUB_THRESHOLD` (devtool,
+matches `threshold`), `MAX_DATA_AGE_DAYS` (cache, matches `_days`), and
+`PERFRAME_INDICATOR_RADIUS_FACTOR` (gui, matches `radius`) all scored
+MEASURED and landed uncited tool config in Tier 1 -- the exact failure
+D1 exists to prevent, reintroduced through a generic stem. Verified
+directly, both directions: all three now correctly score
+"Internal (role ...)", while `BASELINE_ABSOLUTE_TEMP` and
+`B_STAR_TEMPERATURES` (genuine physical facts, different roles) still
+correctly score MEASURED. Costs nothing legitimate.
+
+**A third recognition gap, found during 1a (2026-07-29) -- reshapes 1d
+and Phase 4.** Distinct from the two already in Gap item (6): this one
+is citation *form*, not distance or nesting. `has_citation`/
+`SOURCE_PATTERNS` only recognizes `# Source:`/`# Verified:` keywords or
+a URL -- a bare author-year parenthetical (`# empirical limit (Vecellio
+et al.)`) matches nothing. Verified directly:
+`TW_SURVIVABILITY_BIOLOGICAL` and `TW_SURVIVABILITY_THEORETICAL` are
+genuinely, correctly cited (Vecellio et al. 2022; Sherwood & Huber 2010
+-- real, well-known thresholds) and still score V4 RECALLED, "no source
+citation." The scanner accusing a cited value of being uncited is
+cite-to-clear's mirror image -- same integrity failure, opposite
+direction. Measured at 54 of 156 Tier-1 findings (14/9/8 in
+`shell_configs.py`/`paleoclimate_wet_bulb_full.py`/`idealized_orbits.py`)
+-- **I could not independently reproduce this exact count** with a quick
+approximation (got 19 with a looser pattern, different per-file split);
+the underlying mechanism is solidly confirmed, the precise number isn't,
+pending 1d's actual pattern-matching. This means 1d (where D4's
+recognition regexes live) is likely Phase 1's single largest Tier-1
+reducer, not a minor step, and undercuts the plan to start the Gemini
+worksheet with the paleoclimate family -- several of those already name
+their sources correctly.
+
+**Sequencing decided: 1b next, not 1d pulled forward (2026-07-29).**
+These are independent scoring passes recomputed fresh each run, not a
+stateful migration -- final end-of-Phase-1 state is identical regardless
+of 1b/1d order. Reordering would only invalidate the predictions above
+for no gain, since Phase 4 doesn't start until after all of 1a-1f
+regardless of their internal order.
 **Note (2026-07-29, decided by Tony):** April 2026 constants verification
 (Claude sourced, Gemini reviewed) accepted as sufficiently verified as-is
 -- it caught two real errors (Arrokoth, Parker) and that's the working bar.
