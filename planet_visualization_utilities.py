@@ -30,6 +30,11 @@ Module updated: May 11, 2026 by Claude Opus 4.6 and 4.7 and Tony. (Sphere marker
 Module updated: June 2026 with Anthropic's Claude Opus 4.8
 (shared create_bow_shock_shape extracted from 4 inline copies; conic-section model)
 
+Module updated: July 2026 with Anthropic's Claude Sonnet 5 (L-162: nine
+radius aliases -- Mercury, Venus, Moon, Mars, Saturn, Uranus, Neptune,
+Pluto, Eris -- now imported directly from constants_new.py instead of
+re-derived from CENTER_BODY_RADII; same values, same names)
+
 Role: rendering
 Domain: orrery
 """
@@ -40,6 +45,11 @@ import plotly.graph_objs as go
 from constants_new import (
     KM_PER_AU, SUN_RADIUS_KM, LIGHT_MINUTES_PER_AU, KNOWN_ORBITAL_PERIODS,
     CENTER_BODY_RADII,
+    # L-162 (2026-07-29): named directly in constants_new.py now; these
+    # nine no longer derive from a CENTER_BODY_RADII lookup below.
+    MERCURY_RADIUS_KM, VENUS_RADIUS_KM, MOON_RADIUS_KM, MARS_RADIUS_KM,
+    SATURN_RADIUS_KM, URANUS_RADIUS_KM, NEPTUNE_RADIUS_KM, PLUTO_RADIUS_KM,
+    ERIS_RADIUS_KM,
     # Solar structure
     SOLAR_RADIUS_AU, CORE_AU, RADIATIVE_ZONE_AU,
     # Solar atmosphere (in solar radii)
@@ -57,50 +67,52 @@ from constants_new import (
 # Shell modules consume these short names dozens of times each.
 # Source of truth: CENTER_BODY_RADII in constants_new.py.
 # See v3.20 protocol Option B: utility layer owns aliases, not constants_new.
+# UPDATE (L-162, 2026-07-29): for the nine bodies below whose local alias
+# name exactly matched a name now defined in constants_new.py (Mercury,
+# Venus, Moon, Mars, Saturn, Uranus, Neptune, Pluto, Eris), that name is
+# imported directly above instead of re-derived from CENTER_BODY_RADII --
+# same value, one less lookup, and no more same-named pair invisible to
+# provenance_scanner.py's CONCEPT_ALIASES check. Earth, Jupiter, Planet 9
+# keep their original alias name (EARTH_RADIUS_KM etc., not the same
+# string as constants_new.py's EARTH_EQUATORIAL_RADIUS_KM) and are
+# unaffected -- outside L-162's scope.
 
-# Mercury Constants
-MERCURY_RADIUS_KM = CENTER_BODY_RADII['Mercury']        
+# Mercury Constants (MERCURY_RADIUS_KM imported directly above; see L-162)
 MERCURY_RADIUS_AU = MERCURY_RADIUS_KM / KM_PER_AU
 
-# Venus Constants
-VENUS_RADIUS_KM = CENTER_BODY_RADII['Venus']
+# Venus Constants (VENUS_RADIUS_KM imported directly above; see L-162)
 VENUS_RADIUS_AU = VENUS_RADIUS_KM / KM_PER_AU
 
 # Earth Constants
 EARTH_RADIUS_KM = CENTER_BODY_RADII['Earth']
 EARTH_RADIUS_AU = EARTH_RADIUS_KM / KM_PER_AU
 
-# Moon Constants
-MOON_RADIUS_KM = CENTER_BODY_RADII['Moon']
+# Moon Constants (MOON_RADIUS_KM imported directly above; see L-162)
 MOON_RADIUS_AU = MOON_RADIUS_KM / KM_PER_AU
 
-# Mars Constants
-MARS_RADIUS_KM = CENTER_BODY_RADII['Mars']  # JPL uses an equipotential virtual surface with a mean radius at the equator as the Mars datum. 
+# Mars Constants (MARS_RADIUS_KM imported directly above; see L-162)
+# JPL uses an equipotential virtual surface with a mean radius at the
+# equator as the Mars datum.
 MARS_RADIUS_AU = MARS_RADIUS_KM / KM_PER_AU  # Convert to AU
 
 # Jupiter Constants
 JUPITER_RADIUS_KM = CENTER_BODY_RADII['Jupiter']  # Equatorial radius in km
 JUPITER_RADIUS_AU = JUPITER_RADIUS_KM / KM_PER_AU  # Convert to AU
 
-# Saturn Constants
-SATURN_RADIUS_KM = CENTER_BODY_RADII['Saturn']  # Equatorial radius in km
+# Saturn Constants (SATURN_RADIUS_KM imported directly above; see L-162)
 SATURN_RADIUS_AU = SATURN_RADIUS_KM / KM_PER_AU  # Convert to AU
 
-# Uranus Constants
-URANUS_RADIUS_KM = CENTER_BODY_RADII['Uranus']  # Equatorial radius in km
+# Uranus Constants (URANUS_RADIUS_KM imported directly above; see L-162)
 URANUS_RADIUS_AU = URANUS_RADIUS_KM / KM_PER_AU  # Convert to AU
 
-# Neptune Constants
-NEPTUNE_RADIUS_KM = CENTER_BODY_RADII['Neptune']  # Equatorial radius in km
+# Neptune Constants (NEPTUNE_RADIUS_KM imported directly above; see L-162)
 NEPTUNE_RADIUS_AU = NEPTUNE_RADIUS_KM / KM_PER_AU  # Convert to AU
 
-# Pluto Constants
-PLUTO_RADIUS_KM = CENTER_BODY_RADII['Pluto']  # Equatorial radius in km
+# Pluto Constants (PLUTO_RADIUS_KM imported directly above; see L-162)
 PLUTO_RADIUS_AU = PLUTO_RADIUS_KM / KM_PER_AU  # Convert to AU
 
-# Eris Constants
-# ERIS_RADIUS_KM = CENTER_BODY_RADII['Eris/Dysnomia']  # Equatorial radius in km
-ERIS_RADIUS_KM = CENTER_BODY_RADII['Eris']  # Equatorial radius in km
+# Eris Constants (ERIS_RADIUS_KM imported directly above; see L-162)
+# ERIS_RADIUS_KM = CENTER_BODY_RADII['Eris/Dysnomia']  # Equatorial radius in km -- historical, kept for context
 ERIS_RADIUS_AU = ERIS_RADIUS_KM / KM_PER_AU  # Convert to AU
 
 # Planet 9 Constants

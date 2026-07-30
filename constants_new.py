@@ -37,6 +37,10 @@ Domain: orrery
 
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 Reviewed: April 2026 by Google Gemini (Mode 7 cross-verification)
+
+Module updated: July 2026 with Anthropic's Claude Sonnet 5 (L-162: 14
+remaining CENTER_BODY_RADII bodies promoted to named constants; value
+and citation carried forward unchanged from each dict entry)
 """
 
 import numpy as np
@@ -241,25 +245,81 @@ PARKER_CLOSEST_RADII = 9.86
 #   usage analysis; prior volumetric values caused ~2.3% position error
 #   for Jupiter-scaled shells like Io torus).
 
+# ------------------------------------------------------------
+# Named constants (L-162, 2026-07-29): the 14 remaining bodies,
+# promoted from CENTER_BODY_RADII dict entries to their own named
+# constant, same pattern as SUN_RADIUS_KM / EARTH_EQUATORIAL_RADIUS_KM /
+# JUPITER_EQUATORIAL_RADIUS_KM above. Value and citation carried forward
+# unchanged from the dict entry each replaces -- no new sourcing done
+# in this pass. Planet 9 excluded (model estimate; L-159).
+# ------------------------------------------------------------
+
+MERCURY_RADIUS_KM = 2439.7
+# Source: NASA Fact Sheet (volumetric mean; oblateness ~0.0009)
+
+VENUS_RADIUS_KM = 6051.8
+# Source: NASA Fact Sheet (volumetric mean; oblateness ~0)
+
+MOON_RADIUS_KM = 1737.4
+# Source: NASA Fact Sheet (volumetric mean; oblateness ~0.0012)
+
+MARS_RADIUS_KM = 3396.2
+# Source: IAU 2015 nominal equatorial (volumetric = 3389.5)
+
+PHOBOS_RADIUS_KM = 11.1
+# Source: NASA/JPL Solar System Dynamics group
+
+SATURN_RADIUS_KM = 60268
+# Source: IAU 2015 nominal equatorial (volumetric = 58232)
+
+URANUS_RADIUS_KM = 25559
+# Source: IAU 2015 nominal equatorial (volumetric = 25362)
+
+NEPTUNE_RADIUS_KM = 24764
+# Source: IAU 2015 nominal equatorial (volumetric = 24622)
+
+PLUTO_RADIUS_KM = 1188.3
+# Source: New Horizons occultation (Nimmo et al. 2017)
+
+BENNU_RADIUS_KM = 0.262
+# Source: Volumetric mean (top-shape asteroid, OSIRIS-REx)
+
+ERIS_RADIUS_KM = 1163
+# Source: Volumetric mean (Sicardy et al. 2011 occultation)
+
+HAUMEA_RADIUS_KM = 816
+# Source: Volumetric mean (highly ellipsoidal: 1050x840x537 km)
+
+MAKEMAKE_RADIUS_KM = 715
+# Source: Volumetric mean (Brown et al.)
+
+ARROKOTH_RADIUS_KM = 9.95
+# Source: Volumetric mean (~35x20x14 km bilobed shape)
+# Corrected 2026-04-15 per Gemini review (was 0.0088 = 8.8 meters!)
+
 CENTER_BODY_RADII = {       # km (equatorial for major bodies, volumetric for small)
-    'Sun':      695700,     # IAU 2015 nominal solar radius
-    'Mercury':  2439.7,     # NASA Fact Sheet (volumetric mean; oblateness ~0.0009)
-    'Venus':    6051.8,     # NASA Fact Sheet (volumetric mean; oblateness ~0)
-    'Earth':    6378.137,   # IAU 2015 nominal equatorial (WGS-84; polar = 6356.752)
-    'Moon':     1737.4,     # NASA Fact Sheet (volumetric mean; oblateness ~0.0012)
-    'Mars':     3396.2,     # IAU 2015 nominal equatorial (volumetric = 3389.5)
-    'Phobos':   11.1,       # NASA/JPL Solar System Dynamics group
-    'Jupiter':  71492,      # IAU 2015 nominal equatorial (volumetric = 69911)
-    'Saturn':   60268,      # IAU 2015 nominal equatorial (volumetric = 58232)
-    'Uranus':   25559,      # IAU 2015 nominal equatorial (volumetric = 25362)
-    'Neptune':  24764,      # IAU 2015 nominal equatorial (volumetric = 24622)
-    'Pluto':    1188.3,     # New Horizons occultation (Nimmo et al. 2017)
-    'Bennu':    0.262,      # Volumetric mean (top-shape asteroid, OSIRIS-REx)
-    'Eris':     1163,       # Volumetric mean (Sicardy et al. 2011 occultation)
-    'Haumea':   816,        # Volumetric mean (highly ellipsoidal: 1050x840x537 km)
-    'Makemake': 715,        # Volumetric mean (Brown et al.)
-    'Arrokoth': 9.95,       # Volumetric mean (~35x20x14 km bilobed shape)
-                            # Corrected 2026-04-15 per Gemini review (was 0.0088 = 8.8 meters!)
+    # L-162 (2026-07-29): all 17 named bodies now reference their own
+    # named constant below instead of a raw literal -- Sun/Earth/Jupiter
+    # were already named; Mercury through Arrokoth are newly promoted in
+    # this pass. Planet 9 stays a raw literal -- model estimate, excluded
+    # from promotion and from pinning per L-159.
+    'Sun':      SUN_RADIUS_KM,
+    'Mercury':  MERCURY_RADIUS_KM,
+    'Venus':    VENUS_RADIUS_KM,
+    'Earth':    EARTH_EQUATORIAL_RADIUS_KM,
+    'Moon':     MOON_RADIUS_KM,
+    'Mars':     MARS_RADIUS_KM,
+    'Phobos':   PHOBOS_RADIUS_KM,
+    'Jupiter':  JUPITER_EQUATORIAL_RADIUS_KM,
+    'Saturn':   SATURN_RADIUS_KM,
+    'Uranus':   URANUS_RADIUS_KM,
+    'Neptune':  NEPTUNE_RADIUS_KM,
+    'Pluto':    PLUTO_RADIUS_KM,
+    'Bennu':    BENNU_RADIUS_KM,
+    'Eris':     ERIS_RADIUS_KM,
+    'Haumea':   HAUMEA_RADIUS_KM,
+    'Makemake': MAKEMAKE_RADIUS_KM,
+    'Arrokoth': ARROKOTH_RADIUS_KM,
     'Planet 9': 24000       # Model estimate (Batygin & Brown; 5-10 M_Earth assumption)
 }
 
