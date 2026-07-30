@@ -831,7 +831,8 @@ gated behind a provenance/scoring detour that opened while scoping it (see
 
 Detour status as of 2026-07-29: design and ledger phases CLOSED; scanner build IN PROGRESS.
 Phase 1 (Opus 5, sub-stepped 1a-1f) has 1a and 1b landed and pushed (bf36743);
-1c-1f remain. All nine items (L-154-162) now have their own
+1c-1f remain. 1c's predesign is done and independently verified (Sonnet 5, 2026-07-30) — ready to build directly, no separate design round needed. It also found a real citation gap distinct from the scanner bug it was scoping: shell_configs.py has 8 body blocks with no citation at all, 18 Tier-1 findings among them, tracked as L-173. Revised Phase-1 prediction: Tier 1 ~132 after 1c, not ~114.
+All nine items (L-154-162) now have their own
 ledger entries (previously handoff-only); a Fable 5 broad-review pass
 independently caught two stale claims before they could mislead a future
 session (L-154's own resume handoff wrongly asserted its resolver bug was
@@ -963,6 +964,8 @@ already on record for no gain). Full detail: L-156's Note, this same
 date.
 
 Build progress, 2026-07-29: 1b landed. Built on ac07419, pushed at bf36743 — verified via remote HEAD match and via reason-string re-execution (post-patch audit carries the new "cited, not independently cross-checked"/"date-sensitive" reasons 565 times, the old "has source citation"/"potentially stale" text zero times). Tier 1 held exactly at 156 (the invariant L-156 predicted: the highest score reachable on the changed path is 15, one below the Tier-1 floor of 16). Tier 2 rose 181→563 and Tier 3 fell 430→60 as the former V_STALE population merged into V_SOURCED; Tier 4 fell 14→2; total conserved at 781. One 1a follow-up landed alongside: CRIT_ABSOLUTE_OVERRIDE emptied now that Phase A left CENTER_BODY_RADII with only the Planet 9 raw literal. 1c (citation-window inheritance, ~42-unit Tier-1 reduction) is next.
+
+Build progress, 2026-07-30: 1c predesign verified. Opus 5's predesign for the citation-window inheritance fix (L-156 Gap item 6) was independently re-verified against live HEAD (657542f) rather than accepted on its tables -- every headline figure held except one internal table split (22/1 -> 21/2, same total). The predesign corrected its own earlier estimate: yield is 23 inheriting findings, not 42, and surfaced 18 genuine uncited-block gaps in shell_configs.py now tracked as L-173. idealized_orbits.py's exclusion was re-confirmed on a structural basis (zero findings inside its one cited block) rather than the original, incorrect distance argument. Approved to build directly; no design round needed. Full detail: L-156's Note this date, L-173, PREDESIGN_1c_citation_inheritance.md.
 
 **L-163 — Module role/domain classification redesign (ROLE_MAP + MODULE_DOMAIN_MAP).**
 ✓ Role-side CLOSED, all 4 phases (Opus 5 + Sonnet 5, July 24-26 2026).

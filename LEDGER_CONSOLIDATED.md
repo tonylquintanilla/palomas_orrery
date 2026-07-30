@@ -4247,6 +4247,8 @@ V_SOURCED. This is the actual fix that closes L-158's gap (see L-158's own
 note) -- the inheritance-rule wording alone doesn't catch it. Two confirmed
 live instances to fix alongside it: `comet_visualization_shells.py` lines
 492-493 and 602 (see L-158).
+[SUPERSEDED 2026-07-30 — see Note below and L-173. The 66/42/median-2418
+figures in this paragraph are wrong; kept for history, not for building from.]
 (6) **Citation-window inheritance fix (verified 2026-07-29 -- independently
 re-measured, exact match).** 66 of the 145 Tier-1 findings (46%) have a
 real block-level `# Source:` citation the scanner's 60-line lookback simply
@@ -4361,6 +4363,9 @@ stands as originally written; Phase 2 is not gated on this question.
 L-078(d)'s F/C bare-degree regex fix folds into this Phase 1 build (same
 `NUMERIC_CLAIM_RE` edit as D8's magnetosphere vocabulary addition).
 Note (2026-07-30, 1b landed): Built on ac07419, pushed at bf36743 [verified @bf36743 — remote HEAD match, reason-string re-execution confirmed]. Tier 1 = 156 (unchanged — invariant held, highest reachable score on the changed path is 15, one below the Tier-1 floor of 16). Tier 2 = 181→563, Tier 3 = 430→60, Tier 4 = 14→2, total 781 conserved. Carried one 1a follow-up: CRIT_ABSOLUTE_OVERRIDE emptied (CENTER_BODY_RADII now holds only the Planet 9 raw literal post-Phase-A, confirmed in constants_new.py). Gap item (3): 1b DONE; 1c next.
+Note (2026-07-30, 1c predesign verified): Opus 5's predesign (PREDESIGN_1c_citation_inheritance.md, built on 657542f) re-measured Gap item 6 with the scanner's actual citation patterns instead of a narrow grep, and every figure in it changed. Independently re-verified by Sonnet 5 against live source and the real PROVENANCE_AUDIT.md — all headline numbers confirmed exact. Yield is 23, not 42 (21 in SHELL_CONFIGS, 2 in CUSTOM_SHELLS — corrects the predesign's own internal table, which said 22/1; same total). jupiter_visualization_shells.py's ring_params (function-local, citation at line 897, dict opens 906, finding at 959 — 62-line gap) confirmed exact. idealized_orbits.py's exclusion re-confirmed but on a different, correct basis: 24 findings, 7418-line file, all beyond its single 11-line cited block (lines 57-67) — zero fall inside, a structural fact, not the median-gap-2418 distance argument originally given (real median is 266, indistinguishable from shell_configs.py's own gaps — distance is the wrong discriminator for this fix). New finding, tracked separately as L-173: 18 of shell_configs.py's 41 Tier-1 findings sit in body blocks with no citation at all — genuine gaps, not window misses. Updated prediction: Tier 1 156 -> ~132 (not ~114 carried forward pre-predesign); Tier 2 563 -> ~586; Tier 3/4 unchanged. Mechanism recommendation (precomputed range table over AST parent-tracking) and its edge cases (no fallback for uncited blocks, innermost-block-wins, no cross-dict inheritance, multi-line citation capture, explicit-scope-declaration handling, lookback pinned at 15) all verified sound. Gap item (3): 1c predesign DONE and verified; ready to build. Fix the 22/1 table in the predesign doc itself before using it as the build reference.
+
+Add to Ref: PREDESIGN_1c_citation_inheritance.md; L-173.
 **Ref:** `provenance_scanner.py` (`find_cross_file_issues`,
 `CONCEPT_ALIASES`, `NUMERIC_CLAIM_RE`); `constants_new.py`;
 `data/provenance_exceptions.json`; `documentation/provenance_audit_handoff_v1.md`
@@ -4844,6 +4849,19 @@ on Phases A/1/2/3. Land in the same session as L-164 (dep_trace.py ASCII
 bytes) -- same shape of work.
 **Ref:** `PRELIM_DESIGN_HANDOFF_provenance_cluster_completion_part2.md`
 Tony-action rollup; L-163; L-164.
+
+[L-173] shell_configs.py -- 8 body blocks missing source citations entirely (found during 1c predesign measurement)
+<!-- L:173 status:OPEN upd:2026-07-30 section:W.Active flag: rice:3/3/70/3 -->
+What. 1c's predesign measurement (L-156 Gap item 6) surfaced a real, previously-hidden gap, distinct from the lookback-window bug it was measuring: 8 of shell_configs.py's 24 body blocks carry no # Source: citation of any kind. Three of the eight (CUSTOM_SHELLS['Moon'], CUSTOM_SHELLS['Pluto'], CUSTOM_SHELLS['Sun']) contribute zero Tier-1 findings currently and need no immediate action beyond eventual sourcing. The other five carry 18 Tier-1 findings between them:
+block	uncited Tier-1 findings
+SHELL_CONFIGS['Pluto']	10
+SHELL_CONFIGS['Venus']	3
+SHELL_CONFIGS['Eris']	2
+SHELL_CONFIGS['Mars']	2
+CUSTOM_SHELLS['Mercury']	1
+These are not scanner artifacts -- 1c's citation-window fix correctly leaves them at Tier 1 (V4 RECALLED), because there is nothing to inherit. They need actual sourcing, not a scanner change.
+Gap: candidate for the Phase 4 Gemini worksheet (same channel as L-157/L-161) -- these five blocks are now pre-located and high-confidence, so they can be prioritized in that pass rather than discovered again. Pluto is the largest single target. No design decision needed; this is a citation-sourcing task, not a scoring-model question.
+Ref: PREDESIGN_1c_citation_inheritance.md; L-156 Gap item 6; L-161.
 
 ### W.Done -- closed items, kept with the track
 
