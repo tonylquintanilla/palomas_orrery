@@ -829,8 +829,9 @@ BLOCKED: the client-side feature-rendering JS layer it needs (L-154) is
 gated behind a provenance/scoring detour that opened while scoping it (see
 §6 for the full dependency chain).
 
-**Detour status as of 2026-07-27: design and ledger phases both CLOSED,
-build not yet started.** All nine items (L-154-162) now have their own
+Detour status as of 2026-07-29: design and ledger phases CLOSED; scanner build IN PROGRESS.
+Phase 1 (Opus 5, sub-stepped 1a-1f) has 1a and 1b landed and pushed (bf36743);
+1c-1f remain. All nine items (L-154-162) now have their own
 ledger entries (previously handoff-only); a Fable 5 broad-review pass
 independently caught two stale claims before they could mislead a future
 session (L-154's own resume handoff wrongly asserted its resolver bug was
@@ -960,6 +961,8 @@ already correctly cited. 1b is next (not 1d pulled forward -- reordering
 doesn't change the final Phase 1 outcome, only invalidates predictions
 already on record for no gain). Full detail: L-156's Note, this same
 date.
+
+Build progress, 2026-07-29: 1b landed. Built on ac07419, pushed at bf36743 — verified via remote HEAD match and via reason-string re-execution (post-patch audit carries the new "cited, not independently cross-checked"/"date-sensitive" reasons 565 times, the old "has source citation"/"potentially stale" text zero times). Tier 1 held exactly at 156 (the invariant L-156 predicted: the highest score reachable on the changed path is 15, one below the Tier-1 floor of 16). Tier 2 rose 181→563 and Tier 3 fell 430→60 as the former V_STALE population merged into V_SOURCED; Tier 4 fell 14→2; total conserved at 781. One 1a follow-up landed alongside: CRIT_ABSOLUTE_OVERRIDE emptied now that Phase A left CENTER_BODY_RADII with only the Planet 9 raw literal. 1c (citation-window inheritance, ~42-unit Tier-1 reduction) is next.
 
 **L-163 — Module role/domain classification redesign (ROLE_MAP + MODULE_DOMAIN_MAP).**
 ✓ Role-side CLOSED, all 4 phases (Opus 5 + Sonnet 5, July 24-26 2026).
