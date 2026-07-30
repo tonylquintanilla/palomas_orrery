@@ -6,8 +6,11 @@ fires_when: Editing existing files, patch scripts, sed/regex edits, encoding che
 
 # Safe File Editing
 
-Skill version: 1.0 | Cut from palomas_orrery @ b29ad3f8 | July 1, 2026
-Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons.
+Skill version: 1.1 | Cut from palomas_orrery @ b29ad3f8 (v1.0), updated @
+bdaaa0c (v1.1) | July 29, 2026
+Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;
+v1.1 adds the delivery-format convention from a same-day incident (a
+transactional patch silently never run; see Field Notes).
 Portable: applies to any project, not only Paloma's Orrery.
 
 ## Bottom-Up Editing [QUALITY]
@@ -56,7 +59,48 @@ text was reworded in an earlier session -- variables get added to the
 functions that read them but never created where they are defined. Always
 verify the new symbol exists at its definition site, not just at its uses.
 
-## File Encoding Gate [QUALITY]
+## Delivery Format -- Runnable by Tony, Not Just Reviewable [CRITICAL]
+
+A patch that only Claude knows how to run is not delivered, it's described.
+Every patch-style deliverable states its own exact run command, in the
+deliverable itself, every time -- never assume a prior session's
+explanation still applies.
+
+**Format A -- transactional Python script (default; prefer this).**
+Matches "Transactional Patching for Clustered Edits" above. Tony's steps:
+save the file into the same folder as the file(s) it edits, open in VS
+Code, click Run. The module docstring MUST state the run command
+explicitly (`python <scriptname>.py`) so the file is self-contained even
+outside this conversation.
+- Success: one `ok` line per edit, then `patch applied (N bytes)`.
+- Failure: a single `ERROR:` (bad base) or `ANCHOR FAIL` (a specific edit's
+  text wasn't found) line -- nothing is written either way, always safe to
+  re-check and retry.
+
+**Format B -- raw unified diff (`.patch` file).** Use only when Format A
+doesn't fit (e.g. matching an external AI's own diff output). Tony's exact
+command, stated every time a `.patch` file is delivered:
+```
+git apply <path-to-file>.patch
+```
+run from a terminal with the working directory set to the repo root the
+patch targets (or the correct subfolder, e.g. `tools\`, if the diff's
+paths are relative to one). Tony already has terminal access for this --
+no VS Code or GitHub Desktop needed, any Command Prompt/PowerShell cd'd
+into the right folder works.
+- Success: **silence** -- `git apply` prints nothing when it works. This is
+  the opposite signal from Format A; say so explicitly when handing over a
+  `.patch` file, since silent success reads as "did nothing" otherwise.
+- Failure: an explicit `error:` line (e.g. "patch does not apply") --
+  nothing is written.
+
+**Multiple patches touching the same target file, delivered together:**
+confirm each one individually -- request or read the actual run output for
+EVERY file, not just the last one. A later, unrelated success (a passing
+test suite, a clean compile) does not confirm an earlier patch actually
+executed; each deliverable needs its own confirmed evidence.
+
+
 
 LF line endings. ASCII only in delivered code -- no emoji, arrows, degree
 signs, or checkmarks (Windows cp1252 consoles mangle them).
@@ -101,3 +145,14 @@ skill.)
 - Unicode in generated files breaks on Windows -- generate ASCII.
 - A bad snippet is a localized error; a complete file from a stale base is
   destructive. When unsure of the base, deliver a snippet.
+- Confirm each delivered patch individually, not by batch. One session
+  delivered a transactional script alongside several unrelated `.patch`
+  files in the same reply; the script was never actually run, but a later
+  test suite passing (confirming only the *other* files) was mistakenly
+  read as covering it too. A scanner re-run caught the gap. Get the actual
+  execution output for every file delivered, not just the last one.
+  (2026-07-29)
+- `grep -c 'a\|b\|c'` confirms something matched, not which pattern did.
+  Verifying three distinct claims in one combined call read as confirming
+  all three when only one had actually landed. Check each anchor
+  separately when verifying multiple distinct claims. (2026-07-29)
