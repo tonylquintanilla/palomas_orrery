@@ -266,6 +266,10 @@ Module updated: July 2026 with Anthropic's Claude Opus 5 (L-163 Phase 3:
 classify_role() now takes the filepath this loop already has, so the role
 comes from the module's own docstring tag).
 
+Module updated: July 2026 with Anthropic's Claude Sonnet 5 (L-162:
+CONCEPT_ALIASES entries added for the 14 newly-named CENTER_BODY_RADII
+constants).
+
 Role: devtool
 Domain: dev_tools
 """
@@ -1179,6 +1183,27 @@ CONCEPT_ALIASES = {
     'OBLIQUITY':         ('OBLIQUITY', 'EARTH_OBLIQUITY'),
     'LIGHT_MINUTES_PER_AU': ('LIGHT_MINUTES_PER_AU',),
     'JUPITER_RADIUS_KM': ('JUPITER_RADIUS_KM', 'JUPITER_EQUATORIAL_RADIUS_KM'),
+
+    # L-162 (2026-07-29): the 14 bodies newly promoted from
+    # CENTER_BODY_RADII dict entries to named constants. No known
+    # alternate name exists elsewhere in the repo for any of these today
+    # (checked); each is registered under its own canonical name so a
+    # future differently-named duplicate has an anchor to be caught
+    # against, per the design's hard requirement.
+    'MERCURY_RADIUS_KM':  ('MERCURY_RADIUS_KM',),
+    'VENUS_RADIUS_KM':    ('VENUS_RADIUS_KM',),
+    'MOON_RADIUS_KM':     ('MOON_RADIUS_KM',),
+    'MARS_RADIUS_KM':     ('MARS_RADIUS_KM',),
+    'PHOBOS_RADIUS_KM':   ('PHOBOS_RADIUS_KM',),
+    'SATURN_RADIUS_KM':   ('SATURN_RADIUS_KM',),
+    'URANUS_RADIUS_KM':   ('URANUS_RADIUS_KM',),
+    'NEPTUNE_RADIUS_KM':  ('NEPTUNE_RADIUS_KM',),
+    'PLUTO_RADIUS_KM':    ('PLUTO_RADIUS_KM',),
+    'BENNU_RADIUS_KM':    ('BENNU_RADIUS_KM',),
+    'ERIS_RADIUS_KM':     ('ERIS_RADIUS_KM',),
+    'HAUMEA_RADIUS_KM':   ('HAUMEA_RADIUS_KM',),
+    'MAKEMAKE_RADIUS_KM': ('MAKEMAKE_RADIUS_KM',),
+    'ARROKOTH_RADIUS_KM': ('ARROKOTH_RADIUS_KM',),
 }
 
 
