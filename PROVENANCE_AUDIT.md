@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: July 30, 2026
-Files scanned: 120
-Total findings: 782
-Constants: 91 | Dicts: 38 | Display strings: 653
+Files scanned: 121
+Total findings: 783
+Constants: 91 | Dicts: 39 | Display strings: 653
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -38,8 +38,8 @@ Unit of provenance: the smallest thing with a coherent source citation. A dict w
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 133 |
-| 2 | 10-15 | ALL ACCEPTED RESIDUALS -- see note below | 586 |
+| 1 | 16-20 | FIX NOW | 132 |
+| 2 | 10-15 | ALL ACCEPTED RESIDUALS -- see note below | 588 |
 | 3 | 5-9 | ALREADY CITED OR LOW RISK -- no action required | 61 |
 | 4 | 1-4 | NO ACTION NEEDED | 2 |
 
@@ -68,7 +68,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `uranus_visualization_shells.py` | orrery | 0 | 24 | 0 | 0 | 24 |
 | `comet_visualization_shells.py` | orrery | 2 | 21 | 0 | 0 | 23 |
 | `planet_visualization_utilities.py` | orrery | 8 | 11 | 0 | 0 | 19 |
-| `jupiter_visualization_shells.py` | orrery | 1 | 17 | 0 | 0 | 18 |
+| `jupiter_visualization_shells.py` | orrery | 0 | 18 | 0 | 0 | 18 |
 | `paleoclimate_wet_bulb_full.py` | earth_science | 14 | 2 | 0 | 0 | 16 |
 | `provenance_scanner.py` | dev_tools | 0 | 0 | 15 | 0 | 15 |
 | `sgr_a_grand_tour.py` | orrery | 7 | 1 | 3 | 0 | 11 |
@@ -120,6 +120,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `planetarium_distance.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `plot_data_report_widget.py` | utilities | 1 | 0 | 0 | 0 | 1 |
 | `visualization_utils.py` | stars | 1 | 0 | 0 | 0 | 1 |
+| `patch_L174_citation_level_mismatch.py` | orrery | 0 | 1 | 0 | 0 | 1 |
 | `add_docstrings.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `data_inventory.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `osculating_cache_manager.py` | orrery | 0 | 0 | 1 | 0 | 1 |
@@ -135,7 +136,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 38 | 80 | 503 | 18 | 2 | 603 |
+| Orrery (solar system + orbital mechanics) | 39 | 79 | 505 | 18 | 2 | 604 |
 | Earth System | 12 | 44 | 45 | 2 | 0 | 91 |
 | Stars (stellar neighborhood) | 9 | 8 | 38 | 6 | 0 | 52 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 10 | 0 | 0 | 35 | 0 | 35 |
@@ -145,7 +146,38 @@ Same data again, grouped by subject-matter domain rather than by individual file
 **Domain coverage gap:** the following files have findings but no entry in `MODULE_DOMAIN_MAP` -- defaulted to `orrery` rather than guessed into a more specific bucket. Add each to `MODULE_DOMAIN_MAP` in provenance_scanner.py with its real domain so this stops silently defaulting:
 
 - `orrery_rendering.py`
+- `patch_L174_citation_level_mismatch.py`
 - `shell_configs.py`
+
+---
+
+## CITATION LEVEL MISMATCH -- diagnostic, no scoring effect
+
+Citations in this codebase attach to a block. The resolver reads exactly one block per string: the narrowest one containing it. A citation written one level further out is invisible to it. Nothing below is mis-scored today -- the flat 60-line context window catches these independently, which is exactly why the mismatch is easy to miss. Move a few lines and it becomes a real gap with no warning.
+
+### Shadowed strings
+
+The string sits in a block with no citation, inside a block that has one. Fix by repeating a short citation above the inner block's key, as done for `ring_params` -- not by loosening the resolver, which would clear the L-173 gaps by accident.
+
+| File | Line | Shadowed from | Its citation at |
+|------|-----:|---------------|----------------:|
+| `comet_visualization_shells.py` | 93 | `HISTORICAL_TAIL_DATA` | 85 |
+| `comet_visualization_shells.py` | 209 | `HISTORICAL_TAIL_DATA` | 85 |
+| `comet_visualization_shells.py` | 235 | `HISTORICAL_TAIL_DATA` | 85 |
+| `comet_visualization_shells.py` | 294 | `HISTORICAL_TAIL_DATA` | 85 |
+| `comet_visualization_shells.py` | 305 | `HISTORICAL_TAIL_DATA` | 85 |
+| `comet_visualization_shells.py` | 334 | `HISTORICAL_TAIL_DATA` | 85 |
+| `planet_visualization_utilities.py` | 500 | `PLANET_ROTATION` | 491 |
+| `planet_visualization_utilities.py` | 504 | `PLANET_ROTATION` | 491 |
+| `planet_visualization_utilities.py` | 508 | `PLANET_ROTATION` | 491 |
+| `planet_visualization_utilities.py` | 512 | `PLANET_ROTATION` | 491 |
+| `planet_visualization_utilities.py` | 516 | `PLANET_ROTATION` | 491 |
+| `planet_visualization_utilities.py` | 520 | `PLANET_ROTATION` | 491 |
+| `planet_visualization_utilities.py` | 524 | `PLANET_ROTATION` | 491 |
+| `planet_visualization_utilities.py` | 528 | `PLANET_ROTATION` | 491 |
+| `planet_visualization_utilities.py` | 532 | `PLANET_ROTATION` | 491 |
+| `planet_visualization_utilities.py` | 536 | `PLANET_ROTATION` | 491 |
+| `planet_visualization_utilities.py` | 540 | `PLANET_ROTATION` | 491 |
 
 ---
 
@@ -283,12 +315,6 @@ is planned for a future session.
 | 4652 | string | display string @ line 4652 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 4686 | string | display string @ line 4686 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 5912 | string | display string @ line 5912 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-
-### jupiter_visualization_shells.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 959 | string | display string @ line 959 | (3 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 
 ### object_type_analyzer.py
 
@@ -863,10 +889,11 @@ is planned for a future session.
 | 702 | string | display string @ line 702 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 792 | string | display string @ line 792 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 806 | string | display string @ line 806 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 915 | string | display string @ line 915 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 930 | string | display string @ line 930 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 945 | string | display string @ line 945 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1027 | string | display string @ line 1027 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 916 | string | display string @ line 916 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 932 | string | display string @ line 932 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 948 | string | display string @ line 948 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 963 | string | display string @ line 963 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1031 | string | display string @ line 1031 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
 ### mars_visualization_shells.py
 
@@ -946,6 +973,12 @@ is planned for a future session.
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 125 | string | display string @ line 125 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 341 | string | display string @ line 341 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+
+### patch_L174_citation_level_mismatch.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 103 | dict | TARGETS[...] | (3 entries) | 3 | 5 | **15** | Cited, not independently cross-checked | UNDETERMINED -- could not be classified |
 
 ### planet9_visualization_shells.py
 

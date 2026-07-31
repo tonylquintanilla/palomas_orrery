@@ -904,6 +904,7 @@ def create_jupiter_ring_system(center_position=(0, 0, 0)):
     # Define Jupiter's ring parameters in kilometers from Jupiter's center
     # Then convert to Jupiter radii, and finally to AU
     ring_params = {
+        # Source: NASA Jupiter Ring Fact Sheet; Galileo spacecraft data (full citation above ring_params)
         'main_ring': {
             'inner_radius_km': 122500,  # Inner edge (in km from Jupiter's center)
             'outer_radius_km': 129000,  # Outer edge (in km from Jupiter's center)
@@ -919,6 +920,7 @@ def create_jupiter_ring_system(center_position=(0, 0, 0)):
                 "Metis and Adrastea, due to high-speed impacts by micrometeoroids."
             )
         },
+        # Source: NASA Jupiter Ring Fact Sheet; Galileo spacecraft data (full citation above ring_params)
         'halo_ring': {
             'inner_radius_km': 100000,  # Inner edge (in km from Jupiter's center)
             'outer_radius_km': 122500,  # Outer edge (in km from Jupiter's center)
@@ -934,6 +936,7 @@ def create_jupiter_ring_system(center_position=(0, 0, 0)):
                 "by electromagnetic forces from Jupiter's powerful magnetosphere."
             )
         },
+        # Source: NASA Jupiter Ring Fact Sheet; Galileo spacecraft data (full citation above ring_params)
         'amalthea_gossamer': {
             'inner_radius_km': 129000,  # Inner edge (in km from Jupiter's center)
             'outer_radius_km': 182000,  # Outer edge (at Amalthea's orbit)
@@ -948,6 +951,7 @@ def create_jupiter_ring_system(center_position=(0, 0, 0)):
                 "It is much fainter and more diffuse than the main ring."
             )
         },
+        # Source: NASA Jupiter Ring Fact Sheet; Galileo spacecraft data (full citation above ring_params)
         'thebe_gossamer': {
             'inner_radius_km': 129000,  # Inner edge (in km from Jupiter's center)
             'outer_radius_km': 226000,  # Outer edge (at Thebe's orbit)

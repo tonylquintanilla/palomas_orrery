@@ -778,6 +778,27 @@ SCOPE_DECLARATION_RE = re.compile(r'Scope of the above citation:',
 # than silently doing nothing.
 SCOPE_DECLARED_BLOCKS = []
 
+# L-174 diagnostics. Neither affects scoring; both exist so that a
+# citation pitched at the wrong LEVEL is visible instead of silent.
+#
+# Strict containment means the resolver reads exactly one block: the
+# narrowest one containing the string. A citation written one level too
+# far out is therefore invisible to it, and -- because the flat 60-line
+# context window usually catches the string anyway -- the mismatch does
+# not show up as a finding. It shows up as nothing at all, until someone
+# moves a few lines and it quietly becomes a real gap.
+#
+# SHADOWED_STRINGS: narrowest containing block uncited, an outer
+#   containing block cited. This is the ring_params shape.
+# DEEP_CITATIONS: a dict nested 3+ levels deep carrying its own
+#   citation. The block table records only depth 1 (the assignment) and
+#   depth 2 (its direct dict-valued entries), so such a citation cannot
+#   be reached and its strings would inherit the depth-2 citation
+#   instead -- "innermost wins" failing one level down. None exist
+#   today; this is a tripwire, not a backlog.
+SHADOWED_STRINGS = []
+DEEP_CITATIONS = []
+
 
 def citation_run_above(lines, decl_line, lookback=CITATION_LOOKBACK_BLOCK):
     """Find the citation comment run immediately above a declaration.
@@ -879,7 +900,76 @@ def build_citation_block_table(tree, lines, fname=None):
                 fname or '<unknown>', block['dict_name'], block['key'],
                 block['start'], block['end'], block['citation_line']))
 
+    _record_deep_citations(tree, lines, fname)
+
     return blocks
+
+
+def _record_deep_citations(tree, lines, fname=None):
+    """Flag dicts nested 3+ deep that carry their own citation.
+
+    build_citation_block_table records depth 1 and depth 2 only. A
+    citation written above a depth-3 key is therefore unreachable: the
+    resolver will hand that string the depth-2 citation instead, which
+    is a real misattribution and invisible in the tier counts.
+
+    Nothing in the repo triggers this today. It is recorded rather than
+    handled because the honest fix is to extend the table, and doing
+    that speculatively for a population of zero would add depth to the
+    project's measurement instrument for no measured need.
+    """
+    def descend(dict_node, depth, name, keypath):
+        for key, value in zip(dict_node.keys, dict_node.values):
+            if key is None:
+                continue
+            if not (isinstance(key, ast.Constant)
+                    and isinstance(key.value, str)):
+                continue
+            if not isinstance(value, ast.Dict):
+                continue
+            path = keypath + [key.value]
+            if depth + 1 >= 3:
+                cite_line, cite_text = citation_run_above(lines, key.lineno)
+                if cite_text:
+                    DEEP_CITATIONS.append((
+                        fname or '<unknown>', name, list(path),
+                        depth + 1, key.lineno, cite_line))
+            descend(value, depth + 1, name, path)
+
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Assign):
+            continue
+        if len(node.targets) != 1:
+            continue
+        if not isinstance(node.targets[0], ast.Name):
+            continue
+        if not isinstance(node.value, ast.Dict):
+            continue
+        descend(node.value, 1, node.targets[0].id, [])
+
+
+def find_shadowing_block(blocks, line_start, line_end):
+    """Return the outer cited block a string is shadowed FROM, or None.
+
+    Shadowed means: the narrowest block containing this string has no
+    citation, but some wider containing block does. The resolver
+    correctly declines to inherit -- that strictness is what protects
+    L-173 -- but the author almost certainly meant the outer citation to
+    cover this content, so it is worth reporting.
+
+    Reporting is all this does. Scoring is unchanged.
+    """
+    containing = [b for b in blocks
+                  if b['start'] <= line_start and line_end <= b['end']]
+    if len(containing) < 2:
+        return None
+    containing.sort(key=lambda b: (b['end'] - b['start'], b['start']))
+    if containing[0]['citation_text']:
+        return None
+    for block in containing[1:]:
+        if block['citation_text']:
+            return block
+    return None
 
 
 def resolve_block_citation(blocks, line_start, line_end):
@@ -1284,6 +1374,14 @@ def _extract_string_units(tree, lines, module_name, fname, role,
         if block_table:
             inherited_citation, scope_declined = resolve_block_citation(
                 block_table, line_start, line_end)
+            # L-174: diagnostic only, no effect on scoring.
+            if inherited_citation is None and not scope_declined:
+                shadowing = find_shadowing_block(
+                    block_table, line_start, line_end)
+                if shadowing is not None:
+                    SHADOWED_STRINGS.append((
+                        fname, line_start, shadowing['dict_name'],
+                        shadowing['key'], shadowing['citation_line']))
 
         units.append(ProvenanceUnit(
             kind='string',
@@ -1758,9 +1856,12 @@ def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
     print(f"Provenance Scanner -- scanning {project_dir}")
     print()
 
-    # Phase 1c: module-level collector, cleared per scan so a second
-    # scan_project() call in the same process does not double-report.
+    # Phase 1c / L-174: module-level collectors, cleared per scan so a
+    # second scan_project() call in the same process does not
+    # double-report.
     del SCOPE_DECLARED_BLOCKS[:]
+    del SHADOWED_STRINGS[:]
+    del DEEP_CITATIONS[:]
 
     suppressed_fingerprints, accepted_residuals = load_exceptions(project_dir)
 
@@ -1813,12 +1914,20 @@ def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
     if SCOPE_DECLARED_BLOCKS:
         print(f"{len(SCOPE_DECLARED_BLOCKS)} block(s) carry a scope-limited "
               f"citation -- inheritance declined, see audit")
+    if SHADOWED_STRINGS:
+        print(f"{len(SHADOWED_STRINGS)} string(s) sit in an uncited block "
+              f"inside a cited one -- citation level mismatch, see audit")
+    if DEEP_CITATIONS:
+        print(f"WARNING: {len(DEEP_CITATIONS)} citation(s) sit on a dict "
+              f"nested deeper than the block table reads -- see audit")
 
     generate_report(all_units, consistent_dups, inconsistencies,
                     files_scanned, project_dir, output_path,
                     accepted_residuals=accepted_residuals,
                     coverage_gaps=coverage_gaps,
-                    scope_declared=list(SCOPE_DECLARED_BLOCKS))
+                    scope_declared=list(SCOPE_DECLARED_BLOCKS),
+                    shadowed=list(SHADOWED_STRINGS),
+                    deep_citations=list(DEEP_CITATIONS))
 
     return all_units, consistent_dups, inconsistencies
 
@@ -1830,7 +1939,8 @@ def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
 def generate_report(units, consistent_dups, inconsistencies,
                     files_scanned, project_dir, output_path,
                     accepted_residuals=None, coverage_gaps=None,
-                    scope_declared=None):
+                    scope_declared=None, shadowed=None,
+                    deep_citations=None):
     """Write PROVENANCE_AUDIT.md."""
     now = datetime.now().strftime('%B %d, %Y')
 
@@ -2006,6 +2116,65 @@ def generate_report(units, consistent_dups, inconsistencies,
         out.append("")
     out.append("---")
     out.append("")
+
+    # ---- Citation level mismatch (L-174) ----
+    if shadowed or deep_citations:
+        out.append("## CITATION LEVEL MISMATCH -- diagnostic, no scoring effect")
+        out.append("")
+        out.append("Citations in this codebase attach to a block. The "
+                   "resolver reads exactly one block per string: the "
+                   "narrowest one containing it. A citation written one "
+                   "level further out is invisible to it. Nothing below "
+                   "is mis-scored today -- the flat 60-line context "
+                   "window catches these independently, which is exactly "
+                   "why the mismatch is easy to miss. Move a few lines "
+                   "and it becomes a real gap with no warning.")
+        out.append("")
+
+    if shadowed:
+        from collections import defaultdict as _dd
+        grouped = _dd(list)
+        for sfile, line, dname, dkey, cline in shadowed:
+            grouped[sfile].append((line, dname, dkey, cline))
+        out.append("### Shadowed strings")
+        out.append("")
+        out.append("The string sits in a block with no citation, inside a "
+                   "block that has one. Fix by repeating a short citation "
+                   "above the inner block's key, as done for "
+                   "`ring_params` -- not by loosening the resolver, which "
+                   "would clear the L-173 gaps by accident.")
+        out.append("")
+        out.append("| File | Line | Shadowed from | Its citation at |")
+        out.append("|------|-----:|---------------|----------------:|")
+        for sfile in sorted(grouped):
+            for line, dname, dkey, cline in sorted(grouped[sfile]):
+                label = f"`{dname}['{dkey}']`" if dkey else f"`{dname}`"
+                out.append(f"| `{sfile}` | {line} | {label} | {cline} |")
+        out.append("")
+
+    if deep_citations:
+        out.append("### Citations below the table's reach -- ACTION NEEDED")
+        out.append("")
+        out.append("A dict nested three or more levels deep carries its "
+                   "own citation. The block table records only the "
+                   "assignment and its direct entries, so this citation "
+                   "cannot be reached and strings inside it will inherit "
+                   "the shallower one instead -- a real misattribution "
+                   "that will not show up in the tier counts. This list "
+                   "was empty when the diagnostic was written; if it is "
+                   "not empty now, the table needs extending.")
+        out.append("")
+        out.append("| File | Path | Depth | Key line | Citation at |")
+        out.append("|------|------|------:|---------:|------------:|")
+        for dfile, dname, path, depth, kline, cline in sorted(deep_citations):
+            label = dname + ''.join(f"['{p}']" for p in path)
+            out.append(f"| `{dfile}` | `{label}` | {depth} | {kline} "
+                       f"| {cline} |")
+        out.append("")
+
+    if shadowed or deep_citations:
+        out.append("---")
+        out.append("")
 
     # ---- Scope-limited citations (L-156 Phase 1c) ----
     if scope_declared:

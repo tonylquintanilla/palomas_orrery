@@ -40,8 +40,10 @@ import traceback
 
 from provenance_scanner import (
     CITATION_LOOKBACK_BLOCK,
+    DEEP_CITATIONS,
     SCOPE_DECLARATION_RE,
     SCOPE_DECLARED_BLOCKS,
+    find_shadowing_block,
     V_SOURCED,
     V_RECALLED,
     build_citation_block_table,
@@ -488,6 +490,76 @@ def test_live_jupiter_and_custom_jupiter_differ():
 
 
 # ============================================================
+# TESTS -- L-174 citation level mismatch
+# ============================================================
+
+def test_shadowing_is_detected():
+    """The ring_params shape is reported even though it is not inherited."""
+    blocks, _ = _table(CITED_OUTER_UNCITED_INNER)
+    line = _string_line(CITED_OUTER_UNCITED_INNER, "3000 km")
+
+    citation, _declined = resolve_block_citation(blocks, line, line)
+    assert citation is None, "resolver must still decline to inherit"
+
+    shadowing = find_shadowing_block(blocks, line, line)
+    assert shadowing is not None, \
+        "shadowed string was not detected by the diagnostic"
+    assert shadowing['citation_text'] is not None
+
+
+def test_genuinely_uncited_is_not_reported_as_shadowed():
+    """An uncited block with no cited ancestor is a real gap, not a mismatch.
+
+    Guards the L-173 population against being reclassified as a level
+    mismatch, which would make a missing source look like a formatting
+    problem.
+    """
+    blocks, _ = _table(UNCITED_OUTER)
+    line = _string_line(UNCITED_OUTER, "2000 km")
+    assert find_shadowing_block(blocks, line, line) is None, \
+        "a genuinely uncited block was misreported as shadowed"
+
+
+def test_cited_block_is_not_reported_as_shadowed():
+    """A string that inherits normally is not flagged.
+
+    Uses MULTILINE_CITATION, where the citation sits ABOVE the block key
+    and so is reachable. (UNCITED_OUTER deliberately puts its comment
+    INSIDE the block, which the resolver does not read -- that fixture
+    tests a different thing.)
+    """
+    blocks, _ = _table(MULTILINE_CITATION)
+    line = _string_line(MULTILINE_CITATION, "480 km")
+    citation, _declined = resolve_block_citation(blocks, line, line)
+    assert citation is not None, "fixture should inherit here"
+    assert find_shadowing_block(blocks, line, line) is None,         "a normally-inheriting string was flagged as shadowed"
+
+
+def test_deep_citation_tripwire():
+    """A citation on a depth-3 dict is recorded, since the table cannot read it.
+
+    This population is zero in the repo today. The test uses a fixture so
+    it pins the detector rather than the current repo state.
+    """
+    source = '''\
+TABLE = {
+    'Body': {
+        # Source: a citation three levels down, below the table's reach
+        'layer': {
+            'note': "A claim of 55 km sits here.",
+        },
+    },
+}
+'''
+    del DEEP_CITATIONS[:]
+    _table(source)
+    paths = [entry[2] for entry in DEEP_CITATIONS]
+    assert any('layer' in p for p in paths), \
+        f"deep citation not recorded; collector holds {DEEP_CITATIONS}"
+    del DEEP_CITATIONS[:]
+
+
+# ============================================================
 # RUNNER
 # ============================================================
 
@@ -508,6 +580,10 @@ TESTS = [
     test_inheritance_lands_on_v_sourced_not_lower,
     test_live_shell_configs_uncited_blocks_still_uncited,
     test_live_jupiter_and_custom_jupiter_differ,
+    test_shadowing_is_detected,
+    test_genuinely_uncited_is_not_reported_as_shadowed,
+    test_cited_block_is_not_reported_as_shadowed,
+    test_deep_citation_tripwire,
 ]
 
 
