@@ -295,7 +295,7 @@ skill is relevant and has not fired, load it by name.
 Skill                        Ver  Fires when
 orrery-coding-conventions    1.1  Markers, hover text, axes, shells,
                                   legendgroups, docstrings, new visuals
-safe-file-editing            1.0  Editing existing files, patch scripts,
+safe-file-editing            1.1  Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
 agentic-pre-test             1.1  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
