@@ -6,7 +6,7 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0)
 
 # Provenance Discipline
 
-Skill version: 1.2 | Cut from palomas_orrery @ ca9c706e7c68dec724bbcd242e0b0048c5392dfb | July 26, 2026
+Skill version: 1.3 | Cut from palomas_orrery @ <SHA after push> | July 31, 2026
 Source: project_instructions_v3_29.md Part 3 (Provenance Audit, Fetched vs
 Recalled) + food insecurity build handoff + scanner source at HEAD. v1.1
 adds the report domain-classification mechanics, the Review-Repair
@@ -17,7 +17,11 @@ scanning quirk, and a stale-audit-doc near-miss. v1.2 updates the
 role-driven-inclusion bullet for L-163 Phase 3: a coverage gap is
 resolved by tagging the module's own docstring, since ROLE_MAP is now a
 regenerated mirror rather than a hand-maintained dict. MODULE_DOMAIN_MAP
-and classify_domain() are unaffected and remain hand-maintained.
+and classify_domain() are unaffected and remain hand-maintained. v1.3
+adds No Shadow Constants [CRITICAL]: local copies of constants_new.py
+values must be deleted and replaced with proper imports — a frozen copy
+bypasses the citation chain and drifts silently, same failure class as
+citing over recalled data.
 
 The resident protocol carries the two governing principles as CRITICAL
 gates: Fetched-vs-Recalled (a citation is a provenance claim that must be
@@ -101,6 +105,14 @@ phase1_v17.md` and related handoffs. The originating rationale:
   file lives.
 - False positives get provenance_exceptions.json entries, not code
   workarounds.
+
+## No Shadow Constants [CRITICAL]
+
+Modules must not carry local copies of values that exist in constants_new.py. Import through the established shim (planet_visualization_utilities) or directly from constants_new.py. A local literal that numerically matches a tracked constant is a frozen copy — it won't follow if the source value updates, and it bypasses the scanner's citation chain even when the number is correct today.
+
+This is the code-side complement to the scanner's build_pinned_values() check: the scanner can flag a suspicious match, but the standing rule is that these should never be introduced in the first place. When found, delete the local definition and replace it with a proper import — do not add a # Source: comment to the local copy, because that would cite-to-clear a structural problem rather than fix it.
+
+Known precedent: comet_visualization_shells.py lines 492-493 (SUN_RADIUS_KM, KM_PER_AU hardcoded despite KM_PER_AU already being imported) and line 602 (SUN_RADIUS_AU computed from the two hardcoded values). Same failure class as the close_approach_data.py stale-copy bug that originally motivated test_constants_provenance.py.
 
 ## Report Domain Classification (Findings by File / File Type)
 
