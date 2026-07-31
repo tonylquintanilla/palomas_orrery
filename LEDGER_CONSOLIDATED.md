@@ -4961,7 +4961,7 @@ comment moved, an L-173 finding needs a source found.
 Ref: PREDESIGN_1c_citation_inheritance.md; L-156 Gap item 6; L-161.
 
 #### [L-174] Citation level mismatch -- citations pitched one block too far out
-<!-- L:174 status:OPEN upd:2026-07-30 section:W.Active flag: rice:2/3/90/2 -->
+<!-- L:174 status:DONE upd:2026-07-30 section:W.Active flag: rice:2/3/90/2 -->
 
 What. Phase 1c (L-156 Gap item 6) resolves a display string's citation by
 structural containment: the string inherits from the NARROWEST dict block
