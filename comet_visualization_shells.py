@@ -39,7 +39,8 @@ import math
 import plotly.graph_objs as go
 from shared_utilities import create_sun_direction_indicator
 from orrery_rendering import create_info_marker
-from planet_visualization_utilities import KM_PER_AU
+from planet_visualization_utilities import (
+    KM_PER_AU, SUN_RADIUS_KM, SOLAR_RADIUS_AU)
 
 # Comet nucleus sizes (approximate, in km)
 COMET_NUCLEUS_SIZES = {
@@ -489,8 +490,9 @@ def create_comet_nucleus(center_position=(0, 0, 0), nucleus_size_km=5, comet_nam
 
 def create_maps_disintegration_marker(position_au, comet_name='MAPS'):
     import math
-    SUN_RADIUS_KM   = 695700.0
-    KM_PER_AU       = 149597870.7
+    # SUN_RADIUS_KM and KM_PER_AU are imported at module scope. Local
+    # copies lived here until L-156 1f; the local KM_PER_AU shadowed the
+    # import for this whole function. No Shadow Constants [CRITICAL].
     # Corona begins ~2,100 km above photosphere; outer corona extends to ~several million km
     CORONA_BASE_KM  = 2100.0
     # Roche limit for a strengthless body (density ~400 kg/m^3) ~ 3.45 solar radii from center
@@ -599,7 +601,10 @@ def create_maps_ghost_tail_trace(fig=None):
     import math
     import numpy as np
 
-    SUN_RADIUS_AU = 695700.0 / 149597870.7
+    # SOLAR_RADIUS_AU is imported at module scope. It is defined in
+    # constants_new.py as SUN_RADIUS_KM / KM_PER_AU -- the same two
+    # values this line used to recompute from literals.
+    SUN_RADIUS_AU = SOLAR_RADIUS_AU
 
     # Ghost window in solar radii from Sun center
     R_DISINTEGRATION = 8.33   # ~0.039 AU, April 4 08:15 UTC

@@ -270,6 +270,10 @@ Module updated: July 2026 with Anthropic's Claude Sonnet 5 (L-162:
 CONCEPT_ALIASES entries added for the 14 newly-named CENTER_BODY_RADII
 constants).
 
+Module updated: July 2026 with Anthropic's Claude Opus 5 (L-156 Phase 1d/1e:
+frozen-copy detection for shadow constants, author-year citation forms,
+Fahrenheit/Celsius units, the Tier-1 banner, and neutral tier labels).
+
 Module updated: July 2026 with Anthropic's Claude Opus 5 (L-156 Gap item 6,
 Phase 1c: citation-block inheritance -- a display string inside a dict block
 that carries its own citation now inherits it at V_SOURCED instead of
@@ -599,6 +603,29 @@ SOURCE_PATTERNS = [
     re.compile(r"['\"]?\w*url\w*['\"]?\s*[:=]\s*['\"]https?://",
                re.IGNORECASE),
     re.compile(r'https?://\S+\.\S+', re.IGNORECASE),
+    # L-156 Gap item 7: bare author-year parentheticals.
+    #
+    # Two live forms, both real citations that previously scored V4
+    # RECALLED -- the scanner calling a cited value uncited:
+    #     (Vecellio et al.)          (Sherwood & Huber)
+    #     (Vecellio et al., 2022)    (Sherwood & Huber, 2010)
+    #
+    # Tightness is the whole difficulty here. A pattern that merely
+    # looks for a capitalised word and a year inside parentheses
+    # matches "(May 2026)" -- a date in a comment -- on the first file
+    # in the repo. So a match requires EITHER a multi-author marker
+    # (et al. / & Author / and Author), OR a four-digit year following
+    # a capitalised surname, and month names are excluded outright.
+    re.compile(
+        r'\((?!(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))'
+        r'[A-Z][A-Za-z\'\-]+'
+        r'(?:\s+et\s+al\.?|\s*&\s*[A-Z][A-Za-z\'\-]+'
+        r'|\s+and\s+[A-Z][A-Za-z\'\-]+)'
+        r'(?:,?\s*(?:19|20)\d{2}[a-z]?)?\)'
+        r'|'
+        r'\((?!(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))'
+        r'[A-Z][A-Za-z\'\-]+,?\s+(?:19|20)\d{2}[a-z]?\)'
+    ),
 ]
 
 # Patterns that suggest a cited value may be stale (date-sensitive).
@@ -661,7 +688,9 @@ NUMERIC_CLAIM_RE = re.compile(
     r'(\d{1,3}(?:,\d{3})+(?:\.\d+)?|'     # 31,000 or 31,000.5
     r'\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)'    # 8.33 or 1.5e-3
     r'\s*'
-    r'(R_sun|AU|km/s|km|m/s|degrees?|deg\b|arcsec|mas|pc|kpc|Mpc|'
+    r'(degrees?\s*[CF]\b|deg\s*[CF]\b|\xb0\s*[CF]\b|'
+    r'degrees?\s+(?:Celsius|Fahrenheit)\b|'
+    r'R_sun|AU|km/s|km|m/s|degrees?|deg\b|arcsec|mas|pc|kpc|Mpc|'
     r'solar radii|Earth (?:masses|radii)|M_sun|M_earth|R_earth|'
     r'ly|light[- ]years?|parsec|'
     r'days?|years?|hours?|minutes?\b|min\b|sec\b|'
@@ -1406,6 +1435,186 @@ def _extract_string_units(tree, lines, module_name, fname, role,
 # OPTION A: PINNED CONSTANT CROSS-REFERENCE
 # ============================================================
 
+# ============================================================
+# SHADOW CONSTANTS (L-156 Gap item 5 / L-158; 1d piece 1)
+# ============================================================
+# A module that hand-types a value already defined and cited in
+# constants_new.py has made a frozen copy. The number may be correct
+# today; the problem is that it will not follow if the source is ever
+# corrected, and it sits outside the citation chain in the meantime.
+# provenance-discipline v1.3 makes this a [CRITICAL] convention: delete
+# the local definition and import the real one. Never add a "# Source:"
+# comment to a local copy -- that cites-to-clear a structural problem.
+#
+# Detection matches on NAME AND VALUE TOGETHER. Measured repo-wide at
+# the time this was written: name+value returns exactly the two known
+# direct instances and nothing else; value alone returns 77 candidates,
+# almost all coincidental round numbers (0.5, 2.2, 10.0) that happen to
+# equal some pinned constant. Value alone is not a usable signal.
+#
+# This is a DIAGNOSTIC. It does not change any unit's score. The
+# constants involved are function-local assignments, which the scanner
+# does not extract as units at all, so there is no score to change --
+# see the as-built for why Option A was left alone.
+
+# A derived shadow is an expression built from pinned literals, e.g.
+# SUN_RADIUS_AU = 695700.0 / 149597870.7. Requiring at least one
+# literal of this magnitude excludes trivial coincidences: without it,
+# an expression containing 2 twice matches, because 2.0 is itself a
+# pinned value.
+SHADOW_DERIVED_MIN_MAGNITUDE = 100.0
+
+SHADOW_CONSTANTS = []
+
+
+def _numeric_from_node(node):
+    """Return the float value of a numeric literal node, or None."""
+    if isinstance(node, ast.Constant) and isinstance(node.value, (int, float)) \
+            and not isinstance(node.value, bool):
+        return float(node.value)
+    if (isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.USub)
+            and isinstance(node.operand, ast.Constant)
+            and isinstance(node.operand.value, (int, float))):
+        return -float(node.operand.value)
+    return None
+
+
+def build_cited_constant_names(project_dir):
+    """Map NAME -> value for cited numeric constants in constants_new.py.
+
+    build_pinned_values() returns values only, which is enough to ask
+    "does this number appear upstream" but not "is this the same
+    constant." The name is what separates a frozen copy from a
+    coincidence, so it has to be carried.
+    """
+    path = os.path.join(project_dir, 'constants_new.py')
+    if not os.path.exists(path):
+        return {}
+    try:
+        with open(path, 'rb') as f:
+            content = f.read()
+        lines_c = content.decode('utf-8', errors='replace').splitlines(
+            keepends=True)
+        tree = ast.parse(content)
+    except Exception:
+        return {}
+
+    source_re = re.compile(r'#\s*[Ss]ource\s*:', re.IGNORECASE)
+    named = {}
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Assign) or len(node.targets) != 1:
+            continue
+        target = node.targets[0]
+        if not isinstance(target, ast.Name) or not target.id.isupper():
+            continue
+        num = _numeric_from_node(node.value)
+        if num is None:
+            continue
+        # Find THIS constant's own citation, in either of the two
+        # conventions the file uses.
+        #
+        # build_pinned_values() uses a flat window of 10 lines above and
+        # 5 below, which bleeds: in a densely packed file a constant
+        # with no citation of its own picks up a neighbour's, and a copy
+        # of it would then be reported as a shadow of something that was
+        # never actually cited.
+        #
+        # constants_new.py mostly writes the citation BELOW the
+        # assignment:
+        #     KM_PER_AU = 149597870.7
+        #     # Source: IAU 2012 Resolution B2
+        # while the rest of the codebase writes it above. Both are
+        # accepted, but only as a contiguous comment run touching the
+        # assignment -- a blank line ends it, which is what stops the
+        # bleed.
+        cited = False
+
+        idx = node.lineno          # 0-based index of the line BELOW
+        while idx < len(lines_c) and lines_c[idx].lstrip().startswith('#'):
+            if source_re.search(lines_c[idx]):
+                cited = True
+                break
+            idx += 1
+
+        if not cited:
+            idx = node.lineno - 2  # 0-based index of the line ABOVE
+            while idx >= 0:
+                line = lines_c[idx]
+                if source_re.search(line):
+                    cited = True
+                    break
+                if line.strip() and not line.lstrip().startswith('#'):
+                    break
+                idx -= 1
+
+        if cited:
+            named[target.id] = num
+    return named
+
+
+def scan_shadow_constants(project_dir, cited_names, pinned_values):
+    """Populate SHADOW_CONSTANTS with local copies of cited constants.
+
+    Walks every assignment at ANY nesting depth, because the known
+    instances are function-local -- extract_units_from_file only reads
+    top-level assignments, so these are invisible to the normal unit
+    pipeline.
+
+    Two shapes:
+      'direct'  -- NAME = <literal>, where NAME is a cited constant in
+                   constants_new.py and the value agrees.
+      'derived' -- NAME = <expression of literals>, where every literal
+                   matches a pinned value and at least one is large
+                   enough not to be a coincidence.
+    """
+    for fname in sorted(os.listdir(project_dir)):
+        if not fname.endswith('.py') or fname == 'constants_new.py':
+            continue
+        path = os.path.join(project_dir, fname)
+        try:
+            with open(path, 'rb') as f:
+                tree = ast.parse(f.read())
+        except Exception:
+            continue
+
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Assign) or len(node.targets) != 1:
+                continue
+            target = node.targets[0]
+            if not isinstance(target, ast.Name):
+                continue
+            name = target.id
+
+            num = _numeric_from_node(node.value)
+            if num is not None:
+                upstream = cited_names.get(name)
+                if upstream is not None and abs(num - upstream) < 1e-9:
+                    SHADOW_CONSTANTS.append(
+                        (fname, node.lineno, name, 'direct', num))
+                continue
+
+            if isinstance(node.value, ast.BinOp) and name.isupper():
+                literals = []
+                ok = True
+                for sub in ast.walk(node.value):
+                    val = None
+                    if isinstance(sub, ast.Constant) and isinstance(
+                            sub.value, (int, float)) and not isinstance(
+                            sub.value, bool):
+                        val = float(sub.value)
+                    if val is None:
+                        continue
+                    literals.append(val)
+                    if round(val, 3) not in pinned_values:
+                        ok = False
+                        break
+                if (ok and len(literals) >= 2
+                        and any(abs(v) >= SHADOW_DERIVED_MIN_MAGNITUDE
+                                for v in literals)):
+                    SHADOW_CONSTANTS.append(
+                        (fname, node.lineno, name, 'derived', None))
+
+
 def build_pinned_values(project_dir):
     """Extract numeric values from constants_new.py that have source citations.
 
@@ -1862,6 +2071,7 @@ def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
     del SCOPE_DECLARED_BLOCKS[:]
     del SHADOWED_STRINGS[:]
     del DEEP_CITATIONS[:]
+    del SHADOW_CONSTANTS[:]
 
     suppressed_fingerprints, accepted_residuals = load_exceptions(project_dir)
 
@@ -1873,6 +2083,11 @@ def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
     if pinned_values:
         print(f"Loaded {len(pinned_values)} pinned constant values "
               f"for cross-reference scoring")
+
+    # 1d piece 1: frozen-copy detection. Diagnostic only -- this does
+    # not feed scoring.
+    cited_names = build_cited_constant_names(project_dir)
+    scan_shadow_constants(project_dir, cited_names, pinned_values)
 
     all_units = []
     files_scanned = 0
@@ -1920,6 +2135,9 @@ def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
     if DEEP_CITATIONS:
         print(f"WARNING: {len(DEEP_CITATIONS)} citation(s) sit on a dict "
               f"nested deeper than the block table reads -- see audit")
+    if SHADOW_CONSTANTS:
+        print(f"{len(SHADOW_CONSTANTS)} shadow constant(s) -- local copies "
+              f"of cited constants_new.py values, see audit")
 
     generate_report(all_units, consistent_dups, inconsistencies,
                     files_scanned, project_dir, output_path,
@@ -1927,7 +2145,8 @@ def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
                     coverage_gaps=coverage_gaps,
                     scope_declared=list(SCOPE_DECLARED_BLOCKS),
                     shadowed=list(SHADOWED_STRINGS),
-                    deep_citations=list(DEEP_CITATIONS))
+                    deep_citations=list(DEEP_CITATIONS),
+                    shadow_constants=list(SHADOW_CONSTANTS))
 
     return all_units, consistent_dups, inconsistencies
 
@@ -1940,7 +2159,7 @@ def generate_report(units, consistent_dups, inconsistencies,
                     files_scanned, project_dir, output_path,
                     accepted_residuals=None, coverage_gaps=None,
                     scope_declared=None, shadowed=None,
-                    deep_citations=None):
+                    deep_citations=None, shadow_constants=None):
     """Write PROVENANCE_AUDIT.md."""
     now = datetime.now().strftime('%B %d, %Y')
 
@@ -2009,9 +2228,9 @@ def generate_report(units, consistent_dups, inconsistencies,
     out.append("")
     out.append("**Score = V x C** | Action thresholds:")
     out.append("- 16-20: FIX NOW")
-    out.append("- 10-15: ALL ACCEPTED RESIDUALS -- see note below")
-    out.append("- 5-9: ALREADY CITED OR LOW RISK")
-    out.append("- 1-4: NO ACTION NEEDED")
+    out.append("- 10-15: REVIEW")
+    out.append("- 5-9: LOW PRIORITY")
+    out.append("- 1-4: LOWEST PRIORITY")
     out.append("")
     out.append("---")
     out.append("")
@@ -2021,11 +2240,17 @@ def generate_report(units, consistent_dups, inconsistencies,
     out.append("")
     out.append("| Tier | Score | Action | Count |")
     out.append("|------|-------|--------|------:|")
+    # 1e piece 2 (design handoff D7): tier names are score bands, not
+    # claims about the findings inside them. The old Tier-2 name asserted
+    # "ALL ACCEPTED RESIDUALS", so every new finding landing in that band
+    # was narrated as already-reviewed by this template -- including the
+    # ones 1b had just moved there. Accepted-residual status is
+    # per-finding and has its own report block.
     tier_labels = {
         1: ("16-20", "FIX NOW"),
-        2: ("10-15", "ALL ACCEPTED RESIDUALS -- see note below"),
-        3: ("5-9", "ALREADY CITED OR LOW RISK -- no action required"),
-        4: ("1-4", "NO ACTION NEEDED"),
+        2: ("10-15", "REVIEW"),
+        3: ("5-9", "LOW PRIORITY"),
+        4: ("1-4", "LOWEST PRIORITY"),
     }
     for tier in [1, 2, 3, 4]:
         score_range, action = tier_labels[tier]
@@ -2116,6 +2341,37 @@ def generate_report(units, consistent_dups, inconsistencies,
         out.append("")
     out.append("---")
     out.append("")
+
+    # ---- Shadow constants (L-156 Gap item 5, 1d piece 1) ----
+    if shadow_constants:
+        out.append("## SHADOW CONSTANTS -- [CRITICAL] convention violation")
+        out.append("")
+        out.append("Local copies of values that are already defined and "
+                   "cited in `constants_new.py`. The number may be correct "
+                   "today; the problem is that it will not follow if the "
+                   "source value is ever corrected, and it sits outside "
+                   "the citation chain in the meantime.")
+        out.append("")
+        out.append("Per provenance-discipline v1.3, No Shadow Constants "
+                   "[CRITICAL]: delete the local definition and import the "
+                   "real one, through the `planet_visualization_utilities` "
+                   "shim or directly. Do NOT add a `# Source:` comment to "
+                   "the local copy -- that cites-to-clear a structural "
+                   "problem instead of fixing it.")
+        out.append("")
+        out.append("`direct` means the local name and value both match a "
+                   "cited constant. `derived` means the value is computed "
+                   "from pinned literals rather than from the imported "
+                   "names.")
+        out.append("")
+        out.append("| File | Line | Name | Kind |")
+        out.append("|------|-----:|------|------|")
+        for entry in sorted(shadow_constants):
+            sfile, line, name, kind, _val = entry
+            out.append(f"| `{sfile}` | {line} | `{name}` | {kind} |")
+        out.append("")
+        out.append("---")
+        out.append("")
 
     # ---- Citation level mismatch (L-174) ----
     if shadowed or deep_citations:
@@ -2348,6 +2604,31 @@ def generate_report(units, consistent_dups, inconsistencies,
         score_range, action = tier_labels[tier]
         count = tier_counts.get(tier, 0)
         print(f"  Tier {tier} ({score_range}): {count:5d} findings -- {action}")
+
+    # 1e piece 1: Tier-1 banner. INFORMATIONAL ONLY.
+    #
+    # The exit code is deliberately untouched here, and should stay that
+    # way. Design review section 3c: Tier-1 never gets an auto-exit gate,
+    # at any threshold, ever -- a count is the wrong thing to judge by,
+    # since a trivial new finding would fail a good run and a serious
+    # finding replacing a trivial one at equal count would pass a bad
+    # one. Whether N findings are acceptable to push past is a judgment
+    # call every time. The only hard exit-code gate belongs to the
+    # pinning checks, which are genuinely binary.
+    #
+    # (HANDOFF_phase1_1d_to_1f.md at HEAD describes a deferred exit-gate
+    # flip. That is the superseded Fable design; do not revive it from
+    # that document.)
+    tier1 = tier_counts.get(1, 0)
+    if tier1:
+        bar = "=" * 70
+        print()
+        print(bar)
+        print(f"  {tier1} TIER-1 FINDINGS -- PUSH GATE NOT MET")
+        print()
+        print("  Informational only. This does not affect the exit code.")
+        print("  Review them before pushing; the call is yours.")
+        print(bar)
 
     if inconsistencies:
         print()
