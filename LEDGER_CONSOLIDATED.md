@@ -4300,10 +4300,6 @@ change targeted. Both Option A and staleness credit predated the D3
 ladder and were not wrong when written — they were outlived by a
 definition change and never revisited.
 
-**Phase 1 measured arc:** Tier 1: 145 → 156 (1a) → 156 (1b) → 133 (1c)
-→ 132 (L-174) → 171 (1d/1e/1f, of which 132 → 119 from piece 2, offset
-by +61 newly-visible from piece 3).
-
 ### Observations (not fixed, tracked)
 
 **Em-dashes in comet_visualization_shells.py.** Three pre-existing

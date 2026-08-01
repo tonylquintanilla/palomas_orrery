@@ -35,18 +35,34 @@ Scanner rebuild (Opus 5, Phase 1 sub-stepped 1a-1f): **PHASE 1 COMPLETE.**
   1f  DONE -- shadow constants deleted in comet_visualization_shells.py,
         proper imports through shim. Fire-then-silence test confirmed.
 
-  Follow-on: build_pinned_values() citation-bleed flaw fixed. Shared
-  constant_has_own_citation() predicate extracted; both pinned-value
-  builders routed through it. Defensive (zero measured impact today;
-  prevents future silent mis-scoring).
+  Follow-on fixes:
+  - build_pinned_values() citation-bleed flaw fixed. Shared
+    constant_has_own_citation() predicate extracted; both pinned-value
+    builders routed through it. Defensive (zero measured impact today;
+    prevents future silent mis-scoring).
+  - D8.5 closed: Option A retired. Two mechanisms removed from
+    score_unit(), both granting V_SOURCED without a real citation.
+    (a) Option A: credited display strings by numeric coincidence with
+    pinned constants, not sourcing. 23 findings moved to Tier 1.
+    (b) Staleness credit: granted V_SOURCED to strings with no citation
+    based on date-sensitive patterns -- the reason said "no source" and
+    the score said "sourced." 16 findings moved to Tier 1. Scoring path
+    audit confirmed no other instance of credit-without-sourcing remains.
 
-Current scanner state at HEAD (b813aa6): Tier 1 171, Tier 2 644,
-Tier 3 62, Tier 4 2 (879 findings / 116 files). Tier 1 is 132 baseline
-+ 39 newly-visible temperature claims (L-175). Phase 1 measured arc:
-Tier 1 145 -> 156 (1a) -> 156 (1b) -> 133 (1c) -> 132 (L-174) -> 171
-(1d/1e/1f).
+Current scanner state at HEAD (a8e3862): Tier 1 210, Tier 2 605,
+Tier 3 62, Tier 4 2 (879 findings / 116 files).
 
-Still open under L-156: D8.5 (retire or keep Option A); Phases 2-4.
+Phase 1 measured arc (the instrument got honest): Tier 1
+145 -> 156 (1a) -> 156 (1b) -> 133 (1c) -> 132 (L-174) -> 171
+(1d/1e/1f) -> 210 (D8.5). The first half (145 -> 132) fixed false
+positives -- correctly-sourced claims scored as unsourced. The second
+half (132 -> 210) fixed false negatives -- unsourced claims scored as
+sourced, whether by a blind spot (temperature recognition, +61), numeric
+coincidence (Option A, +23), or a marker meaning the opposite of what it
+was credited for (staleness, +16). The number went up because the
+instrument got honest.
+
+Still open under L-156: Phases 2-4.
 
 What comes next, in order:
 
