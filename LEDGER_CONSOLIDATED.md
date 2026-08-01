@@ -362,7 +362,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-160 | test_constants_provenance.py -- retire once fully absorbed, not before | OPEN | 8.1 | 2026-07-27 |
 | ! | L-172 | Phase 0 record-hygiene batch (provenance cluster prep) | OPEN | 5.7 | 2026-07-29 |
 | ! | L-158 | Derived-constant vulnerability inheritance rule (revised from a proposed rung, 2026-07-27) | OPEN | 5.6 | 2026-07-27 |
-| ! | L-156 | Provenance scanner scoring model fix -- criticality (category-based) + vulnerability recalibration + comprehensive sweep | OPEN | 5.3 | 2026-07-29 |
+| ! | L-156 | Provenance scanner scoring model fix — criticality (category-based) + vulnerability recalibration + comprehensive sweep | OPEN | 5.3 | 2026-07-31 |
 | ! | L-155 | Cross-repo constants/geometry pinning checks -- built INTO provenance_scanner.py, not a standalone script | PENDING-GATE | 4.5 | 2026-07-27 |
 | ! | L-119 | event_link hardcoded None in the builder (F2, gates artifact 7) | OPEN | 3.6 | 2026-07-15 |
 | ! | L-168 | propagate_marker uses solar K_GAUSS mean-motion -- wrong for planetocentric moon markers (FLAG-2; caught in F1 design, avoided in serving, source fix still open) | OPEN | 3.6 | 2026-07-28 |
@@ -4146,339 +4146,180 @@ motivating bug: `close_approach_data.py`'s stale `CENTER_BODY_RADII` copy);
 
 ---
 
-#### [L-156] Provenance scanner scoring model fix -- criticality (category-based) + vulnerability recalibration + comprehensive sweep
-<!-- L:156 status:OPEN upd:2026-07-29 section:W.Active flag: rice:5/4/80/3 -->
-- **What.** `provenance_scanner.py`'s scoring currently mis-prioritizes
-  exactly the data this cluster depends on: `SUN_RADIUS_KM` /
-  `EARTH_EQUATORIAL_RADIUS_KM` / `JUPITER_EQUATORIAL_RADIUS_KM` score 6
-  (Tier 3, "no action required"); `KM_PER_AU` / `CENTER_BODY_RADII` score
-  10 (Tier 2). Root cause: criticality is resolved by direct-import-count
-  of the exact symbol name, so a foundational constant consumed
-  indirectly (via a derived dict) scores as if barely used.
-- **Decided (Tony, design + review, confirmed again in chat 2026-07-27):**
-  - **Two criticality categories: MEASURED (C=5) and RELATIONAL (C=4).**
-    Not consumer-count-based -- a category judgment, brought in line with
-    how display strings already score.
-  - **Ring geometry sits in MEASURED, the top tier.** Tony's own reasoning
-    (2026-07-27): "in general planetary shells are less certain [but] the
-    rings are better defined" -- consistent with the design's own boundary
-    (independently-measured vs. derived-from-something-tracked), not a
-    blast-radius argument.
-  - **Orbital period and radius share the top tier despite different
-    failure shapes.** Tony (2026-07-27): "these are fundamental data."
-  - **Explicit `undetermined` sentinel** for anything that can't be
-    confidently placed in cosmetic/MEASURED/RELATIONAL -- gets its own
-    banner, same visibility as the Tier-1 banner. **Naming conformance
-    (Fable 5, this review):** use `undetermined`, matching L-163's already-
-    decided sentinel name for the same shape of problem, NOT `UNCLASSIFIED`
-    as the design review's D2 amendment literally wrote it (that text
-    predates L-163's naming decision). Whoever builds Phase 1 implements
-    the D2 concept under this name.
-  - **Vulnerability ladder (D3): decided,** via a three-AI calibration
-    round (Gemini 3.1 Pro, GPT 5.5, Fable 5) plus Sonnet 5 synthesis,
-    closed 2026-07-27. Four rungs, same count as today -- no Tier score
-    recalibration needed:
-    - **V1 FETCHED** -- live pipeline query at runtime. Unchanged.
-    - **V2 CROSS-CHECKED** -- never auto-promotable to V1, at any rigor
-      level (all three AIs converged on this against my initial draft,
-      which had proposed a conditional path to V1; the scanner can't
-      observe whether a check was actually rigorous, only a claim that
-      it was -- the same cite-to-clear risk as a `# Source:` tag over
-      recalled data). Requires a structured, dated annotation: who/what
-      checked, against which authority, when, **and whether the check
-      was blind (no anchoring)** -- the last field added directly from
-      this project's own history (see below), not from the panel.
-    - **V3 SOURCED** -- cited but never independently cross-checked,
-      *and* anything decayed from V2 over time. **Tony (2026-07-27):
-      merged, not split** -- the recency/staleness distinction a split
-      would have preserved isn't lost, it lives in the dated field on
-      the V2 annotation; it just stops being double-counted as its own
-      score tier. Matches Fable's calibration principle (rungs
-      distinguished by required action, not by how a value came to be
-      wrong) over the split GPT and I had initially favored.
-    - **V4 RECALLED** -- no citation at all. Unchanged.
-    - **Evidence base (verified against project history, not just the
-      two cases the worksheet opened with):** Arrokoth (~1000x radius
-      error, sourced not cross-checked) and Parker Solar Probe (surface-
-      vs-center convention error, introduced *during* a claimed
-      verification) motivated the original ask. Two more, found on a
-      follow-up pass, changed the answer: a near-miss where Claude's own
-      draft Gemini prompt included its own numbers before Tony caught
-      the anchoring risk (`ADDENDUM_v23_design_session_narrative.md`),
-      and a session where Gemini's *own* cross-check output was wrong on
-      three counts against the primary source
-      (`HANDOFF_addendum_phase1_and_uranus_cleanup.md` /
-      `HANDOFF_provenance_phase1_v17.md` onward) -- direct evidence that
-      cross-checking is itself an interpretation-laden, fallible act,
-      not a passive validator. A positive counter-case exists too
-      (`MANIFEST_bow_shock_and_dipole_cone_v1.md`, blind pass, 7/8
-      agreement) -- the mitigation isn't hypothetical.
-    - **Derived values:** not a separate rung (this cluster's original
-      framing, and L-158's own title, were wrong on this point) -- an
-      *inheritance rule* instead. A value derived at runtime from
-      tracked inputs inherits its weakest input's rung, once the
-      derivation logic itself has cleared one cross-check. A value
-      derived once and then hardcoded as a literal inherits nothing --
-      it's a copy, not a derivation, and lands in plain V3 with the
-      derivation comment as its citation. See L-158, retitled
-      accordingly.
-  - **Tier-1 never gets an auto-exit gate, at any threshold** (D7, review
-    amendment) -- permanent banner, human judgment, indefinitely. The only
-    hard exit-code gate in the cluster is L-155's pinning checks.
-- **Full comprehensive-sweep findings folded in** (design section 3): the
-  never-fixed inline `'source':` dict-value pattern; the duplicate-
-  detector's same-file/dict-kind blind spots; missing magnetosphere unit
-  vocabulary; the comet accepted-residual that contradicts the new scheme;
-  "Option A" retired.
-Note (2026-07-30, 1c BUILT): Built on 23635820 at session start; HEAD moved to
-cf061d7336cfed20a991218deec8b666e08d31b7 mid-session (Tony's push of the build
-prompt itself, one file, 24 insertions). provenance_scanner.py byte-identical
-across the move -- MD5 94891f347cfe1b46bf14020468571993 at both SHAs -- so the
-patch guard stayed valid and no rebuild was needed. Delivered two uncommitted
-files: patch_phase1c_citation_inheritance.py (12-edit anchored transactional
-patch, MD5 guard, ASCII/LF gates on the result, refuses re-run with the cause
-named) and test_citation_inheritance.py (16 tests, test_constants_provenance.py
-conventions, synthetic fixtures plus four live-repo relationship tests).
-Mechanism as specified: CITATION_LOOKBACK_BLOCK = 15 named and justified;
-single ast.walk over all ast.Assign at any depth (reaches function-local
-ring_params); assignment-level and entry-level blocks both recorded; whole
-contiguous comment run captured (the Moon block's match is a continuation
-line, so single-line capture would have dropped Weber 2011 and Draper 1847);
-line-range keying makes cross-dict inheritance structurally impossible;
-inheriting strings land V_SOURCED, no new rung. MEASURED, clean clone,
-apply/test/scan: Tier 1 156 -> 133, Tier 2 563 -> 586, Tier 3 60 and Tier 4 2
-unmoved, 781 conserved, nothing entered Tier 1, all movement confined to
-shell_configs.py. The 21/2 split re-derived independently from the audit and
-CONFIRMED (SHELL_CONFIGS: Earth 8, Jupiter 6, Moon 4, Mercury 2, Planet 9 1 =
-21; CUSTOM_SHELLS: Jupiter 1, Saturn 1 = 2) -- the predesign's own 22/1 table
-is wrong, the prompt's correction stands. The 18 L-173 findings match that
-table exactly and were left untouched. TWO ACCOUNTING CORRECTIONS to the
-prediction, neither a build defect. (a) Tier 1 is 133, not ~132: the predesign
-is internally inconsistent, counting 24 inheriting in its headline while its
-own Section 7 requires the jupiter_visualization_shells.py finding to DECLINE
-on ring_params' scope declaration. Both cannot hold; the scope rule wins and
-23 inherit. (b) Raw scanner output reads 782 findings / Tier 3 61: the +1 is
-the scanner scanning itself and finding its own new CITATION_LOOKBACK_BLOCK
-constant (score 6). Real population conserved exactly -- the self-referential
-quirk already carried as a provenance-discipline field note. DESIGN DEPARTURE
-surfaced by measurement and needing Tony's confirmation: the prompt's
-no-fallback invariant and its Jupiter case are in genuine tension, because the
-line-959 finding sits in an UNCITED nested entry (ring_params['thebe_gossamer'])
-and only the enclosing assignment carries the citation -- so inheriting it
-requires exactly the outward fallback the invariant forbids. Both readings
-implemented and measured; they produce BYTE-IDENTICAL audits at HEAD, because
-SHELL_CONFIGS and CUSTOM_SHELLS are themselves uncited at assignment level and
-there is no outer citation to fall back to. Built the strict version
-(narrowest containing block, cited or not, stop there) so the invariant holds
-by rule rather than by accident of the data: if anyone adds a # Source: above
-SHELL_CONFIGS = { the 18 L-173 findings stay visible instead of silently
-clearing. Cost: strict containment never reaches ring_params' scope
-declaration, so flagging was decoupled from resolution -- scope-declared
-blocks are collected during table construction regardless of whether any
-string reaches them and get their own audit section (SCOPE-LIMITED CITATIONS),
-pinned by test_scope_declared_block_is_flagged_even_when_unreached. Tony-action
-(decide): confirm strict containment, or revert to narrowest-cited-containing
-(one line in resolve_block_citation). SECOND judgment call deliberately not
-made: ring_params' scope note disclaims COLORS, but the claims now being
-suppressed are GEOMETRY (129,000 / 226,000 / 8,600 km), which the citation
-explicitly covers. Built the blunt rule as specified; Tony-action (decide)
-whether to open a follow-on for scope-aware inheritance before L-173's Gemini
-worksheet is drafted. Regression: test_constants_provenance.py 73/73 unchanged;
-test_reset_completeness.py fails identically on baseline and patched (missing
-astroquery in sandbox, not a regression); no external consumers of the changed
-functions. Gap item (6): BUILT, awaiting Tony's run + push. Also found:
-safe-file-editing reads 1.1 in both repo and installed copies while the
-protocol's Skill Manifest table still says 1.0 -- same class as L-152, one row
-down; Tony-action (do) regenerate via skills_index.py.
+#### [L-156] Provenance scanner scoring model fix — criticality (category-based) + vulnerability recalibration + comprehensive sweep
+<!-- L:156 status:OPEN upd:2026-07-31 section:W.Active flag: rice:5/4/80/3 -->
 
-Note (2026-07-30, 1c consequence tracked): The strict-containment decision
-recorded above has a measured cost, now tracked as L-174. A citation written
-above a dict ASSIGNMENT does not reach strings sitting inside that dict's
-uncited entries -- the resolver stops at the narrowest block by design.
-jupiter_visualization_shells.py's ring_params was the live instance (1
-finding, line 959); fixed by repeating the citation at entry level, Tier 1
-133 -> 132, closing the gap between the measured result and the predesign's
-original headline prediction. Three other files carry the same shape with no
-live impact. Also confirmed under L-174: the block table reads depth 1 and
-depth 2 only, which is exactly why shell_configs.py inherits correctly
-(citation at depth 2, strings at depth 3) -- and no depth-3 citation exists
-anywhere in the repo, so nothing is misattributed. Gap item (6) remains DONE;
-this is consequence, not reopening.
+**What.** `provenance_scanner.py`'s scoring mis-prioritized the data this
+cluster depends on: foundational constants (`SUN_RADIUS_KM`,
+`KM_PER_AU`, `CENTER_BODY_RADII`) scored low because criticality was
+resolved by direct-import-count, so a constant consumed indirectly (via a
+derived dict) scored as if barely used.
 
-Note (2026-07-31, 1d/1e/1f BUILT): Built by Opus 5 on e29841f8, patch applied and pushed at 8bd7778. Tests: test_provenance_1d.py 15/15, test_citation_inheritance.py 20/20, test_constants_provenance.py 73/73. Scanner output at HEAD: Tier 1 171, Tier 2 646, Tier 3 62, Tier 4 2, total 881 (includes self-scan of committed patch/test files).
+**Scanner state at HEAD (post-Phase-1, `b813aa6`):** Tier 1 171, Tier 2
+644, Tier 3 62, Tier 4 2, total 879 across 116 files. Tier 1 is
+132 baseline + 39 newly-visible temperature claims (tracked separately as
+L-175).
 
-1d piece 1 (shadow-constant detector): diverged from the predesign's Option A amendment — built as a dedicated scan_shadow_constants() + build_cited_constant_names(). Three measured reasons: Option A only inspects display strings (shadow constants are function-local assignments the scanner never extracts); amending Option A would demote 9 unrelated findings toward Tier 1; value-only matching gives 77 hits vs 2 for name+value. Option A untouched; D8.5 retirement question still open.
+### Decided constraints (design handoff + design review + Tony)
 
-1d piece 2 (citation-form recognition): added author-year parenthetical pattern to SOURCE_PATTERNS, handling both (Author et al., YYYY) and (Author et al.) forms. False-positive exclusion for month names. Measured: 13 findings moved Tier 1 -> Tier 2, population conserved. Actual yield close to the ~15 ceiling Opus 5 measured during review, not the old ~54 estimate.
+These are settled. Future builds work within them.
 
-1d piece 3 (temperature units): added temperature alternatives to NUMERIC_CLAIM_RE. Tier 1 132 -> 193 measured alone (+61 new findings, 96 total new). Largest tier-moving change in Phase 1. All are real uncited temperature claims in climate modules. See L-175.
+**Criticality.** Two categories: MEASURED (C=5) and RELATIONAL (C=4). Not
+consumer-count-based. Ring geometry in MEASURED (Tony: "the rings are
+better defined"). Orbital period and radius share the top tier (Tony:
+"these are fundamental data"). Explicit `undetermined` sentinel for
+unclassifiable items, with its own banner.
 
-1e piece 1 (Tier-1 banner): bordered, informational only. No exit code gate — ever (design review 3c, Tony confirmed). The code carries a comment naming the superseded document.
+**Role-veto amendment (ratified 2026-07-29).** Role overrides name match
+when the module's functional role is non-narrative. Without it,
+`HUB_THRESHOLD`, `MAX_DATA_AGE_DAYS`, and
+`PERFRAME_INDICATOR_RADIUS_FACTOR` all scored MEASURED through generic
+stems.
 
-1e piece 2 (tier labels): Tiers 2/3/4 neutralized (REVIEW, LOW PRIORITY, LOWEST PRIORITY). Tier 1 keeps FIX NOW (Tony accepted — action directive, not a status claim).
+**Vulnerability ladder (D3, decided 2026-07-27).** Four rungs via
+three-AI calibration (Gemini 3.1 Pro, GPT 5.5, Fable 5), Sonnet 5
+synthesis. V1 FETCHED (live pipeline). V2 CROSS-CHECKED (never
+auto-promotable to V1; requires structured, dated annotation with
+blind-check field). V3 SOURCED (cited but unchecked, merged with stale
+per Tony). V4 RECALLED (no citation). Derived values inherit weakest
+input's rung once derivation logic clears one cross-check; a hardcoded
+literal inherits nothing (plain V3).
 
-1f (shadow constants deleted): comet_visualization_shells.py lines 492-493 and 602 deleted, SUN_RADIUS_KM and SOLAR_RADIUS_AU imported through the shim. Runtime-verified value-preserving. Fire-then-silence test confirmed: 1d detected 3 shadow constants, 1f silenced them.
+**Tier-1 exit.** Permanent banner, never auto-exit gate, at any threshold
+(D7, design review 3c, Tony confirmed). The only hard exit-code gate is
+L-155's pinning checks (Phase 3). Errata:
+`documentation/HANDOFF_phase1_1d_to_1f.md` at HEAD still describes a
+deferred exit-gate flip — this is wrong; superseded by the design review
+and `AS_BUILT_L156_phase1d_e_f.md`.
 
-Errata: documentation/HANDOFF_phase1_1d_to_1f.md at HEAD describes a deferred exit-gate flip for 1e. This is wrong — superseded by the design review 3c and AS_BUILT_L156_phase1d_e_f.md. The authoritative documents for 1e are the design review, the R1 predesign (PREDESIGN_HANDOFF_phase1_d_e_f_R1.md), and the as-built.
+**Tier labels.** Tier 1 keeps "FIX NOW" (action directive, not status
+claim — Tony accepted). Tiers 2/3/4 neutral score-band names: REVIEW,
+LOW PRIORITY, LOWEST PRIORITY.
 
-Observation (not fixed): build_pinned_values() uses a 10-line citation window that lets uncited constants inherit a neighbor's citation (bleed flaw). The new build_cited_constant_names() avoids this with a contiguous-comment-run approach. The old mechanism is still live feeding Option A. Tracked here pending D8.5 retirement decision.
+**Block inheritance.** Strict containment, narrowest block wins (Tony
+confirmed via 1c build). No outward fallback — if a block is uncited,
+strings inside it stay uncited even if a parent block is cited. This
+keeps L-173's findings visible.
 
-Observation (not fixed): comet_visualization_shells.py carries 3 pre-existing em-dash bytes (non-ASCII), one in a display string. Tony has approved fixing — separate edit.
+**No Shadow Constants [CRITICAL].** provenance-discipline v1.3. Local
+copies of `constants_new.py` values must be deleted and replaced with
+proper imports. Never cite-to-clear a structural problem.
 
-Gap item (3): 1d DONE; 1e DONE; 1f DONE. Phase 1 COMPLETE. Phase 2 (D4 cross-checked annotation backfill) is next in the original plan.
+### Phase 1 build history (1a–1f: COMPLETE)
 
-**Gap:** (1) fix the `CENTER_BODY_RADII` duplication per L-162 (separate
-dedicated session) -- **DONE, L-162 closed 2026-07-29;** (2) resolve the
-five comprehensive-sweep items; (3) build Phases 1-3 (Opus 5) against the
-decided ladder above, sub-stepped 1a-1f for clean attribution --
-**1a DONE (2026-07-29, see Note below); 1b next.** 1c-1f remain: 1c
-citation-window inheritance (Gap item 6), 1d citation-recognition regexes
-+ D8 vocab + L-078(d) (Gap item 5, now also carrying the citation-form
-gap, item 7 below), 1e banners/labels/Tier-2 sub-band, 1f the D9
-structural check (see L-158); (4) Phase 3 also retires -- the D3
-gate is clear, nothing further blocks the build; (4) Phase 3 also retires
-`MODULE_DOMAIN_MAP`/`DOMAIN_LABELS` in `provenance_scanner.py` and imports
-domain from `module_atlas.py` instead (L-163 review amendment, Fable 5;
-gate was L-163's sweep, now closed -- recorded here so the work item lives
-in the open item a build session reads, not only in L-163's archived
-block and the master plan). (5) widen `build_pinned_values()`/scoring so a bare numeric literal that
-merely matches an already-cited pinned value is flagged
-("possible frozen copy -- verify import") rather than silently granted
-V_SOURCED. This is the actual fix that closes L-158's gap (see L-158's own
-note) -- the inheritance-rule wording alone doesn't catch it. Two confirmed
-live instances to fix alongside it: `comet_visualization_shells.py` lines
-492-493 and 602 (see L-158).
-[SUPERSEDED 2026-07-30 — see Note below and L-173. The 66/42/median-2418
-figures in this paragraph are wrong; kept for history, not for building from.]
-(6) **Citation-window inheritance fix (verified 2026-07-29 -- independently
-re-measured, exact match).** 66 of the 145 Tier-1 findings (46%) have a
-real block-level `# Source:` citation the scanner's 60-line lookback simply
-doesn't reach -- concentrated in `shell_configs.py` (41; one citation per
-~170-line body block, gap 64-821 lines) and `jupiter_visualization_shells.py`
-(1; a two-line miss). Root cause: `_extract_string_units` walks every
-string constant independently with its own 60-line window, blind to any
-enclosing dict's block citation -- and for `shell_configs.py` specifically,
-`_make_dict_unit` never applies at all, since `SHELL_CONFIGS`/
-`CUSTOM_SHELLS` are single top-level dicts whose values are nested dicts,
-which `_make_dict_unit` explicitly skips. Fix: a string unit nested inside
-a block-cited dict inherits that citation, but inheritance is not
-clearance -- it lands at V3 SOURCED, same pattern as L-158's inheritance
-rule. Must land before Phase 4's worksheets are drafted; it determines
-which findings actually need Gemini. `idealized_orbits.py`'s 24 "beyond
-window" findings do NOT get this treatment -- median gap 2418 lines,
-genuinely distant citations, not the same phenomenon; they stay Tier-1 and
-need the worksheet like any other genuinely uncited claim.
-**Updated Tier prediction** genuinely distant citations, not the same phenomenon; they stay Tier-1 and
-need the worksheet like any other genuinely uncited claim.
-(7) **Citation-form recognition gap (found 2026-07-29, during 1a).**
-`has_citation`/`SOURCE_PATTERNS` doesn't recognize a bare author-year
-parenthetical as a citation -- only `# Source:`/`# Verified:` keywords or
-a URL. Real, verified instances exist (`TW_SURVIVABILITY_BIOLOGICAL`,
-`TW_SURVIVABILITY_THEORETICAL`); measured at ~54 of 156 Tier-1 findings
-but not independently confirmed at that precision -- re-measure when 1d
-actually lands. Belongs in 1d alongside item (5)'s D4 regex work.
-**Updated Tier prediction** (supersedes `PRELIM_DESIGN_HANDOFF_...part2.md`
-section 3's table; total conserved at 764):
+**1a (2026-07-29).** Landed D1 (MEASURED/RELATIONAL), D2 (`undetermined`
+sentinel), D3 (V-ladder scoring), D8.3 (magnetosphere vocabulary), D8.4
+(comet un-grandfathering), role-veto amendment. Tier 1 145 → 156 (growth
+is correct — raising criticality promotes previously-buried uncited
+facts). 5 undetermined. 781 total.
 
-| | Live at HEAD | Predicted after Phase 1 |
-|---|---:|---:|
-| Tier 1 | 145 | **~103** |
-| Tier 2 | 158 | **~532** |
-| Tier 3 | 442 | ~110 |
-| Tier 4 | 19 | ~19 |
+**1b (2026-07-29).** V-ladder scoring applied across all findings. Tier 1
+156 (unchanged — invariant held). Tier 2 181 → 563, Tier 3 430 → 60,
+Tier 4 14 → 2. 781 conserved.
 
-**1a built and verified (2026-07-29).** Landed against HEAD `459fecd1`
-(pre-Phase-A baseline), independently re-verified by me against the
-actual pushed state at `bdaaa0c` after a first attempt silently failed to
-execute (caught by a scanner re-run; see `safe-file-editing` skill v1.1
-Field Notes for the process lesson). Result on the combined
-Phase-A-plus-1a state: 781 findings, **Tier 1 = 156** (up from 145 -- see
-below), Tier 2 = 181, Tier 3 = 430, Tier 4 = 14. `undetermined` count:
-**5**, not the 62 (D2-as-written) or 40 (widened vocabulary alone) the
-design discussion estimated -- role as a classification input (per
-Tony's approval) closed the rest: `comet_visualization_info`,
-`TW_SURVIVABILITY_BIOLOGICAL`, `TW_SURVIVABILITY_THEORETICAL`,
-`ROTATION_AXIS_OMITTED`, `REFERENCE_YEAR`.
+**1c (2026-07-30).** Citation-block inheritance via AST walk
+(`build_citation_block_table()`, `resolve_block_citation()`). Tier 1
+156 → 133. 23 shell_configs.py findings moved Tier 1 → Tier 2 (21
+SHELL_CONFIGS, 2 CUSTOM_SHELLS). 18 genuinely uncited findings left
+untouched (tracked as L-173). Design departure: strict containment chosen
+over narrowest-cited-containing, making L-173 findings visible by rule
+rather than by accident of the data.
 
-**Tier 1 growing is correct, not a regression.** The cluster's own
-earlier prediction (Tier 1 stays flat through 1a, since all current
-Tier-1 findings are strings) was wrong -- raising a constant's
-criticality from low to MEASURED can promote a previously-buried,
-uncited physical fact *into* Tier 1 for the first time. Verified
-directly: `COMET_NUCLEUS_SIZES`, `planet_tilts`,
-`BASELINE_ABSOLUTE_TEMP`, `B_STAR_TEMPERATURES` and others were sitting
-in Tier 2/3 specifically because volume-based scoring undercounted them
--- D1 working as designed. The "Updated Tier prediction" table above is
-superseded by this; a corrected end-of-Phase-1 prediction should wait
-until 1d lands (see below), since 1d now looks like a bigger mover than
-1b/1c.
+**L-174 (1c consequence, 2026-07-30).** Citations pitched one block too
+far out for the resolver to see (ring_params line 959). Fixed by
+repeating citation at entry level. Tier 1 133 → 132. Permanent diagnostic
+added (`SHADOWED_STRINGS`, `DEEP_CITATIONS`).
 
-**Role-veto amendment -- ratified (2026-07-29).** Breaks the earlier
-approval that role would only fill in where a name match was absent,
-never override one. Necessary: without it, `HUB_THRESHOLD` (devtool,
-matches `threshold`), `MAX_DATA_AGE_DAYS` (cache, matches `_days`), and
-`PERFRAME_INDICATOR_RADIUS_FACTOR` (gui, matches `radius`) all scored
-MEASURED and landed uncited tool config in Tier 1 -- the exact failure
-D1 exists to prevent, reintroduced through a generic stem. Verified
-directly, both directions: all three now correctly score
-"Internal (role ...)", while `BASELINE_ABSOLUTE_TEMP` and
-`B_STAR_TEMPERATURES` (genuine physical facts, different roles) still
-correctly score MEASURED. Costs nothing legitimate.
+**1d (2026-07-31, Opus 5).** Three pieces:
+- **Piece 1 (shadow-constant detector):** built as dedicated
+  `scan_shadow_constants()` + `build_cited_constant_names()`, diverging
+  from the predesign's Option A amendment. Three measured reasons: Option A
+  only inspects display strings (shadow constants are function-local
+  assignments the scanner never extracts); amending it would demote 9
+  unrelated findings toward Tier 1; value-only matching gives 77 hits vs
+  2 for name+value. Option A untouched; D8.5 still open.
+- **Piece 2 (citation-form recognition, Gap item 7):** author-year
+  parenthetical pattern added to SOURCE_PATTERNS, both `(Author et al.,
+  YYYY)` and `(Author et al.)` forms. Measured: 13 findings Tier 1 →
+  Tier 2, population conserved.
+- **Piece 3 (temperature units, L-078(d)):** temperature alternatives
+  added to NUMERIC_CLAIM_RE. Tier 1 +61 (96 total new findings). Largest
+  tier-moving change in Phase 1. All real uncited temperature claims in
+  climate modules. Tracked as L-175.
 
-**A third recognition gap, found during 1a (2026-07-29) -- reshapes 1d
-and Phase 4.** Distinct from the two already in Gap item (6): this one
-is citation *form*, not distance or nesting. `has_citation`/
-`SOURCE_PATTERNS` only recognizes `# Source:`/`# Verified:` keywords or
-a URL -- a bare author-year parenthetical (`# empirical limit (Vecellio
-et al.)`) matches nothing. Verified directly:
-`TW_SURVIVABILITY_BIOLOGICAL` and `TW_SURVIVABILITY_THEORETICAL` are
-genuinely, correctly cited (Vecellio et al. 2022; Sherwood & Huber 2010
--- real, well-known thresholds) and still score V4 RECALLED, "no source
-citation." The scanner accusing a cited value of being uncited is
-cite-to-clear's mirror image -- same integrity failure, opposite
-direction. Measured at 54 of 156 Tier-1 findings (14/9/8 in
-`shell_configs.py`/`paleoclimate_wet_bulb_full.py`/`idealized_orbits.py`)
--- **I could not independently reproduce this exact count** with a quick
-approximation (got 19 with a looser pattern, different per-file split);
-the underlying mechanism is solidly confirmed, the precise number isn't,
-pending 1d's actual pattern-matching. This means 1d (where D4's
-recognition regexes live) is likely Phase 1's single largest Tier-1
-reducer, not a minor step, and undercuts the plan to start the Gemini
-worksheet with the paleoclimate family -- several of those already name
-their sources correctly.
+**1e (2026-07-31, Opus 5).** Tier-1 banner (bordered, informational, no
+exit code). Tier labels neutralized (2/3/4); Tier 1 keeps "FIX NOW".
+Code carries a comment naming design review 3c and the superseded
+document.
 
-**Sequencing decided: 1b next, not 1d pulled forward (2026-07-29).**
-These are independent scoring passes recomputed fresh each run, not a
-stateful migration -- final end-of-Phase-1 state is identical regardless
-of 1b/1d order. Reordering would only invalidate the predictions above
-for no gain, since Phase 4 doesn't start until after all of 1a-1f
-regardless of their internal order.
-**Note (2026-07-29, decided by Tony):** April 2026 constants verification
-(Claude sourced, Gemini reviewed) accepted as sufficiently verified as-is
--- it caught two real errors (Arrokoth, Parker) and that's the working bar.
-**Not** promoted to a formal `# Cross-checked:` V2 annotation now; that
-annotation, if ever added, rides the regular Gemini sweep when it reaches
-`constants_new.py` (same as any other file, via L-161's relay) -- not a
-separate task, not a Phase 2 blocker. D6's pinning-engine staging premise
-stands as originally written; Phase 2 is not gated on this question.
-L-078(d)'s F/C bare-degree regex fix folds into this Phase 1 build (same
-`NUMERIC_CLAIM_RE` edit as D8's magnetosphere vocabulary addition).
-Note (2026-07-30, 1b landed): Built on ac07419, pushed at bf36743 [verified @bf36743 — remote HEAD match, reason-string re-execution confirmed]. Tier 1 = 156 (unchanged — invariant held, highest reachable score on the changed path is 15, one below the Tier-1 floor of 16). Tier 2 = 181→563, Tier 3 = 430→60, Tier 4 = 14→2, total 781 conserved. Carried one 1a follow-up: CRIT_ABSOLUTE_OVERRIDE emptied (CENTER_BODY_RADII now holds only the Planet 9 raw literal post-Phase-A, confirmed in constants_new.py). Gap item (3): 1b DONE; 1c next.
-Note (2026-07-30, 1c predesign verified): Opus 5's predesign (PREDESIGN_1c_citation_inheritance.md, built on 657542f) re-measured Gap item 6 with the scanner's actual citation patterns instead of a narrow grep, and every figure in it changed. Independently re-verified by Sonnet 5 against live source and the real PROVENANCE_AUDIT.md — all headline numbers confirmed exact. Yield is 23, not 42 (21 in SHELL_CONFIGS, 2 in CUSTOM_SHELLS — corrects the predesign's own internal table, which said 22/1; same total). jupiter_visualization_shells.py's ring_params (function-local, citation at line 897, dict opens 906, finding at 959 — 62-line gap) confirmed exact. idealized_orbits.py's exclusion re-confirmed but on a different, correct basis: 24 findings, 7418-line file, all beyond its single 11-line cited block (lines 57-67) — zero fall inside, a structural fact, not the median-gap-2418 distance argument originally given (real median is 266, indistinguishable from shell_configs.py's own gaps — distance is the wrong discriminator for this fix). New finding, tracked separately as L-173: 18 of shell_configs.py's 41 Tier-1 findings sit in body blocks with no citation at all — genuine gaps, not window misses. Updated prediction: Tier 1 156 -> ~132 (not ~114 carried forward pre-predesign); Tier 2 563 -> ~586; Tier 3/4 unchanged. Mechanism recommendation (precomputed range table over AST parent-tracking) and its edge cases (no fallback for uncited blocks, innermost-block-wins, no cross-dict inheritance, multi-line citation capture, explicit-scope-declaration handling, lookback pinned at 15) all verified sound. Gap item (3): 1c predesign DONE and verified; ready to build. Fix the 22/1 table in the predesign doc itself before using it as the build reference.
+**1f (2026-07-31, Opus 5).** Shadow constants deleted in
+`comet_visualization_shells.py` (lines 492-493, 602). `SUN_RADIUS_KM`
+and `SOLAR_RADIUS_AU` imported through shim. Runtime-verified
+value-preserving. Fire-then-silence test: 1d detected 3 shadow constants,
+1f silenced them.
 
-Add to Ref: PREDESIGN_1c_citation_inheritance.md; L-173.
-**Ref:** `provenance_scanner.py` (`find_cross_file_issues`,
-`CONCEPT_ALIASES`, `NUMERIC_CLAIM_RE`); `constants_new.py`;
-`data/provenance_exceptions.json`; `documentation/provenance_audit_handoff_v1.md`
-(Arrokoth/Parker precedent); `ADDENDUM_v23_design_session_narrative.md`
-(anchoring near-miss); `HANDOFF_addendum_phase1_and_uranus_cleanup.md`,
+**build_pinned_values() bleed fix (2026-07-31, Opus 5 follow-on).**
+Extracted shared `constant_has_own_citation()` predicate routed through
+both `build_pinned_values()` and `build_cited_constant_names()` —
+eliminates the 10-line window bleed where uncited constants could inherit
+a neighbor's citation. Measured impact: zero (all 34 constants in
+`constants_new.py` already carry own citations), but defensive against
+future additions. test_provenance_1d.py 15 → 20 (5 predicate tests
+added). `test_both_pinned_builders_agree` asserts the two callers stay
+synchronized.
+
+**Phase 1 measured arc:** Tier 1: 145 → 156 (1a) → 156 (1b) → 133 (1c)
+→ 132 (L-174) → 171 (1d/1e/1f, of which 132 → 119 from piece 2, offset
+by +61 newly-visible from piece 3).
+
+### Observations (not fixed, tracked)
+
+**Em-dashes in comet_visualization_shells.py.** Three pre-existing
+non-ASCII bytes (em-dashes), one inside a display string. Tony approved
+fixing — separate edit, changes user-visible output.
+
+**Patch scripts in repo root → documentation/.** Seven committed patch
+scripts moved to `documentation/` to clear self-scan Tier-1 noise.
+Complete.
+
+### What remains open under L-156
+
+**D8.5 (retire or keep Option A).** `build_pinned_values()` and Option A
+scoring are still live. The bleed flaw is fixed but the mechanism itself
+may not be worth keeping. Design question, not yet decided.
+
+**Phase 2 (D4 cross-checked annotation backfill).** Next in the original
+plan. Gated on Phase 1 (now complete).
+
+**Phase 3.** L-155 (pinning engine), L-160 (retire
+`test_constants_provenance.py`, gated on L-155), and MODULE_DOMAIN_MAP /
+DOMAIN_LABELS import from `module_atlas.py` (L-163 review amendment).
+
+**Phase 4.** L-157 / L-161 (Gemini cross-check sweeps), L-159
+(disclosed-approximation enforcement).
+
+### Ref
+
+`provenance_scanner.py`; `constants_new.py`;
+`data/provenance_exceptions.json`;
+`documentation/provenance_audit_handoff_v1.md` (Arrokoth/Parker
+precedent); `ADDENDUM_v23_design_session_narrative.md` (anchoring
+near-miss); `HANDOFF_addendum_phase1_and_uranus_cleanup.md`,
 `HANDOFF_provenance_phase1_v17.md` (Gemini cross-check itself wrong);
 `MANIFEST_bow_shock_and_dipole_cone_v1.md` (blind-pass positive case);
 `DESIGN_HANDOFF_provenance_scoring_and_pinning.md`;
-`DESIGN_REVIEW_provenance_scoring_and_pinning.md`; L-163 (naming precedent);
-L-155; L-157; L-158; L-159; L-161; L-162.
-Add to Ref: patch_phase1c_citation_inheritance.py; test_citation_inheritance.py;
-documentation/AS_BUILT_L156_phase1c.md; documentation/BUILD_phase_1c_prompt.md.
+`DESIGN_REVIEW_provenance_scoring_and_pinning.md`;
+`documentation/AS_BUILT_L156_phase1c.md`;
+`documentation/AS_BUILT_L156_phase1d_e_f.md`;
+`documentation/PREDESIGN_HANDOFF_phase1_d_e_f_R1.md`;
+`documentation/REVIEW_predesign_1d_1e_1f.md`;
+`documentation/BUILD_phase_1c_prompt.md`;
+`documentation/patch_phase1c_citation_inheritance.py`;
+`documentation/patch_phase1_d_e_f.py`;
+`documentation/patch_pinned_values_bleed.py`;
+`test_provenance_1d.py`; `test_citation_inheritance.py`;
+L-155; L-157; L-158; L-159; L-161; L-162; L-163; L-173; L-174; L-175.
+
 
 ---
 
