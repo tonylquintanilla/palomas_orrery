@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: July 31, 2026
-Files scanned: 124
-Total findings: 882
-Constants: 92 | Dicts: 41 | Display strings: 749
+Files scanned: 116
+Total findings: 879
+Constants: 92 | Dicts: 38 | Display strings: 749
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -38,8 +38,8 @@ Unit of provenance: the smallest thing with a coherent source citation. A dict w
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 172 |
-| 2 | 10-15 | REVIEW | 646 |
+| 1 | 16-20 | FIX NOW | 171 |
+| 2 | 10-15 | REVIEW | 644 |
 | 3 | 5-9 | LOW PRIORITY | 62 |
 | 4 | 1-4 | LOWEST PRIORITY | 2 |
 
@@ -112,7 +112,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `fetch_climate_data.py` | earth_science | 0 | 2 | 0 | 0 | 2 |
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `orbital_elements.py` | orrery | 1 | 0 | 0 | 0 | 1 |
-| `patch_pinned_values_bleed.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `data_acquisition.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `energy_imbalance.py` | earth_science | 1 | 0 | 0 | 0 | 1 |
 | `exoplanet_orbits.py` | stars | 1 | 0 | 0 | 0 | 1 |
@@ -122,8 +121,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `planetarium_distance.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `plot_data_report_widget.py` | utilities | 1 | 0 | 0 | 0 | 1 |
 | `visualization_utils.py` | stars | 1 | 0 | 0 | 0 | 1 |
-| `patch_L174_citation_level_mismatch.py` | orrery | 0 | 1 | 0 | 0 | 1 |
-| `patch_phase1_d_e_f.py` | orrery | 0 | 1 | 0 | 0 | 1 |
 | `add_docstrings.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `data_inventory.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `osculating_cache_manager.py` | orrery | 0 | 0 | 1 | 0 | 1 |
@@ -139,7 +136,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 41 | 77 | 518 | 18 | 2 | 615 |
+| Orrery (solar system + orbital mechanics) | 38 | 76 | 516 | 18 | 2 | 612 |
 | Earth System | 13 | 86 | 90 | 2 | 0 | 178 |
 | Stars (stellar neighborhood) | 9 | 8 | 38 | 6 | 0 | 52 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 10 | 0 | 0 | 36 | 0 | 36 |
@@ -149,9 +146,6 @@ Same data again, grouped by subject-matter domain rather than by individual file
 **Domain coverage gap:** the following files have findings but no entry in `MODULE_DOMAIN_MAP` -- defaulted to `orrery` rather than guessed into a more specific bucket. Add each to `MODULE_DOMAIN_MAP` in provenance_scanner.py with its real domain so this stops silently defaulting:
 
 - `orrery_rendering.py`
-- `patch_L174_citation_level_mismatch.py`
-- `patch_phase1_d_e_f.py`
-- `patch_pinned_values_bleed.py`
 - `shell_configs.py`
 
 ---
@@ -439,12 +433,6 @@ is planned for a future session.
 | 2128 | string | display string @ line 2128 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2151 | string | display string @ line 2151 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2174 | string | display string @ line 2174 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-
-### patch_pinned_values_bleed.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 86 | dict | TARGETS[...] | (2 entries) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
 
 ### planet_visualization_utilities.py
 
@@ -1097,18 +1085,6 @@ is planned for a future session.
 | 2303 | string | display string @ line 2303 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2332 | string | display string @ line 2332 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2341 | string | display string @ line 2341 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-
-### patch_L174_citation_level_mismatch.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 103 | dict | TARGETS[...] | (3 entries) | 3 | 5 | **15** | Cited, not independently cross-checked | UNDETERMINED -- could not be classified |
-
-### patch_phase1_d_e_f.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 112 | dict | TARGETS[...] | (2 entries) | 3 | 5 | **15** | No source, contains date-sensitive claims | UNDETERMINED -- could not be classified |
 
 ### planet9_visualization_shells.py
 
