@@ -6,7 +6,7 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0)
 
 # Provenance Discipline
 
-Skill version: 1.3 | Cut from palomas_orrery @ <SHA after push> | July 31, 2026
+Skill version: 1.3 | Cut from palomas_orrery @ 4b6b5c12 | July 31, 2026
 Source: project_instructions_v3_29.md Part 3 (Provenance Audit, Fetched vs
 Recalled) + food insecurity build handoff + scanner source at HEAD. v1.1
 adds the report domain-classification mechanics, the Review-Repair

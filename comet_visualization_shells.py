@@ -258,7 +258,7 @@ HISTORICAL_TAIL_DATA = {
             "disintegrated April 4, 2026 ~08:15 UTC, ~6 hours before perihelion. "
             "Blue-green coma observed March 14, 2026. Peak brightness mag -0.6. "
             "Possibly a fragment of the Great Comet of 363 AD. "
-            "Post-disintegration: headless ghost comet — dust and ion tails persist "
+            "Post-disintegration: headless ghost comet -- dust and ion tails persist "
             "on the outbound arc without a nucleus. SOHO/LASCO tracking through ~April 6."
         ),
         'coma_color': 'teal',                 # Blue-green C2 coma, Sky&Tel March 14
@@ -507,7 +507,7 @@ def create_maps_disintegration_marker(position_au, comet_name='MAPS'):
 
     # How deep into the corona? (corona base is ~2,100 km above photosphere)
     depth_into_corona_km = max(0.0, dist_photosphere_km - CORONA_BASE_KM)
-    # Roche status — disintegration was OUTSIDE the Roche limit
+    # Roche status -- disintegration was OUTSIDE the Roche limit
     inside_roche = r_km < ROCHE_KM
     roche_status = (
         f"YES -- {ROCHE_KM - r_km:,.0f} km inside"
@@ -521,7 +521,7 @@ def create_maps_disintegration_marker(position_au, comet_name='MAPS'):
     #         Shell values from constants_new.py
     # Verified: April 2026 via Gemini fact-check
     hover = (
-        f"<b>MAPS (C/2026 A1) — Nucleus Disintegrated</b><br>"
+        f"<b>MAPS (C/2026 A1) -- Nucleus Disintegrated</b><br>"
         f"April 4, 2026 ~08:15 UTC | ~6 hours before perihelion<br>"
     #    f"<br>"
         f"<b>Position at disintegration:</b><br>"
