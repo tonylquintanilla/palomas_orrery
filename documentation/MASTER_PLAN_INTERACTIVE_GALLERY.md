@@ -829,29 +829,36 @@ BLOCKED: the client-side feature-rendering JS layer it needs (L-154) is
 gated behind a provenance/scoring detour that opened while scoping it (see
 §6 for the full dependency chain).
 
-Detour status as of 2026-07-29: design and ledger phases CLOSED; scanner build IN PROGRESS.
-Phase 1 (Opus 5, sub-stepped 1a-1f) has 1a and 1b landed and pushed (bf36743);
-1c-1f remain. 1c's predesign is done and independently verified (Sonnet 5, 2026-07-30) — ready to build directly, no separate design round needed. It also found a real citation gap distinct from the scanner bug it was scoping: shell_configs.py has 8 body blocks with no citation at all, 18 Tier-1 findings among them, tracked as L-173. Revised Phase-1 prediction: Tier 1 ~132 after 1c, not ~114.
-All nine items (L-154-162) now have their own
-ledger entries (previously handoff-only); a Fable 5 broad-review pass
-independently caught two stale claims before they could mislead a future
-session (L-154's own resume handoff wrongly asserted its resolver bug was
-fixed -- it isn't, confirmed against live gallery HEAD; L-163's Gap text
-wrongly read as still-open). The one open design fork -- how the scanner's
-Vulnerability ladder should treat cross-checked vs. merely-cited values --
-went through a three-AI calibration round (Gemini 3.1 Pro, GPT 5.5, Fable
-5) and closed 2026-07-27; full ladder and reasoning in L-156.
+Detour status as of 2026-07-31: design and ledger phases CLOSED; **scanner
+Phase 1 (1a-1f) COMPLETE.**
 
-NEXT: Opus 5 builds the scanner's Phases 1-3 against the now-closed design
-(L-155/156/157/160 -- the scoring model, in-scanner pinning, and the D6/D9
-mechanics); L-157 and L-161 (the two Gemini shell-config and display-string
-sweeps) follow sequentially, not in parallel. L-162 (CENTER_BODY_RADII
-naming) is independent and can land any time before or after. Once the
-scanner build closes, resume L-154's own open design questions
+Phase 1 built by Opus 5 across four sessions, orchestrated by Opus 4.6
+(predesign) and reviewed by Opus 5 (predesign review caught four factual
+errors in the orchestration draft). Final scanner state: Tier 1 171,
+Tier 2 644, Tier 3 62, Tier 4 2 (879 findings / 116 files). Tier 1 is
+132 baseline + 39 newly-visible temperature claims in climate modules
+(tracked separately as L-175, same pattern as L-173). Phase 1 measured
+arc: 145 -> 156 (1a) -> 156 (1b) -> 133 (1c) -> 132 (L-174) -> 171
+(1d/1e/1f).
+
+Also landed: build_pinned_values() citation-bleed flaw fixed (shared
+predicate extracted, zero measured impact, defensive); No Shadow Constants
+[CRITICAL] convention added to provenance-discipline v1.3; shadow
+constants in comet_visualization_shells.py deleted and properly imported.
+
+All nine cluster items (L-154-162) have their own ledger entries. L-162
+closed (CENTER_BODY_RADII naming). L-163 role side closed; domain side
+deferred into the cluster.
+
+Still open under L-156: D8.5 (retire or keep Option A); Phases 2-4.
+
+NEXT: L-157 and L-161 (the two Gemini cross-check sweeps -- shell-config
+geometry and display-string sourcing) follow sequentially, not in
+parallel. Then L-155/L-160 (Phase 3: pinning engine and test retirement).
+Once the scanner work closes, resume L-154's own open design questions
 (geometry-building approach, legend behavior, artifact sequencing --
-captured separately in HANDOFF_gallery_feature_layer_L154_resume.md so
-they aren't lost under the detour, and corrected in place per the finding
-above), then build Artifact 2.
+captured in HANDOFF_gallery_feature_layer_L154_resume.md), then build
+Artifact 2.
 
 ---
 

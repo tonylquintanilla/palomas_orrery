@@ -51,8 +51,8 @@ Known limitations and accepted residuals:
     (b) cross-reference opportunity against constants_new.py pinned values,
     (c) solar/uranus shell files as primary remaining Tier-1 source.
     Option B (dedup) implemented; Option A (constant cross-reference)
-    implemented but rarely fires due to value-matching fragility with
-    coincidental numbers like 200, 1, etc.
+    implemented, then retired in August 2026 (D8.5) -- value matching is
+    not provenance. See mechanism 8 below.
 
     Stage 3 also added: lookback 30->60, exceptions file loading,
     accepted residuals block in report. 34 source citations added to
@@ -147,15 +147,17 @@ Known limitations and accepted residuals:
        April 2026 per Claude Opus 4.7 recommendation. First occurrence
        (standalone variable) wins; dict entry version suppressed.
 
-    8. Constant cross-reference (Option A):
-       An attempt to mark display string claims as V_SOURCED when their
-       numeric values match pinned constants in constants_new.py.
-       Implemented but rarely fires in practice: the "all claims must
-       match" requirement breaks on coincidental numbers (200, 1, etc.)
-       that appear in hover text but are not pinned constants. The
-       correct fix is to add # Source: comments to shell info variables,
-       which was done for solar and uranus shells (April 2026).
-       Identified as insufficient by Claude Sonnet 4.6 after testing.
+    8. Constant cross-reference (Option A) -- RETIRED, D8.5, Aug 2026:
+       Marked display string claims as V_SOURCED when their numeric
+       values matched pinned constants in constants_new.py. Retired
+       because a value match is not provenance: it shows two numbers
+       are equal, not that anyone consulted a source. It credited 26
+       display strings, 23 of which belonged in Tier 1.
+       Value matches are still reported by the shadow-constant detector
+       as a diagnostic. build_pinned_values() remains, feeding that
+       detector only -- it no longer reaches scoring.
+       The same audit retired STALE-ONLY credit, which granted
+       V_SOURCED to uncited units carrying a staleness marker.
 
     9. Accepted Tier-2 residuals (documented, no action needed):
        The following are documented in provenance_exceptions.json:
@@ -269,6 +271,12 @@ comes from the module's own docstring tag).
 Module updated: July 2026 with Anthropic's Claude Sonnet 5 (L-162:
 CONCEPT_ALIASES entries added for the 14 newly-named CENTER_BODY_RADII
 constants).
+
+Module updated: July 2026 with Anthropic's Claude Opus 5 (constant_has_own_
+Module updated: August 2026 with Anthropic's Claude Opus 5 (D8.5: Option A
+retired -- V_SOURCED is no longer granted for numeric coincidence -- and
+stale-only credit retired with it, since a staleness marker is not a source.
+build_pinned_values retained; it now feeds the shadow-constant diagnostic only).
 
 Module updated: July 2026 with Anthropic's Claude Opus 5 (constant_has_own_
 citation extracted as the single citation predicate; build_pinned_values no
@@ -1781,42 +1789,50 @@ def _vocab_hit(name, stems):
     return False
 
 
-def score_unit(unit, imported_names, pinned_values=None):
-    """Assign vulnerability and criticality to a unit."""
+def score_unit(unit, imported_names):
+    """Assign vulnerability and criticality to a unit.
+
+    Vulnerability answers one question: does a citation exist for this
+    claim? Nothing else may substitute for it. Two mechanisms that once
+    did were retired in D8.5 -- see the note above the ladder below.
+    """
     # ---- Vulnerability ----
     text = unit.context_text or ''
     is_doc = bool(unit.is_docstring)
     cited = has_citation(text, is_docstring=is_doc)
     stale = has_stale_marker(text)
 
-    # Option A: cross-reference against pinned constants.
-    # If ALL numeric claims in a display string match values already
-    # pinned and cited in constants_new.py, treat as V_SOURCED.
-    # Requires ALL claims to match to avoid false positives.
-    if (not cited and pinned_values and unit.kind == 'string'
-            and unit.numeric_claims):
-        claim_values = set()
-        for num_str, unit_str, value in unit.numeric_claims:
-            for prec in (0, 1, 2, 3):
-                claim_values.add(round(value, prec))
-        if claim_values and all(v in pinned_values for v in claim_values):
-            cited = True
-            unit.vuln_reason = "Cited via pinned constant in constants_new.py"
-
-    # D3 ladder (L-156). STALE is no longer a rung of its own: a cited
-    # value that has never been independently cross-checked carries the
-    # same vulnerability whether or not it also looks date-sensitive, so
-    # both land on V_SOURCED. The distinction is preserved in the REASON,
-    # which is where it was always the useful information.
+    # D8.5 -- two mechanisms removed here, both of the same class.
+    #
+    # OPTION A granted V_SOURCED to an uncited display string when all
+    # its numeric claims matched values pinned from constants_new.py. A
+    # value match proves two numbers are equal; it does not prove anyone
+    # consulted a source. Suspicious matches are still reported, by the
+    # shadow-constant detector, as a DIAGNOSTIC -- which tells you to go
+    # look, where a score told you not to bother.
+    #
+    # STALE-ONLY CREDIT granted V_SOURCED to a unit with no citation at
+    # all whenever its text carried a staleness marker ("as of 2024",
+    # "Planned"). Its own reason string read "No source, contains
+    # date-sensitive claims" -- the scanner stating there was no source
+    # and scoring it as though there were. A staleness marker is
+    # evidence a claim will EXPIRE, not evidence it was ever sourced;
+    # if anything it belongs on the other side of the ladder.
+    #
+    # Both predate the D3 ladder, when V_SOURCED meant something looser
+    # than "a citation exists." Under the ladder 1b landed it means
+    # "cited, never independently cross-checked," and neither of these
+    # can claim the first half of that.
+    #
+    # Staleness is still DETECTED and still reported in the reason,
+    # which is where it was always the useful information -- it just no
+    # longer moves the score on its own.
     if cited and stale:
         unit.vuln = V_SOURCED
         unit.vuln_reason = "Cited, not cross-checked; date-sensitive"
     elif cited:
         unit.vuln = V_SOURCED
         unit.vuln_reason = "Cited, not independently cross-checked"
-    elif stale:
-        unit.vuln = V_SOURCED
-        unit.vuln_reason = "No source, contains date-sensitive claims"
     elif unit.inherited_citation:
         # Phase 1c: the string sits inside a dict block that carries its
         # own citation. Inheriting is not clearing -- V_SOURCED means
@@ -1824,6 +1840,11 @@ def score_unit(unit, imported_names, pinned_values=None):
         # gave derived values.
         unit.vuln = V_SOURCED
         unit.vuln_reason = "Cited via enclosing block citation"
+    elif stale:
+        # No citation, and the text says it will go out of date. V4,
+        # with the staleness carried in the reason.
+        unit.vuln = V_RECALLED
+        unit.vuln_reason = "No source citation; date-sensitive (recalled)"
     else:
         unit.vuln = V_RECALLED
         unit.vuln_reason = "No source citation (recalled)"
@@ -2098,7 +2119,10 @@ def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
     deps, consumers, local_modules = build_dependency_graph(project_dir)
     imported_names = build_name_import_map(project_dir, local_modules)
 
-    # Option A: build pinned constant lookup from constants_new.py
+    # Pinned constant lookup from constants_new.py. Since D8.5 this
+    # feeds the shadow-constant detector ONLY -- it no longer reaches
+    # scoring. A value match is a reason to go look, not a reason to
+    # grant credit.
     pinned_values = build_pinned_values(project_dir)
     if pinned_values:
         print(f"Loaded {len(pinned_values)} pinned constant values "
@@ -2126,7 +2150,7 @@ def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
 
         units = extract_units_from_file(filepath, module_name, role)
         for u in units:
-            score_unit(u, imported_names, pinned_values)
+            score_unit(u, imported_names)
             hit, fp = is_suppressed(u, suppressed_fingerprints)
             if hit:
                 suppressed_count += 1

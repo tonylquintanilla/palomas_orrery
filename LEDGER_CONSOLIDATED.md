@@ -362,7 +362,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-160 | test_constants_provenance.py -- retire once fully absorbed, not before | OPEN | 8.1 | 2026-07-27 |
 | ! | L-172 | Phase 0 record-hygiene batch (provenance cluster prep) | OPEN | 5.7 | 2026-07-29 |
 | ! | L-158 | Derived-constant vulnerability inheritance rule (revised from a proposed rung, 2026-07-27) | OPEN | 5.6 | 2026-07-27 |
-| ! | L-156 | Provenance scanner scoring model fix — criticality (category-based) + vulnerability recalibration + comprehensive sweep | OPEN | 5.3 | 2026-07-31 |
+| ! | L-156 | Provenance scanner scoring model fix — criticality (category-based) + vulnerability recalibration + comprehensive sweep | OPEN | 5.3 | 2026-08-01 |
 | ! | L-155 | Cross-repo constants/geometry pinning checks -- built INTO provenance_scanner.py, not a standalone script | PENDING-GATE | 4.5 | 2026-07-27 |
 | ! | L-119 | event_link hardcoded None in the builder (F2, gates artifact 7) | OPEN | 3.6 | 2026-07-15 |
 | ! | L-168 | propagate_marker uses solar K_GAUSS mean-motion -- wrong for planetocentric moon markers (FLAG-2; caught in F1 design, avoided in serving, source fix still open) | OPEN | 3.6 | 2026-07-28 |
@@ -4147,7 +4147,7 @@ motivating bug: `close_approach_data.py`'s stale `CENTER_BODY_RADII` copy);
 ---
 
 #### [L-156] Provenance scanner scoring model fix — criticality (category-based) + vulnerability recalibration + comprehensive sweep
-<!-- L:156 status:OPEN upd:2026-07-31 section:W.Active flag: rice:5/4/80/3 -->
+<!-- L:156 status:OPEN upd:2026-08-01 section:W.Active flag: rice:5/4/80/3 -->
 
 **What.** `provenance_scanner.py`'s scoring mis-prioritized the data this
 cluster depends on: foundational constants (`SUN_RADIUS_KM`,
@@ -4155,10 +4155,20 @@ cluster depends on: foundational constants (`SUN_RADIUS_KM`,
 resolved by direct-import-count, so a constant consumed indirectly (via a
 derived dict) scored as if barely used.
 
-**Scanner state at HEAD (post-Phase-1, `b813aa6`):** Tier 1 171, Tier 2
-644, Tier 3 62, Tier 4 2, total 879 across 116 files. Tier 1 is
-132 baseline + 39 newly-visible temperature claims (tracked separately as
-L-175).
+**Scanner state at HEAD (post-D8.5, `42103d6`):** Tier 1 210, Tier 2
+605, Tier 3 62, Tier 4 2, total 879 across 116 files. 879 conserved
+across D8.5 — 39 findings moved Tier 2 to Tier 1 (23 from Option A
+retirement, 16 from staleness-credit removal).
+
+**Phase 1 measured arc (the instrument got honest):** Tier 1
+145 → 156 (1a) → 156 (1b) → 133 (1c) → 132 (L-174) → 171 (1d/1e/1f)
+→ 210 (D8.5). The first half (145 → 132) fixed false positives —
+correctly-sourced claims scored as unsourced. The second half
+(132 → 210) fixed false negatives — unsourced claims scored as sourced,
+whether by a blind spot (temperature recognition, +61), numeric
+coincidence (Option A, +23), or a marker meaning the opposite of what it
+was credited for (staleness, +16). The number went up because the
+instrument got honest.
 
 ### Decided constraints (design handoff + design review + Tony)
 
@@ -4268,6 +4278,28 @@ future additions. test_provenance_1d.py 15 → 20 (5 predicate tests
 added). `test_both_pinned_builders_agree` asserts the two callers stay
 synchronized.
 
+**D8.5 — Option A retired (2026-08-01, Opus 5).** Two mechanisms removed
+from `score_unit()`, both granting V_SOURCED without a real citation.
+(a) Option A: credited display strings whose numeric claims matched
+pinned constant values — coincidence, not sourcing. 26 findings affected
+(not 18 — 1d's temperature units created new claims eligible for the
+credit). 23 moved to Tier 1. (b) Staleness credit: granted V_SOURCED to
+strings matching date-sensitive patterns ("as of 2024", "Planned",
+"Still active") with no citation at all — the reason string said "no
+source" and the score said "sourced." Logic also ran backwards: staleness
+means a claim will expire, making it more vulnerable, not less.
+15 findings, all now at V_RECALLED. `build_pinned_values()` kept — it
+feeds `scan_shadow_constants()` for derived-shadow detection, now
+diagnostic-only. Scoring path audit: three remaining paths that set
+`unit.vuln`, all requiring a citation a person wrote. No other instance
+of the credit-without-sourcing failure class remains.
+
+**General lesson (D8.5):** when a scoring definition changes, every
+mechanism assigning that score needs re-reading, not just the ones the
+change targeted. Both Option A and staleness credit predated the D3
+ladder and were not wrong when written — they were outlived by a
+definition change and never revisited.
+
 **Phase 1 measured arc:** Tier 1: 145 → 156 (1a) → 156 (1b) → 133 (1c)
 → 132 (L-174) → 171 (1d/1e/1f, of which 132 → 119 from piece 2, offset
 by +61 newly-visible from piece 3).
@@ -4283,10 +4315,6 @@ scripts moved to `documentation/` to clear self-scan Tier-1 noise.
 Complete.
 
 ### What remains open under L-156
-
-**D8.5 (retire or keep Option A).** `build_pinned_values()` and Option A
-scoring are still live. The bleed flaw is fixed but the mechanism itself
-may not be worth keeping. Design question, not yet decided.
 
 **Phase 2 (D4 cross-checked annotation backfill).** Next in the original
 plan. Gated on Phase 1 (now complete).
@@ -4319,7 +4347,8 @@ near-miss); `HANDOFF_addendum_phase1_and_uranus_cleanup.md`,
 `documentation/patch_pinned_values_bleed.py`;
 `test_provenance_1d.py`; `test_citation_inheritance.py`;
 L-155; L-157; L-158; L-159; L-161; L-162; L-163; L-173; L-174; L-175.
-
+`documentation/patch_retire_option_a.py`;
+`documentation/AS_BUILT_retire_option_a.md`.
 
 ---
 

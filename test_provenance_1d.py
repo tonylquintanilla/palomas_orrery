@@ -48,14 +48,18 @@ import traceback
 
 from provenance_scanner import (
     SHADOW_CONSTANTS,
+    V_RECALLED,
+    V_SOURCED,
     SHADOW_DERIVED_MIN_MAGNITUDE,
     build_cited_constant_names,
     build_pinned_values,
     constant_has_own_citation,
+    has_stale_marker,
+    score_unit,
     extract_numeric_claims,
     has_citation,
     scan_shadow_constants,
-)
+)  # noqa: F401  -- V_* and scan_shadow_constants used by the D8.5 tests
 
 
 # ============================================================
@@ -385,6 +389,131 @@ def test_both_pinned_builders_agree():
 
 
 # ============================================================
+# TESTS -- D8.5, no credit without a citation
+# ============================================================
+
+class _FakeUnit:
+    """Minimal stand-in for a display-string ProvenanceUnit."""
+
+    def __init__(self, context, claims=(), inherited=None):
+        self.context_text = context
+        self.is_docstring = False
+        self.kind = 'string'
+        self.name = None
+        self.numeric_claims = list(claims)
+        self.inherited_citation = inherited
+        self.scope_declined = False
+        self.raw_value = context
+        self.value = context
+        self.module = 'fake'
+        self.vuln = None
+        self.vuln_reason = None
+        self.crit = None
+        self.crit_reason = None
+        self.consumer_count = 0
+        self.consumers = ()
+        self.score = None
+
+    def compute_score(self):
+        self.score = (self.vuln or 0) * (self.crit or 0)
+
+
+def test_numeric_match_alone_earns_no_credit():
+    """Option A is gone: matching a pinned value is not a citation.
+
+    695700.0 is SUN_RADIUS_KM in constants_new.py and is pinned. Before
+    D8.5 a display string quoting it with no citation scored V_SOURCED.
+    """
+    unit = _FakeUnit('The Sun has a radius of 695700 km.',
+                     claims=[('695700', 'km', 695700.0)])
+    score_unit(unit, {})
+    assert unit.vuln == V_RECALLED, \
+        f"numeric coincidence still earns credit: {unit.vuln_reason!r}"
+
+
+def test_stale_marker_alone_earns_no_credit():
+    """A staleness marker is not a source.
+
+    The retired branch wrote the reason 'No source, contains
+    date-sensitive claims' while assigning V_SOURCED -- stating there
+    was no source and scoring as though there were.
+    """
+    for text in ['# Voyager 1 distance as of 2024 is 163 AU',
+                 '# Planned launch window',
+                 '# Still active as of 2025']:
+        unit = _FakeUnit(text)
+        score_unit(unit, {})
+        assert unit.vuln == V_RECALLED, \
+            f"staleness earned credit for {text!r}: {unit.vuln_reason!r}"
+
+
+def test_staleness_still_detected_and_reported():
+    """Retiring the credit must not lose the signal.
+
+    Staleness detection stays; it just no longer moves the score. The
+    distinction survives in the reason string, which is where it was
+    always the useful information.
+    """
+    assert has_stale_marker('# current as of 2024'), \
+        "stale detection was removed along with the credit"
+    unit = _FakeUnit('# updated 2024, value is 5 AU')
+    score_unit(unit, {})
+    assert 'date-sensitive' in (unit.vuln_reason or ''), \
+        f"staleness dropped from the reason: {unit.vuln_reason!r}"
+
+
+def test_real_citation_still_earns_v_sourced():
+    """The removals must not break actual sourcing."""
+    unit = _FakeUnit('# Source: IAU 2015 Resolution B3\nradius 695700 km')
+    score_unit(unit, {})
+    assert unit.vuln == V_SOURCED, \
+        f"a real citation lost its credit: {unit.vuln_reason!r}"
+
+
+def test_block_inheritance_still_earns_v_sourced():
+    """1c inheritance is NOT the same failure class and must survive.
+
+    An inheriting string carries a citation a person actually wrote
+    about the block it sits in. That is real provenance, one level up --
+    unlike a value match, which is provenance nobody wrote.
+    """
+    unit = _FakeUnit('radius 695700 km',
+                     inherited='# Source: IAU 2015 Resolution B3')
+    score_unit(unit, {})
+    assert unit.vuln == V_SOURCED, \
+        f"block inheritance was broken: {unit.vuln_reason!r}"
+
+
+def test_pinned_values_no_longer_reaches_scoring():
+    """score_unit() must not accept pinned values at all.
+
+    Signature-level guard. If a future change re-adds the parameter,
+    the mechanism can come back quietly; without it, it cannot.
+    """
+    import inspect
+    params = list(inspect.signature(score_unit).parameters)
+    assert 'pinned_values' not in params, \
+        f"score_unit still takes pinned values: {params}"
+
+
+def test_pinned_values_still_feeds_the_shadow_detector():
+    """build_pinned_values() must survive -- it has a second consumer.
+
+    scan_shadow_constants() uses it to detect DERIVED shadow constants
+    (expressions built from pinned literals). Removing it with Option A
+    would have silently broken the detector 1d added.
+    """
+    import inspect
+    params = list(inspect.signature(scan_shadow_constants).parameters)
+    assert 'pinned_values' in params, \
+        "the shadow detector lost its pinned-values input"
+    here = os.path.dirname(os.path.abspath(__file__))
+    if os.path.exists(os.path.join(here, 'constants_new.py')):
+        assert build_pinned_values(here), \
+            "build_pinned_values returned nothing"
+
+
+# ============================================================
 # RUNNER
 # ============================================================
 
@@ -409,6 +538,13 @@ TESTS = [
     test_blank_line_ends_the_run_below,
     test_preceding_code_ends_the_run_above,
     test_both_pinned_builders_agree,
+    test_numeric_match_alone_earns_no_credit,
+    test_stale_marker_alone_earns_no_credit,
+    test_staleness_still_detected_and_reported,
+    test_real_citation_still_earns_v_sourced,
+    test_block_inheritance_still_earns_v_sourced,
+    test_pinned_values_no_longer_reaches_scoring,
+    test_pinned_values_still_feeds_the_shadow_detector,
 ]
 
 
