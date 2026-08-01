@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*102 live items; 91 need attention (`!`); 101 RICE-scored; 65 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*104 live items; 93 need attention (`!`); 103 RICE-scored; 66 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -366,12 +366,14 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-155 | Cross-repo constants/geometry pinning checks -- built INTO provenance_scanner.py, not a standalone script | PENDING-GATE | 4.5 | 2026-07-27 |
 | ! | L-119 | event_link hardcoded None in the builder (F2, gates artifact 7) | OPEN | 3.6 | 2026-07-15 |
 | ! | L-168 | propagate_marker uses solar K_GAUSS mean-motion -- wrong for planetocentric moon markers (FLAG-2; caught in F1 design, avoided in serving, source fix still open) | OPEN | 3.6 | 2026-07-28 |
+| ! | L-175 | Newly-visible uncited temperature claims (1d piece 3) | OPEN | 3.6 | 2026-07-31 |
 | ! | L-161 | Gemini sweep -- clear the display-string Tier-2 backlog | OPEN | 3.1 | 2026-07-27 |
 | ! | L-157 | Gemini cross-check of shell config ring/belt/atmosphere geometry values | OPEN | 2.5 | 2026-07-27 |
 | ! | L-166 | F1b: per-object trust enforcement + soft-edge trust UX (resolver/client consumption of served trust blocks) | OPEN | 2.4 | 2026-07-28 |
 | ! | L-121 | Slim plotly wheel not deployed anywhere (F4, ships-nothing gate) | OPEN | 2.2 | 2026-07-15 |
 | ! | L-150 | Multi-orbit trust model for near-equal-mass binaries (Pluto/Charon and future onboards) | OPEN | 2.2 | 2026-07-20 |
 | ! | L-154 | Gallery feature-rendering JS layer (shells, rings, radiation belts -- Artifact 2 prerequisite) | BLOCKED | 2.1 | 2026-07-28 |
+| ! | L-173 | shell_configs.py -- 8 body blocks missing... source citations entirely (found during 1c predesign measurement) | OPEN | 2.1 | 2026-07-30 |
 | ! | L-122 | Stray data/solar-system.prev_old/ committed to the repo (F6, non-blocking) | OPEN | 1.9 | 2026-07-15 |
 | ! | L-123 | Object info card -- serve info_dictionary.py as JSON, click-to-open (rides with F1) | OPEN | 1.8 | 2026-07-15 |
 | ! | L-080 | Characterization harness (scene equivalence gate) | OPEN | 1.6 | 2026-07-14 |
@@ -462,6 +464,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-085 | LICENSE to repo root | DONE | 4.0 | 2026-07-03 |
 |  | L-088 | Gallery integration test (Phase 0) | DONE | 4.0 | 2026-07-06 |
 |  | L-099 | Solar System Explorer interactive exhibit | DONE | 3.2 | 2026-07-06 |
+|  | L-174 | Citation level mismatch -- citations pitched one block too far out | DONE | 2.7 | 2026-07-30 |
 |  | L-087 | palomas_orrery_helpers.py computation/GUI split | DONE | 2.0 | 2026-07-15 |
 |  | L-152 | ledger-and-session-records skill bumped to 1.2 -- retroactive ledger entry | DONE | 1.9 | 2026-07-20 |
 |  | L-148 | Staging folder names carry no object identifier -- hard to locate manually (gallery-cache-builder) | DONE | 1.8 | 2026-07-20 |
@@ -810,6 +813,7 @@ regenerated mirror, overwritten by the next `module_atlas.py` run. One of
 the four originally-named modules (`smoke_rotation_axis.py`) was also
 deleted outright in L-163 Phase 1. The two files that DO still need a home
 are domain-coverage-gap, not role -- see L-172.
+**Note (2026-07-31):** L-078 sub-item (d) (bare-degree F/C values in NUMERIC_CLAIM_RE) is DONE, landed as part of L-156 Phase 1d piece 3. Pushed at 8bd7778. Surfaced 96 new findings — tracked as L-175.
 **Gap:** (a) merge into L-161's Gemini relay, one worksheet per file,
 covering that file's uncited (this item) and re-read (L-161) claims
 together -- start with the paleoclimate family (32 findings, never
@@ -4301,6 +4305,28 @@ depth 2 only, which is exactly why shell_configs.py inherits correctly
 anywhere in the repo, so nothing is misattributed. Gap item (6) remains DONE;
 this is consequence, not reopening.
 
+Note (2026-07-31, 1d/1e/1f BUILT): Built by Opus 5 on e29841f8, patch applied and pushed at 8bd7778. Tests: test_provenance_1d.py 15/15, test_citation_inheritance.py 20/20, test_constants_provenance.py 73/73. Scanner output at HEAD: Tier 1 171, Tier 2 646, Tier 3 62, Tier 4 2, total 881 (includes self-scan of committed patch/test files).
+
+1d piece 1 (shadow-constant detector): diverged from the predesign's Option A amendment — built as a dedicated scan_shadow_constants() + build_cited_constant_names(). Three measured reasons: Option A only inspects display strings (shadow constants are function-local assignments the scanner never extracts); amending Option A would demote 9 unrelated findings toward Tier 1; value-only matching gives 77 hits vs 2 for name+value. Option A untouched; D8.5 retirement question still open.
+
+1d piece 2 (citation-form recognition): added author-year parenthetical pattern to SOURCE_PATTERNS, handling both (Author et al., YYYY) and (Author et al.) forms. False-positive exclusion for month names. Measured: 13 findings moved Tier 1 -> Tier 2, population conserved. Actual yield close to the ~15 ceiling Opus 5 measured during review, not the old ~54 estimate.
+
+1d piece 3 (temperature units): added temperature alternatives to NUMERIC_CLAIM_RE. Tier 1 132 -> 193 measured alone (+61 new findings, 96 total new). Largest tier-moving change in Phase 1. All are real uncited temperature claims in climate modules. See L-175.
+
+1e piece 1 (Tier-1 banner): bordered, informational only. No exit code gate — ever (design review 3c, Tony confirmed). The code carries a comment naming the superseded document.
+
+1e piece 2 (tier labels): Tiers 2/3/4 neutralized (REVIEW, LOW PRIORITY, LOWEST PRIORITY). Tier 1 keeps FIX NOW (Tony accepted — action directive, not a status claim).
+
+1f (shadow constants deleted): comet_visualization_shells.py lines 492-493 and 602 deleted, SUN_RADIUS_KM and SOLAR_RADIUS_AU imported through the shim. Runtime-verified value-preserving. Fire-then-silence test confirmed: 1d detected 3 shadow constants, 1f silenced them.
+
+Errata: documentation/HANDOFF_phase1_1d_to_1f.md at HEAD describes a deferred exit-gate flip for 1e. This is wrong — superseded by the design review 3c and AS_BUILT_L156_phase1d_e_f.md. The authoritative documents for 1e are the design review, the R1 predesign (PREDESIGN_HANDOFF_phase1_d_e_f_R1.md), and the as-built.
+
+Observation (not fixed): build_pinned_values() uses a 10-line citation window that lets uncited constants inherit a neighbor's citation (bleed flaw). The new build_cited_constant_names() avoids this with a contiguous-comment-run approach. The old mechanism is still live feeding Option A. Tracked here pending D8.5 retirement decision.
+
+Observation (not fixed): comet_visualization_shells.py carries 3 pre-existing em-dash bytes (non-ASCII), one in a display string. Tony has approved fixing — separate edit.
+
+Gap item (3): 1d DONE; 1e DONE; 1f DONE. Phase 1 COMPLETE. Phase 2 (D4 cross-checked annotation backfill) is next in the original plan.
+
 **Gap:** (1) fix the `CENTER_BODY_RADII` duplication per L-162 (separate
 dedicated session) -- **DONE, L-162 closed 2026-07-29;** (2) resolve the
 five comprehensive-sweep items; (3) build Phases 1-3 (Opus 5) against the
@@ -4532,6 +4558,9 @@ the mechanism as specified. Same failure class as the
 because `build_pinned_values()` treats any value match against an
 already-cited `constants_new.py` constant as V_SOURCED, whether the match
 is a real import or a bare hand-typed copy.
+
+**Note (2026-07-31):** L-158 piece 2 (delete shadow constants in comet_visualization_shells.py, import through shim) is DONE, landed as part of L-156 Phase 1f. Pushed at 8bd7778. SUN_RADIUS_KM and SOLAR_RADIUS_AU imported, three local copies deleted, runtime-verified value-preserving.
+
 **Gap:** rides Phase 1 of L-156's scanner build (unchanged). Two concrete
 pieces, not one: (1) widen `build_pinned_values()`/scoring per L-156's Gap
 item 5 -- the actual fix; (2) separately, fix the two live instances
@@ -4927,7 +4956,7 @@ bytes) -- same shape of work.
 **Ref:** `PRELIM_DESIGN_HANDOFF_provenance_cluster_completion_part2.md`
 Tony-action rollup; L-163; L-164.
 
-[L-173] shell_configs.py -- 8 body blocks missing source citations entirely (found during 1c predesign measurement)
+#### [L-173] shell_configs.py -- 8 body blocks missing... source citations entirely (found during 1c predesign measurement)
 <!-- L:173 status:OPEN upd:2026-07-30 section:W.Active flag: rice:3/3/70/3 -->
 What. 1c's predesign measurement (L-156 Gap item 6) surfaced a real, previously-hidden gap, distinct from the lookback-window bug it was measuring: 8 of shell_configs.py's 24 body blocks carry no # Source: citation of any kind. Three of the eight (CUSTOM_SHELLS['Moon'], CUSTOM_SHELLS['Pluto'], CUSTOM_SHELLS['Sun']) contribute zero Tier-1 findings currently and need no immediate action beyond eventual sourcing. The other five carry 18 Tier-1 findings between them:
 block	uncited Tier-1 findings
@@ -4960,122 +4989,17 @@ comment moved, an L-173 finding needs a source found.
 
 Ref: PREDESIGN_1c_citation_inheritance.md; L-156 Gap item 6; L-161.
 
-#### [L-174] Citation level mismatch -- citations pitched one block too far out
-<!-- L:174 status:DONE upd:2026-07-30 section:W.Active flag: rice:2/3/90/2 -->
-
-What. Phase 1c (L-156 Gap item 6) resolves a display string's citation by
-structural containment: the string inherits from the NARROWEST dict block
-containing it, and an uncited block inherits nothing. The strictness is
-deliberate -- outward search would silently clear the genuinely uncited blocks
-tracked as L-173. The cost is that a citation written one level further out
-than the resolver reads is invisible to it.
-
-The generalization, which predicts both the successes and the failures: a
-citation must sit at the SAME DEPTH as the narrowest block the table records.
-build_citation_block_table records depth 1 (the assignment) and depth 2 (its
-direct dict-valued entries), and nothing deeper. shell_configs.py works
-because its citations sit at depth 2 and its strings at depth 3, so the
-narrowest recorded block is the cited depth-2 entry. jupiter_visualization_
-shells.py's ring_params failed because its citation sits at depth 1 while its
-strings sit inside depth-2 blocks -- four uncited per-ring dicts shadowing a
-citation meant to cover all of them.
-
-How found. Surfaced by a session investigating why line 959 was still Tier 1
-after the ring_params citation was reworded to drop the "Scope of the above
-citation:" marker (0fd7cf1 -> 4844044). Root cause diagnosis verified
-independently at HEAD: all four ring entry blocks uncited, resolver returns
-None for all four, SCOPE_DECLARED_BLOCKS empty so the scope-decline is not the
-blocker, Tier 1 confirmed still 133.
-
-Repo-wide sweep, verified independently. Four dicts carry the shape (a cited
-assignment whose dict-valued entries have no citation of their own):
-
-  jupiter_visualization_shells.py  ring_params            4 entries,  1 LIVE
-  comet_visualization_shells.py    HISTORICAL_TAIL_DATA  15 entries,  0 live
-  planet_visualization_utilities.py PLANET_ROTATION      11 entries,  0 live
-  idealized_orbits.py              planet_poles          11 entries,  0 live
-
-CORRECTION to the reporting session's figures, verified line by line:
-HISTORICAL_TAIL_DATA has 15 dict-valued entries, not 13 (2 already cited);
-planet_poles has 11, not 6 (5 already cited). More importantly, the claim that
-comet_visualization_shells.py has LIVE impact does not hold. Howell (line 294)
-and Tempel 2 (line 305) were reported as Tier 1 "No source citation
-(recalled)"; both actually score V_SOURCED, score 12, Tier 2, "Cited, not
-independently cross-checked". Cause: a DIFFERENT citation at line 276 (JPL
-Small-Body Database) sits 18 and 29 lines above them, inside the flat 60-line
-context window -- that file carries per-section citations through
-HISTORICAL_TAIL_DATA, not only the one at line 85. Live mis-scored findings in
-that file: zero. ring_params remains the only file with live impact, and the
-only mis-scored finding in it is line 959. The reporting session flagged its
-own uncertainty here and asked for confirmation before fixing; that was the
-right call and it is why the error did not propagate into a data edit.
-
-THREE-LEVEL CHECK (explicitly requested; answer is not a simple no). Three-
-level nesting is not absent -- it is the DOMINANT shape: 140 dicts nested 3+
-deep across the repo, 63 of them carrying claim-bearing strings, overwhelmingly
-shell_configs.py (SHELL_CONFIGS['Jupiter']['core'] and similar). This cannot be
-seen from build_citation_block_table's output, which stops at depth 2; it
-required walking the source AST directly. That depth-2 ceiling is precisely WHY
-Phase 1c works for shell_configs.py. Verified separately: NO dict nested 3+
-deep anywhere in the repo carries its own citation, so nothing is misattributed
-today. Latent risk retained: the resolver is structurally blind to a depth-3
-citation, and if one is ever added its strings will silently inherit the
-depth-2 citation instead -- "innermost wins" failing one level down, invisible
-in the tier counts.
-
-Fix, as built and verified. (a) DATA, ring_params only: a short repeat citation
-above each of the four ring keys, pointing at the full citation above
-ring_params. Measured on a clean clone: Tier 1 133 -> 132, Tier 2 586 -> 587,
-exactly one finding moves (line 959), nothing enters, Tier 3/4 unchanged --
-matching the original predesign headline. (b) MECHANISM, diagnostic only, zero
-scoring effect: provenance_scanner.py now records SHADOWED_STRINGS (narrowest
-containing block uncited while an outer one is cited) and DEEP_CITATIONS (a
-dict 3+ deep carrying its own citation, currently zero), and reports both in a
-new CITATION LEVEL MISMATCH audit section. Live run reports 17 shadowed strings
-across the two remaining latent files; the deep-citation subsection correctly
-renders zero times.
-
-Deliberately NOT done: repeat citations for the three latent files. They carry
-no live mis-scoring, the flat 60-line window covers them, and editing three
-clean files to fix nothing is churn that can itself drift. The diagnostic
-covers those three, every future instance, and the depth-3 case that no data
-fix would catch. Same move already made for scope-limited citations in 1c:
-decouple detection from resolution, keep the resolver strict, make the shape
-visible rather than silently fine.
-
-Explicitly rejected: loosening the resolver to search outward for a citation.
-Measured during 1c -- it produces byte-identical audits at HEAD and would clear
-all 18 L-173 findings the moment anyone adds a citation above SHELL_CONFIGS.
-The strictness is the protection; this item exists to make its cost visible,
-not to remove it.
-
-Relationship to L-173. Adjacent, not nested. L-173 is sources MISSING. L-174 is
-sources PRESENT but pitched at a level the resolver does not read. A shadowed
-string is not an L-173 gap and must not be reported as one -- test_genuinely_
-uncited_is_not_reported_as_shadowed pins that boundary, because collapsing the
-two would make a missing source look like a formatting problem.
-
-Tony-action (do). Run patch_L174_citation_level_mismatch.py via VS Code's Run
-button; expect 15 ok lines across 3 files. Then test_citation_inheritance.py
-(expect 20 passed) and provenance_scanner.py (expect Tier 1 132, Tier 2 587,
-plus the new CITATION LEVEL MISMATCH section -- that section appearing is the
-intended outcome, not a problem).
-
-Tony-action (decide). Whether the 17 latent shadowed strings ever get repeat
-citations, or stay monitored via the diagnostic indefinitely. Recommendation is
-monitored; revisit only if one of those files is being edited for other
-reasons, when the repeat costs nothing extra.
-
-Gap. If a depth-3 citation ever appears, DEEP_CITATIONS will report it and
-build_citation_block_table needs extending to record depth 3. Not built
-speculatively for a population of zero.
-
-Ref: provenance_scanner.py (build_citation_block_table, resolve_block_citation,
-find_shadowing_block, _record_deep_citations); jupiter_visualization_shells.py
-(ring_params); comet_visualization_shells.py (HISTORICAL_TAIL_DATA);
-planet_visualization_utilities.py (PLANET_ROTATION); idealized_orbits.py
-(planet_poles); test_citation_inheritance.py; L-156 Gap item 6; L-173;
-documentation/AS_BUILT_L156_phase1c.md.
+#### [L-175] Newly-visible uncited temperature claims (1d piece 3)
+<!-- L:175 status:OPEN upd:2026-07-31 section:W.Active flag: rice:3/3/80/2 -->
+What. L-156 Phase 1d piece 3 added temperature units to NUMERIC_CLAIM_RE. This surfaced 96 real uncited temperature claims the scanner was previously blind to — 61 at Tier 1. Almost all in four paleoclimate modules:
+paleoclimate_wet_bulb_full.py (16 -> 51)
+paleoclimate_human_origins_full.py (11 -> 32)
+paleoclimate_visualization_full.py (7 -> 28)
+paleoclimate_dual_scale.py (2 -> 9)
+Why track separately. Same pattern as L-173 (shell_configs gaps): these are genuinely uncited claims that need sourcing, not a scoring regression. Tracking separately lets the Tier-1 count read as "132 known + 61 newly visible" rather than as a backslide.
+Sourcing path. These modules carry human-cost content (heat deaths, food insecurity) where the earth-system-pipeline skill's restraint discipline applies. That is an argument for sourcing them properly, not for leaving them unseen. Sourcing will likely follow the L-157 Gemini sweep methodology.
+Note. "Data Preservation is Climate Action" — the project's own principle says these claims matter more, not less, than average.
+Ref: L-156 Phase 1d piece 3; AS_BUILT_L156_phase1d_e_f.md section 2; L-078(d).
 
 ### W.Done -- closed items, kept with the track
 
@@ -5590,6 +5514,123 @@ credit lines added to `constants_new.py`, `planet_visualization_utilities.py`,
 `provenance_scanner.py`.
 
 ---
+
+#### [L-174] Citation level mismatch -- citations pitched one block too far out
+<!-- L:174 status:DONE upd:2026-07-30 section:W.Done flag: rice:2/3/90/2 -->
+
+What. Phase 1c (L-156 Gap item 6) resolves a display string's citation by
+structural containment: the string inherits from the NARROWEST dict block
+containing it, and an uncited block inherits nothing. The strictness is
+deliberate -- outward search would silently clear the genuinely uncited blocks
+tracked as L-173. The cost is that a citation written one level further out
+than the resolver reads is invisible to it.
+
+The generalization, which predicts both the successes and the failures: a
+citation must sit at the SAME DEPTH as the narrowest block the table records.
+build_citation_block_table records depth 1 (the assignment) and depth 2 (its
+direct dict-valued entries), and nothing deeper. shell_configs.py works
+because its citations sit at depth 2 and its strings at depth 3, so the
+narrowest recorded block is the cited depth-2 entry. jupiter_visualization_
+shells.py's ring_params failed because its citation sits at depth 1 while its
+strings sit inside depth-2 blocks -- four uncited per-ring dicts shadowing a
+citation meant to cover all of them.
+
+How found. Surfaced by a session investigating why line 959 was still Tier 1
+after the ring_params citation was reworded to drop the "Scope of the above
+citation:" marker (0fd7cf1 -> 4844044). Root cause diagnosis verified
+independently at HEAD: all four ring entry blocks uncited, resolver returns
+None for all four, SCOPE_DECLARED_BLOCKS empty so the scope-decline is not the
+blocker, Tier 1 confirmed still 133.
+
+Repo-wide sweep, verified independently. Four dicts carry the shape (a cited
+assignment whose dict-valued entries have no citation of their own):
+
+  jupiter_visualization_shells.py  ring_params            4 entries,  1 LIVE
+  comet_visualization_shells.py    HISTORICAL_TAIL_DATA  15 entries,  0 live
+  planet_visualization_utilities.py PLANET_ROTATION      11 entries,  0 live
+  idealized_orbits.py              planet_poles          11 entries,  0 live
+
+CORRECTION to the reporting session's figures, verified line by line:
+HISTORICAL_TAIL_DATA has 15 dict-valued entries, not 13 (2 already cited);
+planet_poles has 11, not 6 (5 already cited). More importantly, the claim that
+comet_visualization_shells.py has LIVE impact does not hold. Howell (line 294)
+and Tempel 2 (line 305) were reported as Tier 1 "No source citation
+(recalled)"; both actually score V_SOURCED, score 12, Tier 2, "Cited, not
+independently cross-checked". Cause: a DIFFERENT citation at line 276 (JPL
+Small-Body Database) sits 18 and 29 lines above them, inside the flat 60-line
+context window -- that file carries per-section citations through
+HISTORICAL_TAIL_DATA, not only the one at line 85. Live mis-scored findings in
+that file: zero. ring_params remains the only file with live impact, and the
+only mis-scored finding in it is line 959. The reporting session flagged its
+own uncertainty here and asked for confirmation before fixing; that was the
+right call and it is why the error did not propagate into a data edit.
+
+THREE-LEVEL CHECK (explicitly requested; answer is not a simple no). Three-
+level nesting is not absent -- it is the DOMINANT shape: 140 dicts nested 3+
+deep across the repo, 63 of them carrying claim-bearing strings, overwhelmingly
+shell_configs.py (SHELL_CONFIGS['Jupiter']['core'] and similar). This cannot be
+seen from build_citation_block_table's output, which stops at depth 2; it
+required walking the source AST directly. That depth-2 ceiling is precisely WHY
+Phase 1c works for shell_configs.py. Verified separately: NO dict nested 3+
+deep anywhere in the repo carries its own citation, so nothing is misattributed
+today. Latent risk retained: the resolver is structurally blind to a depth-3
+citation, and if one is ever added its strings will silently inherit the
+depth-2 citation instead -- "innermost wins" failing one level down, invisible
+in the tier counts.
+
+Fix, as built and verified. (a) DATA, ring_params only: a short repeat citation
+above each of the four ring keys, pointing at the full citation above
+ring_params. Measured on a clean clone: Tier 1 133 -> 132, Tier 2 586 -> 587,
+exactly one finding moves (line 959), nothing enters, Tier 3/4 unchanged --
+matching the original predesign headline. (b) MECHANISM, diagnostic only, zero
+scoring effect: provenance_scanner.py now records SHADOWED_STRINGS (narrowest
+containing block uncited while an outer one is cited) and DEEP_CITATIONS (a
+dict 3+ deep carrying its own citation, currently zero), and reports both in a
+new CITATION LEVEL MISMATCH audit section. Live run reports 17 shadowed strings
+across the two remaining latent files; the deep-citation subsection correctly
+renders zero times.
+
+Deliberately NOT done: repeat citations for the three latent files. They carry
+no live mis-scoring, the flat 60-line window covers them, and editing three
+clean files to fix nothing is churn that can itself drift. The diagnostic
+covers those three, every future instance, and the depth-3 case that no data
+fix would catch. Same move already made for scope-limited citations in 1c:
+decouple detection from resolution, keep the resolver strict, make the shape
+visible rather than silently fine.
+
+Explicitly rejected: loosening the resolver to search outward for a citation.
+Measured during 1c -- it produces byte-identical audits at HEAD and would clear
+all 18 L-173 findings the moment anyone adds a citation above SHELL_CONFIGS.
+The strictness is the protection; this item exists to make its cost visible,
+not to remove it.
+
+Relationship to L-173. Adjacent, not nested. L-173 is sources MISSING. L-174 is
+sources PRESENT but pitched at a level the resolver does not read. A shadowed
+string is not an L-173 gap and must not be reported as one -- test_genuinely_
+uncited_is_not_reported_as_shadowed pins that boundary, because collapsing the
+two would make a missing source look like a formatting problem.
+
+Tony-action (do). Run patch_L174_citation_level_mismatch.py via VS Code's Run
+button; expect 15 ok lines across 3 files. Then test_citation_inheritance.py
+(expect 20 passed) and provenance_scanner.py (expect Tier 1 132, Tier 2 587,
+plus the new CITATION LEVEL MISMATCH section -- that section appearing is the
+intended outcome, not a problem).
+
+Tony-action (decide). Whether the 17 latent shadowed strings ever get repeat
+citations, or stay monitored via the diagnostic indefinitely. Recommendation is
+monitored; revisit only if one of those files is being edited for other
+reasons, when the repeat costs nothing extra.
+
+Gap. If a depth-3 citation ever appears, DEEP_CITATIONS will report it and
+build_citation_block_table needs extending to record depth 3. Not built
+speculatively for a population of zero.
+
+Ref: provenance_scanner.py (build_citation_block_table, resolve_block_citation,
+find_shadowing_block, _record_deep_citations); jupiter_visualization_shells.py
+(ring_params); comet_visualization_shells.py (HISTORICAL_TAIL_DATA);
+planet_visualization_utilities.py (PLANET_ROTATION); idealized_orbits.py
+(planet_poles); test_citation_inheritance.py; L-156 Gap item 6; L-173;
+documentation/AS_BUILT_L156_phase1c.md.
 ### W.Cross-references -- existing items that interact with the web track
 
 - **L-026** -- CRLF to LF on `palomas_orrery_helpers.py`. Companion to L-087.
