@@ -224,8 +224,10 @@ ROLE_MAP = {
     'module_atlas':                           'devtool',
     'provenance_scanner':                     'devtool',
     'skills_index':                           'devtool',
+    'test_citation_inheritance':              'devtool',
     'test_constants_provenance':              'devtool',
     'test_orbit_cache':                       'devtool',
+    'test_provenance_1d':                     'devtool',
     'test_reset_completeness':                'devtool',
     'verify_orbit_cache':                     'devtool',
 }
