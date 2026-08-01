@@ -270,6 +270,10 @@ Module updated: July 2026 with Anthropic's Claude Sonnet 5 (L-162:
 CONCEPT_ALIASES entries added for the 14 newly-named CENTER_BODY_RADII
 constants).
 
+Module updated: July 2026 with Anthropic's Claude Opus 5 (constant_has_own_
+citation extracted as the single citation predicate; build_pinned_values no
+longer uses a distance window that could inherit a neighbour's citation).
+
 Module updated: July 2026 with Anthropic's Claude Opus 5 (L-156 Phase 1d/1e:
 frozen-copy detection for shadow constants, author-year citation forms,
 Fahrenheit/Celsius units, the Tier-1 banner, and neutral tier labels).
@@ -1479,6 +1483,57 @@ def _numeric_from_node(node):
     return None
 
 
+def constant_has_own_citation(lines_c, lineno, source_re):
+    """Does the constant assigned at `lineno` carry its OWN citation?
+
+    Single source of truth for this question. Both build_pinned_values()
+    and build_cited_constant_names() route through here, because two
+    functions in one file answering "is this cited" by different rules
+    is how the scanner ends up disagreeing with itself.
+
+    The rule is CONTIGUITY, not distance. A citation counts only if it
+    sits in a comment run physically touching the assignment -- a blank
+    line ends the run. Distance windows do not work here: a window wide
+    enough to catch a real citation is also wide enough to reach the
+    NEXT constant's citation, and then an uncited value silently
+    inherits provenance it never had.
+
+    Both conventions in this codebase are accepted, because both are in
+    use. constants_new.py writes the citation BELOW the assignment:
+
+        KM_PER_AU = 149597870.7
+        # Source: IAU 2012 Resolution B2
+
+    while the rest of the repo writes it above. Below is checked first,
+    since that is the convention of the file this predicate is applied
+    to most often.
+
+    `lines_c` is the file's lines with line endings kept; `lineno` is the
+    1-based AST line number; `source_re` is the caller's citation
+    pattern.
+    """
+    # Below: a comment run starting on the very next line. No blank may
+    # intervene -- that is what keeps the next constant's citation out.
+    idx = lineno
+    while idx < len(lines_c) and lines_c[idx].lstrip().startswith('#'):
+        if source_re.search(lines_c[idx]):
+            return True
+        idx += 1
+
+    # Above: walk up through comments and blanks, stopping at the first
+    # line of code, which is the previous assignment.
+    idx = lineno - 2
+    while idx >= 0:
+        line = lines_c[idx]
+        if source_re.search(line):
+            return True
+        if line.strip() and not line.lstrip().startswith('#'):
+            break
+        idx -= 1
+
+    return False
+
+
 def build_cited_constant_names(project_dir):
     """Map NAME -> value for cited numeric constants in constants_new.py.
 
@@ -1510,44 +1565,7 @@ def build_cited_constant_names(project_dir):
         num = _numeric_from_node(node.value)
         if num is None:
             continue
-        # Find THIS constant's own citation, in either of the two
-        # conventions the file uses.
-        #
-        # build_pinned_values() uses a flat window of 10 lines above and
-        # 5 below, which bleeds: in a densely packed file a constant
-        # with no citation of its own picks up a neighbour's, and a copy
-        # of it would then be reported as a shadow of something that was
-        # never actually cited.
-        #
-        # constants_new.py mostly writes the citation BELOW the
-        # assignment:
-        #     KM_PER_AU = 149597870.7
-        #     # Source: IAU 2012 Resolution B2
-        # while the rest of the codebase writes it above. Both are
-        # accepted, but only as a contiguous comment run touching the
-        # assignment -- a blank line ends it, which is what stops the
-        # bleed.
-        cited = False
-
-        idx = node.lineno          # 0-based index of the line BELOW
-        while idx < len(lines_c) and lines_c[idx].lstrip().startswith('#'):
-            if source_re.search(lines_c[idx]):
-                cited = True
-                break
-            idx += 1
-
-        if not cited:
-            idx = node.lineno - 2  # 0-based index of the line ABOVE
-            while idx >= 0:
-                line = lines_c[idx]
-                if source_re.search(line):
-                    cited = True
-                    break
-                if line.strip() and not line.lstrip().startswith('#'):
-                    break
-                idx -= 1
-
-        if cited:
+        if constant_has_own_citation(lines_c, node.lineno, source_re):
             named[target.id] = num
     return named
 
@@ -1657,9 +1675,11 @@ def build_pinned_values(project_dir):
             num = -float(val.operand.value)
         else:
             continue
-        ln = node.lineno
-        context = ''.join(lines_c[max(0, ln - 1 - 10):ln + 5])
-        if SOURCE_RE.search(context):
+        # Was a flat window of 10 lines above and 5 below, which could
+        # reach past this constant onto a neighbour's citation. Now the
+        # same predicate build_cited_constant_names() uses, so the two
+        # cannot disagree about what "cited" means.
+        if constant_has_own_citation(lines_c, node.lineno, SOURCE_RE):
             # Store at multiple precisions to match how hover text rounds
             for prec in (0, 1, 2, 3):
                 pinned.add(round(num, prec))

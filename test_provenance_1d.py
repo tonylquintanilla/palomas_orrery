@@ -50,6 +50,8 @@ from provenance_scanner import (
     SHADOW_CONSTANTS,
     SHADOW_DERIVED_MIN_MAGNITUDE,
     build_cited_constant_names,
+    build_pinned_values,
+    constant_has_own_citation,
     extract_numeric_claims,
     has_citation,
     scan_shadow_constants,
@@ -307,6 +309,82 @@ def test_tier_labels_make_no_blanket_residual_claim():
 
 
 # ============================================================
+# TESTS -- the shared citation predicate
+# ============================================================
+
+import re as _re
+
+_SRC_RE = _re.compile(r'#\s*[Ss]ource\s*:', _re.IGNORECASE)
+
+
+def _lines(text):
+    return text.splitlines(keepends=True)
+
+
+def test_citation_below_assignment_counts():
+    """constants_new.py's convention: citation on the following line."""
+    src = _lines('X = 1.0\n# Source: a real reference\n')
+    assert constant_has_own_citation(src, 1, _SRC_RE)
+
+
+def test_citation_above_assignment_counts():
+    """The rest of the codebase's convention: citation above."""
+    src = _lines('# Source: a real reference\nX = 1.0\n')
+    assert constant_has_own_citation(src, 2, _SRC_RE)
+
+
+def test_blank_line_ends_the_run_below():
+    """A blank line stops the search, so the NEXT constant's citation
+    is not inherited.
+
+    This is the bleed the predicate exists to prevent. With a distance
+    window instead of contiguity, Y below would be scored as cited on
+    the strength of Z's citation.
+    """
+    src = _lines('Y = 2.0\n'
+                 '\n'
+                 '# Source: this belongs to Z, not Y\n'
+                 'Z = 3.0\n')
+    assert not constant_has_own_citation(src, 1, _SRC_RE), \
+        "Y inherited the citation belonging to Z"
+    assert constant_has_own_citation(src, 4, _SRC_RE)
+
+
+def test_preceding_code_ends_the_run_above():
+    """Walking up stops at the previous assignment."""
+    src = _lines('# Source: belongs to A\n'
+                 'A = 1.0\n'
+                 'B = 2.0\n')
+    assert constant_has_own_citation(src, 2, _SRC_RE)
+    assert not constant_has_own_citation(src, 3, _SRC_RE), \
+        "B inherited the citation belonging to A"
+
+
+def test_both_pinned_builders_agree():
+    """The two callers must not diverge again.
+
+    They answer the same question and now share one implementation. If
+    this ever fails, one of them has grown its own rule back.
+    """
+    here = os.path.dirname(os.path.abspath(__file__))
+    if not os.path.exists(os.path.join(here, 'constants_new.py')):
+        print("    (skipped -- constants_new.py not found)")
+        return
+
+    pinned = build_pinned_values(here)
+    named = build_cited_constant_names(here)
+    from_names = set()
+    for value in named.values():
+        for prec in (0, 1, 2, 3):
+            from_names.add(round(value, prec))
+
+    assert pinned == from_names, (
+        f"the two citation rules disagree: "
+        f"{len(pinned - from_names)} only in build_pinned_values, "
+        f"{len(from_names - pinned)} only in build_cited_constant_names")
+
+
+# ============================================================
 # RUNNER
 # ============================================================
 
@@ -326,12 +404,17 @@ TESTS = [
     test_temperature_wins_over_angle,
     test_plain_degrees_still_angular,
     test_tier_labels_make_no_blanket_residual_claim,
+    test_citation_below_assignment_counts,
+    test_citation_above_assignment_counts,
+    test_blank_line_ends_the_run_below,
+    test_preceding_code_ends_the_run_above,
+    test_both_pinned_builders_agree,
 ]
 
 
 def main():
     print("=" * 70)
-    print("Phase 1d/1e recognition tests (L-156)")
+    print("Phase 1d/1e recognition tests (L-156) + citation predicate")
     print("=" * 70)
 
     passed = 0
