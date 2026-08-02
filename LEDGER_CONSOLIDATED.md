@@ -4155,10 +4155,11 @@ cluster depends on: foundational constants (`SUN_RADIUS_KM`,
 resolved by direct-import-count, so a constant consumed indirectly (via a
 derived dict) scored as if barely used.
 
-**Scanner state at HEAD (post-D8.5, `42103d6`):** Tier 1 210, Tier 2
-605, Tier 3 62, Tier 4 2, total 879 across 116 files. 879 conserved
-across D8.5 — 39 findings moved Tier 2 to Tier 1 (23 from Option A
-retirement, 16 from staleness-credit removal).
+**Scanner state at HEAD (post-Phase 2 Piece 1, `373c6d8`):** Tier 1
+210, Tier 2 605, Tier 3 62, Tier 4 2, total 879 across 117 files
+(+1: `test_cross_checked.py`). 879 conserved across Phase 2 Piece 1 —
+zero findings moved. The V_CROSS_CHECKED (V2) recognition mechanism is
+live but has zero population (no annotations written yet).
 
 **Phase 1 measured arc (the instrument got honest):** Tier 1
 145 → 156 (1a) → 156 (1b) → 133 (1c) → 132 (L-174) → 171 (1d/1e/1f)
@@ -4188,9 +4189,9 @@ stems.
 
 **Vulnerability ladder (D3, decided 2026-07-27).** Four rungs via
 three-AI calibration (Gemini 3.1 Pro, GPT 5.5, Fable 5), Sonnet 5
-synthesis. V1 FETCHED (live pipeline). V2 CROSS-CHECKED (never
-auto-promotable to V1; requires structured, dated annotation with
-blind-check field). V3 SOURCED (cited but unchecked, merged with stale
+synthesis. V1 FETCHED (live pipeline). V2 CROSS-CHECKED (never auto-promotable to V1; requires source
+evidence AND two distinct checker annotations via competitive pattern;
+see provenance-discipline v1.4). V3 SOURCED (cited but unchecked, merged with stale
 per Tony). V4 RECALLED (no citation). Derived values inherit weakest
 input's rung once derivation logic clears one cross-check; a hardcoded
 literal inherits nothing (plain V3).
@@ -4300,6 +4301,56 @@ change targeted. Both Option A and staleness credit predated the D3
 ladder and were not wrong when written — they were outlived by a
 definition change and never revisited.
 
+### Phase 2 build history (D4: cross-checked annotation mechanism)
+
+**Piece 1 — scanner mechanism (2026-08-01, Opus 5).** Teaches the scanner
+to recognize `# Cross-checked:` annotations and score them
+V_CROSS_CHECKED (V2). Delivered as transactional patch
+(`documentation/patch_phase2_piece1.py`, 9 anchored edits).
+
+New code: `parse_cross_checks(text)` parser returning `(records, issues)`,
+`distinct_checker_identities()`, `_record_cross_check_diagnostics()`,
+scoring branches in `score_unit()`, diagnostic subsection in
+`generate_report()`. New test file: `test_cross_checked.py` (16 tests).
+
+V2 scoring rule (decided, 5-model competitive review — GPT ×2, Opus 5 ×2,
+Fable 5): `sourced AND two distinct cross-checks`. Sourced means direct
+citation or inherited citation. Two distinct means two annotation lines
+naming different checker identities (string-level, not model-family-level).
+Anti-gaming: parenthetical `.md` reference required. ISO dates only.
+`# Cross-checked:` is deliberately NOT in SOURCE_PATTERNS — a malformed
+annotation earns nothing.
+
+Predesign went through two review rounds (R0 → R1 → R2). Key findings
+from the competitive review: the R0 fallback claim was factually wrong
+(all 4 reviewers independently confirmed `has_citation()` does not match
+"Cross-checked"); V2 must require source evidence (3/4 converged);
+two distinct checkers required (3/4 converged); the worksheet inventory
+was wrong (15 not 7, Opus 5 #1 only); a live false positive exists at
+`planet_visualization_utilities.py` ~line 456 (Fable only). The
+competitive pattern produced genuine discovery — findings missed by some
+reviewers were caught by others.
+
+Lookback bleed measured (as-built §5): an annotation promotes sourced
+claims within ~50 lines below it. Containment is process-side — the
+identity diff after annotation insertion catches unintended promotions.
+High-exposure files: `info_dictionary.py` (up to 11 downstream per
+annotation). Low-exposure files (mars, eris, earth) proceed as-is.
+
+Decided: V_CROSS_CHECKED comment updated to "independently verified via
+competitive pattern" (was "blind"). Worksheets show current values to
+both models; the discipline is independent sourcing, not blindness.
+
+**Track 1 scope (decided, not yet executed).** Complete the competitive
+pattern for the 15 files that have April 2026 Gemini worksheets. Claude
+independently verifies the same claims. Tony compares. Convergent claims
+get annotated. Divergences discussed; unresolved claims go to GPT as
+tiebreaker.
+
+**Track 2 scope (decided, not yet executed).** New worksheets for
+uncovered files, starting with `celestial_objects.py` (54 findings). Both
+models get the same worksheet independently. Separate sessions.
+
 ### Observations (not fixed, tracked)
 
 **Em-dashes in comet_visualization_shells.py.** Three pre-existing
@@ -4312,8 +4363,11 @@ Complete.
 
 ### What remains open under L-156
 
-**Phase 2 (D4 cross-checked annotation backfill).** Next in the original
-plan. Gated on Phase 1 (now complete).
+**Phase 2 (D4 cross-checked annotation backfill).** Piece 1 (scanner
+mechanism) COMPLETE (`373c6d8`). The recognition and scoring are live;
+zero population until annotations are written. Track 1 (Claude's
+cross-check worksheets for April-worksheeted files) and Track 2 (new
+worksheets for uncovered files) are next.
 
 **Phase 3.** L-155 (pinning engine), L-160 (retire
 `test_constants_provenance.py`, gated on L-155), and MODULE_DOMAIN_MAP /
@@ -4345,6 +4399,12 @@ near-miss); `HANDOFF_addendum_phase1_and_uranus_cleanup.md`,
 L-155; L-157; L-158; L-159; L-161; L-162; L-163; L-173; L-174; L-175.
 `documentation/patch_retire_option_a.py`;
 `documentation/AS_BUILT_retire_option_a.md`.
+`documentation/patch_phase2_piece1.py`;
+`test_cross_checked.py`;
+`documentation/AS_BUILT_phase2_piece1.md`;
+`documentation/PREDESIGN_phase2_cross_checked_annotation_R2.md`;
+`documentation/BUILD_PROMPT_phase2_piece1.md`;
+`documentation/REVIEW_PROMPT_phase2_predesign.md`.
 
 ---
 
