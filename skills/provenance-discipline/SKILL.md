@@ -6,7 +6,7 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0)
 
 # Provenance Discipline
 
-Skill version: 1.4 | Cut from palomas_orrery @ 6d25b65ecf3dfdcb54615f4877427145cc4731c3 | August 1, 2026
+Skill version: 1.5 | Cut from palomas_orrery @ 225071f6 | August 2, 2026
 Source: project_instructions_v3_29.md Part 3 (Provenance Audit, Fetched vs
 Recalled) + food insecurity build handoff + scanner source at HEAD. v1.1
 adds the report domain-classification mechanics, the Review-Repair
@@ -19,14 +19,16 @@ resolved by tagging the module's own docstring, since ROLE_MAP is now a
 regenerated mirror rather than a hand-maintained dict. MODULE_DOMAIN_MAP
 and classify_domain() are unaffected and remain hand-maintained. v1.3
 adds No Shadow Constants [CRITICAL]: local copies of constants_new.py
-values must be deleted and replaced with proper imports — a frozen copy
+values must be deleted and replaced with proper imports -- a frozen copy
 bypasses the citation chain and drifts silently, same failure class as
 citing over recalled data. v1.4 rewrites Review-Repair Protocol step 2:
 cross-checking is the competitive pattern (same worksheet, independent
-models, Tony compares), not one model reviewing another's output. The
-worksheet format is the discipline — it forces primary source citations
-per cell, preventing any cross-checker from fabricating authority from
-training memory.
+models, Tony compares), not one model reviewing another's output.
+v1.5 adds Model Roles (tested roles for Claude, GPT, Gemini, Fable in
+the competitive pattern -- emerged from the Mars and constants_new.py
+cross-check sessions, August 2026), two worksheet types (value
+verification vs citation verification), the Cross-checked annotation
+format, and the Batch Worksheet Workflow.
 
 The resident protocol carries the two governing principles as CRITICAL
 gates: Fetched-vs-Recalled (a citation is a provenance claim that must be
@@ -53,42 +55,146 @@ asserting a provenance that does not exist -- wrong-but-cited is worse than
 uncited, because the citation suppresses the suspicion that would catch it.
 A blank with a flag is honest; an unsourced assertion is not.
 
-## Review-Repair Protocol for Tier-1 Findings
+## Review-Repair Protocol for Cross-Checked Annotations
 
-**Claude cannot be the verifier.** Clearing real Tier-1 findings (not
-scanner false positives) is a three-role relay, not something Claude does
-solo:
+**No model is its own verifier.** Clearing findings and earning
+Cross-checked annotations is a multi-model competitive process, not
+something any single AI does solo:
 
-1. **Claude preps a fact-check worksheet.** Group flagged claims (usually
-   by file, or by shared likely source), present each as a numbered claim
-   with its current value, and flag anything that looks suspicious on its
-   face. Claude does NOT propose citations or corrected values here --
-   only what needs checking and why. Template precedent:
-   `documentation/worksheet_earth_visualization.md`.
-2. **Cross-check via competitive pattern.** The same worksheet goes to
-   both Claude and Gemini (or another cross-checker) independently --
-   same prompt, independent answers. Tony compares. Convergence builds
-   confidence; divergence flags where to dig. This is NOT one model
-   reviewing the other's output -- both work from the original claims,
-   not from each other. The worksheet format is the discipline: every
-   cell requires a primary source citation, so a model working from
-   memory instead of sourcing produces visibly empty citation fields.
-3. **Claude mechanically inserts the confirmed citations/corrections.**
-   Transcribe what came back from step 2; do not add, embellish, or
-   "helpfully" fill gaps with recalled values while doing this.
+1. **Claude (orchestrating instance) preps a worksheet prompt.** Group
+   claims by file, present each as a numbered claim with its current
+   value and citation, and flag anything suspicious. The prompt is
+   SHA-anchored (`built on <SHA> at <URL>`), includes the source code
+   being checked, and specifies the job type (see Worksheet Types below).
+   Claude does NOT propose corrected values -- only what needs checking.
+2. **Tony sends the same prompt to Claude, GPT, and/or Gemini
+   independently.** Same prompt, independent answers. Tony compares.
+   Convergence builds confidence; divergence flags where to dig. This
+   is NOT one model reviewing another's output -- all work from the
+   original claims, not from each other.
+3. **Claude (orchestrating instance) compares the worksheets** and
+   produces a convergence/divergence report. Tony decides on
+   divergences.
+4. **Claude builds a transactional patch** with the confirmed fixes
+   and Cross-checked annotations.
 
-Why this order, not "Claude checks its own training data first": a
-citation Claude invented to clear a flag is the exact failure this skill
-exists to prevent (see Clearing a Flagged Claim). The worksheet step is
-Claude's real contribution -- triage, grouping, flagging what's odd -- not
-verification.
+**Why the worksheet format matters for every checker.** The same
+"fetched not recalled" rule that governs Claude's citations governs all
+cross-checkers. A known failure mode is fabricating authority from
+training memory when the output format allows ungrounded narrative. The
+structured worksheet does not -- it forces primary source citations per
+cell. Constrain the format, and the discipline follows.
 
-**Why the worksheet format matters for the cross-checker too.** The same
-"fetched not recalled" rule that governs Claude's citations governs the
-cross-check. A known failure mode for any AI cross-checker is fabricating
-authority from training memory when the output format allows ungrounded
-narrative. The structured worksheet does not -- it forces primary source
-citations per cell. Constrain the format, and the discipline follows.
+### Model Roles in the Competitive Pattern
+
+Tested and validated in the Mars and constants_new.py cross-check
+sessions (August 2026). These are demonstrated strengths, not
+assumptions.
+
+| Model | Demonstrated strength | Use for |
+|-------|----------------------|---------|
+| Claude (Opus) | Derivations, citation-shape errors (catches when a source cannot contain the claim as written), honest about limitations (marks UNVERIFIED rather than bluffing) | Primary checker: papers, web sources, derivations, structural analysis |
+| GPT | Papers with DOIs, explicit derivations with worked math, thorough web sourcing, catches date/year errors in citations | Primary checker: independent of Claude, complementary source selection |
+| Gemini | Book citations (can access book content web search cannot reach), domain knowledge, structural/philosophical dialogue | Book-citation verification, domain review, tiebreaker when primaries diverge |
+| Fable | Large-context comprehensive review, far-reaching audits across many files, pattern recognition at scale | Cross-codebase audits, manifest generation, bulk review when scope exceeds a bounded session |
+
+**Default two-leg pattern:** Claude + GPT independently. Covers papers,
+web sources, derivations, NASA/JPL data.
+
+**Gemini escalation:** When either primary leg marks items UNVERIFIED
+due to book citations, or when Claude and GPT diverge on domain-knowledge
+questions. Also effective as a third independent leg when sent the same
+prompt (tested: all three models received the same constants_new.py
+remaining-items prompt; complementary coverage emerged naturally).
+
+**Fable escalation:** When the scope of review exceeds what a bounded
+session can hold -- auditing an entire manifest, reviewing cross-file
+consistency, or pattern-matching across the full codebase. Not for
+per-claim worksheet work (Opus handles that), but for the architectural
+view that requires seeing everything at once.
+
+**Key finding (August 2026):** Gemini can "open the books." It
+demonstrated access to Carroll & Ostlie and Golub & Pasachoff content
+that neither Claude nor GPT could reach via web search. This is a real,
+tested capability -- not assumed from marketing. Use Gemini specifically
+for book-citation verification and domain claims that rest on textbook
+authority.
+
+### Worksheet Types
+
+Two types, same format, same competitive pattern, different job:
+
+**Value verification:** "Is this number right?" The checker independently
+researches each claim against primary sources, without seeing what the
+other checker found. Catches wrong values behind correct-looking
+citations. Used for shell modules (Mars was the first: bow shock 1.5
+should have been 1.64, Hill sphere 324.5 should have been 320).
+
+**Citation verification:** "Does the cited source actually contain this
+value?" The checker goes to the stated source and confirms the value
+appears there at the stated precision. Catches citations that point at
+sources that don't contain the claimed value -- right number, wrong
+provenance. Used for constants_new.py (IAU B3 cited for Mars/Saturn/
+Uranus/Neptune radii it doesn't define; heliopause arithmetic used 123
+AU where the source says 121.6).
+
+Both types use the same worksheet table format:
+
+| # | Claim/Constant | Value | Source | Verified? | Notes |
+
+The distinction matters because the same file can need both: a shell
+module's display text needs value verification while its `# Source:`
+comments need citation verification.
+
+### Cross-Checked Annotation Format
+
+```python
+# Source: Vignes et al. 2000, GRL 27, 49 -- subsolar bow shock 1.64 R_M
+# Cross-checked: Vignes et al. via Claude 2026-08-01 (worksheet_claude_mars_visualization.md)
+# Cross-checked: Vignes et al. via GPT 2026-08-01 (track1_gpt_independent_worksheet_mars_visualization.md)
+```
+
+**Source leads, model is subordinate, worksheet is the audit trail.**
+The source names the authority. The model names who found it. The
+parenthetical worksheet reference points to the evidence on disk. The
+ISO date is the check date, not the publication date.
+
+For derived values where the source is a computation, not a lookup:
+```python
+# Source: Derived from NASA NSSDCA Mars Fact Sheet (a, GM_Mars)
+#         via standard Hill approximation, Claude Opus 5 2026-08-01
+```
+
+For visualization boundaries where the value is a display choice, not
+a measured constant:
+```python
+# Visualization shell radius (physical chromosphere extends ~2000 km
+# above photosphere = ~1.003 R_sun; drawn at 1.1 for visibility)
+```
+
+The scanner requires two `# Cross-checked:` lines with distinct
+(identity, reference) pairs for V2 scoring. Same source from different
+worksheets counts as two independent checks.
+
+### Batch Worksheet Workflow
+
+For scaling the competitive pattern across many modules:
+
+1. **Claude prepares worksheet prompts** (one per file, SHA-anchored,
+   with the file's claims extracted from the scanner findings).
+2. **Tony sends each prompt to Claude + GPT independently.** Multiple
+   file prompts can go in one session per model.
+3. **Tony uploads both worksheets; Claude compares** and produces the
+   convergence/divergence report per file.
+4. **Tony decides on divergences.** Unresolved divergences go to Gemini
+   or GPT as tiebreaker.
+5. **Claude builds a transactional patch** (fixes + annotations) per
+   file or per batch.
+6. **Gemini gets targeted prompts** only for items both primaries
+   marked UNVERIFIED (typically book citations).
+
+This keeps Gemini's book-access strength aimed where it matters rather
+than diluted across routine web-checkable claims.
 
 Full multi-session history of this protocol (numbered Tier-1 items closed
 via web_search + Gemini cross-check): `documentation/HANDOFF_provenance_

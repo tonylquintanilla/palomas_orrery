@@ -55,14 +55,16 @@ KM_PER_AU = 149597870.7
 # Source: IAU 2012 Resolution B2 -- exact definition
 # Ref: https://syrte.obspm.fr/IAU_resolutions/Res_IAU2012_B2.pdf
 # Also: https://nssdc.gsfc.nasa.gov/planetary/factsheet/fact_notes.html
-# Verified: 2026-04-15
+# Cross-checked: IAU B2 via Claude 2026-08-02 (worksheet_claude_constants_new.md)
+# Cross-checked: IAU B2 via GPT 2026-08-02 (constants_new_citation_verification_gpt.md)
 # Note: 1 AU = 149,597,870,700 m exactly. We use km (divide by 1000).
 
 SUN_RADIUS_KM = 695700.0
 # Source: IAU 2015 Resolution B3 -- nominal solar radius
 # Ref: Prsa et al. 2016, AJ 152:41 (arXiv:1605.09788)
 # Also: https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html
-# Verified: 2026-04-15
+# Cross-checked: IAU B3 via Claude 2026-08-02 (worksheet_claude_constants_new.md)
+# Cross-checked: IAU B3 via GPT 2026-08-02 (constants_new_citation_verification_gpt.md)
 # Note: This is the IAU nominal value (conversion constant), not a
 # measurement. The measured photospheric radius is ~696,340 km
 # (Haberreiter et al. 2008). Use nominal for all calculations.
@@ -71,27 +73,33 @@ EARTH_EQUATORIAL_RADIUS_KM = 6378.137
 # Source: IAU 2015 Resolution B3 -- nominal terrestrial equatorial radius
 # Ref: Prsa et al. 2016, AJ 152:41 (arXiv:1605.09788)
 # Also: https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html
-# Verified: 2026-04-15
+# Note: B3 rounds to 6378.1 km; full precision from IERS Conventions
+# Cross-checked: IAU B3 / IERS via Claude 2026-08-02 (worksheet_claude_constants_new.md)
+# Cross-checked: IAU B3 / IERS via GPT 2026-08-02 (constants_new_citation_verification_gpt.md)
 
 EARTH_POLAR_RADIUS_KM = 6356.752
-# Source: IAU 2015 Resolution B3 -- nominal terrestrial polar radius
+# Source: IERS Conventions (Petit & Luzum 2010); IAU B3 rounds to 6356.8 km
 # Ref: Prsa et al. 2016, AJ 152:41 (arXiv:1605.09788)
-# Verified: 2026-04-15
+# Cross-checked: IAU B3 / IERS via Claude 2026-08-02 (worksheet_claude_constants_new.md)
+# Cross-checked: IAU B3 / IERS via GPT 2026-08-02 (constants_new_citation_verification_gpt.md)
 
 JUPITER_EQUATORIAL_RADIUS_KM = 71492.0
 # Source: IAU 2015 Resolution B3 -- nominal jovian equatorial radius
 # Ref: Prsa et al. 2016, AJ 152:41 (arXiv:1605.09788)
-# Verified: 2026-04-15
+# Cross-checked: IAU B3 via Claude 2026-08-02 (worksheet_claude_constants_new.md)
+# Cross-checked: IAU B3 via GPT 2026-08-02 (constants_new_citation_verification_gpt.md)
 
 JUPITER_POLAR_RADIUS_KM = 66854.0
 # Source: IAU 2015 Resolution B3 -- nominal jovian polar radius
 # Ref: Prsa et al. 2016, AJ 152:41 (arXiv:1605.09788)
-# Verified: 2026-04-15
+# Cross-checked: IAU B3 via Claude 2026-08-02 (worksheet_claude_constants_new.md)
+# Cross-checked: IAU B3 via GPT 2026-08-02 (constants_new_citation_verification_gpt.md)
 
 SPEED_OF_LIGHT_KM_S = 299792.458
 # Source: NIST/SI exact definition
 # Ref: https://physics.nist.gov/cgi-bin/cuu/Value?c
-# Verified: 2026-04-15
+# Cross-checked: NIST/SI via Claude 2026-08-02 (worksheet_claude_constants_new.md)
+# Cross-checked: NIST/SI via GPT 2026-08-02 (constants_new_citation_verification_gpt.md)
 
 
 # ============================================================
@@ -124,44 +132,57 @@ CENTER_MARKER_SIZE = 10  # For central objects like the Sun
 # Interior boundaries are approximate; based on standard solar models.
 # Source: Carroll & Ostlie, "Introduction to Modern Astrophysics" (2017)
 # Also: https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html
-# Verified: 2026-04-15
+# Cross-checked: Carroll & Ostlie via Gemini 2026-08-02 (Gemini worksheet)
+# Cross-checked: NASA Sun Fact Sheet via GPT 2026-08-02 (constants_new_citation_verification_gpt.md)
 
 CORE_AU = 0.2 * SOLAR_RADIUS_AU
-# Derived: core extends to ~0.2 solar radii
-# Source: Standard solar model (Bahcall et al.)
+# Visualization boundary at low end of conventional 0.2-0.25 R_sun core range
+# Source: Bahcall, Pinsonneault & Basu (2001), ApJ 555:990 (radial profiles)
+# Also: Carroll & Ostlie (2017), Ch. 11 gives 0.2-0.25 R_sun
+# Cross-checked: Carroll & Ostlie via Gemini 2026-08-02 (Gemini worksheet)
+# Cross-checked: NASA solar structure via GPT 2026-08-02 (constants_remaining_independent_verification_gpt.md)
 
 RADIATIVE_ZONE_AU = 0.7 * SOLAR_RADIUS_AU
-# Derived: radiative zone extends to ~0.7 solar radii
-# Source: Standard solar model
+# Visualization boundary; rounds the helioseismic tachocline at ~0.713 R_sun
+# Source: Christensen-Dalsgaard, Gough & Thompson (1991), ApJ 378:413
+# Cross-checked: helioseismology literature via GPT 2026-08-02 (constants_remaining_independent_verification_gpt.md)
+# Cross-checked: Carroll & Ostlie via Gemini 2026-08-02 (Gemini worksheet)
 
 # Solar atmosphere (in solar radii)
-CHROMOSPHERE_RADII = 1.5
-# Source: Carroll & Ostlie (2017), Ch. 11
-# Note: Chromosphere extends from photosphere (~1.0) to ~1.5 R_sun
-# Verified: 2026-04-15
+CHROMOSPHERE_RADII = 1.1
+# Visualization shell radius (physical chromosphere extends ~2000 km above
+# photosphere = ~1.003 R_sun; drawn at 1.1 for visibility at orrery scale)
+# Corrected 2026-08-02: 1.5 -> 1.1 (1.5 overstated the physical extent;
+#   Carroll & Ostlie Ch. 11 confirms ~2000 km, not 1.5 R_sun)
+# Cross-checked: Carroll & Ostlie via Gemini 2026-08-02 (Gemini worksheet)
+# Cross-checked: NASA chromosphere data via GPT 2026-08-02 (constants_remaining_independent_verification_gpt.md)
 
 INNER_CORONA_RADII = 3
 # Source: Golub & Pasachoff, "The Solar Corona" (2010)
-# Note: Inner (K-)corona extends to 2-3 R_sun
-# Verified: 2026-04-15
+# Note: Visualization boundary for inner (K-)corona; physical extent 2-3 R_sun
+# Cross-checked: Golub & Pasachoff via Gemini 2026-08-02 (Gemini worksheet)
 
 OUTER_CORONA_RADII = 50
 # Source: Various; F-corona envelope extends to ~50 R_sun
 # Ref: Mann et al. (2004), A&A 414:1127
-# Verified: 2026-04-15
+# Note: Visualization boundary for F-corona envelope; not a sharp physical edge
 
 # New shells (added April 2026)
 STREAMER_BELT_RADII = 6.0
 # Source: Eclipse observations; helmet streamers extend 4-6 R_sun
-# Ref: Golub & Pasachoff (2010); DeForest et al. (2018)
-# Verified: 2026-04-15
+# Ref: Golub & Pasachoff (2010); DeForest, Howard & McComas (2014), ApJ 787:124
+# Note: Visualization cutoff at upper end of 4-6 R_sun observed range;
+#   streamer-belt structure remains observable beyond 6 R_sun.
+# Cross-checked: Golub & Pasachoff via Gemini 2026-08-02 (Gemini worksheet)
+# Cross-checked: DeForest et al. via GPT 2026-08-02 (constants_remaining_independent_verification_gpt.md)
 
 ROCHE_LIMIT_RADII = 3.45
 # Source: Fluid Roche limit formula: d = 2.44 * R * (rho_sun/rho_comet)^(1/3)
 # Calculation: 2.44 * 1.0 * (1408/500)^(1/3) = 3.45 R_sun
 # Using rho_sun = 1408 kg/m3, rho_comet ~ 500 kg/m3
 # Ref: Murray & Dermott, "Solar System Dynamics" (1999), Sec. 4.6
-# Verified: 2026-04-15
+# Cross-checked: formula verified via Claude 2026-08-02 (worksheet_claude_constants_new.md)
+# Cross-checked: formula verified via GPT 2026-08-02 (constants_new_citation_verification_gpt.md)
 # Note: Roche limit is NOT absolute; tensile strength allows survival
 # inside it. Ikeya-Seki survived at 1.66 R_sun.
 
@@ -169,8 +190,11 @@ ALFVEN_SURFACE_RADII = 18.8
 # Source: Parker Solar Probe first crossing, April 28, 2021
 # Ref: Kasper et al. (2021), Phys. Rev. Lett. 127:255101
 # Also: https://www.nasa.gov/feature/goddard/2021/nasa-enters-the-solar-atmosphere
-# Verified: 2026-04-15
 # Note: Varies 10-20 R_sun with solar activity; 18.8 is the measured crossing
+# HELIOCENTRIC: from Sun center. NASA/APL press releases word it as altitude
+#   above the surface, but Kasper's paper says 18.4-19.7 R_sun from center.
+# Cross-checked: Kasper et al. via Claude 2026-08-02 (worksheet_claude_constants_new.md)
+# Cross-checked: Kasper et al. via GPT 2026-08-02 (constants_new_citation_verification_gpt.md)
 
 
 # ============================================================
@@ -181,15 +205,17 @@ TERMINATION_SHOCK_AU = 94
 # Source: Voyager 1 crossed at 94 AU (Dec 2004)
 # Ref: Stone et al. (2005), Science 309:2017
 # Also: Voyager 2 crossed at 84 AU (Aug 2007) -- asymmetric
-# Verified: 2026-04-15
+# Cross-checked: Stone et al. via Claude 2026-08-02 (worksheet_claude_constants_new.md)
+# Cross-checked: Stone et al. via GPT 2026-08-02 (constants_new_citation_verification_gpt.md)
 
-HELIOPAUSE_RADII = 26449
-# Note: This is in solar radii, not AU. ~123 AU = 123 * 149597870.7 / 695700 = 26449 R_sun
+HELIOPAUSE_RADII = 26148
+# Note: This is in solar radii, not AU. 121.6 AU * 149597870.7 / 695700 = 26148 R_sun
 # Source: Voyager 1 crossed heliopause at ~121.6 AU (Aug 2012)
 # Ref: Gurnett et al. (2013), Science 341:1489
-# Verified: 2026-04-15
-# Gemini confirmed: conversion math is correct (123 AU -> 26449 R_sun)
-# TODO: Consider renaming to HELIOPAUSE_AU = 123 for clarity
+# Corrected 2026-08-02: 26449 -> 26148 (prior comment used 123 AU;
+#   Gurnett source says 121.6 AU; both checkers independently found the error)
+# Cross-checked: Gurnett et al. via Claude 2026-08-02 (worksheet_claude_constants_new.md)
+# Cross-checked: Gurnett et al. via GPT 2026-08-02 (constants_new_citation_verification_gpt.md)
 
 # Oort Cloud and gravitational influence (in AU)
 INNER_LIMIT_OORT_CLOUD_AU = 2000
@@ -204,19 +230,25 @@ OUTER_OORT_CLOUD_AU = 100000
 # Source: Oort (1950); Weissman (1996)
 # Note: Estimated outer boundary, ~0.5 parsec
 
-GRAVITATIONAL_INFLUENCE_AU = 126000
-# Source: Approximate Hill sphere radius of Sun in Milky Way
-# Note: ~2 light-years; depends on local stellar density
-# Verified: 2026-04-15
+GRAVITATIONAL_INFLUENCE_AU = 150000
+# Source: Approximate Hill sphere of Sun in Milky Way (model-dependent)
+#         Estimates range 100,000-200,000 AU in the literature;
+#         depends on assumed enclosed galactic mass and Sun's orbital distance.
+#         ~2.4 light-years. Visualization boundary, not a measured value.
+# Corrected 2026-08-02: 126000 -> 150000 (prior value unsourced;
+#   150000 AU is a round midpoint of the published range)
 
 # Spacecraft reference
 PARKER_CLOSEST_RADII = 9.86
 # Source: Parker Solar Probe perihelion 22, Dec 24, 2024
 # Ref: https://parkersolarprobe.jhuapl.edu/The-Mission/index.php
-# Verified: 2026-04-15
 # Corrected: 2026-04-15 per Gemini review -- 8.86 was surface altitude,
 #   9.86 is distance from Sun center (consistent with other shell radii).
 #   Perihelion number corrected from 21 to 22.
+# HELIOCENTRIC: 9.86 from Sun center. NASA press reports ~3.83 Mkm above
+#   the surface = 8.86 R_sun altitude. Same orbit, different reference.
+# Cross-checked: JHUAPL/Riley et al. via Claude 2026-08-02 (worksheet_claude_constants_new.md)
+# Cross-checked: NASA PSP mission data via GPT 2026-08-02 (constants_new_citation_verification_gpt.md)
 # 9.86 R_sun = 6.86 million km = 0.0459 AU
 
 
@@ -235,15 +267,19 @@ PARKER_CLOSEST_RADII = 9.86
 #
 # Sources:
 #   IAU 2015 Resolution B3 (Prsa et al. 2016, AJ 152:41) for Sun,
-#     Earth, Mars, Jupiter, Saturn, Uranus, Neptune nominal values.
+#     Earth, Jupiter nominal values.
+#   Archinal et al. 2018 (Celest. Mech. Dyn. Astr. 130:22) for Mars,
+#     Saturn, Uranus, Neptune equatorial radii (IAU WGCCRE 2015 report).
 #   NASA NSSDCA Planetary Fact Sheets for Mercury, Venus, Moon.
 #   JPL Solar System Dynamics for dwarf planets / small bodies.
 #   Nimmo et al. 2017 (Icarus) for Pluto.
 # Ref: https://nssdc.gsfc.nasa.gov/planetary/factsheet/
 # Ref: https://ssd.jpl.nasa.gov/planets/phys_par.html
-# Verified: 2026-04-16 (equatorial convention adopted per downstream
-#   usage analysis; prior volumetric values caused ~2.3% position error
-#   for Jupiter-scaled shells like Io torus).
+# Note: equatorial convention adopted 2026-04-16 per downstream usage
+#   analysis; prior volumetric values caused ~2.3% position error for
+#   Jupiter-scaled shells like Io torus.
+# Cross-checked: IAU B3 / Archinal / JPL SSD via Claude 2026-08-02 (worksheet_claude_constants_new.md)
+# Cross-checked: IAU B3 / Archinal / JPL SSD via GPT 2026-08-02 (constants_new_citation_verification_gpt.md)
 
 # ------------------------------------------------------------
 # Named constants (L-162, 2026-07-29): the 14 remaining bodies,
@@ -261,41 +297,67 @@ VENUS_RADIUS_KM = 6051.8
 # Source: NASA Fact Sheet (volumetric mean; oblateness ~0)
 
 MOON_RADIUS_KM = 1737.4
-# Source: NASA Fact Sheet (volumetric mean; oblateness ~0.0012)
+# Source: NASA NSSDCA Fact Sheet (volumetric mean; oblateness ~0.0012)
+#         Also IAU/LRO reference radius (Archinal et al. 2011)
+# Cross-checked: NASA NSSDCA via Claude 2026-08-02 (worksheet_claude_constants_remaining.md)
+# Cross-checked: JPL SSD via GPT 2026-08-02 (constants_remaining_independent_verification_gpt.md)
+# Cross-checked: NASA NSSDCA via Gemini 2026-08-02 (Gemini worksheet)
 
 MARS_RADIUS_KM = 3396.2
-# Source: IAU 2015 nominal equatorial (volumetric = 3389.5)
+# Source: Archinal et al. 2018, Celest. Mech. Dyn. Astr. 130:22 (equatorial; vol = 3389.5)
+# Cross-checked: JPL SSD via Claude 2026-08-02 (worksheet_claude_constants_new.md)
+# Cross-checked: JPL SSD via GPT 2026-08-02 (constants_new_citation_verification_gpt.md)
 
 PHOBOS_RADIUS_KM = 11.1
 # Source: NASA/JPL Solar System Dynamics group
 
 SATURN_RADIUS_KM = 60268
-# Source: IAU 2015 nominal equatorial (volumetric = 58232)
+# Source: Archinal et al. 2018, Celest. Mech. Dyn. Astr. 130:22 (equatorial; vol = 58232)
+# Cross-checked: JPL SSD via Claude 2026-08-02 (worksheet_claude_constants_new.md)
+# Cross-checked: JPL SSD via GPT 2026-08-02 (constants_new_citation_verification_gpt.md)
 
 URANUS_RADIUS_KM = 25559
-# Source: IAU 2015 nominal equatorial (volumetric = 25362)
+# Source: Archinal et al. 2018, Celest. Mech. Dyn. Astr. 130:22 (equatorial; vol = 25362)
+# Cross-checked: JPL SSD via Claude 2026-08-02 (worksheet_claude_constants_new.md)
+# Cross-checked: JPL SSD via GPT 2026-08-02 (constants_new_citation_verification_gpt.md)
 
 NEPTUNE_RADIUS_KM = 24764
-# Source: IAU 2015 nominal equatorial (volumetric = 24622)
+# Source: Archinal et al. 2018, Celest. Mech. Dyn. Astr. 130:22 (equatorial; vol = 24622)
+# Cross-checked: JPL SSD via Claude 2026-08-02 (worksheet_claude_constants_new.md)
+# Cross-checked: JPL SSD via GPT 2026-08-02 (constants_new_citation_verification_gpt.md)
 
 PLUTO_RADIUS_KM = 1188.3
 # Source: New Horizons occultation (Nimmo et al. 2017)
 
-BENNU_RADIUS_KM = 0.262
-# Source: Volumetric mean (top-shape asteroid, OSIRIS-REx)
+BENNU_RADIUS_KM = 0.246
+# Source: Nolan et al. 2013 (radar shape model), mean diameter 492 +/- 20 m
+#         Confirmed by OSIRIS-REx OLA: mean radius 246 +/- 10 m, V = 0.062 km^3
+# Corrected 2026-08-02: 0.262 -> 0.246 (prior value matched no published source)
+# Cross-checked: Nolan et al. via Claude 2026-08-02 (worksheet_claude_constants_new.md)
+# Cross-checked: OSIRIS-REx via GPT 2026-08-02 (constants_new_citation_verification_gpt.md)
 
 ERIS_RADIUS_KM = 1163
 # Source: Volumetric mean (Sicardy et al. 2011 occultation)
 
-HAUMEA_RADIUS_KM = 816
-# Source: Volumetric mean (highly ellipsoidal: 1050x840x537 km)
+HAUMEA_RADIUS_KM = 715
+# Source: JPL SSD mean radius (Lockwood et al. 2014)
+#         Highly ellipsoidal: 1050x840x537 km -> geometric mean 779.5 km
+#         JPL SSD publishes 715; equatorial 870
+# Corrected 2026-08-02: 816 -> 715 per JPL SSD (prior value matched neither axes nor database)
+# Cross-checked: JPL SSD via Claude 2026-08-02 (worksheet_claude_constants_new.md)
+# Cross-checked: JPL SSD via GPT 2026-08-02 (constants_new_citation_verification_gpt.md)
 
 MAKEMAKE_RADIUS_KM = 715
 # Source: Volumetric mean (Brown et al.)
 
-ARROKOTH_RADIUS_KM = 9.95
-# Source: Volumetric mean (~35x20x14 km bilobed shape)
+ARROKOTH_RADIUS_KM = 9.1
+# Source: Keane et al. 2022, JGR Planets (New Horizons shape model)
+#         Volume 3166 km^3 -> equivalent sphere radius 9.1 km
+#         Overall dims 35.95 x 19.90 x 9.75 km (bilobed contact binary)
 # Corrected 2026-04-15 per Gemini review (was 0.0088 = 8.8 meters!)
+# Corrected 2026-08-02: 9.95 -> 9.1 per Keane shape model (prior dims were wrong)
+# Cross-checked: Keane et al. 2022 via Claude 2026-08-02 (worksheet_claude_constants_new.md)
+# Cross-checked: Keane et al. 2022 via GPT 2026-08-02 (constants_new_citation_verification_gpt.md)
 
 CENTER_BODY_RADII = {       # km (equatorial for major bodies, volumetric for small)
     # L-162 (2026-07-29): all 17 named bodies now reference their own
