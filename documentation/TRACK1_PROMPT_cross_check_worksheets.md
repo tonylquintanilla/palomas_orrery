@@ -126,6 +126,10 @@ Pull and read from live HEAD before starting:
 - `skills/provenance-discipline/SKILL.md` — v1.4, the competitive
   pattern definition
 - `LEDGER_CONSOLIDATED.md` L-156 — Phase 2 build history
+- `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md` — full project
+  context (architecture, phases, where this work fits)
+- `documentation/MASTER_PLAN_INTERACTIVE_GALLERY_SUMMARY.md` — current
+  status summary
 
 Do NOT read the Gemini worksheets (`documentation/worksheet_*.md`)
 before producing your own results. Tony will compare afterward.
