@@ -362,7 +362,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-160 | test_constants_provenance.py -- retire once fully absorbed, not before | OPEN | 8.1 | 2026-07-27 |
 | ! | L-172 | Phase 0 record-hygiene batch (provenance cluster prep) | OPEN | 5.7 | 2026-07-29 |
 | ! | L-158 | Derived-constant vulnerability inheritance rule (revised from a proposed rung, 2026-07-27) | OPEN | 5.6 | 2026-07-27 |
-| ! | L-156 | Provenance scanner scoring model fix — criticality (category-based) + vulnerability recalibration + comprehensive sweep | OPEN | 5.3 | 2026-08-01 |
+| ! | L-156 | Provenance scanner scoring model fix — criticality (category-based) + vulnerability recalibration + comprehensive sweep | OPEN | 5.3 | 2026-08-02 |
 | ! | L-155 | Cross-repo constants/geometry pinning checks -- built INTO provenance_scanner.py, not a standalone script | PENDING-GATE | 4.5 | 2026-07-27 |
 | ! | L-119 | event_link hardcoded None in the builder (F2, gates artifact 7) | OPEN | 3.6 | 2026-07-15 |
 | ! | L-168 | propagate_marker uses solar K_GAUSS mean-motion -- wrong for planetocentric moon markers (FLAG-2; caught in F1 design, avoided in serving, source fix still open) | OPEN | 3.6 | 2026-07-28 |
