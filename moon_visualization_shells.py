@@ -36,7 +36,13 @@ from orrery_rendering import create_info_marker
 # Moon Shell Creation Functions
 
 # Source: Weber et al. (2011), Science, "Seismic Detection of the Lunar Core";
-#         inner core ~240 km radius, 1,600-1,700 K, refined from Apollo seismic data.
+#         solid inner core ~240 km radius, from Apollo seismic array reanalysis.
+# Removed: former "1,600-1,700 K" inner-core temperature. Weber 2011 is a seismic
+#          detection study and reports no inner-core temperature; the value was not
+#          sourceable after three independent searches, so it is removed and the gap
+#          noted rather than re-cited.
+# Cross-checked: Weber et al. 2011 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
+# Cross-checked: Weber et al. 2011 via Gemini 2026-08-03 (batch1_tier2_cross_check_gemini.md)
 moon_inner_core_info = (
             "The Moon has a small, partially molten core. Seismic data from Apollo missions and more recent studies of the Moon\'s wobble suggest:<br>" 
             "* Inner Core: Believed to be a solid, iron-rich core, roughly 240 kilometers in radius."
@@ -51,12 +57,15 @@ def create_moon_inner_core_shell(center_position=(0, 0, 0)):
         'opacity': 1.0,
         'name': 'Inner Core',
         # Source: Weber et al. (2011), Science, "Seismic Detection of the Lunar Core";
-        #         solid iron-rich inner core ~240 km radius, 1,600-1,700 K confirmed.
+        #         solid iron-rich inner core ~240 km radius (seismic constraint).
+        # Removed: former "1,600-1,700 K" -- see module-level note above.
+        # Cross-checked: Weber et al. 2011 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
+        # Cross-checked: Weber et al. 2011 via Gemini 2026-08-03 (batch1_tier2_cross_check_gemini.md)
         'description': (
             "The Moon has a small, partially molten core. Seismic data from Apollo missions and more recent studies of the Moon\'s wobble suggest:<br>" 
             "* Inner Core: Believed to be a solid, iron-rich core, roughly 240 kilometers in radius:<br>" 
-            "  * Estimates for the temperature of the Moon\'s inner core vary slightly depending on the studies and methods used, but <br>" 
-            "    some more recent reanalyses of seismic data suggest temperatures around 1600-1700 K." 
+            "  * The temperature of the inner core is model-dependent and not well constrained; <br>" 
+            "    seismic data constrain its size, not its temperature." 
         )
     }
     
@@ -119,15 +128,19 @@ def create_moon_outer_core_shell(center_position=(0, 0, 0)):
         'opacity': 0.8,
         'name': 'Outer Core',
         # Source: NASA Moon Fact Sheet; Weber et al. (2011), Science, "Seismic Detection of the Lunar Core";
-        #         outer core ~330 km radius, partially molten silicate boundary layer ~150 km thick confirmed.
+        #         outer core ~330 km radius, partially molten silicate boundary layer ~150 km thick.
+        # Removed: former "1300 K to 1600 K" outer-core temperature from the display text.
+        #          Weber 2011 is a seismic study, not a thermal one; the temperature is
+        #          model-dependent and was not sourceable after three independent searches.
+        # Cross-checked: Weber et al. 2011 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
+        # Cross-checked: Weber et al. 2011 via Gemini 2026-08-03 (batch1_tier2_cross_check_gemini.md)
         'description': (
             "Outer Core: Surrounding the inner core, this is thought to be a liquid, iron-rich outer core with a radius of about <br>" 
             "330 kilometers. There might also be a small, partially molten layer of silicates around the outer core.<br>:" 
             "* The Moon's outer core is generally understood to be hotter than its solid inner core, as it is in a molten or liquid <br>" 
             "  state. <br>" 
-            "* Estimated Temperature: This layer would be slightly cooler than the inner core, but still hot enough to be molten at <br>" 
-            "  the lower pressures found here. Estimates typically fall around 1300 K to 1600 K. Let's use 1500 K as a representative <br>" 
-            "  value for the outer core for your model.<br>" 
+            "* Estimated Temperature: This layer is hot enough to be molten at the lower pressures found here, but the <br>" 
+            "  temperature is model-dependent and not well constrained.<br>" 
             "* Reasoning: As you move outwards, the temperature gradually decreases, but crucially, the pressure also decreases. At this <br>" 
             "  depth and pressure, the temperature is above the melting point of the iron-rich material, allowing it to be liquid."
         )
@@ -205,8 +218,12 @@ def create_moon_outer_core_shell(center_position=(0, 0, 0)):
     
     return traces
 
-# Source: NASA Moon Fact Sheet; Apollo Seismic Experiment reports (deep moonquakes 700-1,200 km,
-#         tidal stress origin confirmed).
+# Source: Nakamura et al. 1982, JGR 87:A117 -- deep moonquake source depths;
+#         Nakamura 2005, JGR 110 -- deep moonquake catalog reanalysis.
+#         Deep moonquakes 700-1,200 km depth, concentrated at 800-1,000 km;
+#         tidal stress origin.
+# Cross-checked: Nakamura et al. 1982 via Claude 2026-08-03 (worksheet_claude_batch1_followup.md)
+# Cross-checked: Nakamura 1982/2005 via GPT 2026-08-03 (batch1_tier2_followup_gpt.md)
 moon_mantle_info = (
             "Above the core lies the Moon's mantle, which makes up the bulk of its interior:<br>" 
             "* Composition: Primarily composed of silicate rocks, similar to Earth's mantle, but with different proportions of <br>" 
@@ -554,8 +571,17 @@ def create_moon_exosphere_shell(center_position=(0, 0, 0)):
     
     return traces
 
-# Source: NASA Solar System Dynamics (SSD); Hill sphere radius ~60,000 km confirmed,
-#         34.53 lunar radii derived from Moon mean radius 1,737.4 km.
+# Source: Derived from NASA NSSDCA Moon Fact Sheet inputs (Moon mass, Earth mass,
+#         Earth-Moon distance) via the standard Hill approximation,
+#         Claude Opus 5 2026-08-03.
+#         ~60,000 km is a conventional rounded value, not a measured constant.
+#         The Hill radius varies over the orbit from ~58,147 km (perigee) to
+#         ~64,901 km (apogee). The shell uses 34.53 lunar radii = ~59,992 km
+#         (Moon mean radius 1,737.4 km), which lies inside that range.
+# Cross-checked: derived Hill radius via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
+# Note: SINGLE-LEG. Only the Claude tier-2 worksheet carries the 58,147-64,901 km
+#       range. GPT and Gemini converged on method and inputs but did not publish
+#       this range. A second independent leg is still owed for V2 scoring.
 moon_hill_sphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.001 AU TO VISUALIZE.<br><br>" 
             "The Moon's Hill sphere (also known as the Roche sphere in this context) is the region around it where its own gravity <br>" 

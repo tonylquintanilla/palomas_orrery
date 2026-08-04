@@ -36,7 +36,9 @@ from orrery_rendering import rotate_to_sunward, create_info_marker
 # Venus Shell Creation Functions
 
 # Source: NASA Venus Fact Sheet; NASA Solar System Exploration;
-#         iron-nickel core, radius ~3,200 km, lack of dynamo due to slow rotation or solid core confirmed.
+#         iron-nickel core, radius ~3,200 km, lack of dynamo due to slow rotation or solid core.
+# Cross-checked: NASA Venus Fact Sheet via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
+# Cross-checked: NASA Venus Fact Sheet via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
 venus_core_info = (
             "Scientists infer that Venus has a central core, likely composed primarily of iron and nickel, similar to Earth's. \n" 
             "Its radius is estimated to be around 3,200 km. Due to the lack of a strong magnetic field, it's speculated that Venus's \n" 
@@ -53,7 +55,9 @@ def create_venus_core_shell(center_position=(0, 0, 0)):
         'opacity': 1.0,
         'name': 'Core',
         # Source: NASA Venus Fact Sheet; NASA Solar System Exploration;
-        #         iron-nickel core, radius ~3,200 km, no dynamo (slow rotation or solid core) confirmed.
+        #         iron-nickel core, radius ~3,200 km, no dynamo (slow rotation or solid core).
+        # Cross-checked: NASA Venus Fact Sheet via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
+        # Cross-checked: NASA Venus Fact Sheet via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
         'description': (
             "Scientists infer that Venus has a central core, likely composed primarily of iron and nickel, similar to Earth's. <br>" 
             "Its radius is estimated to be around 3,200 km. Due to the lack of a strong magnetic field, it's speculated that Venus's <br>" 
@@ -324,13 +328,20 @@ def create_venus_crust_shell(center_position=(0, 0, 0)):
 
     return [surface_trace, hover_trace]
 
+# Source: NASA NSSDCA Venus Fact Sheet -- surface pressure 92 bars, surface
+#         temperature 464 degC, CO2 96.5%, N2 3.5%.
+#         Sanchez-Lavega 2018 -- troposphere/tropopause top range 60-65 km.
+# Cross-checked: NSSDCA Venus Fact Sheet via Claude 2026-08-03 (worksheet_claude_batch1_tier1_sourcing.md)
+# Cross-checked: NSSDCA Venus Fact Sheet via GPT 2026-08-03 (batch1_tier1_sourcing_gpt_independent.md)
+# NOTE: duplicated text -- the description entry in create_venus_atmosphere_shell
+#       below carries a <br> copy of this block. Edit both copies together.
 venus_atmosphere_info = (
-            "Venus boasts an extremely dense atmosphere, about 90 times the pressure of Earth's atmosphere at the surface. It is \n" 
-            "composed primarily of carbon dioxide (about 96.5%) and nitrogen (about 3.5%), with trace amounts of other gases, \n" 
-            "including sulfuric acid clouds that completely enshroud the planet. This thick, CO2-rich atmosphere creates a runaway \n" 
-            "greenhouse effect, making Venus the hottest planet in our solar system with surface temperatures around 464 degC. The \n" 
-            "upper atmosphere exhibits a phenomenon called \"super-rotation,\" where winds blow much faster than the planet's slow \n" 
-            "rotation."
+            "Venus boasts an extremely dense atmosphere, about 92 to 93 times the pressure of Earth's atmosphere at the \n" 
+            "surface. It is composed primarily of carbon dioxide (about 96.5%) and nitrogen (about 3.5%), with trace \n" 
+            "amounts of other gases, including sulfuric acid clouds that completely enshroud the planet. This thick, \n" 
+            "CO2-rich atmosphere creates a runaway greenhouse effect, making Venus the hottest planet in our solar \n" 
+            "system with surface temperatures around 464 degC. The upper atmosphere exhibits a phenomenon called \n" 
+            "\"super-rotation,\" where winds blow much faster than the planet's slow rotation."
 )
 
 def create_venus_atmosphere_shell(center_position=(0, 0, 0)):
@@ -342,14 +353,15 @@ def create_venus_atmosphere_shell(center_position=(0, 0, 0)):
         'opacity': 0.5,
         'name': 'Lower Atmosphere',
         'description': (
-            "Venus boasts an extremely dense atmosphere, about 90 times the pressure of Earth's atmosphere at the surface. It is <br>" 
-            "composed primarily of carbon dioxide (about 96.5%) and nitrogen (about 3.5%), with trace amounts of other gases, <br>" 
-            "including sulfuric acid clouds that completely enshroud the planet. This thick, CO2-rich atmosphere creates a runaway <br>" 
-            "greenhouse effect, making Venus the hottest planet in our solar system with surface temperatures around 464 degC. The <br>" 
-            "upper atmosphere exhibits a phenomenon called \"super-rotation,\" where winds blow much faster than the planet's slow <br>" 
-            "rotation.<br><br>"
-            "The \"lower atmosphere\" of Venus is generally considered to be the troposphere, which extends from the surface up to \n" 
-            "an altitude of approximately 60 kilometers. This region contains the dense, hot air and the main cloud layers."
+            "Venus boasts an extremely dense atmosphere, about 92 to 93 times the pressure of Earth's atmosphere at the <br>" 
+            "surface. It is composed primarily of carbon dioxide (about 96.5%) and nitrogen (about 3.5%), with trace <br>" 
+            "amounts of other gases, including sulfuric acid clouds that completely enshroud the planet. This thick, <br>" 
+            "CO2-rich atmosphere creates a runaway greenhouse effect, making Venus the hottest planet in our solar <br>" 
+            "system with surface temperatures around 464 degC. The upper atmosphere exhibits a phenomenon called <br>" 
+            "\"super-rotation,\" where winds blow much faster than the planet's slow rotation.<br><br>"
+            "The \"lower atmosphere\" of Venus is generally considered to be the troposphere, which extends from the <br>" 
+            "surface up to approximately 60-65 kilometers (visualization uses 60 km). This region contains the dense, <br>" 
+            "hot air and the main cloud layers."
         )
     }
     
@@ -414,8 +426,13 @@ def create_venus_upper_atmosphere_shell(center_position=(0, 0, 0)):
         'color': 'rgb(100, 150, 255)',  # Lighter blue
         'opacity': 0.3,
         'name': 'Upper Atmosphere',
-        # Source: ESA Venus Express Mission; NASA Pioneer Venus Project;
-        #         thermosphere ~300 K dayside, night-side cryosphere 90-120 km, ionosphere 120-140 km peak confirmed.
+        # Source: Bertaux et al. 2007, Nature 450:646 -- Venus mesosphere 60-100 km
+        #         (SPICAV/Venus Express stellar occultation). Mesosphere extent only.
+        # Removed: thermosphere temperature and ionosphere peak altitude as specific
+        #          values. Both are model- and time-dependent; softened in the display
+        #          text rather than cited. VIRA-sourced values may restore them later.
+        # Cross-checked: Bertaux et al. 2007 via Claude 2026-08-03 (worksheet_claude_batch1_blind_lookup.md)
+        # Cross-checked: Bertaux et al. 2007 via GPT 2026-08-03 (batch1_blind_source_lookup_gpt.md)
         'description': (
             "The upper atmosphere of Venus is a complex and dynamic region extending far beyond the troposphere. It doesn't have the same distinct layers <br>" 
             "(stratosphere, mesosphere, thermosphere) as Earth's in the same way due to the very different thermal structure and composition. However, we can <br>" 
@@ -425,14 +442,14 @@ def create_venus_upper_atmosphere_shell(center_position=(0, 0, 0)):
             "  the mesosphere. It's a transition zone between the lower, rapidly rotating atmosphere and the upper atmosphere where solar radiation plays a more dominant <br>" 
             "  role. Extent in Venus radii: The top of this layer is around 90-100 km. So, the mesosphere extends up to about 1.5-1.6% of Venus's radius.<br>" 
             "* Thermosphere (approximately 90-100 km to 200+ km): Above the mesosphere, the temperature increases significantly with altitude due to the absorption of solar <br>" 
-            "  extreme ultraviolet (EUV) radiation. This is the thermosphere. Unlike Earth's thermosphere, Venus's thermosphere is surprisingly cold, with average temperatures <br>" 
-            "  around 300 K (27 degC), and even colder on the night side (the \"cryosphere\" around 90-120 km can reach extremely low temperatures). This is due to efficient <br>" 
+            "  extreme ultraviolet (EUV) radiation. This is the thermosphere. Unlike Earth's thermosphere, Venus's thermosphere is surprisingly cold. Temperatures <br>" 
+            "  vary significantly with altitude, local time, and solar conditions, and the night side (the \"cryosphere\") is colder still. This is due to efficient <br>" 
             "  radiative cooling by carbon dioxide. The thermosphere is also where significant day-night differences in temperature and density occur due to Venus's slow <br>" 
             "  rotation. A global circulation pattern moves hot air from the dayside to the nightside at high altitudes. Extent in Venus radii: The thermosphere extends to at <br>" 
             "  least 200 km, and potentially much higher, gradually thinning into the exosphere. So, the thermosphere extends to at least 3.3% of Venus's radius.<br>" 
             "* Ionosphere (approximately 120 km to several hundred km): Within the thermosphere and extending into the exosphere lies the ionosphere, a region where solar <br>" 
             "  radiation has ionized the atmospheric gases, creating a layer of charged particles (ions and electrons). Venus has a substantial ionosphere, with peak electron <br>" 
-            "  densities occurring around 120-140 km altitude. The ionosphere plays a crucial role in interacting with the solar wind, as Venus lacks a strong global magnetic <br>" 
+            "  densities occurring in the upper atmosphere. The ionosphere plays a crucial role in interacting with the solar wind, as Venus lacks a strong global magnetic <br>" 
             "  field.<br>" 
             "  * The solar wind directly impacts the ionosphere, leading to the formation of an induced magnetosphere.<br>" 
             "  * The nightside ionosphere is more variable and less dense than the dayside ionosphere, but it can extend to very high <br>" 
@@ -503,7 +520,10 @@ def create_venus_upper_atmosphere_shell(center_position=(0, 0, 0)):
     return traces
 
 # Source: ESA Venus Express: Magnetosphere; NASA Pioneer Venus Results;
-#         induced magnetosphere (not intrinsic), formed by solar wind / ionosphere interaction confirmed.
+#         Zhang et al. 2007 -- induced magnetopause ~1.05 R_V;
+#         Shan et al. 2015 -- induced bow shock 1.4 R_V (range 1.36-1.46).
+# Cross-checked: Zhang 2007 / Shan 2015 via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
+# Cross-checked: Zhang 2007 / Shan 2015 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
 venus_magnetosphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.005 AU TO VISUALIZE.\n\n" 
 
@@ -557,8 +577,11 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     y = y + center_y
     z = z + center_z
     
-    # Source: ESA Venus Express: Magnetosphere; NASA Pioneer Venus Results;
-    #         induced magnetosphere, bow shock 1.3-1.7 Rv, comet-shaped tail confirmed.
+    # Source: Edberg et al. 2024, JGR Space Physics 129, e2024JA032603 -- magnetotail
+    #         extends to ~45-60 R_V under active conditions;
+    #         Shan et al. 2015 -- induced bow shock 1.3-1.7 R_V.
+    # Cross-checked: Edberg et al. 2024 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
+    # Cross-checked: Edberg et al. 2024 via Gemini 2026-08-03 (worksheet_gemini_batch1_followup.md)
     magnetosphere_text = ["Venus has no internal magnetic field. Its weak, induced magnetosphere forms where the solar wind <br>"
             "interacts with the planet's ionosphere, draping the solar-wind field into a comet-shaped cavity with a <br>"
             "sunward bow shock and a long anti-sunward magnetotail. Its size varies strongly with solar-wind conditions.<br><br>"
@@ -646,8 +669,14 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
 
     return traces
 
-# Source: NASA Solar System Dynamics (SSD); NASA Venus Fact Sheet;
-#         Hill sphere ~1.01 million km / ~167 Venus radii; no natural moons confirmed.
+# Source: Derived from NASA NSSDCA Venus Fact Sheet inputs (Venus GM, perihelion
+#         distance 107.48 Mkm) via the standard Hill approximation,
+#         Claude Opus 5 2026-08-03.
+#         Perihelion gives ~1.004 Mkm = 166 Venus radii (the shell uses this);
+#         semi-major axis gives ~1.011 Mkm = 167.1 Venus radii.
+#         Venus has no natural moons, so body mass is the correct input.
+# Cross-checked: derived Hill radius via GPT 2026-08-03 (batch1_tier2_followup_gpt.md: 167.08 R_V at a)
+# Cross-checked: derived Hill radius via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
 venus_hill_sphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n" 
             "Venus's Hill Sphere is the region where its gravitational influence is dominant over the gravitational influence of \n" 

@@ -41,11 +41,13 @@ mercury_inner_core_info = (
             "1,000 kilometers thick based on Messenger findings (2019)."
 )
 
-# Source: NASA MESSENGER Mission; Margot et al. (2012) (outer core 1074 km)
-# Verified: April 2026 via Gemini fact-check
+# Source: Hauck et al. 2013, JGR Planets 118:1204 -- Mercury core radius
+#         2020 +/- 30 km (MESSENGER gravity and spin state). Used for visualization.
+# Cross-checked: Hauck et al. 2013 via GPT 2026-08-03 (batch1_blind_source_lookup_gpt.md)
+# Cross-checked: Hauck et al. 2013 via Gemini 2026-08-03 (batch1_tier2_cross_check_gemini.md)
 mercury_outer_core_info = (
             "Outer Core: Surrounding the solid inner core is a liquid metallic outer core. The movement of this molten iron \n" 
-            "is thought to be the source of Mercury's weak magnetic field. About 1074 km thick."
+            "is thought to be the source of Mercury's weak magnetic field. Core radius approximately 2020 km."
 )
 
 mercury_mantle_info = (
@@ -54,18 +56,22 @@ mercury_mantle_info = (
             "Earth's, estimated to be only about 331 kilometers thick."
 )
 
-# Source: NASA MESSENGER; Sori (2018) (crustal thickness ~35 km)
-#         Pei et al. (2024) (diamond layer from graphite + meteorite impacts)
-# Verified: April 2026 via Gemini fact-check
+# Source: Sori 2018, EPSL 489:92 -- Mercury crustal thickness 26 +/- 11 km
+#         (MESSENGER gravity/topography, isostasy).
+# Removed: former "~35 km" (Sori 2018 gives 26, not 35) and the diamond-layer claim,
+#          which carried a mis-parsed author name, the wrong mechanism, and the wrong
+#          location. Removed rather than re-cited.
+# Cross-checked: Sori 2018 via Gemini 2026-08-03 (batch1_tier2_cross_check_gemini.md)
+# Cross-checked: Sori 2018 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
 mercury_crust_info = (
             "SET MANUAL SCALE TO AT LEAST 0.002 AU TO VISUALIZE.\n\n"     
             "Mercury has a solid silicate crust that is heavily cratered, resembling Earth's Moon. The crust is likely quite thin \n" 
-            "compared to Earth's. There's also a theory that a significant portion of Mercury's crust might be made of diamonds, \n" 
-            "formed by billions of years of meteorite impacts on a graphite-rich surface. About 35 km thick."
+            "compared to Earth's. About 26 km thick (Sori 2018)."
 )
 
 # Source: NASA MESSENGER; NASA Mercury Fact Sheet
-# Verified: April 2026 via Gemini fact-check
+# Cross-checked: NASA Mercury Fact Sheet via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
+# Cross-checked: NASA Mercury Fact Sheet via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
 mercury_atmosphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.002 AU TO VISUALIZE.\n\n"     
             "Exosphere: Unlike Earth's substantial atmosphere, Mercury has an extremely thin exosphere. This exosphere is not \n" 
@@ -78,14 +84,20 @@ mercury_atmosphere_info = (
 # Custom geometry functions (live -- called via CUSTOM_SHELLS lazy import)
 # ============================================================
 
-# Source: Potter & Morgan (1985); MESSENGER sodium tail observations
-# Verified: April 2026 via Gemini fact-check
+# Source: Baumgardner et al. 2008, GRL 35 -- sodium tail observed to ~1,400 R_M;
+#         Schmidt et al. 2010, Icarus -- tail >1,000 R_M, highly variable.
+# Note: Potter & Morgan 1985 is the exosphere sodium DISCOVERY paper; it does not
+#       establish tail extent. The former "10,000 R_M" was unsupported by either
+#       source and has been replaced with the observed range.
+# Cross-checked: Baumgardner et al. 2008 via Claude 2026-08-03 (worksheet_claude_batch1_blind_lookup.md)
+# Cross-checked: Baumgardner et al. 2008 via GPT 2026-08-03 (batch1_blind_source_lookup_gpt.md)
 mercury_sodium_tail_info = (
             "TO VISUALIZE CLOSE UP SET MANUAL SCALE TO AT LEAST 0.002 AU TO VISUALIZE.\n"
             "TO VISUALIZE THE COMPLETE TAIL INCLUDE VENUS IN THE PLOT OR SET MANUAL SCALE TO 1.0 AU\n\n" 
 
-            "Sodium Tail: Mercury has a remarkable sodium tail that extends incredibly far into space - up to 10,000 Mercury radii \n"
-            "(approximately 24 million kilometers). This tail is created when sodium atoms from Mercury's exosphere \n"
+            "Sodium Tail: Mercury has a remarkable sodium tail. Observations place its extent in the range \n"
+            "~120 to ~1,400 Mercury radii (approximately 0.3 to 3.4 million kilometers), varying strongly \n"
+            "with orbital position and solar activity. This tail is created when sodium atoms from Mercury's exosphere \n"
             "are pushed away by solar radiation pressure. The tail always points away from the Sun, similar to a comet's tail.\n\n"
             "The sodium tail is highly dynamic and can vary significantly based on Mercury's position in its orbit and solar activity. \n"
             "It's one of Mercury's most distinctive features and can be observed from Earth using specialized telescopes."
@@ -109,16 +121,18 @@ def create_mercury_sodium_tail(center_position=(0, 0, 0), sun_position=(0, 0, 0)
     layer_info = {
         'name': 'Sodium Tail',
         'description': (
-            "Sodium Tail: Mercury has a remarkable sodium tail that extends incredibly far into space - up to 10,000 Mercury radii <br>"
-            "(approximately 24 million kilometers). This tail is created when sodium atoms from Mercury's exosphere <br>"
+            "Sodium Tail: Mercury has a remarkable sodium tail. Observations place its extent in the range <br>"
+            "~120 to ~1,400 Mercury radii (approximately 0.3 to 3.4 million kilometers), varying strongly <br>"
+            "with orbital position and solar activity. This tail is created when sodium atoms from Mercury's exosphere <br>"
             "are pushed away by solar radiation pressure. The tail always points away from the Sun, similar to a comet's tail.<br><br>"
             "The sodium tail is highly dynamic and can vary significantly based on Mercury's position in its orbit and solar activity. <br>"
             "It's one of Mercury's most distinctive features and can be observed from Earth using specialized telescopes."
         )
     }
     
-    # Sodium tail extends up to ~10,000 Mercury radii away from the Sun
-    max_tail_length = 10000 * MERCURY_RADIUS_AU
+    # Sodium tail observed extent ~120 to ~1,400 Mercury radii; drawn at the upper end.
+    # Source: Baumgardner et al. 2008, GRL 35 (~1,400 R_M maximum observed extent)
+    max_tail_length = 1400 * MERCURY_RADIUS_AU
     
     # Create a conical tail shape pointing away from the Sun.
     # Anti-sunward direction = (Mercury - Sun) normalized; valid in any frame.
@@ -230,8 +244,10 @@ def create_mercury_sodium_tail(center_position=(0, 0, 0), sun_position=(0, 0, 0)
     return traces
 
 
-# Source: NASA MESSENGER Mission
-# Verified: April 2026 via Gemini fact-check
+# Source: NASA MESSENGER Mission; Winslow et al. 2013 -- magnetopause subsolar
+#         1.45 R_M and bow shock 1.96 R_M (the values used in the geometry below).
+# Cross-checked: Winslow et al. 2013 via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
+# Cross-checked: Winslow et al. 2013 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
 mercury_magnetosphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.002 AU TO VISUALIZE.\n\n" 
 
@@ -395,8 +411,13 @@ def create_mercury_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(
 
     return traces
 
-# Source: NASA Solar System Dynamics
-# Verified: April 2026 via Gemini fact-check
+# Source: Derived from NASA NSSDCA Mercury Fact Sheet inputs (Mercury GM,
+#         perihelion distance) via the standard Hill approximation,
+#         Claude Opus 5 2026-08-03. Perihelion convention.
+#         Mercury has no significant companion, so body mass is the correct
+#         input (no system-mass term).
+# Cross-checked: NSSDCA-derived Hill radius via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
+# Cross-checked: NSSDCA-derived Hill radius via GPT 2026-08-03 (batch1_tier2_followup_gpt.md)
 mercury_hill_sphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.003 AU TO VISUALIZE.\n\n" 
             "Hill Sphere: Every celestial body has a Hill sphere (also known as the Roche sphere), which is the region around it \n" 

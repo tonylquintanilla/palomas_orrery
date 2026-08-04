@@ -31,16 +31,21 @@ from planet_visualization_utilities import (ERIS_RADIUS_AU, create_sphere_points
 
 # Eris Shell Creation Functions
 
-# Source: Sicardy et al. (2011), Nature (radius 1163 km, density 2.52 g/cm^3, albedo)
-#         Glein et al. (2024) (875 K core temperature model, geochemical modeling)
+# Source: Sicardy et al. (2011), Nature 478:493-496 (radius 1163 km, density 2.52 g/cm^3, albedo)
+#         Nimmo & Brown (2023), Science Advances 9, eadi9201 -- interior model inputs:
+#         radiogenic heating 4.5e-12 W/kg, thermal conductivity 3 W/m/K, surface 30 K,
+#         giving a modeled central temperature of 875 K. Modeled, not measured; one
+#         model's output, and ~500 K below rock melting.
+#         Nimmo & Brown (2023) also supports a differentiated, rock-dominated interior.
 #         JWST (2023/2024) (D/H ratio in methane ice, internal heating evidence)
-# Verified: April 2026 via Gemini fact-check
+# Cross-checked: Nimmo & Brown 2023 via Claude 2026-08-03 (worksheet_claude_batch1_blind_lookup_DELTA.md)
+# Cross-checked: Nimmo & Brown 2023 via GPT 2026-08-03 (batch1_blind_source_lookup_gpt.md)
 eris_core_info = (
             "2.4 MB PER FRAME FOR HTML.<br><br>"
             "Eris, a dwarf planet in the Kuiper Belt, has a structure that scientists have been piecing together through observations <br>" 
             "and theoretical modeling. Here's what we currently understand:<br>" 
-            "Core: Eris is believed to have a rocky core. Its high bulk density (around 2.5 g/cm^3) suggests that it is composed <br>" 
-            "primarily of rock, making up a significant portion of its mass (possibly over 85%). This core likely contains radioactive <br>" 
+            "Core: Eris is believed to have a rocky core. Its high bulk density (around 2.5 g/cm^3) suggests a <br>" 
+            "rock-dominated, differentiated interior. This core likely contains radioactive <br>" 
             "elements, which produce internal heat."
 )
 
@@ -55,15 +60,15 @@ def create_eris_core_shell(center_position=(0, 0, 0)):
         'description': (
             "Eris, a dwarf planet in the Kuiper Belt, has a structure that scientists have been piecing together through observations <br>" 
             "and theoretical modeling. Here's what we currently understand:<br>" 
-            "Core: Eris is believed to have a rocky core. Its high bulk density (around 2.5 g/cm^3) suggests that it is composed <br>" 
-            "primarily of rock, making up a significant portion of its mass (possibly over 85%). This core likely contains radioactive <br>" 
+            "Core: Eris is believed to have a rocky core. Its high bulk density (around 2.5 g/cm^3) suggests a <br>" 
+            "rock-dominated, differentiated interior. This core likely contains radioactive <br>" 
             "elements, which produce internal heat.<br>" 
             "* Determining the precise radius fraction of Eris's core is challenging because we don't have direct observations of its <br>" 
             "  internal structure. However, we can make estimations based on its known properties:<br>" 
             "  * Total Radius: Eris has a radius of approximately 1163 +/- 6 kilometers.<br>" 
             "  * Density: Its density is estimated to be around 2.52 +/- 0.07 g/cm^3. This high density suggests a significant rocky component.<br>" 
-            "  * Compositional Models: Based on its density, scientists believe Eris is composed largely of rock (possibly over 85% of its <br>" 
-            "    mass) with the remainder being primarily water ice. The ice forms the mantle surrounding the rocky core.<br>" 
+            "  * Compositional Models: Based on its density, scientists believe Eris has a rock-dominated, <br>" 
+            "    differentiated interior, the remainder primarily water ice forming the mantle around the core.<br>" 
             "* Considering these factors, and drawing comparisons to other icy bodies with rocky cores like Europa or Ganymede in the outer <br>" 
             "  solar system, a reasonable estimate for the radius fraction of Eris's core would likely be around 50-65% of its total radius. <br>" 
             "  To achieve Eris's high bulk density with a significant ice mantle, the denser rocky core must occupy a substantial portion of <br>" 
@@ -205,9 +210,10 @@ def create_eris_mantle_shell(center_position=(0, 0, 0)):
     
     return traces
 
-# Source: Sicardy et al. (2011), Nature (albedo 0.96)
+# Source: Sicardy et al. (2011), Nature 478:493-496 (albedo 0.96)
 #         Brown & Schaller (2007) (nitrogen/methane surface composition)
-# Verified: April 2026 via Gemini fact-check
+# Cross-checked: Sicardy et al. 2011 via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
+# Cross-checked: Sicardy et al. 2011 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
 eris_crust_info = (
             "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
             "4.6 MB PER FRAME FOR HTML.<br><br>"
@@ -364,6 +370,11 @@ def create_eris_crust_shell(center_position=(0, 0, 0)):
 
     return [surface_trace, hover_trace]
 
+# Source: Sicardy et al. 2011, Nature 478:493-496 -- stellar occultation;
+#         upper limit ~1 nbar surface pressure, ~10,000x more tenuous than Pluto's.
+#         Surface temperature approximately -240 degC (modeled range -217 to -243 degC).
+# Cross-checked: Sicardy et al. 2011 via Claude 2026-08-03 (worksheet_claude_batch1_tier1_sourcing.md)
+# Cross-checked: Sicardy et al. 2011 via GPT 2026-08-03 (batch1_tier1_sourcing_gpt_independent.md)
 eris_atmosphere_info = (
             "2.7 MB PER FRAME FOR HTML.<br><br>"
             "Atmosphere: Eris has a very tenuous atmosphere that is dynamic. When Eris is at its farthest point from the Sun <br>" 
@@ -454,17 +465,22 @@ def create_eris_atmosphere_shell(center_position=(0, 0, 0)):
     
     return traces
 
-# Source: NASA Solar System Dynamics (mass, semi-major axis)
-# Note: Shell geometry uses perihelion-based Hill sphere (~8.1 Mkm);
-#       average orbital distance gives ~9.4 Mkm (~0.06 AU)
-# Verified: April 2026 via Gemini fact-check
+# Source: Derived from JPL SSD Eris system mass 1.66e22 kg (Eris + Dysnomia by
+#         construction from Dysnomia's orbit) via the standard Hill approximation,
+#         Claude Opus 5 2026-08-03.
+#         Perihelion 38.0 AU gives ~8.0 Mkm (the shell uses this);
+#         semi-major axis 67.8 AU gives ~14.3 Mkm (~0.095 AU).
+#         Barycenter binary: system mass is the correct input, not Eris alone.
+# Corrected: the former "~9.4 Mkm" does not follow from these inputs.
+# Cross-checked: derived Hill radius via GPT 2026-08-03 (batch1_tier2_followup_gpt.md: 14.27 Mkm)
+# Cross-checked: derived Hill radius via Gemini 2026-08-03 (worksheet_gemini_batch1_followup.md: 14.26 Mkm)
 eris_hill_sphere_info = (
             "SELECT MANUAL SCALE OF AT LEAST 0.1 AU TO VISUALIZE.<br>" 
             "1.3 MB PER FRAME FOR HTML.<br><br>"
 
             "Hill Sphere: At Eris's average orbital distance (~67.8 AU), the Hill sphere radius is approximately <br>" 
-            "9.4 million kilometers (~0.06 AU). The shell shown uses the perihelion distance (~38 AU), <br>" 
-            "giving ~8.1 million km. Dysnomia orbits at ~37,000 km, well within either estimate."
+            "14.3 million kilometers (~0.095 AU). The shell shown uses the perihelion distance (~38 AU), <br>" 
+            "giving ~8.0 million km. Dysnomia orbits at ~37,000 km, well within either estimate."
 )
 
 def create_eris_hill_sphere_shell(center_position=(0, 0, 0)):
@@ -479,7 +495,7 @@ def create_eris_hill_sphere_shell(center_position=(0, 0, 0)):
             "SET MANUAL SCALE OF AT LEAST 0.05 AU TO VISUALIZE.<br><br>"
             "Hill Sphere: The Hill sphere, or Roche sphere, of Eris is the region around it where its own gravity is the dominant <br>" 
             "force attracting satellites. At Eris's average orbital distance (~67.8 AU), the Hill sphere radius is approximately <br>" 
-            "9.4 million kilometers (~0.06 AU). The shell shown here uses the perihelion distance (~38 AU), giving ~8.1 million km. <br>" 
+            "14.3 million kilometers (~0.095 AU). The shell shown here uses the perihelion distance (~38 AU), giving ~8.0 million km. <br>" 
             "Dysnomia orbits at ~37,000 km, well within either estimate.<br>" 
             "* The region where Eris's gravity is the dominant force attracting satellites extends to a distance of roughly 6965 <br>" 
             "  Eris radii from its center (perihelion-based)."          

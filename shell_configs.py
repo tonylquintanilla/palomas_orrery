@@ -123,11 +123,11 @@ SHELL_CONFIGS = {
             'info_border': 'white',  # two-standards (May 29, 2026): bright orange fill
             'hover_text': (
                 "Outer Core: Surrounding the solid inner core is a liquid metallic outer core. The movement of this molten iron <br>"
-                "is thought to be the source of Mercury's weak magnetic field. About 1074 km thick."
+                "is thought to be the source of Mercury's weak magnetic field. Core radius approximately 2020 km."
             ),
             'tooltip': (
                 "Outer Core: Surrounding the solid inner core is a liquid metallic outer core. The movement of this molten iron \n"
-                "is thought to be the source of Mercury's weak magnetic field. About 1074 km thick."
+                "is thought to be the source of Mercury's weak magnetic field. Core radius approximately 2020 km."
             ),
         },
 
@@ -161,13 +161,11 @@ SHELL_CONFIGS = {
             'hover_text': (
                 "(Note: toggle off the crust layer in the legend to better see the interior structure.)<br><br>"
                 "Mercury has a solid silicate crust that is heavily cratered, resembling Earth's Moon. The crust is likely quite thin <br>"
-                "compared to Earth's. There's also a theory that a significant portion of Mercury's crust might be made of diamonds, <br>"
-                "formed by billions of years of meteorite impacts on a graphite-rich surface. About 35 km thick."
+                "compared to Earth's. About 26 km thick (Sori 2018)."
             ),
             'tooltip': (
                 "Mercury has a solid silicate crust that is heavily cratered, resembling Earth's Moon. The crust is likely quite thin \n"
-                "compared to Earth's. There's also a theory that a significant portion of Mercury's crust might be made of diamonds, \n"
-                "formed by billions of years of meteorite impacts on a graphite-rich surface. About 35 km thick."
+                "compared to Earth's. About 26 km thick (Sori 2018)."
             ),
         },
 
@@ -187,13 +185,13 @@ SHELL_CONFIGS = {
                 "each other. The extent of Mercury's exosphere is not well-defined by a pressure gradient as with a true atmosphere. Instead, <br>"
                 "it gradually fades out into space. However, we can consider how far certain exospheric components have been observed:<br>"
                 "* Sodium Tail: Due to solar radiation pressure, sodium atoms are pushed away from Mercury, forming a long, comet-like tail. <br>"
-                "  This tail has been detected extending to distances of over 24 million kilometers (approximately 10,000 Mercury radii) <br>"
+                "  This tail has been detected extending to ~120 - 1,400 Mercury radii (roughly 0.3 - 3.4 million kilometers) <br>"
                 "  from the planet. This is by far the most extended component of Mercury's exosphere.<br>"
                 "* Other Elements: Other elements like hydrogen, helium, oxygen, potassium, calcium, and magnesium are also present in the <br>"
                 "  exosphere. These are generally found much closer to the planet's surface, within a few Mercury radii. For instance, calcium <br>"
                 "  and magnesium have been observed in the tail but at distances less than 8 Mercury radii.<br>"
                 "In summary: While the bulk of Mercury's exospheric atoms are concentrated very close to the surface (within 1 Mercury radius), <br>"
-                "the sodium tail is a significant feature that extends incredibly far, up to 10,000 Mercury radii. The main body of the exosphere <br>"
+                "the sodium tail is a significant feature that extends to ~120 - 1,400 Mercury radii. The main body of the exosphere <br>"
                 "is very close to the surface, but the tenuous sodium tail stretches to an immense distance."
             ),
             'tooltip': (
@@ -255,8 +253,8 @@ SHELL_CONFIGS = {
             'hover_text': (
                 "The Moon has a small, partially molten core. Seismic data from Apollo missions and more recent studies of the Moon's wobble suggest:<br>"
                 "* Inner Core: Believed to be a solid, iron-rich core, roughly 240 kilometers in radius:<br>"
-                "  * Estimates for the temperature of the Moon's inner core vary slightly depending on the studies and methods used, but <br>"
-                "    some more recent reanalyses of seismic data suggest temperatures around 1600-1700 K."
+                "  * The temperature of the inner core is model-dependent and not well constrained; <br>"
+                "    seismic data constrain its size, not its temperature."
             ),
             'tooltip': (
                 "The Moon has a small, partially molten core. Seismic data from Apollo missions and more recent studies of the Moon's wobble suggest:\n"
@@ -277,9 +275,8 @@ SHELL_CONFIGS = {
                 "330 kilometers. There might also be a small, partially molten layer of silicates around the outer core.<br>:"
                 "* The Moon's outer core is generally understood to be hotter than its solid inner core, as it is in a molten or liquid <br>"
                 "  state. <br>"
-                "* Estimated Temperature: This layer would be slightly cooler than the inner core, but still hot enough to be molten at <br>"
-                "  the lower pressures found here. Estimates typically fall around 1300 K to 1600 K. Let's use 1500 K as a representative <br>"
-                "  value for the outer core for your model.<br>"
+                "* Estimated Temperature: This layer is hot enough to be molten at the lower pressures found here, but the <br>"
+                "  temperature is model-dependent and not well constrained.<br>"
                 "* Reasoning: As you move outwards, the temperature gradually decreases, but crucially, the pressure also decreases. At this <br>"
                 "  depth and pressure, the temperature is above the melting point of the iron-rich material, allowing it to be liquid."
             ),
@@ -541,12 +538,12 @@ SHELL_CONFIGS = {
                 "* Subsurface Ocean Evidence: The potential presence of a subsurface liquid water ocean beneath Pluto's icy mantle suggests that <br>" 
                 "  the core is warm enough to prevent this ocean from completely freezing. The heat flow from the core would be crucial for <br>" 
                 "  maintaining this liquid layer.<br>" 
-                "* Estimated Temperature: The estimated temperature of Pluto's core is around 1000 K. This estimate comes from models that <br>" 
-                "  consider the heat generated by radioactive decay within a rocky core. These models also need to account for the heat transfer <br>" 
-                "  through the icy mantle. Future research and more detailed data could refine this value. The exact temperature would depend on <br>" 
-                "  the precise composition of the core and the efficiency of heat transfer through the mantle. In comparison, the surface <br>" 
-                "  temperature of Pluto is extremely cold, around 40 K. The significant difference highlights the internal heating processes at <br>" 
-                "  work within the dwarf planet. "
+                "* Estimated Temperature: Bierson et al. (2020) support a hot-start formation history for Pluto, but no <br>" 
+                "  published value fixes a present-day core temperature; models depend on the precise core composition <br>" 
+                "  and on the efficiency of heat transfer through the icy mantle. In comparison, the surface temperature <br>" 
+                "  of Pluto is extremely cold, approximately 37-39 K (Gladstone et al. 2016: 37 +/- 3 K; REX analysis: <br>" 
+                "  38.9 +/- 2.1 K). The significant difference highlights the internal heating processes at work within <br>" 
+                "  the dwarf planet. "
             ),
             'tooltip': (
                 "2.4 MB PER FRAME FOR HTML.\n\n"
@@ -600,7 +597,7 @@ SHELL_CONFIGS = {
                 "amounts of methane and carbon monoxide ice. The thickness of this layer likely varies but is estimated to be relatively <br>" 
                 "thin in many regions, perhaps ranging from a few to tens of kilometers. In the deep Sputnik Planitia basin, the nitrogen <br>" 
                 "ice layer is estimated to be several kilometers thick and overlies the water-ice lithosphere.<br>" 
-                "* Pluto's surface, or crust, is composed of various ices, primarily nitrogen ice (over 98%). It also contains smaller <br>" 
+                "* Pluto's surface, or crust, is composed of various ices, predominantly nitrogen ice. It also contains smaller <br>" 
                 "  amounts of methane and carbon monoxide ices.<br>" 
                 "* Interestingly, mountains on Pluto can reach heights comparable to the Rocky Mountains on Earth and are believed to be <br>" 
                 "  made of water ice, which is strong enough to support such structures at Pluto's frigid temperatures. These water-ice <br>" 
@@ -672,7 +669,7 @@ SHELL_CONFIGS = {
 
         'atmosphere': {
             'name': 'Atmosphere',
-            'radius_fraction': 1.43,
+            'radius_fraction': 2.43,  # exobase FROM CENTER (1,710 km altitude + 1,188.3 km radius)
             'color': 'rgb(240, 245, 250)',
             'opacity': 0.3,
             'n_points': 20,
@@ -690,14 +687,14 @@ SHELL_CONFIGS = {
                 "(approximately 1188 km):<br>" 
                 "* Significant Atmosphere: The atmosphere, composed primarily of nitrogen with traces of methane and carbon monoxide, has <br>" 
                 "  been detected extending up to 1700 km above the surface (the exobase).<br>" 
-                "* In Pluto radii: To express this as a fraction of Pluto's radius: ~1.43.<br>" 
+                "* In Pluto radii: 1700 km of altitude is ~1.43 Pluto radii, i.e. ~2.43 Pluto radii measured from the center.<br>" 
                 "* Outer Limits: Some research suggests that the outer, most tenuous parts of Pluto's atmosphere might extend even further, <br>" 
                 "  perhaps to several times Pluto's radius, gradually merging with the vacuum of space. One New Horizons science brief even <br>" 
                 "  mentioned an outer limit potentially as far as seven times Pluto's radius, although this is very ill-defined.<br>" 
                 "* Haze Layers: Within the lower atmosphere, haze layers extend up to about 200 km altitude. This is approximately: ~0.17 So, <br>" 
                 "  the distinct haze layers reach about 0.17 Pluto radii above the surface.<br>" 
                 "In summary, while the bulk of Pluto's atmosphere is very thin, its outer reaches are quite extended. For a general extent, <br>" 
-                "considering the exobase, the atmosphere reaches about 0.43 Pluto radii above the surface, or 1.43 Pluto radii from the center. <br>" 
+                "considering the exobase, the atmosphere reaches about 1.43 Pluto radii above the surface, or 2.43 Pluto radii from the center. <br>" 
                 "If you consider the more diffuse outer limits, it could be even larger."
             ),
             'tooltip': (
@@ -714,7 +711,7 @@ SHELL_CONFIGS = {
 
         'hill_sphere': {
             'name': 'Hill Sphere',
-            'radius_fraction': 4685,
+            'radius_fraction': 5041,  # ~5.99 Mkm at perihelion (Pluto-Charon system mass)
             'color': 'rgb(0, 255, 0)',
             'opacity': 0.25,
             'n_points': 20,
@@ -756,15 +753,15 @@ SHELL_CONFIGS = {
             'hover_text': (
                 "Eris, a dwarf planet in the Kuiper Belt, has a structure that scientists have been piecing together through observations <br>" 
                 "and theoretical modeling. Here's what we currently understand:<br>" 
-                "Core: Eris is believed to have a rocky core. Its high bulk density (around 2.5 g/cm^3) suggests that it is composed <br>" 
-                "primarily of rock, making up a significant portion of its mass (possibly over 85%). This core likely contains radioactive <br>" 
+                "Core: Eris is believed to have a rocky core. Its high bulk density (around 2.5 g/cm^3) suggests a <br>" 
+                "rock-dominated, differentiated interior. This core likely contains radioactive <br>" 
                 "elements, which produce internal heat.<br>" 
                 "* Determining the precise radius fraction of Eris's core is challenging because we don't have direct observations of its <br>" 
                 "  internal structure. However, we can make estimations based on its known properties:<br>" 
                 "  * Total Radius: Eris has a radius of approximately 1163 +/- 6 kilometers.<br>" 
                 "  * Density: Its density is estimated to be around 2.52 +/- 0.07 g/cm^3. This high density suggests a significant rocky component.<br>" 
-                "  * Compositional Models: Based on its density, scientists believe Eris is composed largely of rock (possibly over 85% of its <br>" 
-                "    mass) with the remainder being primarily water ice. The ice forms the mantle surrounding the rocky core.<br>" 
+                "  * Compositional Models: Based on its density, scientists believe Eris has a rock-dominated, <br>" 
+                "    differentiated interior, the remainder primarily water ice forming the mantle around the core.<br>" 
                 "* Considering these factors, and drawing comparisons to other icy bodies with rocky cores like Europa or Ganymede in the outer <br>" 
                 "  solar system, a reasonable estimate for the radius fraction of Eris's core would likely be around 50-65% of its total radius. <br>" 
                 "  To achieve Eris's high bulk density with a significant ice mantle, the denser rocky core must occupy a substantial portion of <br>" 
@@ -787,8 +784,8 @@ SHELL_CONFIGS = {
                 "2.4 MB PER FRAME FOR HTML.\n\n"
                 "Eris, a dwarf planet in the Kuiper Belt, has a structure that scientists have been piecing together through observations \n" 
                 "and theoretical modeling. Here's what we currently understand:\n" 
-                "Core: Eris is believed to have a rocky core. Its high bulk density (around 2.5 g/cm^3) suggests that it is composed \n" 
-                "primarily of rock, making up a significant portion of its mass (possibly over 85%). This core likely contains radioactive \n" 
+                "Core: Eris is believed to have a rocky core. Its high bulk density (around 2.5 g/cm^3) suggests a \n" 
+                "rock-dominated, differentiated interior. This core likely contains radioactive \n" 
                 "elements, which produce internal heat."
             ),
         },
@@ -900,7 +897,7 @@ SHELL_CONFIGS = {
                 "SET MANUAL SCALE OF AT LEAST 0.05 AU TO VISUALIZE.<br><br>"
                 "Hill Sphere: The Hill sphere, or Roche sphere, of Eris is the region around it where its own gravity is the dominant <br>" 
                 "force attracting satellites. At Eris's average orbital distance (~67.8 AU), the Hill sphere radius is approximately <br>" 
-                "9.4 million kilometers (~0.06 AU). The shell shown here uses the perihelion distance (~38 AU), giving ~8.1 million km. <br>" 
+                "14.3 million kilometers (~0.095 AU). The shell shown here uses the perihelion distance (~38 AU), giving ~8.0 million km. <br>" 
                 "Dysnomia orbits at ~37,000 km, well within either estimate.<br>" 
                 "* The region where Eris's gravity is the dominant force attracting satellites extends to a distance of roughly 6965 <br>" 
                 "  Eris radii from its center (perihelion-based)."          
@@ -909,8 +906,8 @@ SHELL_CONFIGS = {
                 "SELECT MANUAL SCALE OF AT LEAST 0.1 AU TO VISUALIZE.\n" 
                 "1.3 MB PER FRAME FOR HTML.\n\n"
                 "Hill Sphere: At Eris's average orbital distance (~67.8 AU), the Hill sphere radius is approximately \n" 
-                "9.4 million kilometers (~0.06 AU). The shell shown uses the perihelion distance (~38 AU), \n" 
-                "giving ~8.1 million km. Dysnomia orbits at ~37,000 km, well within either estimate."
+                "14.3 million kilometers (~0.095 AU). The shell shown uses the perihelion distance (~38 AU), \n" 
+                "giving ~8.0 million km. Dysnomia orbits at ~37,000 km, well within either estimate."
             ),
         },
     },
@@ -994,17 +991,17 @@ SHELL_CONFIGS = {
             'n_points': 20,
             'marker_size': 2.5,
             'hover_text': (
-                "Venus boasts an extremely dense atmosphere, about 90 times the pressure of Earth's atmosphere at the surface. It is <br>" 
-                "composed primarily of carbon dioxide (about 96.5%) and nitrogen (about 3.5%), with trace amounts of other gases, <br>" 
-                "including sulfuric acid clouds that completely enshroud the planet. This thick, CO2-rich atmosphere creates a runaway <br>" 
-                "greenhouse effect, making Venus the hottest planet in our solar system with surface temperatures around 464 degC. The <br>" 
-                "upper atmosphere exhibits a phenomenon called \"super-rotation,\" where winds blow much faster than the planet's slow <br>" 
-                "rotation.<br><br>"
-                "The \"lower atmosphere\" of Venus is generally considered to be the troposphere, which extends from the surface up to <br>" 
-                "an altitude of approximately 60 kilometers. This region contains the dense, hot air and the main cloud layers."
+                "Venus boasts an extremely dense atmosphere, about 92 to 93 times the pressure of Earth's atmosphere at the <br>" 
+                "surface. It is composed primarily of carbon dioxide (about 96.5%) and nitrogen (about 3.5%), with trace <br>" 
+                "amounts of other gases, including sulfuric acid clouds that completely enshroud the planet. This thick, <br>" 
+                "CO2-rich atmosphere creates a runaway greenhouse effect, making Venus the hottest planet in our solar <br>" 
+                "system with surface temperatures around 464 degC. The upper atmosphere exhibits a phenomenon called <br>" 
+                "\"super-rotation,\" where winds blow much faster than the planet's slow rotation.<br><br>"
+                "The \"lower atmosphere\" of Venus is generally considered to be the troposphere, which extends from the <br>" 
+                "surface up to approximately 60-65 kilometers (visualization uses 60 km). This region contains the dense, hot air and the main cloud layers."
             ),
             'tooltip': (
-                "Venus boasts an extremely dense atmosphere, about 90 times the pressure of Earth's atmosphere at the surface. It is \n" 
+                "Venus boasts an extremely dense atmosphere, about 92 to 93 times the pressure of Earth's atmosphere at the \n" 
                 "composed primarily of carbon dioxide (about 96.5%) and nitrogen (about 3.5%), with trace amounts of other gases, \n" 
                 "including sulfuric acid clouds that completely enshroud the planet. This thick, CO2-rich atmosphere creates a runaway \n" 
                 "greenhouse effect, making Venus the hottest planet in our solar system with surface temperatures around 464 degC. The \n" 
@@ -1024,9 +1021,9 @@ SHELL_CONFIGS = {
                 "The upper atmosphere of Venus lies above the main cloud deck (~70 km) and lacks Earth's sharp <br>"
                 "layering. Key regions and approximate extents (Venus radii):<br>"
                 "* Mesosphere (~60 - 100 km): temperature falls with altitude; ~1.5 - 1.6% of Venus's radius.<br>"
-                "* Thermosphere (~90 - 200+ km): heated by solar EUV yet cold (~300 K dayside, colder at night, the <br>"
+                "* Thermosphere (~90 - 200+ km): heated by solar EUV yet cold, varying with altitude, local time and solar <br>"
                 "  \"cryosphere\"); reaches ~3.3% of the radius.<br>"
-                "* Ionosphere (~120 km to several hundred km): peak electron density ~120 - 140 km; up to ~8% of the <br>"
+                "* Ionosphere (~120 km to several hundred km): peak electron density in the upper atmosphere; up to ~8% of the <br>"
                 "  radius. Interacts directly with the solar wind, forming the induced magnetosphere.<br>"
                 "* Exosphere: gas so thin that atoms escape to space; no well-defined upper limit.<br>"
                 "Extents are approximate and vary with solar activity."
@@ -2125,9 +2122,9 @@ CUSTOM_SHELLS = {
             'needs_sun_position': True,
             'tooltip': (
                 "TO VISUALIZE CLOSE UP SET MANUAL SCALE TO AT LEAST 0.002 AU TO VISUALIZE.\n"
-                "TO VISUALIZE THE COMPLETE TAIL INCLUDE VENUS IN THE PLOT OR SET MANUAL SCALE TO 1.0 AU\n\n"
-                "Sodium Tail: Mercury has a remarkable sodium tail that extends incredibly far into space - up to 10,000 Mercury radii \n"
-                "(approximately 24 million kilometers). This tail is created when sodium atoms from Mercury's exosphere \n"
+                "Sodium Tail: Mercury has a remarkable sodium tail. Observations place its extent in the range \n"
+                "~120 to ~1,400 Mercury radii (approximately 0.3 to 3.4 million kilometers), varying strongly \n"
+                "with orbital position and solar activity. This tail is created when sodium atoms from Mercury's exosphere \n"
                 "are pushed away by solar radiation pressure. The tail always points away from the Sun, similar to a comet's tail.\n\n"
                 "The sodium tail is highly dynamic and can vary significantly based on Mercury's position in its orbit and solar activity. \n"
                 "It's one of Mercury's most distinctive features and can be observed from Earth using specialized telescopes."
