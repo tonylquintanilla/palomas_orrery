@@ -1,6 +1,6 @@
 # Opus 5 Build Prompt: Geometry Corrections + `<br>` Fix
 
-**Built on `55b07a6cf5ebfe2dce604d4e9fbff3c010e1b0eb`
+**Built on `80c8580e46d753a296a7f3652b91070b42415607`
 at https://github.com/tonylquintanilla/palomas_orrery (branch main).**
 
 **Prepared:** August 4, 2026 by Claude Opus 4.6 (orchestration) · Tony Quintanilla, integrator
@@ -41,6 +41,29 @@ instead of `\n`. Since the Tk GUI tooltip renders these literally, users
 see markup text. This inverts the canonical format — the source text
 should use `\n`, and `<br>` should be derived at the Plotly hover
 boundary.
+
+## Files
+
+Tony will upload the Fable audit report and this prompt. All Python
+source files should be pulled from HEAD (`80c8580`) at
+`https://raw.githubusercontent.com/tonylquintanilla/palomas_orrery/main/<filename>`.
+Documentation (worksheets, as-builts) is at `documentation/` in the
+same repo.
+
+Target files for patching:
+- `shell_configs.py`
+- `mercury_visualization_shells.py`
+- `moon_visualization_shells.py`
+- `venus_visualization_shells.py`
+- `eris_visualization_shells.py`
+- `pluto_visualization_shells.py`
+- `mars_visualization_shells.py`
+- `palomas_orrery.py` (one comment fix only)
+
+Reference files (read, don't patch):
+- `constants_new.py` (body radii for rf computation)
+- `orrery_rendering.py` (build_sphere_shell consumer)
+- `planet_visualization.py` (dispatch path)
 
 ## Your two jobs
 
@@ -90,6 +113,10 @@ to resolve it** — that is a Mode 5 visual decision for Tony.
 | inner_core | 0.1485 | 258 | 240 km (Weber 2011) | 240/1737.4 | Batch 1 worksheet |
 | outer_core | 0.2083 | 362 | 330 km (Nakamura) | 330/1737.4 | Batch 1 worksheet |
 
+**Moon formatting fix.** Fable finding #43: the `outer_core` `_info`
+string has a stray "`:*`" formatting artifact from the Batch 1 patches.
+Remove it in the same pass as the `<br>` → `\n` conversion.
+
 #### Venus geometry corrections
 
 | Shell | Current rf | Encodes (km) | Cross-checked value | Needed rf | Source |
@@ -125,6 +152,42 @@ config copies are already correct.
 | Bow shock header | shell_configs.py (~line 2188) | "bow shock 1.5 Rm" | "bow shock ~1.64 Rm (Vignes et al. 2000)" | Body-level header citation |
 | Bow shock tooltip (dead) | shell_configs.py (CUSTOM_SHELLS Mars) | "~1.5 Mars radii" | "~1.64 Mars radii" | Dead custom tooltip |
 
+#### Mercury scale note harmonization
+
+Fable findings #14 and #46: Mercury Hill sphere scale note says
+"0.005 AU" in the config but "0.003 AU" in the module copy. The
+crust and atmosphere module copies carry a "SET MANUAL SCALE ...
+0.002 AU" line the config lacks.
+
+**Decision (Tony, this session):** Drop the "SET MANUAL SCALE"
+references — they may be obsolete. The Hill sphere scale value
+(0.005 vs 0.003 AU) should be checked against the provenance review
+worksheets. If a cross-checked value exists, use it; if not, compute
+from the Hill sphere extent and pick the value that makes the feature
+visible, then flag the gap.
+
+#### Mercury mantle diamond claim removal
+
+As-built residual (a), now decided. The mantle text in three locations
+claims Mercury's mantle "might even contain a layer of diamonds, formed
+from ancient carbon-rich material under immense pressure." The crust
+diamond claim was already removed by Batch 1 (carried a mis-parsed
+author name, wrong mechanism, wrong location). The mantle claim is the
+same unsourced assertion. Remove from:
+- `mercury_visualization_shells.py` line 55 (module `_info` string)
+- `shell_configs.py` line 144 (`hover_text`)
+- `shell_configs.py` line 149 (`tooltip`)
+
+Add a `# Removed:` note matching the existing one at mercury:61.
+
+#### Stale comment in `palomas_orrery.py`
+
+Line 7565 references "sodium tail (10,000 body radii)" in a Phase 4
+render-gate code comment. The value was corrected to ~1,400 R_M in
+Batch 1. Update the comment to match. This is a different target file
+from the shell modules — include it as a standalone patch script or
+fold it into a multi-target script at your discretion.
+
 #### Stale header corrections (Mercury + Moon body-level `# Source:`)
 
 These are the Batch 1 as-built residual (b), confirmed by Fable:
@@ -140,8 +203,6 @@ These are the Batch 1 as-built residual (b), confirmed by Fable:
 These are findings Fable surfaced that are **outside the cross-checked
 scope**. Do not fix them — list them in the as-built for ledger tracking.
 
-- Mercury mantle diamond claim (mercury:55, shell_configs:144/149) —
-  pending Tony's decision from the Batch 1 as-built
 - Mercury layer chain 63 km gap — structural, for future Mode 5
 - Moon crust thickness three-way text disagreement (config 50/60,
   module 30–50/100+) — not cross-checked in Batch 1; Batch 2 candidate
@@ -225,8 +286,14 @@ containing its target file, opens it in VS Code, and clicks Run.
 - [ ] Layer chain gaps flagged in comments, not silently adjusted
 - [ ] `<br>` → `\n` applied only to `_info` strings, not to Plotly hover
       text or shell_configs.py hover_text
+- [ ] Moon outer_core `_info` stray "`:*`" removed
+- [ ] Mercury diamond claim removed from all three locations (module +
+      both config copies) with `# Removed:` note
+- [ ] Mercury scale notes harmonized; "SET MANUAL SCALE" references
+      removed or corrected
+- [ ] `palomas_orrery.py` line 7565 comment updated (10,000 → ~1,400)
 - [ ] Mars dead-copy values match live config values after patching
-- [ ] Stale Mercury/Moon headers updated with Batch 1 cross-check sources
+- [ ] Stale Mercury/Moon/Mars headers updated with cross-check sources
 - [ ] py_compile clean on all targets after patching
 - [ ] xvfb GUI run reaches `[DASHBOARD] Dashboard ready.`
 - [ ] Live-dispatch smoke test: sample shells show corrected rf values
