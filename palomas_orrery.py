@@ -7562,7 +7562,7 @@ def animate_objects(step, label):
                     _track_body = _tc
                     # (Phase 4 render-gate, Tony's call) Size the window to
                     # the LARGEST ACTIVE element's measured extent: the
-                    # sodium tail (10,000 body radii) opens it to hold the
+                    # sodium tail (~1400 body radii) opens it to hold the
                     # whole tail; magnetosphere-only collapses it back tight;
                     # a bare body with no per-frame elements falls back to
                     # the orbital-distance formula. 1.2x margin; a small
