@@ -1,5 +1,5 @@
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.33 | July 30, 2026
+Tony Quintanilla, PE | Claude | v3.33 | August 5, 2026
 
 PREAMBLE: WHY THIS PROTOCOL EXISTS
 
