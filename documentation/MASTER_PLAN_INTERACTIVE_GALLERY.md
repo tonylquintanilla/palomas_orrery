@@ -1,6 +1,6 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** v14 -- Phase 2 (solar system assembler) BUILD UNDERWAY. Design
+**Status:** v15 -- Phase 2 (solar system assembler) BUILD UNDERWAY. Design
 handoff v0.1 -> v0.3 resolved every open question (Pluto/Charon composition,
 Apophis close-encounter scope, OQ-4/closeup-shape routing). Competitive
 manifest cross-check (Fable + GPT independent builds) completed two rounds
@@ -50,9 +50,9 @@ and L-118 both DONE, Layer 2 Steps 1-5 passed live; Layer 3 enabled with a
 known open issue; L-150 (multi-orbit binaries) and L-151 (gallery-assembler
 skill) still decided, not yet built)
 **Date begun:** July 3, 2026
-**Last updated:** July 21-24, 2026
+**Last updated:** August 4, 2026
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
-Claude Fable 5, Claude Sonnet 5, GPT
+Claude Opus 5, Claude Fable 5, Claude Sonnet 5, GPT
 
 **Pivot (v8):** The gallery is no longer a stepping stone to a separate web
 application. The gallery IS the web publication — growing interactive
@@ -913,13 +913,14 @@ extraction for 15 of 18 bodies.
 
 **L-154-162 — Provenance scoring model fix (the whole cluster).**
 ✓ Design CLOSED, ✓ ledger formalization CLOSED, ✓ scanner Phase 1
-(1a-1f) COMPLETE, ✓ Phase 2 Piece 1 (D4 mechanism) COMPLETE, ○ Phase 2
-Tracks 1-2 IN PROGRESS. Originally surfaced while scoping L-154's
-feature-rendering JS layer, and still gates it. Design by Fable 5,
-reviewed by Sonnet 5; broad-review by Fable 5 (2026-07-26). All nine
-items have their own ledger DETAIL blocks. The vulnerability ladder fork
-closed 2026-07-27 via three-AI calibration. Full detail in L-156, L-158,
-and the design handoff / design review / predesign documents.
+(1a-1f) COMPLETE, ✓ Phase 2 Piece 1 (D4 mechanism) COMPLETE,
+✓ Phase 2 Track 1 Batch 1 COMPLETE, ○ Phase 2 Track 1 Batch 2 NEXT.
+Originally surfaced while scoping L-154's feature-rendering JS layer,
+and still gates it. Design by Fable 5, reviewed by Sonnet 5;
+broad-review by Fable 5 (2026-07-26). All nine items have their own
+ledger DETAIL blocks. The vulnerability ladder fork closed 2026-07-27
+via three-AI calibration. Full detail in L-156, L-158, and the design
+handoff / design review / predesign documents.
 
 Scanner Phase 1 (1a-1f, Opus 5, 2026-07-29 through 2026-08-01): scoring
 model rebuilt. D8.5 follow-on retired Option A and staleness credit.
@@ -930,6 +931,24 @@ Phase 2 Piece 1 (D4, Opus 5, 2026-08-01): V_CROSS_CHECKED (V2) scanner
 mechanism. Five-model competitive design review. V2 requires source
 evidence AND two distinct checker annotations via competitive pattern.
 Mechanism live, zero population. Phase 2 Tracks 1-2 (backfill) next.
+
+Phase 2 Track 1 Batch 1 (Claude Opus 4.6 orchestration + Opus 5 build +
+Fable 5 audit, 2026-08-03 through 2026-08-04): Three-model competitive
+cross-check of moon, eris, mercury, venus, pluto visualization shells +
+Mars retroactive. Four verification rounds: Tier 1 sourcing, Tier 2
+cross-check, follow-up, blind source lookup. 56 claims verified via
+row-per-claim worksheets using Claude Opus 5, GPT-5.6 Thinking, and
+Gemini independently. Results: 13 value fixes, 17 citation corrections,
+3 fabricated/wrong-paper citations caught. Conventions established for
+Hill sphere documentation and visualization constants. Geometry
+follow-up: Fable 5 full-codebase consistency audit (16 files, ~17,600
+lines) discovered radius_fraction constants not updated to match
+corrected text, `<br>` in _info strings, 124 dead tooltip fields, and
+up to six independent storage locations per physical value. Opus 5
+built geometry + text patches (47 edits, 7 scripts). Provenance-neutral
+(Tier 1: 207 -> 207). New structural items opened: L-176 (illustrated
+dimensions), L-177 (Mercury Hill sphere convention), L-178-180
+(Earth/solar), L-181 (single-source-of-truth constant layer).
 
 Cross-check methodology updated: the competitive pattern (same worksheet
 to two models independently, Tony compares) replaces the earlier
@@ -1415,6 +1434,40 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
   (Jupiter/Saturn) is blocked on that rendering work, not on data, going
   into the next session.
 
+*New in v15 (August 4, 2026):*
+- L-156 Phase 2 Track 1 Batch 1 COMPLETE. Three-model competitive
+  cross-check (Claude Opus 5, GPT-5.6 Thinking, Gemini) of five shell
+  visualization modules (moon, eris, mercury, venus, pluto) plus Mars
+  retroactive corrections. Four verification rounds: Tier 1 sourcing,
+  Tier 2 cross-check, follow-up, blind source lookup. 56 claims verified,
+  13 value fixes, 17 citation corrections. Conventions established for
+  Hill sphere (perihelion distance, system mass for binaries),
+  visualization constants (best-sourced single value for code, range in
+  description), and retired "Verified: April 2026" annotation format.
+- Fable 5 full-codebase consistency audit across all 15 shell modules +
+  shell_configs.py (~17,600 lines). Discovered: (a) Batch 1 corrected
+  display text but left radius_fraction geometry constants at old values;
+  (b) 95 of 126 module _info strings use `<br>` tags rendered literally
+  by the Tk GUI; (c) 124 dead `tooltip` fields in SHELL_CONFIGS/CUSTOM_SHELLS;
+  (d) up to six independent storage locations for one physical value;
+  (e) Saturn (fully migrated to the reference pattern) carried the audit's
+  worst finding -- proving the pattern alone doesn't prevent drift.
+- Opus 5 geometry + text follow-up: 7 patch scripts, 47 edits. Geometry
+  corrections for Mercury, Moon, Venus, Eris (radius_fraction to match
+  cross-checked values). `<br>` -> `\n` for moon, eris, pluto, mars.
+  Mercury mantle diamond claim removed. Stale headers corrected. Mars
+  dead copies updated. Opus 5 self-flagged its own Batch 1 error:
+  Mercury Hill sphere rf 94.4 matches neither perihelion (71.85) nor
+  semi-major (90.45) convention -- tracked as L-177.
+- Six new L-items from the audit: L-176 (illustrated dimensions in shell
+  hover text -- make the render self-documenting), L-177 (Mercury Hill
+  sphere convention error), L-178 (Earth shadow constants), L-179 (solar
+  gravitational influence 150k vs 126k AU), L-180 (solar chromosphere
+  three extents), L-181 (single-source-of-truth constant layer design --
+  the structural fix for the dual-pipeline drift the audit surfaced).
+- Scanner state: Tier 1 207 -> 207 (provenance-neutral). Batch 2 (gas
+  giants) is next, directly unblocking Artifact 2.
+
 ---
 
 ## §11 — Protocol & Skills Review (from Phase 0)
@@ -1443,16 +1496,22 @@ prompts.
 
 ---
 
-Base: orrery @ `373c6d8` / gallery @ `22c947c9`.
+Base: orrery @ `b59cb72` / gallery @ `22c947c9`.
 Phase 0 closed. Phase 1a vocabulary delivered. A/B fork resolved: B′.
 Phase 1b builder built, offline-verified (L-098), and Layer 2 live-Horizons
 fully tested and closed -- L-149 and L-118 both DONE; L-150/L-151 still
 decided, not built.
 Scanner detour: Phase 1 (1a-1f + D8.5) COMPLETE. Phase 2 Piece 1 (D4
 scanner mechanism) COMPLETE -- V2 rung live, zero population. Phase 2
-Track 1 NEXT: Claude's cross-check worksheets for April-worksheeted files,
-Tony compares against Gemini's April results, Opus 5 inserts converged
-annotations.
+Track 1 Batch 1 COMPLETE -- three-model competitive cross-check of 5 shell
+modules + Mars, geometry follow-up, Fable consistency audit. Phase 2
+Track 1 Batch 2 NEXT: gas giants (jupiter, saturn, uranus, neptune).
+New structural items from Fable audit: L-176 (illustrated dimensions in
+hover text), L-177 (Mercury Hill sphere convention), L-178-180
+(Earth/solar inconsistencies), L-181 (single-source-of-truth constant
+layer). Skill updates pending: orrery-coding-conventions (visualization
+constant vs range, Hill sphere standard, <br> direction) and
+provenance-discipline (cross-check conventions, model credit).
 Next after scanner work: write the feature-rendering JS layer
 (ring/shell/belt consumers) -- that's what stands between here and
 attempting Artifact 2 (Jupiter/Saturn) Mode 5. Layer 3 (nightly Task
