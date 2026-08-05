@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: August 04, 2026
-Files scanned: 117
-Total findings: 877
-Constants: 92 | Dicts: 38 | Display strings: 747
+Files scanned: 123
+Total findings: 876
+Constants: 92 | Dicts: 38 | Display strings: 746
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -40,7 +40,7 @@ Unit of provenance: the smallest thing with a coherent source citation. A dict w
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 207 |
 | 2 | 10-15 | REVIEW | 580 |
-| 3 | 5-9 | LOW PRIORITY | 88 |
+| 3 | 5-9 | LOW PRIORITY | 87 |
 | 4 | 1-4 | LOWEST PRIORITY | 2 |
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
@@ -83,14 +83,14 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `spacecraft_encounters.py` | orrery | 0 | 8 | 0 | 0 | 8 |
 | `venus_visualization_shells.py` | orrery | 0 | 4 | 4 | 0 | 8 |
 | `asteroid_belt_visualization_shells.py` | orrery | 0 | 7 | 0 | 0 | 7 |
+| `mercury_visualization_shells.py` | orrery | 0 | 3 | 4 | 0 | 7 |
 | `celestial_coordinates.py` | orrery | 4 | 2 | 0 | 0 | 6 |
-| `mercury_visualization_shells.py` | orrery | 0 | 3 | 3 | 0 | 6 |
-| `mars_visualization_shells.py` | orrery | 0 | 0 | 6 | 0 | 6 |
 | `exoplanet_coordinates.py` | stars | 5 | 0 | 0 | 0 | 5 |
 | `sgr_a_visualization_precession.py` | orrery | 4 | 0 | 1 | 0 | 5 |
 | `star_sphere_builder.py` | stars | 0 | 2 | 3 | 0 | 5 |
 | `eris_visualization_shells.py` | orrery | 0 | 5 | 0 | 0 | 5 |
 | `planet9_visualization_shells.py` | orrery | 0 | 5 | 0 | 0 | 5 |
+| `mars_visualization_shells.py` | orrery | 0 | 0 | 5 | 0 | 5 |
 | `apsidal_markers.py` | orrery | 3 | 1 | 0 | 0 | 4 |
 | `paleoclimate_visualization.py` | earth_science | 4 | 0 | 0 | 0 | 4 |
 | `sgr_a_visualization_core.py` | orrery | 1 | 3 | 0 | 0 | 4 |
@@ -98,7 +98,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `coordinate_system_guide.py` | orrery | 2 | 1 | 0 | 0 | 3 |
 | `scenarios_coral_bleaching.py` | earth_science | 1 | 2 | 0 | 0 | 3 |
 | `food_insecurity_generator.py` | earth_science | 0 | 1 | 2 | 0 | 3 |
-| `moon_visualization_shells.py` | orrery | 0 | 1 | 2 | 0 | 3 |
 | `visualization_3d.py` | stars | 0 | 3 | 0 | 0 | 3 |
 | `dep_trace.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
 | `ledger_index.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
@@ -110,6 +109,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `object_type_analyzer.py` | orrery | 2 | 0 | 0 | 0 | 2 |
 | `close_approach_data.py` | orrery | 0 | 1 | 1 | 0 | 2 |
 | `fetch_climate_data.py` | earth_science | 0 | 2 | 0 | 0 | 2 |
+| `moon_visualization_shells.py` | orrery | 0 | 1 | 1 | 0 | 2 |
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `orbital_elements.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `data_acquisition.py` | orrery | 1 | 0 | 0 | 0 | 1 |
@@ -136,7 +136,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 38 | 92 | 472 | 44 | 2 | 610 |
+| Orrery (solar system + orbital mechanics) | 38 | 92 | 472 | 43 | 2 | 609 |
 | Earth System | 13 | 105 | 71 | 2 | 0 | 178 |
 | Stars (stellar neighborhood) | 9 | 9 | 37 | 6 | 0 | 52 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 10 | 0 | 0 | 36 | 0 | 36 |
@@ -183,7 +183,6 @@ A qualifying annotation needs an ISO date and, after it, a parenthetical workshe
 | `eris_visualization_shells.py` | 478 | `non_markdown_reference` | # Cross-checked: derived Hill radius via Gemini 2026-08-03 (worksheet_gemini_batch1_followup.md: 14.26 Mkm) |
 | `mercury_visualization_shells.py` | 49 | `duplicate_identity` | two or more annotations name the same checker |
 | `pluto_visualization_shells.py` | 41 | `duplicate_identity` | two or more annotations name the same checker |
-| `shell_configs.py` | 128 | `duplicate_identity` | two or more annotations name the same checker |
 | `venus_visualization_shells.py` | 528 | `duplicate_identity` | two or more annotations name the same checker |
 | `venus_visualization_shells.py` | 681 | `non_markdown_reference` | # Cross-checked: derived Hill radius via GPT 2026-08-03 (batch1_tier2_followup_gpt.md: 167.08 R_V at a) |
 
@@ -598,30 +597,30 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 537 | string | display string @ line 537 | (4 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 558 | string | display string @ line 558 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 574 | string | display string @ line 574 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 588 | string | display string @ line 588 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 621 | string | display string @ line 621 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 638 | string | display string @ line 638 | (3 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 668 | string | display string @ line 668 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 687 | string | display string @ line 687 | (5 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 729 | string | display string @ line 729 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 737 | string | display string @ line 737 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 763 | string | display string @ line 763 | (3 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 847 | string | display string @ line 847 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 863 | string | display string @ line 863 | (1 claim) | 4 | 4 | **16** | No source citation; date-sensitive (recalled) | Public-facing display string (hover/INFO) |
+| 528 | string | display string @ line 528 | (4 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 549 | string | display string @ line 549 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 565 | string | display string @ line 565 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 579 | string | display string @ line 579 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 612 | string | display string @ line 612 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 629 | string | display string @ line 629 | (3 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 659 | string | display string @ line 659 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 678 | string | display string @ line 678 | (5 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 720 | string | display string @ line 720 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 728 | string | display string @ line 728 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 754 | string | display string @ line 754 | (3 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 838 | string | display string @ line 838 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 854 | string | display string @ line 854 | (1 claim) | 4 | 4 | **16** | No source citation; date-sensitive (recalled) | Public-facing display string (hover/INFO) |
+| 897 | string | display string @ line 897 | (5 claims) | 4 | 4 | **16** | No source citation; date-sensitive (recalled) | Public-facing display string (hover/INFO) |
 | 906 | string | display string @ line 906 | (5 claims) | 4 | 4 | **16** | No source citation; date-sensitive (recalled) | Public-facing display string (hover/INFO) |
-| 915 | string | display string @ line 915 | (5 claims) | 4 | 4 | **16** | No source citation; date-sensitive (recalled) | Public-facing display string (hover/INFO) |
-| 939 | string | display string @ line 939 | (2 claims) | 4 | 4 | **16** | No source citation; date-sensitive (recalled) | Public-facing display string (hover/INFO) |
-| 945 | string | display string @ line 945 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1007 | string | display string @ line 1007 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1017 | string | display string @ line 1017 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1034 | string | display string @ line 1034 | (3 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1070 | string | display string @ line 1070 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1249 | string | display string @ line 1249 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1261 | string | display string @ line 1261 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 2137 | string | display string @ line 2137 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 930 | string | display string @ line 930 | (2 claims) | 4 | 4 | **16** | No source citation; date-sensitive (recalled) | Public-facing display string (hover/INFO) |
+| 936 | string | display string @ line 936 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 994 | string | display string @ line 994 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1004 | string | display string @ line 1004 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1021 | string | display string @ line 1021 | (3 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1057 | string | display string @ line 1057 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1236 | string | display string @ line 1236 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1248 | string | display string @ line 1248 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 2124 | string | display string @ line 2124 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 
 ### solar_visualization_shells.py
 
@@ -1024,8 +1023,8 @@ is planned for a future session.
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 49 | string | display string @ line 49 | (1 claim) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
-| 254 | string | display string @ line 254 | (1 claim) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
-| 310 | string | display string @ line 310 | (1 claim) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
+| 252 | string | display string @ line 252 | (1 claim) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
+| 308 | string | display string @ line 308 | (1 claim) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
 
 ### moon_visualization_shells.py
 
@@ -1220,73 +1219,73 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 128 | string | display string @ line 128 | (1 claim) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
-| 132 | string | display string @ line 132 | (1 claim) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
-| 168 | string | display string @ line 168 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 173 | string | display string @ line 173 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 230 | string | display string @ line 230 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 311 | string | display string @ line 311 | (9 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 332 | string | display string @ line 332 | (1 claim) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 350 | string | display string @ line 350 | (4 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 370 | string | display string @ line 370 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 423 | string | display string @ line 423 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 452 | string | display string @ line 452 | (8 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 478 | string | display string @ line 478 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 495 | string | display string @ line 495 | (9 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 514 | string | display string @ line 514 | (3 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1305 | string | display string @ line 1305 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1330 | string | display string @ line 1330 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1337 | string | display string @ line 1337 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1354 | string | display string @ line 1354 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1361 | string | display string @ line 1361 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1378 | string | display string @ line 1378 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1384 | string | display string @ line 1384 | (5 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1400 | string | display string @ line 1400 | (5 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1406 | string | display string @ line 1406 | (5 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1421 | string | display string @ line 1421 | (6 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1429 | string | display string @ line 1429 | (6 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1444 | string | display string @ line 1444 | (10 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1451 | string | display string @ line 1451 | (10 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1467 | string | display string @ line 1467 | (4 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1474 | string | display string @ line 1474 | (4 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1490 | string | display string @ line 1490 | (1 claim) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1499 | string | display string @ line 1499 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1523 | string | display string @ line 1523 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1529 | string | display string @ line 1529 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1545 | string | display string @ line 1545 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1551 | string | display string @ line 1551 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1566 | string | display string @ line 1566 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1573 | string | display string @ line 1573 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1589 | string | display string @ line 1589 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1598 | string | display string @ line 1598 | (3 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1616 | string | display string @ line 1616 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1623 | string | display string @ line 1623 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1640 | string | display string @ line 1640 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1650 | string | display string @ line 1650 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2123 | string | display string @ line 2123 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2153 | string | display string @ line 2153 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2186 | string | display string @ line 2186 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2223 | string | display string @ line 2223 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2261 | string | display string @ line 2261 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2277 | string | display string @ line 2277 | (7 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2296 | string | display string @ line 2296 | (11 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2319 | string | display string @ line 2319 | (6 claims) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
-| 2361 | string | display string @ line 2361 | (3 claims) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
-| 2377 | string | display string @ line 2377 | (1 claim) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
-| 2392 | string | display string @ line 2392 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2405 | string | display string @ line 2405 | (1 claim) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 2421 | string | display string @ line 2421 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2462 | string | display string @ line 2462 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2478 | string | display string @ line 2478 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2496 | string | display string @ line 2496 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2510 | string | display string @ line 2510 | (1 claim) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 2527 | string | display string @ line 2527 | (10 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2578 | string | display string @ line 2578 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2594 | string | display string @ line 2594 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2625 | string | display string @ line 2625 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2668 | string | display string @ line 2668 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2684 | string | display string @ line 2684 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2718 | string | display string @ line 2718 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 125 | string | display string @ line 125 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 129 | string | display string @ line 129 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 162 | string | display string @ line 162 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 167 | string | display string @ line 167 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 224 | string | display string @ line 224 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 302 | string | display string @ line 302 | (9 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 323 | string | display string @ line 323 | (1 claim) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 341 | string | display string @ line 341 | (4 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 361 | string | display string @ line 361 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 414 | string | display string @ line 414 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 443 | string | display string @ line 443 | (8 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 469 | string | display string @ line 469 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 486 | string | display string @ line 486 | (9 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 505 | string | display string @ line 505 | (3 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1292 | string | display string @ line 1292 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1317 | string | display string @ line 1317 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1324 | string | display string @ line 1324 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1341 | string | display string @ line 1341 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1348 | string | display string @ line 1348 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1365 | string | display string @ line 1365 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1371 | string | display string @ line 1371 | (5 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1387 | string | display string @ line 1387 | (5 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1393 | string | display string @ line 1393 | (5 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1408 | string | display string @ line 1408 | (6 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1416 | string | display string @ line 1416 | (6 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1431 | string | display string @ line 1431 | (10 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1438 | string | display string @ line 1438 | (10 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1454 | string | display string @ line 1454 | (4 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1461 | string | display string @ line 1461 | (4 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1477 | string | display string @ line 1477 | (1 claim) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1486 | string | display string @ line 1486 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1510 | string | display string @ line 1510 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1516 | string | display string @ line 1516 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1532 | string | display string @ line 1532 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1538 | string | display string @ line 1538 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1553 | string | display string @ line 1553 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1560 | string | display string @ line 1560 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1576 | string | display string @ line 1576 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1585 | string | display string @ line 1585 | (3 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1603 | string | display string @ line 1603 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1610 | string | display string @ line 1610 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1627 | string | display string @ line 1627 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1637 | string | display string @ line 1637 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2110 | string | display string @ line 2110 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2140 | string | display string @ line 2140 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2173 | string | display string @ line 2173 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2210 | string | display string @ line 2210 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2248 | string | display string @ line 2248 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2264 | string | display string @ line 2264 | (7 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2283 | string | display string @ line 2283 | (11 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2306 | string | display string @ line 2306 | (6 claims) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
+| 2348 | string | display string @ line 2348 | (3 claims) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
+| 2364 | string | display string @ line 2364 | (1 claim) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
+| 2379 | string | display string @ line 2379 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2392 | string | display string @ line 2392 | (1 claim) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 2408 | string | display string @ line 2408 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2449 | string | display string @ line 2449 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2465 | string | display string @ line 2465 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2483 | string | display string @ line 2483 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2497 | string | display string @ line 2497 | (1 claim) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 2514 | string | display string @ line 2514 | (10 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2565 | string | display string @ line 2565 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2581 | string | display string @ line 2581 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2612 | string | display string @ line 2612 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2655 | string | display string @ line 2655 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2671 | string | display string @ line 2671 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2705 | string | display string @ line 2705 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
 ### solar_visualization_shells.py
 
@@ -1503,7 +1502,6 @@ is planned for a future session.
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 518 | string | display string @ line 518 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (MAVEN data via Claude, NASA MAVEN via GPT) | Public-facing display string (hover/INFO) |
-| 537 | string | display string @ line 537 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (MAVEN data via Claude, NASA MAVEN via GPT) | Public-facing display string (hover/INFO) |
 | 599 | string | display string @ line 599 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Vignes et al. via Claude, Vignes et al. via GPT) | Public-facing display string (hover/INFO) |
 | 713 | string | display string @ line 713 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Vignes et al. via Claude, Vignes et al. via GPT) | Public-facing display string (hover/INFO) |
 | 843 | string | display string @ line 843 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (NASA NSSDCA Mars Fact Sheet via Claude, JPL SSD astrodynamic parameters via GPT) | Public-facing display string (hover/INFO) |
@@ -1521,9 +1519,10 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 71 | string | display string @ line 71 | (1 claim) | 2 | 4 | **8** | Cross-checked by 4 models (Hauck et al., Sori, NASA Mercury Fact Sheet via Claude, NASA Mercury Fact Sheet via GPT) | Public-facing display string (hover/INFO) |
-| 97 | string | display string @ line 97 | (2 claims) | 2 | 4 | **8** | Cross-checked by 5 models (Hauck et al., Sori, NASA Mercury Fact Sheet via Claude, NASA Mercury Fact Sheet via GPT, Baumgardner et al.) | Public-facing display string (hover/INFO) |
-| 424 | string | display string @ line 424 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (NSSDCA-derived Hill radius via Claude, NSSDCA-derived Hill radius via GPT) | Public-facing display string (hover/INFO) |
+| 67 | string | display string @ line 67 | (2 claims) | 2 | 4 | **8** | Cross-checked by 4 models (Hauck et al., Sori, NASA Mercury Fact Sheet via Claude, NASA Mercury Fact Sheet via GPT) | Public-facing display string (hover/INFO) |
+| 76 | string | display string @ line 76 | (1 claim) | 2 | 4 | **8** | Cross-checked by 4 models (Hauck et al., Sori, NASA Mercury Fact Sheet via Claude, NASA Mercury Fact Sheet via GPT) | Public-facing display string (hover/INFO) |
+| 95 | string | display string @ line 95 | (2 claims) | 2 | 4 | **8** | Cross-checked by 5 models (Hauck et al., Sori, NASA Mercury Fact Sheet via Claude, NASA Mercury Fact Sheet via GPT, Baumgardner et al.) | Public-facing display string (hover/INFO) |
+| 422 | string | display string @ line 422 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (NSSDCA-derived Hill radius via Claude, NSSDCA-derived Hill radius via GPT) | Public-facing display string (hover/INFO) |
 
 ### module_atlas.py
 
@@ -1538,7 +1537,6 @@ is planned for a future session.
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 228 | string | display string @ line 228 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Nakamura et al., Nakamura) | Public-facing display string (hover/INFO) |
-| 249 | string | display string @ line 249 | (8 claims) | 2 | 4 | **8** | Cross-checked by 2 models (Nakamura et al., Nakamura) | Public-facing display string (hover/INFO) |
 
 ### orbit_data_manager.py
 
