@@ -6,7 +6,7 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0)
 
 # Provenance Discipline
 
-Skill version: 1.5 | Cut from palomas_orrery @ 225071f6 | August 2, 2026
+Skill version: 1.6 | Cut from palomas_orrery @ 1e60c783 | August 4, 2026
 Source: project_instructions_v3_29.md Part 3 (Provenance Audit, Fetched vs
 Recalled) + food insecurity build handoff + scanner source at HEAD. v1.1
 adds the report domain-classification mechanics, the Review-Repair
@@ -28,7 +28,12 @@ v1.5 adds Model Roles (tested roles for Claude, GPT, Gemini, Fable in
 the competitive pattern -- emerged from the Mars and constants_new.py
 cross-check sessions, August 2026), two worksheet types (value
 verification vs citation verification), the Cross-checked annotation
-format, and the Batch Worksheet Workflow.
+format, and the Batch Worksheet Workflow. v1.6 adds two rounds to that
+workflow (blind source lookup and the Fable consistency audit), the
+model-credit convention, the retirement of the `# Verified:` stamp
+format, Geometry Constants as First-Class Claims, and three field notes
+-- all earned in the L-156 Phase 2 Batch 1 cross-check and the Fable
+shell-consistency audit, August 3-4, 2026.
 
 The resident protocol carries the two governing principles as CRITICAL
 gates: Fetched-vs-Recalled (a citation is a provenance claim that must be
@@ -54,6 +59,33 @@ Never cite-to-clear. A # Source: over recalled data passes the check while
 asserting a provenance that does not exist -- wrong-but-cited is worse than
 uncited, because the citation suppresses the suspicion that would catch it.
 A blank with a flag is honest; an unsourced assertion is not.
+
+### Geometry Constants Are First-Class Claims
+
+A `radius_fraction` in `shell_configs.py` is a provenance claim exactly as
+much as a number in a display string. It asserts a physical size; it is
+just written in units of body radii instead of km.
+
+**When a cross-check corrects a display value, the constant moves in the
+SAME patch.** Not deferred, not a follow-up. Batch 1 moved Mercury's outer
+core text from 2,074 km to Hauck's 2,020 km and left `radius_fraction` at
+0.85 -- so the shell kept drawing 2,074 km while the hover asserted 2,020.
+Six shells across four bodies were in that state, and every offline test
+passed the whole time.
+
+**The scanner cannot catch this.** It flags numeric tokens in display
+strings; `radius_fraction` is a dict constant with no unit attached, so it
+is invisible to `NUMERIC_CLAIM_RE`. There is no scanner fix that would
+help -- the constant is not wrong in isolation, it is wrong RELATIVE to a
+string somewhere else in the file. That relation is what the Fable
+consistency audit checks (workflow step 8), and it is the only thing that
+does.
+
+Record the derivation in the comment, so the next reader can re-run it:
+
+```python
+'radius_fraction': 0.828,  # 2,020 km / 2,439.7 km (Hauck et al. 2013)
+```
 
 ## Review-Repair Protocol for Cross-Checked Annotations
 
@@ -176,6 +208,26 @@ The scanner requires two `# Cross-checked:` lines with distinct
 (identity, reference) pairs for V2 scoring. Same source from different
 worksheets counts as two independent checks.
 
+### Retired: `# Verified: April 2026 via Gemini fact-check`
+
+This format is RETIRED. Do not add it; replace it on sight during a
+cross-check batch. It records that a model looked, and nothing else --
+no authority, no worksheet, no date that means anything, nothing a later
+session can re-check. A `# Cross-checked:` line carries all four: the
+authoritative source (not the model's name in the source position), the
+model that ran the check, the worksheet on disk, and the ISO check date.
+
+The stamp is worse than absent, because it stops the next reader from
+looking. A `# Verified: April 2026` line sat over Eris's Hill sphere
+while it read 9.4 Mkm against a correct ~14.3 Mkm -- a 34% error under a
+verification stamp.
+
+Census at `1e60c783`: 42 remaining -- shell_configs.py 14, earth 13,
+jupiter 9, comet 6. Zero in the five Batch 1 modules and zero in Mars,
+which were cleared as those batches landed. (Two came out of
+shell_configs.py with the Mercury and Moon body headers in the geometry
+follow-up, from 16.) The rest clear in Batch 2.
+
 ### Batch Worksheet Workflow
 
 For scaling the competitive pattern across many modules:
@@ -192,9 +244,53 @@ For scaling the competitive pattern across many modules:
    file or per batch.
 6. **Gemini gets targeted prompts** only for items both primaries
    marked UNVERIFIED (typically book citations).
+7. **Blind source lookup**, when models converge suspiciously or diverge
+   in a way that smells like anchoring. Every earlier round shows each
+   model the value already in the code, which invites confirming it. So
+   run a round with the expected value REMOVED: present the claim text
+   only, and ask each model to source it cold. Batch 1 ran 8 items this
+   way; 4 reached a primary source and 4 came back honestly unsourced --
+   and it is what caught Mercury's sodium tail at 10,000 R_M (observed
+   range is ~120 to ~1,400) and re-attributed Eris's 875 K core.
+   A "NOT FOUND" from a blind round is a RESULT, not a failed round: it
+   is how a claim earns removal rather than a softer citation.
+8. **Fable consistency audit**, after the patches land. Full-codebase
+   pass checking visualization CONSTANTS against display TEXT, and
+   mapping every duplicated value for the single-source-of-truth
+   migration (L-181). This catches what the per-claim worksheet
+   structurally cannot: the worksheet asks "is this claim right?", never
+   "does the geometry still agree with it?" Batch 1 corrected text and
+   citations across five modules and left six `radius_fraction` values
+   drawing the pre-patch physics. Prompt:
+   `documentation/PROMPT_fable_shell_consistency_audit.md`; report:
+   `documentation/FABLE_shell_consistency_audit_report.md`.
 
 This keeps Gemini's book-access strength aimed where it matters rather
 than diluted across routine web-checkable claims.
+
+### Model Credit in Annotations [PRACTICE]
+
+Name the model that produced each check in the `# Cross-checked:` line.
+This is not vanity -- it is the record of WHICH LEG found the finding,
+and it is the only way to see afterwards whether the legs were actually
+independent.
+
+```python
+# Source: Hauck et al. 2013, JGR Planets 118:1204 -- core radius 2020 +/- 30 km
+# Cross-checked: Hauck et al. 2013 via GPT 2026-08-03 (batch1_blind_source_lookup_gpt.md)
+# Cross-checked: Hauck et al. 2013 via Gemini 2026-08-03 (batch1_tier2_cross_check_gemini.md)
+```
+
+**Two Claude passes are ONE leg, not two.** Same training data, same
+priors, correlated errors. The same holds for two passes of any single
+model. Two `# Cross-checked:` lines satisfy the scanner's V2 scoring
+mechanically, but they only mean what they say if the identities differ.
+Before writing the second line, check that the worksheet it names was
+produced by a different model than the first.
+
+And before citing any worksheet, confirm it exists on disk and contains
+the finding. A parenthetical pointing at a plausible filename is the
+citation-layer version of cite-to-clear.
 
 Full multi-session history of this protocol (numbered Tier-1 items closed
 via web_search + Gemini cross-check): `documentation/HANDOFF_provenance_
@@ -231,9 +327,9 @@ phase1_v17.md` and related handoffs. The originating rationale:
 
 ## No Shadow Constants [CRITICAL]
 
-Modules must not carry local copies of values that exist in constants_new.py. Import through the established shim (planet_visualization_utilities) or directly from constants_new.py. A local literal that numerically matches a tracked constant is a frozen copy — it won't follow if the source value updates, and it bypasses the scanner's citation chain even when the number is correct today.
+Modules must not carry local copies of values that exist in constants_new.py. Import through the established shim (planet_visualization_utilities) or directly from constants_new.py. A local literal that numerically matches a tracked constant is a frozen copy -- it won't follow if the source value updates, and it bypasses the scanner's citation chain even when the number is correct today.
 
-This is the code-side complement to the scanner's build_pinned_values() check: the scanner can flag a suspicious match, but the standing rule is that these should never be introduced in the first place. When found, delete the local definition and replace it with a proper import — do not add a # Source: comment to the local copy, because that would cite-to-clear a structural problem rather than fix it.
+This is the code-side complement to the scanner's build_pinned_values() check: the scanner can flag a suspicious match, but the standing rule is that these should never be introduced in the first place. When found, delete the local definition and replace it with a proper import -- do not add a # Source: comment to the local copy, because that would cite-to-clear a structural problem rather than fix it.
 
 Known precedent: comet_visualization_shells.py lines 492-493 (SUN_RADIUS_KM, KM_PER_AU hardcoded despite KM_PER_AU already being imported) and line 602 (SUN_RADIUS_AU computed from the two hardcoded values). Same failure class as the close_approach_data.py stale-copy bug that originally motivated test_constants_provenance.py.
 
@@ -308,6 +404,32 @@ split by how the words get authority:
   sourced does not ship.
 
 ## Field Notes
+
+- **Three wrong-paper citations survived into Batch 1 files**, each
+  plausible enough to pass a reading. Mercury's crust cited "Pei" -- a
+  mis-parsed GIVEN name read as a surname, so the author did not exist.
+  Mercury's crust cited Sori 2018 for 35 km when Sori 2018 gives 26 --
+  the cited paper REFUTED the value it was cited for. Eris's core cited
+  Glein et al. for 875 K; Glein is a real author of a real paper on
+  methane isotope geochemistry, but that paper does not contain 875 K,
+  which comes from a different 2023 Science Advances paper. Three
+  distinct ways to be wrong while looking right: a name that is not a
+  name, a source that contradicts you, and a real author cited for
+  someone else's number.
+- A citation can be self-contradictory and still read as authoritative.
+  Saturn's Hill sphere carries `# Source: ... ~91 million km / ~151
+  Saturn radii confirmed` -- but 91 Mkm is ~1,510 R_S, so the two halves
+  of the "confirmed" pair are a factor of ten apart, and neither matches
+  the drawn value. The word "confirmed" over an internally inconsistent
+  pair is cite-to-clear caught in the wild.
+- **Verify the anchor SHA exists before trusting a document built on it.**
+  An outbound prompt arrived anchored to a commit that was not in the
+  repo -- it had been written but not pushed. The "does not exist"
+  reading was correct at the moment of the check and resolved on push:
+  the SHA round trip working exactly as designed, with the one failure
+  mode honest and visible. Two repos in play makes this routine rather
+  than exotic -- a HEAD that looks wrong may be the OTHER repo's HEAD.
+  Check both before concluding anything.
 
 - The scanner took ~10 sessions and multiple Gemini cross-checks to
   harden -- treat scanner changes as shared-CI changes with family-wide
