@@ -50,9 +50,13 @@ mercury_outer_core_info = (
             "is thought to be the source of Mercury's weak magnetic field. Core radius approximately 2020 km."
 )
 
+# Removed: the mantle diamond-layer claim ("might even contain a layer of
+#          diamonds, formed from ancient carbon-rich material under immense
+#          pressure"). Same unsourced assertion Batch 1 removed from the crust
+#          (see the Removed note below): mis-parsed author name, wrong mechanism,
+#          wrong location. Removed rather than re-cited.
 mercury_mantle_info = (
-            "Mantle: Surrounding the core is a rocky mantle. Recent research suggests this mantle might even contain a layer of \n" 
-            "diamonds, formed from ancient carbon-rich material under immense pressure. The mantle is significantly thinner than \n" 
+            "Mantle: Surrounding the core is a rocky mantle. The mantle is significantly thinner than \n" 
             "Earth's, estimated to be only about 331 kilometers thick."
 )
 
@@ -64,7 +68,6 @@ mercury_mantle_info = (
 # Cross-checked: Sori 2018 via Gemini 2026-08-03 (batch1_tier2_cross_check_gemini.md)
 # Cross-checked: Sori 2018 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
 mercury_crust_info = (
-            "SET MANUAL SCALE TO AT LEAST 0.002 AU TO VISUALIZE.\n\n"     
             "Mercury has a solid silicate crust that is heavily cratered, resembling Earth's Moon. The crust is likely quite thin \n" 
             "compared to Earth's. About 26 km thick (Sori 2018)."
 )
@@ -73,7 +76,6 @@ mercury_crust_info = (
 # Cross-checked: NASA Mercury Fact Sheet via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
 # Cross-checked: NASA Mercury Fact Sheet via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
 mercury_atmosphere_info = (
-            "SET MANUAL SCALE TO AT LEAST 0.002 AU TO VISUALIZE.\n\n"     
             "Exosphere: Unlike Earth's substantial atmosphere, Mercury has an extremely thin exosphere. This exosphere is not \n" 
             "dense enough to trap heat or offer significant protection from space. It is composed mostly of oxygen, sodium, \n" 
             "hydrogen, helium, and potassium atoms that have been blasted off the surface by the solar wind and micrometeoroid impacts."
@@ -419,7 +421,7 @@ def create_mercury_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(
 # Cross-checked: NSSDCA-derived Hill radius via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
 # Cross-checked: NSSDCA-derived Hill radius via GPT 2026-08-03 (batch1_tier2_followup_gpt.md)
 mercury_hill_sphere_info = (
-            "SET MANUAL SCALE TO AT LEAST 0.003 AU TO VISUALIZE.\n\n" 
+            "SET MANUAL SCALE TO AT LEAST 0.005 AU TO VISUALIZE.\n\n" 
             "Hill Sphere: Every celestial body has a Hill sphere (also known as the Roche sphere), which is the region around it \n" 
             "where its gravity is the dominant gravitational force. Mercury certainly has a Hill sphere, but its size depends on \n" 
             "its mass and its distance from the Sun. Being the closest planet to the Sun, the Sun's powerful gravity limits the \n" 

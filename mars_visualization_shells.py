@@ -38,7 +38,7 @@ from orrery_rendering import rotate_to_sunward, create_info_marker
 # Mars Shell Creation Functions
 
 mars_inner_core_info = (
-            "A Solid Inner Core: Based on seismic data from the InSight lander, scientists have strong evidence that Mars <br>" 
+            "A Solid Inner Core: Based on seismic data from the InSight lander, scientists have strong evidence that Mars \n" 
             "possesses a solid inner core. This inner core is primarily composed of iron and nickel, similar to Earth's."
 )
 
@@ -128,9 +128,9 @@ def create_mars_inner_core_shell(center_position=(0, 0, 0)):
     return traces
 
 mars_outer_core_info = (
-            "A Liquid Outer Core: Surrounding the solid inner core is believed to be a liquid outer core, also primarily <br>" 
-            "made of iron and nickel, but likely containing a significant amount of lighter elements like sulfur, oxygen, <br>" 
-            "or even hydrogen. The presence of these lighter elements would lower the melting point of the iron-nickel alloy, <br>" 
+            "A Liquid Outer Core: Surrounding the solid inner core is believed to be a liquid outer core, also primarily \n" 
+            "made of iron and nickel, but likely containing a significant amount of lighter elements like sulfur, oxygen, \n" 
+            "or even hydrogen. The presence of these lighter elements would lower the melting point of the iron-nickel alloy, \n" 
             "allowing it to remain liquid despite the pressure."
 )
 
@@ -213,7 +213,7 @@ def create_mars_outer_core_shell(center_position=(0, 0, 0)):
     return traces
 
 mars_mantle_info = (
-            "Mantle: Surrounding the core is a silicate mantle, similar to Earth's. It's composed of dense rocks rich in <br>" 
+            "Mantle: Surrounding the core is a silicate mantle, similar to Earth's. It's composed of dense rocks rich in \n" 
             "elements like silicon, oxygen, iron, and magnesium."
 )
 
@@ -281,8 +281,8 @@ def create_mars_mantle_shell(center_position=(0, 0, 0)):
     return traces
 
 mars_crust_info = (
-            "Mars's crust: Mars has a crust, which is the outermost solid shell. Interestingly, recent findings from marsquakes <br>" 
-            "suggest that the Martian crust is significantly thicker than Earth's, perhaps averaging around 70 kilometers <br>" 
+            "Mars's crust: Mars has a crust, which is the outermost solid shell. Interestingly, recent findings from marsquakes \n" 
+            "suggest that the Martian crust is significantly thicker than Earth's, perhaps averaging around 70 kilometers \n" 
             "(43 miles) or even thicker in some areas."
 )
 
@@ -438,7 +438,7 @@ def create_mars_crust_shell(center_position=(0, 0, 0)):
     return [surface_trace, hover_trace]
 
 mars_atmosphere_info = (
-            "Atmosphere: Mars has a thin atmosphere, much less dense than Earth's. It's primarily composed of carbon dioxide <br>" 
+            "Atmosphere: Mars has a thin atmosphere, much less dense than Earth's. It's primarily composed of carbon dioxide \n" 
             "(about 95%), with small amounts of nitrogen, argon, and other gases."
 )
 
@@ -515,13 +515,13 @@ def create_mars_atmosphere_shell(center_position=(0, 0, 0)):
 # Cross-checked: MAVEN data via Claude 2026-08-01 (worksheet_claude_mars_visualization.md)
 # Cross-checked: NASA MAVEN via GPT 2026-08-01 (track1_gpt_independent_worksheet_mars_visualization.md)
 mars_upper_atmosphere_info = (
-            "Upper Atmosphere: Like Earth, Mars has upper atmospheric layers, including an ionosphere and exosphere, where <br>" 
-            "the atmosphere becomes very thin and interacts with solar radiation and the solar wind.<br><br>" 
-            "Exosphere: This is the outermost layer, starting above the thermosphere (around 200 km/124 miles) and gradually <br>" 
-            "thinning out into space. Atoms and molecules here are so far apart that they can escape the planet's gravity.<br><br>" 
-            "Interaction with Solar Wind: Without a global magnetosphere, the Martian atmosphere is directly exposed to the <br>" 
-            "solar wind, a stream of charged particles from the Sun. This interaction is believed to have played a significant <br>" 
-            "role in stripping away much of Mars' early, potentially thicker atmosphere and contributing to the loss of liquid <br>" 
+            "Upper Atmosphere: Like Earth, Mars has upper atmospheric layers, including an ionosphere and exosphere, where \n" 
+            "the atmosphere becomes very thin and interacts with solar radiation and the solar wind.\n\n" 
+            "Exosphere: This is the outermost layer, starting above the thermosphere (around 200 km/124 miles) and gradually \n" 
+            "thinning out into space. Atoms and molecules here are so far apart that they can escape the planet's gravity.\n\n" 
+            "Interaction with Solar Wind: Without a global magnetosphere, the Martian atmosphere is directly exposed to the \n" 
+            "solar wind, a stream of charged particles from the Sun. This interaction is believed to have played a significant \n" 
+            "role in stripping away much of Mars' early, potentially thicker atmosphere and contributing to the loss of liquid \n" 
             "water on the surface."
 )
 
@@ -596,13 +596,13 @@ def create_mars_upper_atmosphere_shell(center_position=(0, 0, 0)):
 # Cross-checked: Vignes et al. via Claude 2026-08-01 (worksheet_claude_mars_visualization.md)
 # Cross-checked: Vignes et al. via GPT 2026-08-01 (track1_gpt_independent_worksheet_mars_visualization.md)
 mars_magnetosphere_info = (
-    "SET MANUAL SCALE TO AT LEAST 0.005 AU TO VISUALIZE.<br><br>"
-    "Unlike Earth, Mars lacks a global magnetic field generated by its core. Instead, it has:<br><br>"
+    "SET MANUAL SCALE TO AT LEAST 0.005 AU TO VISUALIZE.\n\n"
+    "Unlike Earth, Mars lacks a global magnetic field generated by its core. Instead, it has:\n\n"
     "1. Induced Magnetosphere: Created by the interaction between the solar wind and Mars' ionosphere. "
     "It's much weaker and closer to the planet than Earth's magnetosphere, extending only about 1-2 Mars radii "
-    "on the Sun-facing side.<br><br>"
+    "on the Sun-facing side.\n\n"
     "2. Bow Shock: Still forms where the solar wind first encounters Mars' atmosphere and ionosphere, "
-    "but it's much closer to the planet (around 1.6 Mars radii).<br><br>"
+    "but it's much closer to the planet (around 1.6 Mars radii).\n\n"
     "3. Crustal Magnetic Fields: Localized 'mini-magnetospheres' created by magnetized regions in Mars' crust, "
     "particularly in the southern hemisphere. These are remnants of Mars' ancient global magnetic field "
     "that existed billions of years ago."
@@ -840,8 +840,8 @@ def create_mars_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0, 
 # Cross-checked: NASA NSSDCA Mars Fact Sheet via Claude 2026-08-01 (worksheet_claude_mars_visualization.md)
 # Cross-checked: JPL SSD astrodynamic parameters via GPT 2026-08-01 (track1_gpt_independent_worksheet_mars_visualization.md)
 mars_hill_sphere_info = (
-            "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.<br><br>" 
-            "Mars's Hill Sphere (extends to ~320 Mars radii or about 1.1 million km), which defines the region of its <br>" 
+            "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n" 
+            "Mars's Hill Sphere (extends to ~324.5 Mars radii or about 1.1 million km), which defines the region of its \n" 
             "gravitational influence and encompasses its two moons."
 )
 
@@ -851,12 +851,12 @@ def create_mars_hill_sphere_shell(center_position=(0, 0, 0)):
     """Creates Mars's upper atmosphere shell."""
     # Define layer properties
     layer_info = {
-        'radius_fraction': 320,  
+        'radius_fraction': 324.5,  
         'color': 'rgb(0, 255, 0)',  # Green for Hill sphere
         'opacity': 0.15,
         'name': 'Hill Sphere',
         'description': (
-                "Mars's Hill Sphere (extends to ~320 Mars radii or about 1.1 million km), which defines the region of its <br>" 
+                "Mars's Hill Sphere (extends to ~324.5 Mars radii or about 1.1 million km), which defines the region of its <br>" 
                 "gravitational influence and encompasses its two moons.<br><br>" 
                 "* Definition: The Hill sphere (sometimes called the Roche sphere or gravitational sphere of influence) of a <br>" 
                 "  celestial body is the region around it where its own gravity is the dominant force attracting satellites. <br>" 
@@ -881,7 +881,7 @@ def create_mars_hill_sphere_shell(center_position=(0, 0, 0)):
     }
 
     # Hill sphere radius in Mars radii
-    radius_fraction = 320  # Mars's Hill sphere is about 320 Mars radii
+    radius_fraction = 324.5  # Mars's Hill sphere is about 324.5 Mars radii
     
     # Calculate radius in AU
     radius_au = radius_fraction * MARS_RADIUS_AU

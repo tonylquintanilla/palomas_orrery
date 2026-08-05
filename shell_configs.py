@@ -90,8 +90,11 @@ SHELL_CONFIGS = {
     # ============================================================
     # Mercury
     # ============================================================
-    # Source: NASA MESSENGER Mission, Margot et al. (2012), Sori (2018)
-    # Verified: April 2026 via Gemini fact-check
+    # Source: Hauck et al. 2013, JGR Planets 118:1204 -- core radius 2,020 +/- 30 km;
+    #         Sori 2018, EPSL 489:92 -- crustal thickness 26 +/- 11 km;
+    #         NASA MESSENGER Mission; Winslow et al. 2013 (magnetosphere geometry).
+    # Cross-checked: Hauck 2013 / Sori 2018 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
+    # Cross-checked: Hauck 2013 / Sori 2018 via Gemini 2026-08-03 (batch1_tier2_cross_check_gemini.md)
     'Mercury': {
 
         'inner_core': {
@@ -115,7 +118,7 @@ SHELL_CONFIGS = {
 
         'outer_core': {
             'name': 'Outer Core',
-            'radius_fraction': 0.85,
+            'radius_fraction': 0.828,  # 2,020 km / 2,439.7 km (Hauck et al. 2013)
             'color': 'rgb(255, 140, 0)',
             'opacity': 0.8,
             'n_points': 25,
@@ -133,19 +136,17 @@ SHELL_CONFIGS = {
 
         'mantle': {
             'name': 'Mantle',
-            'radius_fraction': 0.98,
+            'radius_fraction': 0.9636,  # (2,020 + 331) km / 2,439.7 km
             'color': 'rgb(230, 100, 20)',
             'opacity': 0.7,
             'n_points': 25,
             'marker_size': 3.4,
             'info_border': 'white',  # two-standards (May 29, 2026): burnt orange fill
             'hover_text': (
-                "Mantle: Surrounding the core is a rocky mantle. Recent research suggests this mantle might even contain a layer of <br>"
-                "diamonds, formed from ancient carbon-rich material under immense pressure. The mantle is significantly thinner than <br>"
+                "Mantle: Surrounding the core is a rocky mantle. The mantle is significantly thinner than <br>"
                 "Earth's, estimated to be only about 331 kilometers thick."
             ),
             'tooltip': (
-                "Mantle: Surrounding the core is a rocky mantle. Recent research suggests this mantle might even contain a layer of \n"
                 "diamonds, formed from ancient carbon-rich material under immense pressure. The mantle is significantly thinner than \n"
                 "Earth's, estimated to be only about 331 kilometers thick."
             ),
@@ -154,6 +155,11 @@ SHELL_CONFIGS = {
         'crust': {
             'name': 'Crust',
             'radius_fraction': 1.0,
+            # LAYER CHAIN GAP (not resolved -- Mode 5 decision): 2,020 (core)
+            # + 331 (mantle) + 26 (crust) = 2,377 km against R = 2,439.7 km, a
+            # 62.7 km shortfall representing unmodelled structure. Crust stays at
+            # the surface (rf 1.0), so its drawn thickness is ~88.8 km, not 26 km.
+            # Note this GREW from ~48.8 km when the mantle moved to 0.9636.
             'color': 'rgb(128, 128, 128)',
             'opacity': 1.0,
             'geometry_type': 'mesh3d',
@@ -233,10 +239,13 @@ SHELL_CONFIGS = {
     # ============================================================
     # Moon
     # ============================================================
-    # Source: Weber et al. (2011), Science, "Seismic Detection of the Lunar Core";
-    #         NASA Moon Fact Sheet; Apollo Seismic Experiment reports;
-    #         NASA Solar System Dynamics (Hill sphere radius); Draper (1847).
-    # Verified: April 2026 provenance audit; all 5 flagged claims confirmed.
+    # Source: Weber et al. (2011), Science, "Seismic Detection of the Lunar Core"
+    #         -- inner core 240 km, outer core 330 km;
+    #         Nakamura et al. 1982, JGR 87:A117 and Nakamura 2005, JGR 110
+    #         -- deep moonquake source depths;
+    #         NASA Moon Fact Sheet; NASA Solar System Dynamics (Hill sphere); Draper (1847).
+    # Cross-checked: Weber 2011 / Nakamura via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
+    # Cross-checked: Weber 2011 / Nakamura via Gemini 2026-08-03 (batch1_tier2_cross_check_gemini.md)
     # Phase B correction: radius_fraction/opacity swap in mantle fixed
     #   (source had radius_fraction=0.85, opacity=0.9655; description text
     #   and lunar geometry confirm boundary at 0.9655 of Moon radius).
@@ -244,7 +253,7 @@ SHELL_CONFIGS = {
 
         'inner_core': {
             'name': 'Inner Core',
-            'radius_fraction': 0.1485,
+            'radius_fraction': 0.1381,  # 240 km / 1,737.4 km (Weber et al. 2011)
             'color': 'rgb(255, 100, 0)',
             'opacity': 1.0,
             'n_points': 25,
@@ -264,7 +273,7 @@ SHELL_CONFIGS = {
 
         'outer_core': {
             'name': 'Outer Core',
-            'radius_fraction': 0.2083,
+            'radius_fraction': 0.1899,  # 330 km / 1,737.4 km (Weber 2011 / Nakamura)
             'color': 'rgb(255, 50, 0)',
             'opacity': 0.8,
             'n_points': 25,
@@ -272,7 +281,7 @@ SHELL_CONFIGS = {
             'info_border': 'white',  # dense-red shell: shell-color fill, white outline (Tony's two-standards, May 28)
             'hover_text': (
                 "Outer Core: Surrounding the inner core, this is thought to be a liquid, iron-rich outer core with a radius of about <br>"
-                "330 kilometers. There might also be a small, partially molten layer of silicates around the outer core.<br>:"
+                "330 kilometers. There might also be a small, partially molten layer of silicates around the outer core.<br>"
                 "* The Moon's outer core is generally understood to be hotter than its solid inner core, as it is in a molten or liquid <br>"
                 "  state. <br>"
                 "* Estimated Temperature: This layer is hot enough to be molten at the lower pressures found here, but the <br>"
@@ -792,7 +801,7 @@ SHELL_CONFIGS = {
 
         'mantle': {
             'name': 'Mantle',
-            'radius_fraction': 0.66,
+            'radius_fraction': 0.686,  # core 697.8 km + 100 km ice shell / 1,163 km
             'color': 'rgb(150, 0, 0)',
             'opacity': 0.9,
             'n_points': 25,
@@ -921,7 +930,7 @@ SHELL_CONFIGS = {
 
         'core': {
             'name': 'Core',
-            'radius_fraction': 0.5,
+            'radius_fraction': 0.5288,  # 3,200 km / 6,051.8 km (NASA Venus Fact Sheet)
             'color': 'rgb(255, 180, 140)',
             'opacity': 1.0,
             'n_points': 25,
@@ -963,6 +972,10 @@ SHELL_CONFIGS = {
         'crust': {
             'name': 'Crust',
             'radius_fraction': 1.0,
+            # STYLIZATION GAP (not resolved -- Mode 5 decision): the mantle below
+            # sits at rf 0.98, so the drawn crust is ~121 km thick while the text
+            # says 10-30 km. Closing the gap numerically would make the crust shell
+            # essentially invisible. Left stylized deliberately; see as-built.
             'color': 'rgb(255, 255, 224)',
             'opacity': 1.0,
             'geometry_type': 'mesh3d',
@@ -2185,7 +2198,7 @@ CUSTOM_SHELLS = {
     # Mars
     # ============================================================
     # Source: NASA MAVEN; NASA Solar System Exploration;
-    #         induced magnetosphere, bow shock 1.5 Rm, crustal magnetic fields
+    #         induced magnetosphere, bow shock ~1.64 Rm (Vignes et al. 2000),
     #         (Acuna et al. 1999 -- MGS MAG/ER discovery).
     # Verified: April 2026 provenance audit via Gemini fact-check.
     'Mars': {
@@ -2210,7 +2223,7 @@ CUSTOM_SHELLS = {
                 "SET MANUAL SCALE TO AT LEAST 0.005 AU TO VISUALIZE.\n\n"
                 "Unlike Earth, Mars lacks a global magnetic field generated by its core. Instead, it has:\n"
                 "1. Induced Magnetosphere: Created by the interaction between the solar wind and Mars' ionosphere.\n"
-                "2. Bow Shock: Forms where the solar wind first encounters Mars' atmosphere/ionosphere (~1.5 Mars radii).\n"
+                "2. Bow Shock: Forms where the solar wind first encounters Mars' atmosphere/ionosphere (~1.64 Mars radii).\n"
                 "3. Crustal Magnetic Fields: Localized 'mini-magnetospheres' from magnetized regions in Mars' crust.\n\n"
                 "The same builder produces all three traces (separate legend entries)."
             ),

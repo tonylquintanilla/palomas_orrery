@@ -38,9 +38,9 @@ from planet_visualization_utilities import (PLUTO_RADIUS_AU, create_sphere_point
 # Cross-checked: Bierson et al. 2020 via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
 # Cross-checked: Bierson et al. 2020 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
 pluto_core_info = (
-            "2.4 MB PER FRAME FOR HTML.<br><br>"
-            "Pluto core: Scientists believe Pluto has a dense, rocky core, likely composed of silicates and iron. The core's diameter <br>" 
-            "is hypothesized to be about 1700 km, which is approximately 70% of Pluto's total diameter. Heat generated from the decay <br>" 
+            "2.4 MB PER FRAME FOR HTML.\n\n"
+            "Pluto core: Scientists believe Pluto has a dense, rocky core, likely composed of silicates and iron. The core's diameter \n" 
+            "is hypothesized to be about 1700 km, which is approximately 70% of Pluto's total diameter. Heat generated from the decay \n" 
             "of radioactive elements within the core may still be present today."
 )
 
@@ -133,9 +133,9 @@ def create_pluto_core_shell(center_position=(0, 0, 0)):
 # Cross-checked: Bierson et al. 2020 via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
 # Cross-checked: Bierson et al. 2020 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
 pluto_mantle_info = (
-            "2.1 MB PER FRAME FOR HTML.<br><br>"
-            "Mantle: Surrounding the rocky core is a mantle made of water ice. There's a compelling theory that a subsurface ocean <br>" 
-            "of liquid water, possibly mixed with ammonia, exists at the boundary between the core and the ice mantle. This ocean <br>" 
+            "2.1 MB PER FRAME FOR HTML.\n\n"
+            "Mantle: Surrounding the rocky core is a mantle made of water ice. There's a compelling theory that a subsurface ocean \n" 
+            "of liquid water, possibly mixed with ammonia, exists at the boundary between the core and the ice mantle. This ocean \n" 
             "could be 100 to 180 km thick. The presence of this ocean is supported by geological features observed on Pluto's surface."
 )
 
@@ -225,10 +225,10 @@ def create_pluto_mantle_shell(center_position=(0, 0, 0)):
 # Cross-checked: Grundy et al. 2016 via Gemini 2026-08-03 (worksheet_gemini_batch1_followup.md)
 pluto_crust_info = (
             "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
-            "4.6 MB PER FRAME FOR HTML.<br><br>"
-            "Crust (Surface Layer): This is the outermost layer, composed of more volatile ices: primarily nitrogen ice, with smaller<br>" 
-            "amounts of methane and carbon monoxide ice. The thickness of this layer likely varies but is estimated to be relatively <br>" 
-            "thin in many regions, perhaps ranging from a few to tens of kilometers. In the deep Sputnik Planitia basin, the nitrogen <br>" 
+            "4.6 MB PER FRAME FOR HTML.\n\n"
+            "Crust (Surface Layer): This is the outermost layer, composed of more volatile ices: primarily nitrogen ice, with smaller\n" 
+            "amounts of methane and carbon monoxide ice. The thickness of this layer likely varies but is estimated to be relatively \n" 
+            "thin in many regions, perhaps ranging from a few to tens of kilometers. In the deep Sputnik Planitia basin, the nitrogen \n" 
             "ice layer is estimated to be several kilometers thick and overlies the water-ice lithosphere."
 )
 
@@ -397,13 +397,13 @@ def create_pluto_crust_shell(center_position=(0, 0, 0)):
 # Cross-checked: Gladstone et al. 2016 via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
 # Cross-checked: Gladstone et al. 2016 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
 pluto_haze_layer_info = (
-            "2.7 MB PER FRAME FOR HTML.<br><br>"
-            "Atmosphere: Pluto has a very thin atmosphere, about 1/100,000th the surface pressure of Earth's. It's primarily composed <br>" 
-            "of nitrogen (N2), with smaller amounts of methane (CH4) and carbon monoxide (CO). This atmosphere is dynamic and changes <br>" 
-            "with Pluto's orbit around the Sun. As Pluto moves farther away, the atmosphere freezes and falls to the surface as ice. <br>" 
-            "When it's closer to the Sun, the surface ice sublimates, forming a gaseous atmosphere. The atmosphere contains layers of <br>" 
-            "haze, extending up to 200 km above the surface, likely formed from the interaction of the atmospheric gases with high-energy <br>" 
-            "radiation. Counterintuitively, Pluto's upper atmosphere is significantly warmer than its surface due to a temperature <br>" 
+            "2.7 MB PER FRAME FOR HTML.\n\n"
+            "Atmosphere: Pluto has a very thin atmosphere, about 1/100,000th the surface pressure of Earth's. It's primarily composed \n" 
+            "of nitrogen (N2), with smaller amounts of methane (CH4) and carbon monoxide (CO). This atmosphere is dynamic and changes \n" 
+            "with Pluto's orbit around the Sun. As Pluto moves farther away, the atmosphere freezes and falls to the surface as ice. \n" 
+            "When it's closer to the Sun, the surface ice sublimates, forming a gaseous atmosphere. The atmosphere contains layers of \n" 
+            "haze, extending up to 200 km above the surface, likely formed from the interaction of the atmospheric gases with high-energy \n" 
+            "radiation. Counterintuitively, Pluto's upper atmosphere is significantly warmer than its surface due to a temperature \n" 
             "inversion, possibly caused by the presence of methane."
 )
 
@@ -506,13 +506,13 @@ def create_pluto_haze_layer_shell(center_position=(0, 0, 0)):
 # Cross-checked: Young et al. 2018 via Claude 2026-08-03 (worksheet_claude_batch1_followup.md)
 # Cross-checked: Young et al. 2018 via GPT 2026-08-03 (batch1_tier2_followup_gpt.md)
 pluto_atmosphere_info = (
-            "2.7 MB PER FRAME FOR HTML.<br><br>"
-            "Atmosphere: Pluto has a very thin atmosphere, about 1/100,000th the surface pressure of Earth's. It's primarily composed <br>" 
-            "of nitrogen (N2), with smaller amounts of methane (CH4) and carbon monoxide (CO). This atmosphere is dynamic and changes <br>" 
-            "with Pluto's orbit around the Sun. As Pluto moves farther away, the atmosphere freezes and falls to the surface as ice. <br>" 
-            "When it's closer to the Sun, the surface ice sublimates, forming a gaseous atmosphere. The atmosphere contains layers of <br>" 
-            "haze, extending up to 200 km above the surface, likely formed from the interaction of the atmospheric gases with high-energy <br>" 
-            "radiation. Counterintuitively, Pluto's upper atmosphere is significantly warmer than its surface due to a temperature <br>" 
+            "2.7 MB PER FRAME FOR HTML.\n\n"
+            "Atmosphere: Pluto has a very thin atmosphere, about 1/100,000th the surface pressure of Earth's. It's primarily composed \n" 
+            "of nitrogen (N2), with smaller amounts of methane (CH4) and carbon monoxide (CO). This atmosphere is dynamic and changes \n" 
+            "with Pluto's orbit around the Sun. As Pluto moves farther away, the atmosphere freezes and falls to the surface as ice. \n" 
+            "When it's closer to the Sun, the surface ice sublimates, forming a gaseous atmosphere. The atmosphere contains layers of \n" 
+            "haze, extending up to 200 km above the surface, likely formed from the interaction of the atmospheric gases with high-energy \n" 
+            "radiation. Counterintuitively, Pluto's upper atmosphere is significantly warmer than its surface due to a temperature \n" 
             "inversion, possibly caused by the presence of methane."
 )
 
@@ -611,13 +611,13 @@ def create_pluto_atmosphere_shell(center_position=(0, 0, 0)):
 # Cross-checked: Pluto/Charon GM values via GPT 2026-08-03 (batch1_blind_source_lookup_gpt.md)
 # Cross-checked: derived Hill radius via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
 pluto_hill_sphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 0.1 AU TO VISUALIZE.<br>" 
-            "1.3 MB PER FRAME FOR HTML.<br><br>"
+            "SELECT MANUAL SCALE OF AT LEAST 0.1 AU TO VISUALIZE.\n" 
+            "1.3 MB PER FRAME FOR HTML.\n\n"
 
-            "Hill Sphere: Pluto's Hill sphere, or Roche sphere, is the region around it where its gravitational influence dominates <br>" 
-            "over the Sun's. The radius of Pluto's Hill sphere is quite large, approximately 5.99 million kilometers (0.04 AU). This is <br>" 
-            "significantly larger than Earth's Hill sphere in terms of volume. Any moon orbiting Pluto within this sphere is <br>" 
-            "gravitationally bound to it. Pluto has five known moons: Charon, Styx, Nix, Kerberos, and Hydra, all of which reside within <br>" 
+            "Hill Sphere: Pluto's Hill sphere, or Roche sphere, is the region around it where its gravitational influence dominates \n" 
+            "over the Sun's. The radius of Pluto's Hill sphere is quite large, approximately 5.99 million kilometers (0.04 AU). This is \n" 
+            "significantly larger than Earth's Hill sphere in terms of volume. Any moon orbiting Pluto within this sphere is \n" 
+            "gravitationally bound to it. Pluto has five known moons: Charon, Styx, Nix, Kerberos, and Hydra, all of which reside within \n" 
             "its Hill sphere."                     
 )
 
