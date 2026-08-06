@@ -6,7 +6,7 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Skill version: 1.4 | Cut from palomas_orrery @ ca9c706e7c68dec724bbcd242e0b0048c5392dfb | July 26, 2026
+Skill version: 1.5 | Cut from palomas_orrery @ 3398970 | August 5, 2026
 Sources: LEDGER_CONSOLIDATED.md header, ledger_index.py at HEAD, handoff
 v28 (consolidation) and v29 (cleanup), food insecurity handoffs. v1.3
 adds the Tony-action (do)/(decide) tag convention and its rollup rule,
@@ -138,8 +138,34 @@ Skill revisions are ledger entries too: each skill's SKILL.md carries a
 version line + source SHA; a skill update gets an L-item (or a line in
 the version-history appendix) recording skill name, new version, and the
 SHA it was cut from. The resident protocol's Skill Manifest table states
-the EXPECTED installed versions -- reconcile a mismatch before trusting a
-skill, the same way a SHA mismatch is reconciled before a build.
+the EXPECTED installed versions -- a mismatch STOPS the session under the
+resident Stale Skill = Stop [CRITICAL] gate, which also tells Tony the two
+actions needed (push to skills/, reinstall to the account profile).
+
+**Binding rule [QUALITY].** A skill version bump is not done until the
+manifest agrees. The three steps travel in ONE commit: bump the version
+line in SKILL.md -> run `skills_index.py` -> commit SKILL.md and both
+protocol copies together. Do not leave the regeneration to a later
+checkpoint someone has to remember.
+
+This is the PREVENTION side. Detection is the resident protocol's
+Stale Skill = Stop [CRITICAL] gate, which halts a session outright when a
+loaded skill's version disagrees with the manifest row. Two layers because
+prevention depends on remembering and detection does not: if the binding
+rule is followed there is no window, and if it is missed the gate catches
+it before any work is done on the wrong copy.
+
+The reason is not tidiness. The protocol tells a session that finds a
+skill-version mismatch to stop and reconcile, the same rule as a SHA
+mismatch. A stale manifest therefore fires that alarm on every session
+that loads the affected skill -- and an alarm that is always wrong is one
+the reader learns to wave off, which is the state in which a REAL mismatch
+stops registering. Bound to the commit, drift cannot exist at any pushed
+SHA. (Earned: the manifest advertised 1.1/1.4 against an actual 1.2/1.6
+for about three weeks, provenance-discipline having already gone stale a
+version earlier -- Fable skills-layer review, Job 3 #8. `skills_index.py`
+now prints what the manifest was advertising before it overwrites it, so
+running the tool reports the drift instead of silently absorbing it.)
 
 ## Codebase Tooling
 
@@ -156,6 +182,16 @@ skill, the same way a SHA mismatch is reconciled before a build.
   multi-file changes to map touchpoints.
 - ledger_index.py: regenerates the index zone in place; also supports
   migrating closed items to section C.
+- skills_index.py: regenerates the Skill Manifest table from the
+  skills/*/SKILL.md files and consistency-checks them. Same marker-zone
+  pattern as the two above. It targets the LIVE protocol only
+  (PROJECT_INSTRUCTIONS.md in the repo root); the versioned copies under
+  documentation/ are archival snapshots the tool deliberately never
+  rewrites, so do not expect a run to update them and do not hand-sync
+  them either -- an archive that keeps changing is not an archive. Since
+  August 2026 the run also PRINTS what the manifest was advertising before
+  it overwrites it, so drift is reported rather than silently absorbed.
+  See the binding rule under Protocol and Skills Change Log.
 
 ## Field Notes
 

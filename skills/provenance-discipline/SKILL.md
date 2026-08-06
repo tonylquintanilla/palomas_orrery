@@ -6,7 +6,7 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0)
 
 # Provenance Discipline
 
-Skill version: 1.6 | Cut from palomas_orrery @ 1e60c783 | August 4, 2026
+Skill version: 1.7 | Cut from palomas_orrery @ 3398970 | August 5, 2026
 Source: project_instructions_v3_29.md Part 3 (Provenance Audit, Fetched vs
 Recalled) + food insecurity build handoff + scanner source at HEAD. v1.1
 adds the report domain-classification mechanics, the Review-Repair
@@ -331,7 +331,7 @@ Modules must not carry local copies of values that exist in constants_new.py. Im
 
 This is the code-side complement to the scanner's build_pinned_values() check: the scanner can flag a suspicious match, but the standing rule is that these should never be introduced in the first place. When found, delete the local definition and replace it with a proper import -- do not add a # Source: comment to the local copy, because that would cite-to-clear a structural problem rather than fix it.
 
-Known precedent: comet_visualization_shells.py lines 492-493 (SUN_RADIUS_KM, KM_PER_AU hardcoded despite KM_PER_AU already being imported) and line 602 (SUN_RADIUS_AU computed from the two hardcoded values). Same failure class as the close_approach_data.py stale-copy bug that originally motivated test_constants_provenance.py.
+Known precedent (FIXED in L-156 1f; kept as history): comet_visualization_shells.py lines 492-493 once hardcoded SUN_RADIUS_KM and KM_PER_AU despite KM_PER_AU already being imported, with line 602 deriving SUN_RADIUS_AU from the two local copies. Those lines now carry the fix comment recording the removal -- a reader sent to find shadow constants there will find the repair, not the defect. Same failure class as the close_approach_data.py stale-copy bug that originally motivated test_constants_provenance.py.
 
 ## Report Domain Classification (Findings by File / File Type)
 

@@ -6,9 +6,9 @@ fires_when: render_orbits.py, resolver.py, cache_reader.py, propagation math, go
 
 # Gallery Assembler
 
-Skill version: 1.0 | Cut from gallery @ a7abea59ed5368a38ce7364ce53b4679aa83b5a1 / orrery @ e775050d227fa63aa79e97a7af3f290a5c038899 | July 20, 2026
+Skill version: 1.1 | Cut from gallery @ f83a3abc72c5516e6dc2ad264be53ce95b68cf38 / orrery @ 3398970 | August 5, 2026
 Sources: render_orbits.py, resolver.py, cache_reader.py (read live this
-session); master plan §3; L-149/L-150/L-151.
+session); master plan sec. 3; L-149/L-150/L-151.
 
 ## The boundary this skill exists to protect
 
@@ -19,7 +19,7 @@ there's no local math. The assembler has no live connection (Pyodide can't
 reach Horizons), so it must cache a recipe once and reconstruct it
 correctly later, alone. Nearly everything distinguishing the two --
 staging/atomic-swap, client-side propagation, trust measurement itself --
-exists because of that one constraint. Full treatment: master plan §3,
+exists because of that one constraint. Full treatment: master plan sec. 3,
 protocol Part 4 ("The Orrery and the Assembler").
 
 What carries over: orbital mechanics, Horizons conventions, the visual
@@ -65,7 +65,7 @@ coverage_index.json dict; never touches network or astroquery.
 object has no `osculating` block -- the concrete enforcement point for
 L-150: an object with only a barycentric cache and no heliocentric one
 fails HERE, with a specific error, the moment a whole-system scene tries
-to include it. (Known stale doc: its own docstring still says
+to include it. (Known stale docs: cache_reader.py AND resolver.py both still say
 served_window is "currently null at HEAD... tracked with F1" -- pre-M2,
 no longer true; fix next time you're in that file.)
 
@@ -115,5 +115,5 @@ This skill's artifacts get Mode 5 visual acceptance. The BUILDER's data
 (gallery-cache-builder's Layer 1/2) is a separate, earlier gate -- an
 artifact can only be attempted once its objects' served data passes that
 gate. Don't conflate "the cache is good" with "the render is right":
-Pluto/Charon and Moon/Io/Titan are both, as of tonight, in the state of
+Pluto/Charon and Moon/Io/Titan are both, as of July 20 2026, in the state of
 "data plumbing partially tested, render never attempted."

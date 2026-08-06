@@ -23,6 +23,9 @@ import os
 import sys
 
 # (relative_path, edit_id, label, old_bytes, new_bytes)
+TARGET = None
+ENCODING_GATE = 'utf-8'
+
 EDITS = [
     ('skills/orrery-coding-conventions/SKILL.md', 'OCC-3', 'Hill table: deviations, Mars corrected',
      b'**Distance convention -- intended, and NOT yet uniform in the code.** The\nintent is perihelion: closest approach to the parent, where the Hill sphere\nis smallest, giving the conservative bound. Measured against the coded\n`radius_fraction` values at `1e60c783`, the codebase actually splits:\n\n| What the coded rf matches | Bodies |\n|---|---|\n| perihelion | Venus, Pluto, Eris |\n| semi-major axis | Mars, Jupiter, Uranus, Neptune |\n| aphelion | Saturn (also the Fable audit\'s worst finding) |\n| no convention within 3% | Mercury (rf 94.4; nearest is semi-major, off 4%) |\n\nThe perihelion convention holds for the bodies Batch 1 touched. It is an\naspiration for the rest, not a description of them. **Do not "correct" a\nbody to perihelion on the strength of this section alone** -- four bodies\nwould move, and the reconciliation has not been cross-checked. That work',
@@ -93,42 +96,55 @@ EDITS = [
 ]
 
 
+
 def main():
     root = os.path.dirname(os.path.abspath(__file__))
-    files = {}
-    for rel, eid, label, old, new in EDITS:
-        path = os.path.join(root, rel.replace('/', os.sep))
-        if rel not in files:
-            if not os.path.exists(path):
-                print("ERROR: %s not found. Run this from the repo root." % rel)
-                return 1
-            with open(path, 'rb') as f:
-                files[rel] = f.read()
-            if b'\r\n' in files[rel]:
-                print("ERROR: %s has CRLF line endings." % rel)
-                return 1
+    rels = []
+    for e in EDITS:
+        r = e[0] if len(e) == 5 else TARGET
+        if r not in rels:
+            rels.append(r)
 
-    # Pass 1: verify every anchor everywhere.
-    for rel, eid, label, old, new in EDITS:
-        n = files[rel].count(old)
-        if n != 1:
-            print("ANCHOR FAIL: %s (%s) in %s matched %d, expected 1." % (eid, label, rel, n))
-            print("             Nothing written. All files unchanged.")
+    files, normalized = {}, []
+    for rel in rels:
+        path = os.path.join(root, rel.replace('/', os.sep))
+        if not os.path.exists(path):
+            print("ERROR: %s not found. Save this script in the repo root.")
+            print("       NOTHING WAS WRITTEN.")
+            return 1
+        with open(path, 'rb') as f:
+            data = f.read()
+        if b'\r\n' in data:
+            n = data.count(b'\r\n')
+            data = data.replace(b'\r\n', b'\n')
+            normalized.append((rel, n))
+        files[rel] = data
+
+    for rel, n in normalized:
+        print("fix CRLF     %s: normalized %d line endings to LF" % (rel, n))
+
+    # Pass 1 -- verify every anchor before writing anything.
+    for e in EDITS:
+        rel, eid, label, old, new = e if len(e) == 5 else (TARGET,) + e
+        c = files[rel].count(old)
+        if c != 1:
+            print("ANCHOR FAIL: %s (%s) in %s matched %d, expected 1." % (eid, label, rel, c))
+            print("             NOTHING WAS WRITTEN. Every file is unchanged.")
+            print("             Fix the cause, then RE-RUN this script.")
             return 1
 
-    # Pass 2: apply.
-    for rel, eid, label, old, new in EDITS:
+    # Pass 2 -- apply.
+    for e in EDITS:
+        rel, eid, label, old, new = e if len(e) == 5 else (TARGET,) + e
         files[rel] = files[rel].replace(old, new, 1)
-        print("ok  %-8s %-52s %s" % (eid, label, rel.split('/')[1]))
+        print("ok  %-10s %s" % (eid, label))
 
     for rel, data in files.items():
         try:
-            data.decode('ascii')
+            data.decode(ENCODING_GATE)
         except UnicodeDecodeError as exc:
-            print("ERROR: %s would contain non-ASCII (%s). Nothing written." % (rel, exc))
-            return 1
-        if b'\r\n' in data:
-            print("ERROR: %s would contain CRLF. Nothing written." % rel)
+            print("ERROR: %s would not be valid %s (%s)." % (rel, ENCODING_GATE, exc))
+            print("       NOTHING WAS WRITTEN. Every file is unchanged.")
             return 1
 
     for rel, data in files.items():
@@ -136,7 +152,8 @@ def main():
             f.write(data)
 
     print("")
-    print("patch applied to %d files" % len(files))
+    print("patch applied to %d file(s)%s"
+          % (len(files), " (+%d CRLF normalized)" % len(normalized) if normalized else ""))
     return 0
 
 

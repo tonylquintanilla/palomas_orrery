@@ -219,11 +219,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*110 live items; 99 need attention (`!`); 109 RICE-scored; 66 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*112 live items; 101 need attention (`!`); 111 RICE-scored; 66 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-182 | Mars Hill sphere — cross-check correction lost across the config pipeline | PENDING-GATE | 12.0 | 2026-08-05 |
 | ! | L-181 | Single-source-of-truth constant layer for shell visualization | OPEN | 5.3 | 2026-08-04 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
@@ -231,7 +232,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
-| ! | L-178 | Earth shadow constants — EARTH_RADIUS_KM duplicate + mean vs equatorial mixing | OPEN | 1.8 | 2026-08-04 |
+| ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
+| ! | L-178 | Earth shadow constants — EARTH_RADIUS_KM duplicate + mean vs equatorial mixing | PENDING-GATE | 1.8 | 2026-08-05 |
 | ! | L-179 | Solar gravitational influence — 150,000 vs 126,000 AU mismatch | OPEN | 1.6 | 2026-08-04 |
 | ! | L-180 | Solar chromosphere — three inconsistent extents in one shell | OPEN | 1.3 | 2026-08-04 |
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
@@ -895,7 +897,7 @@ Perihelion is the project convention for Eris and Pluto.
 **Ref:** ASBUILT_geometry_and_br_fix.md, Batch 1 worksheets.
 
 #### [L-178] Earth shadow constants — EARTH_RADIUS_KM duplicate + mean vs equatorial mixing
-<!-- L:178 status:OPEN upd:2026-08-04 section:A flag: rice:3/3/40/2 -->
+<!-- L:178 status:PENDING-GATE upd:2026-08-05 section:A flag: rice:3/3/40/2 -->
 - Fable findings #33-36. `earth_visualization_shells.py` defines
   `EARTH_RADIUS_KM = 6371.0` twice (lines 907, 1019). This is the mean
   radius; constants_new.py has equatorial 6378.137 and polar 6356.752
@@ -907,8 +909,24 @@ Perihelion is the project convention for Eris and Pluto.
   text is missing the AU equivalent (standing convention gap).
 - No Shadow Constants gate (provenance-discipline v1.3) applies to the
   local EARTH_RADIUS_KM.
-**Gap:** Add mean radius to constants_new.py or switch to equatorial.
-Fix the GEO scatter comment. Add AU to GEO hover.
+**Note (2026-08-05):** Resolved without answering mean-vs-equatorial — the
+question is deleted rather than decided. Both local shadow constants are
+removed and the conversion goes directly through `KM_PER_AU`
+(`AU_PER_KM = 1.0 / KM_PER_AU`), correct regardless of which Earth radius
+anything else uses. Note the ledger title says "shadow constants" but the
+affected code is LEO/GEO band geometry; no umbra/penumbra geometry is
+involved, so no physics decision was needed. Verified: GEO belt
+42,212 -> 42,165 km (target 42,164); LEO band 6578/8380 -> 6571/8371 km,
+now matching its own declared LEO_LOW_KM / LEO_HIGH_KM constants, which it
+did not before.
+**Note:** GEO radial scatter left unchanged at ±0.0002 Earth radii
+(~1.3 km) — the comment claimed ~30 km and real station-keeping bands run
+to tens of km, so the comment was corrected to describe the code and the
+widening flagged in-code as a Mode 5 call for Tony.
+- Tony-action (do): run `patch_earth_L178.py`, push, then close.
+**Gap:** Patch built and smoke-tested; awaiting Tony's run and push.
+**Ref:** FABLE_shell_consistency_audit_report.md findings #33-37;
+patch_earth_L178.py; L-182 (same session).
 **Ref:** FABLE_shell_consistency_audit_report.md findings #33-37.
 
 #### [L-179] Solar gravitational influence — 150,000 vs 126,000 AU mismatch
@@ -954,6 +972,90 @@ Fix the GEO scatter comment. Add AU to GEO hover.
 Sequence migration per body.
 **Ref:** FABLE_shell_consistency_audit_report.md §2 (Job 2),
 migration status summary table.
+
+#### [L-182] Mars Hill sphere — cross-check correction lost across the config pipeline
+<!-- L:182 status:PENDING-GATE upd:2026-08-05 section:A flag: rice:3/4/100/1 -->
+- The Aug-1 Mars cross-check found `324.5 R_Mars` unsourceable and derived
+  ~1.084 Mkm (worksheet D2: "no page publishing a Mars Hill radius of 324.5
+  R_Mars"). `patch_mars_cross_check.py` corrected 5 sites but targeted
+  `mars_visualization_shells.py` ONLY — the correction never reached
+  `shell_configs.py`, so the live render kept 324.5 the whole time.
+- The Aug-4 Fable shell audit saw module=320 vs config=324.5 and read the
+  config as authoritative; the geometry prompt encoded that ("live config
+  already says 324.5"); the Aug-4 geometry patch then harmonized the module
+  UP to 324.5, erasing the last copies of the corrected value. Net effect:
+  the correction was removed from the codebase entirely, and the render was
+  never right at any commit.
+- At the pre-fix HEAD the module carried a two-leg `# Cross-checked:`
+  citation asserting ~320 R_Mars three lines above display text asserting
+  324.5 — a SOURCE_VS_VALUE contradiction created by the harmonization.
+- Resolved value: **319.2 R_Mars** = 1,084,000 km / 3,396.2 km equatorial
+  (Archinal et al. 2018, the project's `CENTER_BODY_RADII['Mars']`). The
+  worksheet's 319.8 is the same 1.084 Mkm over the volumetric mean radius
+  3,389.5 km; this project uses equatorial where oblateness matters.
+- Class: a Check All Parallel Pipelines failure (resident CRITICAL gate),
+  not a value error. Both patches touched one side of a two-copy pair — the
+  first fixed the module and missed the config, the second aligned the
+  module to the config that had never been fixed.
+**Note:** Surfaced by the Fable skills-layer review, which flagged the
+provenance-discipline worksheet example ("Hill sphere 324.5 should have
+been 320") as contradicting orrery-coding-conventions. Fable rated it HIGH
+and diagnosed it as a pending perihelion-vs-semi-major convention question;
+the worksheet showed the opposite — a settled correction silently reverted.
+The audit found the right contradiction from the skills alone and could not
+resolve its direction, because the cross-check worksheets were not in the
+audit prompt's Materials list. Include them next time.
+**Note:** Prevention candidates for Tony to weigh — (a) a cross-check patch
+must enumerate every consumer of a corrected value before delivery, the way
+the geometry follow-up now does; (b) a harmonize step must state WHICH copy
+is authoritative and cite the worksheet that makes it so, rather than
+inferring authority from which copy happens to be live.
+- Tony-action (do): run `patch_mars_hill_correction.py` and
+  `patch_shell_configs_mars_hill.py`, then push and record the SHA here.
+**Gap:** Patches built and smoke-tested (render moves 1,102,067 km ->
+1,084,067 km). Awaiting Tony's run and push; close on SHA record.
+**Ref:** worksheet_claude_mars_visualization.md D2;
+documentation/patch_mars_cross_check.py (module-only target);
+patch_mars_dead_copies.py (the reverting patch);
+FABLE_skills_layer_review_report.md Job 2 #8 / Job 3 #1; L-181.
+
+#### [L-183] Stars / stellar neighbourhood skill (coverage gap)
+<!-- L:183 status:OPEN upd:2026-08-05 section:A flag: rice:4/3/70/4 -->
+- Fable skills-layer review, Job 1 #1: the largest uncovered domain in the
+  project. ~22-24 modules with no owning skill — the acquisition ->
+  processing -> visualization chain for the stellar neighbourhood.
+- Scope as assessed: Gaia/Hipparcos catalog fetch and VOTable caching
+  (`data_acquisition*`, `data_processing`, `vot_cache_manager`), SIMBAD
+  query discipline (`simbad_manager`), the paired dual-mode pattern
+  (`hr_diagram_apparent_magnitude`/`_distance`,
+  `planetarium_apparent_magnitude`/`_distance` — one physics, two selection
+  modes), stellar parameter estimation and its hand-patch layer
+  (`stellar_parameters`, `stellar_data_patches`), Messier handling
+  (`messier_catalog`, `messier_object_data_handler`), exoplanet modules,
+  `star_notes`, `star_properties`, `star_sphere_builder`,
+  `star_visualization_gui`, `catalog_selection`, `sgr_a_star_data`.
+- The project already recognises the domain twice: provenance-discipline
+  defines a `stars` report domain, and a scanner-hardening episode exposed
+  a Tier-1 in `star_notes.py`. The existence of a hand-patch module
+  (`stellar_data_patches`) is itself an earned lesson with no written home.
+**Note:** Two scope decisions ride with the cut, and the new skill's
+frontmatter is where they get settled: where `sgr_a_*` belongs (6 modules,
+currently classified `orrery`), and where the shared
+`visualization_2d/3d/core/utils` modules belong. The prompt's seed list and
+the scanner's MODULE_DOMAIN_MAP disagree at exactly those edges.
+**Note:** Trigger cleanup travels with it — orrery-coding-conventions'
+description names `star_visualization_gui` but the skill holds no
+star-specific content, so a star-GUI session loads 343 lines and finds
+nothing for it while believing it fired the right skill (Fable Job 3 #4).
+Move the filename into the new skill's description when it lands.
+**Note:** Also noted by Fable: 19 root modules are unmapped in
+MODULE_DOMAIN_MAP and default to `orrery`, and 2 map entries point at files
+no longer in the root (`smoke_dipole_cone`, `smoke_rotation_axis`) — a
+small scanner-side cleanup that pairs naturally with this work.
+- Tony-action (decide): approve the scope boundary before the cut.
+**Gap:** Own design session. Not a bolt-on; the domain has its own
+acquisition and caching discipline.
+**Ref:** FABLE_skills_layer_review_report.md Job 1 #1, Job 3 #4.
 
 ## PENDING ACTION (Tony-side)
 
@@ -5821,6 +5923,28 @@ Manifest table between markers, same pattern as ledger_index.py; fires_when
 frontmatter field added to all 8 skills for editorial control of the manifest.
 Protocol header still reads v3.30; filename bumped to v3_31. Reviewed and
 built with Claude Opus 4.6.
+
+v3.32 (July 19-20, 2026): Two additions. (1) The anchor requirement
+generalized from handoffs to any document leaving a session -- audit
+prompts, review requests, relay manifests, as-builts -- each opens with
+"built on <SHA> at <URL>"; an un-anchored document is unverifiable by a
+receiving AI with no repo access of its own (Part 1 Key Principles, Part 3
+SHA Round Trip; line 326 corrected to match). (2) The Orrery and the
+Assembler added to Foundation, plus a matching quotable: the assembler
+inherits knowledge from the orrery, not machinery -- it exists to solve a
+problem the orrery never has -- surfaced via M2 Layer 2 live-Horizons
+testing (L-149, L-150, L-151). Corrected mid-push: ledger-and-session-
+records was already at 1.2 (July 19) when this version was drafted; the
+Skill Manifest table was still showing 1.0, and this entry's own first
+draft nearly re-generalized already-generalized content before the
+mismatch was caught (L-152, retroactive entry). Skill Manifest bumped to
+1.2/1.1/1.1 (ledger-and-session-records / provenance-discipline /
+gallery-cache-builder) to match actual repo state, and a new row added
+for gallery-assembler (L-151).
+
+v3.33 (July 30, 2026): The Register Rule added to Part 2. The protocol's compressed reference voice is distinguished from explanation voice — lead with the claim, one idea per sentence, no aphorisms in an explanation, gloss project terms on first use each session. Two yes-or-no checks before sending (does this paragraph do one job; does any sentence point at a label instead of saying the thing), with the test being "can Tony act on this without a follow-up question." Backstop: Tony says "opaque" at the point it fails, Claude rewrites that passage, and the miss is captured as a field note so it accumulates rather than repeating. Manifest table refreshed to 1.2/1.1/1.6.
+
+v3.34 (August 5, 2026): Two amendments, both from the Fable skills-layer review. (1) WHO TONY IS: the GitHub Desktop / Run-button preference is stated as a preference where practical, not a prohibition. The earlier "never the git command line" wording read as a ban and put the section in conflict with safe-file-editing's git apply delivery format (Fable Job 2 #16); Tony's ruling keeps the GUI as default and treats a terminal step as a fallback. The surviving obligation is unchanged: don't hand over an operation outside Tony's known working set without explaining what it does and what could go wrong. (2) Stale Skill = Stop [CRITICAL] added under the Skill Manifest. A skill lives in three stores — repo skills/, the account install Claude actually loads, and the generated manifest table. When a loaded skill's version disagrees with its manifest row, the session STOPS rather than proceeding and mentioning it later, and asks Tony to push to skills/ and reinstall in Settings. The prior wording asked only to "reconcile before trusting it," and the manifest still advertised 1.1/1.4 against an actual 1.2/1.6 for about three weeks with nothing surfacing it. Supporting change outside the protocol: skills_index.py now prints what the manifest was advertising before overwriting it, so running the tool reports drift instead of silently absorbing it; the prevention side is the binding rule in ledger-and-session-records v1.5.
 
 ### Preserved verbatim: v3.29 Technical lessons (now field notes in skills)
 

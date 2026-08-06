@@ -6,7 +6,7 @@ fires_when: Gallery Studio, json_converter, index.html viewer, gallery cards
 
 # Gallery Pipeline
 
-Skill version: 1.1 | Cut from tonyquintanilla.github.io @ 89c8bf30 (code)
+Skill version: 1.2 | Cut from tonyquintanilla.github.io @ 89c8bf30 (code)
 and palomas_orrery @ b29ad3f8 (context) | July 12, 2026
 Sources: gallery_studio.py, json_converter.py, index.html at HEAD;
 web_gallery_handoff.md (30+ sessions).
@@ -21,7 +21,7 @@ gallery/ holds the JSON files, gallery_metadata.json, gallery_config.json,
 and assets/ (KMZs). The orrery repo produces the raw Plotly HTML exports
 the pipeline consumes. Fixes routinely need BOTH repos checked (the
 parallel-pipelines gate): the same bug appears independently in Studio and
-the viewer. SHA-pin each repo separately in handoffs.
+the viewer. SHA-pin each repo separately in handoffs (master: ledger-and-session-records, Anchor Requirement).
 
 The nightly data-serving stack (tools/gallery_cache_builder.py,
 data/objects_config.json, data/solar-system/, and the future

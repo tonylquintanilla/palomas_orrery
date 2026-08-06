@@ -8,7 +8,7 @@ HOW TO RUN
     Save this file in the REPO ROOT (the folder with LEDGER_CONSOLIDATED.md), open it in VS Code, and click Run.
 
     All anchors are verified before anything is written; on failure
-    nothing is touched.
+    nothing is touched and the script says so plainly.
 
 AFTER RUNNING: run ledger_index.py to regenerate the index tables.
     Never hand-edit the INDEX zone.
@@ -16,6 +16,9 @@ AFTER RUNNING: run ledger_index.py to regenerate the index tables.
 
 import os
 import sys
+
+TARGET = None
+ENCODING_GATE = 'utf-8'
 
 EDITS = [
     ('LEDGER_CONSOLIDATED.md', 'LED-2', 'insert L-182 and L-183 blocks',
@@ -27,44 +30,64 @@ EDITS = [
 ]
 
 
+
 def main():
     root = os.path.dirname(os.path.abspath(__file__))
-    files = {}
-    for rel, eid, label, old, new in EDITS:
-        path = os.path.join(root, rel.replace('/', os.sep))
-        if rel not in files:
-            if not os.path.exists(path):
-                print("ERROR: %s not found. Check where you saved this script." % rel)
-                return 1
-            with open(path, 'rb') as f:
-                files[rel] = f.read()
-            if b'\r\n' in files[rel]:
-                print("ERROR: %s has CRLF line endings." % rel)
-                return 1
+    rels = []
+    for e in EDITS:
+        r = e[0] if len(e) == 5 else TARGET
+        if r not in rels:
+            rels.append(r)
 
-    for rel, eid, label, old, new in EDITS:
-        n = files[rel].count(old)
-        if n != 1:
-            print("ANCHOR FAIL: %s (%s) in %s matched %d, expected 1." % (eid, label, rel, n))
-            print("             Nothing written.")
+    files, normalized = {}, []
+    for rel in rels:
+        path = os.path.join(root, rel.replace('/', os.sep))
+        if not os.path.exists(path):
+            print("ERROR: %s not found. Save this script in the repo root.")
+            print("       NOTHING WAS WRITTEN.")
+            return 1
+        with open(path, 'rb') as f:
+            data = f.read()
+        if b'\r\n' in data:
+            n = data.count(b'\r\n')
+            data = data.replace(b'\r\n', b'\n')
+            normalized.append((rel, n))
+        files[rel] = data
+
+    for rel, n in normalized:
+        print("fix CRLF     %s: normalized %d line endings to LF" % (rel, n))
+
+    # Pass 1 -- verify every anchor before writing anything.
+    for e in EDITS:
+        rel, eid, label, old, new = e if len(e) == 5 else (TARGET,) + e
+        c = files[rel].count(old)
+        if c != 1:
+            print("ANCHOR FAIL: %s (%s) in %s matched %d, expected 1." % (eid, label, rel, c))
+            print("             NOTHING WAS WRITTEN. Every file is unchanged.")
+            print("             Fix the cause, then RE-RUN this script.")
             return 1
 
-    for rel, eid, label, old, new in EDITS:
+    # Pass 2 -- apply.
+    for e in EDITS:
+        rel, eid, label, old, new = e if len(e) == 5 else (TARGET,) + e
         files[rel] = files[rel].replace(old, new, 1)
-        print("ok  %-8s %s" % (eid, label))
+        print("ok  %-10s %s" % (eid, label))
 
     for rel, data in files.items():
         try:
-            data.decode('utf-8')
+            data.decode(ENCODING_GATE)
         except UnicodeDecodeError as exc:
-            print("ERROR: %s would not be valid UTF-8 (%s). Nothing written." % (rel, exc))
+            print("ERROR: %s would not be valid %s (%s)." % (rel, ENCODING_GATE, exc))
+            print("       NOTHING WAS WRITTEN. Every file is unchanged.")
             return 1
 
     for rel, data in files.items():
         with open(os.path.join(root, rel.replace('/', os.sep)), 'wb') as f:
             f.write(data)
+
     print("")
-    print("patch applied to %d file(s)" % len(files))
+    print("patch applied to %d file(s)%s"
+          % (len(files), " (+%d CRLF normalized)" % len(normalized) if normalized else ""))
     return 0
 
 

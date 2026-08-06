@@ -6,7 +6,7 @@ fires_when: Nightly builder, atomic swap, coverage_index, serving cache, objects
 
 # Gallery Cache Builder (Phase 1b data serving)
 
-Skill version: 1.1 | Cut from tonyquintanilla.github.io @ a08bdd10 (code) and palomas_orrery @ af58f7f8 (context) | 2026-07-12
+Skill version: 1.2 | Cut from tonyquintanilla.github.io @ a08bdd10 (code) and palomas_orrery @ 3398970 (context) | 2026-08-05
 
 The standalone nightly builder that fetches fresh JPL Horizons data and deploys
 the web gallery's served cache. A GALLERY-repo tool; this skill is authored in
@@ -76,7 +76,7 @@ Two dispositions, and the difference is load-bearing:
 - WARN AND KEEP, never reject: Guard v2 (guard_monitor / emit_guard_warnings,
   the per-object k*a(1+e) distance band). It is a MONITOR, not a gate.
 
-Field note: an inline comment near line 755 mislabels this as "guard/B3 WARN".
+Field note: an inline comment mislabels this as "guard/B3 WARN" (search for that string; it has drifted from line 755 to ~1099 and will move again).
 #B3 is an ABORT -- the code raises ValidationAbort. The module docstring is
 correct; the inline comment is stale (candidate cleanup, tracked separately).
 

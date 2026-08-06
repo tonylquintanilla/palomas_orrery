@@ -6,7 +6,7 @@ fires_when: BEFORE delivering complete files/agentic code; after data-content sw
 
 # Agentic Pre-Test Protocol [CRITICAL]
 
-Skill version: 1.1 | Cut from palomas_orrery @ e83fe9ce | 2026-07-12
+Skill version: 1.2 | Cut from palomas_orrery @ 3398970 | 2026-08-05
 Source: project_instructions_v3_29.md Part 3 (Agentic Pre-Test Protocol).
 Run before delivery. Catches runtime errors Tony would otherwise hit.
 Division of labor: Claude covers Syntax + Runtime; Tony covers Visual +
@@ -27,7 +27,7 @@ rm _pretest_throwaway.py
 ## [CRITICAL] Swap on a THROWAWAY copy; never restore-in-place
 
 The SystemButtonFace<->gray90 sed round trip is NOT idempotent:
-palomas_orrery.py contains 26 SystemButtonFace literals and 0 native
+palomas_orrery.py contains many SystemButtonFace literals and 0 native
 gray90, so the test swap yields gray90 literals indistinguishable from
 NATIVE gray90 -- which DOES exist in sibling GUI files
 (star_visualization_gui.py has 5, earth_system_visualization_gui.py has 3

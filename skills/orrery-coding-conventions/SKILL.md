@@ -6,7 +6,7 @@ fires_when: Markers, hover text, axes, shells, legendgroups, docstrings, new vis
 
 # Orrery Coding Conventions
 
-Skill version: 1.2 | Cut from palomas_orrery @ 1e60c783 | 2026-08-04
+Skill version: 1.3 | Cut from palomas_orrery @ 3398970 | 2026-08-05
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons.
 Criticality tiers ([CRITICAL]/[QUALITY]/[PRACTICE]) are defined in the
 resident protocol, Part 2.
@@ -133,7 +133,7 @@ Tooling: module_atlas.py generates MODULE_ATLAS.md; add_docstrings.py
 batch-inserts docstrings. MODULE_ATLAS.md is the prompt artifact -- current
 reference for codebase-aware sessions.
 
-## Barycenter Rule
+## Barycenter Rule [QUALITY]
 
 Barycenter visualization only when the barycenter lies outside the primary
 body. Mass ratio is the gatekeeper.
@@ -207,15 +207,29 @@ primary's GM. For non-binaries, use the body's JPL-published GM.
 
 **Distance convention -- intended, and NOT yet uniform in the code.** The
 intent is perihelion: closest approach to the parent, where the Hill sphere
-is smallest, giving the conservative bound. Measured against the coded
-`radius_fraction` values at `1e60c783`, the codebase actually splits:
+is smallest, giving the conservative bound. Re-measured 2026-08-05 with the
+Mars Hill correction applied (L-182; pushed SHA recorded there), reporting
+the deviation rather than a bucket -- a loose tolerance is what let Mars's
+unsourceable 324.5 read as "semi-major" for a version:
 
-| What the coded rf matches | Bodies |
-|---|---|
-| perihelion | Venus, Pluto, Eris |
-| semi-major axis | Mars, Jupiter, Uranus, Neptune |
-| aphelion | Saturn (also the Fable audit's worst finding) |
-| no convention within 3% | Mercury (rf 94.4; nearest is semi-major, off 4%) |
+| Body | coded rf | nearest convention | deviation |
+|---|---|---|---|
+| Venus | 166 | perihelion | +0.03% |
+| Mars | 319.2 | semi-major | +0.00% |
+| Neptune | 4685 | semi-major | -0.03% |
+| Pluto | 5041 | perihelion | +0.15% |
+| Jupiter | 740 | semi-major | -0.45% |
+| Uranus | 2770 | semi-major | +1.01% |
+| Eris | 6965 | perihelion | +1.39% |
+| Saturn | 1120 | aphelion | -1.73% |
+| **Mercury** | **94.4** | **none** | **+4.37% vs semi-major** |
+
+Read the deviation column, not just the label. Anything past ~0.5% is a
+near-miss, not a match: Saturn, Uranus and Eris sit far enough out that
+their labels are descriptive convenience, and Mercury's rf 94.4 matches no
+convention at all (perihelion 71.9, semi-major 90.5, aphelion 109.1) while
+its `# Source:` comment asserts the perihelion convention -- an open
+SOURCE_VS_VALUE conflict awaiting Batch 2.
 
 The perihelion convention holds for the bodies Batch 1 touched. It is an
 aspiration for the rest, not a description of them. **Do not "correct" a

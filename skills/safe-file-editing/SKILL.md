@@ -6,7 +6,7 @@ fires_when: Editing existing files, patch scripts, sed/regex edits, encoding che
 
 # Safe File Editing
 
-Skill version: 1.1 | Cut from palomas_orrery @ b29ad3f8 (v1.0), updated @
+Skill version: 1.2 | Cut from palomas_orrery @ 3398970 (v1.2), earlier @
 bdaaa0c (v1.1) | July 29, 2026
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;
 v1.1 adds the delivery-format convention from a same-day incident (a
@@ -85,9 +85,15 @@ git apply <path-to-file>.patch
 ```
 run from a terminal with the working directory set to the repo root the
 patch targets (or the correct subfolder, e.g. `tools\`, if the diff's
-paths are relative to one). Tony already has terminal access for this --
-no VS Code or GitHub Desktop needed, any Command Prompt/PowerShell cd'd
-into the right folder works.
+paths are relative to one).
+
+**Standing: the VS Code Run button is the preferred path where practical;
+a terminal step is a fallback, not forbidden** (Tony, 2026-08-05,
+resolving the conflict Fable flagged between this section and the resident
+protocol's WHO TONY IS). So prefer a runnable .py patch script over a
+.patch file when both would work. When a terminal step genuinely is the
+better tool, give the exact command and say what success and failure look
+like -- which is what the two bullets below do.
 - Success: **silence** -- `git apply` prints nothing when it works. This is
   the opposite signal from Format A; say so explicitly when handing over a
   `.patch` file, since silent success reads as "did nothing" otherwise.
@@ -101,6 +107,7 @@ test suite, a clean compile) does not confirm an earlier patch actually
 executed; each deliverable needs its own confirmed evidence.
 
 
+## Encoding Gate [QUALITY]
 
 LF line endings. ASCII only in delivered code -- no emoji, arrows, degree
 signs, or checkmarks (Windows cp1252 consoles mangle them).
