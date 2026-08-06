@@ -219,14 +219,16 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*110 live items; 99 need attention (`!`); 109 RICE-scored; 68 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*112 live items; 101 need attention (`!`); 111 RICE-scored; 68 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-181 | Single-source-of-truth constant layer for shell visualization | OPEN | 5.3 | 2026-08-04 |
+| ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
+| ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
+| ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-06 |
 | ! | L-176 | Shell hover text: add illustrated dimensions (radius_fraction → km) | OPEN | 2.8 | 2026-08-04 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
@@ -928,8 +930,8 @@ Perihelion is the project convention for Eris and Pluto.
 **Gap:** Reconcile text, add Show-the-Envelope comment.
 **Ref:** FABLE_shell_consistency_audit_report.md finding #31.
 
-#### [L-181] Single-source-of-truth constant layer for shell visualization
-<!-- L:181 status:OPEN upd:2026-08-04 section:A flag: rice:5/4/80/3 -->
+#### [L-181] Complete the single-source-of-truth constant layer
+<!-- L:181 status:OPEN upd:2026-08-06 section:A flag: rice:5/5/70/5 -->
 - Fable audit established the structural problem: up to six independent
   storage locations for one physical value (radius_fraction, hover_text,
   dead tooltip, module _info, CUSTOM_SHELLS tooltip, legacy inline
@@ -943,8 +945,58 @@ Perihelion is the project convention for Eris and Pluto.
 - 124 dead `tooltip` fields (83 sphere + 41 custom) are a
   delete-or-wire decision before migration.
 - Natural companion to L-176 (illustrated dimensions).
-**Gap:** Design the constant layer. Decide on dead tooltip fields.
-Sequence migration per body.
+- **REFRAMED 2026-08-06 (Tony's ruling).** This is not a NEW constant
+  layer; it is completion of the existing one. `constants_new.py`
+  already holds feature geometry (CHROMOSPHERE_RADII, INNER_CORONA_RADII,
+  OUTER_CORONA_RADII, ROCHE_LIMIT_RADII, ALFVEN_SURFACE_RADII,
+  TERMINATION_SHOCK_AU, HELIOPAUSE_RADII) and already handles nested
+  dicts with per-entry citations (CENTER_BODY_RADII,
+  KNOWN_ORBITAL_PERIODS). Solar shell geometry went into the store;
+  planetary ring geometry stayed inline in the rendering modules. There
+  is no principle behind which went where -- the split is historical.
+- **Scope widened to three layers.** (1) 37 feature entries move out of
+  `jupiter_`/`saturn_`/`uranus_`/`neptune_visualization_shells.py` into
+  `constants_new.py`. (2) Provenance migrates from `# Source:` comments
+  to `source` DATA fields, one pass, bounded to the store (36 citations
+  in constants_new.py plus what migrates in) -- required because a
+  comment cannot be read at runtime and Tony wants hover text to quote
+  its source for Mode 5 audit. The scanner's own docstring already lists
+  this as deferred fix item 6: extend SOURCE_PATTERNS to recognize
+  `'source': '...'`. (3) The exporter reads the store rather than four
+  shell modules -- which is also what makes it POSSIBLE, since reading
+  shell configs pulls Plotly and the constants store does not.
+- **Derivation, not annotation.** Every displayed number -- hover text,
+  descriptions, L-176's illustrated dimensions -- is interpolated from
+  the stored value at render time. Unification removes the duplicate
+  STORE; derivation removes the duplicate STATEMENT. Both are needed:
+  L-179 and L-180 are drift INSIDE constants_new.py today, which proves
+  one store does not by itself prevent drift.
+- **Cross-repo scope (new).** The gallery's `data/objects_config.json`
+  carries feature values, has ONE commit in its history, has no writer
+  anywhere in either repo, and has no per-value source fields. The
+  nightly builder refreshes positions from Horizons and copies features
+  verbatim (`features_out[slug] = feats`), so a green nightly build
+  never refreshes feature geometry and gives no signal that it did not.
+  Batch 2 is scheduled to move Saturn's values; nothing would carry the
+  correction across. Confirmed live: the 2026-08-06 nightly touched
+  vectors, elements and positions and did NOT touch objects_config.json
+  or feature_configs.json.
+- Tony-action (decide): push vs pull across the repo boundary -- handed
+  to Fable for review 2026-08-06. Every push variant that genuinely
+  detects staleness ends up making the same network call pull makes,
+  while still carrying a second copy on disk. A content hash recorded
+  beside its own artifact detects corruption, NOT staleness.
+- Tony-action (decide, settled): description interpolation ships in this
+  build, not as a follow-on. Tony's reasoning doubles as an acceptance
+  test -- "this should be minor if the architecture is right." A large
+  Mode 5 surface is evidence the architecture is wrong, not evidence the
+  scope was too big.
+**Gap:** Blocked on Fable architecture review (sent 2026-08-06). Then
+design the store format, decide on dead tooltip fields, sequence
+migration per body. L-184's build path cannot be defined until this
+settles.
+**Note:** Architecture comes before Batch 2 -- Tony's deliberate
+reversal of "clear all batches first," 2026-08-06.
 **Ref:** FABLE_shell_consistency_audit_report.md §2 (Job 2),
 migration status summary table.
 
@@ -981,10 +1033,96 @@ Move the filename into the new skill's description when it lands.
 MODULE_DOMAIN_MAP and default to `orrery`, and 2 map entries point at files
 no longer in the root (`smoke_dipole_cone`, `smoke_rotation_axis`) — a
 small scanner-side cleanup that pairs naturally with this work.
+DONE 2026-08-06: both stale entries removed and `orrery_rendering` /
+`shell_configs` mapped explicitly, in the Task 2a patch (L-184). The
+remaining unmapped-root-modules question still rides with this item.
 - Tony-action (decide): approve the scope boundary before the cut.
 **Gap:** Own design session. Not a bolt-on; the domain has its own
 acquisition and caching discipline.
 **Ref:** FABLE_skills_layer_review_report.md Job 1 #1, Job 3 #4.
+
+#### [L-184] Interactive build-path push gate
+<!-- L:184 status:OPEN upd:2026-08-06 section:A flag: rice:4/4/75/3 -->
+- Tony ratified 2026-08-05: the global "Tier-1 = 0" push gate becomes
+  "Tier-1 = 0 on the interactive build path" for this phase. The global
+  gate was unreachable in practice -- of 206 Tier-1 findings measured at
+  `4b82384`, 105 sit in the Earth System domain, a subsystem Artifact 2
+  never touches. A gate nobody can reach stops functioning as a gate.
+- Tony's correction to the original proposal, and the load-bearing part:
+  the gate is BUILT BEFORE the batches it scopes. Deferring the definition
+  of a gate to a later item is the same category error as deferring the
+  gate. This item therefore records work being done, not work deferred.
+- **Task 2a DONE (2026-08-06, local; push pending).** Console output now
+  prints the per-domain split under each tier line. MODULE_DOMAIN_MAP
+  gained explicit entries for `orrery_rendering` and `shell_configs` --
+  both carried findings with no entry and defaulted to `orrery`, and
+  `shell_configs.py` is the single most important file on the build path,
+  so an accidental default was the one case worth ruling out by hand. Two
+  stale entries removed (see L-183). Verified by live run: domain
+  coverage-gap note gone, totals unchanged at 877 / 118 files /
+  206-581-88-2.
+- **Task 2b RESHAPED, not yet built.** The original plan was to compute
+  build-path membership by walking the import graph from named orrery-side
+  entry points. Tracing at `24452442` found the premise wrong in three
+  ways: (1) the named entry points (`tools/gallery_cache_builder.py`,
+  `gallery_studio.py`, `json_converter.py`) live in the GALLERY repo, not
+  the orrery, and the scanner only scans the orrery; (2) the cache builder
+  imports nothing from the orrery at all -- its docstring states "No orrery
+  imports" as a design decision, so an import walk from it finds zero
+  orrery modules; (3) `gallery_studio.py` does import three orrery modules
+  (`info_dictionary`, `visualization_utils`, `celestial_objects`) but as
+  FUNCTION-LOCAL imports inside function bodies, which a header-only walk
+  misses entirely.
+- Artifact-2 path measured by named file at `4b82384`: shell_configs 23,
+  idealized_orbits 26, planet_visualization_utilities 4, saturn shells 1,
+  uranus shells 1, orrery_rendering 1, jupiter shells 0, neptune shells 0
+  -- 56 total. Two consequences: the gas giant shells are ALREADY nearly
+  clean (2 Tier-1 across all four), so Batch 2's job on those files is
+  value verification rather than Tier-1 clearance; and Artifact 2 is not
+  blocked by scanner debt in the shells themselves.
+- Tony-action (decide): entry points for the computed path, once the
+  L-181 architecture settles. The two questions are now coupled.
+**Gap:** 2b blocked on the L-181 architecture review (Fable, sent
+2026-08-06). The build path cannot be defined until the cross-repo data
+flow is decided.
+**Ref:** HANDOFF_next_session_masterplan_v16.md Task 2;
+MASTER_PLAN_INTERACTIVE_GALLERY.md v16, *New in v16* block.
+
+#### [L-185] Source discipline for the assembler's own constants
+<!-- L:185 status:OPEN upd:2026-08-06 section:A flag: rice:3/3/90/1 -->
+- Tony's ruling, 2026-08-06: the same source discipline applies to the
+  assembler's constants even though there are only a few.
+- The assembler reads DATA (positions, elements, feature configs) from the
+  served cache and authors none of it -- that model is correct. But it also
+  performs arithmetic (client-side Kepler propagation, km-to-AU
+  conversion), and arithmetic needs constants that arrive in no cache file.
+- Uncited at gallery `e7e8c5e`: `AU_KM = 149597870.7` in
+  `gallery/assembler/render_orbits.py:41`,
+  `gallery/assembler/render_objects.py:20`, and
+  `gallery/assembler/tests/test_artifact1_earth.py:43`;
+  `K_GAUSS = 0.01720209895` in `render_orbits.py:42`;
+  `_JD_UNIX_EPOCH = 2440587.5` in `tools/inspect_staging.py:63`.
+  Total `# Source:` citations in the whole gallery repo: 4.
+- The correct pattern already exists at `tools/gallery_cache_builder.py:89`
+  -- a cross-repo citation naming file, line, and source SHA:
+  `# Source: constants_new.py:47 (orrery 4e2629c) -- IAU km per AU.`
+  Apply that shape to the five uncited lines.
+- Reasoning error worth recording, because it generalizes: an earlier draft
+  dismissed these as low-value because the values are exact by definition
+  and will never drift. That substitutes "will this drift?" for "is this a
+  claim?" Stability makes a value EASY to source, not exempt from sourcing.
+  A reader meeting an uncited number cannot tell a deliberate skip from an
+  unchecked one. Call it skip-because-stable; it is cite-to-clear pointed
+  the other way.
+- Not evidence on the push/pull fork. These values do not drift, and an
+  earlier draft leaned on them there incorrectly.
+- `No Shadow Constants` [CRITICAL] normally prescribes deleting the local
+  copy and importing the real one. That remedy is UNAVAILABLE across the
+  repo boundary while self-containment is preserved, which is the one place
+  these constants touch L-181's architecture question.
+**Gap:** Five lines. Can ship independently of L-181; should not wait on a
+structural build.
+**Ref:** PREDESIGN_HANDOFF_feature_constant_unification.md, Open Question 4.
 
 ## PENDING ACTION (Tony-side)
 
