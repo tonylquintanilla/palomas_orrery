@@ -293,6 +293,12 @@ scoring V_RECALLED. Strictly narrowest-block containment; an uncited block
 inherits nothing, which is what keeps the genuinely uncited blocks tracked
 as L-173 visible).
 
+Module updated: August 2026 with Anthropic's Claude Opus 5 (Task 2a:
+per-domain split printed under each console tier line;
+MODULE_DOMAIN_MAP entries added for orrery_rendering and shell_configs,
+and two entries removed for smoke_* files no longer in the repo.
+Report-only grouping -- no scanning or scoring behaviour changed).
+
 Role: devtool
 Domain: dev_tools
 """
@@ -467,6 +473,12 @@ MODULE_DOMAIN_MAP = {
     'celestial_objects': 'orrery',
     'idealized_orbits': 'orrery',
     'solar_visualization_shells': 'orrery',
+    # Added August 2026 (Task 2a): both carried findings with no
+    # entry and defaulted to 'orrery' via the coverage-gap path.
+    # shell_configs is on the interactive build path, so an
+    # accidental default is the one case worth ruling out by hand.
+    'orrery_rendering': 'orrery',
+    'shell_configs': 'orrery',
     'constants_new': 'orrery',
     'neptune_visualization_shells': 'orrery',
     'uranus_visualization_shells': 'orrery',
@@ -561,8 +573,6 @@ MODULE_DOMAIN_MAP = {
     'module_atlas': 'dev_tools',
     'add_docstrings': 'dev_tools',
     'data_inventory': 'dev_tools',
-    'smoke_dipole_cone': 'dev_tools',
-    'smoke_rotation_axis': 'dev_tools',
     'test_reset_completeness': 'dev_tools',
     'test_constants_provenance': 'dev_tools',
     'test_orbit_cache': 'dev_tools',
@@ -2899,11 +2909,26 @@ def generate_report(units, consistent_dups, inconsistencies,
     print(f"Audit written to {output_path}")
     print(f"  {len(scored)} findings across {files_scanned} files")
     print()
+    # Task 2a: the audit already carries a full "Findings by File
+    # Type" table. This surfaces the same rollup on the console,
+    # where the push-gate call actually gets made. Domain stays a
+    # report-only grouping -- nothing here affects scanning or
+    # scoring.
+    domain_by_tier = defaultdict(lambda: defaultdict(int))
+    for u in scored:
+        stem = u.file[:-3] if u.file.endswith('.py') else u.file
+        dom, _mapped = classify_domain(stem)
+        domain_by_tier[action_tier(u.score)][dom] += 1
+
     print("Priority summary:")
     for tier in [1, 2, 3, 4]:
         score_range, action = tier_labels[tier]
         count = tier_counts.get(tier, 0)
         print(f"  Tier {tier} ({score_range}): {count:5d} findings -- {action}")
+        split = domain_by_tier.get(tier, {})
+        for dom, n in sorted(split.items(),
+                             key=lambda kv: (-kv[1], kv[0])):
+            print(f"      {dom:<16s}{n:5d}")
 
     # 1e piece 1: Tier-1 banner. INFORMATIONAL ONLY.
     #
