@@ -219,12 +219,11 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*112 live items; 101 need attention (`!`); 111 RICE-scored; 66 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*110 live items; 99 need attention (`!`); 109 RICE-scored; 68 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-182 | Mars Hill sphere — cross-check correction lost across the config pipeline | PENDING-GATE | 12.0 | 2026-08-05 |
 | ! | L-181 | Single-source-of-truth constant layer for shell visualization | OPEN | 5.3 | 2026-08-04 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
@@ -233,7 +232,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
-| ! | L-178 | Earth shadow constants — EARTH_RADIUS_KM duplicate + mean vs equatorial mixing | PENDING-GATE | 1.8 | 2026-08-05 |
 | ! | L-179 | Solar gravitational influence — 150,000 vs 126,000 AU mismatch | OPEN | 1.6 | 2026-08-04 |
 | ! | L-180 | Solar chromosphere — three inconsistent extents in one shell | OPEN | 1.3 | 2026-08-04 |
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
@@ -411,6 +409,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |:---:|----|------|-------------|:-----:|---------|
 |  | L-117 | Offline suite red at HEAD: Encke id drift (2P -> 90000091) not mirrored in the mock | DONE | 34.2 | 2026-07-12 |
 |  | L-114 | objects_config.json stranded by the atomic swap; also blocks crash-recovery (gallery builder) | DONE | 16.2 | 2026-07-27 |
+|  | L-182 | Mars Hill sphere — cross-check correction lost across the config pipeline | DONE | 12.0 | 2026-08-05 |
 |  | L-003 | Protocol amendment candidates (for v3.29) | DONE | 5.4 | 2026-06-22 |
 |  | L-062 | README refresh -- fold in handoff + ledger developments | DONE | 5.1 | 2026-07-28 |
 |  | L-153 | Restore "Who Tony Is" framing into resident protocol (protocol) | DONE | 5.1 | 2026-07-21 |
@@ -432,6 +431,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-072 | Gallery Studio WYSIWYG preview -- render through the real index.html viewer | DONE | 2.0 | 2026-06-26 |
 |  | L-169 | Gallery/Studio track -- repo structure reference | DONE | 1.9 | 2026-07-28 |
 |  | L-108 | Master plan v10 -> v11: Phase 1b fetch-fresh pivot reconciliation | DONE | 1.8 | 2026-07-12 |
+|  | L-178 | Earth shadow constants — EARTH_RADIUS_KM duplicate + mean vs equatorial mixing | DONE | 1.8 | 2026-08-05 |
 |  | L-002 | Protocol -> Skills refactor (process/tooling) | DONE | 1.5 | 2026-07-04 |
 |  | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | DONE | 1.5 | 2026-06-23 |
 |  | L-147 | Embed dashboard launcher in orrery GUI third column | DONE | 1.5 | 2026-07-17 |
@@ -875,6 +875,14 @@ skill (comet record pinning).
 - Natural companion to the single-source-of-truth constant layer
   (L-181): once constants are defined, the illustrated-dimension text
   can reference them.
+**Note (2026-08-05):** Scope boundary, so the item is not oversold later.
+Illustrated dimensions catch CONSTANT-VS-TEXT drift -- the Batch 1 class,
+where Mercury's rf 0.85 drew 2,074 km under text claiming 2,020. They do
+NOT catch a value that is internally consistent but unsourced: Mars's Hill
+sphere drew exactly the 324.5 R_Mars its text claimed, and both were wrong
+(L-182). Drift is visible in the render; wrong-but-consistent needs the
+provenance cross-check. The two mechanisms are complementary, not
+substitutes.
 **Gap:** Design the text format, decide whether to include the physical
 value alongside the illustrated value for stylized shells. Build after
 L-181 constant layer or in parallel.
@@ -895,39 +903,6 @@ L-156 Phase 2.
 **Gap:** Tony decision: perihelion (71.85) or semi-major (90.45)?
 Perihelion is the project convention for Eris and Pluto.
 **Ref:** ASBUILT_geometry_and_br_fix.md, Batch 1 worksheets.
-
-#### [L-178] Earth shadow constants — EARTH_RADIUS_KM duplicate + mean vs equatorial mixing
-<!-- L:178 status:PENDING-GATE upd:2026-08-05 section:A flag: rice:3/3/40/2 -->
-- Fable findings #33-36. `earth_visualization_shells.py` defines
-  `EARTH_RADIUS_KM = 6371.0` twice (lines 907, 1019). This is the mean
-  radius; constants_new.py has equatorial 6378.137 and polar 6356.752
-  but no mean radius. The derivation of AU_PER_KM mixes the
-  equatorial-based EARTH_RADIUS_AU with the mean 6371 denominator —
-  a built-in ~0.11% error.
-- Also: GEO scatter comment claims "±0.0002 AU (~30 km at GEO)" but the
-  code computes ±0.0002 × EARTH_RADIUS_AU ≈ ±1.3 km. And GEO hover
-  text is missing the AU equivalent (standing convention gap).
-- No Shadow Constants gate (provenance-discipline v1.3) applies to the
-  local EARTH_RADIUS_KM.
-**Note (2026-08-05):** Resolved without answering mean-vs-equatorial — the
-question is deleted rather than decided. Both local shadow constants are
-removed and the conversion goes directly through `KM_PER_AU`
-(`AU_PER_KM = 1.0 / KM_PER_AU`), correct regardless of which Earth radius
-anything else uses. Note the ledger title says "shadow constants" but the
-affected code is LEO/GEO band geometry; no umbra/penumbra geometry is
-involved, so no physics decision was needed. Verified: GEO belt
-42,212 -> 42,165 km (target 42,164); LEO band 6578/8380 -> 6571/8371 km,
-now matching its own declared LEO_LOW_KM / LEO_HIGH_KM constants, which it
-did not before.
-**Note:** GEO radial scatter left unchanged at ±0.0002 Earth radii
-(~1.3 km) — the comment claimed ~30 km and real station-keeping bands run
-to tens of km, so the comment was corrected to describe the code and the
-widening flagged in-code as a Mode 5 call for Tony.
-- Tony-action (do): run `patch_earth_L178.py`, push, then close.
-**Gap:** Patch built and smoke-tested; awaiting Tony's run and push.
-**Ref:** FABLE_shell_consistency_audit_report.md findings #33-37;
-patch_earth_L178.py; L-182 (same session).
-**Ref:** FABLE_shell_consistency_audit_report.md findings #33-37.
 
 #### [L-179] Solar gravitational influence — 150,000 vs 126,000 AU mismatch
 <!-- L:179 status:OPEN upd:2026-08-04 section:A flag: rice:4/3/40/3 -->
@@ -972,52 +947,6 @@ patch_earth_L178.py; L-182 (same session).
 Sequence migration per body.
 **Ref:** FABLE_shell_consistency_audit_report.md §2 (Job 2),
 migration status summary table.
-
-#### [L-182] Mars Hill sphere — cross-check correction lost across the config pipeline
-<!-- L:182 status:PENDING-GATE upd:2026-08-05 section:A flag: rice:3/4/100/1 -->
-- The Aug-1 Mars cross-check found `324.5 R_Mars` unsourceable and derived
-  ~1.084 Mkm (worksheet D2: "no page publishing a Mars Hill radius of 324.5
-  R_Mars"). `patch_mars_cross_check.py` corrected 5 sites but targeted
-  `mars_visualization_shells.py` ONLY — the correction never reached
-  `shell_configs.py`, so the live render kept 324.5 the whole time.
-- The Aug-4 Fable shell audit saw module=320 vs config=324.5 and read the
-  config as authoritative; the geometry prompt encoded that ("live config
-  already says 324.5"); the Aug-4 geometry patch then harmonized the module
-  UP to 324.5, erasing the last copies of the corrected value. Net effect:
-  the correction was removed from the codebase entirely, and the render was
-  never right at any commit.
-- At the pre-fix HEAD the module carried a two-leg `# Cross-checked:`
-  citation asserting ~320 R_Mars three lines above display text asserting
-  324.5 — a SOURCE_VS_VALUE contradiction created by the harmonization.
-- Resolved value: **319.2 R_Mars** = 1,084,000 km / 3,396.2 km equatorial
-  (Archinal et al. 2018, the project's `CENTER_BODY_RADII['Mars']`). The
-  worksheet's 319.8 is the same 1.084 Mkm over the volumetric mean radius
-  3,389.5 km; this project uses equatorial where oblateness matters.
-- Class: a Check All Parallel Pipelines failure (resident CRITICAL gate),
-  not a value error. Both patches touched one side of a two-copy pair — the
-  first fixed the module and missed the config, the second aligned the
-  module to the config that had never been fixed.
-**Note:** Surfaced by the Fable skills-layer review, which flagged the
-provenance-discipline worksheet example ("Hill sphere 324.5 should have
-been 320") as contradicting orrery-coding-conventions. Fable rated it HIGH
-and diagnosed it as a pending perihelion-vs-semi-major convention question;
-the worksheet showed the opposite — a settled correction silently reverted.
-The audit found the right contradiction from the skills alone and could not
-resolve its direction, because the cross-check worksheets were not in the
-audit prompt's Materials list. Include them next time.
-**Note:** Prevention candidates for Tony to weigh — (a) a cross-check patch
-must enumerate every consumer of a corrected value before delivery, the way
-the geometry follow-up now does; (b) a harmonize step must state WHICH copy
-is authoritative and cite the worksheet that makes it so, rather than
-inferring authority from which copy happens to be live.
-- Tony-action (do): run `patch_mars_hill_correction.py` and
-  `patch_shell_configs_mars_hill.py`, then push and record the SHA here.
-**Gap:** Patches built and smoke-tested (render moves 1,102,067 km ->
-1,084,067 km). Awaiting Tony's run and push; close on SHA record.
-**Ref:** worksheet_claude_mars_visualization.md D2;
-documentation/patch_mars_cross_check.py (module-only target);
-patch_mars_dead_copies.py (the reverting patch);
-FABLE_skills_layer_review_report.md Job 2 #8 / Job 3 #1; L-181.
 
 #### [L-183] Stars / stellar neighbourhood skill (coverage gap)
 <!-- L:183 status:OPEN upd:2026-08-05 section:A flag: rice:4/3/70/4 -->
@@ -2884,6 +2813,91 @@ build. Sequence relative to L-154 (feature JS layer) is Tony's call.
 **Ref:** L-118/L-149 (F1a, closed), L-150, L-126, L-080 (fingerprint),
 M2_IMPLEMENTATION_REPORT.md, FABLE_PROMPT_served_window_trust_bound_v0_1.md
 and its response (July 2026 relay); resolver.py resolve() (~91-106).
+
+#### [L-178] Earth shadow constants — EARTH_RADIUS_KM duplicate + mean vs equatorial mixing
+<!-- L:178 status:DONE upd:2026-08-05 section:C flag: rice:3/3/40/2 -->
+- Fable findings #33-36. `earth_visualization_shells.py` defines
+  `EARTH_RADIUS_KM = 6371.0` twice (lines 907, 1019). This is the mean
+  radius; constants_new.py has equatorial 6378.137 and polar 6356.752
+  but no mean radius. The derivation of AU_PER_KM mixes the
+  equatorial-based EARTH_RADIUS_AU with the mean 6371 denominator —
+  a built-in ~0.11% error.
+- Also: GEO scatter comment claims "±0.0002 AU (~30 km at GEO)" but the
+  code computes ±0.0002 × EARTH_RADIUS_AU ≈ ±1.3 km. And GEO hover
+  text is missing the AU equivalent (standing convention gap).
+- No Shadow Constants gate (provenance-discipline v1.3) applies to the
+  local EARTH_RADIUS_KM.
+**Note (2026-08-05):** Resolved without answering mean-vs-equatorial — the
+question is deleted rather than decided. Both local shadow constants are
+removed and the conversion goes directly through `KM_PER_AU`
+(`AU_PER_KM = 1.0 / KM_PER_AU`), correct regardless of which Earth radius
+anything else uses. Note the ledger title says "shadow constants" but the
+affected code is LEO/GEO band geometry; no umbra/penumbra geometry is
+involved, so no physics decision was needed. Verified: GEO belt
+42,212 -> 42,165 km (target 42,164); LEO band 6578/8380 -> 6571/8371 km,
+now matching its own declared LEO_LOW_KM / LEO_HIGH_KM constants, which it
+did not before.
+**Note:** GEO radial scatter left unchanged at ±0.0002 Earth radii
+(~1.3 km) — the comment claimed ~30 km and real station-keeping bands run
+to tens of km, so the comment was corrected to describe the code and the
+widening flagged in-code as a Mode 5 call for Tony.
+- Tony-action (do): run `patch_earth_L178.py`, push, then close.
+**Closed 2026-08-05 at `06daa8b825c93d8968a46a1edb2f5083610ef665`.** Patch
+run and pushed; Mode 5 confirmed by Tony -- GEO hover reads 42,164 km /
+0.000282 AU and the LEO band sits on its declared 200/2000 km altitude
+bounds. Shadow constants removed; mean-vs-equatorial no longer arises here.
+[verified @06daa8b]
+**Ref:** FABLE_shell_consistency_audit_report.md findings #33-37;
+patch_earth_L178.py; L-182 (same session).
+**Ref:** FABLE_shell_consistency_audit_report.md findings #33-37.
+
+#### [L-182] Mars Hill sphere — cross-check correction lost across the config pipeline
+<!-- L:182 status:DONE upd:2026-08-05 section:C flag: rice:3/4/100/1 -->
+- The Aug-1 Mars cross-check found `324.5 R_Mars` unsourceable and derived
+  ~1.084 Mkm (worksheet D2: "no page publishing a Mars Hill radius of 324.5
+  R_Mars"). `patch_mars_cross_check.py` corrected 5 sites but targeted
+  `mars_visualization_shells.py` ONLY — the correction never reached
+  `shell_configs.py`, so the live render kept 324.5 the whole time.
+- The Aug-4 Fable shell audit saw module=320 vs config=324.5 and read the
+  config as authoritative; the geometry prompt encoded that ("live config
+  already says 324.5"); the Aug-4 geometry patch then harmonized the module
+  UP to 324.5, erasing the last copies of the corrected value. Net effect:
+  the correction was removed from the codebase entirely, and the render was
+  never right at any commit.
+- At the pre-fix HEAD the module carried a two-leg `# Cross-checked:`
+  citation asserting ~320 R_Mars three lines above display text asserting
+  324.5 — a SOURCE_VS_VALUE contradiction created by the harmonization.
+- Resolved value: **319.2 R_Mars** = 1,084,000 km / 3,396.2 km equatorial
+  (Archinal et al. 2018, the project's `CENTER_BODY_RADII['Mars']`). The
+  worksheet's 319.8 is the same 1.084 Mkm over the volumetric mean radius
+  3,389.5 km; this project uses equatorial where oblateness matters.
+- Class: a Check All Parallel Pipelines failure (resident CRITICAL gate),
+  not a value error. Both patches touched one side of a two-copy pair — the
+  first fixed the module and missed the config, the second aligned the
+  module to the config that had never been fixed.
+**Note:** Surfaced by the Fable skills-layer review, which flagged the
+provenance-discipline worksheet example ("Hill sphere 324.5 should have
+been 320") as contradicting orrery-coding-conventions. Fable rated it HIGH
+and diagnosed it as a pending perihelion-vs-semi-major convention question;
+the worksheet showed the opposite — a settled correction silently reverted.
+The audit found the right contradiction from the skills alone and could not
+resolve its direction, because the cross-check worksheets were not in the
+audit prompt's Materials list. Include them next time.
+**Note:** Prevention candidates for Tony to weigh — (a) a cross-check patch
+must enumerate every consumer of a corrected value before delivery, the way
+the geometry follow-up now does; (b) a harmonize step must state WHICH copy
+is authoritative and cite the worksheet that makes it so, rather than
+inferring authority from which copy happens to be live.
+- Tony-action (do): run `patch_mars_hill_correction.py` and
+  `patch_shell_configs_mars_hill.py`, then push and record the SHA here.
+**Closed 2026-08-05 at `06daa8b825c93d8968a46a1edb2f5083610ef665`.** Both
+patches run and pushed; Mode 5 confirmed by Tony -- the Mars Hill shell is
+visibly smaller and the hover reads 1.08 Mkm. Every live and dead copy now
+reads 319.2 R_Mars. [verified @06daa8b]
+**Ref:** worksheet_claude_mars_visualization.md D2;
+documentation/patch_mars_cross_check.py (module-only target);
+patch_mars_dead_copies.py (the reverting patch);
+FABLE_skills_layer_review_report.md Job 2 #8 / Job 3 #1; L-181.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
