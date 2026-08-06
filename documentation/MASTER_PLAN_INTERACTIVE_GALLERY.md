@@ -1,6 +1,6 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** v15 -- Phase 2 (solar system assembler) BUILD UNDERWAY. Design
+**Status:** v16 -- Phase 2 (solar system assembler) BUILD UNDERWAY. Design
 handoff v0.1 -> v0.3 resolved every open question (Pluto/Charon composition,
 Apophis close-encounter scope, OQ-4/closeup-shape routing). Competitive
 manifest cross-check (Fable + GPT independent builds) completed two rounds
@@ -45,12 +45,12 @@ has a known intermittent failure under the scheduler's execution context
 fully hands-off.
 **Base:** orrery @ `c10a424`, gallery @ `e864fd42` (design ratified here;
 Artifact 1 built+pushed at orrery `6fc52b9a` / gallery `f89d83c4`; current
-HEAD orrery `17913aef` / gallery `22c947c9` -- F1a (M2) fully closed: L-149
+HEAD orrery `4b82384e` / gallery `e7e8c5ef` -- F1a (M2) fully closed: L-149
 and L-118 both DONE, Layer 2 Steps 1-5 passed live; Layer 3 enabled with a
 known open issue; L-150 (multi-orbit binaries) and L-151 (gallery-assembler
 skill) still decided, not yet built)
 **Date begun:** July 3, 2026
-**Last updated:** August 4, 2026
+**Last updated:** August 5, 2026
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
 Claude Opus 5, Claude Fable 5, Claude Sonnet 5, GPT
 
@@ -915,6 +915,9 @@ extraction for 15 of 18 bodies.
 ✓ Design CLOSED, ✓ ledger formalization CLOSED, ✓ scanner Phase 1
 (1a-1f) COMPLETE, ✓ Phase 2 Piece 1 (D4 mechanism) COMPLETE,
 ✓ Phase 2 Track 1 Batch 1 COMPLETE, ○ Phase 2 Track 1 Batch 2 NEXT.
+Batch 2 is now the stated gate before Artifact 2 (Tony, 2026-08-05):
+all provenance batches clear before the Jupiter/Saturn artifact
+proceeds.
 Originally surfaced while scoping L-154's feature-rendering JS layer,
 and still gates it. Design by Fable 5, reviewed by Sonnet 5;
 broad-review by Fable 5 (2026-07-26). All nine items have their own
@@ -949,6 +952,36 @@ built geometry + text patches (47 edits, 7 scripts). Provenance-neutral
 (Tier 1: 207 -> 207). New structural items opened: L-176 (illustrated
 dimensions), L-177 (Mercury Hill sphere convention), L-178-180
 (Earth/solar), L-181 (single-source-of-truth constant layer).
+
+August 4-5 cycle (Claude Opus 5 orchestration + Fable 5 skills-layer
+review; landed at `2becfbf`, recorded here at `4b82384`): two ledger
+items closed and the record layer brought current. L-182 -- the Mars
+Hill sphere corrected to 319.2 R_Mars across all seven copies, module
+and live config alike, Mode 5 confirmed. L-178 -- both EARTH_RADIUS_KM
+shadow constants removed from `earth_visualization_shells.py`, so the
+conversion now runs straight through KM_PER_AU; the GEO belt moved
+42,212 -> 42,165 km and the LEO band now renders on its own declared
+200/2000 km bounds. (The ledger title says "shadow constants" but the
+affected code is LEO/GEO band geometry -- no umbra is involved.)
+Protocol v3.34 ratified, with two amendments: the GitHub Desktop /
+Run-button preference restated as a preference where practical rather
+than a prohibition, and Stale Skill = Stop [CRITICAL] added, halting a
+session outright when a loaded skill's version disagrees with its
+manifest row. All ten skills bumped and reconciled across their three
+stores (repo `skills/`, the generated manifest table, the account
+install), with `skills_index.py` now printing what the manifest was
+advertising before it overwrites it. Ledger appendix caught up with the
+v3.32, v3.33 and v3.34 entries, having stopped at v3.31.
+
+L-182 names a failure class worth carrying forward: a correction that
+reaches one copy of a two-copy pair is WORSE than no correction at all.
+The August 1 cross-check derived the right Mars value, but its patch
+targeted the shell module only; `shell_configs.py` never received it,
+and the August 4 consistency pass then harmonized the module UP toward
+the uncorrected copy, erasing the fix entirely. The rule that follows:
+enumerate every consumer in the same patch, and state which copy is
+authoritative AND why, citing the worksheet -- never infer authority
+from which copy happens to be live.
 
 Cross-check methodology updated: the competitive pattern (same worksheet
 to two models independently, Tony compares) replaces the earlier
@@ -1467,6 +1500,69 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
   the structural fix for the dual-pipeline drift the audit surfaced).
 - Scanner state: Tier 1 207 -> 207 (provenance-neutral). Batch 2 (gas
   giants) is next, directly unblocking Artifact 2.
+- Re-measured at `4b82384` on 2026-08-05 by a live scanner run, not
+  carried: 877 findings across 118 files -- Tier 1 206, Tier 2 581,
+  Tier 3 88, Tier 4 2. The 207/580/117 figures above were measured
+  before the August 4-5 patches landed; one finding moved Tier 1 ->
+  Tier 2. Recorded as a reminder that a number quoted in a handoff
+  can predate that handoff's own anchor.
+
+*New in v16 (August 5, 2026):*
+- L-178 and L-182 CLOSED, both Mode 5 confirmed by Tony. Mars Hill
+  sphere corrected to 319.2 R_Mars across all seven copies (L-182);
+  Earth LEO/GEO band geometry freed of its two duplicate
+  EARTH_RADIUS_KM shadow constants (L-178).
+- New failure class recorded (see §6): a correction reaching one copy
+  of a two-copy pair is worse than no correction, because the next
+  consistency pass harmonizes toward the uncorrected copy.
+- Protocol v3.34 plus the ten-skill reconciliation across three stores.
+  Amendments: the git-GUI preference ruling, and Stale Skill = Stop
+  [CRITICAL].
+- **The push gate changes for this phase (Tony ratified 2026-08-05).**
+  "Tier-1 = 0" becomes **"Tier-1 = 0 on the interactive build path."**
+  The global gate was unreachable in practice: of 206 Tier-1 findings
+  measured at `4b82384`, 105 sit in the Earth System domain, a
+  subsystem Artifact 2 never touches. A gate nobody can reach stops
+  functioning as a gate. The path is NAMED explicitly and COMPUTED
+  rather than listed -- build-path membership is derived by walking the
+  import graph from a small set of declared orrery-side entry points,
+  which `dep_trace.py` already does, because a third hand-maintained
+  module map would be a third store that drifts. The Earth System
+  remainder gets its own L-item and its own schedule; deferring it does
+  not endanger the interactive build.
+- The gate is built BEFORE the batches it scopes (Tony's correction,
+  2026-08-05). Deferring the definition of a gate to a later L-item is
+  the same category error as deferring the gate.
+- Scanner re-measured at `4b82384` by a live run, not carried: 877
+  findings across 118 files -- Tier 1 206, Tier 2 581, Tier 3 88,
+  Tier 4 2. Domain split of Tier 1: Earth System 105, orrery 91,
+  stars 9, utilities 1, dev tools 0, gallery 0.
+- Artifact-2 path measurement at the same SHA, per file:
+  `shell_configs.py` 23 Tier-1, `idealized_orbits.py` 26,
+  `planet_visualization_utilities.py` 4,
+  `saturn_visualization_shells.py` 1,
+  `uranus_visualization_shells.py` 1, `orrery_rendering.py` 1,
+  `jupiter_visualization_shells.py` 0,
+  `neptune_visualization_shells.py` 0 -- 56 across the named files.
+  Two consequences worth stating plainly: the gas giant shells are
+  ALREADY nearly clean, so Batch 2's job on those four files is VALUE
+  VERIFICATION rather than Tier-1 clearance; and Artifact 2 is
+  therefore not blocked by scanner debt in the shells themselves.
+- Batch 2 (gas giants) is the stated gate before Artifact 2 -- all
+  provenance batches clear first (Tony, 2026-08-05).
+- L-176 scope boundary recorded so the item is not oversold later:
+  illustrated dimensions catch CONSTANT-VS-TEXT drift, not values that
+  are internally consistent but wrong. Mars drew exactly the 324.5
+  R_Mars its text claimed, and both were wrong. Complementary to the
+  provenance cross-check, not a substitute for it.
+- Domain coverage gap confirmed live: `orrery_rendering.py` and
+  `shell_configs.py` carry findings but have no MODULE_DOMAIN_MAP entry
+  and silently default to `orrery`. Both are on the Artifact-2 path, so
+  the single most important file in the gate would otherwise land in
+  the pile by accident. Fix in the same pass that adds the domain split
+  to the console output. Naming note for whoever greps for it: the
+  audit's section is titled "Findings by File Type", not "Findings by
+  Domain".
 
 ---
 
@@ -1496,7 +1592,8 @@ prompts.
 
 ---
 
-Base: orrery @ `b59cb72` / gallery @ `22c947c9`.
+Base: orrery @ `4b82384` / gallery @ `e7e8c5e` (v16; v15 was orrery
+`b59cb72` / gallery `22c947c9`).
 Phase 0 closed. Phase 1a vocabulary delivered. A/B fork resolved: B′.
 Phase 1b builder built, offline-verified (L-098), and Layer 2 live-Horizons
 fully tested and closed -- L-149 and L-118 both DONE; L-150/L-151 still
@@ -1505,13 +1602,21 @@ Scanner detour: Phase 1 (1a-1f + D8.5) COMPLETE. Phase 2 Piece 1 (D4
 scanner mechanism) COMPLETE -- V2 rung live, zero population. Phase 2
 Track 1 Batch 1 COMPLETE -- three-model competitive cross-check of 5 shell
 modules + Mars, geometry follow-up, Fable consistency audit. Phase 2
-Track 1 Batch 2 NEXT: gas giants (jupiter, saturn, uranus, neptune).
+Track 1 Batch 2 NEXT: gas giants (jupiter, saturn, uranus, neptune)
+-- and the stated gate before Artifact 2. Push gate for this phase:
+Tier-1 = 0 ON THE INTERACTIVE BUILD PATH, with the path computed from
+the import graph rather than listed by hand. The gate gets built
+before the batches it scopes.
 New structural items from Fable audit: L-176 (illustrated dimensions in
 hover text), L-177 (Mercury Hill sphere convention), L-178-180
 (Earth/solar inconsistencies), L-181 (single-source-of-truth constant
-layer). Skill updates pending: orrery-coding-conventions (visualization
-constant vs range, Hill sphere standard, <br> direction) and
-provenance-discipline (cross-check conventions, model credit).
+layer). Skill updates LANDED 2026-08-05: all ten skills bumped and reconciled
+across repo, manifest, and account install --
+orrery-coding-conventions 1.3, provenance-discipline 1.7,
+ledger-and-session-records 1.5, safe-file-editing 1.2,
+agentic-pre-test 1.2, gallery-pipeline 1.2, gallery-assembler 1.1,
+gallery-cache-builder 1.2, horizons-orbital-mechanics 1.1,
+earth-system-pipeline 1.1. Protocol at v3.34.
 Next after scanner work: write the feature-rendering JS layer
 (ring/shell/belt consumers) -- that's what stands between here and
 attempting Artifact 2 (Jupiter/Saturn) Mode 5. Layer 3 (nightly Task
