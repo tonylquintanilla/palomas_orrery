@@ -1273,13 +1273,13 @@ SHELL_CONFIGS = {
 
         'hill_sphere': {
             'name': 'Hill Sphere',
-            'radius_fraction': 324.5,
+            'radius_fraction': 319.2,  # 1,084,000 km / 3,396.2 km equatorial (Archinal 2018)
             'color': 'rgb(0, 255, 0)',
             'opacity': 0.15,
             'n_points': 20,
             'marker_size': 1.0,
             'hover_text': (
-                "Mars's Hill Sphere (extends to ~324.5 Mars radii or about 1.1 million km), which defines the region of its <br>" 
+                "Mars's Hill Sphere (extends to ~319.2 Mars radii or about 1.08 million km), which defines the region of its <br>" 
                 "gravitational influence and encompasses its two moons.<br><br>" 
                 "* Definition: The Hill sphere (sometimes called the Roche sphere or gravitational sphere of influence) of a <br>" 
                 "  celestial body is the region around it where its own gravity is the dominant force attracting satellites. <br>" 
@@ -1303,7 +1303,7 @@ SHELL_CONFIGS = {
             ),
             'tooltip': (
                 "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n" 
-                "Mars's Hill Sphere (extends to ~324.5 Mars radii or about 1.1 million km), which defines the region of its \n" 
+                "Mars's Hill Sphere (extends to ~319.2 Mars radii or about 1.08 million km), which defines the region of its \n" 
                 "gravitational influence and encompasses its two moons."
             ),
         },

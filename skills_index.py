@@ -290,6 +290,34 @@ def main():
         sys.exit(2)
 
     manifest = build_manifest(records)
+
+    # Drift report (August 2026): name what the manifest was advertising
+    # BEFORE overwriting it. Regenerating silently is how three weeks of
+    # stale versions went unnoticed -- running the tool made the evidence
+    # disappear at the same moment it fixed the problem.
+    old_zone = re.search(re.escape(START) + r'(.*?)' + re.escape(END),
+                         text, flags=re.DOTALL)
+    if old_zone:
+        was = dict(re.findall(r'^([a-z0-9][a-z0-9-]*)\s+(\S+)\s',
+                              old_zone.group(1), flags=re.M))
+        drift = [(r['name'], was[r['name']], r['version'])
+                 for r in records
+                 if r['name'] in was and was[r['name']] != r['version']]
+        missing = [r['name'] for r in records if r['name'] not in was]
+        dropped = [n for n in was if n not in {r['name'] for r in records}]
+        if drift or missing or dropped:
+            print("MANIFEST WAS STALE -- corrected below:")
+            for name, old_v, new_v in drift:
+                print(f"  - {name}: manifest said {old_v}, SKILL.md says {new_v}")
+            for name in missing:
+                print(f"  - {name}: missing from the manifest entirely")
+            for name in dropped:
+                print(f"  - {name}: in the manifest but no longer a skill folder")
+            print("  Commit the protocol copies together with the SKILL.md")
+            print("  change -- see the binding rule in ledger-and-session-records.")
+        else:
+            print(f"Manifest already matched all {len(records)} skills.")
+
     new = re.sub(re.escape(START) + r'.*?' + re.escape(END),
                  lambda _m: manifest, text, flags=re.DOTALL)
 

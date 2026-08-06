@@ -836,12 +836,19 @@ def create_mars_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0, 
 # Source: Derived from NASA NSSDCA Mars Fact Sheet (a, GM_Mars)
 #         via standard Hill approximation, Claude Opus 5 2026-08-01
 #         Hill sphere varies with eccentricity (~0.98 Mkm perihelion to ~1.19 Mkm aphelion);
-#         ~1.08 Mkm / ~320 R_Mars is the semi-major axis average.
+#         ~1.084 Mkm / ~319.2 R_Mars is the semi-major axis average, using the
+#         project equatorial radius 3,396.2 km (Archinal et al. 2018).
+# Corrected 2026-08-05: the former ~324.5 R_Mars matched no published source
+#         (1.5% high). The Aug-1 cross-check derived ~1.084 Mkm; that correction
+#         reached this module but never reached shell_configs.py, and was then
+#         reverted here by the Aug-4 consistency patch. Both copies now agree.
+#         Note 319.8 appears in the worksheet: same 1.084 Mkm over the volumetric
+#         mean radius 3,389.5 km. This project uses equatorial, so 319.2 is correct.
 # Cross-checked: NASA NSSDCA Mars Fact Sheet via Claude 2026-08-01 (worksheet_claude_mars_visualization.md)
 # Cross-checked: JPL SSD astrodynamic parameters via GPT 2026-08-01 (track1_gpt_independent_worksheet_mars_visualization.md)
 mars_hill_sphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n" 
-            "Mars's Hill Sphere (extends to ~324.5 Mars radii or about 1.1 million km), which defines the region of its \n" 
+            "Mars's Hill Sphere (extends to ~319.2 Mars radii or about 1.08 million km), which defines the region of its \n" 
             "gravitational influence and encompasses its two moons."
 )
 
@@ -851,12 +858,12 @@ def create_mars_hill_sphere_shell(center_position=(0, 0, 0)):
     """Creates Mars's upper atmosphere shell."""
     # Define layer properties
     layer_info = {
-        'radius_fraction': 324.5,  
+        'radius_fraction': 319.2,  
         'color': 'rgb(0, 255, 0)',  # Green for Hill sphere
         'opacity': 0.15,
         'name': 'Hill Sphere',
         'description': (
-                "Mars's Hill Sphere (extends to ~324.5 Mars radii or about 1.1 million km), which defines the region of its <br>" 
+                "Mars's Hill Sphere (extends to ~319.2 Mars radii or about 1.08 million km), which defines the region of its <br>" 
                 "gravitational influence and encompasses its two moons.<br><br>" 
                 "* Definition: The Hill sphere (sometimes called the Roche sphere or gravitational sphere of influence) of a <br>" 
                 "  celestial body is the region around it where its own gravity is the dominant force attracting satellites. <br>" 
@@ -881,7 +888,7 @@ def create_mars_hill_sphere_shell(center_position=(0, 0, 0)):
     }
 
     # Hill sphere radius in Mars radii
-    radius_fraction = 324.5  # Mars's Hill sphere is about 324.5 Mars radii
+    radius_fraction = 319.2  # 1,084,000 km / 3,396.2 km equatorial (Archinal 2018)
     
     # Calculate radius in AU
     radius_au = radius_fraction * MARS_RADIUS_AU

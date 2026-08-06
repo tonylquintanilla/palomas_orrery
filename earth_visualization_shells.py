@@ -45,6 +45,7 @@ import numpy as np
 import math
 import plotly.graph_objs as go
 from planet_visualization_utilities import (EARTH_RADIUS_AU, create_sphere_points, create_magnetosphere_shape, create_bow_shock_shape)
+from constants_new import KM_PER_AU  # L-178: direct km<->AU conversion, no shadow constant
 from orrery_rendering import rotate_to_sunward, create_info_marker
 
 # Earth Shell Creation Functions
@@ -904,8 +905,11 @@ def create_earth_leo_shell(center_position=(0, 0, 0)):
 
     center_x, center_y, center_z = center_position
 
-    EARTH_RADIUS_KM = 6371.0
-    AU_PER_KM = EARTH_RADIUS_AU / EARTH_RADIUS_KM
+    # L-178: converted directly via KM_PER_AU. The former local
+    # EARTH_RADIUS_KM = 6371.0 (volumetric mean) was a shadow constant, and
+    # dividing it into the equatorial-based EARTH_RADIUS_AU (6,378.137 km)
+    # introduced a +0.112% error in every altitude band below.
+    AU_PER_KM = 1.0 / KM_PER_AU
 
     # LEO altitude bands in km
     LEO_LOW_KM  = 6571.0   # 200 km altitude
@@ -1016,8 +1020,11 @@ def create_earth_geostationary_belt_shell(center_position=(0, 0, 0)):
 
     # Geostationary orbit radius in AU
     GEO_RADIUS_KM = 42164.0
-    EARTH_RADIUS_KM = 6371.0
-    geo_radius_au = (GEO_RADIUS_KM / EARTH_RADIUS_KM) * EARTH_RADIUS_AU
+    # L-178: converted directly via KM_PER_AU. The former local
+    # EARTH_RADIUS_KM = 6371.0 (volumetric mean) was a shadow constant, and
+    # dividing into the equatorial-based EARTH_RADIUS_AU drew the belt
+    # ~47 km too high (+0.112%).
+    geo_radius_au = GEO_RADIUS_KM / KM_PER_AU
 
     # Satellite scatter parameters
     # Real GEO satellites are station-kept within ~0.1 deg latitude and
@@ -1031,7 +1038,9 @@ def create_earth_geostationary_belt_shell(center_position=(0, 0, 0)):
     angle_jitter = np.random.uniform(-0.008, 0.008, n_satellites)  # Small jitter
     angles = base_angles + angle_jitter
 
-    # Radial scatter: +/- 0.0002 AU (~30 km at GEO -- realistic station-keeping band)
+    # Radial scatter: +/- 0.0002 EARTH RADII (~1.3 km), not AU. Real GEO
+    # station-keeping bands run to tens of km; widening this is a Mode 5
+    # call, so the value is unchanged and only the comment is corrected.
     radial_scatter = np.random.uniform(-0.0002, 0.0002, n_satellites) * EARTH_RADIUS_AU
     radii = geo_radius_au + radial_scatter
 
@@ -1048,8 +1057,8 @@ def create_earth_geostationary_belt_shell(center_position=(0, 0, 0)):
     hover_text = (
         "Earth: Geostationary Belt (GEO)<br><br>"
         "Geostationary Belt (GEO)<br>"
-        "Altitude: 35,786 km above surface<br>"
-        "Radius: 42,164 km from Earth's center (6.62 Earth radii)<br><br>"
+        "Altitude: 35,786 km / 0.000239 AU above surface<br>"
+        "Radius: 42,164 km / 0.000282 AU from Earth's center (6.62 Earth radii)<br><br>"
         "Each point represents a region of this belt populated by active satellites.<br>"
         "Approximately 550 active geostationary satellites carry TV broadcasts,<br>"
         "weather imagery, communications, and GPS augmentation for half the world.<br><br>"
