@@ -6,11 +6,13 @@ fires_when: Editing existing files, patch scripts, sed/regex edits, encoding che
 
 # Safe File Editing
 
-Skill version: 1.2 | Cut from palomas_orrery @ 3398970 (v1.2), earlier @
-bdaaa0c (v1.1) | July 29, 2026
+Skill version: 1.3 | Cut from palomas_orrery @ 1ba20c3 (v1.3), earlier @
+3398970 (v1.2), bdaaa0c (v1.1) | August 7, 2026
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;
 v1.1 adds the delivery-format convention from a same-day incident (a
-transactional patch silently never run; see Field Notes).
+transactional patch silently never run; see Field Notes). v1.3 adds
+Line Endings Are Not Content, earned when a patch aborted twice on a
+CRLF working copy whose bytes were identical to the repo's.
 Portable: applies to any project, not only Paloma's Orrery.
 
 ## Bottom-Up Editing [QUALITY]
@@ -52,6 +54,45 @@ for old, new in edits:
     content = content.replace(old, new)
 with open(fn, 'wb') as f: f.write(content)
 ```
+
+### Line Endings Are Not Content [QUALITY]
+
+A patch harness has to answer two questions, and they are different:
+"is this the file I built against" and "does this anchor still exist."
+Line endings can change the first answer while leaving the second true.
+
+**Fingerprint the content, not the raw bytes.** Normalize before hashing:
+
+```python
+fp = hashlib.md5(data.replace(b'\r\n', b'\n')).hexdigest()
+```
+
+A Windows working copy can hold CRLF where the repo holds LF. With
+`.gitattributes` set to `* text=auto eol=lf`, git normalizes on commit
+and reports NO change -- correctly, because there is none. A raw-byte
+fingerprint calls that "BASE MOVED" and sends everyone hunting for an
+edit that was never made. The delta is exactly one byte per line, which
+is the tell: compare sizes before assuming content drift.
+
+**Translate anchors to the file's own convention.** Anchors are written
+LF; a CRLF file matches none of them and the patch aborts on a file it
+could have edited safely. Detect per file and convert both sides:
+
+```python
+is_crlf = data.count(b'\r\n') > 0
+if is_crlf:
+    old = old.replace(b'\n', b'\r\n')
+    new = new.replace(b'\n', b'\r\n')
+```
+
+Preserve what the file already uses rather than converting it. The patch
+is there to make one change, not to also silently restyle 11,000 lines.
+
+**Files in one repo can disagree.** Do not detect once and apply the
+answer everywhere. In the case that produced this note, four files were
+LF and one was CRLF in the same working directory -- something had
+rewritten that one file in text mode, which is precisely what the
+binary-mode rule above exists to prevent.
 
 The assert is the point: a zero-match replace "succeeds" silently and the
 edit never lands. Agentic string matching can silently fail when the target
@@ -163,3 +204,21 @@ skill.)
   Verifying three distinct claims in one combined call read as confirming
   all three when only one had actually landed. Check each anchor
   separately when verifying multiple distinct claims. (2026-07-29)
+- **A fingerprint mismatch is evidence of difference, not evidence of
+  editing.** A patch aborted with BASE MOVED and the diagnosis offered
+  was "your working copy has unpushed edits" -- stated as fact, inferred
+  from comparing the working copy against repo bytes without checking
+  what kind of difference it was. It was CRLF versus LF, content
+  identical, nothing edited. The check was right to fire and the reading
+  of it was wrong. When a fingerprint fails, establish WHAT differs
+  before saying WHY. (2026-08-07)
+- **Build patch anchors from the file, not from memory of the file.** An
+  anchor included trailing context typed from recall; the actual next
+  line was a different `# Source:` comment entirely, so the anchor
+  matched zero times and the harness refused. This is the harness
+  working, but it costs a round trip. Read the exact bytes at the edit
+  site first, and prefer a short unique anchor over a long guessed one.
+  Where a block genuinely appears twice and both copies get the same
+  replacement, one edit with an explicit expected count of 2 is safer
+  than two long anchors distinguished only by distant context.
+  (2026-08-07)
