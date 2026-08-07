@@ -68,6 +68,7 @@ from constants_new import (
     INNER_OORT_CLOUD_AU,
     OUTER_OORT_CLOUD_AU,
     GRAVITATIONAL_INFLUENCE_AU,
+    GRAVITATIONAL_INFLUENCE_RANGE_AU,
     # Spacecraft reference
     PARKER_CLOSEST_RADII,
     # Dictionaries
@@ -247,9 +248,28 @@ def test_outer_oort_cloud_au():
 
 
 def test_gravitational_influence_au():
-    """Approximate Hill sphere radius of Sun in Milky Way (~2 light-years)."""
-    assert GRAVITATIONAL_INFLUENCE_AU == 126000, \
+    """Approximate Hill sphere radius of Sun in Milky Way (~2.4 light-years).
+
+    Two assertions, catching different things. The equality is a tripwire:
+    it fires on ANY change, so a deliberate edit has to be acknowledged
+    here. The range is a guard: it stays quiet for any value the published
+    literature supports and fires only when a value leaves that envelope.
+    A considered move to 152,000 trips the tripwire alone; a typo of
+    15,000 trips both.
+
+    Corrected 2026-08-07 (L-179): this asserted 126000, which the store
+    stopped holding on 2026-08-02. It was false for five days and nothing
+    surfaced it, because this file is not on any run path. Per L-160 it
+    retires once L-155's pinning engine absorbs these checks into
+    provenance_scanner.py -- until then, treat these two assertions as the
+    written spec for what the scanner should absorb.
+    """
+    assert GRAVITATIONAL_INFLUENCE_AU == 150000, \
         f"GRAVITATIONAL_INFLUENCE_AU drifted to {GRAVITATIONAL_INFLUENCE_AU}"
+    low, high = GRAVITATIONAL_INFLUENCE_RANGE_AU
+    assert low <= GRAVITATIONAL_INFLUENCE_AU <= high, \
+        (f"GRAVITATIONAL_INFLUENCE_AU {GRAVITATIONAL_INFLUENCE_AU} is outside "
+         f"the published range {low}-{high} AU")
 
 
 def test_oort_cloud_ordering():

@@ -10292,7 +10292,12 @@ CreateToolTip(manual_scale_radio, "Some key mean distances for custom scaling: \
 "* Dwarf Planet Pluto: between 30 and 49 AU.\n* Kuiper Belt: from roughly 30 to 50 AU\n* Dwarf Planet Sedna: currently at about 83.3 AU, ranging from 74 AU to 936 AU, " 
 "with a mean distance of 526 AU\n* Planet 9, use 360 AU for full orbit\n* Solar Wind Termination Shock: 94 AU\n* Heliopause (edge of the Sun's influence): 126 AU\n* Voyager 1: currently over 165 AU\n" 
 "* Hypothetical \"Planet Nine\" orbit: 600 AU\n"
-"* Inner Limit of Oort Cloud: 2,000 AU\n* Outer Limit of Oort Cloud: 100,000 AU\n* Extent of Solar Gravitational Influence (Hill Sphere): 126,000 AU\n* Proxima Centauri: 268,585 AU")
+"* Inner Limit of Oort Cloud: 2,000 AU\n* Outer Limit of Oort Cloud: 100,000 AU\n"
+# Source: GRAVITATIONAL_INFLUENCE_AU in constants_new.py, imported above.
+#         Interpolated rather than typed: this site carried a stale 126,000
+#         literal with no link to the store until 2026-08-07 (L-179).
+f"* Extent of Solar Gravitational Influence (Hill Sphere): "
+f"{GRAVITATIONAL_INFLUENCE_AU:,.0f} AU\n* Proxima Centauri: 268,585 AU")
 
 custom_scale_entry = tk.Entry(scale_frame, width=10)
 custom_scale_entry.pack(anchor='w')

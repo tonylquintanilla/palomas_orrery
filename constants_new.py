@@ -116,6 +116,16 @@ LIGHT_MINUTES_PER_AU = KM_PER_AU / SPEED_OF_LIGHT_KM_S / 60.0
 # Derived: 149597870.7 / 299792.458 / 60 = 8.31675...
 # Previous hardcoded value was 8.3167 (consistent to 5 sig figs)
 
+AU_PER_LIGHT_YEAR = (SPEED_OF_LIGHT_KM_S * 365.25 * 86400.0) / KM_PER_AU
+# Derived: 299792.458 km/s x Julian year (365.25 d x 86400 s) / KM_PER_AU
+#          = 63,241.077 AU per light-year
+# Source: IAU -- the light-year is defined as c x the Julian year.
+# Ref: https://www.iau.org/public/themes/measuring/
+# Note: reproduces the IAU published light-year (9.4607304726e12 km)
+#       to ten significant figures. Added 2026-08-07 (L-179) so that
+#       display text can derive light-year figures instead of typing
+#       them beside an AU value that then drifts away from them.
+
 
 # ============================================================
 # GUI CONSTANTS (application settings, not physical)
@@ -152,10 +162,24 @@ RADIATIVE_ZONE_AU = 0.7 * SOLAR_RADIUS_AU
 CHROMOSPHERE_RADII = 1.1
 # Visualization shell radius (physical chromosphere extends ~2000 km above
 # photosphere = ~1.003 R_sun; drawn at 1.1 for visibility at orrery scale)
+# DRAWN value, deliberately larger than physical -- see
+# CHROMOSPHERE_PHYSICAL_KM below, and say so in any display text
+# (Tony's ruling, 2026-08-07, L-180).
 # Corrected 2026-08-02: 1.5 -> 1.1 (1.5 overstated the physical extent;
 #   Carroll & Ostlie Ch. 11 confirms ~2000 km, not 1.5 R_sun)
 # Cross-checked: Carroll & Ostlie via Gemini 2026-08-02 (Gemini worksheet)
 # Cross-checked: NASA chromosphere data via GPT 2026-08-02 (constants_remaining_independent_verification_gpt.md)
+
+CHROMOSPHERE_PHYSICAL_KM = 2000.0
+# Source: Carroll & Ostlie, An Introduction to Modern Astrophysics,
+#         Ch. 11 -- chromosphere extends ~2000 km above the photosphere.
+# Cross-checked: Carroll & Ostlie via Gemini 2026-08-02 (Gemini worksheet)
+# Note: the PHYSICAL extent. CHROMOSPHERE_RADII (1.1) is the DRAWN
+#       shell radius, ~36x thicker, chosen for visibility at orrery
+#       scale. Both figures are real; they answer different questions.
+
+CHROMOSPHERE_PHYSICAL_RADII = 1.0 + CHROMOSPHERE_PHYSICAL_KM / SUN_RADIUS_KM
+# Derived: 1 + 2000 / 695700 = 1.002875... solar radii
 
 INNER_CORONA_RADII = 3
 # Source: Golub & Pasachoff, "The Solar Corona" (2010)
@@ -237,6 +261,17 @@ GRAVITATIONAL_INFLUENCE_AU = 150000
 #         ~2.4 light-years. Visualization boundary, not a measured value.
 # Corrected 2026-08-02: 126000 -> 150000 (prior value unsourced;
 #   150000 AU is a round midpoint of the published range)
+# Confirmed 2026-08-07 (Tony, L-179): 150000 stands, chosen as the
+#   midpoint of the published range below. Display text must carry
+#   the RANGE, not present the midpoint as a measurement.
+
+GRAVITATIONAL_INFLUENCE_RANGE_AU = (100000, 200000)
+# Source: spread of published Sun-in-Galaxy Hill sphere estimates;
+#         model-dependent, varying with assumed enclosed galactic mass
+#         and the Sun's galactocentric distance.
+# Note: 100,000-200,000 AU = 1.6-3.2 light-years. Stored as DATA rather
+#       than prose so display strings can interpolate the envelope
+#       instead of restating the midpoint alone (L-179, 2026-08-07).
 
 # Spacecraft reference
 PARKER_CLOSEST_RADII = 9.86

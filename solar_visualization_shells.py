@@ -41,13 +41,55 @@ from planet_visualization_utilities import (create_sphere_points, SOLAR_RADIUS_A
                                             ROCHE_LIMIT_RADII, ALFVEN_SURFACE_RADII,
                                             TERMINATION_SHOCK_AU, HELIOPAUSE_RADII,
                                             INNER_LIMIT_OORT_CLOUD_AU, INNER_OORT_CLOUD_AU, OUTER_OORT_CLOUD_AU, 
-                                            GRAVITATIONAL_INFLUENCE_AU)
+                                            GRAVITATIONAL_INFLUENCE_AU, GRAVITATIONAL_INFLUENCE_RANGE_AU,
+                                            AU_PER_LIGHT_YEAR,
+                                            CHROMOSPHERE_PHYSICAL_KM, CHROMOSPHERE_PHYSICAL_RADII)
 
 #####################################
 # Sun Visualization Functions
 #####################################
 
-# Source: GRAVITATIONAL_INFLUENCE_AU=126000 in constants_new.py; NASA Solar System Exploration
+#####################################
+# Shared derived sentences (L-179 / L-180, 2026-08-07)
+#####################################
+# Each figure below is interpolated from constants_new.py, never typed.
+# One fragment, referenced by every string that states the fact, so the
+# statement exists once and cannot drift from the constant or from its
+# own duplicate. Editing the constant updates every display site.
+
+# Source: GRAVITATIONAL_INFLUENCE_AU and GRAVITATIONAL_INFLUENCE_RANGE_AU
+#         in constants_new.py -- approximate Hill sphere of the Sun in the
+#         Milky Way, model-dependent. Published estimates span
+#         100,000-200,000 AU; the visualization draws the 150,000 AU
+#         midpoint (Tony's ruling, 2026-08-07). Light-year figures derive
+#         from AU_PER_LIGHT_YEAR. NASA Solar System Exploration.
+GRAVITATIONAL_INFLUENCE_SENTENCE = (
+    f"The Sun's gravitational influence extends to roughly "
+    f"{GRAVITATIONAL_INFLUENCE_AU / AU_PER_LIGHT_YEAR:.1f} light-years "
+    f"(~{GRAVITATIONAL_INFLUENCE_AU:,.0f} AU). Published estimates range "
+    f"{GRAVITATIONAL_INFLUENCE_RANGE_AU[0]:,.0f}-"
+    f"{GRAVITATIONAL_INFLUENCE_RANGE_AU[1]:,.0f} AU "
+    f"({GRAVITATIONAL_INFLUENCE_RANGE_AU[0] / AU_PER_LIGHT_YEAR:.1f}-"
+    f"{GRAVITATIONAL_INFLUENCE_RANGE_AU[1] / AU_PER_LIGHT_YEAR:.1f} "
+    f"light-years); this visualization draws the midpoint."
+)
+
+# Source: CHROMOSPHERE_RADII (drawn) and CHROMOSPHERE_PHYSICAL_KM /
+#         CHROMOSPHERE_PHYSICAL_RADII (physical) in constants_new.py;
+#         Carroll & Ostlie Ch. 11 for the ~2000 km physical extent.
+#         The drawn shell is a declared stylization for visibility at
+#         orrery scale and the text says so (L-180, 2026-08-07).
+CHROMOSPHERE_RADIUS_LINE = (
+    f"* Radius: drawn from the photosphere out to "
+    f"{CHROMOSPHERE_RADII} solar radii "
+    f"(~{SOLAR_RADIUS_AU:.5f} - {CHROMOSPHERE_RADII * SOLAR_RADIUS_AU:.5f} AU). "
+    f"This is a stylization for visibility: the physical chromosphere "
+    f"extends only ~{CHROMOSPHERE_PHYSICAL_KM:,.0f} km above the "
+    f"photosphere (~{CHROMOSPHERE_PHYSICAL_RADII:.3f} solar radii).<br>"
+)
+
+# Source: GRAVITATIONAL_INFLUENCE_SENTENCE above (derived); NASA Solar
+#         System Exploration for the heliopause and Oort Cloud framing.
 gravitational_influence_info = (
             "SELECT A MANUAL SCALE OF AT LEAST 160,000 AU TO VISUALIZE.<br><br>"
             
@@ -57,8 +99,8 @@ gravitational_influence_info = (
             "Where the solar wind meets interstellar space.<br><br>" 
 
             "Gravitational influence extends much further, including, Sedna\'s orbit (936 AU), the Hills Cloud/Inner<br>" 
-            "Oort Cloud (2,000-20,000 AU), and the Outer Oort Cloud (20,000-100,000 AU). The Sun's gravitational influence<br>" 
-            "extends to about 2 light-years (~126,000 AU).<br><br>" 
+            "Oort Cloud (2,000-20,000 AU), and the Outer Oort Cloud (20,000-100,000 AU).<br><br>" 
+            + GRAVITATIONAL_INFLUENCE_SENTENCE + "<br><br>"
             
             "While the Heliopause marks where the Sun\'s particle influence ends, its gravitational influence extends much<br>" 
             "further. Sedna and other distant objects remain gravitationally bound to the Sun despite being well beyond<br>" 
@@ -171,7 +213,11 @@ outer_oort_clumpy_info = (
             "* NEOWISE survey improving population estimates"
         )
 
-# Source: Dones et al. (2004) Comets II -- galactic tidal sculpting of Oort Cloud; GRAVITATIONAL_INFLUENCE_AU=126000 in constants_new.py
+# Source: Dones et al. (2004) Comets II -- galactic tidal sculpting of Oort Cloud.
+# Note: this string states no gravitational-influence figure; the previous
+#       citation asserted a gravitational-influence value of 126,000 AU
+#       here, which was both wrong and irrelevant to the text below
+#       (removed L-179).
 galactic_tide_info = (
             "Oort Cloud: Galactic Tide Influenced Oort:<br><br>"
 
@@ -295,7 +341,13 @@ inner_corona_info = (
             "* It radiates at an average wavelength of 1.93 nm, within the extreme ultraviolet to soft X-ray regions."
         )
 
-# Source: constants_new.py CHROMOSPHERE_RADII=1.5; Golub & Pasachoff (2010) The Solar Corona
+# Source: constants_new.py CHROMOSPHERE_RADII=1.1 (DRAWN shell radius, a
+#         declared stylization for visibility) and CHROMOSPHERE_PHYSICAL_KM
+#         =2000 (physical extent, Carroll & Ostlie Ch. 11, ~1.003 R_sun);
+#         Golub & Pasachoff (2010) The Solar Corona.
+# Note: the previous citation asserted a chromosphere radius of 1.5 solar
+#       radii, which the store has not held since 2026-08-02
+#       (corrected L-180).
 chromosphere_info = (
             "Sun: Chromosphere:<br><br>"
 
@@ -319,7 +371,7 @@ chromosphere_info = (
             "  * Plages: These are bright regions in the chromosphere associated with active regions, where magnetic fields<br>" 
             "    are concentrated.<br><br>" 
              
-            "* Radius: from Photosphere to 1.5 Solar radii or ~0.00465 - 0.0070 AU<br>"
+            + CHROMOSPHERE_RADIUS_LINE +
             "* Temperature: ~6,000 to 20,000 K, for a average of 10,000 K<br>"
             "* Radiates at an average peak wavelength of ~290 nm, ultraviolet range, invisible."
         )
@@ -429,8 +481,8 @@ gravitational_influence_info_hover = (
             "Where the solar wind meets interstellar space.<br><br>" 
 
             "Gravitational influence extends much further, including, Sedna\'s orbit (936 AU), the Hills Cloud/Inner<br>" 
-            "Oort Cloud (2,000-20,000 AU), and the Outer Oort Cloud (20,000-100,000 AU). The Sun's gravitational influence<br>" 
-            "extends to about 2 light-years (~126,000 AU).<br><br>" 
+            "Oort Cloud (2,000-20,000 AU), and the Outer Oort Cloud (20,000-100,000 AU).<br><br>" 
+            + GRAVITATIONAL_INFLUENCE_SENTENCE + "<br><br>"
             
             "While the Heliopause marks where the Sun\'s particle influence ends, its gravitational influence extends much<br>" 
             "further. Sedna and other distant objects remain gravitationally bound to the Sun despite being well beyond<br>" 
@@ -756,7 +808,7 @@ chromosphere_info_hover = (
             "  * Plages: These are bright regions in the chromosphere associated with active regions, where magnetic fields<br>" 
             "    are concentrated.<br><br>" 
              
-            "* Radius: from Photosphere to 1.5 Solar radii or ~0.00465 - 0.0070 AU<br>"
+            + CHROMOSPHERE_RADIUS_LINE +
             "* Temperature: ~6,000 to 20,000 K, for a average of 10,000 K<br>"
             "* Radiates at an average peak wavelength of ~290 nm, ultraviolet range, invisible."
         )
