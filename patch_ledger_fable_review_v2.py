@@ -60,11 +60,11 @@ TARGET = 'LEDGER_CONSOLIDATED.md'
 BASE_MD5 = 'cc983fd356090aaa7d5f45d04a29f84b'
 
 NEW_ITEMS = b"""#### [L-186] Cross-check annotation issues -- clear before Batch 2
-<!-- L:186 status:OPEN upd:2026-08-06 section:A flag: rice:3/3/80/2 -->
+<!-- L:186 status:OPEN upd:2026-08-07 section:A flag: rice:3/3/80/2 -->
 - Scanner reports 12 annotation lines it saw but could not use. None
   changed a score. They matter because an annotation that quietly does
   nothing reads as a completed cross-check to anyone skimming the source.
-- Tony ruled 2026-08-06: clear these BEFORE Batch 2 rather than during,
+- Tony ruled 2026-08-07: clear these BEFORE Batch 2 rather than during,
   since Batch 2 will add more annotations of the same kind.
 - **Six `duplicate_identity`** -- two or more annotations naming the same
   checker on one claim, which cannot earn V2 (V2 needs two DIFFERENT
@@ -99,7 +99,7 @@ ruling.
 `ee0da47c`.
 
 #### [L-187] info_dictionary numeric-overlap enumeration
-<!-- L:187 status:OPEN upd:2026-08-06 section:A flag: rice:3/3/60/3 -->
+<!-- L:187 status:OPEN upd:2026-08-07 section:A flag: rice:3/3/60/3 -->
 - Fable review, Open Question 2(d): do NOT extend the L-181 interpolation
   migration into `info_dictionary.py` now. Applied literally, the
   derivation rule would pull every numeric claim in 2,248 lines of prose
@@ -123,122 +123,60 @@ and findings summary #5.
 
 """
 
-L181_ADD = b"""- **FABLE DESIGN REVIEW, 2026-08-06** (built on orrery `ee0da47c` /
+L181_ADD = b"""- **FABLE DESIGN REVIEWS, ROUNDS 1 AND 2, AUGUST 2026** (built on orrery `ee0da47c` /
   gallery `61a78c0`; zero code). Architecture ENDORSED: one store, three
   zones per entry, provenance as data, derivation instead of annotation,
   exporter aborting on a missing source. Every piece extends an existing
   pattern rather than inventing one. All findings below independently
   verified by Claude Opus 5 at the same anchors before recording.
-- **Transport form: three candidates, none ruled. Option 3 leading.**
-  (1) Export then fetch -- something in the orrery writes a JSON artifact;
-  the builder fetches it at the orrery HEAD SHA, validates shape +
-  source-presence + content hash, and commits it with the nightly output
-  (Fable's "vendored pull": fetch it AND commit the copy, so an
-  unreachable orrery falls back to last night). (2) JSON as the source of
-  truth -- no generation, but the scanner reads `.py` only, so the source
-  would be invisible to it. (3) Builder extracts directly -- fetch
-  `constants_new.py` as TEXT at the orrery HEAD SHA and read the values
-  out with Python's `ast` module, parsing structure without executing the
-  file. No exporter, no new step in Tony's workflow, no scheduled job
-  committing into the orrery repo. Not a novel technique:
-  `provenance_scanner.py` line 899 already does this to the same file.
-  Under every option the failure path is the same -- quarantine, keep
-  serving the last good copy, warn loudly.
-- **Option 3 surfaced only after Tony questioned the premise.** Both the
-  predesign handoff and Fable's review wrote "the exporter" as though
-  pointing at something live. Once that assumption was removed, the
-  export step turned out to be optional rather than structural. This is a
-  material change from what Fable reviewed, so it goes back for a second
-  look before anything is built. See master plan Section 7 decision 12.
-- The reframe that dissolved the fork: self-containment is TWO
-  properties, not one. Render-time self-containment (the assembler
-  reconstructing alone from the cache) is what the protocol protects, and
-  pull never touches it. The network dependency lands in the BUILDER at
-  build time -- already network-dependent via Horizons, already
-  committing fetched external data nightly. Push-vs-pull was a false
-  binary; the vendored form is the third option. It also resolves the
-  pin-vs-HEAD tension: track HEAD at fetch time, pin by record in git
-  history, so every nightly commit is a reproducible snapshot.
-- Claude Opus 5 addition: the builder should SURFACE the orrery SHA lag
-  ("features stale as of orrery <SHA>"), not merely log it. That also
-  covers the third staleness vector -- a build that did not run at all
-  (Tony's machine off, 2026-08-06) presents identically to one that ran
-  and failed, from the served side.
-- **Store-internal findings -- the convention must apply at home before
-  it is enforced outward.** (1) `spectral_subclass_temps` is a numeric
-  physical claim with no citation of any kind; it belongs in the
-  citation-form migration or gets an explicit carve-out ruling.
-  (2) `color_map()` and `stellar_class_labels` are presentation living
-  untagged in the store; tag them under the same three-zone convention.
-  (3) `KNOWN_ORBITAL_PERIODS` contains the key `'Phobos'` TWICE (both
-  0.319, verified: 133 keys, one duplicate). Same value today, so
-  harmless -- but Python silently keeps the last, which is the exact
-  silent-drift class this design exists to kill. It is the argument for a
-  load-time validation pass over the store (duplicate keys, source
-  presence on physics fields, unit sanity). The exporter's abort is
-  generation-time; this is the matching import-time check.
-- **Fifth restatement surface, missed by the handoff's count.** The
-  handoff counted `description` fields inside the params dicts. The four
-  shell modules ALSO carry module-level `*_info` strings imported by
-  `palomas_orrery.py` for Tk GUI tooltips -- a different consumer.
-  Verified: Uranus restates 25,559 km nine times and does arithmetic in
-  prose ("25,559 km + 50 km = 25,609 ... fraction ~1.002"); Neptune's
-  Galle info restates "41,900-42,900 km". Counts of module-level `*_info`
-  strings: jupiter 10, saturn 10, uranus 8, neptune 8. If interpolation
-  covers dict descriptions but not these, the `*_info` strings become the
-  surviving duplicate and the next consistency pass harmonizes toward
-  them -- L-182's exact shape, which the build was on course to recreate.
-  Include in derivation scope or defer explicitly.
-- **Three prose cases resist naive interpolation; use them as the
-  acceptance test set.** (1) Jupiter main ring: prose says "about
-  30-300 km" against a stored scalar `thickness_km` of 30. (2) Neptune
-  Galle: "41,900-42,900 km" where the stored pair is inner/outer radius,
-  derivable but not by naive field substitution. (3) Uranus atmosphere
-  info: arithmetic performed in prose. These need a small schema answer
-  (optional range field, derived value computed in code, or a documented
-  per-case carve-out). This is Tony's acceptance test in miniature: if
-  the schema absorbs these three cleanly the architecture is right; if
-  many more surface, that is the signal.
-- **Sequencing rule for the scanner change.** Land the SOURCE_PATTERNS
-  extension ALONE, run the full scan, diff the finding set against the
-  prior audit, and attribute any newly-exposed pre-existing findings to
-  the scanner change BEFORE the citation migration lands. Otherwise the
-  migration diff and the scanner diff interleave and neither is
-  auditable. (Precedent: a unit-vocabulary extension once exposed a
-  pre-existing Tier-1 in `star_notes.py`.)
-- **The 17 citation-level mismatches ride here, not as a separate fix.**
-  Scanner diagnostic at `ee0da47c`: 11 in `planet_visualization_utilities.py`
-  (one per body in `PLANET_ROTATION`, shadowed from the block citation at
-  491) and 6 in `comet_visualization_shells.py` (shadowed from
-  `HISTORICAL_TAIL_DATA` at 86). Nothing is mis-scored today; the flat
-  60-line context window catches them independently, which is why the
-  mismatch is easy to miss. The mechanical fix -- repeat a short citation
-  above each inner key -- would write 17 NEW citation copies into files
-  this item is about to restructure. Under the data-field design each
-  entry carries its own `source` and nothing can be shadowed by
-  construction. Track, do not patch.
-- **Filename collision to resolve in this build.** Two files are already
-  named `feature_configs.json` (orrery exporter writes one, gallery
-  builder writes another). Under vendored pull that becomes three. The
-  orrery artifact should either replace `objects_config.json`'s features
-  block outright or take a distinct name. Same-name-different-content
-  across repos is a standing trap for every future session and for the
-  scanner.
-- **Schema uniformity.** The gallery copy drops `thickness_km` for Saturn
-  while keeping it for Jupiter (verified at `61a78c0`) -- an artifact of
-  hand-seeding. The generated artifact must emit a uniform schema.
-- **Do NOT teach the scanner JSON.** Fable's answer to the handoff's
-  closing question: extend provenance into config JSON via the
-  generator's abort-on-missing-source and the builder's validation gate,
-  not by widening the scanner's `.py`-only filter. The artifact's own
-  validation is the compensating control.
-- **GATE: settle L-179 and L-180 BEFORE the migration transports their
-  values.** Both are drift inside the store today. Migrating and deriving
-  first would carry a known-inconsistent value into the gallery, the
-  served cache, and the hover text, now looking authoritative in three
-  more places. The handoff's own "presence is not truth" warning applies
-  to its own build order.
-- **PROMOTED TO PHASE 2 TRACK 0 (Tony's ruling, 2026-08-06).** The order
+- **Transport form: FETCH-AND-IMPORT.** Recommended by Claude Opus 5,
+  endorsed by Fable 5 round 2, NOT YET RATIFIED by Tony. The nightly
+  builder resolves the orrery HEAD SHA, fetches `constants_new.py` as
+  text at that SHA, imports it, reads the feature values and their
+  sources, validates, and writes into staging under existing atomic-swap
+  semantics. Python evaluates all derivation natively. Tony's workflow
+  does not change. Fable's summary: "round 1's vendored pull with the
+  exporter removed -- same fallback property, same SHA recording, same
+  quarantine semantics, strictly fewer moving parts, and zero hand
+  steps."
+- Two earlier candidates retired. Exporting a JSON artifact rests on a
+  generation step and a run trigger that do not exist. Reading the file
+  with `ast` without executing it fights the store's design: 7 of 45
+  top-level assignments are derived rather than literal, and two contain
+  constructor calls `ast.literal_eval` cannot evaluate at all.
+- **Three premises were removed by Tony's questions to get here**, and
+  the pattern is worth carrying: each was Claude reading code and
+  treating that as knowing the system. (1) "The exporter" was written as
+  live; it is dormant. (2) The 7 derived constants were written up as a
+  complication; they are the store's own principle working, and
+  `SOLAR_RADIUS_AU` alone has 11 consumers. (3) The claim that the
+  gallery could not execute the file was never tested; the store imports
+  only numpy and `datetime`, and the builder already hard-depends on
+  numpy through astroquery.
+- **Round 2 build requirements.** (a) Drop the dead `numpy` and
+  `timedelta` imports from `constants_new.py` -- both are imported and
+  never used, verified; the store becomes stdlib-only, removing the
+  version-skew surface between environments. (b) Add a PRE-IMPORT GATE:
+  parse the fetched file with `ast` and check exactly two structural
+  properties -- imports on an allowlist, no duplicate dict keys -- then
+  hand off to import. This is not a revival of ast-extraction; it reads
+  no values. It recovers the one capability fetch-and-import loses: after
+  import, Python has already silently kept the last duplicate, so the
+  Phobos class becomes invisible. (c) Load via
+  `importlib.util.spec_from_file_location` from the staging path with a
+  per-run module name; never insert staging into `sys.path`. (d) Add a
+  one-line rule to the store docstring: data-only module, no top-level
+  I/O -- importing executes top-level code, so a future file write or
+  network call would be inherited silently every night.
+- **FEATURE_REGISTRY: shrink the contract to one name.** Track 0 defines
+  a single dict in the store mapping body slug to that body's feature
+  entries, and the builder reads exactly that name. Every rename,
+  regrouping, or nesting change inside the store then stays internal; the
+  only breaking change left is renaming the registry itself, which is one
+  grep from impossible to miss. This is the mechanical answer to the
+  coupling question, and it demotes the three documentation notes from
+  load-bearing to descriptive.
+- **PROMOTED TO PHASE 2 TRACK 0 (Tony's ruling, 2026-08-07).** The order
   is scaffolding, then provenance batches, then Artifact 2. Reasoning: a
   golden artifact is fingerprinted, so locking one on values that are not
   yet sourced and derived means redoing the lock rather than editing a
@@ -266,36 +204,63 @@ L181_ADD = b"""- **FABLE DESIGN REVIEW, 2026-08-06** (built on orrery `ee0da47c`
       hand step;
   (b) every physics value carries a source, enforced by an abort rather
       than a warning;
-  (c) unit-sanity range checking is in place -- shape validation and
-      source-presence validation BOTH pass on a value whose units
-      changed, so neither catches a km-to-AU slip (master plan decision
-      15);
-  (d) the store-to-builder coupling is documented on BOTH sides. Under
-      option 3 the builder depends on the store's dict NAMES and SHAPE,
-      not its values: value edits, new entries, new bodies and comment
-      changes flow through untouched, while renames, field renames,
-      nesting changes and file moves break the extractor. A note placed
-      on only one side reaches only one of the two editors -- the L-182
-      shape again. The three places: a comment at the feature block in
-      `constants_new.py` (catches the editor mid-edit, rank this first),
-      a field note in `provenance-discipline` (fires on any
-      `constants_new.py` work), and a field note in
-      `gallery-cache-builder` (fires from the consumer side).
-- **Build the extractor AFTER Track 0 settles the shape**, not before.
-  Track 0 is itself a restructure -- it moves 37 entries into the store
-  and adds `source` fields -- so an extractor written first would be
-  chasing a shape about to change. Related benefit worth noting: today
-  the `*_params` dicts are function-local, which is awkward to extract
-  reliably; after Track 0 they are module-level, which is the easy case.
-  Track 0 also narrows the coupling from four rendering modules to one
-  file.
+  (c) all four validation layers are in place (master plan decision 15):
+      source presence as an ABORT not a warning; unit-sanity RANGE
+      checking, since shape and source-presence validation both pass on a
+      value whose units changed and only magnitude bounds catch a
+      km-to-AU slip; a cross-field ring invariant using `inner <= outer`
+      -- NOT Fable's strict `<`, which was verified against the store and
+      would fire on 8 Neptune entries where inner and outer are
+      deliberately equal (Le Verrier at 53,200 km, six Adams arcs at
+      62,932 km; `inner > outer` is genuinely zero across all 33 pairs);
+      and a nightly value-diff against last night's committed copy
+      logging old, new, and both orrery SHAs, which is the only guard
+      that sees CHANGE itself -- the L-182 family;
+  (f) the JSON-serializability boundary is enforced: import yields live
+      Python objects while the cache is JSON, and the store already holds
+      a function (`color_map`) and a datetime (`HORIZONS_MAX_DATE`) at
+      top level. Every value bound for the cache is coerced to plain
+      int/float/str/list/dict; anything else is a validation failure, not
+      a crash mid-write;
+  (g) the interpolation locus is decided before the cache schema is
+      written (master plan decision 17). Fable recommends builder-side
+      pre-interpolation: it keeps the assembler dumb and moves template
+      errors to build time where quarantine exists, rather than into a
+      user's browser;
+  (d) the store-to-builder coupling is reduced to the single
+      `FEATURE_REGISTRY` name and documented on BOTH sides. Under
+      fetch-and-import the builder reads NAMES, not structures, so
+      nesting and shape changes no longer break it and only a rename
+      does -- weaker coupling than the retired `ast` route implied. A
+      note placed on one side reaches only one of two editors, the L-182
+      shape again. Three places: a comment at the registry in
+      `constants_new.py` (catches the editor mid-edit, rank first), a
+      field note in `provenance-discipline` (fires on any store work),
+      and a field note in `gallery-cache-builder` (fires from the
+      consumer side).
+  (e) the run manifest records BOTH the orrery SHA and the content hash
+      of the fetched `constants_new.py` (`_write_run_manifest`, builder
+      line 1476), so any served state traces to exact store bytes.
+- **Sequencing within Track 0 is now open, not settled.** The earlier
+  "build transport after Track 0" reasoning assumed a shape-sensitive
+  extractor. Fetch-and-import is not shape-sensitive, which reopens it.
+  Fable round 2 recommends a PILOT SLICE: migrate Jupiter (5 entries)
+  through the full Track 0 treatment, build the transport end-to-end
+  against it, then scale to the remaining 32 -- which needs zero
+  transport rework. The argument: the transport cannot be tested against
+  today's store at all, since no `source` fields exist for
+  abort-on-missing-source to act on, so "transport after Track 0" really
+  means "first end-to-end test after all 37 entries move," the largest
+  possible batch before the first proof. Jupiter also holds the
+  resistant-prose cases. Cost: two passes over the migration tooling.
+  Tony-action (decide); master plan Section 7 decision 16.
 - **L-179/L-180 change role under this order.** They were a gate standing
   in front of the migration. They are now the FIRST thing Track 0 fixes.
   Same requirement, better placement.
 - Correction worth carrying: `export_orbit_cache.py` is a DORMANT Phase
   1b seeding tool, not a live exporter. Nothing calls or imports it; all
   four tooling maps classify it `dev_tools`; the gallery references it
-  only as a historical porting source at orrery `4e2629c`. The August 6
+  only as a historical porting source at orrery `4e2629c`. The August 6-7
   session twice built on the assumption it was live and Tony corrected it
   both times. Whatever generates the feature artifact is a NEW
   responsibility, and "run something before pushing" is a habit that does
@@ -355,7 +320,7 @@ EDITS = [
      b"**Gap:** Resolve which value is authoritative. Update the loser.\n"
      b"**Ref:** FABLE_shell_consistency_audit_report.md findings #29-30.",
      b"- **FIRST STEP OF PHASE 2 TRACK 0** (Tony's ordering ruling,\n"
-     b"  2026-08-06; Fable sequencing note). Migrating and deriving before\n"
+     b"  2026-08-07; Fable sequencing note). Migrating and deriving before\n"
      b"  this value is settled would transport a known-inconsistent number\n"
      b"  into the gallery artifact, the served cache, and the hover text --\n"
      b"  authoritative-looking in three more places. Settle it first, as\n"
@@ -367,7 +332,7 @@ EDITS = [
     ('F-3b', 'L-180: gates the L-181 migration',
      b"**Gap:** Reconcile text, add Show-the-Envelope comment.\n"
      b"**Ref:** FABLE_shell_consistency_audit_report.md finding #31.",
-     b"- **FIRST STEP OF PHASE 2 TRACK 0** (2026-08-06). Same reasoning as\n"
+     b"- **FIRST STEP OF PHASE 2 TRACK 0** (2026-08-07). Same reasoning as\n"
      b"  L-179: do not transport an unsettled value into three more places.\n"
      b"**Gap:** Reconcile text, add Show-the-Envelope comment.\n"
      b"**Ref:** FABLE_shell_consistency_audit_report.md finding #31;\n"
@@ -437,9 +402,9 @@ def main():
     print("Track 1 provenance batches -> Track 2 Artifact 2.")
     print("")
     print("OPEN, and none of them block starting Track 0:")
-    print("  - transport form (opt 3 leading)   plan sec 7 #12")
-    print("  - generator shape (opt 1 only)     plan sec 7 #13")
-    print("  - unit-sanity validation           plan sec 7 #15")
+    print("  - ratify fetch-and-import          plan sec 7 #12")
+    print("  - pilot slice inside Track 0       plan sec 7 #16")
+    print("  - interpolation locus              plan sec 7 #17")
     print("  - L-179 / L-180 values             plan sec 7 #14, Track 0 step 1")
     print("  - annotation parser ruling         [L-186], Track 1")
     return 0
