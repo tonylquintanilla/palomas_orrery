@@ -1,4 +1,37 @@
-Where we are 8/7/2026
+# -*- coding: utf-8 -*-
+"""patch_summary_v17.py -- refresh the master plan's summary companion
+from the 8/5 snapshot to 8/7, matching master plan v17.
+
+Built on d38d31482a8fedc8d6625930bc6d2ba2f15fb8cb
+at https://github.com/tonylquintanilla/palomas_orrery (branch main).
+Gallery pinned at 61a78c00668573dbff111ec9f10a96b1cd2fdc35.
+
+HOW TO RUN
+    Save this file in the REPO ROOT (the folder holding documentation/),
+    open it in VS Code, and click Run.
+
+    Success: one "ok" line, then "patch applied".
+    Failure: an "ERROR" line followed by "NOTHING WAS WRITTEN".
+
+WHAT IT DOES
+    Rewrites documentation/MASTER_PLAN_INTERACTIVE_GALLERY_SUMMARY.md in
+    full, guarded by an MD5 of the expected base. If that file changed
+    since this patch was written, the guard fails and nothing is written.
+
+    No ledger edits, so ledger_index.py does NOT need to run after.
+
+Patch written August 7, 2026 with Anthropic's Claude Opus 5.
+"""
+
+import hashlib
+import os
+import sys
+
+TARGET = os.path.join('documentation',
+                      'MASTER_PLAN_INTERACTIVE_GALLERY_SUMMARY.md')
+BASE_MD5 = '76dcbf4dc5f10d935c1400dd2db75cb5'
+
+NEW = b"""Where we are 8/7/2026
 
 Built on d38d31482a8fedc8d6625930bc6d2ba2f15fb8cb at
 https://github.com/tonylquintanilla/palomas_orrery (branch main);
@@ -319,3 +352,54 @@ skills reconciled across their three stores. Phase 0, Phase 1a and Phase
 promotion-step glitch still being watched.
 
 Entry written August 2026 with Anthropic's Claude Opus 5.
+"""
+
+
+def main():
+    root = os.path.dirname(os.path.abspath(__file__))
+    path = os.path.join(root, TARGET)
+    if not os.path.exists(path):
+        print("ERROR: %s not found." % TARGET)
+        print("       Save this script in the REPO ROOT, not documentation/.")
+        print("       NOTHING WAS WRITTEN.")
+        return 1
+
+    with open(path, 'rb') as f:
+        data = f.read()
+
+    norm = 0
+    if b'\r\n' in data:
+        norm = data.count(b'\r\n')
+        data = data.replace(b'\r\n', b'\n')
+        print("fix CRLF     normalized %d line endings to LF" % norm)
+
+    got = hashlib.md5(data).hexdigest()
+    if got != BASE_MD5:
+        print("ERROR: summary base does not match.")
+        print("       expected md5 %s" % BASE_MD5)
+        print("       found    md5 %s" % got)
+        print("       The file changed since this patch was written.")
+        print("       NOTHING WAS WRITTEN. Re-pull and rebuild.")
+        return 1
+
+    try:
+        NEW.decode('utf-8')
+    except UnicodeDecodeError as exc:
+        print("ERROR: replacement is not valid UTF-8 (%s)." % exc)
+        print("       NOTHING WAS WRITTEN.")
+        return 1
+
+    with open(path, 'wb') as f:
+        f.write(NEW)
+
+    print("ok  SUM-1  summary companion rewritten to 8/7/2026 (matches v17)")
+    print("")
+    print("patch applied%s" % (" (+%d CRLF normalized)" % norm if norm else ""))
+    print("  %s" % TARGET)
+    print("")
+    print("No ledger edits, so ledger_index.py does NOT need to run.")
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())
