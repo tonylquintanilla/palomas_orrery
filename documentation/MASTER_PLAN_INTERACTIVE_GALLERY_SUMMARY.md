@@ -1,6 +1,7 @@
 Where we are 8/7/2026
 
-Built on d38d31482a8fedc8d6625930bc6d2ba2f15fb8cb at
+Updated 2026-08-07 after the L-179/L-180 close. Built on
+a24b867a5f472d7824f27ddd3d031908915e11e3 at
 https://github.com/tonylquintanilla/palomas_orrery (branch main);
 gallery at 61a78c00668573dbff111ec9f10a96b1cd2fdc35 at
 https://github.com/tonylquintanilla/tonyquintanilla.github.io.
@@ -213,31 +214,58 @@ OPEN DECISIONS FOR TONY, IN ORDER OF NEED
            so the ruling is Tony's.
 
 
-UNRUN PATCH SITTING AT HEAD
+TRACK 0 STEP ONE IS DONE -- L-179 AND L-180 CLOSED
 
-patch_L179_L180_derivation.py was committed at d38d314 and has not been
-run -- L-179 and L-180 still read status:OPEN in the ledger. It did not
-come from the August 6-7 design session.
+Ruled and shipped August 7, pushed at 17dab34. Tony ruled 150,000 AU,
+the midpoint of the published 100,000-200,000 AU range, and 1.1 solar
+radii as the DRAWN chromosphere shell with the physical ~2,000 km
+extent stated beside it.
 
-Checked before recording: its anchor 6623c69 is one commit back and is a
-real ancestor, and none of its five target files have changed since, so
-its base is still valid. It closes both items by making every displayed
-figure DERIVE from constants_new.py rather than be typed -- which is the
-Track 0 approach, so it is aligned rather than competing. It touches
-constants_new.py, planet_visualization_utilities.py,
-solar_visualization_shells.py, palomas_orrery.py, and
-test_constants_provenance.py.
+Both closed by DERIVATION, not replacement, which is why this doubles
+as the first exercise of the Track 0 authoring pattern. Ranges are
+stored as data; the light-year figure derives from constants already
+in the store; one shared fragment per fact feeds every display site.
+No displayed number is typed any more. Change the constant and the
+hover text, the AU figure and the light-year figure all move together.
 
-One small note for later: it adds GRAVITATIONAL_INFLUENCE_RANGE_AU as a
+The geometry was never wrong -- the shells have drawn at the correct
+radii since August 2. Only the words had drifted, across four
+restatements, with every offline test passing throughout. That is
+L-181's thesis in miniature, at one-tenth of Jupiter's size.
+
+What it did NOT exercise, stated plainly so nobody reads it as a
+transport test: no fetch across the repo boundary, no pre-import gate,
+no FEATURE_REGISTRY, no validation layers, no builder. It rehearsed
+the authoring side only. The Jupiter pilot is still the pilot.
+
+The divergent class was enumerated rather than assumed. A check across
+all 157 Python files and 35 store constants, looking for a citation
+that names a constant and states a value disagreeing with it, found
+exactly three sites -- two in L-179, one in L-180 -- and reads zero
+after the patch. The scanner cannot find these, by construction: it
+flags UNCITED claims, and every one of these was cited. That check is
+the seed of L-189.
+
+One live note carried forward: GRAVITATIONAL_INFLUENCE_RANGE_AU is a
 tuple. Under fetch-and-import, tuples become JSON lists, which the
 serialization boundary check should handle deliberately rather than
-discover.
+discover. This is now real code, not a hypothetical.
+
+A relay hazard worth recording: the previous revision of this summary
+described that patch as something that "did not come from the August
+6-7 design session." It did -- it came from a sibling session on the
+same day. A committed artifact carries no authorship, so a parallel
+reader cannot tell the project's own work from a stranger's.
 
 
-SCANNER STATE, MEASURED AT 4b82384
+SCANNER STATE, MEASURED AT 1ba20c3
 
-A live run, not a figure carried from a handoff: 877 findings across 117
-files. Tier 1 206, Tier 2 581, Tier 3 88, Tier 4 2. (An earlier revision
+A live run, not a figure carried from a handoff: 879 findings across 117
+files. Tier 1 206, Tier 2 583, Tier 3 88, Tier 4 2. Measured after the
+L-179/L-180 close: Tier-1 unchanged, no file's Tier-1 count rose, and
+the +2 is Tier-2 -- the new constants and display fragments registering
+as claims, which is correct behavior rather than a gap. (The previous
+figures, 877 at 4b82384, differ only by that.) (An earlier revision
 of this summary said 118 files; the extra one was a patch script sitting
 in the test directory during measurement, not a repo file.)
 
@@ -313,8 +341,10 @@ ALREADY RESOLVED
 L-178 (Earth LEO/GEO band geometry) and L-182 (Mars Hill sphere, 319.2
 R_Mars across all seven copies) both closed August 5, Mode 5 confirmed.
 L-162 (CENTER_BODY_RADII naming) done. Artifact 1 (Earth) built and
-Mode-5 accepted, golden fingerprint locked. Protocol at v3.34 and all ten
-skills reconciled across their three stores. Phase 0, Phase 1a and Phase
+Mode-5 accepted, golden fingerprint locked. L-179 and L-180 closed
+August 7 (see above). Protocol at v3.35; safe-file-editing at 1.3
+(Line Endings Are Not Content, added August 7), all ten skills
+reconciled across their three stores. Phase 0, Phase 1a and Phase
 1b all closed; Layer 3 (Task Scheduler) live, with a known intermittent
 promotion-step glitch still being watched.
 

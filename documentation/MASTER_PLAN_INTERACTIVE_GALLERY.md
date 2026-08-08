@@ -1180,13 +1180,19 @@ which cites this item's coverage-gap pattern as its own precedent.
     the launcher menu (Fable round 2). That entry, and the exporter's own
     `feature_configs.json` output, belong in a retirement note so no
     future session reads them as live.
-14. **L-179 and L-180 values.** Solar gravitational influence (150,000 vs
-    126,000 AU) and the solar chromosphere's three inconsistent extents.
-    Both are drift inside `constants_new.py` today. Under the v17 order
-    they are the FIRST thing Track 0 settles -- migrating and deriving
-    before they are resolved would transport a known-inconsistent value
-    into the served cache and the hover text, authoritative-looking in
-    three more places.
+14. ~~**L-179 and L-180 values.**~~ **RESOLVED 2026-08-07, pushed at
+    `17dab34`.** Tony ruled 150,000 AU (the midpoint of the published
+    100,000-200,000 AU range) and 1.1 solar radii as the DRAWN
+    chromosphere shell, with the physical ~2,000 km extent stated
+    alongside it. Both were closed by derivation rather than
+    replacement: the ranges are stored as data
+    (`GRAVITATIONAL_INFLUENCE_RANGE_AU`, `CHROMOSPHERE_PHYSICAL_KM`),
+    the light-year figure derives from existing primaries, and one
+    shared fragment per fact feeds every display site, so no number is
+    typed. The divergent class was then enumerated rather than assumed:
+    a check across all 157 Python files and 35 store constants found
+    exactly three sites -- the two in L-179 and one in L-180 -- and
+    reads zero after the patch. Track 0's first step is complete.
 15. **Validation layers.** Four checks, each catching a class the others
     miss. (a) Source presence -- abort, not warn. (b) Unit-sanity RANGE
     checking: shape and source-presence validation both PASS on a value

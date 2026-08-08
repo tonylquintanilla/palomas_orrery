@@ -219,25 +219,25 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*114 live items; 103 need attention (`!`); 113 RICE-scored; 68 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*114 live items; 103 need attention (`!`); 113 RICE-scored; 70 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
+| ! | L-189 | Provenance scanner: run history and run-to-run delta | OPEN | 4.8 | 2026-08-07 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-06 |
+| ! | L-188 | Maintenance runner -- one command, the whole suite | OPEN | 3.1 | 2026-08-07 |
 | ! | L-176 | Shell hover text: add illustrated dimensions (radius_fraction → km) | OPEN | 2.8 | 2026-08-04 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
 | ! | L-187 | info_dictionary numeric-overlap enumeration | OPEN | 1.8 | 2026-08-07 |
-| ! | L-179 | Solar gravitational influence — 150,000 vs 126,000 AU mismatch | OPEN | 1.6 | 2026-08-04 |
-| ! | L-180 | Solar chromosphere — three inconsistent extents in one shell | OPEN | 1.3 | 2026-08-04 |
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
 | ! | L-129 | Cometary structure constants -- periodic maintenance sweep | OPEN | 1.0 | 2026-07-17 |
 | ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 0.9 | 2026-07-16 |
@@ -436,9 +436,11 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-169 | Gallery/Studio track -- repo structure reference | DONE | 1.9 | 2026-07-28 |
 |  | L-108 | Master plan v10 -> v11: Phase 1b fetch-fresh pivot reconciliation | DONE | 1.8 | 2026-07-12 |
 |  | L-178 | Earth shadow constants — EARTH_RADIUS_KM duplicate + mean vs equatorial mixing | DONE | 1.8 | 2026-08-05 |
+|  | L-179 | Solar gravitational influence — 150,000 vs 126,000 AU mismatch | DONE | 1.6 | 2026-08-07 |
 |  | L-002 | Protocol -> Skills refactor (process/tooling) | DONE | 1.5 | 2026-07-04 |
 |  | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | DONE | 1.5 | 2026-06-23 |
 |  | L-147 | Embed dashboard launcher in orrery GUI third column | DONE | 1.5 | 2026-07-17 |
+|  | L-180 | Solar chromosphere — three inconsistent extents in one shell | DONE | 1.3 | 2026-08-07 |
 |  | L-047 (#N10) | Note-composition structural refactor (behind N6) | DONE | 1.0 | 2026-06-23 |
 |  | L-050 (#N9) | white -> red orbit-marker switch (osculating marker intentionally stays white) | DONE | 1.0 | 2026-06-23 |
 |  | L-134 | Dashboard developer-tools audit | DONE | 1.0 | 2026-07-17 |
@@ -908,40 +910,6 @@ L-156 Phase 2.
 Perihelion is the project convention for Eris and Pluto.
 **Ref:** ASBUILT_geometry_and_br_fix.md, Batch 1 worksheets.
 
-#### [L-179] Solar gravitational influence — 150,000 vs 126,000 AU mismatch
-<!-- L:179 status:OPEN upd:2026-08-04 section:A flag: rice:4/3/40/3 -->
-- Fable findings #29-30. constants_new.py defines
-  GRAVITATIONAL_INFLUENCE_AU = 150,000 (with an honest note: 100k-200k
-  range). solar_visualization_shells.py citations at lines 50 and 174
-  both claim the constant is 126,000. Display text says 126,000 AU.
-  Shell renders at 150,000 AU. Classic dual-pipeline drift — someone
-  moved one copy.
-- Three-model cross-check needed to decide the correct value.
-- **FIRST STEP OF PHASE 2 TRACK 0** (Tony's ordering ruling,
-  2026-08-07; Fable sequencing note). Migrating and deriving before
-  this value is settled would transport a known-inconsistent number
-  into the gallery artifact, the served cache, and the hover text --
-  authoritative-looking in three more places. Settle it first, as
-  Track 0 work rather than as a gate in front of Track 0.
-**Gap:** Resolve which value is authoritative. Update the loser.
-**Ref:** FABLE_shell_consistency_audit_report.md findings #29-30;
-FABLE_REVIEW_feature_constant_unification.md sequencing note.
-
-#### [L-180] Solar chromosphere — three inconsistent extents in one shell
-<!-- L:180 status:OPEN upd:2026-08-04 section:A flag: rice:3/3/30/2 -->
-- Fable finding #31. Chromosphere shell text says "Radius: from
-  Photosphere to 1.5 Solar radii" and also "about 2,000 kilometers"
-  (≈1.003 R_sun). Shell renders at constants_new.py CHROMOSPHERE_RADII
-  = 1.1 R_sun (≈0.00512 AU). Three different extents: 2,000 km
-  (physical), 1.1 (drawn), 1.5 (claimed).
-- The drawn value is a declared stylization (there's a code comment).
-  The text should say "drawn at 1.1" and note the physical extent.
-- **FIRST STEP OF PHASE 2 TRACK 0** (2026-08-07). Same reasoning as
-  L-179: do not transport an unsettled value into three more places.
-**Gap:** Reconcile text, add Show-the-Envelope comment.
-**Ref:** FABLE_shell_consistency_audit_report.md finding #31;
-FABLE_REVIEW_feature_constant_unification.md sequencing note.
-
 #### [L-181] Complete the single-source-of-truth constant layer
 <!-- L:181 status:OPEN upd:2026-08-06 section:A flag: rice:5/5/70/5 -->
 - Fable audit established the structural problem: up to six independent
@@ -1371,6 +1339,81 @@ ruling.
 **Gap:** Write the enumeration. Then decide scope from real numbers.
 **Ref:** FABLE_REVIEW_feature_constant_unification.md, Open Question 2(d)
 and findings summary #5.
+
+#### [L-188] Maintenance runner -- one command, the whole suite
+<!-- L:188 status:OPEN upd:2026-08-07 section:A flag: rice:3/3/70/2 -->
+- **Tony's idea, 2026-08-07:** "a common batch file could run a suite
+  of files that should run after every update, including module
+  atlas." Raised while looking at a test file that had been failing
+  for five days with nobody watching.
+- **The problem is not discoverability.** `palomas_orrery_dashboard.py`
+  already lists eight maintenance tools under Developer Tools, each
+  with a description saying when to run it. They still get skipped:
+  the skill manifest advertised wrong versions for about three weeks,
+  and `test_constants_provenance.py` sat false for five days. Eight
+  separate judgment calls after every edit is eight chances to skip
+  one.
+- **Therefore the design constraint: it must REPLACE the individual
+  entries, not join them.** A ninth menu item reproduces the exact
+  failure. One action instead of five, not a sixth thing to remember.
+- Two kinds of tool, and the split decides the shape. GENERATORS
+  rewrite a file and are safe to run every time (`ledger_index.py`,
+  `skills_index.py`, `module_atlas.py`, `data_inventory.py`); running
+  them when nothing changed is a no-op. CHECKERS report a problem and
+  inform the push call (`provenance_scanner.py`, and whatever L-155
+  absorbs from the constants pins); these run last so their verdict is
+  the last thing on screen. `dep_trace.py` stays OUT -- it takes a
+  module name and answers a question BEFORE an edit, a different job.
+- Useful precedent: `ledger_index.py` already has a `--check` mode
+  that reports without rewriting and exits 1 on problems. That is the
+  gate shape; the other generators would need the same mode added.
+- Correction worth carrying: the scanner imports `module_atlas`'s
+  FUNCTIONS directly rather than reading the generated
+  `MODULE_ATLAS.md`, so it does NOT depend on the atlas being
+  regenerated first. Ordering is for readability, not correctness --
+  do not build a dependency that is not there.
+**Gap:** **(decide)** does this ship as a dashboard entry that
+replaces the eight, or as a script run before every push? Then build.
+**Ref:** L-160 (the unrun test file that prompted it); L-184
+(build-path push gate, same family); L-189.
+
+#### [L-189] Provenance scanner: run history and run-to-run delta
+<!-- L:189 status:OPEN upd:2026-08-07 section:A flag: rice:3/4/80/2 -->
+- **Tony's request, 2026-08-07:** "could the scanner keep a log of
+  results by date so we can track this? maybe the last 6 runs."
+  Raised after a session where the only way to learn whether a patch
+  had ADDED findings was for Claude to diff two committed copies of
+  `PROVENANCE_AUDIT.md` from two commits -- which needs repo access
+  and a script, and is therefore not a check Tony can run.
+- **The number that matters is the DELTA, and it belongs on the
+  console** where the push call actually gets made -- not in a file
+  that has to be opened. "206 Tier-1" answers nothing on its own;
+  "206, unchanged, and no file's Tier-1 rose" answers the question.
+- Shape: `data/provenance_history.json`, a ring buffer of the last 6
+  runs. Per run: timestamp, repo HEAD SHA (readable from `.git`
+  without a git command), per-tier counts, per-domain counts, and
+  Tier-1 per file. Console prints the delta after the priority
+  summary and NAMES any file whose Tier-1 rose. `PROVENANCE_AUDIT.md`
+  gets a matching Run History table.
+- **Tony's call, 2026-08-07: TRACK the history file in git.** When an
+  audit was taken and against which SHA is itself provenance. Cost is
+  one small file showing as modified after each deliberate run.
+- Stays INFORMATIONAL. The scanner's own comments are emphatic that
+  Tier-1 never gets an auto-exit gate at any threshold; history makes
+  the judgment better informed, it does not automate it.
+- Build note: the scanner scans itself, so this change will nudge its
+  own findings count. The first run after it lands shows a delta that
+  IS the change; have it say so rather than let it read as a
+  regression.
+- Seed already written: the 20-line divergence check from the L-179
+  session, which finds citations naming a constant and stating a value
+  that disagrees with the store. It caught all 3 sites in the codebase
+  and the scanner cannot -- it flags UNCITED claims, and these were
+  cited. Worth folding in as a checker in its own right.
+**Gap:** Build it. Additive change to a ~3,000-line shared tool;
+treat as a shared-CI change with family-wide ripple.
+**Ref:** provenance_scanner.py console summary block (~line 2909);
+L-188; L-184.
 
 ## PENDING ACTION (Tony-side)
 
@@ -3284,6 +3327,115 @@ reads 319.2 R_Mars. [verified @06daa8b]
 documentation/patch_mars_cross_check.py (module-only target);
 patch_mars_dead_copies.py (the reverting patch);
 FABLE_skills_layer_review_report.md Job 2 #8 / Job 3 #1; L-181.
+
+#### [L-179] Solar gravitational influence — 150,000 vs 126,000 AU mismatch
+<!-- L:179 status:DONE upd:2026-08-07 section:C flag: rice:4/3/40/3 -->
+- Fable findings #29-30. constants_new.py defines
+  GRAVITATIONAL_INFLUENCE_AU = 150,000 (with an honest note: 100k-200k
+  range). solar_visualization_shells.py citations at lines 50 and 174
+  both claim the constant is 126,000. Display text says 126,000 AU.
+  Shell renders at 150,000 AU. Classic dual-pipeline drift — someone
+  moved one copy.
+- Three-model cross-check needed to decide the correct value.
+- **FIRST STEP OF PHASE 2 TRACK 0** (Tony's ordering ruling,
+  2026-08-07; Fable sequencing note). Migrating and deriving before
+  this value is settled would transport a known-inconsistent number
+  into the gallery artifact, the served cache, and the hover text --
+  authoritative-looking in three more places. Settle it first, as
+  Track 0 work rather than as a gate in front of Track 0.
+- **RULED (Tony, 2026-08-07): 150,000 AU stands.** His reasoning:
+  it is the range interpolation from the cross check -- the midpoint
+  of the published 100,000-200,000 AU spread. The store already held
+  150,000 (corrected 2026-08-02); every divergent copy was downstream.
+- **DONE 2026-08-07, pushed at `17dab34`** (base `d38d314`,
+  patch_L179_L180_derivation_v3.py). Five sites corrected, and the
+  approach is derivation rather than replacement: no display figure
+  is typed any more. Added to `constants_new.py`:
+  `GRAVITATIONAL_INFLUENCE_RANGE_AU = (100000, 200000)` as DATA, and
+  `AU_PER_LIGHT_YEAR` derived from `SPEED_OF_LIGHT_KM_S` and
+  `KM_PER_AU`. `GRAVITATIONAL_INFLUENCE_SENTENCE` in
+  `solar_visualization_shells.py` builds the statement once; both
+  duplicate display strings reference it.
+- **Per Tony's ruling the text carries the ENVELOPE, not the point.**
+  Rendered: "extends to roughly 2.4 light-years (~150,000 AU).
+  Published estimates range 100,000-200,000 AU (1.6-3.2 light-years);
+  this visualization draws the midpoint." Show-the-Envelope applied
+  to a model-dependent quantity: the midpoint is a choice, and the
+  hover says so rather than implying a measurement.
+- **The geometry was never wrong.** `create_sphere_points` has drawn
+  at 150,000 AU since 2026-08-02; the import chain from the store
+  through `planet_visualization_utilities.py` is clean, with no
+  shadow constant. Only the words had drifted. One store correct,
+  four restatements adrift, every offline test passing throughout --
+  L-181's thesis demonstrated in miniature.
+- **Two citations were asserting a value the store did not hold**
+  (`GRAVITATIONAL_INFLUENCE_AU=126000` at lines 50 and 174). One of
+  them cited the constant for a string that states no such figure at
+  all. Cite-to-clear caught in the wild: both passed every scanner
+  run precisely because they were cited.
+- **`palomas_orrery.py` line 10295 was the hard case** -- a bare
+  "126,000 AU" in a scale-suggestion tooltip with no import and no
+  link to the store. Now interpolated. Nothing mechanical would have
+  found it; it is wrong only RELATIVE to a value in another file.
+- **The whole divergent class was enumerated, not assumed.** A
+  20-line check over all 157 Python files and 35 store constants,
+  looking for citations that name a constant and state a value
+  disagreeing with it, found exactly three sites: two here and one
+  in L-180. The class is closed. The scanner is blind to it by
+  construction (it flags UNCITED claims), which is why they
+  survived. That check is the seed of L-189.
+- Verified after the push: scanner Tier-1 unchanged at 206, no file's
+  Tier-1 rose, +2 Tier-2 from the new constants registering as
+  claims. SHA round trip confirmed against `17dab34`.
+- Field note, recorded in safe-file-editing 1.3: the delivery hit a
+  CRLF working copy whose content was byte-identical to the repo,
+  and the patch harness read that as BASE MOVED. Fingerprint content,
+  not raw bytes; translate anchors to the file's own convention.
+  Nothing was edited on Tony's side and git was right all along.
+**Gap:** None. Closed.
+**Ref:** patch_L179_L180_derivation_v3.py (pushed `17dab34`);
+FABLE_shell_consistency_audit_report.md findings #29-30;
+FABLE_REVIEW_feature_constant_unification.md sequencing note.
+
+#### [L-180] Solar chromosphere — three inconsistent extents in one shell
+<!-- L:180 status:DONE upd:2026-08-07 section:C flag: rice:3/3/30/2 -->
+- Fable finding #31. Chromosphere shell text says "Radius: from
+  Photosphere to 1.5 Solar radii" and also "about 2,000 kilometers"
+  (≈1.003 R_sun). Shell renders at constants_new.py CHROMOSPHERE_RADII
+  = 1.1 R_sun (≈0.00512 AU). Three different extents: 2,000 km
+  (physical), 1.1 (drawn), 1.5 (claimed).
+- The drawn value is a declared stylization (there's a code comment).
+  The text should say "drawn at 1.1" and note the physical extent.
+- **FIRST STEP OF PHASE 2 TRACK 0** (2026-08-07). Same reasoning as
+  L-179: do not transport an unsettled value into three more places.
+- **RULED (Tony, 2026-08-07): 1.1 stands as the drawn value; the
+  other figures change to match.** The drawn shell is a declared
+  stylization and the text now says so instead of implying a
+  measurement.
+- **DONE 2026-08-07, pushed at `17dab34`**, same patch as L-179.
+  Added to `constants_new.py`: `CHROMOSPHERE_PHYSICAL_KM = 2000.0`
+  (Carroll & Ostlie Ch. 11) and `CHROMOSPHERE_PHYSICAL_RADII`,
+  derived as `1 + CHROMOSPHERE_PHYSICAL_KM / SUN_RADIUS_KM`. Both
+  drawn and physical extents are now first-class stored values that
+  answer different questions.
+- `CHROMOSPHERE_RADIUS_LINE` builds the statement once; both
+  duplicate display strings reference it. Rendered: "drawn from the
+  photosphere out to 1.1 solar radii (~0.00465 - 0.00512 AU). This is
+  a stylization for visibility: the physical chromosphere extends
+  only ~2,000 km above the photosphere (~1.003 solar radii)."
+- The third extent (1.5) lived only in a `# Source:` comment claiming
+  the store held that value; the store has held 1.1 since 2026-08-02.
+  Corrected, with the erratum recorded at the site.
+- Note for whoever writes the next erratum: the divergence check
+  (L-189) initially fired on these very notes, because a comment
+  saying "X was wrong" contains the same NAME=value shape as a
+  comment asserting X. The notes were reworded rather than the
+  checker taught exceptions -- a check that fires on its own fix is
+  one people learn to ignore.
+**Gap:** None. Closed.
+**Ref:** patch_L179_L180_derivation_v3.py (pushed `17dab34`);
+FABLE_shell_consistency_audit_report.md finding #31;
+FABLE_REVIEW_feature_constant_unification.md sequencing note.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
