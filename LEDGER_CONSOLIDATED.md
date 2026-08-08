@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*114 live items; 103 need attention (`!`); 113 RICE-scored; 70 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*115 live items; 104 need attention (`!`); 114 RICE-scored; 70 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -227,6 +227,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-189 | Provenance scanner: run history and run-to-run delta | OPEN | 4.8 | 2026-08-07 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
+| ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-07 |
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
@@ -382,7 +383,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-166 | F1b: per-object trust enforcement + soft-edge trust UX (resolver/client consumption of served trust blocks) | OPEN | 2.4 | 2026-07-28 |
 | ! | L-121 | Slim plotly wheel not deployed anywhere (F4, ships-nothing gate) | OPEN | 2.2 | 2026-07-15 |
 | ! | L-150 | Multi-orbit trust model for near-equal-mass binaries (Pluto/Charon and future onboards) | OPEN | 2.2 | 2026-07-20 |
-| ! | L-154 | Gallery feature-rendering JS layer (shells, rings, radiation belts -- Artifact 2 prerequisite) | BLOCKED | 2.1 | 2026-07-28 |
+| ! | L-154 | Gallery feature-rendering JS layer (shells, rings, radiation belts -- Artifact 2 prerequisite) | BLOCKED | 2.1 | 2026-08-07 |
 | ! | L-173 | shell_configs.py -- 8 body blocks missing... source citations entirely (found during 1c predesign measurement) | OPEN | 2.1 | 2026-07-30 |
 | ! | L-122 | Stray data/solar-system.prev_old/ committed to the repo (F6, non-blocking) | OPEN | 1.9 | 2026-07-15 |
 | ! | L-123 | Object info card -- serve info_dictionary.py as JSON, click-to-open (rides with F1) | OPEN | 1.8 | 2026-07-15 |
@@ -934,9 +935,38 @@ Perihelion is the project convention for Eris and Pluto.
   KNOWN_ORBITAL_PERIODS). Solar shell geometry went into the store;
   planetary ring geometry stayed inline in the rendering modules. There
   is no principle behind which went where -- the split is historical.
-- **Scope widened to three layers.** (1) 37 feature entries move out of
-  `jupiter_`/`saturn_`/`uranus_`/`neptune_visualization_shells.py` into
-  `constants_new.py`. (2) Provenance migrates from `# Source:` comments
+- **COUNT CORRECTED 2026-08-07.** The "37 entries" figure was never
+  sourced and does not match the code. Enumerated by AST walk over the
+  four shell modules at `9b4f278`: **33 ring entries** -- Jupiter 4
+  (Main, Halo, Amalthea Gossamer, Thebe Gossamer), Saturn 7, Uranus 11,
+  Neptune 11. Jupiter is 4, not the 5 the August 7 handoff stated.
+- **A SECOND SURFACE exists and was in neither count.** Radiation belts
+  and plasma tori carry geometry as BARE LITERALS inside function
+  bodies, not as dicts with `inner_radius_km`: Jupiter
+  `io_torus_distance=5.9`, thickness 2, width 1, `belt_distances=
+  [1.5, 3.0, 6.0]`, `belt_thickness=0.5`; Saturn
+  `enceladus_torus_distance=3.95`, thickness 1, width 2,
+  `belt_distances=[2.7, 3.5, 4.4, 5.6, 7.4, 9.0]`, thickness 0.5;
+  Uranus `belt_distances=[2, 6]`, thickness 0.5; Neptune dict-keyed on
+  `thickness`. About 22 physical values in FOUR different shapes, and
+  ZERO carry a `# Source:` comment. These are inside Artifact 2, which
+  the plan defines as "Jupiter/Saturn, rings + radiation belts."
+- **Tony's ruling 2026-08-07 on their status:** the belt dimensions are
+  NOT arbitrary. They are RANGES, and the modeling can use the ranges
+  or interpolate within them -- the same treatment L-179 gave the solar
+  gravitational influence. Where a value is genuinely a style choice
+  (belt thickness for visibility, how many shells to draw), Tony
+  decides and it is declared as such. An earlier framing of these as
+  "drawing choices" was wrong and is withdrawn.
+- **REGISTRY STRUCTURE IS A DESIGN TASK (Tony, 2026-08-07).** One
+  `FEATURE_REGISTRY` has to hold rings (dict, inner/outer/thickness),
+  belt sets (list of distances plus a scalar), and tori (three
+  scalars). Tony: "we need a structure for this data. it will extend
+  to other bodies." Design the shape BEFORE the migration, because the
+  migration writes into whatever it defines.
+- **Scope widened to three layers.** (1) The feature entries above move
+  out of `jupiter_`/`saturn_`/`uranus_`/`neptune_visualization_shells.py`
+  into `constants_new.py`. (2) Provenance migrates from `# Source:` comments
   to `source` DATA fields, one pass, bounded to the store (36 citations
   in constants_new.py plus what migrates in) -- required because a
   comment cannot be read at runtime and Tony wants hover text to quote
@@ -971,10 +1001,48 @@ Perihelion is the project convention for Eris and Pluto.
   test -- "this should be minor if the architecture is right." A large
   Mode 5 surface is evidence the architecture is wrong, not evidence the
   scope was too big.
-**Gap:** Blocked on Fable architecture review (sent 2026-08-06). Then
-design the store format, decide on dead tooltip fields, sequence
-migration per body. L-184's build path cannot be defined until this
-settles.
+- **TONY'S RULING 2026-08-07: `constants_new.py` IS THE STORE, and
+  `objects_config.json` stops carrying feature values.** The `features`
+  key is emptied and the store owns them. His reasoning: two files
+  claiming the same value violates single-source-of-truth, and the
+  frozen-file rule on `objects_config.json` "is a rule we can't observe
+  either way, to keep it current" -- so freezing it does not protect
+  anything that matters. This settles the ownership question the
+  cross-repo scope note above raised but did not rule on.
+- **Why it had to be ruled.** The builder assembles
+  `feature_configs.json` from `objects_config.json`'s `features` key
+  (`features_out[slug] = feats`). Track 0 would have the builder import
+  `FEATURE_REGISTRY` instead. With both in place the builder picks one
+  silently: edit the store, and if it still reads the config your edit
+  never reaches the cache while every freshness signal stays green.
+  That is the L-182 shape -- one value, two homes, no rule.
+- **SERVED STATE MEASURED 2026-08-07** (gallery `33fc7d6`), and it is
+  not what the project assumed. The hand-copy was INCOMPLETE when made,
+  not merely stale. Jupiter: 4 of 4 rings with all three fields, plus
+  belts -- every value matching the orrery EXACTLY. Saturn: 7 of 7
+  rings but `thickness_km` absent on all seven, and NO radiation belts
+  or Enceladus torus at all. Uranus and Neptune: nothing served, and
+  neither slug exists in `objects_config.json`'s twelve. So the
+  transport's job is not "keep a synced copy fresh" -- it is "serve
+  data that has never been served." No drift found in what IS served.
+- **Which makes Jupiter the right pilot for a better reason than size:**
+  it is the only body whose served feature data is complete and
+  correct, so the transport has a real acceptance test. Stage 1,
+  reproduce Jupiter's existing `feature_configs.json` entry exactly
+  plus `source` fields -- proves the transport is faithful. Stage 2,
+  serve something never served (the Io torus, or Saturn's
+  `thickness_km`) -- proves it can extend the cache, which is the
+  actual job. Neither 5 entries nor 12: 4 rings plus 2 belt values to
+  match, then one new thing to prove extension.
+- **Artifact 2 cannot be built from today's served data** regardless of
+  how good the rendering layer is. Saturn's radiation belts are not in
+  the cache, and Artifact 2 is defined as rings PLUS radiation belts.
+**Gap:** Fable review complete (rounds 1 and 2, August 2026). Remaining
+before build, in order: (a) **(decide)** ratify fetch-and-import;
+(b) **(design)** the `FEATURE_REGISTRY` shape covering rings, belt sets
+and tori; (c) **(design)** the migration shape and per-body sequence;
+(d) decide on the 124 dead tooltip fields. L-184's build path cannot be
+defined until this settles.
 - **FABLE DESIGN REVIEWS, ROUNDS 1 AND 2, AUGUST 2026** (built on orrery `ee0da47c` /
   gallery `61a78c0`; zero code). Architecture ENDORSED: one store, three
   zones per entry, provenance as data, derivation instead of annotation,
@@ -1414,6 +1482,38 @@ replaces the eight, or as a script run before every push? Then build.
 treat as a shared-CI change with family-wide ripple.
 **Ref:** provenance_scanner.py console summary block (~line 2909);
 L-188; L-184.
+
+#### [L-190] Scanner reach: anything rendered must be reachable
+<!-- L:190 status:OPEN upd:2026-08-07 section:A flag: rice:4/4/80/3 -->
+- **Tony's rule, 2026-08-07:** "anything rendered from sourced data
+  should be reached by the scanner." Stated as a general principle, not
+  a one-off fix.
+- **It is a stronger rule than the one the scanner was built on.** The
+  scanner today reaches values in the shapes it knows -- annotated
+  module constants, dict entries, `# Source:` comments. Tony's test is
+  whether a value reaches a RENDER, whatever shape it is stored in.
+- **The gap that surfaced it.** The gas giant radiation belt and plasma
+  torus geometry (about 22 values across four bodies, see L-181) is
+  bare literals inside function bodies. The scanner does not see them:
+  zero occurrences of `belt_distances`, `torus_distance` or
+  `belt_thickness` anywhere in the 879-finding audit at `1ba20c3`.
+  Every one of these values renders.
+- **Why it matters beyond tidiness.** Batch 2's worksheet is built from
+  scanner findings. An assumption formed this session -- that Batch 2
+  would source the belt ranges as part of the gas giant cross-check it
+  was already doing -- would have handled NOTHING, silently, because
+  those values never reach the worksheet. Invisible-to-the-tool is the
+  same failure class as uncited: both pass every check.
+- Adjacent finding from the same session, worth folding in: the 20-line
+  divergence check written for L-179 finds a class the scanner also
+  cannot see -- a citation naming a constant and stating a value that
+  disagrees with the store. It flags CITED claims, where the scanner
+  flags UNCITED ones. See L-189.
+**Gap:** Extend the scanner to reach bare literals that feed a render.
+Start with the belt and torus values, since they gate Batch 2's
+worksheet completeness. Treat as a shared-CI change.
+**Ref:** L-181 (the enumerated belt/torus surface); L-189 (run history
+and the divergence check); L-156 (Batch 2 worksheet).
 
 ## PENDING ACTION (Tony-side)
 
@@ -4806,7 +4906,28 @@ checks one global bound regardless of scene composition -- same limitation noted
 (pluto/charon, barycentric-only today); "Pluto/Charon two-view" golden artifact.
 
 #### [L-154] Gallery feature-rendering JS layer (shells, rings, radiation belts -- Artifact 2 prerequisite)
-<!-- L:154 status:BLOCKED upd:2026-07-28 section:W.Active flag: rice:3/3/70/3 -->
+<!-- L:154 status:BLOCKED upd:2026-08-07 section:W.Active flag: rice:3/3/70/3 -->
+- **RE-VERIFIED 2026-08-07 at gallery HEAD `33fc7d6`, and the block is
+  reclassified.** `gallery/assembler/resolver.py` line 133 STILL reads
+  `features = tuple(rec.get("features") or ())`. Failure reproduced
+  directly this session: `{'ring_system': {'main_ring':
+  {'inner_radius_km': 122500}}}` collapses to `('ring_system',)`.
+  Third independent verification (2026-07-27 Fable, 2026-07-28 Sonnet,
+  2026-08-07 Opus 5), each at a different HEAD.
+- **Why the reclassification.** This entry is carried as blocked on the
+  L-155-162 provenance cluster. That is true but it is not the NEAREST
+  blocker, and reading it as the only one is misleading. Even with a
+  perfect transport and perfectly sourced values, the resolver discards
+  every parameter one step before anything could draw them. The
+  resolver fix is small, independent of ALL provenance work, and can
+  proceed at any time. Confirmed the same day: nothing on the client
+  reads `feature_configs.json` at all -- zero references in any JS or
+  HTML. The file is written nightly into the cache and no code reads
+  it.
+- Note the surfaces are distinct: `index.html` is the STATIC curated
+  gallery and never needed feature data; `interactive.html` is the
+  assembler surface and is the one that does. Only the Artifact 1 test
+  harness reads the cache today.
 - **What.** The client-side JS that reads `ring_system`, `van_allen_belts`,
   `atmosphere_shell`, and `radiation_belts` out of the served cache and
   actually draws them. `assemble.py` already resolves and reports the

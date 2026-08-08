@@ -1211,12 +1211,13 @@ which cites this item's coverage-gap pattern as its own precedent.
 16. **Pilot slice inside Track 0.** OPEN, Tony decides. Fable round 2
     recommends migrating ONE body first (Jupiter, 5 entries) through the
     full Track 0 treatment and building the transport end-to-end against
-    it, then scaling to the remaining 32 -- which under fetch-and-import
+    it, then scaling to the remaining 29 rings -- which under fetch-and-import
     needs zero transport rework, since new entries flow through
     untouched. The argument: the transport cannot be tested against
     today's store at all, because no `source` fields exist for
     abort-on-missing-source to act on, so "transport after Track 0"
-    really means "first end-to-end test after all 37 entries move" --
+    really means "first end-to-end test after all 33 ring entries move"
+    --
     the largest possible batch before the first proof. A pilot gives
     Tony's acceptance test ("this should be minor if the architecture is
     right") its first data point at one-seventh the exposure, and
@@ -1696,6 +1697,14 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
   narrow ringlets modelled at a single radius. Use `inner <= outer`. The
   directional claim holds: `inner > outer` is genuinely zero across all
   33 ring pairs.
+
+**Count corrected 2026-08-07.** An earlier "37 entries" figure appeared
+once in this document, unsourced, alongside "33 ring pairs" elsewhere.
+Enumerated by AST walk at `9b4f278`: 33 ring entries -- Jupiter 4,
+Saturn 7, Uranus 11, Neptune 11. Jupiter is 4, not 5. Separately, the
+radiation belt and plasma torus geometry is roughly 22 more physical
+values in four different shapes, held as bare literals in function
+bodies and counted in neither figure. See L-181 and L-190.
 - **Coupling requirement recorded as a Track 0 exit criterion in L-181**
   rather than as its own ledger item, per Tony: do not multiply handles.
 - Scanner console now prints the per-domain split under each tier line,
