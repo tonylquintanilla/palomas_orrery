@@ -924,7 +924,7 @@ Perihelion is the project convention for Eris and Pluto.
   radius_fraction and display text from it. The `<br>` canonical
   direction also belongs here: source text in `\n`, derive `<br>` at
   the Plotly boundary.
-- 124 dead `tooltip` fields (83 sphere + 41 custom) are a
+- 126 dead `tooltip` fields (83 sphere + 41 custom) are a
   delete-or-wire decision before migration.
 - Natural companion to L-176 (illustrated dimensions).
 - **REFRAMED 2026-08-06 (Tony's ruling).** This is not a NEW constant
@@ -1042,7 +1042,7 @@ Perihelion is the project convention for Eris and Pluto.
 before build, in order: (a) **(decide)** ratify fetch-and-import;
 (b) **(design)** the `FEATURE_REGISTRY` shape covering rings, belt sets
 and tori; (c) **(design)** the migration shape and per-body sequence;
-(d) decide on the 124 dead tooltip fields. L-184's build path cannot be
+(d) decide on the 126 dead tooltip fields. L-184's build path cannot be
 defined until this settles.
 - **FABLE DESIGN REVIEWS, ROUNDS 1 AND 2, AUGUST 2026** (built on orrery `ee0da47c` /
   gallery `61a78c0`; zero code). Architecture ENDORSED: one store, three
@@ -1589,7 +1589,7 @@ and the divergence check); L-156 (Batch 2 worksheet).
 - **Gas giant shells have NO tooltips at all** -- zero `CreateToolTip`
   bindings for any jupiter/saturn/uranus/neptune shell. Related
   measurement: the `'tooltip'` key in `shell_configs.py` is defined
-  **126 times and read by nothing**, confirming L-181's "124 dead
+  **126 times and read by nothing**, confirming L-181's "126 dead
   tooltip fields" as dead and updating the count. Whether the gas
   giants SHOULD have tooltips is a separate question for Tony.
 
@@ -5357,7 +5357,7 @@ annotation format. Mars cross-checked as precedent.
 radius_fraction geometry constants were not updated to match the
 corrected display text values — shells rendered at old sizes while hover
 text claimed new ones. Also found: `<br>` in _info strings rendering
-as literal markup in GUI tooltips; 124 dead `tooltip` fields in
+as literal markup in GUI tooltips; 126 dead `tooltip` fields in
 SHELL_CONFIGS/CUSTOM_SHELLS; up to six independent storage locations per
 physical value. Opus 5 built 7 geometry+text patch scripts (47 edits).
 `<br>` → `\n` converted for moon, eris, pluto, mars. Mercury mantle
