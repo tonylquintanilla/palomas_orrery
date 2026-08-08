@@ -1589,7 +1589,7 @@ and the divergence check); L-156 (Batch 2 worksheet).
 - **Gas giant shells have NO tooltips at all** -- zero `CreateToolTip`
   bindings for any jupiter/saturn/uranus/neptune shell. Related
   measurement: the `'tooltip'` key in `shell_configs.py` is defined
-  **126 times and read by nothing**, confirming L-181's "126 dead
+  **126 times and read by nothing**, confirming L-181's "124 dead
   tooltip fields" as dead and updating the count. Whether the gas
   giants SHOULD have tooltips is a separate question for Tony.
 
