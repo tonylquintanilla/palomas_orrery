@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*115 live items; 104 need attention (`!`); 114 RICE-scored; 70 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*116 live items; 105 need attention (`!`); 115 RICE-scored; 70 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -234,6 +234,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-06 |
 | ! | L-188 | Maintenance runner -- one command, the whole suite | OPEN | 3.1 | 2026-08-07 |
 | ! | L-176 | Shell hover text: add illustrated dimensions (radius_fraction → km) | OPEN | 2.8 | 2026-08-04 |
+| ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-08-07 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
@@ -1514,6 +1515,99 @@ Start with the belt and torus values, since they gate Batch 2's
 worksheet completeness. Treat as a shared-CI change.
 **Ref:** L-181 (the enumerated belt/torus surface); L-189 (run history
 and the divergence check); L-156 (Batch 2 worksheet).
+
+#### [L-191] Display-text duplication across the shell modules
+<!-- L:191 status:OPEN upd:2026-08-07 section:A flag: rice:3/4/70/3 -->
+- **Surfaced by Tony's Mode 5 pass, 2026-08-07.** Literal `<br>` tags
+  visible in the Tkinter checkbox tooltips for the solar shells. Tony
+  then spot-checked the asteroid belt and Earth tooltips, found them
+  CLEAN, and ruled: **Mode 5 survey BEFORE the sweep, not after.**
+  That ruling is the item's method and it is what produced everything
+  below.
+
+- **ORIGIN, traced not assumed.** On 2025-04-05 (`e3ca900`) the design
+  was correct: `gravitational_influence_info` carried `\n` for the
+  Tkinter tooltip and `gravitational_influence_info_hover` carried
+  `<br>` for the Plotly hover. Same text, two formats, both in
+  `constants_new.py`. The naming still carries that intent. Commit
+  `97bbfe3` (2026-05-25, "sun indicator refactor") converted `\n` to
+  `<br>` in the tooltip variants as well, collapsing the distinction
+  while the names kept implying it held. The regression is 2.5 months
+  old.
+
+- **SCOPE, corrected twice.** A first estimate of "772 lines across 17
+  files" was WRONG -- it counted every line in that commit gaining a
+  `<br>`, which sweeps in the `_info_hover` strings where `<br>` is
+  correct. Resolving every name bound to `CreateToolTip` back to its
+  definition gives the real figure: **20 affected strings, all in
+  `solar_visualization_shells.py`.** Earth (11 tooltip strings) and
+  asteroid belt (4) are clean. Grep counted a proxy; the render
+  counted the surface.
+
+- **FOUR PATTERNS EXIST for the same job.** This is the actual finding.
+  | Module | Tooltip source | Plot source | State |
+  |---|---|---|---|
+  | solar | `_info` | `_info_hover` | two copies, FORMAT BUG VISIBLE |
+  | earth | `_info` | dict `description` | two copies, correct today, DRIFT-CAPABLE |
+  | gas giants | none | `_info` via `.replace()` | one copy, correct |
+  | asteroid belt | `_info` | -- | clean |
+
+- **The gas giant pattern is already the fix.** `shell_configs.py`
+  carries 16 sites of the form
+  `'hover_text': saturn_core_info.replace('\n', '<br>')` -- one string
+  authored in `\n`, converted at the Plotly boundary. That IS L-181's
+  stated canonical direction, already implemented and working. So this
+  item is NOT "invent a `\n`-canonical system"; it is "bring the other
+  modules into the pattern the codebase already uses," with a
+  reference implementation in the tree.
+
+- **Why only solar broke.** The May sweep changed source strings in
+  many modules. For a module whose config converts at the boundary the
+  change is a harmless no-op. Solar has no conversion step -- its
+  `_info` copy goes to Tkinter exactly as written. Same edit, two
+  consequences, because the modules consume their strings differently.
+
+- **EARTH IS NOT THE HEALTHY CASE.** Same two-copies structure as
+  solar, the duplicate living inside a layer dict rather than under a
+  second module-level name. Measured: **6 of 11 tooltip strings
+  duplicate a Plotly `description` VERBATIM**, 1 differs
+  deliberately, 4 have no plot pair. It looks correct only because
+  both copies still agree. Editing one and not the other drifts the
+  content SILENTLY -- and unlike solar's visible `<br>`, nothing would
+  show it. L-182's shape.
+
+- **Earth's crust text carries a DESIGN CONSTRAINT on the fix.** Its
+  plot description ends with "(Note: toggle off the crust layer in the
+  legend to better see the interior structure.)" and its tooltip does
+  not. That is deliberate, not drift -- a legend instruction that is
+  nonsense in a checkbox tooltip. So a naive collapse-to-one-string
+  either loses the note or pushes it where it does not belong. The
+  unification needs a way to carry SURFACE-SPECIFIC text alongside the
+  shared body. Solar does not surface this requirement; Earth does.
+  Design against Earth's harder case, not solar's easier one.
+
+- **Gas giant shells have NO tooltips at all** -- zero `CreateToolTip`
+  bindings for any jupiter/saturn/uranus/neptune shell. Related
+  measurement: the `'tooltip'` key in `shell_configs.py` is defined
+  **126 times and read by nothing**, confirming L-181's "124 dead
+  tooltip fields" as dead and updating the count. Whether the gas
+  giants SHOULD have tooltips is a separate question for Tony.
+
+- **The shared-fragment pattern from L-179/L-180 is the precondition.**
+  One string serving two surfaces means the boundary conversion is a
+  one-line change rather than a per-string rewrite.
+
+**Gap:** TWO JOBS, not one. (1) SOLAR -- visible bug, template exists,
+mechanical: delete the 15 `_info_hover` duplicates, author the 18
+`_info` strings in `\n`, add `.replace('\n', '<br>')` at the solar
+entries in `shell_configs.py`. (2) EARTH -- no visible bug, same
+duplication, and it is the case that decides the shape of the fix
+because of the surface-specific-text requirement. Do the Mode 5
+survey first in both cases.
+**Ref:** origin `e3ca900` (2025-04-05, correct design), `97bbfe3`
+(2026-05-25, the regression); L-181 (canonical `<br>` direction and
+the dead tooltip decision); L-190 (tooling reach); L-182 (the silent
+drift class Earth sits in).
 
 ## PENDING ACTION (Tony-side)
 
