@@ -66,7 +66,8 @@ from planet_visualization_utilities import (create_sphere_points, SOLAR_RADIUS_A
 GRAVITATIONAL_INFLUENCE_SENTENCE = (
     f"The Sun's gravitational influence extends to roughly "
     f"{GRAVITATIONAL_INFLUENCE_AU / AU_PER_LIGHT_YEAR:.1f} light-years "
-    f"(~{GRAVITATIONAL_INFLUENCE_AU:,.0f} AU). Published estimates range "
+    f"(~{GRAVITATIONAL_INFLUENCE_AU:,.0f} AU).<br>"
+    f"Published estimates range "
     f"{GRAVITATIONAL_INFLUENCE_RANGE_AU[0]:,.0f}-"
     f"{GRAVITATIONAL_INFLUENCE_RANGE_AU[1]:,.0f} AU "
     f"({GRAVITATIONAL_INFLUENCE_RANGE_AU[0] / AU_PER_LIGHT_YEAR:.1f}-"
@@ -82,10 +83,10 @@ GRAVITATIONAL_INFLUENCE_SENTENCE = (
 CHROMOSPHERE_RADIUS_LINE = (
     f"* Radius: drawn from the photosphere out to "
     f"{CHROMOSPHERE_RADII} solar radii "
-    f"(~{SOLAR_RADIUS_AU:.5f} - {CHROMOSPHERE_RADII * SOLAR_RADIUS_AU:.5f} AU). "
-    f"This is a stylization for visibility: the physical chromosphere "
-    f"extends only ~{CHROMOSPHERE_PHYSICAL_KM:,.0f} km above the "
-    f"photosphere (~{CHROMOSPHERE_PHYSICAL_RADII:.3f} solar radii).<br>"
+    f"(~{SOLAR_RADIUS_AU:.5f} - {CHROMOSPHERE_RADII * SOLAR_RADIUS_AU:.5f} AU).<br>"
+    f"  A stylization for visibility: the physical chromosphere extends only "
+    f"~{CHROMOSPHERE_PHYSICAL_KM:,.0f} km<br>"
+    f"  above the photosphere (~{CHROMOSPHERE_PHYSICAL_RADII:.3f} solar radii).<br>"
 )
 
 # Source: GRAVITATIONAL_INFLUENCE_SENTENCE above (derived); NASA Solar
