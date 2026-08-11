@@ -219,13 +219,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*116 live items; 105 need attention (`!`); 115 RICE-scored; 70 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*115 live items; 104 need attention (`!`); 114 RICE-scored; 71 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
-| ! | L-189 | Provenance scanner: run history and run-to-run delta | OPEN | 4.8 | 2026-08-07 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-07 |
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
@@ -419,6 +418,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-003 | Protocol amendment candidates (for v3.29) | DONE | 5.4 | 2026-06-22 |
 |  | L-062 | README refresh -- fold in handoff + ledger developments | DONE | 5.1 | 2026-07-28 |
 |  | L-153 | Restore "Who Tony Is" framing into resident protocol (protocol) | DONE | 5.1 | 2026-07-21 |
+|  | L-189 | Provenance scanner: run history and run-to-run delta | DONE | 4.8 | 2026-08-11 |
 |  | L-065 | European heat wave heat map (Earth System track) | DONE | 4.8 | 2026-06-25 |
 |  | L-064 | Provenance-scanner format sweep -- Earth System family | DONE | 4.5 | 2026-06-30 |
 |  | L-075 | KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine) | DONE | 4.3 | 2026-06-30 |
@@ -1443,46 +1443,16 @@ and findings summary #5.
   do not build a dependency that is not there.
 **Gap:** **(decide)** does this ship as a dashboard entry that
 replaces the eight, or as a script run before every push? Then build.
+**Note (2026-08-11):** L-189 shipped its data half and left the
+  staleness check for this item to call. `provenance_history.py`
+  exports `is_overdue(history, now)` and `overdue_lines(history)`;
+  both are unused at `dea0bc0` and waiting on a caller here. The
+  declared cadence is 1 day, compared by calendar date. This makes
+  L-188 the trigger and L-189 the data, which is the reason the
+  check does not live inside the scanner: a scanner that is running
+  cannot report that it did not run.
 **Ref:** L-160 (the unrun test file that prompted it); L-184
 (build-path push gate, same family); L-189.
-
-#### [L-189] Provenance scanner: run history and run-to-run delta
-<!-- L:189 status:OPEN upd:2026-08-07 section:A flag: rice:3/4/80/2 -->
-- **Tony's request, 2026-08-07:** "could the scanner keep a log of
-  results by date so we can track this? maybe the last 6 runs."
-  Raised after a session where the only way to learn whether a patch
-  had ADDED findings was for Claude to diff two committed copies of
-  `PROVENANCE_AUDIT.md` from two commits -- which needs repo access
-  and a script, and is therefore not a check Tony can run.
-- **The number that matters is the DELTA, and it belongs on the
-  console** where the push call actually gets made -- not in a file
-  that has to be opened. "206 Tier-1" answers nothing on its own;
-  "206, unchanged, and no file's Tier-1 rose" answers the question.
-- Shape: `data/provenance_history.json`, a ring buffer of the last 6
-  runs. Per run: timestamp, repo HEAD SHA (readable from `.git`
-  without a git command), per-tier counts, per-domain counts, and
-  Tier-1 per file. Console prints the delta after the priority
-  summary and NAMES any file whose Tier-1 rose. `PROVENANCE_AUDIT.md`
-  gets a matching Run History table.
-- **Tony's call, 2026-08-07: TRACK the history file in git.** When an
-  audit was taken and against which SHA is itself provenance. Cost is
-  one small file showing as modified after each deliberate run.
-- Stays INFORMATIONAL. The scanner's own comments are emphatic that
-  Tier-1 never gets an auto-exit gate at any threshold; history makes
-  the judgment better informed, it does not automate it.
-- Build note: the scanner scans itself, so this change will nudge its
-  own findings count. The first run after it lands shows a delta that
-  IS the change; have it say so rather than let it read as a
-  regression.
-- Seed already written: the 20-line divergence check from the L-179
-  session, which finds citations naming a constant and stating a value
-  that disagrees with the store. It caught all 3 sites in the codebase
-  and the scanner cannot -- it flags UNCITED claims, and these were
-  cited. Worth folding in as a checker in its own right.
-**Gap:** Build it. Additive change to a ~3,000-line shared tool;
-treat as a shared-CI change with family-wide ripple.
-**Ref:** provenance_scanner.py console summary block (~line 2909);
-L-188; L-184.
 
 #### [L-190] Scanner reach: anything rendered must be reachable
 <!-- L:190 status:OPEN upd:2026-08-07 section:A flag: rice:4/4/80/3 -->
@@ -3630,6 +3600,117 @@ FABLE_REVIEW_feature_constant_unification.md sequencing note.
 **Ref:** patch_L179_L180_derivation_v3.py (pushed `17dab34`);
 FABLE_shell_consistency_audit_report.md finding #31;
 FABLE_REVIEW_feature_constant_unification.md sequencing note.
+
+#### [L-189] Provenance scanner: run history and run-to-run delta
+<!-- L:189 status:DONE upd:2026-08-11 section:C flag: rice:3/4/80/2 -->
+- **Tony's request, 2026-08-07:** "could the scanner keep a log of
+  results by date so we can track this? maybe the last 6 runs."
+  Raised after a session where the only way to learn whether a patch
+  had ADDED findings was for Claude to diff two committed copies of
+  `PROVENANCE_AUDIT.md` from two commits -- which needs repo access
+  and a script, and is therefore not a check Tony can run.
+- **The number that matters is the DELTA, and it belongs on the
+  console** where the push call actually gets made -- not in a file
+  that has to be opened. "206 Tier-1" answers nothing on its own;
+  "206, unchanged, and no file's Tier-1 rose" answers the question.
+- Shape: `data/provenance_history.json`, a ring buffer of the last 6
+  runs. Per run: timestamp, repo HEAD SHA (readable from `.git`
+  without a git command), per-tier counts, per-domain counts, and
+  Tier-1 per file. Console prints the delta after the priority
+  summary and NAMES any file whose Tier-1 rose. `PROVENANCE_AUDIT.md`
+  gets a matching Run History table.
+- **Tony's call, 2026-08-07: TRACK the history file in git.** When an
+  audit was taken and against which SHA is itself provenance. Cost is
+  one small file showing as modified after each deliberate run.
+- Stays INFORMATIONAL. The scanner's own comments are emphatic that
+  Tier-1 never gets an auto-exit gate at any threshold; history makes
+  the judgment better informed, it does not automate it.
+- Build note: the scanner scans itself, so this change will nudge its
+  own findings count. The first run after it lands shows a delta that
+  IS the change; have it say so rather than let it read as a
+  regression.
+- Seed already written: the 20-line divergence check from the L-179
+  session, which finds citations naming a constant and stating a value
+  that disagrees with the store. It caught all 3 sites in the codebase
+  and the scanner cannot -- it flags UNCITED claims, and these were
+  cited. Worth folding in as a checker in its own right.
+**Note (2026-08-11): BUILT AND VERIFIED.** New module
+  `provenance_history.py` (444 lines) plus eight anchored edits to
+  `provenance_scanner.py`, applied by
+  `patch_L189_run_history.py`. Shipped at `dea0bc0`.
+- Shape is the 2026-08-07 ruling unchanged: one
+  `data/provenance_history.json`, ring buffer of the last 6 runs,
+  tracked in git. The per-run FIELDS follow the gallery cache
+  builder's existing record vocabulary (`run_id` as a compact UTC
+  stamp, `started`, `finished`, `mode`) rather than inventing a
+  second one. Its one-file-per-run LAYOUT was not adopted: the
+  builder runs nightly, the scanner runs several times in a working
+  session, and the 23 files accumulated in the gallery repo since
+  July show what that costs in the changed-files list.
+- **Cadence declared: 1 day, compared by calendar DATE** (Tony,
+  2026-08-11) -- once per day, not at a fixed time, because the run
+  is manual. A file that only accumulates runs cannot report a run
+  that never happened; the declared number is what makes the
+  missing run detectable.
+- Console prints the DELTA after the priority summary and before
+  the Tier-1 banner, and NAMES any file whose Tier-1 rose. Files
+  whose Tier-1 fell are not named: a drop is the outcome the work
+  aims at, and naming it competes with the thing needing a call.
+  `PROVENANCE_AUDIT.md` carries a Run History table ahead of the
+  risk matrix.
+- Informational only. The exit code is untouched, per the scanner's
+  standing design review section 3c.
+- **First-run cost, predicted and attributable: 879 -> 882
+  findings.** The three are the new module's own SCHEMA_VERSION,
+  MAX_RUNS and EXPECTED_CADENCE_DAYS -- all Tier 3, all
+  `dev_tools`, Tier-1 unchanged at 206. The console says so on the
+  first run rather than letting the jump read as a regression.
+  **(decide)** whether those three earn `provenance_exceptions.json`
+  entries: they are configuration, not factual claims, which is the
+  textbook shape of an accepted residual.
+- **`is_overdue()` and `overdue_lines()` ship UNCALLED, by design.**
+  A scanner that is running cannot report that it did not run, so
+  the staleness check cannot live inside the thing it watches.
+  L-188 is the trigger; L-189 is the data. The module docstring
+  says this explicitly so a later session does not remove them as
+  dead code.
+- The divergence checker noted above stays OUT of scope. It flags
+  CITED claims that disagree with the store, where the scanner
+  flags UNCITED ones -- a different check, and it belongs with
+  L-190's reach work.
+- **(do)** move `patch_L189_run_history.py` out of the repo root
+  into `documentation/` (alongside `patch_dashboard_manual_builder
+  .py`). It was committed to the root at `dea0bc0`; it is spent,
+  its base fingerprint no longer matches, and while it sits there
+  the scanner counts 119 files instead of 118 and `module_atlas.py`
+  reports one undetermined module.
+**Note (2026-08-11), measurement kept from the cadence discussion.**
+  Every trust window in the gallery served cache is set by its
+  CATEGORY CAP, never by measured propagation error -- across all
+  eleven objects carrying a trust block, the error test has never
+  been the binding constraint. Apophis alone binds the global
+  served window: 647.0868619950488 days, identical to the served
+  window's own width to the last digit, recentered on build time.
+  The per-object windows that look alarming -- Io +/-5.3 hours,
+  Charon +/-19 hours, Titan +/-2.0 days, Moon +/-3.4 days, Pluto
+  +/-6.4 days -- are excluded from the global gate by frame per
+  L-149 and are enforced by nothing. Tony's call: NOT its own
+  ledger item, because the practical cost is sub-pixel. On a plot
+  where the orbit spans 400 pixels the worst case (Moon) is about
+  0.15 px after a day and 1.1 px after a week, and the orbit SHAPE
+  does not degrade at all, being geometric. It is a gate that does
+  not fire, not a picture that is wrong. Recorded here so the next
+  session to find Io's five-hour window does not re-raise it.
+**Verification:** sandbox clone at `df7ca50` -- patch applied,
+scanner run three times, ring-buffer trim at 6, corrupt-file
+tolerance, HEAD SHA read without invoking git, and the Tier-1-rose
+path exercised against real per-file counts. Confirmed on Tony's
+machine at `dea0bc0`: 882 findings, 206 Tier-1, dev_tools 39.
+`[verified @dea0bc0]`
+**Gap:** none -- move to section C.
+**Ref:** `provenance_history.py`; `patch_L189_run_history.py`;
+`documentation/HANDOFF_20260811_L189_run_history.md`; L-188 (the
+staleness caller); L-190; L-184.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
