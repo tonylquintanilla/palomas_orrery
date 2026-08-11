@@ -11,18 +11,14 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 119  
-**Total Lines of Code (non-blank):** 96,287  
+**Total Lines of Code (non-blank):** 96,322  
 **Total Public Functions/Classes:** 1,057
 
 ## Classification Coverage
 
-**Undetermined role (1).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Patch scripts awaiting archive (1).** A `Role: patch` module is a one-shot script that has already run. Its base fingerprint no longer matches, so it cannot run again. Move each into `documentation/`. While one sits in the scanned tree it inflates the module count here and the file count in the provenance audit.
 
-- `patch_L189_run_history.py`
-
-**Undetermined domain (1).** No valid `Domain:` tag.
-
-- `patch_L189_run_history.py`
+- `patch_module_atlas_patch_role.py`
 
 
 ---
@@ -201,7 +197,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (710 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (914 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (949 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (2,691 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (281 lines) |
@@ -215,11 +211,11 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 ---
 
-## Undetermined -- Needs a Role: Tag
+## Patch Scripts (transient -- awaiting archive)
 
 | Module | Description |
 |--------|-------------|
-| `patch_L189_run_history.py` | - wire the run-history module into provenance_scanner.py (ledger L-189). (220 lines) |
+| `patch_module_atlas_patch_role.py` | - add a transient `patch` role to module_atlas.py so spent one-shot patch scripts classify as what they are instead of landing in `undetermined`. (220 lines) |
 
 ---
 

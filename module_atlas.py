@@ -57,6 +57,12 @@ becomes a regenerated mirror zone; SCAN_PATHS multi-path scan with
 collision flagging; undetermined sentinel and a Classification Coverage
 section in both outputs).
 
+Module updated: August 2026 with Anthropic's Claude Opus 5: adds the
+transient `patch` role. A spent one-shot patch script now classifies
+as `patch` and is reported under "Patch scripts awaiting archive"
+with the action named, instead of landing in `undetermined` -- which
+had been carrying two unrelated meanings at once.
+
 Role: devtool
 Domain: dev_tools
 """
@@ -232,6 +238,9 @@ ROLE_MAP = {
     'test_provenance_1d':                     'devtool',
     'test_reset_completeness':                'devtool',
     'verify_orbit_cache':                     'devtool',
+
+    # patch
+    'patch_module_atlas_patch_role':          'patch',
 }
 # ROLE-MAP:END
 
@@ -364,6 +373,7 @@ ROLE_DESCRIPTIONS = {
     'scenario':         'Specific Earth system scenarios',
     'utility':          'Shared helper functions',
     'devtool':          'Developer tools (dependency tracing, atlas)',
+    'patch':            'Spent one-shot patch script -- transient, belongs in documentation/',
     'legacy':           'Archived / superseded modules',
     'other':            'Uncategorized',
     UNDETERMINED:       'No valid Role: tag in the module docstring',
@@ -386,6 +396,7 @@ ROLE_SECTION_TITLES = {
     'scenario':         'Earth System Scenarios',
     'utility':          'Utility & Helper Modules',
     'devtool':          'Developer Tools',
+    'patch':            'Patch Scripts (transient -- awaiting archive)',
     'legacy':           'Legacy / Archived Modules',
     'other':            'Other Modules',
     UNDETERMINED:       'Undetermined -- Needs a Role: Tag',
@@ -652,7 +663,7 @@ def scan_modules(project_dir):
 ROLE_ORDER = [
     'gui', 'rendering', 'rendering/shells', 'computation',
     'data', 'cache', 'pipeline', 'scenario', 'utility',
-    'devtool', 'legacy', 'other', UNDETERMINED
+    'devtool', 'patch', 'legacy', 'other', UNDETERMINED
 ]
 
 # Every role value must appear in all three structures or a module can be
@@ -747,13 +758,32 @@ def classification_report_lines(modules, heading_level='##'):
     legacy = [m for m in modules if m.get('role_source') == 'legacy']
     no_domain = [m for m in modules
                  if m.get('domain', UNDETERMINED) == UNDETERMINED]
+    # A `patch` module is transient by declaration -- it is not a
+    # classification failure, it is a filing step not yet done. It
+    # is reported here rather than in the clean roster so that its
+    # presence stays visible until it is archived.
+    awaiting = [m for m in modules if m['role'] == 'patch']
 
     out = [f'{heading_level} Classification Coverage', '']
-    if not undetermined and not legacy and not no_domain:
+    if not undetermined and not legacy and not no_domain \
+            and not awaiting:
         out.append(f'All {len(modules)} modules declare a valid `Role:` and '
                    '`Domain:` tag in their docstring.')
         out.append('')
         return out
+
+    if awaiting:
+        out.append(f'**Patch scripts awaiting archive ({len(awaiting)}).** '
+                   'A `Role: patch` module is a one-shot script that has '
+                   'already run. Its base fingerprint no longer matches, '
+                   'so it cannot run again. Move each into '
+                   '`documentation/`. While one sits in the scanned tree '
+                   'it inflates the module count here and the file count '
+                   'in the provenance audit.')
+        out.append('')
+        for m in awaiting:
+            out.append(f'- `{m["path"]}`')
+        out.append('')
 
     if undetermined:
         out.append(f'**Undetermined role ({len(undetermined)}).** No valid '
@@ -930,6 +960,15 @@ def generate_atlas(modules, output_path):
         if role in by_role:
             count = len(by_role[role])
             print(f"  {role:20s} {count:3d} modules")
+
+    # Transient class: name the action rather than the count. A
+    # zero here is the steady state, so nothing prints when clean.
+    awaiting = by_role.get('patch') or []
+    if awaiting:
+        print(f"\n  {len(awaiting)} patch script(s) awaiting "
+              f"archive -- move into documentation/:")
+        for mod in awaiting:
+            print(f"      {mod['path']}")
 
 
 # ============================================================
