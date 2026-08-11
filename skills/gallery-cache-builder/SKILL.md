@@ -6,10 +6,42 @@ fires_when: Nightly builder, atomic swap, coverage_index, serving cache, objects
 
 # Gallery Cache Builder (Phase 1b data serving)
 
-Skill version: 1.2 | Cut from tonyquintanilla.github.io @ a08bdd10 (code) and palomas_orrery @ 3398970 (context) | 2026-08-05
+Skill version: 1.3 | Cut from tonyquintanilla.github.io @ 02d7163 (code) and palomas_orrery @ 8e4b5ca (context) | 2026-08-11
 
-The standalone nightly builder that fetches fresh JPL Horizons data and deploys
-the web gallery's served cache. A GALLERY-repo tool; this skill is authored in
+The standalone builder that fetches fresh JPL Horizons data and deploys the
+web gallery's served cache. Tony runs it MANUALLY and commits the result
+himself; the scheduled nightly was retired August 10, 2026 (see Operating
+mode below).
+
+## Operating mode -- manual, as of August 10 2026
+
+The Windows scheduled task is DISABLED, not deleted. Tony's ruling: "It
+can't run without my machine being on anyway and it's consistent with me
+being the only commit authority. And obviates complicated fail safe
+procedures that could also fail."
+
+What this means in practice:
+- The builder is launched from the dashboard's Developer Tools group, or
+  by running `tools/gallery_cache_builder.py` from the GALLERY REPO ROOT.
+  The root matters: `--config` and `--output-dir` default to paths
+  relative to the working directory, so launching from `tools/` fails at
+  load_config.
+- No flags runs nightly mode. `--commit` is NOT passed, so the builder
+  swaps the new cache in and stops. Tony commits in GitHub Desktop.
+- Because Tony starts the run, he knows a build is in flight. This is the
+  substantive safety change: the atomic swap's window shows deletions only
+  in a git client, and on August 10 that was committed by mistake by
+  someone who did not know a build was running.
+- A `pre-commit` hook refusing a deletion-only commit under
+  `data/solar-system/` was designed and is deliberately NOT built. It
+  becomes relevant again if the schedule returns, if a second person gains
+  commit access to the gallery repo, or if the builder ever runs
+  unattended in any other form.
+
+The cadence question did not go away, it changed shape. "Did the nightly
+run?" became "when did I last run it?" -- and a manual build has no
+expected time at all, so an explicit staleness check is now the ONLY thing
+that can report that the served data is eleven days old. That is L-189. A GALLERY-repo tool; this skill is authored in
 the orrery repo per the L-002 convention (both SHAs on the cut line, like
 gallery-pipeline). For the interactive Studio/converter/viewer chain, load
 gallery-pipeline instead.
@@ -67,8 +99,11 @@ mid-swap now self-heals on the next run.
 ## Validation stance
 
 Two dispositions, and the difference is load-bearing:
-- ABORT (raise ValidationAbort -> nonzero exit; Task Scheduler history is the
-  monitoring channel): structural invariants (#2/#3/#C/#8), #B3
+- ABORT (raise ValidationAbort -> nonzero exit; the nonzero exit surfaces in
+  the console Tony is watching, since he starts the run -- through 2026-08-10
+  this read "Task Scheduler history is the monitoring channel," which was
+  true until the schedule was retired and is now the note to fix if the
+  schedule ever returns): structural invariants (#2/#3/#C/#8), #B3
   conversion-consistency (served km must equal raw * AU at the matching point),
   the #T as_of_today freshness check, and the shrink_gate (per-object AND
   aggregate point count must be >= 95% of the live generation; first build is
@@ -97,8 +132,11 @@ round-trip discipline the project uses by hand, baked into the builder.
 - Layer 2 -- live dry-run on Tony's hardware: `--dry-run --object <slug>` per
   tranche object, then a real --first-build. Proves the OUTPUT against real
   Horizons.
-- Layer 3 -- scheduling (unattended nightly). Correctness/operability items
-  gate this (gap-aware catch-up, a health summary) -- see L-098 / L-111.
+- Layer 3 -- scheduling (unattended nightly). RETIRED 2026-08-10; the task
+  is disabled, not deleted. The layer is kept here because it becomes live
+  again the moment the build runs unattended by any mechanism, including a
+  GitHub Action. Its gating items are unchanged (gap-aware catch-up, a
+  health summary) -- see L-098 / L-111.
 
 ## Adding a new object -- the full sequence, and where it silently breaks
 

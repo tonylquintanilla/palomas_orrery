@@ -6,7 +6,8 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0)
 
 # Provenance Discipline
 
-Skill version: 1.7 | Cut from palomas_orrery @ 3398970 | August 5, 2026
+Skill version: 1.8 | Cut from palomas_orrery @ 8e4b5ca (v1.8), earlier
+@ 3398970 (v1.7) | August 11, 2026
 Source: project_instructions_v3_29.md Part 3 (Provenance Audit, Fetched vs
 Recalled) + food insecurity build handoff + scanner source at HEAD. v1.1
 adds the report domain-classification mechanics, the Review-Repair
@@ -33,7 +34,12 @@ workflow (blind source lookup and the Fable consistency audit), the
 model-credit convention, the retirement of the `# Verified:` stamp
 format, Geometry Constants as First-Class Claims, and three field notes
 -- all earned in the L-156 Phase 2 Batch 1 cross-check and the Fable
-shell-consistency audit, August 3-4, 2026.
+shell-consistency audit, August 3-4, 2026. v1.8 adds Worksheet First,
+Annotation Second (an annotation naming a worksheet that does not exist
+is cite-to-clear in the annotation's own format) and the field note that
+an evidence artifact is filed as received -- both earned August 10, 2026,
+when a recovered worksheet proved an annotation true that the session had
+already talked itself into calling fabricated.
 
 The resident protocol carries the two governing principles as CRITICAL
 gates: Fetched-vs-Recalled (a citation is a provenance claim that must be
@@ -191,6 +197,27 @@ The source names the authority. The model names who found it. The
 parenthetical worksheet reference points to the evidence on disk. The
 ISO date is the check date, not the publication date.
 
+#### Worksheet First, Annotation Second [CRITICAL]
+
+If no worksheet file exists on disk, the annotation does not get written.
+Save the exchange as a `.md` in `documentation/` first, then write the
+annotation against the real filename.
+
+The parenthetical is a PATH, and a path that resolves to nothing asserts
+an audit trail that cannot be walked. That is cite-to-clear wearing the
+annotation format -- and it is worse than a bare `# Source:` line,
+because the annotation's whole promise is that the evidence is on disk.
+
+Two failure shapes, and they need different fixes:
+- The check happened but was never filed. Recoverable: find the exchange,
+  file it as received, repoint the annotation. Eight annotations in
+  `constants_new.py` were in this state and were repaired on August 10
+  once Tony recovered the worksheet.
+- The check never happened. Not recoverable by filing anything. Strip the
+  annotation, and re-run the claim through the workflow.
+
+Do not write the annotation planning to file the worksheet afterwards.
+The gap between the two is where the first shape comes from.
 For derived values where the source is a computation, not a lookup:
 ```python
 # Source: Derived from NASA NSSDCA Mars Fact Sheet (a, GM_Mars)
@@ -405,6 +432,30 @@ split by how the words get authority:
 
 ## Field Notes
 
+- **An evidence artifact is filed AS RECEIVED.** House style -- ASCII
+  rules, naming conventions, header blocks -- applies to code and to
+  documents we author. It does NOT apply to a document whose entire value
+  is that someone else wrote it. A session took Tony's uploaded Gemini
+  worksheet, converted its LaTeX to ASCII, stripped the markdown escaping,
+  added a header block and a provenance note it wrote itself, and filed
+  the result labelled as the Gemini worksheet. Tony caught it: "you have
+  created a parallel unsourced worksheet not made by gemini." The corpus
+  settled the question -- the existing GPT worksheet carries 115
+  non-ASCII bytes and the earlier Gemini one 37, so there was no
+  consistency to fix, only an assumed one. Reformatting an evidence file
+  destroys the property that makes it evidence.
+- **Unverified and true is still unverified -- do not over-confess.** Asked
+  whether it had fabricated a `(Gemini worksheet)` annotation, a session
+  gave an accurate account of its method (it had pattern-matched an
+  adjacent annotation's shape without checking), then concluded from that
+  the CONTENT was fabricated, called it cite-to-clear, and offered to
+  strip the annotation. The recovered worksheet proved all three
+  specifics it believed it had invented were true. Acting on the
+  self-report would have deleted a real citation. Separate the two
+  findings: the METHOD was wrong and is worth fixing; whether the CONTENT
+  is wrong is a different question with its own evidence. An
+  over-confession is as much a calibration failure as a denial, and it is
+  more persuasive because it sounds like rigor.
 - **Three wrong-paper citations survived into Batch 1 files**, each
   plausible enough to pass a reading. Mercury's crust cited "Pei" -- a
   mis-parsed GIVEN name read as a surname, so the author did not exist.

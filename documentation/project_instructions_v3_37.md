@@ -381,7 +381,7 @@ agentic-pre-test             1.2  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
 horizons-orbital-mechanics   1.1  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning
-provenance-discipline        1.7  Scanner runs, audits, citations, constants,
+provenance-discipline        1.8  Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0)
 earth-system-pipeline        1.1  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY
                                   human-cost visualization or text
@@ -393,7 +393,7 @@ gallery-assembler            1.1  render_orbits.py, resolver.py,
                                   cache_reader.py, propagation math, golden
                                   artifact builds, Mode 5 acceptance,
                                   orrery/assembler boundary questions
-gallery-cache-builder        1.2  Nightly builder, atomic swap, coverage_index,
+gallery-cache-builder        1.3  Nightly builder, atomic swap, coverage_index,
                                   serving cache, objects_config,
                                   dry-run/first-build/nightly, builder testing
                                   layers
