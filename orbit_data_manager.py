@@ -20,6 +20,8 @@ from astroquery.jplhorizons import Horizons
 from astropy.time import Time
 import plotly.graph_objs as go
 
+from constants_new import KM_PER_AU
+
         # Track which orbits we've already shown conversion messages for
 _conversion_messages_shown = set()
 
@@ -1847,7 +1849,7 @@ def query_horizons_elements(horizons_id, id_type='smallbody', date_str=None, cen
         # In km, q is always > 10,000 (even Sun-grazing comets: q ~ 1e6 km).
         # So q > 10000 reliably means "units are km".
         
-        KM_TO_AU = 1.0 / 149597870.7
+        KM_TO_AU = 1.0 / KM_PER_AU
         
         # Get q FIRST to determine units
         try:
