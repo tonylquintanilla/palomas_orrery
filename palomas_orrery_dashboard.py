@@ -55,6 +55,11 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 # Gallery tools live in a sibling directory
 GALLERY_TOOLS_DIR = os.path.join(SCRIPT_DIR, "..", "tonyquintanilla.github.io", "tools")
 
+# The cache builder must run from the gallery REPO ROOT, not from tools/:
+# its --config and --output-dir defaults are relative to the working
+# directory. Launching it from GALLERY_TOOLS_DIR fails on load_config().
+GALLERY_REPO_DIR = os.path.join(SCRIPT_DIR, "..", "tonyquintanilla.github.io")
+
 # Window
 WINDOW_TITLE = "Paloma's Orrery (palomas_orrery_dashboard.py)"
 WINDOW_WIDTH = 960
@@ -147,13 +152,6 @@ LAUNCH_GROUPS = {
         "gallery_json_fixer.py",
         "Fix older gallery JSON files for current viewer",
         GALLERY_TOOLS_DIR),
-        ("Gallery Cache Builder",
-        "gallery_cache_builder.py",
-        "Nightly serving-cache builder (Phase 2 F1): fetch from Horizons, "
-        "validate, atomic swap, commit. Needs flags -- opens a console so "
-        "you can type --dry-run / --first-build / --nightly / --object etc.",
-        GALLERY_TOOLS_DIR,
-        True),
         ("Inspect Staging",
         "inspect_staging.py",
         "Read-only plain-language report on an existing dry-run staging "
@@ -183,6 +181,21 @@ LAUNCH_GROUPS = {
     ],
 
     "Developer Tools": [
+        ("Gallery Cache Builder -- Manual Run",
+         os.path.join("tools", "gallery_cache_builder.py"),
+         "Manual serving-cache build. Runs from the gallery repo ROOT: the "
+         "builder resolves its data/ paths from the working directory, so "
+         "launching it from tools/ cannot find data/objects_config.json. "
+         "With no flags it fetches from Horizons, validates, atomic-swaps "
+         "the new cache into data/solar-system, and STOPS -- it does not "
+         "commit or push. Commit it yourself in GitHub Desktop after the "
+         "run finishes. Do not commit while it is still running: mid-build "
+         "the working tree shows deletions only, which is the swap in "
+         "progress, not data loss. The console stays open at the repo root "
+         "if you want a flagged re-run (--dry-run --object <slug>, "
+         "--first-build).",
+         GALLERY_REPO_DIR,
+         True),
         ("Update Ledger Index",
          "ledger_index.py",
          "Regenerate the INDEX in LEDGER_CONSOLIDATED.md from the DETAIL blocks "
@@ -610,7 +623,8 @@ class PalomasOrreryDashboardFrame(ctk.CTkFrame):
 
         ctk.CTkLabel(
             text_frame, text=desc,
-            font=FONT_DESC, text_color=COLOR_TEXT_DIM, anchor="w"
+            font=FONT_DESC, text_color=COLOR_TEXT_DIM, anchor="w",
+            wraplength=600, justify="left"
         ).pack(anchor="w")
 
         # Right side: launch button
