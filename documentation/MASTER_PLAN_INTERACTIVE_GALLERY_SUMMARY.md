@@ -1,7 +1,7 @@
 Where we are 8/11/2026
 
 Updated 2026-08-11 after the August 8-10 session. Built on
-826a932f8bb7329e211337085f4d68d26aaa4a51 at
+4509c08 at
 https://github.com/tonylquintanilla/palomas_orrery (branch main);
 gallery at 02d71637e100c4faf6ddaa23cdbc9b6f4a88ddc0 at
 https://github.com/tonylquintanilla/tonyquintanilla.github.io.
@@ -9,11 +9,10 @@ https://github.com/tonylquintanilla/tonyquintanilla.github.io.
 Companion to MASTER_PLAN_INTERACTIVE_GALLERY.md v17. The plan is the
 reference document; this is the readable snapshot.
 
-NOTE, and it is temporary: this snapshot is currently AHEAD of the plan.
-Five August 8 rulings are not yet written into Section 7, so decisions
-12, 16 and 17 still read as open there. Patching the plan is the first
-item of the next session. Until that lands, trust this document on those
-five and the plan on everything else.
+The plan is now current with this snapshot. Every August 8 ruling is
+written into Section 7 -- decision 12 ratified, 16 and 17 ruled, and 18
+added for the registry's three-zone shape. Where the two documents once
+disagreed they now agree, so either is safe to read.
 
 
 THE SHORT VERSION
@@ -37,7 +36,7 @@ values stripped -- and one shadow constant is gone. The scheduled
 nightly build is retired; Tony now runs the builder by hand and commits
 it himself.
 
-The next session opens with the plan patch, then builds L-189, the
+The next session opens with the build of L-189, the
 scanner run history.
 
 
@@ -210,8 +209,7 @@ KM_PER_AU; CENTER_BODY_RADII maps body names to other named constants.
 Six of forty-nine top-level assignments work this way, and that is the
 store's stated principle, not a defect. Anything reading the file
 without running it would have to reimplement arithmetic Python already
-does. (Measured at HEAD. The plan still says seven of forty-five; the
-count moved because L-179 and L-180 added four assignments.)
+does. (Measured at HEAD.)
 
 This does not violate the builder's no-orrery-imports rule.
 constants_new.py is a leaf -- numpy and datetime, nothing else. No
