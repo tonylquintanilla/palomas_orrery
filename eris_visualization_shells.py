@@ -472,8 +472,8 @@ def create_eris_atmosphere_shell(center_position=(0, 0, 0)):
 #         semi-major axis 67.8 AU gives ~14.3 Mkm (~0.095 AU).
 #         Barycenter binary: system mass is the correct input, not Eris alone.
 # Corrected: the former "~9.4 Mkm" does not follow from these inputs.
-# Cross-checked: derived Hill radius via GPT 2026-08-03 (batch1_tier2_followup_gpt.md: 14.27 Mkm)
-# Cross-checked: derived Hill radius via Gemini 2026-08-03 (worksheet_gemini_batch1_followup.md: 14.26 Mkm)
+# Cross-checked: derived Hill radius via GPT 2026-08-03 (batch1_tier2_followup_gpt.md)
+# Cross-checked: derived Hill radius via Gemini 2026-08-03 (worksheet_gemini_batch1_followup.md)
 eris_hill_sphere_info = (
             "SELECT MANUAL SCALE OF AT LEAST 0.1 AU TO VISUALIZE.\n" 
             "1.3 MB PER FRAME FOR HTML.\n\n"

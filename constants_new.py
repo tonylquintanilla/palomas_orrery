@@ -142,21 +142,21 @@ CENTER_MARKER_SIZE = 10  # For central objects like the Sun
 # Interior boundaries are approximate; based on standard solar models.
 # Source: Carroll & Ostlie, "Introduction to Modern Astrophysics" (2017)
 # Also: https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html
-# Cross-checked: Carroll & Ostlie via Gemini 2026-08-02 (Gemini worksheet)
+# Cross-checked: Carroll & Ostlie via Gemini 2026-08-02 (worksheet_gemini_constants_remaining.md)
 # Cross-checked: NASA Sun Fact Sheet via GPT 2026-08-02 (constants_new_citation_verification_gpt.md)
 
 CORE_AU = 0.2 * SOLAR_RADIUS_AU
 # Visualization boundary at low end of conventional 0.2-0.25 R_sun core range
 # Source: Bahcall, Pinsonneault & Basu (2001), ApJ 555:990 (radial profiles)
 # Also: Carroll & Ostlie (2017), Ch. 11 gives 0.2-0.25 R_sun
-# Cross-checked: Carroll & Ostlie via Gemini 2026-08-02 (Gemini worksheet)
+# Cross-checked: Carroll & Ostlie via Gemini 2026-08-02 (worksheet_gemini_constants_remaining.md)
 # Cross-checked: NASA solar structure via GPT 2026-08-02 (constants_remaining_independent_verification_gpt.md)
 
 RADIATIVE_ZONE_AU = 0.7 * SOLAR_RADIUS_AU
 # Visualization boundary; rounds the helioseismic tachocline at ~0.713 R_sun
 # Source: Christensen-Dalsgaard, Gough & Thompson (1991), ApJ 378:413
 # Cross-checked: helioseismology literature via GPT 2026-08-02 (constants_remaining_independent_verification_gpt.md)
-# Cross-checked: Carroll & Ostlie via Gemini 2026-08-02 (Gemini worksheet)
+# Cross-checked: Carroll & Ostlie via Gemini 2026-08-02 (worksheet_gemini_constants_remaining.md)
 
 # Solar atmosphere (in solar radii)
 CHROMOSPHERE_RADII = 1.1
@@ -167,13 +167,13 @@ CHROMOSPHERE_RADII = 1.1
 # (Tony's ruling, 2026-08-07, L-180).
 # Corrected 2026-08-02: 1.5 -> 1.1 (1.5 overstated the physical extent;
 #   Carroll & Ostlie Ch. 11 confirms ~2000 km, not 1.5 R_sun)
-# Cross-checked: Carroll & Ostlie via Gemini 2026-08-02 (Gemini worksheet)
+# Cross-checked: Carroll & Ostlie via Gemini 2026-08-02 (worksheet_gemini_constants_remaining.md)
 # Cross-checked: NASA chromosphere data via GPT 2026-08-02 (constants_remaining_independent_verification_gpt.md)
 
 CHROMOSPHERE_PHYSICAL_KM = 2000.0
 # Source: Carroll & Ostlie, An Introduction to Modern Astrophysics,
 #         Ch. 11 -- chromosphere extends ~2000 km above the photosphere.
-# Cross-checked: Carroll & Ostlie via Gemini 2026-08-02 (Gemini worksheet)
+# Cross-checked: Carroll & Ostlie via Gemini 2026-08-02 (worksheet_gemini_constants_remaining.md)
 # Note: the PHYSICAL extent. CHROMOSPHERE_RADII (1.1) is the DRAWN
 #       shell radius, ~36x thicker, chosen for visibility at orrery
 #       scale. Both figures are real; they answer different questions.
@@ -184,7 +184,7 @@ CHROMOSPHERE_PHYSICAL_RADII = 1.0 + CHROMOSPHERE_PHYSICAL_KM / SUN_RADIUS_KM
 INNER_CORONA_RADII = 3
 # Source: Golub & Pasachoff, "The Solar Corona" (2010)
 # Note: Visualization boundary for inner (K-)corona; physical extent 2-3 R_sun
-# Cross-checked: Golub & Pasachoff via Gemini 2026-08-02 (Gemini worksheet)
+# Cross-checked: Golub & Pasachoff via Gemini 2026-08-02 (worksheet_gemini_constants_remaining.md)
 
 OUTER_CORONA_RADII = 50
 # Source: Various; F-corona envelope extends to ~50 R_sun
@@ -197,7 +197,7 @@ STREAMER_BELT_RADII = 6.0
 # Ref: Golub & Pasachoff (2010); DeForest, Howard & McComas (2014), ApJ 787:124
 # Note: Visualization cutoff at upper end of 4-6 R_sun observed range;
 #   streamer-belt structure remains observable beyond 6 R_sun.
-# Cross-checked: Golub & Pasachoff via Gemini 2026-08-02 (Gemini worksheet)
+# Cross-checked: Golub & Pasachoff via Gemini 2026-08-02 (worksheet_gemini_constants_remaining.md)
 # Cross-checked: DeForest et al. via GPT 2026-08-02 (constants_remaining_independent_verification_gpt.md)
 
 ROCHE_LIMIT_RADII = 3.45
@@ -336,7 +336,7 @@ MOON_RADIUS_KM = 1737.4
 #         Also IAU/LRO reference radius (Archinal et al. 2011)
 # Cross-checked: NASA NSSDCA via Claude 2026-08-02 (worksheet_claude_constants_remaining.md)
 # Cross-checked: JPL SSD via GPT 2026-08-02 (constants_remaining_independent_verification_gpt.md)
-# Cross-checked: NASA NSSDCA via Gemini 2026-08-02 (Gemini worksheet)
+# Cross-checked: NASA NSSDCA via Gemini 2026-08-02 (worksheet_gemini_constants_remaining.md)
 
 MARS_RADIUS_KM = 3396.2
 # Source: Archinal et al. 2018, Celest. Mech. Dyn. Astr. 130:22 (equatorial; vol = 3389.5)

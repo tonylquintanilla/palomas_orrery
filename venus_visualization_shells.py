@@ -675,7 +675,7 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
 #         Perihelion gives ~1.004 Mkm = 166 Venus radii (the shell uses this);
 #         semi-major axis gives ~1.011 Mkm = 167.1 Venus radii.
 #         Venus has no natural moons, so body mass is the correct input.
-# Cross-checked: derived Hill radius via GPT 2026-08-03 (batch1_tier2_followup_gpt.md: 167.08 R_V at a)
+# Cross-checked: derived Hill radius via GPT 2026-08-03 (batch1_tier2_followup_gpt.md)
 # Cross-checked: derived Hill radius via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
 venus_hill_sphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n" 
