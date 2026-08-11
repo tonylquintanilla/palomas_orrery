@@ -313,6 +313,10 @@ from datetime import datetime
 # Reuse the atlas dependency graph builder
 from module_atlas import build_dependency_graph, classify_role
 
+# L-189: run history and run-to-run delta. Informational only --
+# nothing imported here touches the exit code.
+import provenance_history
+
 
 # ============================================================
 # SCORING CONSTANTS
@@ -566,6 +570,7 @@ MODULE_DOMAIN_MAP = {
 
     # --- dev_tools: audit/diagnostic/one-shot infra (new bucket) ---
     'provenance_scanner': 'dev_tools',
+    'provenance_history': 'dev_tools',
     'skills_index': 'dev_tools',
     'dep_trace': 'dev_tools',
     'ledger_index': 'dev_tools',
@@ -2329,6 +2334,10 @@ def _scan_coverage_gap(filepath):
 
 def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
     """Scan all .py files and produce the provenance audit report."""
+    # L-189: stamped before any work, so the recorded run spans the
+    # scan and not just the report write.
+    run_started = provenance_history.utc_now()
+
     print(f"Provenance Scanner -- scanning {project_dir}")
     print()
 
@@ -2422,7 +2431,8 @@ def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
                     shadowed=list(SHADOWED_STRINGS),
                     deep_citations=list(DEEP_CITATIONS),
                     shadow_constants=list(SHADOW_CONSTANTS),
-                    cross_check_issues=list(CROSS_CHECK_ISSUES))
+                    cross_check_issues=list(CROSS_CHECK_ISSUES),
+                    started=run_started)
 
     return all_units, consistent_dups, inconsistencies
 
@@ -2436,7 +2446,7 @@ def generate_report(units, consistent_dups, inconsistencies,
                     accepted_residuals=None, coverage_gaps=None,
                     scope_declared=None, shadowed=None,
                     deep_citations=None, shadow_constants=None,
-                    cross_check_issues=None):
+                    cross_check_issues=None, started=None):
     """Write PROVENANCE_AUDIT.md."""
     now = datetime.now().strftime('%B %d, %Y')
 
@@ -2450,6 +2460,42 @@ def generate_report(units, consistent_dups, inconsistencies,
     kind_counts = defaultdict(int)
     for u in scored:
         kind_counts[u.kind] += 1
+
+    # ---- L-189: run history ----
+    # Built here, before the report body, so the Run History table
+    # below can include the run being written. It reaches DISK only
+    # at the end of this function, after the audit itself is safely
+    # written: a history write is never worth an audit.
+    #
+    # This walks `scored` a second time. The existing console
+    # rollup near the end of this function walks it for a different
+    # cut (by tier, not by file), and merging them would mean
+    # editing working code to save one pass over an in-memory list.
+    domain_counts = defaultdict(int)
+    tier1_by_file = defaultdict(int)
+    for u in scored:
+        stem = u.file[:-3] if u.file.endswith('.py') else u.file
+        dom, _mapped = classify_domain(stem)
+        domain_counts[dom] += 1
+        if action_tier(u.score) == 1:
+            tier1_by_file[u.file] += 1
+
+    history = provenance_history.load_history(project_dir)
+    run_record = provenance_history.make_run_record(
+        started or provenance_history.utc_now(),
+        provenance_history.utc_now(), project_dir,
+        files_scanned, len(scored), tier_counts, domain_counts,
+        tier1_by_file)
+
+    # A copy for the table, so `history` still holds the PREVIOUS
+    # state when the console delta is computed further down.
+    history_preview = {
+        'schema_version': history.get('schema_version'),
+        'expected_cadence_days': history.get('expected_cadence_days'),
+        'max_runs': history.get('max_runs'),
+        'runs': list(history.get('runs') or []),
+    }
+    provenance_history.append_run(history_preview, run_record)
 
     out = []
 
@@ -2486,6 +2532,12 @@ def generate_report(units, consistent_dups, inconsistencies,
     out.append("")
     out.append("---")
     out.append("")
+
+    # ---- Run history (L-189) ----
+    # Ahead of the risk matrix on purpose: the delta is the part
+    # that changed since last time, and the matrix below it is
+    # reference material that does not.
+    out.extend(provenance_history.history_table(history_preview))
 
     # ---- Risk matrix ----
     out.append("## Risk Matrix: Vulnerability x Criticality")
@@ -2929,6 +2981,18 @@ def generate_report(units, consistent_dups, inconsistencies,
         for dom, n in sorted(split.items(),
                              key=lambda kv: (-kv[1], kv[0])):
             print(f"      {dom:<16s}{n:5d}")
+
+    # L-189: run-to-run delta. After the priority summary and
+    # before the Tier-1 banner, because the delta is what informs
+    # the push call while the total above it does not. Saved last
+    # so a failed write costs a history record, never the audit.
+    print()
+    for _line in provenance_history.console_lines(history, run_record):
+        print(_line)
+    provenance_history.append_run(history, run_record)
+    if not provenance_history.save_history(project_dir, history):
+        print("  WARNING: could not write "
+              "data/provenance_history.json -- run not recorded.")
 
     # 1e piece 1: Tier-1 banner. INFORMATIONAL ONLY.
     #
