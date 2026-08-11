@@ -37,12 +37,22 @@ layer is the real next gate before Artifact 2 (Jupiter/Saturn) can attempt
 Mode 5. Alongside it, the trust system's consumption side is now tracked as L-166
 (F1b: per-object trust enforcement in the resolver + soft-edge date-picker
 UX -- a deliberate golden-fingerprint re-open when it lands; the per-object
-trust blocks are already served nightly, dormant). Independently: Layer 3 (nightly Task Scheduler) is ENABLED and its
-core mechanism is proven -- unattended trigger, Horizons fetch, and data
+trust blocks are already served nightly, dormant). Independently: Layer 3 (nightly Task Scheduler) is RETIRED as of
+2026-08-10 (Tony). The task is DISABLED, not deleted, and the builder now
+runs manually with Tony committing the result himself. His reasoning: the
+build cannot run without his machine on anyway, so the schedule created an
+appearance of automation the setup could not deliver -- three nights were
+missed in the week before the ruling and the failure was silent. Running
+it by hand also dissolves the surprise behind the August 10 gallery
+incident, because a build in flight is no longer something he can walk
+into unaware. First manual build ran clean end to end on 2026-08-11
+(gallery `d5437f0`).
+The layer's history is kept because it becomes live again the moment the
+build runs unattended by ANY mechanism, including a GitHub Action: its
+core mechanism was proven -- unattended trigger, Horizons fetch, and data
 assembly all confirmed working end to end -- but the final promotion step
-has a known intermittent failure under the scheduler's execution context
-(see S3a addendum, July 24). Watch a few more cycles before trusting it
-fully hands-off.
+had a known intermittent failure under the scheduler's execution context
+(see S3a addendum, July 24).
 **Base:** orrery @ `c10a424`, gallery @ `e864fd42` (design ratified here;
 Artifact 1 built+pushed at orrery `6fc52b9a` / gallery `f89d83c4`; current
 HEAD orrery `ee0da47c` / gallery `61a78c00` -- F1a (M2) fully closed: L-149
@@ -55,13 +65,13 @@ skill) still decided, not yet built)
 Claude Opus 5, Claude Fable 5, Claude Sonnet 5, GPT
 
 **Pivot (v8):** The gallery is no longer a stepping stone to a separate web
-application. The gallery IS the web publication — growing interactive
+application. The gallery IS the web publication -- growing interactive
 controls incrementally, like a science museum adding hands-on exhibits to a
 permanent collection.
 
 ---
 
-## §1 — Architectural Constraints (settled)
+## Section 1 -- Architectural Constraints (settled)
 
 These are not options. They are facts that constrain every downstream decision.
 
@@ -71,19 +81,19 @@ surface.
 
 **Three-tier cache, all offline-populated (orrery domain):**
 
-- Tier 1 — Scheduled standard catalog. Sequential batch job refreshes a fixed
+- Tier 1 -- Scheduled standard catalog. Sequential batch job refreshes a fixed
   set of object/center pairs, rolling the date window forward. Size-stable.
-- Tier 2 — Curated specials, define-once. Encounters, perihelia, close
+- Tier 2 -- Curated specials, define-once. Encounters, perihelia, close
   approaches. Write-once/read-forever. Fetched by Tony via the desktop app.
-- Tier 3 — User requests, manually curated. Tony produces and caches offline;
+- Tier 3 -- User requests, manually curated. Tony produces and caches offline;
   the user is notified when ready. Whether fulfilled requests persist in the
-  shared cache is a dial Tony sets (see §7).
+  shared cache is a dial Tony sets (see Section 7).
 
 **The gallery is the delivery platform.** The existing gallery on GitHub Pages
 (`tonyquintanilla.github.io`) is a working static site that already renders
 Plotly 3D figures on every device including phones. It has navigation,
 narrative sections, categories, and a curator's workflow (Gallery Studio). The
-web publication extends this — it does not replace it.
+web publication extends this -- it does not replace it.
 
 **The JSON bridge.** Pre-curated gallery cards and interactive gallery pages both
 produce the same artifact: Plotly JSON. One path is pre-baked by Tony on the
@@ -92,7 +102,7 @@ browser from user selections via Pyodide. The gallery viewer renders both
 identically. This is the unifying architectural principle.
 
 **The GUI declares the envelope.** A cache miss is something the UI will not let
-you request — not a runtime error, not a silent wrong plot. Coverage is a
+you request -- not a runtime error, not a silent wrong plot. Coverage is a
 visible, honest boundary. The coverage index tells the interactive page which
 combinations are available; the page shows only those options.
 
@@ -104,10 +114,10 @@ repo. **Phase 0 confirmed Pyodide is acceptable** (2.1-3.3 s cold-start on
 iPhone WiFi, including plotly via micropip). The B′ architecture (shared
 desktop engines running in Pyodide) is the Phase 2 path. Frozen pedagogical
 demos (like the Phase 0 Solar System Explorer) stay on the lightweight A path
-(NumPy only, JS figure builder) — a two-tier model.
+(NumPy only, JS figure builder) -- a two-tier model.
 
-**Assemblers read cache through the coverage-index abstraction from day one** —
-never by opening data files directly — so cache restructuring cannot break
+**Assemblers read cache through the coverage-index abstraction from day one** --
+never by opening data files directly -- so cache restructuring cannot break
 the assemblers. The coverage index is a **solar system concept** where the
 envelope is complex (object/center/date-range matrix). Other domains declare
 their bounds simply: stars state distance and magnitude limits, orbital
@@ -123,18 +133,18 @@ graduation for large files (star cache, orbit cache) is a dial.
 
 ---
 
-## §2 — Gallery Extension Architecture (replaces v7 "Fork Decision")
+## Section 2 -- Gallery Extension Architecture (replaces v7 "Fork Decision")
 
 **The gallery grows interactive; the desktop stays as-is.**
 
-The desktop tkinter app continues as the power-user creation tool — live
+The desktop tkinter app continues as the power-user creation tool -- live
 Horizons, animation export, KML/KMZ, Gallery Studio. The web publication is
 the gallery gaining new interactive pages, not a fork of the desktop GUI.
 
 **The science museum model.** The gallery is the exhibit hall. Pre-curated cards
-(today's content) are the permanent collection — beautiful, informative, no
+(today's content) are the permanent collection -- beautiful, informative, no
 computation required to view. Interactive pages are the hands-on science center
-— the user walks up, makes selections, and sees the result. The curated
+-- the user walks up, makes selections, and sees the result. The curated
 collection loads instantly (pre-computed JSON). The interactive exhibits load
 after Pyodide initializes (5-15 seconds on first visit, cached after).
 
@@ -146,11 +156,11 @@ distance controls." Every step is useful on its own. No big-bang deployment.
 **What this replaces.** The v7 plan called for forking the desktop GUI into a
 web GUI (Dash or Pyodide), presenting 95 widget inputs on a web page, and
 resolving a server-vs-serverless decision via a two-sided pilot. That approach
-asked the wrong question — "how do we shrink the desktop onto a phone" — when
+asked the wrong question -- "how do we shrink the desktop onto a phone" -- when
 the right question was "what does a phone user want?" The answer is what the
 gallery already does, plus the ability to change what's plotted.
 
-**Shared computation layer — verified at HEAD (`d6c8c42`, unchanged at
+**Shared computation layer -- verified at HEAD (`d6c8c42`, unchanged at
 `fdb66ca`):**
 
 Six modules are import-clean (zero tkinter references): `idealized_orbits.py`,
@@ -159,34 +169,34 @@ Six modules are import-clean (zero tkinter references): `idealized_orbits.py`,
 
 **Two named seams (same as v7):**
 
-1. `celestial_objects.py` — data half (`OBJECT_DEFINITIONS`) is import-clean.
+1. `celestial_objects.py` -- data half (`OBJECT_DEFINITIONS`) is import-clean.
    Selection/instance half is tk-shaped. The gallery imports the data; it
    supplies its own selection-state injection.
 
-2. `palomas_orrery_helpers.py` — imports tkinter directly and carries
+2. `palomas_orrery_helpers.py` -- imports tkinter directly and carries
    computation the assembler will want. Fix: split computation from GUI helpers
    (L-087).
 
 **Desktop migration is deferred, not abandoned.** Over time, the desktop could
 refactor to use the shared assembler, unifying both paths. But this is an
 efficiency improvement, not a web publication blocker. The critical path is:
-assembler → gallery interactive page → ship it.
+assembler -> gallery interactive page -> ship it.
 
 ---
 
-## §2a — Gallery Viewer Refactor (Option C — Hybrid)
+## Section 2a -- Gallery Viewer Refactor (Option C -- Hybrid)
 
 **Two pages, not one; not N.**
 
-`index.html` stays as-is — the "dumb renderer" that loads pre-computed JSON
+`index.html` stays as-is -- the "dumb renderer" that loads pre-computed JSON
 and calls `Plotly.newPlot()`. It continues to serve curated cards with zero
-changes to the existing pipeline (Studio → converter → viewer). The WYSIWYG
+changes to the existing pipeline (Studio -> converter -> viewer). The WYSIWYG
 principle is untouched for curated content.
 
 A single new `interactive.html` handles all interactive exhibits. The exhibit
 is selected via URL parameter (`?exhibit=solar-system-explorer`). Each exhibit
-is a "mode" within the page — a different control panel and assembler
-configuration — not a separate HTML file. Two pages total for the entire
+is a "mode" within the page -- a different control panel and assembler
+configuration -- not a separate HTML file. Two pages total for the entire
 gallery.
 
 **`gallery_metadata.json` is the bridge.** It gains a `type` field per entry:
@@ -198,7 +208,7 @@ gallery.
 
 Curated entries link to `index.html` (the existing viewer). Interactive entries
 link to `interactive.html?exhibit=<exhibit>`. The gallery landing page reads
-`gallery_metadata.json` and renders both types as cards — curated cards show
+`gallery_metadata.json` and renders both types as cards -- curated cards show
 categories and thumbnails, interactive cards show an "Explore" badge and link
 to the interactive page. The landing page could be `index.html` itself (adding
 a section for interactive cards) or a lightweight `gallery.html` that links to
@@ -207,11 +217,11 @@ page integration deferred to Phase 2.
 
 **Why this works:**
 
-- **The existing pipeline is untouched.** Studio, the converter, the viewer —
+- **The existing pipeline is untouched.** Studio, the converter, the viewer --
   all continue to work exactly as they do today. No regression risk on 148
   curated cards.
 - **Interactive complexity is isolated.** Pyodide loading, control panels,
-  assembler calls, coverage-index queries — all live in `interactive.html`.
+  assembler calls, coverage-index queries -- all live in `interactive.html`.
   The curated viewer never loads Pyodide.
 - **Editors develop separately.** Tony can refine the curated viewer and the
   interactive page on independent tracks. A bug in one cannot break the other.
@@ -222,14 +232,14 @@ page integration deferred to Phase 2.
 **`interactive.html` responsibilities:**
 
 1. Load the common gallery CSS and navigation header
-2. Read the `exhibit` URL parameter → select the appropriate control panel
+2. Read the `exhibit` URL parameter -> select the appropriate control panel
 3. Lazy-load Pyodide (from CDN) + the assembler module + domain cache files
 4. Render the control panel (planet toggles, date picker, presets, etc.)
-5. On user selection: build a scene spec (JSON) → call the assembler via
-   Pyodide → receive Plotly JSON → `Plotly.newPlot()`
+5. On user selection: build a scene spec (JSON) -> call the assembler via
+   Pyodide -> receive Plotly JSON -> `Plotly.newPlot()`
 6. Show loading state during Pyodide initialization ("Loading computation
    engine..." with progress)
-7. Query the coverage index to determine available options — the envelope
+7. Query the coverage index to determine available options -- the envelope
    drives what controls are enabled
 
 **Pyodide loading strategy:**
@@ -259,25 +269,25 @@ Created `300ac30c`, updated `a85a4fa` (July 6, 2026).
 
 **Design inspirations (from research):**
 
-- **NASA Eyes on the Solar System** — minimal controls overlaying 3D content;
+- **NASA Eyes on the Solar System** -- minimal controls overlaying 3D content;
   "if you can see it, you can click on it"; browser-native, real data
-- **Exploratorium** — "you don't look at exhibits, you play with them"; the
+- **Exploratorium** -- "you don't look at exhibits, you play with them"; the
   interactive page IS the exhibit, not a settings panel
-- **teamLab / ArtScience Museum** — art + science + immersion; the dark space
+- **teamLab / ArtScience Museum** -- art + science + immersion; the dark space
   palette and glowing accents match the gallery's existing aesthetic
-- **ViewSpace (STScI)** — interactive astronomy content that teaches while
+- **ViewSpace (STScI)** -- interactive astronomy content that teaches while
   being beautiful; every exhibit carries context (the info panel)
 
 ---
 
-## §3 — The Shared Assembler Architecture (settled — architecture B′)
+## Section 3 -- The Shared Assembler Architecture (settled -- architecture B′)
 
 **One shared assembler per domain, called by Pyodide in the browser.**
 
-**The pattern — three stages:**
+**The pattern -- three stages:**
 
 1. **Harvest.** The gallery page reads user selections (JavaScript) and builds
-   a scene spec — a plain JSON document describing what to render.
+   a scene spec -- a plain JSON document describing what to render.
 2. **Assemble.** Pyodide calls the shared assembler (Python) with the spec plus
    cached data (through the coverage-index abstraction). No tkinter, no network
    calls. Produces a Plotly figure as JSON.
@@ -312,7 +322,7 @@ closing that gap will double as a live test of the porting pipeline.)
 **Scene-spec vocabulary: DELIVERED.** `PHASE1_SCENE_SPEC_VOCABULARY.md` (Fable 5,
 `fdb66ca`). Shared skeleton (5 fields) + solar system payload (9 field groups)
 + exhaustive mapping table (95 active `.get()` reads) + coverage index Protocol
-class. Eight design decisions and six open questions deferred to the Phase 0 →
+class. Eight design decisions and six open questions deferred to the Phase 0 ->
 Phase 2 transition.
 
 **The hybrid delivery model.** Pre-curated content ships as static JSON files
@@ -328,52 +338,52 @@ consumer is a gallery interactive page, not a separate web application.
 
 ---
 
-## §3a — Data Serving Architecture (framed — Phase 1b)
+## Section 3a -- Data Serving Architecture (framed -- Phase 1b)
 
 **What Phase 0 proved.** The Solar System Explorer prototype computes
 Keplerian orbits from mean orbital elements embedded in `orbital_elements.py`,
 with no served data at all. This proves the Keplerian trace needs zero cache.
 But the elements embedded in the codebase are manually maintained and some are
-old (Saturn: epoch 2003, Pluto: epoch 1989). The desktop has better data —
+old (Saturn: epoch 2003, Pluto: epoch 1989). The desktop has better data --
 fresh osculating elements in `osculating_cache_manager.py` and position
-vectors in `orbit_paths.json` — accumulated over months of plotting.
+vectors in `orbit_paths.json` -- accumulated over months of plotting.
 
 **The data serving architecture is the pipeline that bridges Tony's desktop
 caches to the browser.**
 
 **Three trace types (from the desktop codebase, verified in gallery JSON):**
 
-- **Actual positions** — Horizons ephemeris, x/y/z at dated time steps. Covers
+- **Actual positions** -- Horizons ephemeris, x/y/z at dated time steps. Covers
   only the selected date range. Critical for precision at encounters, perihelia,
   close approaches, and date-range sweeps. This is the rolling cache data.
-- **Osculating orbit at epoch** — complete Keplerian conic from instantaneous
+- **Osculating orbit at epoch** -- complete Keplerian conic from instantaneous
   elements (6 numbers + epoch per object). Critical for moons, where it's the
   only way to see the full orbit shape. Also important for comets near
   perihelion. The divergence from the mean orbit IS the perturbation lesson.
-- **Mean elements** — long-term average from `orbital_elements.py`. Ships with
+- **Mean elements** -- long-term average from `orbital_elements.py`. Ships with
   the codebase; no serving needed. Toggled off by default. Accurate for planet
   shapes; poor for close-approach detail.
 
 **Two data types to serve (mean elements ship free):**
 
-1. **Osculating elements per object** — tiny (a handful of numbers each). Could
+1. **Osculating elements per object** -- tiny (a handful of numbers each). Could
    ride in the coverage index or a small sidecar file. The assembler computes
    the complete Keplerian conic from these.
-2. **Position vectors over date ranges** — the rolling cache, the real volume.
+2. **Position vectors over date ranges** -- the rolling cache, the real volume.
    Per-object canonical files (F2 storage: ~157 positional objects, not 1,501
    pairs; canonical file count may be slightly higher due to barycenters).
    ~36 MB for the full catalog (Fable estimate, from 130.4 MB monolith).
 
-**What works analytically vs what requires cache — two classes for the rolling
+**What works analytically vs what requires cache -- two classes for the rolling
 cache, plus a write-once category:**
 
-- **Planets, asteroids, comets** — analytical orbits sufficient at solar-system
+- **Planets, asteroids, comets** -- analytical orbits sufficient at solar-system
   scale. Presets override with cached data for close approaches and perihelia
   (Tier-2 curated data, write-once).
-- **Moons** — cache required. Constant perturbations and non-heliocentric
+- **Moons** -- cache required. Constant perturbations and non-heliocentric
   mechanics make analytical orbits insufficient. The rolling batch is primarily
   moons.
-- **Spacecraft** — actual position arcs. NOT write-once (OQ-B): the flown arc
+- **Spacecraft** -- actual position arcs. NOT write-once (OQ-B): the flown arc
   is a coarse glide backbone + daily densification inside known flyby windows,
   Douglas-Peucker-thinned, and each nightly run appends today's point.
   Elements not applicable.
@@ -395,28 +405,28 @@ float64.
 
 **Serving home is a subdirectory of the gallery repo.** The `data/` directory
 in `tonyquintanilla.github.io` serves at `palomasorrery.com/data/`. Same
-origin by construction — no CORS question. Gallery measured at 474 MB with
+origin by construction -- no CORS question. Gallery measured at 474 MB with
 526 MB headroom against the 1 GB GitHub Pages soft limit; all-phase data
 needs are ~72 MB (14% of remaining). Pre-heavy gallery JSONs are cullable
 via L-074 if headroom tightens. The coverage index's `generated` timestamp
 is the provenance anchor for the data (the data files don't carry their own
 version history).
 
-**Star cache:** 31 MB pickle → `.npz` for v1 (NumPy stable in Pyodide; Parquet
+**Star cache:** 31 MB pickle -> `.npz` for v1 (NumPy stable in Pyodide; Parquet
 held as optimization). Deferred to Phase 3.
 
-**Open questions — status after Phase 1b design convergence (v0.3):**
+**Open questions -- status after Phase 1b design convergence (v0.3):**
 
-- OQ-A: Web catalog scope — curated first tranche (9 test objects); full
+- OQ-A: Web catalog scope -- curated first tranche (9 test objects); full
   catalog scales via export run, not schema change. **Positioned.**
-- OQ-B: Window policy — v0.4 provisional leading edge -- nightly overwrite
+- OQ-B: Window policy -- v0.4 provisional leading edge -- nightly overwrite
   `[today-7d, today]`, freeze older past; `horizon=0` for non-spacecraft (the
   conic covers the future); spacecraft fetch the flown arc once then append
   today nightly (NOT write-once). **Settled (v0.4).**
-- OQ-C: Update cadence — NIGHTLY batch (v0.3 pivot), no forward padding --
+- OQ-C: Update cadence -- NIGHTLY batch (v0.3 pivot), no forward padding --
   `horizon=0`, the conic covers the future. **Settled (v0.4).**
 
-> **Addendum (July 24) — Layer 3 operational config and a known failure
+> **Addendum (July 24) -- Layer 3 operational config and a known failure
 > mode.** For reproducibility: Windows Task Scheduler, account `tonyq`,
 > "Run whether user is logged on or not" (needs the real account password
 > -- confirmed a Windows Hello PIN cannot be used for this option). Action:
@@ -447,16 +457,16 @@ held as optimization). Deferred to Phase 3.
 > interactive run this week, possibly behaving differently under the
 > scheduler's account context.
 
-- OQ-D: Moon step size — 6h default; per-object `step_hours` from day one.
+- OQ-D: Moon step size -- 6h default; per-object `step_hours` from day one.
   Io may want 2h. Mode 5 decides. **Positioned, Mode 5.**
-- OQ-E: Serving home — H2 subfolder in gallery repo (`data/`). Gallery
+- OQ-E: Serving home -- H2 subfolder in gallery repo (`data/`). Gallery
   measured at 474 MB, 526 MB headroom, all-phase data needs ~72 MB. No
   CORS question (same repo, same origin). **Settled.**
-- OQ-F: Canonical frame — helio / parent-relative / arc-natural. The v4 model correction
+- OQ-F: Canonical frame -- helio / parent-relative / arc-natural. The v4 model correction
   RETIRED subtraction (catastrophic cancellation + aliasing); osculating-primary
   now. The builder fetches FRESH from Horizons at each object's canonical center
   (it DOES re-query); no co-sampling for the orbit. **Settled (v0.4).**
-- OQ-G: Wire format — JSON for v1, column-oriented. **Settled.**
+- OQ-G: Wire format -- JSON for v1, column-oriented. **Settled.**
 
 **Schema decisions settled in v0.3 (three-model convergence):**
 
@@ -504,15 +514,15 @@ held as optimization). Deferred to Phase 3.
 2026, built on `993dfd5` / `a6420bc`). Reviewed and refined by Opus 4.6 + Tony
 (July 6, 2026). 4.8 review confirmed source faithfulness (July 6, 2026).
 Phase 1b design handoff v0.3 (`PHASE1B_DATA_SERVING_DESIGN_HANDOFF.md`,
-July 7, 2026): Opus 4.6 + Tony → 4.8 review → Fable 5 review → convergence.
+July 7, 2026): Opus 4.6 + Tony -> 4.8 review -> Fable 5 review -> convergence.
 
 ---
 
-## §4 — Four Visualization Domains
+## Section 4 -- Four Visualization Domains
 
 The domains are unchanged from v7. What changes is how each reaches the web.
 
-### §4a — Solar System (the main build)
+### Section 4a -- Solar System (the main build)
 
 **Desktop GUI:** `palomas_orrery.py` (11,110 lines at HEAD). `plot_objects` and
 `animate_objects` are the orchestration functions.
@@ -529,27 +539,27 @@ close approaches. Animation presets added later (curated tier-2 exports). The
 vocabulary's 95 mapped inputs narrow to the 10-15 most useful for exploration;
 the rest are set by preset defaults.
 
-**Cache model:** Three-tier (§1). Coverage index drives the envelope.
+**Cache model:** Three-tier (Section 1). Coverage index drives the envelope.
 
-### §4b — Stars
+### Section 4b -- Stars
 
 **Desktop GUI:** `star_visualization_gui.py` with HR diagram and planetarium
 pipeline scripts.
 
 **Data:** Gaia + Hipparcos, 101 ly distance, magnitude 9. Fully cached in PKL.
-Cannot be casually regenerated. Wire format decision (pickle → Parquet/JSON)
-needed for Pyodide (see §7).
+Cannot be casually regenerated. Wire format decision (pickle -> Parquet/JSON)
+needed for Pyodide (see Section 7).
 
 **Gallery interactive page:** Distance and magnitude sliders, visualization
-type selector, spectral class filters, star search. Rich controls — this
+type selector, spectral class filters, star search. Rich controls -- this
 domain is naturally interactive and phone-friendly (2D HR diagrams render well
 on small screens).
 
-### §4c — Orbital Parameters (educational showcase)
+### Section 4c -- Orbital Parameters (educational showcase)
 
 **Desktop GUI:** `orbital_param_viz.py`. Eccentricity slider demo.
 
-**Computation engines:** Pure geometry — `idealized_orbits.py`,
+**Computation engines:** Pure geometry -- `idealized_orbits.py`,
 `constants_new.py`, `apsidal_markers.py`. No data fetching.
 
 **Gallery interactive page:** The eccentricity slider is the Phase 0 test
@@ -557,12 +567,12 @@ case. Lightest domain, pure geometry, no cache files. Teaches the Keplerian
 language the rest of the orrery speaks. Converts from matplotlib to Plotly
 for the gallery (no matplotlib in the browser).
 
-### §4d — Earth System
+### Section 4d -- Earth System
 
 **Generators:** `earth_system_generator.py`, `food_insecurity_generator.py`.
 Scenario modules for heatwaves, coral bleaching, food insecurity.
 
-**Output:** Mixed — KMZ files for Google Earth + Plotly teasers.
+**Output:** Mixed -- KMZ files for Google Earth + Plotly teasers.
 
 **Gallery interactive page:** Scenario selector. KMZ download links with
 Plotly teasers (the pattern that works today). Future: Plotly choropleth or
@@ -572,7 +582,7 @@ when this domain's interactive page is built.
 **Stance carries forward:** "Synthesize nothing, transcribe everything,
 attribute to IPC." "Data Preservation is Climate Action."
 
-### §4e — Cross-Domain Integration
+### Section 4e -- Cross-Domain Integration
 
 - **Celestial sphere** (`star_sphere_builder.py`): Adds star traces to orrery
   figures. Called by the solar system assembler.
@@ -583,7 +593,7 @@ attribute to IPC." "Data Preservation is Climate Action."
 
 ---
 
-## §5 — Phased Approach
+## Section 5 -- Phased Approach
 
 **The gallery gains one interactive page per phase.** Each phase ships a
 working increment. Tony's render remains the close authority (Mode 5).
@@ -591,13 +601,13 @@ working increment. Tony's render remains the close authority (Mode 5).
 **Delta-log discipline throughout:** any orchestration change to the desktop
 during the build gets a ledger tag ("assembler-must-inherit").
 
-### Phase 0 — Gallery Integration Test
+### Phase 0 -- Gallery Integration Test
 
-**✓ DONE** (July 6, 2026). `interactive.html` deployed to
+**[x] DONE** (July 6, 2026). `interactive.html` deployed to
 `palomasorrery.com/interactive.html` (created `300ac30c`, updated `a85a4fa`).
 Pyodide v314.0.2 + NumPy computing Keplerian orbits from mean elements,
 rendered by Plotly.js. Tested on desktop Chrome and iPhone Safari. Zero
-server, zero data files — pure computation from embedded orbital elements.
+server, zero data files -- pure computation from embedded orbital elements.
 
 **Stack proven:** Python computation runs in the browser on a static GitHub
 Pages site. Server/serverless decision resolved: Pyodide.
@@ -611,11 +621,11 @@ about unnamed downloads.
 **Lessons:** Pyodide v314.0.2 loads in ~4-10 seconds depending on connection
 (cached after first visit). The lightweight approach (Python/NumPy computes
 math, JavaScript builds Plotly figure) avoids loading the full `plotly` Python
-package — dramatically faster than loading plotly in Pyodide.
+package -- dramatically faster than loading plotly in Pyodide.
 
-**Architecture A vs B fork — RESOLVED: B′.** Phase 0 proved architecture A
+**Architecture A vs B fork -- RESOLVED: B′.** Phase 0 proved architecture A
 (Python/NumPy computes arrays, JS builds Plotly traces). Fable 5 identified
-that A creates a parallel rendering pipeline — convention duplication across
+that A creates a parallel rendering pipeline -- convention duplication across
 Python and JavaScript for the life of the project (the protocol's own anti-
 pattern). A B′ measurement page (`measure_plotly.html`) timed the full
 plotly-in-Pyodide cold-start on iPhone Safari WiFi:
@@ -625,17 +635,17 @@ plotly-in-Pyodide cold-start on iPhone Safari WiFi:
 - micropip + plotly install: 507 ms - 1.8 s
 - `import plotly.graph_objects`: 57-59 ms
 - Build figure + `to_json()`: 448-449 ms
-- **Total: 2.1-3.3 s** (acceptance threshold was ≤15 s)
+- **Total: 2.1-3.3 s** (acceptance threshold was <=15 s)
 
 Fable verified plotly 6 imports lazy (0.06 s native); the WASM multiplier is
 ~1:1. The feared cold-start cost dissolved. B′ uses a slim self-hosted wheel
 (~3.9 MB, stripped of dead JS bundles and Jupyter extras) from the Phase 1b
-serving home — no PyPI runtime dependency.
+serving home -- no PyPI runtime dependency.
 
 **Two-tier model:** frozen pedagogical demos (Phase 0 Solar System Explorer,
-eccentricity demo) stay on A — instant-loading, convention-light, no sync tax
+eccentricity demo) stay on A -- instant-loading, convention-light, no sync tax
 because frozen exhibits don't change. Data-backed catalog exhibits (Phase 2+)
-take B′ — shared desktop engines, one codebase, scene equivalence by
+take B′ -- shared desktop engines, one codebase, scene equivalence by
 construction.
 
 **Attribution gate (L-086):** `interactive.html` is publicly reachable with
@@ -643,21 +653,21 @@ inline "Data: JPL/NASA" credit. Ruled sufficient pending L-086: a JPL-only
 exhibit with inline credit passes. Page kept unlinked from landing page until
 L-086 lands.
 
-### Phase 1a — Shared Spec Skeleton + Solar System Vocabulary
+### Phase 1a -- Shared Spec Skeleton + Solar System Vocabulary
 
-**✓ COMPLETE.** `PHASE1_SCENE_SPEC_VOCABULARY.md` (Fable 5, July 4, 2026,
+**[x] COMPLETE.** `PHASE1_SCENE_SPEC_VOCABULARY.md` (Fable 5, July 4, 2026,
 built on `fdb66ca`). Shared skeleton (5 fields) + solar system payload
 (9 field groups) + exhaustive mapping table (95 active `.get()` reads) +
 content-type distinction (proves one assembler replaces both orchestrators)
 + coverage index Protocol class. Serializability settled yes.
 
 Eight design decisions (DD-1 through DD-8) and six open questions (OQ-1
-through OQ-6) deferred to Phase 0 → Phase 2 transition.
+through OQ-6) deferred to Phase 0 -> Phase 2 transition.
 
 Remaining gate items: seam gate-check and scene-equivalence criteria at
 Phase 2 start.
 
-### Phase 1b — Data Serving Pipeline
+### Phase 1b -- Data Serving Pipeline
 
 **Fetch fresh from Horizons, serve to the browser.** Phase 1b builds a
 purpose-built gallery cache in the gallery repo, populated nightly from
@@ -666,25 +676,25 @@ is no longer read (provenance by construction). It makes this data
 available to the interactive gallery.
 
 **Design converged: v0.4** (v0.3 July 7 + the fetch-fresh / nightly amendments, July 8-9). Three-model review: Opus 4.6 +
-Tony drafted schema → 4.8 caught osculating-center gap, parent dependency,
-validation invariants → Fable 5 caught invariant self-contradiction,
-`stored_center` overload, grid nesting → Opus 4.6 + Tony converged.
+Tony drafted schema -> 4.8 caught osculating-center gap, parent dependency,
+validation invariants -> Fable 5 caught invariant self-contradiction,
+`stored_center` overload, grid nesting -> Opus 4.6 + Tony converged.
 Full design in `PHASE1B_DATA_SERVING_DESIGN_HANDOFF.md v0.3`.
 
 Deliverables:
-1. **Export script** — fetches FRESH from Horizons per object with the explicit canonical
+1. **Export script** -- fetches FRESH from Horizons per object with the explicit canonical
    center (v0.4 fetch-fresh pivot -- the legacy desktop cache is no longer
    read), validates on write (Guard v2 MONITOR + structural invariants), then
    stages -> atomic-swaps -> commits per-object canonical files in web-servable
    format (F2 storage). Built as `tools/gallery_cache_builder.py`.
-2. **Coverage index** — JSON manifest (schema v0.3) listing available objects,
+2. **Coverage index** -- JSON manifest (schema v0.3) listing available objects,
    availability class, date coverage, step size, osculating elements with
    explicit center, `trajectory_of` for barycenter substitution, feature
    slugs. The assembler reads this to know what it can offer.
-3. **Feature configs** — separate `feature_configs.json` with renderer +
+3. **Feature configs** -- separate `feature_configs.json` with renderer +
    params for JS feature renderers (interactive layer only; static gallery
    pre-bakes features).
-4. **Serving home** — OQ-E resolved (H2): the cache lives in the GALLERY repo `data/`
+4. **Serving home** -- OQ-E resolved (H2): the cache lives in the GALLERY repo `data/`
    subfolder -- same repo, same origin, NO CORS question (the dedicated
    `palomas-orrery-data` repo, option H1, was superseded). Deploy first web cache.
    The slim plotly wheel (~3.9 MB, B′) also lives here.
@@ -695,9 +705,9 @@ Pre-build: diff `f1ede52..a56e036` for source file changes.
 Gate: export script runs, web cache deployed to `data/`, interactive page
 can fetch it.
 
-### Phase 2 — Solar System Assembler + First Interactive Page
+### Phase 2 -- Solar System Assembler + First Interactive Page
 
-Build the solar system assembler: scene spec → Plotly figure JSON. Written
+Build the solar system assembler: scene spec -> Plotly figure JSON. Written
 against the Phase 1 vocabulary, calling the shared computation engines.
 
 Build the first solar system interactive gallery page: planet selection
@@ -706,7 +716,7 @@ comet perihelion, close approaches. Each preset is a pre-filled scene spec that
 the user can view as-is or modify.
 
 Requires: helpers split (L-087), Phase 1b data pipeline. Architecture B′
-confirmed (measurement passed July 6, 2026 — 2.1-3.3 s on iPhone).
+confirmed (measurement passed July 6, 2026 -- 2.1-3.3 s on iPhone).
 
 
 **Track structure (added v17, Tony's ruling, August 2026 session).** Phase 2
@@ -745,10 +755,10 @@ Track 0 would then migrate; and L-179/L-180 become the first thing Track
 
 Gate: scene equivalence (Mode 5) + the gallery page ships.
 
-### Phase 3 — Star Assembler + Interactive Page
+### Phase 3 -- Star Assembler + Interactive Page
 
 Design the star vocabulary (just-in-time, informed by Phase 2 lessons). Build
-the star assembler. Resolve the star cache wire format — pickle → Parquet or
+the star assembler. Resolve the star cache wire format -- pickle -> Parquet or
 JSON for browser delivery.
 
 Build the star interactive gallery page: distance and magnitude controls, HR
@@ -756,13 +766,13 @@ diagram and planetarium view selectors, spectral class filters.
 
 Gate: scene equivalence + Mode 5 + the page ships.
 
-### Phase 4 — Hybrid: Exoplanets + Sgr A*
+### Phase 4 -- Hybrid: Exoplanets + Sgr A*
 
 Cross-domain gallery pages. Depends on the solar system assembler.
 
 Gate: scene equivalence + Mode 5 + pages ship.
 
-### Phase 5 — Earth System
+### Phase 5 -- Earth System
 
 Resolve the KMZ rendering question. Build the Earth system interactive gallery
 page: scenario selector with Plotly teasers and KMZ download links. Future:
@@ -771,10 +781,10 @@ content.
 
 Gate: Mode 5 + the page ships.
 
-### Phase 6 — Dissolves
+### Phase 6 -- Dissolves
 
 In the v7 plan, Phase 6 was "Web UI." In the gallery-extension model, there is
-no separate web UI to build — the gallery IS the UI. Each earlier phase ships
+no separate web UI to build -- the gallery IS the UI. Each earlier phase ships
 its own interactive page. What remains is refinement: navigation coherence
 across all interactive pages, mobile responsive polish, the "suite-design
 conversation" about what the whole interactive gallery feels like (L-096).
@@ -782,60 +792,60 @@ This is continuous work, not a gated phase.
 
 ---
 
-## §5a — Execution Map: Dependencies & Model Assignments
+## Section 5a -- Execution Map: Dependencies & Model Assignments
 
 ### Dependency Chain
 
 ```
 PREP (independent, can start now)
-  ✓ LICENSE moved to root
-  ✓ Section W ledger entries
-  ○ Attribution page ─────────── 4.8 ──→ needed before public pages
-  ○ Helpers split ────────────── 4.6 ──→ needed before Phase 2
+  [x] LICENSE moved to root
+  [x] Section W ledger entries
+  [ ] Attribution page --------- 4.8 --> needed before public pages
+  [ ] Helpers split ------------ 4.6 --> needed before Phase 2
 
-PHASE 0 ✓ DONE ──── PHASE 1a ✓ COMPLETE ──── PHASE 1b
+PHASE 0 DONE ------ PHASE 1a COMPLETE ------ PHASE 1b
 Stack proven         Vocabulary delivered       Data serving pipeline
 Arch A proven        (Fable, Jul 4)             Export script + coverage
 B′ measured: PASS                               index + serving home
 (Jul 6)                                         + slim plotly wheel
-                          │
-                     PHASE 2 ◄── Phase 1b + helpers split
+                          |
+                     PHASE 2 <-- Phase 1b + helpers split
                      Solar system assembler (B′)
                      Shared engines in Pyodide
                      + interactive page
-                          │
+                          |
                      PHASE 3
                      Star assembler + star cache format
-                          │
+                          |
                      PHASE 4
                      Hybrid domains
-                          │
-                     PHASE 5 ◄── 4.8 restraint discipline
+                          |
+                     PHASE 5 <-- 4.8 restraint discipline
                      Earth system
 ```
 
-**Critical path:** Phase 1b → Phase 2 → domain pages.
+**Critical path:** Phase 1b -> Phase 2 -> domain pages.
 (Phase 0, Phase 1a complete. A/B fork resolved: B′.)
 
 **Secondary dependencies:**
-- Helpers split → Phase 2 (computation functions freed from tkinter)
-- Attribution page → any publicly reachable interactive page
-- Star cache wire format → Phase 3 (Pyodide needs non-pickle format)
-- ~~A/B architecture decision~~ → resolved: B′ (July 6, 2026)
+- Helpers split -> Phase 2 (computation functions freed from tkinter)
+- Attribution page -> any publicly reachable interactive page
+- Star cache wire format -> Phase 3 (Pyodide needs non-pickle format)
+- ~~A/B architecture decision~~ -> resolved: B′ (July 6, 2026)
 
 ### Model Assignments
 
-**Fable 5** — Phase 1a vocabulary delivered. Data serving analysis delivered.
+**Fable 5** -- Phase 1a vocabulary delivered. Data serving analysis delivered.
 Phase 1b design review (July 7, 2026: caught invariant #4 self-contradiction,
 `stored_center` overload, grid nesting). Fable access extended to July 12,
 2026. Available for: provenance Tier-1 triage, Phase 2 broad-first design.
 
-**Opus 4.8 and Opus 5** — verification, convergence, restraint. Phase 1b design review
+**Opus 4.8 and Opus 5** -- verification, convergence, restraint. Phase 1b design review
 (July 7, 2026: caught osculating center gap, validation invariants, parent
 dependency). Attribution page (fetch license terms). Vocabulary DD/OQ review
 at Phase 2 start. Phase 5 restraint discipline on human-cost content.
 
-**Sonnet 5** — predesign discovery for L-154 (the resolver bug, the
+**Sonnet 5** -- predesign discovery for L-154 (the resolver bug, the
 physical-radius source question) that surfaced the provenance scoring
 problem; independent design review of Fable 5's provenance fix (verified
 every factual claim by rerunning the tool and regrepping both repos rather
@@ -862,7 +872,7 @@ addendum. Phase 2 Artifact 1 (Earth) built and Mode-5 accepted; Artifact 2
 (Jupiter/Saturn, rings + radiation belts) is next in the artifact order but
 BLOCKED: the client-side feature-rendering JS layer it needs (L-154) is
 gated behind a provenance/scoring detour that opened while scoping it (see
-§6 for the full dependency chain).
+Section 6 for the full dependency chain).
 
 Detour status as of 2026-08-01: design and ledger phases CLOSED;
 **scanner Phase 1 (1a-1f) COMPLETE; Phase 2 Piece 1 (D4 scanner
@@ -878,7 +888,7 @@ Phase 2 Piece 1 (2026-08-01, Opus 5): scanner mechanism for the
 V_CROSS_CHECKED (V2) rung. parse_cross_checks() parser, scoring
 branches requiring source evidence AND two distinct checker annotations,
 diagnostics subsection, test_cross_checked.py (16 tests). Five-model
-competitive design review (GPT x2, Opus 5 x2, Fable 5) — the competitive
+competitive design review (GPT x2, Opus 5 x2, Fable 5) -- the competitive
 pattern produced genuine discovery (worksheet inventory error caught by
 one reviewer only, a live false-positive regex hazard caught by another
 only). Mechanism live, zero population until annotations written.
@@ -912,29 +922,29 @@ then build Artifact 2.
 
 ---
 
-## §6 — Prep Work
+## Section 6 -- Prep Work
 
-**L-080 — Smoke-test harness.** Spec for scene equivalence (Phase 1 criteria).
+**L-080 -- Smoke-test harness.** Spec for scene equivalence (Phase 1 criteria).
 Deferred to Phase 2 start.
 
-**LICENSE to repo root.** ✓ Done. `LICENSE.md` at repo root at HEAD (`7b25eb9`).
+**LICENSE to repo root.** [x] Done. `LICENSE.md` at repo root at HEAD (`7b25eb9`).
 
-**Attribution page.** ○ Not started. Data sources: JPL Horizons, JPL SBDB/CAD,
+**Attribution page.** [ ] Not started. Data sources: JPL Horizons, JPL SBDB/CAD,
 Copernicus CDS / ERA5 / ERA5T, NOAA Coral Reef Watch, IPC and FEWS NET, HDX,
-OCHA FTS, SIMBAD (CDS), Gaia (ESA), Hipparcos, NSIDC, Mauna Loa CO₂ (NOAA
-GML/Scripps), HOT program. Provider citation strings need fetching (4.8 task —
+OCHA FTS, SIMBAD (CDS), Gaia (ESA), Hipparcos, NSIDC, Mauna Loa CO2 (NOAA
+GML/Scripps), HOT program. Provider citation strings need fetching (4.8 task --
 fetched not recalled). Copernicus and IPC terms most likely to constrain
 hosting. Not a Phase 0 blocker if page kept unlisted; required before any
 publicly reachable interactive page.
 
-**L-068 residuals** (L-066, L-016, L-014) — Desktop cleanup. Not web blockers.
+**L-068 residuals** (L-066, L-016, L-014) -- Desktop cleanup. Not web blockers.
 
-**`palomas_orrery_helpers.py` split** — ○ Not started. Separate computation
+**`palomas_orrery_helpers.py` split** -- [ ] Not started. Separate computation
 from tkinter GUI helpers. Computation the assembler needs:
 `calculate_planet9_position_on_orbit`, `rotate_points2`,
 `calculate_axis_range`. Required before Phase 2.
 
-**L-162 — CENTER_BODY_RADII de-duplication.** ○ Not started, scoped, now
+**L-162 -- CENTER_BODY_RADII de-duplication.** [ ] Not started, scoped, now
 with its own ledger entry (previously design-doc only). Promote 15
 remaining bodies (Mercury, Venus, Moon, Mars, Phobos, Saturn, Uranus,
 Neptune, Pluto, Bennu, Eris, Haumea, Makemake, Arrokoth -- Planet 9
@@ -946,14 +956,21 @@ provenance scanner's Phase 3 pinning engine is built (L-155/156), so
 pinning references named constants directly rather than needing dict-path
 extraction for 15 of 18 bodies.
 
-**L-154-162 — Provenance scoring model fix (the whole cluster).**
-✓ Design CLOSED, ✓ ledger formalization CLOSED, ✓ scanner Phase 1
-(1a-1f) COMPLETE, ✓ Phase 2 Piece 1 (D4 mechanism) COMPLETE,
-✓ Phase 2 Track 1 Batch 1 COMPLETE, ○ Phase 2 Track 1 Batch 2 NEXT.
+**L-154-162 -- Provenance scoring model fix (the whole cluster).**
+[x] Design CLOSED, [x] ledger formalization CLOSED, [x] scanner Phase 1
+(1a-1f) COMPLETE, [x] Phase 2 Piece 1 (D4 mechanism) COMPLETE,
+[x] Phase 2 Track 1 Batch 1 COMPLETE, [ ] Phase 2 Track 1 Batch 2 NEXT.
 AMENDED v17 (Tony, 2026-08-07): Track 0 (constant layer scaffolding)
 now precedes the batches. The August 5 wording is preserved below as
 history -- batches still precede the artifact, but they no longer come
 first. See Phase 2 track structure in Section 5.
+AMENDED AGAIN 2026-08-08 (Tony): Artifact 2 is no longer BLOCKED; it
+becomes step 2. The migration proves the registry structure on Jupiter
+first, because Jupiter's served data is complete and correct and so gives
+the transport a real acceptance test. Artifact 2's remaining values are
+then cross-checked INTO that proven structure, which is the same work the
+Batch 2 gate was asking for, sequenced so it lands somewhere. The two
+August wordings below are preserved as history, not withdrawn.
 Batch 2 is the stated gate before Artifact 2 (Tony, 2026-08-05):
 all provenance batches clear before the Jupiter/Saturn artifact
 proceeds.
@@ -1075,12 +1092,12 @@ doesn't change the final Phase 1 outcome, only invalidates predictions
 already on record for no gain). Full detail: L-156's Note, this same
 date.
 
-Build progress, 2026-07-29: 1b landed. Built on ac07419, pushed at bf36743 — verified via remote HEAD match and via reason-string re-execution (post-patch audit carries the new "cited, not independently cross-checked"/"date-sensitive" reasons 565 times, the old "has source citation"/"potentially stale" text zero times). Tier 1 held exactly at 156 (the invariant L-156 predicted: the highest score reachable on the changed path is 15, one below the Tier-1 floor of 16). Tier 2 rose 181→563 and Tier 3 fell 430→60 as the former V_STALE population merged into V_SOURCED; Tier 4 fell 14→2; total conserved at 781. One 1a follow-up landed alongside: CRIT_ABSOLUTE_OVERRIDE emptied now that Phase A left CENTER_BODY_RADII with only the Planet 9 raw literal. 1c (citation-window inheritance, ~42-unit Tier-1 reduction) is next.
+Build progress, 2026-07-29: 1b landed. Built on ac07419, pushed at bf36743 -- verified via remote HEAD match and via reason-string re-execution (post-patch audit carries the new "cited, not independently cross-checked"/"date-sensitive" reasons 565 times, the old "has source citation"/"potentially stale" text zero times). Tier 1 held exactly at 156 (the invariant L-156 predicted: the highest score reachable on the changed path is 15, one below the Tier-1 floor of 16). Tier 2 rose 181->563 and Tier 3 fell 430->60 as the former V_STALE population merged into V_SOURCED; Tier 4 fell 14->2; total conserved at 781. One 1a follow-up landed alongside: CRIT_ABSOLUTE_OVERRIDE emptied now that Phase A left CENTER_BODY_RADII with only the Planet 9 raw literal. 1c (citation-window inheritance, ~42-unit Tier-1 reduction) is next.
 
 Build progress, 2026-07-30: 1c predesign verified. Opus 5's predesign for the citation-window inheritance fix (L-156 Gap item 6) was independently re-verified against live HEAD (657542f) rather than accepted on its tables -- every headline figure held except one internal table split (22/1 -> 21/2, same total). The predesign corrected its own earlier estimate: yield is 23 inheriting findings, not 42, and surfaced 18 genuine uncited-block gaps in shell_configs.py now tracked as L-173. idealized_orbits.py's exclusion was re-confirmed on a structural basis (zero findings inside its one cited block) rather than the original, incorrect distance argument. Approved to build directly; no design round needed. Full detail: L-156's Note this date, L-173, PREDESIGN_1c_citation_inheritance.md.
 
-**L-163 — Module role/domain classification redesign (ROLE_MAP + MODULE_DOMAIN_MAP).**
-✓ Role-side CLOSED, all 4 phases (Opus 5 + Sonnet 5, July 24-26 2026).
+**L-163 -- Module role/domain classification redesign (ROLE_MAP + MODULE_DOMAIN_MAP).**
+[x] Role-side CLOSED, all 4 phases (Opus 5 + Sonnet 5, July 24-26 2026).
 Design (Sonnet 5) reviewed by Fable 5, both confirmed build-ready; full
 detail in ROLE_DOMAIN_CLASSIFICATION_HANDOFF.md and
 AS_BUILT_L163_phase1.md through AS_BUILT_L163_phase4.md. ROLE_MAP
@@ -1104,7 +1121,7 @@ which cites this item's coverage-gap pattern as its own precedent.
 
 ---
 
-## §7 — Open Decisions
+## Section 7 -- Open Decisions
 
 1. ~~**Server vs serverless.**~~ **Resolved: Pyodide.** Phase 0 proved the
    stack (July 6, 2026): Pyodide v314.0.2 loads in ~4 seconds on WiFi,
@@ -1125,10 +1142,10 @@ which cites this item's coverage-gap pattern as its own precedent.
    check; probable answer is yes (same-origin). Resolved in Phase 1b.
 7. **Earth system KMZ rendering on the web:** downloads with teasers, Plotly
    choropleth, or map library.
-8. **Star cache wire format:** PKL → Parquet/JSON for Pyodide. Resolved in
+8. **Star cache wire format:** PKL -> Parquet/JSON for Pyodide. Resolved in
    Phase 3.
 9. ~~**Matplotlib in Phase 0.**~~ **Dissolved.** The gallery is Plotly. The
-   eccentricity demo converts to Plotly as part of Phase 0 — not a separate
+   eccentricity demo converts to Plotly as part of Phase 0 -- not a separate
    decision.
 10. ~~**Pyodide package weight + cold-start.**~~ **Resolved: B′.** Measured
     on iPhone Safari WiFi (July 6, 2026): Pyodide v314.0.2 + NumPy +
@@ -1136,7 +1153,7 @@ which cites this item's coverage-gap pattern as its own precedent.
     start**. `import plotly.graph_objects` = 57-59 ms (plotly 6 lazy-loads;
     WASM multiplier ~1:1). B′ uses a slim self-hosted wheel (~3.9 MB,
     stripped of dead JS bundles and Jupyter extras per Fable's strip spec)
-    from the Phase 1b serving home — no PyPI dependency. Two-tier model:
+    from the Phase 1b serving home -- no PyPI dependency. Two-tier model:
     frozen A exhibits (instant, convention-light) + data-backed B′ exhibits
     (shared engines, one codebase). Fable's convention-duplication analysis
     confirmed A's parallel-pipeline cost outweighs B′'s cold-start cost for
@@ -1145,10 +1162,10 @@ which cites this item's coverage-gap pattern as its own precedent.
 11. ~~**Gallery viewer architecture for interactive pages.**~~ **Resolved:
     Option C (hybrid).** `index.html` stays as curated viewer. Single
     `interactive.html` handles all interactive exhibits via URL parameter.
-    `gallery_metadata.json` bridges both. See §2a.
+    `gallery_metadata.json` bridges both. See Section 2a.
 
-12. **How feature data crosses the repo boundary.** RECOMMENDED, not yet
-    ratified: **fetch-and-import.** The nightly builder resolves the
+12. **How feature data crosses the repo boundary.** **RATIFIED 2026-08-08
+    (Tony).** **fetch-and-import.** The builder resolves the
     orrery HEAD SHA, fetches `constants_new.py` as text at that SHA,
     imports it, reads the feature values and their sources, validates,
     and writes into the staging cache under existing atomic-swap
@@ -1160,15 +1177,40 @@ which cites this item's coverage-gap pattern as its own precedent.
     Two earlier candidates are retired: exporting to a JSON artifact
     (rests on a generation step and a run trigger that do not exist), and
     reading the file with Python's `ast` module without executing it
-    (fights the store's design -- 7 of 45 top-level assignments are
-    derived rather than literal, and two contain constructor calls
-    `ast.literal_eval` cannot evaluate at all).
+    (fights the store's design -- 6 of 49 top-level assignments are
+    derived rather than literal, and at least one contains a constructor
+    call `ast.literal_eval` cannot evaluate at all).
+    **Count correction, 2026-08-11.** Measured at HEAD: 49 assignments, 6
+    derived. The plan read 7 of 45. The 45-to-49 gap is exactly the four
+    L-179/L-180 additions, so that half was stale rather than wrong. The
+    constructor-call count is a genuine open question rather than a
+    correction: the plan says two, measurement finds one
+    (`HORIZONS_MAX_DATE = datetime(...)`), with no calls nested inside any
+    of the six derived expressions -- and staleness explains a count going
+    UP, not down. Resolve by looking, not by patching. The argument
+    against `ast` is unaffected either way; one non-evaluable constructor
+    is as fatal to it as two.
     Trust argument, recorded because future sessions will re-ask it: the
     builder, the orrery GUI, and every patch script Tony runs already
     come from the same two repos under the same account, so importing one
     more file from it adds NO NEW TRUST ROOT. A raw fetch at a full
     40-character SHA is content-addressed, so there is no window in which
     what was checked and what was imported can differ.
+    **Two conditions attach to the ratification (Tony, 2026-08-08).**
+    (a) A data-only rule for `constants_new.py` plus a pre-import gate,
+    because import executes top-level code. The gate is roughly ten lines
+    and checks two structural properties before the file runs: that every
+    import is on an allowlist, and that no dictionary has a duplicate key.
+    The duplicate-key check is the one capability fetch-and-import
+    otherwise loses, since after import Python has already silently kept
+    the last duplicate. (b) The fallback when GitHub is unreachable must
+    be OBSERVED at build time, not inherited from a reviewer's claim. It
+    falls back to the last committed copy and never writes empty features.
+    Feasibility confirmed at ratification: `constants_new.py` imports only
+    numpy and datetime, nothing orrery-internal, so the fetch really is
+    ONE file with no dependency tree. (The numpy import is dead -- present
+    since April 5 2025 with zero uses across all 46 commits -- and comes
+    out when the migration next touches the file.)
 13. **Generator shape and run cadence.** DISSOLVED by decision 12. There
     is no generation step -- "generation" is Tony editing the store.
     Kept as a record because two sessions built on the opposite
@@ -1208,7 +1250,17 @@ which cites this item's coverage-gap pattern as its own precedent.
     night's committed copy, logging every changed value with old, new,
     and both orrery SHAs -- the only guard that sees CHANGE itself, which
     is the L-182 failure family.
-16. **Pilot slice inside Track 0.** OPEN, Tony decides. Fable round 2
+16. **Pilot slice inside Track 0.** **RULED 2026-08-08 (Tony): Jupiter
+    first, structure before values.** Prove the registry structure on
+    Jupiter, where the served data is already complete and correct so the
+    transport gets a real acceptance test. Then cross-check Artifact 2's
+    remaining values, writing them into the proven structure. Then
+    complete the migration and resolve what surfaces. The recommendation
+    below is what Tony ruled on, and it stands as written except for one
+    number: it says Jupiter has 5 entries, and the August 10 session
+    counted 4 ring entries. Confirm before the pilot starts, since the
+    pilot is scoped by it.
+    Fable round 2
     recommends migrating ONE body first (Jupiter, 5 entries) through the
     full Track 0 treatment and building the transport end-to-end against
     it, then scaling to the remaining 29 rings -- which under fetch-and-import
@@ -1223,58 +1275,93 @@ which cites this item's coverage-gap pattern as its own precedent.
     right") its first data point at one-seventh the exposure, and
     Jupiter's descriptions contain the resistant-prose cases. Cost: two
     passes over the migration tooling instead of one.
-17. **Where description interpolation happens.** OPEN. The served cache
-    can hold templates plus values, with the assembler interpolating at
-    render time; or pre-interpolated final strings, with the builder
-    interpolating at build time. Fable recommends builder-side: it keeps
-    the assembler dumb, keeps the failure surface at build time where
-    quarantine already exists, and means a template error is caught
-    nightly rather than in a user's browser. Either answer works, but it
-    decides the cache schema, so it is decided before the schema is
-    written.
+17. **Where description interpolation happens.** **RULED 2026-08-08
+    (Tony): BUILDER SIDE.** The served cache holds pre-interpolated final
+    strings. Tony's reason is not the one Fable argued: it is that the
+    orrery and the assembler cannot diverge if only one of them ever
+    composes the sentence. Accepted cost, stated at the time: the cache
+    holds finished strings, so rephrasing anything requires a rebuild.
+    Fable's supporting arguments also hold -- it keeps the assembler dumb,
+    keeps the failure surface at build time where quarantine already
+    exists, and means a template error is caught at build rather than in a
+    user's browser. The alternative (cache holds templates plus values,
+    assembler interpolates at render time) is retired.
+
+18. **Shape of a registry entry.** **RULED 2026-08-08 (Tony): three
+    zones.** Every entry separates:
+    - **MEASURED** -- a published value, carrying value, unit, AND source.
+      Not a bare number with the unit baked into the key name. Tony's
+      reasoning: published values arrive in mixed units regardless, so a
+      conversion step is needed for uniform display text no matter what
+      is stored. Storage stays heterogeneous; conversion happens at the
+      display step. This DELETED an earlier Claude recommendation for a
+      per-feature unit convention.
+    - **DECLARED** -- a developer style choice (color, opacity). No source
+      is expected, and its absence is not a finding.
+    - **DERIVED display text** -- NOT stored. Built by interpolation from
+      the other two, at the builder, per decision 17.
+    Two structural constraints follow. Everything measured must sit at
+    MODULE SCOPE, readable without executing anything -- this is what
+    makes L-181 the PRECONDITION for L-190 rather than more work for it,
+    since a value inside a draw function cannot be walked by a static
+    pass, which is exactly why the scanner cannot see `belt_distances`
+    today. And there is ONE not-yet-sourced state, not two: the orrery is
+    the source, so if the orrery does not offer a value there is nothing
+    to render and no field to fill. A not-yet-sourced field means a value
+    that IS rendered but has no recorded provenance. Distinguishable from
+    absent; never an empty field.
+    `CHROMOSPHERE_RADIUS_LINE` is the working precedent for the derived
+    zone: two values stored in different units feeding one sentence that
+    emits solar radii, AU, and km.
+    One question stays open and is better answered against Jupiter's ring
+    entries than in the abstract: should EVERY measured field be
+    range-capable? The evidence that it might -- Jupiter's main ring
+    `description` says the thickness is about 30 to 300 km while
+    `thickness_km` says 30, so the prose is more accurate than the data
+    beside it.
 
 ---
 
-## §8 — Vision Opportunities
+## Section 8 -- Vision Opportunities
 
 *Captured in `LEDGER_CONSOLIDATED.md`. Several already carry L-numbers.*
 
 **Arriving naturally with the gallery-extension model:**
 
-- **Option E unified front end** (L-091) — the gallery IS the front end now.
+- **Option E unified front end** (L-091) -- the gallery IS the front end now.
   This vision item is realized by the architecture, not deferred.
-- **Gallery generators as spec-producers** — already true for pre-curated
+- **Gallery generators as spec-producers** -- already true for pre-curated
   cards; interactive pages extend it.
-- **Embeddable scenes for educators** (L-092) — a gallery page with preset
+- **Embeddable scenes for educators** (L-092) -- a gallery page with preset
   parameters in the URL hash is an embeddable exhibit. Arrives nearly for free
   once interactive pages exist.
-- **Educational guided explorations** (L-093) — the narrative sections plus
+- **Educational guided explorations** (L-093) -- the narrative sections plus
   interactive pages plus presets = a guided tour.
 
 **Still deferred:**
 - Preset authoring (L-046)
 - Community cache as commons (L-094)
 - PWA / offline for classrooms (L-095)
-- What the interactive gallery *feels* like (L-096 — suite-design conversation)
+- What the interactive gallery *feels* like (L-096 -- suite-design conversation)
 
 ---
 
-## §9 — What This Plan Does NOT Cover
+## Section 9 -- What This Plan Does NOT Cover
 
 Desktop development continues on its own track. The gallery extension is
 additive. The Instagram pipeline is independent. The existing ledger is
 unaffected. Desktop-to-assembler migration (refactoring the desktop to use
-the shared assembler) is deferred — valuable for codebase unification but
+the shared assembler) is deferred -- valuable for codebase unification but
 not on the critical path for the gallery.
 
 ---
 
-## §10 — Lineage
+## Section 10 -- Lineage
 
 This plan draws from seventeen sessions across three Claude models + two pivots:
 
 - **Fable 5 survey** (July 2, 2026): Four-front survey. L-079 as keystone.
-  Five publication options. Six code proposals (L-079–L-084).
+  Five publication options. Six code proposals (L-079-L-084).
 - **Fable 5 L-079 deep dive** (July 2, 2026): Five S-options, four M-options,
   three phasing strategies, repricing map.
 - **Opus 4.8 convergence handoff** (July 2, 2026): Fetched JPL/GitHub terms.
@@ -1283,13 +1370,13 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
   Caught `celestial_objects.py` seam.
 - **Fable 5 review of v2** (July 3, 2026): Found `palomas_orrery_helpers.py`
   seam. Named assembly-duplication tension. Redefined gate as scene equivalence.
-- **Opus 4.6 + Tony convergence** (July 3, 2026): Resolved option (b) — shared
+- **Opus 4.6 + Tony convergence** (July 3, 2026): Resolved option (b) -- shared
   assembler. Fork decision. Four domains identified.
 - **Opus 4.8 review of v3.1** (July 3, 2026): Named server-vs-serverless
   decision. Two-substrate model. Cache-through-index from day one.
 - **Fable 5 review of v4** (July 3, 2026): Star PKL cache provenance. Module
-  corrections. Phase 7 drift window → per-domain migration tails. Vocabulary
-  waterfall → just-in-time. Two-sided pilot. Animation envelope. Scene
+  corrections. Phase 7 drift window -> per-domain migration tails. Vocabulary
+  waterfall -> just-in-time. Two-sided pilot. Animation envelope. Scene
   equivalence criteria. Coverage index as solar system concept.
 - **Opus 4.6 execution review** (July 4, 2026): Verified prep work status.
   Mapped dependency chain and critical path. Assigned models to phases.
@@ -1310,7 +1397,7 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
   (Pyodide/static). Desktop migration deferred from critical path. Gallery
   viewer architecture settled (Option C: two pages). New open decisions:
   Pyodide weight, data serving architecture, second-renderer question
-  (resolved: two WYSIWYG pipelines, not a shared core — each studio previews
+  (resolved: two WYSIWYG pipelines, not a shared core -- each studio previews
   through its own viewer).
 - **Opus 4.8 review of v8** (July 5, 2026): Confirmed pivot integrity,
   vocabulary preservation, constraint faithfulness, phasing coherence, and
@@ -1319,10 +1406,10 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
   (resolved: gallery already serves 30 MB+ files, Pyodide is within norms).
   Verified `graph_objects` coupling makes full plotly package unavoidable in
   Pyodide. Confirmed 148 gallery entries vs "330+" claim. Provided headroom
-  math (479+130+31=640 MB, but orbit/star caches are gitignored — not in
+  math (479+130+31=640 MB, but orbit/star caches are gitignored -- not in
   either repo). Nits accepted.
 - **Opus 4.6 + Tony data serving exploration** (July 5, 2026): Discovered
-  orbit cache and star cache are both gitignored — not served by either repo.
+  orbit cache and star cache are both gitignored -- not served by either repo.
   Surfaced planet/satellite split (planets have analytical fallback, satellites
   don't). Explored per-pair splitting, curated subset, orrery Pages, Releases,
   R2, and hybrid approaches. Identified rolling cache date-range question.
@@ -1339,7 +1426,7 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
 - **Opus 4.6 + Tony convergence and build** (July 6, 2026): Reviewed Fable
   analysis; adopted F2, three trace types, two-class model (analytic vs
   cache-required, plus spacecraft write-once). Built Solar System Explorer
-  as Phase 0 deliverable — `interactive.html` deployed to
+  as Phase 0 deliverable -- `interactive.html` deployed to
   `palomasorrery.com/interactive.html` (created `300ac30c`, updated
   `a85a4fa`). Pyodide v314.0.2, mean element Keplerian computation,
   consent gate. Tested on desktop Chrome and iPhone Safari. Phase 0 proven.
@@ -1366,70 +1453,70 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
 - **B′ cold-start measurement** (July 6, 2026): `measure_plotly.html` deployed,
   timed on iPhone Safari WiFi. Stock plotly from PyPI: 2.1-3.3 s total cold
   start. `import plotly.graph_objects` = 57-59 ms. WASM multiplier ~1:1.
-  Acceptance threshold ≤15 s — passed at one-seventh. A/B fork resolved: B′.
+  Acceptance threshold <=15 s -- passed at one-seventh. A/B fork resolved: B′.
   Phase 0 closed.
 
 **Decisions made (cumulative):**
 
 *Preserved from v7:*
-- Site never fetches Horizons (§1)
-- Three-tier cache, all offline (§1)
-- GUI declares the envelope, including content type (§1)
-- Assemblers read cache through index abstraction from day one (§1)
-- Coverage index is solar system concept; other domains declare bounds simply (§1)
-- One shared assembler per domain (§3)
-- Assembler is new code; original code archived (§3)
-- Four visualization domains recognized (§4)
-- Star data is fully cached, 101 ly / mag 9, Gaia + Hipparcos (§4b)
-- Other domain vocabularies designed just-in-time (§5)
-- Animation presets as curated tier-2 exports (§1/§5)
+- Site never fetches Horizons (Section 1)
+- Three-tier cache, all offline (Section 1)
+- GUI declares the envelope, including content type (Section 1)
+- Assemblers read cache through index abstraction from day one (Section 1)
+- Coverage index is solar system concept; other domains declare bounds simply (Section 1)
+- One shared assembler per domain (Section 3)
+- Assembler is new code; original code archived (Section 3)
+- Four visualization domains recognized (Section 4)
+- Star data is fully cached, 101 ly / mag 9, Gaia + Hipparcos (Section 4b)
+- Other domain vocabularies designed just-in-time (Section 5)
+- Animation presets as curated tier-2 exports (Section 1/Section 5)
 - Phase 1 vocabulary complete (Fable, Jul 4)
 - Animation/static consolidation verified (Phase 1)
 - Scene spec is JSON-serializable from day one (Phase 1)
 - DD/OQ rulings deferred to Phase 2 start (Phase 1)
 
-*New in v8 — the pivot:*
-- Gallery is the web publication, not a separate app (§2)
-- Science museum model: curated permanent collection + interactive exhibits (§2)
-- Incremental delivery: each interactive page ships independently (§2)
-- JSON bridge: pre-curated and interactive content produce the same artifact (§1)
-- Pyodide for client-side computation; no server (§1)
-- Desktop migration deferred from critical path (§2)
-- Matplotlib question dissolved — gallery is Plotly (§7)
-- Phase 6 dissolved — gallery IS the UI (§5)
-- Server-vs-serverless resolved in principle: serverless/Pyodide (§7)
-- Gallery viewer: Option C hybrid — two pages, `index.html` + `interactive.html` (§2a)
+*New in v8 -- the pivot:*
+- Gallery is the web publication, not a separate app (Section 2)
+- Science museum model: curated permanent collection + interactive exhibits (Section 2)
+- Incremental delivery: each interactive page ships independently (Section 2)
+- JSON bridge: pre-curated and interactive content produce the same artifact (Section 1)
+- Pyodide for client-side computation; no server (Section 1)
+- Desktop migration deferred from critical path (Section 2)
+- Matplotlib question dissolved -- gallery is Plotly (Section 7)
+- Phase 6 dissolved -- gallery IS the UI (Section 5)
+- Server-vs-serverless resolved in principle: serverless/Pyodide (Section 7)
+- Gallery viewer: Option C hybrid -- two pages, `index.html` + `interactive.html` (Section 2a)
 
 *New in v9:*
-- Phase 0 proven: Pyodide v314.0.2 + NumPy + Plotly.js on static GitHub Pages (§5)
-- Server/serverless resolved in practice: Pyodide (§7 #1)
-- A/B architecture fork resolved: B′ (§5, §7 #10, measurement: 2.1-3.3 s)
-- Two-tier model: frozen A exhibits + data-backed B′ exhibits (§1, §5)
-- F2 canonical per-object storage adopted (§3a)
-- Three trace types: actual positions, osculating at epoch, mean elements (§3a)
-- Two data types to serve: osculating elements + position vectors (§3a)
-- Two classes for rolling cache + spacecraft write-once (§3a)
-- Phase 1b inserted: data serving pipeline (§5)
-- Consent gate for Pyodide loading (§5, §7 #10)
-- L-086 attribution gate ruled: JPL-only with inline credit passes (§5)
-- `interactive.html` deployed as first exhibit (§2a)
-- `orbit_paths.json` and `orbit_cache/` added to `.gitignore` (§3a)
-- URL parameter scheme: `?exhibit=` (§2a)
-- Slim self-hosted plotly wheel (~3.9 MB) in Phase 1b serving home (§5, §7 #10)
+- Phase 0 proven: Pyodide v314.0.2 + NumPy + Plotly.js on static GitHub Pages (Section 5)
+- Server/serverless resolved in practice: Pyodide (Section 7 #1)
+- A/B architecture fork resolved: B′ (Section 5, Section 7 #10, measurement: 2.1-3.3 s)
+- Two-tier model: frozen A exhibits + data-backed B′ exhibits (Section 1, Section 5)
+- F2 canonical per-object storage adopted (Section 3a)
+- Three trace types: actual positions, osculating at epoch, mean elements (Section 3a)
+- Two data types to serve: osculating elements + position vectors (Section 3a)
+- Two classes for rolling cache + spacecraft write-once (Section 3a)
+- Phase 1b inserted: data serving pipeline (Section 5)
+- Consent gate for Pyodide loading (Section 5, Section 7 #10)
+- L-086 attribution gate ruled: JPL-only with inline credit passes (Section 5)
+- `interactive.html` deployed as first exhibit (Section 2a)
+- `orbit_paths.json` and `orbit_cache/` added to `.gitignore` (Section 3a)
+- URL parameter scheme: `?exhibit=` (Section 2a)
+- Slim self-hosted plotly wheel (~3.9 MB) in Phase 1b serving home (Section 5, Section 7 #10)
 
 *New in v10:*
-- Phase 1b design converged v0.4, three-model review (§3a, §5)
+- Phase 1b design converged v0.4, three-model review (Section 3a, Section 5)
 - OQ-E resolved: H2 subfolder in gallery repo (474 MB used, 526 MB headroom,
-  ~72 MB all-phase data needs) (§3a)
+  ~72 MB all-phase data needs) (Section 3a)
 - 14 settled schema decisions: osculating center, parent position files,
   trajectory_of, presets self-contained, subtract-don't-requery, unit-is-data,
-  feature rendering always JS, validation invariants, grid nesting (§3a)
-- Coverage index schema v0.3 with 8 validation invariants (§3a)
-- Feature rendering architecture: three-context split (§3a)
-- OQ-B/C/F/G settled; OQ-A/D positioned; OQ-E pending CORS check (§3a)
-- Fable access extended to July 12, 2026 (§5a)
+  feature rendering always JS, validation invariants, grid nesting (Section 3a)
+- Coverage index schema v0.3 with 8 validation invariants (Section 3a)
+- Feature rendering architecture: three-context split (Section 3a)
+- OQ-B/C/F/G settled; OQ-A/D positioned; OQ-E pending CORS check (Section 3a)
+- Fable access extended to July 12, 2026 (Section 5a)
 - Phase 1b deliverables refined: coverage index, feature configs, export
-  script with invariant assertions (§5)
+  script with invariant assertions (Section 5)
 
 *New in v11 (July 9, 2026):*
 - Phase 1b BUILD: standalone `gallery_cache_builder.py` + `objects_config.json`
@@ -1464,13 +1551,13 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
   propagate via Kepler's equation from M0_deg/epoch_jd, bounded by the
   served_window field (currently null at HEAD; small builder change
   needed to populate it).
-- Mean elements (§3a's original "three trace types," never implemented in
+- Mean elements (Section 3a's original "three trace types," never implemented in
   Phase 1b) completed for planets + a curated comet list (Halley,
   Ikeya-Seki), porting the orrery's existing name-keyed lookup mechanism.
   Satellites/moons explicitly excluded -- their mean-element source data
   lacks secular-rate terms and is inconsistently dated/sourced; flagged as
   an orrery-side cleanup candidate, independent of this build.
-- §3a's "feature rendering always JS" reaffirmed after a synthesis draft
+- Section 3a's "feature rendering always JS" reaffirmed after a synthesis draft
   briefly (and incorrectly) merged in a Python-renders-features proposal --
   caught in second-pass review, reversed.
 - Four builder-layer gates found via direct code/cache verification: F1
@@ -1720,7 +1807,7 @@ bodies and counted in neither figure. See L-181 and L-190.
   sphere corrected to 319.2 R_Mars across all seven copies (L-182);
   Earth LEO/GEO band geometry freed of its two duplicate
   EARTH_RADIUS_KM shadow constants (L-178).
-- New failure class recorded (see §6): a correction reaching one copy
+- New failure class recorded (see Section 6): a correction reaching one copy
   of a two-copy pair is worse than no correction, because the next
   consistency pass harmonizes toward the uncorrected copy.
 - Protocol v3.34 plus the ten-skill reconciliation across three stores.
@@ -1774,15 +1861,15 @@ bodies and counted in neither figure. See L-181 and L-190.
 
 ---
 
-## §11 — Protocol & Skills Review (from Phase 0)
+## Section 11 -- Protocol & Skills Review (from Phase 0)
 
 Phase 0 stress-tested the protocol across three models in a single day.
 Detailed findings in `PROTOCOL_SKILLS_REVIEW_PHASE0.md`. Summary:
 
 **New lessons for protocol v3.32 consideration:**
-- "Measure before analyzing" — when an architectural fork hinges on a
+- "Measure before analyzing" -- when an architectural fork hinges on a
   measurable quantity, build the measurement before the analysis.
-- Frozen artifacts don't accrue sync tax — refines the parallel-pipeline
+- Frozen artifacts don't accrue sync tax -- refines the parallel-pipeline
   anti-pattern.
 - Consent gate as a UX pattern for unfamiliar technology.
 - Provenance markers (*(est.)*, *(fetched)*) belong in relay prompts too.
@@ -1794,7 +1881,7 @@ Detailed findings in `PROTOCOL_SKILLS_REVIEW_PHASE0.md`. Summary:
 
 **What worked:** SHA round-trip caught real provenance errors; three-model
 relay produced genuine error correction; "each round simpler" held (feared
-B cost: 15-25 s → measured 2.1 s). **What to improve:** re-pull SHAs at
+B cost: 15-25 s -> measured 2.1 s). **What to improve:** re-pull SHAs at
 draft time (not just session start); mark estimates as *(est.)* in relay
 prompts.
 
@@ -1821,15 +1908,21 @@ hover text), L-177 (Mercury Hill sphere convention), L-178-180
 (Earth/solar inconsistencies), L-181 (single-source-of-truth constant
 layer). Skill updates LANDED 2026-08-05: all ten skills bumped and reconciled
 across repo, manifest, and account install --
-orrery-coding-conventions 1.3, provenance-discipline 1.7,
-ledger-and-session-records 1.5, safe-file-editing 1.2,
+orrery-coding-conventions 1.3, provenance-discipline 1.8,
+ledger-and-session-records 1.5, safe-file-editing 1.3,
 agentic-pre-test 1.2, gallery-pipeline 1.2, gallery-assembler 1.1,
-gallery-cache-builder 1.2, horizons-orbital-mechanics 1.1,
-earth-system-pipeline 1.1. Protocol at v3.34.
+gallery-cache-builder 1.3, horizons-orbital-mechanics 1.1,
+earth-system-pipeline 1.1. Protocol at v3.37.
+(Versions above current as of 2026-08-11: safe-file-editing 1.2 -> 1.3
+Aug 7; provenance-discipline 1.7 -> 1.8 and gallery-cache-builder
+1.2 -> 1.3 Aug 11; protocol v3.34 -> v3.37 Aug 8-11. All three stores
+reconciled -- repo, manifest, account install.)
 Next after scanner work: write the feature-rendering JS layer
 (ring/shell/belt consumers) -- that's what stands between here and
 attempting Artifact 2 (Jupiter/Saturn) Mode 5. Layer 3 (nightly Task
-Scheduler) enabled with known intermittent promotion-step glitch (S3a
-addendum, July 24).
+Scheduler) RETIRED 2026-08-10 -- task disabled not deleted, builder run
+manually, first manual build clean 2026-08-11. The known intermittent
+promotion-step glitch (S3a addendum, July 24) is moot while manual and
+returns with the schedule if it ever does.
 Solar System Explorer live at palomasorrery.com/interactive.html.
 ```
