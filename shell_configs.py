@@ -93,8 +93,8 @@ SHELL_CONFIGS = {
     # Source: Hauck et al. 2013, JGR Planets 118:1204 -- core radius 2,020 +/- 30 km;
     #         Sori 2018, EPSL 489:92 -- crustal thickness 26 +/- 11 km;
     #         NASA MESSENGER Mission; Winslow et al. 2013 (magnetosphere geometry).
-    # Cross-checked: Hauck 2013 / Sori 2018 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
-    # Cross-checked: Hauck 2013 / Sori 2018 via Gemini 2026-08-03 (batch1_tier2_cross_check_gemini.md)
+    # Cross-checked: GPT 2026-08-03 -- Hauck 2013 / Sori 2018 (batch1_tier2_cross_check_gpt.md)
+    # Cross-checked: Gemini 2026-08-03 -- Hauck 2013 / Sori 2018 (batch1_tier2_cross_check_gemini.md)
     'Mercury': {
 
         'inner_core': {
@@ -244,8 +244,8 @@ SHELL_CONFIGS = {
     #         Nakamura et al. 1982, JGR 87:A117 and Nakamura 2005, JGR 110
     #         -- deep moonquake source depths;
     #         NASA Moon Fact Sheet; NASA Solar System Dynamics (Hill sphere); Draper (1847).
-    # Cross-checked: Weber 2011 / Nakamura via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
-    # Cross-checked: Weber 2011 / Nakamura via Gemini 2026-08-03 (batch1_tier2_cross_check_gemini.md)
+    # Cross-checked: GPT 2026-08-03 -- Weber 2011 / Nakamura (batch1_tier2_cross_check_gpt.md)
+    # Cross-checked: Gemini 2026-08-03 -- Weber 2011 / Nakamura (batch1_tier2_cross_check_gemini.md)
     # Phase B correction: radius_fraction/opacity swap in mantle fixed
     #   (source had radius_fraction=0.85, opacity=0.9655; description text
     #   and lunar geometry confirm boundary at 0.9655 of Moon radius).

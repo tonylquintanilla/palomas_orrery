@@ -41,8 +41,8 @@ from orrery_rendering import create_info_marker
 #          detection study and reports no inner-core temperature; the value was not
 #          sourceable after three independent searches, so it is removed and the gap
 #          noted rather than re-cited.
-# Cross-checked: Weber et al. 2011 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
-# Cross-checked: Weber et al. 2011 via Gemini 2026-08-03 (batch1_tier2_cross_check_gemini.md)
+# Cross-checked: GPT 2026-08-03 -- Weber et al. 2011 (batch1_tier2_cross_check_gpt.md)
+# Cross-checked: Gemini 2026-08-03 -- Weber et al. 2011 (batch1_tier2_cross_check_gemini.md)
 moon_inner_core_info = (
             "The Moon has a small, partially molten core. Seismic data from Apollo missions and more recent studies of the Moon\'s wobble suggest:\n" 
             "* Inner Core: Believed to be a solid, iron-rich core, roughly 240 kilometers in radius."
@@ -59,8 +59,8 @@ def create_moon_inner_core_shell(center_position=(0, 0, 0)):
         # Source: Weber et al. (2011), Science, "Seismic Detection of the Lunar Core";
         #         solid iron-rich inner core ~240 km radius (seismic constraint).
         # Removed: former "1,600-1,700 K" -- see module-level note above.
-        # Cross-checked: Weber et al. 2011 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
-        # Cross-checked: Weber et al. 2011 via Gemini 2026-08-03 (batch1_tier2_cross_check_gemini.md)
+        # Cross-checked: GPT 2026-08-03 -- Weber et al. 2011 (batch1_tier2_cross_check_gpt.md)
+        # Cross-checked: Gemini 2026-08-03 -- Weber et al. 2011 (batch1_tier2_cross_check_gemini.md)
         'description': (
             "The Moon has a small, partially molten core. Seismic data from Apollo missions and more recent studies of the Moon\'s wobble suggest:<br>" 
             "* Inner Core: Believed to be a solid, iron-rich core, roughly 240 kilometers in radius:<br>" 
@@ -132,8 +132,8 @@ def create_moon_outer_core_shell(center_position=(0, 0, 0)):
         # Removed: former "1300 K to 1600 K" outer-core temperature from the display text.
         #          Weber 2011 is a seismic study, not a thermal one; the temperature is
         #          model-dependent and was not sourceable after three independent searches.
-        # Cross-checked: Weber et al. 2011 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
-        # Cross-checked: Weber et al. 2011 via Gemini 2026-08-03 (batch1_tier2_cross_check_gemini.md)
+        # Cross-checked: GPT 2026-08-03 -- Weber et al. 2011 (batch1_tier2_cross_check_gpt.md)
+        # Cross-checked: Gemini 2026-08-03 -- Weber et al. 2011 (batch1_tier2_cross_check_gemini.md)
         'description': (
             "Outer Core: Surrounding the inner core, this is thought to be a liquid, iron-rich outer core with a radius of about <br>" 
             "330 kilometers. There might also be a small, partially molten layer of silicates around the outer core.<br>" 
@@ -222,8 +222,8 @@ def create_moon_outer_core_shell(center_position=(0, 0, 0)):
 #         Nakamura 2005, JGR 110 -- deep moonquake catalog reanalysis.
 #         Deep moonquakes 700-1,200 km depth, concentrated at 800-1,000 km;
 #         tidal stress origin.
-# Cross-checked: Nakamura et al. 1982 via Claude 2026-08-03 (worksheet_claude_batch1_followup.md)
-# Cross-checked: Nakamura 1982/2005 via GPT 2026-08-03 (batch1_tier2_followup_gpt.md)
+# Cross-checked: Claude 2026-08-03 -- Nakamura et al. 1982 (worksheet_claude_batch1_followup.md)
+# Cross-checked: GPT 2026-08-03 -- Nakamura 1982/2005 (batch1_tier2_followup_gpt.md)
 moon_mantle_info = (
             "Above the core lies the Moon's mantle, which makes up the bulk of its interior:\n" 
             "* Composition: Primarily composed of silicate rocks, similar to Earth's mantle, but with different proportions of \n" 
@@ -578,7 +578,7 @@ def create_moon_exosphere_shell(center_position=(0, 0, 0)):
 #         The Hill radius varies over the orbit from ~58,147 km (perigee) to
 #         ~64,901 km (apogee). The shell uses 34.53 lunar radii = ~59,992 km
 #         (Moon mean radius 1,737.4 km), which lies inside that range.
-# Cross-checked: derived Hill radius via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
+# Cross-checked: Claude 2026-08-03 -- derived Hill radius (worksheet_claude_batch1_tier2.md)
 # Note: SINGLE-LEG. Only the Claude tier-2 worksheet carries the 58,147-64,901 km
 #       range. GPT and Gemini converged on method and inputs but did not publish
 #       this range. A second independent leg is still owed for V2 scoring.

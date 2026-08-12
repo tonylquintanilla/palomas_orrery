@@ -35,8 +35,8 @@ from planet_visualization_utilities import (PLUTO_RADIUS_AU, create_sphere_point
 # Removed: former "core temp ~1,000 K". Bierson et al. 2020 supports a hot-start
 #          formation history but states no specific present-day core temperature;
 #          verified absent from the abstract. Removed rather than re-cited.
-# Cross-checked: Bierson et al. 2020 via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
-# Cross-checked: Bierson et al. 2020 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
+# Cross-checked: Claude 2026-08-03 -- Bierson et al. 2020 (worksheet_claude_batch1_tier2.md)
+# Cross-checked: GPT 2026-08-03 -- Bierson et al. 2020 (batch1_tier2_cross_check_gpt.md)
 pluto_core_info = (
             "2.4 MB PER FRAME FOR HTML.\n\n"
             "Pluto core: Scientists believe Pluto has a dense, rocky core, likely composed of silicates and iron. The core's diameter \n" 
@@ -55,8 +55,8 @@ def create_pluto_core_shell(center_position=(0, 0, 0)):
         # Source: Stern et al. (2015, Science); Bierson et al. (2020, Nature Geoscience);
         #         core ~1,700 km / 70% diameter, radioactive isotopes (U-238, U-235, Th-232, K-40), ocean evidence.
         # Removed: former "~1,000 K" core temperature -- see module-level note above.
-        # Cross-checked: Bierson et al. 2020 via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
-        # Cross-checked: Bierson et al. 2020 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
+        # Cross-checked: Claude 2026-08-03 -- Bierson et al. 2020 (worksheet_claude_batch1_tier2.md)
+        # Cross-checked: GPT 2026-08-03 -- Bierson et al. 2020 (batch1_tier2_cross_check_gpt.md)
         'description': (
             "Pluto core: Scientists believe Pluto has a dense, rocky core, likely composed of silicates and iron. The core's diameter <br>" 
             "is hypothesized to be about 1700 km, which is approximately 70% of Pluto's total diameter. Heat generated from the decay <br>" 
@@ -130,8 +130,8 @@ def create_pluto_core_shell(center_position=(0, 0, 0)):
 
 # Source: NASA New Horizons Mission Press Kit; Stern et al. (2015, Science); Bierson et al. (2020, Nature Geoscience);
 #         water-ice mantle, subsurface ocean 100-180 km thick with ammonia antifreeze.
-# Cross-checked: Bierson et al. 2020 via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
-# Cross-checked: Bierson et al. 2020 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
+# Cross-checked: Claude 2026-08-03 -- Bierson et al. 2020 (worksheet_claude_batch1_tier2.md)
+# Cross-checked: GPT 2026-08-03 -- Bierson et al. 2020 (batch1_tier2_cross_check_gpt.md)
 pluto_mantle_info = (
             "2.1 MB PER FRAME FOR HTML.\n\n"
             "Mantle: Surrounding the rocky core is a mantle made of water ice. There's a compelling theory that a subsurface ocean \n" 
@@ -149,8 +149,8 @@ def create_pluto_mantle_shell(center_position=(0, 0, 0)):
         'name': 'mantle',
         # Source: NASA New Horizons Mission Press Kit; Stern et al. (2015); Bierson et al. (2020);
         #         ocean 100-180 km thick; lithosphere at least 300 km thick in some models to support high mountains.
-        # Cross-checked: Bierson et al. 2020 via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
-        # Cross-checked: Bierson et al. 2020 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
+        # Cross-checked: Claude 2026-08-03 -- Bierson et al. 2020 (worksheet_claude_batch1_tier2.md)
+        # Cross-checked: GPT 2026-08-03 -- Bierson et al. 2020 (batch1_tier2_cross_check_gpt.md)
         'description': (
             "mantle: Surrounding the rocky core is a mantle made of water ice. There's a compelling theory that a subsurface ocean <br>" 
             "of liquid water, possibly mixed with ammonia, exists at the boundary between the core and the ice mantle. This ocean <br>" 
@@ -221,8 +221,8 @@ def create_pluto_mantle_shell(center_position=(0, 0, 0)):
 #         Sputnik Planitia age <10 Myr.
 # Removed: former ">98%" N2 purity. No published paper quantifies N2 ice purity;
 #          replaced with a qualitative statement rather than re-cited.
-# Cross-checked: Grundy et al. 2016 via GPT 2026-08-03 (batch1_tier2_followup_gpt.md)
-# Cross-checked: Grundy et al. 2016 via Gemini 2026-08-03 (worksheet_gemini_batch1_followup.md)
+# Cross-checked: GPT 2026-08-03 -- Grundy et al. 2016 (batch1_tier2_followup_gpt.md)
+# Cross-checked: Gemini 2026-08-03 -- Grundy et al. 2016 (worksheet_gemini_batch1_followup.md)
 pluto_crust_info = (
             "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
             "4.6 MB PER FRAME FOR HTML.\n\n"
@@ -244,8 +244,8 @@ def create_pluto_crust_shell(center_position=(0, 0, 0)):
         #         Grundy et al. (2016, Science) -- surface composition mapping.
         #         N2-dominated ice surface, water-ice mountains (2-3 km), Sputnik Planitia convection.
         # Removed: former ">98%" N2 purity -- no published paper quantifies it.
-        # Cross-checked: Grundy et al. 2016 via GPT 2026-08-03 (batch1_tier2_followup_gpt.md)
-        # Cross-checked: Grundy et al. 2016 via Gemini 2026-08-03 (worksheet_gemini_batch1_followup.md)
+        # Cross-checked: GPT 2026-08-03 -- Grundy et al. 2016 (batch1_tier2_followup_gpt.md)
+        # Cross-checked: Gemini 2026-08-03 -- Grundy et al. 2016 (worksheet_gemini_batch1_followup.md)
         'description': (
             "Pluto Crust<br>" 
             "(Note: toggle off the cloud layer in the legend to better see the interior structure.)<br><br>"
@@ -394,8 +394,8 @@ def create_pluto_crust_shell(center_position=(0, 0, 0)):
 
 # Source: Stern et al. (2015, Science); Gladstone et al. (2016, Science);
 #         20+ haze layers up to 200 km observed by New Horizons; temperature inversion.
-# Cross-checked: Gladstone et al. 2016 via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
-# Cross-checked: Gladstone et al. 2016 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
+# Cross-checked: Claude 2026-08-03 -- Gladstone et al. 2016 (worksheet_claude_batch1_tier2.md)
+# Cross-checked: GPT 2026-08-03 -- Gladstone et al. 2016 (batch1_tier2_cross_check_gpt.md)
 pluto_haze_layer_info = (
             "2.7 MB PER FRAME FOR HTML.\n\n"
             "Atmosphere: Pluto has a very thin atmosphere, about 1/100,000th the surface pressure of Earth's. It's primarily composed \n" 
@@ -417,8 +417,8 @@ def create_pluto_haze_layer_shell(center_position=(0, 0, 0)):
         'name': 'Haze Layer',
         # Source: Stern et al. (2015, Science); Gladstone et al. (2016, Science);
         #         20 distinct haze layers up to 200 km, tholin formation, blue backlit color.
-        # Cross-checked: Gladstone et al. 2016 via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
-        # Cross-checked: Gladstone et al. 2016 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
+        # Cross-checked: Claude 2026-08-03 -- Gladstone et al. 2016 (worksheet_claude_batch1_tier2.md)
+        # Cross-checked: GPT 2026-08-03 -- Gladstone et al. 2016 (batch1_tier2_cross_check_gpt.md)
         'description': (
             "Haze Layer: Pluto has a very thin atmosphere, about 1/100,000th the surface pressure of Earth's. It's primarily composed <br>" 
             "of nitrogen (N2), with smaller amounts of methane (CH4) and carbon monoxide (CO). This atmosphere is dynamic and changes <br>" 
@@ -503,8 +503,8 @@ def create_pluto_haze_layer_shell(center_position=(0, 0, 0)):
 #         20+ haze layers.
 # Corrected: the former "~1.43 Pluto radii" treated the 1,700 km ALTITUDE as if it
 #            were a center distance. From center the exobase is ~2.43 R_Pluto.
-# Cross-checked: Young et al. 2018 via Claude 2026-08-03 (worksheet_claude_batch1_followup.md)
-# Cross-checked: Young et al. 2018 via GPT 2026-08-03 (batch1_tier2_followup_gpt.md)
+# Cross-checked: Claude 2026-08-03 -- Young et al. 2018 (worksheet_claude_batch1_followup.md)
+# Cross-checked: GPT 2026-08-03 -- Young et al. 2018 (batch1_tier2_followup_gpt.md)
 pluto_atmosphere_info = (
             "2.7 MB PER FRAME FOR HTML.\n\n"
             "Atmosphere: Pluto has a very thin atmosphere, about 1/100,000th the surface pressure of Earth's. It's primarily composed \n" 
@@ -529,8 +529,8 @@ def create_pluto_atmosphere_shell(center_position=(0, 0, 0)):
         #         Stern et al. (2015, Science) -- temperature inversion.
         # Corrected: former "~1.43 Pluto radii" treated the 1,700 km ALTITUDE as a
         #            center distance. From center the exobase is ~2.43 R_Pluto.
-        # Cross-checked: Young et al. 2018 via Claude 2026-08-03 (worksheet_claude_batch1_followup.md)
-        # Cross-checked: Young et al. 2018 via GPT 2026-08-03 (batch1_tier2_followup_gpt.md)
+        # Cross-checked: Claude 2026-08-03 -- Young et al. 2018 (worksheet_claude_batch1_followup.md)
+        # Cross-checked: GPT 2026-08-03 -- Young et al. 2018 (batch1_tier2_followup_gpt.md)
         'description': (
             "Atmosphere: Pluto has a very thin atmosphere, about 1/100,000th the surface pressure of Earth's. It's primarily composed <br>" 
             "of nitrogen (N2), with smaller amounts of methane (CH4) and carbon monoxide (CO). This atmosphere is dynamic and changes <br>" 
@@ -608,8 +608,8 @@ def create_pluto_atmosphere_shell(center_position=(0, 0, 0)):
 #         Barycenter binary: system mass is the correct input, not Pluto alone.
 # Corrected: the former radius_fraction 4685 drew a ~5.57 Mkm shell while the text
 #            claimed 5.99 Mkm -- geometry and text now agree.
-# Cross-checked: Pluto/Charon GM values via GPT 2026-08-03 (batch1_blind_source_lookup_gpt.md)
-# Cross-checked: derived Hill radius via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
+# Cross-checked: GPT 2026-08-03 -- Pluto/Charon GM values (batch1_blind_source_lookup_gpt.md)
+# Cross-checked: Claude 2026-08-03 -- derived Hill radius (worksheet_claude_batch1_tier2.md)
 pluto_hill_sphere_info = (
             "SELECT MANUAL SCALE OF AT LEAST 0.1 AU TO VISUALIZE.\n" 
             "1.3 MB PER FRAME FOR HTML.\n\n"
@@ -632,8 +632,8 @@ def create_pluto_hill_sphere_shell(center_position=(0, 0, 0)):
         # Source: Derived from JPL SSD Pluto-Charon system GM (869.3 + 106.1 km^3/s^2)
         #         at perihelion 29.66 AU: ~5.99 Mkm (0.04 AU) = 5041 Pluto radii.
         #         All 5 moons (Charon, Styx, Nix, Kerberos, Hydra) lie within.
-        # Cross-checked: Pluto/Charon GM via GPT 2026-08-03 (batch1_blind_source_lookup_gpt.md)
-        # Cross-checked: derived Hill radius via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
+        # Cross-checked: GPT 2026-08-03 -- Pluto/Charon GM (batch1_blind_source_lookup_gpt.md)
+        # Cross-checked: Claude 2026-08-03 -- derived Hill radius (worksheet_claude_batch1_tier2.md)
         'description': (
             "SET MANUAL SCALE OF AT LEAST 0.05 AU TO VISUALIZE.<br><br>"
             "Hill Sphere: Pluto's Hill sphere, or Roche sphere, is the region around it where its gravitational influence dominates <br>" 

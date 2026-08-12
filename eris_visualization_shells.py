@@ -38,8 +38,8 @@ from planet_visualization_utilities import (ERIS_RADIUS_AU, create_sphere_points
 #         model's output, and ~500 K below rock melting.
 #         Nimmo & Brown (2023) also supports a differentiated, rock-dominated interior.
 #         JWST (2023/2024) (D/H ratio in methane ice, internal heating evidence)
-# Cross-checked: Nimmo & Brown 2023 via Claude 2026-08-03 (worksheet_claude_batch1_blind_lookup_DELTA.md)
-# Cross-checked: Nimmo & Brown 2023 via GPT 2026-08-03 (batch1_blind_source_lookup_gpt.md)
+# Cross-checked: Claude 2026-08-03 -- Nimmo & Brown 2023 (worksheet_claude_batch1_blind_lookup_DELTA.md)
+# Cross-checked: GPT 2026-08-03 -- Nimmo & Brown 2023 (batch1_blind_source_lookup_gpt.md)
 eris_core_info = (
             "2.4 MB PER FRAME FOR HTML.\n\n"
             "Eris, a dwarf planet in the Kuiper Belt, has a structure that scientists have been piecing together through observations \n" 
@@ -212,8 +212,8 @@ def create_eris_mantle_shell(center_position=(0, 0, 0)):
 
 # Source: Sicardy et al. (2011), Nature 478:493-496 (albedo 0.96)
 #         Brown & Schaller (2007) (nitrogen/methane surface composition)
-# Cross-checked: Sicardy et al. 2011 via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
-# Cross-checked: Sicardy et al. 2011 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
+# Cross-checked: Claude 2026-08-03 -- Sicardy et al. 2011 (worksheet_claude_batch1_tier2.md)
+# Cross-checked: GPT 2026-08-03 -- Sicardy et al. 2011 (batch1_tier2_cross_check_gpt.md)
 eris_crust_info = (
             "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
             "4.6 MB PER FRAME FOR HTML.\n\n"
@@ -373,8 +373,8 @@ def create_eris_crust_shell(center_position=(0, 0, 0)):
 # Source: Sicardy et al. 2011, Nature 478:493-496 -- stellar occultation;
 #         upper limit ~1 nbar surface pressure, ~10,000x more tenuous than Pluto's.
 #         Surface temperature approximately -240 degC (modeled range -217 to -243 degC).
-# Cross-checked: Sicardy et al. 2011 via Claude 2026-08-03 (worksheet_claude_batch1_tier1_sourcing.md)
-# Cross-checked: Sicardy et al. 2011 via GPT 2026-08-03 (batch1_tier1_sourcing_gpt_independent.md)
+# Cross-checked: Claude 2026-08-03 -- Sicardy et al. 2011 (worksheet_claude_batch1_tier1_sourcing.md)
+# Cross-checked: GPT 2026-08-03 -- Sicardy et al. 2011 (batch1_tier1_sourcing_gpt_independent.md)
 eris_atmosphere_info = (
             "2.7 MB PER FRAME FOR HTML.\n\n"
             "Atmosphere: Eris has a very tenuous atmosphere that is dynamic. When Eris is at its farthest point from the Sun \n" 
@@ -472,8 +472,8 @@ def create_eris_atmosphere_shell(center_position=(0, 0, 0)):
 #         semi-major axis 67.8 AU gives ~14.3 Mkm (~0.095 AU).
 #         Barycenter binary: system mass is the correct input, not Eris alone.
 # Corrected: the former "~9.4 Mkm" does not follow from these inputs.
-# Cross-checked: derived Hill radius via GPT 2026-08-03 (batch1_tier2_followup_gpt.md)
-# Cross-checked: derived Hill radius via Gemini 2026-08-03 (worksheet_gemini_batch1_followup.md)
+# Cross-checked: GPT 2026-08-03 -- derived Hill radius (batch1_tier2_followup_gpt.md)
+# Cross-checked: Gemini 2026-08-03 -- derived Hill radius (worksheet_gemini_batch1_followup.md)
 eris_hill_sphere_info = (
             "SELECT MANUAL SCALE OF AT LEAST 0.1 AU TO VISUALIZE.\n" 
             "1.3 MB PER FRAME FOR HTML.\n\n"

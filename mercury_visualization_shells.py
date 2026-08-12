@@ -43,8 +43,8 @@ mercury_inner_core_info = (
 
 # Source: Hauck et al. 2013, JGR Planets 118:1204 -- Mercury core radius
 #         2020 +/- 30 km (MESSENGER gravity and spin state). Used for visualization.
-# Cross-checked: Hauck et al. 2013 via GPT 2026-08-03 (batch1_blind_source_lookup_gpt.md)
-# Cross-checked: Hauck et al. 2013 via Gemini 2026-08-03 (batch1_tier2_cross_check_gemini.md)
+# Cross-checked: GPT 2026-08-03 -- Hauck et al. 2013 (batch1_blind_source_lookup_gpt.md)
+# Cross-checked: Gemini 2026-08-03 -- Hauck et al. 2013 (batch1_tier2_cross_check_gemini.md)
 mercury_outer_core_info = (
             "Outer Core: Surrounding the solid inner core is a liquid metallic outer core. The movement of this molten iron \n" 
             "is thought to be the source of Mercury's weak magnetic field. Core radius approximately 2020 km."
@@ -65,16 +65,16 @@ mercury_mantle_info = (
 # Removed: former "~35 km" (Sori 2018 gives 26, not 35) and the diamond-layer claim,
 #          which carried a mis-parsed author name, the wrong mechanism, and the wrong
 #          location. Removed rather than re-cited.
-# Cross-checked: Sori 2018 via Gemini 2026-08-03 (batch1_tier2_cross_check_gemini.md)
-# Cross-checked: Sori 2018 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
+# Cross-checked: Gemini 2026-08-03 -- Sori 2018 (batch1_tier2_cross_check_gemini.md)
+# Cross-checked: GPT 2026-08-03 -- Sori 2018 (batch1_tier2_cross_check_gpt.md)
 mercury_crust_info = (
             "Mercury has a solid silicate crust that is heavily cratered, resembling Earth's Moon. The crust is likely quite thin \n" 
             "compared to Earth's. About 26 km thick (Sori 2018)."
 )
 
 # Source: NASA MESSENGER; NASA Mercury Fact Sheet
-# Cross-checked: NASA Mercury Fact Sheet via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
-# Cross-checked: NASA Mercury Fact Sheet via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
+# Cross-checked: Claude 2026-08-03 -- NASA Mercury Fact Sheet (worksheet_claude_batch1_tier2.md)
+# Cross-checked: GPT 2026-08-03 -- NASA Mercury Fact Sheet (batch1_tier2_cross_check_gpt.md)
 mercury_atmosphere_info = (
             "Exosphere: Unlike Earth's substantial atmosphere, Mercury has an extremely thin exosphere. This exosphere is not \n" 
             "dense enough to trap heat or offer significant protection from space. It is composed mostly of oxygen, sodium, \n" 
@@ -91,8 +91,8 @@ mercury_atmosphere_info = (
 # Note: Potter & Morgan 1985 is the exosphere sodium DISCOVERY paper; it does not
 #       establish tail extent. The former "10,000 R_M" was unsupported by either
 #       source and has been replaced with the observed range.
-# Cross-checked: Baumgardner et al. 2008 via Claude 2026-08-03 (worksheet_claude_batch1_blind_lookup.md)
-# Cross-checked: Baumgardner et al. 2008 via GPT 2026-08-03 (batch1_blind_source_lookup_gpt.md)
+# Cross-checked: Claude 2026-08-03 -- Baumgardner et al. 2008 (worksheet_claude_batch1_blind_lookup.md)
+# Cross-checked: GPT 2026-08-03 -- Baumgardner et al. 2008 (batch1_blind_source_lookup_gpt.md)
 mercury_sodium_tail_info = (
             "TO VISUALIZE CLOSE UP SET MANUAL SCALE TO AT LEAST 0.002 AU TO VISUALIZE.\n"
             "TO VISUALIZE THE COMPLETE TAIL INCLUDE VENUS IN THE PLOT OR SET MANUAL SCALE TO 1.0 AU\n\n" 
@@ -248,8 +248,8 @@ def create_mercury_sodium_tail(center_position=(0, 0, 0), sun_position=(0, 0, 0)
 
 # Source: NASA MESSENGER Mission; Winslow et al. 2013 -- magnetopause subsolar
 #         1.45 R_M and bow shock 1.96 R_M (the values used in the geometry below).
-# Cross-checked: Winslow et al. 2013 via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
-# Cross-checked: Winslow et al. 2013 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
+# Cross-checked: Claude 2026-08-03 -- Winslow et al. 2013 (worksheet_claude_batch1_tier2.md)
+# Cross-checked: GPT 2026-08-03 -- Winslow et al. 2013 (batch1_tier2_cross_check_gpt.md)
 mercury_magnetosphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.002 AU TO VISUALIZE.\n\n" 
 
@@ -418,8 +418,8 @@ def create_mercury_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(
 #         Claude Opus 5 2026-08-03. Perihelion convention.
 #         Mercury has no significant companion, so body mass is the correct
 #         input (no system-mass term).
-# Cross-checked: NSSDCA-derived Hill radius via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
-# Cross-checked: NSSDCA-derived Hill radius via GPT 2026-08-03 (batch1_tier2_followup_gpt.md)
+# Cross-checked: Claude 2026-08-03 -- NSSDCA-derived Hill radius (worksheet_claude_batch1_tier2.md)
+# Cross-checked: GPT 2026-08-03 -- NSSDCA-derived Hill radius (batch1_tier2_followup_gpt.md)
 mercury_hill_sphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.005 AU TO VISUALIZE.\n\n" 
             "Hill Sphere: Every celestial body has a Hill sphere (also known as the Roche sphere), which is the region around it \n" 

@@ -37,8 +37,8 @@ from orrery_rendering import rotate_to_sunward, create_info_marker
 
 # Source: NASA Venus Fact Sheet; NASA Solar System Exploration;
 #         iron-nickel core, radius ~3,200 km, lack of dynamo due to slow rotation or solid core.
-# Cross-checked: NASA Venus Fact Sheet via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
-# Cross-checked: NASA Venus Fact Sheet via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
+# Cross-checked: Claude 2026-08-03 -- NASA Venus Fact Sheet (worksheet_claude_batch1_tier2.md)
+# Cross-checked: GPT 2026-08-03 -- NASA Venus Fact Sheet (batch1_tier2_cross_check_gpt.md)
 venus_core_info = (
             "Scientists infer that Venus has a central core, likely composed primarily of iron and nickel, similar to Earth's. \n" 
             "Its radius is estimated to be around 3,200 km. Due to the lack of a strong magnetic field, it's speculated that Venus's \n" 
@@ -56,8 +56,8 @@ def create_venus_core_shell(center_position=(0, 0, 0)):
         'name': 'Core',
         # Source: NASA Venus Fact Sheet; NASA Solar System Exploration;
         #         iron-nickel core, radius ~3,200 km, no dynamo (slow rotation or solid core).
-        # Cross-checked: NASA Venus Fact Sheet via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
-        # Cross-checked: NASA Venus Fact Sheet via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
+        # Cross-checked: Claude 2026-08-03 -- NASA Venus Fact Sheet (worksheet_claude_batch1_tier2.md)
+        # Cross-checked: GPT 2026-08-03 -- NASA Venus Fact Sheet (batch1_tier2_cross_check_gpt.md)
         'description': (
             "Scientists infer that Venus has a central core, likely composed primarily of iron and nickel, similar to Earth's. <br>" 
             "Its radius is estimated to be around 3,200 km. Due to the lack of a strong magnetic field, it's speculated that Venus's <br>" 
@@ -331,8 +331,8 @@ def create_venus_crust_shell(center_position=(0, 0, 0)):
 # Source: NASA NSSDCA Venus Fact Sheet -- surface pressure 92 bars, surface
 #         temperature 464 degC, CO2 96.5%, N2 3.5%.
 #         Sanchez-Lavega 2018 -- troposphere/tropopause top range 60-65 km.
-# Cross-checked: NSSDCA Venus Fact Sheet via Claude 2026-08-03 (worksheet_claude_batch1_tier1_sourcing.md)
-# Cross-checked: NSSDCA Venus Fact Sheet via GPT 2026-08-03 (batch1_tier1_sourcing_gpt_independent.md)
+# Cross-checked: Claude 2026-08-03 -- NSSDCA Venus Fact Sheet (worksheet_claude_batch1_tier1_sourcing.md)
+# Cross-checked: GPT 2026-08-03 -- NSSDCA Venus Fact Sheet (batch1_tier1_sourcing_gpt_independent.md)
 # NOTE: duplicated text -- the description entry in create_venus_atmosphere_shell
 #       below carries a <br> copy of this block. Edit both copies together.
 venus_atmosphere_info = (
@@ -431,8 +431,8 @@ def create_venus_upper_atmosphere_shell(center_position=(0, 0, 0)):
         # Removed: thermosphere temperature and ionosphere peak altitude as specific
         #          values. Both are model- and time-dependent; softened in the display
         #          text rather than cited. VIRA-sourced values may restore them later.
-        # Cross-checked: Bertaux et al. 2007 via Claude 2026-08-03 (worksheet_claude_batch1_blind_lookup.md)
-        # Cross-checked: Bertaux et al. 2007 via GPT 2026-08-03 (batch1_blind_source_lookup_gpt.md)
+        # Cross-checked: Claude 2026-08-03 -- Bertaux et al. 2007 (worksheet_claude_batch1_blind_lookup.md)
+        # Cross-checked: GPT 2026-08-03 -- Bertaux et al. 2007 (batch1_blind_source_lookup_gpt.md)
         'description': (
             "The upper atmosphere of Venus is a complex and dynamic region extending far beyond the troposphere. It doesn't have the same distinct layers <br>" 
             "(stratosphere, mesosphere, thermosphere) as Earth's in the same way due to the very different thermal structure and composition. However, we can <br>" 
@@ -522,8 +522,8 @@ def create_venus_upper_atmosphere_shell(center_position=(0, 0, 0)):
 # Source: ESA Venus Express: Magnetosphere; NASA Pioneer Venus Results;
 #         Zhang et al. 2007 -- induced magnetopause ~1.05 R_V;
 #         Shan et al. 2015 -- induced bow shock 1.4 R_V (range 1.36-1.46).
-# Cross-checked: Zhang 2007 / Shan 2015 via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
-# Cross-checked: Zhang 2007 / Shan 2015 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
+# Cross-checked: Claude 2026-08-03 -- Zhang 2007 / Shan 2015 (worksheet_claude_batch1_tier2.md)
+# Cross-checked: GPT 2026-08-03 -- Zhang 2007 / Shan 2015 (batch1_tier2_cross_check_gpt.md)
 venus_magnetosphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.005 AU TO VISUALIZE.\n\n" 
 
@@ -580,8 +580,8 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     # Source: Edberg et al. 2024, JGR Space Physics 129, e2024JA032603 -- magnetotail
     #         extends to ~45-60 R_V under active conditions;
     #         Shan et al. 2015 -- induced bow shock 1.3-1.7 R_V.
-    # Cross-checked: Edberg et al. 2024 via GPT 2026-08-03 (batch1_tier2_cross_check_gpt.md)
-    # Cross-checked: Edberg et al. 2024 via Gemini 2026-08-03 (worksheet_gemini_batch1_followup.md)
+    # Cross-checked: GPT 2026-08-03 -- Edberg et al. 2024 (batch1_tier2_cross_check_gpt.md)
+    # Cross-checked: Gemini 2026-08-03 -- Edberg et al. 2024 (worksheet_gemini_batch1_followup.md)
     magnetosphere_text = ["Venus has no internal magnetic field. Its weak, induced magnetosphere forms where the solar wind <br>"
             "interacts with the planet's ionosphere, draping the solar-wind field into a comet-shaped cavity with a <br>"
             "sunward bow shock and a long anti-sunward magnetotail. Its size varies strongly with solar-wind conditions.<br><br>"
@@ -675,8 +675,8 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
 #         Perihelion gives ~1.004 Mkm = 166 Venus radii (the shell uses this);
 #         semi-major axis gives ~1.011 Mkm = 167.1 Venus radii.
 #         Venus has no natural moons, so body mass is the correct input.
-# Cross-checked: derived Hill radius via GPT 2026-08-03 (batch1_tier2_followup_gpt.md)
-# Cross-checked: derived Hill radius via Claude 2026-08-03 (worksheet_claude_batch1_tier2.md)
+# Cross-checked: GPT 2026-08-03 -- derived Hill radius (batch1_tier2_followup_gpt.md)
+# Cross-checked: Claude 2026-08-03 -- derived Hill radius (worksheet_claude_batch1_tier2.md)
 venus_hill_sphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n" 
             "Venus's Hill Sphere is the region where its gravitational influence is dominant over the gravitational influence of \n" 
