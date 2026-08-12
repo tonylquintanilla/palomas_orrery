@@ -1,22 +1,16 @@
-# Data Inventory (state of the local data stores)
+# Data Inventory (local, gitignored -- CURRENT state)
 
-This FILE is tracked in git. The data DIRECTORIES it describes are
-local and not all of them are in the repo, so the tables below can
-only be confirmed by re-running the inventory tool on Tony's
-machine. Treat them as current as of the generation date, not as
-something the repo can verify. (Corrected 2026-08-11: the header
-read "local, gitignored" while the file was committed and absent
-from .gitignore -- a tracked file asserting it was not in the repo.)
+Repo copies stale/absent; this reflects the live local stores.
 
 ## Orrery Data -- By extension
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
 | .vot | 4 | 295.1 MB | gaia_data_magnitude.vot (284.4 MB) | 2026-02-08 |
-| .json | 49 | 262.3 MB | orbit_paths.json (130.4 MB) | 2026-07-16 |
+| .json | 50 | 262.3 MB | orbit_paths.json (130.4 MB) | 2026-08-11 |
 | .nc | 18 | 161.1 MB | era5_clim_march_day22.nc (27.4 MB) | 2026-04-07 |
-| .backup | 4 | 130.7 MB | orbit_paths.json.backup (130.4 MB) | 2026-06-17 |
-| .backup_old | 1 | 130.4 MB | orbit_paths.json.backup_old (130.4 MB) | 2026-06-17 |
+| .backup | 4 | 130.8 MB | orbit_paths.json.backup (130.4 MB) | 2026-08-05 |
+| .backup_old | 1 | 130.4 MB | orbit_paths.json.backup_old (130.4 MB) | 2026-08-04 |
 | .csv | 15 | 34.9 MB | 3773_v3_niskin_hot001_yr01_to_hot348_yr35.csv (30.8 MB) | 2026-04-07 |
 | .pkl | 2 | 33.6 MB | star_properties_magnitude.pkl (31.1 MB) | 2025-09-16 |
 | .png | 159 | 14.6 MB | 2026-03-21_heatmap_western_heatwave_march_21.png (807.0 KB) | 2026-06-30 |
@@ -31,7 +25,7 @@ from .gitignore -- a tracked file asserting it was not in the repo.)
 ## orbit_paths.json
 
 - entries: 1501, formats: {'data_points': 1501}
-- points/entry: min 2, max 24479, total 1515409
+- points/entry: min 2, max 24479, total 1515789
 - sample 'Mercury_Sun':
 ```
 {
@@ -81,28 +75,28 @@ from .gitignore -- a tracked file asserting it was not in the repo.)
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 437.6 MB (358 files)
+**Total size:** 438.7 MB (390 files)
 
-**GitHub Pages headroom:** 586 MB remaining of 1024 MB ceiling (42.7% used)
+**GitHub Pages headroom:** 585 MB remaining of 1024 MB ceiling (42.8% used)
 
 ### By extension
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 237 | 416.9 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-07-16 |
+| .json | 261 | 417.6 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-08-11 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 1 | 5.1 MB | palomas_orrery_logo.png (5.1 MB) | 2025-11-27 |
-| .py | 25 | 505.6 KB | gallery_studio.py (244.1 KB) | 2026-07-16 |
-| .md | 9 | 366.4 KB | web_gallery_handoff.md (242.4 KB) | 2026-07-16 |
+| .py | 27 | 615.6 KB | gallery_studio.py (244.1 KB) | 2026-07-29 |
+| .md | 13 | 409.9 KB | web_gallery_handoff.md (242.4 KB) | 2026-08-06 |
+| .jsonl | 33 | 241.7 KB | encke.jsonl (7.6 KB) | 2026-08-11 |
 | .html | 5 | 184.7 KB | index.html (128.2 KB) | 2026-07-14 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |
-| .txt | 3 | 20.1 KB | horizons_results encke.txt (8.2 KB) | 2026-07-11 |
-| .jsonl | 30 | 12.2 KB | encke.jsonl (632.0 B) | 2026-07-11 |
+| .patch | 4 | 13.2 KB | phaseb_studio.patch (7.0 KB) | 2026-07-29 |
 | .mermaid | 1 | 7.4 KB | gallery_navigation_flowchart.mermaid (7.4 KB) | 2026-03-08 |
-| .patch | 1 | 7.0 KB | phaseb_studio.patch (7.0 KB) | 2026-06-16 |
+| .txt | 1 | 4.2 KB | requirements.txt (4.2 KB) | 2026-02-28 |
 | .url | 1 | 176.0 B | Paloma's Orrery - Interactive Astronomical Visualizations.url (176.0 B) | 2026-02-27 |
-| (none) | 3 | 17.0 B | CNAME (17.0 B) | 2026-07-12 |
+| (none) | 1 | 17.0 B | CNAME (17.0 B) | 2026-02-13 |
 
 ### Largest files (top 10)
 
@@ -132,7 +126,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | repo | served size | ceiling | headroom | used |
 |---|---|---|---|---|
-| gallery | 437.6 MB | 1024 MB | 586 MB | 42.7% |
+| gallery | 438.7 MB | 1024 MB | 585 MB | 42.8% |
 | orrery (gitignored data) | 1.1 GB | n/a (not served) | -- | -- |
 
 Note: orrery data is local/gitignored. If orbit cache files are pushed to either repo for web serving, re-run this inventory to update headroom.

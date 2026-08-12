@@ -1356,14 +1356,35 @@ should not wait on a structural build.
   nothing reads as a completed cross-check to anyone skimming the source.
 - Tony ruled 2026-08-07: clear these BEFORE Batch 2 rather than during,
   since Batch 2 will add more annotations of the same kind.
-- **Six `duplicate_identity`** -- two or more annotations naming the same
-  checker on one claim, which cannot earn V2 (V2 needs two DIFFERENT
-  checkers). Sites: `constants_new.py` 388, `eris_visualization_shells.py`
-  218, `mercury_visualization_shells.py` 49,
-  `pluto_visualization_shells.py` 41, `shell_configs.py` 128,
-  `venus_visualization_shells.py` 528. Each needs a look at the source:
-  either one annotation is redundant, or a checker name is wrong. Data
-  question, not a mechanical fix.
+- **Six `duplicate_identity` -- RESOLVED 2026-08-12. Not a data question
+  and no annotation was wrong.** Every one was the parser misreading a
+  correct line. The retired format put a free-text source before the
+  check date, so a source carrying its own publication year was read AS
+  the check date and the checker name fell outside the identity. Two
+  annotations by two different models read as one checker written twice.
+  Measured at `eb77c83`: 19 units affected against 20 scored correctly,
+  and 54 of 134 annotation lines codebase-wide parsed with the checker
+  outside the identity.
+- Tony ruled 2026-08-12 to fix the root causes rather than edit on top of
+  them. Three were found, and the format change addresses all three:
+  (a) the format was ambiguous by construction -- free text before the
+  date, no delimiters; (b) the scanner's "checker identity" field was
+  filled with source-plus-model, so two DIFFERENT sources checked by the
+  SAME model would have earned V2, which is the "two Claude passes are
+  one leg" hole; (c) nothing bound the skill's examples to the parser --
+  the skill's own Model Credit example was a line the parser could not
+  read, and the test fixtures had used checker-first since the parser was
+  written, so all three stores disagreed in silence.
+- **New grammar, checker first:**
+  `# Cross-checked: <checker> <ISO date>[ -- <source>] (<worksheet>.md)`.
+  The retired order is now REFUSED as `legacy_source_first` rather than
+  reconstructed. 134 annotation lines migrated across 8 modules by
+  `patch_L186_annotation_checker_first.py`; grammar guard, tests, skill
+  v2.0 and this entry by `patch_L186_grammar_guard.py`.
+- **The store-binding test is the durable part.** `test_cross_checked.py`
+  now reads `skills/provenance-discipline/SKILL.md` off disk and asserts
+  every annotation example in it parses to the fields the skill says it
+  carries. Cause (c) cannot recur silently.
 - **Six `non_markdown_reference`**, splitting two ways. Three in
   `constants_new.py` (124, 152, 293) say "(Gemini worksheet)" with no
   filename at all -- genuinely incomplete, supply the real worksheet

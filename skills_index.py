@@ -195,6 +195,60 @@ def check(records, problems):
     return problems
 
 
+def check_annotation_examples(skills_dir, problems):
+    """Every annotation example in a skill must parse as the parser reads it.
+
+    This is the store-binding check, and it lives here rather than in a
+    test file for a practical reason: this tool is the one that runs at
+    the moment a skill changes, which is the moment the drift gets
+    introduced. A check nobody runs is not a check -- which is the exact
+    defect it exists to catch.
+
+    What it caught (L-186, 2026-08-12): provenance-discipline taught an
+    annotation format whose own worked example provenance_scanner.py
+    could not read. The skill said the ISO date was the check date; the
+    parser took the first four-digit year, which in that example was the
+    SOURCE's publication year. Two annotations by two different models
+    read as one checker written twice, and 19 completed cross-checks
+    were scored and reported as half-done for a week. Nothing reported
+    the disagreement, because nothing compared the two stores.
+
+    Lines carrying angle brackets are grammar templates, not examples,
+    and are skipped.
+    """
+    try:
+        from provenance_scanner import parse_cross_checks
+    except ImportError:
+        problems.append(
+            'annotation examples not checked: provenance_scanner.py not '
+            'importable from this folder')
+        return problems
+
+    for skill_dir in sorted(p for p in skills_dir.iterdir() if p.is_dir()):
+        path = skill_dir / 'SKILL.md'
+        if not path.is_file():
+            continue
+        text = path.read_text(encoding='utf-8', errors='replace')
+        for line in text.splitlines():
+            stripped = line.strip()
+            if not stripped.startswith('# Cross-checked:') or '<' in stripped:
+                continue
+            records, issues = parse_cross_checks(stripped)
+            if len(records) != 1:
+                problems.append(
+                    f"{skill_dir.name}: annotation example does not parse "
+                    f"({issues or 'no record'}): {stripped}")
+                continue
+            identity = records[0][0]
+            runs = ''.join(c if c.isdigit() else ' ' for c in identity).split()
+            if any(len(run) >= 4 for run in runs):
+                problems.append(
+                    f"{skill_dir.name}: annotation example's checker carries "
+                    f"a year, so the date was parsed from the source: "
+                    f"{stripped}")
+    return problems
+
+
 def sort_key(record):
     name = record['name']
     if name in SKILL_ORDER:
@@ -262,6 +316,7 @@ def main():
         if rec:
             records.append(rec)
     problems = check(records, problems)
+    problems = check_annotation_examples(skills_dir, problems)
 
     if problems:
         print("CONSISTENCY PROBLEMS:")

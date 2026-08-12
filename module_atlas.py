@@ -225,6 +225,7 @@ ROLE_MAP = {
     'export_orbit_cache':                     'devtool',
     'food_insecurity_generator':              'devtool',
     'ledger_index':                           'devtool',
+    'maintenance_run':                        'devtool',
     'measure_animation_html':                 'devtool',
     'measure_perframe_elements':              'devtool',
     'module_atlas':                           'devtool',

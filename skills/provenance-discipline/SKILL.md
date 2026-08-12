@@ -6,8 +6,8 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 1.9 | Cut from palomas_orrery @ cdcdb4b (v1.9), earlier
-@ 8e4b5ca (v1.8), @ 3398970 (v1.7) | August 11, 2026
+Skill version: 2.0 | Cut from palomas_orrery @ eb77c83 (v2.0), earlier
+@ cdcdb4b (v1.9), @ 8e4b5ca (v1.8) | August 12, 2026
 Source: project_instructions_v3_29.md Part 3 (Provenance Audit, Fetched vs
 Recalled) + food insecurity build handoff + scanner source at HEAD. v1.1
 adds the report domain-classification mechanics, the Review-Repair
@@ -212,18 +212,42 @@ The distinction matters because the same file can need both: a shell
 module's display text needs value verification while its `# Source:`
 comments need citation verification.
 
-### Cross-Checked Annotation Format
+### Cross-Checked Annotation Format [CRITICAL]
+
+The checker comes FIRST. The grammar is fixed:
+
+```
+# Cross-checked: <checker> <ISO date>[ -- <source>] (<worksheet>.md)
+```
 
 ```python
 # Source: Vignes et al. 2000, GRL 27, 49 -- subsolar bow shock 1.64 R_M
-# Cross-checked: Vignes et al. via Claude 2026-08-01 (worksheet_claude_mars_visualization.md)
-# Cross-checked: Vignes et al. via GPT 2026-08-01 (track1_gpt_independent_worksheet_mars_visualization.md)
+# Cross-checked: Claude 2026-08-01 -- Vignes et al. 2000 (worksheet_claude_mars_visualization.md)
+# Cross-checked: GPT 2026-08-01 -- Vignes et al. 2000 (track1_gpt_independent_worksheet_mars_visualization.md)
 ```
 
-**Source leads, model is subordinate, worksheet is the audit trail.**
-The source names the authority. The model names who found it. The
-parenthetical worksheet reference points to the evidence on disk. The
-ISO date is the check date, not the publication date.
+**Checker, then date, then the source it checked, then the worksheet.**
+The checker names who did the work. The ISO date is the check date. The
+optional ` -- <source>` clause names the authority that was checked.
+The parenthetical points to the evidence on disk.
+
+**Why the checker leads (L-186, 2026-08-12).** It used to trail, and the
+source led. The parser reads the first four-digit year on the line as the
+check date and everything before it as the checker -- so a source carrying
+its own publication year ate the date, and the checker name landed after
+it and never entered the identity at all. Two annotations by two DIFFERENT
+models then read as one checker written twice: `duplicate_identity`, and
+the claim scored V3 with the reason "cross-check incomplete (1/2 models)"
+while both legs had in fact been done. Nineteen units were in that state.
+Putting the checker first makes the parser's rule TRUE rather than
+accidental, and adds no heuristic anywhere.
+
+A line in the retired order is now REFUSED as `legacy_source_first`, not
+repaired. The parser cannot tell a publication year from a check year, so
+it declines to try.
+
+The source clause is optional. `# Cross-checked: Gemini 2026-04-15
+(worksheet.md)` is complete.
 
 #### Worksheet First, Annotation Second [CRITICAL]
 
@@ -332,8 +356,8 @@ independent.
 
 ```python
 # Source: Hauck et al. 2013, JGR Planets 118:1204 -- core radius 2020 +/- 30 km
-# Cross-checked: Hauck et al. 2013 via GPT 2026-08-03 (batch1_blind_source_lookup_gpt.md)
-# Cross-checked: Hauck et al. 2013 via Gemini 2026-08-03 (batch1_tier2_cross_check_gemini.md)
+# Cross-checked: GPT 2026-08-03 -- Hauck et al. 2013 (batch1_blind_source_lookup_gpt.md)
+# Cross-checked: Gemini 2026-08-03 -- Hauck et al. 2013 (batch1_tier2_cross_check_gemini.md)
 ```
 
 **Two Claude passes are ONE leg, not two.** Same training data, same

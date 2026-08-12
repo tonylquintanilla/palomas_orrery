@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
-Generated: August 11, 2026
-Files scanned: 119
-Total findings: 882
-Constants: 96 | Dicts: 38 | Display strings: 748
+Generated: August 12, 2026
+Files scanned: 123
+Total findings: 884
+Constants: 98 | Dicts: 38 | Display strings: 748
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -19,12 +19,17 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260812T165716Z | `8419f71` | 123 | 884 | 207 | 562 | 113 | 2 |
 | 20260812T011625Z | `bbc5e78` | 119 | 882 | 206 | 580 | 94 | 2 |
 | 20260811T230143Z | `df7ca50` | 119 | 882 | 206 | 580 | 94 | 2 |
 
-Change since the previous run: total +0, Tier-1 +0.
+Change since the previous run: total +2, Tier-1 +1.
 
-No file's Tier-1 count rose.
+Tier-1 rose in these files:
+
+| File | Before | After |
+|------|-------:|------:|
+| patch_L186_annotation_checker_first.py | 0 | 1 |
 
 ---
 
@@ -55,9 +60,9 @@ No file's Tier-1 count rose.
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 206 |
-| 2 | 10-15 | REVIEW | 580 |
-| 3 | 5-9 | LOW PRIORITY | 94 |
+| 1 | 16-20 | FIX NOW | 207 |
+| 2 | 10-15 | REVIEW | 562 |
+| 3 | 5-9 | LOW PRIORITY | 113 |
 | 4 | 1-4 | LOWEST PRIORITY | 2 |
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
@@ -74,7 +79,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | File | Domain | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |------|--------|-------:|-------:|-------:|-------:|------:|
 | `info_dictionary.py` | orrery | 2 | 119 | 3 | 0 | 124 |
-| `shell_configs.py` | orrery | 23 | 68 | 0 | 0 | 91 |
+| `shell_configs.py` | orrery | 23 | 66 | 2 | 0 | 91 |
 | `celestial_objects.py` | orrery | 0 | 54 | 0 | 0 | 54 |
 | `paleoclimate_wet_bulb_full.py` | earth_science | 31 | 20 | 0 | 0 | 51 |
 | `constants_new.py` | orrery | 0 | 29 | 9 | 2 | 40 |
@@ -93,21 +98,21 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `sgr_a_grand_tour.py` | orrery | 8 | 0 | 3 | 0 | 11 |
 | `sgr_a_star_data.py` | orrery | 1 | 10 | 0 | 0 | 11 |
 | `saturn_visualization_shells.py` | orrery | 1 | 9 | 0 | 0 | 10 |
-| `pluto_visualization_shells.py` | orrery | 0 | 8 | 2 | 0 | 10 |
+| `pluto_visualization_shells.py` | orrery | 0 | 0 | 10 | 0 | 10 |
 | `scenarios_western_heatwave_march_2026.py` | earth_science | 8 | 1 | 0 | 0 | 9 |
 | `paleoclimate_dual_scale.py` | earth_science | 9 | 0 | 0 | 0 | 9 |
 | `scenarios_heatwaves.py` | earth_science | 1 | 7 | 0 | 0 | 8 |
 | `spacecraft_encounters.py` | orrery | 0 | 8 | 0 | 0 | 8 |
-| `venus_visualization_shells.py` | orrery | 0 | 3 | 5 | 0 | 8 |
+| `venus_visualization_shells.py` | orrery | 0 | 1 | 7 | 0 | 8 |
 | `asteroid_belt_visualization_shells.py` | orrery | 0 | 7 | 0 | 0 | 7 |
 | `celestial_coordinates.py` | orrery | 4 | 2 | 0 | 0 | 6 |
-| `mercury_visualization_shells.py` | orrery | 0 | 3 | 3 | 0 | 6 |
 | `mars_visualization_shells.py` | orrery | 0 | 0 | 6 | 0 | 6 |
+| `mercury_visualization_shells.py` | orrery | 0 | 0 | 6 | 0 | 6 |
 | `exoplanet_coordinates.py` | stars | 5 | 0 | 0 | 0 | 5 |
 | `sgr_a_visualization_precession.py` | orrery | 4 | 0 | 1 | 0 | 5 |
 | `star_sphere_builder.py` | stars | 0 | 2 | 3 | 0 | 5 |
-| `eris_visualization_shells.py` | orrery | 0 | 3 | 2 | 0 | 5 |
 | `planet9_visualization_shells.py` | orrery | 0 | 5 | 0 | 0 | 5 |
+| `eris_visualization_shells.py` | orrery | 0 | 0 | 5 | 0 | 5 |
 | `apsidal_markers.py` | orrery | 3 | 1 | 0 | 0 | 4 |
 | `paleoclimate_visualization.py` | earth_science | 4 | 0 | 0 | 0 | 4 |
 | `sgr_a_visualization_core.py` | orrery | 1 | 3 | 0 | 0 | 4 |
@@ -130,6 +135,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `fetch_climate_data.py` | earth_science | 0 | 2 | 0 | 0 | 2 |
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `orbital_elements.py` | orrery | 1 | 0 | 0 | 0 | 1 |
+| `patch_L186_annotation_checker_first.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `data_acquisition.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `energy_imbalance.py` | earth_science | 1 | 0 | 0 | 0 | 1 |
 | `exoplanet_orbits.py` | stars | 1 | 0 | 0 | 0 | 1 |
@@ -141,6 +147,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `visualization_utils.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `add_docstrings.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `data_inventory.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
+| `maintenance_run.py` | orrery | 0 | 0 | 1 | 0 | 1 |
 | `osculating_cache_manager.py` | orrery | 0 | 0 | 1 | 0 | 1 |
 | `sgr_a_visualization_animation.py` | orrery | 0 | 0 | 1 | 0 | 1 |
 | `test_reset_completeness.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
@@ -154,31 +161,17 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 38 | 91 | 472 | 47 | 2 | 612 |
+| Orrery (solar system + orbital mechanics) | 40 | 92 | 454 | 66 | 2 | 614 |
 | Earth System | 13 | 105 | 71 | 2 | 0 | 178 |
 | Stars (stellar neighborhood) | 9 | 9 | 37 | 6 | 0 | 52 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 39 | 0 | 39 |
 | Utilities (cross-domain shared helpers) | 1 | 1 | 0 | 0 | 0 | 1 |
 | Gallery | 0 | 0 | 0 | 0 | 0 | 0 |
 
----
+**Domain coverage gap:** the following files have findings but no entry in `MODULE_DOMAIN_MAP` -- defaulted to `orrery` rather than guessed into a more specific bucket. Add each to `MODULE_DOMAIN_MAP` in provenance_scanner.py with its real domain so this stops silently defaulting:
 
-## CROSS-CHECK ANNOTATION ISSUES -- diagnostic, no scoring effect
-
-Annotation lines the scanner saw but could not use. None of these changed a score. They are listed because an annotation that quietly does nothing is worse than one that is visibly wrong -- it reads as a completed cross-check to anyone skimming the source.
-
-A qualifying annotation needs an ISO date and, after it, a parenthetical worksheet reference ending in `.md`. Two of them, naming different checkers, on a claim that already has a citation, are what earns V2.
-
-`Near line` is the first claim that saw the annotation, not the annotation's own line. The annotation sits within the citation lookback above it.
-
-| File | Near line | Issue | Detail |
-|------|----------:|-------|--------|
-| `constants_new.py` | 423 | `duplicate_identity` | two or more annotations name the same checker |
-| `eris_visualization_shells.py` | 218 | `duplicate_identity` | two or more annotations name the same checker |
-| `mercury_visualization_shells.py` | 49 | `duplicate_identity` | two or more annotations name the same checker |
-| `pluto_visualization_shells.py` | 41 | `duplicate_identity` | two or more annotations name the same checker |
-| `shell_configs.py` | 128 | `duplicate_identity` | two or more annotations name the same checker |
-| `venus_visualization_shells.py` | 528 | `duplicate_identity` | two or more annotations name the same checker |
+- `maintenance_run.py`
+- `patch_L186_annotation_checker_first.py`
 
 ---
 
@@ -501,6 +494,12 @@ is planned for a future session.
 | 2174 | string | display string @ line 2174 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2332 | string | display string @ line 2332 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 
+### patch_L186_annotation_checker_first.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 85 | constant | EXPECTED_TOTAL | 134 | 4 | 5 | **20** | No source citation; date-sensitive (recalled) | UNDETERMINED -- could not be classified |
+
 ### planet_visualization_utilities.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
@@ -758,35 +757,35 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 423 | dict | KNOWN_ORBITAL_PERIODS[...] | (133 entries) | 3 | 5 | **15** | Cited; cross-check incomplete (1/2 models) | MEASURED -- independently catalogued fact (name) |
 | 1 | string | display string @ line 1 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 54 | constant | KM_PER_AU | 149597870.7 | 2 | 5 | **10** | Cross-checked by 4 models (IAU B2 via Claude, IAU B2 via GPT, IAU B3 via Claude, IAU B3 via GPT) | MEASURED -- independently catalogued fact (name) |
-| 62 | constant | SUN_RADIUS_KM | 695700.0 | 2 | 5 | **10** | Cross-checked by 5 models (IAU B2 via Claude, IAU B2 via GPT, IAU B3 via Claude, IAU B3 via GPT, IAU B3 / IERS via Claude) | MEASURED -- independently catalogued fact (name) |
-| 72 | constant | EARTH_EQUATORIAL_RADIUS_KM | 6378.137 | 2 | 5 | **10** | Cross-checked by 6 models (IAU B2 via Claude, IAU B2 via GPT, IAU B3 via Claude, IAU B3 via GPT, IAU B3 / IERS via Claude, IAU B3 / IERS via GPT) | MEASURED -- independently catalogued fact (name) |
-| 80 | constant | EARTH_POLAR_RADIUS_KM | 6356.752 | 2 | 5 | **10** | Cross-checked by 6 models (IAU B2 via Claude, IAU B2 via GPT, IAU B3 via Claude, IAU B3 via GPT, IAU B3 / IERS via Claude, IAU B3 / IERS via GPT) | MEASURED -- independently catalogued fact (name) |
-| 86 | constant | JUPITER_EQUATORIAL_RADIUS_KM | 71492.0 | 2 | 5 | **10** | Cross-checked by 7 models (IAU B2 via Claude, IAU B2 via GPT, IAU B3 via Claude, IAU B3 via GPT, IAU B3 / IERS via Claude, IAU B3 / IERS via GPT, NIST/SI via Claude) | MEASURED -- independently catalogued fact (name) |
-| 92 | constant | JUPITER_POLAR_RADIUS_KM | 66854.0 | 2 | 5 | **10** | Cross-checked by 6 models (IAU B3 via Claude, IAU B3 via GPT, IAU B3 / IERS via Claude, IAU B3 / IERS via GPT, NIST/SI via Claude, NIST/SI via GPT) | MEASURED -- independently catalogued fact (name) |
-| 98 | constant | SPEED_OF_LIGHT_KM_S | 299792.458 | 2 | 5 | **10** | Cross-checked by 6 models (IAU B3 / IERS via Claude, IAU B3 / IERS via GPT, IAU B3 via Claude, IAU B3 via GPT, NIST/SI via Claude, NIST/SI via GPT) | MEASURED (inferred from role 'data') |
-| 173 | constant | CHROMOSPHERE_PHYSICAL_KM | 2000.0 | 2 | 5 | **10** | Cross-checked by 6 models (Carroll & Ostlie via Gemini, NASA Sun Fact Sheet via GPT, NASA solar structure via GPT, helioseismology literature via GPT, NASA chromosphere data via GPT, Golub & Pasachoff via Gemini) | MEASURED -- independently catalogued fact (name) |
-| 228 | constant | TERMINATION_SHOCK_AU | 94 | 2 | 5 | **10** | Cross-checked by 10 models (Golub & Pasachoff via Gemini, DeForest et al. via GPT, formula verified via Claude, formula verified via GPT, Kasper et al. via Claude, Kasper et al. via GPT, Stone et al. via Claude, Stone et al. via GPT, Gurnett et al. via Claude, Gurnett et al. via GPT) | MEASURED -- independently catalogued fact (name) |
-| 245 | constant | INNER_LIMIT_OORT_CLOUD_AU | 2000 | 2 | 5 | **10** | Cross-checked by 6 models (Kasper et al. via Claude, Kasper et al. via GPT, Stone et al. via Claude, Stone et al. via GPT, Gurnett et al. via Claude, Gurnett et al. via GPT) | MEASURED -- independently catalogued fact (name) |
-| 249 | constant | INNER_OORT_CLOUD_AU | 20000 | 2 | 5 | **10** | Cross-checked by 6 models (Kasper et al. via Claude, Kasper et al. via GPT, Stone et al. via Claude, Stone et al. via GPT, Gurnett et al. via Claude, Gurnett et al. via GPT) | MEASURED -- independently catalogued fact (name) |
-| 253 | constant | OUTER_OORT_CLOUD_AU | 100000 | 2 | 5 | **10** | Cross-checked by 4 models (Stone et al. via Claude, Stone et al. via GPT, Gurnett et al. via Claude, Gurnett et al. via GPT) | MEASURED -- independently catalogued fact (name) |
-| 257 | constant | GRAVITATIONAL_INFLUENCE_AU | 150000 | 2 | 5 | **10** | Cross-checked by 4 models (Stone et al. via Claude, Stone et al. via GPT, Gurnett et al. via Claude, Gurnett et al. via GPT) | MEASURED -- independently catalogued fact (name) |
-| 328 | constant | MERCURY_RADIUS_KM | 2439.7 | 2 | 5 | **10** | Cross-checked by 6 models (IAU B3 / Archinal / JPL SSD via Claude, IAU B3 / Archinal / JPL SSD via GPT, NASA NSSDCA via Claude, JPL SSD via GPT, NASA NSSDCA via Gemini, JPL SSD via Claude) | MEASURED -- independently catalogued fact (name) |
-| 331 | constant | VENUS_RADIUS_KM | 6051.8 | 2 | 5 | **10** | Cross-checked by 6 models (IAU B3 / Archinal / JPL SSD via Claude, IAU B3 / Archinal / JPL SSD via GPT, NASA NSSDCA via Claude, JPL SSD via GPT, NASA NSSDCA via Gemini, JPL SSD via Claude) | MEASURED -- independently catalogued fact (name) |
-| 334 | constant | MOON_RADIUS_KM | 1737.4 | 2 | 5 | **10** | Cross-checked by 6 models (IAU B3 / Archinal / JPL SSD via Claude, IAU B3 / Archinal / JPL SSD via GPT, NASA NSSDCA via Claude, JPL SSD via GPT, NASA NSSDCA via Gemini, JPL SSD via Claude) | MEASURED -- independently catalogued fact (name) |
-| 341 | constant | MARS_RADIUS_KM | 3396.2 | 2 | 5 | **10** | Cross-checked by 6 models (IAU B3 / Archinal / JPL SSD via Claude, IAU B3 / Archinal / JPL SSD via GPT, NASA NSSDCA via Claude, JPL SSD via GPT, NASA NSSDCA via Gemini, JPL SSD via Claude) | MEASURED -- independently catalogued fact (name) |
-| 346 | constant | PHOBOS_RADIUS_KM | 11.1 | 2 | 5 | **10** | Cross-checked by 6 models (IAU B3 / Archinal / JPL SSD via Claude, IAU B3 / Archinal / JPL SSD via GPT, NASA NSSDCA via Claude, JPL SSD via GPT, NASA NSSDCA via Gemini, JPL SSD via Claude) | MEASURED -- independently catalogued fact (name) |
-| 349 | constant | SATURN_RADIUS_KM | 60268 | 2 | 5 | **10** | Cross-checked by 4 models (NASA NSSDCA via Claude, JPL SSD via GPT, NASA NSSDCA via Gemini, JPL SSD via Claude) | MEASURED -- independently catalogued fact (name) |
-| 354 | constant | URANUS_RADIUS_KM | 25559 | 2 | 5 | **10** | Cross-checked by 4 models (NASA NSSDCA via Claude, JPL SSD via GPT, NASA NSSDCA via Gemini, JPL SSD via Claude) | MEASURED -- independently catalogued fact (name) |
-| 359 | constant | NEPTUNE_RADIUS_KM | 24764 | 2 | 5 | **10** | Cross-checked by 6 models (NASA NSSDCA via Claude, JPL SSD via GPT, NASA NSSDCA via Gemini, JPL SSD via Claude, Nolan et al. via Claude, OSIRIS-REx via GPT) | MEASURED -- independently catalogued fact (name) |
-| 364 | constant | PLUTO_RADIUS_KM | 1188.3 | 2 | 5 | **10** | Cross-checked by 6 models (NASA NSSDCA via Claude, JPL SSD via GPT, NASA NSSDCA via Gemini, JPL SSD via Claude, Nolan et al. via Claude, OSIRIS-REx via GPT) | MEASURED -- independently catalogued fact (name) |
-| 367 | constant | BENNU_RADIUS_KM | 0.246 | 2 | 5 | **10** | Cross-checked by 6 models (NASA NSSDCA via Claude, JPL SSD via GPT, NASA NSSDCA via Gemini, JPL SSD via Claude, Nolan et al. via Claude, OSIRIS-REx via GPT) | MEASURED -- independently catalogued fact (name) |
-| 374 | constant | ERIS_RADIUS_KM | 1163 | 2 | 5 | **10** | Cross-checked by 4 models (JPL SSD via GPT, JPL SSD via Claude, Nolan et al. via Claude, OSIRIS-REx via GPT) | MEASURED -- independently catalogued fact (name) |
-| 377 | constant | HAUMEA_RADIUS_KM | 715 | 2 | 5 | **10** | Cross-checked by 4 models (JPL SSD via Claude, JPL SSD via GPT, Nolan et al. via Claude, OSIRIS-REx via GPT) | MEASURED -- independently catalogued fact (name) |
-| 385 | constant | MAKEMAKE_RADIUS_KM | 715 | 2 | 5 | **10** | Cross-checked by 5 models (JPL SSD via Claude, JPL SSD via GPT, Nolan et al. via Claude, OSIRIS-REx via GPT, Keane et al.) | MEASURED -- independently catalogued fact (name) |
-| 388 | constant | ARROKOTH_RADIUS_KM | 9.1 | 2 | 5 | **10** | Cross-checked by 5 models (JPL SSD via Claude, JPL SSD via GPT, Nolan et al. via Claude, OSIRIS-REx via GPT, Keane et al.) | MEASURED -- independently catalogued fact (name) |
+| 54 | constant | KM_PER_AU | 149597870.7 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 62 | constant | SUN_RADIUS_KM | 695700.0 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 72 | constant | EARTH_EQUATORIAL_RADIUS_KM | 6378.137 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 80 | constant | EARTH_POLAR_RADIUS_KM | 6356.752 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 86 | constant | JUPITER_EQUATORIAL_RADIUS_KM | 71492.0 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 92 | constant | JUPITER_POLAR_RADIUS_KM | 66854.0 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 98 | constant | SPEED_OF_LIGHT_KM_S | 299792.458 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED (inferred from role 'data') |
+| 173 | constant | CHROMOSPHERE_PHYSICAL_KM | 2000.0 | 2 | 5 | **10** | Cross-checked by 2 models (Gemini, GPT) | MEASURED -- independently catalogued fact (name) |
+| 228 | constant | TERMINATION_SHOCK_AU | 94 | 2 | 5 | **10** | Cross-checked by 3 models (Gemini, GPT, Claude) | MEASURED -- independently catalogued fact (name) |
+| 245 | constant | INNER_LIMIT_OORT_CLOUD_AU | 2000 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 249 | constant | INNER_OORT_CLOUD_AU | 20000 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 253 | constant | OUTER_OORT_CLOUD_AU | 100000 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 257 | constant | GRAVITATIONAL_INFLUENCE_AU | 150000 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 328 | constant | MERCURY_RADIUS_KM | 2439.7 | 2 | 5 | **10** | Cross-checked by 3 models (Claude, GPT, Gemini) | MEASURED -- independently catalogued fact (name) |
+| 331 | constant | VENUS_RADIUS_KM | 6051.8 | 2 | 5 | **10** | Cross-checked by 3 models (Claude, GPT, Gemini) | MEASURED -- independently catalogued fact (name) |
+| 334 | constant | MOON_RADIUS_KM | 1737.4 | 2 | 5 | **10** | Cross-checked by 3 models (Claude, GPT, Gemini) | MEASURED -- independently catalogued fact (name) |
+| 341 | constant | MARS_RADIUS_KM | 3396.2 | 2 | 5 | **10** | Cross-checked by 3 models (Claude, GPT, Gemini) | MEASURED -- independently catalogued fact (name) |
+| 346 | constant | PHOBOS_RADIUS_KM | 11.1 | 2 | 5 | **10** | Cross-checked by 3 models (Claude, GPT, Gemini) | MEASURED -- independently catalogued fact (name) |
+| 349 | constant | SATURN_RADIUS_KM | 60268 | 2 | 5 | **10** | Cross-checked by 3 models (Claude, GPT, Gemini) | MEASURED -- independently catalogued fact (name) |
+| 354 | constant | URANUS_RADIUS_KM | 25559 | 2 | 5 | **10** | Cross-checked by 3 models (Claude, GPT, Gemini) | MEASURED -- independently catalogued fact (name) |
+| 359 | constant | NEPTUNE_RADIUS_KM | 24764 | 2 | 5 | **10** | Cross-checked by 3 models (Claude, GPT, Gemini) | MEASURED -- independently catalogued fact (name) |
+| 364 | constant | PLUTO_RADIUS_KM | 1188.3 | 2 | 5 | **10** | Cross-checked by 3 models (Claude, GPT, Gemini) | MEASURED -- independently catalogued fact (name) |
+| 367 | constant | BENNU_RADIUS_KM | 0.246 | 2 | 5 | **10** | Cross-checked by 3 models (Claude, GPT, Gemini) | MEASURED -- independently catalogued fact (name) |
+| 374 | constant | ERIS_RADIUS_KM | 1163 | 2 | 5 | **10** | Cross-checked by 2 models (GPT, Claude) | MEASURED -- independently catalogued fact (name) |
+| 377 | constant | HAUMEA_RADIUS_KM | 715 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 385 | constant | MAKEMAKE_RADIUS_KM | 715 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 388 | constant | ARROKOTH_RADIUS_KM | 9.1 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 423 | dict | KNOWN_ORBITAL_PERIODS[...] | (133 entries) | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
 
 ### coordinate_system_guide.py
 
@@ -824,14 +823,6 @@ is planned for a future session.
 | 1058 | string | display string @ line 1058 | (7 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 1098 | string | display string @ line 1098 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 1121 | string | display string @ line 1121 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-
-### eris_visualization_shells.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 61 | string | display string @ line 61 | (3 claims) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
-| 218 | string | display string @ line 218 | (1 claim) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
-| 397 | string | display string @ line 397 | (1 claim) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
 
 ### fetch_climate_data.py
 
@@ -1010,14 +1001,6 @@ is planned for a future session.
 | 963 | string | display string @ line 963 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 1031 | string | display string @ line 1031 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
-### mercury_visualization_shells.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 49 | string | display string @ line 49 | (1 claim) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
-| 254 | string | display string @ line 254 | (1 claim) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
-| 310 | string | display string @ line 310 | (1 claim) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
-
 ### moon_visualization_shells.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
@@ -1132,19 +1115,6 @@ is planned for a future session.
 | 715 | string | display string @ line 715 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 723 | string | display string @ line 723 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
-### pluto_visualization_shells.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 41 | string | display string @ line 41 | (1 claim) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
-| 61 | string | display string @ line 61 | (4 claims) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
-| 136 | string | display string @ line 136 | (1 claim) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
-| 155 | string | display string @ line 155 | (1 claim) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
-| 227 | string | display string @ line 227 | (1 claim) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
-| 400 | string | display string @ line 400 | (1 claim) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
-| 423 | string | display string @ line 423 | (3 claims) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
-| 535 | string | display string @ line 535 | (5 claims) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
-
 ### saturn_visualization_shells.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
@@ -1211,8 +1181,6 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 128 | string | display string @ line 128 | (1 claim) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
-| 132 | string | display string @ line 132 | (1 claim) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
 | 168 | string | display string @ line 168 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 173 | string | display string @ line 173 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 230 | string | display string @ line 230 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
@@ -1398,8 +1366,6 @@ is planned for a future session.
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 1 | string | display string @ line 1 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 437 | string | display string @ line 437 | (9 claims) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
-| 528 | string | display string @ line 528 | (1 claim) | 3 | 4 | **12** | Cited; cross-check incomplete (1/2 models) | Public-facing display string (hover/INFO) |
 
 ### visualization_3d.py
 
@@ -1429,15 +1395,15 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 162 | constant | CHROMOSPHERE_RADII | 1.1 | 2 | 4 | **8** | Cross-checked by 5 models (Carroll & Ostlie via Gemini, NASA Sun Fact Sheet via GPT, NASA solar structure via GPT, helioseismology literature via GPT, NASA chromosphere data via GPT) | RELATIONAL -- defined against a tracked base (name) |
-| 184 | constant | INNER_CORONA_RADII | 3 | 2 | 4 | **8** | Cross-checked by 4 models (helioseismology literature via GPT, Carroll & Ostlie via Gemini, NASA chromosphere data via GPT, Golub & Pasachoff via Gemini) | RELATIONAL -- defined against a tracked base (name) |
-| 189 | constant | OUTER_CORONA_RADII | 50 | 2 | 4 | **8** | Cross-checked by 4 models (Carroll & Ostlie via Gemini, NASA chromosphere data via GPT, Golub & Pasachoff via Gemini, DeForest et al. via GPT) | RELATIONAL -- defined against a tracked base (name) |
-| 195 | constant | STREAMER_BELT_RADII | 6.0 | 2 | 4 | **8** | Cross-checked by 6 models (Carroll & Ostlie via Gemini, NASA chromosphere data via GPT, Golub & Pasachoff via Gemini, DeForest et al. via GPT, formula verified via Claude, formula verified via GPT) | RELATIONAL -- defined against a tracked base (name) |
-| 203 | constant | ROCHE_LIMIT_RADII | 3.45 | 2 | 4 | **8** | Cross-checked by 5 models (Carroll & Ostlie via Gemini, Golub & Pasachoff via Gemini, DeForest et al. via GPT, formula verified via Claude, formula verified via GPT) | RELATIONAL -- defined against a tracked base (name) |
-| 213 | constant | ALFVEN_SURFACE_RADII | 18.8 | 2 | 4 | **8** | Cross-checked by 6 models (Golub & Pasachoff via Gemini, DeForest et al. via GPT, formula verified via Claude, formula verified via GPT, Kasper et al. via Claude, Kasper et al. via GPT) | RELATIONAL -- defined against a tracked base (name) |
-| 235 | constant | HELIOPAUSE_RADII | 26148 | 2 | 4 | **8** | Cross-checked by 8 models (formula verified via Claude, formula verified via GPT, Kasper et al. via Claude, Kasper et al. via GPT, Stone et al. via Claude, Stone et al. via GPT, Gurnett et al. via Claude, Gurnett et al. via GPT) | RELATIONAL -- defined against a tracked base (name) |
-| 277 | constant | PARKER_CLOSEST_RADII | 9.86 | 2 | 4 | **8** | Cross-checked by 2 models (JHUAPL/Riley et al. via Claude, NASA PSP mission data via GPT) | RELATIONAL -- defined against a tracked base (name) |
-| 397 | dict | CENTER_BODY_RADII[...] | (1 entry) | 2 | 4 | **8** | Cross-checked by 5 models (Nolan et al. via Claude, OSIRIS-REx via GPT, JPL SSD via Claude, JPL SSD via GPT, Keane et al.) | RELATIONAL -- defined against a tracked base (name) |
+| 162 | constant | CHROMOSPHERE_RADII | 1.1 | 2 | 4 | **8** | Cross-checked by 2 models (Gemini, GPT) | RELATIONAL -- defined against a tracked base (name) |
+| 184 | constant | INNER_CORONA_RADII | 3 | 2 | 4 | **8** | Cross-checked by 2 models (GPT, Gemini) | RELATIONAL -- defined against a tracked base (name) |
+| 189 | constant | OUTER_CORONA_RADII | 50 | 2 | 4 | **8** | Cross-checked by 2 models (Gemini, GPT) | RELATIONAL -- defined against a tracked base (name) |
+| 195 | constant | STREAMER_BELT_RADII | 6.0 | 2 | 4 | **8** | Cross-checked by 3 models (Gemini, GPT, Claude) | RELATIONAL -- defined against a tracked base (name) |
+| 203 | constant | ROCHE_LIMIT_RADII | 3.45 | 2 | 4 | **8** | Cross-checked by 3 models (Gemini, GPT, Claude) | RELATIONAL -- defined against a tracked base (name) |
+| 213 | constant | ALFVEN_SURFACE_RADII | 18.8 | 2 | 4 | **8** | Cross-checked by 3 models (Gemini, GPT, Claude) | RELATIONAL -- defined against a tracked base (name) |
+| 235 | constant | HELIOPAUSE_RADII | 26148 | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | RELATIONAL -- defined against a tracked base (name) |
+| 277 | constant | PARKER_CLOSEST_RADII | 9.86 | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | RELATIONAL -- defined against a tracked base (name) |
+| 397 | dict | CENTER_BODY_RADII[...] | (1 entry) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | RELATIONAL -- defined against a tracked base (name) |
 
 ### data_inventory.py
 
@@ -1457,8 +1423,11 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 478 | string | display string @ line 478 | (5 claims) | 2 | 4 | **8** | Cross-checked by 2 models (derived Hill radius via GPT, derived Hill radius via Gemini) | Public-facing display string (hover/INFO) |
-| 495 | string | display string @ line 495 | (5 claims) | 2 | 4 | **8** | Cross-checked by 2 models (derived Hill radius via GPT, derived Hill radius via Gemini) | Public-facing display string (hover/INFO) |
+| 61 | string | display string @ line 61 | (3 claims) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
+| 218 | string | display string @ line 218 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
+| 397 | string | display string @ line 397 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT); date-sensitive | Public-facing display string (hover/INFO) |
+| 478 | string | display string @ line 478 | (5 claims) | 2 | 4 | **8** | Cross-checked by 2 models (GPT, Gemini) | Public-facing display string (hover/INFO) |
+| 495 | string | display string @ line 495 | (5 claims) | 2 | 4 | **8** | Cross-checked by 2 models (GPT, Gemini) | Public-facing display string (hover/INFO) |
 
 ### exoplanet_systems.py
 
@@ -1497,16 +1466,22 @@ is planned for a future session.
 | 174 | dict | SECTION_TITLES[...] | (26 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 | 482 | dict | ISSUE_TAGS[...] | (4 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
+### maintenance_run.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 108 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+
 ### mars_visualization_shells.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 518 | string | display string @ line 518 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (MAVEN data via Claude, NASA MAVEN via GPT) | Public-facing display string (hover/INFO) |
-| 537 | string | display string @ line 537 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (MAVEN data via Claude, NASA MAVEN via GPT) | Public-facing display string (hover/INFO) |
-| 599 | string | display string @ line 599 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Vignes et al. via Claude, Vignes et al. via GPT) | Public-facing display string (hover/INFO) |
-| 713 | string | display string @ line 713 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Vignes et al. via Claude, Vignes et al. via GPT) | Public-facing display string (hover/INFO) |
-| 850 | string | display string @ line 850 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (NASA NSSDCA Mars Fact Sheet via Claude, JPL SSD astrodynamic parameters via GPT) | Public-facing display string (hover/INFO) |
-| 866 | string | display string @ line 866 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (NASA NSSDCA Mars Fact Sheet via Claude, JPL SSD astrodynamic parameters via GPT) | Public-facing display string (hover/INFO) |
+| 518 | string | display string @ line 518 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
+| 537 | string | display string @ line 537 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
+| 599 | string | display string @ line 599 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
+| 713 | string | display string @ line 713 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
+| 850 | string | display string @ line 850 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
+| 866 | string | display string @ line 866 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
 
 ### measure_perframe_elements.py
 
@@ -1520,24 +1495,27 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 71 | string | display string @ line 71 | (1 claim) | 2 | 4 | **8** | Cross-checked by 4 models (Hauck et al., Sori, NASA Mercury Fact Sheet via Claude, NASA Mercury Fact Sheet via GPT) | Public-facing display string (hover/INFO) |
-| 97 | string | display string @ line 97 | (2 claims) | 2 | 4 | **8** | Cross-checked by 5 models (Hauck et al., Sori, NASA Mercury Fact Sheet via Claude, NASA Mercury Fact Sheet via GPT, Baumgardner et al.) | Public-facing display string (hover/INFO) |
-| 424 | string | display string @ line 424 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (NSSDCA-derived Hill radius via Claude, NSSDCA-derived Hill radius via GPT) | Public-facing display string (hover/INFO) |
+| 49 | string | display string @ line 49 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (GPT, Gemini) | Public-facing display string (hover/INFO) |
+| 71 | string | display string @ line 71 | (1 claim) | 2 | 4 | **8** | Cross-checked by 3 models (GPT, Gemini, Claude) | Public-facing display string (hover/INFO) |
+| 97 | string | display string @ line 97 | (2 claims) | 2 | 4 | **8** | Cross-checked by 3 models (GPT, Gemini, Claude) | Public-facing display string (hover/INFO) |
+| 254 | string | display string @ line 254 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
+| 310 | string | display string @ line 310 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT); date-sensitive | Public-facing display string (hover/INFO) |
+| 424 | string | display string @ line 424 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
 
 ### module_atlas.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 103 | dict | ROLE_MAP[...] | (119 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 365 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 388 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 103 | dict | ROLE_MAP[...] | (120 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 366 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 389 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 228 | string | display string @ line 228 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Nakamura et al., Nakamura) | Public-facing display string (hover/INFO) |
-| 249 | string | display string @ line 249 | (8 claims) | 2 | 4 | **8** | Cross-checked by 2 models (Nakamura et al., Nakamura) | Public-facing display string (hover/INFO) |
+| 228 | string | display string @ line 228 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
+| 249 | string | display string @ line 249 | (8 claims) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
 
 ### orbit_data_manager.py
 
@@ -1566,14 +1544,22 @@ is planned for a future session.
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 65 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
 | 66 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 349 | dict | SECTION_SYMBOLS[...] | (4 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 398 | dict | SECTION_SYMBOLS[...] | (4 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### pluto_visualization_shells.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 614 | string | display string @ line 614 | (2 claims) | 2 | 4 | **8** | Cross-checked by 2 models (Pluto/Charon GM values via GPT, derived Hill radius via Claude) | Public-facing display string (hover/INFO) |
-| 638 | string | display string @ line 638 | (2 claims) | 2 | 4 | **8** | Cross-checked by 3 models (Pluto/Charon GM values via GPT, derived Hill radius via Claude, Pluto/Charon GM via GPT) | Public-facing display string (hover/INFO) |
+| 41 | string | display string @ line 41 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
+| 61 | string | display string @ line 61 | (4 claims) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
+| 136 | string | display string @ line 136 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
+| 155 | string | display string @ line 155 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
+| 227 | string | display string @ line 227 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (GPT, Gemini) | Public-facing display string (hover/INFO) |
+| 400 | string | display string @ line 400 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
+| 423 | string | display string @ line 423 | (3 claims) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
+| 535 | string | display string @ line 535 | (5 claims) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
+| 614 | string | display string @ line 614 | (2 claims) | 2 | 4 | **8** | Cross-checked by 2 models (GPT, Claude) | Public-facing display string (hover/INFO) |
+| 638 | string | display string @ line 638 | (2 claims) | 2 | 4 | **8** | Cross-checked by 2 models (GPT, Claude) | Public-facing display string (hover/INFO) |
 
 ### provenance_history.py
 
@@ -1601,8 +1587,8 @@ is planned for a future session.
 | 364 | constant | C_UNDETERMINED | 5 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 | 465 | dict | DOMAIN_LABELS[...] | (6 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 | 474 | dict | MODULE_DOMAIN_MAP[...] | (101 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 956 | constant | CITATION_LOOKBACK_BLOCK | 15 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
-| 1634 | constant | SHADOW_DERIVED_MIN_MAGNITUDE | 100.0 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 1000 | constant | CITATION_LOOKBACK_BLOCK | 15 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 1678 | constant | SHADOW_DERIVED_MIN_MAGNITUDE | 100.0 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
 
 ### sgr_a_grand_tour.py
 
@@ -1623,6 +1609,13 @@ is planned for a future session.
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 33 | dict | S4714_ACCURACY_PATCH[...] | (1 entry) | 4 | 2 | **8** | No source citation (recalled) | Internal use (name vocabulary) |
+
+### shell_configs.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 128 | string | display string @ line 128 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (GPT, Gemini) | Public-facing display string (hover/INFO) |
+| 132 | string | display string @ line 132 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (GPT, Gemini) | Public-facing display string (hover/INFO) |
 
 ### skills_index.py
 
@@ -1651,11 +1644,13 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 43 | string | display string @ line 43 | (2 claims) | 2 | 4 | **8** | Cross-checked by 2 models (NASA Venus Fact Sheet via Claude, NASA Venus Fact Sheet via GPT) | Public-facing display string (hover/INFO) |
-| 62 | string | display string @ line 62 | (2 claims) | 2 | 4 | **8** | Cross-checked by 2 models (NASA Venus Fact Sheet via Claude, NASA Venus Fact Sheet via GPT) | Public-facing display string (hover/INFO) |
-| 339 | string | display string @ line 339 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (NSSDCA Venus Fact Sheet via Claude, NSSDCA Venus Fact Sheet via GPT) | Public-facing display string (hover/INFO) |
-| 356 | string | display string @ line 356 | (2 claims) | 2 | 4 | **8** | Cross-checked by 2 models (NSSDCA Venus Fact Sheet via Claude, NSSDCA Venus Fact Sheet via GPT) | Public-facing display string (hover/INFO) |
-| 681 | string | display string @ line 681 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (derived Hill radius via GPT, derived Hill radius via Claude) | Public-facing display string (hover/INFO) |
+| 43 | string | display string @ line 43 | (2 claims) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
+| 62 | string | display string @ line 62 | (2 claims) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
+| 339 | string | display string @ line 339 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
+| 356 | string | display string @ line 356 | (2 claims) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
+| 437 | string | display string @ line 437 | (9 claims) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
+| 528 | string | display string @ line 528 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
+| 681 | string | display string @ line 681 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (GPT, Claude) | Public-facing display string (hover/INFO) |
 
 ---
 
@@ -1665,8 +1660,8 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 134 | constant | DEFAULT_MARKER_SIZE | 7 | 2 | 1 | **2** | Cross-checked by 2 models (Carroll & Ostlie via Gemini, NASA Sun Fact Sheet via GPT) | Cosmetic (name vocabulary) |
-| 136 | constant | CENTER_MARKER_SIZE | 10 | 2 | 1 | **2** | Cross-checked by 2 models (Carroll & Ostlie via Gemini, NASA Sun Fact Sheet via GPT) | Cosmetic (name vocabulary) |
+| 134 | constant | DEFAULT_MARKER_SIZE | 7 | 2 | 1 | **2** | Cross-checked by 2 models (Gemini, GPT) | Cosmetic (name vocabulary) |
+| 136 | constant | CENTER_MARKER_SIZE | 10 | 2 | 1 | **2** | Cross-checked by 2 models (Gemini, GPT) | Cosmetic (name vocabulary) |
 
 ---
 

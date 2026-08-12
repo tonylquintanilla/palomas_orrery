@@ -362,33 +362,52 @@ def test_lookback_window_bleed_is_measured():
         "a claim well beyond the window must not see the annotation")
 
 
-def test_live_corpus_has_no_annotations_yet():
-    """No source file in the repo carries an annotation, and none is
-    misread as carrying one.
+def test_legacy_source_first_is_refused():
+    """The retired source-first order earns nothing and says why.
 
-    This is the self-scan regression in its load-bearing form. Piece 1
-    ships the mechanism only; the population arrives in Piece 2. So the
-    whole corpus must parse to zero records AND zero issues -- zero
-    records proves nothing was annotated early, and zero issues proves
-    no existing prose is being misread. Sweeping every file directly is
-    a stricter check than a full scan diff, since it looks at files the
-    scanner's role gate excludes from findings entirely.
-
-    Test files are skipped: this one deliberately contains well-formed
-    example annotations inside its own function bodies.
+    Both variants are covered. When the source carries its own year that
+    year is taken as the check date and the checker falls outside the
+    identity; when it does not, the whole prefix parses as the identity.
+    Neither may quietly become a record.
     """
-    offenders = []
-    for fname in sorted(os.listdir('.')):
-        if not fname.endswith('.py') or fname.startswith('test_'):
-            continue
-        with open(fname, 'rb') as handle:
-            text = handle.read().decode('utf-8', 'replace')
-        records, issues = parse_cross_checks(text)
-        if records or issues:
-            offenders.append((fname, records, issues))
-    assert not offenders, (
-        "expected an unannotated corpus at Piece 1; found: "
-        + "; ".join(f"{f}: {r} {i}" for f, r, i in offenders))
+    for line in ("# Cross-checked: Hauck et al. 2013 via GPT 2026-08-03 "
+                 "(worksheet.md)",
+                 "# Cross-checked: IAU B2 via Claude 2026-08-02 "
+                 "(worksheet.md)"):
+        records, issues = parse_cross_checks(line)
+        assert not records, (
+            "source-first line must not parse as a record: %s" % line)
+        assert issues and issues[0][1] == 'legacy_source_first', (
+            "expected legacy_source_first, got %r for %s"
+            % (issues, line))
+
+
+def test_source_clause_after_date_is_accepted():
+    """Checker-first parses, with and without the source clause.
+
+    The ` -- <source>` clause is optional by design; the bare form has
+    been the tested shape since the parser was written. Anything else
+    between the date and the reference is refused.
+    """
+    with_source = ("# Cross-checked: GPT 2026-08-03 -- Hauck et al. 2013 "
+                   "(worksheet.md)")
+    records, issues = parse_cross_checks(with_source)
+    assert len(records) == 1 and records[0][0] == 'GPT', (
+        "checker-first with a source clause should parse to GPT, got %r"
+        % (records,))
+    assert not issues, "well-formed line raised issues: %r" % (issues,)
+
+    bare = "# Cross-checked: Gemini 2026-04-15 (worksheet.md)"
+    records, issues = parse_cross_checks(bare)
+    assert len(records) == 1 and records[0][0] == 'Gemini', (
+        "bare checker-first should parse to Gemini, got %r" % (records,))
+    assert not issues, "bare line raised issues: %r" % (issues,)
+
+    junk = "# Cross-checked: GPT 2026-08-03 Hauck et al. (worksheet.md)"
+    records, issues = parse_cross_checks(junk)
+    assert not records, "unseparated tail must not parse: %r" % (records,)
+    assert issues and issues[0][1] == 'malformed_tail', (
+        "expected malformed_tail, got %r" % (issues,))
 
 
 def test_parse_issue_codes():
@@ -452,8 +471,9 @@ TESTS = [
     test_staleness_interaction,
     test_population_conservation_by_identity,
     test_lookback_window_bleed_is_measured,
-    test_live_corpus_has_no_annotations_yet,
     test_parse_issue_codes,
+    test_legacy_source_first_is_refused,
+    test_source_clause_after_date_is_accepted,
 ]
 
 

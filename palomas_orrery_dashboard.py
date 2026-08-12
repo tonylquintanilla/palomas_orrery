@@ -196,35 +196,103 @@ LAUNCH_GROUPS = {
          "--first-build).",
          GALLERY_REPO_DIR,
          True),
+        ("MAINTENANCE RUN -- everything indented below",
+         "maintenance_run.py",
+         "One command for the whole routine: regenerates the four generated "
+         "documents, then runs every checker, then prints one summary. It "
+         "reports and continues rather than stopping at the first failure, "
+         "and says which generated files actually moved. About ten seconds. "
+         "Run after an edit session and before a push. Everything indented "
+         "below is included in it and can still be launched on its own.",
+         SCRIPT_DIR,
+         True),
         ("Update Ledger Index",
          "ledger_index.py",
          "Regenerate the INDEX in LEDGER_CONSOLIDATED.md from the DETAIL blocks "
          "and migrate DONE items to section C. Run after editing any ledger block.",
          SCRIPT_DIR,
+         True,
+         None,
          True),
         ("Update Skill Manifest",
          "skills_index.py",
          "Regenerate the Skill Manifest table in the protocol from skills/*/SKILL.md. "
          "Run after adding, renaming, or versioning a skill.",
          SCRIPT_DIR,
+         True,
+         None,
          True),
         ("Data Inventory",
          "data_inventory.py",
          "Inventory the large, gitignored data stores (data/, star_data/). "
          "Writes DATA_INVENTORY.md. Run before handoffs or to check cache state.",
          SCRIPT_DIR,
-         True),
-        ("Provenance Scanner",
-         "provenance_scanner.py",
-         "Scan for hardcoded constants and duplicates. Writes PROVENANCE_AUDIT.md. "
-         "Run before/after edits to shared values, or when a value looks suspicious.",
-         SCRIPT_DIR,
+         True,
+         None,
          True),
         ("Regenerate Module Atlas",
          "module_atlas.py",
          "Scan codebase, generate MODULE_ATLAS.md. "
          "Run after significant codebase changes (new modules, reorganizations).",
          SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Test Constants Provenance",
+         "test_constants_provenance.py",
+         "Pass/fail regression tests for constants_new.py. "
+         "Run before committing changes to constants, or first if a plot looks wrong.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Test Cross-Check Annotations",
+         "test_cross_checked.py",
+         "Pass/fail tests for the cross-check annotation grammar and V2 "
+         "scoring. Run after editing annotations or the scanner's parser.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Test Citation Inheritance",
+         "test_citation_inheritance.py",
+         "Pass/fail tests for block-scoped citation inheritance in the "
+         "provenance scanner.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Test Provenance 1d/1e",
+         "test_provenance_1d.py",
+         "Pass/fail regression tests for the Phase 1d/1e scanner mechanisms.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Test Reset Completeness",
+         "test_reset_completeness.py",
+         "Guard the Reset button against partial-reset drift: dirties every "
+         "tracked control, calls the live reset handler, asserts everything "
+         "returns to its startup default.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Test Orbit Cache",
+         "test_orbit_cache.py",
+         "Comprehensive test suite for orbit data caching, format conversion, "
+         "and repair. Run alongside Verify Orbit Cache when the cache looks off.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Provenance Scanner",
+         "provenance_scanner.py",
+         "Scan for hardcoded constants and duplicates. Writes PROVENANCE_AUDIT.md. "
+         "Run before/after edits to shared values, or when a value looks suspicious.",
+         SCRIPT_DIR,
+         True,
+         None,
          True),
         ("Dependency Trace",
          "dep_trace.py",
@@ -239,12 +307,6 @@ LAUNCH_GROUPS = {
          "baseline against a patched export and quantify the frame-fence fix.",
          SCRIPT_DIR,
          True),
-        ("Test Constants Provenance",
-         "test_constants_provenance.py",
-         "Pass/fail regression tests for constants_new.py. "
-         "Run before committing changes to constants, or first if a plot looks wrong.",
-         SCRIPT_DIR,
-         True),
         ("Add Module Docstrings",
          "add_docstrings.py",
          "Add or improve module-level docstrings across the codebase; touches no code. "
@@ -257,23 +319,10 @@ LAUNCH_GROUPS = {
          "Run if orbit plots look wrong or the cache may be corrupted.",
          SCRIPT_DIR,
          True),
-        ("Test Orbit Cache",
-         "test_orbit_cache.py",
-         "Comprehensive test suite for orbit data caching, format conversion, "
-         "and repair. Run alongside Verify Orbit Cache when the cache looks off.",
-         SCRIPT_DIR,
-         True),
         ("Export Orbit Cache",
          "export_orbit_cache.py",
          "Phase 1b devtool: read the local orbit caches (read-only) and write "
          "web-servable orbit/position files for the interactive gallery.",
-         SCRIPT_DIR,
-         True),
-        ("Test Reset Completeness",
-         "test_reset_completeness.py",
-         "Guard the Reset button against partial-reset drift: dirties every "
-         "tracked control, calls the live reset handler, asserts everything "
-         "returns to its startup default.",
          SCRIPT_DIR,
          True),
         ("Create Ephemeris Database",
@@ -599,15 +648,26 @@ class PalomasOrreryDashboardFrame(ctk.CTkFrame):
                 base_dir = entry[3] if len(entry) > 3 else SCRIPT_DIR
                 interactive = entry[4] if len(entry) > 4 else False
                 args = entry[5] if len(entry) > 5 else None
+                indent = entry[6] if len(entry) > 6 else False
                 self._build_launch_card(cards_frame, name, script, desc,
-                                        base_dir, interactive, args, i)
+                                        base_dir, interactive, args, i,
+                                        indent)
 
     def _build_launch_card(self, parent, name, script, desc, base_dir,
-                           interactive, args, index):
-        """Individual launch card with button and description."""
+                           interactive, args, index, indent=False):
+        """Individual launch card with button and description.
+
+        `indent` marks a tool that the maintenance runner already covers.
+        Indenting rather than removing was Tony's ruling of 2026-08-12:
+        the individual entries stay launchable, and staying visible is how
+        the automation's contents remain known instead of disappearing
+        behind one button. The runner sits directly above its indented
+        group.
+        """
         card = ctk.CTkFrame(parent, fg_color=COLOR_SURFACE,
                             corner_radius=10)
-        card.pack(fill="x", pady=4, ipady=6)
+        card.pack(fill="x", pady=4, ipady=6,
+                  padx=(28, 0) if indent else 0)
 
         inner = ctk.CTkFrame(card, fg_color="transparent")
         inner.pack(fill="x", padx=16, pady=8)

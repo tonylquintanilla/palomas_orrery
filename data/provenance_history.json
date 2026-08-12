@@ -122,6 +122,67 @@
         "uranus_visualization_shells.py": 1,
         "visualization_utils.py": 1
       }
+    },
+    {
+      "run_id": "20260812T165716Z",
+      "started": "2026-08-12T16:57:16.062079+00:00",
+      "finished": "2026-08-12T16:57:24.825206+00:00",
+      "mode": "scan",
+      "head_sha": "8419f714258f5b35b4d0fc27fc6b89f9e97aa0e1",
+      "files_scanned": 123,
+      "total_findings": 884,
+      "tier_counts": {
+        "1": 207,
+        "2": 562,
+        "3": 113,
+        "4": 2
+      },
+      "domain_counts": {
+        "dev_tools": 39,
+        "earth_science": 178,
+        "orrery": 614,
+        "stars": 52,
+        "utilities": 1
+      },
+      "tier1_by_file": {
+        "apsidal_markers.py": 3,
+        "celestial_coordinates.py": 4,
+        "comet_visualization_shells.py": 3,
+        "coordinate_system_guide.py": 2,
+        "data_acquisition.py": 1,
+        "earth_visualization_shells.py": 1,
+        "energy_imbalance.py": 1,
+        "exoplanet_coordinates.py": 5,
+        "exoplanet_orbits.py": 1,
+        "fetch_paleoclimate_data.py": 1,
+        "hr_diagram_distance.py": 1,
+        "idealized_orbits.py": 26,
+        "info_dictionary.py": 2,
+        "object_type_analyzer.py": 2,
+        "orbital_elements.py": 1,
+        "orrery_rendering.py": 1,
+        "paleoclimate_dual_scale.py": 9,
+        "paleoclimate_human_origins_full.py": 26,
+        "paleoclimate_visualization.py": 4,
+        "paleoclimate_visualization_full.py": 22,
+        "paleoclimate_wet_bulb_full.py": 31,
+        "patch_L186_annotation_checker_first.py": 1,
+        "planet_visualization_utilities.py": 4,
+        "planetarium_distance.py": 1,
+        "plot_data_report_widget.py": 1,
+        "saturn_visualization_shells.py": 1,
+        "scenarios_coral_bleaching.py": 1,
+        "scenarios_heatwaves.py": 1,
+        "scenarios_western_heatwave_march_2026.py": 8,
+        "sgr_a_grand_tour.py": 8,
+        "sgr_a_star_data.py": 1,
+        "sgr_a_visualization_core.py": 1,
+        "sgr_a_visualization_precession.py": 4,
+        "shell_configs.py": 23,
+        "solar_visualization_shells.py": 3,
+        "uranus_visualization_shells.py": 1,
+        "visualization_utils.py": 1
+      }
     }
   ]
 }

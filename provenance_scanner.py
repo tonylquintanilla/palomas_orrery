@@ -742,6 +742,16 @@ CROSS_CHECK_PROSE_MONTH_RE = re.compile(
     r'jun(?:e)?|jul(?:y)?|aug(?:ust)?|sept?(?:ember)?|oct(?:ober)?|'
     r'nov(?:ember)?|dec(?:ember)?)\.?\s*,?\s*$')
 
+# The word "via" is the signature of the retired source-first order. It
+# never appears in a checker-first line: the checker is a model name and
+# the optional source clause follows the date behind a "--".
+CROSS_CHECK_VIA_RE = re.compile(r'(?i)\bvia\b')
+
+# The only thing allowed between the check date and the reference is a
+# "-- <source>" clause. Anything else is refused rather than ignored,
+# because text the parser silently drops is text nobody is checking.
+CROSS_CHECK_TAIL_RE = re.compile(r'^\s*--\s+\S')
+
 
 def parse_cross_checks(text):
     """Parse cross-check annotation lines out of a context block.
@@ -754,7 +764,24 @@ def parse_cross_checks(text):
     issues:  list of (raw_line, error_code) for lines that look like an
         annotation but do not qualify. Codes: 'missing_year',
         'prose_date', 'missing_identity', 'missing_reference',
-        'empty_reference', 'non_markdown_reference'.
+        'empty_reference', 'non_markdown_reference',
+        'legacy_source_first', 'malformed_tail'.
+
+    Grammar (L-186, 2026-08-12) -- the checker comes FIRST. The comment
+    line reads (the leading hash is omitted here on purpose: the scanner
+    scans itself, and a literal annotation in this docstring would be
+    extracted as one):
+
+        Cross-checked: <checker> <ISO date>[ -- <source>] (<ref>.md)
+
+    The optional ` -- <source>` clause names the authority that was
+    checked. It sits AFTER the date on purpose. The retired order put
+    the source in front, and a source carrying its own publication year
+    was then read as the check date, leaving the checker name outside
+    the identity entirely. Such a line is now refused as
+    'legacy_source_first' rather than reconstructed -- the parser has no
+    way to tell a publication year from a check year, so it stops
+    guessing and says so.
 
     A line qualifies only with an ISO date and, after that date, a
     parenthetical reference ending in `.md`. Anything less earns
@@ -791,11 +818,28 @@ def parse_cross_checks(text):
         if CROSS_CHECK_PROSE_MONTH_RE.search(identity):
             issues.append((raw, 'prose_date'))
             continue
+        if CROSS_CHECK_VIA_RE.search(identity):
+            # "<source> via <checker>" with a yearless source: the whole
+            # prefix parsed as the identity. Retired order.
+            issues.append((raw, 'legacy_source_first'))
+            continue
 
-        ref_match = CROSS_CHECK_REF_RE.search(body[date_match.end():])
+        tail = body[date_match.end():]
+        ref_match = CROSS_CHECK_REF_RE.search(tail)
         if ref_match is None:
             issues.append((raw, 'missing_reference'))
             continue
+
+        between = tail[:ref_match.start()]
+        if between.strip():
+            if CROSS_CHECK_VIA_RE.search(between):
+                # "<source> <year> via <checker> <date>": the source's
+                # own year was taken as the check date.
+                issues.append((raw, 'legacy_source_first'))
+                continue
+            if not CROSS_CHECK_TAIL_RE.match(between):
+                issues.append((raw, 'malformed_tail'))
+                continue
 
         reference = ref_match.group(1).strip()
         if not reference:
