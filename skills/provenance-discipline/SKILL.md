@@ -1,13 +1,13 @@
 ---
 name: provenance-discipline
-description: Provenance and citation discipline for the Paloma's Orrery project. Use whenever running or discussing provenance_scanner.py, reading PROVENANCE_AUDIT.md, clearing Tier-1 findings, adding or reviewing # Source: citations, editing provenance_exceptions.json, embedding constants or numeric/factual claims in orrery display strings or data modules, or preparing a GitHub push (Tier-1 = 0 is the push gate). Also use when composing on-layer or user-facing factual text for any orrery visualization. Do not use for projects other than Paloma's Orrery.
-fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0)
+description: Provenance and citation discipline for the Paloma's Orrery project. Use whenever running or discussing provenance_scanner.py, reading PROVENANCE_AUDIT.md, clearing Tier-1 findings, adding or reviewing # Source: citations, editing provenance_exceptions.json, embedding constants or numeric/factual claims in orrery display strings or data modules, or preparing a GitHub push (the gate is Tier-1 = 0 on the active build path). Also use when composing on-layer or user-facing factual text for any orrery visualization. Do not use for projects other than Paloma's Orrery.
+fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on the active build path)
 ---
 
 # Provenance Discipline
 
-Skill version: 1.8 | Cut from palomas_orrery @ 8e4b5ca (v1.8), earlier
-@ 3398970 (v1.7) | August 11, 2026
+Skill version: 1.9 | Cut from palomas_orrery @ cdcdb4b (v1.9), earlier
+@ 8e4b5ca (v1.8), @ 3398970 (v1.7) | August 11, 2026
 Source: project_instructions_v3_29.md Part 3 (Provenance Audit, Fetched vs
 Recalled) + food insecurity build handoff + scanner source at HEAD. v1.1
 adds the report domain-classification mechanics, the Review-Repair
@@ -40,6 +40,11 @@ is cite-to-clear in the annotation's own format) and the field note that
 an evidence artifact is filed as received -- both earned August 10, 2026,
 when a recovered worksheet proved an annotation true that the session had
 already talked itself into calling fabricated.
+v1.9 narrows The Goal State to the ACTIVE BUILD PATH gate Tony
+ratified 2026-08-05 (L-184), keeping global Tier-1 = 0 as the
+stated destination rather than the firing rule. The skill had
+carried the retired global gate for a week; caught by Fable's
+document-layer claim audit, finding F1, August 11, 2026.
 
 The resident protocol carries the two governing principles as CRITICAL
 gates: Fetched-vs-Recalled (a citation is a provenance claim that must be
@@ -50,7 +55,30 @@ gates win -- flag it.
 
 ## The Goal State
 
-Tier-1 = 0 before any GitHub push. A clean audit can rest on honest
+**The push gate is Tier-1 = 0 ON THE ACTIVE BUILD PATH** -- the
+files the project is currently building. As of August 2026 that is
+the interactive gallery build path (Tony ratified 2026-08-05;
+recorded in L-184). The scope MOVES with the work: when
+Earth-science visualization work resumes, those files become the
+gated path in turn.
+
+**Global Tier-1 = 0 is the destination, not the current gate.** It
+was suspended, not retired. At 206 Tier-1 findings a global gate
+blocks every push forever, and a rule nobody can obey stops being
+read as a rule at all. The global number is approached by clearing
+paths as they go active -- which is why the gate is written
+active-path rather than pinned to one named path.
+
+Do not enforce the global form on a push outside the active path,
+and do not read a bare "Tier-1 = 0" anywhere in this project as
+the global form unless it says so. (Tony's ruling 2026-08-11, on
+Fable audit finding F1: this skill and the protocol's manifest row
+carried the global gate for a week after the ratification narrowed
+it, while Tony pushed five times in one evening against it. A gate
+that is routinely and correctly ignored is worse than a wrong
+number -- it teaches the reader to ignore gates.)
+
+A clean audit can rest on honest
 removals: "Tier-1 = 0" does not imply "every claim sourced" -- it can mean
 unsourceable claims were correctly stripped pending real sourcing. Record
 which. The scanner must stay maintainable with accepted false positives,
