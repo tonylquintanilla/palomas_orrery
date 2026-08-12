@@ -10,13 +10,19 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 120  
-**Total Lines of Code (non-blank):** 96,537  
-**Total Public Functions/Classes:** 1,014
+**Total Python Files:** 121  
+**Total Lines of Code (non-blank):** 97,193  
+**Total Public Functions/Classes:** 1,023
 
 ## Classification Coverage
 
-All 120 modules declare a valid `Role:` and `Domain:` tag in their docstring.
+**Undetermined role (1).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+
+- `patch_L192_attachment.py`
+
+**Undetermined domain (1).** No valid `Domain:` tag.
+
+- `patch_L192_attachment.py`
 
 
 ---
@@ -199,15 +205,23 @@ All 120 modules declare a valid `Role:` and `Domain:` tag in their docstring.
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
 | `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (951 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
-| `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (2,729 lines) |
+| `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (2,941 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (330 lines) |
 | `test_citation_inheritance.py` | Regression tests for citation-block inheritance. (512 lines) |
 | `test_constants_provenance.py` | Regression tests for verified numeric constants. (284 lines) |
-| `test_cross_checked.py` | Regression tests for cross-check annotations. (429 lines) |
+| `test_cross_checked.py` | Regression tests for cross-check annotations. (431 lines) |
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (206 lines) |
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (469 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (113 lines) |
 | `verify_orbit_cache.py` | Safely verify and repair orbit_paths.json (172 lines) |
+
+---
+
+## Undetermined -- Needs a Role: Tag
+
+| Module | Description |
+|--------|-------------|
+| `patch_L192_attachment.py` | Patch: narrow cross-check credit to attached annotations (L-192). (442 lines) |
 
 ---
 
