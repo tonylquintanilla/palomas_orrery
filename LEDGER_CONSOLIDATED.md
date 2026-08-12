@@ -221,7 +221,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*115 live items; 104 need attention (`!`); 114 RICE-scored; 71 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*115 live items; 104 need attention (`!`); 114 RICE-scored; 72 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -233,12 +233,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-06 |
-| ! | L-188 | Maintenance runner -- one command, the whole suite | OPEN | 3.1 | 2026-08-07 |
 | ! | L-176 | Shell hover text: add illustrated dimensions (radius_fraction → km) | OPEN | 2.8 | 2026-08-04 |
 | ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-08-07 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
+| ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-12 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
 | ! | L-187 | info_dictionary numeric-overlap enumeration | OPEN | 1.8 | 2026-08-07 |
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
@@ -429,6 +429,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-115 | Skills v1.1 batch: accuracy fixes + two seed blocks (Fable Mode 7) | DONE | 3.6 | 2026-07-12 |
 |  | L-097 | skills_index.py -- Skill Manifest auto-generation (process/tooling) | DONE | 3.2 | 2026-07-04 |
 |  | L-127 | module_atlas.py generates MODULE_INDEX.md too -- single source, eliminate divergence | DONE | 3.2 | 2026-07-28 |
+|  | L-188 | Maintenance runner -- one command, the whole suite | DONE | 3.1 | 2026-08-12 |
 |  | L-069 | Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan) | DONE | 2.8 | 2026-06-24 |
 |  | L-109 | Fable 5 adversarial review remediation (builder Pass 1+2) | DONE | 2.8 | 2026-07-10 |
 |  | L-112 | Gallery builder Pass 5: two-reviewer Pass-2 remediation | DONE | 2.8 | 2026-07-10 |
@@ -1381,10 +1382,52 @@ should not wait on a structural build.
   reconstructed. 134 annotation lines migrated across 8 modules by
   `patch_L186_annotation_checker_first.py`; grammar guard, tests, skill
   v2.0 and this entry by `patch_L186_grammar_guard.py`.
-- **The store-binding test is the durable part.** `test_cross_checked.py`
-  now reads `skills/provenance-discipline/SKILL.md` off disk and asserts
-  every annotation example in it parses to the fields the skill says it
-  carries. Cause (c) cannot recur silently.
+- **The store-binding test is the durable part.** It now lives in
+  `skills_index.py` rather than the test suite: every annotation example
+  in every SKILL.md must parse as `provenance_scanner.py` reads it.
+  Placed there deliberately, because that tool runs at the moment a skill
+  changes, which is the moment the drift gets introduced. Tony's fact,
+  2026-08-12: "I don't independently run tests like that unless you ask
+  during the build" -- so a check living in the suite is a check that
+  does not run. Cause (c) cannot recur silently.
+- **SECOND HALF, 2026-08-12: the 55 pinned literals are retired.**
+  `test_constants_provenance.py` held its own copy of 55 measured values,
+  which is the same two-store defect one layer over: every correction
+  needed a synchronized hand-edit in two files, enforced by nothing. The
+  August 2 batch corrected six constants and updated no pins, and the
+  tests then failed correctly for ten days describing sourced values as
+  "drifted." The pins also carried unaudited citations -- the scanner
+  extracts claims only from narrative-role files and that one is
+  `Role: devtool` -- and at least one was FALSE:
+  `test_chromosphere_radii` attributed ~1.5 R_sun to Carroll & Ostlie
+  Ch. 11, the same chapter the August check read as ~2000 km (~1.003
+  R_sun). Wrong-but-cited in a file nothing audits.
+- **18 tests remain and they are a different kind:** derivations,
+  orderings, cross-consistency, completeness. None holds a copy of a
+  measured value, so none goes stale when a value is corrected.
+- **Replaced by `constants_change_report.py`**, which stores no numbers.
+  Tony's framing: "What I don't think we should do is create a second
+  dictionary. Can we create a diff that would alert us to drift or
+  intentional revision?" It asks git what changed in `constants_new.py`
+  since the last commit and reads both values out of the diff. A
+  deliberate correction moves the number AND its comment block;
+  corruption moves the number alone. It also covers constants that do
+  not exist yet -- a value added next month is reported the first time it
+  moves, with nobody writing a test. Wired into the runner as the first
+  checker.
+- **Both of its blind spots announce** (Tony: "such a gap should announce
+  and we would track it down"). Two values changed in one block with one
+  comment edit reports AMBIGUOUS and credits neither; a changed line
+  carrying a digit that matches no shape it reads is listed as NOT
+  CHECKED. Exit 0 means everything was read and everything documented.
+- **The worksheet evidence chain moved to `documentation/worksheets/`**
+  (34 files: prompts sent, worksheets returned, cited or not). Tony's
+  reasoning: these stopped being archive the moment a tool started
+  reading them. `data/` was considered and set aside -- it means what the
+  application produces and consumes. The 134 annotations name bare
+  filenames, never paths, so nothing in any source module changed. Nine
+  worksheets are cited by no annotation; those are NOT orphans, they
+  cover files the provenance sweep has not reached yet.
 - **Six `non_markdown_reference`**, splitting two ways. Three in
   `constants_new.py` (124, 152, 293) say "(Gemini worksheet)" with no
   filename at all -- genuinely incomplete, supply the real worksheet
@@ -1432,50 +1475,46 @@ ruling.
 **Ref:** FABLE_REVIEW_feature_constant_unification.md, Open Question 2(d)
 and findings summary #5.
 
-#### [L-188] Maintenance runner -- one command, the whole suite
-<!-- L:188 status:OPEN upd:2026-08-07 section:A flag: rice:3/3/70/2 -->
-- **Tony's idea, 2026-08-07:** "a common batch file could run a suite
-  of files that should run after every update, including module
-  atlas." Raised while looking at a test file that had been failing
-  for five days with nobody watching.
-- **The problem is not discoverability.** `palomas_orrery_dashboard.py`
-  already lists eight maintenance tools under Developer Tools, each
-  with a description saying when to run it. They still get skipped:
-  the skill manifest advertised wrong versions for about three weeks,
-  and `test_constants_provenance.py` sat false for five days. Eight
-  separate judgment calls after every edit is eight chances to skip
-  one.
-- **Therefore the design constraint: it must REPLACE the individual
-  entries, not join them.** A ninth menu item reproduces the exact
-  failure. One action instead of five, not a sixth thing to remember.
-- Two kinds of tool, and the split decides the shape. GENERATORS
-  rewrite a file and are safe to run every time (`ledger_index.py`,
-  `skills_index.py`, `module_atlas.py`, `data_inventory.py`); running
-  them when nothing changed is a no-op. CHECKERS report a problem and
-  inform the push call (`provenance_scanner.py`, and whatever L-155
-  absorbs from the constants pins); these run last so their verdict is
-  the last thing on screen. `dep_trace.py` stays OUT -- it takes a
-  module name and answers a question BEFORE an edit, a different job.
-- Useful precedent: `ledger_index.py` already has a `--check` mode
-  that reports without rewriting and exits 1 on problems. That is the
-  gate shape; the other generators would need the same mode added.
-- Correction worth carrying: the scanner imports `module_atlas`'s
-  FUNCTIONS directly rather than reading the generated
-  `MODULE_ATLAS.md`, so it does NOT depend on the atlas being
-  regenerated first. Ordering is for readability, not correctness --
-  do not build a dependency that is not there.
-**Gap:** **(decide)** does this ship as a dashboard entry that
-replaces the eight, or as a script run before every push? Then build.
-**Note (2026-08-11):** L-189 shipped its data half and left the
-  staleness check for this item to call. `provenance_history.py`
-  exports `is_overdue(history, now)` and `overdue_lines(history)`;
-  both are unused at `dea0bc0` and waiting on a caller here. The
-  declared cadence is 1 day, compared by calendar date. This makes
-  L-188 the trigger and L-189 the data, which is the reason the
-  check does not live inside the scanner: a scanner that is running
-  cannot report that it did not run.
-**Ref:** L-160 (the unrun test file that prompted it); L-184
-(build-path push gate, same family); L-189.
+#### [L-192] Worksheet checker -- verify a value against its own evidence
+<!-- L:192 status:OPEN upd:2026-08-12 section:A flag: rice:3/3/70/3 -->
+- **What it does:** for a constant carrying `# Cross-checked:` lines,
+  open the `.md` each line names in `documentation/worksheets/` and
+  confirm the worksheet exists and states the value. The skill already
+  requires this of a human -- "before citing any worksheet, confirm it
+  exists on disk and contains the finding" -- with no tool behind it.
+- **Why it is a separate handle from `constants_change_report.py`.** The
+  change reporter compares the working tree against the last commit, so
+  it is a pre-commit reader: a value corrupted and committed three weeks
+  ago is history, not a pending change, and there is nothing in the diff
+  for it to notice. This one reads a value against the evidence its own
+  annotation names, which does not depend on WHEN the value moved. It is
+  the only planned check that reaches committed history.
+- **Not routine, and not arbitrary either** (Tony, 2026-08-12). The cost
+  is reading up to 34 markdown files, so it does not belong in
+  `maintenance_run.py`. Four trigger conditions, each an observable
+  state rather than a judgement call, to be written into
+  `provenance-discipline`:
+  1. `constants_change_report.py` flags a value -- moved alone,
+     ambiguous, or unparsed. SCOPED to those names, so the expensive
+     pass runs over two or three constants rather than all of them. The
+     cheap check names the expensive one and bounds it.
+  2. A cross-check batch lands. New `# Cross-checked:` lines were just
+     written; verify each names a worksheet that exists and states the
+     value. This replaces the amendment once planned for step 5 of the
+     Batch Worksheet Workflow (update the pins), which is moot now the
+     pins are retired.
+  3. A worksheet is added, renamed, or removed in
+     `documentation/worksheets/`. Annotations pointing at it may now
+     dangle. Mechanically detectable from the same git diff.
+  4. Before a gallery build -- the moment a value stops being local and
+     becomes published.
+- **An uncited worksheet is PENDING WORK, not a defect** (Tony,
+  2026-08-12): the provenance sweep is incomplete, and the nine
+  currently uncited worksheets cover files not yet annotated. The
+  checker must not report them as orphans.
+- **Ref:** L-186 (the annotation grammar and the pin retirement it
+  replaces); L-188 (the runner it deliberately stays out of); L-156
+  Phase 2 (the cross-check batches that produced the worksheets).
 
 #### [L-190] Scanner reach: anything rendered must be reachable
 <!-- L:190 status:OPEN upd:2026-08-07 section:A flag: rice:4/4/80/3 -->
@@ -3739,6 +3778,89 @@ machine at `dea0bc0`: 882 findings, 206 Tier-1, dev_tools 39.
 **Ref:** `provenance_history.py`; `patch_L189_run_history.py`;
 `documentation/HANDOFF_20260811_L189_run_history.md`; L-188 (the
 staleness caller); L-190; L-184.
+
+#### [L-188] Maintenance runner -- one command, the whole suite
+<!-- L:188 status:DONE upd:2026-08-12 section:C flag: rice:3/3/70/2 -->
+- **CLOSED 2026-08-12.** `maintenance_run.py` shipped at `cfff5b5`, and
+  the dashboard wiring with it. Four generators, then eight checkers,
+  then one summary; about 30 seconds on Tony's machine. It reports and
+  continues rather than stopping at the first failure (Tony's ruling:
+  he pastes the output back, so the whole picture in one pass is worth
+  more than an early exit), and it REGENERATES by default rather than
+  offering a check-only mode -- "a regenerate step may be missed."
+  Generated files are fingerprinted before and after, so the summary
+  names the ones that actually moved.
+- **The staleness check now has its caller.** `is_overdue()` and
+  `overdue_lines()` are read FIRST, before anything else runs. That
+  ordering is load-bearing: the runner runs the scanner, so asking
+  afterwards whether the scanner is overdue would always read fresh and
+  the check could never fire.
+- **The (decide) dissolved rather than resolving.** It asked: dashboard
+  entry, or script run before every push? Both. The script is the
+  artifact; the dashboard entry launches it.
+- **CORRECTION to the constraint below.** This item says the runner
+  "must REPLACE the individual entries, not join them." Tony ruled
+  2026-08-12 to INDENT them beneath it instead. That satisfies what the
+  constraint was protecting -- the fear was a ninth PEER entry, one more
+  equal choice among nine, and an indented child is not a peer, so the
+  one-action default survives. His reason for keeping them: staying
+  visible is how the automation's contents remain known instead of
+  disappearing behind one button. Developer Tools now reads MAINTENANCE
+  RUN with eleven tools indented under it, in execution order, scanner
+  last so its verdict reads last. The five tools the runner does not
+  cover stay unindented as peers.
+- **Found by running it, first pass:** the test suite had been red since
+  roughly August 3 (`test_cross_checked.py` asserting an unannotated
+  corpus that stopped being unannotated in early August) and
+  `test_constants_provenance.py` was failing 6 of 73. Neither was
+  detectable before, because neither file was in any routine. That is
+  the item's own premise confirming itself on first use.
+- **Known gap, not urgent:** the runner prints a checker's full output
+  only on failure, so the scanner's run-to-run delta -- the lines that
+  say WHY a Tier-1 count moved -- never reaches the screen on a clean
+  run. That delta is worth seeing every time.
+- **Tony's idea, 2026-08-07:** "a common batch file could run a suite
+  of files that should run after every update, including module
+  atlas." Raised while looking at a test file that had been failing
+  for five days with nobody watching.
+- **The problem is not discoverability.** `palomas_orrery_dashboard.py`
+  already lists eight maintenance tools under Developer Tools, each
+  with a description saying when to run it. They still get skipped:
+  the skill manifest advertised wrong versions for about three weeks,
+  and `test_constants_provenance.py` sat false for five days. Eight
+  separate judgment calls after every edit is eight chances to skip
+  one.
+- **Therefore the design constraint: it must REPLACE the individual
+  entries, not join them.** A ninth menu item reproduces the exact
+  failure. One action instead of five, not a sixth thing to remember.
+- Two kinds of tool, and the split decides the shape. GENERATORS
+  rewrite a file and are safe to run every time (`ledger_index.py`,
+  `skills_index.py`, `module_atlas.py`, `data_inventory.py`); running
+  them when nothing changed is a no-op. CHECKERS report a problem and
+  inform the push call (`provenance_scanner.py`, and whatever L-155
+  absorbs from the constants pins); these run last so their verdict is
+  the last thing on screen. `dep_trace.py` stays OUT -- it takes a
+  module name and answers a question BEFORE an edit, a different job.
+- Useful precedent: `ledger_index.py` already has a `--check` mode
+  that reports without rewriting and exits 1 on problems. That is the
+  gate shape; the other generators would need the same mode added.
+- Correction worth carrying: the scanner imports `module_atlas`'s
+  FUNCTIONS directly rather than reading the generated
+  `MODULE_ATLAS.md`, so it does NOT depend on the atlas being
+  regenerated first. Ordering is for readability, not correctness --
+  do not build a dependency that is not there.
+**Gap:** **(decide)** does this ship as a dashboard entry that
+replaces the eight, or as a script run before every push? Then build.
+**Note (2026-08-11):** L-189 shipped its data half and left the
+  staleness check for this item to call. `provenance_history.py`
+  exports `is_overdue(history, now)` and `overdue_lines(history)`;
+  both are unused at `dea0bc0` and waiting on a caller here. The
+  declared cadence is 1 day, compared by calendar date. This makes
+  L-188 the trigger and L-189 the data, which is the reason the
+  check does not live inside the scanner: a scanner that is running
+  cannot report that it did not run.
+**Ref:** L-160 (the unrun test file that prompted it); L-184
+(build-path push gate, same family); L-189.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

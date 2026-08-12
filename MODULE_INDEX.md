@@ -10,19 +10,13 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 121  
-**Total Lines of Code (non-blank):** 96,768  
-**Total Public Functions/Classes:** 1,016
+**Total Python Files:** 120  
+**Total Lines of Code (non-blank):** 96,537  
+**Total Public Functions/Classes:** 1,014
 
 ## Classification Coverage
 
-**Undetermined role (1).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
-
-- `patch_ledger_20260812.py`
-
-**Undetermined domain (1).** No valid `Domain:` tag.
-
-- `patch_ledger_20260812.py`
+All 120 modules declare a valid `Role:` and `Domain:` tag in their docstring.
 
 
 ---
@@ -214,14 +208,6 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (469 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (113 lines) |
 | `verify_orbit_cache.py` | Safely verify and repair orbit_paths.json (172 lines) |
-
----
-
-## Undetermined -- Needs a Role: Tag
-
-| Module | Description |
-|--------|-------------|
-| `patch_ledger_20260812.py` | Ledger capture for the 2026-08-12 session. (231 lines) |
 
 ---
 

@@ -1,5 +1,5 @@
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.38 | August 11, 2026
+Tony Quintanilla, PE | Claude | v3.39 | August 12, 2026
 
 PREAMBLE: WHY THIS PROTOCOL EXISTS
 
@@ -523,6 +523,41 @@ When the render disagrees with the code reading, the render wins. This is
 the same lesson as Check All Parallel Pipelines, one step upstream:
 confirm which path is LIVE before editing anything.
 
+A Check That Cannot Fail Is Not Passing [CRITICAL]
+Companion to the gate above, aimed one layer further out. That one asks
+whether the code you edited is the code that runs. This one asks whether
+the CHECK you are trusting can produce a failure at all.
+
+A green result answers two questions at once and does not say which:
+did this pass, or did it never run? Those look identical on screen. A
+test file nobody executes, a parser that silently skips what it cannot
+read, a diff against a path the tool does not track -- each reports
+exactly what a real pass reports.
+
+So the test is not "did it pass." It is: WHAT WOULD MAKE THIS FAIL, and
+does the passing output prove that path was live?
+
+Three moves, in order of how often they are the answer:
+- Make success carry evidence. Print what was compared, against what,
+  and how many things were examined. "No changes since <sha> <subject>"
+  cannot print unless the revision resolved; "no changes" alone can
+  print for any reason at all.
+- Make the blind spot announce. Anything the check could not read is
+  reported and fails the run -- never dropped. Silence about something
+  unexamined is the failure mode, not a tidy output.
+- Put the check where it runs. A check in a store nobody opens is a
+  check that cannot fail, no matter how correct it is. Prefer the tool
+  already in the routine over the file that has to be remembered.
+
+The confirming question, and it is Tony's: what tells us it is working?
+If the only answer is that it did not complain, that is not an answer.
+
+(Origin, August 12, 2026: three instances in one session, in three
+unrelated layers -- a skill whose own example the parser could not read,
+a 55-pin test file nothing executed for ten days, and a git diff that
+exits 0 with empty output for an untracked path. Each was found by a
+different route and none was found by reading a passing result.)
+
 Check All Parallel Pipelines [CRITICAL]
 Position data flows through 5 parallel pipelines in palomas_orrery.py.
 Fixing one does not propagate. Map ALL consumers before patching.
@@ -904,5 +939,20 @@ the handoff and is discharged by the next session's load. Skill-layer
 companion: provenance-discipline v1.9 narrows the push gate to the
 ACTIVE BUILD PATH (L-184), keeping global Tier-1 = 0 as the destination
 rather than the firing rule (finding F1).
+
+v3.39 (August 12, 2026): One change. "A Check That Cannot Fail Is Not
+Passing" added to Part 3 as a CRITICAL gate, immediately after Verify
+Execution, Not Appearance, which it extends: that gate asks whether the
+edited code is the code that runs, this one asks whether the check being
+trusted can produce a failure at all. Origin was three instances in a
+single session, each in a different layer and each indistinguishable
+from a pass -- the provenance-discipline skill teaching an annotation
+format its own parser could not read, test_constants_provenance.py
+pinning 55 values in a file no routine executed, and
+constants_change_report.py reporting clean both for an edit shape it
+could not parse and for a path git does not track. The gate's three
+moves are: make success carry evidence, make the blind spot announce,
+and put the check where it actually runs. Tony's confirming question --
+what tells us it is working -- is the one that found the third instance.
 
 Functional for Claude, readable for human, signal preserved.
