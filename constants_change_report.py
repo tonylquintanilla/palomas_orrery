@@ -42,6 +42,14 @@ It also means this covers constants that do not exist yet. A value added
 next month is reported the first time it moves, with nobody writing
 anything.
 
+HOW YOU KNOW GIT ACTUALLY RAN
+-----------------------------
+Every run prints the commit it compared against, by short SHA and
+subject. That line cannot appear unless git resolved the revision, and
+the run aborts before it if git does not track constants_new.py at this
+path. An empty diff on its own proves nothing: git exits 0 with no output
+for an untracked or missing path, which reads exactly like "no changes."
+
 WHAT IT CANNOT SEE
 ------------------
 Anything already committed. This compares the working tree against the
@@ -208,6 +216,31 @@ def main():
     print('=' * 70)
     print('CONSTANTS CHANGE REPORT -- %s vs %s' % (TARGET, base))
     print('=' * 70)
+
+    # Prove git is answering about THIS file before trusting an empty
+    # diff. `git diff <rev> -- <path>` exits 0 with no output when the
+    # path is untracked or absent, which is indistinguishable from "no
+    # changes" -- so a clean result would print forever after a rename
+    # or a re-initialised repo. Both checks below are cheap and both
+    # print, so a pass carries its own evidence rather than being
+    # inferred from silence.
+    ok, tracked = git(['ls-files', '--error-unmatch', TARGET], here)
+    if not ok:
+        print('  git does not track %s at this path.' % TARGET)
+        print('  %s' % tracked.strip())
+        print()
+        print('  Nothing was checked. This is not a pass.')
+        return 2
+
+    ok, resolved = git(['log', '-1', '--format=%h %s', base], here)
+    if not ok:
+        print('  Could not resolve %s:' % base)
+        print('  %s' % resolved.strip())
+        print()
+        print('  Nothing was checked. This is not a pass.')
+        return 2
+    print('  comparing against %s' % resolved.strip())
+    print()
 
     ok, out = git(['diff', '--unified=6', base, '--', TARGET], here)
     if not ok:

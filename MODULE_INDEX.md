@@ -10,13 +10,19 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 120  
-**Total Lines of Code (non-blank):** 96,509  
-**Total Public Functions/Classes:** 1,014
+**Total Python Files:** 121  
+**Total Lines of Code (non-blank):** 96,768  
+**Total Public Functions/Classes:** 1,016
 
 ## Classification Coverage
 
-All 120 modules declare a valid `Role:` and `Domain:` tag in their docstring.
+**Undetermined role (1).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+
+- `patch_ledger_20260812.py`
+
+**Undetermined domain (1).** No valid `Domain:` tag.
+
+- `patch_ledger_20260812.py`
 
 
 ---
@@ -182,7 +188,7 @@ All 120 modules declare a valid `Role:` and `Domain:` tag in their docstring.
 | Module | Description |
 |--------|-------------|
 | `add_docstrings.py` | Two related tools for module-level docstrings. (1,210 lines) |
-| `constants_change_report.py` | - what moved in constants_new.py, and why. (233 lines) |
+| `constants_change_report.py` | - what moved in constants_new.py, and why. (263 lines) |
 | `convert_hot_ph_to_json.py` | Convert HOT ocean pH data to JSON format Manual converter for ocean acidification visualization (199 lines) |
 | `create_cache_backups.py` | One-shot script to create timestamped backups of star data caches. (10 lines) |
 | `create_ephemeris_database.py` | Create satellite_ephemerides.json from multiple sources (245 lines) |
@@ -197,7 +203,7 @@ All 120 modules declare a valid `Role:` and `Domain:` tag in their docstring.
 | `maintenance_run.py` | - L-188. One command, the whole maintenance suite. (234 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (953 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (951 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (2,729 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (330 lines) |
@@ -208,6 +214,14 @@ All 120 modules declare a valid `Role:` and `Domain:` tag in their docstring.
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (469 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (113 lines) |
 | `verify_orbit_cache.py` | Safely verify and repair orbit_paths.json (172 lines) |
+
+---
+
+## Undetermined -- Needs a Role: Tag
+
+| Module | Description |
+|--------|-------------|
+| `patch_ledger_20260812.py` | Ledger capture for the 2026-08-12 session. (231 lines) |
 
 ---
 
