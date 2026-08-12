@@ -10,27 +10,13 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 123  
-**Total Lines of Code (non-blank):** 97,632  
-**Total Public Functions/Classes:** 1,073
+**Total Python Files:** 120  
+**Total Lines of Code (non-blank):** 96,509  
+**Total Public Functions/Classes:** 1,014
 
 ## Classification Coverage
 
-**Patch scripts awaiting archive (1).** A `Role: patch` module is a one-shot script that has already run. Its base fingerprint no longer matches, so it cannot run again. Move each into `documentation/`. While one sits in the scanned tree it inflates the module count here and the file count in the provenance audit.
-
-- `patch_fable_corrections.py`
-
-**Undetermined role (3).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
-
-- `patch_L186_annotation_checker_first.py`
-- `patch_L186_grammar_guard.py`
-- `patch_L188_dashboard_runner.py`
-
-**Undetermined domain (3).** No valid `Domain:` tag.
-
-- `patch_L186_annotation_checker_first.py`
-- `patch_L186_grammar_guard.py`
-- `patch_L188_dashboard_runner.py`
+All 120 modules declare a valid `Role:` and `Domain:` tag in their docstring.
 
 
 ---
@@ -196,6 +182,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `add_docstrings.py` | Two related tools for module-level docstrings. (1,210 lines) |
+| `constants_change_report.py` | - what moved in constants_new.py, and why. (233 lines) |
 | `convert_hot_ph_to_json.py` | Convert HOT ocean pH data to JSON format Manual converter for ocean acidification visualization (199 lines) |
 | `create_cache_backups.py` | One-shot script to create timestamped backups of star data caches. (10 lines) |
 | `create_ephemeris_database.py` | Create satellite_ephemerides.json from multiple sources (245 lines) |
@@ -207,38 +194,20 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `export_orbit_cache.py` | Phase 1b desktop devtool: read the local orbit caches and write web-servable orbit/position files for the interactive gallery. (617 lines) |
 | `food_insecurity_generator.py` | IPC acute food-insecurity KMZ layer (Sudan, current period). (702 lines) |
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (710 lines) |
-| `maintenance_run.py` | - L-188. One command, the whole maintenance suite. (229 lines) |
+| `maintenance_run.py` | - L-188. One command, the whole maintenance suite. (234 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (951 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (953 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (2,729 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (330 lines) |
 | `test_citation_inheritance.py` | Regression tests for citation-block inheritance. (512 lines) |
-| `test_constants_provenance.py` | Regression tests for verified numeric constants. (510 lines) |
+| `test_constants_provenance.py` | Regression tests for verified numeric constants. (284 lines) |
 | `test_cross_checked.py` | Regression tests for cross-check annotations. (429 lines) |
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (206 lines) |
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (469 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (113 lines) |
 | `verify_orbit_cache.py` | Safely verify and repair orbit_paths.json (172 lines) |
-
----
-
-## Patch Scripts (transient -- awaiting archive)
-
-| Module | Description |
-|--------|-------------|
-| `patch_fable_corrections.py` | - apply the corrections from Fable's document-layer claim audit (documentation/FABLE_FINDINGS_document_layer_ claims.md), plus the Stale Skill gate amendment earned tonight. (402 lines) |
-
----
-
-## Undetermined -- Needs a Role: Tag
-
-| Module | Description |
-|--------|-------------|
-| `patch_L186_annotation_checker_first.py` | L-186 -- migrate every Cross-checked annotation to checker-first form. (149 lines) |
-| `patch_L186_grammar_guard.py` | L-186 -- enforce the checker-first annotation grammar in four stores. (473 lines) |
-| `patch_L188_dashboard_runner.py` | L-188 -- wire the maintenance runner into the dashboard. (113 lines) |
 
 ---
 

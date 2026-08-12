@@ -849,7 +849,7 @@ Findings by File Type report sections ~L1467-1546); module_atlas.py
 (classify_role, ROLE_MAP); L-064 (closed predecessor); PROVENANCE_AUDIT.md
 (July 16, 2026 run: 120 files, 675 findings, Tier-1 = 104); skills/
 provenance-discipline/SKILL.md v1.1; documentation/provenance_audit_handoff_v4.md
-(Review-Repair Protocol origin); documentation/worksheet_earth_visualization.md
+(Review-Repair Protocol origin); documentation/worksheets/worksheet_earth_visualization.md
 (worksheet template precedent for the (a) triage).
 
 #### [L-105] merge_orbit_data source-side frame guard (desktop cache hardening)

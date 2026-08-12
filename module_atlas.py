@@ -214,6 +214,7 @@ ROLE_MAP = {
 
     # devtool
     'add_docstrings':                         'devtool',
+    'constants_change_report':                'devtool',
     'convert_hot_ph_to_json':                 'devtool',
     'create_cache_backups':                   'devtool',
     'create_ephemeris_database':              'devtool',
@@ -239,9 +240,6 @@ ROLE_MAP = {
     'test_provenance_1d':                     'devtool',
     'test_reset_completeness':                'devtool',
     'verify_orbit_cache':                     'devtool',
-
-    # patch
-    'patch_fable_corrections':                'patch',
 }
 # ROLE-MAP:END
 

@@ -151,7 +151,7 @@ ever runs unattended in any other form.
 WHAT SHIPPED, AUGUST 10
 
 L-186's mechanical half. The August 2 Gemini worksheet was recovered by
-Tony and filed at documentation/worksheet_gemini_constants_remaining.md.
+Tony and filed at documentation/worksheets/worksheet_gemini_constants_remaining.md.
 Eight annotations in constants_new.py that named no file now point at
 it, and three appended values were stripped -- two in eris, one in
 venus. Cross-check annotation issues fell from 12 to 6. All six

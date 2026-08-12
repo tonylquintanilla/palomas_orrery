@@ -1,9 +1,21 @@
 """
 test_constants_provenance.py - Regression tests for verified numeric constants.
 
-Pins every verified constant in constants_new.py against its cited value.
-Fails if any value drifts. Forces deliberate updates with updated citation
-comments rather than silent modification.
+Checks the RELATIONS among constants in constants_new.py -- derivations,
+orderings, cross-consistency, completeness. It holds no copy of any
+measured value, so a legitimate correction never makes it stale.
+
+Drift in the values themselves is NOT checked here. That is
+constants_change_report.py, which reads the git diff rather than storing
+its own copy of the numbers.
+
+Retired 2026-08-12 (Tony's ruling): 55 tests that pinned a constant to a
+hand-typed literal. They were a second dictionary -- every correction
+needed a synchronized edit in two files, enforced by nothing. An August 2
+cross-check batch corrected six values and updated no pins; the tests
+then failed correctly for ten days while describing sourced values as
+"drifted." The pins also carried their own citations, which nothing has
+ever audited, and at least one of those citations was false.
 
 Run from the project directory:
     python test_constants_provenance.py
@@ -81,46 +93,6 @@ from constants_new import (
 # Section 1: Fundamental constants (IAU/NIST exact definitions)
 # ============================================================
 
-def test_km_per_au():
-    """IAU 2012 Resolution B2: 1 AU = 149,597,870,700 m exactly (149597870.7 km)."""
-    assert KM_PER_AU == 149597870.7, f"KM_PER_AU drifted to {KM_PER_AU}"
-
-
-def test_sun_radius_km():
-    """IAU 2015 Resolution B3 nominal solar radius (Prsa et al. 2016, AJ 152:41)."""
-    assert SUN_RADIUS_KM == 695700.0, f"SUN_RADIUS_KM drifted to {SUN_RADIUS_KM}"
-
-
-def test_earth_equatorial_radius_km():
-    """IAU 2015 Resolution B3 nominal terrestrial equatorial radius (WGS-84)."""
-    assert EARTH_EQUATORIAL_RADIUS_KM == 6378.137, \
-        f"EARTH_EQUATORIAL_RADIUS_KM drifted to {EARTH_EQUATORIAL_RADIUS_KM}"
-
-
-def test_earth_polar_radius_km():
-    """IAU 2015 Resolution B3 nominal terrestrial polar radius."""
-    assert EARTH_POLAR_RADIUS_KM == 6356.752, \
-        f"EARTH_POLAR_RADIUS_KM drifted to {EARTH_POLAR_RADIUS_KM}"
-
-
-def test_jupiter_equatorial_radius_km():
-    """IAU 2015 Resolution B3 nominal jovian equatorial radius."""
-    assert JUPITER_EQUATORIAL_RADIUS_KM == 71492.0, \
-        f"JUPITER_EQUATORIAL_RADIUS_KM drifted to {JUPITER_EQUATORIAL_RADIUS_KM}"
-
-
-def test_jupiter_polar_radius_km():
-    """IAU 2015 Resolution B3 nominal jovian polar radius."""
-    assert JUPITER_POLAR_RADIUS_KM == 66854.0, \
-        f"JUPITER_POLAR_RADIUS_KM drifted to {JUPITER_POLAR_RADIUS_KM}"
-
-
-def test_speed_of_light_km_s():
-    """NIST/SI exact definition: c = 299,792.458 km/s."""
-    assert SPEED_OF_LIGHT_KM_S == 299792.458, \
-        f"SPEED_OF_LIGHT_KM_S drifted to {SPEED_OF_LIGHT_KM_S}"
-
-
 # ============================================================
 # Section 2: Derived constants (identity checks)
 # ============================================================
@@ -172,36 +144,6 @@ def test_radiative_zone_au_derived_from_solar_radius():
         f"RADIATIVE_ZONE_AU = {RADIATIVE_ZONE_AU}, expected {expected} (derivation broken)"
 
 
-def test_chromosphere_radii():
-    """Chromosphere extends to ~1.5 R_sun (Carroll & Ostlie 2017, Ch. 11)."""
-    assert CHROMOSPHERE_RADII == 1.5, f"CHROMOSPHERE_RADII drifted to {CHROMOSPHERE_RADII}"
-
-
-def test_inner_corona_radii():
-    """Inner (K-)corona extends to 2-3 R_sun; we use 3 (Golub & Pasachoff 2010)."""
-    assert INNER_CORONA_RADII == 3, f"INNER_CORONA_RADII drifted to {INNER_CORONA_RADII}"
-
-
-def test_outer_corona_radii():
-    """F-corona envelope extends to ~50 R_sun (Mann et al. 2004, A&A 414:1127)."""
-    assert OUTER_CORONA_RADII == 50, f"OUTER_CORONA_RADII drifted to {OUTER_CORONA_RADII}"
-
-
-def test_streamer_belt_radii():
-    """Helmet streamers extend 4-6 R_sun; we use 6.0 (DeForest et al. 2018)."""
-    assert STREAMER_BELT_RADII == 6.0, f"STREAMER_BELT_RADII drifted to {STREAMER_BELT_RADII}"
-
-
-def test_roche_limit_radii():
-    """Fluid Roche limit for comet densities: 2.44 * (1408/500)^(1/3) = 3.45 R_sun."""
-    assert ROCHE_LIMIT_RADII == 3.45, f"ROCHE_LIMIT_RADII drifted to {ROCHE_LIMIT_RADII}"
-
-
-def test_alfven_surface_radii():
-    """Parker Solar Probe first crossing, April 28, 2021 (Kasper et al. 2021)."""
-    assert ALFVEN_SURFACE_RADII == 18.8, f"ALFVEN_SURFACE_RADII drifted to {ALFVEN_SURFACE_RADII}"
-
-
 def test_solar_shell_ordering():
     """Solar atmosphere shells must nest outward: chromosphere < corona < streamer < alfven."""
     assert CHROMOSPHERE_RADII < INNER_CORONA_RADII < ROCHE_LIMIT_RADII < STREAMER_BELT_RADII, \
@@ -214,64 +156,6 @@ def test_solar_shell_ordering():
 # Section 4: Heliosphere and Oort cloud (AU)
 # ============================================================
 
-def test_termination_shock_au():
-    """Voyager 1 crossed termination shock at 94 AU, Dec 2004 (Stone et al. 2005)."""
-    assert TERMINATION_SHOCK_AU == 94, f"TERMINATION_SHOCK_AU drifted to {TERMINATION_SHOCK_AU}"
-
-
-def test_heliopause_radii():
-    """~123 AU converted to solar radii: 123 * 149597870.7 / 695700 = 26449."""
-    assert HELIOPAUSE_RADII == 26449, f"HELIOPAUSE_RADII drifted to {HELIOPAUSE_RADII}"
-
-
-def test_heliopause_conversion_sanity():
-    """Verify HELIOPAUSE_RADII conversion math: should round-trip to ~123 AU."""
-    au_equivalent = HELIOPAUSE_RADII * SUN_RADIUS_KM / KM_PER_AU
-    assert 122.9 < au_equivalent < 123.1, \
-        f"HELIOPAUSE_RADII converts to {au_equivalent} AU, expected ~123 AU"
-
-
-def test_inner_limit_oort_cloud_au():
-    """Hills (1981); Oort (1950) -- inner edge estimate."""
-    assert INNER_LIMIT_OORT_CLOUD_AU == 2000, \
-        f"INNER_LIMIT_OORT_CLOUD_AU drifted to {INNER_LIMIT_OORT_CLOUD_AU}"
-
-
-def test_inner_oort_cloud_au():
-    """Hills (1981) -- outer edge of inner (Hills) cloud."""
-    assert INNER_OORT_CLOUD_AU == 20000, f"INNER_OORT_CLOUD_AU drifted to {INNER_OORT_CLOUD_AU}"
-
-
-def test_outer_oort_cloud_au():
-    """Oort (1950); Weissman (1996) -- estimated outer boundary, ~0.5 parsec."""
-    assert OUTER_OORT_CLOUD_AU == 100000, f"OUTER_OORT_CLOUD_AU drifted to {OUTER_OORT_CLOUD_AU}"
-
-
-def test_gravitational_influence_au():
-    """Approximate Hill sphere radius of Sun in Milky Way (~2.4 light-years).
-
-    Two assertions, catching different things. The equality is a tripwire:
-    it fires on ANY change, so a deliberate edit has to be acknowledged
-    here. The range is a guard: it stays quiet for any value the published
-    literature supports and fires only when a value leaves that envelope.
-    A considered move to 152,000 trips the tripwire alone; a typo of
-    15,000 trips both.
-
-    Corrected 2026-08-07 (L-179): this asserted 126000, which the store
-    stopped holding on 2026-08-02. It was false for five days and nothing
-    surfaced it, because this file is not on any run path. Per L-160 it
-    retires once L-155's pinning engine absorbs these checks into
-    provenance_scanner.py -- until then, treat these two assertions as the
-    written spec for what the scanner should absorb.
-    """
-    assert GRAVITATIONAL_INFLUENCE_AU == 150000, \
-        f"GRAVITATIONAL_INFLUENCE_AU drifted to {GRAVITATIONAL_INFLUENCE_AU}"
-    low, high = GRAVITATIONAL_INFLUENCE_RANGE_AU
-    assert low <= GRAVITATIONAL_INFLUENCE_AU <= high, \
-        (f"GRAVITATIONAL_INFLUENCE_AU {GRAVITATIONAL_INFLUENCE_AU} is outside "
-         f"the published range {low}-{high} AU")
-
-
 def test_oort_cloud_ordering():
     """Oort cloud radii must nest outward: inner limit < inner < outer < gravitational influence."""
     assert INNER_LIMIT_OORT_CLOUD_AU < INNER_OORT_CLOUD_AU < OUTER_OORT_CLOUD_AU < GRAVITATIONAL_INFLUENCE_AU, \
@@ -281,15 +165,6 @@ def test_oort_cloud_ordering():
 # ============================================================
 # Section 5: Spacecraft reference
 # ============================================================
-
-def test_parker_closest_radii():
-    """Parker Solar Probe perihelion 22, Dec 24, 2024.
-    Corrected Apr 15, 2026 per Gemini review: 8.86 (surface altitude)
-    -> 9.86 (from Sun center, consistent with other shell radii)."""
-    assert PARKER_CLOSEST_RADII == 9.86, \
-        f"PARKER_CLOSEST_RADII drifted to {PARKER_CLOSEST_RADII} " \
-        f"(if this is 8.86, the 2026-04-15 Gemini correction was reverted)"
-
 
 # ============================================================
 # Section 6: CENTER_BODY_RADII dict -- the Hybrid Radius Convention
@@ -312,18 +187,6 @@ def test_center_body_radii_sun():
         "CENTER_BODY_RADII['Sun'] and SUN_RADIUS_KM have diverged"
 
 
-def test_center_body_radii_mercury():
-    """NASA Fact Sheet volumetric mean (oblateness ~0.0009, equatorial diff sub-0.1%)."""
-    assert CENTER_BODY_RADII['Mercury'] == 2439.7, \
-        f"CENTER_BODY_RADII['Mercury'] drifted to {CENTER_BODY_RADII['Mercury']}"
-
-
-def test_center_body_radii_venus():
-    """NASA Fact Sheet volumetric mean (oblateness ~0)."""
-    assert CENTER_BODY_RADII['Venus'] == 6051.8, \
-        f"CENTER_BODY_RADII['Venus'] drifted to {CENTER_BODY_RADII['Venus']}"
-
-
 def test_center_body_radii_earth():
     """IAU 2015 nominal equatorial (WGS-84). Hybrid convention: EQUATORIAL not volumetric (6371.0)."""
     assert CENTER_BODY_RADII['Earth'] == 6378.137, \
@@ -332,19 +195,6 @@ def test_center_body_radii_earth():
     # Cross-check with standalone constant
     assert CENTER_BODY_RADII['Earth'] == EARTH_EQUATORIAL_RADIUS_KM, \
         "CENTER_BODY_RADII['Earth'] and EARTH_EQUATORIAL_RADIUS_KM have diverged"
-
-
-def test_center_body_radii_moon():
-    """NASA Fact Sheet volumetric mean (oblateness ~0.0012)."""
-    assert CENTER_BODY_RADII['Moon'] == 1737.4, \
-        f"CENTER_BODY_RADII['Moon'] drifted to {CENTER_BODY_RADII['Moon']}"
-
-
-def test_center_body_radii_mars():
-    """IAU 2015 nominal equatorial. Hybrid convention: EQUATORIAL not volumetric (3389.5)."""
-    assert CENTER_BODY_RADII['Mars'] == 3396.2, \
-        f"CENTER_BODY_RADII['Mars'] = {CENTER_BODY_RADII['Mars']}. " \
-        f"If this is 3389.5, the pre-April-16 volumetric-mean convention returned."
 
 
 def test_center_body_radii_jupiter():
@@ -359,71 +209,6 @@ def test_center_body_radii_jupiter():
     # Cross-check with standalone constant
     assert CENTER_BODY_RADII['Jupiter'] == JUPITER_EQUATORIAL_RADIUS_KM, \
         "CENTER_BODY_RADII['Jupiter'] and JUPITER_EQUATORIAL_RADIUS_KM have diverged"
-
-
-def test_center_body_radii_saturn():
-    """IAU 2015 nominal equatorial. Hybrid convention: EQUATORIAL not volumetric (58232)."""
-    assert CENTER_BODY_RADII['Saturn'] == 60268, \
-        f"CENTER_BODY_RADII['Saturn'] = {CENTER_BODY_RADII['Saturn']}. " \
-        f"If this is 58232, the pre-April-16 volumetric-mean convention returned."
-
-
-def test_center_body_radii_uranus():
-    """IAU 2015 nominal equatorial. Hybrid convention: EQUATORIAL not volumetric (25362)."""
-    assert CENTER_BODY_RADII['Uranus'] == 25559, \
-        f"CENTER_BODY_RADII['Uranus'] = {CENTER_BODY_RADII['Uranus']}. " \
-        f"If this is 25362, the pre-April-16 volumetric-mean convention returned."
-
-
-def test_center_body_radii_neptune():
-    """IAU 2015 nominal equatorial. Hybrid convention: EQUATORIAL not volumetric (24622)."""
-    assert CENTER_BODY_RADII['Neptune'] == 24764, \
-        f"CENTER_BODY_RADII['Neptune'] = {CENTER_BODY_RADII['Neptune']}. " \
-        f"If this is 24622, the pre-April-16 volumetric-mean convention returned."
-
-
-def test_center_body_radii_pluto():
-    """New Horizons occultation (Nimmo et al. 2017, Icarus)."""
-    assert CENTER_BODY_RADII['Pluto'] == 1188.3, \
-        f"CENTER_BODY_RADII['Pluto'] drifted to {CENTER_BODY_RADII['Pluto']}"
-
-
-def test_center_body_radii_bennu():
-    """Volumetric mean from OSIRIS-REx top-shape asteroid observations."""
-    assert CENTER_BODY_RADII['Bennu'] == 0.262, \
-        f"CENTER_BODY_RADII['Bennu'] drifted to {CENTER_BODY_RADII['Bennu']}"
-
-
-def test_center_body_radii_eris():
-    """Volumetric mean from 2011 occultation (Sicardy et al. 2011)."""
-    assert CENTER_BODY_RADII['Eris'] == 1163, \
-        f"CENTER_BODY_RADII['Eris'] drifted to {CENTER_BODY_RADII['Eris']}"
-
-
-def test_center_body_radii_haumea():
-    """Volumetric mean (highly ellipsoidal: 1050x840x537 km)."""
-    assert CENTER_BODY_RADII['Haumea'] == 816, \
-        f"CENTER_BODY_RADII['Haumea'] drifted to {CENTER_BODY_RADII['Haumea']}"
-
-
-def test_center_body_radii_makemake():
-    """Volumetric mean (Brown et al.)."""
-    assert CENTER_BODY_RADII['Makemake'] == 715, \
-        f"CENTER_BODY_RADII['Makemake'] drifted to {CENTER_BODY_RADII['Makemake']}"
-
-
-def test_center_body_radii_arrokoth():
-    """Volumetric mean (~35x20x14 km bilobed shape).
-    Corrected 2026-04-15 per Gemini review: was 0.0088 (8.8 METERS!) -> 9.95 km."""
-    assert CENTER_BODY_RADII['Arrokoth'] == 9.95, \
-        f"CENTER_BODY_RADII['Arrokoth'] = {CENTER_BODY_RADII['Arrokoth']}. " \
-        f"If this is 0.0088, the Gemini correction was reverted -- Arrokoth would be 8.8 METERS."
-
-
-def test_center_body_radii_planet9():
-    """Model estimate (Batygin & Brown; 5-10 M_Earth assumption)."""
-    assert CENTER_BODY_RADII['Planet 9'] == 24000, \
-        f"CENTER_BODY_RADII['Planet 9'] drifted to {CENTER_BODY_RADII['Planet 9']}"
 
 
 def test_center_body_radii_completeness():
@@ -444,127 +229,6 @@ def test_center_body_radii_completeness():
 # Testing planets (IAU-anchored) and major moons with JPL-anchored values.
 # Skipping approximations like "3.63 * 365.25" for asteroids -- too noisy
 # and the values are computed expressions, not cited constants.
-
-def test_orbital_period_mercury():
-    """Mercury orbital period: 87.969 days (JPL)."""
-    assert KNOWN_ORBITAL_PERIODS['Mercury'] == 87.969, \
-        f"Mercury orbital period drifted to {KNOWN_ORBITAL_PERIODS['Mercury']}"
-
-
-def test_orbital_period_venus():
-    """Venus orbital period: 224.701 days (JPL)."""
-    assert KNOWN_ORBITAL_PERIODS['Venus'] == 224.701, \
-        f"Venus orbital period drifted to {KNOWN_ORBITAL_PERIODS['Venus']}"
-
-
-def test_orbital_period_earth():
-    """Earth orbital period: 365.256 days (sidereal year, JPL)."""
-    assert KNOWN_ORBITAL_PERIODS['Earth'] == 365.256, \
-        f"Earth orbital period drifted to {KNOWN_ORBITAL_PERIODS['Earth']}"
-
-
-def test_orbital_period_mars():
-    """Mars orbital period: 686.980 days (JPL)."""
-    assert KNOWN_ORBITAL_PERIODS['Mars'] == 686.980, \
-        f"Mars orbital period drifted to {KNOWN_ORBITAL_PERIODS['Mars']}"
-
-
-def test_orbital_period_jupiter():
-    """Jupiter orbital period: 4332.589 days (JPL)."""
-    assert KNOWN_ORBITAL_PERIODS['Jupiter'] == 4332.589, \
-        f"Jupiter orbital period drifted to {KNOWN_ORBITAL_PERIODS['Jupiter']}"
-
-
-def test_orbital_period_saturn():
-    """Saturn orbital period: 10759.22 days (JPL)."""
-    assert KNOWN_ORBITAL_PERIODS['Saturn'] == 10759.22, \
-        f"Saturn orbital period drifted to {KNOWN_ORBITAL_PERIODS['Saturn']}"
-
-
-def test_orbital_period_uranus():
-    """Uranus orbital period: 30688.5 days (JPL)."""
-    assert KNOWN_ORBITAL_PERIODS['Uranus'] == 30688.5, \
-        f"Uranus orbital period drifted to {KNOWN_ORBITAL_PERIODS['Uranus']}"
-
-
-def test_orbital_period_neptune():
-    """Neptune orbital period: 60189.0 days (JPL)."""
-    assert KNOWN_ORBITAL_PERIODS['Neptune'] == 60189.0, \
-        f"Neptune orbital period drifted to {KNOWN_ORBITAL_PERIODS['Neptune']}"
-
-
-def test_orbital_period_moon():
-    """Moon sidereal orbital period: 27.321582 days."""
-    assert KNOWN_ORBITAL_PERIODS['Moon'] == 27.321582, \
-        f"Moon orbital period drifted to {KNOWN_ORBITAL_PERIODS['Moon']}"
-
-
-def test_orbital_period_io():
-    """Io orbital period: 1.769 days (42.456 hours, JPL)."""
-    assert KNOWN_ORBITAL_PERIODS['Io'] == 1.769, \
-        f"Io orbital period drifted to {KNOWN_ORBITAL_PERIODS['Io']}"
-
-
-def test_orbital_period_europa():
-    """Europa orbital period: 3.551 days (85.224 hours, JPL)."""
-    assert KNOWN_ORBITAL_PERIODS['Europa'] == 3.551, \
-        f"Europa orbital period drifted to {KNOWN_ORBITAL_PERIODS['Europa']}"
-
-
-def test_orbital_period_ganymede():
-    """Ganymede orbital period: 7.155 days (171.72 hours, JPL)."""
-    assert KNOWN_ORBITAL_PERIODS['Ganymede'] == 7.155, \
-        f"Ganymede orbital period drifted to {KNOWN_ORBITAL_PERIODS['Ganymede']}"
-
-
-def test_orbital_period_callisto():
-    """Callisto orbital period: 16.689 days (400.536 hours, JPL)."""
-    assert KNOWN_ORBITAL_PERIODS['Callisto'] == 16.689, \
-        f"Callisto orbital period drifted to {KNOWN_ORBITAL_PERIODS['Callisto']}"
-
-
-def test_orbital_period_titan():
-    """Titan orbital period: 15.945 days (382.68 hours, JPL)."""
-    assert KNOWN_ORBITAL_PERIODS['Titan'] == 15.945, \
-        f"Titan orbital period drifted to {KNOWN_ORBITAL_PERIODS['Titan']}"
-
-
-def test_orbital_period_triton():
-    """Triton orbital period: 5.877 days (141.05 hours, JPL). Note: retrograde orbit."""
-    assert KNOWN_ORBITAL_PERIODS['Triton'] == 5.877, \
-        f"Triton orbital period drifted to {KNOWN_ORBITAL_PERIODS['Triton']}"
-
-
-def test_orbital_period_charon():
-    """Charon orbital period: 6.387 days (153.29 hours, JPL). Pluto-Charon barycenter system."""
-    assert KNOWN_ORBITAL_PERIODS['Charon'] == 6.387, \
-        f"Charon orbital period drifted to {KNOWN_ORBITAL_PERIODS['Charon']}"
-
-
-def test_orbital_period_phobos():
-    """Phobos orbital period: 0.319 days (JPL)."""
-    assert KNOWN_ORBITAL_PERIODS['Phobos'] == 0.319, \
-        f"Phobos orbital period drifted to {KNOWN_ORBITAL_PERIODS['Phobos']}"
-
-
-def test_orbital_period_deimos():
-    """Deimos orbital period: 1.263 days (JPL)."""
-    assert KNOWN_ORBITAL_PERIODS['Deimos'] == 1.263, \
-        f"Deimos orbital period drifted to {KNOWN_ORBITAL_PERIODS['Deimos']}"
-
-
-def test_orbital_period_halley():
-    """Halley's comet period: 75.92414033 Julian years * 365.25 = 27731.29226 days.
-    Epoch: JD 2439907.5 (1968-Feb-21)."""
-    assert KNOWN_ORBITAL_PERIODS['Halley'] == 27731.29226, \
-        f"Halley orbital period drifted to {KNOWN_ORBITAL_PERIODS['Halley']}"
-
-
-def test_orbital_period_sedna():
-    """Sedna orbital period: 11400 * 365.25 = 4163850.00 days (~11,400 years)."""
-    assert KNOWN_ORBITAL_PERIODS['Sedna'] == 4163850.00, \
-        f"Sedna orbital period drifted to {KNOWN_ORBITAL_PERIODS['Sedna']}"
-
 
 # ============================================================
 # Section 8: Hyperbolic/parabolic objects must remain None

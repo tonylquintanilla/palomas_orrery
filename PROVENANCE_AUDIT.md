@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: August 12, 2026
-Files scanned: 123
-Total findings: 884
-Constants: 98 | Dicts: 38 | Display strings: 748
+Files scanned: 120
+Total findings: 883
+Constants: 97 | Dicts: 38 | Display strings: 748
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -19,17 +19,15 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260812T192103Z | `cfff5b5` | 120 | 883 | 206 | 562 | 113 | 2 |
+| 20260812T190129Z | `cfff5b5` | 124 | 884 | 207 | 562 | 113 | 2 |
 | 20260812T165716Z | `8419f71` | 123 | 884 | 207 | 562 | 113 | 2 |
 | 20260812T011625Z | `bbc5e78` | 119 | 882 | 206 | 580 | 94 | 2 |
 | 20260811T230143Z | `df7ca50` | 119 | 882 | 206 | 580 | 94 | 2 |
 
-Change since the previous run: total +2, Tier-1 +1.
+Change since the previous run: total -1, Tier-1 -1.
 
-Tier-1 rose in these files:
-
-| File | Before | After |
-|------|-------:|------:|
-| patch_L186_annotation_checker_first.py | 0 | 1 |
+No file's Tier-1 count rose.
 
 ---
 
@@ -60,7 +58,7 @@ Tier-1 rose in these files:
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 207 |
+| 1 | 16-20 | FIX NOW | 206 |
 | 2 | 10-15 | REVIEW | 562 |
 | 3 | 5-9 | LOW PRIORITY | 113 |
 | 4 | 1-4 | LOWEST PRIORITY | 2 |
@@ -135,7 +133,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `fetch_climate_data.py` | earth_science | 0 | 2 | 0 | 0 | 2 |
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `orbital_elements.py` | orrery | 1 | 0 | 0 | 0 | 1 |
-| `patch_L186_annotation_checker_first.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `data_acquisition.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `energy_imbalance.py` | earth_science | 1 | 0 | 0 | 0 | 1 |
 | `exoplanet_orbits.py` | stars | 1 | 0 | 0 | 0 | 1 |
@@ -161,7 +158,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 40 | 92 | 454 | 66 | 2 | 614 |
+| Orrery (solar system + orbital mechanics) | 39 | 91 | 454 | 66 | 2 | 613 |
 | Earth System | 13 | 105 | 71 | 2 | 0 | 178 |
 | Stars (stellar neighborhood) | 9 | 9 | 37 | 6 | 0 | 52 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 39 | 0 | 39 |
@@ -171,7 +168,6 @@ Same data again, grouped by subject-matter domain rather than by individual file
 **Domain coverage gap:** the following files have findings but no entry in `MODULE_DOMAIN_MAP` -- defaulted to `orrery` rather than guessed into a more specific bucket. Add each to `MODULE_DOMAIN_MAP` in provenance_scanner.py with its real domain so this stops silently defaulting:
 
 - `maintenance_run.py`
-- `patch_L186_annotation_checker_first.py`
 
 ---
 
@@ -493,12 +489,6 @@ is planned for a future session.
 | 2151 | string | display string @ line 2151 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2174 | string | display string @ line 2174 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2332 | string | display string @ line 2332 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-
-### patch_L186_annotation_checker_first.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 85 | constant | EXPECTED_TOTAL | 134 | 4 | 5 | **20** | No source citation; date-sensitive (recalled) | UNDETERMINED -- could not be classified |
 
 ### planet_visualization_utilities.py
 
@@ -1470,7 +1460,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 108 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 114 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### mars_visualization_shells.py
 
@@ -1507,8 +1497,8 @@ is planned for a future session.
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 103 | dict | ROLE_MAP[...] | (120 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 366 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 389 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 364 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 387 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 

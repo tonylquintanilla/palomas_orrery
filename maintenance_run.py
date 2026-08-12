@@ -34,6 +34,11 @@ evening while nothing noticed.
 CHECKERS report a problem and inform the push call. They run last so
 their verdict is the last thing on screen.
 
+Constants change runs first among them: it reads the git diff for
+constants_new.py and reports any value that moved without its provenance
+moving too. It replaced 55 hand-pinned literals on 2026-08-12 and stores
+no numbers of its own.
+
 WHAT IS DELIBERATELY NOT HERE
 -----------------------------
 dep_trace.py takes a module name and answers a question BEFORE an edit.
@@ -96,7 +101,8 @@ GENERATORS = [
 # rather than its verdict, and its Tier-1 count is the number the push
 # call actually turns on.
 CHECKERS = [
-    ('Constants provenance', ['test_constants_provenance.py'], None),
+    ('Constants change', ['constants_change_report.py'], None),
+    ('Constants relations', ['test_constants_provenance.py'], None),
     ('Cross-check annotations', ['test_cross_checked.py'], None),
     ('Citation inheritance', ['test_citation_inheritance.py'], None),
     ('Provenance 1d/1e', ['test_provenance_1d.py'], None),
