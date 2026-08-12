@@ -19,8 +19,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260812T011625Z | `bbc5e78` | 119 | 882 | 206 | 580 | 94 | 2 |
 | 20260811T230143Z | `df7ca50` | 119 | 882 | 206 | 580 | 94 | 2 |
 
+Change since the previous run: total +0, Tier-1 +0.
+
+No file's Tier-1 count rose.
 
 ---
 
@@ -1524,9 +1528,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 97 | dict | ROLE_MAP[...] | (116 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 354 | dict | ROLE_DESCRIPTIONS[...] | (12 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 376 | dict | ROLE_SECTION_TITLES[...] | (12 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 103 | dict | ROLE_MAP[...] | (119 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 365 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 388 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 

@@ -240,7 +240,7 @@ ROLE_MAP = {
     'verify_orbit_cache':                     'devtool',
 
     # patch
-    'patch_module_atlas_patch_role':          'patch',
+    'patch_fable_corrections':                'patch',
 }
 # ROLE-MAP:END
 

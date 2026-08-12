@@ -1,6 +1,12 @@
-# Data Inventory (local, gitignored -- CURRENT state)
+# Data Inventory (state of the local data stores)
 
-Repo copies stale/absent; this reflects the live local stores.
+This FILE is tracked in git. The data DIRECTORIES it describes are
+local and not all of them are in the repo, so the tables below can
+only be confirmed by re-running the inventory tool on Tony's
+machine. Treat them as current as of the generation date, not as
+something the repo can verify. (Corrected 2026-08-11: the header
+read "local, gitignored" while the file was committed and absent
+from .gitignore -- a tracked file asserting it was not in the repo.)
 
 ## Orrery Data -- By extension
 

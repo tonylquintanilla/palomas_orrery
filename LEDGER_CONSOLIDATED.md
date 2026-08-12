@@ -145,7 +145,9 @@ status changes, gap/ref notes), normally at the handoff that closes a session
 and only when asked. Tony is the integrator and the only writer to the repo --
 Claude has read-only GitHub access, so every change is reviewed and committed
 by Tony. Updates are made IN PLACE: edit the relevant detail block; do not
-re-embed a fresh copy. Handles are append-only -- the next new item is L-062;
+re-embed a fresh copy. Handles are append-only -- a new item takes the next
+unused L-### (read the highest in use off the index; do not trust a number
+written here, which goes stale the moment it is written);
 a closed item keeps its L-### and moves to section C.
 
 **ledger_index.py -- what it does, when to run it.** The DETAIL blocks are the
@@ -924,7 +926,7 @@ Perihelion is the project convention for Eris and Pluto.
   radius_fraction and display text from it. The `<br>` canonical
   direction also belongs here: source text in `\n`, derive `<br>` at
   the Plotly boundary.
-- 126 dead `tooltip` fields (83 sphere + 41 custom) are a
+- 124 dead `tooltip` fields (83 sphere + 41 custom) are a
   delete-or-wire decision before migration.
 - Natural companion to L-176 (illustrated dimensions).
 - **REFRAMED 2026-08-06 (Tony's ruling).** This is not a NEW constant
@@ -1042,7 +1044,7 @@ Perihelion is the project convention for Eris and Pluto.
 before build, in order: (a) **(decide)** ratify fetch-and-import;
 (b) **(design)** the `FEATURE_REGISTRY` shape covering rings, belt sets
 and tori; (c) **(design)** the migration shape and per-body sequence;
-(d) decide on the 126 dead tooltip fields. L-184's build path cannot be
+(d) decide on the 124 dead tooltip fields. L-184's build path cannot be
 defined until this settles.
 - **FABLE DESIGN REVIEWS, ROUNDS 1 AND 2, AUGUST 2026** (built on orrery `ee0da47c` /
   gallery `61a78c0`; zero code). Architecture ENDORSED: one store, three
@@ -1062,13 +1064,13 @@ defined until this settles.
   steps."
 - Two earlier candidates retired. Exporting a JSON artifact rests on a
   generation step and a run trigger that do not exist. Reading the file
-  with `ast` without executing it fights the store's design: 7 of 45
+  with `ast` without executing it fights the store's design: 6 of 49
   top-level assignments are derived rather than literal, and two contain
   constructor calls `ast.literal_eval` cannot evaluate at all.
 - **Three premises were removed by Tony's questions to get here**, and
   the pattern is worth carrying: each was Claude reading code and
   treating that as knowing the system. (1) "The exporter" was written as
-  live; it is dormant. (2) The 7 derived constants were written up as a
+  live; it is dormant. (2) The 6 derived constants were written up as a
   complication; they are the store's own principle working, and
   `SOLAR_RADIUS_AU` alone has 11 consumers. (3) The claim that the
   gallery could not execute the file was never tested; the store imports
@@ -1559,8 +1561,13 @@ and the divergence check); L-156 (Batch 2 worksheet).
 - **Gas giant shells have NO tooltips at all** -- zero `CreateToolTip`
   bindings for any jupiter/saturn/uranus/neptune shell. Related
   measurement: the `'tooltip'` key in `shell_configs.py` is defined
-  **126 times and read by nothing**, confirming L-181's "124 dead
-  tooltip fields" as dead and updating the count. Whether the gas
+  **124 times and read by nothing**, confirming L-181's "124 dead
+  tooltip fields" as dead. (Corrected 2026-08-11: this bullet had
+  read 126 and described itself as "updating the count" -- but 126
+  is the raw text-match total, and the real figure is 124 dict
+  keys, 83 in SHELL_CONFIGS plus 41 in CUSTOM_SHELLS, measured with
+  `ast`. It revised a correct number back to a wrong one on the
+  strength of a grep.) Whether the gas
   giants SHOULD have tooltips is a separate question for Tony.
 
 - **The shared-fragment pattern from L-179/L-180 is the precondition.**
@@ -6793,6 +6800,52 @@ for gallery-assembler (L-151).
 v3.33 (July 30, 2026): The Register Rule added to Part 2. The protocol's compressed reference voice is distinguished from explanation voice — lead with the claim, one idea per sentence, no aphorisms in an explanation, gloss project terms on first use each session. Two yes-or-no checks before sending (does this paragraph do one job; does any sentence point at a label instead of saying the thing), with the test being "can Tony act on this without a follow-up question." Backstop: Tony says "opaque" at the point it fails, Claude rewrites that passage, and the miss is captured as a field note so it accumulates rather than repeating. Manifest table refreshed to 1.2/1.1/1.6.
 
 v3.34 (August 5, 2026): Two amendments, both from the Fable skills-layer review. (1) WHO TONY IS: the GitHub Desktop / Run-button preference is stated as a preference where practical, not a prohibition. The earlier "never the git command line" wording read as a ban and put the section in conflict with safe-file-editing's git apply delivery format (Fable Job 2 #16); Tony's ruling keeps the GUI as default and treats a terminal step as a fallback. The surviving obligation is unchanged: don't hand over an operation outside Tony's known working set without explaining what it does and what could go wrong. (2) Stale Skill = Stop [CRITICAL] added under the Skill Manifest. A skill lives in three stores — repo skills/, the account install Claude actually loads, and the generated manifest table. When a loaded skill's version disagrees with its manifest row, the session STOPS rather than proceeding and mentioning it later, and asks Tony to push to skills/ and reinstall in Settings. The prior wording asked only to "reconcile before trusting it," and the manifest still advertised 1.1/1.4 against an actual 1.2/1.6 for about three weeks with nothing surfacing it. Supporting change outside the protocol: skills_index.py now prints what the manifest was advertising before overwriting it, so running the tool reports drift instead of silently absorbing it; the prevention side is the binding rule in ledger-and-session-records v1.5.
+
+v3.35 (August 7, 2026): Updated skill safe-file-editing (v1.3).
+
+v3.36 (August 8, 2026): Register Rule amended (Part 2). A
+message-level Check 0 added ahead of the two paragraph-level checks --
+does this message ask Tony for one thing. The prior checks were
+paragraph-scoped and could all pass while a message carried four
+separate jobs, which is the load that actually fails. Two supporting
+defaults added: answer first with evidence only on request, and
+capture goes in a file rather than in the conversation. Backstop
+corrected -- "opaque" is a repair, not the mechanism, because Tony has
+stated he cannot sustain flagging density in real time; the check runs
+on Claude's side before sending. "Just the decision" added as a second
+Tony-side lever. Origin: a full mobile session in which the rule did
+not fire once.
+
+v3.37 (August 11, 2026): Two changes. (1) "The Artifact Bounds the
+Audit" added to Part 3 -- Tony's August 8 ruling, drafted for the first
+time. (2) Protocol trimmed from 882 lines to 849: version history
+v3.29-v3.33 dropped (the ledger carries it) and twenty-seven Part 5
+lessons removed as restatements of rules already stated where they
+fire. A first cut moved ALL forty-one lessons to an archive file and
+was reversed the same day -- an archive has no trigger, so the fourteen
+with no counterpart elsewhere would have left. A lesson duplicated by a
+firing rule is redundant; a lesson that is nowhere else IS the archive.
+
+v3.37.1 (August 11, 2026): provenance-discipline skill v1.8 -> v1.9.
+
+v3.38 (August 11, 2026): Two changes, both from Fable's document-layer
+claim audit. (1) Two dead pointers to documentation/PROJECT_ORIGIN.md
+corrected -- the file is at the repo root (finding F11). (2) Stale
+Skill = Stop gains its two known limits. The gate is LOAD-TRIGGERED, so
+a manifest that changes later in the same session creates a mismatch
+with nothing to fire on -- which is exactly what happened when
+provenance-discipline went 1.8 to 1.9 mid-session and the mismatch
+surfaced only because a later check re-read the file for an unrelated
+reason. And a mid-session reinstall CANNOT be verified from inside the
+session: the loaded copy appears bound at conversation start, so the
+reinstall lands in the account and stays invisible until the next
+session. Tony's ruling: do not add an assertion-based clear. "Tony
+reinstalled it" is a claim, not a check, and accepting it in place of a
+read is cite-to-clear moved into the skill layer. The verification is
+deferred into the handoff and discharged by the next session's load.
+Skill-layer companion: provenance-discipline v1.9 narrows the push gate
+to the ACTIVE BUILD PATH (L-184, ratified 2026-08-05), keeping global
+Tier-1 = 0 as the destination rather than the firing rule (finding F1).
 
 ### Preserved verbatim: v3.29 Technical lessons (now field notes in skills)
 

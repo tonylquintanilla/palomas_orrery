@@ -405,8 +405,11 @@ are fixed once rather than argued twice.
 The tooltip count is 124, not 126. The raw grep returns 126, but two
 matches are documentation -- a module docstring and a comment. The real
 key definitions are 83 in SHELL_CONFIGS plus 41 in CUSTOM_SHELLS. Two
-sites in the ledger carry 126, one of which contradicts its own
-83-plus-41 breakdown in the same bullet.
+live sites in the ledger carry 126, one of which contradicts its own
+83-plus-41 breakdown in the same bullet. (Corrected 2026-08-11: this
+note said two; there were three. A fourth sits inside a completed-batch
+historical record and is correctly left alone -- correcting it would
+falsify the record.)
 
 Top-level assignments in constants_new.py are 49 with 6 derived, not 45
 with 7.

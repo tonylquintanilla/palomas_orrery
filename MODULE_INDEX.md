@@ -11,14 +11,14 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 119  
-**Total Lines of Code (non-blank):** 96,322  
+**Total Lines of Code (non-blank):** 96,506  
 **Total Public Functions/Classes:** 1,057
 
 ## Classification Coverage
 
 **Patch scripts awaiting archive (1).** A `Role: patch` module is a one-shot script that has already run. Its base fingerprint no longer matches, so it cannot run again. Move each into `documentation/`. While one sits in the scanned tree it inflates the module count here and the file count in the provenance audit.
 
-- `patch_module_atlas_patch_role.py`
+- `patch_fable_corrections.py`
 
 
 ---
@@ -197,7 +197,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (710 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (949 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (951 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (2,691 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (281 lines) |
@@ -215,7 +215,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_module_atlas_patch_role.py` | - add a transient `patch` role to module_atlas.py so spent one-shot patch scripts classify as what they are instead of landing in `undetermined`. (220 lines) |
+| `patch_fable_corrections.py` | - apply the corrections from Fable's document-layer claim audit (documentation/FABLE_FINDINGS_document_layer_ claims.md), plus the Stale Skill gate amendment earned tonight. (402 lines) |
 
 ---
 

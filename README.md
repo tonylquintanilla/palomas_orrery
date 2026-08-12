@@ -172,7 +172,8 @@ data spreadsheets).
 
 ```
 palomas_orrery/                  # this repo
-|- *.py                          # ~121 Python modules, all at root
+|- *.py                          # Python modules, all at root (count:
+|                                #   MODULE_ATLAS.md, generated)
 |- README.md, LICENSE.md         # you are here
 |- MODULE_INDEX.md               # what every module does (generated)
 |- MODULE_ATLAS.md               # full architecture atlas (generated)
@@ -328,7 +329,7 @@ Paloma's Orrery is not enterprise software. Commercial codebases are orders
 of magnitude larger, maintained by teams of hundreds over decades. But for a
 project built by a single developer without formal CS training, using
 conversational AI collaboration, the system has grown to a scale worth
-noting: 121 Python modules and roughly 92,000 non-blank lines as of July
+noting: 118 Python modules and roughly 96,000 non-blank lines as of August
 2026 ([MODULE_ATLAS.md](MODULE_ATLAS.md) carries the authoritative current
 counts -- it's regenerated mechanically, so trust it over any number
 hardcoded here), five parallel position pipelines, 1,000+ cached orbital

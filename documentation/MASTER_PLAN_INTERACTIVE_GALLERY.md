@@ -55,7 +55,8 @@ had a known intermittent failure under the scheduler's execution context
 (see S3a addendum, July 24).
 **Base:** orrery @ `c10a424`, gallery @ `e864fd42` (design ratified here;
 Artifact 1 built+pushed at orrery `6fc52b9a` / gallery `f89d83c4`; current
-HEAD orrery `ee0da47c` / gallery `61a78c00` -- F1a (M2) fully closed: L-149
+state as of that work, orrery `ee0da47c` / gallery `61a78c00` -- F1a (M2)
+fully closed: L-149
 and L-118 both DONE, Layer 2 Steps 1-5 passed live; Layer 3 enabled with a
 known open issue; L-150 (multi-orbit binaries) and L-151 (gallery-assembler
 skill) still decided, not yet built)
