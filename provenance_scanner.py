@@ -1041,6 +1041,9 @@ DEEP_CITATIONS = []
 # silently doing nothing. Entries: (file, line, code, detail).
 CROSS_CHECK_ISSUES = []
 
+# L-192: annotation lines that attach to no unit. Diagnostic only.
+ORPHAN_ANNOTATIONS = []
+
 
 def citation_run_above(lines, decl_line, lookback=CITATION_LOOKBACK_BLOCK):
     """Find the citation comment run immediately above a declaration.
@@ -1259,6 +1262,8 @@ class ProvenanceUnit:
     __slots__ = [
         'kind', 'module', 'file', 'name', 'line_start', 'line_end',
         'context_text',        # text the unit sees for citation lookup
+        'attached_text',       # comment run(s) touching the unit's statement
+        'attached_lines',      # 1-based line numbers of that run
         'raw_value',           # for strings: the actual string content (for suppression matching)
         'entries',             # for dicts: [(key_name, value, value_str, line)]
         'numeric_claims',      # for strings: [(num_str, unit, value)]
@@ -1343,6 +1348,174 @@ def get_unit_interior(lines, line_start, line_end):
 
 
 # ============================================================
+# ANNOTATION ATTACHMENT (L-192)
+# ============================================================
+# A CITATION may be inherited. A section header naming a source
+# legitimately covers the declarations beneath it, and the citation
+# window plus the block-citation table exist for exactly that.
+#
+# A cross-check ANNOTATION is a narrower object: it names one checker
+# who verified one value on one date and wrote the check down in one
+# worksheet. It may not be inherited by proximity. "Gemini checked the
+# Moon's radius on 2026-08-02" says nothing about Mercury's radius.
+#
+# Attachment is adjacency to the unit's own statement -- the unbroken
+# run of comment lines ending directly above it, plus the unbroken run
+# starting directly below it. A blank line or a line of code ends a run.
+#
+# Measured when this landed (2026-08-12): 50 of 77 units at the
+# cross-checked rung held two attached checkers. The other 27 were
+# credited from annotations written for a different value. In the Oort
+# cloud case the borrowed annotations pointed at worksheet rows reading
+# UNVERIFIED and PARTIAL for the very value being credited, so the
+# window was converting a recorded non-verification into a top rung.
+#
+# Scope: annotation CREDIT only. Citation inheritance is unchanged, and
+# the malformation diagnostics keep the wide window -- a broken
+# annotation anywhere nearby should still be reported.
+
+
+def statement_spans(tree):
+    """(first_line, last_line, is_module_level) for every statement."""
+    spans = []
+
+    def walk(node, top):
+        for child in ast.iter_child_nodes(node):
+            if isinstance(child, ast.stmt):
+                spans.append((
+                    child.lineno,
+                    getattr(child, 'end_lineno', child.lineno)
+                    or child.lineno,
+                    top))
+                walk(child, False)
+            else:
+                walk(child, top)
+
+    walk(tree, True)
+    return spans
+
+
+def entry_anchor_map(tree):
+    """Map each line of a value expression to the line its entry starts on.
+
+    A display string inside a dict begins one or more lines below the
+    key that introduces it, and the comments written for it sit above
+    that KEY, not above the literal. Anchoring on the literal's own line
+    would find the key line itself -- which is code, not a comment --
+    and attach nothing. The innermost (largest) enclosing entry line
+    wins for nested structures.
+    """
+    anchors = {}
+    for node in ast.walk(tree):
+        pairs = []
+        if isinstance(node, ast.Dict):
+            for key, val in zip(node.keys, node.values):
+                if key is not None:
+                    pairs.append((key.lineno, val))
+        elif isinstance(node, ast.Assign):
+            pairs.append((node.lineno, node.value))
+        elif isinstance(node, ast.AnnAssign) and node.value is not None:
+            pairs.append((node.lineno, node.value))
+        for anchor_line, val in pairs:
+            lo = val.lineno
+            hi = getattr(val, 'end_lineno', lo) or lo
+            for ln in range(lo, hi + 1):
+                prev = anchors.get(ln)
+                if prev is None or anchor_line > prev:
+                    anchors[ln] = anchor_line
+    return anchors
+
+
+def comment_run_above(lines, first_line):
+    """0-based indices of the comment run ending directly above."""
+    out = []
+    i = first_line - 2
+    while i >= 0 and lines[i].lstrip().startswith('#'):
+        out.append(i)
+        i -= 1
+    return out
+
+
+def comment_run_below(lines, last_line):
+    """0-based indices of the comment run starting directly below."""
+    out = []
+    j = last_line
+    while j < len(lines) and lines[j].lstrip().startswith('#'):
+        out.append(j)
+        j += 1
+    return out
+
+
+def attached_comment_indices(lines, spans, anchors, line_start):
+    """0-based indices of the comment lines attached to this unit.
+
+    A unit declared at module level takes both runs around its whole
+    statement -- constants_new.py writes its citations BELOW the
+    declaration, the shells modules write them ABOVE, and both are
+    correct.
+
+    A string nested inside a dict or a function body takes only the run
+    directly above the entry that introduces it. Its enclosing statement
+    can span hundreds of lines, and that statement's trailing comments
+    belong to the statement, not to one string inside it.
+    """
+    inner = None
+    for first, last, top in spans:
+        if first <= line_start <= last:
+            if inner is None or (last - first) < (inner[1] - inner[0]):
+                inner = (first, last, top)
+    if inner is not None and inner[2]:
+        return (comment_run_above(lines, inner[0])
+                + comment_run_below(lines, inner[1]))
+    return comment_run_above(lines, anchors.get(line_start, line_start))
+
+
+def attached_block(lines, spans, anchors, line_start):
+    """(text, 1-based line numbers) of the attached comment lines."""
+    idx = sorted(attached_comment_indices(lines, spans, anchors, line_start))
+    return ''.join(lines[i] for i in idx), tuple(i + 1 for i in idx)
+
+
+def collect_orphan_annotations(lines, fname, units):
+    """Annotation lines whose comment run touches no code at all.
+
+    The attachment rule refuses window credit. Without this list the
+    refused lines would vanish quietly, which is the failure the rule
+    exists to prevent -- an annotation that grants nothing and says
+    nothing still reads as a completed cross-check to anyone skimming
+    the source.
+
+    "Touches no code" is the test, not "attached to a scored unit". A
+    run sitting directly above or below a statement was written for that
+    statement, whether or not the scanner scores it -- CORE_AU is a
+    product of two names, so it never becomes a unit, and its
+    annotations are correctly placed all the same. What is genuinely
+    unattached is a run fenced off by blank lines on both sides. Two
+    live examples at the time of writing are section headers in
+    constants_new.py whose annotations were written to cover a group.
+    """
+    n = len(lines)
+    i = 0
+    while i < n:
+        if not lines[i].lstrip().startswith('#'):
+            i += 1
+            continue
+        j = i
+        while j < n and lines[j].lstrip().startswith('#'):
+            j += 1
+        run = range(i, j)
+        code_above = i > 0 and lines[i - 1].strip() != ''
+        code_below = j < n and lines[j].strip() != ''
+        if not (code_above or code_below):
+            for k in run:
+                if CROSS_CHECK_LINE_RE.match(lines[k]):
+                    ORPHAN_ANNOTATIONS.append(
+                        (fname, k + 1, lines[k].strip()))
+        i = j
+
+
+
+# ============================================================
 # AST-BASED UNIT EXTRACTION
 # ============================================================
 
@@ -1402,6 +1575,13 @@ def extract_units_from_file(filepath, module_name, role):
 
     fname = os.path.basename(filepath)
 
+    # L-192: statement spans and entry anchors, built once per file and
+    # threaded through unit construction. Attachment is a property of
+    # where a declaration SITS, so it has to be computed while the AST
+    # is in hand rather than re-derived later from line numbers.
+    spans = statement_spans(tree)
+    anchors = entry_anchor_map(tree)
+
     # ---- Top-level assignments: constants and dicts ----
     for node in ast.iter_child_nodes(tree):
         if not isinstance(node, ast.Assign):
@@ -1415,7 +1595,7 @@ def extract_units_from_file(filepath, module_name, role):
 
         if isinstance(node.value, ast.Dict):
             unit = _make_dict_unit(node, name, lines, module_name,
-                                    fname, role)
+                                    fname, role, spans, anchors)
             if unit is not None:
                 units.append(unit)
             continue
@@ -1436,9 +1616,13 @@ def extract_units_from_file(filepath, module_name, role):
         line_end = getattr(node, 'end_lineno', line_start) or line_start
         context_text = get_context_block(lines, line_start, line_end,
                                          lookback=30, lookahead=15)
+        att_text, att_lines = attached_block(lines, spans, anchors,
+                                             line_start)
 
         units.append(ProvenanceUnit(
             kind='constant',
+            attached_text=att_text,
+            attached_lines=att_lines,
             module=module_name,
             file=fname,
             name=name,
@@ -1472,12 +1656,19 @@ def extract_units_from_file(filepath, module_name, role):
         # Phase 1c: containment table for block-citation inheritance.
         block_table = build_citation_block_table(tree, lines, fname)
         units.extend(_extract_string_units(
-            tree, lines, module_name, fname, role, block_table))
+            tree, lines, module_name, fname, role, block_table,
+            spans, anchors))
+
+    # L-192: anything the attachment rule refused is reported, never
+    # dropped. Silence about an unattached annotation is the same
+    # failure as silence about an unexamined one.
+    collect_orphan_annotations(lines, fname, units)
 
     return units
 
 
-def _make_dict_unit(assign_node, name, lines, module_name, fname, role):
+def _make_dict_unit(assign_node, name, lines, module_name, fname, role,
+                    spans=(), anchors=None):
     """Build a ProvenanceUnit for a top-level dict assignment."""
     dict_node = assign_node.value
     if not isinstance(dict_node, ast.Dict):
@@ -1491,6 +1682,8 @@ def _make_dict_unit(assign_node, name, lines, module_name, fname, role):
     context_text = get_context_block(lines, line_start, line_end,
                                      lookback=30, lookahead=10)
     interior_text = get_unit_interior(lines, line_start, line_end)
+    att_text, att_lines = attached_block(lines, spans, anchors or {},
+                                         line_start)
 
     entries = []
     for key, val in zip(dict_node.keys, dict_node.values):
@@ -1529,7 +1722,7 @@ def _make_dict_unit(assign_node, name, lines, module_name, fname, role):
 
 
 def _extract_string_units(tree, lines, module_name, fname, role,
-                          block_table=None):
+                          block_table=None, spans=(), anchors=None):
     """Find string literals containing numeric claims. One string = one unit.
 
     Module/class/function docstrings are treated specially: their own text
@@ -1625,8 +1818,13 @@ def _extract_string_units(tree, lines, module_name, fname, role,
                         fname, line_start, shadowing['dict_name'],
                         shadowing['key'], shadowing['citation_line']))
 
+        att_text, att_lines = attached_block(lines, spans, anchors or {},
+                                             line_start)
+
         units.append(ProvenanceUnit(
             kind='string',
+            attached_text=att_text,
+            attached_lines=att_lines,
             module=module_name,
             file=fname,
             name=None,
@@ -2078,14 +2276,23 @@ def score_unit(unit, imported_names):
     #
     # Two DISTINCT checkers, because the rung is defined by a two-model
     # process. One annotation is half of it, and says so in the reason.
+    #
+    # L-192: credit comes from ATTACHED annotations only -- the comment
+    # run touching this unit's own statement. The wide window still
+    # feeds the diagnostics below, because a malformed annotation
+    # anywhere nearby is worth reporting, but it no longer lets one
+    # value earn a rung on the evidence of its neighbour.
     records, cross_check_issues = parse_cross_checks(text)
+    attached_records, _attached_issues = parse_cross_checks(
+        getattr(unit, 'attached_text', None) or '')
     sourced = cited or bool(unit.inherited_citation)
-    identities = distinct_checker_identities(records)
+    identities = distinct_checker_identities(attached_records)
     distinct_checkers = len(identities) >= 2
 
     if records or cross_check_issues:
         _record_cross_check_diagnostics(
-            unit, records, cross_check_issues, sourced, len(identities))
+            unit, records, cross_check_issues, sourced,
+            len(distinct_checker_identities(records)))
 
     if sourced and distinct_checkers:
         unit.vuln = V_CROSS_CHECKED
@@ -2094,7 +2301,7 @@ def score_unit(unit, imported_names):
             "Cross-checked by %d models (%s)%s"
             % (len(identities), who,
                "; date-sensitive" if stale else ""))
-    elif sourced and records:
+    elif sourced and attached_records:
         # One leg of the competitive pattern done. Still V3, but the
         # reason says which state it is in, so the audit shows work in
         # progress instead of looking identical to an unchecked claim.
@@ -2393,6 +2600,7 @@ def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
     del DEEP_CITATIONS[:]
     del SHADOW_CONSTANTS[:]
     del CROSS_CHECK_ISSUES[:]
+    del ORPHAN_ANNOTATIONS[:]
 
     suppressed_fingerprints, accepted_residuals = load_exceptions(project_dir)
 
@@ -2467,6 +2675,12 @@ def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
         print(f"{len(CROSS_CHECK_ISSUES)} cross-check annotation issue(s) "
               f"-- malformed or unusable annotations, see audit")
 
+    if ORPHAN_ANNOTATIONS:
+        print(f"{len(ORPHAN_ANNOTATIONS)} orphan annotation(s) -- attached "
+              f"to no claim, granted no credit, see audit")
+        for ofile, oline, _text in ORPHAN_ANNOTATIONS:
+            print(f"    {ofile}:{oline}")
+
     generate_report(all_units, consistent_dups, inconsistencies,
                     files_scanned, project_dir, output_path,
                     accepted_residuals=accepted_residuals,
@@ -2476,6 +2690,7 @@ def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
                     deep_citations=list(DEEP_CITATIONS),
                     shadow_constants=list(SHADOW_CONSTANTS),
                     cross_check_issues=list(CROSS_CHECK_ISSUES),
+                    orphan_annotations=list(ORPHAN_ANNOTATIONS),
                     started=run_started)
 
     return all_units, consistent_dups, inconsistencies
@@ -2490,7 +2705,8 @@ def generate_report(units, consistent_dups, inconsistencies,
                     accepted_residuals=None, coverage_gaps=None,
                     scope_declared=None, shadowed=None,
                     deep_citations=None, shadow_constants=None,
-                    cross_check_issues=None, started=None):
+                    cross_check_issues=None, started=None,
+                    orphan_annotations=None):
     """Write PROVENANCE_AUDIT.md."""
     now = datetime.now().strftime('%B %d, %Y')
 
@@ -2775,6 +2991,32 @@ def generate_report(units, consistent_dups, inconsistencies,
             cfile, cline, code, detail = entry
             detail = detail.replace('|', r'\|')
             out.append(f"| `{cfile}` | {cline} | `{code}` | {detail} |")
+        out.append("")
+        out.append("---")
+        out.append("")
+
+    # ---- Orphan annotations (L-192) ----
+    if orphan_annotations:
+        out.append("## ORPHAN ANNOTATIONS -- diagnostic, no scoring effect")
+        out.append("")
+        out.append("Cross-check annotations that touch no claim's own "
+                   "statement. They granted no credit. A citation may be "
+                   "inherited from a section header; an annotation may "
+                   "not, because it names one checker who verified one "
+                   "value.")
+        out.append("")
+        out.append("Each of these was written for something. Either it "
+                   "belongs on a specific value -- move it down and the "
+                   "credit follows -- or it was meant to cover a group, "
+                   "which this codebase does not express. Nothing here "
+                   "is safe to delete without reading the worksheet it "
+                   "names.")
+        out.append("")
+        out.append("| File | Line | Annotation |")
+        out.append("|------|-----:|------------|")
+        for ofile, oline, otext in sorted(orphan_annotations):
+            otext = otext.replace('|', r'\|')
+            out.append(f"| `{ofile}` | {oline} | {otext} |")
         out.append("")
         out.append("---")
         out.append("")

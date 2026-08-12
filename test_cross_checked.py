@@ -78,6 +78,8 @@ def _unit(context_text, raw_value=None, inherited_citation=None):
         line_start=10,
         line_end=10,
         context_text=context_text,
+        attached_text=context_text,
+        attached_lines=(),
         raw_value=raw_value or 'fixture claim text',
         numeric_claims=[],
         role='data',
@@ -320,20 +322,20 @@ def test_population_conservation_by_identity():
         "a cross-checked claim should score lower, not higher")
 
 
-def test_lookback_window_bleed_is_measured():
-    """An annotation reaches every claim inside the lookback window.
+def test_lookback_window_bleed_is_closed():
+    """An annotation reaches ONLY the claim whose statement it touches.
 
-    This is a property of the flat 60-line context block, not of the
-    annotation parser: the window is the same one that carries `#
-    Source:` comments down to the claims below them. A separately
-    sourced claim a few lines below an annotated one therefore reads the
-    annotation too and receives V2 without anyone having checked it.
+    Until L-192 this test asserted the opposite, and was right to.
+    The flat context block carried an annotation to every claim inside
+    it, so a separately sourced claim a few lines below an annotated
+    one read that annotation too and received V2 without anyone having
+    checked it. The mechanism was pinned here on purpose rather than
+    left to inference.
 
-    The test pins both halves -- that it happens near, and that it stops
-    far away -- so the mechanism is on record rather than inferred. The
-    mitigation is a Piece 2 placement question, not a parser change;
-    tight placement alone does NOT solve it, because the annotation is
-    already tightly placed in this fixture.
+    Credit now comes from the comment run touching a claim's own
+    statement, so the near neighbour holds at V3. Both halves stay
+    pinned -- near and far -- because a rule that only works at
+    distance is the old behaviour wearing a new name.
     """
     def build(gap_lines):
         filler = "\n".join("# filler" for _ in range(gap_lines))
@@ -354,10 +356,10 @@ def test_lookback_window_bleed_is_measured():
             f"fixture should yield two units, got {len(units)}")
         return max(units, key=lambda u: u.line_start).vuln
 
-    assert neighbour_vuln(5) == V_CROSS_CHECKED, (
-        "expected the near neighbour to inherit the annotation through "
-        "the context window; if this now fails, the window changed and "
-        "the Piece 2 placement guidance needs revisiting")
+    assert neighbour_vuln(5) == V_SOURCED, (
+        "the near neighbour must NOT inherit an annotation written for "
+        "another claim; if this fails, credit is flowing through the "
+        "context window again (L-192)")
     assert neighbour_vuln(80) == V_SOURCED, (
         "a claim well beyond the window must not see the annotation")
 
@@ -470,7 +472,7 @@ TESTS = [
     test_iso_date_required,
     test_staleness_interaction,
     test_population_conservation_by_identity,
-    test_lookback_window_bleed_is_measured,
+    test_lookback_window_bleed_is_closed,
     test_parse_issue_codes,
     test_legacy_source_first_is_refused,
     test_source_clause_after_date_is_accepted,
