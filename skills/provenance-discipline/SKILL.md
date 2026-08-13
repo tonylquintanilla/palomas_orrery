@@ -6,8 +6,8 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 2.0 | Cut from palomas_orrery @ eb77c83 (v2.0), earlier
-@ cdcdb4b (v1.9), @ 8e4b5ca (v1.8) | August 12, 2026
+Skill version: 2.1 | Cut from palomas_orrery @ 00219d9 (v2.1), earlier
+@ eb77c83 (v2.0), @ cdcdb4b (v1.9), @ 8e4b5ca (v1.8) | August 13, 2026
 Source: project_instructions_v3_29.md Part 3 (Provenance Audit, Fetched vs
 Recalled) + food insecurity build handoff + scanner source at HEAD. v1.1
 adds the report domain-classification mechanics, the Review-Repair
@@ -45,6 +45,28 @@ ratified 2026-08-05 (L-184), keeping global Tier-1 = 0 as the
 stated destination rather than the firing rule. The skill had
 carried the retired global gate for a week; caught by Fable's
 document-layer claim audit, finding F1, August 11, 2026.
+
+v2.0 (August 12, 2026) replaced the annotation grammar: checker first,
+optional ` -- <source>` clause, and the retired source-first order now
+REFUSED as `legacy_source_first` rather than reconstructed. The old
+order was ambiguous by construction -- a source carrying its own
+publication year ate the check date, so the model name landed outside
+the checker identity and two annotations by two DIFFERENT models read
+as one checker written twice. All 134 lines were migrated. The
+store-binding check lives in skills_index.py, which asserts that every
+annotation example in every SKILL.md parses as the scanner reads it --
+placed there because it runs at the moment a skill changes, which is
+the moment the drift is introduced.
+
+v2.1 (August 13, 2026) extends Worksheet First, Annotation Second with
+two clauses about what the worksheet has to CONTAIN, and specifies the
+worksheet table schema and verdict vocabulary at the prompt so the
+evidence arrives usable. Earned August 12-13: two annotations in
+constants_new.py credited a worksheet for checks it explicitly did not
+perform, and one cited worksheet was prose a tool cannot read. Tony's
+ruling -- we do not have to accept and interpret incomplete or
+malformed answers -- is the second clause, and the session that
+produced the evidence can be reopened to finish the job.
 
 The resident protocol carries the two governing principles as CRITICAL
 gates: Fetched-vs-Recalled (a citation is a provenance claim that must be
@@ -132,6 +154,8 @@ something any single AI does solo:
    value and citation, and flag anything suspicious. The prompt is
    SHA-anchored (`built on <SHA> at <URL>`), includes the source code
    being checked, and specifies the job type (see Worksheet Types below).
+   The prompt states the table schema and the verdict vocabulary
+   explicitly -- an unspecified format is how eight of them happened.
    Claude does NOT propose corrected values -- only what needs checking.
 2. **Tony sends the same prompt to Claude, GPT, and/or Gemini
    independently.** Same prompt, independent answers. Tony compares.
@@ -206,7 +230,34 @@ AU where the source says 121.6).
 
 Both types use the same worksheet table format:
 
-| # | Claim/Constant | Value | Source | Verified? | Notes |
+| # | Claim/Constant | Code value | Your value | Source | Value correct? | Citation correct? | Notes |
+
+**State this schema IN THE PROMPT, with the verdict vocabulary.** Eight
+different column layouts exist across the worksheets on disk because no
+prompt ever specified one, and a tool that must read them all needs a
+header-role registry to do it. That is the consumer paying for a
+producer that was never pinned.
+
+A verdict cell carries EXACTLY ONE of these tokens and nothing else,
+with the reasoning in Notes:
+
+    YES  NO  PARTIAL  APPROX  DERIVED  UNVERIFIED
+
+Two verdicts per row, never conflated. `Value correct?` asks whether
+the number is right; `Citation correct?` asks whether the named source
+publishes it. A right number under a wrong authority is value-YES and
+citation-NO, and that split is the whole reason for two columns.
+
+`Code value` is what the checker read from the code at the prompt's
+SHA. It is not redundant with `Your value`: comparing it against the
+code NOW detects a value edited after its check, which no diff-based
+tool can see once the edit is committed.
+
+PARTIAL means the claim is genuinely half-right -- a source that
+publishes the value at lower precision than the code carries.
+"I ran out of session" is UNVERIFIED, and the Notes say what blocked
+it. An honest UNVERIFIED is a usable answer; a PARTIAL standing in for
+one is not.
 
 The distinction matters because the same file can need both: a shell
 module's display text needs value verification while its `# Source:`
@@ -270,6 +321,46 @@ Two failure shapes, and they need different fixes:
 
 Do not write the annotation planning to file the worksheet afterwards.
 The gap between the two is where the first shape comes from.
+
+**The worksheet has to SAY THE THING.** Existence is clause one, not the
+whole rule. An annotation names a checker who verified THIS value; the
+worksheet must record that check, for that value, with a verdict that
+amounts to a completed one.
+
+Two live failures, both found August 13, 2026, and both the same shape:
+
+- `BENNU_RADIUS_KM` -- worksheet row G10 reads UNVERIFIED, "Not
+  checked." The annotation credits Claude with a cross-check against
+  Nolan et al.
+- `ARROKOTH_RADIUS_KM` -- the worksheet said the OLD value was wrong.
+  The value was then corrected against Keane et al. 2022, a paper the
+  worksheet never opened, and the annotation still credits the
+  worksheet.
+
+**A worksheet that says a value is WRONG is not a worksheet that says
+the replacement is RIGHT.** Those are different claims resting on
+different evidence. The correction is the moment this enters: someone
+fixes a value against a new source, and the existing annotation rides
+along unchanged. Re-check the annotation whenever the value under it
+moves.
+
+**Incomplete or malformed evidence is sent back, not interpreted.**
+[Tony's ruling, August 13, 2026.] If a worksheet is prose a tool cannot
+read, or its verdict is PARTIAL because the checker ran out of session
+rather than because the claim is half-right, the answer is a better
+worksheet -- not a cleverer parser and not a charitable reading.
+
+The move that makes this cheap: **reopen the session that produced it.**
+Conversations persist and can be continued. The session holds the
+research context, so asking it to finish costs a fraction of starting
+over, and the addendum lands in the format the tools expect. Measured
+the first time this was tried: of seventeen unresolved rows, nine
+closed, including one that had blocked on nobody opening the cited fact
+sheet.
+
+Ask for a NEW file rather than an edit. The original worksheet is the
+record of what was known on its date, and rewriting it makes it assert
+something it did not say at the time.
 For derived values where the source is a computation, not a lookup:
 ```python
 # Source: Derived from NASA NSSDCA Mars Fact Sheet (a, GM_Mars)

@@ -301,6 +301,100 @@ produced, at the moment of production. Nothing else would have.
 
 ---
 
+# PART 2 -- the pre-design, the review, and a rule
+
+Everything above was written at `c5218f6`. The session continued.
+Anchor for this part: `00219d9`, plus whatever SHA carries this
+amendment.
+
+## The checker was designed, reviewed, and not built
+
+`documentation/PREDESIGN_L192_worksheet_checker.md` went to Fable 5;
+`documentation/FABLE_REVIEW_L192_worksheet_checker.md` came back.
+Verdict: sound, with changes. Full capture is in the L-192 ledger
+block; the three things worth carrying in prose are below.
+
+**Fable cited L-158 wrongly, and the ledger records the divergence.**
+It proposed treating a DERIVED verdict as closed-by-derivation, citing
+L-158 as having placed derived values on their own rung. L-158
+explicitly RETIRED that framing in July: a runtime-derived value
+inherits its weakest input's rung only after the derivation logic
+itself has cleared one independent cross-check. A DERIVED row is
+pending, not closed. The convention wins over external input, and this
+is only catchable with both documents open -- a fresh session reads
+"the L-158 ruling" and takes it as given.
+
+**One ruling changed.** The checker now JOINS `maintenance_run.py`,
+one line with a denominator on a clean run, findings to the audit,
+report-only. Tony's original reason for keeping it out was never the
+34 files; it was one more block of output to read before every push.
+One line with a count answers that, and a count moves when something
+moves.
+
+**Two annotations are false and are not yet fixed.**
+`BENNU_RADIUS_KM` and `ARROKOTH_RADIUS_KM` both credit
+`worksheet_claude_constants_new.md` for checks it explicitly did not
+perform. The values are fine; the provenance claim overstates. Tony
+(decide) before the checker's first run, or it arrives as a failure.
+
+## The move that changed the design: reopen the session
+
+Tony's ruling, and it is the most reusable thing here: **we do not have
+to accept and interpret incomplete or malformed answers.**
+
+One cited worksheet was prose no tool can read; another carried six
+PARTIAL and eleven UNVERIFIED rows. The design was drifting toward a
+parser clever enough to cope. The better move was to go back to the
+conversation that produced them -- "DONE: Phase 2 design and build
+Piece 1", August 2-4 -- and ask it to finish the job in a readable
+format.
+
+**It works, and the numbers say so.** Of seventeen unresolved rows,
+nine closed. Mercury closed because the session finally opened the NASA
+fact sheet it had never opened: 2439.7 confirmed, oblateness 0.0009
+confirmed, and the 0.3 km disagreement with JPL turns out to be a
+separate determination rather than an error. The addendum also found
+the two false attributions above, which nobody was looking for.
+
+Old sessions persist and can be continued. They hold the research
+context, so asking them to finish costs a fraction of starting over.
+This is now a standing move, not a one-off. `documentation/
+ADDENDUM_REQUESTS_worksheet_readability.md` holds both prompts as
+worked examples.
+
+## Skill: provenance-discipline 2.0 -> 2.1
+
+Two clauses added to Worksheet First, Annotation Second: **the
+worksheet has to say the thing** (existence is clause one, not the
+whole rule -- a worksheet saying a value is WRONG is not a worksheet
+saying the replacement is RIGHT), and **incomplete or malformed
+evidence is sent back, not interpreted.** Plus the producer half: the
+worksheet table schema and the verdict vocabulary are now stated in the
+prompt, because eight layouts exist on disk and no prompt ever
+specified one.
+
+Also recorded: the v2.0 changelog entry, which was never written when
+v2.0 landed.
+
+**OBLIGATION FOR THE NEXT SESSION.** `provenance-discipline` went to
+2.1 at this session's push. The session that bumped it loaded 2.0. A
+mid-session reinstall cannot be verified from inside the session --
+the loaded copy appears bound at conversation start. **Confirm your
+loaded copy reads 2.1 before doing any provenance work.** Your load
+performs the check; this note cannot.
+
+## Next session
+
+L-192's build, with fork 2 as the first question rather than the
+fifth. Then the backfill of the 27, verdict-gated, starting with the
+four orphans and the two false attributions.
+
+The addendum also routed the remaining unresolved rows: D1, D3, D4 to
+Gemini for book access; D2, D5, D6, G9, G10 to any journal-access
+checker -- those five are the cheapest remaining wins and need no book.
+
+---
+
 *Handoff prepared August 2026 with Anthropic's Claude Opus 5, built on
 `c5218f6202965bc051044e59988e1a040a234fc9` at
 https://github.com/tonylquintanilla/palomas_orrery and

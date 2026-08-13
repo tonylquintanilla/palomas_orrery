@@ -1,12 +1,12 @@
-Where we are 8/11/2026
+Where we are 8/13/2026
 
-Updated 2026-08-11 after the August 8-10 session. Built on
-4509c08 at
+Updated 2026-08-13 after the August 12-13 sessions. Built on
+00219d9 at
 https://github.com/tonylquintanilla/palomas_orrery (branch main);
-gallery at 02d71637e100c4faf6ddaa23cdbc9b6f4a88ddc0 at
+gallery at cd4874467254c89e88dc2a8fa0645e99bf5c986e at
 https://github.com/tonylquintanilla/tonyquintanilla.github.io.
 
-Companion to MASTER_PLAN_INTERACTIVE_GALLERY.md v17. The plan is the
+Companion to MASTER_PLAN_INTERACTIVE_GALLERY.md v18. The plan is the
 reference document; this is the readable snapshot.
 
 The plan is now current with this snapshot. Every August 8 ruling is
@@ -274,9 +274,6 @@ OPEN DECISIONS FOR TONY, IN ORDER OF NEED
            with a thickness, the number exists in code and the gap is
            transport, not data. One look at the file settles it.
 
-  (decide) Where the L-188 run-all push-gate binding lands -- L-188 or
-           L-184.
-
   (decide) The constructor-call count in decision 12. It says two
            assignments contain constructor calls. Measured: one,
            HORIZONS_MAX_DATE. Staleness explains a count going up, not
@@ -373,16 +370,18 @@ LEDGER ITEMS BY TRACK
               L-180  Solar chromosphere  DONE
               L-176  Illustrated dimensions in shell hover text
 
-  Track 1     L-186  Cross-check annotation issues -- mechanical half
-                     done, six duplicate_identity sites remain
+  Track 1     L-186  Cross-check annotation issues  DONE
+              L-192  Worksheet checker -- scanner half built,
+                     checker designed and reviewed, NOT built
               L-177  Mercury Hill sphere convention
               L-184  Interactive build-path push gate
 
   Track 2     L-154  JS feature-rendering layer -- does not exist yet
 
-  Tooling     L-188  Maintenance runner -- one command, the whole suite
+  Tooling     L-188  Maintenance runner -- one command, the whole
+                     suite  DONE
               L-189  Provenance scanner: run history and run-to-run
-                     delta  -- NEXT SESSION'S BUILD
+                     delta  DONE
               L-190  Scanner reach: anything rendered must be reachable
               L-191  Display-text duplication across the shell modules
 
@@ -433,10 +432,10 @@ done. Artifact 1 (Earth) built and Mode-5 accepted, golden fingerprint
 locked. L-179 and L-180 closed August 7. L-186's mechanical half and one
 shadow constant closed August 10.
 
-Protocol at v3.35. The v3.36 Register Rule amendment is drafted at
-documentation/REGISTER_RULE_AMENDMENT_v3.36.md and NOT YET APPLIED. "The
-Artifact Bounds the Audit" is ruled for Part 3 but has no drafted text
-anywhere in the repo -- it needs writing, not applying.
+Protocol at v3.39. The v3.36 Register Rule amendment is applied, and
+so is "The Artifact Bounds the Audit" (v3.37). v3.38 records the two
+limits on Stale Skill = Stop. v3.39 adds "A Check That Cannot Fail Is
+Not Passing" as a CRITICAL gate. provenance-discipline is at v2.1.
 
 Phases 0, 1a and 1b are all closed. Layer 3, the nightly Task Scheduler
 job, is RETIRED as of August 10 -- disabled, not deleted. Several
@@ -444,5 +443,66 @@ documents still describe it as live: MASTER_PLAN_INTERACTIVE_GALLERY.md
 line 40, documentation/TESTING_PROTOCOL.md line 292, the
 gallery-cache-builder skill line 70, and the deployment-model decision
 block in the ledger near line 4555.
+
+AUGUST 12-13: THE PROVENANCE LAYER GREW TEETH
+
+Two sessions, no rendering code touched, and Track 0 did not move. What
+changed is what the tooling can now catch.
+
+L-186 closed, and it turned out not to be a data question at all. Six
+findings had been carried through three handoffs as "each needs a look
+at the source." All six were the parser misreading correct
+annotations, because the old annotation format let a source's own
+publication year eat the check date. The fix was the format. All 134
+annotations were migrated.
+
+L-188 and L-189 closed. `maintenance_run.py` now runs four generators
+and eight checkers in one command, about 40 seconds. Its very first
+pass found two test files that had been red for days and that nobody
+ran, which is the argument for the runner in one sentence.
+
+Fifty-five pinned constant values were retired from the test suite.
+They were pinning pre-correction numbers and nobody had updated them.
+`constants_change_report.py` replaces them and stores no numbers at all
+-- it asks git what moved and reads both values out of the diff, which
+means it covers constants that do not exist yet.
+
+L-192 is the one worth reading twice. The scanner had been granting
+its top trust rung -- cross-checked -- to values on the strength of
+annotations written for a DIFFERENT value a few lines away. The
+deciding case was the inner Oort cloud limit, which wore the top badge
+while the two worksheets it was credited with read UNVERIFIED and
+PARTIAL for that exact number. A recorded non-verification was
+rendering as a completed check.
+
+Credit now requires the annotation to touch the value's own
+declaration. The cross-checked count fell from 77 to 50. Nothing got
+worse; 50 was always the real number.
+
+Two things from those sessions are worth carrying beyond them.
+
+The first is a correction. A measurement went to Tony wrong twice
+before it was caught -- Fable's written rule and its own script
+disagreed, and the independent check reproduced the error because it
+read the same prose the same wrong way. Two implementations agreeing
+is only as good as the specification they share. The right split is 50
+and 27.
+
+The second is a move that is now standing procedure: reopen the
+session that produced the evidence. Two cited worksheets were
+unusable, and the design was drifting toward building a parser clever
+enough to interpret them. Tony's ruling was that we do not have to
+accept and interpret incomplete or malformed answers. Going back to
+the August 2-4 conversation and asking it to finish closed nine of
+seventeen open rows, settled Mercury's radius after eleven days, and
+turned up two annotations crediting a worksheet for checks it had
+explicitly declined to make. Old sessions persist, they hold the
+research context, and asking them to finish costs a fraction of
+starting over.
+
+The worksheet checker itself is designed and reviewed and NOT built.
+That is the next build, and one question goes first: whether a
+half-confirmed verdict can count as a completed check.
+
 
 Entry written August 2026 with Anthropic's Claude Opus 5.

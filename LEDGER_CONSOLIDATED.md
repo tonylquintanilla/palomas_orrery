@@ -238,7 +238,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
-| ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-12 |
+| ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-13 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
 | ! | L-187 | info_dictionary numeric-overlap enumeration | OPEN | 1.8 | 2026-08-07 |
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
@@ -1476,7 +1476,7 @@ ruling.
 and findings summary #5.
 
 #### [L-192] Worksheet checker -- verify a value against its own evidence
-<!-- L:192 status:OPEN upd:2026-08-12 section:A flag: rice:3/3/70/3 -->
+<!-- L:192 status:OPEN upd:2026-08-13 section:A flag: rice:3/3/70/3 -->
 - **What it does:** for a constant carrying `# Cross-checked:` lines,
   open the `.md` each line names in `documentation/worksheets/` and
   confirm the worksheet exists and states the value. The skill already
@@ -1587,6 +1587,108 @@ prerequisite that surfaced while measuring it.
   was reported as confirmation and was not. Caught only by re-reading
   the written rule against the code being produced. Cross-AI
   independence protects against a shared model, not a shared spec.
+
+##### Pre-design reviewed, 2026-08-13: the checker itself
+
+Documents: `documentation/PREDESIGN_L192_worksheet_checker.md` and
+`documentation/FABLE_REVIEW_L192_worksheet_checker.md`, both anchored
+`00219d9`. Fable's verdict: **sound, with changes.** Not built.
+
+**Purpose, restated.** The checker confirms that an annotation's claim
+of evidence is TRUE. It is the only planned check reaching committed
+history: `constants_change_report.py` is a pre-commit diff reader by
+construction, so a value corrupted and committed three weeks ago has
+nothing in the diff to notice. The worksheet is a fixed record and says
+what it said.
+
+**Four layers, each with a named failure.** L0 worksheet exists
+(currently zero failures across 134 annotations -- passes today, can
+still fail on a rename or a migration-mangled filename). L1 the row is
+located (failure: UNMATCHED). L2 the value agrees (failure: MISMATCH --
+the loudest finding available, because the code and its own evidence
+disagree about a number). L3 the verdict is read (failure: an
+annotation asserting a completed check over a row recording an
+incomplete one -- the Oort case).
+
+**Fable's three additions, all accepted:**
+
+- **Identity consistency.** Nothing checked that the named worksheet
+  belongs to the named checker, so two annotations naming different
+  models over one model's evidence would pass all four layers and fake
+  the rung. Rule: the worksheet filename must contain the checker
+  token, case-folded. Verified independently: 134 of 134 pass today,
+  and an injected Gemini-over-Claude-worksheet violation is caught.
+- **Drift-since-check (L2b).** The tier2 schema records `Code value` --
+  what the checker read at the prompt's SHA. Comparing it to the code
+  NOW detects a value edited after its check. Verified coverage: the
+  column reaches **72 of 134** annotations, not the whole corpus.
+- **DERIVED split out of QUALIFIED.** ACCEPTED AS A SPLIT, REJECTED AS
+  A DISPOSITION. Fable proposed "closed by derivation, do not queue,"
+  citing L-158. **L-158 rules the opposite**: it explicitly retired the
+  derived-rung framing, and holds that a runtime-derived value inherits
+  its weakest input's rung only once the derivation logic -- formula,
+  units, parent reference -- has cleared one independent cross-check,
+  and is unverified until then. Fable and GPT both rejected the
+  immune-by-derivation premise in July, citing Mars Climate Orbiter.
+  The convention wins; a DERIVED row is PENDING, not closed.
+
+**Comparison rule (Fable, accepted).** Exact-or-rounded, never "within
+tolerance." A significant-figures tolerance would call Mercury's 2439.7
+and JPL's 2439.4 +/- 0.1 a match at three figures and the finding would
+vanish. A range cell is never MATCH; it is RANGE, its own class. A
+comparison needing a unit conversion is MATCHED-VIA-CONVERSION, its own
+class, because the conversion imports the project's own constants into
+the comparator.
+
+**Row matching (fork 1, Fable: (a) plus (c)).** Header-role mapping is
+the primary matcher; an unrecognised header set makes the whole
+worksheet WORKSHEET_UNREADABLE, announced every run. Value-based search
+is permitted only against the CODE-VALUE column, never the evidence
+column. Future worksheet prompts emit one schema with a key column --
+now carried in provenance-discipline v2.1.
+
+**Where it runs (fork 4). RULING CHANGED, 2026-08-13.** The earlier
+ruling kept the checker out of `maintenance_run.py` on cost grounds.
+Tony's reason was never file size: it was one more block of output to
+read on every push. Ruling: **the checker joins the runner**, printing
+ONE line on a clean run with its denominator ("134 annotations, N
+verified, M unmatched"), findings to the audit. Report-only -- it does
+NOT gate pushes; expanding the Tier-1 gate stays a separate decision.
+A line carrying a denominator moves when something moves; a line that
+always reads the same is wallpaper, and wallpaper is a check that
+cannot fail.
+
+**Uncited worksheets (fork 5, accepted).** One line steady-state with
+the date the set last changed; the full list prints only when the set
+differs from the recorded state.
+
+**Writing (fork 3, Fable recommends, Tony has not ruled).** A
+`--propose` mode emitting a patch script, never editing in place, with
+each worksheet row quoted verbatim beside each proposed annotation --
+so review runs against the evidence rather than the tool's claim about
+it. The risk is not forgery; it is a matcher bug writing annotations
+against wrong rows and the same matcher later confirming them.
+
+**Still open for Tony (decide):**
+1. Does a QUALIFIED verdict (PARTIAL, APPROX) earn a leg? Fable's
+   middle: never by token class, only by explicit per-row ruling
+   recorded in `provenance_exceptions.json` and visible in the audit.
+   Deliberately deferred to a fresh session -- a day spent inside the
+   Oort case biases this toward the strict answer.
+2. Fork 3, the propose mode.
+3. `BENNU_RADIUS_KM` and `ARROKOTH_RADIUS_KM` -- see below.
+
+**Two false attributions, found 2026-08-13 and NOT yet fixed.** Both
+annotations credit `worksheet_claude_constants_new.md` for checks it
+explicitly did not perform. Row G10 reads UNVERIFIED, "Not checked,"
+while the Bennu annotation credits a cross-check against Nolan et al.
+Row G14 said the OLD Arrokoth value was wrong; the value was then
+corrected against Keane et al. 2022, which the worksheet never opened,
+and the annotation rode along unchanged. Both replacement values are
+arithmetically self-consistent with their stated inputs, so the numbers
+look right and the PROVENANCE claim is what overstates. The checker
+will surface both mechanically on its first run. Tony (decide): remove,
+reattribute, or annotate. Rule added to provenance-discipline v2.1.
 
 #### [L-190] Scanner reach: anything rendered must be reachable
 <!-- L:190 status:OPEN upd:2026-08-07 section:A flag: rice:4/4/80/3 -->

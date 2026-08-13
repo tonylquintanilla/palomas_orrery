@@ -1,6 +1,6 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** v17 -- Phase 2 (solar system assembler) BUILD UNDERWAY. Design
+**Status:** v18 -- Phase 2 (solar system assembler) BUILD UNDERWAY. Design
 handoff v0.1 -> v0.3 resolved every open question (Pluto/Charon composition,
 Apophis close-encounter scope, OQ-4/closeup-shape routing). Competitive
 manifest cross-check (Fable + GPT independent builds) completed two rounds
@@ -1859,6 +1859,98 @@ bodies and counted in neither figure. See L-181 and L-190.
   to the console output. Naming note for whoever greps for it: the
   audit's section is titled "Findings by File Type", not "Findings by
   Domain".
+
+*New in v18 (August 13, 2026):*
+- **Track 1 tooling advanced on three fronts; no rendering code touched
+  and no Track 0 or Track 2 work moved.** L-186 closed, L-188 closed,
+  L-189 closed, L-192's scanner half built. The plan's phase structure
+  is unchanged; this entry records what the provenance layer now does
+  that it did not do on August 7.
+- **L-186 closed, and it was never a data question.** The six
+  `duplicate_identity` findings carried through three handoffs as
+  "each needs a look at the source" were all the parser misreading
+  correct annotations. The retired annotation grammar put a free-text
+  source before the check date, so a source carrying its own
+  publication year ate the date and the model name landed outside the
+  checker identity -- two annotations by two DIFFERENT models read as
+  one checker written twice. Measured: 54 of 134 annotation lines
+  codebase-wide were affected. The fix was the grammar, not the six
+  sites: checker first, optional source clause, retired order REFUSED
+  rather than reconstructed. All 134 lines migrated.
+- **L-188 closed. `maintenance_run.py` runs four generators and eight
+  checkers in about 40 seconds.** Its first pass confirmed its own
+  premise by finding two red test files nobody had executed -- one
+  asserting an unannotated corpus since roughly August 3, the other
+  failing 6 of 73 against values deliberately corrected on August 2.
+  Neither was detectable before, because neither file was in any
+  routine.
+- **55 pinned constant literals retired; `constants_change_report.py`
+  replaces them and stores no numbers.** It asks git what changed in
+  `constants_new.py` since the last commit and reads both values out of
+  the diff -- so it covers constants that do not exist yet. 18
+  structural tests kept (derivations, orderings, cross-consistency,
+  completeness); none holds a copy of a measured value.
+- **Protocol v3.39: "A Check That Cannot Fail Is Not Passing"
+  [CRITICAL].** Companion to Verify Execution, Not Appearance, one
+  layer out: that gate asks whether the code you edited is the code
+  that runs; this one asks whether the CHECK you are trusting can
+  produce a failure at all. Three instances in one session, each in a
+  different layer and each indistinguishable from a pass. The three
+  moves: make success carry evidence, make the blind spot announce, put
+  the check where it runs.
+- **L-192's scanner half built (August 12-13): cross-check credit now
+  requires ATTACHMENT.** The scanner counted any annotation inside a
+  30-line window. That window is correct for a citation -- a section
+  header naming IAU Resolution B3 legitimately covers the constants
+  beneath it -- and wrong for an annotation, which names one checker
+  who verified one value on one date. The deciding case:
+  `INNER_LIMIT_OORT_CLOUD_AU` wore the cross-checked rung on
+  annotations belonging to the heliopause constant three lines above,
+  while the worksheets those annotations name read UNVERIFIED and
+  PARTIAL for the Oort value. The window was converting a recorded
+  non-verification into a top rung.
+- **Audit movement: the cross-checked rung fell from 77 to 50.**
+  Nothing got worse; 50 was always the true number. Four orphan
+  annotations are reported -- two section headers in `constants_new.py`
+  written to cover a group, which the codebase has no grammar to
+  express.
+- **Ruled: per-value annotations, not block-scope grammar.** A parser
+  cannot distinguish group intent from proximity, because in bytes they
+  are identical. The reason to prefer per-value is the Oort case: a
+  block annotation reading "everything below checked" would have
+  papered over two UNVERIFIED worksheet rows inside its own scope.
+- **A number was wrong twice before it was caught, and the method note
+  matters more than the number.** Fable's written attachment rule and
+  its own measurement script disagreed; the independent verification
+  leg reproduced the error, because it implemented the same prose and
+  read it the same wrong way, and the agreement was reported as
+  confirmation. Cross-AI independence protects against a shared model,
+  not a shared specification. Correct split: 50 keep, 27 drop.
+- **L-192's checker itself is designed and reviewed, not built.**
+  Pre-design and Fable's review both anchored `00219d9`; verdict sound
+  with changes. Four layers, each with a named failure: worksheet
+  exists, row located, value agrees, verdict read. Three additions
+  accepted -- an identity-consistency check (the worksheet filename
+  must carry the checker token; 134 of 134 pass today), a
+  drift-since-check against the tier2 schema's `Code value` column
+  (reaches 72 of 134), and DERIVED split out of QUALIFIED. Fable
+  proposed treating DERIVED as closed-by-derivation, citing L-158;
+  L-158 rules the opposite and the convention wins.
+- **Ruling changed: the checker joins `maintenance_run.py`.** The
+  earlier ruling kept it out on cost grounds. The cost was never the 34
+  markdown files -- it was one more block of output to read before
+  every push. One line carrying a denominator answers that, findings to
+  the audit, report-only. It does not gate pushes.
+- **A standing move, new: reopen the session that produced the
+  evidence.** Tony's ruling -- we do not have to accept and interpret
+  incomplete or malformed answers. Two cited worksheets were unusable,
+  one prose a tool cannot read and one carrying seventeen unresolved
+  rows, and the design was drifting toward a parser clever enough to
+  cope. Going back to the originating conversation closed nine of
+  seventeen rows, settled the Mercury radius that had been open eleven
+  days, and surfaced two annotations crediting a worksheet for checks
+  it explicitly did not perform. Now carried in
+  provenance-discipline v2.1.
 
 ---
 
