@@ -10,19 +10,21 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 121  
-**Total Lines of Code (non-blank):** 97,193  
-**Total Public Functions/Classes:** 1,023
+**Total Python Files:** 122  
+**Total Lines of Code (non-blank):** 97,318  
+**Total Public Functions/Classes:** 1,024
 
 ## Classification Coverage
 
-**Undetermined role (1).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (2).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `patch_L192_attachment.py`
+- `patch_ledger_L192_attachment.py`
 
-**Undetermined domain (1).** No valid `Domain:` tag.
+**Undetermined domain (2).** No valid `Domain:` tag.
 
 - `patch_L192_attachment.py`
+- `patch_ledger_L192_attachment.py`
 
 
 ---
@@ -222,6 +224,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `patch_L192_attachment.py` | Patch: narrow cross-check credit to attached annotations (L-192). (442 lines) |
+| `patch_ledger_L192_attachment.py` | Patch: record the L-192 attachment build in the ledger. (125 lines) |
 
 ---
 
