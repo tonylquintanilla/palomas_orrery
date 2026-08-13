@@ -242,8 +242,7 @@ ROLE_MAP = {
     'verify_orbit_cache':                     'devtool',
 
     # patch
-    'patch_ledger_L192_rulings':              'patch',
-    'patch_ledger_L192_sequencing_fix':       'patch',
+    'patch_runner_write_vs_change':           'patch',
 }
 # ROLE-MAP:END
 

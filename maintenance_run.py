@@ -118,16 +118,31 @@ TOOL_TIMEOUT_SECONDS = 900
 # HELPERS
 # ============================================================
 
-def fingerprint(path):
-    """MD5 over LF-normalized content, or None if the file is absent.
+def snapshot(path):
+    """(mtime_ns, content hash) for a file, or (None, None) if absent.
 
-    Normalized because a CRLF working copy is not a content change --
-    the same reason the patch scripts fingerprint this way.
+    TWO facts, deliberately, because a generator can change one
+    without the other. skills_index.py rewrites its manifest zone on
+    every run whether or not the bytes move: the mtime advances, the
+    hash does not. Windows Explorer shows the first and this runner
+    used to report only the second, so a file could look new on disk
+    while the screen said 'unchanged' and neither was wrong.
+
+    The distinction is operational, not cosmetic. A real change to
+    PROJECT_INSTRUCTIONS.md has to be re-uploaded to the Claude UI;
+    a rewrite with identical bytes does not.
+
+    The hash is LF-normalized because a CRLF working copy is not a
+    content change -- the same reason the patch scripts fingerprint
+    this way.
     """
     if not os.path.exists(path):
-        return None
+        return (None, None)
+    mtime = os.stat(path).st_mtime_ns
     with open(path, 'rb') as handle:
-        return hashlib.md5(handle.read().replace(b'\r\n', b'\n')).hexdigest()
+        digest = hashlib.md5(
+            handle.read().replace(b'\r\n', b'\n')).hexdigest()
+    return (mtime, digest)
 
 
 def last_meaningful_line(text):
@@ -220,18 +235,25 @@ def main():
     print('GENERATORS -- regenerate every time; a no-op when nothing moved')
     print('-' * 70)
     for label, argv_tail, outputs in GENERATORS:
-        before = dict((path, fingerprint(path)) for path in outputs)
+        before = dict((path, snapshot(path)) for path in outputs)
         rc, output, seconds = run_tool(project_dir, argv_tail)
-        after = dict((path, fingerprint(path)) for path in outputs)
-        moved = [path for path in outputs if before[path] != after[path]]
+        after = dict((path, snapshot(path)) for path in outputs)
+        moved = [path for path in outputs
+                 if before[path][1] != after[path][1]]
+        written = [path for path in outputs
+                   if before[path][0] != after[path][0]]
         if rc is None:
             note = 'DID NOT RUN'
         elif rc != 0:
             note = 'exit %d' % rc
         elif moved:
             note = 'rewrote ' + ', '.join(moved)
+        elif written:
+            note = ('unchanged (%d of %d rewritten, content identical)'
+                    % (len(written), len(outputs)))
         else:
-            note = 'unchanged'
+            note = ('unchanged (%d checked, not written)'
+                    % len(outputs))
         print('  %-24s %6.1fs  %s' % (label, seconds, note))
         results.append((label, rc, seconds, note, output, False))
     print()
