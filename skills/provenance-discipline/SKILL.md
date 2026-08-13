@@ -6,8 +6,8 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 2.1 | Cut from palomas_orrery @ 00219d9 (v2.1), earlier
-@ eb77c83 (v2.0), @ cdcdb4b (v1.9), @ 8e4b5ca (v1.8) | August 13, 2026
+Skill version: 2.2 | Cut from palomas_orrery @ 6b99ace (v2.2), earlier
+@ 00219d9 (v2.1), @ eb77c83 (v2.0), @ cdcdb4b (v1.9) | August 13, 2026
 Source: project_instructions_v3_29.md Part 3 (Provenance Audit, Fetched vs
 Recalled) + food insecurity build handoff + scanner source at HEAD. v1.1
 adds the report domain-classification mechanics, the Review-Repair
@@ -67,6 +67,19 @@ perform, and one cited worksheet was prose a tool cannot read. Tony's
 ruling -- we do not have to accept and interpret incomplete or
 malformed answers -- is the second clause, and the session that
 produced the evidence can be reopened to finish the job.
+
+v2.2 (August 13, 2026) defines DERIVED, which v2.1 listed in the
+verdict vocabulary without ever saying what it meant, and separates
+two things the send-back rule had run together. A row that is
+INCOMPLETE goes back to its originator. A row that is COMPLETE and
+disagrees with the code is a FINDING and comes to conversation,
+because the disagreement may be a convention mismatch rather than an
+error in either place. Earned August 13 on the Eris and Pluto Hill
+sphere rows, where checkers computing at semimajor axis disagreed
+with code computing at perihelion and nobody had done bad
+arithmetic. Tony's rulings: PARTIAL and APPROX return
+unconditionally, and an adjudication is recorded with its reason so
+the next run does not re-raise it.
 
 The resident protocol carries the two governing principles as CRITICAL
 gates: Fetched-vs-Recalled (a citation is a provenance claim that must be
@@ -255,9 +268,27 @@ tool can see once the edit is committed.
 
 PARTIAL means the claim is genuinely half-right -- a source that
 publishes the value at lower precision than the code carries.
-"I ran out of session" is UNVERIFIED, and the Notes say what blocked
-it. An honest UNVERIFIED is a usable answer; a PARTIAL standing in for
-one is not.
+A checker that STOPPED BEFORE FINISHING writes UNVERIFIED, and the
+Notes say what blocked it: a context limit, a paywalled paper, a
+conversation that ended. An honest UNVERIFIED is a usable answer; a
+PARTIAL standing in for one is not.
+
+DERIVED answers the CITATION question, not the value question. It
+means no source publishes this number because the number is computed,
+so there is no citation for that column to be right about. It can
+pair with any value verdict, including NO. Reading it as a third
+member of the PARTIAL/APPROX family is the error to avoid: those two
+qualify a value, DERIVED describes where one came from.
+
+A DERIVED row is COMPLETE when it names its inputs, shows the
+arithmetic, and the arithmetic closes. Then L-158 governs: the
+derivation logic has cleared its own check, and the value inherits
+the rung of its WEAKEST INPUT. That is not a completed check on its
+own -- it hands the question to the premise. Worked example, the
+Moon's Hill sphere in lunar radii: 60,000 / 1737.4 = 34.53 closes
+exactly, and the 60,000 km premise under it reads APPROX and
+UNSOURCED, so the derived figure is worth precisely that and no
+more. A DERIVED row showing no work is incomplete and goes back.
 
 The distinction matters because the same file can need both: a shell
 module's display text needs value verification while its `# Source:`
@@ -345,10 +376,14 @@ along unchanged. Re-check the annotation whenever the value under it
 moves.
 
 **Incomplete or malformed evidence is sent back, not interpreted.**
-[Tony's ruling, August 13, 2026.] If a worksheet is prose a tool cannot
-read, or its verdict is PARTIAL because the checker ran out of session
-rather than because the claim is half-right, the answer is a better
-worksheet -- not a cleverer parser and not a charitable reading.
+[Tony's ruling, August 13, 2026.] If a worksheet is prose a tool
+cannot read, or a row shows no work, the answer is a better worksheet
+-- not a cleverer parser and not a charitable reading.
+
+**PARTIAL and APPROX return to the originator for completion.**
+[Tony's ruling, August 13, 2026.] Unconditionally, and without first
+asking why the row is qualified. Neither token earns a leg toward the
+cross-checked rung, and neither is interpreted into one.
 
 The move that makes this cheap: **reopen the session that produced it.**
 Conversations persist and can be continued. The session holds the
@@ -361,6 +396,51 @@ sheet.
 Ask for a NEW file rather than an edit. The original worksheet is the
 record of what was known on its date, and rewriting it makes it assert
 something it did not say at the time.
+
+#### A Complete Row That Disagrees Is a Finding [CRITICAL]
+
+Send-back fires on incompleteness. It does NOT fire on disagreement.
+A row that names its inputs and shows its arithmetic has already
+given everything needed to settle the question; returning it asks for
+what we already hold and discards a usable finding.
+
+So a mismatch between a value and its own evidence is reported LOUDLY
+and routed to conversation. No tool assigns the cause. Three outcomes
+are live and none of them is the default:
+
+- CONVENTION MISMATCH. Both derivations are arithmetically correct
+  and answer different questions. Nobody is wrong; the code has to
+  say which question it answers.
+- THE CODE'S NUMBER IS WRONG. The worksheet wins; the value changes.
+- THE WORKSHEET'S DERIVATION IS WRONG. The code wins.
+
+**Every outcome is confirmed in conversation unless the rule is
+already stated** [Tony's ruling, August 13, 2026]. A stated rule
+settles the next occurrence without a second conversation, which is
+the whole reason for writing it down.
+
+The Hill sphere is the worked example, and it is a convention
+mismatch. The standard Hill radius carries an eccentricity factor,
+a(1-e)(m/3M)^(1/3), so what it returns is the PERIHELION Hill radius.
+Checkers computing at semimajor axis dropped the (1-e) and got a
+larger number: for Eris at e~0.44 that is 14.2 Mkm against 8.0 Mkm,
+which reads as a gross error and is not one.
+
+**The adjudication is recorded with its reason, in the place the next
+reader will hit it.** Two shapes already work in this codebase:
+
+- For a convention, the reader-facing text. Eris's shell text now
+  states both figures and says the shell draws perihelion, so the
+  next checker who computes 14.3 Mkm reads the answer before raising
+  it.
+- For a changed value, a `# Corrected:` line in the comment block
+  saying what moved and why. Pluto's block carries one recording that
+  radius_fraction 4685 drew a 5.57 Mkm shell under text claiming
+  5.99 Mkm.
+
+A verdict with no reason is not an adjudication. It is the same run
+repeated later by somebody who does not know it already happened.
+
 For derived values where the source is a computation, not a lookup:
 ```python
 # Source: Derived from NASA NSSDCA Mars Fact Sheet (a, GM_Mars)

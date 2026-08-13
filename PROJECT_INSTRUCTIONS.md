@@ -420,7 +420,7 @@ agentic-pre-test             1.2  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
 horizons-orbital-mechanics   1.1  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning
-provenance-discipline        2.1  Scanner runs, audits, citations, constants,
+provenance-discipline        2.2  Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
 earth-system-pipeline        1.1  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY

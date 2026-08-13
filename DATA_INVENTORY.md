@@ -7,7 +7,7 @@ Repo copies stale/absent; this reflects the live local stores.
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
 | .vot | 4 | 295.1 MB | gaia_data_magnitude.vot (284.4 MB) | 2026-02-08 |
-| .json | 50 | 262.3 MB | orbit_paths.json (130.4 MB) | 2026-08-12 |
+| .json | 50 | 262.3 MB | orbit_paths.json (130.4 MB) | 2026-08-13 |
 | .nc | 18 | 161.1 MB | era5_clim_march_day22.nc (27.4 MB) | 2026-04-07 |
 | .backup | 4 | 130.8 MB | orbit_paths.json.backup (130.4 MB) | 2026-08-05 |
 | .backup_old | 1 | 130.4 MB | orbit_paths.json.backup_old (130.4 MB) | 2026-08-04 |
@@ -75,7 +75,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 438.7 MB (392 files)
+**Total size:** 438.7 MB (396 files)
 
 **GitHub Pages headroom:** 585 MB remaining of 1024 MB ceiling (42.8% used)
 
@@ -83,12 +83,12 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 263 | 417.6 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-08-12 |
+| .json | 267 | 417.6 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-08-13 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 1 | 5.1 MB | palomas_orrery_logo.png (5.1 MB) | 2025-11-27 |
 | .py | 27 | 615.6 KB | gallery_studio.py (244.1 KB) | 2026-07-29 |
 | .md | 13 | 409.9 KB | web_gallery_handoff.md (242.4 KB) | 2026-08-06 |
-| .jsonl | 33 | 248.9 KB | encke.jsonl (7.9 KB) | 2026-08-12 |
+| .jsonl | 33 | 256.2 KB | encke.jsonl (8.3 KB) | 2026-08-13 |
 | .html | 5 | 184.7 KB | index.html (128.2 KB) | 2026-07-14 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |

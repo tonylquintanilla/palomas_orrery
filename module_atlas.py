@@ -240,6 +240,9 @@ ROLE_MAP = {
     'test_provenance_1d':                     'devtool',
     'test_reset_completeness':                'devtool',
     'verify_orbit_cache':                     'devtool',
+
+    # patch
+    'patch_provenance_skill_v22':             'patch',
 }
 # ROLE-MAP:END
 

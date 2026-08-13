@@ -10,23 +10,15 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 123  
-**Total Lines of Code (non-blank):** 97,454  
-**Total Public Functions/Classes:** 1,026
+**Total Python Files:** 121  
+**Total Lines of Code (non-blank):** 96,962  
+**Total Public Functions/Classes:** 1,022
 
 ## Classification Coverage
 
-**Undetermined role (3).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Patch scripts awaiting archive (1).** A `Role: patch` module is a one-shot script that has already run. Its base fingerprint no longer matches, so it cannot run again. Move each into `documentation/`. While one sits in the scanned tree it inflates the module count here and the file count in the provenance audit.
 
-- `patch_capture_L192_review.py`
-- `patch_masterplan_v18.py`
-- `patch_skill_provenance_2_1.py`
-
-**Undetermined domain (3).** No valid `Domain:` tag.
-
-- `patch_capture_L192_review.py`
-- `patch_masterplan_v18.py`
-- `patch_skill_provenance_2_1.py`
+- `patch_provenance_skill_v22.py`
 
 
 ---
@@ -221,13 +213,11 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 ---
 
-## Undetermined -- Needs a Role: Tag
+## Patch Scripts (transient -- awaiting archive)
 
 | Module | Description |
 |--------|-------------|
-| `patch_capture_L192_review.py` | Patch: capture the L-192 pre-design review in the ledger and handoff. (265 lines) |
-| `patch_masterplan_v18.py` | Patch: master plan v17 -> v18 and summary current through Aug 13. (265 lines) |
-| `patch_skill_provenance_2_1.py` | Patch: provenance-discipline skill 2.0 -> 2.1. (173 lines) |
+| `patch_provenance_skill_v22.py` | - provenance-discipline SKILL.md 2.1 -> 2.2 (211 lines) |
 
 ---
 
