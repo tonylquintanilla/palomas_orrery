@@ -304,8 +304,13 @@ produced, at the moment of production. Nothing else would have.
 # PART 2 -- the pre-design, the review, and a rule
 
 Everything above was written at `c5218f6`. The session continued.
-Anchor for this part: `00219d9`, plus whatever SHA carries this
-amendment.
+
+**Anchor for this part: `6b99acec3d980c9de7e1770ef752d82a54c01db8`
+at https://github.com/tonylquintanilla/palomas_orrery (branch main).
+Gallery at `c2202dcc2c4ed210160ce6033b70346aef194b68` at
+https://github.com/tonylquintanilla/tonyquintanilla.github.io.
+Both verified live at session close.** The work described below was
+built on `00219d9` and pushed at `6b99ace`.
 
 ## The checker was designed, reviewed, and not built
 
@@ -383,6 +388,30 @@ the loaded copy appears bound at conversation start. **Confirm your
 loaded copy reads 2.1 before doing any provenance work.** Your load
 performs the check; this note cannot.
 
+## Master plan v17 -> v18, summary current at 8/13
+
+`documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md` gains a "New in v18"
+lineage entry covering L-186, L-188, L-189, protocol v3.39, the
+attachment rule, and the checker's design review. No phase structure
+changed and no Track 0 or Track 2 work moved.
+
+`MASTER_PLAN_INTERACTIVE_GALLERY_SUMMARY.md` was two days and four
+protocol versions stale. Three corrections beyond the new section:
+
+- The status table showed L-186 as "mechanical half done, six
+  duplicate_identity sites remain." Those six were never data problems.
+- L-188 and L-189 were listed as open, with L-189 marked "NEXT
+  SESSION'S BUILD." Both are done.
+- It read "Protocol at v3.35," described the v3.36 Register Rule
+  amendment as NOT YET APPLIED, and said "The Artifact Bounds the
+  Audit" had no drafted text anywhere in the repo. Both landed in
+  v3.37. **A snapshot asserting that an applied rule does not exist yet
+  is worse than one that is merely old** -- somebody reads it and
+  writes the rule a second time.
+
+That third one is the argument for updating the readable snapshot in
+the same session as the work, not a week later.
+
 ## Next session
 
 L-192's build, with fork 2 as the first question rather than the
@@ -395,8 +424,11 @@ checker -- those five are the cheapest remaining wins and need no book.
 
 ---
 
-*Handoff prepared August 2026 with Anthropic's Claude Opus 5, built on
-`c5218f6202965bc051044e59988e1a040a234fc9` at
-https://github.com/tonylquintanilla/palomas_orrery and
-`d5437f08f94feccd70b697729b52cdc44df8b51d` at
-https://github.com/tonylquintanilla/tonyquintanilla.github.io*
+*Handoff prepared August 2026 with Anthropic's Claude Opus 5.
+Part 1 built on `c5218f6202965bc051044e59988e1a040a234fc9`, Part 2 on
+`00219d9852c65d653ae49855d3138050dd8f76dd` and pushed at
+`6b99acec3d980c9de7e1770ef752d82a54c01db8`, at
+https://github.com/tonylquintanilla/palomas_orrery. Gallery at
+`c2202dcc2c4ed210160ce6033b70346aef194b68` at
+https://github.com/tonylquintanilla/tonyquintanilla.github.io --
+untouched by this session; it moved on its own nightly fetch.*
