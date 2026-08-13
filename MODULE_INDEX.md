@@ -10,15 +10,16 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 121  
-**Total Lines of Code (non-blank):** 96,962  
-**Total Public Functions/Classes:** 1,022
+**Total Python Files:** 122  
+**Total Lines of Code (non-blank):** 97,093  
+**Total Public Functions/Classes:** 1,023
 
 ## Classification Coverage
 
-**Patch scripts awaiting archive (1).** A `Role: patch` module is a one-shot script that has already run. Its base fingerprint no longer matches, so it cannot run again. Move each into `documentation/`. While one sits in the scanned tree it inflates the module count here and the file count in the provenance audit.
+**Patch scripts awaiting archive (2).** A `Role: patch` module is a one-shot script that has already run. Its base fingerprint no longer matches, so it cannot run again. Move each into `documentation/`. While one sits in the scanned tree it inflates the module count here and the file count in the provenance audit.
 
-- `patch_provenance_skill_v22.py`
+- `patch_ledger_L192_rulings.py`
+- `patch_ledger_L192_sequencing_fix.py`
 
 
 ---
@@ -199,7 +200,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `maintenance_run.py` | - L-188. One command, the whole maintenance suite. (234 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (951 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (953 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (2,941 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (330 lines) |
@@ -217,7 +218,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_provenance_skill_v22.py` | - provenance-discipline SKILL.md 2.1 -> 2.2 (211 lines) |
+| `patch_ledger_L192_rulings.py` | - record the L-192 fork rulings in the ledger (208 lines) |
+| `patch_ledger_L192_sequencing_fix.py` | - correct the Bennu/Arrokoth disposition already written into LEDGER_CONSOLIDATED.md (132 lines) |
 
 ---
 

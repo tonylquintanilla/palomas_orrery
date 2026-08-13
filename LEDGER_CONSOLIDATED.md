@@ -1669,14 +1669,11 @@ so review runs against the evidence rather than the tool's claim about
 it. The risk is not forgery; it is a matcher bug writing annotations
 against wrong rows and the same matcher later confirming them.
 
-**Still open for Tony (decide):**
-1. Does a QUALIFIED verdict (PARTIAL, APPROX) earn a leg? Fable's
-   middle: never by token class, only by explicit per-row ruling
-   recorded in `provenance_exceptions.json` and visible in the audit.
-   Deliberately deferred to a fresh session -- a day spent inside the
-   Oort case biases this toward the strict answer.
-2. Fork 3, the propose mode.
-3. `BENNU_RADIUS_KM` and `ARROKOTH_RADIUS_KM` -- see below.
+**Still open for Tony (decide): none.** All three were ruled
+2026-08-13; see the forks-ruled section below. Fable's middle answer
+on QUALIFIED -- per-row rulings recorded in
+`provenance_exceptions.json` -- was NOT taken. The ruling is simpler
+and needs no store.
 
 **Two false attributions, found 2026-08-13 and NOT yet fixed.** Both
 annotations credit `worksheet_claude_constants_new.md` for checks it
@@ -1687,8 +1684,135 @@ corrected against Keane et al. 2022, which the worksheet never opened,
 and the annotation rode along unchanged. Both replacement values are
 arithmetically self-consistent with their stated inputs, so the numbers
 look right and the PROVENANCE claim is what overstates. The checker
-will surface both mechanically on its first run. Tony (decide): remove,
-reattribute, or annotate. Rule added to provenance-discipline v2.1.
+will surface both mechanically on its first run. Rule added to
+provenance-discipline v2.1.
+
+**RULED 2026-08-13: they stay until the checker's first run, then go
+back. Not fixed now.** The rule that governs a PARTIAL row governs a
+false attribution -- we do not accept and interpret an answer the
+evidence does not support -- so the disposition is return to the
+originator: reopen the session that produced
+`worksheet_claude_constants_new.md` and ask it either to perform the
+two checks or to state plainly that it did not.
+
+The SEQUENCING is the ruling. The first run should catch both as
+examples of an incomplete response, and the catch is what routes
+them. Fixing them beforehand would remove the only two known-true
+failures in the corpus, and a first run that cannot fail is not a
+passing run.
+
+(Correction of record: this entry first read "send both back" and
+said the leave-in-place option was declined. That inverted the
+ruling. Fixed 2026-08-13 in a follow-up patch.)
+
+##### Forks ruled, 2026-08-13: DERIVED, no propose mode, the mismatch route
+
+Skill consequence: provenance-discipline 2.1 -> 2.2, five edits,
+pushed with this entry. The rulings are Tony's; the reasoning is the
+session record.
+
+**Fork 2 -- what counts as a completed check. PARTIAL and APPROX
+return to the originator for completion**, unconditionally and
+without first asking why the row is qualified. Neither earns a leg
+toward the cross-checked rung and neither is interpreted into one.
+This is the August 13 rule -- we do not have to accept and interpret
+incomplete or malformed answers -- applied to the verdict vocabulary
+rather than only to unreadable worksheets. Fable's middle answer,
+per-row exceptions in `provenance_exceptions.json`, is declined: it
+stores a judgement where the simpler move is to get a better
+worksheet.
+
+**DERIVED is not a third member of that family.** It answers the
+CITATION question, not the value question -- no source publishes the
+number because the number is computed, so there is nothing for that
+column to be right about. It can pair with any value verdict,
+including NO. The pre-design's classification table put DERIVED
+beside PARTIAL and APPROX as though all three qualified a value.
+Measured against the corpus that is wrong, and wrong in a way that
+would have returned complete derivations while letting incomplete
+ones through.
+
+**A DERIVED row is COMPLETE when it names its inputs, shows the
+arithmetic, and the arithmetic closes.** Then L-158 governs: the
+derivation logic has cleared its own check and the value inherits the
+rung of its weakest input. Not a completed check on its own -- it
+hands the question to the premise. Worked case, the Moon's Hill
+sphere in lunar radii: 60,000 / 1737.4 = 34.53 closes exactly over a
+60,000 km premise that reads APPROX and UNSOURCED, so the derived
+figure is worth that and no more. A DERIVED row showing no work is
+incomplete and goes back like any other.
+
+**Fork 3 -- the checker does not write.** No `--propose` argument.
+Proposed annotations are discussed in conversation before anything is
+written. Fable recommended a propose mode emitting a patch script for
+review; the mode itself is declined, not merely its safeguards. The
+backfill of the 27 happens in conversation, which is also where the
+adjudications get made.
+
+**A complete row that disagrees is a FINDING, not a defective
+worksheet.** This is the correction that changed the design.
+Send-back fires on INCOMPLETENESS; it does not fire on DISAGREEMENT.
+A row that names its inputs and shows its arithmetic has already
+given everything needed to settle the question, so returning it asks
+for what we already hold. A mismatch is therefore reported loudly and
+routed to conversation, with no cause assigned by any tool. Three
+outcomes, none of them the default:
+
+- CONVENTION MISMATCH -- both derivations correct, answering
+  different questions; the code must say which question it answers.
+- THE CODE'S NUMBER IS WRONG -- the worksheet wins, the value moves.
+- THE WORKSHEET'S DERIVATION IS WRONG -- the code wins.
+
+Every outcome is confirmed in conversation UNLESS THE RULE IS ALREADY
+STATED. That clause is what makes writing an adjudication down worth
+the effort: a stated rule settles the next occurrence without a
+second conversation.
+
+**Two dispositions, and the checker names which one.** An L2 MISMATCH
+-- a value and its own evidence disagreeing about a number -- routes
+to CONVERSATION, because the cause is open. An L3 failure -- an
+annotation asserting a completed check over a row that records an
+incomplete one -- routes to SEND BACK, because the cause is already
+known. `BENNU_RADIUS_KM` and `ARROKOTH_RADIUS_KM` are the worked L3
+cases, and demonstrating that route is part of what the first run is
+for.
+
+**The Hill sphere is the worked example, and it is a convention
+mismatch.** The standard Hill radius carries an eccentricity factor,
+a(1-e)(m/3M)^(1/3), so what it returns is the PERIHELION Hill radius.
+Checkers computing at semimajor axis dropped the (1-e): for Eris at
+e~0.44 that gives 14.2 Mkm against 8.0 Mkm, which reads as a gross
+error and is not one. Nobody did bad arithmetic. This is Tony's
+reading and it corrected this session's first pass, which had filed
+both Eris and Pluto as live value errors.
+
+Eris is already resolved in the tree and shows the recording shape:
+the shell text names both figures and says the shell draws
+perihelion, so the next checker who computes 14.3 Mkm reads the
+answer before raising it. **Pluto is the same case half-finished.**
+Its `# Source:` comments name perihelion 29.66 AU and the
+Pluto-Charon system GM, and `radius_fraction` 5041 is consistent with
+them -- but the hover text and tooltip a reader actually sees say
+only "approximately 5.99 million kilometers" with no basis at all.
+**(do)** Apply the Eris fix to Pluto's reader-facing text, in both
+`pluto_visualization_shells.py` and `shell_configs.py`.
+
+**An adjudication is recorded with its reason, in the place the next
+reader will hit it.** Two shapes already work here: the reader-facing
+text for a convention, and a `# Corrected:` line in the comment block
+for a changed value -- Pluto's block carries one recording that
+`radius_fraction` 4685 drew a 5.57 Mkm shell under text claiming 5.99
+Mkm. A verdict with no reason is not an adjudication; it is the same
+run repeated later by somebody who does not know it already happened.
+
+**Method note.** The DERIVED reading came from reading the rows, not
+from the token list. They split three ways: arithmetic on the
+project's own premise, a formula applied to external inputs, and
+inference from a measurement -- "high density implies a largely rocky
+composition" -- which is not derivation at all. Two worksheets also
+write a compound token, `DERIVED -- verified`, which the vocabulary
+does not contain. The token was carrying more than one job because
+nothing had ever defined it.
 
 #### [L-190] Scanner reach: anything rendered must be reachable
 <!-- L:190 status:OPEN upd:2026-08-07 section:A flag: rice:4/4/80/3 -->
