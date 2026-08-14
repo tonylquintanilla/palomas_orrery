@@ -239,10 +239,9 @@ ROLE_MAP = {
     'test_orbit_cache':                       'devtool',
     'test_provenance_1d':                     'devtool',
     'test_reset_completeness':                'devtool',
+    'test_worksheet_checker':                 'devtool',
     'verify_orbit_cache':                     'devtool',
-
-    # patch
-    'patch_runner_write_vs_change':           'patch',
+    'worksheet_checker':                      'devtool',
 }
 # ROLE-MAP:END
 

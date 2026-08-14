@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: August 13, 2026
-Files scanned: 121
-Total findings: 883
-Constants: 97 | Dicts: 38 | Display strings: 748
+Files scanned: 122
+Total findings: 886
+Constants: 100 | Dicts: 38 | Display strings: 748
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -19,12 +19,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260814T030724Z | `b22bcf8` | 122 | 886 | 206 | 575 | 103 | 2 |
+| 20260814T023456Z | `b22bcf8` | 122 | 886 | 206 | 575 | 103 | 2 |
 | 20260813T233420Z | `173902b` | 121 | 883 | 206 | 575 | 100 | 2 |
 | 20260813T225952Z | `2a7ead8` | 122 | 883 | 206 | 575 | 100 | 2 |
 | 20260813T222104Z | `6ec970a` | 121 | 883 | 206 | 575 | 100 | 2 |
 | 20260813T203550Z | `00219d9` | 123 | 883 | 206 | 575 | 100 | 2 |
-| 20260813T003943Z | `c5218f6` | 122 | 883 | 206 | 575 | 100 | 2 |
-| 20260812T235333Z | `878e2c9` | 121 | 883 | 206 | 575 | 100 | 2 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
@@ -61,7 +61,7 @@ No file's Tier-1 count rose.
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 206 |
 | 2 | 10-15 | REVIEW | 575 |
-| 3 | 5-9 | LOW PRIORITY | 100 |
+| 3 | 5-9 | LOW PRIORITY | 103 |
 | 4 | 1-4 | LOWEST PRIORITY | 2 |
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
@@ -128,6 +128,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `palomas_orrery.py` | orrery | 0 | 0 | 3 | 0 | 3 |
 | `palomas_orrery_dashboard.py` | orrery | 0 | 0 | 3 | 0 | 3 |
 | `provenance_history.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
+| `worksheet_checker.py` | orrery | 0 | 0 | 3 | 0 | 3 |
 | `exoplanet_systems.py` | stars | 0 | 0 | 3 | 0 | 3 |
 | `object_type_analyzer.py` | orrery | 2 | 0 | 0 | 0 | 2 |
 | `close_approach_data.py` | orrery | 0 | 1 | 1 | 0 | 2 |
@@ -159,7 +160,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 39 | 91 | 467 | 53 | 2 | 613 |
+| Orrery (solar system + orbital mechanics) | 40 | 91 | 467 | 56 | 2 | 616 |
 | Earth System | 13 | 105 | 71 | 2 | 0 | 178 |
 | Stars (stellar neighborhood) | 9 | 9 | 37 | 6 | 0 | 52 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 39 | 0 | 39 |
@@ -169,6 +170,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 **Domain coverage gap:** the following files have findings but no entry in `MODULE_DOMAIN_MAP` -- defaulted to `orrery` rather than guessed into a more specific bucket. Add each to `MODULE_DOMAIN_MAP` in provenance_scanner.py with its real domain so this stops silently defaulting:
 
 - `maintenance_run.py`
+- `worksheet_checker.py`
 
 ---
 
@@ -1498,7 +1500,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 114 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 127 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### mars_visualization_shells.py
 
@@ -1531,9 +1533,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 103 | dict | ROLE_MAP[...] | (121 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 367 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 390 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 103 | dict | ROLE_MAP[...] | (122 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 366 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 389 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 
@@ -1568,7 +1570,7 @@ is planned for a future session.
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 65 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
 | 66 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 398 | dict | SECTION_SYMBOLS[...] | (4 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 421 | dict | SECTION_SYMBOLS[...] | (4 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### pluto_visualization_shells.py
 
@@ -1667,6 +1669,14 @@ is planned for a future session.
 | 437 | string | display string @ line 437 | (9 claims) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
 | 528 | string | display string @ line 528 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | Public-facing display string (hover/INFO) |
 | 681 | string | display string @ line 681 | (1 claim) | 2 | 4 | **8** | Cross-checked by 2 models (GPT, Claude) | Public-facing display string (hover/INFO) |
+
+### worksheet_checker.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 463 | constant | MIN_PROSE_FRAGMENT | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 695 | constant | INSTRUCTION_LOOKBACK | 30 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 696 | constant | INSTRUCTION_LOOKAHEAD | 25 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ---
 

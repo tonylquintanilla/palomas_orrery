@@ -10,15 +10,13 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 121  
-**Total Lines of Code (non-blank):** 96,928  
-**Total Public Functions/Classes:** 1,022
+**Total Python Files:** 122  
+**Total Lines of Code (non-blank):** 98,333  
+**Total Public Functions/Classes:** 1,066
 
 ## Classification Coverage
 
-**Patch scripts awaiting archive (1).** A `Role: patch` module is a one-shot script that has already run. Its base fingerprint no longer matches, so it cannot run again. Move each into `documentation/`. While one sits in the scanned tree it inflates the module count here and the file count in the provenance audit.
-
-- `patch_runner_write_vs_change.py`
+All 122 modules declare a valid `Role:` and `Domain:` tag in their docstring.
 
 
 ---
@@ -31,7 +29,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,938 lines) |
 | `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,456 lines) |
-| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (945 lines) |
+| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (968 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
 ---
@@ -196,10 +194,10 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `export_orbit_cache.py` | Phase 1b desktop devtool: read the local orbit caches and write web-servable orbit/position files for the interactive gallery. (617 lines) |
 | `food_insecurity_generator.py` | IPC acute food-insecurity KMZ layer (Sudan, current period). (702 lines) |
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (710 lines) |
-| `maintenance_run.py` | - L-188. One command, the whole maintenance suite. (254 lines) |
+| `maintenance_run.py` | - L-188. One command, the whole maintenance suite. (265 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (954 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (953 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (2,941 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (330 lines) |
@@ -209,15 +207,9 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (206 lines) |
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (469 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (113 lines) |
+| `test_worksheet_checker.py` | - L-192. Can each layer actually fail? (323 lines) |
 | `verify_orbit_cache.py` | Safely verify and repair orbit_paths.json (172 lines) |
-
----
-
-## Patch Scripts (transient -- awaiting archive)
-
-| Module | Description |
-|--------|-------------|
-| `patch_runner_write_vs_change.py` | - maintenance_run.py reports whether a generator WROTE a file, separately from whether the content MOVED (154 lines) |
+| `worksheet_checker.py` | - L-192. Does the worksheet say what the annotation claims it says? (1,203 lines) |
 
 ---
 

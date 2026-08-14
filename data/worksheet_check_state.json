@@ -1,0 +1,25 @@
+{
+  "prompts": [
+    "TRACK1_PROMPT_cross_check_worksheets.md",
+    "worksheet_prompt_batch1_blind_lookup.md",
+    "worksheet_prompt_batch1_followup.md",
+    "worksheet_prompt_batch1_tier1_sourcing.md",
+    "worksheet_prompt_batch1_tier2_cross_check.md",
+    "worksheet_prompt_constants_new.md",
+    "worksheet_prompt_constants_remaining.md"
+  ],
+  "uncited": [
+    "batch1_blind_source_lookup_gemini.md",
+    "worksheet_asteroid_belt.md",
+    "worksheet_batch1_tier1_sourcing_gemini.md",
+    "worksheet_claude_batch1_blind_lookup_DELTA.md",
+    "worksheet_claude_constants_new_addendum.md",
+    "worksheet_comet_visualization.md",
+    "worksheet_earth_visualization.md",
+    "worksheet_eris_visualization.md",
+    "worksheet_jupiter_visualization.md",
+    "worksheet_mars_visualization.md",
+    "worksheet_mercury_visualization.md"
+  ],
+  "uncited_changed": "2026-08-13"
+}

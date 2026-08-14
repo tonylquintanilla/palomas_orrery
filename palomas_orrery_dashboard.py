@@ -286,6 +286,29 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
+        ("Worksheet Checker",
+         "worksheet_checker.py",
+         "Open the worksheet each cross-check annotation names and report "
+         "whether that worksheet records the check the annotation claims. "
+         "Catches a value edited AFTER its check, which no diff-based tool "
+         "can see once the edit is committed. Report-only -- it writes "
+         "WORKSHEET_CHECK.md and never gates a push. Run after writing "
+         "annotations, after a value moves, or before a gallery build.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Test Worksheet Checker",
+         "test_worksheet_checker.py",
+         "Pass/fail tests for the worksheet checker. Every layer is "
+         "exercised twice, once with evidence that clears it and once "
+         "with an injected violation that must not, because zero "
+         "findings and a broken check look identical. Run after editing "
+         "the checker or the worksheet schema.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
         ("Provenance Scanner",
          "provenance_scanner.py",
          "Scan for hardcoded constants and duplicates. Writes PROVENANCE_AUDIT.md. "

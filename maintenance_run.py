@@ -39,6 +39,17 @@ constants_new.py and reports any value that moved without its provenance
 moving too. It replaced 55 hand-pinned literals on 2026-08-12 and stores
 no numbers of its own.
 
+The worksheet checker sits just above the scanner. It opens the worksheet
+each cross-check annotation names and reports whether that worksheet
+records the check the annotation claims. It is REPORT-ONLY: it exits 0
+whatever it finds, and exits 1 only when it could not run. Its one
+summary line carries a denominator, so the number moves when something
+moves; findings go to WORKSHEET_CHECK.md.
+
+The scanner stays LAST deliberately. Its Tier-1 count is the number the
+push call turns on, and a report-only tool printing after it pushes that
+number up the screen.
+
 WHAT IS DELIBERATELY NOT HERE
 -----------------------------
 dep_trace.py takes a module name and answers a question BEFORE an edit.
@@ -108,6 +119,8 @@ CHECKERS = [
     ('Provenance 1d/1e', ['test_provenance_1d.py'], None),
     ('Reset completeness', ['test_reset_completeness.py'], None),
     ('Orbit cache', ['test_orbit_cache.py'], None),
+    ('Worksheet checker', ['worksheet_checker.py'], 'WORKSHEET CHECK:'),
+    ('Worksheet checker tests', ['test_worksheet_checker.py'], None),
     ('Provenance scanner', ['provenance_scanner.py'], 'TIER-1 FINDINGS'),
 ]
 
