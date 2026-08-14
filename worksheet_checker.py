@@ -227,24 +227,43 @@ VERDICT_TOKENS = {
     'approximate': (V_INCOMPLETE, SCOPE_EITHER),
 
     'no': (V_REFUTED, SCOPE_EITHER),
-    'wrong': (V_REFUTED, SCOPE_EITHER),
-    'incorrect': (V_REFUTED, SCOPE_EITHER),
-    'wrong value': (V_REFUTED, SCOPE_VALUE),
-    'wrong citation': (V_REFUTED, SCOPE_CITATION),
 
-    # UNVERIFIED means nobody looked. NOT FOUND means somebody looked
-    # and the source does not publish it. Those are different findings
-    # with different owners, and collapsing them would have reported
-    # the Bennu row -- "Not checked" -- as a citation defect, which
-    # blames the source for work that was never done.
+    # UNVERIFIED means nobody looked. UNSOURCED means somebody looked
+    # and the source does not publish it at all. Those are different
+    # findings with different owners, and collapsing them reported the
+    # Bennu row -- "Not checked" -- as a citation defect, which blames
+    # the source for work that was never done.
     'unverified': (V_ABSENT, SCOPE_EITHER),
-    'not checked': (V_ABSENT, SCOPE_EITHER),
-    'n/a': (V_ABSENT, SCOPE_EITHER),
     'unsourced': (V_SOURCE_ABSENT, SCOPE_CITATION),
-    'not found': (V_SOURCE_ABSENT, SCOPE_CITATION),
 
     'derived': (V_DERIVED, SCOPE_EITHER),
 }
+
+# WHAT WAS REMOVED, AND WHY IT IS NOT COMING BACK.
+#
+# An earlier registry read twenty tokens. It was built by measuring the
+# corpus rather than by reading the vocabulary, on the reasoning that a
+# word the prompts had commissioned should be honored rather than
+# refused. That reasoning holds for exactly one word.
+#
+# Measured across the seventeen cited worksheets: of the three tokens
+# earlier prompts named beyond the six, UNSOURCED appears ten times,
+# DEAD LINK zero, OUTDATED zero. Everything else -- CONFIRMED (14),
+# WRONG CITATION (10), NOT FOUND (7), WRONG VALUE (5), and a tail of
+# one-offs like 'thermosphere' and 'see F5' -- was invented at the
+# keyboard, and nearly every one sits in the Resolution column of the
+# five followup files already going back for redo.
+#
+# So the translation table would have been maintained for files being
+# re-commissioned anyway. WRONG VALUE and WRONG CITATION are the
+# clearest case: they exist only because a worksheet had ONE verdict
+# column, and the two-column schema states which one is wrong without
+# needing a compound word for it.
+#
+# Anything outside the seven now reads UNREADABLE and goes back. That
+# is the intended behaviour, not a gap. (Tony's ruling, 2026-08-13,
+# after Fable argued for grandfathering and the measurement showed the
+# grandfathered population was being re-commissioned regardless.)
 
 # Verdicts that let an annotation stand as written. Everything else is
 # a finding of some kind. PARTIAL and APPROX are deliberately absent:
@@ -578,13 +597,54 @@ def classify_verdict(cell, default_scope=SCOPE_EITHER):
     # semicolon, or a parenthesis. The token is what is read; the
     # caveat is prose for the human reading the report.
     head = re.split(r'\s+--\s+|\s*;\s*|\s*\(', low)[0].strip().strip('.')
-    # Longest token first, so "wrong citation" is never read as "wrong".
+    # Longest token first, so a two-word token is never read as its
+    # first word alone.
     for token in sorted(VERDICT_TOKENS, key=len, reverse=True):
         own, scope = VERDICT_TOKENS[token]
         if head == token or head.startswith(token + ' '):
             return own, text, (default_scope if scope == SCOPE_EITHER
                                else scope)
     return V_UNREADABLE, text, default_scope
+
+
+def is_compound(cell):
+    """Does this cell carry a recognized token PLUS other prose?
+
+    Classifying by the leading token and discarding the rest is the
+    tool deciding a qualification does not matter, which is
+    interpretation by omission. A compound cell is flagged and its
+    whole text rides the quoting path, so the qualification reaches a
+    reader instead of being trimmed away.
+    """
+    text = strip_cell(cell)
+    if not text:
+        return False
+    low = text.lower().strip().strip('.')
+    for token in sorted(VERDICT_TOKENS, key=len, reverse=True):
+        if low == token:
+            return False
+        if low.startswith(token):
+            return True
+    return False
+
+
+# Quoting a worksheet is TRANSCRIPTION, not interpretation. The token
+# decides; prose informs. That distinction only survives if the quote
+# is visibly separated from the tool's own words -- a live finding once
+# read "reads NO -- wrong authority -- wrong authority for a value that
+# may still be right", half checker and half template, and no reader
+# could tell which half was evidence.
+QUOTE_LIMIT = 160
+
+
+def quoted(text):
+    """A worksheet cell, delimited, and cut only with a visible marker."""
+    body = strip_cell(text)
+    if not body:
+        return '(blank)'
+    if len(body) > QUOTE_LIMIT:
+        body = body[:QUOTE_LIMIT].rstrip() + ' [...]'
+    return '<<%s>>' % body
 
 
 def dispose_verdict(claim, own, token, scope, where, extra=''):
@@ -596,7 +656,7 @@ def dispose_verdict(claim, own, token, scope, where, extra=''):
     a wrong authority is value-YES and citation-NO, and calling that a
     refuted value misclassifies in both directions.
     """
-    tag = token or 'blank'
+    tag = quoted(token)
     if own in VERDICT_CLEARS:
         return True
     if own == V_INCOMPLETE:
@@ -635,7 +695,8 @@ def dispose_verdict(claim, own, token, scope, where, extra=''):
                    '%s has a blank verdict%s' % (where, extra), 'SEND BACK')
     else:
         claim.fail('L3', 'UNREADABLE_VERDICT',
-                   '%s reads %r%s' % (where, tag[:40], extra), 'SEND BACK')
+                   '%s reads %s -- not in the vocabulary%s'
+                   % (where, tag, extra), 'SEND BACK')
     return False
 
 
@@ -738,6 +799,7 @@ class Claim(object):
         self.label = label
         self.findings = []          # (layer, code, detail)
         self.route = ''             # SEND BACK / CONVERSATION / ''
+        self.notes = ''             # the matched row's Notes, verbatim
         self.verdict_column = ''
         self.matched_line = None
 
@@ -911,6 +973,10 @@ def check_claim(claim, worksheets, unregistered):
     table, (line_no, cells), rule = best
     claim.matched_line = line_no
     claim.match_rule = rule
+    # Keyed to the MATCHED row and nothing else. No row, no quote -- a
+    # tool hunting for a nearby note when the match failed would have
+    # crossed from transcription into interpretation.
+    claim.notes = table.cell(cells, ROLE_NOTES)
 
     # ---- L2a: the value agrees with the evidence ---------------------
     evidence = table.cell(cells, ROLE_EVIDENCE)
@@ -1049,6 +1115,7 @@ def check_string_claim(claim, tables):
         addressed += 1
         table, line_no, cells, source_cell = hits[0]
         claim.matched_line = line_no
+        claim.notes = table.cell(cells, ROLE_NOTES)
 
         evidence = table.cell(cells, ROLE_EVIDENCE)
         if evidence:
@@ -1205,13 +1272,15 @@ def write_report(project_dir, claims, unreached, unregistered,
         'what was known on its date.')
     add('')
     if send_back:
-        add('| Where | Value | Checker | Worksheet | Finding |')
-        add('|---|---|---|---|---|')
+        add('| Where | Value | Checker | Worksheet | Finding | '
+            'What the checker wrote |')
+        add('|---|---|---|---|---|---|')
         for claim in send_back:
             first = claim.findings[0]
-            add('| `%s` | %s | %s | `%s` | **%s** -- %s |'
+            add('| `%s` | %s | %s | `%s` | **%s** -- %s | %s |'
                 % (claim.where, claim.display, claim.checker,
-                   claim.worksheet, first[1], first[2]))
+                   claim.worksheet, first[1], first[2],
+                   quoted(claim.notes)))
     else:
         add('None.')
     add('')
@@ -1224,13 +1293,15 @@ def write_report(project_dir, claims, unreached, unregistered,
         'derivation in the worksheet.')
     add('')
     if conversation:
-        add('| Where | Value | Worksheet | Row | Finding |')
-        add('|---|---|---|---|---|')
+        add('| Where | Value | Worksheet | Row | Finding | '
+            'What the checker wrote |')
+        add('|---|---|---|---|---|---|')
         for claim in conversation:
             for layer, code, detail in claim.findings:
-                add('| `%s` | %s | `%s` | %s | **%s** -- %s |'
+                add('| `%s` | %s | `%s` | %s | **%s** -- %s | %s |'
                     % (claim.where, claim.display, claim.worksheet,
-                       claim.matched_line or '-', code, detail))
+                       claim.matched_line or '-', code, detail,
+                       quoted(claim.notes)))
     else:
         add('None.')
     add('')

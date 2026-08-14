@@ -132,20 +132,46 @@ def test_verdicts():
     check('DERIVED survives a compound token',
           own == wc.V_DERIVED, own)
 
-    # The whole reason tokens carry a scope. Read as a bare "wrong",
-    # this would report a refuted VALUE for a row that says the value
-    # may be perfectly right under a different authority.
-    own, _tok, scope = wc.classify_verdict('**WRONG CITATION**',
+    # The 2026-08-13 ruling: seven tokens, and a word outside them goes
+    # back rather than being translated. WRONG CITATION and WRONG VALUE
+    # were invented at the keyboard -- they exist only because a
+    # worksheet had one verdict column, and the two-column schema says
+    # which one is wrong without a compound word for it.
+    own, _tok, _s = wc.classify_verdict('**WRONG CITATION**',
+                                        wc.SCOPE_VALUE)
+    check('an invented token is UNREADABLE, not translated',
+          own == wc.V_UNREADABLE, own)
+
+    own, _tok, _s = wc.classify_verdict('**NOT FOUND**', wc.SCOPE_CITATION)
+    check('NOT FOUND is UNREADABLE -- no prompt ever asked for it',
+          own == wc.V_UNREADABLE, own)
+
+    # UNSOURCED is the one survivor beyond the six: the tier2 prompt
+    # commissioned it by name and ten cells on disk use it.
+    own, _tok, scope = wc.classify_verdict('**UNSOURCED**',
                                            wc.SCOPE_VALUE)
-    check('WRONG CITATION is scoped to the citation',
-          own == wc.V_REFUTED and scope == wc.SCOPE_CITATION,
+    check('UNSOURCED survives, scoped to the citation',
+          own == wc.V_SOURCE_ABSENT and scope == wc.SCOPE_CITATION,
           '%s / %s' % (own, scope))
 
-    own, _tok, scope = wc.classify_verdict('**WRONG VALUE**',
-                                           wc.SCOPE_CITATION)
-    check('WRONG VALUE is scoped to the value',
-          own == wc.V_REFUTED and scope == wc.SCOPE_VALUE,
-          '%s / %s' % (own, scope))
+    # A qualification must not be trimmed away in silence.
+    check('a token plus prose is flagged compound',
+          wc.is_compound('**YES** -- fully confirmed at 3 dp'))
+    check('a bare token is not compound',
+          not wc.is_compound('**YES**'))
+
+    # Quoting is transcription, and transcription that fuses with the
+    # tool's own words is not transcription. A live finding once read
+    # "reads NO -- wrong authority -- wrong authority for a value that
+    # may still be right" with no way to tell evidence from template.
+    quote = wc.quoted('NO -- wrong authority')
+    check('a quoted cell is delimited from the tool text',
+          quote.startswith('<<') and quote.endswith('>>'), quote)
+
+    long_quote = wc.quoted('x' * (wc.QUOTE_LIMIT + 40))
+    check('a long quote is cut with a visible marker',
+          '[...]' in long_quote and len(long_quote) < wc.QUOTE_LIMIT + 40,
+          len(long_quote))
 
     own, _tok, _s = wc.classify_verdict('mostly fine I think')
     check('an unvocabularied cell is UNREADABLE, not a pass',

@@ -6,7 +6,7 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 2.2 | Cut from palomas_orrery @ 6b99ace (v2.2), earlier
+Skill version: 2.3 | Cut from palomas_orrery @ 6b99ace (v2.2), earlier
 @ 00219d9 (v2.1), @ eb77c83 (v2.0), @ cdcdb4b (v1.9) | August 13, 2026
 Source: project_instructions_v3_29.md Part 3 (Provenance Audit, Fetched vs
 Recalled) + food insecurity build handoff + scanner source at HEAD. v1.1
@@ -252,14 +252,37 @@ header-role registry to do it. That is the consumer paying for a
 producer that was never pinned.
 
 A verdict cell carries EXACTLY ONE of these tokens and nothing else,
-with the reasoning in Notes:
+with the reasoning in Notes. **The tokens are scoped to their column.**
 
-    YES  NO  PARTIAL  APPROX  DERIVED  UNVERIFIED
+    Value correct?     YES  NO  APPROX  UNVERIFIED
+    Citation correct?  YES  NO  PARTIAL  DERIVED  UNSOURCED  UNVERIFIED
 
 Two verdicts per row, never conflated. `Value correct?` asks whether
 the number is right; `Citation correct?` asks whether the named source
 publishes it. A right number under a wrong authority is value-YES and
 citation-NO, and that split is the whole reason for two columns.
+
+**The scoping is the substance, not the formatting.** APPROX qualifies
+a VALUE -- the number is right to a stated tolerance. PARTIAL qualifies
+a CITATION -- the source supports some of what is claimed. They were
+commissioned that way and they are not synonyms; listing all of them on
+one flat line lost the distinction, and a checker reading the flat list
+cannot tell which word answers which question.
+
+UNSOURCED belongs to the citation column: the named source does not
+publish this value at all, as against NO, which is the source
+publishing a DIFFERENT value. Both send the row to conversation; the
+distinction survives because it changes the repair.
+
+**Vocabulary version.** A worksheet states which vocabulary it was
+written against, on its own line near the top:
+
+    Vocabulary: v2 (2026-08-13)
+
+Seventeen worksheets on disk predate any settled vocabulary and carry
+no such line. A tool reads the line rather than guessing from a date,
+and an absent line means pre-v2 -- which is a fact about the file, not
+a defect in it.
 
 `Code value` is what the checker read from the code at the prompt's
 SHA. It is not redundant with `Your value`: comparing it against the
@@ -293,6 +316,44 @@ more. A DERIVED row showing no work is incomplete and goes back.
 The distinction matters because the same file can need both: a shell
 module's display text needs value verification while its `# Source:`
 comments need citation verification.
+
+### Quoting a Worksheet Is Transcription, Not Interpretation [CRITICAL]
+
+A verdict token decides. Prose informs. Any tool reporting on a
+worksheet may QUOTE what the checker wrote, and may never READ that
+prose to decide anything.
+
+The rule exists because of what the alternative turned out to be. Asked
+who consults the Notes column, the answer was: nothing. The checker
+reads Notes only to work out which row is about which value, and never
+reports a word of it. So "the reason goes in Notes" meant the reason
+went nowhere -- a record that cannot fail, because nothing opens it.
+
+Quoting is safe when four properties hold. Two of them were being
+violated in the L-192 checker's first report, which is how the rule got
+written:
+
+1. **Verbatim and DELIMITED.** The quoted cell is visibly separated
+   from the tool's own words. Without this they fuse: a real finding
+   read `reads NO -- wrong authority -- wrong authority for a value
+   that may still be right`, half checker and half template, and no
+   reader can tell which half is evidence.
+2. **Untruncated**, or cut only at a mechanical limit with an explicit
+   marker. A live finding cut mid-word at forty characters --
+   `'Partial. Main interaction/loss claims ma'` -- reads as a
+   transcription and is not one.
+3. **Keyed to the MATCHED row only.** No row, no quote. A tool that
+   goes hunting for a nearby note when the match failed has crossed
+   into interpretation.
+4. **Never fed to a decision.** No verdict, no routing, and no score
+   reads quoted prose. If removing the quoting changes any outcome, the
+   rule is already broken.
+
+A compound cell -- a recognized token followed by prose -- classifies
+by the token, is FLAGGED as compound, and its remainder rides the
+quoting path verbatim. Reading the token and discarding the rest is the
+tool deciding a qualification does not matter, which is interpretation
+by omission.
 
 ### Cross-Checked Annotation Format [CRITICAL]
 

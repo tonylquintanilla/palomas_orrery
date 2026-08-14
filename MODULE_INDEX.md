@@ -1,6 +1,6 @@
 # Paloma's Orrery - Module Index
 
-**Generated:** August 13, 2026 by `module_atlas.py`  
+**Generated:** August 14, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -10,13 +10,23 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 122  
-**Total Lines of Code (non-blank):** 98,333  
-**Total Public Functions/Classes:** 1,066
+**Total Python Files:** 125  
+**Total Lines of Code (non-blank):** 98,949  
+**Total Public Functions/Classes:** 1,074
 
 ## Classification Coverage
 
-All 122 modules declare a valid `Role:` and `Domain:` tag in their docstring.
+**Undetermined role (3).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+
+- `patch_L192_tests.py`
+- `patch_L192_vocabulary.py`
+- `patch_skill_2_3_vocabulary.py`
+
+**Undetermined domain (3).** No valid `Domain:` tag.
+
+- `patch_L192_tests.py`
+- `patch_L192_vocabulary.py`
+- `patch_skill_2_3_vocabulary.py`
 
 
 ---
@@ -207,9 +217,19 @@ All 122 modules declare a valid `Role:` and `Domain:` tag in their docstring.
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (206 lines) |
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (469 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (113 lines) |
-| `test_worksheet_checker.py` | - L-192. Can each layer actually fail? (323 lines) |
+| `test_worksheet_checker.py` | - L-192. Can each layer actually fail? (345 lines) |
 | `verify_orbit_cache.py` | Safely verify and repair orbit_paths.json (172 lines) |
-| `worksheet_checker.py` | - L-192. Does the worksheet say what the annotation claims it says? (1,203 lines) |
+| `worksheet_checker.py` | - L-192. Does the worksheet say what the annotation claims it says? (1,266 lines) |
+
+---
+
+## Undetermined -- Needs a Role: Tag
+
+| Module | Description |
+|--------|-------------|
+| `patch_L192_tests.py` | - tests follow the vocabulary ruling. (101 lines) |
+| `patch_L192_vocabulary.py` | - checker to the settled vocabulary. (270 lines) |
+| `patch_skill_2_3_vocabulary.py` | - provenance-discipline 2.2 -> 2.3. (160 lines) |
 
 ---
 

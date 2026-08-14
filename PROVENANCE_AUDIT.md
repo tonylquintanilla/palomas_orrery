@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
-Generated: August 13, 2026
-Files scanned: 122
-Total findings: 886
-Constants: 100 | Dicts: 38 | Display strings: 748
+Generated: August 14, 2026
+Files scanned: 125
+Total findings: 887
+Constants: 101 | Dicts: 38 | Display strings: 748
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -19,14 +19,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260814T182058Z | `dfabd0f` | 125 | 887 | 206 | 575 | 104 | 2 |
 | 20260814T044110Z | `6de5e8d` | 122 | 886 | 206 | 575 | 103 | 2 |
 | 20260814T030724Z | `b22bcf8` | 122 | 886 | 206 | 575 | 103 | 2 |
 | 20260814T023456Z | `b22bcf8` | 122 | 886 | 206 | 575 | 103 | 2 |
 | 20260813T233420Z | `173902b` | 121 | 883 | 206 | 575 | 100 | 2 |
 | 20260813T225952Z | `2a7ead8` | 122 | 883 | 206 | 575 | 100 | 2 |
-| 20260813T222104Z | `6ec970a` | 121 | 883 | 206 | 575 | 100 | 2 |
 
-Change since the previous run: total +0, Tier-1 +0.
+Change since the previous run: total +1, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -61,7 +61,7 @@ No file's Tier-1 count rose.
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 206 |
 | 2 | 10-15 | REVIEW | 575 |
-| 3 | 5-9 | LOW PRIORITY | 103 |
+| 3 | 5-9 | LOW PRIORITY | 104 |
 | 4 | 1-4 | LOWEST PRIORITY | 2 |
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
@@ -116,6 +116,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `paleoclimate_visualization.py` | earth_science | 4 | 0 | 0 | 0 | 4 |
 | `sgr_a_visualization_core.py` | orrery | 1 | 3 | 0 | 0 | 4 |
 | `skills_index.py` | dev_tools | 0 | 0 | 4 | 0 | 4 |
+| `worksheet_checker.py` | orrery | 0 | 0 | 4 | 0 | 4 |
 | `coordinate_system_guide.py` | orrery | 2 | 1 | 0 | 0 | 3 |
 | `scenarios_coral_bleaching.py` | earth_science | 1 | 2 | 0 | 0 | 3 |
 | `food_insecurity_generator.py` | earth_science | 0 | 1 | 2 | 0 | 3 |
@@ -128,7 +129,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `palomas_orrery.py` | orrery | 0 | 0 | 3 | 0 | 3 |
 | `palomas_orrery_dashboard.py` | orrery | 0 | 0 | 3 | 0 | 3 |
 | `provenance_history.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
-| `worksheet_checker.py` | orrery | 0 | 0 | 3 | 0 | 3 |
 | `exoplanet_systems.py` | stars | 0 | 0 | 3 | 0 | 3 |
 | `object_type_analyzer.py` | orrery | 2 | 0 | 0 | 0 | 2 |
 | `close_approach_data.py` | orrery | 0 | 1 | 1 | 0 | 2 |
@@ -160,7 +160,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 40 | 91 | 467 | 56 | 2 | 616 |
+| Orrery (solar system + orbital mechanics) | 40 | 91 | 467 | 57 | 2 | 617 |
 | Earth System | 13 | 105 | 71 | 2 | 0 | 178 |
 | Stars (stellar neighborhood) | 9 | 9 | 37 | 6 | 0 | 52 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 39 | 0 | 39 |
@@ -1674,9 +1674,10 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 463 | constant | MIN_PROSE_FRAGMENT | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 695 | constant | INSTRUCTION_LOOKBACK | 30 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 696 | constant | INSTRUCTION_LOOKAHEAD | 25 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 482 | constant | MIN_PROSE_FRAGMENT | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 637 | constant | QUOTE_LIMIT | 160 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 756 | constant | INSTRUCTION_LOOKBACK | 30 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 757 | constant | INSTRUCTION_LOOKAHEAD | 25 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ---
 
