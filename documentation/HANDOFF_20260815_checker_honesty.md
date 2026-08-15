@@ -3,7 +3,8 @@
 **Built on `66cf0cbcf298787542ae9b7bf335273d7ffa67d1`; pushed at
 `2a8f82366265fa87b7b0e761c479b1fdeb0f6e28`, then
 `bdb56d8a5b0503c9afa3ff0511add2854064586e`, then
-`f8b4356abe53c423e9730b2c70086f3fa5f1fcd7`
+`f8b4356abe53c423e9730b2c70086f3fa5f1fcd7`, then
+`7ef3d67c0d5439bef760b6fadb2a3ebe019360c6`
 at https://github.com/tonylquintanilla/palomas_orrery (branch main).**
 Every SHA above was confirmed by a live `git ls-remote` and each pushed
 file compared byte-for-byte against the tree the tests ran on. Gallery
@@ -65,6 +66,21 @@ decision, rather than by accident on two rulings.
 | `2a8f823` | Extractor freeze: `test_extractor_pins.py`, `documentation/worksheets/L192_extractor_pins.txt`, the `Extractor pins` row in `maintenance_run.py`, the freeze note above the constants. L2b's three outcomes and the compound-verdict handling. |
 | `bdb56d8` | L-193 in the ledger. |
 | `f8b4356` | Two corrections to claims written earlier the same day. |
+| `7ef3d67` | L-192 brought back in line with the code, plus the schema and dispatch-shape rulings. All five of this session's documents filed in `documentation/`. |
+
+**The L-192 edit was not bookkeeping.** The entry said the checker's
+cost "does not belong in `maintenance_run.py`" and its Ref line called
+L-188 "the runner it deliberately stays out of". It has been a row in
+that runner since 2026-08-14, finishing in under seven seconds -- a
+fifth of the reset check already in the table. The estimate behind the
+original call was never measured. The reversal is recorded rather than
+overwritten: the trigger conditions are the right list for a scoped
+expensive pass, and they were written against a cost that turned out
+not to exist.
+
+That entry described the tool this session spent the day repairing, and
+it had been misdescribing it for two days. Same class as the seven
+below.
 
 **L2b now has three outcomes instead of one.** DRIFTED means the
 worksheet confirmed that value and the code left it anyway -- the only
@@ -90,13 +106,14 @@ Tests went 51 -> 61. Twelve checkers pass.
 
 **Tony-action (do)**
 
-1. Send `FABLE_PROMPT_worksheet_schema_review.md` -- already done this
-   session; the reply is in
-   `documentation/FABLE_REVIEW_worksheet_schema.md`. Listed only so the
-   round trip is closed in writing.
-2. File `L192_haumea_sourcing_sendback.md` into `documentation/` if it
-   is not there yet. It carries the ruling and the exact question,
-   including the instruction not to reopen the equatorial figure.
+1. CLOSED. `FABLE_PROMPT_worksheet_schema_review.md` was sent and the
+   reply is filed at `documentation/FABLE_REVIEW_worksheet_schema.md`.
+   Kept in the record so the round trip is closed in writing rather
+   than by absence.
+2. CLOSED. `L192_haumea_sourcing_sendback.md` is filed in
+   `documentation/` at `7ef3d67`, confirmed by clone. It carries the
+   ruling and the exact question, including the instruction not to
+   reopen the equatorial figure.
 
 **Tony-action (decide)** -- all from Fable's review, none blocking the
 builder
@@ -132,6 +149,14 @@ builder
    evidence: both sites carry the identical claim signature (`0.04`,
    one instruction drop), and both are among the three live
    QUALIFIED_PASS rows.
+9. **Transition sequencing.** The checker simplification the schema
+   permits -- deleting `match_row()`, a strict fail-loud verdict
+   grammar -- is gated on the re-cut, not the reverse: fuzzy matching
+   cannot be removed while 104 annotations still depend on it. Either
+   both formats stay readable through the transition, or the re-cut is
+   atomic. This is in L-192 as of `7ef3d67`; it is listed here because
+   a decide that lives in only one of the two documents is how an item
+   goes missing.
 
 **Claude-side, held on purpose**
 
