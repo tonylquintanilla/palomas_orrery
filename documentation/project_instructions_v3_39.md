@@ -427,7 +427,7 @@ earth-system-pipeline        1.1  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY
                                   human-cost visualization or text
 gallery-pipeline             1.2  Gallery Studio, json_converter, index.html
                                   viewer, gallery cards
-ledger-and-session-records   1.5  Ledger edits, ledger_index.py, RICE,
+ledger-and-session-records   1.6  Ledger edits, ledger_index.py, RICE,
                                   handoffs, manifests, atlas, dep_trace
 gallery-assembler            1.1  render_orbits.py, resolver.py,
                                   cache_reader.py, propagation math, golden

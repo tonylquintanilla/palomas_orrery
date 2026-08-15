@@ -6,7 +6,8 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Skill version: 1.5 | Cut from palomas_orrery @ 3398970 | August 5, 2026
+Skill version: 1.6 | Cut from palomas_orrery @ 305b269 (v1.6), earlier
+@ 3398970 (v1.5) | August 14, 2026
 Sources: LEDGER_CONSOLIDATED.md header, ledger_index.py at HEAD, handoff
 v28 (consolidation) and v29 (cleanup), food insecurity handoffs. v1.3
 adds the Tony-action (do)/(decide) tag convention and its rollup rule,
@@ -116,6 +117,44 @@ separately (orrery and gallery move independently):
 This is the document-layer form of the protocol's SHA Round Trip
 CRITICAL gate -- applies uniformly regardless of document type or
 audience.
+
+## Where a File Goes [QUALITY]
+
+Two directories, and the test is not how finished the file is.
+
+  documentation/            read by a PERSON, occasionally
+  documentation/worksheets/ read by a TOOL, on every run
+
+A worksheet is the most finished thing in the project -- immutable
+evidence, fixed at its date, never edited -- and it lives in
+worksheets/ because worksheet_checker.py opens it every run. A handoff
+is equally frozen and lives in documentation/ because no code opens
+it. So "active versus archived" is the wrong cut; "input versus
+record" is the right one.
+
+Applied:
+- worksheets, request files the builder emits, prompt templates,
+  pinned key lists, site lists  -> documentation/worksheets/
+- handoffs, as-builts, manifests, design reviews, spent patch scripts,
+  archived protocol copies                      -> documentation/
+
+Two consequences worth stating.
+
+A tool input must not be filed by resemblance. The as-built describing
+a batch of request files is a record and stays in documentation/, even
+though it is about files that live in worksheets/.
+
+A non-.md file is invisible to the checker's loader, which takes only
+.md from that directory. That is why a .txt pin list can sit in
+worksheets/ without becoming a phantom uncited worksheet -- checked,
+not assumed, before the two files were moved there.
+
+(Origin, August 14, 2026: the L-192 site list and key pins were first
+written to documentation/ among the handoffs and the roughly one
+hundred spent patch scripts. Tony moved them and named the reason. The
+wording here is the corrected form of his rule -- his "live versus
+finished" cut would have sent the worksheets themselves the other
+way.)
 
 ## Handoff Structure (the load-bearing lines)
 

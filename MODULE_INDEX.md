@@ -10,23 +10,19 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 125  
-**Total Lines of Code (non-blank):** 98,949  
-**Total Public Functions/Classes:** 1,074
+**Total Python Files:** 127  
+**Total Lines of Code (non-blank):** 99,198  
+**Total Public Functions/Classes:** 1,086
 
 ## Classification Coverage
 
-**Undetermined role (3).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L192_tests.py`
-- `patch_L192_vocabulary.py`
-- `patch_skill_2_3_vocabulary.py`
-
-**Undetermined domain (3).** No valid `Domain:` tag.
-
-- `patch_L192_tests.py`
-- `patch_L192_vocabulary.py`
-- `patch_skill_2_3_vocabulary.py`
+- `patch_L192_runner_keys.py`
+- `patch_L192_skill_lsr_16.py`
+- `test_worksheet_keys.py`
+- `worksheet_key_aliases.py`
+- `worksheet_keys.py`
 
 
 ---
@@ -204,7 +200,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `export_orbit_cache.py` | Phase 1b desktop devtool: read the local orbit caches and write web-servable orbit/position files for the interactive gallery. (617 lines) |
 | `food_insecurity_generator.py` | IPC acute food-insecurity KMZ layer (Sudan, current period). (702 lines) |
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (710 lines) |
-| `maintenance_run.py` | - L-188. One command, the whole maintenance suite. (265 lines) |
+| `maintenance_run.py` | - L-188. One command, the whole maintenance suite. (266 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
 | `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (953 lines) |
@@ -227,9 +223,11 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L192_tests.py` | - tests follow the vocabulary ruling. (101 lines) |
-| `patch_L192_vocabulary.py` | - checker to the settled vocabulary. (270 lines) |
-| `patch_skill_2_3_vocabulary.py` | - provenance-discipline 2.2 -> 2.3. (160 lines) |
+| `patch_L192_runner_keys.py` | Wire the worksheet key round trip into the maintenance runner (L-192). (105 lines) |
+| `patch_L192_skill_lsr_16.py` | Ledger-and-session-records 1.5 -> 1.6: where a file goes (L-192). (151 lines) |
+| `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (228 lines) |
+| `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |
+| `worksheet_keys.py` | Worksheet row keys -- one owner for the syntax and the resolution. (243 lines) |
 
 ---
 

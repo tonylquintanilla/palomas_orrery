@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: August 14, 2026
-Files scanned: 125
-Total findings: 887
-Constants: 101 | Dicts: 38 | Display strings: 748
+Files scanned: 127
+Total findings: 888
+Constants: 102 | Dicts: 38 | Display strings: 748
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -19,12 +19,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260815T021349Z | `d9b06df` | 127 | 888 | 206 | 575 | 105 | 2 |
 | 20260814T182058Z | `dfabd0f` | 125 | 887 | 206 | 575 | 104 | 2 |
 | 20260814T044110Z | `6de5e8d` | 122 | 886 | 206 | 575 | 103 | 2 |
 | 20260814T030724Z | `b22bcf8` | 122 | 886 | 206 | 575 | 103 | 2 |
 | 20260814T023456Z | `b22bcf8` | 122 | 886 | 206 | 575 | 103 | 2 |
 | 20260813T233420Z | `173902b` | 121 | 883 | 206 | 575 | 100 | 2 |
-| 20260813T225952Z | `2a7ead8` | 122 | 883 | 206 | 575 | 100 | 2 |
 
 Change since the previous run: total +1, Tier-1 +0.
 
@@ -61,7 +61,7 @@ No file's Tier-1 count rose.
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 206 |
 | 2 | 10-15 | REVIEW | 575 |
-| 3 | 5-9 | LOW PRIORITY | 104 |
+| 3 | 5-9 | LOW PRIORITY | 105 |
 | 4 | 1-4 | LOWEST PRIORITY | 2 |
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
@@ -150,6 +150,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `osculating_cache_manager.py` | orrery | 0 | 0 | 1 | 0 | 1 |
 | `sgr_a_visualization_animation.py` | orrery | 0 | 0 | 1 | 0 | 1 |
 | `test_reset_completeness.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
+| `worksheet_keys.py` | orrery | 0 | 0 | 1 | 0 | 1 |
 | `export_orbit_cache.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 
 ---
@@ -160,7 +161,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 40 | 91 | 467 | 57 | 2 | 617 |
+| Orrery (solar system + orbital mechanics) | 41 | 91 | 467 | 58 | 2 | 618 |
 | Earth System | 13 | 105 | 71 | 2 | 0 | 178 |
 | Stars (stellar neighborhood) | 9 | 9 | 37 | 6 | 0 | 52 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 39 | 0 | 39 |
@@ -171,6 +172,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 - `maintenance_run.py`
 - `worksheet_checker.py`
+- `worksheet_keys.py`
 
 ---
 
@@ -1500,7 +1502,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 127 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 128 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### mars_visualization_shells.py
 
@@ -1678,6 +1680,12 @@ is planned for a future session.
 | 637 | constant | QUOTE_LIMIT | 160 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 | 756 | constant | INSTRUCTION_LOOKBACK | 30 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 | 757 | constant | INSTRUCTION_LOOKAHEAD | 25 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+
+### worksheet_keys.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 118 | constant | EXTRACTOR_VERSION | 1 | 4 | 2 | **8** | No source citation (recalled) | Internal use (name vocabulary) |
 
 ---
 
