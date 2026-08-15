@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Provenance Audit
 
-Generated: August 14, 2026
-Files scanned: 125
+Generated: August 15, 2026
+Files scanned: 126
 Total findings: 888
 Constants: 102 | Dicts: 38 | Display strings: 748
 
@@ -19,12 +19,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260815T182345Z | `66cf0cb` | 126 | 888 | 206 | 575 | 105 | 2 |
 | 20260815T024815Z | `92b5bf8` | 125 | 888 | 206 | 575 | 105 | 2 |
 | 20260815T021349Z | `d9b06df` | 127 | 888 | 206 | 575 | 105 | 2 |
 | 20260814T182058Z | `dfabd0f` | 125 | 887 | 206 | 575 | 104 | 2 |
 | 20260814T044110Z | `6de5e8d` | 122 | 886 | 206 | 575 | 103 | 2 |
 | 20260814T030724Z | `b22bcf8` | 122 | 886 | 206 | 575 | 103 | 2 |
-| 20260814T023456Z | `b22bcf8` | 122 | 886 | 206 | 575 | 103 | 2 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
@@ -1502,7 +1502,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 128 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 129 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### mars_visualization_shells.py
 
@@ -1678,8 +1678,8 @@ is planned for a future session.
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 482 | constant | MIN_PROSE_FRAGMENT | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 | 637 | constant | QUOTE_LIMIT | 160 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 756 | constant | INSTRUCTION_LOOKBACK | 30 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 757 | constant | INSTRUCTION_LOOKAHEAD | 25 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 765 | constant | INSTRUCTION_LOOKBACK | 30 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 766 | constant | INSTRUCTION_LOOKAHEAD | 25 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### worksheet_keys.py
 

@@ -293,6 +293,79 @@ def test_layers():
     check('L2b fails when the code moved since the check',
           'DRIFTED' in codes(claim), codes(claim))
 
+    # L2b, the other two outcomes. DRIFTED above earns its name only
+    # because that row's verdict is YES: the worksheet confirmed 137.5
+    # and the code left it anyway. Change the verdict and the same
+    # movement means something else entirely.
+    claim = run_layers("""
+| # | Constant | Code value | Your value | Value correct? |
+|---|---|---|---|---|
+| 1 | `TEST_RADIUS_KM` | 137.5 | 100.0 | **NO -- does not follow** |
+""")
+    check('a value the worksheet REFUTED reports CORRECTED, not DRIFTED',
+          'CORRECTED' in codes(claim) and 'DRIFTED' not in codes(claim),
+          codes(claim))
+    check('a correction is recorded but not routed back',
+          claim.route != 'SEND BACK', claim.route)
+
+    claim = run_layers("""
+| # | Constant | Code value | Your value | Value correct? |
+|---|---|---|---|---|
+| 1 | `TEST_RADIUS_KM` | 137.5 | 100.0 | **UNVERIFIED** |
+""")
+    check('a value nobody checked reports UNCHECKED_MOVE',
+          'UNCHECKED_MOVE' in codes(claim), codes(claim))
+
+    # The live corpus case. A worksheet whose only verdict column asks
+    # about the CITATION has not answered the value question at all, so
+    # neither DRIFTED nor CORRECTED is honest -- and a NO here routinely
+    # means 'wrong authority, value correct' (rows G4, G6, G7, G8).
+    claim = run_layers("""
+| # | Constant | Value | Cited source | Citation correct? |
+|---|---|---|---|---|
+| 1 | `TEST_RADIUS_KM` | 137.5 | Somebody et al. | **NO -- wrong authority** |
+""")
+    check('a citation-only verdict cannot clear or condemn a moved value',
+          'UNCHECKED_MOVE' in codes(claim), codes(claim))
+
+    # L3 -- a qualification is evidence. The clearing branch is the one
+    # place a verdict produces no finding at all, so it is the only
+    # place a reservation can disappear. No live claim currently sits
+    # on a qualified YES, which is exactly why these two run: the guard
+    # would otherwise be unfalsifiable on this corpus.
+    claim = run_layers("""
+| # | Constant | Code value | Your value | Value correct? | Notes |
+|---|---|---|---|---|---|
+| 1 | `TEST_RADIUS_KM` | 100.0 | 100.0 | **YES -- to 2 dp only** | fine |
+""")
+    check('a YES carrying a reservation does not read as clean',
+          'QUALIFIED_PASS' in codes(claim), codes(claim))
+
+    claim = run_layers(VALUE_TABLE)
+    check('a bare YES still clears with no findings at all',
+          not codes(claim), codes(claim))
+
+    # L3 -- the same NO means opposite things in the same column.
+    # 'wrong authority' says the value is fine; 'arithmetic error' says
+    # the source is fine. The tool may not pick one, and until this
+    # change it printed the first reading over both.
+    claim = run_layers("""
+| # | Constant | Value | Cited source | Citation correct? | Notes |
+|---|---|---|---|---|---|
+| 1 | `TEST_RADIUS_KM` | 100.0 | Somebody et al. | **NO -- arithmetic error** | x |
+""")
+    check('a qualified refusal is not classified as a citation defect',
+          'REFUSAL_UNCLASSIFIED' in codes(claim)
+          and 'CITATION_DEFECT' not in codes(claim), codes(claim))
+
+    claim = run_layers("""
+| # | Constant | Value | Cited source | Citation correct? | Notes |
+|---|---|---|---|---|---|
+| 1 | `TEST_RADIUS_KM` | 100.0 | Somebody et al. | **NO** | x |
+""")
+    check('a bare NO in a citation column is still a citation defect',
+          'CITATION_DEFECT' in codes(claim), codes(claim))
+
     # L3 -- the Oort shape: an annotation asserting a completed check
     # over a row that records the check as not performed.
     claim = run_layers("""
@@ -361,8 +434,13 @@ def test_display_instructions():
 # THE LIVE CORPUS -- pin what the checker actually finds
 # ============================================================
 
-DRIFTED_CONSTANTS = ('HELIOPAUSE_RADII', 'BENNU_RADIUS_KM',
-                     'HAUMEA_RADIUS_KM', 'ARROKOTH_RADIUS_KM')
+# All four moved after their worksheets ran, and all four sit in
+# worksheets whose only verdict column asks about the CITATION. So the
+# tool cannot say whether the movement was a correction or a defect,
+# and says so. Before 2026-08-15 it called all eight rows DRIFTED,
+# which asserted the strongest of the three readings on no evidence.
+UNCHECKED_MOVE_CONSTANTS = ('HELIOPAUSE_RADII', 'BENNU_RADIUS_KM',
+                            'HAUMEA_RADIUS_KM', 'ARROKOTH_RADIUS_KM')
 
 
 def test_live_corpus(project_dir):
@@ -376,17 +454,36 @@ def test_live_corpus(project_dir):
     check('annotations are found at all', len(claims) > 50, len(claims))
 
     drifted = set()
+    moved = set()
     not_performed = set()
     for claim in claims:
         for _layer, code, _detail in claim.findings:
             if code == 'DRIFTED':
                 drifted.add(claim.label)
+            if code in ('UNCHECKED_MOVE', 'CORRECTED'):
+                moved.add(claim.label)
             if code == 'CHECK_NOT_PERFORMED':
                 not_performed.add(claim.label)
 
-    for name in DRIFTED_CONSTANTS:
-        check('L2b still finds the drift in %s' % name,
-              name in drifted, sorted(drifted))
+    for name in UNCHECKED_MOVE_CONSTANTS:
+        check('L2b still sees the movement in %s' % name,
+              name in moved, sorted(moved))
+
+    # The point of the change is that the strong word is now reserved.
+    # If DRIFTED reappears in this corpus, a worksheet grew a value
+    # verdict and a real defect is being reported -- read it, do not
+    # relax this.
+    check('no live claim is called DRIFTED without a value verdict',
+          not drifted, sorted(drifted))
+
+    # Seven live refusals carry their own reason and are no longer
+    # reported as wrong-authority. If this reaches zero, either the
+    # worksheets were re-cut or the qualification stopped being read.
+    unclassified = sum(1 for c in claims
+                       for _l, code, _d in c.findings
+                       if code == 'REFUSAL_UNCLASSIFIED')
+    check('qualified refusals are reported as unclassified',
+          unclassified > 0, unclassified)
 
     check('L3 still finds BENNU_RADIUS_KM crediting an unperformed check',
           'BENNU_RADIUS_KM' in not_performed, sorted(not_performed))

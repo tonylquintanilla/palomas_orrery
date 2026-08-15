@@ -657,7 +657,18 @@ def dispose_verdict(claim, own, token, scope, where, extra=''):
     refuted value misclassifies in both directions.
     """
     tag = quoted(token)
+
+    # A pass with a reservation is not a pass. This is the ONE branch
+    # that returns without recording anything, so it is the only place
+    # a qualification actually vanishes -- every other class below
+    # already quotes the whole cell into its finding. Fifteen of this
+    # corpus's sixty-one compound cells qualify a YES, and each of
+    # them reads as clean today.
     if own in VERDICT_CLEARS:
+        if is_compound(token):
+            claim.fail('L3', 'QUALIFIED_PASS',
+                       '%s reads %s -- confirmed with a reservation%s'
+                       % (where, tag, extra), '')
         return True
     if own == V_INCOMPLETE:
         # PARTIAL and APPROX return to the originator unconditionally,
@@ -673,7 +684,26 @@ def dispose_verdict(claim, own, token, scope, where, extra=''):
                    '%s reads %s -- the cited source does not publish '
                    'it%s' % (where, tag, extra), 'CONVERSATION')
     elif own == V_REFUTED:
-        if scope == SCOPE_CITATION:
+        if scope == SCOPE_CITATION and is_compound(token):
+            # The column asks whether the citation is right. A bare NO
+            # answers that question and nothing else. A NO carrying its
+            # own reason may answer a different one: in this corpus
+            # "NO -- wrong authority" means the value is fine and the
+            # source is not, while "NO -- arithmetic error" means the
+            # source is fine and the value is not. Same token, same
+            # column, opposite meanings.
+            #
+            # So the qualification decides whether this tool may say
+            # which kind of refusal it is, and it never reads the
+            # qualification to decide what it says -- that would be a
+            # prose-parsed convention, which is the failure class this
+            # project keeps meeting. It states the quote and stops.
+            claim.fail('L3', 'REFUSAL_UNCLASSIFIED',
+                       '%s reads %s -- a refusal qualified beyond what '
+                       'the column asks; whether the citation or the '
+                       'value is at fault is not decidable here%s'
+                       % (where, tag, extra), 'CONVERSATION')
+        elif scope == SCOPE_CITATION:
             claim.fail('L3', 'CITATION_DEFECT',
                        '%s reads %s -- wrong authority for a value that '
                        'may still be right%s' % (where, tag, extra),
@@ -749,6 +779,15 @@ DISPLAY_INSTRUCTION_RE = re.compile(
     r'(?i)manual scale|manual scaled|mb per frame|to visualize|'
     r'to view closely|frame for html')
 
+# FROZEN by Tony 2026-08-14 and pinned. Measured over the L-192
+# corpus, the drop set is identical for lookback 25 through 60 at
+# every lookahead tested; 30 sits mid-plateau. These values decide
+# which numbers count as claims, and the ::cN ordinal in every
+# issued key counts claims AFTER this filter runs -- so retuning
+# either one re-points ordinals corpus-wide with no prose edit at
+# all. test_extractor_pins.py asserts them against
+# documentation/worksheets/L192_extractor_pins.txt on every run.
+#
 # Tight and directional on purpose. The instruction phrase sits right
 # against its own number -- "MANUAL SCALE OF 0.005 AU", "4.6 MB PER
 # FRAME" -- so a wide window reaches across the paragraph break and
@@ -991,22 +1030,55 @@ def check_claim(claim, worksheets, unregistered):
         elif verdict == 'CONVERSION':
             claim.fail('L2a', 'MATCHED_VIA_CONVERSION', detail, '')
 
+    # ---- The verdict, read once --------------------------------------
+    #
+    # Read here rather than at L3 because L2b needs it, and reused
+    # below so there is still exactly one read.
+    own, token, scope, column = read_verdict(table, cells)
+
     # ---- L2b: drift since the check ----------------------------------
     #
     # The code-value cell is what the checker read at the prompt's SHA.
     # Comparing it to the code NOW is the committed-history failure
     # caught directly rather than inferred. It exists only where the
     # schema carries the column, and the coverage count says so.
+    #
+    # THREE outcomes, not two. A value that moved away from a number
+    # the worksheet REJECTED is the correction landing -- this whole
+    # apparatus working -- and reporting it as drift tells a reader to
+    # go re-check a resolution the code already records. All eight L2b
+    # findings in the L-192 report were that shape. The information
+    # needed to tell them apart was already in the matched row, three
+    # lines further down, and was simply read too late.
+    #
+    #   DRIFTED         the worksheet confirmed that value; the code
+    #                   left it anyway. The only defect of the three.
+    #   CORRECTED       the worksheet refuted it and the code moved.
+    #                   Recorded, not routed.
+    #   UNCHECKED_MOVE  the worksheet neither confirmed nor refuted it,
+    #                   so neither word is honest. Routed, because
+    #                   nobody has established anything.
     recorded = table.cell(cells, ROLE_CODE)
     if claim.code_value is not None and recorded:
         verdict, detail = compare(claim.code_value, recorded)
         if verdict == 'MISMATCH':
-            claim.fail('L2b', 'DRIFTED',
-                       'code now %s, checker read %s'
-                       % (claim.unit.value_str, detail), 'CONVERSATION')
+            moved = ('code now %s, checker read %s'
+                     % (claim.unit.value_str, detail))
+            if column == 'citation-only':
+                claim.fail('L2b', 'UNCHECKED_MOVE',
+                           '%s; this worksheet carries no value verdict'
+                           % moved, 'CONVERSATION')
+            elif own == V_REFUTED:
+                claim.fail('L2b', 'CORRECTED',
+                           '%s, which it rejected: %s' % (moved, token), '')
+            elif own in (V_CONFIRMED, V_INCOMPLETE):
+                claim.fail('L2b', 'DRIFTED', moved, 'CONVERSATION')
+            else:
+                claim.fail('L2b', 'UNCHECKED_MOVE',
+                           '%s; the verdict on that value was %s'
+                           % (moved, own), 'CONVERSATION')
 
-    # ---- L3: the verdict is read -------------------------------------
-    own, token, scope, column = read_verdict(table, cells)
+    # ---- L3: the verdict is used -------------------------------------
     claim.verdict_column = column
     if own is None:
         claim.fail('L3', 'NO_VERDICT_COLUMN',

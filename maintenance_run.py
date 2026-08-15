@@ -122,6 +122,7 @@ CHECKERS = [
     ('Worksheet checker', ['worksheet_checker.py'], 'WORKSHEET CHECK:'),
     ('Worksheet checker tests', ['test_worksheet_checker.py'], None),
     ('Worksheet key round trip', ['test_worksheet_keys.py'], None),
+    ('Extractor pins', ['test_extractor_pins.py'], None),
     ('Provenance scanner', ['provenance_scanner.py'], 'TIER-1 FINDINGS'),
 ]
 
