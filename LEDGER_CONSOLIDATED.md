@@ -239,7 +239,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
-| ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-13 |
+| ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
 | ! | L-187 | info_dictionary numeric-overlap enumeration | OPEN | 1.8 | 2026-08-07 |
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
@@ -1477,7 +1477,7 @@ ruling.
 and findings summary #5.
 
 #### [L-192] Worksheet checker -- verify a value against its own evidence
-<!-- L:192 status:OPEN upd:2026-08-13 section:A flag: rice:3/3/70/3 -->
+<!-- L:192 status:OPEN upd:2026-08-15 section:A flag: rice:3/3/70/3 -->
 - **What it does:** for a constant carrying `# Cross-checked:` lines,
   open the `.md` each line names in `documentation/worksheets/` and
   confirm the worksheet exists and states the value. The skill already
@@ -1491,8 +1491,8 @@ and findings summary #5.
   annotation names, which does not depend on WHEN the value moved. It is
   the only planned check that reaches committed history.
 - **Not routine, and not arbitrary either** (Tony, 2026-08-12). The cost
-  is reading up to 34 markdown files, so it does not belong in
-  `maintenance_run.py`. Four trigger conditions, each an observable
+  was estimated at reading up to 34 markdown files, so it did not belong
+  in `maintenance_run.py`. Four trigger conditions, each an observable
   state rather than a judgement call, to be written into
   `provenance-discipline`:
   1. `constants_change_report.py` flags a value -- moved alone,
@@ -1513,9 +1513,44 @@ and findings summary #5.
   2026-08-12): the provenance sweep is incomplete, and the nine
   currently uncited worksheets cover files not yet annotated. The
   checker must not report them as orphans.
+- **REVERSED 2026-08-14: it is a row in the runner.** The estimate above
+  was never measured. Measured, the pass reads 35 worksheets and 104
+  annotations in under seven seconds, which is a fifth of the reset
+  check already in the table. The trigger conditions are not wrong --
+  they are the right list for a scoped, expensive pass -- they were
+  written against a cost that turned out not to exist. Recorded rather
+  than deleted: a check nobody runs cannot fail, and four conditions
+  that must be noticed by a human are four chances not to notice.
+  Putting it where the routine already runs is what made 2026-08-15's
+  findings visible at all.
+- **The schema is settled** (Tony, 2026-08-15). Four fields: code value
+  at time of check; value RIGHT/WRONG/UNKNOWN plus the number, or a
+  range with its reduction rule stated in the cell; citation
+  RIGHT/WRONG/UNKNOWN, separately, because the two come apart in real
+  rows; notes, the only place interpretation lives. Not a proposal --
+  `worksheet_claude_constants_new_addendum.md` already carries this
+  header and already parses. The re-cut is "make the others look like
+  the addendum."
+- **Dispatch shape: one pre-printed row per (key, ordinal)** (Tony,
+  2026-08-15), with field 1 filled in by the builder so the responder
+  fills only verdicts and notes. Measured on the corpus: 53 rows become
+  65. It is what makes Roche's three provenance legs and Eris's four
+  claims expressible at all, it deletes `match_row()` and the 25
+  UNMATCHED findings that fuzzy binding produced, and a later ordinal
+  shift stops matching its pre-printed value loudly instead of binding
+  to the wrong claim silently.
+- **Sequencing, not yet ruled.** The checker simplification the schema
+  permits -- deleting `match_row()`, a strict fail-loud verdict grammar
+  -- is gated on the re-cut, not the reverse: fuzzy matching cannot be
+  removed while 104 annotations still depend on it. Either both formats
+  stay readable through the transition or the re-cut is atomic.
+  **Tony-action (decide).**
 - **Ref:** L-186 (the annotation grammar and the pin retirement it
-  replaces); L-188 (the runner it deliberately stays out of); L-156
-  Phase 2 (the cross-check batches that produced the worksheets).
+  replaces); L-188 (the runner it now runs in); L-193 (qualified
+  verdicts, and the interpretation layer this schema is meant to
+  delete); L-156 Phase 2 (the cross-check batches that produced the
+  worksheets); `documentation/HANDOFF_20260815_checker_honesty.md` and
+  `documentation/FABLE_REVIEW_worksheet_schema.md`.
 
 ##### As built, 2026-08-12: the attachment rule (scanner half)
 
