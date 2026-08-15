@@ -1,7 +1,10 @@
 # Session Handoff -- August 14, 2026
 
 **Built on `305b2697648590e4a75551c73743abc98bd20c66`, pushed at
-`92b5bf8f7def1bc384c165eb84224ad1e542125f`
+`65ca311512a5646551a8ed9e385863807809e2e9`
+(the build landed at `92b5bf8f7def1bc384c165eb84224ad1e542125f`;
+the Tier-1 banner patch ran after this document was written and
+pushed at `65ca311`, which is where the session actually ends)
 at https://github.com/tonylquintanilla/palomas_orrery (branch main).
 Gallery at `b486c68ab63abb25ae6d7dda73d0b4b6f64c0d0d`
 at https://github.com/tonylquintanilla/tonyquintanilla.github.io --
@@ -278,8 +281,12 @@ full output on every passing run.
    its `dev_tools` docstring tag. `MODULE_DOMAIN_MAP` does not know the
    module. Cosmetic. `worksheet_keys.py`, `worksheet_key_aliases.py`
    and `test_worksheet_keys.py` are new and will land the same way.
-9. **Run `patch_L192_tier1_banner.py`.** Delivered, tested, not yet
-   run. Reason below.
+9. **CLOSED -- the Tier-1 banner was reworded and verified.** The
+   patch ran clean at `65ca311` and the runner now prints `206
+   TIER-1 FINDINGS IN THE SCANNED TREE` above `All 11 checkers
+   passed`, which no longer contradicts it. Kept here rather than
+   deleted: the reason below is why the banner said what it said
+   for three protocol versions, and that is worth reading once.
 10. **Correction note for the Fable prompt document** at `305b269`,
     carrying the 15-bodies figure. Append rather than edit.
 11. **The claims-fraction counting-unit label** ("19 of 73 claims"
@@ -359,7 +366,7 @@ message, answer first, evidence on request.
 
 *Handoff prepared August 2026 with Anthropic's Claude Opus 5. Built on
 `305b2697648590e4a75551c73743abc98bd20c66` and pushed at
-`92b5bf8f7def1bc384c165eb84224ad1e542125f` at
+`65ca311512a5646551a8ed9e385863807809e2e9` at
 https://github.com/tonylquintanilla/palomas_orrery. Gallery at
 `b486c68ab63abb25ae6d7dda73d0b4b6f64c0d0d` at
 https://github.com/tonylquintanilla/tonyquintanilla.github.io.*
