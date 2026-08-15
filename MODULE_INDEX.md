@@ -10,16 +10,14 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 127  
-**Total Lines of Code (non-blank):** 99,198  
-**Total Public Functions/Classes:** 1,086
+**Total Python Files:** 125  
+**Total Lines of Code (non-blank):** 98,948  
+**Total Public Functions/Classes:** 1,082
 
 ## Classification Coverage
 
-**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (3).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L192_runner_keys.py`
-- `patch_L192_skill_lsr_16.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 - `worksheet_keys.py`
@@ -205,7 +203,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
 | `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (953 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
-| `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (2,941 lines) |
+| `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (2,947 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (330 lines) |
 | `test_citation_inheritance.py` | Regression tests for citation-block inheritance. (512 lines) |
 | `test_constants_provenance.py` | Regression tests for verified numeric constants. (284 lines) |
@@ -223,8 +221,6 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L192_runner_keys.py` | Wire the worksheet key round trip into the maintenance runner (L-192). (105 lines) |
-| `patch_L192_skill_lsr_16.py` | Ledger-and-session-records 1.5 -> 1.6: where a file goes (L-192). (151 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (228 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |
 | `worksheet_keys.py` | Worksheet row keys -- one owner for the syntax and the resolution. (243 lines) |

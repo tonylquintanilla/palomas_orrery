@@ -3299,10 +3299,16 @@ def generate_report(units, consistent_dups, inconsistencies,
         bar = "=" * 70
         print()
         print(bar)
-        print(f"  {tier1} TIER-1 FINDINGS -- PUSH GATE NOT MET")
+        print(f"  {tier1} TIER-1 FINDINGS IN THE SCANNED TREE")
         print()
-        print("  Informational only. This does not affect the exit code.")
-        print("  Review them before pushing; the call is yours.")
+        print("  Informational only. This does not affect the exit code,")
+        print("  and it is NOT the push gate. The gate is Tier-1 = 0 on")
+        print("  the ACTIVE BUILD PATH (provenance-discipline 2.3,")
+        print("  L-184). This line does not compute that subset -- it")
+        print("  counts every Tier-1 finding anywhere in the tree, most")
+        print("  of them off the path the gate judges. Read")
+        print("  PROVENANCE_AUDIT.md for the build-path findings.")
+        print("  The call is yours.")
         print(bar)
 
     if inconsistencies:
