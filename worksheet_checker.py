@@ -667,7 +667,8 @@ def dispose_verdict(claim, own, token, scope, where, extra=''):
     if own in VERDICT_CLEARS:
         if is_compound(token):
             claim.fail('L3', 'QUALIFIED_PASS',
-                       '%s reads %s -- confirmed with a reservation%s'
+                       '%s reads %s -- a pass carrying more than its '
+                       'token; read the cell%s'
                        % (where, tag, extra), '')
         return True
     if own == V_INCOMPLETE:

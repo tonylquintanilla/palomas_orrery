@@ -84,9 +84,21 @@ Is Not Passing"; `patch_L192_verdict_aware_L2b.py`.
 """
 
 
-def normalized(path):
-    with open(path, 'rb') as handle:
-        return handle.read().replace(b'\\r\\n', b'\\n')
+def dominant_eol(raw):
+    """The line ending this file actually uses, as text.
+
+    The first version of this script carried a normalizer that read
+    replace(b'BACKSLASH r BACKSLASH n', ...) -- the escapes doubled, so
+    it swapped a four-character literal that appears nowhere and left
+    real CRLF bytes untouched. It looked like normalization, ran on
+    every call, and could not fail, because the .py files it was first
+    tried on were already LF. It aborted on the first CRLF file it met.
+
+    So this does not normalize at all. It reads the file's own
+    convention and rewrites the anchor to match, which leaves every
+    line the patch does not touch exactly as it was.
+    """
+    return '\r\n' if raw.count(b'\r\n') else '\n'
 
 
 def main():
@@ -97,24 +109,34 @@ def main():
         print('ABORT: %s not found. Run this from the repo root.' % LEDGER)
         return 1
 
-    text = normalized(LEDGER).decode('utf-8')
+    with open(LEDGER, 'rb') as handle:
+        raw = handle.read()
+    text = raw.decode('utf-8')
+    eol = dominant_eol(raw)
 
     if SENTINEL in text:
         print('  already   %s carries L-193.' % LEDGER)
         print('Nothing to do.')
         return 0
 
-    count = text.count(ANCHOR)
+    anchor = ANCHOR.replace('\n', eol)
+    entry = ENTRY.replace('\n', eol)
+
+    count = text.count(anchor)
     if count != 1:
         print('ABORT: the anchor matched %d times, expected 1.' % count)
+        print('Line endings read as %s.'
+              % ('CRLF' if eol == '\r\n' else 'LF'))
         print('Nothing was written. The ledger is not the one this')
         print('entry was written against.')
         return 1
 
     with open(LEDGER, 'wb') as handle:
-        handle.write(text.replace(ANCHOR, ENTRY).encode('utf-8'))
-    print('  added     L-193 to %s  -> %s'
-          % (LEDGER, hashlib.md5(normalized(LEDGER)).hexdigest()))
+        handle.write(text.replace(anchor, entry).encode('utf-8'))
+    print('  added     L-193 to %s (%s endings preserved)'
+          % (LEDGER, 'CRLF' if eol == '\r\n' else 'LF'))
+    print('  new md5   %s'
+          % hashlib.md5(open(LEDGER, 'rb').read()).hexdigest())
     print()
     print('Done. Next: run ledger_index.py to rebuild the index.')
     return 0

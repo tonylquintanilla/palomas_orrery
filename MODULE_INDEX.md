@@ -10,23 +10,18 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 127  
-**Total Lines of Code (non-blank):** 99,477  
-**Total Public Functions/Classes:** 1,091
+**Total Python Files:** 126  
+**Total Lines of Code (non-blank):** 99,356  
+**Total Public Functions/Classes:** 1,089
 
 ## Classification Coverage
 
-**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_ledger_L193.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 - `worksheet_keys.py`
-
-**Undetermined domain (1).** No valid `Domain:` tag.
-
-- `patch_ledger_L193.py`
 
 
 ---
@@ -219,7 +214,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (113 lines) |
 | `test_worksheet_checker.py` | - L-192. Can each layer actually fail? (433 lines) |
 | `verify_orbit_cache.py` | Safely verify and repair orbit_paths.json (172 lines) |
-| `worksheet_checker.py` | - L-192. Does the worksheet say what the annotation claims it says? (1,336 lines) |
+| `worksheet_checker.py` | - L-192. Does the worksheet say what the annotation claims it says? (1,337 lines) |
 
 ---
 
@@ -227,7 +222,6 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_ledger_L193.py` | Add L-193 to the ledger: qualified verdicts and the two-axis report. (122 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (248 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (228 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |

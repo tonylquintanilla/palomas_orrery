@@ -1,7 +1,7 @@
 # Review request: the worksheet schema, and a checker that keeps
 # hiding its own errors
 
-**Built on `66cf0cbcf298787542ae9b7bf335273d7ffa67d1` at
+**Built on `bdb56d8a5b0503c9afa3ff0511add2854064586e` at
 https://github.com/tonylquintanilla/palomas_orrery (branch main).
 Gallery repo not involved. Every number below was measured against
 that commit on 2026-08-15; none is recalled.**
@@ -39,7 +39,9 @@ The provenance system exists so the project never asserts a number it
 has not verified. The concern is that the machinery built to enforce
 that has become something we cannot ourselves confirm.
 
-One session, 2026-08-15, surfaced six defects in it:
+One session, 2026-08-15, surfaced seven defects in it. Four are
+repaired at the commit named above; they are listed because HOW they
+were found is the finding, not what they were:
 
 1. `is_compound()` -- a guard written specifically to stop the tool
    discarding a human's qualification -- had zero call sites from the
@@ -57,11 +59,17 @@ One session, 2026-08-15, surfaced six defects in it:
    them against today's source. It could not fail.
 6. A banner announced `206 TIER-1 FINDINGS -- PUSH GATE NOT MET` and
    said two lines later that it affected nothing.
+7. A ledger entry written the same day stated that zero claims sat on
+   a qualified pass. Three do. The figure came from grepping the
+   report, which lists routed findings, for a finding recorded without
+   a route -- a green result to a question nobody had asked.
 
-**None of the six was found by the system. Every one was found by a
-person reading, or by accident.** One was caught only because the
-same prompt was sent twice by mistake on a phone with bad signal, and
-the two runs disagreed.
+**None of the seven was found by the system. Every one was found by a
+person reading, or by accident.** One was caught only because the same
+prompt was sent twice by mistake on a phone with bad signal, and the
+two runs disagreed. Two were caught because Tony asked a plain
+question the tool's own output had not prompted -- "the citations are
+correct, right?" 
 
 That is the same failure shape as the uncited constant this whole
 apparatus exists to catch: wrong, plausible, and invisible to every
@@ -88,7 +96,7 @@ fault. A wrong answer there looks exactly like a right one.
 
 ## The measurements
 
-At `66cf0cb`, over 104 cross-check annotations and 17 cited
+At `bdb56d8`, over 104 cross-check annotations and 17 cited
 worksheets:
 
 **Which question the worksheet actually answered**
@@ -106,6 +114,25 @@ worksheet column that asked about the value.
 **Verdict cells carrying a token plus prose:** 61 of 355 (17%).
 By class: UNREADABLE 17, CONFIRMED 15, REFUTED 12, DERIVED 7,
 INCOMPLETE 6, ABSENT 4.
+
+**What the checker currently reports** (104 annotations, 61 routed)
+
+| Finding | Count |
+|---|---|
+| VALUE_VERDICT_ABSENT | 46 |
+| UNMATCHED | 25 |
+| NO_NUMERIC_CLAIM | 18 |
+| INCOMPLETE_CHECK | 11 |
+| CITATION_DEFECT | 10 |
+| UNCHECKED_MOVE | 8 |
+| REFUSAL_UNCLASSIFIED | 7 |
+| UNREADABLE_VERDICT | 6 |
+| CLAIMS_UNADDRESSED | 4 |
+| DERIVED, QUALIFIED_PASS | 3 each |
+| WORKSHEET_UNREADABLE, UNPAIRED_UNITS, MISMATCH, RANGE | 2 each |
+| CHECK_NOT_PERFORMED | 1 |
+
+Sixteen finding classes. That count is itself part of the question.
 
 **What the refusals say**
 
@@ -188,5 +215,5 @@ is either quoted above or reachable at the commit named at the top.
 
 ---
 
-*Built on `66cf0cbcf298787542ae9b7bf335273d7ffa67d1` at
+*Built on `bdb56d8a5b0503c9afa3ff0511add2854064586e` at
 https://github.com/tonylquintanilla/palomas_orrery.*

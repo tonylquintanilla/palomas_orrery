@@ -2071,8 +2071,18 @@ drift class Earth sits in).
   is the ONE branch where a qualification vanishes -- every other class
   already quotes the whole cell into its finding. "YES -- to 2 decimal
   places" and a bare "YES" were the same row, and the first one is not
-  clean. Zero live claims currently sit on a qualified YES, which is
-  why the guard has a unit test rather than a corpus pin.
+  clean. THREE live claims sit on a qualified YES: MOON_RADIUS_KM,
+  and the pluto_hill_sphere_info / description pair that is also the
+  614/638 merge candidate. The entry first said zero, from a grep of
+  WORKSHEET_CHECK.md -- which lists routed findings, and this one is
+  recorded without a route. The grep answered a question nobody asked
+  and returned a clean-looking number for it.
+- **One of the three is a false positive, and it is kept.** "YES --
+  fully confirmed" is compound in structure and emphatic in meaning,
+  not qualified. The guard cannot tell those apart without reading
+  prose, which it is forbidden to do, so it flags the shape and a
+  person reads the words. One unnecessary look per two real catches is
+  the right side to err on; the wrong side is silent.
 - **The 12 REFUTED are the loud ones, and they were reported wrong.**
   In this corpus `NO -- wrong authority` means the value is fine and
   the source is not, while `NO -- arithmetic error` means the source is
