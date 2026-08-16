@@ -11,8 +11,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 127  
-**Total Lines of Code (non-blank):** 99,819  
-**Total Public Functions/Classes:** 1,101
+**Total Lines of Code (non-blank):** 99,823  
+**Total Public Functions/Classes:** 1,100
 
 ## Classification Coverage
 
@@ -223,10 +223,10 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (248 lines) |
-| `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (268 lines) |
+| `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
+| `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |
-| `worksheet_keys.py` | Worksheet row keys -- one owner for the syntax and the resolution. (243 lines) |
+| `worksheet_keys.py` | Worksheet row keys -- one owner for the syntax and the resolution. (270 lines) |
 
 ---
 
