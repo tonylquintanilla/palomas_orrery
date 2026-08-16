@@ -131,6 +131,39 @@ class KeyError_(ValueError):
     and then fails to resolve -- that is a finding, not an error."""
 
 
+RETIRED_TAG = 'RETIRED'
+
+
+def parse_sites_doc(path):
+    """[(module, line, label)] from documentation/worksheets/L192_annotated_sites.txt.
+
+    One parser, because the format has more than one consumer. Both
+    test_worksheet_keys.py and test_extractor_pins.py read this file,
+    and each carried its own copy of this loop until a RETIRED row was
+    added for a deliberately retired key: the copy that had learned the
+    tag passed, the copy that had not crashed on int('2026-08-16').
+    Fixing the consumer that broke would have left the same landmine
+    for the third consumer. (2026-08-16)
+
+    A RETIRED row records why a site left the corpus and is skipped
+    here. The inverted assertion that gives it teeth lives with the
+    pins, in test_worksheet_keys.py -- this loader only has to not
+    choke on it.
+    """
+    sites = []
+    with open(path, encoding='utf-8') as handle:
+        for raw in handle:
+            raw = raw.rstrip('\n')
+            if not raw.strip() or raw.startswith('#'):
+                continue
+            if raw.startswith(RETIRED_TAG + '\t'):
+                continue
+            parts = raw.split('\t')
+            if len(parts) >= 3:
+                sites.append((parts[0], int(parts[1]), parts[2]))
+    return sites
+
+
 def compose(module, enclosing, label='', ordinal=None):
     """Build a key from its parts.
 

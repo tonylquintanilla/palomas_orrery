@@ -83,28 +83,59 @@ def check_pins(pins, sources, aliases=None):
     return failures
 
 
+RETIRED_TAG = wk.RETIRED_TAG
+
+
 def parse_pins(path):
-    pins = []
-    with open(path, encoding='utf-8') as handle:
-        for raw in handle:
-            raw = raw.strip()
-            if raw and not raw.startswith('#'):
-                pins.append(raw)
-    return pins
+    """(live, retired) pins. A retired pin INVERTS the assertion.
 
+    A key can leave the corpus two ways and they are not the same
+    event. A RENAME is an accident and must fail loudly. A RETIREMENT
+    is a decision and must be recorded -- deleting the line loses why
+    the key vanished, and an inert '# RETIRED' comment records it
+    while checking nothing, which is a check that cannot fail.
 
-def parse_sites(path):
-    sites = []
+    So a retired pin asserts the opposite of a live one: this key must
+    NOT resolve. If it resolves again, either the constant came back
+    or the retirement record is wrong, and both deserve a red run.
+
+    Format, tab-separated:  RETIRED  <date>  <handle>  <key>
+    """
+    live = []
+    retired = []
     with open(path, encoding='utf-8') as handle:
         for raw in handle:
             raw = raw.strip()
             if not raw or raw.startswith('#'):
                 continue
-            parts = raw.split('\t')
-            if len(parts) < 3:
+            if raw.startswith(RETIRED_TAG + '\t'):
+                parts = raw.split('\t')
+                if len(parts) < 4:
+                    retired.append(('<malformed>', raw, ''))
+                    continue
+                retired.append((parts[3], parts[1], parts[2]))
                 continue
-            sites.append((parts[0], int(parts[1]), parts[2]))
-    return sites
+            live.append(raw)
+    return live, retired
+
+
+def check_retired_pins(retired, sources):
+    """A retired key that still resolves is a failure."""
+    failures = []
+    for key, when, handle in retired:
+        if key == '<malformed>':
+            failures.append((when, 'malformed RETIRED line -- want '
+                                   'RETIRED<tab>date<tab>handle<tab>key'))
+            continue
+        resolved, _ = wk.resolve(key, sources)
+        if resolved is not None:
+            failures.append((key, 'recorded RETIRED %s (%s) but it resolves '
+                                  'again at line %s' % (when, handle,
+                                                        resolved)))
+    return failures
+
+
+parse_sites = wk.parse_sites_doc
 
 
 def unit_tests():
@@ -246,14 +277,17 @@ def main():
         print('  agrees with itself and cannot detect a rename.')
         pin_failures = [('<no pin file>', PINS_DOC)]
         pins = []
+        retired = []
     else:
-        pins = parse_pins(pins_path)
+        pins, retired = parse_pins(pins_path)
         # aliases=None on purpose: the pins resolve through the map
         # installed beside the checker, which is the only way a
         # repaired rename shows up as repaired.
         pin_failures = check_pins(pins, sources, aliases=None)
+        pin_failures += check_retired_pins(retired, sources)
         print('  Aliases installed: %d' % len(wk.INSTALLED_ALIASES))
-        print('  Pinned keys:       %d' % len(pins))
+        print('  Pinned keys:       %d live, %d retired'
+              % (len(pins), len(retired)))
         print('  Pins unresolved:   %d' % len(pin_failures))
         for key, reason in pin_failures:
             print('    %s  %s' % (key, reason))
@@ -266,8 +300,8 @@ def main():
         return 1
 
     print('  RESULT: %d sites minted %d distinct keys, all resolved; '
-          '%d pinned keys still resolve.'
-          % (len(sites), len(minted), len(pins)))
+          '%d pinned keys still resolve; %d retired keys confirmed gone.'
+          % (len(sites), len(minted), len(pins), len(retired)))
     print('=' * 70)
     return 0
 

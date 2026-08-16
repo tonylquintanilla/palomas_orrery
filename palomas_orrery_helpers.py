@@ -29,7 +29,7 @@ import os
 import warnings
 # from astropy.utils.exceptions import ErfaWarning
 # ErfaWarning - for suppressing astronomy library warnings about "dubious" dates.
-# Import path has changed across versions (astropy → erfa → erfa.core).
+# Import path has changed across versions (astropy -> erfa -> erfa.core).
 try:
     from erfa.core import ErfaWarning
 except ImportError:
@@ -182,7 +182,6 @@ from constants_new import (
     RADIATIVE_ZONE_AU,
     SOLAR_RADIUS_AU,
     # Solar atmosphere
-    CHROMOSPHERE_RADII,
     INNER_CORONA_RADII,
     OUTER_CORONA_RADII,
     # Heliosphere

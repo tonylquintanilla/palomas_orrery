@@ -592,7 +592,7 @@ def create_mars_upper_atmosphere_shell(center_position=(0, 0, 0)):
     return traces
 
 # Source: NASA MAVEN Mission; Mars Global Surveyor (crustal magnetic fields);
-#         Vignes et al. 2000, GRL 27 (MPB 1.29 R_M, bow shock 1.64 R_M)
+# Source+: Vignes et al. 2000, GRL 27 (MPB 1.29 R_M, bow shock 1.64 R_M)
 # Cross-checked: Claude 2026-08-01 -- Vignes et al. (worksheet_claude_mars_visualization.md)
 # Cross-checked: GPT 2026-08-01 -- Vignes et al. (track1_gpt_independent_worksheet_mars_visualization.md)
 mars_magnetosphere_info = (
@@ -707,7 +707,7 @@ def create_mars_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0, 
     bow_shock_z = bow_shock_z + center_z
     
     # Source: Vignes et al. 2000, GRL 27 (bow shock 1.64 R_M);
-    #         NASA Solar System Exploration (Earth comparison)
+    # Source+: NASA Solar System Exploration (Earth comparison)
     # Cross-checked: Claude 2026-08-01 -- Vignes et al. (worksheet_claude_mars_visualization.md)
     # Cross-checked: GPT 2026-08-01 -- Vignes et al. (track1_gpt_independent_worksheet_mars_visualization.md)
     bow_shock_text = ["Mars Bow Shock: Forms where the supersonic solar wind first encounters<br>"
@@ -834,10 +834,10 @@ def create_mars_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0, 
     return traces
 
 # Source: Derived from NASA NSSDCA Mars Fact Sheet (a, GM_Mars)
-#         via standard Hill approximation, Claude Opus 5 2026-08-01
-#         Hill sphere varies with eccentricity (~0.98 Mkm perihelion to ~1.19 Mkm aphelion);
-#         ~1.084 Mkm / ~319.2 R_Mars is the semi-major axis average, using the
-#         project equatorial radius 3,396.2 km (Archinal et al. 2018).
+# Source+: via standard Hill approximation, Claude Opus 5 2026-08-01
+# Source+: Hill sphere varies with eccentricity (~0.98 Mkm perihelion to ~1.19 Mkm aphelion);
+# Source+: ~1.084 Mkm / ~319.2 R_Mars is the semi-major axis average, using the
+# Source+: project equatorial radius 3,396.2 km (Archinal et al. 2018).
 # Corrected 2026-08-05: the former ~324.5 R_Mars matched no published source
 #         (1.5% high). The Aug-1 cross-check derived ~1.084 Mkm; that correction
 #         reached this module but never reached shell_configs.py, and was then

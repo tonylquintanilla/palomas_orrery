@@ -36,7 +36,7 @@ import math
 import plotly.graph_objs as go
 from orrery_rendering import create_info_marker
 
-from planet_visualization_utilities import (create_sphere_points, SOLAR_RADIUS_AU, CORE_AU, RADIATIVE_ZONE_AU, CHROMOSPHERE_RADII,
+from planet_visualization_utilities import (create_sphere_points, SOLAR_RADIUS_AU, CORE_AU, RADIATIVE_ZONE_AU, SUN_RADIUS_KM,
                                             INNER_CORONA_RADII, OUTER_CORONA_RADII, STREAMER_BELT_RADII,
                                             ROCHE_LIMIT_RADII, ALFVEN_SURFACE_RADII,
                                             TERMINATION_SHOCK_AU, HELIOPAUSE_RADII,
@@ -75,18 +75,20 @@ GRAVITATIONAL_INFLUENCE_SENTENCE = (
     f"light-years); this visualization draws the midpoint."
 )
 
-# Source: CHROMOSPHERE_RADII (drawn) and CHROMOSPHERE_PHYSICAL_KM /
-#         CHROMOSPHERE_PHYSICAL_RADII (physical) in constants_new.py;
-#         Carroll & Ostlie Ch. 11 for the ~2000 km physical extent.
-#         The drawn shell is a declared stylization for visibility at
-#         orrery scale and the text says so (L-180, 2026-08-07).
+# Source: Carroll & Ostlie, An Introduction to Modern Astrophysics, Ch. 11
+# Source+: -- the ~2000 km physical extent above the photosphere, carried
+# Source+: by CHROMOSPHERE_PHYSICAL_KM / CHROMOSPHERE_PHYSICAL_RADII in
+# Source+: constants_new.py. The shell draws at TRUE SCALE as of
+# Source+: 2026-08-16; the 1.1 stylization is retired (L-180 dormant).
 CHROMOSPHERE_RADIUS_LINE = (
-    f"* Radius: drawn from the photosphere out to "
-    f"{CHROMOSPHERE_RADII} solar radii "
-    f"(~{SOLAR_RADIUS_AU:.5f} - {CHROMOSPHERE_RADII * SOLAR_RADIUS_AU:.5f} AU).<br>"
-    f"  A stylization for visibility: the physical chromosphere extends only "
-    f"~{CHROMOSPHERE_PHYSICAL_KM:,.0f} km<br>"
-    f"  above the photosphere (~{CHROMOSPHERE_PHYSICAL_RADII:.3f} solar radii).<br>"
+    f"* Radius: drawn at true scale, {CHROMOSPHERE_PHYSICAL_RADII:.6f} solar radii<br>"
+    f"  (~{SOLAR_RADIUS_AU:.5f} - {CHROMOSPHERE_PHYSICAL_RADII * SOLAR_RADIUS_AU:.5f} AU).<br>"
+    f"  The chromosphere is a skin about {CHROMOSPHERE_PHYSICAL_KM:,.0f} km deep on a star "
+    f"{SUN_RADIUS_KM:,.0f} km in radius --<br>"
+    f"  roughly {100.0 * (CHROMOSPHERE_PHYSICAL_RADII - 1.0):.2f}% of the solar radius. At any scale that "
+    f"also shows the corona<br>"
+    f"  it is too thin to resolve, which is why this shell appears welded to the<br>"
+    f"  photosphere.<br>"
 )
 
 # Source: GRAVITATIONAL_INFLUENCE_SENTENCE above (derived); NASA Solar
@@ -342,13 +344,12 @@ inner_corona_info = (
             "* It radiates at an average wavelength of 1.93 nm, within the extreme ultraviolet to soft X-ray regions."
         )
 
-# Source: constants_new.py CHROMOSPHERE_RADII=1.1 (DRAWN shell radius, a
-#         declared stylization for visibility) and CHROMOSPHERE_PHYSICAL_KM
-#         =2000 (physical extent, Carroll & Ostlie Ch. 11, ~1.003 R_sun);
-#         Golub & Pasachoff (2010) The Solar Corona.
-# Note: the previous citation asserted a chromosphere radius of 1.5 solar
-#       radii, which the store has not held since 2026-08-02
-#       (corrected L-180).
+# Source: constants_new.py CHROMOSPHERE_PHYSICAL_KM = 2000 (physical extent,
+# Source+: Carroll & Ostlie Ch. 11, ~1.003 R_sun, and since 2026-08-16 the
+# Source+: drawn radius as well); Golub & Pasachoff (2010) The Solar Corona.
+# Note: two earlier drawn radii are retired. 1.5 solar radii has not been
+#       held since 2026-08-02; the 1.1 stylization was retired 2026-08-16
+#       when the shell moved to true scale.
 chromosphere_info = (
             "Sun: Chromosphere:<br><br>"
 
@@ -473,7 +474,7 @@ core_info = (
             )
 
 # Source: NASA Solar System Exploration; constants_new.py pinned values (HELIOPAUSE_RADII, TERMINATION_SHOCK_AU,
-# OUTER_CORONA_RADII, INNER_CORONA_RADII, CHROMOSPHERE_RADII, GRAVITATIONAL_INFLUENCE_AU, Oort Cloud AU constants);
+# OUTER_CORONA_RADII, INNER_CORONA_RADII, CHROMOSPHERE_PHYSICAL_RADII, GRAVITATIONAL_INFLUENCE_AU, Oort Cloud AU constants);
 # Dones et al. (2004) Comets II; Golub & Pasachoff (2010) The Solar Corona; NASA solar interior model
 gravitational_influence_info_hover = (
             "Sun: Outer Limit of Gravitational Influence:<br><br>" 
@@ -1287,25 +1288,38 @@ def create_sun_alfven_surface_shell():
 
 
 def create_sun_chromosphere_shell():
-    """Creates the Sun's chromosphere shell."""
-    x, y, z = create_sphere_points(CHROMOSPHERE_RADII * SOLAR_RADIUS_AU, n_points=25)
-    r_info = CHROMOSPHERE_RADII * SOLAR_RADIUS_AU * 1.05
+    """Creates the Sun's chromosphere shell, at true physical scale.
+
+    The shell sits ~0.29% above the photosphere, so at any scale that
+    also renders the corona it reads as welded to the solar surface.
+    That is the correct proportion and it is the point (2026-08-16).
+    Because photosphere and chromosphere radii differ by less than 10%,
+    their info markers would collide at the north pole. Per
+    orrery-coding-conventions, the photosphere keeps the pole and this
+    marker steps 20 degrees in polar angle along the +x meridian.
+    """
+    r_shell = CHROMOSPHERE_PHYSICAL_RADII * SOLAR_RADIUS_AU
+    x, y, z = create_sphere_points(r_shell, n_points=25)
+    r_info = r_shell * 1.05
+    info_polar_deg = 20.0
+    info_x = r_info * math.sin(math.radians(info_polar_deg))
+    info_z = r_info * math.cos(math.radians(info_polar_deg))
 
     shell_trace = go.Scatter3d(
         x=x, y=y, z=z,
         mode='markers',
         marker=dict(size=3.0, color='rgb(30, 144, 255)', opacity=0.5),
-        name='Sun: Chromosphere',
-        legendgroup='Sun: Chromosphere',
+        name='Sun: Chromosphere (2,000 km skin)',
+        legendgroup='Sun: Chromosphere (2,000 km skin)',
         hoverinfo='skip',
         showlegend=True
     )
     # Phase 1 re-pipe (May 28, 2026): factory-routed.
     info_trace = create_info_marker(
-        0, 0, r_info,
+        info_x, 0, info_z,
         'rgb(30, 144, 255)',
-        f"Sun: Chromosphere<br><br>{chromosphere_info_hover}",
-        'Sun: Chromosphere'
+        f"Sun: Chromosphere (2,000 km skin)<br><br>{chromosphere_info_hover}",
+        'Sun: Chromosphere (2,000 km skin)'
     )
     return [shell_trace, info_trace]
 

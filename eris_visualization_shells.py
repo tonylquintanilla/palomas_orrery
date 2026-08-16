@@ -32,12 +32,12 @@ from planet_visualization_utilities import (ERIS_RADIUS_AU, create_sphere_points
 # Eris Shell Creation Functions
 
 # Source: Sicardy et al. (2011), Nature 478:493-496 (radius 1163 km, density 2.52 g/cm^3, albedo)
-#         Nimmo & Brown (2023), Science Advances 9, eadi9201 -- interior model inputs:
-#         radiogenic heating 4.5e-12 W/kg, thermal conductivity 3 W/m/K, surface 30 K,
-#         giving a modeled central temperature of 875 K. Modeled, not measured; one
-#         model's output, and ~500 K below rock melting.
-#         Nimmo & Brown (2023) also supports a differentiated, rock-dominated interior.
-#         JWST (2023/2024) (D/H ratio in methane ice, internal heating evidence)
+# Source+: Nimmo & Brown (2023), Science Advances 9, eadi9201 -- interior model inputs:
+# Source+: radiogenic heating 4.5e-12 W/kg, thermal conductivity 3 W/m/K, surface 30 K,
+# Source+: giving a modeled central temperature of 875 K. Modeled, not measured; one
+# Source+: model's output, and ~500 K below rock melting.
+# Source+: Nimmo & Brown (2023) also supports a differentiated, rock-dominated interior.
+# Source+: JWST (2023/2024) (D/H ratio in methane ice, internal heating evidence)
 # Cross-checked: Claude 2026-08-03 -- Nimmo & Brown 2023 (worksheet_claude_batch1_blind_lookup_DELTA.md)
 # Cross-checked: GPT 2026-08-03 -- Nimmo & Brown 2023 (batch1_blind_source_lookup_gpt.md)
 eris_core_info = (
@@ -211,7 +211,7 @@ def create_eris_mantle_shell(center_position=(0, 0, 0)):
     return traces
 
 # Source: Sicardy et al. (2011), Nature 478:493-496 (albedo 0.96)
-#         Brown & Schaller (2007) (nitrogen/methane surface composition)
+# Source+: Brown & Schaller (2007) (nitrogen/methane surface composition)
 # Cross-checked: Claude 2026-08-03 -- Sicardy et al. 2011 (worksheet_claude_batch1_tier2.md)
 # Cross-checked: GPT 2026-08-03 -- Sicardy et al. 2011 (batch1_tier2_cross_check_gpt.md)
 eris_crust_info = (
@@ -371,8 +371,8 @@ def create_eris_crust_shell(center_position=(0, 0, 0)):
     return [surface_trace, hover_trace]
 
 # Source: Sicardy et al. 2011, Nature 478:493-496 -- stellar occultation;
-#         upper limit ~1 nbar surface pressure, ~10,000x more tenuous than Pluto's.
-#         Surface temperature approximately -240 degC (modeled range -217 to -243 degC).
+# Source+: upper limit ~1 nbar surface pressure, ~10,000x more tenuous than Pluto's.
+# Source+: Surface temperature approximately -240 degC (modeled range -217 to -243 degC).
 # Cross-checked: Claude 2026-08-03 -- Sicardy et al. 2011 (worksheet_claude_batch1_tier1_sourcing.md)
 # Cross-checked: GPT 2026-08-03 -- Sicardy et al. 2011 (batch1_tier1_sourcing_gpt_independent.md)
 eris_atmosphere_info = (
@@ -466,11 +466,11 @@ def create_eris_atmosphere_shell(center_position=(0, 0, 0)):
     return traces
 
 # Source: Derived from JPL SSD Eris system mass 1.66e22 kg (Eris + Dysnomia by
-#         construction from Dysnomia's orbit) via the standard Hill approximation,
-#         Claude Opus 5 2026-08-03.
-#         Perihelion 38.0 AU gives ~8.0 Mkm (the shell uses this);
-#         semi-major axis 67.8 AU gives ~14.3 Mkm (~0.095 AU).
-#         Barycenter binary: system mass is the correct input, not Eris alone.
+# Source+: construction from Dysnomia's orbit) via the standard Hill approximation,
+# Source+: Claude Opus 5 2026-08-03.
+# Source+: Perihelion 38.0 AU gives ~8.0 Mkm (the shell uses this);
+# Source+: semi-major axis 67.8 AU gives ~14.3 Mkm (~0.095 AU).
+# Source+: Barycenter binary: system mass is the correct input, not Eris alone.
 # Corrected: the former "~9.4 Mkm" does not follow from these inputs.
 # Cross-checked: GPT 2026-08-03 -- derived Hill radius (batch1_tier2_followup_gpt.md)
 # Cross-checked: Gemini 2026-08-03 -- derived Hill radius (worksheet_gemini_batch1_followup.md)

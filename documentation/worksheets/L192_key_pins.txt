@@ -5,7 +5,6 @@ constants_new.py::ALFVEN_SURFACE_RADII
 constants_new.py::ARROKOTH_RADIUS_KM
 constants_new.py::BENNU_RADIUS_KM
 constants_new.py::CHROMOSPHERE_PHYSICAL_KM
-constants_new.py::CHROMOSPHERE_RADII
 constants_new.py::EARTH_EQUATORIAL_RADIUS_KM
 constants_new.py::EARTH_POLAR_RADIUS_KM
 constants_new.py::HAUMEA_RADIUS_KM
@@ -54,3 +53,11 @@ venus_visualization_shells.py::venus_atmosphere_info
 venus_visualization_shells.py::venus_core_info
 venus_visualization_shells.py::venus_hill_sphere_info
 venus_visualization_shells.py::venus_magnetosphere_info
+
+# RETIRED keys. The assertion INVERTS here: a retired key must NOT
+# resolve. A rename is an accident and fails loudly above; a
+# retirement is a decision and is recorded rather than deleted, so a
+# future stale-key hit on the name reads as expected. If one of these
+# resolves again, either the value came back or this record is wrong.
+# Format: RETIRED<tab>date<tab>handle<tab>key
+RETIRED	2026-08-16	L-196	constants_new.py::CHROMOSPHERE_RADII

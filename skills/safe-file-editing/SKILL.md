@@ -6,13 +6,17 @@ fires_when: Editing existing files, patch scripts, sed/regex edits, encoding che
 
 # Safe File Editing
 
-Skill version: 1.3 | Cut from palomas_orrery @ 1ba20c3 (v1.3), earlier @
-3398970 (v1.2), bdaaa0c (v1.1) | August 7, 2026
+Skill version: 1.4 | Cut from palomas_orrery @ a872205 (v1.4), earlier @
+1ba20c3 (v1.3), 3398970 (v1.2), bdaaa0c (v1.1) | August 16, 2026
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;
 v1.1 adds the delivery-format convention from a same-day incident (a
 transactional patch silently never run; see Field Notes). v1.3 adds
 Line Endings Are Not Content, earned when a patch aborted twice on a
-CRLF working copy whose bytes were identical to the repo's.
+CRLF working copy whose bytes were identical to the repo's. v1.4 adds
+Fix In Passing, Report It, after a patch blocked itself on two Unicode
+arrows that predated it by months, and Naming and Archiving a Patch
+Script, an unstated convention 96 scripts deep that Tony had been
+following alone.
 Portable: applies to any project, not only Paloma's Orrery.
 
 ## Bottom-Up Editing [QUALITY]
@@ -128,6 +132,40 @@ run from a terminal with the working directory set to the repo root the
 patch targets (or the correct subfolder, e.g. `tools\`, if the diff's
 paths are relative to one).
 
+### Naming and Archiving a Patch Script [QUALITY]
+
+A patch script is disposable and its record is permanent. Both facts
+are carried by where it ends up, not by anyone remembering.
+
+**Name it `patch_<handle>_<what>.py`**, leading with the ledger handle
+that authorized it -- `patch_L189_run_history.py`,
+`patch_F1_active_path_gate.py`. A name describing only what the script
+does ("normalize_continuations_stage1.py") reads fine on the day and
+is unattributable a year later.
+
+**Number a sequence.** Where several patches must run in order, the
+order lives nowhere but their fingerprints -- each is built against the
+tree the last one produced, so running them out of order aborts safely
+but tells nobody what the right order was. Put it in the filename:
+`patch_L196_1_continuations`, `_2_chromosphere`, `_3_key_retirement`.
+Sort order is then run order.
+
+**Archive to `documentation/` once it has run**, never the repo root.
+It is one-shot by construction -- the fingerprint it guards on describes
+a tree that stopped existing the moment it succeeded, so a second run
+aborts and writes nothing. Keeping it is for the record, not for reuse.
+
+**Say which parts are permanent.** A disposable script routinely
+installs lasting capability -- a new function, a new file grammar, a new
+data record. The script is thrown away; those are not. State the split
+when delivering, or the permanent half gets archived mentally along
+with the script.
+
+(Tony's ruling, 2026-08-16. The convention was already 96 scripts deep
+in `documentation/` and written down nowhere, so a session that read
+the delivery format above still produced three unprefixed scripts and
+had to be told.)
+
 **Standing: the VS Code Run button is the preferred path where practical;
 a terminal step is a fallback, not forbidden** (Tony, 2026-08-05,
 resolving the conflict Fable flagged between this section and the resident
@@ -157,6 +195,56 @@ signs, or checkmarks (Windows cp1252 consoles mangle them).
 grep -P '[^\x00-\x7F]' filename.py   # Find non-ASCII (should be empty)
 file filename.py                      # Check line endings
 ```
+
+### Fix In Passing, Report It [QUALITY]
+
+When a patch is already fingerprinting a file and finds a violation of
+an ALREADY-RULED convention in it -- non-ASCII bytes, CRLF where the
+repo is LF -- fix it in the same patch and say so in the output. Do not
+note it and move on.
+
+The reasoning is about what actually gets scheduled. A dedicated sweep
+for two characters is costly and low priority, so "recorded for later"
+means never. Meanwhile the patch already holds the two things that make
+the fix safe: a fingerprint proving the file is the expected one, and an
+all-or-nothing harness. Those conditions will not recur more cheaply
+than right now.
+
+This is NOT a licence for scope creep. It applies only where all three
+hold:
+- the convention is already ruled, not a judgment call being made on
+  the spot;
+- the file is already being edited by this patch, not opened for the
+  purpose;
+- the fix is mechanical, with no reading of intent.
+
+A design change, a refactor, or anything needing a decision stays out
+of scope and goes to the person. "Fix only what asked" governs DESIGN.
+It was never meant to preserve a ruled violation in a file you are
+already holding open.
+
+**Scope the gate to what the patch INTRODUCES, then sweep what it can
+reach.** A gate that fails the whole run because the file already held a
+violation blocks a correct patch over somebody else's bug. A gate that
+stays silent about it is how a convention quietly stops being true. So:
+hard-fail on non-ASCII in inserted lines, fix pre-existing violations
+where the three conditions hold, and print which of the two happened.
+
+Report both outcomes explicitly, because they are different facts:
+
+```
+note: <file> had N non-ASCII byte(s); normalized to ASCII in passing
+note: <file> still holds N non-ASCII byte(s) this patch did not reach
+```
+
+The second line is the one that matters. A patch that fixes some and
+not all must say which, or the next session reads a clean run as a
+clean file.
+
+**The patch script's own bytes are also in scope.** A script that
+repairs a Unicode character has to CARRY that character to match on it.
+Write it escaped (a `\uXXXX` literal) so the deliverable stays ASCII and
+does not fail the gate it exists to enforce.
 
 ## grep -c in && Chains [QUALITY]
 
@@ -212,6 +300,15 @@ skill.)
   identical, nothing edited. The check was right to fire and the reading
   of it was wrong. When a fingerprint fails, establish WHAT differs
   before saying WHY. (2026-08-07)
+- **A pre-existing violation found mid-patch gets fixed, not noted.** A
+  patch touching eight files hit its own ASCII gate on two Unicode
+  arrows in a comment that predated the work by months. The first
+  instinct was to report and leave it, citing "fix only what asked."
+  Tony's ruling: the convention was already ruled, the file was already
+  fingerprinted, and a separate sweep for two characters would never be
+  scheduled -- so fix it in passing and report it. The anti-pattern
+  "fix only what asked" guards against is unreviewed DESIGN change, not
+  mechanical compliance with a standing rule. (2026-08-16)
 - **Build patch anchors from the file, not from memory of the file.** An
   anchor included trailing context typed from recall; the actual next
   line was a different `# Source:` comment entirely, so the anchor

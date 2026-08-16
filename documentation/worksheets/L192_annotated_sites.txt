@@ -7,7 +7,6 @@ constants_new.py	80	EARTH_POLAR_RADIUS_KM
 constants_new.py	86	JUPITER_EQUATORIAL_RADIUS_KM
 constants_new.py	92	JUPITER_POLAR_RADIUS_KM
 constants_new.py	98	SPEED_OF_LIGHT_KM_S
-constants_new.py	162	CHROMOSPHERE_RADII
 constants_new.py	173	CHROMOSPHERE_PHYSICAL_KM
 constants_new.py	184	INNER_CORONA_RADII
 constants_new.py	195	STREAMER_BELT_RADII
@@ -53,3 +52,7 @@ venus_visualization_shells.py	339	venus_atmosphere_info
 venus_visualization_shells.py	437	description
 venus_visualization_shells.py	528	venus_magnetosphere_info
 venus_visualization_shells.py	681	venus_hill_sphere_info
+
+# RETIRED sites -- skipped by the round trip, kept as the record of
+# why the site left the corpus. Format: RETIRED<tab>date<tab>handle<tab>site
+RETIRED	2026-08-16	L-196	constants_new.py	162	CHROMOSPHERE_RADII

@@ -42,7 +42,7 @@ mercury_inner_core_info = (
 )
 
 # Source: Hauck et al. 2013, JGR Planets 118:1204 -- Mercury core radius
-#         2020 +/- 30 km (MESSENGER gravity and spin state). Used for visualization.
+# Source+: 2020 +/- 30 km (MESSENGER gravity and spin state). Used for visualization.
 # Cross-checked: GPT 2026-08-03 -- Hauck et al. 2013 (batch1_blind_source_lookup_gpt.md)
 # Cross-checked: Gemini 2026-08-03 -- Hauck et al. 2013 (batch1_tier2_cross_check_gemini.md)
 mercury_outer_core_info = (
@@ -61,7 +61,7 @@ mercury_mantle_info = (
 )
 
 # Source: Sori 2018, EPSL 489:92 -- Mercury crustal thickness 26 +/- 11 km
-#         (MESSENGER gravity/topography, isostasy).
+# Source+: (MESSENGER gravity/topography, isostasy).
 # Removed: former "~35 km" (Sori 2018 gives 26, not 35) and the diamond-layer claim,
 #          which carried a mis-parsed author name, the wrong mechanism, and the wrong
 #          location. Removed rather than re-cited.
@@ -87,7 +87,7 @@ mercury_atmosphere_info = (
 # ============================================================
 
 # Source: Baumgardner et al. 2008, GRL 35 -- sodium tail observed to ~1,400 R_M;
-#         Schmidt et al. 2010, Icarus -- tail >1,000 R_M, highly variable.
+# Source+: Schmidt et al. 2010, Icarus -- tail >1,000 R_M, highly variable.
 # Note: Potter & Morgan 1985 is the exosphere sodium DISCOVERY paper; it does not
 #       establish tail extent. The former "10,000 R_M" was unsupported by either
 #       source and has been replaced with the observed range.
@@ -247,7 +247,7 @@ def create_mercury_sodium_tail(center_position=(0, 0, 0), sun_position=(0, 0, 0)
 
 
 # Source: NASA MESSENGER Mission; Winslow et al. 2013 -- magnetopause subsolar
-#         1.45 R_M and bow shock 1.96 R_M (the values used in the geometry below).
+# Source+: 1.45 R_M and bow shock 1.96 R_M (the values used in the geometry below).
 # Cross-checked: Claude 2026-08-03 -- Winslow et al. 2013 (worksheet_claude_batch1_tier2.md)
 # Cross-checked: GPT 2026-08-03 -- Winslow et al. 2013 (batch1_tier2_cross_check_gpt.md)
 mercury_magnetosphere_info = (
@@ -414,10 +414,10 @@ def create_mercury_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(
     return traces
 
 # Source: Derived from NASA NSSDCA Mercury Fact Sheet inputs (Mercury GM,
-#         perihelion distance) via the standard Hill approximation,
-#         Claude Opus 5 2026-08-03. Perihelion convention.
-#         Mercury has no significant companion, so body mass is the correct
-#         input (no system-mass term).
+# Source+: perihelion distance) via the standard Hill approximation,
+# Source+: Claude Opus 5 2026-08-03. Perihelion convention.
+# Source+: Mercury has no significant companion, so body mass is the correct
+# Source+: input (no system-mass term).
 # Cross-checked: Claude 2026-08-03 -- NSSDCA-derived Hill radius (worksheet_claude_batch1_tier2.md)
 # Cross-checked: GPT 2026-08-03 -- NSSDCA-derived Hill radius (batch1_tier2_followup_gpt.md)
 mercury_hill_sphere_info = (

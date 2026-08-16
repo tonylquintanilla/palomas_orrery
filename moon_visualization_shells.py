@@ -36,7 +36,7 @@ from orrery_rendering import create_info_marker
 # Moon Shell Creation Functions
 
 # Source: Weber et al. (2011), Science, "Seismic Detection of the Lunar Core";
-#         solid inner core ~240 km radius, from Apollo seismic array reanalysis.
+# Source+: solid inner core ~240 km radius, from Apollo seismic array reanalysis.
 # Removed: former "1,600-1,700 K" inner-core temperature. Weber 2011 is a seismic
 #          detection study and reports no inner-core temperature; the value was not
 #          sourceable after three independent searches, so it is removed and the gap
@@ -57,7 +57,7 @@ def create_moon_inner_core_shell(center_position=(0, 0, 0)):
         'opacity': 1.0,
         'name': 'Inner Core',
         # Source: Weber et al. (2011), Science, "Seismic Detection of the Lunar Core";
-        #         solid iron-rich inner core ~240 km radius (seismic constraint).
+        # Source+: solid iron-rich inner core ~240 km radius (seismic constraint).
         # Removed: former "1,600-1,700 K" -- see module-level note above.
         # Cross-checked: GPT 2026-08-03 -- Weber et al. 2011 (batch1_tier2_cross_check_gpt.md)
         # Cross-checked: Gemini 2026-08-03 -- Weber et al. 2011 (batch1_tier2_cross_check_gemini.md)
@@ -128,7 +128,7 @@ def create_moon_outer_core_shell(center_position=(0, 0, 0)):
         'opacity': 0.8,
         'name': 'Outer Core',
         # Source: NASA Moon Fact Sheet; Weber et al. (2011), Science, "Seismic Detection of the Lunar Core";
-        #         outer core ~330 km radius, partially molten silicate boundary layer ~150 km thick.
+        # Source+: outer core ~330 km radius, partially molten silicate boundary layer ~150 km thick.
         # Removed: former "1300 K to 1600 K" outer-core temperature from the display text.
         #          Weber 2011 is a seismic study, not a thermal one; the temperature is
         #          model-dependent and was not sourceable after three independent searches.
@@ -219,9 +219,9 @@ def create_moon_outer_core_shell(center_position=(0, 0, 0)):
     return traces
 
 # Source: Nakamura et al. 1982, JGR 87:A117 -- deep moonquake source depths;
-#         Nakamura 2005, JGR 110 -- deep moonquake catalog reanalysis.
-#         Deep moonquakes 700-1,200 km depth, concentrated at 800-1,000 km;
-#         tidal stress origin.
+# Source+: Nakamura 2005, JGR 110 -- deep moonquake catalog reanalysis.
+# Source+: Deep moonquakes 700-1,200 km depth, concentrated at 800-1,000 km;
+# Source+: tidal stress origin.
 # Cross-checked: Claude 2026-08-03 -- Nakamura et al. 1982 (worksheet_claude_batch1_followup.md)
 # Cross-checked: GPT 2026-08-03 -- Nakamura 1982/2005 (batch1_tier2_followup_gpt.md)
 moon_mantle_info = (
@@ -243,8 +243,8 @@ def create_moon_mantle_shell(center_position=(0, 0, 0)):
         'opacity': 0.9655,
         'name': 'Mantle',
         # Source: NASA Moon Fact Sheet; Weber et al. (2011), Science, "Seismic Detection of the Lunar Core";
-        #         Apollo Seismic Experiment reports (deep moonquakes, tidal stress);
-        #         Draper (1847) for Draper point 798 K.
+        # Source+: Apollo Seismic Experiment reports (deep moonquakes, tidal stress);
+        # Source+: Draper (1847) for Draper point 798 K.
         'description': (
             "Above the core lies the Moon's mantle, which makes up the bulk of its interior:<br>" 
             "* Composition: Primarily composed of silicate rocks, similar to Earth's mantle, but with different proportions of <br>" 
@@ -572,12 +572,12 @@ def create_moon_exosphere_shell(center_position=(0, 0, 0)):
     return traces
 
 # Source: Derived from NASA NSSDCA Moon Fact Sheet inputs (Moon mass, Earth mass,
-#         Earth-Moon distance) via the standard Hill approximation,
-#         Claude Opus 5 2026-08-03.
-#         ~60,000 km is a conventional rounded value, not a measured constant.
-#         The Hill radius varies over the orbit from ~58,147 km (perigee) to
-#         ~64,901 km (apogee). The shell uses 34.53 lunar radii = ~59,992 km
-#         (Moon mean radius 1,737.4 km), which lies inside that range.
+# Source+: Earth-Moon distance) via the standard Hill approximation,
+# Source+: Claude Opus 5 2026-08-03.
+# Source+: ~60,000 km is a conventional rounded value, not a measured constant.
+# Source+: The Hill radius varies over the orbit from ~58,147 km (perigee) to
+# Source+: ~64,901 km (apogee). The shell uses 34.53 lunar radii = ~59,992 km
+# Source+: (Moon mean radius 1,737.4 km), which lies inside that range.
 # Cross-checked: Claude 2026-08-03 -- derived Hill radius (worksheet_claude_batch1_tier2.md)
 # Note: SINGLE-LEG. Only the Claude tier-2 worksheet carries the 58,147-64,901 km
 #       range. GPT and Gemini converged on method and inputs but did not publish

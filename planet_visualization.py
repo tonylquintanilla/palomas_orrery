@@ -61,7 +61,7 @@ from solar_visualization_shells import (
 from planet_visualization_utilities import (
     # Solar structure and atmosphere
     SOLAR_RADIUS_AU, CORE_AU, RADIATIVE_ZONE_AU,
-    CHROMOSPHERE_RADII, INNER_CORONA_RADII, OUTER_CORONA_RADII,
+    INNER_CORONA_RADII, OUTER_CORONA_RADII,
     STREAMER_BELT_RADII, ROCHE_LIMIT_RADII, ALFVEN_SURFACE_RADII,
     # Heliosphere and beyond
     TERMINATION_SHOCK_AU, HELIOPAUSE_RADII,

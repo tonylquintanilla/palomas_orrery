@@ -72,7 +72,7 @@ from solar_visualization_shells import (
 # Phase D1: Import Sun radius constants for radius_au expressions.
 from planet_visualization_utilities import (
     SOLAR_RADIUS_AU, CORE_AU, RADIATIVE_ZONE_AU,
-    CHROMOSPHERE_RADII, INNER_CORONA_RADII, OUTER_CORONA_RADII,
+    CHROMOSPHERE_PHYSICAL_RADII, INNER_CORONA_RADII, OUTER_CORONA_RADII,
     STREAMER_BELT_RADII, ROCHE_LIMIT_RADII, ALFVEN_SURFACE_RADII,
     TERMINATION_SHOCK_AU, HELIOPAUSE_RADII,
     INNER_LIMIT_OORT_CLOUD_AU, INNER_OORT_CLOUD_AU, OUTER_OORT_CLOUD_AU,
@@ -1917,8 +1917,8 @@ SHELL_CONFIGS = {
         },
 
         'chromosphere': {
-            'name': 'Chromosphere',
-            'radius_au': CHROMOSPHERE_RADII * SOLAR_RADIUS_AU,
+            'name': 'Chromosphere (2,000 km skin)',
+            'radius_au': CHROMOSPHERE_PHYSICAL_RADII * SOLAR_RADIUS_AU,
             'color': 'rgb(30, 144, 255)',
             'opacity': 0.5,
             'n_points': 25,

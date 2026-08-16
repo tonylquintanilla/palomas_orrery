@@ -66,17 +66,7 @@ def live_header():
     }
 
 
-def parse_sites(path):
-    """[(module, line, label)] from the shared corpus list."""
-    sites = []
-    with open(path, encoding='utf-8') as handle:
-        for raw in handle:
-            if raw.startswith('#') or not raw.strip():
-                continue
-            parts = raw.rstrip('\n').split('\t')
-            if len(parts) >= 3:
-                sites.append((parts[0], int(parts[1]), parts[2]))
-    return sites
+parse_sites = wk.parse_sites_doc
 
 
 def parse_pins(path):

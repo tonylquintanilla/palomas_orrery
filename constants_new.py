@@ -110,15 +110,15 @@ SPEED_OF_LIGHT_KM_S = 299792.458
 
 SOLAR_RADIUS_AU = SUN_RADIUS_KM / KM_PER_AU
 # Derived: 695700 / 149597870.7 = 0.004650467...
-# Previous hardcoded value was 0.00465047 (consistent to 6 sig figs)
+# Derived+: Previous hardcoded value was 0.00465047 (consistent to 6 sig figs)
 
 LIGHT_MINUTES_PER_AU = KM_PER_AU / SPEED_OF_LIGHT_KM_S / 60.0
 # Derived: 149597870.7 / 299792.458 / 60 = 8.31675...
-# Previous hardcoded value was 8.3167 (consistent to 5 sig figs)
+# Derived+: Previous hardcoded value was 8.3167 (consistent to 5 sig figs)
 
 AU_PER_LIGHT_YEAR = (SPEED_OF_LIGHT_KM_S * 365.25 * 86400.0) / KM_PER_AU
 # Derived: 299792.458 km/s x Julian year (365.25 d x 86400 s) / KM_PER_AU
-#          = 63,241.077 AU per light-year
+# Derived+: = 63,241.077 AU per light-year
 # Source: IAU -- the light-year is defined as c x the Julian year.
 # Ref: https://www.iau.org/public/themes/measuring/
 # Note: reproduces the IAU published light-year (9.4607304726e12 km)
@@ -159,24 +159,26 @@ RADIATIVE_ZONE_AU = 0.7 * SOLAR_RADIUS_AU
 # Cross-checked: Gemini 2026-08-02 -- Carroll & Ostlie (worksheet_gemini_constants_remaining.md)
 
 # Solar atmosphere (in solar radii)
-CHROMOSPHERE_RADII = 1.1
-# Visualization shell radius (physical chromosphere extends ~2000 km above
-# photosphere = ~1.003 R_sun; drawn at 1.1 for visibility at orrery scale)
-# DRAWN value, deliberately larger than physical -- see
-# CHROMOSPHERE_PHYSICAL_KM below, and say so in any display text
-# (Tony's ruling, 2026-08-07, L-180).
-# Corrected 2026-08-02: 1.5 -> 1.1 (1.5 overstated the physical extent;
-#   Carroll & Ostlie Ch. 11 confirms ~2000 km, not 1.5 R_sun)
-# Cross-checked: Gemini 2026-08-02 -- Carroll & Ostlie (worksheet_gemini_constants_remaining.md)
-# Cross-checked: GPT 2026-08-02 -- NASA chromosphere data (constants_remaining_independent_verification_gpt.md)
+# RETIRED 2026-08-16 -- CHROMOSPHERE_RADII = 1.1, the DRAWN shell radius.
+# The chromosphere now draws at CHROMOSPHERE_PHYSICAL_RADII (below), at
+# true scale. Tony's ruling: the user should see the real proportion, and
+# a 2000 km skin reading as a hairline on the photosphere IS the lesson.
+# Discoverability moved to the legend name and the info marker (see
+# orrery-coding-conventions, 20-degree info marker separation).
+# L-180 (2026-08-07) required display text to declare the stylization. It
+# stays ON RECORD and DORMANT: it governs nothing while no solar shell is
+# stylized, and is NOT categorically superseded -- a future stylization
+# anywhere would revive it (Tony's ruling, 2026-08-16).
+# The 2026-08-02 cross-checks were checks on the drawn value and retire
+# with it; the physical value below carries its own.
 
 CHROMOSPHERE_PHYSICAL_KM = 2000.0
 # Source: Carroll & Ostlie, An Introduction to Modern Astrophysics,
-#         Ch. 11 -- chromosphere extends ~2000 km above the photosphere.
+# Source+: Ch. 11 -- chromosphere extends ~2000 km above the photosphere.
 # Cross-checked: Gemini 2026-08-02 -- Carroll & Ostlie (worksheet_gemini_constants_remaining.md)
-# Note: the PHYSICAL extent. CHROMOSPHERE_RADII (1.1) is the DRAWN
-#       shell radius, ~36x thicker, chosen for visibility at orrery
-#       scale. Both figures are real; they answer different questions.
+# Note: the PHYSICAL extent, and since 2026-08-16 the drawn one too.
+#       CHROMOSPHERE_PHYSICAL_RADII below converts it to solar radii and
+#       is what the shell draws at. The 1.1 stylization is retired.
 
 CHROMOSPHERE_PHYSICAL_RADII = 1.0 + CHROMOSPHERE_PHYSICAL_KM / SUN_RADIUS_KM
 # Derived: 1 + 2000 / 695700 = 1.002875... solar radii
@@ -203,7 +205,7 @@ STREAMER_BELT_RADII = 6.0
 ROCHE_LIMIT_RADII = 3.45
 # Source: Fluid Roche limit formula: d = 2.44 * R * (rho_sun/rho_comet)^(1/3)
 # Calculation: 2.44 * 1.0 * (1408/500)^(1/3) = 3.45 R_sun
-# Using rho_sun = 1408 kg/m3, rho_comet ~ 500 kg/m3
+# Calculation+: Using rho_sun = 1408 kg/m3, rho_comet ~ 500 kg/m3
 # Ref: Murray & Dermott, "Solar System Dynamics" (1999), Sec. 4.6
 # Cross-checked: Claude 2026-08-02 -- formula verified (worksheet_claude_constants_new.md)
 # Cross-checked: GPT 2026-08-02 -- formula verified (constants_new_citation_verification_gpt.md)
@@ -256,9 +258,9 @@ OUTER_OORT_CLOUD_AU = 100000
 
 GRAVITATIONAL_INFLUENCE_AU = 150000
 # Source: Approximate Hill sphere of Sun in Milky Way (model-dependent)
-#         Estimates range 100,000-200,000 AU in the literature;
-#         depends on assumed enclosed galactic mass and Sun's orbital distance.
-#         ~2.4 light-years. Visualization boundary, not a measured value.
+# Source+: Estimates range 100,000-200,000 AU in the literature;
+# Source+: depends on assumed enclosed galactic mass and Sun's orbital distance.
+# Source+: ~2.4 light-years. Visualization boundary, not a measured value.
 # Corrected 2026-08-02: 126000 -> 150000 (prior value unsourced;
 #   150000 AU is a round midpoint of the published range)
 # Confirmed 2026-08-07 (Tony, L-179): 150000 stands, chosen as the
@@ -267,8 +269,8 @@ GRAVITATIONAL_INFLUENCE_AU = 150000
 
 GRAVITATIONAL_INFLUENCE_RANGE_AU = (100000, 200000)
 # Source: spread of published Sun-in-Galaxy Hill sphere estimates;
-#         model-dependent, varying with assumed enclosed galactic mass
-#         and the Sun's galactocentric distance.
+# Source+: model-dependent, varying with assumed enclosed galactic mass
+# Source+: and the Sun's galactocentric distance.
 # Note: 100,000-200,000 AU = 1.6-3.2 light-years. Stored as DATA rather
 #       than prose so display strings can interpolate the envelope
 #       instead of restating the midpoint alone (L-179, 2026-08-07).
@@ -333,7 +335,7 @@ VENUS_RADIUS_KM = 6051.8
 
 MOON_RADIUS_KM = 1737.4
 # Source: NASA NSSDCA Fact Sheet (volumetric mean; oblateness ~0.0012)
-#         Also IAU/LRO reference radius (Archinal et al. 2011)
+# Source+: Also IAU/LRO reference radius (Archinal et al. 2011)
 # Cross-checked: Claude 2026-08-02 -- NASA NSSDCA (worksheet_claude_constants_remaining.md)
 # Cross-checked: GPT 2026-08-02 -- JPL SSD (constants_remaining_independent_verification_gpt.md)
 # Cross-checked: Gemini 2026-08-02 -- NASA NSSDCA (worksheet_gemini_constants_remaining.md)
@@ -366,7 +368,7 @@ PLUTO_RADIUS_KM = 1188.3
 
 BENNU_RADIUS_KM = 0.246
 # Source: Nolan et al. 2013 (radar shape model), mean diameter 492 +/- 20 m
-#         Confirmed by OSIRIS-REx OLA: mean radius 246 +/- 10 m, V = 0.062 km^3
+# Source+: Confirmed by OSIRIS-REx OLA: mean radius 246 +/- 10 m, V = 0.062 km^3
 # Corrected 2026-08-02: 0.262 -> 0.246 (prior value matched no published source)
 # Cross-checked: Claude 2026-08-02 -- Nolan et al. (worksheet_claude_constants_new.md)
 # Cross-checked: GPT 2026-08-02 -- OSIRIS-REx (constants_new_citation_verification_gpt.md)
@@ -376,8 +378,8 @@ ERIS_RADIUS_KM = 1163
 
 HAUMEA_RADIUS_KM = 715
 # Source: JPL SSD mean radius (Lockwood et al. 2014)
-#         Highly ellipsoidal: 1050x840x537 km -> geometric mean 779.5 km
-#         JPL SSD publishes 715; equatorial 870
+# Source+: Highly ellipsoidal: 1050x840x537 km -> geometric mean 779.5 km
+# Source+: JPL SSD publishes 715; equatorial 870
 # Corrected 2026-08-02: 816 -> 715 per JPL SSD (prior value matched neither axes nor database)
 # Cross-checked: Claude 2026-08-02 -- JPL SSD (worksheet_claude_constants_new.md)
 # Cross-checked: GPT 2026-08-02 -- JPL SSD (constants_new_citation_verification_gpt.md)
@@ -387,9 +389,9 @@ MAKEMAKE_RADIUS_KM = 715
 
 ARROKOTH_RADIUS_KM = 9.1
 # Source: Keane et al. 2022, JGR Planets (New Horizons shape model)
-#         Volume 3166 km^3 -> equivalent sphere radius 9.1 km
-#         Overall dims 35.95 x 19.90 x 9.75 km (bilobed contact binary)
-# Corrected 2026-04-15 per Gemini review (was 0.0088 = 8.8 meters!)
+# Source+: Volume 3166 km^3 -> equivalent sphere radius 9.1 km
+# Source+: Overall dims 35.95 x 19.90 x 9.75 km (bilobed contact binary)
+# Source+: Corrected 2026-04-15 per Gemini review (was 0.0088 = 8.8 meters!)
 # Corrected 2026-08-02: 9.95 -> 9.1 per Keane shape model (prior dims were wrong)
 # Cross-checked: Claude 2026-08-02 -- Keane et al. 2022 (worksheet_claude_constants_new.md)
 # Cross-checked: GPT 2026-08-02 -- Keane et al. 2022 (constants_new_citation_verification_gpt.md)

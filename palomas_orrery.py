@@ -266,7 +266,6 @@ from constants_new import (
     RADIATIVE_ZONE_AU,
     SOLAR_RADIUS_AU,
     # Solar atmosphere
-    CHROMOSPHERE_RADII,
     INNER_CORONA_RADII,
     OUTER_CORONA_RADII,
     # Heliosphere

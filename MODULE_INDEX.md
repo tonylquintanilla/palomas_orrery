@@ -1,6 +1,6 @@
 # Paloma's Orrery - Module Index
 
-**Generated:** August 15, 2026 by `module_atlas.py`  
+**Generated:** August 16, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -10,25 +10,18 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 129  
-**Total Lines of Code (non-blank):** 100,100  
-**Total Public Functions/Classes:** 1,104
+**Total Python Files:** 127  
+**Total Lines of Code (non-blank):** 99,819  
+**Total Public Functions/Classes:** 1,101
 
 ## Classification Coverage
 
-**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_ledger_L194_text_only_assertions.py`
-- `patch_masterplan_20260815_version_and_count.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 - `worksheet_keys.py`
-
-**Undetermined domain (2).** No valid `Domain:` tag.
-
-- `patch_ledger_L194_text_only_assertions.py`
-- `patch_masterplan_20260815_version_and_count.py`
 
 
 ---
@@ -40,7 +33,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_controller.py` | KMZ layer selector for Google Earth Pro. (131 lines) |
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,938 lines) |
-| `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,456 lines) |
+| `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,455 lines) |
 | `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (968 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
@@ -92,7 +85,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `planet9_visualization_shells.py` | Hypothetical Planet 9 shell traces. (269 lines) |
 | `pluto_visualization_shells.py` | Pluto interior and atmosphere shell traces. (615 lines) |
 | `saturn_visualization_shells.py` | Saturn interior, ring, and magnetosphere shell traces. (1,088 lines) |
-| `solar_visualization_shells.py` | Sun interior, corona, and heliosphere shell traces. (1,364 lines) |
+| `solar_visualization_shells.py` | Sun interior, corona, and heliosphere shell traces. (1,377 lines) |
 | `uranus_visualization_shells.py` | Uranus interior, ring, and magnetosphere shell traces. (1,083 lines) |
 | `venus_visualization_shells.py` | Venus interior and atmosphere shell traces. (645 lines) |
 
@@ -125,7 +118,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,250 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (515 lines) |
-| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (772 lines) |
+| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (774 lines) |
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (401 lines) |
 | `exoplanet_stellar_properties.py` | Stellar Properties for Exoplanet Host Stars (484 lines) |
 | `exoplanet_systems.py` | Hardcoded Exoplanet System Catalog (572 lines) |
@@ -182,7 +175,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `earth_system_common.py` | Shared, engine-agnostic helpers for the Earth System KMZ generators (climate/heat and food insecurity). (134 lines) |
 | `formatting_utils.py` | Basic formatting utilities used by both palomas_orrery.py and visualization_utils.py. (19 lines) |
-| `palomas_orrery_helpers.py` | Support functions extracted from the main orrery monolith. (771 lines) |
+| `palomas_orrery_helpers.py` | Support functions extracted from the main orrery monolith. (770 lines) |
 | `report_manager.py` | Scientific Report Manager for Astronomical Data Analysis Manages generation, storage, and retrieval of analysis reports. (126 lines) |
 | `shared_utilities.py` | Small shared helpers used across shell visualization modules. (204 lines) |
 | `shutdown_handler.py` | Graceful shutdown and safe figure display for Plotly. (75 lines) |
@@ -209,7 +202,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `maintenance_run.py` | - L-188. One command, the whole maintenance suite. (267 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (953 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (954 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (2,947 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (330 lines) |
@@ -230,10 +223,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_ledger_L194_text_only_assertions.py` | Adds one new detail block, [L-194], to LEDGER_CONSOLIDATED.md, inserted after L-193 and before the PENDING ACTION heading. Nothing else is touched. The index zone is NOT edited by hand -- run ledger_index.py (or maintenance_run.py, which includes it as a generator) afterwards to regenerate the in... (233 lines) |
-| `patch_masterplan_20260815_version_and_count.py` | Corrects two stale facts in the master plan and its readable summary, both verified against repo HEAD 253bcdd on 2026-08-15: (102 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (248 lines) |
-| `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (228 lines) |
+| `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (268 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |
 | `worksheet_keys.py` | Worksheet row keys -- one owner for the syntax and the resolution. (243 lines) |
 

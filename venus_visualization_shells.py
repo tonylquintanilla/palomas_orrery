@@ -36,7 +36,7 @@ from orrery_rendering import rotate_to_sunward, create_info_marker
 # Venus Shell Creation Functions
 
 # Source: NASA Venus Fact Sheet; NASA Solar System Exploration;
-#         iron-nickel core, radius ~3,200 km, lack of dynamo due to slow rotation or solid core.
+# Source+: iron-nickel core, radius ~3,200 km, lack of dynamo due to slow rotation or solid core.
 # Cross-checked: Claude 2026-08-03 -- NASA Venus Fact Sheet (worksheet_claude_batch1_tier2.md)
 # Cross-checked: GPT 2026-08-03 -- NASA Venus Fact Sheet (batch1_tier2_cross_check_gpt.md)
 venus_core_info = (
@@ -55,7 +55,7 @@ def create_venus_core_shell(center_position=(0, 0, 0)):
         'opacity': 1.0,
         'name': 'Core',
         # Source: NASA Venus Fact Sheet; NASA Solar System Exploration;
-        #         iron-nickel core, radius ~3,200 km, no dynamo (slow rotation or solid core).
+        # Source+: iron-nickel core, radius ~3,200 km, no dynamo (slow rotation or solid core).
         # Cross-checked: Claude 2026-08-03 -- NASA Venus Fact Sheet (worksheet_claude_batch1_tier2.md)
         # Cross-checked: GPT 2026-08-03 -- NASA Venus Fact Sheet (batch1_tier2_cross_check_gpt.md)
         'description': (
@@ -329,8 +329,8 @@ def create_venus_crust_shell(center_position=(0, 0, 0)):
     return [surface_trace, hover_trace]
 
 # Source: NASA NSSDCA Venus Fact Sheet -- surface pressure 92 bars, surface
-#         temperature 464 degC, CO2 96.5%, N2 3.5%.
-#         Sanchez-Lavega 2018 -- troposphere/tropopause top range 60-65 km.
+# Source+: temperature 464 degC, CO2 96.5%, N2 3.5%.
+# Source+: Sanchez-Lavega 2018 -- troposphere/tropopause top range 60-65 km.
 # Cross-checked: Claude 2026-08-03 -- NSSDCA Venus Fact Sheet (worksheet_claude_batch1_tier1_sourcing.md)
 # Cross-checked: GPT 2026-08-03 -- NSSDCA Venus Fact Sheet (batch1_tier1_sourcing_gpt_independent.md)
 # NOTE: duplicated text -- the description entry in create_venus_atmosphere_shell
@@ -427,7 +427,7 @@ def create_venus_upper_atmosphere_shell(center_position=(0, 0, 0)):
         'opacity': 0.3,
         'name': 'Upper Atmosphere',
         # Source: Bertaux et al. 2007, Nature 450:646 -- Venus mesosphere 60-100 km
-        #         (SPICAV/Venus Express stellar occultation). Mesosphere extent only.
+        # Source+: (SPICAV/Venus Express stellar occultation). Mesosphere extent only.
         # Removed: thermosphere temperature and ionosphere peak altitude as specific
         #          values. Both are model- and time-dependent; softened in the display
         #          text rather than cited. VIRA-sourced values may restore them later.
@@ -520,8 +520,8 @@ def create_venus_upper_atmosphere_shell(center_position=(0, 0, 0)):
     return traces
 
 # Source: ESA Venus Express: Magnetosphere; NASA Pioneer Venus Results;
-#         Zhang et al. 2007 -- induced magnetopause ~1.05 R_V;
-#         Shan et al. 2015 -- induced bow shock 1.4 R_V (range 1.36-1.46).
+# Source+: Zhang et al. 2007 -- induced magnetopause ~1.05 R_V;
+# Source+: Shan et al. 2015 -- induced bow shock 1.4 R_V (range 1.36-1.46).
 # Cross-checked: Claude 2026-08-03 -- Zhang 2007 / Shan 2015 (worksheet_claude_batch1_tier2.md)
 # Cross-checked: GPT 2026-08-03 -- Zhang 2007 / Shan 2015 (batch1_tier2_cross_check_gpt.md)
 venus_magnetosphere_info = (
@@ -578,8 +578,8 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     z = z + center_z
     
     # Source: Edberg et al. 2024, JGR Space Physics 129, e2024JA032603 -- magnetotail
-    #         extends to ~45-60 R_V under active conditions;
-    #         Shan et al. 2015 -- induced bow shock 1.3-1.7 R_V.
+    # Source+: extends to ~45-60 R_V under active conditions;
+    # Source+: Shan et al. 2015 -- induced bow shock 1.3-1.7 R_V.
     # Cross-checked: GPT 2026-08-03 -- Edberg et al. 2024 (batch1_tier2_cross_check_gpt.md)
     # Cross-checked: Gemini 2026-08-03 -- Edberg et al. 2024 (worksheet_gemini_batch1_followup.md)
     magnetosphere_text = ["Venus has no internal magnetic field. Its weak, induced magnetosphere forms where the solar wind <br>"
@@ -670,11 +670,11 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     return traces
 
 # Source: Derived from NASA NSSDCA Venus Fact Sheet inputs (Venus GM, perihelion
-#         distance 107.48 Mkm) via the standard Hill approximation,
-#         Claude Opus 5 2026-08-03.
-#         Perihelion gives ~1.004 Mkm = 166 Venus radii (the shell uses this);
-#         semi-major axis gives ~1.011 Mkm = 167.1 Venus radii.
-#         Venus has no natural moons, so body mass is the correct input.
+# Source+: distance 107.48 Mkm) via the standard Hill approximation,
+# Source+: Claude Opus 5 2026-08-03.
+# Source+: Perihelion gives ~1.004 Mkm = 166 Venus radii (the shell uses this);
+# Source+: semi-major axis gives ~1.011 Mkm = 167.1 Venus radii.
+# Source+: Venus has no natural moons, so body mass is the correct input.
 # Cross-checked: GPT 2026-08-03 -- derived Hill radius (batch1_tier2_followup_gpt.md)
 # Cross-checked: Claude 2026-08-03 -- derived Hill radius (worksheet_claude_batch1_tier2.md)
 venus_hill_sphere_info = (
