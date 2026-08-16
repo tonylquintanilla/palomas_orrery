@@ -6,8 +6,13 @@ fires_when: Markers, hover text, axes, shells, legendgroups, docstrings, new vis
 
 # Orrery Coding Conventions
 
-Skill version: 1.3 | Cut from palomas_orrery @ 3398970 | 2026-08-05
+Skill version: 1.4 | Cut from palomas_orrery @ 86f529a (v1.4), earlier @
+3398970 (v1.3) | 2026-08-16
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons.
+v1.4 adds Marker Separation for Near-Equal Radii to the Single Info
+Marker Pattern, earned when the chromosphere moved to true scale and its
+marker landed one pixel from the photosphere's; and Harvest the
+Conventions You Find, which is how this skill grows.
 Criticality tiers ([CRITICAL]/[QUALITY]/[PRACTICE]) are defined in the
 resident protocol, Part 2.
 
@@ -18,6 +23,40 @@ standard (including the measured per-body state, which does NOT yet match
 the intended convention), the canonical `\n` direction for module _info
 strings, dual-pipeline detail added to the shell dispatch section, and
 layer-chain gap handling. Two field notes added.
+
+## Harvest the Conventions You Find [PRACTICE]
+
+This skill holds the conventions somebody wrote down. The codebase holds
+many more, and they live where they were invented -- a comment above one
+function, a docstring paragraph, a pattern repeated across four modules
+that nobody ever named. A convention that exists only in the file that
+uses it is invisible to the next session, which will either reinvent it
+differently or break it without knowing it was there.
+
+**So when you touch a file and find a convention that is not in this
+skill, say so.** Report it in the same message as the work. Do not
+silently follow it -- following it without naming it is exactly how it
+stays invisible for another six months.
+
+Promote it here when all three hold:
+- it applies beyond the file it was found in;
+- it was a decision, not an accident of how that file happened to get
+  written;
+- a future session would get it wrong without it.
+
+Report it even when they do not all hold. The judgment about promotion is
+Tony's, not the finder's, and a convention named and declined costs one
+line. One left unnamed costs a rediscovery.
+
+What this looks like in practice: "while editing X I noticed every shell
+module does Y -- that is not in the conventions skill. Worth adding?"
+That is the whole obligation. It does not require stopping the work or
+opening a ledger item.
+
+(Tony's ruling, 2026-08-16: "there are many unrecorded conventions except
+in local files." The same day, this skill's own v1.4 was delivered with
+its version block deleted by an insert that was written as a replace --
+see Field Notes.)
 
 ## Marker Symbol Convention [QUALITY]
 
@@ -65,6 +104,44 @@ Include the info marker in the geometry's legendgroup so it toggles with it.
 Rationale: hover text on every point is N^2 storage and routing spam (the
 May 2026 codebase-wide refactor converted 141 inline patterns across 18 files
 and saved 9-13 MB per render).
+
+### Marker Separation for Near-Equal Radii [QUALITY]
+
+The position choices above assume shells are separated by their radii.
+Where two shells sit within about 10% of each other, r*1.05 puts both
+markers in the same place and Plotly shows one where the user expects
+two. The geometry is correct, the legend is correct, and the affordance
+silently does not exist -- nothing errors and nothing renders wrong.
+
+**Rule: the inner shell keeps the north pole. Each subsequent shell in
+the stack steps 20 degrees in polar angle along the +x meridian, at its
+own radius.** Separate angularly, never radially -- moving a marker off
+its own shell's radius detaches it from the thing it labels.
+
+```python
+info_polar_deg = 20.0                       # 0 for the innermost
+r_info = r_shell * 1.05
+info_x = r_info * math.sin(math.radians(info_polar_deg))
+info_z = r_info * math.cos(math.radians(info_polar_deg))
+# marker at (info_x, 0, info_z)
+```
+
+Worked case, the solar skin stack. The photosphere's marker sits at
+1.050 solar radii. At the retired drawn radius of 1.1 the chromosphere's
+sat at 1.155, comfortably clear. At true scale (1.002875) it lands at
+1.053 -- 0.003 apart, about one pixel on a 0-3 R_sun view. Stepped 20
+degrees it sits 0.365 solar radii away and reads as a separate marker at
+every scale the shell family renders at.
+
+**This is not the ring-marker fix.** Saturn's ring markers once collapsed
+to a single X position and were separated in May 2026 by placing each on
+its own already-rotated trace -- radial separation, which works because
+ring radii differ by a lot. That approach cannot help at 0.29%, and
+reaching for it here is the trap. Different mechanism, different trigger.
+
+**The trigger is measurable, so measure it.** Two shells within 10% is
+the test, not "looks close." A shell whose radius is a derived constant
+can move without anyone editing the marker code.
 
 ## Hover Text AU Convention [QUALITY]
 
