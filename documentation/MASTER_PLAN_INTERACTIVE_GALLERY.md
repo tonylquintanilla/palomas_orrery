@@ -1877,7 +1877,7 @@ bodies and counted in neither figure. See L-181 and L-190.
   codebase-wide were affected. The fix was the grammar, not the six
   sites: checker first, optional source clause, retired order REFUSED
   rather than reconstructed. All 134 lines migrated.
-- **L-188 closed. `maintenance_run.py` runs four generators and eight
+- **L-188 closed. `maintenance_run.py` runs four generators and twelve
   checkers in about 40 seconds.** Its first pass confirmed its own
   premise by finding two red test files nobody had executed -- one
   asserting an unannotated corpus since roughly August 3, the other
@@ -1950,7 +1950,7 @@ bodies and counted in neither figure. See L-181 and L-190.
   seventeen rows, settled the Mercury radius that had been open eleven
   days, and surfaced two annotations crediting a worksheet for checks
   it explicitly did not perform. Now carried in
-  provenance-discipline v2.1.
+  provenance-discipline v2.3.
 
 ---
 

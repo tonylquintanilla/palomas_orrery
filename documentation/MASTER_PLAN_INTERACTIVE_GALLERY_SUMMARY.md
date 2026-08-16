@@ -6,6 +6,11 @@ https://github.com/tonylquintanilla/palomas_orrery (branch main);
 gallery at cd4874467254c89e88dc2a8fa0645e99bf5c986e at
 https://github.com/tonylquintanilla/tonyquintanilla.github.io.
 
+Two facts were refreshed 2026-08-15 at 253bcdd: the
+provenance-discipline version and the maintenance_run.py checker
+count. Everything else here still describes 00219d9 -- notably
+L-192's status, which has moved.
+
 Companion to MASTER_PLAN_INTERACTIVE_GALLERY.md v18. The plan is the
 reference document; this is the readable snapshot.
 
@@ -435,7 +440,7 @@ shadow constant closed August 10.
 Protocol at v3.39. The v3.36 Register Rule amendment is applied, and
 so is "The Artifact Bounds the Audit" (v3.37). v3.38 records the two
 limits on Stale Skill = Stop. v3.39 adds "A Check That Cannot Fail Is
-Not Passing" as a CRITICAL gate. provenance-discipline is at v2.1.
+Not Passing" as a CRITICAL gate. provenance-discipline is at v2.3.
 
 Phases 0, 1a and 1b are all closed. Layer 3, the nightly Task Scheduler
 job, is RETIRED as of August 10 -- disabled, not deleted. Several
@@ -457,7 +462,7 @@ publication year eat the check date. The fix was the format. All 134
 annotations were migrated.
 
 L-188 and L-189 closed. `maintenance_run.py` now runs four generators
-and eight checkers in one command, about 40 seconds. Its very first
+and twelve checkers in one command, about 40 seconds. Its very first
 pass found two test files that had been red for days and that nobody
 ran, which is the argument for the runner in one sentence.
 

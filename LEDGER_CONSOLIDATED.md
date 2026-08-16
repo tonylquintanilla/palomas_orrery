@@ -221,12 +221,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*116 live items; 105 need attention (`!`); 115 RICE-scored; 72 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*118 live items; 106 need attention (`!`); 117 RICE-scored; 72 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
+| ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
 | ! | L-193 | Qualified verdicts -- the token is not the whole answer | OPEN | 4.8 | 2026-08-15 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-07 |
@@ -242,6 +243,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
 | ! | L-187 | info_dictionary numeric-overlap enumeration | OPEN | 1.8 | 2026-08-07 |
+|  | L-194 | Text-only assertions -- claims the scanner cannot see | DEFERRED | 1.4 | 2026-08-15 |
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
 | ! | L-129 | Cometary structure constants -- periodic maintenance sweep | OPEN | 1.0 | 2026-07-17 |
 | ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 0.9 | 2026-07-16 |
@@ -1531,6 +1533,26 @@ and findings summary #5.
   `worksheet_claude_constants_new_addendum.md` already carries this
   header and already parses. The re-cut is "make the others look like
   the addendum."
+- **Break 2 ruled, 2026-08-15: field 2's object stays a NUMBER.**
+  Fable asked whether a claim with no number (a rendered qualitative
+  sentence) could be verdicted by quoting it verbatim into the value
+  cell. Tony: if the checker cannot verify a claim, it should not be
+  asked to do so. The class is real and is recorded as L-194;
+  it is deferred to a future refactor and blocks nothing here.
+- **Break 5 ruled, 2026-08-15: field 3 verdicts the `# Source:` line
+  only.** `# Ref:` and `# Also:` are pre-printed on the dispatch row as
+  READ-ONLY context -- visible to the responder, never verdicted, never
+  read by the tool. One tri-state, and the 65-row count does not move.
+  Measured @253bcdd: 20 citation blocks in the repo carry more than one
+  leg, at least 9 of them in the dispatch corpus, all in
+  `constants_new.py`. Shapes: Source+Ref (4), Source+Ref+Also (3),
+  Source+Also (2). In the normal case the extra legs are a locator and
+  a corroboration for one authority, not separate claims --
+  `SUN_RADIUS_KM` cites IAU 2015 B3, then the paper documenting it,
+  then a NASA factsheet. The blocks where the authority is NOT in the
+  Source line are a malformation, not a schema case, and are handled
+  as L-195. A schema that bends to fit a bad annotation makes the bad
+  form permanent.
 - **Dispatch shape: one pre-printed row per (key, ordinal)** (Tony,
   2026-08-15), with field 1 filled in by the builder so the responder
   fills only verdicts and notes. Measured on the corpus: 53 rows become
@@ -2146,6 +2168,111 @@ pieces of it.
 **Ref:** L-192 (the checker and the dispatch errand); L-184 (the
 active-build-path push gate); protocol v3.39 "A Check That Cannot Fail
 Is Not Passing"; `patch_L192_verdict_aware_L2b.py`.
+
+#### [L-194] Text-only assertions -- claims the scanner cannot see
+<!-- L:194 status:DEFERRED upd:2026-08-15 section:A flag: rice:4/3/60/5 -->
+- **The class.** A qualitative sentence in display text carries no
+  number, so the scanner emits no claim for it at all. Claim detection
+  in display strings is `NUMERIC_CLAIM_RE` -- a number followed by a
+  recognized unit -- and a string literal becomes a scannable unit only
+  if it contains one. These sentences are not uncited. They are
+  invisible, which is the failure class this project treats as equal to
+  uncited.
+- **The instance that surfaced it, 2026-08-15.** "Unlike Earth, Mars
+  lacks a stratosphere," rendered from `shell_configs.py:1256` --
+  `SHELL_CONFIGS` Mars `upper_atmosphere`, key `hover_text`, the key
+  `orrery_rendering.py` actually reads. GPT found it unsupported. Raised
+  as Break 2 of Fable's worksheet schema review, which cited
+  `mars_visualization_shells.py:518`; that is the wrong file, and the
+  word stratosphere appears nowhere in that module. The claim is real,
+  the citation of it was not. [verified @253bcdd]
+- **Population, measured @253bcdd.** Counting display prose strings over
+  120 characters -- Claude's cut, not the scanner's -- as
+  total / carrying a number+unit / carrying none:
+  `shell_configs.py` 143 / 92 / 51; `saturn_visualization_shells.py`
+  32 / 10 / 22; `mars_visualization_shells.py` 19 / 6 / 13;
+  `jupiter_visualization_shells.py` 25 / 19 / 6;
+  `earth_visualization_shells.py` 28 / 27 / 1. The third column is a
+  FLOOR, not the total: a string that does contain a number can still
+  carry unsourced qualitative sentences beside it.
+- **The half that is worse than invisible.** Where a qualitative
+  sentence shares a string literal with a numeric one, the scanner
+  scores the string on the number, and a `# Source:` on that unit
+  covers the whole literal. Mercury's inner core reads "a very large
+  metallic core, unlike Earth's which is proportionally smaller" in the
+  same string as "Core radius approximately 2020 km." Source the radius
+  and the comparison inherits coverage nobody checked. This is
+  proximity standing in for attachment one level BELOW the comment-run
+  rule L-192 settled -- inside a single string literal rather than
+  across a comment run.
+- **Tony's governing ruling, 2026-08-15: if the checker cannot verify a
+  claim, it should not be asked to do so.** This settles Break 2 of the
+  schema review directly. Field 2 keeps a number as its object; it does
+  NOT generalize to "the number, OR the claim text quoted verbatim."
+  Asking a responder to verdict a claim the tool cannot check produces
+  a verdict the tool must then interpret, which is the interpretation
+  layer L-193 exists to shrink.
+- **And it does not block.** Text-only assertions wait for a future
+  refactor and gate nothing in the meantime -- not L-192's schema
+  re-cut, not the request builder, not the dispatch errand. Many of
+  these sentences came from Gemini and their sources are not readily
+  available, so this is a sourcing errand of unknown size rather than a
+  scanner patch, and its size is exactly why it must not sit in front
+  of work that is ready to move.
+- **Avenue Tony named, not yet designed:** a visible in-text marker for
+  an unsourced assertion, in the spirit of Wikipedia's "citation
+  needed." The attraction is that it makes the gap legible to a READER
+  rather than only to a tool. Same move as L-192's orphan report and
+  the protocol's Show the Envelope: state the absence, rather than let
+  silence read as coverage.
+**Note:** kept separate from L-190 deliberately. L-190 is about VALUES
+that render from shapes the scanner does not reach -- bare literals
+inside function bodies. This is about claims that have no value at all,
+which no extension of shape coverage will ever find. Same rule of
+Tony's underneath ("anything rendered should be reached by the
+scanner"), different mechanism, different fix.
+**Note:** RICE is Claude's proposal, unratified. Effort is scored high
+because the corpus is large and the sourcing may not exist to be found.
+**Gap:** a future refactor decides how an unverifiable rendered claim
+is marked and how its absence of provenance is reported. Deferred by
+ruling, not blocked by a dependency: nothing has to finish before this
+can start, and nothing waits on it.
+**Ref:** L-190 (scanner reach, the VALUE form of the same rule); L-191
+(display-text duplication -- the same sentence can exist in three
+copies with only one live); L-192 (the schema re-cut this waits on, and
+its Break 2); L-193 (verdict honesty);
+`documentation/FABLE_REVIEW_worksheet_schema.md`.
+
+#### [L-195] Citation legs -- put the authority in the Source line
+<!-- L:195 status:OPEN upd:2026-08-15 section:A flag: rice:2/3/85/1 -->
+- **The defect.** `# Source:`, `# Ref:` and `# Also:` do not carry
+  consistent roles. In the normal case Source is the authority and the
+  others are a locator and a corroboration -- `SUN_RADIUS_KM` cites IAU
+  2015 Resolution B3, then Prsa et al. 2016 documenting it, then a NASA
+  factsheet. In `ROCHE_LIMIT_RADII` the Source line holds a FORMULA and
+  the authority (Murray & Dermott 1999, Sec. 4.6) sits in `# Ref:`.
+  Same three labels, inverted roles.
+- **Why it matters now.** L-192's Break 5 ruling makes field 3 verdict
+  the Source line only. That rule is correct for the normal case and
+  silently wrong wherever the authority is elsewhere: the row would
+  read CITATION RIGHT while the actual authority went unchecked. The
+  ruling is what makes this a defect rather than a style quibble.
+- **Scope, measured @253bcdd.** 20 multi-leg citation blocks in the
+  repo, 17 of them in `constants_new.py`. At least 9 sit in the
+  dispatch corpus. Not every one is malformed -- most are the normal
+  shape -- so the errand is to read 20 blocks and move the authority
+  into Source where it is not already there. My scan breaks a block on
+  an unlabeled continuation comment, so 20 is a floor.
+- **Not a vocabulary change.** The labels stay. What is being fixed is
+  which line the authority sits on, so that one rule reads the same
+  thing in every block.
+**Note:** RICE is Claude's proposal, unratified. Effort is low -- this
+is a bounded read of 20 blocks in mostly one file.
+**Gap:** enumerate the 20 blocks, identify the ones whose authority is
+not in Source, move it, and re-run the checker. Do this before the
+first dispatch that relies on the Break 5 rule.
+**Ref:** L-192 (Break 5, the rule this makes true); L-186 (annotation
+grammar); `documentation/FABLE_REVIEW_worksheet_schema.md` item 5.
 
 ## PENDING ACTION (Tony-side)
 
