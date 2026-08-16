@@ -1561,6 +1561,11 @@ and findings summary #5.
   UNMATCHED findings that fuzzy binding produced, and a later ordinal
   shift stops matching its pre-printed value loudly instead of binding
   to the wrong claim silently.
+- **Builder and key rule built 2026-08-15**, see the as-built below.
+  `match_row()` is NOT deleted: rule 0 sits ahead of the four fuzzy
+  rules rather than replacing them, because 104 annotations still bind
+  through them. That is the transition the sequencing decide below is
+  about, and this build is the first half of it.
 - **Sequencing, not yet ruled.** The checker simplification the schema
   permits -- deleting `match_row()`, a strict fail-loud verdict grammar
   -- is gated on the re-cut, not the reverse: fuzzy matching cannot be
@@ -1573,6 +1578,62 @@ and findings summary #5.
   delete); L-156 Phase 2 (the cross-check batches that produced the
   worksheets); `documentation/HANDOFF_20260815_checker_honesty.md` and
   `documentation/FABLE_REVIEW_worksheet_schema.md`.
+
+##### As built, 2026-08-15: the request builder and the key rule
+
+Built on `87176e9` at https://github.com/tonylquintanilla/palomas_orrery.
+One build, two consumers, because `worksheet_keys.py` had none: the
+checker did not import it and `resolve()` was never called on the
+checking path. Shipping the builder alone would have put keys into
+outgoing worksheets that the returning checker could not read --
+worksheets that look right and check the old way.
+
+- **`worksheet_request_builder.py` (new, ~310 lines).** Reads the
+  annotated corpus through the checker's own `collect_claims()`, mints
+  a key per site through `worksheet_keys`, and emits one pre-printed
+  row per (key, ordinal) with the code value filled in. Measured on the
+  corpus: **65 rows over 65 distinct keys, zero collisions** -- the
+  53 -> 65 figure reproduced from the corpus rather than carried from
+  the ruling. It judges nothing: no verdict token, no route. The
+  checker judges; the builder asks.
+- **Rule 0 in `match_row()`.** An exact key match wins outright. A key
+  the WORKSHEET carries that no longer resolves announces KEY_STALE and
+  does NOT fall through to the fuzzy rules, because falling through
+  hides a rename behind a lucky prose hit. `ROLE_KEY` registered with
+  the `key` and `row key` headers.
+- **The circularity caught in test.** The first implementation resolved
+  the CLAIM's key to decide staleness. That key is minted from today's
+  source moments earlier, so it always resolves -- a check that cannot
+  fail. Corrected to resolve the keys the worksheet carries, which is
+  what a rename looks like from this side.
+- **Two design calls, both stated because neither was ruled.** The
+  citation legs print ABOVE the response table rather than as columns:
+  nine columns is already at the limit of what these worksheets are
+  filled in with, and a leg sitting in a cell invites a verdict token
+  typed beside it, which is the compound answer the checker may not
+  interpret. And the response table keeps the addendum's header text
+  verbatim, so the checker's existing role registry reads it with zero
+  unrecognised columns.
+- **Round trip proven at the format layer,** not assumed: the emitted
+  file was parsed back through `parse_tables()` -- one row table, 65
+  rows, zero unregistered headers, all eight roles resolved, and rule 0
+  binding a row by key.
+- **Tests 61 -> 69.** All six new checks are synthetic ON PURPOSE: no
+  worksheet in the corpus carries a Key column, so the live run cannot
+  reach rule 0 and a green run proves nothing about it. One check is
+  load-bearing -- a stale-key row whose PROSE would match -- and it was
+  mutation-tested by breaking the rule deliberately to confirm it goes
+  red.
+- **A scanner finding from the pre-test, worth recording.** The new
+  module first classified as role `undetermined`, which scored its
+  display-width constant as an uncited physical claim and moved Tier-1
+  206 -> 207. A `Role: devtool` line in the docstring returned it to
+  206. A new dev tool without a role line is scored as though it made
+  claims about the world.
+- **What this does NOT do.** No dispatch. The first dispatch that
+  relies on the Break 5 rule should follow L-195, since a block whose
+  authority is not in its `# Source:` line would be verdicted CITATION
+  RIGHT while the real authority went unchecked.
 
 ##### As built, 2026-08-12: the attachment rule (scanner half)
 

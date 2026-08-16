@@ -225,6 +225,85 @@ def test_registry():
 
 
 # ============================================================
+# RULE 0 -- THE KEY, AND ITS REFUSAL TO FALL THROUGH
+# ============================================================
+#
+# The key rule is INERT against today's corpus: no worksheet carries a
+# Key column yet, so match_row never reaches rule 0 and the live run
+# proves nothing about it. These are synthetic on purpose. Each is
+# shown to produce its outcome AND, where it matters, shown not to
+# produce the outcome it would have had without the rule.
+
+KEY_TABLE = """
+| # | Key | Claim | Code value | Your value | Source | Value correct? | Citation correct? | Notes |
+|---|---|---|---|---|---|---|---|---|
+| R1 | `worksheet_keys.py::compose` | the compose helper | 1.0 | 1.0 | somewhere | YES | YES | fine |
+| R2 | `worksheet_keys.py::parse` | the parse helper | 2.0 | 2.0 | somewhere | YES | YES | fine |
+"""
+
+DUPLICATE_KEY_TABLE = """
+| # | Key | Claim | Code value | Notes |
+|---|---|---|---|---|
+| R1 | `worksheet_keys.py::compose` | first | 1.0 | a |
+| R2 | `worksheet_keys.py::compose` | second | 1.0 | b |
+"""
+
+# A prose-matchable row whose key names a function that does not
+# exist. Without rule 0 the PROSE rule would match it happily; that is
+# precisely the lucky hit a rename must not hide behind.
+STALE_KEY_TABLE = """
+| # | Key | Claim | Code value | Notes |
+|---|---|---|---|---|
+| R1 | `worksheet_keys.py::function_renamed_away` | the compose helper writes a key from its parts | 1.0 | a |
+"""
+
+
+def test_key_rule():
+    table = table_from(KEY_TABLE)
+    check('a Key header is recognised as a role',
+          table.column(wc.ROLE_KEY) is not None, table.unregistered)
+
+    row, rule, _note = wc.match_row(table, '', '', 1.0,
+                                    'worksheet_keys.py::compose')
+    check('an exact key match wins as rule KEY', rule == 'KEY', rule)
+    check('and it picks the row that carries the key',
+          row is not None and 'compose' in ' '.join(row[1]), row)
+
+    _row, rule, note = wc.match_row(table, '', '', 1.0,
+                                    'worksheet_keys.py::resolve')
+    check('a resolvable key no row carries is KEY_ABSENT',
+          rule == 'KEY_ABSENT', '%s %s' % (rule, note))
+
+    table = table_from(DUPLICATE_KEY_TABLE)
+    _row, rule, note = wc.match_row(table, '', '', 1.0,
+                                    'worksheet_keys.py::compose')
+    check('two rows under one key announce rather than pick',
+          rule == 'AMBIGUOUS', '%s %s' % (rule, note))
+
+    # The load-bearing one. The worksheet records a key minted before a
+    # rename, so it no longer resolves; the claim now mints a different
+    # key that no row carries. The prose in that row WOULD satisfy the
+    # PROSE rule, so a fall-through would report a clean match and the
+    # rename would never surface.
+    table = table_from(STALE_KEY_TABLE)
+    _row, rule, note = wc.match_row(
+        table, '', 'the compose helper writes a key from its parts', 1.0,
+        'worksheet_keys.py::compose')
+    check('a key the worksheet carries that no longer resolves is '
+          'KEY_STALE', rule == 'KEY_STALE', '%s %s' % (rule, note))
+    check('and it does NOT fall through to a prose match',
+          rule != 'PROSE', rule)
+
+    # Same table, no key supplied: the prose match must still succeed,
+    # or the previous check proves nothing -- it would be passing
+    # because nothing matches rather than because rule 0 stopped it.
+    _row, rule, _note = wc.match_row(
+        table, '', 'the compose helper writes a key from its parts', 1.0)
+    check('the same row DOES match on prose when no key is given',
+          rule == 'PROSE', rule)
+
+
+# ============================================================
 # THE LAYERS, EACH SHOWN TO FAIL
 # ============================================================
 
@@ -510,6 +589,7 @@ def main():
     test_comparison()
     test_verdicts()
     test_registry()
+    test_key_rule()
     test_layers()
     test_display_instructions()
     test_live_corpus(project_dir)

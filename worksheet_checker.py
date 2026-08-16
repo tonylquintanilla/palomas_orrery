@@ -98,6 +98,7 @@ import re
 import sys
 
 import provenance_scanner as ps
+import worksheet_keys as wk
 
 WORKSHEET_DIR = os.path.join('documentation', 'worksheets')
 REPORT_PATH = 'WORKSHEET_CHECK.md'
@@ -118,6 +119,9 @@ STATE_PATH = os.path.join('data', 'worksheet_check_state.json')
 # this whole layer exists to prevent.
 
 ROLE_NUM = 'num'
+# The row key minted by worksheet_request_builder.py. Not an
+# evidence role: a key names the row, it records nothing about it.
+ROLE_KEY = 'key'
 ROLE_ID = 'id'
 ROLE_CODE = 'code_value'
 ROLE_EVIDENCE = 'evidence_value'
@@ -135,6 +139,9 @@ ROLE_RESOLUTION = 'resolution'
 
 HEADER_ROLES = {
     '#': ROLE_NUM,
+
+    'key': ROLE_KEY,
+    'row key': ROLE_KEY,
 
     'claim': ROLE_ID,
     'claim in code': ROLE_ID,
@@ -520,11 +527,47 @@ def name_hit(cell, name):
     return name.lower() in strip_cell(cell).lower()
 
 
-def match_row(table, unit_name, unit_text, code_value):
+def match_row(table, unit_name, unit_text, code_value, key=''):
     """(row, rule, note) for the row about this value, or (None, ...).
 
     Returns rule 'AMBIGUOUS' when a rule matched more than one row.
+
+    Rule 0 is the KEY, and it does not fall through. A worksheet that
+    states a key has named the site exactly; if that key does not
+    resolve against today's source, the honest outcome is KEY_STALE --
+    a rename someone has to confirm. Letting it drop into the fuzzy
+    rules would hide the rename behind a lucky prose hit, which is
+    the shape of failure the key was introduced to end.
     """
+    key_index = table.column(ROLE_KEY)
+    if key and key_index is not None:
+        hits = [row for row in table.rows
+                if key_index < len(row[1])
+                and strip_cell(row[1][key_index]).strip('`') == key]
+        if len(hits) == 1:
+            return hits[0], 'KEY', ''
+        if len(hits) > 1:
+            return None, 'AMBIGUOUS', '%d rows under KEY' % len(hits)
+        # No row carries this claim's key. Resolving the CLAIM's key
+        # here would be circular -- it was minted from today's source
+        # a moment ago, so it always resolves. The question is whether
+        # a key the WORKSHEET carries has stopped resolving, because
+        # that is what a rename looks like from this side.
+        for row in table.rows:
+            if key_index >= len(row[1]):
+                continue
+            recorded = strip_cell(row[1][key_index]).strip('`')
+            if not recorded:
+                continue
+            try:
+                wk.parse(recorded)
+            except wk.KeyError_:
+                continue
+            line, reason = wk.resolve(recorded, key_sources())
+            if line is None:
+                return None, 'KEY_STALE', reason
+        return None, 'KEY_ABSENT', 'no row carries %s' % key
+
     id_index = table.column(ROLE_ID)
     if id_index is None:
         return None, 'NO_ID_COLUMN', ''
@@ -826,6 +869,44 @@ def physical_claims(unit):
     return kept, dropped
 
 
+_SOURCE_CACHE = {}
+_KEY_SOURCES = {}
+
+
+def key_sources(project_dir='.'):
+    """module file name -> source text, for key resolution.
+
+    Built once and reused. A module missing from this map makes its
+    keys resolve to KEY_STALE with the module named, which is what a
+    reader needs; an empty map would make EVERY key stale and say the
+    same thing about all of them, so the map is built eagerly rather
+    than filled on demand.
+    """
+    if not _KEY_SOURCES:
+        for fname in sorted(os.listdir(project_dir)):
+            if not fname.endswith('.py'):
+                continue
+            _KEY_SOURCES[fname] = module_source(
+                os.path.join(project_dir, fname))
+    return _KEY_SOURCES
+
+
+def module_source(path):
+    """Source text of a module, read once per run.
+
+    A read failure returns '' and is NOT swallowed: worksheet_keys
+    reports an unresolvable key as KEY_STALE, which is the honest
+    outcome for a module this process could not open.
+    """
+    if path not in _SOURCE_CACHE:
+        try:
+            with open(path, encoding='utf-8', errors='replace') as handle:
+                _SOURCE_CACHE[path] = handle.read()
+        except OSError:
+            _SOURCE_CACHE[path] = ''
+    return _SOURCE_CACHE[path]
+
+
 class Claim(object):
     """One annotation, with the value it is attached to."""
 
@@ -856,6 +937,16 @@ class Claim(object):
         if self.unit.kind == 'constant':
             return self.unit.value
         return None
+
+    def key(self, ordinal=None):
+        """The row key for this claim, minted the builder's way.
+
+        Minted by worksheet_keys, never composed here. Two spellings
+        of the enclosing name would let a key be born stale -- correct
+        when written, unresolvable forever, with nothing to say so.
+        """
+        return wk.key_for_site(self.path, module_source(self.path),
+                               self.unit.line_start, self.label, ordinal)
 
     @property
     def claim_values(self):
@@ -994,15 +1085,21 @@ def check_claim(claim, worksheets, unregistered):
 
     best = None
     ambiguous = ''
+    stale = ''
     for table in tables:
-        row, rule, note = match_row(table, claim.label, '', claim.code_value)
+        row, rule, note = match_row(table, claim.label, '',
+                                    claim.code_value, claim.key())
         if row is not None:
             best = (table, row, rule)
             break
         if rule == 'AMBIGUOUS':
             ambiguous = note
+        if rule == 'KEY_STALE':
+            stale = note
     if best is None:
-        if ambiguous:
+        if stale:
+            claim.fail('L1', 'KEY_STALE', stale, 'SEND BACK')
+        elif ambiguous:
             claim.fail('L1', 'AMBIGUOUS_ROW', ambiguous, 'SEND BACK')
         else:
             claim.fail('L1', 'UNMATCHED',

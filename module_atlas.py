@@ -242,6 +242,7 @@ ROLE_MAP = {
     'test_worksheet_checker':                 'devtool',
     'verify_orbit_cache':                     'devtool',
     'worksheet_checker':                      'devtool',
+    'worksheet_request_builder':              'devtool',
 }
 # ROLE-MAP:END
 

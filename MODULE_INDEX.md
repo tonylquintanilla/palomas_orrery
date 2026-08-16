@@ -10,9 +10,9 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 128  
-**Total Lines of Code (non-blank):** 99,691  
-**Total Public Functions/Classes:** 1,093
+**Total Python Files:** 129  
+**Total Lines of Code (non-blank):** 100,100  
+**Total Public Functions/Classes:** 1,104
 
 ## Classification Coverage
 
@@ -219,9 +219,10 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (206 lines) |
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (469 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (113 lines) |
-| `test_worksheet_checker.py` | - L-192. Can each layer actually fail? (433 lines) |
+| `test_worksheet_checker.py` | - L-192. Can each layer actually fail? (501 lines) |
 | `verify_orbit_cache.py` | Safely verify and repair orbit_paths.json (172 lines) |
-| `worksheet_checker.py` | - L-192. Does the worksheet say what the annotation claims it says? (1,337 lines) |
+| `worksheet_checker.py` | - L-192. Does the worksheet say what the annotation claims it says? (1,421 lines) |
+| `worksheet_request_builder.py` | Worksheet request builder -- ask the question the checker can read. (257 lines) |
 
 ---
 
