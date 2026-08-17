@@ -11,14 +11,14 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 129  
-**Total Lines of Code (non-blank):** 100,972  
+**Total Lines of Code (non-blank):** 100,538  
 **Total Public Functions/Classes:** 1,118
 
 ## Classification Coverage
 
 **Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L196_13_continuations_stage2.py`
+- `patch_L196_14_claim_vocabulary.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
@@ -26,7 +26,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 **Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L196_13_continuations_stage2.py`
+- `patch_L196_14_claim_vocabulary.py`
 
 
 ---
@@ -209,7 +209,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
 | `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (955 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
-| `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (2,947 lines) |
+| `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (2,970 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (330 lines) |
 | `test_citation_inheritance.py` | Regression tests for citation-block inheritance. (512 lines) |
 | `test_constants_provenance.py` | Regression tests for verified numeric constants. (284 lines) |
@@ -229,7 +229,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L196_13_continuations_stage2.py` | - L-195 / L-192. Mark the remaining citation-leg continuation comments so nothing pre-existing can trip the loud failure. (726 lines) |
+| `patch_L196_14_claim_vocabulary.py` | - teach the scanner the units it was missing, then re-pin everything the change re-points. (269 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |

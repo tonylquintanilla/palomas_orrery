@@ -8,38 +8,38 @@
 # Header lines are asserted literally. Row format:
 #   key <TAB> kept-claim raws, pipe separated <TAB> dropped count
 #
-EXTRACTOR_VERSION	1
+EXTRACTOR_VERSION	2
 INSTRUCTION_LOOKBACK	30
 INSTRUCTION_LOOKAHEAD	25
-NUMERIC_CLAIM_RE	(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)\s*(degrees?\s*[CF]\b|deg\s*[CF]\b|\xb0\s*[CF]\b|degrees?\s+(?:Celsius|Fahrenheit)\b|R_sun|AU|km/s|km|m/s|degrees?|deg\b|arcsec|mas|pc|kpc|Mpc|solar radii|Earth (?:masses|radii)|M_sun|M_earth|R_earth|ly|light[- ]years?|parsec|days?|years?|hours?|minutes?\b|min\b|sec\b|K\b|kelvin|kg\b|g/cm3|g/cc|km/h|mph|people|persons?|percent|%)\b
+NUMERIC_CLAIM_RE	(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)(?:\s*(?:thousand|million|billion|trillion))?\s*(degrees?\s*[CF]|deg\s*[CF]|\xb0\s*[CF]|degrees?\s+(?:Celsius|Fahrenheit)|R_sun|AU|km/s|kilometers?|kilometres?|km|m/s|degrees?|deg|arcsec|mas|pc|kpc|Mpc|solar radii|Earth (?:masses|radii)|M_sun|M_earth|R_earth|[A-Za-z]+ radii|radii|ly|light[- ]years?|parsec|days?|years?|hours?|minutes?|min|sec|K|kelvin|kg|g/cm3|g/cc|km/h|mph|people|persons?|percent|%)(?![A-Za-z0-9_])
 DISPLAY_INSTRUCTION_RE	(?i)manual scale|manual scaled|mb per frame|to visualize|to view closely|frame for html
 #
-eris_visualization_shells.py::eris_crust_info		1
-eris_visualization_shells.py::eris_hill_sphere_info	67.8|0.095|38|37,000	1
-mars_visualization_shells.py::create_mars_magnetosphere_shell::bow_shock_text	15	0
-mars_visualization_shells.py::mars_hill_sphere_info		1
-mars_visualization_shells.py::mars_magnetosphere_info		1
+eris_visualization_shells.py::eris_crust_info	96	1
+eris_visualization_shells.py::eris_hill_sphere_info	67.8|14.3|0.095|38|8.0|37,000	1
+mars_visualization_shells.py::create_mars_magnetosphere_shell::bow_shock_text	1.6|15	0
+mars_visualization_shells.py::mars_hill_sphere_info	319.2|1.08	1
+mars_visualization_shells.py::mars_magnetosphere_info	2|1.6	1
 mars_visualization_shells.py::mars_upper_atmosphere_info	200	0
 mercury_visualization_shells.py::mercury_crust_info	26	0
 mercury_visualization_shells.py::mercury_hill_sphere_info		1
 mercury_visualization_shells.py::mercury_magnetosphere_info		1
 mercury_visualization_shells.py::mercury_outer_core_info	2020	0
-mercury_visualization_shells.py::mercury_sodium_tail_info		2
-moon_visualization_shells.py::moon_hill_sphere_info		1
+mercury_visualization_shells.py::mercury_sodium_tail_info	1,400|3.4	2
+moon_visualization_shells.py::moon_hill_sphere_info	60,000|34.53	1
 moon_visualization_shells.py::moon_mantle_info	1,200	0
-pluto_visualization_shells.py::create_pluto_atmosphere_shell::description	200|1188|1700|1700|200	0
-pluto_visualization_shells.py::create_pluto_core_shell::description	1700|39|3|2.1	0
-pluto_visualization_shells.py::create_pluto_haze_layer_shell::description	200|200|200	0
-pluto_visualization_shells.py::create_pluto_hill_sphere_shell::description	0.04	1
-pluto_visualization_shells.py::create_pluto_mantle_shell::description	180	0
-pluto_visualization_shells.py::pluto_core_info	1700	0
+pluto_visualization_shells.py::create_pluto_atmosphere_shell::description	200|1188|1700|1700|1.43|2.43|200|0.17|1.43|2.43	0
+pluto_visualization_shells.py::create_pluto_core_shell::description	1700|70|39|3|2.1	0
+pluto_visualization_shells.py::create_pluto_haze_layer_shell::description	200|200|200|0.17	0
+pluto_visualization_shells.py::create_pluto_hill_sphere_shell::description	5.99|0.04	1
+pluto_visualization_shells.py::create_pluto_mantle_shell::description	180|180	0
+pluto_visualization_shells.py::pluto_core_info	1700|70	0
 pluto_visualization_shells.py::pluto_crust_info		1
 pluto_visualization_shells.py::pluto_haze_layer_info	200	0
-pluto_visualization_shells.py::pluto_hill_sphere_info	0.04	1
+pluto_visualization_shells.py::pluto_hill_sphere_info	5.99|0.04	1
 pluto_visualization_shells.py::pluto_mantle_info	180	0
 venus_visualization_shells.py::create_venus_core_shell::description	3,200|243	0
-venus_visualization_shells.py::create_venus_upper_atmosphere_shell::description	70|60|100|100|100|200|120|120|500	0
-venus_visualization_shells.py::venus_atmosphere_info	464	0
+venus_visualization_shells.py::create_venus_upper_atmosphere_shell::description	70|60|100|100|1.6|100|200|3.3|120|120|500|8.3|1.6|3.3|8	0
+venus_visualization_shells.py::venus_atmosphere_info	96.5|3.5|464	0
 venus_visualization_shells.py::venus_core_info	3,200|243	0
-venus_visualization_shells.py::venus_hill_sphere_info		1
+venus_visualization_shells.py::venus_hill_sphere_info	1	1
 venus_visualization_shells.py::venus_magnetosphere_info		1

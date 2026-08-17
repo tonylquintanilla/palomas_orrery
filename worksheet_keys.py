@@ -115,7 +115,7 @@ ORDINAL_PREFIX = 'c'
 # scanner's claim regex or the checker's instruction filter. Recorded
 # with every key; see ON THE EXTRACTOR VERSION above for why it is
 # recorded and not enforced.
-EXTRACTOR_VERSION = 1
+EXTRACTOR_VERSION = 2
 
 Key = namedtuple('Key', 'module enclosing label ordinal')
 

@@ -889,19 +889,42 @@ def has_stale_marker(text):
 # ============================================================
 # Captures numbers with optional comma separators and decimal parts.
 # Comma handling: "31,000 km" is one token, not "31" + "000 km".
+#
+# WIDENED 2026-08-17 (L-195). Four gaps, each found by a site the
+# builder silently produced no row for:
+#   - per-body radii. "1.6 Mars radii" was not a claim because only
+#     "solar radii" and "Earth radii" were listed by name.
+#   - the spelled-out kilometer. Only the abbreviation was listed.
+#   - a magnitude word between number and unit. "1.08 million km"
+#     failed where "1.08 km" passed.
+#   - the trailing \b applied to '%' as well, and a word boundary
+#     after a percent sign requires a word character next to it, so
+#     "96% of the sunlight" matched nothing while "96%x" matched. It
+#     is now a negative lookahead, which is what the other
+#     alternatives already meant.
+#
+# Measured over the whole tree at the time of the change: 728 matches
+# gained, 16 lost, and every one of the 16 was a false positive --
+# percent-encoded URLs and %s format placeholders. No real claim was
+# lost. EXTRACTOR_VERSION went to 2 with this, because the ordinal in
+# an issued key counts claims AFTER this filter runs.
 
 NUMERIC_CLAIM_RE = re.compile(
     r'(\d{1,3}(?:,\d{3})+(?:\.\d+)?|'     # 31,000 or 31,000.5
     r'\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)'    # 8.33 or 1.5e-3
+    r'(?:\s*(?:thousand|million|billion|trillion))?'   # 1.08 million km
     r'\s*'
-    r'(degrees?\s*[CF]\b|deg\s*[CF]\b|\xb0\s*[CF]\b|'
-    r'degrees?\s+(?:Celsius|Fahrenheit)\b|'
-    r'R_sun|AU|km/s|km|m/s|degrees?|deg\b|arcsec|mas|pc|kpc|Mpc|'
+    r'(degrees?\s*[CF]|deg\s*[CF]|\xb0\s*[CF]|'
+    r'degrees?\s+(?:Celsius|Fahrenheit)|'
+    r'R_sun|AU|km/s|kilometers?|kilometres?|km|m/s|'
+    r'degrees?|deg|arcsec|mas|pc|kpc|Mpc|'
     r'solar radii|Earth (?:masses|radii)|M_sun|M_earth|R_earth|'
+    r'[A-Za-z]+ radii|radii|'
     r'ly|light[- ]years?|parsec|'
-    r'days?|years?|hours?|minutes?\b|min\b|sec\b|'
-    r'K\b|kelvin|kg\b|g/cm3|g/cc|'
-    r'km/h|mph|people|persons?|percent|%)\b',
+    r'days?|years?|hours?|minutes?|min|sec|'
+    r'K|kelvin|kg|g/cm3|g/cc|'
+    r'km/h|mph|people|persons?|percent|%)'
+    r'(?![A-Za-z0-9_])',
     re.IGNORECASE
 )
 
