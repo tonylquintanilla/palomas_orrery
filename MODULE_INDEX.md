@@ -10,23 +10,18 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 129  
-**Total Lines of Code (non-blank):** 100,397  
-**Total Public Functions/Classes:** 1,118
+**Total Python Files:** 128  
+**Total Lines of Code (non-blank):** 100,246  
+**Total Public Functions/Classes:** 1,115
 
 ## Classification Coverage
 
-**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L196_11_orbit_cache_verdict.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 - `worksheet_keys.py`
-
-**Undetermined domain (1).** No valid `Domain:` tag.
-
-- `patch_L196_11_orbit_cache_verdict.py`
 
 
 ---
@@ -204,7 +199,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `export_orbit_cache.py` | Phase 1b desktop devtool: read the local orbit caches and write web-servable orbit/position files for the interactive gallery. (617 lines) |
 | `food_insecurity_generator.py` | IPC acute food-insecurity KMZ layer (Sudan, current period). (702 lines) |
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (710 lines) |
-| `maintenance_run.py` | - L-188. One command, the whole maintenance suite. (294 lines) |
+| `maintenance_run.py` | - L-188. One command, the whole maintenance suite. (301 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
 | `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (955 lines) |
@@ -216,7 +211,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_cross_checked.py` | Regression tests for cross-check annotations. (431 lines) |
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (224 lines) |
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (477 lines) |
-| `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (113 lines) |
+| `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (119 lines) |
 | `test_worksheet_checker.py` | - L-192. Can each layer actually fail? (501 lines) |
 | `test_worksheet_request_builder.py` | - L-195 / L-192. Does the marker join actually join, and can it fail? (190 lines) |
 | `verify_orbit_cache.py` | Safely verify and repair orbit_paths.json (172 lines) |
@@ -229,7 +224,6 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L196_11_orbit_cache_verdict.py` | - give test_orbit_cache.py a closing line that says whether it passed. (164 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |

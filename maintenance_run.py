@@ -117,7 +117,8 @@ CHECKERS = [
     ('Cross-check annotations', ['test_cross_checked.py'], None),
     ('Citation inheritance', ['test_citation_inheritance.py'], None),
     ('Scanner recognition 1d/1e', ['test_provenance_1d.py'], None),
-    ('Reset completeness', ['test_reset_completeness.py'], None),
+    ('Reset completeness', ['test_reset_completeness.py'],
+     'RESET COMPLETENESS:'),
     ('Orbit cache', ['test_orbit_cache.py'], None),
     ('Worksheet checker', ['worksheet_checker.py'], 'WORKSHEET CHECK:'),
     ('Worksheet checker tests', ['test_worksheet_checker.py'], None),
@@ -313,6 +314,12 @@ def main():
     for label, argv_tail, hint in CHECKERS:
         rc, output, seconds = run_tool(project_dir, argv_tail)
         verdict = line_containing(output, hint) if hint else ''
+        # The row already carries the label; a verdict that opens by
+        # repeating the hint spends the column on it twice. Stripped only
+        # when the hint is a genuine prefix, so a hint matched mid-line
+        # (the scanner's 'TIER-1 FINDINGS') is left exactly as printed.
+        if hint and verdict.startswith(hint):
+            verdict = verdict[len(hint):].strip()
         if rc is None:
             note = 'DID NOT RUN'
         elif rc == 0:

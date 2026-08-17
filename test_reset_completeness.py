@@ -120,11 +120,17 @@ for nm, expected in (('entry_year', now.year), ('entry_month', now.month),
                         f"expected ~{expected}")
 
 if failures:
-    print(f"\nFAIL -- {len(failures)} var(s) not reset to startup default:")
+    print(f"\nRESET COMPLETENESS: FAIL -- {len(failures)} var(s) not "
+          f"reset to startup default:")
     for f in failures:
         print("  -", f)
     sys.exit(1)
 
-print(f"\nPASS -- all {len(intvars)} IntVars + {len(strvars)} StringVars + "
-      f"{len(entries)} entries reset to startup defaults; date set to now.")
+# The prefix is what maintenance_run.py matches on. Without it the runner
+# falls back to the last line of stdout, which is the atexit cleanup
+# message from the PlotlyShutdownHandler that importing palomas_orrery
+# registers -- printed after this one, and not a verdict.
+print(f"\nRESET COMPLETENESS: PASS -- all {len(intvars)} IntVars + "
+      f"{len(strvars)} StringVars + {len(entries)} entries reset to "
+      f"startup defaults; date set to now.")
 sys.exit(0)
