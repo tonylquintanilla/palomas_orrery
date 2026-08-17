@@ -1,48 +1,100 @@
-Where we are 8/13/2026
+Where we are 8/16/2026
 
-Updated 2026-08-13 after the August 12-13 sessions. Built on
-00219d9 at
+Updated 2026-08-16 after the August 15-16 sessions. Built on
+227f5b2d6763baa384c090a911c2c5ced64f4a4d at
 https://github.com/tonylquintanilla/palomas_orrery (branch main);
-gallery at cd4874467254c89e88dc2a8fa0645e99bf5c986e at
+gallery at 3d10739b097e2b63395cf58742873cf378210e68 at
 https://github.com/tonylquintanilla/tonyquintanilla.github.io.
+Both confirmed by live check on the date above.
 
-Two facts were refreshed 2026-08-15 at 253bcdd: the
-provenance-discipline version and the maintenance_run.py checker
-count. Everything else here still describes 00219d9 -- notably
-L-192's status, which has moved.
-
-Companion to MASTER_PLAN_INTERACTIVE_GALLERY.md v18. The plan is the
+Companion to MASTER_PLAN_INTERACTIVE_GALLERY.md. The plan is the
 reference document; this is the readable snapshot.
 
-The plan is now current with this snapshot. Every August 8 ruling is
-written into Section 7 -- decision 12 ratified, 16 and 17 ruled, and 18
-added for the registry's three-zone shape. Where the two documents once
-disagreed they now agree, so either is safe to read.
+Section 5a of the plan was rewritten on August 16 as the critical
+path -- end goal, one-way pipeline, five segments, and a "you are
+here" table. CRITICAL_PATH_SUMMARY.md is its readable companion and
+answers "how far to the end." THIS document answers "what is being
+tracked right now." Read 5a for the shape of the work; read this for
+its state.
 
 
 THE SHORT VERSION
 
-Track 0 is no longer waiting on decisions. On August 8 Tony ruled the
-five questions that were blocking it -- the transport, the shape of a
-registry entry, what a measured field carries, where display text gets
-assembled, and what order the migration runs in. Nothing in Track 0 now
-needs a ruling before work can start.
+The worksheet checker is built and running. It is one of the twelve
+checkers in maintenance_run.py, so the reconciliation Tony wanted
+continual rather than one-shot is continual. The request builder that
+sends questions out is built too, and the key rule that binds a
+returned row to the right claim.
 
-The order changed in a way worth stating plainly. Artifact 2 was blocked
-behind Track 0 and Batch 2. It is now step 2: prove the registry
-structure on Jupiter first, where the served data is already complete
-and correct so the transport gets a real acceptance test, then
-cross-check Artifact 2's remaining values into the proven structure.
-Structure first, values second.
+What the checker reports is the number that now organizes Track 1:
+102 annotations scored, THREE clean. Forty route to SEND BACK,
+nineteen to CONVERSATION, forty are noted with no route. That is not
+a discouraging result. Before the checker existed the same 102 claims
+were unexamined and looked fine.
 
-Two smaller things landed on August 10. L-186's mechanical half is done
--- eight annotations repointed at a real worksheet file, three appended
-values stripped -- and one shadow constant is gone. The scheduled
-nightly build is retired; Tony now runs the builder by hand and commits
-it himself.
+The dispatch that clears them is repaired but not finished. Fable 5
+and GPT 5.6 Sol reviewed it blind on August 16; both said do not send
+it yet, and between them they found nine structural blockers where
+two were known. One is closed, three are ruled and unbuilt, three are
+open, two need no ruling.
 
-The next session opens with the build of L-189, the
-scanner run history.
+The chromosphere stylization is retired. The shell now draws at true
+physical scale, 1.002875 solar radii, and the fact that it reads as a
+hairline welded to the photosphere is the lesson rather than a defect.
+That decision closed one of the nine blockers by removing the question
+instead of answering it.
+
+The next session opens with the builder-side marker join. Ninety-six
+continuation markers were placed in seven files on August 16 and the
+builder does not yet know they exist, so the largest blocker -- 45 of
+65 dispatch rows showing a truncated citation -- is still live.
+
+
+WHAT CLAUDE CHECKS BEFORE ANYTHING ELSE
+
+Recorded here on Tony's instruction, 2026-08-16, so the two of us
+track the same list. These fire at session start, unprompted, and a
+session that skips them is building on an unverified base.
+
+  1. SHA round trip, both repos. A live remote read of HEAD for the
+     orrery and the gallery, compared against what the handoff says
+     was pushed. A matching HEAD confirms commit and push in one
+     unforgeable check. A mismatch is reconciled BEFORE any build.
+
+  2. Skill version check. Every skill Claude loads has its version
+     line compared against the manifest row in PROJECT_INSTRUCTIONS.md.
+     If they disagree, the session STOPS and asks Tony to push the
+     current SKILL.md to skills/ and reinstall it in Settings.
+
+     Two limits worth Tony knowing. The check is LOAD-triggered, so a
+     skill bumped later in the same session produces a mismatch with
+     nothing left to fire on. And a mid-session reinstall cannot be
+     verified from inside the session -- the loaded copy appears bound
+     at conversation start. So a mid-session bump is NOT cleared in
+     session. It is written into the handoff as an obligation the next
+     session discharges.
+
+     CURRENTLY OUTSTANDING: safe-file-editing and
+     orrery-coding-conventions both went 1.3 -> 1.4 on August 16. The
+     session that bumped them loaded 1.3. The next session must
+     confirm its loaded copies read 1.4 before any patch-script or
+     marker work.
+
+  3. Uploads enumerated. Some uploaded files arrive as readable text
+     and others sit only on disk. The split is invisible from Tony's
+     side. Claude lists the directory and reads the whole set before
+     claiming to have reviewed anything.
+
+  4. Ledger read. Open items, Tony comments and Gap notes, before
+     proposing work.
+
+  5. Handoff obligations discharged. Anything the previous session
+     wrote down as unverifiable at the time.
+
+What Tony can do with this list: push before a session starts so HEAD
+is current, and keep the three skill stores in sync (repo skills/,
+Settings, then skills_index.py) so the version gate has nothing to
+catch.
 
 
 THE FIVE RULINGS THAT CHANGE THE PLAN
@@ -322,9 +374,12 @@ one new file entered the scan, and orbit_data_manager.py changed shape.
 Three real events, invisible in the summary line. This is the argument
 for L-189 in one paragraph -- report the DELTA, not the total.
 
-The tier breakdown below was measured at 1ba20c3 on August 7 and has not
-been re-measured since: 879 findings across 117 files, Tier 1 206,
-Tier 2 583, Tier 3 88, Tier 4 2.
+The tier breakdown below was measured at 1ba20c3 on August 7: 879
+findings across 117 files, Tier 1 206, Tier 2 583, Tier 3 88, Tier 4 2.
+Tier 1 was re-measured at 227f5b2 on August 16 and is UNCHANGED at 206
+-- the chromosphere retirement and the continuation markers moved
+nothing, which is correct, since neither added or removed a claim about
+the world.
 
   Tier 1 by domain
 
@@ -372,16 +427,34 @@ LEDGER ITEMS BY TRACK
 
   Track 0     L-181  Complete the constant layer -- the Track 0 build
               L-179  Solar gravitational influence  DONE
-              L-180  Solar chromosphere  DONE
+              L-180  Solar chromosphere  ON RECORD, DORMANT -- the
+                     stylization it governed is retired, so it governs
+                     nothing. NOT categorically superseded; a future
+                     stylization anywhere would revive it.
               L-176  Illustrated dimensions in shell hover text
 
   Track 1     L-186  Cross-check annotation issues  DONE
-              L-192  Worksheet checker -- scanner half built,
-                     checker designed and reviewed, NOT built
+              L-192  Worksheet checker  BUILT and running as one of
+                     the twelve maintenance checkers. Request builder
+                     built. Key rule built. DISPATCH not finished --
+                     see the nine blockers.
+              L-193  Worksheet corpus reconciliation
+              L-194  Text-only assertions (no number in the claim)
+                     DEFERRED, blocking nothing
+              L-195  Citation legs -- authority not in the # Source:
+                     line. Six of 65 dispatch rows. Shape A ruled,
+                     swaps NOT built.
+              L-196  Chromosphere retirement, continuation markers,
+                     key retirement record  DONE
               L-177  Mercury Hill sphere convention
               L-184  Interactive build-path push gate
 
-  Track 2     L-154  JS feature-rendering layer -- does not exist yet
+  Track 2     L-154  JS feature-rendering layer -- does not exist yet.
+                     Now precisely diagnosed: resolver.py:133 reduces a
+                     feature dict to its keys, models.py:91 types the
+                     field to match, and no code in the gallery repo
+                     reads feature_configs.json at all. Two lines and a
+                     type, then the renderers.
 
   Tooling     L-188  Maintenance runner -- one command, the whole
                      suite  DONE
@@ -418,9 +491,10 @@ falsify the record.)
 Top-level assignments in constants_new.py are 49 with 6 derived, not 45
 with 7.
 
-Jupiter's registry entry count is unsettled. The August 7 revision of
-this summary said five; the August 10 session counted four ring entries.
-Confirm before the pilot starts, since the pilot is scoped by it.
+Jupiter's registry entry count is SETTLED at four, confirmed at 253bcdd
+on August 15. Jupiter 4, Saturn 7, Uranus 11, Neptune 11, total 33 --
+matching L-181's enumeration. The five came from counting
+inner_radius_km including the line that reads the key.
 
 Eighteen inline literals still duplicate cited constants -- KM_PER_AU at
 14 sites in 8 files, MOON_RADIUS_KM at 3 in 2, SUN_RADIUS_KM at 2 in 1.
@@ -437,7 +511,12 @@ done. Artifact 1 (Earth) built and Mode-5 accepted, golden fingerprint
 locked. L-179 and L-180 closed August 7. L-186's mechanical half and one
 shadow constant closed August 10.
 
-Protocol at v3.39. The v3.36 Register Rule amendment is applied, and
+Protocol at v3.40 (August 16) -- no change to its own rules; the entry
+records two skill bumps and the two bad deliveries that preceded the
+good ones. safe-file-editing 1.4 adds Fix In Passing, Report It and the
+patch-script naming convention. orrery-coding-conventions 1.4 adds
+Marker Separation for Near-Equal Radii and Harvest the Conventions You
+Find. The v3.36 Register Rule amendment is applied, and
 so is "The Artifact Bounds the Audit" (v3.37). v3.38 records the two
 limits on Stale Skill = Stop. v3.39 adds "A Check That Cannot Fail Is
 Not Passing" as a CRITICAL gate. provenance-discipline is at v2.3.
@@ -509,5 +588,36 @@ The worksheet checker itself is designed and reviewed and NOT built.
 That is the next build, and one question goes first: whether a
 half-confirmed verdict can count as a completed check.
 
+  [Both since done. The checker was built and now runs continually;
+  the half-confirmed question was ruled. Left as written because it
+  is the record of what was true then.]
 
-Entry written August 2026 with Anthropic's Claude Opus 5.
+
+WHAT IS TRACKED RIGHT NOW -- 2026-08-16
+
+  Ready to build, no ruling outstanding
+    Builder marker join + loud failure  <- do this first; 96 markers
+      are placed and currently do nothing
+    Stage 2 continuation markers -- 117 runs, 23 files, fingerprints
+      to be regenerated against 227f5b2
+    Six Shape A citation swaps (L-195)
+    Ordinal context window -- 26 rows share 8 excerpts today
+    Print the seven verdict tokens in the request
+    Resolver + models fix (L-154) -- independent of all provenance work
+
+  Waiting on a ruling
+    Lazy responder: canaries, or remove the self-certifying field
+    Claim typing: real row types, or wait for a measured population
+    Cross-worksheet disagreement, what UNKNOWN does, pluto 614/638,
+      transition sequencing, whether batching becomes real
+
+  Carried as an obligation
+    Confirm safe-file-editing and orrery-coding-conventions load at
+      1.4 before patch-script or marker work
+
+  Not yet written
+    Ledger entries for L-194, L-195, L-196 and the L-192 as-built
+
+
+Entry written August 2026 with Anthropic's Claude Opus 5. Updated
+August 16, 2026, built on 227f5b2d6763baa384c090a911c2c5ced64f4a4d.
