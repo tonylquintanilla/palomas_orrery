@@ -19,42 +19,16 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260817T043645Z | `f08ed48` | 128 | 1023 | 289 | 620 | 112 | 2 |
 | 20260817T041304Z | `2d5459f` | 128 | 1023 | 289 | 620 | 112 | 2 |
 | 20260817T033347Z | `01a1b8a` | 128 | 892 | 206 | 576 | 108 | 2 |
 | 20260817T031933Z | `01a1b8a` | 128 | 892 | 206 | 576 | 108 | 2 |
 | 20260817T030920Z | `4a11001` | 129 | 892 | 206 | 576 | 108 | 2 |
 | 20260817T030427Z | `5840145` | 128 | 892 | 206 | 576 | 108 | 2 |
-| 20260817T024745Z | `5840145` | 129 | 890 | 206 | 576 | 106 | 2 |
 
-Change since the previous run: total +131, Tier-1 +83.
+Change since the previous run: total +0, Tier-1 +0.
 
-Tier-1 rose in these files:
-
-| File | Before | After |
-|------|-------:|------:|
-| comet_visualization_shells.py | 3 | 4 |
-| eris_visualization_shells.py | 0 | 2 |
-| food_insecurity_generator.py | 0 | 5 |
-| idealized_orbits.py | 26 | 29 |
-| mars_visualization_shells.py | 0 | 4 |
-| mercury_visualization_shells.py | 0 | 1 |
-| messier_catalog.py | 0 | 1 |
-| moon_visualization_shells.py | 0 | 3 |
-| object_type_analyzer.py | 2 | 3 |
-| paleoclimate_dual_scale.py | 9 | 10 |
-| paleoclimate_human_origins_full.py | 26 | 40 |
-| paleoclimate_visualization.py | 4 | 6 |
-| paleoclimate_visualization_full.py | 22 | 28 |
-| paleoclimate_wet_bulb_full.py | 31 | 44 |
-| plot_data_report_widget.py | 1 | 2 |
-| scenarios_heatwaves.py | 1 | 3 |
-| scenarios_western_heatwave_march_2026.py | 8 | 10 |
-| sgr_a_star_data.py | 1 | 4 |
-| sgr_a_visualization_animation.py | 0 | 1 |
-| shell_configs.py | 23 | 35 |
-| star_notes.py | 0 | 1 |
-| venus_visualization_shells.py | 0 | 3 |
-| visualization_core.py | 0 | 1 |
+No file's Tier-1 count rose.
 
 ---
 
@@ -179,8 +153,8 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `osculating_cache_manager.py` | orrery | 0 | 0 | 1 | 0 | 1 |
 | `test_reset_completeness.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `worksheet_keys.py` | orrery | 0 | 0 | 1 | 0 | 1 |
-| `export_orbit_cache.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `worksheet_request_builder.py` | orrery | 0 | 0 | 1 | 0 | 1 |
+| `export_orbit_cache.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 
 ---
 
@@ -1915,7 +1889,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 91 | constant | CLAIM_EXCERPT | 90 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 118 | constant | CLAIM_EXCERPT | 90 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ---
 

@@ -81,6 +81,33 @@ LEG_RE = re.compile(
     r'^\s*#\s*(%s)(\+)?:\s*(.*)$'
     % '|'.join((VERDICTED_LEG,) + CONTEXT_LEGS))
 
+# Recognising an UNMARKED continuation, so the builder can refuse one.
+# This is the rule the two marking patches used, and it was validated by
+# reproducing stage 1's answer set exactly: 48 runs, 96 lines, the same
+# line numbers.
+#
+# Padding is the discriminator, and it is checked FIRST. A line aligned
+# under the leg above it is continuation text no matter what punctuation
+# it contains, so '#         Highly ellipsoidal: 1050x840x537 km' is a
+# continuation and not a label called 'Highly ellipsoidal'. The label
+# test runs second and is deliberately loose about leading whitespace,
+# so that the padding test is the thing deciding the case rather than an
+# accident of how many spaces the label pattern happens to allow. Delete
+# the padding test and that line reads as a label -- which is the bug
+# the first version of this detector had.
+COMMENT_RE = re.compile(r'^\s*#')
+PADDED_RE = re.compile(r'^\s*#\s{2,}\S')
+OTHER_LABEL_RE = re.compile(r'^\s*#\s*([A-Za-z][A-Za-z0-9_ /.-]{0,30})\+?:')
+
+
+def continues_a_leg(line):
+    """True when this comment line is unlabelled continuation text."""
+    if not COMMENT_RE.match(line) or line.strip() == '#':
+        return False
+    if PADDED_RE.match(line):
+        return True
+    return not OTHER_LABEL_RE.match(line)
+
 # Columns of the response table, in order. The header text is what the
 # checker's HEADER_ROLES maps; changing a string here without changing
 # it there produces a column the checker cannot read, which it reports
@@ -124,21 +151,29 @@ def legs_of(attached_text):
     so a run that joins nothing says so rather than looking identical to
     a run with nothing to join.
 
-    An UNMARKED continuation is still dropped, silently, exactly as
-    before. Making that loud is stage 2 work; see L-195.
+    `unmarked` holds continuation text carrying no marker at all. That
+    text is invisible everywhere -- not joined, and not printed into the
+    worksheet the way a mismatched marker is -- so the builder refuses
+    to write a request while any exists, rather than reporting it. Each
+    entry is the offending line, stripped.
     """
     verdicted = []
     context = []
     problems = []
+    unmarked = []
     joined = 0
     open_label = None
     open_leg = None
     for line in (attached_text or '').splitlines():
         match = LEG_RE.match(line)
         if not match:
-            # Any non-leg line closes the run a continuation could
-            # attach to. Without this a marker separated from its leg by
-            # unrelated prose would join across the gap.
+            # A line that continues the leg above it but carries no
+            # marker is the failure this refuses on. Anything else
+            # closes the run, so a marker separated from its leg by
+            # unrelated prose cannot join across the gap.
+            if open_label is not None and continues_a_leg(line):
+                unmarked.append(line.strip())
+                continue
             open_label = None
             open_leg = None
             continue
@@ -165,14 +200,14 @@ def legs_of(attached_text):
             context.append('%s: %s' % (label, body))
             open_leg = context
         open_label = label
-    return verdicted, context, problems, joined
+    return verdicted, context, problems, unmarked, joined
 
 
 class Request(object):
     """One pre-printed row: a key, a claim, and the code's value."""
 
     def __init__(self, key, claim, code_value, where, cited, context,
-                 problems=(), joined=0):
+                 problems=(), unmarked=(), joined=0):
         self.key = key
         self.claim = claim
         self.code_value = code_value
@@ -180,6 +215,7 @@ class Request(object):
         self.cited = cited          # list of `# Source:` bodies
         self.context = context      # list of other legs, read-only
         self.problems = list(problems)  # markers that could not join
+        self.unmarked = list(unmarked)  # continuation text with no marker
         self.joined = joined        # continuation lines joined on
         self.row_id = ''
 
@@ -191,7 +227,8 @@ def requests_for_claim(claim, source_text):
     claim it makes, numbered from 1 in the order the scanner finds
     them -- the same order the checker's ordinal means.
     """
-    cited, context, problems, joined = legs_of(claim.unit.attached_text)
+    cited, context, problems, unmarked, joined = legs_of(
+        claim.unit.attached_text)
     where = '%s:%d' % (os.path.basename(claim.path), claim.unit.line_start)
 
     if claim.unit.kind == 'constant':
@@ -199,7 +236,7 @@ def requests_for_claim(claim, source_text):
                               claim.unit.line_start, claim.label, None)
         return [Request(key, claim.label,
                         claim.unit.value_str, where, cited, context,
-                        problems, joined)]
+                        problems, unmarked, joined)]
 
     rows = []
     values, _dropped = wc.physical_claims(claim.unit)
@@ -208,7 +245,7 @@ def requests_for_claim(claim, source_text):
         key = wk.key_for_site(claim.path, source_text,
                               claim.unit.line_start, claim.label, index)
         rows.append(Request(key, excerpt(text), raw, where,
-                            cited, context, problems, joined))
+                            cited, context, problems, unmarked, joined))
     return rows
 
 
@@ -349,6 +386,32 @@ def main():
     if skipped:
         print('%d file(s) not reached -- listed in the output.'
               % len(skipped))
+
+    # The ratchet (L-195). An unmarked continuation is text that reaches
+    # nobody: not joined onto its leg, not printed into the worksheet.
+    # Refuse rather than issue a request that quotes half a citation.
+    # Every one is listed, because a refusal naming one problem gets
+    # fixed one round trip at a time.
+    blocked = {}
+    for request in requests:
+        for line in request.unmarked:
+            blocked.setdefault(request.where, [])
+            if line not in blocked[request.where]:
+                blocked[request.where].append(line)
+    if blocked:
+        count = sum(len(v) for v in blocked.values())
+        print('')
+        print('REFUSING TO WRITE. %d citation line(s) at %d site(s) '
+              'continue a leg with no marker, so their text would be '
+              'dropped from the request.' % (count, len(blocked)))
+        for where in sorted(blocked):
+            print('  %s' % where)
+            for line in blocked[where]:
+                print('      %s' % line)
+        print('')
+        print('Relabel each one with the leg it continues -- a line '
+              'under `# Source:` becomes `# Source+:` -- then re-run.')
+        return 1
 
     batch = input('Batch name (e.g. batch3_gas_giants): ').strip()
     if not batch:

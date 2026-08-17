@@ -60,7 +60,7 @@ def run(*lines):
 
 def test_join():
     """A marked continuation joins onto the leg it names."""
-    cited, _context, problems, joined = run(
+    cited, _context, problems, _unmarked, joined = run(
         '# Source: Nolan et al. 2013 (radar shape model),',
         '# Source+: mean diameter 492 +/- 20 m.')
     check('join: two lines become one citation',
@@ -70,7 +70,7 @@ def test_join():
     check('join: reports one joined line', joined == 1, repr(joined))
     check('join: reports no problem', problems == [], repr(problems))
 
-    cited, _context, _problems, joined = run(
+    cited, _context, _problems, _unmarked, joined = run(
         '# Source: one',
         '# Source+: two',
         '# Source+: three')
@@ -78,7 +78,7 @@ def test_join():
           cited == ['one two three'], repr(cited))
     check('join: chain counts both lines', joined == 2, repr(joined))
 
-    _cited, context, _problems, joined = run(
+    _cited, context, _problems, _unmarked, joined = run(
         '# Ref: Archinal et al. 2011,',
         '# Ref+: IAU/LRO reference radius.')
     check('join: a context leg joins too',
@@ -87,27 +87,73 @@ def test_join():
     check('join: context join is counted', joined == 1, repr(joined))
 
 
-def test_unmarked_does_not_join():
-    """The pre-stage-1 shape. Padding is not a marker and must not join.
+def test_unmarked_is_caught():
+    """The pre-stage-1 shape. Padding does not join, and is REPORTED.
 
-    This is the blocker the loud failure will later catch. Until stage 2
-    marks the remaining 87 runs, the builder still drops these lines --
-    pinned here so the limitation is a recorded fact rather than a
-    surprise.
+    Until L-195 this text was dropped in silence. It is now returned so
+    the builder can refuse, which is the ratchet that keeps the next
+    unmarked continuation from reaching a worksheet.
     """
-    cited, _context, problems, joined = run(
+    cited, _context, problems, unmarked, joined = run(
         '# Source: Nolan et al. 2013 (radar shape model),',
         '#         mean diameter 492 +/- 20 m.')
     check('unmarked: padding does not join',
           cited == ['Nolan et al. 2013 (radar shape model),'], repr(cited))
     check('unmarked: nothing counted as joined', joined == 0, repr(joined))
-    check('unmarked: silent, not reported as malformed',
+    check('unmarked: reported, not silent',
+          unmarked == ['#         mean diameter 492 +/- 20 m.'],
+          repr(unmarked))
+    check('unmarked: not confused with a malformed marker',
           problems == [], repr(problems))
+
+    # An unpadded comment line continuing a leg -- the other shape the
+    # marking patches treated as continuation.
+    _c, _x, _p, unmarked, _j = run(
+        '# Derived: 63,241.077 AU per light-year',
+        '# Previous hardcoded value was 8.3167')
+    check('unmarked: an unpadded continuation is caught too',
+          len(unmarked) == 1, repr(unmarked))
+
+
+def test_what_is_not_a_continuation():
+    """The negative half. Over-eager detection would refuse forever."""
+    _c, _x, _p, unmarked, _j = run(
+        '# Source: Nolan et al. 2013,',
+        '# Note: an unrelated remark about the shape model')
+    check('not-continuation: a new label closes the run',
+          unmarked == [], repr(unmarked))
+
+    _c, _x, _p, unmarked, _j = run(
+        '# Source: Nolan et al. 2013,',
+        '# Cross-checked: Claude 2026-08-03 -- Nolan (worksheet.md)')
+    check('not-continuation: Cross-checked closes the run',
+          unmarked == [], repr(unmarked))
+
+    _c, _x, _p, unmarked, _j = run(
+        '# Source: Nolan et al. 2013,',
+        '#',
+        '#         orphaned text after a blank comment')
+    check('not-continuation: a bare # closes the run',
+          unmarked == [], repr(unmarked))
+
+    _c, _x, _p, unmarked, _j = run(
+        '# Source: Nolan et al. 2013,',
+        'BENNU_RADIUS_KM = 0.246')
+    check('not-continuation: a code line closes the run',
+          unmarked == [], repr(unmarked))
+
+    # The case that broke the first detector: padded text whose own
+    # words end in a colon. Padding wins, so this is continuation.
+    _c, _x, _p, unmarked, _j = run(
+        '# Source: JPL SSD mean radius (Lockwood et al. 2014)',
+        '#         Highly ellipsoidal: 1050x840x537 km')
+    check('not-continuation: padded text with a colon is still '
+          'continuation', len(unmarked) == 1, repr(unmarked))
 
 
 def test_label_mismatch():
     """A continuation naming a different leg is reported, never joined."""
-    cited, context, problems, joined = run(
+    cited, context, problems, _unmarked, joined = run(
         '# Source: Nolan et al. 2013,',
         '# Ref+: mean diameter 492 +/- 20 m.')
     check('mismatch: reported', len(problems) == 1, repr(problems))
@@ -123,14 +169,14 @@ def test_label_mismatch():
 
 def test_orphan():
     """A continuation with no leg above it is reported, never joined."""
-    cited, context, problems, joined = run(
+    cited, context, problems, _unmarked, joined = run(
         '# Source+: mean diameter 492 +/- 20 m.')
     check('orphan: reported', len(problems) == 1, repr(problems))
     check('orphan: nothing cited', cited == [], repr(cited))
     check('orphan: nothing in context', context == [], repr(context))
     check('orphan: nothing counted as joined', joined == 0, repr(joined))
 
-    _cited, _context, problems, joined = run(
+    _cited, _context, problems, _unmarked, joined = run(
         '# Source: Nolan et al. 2013,',
         '# Note: unrelated prose about the shape model',
         '# Source+: mean diameter 492 +/- 20 m.')
@@ -146,7 +192,7 @@ def test_two_source_malformation():
     The join must not paper over it: both are still reported, and a
     continuation attaches to the leg immediately above it.
     """
-    cited, _context, problems, joined = run(
+    cited, _context, problems, _unmarked, joined = run(
         '# Source: first authority',
         '# Source: second authority',
         '# Source+: continued.')
@@ -162,11 +208,11 @@ def test_two_source_malformation():
 
 def test_empty_and_bare():
     """Degenerate input does not raise."""
-    check('empty: no text', b.legs_of('') == ([], [], [], 0),
+    check('empty: no text', b.legs_of('') == ([], [], [], [], 0),
           repr(b.legs_of('')))
-    check('empty: None', b.legs_of(None) == ([], [], [], 0),
+    check('empty: None', b.legs_of(None) == ([], [], [], [], 0),
           repr(b.legs_of(None)))
-    cited, _context, problems, joined = run(
+    cited, _context, problems, _unmarked, joined = run(
         '# Source: authority',
         '# Source+:')
     check('empty: a marker with no body joins nothing visible',
@@ -191,6 +237,11 @@ def test_live_corpus(project_dir):
     check('corpus: no mismatched or orphaned markers', not flawed,
           '%d row(s): %s' % (len(flawed), shown))
 
+    stuck = [r for r in requests if r.unmarked]
+    check('corpus: no unmarked continuation anywhere', not stuck,
+          '; '.join('%s %s' % (r.where, r.unmarked[0])
+                    for r in stuck[:5]))
+
     with_citation = [r for r in requests if r.cited]
     check('corpus: rows still carry citations',
           len(with_citation) == len(requests),
@@ -211,7 +262,8 @@ def main():
     print('=' * 70)
 
     test_join()
-    test_unmarked_does_not_join()
+    test_unmarked_is_caught()
+    test_what_is_not_a_continuation()
     test_label_mismatch()
     test_orphan()
     test_two_source_malformation()
