@@ -10293,8 +10293,8 @@ CreateToolTip(manual_scale_radio, "Some key mean distances for custom scaling: \
 "* Hypothetical \"Planet Nine\" orbit: 600 AU\n"
 "* Inner Limit of Oort Cloud: 2,000 AU\n* Outer Limit of Oort Cloud: 100,000 AU\n"
 # Source: GRAVITATIONAL_INFLUENCE_AU in constants_new.py, imported above.
-#         Interpolated rather than typed: this site carried a stale 126,000
-#         literal with no link to the store until 2026-08-07 (L-179).
+# Source+: Interpolated rather than typed: this site carried a stale 126,000
+# Source+: literal with no link to the store until 2026-08-07 (L-179).
 f"* Extent of Solar Gravitational Influence (Hill Sphere): "
 f"{GRAVITATIONAL_INFLUENCE_AU:,.0f} AU\n* Proxima Centauri: 268,585 AU")
 

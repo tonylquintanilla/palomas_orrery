@@ -19,8 +19,8 @@ Domain: orrery
 planetary_params = {
         #   Standard J2000 mean orbital elements for all planets. These are indeed in the ecliptic frame.
         #   Source: NASA Planetary Fact Sheets: https://nssdc.gsfc.nasa.gov/planetary/factsheet/
-        #   JPL Approximate Positions: https://ssd.jpl.nasa.gov/planets/approx_pos.html
-        #   Here are the updated values with J2000.0 mean elements. 
+        # Source+: JPL Approximate Positions: https://ssd.jpl.nasa.gov/planets/approx_pos.html
+        # Source+: Here are the updated values with J2000.0 mean elements.
 
     # Saturn satellites
 #    'Atlas': 0.602,        # 14.45 hours

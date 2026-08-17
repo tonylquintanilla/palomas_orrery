@@ -820,9 +820,9 @@ MODULE_TAGS = {
 
     # ---------- orrery repo (114 modules) ----------
     # Source: MAP = migrated from the existing ROLE_MAP /
-    # MODULE_DOMAIN_MAP; HEUR = the _shells suffix heuristic, now made
-    # explicit; NEW = classified this session, listed in the Phase 2
-    # as-built for Tony's review.
+    # Source+: MODULE_DOMAIN_MAP; HEUR = the _shells suffix heuristic, now made
+    # Source+: explicit; NEW = classified this session, listed in the Phase 2
+    # Source+: as-built for Tony's review.
     'add_docstrings.py':                        ('devtool', 'dev_tools'),
     'apsidal_markers.py':                       ('computation', 'orrery'),
     'asteroid_belt_visualization_shells.py':    ('rendering/shells', 'orrery'),   # HEUR/MAP

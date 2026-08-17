@@ -58,11 +58,11 @@ from planet_visualization_utilities import (create_sphere_points, SOLAR_RADIUS_A
 # own duplicate. Editing the constant updates every display site.
 
 # Source: GRAVITATIONAL_INFLUENCE_AU and GRAVITATIONAL_INFLUENCE_RANGE_AU
-#         in constants_new.py -- approximate Hill sphere of the Sun in the
-#         Milky Way, model-dependent. Published estimates span
-#         100,000-200,000 AU; the visualization draws the 150,000 AU
-#         midpoint (Tony's ruling, 2026-08-07). Light-year figures derive
-#         from AU_PER_LIGHT_YEAR. NASA Solar System Exploration.
+# Source+: in constants_new.py -- approximate Hill sphere of the Sun in the
+# Source+: Milky Way, model-dependent. Published estimates span
+# Source+: 100,000-200,000 AU; the visualization draws the 150,000 AU
+# Source+: midpoint (Tony's ruling, 2026-08-07). Light-year figures derive
+# Source+: from AU_PER_LIGHT_YEAR. NASA Solar System Exploration.
 GRAVITATIONAL_INFLUENCE_SENTENCE = (
     f"The Sun's gravitational influence extends to roughly "
     f"{GRAVITATIONAL_INFLUENCE_AU / AU_PER_LIGHT_YEAR:.1f} light-years "
@@ -92,7 +92,7 @@ CHROMOSPHERE_RADIUS_LINE = (
 )
 
 # Source: GRAVITATIONAL_INFLUENCE_SENTENCE above (derived); NASA Solar
-#         System Exploration for the heliopause and Oort Cloud framing.
+# Source+: System Exploration for the heliopause and Oort Cloud framing.
 gravitational_influence_info = (
             "SELECT A MANUAL SCALE OF AT LEAST 160,000 AU TO VISUALIZE.<br><br>"
             
@@ -474,8 +474,8 @@ core_info = (
             )
 
 # Source: NASA Solar System Exploration; constants_new.py pinned values (HELIOPAUSE_RADII, TERMINATION_SHOCK_AU,
-# OUTER_CORONA_RADII, INNER_CORONA_RADII, CHROMOSPHERE_PHYSICAL_RADII, GRAVITATIONAL_INFLUENCE_AU, Oort Cloud AU constants);
-# Dones et al. (2004) Comets II; Golub & Pasachoff (2010) The Solar Corona; NASA solar interior model
+# Source+: OUTER_CORONA_RADII, INNER_CORONA_RADII, CHROMOSPHERE_PHYSICAL_RADII, GRAVITATIONAL_INFLUENCE_AU, Oort Cloud AU constants);
+# Source+: Dones et al. (2004) Comets II; Golub & Pasachoff (2010) The Solar Corona; NASA solar interior model
 gravitational_influence_info_hover = (
             "Sun: Outer Limit of Gravitational Influence:<br><br>" 
 
@@ -577,7 +577,7 @@ solar_wind_info_hover = (
         )
 
 # Source: Stone et al. (2005) Science -- Voyager 1/2 termination shock;
-# TERMINATION_SHOCK_AU=94, STREAMER_BELT_RADII=6 in constants_new.py
+# Source+: TERMINATION_SHOCK_AU=94, STREAMER_BELT_RADII=6 in constants_new.py
 termination_shock_info_hover = (
             "Solar Wind: Termination Shock:<br><br>"
 
@@ -786,7 +786,7 @@ inner_corona_info_hover = (
 )
 
 # Source: NASA solar interior model; Golub & Pasachoff (2010) The Solar Corona;
-# Bahcall et al. standard solar model; SUN_RADIUS_KM=695700 in constants_new.py
+# Source+: Bahcall et al. standard solar model; SUN_RADIUS_KM=695700 in constants_new.py
 chromosphere_info_hover = (
             "Sun: Chromosphere:<br><br>"
 
@@ -848,7 +848,7 @@ photosphere_info_hover = (
         )
 
 # Source: Bahcall et al. standard solar model; NASA solar interior;
-# CORE_AU=0.2*SOLAR_RADIUS_AU, RADIATIVE_ZONE_AU=0.7*SOLAR_RADIUS_AU in constants_new.py
+# Source+: CORE_AU=0.2*SOLAR_RADIUS_AU, RADIATIVE_ZONE_AU=0.7*SOLAR_RADIUS_AU in constants_new.py
 radiative_zone_info_hover = (
             "Sun: Radiative Zone<br><br>"
 
@@ -1221,7 +1221,7 @@ def create_sun_streamer_belt_shell():
 
 
 # Source: ROCHE_LIMIT_RADII=3.45 in constants_new.py; Ida et al. (2020);
-# MAPS disintegration at 8.33 R_sun from SOHO/CCOR-1 observations April 2026
+# Source+: MAPS disintegration at 8.33 R_sun from SOHO/CCOR-1 observations April 2026
 def create_sun_roche_limit_shell():
     """
     Fluid Roche limit for cometary bodies: ~3.45 solar radii (~0.016 AU).

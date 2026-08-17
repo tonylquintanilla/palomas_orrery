@@ -32,8 +32,8 @@ from planet_visualization_utilities import (PLANET9_RADIUS_AU, create_sphere_poi
 # Planet 9
 
 # Source: Batygin & Brown (2016, 2021); Fortney et al. (2016);
-#         radius 3-4 Earth radii (~3.7 R_E) from thermal evolution models for 5-10 Earth mass ice giant.
-#         Planet Nine is hypothetical -- all values are model predictions, not confirmed observations.
+# Source+: radius 3-4 Earth radii (~3.7 R_E) from thermal evolution models for 5-10 Earth mass ice giant.
+# Source+: Planet Nine is hypothetical -- all values are model predictions, not confirmed observations.
 planet9_surface_info = (
             "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
             "4.6 MB PER FRAME FOR HTML.<br><br>"
@@ -52,8 +52,8 @@ def create_planet9_surface_shell(center_position=(0, 0, 0)):
         'opacity': 1.0,
         'name': 'Crust',
         # Source: Batygin & Brown (2016, 2021); Fortney et al. (2016);
-        #         3.7 Earth radii for 5-10 Earth mass ice giant; composition modeled on Uranus/Neptune.
-        #         Planet Nine is hypothetical -- all values are model predictions.
+        # Source+: 3.7 Earth radii for 5-10 Earth mass ice giant; composition modeled on Uranus/Neptune.
+        # Source+: Planet Nine is hypothetical -- all values are model predictions.
         'description': (
             "Planet 9 Surface<br>" 
             "(Note: toggle off the cloud layer in the legend to better see the interior structure.)<br><br>"
@@ -208,9 +208,9 @@ def create_planet9_surface_shell(center_position=(0, 0, 0)):
     return [surface_trace, hover_trace]
 
 # Source: Batygin & Brown (2016, 2021); NASA Solar System Exploration;
-#         Hill sphere ~7.6 AU derived from a=600 AU, e=0.30, m=6 Earth masses.
-#         Note: 2021 refinement favors a=460 +/- 100 AU as central estimate; 600 AU remains valid for visualization.
-#         Planet Nine is hypothetical -- all values are model predictions, not confirmed observations.
+# Source+: Hill sphere ~7.6 AU derived from a=600 AU, e=0.30, m=6 Earth masses.
+# Source+: Note: 2021 refinement favors a=460 +/- 100 AU as central estimate; 600 AU remains valid for visualization.
+# Source+: Planet Nine is hypothetical -- all values are model predictions, not confirmed observations.
 planet9_hill_sphere_info = (
             "SELECT MANUAL SCALE OF AT LEAST 8 AU TO VISUALIZE PLANET 9 CENTERED OR 800 AU HELIOCENTRIC.<br>" 
             "1.3 MB PER FRAME FOR HTML.<br><br>"
@@ -228,9 +228,9 @@ def create_planet9_hill_sphere_shell(center_position=(0, 0, 0)):
         'opacity': 0.3,
         'name': 'Hill Sphere',
         # Source: Batygin & Brown (2016, 2021); NASA Solar System Exploration;
-        #         a=600 AU baseline (2021 refinement: ~460 AU central estimate), e=0.30, m=6 Earth masses.
-        #         Using perihelion distance in Hill sphere formula is more physically accurate for satellite stability.
-        #         Planet Nine is hypothetical -- all values are model predictions.
+        # Source+: a=600 AU baseline (2021 refinement: ~460 AU central estimate), e=0.30, m=6 Earth masses.
+        # Source+: Using perihelion distance in Hill sphere formula is more physically accurate for satellite stability.
+        # Source+: Planet Nine is hypothetical -- all values are model predictions.
         'description': (
             "SELECT MANUAL SCALE OF AT LEAST 8 AU TO VISUALIZE PLANET 9 CENTERED OR 800 AU HELIOCENTRIC.<br><br>"
             "Hill Sphere: Planet 9's Hill sphere, or Roche sphere, is the region around it where its gravitational influence dominates <br><br>" 

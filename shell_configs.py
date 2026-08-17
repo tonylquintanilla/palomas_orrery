@@ -91,8 +91,8 @@ SHELL_CONFIGS = {
     # Mercury
     # ============================================================
     # Source: Hauck et al. 2013, JGR Planets 118:1204 -- core radius 2,020 +/- 30 km;
-    #         Sori 2018, EPSL 489:92 -- crustal thickness 26 +/- 11 km;
-    #         NASA MESSENGER Mission; Winslow et al. 2013 (magnetosphere geometry).
+    # Source+: Sori 2018, EPSL 489:92 -- crustal thickness 26 +/- 11 km;
+    # Source+: NASA MESSENGER Mission; Winslow et al. 2013 (magnetosphere geometry).
     # Cross-checked: GPT 2026-08-03 -- Hauck 2013 / Sori 2018 (batch1_tier2_cross_check_gpt.md)
     # Cross-checked: Gemini 2026-08-03 -- Hauck 2013 / Sori 2018 (batch1_tier2_cross_check_gemini.md)
     'Mercury': {
@@ -240,10 +240,10 @@ SHELL_CONFIGS = {
     # Moon
     # ============================================================
     # Source: Weber et al. (2011), Science, "Seismic Detection of the Lunar Core"
-    #         -- inner core 240 km, outer core 330 km;
-    #         Nakamura et al. 1982, JGR 87:A117 and Nakamura 2005, JGR 110
-    #         -- deep moonquake source depths;
-    #         NASA Moon Fact Sheet; NASA Solar System Dynamics (Hill sphere); Draper (1847).
+    # Source+: -- inner core 240 km, outer core 330 km;
+    # Source+: Nakamura et al. 1982, JGR 87:A117 and Nakamura 2005, JGR 110
+    # Source+: -- deep moonquake source depths;
+    # Source+: NASA Moon Fact Sheet; NASA Solar System Dynamics (Hill sphere); Draper (1847).
     # Cross-checked: GPT 2026-08-03 -- Weber 2011 / Nakamura (batch1_tier2_cross_check_gpt.md)
     # Cross-checked: Gemini 2026-08-03 -- Weber 2011 / Nakamura (batch1_tier2_cross_check_gemini.md)
     # Phase B correction: radius_fraction/opacity swap in mantle fixed
@@ -434,9 +434,9 @@ SHELL_CONFIGS = {
     # Planet 9 (hypothetical)
     # ============================================================
     # Source: Batygin & Brown (2016, 2021); Fortney et al. (2016);
-    #         NASA Solar System Exploration.
-    #         All values are model predictions for a 5-10 Earth-mass ice giant;
-    #         Planet Nine has not been observationally confirmed.
+    # Source+: NASA Solar System Exploration.
+    # Source+: All values are model predictions for a 5-10 Earth-mass ice giant;
+    # Source+: Planet Nine has not been observationally confirmed.
     # Verified: April 2026 provenance audit; 2 corrections applied (Eris typo,
     #           2021 semi-major axis refinement note).
     'Planet 9': {
@@ -1314,8 +1314,8 @@ SHELL_CONFIGS = {
     # Earth
     # ============================================================
     # Source: USGS Interior of the Earth, NASA Earth Fact Sheet,
-    #         NOAA / NCEI (atmosphere boundaries), NASA Goddard,
-    #         NASA Van Allen Probes, NASA Solar System Dynamics.
+    # Source+: NOAA / NCEI (atmosphere boundaries), NASA Goddard,
+    # Source+: NASA Van Allen Probes, NASA Solar System Dynamics.
     # Verified: April 2026 provenance audit.
     'Earth': {
 
@@ -1507,8 +1507,8 @@ SHELL_CONFIGS = {
     # Jupiter
     # ============================================================
     # Source: NASA Juno Mission; Wahl et al. (2017) for core;
-    #         NASA Solar System Exploration; NASA Juno gravity science
-    #         (fuzzy core to ~60% R_J).
+    # Source+: NASA Solar System Exploration; NASA Juno gravity science
+    # Source+: (fuzzy core to ~60% R_J).
     # Verified: April 2026 provenance audit via Gemini fact-check.
     'Jupiter': {
 
@@ -1659,7 +1659,7 @@ SHELL_CONFIGS = {
     # Saturn
     # ============================================================
     # Source: NASA Saturn Fact Sheet; NASA Cassini Mission;
-    #         NASA Saturn Magnetosphere Overview; Mankovich & Fuller (2021).
+    # Source+: NASA Saturn Magnetosphere Overview; Mankovich & Fuller (2021).
     # Verified: April 2026 provenance audit via Gemini fact-check.
     'Saturn': {
 
@@ -1736,7 +1736,7 @@ SHELL_CONFIGS = {
     # Uranus
     # ============================================================
     # Source: NASA Voyager 2 Mission; NASA Uranus Fact Sheet;
-    #         Ness et al. (1986) Science (magnetometer).
+    # Source+: Ness et al. (1986) Science (magnetometer).
     # Verified: April 2026 provenance audit via Gemini fact-check.
     'Uranus': {
 
@@ -1803,7 +1803,7 @@ SHELL_CONFIGS = {
     # Neptune
     # ============================================================
     # Source: NASA Voyager 2 Mission; NASA Neptune Fact Sheet;
-    #         Ness et al. (1989) Science (magnetometer).
+    # Source+: Ness et al. (1989) Science (magnetometer).
     # Verified: April 2026 provenance audit via Gemini fact-check.
     'Neptune': {
 
@@ -1869,7 +1869,7 @@ SHELL_CONFIGS = {
     # Sun
     # ============================================================
     # Source: NASA Solar Dynamics Observatory; NASA Parker Solar Probe;
-    #         NASA Heliophysics; IAU 2015 nominal solar radius.
+    # Source+: NASA Heliophysics; IAU 2015 nominal solar radius.
     # Verified: April 2026 provenance audit.
     # Live: rendered via the unified dispatch --
     #       create_celestial_body_visualization(fig, 'Sun', ...).
@@ -2162,7 +2162,7 @@ CUSTOM_SHELLS = {
     # Venus
     # ============================================================
     # Source: ESA Venus Express: Magnetosphere; NASA Pioneer Venus Results;
-    #         induced magnetosphere, bow shock 1.3-1.7 Rv, comet-shaped tail.
+    # Source+: induced magnetosphere, bow shock 1.3-1.7 Rv, comet-shaped tail.
     # Verified: April 2026 provenance audit.
     'Venus': {
 
@@ -2198,8 +2198,8 @@ CUSTOM_SHELLS = {
     # Mars
     # ============================================================
     # Source: NASA MAVEN; NASA Solar System Exploration;
-    #         induced magnetosphere, bow shock ~1.64 Rm (Vignes et al. 2000),
-    #         (Acuna et al. 1999 -- MGS MAG/ER discovery).
+    # Source+: induced magnetosphere, bow shock ~1.64 Rm (Vignes et al. 2000),
+    # Source+: (Acuna et al. 1999 -- MGS MAG/ER discovery).
     # Verified: April 2026 provenance audit via Gemini fact-check.
     'Mars': {
 
@@ -2235,10 +2235,10 @@ CUSTOM_SHELLS = {
     # Earth
     # ============================================================
     # Source: NASA Goddard Space Flight Center -- Magnetosphere overview;
-    #         NASA Van Allen Probes (radiation belts, 2012-2019);
-    #         NASA Heliophysics. Earth's magnetosphere extends ~10 R_E
-    #         sunward, magnetotail ~100 R_E. Bow shock standoff ~15 R_E.
-    #         Inner radiation belt ~1.5 R_E (protons), outer ~4.5 R_E (electrons).
+    # Source+: NASA Van Allen Probes (radiation belts, 2012-2019);
+    # Source+: NASA Heliophysics. Earth's magnetosphere extends ~10 R_E
+    # Source+: sunward, magnetotail ~100 R_E. Bow shock standoff ~15 R_E.
+    # Source+: Inner radiation belt ~1.5 R_E (protons), outer ~4.5 R_E (electrons).
     # Verified: April 2026 provenance audit.
     'Earth': {
 
@@ -2337,8 +2337,8 @@ CUSTOM_SHELLS = {
     # Jupiter
     # ============================================================
     # Source: NASA Juno Mission; NASA Galileo Mission; NASA Voyager 1/2;
-    #         Galileo plasma instrument data (Io torus);
-    #         NASA Jupiter Magnetosphere Overview.
+    # Source+: Galileo plasma instrument data (Io torus);
+    # Source+: NASA Jupiter Magnetosphere Overview.
     # Verified: April 2026 provenance audit via Gemini fact-check.
     'Jupiter': {
 
@@ -2438,8 +2438,8 @@ CUSTOM_SHELLS = {
     # Saturn
     # ============================================================
     # Source: NASA Saturn Fact Sheet; NASA Cassini Mission;
-    #         NASA Saturn Magnetosphere Overview; Cassini Mission: Enceladus;
-    #         NASA Voyager 2 Saturn Encounter; Mankovich & Fuller (2021).
+    # Source+: NASA Saturn Magnetosphere Overview; Cassini Mission: Enceladus;
+    # Source+: NASA Voyager 2 Saturn Encounter; Mankovich & Fuller (2021).
     # Verified: April 2026 provenance audit via Gemini fact-check.
     'Saturn': {
 
@@ -2555,7 +2555,7 @@ CUSTOM_SHELLS = {
     # Uranus
     # ============================================================
     # Source: NASA Voyager 2 Mission; Ness et al. (1986) Science;
-    #         Elliot et al. (1977) Nature; de Pater et al. (2006).
+    # Source+: Elliot et al. (1977) Nature; de Pater et al. (2006).
     # Verified: April 2026 provenance audit via Gemini fact-check.
     'Uranus': {
 
@@ -2645,7 +2645,7 @@ CUSTOM_SHELLS = {
     # Neptune
     # ============================================================
     # Source: Voyager 2 Mission Archive; Ness et al. (1989, Science);
-    #         Smith et al. (1989, Science); NASA Planetary Ring Node.
+    # Source+: Smith et al. (1989, Science); NASA Planetary Ring Node.
     # Verified: April 2026 provenance audit via Gemini fact-check.
     'Neptune': {
 

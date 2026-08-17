@@ -34,7 +34,7 @@ from idealized_orbits import orient_to_planet_pole  # N15: pole-vector ring orie
 # Saturn Shell Creation Functions
 
 # Source: NASA Saturn Fact Sheet; Mankovich & Fuller (2021, Nature Astronomy);
-#         fuzzy core to ~60% R, ~17 Earth masses rock/ice (~55 total with H/He), ~11,700-12,000 K confirmed.
+# Source+: fuzzy core to ~60% R, ~17 Earth masses rock/ice (~55 total with H/He), ~11,700-12,000 K confirmed.
 saturn_core_info = (
             "2.4 MB PER FRAME FOR HTML.<br><br>"
             "Saturn likely has a dense core composed of metallic elements like iron and nickel, surrounded by rocky material and <br>" 
@@ -51,7 +51,7 @@ def create_saturn_core_shell(center_position=(0, 0, 0)):
         'opacity': 1.0,
         'name': 'Core',
         # Source: NASA Saturn Fact Sheet; Mankovich & Fuller (2021, Nature Astronomy);
-        #         fuzzy core (ring seismology) to ~60% R; ~17 Earth masses rock/ice in ~55 Earth mass total region confirmed.
+        # Source+: fuzzy core (ring seismology) to ~60% R; ~17 Earth masses rock/ice in ~55 Earth mass total region confirmed.
         'description': (
             "Saturn likely has a dense core composed of metallic elements like iron and nickel, surrounded by rocky material and <br>" 
             "other compounds solidified by immense pressure and heat. This core is estimated to be about 10 to 15 times the mass <br>" 
@@ -137,7 +137,7 @@ def create_saturn_metallic_hydrogen_shell(center_position=(0, 0, 0)):
         'opacity': 0.9,
         'name': 'Metallic Hydrogen Layer',
         # Source: NASA Solar System Exploration; Mankovich et al. (2021);
-        #         transition at 0.4-0.5 R, weaker field than Jupiter, ~6,000 K at transition confirmed.
+        # Source+: transition at 0.4-0.5 R, weaker field than Jupiter, ~6,000 K at transition confirmed.
         'description': (
             "Metallic Hydrogen Layer:<br>" 
             "Surrounding the core is a thick layer of liquid metallic hydrogen, similar to Jupiter. Above this is a layer of liquid <br>" 
@@ -273,7 +273,7 @@ def create_saturn_molecular_hydrogen_shell(center_position=(0, 0, 0)):
     return traces
 
 # Source: NASA Saturn Fact Sheet; Cassini Mission Results;
-#         ~75% H2, ~25% He, winds 1,800 km/h, north pole hexagon, cloud deck order all confirmed.
+# Source+: ~75% H2, ~25% He, winds 1,800 km/h, north pole hexagon, cloud deck order all confirmed.
 saturn_cloud_layer_info = (
             "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
             "4.6 MB PER FRAME FOR HTML.<br><br>"
@@ -294,7 +294,7 @@ def create_saturn_cloud_layer_shell(center_position=(0, 0, 0)):
         'opacity': 1.0,
         'name': 'Cloud Layer',
         # Source: NASA Saturn Fact Sheet; Cassini Mission Results;
-        #         composition, wind speed, hexagonal jet stream, cloud deck order all confirmed.
+        # Source+: composition, wind speed, hexagonal jet stream, cloud deck order all confirmed.
         'description': (
             "Saturn Cloud Layer<br>" 
             "(Note: toggle off the cloud layer in the legend to better see the interior structure.)<br><br>"
@@ -498,7 +498,7 @@ def create_saturn_upper_atmosphere_shell(center_position=(0, 0, 0)):
         'opacity': 0.5,
         'name': 'Upper Atmosphere',
         # Source: NASA Saturn Fact Sheet; Cassini Mission Results;
-        #         thermosphere ~300 degC / 570 K at poles from auroral heating confirmed.
+        # Source+: thermosphere ~300 degC / 570 K at poles from auroral heating confirmed.
         'description': (
             "Saturn definitely has an upper atmosphere above its cloud layers. Similar to Earth, Jupiter, and other planets with <br>" 
             "atmospheres, Saturn's atmosphere doesn't just abruptly end at the visible clouds. It extends far beyond.<br>" 
@@ -766,7 +766,7 @@ def create_saturn_enceladus_plasma_torus(center_position=(0, 0, 0)):
 
     # Create the enceladus plasma torus hover text and customdata arrays
     # Source: Cassini Mission: Enceladus; NASA Solar System Exploration;
-    #         geyser rate hundreds kg/s, plasma loading ~100 kg/s, E ring fed by Enceladus ice confirmed.
+    # Source+: geyser rate hundreds kg/s, plasma loading ~100 kg/s, E ring fed by Enceladus ice confirmed.
     enceladus_text = ["Enceladus plasma torus: Primarily sourced by water vapor and icy particles vented from the geysers on the <br>" 
                       "south pole of Enceladus. These geysers release hundreds of kilograms of water vapor per second.<br>" 
                       "* Composition: Dominated by water group ions and also contains hydrogen ions.<br>" 
@@ -927,7 +927,7 @@ def create_saturn_radiation_belts(center_position=(0, 0, 0)):
     return traces
 
 # Source: NASA Solar System Dynamics (SSD);
-#         Hill sphere ~91 million km / ~151 Saturn radii confirmed.
+# Source+: Hill sphere ~91 million km / ~151 Saturn radii confirmed.
 saturn_hill_sphere_info = (
             "SELECT MANUAL SCALE OF AT LEAST 0.6 AU TO VISUALIZE.<br>" 
             "1.3 MB PER FRAME FOR HTML.<br><br>"
@@ -947,7 +947,7 @@ def create_saturn_hill_sphere_shell(center_position=(0, 0, 0)):
         'opacity': 0.3,
         'name': 'Hill Sphere',
         # Source: NASA Solar System Dynamics (SSD);
-        #         Hill sphere ~91 million km / ~151 Saturn radii at semi-major axis confirmed.
+        # Source+: Hill sphere ~91 million km / ~151 Saturn radii at semi-major axis confirmed.
         'description': (
             "SET MANUAL SCALE OF AT LEAST 0.3 AU TO VISUALIZE.<br><br>"
             "Saturn: Its Hill sphere, the region around the planet where its gravity dominates over the Sun's, has a radius of <br>" 
@@ -1226,7 +1226,7 @@ def create_saturn_ring_system(center_position=(0, 0, 0)):
     return traces
 
 # Source: NASA Cassini Mission; Saturn Magnetosphere Overview;
-#         magnetic axis tilt <0.1 deg (unique among planets), Enceladus as dominant plasma source confirmed.
+# Source+: magnetic axis tilt <0.1 deg (unique among planets), Enceladus as dominant plasma source confirmed.
 saturn_magnetosphere_info = (
             "SELECT MANUAL SCALE OF AT LEAST 0.2 AU TO VISUALIZE.<br>"
             "1.4 MB PER FRAME FOR HTML.<br><br>"

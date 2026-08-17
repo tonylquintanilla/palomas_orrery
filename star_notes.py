@@ -772,7 +772,7 @@ unique_notes = {
         '* Future evolution: Bellatrix is expected to eventually end its life as a massive white dwarf.',
 
         # Source: SIMBAD; Shenar et al. (2015) -- 5-6 component system, Aa1/Aa2 eclipsing binary (5.7d period),
-        # O9.5 II, distance ~1200 ly (Hipparcos/Gaia). Gemini fact-check Apr 2026: corrected from 900 ly.
+        # Source+: O9.5 II, distance ~1200 ly (Hipparcos/Gaia). Gemini fact-check Apr 2026: corrected from 900 ly.
         '* del Ori': '<br>delta Ori or delta Orionis, better known as Mintaka.<br>' 
         '* Mintaka is a star system that marks the westernmost point of Orion\'s Belt<br>' 
         '* While it appears as a single star to the naked eye, Mintaka is actually a multiple star system of six or more stars!<br>' 
@@ -787,7 +787,7 @@ unique_notes = {
         '* Distance: Mintaka is located about 1,200 light-years away from Earth (Hipparcos/Gaia; +/-200 ly).',
 
         # Source: SIMBAD; Hipparcos Catalog -- B0 Ia, ~2000 ly, 375000-500000 Lsun (extinction model dependent),
-        # NGC 1990 reflection nebula
+        # Source+: NGC 1990 reflection nebula
         '* eps Ori': '<br>epsilon Orionis or Epsilon Orionis, more commonly known as Alnilam.<br>' 
         '* Fourth brightest in Orion: It\'s the fourth-brightest star in the constellation Orion and the 29th brightest star in the<br>' 
         '  entire night sky.<br>' 
@@ -802,7 +802,7 @@ unique_notes = {
         '* Surrounded by nebulosity: Alnilam is surrounded by a faint reflection nebula, NGC 1990, which is illuminated by the star\'s light.',
       
         # Source: SIMBAD; Hummel et al. (2013) -- O9.7 Ibe primary, Aa/Ab binary period ~7.6 yr,
-        # illuminates Flame Nebula NGC 2024 and Horsehead Nebula region
+        # Source+: illuminates Flame Nebula NGC 2024 and Horsehead Nebula region
         '* zet Ori': '<br>zeta Orionis or Zeta Orionis, more commonly known as Alnitak.<br>' 
         '* Orion\'s Belt: Alnitak is one of the three stars that form Orion\'s Belt, the prominent line of stars across the<br>' 
         '  Hunter\'s waist.' 
@@ -893,7 +893,7 @@ unique_notes = {
         '* del Pic': '<br>Delta Pictoris',
 
         # Source: SIMBAD; GASP -- Fomalhaut b reinterpreted as dust cloud (not confirmed planet);
-        # Fomalhaut c status contested; distance ~25 ly, 18th brightest, spectral type A3V
+        # Source+: Fomalhaut c status contested; distance ~25 ly, 18th brightest, spectral type A3V
         '* alf PsA': '<br>alpha Piscis Austrinus or Alpha Piscis Austrinus, also known as Fomalhaut.<br> ' 
         '* Relatively young: Fomalhaut is a young star, estimated to be around 440 million years old. This is quite young compared<br> ' 
         '  to our Sun\'s 4.6 billion years.<br> ' 
@@ -924,7 +924,7 @@ unique_notes = {
         '* alf Pup': '<br>Alpha Puppis',
 
         # Source: SIMBAD; Ramiaramanantsoa et al. (2018) -- O-type, ~42000K, ~22-25 Msun, mag 2.25,
-        # runaway from Vela OB2 association at >60 km/s, rotation ~220 km/s
+        # Source+: runaway from Vela OB2 association at >60 km/s, rotation ~220 km/s
         '* zet Pup': '<br>Zeta Puppis (zeta Pup), also known by its beautiful traditional name Naos. Shining with an apparent<br> ' 
         'magnitude of 2.25. It\'s the brightest star in the constellation Puppis (the Stern) and one of the most luminous stars<br> ' 
         'visible to the naked eye.<br> '

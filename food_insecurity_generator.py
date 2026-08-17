@@ -68,8 +68,8 @@ BUILD_STAMP = datetime.now().strftime("%Y-%m-%d-%H-%M")
 # report's own "Key for the Map" legend swatches (a true in-document source),
 # so they are the colors IPC used in THIS report rather than recalled hex.
 # Source: IPC Sudan Special Report, Feb 2026-Jan 2027 (publ. 2026-06-03),
-#   page 7 "Key for the Map / IPC Acute Food Insecurity Phase Classification"
-#   legend swatches, sampled at 200 dpi (anti-alias +/-2; see build handoff).
+# Source+: page 7 "Key for the Map / IPC Acute Food Insecurity Phase Classification"
+# Source+: legend swatches, sampled at 200 dpi (anti-alias +/-2; see build handoff).
 PHASE_COLORS_RGB = {
     1: "#D0E7C7",   # Phase 1 - Minimal     (light green)
     2: "#F8E303",   # Phase 2 - Stressed    (yellow)
@@ -78,7 +78,7 @@ PHASE_COLORS_RGB = {
     5: "#621012",   # Phase 5 - Famine/Catastrophe (dark red)
 }
 # Source: same legend, page 7 -- "Areas not analysed" (white) and "Areas with
-#   inadequate evidence" (grey) are distinct legend categories, not a phase.
+# Source+: inadequate evidence" (grey) are distinct legend categories, not a phase.
 NOT_ANALYSED_RGB = "#FFFFFF"        # Abyei PCA in the current export
 INADEQUATE_EVIDENCE_RGB = "#BBBCBE"  # defined for completeness; not applied this cut
 
@@ -115,10 +115,10 @@ P5_DOT_ICON = "http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png"
 # A naive polygon sum over-counts (IDP settlements overlap host localities), so
 # these come from the report TEXT, not from the GeoJSON.
 # Source: IPC Sudan Special Report, Feb 2026-Jan 2027, Country-wide Analysis
-#   (Feb-May 2026): "covering the total population of Sudan (47.5 million)";
-#   "nearly 19.5 million people are classified in IPC Phase 3 or above for the
-#   current period, including over 5 million people in IPC Phase 4 (Emergency)";
-#   "nearly 135,000 people are classified in IPC Phase 5 (Catastrophe)".
+# Source+: (Feb-May 2026): "covering the total population of Sudan (47.5 million)";
+# Source+: "nearly 19.5 million people are classified in IPC Phase 3 or above for the
+# Source+: current period, including over 5 million people in IPC Phase 4 (Emergency)";
+# Source+: "nearly 135,000 people are classified in IPC Phase 5 (Catastrophe)".
 NATL_TOTAL_POP = "47.5 million"         # total population of Sudan analysed
 NATL_PHASE3PLUS = "19.5 million"        # IPC Phase 3 or above, current period
 NATL_PHASE4 = "5 million"               # IPC Phase 4 (Emergency), current period
@@ -126,7 +126,7 @@ NATL_PHASE5_CATASTROPHE = "135,000"     # IPC Phase 5 (Catastrophe), current per
 
 # IPC's OWN wording of the mapped-phase rule (transcribed verbatim -> safe tier).
 # Source: IPC Sudan Special Report page 7 legend, "Key for the Map": "mapped
-#   Phase represents highest severity affecting at least 20% of the population".
+# Source+: Phase represents highest severity affecting at least 20% of the population".
 TWENTY_PCT_RULE = ("The mapped phase is the highest severity affecting at least "
                    "20% of an area's population. A smaller Catastrophe population "
                    "can sit under a Phase 4 color -- the full breakdown in each "
@@ -137,7 +137,7 @@ TWENTY_PCT_RULE = ("The mapped phase is the highest severity affecting at least 
 
 # --- KEY DRIVERS (transcribed verbatim from the report; IPC's voice only) ---
 # Source: IPC Sudan Special Report, Feb 2026-Jan 2027, "KEY DRIVERS" section
-#   (page 6). Wording lifted verbatim; smart quotes/dashes normalized to ASCII.
+# Source+: (page 6). Wording lifted verbatim; smart quotes/dashes normalized to ASCII.
 DRIVERS = [
     ("Conflict",
      "With no peace settlement in sight, three years of conflict continue to "
@@ -166,9 +166,9 @@ DRIVERS = [
 # IPC's own naming of the Middle East fuel/food/fertilizer channel (transcribed;
 # the reader makes the Hormuz connection -- we never author the linkage).
 # Source: IPC Sudan Special Report, Feb 2026-Jan 2027 (Key Messages): the
-#   ongoing conflict in the Middle East "contributing to higher fuel, food, and
-#   fertilizer prices. The impacts of the Middle East crisis on Sudan are likely
-#   to intensify in the near and medium term."
+# Source+: ongoing conflict in the Middle East "contributing to higher fuel, food, and
+# Source+: fertilizer prices. The impacts of the Middle East crisis on Sudan are likely
+# Source+: to intensify in the near and medium term."
 MIDDLE_EAST_LINE = ("IPC notes the ongoing conflict in the Middle East "
                     "contributing to higher fuel, food, and fertilizer prices, "
                     "with impacts likely to intensify in the near and medium term.")
@@ -184,7 +184,7 @@ PROVENANCE_DATA = "IPC, IPC Mapping Tool"
 # The report carries no formal "recommended citation" line; this is ASSEMBLED
 # from the report's title page facts (publisher, title, dates) -- see handoff.
 # Source: IPC Sudan Special Report title page (IPC Global Initiative; "IPC Acute
-#   Food Insecurity Analysis February 2026-January 2027"; published 3 June 2026).
+# Source+: Food Insecurity Analysis February 2026-January 2027"; published 3 June 2026).
 CITATION = ("IPC Global Initiative. 2026. Sudan: IPC Acute Food Insecurity "
             "Analysis, February 2026 - January 2027 (Special Report). "
             "Published 3 June 2026.")

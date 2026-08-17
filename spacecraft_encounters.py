@@ -112,8 +112,8 @@ SPACECRAFT_ENCOUNTERS = {
             'v_helio_kms': 23.0,       # relative to Sun (post-assist)
             'label': 'Jupiter Gravity Assist',
             # Source: NASA New Horizons Mission Guide; NASA Solar System Exploration;
-            #         launch 16.26 km/s (fastest ever at launch), heliocentric ~43-45 km/s,
-            #         slowed to ~19 km/s at Jupiter, +4 km/s assist, 3 years saved confirmed.
+            # Source+: launch 16.26 km/s (fastest ever at launch), heliocentric ~43-45 km/s,
+            # Source+: slowed to ~19 km/s at Jupiter, +4 km/s assist, 3 years saved confirmed.
             'note': ('Fastest launch ever: 16.26 km/s Earth-relative, '
                      'combining with Earth\'s orbital velocity to ~43 km/s '
                      'heliocentric (velocities add as vectors, not scalars). '
@@ -142,7 +142,7 @@ SPACECRAFT_ENCOUNTERS = {
             'v_helio_kms': 14.52,      # relative to Sun at encounter
             'label': 'Pluto Flyby',
             # Source: Stern et al. (2015, Science); NASA New Horizons Pluto Flyby Press Kit;
-            #         12,472 km altitude, 13.78 km/s, 28,800 km Charon distance, Sputnik Planitia all confirmed.
+            # Source+: 12,472 km altitude, 13.78 km/s, 28,800 km Charon distance, Sputnik Planitia all confirmed.
             'note': ('First spacecraft to explore Pluto. Flew 12,472 km '
                      'above the surface at 13.78 km/s. Also passed within '
                      '28,800 km of Charon. Revealed Pluto\'s heart-shaped '

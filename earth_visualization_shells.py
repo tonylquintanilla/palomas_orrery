@@ -632,7 +632,7 @@ def create_earth_upper_atmosphere_shell(center_position=(0, 0, 0)):
     return traces
 
 # Source: NASA Goddard Space Flight Center - Magnetosphere
-#         NASA Van Allen Probes (radiation belts)
+# Source+: NASA Van Allen Probes (radiation belts)
 # Verified: April 2026 via Gemini fact-check
 earth_magnetosphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n" 
@@ -865,7 +865,7 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     return traces
 
 # Source: UCS Satellite Database, ESA Space Debris Office, NASA
-#         Satellite/debris counts as of early 2026
+# Source+: Satellite/debris counts as of early 2026
 # Verified: April 2026 via Gemini fact-check
 earth_leo_shell_info = (
             "SET MANUAL SCALE TO 0.003 AU TO VISUALIZE.\n\n"
@@ -941,7 +941,7 @@ def create_earth_leo_shell(center_position=(0, 0, 0)):
     z = radii_au * np.cos(theta_main) + center_z
 
     # Source: UCS Satellite Database, ESA Space Debris Office (counts as of early 2026)
-    #         SpaceX Starlink status; NASA (ISS, Hubble altitudes)
+    # Source+: SpaceX Starlink status; NASA (ISS, Hubble altitudes)
     # Verified: April 2026 via Gemini fact-check
     hover_text = (
         "Earth: Low Earth Orbit (LEO)<br><br>"

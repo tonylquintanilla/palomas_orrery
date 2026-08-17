@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: August 16, 2026
-Files scanned: 129
+Files scanned: 128
 Total findings: 892
 Constants: 105 | Dicts: 38 | Display strings: 749
 
@@ -19,12 +19,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260817T033347Z | `01a1b8a` | 128 | 892 | 206 | 576 | 108 | 2 |
+| 20260817T031933Z | `01a1b8a` | 128 | 892 | 206 | 576 | 108 | 2 |
 | 20260817T030920Z | `4a11001` | 129 | 892 | 206 | 576 | 108 | 2 |
 | 20260817T030427Z | `5840145` | 128 | 892 | 206 | 576 | 108 | 2 |
 | 20260817T024745Z | `5840145` | 129 | 890 | 206 | 576 | 106 | 2 |
 | 20260817T022241Z | `f88ad94` | 128 | 889 | 206 | 576 | 105 | 2 |
-| 20260816T234343Z | `227f5b2` | 127 | 889 | 206 | 576 | 105 | 2 |
-| 20260816T231626Z | `227f5b2` | 128 | 889 | 206 | 576 | 105 | 2 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
@@ -203,12 +203,12 @@ The string sits in a block with no citation, inside a block that has one. Fix by
 
 | File | Line | Shadowed from | Its citation at |
 |------|-----:|---------------|----------------:|
-| `comet_visualization_shells.py` | 94 | `HISTORICAL_TAIL_DATA` | 86 |
-| `comet_visualization_shells.py` | 210 | `HISTORICAL_TAIL_DATA` | 86 |
-| `comet_visualization_shells.py` | 236 | `HISTORICAL_TAIL_DATA` | 86 |
-| `comet_visualization_shells.py` | 295 | `HISTORICAL_TAIL_DATA` | 86 |
-| `comet_visualization_shells.py` | 306 | `HISTORICAL_TAIL_DATA` | 86 |
-| `comet_visualization_shells.py` | 335 | `HISTORICAL_TAIL_DATA` | 86 |
+| `comet_visualization_shells.py` | 94 | `HISTORICAL_TAIL_DATA` | 81 |
+| `comet_visualization_shells.py` | 210 | `HISTORICAL_TAIL_DATA` | 81 |
+| `comet_visualization_shells.py` | 236 | `HISTORICAL_TAIL_DATA` | 81 |
+| `comet_visualization_shells.py` | 295 | `HISTORICAL_TAIL_DATA` | 81 |
+| `comet_visualization_shells.py` | 306 | `HISTORICAL_TAIL_DATA` | 81 |
+| `comet_visualization_shells.py` | 335 | `HISTORICAL_TAIL_DATA` | 81 |
 | `planet_visualization_utilities.py` | 503 | `PLANET_ROTATION` | 494 |
 | `planet_visualization_utilities.py` | 507 | `PLANET_ROTATION` | 494 |
 | `planet_visualization_utilities.py` | 511 | `PLANET_ROTATION` | 494 |
@@ -1238,7 +1238,7 @@ is planned for a future session.
 | 1337 | string | display string @ line 1337 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 1354 | string | display string @ line 1354 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 1361 | string | display string @ line 1361 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1378 | string | display string @ line 1378 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1378 | string | display string @ line 1378 | (5 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
 | 1384 | string | display string @ line 1384 | (5 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
 | 1400 | string | display string @ line 1400 | (5 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
 | 1406 | string | display string @ line 1406 | (5 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
@@ -1504,9 +1504,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 130 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 181 | constant | NOTE_WIDTH | 44 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 182 | constant | NOTE_INDENT | 37 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 131 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 182 | constant | NOTE_WIDTH | 44 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 183 | constant | NOTE_INDENT | 37 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### mars_visualization_shells.py
 

@@ -103,7 +103,7 @@ note_text = (
 
 
 # Source: SIMBAD Astronomical Database object type classification system (CDS Strasbourg)
-# Mapping of SIMBAD object types to full descriptions
+# Source+: Mapping of SIMBAD object types to full descriptions
 object_type_mapping = {
     'Ae*': 'A-type Star with emission lines',
     'AGB*': 'Asymptotic Giant Branch Star',
@@ -238,8 +238,8 @@ object_type_mapping = {
 
 
 # Source: IAU/MK (Morgan-Keenan) luminosity classification system; Gray & Corbally "Stellar Spectral Classification" (2009)
-# Mapping of Roman numerals to luminosity class descriptions
-# (Full version including sub-types: 0, Ia+, Ia, Iab, Ib, sd, D)
+# Source+: Mapping of Roman numerals to luminosity class descriptions
+# Source+: (Full version including sub-types: 0, Ia+, Ia, Iab, Ib, sd, D)
 class_mapping = {
     '0': 'Hypergiant',
     'Ia+': 'Hypergiant',

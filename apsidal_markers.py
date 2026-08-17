@@ -1846,12 +1846,12 @@ def add_keplerian_position_marker(fig, obj_name, orbital_params, current_datetim
 #
 # The existing add_closest_approach_marker finds closest approach to the
 # coordinate center (origin). This function finds closest approach between
-# TWO objects that are both plotted — e.g. New Horizons relative to Pluto
+# TWO objects that are both plotted -- e.g. New Horizons relative to Pluto
 # when both have heliocentric positions.
 
 # Source: Jupiter Hill sphere ~0.35 AU (m_J/3m_sun)^(1/3) * a_J; threshold set
-# generously at 0.5 AU to capture all close approaches. Engineering choice, not
-# a physical constant -- see compute_pairwise_encounter() for usage context.
+# Source+: generously at 0.5 AU to capture all close approaches. Engineering choice, not
+# Source+: a physical constant -- see compute_pairwise_encounter() for usage context.
 # Encounter threshold: maximum relative distance (AU) to qualify as encounter.
 # Jupiter's Hill sphere is ~0.35 AU. Start generous.
 ENCOUNTER_THRESHOLD_AU = 0.5
@@ -1862,7 +1862,7 @@ def compute_pairwise_encounter(sc_positions, target_positions, sc_dates, target_
     Find the closest approach between two objects from their position time series.
     
     Both position lists must be in the same coordinate frame (typically heliocentric).
-    Dates must be aligned — same length, same time steps. If not aligned, the function
+    Dates must be aligned -- same length, same time steps. If not aligned, the function
     uses the intersection of available dates.
     
     Parameters:
@@ -1878,7 +1878,7 @@ def compute_pairwise_encounter(sc_positions, target_positions, sc_dates, target_
                 'date_str':       formatted date string,
                 'dist_au':        minimum relative distance in AU,
                 'dist_km':        minimum relative distance in km,
-                'rel_x':          relative position x (AU) — spacecraft minus target,
+                'rel_x':          relative position x (AU) -- spacecraft minus target,
                 'rel_y':          relative position y (AU),
                 'rel_z':          relative position z (AU),
                 'sc_pos':         spacecraft position dict at encounter,
@@ -1951,7 +1951,7 @@ def compute_pairwise_encounter(sc_positions, target_positions, sc_dates, target_
                 dvx = sc_vx - tgt_vx
                 dvy = sc_vy - tgt_vy
                 dvz = sc_vz - tgt_vz
-                # Horizons velocities are in AU/day — convert to km/s
+                # Horizons velocities are in AU/day -- convert to km/s
                 v_rel = np.sqrt(dvx**2 + dvy**2 + dvz**2) * AU_PER_DAY_TO_KM_PER_S
             
             # Format date

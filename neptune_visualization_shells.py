@@ -35,7 +35,7 @@ from shared_utilities import create_sun_direction_indicator
 # Neptune Shell Creation Functions
 
 # Source: NASA Neptune Fact Sheet; Podolak et al. (1995);
-#         core ~1.2 Earth masses, ~700-800 GPa, ~5,100 degC; iron/nickel/silicate composition confirmed.
+# Source+: core ~1.2 Earth masses, ~700-800 GPa, ~5,100 degC; iron/nickel/silicate composition confirmed.
 neptune_core_info = (
             "2.4 MB PER FRAME FOR HTML.<br><br>"
             "Neptune core: At Neptune's center lies a relatively small, rocky core composed primarily of iron, nickel, and silicates. <br>" 
@@ -52,7 +52,7 @@ def create_neptune_core_shell(center_position=(0, 0, 0)):
         'opacity': 1.0,
         'name': 'Core',
         # Source: NASA Neptune Fact Sheet; Podolak et al. (1995);
-        #         core mass ~1.2 Earth masses, pressure ~700-800 GPa, temperature ~5,100 degC confirmed.
+        # Source+: core mass ~1.2 Earth masses, pressure ~700-800 GPa, temperature ~5,100 degC confirmed.
         'description': (
             "Neptune core: At Neptune's center lies a relatively small, rocky core composed primarily of iron, nickel, and silicates. <br>" 
             "Its mass is estimated to be about 1.2 times that of Earth. The pressure at the core is immense, reaching about 7 million <br>" 
@@ -108,7 +108,7 @@ def create_neptune_core_shell(center_position=(0, 0, 0)):
     return traces
 
 # Source: NASA Solar System Exploration; Kraus et al. (2017, Nature Astronomy);
-#         superionic water and diamond rain confirmed by high-pressure experiments; 10-15 Earth masses confirmed.
+# Source+: superionic water and diamond rain confirmed by high-pressure experiments; 10-15 Earth masses confirmed.
 neptune_mantle_info = (
             "2.1 MB PER FRAME FOR HTML.<br><br>"
             "Mantle: Surrounding the core is a dense mantle made up of a hot, highly compressed fluid of water, methane, and ammonia. <br> " 
@@ -127,7 +127,7 @@ def create_neptune_mantle_shell(center_position=(0, 0, 0)):
         'opacity': 0.9,
         'name': 'mantle',
         # Source: NASA Solar System Exploration; Kraus et al. (2017, Nature Astronomy);
-        #         mantle 80-85% R_N, 2,000-5,000 K, superionic water and diamond rain confirmed.
+        # Source+: mantle 80-85% R_N, 2,000-5,000 K, superionic water and diamond rain confirmed.
         'description': (
             "mantle: Surrounding the core is a dense mantle made up of a hot, highly compressed fluid of water, methane, and ammonia. <br> " 
             "This layer constitutes the majority of Neptune's mass, about 10 to 15 Earth masses. The high pressure and temperature create <br>" 
@@ -192,7 +192,7 @@ def create_neptune_mantle_shell(center_position=(0, 0, 0)):
     return traces
 
 # Source: NASA Neptune Fact Sheet; Chavez et al. (2023, Icarus); cloud cover solar cycle correlation confirmed.
-#         Wind speed 2,100 km/h is solar system record; H2/He/CH4 composition confirmed.
+# Source+: Wind speed 2,100 km/h is solar system record; H2/He/CH4 composition confirmed.
 neptune_cloud_layer_info = (
             "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
             "4.6 MB PER FRAME FOR HTML.<br><br>"
@@ -216,7 +216,7 @@ def create_neptune_cloud_layer_shell(center_position=(0, 0, 0)):
         'opacity': 1.0,
         'name': 'Cloud Layer',
         # Source: NASA Neptune Fact Sheet; Chavez et al. (2023, Icarus); wind speed 2,100 km/h solar system
-        #         record confirmed; cloud cover decrease linked to solar cycle (2024 Keck/Lick/Hubble study).
+        # Source+: record confirmed; cloud cover decrease linked to solar cycle (2024 Keck/Lick/Hubble study).
         'description': (
             "Neptune Cloud Layer<br>" 
             "(Note: toggle off the cloud layer in the legend to better see the interior structure.)<br><br>"
@@ -457,7 +457,7 @@ def create_neptune_upper_atmosphere_shell(center_position=(0, 0, 0)):
     return traces
 
 # Source: Voyager 2 Mission Archive (NASA/JPL); Ness et al. (1989, Science);
-#         47 deg tilt and 0.55 R_N offset discovered by Voyager 2, 1989.
+# Source+: 47 deg tilt and 0.55 R_N offset discovered by Voyager 2, 1989.
 neptune_magnetosphere_info = (
             "SELECT MANUAL SCALE OF AT LEAST 0.2 AU TO VISUALIZE.<br>"
             "1.4 MB PER FRAME FOR HTML.<br><br>"
@@ -591,8 +591,8 @@ def create_neptune_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 
 
     # Phase C4: info marker at first point of sunward-rotated, offset geometry
     # Source: Ness et al. (1989) Science 246:1473 -- Voyager 2 magnetometer;
-    # offset tilted dipole inclined 47 deg to rotation axis, displaced 0.55 R_N
-    # from center. Confirmed NASA "30 Years Ago: Voyager 2 Explores Neptune" (2024).    
+    # Source+: offset tilted dipole inclined 47 deg to rotation axis, displaced 0.55 R_N
+    # Source+: from center. Confirmed NASA "30 Years Ago: Voyager 2 Explores Neptune" (2024).
     magnetosphere_text = (
         "Neptune's Magnetosphere: Unlike other planets, Neptune's magnetic field is dramatically tilted <br>"
         "(47 deg from its rotation axis) and significantly offset from the planet's center by more than <br>"
@@ -829,9 +829,9 @@ neptune_radiation_belts_info = (
 def create_neptune_radiation_belts(center_position=(0, 0, 0)):
     """Creates Neptune's radiation belts with proper structure reflecting the complex magnetospheric environment."""
     # Source: Voyager 2 Mission Archive (NASA/JPL); Ness et al. (1989, Science);
-    #         Voyager 2 is the only spacecraft to visit Neptune; all belt parameters derive from 1989 flyby data.
-    #         Belt locations (1.2-2.5 R_N inner, 3.5 R_N electron, 6.0 R_N plasma sheet, 4.2 R_N cusps) confirmed.
-    # Belt names and descriptions based on current understanding
+    # Source+: Voyager 2 is the only spacecraft to visit Neptune; all belt parameters derive from 1989 flyby data.
+    # Source+: Belt locations (1.2-2.5 R_N inner, 3.5 R_N electron, 6.0 R_N plasma sheet, 4.2 R_N cusps) confirmed.
+    # Source+: Belt names and descriptions based on current understanding
     belt_regions = [
         {
             'name': 'Proton-Rich Inner Belt',
@@ -907,7 +907,7 @@ def create_neptune_radiation_belts(center_position=(0, 0, 0)):
             'opacity': 0.25,
             'variable_offset': True,  # Special handling for cusp region
             # Source: Ness et al. (1989) Science 246, 1473 -- Voyager 2 magnetometer:
-            #         Neptune dipole 47 deg tilt, 0.55 R_N offset from center.
+            # Source+: Neptune dipole 47 deg tilt, 0.55 R_N offset from center.
             'description': "The polar cusps represent funnel-shaped openings where solar wind particles can directly access <br>"
                           "Neptune's magnetosphere. Due to Neptune's tilted magnetic field, these regions demonstrate complex <br>"
                           "behavior and vary dramatically with the planet's rotation.<br><br>"
@@ -1165,8 +1165,8 @@ def create_field_aligned_currents(mag_center_x, mag_center_y, mag_center_z, tilt
     return traces
     
 # Source: NASA Planetary Ring Node; Smith et al. (1989, Science, Voyager 2 encounter);
-#         Neptune has 5 named rings (Galle, Le Verrier, Lassell, Arago, Adams) plus diffuse sheets.
-#         "13 known rings" is a high estimate; updated to 5 primary named rings per current consensus.
+# Source+: Neptune has 5 named rings (Galle, Le Verrier, Lassell, Arago, Adams) plus diffuse sheets.
+# Source+: "13 known rings" is a high estimate; updated to 5 primary named rings per current consensus.
 neptune_ring_system_info = (
                 "22.2 MB PER FRAME FOR HTML.<br><br>"
 
@@ -1345,7 +1345,7 @@ def create_neptune_ring_system(center_position=(0, 0, 0)):
             'opacity': 0.6,
             'name': 'Adams Ring (1989N1R)',
             # Source: NASA Planetary Ring Node; Smith et al. (1989); arcs first detected from Earth 1984,
-            #         confirmed Voyager 2 1989; Galatea resonance confinement confirmed.
+            # Source+: confirmed Voyager 2 1989; Galatea resonance confinement confirmed.
             'description': (
                 "Adams Ring (1989N1R): Neptune's outermost and most prominent discrete ring, located about 62,930 km from Neptune's center.<br>" 
                 "* Named after John Couch Adams, who independently predicted Neptune's existence around the same time as Le Verrier.<br>" 

@@ -698,11 +698,11 @@ SCENARIOS = [
         'description': ('Migrating heat dome, Gulf Coast -> St. Louis -> Chicago; '
                          'humid Mississippi Valley corridor, Corn Belt pattern.'),
         # Source: ERA5T lag confirmed ~5 days behind real-time, D-5 data typically
-        #   available by 12 UTC (Copernicus C3S / ECMWF CDS documentation,
-        #   retrieved 2026-06-30). No observed wet-bulb field exists yet for the
-        #   event's June 27-Jul 1 peak as of this scaffold; all peak/station
-        #   figures below are deliberately [TO-FETCH] pending a real fetch and a
-        #   fresh source check at build time -- do not backfill from recall.
+        # Source+: available by 12 UTC (Copernicus C3S / ECMWF CDS documentation,
+        # Source+: retrieved 2026-06-30). No observed wet-bulb field exists yet for the
+        # Source+: event's June 27-Jul 1 peak as of this scaffold; all peak/station
+        # Source+: figures below are deliberately [TO-FETCH] pending a real fetch and a
+        # Source+: fresh source check at build time -- do not backfill from recall.
         'briefing': (
             "THE MIGRATING DOME. A ridge centroid forecast track ran Gulf Coast "
             "-> St. Louis -> Chicago -> retreat into the High Plains, against a "

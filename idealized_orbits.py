@@ -49,10 +49,10 @@ from orbital_elements import planetary_params, parent_planets, planet_tilts
 # Dictionary of planet pole directions (J2000)
 # IAU north-pole directions (ICRF equatorial, J2000). RA/Dec in degrees.
 # Source: IAU WGCCRE report, Archinal et al. 2018, Cel. Mech. Dyn. Astron. 130:22
-#         (Table 1, planets/Sun; Table 2, Moon mean pole 269.9949/66.5392, E-terms dropped).
-# N15+ (June 2026): Sun/Mercury/Venus/Earth/Moon added so create_planet_transformation_matrix
-# yields a correct spin pole for every shell body (rotation-axis primitive). The six prior
-# entries are unchanged and cross-check exactly against the same IAU table.
+# Source+: (Table 1, planets/Sun; Table 2, Moon mean pole 269.9949/66.5392, E-terms dropped).
+# Source+: N15+ (June 2026): Sun/Mercury/Venus/Earth/Moon added so create_planet_transformation_matrix
+# Source+: yields a correct spin pole for every shell body (rotation-axis primitive). The six prior
+# Source+: entries are unchanged and cross-check exactly against the same IAU table.
 planet_poles = {
     'Sun': {'ra': 286.13, 'dec': 63.87},      # Source: IAU 2018 (Archinal et al.)
     'Mercury': {'ra': 281.01, 'dec': 61.45},  # Source: IAU 2018 (MESSENGER-updated)
@@ -2489,7 +2489,7 @@ def add_pluto_barycenter_marker(fig, date, charon_position=None):
     """
     # Barycenter distance from Pluto center in AU
     # Calculation: separation x (m_charon / (m_pluto + m_charon))
-    # = 19,596 km x (0.122 / 1.122) ~ 2,131 km ~ 0.0000142 AU
+    # Calculation+: = 19,596 km x (0.122 / 1.122) ~ 2,131 km ~ 0.0000142 AU
     BARYCENTER_DIST_AU = 0.0000142
     
     if charon_position and charon_position.get('x') is not None:
@@ -2787,7 +2787,7 @@ def add_orcus_barycenter_marker(fig, date, vanth_position=None):
     """
     # Barycenter distance from Orcus center in AU
     # Calculation: separation x (m_vanth / (m_orcus + m_vanth))
-    # = 9,000 km x (0.16 / 1.16) ~ 1,241 km ~ 0.0000083 AU
+    # Calculation+: = 9,000 km x (0.16 / 1.16) ~ 1,241 km ~ 0.0000083 AU
     BARYCENTER_DIST_AU = 0.0000083
     
     if vanth_position and vanth_position.get('x') is not None:
@@ -4663,7 +4663,7 @@ def add_earth_moon_barycenter_marker(fig, date, moon_position=None):
     """
     # Barycenter distance from Earth center in AU
     # Calculation: separation x (m_moon / (m_earth + m_moon))
-    # = 384,400 km x (0.01230 / 1.01230) ~ 4,672 km ~ 0.0000312 AU
+    # Calculation+: = 384,400 km x (0.01230 / 1.01230) ~ 4,672 km ~ 0.0000312 AU
     BARYCENTER_DIST_AU = 0.0000312
     
     if moon_position and moon_position.get('x') is not None:

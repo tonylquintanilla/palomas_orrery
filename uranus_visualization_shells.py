@@ -525,12 +525,12 @@ def create_uranus_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 0
     trace_name = 'Uranus: Magnetosphere'
 
     # Source: Ness et al. (1986) Science 233:85 -- Voyager 2 magnetometer.
-    # Dipole-vs-rotation tilt reported as 60 deg. Display uses 60 (one sig fig):
-    # a single flyby's tilt determination does not justify sub-degree precision,
-    # so 60, ~59, and the often-cited 58.6 are the same measurement and 58.6 is
-    # spurious digits. Not a 'refined value' question -- a significant-figures one.
-    # Dipole offset 0.3 R_U (~1/3 radius). Axial tilt 97.77 deg (NASA Uranus fact
-    # sheet). Sidereal rotation ~17.24 h (17h 14m).
+    # Source+: Dipole-vs-rotation tilt reported as 60 deg. Display uses 60 (one sig fig):
+    # Source+: a single flyby's tilt determination does not justify sub-degree precision,
+    # Source+: so 60, ~59, and the often-cited 58.6 are the same measurement and 58.6 is
+    # Source+: spurious digits. Not a 'refined value' question -- a significant-figures one.
+    # Source+: Dipole offset 0.3 R_U (~1/3 radius). Axial tilt 97.77 deg (NASA Uranus fact
+    # Source+: sheet). Sidereal rotation ~17.24 h (17h 14m).
     description = (
         "Uranus's Magnetosphere: tilted ~60 degrees from the rotation axis -- <br>"
         "itself tilted 97.77 degrees from the orbital plane. This produces a <br>"
@@ -621,7 +621,7 @@ uranus_radiation_belts_info = (
 def create_uranus_radiation_belts(center_position=(0, 0, 0)):
     """Creates Uranus's radiation belts."""
     # Source: NASA Voyager 2 Uranus Science Summary; Ness et al. (1986) Science -- 3-10 R_U extent,
-    # asymmetry from ~60-deg magnetic tilt, Voyager 2 (1986) sole in-situ measurement
+    # Source+: asymmetry from ~60-deg magnetic tilt, Voyager 2 (1986) sole in-situ measurement
     belt_colors = ['rgb(255, 255, 100)', 'rgb(100, 255, 150)']
     belt_names = ['Inner Radiation Belt', 'Outer Radiation Belt']
     belt_texts = [
@@ -799,7 +799,7 @@ uranus_ring_system_info = (
 )
 
 # Source: Elliot et al. (1977) Nature -- ring discovery; Voyager 2 (1986) confirmed 13 rings;
-# de Pater et al. (2006) Science -- ring properties, widths, colors; Showalter & Lissauer (2006)
+# Source+: de Pater et al. (2006) Science -- ring properties, widths, colors; Showalter & Lissauer (2006)
 def create_uranus_ring_system(center_position=(0, 0, 0)):
     """
     Creates a visualization of Uranus's ring system.

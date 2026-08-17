@@ -79,11 +79,11 @@ COMET_NUCLEUS_SIZES = {
 # long-exposure photography, and since most people are familiar with comets from
 # photographs rather than naked-eye observation, these colors match astrophotography.
 # Source: NASA Solar System Exploration (per-comet pages); ESA Giotto Mission Archive (Halley)
-#         Jones et al., Nature (2000) / Ulysses spacecraft (Hyakutake ion tail: 3.8 AU)
-#         Sekanina & Farrell (1978) (West fragmentation into 4 pieces)
-#         Sekanina (1966) (Ikeya-Seki, Kreutz sungrazer family)
-#         NASA JPL Small-Body Database (orbital elements)
-#         NASA NEOWISE Mission / IPAC (C/2020 F3)
+# Source+: Jones et al., Nature (2000) / Ulysses spacecraft (Hyakutake ion tail: 3.8 AU)
+# Source+: Sekanina & Farrell (1978) (West fragmentation into 4 pieces)
+# Source+: Sekanina (1966) (Ikeya-Seki, Kreutz sungrazer family)
+# Source+: NASA JPL Small-Body Database (orbital elements)
+# Source+: NASA NEOWISE Mission / IPAC (C/2020 F3)
 # Verified: April 2026 via Gemini fact-check
 HISTORICAL_TAIL_DATA = {
     'Halley': {
@@ -245,8 +245,8 @@ HISTORICAL_TAIL_DATA = {
     },
 
     # Source: SOHO/LASCO CCOR-1 Event Report 2026-04; JWST Early Release (nucleus)
-    #         Sky & Telescope March 14, 2026 (coma color)
-    #         JPL Horizons (perihelion distance)
+    # Source+: Sky & Telescope March 14, 2026 (coma color)
+    # Source+: JPL Horizons (perihelion distance)
     # Verified: April 2026 via Gemini fact-check
     'MAPS': {
         'max_dust_tail_length_mkm': 20,       # Estimated medium Kreutz; sky-and-tel "5-10 deg tail"
@@ -517,8 +517,8 @@ def create_maps_disintegration_marker(position_au, comet_name='MAPS'):
     )
 
     # Source: SOHO/LASCO CCOR-1 Event Report 2026-04
-    #         JWST Early Release Observations (nucleus ~400 m, March 2026)
-    #         Shell values from constants_new.py
+    # Source+: JWST Early Release Observations (nucleus ~400 m, March 2026)
+    # Source+: Shell values from constants_new.py
     # Verified: April 2026 via Gemini fact-check
     hover = (
         f"<b>MAPS (C/2026 A1) -- Nucleus Disintegrated</b><br>"
@@ -700,7 +700,7 @@ def create_maps_ghost_tail_trace(fig=None):
     n = len(xs)
 
     # Source: SOHO/LASCO CCOR-1 Event Report 2026-04; JWST Early Release Observations
-    #         Shell values from constants_new.py (verified via test_constants_provenance)
+    # Source+: Shell values from constants_new.py (verified via test_constants_provenance)
     # Verified: April 2026 via Gemini fact-check
     hover = (
         "<b>MAPS: Ghost Tail (debris arc)</b><br>"
@@ -1348,9 +1348,9 @@ def create_comet_anti_tail(center_position=(0, 0, 0), anti_tail_length_km=400000
             )
             
             # Source: NASA/ESA/STScI Hubble (WFC3/UVIS F350LP) imaging of 3I/ATLAS,
-            #         Jan 7/14/22 2026; four-jet structure (1 sunward anti-tail +
-            #         3 mini-jets at 120 deg) via Larson-Sekanina gradient filter --
-            #         Loeb & Scarmato 2026 (RNAAS); Jan 22 alignment obs. Man-To Hui (SHAO).
+            # Source+: Jan 7/14/22 2026; four-jet structure (1 sunward anti-tail +
+            # Source+: 3 mini-jets at 120 deg) via Larson-Sekanina gradient filter --
+            # Source+: Loeb & Scarmato 2026 (RNAAS); Jan 22 alignment obs. Man-To Hui (SHAO).
             mini_desc = (
                 f"Mini-jet {j+1} of {comet_name}<br>"
                 f"One of {num_mini_jets} jets at 120 deg spacing<br>"
@@ -1525,11 +1525,11 @@ def create_complete_comet_visualization(comet_name='Halley', center_position=(0,
 
 
 # Source: NASA Solar System Exploration (per-comet pages)
-#         ESA Giotto Mission Archive (Halley)
-#         Jones et al., Nature (2000) / Ulysses spacecraft (Hyakutake ion tail)
-#         Sekanina & Farrell (1978) (West fragmentation)
-#         Sekanina (1966) (Ikeya-Seki)
-#         JPL Small-Body Database (orbital elements)
+# Source+: ESA Giotto Mission Archive (Halley)
+# Source+: Jones et al., Nature (2000) / Ulysses spacecraft (Hyakutake ion tail)
+# Source+: Sekanina & Farrell (1978) (West fragmentation)
+# Source+: Sekanina (1966) (Ikeya-Seki)
+# Source+: JPL Small-Body Database (orbital elements)
 # Verified: April 2026 via Gemini fact-check
 # Info strings for GUI integration
 comet_visualization_info = {
