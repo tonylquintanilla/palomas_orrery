@@ -221,7 +221,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*118 live items; 106 need attention (`!`); 117 RICE-scored; 75 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*119 live items; 107 need attention (`!`); 118 RICE-scored; 75 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -229,6 +229,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
 | ! | L-193 | Qualified verdicts -- the token is not the whole answer | OPEN | 4.8 | 2026-08-15 |
+| ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-07 |
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
@@ -2343,6 +2344,84 @@ is now marked, joined and ratcheted. What remains here is the authority
 placement itself.
 **Ref:** L-192 (Break 5, the rule this makes true); L-186 (annotation
 grammar); `documentation/FABLE_REVIEW_worksheet_schema.md` item 5.
+
+#### [L-199] Protocol length: govern the growth, not the number
+<!-- L:199 status:OPEN upd:2026-08-17 section:A flag: rice:2/3/80/1 -->
+- **The question, Tony 2026-08-17.** The protocol is 1021 lines against
+  an earlier target of 850. It keeps growing and none of it is
+  obviously disposable.
+- **Measured @fb63e4b.** Preamble 38 (3.7%), Part 1 138 (13.5%), Part 2
+  158 (15.5%), Part 3 gates and skills 296 (29.0%), Part 4 121 (11.8%),
+  Part 5 268 (26.2%). Inside Part 5, **Version History alone is 129
+  lines, 12.6% of the whole document**.
+- **Length is not a reading problem.** 1021 lines is roughly 14,000
+  tokens. The cost is SALIENCE, not capacity: the resident layer exists
+  so the CRITICAL gates fire unprompted, and everything that is not a
+  gate competes for that. This is the document-scale form of the rule
+  Part 2 already states about the tiers -- if everything is critical,
+  nothing is.
+- **The test for what may leave is not "is it secondary".** It is
+  **does this have a trigger somewhere else**. A skill fires on task
+  match; the ledger is read at session start; a bare archive file has
+  no trigger at all. That is why the v3.37 first cut, which moved all
+  41 lessons out and left a pointer, was reversed the same day. The
+  850 number came from Claude's own recommendation when context length
+  genuinely constrained the work; it has outlived the condition that
+  produced it and should be replaced by the test rather than re-tuned.
+- **Applying the test, only one section passes.** Version History has a
+  real trigger elsewhere -- the ledger appendix below is its store, and
+  the protocol already says so. Quotables shapes voice, Part 4 shapes
+  judgment, and the resident Lessons Archive is by construction the
+  fourteen with no counterpart anywhere. Those have no trigger, but
+  firing is not their job.
+- **A store relationship that is currently false.** The protocol says
+  the full version history lives in this ledger's appendix. The
+  appendix carries v1.0 through **v3.38**; v3.39 and v3.40 exist ONLY
+  in the protocol. Push those two down BEFORE trimming anything, or the
+  trim deletes the only copy.
+- **Also worth stating: 850 may be the wrong thing to measure.** It was
+  set when the protocol was the only layer. Since v3.30 there are two,
+  and the skills carry well over a thousand lines of procedure that
+  used to live here. The number worth watching is what FRACTION of the
+  resident document is gates, not its total.
+
+**Proposal, three parts, none built.**
+1. A short sizing section in the protocol -- roughly fifteen lines --
+   carrying the trigger test, the gates-fraction measure, and a stated
+   cap on resident version-history entries. It earns its lines by
+   governing growth rather than adding to it; the document currently
+   has no rule about itself, which is how it gained 200 lines with
+   nothing objecting.
+2. Copy v3.39 and v3.40 into the ledger appendix, then reduce
+   v3.34-v3.39 in the protocol to a single pointer line, keeping the
+   two most recent entries in full. Recovers roughly 95 lines, taking
+   the protocol to about 925.
+3. One line in Part 5 naming `documentation/LESSONS_ARCHIVE.md`. The
+   file is invisible from the protocol today, which is the only real
+   defect it has.
+
+**Note: do NOT reintegrate the lessons archive.** Tony raised this on
+the reasoning that nothing reads it. Checked by reading the file rather
+than from memory: 27 entries, every one names where it still lives, and
+all four homes that a first automated probe flagged as missing are in
+fact present -- the probe was matching truncated strings. Reintegrating
+would re-add 27 restatements of rules already stated where they fire,
+grow the protocol by about 30 lines, and restore exactly the
+duplication v3.37 removed. Nothing is stranded except the record of the
+decision, and a record is supposed to sit still. The archive's own
+header already sets the standard for reopening this: put a line back if
+it turns out to be doing work its counterpart does not do, judged by
+reading. None of the 27 met that bar on 2026-08-17.
+**Note:** RICE is Claude's proposal, unratified.
+**Tony-action (decide):** approve the sizing section's content before
+it is written into the protocol -- it is a constitutional amendment,
+not a build.
+**Gap:** all three parts unbuilt. Part 2 must not run before the
+appendix repair in the bullet above.
+**Ref:** v3.37 (the reversed all-lessons cut, and why an archive has no
+trigger); v3.30 (the two-layer split that moved procedure into skills);
+`documentation/LESSONS_ARCHIVE.md`; the Protocol Version History
+appendix at the end of this ledger.
 
 ## PENDING ACTION (Tony-side)
 
