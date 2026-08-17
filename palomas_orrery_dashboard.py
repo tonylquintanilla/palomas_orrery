@@ -42,6 +42,7 @@ import subprocess
 import threading
 import queue
 import webbrowser
+import tkinter as tk
 import customtkinter as ctk
 from PIL import Image, ImageTk
 
@@ -262,9 +263,16 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
-        ("Test Provenance 1d/1e",
+        ("Test Scanner Recognition",
          "test_provenance_1d.py",
-         "Pass/fail regression tests for the Phase 1d/1e scanner mechanisms.",
+         "Proves the provenance scanner still recognizes a real citation "
+         "and still refuses a fake one. Covers shadow constants (a local "
+         "copy of a value already defined and cited in constants_new.py), "
+         "author-year forms like (Nolan et al. 2013), F/C units, and tier "
+         "labels. Half the tests are written backwards on purpose: a regex "
+         "that is too loose clears findings by matching what it should "
+         "not, and the Tier-1 count then falls, which looks like progress. "
+         "Ledger L-156, sub-steps 1d and 1e.",
          SCRIPT_DIR,
          True,
          None,
@@ -379,6 +387,110 @@ LAUNCH_GROUPS = {
     ],
 
 }
+
+# ============================================================
+# LAUNCH TARGET LABELS AND HOVER TEXT
+# ============================================================
+
+# Longest path first: a nested repo must be tested before its parent,
+# or the parent claims every file under it.
+REPO_ROOTS = (
+    (GALLERY_REPO_DIR, "Gallery"),
+    (SCRIPT_DIR, "Orrery"),
+)
+
+TOOLTIP_DELAY_MS = 400
+
+
+def launch_target_label(script, base_dir=None, args=None):
+    """'Orrery: palomas_orrery.py' -- which repo, and the path inside it.
+
+    The dashboard launches some tools with a working directory already
+    inside the repo (gallery tools run from tools/), so the path is
+    rebuilt relative to the repo ROOT rather than shown as handed to
+    the subprocess. A target outside both repos falls back to its full
+    path, which is also what an unresolvable one shows.
+    """
+    full = os.path.abspath(os.path.join(base_dir or SCRIPT_DIR, script))
+    shown = full
+    for root, label in REPO_ROOTS:
+        try:
+            rel = os.path.relpath(full, os.path.abspath(root))
+        except ValueError:
+            # Different drive on Windows. Not this repo.
+            continue
+        if not rel.startswith(os.pardir):
+            shown = "%s: %s" % (label, rel.replace(os.sep, "/"))
+            break
+    if args:
+        shown = "%s %s" % (shown, " ".join(args))
+    return shown
+
+
+class Tooltip(object):
+    """Hover text for a customtkinter widget.
+
+    Bound to the widget AND every descendant. A CTkButton is a frame
+    holding a canvas and a label; those sit on top of the frame and
+    receive the enter event instead of it, so binding the frame alone
+    shows nothing on the widget it was asked for.
+    """
+
+    def __init__(self, widget, text):
+        self.text = text
+        self.window = None
+        self.after_id = None
+        self.widget = widget
+        self._bind_tree(widget)
+
+    def _bind_tree(self, widget):
+        widget.bind("<Enter>", self._schedule, add="+")
+        widget.bind("<Leave>", self._hide, add="+")
+        widget.bind("<ButtonPress>", self._hide, add="+")
+        for child in widget.winfo_children():
+            self._bind_tree(child)
+
+    def _schedule(self, _event=None):
+        self._cancel()
+        self.after_id = self.widget.after(TOOLTIP_DELAY_MS, self._show)
+
+    def _cancel(self):
+        if self.after_id is not None:
+            try:
+                self.widget.after_cancel(self.after_id)
+            except Exception:
+                pass
+            self.after_id = None
+
+    def _show(self):
+        if self.window is not None or not self.text:
+            return
+        try:
+            x = self.widget.winfo_rootx()
+            y = self.widget.winfo_rooty() + self.widget.winfo_height() + 6
+        except Exception:
+            return
+        self.window = tk.Toplevel(self.widget)
+        self.window.wm_overrideredirect(True)
+        self.window.wm_geometry("+%d+%d" % (x, y))
+        try:
+            self.window.wm_attributes("-topmost", True)
+        except Exception:
+            # Not supported everywhere; the tooltip still shows.
+            pass
+        tk.Label(
+            self.window, text=self.text, justify="left",
+            background=COLOR_SURFACE_HOVER, foreground=COLOR_TEXT,
+            relief="solid", borderwidth=1,
+            font=("Consolas", 10), padx=8, pady=4
+        ).pack()
+
+    def _hide(self, _event=None):
+        self._cancel()
+        if self.window is not None:
+            self.window.destroy()
+            self.window = None
+
 
 # ============================================================
 # EXTERNAL LINKS
@@ -728,6 +840,14 @@ class PalomasOrreryDashboardFrame(ctk.CTkFrame):
             state="normal" if exists else "disabled"
         )
         btn.pack(side="right", padx=(12, 0))
+
+        # Name the repo and file this button runs. A missing script shows
+        # the full path instead, so "Not Found" says where it looked.
+        if exists:
+            hover = launch_target_label(script, base_dir, args)
+        else:
+            hover = "Not found: %s" % script_path
+        Tooltip(btn, hover)
 
     def _launch(self, script, base_dir=None, interactive=False, args=None):
         """Launch a Python script as a subprocess.

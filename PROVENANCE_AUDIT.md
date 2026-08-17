@@ -2,8 +2,8 @@
 
 Generated: August 16, 2026
 Files scanned: 128
-Total findings: 889
-Constants: 102 | Dicts: 38 | Display strings: 749
+Total findings: 892
+Constants: 105 | Dicts: 38 | Display strings: 749
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -19,14 +19,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260817T030427Z | `5840145` | 128 | 892 | 206 | 576 | 108 | 2 |
+| 20260817T024745Z | `5840145` | 129 | 890 | 206 | 576 | 106 | 2 |
 | 20260817T022241Z | `f88ad94` | 128 | 889 | 206 | 576 | 105 | 2 |
 | 20260816T234343Z | `227f5b2` | 127 | 889 | 206 | 576 | 105 | 2 |
 | 20260816T231626Z | `227f5b2` | 128 | 889 | 206 | 576 | 105 | 2 |
 | 20260816T192607Z | `86f529a` | 128 | 889 | 206 | 576 | 105 | 2 |
-| 20260816T192437Z | `86f529a` | 128 | 889 | 206 | 576 | 105 | 2 |
-| 20260816T191941Z | `86f529a` | 127 | 889 | 206 | 576 | 105 | 2 |
 
-Change since the previous run: total +0, Tier-1 +0.
+Change since the previous run: total +2, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -61,7 +61,7 @@ No file's Tier-1 count rose.
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 206 |
 | 2 | 10-15 | REVIEW | 576 |
-| 3 | 5-9 | LOW PRIORITY | 105 |
+| 3 | 5-9 | LOW PRIORITY | 108 |
 | 4 | 1-4 | LOWEST PRIORITY | 2 |
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
@@ -115,6 +115,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `apsidal_markers.py` | orrery | 3 | 1 | 0 | 0 | 4 |
 | `paleoclimate_visualization.py` | earth_science | 4 | 0 | 0 | 0 | 4 |
 | `sgr_a_visualization_core.py` | orrery | 1 | 3 | 0 | 0 | 4 |
+| `palomas_orrery_dashboard.py` | orrery | 0 | 0 | 4 | 0 | 4 |
 | `skills_index.py` | dev_tools | 0 | 0 | 4 | 0 | 4 |
 | `worksheet_checker.py` | orrery | 0 | 0 | 4 | 0 | 4 |
 | `coordinate_system_guide.py` | orrery | 2 | 1 | 0 | 0 | 3 |
@@ -124,10 +125,10 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `visualization_3d.py` | stars | 0 | 3 | 0 | 0 | 3 |
 | `dep_trace.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
 | `ledger_index.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
+| `maintenance_run.py` | orrery | 0 | 0 | 3 | 0 | 3 |
 | `measure_perframe_elements.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
 | `module_atlas.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
 | `palomas_orrery.py` | orrery | 0 | 0 | 3 | 0 | 3 |
-| `palomas_orrery_dashboard.py` | orrery | 0 | 0 | 3 | 0 | 3 |
 | `provenance_history.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
 | `exoplanet_systems.py` | stars | 0 | 0 | 3 | 0 | 3 |
 | `object_type_analyzer.py` | orrery | 2 | 0 | 0 | 0 | 2 |
@@ -146,7 +147,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `visualization_utils.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `add_docstrings.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `data_inventory.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
-| `maintenance_run.py` | orrery | 0 | 0 | 1 | 0 | 1 |
 | `osculating_cache_manager.py` | orrery | 0 | 0 | 1 | 0 | 1 |
 | `sgr_a_visualization_animation.py` | orrery | 0 | 0 | 1 | 0 | 1 |
 | `test_reset_completeness.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
@@ -162,7 +162,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 42 | 91 | 468 | 58 | 2 | 619 |
+| Orrery (solar system + orbital mechanics) | 42 | 91 | 468 | 61 | 2 | 622 |
 | Earth System | 13 | 105 | 71 | 2 | 0 | 178 |
 | Stars (stellar neighborhood) | 9 | 9 | 37 | 6 | 0 | 52 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 39 | 0 | 39 |
@@ -1505,6 +1505,8 @@ is planned for a future session.
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 130 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 181 | constant | NOTE_WIDTH | 44 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 182 | constant | NOTE_INDENT | 37 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### mars_visualization_shells.py
 
@@ -1572,9 +1574,10 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 65 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 66 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 421 | dict | SECTION_SYMBOLS[...] | (4 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 66 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 67 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 402 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 533 | dict | SECTION_SYMBOLS[...] | (4 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### pluto_visualization_shells.py
 

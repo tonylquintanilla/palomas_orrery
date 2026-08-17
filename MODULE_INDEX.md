@@ -10,18 +10,25 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 128  
-**Total Lines of Code (non-blank):** 100,077  
-**Total Public Functions/Classes:** 1,110
+**Total Python Files:** 130  
+**Total Lines of Code (non-blank):** 100,715  
+**Total Public Functions/Classes:** 1,120
 
 ## Classification Coverage
 
-**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
+- `patch_L196_10_full_verdicts.py`
+- `patch_L196_9_launch_tooltips.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 - `worksheet_keys.py`
+
+**Undetermined domain (2).** No valid `Domain:` tag.
+
+- `patch_L196_10_full_verdicts.py`
+- `patch_L196_9_launch_tooltips.py`
 
 
 ---
@@ -34,7 +41,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,938 lines) |
 | `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,455 lines) |
-| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (968 lines) |
+| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (1,071 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
 ---
@@ -199,10 +206,10 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `export_orbit_cache.py` | Phase 1b desktop devtool: read the local orbit caches and write web-servable orbit/position files for the interactive gallery. (617 lines) |
 | `food_insecurity_generator.py` | IPC acute food-insecurity KMZ layer (Sudan, current period). (702 lines) |
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (710 lines) |
-| `maintenance_run.py` | - L-188. One command, the whole maintenance suite. (268 lines) |
+| `maintenance_run.py` | - L-188. One command, the whole maintenance suite. (294 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (954 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (955 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (2,947 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (330 lines) |
@@ -210,7 +217,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_constants_provenance.py` | Regression tests for verified numeric constants. (284 lines) |
 | `test_cross_checked.py` | Regression tests for cross-check annotations. (431 lines) |
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (206 lines) |
-| `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (469 lines) |
+| `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (477 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (113 lines) |
 | `test_worksheet_checker.py` | - L-192. Can each layer actually fail? (501 lines) |
 | `test_worksheet_request_builder.py` | - L-195 / L-192. Does the marker join actually join, and can it fail? (190 lines) |
@@ -224,6 +231,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
+| `patch_L196_10_full_verdicts.py` | - finish the sentences the maintenance runner was cutting off, and name the 1d/1e dashboard card for what it checks. (204 lines) |
+| `patch_L196_9_launch_tooltips.py` | - dashboard launch-button hover text, plus a self-explanatory summary line for the 1d/1e checker. (296 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |

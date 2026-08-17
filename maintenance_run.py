@@ -116,7 +116,7 @@ CHECKERS = [
     ('Constants relations', ['test_constants_provenance.py'], None),
     ('Cross-check annotations', ['test_cross_checked.py'], None),
     ('Citation inheritance', ['test_citation_inheritance.py'], None),
-    ('Provenance 1d/1e', ['test_provenance_1d.py'], None),
+    ('Scanner recognition 1d/1e', ['test_provenance_1d.py'], None),
     ('Reset completeness', ['test_reset_completeness.py'], None),
     ('Orbit cache', ['test_orbit_cache.py'], None),
     ('Worksheet checker', ['worksheet_checker.py'], 'WORKSHEET CHECK:'),
@@ -176,6 +176,39 @@ def line_containing(text, hint):
         if hint in line:
             return line.strip()
     return ''
+
+
+NOTE_WIDTH = 44
+NOTE_INDENT = 37        # matches '  %-25s %6.1fs  ' below
+
+
+def wrapped(text, width=NOTE_WIDTH):
+    """The whole sentence across as many lines as it needs.
+
+    A verdict is the one line of a tool's output anybody reads, so it
+    does not get an ellipsis. A single token longer than the width --
+    a file path, usually -- overhangs rather than being cut in half.
+    """
+    lines = []
+    current = ''
+    for word in (text or '').split():
+        candidate = word if not current else current + ' ' + word
+        if len(candidate) > width and current:
+            lines.append(current)
+            current = word
+        else:
+            current = candidate
+    if current:
+        lines.append(current)
+    return lines or ['']
+
+
+def print_row(label, seconds, note):
+    """One tool's row: label, elapsed, and its verdict in full."""
+    lines = wrapped(note)
+    print('  %-25s %6.1fs  %s' % (label, seconds, lines[0]))
+    for extra in lines[1:]:
+        print(' ' * NOTE_INDENT + extra)
 
 
 def fit(text, width=44):
@@ -270,7 +303,7 @@ def main():
         else:
             note = ('unchanged (%d checked, not written)'
                     % len(outputs))
-        print('  %-24s %6.1fs  %s' % (label, seconds, note))
+        print_row(label, seconds, note)
         results.append((label, rc, seconds, note, output, False))
     print()
 
@@ -283,12 +316,12 @@ def main():
         if rc is None:
             note = 'DID NOT RUN'
         elif rc == 0:
-            note = fit(verdict or last_meaningful_line(output)) or 'passed'
+            note = (verdict or last_meaningful_line(output)) or 'passed'
         else:
             note = 'FAILED (exit %d)' % rc
             if verdict:
                 note += ' -- ' + fit(verdict, 30)
-        print('  %-24s %6.1fs  %s' % (label, seconds, note))
+        print_row(label, seconds, note)
         results.append((label, rc, seconds, note, output, True))
     print()
 

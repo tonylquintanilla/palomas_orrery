@@ -581,7 +581,15 @@ def main():
             print(f"    {msg}")
         return 1
 
-    print("\nAll Phase 1d/1e tests passed.")
+    print("\nPhase 1d/1e (L-156) pins the scanner's recognition rules: "
+          "shadow\nconstants, author-year citation forms, F/C units, "
+          "tier labels. Half\nthe tests are negative, because a regex "
+          "that is too loose clears\nfindings by matching what it "
+          "should not, and the tier totals then move\nin the direction "
+          "that looks like success.")
+    # The runner quotes the LAST non-blank line and trims it to 44
+    # characters, so the verdict goes last and stays one short line.
+    print("\nReal citations recognized, fake ones refused.")
     return 0
 
 
