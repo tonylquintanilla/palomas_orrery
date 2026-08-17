@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: August 16, 2026
-Files scanned: 127
+Files scanned: 128
 Total findings: 889
 Constants: 102 | Dicts: 38 | Display strings: 749
 
@@ -19,12 +19,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260817T022241Z | `f88ad94` | 128 | 889 | 206 | 576 | 105 | 2 |
 | 20260816T234343Z | `227f5b2` | 127 | 889 | 206 | 576 | 105 | 2 |
 | 20260816T231626Z | `227f5b2` | 128 | 889 | 206 | 576 | 105 | 2 |
 | 20260816T192607Z | `86f529a` | 128 | 889 | 206 | 576 | 105 | 2 |
 | 20260816T192437Z | `86f529a` | 128 | 889 | 206 | 576 | 105 | 2 |
 | 20260816T191941Z | `86f529a` | 127 | 889 | 206 | 576 | 105 | 2 |
-| 20260816T190911Z | `86f529a` | 127 | 889 | 206 | 576 | 105 | 2 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
@@ -151,8 +151,8 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `sgr_a_visualization_animation.py` | orrery | 0 | 0 | 1 | 0 | 1 |
 | `test_reset_completeness.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `worksheet_keys.py` | orrery | 0 | 0 | 1 | 0 | 1 |
-| `worksheet_request_builder.py` | orrery | 0 | 0 | 1 | 0 | 1 |
 | `export_orbit_cache.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
+| `worksheet_request_builder.py` | orrery | 0 | 0 | 1 | 0 | 1 |
 
 ---
 
@@ -1504,7 +1504,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 129 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 130 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### mars_visualization_shells.py
 
@@ -1537,9 +1537,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 103 | dict | ROLE_MAP[...] | (123 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 367 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 390 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 103 | dict | ROLE_MAP[...] | (124 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 368 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 391 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 
@@ -1693,7 +1693,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 85 | constant | CLAIM_EXCERPT | 90 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 91 | constant | CLAIM_EXCERPT | 90 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
 
 ---
 

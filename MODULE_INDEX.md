@@ -10,9 +10,9 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 127  
-**Total Lines of Code (non-blank):** 99,823  
-**Total Public Functions/Classes:** 1,100
+**Total Python Files:** 128  
+**Total Lines of Code (non-blank):** 100,077  
+**Total Public Functions/Classes:** 1,110
 
 ## Classification Coverage
 
@@ -199,7 +199,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `export_orbit_cache.py` | Phase 1b desktop devtool: read the local orbit caches and write web-servable orbit/position files for the interactive gallery. (617 lines) |
 | `food_insecurity_generator.py` | IPC acute food-insecurity KMZ layer (Sudan, current period). (702 lines) |
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (710 lines) |
-| `maintenance_run.py` | - L-188. One command, the whole maintenance suite. (267 lines) |
+| `maintenance_run.py` | - L-188. One command, the whole maintenance suite. (268 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
 | `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (954 lines) |
@@ -213,9 +213,10 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (469 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (113 lines) |
 | `test_worksheet_checker.py` | - L-192. Can each layer actually fail? (501 lines) |
+| `test_worksheet_request_builder.py` | - L-195 / L-192. Does the marker join actually join, and can it fail? (190 lines) |
 | `verify_orbit_cache.py` | Safely verify and repair orbit_paths.json (172 lines) |
 | `worksheet_checker.py` | - L-192. Does the worksheet say what the annotation claims it says? (1,421 lines) |
-| `worksheet_request_builder.py` | Worksheet request builder -- ask the question the checker can read. (257 lines) |
+| `worksheet_request_builder.py` | Worksheet request builder -- ask the question the checker can read. (320 lines) |
 
 ---
 

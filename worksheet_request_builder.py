@@ -72,8 +72,14 @@ OUTPUT_DIR = os.path.join('documentation', 'worksheets')
 VERDICTED_LEG = 'Source'
 CONTEXT_LEGS = ('Ref', 'Also', 'See', 'Derived', 'Calculation')
 
+# The optional `+` is the continuation marker stage 1 placed on wrapped
+# citation lines (L-195). It is leg-specific on purpose: a `# Ref+:`
+# sitting under a `# Source:` line is a mismatch that can be named,
+# where a generic continuation marker would have nothing to compare
+# against.
 LEG_RE = re.compile(
-    r'^\s*#\s*(%s):\s*(.*)$' % '|'.join((VERDICTED_LEG,) + CONTEXT_LEGS))
+    r'^\s*#\s*(%s)(\+)?:\s*(.*)$'
+    % '|'.join((VERDICTED_LEG,) + CONTEXT_LEGS))
 
 # Columns of the response table, in order. The header text is what the
 # checker's HEADER_ROLES maps; changing a string here without changing
@@ -99,36 +105,82 @@ def excerpt(text, limit=CLAIM_EXCERPT):
 
 
 def legs_of(attached_text):
-    """(verdicted, context) citation legs from a comment run.
+    """(verdicted, context, problems, joined) legs from a comment run.
 
     Returns the `# Source:` lines and, separately, every other leg.
     Both are lists: a run carrying two Source lines is a malformation
     (L-195) and this reports both rather than picking one.
+
+    A citation too long for one line continues on a marked line naming
+    the leg it continues -- `# Source+:` under `# Source:`. Those are
+    joined back onto their leg here, so the worksheet quotes the whole
+    citation rather than its first line.
+
+    `problems` holds continuation markers that could not be joined: one
+    naming a different leg than the line above it, or one with no leg
+    above it at all. Their text is reported and NOT joined, because
+    attaching it to the wrong authority is the failure this marker was
+    made leg-specific to catch. `joined` counts the lines that did join,
+    so a run that joins nothing says so rather than looking identical to
+    a run with nothing to join.
+
+    An UNMARKED continuation is still dropped, silently, exactly as
+    before. Making that loud is stage 2 work; see L-195.
     """
     verdicted = []
     context = []
+    problems = []
+    joined = 0
+    open_label = None
+    open_leg = None
     for line in (attached_text or '').splitlines():
         match = LEG_RE.match(line)
         if not match:
+            # Any non-leg line closes the run a continuation could
+            # attach to. Without this a marker separated from its leg by
+            # unrelated prose would join across the gap.
+            open_label = None
+            open_leg = None
             continue
-        label, body = match.group(1), match.group(2).strip()
+        label = match.group(1)
+        marker = match.group(2)
+        body = match.group(3).strip()
+        if marker:
+            if open_label is None:
+                problems.append(
+                    '`%s+:` continuation with no leg above it to join'
+                    % label)
+            elif label != open_label:
+                problems.append(
+                    '`%s+:` continuation under a `%s:` leg'
+                    % (label, open_label))
+            else:
+                open_leg[-1] = (open_leg[-1] + ' ' + body).strip()
+                joined += 1
+            continue
         if label == VERDICTED_LEG:
             verdicted.append(body)
+            open_leg = verdicted
         else:
             context.append('%s: %s' % (label, body))
-    return verdicted, context
+            open_leg = context
+        open_label = label
+    return verdicted, context, problems, joined
 
 
 class Request(object):
     """One pre-printed row: a key, a claim, and the code's value."""
 
-    def __init__(self, key, claim, code_value, where, cited, context):
+    def __init__(self, key, claim, code_value, where, cited, context,
+                 problems=(), joined=0):
         self.key = key
         self.claim = claim
         self.code_value = code_value
         self.where = where
         self.cited = cited          # list of `# Source:` bodies
         self.context = context      # list of other legs, read-only
+        self.problems = list(problems)  # markers that could not join
+        self.joined = joined        # continuation lines joined on
         self.row_id = ''
 
 
@@ -139,14 +191,15 @@ def requests_for_claim(claim, source_text):
     claim it makes, numbered from 1 in the order the scanner finds
     them -- the same order the checker's ordinal means.
     """
-    cited, context = legs_of(claim.unit.attached_text)
+    cited, context, problems, joined = legs_of(claim.unit.attached_text)
     where = '%s:%d' % (os.path.basename(claim.path), claim.unit.line_start)
 
     if claim.unit.kind == 'constant':
         key = wk.key_for_site(claim.path, source_text,
                               claim.unit.line_start, claim.label, None)
         return [Request(key, claim.label,
-                        claim.unit.value_str, where, cited, context)]
+                        claim.unit.value_str, where, cited, context,
+                        problems, joined)]
 
     rows = []
     values, _dropped = wc.physical_claims(claim.unit)
@@ -154,7 +207,8 @@ def requests_for_claim(claim, source_text):
     for index, (_value, raw) in enumerate(values, start=1):
         key = wk.key_for_site(claim.path, source_text,
                               claim.unit.line_start, claim.label, index)
-        rows.append(Request(key, excerpt(text), raw, where, cited, context))
+        rows.append(Request(key, excerpt(text), raw, where,
+                            cited, context, problems, joined))
     return rows
 
 
@@ -242,6 +296,10 @@ def render(requests, batch, sha, repo_url, skipped):
         for body in request.context:
             out.append('- Also cited, context only, NOT verdicted: %s'
                        % body)
+        for note in request.problems:
+            out.append('- **Malformed continuation marker:** %s. The '
+                       'text on that line is NOT part of the cited '
+                       'source above, and was not joined to it.' % note)
         out.append('')
 
     out.append('## Response table')
@@ -280,6 +338,14 @@ def main():
 
     print('%d rows over %d distinct keys.'
           % (len(requests), len({r.key for r in requests})))
+    # Printed on every run, including zero. A join that fired on nothing
+    # is otherwise indistinguishable from a corpus with nothing to join.
+    print('%d continuation line(s) joined onto their leg.'
+          % sum(r.joined for r in requests))
+    flawed = [r for r in requests if r.problems]
+    if flawed:
+        print('%d row(s) carry a malformed continuation marker -- '
+              'listed in the output.' % len(flawed))
     if skipped:
         print('%d file(s) not reached -- listed in the output.'
               % len(skipped))

@@ -240,6 +240,7 @@ ROLE_MAP = {
     'test_provenance_1d':                     'devtool',
     'test_reset_completeness':                'devtool',
     'test_worksheet_checker':                 'devtool',
+    'test_worksheet_request_builder':         'devtool',
     'verify_orbit_cache':                     'devtool',
     'worksheet_checker':                      'devtool',
     'worksheet_request_builder':              'devtool',
