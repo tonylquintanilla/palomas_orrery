@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: August 17, 2026
-Files scanned: 129
-Total findings: 1023
-Constants: 105 | Dicts: 38 | Display strings: 880
+Files scanned: 128
+Total findings: 1024
+Constants: 106 | Dicts: 38 | Display strings: 880
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -19,14 +19,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260817T181419Z | `98b29f0` | 128 | 1024 | 289 | 620 | 113 | 2 |
+| 20260817T180615Z | `98b29f0` | 129 | 1023 | 289 | 620 | 112 | 2 |
 | 20260817T150907Z | `fb63e4b` | 129 | 1023 | 289 | 620 | 112 | 2 |
 | 20260817T132707Z | `ce84f05` | 129 | 1023 | 289 | 620 | 112 | 2 |
 | 20260817T043645Z | `f08ed48` | 128 | 1023 | 289 | 620 | 112 | 2 |
 | 20260817T041304Z | `2d5459f` | 128 | 1023 | 289 | 620 | 112 | 2 |
-| 20260817T033347Z | `01a1b8a` | 128 | 892 | 206 | 576 | 108 | 2 |
-| 20260817T031933Z | `01a1b8a` | 128 | 892 | 206 | 576 | 108 | 2 |
 
-Change since the previous run: total +0, Tier-1 +0.
+Change since the previous run: total +1, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -61,7 +61,7 @@ No file's Tier-1 count rose.
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 289 |
 | 2 | 10-15 | REVIEW | 620 |
-| 3 | 5-9 | LOW PRIORITY | 112 |
+| 3 | 5-9 | LOW PRIORITY | 113 |
 | 4 | 1-4 | LOWEST PRIORITY | 2 |
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
@@ -138,6 +138,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `sgr_a_visualization_animation.py` | orrery | 1 | 0 | 1 | 0 | 2 |
 | `close_approach_data.py` | orrery | 0 | 1 | 1 | 0 | 2 |
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
+| `worksheet_request_builder.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `orbital_elements.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `data_acquisition.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `exoplanet_orbits.py` | stars | 1 | 0 | 0 | 0 | 1 |
@@ -153,7 +154,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `osculating_cache_manager.py` | orrery | 0 | 0 | 1 | 0 | 1 |
 | `test_reset_completeness.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `worksheet_keys.py` | orrery | 0 | 0 | 1 | 0 | 1 |
-| `worksheet_request_builder.py` | orrery | 0 | 0 | 1 | 0 | 1 |
 | `export_orbit_cache.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 
 ---
@@ -164,7 +164,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 42 | 125 | 497 | 65 | 2 | 689 |
+| Orrery (solar system + orbital mechanics) | 42 | 125 | 497 | 66 | 2 | 690 |
 | Earth System | 13 | 150 | 81 | 2 | 0 | 233 |
 | Stars (stellar neighborhood) | 11 | 12 | 42 | 6 | 0 | 60 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 39 | 0 | 39 |
@@ -1889,7 +1889,8 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 118 | constant | CLAIM_EXCERPT | 90 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 120 | constant | CLAIM_EXCERPT | 90 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 385 | constant | HASH_CHARS | 8 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ---
 

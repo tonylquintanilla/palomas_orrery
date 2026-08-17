@@ -189,32 +189,32 @@ INNER_CORONA_RADII = 3
 # Cross-checked: Gemini 2026-08-02 -- Golub & Pasachoff (worksheet_gemini_constants_remaining.md)
 
 OUTER_CORONA_RADII = 50
-# Source: Various; F-corona envelope extends to ~50 R_sun
-# Ref: Mann et al. (2004), A&A 414:1127
+# Source: Mann et al. (2004), A&A 414:1127
+# See: Various; F-corona envelope extends to ~50 R_sun
 # Note: Visualization boundary for F-corona envelope; not a sharp physical edge
 
 # New shells (added April 2026)
 STREAMER_BELT_RADII = 6.0
-# Source: Eclipse observations; helmet streamers extend 4-6 R_sun
-# Ref: Golub & Pasachoff (2010); DeForest, Howard & McComas (2014), ApJ 787:124
+# Source: Golub & Pasachoff (2010); DeForest, Howard & McComas (2014), ApJ 787:124
+# See: Eclipse observations; helmet streamers extend 4-6 R_sun
 # Note: Visualization cutoff at upper end of 4-6 R_sun observed range;
 #   streamer-belt structure remains observable beyond 6 R_sun.
 # Cross-checked: Gemini 2026-08-02 -- Golub & Pasachoff (worksheet_gemini_constants_remaining.md)
 # Cross-checked: GPT 2026-08-02 -- DeForest et al. (constants_remaining_independent_verification_gpt.md)
 
 ROCHE_LIMIT_RADII = 3.45
-# Source: Fluid Roche limit formula: d = 2.44 * R * (rho_sun/rho_comet)^(1/3)
+# Source: Murray & Dermott, "Solar System Dynamics" (1999), Sec. 4.6
+# Derived: Fluid Roche limit formula: d = 2.44 * R * (rho_sun/rho_comet)^(1/3)
 # Calculation: 2.44 * 1.0 * (1408/500)^(1/3) = 3.45 R_sun
 # Calculation+: Using rho_sun = 1408 kg/m3, rho_comet ~ 500 kg/m3
-# Ref: Murray & Dermott, "Solar System Dynamics" (1999), Sec. 4.6
 # Cross-checked: Claude 2026-08-02 -- formula verified (worksheet_claude_constants_new.md)
 # Cross-checked: GPT 2026-08-02 -- formula verified (constants_new_citation_verification_gpt.md)
 # Note: Roche limit is NOT absolute; tensile strength allows survival
 # inside it. Ikeya-Seki survived at 1.66 R_sun.
 
 ALFVEN_SURFACE_RADII = 18.8
-# Source: Parker Solar Probe first crossing, April 28, 2021
-# Ref: Kasper et al. (2021), Phys. Rev. Lett. 127:255101
+# Source: Kasper et al. (2021), Phys. Rev. Lett. 127:255101
+# See: Parker Solar Probe first crossing, April 28, 2021
 # Also: https://www.nasa.gov/feature/goddard/2021/nasa-enters-the-solar-atmosphere
 # Note: Varies 10-20 R_sun with solar activity; 18.8 is the measured crossing
 # HELIOCENTRIC: from Sun center. NASA/APL press releases word it as altitude
@@ -228,16 +228,16 @@ ALFVEN_SURFACE_RADII = 18.8
 # ============================================================
 
 TERMINATION_SHOCK_AU = 94
-# Source: Voyager 1 crossed at 94 AU (Dec 2004)
-# Ref: Stone et al. (2005), Science 309:2017
+# Source: Stone et al. (2005), Science 309:2017
+# See: Voyager 1 crossed at 94 AU (Dec 2004)
 # Also: Voyager 2 crossed at 84 AU (Aug 2007) -- asymmetric
 # Cross-checked: Claude 2026-08-02 -- Stone et al. (worksheet_claude_constants_new.md)
 # Cross-checked: GPT 2026-08-02 -- Stone et al. (constants_new_citation_verification_gpt.md)
 
 HELIOPAUSE_RADII = 26148
 # Note: This is in solar radii, not AU. 121.6 AU * 149597870.7 / 695700 = 26148 R_sun
-# Source: Voyager 1 crossed heliopause at ~121.6 AU (Aug 2012)
-# Ref: Gurnett et al. (2013), Science 341:1489
+# Source: Gurnett et al. (2013), Science 341:1489
+# See: Voyager 1 crossed heliopause at ~121.6 AU (Aug 2012)
 # Corrected 2026-08-02: 26449 -> 26148 (prior comment used 123 AU;
 #   Gurnett source says 121.6 AU; both checkers independently found the error)
 # Cross-checked: Claude 2026-08-02 -- Gurnett et al. (worksheet_claude_constants_new.md)
@@ -277,8 +277,8 @@ GRAVITATIONAL_INFLUENCE_RANGE_AU = (100000, 200000)
 
 # Spacecraft reference
 PARKER_CLOSEST_RADII = 9.86
-# Source: Parker Solar Probe perihelion 22, Dec 24, 2024
-# Ref: https://parkersolarprobe.jhuapl.edu/The-Mission/index.php
+# Source: https://parkersolarprobe.jhuapl.edu/The-Mission/index.php
+# See: Parker Solar Probe perihelion 22, Dec 24, 2024
 # Corrected: 2026-04-15 per Gemini review -- 8.86 was surface altitude,
 #   9.86 is distance from Sun center (consistent with other shell radii).
 #   Perihelion number corrected from 21 to 22.
