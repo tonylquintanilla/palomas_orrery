@@ -221,13 +221,15 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*119 live items; 107 need attention (`!`); 118 RICE-scored; 75 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*122 live items; 110 need attention (`!`); 121 RICE-scored; 75 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
+| ! | L-201 | Request selection -- ask the builder for fewer rows | OPEN | 5.4 | 2026-08-17 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
+| ! | L-200 | The `# Resolved:` leg -- record a verdict that landed | OPEN | 5.1 | 2026-08-17 |
 | ! | L-193 | Qualified verdicts -- the token is not the whole answer | OPEN | 4.8 | 2026-08-15 |
 | ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
@@ -240,6 +242,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-08-07 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
+| ! | L-202 | JSON worksheet format, with markdown as fallback | OPEN | 2.2 | 2026-08-17 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
@@ -2422,6 +2425,110 @@ appendix repair in the bullet above.
 trigger); v3.30 (the two-layer split that moved procedure into skills);
 `documentation/LESSONS_ARCHIVE.md`; the Protocol Version History
 appendix at the end of this ledger.
+
+#### [L-200] The `# Resolved:` leg -- record a verdict that landed
+<!-- L:200 status:OPEN upd:2026-08-17 section:A flag: rice:2/3/85/1 -->
+- **What it is.** A record-only annotation leg naming the worksheet row
+  whose verdict caused an edit, and the ledger handle that authorized
+  it. Example shape:
+  `# Resolved: <batch> <key> -- citation refuted, Source replaced (L-2xx)`
+- **Why it is needed now.** The pilot ends at re-verification in the
+  code (2026-08-17 ruling). Without this leg, an annotation edited in
+  response to a verdict is indistinguishable from an unexplained edit,
+  and the only record of which is which lives in a handoff.
+- **It cites the KEY, never the row number.** `row_id` is positional and
+  renumbers whenever the corpus changes; the key
+  (`module.py::enclosing::label::cN`) is stable. Same failure the ledger
+  already records for per-handoff item numbers.
+- **Deliberately NOT in `CONTEXT_LEGS`.** As an unknown label it is
+  invisible to the request, which is correct: a row dispatched a second
+  time must not show the responder what the last one concluded. A
+  context leg would anchor the way a Claude-derived figure anchors
+  Gemini.
+- **Measured, not assumed.** A `# Resolved:` line added to a real block
+  in the patched sandbox: 100 rows, 0 unmarked, 0 problems, 153 joins --
+  unchanged. It reads as a label, so it closes a leg run rather than
+  tripping the L-196 ratchet. Nothing in the builder has to change.
+- **The check is linkage, not meaning.** Three existence facts: the leg
+  parses, it names a worksheet row that exists, and that row's citation
+  verdict was one requiring an edit. Refuses on a leg pointing at a row
+  that does not exist. Prints how many legs it examined, so a clean run
+  says what it looked at.
+**Note:** RICE is Claude's proposal, unratified.
+**Gap:** unbuilt. Fields depend on nothing outstanding -- reader count
+was removed from its critical path 2026-08-17.
+**Ref:** L-192 (Break 5); L-196 (the ratchet it must not trip); L-201.
+
+#### [L-201] Request selection -- ask the builder for fewer rows
+<!-- L:201 status:OPEN upd:2026-08-17 section:A flag: rice:2/3/90/1 -->
+- **The defect.** `build()` returns the whole annotated corpus and
+  `main()` renders every row -- 100 rows over 52 sites at HEAD. There is
+  no way to ask for fewer, so producing a pilot slice today means
+  hand-editing the generated file, which breaks the request's own
+  do-not-edit instruction and yields a slice no second run reproduces.
+- **A selection is code, not typing.** Named entries in the module, each
+  a name, a one-line purpose, and a predicate. `main()` lists them at
+  the prompt; blank means the whole corpus, so today's behaviour is the
+  default.
+- **Ships with exactly two:** `all`, and `constants_new` (the pilot's
+  23 rows). Stratified caps from the design note are NOT built --
+  decision 5 removed the need for them.
+- **Selection runs AFTER the L-196 refusal, never before.** Excluding a
+  site must never excuse an unmarked continuation; a ratchet with a
+  bypass is not a ratchet.
+- **The request records its own selection:** name, count against corpus
+  size ("23 of 100"), and the statement that keys identify rows.
+- **Checker emits JSON findings** alongside `WORKSHEET_CHECK.md`,
+  carrying routed rows by key. Precedent:
+  `data/worksheet_check_state.json`.
+- **A key list is legitimate only when the checker wrote it.** Never one
+  a person typed. The test is whether the list can be regenerated.
+- **The key-list consumer ships WITH this item** (Tony, 2026-08-17). The
+  earlier case for deferring it was that building the consumer meant
+  inventing the producer's format; the JSON findings emission removes
+  that, since the producer exists in the same patch. What remained
+  against it was an unexercised path that looks available -- weaker than
+  the risk of the rule being written down and not read under pressure.
+**Note:** RICE is Claude's proposal, unratified.
+**Gap:** unbuilt. Full detail in
+`documentation/DESIGN_20260817_worksheet_selection.md`.
+**Ref:** L-196; L-200; L-202.
+
+#### [L-202] JSON worksheet format, with markdown as fallback
+<!-- L:202 status:OPEN upd:2026-08-17 section:A flag: rice:2/3/75/2 -->
+- **Why.** The checker carries tolerance machinery that exists only
+  because the interchange is prose: eight header spellings mapped to the
+  source column alone, an emphasis stripper, and 15 unrecognised columns
+  in the current run. A keyed object deletes that defect class -- a
+  field name is right or it fails loudly.
+- **The known risk, stated.** Failure granularity inverts. Markdown
+  degrades row by row; JSON fails whole-file. Hedge: rows written one
+  object per line, so a truncated return is salvageable object by
+  object.
+- **Tony's ruling 2026-08-17:** the purpose of the pilot is to test, so
+  send the JSON; if a return fails to parse, send the markdown.
+- **Markdown parsing stays live permanently.** The seventeen historical
+  worksheets are markdown. This is a format ADDED, never a replacement.
+- **One producer, two views.** The markdown renderer and the JSON
+  emitter both run off the same `Request` list. No second source of
+  truth.
+- **Row integrity hash, approved 2026-08-17.** Eight hex characters over
+  the joined, normalized do-not-edit fields (key, claim, code value),
+  written by the builder and recomputed by the checker. The case is
+  ATTRIBUTION, not tamper-proofing: without it, a responder who rounds a
+  code value produces an L2b mismatch reporting the CODE as drifted,
+  sending someone to investigate a constant that never moved. A missing
+  hash FAILS the row -- a hash that passes when absent is a check that
+  cannot fail. The run reports how many were verified.
+- **Rejected alternative:** rebuilding rows from the anchor SHA to
+  compare directly. More exact, but only works while the tree still
+  matches the anchor, and by the time a return lands it usually does
+  not.
+**Note:** RICE is Claude's proposal, unratified.
+**Gap:** unbuilt. Needs a checker-side JSON reader as well as a builder
+-side emitter.
+**Ref:** L-201; L-192 (L2b, the layer the hash protects from
+misattribution).
 
 ## PENDING ACTION (Tony-side)
 
