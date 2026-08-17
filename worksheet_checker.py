@@ -1541,6 +1541,135 @@ def check_string_claim(claim, tables):
 
 
 # ============================================================
+# THE RESOLVED LEG (L-200)
+# ============================================================
+#
+# The scanner owns the grammar; this owns the linkage. Two definitions
+# of what a leg looks like would drift apart by construction.
+#
+# The check is LINKAGE, not meaning. Three existence facts: the leg
+# parses, it names a worksheet row that exists, and that row's citation
+# verdict was one requiring an edit. Whether the edit was the RIGHT one
+# is a reader's judgement and stays with a reader -- the same division
+# ruled 2026-08-17 for the pilot, where the mechanical checker stays at
+# numbers and the citation comparison is done by a person.
+#
+# The failure this exists to catch is an edit attributed to a verdict
+# nobody can find, which is an unexplained edit wearing a citation.
+
+
+class Resolved(object):
+    """One Resolved leg, and what the linkage check made of it."""
+
+    def __init__(self, module, path, line_no, raw):
+        self.module = module
+        self.path = path
+        self.line_no = line_no
+        self.raw = raw
+        self.worksheet = ''
+        self.key = ''
+        self.what = ''
+        self.handle = ''
+        self.verdict = ''
+        self.findings = []
+
+    @property
+    def where(self):
+        return '%s:%d' % (os.path.basename(self.path), self.line_no)
+
+    def fail(self, code, detail):
+        self.findings.append((code, detail))
+
+
+def collect_resolved(project_dir):
+    """Every Resolved leg in the corpus, parsed but not yet linked.
+
+    Read straight off the file text rather than through scanner units.
+    The leg is deliberately absent from the request builder's
+    CONTEXT_LEGS -- a row dispatched a second time must not be shown
+    what the last one concluded -- so it attaches to no unit, and a
+    unit-driven walk would never see it.
+    """
+    legs = []
+    for fname in sorted(os.listdir(project_dir)):
+        if not fname.endswith('.py'):
+            continue
+        path = os.path.join(project_dir, fname)
+        try:
+            with open(path, encoding='utf-8', errors='replace') as handle:
+                lines = handle.read().splitlines()
+        except OSError:
+            continue
+        for index, line in enumerate(lines, start=1):
+            if ps.RESOLVED_LINE_RE.match(line) is None:
+                continue
+            leg = Resolved(fname[:-3], path, index, line.strip())
+            records, issues = ps.parse_resolved(line)
+            if records:
+                (leg.worksheet, leg.key, leg.what,
+                 leg.handle) = records[0]
+            else:
+                detail = issues[0][1] if issues else 'malformed_resolved'
+                leg.fail('RESOLVED_MALFORMED',
+                         '%s -- expected: Resolved: <worksheet> <key> '
+                         '-- <what changed> (L-nnn)' % detail)
+            legs.append(leg)
+    return legs
+
+
+def check_resolved(leg, worksheets):
+    """LR -- the leg names a real row whose verdict required an edit."""
+    if leg.findings:
+        return
+    sheet = worksheets.get(leg.worksheet)
+    if sheet is None:
+        leg.fail('RESOLVED_WORKSHEET_MISSING',
+                 'no such file in %s' % WORKSHEET_DIR)
+        return
+
+    row = None
+    table = None
+    for candidate in sheet['tables']:
+        index = candidate.column(ROLE_KEY)
+        if index is None:
+            continue
+        for entry in candidate.rows:
+            cells = entry[1]
+            if index >= len(cells):
+                continue
+            if strip_cell(cells[index]).strip('`') == leg.key:
+                row, table = entry, candidate
+                break
+        if row is not None:
+            break
+
+    if row is None:
+        leg.fail('RESOLVED_ROW_MISSING',
+                 'no row in %s carries the key %s'
+                 % (leg.worksheet, leg.key))
+        return
+
+    if table.column(ROLE_CITATION_VERDICT) is None:
+        leg.fail('RESOLVED_NO_VERDICT_COLUMN',
+                 '%s has no citation-verdict column, so what the row '
+                 'concluded cannot be read' % leg.worksheet)
+        return
+
+    cell = table.cell(row[1], ROLE_CITATION_VERDICT)
+    verdict, _token, _scope = classify_verdict(cell, SCOPE_CITATION)
+    leg.verdict = verdict
+    if verdict in (V_EMPTY, V_UNREADABLE):
+        leg.fail('RESOLVED_VERDICT_UNREADABLE',
+                 'row %d carries no readable citation verdict: %s'
+                 % (row[0], quoted(cell)))
+        return
+    if verdict in VERDICT_CLEARS:
+        leg.fail('RESOLVED_VERDICT_CLEAR',
+                 'row %d reads %s -- a cleared row warrants no edit, so '
+                 'this leg does not explain one' % (row[0], verdict))
+
+
+# ============================================================
 # THE UNCITED SET
 # ============================================================
 #
@@ -1606,7 +1735,8 @@ def uncited_report(project_dir, worksheets, cited, today):
 # ============================================================
 
 def write_report(project_dir, claims, unreached, unregistered,
-                 headline, changed, uncited, files, worksheets):
+                 headline, changed, uncited, files, worksheets,
+                 resolved):
     """The findings file. The console gets one line; this gets the rest."""
     out = []
     add = out.append
@@ -1635,6 +1765,9 @@ def write_report(project_dir, claims, unreached, unregistered,
     add('| Noted, no route | %d |' % len(noted))
     add('| Annotation lines the scanner does not score | %d |'
         % len(unreached))
+    add('| Resolved legs examined | %d |' % len(resolved))
+    add('| Resolved legs with a linkage problem | %d |'
+        % sum(1 for leg in resolved if leg.findings))
     add('')
 
     add('## SEND BACK -- the cause is known')
@@ -1690,6 +1823,29 @@ def write_report(project_dir, claims, unreached, unregistered,
                     % (claim.where, claim.display, code, detail))
     else:
         add('None.')
+    add('')
+
+    add('## Resolved legs -- verdicts that landed in the code (L-200)')
+    add('')
+    add('Linkage only. That the leg names a real row whose citation '
+        'verdict required an edit is checkable. Whether the edit was '
+        'the RIGHT one is not, and stays with a reader.')
+    add('')
+    if resolved:
+        add('| Where | Worksheet | Row key | Verdict | Handle | Finding |')
+        add('|---|---|---|---|---|---|')
+        for leg in resolved:
+            finding = 'linked'
+            if leg.findings:
+                finding = '**%s** -- %s' % (leg.findings[0][0],
+                                            leg.findings[0][1])
+            add('| `%s` | `%s` | `%s` | %s | %s | %s |'
+                % (leg.where, leg.worksheet or '-', leg.key or '-',
+                   leg.verdict or '-', leg.handle or '-', finding))
+    else:
+        add('None in the corpus. Stated rather than left silent: the '
+            'leg is new (L-200, 2026-08-17), and an empty section that '
+            'prints nothing cannot be told from one that never ran.')
     add('')
 
     add('## What this tool cannot see')
@@ -1842,6 +1998,10 @@ def run(project_dir, today):
     worksheets = load_worksheets(project_dir)
     claims, unreached, files = collect_claims(project_dir)
 
+    resolved = collect_resolved(project_dir)
+    for leg in resolved:
+        check_resolved(leg, worksheets)
+
     unregistered = set()
     for claim in claims:
         check_claim(claim, worksheets, unregistered)
@@ -1852,7 +2012,8 @@ def run(project_dir, today):
     save_state(project_dir, state)
 
     report = write_report(project_dir, claims, unreached, unregistered,
-                          headline, changed, uncited, files, worksheets)
+                          headline, changed, uncited, files, worksheets,
+                          resolved)
 
     routed_written, routing_error = write_routing_file(project_dir, claims)
     examined, ok, missing, mismatch, unreadable = integrity_summary(
@@ -1874,6 +2035,8 @@ def run(project_dir, today):
         'hashes_mismatch': mismatch,
         'json_unreadable_lines': unreadable,
         'routed_keys_written': routed_written,
+        'resolved_legs': len(resolved),
+        'resolved_problems': sum(1 for leg in resolved if leg.findings),
     }
 
     # The summary line carries its denominator on purpose. A line that
@@ -1902,6 +2065,14 @@ def run(project_dir, today):
     if unreadable:
         detail += ('\n  %d JSON line(s) could not be parsed and were '
                    'NOT checked' % unreadable)
+    # Printed every run, including zero, for the same reason the hash
+    # line is: a section that says nothing when there is nothing cannot
+    # be told from one that never ran.
+    resolved_problems = sum(1 for leg in resolved if leg.findings)
+    detail += ('\n  %d Resolved leg(s) examined: %d linked, %d with a '
+               'linkage problem'
+               % (len(resolved), len(resolved) - resolved_problems,
+                  resolved_problems))
     if routing_error:
         detail += '\n  %s' % routing_error
     else:

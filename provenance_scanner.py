@@ -752,6 +752,86 @@ CROSS_CHECK_VIA_RE = re.compile(r'(?i)\bvia\b')
 # because text the parser silently drops is text nobody is checking.
 CROSS_CHECK_TAIL_RE = re.compile(r'^\s*--\s+\S')
 
+# The worksheet reference formats the grammar accepts (L-204,
+# 2026-08-17). The SHAPE check -- a parenthetical naming a file rather
+# than free prose -- is the anti-gaming half of L-186 and does not
+# move. This list is the other half, and it pinned the only worksheet
+# format that existed when the rule was written. The JSON return format
+# (L-202) landed 2026-08-17, at which point a returned verdict could be
+# built, carried, filled, returned, checked and routed -- and then
+# refused by this one condition when somebody tried to write it back
+# into the code as an annotation.
+#
+# Widened rather than worked around. Rendering an accepted JSON return
+# into markdown for citation would leave two stores of one return, free
+# to drift, with the integrity hash in only one of them.
+#
+# worksheet_checker.JSON_SUFFIXES must stay a subset of this.
+# test_worksheet_checker.py pins the two together, so a fourth format
+# added in one place fails loudly instead of drifting in two.
+WORKSHEET_REFERENCE_SUFFIXES = ('.md', '.jsonl', '.json')
+
+# The Resolved leg (L-200, 2026-08-17). Record-only: it grants no
+# source credit, is deliberately absent from SOURCE_PATTERNS, and is
+# read by worksheet_checker for linkage. See parse_resolved below.
+RESOLVED_LINE_RE = re.compile(
+    r'(?mi)^[ \t]*#[ \t]*resolved[ \t]*:(?P<body>[^\n]*)$')
+
+RESOLVED_BODY_RE = re.compile(
+    r'^\s*(?P<worksheet>\S+)\s+(?P<key>\S+)\s+--\s+(?P<what>.+?)'
+    r'\s*\((?P<handle>L-\d+)\)\s*$')
+
+
+def parse_resolved(text):
+    """Parse Resolved annotation legs out of a block of source text.
+
+    Returns (records, issues).
+
+    records: list of (worksheet, key, what, handle) tuples.
+    issues:  list of (raw_line, 'malformed_resolved') for a line that
+        opens with the leg label and does not complete the grammar.
+
+    Grammar (L-200, 2026-08-17). The leading hash is omitted here on
+    purpose: the scanner scans itself, and a literal leg in this
+    docstring would be extracted as one.
+
+        Resolved: <worksheet> <key> -- <what changed> (L-nnn)
+
+    It says which returned verdict caused an edit. Without it, an
+    annotation edited in response to a worksheet is indistinguishable
+    from an unexplained edit, and the only record of which is which
+    lives in a handoff.
+
+    The first token is the worksheet FILENAME -- the same thing the
+    cross-check parenthetical names. The ledger block that designed
+    this leg wrote <batch>; a batch name does not determine what the
+    returned file is called, and "names a worksheet row that exists" is
+    only mechanically checkable against a file on disk.
+
+    The second token is the row KEY, never the row number. row_id is
+    assigned by position at render time and renumbers whenever the
+    corpus changes; module.py::enclosing::label::cN is stable.
+
+    This function parses. It does not check that the worksheet or the
+    row exists -- that is linkage, and it lives in worksheet_checker
+    where the worksheets are already loaded.
+    """
+    records = []
+    issues = []
+    if not text or 'resolved' not in text.lower():
+        return records, issues
+    for match in RESOLVED_LINE_RE.finditer(text):
+        raw = match.group(0).strip()
+        body = RESOLVED_BODY_RE.match(match.group('body'))
+        if body is None:
+            issues.append((raw, 'malformed_resolved'))
+            continue
+        records.append((body.group('worksheet').strip('`'),
+                        body.group('key').strip('`'),
+                        body.group('what').strip(),
+                        body.group('handle')))
+    return records, issues
+
 
 def parse_cross_checks(text):
     """Parse cross-check annotation lines out of a context block.
@@ -764,7 +844,7 @@ def parse_cross_checks(text):
     issues:  list of (raw_line, error_code) for lines that look like an
         annotation but do not qualify. Codes: 'missing_year',
         'prose_date', 'missing_identity', 'missing_reference',
-        'empty_reference', 'non_markdown_reference',
+        'empty_reference', 'unsupported_reference_format',
         'legacy_source_first', 'malformed_tail'.
 
     Grammar (L-186, 2026-08-12) -- the checker comes FIRST. The comment
@@ -772,7 +852,7 @@ def parse_cross_checks(text):
     scans itself, and a literal annotation in this docstring would be
     extracted as one):
 
-        Cross-checked: <checker> <ISO date>[ -- <source>] (<ref>.md)
+        Cross-checked: <checker> <ISO date>[ -- <source>] (<worksheet>)
 
     The optional ` -- <source>` clause names the authority that was
     checked. It sits AFTER the date on purpose. The retired order put
@@ -784,7 +864,8 @@ def parse_cross_checks(text):
     guessing and says so.
 
     A line qualifies only with an ISO date and, after that date, a
-    parenthetical reference ending in `.md`. Anything less earns
+    parenthetical reference naming a worksheet FILE -- one ending in
+    `.md`, `.jsonl` or `.json` (L-204, 2026-08-17). Anything less earns
     nothing. This is the anti-gaming rule: the annotation is not a
     citation form, is deliberately absent from SOURCE_PATTERNS, and
     never grants source credit on its own. A malformed annotation on an
@@ -845,8 +926,8 @@ def parse_cross_checks(text):
         if not reference:
             issues.append((raw, 'empty_reference'))
             continue
-        if not reference.lower().endswith('.md'):
-            issues.append((raw, 'non_markdown_reference'))
+        if not reference.lower().endswith(WORKSHEET_REFERENCE_SUFFIXES):
+            issues.append((raw, 'unsupported_reference_format'))
             continue
 
         records.append((identity, date_match.group(1), reference))
@@ -2999,9 +3080,9 @@ def generate_report(units, consistent_dups, inconsistencies,
         out.append("")
         out.append("A qualifying annotation needs an ISO date and, "
                    "after it, a parenthetical worksheet reference "
-                   "ending in `.md`. Two of them, naming different "
-                   "checkers, on a claim that already has a citation, "
-                   "are what earns V2.")
+                   "ending in `.md`, `.jsonl` or `.json`. Two of them, "
+                   "naming different checkers, on a claim that already "
+                   "has a citation, are what earns V2.")
         out.append("")
         out.append("`Near line` is the first claim that saw the "
                    "annotation, not the annotation's own line. The "

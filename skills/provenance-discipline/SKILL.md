@@ -6,8 +6,8 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 2.3 | Cut from palomas_orrery @ 6b99ace (v2.2), earlier
-@ 00219d9 (v2.1), @ eb77c83 (v2.0), @ cdcdb4b (v1.9) | August 13, 2026
+Skill version: 2.4 | Cut from palomas_orrery @ 6b99ace (v2.2), earlier
+@ 00219d9 (v2.1), @ eb77c83 (v2.0), @ cdcdb4b (v1.9) | August 17, 2026
 Source: project_instructions_v3_29.md Part 3 (Provenance Audit, Fetched vs
 Recalled) + food insecurity build handoff + scanner source at HEAD. v1.1
 adds the report domain-classification mechanics, the Review-Repair
@@ -87,6 +87,54 @@ TRUE; source-then-cite, never cite-to-clear) and Show the Envelope of the
 Unknowable. This skill carries the working procedures and the scanner's
 mechanics. If this skill and the resident gates ever seem to disagree, the
 gates win -- flag it.
+
+
+v2.4 (August 17, 2026) carries three changes, all earned the same day.
+The annotation grammar now accepts a `.jsonl` or `.json` worksheet
+reference as well as `.md` (L-204). The `.md` condition did two jobs:
+it required the parenthetical to name a FILE rather than free prose,
+which is the anti-gaming half of L-186 and does not move, and it
+pinned the only worksheet format that existed in August 2026. The JSON
+return format (L-202) landed 2026-08-17, and a returned verdict could
+then be built, carried, filled, checked and routed -- and refused by
+that one condition when somebody wrote it back into the code. Found by
+an integration test, not by a reading. The Resolved Leg section is new
+(L-200): a record-only leg saying which returned verdict caused an
+edit. And The Visibility Convention is new (L-203), promoting a
+one-off ruling about the request builder into the general rule it was
+always an instance of.
+
+## The Visibility Convention [CRITICAL]
+
+**A failure that prints where the responder reads it gets an
+ANNOTATION. A failure that appears nowhere gets a REFUSAL. Visibility
+decides, not severity.**
+
+The case that produced it: the request builder joins a citation
+continued onto a marked line, and two things can go wrong. A
+continuation marker whose label does not match the leg above it is
+REPORTED -- the mismatch prints into the worksheet, where the person
+filling the row will see it and can say so. A continuation line
+carrying no marker at all REFUSES the whole build, because nothing
+about it reaches any reader: the text is silently dropped and the
+worksheet that results looks complete.
+
+Severity would have ranked these the other way round. A label mismatch
+is the louder defect on its face. What matters instead is whether the
+system can be told about the failure by somebody who sees it, because
+a defect with a reader has a correction path and a defect with no
+reader does not.
+
+The rule generalizes past the builder. Before choosing between
+reporting a problem and refusing to proceed, ask where the report
+lands and who reads it. If the honest answer is that it lands in a log
+nobody opens, or in a file the next session will not load, then
+reporting is silence wearing the costume of diligence, and the correct
+behaviour is to refuse.
+
+(Tony's ruling, 2026-08-17, settling an L-196 question as a convention
+rather than a one-off, because the same distinction governs every
+future case of the same shape.)
 
 ## The Goal State
 
@@ -360,8 +408,17 @@ by omission.
 The checker comes FIRST. The grammar is fixed:
 
 ```
-# Cross-checked: <checker> <ISO date>[ -- <source>] (<worksheet>.md)
+# Cross-checked: <checker> <ISO date>[ -- <source>] (<worksheet>)
 ```
+
+The parenthetical names a worksheet FILE. Accepted formats are `.md`,
+`.jsonl` and `.json` (L-204, 2026-08-17); anything that is not a
+filename -- free prose, a bare word, a description of where the
+evidence lives -- is refused as `unsupported_reference_format`. The
+shape rule is the anti-gaming half of L-186 and does not move. The
+format list widened when the JSON worksheet format landed (L-202),
+because a return that can be checked and routed and then not cited is
+a loop with no last inch.
 
 ```python
 # Source: Vignes et al. 2000, GRL 27, 49 -- subsolar bow shock 1.64 R_M
@@ -391,6 +448,36 @@ it declines to try.
 
 The source clause is optional. `# Cross-checked: Gemini 2026-04-15
 (worksheet.md)` is complete.
+
+#### The Resolved Leg [QUALITY]
+
+A record-only leg naming the worksheet row whose verdict caused an
+edit, and the ledger handle that authorized it (L-200, 2026-08-17):
+
+```
+# Resolved: worksheet_pilot.jsonl constants_new.py::ROCHE_LIMIT_RADII::c1 -- citation refuted, Source replaced (L-204)
+```
+
+Without it, an annotation edited in response to a verdict is
+indistinguishable from an unexplained edit, and the only record of
+which is which lives in a handoff.
+
+**It cites the KEY, never the row number.** `row_id` is assigned by
+position when a request is rendered and renumbers whenever the corpus
+changes. `module.py::enclosing::label::cN` is stable. This is the same
+failure the ledger already records for per-handoff item numbers.
+
+**It is deliberately invisible to the request.** The leg is not in the
+builder's `CONTEXT_LEGS`, so a row dispatched a second time cannot see
+what the last one concluded. A context leg would anchor a second
+reader the way a Claude-derived figure anchors Gemini.
+
+**The checker checks LINKAGE, not meaning.** Three existence facts: the
+leg parses, it names a worksheet row that exists, and that row's
+citation verdict was one requiring an edit. A leg pointing at a row
+that does not exist is refused -- an edit attributed to a verdict
+nobody can find is an unexplained edit wearing a citation. Whether the
+edit was the RIGHT one stays with a reader.
 
 #### Worksheet First, Annotation Second [CRITICAL]
 

@@ -831,6 +831,142 @@ def test_routing_file(project_dir):
           '%r vs %r' % (written, payload.get('send_back')))
 
 
+def _resolved_project(leg_line, rows, sheet='worksheet_pilot.jsonl',
+                      sheet_text=None):
+    """A throwaway project: one module carrying a leg, one worksheet.
+
+    Written into a fresh temporary directory on purpose. Checking the
+    repo's own tree proved only that some earlier run had left the
+    right state behind -- the defect that let a mutation replacing the
+    routing write with `pass` pass its test.
+
+    `sheet_text` writes the worksheet verbatim, which is how the
+    markdown cases get a table whose columns this test chooses.
+    """
+    scratch = tempfile.mkdtemp(prefix='resolved_test_')
+    os.makedirs(os.path.join(scratch, wc.WORKSHEET_DIR))
+    with open(os.path.join(scratch, 'fixture_module.py'), 'w',
+              encoding='utf-8', newline='\n') as handle:
+        handle.write('VALUE = 1.0\n')
+        handle.write(leg_line + '\n')
+    with open(os.path.join(scratch, wc.WORKSHEET_DIR, sheet), 'w',
+              encoding='utf-8', newline='\n') as handle:
+        if sheet_text is not None:
+            handle.write(sheet_text)
+        else:
+            for row in rows:
+                handle.write(json.dumps(row) + '\n')
+    return scratch
+
+
+def _linked(scratch):
+    """(legs, codes) after the linkage layer has run."""
+    legs = wc.collect_resolved(scratch)
+    worksheets = wc.load_worksheets(scratch)
+    for leg in legs:
+        wc.check_resolved(leg, worksheets)
+    return legs, [code for leg in legs for code, _detail in leg.findings]
+
+
+KEY = 'fixture_module.py::VALUE::c1'
+GOOD_LEG = ('# Resolved: worksheet_pilot.jsonl %s -- citation refuted, '
+            'Source replaced (L-204)' % KEY)
+
+
+def _row(key=KEY, citation='NO'):
+    """One returned row. NO is the vocabulary's refuted token.
+
+    Deliberately a real token rather than the word REFUTED: the
+    vocabulary is exact-match by ruling, and a fixture using a word the
+    checker does not accept would test the fixture rather than the
+    layer.
+    """
+    return {'key': key, 'claim': 'the claim', 'code_value': '1.0',
+            'citation_correct': citation}
+
+
+def test_resolved_linkage():
+    """L-200 -- the leg links, and every way it can fail does fail."""
+    legs, codes = _linked(_resolved_project(GOOD_LEG, [_row()]))
+    check('resolved: one leg is collected', len(legs) == 1, repr(legs))
+    check('resolved: a good leg links clean', codes == [], repr(codes))
+    if legs:
+        check('resolved: it carries the handle it names',
+              legs[0].handle == 'L-204', repr(legs[0].handle))
+        check('resolved: it reports the verdict class it found',
+              legs[0].verdict == wc.V_REFUTED, repr(legs[0].verdict))
+
+    # A leg naming a worksheet that is not on disk.
+    missing_sheet = GOOD_LEG.replace('worksheet_pilot.jsonl',
+                                     'worksheet_absent.jsonl')
+    _legs, codes = _linked(_resolved_project(missing_sheet, [_row()]))
+    check('resolved: a missing worksheet fails',
+          codes == ['RESOLVED_WORKSHEET_MISSING'], repr(codes))
+
+    # A leg naming a row no worksheet carries. This is the failure the
+    # layer exists for: an edit attributed to a verdict nobody can find.
+    _legs, codes = _linked(
+        _resolved_project(GOOD_LEG, [_row(key='other.py::THING::c1')]))
+    check('resolved: a row that does not exist fails',
+          codes == ['RESOLVED_ROW_MISSING'], repr(codes))
+
+    # A leg citing a row that CLEARED. Nothing needed editing, so the
+    # leg does not explain the edit it is attached to.
+    _legs, codes = _linked(
+        _resolved_project(GOOD_LEG, [_row(citation='CONFIRMED')]))
+    check('resolved: a cleared row fails',
+          codes == ['RESOLVED_VERDICT_CLEAR'], repr(codes))
+
+    # A row whose verdict cell is empty is not a pass.
+    _legs, codes = _linked(
+        _resolved_project(GOOD_LEG, [_row(citation='')]))
+    check('resolved: an unreadable verdict fails',
+          codes == ['RESOLVED_VERDICT_UNREADABLE'], repr(codes))
+
+    # A worksheet with no citation-verdict column at all. This one has
+    # to be markdown: the JSON reader synthesizes every column in
+    # JSON_FIELD_HEADERS whether or not the return carried it, so a
+    # JSON worksheet always HAS the column and an absent verdict shows
+    # up as an empty cell instead.
+    no_column = ('| Key | Claim | Value correct? |\n'
+                 '|---|---|---|\n'
+                 '| `%s` | the claim | YES |\n' % KEY)
+    md_leg = GOOD_LEG.replace('worksheet_pilot.jsonl', 'worksheet_pilot.md')
+    _legs, codes = _linked(
+        _resolved_project(md_leg, [], sheet='worksheet_pilot.md',
+                          sheet_text=no_column))
+    check('resolved: a worksheet with no verdict column fails',
+          codes == ['RESOLVED_NO_VERDICT_COLUMN'], repr(codes))
+
+    # A leg that does not complete the grammar never reaches linkage.
+    _legs, codes = _linked(
+        _resolved_project('# Resolved: worksheet_pilot.jsonl', [_row()]))
+    check('resolved: a malformed leg fails at the grammar',
+          codes == ['RESOLVED_MALFORMED'], repr(codes))
+
+    # And a corpus with no legs collects none, rather than erroring.
+    legs, codes = _linked(_resolved_project('VALUE2 = 2.0', [_row()]))
+    check('resolved: a corpus with no legs collects none',
+          legs == [] and codes == [], repr(legs))
+
+
+def test_suffix_sets_agree():
+    """The two stores of "what a worksheet file looks like" agree.
+
+    The scanner decides which references the annotation grammar
+    accepts; the checker decides which files it parses as JSON. Nothing
+    connected them, so a fourth format added in one place would be
+    accepted in a citation and never read, or read and never citable.
+    """
+    expected = ('.md',) + wc.JSON_SUFFIXES
+    check('suffixes: the scanner and the checker agree',
+          set(expected) == set(wc.ps.WORKSHEET_REFERENCE_SUFFIXES),
+          '%r vs %r' % (expected, wc.ps.WORKSHEET_REFERENCE_SUFFIXES))
+    check('suffixes: markdown is still accepted',
+          '.md' in wc.ps.WORKSHEET_REFERENCE_SUFFIXES,
+          repr(wc.ps.WORKSHEET_REFERENCE_SUFFIXES))
+
+
 def main():
     project_dir = os.path.dirname(os.path.abspath(__file__))
     os.chdir(project_dir)
@@ -853,6 +989,8 @@ def main():
     test_markdown_has_no_integrity_map()
     test_integrity_layer_fails_a_bad_row()
     test_routing_file(project_dir)
+    test_resolved_linkage()
+    test_suffix_sets_agree()
 
     for name, detail in FAILED:
         print('  FAIL  %s' % name)

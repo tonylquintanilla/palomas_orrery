@@ -52,10 +52,12 @@ from provenance_scanner import (
     V_CROSS_CHECKED,
     V_RECALLED,
     V_SOURCED,
+    WORKSHEET_REFERENCE_SUFFIXES,
     distinct_checker_identities,
     extract_units_from_file,
     has_citation,
     parse_cross_checks,
+    parse_resolved,
     score_unit,
 )
 
@@ -206,11 +208,13 @@ def test_missing_reference_yields_no_record():
 
 
 def test_trivial_reference_yields_no_record():
-    """Empty and non-markdown references are both rejected."""
+    """Empty and unsupported-format references are both rejected."""
     empty = "# Cross-checked: Gemini 2026-04-15 ()"
     trivial = "# Cross-checked: Gemini 2026-04-15 (x)"
+    prose = "# Cross-checked: Gemini 2026-04-15 (the Gemini worksheet)"
     for line, expected in ((empty, 'empty_reference'),
-                           (trivial, 'non_markdown_reference')):
+                           (trivial, 'unsupported_reference_format'),
+                           (prose, 'unsupported_reference_format')):
         records, issues = parse_cross_checks(line)
         assert records == [], f"expected no records for {line!r}"
         assert issues and issues[0][1] == expected, (
@@ -426,7 +430,8 @@ def test_parse_issue_codes():
         "# Cross-checked: 2026-04-15 (worksheet.md)": 'missing_identity',
         "# Cross-checked: Gemini 2026-04-15": 'missing_reference',
         "# Cross-checked: Gemini 2026-04-15 ()": 'empty_reference',
-        "# Cross-checked: Gemini 2026-04-15 (x)": 'non_markdown_reference',
+        "# Cross-checked: Gemini 2026-04-15 (x)":
+            'unsupported_reference_format',
     }
     for line, code in expected.items():
         _records, issues = parse_cross_checks(line)
@@ -458,6 +463,75 @@ def test_parse_issue_codes():
     del CROSS_CHECK_ISSUES[:]
 
 
+def test_json_worksheet_reference_is_accepted():
+    """L-204 -- a JSON return can be cited, and prose still cannot.
+
+    The `.md` condition did two jobs. It required the parenthetical to
+    name a FILE rather than free prose, which is the anti-gaming half
+    of L-186 and does not move. It also pinned the only worksheet
+    format that existed in August 2026. The JSON return format (L-202)
+    landed 2026-08-17, so a verdict could be returned, checked and
+    routed as `.jsonl` and then refused when it was written back into
+    the code -- which is where the loop stopped.
+    """
+    for suffix in WORKSHEET_REFERENCE_SUFFIXES:
+        line = f"# Cross-checked: Gemini 2026-04-15 (worksheet_x{suffix})"
+        records, issues = parse_cross_checks(line)
+        assert len(records) == 1 and not issues, (
+            f"expected {suffix} to be accepted, got {records} {issues}")
+        assert records[0][2] == f"worksheet_x{suffix}", (
+            f"the reference did not survive the parse: {records}")
+
+    # The shape check survives. The widening is a list of FORMATS, not
+    # a relaxation of the rule that a reference names a file.
+    for bad in ("(the Gemini worksheet)", "(notes.txt)", "(worksheet)"):
+        line = f"# Cross-checked: Gemini 2026-04-15 {bad}"
+        records, issues = parse_cross_checks(line)
+        assert records == [] and issues, (
+            f"expected {bad} to be refused, got {records} {issues}")
+        assert issues[0][1] == 'unsupported_reference_format', (
+            f"expected unsupported_reference_format for {bad}: {issues}")
+
+    assert WORKSHEET_REFERENCE_SUFFIXES == ('.md', '.jsonl', '.json'), (
+        f"the accepted set moved: {WORKSHEET_REFERENCE_SUFFIXES}")
+
+
+def test_resolved_leg_grammar():
+    """L-200 -- the Resolved leg parses, and a partial one is refused.
+
+    Record-only, so the thing to pin is that it grants nothing. A leg
+    on an uncited claim must leave it at V_RECALLED exactly as if the
+    line were not there, the same anti-gaming rule the cross-check
+    annotation follows.
+    """
+    key = 'constants_new.py::ROCHE_LIMIT_RADII::c1'
+    good = ("# Resolved: worksheet_pilot.jsonl %s -- citation refuted, "
+            "Source replaced (L-204)" % key)
+    records, issues = parse_resolved(good)
+    assert len(records) == 1 and not issues, (
+        f"expected one record, got {records} {issues}")
+    worksheet, parsed_key, what, handle = records[0]
+    assert worksheet == 'worksheet_pilot.jsonl', worksheet
+    assert parsed_key == key, parsed_key
+    assert what == 'citation refuted, Source replaced', what
+    assert handle == 'L-204', handle
+
+    for bad in ("# Resolved: worksheet_pilot.jsonl",
+                "# Resolved: worksheet_pilot.jsonl %s -- no handle" % key,
+                "# Resolved: -- citation refuted (L-204)"):
+        records, issues = parse_resolved(bad)
+        assert records == [] and issues, (
+            f"expected a refusal for {bad!r}, got {records} {issues}")
+        assert issues[0][1] == 'malformed_resolved', issues
+
+    unit = _scored("# Source: Fixture authority ALPHA\n" + good)
+    assert unit.vuln != V_CROSS_CHECKED, (
+        "a Resolved leg must not earn cross-check credit")
+    unit = _scored(good)
+    assert unit.vuln == V_RECALLED, (
+        f"a Resolved leg must source nothing, got V{unit.vuln}")
+
+
 TESTS = [
     test_full_v2_scoring,
     test_v2_with_inherited_citation,
@@ -476,6 +550,8 @@ TESTS = [
     test_parse_issue_codes,
     test_legacy_source_first_is_refused,
     test_source_clause_after_date_is_accepted,
+    test_json_worksheet_reference_is_accepted,
+    test_resolved_leg_grammar,
 ]
 
 

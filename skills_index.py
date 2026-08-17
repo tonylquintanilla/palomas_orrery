@@ -217,7 +217,7 @@ def check_annotation_examples(skills_dir, problems):
     and are skipped.
     """
     try:
-        from provenance_scanner import parse_cross_checks
+        from provenance_scanner import parse_cross_checks, parse_resolved
     except ImportError:
         problems.append(
             'annotation examples not checked: provenance_scanner.py not '
@@ -246,6 +246,19 @@ def check_annotation_examples(skills_dir, problems):
                     f"{skill_dir.name}: annotation example's checker carries "
                     f"a year, so the date was parsed from the source: "
                     f"{stripped}")
+
+        # The Resolved leg (L-200) is checked the same way and for the
+        # same reason. A skill that teaches a leg the parser refuses is
+        # the L-186 defect in a second grammar.
+        for line in text.splitlines():
+            stripped = line.strip()
+            if not stripped.startswith('# Resolved:') or '<' in stripped:
+                continue
+            records, issues = parse_resolved(stripped)
+            if len(records) != 1:
+                problems.append(
+                    f"{skill_dir.name}: Resolved example does not parse "
+                    f"({issues or 'no record'}): {stripped}")
     return problems
 
 
