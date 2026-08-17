@@ -92,6 +92,7 @@ Domain: dev_tools
 Module created: August 2026 with Anthropic's Claude Opus 5.
 """
 
+import hashlib
 import json
 import os
 import re
@@ -103,6 +104,9 @@ import worksheet_keys as wk
 WORKSHEET_DIR = os.path.join('documentation', 'worksheets')
 REPORT_PATH = 'WORKSHEET_CHECK.md'
 STATE_PATH = os.path.join('data', 'worksheet_check_state.json')
+# Written by this tool, read by worksheet_request_builder's `sendbacks`
+# selection. See write_routing_file.
+ROUTED_PATH = os.path.join('data', 'worksheet_routed.json')
 
 
 # ============================================================
@@ -314,11 +318,17 @@ def split_row(line):
 class Table(object):
     """One markdown table: its header roles and its data rows."""
 
-    def __init__(self, path, header_line, headers, rows):
+    def __init__(self, path, header_line, headers, rows,
+                 integrity=None):
         self.path = path
         self.header_line = header_line
         self.headers = headers
         self.rows = rows
+        # {line_no: (status, detail)} for a JSON return; None for a
+        # markdown worksheet, which carries no hashes and never did.
+        # None means NOT APPLICABLE, not "passed" -- the layer that
+        # reads this skips a markdown table rather than clearing it.
+        self.integrity = integrity
         self.roles = [HEADER_ROLES.get(strip_cell(h).lower())
                       for h in headers]
         self.unregistered = [strip_cell(h) for h, role
@@ -364,6 +374,152 @@ def parse_tables(path, text):
         else:
             index += 1
     return tables
+
+
+# ============================================================
+# JSON RETURNS (L-202)
+# ============================================================
+#
+# The request now goes out as JSON Lines and comes back the same way.
+# This reads it into the SAME Table the markdown parser produces, so
+# every layer below -- match, L2a, L2b, L3 -- runs unchanged against
+# either format. One adapter rather than a second checking path: a
+# parallel pipeline is the thing this project has a rule about.
+#
+# The adapter works by naming the synthesized columns exactly as
+# HEADER_ROLES already spells them. Nothing here decides what a column
+# MEANS; the registry above still does.
+#
+# MARKDOWN IS NOT DEPRECATED. Seventeen historical worksheets are
+# markdown and always will be, so both readers stay live permanently.
+# (Tony's ruling 2026-08-17: send the JSON, fall back to markdown if a
+# return will not parse.)
+
+JSON_SUFFIXES = ('.jsonl', '.json')
+
+# Field in the returned object -> the header spelling HEADER_ROLES
+# knows. Order fixes the cell order of the synthesized row.
+JSON_FIELD_HEADERS = (
+    ('key', 'Key'),
+    ('claim', 'Claim'),
+    ('code_value', 'Code value'),
+    ('your_value', 'Your value'),
+    ('source', 'Source'),
+    ('value_correct', 'Value correct?'),
+    ('citation_correct', 'Citation correct?'),
+    ('notes', 'Notes'),
+)
+
+HASH_CHARS = 8
+
+
+def row_hash(key, claim, code_value):
+    """Short digest over the fields a responder must not edit.
+
+    Must agree with worksheet_request_builder.row_hash byte for byte.
+    Duplicated deliberately rather than imported: the checker is
+    read-only over the corpus and does not import the builder, which
+    would put a writer behind that boundary. The two are pinned
+    together by test_worksheet_request_builder.py.
+    """
+    parts = []
+    for field in (key, claim, code_value):
+        parts.append(' '.join(str(field if field is not None else '').split()))
+    blob = '\n'.join(parts).encode('utf-8')
+    return hashlib.sha256(blob).hexdigest()[:HASH_CHARS]
+
+
+def check_row_hash(record):
+    """('ok'|'missing'|'mismatch', detail) for one returned row.
+
+    A MISSING hash fails. A hash that quietly passes when absent is a
+    check that cannot fail -- and stripping the field is exactly what
+    an editor reformatting the file would do.
+    """
+    stated = str(record.get('hash', '') or '').strip().lower()
+    if not stated:
+        return 'missing', 'the row carries no hash'
+    expected = row_hash(record.get('key', ''), record.get('claim', ''),
+                        record.get('code_value', ''))
+    if stated != expected:
+        return 'mismatch', ('hash %s, but key/claim/code value hash to %s '
+                            '-- a do-not-edit field was changed'
+                            % (stated, expected))
+    return 'ok', ''
+
+
+def parse_json_worksheet(path, text):
+    """(tables, integrity, unreadable) for one JSON Lines worksheet.
+
+    `integrity` maps a synthesized row's line number to (status,
+    detail). `unreadable` lists lines that did not parse, because a
+    blind spot that stays silent is the failure mode, not a tidy
+    output.
+
+    Tolerant on the way IN, deliberately: a return may come back as a
+    JSON array rather than one object per line, and refusing it would
+    throw away work over a formatting choice. Line-delimited is what
+    goes out, because it is what survives truncation.
+    """
+    records = []
+    unreadable = []
+    lines = text.splitlines()
+    stripped = text.strip()
+
+    array = None
+    if stripped.startswith('[') or stripped.startswith('{"records"'):
+        try:
+            loaded = json.loads(stripped)
+        except ValueError:
+            loaded = None
+        if isinstance(loaded, list):
+            array = loaded
+        elif isinstance(loaded, dict) and isinstance(
+                loaded.get('records'), list):
+            array = loaded['records']
+
+    if array is not None:
+        for index, item in enumerate(array, start=1):
+            if isinstance(item, dict):
+                records.append((index, item))
+            else:
+                unreadable.append((index, 'not an object'))
+    else:
+        for number, line in enumerate(lines, start=1):
+            body = line.strip()
+            if not body:
+                continue
+            try:
+                item = json.loads(body)
+            except ValueError as exc:
+                unreadable.append((number, str(exc)))
+                continue
+            if isinstance(item, dict):
+                records.append((number, item))
+            else:
+                unreadable.append((number, 'not an object'))
+
+    headers = [header for _field, header in JSON_FIELD_HEADERS]
+    rows = []
+    integrity = {}
+    for number, record in records:
+        if record.get('record') == 'header':
+            continue
+        if 'key' not in record and 'claim' not in record:
+            continue
+        cells = []
+        for field, _header in JSON_FIELD_HEADERS:
+            value = record.get(field, '')
+            if isinstance(value, (list, tuple)):
+                value = ' '.join(str(part) for part in value)
+            cells.append('' if value is None else str(value))
+        rows.append((number, cells))
+        integrity[number] = check_row_hash(record)
+
+    if not rows:
+        return [], integrity, unreadable
+    table = Table(path, 0, headers, rows, integrity=integrity)
+    return [table], integrity, unreadable
 
 
 # ============================================================
@@ -923,6 +1079,13 @@ class Claim(object):
         self.notes = ''             # the matched row's Notes, verbatim
         self.verdict_column = ''
         self.matched_line = None
+        # Which ordinals of this claim were routed back, so the
+        # routing file can name the ROW rather than the annotation. A
+        # constant has one row and records None; a display string has
+        # one per numeric claim and records the ordinal being checked
+        # when the finding fired.
+        self.routed_ordinals = []
+        self.current_ordinal = None
 
     @property
     def where(self):
@@ -969,6 +1132,9 @@ class Claim(object):
         self.findings.append((layer, code, detail))
         if route and self.route != 'SEND BACK':
             self.route = route
+        if route == 'SEND BACK':
+            if self.current_ordinal not in self.routed_ordinals:
+                self.routed_ordinals.append(self.current_ordinal)
 
 
 def collect_claims(project_dir):
@@ -1037,6 +1203,32 @@ def identity_token(checker):
         if name in low:
             return tokens
     return ()
+
+
+def check_row_integrity(claim, table, line_no):
+    """LH -- the returned row's do-not-edit fields are unchanged.
+
+    The case is ATTRIBUTION. Without this, a responder who rounds a
+    code value produces an L2b mismatch that reports the CODE as
+    drifted, sending somebody to investigate a constant that never
+    moved. The defect is in the worksheet and the report names the
+    code.
+
+    A markdown table has no integrity map. That is NOT APPLICABLE
+    rather than a pass, and this returns without recording anything --
+    a markdown worksheet cannot fail a check that did not exist when it
+    was written.
+    """
+    if not getattr(table, 'integrity', None):
+        return
+    status, detail = table.integrity.get(line_no, ('missing',
+                                                   'row not in the '
+                                                   'integrity map'))
+    if status == 'ok':
+        return
+    code = ('ROW_HASH_MISSING' if status == 'missing'
+            else 'ROW_MODIFIED')
+    claim.fail('LH', code, 'row %d: %s' % (line_no, detail), 'SEND BACK')
 
 
 def check_claim(claim, worksheets, unregistered):
@@ -1110,6 +1302,12 @@ def check_claim(claim, worksheets, unregistered):
     table, (line_no, cells), rule = best
     claim.matched_line = line_no
     claim.match_rule = rule
+
+    # ---- LH: the row's immutable half is intact ----------------------
+    #
+    # Only a JSON return carries a hash, so this reads as NOT
+    # APPLICABLE for markdown and clears nothing there.
+    check_row_integrity(claim, table, line_no)
     # Keyed to the MATCHED row and nothing else. No row, no quote -- a
     # tool hunting for a nearby note when the match failed would have
     # crossed from transcription into interpretation.
@@ -1278,7 +1476,8 @@ def check_string_claim(claim, tables):
         return
 
     addressed = 0
-    for value in values:
+    for ordinal, value in enumerate(values, start=1):
+        claim.current_ordinal = ordinal
         hits = claim_rows(tables, value, text, token)
         if not hits:
             continue
@@ -1286,6 +1485,7 @@ def check_string_claim(claim, tables):
         table, line_no, cells, source_cell = hits[0]
         claim.matched_line = line_no
         claim.notes = table.cell(cells, ROLE_NOTES)
+        check_row_integrity(claim, table, line_no)
 
         evidence = table.cell(cells, ROLE_EVIDENCE)
         if evidence:
@@ -1324,6 +1524,9 @@ def check_string_claim(claim, tables):
         dispose_verdict(claim, own, tok, scope, 'row %d' % line_no,
                         ' for %g' % value)
 
+    # Findings after the loop belong to the annotation, not to one
+    # ordinal, so the routing file names the whole site for them.
+    claim.current_ordinal = None
     claim.claims_addressed = addressed
     if addressed == 0:
         claim.fail('L1', 'UNMATCHED',
@@ -1547,17 +1750,91 @@ def write_report(project_dir, claims, unreached, unregistered,
 # ============================================================
 
 def load_worksheets(project_dir):
-    """Every worksheet on disk, parsed into tables."""
+    """Every worksheet on disk, parsed into tables.
+
+    Markdown and JSON both land here as Tables, so nothing downstream
+    knows which format it is reading. `hashes` and `unreadable` are
+    carried per sheet so the run can REPORT what it examined -- a run
+    that says only "no problems" cannot be told from one that read
+    nothing.
+    """
     directory = os.path.join(project_dir, WORKSHEET_DIR)
     sheets = {}
     for name in sorted(os.listdir(directory)):
-        if not name.endswith('.md'):
-            continue
         path = os.path.join(directory, name)
+        if name.endswith('.md'):
+            with open(path, encoding='utf-8', errors='replace') as handle:
+                text = handle.read()
+            sheets[name] = {'path': path,
+                            'tables': parse_tables(name, text),
+                            'format': 'markdown',
+                            'hashes': {},
+                            'unreadable': []}
+            continue
+        if not name.endswith(JSON_SUFFIXES):
+            continue
         with open(path, encoding='utf-8', errors='replace') as handle:
             text = handle.read()
-        sheets[name] = {'path': path, 'tables': parse_tables(name, text)}
+        tables, integrity, unreadable = parse_json_worksheet(name, text)
+        sheets[name] = {'path': path,
+                        'tables': tables,
+                        'format': 'json',
+                        'hashes': integrity,
+                        'unreadable': unreadable}
     return sheets
+
+
+def integrity_summary(worksheets):
+    """(examined, ok, missing, mismatch, unreadable_lines) over JSON."""
+    examined = ok = missing = mismatch = 0
+    unreadable = 0
+    for sheet in worksheets.values():
+        if sheet.get('format') != 'json':
+            continue
+        unreadable += len(sheet.get('unreadable') or ())
+        for status, _detail in (sheet.get('hashes') or {}).values():
+            examined += 1
+            if status == 'ok':
+                ok += 1
+            elif status == 'missing':
+                missing += 1
+            else:
+                mismatch += 1
+    return examined, ok, missing, mismatch, unreadable
+
+
+def write_routing_file(project_dir, claims):
+    """The keys a later dispatch can re-ask, written for a machine.
+
+    The `sendbacks` selection in worksheet_request_builder.py reads
+    this. A key list is legitimate ONLY when the checker wrote it --
+    never one a person typed -- and the test is whether the list can be
+    regenerated. This one can: it is an output of the run that produced
+    the routing.
+    """
+    keys = []
+    for claim in claims:
+        if claim.route != 'SEND BACK':
+            continue
+        ordinals = claim.routed_ordinals or [None]
+        for ordinal in ordinals:
+            key = claim.key(ordinal)
+            if key and key not in keys:
+                keys.append(key)
+    payload = {
+        'written_by': 'worksheet_checker.py',
+        'send_back': sorted(keys),
+        'send_back_count': len(keys),
+    }
+    path = os.path.join(project_dir, ROUTED_PATH)
+    try:
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, 'w', encoding='utf-8', newline='\n') as handle:
+            json.dump(payload, handle, indent=2, sort_keys=True)
+            handle.write('\n')
+    except (IOError, OSError) as exc:
+        return 0, 'could not write %s: %s' % (ROUTED_PATH, exc)
+    return len(keys), ''
 
 
 def run(project_dir, today):
@@ -1577,6 +1854,10 @@ def run(project_dir, today):
     report = write_report(project_dir, claims, unreached, unregistered,
                           headline, changed, uncited, files, worksheets)
 
+    routed_written, routing_error = write_routing_file(project_dir, claims)
+    examined, ok, missing, mismatch, unreadable = integrity_summary(
+        worksheets)
+
     send_back = sum(1 for c in claims if c.route == 'SEND BACK')
     conversation = sum(1 for c in claims if c.route == 'CONVERSATION')
     clean = sum(1 for c in claims if not c.findings)
@@ -1587,6 +1868,12 @@ def run(project_dir, today):
         'conversation': conversation,
         'unreached': len(unreached),
         'unregistered': len(unregistered),
+        'hashes_examined': examined,
+        'hashes_ok': ok,
+        'hashes_missing': missing,
+        'hashes_mismatch': mismatch,
+        'json_unreadable_lines': unreadable,
+        'routed_keys_written': routed_written,
     }
 
     # The summary line carries its denominator on purpose. A line that
@@ -1604,6 +1891,22 @@ def run(project_dir, today):
               '%d not scanner-reachable'
               % (send_back, conversation,
                  len(claims) - routed - clean, len(unreached)))
+
+    # Printed every run, including zero. "N row hashes verified" cannot
+    # print unless the rows were read; silence about it could mean
+    # anything, which is the shape of a check that cannot fail. The
+    # blind spot -- a line that would not parse -- announces on its own
+    # line rather than being dropped.
+    detail += ('\n  %d row hash(es) verified: %d ok, %d missing, '
+               '%d modified' % (examined, ok, missing, mismatch))
+    if unreadable:
+        detail += ('\n  %d JSON line(s) could not be parsed and were '
+                   'NOT checked' % unreadable)
+    if routing_error:
+        detail += '\n  %s' % routing_error
+    else:
+        detail += ('\n  %d key(s) written to %s for re-dispatch'
+                   % (routed_written, ROUTED_PATH))
     summary = ('WORKSHEET CHECK: %d of %d routed, %d clean'
                % (routed, len(claims), clean))
     return summary, report, counts, headline, changed, detail

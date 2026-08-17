@@ -31,8 +31,10 @@ Domain: dev_tools
 Module created: August 2026 with Anthropic's Claude Opus 5.
 """
 
+import json
 import os
 import sys
+import tempfile
 
 import worksheet_checker as wc
 
@@ -578,6 +580,257 @@ def test_live_corpus(project_dir):
 # MAIN
 # ============================================================
 
+def _pilot_row(**overrides):
+    """One returned row object, valid unless an override breaks it."""
+    row = {
+        'record': 'row',
+        'id': 'R1',
+        'key': 'constants_new.py::KM_PER_AU',
+        'claim': 'KM_PER_AU',
+        'code_value': '149597870.7',
+        'your_value': '149597870.7',
+        'source': 'IAU 2012 Resolution B2',
+        'value_correct': 'yes',
+        'citation_correct': 'yes',
+        'notes': '',
+    }
+    row['hash'] = wc.row_hash(row['key'], row['claim'], row['code_value'])
+    row.update(overrides)
+    return row
+
+
+def _as_jsonl(rows):
+    return '\n'.join(json.dumps(r, sort_keys=True) for r in rows) + '\n'
+
+
+def test_json_reader():
+    """A JSON return becomes the same Table a markdown one does."""
+    header = {'record': 'header', 'batch': 'test', 'selection': 'all'}
+    text = _as_jsonl([header, _pilot_row(), _pilot_row(id='R2')])
+    tables, integrity, unreadable = wc.parse_json_worksheet('r.jsonl', text)
+
+    check('json: one table comes back', len(tables) == 1, len(tables))
+    if not tables:
+        return
+    table = tables[0]
+    check('json: the header line is not a row', len(table.rows) == 2,
+          len(table.rows))
+    check('json: it is a row table the layers will use',
+          table.is_row_table, repr(table.roles))
+    check('json: no column is unregistered', table.unregistered == [],
+          repr(table.unregistered))
+    check('json: the code value lands in the code column',
+          table.cell(table.rows[0][1], wc.ROLE_CODE) == '149597870.7',
+          table.cell(table.rows[0][1], wc.ROLE_CODE))
+    check('json: the citation verdict lands in its own column',
+          table.cell(table.rows[0][1], wc.ROLE_CITATION_VERDICT) == 'yes',
+          table.cell(table.rows[0][1], wc.ROLE_CITATION_VERDICT))
+    check('json: nothing unreadable in a clean return', unreadable == [],
+          repr(unreadable))
+    check('json: every row is hash-checked', len(integrity) == 2,
+          repr(integrity))
+
+
+def test_json_row_hash():
+    """The hash catches an edited do-not-edit field, and its absence."""
+    good = _pilot_row()
+    status, _detail = wc.check_row_hash(good)
+    check('hash: a clean row passes', status == 'ok', status)
+
+    rounded = _pilot_row(code_value='149597871')
+    status, detail = wc.check_row_hash(rounded)
+    check('hash: a rounded code value is caught', status == 'mismatch',
+          status)
+    check('hash: the detail names the cause',
+          'do-not-edit' in detail, detail)
+
+    reflowed = _pilot_row(key='constants_new.py :: KM_PER_AU')
+    check('hash: a reflowed key is caught',
+          wc.check_row_hash(reflowed)[0] == 'mismatch', '')
+
+    stripped = _pilot_row()
+    del stripped['hash']
+    check('hash: a MISSING hash fails rather than passing',
+          wc.check_row_hash(stripped)[0] == 'missing',
+          wc.check_row_hash(stripped)[0])
+
+    blank = _pilot_row(hash='')
+    check('hash: a blank hash fails too',
+          wc.check_row_hash(blank)[0] == 'missing', '')
+
+    # The builder and the checker each carry this function; they must
+    # agree byte for byte or every returned row reads as modified.
+    check('hash: eight characters, as the request states',
+          len(wc.row_hash('a', 'b', 'c')) == 8, wc.row_hash('a', 'b', 'c'))
+
+
+def test_json_truncation_is_salvaged_and_announced():
+    """A return cut off mid-generation keeps its complete rows."""
+    header = {'record': 'header', 'batch': 'test'}
+    text = _as_jsonl([header, _pilot_row(), _pilot_row(id='R2')])
+    cut = text.strip().split('\n')
+    cut[-1] = cut[-1][:40]
+    tables, integrity, unreadable = wc.parse_json_worksheet(
+        'cut.jsonl', '\n'.join(cut) + '\n')
+
+    check('truncation: the complete rows survive',
+          tables and len(tables[0].rows) == 1,
+          len(tables[0].rows) if tables else 0)
+    check('truncation: the broken line is REPORTED, not dropped',
+          len(unreadable) == 1, repr(unreadable))
+
+
+def test_json_array_return_is_accepted():
+    """A responder who returns an array instead of lines is still read."""
+    rows = [{'record': 'header'}, _pilot_row(), _pilot_row(id='R2')]
+    tables, _integrity, unreadable = wc.parse_json_worksheet(
+        'array.json', json.dumps(rows))
+    check('array: rows are read', tables and len(tables[0].rows) == 2,
+          len(tables[0].rows) if tables else 0)
+    check('array: nothing reported unreadable', unreadable == [],
+          repr(unreadable))
+
+
+def test_markdown_has_no_integrity_map():
+    """A markdown worksheet is NOT APPLICABLE, not passed."""
+    text = ('| Key | Claim | Code value | Value correct? |\n'
+            '|---|---|---|---|\n'
+            '| `k` | KM_PER_AU | 149597870.7 | yes |\n')
+    tables = wc.parse_tables('sheet.md', text)
+    check('markdown: still parses', len(tables) == 1, len(tables))
+    check('markdown: carries no integrity map',
+          tables[0].integrity is None, repr(tables[0].integrity))
+
+    # The layer must not invent a failure for a format that never had
+    # hashes. Seventeen historical worksheets are markdown.
+    class Fake(object):
+        def __init__(self):
+            self.findings = []
+            self.route = ''
+            self.current_ordinal = None
+            self.routed_ordinals = []
+
+        def fail(self, layer, code, detail, route):
+            self.findings.append((layer, code, detail))
+            if route:
+                self.route = route
+
+    claim = Fake()
+    wc.check_row_integrity(claim, tables[0], 3)
+    check('markdown: the integrity layer records nothing',
+          claim.findings == [], repr(claim.findings))
+
+
+def test_integrity_layer_fails_a_bad_row():
+    """LH routes a modified or unhashed row back.
+
+    The NOT APPLICABLE case above is only half the layer. A mutation
+    that made check_row_integrity return early for EVERY status passed
+    all 96 checks, because nothing here had ever asked it to fail.
+    """
+    class Fake(object):
+        def __init__(self):
+            self.findings = []
+            self.route = ''
+            self.current_ordinal = None
+            self.routed_ordinals = []
+
+        def fail(self, layer, code, detail, route):
+            self.findings.append((layer, code, detail))
+            if route:
+                self.route = route
+
+    header = {'record': 'header'}
+    rows = [_pilot_row(id='R1'),
+            _pilot_row(id='R2', code_value='999'),
+            _pilot_row(id='R3')]
+    del rows[2]['hash']
+    tables, _integrity, _bad = wc.parse_json_worksheet(
+        'r.jsonl', _as_jsonl([header] + rows))
+    table = tables[0]
+    lines = [line_no for line_no, _cells in table.rows]
+
+    clean = Fake()
+    wc.check_row_integrity(clean, table, lines[0])
+    check('LH: a clean row records nothing', clean.findings == [],
+          repr(clean.findings))
+
+    modified = Fake()
+    wc.check_row_integrity(modified, table, lines[1])
+    check('LH: a modified row is caught',
+          [f[1] for f in modified.findings] == ['ROW_MODIFIED'],
+          repr(modified.findings))
+    check('LH: a modified row goes back',
+          modified.route == 'SEND BACK', modified.route)
+
+    unhashed = Fake()
+    wc.check_row_integrity(unhashed, table, lines[2])
+    check('LH: an unhashed row is caught',
+          [f[1] for f in unhashed.findings] == ['ROW_HASH_MISSING'],
+          repr(unhashed.findings))
+    check('LH: an unhashed row goes back',
+          unhashed.route == 'SEND BACK', unhashed.route)
+
+    absent = Fake()
+    wc.check_row_integrity(absent, table, 9999)
+    check('LH: a row missing from the map is caught, not assumed fine',
+          absent.route == 'SEND BACK', repr(absent.findings))
+
+
+def test_routing_file(project_dir):
+    """The routing file is written, and says what it contains."""
+    scratch = tempfile.mkdtemp(prefix='routing_test_')
+    written, error = wc.write_routing_file(scratch, [])
+    check('routing: an empty run still writes the file',
+          error == '' and written == 0, '%r %r' % (written, error))
+
+    # Deliberately NOT the repo's own copy. Checking the repo file
+    # proved only that some earlier run had written one -- a mutation
+    # replacing the write with `pass` passed this test.
+    path = os.path.join(scratch, wc.ROUTED_PATH)
+    check('routing: the file exists', os.path.isfile(path), path)
+    if not os.path.isfile(path):
+        return
+    with open(path, encoding='utf-8') as handle:
+        payload = json.load(handle)
+    check('routing: it names its writer',
+          payload.get('written_by') == 'worksheet_checker.py',
+          repr(payload.get('written_by')))
+    check('routing: the key list is a list',
+          isinstance(payload.get('send_back'), list),
+          repr(type(payload.get('send_back'))))
+    check('routing: the count matches the list',
+          payload.get('send_back_count') == len(payload.get('send_back', [])),
+          repr(payload.get('send_back_count')))
+
+    # With real keys, so the returned count and the file agree on a
+    # number that is not zero. A mutation returning a hard 0 passed
+    # while every count in sight was already 0.
+    class FakeClaim(object):
+        def __init__(self, key, route):
+            self._key = key
+            self.route = route
+            self.routed_ordinals = []
+
+        def key(self, ordinal=None):
+            return self._key
+
+    claims = [FakeClaim('a.py::ONE', 'SEND BACK'),
+              FakeClaim('a.py::TWO', 'SEND BACK'),
+              FakeClaim('a.py::THREE', 'CONVERSATION')]
+    written, error = wc.write_routing_file(scratch, claims)
+    check('routing: only SEND BACK rows are written',
+          written == 2 and error == '', '%r %r' % (written, error))
+    with open(path, encoding='utf-8') as handle:
+        payload = json.load(handle)
+    check('routing: the file holds the two routed keys',
+          payload.get('send_back') == ['a.py::ONE', 'a.py::TWO'],
+          repr(payload.get('send_back')))
+    check('routing: the returned count matches what was written',
+          written == len(payload.get('send_back', [])),
+          '%r vs %r' % (written, payload.get('send_back')))
+
+
 def main():
     project_dir = os.path.dirname(os.path.abspath(__file__))
     os.chdir(project_dir)
@@ -593,6 +846,13 @@ def main():
     test_layers()
     test_display_instructions()
     test_live_corpus(project_dir)
+    test_json_reader()
+    test_json_row_hash()
+    test_json_truncation_is_salvaged_and_announced()
+    test_json_array_return_is_accepted()
+    test_markdown_has_no_integrity_map()
+    test_integrity_layer_fails_a_bad_row()
+    test_routing_file(project_dir)
 
     for name, detail in FAILED:
         print('  FAIL  %s' % name)
