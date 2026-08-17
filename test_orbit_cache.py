@@ -240,15 +240,37 @@ class TestOrbitCache(unittest.TestCase):
             self.assertNotIn("Earth_Sun", loaded_data)
 
 
-if __name__ == "__main__":
-    print(f"Test output will be created in: ./test_output/")
+def main():
+    """Run the suite and close on a verdict, not on a directory path.
+
+    unittest.main() writes OK / FAILED to stderr, and maintenance_run.py
+    reads the last line of stdout. That left the Orbit cache row quoting
+    the tearDown print -- a path, which appears whether the tests passed
+    or not. Running the suite here lets the result be read and stated.
+    """
+    print("Test output will be created in: ./test_output/")
     print("Running tests in isolated environment...")
-    
-    # Create test output directory if it doesn't exist
+
     test_output_dir = os.path.join(os.path.dirname(__file__), "test_output")
     if not os.path.exists(test_output_dir):
         os.makedirs(test_output_dir)
-        print(f"Created test output directory: {test_output_dir}")
-    
-    # Run tests
-    unittest.main()
+        print("Created test output directory: %s" % test_output_dir)
+
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestOrbitCache)
+    result = unittest.TextTestRunner(verbosity=2).run(suite)
+
+    total = result.testsRun
+    bad = len(result.failures) + len(result.errors)
+    if bad:
+        # Non-zero exit is what maintenance_run.py reads. unittest.main()
+        # set it for free; forgetting it here would leave this row green
+        # forever, which is the defect this patch exists to remove.
+        print("\n%d of %d orbit cache tests FAILED." % (bad, total))
+        return 1
+    print("\nAll %d orbit cache tests passed: cache loads, old formats "
+          "convert, corrupted entries are dropped." % total)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

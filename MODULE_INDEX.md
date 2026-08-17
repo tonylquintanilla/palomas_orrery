@@ -10,25 +10,23 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 130  
-**Total Lines of Code (non-blank):** 100,715  
-**Total Public Functions/Classes:** 1,120
+**Total Python Files:** 129  
+**Total Lines of Code (non-blank):** 100,397  
+**Total Public Functions/Classes:** 1,118
 
 ## Classification Coverage
 
-**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L196_10_full_verdicts.py`
-- `patch_L196_9_launch_tooltips.py`
+- `patch_L196_11_orbit_cache_verdict.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 - `worksheet_keys.py`
 
-**Undetermined domain (2).** No valid `Domain:` tag.
+**Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L196_10_full_verdicts.py`
-- `patch_L196_9_launch_tooltips.py`
+- `patch_L196_11_orbit_cache_verdict.py`
 
 
 ---
@@ -216,7 +214,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_citation_inheritance.py` | Regression tests for citation-block inheritance. (512 lines) |
 | `test_constants_provenance.py` | Regression tests for verified numeric constants. (284 lines) |
 | `test_cross_checked.py` | Regression tests for cross-check annotations. (431 lines) |
-| `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (206 lines) |
+| `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (224 lines) |
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (477 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (113 lines) |
 | `test_worksheet_checker.py` | - L-192. Can each layer actually fail? (501 lines) |
@@ -231,8 +229,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L196_10_full_verdicts.py` | - finish the sentences the maintenance runner was cutting off, and name the 1d/1e dashboard card for what it checks. (204 lines) |
-| `patch_L196_9_launch_tooltips.py` | - dashboard launch-button hover text, plus a self-explanatory summary line for the 1d/1e checker. (296 lines) |
+| `patch_L196_11_orbit_cache_verdict.py` | - give test_orbit_cache.py a closing line that says whether it passed. (164 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |
