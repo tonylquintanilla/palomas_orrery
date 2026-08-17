@@ -1,6 +1,6 @@
 # Paloma's Orrery - Module Index
 
-**Generated:** August 16, 2026 by `module_atlas.py`  
+**Generated:** August 17, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -11,14 +11,14 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 129  
-**Total Lines of Code (non-blank):** 100,805  
+**Total Lines of Code (non-blank):** 100,670  
 **Total Public Functions/Classes:** 1,120
 
 ## Classification Coverage
 
 **Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L196_15_loud_failure.py`
+- `patch_L196_16_ledger_close.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
@@ -26,7 +26,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 **Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L196_15_loud_failure.py`
+- `patch_L196_16_ledger_close.py`
 
 
 ---
@@ -229,7 +229,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L196_15_loud_failure.py` | - L-195 blocker 1, last piece. The builder refuses to write a request when a citation wraps onto an unmarked line. (433 lines) |
+| `patch_L196_16_ledger_close.py` | - write the ledger record for the work completed 2026-08-16 and 2026-08-17. (298 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |
