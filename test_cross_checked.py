@@ -588,7 +588,11 @@ def main():
             print(f"    {msg}")
         return 1
 
-    print("\nAll cross-check annotation tests passed.")
+    # The runner quotes the LAST non-blank line as this tool's
+    # verdict, so the count belongs here rather than only in the
+    # Results line above.
+    print(f"\n{passed} of {len(TESTS)} cross-check annotation tests "
+          f"passed.")
     return 0
 
 

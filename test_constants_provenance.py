@@ -348,7 +348,12 @@ def main():
             print(f"    {msg}")
         return 1
 
-    print("\nAll provenance tests passed. No constants have drifted.")
+    # The runner quotes the LAST non-blank line as this tool's
+    # verdict, so the count belongs here rather than only in the
+    # Results line above. A verdict that cannot move cannot report a
+    # suite that shrank.
+    print(f"\n{passed} of {len(tests)} provenance tests passed against "
+          f"constants_new.py. No constants have drifted.")
     return 0
 
 

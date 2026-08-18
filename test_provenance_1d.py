@@ -587,9 +587,17 @@ def main():
           "that is too loose clears\nfindings by matching what it "
           "should not, and the tier totals then move\nin the direction "
           "that looks like success.")
-    # The runner quotes the LAST non-blank line and trims it to 44
-    # characters, so the verdict goes last and stays one short line.
-    print("\nReal citations recognized, fake ones refused.")
+    # The runner quotes the LAST non-blank line as this tool's
+    # verdict, so it goes last and carries the count.
+    #
+    # It does NOT trim. An earlier version of this comment said the
+    # runner cut the line at 44 characters; measured at HEAD, print_row
+    # calls wrapped(), which runs a verdict across as many lines as it
+    # needs and deliberately gives it no ellipsis. 44 is the wrap
+    # width. The wrong version of this note would have argued against
+    # adding the count, which is why it is corrected rather than left.
+    print(f"\n{passed} of {len(TESTS)} recognition pins hold: real "
+          f"citations recognized, fake ones refused.")
     return 0
 
 

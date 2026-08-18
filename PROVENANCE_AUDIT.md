@@ -19,20 +19,20 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260818T053404Z | `24f445a` | 129 | 1026 | 290 | 620 | 114 | 2 |
 | 20260818T051607Z | `ae1883b` | 129 | 1026 | 290 | 620 | 114 | 2 |
 | 20260818T044912Z | `6c06b3f` | 130 | 1027 | 291 | 620 | 114 | 2 |
 | 20260817T234937Z | `df81b33` | 129 | 1026 | 290 | 620 | 114 | 2 |
 | 20260817T203635Z | `ac03ceb` | 128 | 1025 | 289 | 620 | 114 | 2 |
 | 20260817T194323Z | `bbac1a5` | 128 | 1025 | 289 | 620 | 114 | 2 |
-| 20260817T181419Z | `98b29f0` | 128 | 1024 | 289 | 620 | 113 | 2 |
 
-Change since the previous run: total -1, Tier-1 -1.
+Change since the previous run: total +0, Tier-1 +0.
 
 Tier-1 rose in these files:
 
 | File | Before | After |
 |------|-------:|------:|
-| patch_L188_1_report_only_summary.py | 0 | 1 |
+| patch_L188_2_verdict_lines_carry_counts.py | 0 | 1 |
 
 ---
 
@@ -144,7 +144,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `worksheet_request_builder.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `orbital_elements.py` | orrery | 1 | 0 | 0 | 0 | 1 |
-| `patch_L188_1_report_only_summary.py` | orrery | 1 | 0 | 0 | 0 | 1 |
+| `patch_L188_2_verdict_lines_carry_counts.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `data_acquisition.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `exoplanet_orbits.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `fetch_paleoclimate_data.py` | earth_science | 1 | 0 | 0 | 0 | 1 |
@@ -179,7 +179,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 **Domain coverage gap:** the following files have findings but no entry in `MODULE_DOMAIN_MAP` -- defaulted to `orrery` rather than guessed into a more specific bucket. Add each to `MODULE_DOMAIN_MAP` in provenance_scanner.py with its real domain so this stops silently defaulting:
 
 - `maintenance_run.py`
-- `patch_L188_1_report_only_summary.py`
+- `patch_L188_2_verdict_lines_carry_counts.py`
 - `worksheet_checker.py`
 - `worksheet_keys.py`
 - `worksheet_request_builder.py`
@@ -607,11 +607,11 @@ is planned for a future session.
 | 2197 | string | display string @ line 2197 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2332 | string | display string @ line 2332 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 
-### patch_L188_1_report_only_summary.py
+### patch_L188_2_verdict_lines_carry_counts.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 79 | dict | FINGERPRINTS[...] | (1 entry) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
+| 84 | dict | FINGERPRINTS[...] | (4 entries) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
 
 ### planet_visualization_utilities.py
 

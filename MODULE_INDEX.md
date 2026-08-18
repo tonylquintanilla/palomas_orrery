@@ -11,14 +11,14 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 129  
-**Total Lines of Code (non-blank):** 102,134  
+**Total Lines of Code (non-blank):** 102,085  
 **Total Public Functions/Classes:** 1,152
 
 ## Classification Coverage
 
 **Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L188_1_report_only_summary.py`
+- `patch_L188_2_verdict_lines_carry_counts.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
@@ -26,7 +26,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 **Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L188_1_report_only_summary.py`
+- `patch_L188_2_verdict_lines_carry_counts.py`
 
 
 ---
@@ -211,11 +211,11 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,038 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (342 lines) |
-| `test_citation_inheritance.py` | Regression tests for citation-block inheritance. (512 lines) |
-| `test_constants_provenance.py` | Regression tests for verified numeric constants. (284 lines) |
-| `test_cross_checked.py` | Regression tests for cross-check annotations. (497 lines) |
+| `test_citation_inheritance.py` | Regression tests for citation-block inheritance. (516 lines) |
+| `test_constants_provenance.py` | Regression tests for verified numeric constants. (289 lines) |
+| `test_cross_checked.py` | Regression tests for cross-check annotations. (501 lines) |
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (224 lines) |
-| `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (477 lines) |
+| `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (485 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (119 lines) |
 | `test_worksheet_checker.py` | - L-192. Can each layer actually fail? (837 lines) |
 | `test_worksheet_request_builder.py` | - L-195 / L-192. Does the marker join actually join, and can it fail? (376 lines) |
@@ -229,7 +229,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L188_1_report_only_summary.py` | - L-188. (259 lines) |
+| `patch_L188_2_verdict_lines_carry_counts.py` | - L-188. (189 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |
