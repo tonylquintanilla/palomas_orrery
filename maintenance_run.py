@@ -70,10 +70,26 @@ readable when everything passes and tells you what happened when it does
 not. Nothing is written to a log file: the console output is the
 artifact, and it is short enough to copy.
 
+GATING AND REPORT-ONLY
+----------------------
+Eleven checkers are pass/fail: a problem makes them exit non-zero.
+Two are REPORT-ONLY -- worksheet_checker.py and provenance_scanner.py
+exit 0 whatever they find, and exit 1 only when they could not run.
+They are marked in the CHECKERS table, and the summary counts the
+gating eleven in its headline and quotes the two report-only verdicts
+underneath.
+
+The block quotes each tool's own note rather than restating it. A
+restatement would be a second copy of a number, free to drift from the
+first, and the whole point of the line is that it moves when the number
+moves.
+
 EXIT CODE
 ---------
 0 when every checker passed, 1 when any failed. The generators do not
 affect it -- a regenerated file is the normal case, not a problem.
+Report-only tools take part: a non-zero exit from one of them means it
+could not run, which is a failure and not a finding.
 
 Role: devtool
 Domain: dev_tools
@@ -120,12 +136,19 @@ CHECKERS = [
     ('Reset completeness', ['test_reset_completeness.py'],
      'RESET COMPLETENESS:'),
     ('Orbit cache', ['test_orbit_cache.py'], None),
-    ('Worksheet checker', ['worksheet_checker.py'], 'WORKSHEET CHECK:'),
+    # A fourth field marks a tool REPORT-ONLY: it exits 0 whatever it
+    # finds, so "passed" says only that it ran. Exactly two are, and
+    # both are deliberate -- their numbers are the verdict, not their
+    # exit codes. Omit the field and a row gates, which is the safe
+    # default for anything added later.
+    ('Worksheet checker', ['worksheet_checker.py'], 'WORKSHEET CHECK:',
+     True),
     ('Worksheet checker tests', ['test_worksheet_checker.py'], None),
     ('Worksheet key round trip', ['test_worksheet_keys.py'], None),
     ('Builder marker join', ['test_worksheet_request_builder.py'], None),
     ('Extractor pins', ['test_extractor_pins.py'], None),
-    ('Provenance scanner', ['provenance_scanner.py'], 'TIER-1 FINDINGS'),
+    ('Provenance scanner', ['provenance_scanner.py'], 'TIER-1 FINDINGS',
+     True),
 ]
 
 TOOL_TIMEOUT_SECONDS = 900
@@ -279,7 +302,10 @@ def main():
         print('  ' + line)
     print()
 
-    results = []      # (label, rc, seconds, note, output)
+    # (label, rc, seconds, note, output, is_checker[, report_only])
+    # Checker rows carry the seventh field; generator rows stop at six.
+    # Read it with a length guard, never by unpacking a fixed width.
+    results = []
 
     # ---- generators ---------------------------------------------------
     print('GENERATORS -- regenerate every time; a no-op when nothing moved')
@@ -311,7 +337,9 @@ def main():
     # ---- checkers -----------------------------------------------------
     print('CHECKERS -- verdict informs the push call')
     print('-' * 70)
-    for label, argv_tail, hint in CHECKERS:
+    for entry in CHECKERS:
+        label, argv_tail, hint = entry[0], entry[1], entry[2]
+        report_only = entry[3] if len(entry) > 3 else False
         rc, output, seconds = run_tool(project_dir, argv_tail)
         verdict = line_containing(output, hint) if hint else ''
         # The row already carries the label; a verdict that opens by
@@ -329,24 +357,48 @@ def main():
             if verdict:
                 note += ' -- ' + fit(verdict, 30)
         print_row(label, seconds, note)
-        results.append((label, rc, seconds, note, output, True))
+        results.append((label, rc, seconds, note, output, True,
+                        report_only))
     print()
 
     # ---- summary ------------------------------------------------------
-    failed = [row for row in results if row[5] and row[1] != 0]
+    # A generator row is a 6-tuple and a checker row a 7-tuple, so the
+    # report-only flag is read with a length guard rather than an index.
+    checkers = [row for row in results if row[5]]
+    failed = [row for row in checkers if row[1] != 0]
+    report_only = [row for row in checkers if len(row) > 6 and row[6]]
+    gating = [row for row in checkers if row not in report_only]
     total = sum(row[2] for row in results)
 
     print('=' * 70)
     if failed:
         print('  %d of %d checkers FAILED -- %.1fs total'
-              % (len(failed), len(CHECKERS), total))
+              % (len(failed), len(checkers), total))
         print('  ' + ', '.join(row[0] for row in failed))
     else:
-        print('  All %d checkers passed -- %.1fs total' % (len(CHECKERS), total))
+        print('  %d of %d gating checkers passed -- %.1fs total'
+              % (len(gating), len(gating), total))
+
+    # Printed in BOTH branches on purpose. The scanner's count is the
+    # number the push call turns on, so hiding it behind a failure
+    # would be the same defect this block exists to remove. Each line
+    # quotes the tool's own note -- the string already printed in its
+    # row above -- rather than restating it, because a restatement is a
+    # second copy of a number and free to drift from the first.
+    if report_only:
+        print('  %d report-only, exit 0 whatever they find:'
+              % len(report_only))
+        for row in report_only:
+            print('    %-27s %s' % (row[0], row[3]))
     print('=' * 70)
 
     # ---- detail for failures only -------------------------------------
-    for label, rc, seconds, note, output, is_checker in results:
+    # Indexed rather than unpacked: checker rows carry a seventh field
+    # and generator rows do not, so a fixed-width unpack here raises on
+    # the first checker row. It compiled cleanly and died on the run --
+    # the compiler cannot see a tuple width.
+    for row in results:
+        label, rc, note, output = row[0], row[1], row[3], row[4]
         if rc == 0:
             continue
         print()
