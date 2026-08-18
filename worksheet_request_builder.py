@@ -54,8 +54,32 @@ what an answer MEANS belongs to the checker.
 
 RUNNING IT
 
-Open in VS Code and press Run. It asks for a batch name and writes one
-file into documentation/worksheets/. No command-line flags.
+Open in VS Code and press Run. No command-line flags; it asks three
+questions in the console, in this order.
+
+  1. WHICH ROWS. A numbered list of the named selections defined in
+     this module. The prompt DEFAULTS TO 1 -- the whole corpus -- so
+     pressing Enter here produces a request over every annotated row
+     rather than the slice you meant. Type the number.
+  2. BATCH NAME. Becomes the filename, and is recorded in the request
+     header.
+  3. ANCHOR SHA. The commit this request describes. A returned row is
+     checked against it later, so it must be current HEAD at the
+     moment of the run -- commit something afterwards and re-run.
+
+It writes TWO files into documentation/worksheets/, both rendered from
+the same Request list so there is no second source of truth:
+
+    REQUEST_<batch>.jsonl   what goes out
+    REQUEST_<batch>.md      the fallback, if a return will not parse
+
+It refuses rather than overwriting if either name already exists, and
+it refuses to write at all if a selection matches no rows -- an empty
+worksheet is indistinguishable from a finished one once it is out of
+the room.
+
+It is also a launch card in palomas_orrery_dashboard.py, under
+Developer Tools, which opens it in its own console window.
 """
 
 import hashlib

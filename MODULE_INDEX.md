@@ -10,22 +10,24 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 129  
-**Total Lines of Code (non-blank):** 102,592  
-**Total Public Functions/Classes:** 1,152
+**Total Python Files:** 130  
+**Total Lines of Code (non-blank):** 102,996  
+**Total Public Functions/Classes:** 1,155
 
 ## Classification Coverage
 
-**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
+- `patch_L201_2_dashboard_entries.py`
 - `patch_L204_1_grammar_and_resolved_leg.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 - `worksheet_keys.py`
 
-**Undetermined domain (1).** No valid `Domain:` tag.
+**Undetermined domain (2).** No valid `Domain:` tag.
 
+- `patch_L201_2_dashboard_entries.py`
 - `patch_L204_1_grammar_and_resolved_leg.py`
 
 
@@ -39,7 +41,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,938 lines) |
 | `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,455 lines) |
-| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (1,071 lines) |
+| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (1,147 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
 ---
@@ -221,7 +223,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_worksheet_request_builder.py` | - L-195 / L-192. Does the marker join actually join, and can it fail? (376 lines) |
 | `verify_orbit_cache.py` | Safely verify and repair orbit_paths.json (172 lines) |
 | `worksheet_checker.py` | - L-192. Does the worksheet say what the annotation claims it says? (1,845 lines) |
-| `worksheet_request_builder.py` | Worksheet request builder -- ask the question the checker can read. (690 lines) |
+| `worksheet_request_builder.py` | Worksheet request builder -- ask the question the checker can read. (709 lines) |
 
 ---
 
@@ -229,6 +231,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
+| `patch_L201_2_dashboard_entries.py` | - L-201. (309 lines) |
 | `patch_L204_1_grammar_and_resolved_leg.py` | - L-204, L-200, L-203. (861 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |

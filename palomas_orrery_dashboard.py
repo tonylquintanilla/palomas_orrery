@@ -223,6 +223,14 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
+        ("Regenerate Module Atlas",
+         "module_atlas.py",
+         "Scan codebase, generate MODULE_ATLAS.md. "
+         "Run after significant codebase changes (new modules, reorganizations).",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
         ("Data Inventory",
          "data_inventory.py",
          "Inventory the large, gitignored data stores (data/, star_data/). "
@@ -231,10 +239,16 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
-        ("Regenerate Module Atlas",
-         "module_atlas.py",
-         "Scan codebase, generate MODULE_ATLAS.md. "
-         "Run after significant codebase changes (new modules, reorganizations).",
+        ("Constants Change Report",
+         "constants_change_report.py",
+         "Ask git what changed in constants_new.py since the last commit "
+         "and report each moved value in words. The line that matters "
+         "says whether the provenance moved WITH the number: a deliberate "
+         "correction edits the value and its comment block together, "
+         "while corruption -- a bad merge, a stray keystroke, a copied "
+         "stale value -- moves the number alone and leaves the evidence "
+         "describing the old one. Run before committing a change to "
+         "constants_new.py.",
          SCRIPT_DIR,
          True,
          None,
@@ -317,6 +331,49 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
+        ("Worksheet Key Round Trip",
+         "test_worksheet_keys.py",
+         "Assert that every annotated site mints a key that resolves back "
+         "to it, on every run. A rename breaks it, a split implementation "
+         "between the builder and the checker breaks it, and a change to "
+         "the enclosing-name rule breaks it -- all three loudly, at the "
+         "commit that introduced them, rather than months later when a "
+         "returned worksheet will not bind.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Builder Marker Join",
+         "test_worksheet_request_builder.py",
+         "Test that a citation continued onto a marked second line "
+         "(`# Source+:` under `# Source:`) is joined back before the "
+         "request quotes it. Every behaviour is exercised twice, once "
+         "with input that should join and once with input that must NOT: "
+         "a join firing on everything is indistinguishable from a join "
+         "firing correctly, and both report zero problems, so the "
+         "negative cases are the test. The last check runs against the "
+         "real corpus. Run after editing the builder or relabeling a "
+         "continuation.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Extractor Pins",
+         "test_extractor_pins.py",
+         "Pin the instruction filter's kept-and-dropped set at "
+         "LOOKBACK 30 / LOOKAHEAD 25, frozen 2026-08-14. The claim "
+         "ordinal in every issued key -- the `::c2` -- counts claims "
+         "AFTER this filter runs, so extending the instruction pattern "
+         "by one phrase lets a formerly-dropped number join the sequence "
+         "and shifts every ordinal after it with no prose edit at all. A "
+         "worksheet returned against the old ordinals would then bind to "
+         "the wrong claim. It does not decide whether a change is wrong; "
+         "it reports that the extractor no longer means what the issued "
+         "keys assume, and prints the replacement pin file.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
         ("Provenance Scanner",
          "provenance_scanner.py",
          "Scan for hardcoded constants and duplicates. Writes PROVENANCE_AUDIT.md. "
@@ -324,6 +381,25 @@ LAUNCH_GROUPS = {
          SCRIPT_DIR,
          True,
          None,
+         True),
+        ("Worksheet Request Builder",
+         "worksheet_request_builder.py",
+         "Write the cross-check request that goes OUT to a reader. The "
+         "checker reads what comes back; this writes what is sent. Opens "
+         "in its own console because it asks three questions, in this "
+         "order. WHICH ROWS -- a numbered list of named selections; it "
+         "DEFAULTS TO 1, the whole corpus, so type the number you want "
+         "rather than pressing Enter (2 is constants_new.py, the 23-row "
+         "pilot slice). BATCH NAME -- becomes the filename. ANCHOR SHA -- "
+         "the commit the request describes; use current HEAD, and re-run "
+         "if you commit anything before sending it, because a returned "
+         "row is checked against this SHA. It writes "
+         "REQUEST_<batch>.jsonl and REQUEST_<batch>.md into "
+         "documentation/worksheets/ and refuses rather than overwriting "
+         "if either name is taken. Send the .jsonl; the .md is the "
+         "fallback if a return will not parse. It judges nothing -- "
+         "reading the returns is Worksheet Checker, above.",
+         SCRIPT_DIR,
          True),
         ("Dependency Trace",
          "dep_trace.py",
