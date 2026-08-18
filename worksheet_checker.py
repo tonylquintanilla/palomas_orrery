@@ -57,12 +57,17 @@ Ruled 2026-08-13, and the distinction is the whole design:
 
 WHAT IT DOES NOT DO
 -------------------
-It does not write. There is no propose mode and no argument that adds
-one (ruled 2026-08-13). Proposed annotations are discussed in
-conversation first. A tool that both judges evidence and writes
-citations can satisfy itself, and the risk is not forgery -- it is a
-matcher bug writing annotations against wrong rows and the same
+It does not write INTO THE CORPUS. There is no propose mode and no
+argument that adds one (ruled 2026-08-13). Proposed annotations are
+discussed in conversation first. A tool that both judges evidence and
+writes citations can satisfy itself, and the risk is not forgery -- it
+is a matcher bug writing annotations against wrong rows and the same
 matcher later confirming them.
+
+It DOES write reports, and there are three: this file,
+data/worksheet_routed.json, and the citation prompt at
+documentation/prompts/citation_review.jsonl (L-207). A report is not
+a corpus edit, and none of them proposes an annotation.
 
 It does not gate the push. Report-only. Exit 0 whenever the check RAN,
 whatever it found; exit 1 only when the check could not run at all.
@@ -90,6 +95,7 @@ Role: devtool
 Domain: dev_tools
 
 Module created: August 2026 with Anthropic's Claude Opus 5.
+Module updated: August 18, 2026 with Anthropic's Claude Opus 5 (L-207).
 """
 
 import hashlib
@@ -1086,6 +1092,10 @@ class Claim(object):
         # when the finding fired.
         self.routed_ordinals = []
         self.current_ordinal = None
+        # The citation half of every row this claim matched,
+        # kept for the citation prompt (L-207). Filled at the
+        # point of the match; empty means no row was found.
+        self.citation_rows = []
 
     @property
     def where(self):
@@ -1312,6 +1322,8 @@ def check_claim(claim, worksheets, unregistered):
     # tool hunting for a nearby note when the match failed would have
     # crossed from transcription into interpretation.
     claim.notes = table.cell(cells, ROLE_NOTES)
+    capture_citation_row(claim, table, cells, None,
+                         claim.label, claim.unit.value_str)
 
     # ---- L2a: the value agrees with the evidence ---------------------
     evidence = table.cell(cells, ROLE_EVIDENCE)
@@ -1464,6 +1476,10 @@ def claim_rows(tables, value, string_text, token):
 def check_string_claim(claim, tables):
     """L1-L3 for a display string, per claim rather than per row."""
     values = claim.claim_values
+    # The raw spelling of each claim, kept for the citation
+    # prompt so it states the value the way the code writes
+    # it, as a request row does.
+    raws = [raw for _value, raw in physical_claims(claim.unit)[0]]
     claim.claims_present = len(values)
     text = claim.unit.raw_value or ''
     token = body_token(claim.module)
@@ -1485,6 +1501,9 @@ def check_string_claim(claim, tables):
         table, line_no, cells, source_cell = hits[0]
         claim.matched_line = line_no
         claim.notes = table.cell(cells, ROLE_NOTES)
+        capture_citation_row(
+            claim, table, cells, ordinal, text,
+            raws[ordinal - 1] if ordinal <= len(raws) else '')
         check_row_integrity(claim, table, line_no)
 
         evidence = table.cell(cells, ROLE_EVIDENCE)
@@ -1993,6 +2012,262 @@ def write_routing_file(project_dir, claims):
     return len(keys), ''
 
 
+
+# ============================================================
+# THE CITATION PROMPT (L-207)
+# ============================================================
+#
+# The numerical half of a return routes. The citation half -- the
+# source a responder actually consulted, and their verdict on the
+# source the CODE cites -- is parsed into the Table and stops there.
+# That is not a defect in the split: whether a source SUPPORTS a claim
+# is a language judgement, and the ruling of 2026-08-17 put it with a
+# reader on purpose, leaving the mechanical checker at numbers. What
+# was never built is the leg carrying the material to that reader.
+#
+# This is that leg. It is an EMITTER over the Table the run already
+# built: no second parse, no new verdict class, no routing change. The
+# precedent is the JSON adapter, which converted JSON into the same
+# Table rather than standing up a second checker.
+#
+# A PROMPT RATHER THAN A WORKLIST, on purpose (Tony, 2026-08-18). A
+# worklist is data; a request inherits the discipline the request
+# builder already has -- keyed rows, a hash over the do-not-edit
+# fields, a SHA anchor, generated rather than typed. Same HEAD plus
+# the same returns must give the same bytes, which is what makes a
+# citation review evidence rather than an opinion: re-runnable against
+# another model, comparable across sessions, reproducible by anyone
+# holding the repo.
+#
+# ONE ROW PER KEY, NOT PER ANNOTATION. Two checkers who both examined
+# one site produce two legs and one row. The key names the row and the
+# hash is taken over the key, so two rows sharing both would make the
+# hash stop identifying anything. Grouping also puts the two sources
+# side by side, where a disagreement between responders is visible
+# without inventing a mechanism to look for one.
+#
+# THE RESPONDER'S VERDICT IS SHOWN (ruled 2026-08-18). It makes the
+# review a comparison rather than a re-derivation, and disagreement
+# between their verdict and the reviewer's is the lazy-responder
+# canary, measured per row on real rows. The cost is anchoring, and it
+# was traded away deliberately; the mitigations are weaker than
+# structural blindness would be, so they are named rather than
+# assumed: their verdict sits in its own field, after the evidence,
+# and the prompt states that the review is independent and that
+# disagreement is a FINDING rather than an error to reconcile.
+#
+# WHAT IT DOES NOT DO. It does not route, score, or promote. A
+# returned citation review does not become a `# Cross-checked:` leg by
+# itself: what lands in the code is an edit, and what records it is a
+# `# Resolved:` leg, which this tool already checks for linkage.
+
+CITATION_PROMPT_PATH = os.path.join('documentation', 'prompts',
+                                    'citation_review.jsonl')
+CITATION_PROMPT_REPO = 'https://github.com/tonylquintanilla/palomas_orrery'
+
+
+def capture_citation_row(claim, table, cells, ordinal, claim_text,
+                         code_value):
+    """Keep the citation half of a row the match already found.
+
+    Called at the point of the match, where the table and the row are
+    both in hand. A later pass that went looking for the row again
+    would be a second matcher, and two matchers disagreeing about
+    which row belongs to a value is the failure this file exists to
+    prevent.
+    """
+    claim.citation_rows.append({
+        'ordinal': ordinal,
+        'claim_text': ' '.join((claim_text or '').split()),
+        'code_value': '' if code_value is None else str(code_value),
+        'source': table.cell(cells, ROLE_SOURCE),
+        'citation_verdict': table.cell(cells, ROLE_CITATION_VERDICT),
+        'notes': table.cell(cells, ROLE_NOTES),
+    })
+
+
+def citation_vocabulary():
+    """The verdict words that answer a CITATION question.
+
+    Read from the registry rather than retyped. A prompt naming a word
+    the vocabulary does not carry would send a reviewer to write
+    something this project's own tools read as UNREADABLE.
+    """
+    groups = {}
+    for token in sorted(VERDICT_TOKENS):
+        own, scope = VERDICT_TOKENS[token]
+        if scope not in (SCOPE_CITATION, SCOPE_EITHER):
+            continue
+        groups.setdefault(own, [])
+        groups[own].append(token)
+    return [{'means': own, 'words': groups[own]} for own in sorted(groups)]
+
+
+def anchor_sha(project_dir):
+    """HEAD as this run reads it, or a stated absence.
+
+    An unknown anchor is written out rather than omitted. A prompt
+    carrying no anchor line looks exactly like one whose anchor was
+    unreadable, and the rule here is that a document leaving the
+    session says what it was built on.
+    """
+    try:
+        import provenance_history as ph
+        sha = ph.head_sha(project_dir)
+    except Exception:                                     # noqa: BLE001
+        sha = None
+    return sha or 'unknown -- not a git checkout, or HEAD unreadable'
+
+
+def citation_prompt_rows(claims):
+    """(rows, not_included) -- one row per key, legs grouped under it.
+
+    `not_included` counts what was left out, by reason, and every
+    count is reported whether or not it is zero. A row dropped in
+    silence is the blind spot this file has a rule about.
+    """
+    rows = {}
+    not_included = {
+        'annotations_with_no_matched_row': 0,
+        'matched_rows_with_no_citation_material': 0,
+        'matched_rows_with_no_key': 0,
+    }
+    for claim in claims:
+        if not claim.citation_rows:
+            not_included['annotations_with_no_matched_row'] += 1
+            continue
+        cited, context, _problems, _unmarked, _joined = wk.legs_of(
+            claim.unit.attached_text)
+        for captured in claim.citation_rows:
+            if not captured['source'] and not captured['citation_verdict']:
+                not_included[
+                    'matched_rows_with_no_citation_material'] += 1
+                continue
+            key = claim.key(captured['ordinal'])
+            if not key:
+                not_included['matched_rows_with_no_key'] += 1
+                continue
+            row = rows.get(key)
+            if row is None:
+                row = {
+                    'record': 'row',
+                    'key': key,
+                    'claim': captured['claim_text'],
+                    'code_value': captured['code_value'],
+                    'site': claim.where,
+                    # What the CODE cites, read from the code NOW --
+                    # the authority a reviewer would edit, not the one
+                    # a months-old worksheet happened to be shown.
+                    'code_cited': list(cited),
+                    # Not decoration. The context legs are what
+                    # separate a citation that is WRONG from one that
+                    # is merely MISPLACED.
+                    'context_legs': list(context),
+                    'responses': [],
+                    'review_verdict': '',
+                    'review_source': '',
+                    'review_notes': '',
+                }
+                row['hash'] = row_hash(key, row['claim'],
+                                       row['code_value'])
+                rows[key] = row
+            row['responses'].append({
+                'checker': claim.checker,
+                'worksheet': claim.worksheet,
+                'numerical_route': claim.route or 'not routed',
+                'their_source': captured['source'],
+                'their_citation_verdict': captured['citation_verdict'],
+                'their_notes': captured['notes'],
+            })
+
+    ordered = []
+    for key in sorted(rows):
+        row = rows[key]
+        row['responses'].sort(
+            key=lambda entry: (entry['checker'], entry['worksheet']))
+        ordered.append(row)
+    return ordered, not_included
+
+
+def citation_prompt_payload(project_dir, claims):
+    """(text, row count, not_included) -- the prompt as it is written.
+
+    Deterministic by construction: rows sorted by key, responses
+    sorted inside a row, keys sorted inside every object, and no
+    timestamp anywhere. Same HEAD and same returns, same bytes -- so
+    git reporting no change is itself the statement that the review is
+    reproducible.
+    """
+    rows, not_included = citation_prompt_rows(claims)
+    header = {
+        'record': 'header',
+        'artifact': 'citation_review_prompt',
+        'written_by': 'worksheet_checker.py',
+        'ledger_item': 'L-207',
+        'built_on_sha': anchor_sha(project_dir),
+        'repo': CITATION_PROMPT_REPO,
+        'extractor_version': wk.EXTRACTOR_VERSION,
+        'key_format': 'module.py::enclosing::label::cN',
+        'rows': len(rows),
+        'responder_legs': sum(len(row['responses']) for row in rows),
+        'not_included': not_included,
+        'question': ('For each row: does the source the CODE cites '
+                     'support the claim the code makes? Whether the '
+                     'NUMBER is right is checked elsewhere and is not '
+                     'what this asks.'),
+        'row_hash': ('sha256 over key, claim and code value, first %d '
+                     'hex characters. Those three fields are not yours '
+                     'to edit; a row whose hash does not match them is '
+                     'returned rather than read.' % HASH_CHARS),
+        'answer_fields': ['review_verdict', 'review_source',
+                          'review_notes'],
+        'instructions': [
+            'review_verdict -- about the CODE\'s cited source only, '
+            'carried on each row as code_cited. Does that authority '
+            'publish or support this claim? One token, from the list '
+            'below.',
+            'review_source -- what you consulted to answer that, '
+            'specific enough to find again.',
+            'review_notes -- anything a token cannot carry. Say in '
+            'particular whether a citation that looks wrong is WRONG '
+            'or merely MISPLACED: the context legs are shown for '
+            'exactly that reason, and a value whose last digits come '
+            'from a second authority named in a context leg is a '
+            'citation to swap, not a number to change.',
+            'The responses field carries what an earlier responder '
+            'cited and what they concluded. Your review is '
+            'INDEPENDENT: read the claim and the cited source first, '
+            'and record disagreement with them as a FINDING rather '
+            'than reconciling it away. Agreement nobody checked is '
+            'the thing this is measuring.',
+            'One token per verdict field. A field holding a token plus '
+            'a qualification is reported as unclassified rather than '
+            'read, because guessing which half you meant is the '
+            'interpretation this system exists to avoid.',
+        ],
+        'verdict_tokens': citation_vocabulary(),
+    }
+    lines = [json.dumps(header, sort_keys=True)]
+    for row in rows:
+        lines.append(json.dumps(row, sort_keys=True))
+    return '\n'.join(lines) + '\n', len(rows), not_included
+
+
+def write_citation_prompt(project_dir, claims):
+    """(rows_written, not_included, error). Written every run."""
+    payload, count, not_included = citation_prompt_payload(
+        project_dir, claims)
+    path = os.path.join(project_dir, CITATION_PROMPT_PATH)
+    try:
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, 'wb') as handle:
+            handle.write(payload.encode('ascii', 'replace'))
+    except (IOError, OSError) as exc:
+        return 0, not_included, ('could not write %s: %s'
+                                 % (CITATION_PROMPT_PATH, exc))
+    return count, not_included, ''
+
+
 def run(project_dir, today):
     """Returns (summary_line, report_path, counts)."""
     worksheets = load_worksheets(project_dir)
@@ -2016,6 +2291,8 @@ def run(project_dir, today):
                           resolved)
 
     routed_written, routing_error = write_routing_file(project_dir, claims)
+    prompt_rows, prompt_excluded, prompt_error = write_citation_prompt(
+        project_dir, claims)
     examined, ok, missing, mismatch, unreadable = integrity_summary(
         worksheets)
 
@@ -2037,6 +2314,7 @@ def run(project_dir, today):
         'routed_keys_written': routed_written,
         'resolved_legs': len(resolved),
         'resolved_problems': sum(1 for leg in resolved if leg.findings),
+        'citation_prompt_rows': prompt_rows,
     }
 
     # The summary line carries its denominator on purpose. A line that
@@ -2073,6 +2351,18 @@ def run(project_dir, today):
                'linkage problem'
                % (len(resolved), len(resolved) - resolved_problems,
                   resolved_problems))
+    # Printed every run, including zero, and the excluded
+    # counts ride with it: a prompt that quietly dropped half
+    # the corpus reads exactly like one with nothing to drop.
+    if prompt_error:
+        detail += '\n  %s' % prompt_error
+    else:
+        detail += ('\n  %d citation row(s) written to %s'
+                   % (prompt_rows, CITATION_PROMPT_PATH))
+    detail += ('\n    not included: %d annotation(s) matched no row, '
+               '%d row(s) carried no citation material'
+               % (prompt_excluded['annotations_with_no_matched_row'],
+                  prompt_excluded['matched_rows_with_no_citation_material']))
     if routing_error:
         detail += '\n  %s' % routing_error
     else:

@@ -6,8 +6,9 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 2.4 | Cut from palomas_orrery @ 6b99ace (v2.2), earlier
-@ 00219d9 (v2.1), @ eb77c83 (v2.0), @ cdcdb4b (v1.9) | August 17, 2026
+Skill version: 2.5 | Cut from palomas_orrery @ 731066f (v2.5), earlier
+@ 6b99ace (v2.2), @ 00219d9 (v2.1), @ eb77c83 (v2.0), @ cdcdb4b (v1.9)
+| August 18, 2026
 Source: project_instructions_v3_29.md Part 3 (Provenance Audit, Fetched vs
 Recalled) + food insecurity build handoff + scanner source at HEAD. v1.1
 adds the report domain-classification mechanics, the Review-Repair
@@ -103,6 +104,66 @@ an integration test, not by a reading. The Resolved Leg section is new
 edit. And The Visibility Convention is new (L-203), promoting a
 one-off ruling about the request builder into the general rule it was
 always an instance of.
+
+v2.5 (August 18, 2026) adds Extend a Boundary Before Adding a Path,
+the rule an external review proposed on 2026-08-18 and Tony adopted
+the same day. It lives here rather than in the resident protocol
+because it fires while a provenance feature is being designed, which
+is when this skill loads. L-207, the citation prompt, was the first
+item checked against it rather than assumed to pass.
+
+## Extend a Boundary Before Adding a Path [QUALITY]
+
+**Before building a new provenance feature, ask whether it can be
+expressed by extending a data boundary that already exists, rather
+than by adding another checking path.**
+
+The reason is a measurement rather than a preference. By August 2026
+the verification infrastructure had a larger state space than a person
+can hold in mind at once, and the project had more epistemic
+INFRASTRUCTURE than epistemic COVERAGE: Tier-1 findings stood at 289
+and were rising, because every improvement to the scanner's reach
+exposed claims that had been invisible rather than sound. Machinery
+that grows faster than the coverage it produces stops being read, and
+a check nobody reads is a check that cannot fail.
+
+Three shapes the extension usually takes, in the order to try them:
+
+- AN EMITTER over a structure the run already builds. L-207's citation
+  prompt reads the Table the checker assembles for its numerical
+  layers and writes a second artifact from it -- no second parse, no
+  new verdict class, no routing change.
+- AN ADAPTER converting a new input into the structure the existing
+  layers already read. The JSON worksheet reader (L-202) is the
+  precedent: it synthesizes the same Table the markdown parser
+  produces, so match, integrity, drift and verdict all ran unchanged
+  against a format that did not exist when they were written. The
+  alternative -- a second checker for JSON returns -- is the parallel
+  pipeline this project has a rule about.
+- A FIELD on a record that already travels. Cheaper than a new record,
+  and it arrives everywhere that record already goes.
+
+The rule does NOT forbid a new path. It requires that the question be
+asked out loud and the answer written down, because the failure mode
+is not one bad decision. It is a dozen locally reasonable ones, each
+adding a layer nobody would have approved as a whole.
+
+State the honest cost of the extension too. L-207 gives the checker a
+second artifact type, and two outputs are more surface than one. That
+was weighed and accepted; what it avoided was a second reader of the
+corpus.
+
+**And the test that comes after.** Once the machinery can answer the
+question it was built for, the default question stops being "what does
+the provenance system need next" and becomes "which outstanding claim
+can this now settle." Stated so it can fail: the next provenance
+feature should be one an actual RUN exposed the need for, not one a
+design conversation invented.
+
+(Proposed by an external review, 2026-08-18, and adopted by Tony the
+same day. Marked QUALITY rather than CRITICAL because no failure has
+yet shown it load-bearing -- it was adopted from a prediction, and the
+tiers move on evidence.)
 
 ## The Visibility Convention [CRITICAL]
 

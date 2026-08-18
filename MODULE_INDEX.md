@@ -10,18 +10,23 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 128  
-**Total Lines of Code (non-blank):** 101,896  
-**Total Public Functions/Classes:** 1,149
+**Total Python Files:** 129  
+**Total Lines of Code (non-blank):** 103,222  
+**Total Public Functions/Classes:** 1,161
 
 ## Classification Coverage
 
-**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
+- `patch_L207_1_citation_prompt.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 - `worksheet_keys.py`
+
+**Undetermined domain (1).** No valid `Domain:` tag.
+
+- `patch_L207_1_citation_prompt.py`
 
 
 ---
@@ -212,11 +217,11 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (224 lines) |
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (485 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (119 lines) |
-| `test_worksheet_checker.py` | - L-192. Can each layer actually fail? (837 lines) |
-| `test_worksheet_request_builder.py` | - L-195 / L-192. Does the marker join actually join, and can it fail? (376 lines) |
+| `test_worksheet_checker.py` | - L-192. Can each layer actually fail? (972 lines) |
+| `test_worksheet_request_builder.py` | - L-195 / L-192. Does the marker join actually join, and can it fail? (393 lines) |
 | `verify_orbit_cache.py` | Safely verify and repair orbit_paths.json (172 lines) |
-| `worksheet_checker.py` | - L-192. Does the worksheet say what the annotation claims it says? (1,845 lines) |
-| `worksheet_request_builder.py` | Worksheet request builder -- ask the question the checker can read. (709 lines) |
+| `worksheet_checker.py` | - L-192. Does the worksheet say what the annotation claims it says? (2,112 lines) |
+| `worksheet_request_builder.py` | Worksheet request builder -- ask the question the checker can read. (626 lines) |
 
 ---
 
@@ -224,10 +229,11 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
+| `patch_L207_1_citation_prompt.py` | - L-207. The citation prompt. (868 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |
-| `worksheet_keys.py` | Worksheet row keys -- one owner for the syntax and the resolution. (270 lines) |
+| `worksheet_keys.py` | Worksheet row keys -- one owner for the syntax and the resolution. (392 lines) |
 
 ---
 

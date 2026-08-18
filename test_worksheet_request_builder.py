@@ -34,6 +34,7 @@ Role: devtool
 Domain: dev_tools
 
 Module created: August 2026 with Anthropic's Claude Opus 5.
+Module updated: August 18, 2026 with Anthropic's Claude Opus 5 (L-207).
 """
 
 import json
@@ -41,6 +42,7 @@ import os
 import sys
 
 import worksheet_checker as wc
+import worksheet_keys as wk
 import worksheet_request_builder as b
 
 
@@ -408,6 +410,24 @@ def test_json_lines(project_dir):
           % (sorted(named), sorted(wc.VERDICT_TOKENS)))
 
 
+
+
+def test_one_parser():
+    """The builder's leg names ARE the shared ones, not copies.
+
+    The parser moved to worksheet_keys.py on 2026-08-18 so the checker
+    could read the same comment run without importing this module.
+    Aliases make the move invisible to every caller, which is the
+    point -- and also the risk: a later edit could restore a local
+    copy here and nothing else would notice. This is what notices.
+    """
+    check('one parser: legs_of is worksheet_keys.legs_of',
+          b.legs_of is wk.legs_of,
+          '%r vs %r' % (b.legs_of, wk.legs_of))
+    check('one parser: the regexes and labels are shared too',
+          b.LEG_RE is wk.LEG_RE and b.VERDICTED_LEG is wk.VERDICTED_LEG,
+          '%r vs %r' % (b.LEG_RE, wk.LEG_RE))
+
 def main():
     project_dir = os.path.dirname(os.path.abspath(__file__))
     os.chdir(project_dir)
@@ -429,6 +449,7 @@ def main():
     test_ratchet_is_not_bypassed_by_selection(project_dir)
     test_row_hash()
     test_json_lines(project_dir)
+    test_one_parser()
 
     for name, detail in FAILED:
         print('  FAIL  %s' % name)

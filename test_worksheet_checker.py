@@ -29,6 +29,7 @@ Role: devtool
 Domain: dev_tools
 
 Module created: August 2026 with Anthropic's Claude Opus 5.
+Module updated: August 18, 2026 with Anthropic's Claude Opus 5 (L-207).
 """
 
 import json
@@ -967,6 +968,154 @@ def test_suffix_sets_agree():
           repr(wc.ps.WORKSHEET_REFERENCE_SUFFIXES))
 
 
+
+
+def test_citation_prompt(project_dir):
+    """The prompt is written, groups by key, and is reproducible."""
+
+    class PromptUnit(object):
+        def __init__(self, attached_text=''):
+            self.attached_text = attached_text
+            self.line_start = 12
+
+    class PromptClaim(object):
+        """The fields the emitter reads, and nothing else."""
+
+        def __init__(self, key, checker, worksheet, rows, route='',
+                     attached='# Source: IAU 2015 Resolution B3'):
+            self._key = key
+            self.checker = checker
+            self.worksheet = worksheet
+            self.citation_rows = rows
+            self.route = route
+            self.unit = PromptUnit(attached)
+            self.where = 'constants_new.py:12'
+
+        def key(self, ordinal=None):
+            return self._key
+
+    def captured(source='IAU B3', verdict='partial', ordinal=None):
+        return {'ordinal': ordinal, 'claim_text': 'EARTH_RADIUS_KM',
+                'code_value': '6378.137', 'source': source,
+                'citation_verdict': verdict, 'notes': 'over-precise'}
+
+    scratch = tempfile.mkdtemp(prefix='citation_prompt_')
+
+    # An empty run still writes the file. Checking the repo's own copy
+    # would prove only that some earlier run wrote one -- the mistake
+    # test_routing_file records having made.
+    written, not_included, error = wc.write_citation_prompt(scratch, [])
+    path = os.path.join(scratch, wc.CITATION_PROMPT_PATH)
+    check('citation prompt: an empty run still writes the file',
+          error == '' and written == 0 and os.path.isfile(path),
+          '%r %r %s' % (written, error, path))
+    if not os.path.isfile(path):
+        return
+    with open(path, encoding='utf-8') as handle:
+        header = json.loads(handle.readline())
+    check('citation prompt: the header names its writer and its item',
+          header.get('written_by') == 'worksheet_checker.py'
+          and header.get('ledger_item') == 'L-207',
+          repr(header.get('written_by')))
+    check('citation prompt: the header carries an anchor',
+          bool(header.get('built_on_sha')),
+          repr(header.get('built_on_sha')))
+    check('citation prompt: the vocabulary comes from the registry',
+          any(entry['means'] == wc.V_SOURCE_ABSENT
+              for entry in header.get('verdict_tokens', [])),
+          repr(header.get('verdict_tokens')))
+
+    # Two checkers, one site: ONE row carrying TWO responses. A row
+    # per annotation would put the same key and the same hash on two
+    # lines, which is a hash identifying nothing.
+    claims = [
+        PromptClaim('constants_new.py::EARTH_RADIUS_KM', 'Claude',
+                    'worksheet_claude_constants_new.md',
+                    [captured(source='IAU B3', verdict='partial')]),
+        PromptClaim('constants_new.py::EARTH_RADIUS_KM', 'GPT',
+                    'constants_new_citation_verification_gpt.md',
+                    [captured(source='IERS 2010', verdict='no')],
+                    route='CONVERSATION'),
+    ]
+    written, not_included, error = wc.write_citation_prompt(
+        scratch, claims)
+    with open(path, encoding='utf-8') as handle:
+        lines = [json.loads(line) for line in handle if line.strip()]
+    rows = [line for line in lines if line.get('record') == 'row']
+    check('citation prompt: two legs on one site make one row',
+          written == 1 and len(rows) == 1,
+          '%r %r' % (written, len(rows)))
+    if not rows:
+        return
+    row = rows[0]
+    check('citation prompt: both responders are carried',
+          len(row.get('responses', [])) == 2,
+          repr(row.get('responses')))
+    check('citation prompt: the responses are ordered by checker',
+          [entry['checker'] for entry in row['responses']]
+          == ['Claude', 'GPT'],
+          repr([entry['checker'] for entry in row['responses']]))
+    check("citation prompt: the hash is over this row's own fields",
+          row.get('hash') == wc.row_hash(row['key'], row['claim'],
+                                         row['code_value']),
+          repr(row.get('hash')))
+    check("citation prompt: the code's own citation is carried",
+          row.get('code_cited') == ['IAU 2015 Resolution B3'],
+          repr(row.get('code_cited')))
+    check('citation prompt: the answer fields are present and empty',
+          row.get('review_verdict') == ''
+          and row.get('review_source') == '',
+          repr(row.get('review_verdict')))
+
+    # Same input, same bytes. A prompt that changes when nothing
+    # changed cannot be evidence of anything.
+    with open(path, 'rb') as handle:
+        first = handle.read()
+    wc.write_citation_prompt(scratch, claims)
+    with open(path, 'rb') as handle:
+        second = handle.read()
+    check('citation prompt: the same input gives the same bytes',
+          first == second)
+
+    # A matched row carrying neither a source nor a citation verdict
+    # has nothing to review. It is excluded AND counted -- a silent
+    # drop is the failure mode, not a tidy file.
+    bare = [PromptClaim('constants_new.py::BARE_KM', 'Claude',
+                        'worksheet_claude_constants_new.md',
+                        [captured(source='', verdict='')])]
+    written, not_included, error = wc.write_citation_prompt(
+        scratch, bare)
+    check('citation prompt: a row with nothing to review is excluded',
+          written == 0
+          and not_included['matched_rows_with_no_citation_material'] == 1,
+          '%r %r' % (written, not_included))
+
+    # An annotation that never matched a row is counted separately.
+    unmatched = [PromptClaim('constants_new.py::NOMATCH_KM', 'Claude',
+                             'worksheet_claude_constants_new.md', [])]
+    written, not_included, error = wc.write_citation_prompt(
+        scratch, unmatched)
+    check('citation prompt: an unmatched annotation is counted',
+          not_included['annotations_with_no_matched_row'] == 1,
+          repr(not_included))
+
+    # And the live corpus, because a synthetic pass proves the shape
+    # and not the reach. Zero rows here would mean the emitter runs
+    # and finds nothing, which reads exactly like a passing run.
+    worksheets = wc.load_worksheets(project_dir)
+    real, _unreached, _files = wc.collect_claims(project_dir)
+    unregistered = set()
+    for claim in real:
+        wc.check_claim(claim, worksheets, unregistered)
+    corpus_rows, _corpus_excluded = wc.citation_prompt_rows(real)
+    check('citation prompt: the live corpus produces rows',
+          len(corpus_rows) >= 40, repr(len(corpus_rows)))
+    check('citation prompt: every corpus row carries a response',
+          all(row['responses'] for row in corpus_rows))
+    check('citation prompt: no key appears twice',
+          len(set(row['key'] for row in corpus_rows)) == len(corpus_rows),
+          repr(len(corpus_rows)))
+
 def main():
     project_dir = os.path.dirname(os.path.abspath(__file__))
     os.chdir(project_dir)
@@ -991,6 +1140,7 @@ def main():
     test_routing_file(project_dir)
     test_resolved_linkage()
     test_suffix_sets_agree()
+    test_citation_prompt(project_dir)
 
     for name, detail in FAILED:
         print('  FAIL  %s' % name)
