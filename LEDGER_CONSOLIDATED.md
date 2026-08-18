@@ -221,13 +221,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*121 live items; 109 need attention (`!`); 120 RICE-scored; 81 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*120 live items; 108 need attention (`!`); 119 RICE-scored; 82 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
-| ! | L-207 | The citation prompt -- the checker asks the fuzzy question | OPEN | 7.6 | 2026-08-18 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
 | ! | L-206 | Worksheet return filenames carry model and session | OPEN | 5.1 | 2026-08-18 |
 | ! | L-193 | Qualified verdicts -- the token is not the whole answer | OPEN | 4.8 | 2026-08-15 |
@@ -238,7 +237,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-06 |
-| ! | L-176 | Shell hover text: add illustrated dimensions (radius_fraction → km) | OPEN | 2.8 | 2026-08-04 |
+| ! | L-176 | Shell hover text: add illustrated dimensions (radius_fraction -> km) | OPEN | 2.8 | 2026-08-04 |
 | ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-08-07 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
@@ -381,7 +380,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-160 | test_constants_provenance.py -- retire once fully absorbed, not before | OPEN | 8.1 | 2026-07-27 |
 | ! | L-172 | Phase 0 record-hygiene batch (provenance cluster prep) | OPEN | 5.7 | 2026-07-29 |
 | ! | L-158 | Derived-constant vulnerability inheritance rule (revised from a proposed rung, 2026-07-27) | OPEN | 5.6 | 2026-07-27 |
-| ! | L-156 | Provenance scanner scoring model fix — criticality (category-based) + vulnerability recalibration + comprehensive sweep | OPEN | 5.3 | 2026-08-02 |
+| ! | L-156 | Provenance scanner scoring model fix -- criticality (category-based) + vulnerability recalibration + comprehensive sweep | OPEN | 5.3 | 2026-08-02 |
 | ! | L-155 | Cross-repo constants/geometry pinning checks -- built INTO provenance_scanner.py, not a standalone script | PENDING-GATE | 4.5 | 2026-07-27 |
 | ! | L-119 | event_link hardcoded None in the builder (F2, gates artifact 7) | OPEN | 3.6 | 2026-07-15 |
 | ! | L-168 | propagate_marker uses solar K_GAUSS mean-motion -- wrong for planetocentric moon markers (FLAG-2; caught in F1 design, avoided in serving, source fix still open) | OPEN | 3.6 | 2026-07-28 |
@@ -396,7 +395,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-122 | Stray data/solar-system.prev_old/ committed to the repo (F6, non-blocking) | OPEN | 1.9 | 2026-07-15 |
 | ! | L-123 | Object info card -- serve info_dictionary.py as JSON, click-to-open (rides with F1) | OPEN | 1.8 | 2026-07-15 |
 | ! | L-080 | Characterization harness (scene equivalence gate) | OPEN | 1.6 | 2026-07-14 |
-| ! | L-079 | Shared assembler architecture (keystone — redefined) | OPEN | 1.5 | 2026-07-07 |
+| ! | L-079 | Shared assembler architecture (keystone -- redefined) | OPEN | 1.5 | 2026-07-07 |
 |  | L-089 | Scene-spec shared skeleton + solar system vocabulary (Phase 1) | PROPOSED | 1.5 | 2026-07-03 |
 | ! | L-159 | Disclosed-approximation check (Envelope of the Unknowable, scanner-level) | OPEN | 1.2 | 2026-07-27 |
 | ! | L-111 | Gallery builder Pass 5 -- operability + deferred hardening | OPEN | 1.0 | 2026-07-27 |
@@ -422,8 +421,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |:---:|----|------|-------------|:-----:|---------|
 |  | L-117 | Offline suite red at HEAD: Encke id drift (2P -> 90000091) not mirrored in the mock | DONE | 34.2 | 2026-07-12 |
 |  | L-114 | objects_config.json stranded by the atomic swap; also blocks crash-recovery (gallery builder) | DONE | 16.2 | 2026-07-27 |
-|  | L-182 | Mars Hill sphere — cross-check correction lost across the config pipeline | DONE | 12.0 | 2026-08-05 |
+|  | L-182 | Mars Hill sphere -- cross-check correction lost across the config pipeline | DONE | 12.0 | 2026-08-05 |
 |  | L-198 | Claim vocabulary: the units the scanner could not see | DONE | 10.2 | 2026-08-17 |
+|  | L-207 | The citation prompt -- the checker asks the fuzzy question | DONE | 7.6 | 2026-08-18 |
 |  | L-204 | The worksheet reference may be JSON | DONE | 5.7 | 2026-08-18 |
 |  | L-196 | Citation continuations: mark, join, refuse | DONE | 5.4 | 2026-08-17 |
 |  | L-197 | Maintenance runner output: say what passed | DONE | 5.4 | 2026-08-17 |
@@ -455,12 +455,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-072 | Gallery Studio WYSIWYG preview -- render through the real index.html viewer | DONE | 2.0 | 2026-06-26 |
 |  | L-169 | Gallery/Studio track -- repo structure reference | DONE | 1.9 | 2026-07-28 |
 |  | L-108 | Master plan v10 -> v11: Phase 1b fetch-fresh pivot reconciliation | DONE | 1.8 | 2026-07-12 |
-|  | L-178 | Earth shadow constants — EARTH_RADIUS_KM duplicate + mean vs equatorial mixing | DONE | 1.8 | 2026-08-05 |
-|  | L-179 | Solar gravitational influence — 150,000 vs 126,000 AU mismatch | DONE | 1.6 | 2026-08-07 |
+|  | L-178 | Earth shadow constants -- EARTH_RADIUS_KM duplicate + mean vs equatorial mixing | DONE | 1.8 | 2026-08-05 |
+|  | L-179 | Solar gravitational influence -- 150,000 vs 126,000 AU mismatch | DONE | 1.6 | 2026-08-07 |
 |  | L-002 | Protocol -> Skills refactor (process/tooling) | DONE | 1.5 | 2026-07-04 |
 |  | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | DONE | 1.5 | 2026-06-23 |
 |  | L-147 | Embed dashboard launcher in orrery GUI third column | DONE | 1.5 | 2026-07-17 |
-|  | L-180 | Solar chromosphere — three inconsistent extents in one shell | DONE | 1.3 | 2026-08-07 |
+|  | L-180 | Solar chromosphere -- three inconsistent extents in one shell | DONE | 1.3 | 2026-08-07 |
 |  | L-047 (#N10) | Note-composition structural refactor (behind N6) | DONE | 1.0 | 2026-06-23 |
 |  | L-050 (#N9) | white -> red orbit-marker switch (osculating marker intentionally stays white) | DONE | 1.0 | 2026-06-23 |
 |  | L-134 | Dashboard developer-tools audit | DONE | 1.0 | 2026-07-17 |
@@ -847,7 +847,7 @@ regenerated mirror, overwritten by the next `module_atlas.py` run. One of
 the four originally-named modules (`smoke_rotation_axis.py`) was also
 deleted outright in L-163 Phase 1. The two files that DO still need a home
 are domain-coverage-gap, not role -- see L-172.
-**Note (2026-07-31):** L-078 sub-item (d) (bare-degree F/C values in NUMERIC_CLAIM_RE) is DONE, landed as part of L-156 Phase 1d piece 3. Pushed at 8bd7778. Surfaced 96 new findings — tracked as L-175.
+**Note (2026-07-31):** L-078 sub-item (d) (bare-degree F/C values in NUMERIC_CLAIM_RE) is DONE, landed as part of L-156 Phase 1d piece 3. Pushed at 8bd7778. Surfaced 96 new findings -- tracked as L-175.
 **Gap:** (a) merge into L-161's Gemini relay, one worksheet per file,
 covering that file's uncited (this item) and re-read (L-161) claims
 together -- start with the paleoclimate family (32 findings, never
@@ -888,7 +888,7 @@ apparition? per session?) and which comets are in scope.
 **Ref:** to_do_ideas.md (pre-ledger, 4/16/26); horizons-orbital-mechanics
 skill (comet record pinning).
 
-#### [L-176] Shell hover text: add illustrated dimensions (radius_fraction → km)
+#### [L-176] Shell hover text: add illustrated dimensions (radius_fraction -> km)
 <!-- L:176 status:OPEN upd:2026-08-04 section:A flag: rice:4/3/70/3 -->
 - Fable audit surfaced that radius_fraction geometry constants are
   invisible to the user and verifiable only by manual computation. Add to
@@ -897,7 +897,7 @@ skill (comet record pinning).
   any stylization (e.g. Mercury crust drawn at 89 km vs physical 26 km)
   explicitly visible rather than silently present.
 - Should derive from the radius_fraction at render time, not from a
-  second typed literal — single source of truth.
+  second typed literal -- single source of truth.
 - Natural companion to the single-source-of-truth constant layer
   (L-181): once constants are defined, the illustrated-dimension text
   can reference them.
@@ -920,7 +920,7 @@ L-156 Phase 2.
 - Opus 5 flagged its own Batch 1 work: Mercury Hill sphere
   radius_fraction is 94.4 R_M (230,308 km), but the citation says
   "perihelion convention." Perihelion gives 71.85 R_M; semi-major gives
-  90.45 R_M. 94.4 matches neither — wrong-but-cited, the exact failure
+  90.45 R_M. 94.4 matches neither -- wrong-but-cited, the exact failure
   class the provenance discipline is designed to prevent.
 - Fable couldn't catch it because Mercury's Hill text is qualitative
   (no number for the constant to contradict).
@@ -936,7 +936,7 @@ Perihelion is the project convention for Eris and Pluto.
   storage locations for one physical value (radius_fraction, hover_text,
   dead tooltip, module _info, CUSTOM_SHELLS tooltip, legacy inline
   builder dict). The reference pattern (Saturn/Uranus/Neptune/Sun) links
-  text copies but not geometry to text — Saturn (fully migrated) carried
+  text copies but not geometry to text -- Saturn (fully migrated) carried
   the worst finding in the audit.
 - Design required: define each value once as a named constant, derive
   radius_fraction and display text from it. The `<br>` canonical
@@ -1209,19 +1209,19 @@ reversal of "clear all batches first," 2026-08-06.
 **Ref:** FABLE_REVIEW_feature_constant_unification.md (orrery
 `ee0da47c` / gallery `61a78c0`);
 PREDESIGN_HANDOFF_feature_constant_unification.md.
-**Ref:** FABLE_shell_consistency_audit_report.md §2 (Job 2),
+**Ref:** FABLE_shell_consistency_audit_report.md section 2 (Job 2),
 migration status summary table.
 
 #### [L-183] Stars / stellar neighbourhood skill (coverage gap)
 <!-- L:183 status:OPEN upd:2026-08-05 section:A flag: rice:4/3/70/4 -->
 - Fable skills-layer review, Job 1 #1: the largest uncovered domain in the
-  project. ~22-24 modules with no owning skill — the acquisition ->
+  project. ~22-24 modules with no owning skill -- the acquisition ->
   processing -> visualization chain for the stellar neighbourhood.
 - Scope as assessed: Gaia/Hipparcos catalog fetch and VOTable caching
   (`data_acquisition*`, `data_processing`, `vot_cache_manager`), SIMBAD
   query discipline (`simbad_manager`), the paired dual-mode pattern
   (`hr_diagram_apparent_magnitude`/`_distance`,
-  `planetarium_apparent_magnitude`/`_distance` — one physics, two selection
+  `planetarium_apparent_magnitude`/`_distance` -- one physics, two selection
   modes), stellar parameter estimation and its hand-patch layer
   (`stellar_parameters`, `stellar_data_patches`), Messier handling
   (`messier_catalog`, `messier_object_data_handler`), exoplanet modules,
@@ -1236,14 +1236,14 @@ frontmatter is where they get settled: where `sgr_a_*` belongs (6 modules,
 currently classified `orrery`), and where the shared
 `visualization_2d/3d/core/utils` modules belong. The prompt's seed list and
 the scanner's MODULE_DOMAIN_MAP disagree at exactly those edges.
-**Note:** Trigger cleanup travels with it — orrery-coding-conventions'
+**Note:** Trigger cleanup travels with it -- orrery-coding-conventions'
 description names `star_visualization_gui` but the skill holds no
 star-specific content, so a star-GUI session loads 343 lines and finds
 nothing for it while believing it fired the right skill (Fable Job 3 #4).
 Move the filename into the new skill's description when it lands.
 **Note:** Also noted by Fable: 19 root modules are unmapped in
 MODULE_DOMAIN_MAP and default to `orrery`, and 2 map entries point at files
-no longer in the root (`smoke_dipole_cone`, `smoke_rotation_axis`) — a
+no longer in the root (`smoke_dipole_cone`, `smoke_rotation_axis`) -- a
 small scanner-side cleanup that pairs naturally with this work.
 DONE 2026-08-06: both stale entries removed and `orrery_rendering` /
 `shell_configs` mapped explicitly, in the Task 2a patch (L-184). The
@@ -2494,63 +2494,6 @@ trigger); v3.30 (the two-layer split that moved procedure into skills);
 will need renaming -- and a rename breaks every `# Resolved:` leg
 pointing at it, so name the pilot's return by hand at dispatch time.
 **Ref:** L-200 (the leg that cites the filename); L-186; L-192.
-
-#### [L-207] The citation prompt -- the checker asks the fuzzy question
-<!-- L:207 status:OPEN upd:2026-08-18 section:A flag: rice:3/3/85/1 -->
-- **The gap, measured 2026-08-18.** The citation half of a return has
-  no route out of the file. `ROLE_SOURCE` -- the responder's own cited
-  source -- is mapped in the header registry and read NOWHERE.
-  `ROLE_CITATION_VERDICT` is read in exactly two places: an unreachable
-  third branch of `read_verdict` (unreachable for JSON, which always
-  synthesizes a value column) and L-200's linkage check, which only
-  fires on a row a `# Resolved:` leg already names. So both halves of
-  the citation question are parsed into the Table and stop there.
-- **This is NOT a defect in the split.** The 2026-08-17 ruling assigned
-  the citation comparison to a reader BECAUSE it is a language
-  judgement rather than a numerical one, and the mechanical checker
-  correctly stays at numbers. What was never built is the leg that
-  carries the material to that reader.
-- **Tony's design, 2026-08-18.** The checker does two things in one
-  run: (1) the numerical check exactly as now, and (2) writes a
-  CONSISTENT JSON prompt asking Claude the citation question.
-- **Why a prompt rather than a worklist.** A worklist is data; a prompt
-  is a request, and a request inherits the discipline the builder
-  already has -- keyed rows, a hash over the do-not-edit fields, a SHA
-  anchor, and generation rather than typing. Same SHA plus same returns
-  gives the same prompt, which is what makes a citation review EVIDENCE
-  rather than an opinion, re-runnable against another model and
-  comparable across sessions. Same rule as L-201: a selection is code,
-  not typing.
-- **It respects the existing boundary.** The checker stays read-only
-  over the corpus and writes reports; it already writes
-  `data/worksheet_routed.json`. No writer moves behind that line.
-- **Each row carries:** key, claim, code value, the code's current
-  `# Source:` authority, the context legs (`# See:`, `# Derived:`,
-  `# Note:`) so a misplaced authority is distinguishable from an absent
-  one, the responder's cited source, the worksheet and checker it came
-  from, and a row hash.
-- **Ruled 2026-08-18: the prompt SHOWS the responder's citation
-  verdict.** It makes the review a comparison rather than a
-  re-derivation, and disagreement between the responder's verdict and
-  the reviewer's is the lazy-responder canary -- measured per row,
-  with no separate mechanism invented for it. The cost is stated
-  rather than hidden: seeing a verdict before judging anchors, and the
-  only mitigations are field order and an instruction saying the review
-  is independent and that disagreement is a finding, not an error.
-  Structural blindness would be stronger and was traded away
-  deliberately.
-- **On complexity.** This passes the extend-don't-add test: it is an
-  EMITTER over the Table the checker already builds, reusing
-  `row_hash` and the report writer. No new verdict semantics, no new
-  layer, no second parse.
-- **It is not strictly blocking for the pilot.** Twenty-three rows can
-  be read by hand. It is blocking for the pilot to produce evidence of
-  the kind this project trades in, and it does not scale to 110.
-**Note:** RICE is Claude's proposal, unratified.
-**Gap:** unbuilt. Full detail in
-`documentation/DESIGN_20260818_citation_prompt.md`.
-**Ref:** L-192 (the checker); L-200 (the leg that records what a
-verdict caused); L-202 (the JSON schema it reads).
 
 ## PENDING ACTION (Tony-side)
 
@@ -4380,20 +4323,20 @@ build. Sequence relative to L-154 (feature JS layer) is Tony's call.
 M2_IMPLEMENTATION_REPORT.md, FABLE_PROMPT_served_window_trust_bound_v0_1.md
 and its response (July 2026 relay); resolver.py resolve() (~91-106).
 
-#### [L-178] Earth shadow constants — EARTH_RADIUS_KM duplicate + mean vs equatorial mixing
+#### [L-178] Earth shadow constants -- EARTH_RADIUS_KM duplicate + mean vs equatorial mixing
 <!-- L:178 status:DONE upd:2026-08-05 section:C flag: rice:3/3/40/2 -->
 - Fable findings #33-36. `earth_visualization_shells.py` defines
   `EARTH_RADIUS_KM = 6371.0` twice (lines 907, 1019). This is the mean
   radius; constants_new.py has equatorial 6378.137 and polar 6356.752
   but no mean radius. The derivation of AU_PER_KM mixes the
-  equatorial-based EARTH_RADIUS_AU with the mean 6371 denominator —
+  equatorial-based EARTH_RADIUS_AU with the mean 6371 denominator --
   a built-in ~0.11% error.
-- Also: GEO scatter comment claims "±0.0002 AU (~30 km at GEO)" but the
-  code computes ±0.0002 × EARTH_RADIUS_AU ≈ ±1.3 km. And GEO hover
+- Also: GEO scatter comment claims "+/-0.0002 AU (~30 km at GEO)" but the
+  code computes +/-0.0002 x EARTH_RADIUS_AU ~ +/-1.3 km. And GEO hover
   text is missing the AU equivalent (standing convention gap).
 - No Shadow Constants gate (provenance-discipline v1.3) applies to the
   local EARTH_RADIUS_KM.
-**Note (2026-08-05):** Resolved without answering mean-vs-equatorial — the
+**Note (2026-08-05):** Resolved without answering mean-vs-equatorial -- the
 question is deleted rather than decided. Both local shadow constants are
 removed and the conversion goes directly through `KM_PER_AU`
 (`AU_PER_KM = 1.0 / KM_PER_AU`), correct regardless of which Earth radius
@@ -4403,8 +4346,8 @@ involved, so no physics decision was needed. Verified: GEO belt
 42,212 -> 42,165 km (target 42,164); LEO band 6578/8380 -> 6571/8371 km,
 now matching its own declared LEO_LOW_KM / LEO_HIGH_KM constants, which it
 did not before.
-**Note:** GEO radial scatter left unchanged at ±0.0002 Earth radii
-(~1.3 km) — the comment claimed ~30 km and real station-keeping bands run
+**Note:** GEO radial scatter left unchanged at +/-0.0002 Earth radii
+(~1.3 km) -- the comment claimed ~30 km and real station-keeping bands run
 to tens of km, so the comment was corrected to describe the code and the
 widening flagged in-code as a Mode 5 call for Tony.
 - Tony-action (do): run `patch_earth_L178.py`, push, then close.
@@ -4417,12 +4360,12 @@ bounds. Shadow constants removed; mean-vs-equatorial no longer arises here.
 patch_earth_L178.py; L-182 (same session).
 **Ref:** FABLE_shell_consistency_audit_report.md findings #33-37.
 
-#### [L-182] Mars Hill sphere — cross-check correction lost across the config pipeline
+#### [L-182] Mars Hill sphere -- cross-check correction lost across the config pipeline
 <!-- L:182 status:DONE upd:2026-08-05 section:C flag: rice:3/4/100/1 -->
 - The Aug-1 Mars cross-check found `324.5 R_Mars` unsourceable and derived
   ~1.084 Mkm (worksheet D2: "no page publishing a Mars Hill radius of 324.5
   R_Mars"). `patch_mars_cross_check.py` corrected 5 sites but targeted
-  `mars_visualization_shells.py` ONLY — the correction never reached
+  `mars_visualization_shells.py` ONLY -- the correction never reached
   `shell_configs.py`, so the live render kept 324.5 the whole time.
 - The Aug-4 Fable shell audit saw module=320 vs config=324.5 and read the
   config as authoritative; the geometry prompt encoded that ("live config
@@ -4432,24 +4375,24 @@ patch_earth_L178.py; L-182 (same session).
   never right at any commit.
 - At the pre-fix HEAD the module carried a two-leg `# Cross-checked:`
   citation asserting ~320 R_Mars three lines above display text asserting
-  324.5 — a SOURCE_VS_VALUE contradiction created by the harmonization.
+  324.5 -- a SOURCE_VS_VALUE contradiction created by the harmonization.
 - Resolved value: **319.2 R_Mars** = 1,084,000 km / 3,396.2 km equatorial
   (Archinal et al. 2018, the project's `CENTER_BODY_RADII['Mars']`). The
   worksheet's 319.8 is the same 1.084 Mkm over the volumetric mean radius
   3,389.5 km; this project uses equatorial where oblateness matters.
 - Class: a Check All Parallel Pipelines failure (resident CRITICAL gate),
-  not a value error. Both patches touched one side of a two-copy pair — the
+  not a value error. Both patches touched one side of a two-copy pair -- the
   first fixed the module and missed the config, the second aligned the
   module to the config that had never been fixed.
 **Note:** Surfaced by the Fable skills-layer review, which flagged the
 provenance-discipline worksheet example ("Hill sphere 324.5 should have
 been 320") as contradicting orrery-coding-conventions. Fable rated it HIGH
 and diagnosed it as a pending perihelion-vs-semi-major convention question;
-the worksheet showed the opposite — a settled correction silently reverted.
+the worksheet showed the opposite -- a settled correction silently reverted.
 The audit found the right contradiction from the skills alone and could not
 resolve its direction, because the cross-check worksheets were not in the
 audit prompt's Materials list. Include them next time.
-**Note:** Prevention candidates for Tony to weigh — (a) a cross-check patch
+**Note:** Prevention candidates for Tony to weigh -- (a) a cross-check patch
 must enumerate every consumer of a corrected value before delivery, the way
 the geometry follow-up now does; (b) a harmonize step must state WHICH copy
 is authoritative and cite the worksheet that makes it so, rather than
@@ -4465,13 +4408,13 @@ documentation/patch_mars_cross_check.py (module-only target);
 patch_mars_dead_copies.py (the reverting patch);
 FABLE_skills_layer_review_report.md Job 2 #8 / Job 3 #1; L-181.
 
-#### [L-179] Solar gravitational influence — 150,000 vs 126,000 AU mismatch
+#### [L-179] Solar gravitational influence -- 150,000 vs 126,000 AU mismatch
 <!-- L:179 status:DONE upd:2026-08-07 section:C flag: rice:4/3/40/3 -->
 - Fable findings #29-30. constants_new.py defines
   GRAVITATIONAL_INFLUENCE_AU = 150,000 (with an honest note: 100k-200k
   range). solar_visualization_shells.py citations at lines 50 and 174
   both claim the constant is 126,000. Display text says 126,000 AU.
-  Shell renders at 150,000 AU. Classic dual-pipeline drift — someone
+  Shell renders at 150,000 AU. Classic dual-pipeline drift -- someone
   moved one copy.
 - Three-model cross-check needed to decide the correct value.
 - **FIRST STEP OF PHASE 2 TRACK 0** (Tony's ordering ruling,
@@ -4534,12 +4477,12 @@ FABLE_skills_layer_review_report.md Job 2 #8 / Job 3 #1; L-181.
 FABLE_shell_consistency_audit_report.md findings #29-30;
 FABLE_REVIEW_feature_constant_unification.md sequencing note.
 
-#### [L-180] Solar chromosphere — three inconsistent extents in one shell
+#### [L-180] Solar chromosphere -- three inconsistent extents in one shell
 <!-- L:180 status:DONE upd:2026-08-07 section:C flag: rice:3/3/30/2 -->
 - Fable finding #31. Chromosphere shell text says "Radius: from
   Photosphere to 1.5 Solar radii" and also "about 2,000 kilometers"
-  (≈1.003 R_sun). Shell renders at constants_new.py CHROMOSPHERE_RADII
-  = 1.1 R_sun (≈0.00512 AU). Three different extents: 2,000 km
+  (~1.003 R_sun). Shell renders at constants_new.py CHROMOSPHERE_RADII
+  = 1.1 R_sun (~0.00512 AU). Three different extents: 2,000 km
   (physical), 1.1 (drawn), 1.5 (claimed).
 - The drawn value is a declared stylization (there's a code comment).
   The text should say "drawn at 1.1" and note the physical extent.
@@ -5205,6 +5148,120 @@ that required this); L-200 (shipped in the same patch);
 **Note:** RICE is Claude's proposal, unratified.
 **Ref:** L-188 (the runner); L-197 (the same defect class, earlier
 instance); `documentation/patch_L188_1`, `documentation/patch_L188_2`.
+
+#### [L-207] The citation prompt -- the checker asks the fuzzy question
+<!-- L:207 status:DONE upd:2026-08-18 section:C flag: rice:3/3/85/1 -->
+- **The gap, measured 2026-08-18.** The citation half of a return has
+  no route out of the file. `ROLE_SOURCE` -- the responder's own cited
+  source -- is mapped in the header registry and read NOWHERE.
+  `ROLE_CITATION_VERDICT` is read in exactly two places: an unreachable
+  third branch of `read_verdict` (unreachable for JSON, which always
+  synthesizes a value column) and L-200's linkage check, which only
+  fires on a row a `# Resolved:` leg already names. So both halves of
+  the citation question are parsed into the Table and stop there.
+- **This is NOT a defect in the split.** The 2026-08-17 ruling assigned
+  the citation comparison to a reader BECAUSE it is a language
+  judgement rather than a numerical one, and the mechanical checker
+  correctly stays at numbers. What was never built is the leg that
+  carries the material to that reader.
+- **Tony's design, 2026-08-18.** The checker does two things in one
+  run: (1) the numerical check exactly as now, and (2) writes a
+  CONSISTENT JSON prompt asking Claude the citation question.
+- **Why a prompt rather than a worklist.** A worklist is data; a prompt
+  is a request, and a request inherits the discipline the builder
+  already has -- keyed rows, a hash over the do-not-edit fields, a SHA
+  anchor, and generation rather than typing. Same SHA plus same returns
+  gives the same prompt, which is what makes a citation review EVIDENCE
+  rather than an opinion, re-runnable against another model and
+  comparable across sessions. Same rule as L-201: a selection is code,
+  not typing.
+- **It respects the existing boundary.** The checker stays read-only
+  over the corpus and writes reports; it already writes
+  `data/worksheet_routed.json`. No writer moves behind that line.
+- **Each row carries:** key, claim, code value, the code's current
+  `# Source:` authority, the context legs (`# See:`, `# Derived:`,
+  `# Note:`) so a misplaced authority is distinguishable from an absent
+  one, the responder's cited source, the worksheet and checker it came
+  from, and a row hash.
+- **Ruled 2026-08-18: the prompt SHOWS the responder's citation
+  verdict.** It makes the review a comparison rather than a
+  re-derivation, and disagreement between the responder's verdict and
+  the reviewer's is the lazy-responder canary -- measured per row,
+  with no separate mechanism invented for it. The cost is stated
+  rather than hidden: seeing a verdict before judging anchors, and the
+  only mitigations are field order and an instruction saying the review
+  is independent and that disagreement is a finding, not an error.
+  Structural blindness would be stronger and was traded away
+  deliberately.
+- **On complexity.** This passes the extend-don't-add test: it is an
+  EMITTER over the Table the checker already builds, reusing
+  `row_hash` and the report writer. No new verdict semantics, no new
+  layer, no second parse.
+- **It is not strictly blocking for the pilot.** Twenty-three rows can
+  be read by hand. It is blocking for the pilot to produce evidence of
+  the kind this project trades in, and it does not scale to 110.
+- **As built, 2026-08-18** (`patch_L207_1_citation_prompt`). The
+  checker writes `documentation/prompts/citation_review.jsonl` on
+  every run: a header carrying the anchor SHA, the key format, the
+  question, the answer fields, the verdict vocabulary read from
+  `VERDICT_TOKENS` rather than retyped, and the counts of what was
+  left out; then one row per key. Hooked into `run()` after the
+  routing file, counted in `counts`, and printed in the detail block
+  whether or not it found anything.
+- **One row per KEY, not per annotation** -- a decision the design
+  note did not settle and the hash did. Two checkers over one site
+  would otherwise produce two rows sharing a key and a hash, which is
+  a hash identifying nothing. Grouped, the two sources sit side by
+  side and a disagreement between responders is visible without a
+  mechanism for it. Measured on the first run: 53 rows carrying 81
+  responder legs, 27 of them with two responders.
+- **The leg parser moved** (Tony's ruling, 2026-08-18: move it and
+  get one parser). `legs_of` and its regexes went from
+  `worksheet_request_builder.py` to `worksheet_keys.py`, the module
+  both tools already import. The move was forced by direction: the
+  checker cannot import the builder because the builder imports the
+  checker. The builder keeps the old names as ALIASES, and
+  `test_worksheet_request_builder.py` pins `b.legs_of is wk.legs_of`
+  so a later local copy goes red rather than quietly answering the
+  same question twice. Proved behaviour-neutral by building the same
+  23-row pilot request before and after the move: byte-identical,
+  including all 153 continuation joins.
+- **What the first run measured.** 53 rows, 81 legs, 41 annotations
+  that matched no row and are counted rather than dropped, 0 matched
+  rows carrying no citation material. Routing unchanged at 68 of 110
+  routed and 8 clean; Tier-1 unchanged at 289. The maintenance runner
+  read 11 of 11 gating checkers green.
+- **Determinism is the point and it is tested.** Rows sorted by key,
+  responses sorted inside a row, keys sorted inside every object, no
+  timestamp anywhere. Two consecutive runs produce byte-identical
+  files, so `git` reporting no change IS the statement that a citation
+  review is reproducible. The anchor moves only when HEAD does, which
+  is why the committed artifact reads `731066f4` -- the tree it was
+  built from, one commit behind the commit that landed it.
+- **Three mutations prove the new checks can fail.** Dropping the
+  per-key grouping, making the writer a no-op that reports success,
+  and re-forking the parser into a local copy that behaves
+  identically. The last is visible only to the identity pin, which is
+  why the identity pin exists.
+- **The skill moved with it.** `provenance-discipline` 2.4 -> 2.5 adds
+  Extend a Boundary Before Adding a Path, the rule the 2026-08-18
+  external review proposed and Tony adopted; L-207 was checked against
+  it rather than assumed to pass. Marked QUALITY, not CRITICAL: it was
+  adopted from a prediction and the tiers move on evidence. The edit
+  was verified as a PURE ADDITION by stripping the new section back
+  out and comparing to 2.4 byte for byte -- the check that was missing
+  the day a skill rebuild deleted its own version block.
+- **Carried, because it cannot be cleared here.** The 2.5 reinstall
+  landed in the account during the session that made it, and a running
+  conversation serves the copy it loaded. The NEXT session confirms
+  its loaded `provenance-discipline` reads 2.5 before doing provenance
+  work.
+**Note:** RICE is Claude's proposal, unratified.
+**Ref:** L-192 (the checker); L-200 (the leg that records what a
+verdict caused); L-202 (the JSON schema it reads); L-206 (the return
+filenames a review will come back under); `documentation/
+DESIGN_20260818_citation_prompt.md`; `documentation/patch_L207_1_
+citation_prompt.py`.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
@@ -6326,9 +6383,9 @@ the Phase 0 pilot if publicly reachable.
 
 ### W.Active -- current phase
 
-#### [L-079] Shared assembler architecture (keystone — redefined)
+#### [L-079] Shared assembler architecture (keystone -- redefined)
 <!-- L:079 status:OPEN upd:2026-07-07 section:W.Active flag: rice:3/3/50/3 -->
-- **Redefined from:** "Headless scene core — decouple scene construction from
+- **Redefined from:** "Headless scene core -- decouple scene construction from
   Tkinter" (Fable 5 survey, July 2 2026).
 - **Redefined to:** Build a shared assembler per domain. Both GUIs (tkinter
   desktop, web) are thin harvesters feeding the assembler. The assembler is new
@@ -6337,14 +6394,14 @@ the Phase 0 pilot if publicly reachable.
 - **Four domains:** solar system (main build), stars, orbital parameters
   (educational showcase), Earth system (mixed KMZ + Plotly).
 - **Phasing (governed by master plan v10):**
-  Phase 0: gallery integration test ✓ DONE (L-088, July 6, 2026).
-  Phase 1a: shared spec skeleton + solar system vocabulary ✓ DONE (L-089).
-  Phase 1b: data serving pipeline (L-098) — design converged v0.3.
+  Phase 0: gallery integration test [x] DONE (L-088, July 6, 2026).
+  Phase 1a: shared spec skeleton + solar system vocabulary [x] DONE (L-089).
+  Phase 1b: data serving pipeline (L-098) -- design converged v0.3.
   Phase 2: solar system assembler + desktop migration tail.
   Phase 3: star assembler + cache. Phase 4: hybrid (exoplanets + Sgr A*).
   Phase 5: Earth system.
 - **Per-domain migration tails:** desktop migrates onto each assembler right
-  after it validates — not a single late migration. Delta-log discipline: any
+  after it validates -- not a single late migration. Delta-log discipline: any
   desktop orchestration change during the build gets a ledger tag
   "assembler-must-inherit."
 - **Key decisions (settled):** site never fetches Horizons; three-tier cache all
@@ -6356,12 +6413,12 @@ the Phase 0 pilot if publicly reachable.
   assembler replaces both orchestrators).
 - **Key decision (settled):** server (Dash) vs serverless (Pyodide) -- Phase 0
   resolved this: Pyodide, proven July 6, 2026 (L-088).
-- **Key decision (settled):** architecture A (numpy + JS figure builder) vs B′
-  (shared engines via plotly in Pyodide, slim self-hosted wheel). B′ measured
+- **Key decision (settled):** architecture A (numpy + JS figure builder) vs B'
+  (shared engines via plotly in Pyodide, slim self-hosted wheel). B' measured
   at 2.1-3.3 s on iPhone WiFi (July 6, 2026). Two-tier model: frozen A
-  exhibits + data-backed B′ exhibits.
+  exhibits + data-backed B' exhibits.
 - **Progress:** Phase 0 closed (L-088, July 6). Phase 1a vocabulary delivered
-  (L-089, Fable 5, July 4). A/B fork resolved: B′. Phase 1b (L-098) built and
+  (L-089, Fable 5, July 4). A/B fork resolved: B'. Phase 1b (L-098) built and
   CLOSED (July 12). Phase 2 design closed: handoff v0.1 -> v0.3, competitive
   manifest cross-check (Fable + GPT), synthesis v1 -> v2, both second-pass
   reviewed. Artifact 1 (Earth alone) built and Mode-5 confirmed (Opus 4.8,
@@ -6691,7 +6748,7 @@ motivating bug: `close_approach_data.py`'s stale `CENTER_BODY_RADII` copy);
 
 ---
 
-#### [L-156] Provenance scanner scoring model fix — criticality (category-based) + vulnerability recalibration + comprehensive sweep
+#### [L-156] Provenance scanner scoring model fix -- criticality (category-based) + vulnerability recalibration + comprehensive sweep
 <!-- L:156 status:OPEN upd:2026-08-02 section:W.Active flag: rice:5/4/80/3 -->
 
 **What.** `provenance_scanner.py`'s scoring mis-prioritized the data this
@@ -6702,15 +6759,15 @@ derived dict) scored as if barely used.
 
 **Scanner state at HEAD (post-Phase 2 Piece 1, `373c6d8`):** Tier 1
 210, Tier 2 605, Tier 3 62, Tier 4 2, total 879 across 117 files
-(+1: `test_cross_checked.py`). 879 conserved across Phase 2 Piece 1 —
+(+1: `test_cross_checked.py`). 879 conserved across Phase 2 Piece 1 --
 zero findings moved. The V_CROSS_CHECKED (V2) recognition mechanism is
 live but has zero population (no annotations written yet).
 
 **Phase 1 measured arc (the instrument got honest):** Tier 1
-145 → 156 (1a) → 156 (1b) → 133 (1c) → 132 (L-174) → 171 (1d/1e/1f)
-→ 210 (D8.5). The first half (145 → 132) fixed false positives —
+145 -> 156 (1a) -> 156 (1b) -> 133 (1c) -> 132 (L-174) -> 171 (1d/1e/1f)
+-> 210 (D8.5). The first half (145 -> 132) fixed false positives --
 correctly-sourced claims scored as unsourced. The second half
-(132 → 210) fixed false negatives — unsourced claims scored as sourced,
+(132 -> 210) fixed false negatives -- unsourced claims scored as sourced,
 whether by a blind spot (temperature recognition, +61), numeric
 coincidence (Option A, +23), or a marker meaning the opposite of what it
 was credited for (staleness, +16). The number went up because the
@@ -6745,15 +6802,15 @@ literal inherits nothing (plain V3).
 (D7, design review 3c, Tony confirmed). The only hard exit-code gate is
 L-155's pinning checks (Phase 3). Errata:
 `documentation/HANDOFF_phase1_1d_to_1f.md` at HEAD still describes a
-deferred exit-gate flip — this is wrong; superseded by the design review
+deferred exit-gate flip -- this is wrong; superseded by the design review
 and `AS_BUILT_L156_phase1d_e_f.md`.
 
 **Tier labels.** Tier 1 keeps "FIX NOW" (action directive, not status
-claim — Tony accepted). Tiers 2/3/4 neutral score-band names: REVIEW,
+claim -- Tony accepted). Tiers 2/3/4 neutral score-band names: REVIEW,
 LOW PRIORITY, LOWEST PRIORITY.
 
 **Block inheritance.** Strict containment, narrowest block wins (Tony
-confirmed via 1c build). No outward fallback — if a block is uncited,
+confirmed via 1c build). No outward fallback -- if a block is uncited,
 strings inside it stay uncited even if a parent block is cited. This
 keeps L-173's findings visible.
 
@@ -6761,21 +6818,21 @@ keeps L-173's findings visible.
 copies of `constants_new.py` values must be deleted and replaced with
 proper imports. Never cite-to-clear a structural problem.
 
-### Phase 1 build history (1a–1f: COMPLETE)
+### Phase 1 build history (1a-1f: COMPLETE)
 
 **1a (2026-07-29).** Landed D1 (MEASURED/RELATIONAL), D2 (`undetermined`
 sentinel), D3 (V-ladder scoring), D8.3 (magnetosphere vocabulary), D8.4
-(comet un-grandfathering), role-veto amendment. Tier 1 145 → 156 (growth
-is correct — raising criticality promotes previously-buried uncited
+(comet un-grandfathering), role-veto amendment. Tier 1 145 -> 156 (growth
+is correct -- raising criticality promotes previously-buried uncited
 facts). 5 undetermined. 781 total.
 
 **1b (2026-07-29).** V-ladder scoring applied across all findings. Tier 1
-156 (unchanged — invariant held). Tier 2 181 → 563, Tier 3 430 → 60,
-Tier 4 14 → 2. 781 conserved.
+156 (unchanged -- invariant held). Tier 2 181 -> 563, Tier 3 430 -> 60,
+Tier 4 14 -> 2. 781 conserved.
 
 **1c (2026-07-30).** Citation-block inheritance via AST walk
 (`build_citation_block_table()`, `resolve_block_citation()`). Tier 1
-156 → 133. 23 shell_configs.py findings moved Tier 1 → Tier 2 (21
+156 -> 133. 23 shell_configs.py findings moved Tier 1 -> Tier 2 (21
 SHELL_CONFIGS, 2 CUSTOM_SHELLS). 18 genuinely uncited findings left
 untouched (tracked as L-173). Design departure: strict containment chosen
 over narrowest-cited-containing, making L-173 findings visible by rule
@@ -6783,7 +6840,7 @@ rather than by accident of the data.
 
 **L-174 (1c consequence, 2026-07-30).** Citations pitched one block too
 far out for the resolver to see (ring_params line 959). Fixed by
-repeating citation at entry level. Tier 1 133 → 132. Permanent diagnostic
+repeating citation at entry level. Tier 1 133 -> 132. Permanent diagnostic
 added (`SHADOWED_STRINGS`, `DEEP_CITATIONS`).
 
 **1d (2026-07-31, Opus 5).** Three pieces:
@@ -6796,7 +6853,7 @@ added (`SHADOWED_STRINGS`, `DEEP_CITATIONS`).
   2 for name+value. Option A untouched; D8.5 still open.
 - **Piece 2 (citation-form recognition, Gap item 7):** author-year
   parenthetical pattern added to SOURCE_PATTERNS, both `(Author et al.,
-  YYYY)` and `(Author et al.)` forms. Measured: 13 findings Tier 1 →
+  YYYY)` and `(Author et al.)` forms. Measured: 13 findings Tier 1 ->
   Tier 2, population conserved.
 - **Piece 3 (temperature units, L-078(d)):** temperature alternatives
   added to NUMERIC_CLAIM_RE. Tier 1 +61 (96 total new findings). Largest
@@ -6816,25 +6873,25 @@ value-preserving. Fire-then-silence test: 1d detected 3 shadow constants,
 
 **build_pinned_values() bleed fix (2026-07-31, Opus 5 follow-on).**
 Extracted shared `constant_has_own_citation()` predicate routed through
-both `build_pinned_values()` and `build_cited_constant_names()` —
+both `build_pinned_values()` and `build_cited_constant_names()` --
 eliminates the 10-line window bleed where uncited constants could inherit
 a neighbor's citation. Measured impact: zero (all 34 constants in
 `constants_new.py` already carry own citations), but defensive against
-future additions. test_provenance_1d.py 15 → 20 (5 predicate tests
+future additions. test_provenance_1d.py 15 -> 20 (5 predicate tests
 added). `test_both_pinned_builders_agree` asserts the two callers stay
 synchronized.
 
-**D8.5 — Option A retired (2026-08-01, Opus 5).** Two mechanisms removed
+**D8.5 -- Option A retired (2026-08-01, Opus 5).** Two mechanisms removed
 from `score_unit()`, both granting V_SOURCED without a real citation.
 (a) Option A: credited display strings whose numeric claims matched
-pinned constant values — coincidence, not sourcing. 26 findings affected
-(not 18 — 1d's temperature units created new claims eligible for the
+pinned constant values -- coincidence, not sourcing. 26 findings affected
+(not 18 -- 1d's temperature units created new claims eligible for the
 credit). 23 moved to Tier 1. (b) Staleness credit: granted V_SOURCED to
 strings matching date-sensitive patterns ("as of 2024", "Planned",
-"Still active") with no citation at all — the reason string said "no
+"Still active") with no citation at all -- the reason string said "no
 source" and the score said "sourced." Logic also ran backwards: staleness
 means a claim will expire, making it more vulnerable, not less.
-15 findings, all now at V_RECALLED. `build_pinned_values()` kept — it
+15 findings, all now at V_RECALLED. `build_pinned_values()` kept -- it
 feeds `scan_shadow_constants()` for derived-shadow detection, now
 diagnostic-only. Scoring path audit: three remaining paths that set
 `unit.vuln`, all requiring a citation a person wrote. No other instance
@@ -6843,12 +6900,12 @@ of the credit-without-sourcing failure class remains.
 **General lesson (D8.5):** when a scoring definition changes, every
 mechanism assigning that score needs re-reading, not just the ones the
 change targeted. Both Option A and staleness credit predated the D3
-ladder and were not wrong when written — they were outlived by a
+ladder and were not wrong when written -- they were outlived by a
 definition change and never revisited.
 
 ### Phase 2 build history (D4: cross-checked annotation mechanism)
 
-**Piece 1 — scanner mechanism (2026-08-01, Opus 5).** Teaches the scanner
+**Piece 1 -- scanner mechanism (2026-08-01, Opus 5).** Teaches the scanner
 to recognize `# Cross-checked:` annotations and score them
 V_CROSS_CHECKED (V2). Delivered as transactional patch
 (`documentation/patch_phase2_piece1.py`, 9 anchored edits).
@@ -6858,26 +6915,26 @@ New code: `parse_cross_checks(text)` parser returning `(records, issues)`,
 scoring branches in `score_unit()`, diagnostic subsection in
 `generate_report()`. New test file: `test_cross_checked.py` (16 tests).
 
-V2 scoring rule (decided, 5-model competitive review — GPT ×2, Opus 5 ×2,
+V2 scoring rule (decided, 5-model competitive review -- GPT x2, Opus 5 x2,
 Fable 5): `sourced AND two distinct cross-checks`. Sourced means direct
 citation or inherited citation. Two distinct means two annotation lines
 naming different checker identities (string-level, not model-family-level).
 Anti-gaming: parenthetical `.md` reference required. ISO dates only.
-`# Cross-checked:` is deliberately NOT in SOURCE_PATTERNS — a malformed
+`# Cross-checked:` is deliberately NOT in SOURCE_PATTERNS -- a malformed
 annotation earns nothing.
 
-Predesign went through two review rounds (R0 → R1 → R2). Key findings
+Predesign went through two review rounds (R0 -> R1 -> R2). Key findings
 from the competitive review: the R0 fallback claim was factually wrong
 (all 4 reviewers independently confirmed `has_citation()` does not match
 "Cross-checked"); V2 must require source evidence (3/4 converged);
 two distinct checkers required (3/4 converged); the worksheet inventory
 was wrong (15 not 7, Opus 5 #1 only); a live false positive exists at
 `planet_visualization_utilities.py` ~line 456 (Fable only). The
-competitive pattern produced genuine discovery — findings missed by some
+competitive pattern produced genuine discovery -- findings missed by some
 reviewers were caught by others.
 
-Lookback bleed measured (as-built §5): an annotation promotes sourced
-claims within ~50 lines below it. Containment is process-side — the
+Lookback bleed measured (as-built section 5): an annotation promotes sourced
+claims within ~50 lines below it. Containment is process-side -- the
 identity diff after annotation insertion catches unintended promotions.
 High-exposure files: `info_dictionary.py` (up to 11 downstream per
 annotation). Low-exposure files (mars, eris, earth) proceed as-is.
@@ -6896,7 +6953,7 @@ tiebreaker.
 uncovered files, starting with `celestial_objects.py` (54 findings). Both
 models get the same worksheet independently. Separate sessions.
 
-**Phase 2 Track 1 — Mars calibration (2026-08-02, Opus 4.6
+**Phase 2 Track 1 -- Mars calibration (2026-08-02, Opus 4.6
 orchestrating).** First cross-checked annotations written.
 `mars_visualization_shells.py`: 14 edits via transactional patch.
 Value fixes: bow shock 1.5->1.6, Hill sphere 324.5->~320, perihelion
@@ -6905,7 +6962,7 @@ unsourceable). Hill sphere `# Source:` rewritten as derived-value
 citation. 8 Cross-checked annotations, 4 source blocks. Pushed at
 `225071f6`. Checkers: Claude Opus 5 + GPT-5.6 Thinking.
 
-**Phase 2 — constants_new.py cross-check (2026-08-02, Opus 4.6
+**Phase 2 -- constants_new.py cross-check (2026-08-02, Opus 4.6
 orchestrating).** Citation verification (distinct from Mars's value
 verification). 30 edits via transactional patch. 6 accuracy fixes
 (heliopause arithmetic, Haumea/Arrokoth/Bennu radii, chromosphere
@@ -6913,7 +6970,7 @@ verification). 30 edits via transactional patch. 6 accuracy fixes
 (IAU B3 scope, Archinal 2018, IERS, DeForest year). 54 Cross-checked
 annotations, zero Verified lines remaining. Pushed at `acf32d5a`.
 Checkers: Claude Opus 5 + GPT-5.6 Thinking (primary); Gemini (book
-citations — Carroll & Ostlie, Golub & Pasachoff). Key finding: Gemini
+citations -- Carroll & Ostlie, Golub & Pasachoff). Key finding: Gemini
 can access book content web search cannot reach.
 
 ### Phase 2: Cross-check sweep (OPEN)
@@ -6930,16 +6987,16 @@ annotation format. Mars cross-checked as precedent.
 **Batch 1 geometry follow-up (COMPLETE).** Fable audit
 (`FABLE_shell_consistency_audit_report.md`, `679c2f4`) discovered
 radius_fraction geometry constants were not updated to match the
-corrected display text values — shells rendered at old sizes while hover
+corrected display text values -- shells rendered at old sizes while hover
 text claimed new ones. Also found: `<br>` in _info strings rendering
 as literal markup in GUI tooltips; 126 dead `tooltip` fields in
 SHELL_CONFIGS/CUSTOM_SHELLS; up to six independent storage locations per
 physical value. Opus 5 built 7 geometry+text patch scripts (47 edits).
-`<br>` → `\n` converted for moon, eris, pluto, mars. Mercury mantle
+`<br>` -> `\n` converted for moon, eris, pluto, mars. Mercury mantle
 diamond claim removed. Stale headers corrected. Provenance-neutral
-(Tier 1: 207 → 207).
+(Tier 1: 207 -> 207).
 
-**Batch 2 (NEXT): Gas giants** — jupiter (18 findings), saturn (10),
+**Batch 2 (NEXT): Gas giants** -- jupiter (18 findings), saturn (10),
 uranus (24), neptune (26). Plus Saturn Hill sphere three-way
 inconsistency, Jupiter/Saturn "not yet rendered" false claims, `<br>`
 conversion for jupiter/saturn/uranus/neptune/planet9/solar. See
@@ -6955,17 +7012,17 @@ confirmed not V2-quality (Mars bow shock miss); all modules need fresh
 independent legs regardless of Track 1/Track 2 status.
 
 **Module plan (decided 2026-08-02).** Four batches: Batch 1 (Moon, Eris,
-Mercury, Venus, Pluto — 34 findings), Batch 2 (gas giants — 78),
-Batch 3 (Earth, solar, comets — 82), Batch 4 (star_notes,
-celestial_objects, info_dictionary — 210). Batch 2 unblocks Artifact 2.
+Mercury, Venus, Pluto -- 34 findings), Batch 2 (gas giants -- 78),
+Batch 3 (Earth, solar, comets -- 82), Batch 4 (star_notes,
+celestial_objects, info_dictionary -- 210). Batch 2 unblocks Artifact 2.
 
 ### Observations (not fixed, tracked)
 
 **Em-dashes in comet_visualization_shells.py.** Three pre-existing
 non-ASCII bytes (em-dashes), one inside a display string. Tony approved
-fixing — separate edit, changes user-visible output.
+fixing -- separate edit, changes user-visible output.
 
-**Patch scripts in repo root → documentation/.** Seven committed patch
+**Patch scripts in repo root -> documentation/.** Seven committed patch
 scripts moved to `documentation/` to clear self-scan Tier-1 noise.
 Complete.
 
@@ -7531,14 +7588,14 @@ Ref: PREDESIGN_1c_citation_inheritance.md; L-156 Gap item 6; L-161.
 
 #### [L-175] Newly-visible uncited temperature claims (1d piece 3)
 <!-- L:175 status:OPEN upd:2026-07-31 section:W.Active flag: rice:3/3/80/2 -->
-What. L-156 Phase 1d piece 3 added temperature units to NUMERIC_CLAIM_RE. This surfaced 96 real uncited temperature claims the scanner was previously blind to — 61 at Tier 1. Almost all in four paleoclimate modules:
+What. L-156 Phase 1d piece 3 added temperature units to NUMERIC_CLAIM_RE. This surfaced 96 real uncited temperature claims the scanner was previously blind to -- 61 at Tier 1. Almost all in four paleoclimate modules:
 paleoclimate_wet_bulb_full.py (16 -> 51)
 paleoclimate_human_origins_full.py (11 -> 32)
 paleoclimate_visualization_full.py (7 -> 28)
 paleoclimate_dual_scale.py (2 -> 9)
 Why track separately. Same pattern as L-173 (shell_configs gaps): these are genuinely uncited claims that need sourcing, not a scoring regression. Tracking separately lets the Tier-1 count read as "132 known + 61 newly visible" rather than as a backslide.
 Sourcing path. These modules carry human-cost content (heat deaths, food insecurity) where the earth-system-pipeline skill's restraint discipline applies. That is an argument for sourcing them properly, not for leaving them unseen. Sourcing will likely follow the L-157 Gemini sweep methodology.
-Note. "Data Preservation is Climate Action" — the project's own principle says these claims matter more, not less, than average.
+Note. "Data Preservation is Climate Action" -- the project's own principle says these claims matter more, not less, than average.
 Ref: L-156 Phase 1d piece 3; AS_BUILT_L156_phase1d_e_f.md section 2; L-078(d).
 
 ### W.Done -- closed items, kept with the track
@@ -7566,18 +7623,18 @@ Ref: L-156 Phase 1d piece 3; AS_BUILT_L156_phase1d_e_f.md section 2; L-078(d).
   Plotly.js. Tested on desktop Chrome and iPhone Safari. Consent gate for
   first-time visitors (localStorage persistence). ~4-10 second load time,
   cached after first visit. Server/serverless resolved: Pyodide.
-- **A/B fork resolved: B′.** `measure_plotly.html` timed full plotly-in-Pyodide
-  cold-start on iPhone Safari WiFi: **2.1-3.3 s** (acceptance ≤15 s — passed at
+- **A/B fork resolved: B'.** `measure_plotly.html` timed full plotly-in-Pyodide
+  cold-start on iPhone Safari WiFi: **2.1-3.3 s** (acceptance <=15 s -- passed at
   one-seventh). `import plotly.graph_objects` = 57-59 ms. Fable's convention-
-  duplication analysis confirmed A's parallel-pipeline cost exceeds B′'s cold-
-  start cost for a solo developer. B′ uses slim self-hosted wheel (~3.9 MB).
-  Two-tier model: frozen A exhibits (instant) + data-backed B′ exhibits
+  duplication analysis confirmed A's parallel-pipeline cost exceeds B''s cold-
+  start cost for a solo developer. B' uses slim self-hosted wheel (~3.9 MB).
+  Two-tier model: frozen A exhibits (instant) + data-backed B' exhibits
   (shared engines, one codebase). Phase 0 closed.
-- **Supersedes:** Two-sided pilot (Dash vs Pyodide), matplotlib question — both
+- **Supersedes:** Two-sided pilot (Dash vs Pyodide), matplotlib question -- both
   dissolved by the v8 architectural pivot.
 - **Attribution gate (L-086):** Publicly reachable with inline "Data: JPL/NASA"
   credit. Ruled sufficient pending L-086.
-**Ref:** Master plan v9 §5 Phase 0; gallery @ `4b086a6`.
+**Ref:** Master plan v9 section 5 Phase 0; gallery @ `4b086a6`.
 
 #### [L-098] Data serving pipeline (Phase 1b)
 <!-- L:098 status:DONE upd:2026-07-12 section:W.Done flag: rice:3/3/50/3 -->
@@ -7707,7 +7764,7 @@ L-107 copy-provenance sync register; L-108 master-plan v11 reconciliation.
 PHASE1B_STAGE2_TEST_PROTOCOL.md; PHASE1B_BUILD_MANIFEST_v4.md;
 PHASE1B_MODEL_CORRECTION_HANDOFF.md; PHASE1B_DATA_SERVING_DESIGN_HANDOFF.md
 v0.6; DATA_SERVING_BROAD_ANALYSIS.md; export_orbit_cache.py; L-078 (ROLE_MAP);
-master plan v10 §3a, §5 Phase 1b.
+master plan v10 section 3a, section 5 Phase 1b.
 **Note:** Closed 2026-07-12: builder built,
 offline-verified (75/0 clean clone), live-gated 2026-07-11, deployed to gallery
 data/solar-system/, backup covered (L-106). Children: L-102/L-113 (thinning,
@@ -7727,13 +7784,13 @@ deferred), L-107 (provenance register), L-111 (unattended-nightly, follow-on).
 - **Architecture.** Architecture A (lightweight): Python/NumPy computes orbit
   geometry, JavaScript builds Plotly traces, `Plotly.newPlot()` renders.
   No plotly Python package in Pyodide. Frozen as an "instant tier" exhibit
-  under the two-tier model (A/B fork resolved: B′ for Phase 2+ data-backed
+  under the two-tier model (A/B fork resolved: B' for Phase 2+ data-backed
   exhibits, A retained for frozen pedagogical demos). Option C viewer
-  (master plan §2a): `index.html` serves curated cards; `interactive.html`
+  (master plan section 2a): `index.html` serves curated cards; `interactive.html`
   serves interactive exhibits via `?exhibit=` parameter (hardcoded in v1).
 - **Next iteration:** Plot refinements (Mercury color contrast, scale presets,
   outer planet zoom, additional controls).
-**Ref:** Master plan v10 §2a, §5 Phase 0; gallery @ `a85a4fa`.
+**Ref:** Master plan v10 section 2a, section 5 Phase 0; gallery @ `a85a4fa`.
 
 #### [L-118] feature_configs.json served empty every build (F1, gates artifact 2)
 <!-- L:118 status:DONE upd:2026-07-21 section:W.Done flag: rice:3/3/90/1 -->
@@ -7925,7 +7982,7 @@ served. Closing outright, no residual carried forward.
   chain. Neither is the right home for "how the new mechanism itself works."
 - **Decided (Tony, 2026-07-20):** create gallery-assembler as that home.
 - **Must carry, once written (corrected tonight, not the first-pass framing):**
-  - Orrery-vs-assembler boundary: shared knowledge, not shared machinery (see master plan §3).
+  - Orrery-vs-assembler boundary: shared knowledge, not shared machinery (see master plan section 3).
   - No composition between frames -- retired by design (v4, catastrophic cancellation +
     aliasing). Each orbit is an independent fetch at its own center; a binary pair needing
     two views means two independent caches, never one derived from the other.
@@ -7934,7 +7991,7 @@ served. Closing outright, no residual carried forward.
   - Orrery-first authoring rule, with Encke as the confirmed, deliberate exception.
 **Gap:** write the skill; migrate the field notes above into it; add fires_when to the
 Skill Manifest.
-**Ref:** L-149, L-150 (motivating work); master plan §3; render_orbits.py, resolver.py,
+**Ref:** L-149, L-150 (motivating work); master plan section 3; render_orbits.py, resolver.py,
 cache_reader.py.
 
 #### [L-087] palomas_orrery_helpers.py computation/GUI split
