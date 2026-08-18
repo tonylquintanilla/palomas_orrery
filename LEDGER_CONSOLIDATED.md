@@ -221,15 +221,15 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*122 live items; 110 need attention (`!`); 121 RICE-scored; 75 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*121 live items; 109 need attention (`!`); 120 RICE-scored; 81 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
-| ! | L-201 | Request selection -- ask the builder for fewer rows | OPEN | 5.4 | 2026-08-17 |
+| ! | L-207 | The citation prompt -- the checker asks the fuzzy question | OPEN | 7.6 | 2026-08-18 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
-| ! | L-200 | The `# Resolved:` leg -- record a verdict that landed | OPEN | 5.1 | 2026-08-17 |
+| ! | L-206 | Worksheet return filenames carry model and session | OPEN | 5.1 | 2026-08-18 |
 | ! | L-193 | Qualified verdicts -- the token is not the whole answer | OPEN | 4.8 | 2026-08-15 |
 | ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
@@ -242,7 +242,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-08-07 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
-| ! | L-202 | JSON worksheet format, with markdown as fallback | OPEN | 2.2 | 2026-08-17 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
@@ -425,11 +424,16 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-114 | objects_config.json stranded by the atomic swap; also blocks crash-recovery (gallery builder) | DONE | 16.2 | 2026-07-27 |
 |  | L-182 | Mars Hill sphere — cross-check correction lost across the config pipeline | DONE | 12.0 | 2026-08-05 |
 |  | L-198 | Claim vocabulary: the units the scanner could not see | DONE | 10.2 | 2026-08-17 |
+|  | L-204 | The worksheet reference may be JSON | DONE | 5.7 | 2026-08-18 |
 |  | L-196 | Citation continuations: mark, join, refuse | DONE | 5.4 | 2026-08-17 |
 |  | L-197 | Maintenance runner output: say what passed | DONE | 5.4 | 2026-08-17 |
+|  | L-201 | Request selection -- ask the builder for fewer rows | DONE | 5.4 | 2026-08-18 |
+|  | L-205 | The runner's verdict lines carry evidence | DONE | 5.4 | 2026-08-18 |
 |  | L-003 | Protocol amendment candidates (for v3.29) | DONE | 5.4 | 2026-06-22 |
 |  | L-062 | README refresh -- fold in handoff + ledger developments | DONE | 5.1 | 2026-07-28 |
 |  | L-153 | Restore "Who Tony Is" framing into resident protocol (protocol) | DONE | 5.1 | 2026-07-21 |
+|  | L-200 | The `# Resolved:` leg -- record a verdict that landed | DONE | 5.1 | 2026-08-18 |
+|  | L-203 | The visibility convention -- give it a home in the skill | DONE | 5.1 | 2026-08-18 |
 |  | L-189 | Provenance scanner: run history and run-to-run delta | DONE | 4.8 | 2026-08-11 |
 |  | L-065 | European heat wave heat map (Earth System track) | DONE | 4.8 | 2026-06-25 |
 |  | L-064 | Provenance-scanner format sweep -- Earth System family | DONE | 4.5 | 2026-06-30 |
@@ -446,6 +450,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-110 | GPT competitive cross-check remediation (builder Pass 4) | DONE | 2.7 | 2026-07-10 |
 |  | L-116 | New skill: gallery-cache-builder (Move 2 of the skills update) | DONE | 2.5 | 2026-07-12 |
 |  | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | DONE | 2.2 | 2026-07-15 |
+|  | L-202 | JSON worksheet format, with markdown as fallback | DONE | 2.2 | 2026-08-18 |
 |  | L-063 | Orrery GUI Note text update | DONE | 2.0 | 2026-07-17 |
 |  | L-072 | Gallery Studio WYSIWYG preview -- render through the real index.html viewer | DONE | 2.0 | 2026-06-26 |
 |  | L-169 | Gallery/Studio track -- repo structure reference | DONE | 1.9 | 2026-07-28 |
@@ -2399,7 +2404,8 @@ grammar); `documentation/FABLE_REVIEW_worksheet_schema.md` item 5.
    v3.34-v3.39 in the protocol to a single pointer line, keeping the
    two most recent entries in full. Recovers roughly 95 lines, taking
    the protocol to about 925.
-3. One line in Part 5 naming `documentation/LESSONS_ARCHIVE.md`. The
+3. One line in Part 5 naming the archive file (now
+   `documentation/PROJECT_INSTRUCTIONS_HISTORY.md`). The
    file is invisible from the protocol today, which is the only real
    defect it has.
 
@@ -2419,116 +2425,132 @@ reading. None of the 27 met that bar on 2026-08-17.
 **Tony-action (decide):** approve the sizing section's content before
 it is written into the protocol -- it is a constitutional amendment,
 not a build.
-**Gap:** all three parts unbuilt. Part 2 must not run before the
-appendix repair in the bullet above.
+- **Tony's ruling, 2026-08-18, and it changes part 2.** The store for
+  the version history is NOT this ledger's appendix. The appendix moves
+  out into `documentation/PROJECT_INSTRUCTIONS_HISTORY.md`, which is
+  `LESSONS_ARCHIVE.md` renamed and now carrying two records: the
+  version history as PART 1, the v3.37 lessons record verbatim as
+  PART 2. Both are kept -- the lessons record is not displaced by the
+  history arriving beside it. The ledger keeps a pointer.
+- **As built, 2026-08-18** (`patch_L199_1`). Parts 2 and 3 of the
+  proposal landed, part 1 did not.
+  - The appendix repair the bullet above insisted on is satisfied
+    WITHOUT copying anything: v3.39 and v3.40 are two of the three
+    entries that STAY resident, so the trim never reaches them.
+    v3.34-v3.38 come out of the protocol and are not copied, because
+    they are already inside the appendix that became PART 1. Every
+    entry lives in exactly one place.
+  - The rule that keeps it that way is now stated in the protocol:
+    three most recent resident, and a fourth pushes the oldest down.
+    That is the stated cap part 1 asked for, arriving as one line
+    rather than as a sizing section.
+  - Part 3 landed too: Part 5 names the file, which is the only real
+    defect the archive had.
+  - The header gained an anchor and a corrected date. The repo copy
+    read August 16 and the copy installed in the Claude UI read
+    August 17 under the SAME version number -- two stores of one
+    document, one of them hand-edited. v3.41 supersedes both.
+- **Remaining, and it is part 1 alone.** A short sizing section
+  carrying the trigger test and the gates-fraction measure. The cap it
+  was to contain now exists; what is still missing is the reasoning
+  that governs the next thing wanting to move in.
+**Gap:** part 1 unbuilt. Parts 2 and 3 landed 2026-08-18.
 **Ref:** v3.37 (the reversed all-lessons cut, and why an archive has no
 trigger); v3.30 (the two-layer split that moved procedure into skills);
-`documentation/LESSONS_ARCHIVE.md`; the Protocol Version History
-appendix at the end of this ledger.
+`documentation/PROJECT_INSTRUCTIONS_HISTORY.md`;
+`documentation/patch_L199_1`.
 
-#### [L-200] The `# Resolved:` leg -- record a verdict that landed
-<!-- L:200 status:OPEN upd:2026-08-17 section:A flag: rice:2/3/85/1 -->
-- **What it is.** A record-only annotation leg naming the worksheet row
-  whose verdict caused an edit, and the ledger handle that authorized
-  it. Example shape:
-  `# Resolved: <batch> <key> -- citation refuted, Source replaced (L-2xx)`
-- **Why it is needed now.** The pilot ends at re-verification in the
-  code (2026-08-17 ruling). Without this leg, an annotation edited in
-  response to a verdict is indistinguishable from an unexplained edit,
-  and the only record of which is which lives in a handoff.
-- **It cites the KEY, never the row number.** `row_id` is positional and
-  renumbers whenever the corpus changes; the key
-  (`module.py::enclosing::label::cN`) is stable. Same failure the ledger
-  already records for per-handoff item numbers.
-- **Deliberately NOT in `CONTEXT_LEGS`.** As an unknown label it is
-  invisible to the request, which is correct: a row dispatched a second
-  time must not show the responder what the last one concluded. A
-  context leg would anchor the way a Claude-derived figure anchors
-  Gemini.
-- **Measured, not assumed.** A `# Resolved:` line added to a real block
-  in the patched sandbox: 100 rows, 0 unmarked, 0 problems, 153 joins --
-  unchanged. It reads as a label, so it closes a leg run rather than
-  tripping the L-196 ratchet. Nothing in the builder has to change.
-- **The check is linkage, not meaning.** Three existence facts: the leg
-  parses, it names a worksheet row that exists, and that row's citation
-  verdict was one requiring an edit. Refuses on a leg pointing at a row
-  that does not exist. Prints how many legs it examined, so a clean run
-  says what it looked at.
+#### [L-206] Worksheet return filenames carry model and session
+<!-- L:206 status:OPEN upd:2026-08-18 section:A flag: rice:2/3/85/1 -->
+- **The requirement, Tony 2026-08-18.** Beyond tracking, the filename
+  must identify the originating MODEL and SESSION.
+- **The shape, confirmed 2026-08-18.**
+  `worksheet_<model>_<batch>_<YYYYMMDD>.jsonl`, e.g.
+  `worksheet_claude-opus-5_pilot_constants_new_20260818.jsonl`.
+  Underscores separate fields; hyphens live INSIDE a field. Parse from
+  both ends -- literal `worksheet`, then model, then the date last --
+  so the batch keeps the underscores it already has.
+- **Session is the date, with a trailing letter when a day repeats**
+  (`_20260818b`). Not hypothetical: 2026-08-18 alone would have needed
+  it.
+- **The model field carries the VERSION; the annotation identity does
+  not.** The scanner compares checker identity as a plain string and
+  says so -- "Gemini" and "Gemini Pro" count as two checkers. Live
+  annotations read bare `Claude` (43), `GPT` (52), `Gemini` (13). If
+  Opus and Fable both answer a row, two legs arrive and V2 grants
+  cross-checked on what may be one family's shared misreading. Version
+  in the FILENAME and bare identity in the annotation keeps two Claude
+  legs scoring as ONE identity -- conservative and correct -- while the
+  file still records which two Claudes. No migration of 134
+  annotations.
+- **Two supporting pieces, unbuilt.** The request prints the EXPECTED
+  return filename in its header, since the builder cannot name a return
+  and the request is the only place the convention reaches the reader.
+  And the checker REPORTS on names rather than refusing them: 34
+  historical worksheets predate this, and a checker that refuses the
+  corpus it exists to check is useless.
 **Note:** RICE is Claude's proposal, unratified.
-**Gap:** unbuilt. Fields depend on nothing outstanding -- reader count
-was removed from its critical path 2026-08-17.
-**Ref:** L-192 (Break 5); L-196 (the ratchet it must not trip); L-201.
+**Gap:** unbuilt. Blocks nothing, but a return filed before it lands
+will need renaming -- and a rename breaks every `# Resolved:` leg
+pointing at it, so name the pilot's return by hand at dispatch time.
+**Ref:** L-200 (the leg that cites the filename); L-186; L-192.
 
-#### [L-201] Request selection -- ask the builder for fewer rows
-<!-- L:201 status:OPEN upd:2026-08-17 section:A flag: rice:2/3/90/1 -->
-- **The defect.** `build()` returns the whole annotated corpus and
-  `main()` renders every row -- 100 rows over 52 sites at HEAD. There is
-  no way to ask for fewer, so producing a pilot slice today means
-  hand-editing the generated file, which breaks the request's own
-  do-not-edit instruction and yields a slice no second run reproduces.
-- **A selection is code, not typing.** Named entries in the module, each
-  a name, a one-line purpose, and a predicate. `main()` lists them at
-  the prompt; blank means the whole corpus, so today's behaviour is the
-  default.
-- **Ships with exactly two:** `all`, and `constants_new` (the pilot's
-  23 rows). Stratified caps from the design note are NOT built --
-  decision 5 removed the need for them.
-- **Selection runs AFTER the L-196 refusal, never before.** Excluding a
-  site must never excuse an unmarked continuation; a ratchet with a
-  bypass is not a ratchet.
-- **The request records its own selection:** name, count against corpus
-  size ("23 of 100"), and the statement that keys identify rows.
-- **Checker emits JSON findings** alongside `WORKSHEET_CHECK.md`,
-  carrying routed rows by key. Precedent:
-  `data/worksheet_check_state.json`.
-- **A key list is legitimate only when the checker wrote it.** Never one
-  a person typed. The test is whether the list can be regenerated.
-- **The key-list consumer ships WITH this item** (Tony, 2026-08-17). The
-  earlier case for deferring it was that building the consumer meant
-  inventing the producer's format; the JSON findings emission removes
-  that, since the producer exists in the same patch. What remained
-  against it was an unexercised path that looks available -- weaker than
-  the risk of the rule being written down and not read under pressure.
+#### [L-207] The citation prompt -- the checker asks the fuzzy question
+<!-- L:207 status:OPEN upd:2026-08-18 section:A flag: rice:3/3/85/1 -->
+- **The gap, measured 2026-08-18.** The citation half of a return has
+  no route out of the file. `ROLE_SOURCE` -- the responder's own cited
+  source -- is mapped in the header registry and read NOWHERE.
+  `ROLE_CITATION_VERDICT` is read in exactly two places: an unreachable
+  third branch of `read_verdict` (unreachable for JSON, which always
+  synthesizes a value column) and L-200's linkage check, which only
+  fires on a row a `# Resolved:` leg already names. So both halves of
+  the citation question are parsed into the Table and stop there.
+- **This is NOT a defect in the split.** The 2026-08-17 ruling assigned
+  the citation comparison to a reader BECAUSE it is a language
+  judgement rather than a numerical one, and the mechanical checker
+  correctly stays at numbers. What was never built is the leg that
+  carries the material to that reader.
+- **Tony's design, 2026-08-18.** The checker does two things in one
+  run: (1) the numerical check exactly as now, and (2) writes a
+  CONSISTENT JSON prompt asking Claude the citation question.
+- **Why a prompt rather than a worklist.** A worklist is data; a prompt
+  is a request, and a request inherits the discipline the builder
+  already has -- keyed rows, a hash over the do-not-edit fields, a SHA
+  anchor, and generation rather than typing. Same SHA plus same returns
+  gives the same prompt, which is what makes a citation review EVIDENCE
+  rather than an opinion, re-runnable against another model and
+  comparable across sessions. Same rule as L-201: a selection is code,
+  not typing.
+- **It respects the existing boundary.** The checker stays read-only
+  over the corpus and writes reports; it already writes
+  `data/worksheet_routed.json`. No writer moves behind that line.
+- **Each row carries:** key, claim, code value, the code's current
+  `# Source:` authority, the context legs (`# See:`, `# Derived:`,
+  `# Note:`) so a misplaced authority is distinguishable from an absent
+  one, the responder's cited source, the worksheet and checker it came
+  from, and a row hash.
+- **Ruled 2026-08-18: the prompt SHOWS the responder's citation
+  verdict.** It makes the review a comparison rather than a
+  re-derivation, and disagreement between the responder's verdict and
+  the reviewer's is the lazy-responder canary -- measured per row,
+  with no separate mechanism invented for it. The cost is stated
+  rather than hidden: seeing a verdict before judging anchors, and the
+  only mitigations are field order and an instruction saying the review
+  is independent and that disagreement is a finding, not an error.
+  Structural blindness would be stronger and was traded away
+  deliberately.
+- **On complexity.** This passes the extend-don't-add test: it is an
+  EMITTER over the Table the checker already builds, reusing
+  `row_hash` and the report writer. No new verdict semantics, no new
+  layer, no second parse.
+- **It is not strictly blocking for the pilot.** Twenty-three rows can
+  be read by hand. It is blocking for the pilot to produce evidence of
+  the kind this project trades in, and it does not scale to 110.
 **Note:** RICE is Claude's proposal, unratified.
 **Gap:** unbuilt. Full detail in
-`documentation/DESIGN_20260817_worksheet_selection.md`.
-**Ref:** L-196; L-200; L-202.
-
-#### [L-202] JSON worksheet format, with markdown as fallback
-<!-- L:202 status:OPEN upd:2026-08-17 section:A flag: rice:2/3/75/2 -->
-- **Why.** The checker carries tolerance machinery that exists only
-  because the interchange is prose: eight header spellings mapped to the
-  source column alone, an emphasis stripper, and 15 unrecognised columns
-  in the current run. A keyed object deletes that defect class -- a
-  field name is right or it fails loudly.
-- **The known risk, stated.** Failure granularity inverts. Markdown
-  degrades row by row; JSON fails whole-file. Hedge: rows written one
-  object per line, so a truncated return is salvageable object by
-  object.
-- **Tony's ruling 2026-08-17:** the purpose of the pilot is to test, so
-  send the JSON; if a return fails to parse, send the markdown.
-- **Markdown parsing stays live permanently.** The seventeen historical
-  worksheets are markdown. This is a format ADDED, never a replacement.
-- **One producer, two views.** The markdown renderer and the JSON
-  emitter both run off the same `Request` list. No second source of
-  truth.
-- **Row integrity hash, approved 2026-08-17.** Eight hex characters over
-  the joined, normalized do-not-edit fields (key, claim, code value),
-  written by the builder and recomputed by the checker. The case is
-  ATTRIBUTION, not tamper-proofing: without it, a responder who rounds a
-  code value produces an L2b mismatch reporting the CODE as drifted,
-  sending someone to investigate a constant that never moved. A missing
-  hash FAILS the row -- a hash that passes when absent is a check that
-  cannot fail. The run reports how many were verified.
-- **Rejected alternative:** rebuilding rows from the anchor SHA to
-  compare directly. More exact, but only works while the tree still
-  matches the anchor, and by the time a return lands it usually does
-  not.
-**Note:** RICE is Claude's proposal, unratified.
-**Gap:** unbuilt. Needs a checker-side JSON reader as well as a builder
--side emitter.
-**Ref:** L-201; L-192 (L2b, the layer the hash protects from
-misattribution).
+`documentation/DESIGN_20260818_citation_prompt.md`.
+**Ref:** L-192 (the checker); L-200 (the leg that records what a
+verdict caused); L-202 (the JSON schema it reads).
 
 ## PENDING ACTION (Tony-side)
 
@@ -4908,6 +4930,281 @@ earlier; the rerun asserts the two patterns differ before comparing.
 **Ref:** L-156 (the scanner recognition work this widens); L-192 (the
 dispatch corpus it grows); `documentation/patch_L196_14`;
 `documentation/worksheets/L192_extractor_pins.txt` (regenerated).
+
+#### [L-200] The `# Resolved:` leg -- record a verdict that landed
+<!-- L:200 status:DONE upd:2026-08-18 section:C flag: rice:2/3/85/1 -->
+- **What it is.** A record-only annotation leg naming the worksheet row
+  whose verdict caused an edit, and the ledger handle that authorized
+  it. Example shape:
+  `# Resolved: <batch> <key> -- citation refuted, Source replaced (L-2xx)`
+- **Why it is needed now.** The pilot ends at re-verification in the
+  code (2026-08-17 ruling). Without this leg, an annotation edited in
+  response to a verdict is indistinguishable from an unexplained edit,
+  and the only record of which is which lives in a handoff.
+- **It cites the KEY, never the row number.** `row_id` is positional and
+  renumbers whenever the corpus changes; the key
+  (`module.py::enclosing::label::cN`) is stable. Same failure the ledger
+  already records for per-handoff item numbers.
+- **Deliberately NOT in `CONTEXT_LEGS`.** As an unknown label it is
+  invisible to the request, which is correct: a row dispatched a second
+  time must not show the responder what the last one concluded. A
+  context leg would anchor the way a Claude-derived figure anchors
+  Gemini.
+- **Measured, not assumed.** A `# Resolved:` line added to a real block
+  in the patched sandbox: 100 rows, 0 unmarked, 0 problems, 153 joins --
+  unchanged. It reads as a label, so it closes a leg run rather than
+  tripping the L-196 ratchet. Nothing in the builder has to change.
+- **The check is linkage, not meaning.** Three existence facts: the leg
+  parses, it names a worksheet row that exists, and that row's citation
+  verdict was one requiring an edit. Refuses on a leg pointing at a row
+  that does not exist. Prints how many legs it examined, so a clean run
+  says what it looked at.
+- **As built, 2026-08-18** (`patch_L204_1`, shipped with L-204 because
+  both touch the annotation grammar and the checker that reads it).
+  The grammar lives in `provenance_scanner.parse_resolved`, beside the
+  cross-check grammar rather than in a second copy; the linkage layer
+  lives in `worksheet_checker.check_resolved`, where the worksheets are
+  already loaded. Four ways to fail, all mutation-proven: the leg does
+  not parse, the worksheet is not on disk, no row carries the key, or
+  the row's citation verdict cleared and so warrants no edit. A fifth
+  fires when the named worksheet has no citation-verdict column at all,
+  which only a markdown return can produce -- the JSON reader
+  synthesizes every column whether the return carried it or not.
+- **The count prints on every run, including zero.** "0 Resolved
+  leg(s) examined: 0 linked, 0 with a linkage problem." A section that
+  says nothing when there is nothing cannot be told from one that never
+  ran.
+- **One interpretation, made by Claude and NOT yet ruled.** The design
+  above wrote `<batch>` as the first token. It shipped as the worksheet
+  FILENAME, because a batch name does not determine what the returned
+  file is called, and "names a worksheet row that exists" is only
+  mechanically checkable against a file on disk. Overrule if the batch
+  was meant literally.
+**Note:** RICE is Claude's proposal, unratified.
+**Ref:** L-192 (Break 5); L-196 (the ratchet it must not trip); L-201;
+L-204 (shipped in the same patch); `documentation/patch_L204_1`.
+
+#### [L-201] Request selection -- ask the builder for fewer rows
+<!-- L:201 status:DONE upd:2026-08-18 section:C flag: rice:2/3/90/1 -->
+- **The defect.** `build()` returns the whole annotated corpus and
+  `main()` renders every row -- 100 rows over 52 sites at HEAD. There is
+  no way to ask for fewer, so producing a pilot slice today means
+  hand-editing the generated file, which breaks the request's own
+  do-not-edit instruction and yields a slice no second run reproduces.
+- **A selection is code, not typing.** Named entries in the module, each
+  a name, a one-line purpose, and a predicate. `main()` lists them at
+  the prompt; blank means the whole corpus, so today's behaviour is the
+  default.
+- **Ships with exactly two:** `all`, and `constants_new` (the pilot's
+  23 rows). Stratified caps from the design note are NOT built --
+  decision 5 removed the need for them.
+- **Selection runs AFTER the L-196 refusal, never before.** Excluding a
+  site must never excuse an unmarked continuation; a ratchet with a
+  bypass is not a ratchet.
+- **The request records its own selection:** name, count against corpus
+  size ("23 of 100"), and the statement that keys identify rows.
+- **Checker emits JSON findings** alongside `WORKSHEET_CHECK.md`,
+  carrying routed rows by key. Precedent:
+  `data/worksheet_check_state.json`.
+- **A key list is legitimate only when the checker wrote it.** Never one
+  a person typed. The test is whether the list can be regenerated.
+- **The key-list consumer ships WITH this item** (Tony, 2026-08-17). The
+  earlier case for deferring it was that building the consumer meant
+  inventing the producer's format; the JSON findings emission removes
+  that, since the producer exists in the same patch. What remained
+  against it was an unexercised path that looks available -- weaker than
+  the risk of the rule being written down and not read under pressure.
+- **As built, 2026-08-17** (`patch_L201_1`, with L-202). Three named
+  selections shipped rather than the two planned: `all`,
+  `constants_new` (23 of 100 rows), and `sendbacks`, which reads the
+  checker-written key list. Builder tests went 41 -> 61.
+- **Reachable without the terminal, 2026-08-18** (`patch_L201_2`). The
+  builder is a Developer Tools card on the dashboard, un-indented
+  because the maintenance runner does not cover it, and marked
+  interactive so it opens in its own console. Its card and its module
+  docstring both name the three prompts in order and both say that the
+  selection prompt DEFAULTS TO 1 -- pressing Enter there produces a
+  100-row request that looks exactly like a working tool. The
+  docstring's old RUNNING IT block said the tool asks one question and
+  writes one file; it asks three and writes two, and had not moved with
+  either this item or L-202.
+- **Four runner-covered checkers were missing from the dashboard** and
+  were added in the same patch, against the 2026-08-12 ruling that a
+  tool the runner covers stays visible as its own card. The indented
+  group now matches `maintenance_run.py` row for row AND in execution
+  order, verified by reading the runner's own GENERATORS and CHECKERS
+  lists rather than by eye.
+**Note:** RICE is Claude's proposal, unratified.
+**Ref:** L-196; L-200; L-202; `documentation/patch_L201_1`,
+`documentation/patch_L201_2`;
+`documentation/DESIGN_20260817_worksheet_selection.md`.
+
+#### [L-202] JSON worksheet format, with markdown as fallback
+<!-- L:202 status:DONE upd:2026-08-18 section:C flag: rice:2/3/75/2 -->
+- **Why.** The checker carries tolerance machinery that exists only
+  because the interchange is prose: eight header spellings mapped to the
+  source column alone, an emphasis stripper, and 15 unrecognised columns
+  in the current run. A keyed object deletes that defect class -- a
+  field name is right or it fails loudly.
+- **The known risk, stated.** Failure granularity inverts. Markdown
+  degrades row by row; JSON fails whole-file. Hedge: rows written one
+  object per line, so a truncated return is salvageable object by
+  object.
+- **Tony's ruling 2026-08-17:** the purpose of the pilot is to test, so
+  send the JSON; if a return fails to parse, send the markdown.
+- **Markdown parsing stays live permanently.** The seventeen historical
+  worksheets are markdown. This is a format ADDED, never a replacement.
+- **One producer, two views.** The markdown renderer and the JSON
+  emitter both run off the same `Request` list. No second source of
+  truth.
+- **Row integrity hash, approved 2026-08-17.** Eight hex characters over
+  the joined, normalized do-not-edit fields (key, claim, code value),
+  written by the builder and recomputed by the checker. The case is
+  ATTRIBUTION, not tamper-proofing: without it, a responder who rounds a
+  code value produces an L2b mismatch reporting the CODE as drifted,
+  sending someone to investigate a constant that never moved. A missing
+  hash FAILS the row -- a hash that passes when absent is a check that
+  cannot fail. The run reports how many were verified.
+- **Rejected alternative:** rebuilding rows from the anchor SHA to
+  compare directly. More exact, but only works while the tree still
+  matches the anchor, and by the time a return lands it usually does
+  not.
+- **As built, 2026-08-17** (`patch_L201_1` emitter, `patch_L202_1`
+  reader). The request is written as JSON Lines beside the markdown,
+  each row carrying an eight-character hash over its do-not-edit
+  fields. The checker reads a returned `.jsonl` into the same Table the
+  markdown parser produces, so every existing layer runs unchanged. A
+  new layer LH routes back any row whose hash is wrong
+  (`ROW_MODIFIED`) or absent (`ROW_HASH_MISSING`); a markdown table has
+  no integrity map and reads NOT APPLICABLE rather than pass. Checker
+  tests went 69 -> 105.
+- **The defect this format left behind, found the same day.** A
+  returned `.jsonl` could be checked and routed and then NOT cited: the
+  annotation grammar refused a reference that did not end in `.md`.
+  Leg 6 of the loop -- turning a verdict into an annotation -- had no
+  last inch. Found by building a simulated JSON return and running the
+  checker, not by reading the code. Closed under L-204.
+**Note:** RICE is Claude's proposal, unratified.
+**Ref:** L-201; L-192 (L2b, the layer the hash protects from
+misattribution); L-204 (the grammar this format required).
+
+#### [L-203] The visibility convention -- give it a home in the skill
+<!-- L:203 status:DONE upd:2026-08-18 section:C flag: rice:2/3/85/1 -->
+- **The convention.** A failure that prints where the responder reads
+  it gets an ANNOTATION; a failure that appears nowhere gets a
+  REFUSAL. Visibility decides, not severity.
+- **Where it came from.** L-196 left one question open as Claude's
+  call: should a mismatched continuation marker refuse rather than
+  report? It reports. The distinction drawn was that a mismatch prints
+  into the worksheet where the responder reads it, while an unmarked
+  continuation appears nowhere. Tony's ruling 2026-08-17: settle it as
+  a CONVENTION rather than a one-off, because the same distinction
+  governs every future case of the same shape.
+- **It had a record and no home.** Recorded in
+  `documentation/DECISIONS_20260817_pilot_design.md`, which nothing
+  loads at the moment of need. That is the same failure shape as a
+  lesson filed in an archive with no trigger.
+- **As built, 2026-08-18** (`patch_L204_1`). Written into
+  `skills/provenance-discipline/SKILL.md` next to the annotation
+  grammar, marked CRITICAL, with the generalization stated: before
+  choosing between reporting and refusing, ask where the report lands
+  and who reads it -- if it lands in a log nobody opens or a file the
+  next session will not load, reporting is silence wearing the costume
+  of diligence. Skill 2.3 -> 2.4. No tool behaviour changed.
+- **The obligation this creates.** A mid-session reinstall cannot be
+  verified from inside the session that makes it, so the NEXT session
+  confirms its own loaded copy reads 2.4 before doing provenance work.
+**Note:** RICE is Claude's proposal, unratified.
+**Ref:** L-196 (where the question arose); L-186 (the annotation
+grammar it sits beside); `documentation/patch_L204_1`.
+
+#### [L-204] The worksheet reference may be JSON
+<!-- L:204 status:DONE upd:2026-08-18 section:C flag: rice:2/3/95/1 -->
+- **The defect.** `provenance_scanner.parse_cross_checks` required the
+  parenthetical worksheet reference to end in `.md`. A line citing a
+  `.jsonl` return was refused with the code `non_markdown_reference`,
+  earned nothing, and was reported as a diagnostic. So a verdict could
+  be built, carried, filled, returned, checked and routed -- and then
+  refused when somebody wrote it back into the code. Leg 6 of the loop
+  had no last inch, and the pilot could not dispatch.
+- **Found by an integration test, not a reading.** A simulated JSON
+  return was built, a constant annotated to cite it, and the checker
+  run; it listed the worksheet as UNCITED. Reading the code would not
+  have produced this.
+- **The condition did two jobs, and only one of them moved.** It
+  required the reference to name a FILE rather than free prose, which
+  is the anti-gaming half of L-186 and stays. It also pinned the only
+  worksheet format that existed in August 2026, which stopped being
+  true on 2026-08-17 when L-202 landed.
+- **Tony's ruling, 2026-08-18:** widen the extension set, taking
+  Claude's recommendation over the two alternatives. Rendering
+  accepted JSON returns into markdown for citation was rejected
+  because it leaves two stores of one return, free to drift, with the
+  integrity hash in only one of them; a hand-written markdown
+  companion adds the same drift plus manual work per return.
+- **As built** (`patch_L204_1`). One condition in one function, plus
+  the three wordings that would otherwise have become false -- the
+  docstring's code list, its prose, and the report's own explanation
+  of what earns V2. `non_markdown_reference` became
+  `unsupported_reference_format`, which is what the rule now says.
+  `WORKSHEET_REFERENCE_SUFFIXES` is defined once in the scanner and a
+  test pins the checker's `JSON_SUFFIXES` against it, so a fourth
+  format added in one place fails loudly instead of drifting in two.
+- **The skill's examples are checked now too.** `skills_index.py`
+  already parsed `# Cross-checked:` examples in skill files; it parses
+  `# Resolved:` examples the same way. A skill teaching a leg its own
+  parser refuses is the L-186 defect in a second grammar.
+**Note:** RICE is Claude's proposal, unratified.
+**Ref:** L-186 (the shape rule that did not move); L-202 (the format
+that required this); L-200 (shipped in the same patch);
+`documentation/patch_L204_1`.
+
+#### [L-205] The runner's verdict lines carry evidence
+<!-- L:205 status:DONE upd:2026-08-18 section:C flag: rice:2/3/90/1 -->
+- **Two defects, both raised by Tony, both the same shape as L-197 and
+  neither fixed by it.**
+- **One: the summary counted report-only tools as passing.** Eleven of
+  thirteen checkers are pass/fail. Two -- `worksheet_checker.py` and
+  `provenance_scanner.py` -- exit 0 whatever they find, and exit 1
+  only when they could not run. The summary said "All 13 checkers
+  passed" above a row reporting 289 Tier-1 findings. Both statements
+  true; read together they tell someone scanning for a verdict that
+  there is nothing to act on. A line that reads the same whether the
+  scanner found 289 or 0 cannot inform, because it cannot move.
+- **Two: four verdict lines could not move either.** Constants
+  relations, Cross-check annotations, Citation inheritance and Scanner
+  recognition each ended in a fixed sentence. Tony's question --
+  "Real citations recognized, fake ones refused: is this intent or
+  result?" -- has the answer that it is a result, since it prints only
+  after the failure branch has returned, but a result that reads
+  identically whether 27 tests ran or two. Each file already printed
+  the count two lines earlier; the runner quotes the LAST line.
+- **As built, 2026-08-18** (`patch_L188_1`, `patch_L188_2`). CHECKERS
+  rows gained an optional fourth field marking a tool report-only, set
+  on exactly two; the summary counts the gating eleven in its headline
+  and quotes the two report-only verdicts underneath, in both the
+  passing and failing branches, because the scanner's count is what the
+  push call turns on. The four fixed lines now carry `N of N`, keeping
+  the words that say what was checked -- a bare count trades one
+  blindness for another. Proven by mutation: deleting one test from
+  each suite makes the lines read 18, 19, 26, 17.
+- **Fixed in passing.** `test_provenance_1d.py` carried a comment
+  saying the runner trims a verdict to 44 characters. Measured: 44 is
+  the WRAP width and `wrapped()` deliberately gives a verdict no
+  ellipsis. The wrong note argued directly against the change being
+  made, so it was corrected rather than left to mislead.
+- **Still not fixed, and inherited from L-197.** Eleven of thirteen
+  rows resolve their verdict by last line, so any of them can be
+  displaced the moment something prints later. Giving every row a hint
+  substring is the general cure and was not attempted.
+- **Process note.** The first cut of `patch_L188_1` compiled cleanly
+  and died on the run: widening the results tuple broke a
+  failure-detail loop that unpacked a fixed width. `py_compile` cannot
+  see a tuple width, which is the resident gate restated in a new
+  place.
+**Note:** RICE is Claude's proposal, unratified.
+**Ref:** L-188 (the runner); L-197 (the same defect class, earlier
+instance); `documentation/patch_L188_1`, `documentation/patch_L188_2`.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
@@ -7888,183 +8185,13 @@ documentation/AS_BUILT_L156_phase1c.md.
 
 ---
 
-## Appendix: Protocol Version History
+## Appendix: Protocol Version History -- MOVED
 
-The protocol's change log lives here as of v3.30; the protocol document
-keeps only the most recent entries. Skill-layer changes are logged here
-too (or as L-items when they warrant one): skill name, new version, and
-the SHA it was cut from.
+Moved 2026-08-18 to `documentation/PROJECT_INSTRUCTIONS_HISTORY.md`,
+PART 1, per Tony's ruling under L-199. That file carries the full
+history from v1.0 and, as PART 2, the twenty-seven lessons removed from
+the protocol at v3.37.
 
-v1.0-v3.12 (Oct 2025 - Feb 2026): Foundation through Gallery Studio workflow redesign.
-  Covers: modes, alignment, discovery pathway, Einstein proof, platform integration,
-  Windows encoding, Horizons center patterns, agentic/targeted guidance, xvfb pre-test,
-  bottom-up editing, Unicode-safe editing, Mode 7, LF line endings, JPL binary IDs,
-  parallel pipeline lesson, iterative design planning, irreducibility argument,
-  Gallery Studio session, _studio flag, pan arrows, Hassabis corroboration,
-  featured trace labels, gallery badges, studio workflow redesign.
-
-v3.13 (Mar 5, 2026): Studio source vs export distinction. 3D axis dtick+range convention. Hover text AU convention.
-
-v3.14 (Mar 9, 2026): The Epistemic Dialogue. Polycrisis framework. Gemini elevated to dialogue partner.
-
-v3.15 (Mar 14, 2026): Adaptive encounter resolution design. Two-length-scale insight. Double-Helix as safety mechanism.
-
-v3.16 (Mar 25, 2026): Verify base against handoff before building on multi-session files.
-
-v3.17 (Apr 3, 2026): Competitive Mode 7. Activation vs provision. Interpretation gap as signal. Fog of war is the experiment.
-
-v3.18 (Apr 10, 2026): Single info marker pattern. Credit line convention. Ghost tail legendgroup. MAPS elegy.
-
-v3.19 (Apr 13, 2026): Marker symbol convention. Two-tier label system. Renderer refactor. Celestial sphere complete.
-
-v3.20 (Apr 14, 2026): Module Docstring Standard. Module Atlas tooling (99 modules, 785 functions, 86K lines).
-
-v3.21 (May 4, 2026): Project file staleness rule formalized. Object Encyclopedia. Encounter Export design.
-
-v3.22 (May 12, 2026): Collegial Mode 7 pattern. The Weasley Principle. Single info marker codebase-wide refactor: 141 conversions, 18 files, 3 Claude models, 9-13 MB savings per render.
-
-v3.23 (May 16, 2026): Procedural criticality framework -- three-tier taxonomy (CRITICAL / QUALITY / PRACTICE), a Part-2 principle with markers across Part 3. Broad-first methodology validated; procedure-to-judgment ratio scales with experience and shared context. Grounded in Tony's ops-management experience (LOTO, normalization of deviance).
-
-v3.24 (May 29, 2026): Verify Execution, Not Appearance [CRITICAL] -- map the dispatch before editing leaves; compile != used != edited; swallowed exceptions hide render bugs. Agentic Pre-Test refined: data-content sweeps need a runtime smoke against the LIVE dispatch. Platform Neutrality [QUALITY]. Plotly facts (Scatter3d ignores border width, 8-symbol palette); transactional binary-mode patching. From the shell-consolidation dispatch discovery -- an inline-marker sweep editing dead code, an osculating marker silently absent 11 weeks; Tony's eyes caught both.
-
-v3.24 re-issue (May 29, 2026): Enumerate Uploads Before Claiming a Review [CRITICAL] -- ls the uploads dir, read the whole set; the in-context subset is invisible to Tony and not authoritative. Recovered lessons the first pass missed (itself built on 9 of 19 handoffs -- the exact failure it names): floating-items-capture, verify-propagation-with-grep, central-factory-migration-intent, testing-in-dependency-order, smoke-test-deferred-pipelines, handoff-numbering-rebase drift.
-
-v3.25 (May 31, 2026): Provenance Audit named as a Part-3 skill (scanner, Tier-1=0 goal, lookback-window mechanics, exceptions-file over-report gotcha). Fetched-vs-Recalled extended: three outcomes (cite / remove-and-note-the-gap / never cite-to-clear); a citation is a provenance claim that must be TRUE [CRITICAL]. From provenance Phase 1, after nearly papering a # Source over recalled data.
-
-v3.26 (June 2, 2026): Session-Start Repo Pull [CRITICAL] -- the GitHub repo at HEAD is ground truth; pull and SHA-pin, build on repo or fresh upload, /mnt/project + project knowledge demoted to orientation. From the stale-Earth thread: a duplicate upload shadowed the current file and a true ghost was served through a project-knowledge replacement; repo-pull validated byte-for-byte.
-
-v3.27 (June 4, 2026): Project knowledge now auto-syncs from the repo (no manual add/delete), retiring v3.26's stale-snapshot + served-ghost class at source. Session-Start reframed around "The SHA is the round trip" -- a matching remote HEAD confirms commit + push + sync in one unforgeable check. Foundation gains "access is not understanding." Quotable: "Our work is not just right -- it's beautiful."
-
-v3.28 (June 6, 2026): Two additions (Movement-2 dipole-cone session, handoff v27). (1) Live repo vs snapshots -- the repo is live-readable any time (re-pull after a push; reading HEAD is the round-trip check, run live: de12f56 -> c25bdd7); project knowledge does NOT re-sync mid-session; un-pushed edits live only in uploads, which stay tier 1. (2) Show the Envelope of the Unknowable -- companion to Fetched-vs-Recalled: where a value is genuinely unknowable (rotation phase / instantaneous azimuth), show the envelope, not a faked point, and say so in the hover where the shape is approximate; faking an unknowable value is the cite-over-recalled failure class [CRITICAL].
-
-v3.29 (June 22, 2026): Three amendments from the animation-refactor sessions (L-003). (1) Agentic Pre-Test [CRITICAL] corrected -- the SystemButtonFace<->gray90 sed round trip is NOT idempotent (palomas_orrery.py has 26 native gray90 literals), so swap on a THROWAWAY copy and discard it; never restore-in-place on the deliverable. (2) Live-dispatch smoke test folded into the data-sweep gate -- exec the whole module under xvfb with the tk mainloop suppressed, to exercise the real path rather than a lookalike. (3) grep -c in && chains [QUALITY] -- grep -c exits non-zero on a zero count, silently breaking the chain; run verification greps standalone or join with ;. Cleanup: merged the duplicate data-sweep paragraphs, trimmed the redundant Uploads-Before-Project-Files block to a pointer, corrected the stale xvfb archive line, dropped the [NEW v3.23] tag.
-
-v3.30 (July 1, 2026): The skills refactor (L-002). The protocol becomes the
-constitution of a two-layer system: Part 3's task-triggered conventions and
-procedures extracted into eight repo-authored skills (skills/<name>/SKILL.md,
-each versioned and SHA-stamped; installed to the account as a deployment
-step), with the resident document keeping the checkpoint CRITICAL gates, the
-modes, the principles, the Foundation, and the quotables. Skill set at 1.0:
-orrery-coding-conventions, safe-file-editing (portable), agentic-pre-test,
-horizons-orbital-mechanics, provenance-discipline, earth-system-pipeline,
-gallery-pipeline, ledger-and-session-records -- all cut from palomas_orrery
-@ b29ad3f8 (gallery-pipeline also from tonyquintanilla.github.io @ 89c8bf30).
-Part-3 technical lessons distributed into skills as field notes; the full
-v3.29 Technical lessons list is preserved verbatim below for institutional
-memory. Skill Manifest table added to Part 3 as the under-trigger backstop
-and version drift check; a Triggers row added ("Relevant skill unfired ->
-load it"). Skills 6-8 are first-time capture: Earth System pipeline +
-human-cost restraint discipline, gallery pipeline + WYSIWYG authority,
-ledger/handoff/manifest conventions -- knowledge that previously lived only
-in handoffs and code. Version history moved here; the ledger is now the
-change log for protocol and skills. Extraction audit trail:
-documentation/MAPPING_TABLE_L002.md. Designed with Claude Opus 4.6; built
-with Claude Fable 5 via collegial relay; Tony integrated.
-
-v3.31 (July 4, 2026): Project-knowledge GitHub sync removed; Context Priority
-simplified to 7 tiers (the repo, the protocol+skills, and uploads are the
-three stores). skills_index.py devtool (L-097) auto-generates the Skill
-Manifest table between markers, same pattern as ledger_index.py; fires_when
-frontmatter field added to all 8 skills for editorial control of the manifest.
-Protocol header still reads v3.30; filename bumped to v3_31. Reviewed and
-built with Claude Opus 4.6.
-
-v3.32 (July 19-20, 2026): Two additions. (1) The anchor requirement
-generalized from handoffs to any document leaving a session -- audit
-prompts, review requests, relay manifests, as-builts -- each opens with
-"built on <SHA> at <URL>"; an un-anchored document is unverifiable by a
-receiving AI with no repo access of its own (Part 1 Key Principles, Part 3
-SHA Round Trip; line 326 corrected to match). (2) The Orrery and the
-Assembler added to Foundation, plus a matching quotable: the assembler
-inherits knowledge from the orrery, not machinery -- it exists to solve a
-problem the orrery never has -- surfaced via M2 Layer 2 live-Horizons
-testing (L-149, L-150, L-151). Corrected mid-push: ledger-and-session-
-records was already at 1.2 (July 19) when this version was drafted; the
-Skill Manifest table was still showing 1.0, and this entry's own first
-draft nearly re-generalized already-generalized content before the
-mismatch was caught (L-152, retroactive entry). Skill Manifest bumped to
-1.2/1.1/1.1 (ledger-and-session-records / provenance-discipline /
-gallery-cache-builder) to match actual repo state, and a new row added
-for gallery-assembler (L-151).
-
-v3.33 (July 30, 2026): The Register Rule added to Part 2. The protocol's compressed reference voice is distinguished from explanation voice — lead with the claim, one idea per sentence, no aphorisms in an explanation, gloss project terms on first use each session. Two yes-or-no checks before sending (does this paragraph do one job; does any sentence point at a label instead of saying the thing), with the test being "can Tony act on this without a follow-up question." Backstop: Tony says "opaque" at the point it fails, Claude rewrites that passage, and the miss is captured as a field note so it accumulates rather than repeating. Manifest table refreshed to 1.2/1.1/1.6.
-
-v3.34 (August 5, 2026): Two amendments, both from the Fable skills-layer review. (1) WHO TONY IS: the GitHub Desktop / Run-button preference is stated as a preference where practical, not a prohibition. The earlier "never the git command line" wording read as a ban and put the section in conflict with safe-file-editing's git apply delivery format (Fable Job 2 #16); Tony's ruling keeps the GUI as default and treats a terminal step as a fallback. The surviving obligation is unchanged: don't hand over an operation outside Tony's known working set without explaining what it does and what could go wrong. (2) Stale Skill = Stop [CRITICAL] added under the Skill Manifest. A skill lives in three stores — repo skills/, the account install Claude actually loads, and the generated manifest table. When a loaded skill's version disagrees with its manifest row, the session STOPS rather than proceeding and mentioning it later, and asks Tony to push to skills/ and reinstall in Settings. The prior wording asked only to "reconcile before trusting it," and the manifest still advertised 1.1/1.4 against an actual 1.2/1.6 for about three weeks with nothing surfacing it. Supporting change outside the protocol: skills_index.py now prints what the manifest was advertising before overwriting it, so running the tool reports drift instead of silently absorbing it; the prevention side is the binding rule in ledger-and-session-records v1.5.
-
-v3.35 (August 7, 2026): Updated skill safe-file-editing (v1.3).
-
-v3.36 (August 8, 2026): Register Rule amended (Part 2). A
-message-level Check 0 added ahead of the two paragraph-level checks --
-does this message ask Tony for one thing. The prior checks were
-paragraph-scoped and could all pass while a message carried four
-separate jobs, which is the load that actually fails. Two supporting
-defaults added: answer first with evidence only on request, and
-capture goes in a file rather than in the conversation. Backstop
-corrected -- "opaque" is a repair, not the mechanism, because Tony has
-stated he cannot sustain flagging density in real time; the check runs
-on Claude's side before sending. "Just the decision" added as a second
-Tony-side lever. Origin: a full mobile session in which the rule did
-not fire once.
-
-v3.37 (August 11, 2026): Two changes. (1) "The Artifact Bounds the
-Audit" added to Part 3 -- Tony's August 8 ruling, drafted for the first
-time. (2) Protocol trimmed from 882 lines to 849: version history
-v3.29-v3.33 dropped (the ledger carries it) and twenty-seven Part 5
-lessons removed as restatements of rules already stated where they
-fire. A first cut moved ALL forty-one lessons to an archive file and
-was reversed the same day -- an archive has no trigger, so the fourteen
-with no counterpart elsewhere would have left. A lesson duplicated by a
-firing rule is redundant; a lesson that is nowhere else IS the archive.
-
-v3.37.1 (August 11, 2026): provenance-discipline skill v1.8 -> v1.9.
-
-v3.38 (August 11, 2026): Two changes, both from Fable's document-layer
-claim audit. (1) Two dead pointers to documentation/PROJECT_ORIGIN.md
-corrected -- the file is at the repo root (finding F11). (2) Stale
-Skill = Stop gains its two known limits. The gate is LOAD-TRIGGERED, so
-a manifest that changes later in the same session creates a mismatch
-with nothing to fire on -- which is exactly what happened when
-provenance-discipline went 1.8 to 1.9 mid-session and the mismatch
-surfaced only because a later check re-read the file for an unrelated
-reason. And a mid-session reinstall CANNOT be verified from inside the
-session: the loaded copy appears bound at conversation start, so the
-reinstall lands in the account and stays invisible until the next
-session. Tony's ruling: do not add an assertion-based clear. "Tony
-reinstalled it" is a claim, not a check, and accepting it in place of a
-read is cite-to-clear moved into the skill layer. The verification is
-deferred into the handoff and discharged by the next session's load.
-Skill-layer companion: provenance-discipline v1.9 narrows the push gate
-to the ACTIVE BUILD PATH (L-184, ratified 2026-08-05), keeping global
-Tier-1 = 0 as the destination rather than the firing rule (finding F1).
-
-### Preserved verbatim: v3.29 Technical lessons (now field notes in skills)
-
-- Cache: cache[name]['elements'] (nested dict)
-- Reference frames can differ for same object; inclination reveals coordinate system
-- Osculating elements must match viewing center (Charon@9)
-- Horizons centers: Only numeric IDs work. helio_id vs center_id: opposite directions
-- JPL binary IDs: 20XXXXXX (barycenter), 920XXXXXX (primary), 120XXXXXX (secondary). Derive primary from secondary via mass ratio
-- Plotly camera: Axis ranges control zoom, not camera distance
-- xvfb-run enables headless GUI testing; SystemButtonFace -> gray90 for Linux on a THROWAWAY copy -- the swap is NOT idempotent (26 native gray90 literals in palomas_orrery.py), so never restore-in-place on the deliverable
-- Python binary mode (rb/wb) preserves line endings and Unicode; sed can corrupt multi-byte UTF-8
-- Position data flows through 5 parallel pipelines in palomas_orrery.py -- ALL must be patched
-- Plotly customdata survives JSON extraction; _studio flag survives -- downstream consumers can detect curated plots
-- Plotly.js native touch works on mobile/tablet without custom code
-- D-pad pan arrows: 2D uses Plotly.relayout on axis ranges, 3D uses camera eye/center shifting
-- Stacked bugs: fixing one can reveal a second that was invisible before
-- JS: JSON.stringify(undefined).substring() crashes; always guard with || ''
-- position: fixed escapes CSS containment; position: absolute stays inside parent
-- Plotly 3D annotations go on scene.annotations; 2D on layout.annotations
-- Gallery Studio source vs export: source has figure-native values; export has _studio_config overlay
-- Horizons step format: {number}{unit} (1m, 5m, 1h, 6h, 1d)
-- Encounter resolution: cube scale (dist_km * 4) frames view; curvature scale drives fetch step
-- Roche limit is not absolute: tensile strength allows survival inside it
-- Celestial sphere in ecliptic frame: unit vectors rotated from equatorial via obliquity about X axis
-- Sphere shells render via SHELL_CONFIGS -> build_sphere_shell -> create_info_marker (factory). Inline markers in *_visualization_shells.py are dead code for sphere shells; custom geometry (magnetospheres, rings, belts) routes via CUSTOM_SHELLS and uses the live inline path
-- Plotly Scatter3d ignores marker border WIDTH (plotly.js #4118) -- the contrast lever is FILL color, not border. 3D symbol palette is only 8: circle, circle-open, cross, diamond, diamond-open, square, square-open, x
-- A swallowed exception in try/except hides render bugs; an undefined variable can drop a marker silently for weeks. Check the console for the caught-error print
-- grep -c exits non-zero on a zero count, silently breaking an && chain (the next command never runs while output looks complete) -- run verification greps standalone or join with ;
-- GitHub is reachable in-environment: git ls-remote gives branch+HEAD SHA with no auth; raw.githubusercontent.com fetches files byte-exact. The HEAD SHA is the unforgeable current-state token AND the round-trip check -- a matching remote HEAD confirms commit + push + sync at once (project knowledge auto-syncs from the repo as of v3.27)
-- The two surviving store failures are honest and visible -- no push, or no sync -- both show as a HEAD mismatch. (v3.26's stale-snapshot + served-ghost failures came from the manual step, retired in v3.27)
-
-
+The protocol document keeps the three most recent entries resident; a
+fourth pushes the oldest down into PART 1. Every entry lives in exactly
+one place, so there is nothing here to keep in step.

@@ -287,12 +287,38 @@ Second, and more serious: `main()` calls `load_config()` before `run_build()` --
 
 With that worked around, the drill itself passed cleanly: `[RECOVER]` fired, the correct generation was restored, and the nightly build completed normally on top of it. This closes Layer 2 in full -- all 11 objects individually, Encke's live bug found and fixed, Voyager's arc structurally verified, a real first-build, and a real crash-recovery + nightly run, all on real hardware tonight.
 
-## Layer 3 -- Schedule
+## Layer 3 -- Schedule (RETIRED 2026-08-10)
 
-Only after Layers 1-2 pass on the tranche: enable the nightly Task Scheduler job
-(working dir = repo root). Watch the first unattended runs; a nonzero exit
-(A-2) now surfaces in Task Scheduler history. Backup discipline (L-106) stays in
-force: the git history + off-site copy are the archive's rollback of last resort.
+**Do not enable the schedule.** Tony retired it on 2026-08-10. The
+Windows task is DISABLED, not deleted, so the corrected configuration
+survives if this is ever revisited. The builder now runs MANUALLY and
+Tony commits the result himself.
+
+His reasoning: the build cannot run without his machine on anyway, so
+the schedule created an appearance of automation the setup could not
+deliver -- three nights were missed in one week and the failure was
+silent. A manual run is honest about what it is. It also dissolves the
+2026-08-10 gallery incident: somebody who starts the build himself
+knows a build is in flight and cannot walk into the swap window
+unaware.
+
+What the retirement does NOT dissolve is the cadence question, which
+changes shape rather than going away. "Did the nightly run?" becomes
+"when did I last run it?", and something still has to say the served
+data is eleven days old. That is L-189, and the retirement makes it
+more load-bearing, not less, because a manual build has no expected
+time at all.
+
+Backup discipline (L-106) stays in force either way: the git history
+plus the off-site copy are the archive's rollback of last resort.
+
+This section previously carried the opposite instruction, gated on
+Layers 1-2 passing. It was correct when written and was overtaken by
+the ruling above. It is REPLACED rather than bracketed, and the old
+wording is deliberately not quoted here: a testing protocol is read at
+the moment of DOING the thing it describes, and a superseded
+instruction left sitting in one -- even inside quotation marks -- is an
+instruction somebody follows.
 
 ## Reviewer level -- recommendation (Mode 7 vs Mode 5)
 

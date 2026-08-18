@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: August 18, 2026
-Files scanned: 129
-Total findings: 1026
-Constants: 107 | Dicts: 39 | Display strings: 880
+Files scanned: 128
+Total findings: 1025
+Constants: 107 | Dicts: 38 | Display strings: 880
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -19,20 +19,16 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260818T175145Z | `b65ac11` | 128 | 1025 | 289 | 620 | 114 | 2 |
+| 20260818T173613Z | `b65ac11` | 130 | 1026 | 289 | 621 | 114 | 2 |
 | 20260818T053404Z | `24f445a` | 129 | 1026 | 290 | 620 | 114 | 2 |
 | 20260818T051607Z | `ae1883b` | 129 | 1026 | 290 | 620 | 114 | 2 |
 | 20260818T044912Z | `6c06b3f` | 130 | 1027 | 291 | 620 | 114 | 2 |
 | 20260817T234937Z | `df81b33` | 129 | 1026 | 290 | 620 | 114 | 2 |
-| 20260817T203635Z | `ac03ceb` | 128 | 1025 | 289 | 620 | 114 | 2 |
-| 20260817T194323Z | `bbac1a5` | 128 | 1025 | 289 | 620 | 114 | 2 |
 
-Change since the previous run: total +0, Tier-1 +0.
+Change since the previous run: total -1, Tier-1 +0.
 
-Tier-1 rose in these files:
-
-| File | Before | After |
-|------|-------:|------:|
-| patch_L188_2_verdict_lines_carry_counts.py | 0 | 1 |
+No file's Tier-1 count rose.
 
 ---
 
@@ -63,7 +59,7 @@ Tier-1 rose in these files:
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 290 |
+| 1 | 16-20 | FIX NOW | 289 |
 | 2 | 10-15 | REVIEW | 620 |
 | 3 | 5-9 | LOW PRIORITY | 114 |
 | 4 | 1-4 | LOWEST PRIORITY | 2 |
@@ -144,7 +140,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `worksheet_request_builder.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `orbital_elements.py` | orrery | 1 | 0 | 0 | 0 | 1 |
-| `patch_L188_2_verdict_lines_carry_counts.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `data_acquisition.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `exoplanet_orbits.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `fetch_paleoclimate_data.py` | earth_science | 1 | 0 | 0 | 0 | 1 |
@@ -169,7 +164,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 43 | 126 | 497 | 67 | 2 | 692 |
+| Orrery (solar system + orbital mechanics) | 42 | 125 | 497 | 67 | 2 | 691 |
 | Earth System | 13 | 150 | 81 | 2 | 0 | 233 |
 | Stars (stellar neighborhood) | 11 | 12 | 42 | 6 | 0 | 60 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 39 | 0 | 39 |
@@ -179,7 +174,6 @@ Same data again, grouped by subject-matter domain rather than by individual file
 **Domain coverage gap:** the following files have findings but no entry in `MODULE_DOMAIN_MAP` -- defaulted to `orrery` rather than guessed into a more specific bucket. Add each to `MODULE_DOMAIN_MAP` in provenance_scanner.py with its real domain so this stops silently defaulting:
 
 - `maintenance_run.py`
-- `patch_L188_2_verdict_lines_carry_counts.py`
 - `worksheet_checker.py`
 - `worksheet_keys.py`
 - `worksheet_request_builder.py`
@@ -606,12 +600,6 @@ is planned for a future session.
 | 2174 | string | display string @ line 2174 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2197 | string | display string @ line 2197 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2332 | string | display string @ line 2332 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-
-### patch_L188_2_verdict_lines_carry_counts.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 84 | dict | FINGERPRINTS[...] | (4 entries) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
 
 ### planet_visualization_utilities.py
 

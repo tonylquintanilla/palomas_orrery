@@ -1,5 +1,16 @@
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.40 | August 16, 2026
+Tony Quintanilla, PE | Claude | v3.41 | August 18, 2026
+
+Cut from b65ac115 at https://github.com/tonylquintanilla/palomas_orrery
+(branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
+Full version history and the v3.37 lessons record:
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md
+
+The anchor names the state this document was CUT FROM, not a promise
+that the repo still sits there. It is here because this file's own
+CRITICAL gate requires it of any document leaving a live session, and
+a relay partner reading this has no other way to know what it
+describes.
 
 PREAMBLE: WHY THIS PROTOCOL EXISTS
 
@@ -797,8 +808,9 @@ gallery-pipeline) -- loaded at the moment of need.
 
 The PROCESS and PHILOSOPHICAL lessons below exist in only one place.
 Twenty-seven others were removed on August 11, 2026, each a restatement of a
-rule already stated where it fires; documentation/LESSONS_ARCHIVE.md lists
-them against the place each still lives. That file is a record, not a store.
+rule already stated where it fires;
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md, PART 2, lists them against
+the place each still lives. That file is a record, not a store.
 
 Process:
 - Bugs become lessons when documented. Stories make science memorable
@@ -891,54 +903,32 @@ Gemini/ChatGPT: Domain specialists and genuine dialogue partners on
 structural questions.
 
 Version History
-The full version history (v1.0 through current) lives in
-LEDGER_CONSOLIDATED.md, Protocol Version History appendix -- the ledger is
-the change log for the protocol and the skills layer. Recent entries:
+The THREE most recent entries live here. Everything older lives in
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md, PART 1 -- which also
+carries, as PART 2, the twenty-seven lessons removed at v3.37.
 
-v3.34 (August 5, 2026): Two amendments, both from the Fable skills-layer review. (1) WHO TONY IS: the GitHub Desktop / Run-button preference is stated as a preference where practical, not a prohibition. The earlier "never the git command line" wording read as a ban and put the section in conflict with safe-file-editing's git apply delivery format (Fable Job 2 #16); Tony's ruling keeps the GUI as default and treats a terminal step as a fallback. The surviving obligation is unchanged: don't hand over an operation outside Tony's known working set without explaining what it does and what could go wrong. (2) Stale Skill = Stop [CRITICAL] added under the Skill Manifest. A skill lives in three stores  --  repo skills/, the account install Claude actually loads, and the generated manifest table. When a loaded skill's version disagrees with its manifest row, the session STOPS rather than proceeding and mentioning it later, and asks Tony to push to skills/ and reinstall in Settings. The prior wording asked only to "reconcile before trusting it," and the manifest still advertised 1.1/1.4 against an actual 1.2/1.6 for about three weeks with nothing surfacing it. Supporting change outside the protocol: skills_index.py now prints what the manifest was advertising before overwriting it, so running the tool reports drift instead of silently absorbing it; the prevention side is the binding rule in ledger-and-session-records v1.5.
+The rule is mechanical, and it is what stops this section growing back:
+when a fourth entry is added, the oldest of the four moves down into
+that file. An entry lives in exactly one place, never both.
 
-v3.35 (August 7, 2026): Updated skill safe-file-editing.
-
-v3.36 (August 8, 2026): Register Rule amended (Part 2). A message-level
-check added ahead of the two paragraph-level checks -- does this message
-ask Tony for one thing. The prior checks were paragraph-scoped and could
-all pass while a message carried four separate jobs, which is the load
-that actually fails. Two supporting defaults added: answer first with
-evidence only on request, and capture goes in a file rather than in the
-conversation. Backstop corrected -- "opaque" is a repair, not the
-mechanism, because Tony has stated he cannot sustain flagging density in
-real time; the check runs on Claude's side before sending. "Just the
-decision" added as a second Tony-side lever. Origin: a full mobile
-session in which the rule did not fire once.
-
-v3.37 (August 11, 2026): Two changes. (1) "The Artifact Bounds the Audit"
-added to Part 3 -- Tony's August 8 ruling, drafted for the first time.
-(2) Protocol trimmed from 882 lines: version history v3.29-v3.33 dropped
-(the ledger carries it) and twenty-seven Part 5 lessons removed as
-restatements of rules already stated where they fire. A first cut moved ALL
-forty-one lessons to an archive file and was reversed the same day -- an
-archive has no trigger, so the fourteen with no counterpart elsewhere would
-have left. A lesson duplicated by a firing rule is redundant; a lesson that
-is nowhere else IS the archive.
-
-v3.37.1 (August 11, 2026): provenance-discipline skill v1.8 -> v1.9.
-
-v3.38 (August 11, 2026): Two changes, both from Fable's
-document-layer claim audit. (1) Two dead pointers to
-documentation/PROJECT_ORIGIN.md corrected -- the file is at the repo
-root (finding F11). (2) Stale Skill = Stop gains its two known limits.
-The gate is LOAD-TRIGGERED, so a manifest that changes later in the same
-session creates a mismatch with nothing to fire on -- which is what
-happened when provenance-discipline went 1.8 to 1.9 mid-session. And a
-mid-session reinstall cannot be verified from inside the session: the
-loaded copy appears bound at conversation start. Tony's ruling: do NOT
-add an assertion-based clear, because "Tony reinstalled it" is a claim
-rather than a check, and accepting it in place of a read is
-cite-to-clear moved into the skill layer. The verification defers into
-the handoff and is discharged by the next session's load. Skill-layer
-companion: provenance-discipline v1.9 narrows the push gate to the
-ACTIVE BUILD PATH (L-184), keeping global Tier-1 = 0 as the destination
-rather than the firing rule (finding F1).
+v3.41 (August 18, 2026): Records restructure and a skill bump.
+No rule changed. (1) The version history left this document: v1.0-v3.38
+now live in documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1, the
+file that was LESSONS_ARCHIVE.md and still carries the v3.37 lessons
+record verbatim as PART 2. The ledger's appendix is replaced by a
+pointer. Three entries stay resident and a fourth pushes the oldest
+down, which is the cap L-199 asked for; its part 1, a sizing section,
+is still unbuilt. (2) The header gained an anchor and lost a
+contradiction -- the repo copy read August 16 and the copy installed in
+the Claude UI read August 17 under the SAME version, two stores with
+nothing watching them the way Stale Skill = Stop watches the skills.
+(3) provenance-discipline 2.3 -> 2.4 (L-203, L-204): the visibility
+convention got a home, and the annotation grammar now accepts a .jsonl
+or .json worksheet reference, because a returned verdict could be
+checked and routed and then refused when written back into the code.
+The reinstall cannot be verified from inside the session that makes it,
+so the NEXT session confirms its loaded copy reads 2.4 before doing
+provenance work.
 
 v3.39 (August 12, 2026): One change. "A Check That Cannot Fail Is Not
 Passing" added to Part 3 as a CRITICAL gate, immediately after Verify

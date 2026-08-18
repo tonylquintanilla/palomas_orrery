@@ -1,11 +1,16 @@
-Where we are 8/16/2026
+Where we are 8/18/2026
 
-Updated 2026-08-16 after the August 15-16 sessions. Built on
-227f5b2d6763baa384c090a911c2c5ced64f4a4d at
+Updated 2026-08-18 after the August 17-18 sessions. Built on
+b65ac115fc0f820e8270c0807249813c67bde7bc at
 https://github.com/tonylquintanilla/palomas_orrery (branch main);
-gallery at 3d10739b097e2b63395cf58742873cf378210e68 at
+gallery at ff18d3e6fa31f70a8f525df471e751d046cf14fa at
 https://github.com/tonylquintanilla/tonyquintanilla.github.io.
 Both confirmed by live check on the date above.
+
+Where a claim was TRUE when written and has since been overtaken, it is
+left in place with a bracketed note rather than deleted. This document
+is a record of what was tracked on a date, and one that silently
+rewrites its own past stops being evidence of anything.
 
 Companion to MASTER_PLAN_INTERACTIVE_GALLERY.md. The plan is the
 reference document; this is the readable snapshot.
@@ -26,17 +31,32 @@ continual rather than one-shot is continual. The request builder that
 sends questions out is built too, and the key rule that binds a
 returned row to the right claim.
 
-What the checker reports is the number that now organizes Track 1:
-102 annotations scored, THREE clean. Forty route to SEND BACK,
-nineteen to CONVERSATION, forty are noted with no route. That is not
-a discouraging result. Before the checker existed the same 102 claims
-were unexamined and looked fine.
+What the checker reports is the number that organizes Track 1:
+110 annotations scored, EIGHT clean. Forty-eight route to SEND BACK,
+twenty to CONVERSATION, thirty-four are noted with no route, and
+twenty-four are not scanner-reachable. That is not a discouraging
+result. Before the checker existed the same claims were unexamined and
+looked fine.
 
-The dispatch that clears them is repaired but not finished. Fable 5
-and GPT 5.6 Sol reviewed it blind on August 16; both said do not send
-it yet, and between them they found nine structural blockers where
-two were known. One is closed, three are ruled and unbuilt, three are
-open, two need no ruling.
+  [Read 2026-08-16 as: 102 scored, THREE clean, 40 SEND BACK, 19
+  CONVERSATION, 40 noted. The corpus grew and the clean count nearly
+  tripled between the 16th and the 18th, and neither is a change in
+  the world -- L-198 taught the scanner units it could not read, so
+  claims that were always there became visible and rows that had been
+  mis-parsed resolved.]
+
+The dispatch loop is FINISHED and unused. Fable 5 and GPT 5.6 Sol
+reviewed it blind on August 16; both said do not send it yet, and
+between them found nine structural blockers where two were known.
+Eight are closed. The ninth -- the truncated ordinal context window --
+is deliberately not exercised by the pilot, since constants carry no
+ordinals.
+
+The last inch closed on August 18. Until then a returned verdict could
+be built, carried, filled, returned, checked and routed, and then
+REFUSED when somebody wrote it back into the code, because the
+annotation grammar accepted only a markdown reference (L-204). Found by
+an integration test, not by reading the code.
 
 The chromosphere stylization is retired. The shell now draws at true
 physical scale, 1.002875 solar radii, and the fact that it reads as a
@@ -44,10 +64,21 @@ hairline welded to the photosphere is the lesson rather than a defect.
 That decision closed one of the nine blockers by removing the question
 instead of answering it.
 
-The next session opens with the builder-side marker join. Ninety-six
-continuation markers were placed in seven files on August 16 and the
-builder does not yet know they exist, so the largest blocker -- 45 of
-65 dispatch rows showing a truncated citation -- is still live.
+  [2026-08-16 read: "The next session opens with the builder-side
+  marker join. Ninety-six continuation markers were placed in seven
+  files on August 16 and the builder does not yet know they exist, so
+  the largest blocker -- 45 of 65 dispatch rows showing a truncated
+  citation -- is still live." DONE, L-196. The builder joins 153
+  continuations on every build and refuses to build at all when a
+  citation continues onto an unmarked line.]
+
+What opens the next session is the DISPATCH. The request is one file,
+reader-agnostic, 23 rows over constants_new.py, with every row's
+expected disposition written down before it goes out
+(PILOT_EXPECTED_DISPOSITIONS_20260817.md: 13 clear, 10 return, three
+trap rows). If all 23 come back clear, that is agreement rather than
+success, and the prediction file is what makes the difference
+visible.
 
 
 WHAT CLAUDE CHECKS BEFORE ANYTHING ELSE
@@ -74,11 +105,15 @@ session that skips them is building on an unverified base.
      session. It is written into the handoff as an obligation the next
      session discharges.
 
-     CURRENTLY OUTSTANDING: safe-file-editing and
-     orrery-coding-conventions both went 1.3 -> 1.4 on August 16. The
-     session that bumped them loaded 1.3. The next session must
-     confirm its loaded copies read 1.4 before any patch-script or
-     marker work.
+     CURRENTLY OUTSTANDING: provenance-discipline went 2.3 -> 2.4 on
+     August 18. The session that bumped it loaded 2.3. The next
+     session must confirm its loaded copy reads 2.4 before any
+     provenance work.
+
+     [The August 16 obligation -- safe-file-editing and
+     orrery-coding-conventions at 1.3 -> 1.4 -- was discharged
+     2026-08-17. All ten skills were compared loaded-against-repo on
+     August 18 and only provenance-discipline differs.]
 
   3. Uploads enumerated. Some uploaded files arrive as readable text
      and others sit only on disk. The split is invisible from Tony's
@@ -374,19 +409,30 @@ one new file entered the scan, and orbit_data_manager.py changed shape.
 Three real events, invisible in the summary line. This is the argument
 for L-189 in one paragraph -- report the DELTA, not the total.
 
-The tier breakdown below was measured at 1ba20c3 on August 7: 879
-findings across 117 files, Tier 1 206, Tier 2 583, Tier 3 88, Tier 4 2.
-Tier 1 was re-measured at 227f5b2 on August 16 and is UNCHANGED at 206
--- the chromosphere retirement and the continuation markers moved
-nothing, which is correct, since neither added or removed a claim about
-the world.
+Measured at b65ac115 on August 18: 1025 findings across 128 files,
+Tier 1 289, Tier 2 620, Tier 3 114, Tier 4 2.
 
-  Tier 1 by domain
+  [August 7 at 1ba20c3: 879 findings across 117 files, Tier 1 206,
+  Tier 2 583, Tier 3 88, Tier 4 2. Re-measured at 227f5b2 on August 16
+  and UNCHANGED at 206 -- the chromosphere retirement and the
+  continuation markers moved nothing, which was correct, since neither
+  added nor removed a claim about the world.]
 
-    Earth System                105
-    Orrery                       91
-    Stars                         9
-    Utilities                     1
+Tier 1 went 206 -> 289 in two days, and the paragraph above says that
+should not happen. Both are right, and the reconciliation is the point
+worth keeping: the POPULATION changed, not the world. L-198 taught the
+scanner claim vocabulary it did not have -- per-body radii, spelled-out
+kilometres, units separated from their number by an intervening word --
+so claims that had always been in the code became visible and
+countable. A scanner that sees more is not a codebase that got worse.
+Read 289 against 206 as coverage, not regression.
+
+  Tier 1 by domain, at b65ac115
+
+    Earth System                150
+    Orrery                      125
+    Stars                        12
+    Utilities                     2
     Dev Tools                     0
     Gallery                       0
 
@@ -405,8 +451,8 @@ touches, and a gate nobody can reach stops working as a gate.
 
 THE ARTIFACT-2 PATH, PER FILE
 
-  shell_configs.py                      23
-  idealized_orbits.py                   26
+  shell_configs.py                      35
+  idealized_orbits.py                   29
   planet_visualization_utilities.py      4
   saturn_visualization_shells.py         1
   uranus_visualization_shells.py         1
@@ -414,7 +460,10 @@ THE ARTIFACT-2 PATH, PER FILE
   jupiter_visualization_shells.py        0
   neptune_visualization_shells.py        0
                                         --
-                                        56
+                                        71
+
+  [August 16: 23, 26, and a total of 56. The two that moved are the
+  L-198 vocabulary effect again, not new debt.]
 
 Two things follow, both good news. The gas giant shells are already
 nearly clean -- two Tier-1 findings across all four files -- so Batch 2's
@@ -435,9 +484,24 @@ LEDGER ITEMS BY TRACK
 
   Track 1     L-186  Cross-check annotation issues  DONE
               L-192  Worksheet checker  BUILT and running as one of
-                     the twelve maintenance checkers. Request builder
-                     built. Key rule built. DISPATCH not finished --
-                     see the nine blockers.
+                     the maintenance checkers. Request builder built.
+                     Key rule built. DISPATCH machinery now complete;
+                     eight of nine blockers closed, the ninth
+                     deliberately unexercised by the pilot.
+              L-196  Citation continuations: mark, join, refuse  DONE
+              L-197  Maintenance runner output: say what passed  DONE
+              L-198  Claim vocabulary: the units the scanner could
+                     not see  DONE -- and the reason Tier 1 moved
+                     206 -> 289
+              L-200  The Resolved leg -- record a verdict that
+                     landed  DONE
+              L-201  Request selection -- ask the builder for fewer
+                     rows  DONE; also a dashboard card
+              L-202  JSON worksheet format, markdown as fallback  DONE
+              L-203  The visibility convention, now in the skill  DONE
+              L-204  The worksheet reference may be JSON  DONE -- the
+                     last inch of the loop
+              L-205  The runner's verdict lines carry evidence  DONE
               L-193  Worksheet corpus reconciliation
               L-194  Text-only assertions (no number in the claim)
                      DEFERRED, blocking nothing
@@ -511,22 +575,43 @@ done. Artifact 1 (Earth) built and Mode-5 accepted, golden fingerprint
 locked. L-179 and L-180 closed August 7. L-186's mechanical half and one
 shadow constant closed August 10.
 
-Protocol at v3.40 (August 16) -- no change to its own rules; the entry
-records two skill bumps and the two bad deliveries that preceded the
-good ones. safe-file-editing 1.4 adds Fix In Passing, Report It and the
-patch-script naming convention. orrery-coding-conventions 1.4 adds
-Marker Separation for Near-Equal Radii and Harvest the Conventions You
-Find. The v3.36 Register Rule amendment is applied, and
-so is "The Artifact Bounds the Audit" (v3.37). v3.38 records the two
-limits on Stale Skill = Stop. v3.39 adds "A Check That Cannot Fail Is
-Not Passing" as a CRITICAL gate. provenance-discipline is at v2.3.
+Protocol at v3.41 (August 18) -- a records restructure and a skill
+bump, no rule changed. The version history left the protocol document
+for documentation/PROJECT_INSTRUCTIONS_HISTORY.md, which is
+LESSONS_ARCHIVE.md renamed and now carries both records; the ledger's
+appendix became a pointer; three entries stay resident and a fourth
+pushes the oldest down. The header gained an anchor and lost a
+contradiction -- the repo copy read August 16 and the copy installed in
+the Claude UI read August 17 under the same version.
+provenance-discipline is at v2.4.
+
+  [August 16 read: protocol at v3.40, provenance-discipline at v2.3.
+  v3.40's own entry records two skill bumps and the two bad deliveries
+  that preceded the good ones -- safe-file-editing 1.4 adding Fix In
+  Passing, Report It and the patch-script naming convention, and
+  orrery-coding-conventions 1.4 adding Marker Separation for
+  Near-Equal Radii and Harvest the Conventions You Find. v3.36's
+  Register Rule amendment, v3.37's "The Artifact Bounds the Audit",
+  v3.38's two limits on Stale Skill = Stop and v3.39's "A Check That
+  Cannot Fail Is Not Passing" all remain in force.]
 
 Phases 0, 1a and 1b are all closed. Layer 3, the nightly Task Scheduler
-job, is RETIRED as of August 10 -- disabled, not deleted. Several
-documents still describe it as live: MASTER_PLAN_INTERACTIVE_GALLERY.md
-line 40, documentation/TESTING_PROTOCOL.md line 292, the
-gallery-cache-builder skill line 70, and the deployment-model decision
-block in the ledger near line 4555.
+job, is RETIRED as of August 10 -- disabled, not deleted.
+
+The four documents that described it as live were re-checked on August
+18, and the list itself had gone stale.
+MASTER_PLAN_INTERACTIVE_GALLERY.md line 40 was ALREADY corrected and
+states the retirement with its reasoning. TESTING_PROTOCOL.md Layer 3
+was still telling a reader to enable the schedule and is corrected in
+the same patch as this note -- it mattered more than the others,
+because a testing protocol is read at the moment of doing the thing it
+describes. The gallery-cache-builder skill and the ledger's
+deployment-model block still need a look; the line numbers recorded
+here have moved and are not worth trusting.
+
+That a to-do list about staleness went stale is the ordinary case, not
+an irony. It is why the entries above carry what was measured and when
+rather than a line number.
 
 AUGUST 12-13: THE PROVENANCE LAYER GREW TEETH
 
@@ -593,31 +678,39 @@ half-confirmed verdict can count as a completed check.
   is the record of what was true then.]
 
 
-WHAT IS TRACKED RIGHT NOW -- 2026-08-16
+WHAT IS TRACKED RIGHT NOW -- 2026-08-18
+
+  Unstarted and unblocked
+    The pilot dispatch. 23 rows over constants_new.py, request built
+      by selection 2, sent as JSON with markdown as the fallback,
+      expected dispositions written before it goes out.
 
   Ready to build, no ruling outstanding
-    Builder marker join + loud failure  <- do this first; 96 markers
-      are placed and currently do nothing
-    Stage 2 continuation markers -- 117 runs, 23 files, fingerprints
-      to be regenerated against 227f5b2
-    Six Shape A citation swaps (L-195)
-    Ordinal context window -- 26 rows share 8 excerpts today
-    Print the seven verdict tokens in the request
-    Resolver + models fix (L-154) -- independent of all provenance work
+    Resolver + models fix (L-154) -- two lines and a type, then the
+      renderers. Independent of every provenance question, and now the
+      only item on this list. It is the smallest piece of work between
+      the project and a Saturn that renders.
+    Ordinal context window (blocker 7) -- 26 rows share 8 excerpts.
+      Not exercised by the pilot on purpose.
 
   Waiting on a ruling
     Lazy responder: canaries, or remove the self-certifying field
     Claim typing: real row types, or wait for a measured population
     Cross-worksheet disagreement, what UNKNOWN does, pluto 614/638,
       transition sequencing, whether batching becomes real
+    The Resolved leg's first token: shipped as the worksheet FILENAME,
+      where the design wrote <batch>. Claude's reading, unruled.
 
   Carried as an obligation
-    Confirm safe-file-editing and orrery-coding-conventions load at
-      1.4 before patch-script or marker work
+    Confirm provenance-discipline loads at 2.4 before provenance work
 
-  Not yet written
-    Ledger entries for L-194, L-195, L-196 and the L-192 as-built
+  [2026-08-16 list, for the record: builder marker join (DONE, L-196),
+  stage 2 continuation markers (DONE), six Shape A citation swaps
+  (DONE as seven, L-195), print the seven verdict tokens (DONE), and
+  ledger entries for L-194, L-195, L-196 and the L-192 as-built (all
+  written).]
 
 
 Entry written August 2026 with Anthropic's Claude Opus 5. Updated
-August 16, 2026, built on 227f5b2d6763baa384c090a911c2c5ced64f4a4d.
+August 18, 2026, built on b65ac115fc0f820e8270c0807249813c67bde7bc;
+gallery at ff18d3e6fa31f70a8f525df471e751d046cf14fa.

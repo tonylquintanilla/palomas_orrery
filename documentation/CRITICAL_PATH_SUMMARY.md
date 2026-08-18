@@ -1,8 +1,10 @@
 # The critical path -- where we are and what stands between here and the end
 
-**August 16, 2026.** Orrery at `227f5b2d6763baa384c090a911c2c5ced64f4a4d`,
-gallery at `3d10739b097e2b63395cf58742873cf378210e68`. Both confirmed by
-live check.
+**Updated August 18, 2026.** Orrery at
+`b65ac115fc0f820e8270c0807249813c67bde7bc`, gallery at
+`ff18d3e6fa31f70a8f525df471e751d046cf14fa`. Both confirmed by live
+check. First written August 16 at `227f5b2d`; the structure below is
+unchanged from that version and only the measured figures moved.
 
 **Lands in `documentation/` as `CRITICAL_PATH_SUMMARY.md`.** Section 5a
 of the master plan and the readable snapshot both cite it by that exact
@@ -79,7 +81,15 @@ the one Saturn and Jupiter need.
 The checker, the worksheet builder and the dispatch loop are the
 machinery of this step, not a step of their own. They exist because
 reconciling worksheets against the code by hand does not scale, and the
-scale is now measured: 102 claims scored, three of them clean.
+scale is measured: 110 claims scored, eight of them clean.
+
+As of August 18 that machinery is FINISHED and unused. A request can be
+built for a chosen slice of rows, carried out as JSON, returned,
+checked, routed, and written back into the code as an annotation the
+scanner accepts. The last inch closed on August 18: until then a
+returned verdict could be checked and routed and then refused when
+somebody tried to cite it, because the annotation grammar accepted only
+a markdown reference. What has not happened is the first dispatch.
 
 **Two. Make the copy faithful.** A correct orrery is not enough while
 the gallery's copy of its constants is maintained by hand. The transport
@@ -121,12 +131,18 @@ process all work.
 It also drew no features at all, which is how the feature path stayed
 broken without anyone noticing.
 
-**Step one is in progress and the backlog is now visible.** Of 102
-verification claims, three are clean, forty need to go back to whoever
-filled them in, nineteen need a conversation, and forty are recorded
-without a route. That is not a discouraging result -- it is the first
-time the number has been knowable at all. Before the checker existed,
-the same 102 claims were unexamined and looked fine.
+**Step one is in progress and the backlog is now visible.** Of 110
+verification claims, eight are clean, forty-eight need to go back to
+whoever filled them in, twenty need a conversation, thirty-four are
+noted without a route, and twenty-four are not reachable by the scanner
+at all. That is not a discouraging result -- it is the first time the
+number has been knowable. Before the checker existed, the same claims
+were unexamined and looked fine.
+
+The corpus grew from 102 and the clean count nearly tripled. Neither is
+a change in the world: L-198 taught the scanner to read units it could
+not previously see, so claims that were always there entered the corpus
+and rows that had been mis-parsed resolved.
 
 **Step two is designed, not built.**
 
@@ -139,9 +155,12 @@ standing between the project and a Saturn that renders.
 
 An independent review by two models in August found nine structural
 problems in the dispatch machinery before a single questionnaire went
-out. Both reviewers, working blind, said do not send it yet. One of the
-nine has since been closed by a design decision that removed the
-question rather than answering it.
+out. Both reviewers, working blind, said do not send it yet. Eight are
+now closed -- the first of them by a design decision that removed the
+question rather than answering it. The ninth, a truncated ordinal
+context window, is deliberately not exercised by the pilot, because
+constants carry no ordinals and shipping a known-defective presentation
+into the first dispatch would confound the thing being tested.
 
 That is the pattern the project runs on and it is working: find the
 problem while it is still cheap, in conversation, rather than after it
@@ -149,7 +168,8 @@ has been baked into a hundred worksheets and a fingerprinted artifact.
 
 ---
 
-*Prepared August 16, 2026 with Anthropic's Claude Opus 5. Built on
-`227f5b2d6763baa384c090a911c2c5ced64f4a4d` at
+*Prepared August 16, 2026 with Anthropic's Claude Opus 5; figures
+updated August 18. Built on
+`b65ac115fc0f820e8270c0807249813c67bde7bc` at
 https://github.com/tonylquintanilla/palomas_orrery, gallery at
-`3d10739b097e2b63395cf58742873cf378210e68`.*
+`ff18d3e6fa31f70a8f525df471e751d046cf14fa`.*
