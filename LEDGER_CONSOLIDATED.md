@@ -221,7 +221,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*120 live items; 108 need attention (`!`); 119 RICE-scored; 82 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*121 live items; 109 need attention (`!`); 120 RICE-scored; 82 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -337,6 +337,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### G. Open Questions / Tony Calls
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-208 | CRITICAL-gate tier audit + self-report -> visible-evidence pattern extension | OPEN | 2.2 | 2026-08-18 |
 | ! | L-100 | Gallery feature-render surface: shells gallery-side vs interactive-side (OPEN QUESTION) | OPEN | 1.0 | 2026-07-08 |
 |  | L-137 | Heliocentric -> solar barycentric coordinates -- decided against | PARKED | 1.0 | 2026-07-17 |
 | ! | L-053 | AU-convention sweep (section E): keep open, revisit | OPEN | 0.8 | 2026-06-07 |
@@ -6080,6 +6081,39 @@ apsidal_markers.py em-dashes (-> platform-neutrality, L-027). No Mode-5 needed h
 **Gap:** none -- parked by decision, not missing information. Reopen only
 if a specific use case surfaces that heliocentric can't serve.
 **Ref:** to_do_ideas.md (pre-ledger, 4/16/26). 
+
+#### [L-208] CRITICAL-gate tier audit + self-report -> visible-evidence pattern extension
+<!-- L:208 status:OPEN upd:2026-08-18 section:G flag: rice:3/3/50/2 -->
+- Raised in an Aug 18, 2026 conversation on reward-hacking research and
+  the double-helix check-in mechanism -- a protocol self-audit, not an
+  orrery bug. Two related questions, captured together because the
+  second depends on the outcome of the first:
+  (a) Part 3 states the critical tier must stay short -- "if everything
+  is critical, nothing is." Eight resident CRITICAL gates currently
+  qualify. AUDIT whether all eight still meet that bar, or whether one
+  or more have drifted toward QUALITY/PRACTICE weight without being
+  reclassified -- that drift would be invisible from inside the list
+  itself.
+  (b) Several CRITICAL gates (Register Rule; Verify Execution, Not
+  Appearance; others) currently rely on Claude's own self-report that
+  the check ran, rather than producing visible evidence that it did.
+  Same session, Tony proposed a concrete fix for one instance -- an
+  Executive Summary / Supporting Information header split for the
+  Register Rule, so a missing header proves the check did not fire.
+  OPEN QUESTION: does that same visible-evidence move generalize to
+  the other self-report-reliant CRITICAL gates, or is Register Rule a
+  special case?
+**Gap:** design-before-protocol-amendment -- needs its own iterative
+design conversation (options, tradeoffs, Tony's convergence) before any
+Part 3 wording changes, same discipline as a code architecture
+decision. Not urgent; the provenance chain (L-200 through L-207) stays
+primary focus. Rides alongside it.
+**Note:** RICE set directly by Tony at capture time (2026-08-18):
+3/3/50/2 -- not a Claude proposal.
+**Ref:** conversation Aug 18, 2026 (reward hacking / double-helix
+check-in framing; no repo pull this session -- design-stage capture
+only); PROJECT_INSTRUCTIONS v3.41, Part 2 (Register Rule) and Part 3
+(Procedural Criticality; Skill Manifest CRITICAL gates).
 
 ## H. GALLERY / STUDIO TRACK (website repo; low-activity)
 

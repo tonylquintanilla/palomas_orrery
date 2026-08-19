@@ -9,17 +9,29 @@
     "worksheet_prompt_constants_remaining.md"
   ],
   "uncited": [
+    "REQUEST_constants_new_pilot_claude.jsonl",
+    "REQUEST_constants_new_pilot_claude.md",
+    "REQUEST_constants_new_pilot_gemini.jsonl",
+    "REQUEST_constants_new_pilot_gemini.md",
+    "REQUEST_constants_new_pilot_gpt.jsonl",
+    "REQUEST_constants_new_pilot_gpt.md",
     "batch1_blind_source_lookup_gemini.md",
     "worksheet_asteroid_belt.md",
     "worksheet_batch1_tier1_sourcing_gemini.md",
     "worksheet_claude_batch1_blind_lookup_DELTA.md",
+    "worksheet_claude_constants_new_20260818.jsonl",
     "worksheet_claude_constants_new_addendum.md",
     "worksheet_comet_visualization.md",
     "worksheet_earth_visualization.md",
     "worksheet_eris_visualization.md",
+    "worksheet_gemini_constants_new_20260818.jsonl",
+    "worksheet_gemini_constants_new_20260818_from0415.jsonl",
+    "worksheet_gemini_constants_new_20260818_from0602.jsonl",
+    "worksheet_gemini_constants_new_20260818_from0802.jsonl",
+    "worksheet_gpt_constants_new_20260818.jsonl",
     "worksheet_jupiter_visualization.md",
     "worksheet_mars_visualization.md",
     "worksheet_mercury_visualization.md"
   ],
-  "uncited_changed": "2026-08-13"
+  "uncited_changed": "2026-08-18"
 }
