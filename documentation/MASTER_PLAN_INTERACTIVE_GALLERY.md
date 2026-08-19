@@ -888,7 +888,7 @@ belts* cannot be Mode 5 accepted while nothing renders them.
 exoplanets and Sgr A*, Phase 5 Earth system. Phase 6 dissolves into
 continuous refinement (Section 5).
 
-### You are here -- 2026-08-18, orrery `b65ac11`, gallery `ff18d3e`
+### You are here -- 2026-08-19, orrery `9ffb9b4`, gallery `ff18d3e`
 
 | | State |
 |---|---|
@@ -896,7 +896,8 @@ continuous refinement (Section 5).
 | Phase 1a, vocabulary | COMPLETE. |
 | Phase 1b, serving | DONE. 12 objects served. Saturn's 7 rings, Jupiter's 4 rings and radiation belts, Earth's atmosphere and Van Allen belts all present in `feature_configs.json` with full parameters. |
 | Artifact 1, Earth | LOCKED (`artifact_1_earth_alone.json`). Proved propagation, the harness and the acceptance loop -- on an ORBIT. Exercised no features, which is how the feature path stayed broken unnoticed. |
-| Segment 1, orrery | IN PROGRESS. Track 0 has no open rulings. The reconciliation is measured: 110 annotations scored, **8 clean**, 48 SEND BACK, 20 CONVERSATION, 34 noted, 24 not scanner-reachable. The corpus grew and the clean count tripled because L-198 taught the scanner units it could not read -- coverage, not regression. Dispatch machinery COMPLETE as of August 18; 8 of the 9 August-16 blockers closed, the 9th (ordinal context window) deliberately unexercised by the pilot. The first dispatch has not gone out. |
+| L-207, citation prompt | BUILT August 18. The checker emits `documentation/prompts/citation_review.jsonl` every run -- 53 rows, one per key, carrying what the code cites and what each responder concluded. Closes the last leg of the loop: the citation half of a return now reaches a reader. |
+| Segment 1, orrery | IN PROGRESS. Track 0 has no open rulings. The reconciliation is measured: 110 annotations scored, **8 clean**, 48 SEND BACK, 20 CONVERSATION, 34 noted, 24 not scanner-reachable. The corpus grew and the clean count tripled because L-198 taught the scanner units it could not read -- coverage, not regression. Dispatch machinery COMPLETE as of August 18; 8 of the 9 August-16 blockers closed, the 9th (ordinal context window) deliberately unexercised by the pilot. **The first dispatch went out and returned on August 18**: 23 rows to three models, 69 answered rows, zero format defects, all three trap rows unsprung. Findings at L-209, L-210, L-211; evidence in `documentation/PILOT_CONVERGENCE_20260819.md`. |
 | Segment 2, transport | DESIGNED, not built. |
 | Segment 3, assembler draw | NOT STARTED. Two lines plus a type, then the renderers. Now the only item anywhere with no ruling outstanding and no dependency on the provenance work. |
 | Segment 4, Artifact 2 | Gated on 1-3. |

@@ -1,10 +1,11 @@
 # The critical path -- where we are and what stands between here and the end
 
-**Updated August 18, 2026.** Orrery at
-`b65ac115fc0f820e8270c0807249813c67bde7bc`, gallery at
+**Updated August 19, 2026.** Orrery at
+`9ffb9b403a7d62090b30a9acf9adbc6180a6baec`, gallery at
 `ff18d3e6fa31f70a8f525df471e751d046cf14fa`. Both confirmed by live
 check. First written August 16 at `227f5b2d`; the structure below is
-unchanged from that version and only the measured figures moved.
+unchanged from that version. The figures moved, and one claim
+reversed: the first dispatch has now gone out and come back.
 
 **Lands in `documentation/` as `CRITICAL_PATH_SUMMARY.md`.** Section 5a
 of the master plan and the readable snapshot both cite it by that exact
@@ -83,13 +84,28 @@ machinery of this step, not a step of their own. They exist because
 reconciling worksheets against the code by hand does not scale, and the
 scale is measured: 110 claims scored, eight of them clean.
 
-As of August 18 that machinery is FINISHED and unused. A request can be
+That machinery was finished and unused for one day. A request can be
 built for a chosen slice of rows, carried out as JSON, returned,
 checked, routed, and written back into the code as an annotation the
 scanner accepts. The last inch closed on August 18: until then a
 returned verdict could be checked and routed and then refused when
 somebody tried to cite it, because the annotation grammar accepted only
-a markdown reference. What has not happened is the first dispatch.
+a markdown reference.
+
+**The first dispatch went out the same day and came back.** Twenty-three
+rows from `constants_new.py` to three models in fresh chats. Sixty-nine
+answered rows, and across all of them: no unparseable line, no missing
+or modified row hash, no duplicate key, no empty answer field, no token
+outside the vocabulary. The JSON format needed no fallback. The loop
+works.
+
+What it found is in
+`documentation/PILOT_CONVERGENCE_20260819.md`. The headline: a
+prediction of 13 clear rows, written six days before dispatch, drew 17,
+10 and 11 from the three legs. All three planted trap rows failed to
+spring, which means the artifact conveys what it was built to convey.
+Ten rows came back clean from all three models independently, and six
+were flagged by all three.
 
 **Two. Make the copy faithful.** A correct orrery is not enough while
 the gallery's copy of its constants is maintained by hand. The transport
@@ -131,7 +147,8 @@ process all work.
 It also drew no features at all, which is how the feature path stayed
 broken without anyone noticing.
 
-**Step one is in progress and the backlog is now visible.** Of 110
+**Step one is in progress, the backlog is visible, and the loop has now
+run end to end.** Of 110
 verification claims, eight are clean, forty-eight need to go back to
 whoever filled them in, twenty need a conversation, thirty-four are
 noted without a route, and twenty-four are not reachable by the scanner
@@ -143,6 +160,15 @@ The corpus grew from 102 and the clean count nearly tripled. Neither is
 a change in the world: L-198 taught the scanner to read units it could
 not previously see, so claims that were always there entered the corpus
 and rows that had been mis-parsed resolved.
+
+The pilot also found two things worth acting on that no reading had
+caught. `ALFVEN_SURFACE_RADII` measures from the photosphere while its
+sibling `PARKER_CLOSEST_RADII` measures from Sun centre -- two constants
+in one file, same spacecraft, one solar radius apart, which is a
+rendering defect rather than a documentation one if that shell draws
+from centre (L-209). And `STREAMER_BELT_RADII` cites a paper
+inverted: the cited 6 R_sun is that paper's FLOOR, and its actual
+result is a lower bound three times larger (L-210).
 
 **Step two is designed, not built.**
 
@@ -169,7 +195,7 @@ has been baked into a hundred worksheets and a fingerprinted artifact.
 ---
 
 *Prepared August 16, 2026 with Anthropic's Claude Opus 5; figures
-updated August 18. Built on
-`b65ac115fc0f820e8270c0807249813c67bde7bc` at
+updated August 18, dispatch result added August 19. Built on
+`9ffb9b403a7d62090b30a9acf9adbc6180a6baec` at
 https://github.com/tonylquintanilla/palomas_orrery, gallery at
 `ff18d3e6fa31f70a8f525df471e751d046cf14fa`.*

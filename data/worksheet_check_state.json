@@ -1,5 +1,6 @@
 {
   "prompts": [
+    "PROMPT_dispatch_jsonl_request.md",
     "TRACK1_PROMPT_cross_check_worksheets.md",
     "worksheet_prompt_batch1_blind_lookup.md",
     "worksheet_prompt_batch1_followup.md",
@@ -18,20 +19,20 @@
     "batch1_blind_source_lookup_gemini.md",
     "worksheet_asteroid_belt.md",
     "worksheet_batch1_tier1_sourcing_gemini.md",
+    "worksheet_claude-opus-5_pilot_constants_new_20260818.jsonl",
     "worksheet_claude_batch1_blind_lookup_DELTA.md",
-    "worksheet_claude_constants_new_20260818.jsonl",
     "worksheet_claude_constants_new_addendum.md",
     "worksheet_comet_visualization.md",
     "worksheet_earth_visualization.md",
     "worksheet_eris_visualization.md",
-    "worksheet_gemini_constants_new_20260818.jsonl",
-    "worksheet_gemini_constants_new_20260818_from0415.jsonl",
-    "worksheet_gemini_constants_new_20260818_from0602.jsonl",
-    "worksheet_gemini_constants_new_20260818_from0802.jsonl",
-    "worksheet_gpt_constants_new_20260818.jsonl",
+    "worksheet_gemini-3-1-pro_pilot_constants_new_20260818.jsonl",
+    "worksheet_gemini-3-1-pro_pilot_constants_new_20260818_from0415.jsonl",
+    "worksheet_gemini-3-1-pro_pilot_constants_new_20260818_from0602.jsonl",
+    "worksheet_gemini-3-1-pro_pilot_constants_new_20260818_from0802.jsonl",
+    "worksheet_gpt-5-6-sol_pilot_constants_new_20260818.jsonl",
     "worksheet_jupiter_visualization.md",
     "worksheet_mars_visualization.md",
     "worksheet_mercury_visualization.md"
   ],
-  "uncited_changed": "2026-08-18"
+  "uncited_changed": "2026-08-19"
 }

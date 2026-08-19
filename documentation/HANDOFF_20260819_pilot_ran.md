@@ -28,9 +28,9 @@ The material is seven JSON Lines files in
 `documentation/worksheets/`. Three are the legs of record, dispatched
 at `eae95f5a` on 2026-08-18 to three models in fresh chats:
 
-    worksheet_gemini_constants_new_20260818.jsonl
-    worksheet_gpt_constants_new_20260818.jsonl
-    worksheet_claude_constants_new_20260818.jsonl
+    worksheet_gemini-3-1-pro_pilot_constants_new_20260818.jsonl
+    worksheet_gpt-5-6-sol_pilot_constants_new_20260818.jsonl
+    worksheet_claude-opus-5_pilot_constants_new_20260818.jsonl
 
 Three more are Gemini runs in continuation threads, kept as
 context-sensitivity evidence and NOT legs:
@@ -186,15 +186,19 @@ quietly overwritten.
 L-206 specifies `worksheet_<model>_<batch>_<YYYYMMDD>.jsonl` with the
 model field carrying the VERSION, its own example being
 `worksheet_claude-opus-5_pilot_constants_new_20260818.jsonl`. What was
-recommended and used is `worksheet_gemini_constants_new_20260818.jsonl`
+recommended and used was `worksheet_gemini_constants_new_20260818.jsonl`
 -- bare model, no version, and the selection where L-206 wrote batch.
 Claude proposed the name from first principles without checking the
-ledger item that had already ruled it, which is the failure the
-ledger exists to prevent. Nothing is broken: no annotation cites these
-files yet, so a rename is currently free. It stops being free the
-moment the first `# Cross-checked:` leg names one. **Decide before
-annotating.** Either rename the seven files to the L-206 shape, or
-amend L-206 to what was used and say why.
+ledger item that had already ruled it, which is the failure the ledger
+exists to prevent.
+
+**Corrected the same session, before any annotation existed.** Tony
+renamed all six to the ruled shape and
+`patch_L209_1_pilot_findings.py` carries the corrected references in
+the L-209 Ref line and in the convergence report's leg list. The
+rename was free only because nothing cited the files yet; an hour
+after the first `# Cross-checked:` leg it would have meant editing
+every leg that named one.
 
 **2. The encoding gate was applied backwards, and Tony caught it.**
 Asked to patch the ledger, Claude found 123 pre-existing non-ASCII

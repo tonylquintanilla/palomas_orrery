@@ -9,9 +9,19 @@ written before dispatch.
 
 Legs of record, all dispatched at `eae95f5a` on 2026-08-18:
 
-- `worksheet_gemini_constants_new_20260818.jsonl` (Gemini 3.1 Pro, fresh chat)
-- `worksheet_gpt_constants_new_20260818.jsonl` (GPT, fresh chat)
-- `worksheet_claude_constants_new_20260818.jsonl` (Claude, fresh chat, outside the project)
+- `worksheet_gemini-3-1-pro_pilot_constants_new_20260818.jsonl`
+  (Gemini 3.1 Pro, fresh chat)
+- `worksheet_gpt-5-6-sol_pilot_constants_new_20260818.jsonl`
+  (GPT 5.6 Sol, fresh chat)
+- `worksheet_claude-opus-5_pilot_constants_new_20260818.jsonl`
+  (Claude Opus 5, fresh chat, outside the project)
+
+Renamed 2026-08-19 to the shape L-206 had already ruled --
+`worksheet_<model>_<batch>_<YYYYMMDD>` with the model field carrying
+the version. The names first used omitted the version and were
+proposed without checking the ledger item that had settled it. The
+rename was free because no annotation cited them yet; it would not
+have been free an hour after the first `# Cross-checked:` leg.
 
 Three further Gemini files, `_from0415`, `_from0602`, `_from0802`, are
 NOT legs. They are continuation-thread runs kept as

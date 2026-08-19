@@ -1,7 +1,7 @@
-Where we are 8/18/2026
+Where we are 8/19/2026
 
-Updated 2026-08-18 after the August 17-18 sessions. Built on
-b65ac115fc0f820e8270c0807249813c67bde7bc at
+Updated 2026-08-19 after the August 18 pilot session. Built on
+9ffb9b403a7d62090b30a9acf9adbc6180a6baec at
 https://github.com/tonylquintanilla/palomas_orrery (branch main);
 gallery at ff18d3e6fa31f70a8f525df471e751d046cf14fa at
 https://github.com/tonylquintanilla/tonyquintanilla.github.io.
@@ -52,6 +52,12 @@ Eight are closed. The ninth -- the truncated ordinal context window --
 is deliberately not exercised by the pilot, since constants carry no
 ordinals.
 
+  [2026-08-18: overtaken within a day. The loop RAN. Twenty-three rows
+  to Gemini, GPT and Claude in fresh chats; 69 answered rows; zero
+  format defects of any kind across all three returns, so the JSON
+  format needed no fallback. Full result:
+  documentation/PILOT_CONVERGENCE_20260819.md.]
+
 The last inch closed on August 18. Until then a returned verdict could
 be built, carried, filled, returned, checked and routed, and then
 REFUSED when somebody wrote it back into the code, because the
@@ -79,6 +85,13 @@ expected disposition written down before it goes out
 trap rows). If all 23 come back clear, that is agreement rather than
 success, and the prediction file is what makes the difference
 visible.
+
+  [2026-08-18: it went out and came back the same day. The prediction
+  of 13 clears drew 17, 10 and 11 from the three legs. All three trap
+  rows failed to spring. Ten rows came back clean from every leg and
+  six were flagged by every leg. The warning above held: Gemini's 17
+  is the sweep it describes, and it carries the shortest notes of the
+  three. Result: documentation/PILOT_CONVERGENCE_20260819.md.]
 
 
 WHAT CLAUDE CHECKS BEFORE ANYTHING ELSE
@@ -678,12 +691,21 @@ half-confirmed verdict can count as a completed check.
   is the record of what was true then.]
 
 
-WHAT IS TRACKED RIGHT NOW -- 2026-08-18
+WHAT IS TRACKED RIGHT NOW -- 2026-08-19
 
   Unstarted and unblocked
-    The pilot dispatch. 23 rows over constants_new.py, request built
-      by selection 2, sent as JSON with markdown as the fallback,
-      expected dispositions written before it goes out.
+    L-209. ALFVEN_SURFACE_RADII origin mismatch -- 18.8 is an altitude
+      above the photosphere; the sibling row PARKER_CLOSEST_RADII at
+      9.86 is heliocentric. Confirm whether the shell draws from Sun
+      centre before editing: that decides render bug or comment bug.
+    L-210. Four pilot citation findings in constants_new.py. Streamer
+      first -- the DeForest citation is inverted, not merely loose.
+    L-211. Build UNKNOWN. The pre-registered trigger asked for two
+      rows and got seven.
+
+  Done this session
+    L-207, the citation prompt. 53 rows written every checker run.
+    The pilot dispatch itself, three legs, zero format defects.
 
   Ready to build, no ruling outstanding
     Resolver + models fix (L-154) -- two lines and a type, then the
@@ -694,15 +716,37 @@ WHAT IS TRACKED RIGHT NOW -- 2026-08-18
       Not exercised by the pilot on purpose.
 
   Waiting on a ruling
-    Lazy responder: canaries, or remove the self-certifying field
+    Whether a VISUALIZATION BOUNDARY is verdictable at all. All three
+      legs declined to confirm INNER_CORONA_RADII and split on what
+      kind of thing it is. The artifact-bounds question arriving as a
+      worksheet row rather than as an argument.
+    Whether Gemini stays a leg of record. It cleared 17 of 23 with the
+      shortest notes in the batch and confirmed both rows the other two
+      refused.
+    Whether the pilot is finished. Nothing has been written back into
+      the code as an annotation yet, and the pilot was scoped to end at
+      re-verification in code.
+    Lazy responder: canaries, or remove the self-certifying field.
+      Note L-207 may have answered this -- a reviewer disagreeing with a
+      responder's citation verdict is now measured per row.
     Claim typing: real row types, or wait for a measured population
-    Cross-worksheet disagreement, what UNKNOWN does, pluto 614/638,
-      transition sequencing, whether batching becomes real
+    Cross-worksheet disagreement, pluto 614/638, transition sequencing,
+      whether batching becomes real
     The Resolved leg's first token: shipped as the worksheet FILENAME,
       where the design wrote <batch>. Claude's reading, unruled.
 
   Carried as an obligation
-    Confirm provenance-discipline loads at 2.4 before provenance work
+    Confirm provenance-discipline loads at 2.5 before provenance work.
+      [2.4 was confirmed and discharged on August 18; the skill went to
+      2.5 the same session and a mid-session reinstall cannot be verified
+      from inside the session that makes it. One session later a fresh
+      chat reported loading 2.5, which is the first independent
+      confirmation.]
+    Add the dispatch-hygiene rule to provenance-discipline: a fresh
+      chat is not enough, it must be OUTSIDE any project. A new chat
+      inside the Paloma's Orrery project inherits memory naming the
+      pilot's trap rows, which turns row-checking into trap-hunting. Found
+      when a responder refused the job for that reason.
 
   [2026-08-16 list, for the record: builder marker join (DONE, L-196),
   stage 2 continuation markers (DONE), six Shape A citation swaps
@@ -712,5 +756,5 @@ WHAT IS TRACKED RIGHT NOW -- 2026-08-18
 
 
 Entry written August 2026 with Anthropic's Claude Opus 5. Updated
-August 18, 2026, built on b65ac115fc0f820e8270c0807249813c67bde7bc;
+August 19, 2026, built on 9ffb9b403a7d62090b30a9acf9adbc6180a6baec;
 gallery at ff18d3e6fa31f70a8f525df471e751d046cf14fa.
