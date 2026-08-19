@@ -787,39 +787,6 @@ def print_planet_positions(positions):
         print(f"{name:15} Position: {pos_str:35} Distance from center: {dist_str}")
     print("=" * 50)
 
-# Helper function to create backup
-def create_orbit_backup():
-    """Create a backup of orbit cache on startup"""
-#    if os.path.exists('orbit_paths.json'):
-    if os.path.exists('data/orbit_paths.json'):
-        try:
-    #        shutil.copy('orbit_paths.json', 'orbit_paths_backup.json')
-            shutil.copy('data/orbit_paths.json', 'data/orbit_paths_backup.json')
-    #        file_size = os.path.getsize('orbit_paths.json') / (1024 * 1024)  # MB
-            file_size = os.path.getsize('data/orbit_paths.json') / (1024 * 1024)  # MB
-    #        message = f"Backup created: orbit_paths_backup.json ({file_size:.1f}MB)"
-            message = f"Backup created: data/orbit_paths_backup.json ({file_size:.1f}MB)"
-            print(f"[STARTUP] {message}")
-            
-            # Print cache statistics to terminal
-    #        with open('orbit_paths.json', 'r') as f:
-            with open('data/orbit_paths.json', 'r') as f:
-                orbit_data = json.load(f)
-                print(f"[CACHE INFO] Total orbits cached: {len(orbit_data)}")
-    #            print("[CACHE INFO] To manually delete cache, remove 'orbit_paths.json' file")
-                print("[CACHE INFO] To manually delete cache, remove 'data/orbit_paths.json' file")
-            
-            return message, 'info'
-                
-        except Exception as e:
-            error_msg = f"Warning: Could not create backup: {e}"
-            print(f"[ERROR] {error_msg}")
-            return error_msg, 'error'
-    else:
-        message = "No cache found. Will create new cache as needed."
-        print(f"[STARTUP] {message}")
-        return message, 'info'
-    
 # Weekly cleanup function -- deprecated
 def cleanup_old_orbits():
     """Remove orbit data older than 30 days"""

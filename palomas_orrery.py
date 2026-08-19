@@ -83,7 +83,7 @@ from osculating_cache_manager import get_elements_with_prompt
 from orbital_param_viz import create_orbital_transformation_viz, create_orbital_viz_window 
 from palomas_orrery_helpers import (calculate_planet9_position_on_orbit, rotate_points2, calculate_axis_range,
                                     fetch_trajectory, fetch_orbit_path, pad_trajectory, add_url_buttons,
-                                    get_default_camera, print_planet_positions, create_orbit_backup, cleanup_old_orbits, 
+                                    get_default_camera, print_planet_positions, cleanup_old_orbits, 
                                     show_animation_safely)
 
 from idealized_orbits import plot_idealized_orbits, planetary_params, parent_planets, planet_tilts, rotate_points, plot_hyperbolic_osculating_orbit, plot_perihelion_osculating_orbit
@@ -3645,10 +3645,6 @@ refresh_all = messagebox.askyesno(
 )
 """
 
-# Create backup on startup
-message, msg_type = create_orbit_backup()
-update_status_display(message, msg_type)
-
 # Initialize orbit data manager without dialogs
 orbit_paths_over_time = orbit_data_manager.initialize(status_display)
 
@@ -3680,6 +3676,22 @@ if os.path.exists('data/orbit_paths.json'):
         print(f"  {center}: {count} orbits", flush=True)
 #    print("\nNote: Cache can only be manually deleted by removing 'orbit_paths.json' file")
     print("\nNote: Cache can only be manually deleted by removing 'data/orbit_paths.json' file", flush=True)
+
+    # Restore points -- the two generations load_orbit_paths() falls back to
+    # automatically when the cache is missing or corrupt. Reported here so a
+    # damaged cache is recoverable without guessing what exists (L-213).
+    print("Restore points (used automatically if the cache is damaged):", flush=True)
+    for backup_path in ('data/orbit_paths.json.backup', 'data/orbit_paths.json.backup_old'):
+        if os.path.exists(backup_path):
+            backup_mb = os.path.getsize(backup_path) / (1024 * 1024)
+            backup_when = datetime.fromtimestamp(os.path.getmtime(backup_path)).strftime('%Y-%m-%d %H:%M')
+            print(f"  {backup_path}: {backup_mb:.1f} MB, saved {backup_when}", flush=True)
+        else:
+            print(f"  {backup_path}: none yet", flush=True)
+    print("-" * 50, flush=True)
+else:
+    print("\n[CACHE HEALTH SUMMARY]", flush=True)
+    print("No cache found at data/orbit_paths.json. A new one will be created as needed.", flush=True)
     print("-" * 50, flush=True)
 
 # CONSTANTS
