@@ -221,7 +221,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*124 live items; 112 need attention (`!`); 123 RICE-scored; 83 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*125 live items; 113 need attention (`!`); 124 RICE-scored; 83 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -244,6 +244,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-08-07 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
+| ! | L-213 | Orbit cache backup fires on IMPORT, not on cache write | OPEN | 2.2 | 2026-08-19 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
@@ -2638,6 +2639,58 @@ the token exists.
 `documentation/PILOT_CONVERGENCE_20260819.md` Part 5; L-207.
 
 ## PENDING ACTION (Tony-side)
+
+#### [L-213] Orbit cache backup fires on IMPORT, not on cache write
+<!-- L:213 status:OPEN upd:2026-08-19 section:A flag: rice:2/3/75/2 -->
+- **Found by L-212 on its second day.** The FILES WRITTEN block
+  reported `data/orbit_paths_backup.json` rewritten with identical
+  bytes on every maintenance run. Tony asked what was triggering it,
+  since the intent is for the backup to be rewritten when the CACHE is
+  updated.
+- **The trigger, traced.** `create_orbit_backup()` is called at MODULE
+  LEVEL in `palomas_orrery.py:3649` -- not inside a function, not
+  behind an `if __name__` guard. `test_reset_completeness.py:39` does
+  `importlib.import_module('palomas_orrery')`, and that test is in the
+  maintenance suite. So importing the orrery runs the backup, and the
+  suite imports the orrery every run. The cache is never touched; only
+  the module is loaded.
+- **Why this is more than a pointless rewrite.** The backup is
+  `shutil.copy` of `data/orbit_paths.json` over
+  `data/orbit_paths_backup.json`, unconditional. If the cache is ever
+  corrupted and ANYTHING imports the orrery afterwards -- a GUI
+  launch, a test run, a maintenance run -- the good backup is
+  overwritten with the corrupted file. The window between corruption
+  and loss is one import, and the maintenance suite makes an import
+  routine.
+- **Nothing has gone wrong yet**, and that is the shape of the risk
+  rather than a reason to discount it: the defect costs nothing until
+  the cache goes bad once.
+- **Two repairs, different sizes.** The SMALL one: make the copy
+  conditional on the source differing from the existing backup, which
+  stops the rewrite and nothing else. The REAL one: back up when the
+  cache is WRITTEN, which means moving the call out of module import
+  and next to whatever saves `orbit_paths.json` (see
+  `orbit_data_manager.py`, `ORBIT_PATHS_FILE` and the
+  `save_orbit_paths` path), and keeping a copy that a later import
+  cannot clobber.
+- **Design pass first** (Tony, 2026-08-19). This touches
+  `palomas_orrery.py`, which is Mode 1 territory -- targeted snippets,
+  never a full-file rewrite -- and moving a module-level call changes
+  startup behaviour for the GUI as well as the tests. Iterate the
+  design in conversation before any code.
+- **Confirm the dispatch before editing the leaf.** The same rule that
+  opens L-209. `create_orbit_backup()` lives in
+  `palomas_orrery_helpers.py:791` and is called from exactly one
+  place; check that is still true at the time of the fix rather than
+  trusting this note.
+**Note:** RICE is Claude's proposal, unratified.
+**Gap:** unmeasured -- how large the cache is, how often it is written
+in a session, and whether any other module-level side effect in
+`palomas_orrery.py` fires on the same import. The third question is
+the one worth asking early, because a module-level call that runs
+during a test suite is a pattern rather than an instance.
+**Ref:** L-212 (the block that surfaced it); `palomas_orrery.py:3649`;
+`palomas_orrery_helpers.py:791`; `test_reset_completeness.py:39`.
 
 ## C. RECONCILED LEDGER -- DONE (closed; for the record, do not re-do)
 
