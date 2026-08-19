@@ -119,6 +119,25 @@ Before Adding a Path -- the rule an external review proposed on
 2026-08-18 and Tony adopted. L-207 was the first item checked against
 it rather than assumed to pass.
 
+**L-212, added after this handoff was first written.**
+`maintenance_run.py` now prints a FILES WRITTEN THIS RUN block naming
+every file the suite changed, split into written, created, removed and
+rewritten-with-identical-bytes. It measures a tree snapshot before and
+after rather than asking each checker to declare its outputs, so an
+artifact nobody declared still appears. Expect the block at the bottom
+of every run from now on; it is not a new failure mode, it is the
+runner saying what it did.
+
+**And a correction that belongs in writing rather than in a chat.** On
+its first sandbox run that block reported
+`test_output/test_orbit_paths.json` as REMOVED by the suite, and Claude
+passed that to Tony as a finding. It was not one: the sandbox lacks
+astroquery, `test_orbit_cache.py` failed, and the file was left
+deleted. On a working machine the same run reports it rewritten with
+identical bytes. The tool was right both times and the reading of it
+was wrong once -- which is exactly the failure a diff tool invites, and
+worth knowing before the next session reads its first block.
+
 ---
 
 ## Carried obligations

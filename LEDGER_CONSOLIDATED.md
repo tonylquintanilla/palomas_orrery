@@ -221,7 +221,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*124 live items; 112 need attention (`!`); 123 RICE-scored; 82 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*124 live items; 112 need attention (`!`); 123 RICE-scored; 83 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -433,6 +433,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-197 | Maintenance runner output: say what passed | DONE | 5.4 | 2026-08-17 |
 |  | L-201 | Request selection -- ask the builder for fewer rows | DONE | 5.4 | 2026-08-18 |
 |  | L-205 | The runner's verdict lines carry evidence | DONE | 5.4 | 2026-08-18 |
+|  | L-212 | maintenance_run names every file the run wrote | DONE | 5.4 | 2026-08-19 |
 |  | L-003 | Protocol amendment candidates (for v3.29) | DONE | 5.4 | 2026-06-22 |
 |  | L-062 | README refresh -- fold in handoff + ledger developments | DONE | 5.1 | 2026-07-28 |
 |  | L-153 | Restore "Who Tony Is" framing into resident protocol (protocol) | DONE | 5.1 | 2026-07-21 |
@@ -2639,6 +2640,52 @@ the token exists.
 ## PENDING ACTION (Tony-side)
 
 ## C. RECONCILED LEDGER -- DONE (closed; for the record, do not re-do)
+
+#### [L-212] maintenance_run names every file the run wrote
+<!-- L:212 status:DONE upd:2026-08-19 section:C flag: rice:2/3/90/1 -->
+- **Asked for by Tony, 2026-08-19**, after watching a run: "could we
+  list the files that were modified by the run, by name? we list some
+  but not all i believe." Correct. The four GENERATORS declare their
+  outputs and their rows name them; the CHECKERS declare nothing, and
+  five artifacts were being written every run with nothing on screen
+  saying so -- `WORKSHEET_CHECK.md`, `data/worksheet_routed.json`,
+  `documentation/prompts/citation_review.jsonl`, `PROVENANCE_AUDIT.md`
+  and `data/provenance_history.json`.
+- **As built** (`patch_L212_1_files_written`). A FILES WRITTEN THIS RUN
+  block after the verdict summary, naming every changed file, split
+  into written / created / removed / rewritten-with-identical-bytes.
+  Printed on every run including one that changes nothing.
+- **MEASURED, NOT DECLARED, and that was the design decision.** The
+  obvious fix is an output list per checker matching the generators.
+  That is a second store of a fact the tools already own, and it drifts
+  in one direction only: the next artifact somebody adds is invisible
+  again and nothing fails to report it. A tree snapshot before and
+  after reports what actually happened, so a file written by a tool
+  nobody declared still appears.
+- **Cost measured before the design was chosen**, not after. A stat
+  walk over 1,329 files is about 0.01 s; hashing everything at or under
+  2 MB is about 0.13 s. Two snapshots cost roughly a third of a second
+  against a run of 100 seconds or more.
+- **The blind spot announces itself.** Files over 2 MB are compared by
+  size and mtime rather than content, and the count of them prints
+  every run. On Tony's machine that is 22 files; a same-size edit to
+  one would read as touched rather than written, and the line saying so
+  is what keeps that from being a silent gap.
+- **Success carries evidence.** The block prints the number of files
+  EXAMINED, not only the number changed. "Nothing was written" and
+  "nothing was looked at" are otherwise the same sentence.
+- **Found on its first outing**: `data/worksheet_check_state.json`,
+  written by the checker every run and named nowhere.
+- **A wrong reading, recorded.** The first sandbox run reported
+  `test_output/test_orbit_paths.json` as REMOVED and Claude passed that
+  to Tony as a finding. It was an artifact of the sandbox lacking
+  astroquery, so `test_orbit_cache.py` failed and left the file
+  deleted. On a working machine the same run reports it rewritten with
+  identical bytes. The tool was right both times; the reading of it was
+  wrong once, which is the failure mode a diff tool invites.
+**Note:** RICE is Claude's proposal, unratified.
+**Ref:** L-188 (the runner); L-205 (the summary line this sits under);
+`documentation/patch_L212_1_files_written.py`.
 
 ### Strategic status -- shell-consolidation + animation refactor (CLOSED, for the record)
 (Moved from B. Strategic Status, 2026-06-22; no L-number, historical record. The animation

@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: August 19, 2026
-Files scanned: 128
-Total findings: 1026
-Constants: 108 | Dicts: 38 | Display strings: 880
+Files scanned: 129
+Total findings: 1027
+Constants: 108 | Dicts: 39 | Display strings: 880
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -19,12 +19,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260819T175306Z | `d2cb527` | 129 | 1027 | 289 | 621 | 115 | 2 |
 | 20260819T174326Z | `d5814d3` | 128 | 1026 | 289 | 620 | 115 | 2 |
 | 20260819T172341Z | `894f015` | 128 | 1025 | 289 | 620 | 114 | 2 |
 | 20260819T025354Z | `eae95f5` | 128 | 1025 | 289 | 620 | 114 | 2 |
 | 20260818T232216Z | `c5c0102` | 129 | 1027 | 289 | 622 | 114 | 2 |
 | 20260818T213246Z | `731066f` | 129 | 1026 | 289 | 621 | 114 | 2 |
-| 20260818T175145Z | `b65ac11` | 128 | 1025 | 289 | 620 | 114 | 2 |
 
 Change since the previous run: total +1, Tier-1 +0.
 
@@ -60,7 +60,7 @@ No file's Tier-1 count rose.
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 289 |
-| 2 | 10-15 | REVIEW | 620 |
+| 2 | 10-15 | REVIEW | 621 |
 | 3 | 5-9 | LOW PRIORITY | 115 |
 | 4 | 1-4 | LOWEST PRIORITY | 2 |
 
@@ -149,6 +149,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `planetarium_distance.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `visualization_core.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `visualization_utils.py` | stars | 1 | 0 | 0 | 0 | 1 |
+| `patch_L212_2_records.py` | orrery | 0 | 1 | 0 | 0 | 1 |
 | `add_docstrings.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `data_inventory.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `osculating_cache_manager.py` | orrery | 0 | 0 | 1 | 0 | 1 |
@@ -164,7 +165,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 42 | 125 | 497 | 68 | 2 | 692 |
+| Orrery (solar system + orbital mechanics) | 43 | 125 | 498 | 68 | 2 | 693 |
 | Earth System | 13 | 150 | 81 | 2 | 0 | 233 |
 | Stars (stellar neighborhood) | 11 | 12 | 42 | 6 | 0 | 60 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 39 | 0 | 39 |
@@ -174,6 +175,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 **Domain coverage gap:** the following files have findings but no entry in `MODULE_DOMAIN_MAP` -- defaulted to `orrery` rather than guessed into a more specific bucket. Add each to `MODULE_DOMAIN_MAP` in provenance_scanner.py with its real domain so this stops silently defaulting:
 
 - `maintenance_run.py`
+- `patch_L212_2_records.py`
 - `worksheet_checker.py`
 - `worksheet_keys.py`
 - `worksheet_request_builder.py`
@@ -1287,6 +1289,12 @@ is planned for a future session.
 | 2303 | string | display string @ line 2303 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2341 | string | display string @ line 2341 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2416 | string | display string @ line 2416 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+
+### patch_L212_2_records.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 54 | dict | BASE[...] | (2 entries) | 3 | 5 | **15** | Cited, not independently cross-checked | UNDETERMINED -- could not be classified |
 
 ### planet9_visualization_shells.py
 
