@@ -185,6 +185,137 @@ def snapshot(path):
     return (mtime, digest)
 
 
+# ============================================================
+# WHAT THE RUN WROTE (L-212)
+# ============================================================
+#
+# The generators declare their outputs and their rows name them. The
+# checkers declare nothing, and they write five artifacts between
+# them, so a run could rewrite WORKSHEET_CHECK.md, the routing file,
+# the citation prompt, PROVENANCE_AUDIT.md and the history file with
+# nothing on screen saying so. Tony asked for the missing names.
+#
+# MEASURED, NOT DECLARED. The obvious fix is an output list per
+# checker, matching the generators. That is a second store of a fact
+# the tools already own, and it drifts in one direction only: the next
+# artifact added is invisible again, and nothing fails to report it.
+# Snapshotting the tree instead means a file written by a tool nobody
+# declared still appears.
+#
+# The cost was measured before the design was chosen. A stat walk over
+# 1,329 files is about 0.01 s; hashing everything at or under the size
+# limit is about 0.13 s. Two snapshots cost roughly a third of a
+# second against a run of 100 seconds or more.
+#
+# THE BLIND SPOT ANNOUNCES ITSELF. Fourteen files exceed the limit --
+# bulk climate and ocean data, 218 MB of it -- and are compared by
+# size and mtime rather than content, so a same-size edit to one of
+# them would be reported as touched rather than written. The summary
+# prints that count every run rather than hiding it.
+
+# Files larger than this are compared by size and mtime, not content.
+HASH_LIMIT_BYTES = 2 * 1024 * 1024
+
+# Not part of the working tree for this purpose. .git is git's own
+# business, __pycache__ is a build product of running the suite at all,
+# and a virtualenv is not project state.
+SKIP_DIRS = ('.git', '__pycache__', '.venv', 'venv', '.pytest_cache',
+             'node_modules')
+
+
+def tree_snapshot(project_dir):
+    """{relative path: (mtime_ns, size, hash or None)} for the tree.
+
+    The hash is LF-normalized, like every other fingerprint in this
+    project, because a CRLF working copy is not a content change.
+    """
+    seen = {}
+    for root, dirs, files in os.walk(project_dir):
+        dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
+        for name in files:
+            path = os.path.join(root, name)
+            try:
+                stat = os.stat(path)
+            except OSError:
+                continue
+            digest = None
+            if stat.st_size <= HASH_LIMIT_BYTES:
+                try:
+                    with open(path, 'rb') as handle:
+                        digest = hashlib.md5(
+                            handle.read().replace(b'\r\n', b'\n')
+                        ).hexdigest()
+                except OSError:
+                    digest = None
+            key = os.path.relpath(path, project_dir).replace(os.sep, '/')
+            seen[key] = (stat.st_mtime_ns, stat.st_size, digest)
+    return seen
+
+
+def tree_diff(before, after):
+    """(written, created, removed, touched, unhashed).
+
+    `written` changed content. `touched` was rewritten with identical
+    bytes, which matters operationally: a real change to
+    PROJECT_INSTRUCTIONS.md has to be re-uploaded to the Claude UI and
+    an identical rewrite does not. `unhashed` counts files too large to
+    compare by content, so the reader knows what the answer does not
+    cover.
+    """
+    written, created, removed, touched = [], [], [], []
+    unhashed = 0
+    for path, now in sorted(after.items()):
+        if now[2] is None:
+            unhashed += 1
+        was = before.get(path)
+        if was is None:
+            created.append(path)
+            continue
+        if now[2] is not None and was[2] is not None:
+            if now[2] != was[2]:
+                written.append(path)
+            elif now[0] != was[0]:
+                touched.append(path)
+        elif now[1] != was[1]:
+            written.append(path)
+        elif now[0] != was[0]:
+            touched.append(path)
+    for path in sorted(before):
+        if path not in after:
+            removed.append(path)
+    return written, created, removed, touched, unhashed
+
+
+def print_files_written(before, after):
+    """Name every file the run changed. Printed on every run."""
+    written, created, removed, touched, unhashed = tree_diff(
+        before, after)
+
+    print()
+    print('FILES WRITTEN THIS RUN')
+    print('-' * 70)
+    # Success carries evidence: the count of files EXAMINED, not just
+    # the count changed. "Nothing written" and "nothing looked at" are
+    # the same sentence otherwise.
+    print('  %d file(s) examined, %d written, %d created, %d removed, '
+          '%d rewritten identically'
+          % (len(after), len(written), len(created), len(removed),
+             len(touched)))
+    for label, paths in (('written', written), ('created', created),
+                         ('removed', removed)):
+        for path in paths:
+            print('    %-9s %s' % (label, path))
+    if touched:
+        print('    rewritten with identical bytes, no action needed:')
+        for path in touched:
+            print('      %s' % path)
+    if unhashed:
+        print('    %d file(s) over %d MB compared by size and mtime '
+              'only' % (unhashed, HASH_LIMIT_BYTES // (1024 * 1024)))
+    if not (written or created or removed):
+        print('    nothing changed on disk')
+
+
 def last_meaningful_line(text):
     """The last non-blank, non-rule line -- a tool's verdict, usually."""
     for line in reversed((text or '').splitlines()):
@@ -297,6 +428,10 @@ def main():
     print('MAINTENANCE RUN -- generators, then checkers (L-188)')
     print('=' * 70)
 
+    # Bracketed around the whole suite, so the report covers every
+    # tool rather than the ones that happened to declare an output.
+    tree_before = tree_snapshot(project_dir)
+
     # ---- staleness first, before the suite makes it fresh ------------
     for line in staleness_report(project_dir):
         print('  ' + line)
@@ -391,6 +526,13 @@ def main():
         for row in report_only:
             print('    %-27s %s' % (row[0], row[3]))
     print('=' * 70)
+
+    # ---- what the run wrote (L-212) -----------------------------------
+    # After the verdict block, because the verdict is what the push
+    # call turns on. Printed whether or not anything changed: a run
+    # that wrote nothing should say so rather than leaving the reader
+    # to infer it from an absence.
+    print_files_written(tree_before, tree_snapshot(project_dir))
 
     # ---- detail for failures only -------------------------------------
     # Indexed rather than unpacked: checker rows carry a seventh field
