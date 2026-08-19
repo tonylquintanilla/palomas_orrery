@@ -8,10 +8,53 @@ live. The checker scans that directory and recognises a `PROMPT_`
 name, so it is categorised as a prompt file rather than counted as an
 uncited worksheet.
 
-Reusable. Paste the block below into a fresh chat, attach the
-`REQUEST_*.jsonl` file, send nothing else. It carries no batch name,
-no row count and no model name, so the same text serves every
-responder and every batch.
+Reusable. It carries no batch name, no row count and no model name,
+so the same text serves every responder and every batch.
+
+---
+
+## Dispatch hygiene -- one query per model, in a fresh chat
+
+**One query per model. A NEW chat, every time. Never a thread that has
+discussed these values before.**
+
+The request is self-contained by construction: it carries the rows,
+the code's own citations, the context legs, the vocabulary, the
+instructions and the hashes. Nothing in it depends on anything said in
+an earlier conversation, which is what lets one prompt serve every
+responder.
+
+Going back to the thread that produced an earlier round looks like
+continuity and is the opposite. That thread already holds the model's
+previous answers about these constants, so asking again inside it
+invites the model to reaffirm what it said rather than check anything.
+It is the anchoring problem this system is built around, arriving
+through the back door. A fresh chat is also REPRODUCIBLE -- someone
+else can run it and get a comparable answer. An old thread cannot be
+re-run by anyone, including you.
+
+Attach the `REQUEST_*.jsonl` and the prompt block below. Send nothing
+else: no explanation of what the project is, no mention of what a
+previous model said, no hint about which rows are expected to be
+interesting.
+
+**Measured, 2026-08-18.** Three Gemini threads were given identical
+rows on the same day, each thread being one that had produced an
+earlier round of cross-checks. One returned `confirmed` on all 46
+verdict fields. One returned 44 confirmed and 2 derived. The third
+used four different tokens and produced the only refusal across all 69
+answered fields. Three samples do not prove causation, but that is the
+shape contamination takes, and it is why this section exists. Those
+files are kept as context-sensitivity evidence, named
+`worksheet_gemini_constants_new_20260818_from<date>.jsonl`. They are
+NOT the Gemini leg of record.
+
+**Threads of one model are one model.** Running four Gemini chats does
+not produce four independent legs, and the scanner cannot tell the
+difference: it counts distinct checker STRINGS, so four spellings of
+Gemini would promote a site to cross-checked on four legs that share
+training, priors and blind spots. Independence comes from a different
+model, not a different conversation.
 
 ---
 
