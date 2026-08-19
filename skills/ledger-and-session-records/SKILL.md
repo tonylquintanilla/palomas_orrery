@@ -6,8 +6,8 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Skill version: 1.6 | Cut from palomas_orrery @ 305b269 (v1.6), earlier
-@ 3398970 (v1.5) | August 14, 2026
+Skill version: 1.7 | Cut from palomas_orrery @ 434a712b (v1.7), earlier
+@ 305b269 (v1.6), @ 3398970 (v1.5) | August 19, 2026
 Sources: LEDGER_CONSOLIDATED.md header, ledger_index.py at HEAD, handoff
 v28 (consolidation) and v29 (cleanup), food insecurity handoffs. v1.3
 adds the Tony-action (do)/(decide) tag convention and its rollup rule,
@@ -18,7 +18,10 @@ with no consistent tag, discovered only because a builder session
 rewrites the Codebase Tooling ROLE_MAP bullet for L-163 Phase 3: a new
 module is classified by tagging its own docstring, not by hand-adding a
 ROLE_MAP entry, because ROLE_MAP became a regenerated mirror that the
-next module_atlas.py run overwrites.
+next module_atlas.py run overwrites. v1.7 adds Cluster the Tail by
+Topic, Not by Age -- Tony's ruling of August 19, 2026, replacing a
+by-age triage, after a measurement found 54 of 107 open items both
+below RICE 3.0 and untouched for a month (L-215).
 
 Note: READING the ledger at session start is resident Part-1 behavior,
 not this skill's job. This skill carries the maintenance mechanics.
@@ -104,6 +107,42 @@ scores, verification results, corrections, open questions for Tony).
 - Verification honesty tags where useful: [verified @<sha>] vs
   [per chain] vs [render-gated] -- the ledger states which of its own
   claims are checked vs carried.
+
+### Cluster the Tail by Topic, Not by Age [QUALITY]
+
+RICE Effort is not a property of an item. It is a property of an item
+GIVEN what else is open. Scoring each one alone is what produces a
+tail: by August 2026 this ledger held 107 open items, 54 of them both
+below RICE 3.0 and untouched for over 30 days, and a score-ordered
+board cannot distinguish "correctly deprioritized" from "dropped."
+
+The move is not a scheduled cleanup event. It is a STEP inside every
+job: when work is scheduled, sweep the open ledger for items whose
+FILES the job already opens, and clear them in the same patch. Sitting
+inside a file the job has already fingerprinted lowers Effort, raises
+Confidence, and lets one patch carry reach neither item had alone.
+
+**Cluster by FILES TOUCHED, not by keyword.** A keyword sweep for the
+worksheet-builder topic returned 36 items including a comet-tail
+animation, a food-insecurity track and a ring-colour audit -- shared
+vocabulary, unrelated work. The file list a job already holds is the
+version that survives being run twice.
+
+Two findings from the first run, and both are the reason it is worth
+doing:
+- An item 69 days old at RICE 1.0 was ALREADY DONE. The work had been
+  finished and nobody closed the entry, so it sat in the tail counted
+  as debt. A tail nobody looks at cannot say which of its items are
+  dead.
+- A ruled ASCII violation sat in a file the session had already
+  fingerprinted, opened and edited. The safe-file-editing sweep
+  conditions all held. The count was printed by the patch's own
+  encoding report and read past, because the item that gave it meaning
+  was seventy rows down a list sorted by score.
+
+(Tony's proposal, 2026-08-19, replacing a by-age triage Claude had
+recommended. His reasoning is the rule: coordination raises Reach,
+Impact and Confidence at the same time as it lowers Effort.)
 
 ## Anchor Requirement (all outbound documents)
 

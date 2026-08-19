@@ -635,13 +635,13 @@ INFO = {
         'to its parent planet than any other moon in the solar system.\n' 
         'Dimensions: It is a non-spherical, "triaxial" ellipsoid measuring approximately 26.0 x 22.8 x 18.2 km. Mean Radius: 11.1 km.\n' 
         'Mass: Approximately 1.0659 10^16 kg.\n' 
-        'Density: It has a very low mean density of about 1.876 g/cm³, suggesting a porous "rubble pile" composition or a mix of rock and ice.\n' 
-        'Surface Gravity: Extremely weak at 0.0057 m/s², meaning a person could easily jump off the surface into orbit.\n' 
+        'Density: It has a very low mean density of about 1.876 g/cm^3, suggesting a porous "rubble pile" composition or a mix of rock and ice.\n' 
+        'Surface Gravity: Extremely weak at 0.0057 m/s^2, meaning a person could easily jump off the surface into orbit.\n' 
         'Proximity: It orbits Mars at a mean distance of only 9,376 km from the planet\'s center (about 6,000 km from the surface).\n' 
         'Orbital Period: It completes one revolution every 7 hours and 39 minutes, meaning it orbits Mars three times in a single Martian day.\n' 
         'Tidal Locking: It is synchronously rotating, meaning the same face always points toward Mars.\n' 
         'Apparent Motion: Because it orbits faster than Mars rotates, it is the only moon that appears to rise in the West and set in the East.\n' 
-        'Stickney Crater: Its most prominent feature is a massive impact crater nearly 9 km wide—large enough that the impact almost shattered the moon.\n' 
+        'Stickney Crater: Its most prominent feature is a massive impact crater nearly 9 km wide -- large enough that the impact almost shattered the moon.\n' 
         'Orbital Decay: Phobos is below the "synchronous orbit" radius. Tidal forces are slowly dragging it closer to Mars at a rate of about 2 meters \n' 
         'every 100 years. In roughly 30 to 50 million years, Phobos will either crash into Mars or be ripped apart by gravity to form a planetary ring.\n' 
         'Dust Rings: The moon is a source of seasonal dust rings around Mars as micrometeoroid impacts kick material off its surface.\n' 
@@ -654,10 +654,10 @@ INFO = {
         'Ceres': 'Horizons: A801 AA. The largest object in the asteroid belt, considered a dwarf planet.',
 
         '16 Psyche': 'Horizons: 16 or 20000016 or A852 FA. Scientists hypothesize that Psyche might be the exposed core of a "planetesimal" \n' 
-        '—a building block of an early planet that had its rocky outer layers stripped away by violent collisions billions of years ago. \n'
+        ' -- a building block of an early planet that had its rocky outer layers stripped away by violent collisions billions of years ago. \n'
         '16 Psyche is the target of the NASA Psyche mission. The spacecraft is expected to reach the asteroid in August 2029. \n' 
         '16 Psyche is a unique, metal-rich asteroid located in the main asteroid belt between Mars and Jupiter. Unlike most \n' 
-        'asteroids that are composed of rock or ice, Psyche appears to be made largely of nickel and iron—similar to the core of Earth.',
+        'asteroids that are composed of rock or ice, Psyche appears to be made largely of nickel and iron -- similar to the core of Earth.',
 
         # Source: NASA CNEOS (cneos.jpl.nasa.gov/apophis) -- size 370m, Aten-type, 2029 flyby 31600 km, OSIRIS-APEX/RAMSES missions
         'Apophis': '***SET MANUAL SCALE TO 0.005 AU TO SEE THE CLOSE APPROACH TO EARTH AND MOON***\n\n'
@@ -2069,7 +2069,7 @@ INFO = {
         '* Pristine visitor: It traveled ~170,000 years from the Oort Cloud to reach the inner\n'
         '  Solar System. This is its first and final visit.\n'
         '* The Interstellar Exit: During its approach, Jupiter provided a massive gravitational\n'
-        '  slingshot—the same mechanism NASA used to send Voyager into interstellar space.\n'
+        '  slingshot -- the same mechanism NASA used to send Voyager into interstellar space.\n'
         '  This "kick" added enough orbital energy to push its eccentricity above 1.0, meaning\n'
         '  it now exceeds solar escape velocity and will never return.\n'
         '* Perihelion: April 19, 2026 at 0.499 AU (74.6 million km from the Sun).\n'
@@ -2173,7 +2173,7 @@ INFO = {
         '  * CO2-Driven: JWST confirmed that the comet\'s distant, early activity was driven almost entirely by carbon dioxide sublimation.\n' 
         '  * The Missing CO: Surprisingly, there were no emission features for carbon monoxide (CO) or water. Since CO is far more volatile than CO2, it was ' 
         'expected to be a primary driver of activity at that distance. The distinct lack of CO suggests the comet\'s nucleus (estimated at 2 to 10 km in diameter) ' 
-        'might have been thermally processed — losing its near-surface hyper-volatiles — during the early days of the solar system, well before it was kicked out ' 
+        'might have been thermally processed  --  losing its near-surface hyper-volatiles  --  during the early days of the solar system, well before it was kicked out ' 
         'into the Oort Cloud.' 
         '* Eccentricity: >1, currently hyperbolic due to planetary perturbations in the inner solar system. Since the comet is now outbound, its eccentricity will ' 
         'eventually settle back just below 1 once it clears the planetary region, putting it on a highly elliptical outbound orbit with a period estimated at ' 

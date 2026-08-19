@@ -19,20 +19,16 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260819T223209Z | `434a712` | 128 | 1033 | 292 | 626 | 113 | 2 |
 | 20260819T214150Z | `81108b2` | 128 | 1033 | 292 | 626 | 113 | 2 |
 | 20260819T175306Z | `d2cb527` | 129 | 1027 | 289 | 621 | 115 | 2 |
 | 20260819T174326Z | `d5814d3` | 128 | 1026 | 289 | 620 | 115 | 2 |
 | 20260819T172341Z | `894f015` | 128 | 1025 | 289 | 620 | 114 | 2 |
 | 20260819T025354Z | `eae95f5` | 128 | 1025 | 289 | 620 | 114 | 2 |
-| 20260818T232216Z | `c5c0102` | 129 | 1027 | 289 | 622 | 114 | 2 |
 
-Change since the previous run: total +6, Tier-1 +3.
+Change since the previous run: total +0, Tier-1 +0.
 
-Tier-1 rose in these files:
-
-| File | Before | After |
-|------|-------:|------:|
-| solar_visualization_shells.py | 3 | 6 |
+No file's Tier-1 count rose.
 
 ---
 
@@ -1740,9 +1736,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 103 | dict | ROLE_MAP[...] | (126 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 370 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 393 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 103 | dict | ROLE_MAP[...] | (124 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 368 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 391 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 

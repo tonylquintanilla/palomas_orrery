@@ -83,12 +83,12 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 239 | 417.1 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-08-18 |
+| .json | 239 | 417.1 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-08-19 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 1 | 5.1 MB | palomas_orrery_logo.png (5.1 MB) | 2025-11-27 |
 | .py | 27 | 615.6 KB | gallery_studio.py (244.1 KB) | 2026-07-29 |
 | .md | 13 | 409.9 KB | web_gallery_handoff.md (242.4 KB) | 2026-08-06 |
-| .jsonl | 22 | 210.4 KB | encke.jsonl (9.9 KB) | 2026-08-18 |
+| .jsonl | 22 | 217.6 KB | encke.jsonl (10.3 KB) | 2026-08-19 |
 | .html | 5 | 184.7 KB | index.html (128.2 KB) | 2026-07-14 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |

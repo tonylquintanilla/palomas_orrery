@@ -221,7 +221,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*125 live items; 113 need attention (`!`); 124 RICE-scored; 84 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*125 live items; 113 need attention (`!`); 124 RICE-scored; 85 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -240,6 +240,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-214 | The request builder drops the comment lines that matter | OPEN | 3.8 | 2026-08-19 |
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
 | ! | L-210 | Pilot citation findings -- four rows in constants_new.py | OPEN | 3.6 | 2026-08-19 |
+| ! | L-215 | Ledger cleanup by topic, not by age | OPEN | 3.6 | 2026-08-19 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-06 |
 | ! | L-176 | Shell hover text: add illustrated dimensions (radius_fraction -> km) | OPEN | 2.8 | 2026-08-04 |
 | ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-08-07 |
@@ -278,7 +279,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-171 | patch_ledger_index_retired_handles.py breaks L-163's zero-undetermined close | OPEN | 1.8 | 2026-07-29 |
 | ! | L-025 (#N7) | Reduced to custom-geometry inline markers only | OPEN | 1.5 | 2026-06-18 |
 | ! | L-068 | Static/animation pipeline consolidation -- remaining residuals (umbrella) | OPEN | 1.5 | 2026-06-23 |
-| ! | L-028 | ASCII em-dash violation, comet_visualization_shells.py L257/505/519 | OPEN | 1.0 | 2026-06-11 |
 | ! | L-133 | Codebase-wide CRLF sweep (beyond L-026) | OPEN | 1.0 | 2026-07-17 |
 | ! | L-135 | Basic-plot file-size bloat (non-shell) -- Mercury-alone example | OPEN | 1.0 | 2026-07-17 |
 | ! | L-015 (#5) | _info import cleanup (~89+87 imports, 2 files) | OPEN | 0.9 | 2026-06-18 |
@@ -468,6 +468,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | DONE | 1.5 | 2026-06-23 |
 |  | L-147 | Embed dashboard launcher in orrery GUI third column | DONE | 1.5 | 2026-07-17 |
 |  | L-180 | Solar chromosphere -- three inconsistent extents in one shell | DONE | 1.3 | 2026-08-07 |
+|  | L-028 | ASCII em-dash violation, comet_visualization_shells.py L257/505/519 | DONE | 1.0 | 2026-08-19 |
 |  | L-047 (#N10) | Note-composition structural refactor (behind N6) | DONE | 1.0 | 2026-06-23 |
 |  | L-050 (#N9) | white -> red orbit-marker switch (osculating marker intentionally stays white) | DONE | 1.0 | 2026-06-23 |
 |  | L-134 | Dashboard developer-tools audit | DONE | 1.0 | 2026-07-17 |
@@ -2180,6 +2181,15 @@ entries in `shell_configs.py`. (2) EARTH -- no visible bug, same
 duplication, and it is the case that decides the shape of the fix
 because of the surface-specific-text requirement. Do the Mode 5
 survey first in both cases.
+**Gap+ (2026-08-19):** replacing a typed constant with a read SPLITS a
+display-string unit and raises the Tier-1 COUNT while the uncited surface
+shrinks. Measured on L-209: `solar_visualization_shells.py` went 3 -> 6
+Tier-1 findings, and total counted claims went 52 -> 42, because an
+f-string prefix inserted mid-run ends one string unit and starts another.
+Same text, same absent citation, more rows to report it in. Expect the
+count to climb through this item and L-181 while the files get better;
+the real repair for those six rows is citing the corona hover text, which
+was owed before today.
 **Ref:** origin `e3ca900` (2025-04-05, correct design), `97bbfe3`
 (2026-05-25, the regression); L-181 (canonical `<br>` direction and
 the dead tooltip decision); L-190 (tooling reach); L-182 (the silent
@@ -2614,6 +2624,52 @@ That count comes before the design.
 **Ref:** `worksheet_keys.py` `LEG_RE` / `legs_of` / `continues_a_leg`;
 L-209 (the row that exposed it); L-203 (the Visibility Convention);
 L-204; L-207.
+
+#### [L-215] Ledger cleanup by topic, not by age
+<!-- L:215 status:OPEN upd:2026-08-19 section:A flag: rice:3/3/80/2 -->
+- **Tony, 2026-08-19:** "Can we do a cleanup run to move the items that
+  touch on our current work? This would reduce the effort factor and
+  increase the confidence factor, the reach and impact by coordination."
+  Replaces a by-age triage Claude had recommended.
+- **The rule underneath it.** RICE Effort is not a property of an item;
+  it is a property of an item GIVEN what else is open. Scoring each one
+  alone is what produces a tail, and a score-ordered board cannot
+  distinguish "correctly deprioritized" from "dropped."
+- **Baseline, measured 2026-08-19 at `434a712b`.** 107 open items. 52
+  score below RICE 2.0; 54 are both below 3.0 and untouched for more
+  than 30 days. Oldest is L-053 at 73 days. Nothing exceeds 90 days, so
+  the tail is a stratum rather than a swamp.
+- **The mechanism is a STEP, not an event.** When a job is scheduled,
+  sweep the open ledger for items whose FILES the job already opens and
+  clear them in the same patch.
+- **Cluster by files touched, NOT by keyword.** A keyword sweep for the
+  worksheet-builder topic returned 36 items including a comet-tail
+  animation, the food-insecurity track and a ring-colour audit -- shared
+  vocabulary, unrelated work. The file list a job already holds is the
+  version that survives being run twice.
+- **First run, two findings, both of which are the argument.** L-028 was
+  ALREADY DONE and still counted as debt at 69 days (now closed). And a
+  ruled ASCII violation sat in `info_dictionary.py`, a file this session
+  had already fingerprinted, opened and edited -- the number was printed
+  by the patch's own encoding report and read past, because no ledger
+  item gave it meaning.
+- **A correction, recorded.** Claude attributed those ASCII bytes to
+  L-187 in conversation. L-187 is `info_dictionary` NUMERIC-OVERLAP
+  enumeration and has nothing to do with encoding. The violation had no
+  ledger item at all, which is a worse finding than a stale one.
+- **Tony-action (decide):** two non-ASCII bytes remain in
+  `info_dictionary.py` after this sweep, both the `s`-acute in the name
+  of Kacper Wierzchos, the Polish astronomer who discovered C/2024 E1.
+  Transliterating a person's name is not a mechanical fix and reads
+  intent, so it stayed out of scope. Options: keep the diacritic and
+  carry a named exception, or write the ASCII spelling and note the
+  original in the same string.
+**Note:** RICE is Claude's proposal, unratified.
+**Gap:** the 54-item tail is measured but unswept. No sweep has run
+except the L-214-adjacent one that produced the findings above.
+**Ref:** L-191 and L-181 (the migration that will inflate Tier-1 counts);
+L-028 (closed by the first sweep); L-187; `ledger-and-session-records`
+v1.7, which carries the convention.
 
 #### [L-210] Pilot citation findings -- four rows in constants_new.py
 <!-- L:210 status:OPEN upd:2026-08-19 section:A flag: rice:3/3/80/2 -->
@@ -5621,6 +5677,17 @@ it is worth the startup-behaviour change to the GUI and the tests.
 `save_orbit_paths` / `load_orbit_paths` (the real backup chain);
 `documentation/patch_L213_2_remove_startup_backup.py`;
 `documentation/patch_L213_3_cache_line_and_close.py`.
+
+#### [L-028] ASCII em-dash violation, comet_visualization_shells.py L257/505/519
+<!-- L:028 status:DONE upd:2026-08-19 section:C flag: rice:1/1/100/1 -->
+- **Closed 2026-08-19: ALREADY DONE, and nobody had closed it.**
+  `comet_visualization_shells.py` holds zero non-ASCII bytes at
+  `434a712b`, verified by byte scan, and the named lines L257/L505 are
+  unrelated code. The work was finished at some point and the entry sat
+  69 days in the tail counted as debt. Found by the first by-topic sweep
+  (L-215), not by anyone reading the list.
+Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
+**Gap:** fix on next touch (binary-mode).
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
@@ -5793,11 +5860,6 @@ detection (sys.platform), or ttk styling.
 build. Moderate scope (26 sites); low functional risk (cosmetic only).
 **Platform neutrality:** same goal as L-026 (the LF sweep) -- pair them. This is the Tk
 color-name half (SystemButtonFace -> hex literal / sys.platform detection / ttk).
-
-#### [L-028] ASCII em-dash violation, comet_visualization_shells.py L257/505/519
-<!-- L:028 status:OPEN upd:2026-06-11 section:D.Structural flag: rice:1/1/100/1 -->
-Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
-**Gap:** fix on next touch (binary-mode).
 
 ### D.Cosmetic -- polish (bundle when convenient)
 
