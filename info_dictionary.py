@@ -31,6 +31,9 @@ signal March->April 27 2002), Gaia (end date corrected to Jan 15 2025).
 Provenance audit identified by Anthropic's Claude Opus 4.7.
 """
 
+# Shell radii are read from constants_new.py, never retyped here (L-209).
+from constants_new import ALFVEN_SURFACE_RADII, SOLAR_RADIUS_AU
+
 # Updated note_text for the GUI note_frame
 # Based on README updates - January 2026
 
@@ -2113,7 +2116,7 @@ INFO = {
         'Final passage -- an experimental probe into the solar atmosphere:\n'
         '* April 2: entered SOHO/LASCO C3 field (~33 R_sun, ~0.153 AU);\n'
         '  crossed the extended F-corona. Visible in coronagraphs.\n'
-        '* April 3 ~18:00 UTC: crossed the Alfven surface (~18.8 R_sun, ~0.087 AU) --\n'
+        f'* April 3 ~18:00 UTC: crossed the Alfven surface (~{ALFVEN_SURFACE_RADII} R_sun, ~{ALFVEN_SURFACE_RADII * SOLAR_RADIUS_AU:.3f} AU) --\n'
         '  now inside the true corona; plasma magnetically connected to the Sun;\n'
         '  immersed in 1-2 million K coronal plasma.\n'
         '* April 4 ~08:15 UTC: NUCLEUS DISINTEGRATED at ~8.33 R_sun (~0.039 AU).\n'

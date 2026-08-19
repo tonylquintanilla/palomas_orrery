@@ -40,7 +40,8 @@ import plotly.graph_objs as go
 from shared_utilities import create_sun_direction_indicator
 from orrery_rendering import create_info_marker
 from planet_visualization_utilities import (
-    KM_PER_AU, SUN_RADIUS_KM, SOLAR_RADIUS_AU)
+    KM_PER_AU, SUN_RADIUS_KM, SOLAR_RADIUS_AU,
+    ALFVEN_SURFACE_RADII, STREAMER_BELT_RADII)
 
 # Comet nucleus sizes (approximate, in km)
 COMET_NUCLEUS_SIZES = {
@@ -528,7 +529,9 @@ def create_maps_disintegration_marker(position_au, comet_name='MAPS'):
         f"Distance from Sun center: {r_au:.6f} AU ({r_km:,.0f} km)<br>"
         f"Distance from photosphere: {dist_photosphere_km:,.0f} km "
         f"({dist_photosphere_au:.6f} AU) = {r_solar_radii:.2f} R_sun<br>"
-        f"Layer: between Alfven Surface (~18.8 R_sun, ~0.087 AU) and Streamer Belt (~6.0 R_sun, ~0.028 AU)<br>"
+        f"Layer: between Alfven Surface (~{ALFVEN_SURFACE_RADII} R_sun, "
+        f"~{ALFVEN_SURFACE_RADII * SOLAR_RADIUS_AU:.3f} AU) and Streamer Belt "
+        f"(~{STREAMER_BELT_RADII} R_sun, ~{STREAMER_BELT_RADII * SOLAR_RADIUS_AU:.3f} AU)<br>"
     #    f"<br>"
         f"<b>Solar environment:</b><br>"
         f"Corona temperature at this distance: ~1-2 million K<br>"

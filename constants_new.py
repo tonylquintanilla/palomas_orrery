@@ -212,15 +212,30 @@ ROCHE_LIMIT_RADII = 3.45
 # Note: Roche limit is NOT absolute; tensile strength allows survival
 # inside it. Ikeya-Seki survived at 1.66 R_sun.
 
-ALFVEN_SURFACE_RADII = 18.8
-# Source: Kasper et al. (2021), Phys. Rev. Lett. 127:255101
-# See: Parker Solar Probe first crossing, April 28, 2021
+ALFVEN_SURFACE_RADII = 19.7
+# Source: Kasper et al. (2021), Phys. Rev. Lett. 127:255101 -- first crossing
+# Source+: 28 April 2021 09:33 UT; the sub-Alfvenic interval spans 19.7 to
+# Source+: 18.4 solar radii from the center of the Sun
+# See: HELIOCENTRIC, from Sun center, like every other shell radius in this
+# See+: file. The widely quoted 18.8 R_sun is the ALTITUDE above the
+# See+: photosphere, stated by the NASA/JHUAPL release of 14 December 2021;
+# See+: the paper's own abstract gives the same event as 13 million km above
+# See+: the photosphere. Adding one solar radius gives 19.8, which agrees
+# See+: with the paper's own 19.7 to rounding.
+# See+: PARKER_CLOSEST_RADII below carries the identical correction, made
+# See+: 2026-04-15: 8.86 was altitude, 9.86 is from Sun center.
+# See+: The surface is neither smooth nor fixed -- 10-20 R_sun varying with
+# See+: solar activity, and the 2021 crossing was into a boundary layer above
+# See+: a pseudostreamer rather than a global shell. 19.7 is the measured
+# See+: first crossing, drawn here as a nominal sphere.
 # Also: https://www.nasa.gov/feature/goddard/2021/nasa-enters-the-solar-atmosphere
-# Note: Varies 10-20 R_sun with solar activity; 18.8 is the measured crossing
-# HELIOCENTRIC: from Sun center. NASA/APL press releases word it as altitude
-#   above the surface, but Kasper's paper says 18.4-19.7 R_sun from center.
-# Cross-checked: Claude 2026-08-02 -- Kasper et al. (worksheet_claude_constants_new.md)
-# Cross-checked: GPT 2026-08-02 -- Kasper et al. (constants_new_citation_verification_gpt.md)
+# Corrected: 2026-08-19 -- was 18.8, an altitude used as a heliocentric radius.
+#   The prose above was carried on a bare Note: line and an invented
+#   HELIOCENTRIC: label, neither of which the request builder reads, so it
+#   reached no responder. It now rides on See+ legs that do carry (L-214).
+#   The two Cross-checked legs dated 2026-08-02 certified 18.8 and were
+#   stripped with it: a check of the old value is not a check of the new one.
+# Resolved: worksheet_claude-opus-5_pilot_constants_new_20260818.jsonl constants_new.py::ALFVEN_SURFACE_RADII -- origin mismatch, value and Source replaced (L-209)
 
 
 # ============================================================

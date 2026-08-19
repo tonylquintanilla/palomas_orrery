@@ -3680,14 +3680,23 @@ if os.path.exists('data/orbit_paths.json'):
     # Restore points -- the two generations load_orbit_paths() falls back to
     # automatically when the cache is missing or corrupt. Reported here so a
     # damaged cache is recoverable without guessing what exists (L-213).
-    print("Restore points (used automatically if the cache is damaged):", flush=True)
-    for backup_path in ('data/orbit_paths.json.backup', 'data/orbit_paths.json.backup_old'):
-        if os.path.exists(backup_path):
-            backup_mb = os.path.getsize(backup_path) / (1024 * 1024)
-            backup_when = datetime.fromtimestamp(os.path.getmtime(backup_path)).strftime('%Y-%m-%d %H:%M')
-            print(f"  {backup_path}: {backup_mb:.1f} MB, saved {backup_when}", flush=True)
+    # Cache and its two restore points, newest first. save_orbit_paths()
+    # copies with shutil.copy2, which PRESERVES mtime, so each date is when
+    # that CONTENT was written rather than when the copy was taken: the live
+    # cache carries the last save, .backup the save before it, .backup_old
+    # the one before that. Printing all three together is what makes a
+    # stalled rotation visible -- two old backup dates alone cannot be told
+    # apart from a healthy cache nobody has written to lately (L-213).
+    print("Cache and restore points (date = when that content was written):", flush=True)
+    for cache_path in ('data/orbit_paths.json',
+                       'data/orbit_paths.json.backup',
+                       'data/orbit_paths.json.backup_old'):
+        if os.path.exists(cache_path):
+            cache_mb = os.path.getsize(cache_path) / (1024 * 1024)
+            cache_when = datetime.fromtimestamp(os.path.getmtime(cache_path)).strftime('%Y-%m-%d %H:%M')
+            print(f"  {cache_path}: {cache_mb:.1f} MB, written {cache_when}", flush=True)
         else:
-            print(f"  {backup_path}: none yet", flush=True)
+            print(f"  {cache_path}: none yet", flush=True)
     print("-" * 50, flush=True)
 else:
     print("\n[CACHE HEALTH SUMMARY]", flush=True)

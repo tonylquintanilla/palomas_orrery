@@ -302,7 +302,7 @@ outer_corona_info = (
 
     "* The visible structured corona (helmet streamers) extends to ~4-6 R_sun.<br>"
     "* The Alfven surface -- the true corona/solar wind boundary -- is ~10-20 R_sun.<br>"
-    "  Parker Solar Probe measured this at 18.8 R_sun on April 28, 2021.<br>"
+    f"  Parker Solar Probe measured this at {ALFVEN_SURFACE_RADII} R_sun on April 28, 2021.<br>"
     "* Beyond the Alfven surface, plasma is solar wind, not corona.<br>"
     "* This 50 R_sun shell represents the faint, extended F-corona envelope.<br><br>"
 
@@ -600,7 +600,7 @@ outer_corona_info_hover = (
     "Layer hierarchy within this shell:<br>"
     "* Visible streamer belt: 4-6 R_sun (see Streamer Belt shell)<br>"
     "* Alfven surface (corona/solar wind boundary): ~15-20 R_sun (see Alfven Surface shell)<br>"
-    "  Parker Solar Probe first crossing: 18.8 R_sun, April 28, 2021<br>"
+    f"  Parker Solar Probe first crossing: {ALFVEN_SURFACE_RADII} R_sun, April 28, 2021<br>"
     "* F-corona (dust-scattered): 3-50+ R_sun -- this shell's extent<br><br>"
 
     "* Temperature: ~1-2 million K (coronal heating paradox)<br>"
@@ -710,7 +710,9 @@ roche_limit_info_hover = (
     "* The nucleus never reached the Roche limit intact"
 )
 
-# Source: Cranmer et al. (2007); NASA Parker Solar Probe -- Alfven surface ~18.8 R_sun, solar corona boundary
+# Source: Cranmer et al. (2007) -- solar corona boundary structure
+# Source+: the Alfven surface radius itself is ALFVEN_SURFACE_RADII in
+# Source+: constants_new.py, imported here rather than retyped (L-209)
 alfven_surface_info = (
     "Sun: Alfven Surface:<br><br>"
 
@@ -719,7 +721,8 @@ alfven_surface_info = (
     "communicate back to the Sun. Beyond it, the corona becomes the solar wind.<br><br>"
 
     "* Location: ~10-20 solar radii, measured directly by NASA's Parker Solar Probe.<br>"
-    "  On April 28, 2021, Parker Solar Probe crossed inward at 18.8 R_sun (13 million km),<br>"
+    f"  On April 28, 2021, Parker Solar Probe crossed inward at {ALFVEN_SURFACE_RADII} R_sun "
+    f"({ALFVEN_SURFACE_RADII * SUN_RADIUS_KM / 1e6:.1f} million km from Sun center),<br>"
     "  spending ~5 hours inside the corona -- the first spacecraft to 'touch the Sun.'<br>"
     "* This is not a smooth sphere: it has spikes and valleys shaped by solar magnetic activity.<br>"
     "  At polar coronal holes: ~12-15 R_sun. In the streamer belt: ~17-19 R_sun.<br><br>"
@@ -745,7 +748,8 @@ alfven_surface_info_hover = (
     "The true outer boundary of the solar corona. Beyond this point, plasma can no longer<br>"
     "communicate back to the Sun -- the corona becomes the solar wind.<br><br>"
 
-    "* Measured directly: Parker Solar Probe, April 28, 2021 at 18.8 R_sun (13 million km)<br>"
+    f"* Measured directly: Parker Solar Probe, April 28, 2021 at {ALFVEN_SURFACE_RADII} R_sun "
+    f"({ALFVEN_SURFACE_RADII * SUN_RADIUS_KM / 1e6:.1f} million km from Sun center)<br>"
     "  First spacecraft to enter the corona -- 'touching the Sun' for ~5 hours.<br>"
     "* Not a smooth sphere: spikes and valleys from solar magnetic activity.<br>"
     "  Polar coronal holes: ~12-15 R_sun | Streamer belt: ~17-19 R_sun<br><br>"
@@ -915,7 +919,7 @@ hover_text_sun_and_corona = (
     '* Inner Corona (K-corona): 1-3 R_sun, ~1-3 million K<br>'
     '* Roche Limit: 3.45 R_sun -- tidal disruption threshold for comets<br>'
     '* Streamer Belt (Visible Corona): 4-6 R_sun -- eclipse white-light corona<br>'
-    '* Alfven Surface: ~18.8 R_sun -- true corona/solar wind boundary<br>'
+    f'* Alfven Surface: ~{ALFVEN_SURFACE_RADII} R_sun -- true corona/solar wind boundary<br>'
     '  (Parker Solar Probe first crossing: April 28, 2021)<br>'
     '* Extended Corona (F-corona): ~50 R_sun -- faint dust-scattered envelope<br><br>'
     'Parker Solar Probe closest approach: ~8.8 R_sun (2024)<br><br>'
@@ -924,7 +928,7 @@ hover_text_sun_and_corona = (
     'nanoflares, and magnetic reconnection -- still actively debated.<br><br>'
     'MAPS C/2026 A1 (April 2026) crossed each boundary in sequence:<br>'
     'Extended F-corona (April 2, ~33 R_sun, ~0.153 AU) -><br>'
-    'Alfven Surface (April 3 ~18:00, 18.8 R_sun, 0.087 AU) -><br>'
+    f'Alfven Surface (April 3 ~18:00, {ALFVEN_SURFACE_RADII} R_sun, {ALFVEN_SURFACE_RADII * SOLAR_RADIUS_AU:.3f} AU) -><br>'
     '<b>DISINTEGRATION (April 4 08:15, 8.33 R_sun, 0.039 AU)</b> -><br>'
     'Streamer Belt / Roche Limit / Inner K-corona: crossed by DEBRIS ONLY -><br>'
     'Perihelion (April 4 14:22, 1.23 R_sun, 0.006 AU) as a ghost.<br>'
@@ -942,7 +946,7 @@ hover_text_sun_and_corona_tooltip = (
     '* Inner Corona (K-corona): 1-3 R_sun, ~1-3 million K<br>'
     '* Roche Limit: 3.45 R_sun -- tidal disruption threshold for comets<br>'
     '* Streamer Belt (Visible Corona): 4-6 R_sun -- eclipse white-light corona<br>'
-    '* Alfven Surface: ~18.8 R_sun -- true corona/solar wind boundary<br>'
+    f'* Alfven Surface: ~{ALFVEN_SURFACE_RADII} R_sun -- true corona/solar wind boundary<br>'
     '  (Parker Solar Probe first crossing: April 28, 2021)<br>'
     '* Extended Corona (F-corona): ~50 R_sun -- faint dust-scattered envelope<br><br>'
     'Parker Solar Probe closest approach: ~8.8 R_sun (2024)<br><br>'
@@ -951,7 +955,7 @@ hover_text_sun_and_corona_tooltip = (
     'nanoflares, and magnetic reconnection -- still actively debated.<br><br>'
     'MAPS C/2026 A1 (April 2026) crossed each boundary in sequence:<br>'
     'Extended F-corona (April 2, ~33 R_sun, ~0.153 AU) -><br>'
-    'Alfven Surface (April 3 ~18:00, 18.8 R_sun, 0.087 AU) -><br>'
+    f'Alfven Surface (April 3 ~18:00, {ALFVEN_SURFACE_RADII} R_sun, {ALFVEN_SURFACE_RADII * SOLAR_RADIUS_AU:.3f} AU) -><br>'
     'DISINTEGRATION (April 4 08:15, 8.33 R_sun, 0.039 AU) -><br>'
     'Streamer Belt / Roche Limit / Inner K-corona: crossed by DEBRIS ONLY -><br>'
     'Perihelion (April 4 14:22, 1.23 R_sun, 0.006 AU) as a ghost.<br>'
@@ -1259,8 +1263,9 @@ def create_sun_roche_limit_shell():
 
 def create_sun_alfven_surface_shell():
     """
-    Alfven surface: the true outer boundary of the solar corona (~18.8 solar radii,
-    ~0.087 AU). Beyond this surface, plasma can no longer communicate back to the Sun --
+    Alfven surface: the true outer boundary of the solar corona, drawn at
+    ALFVEN_SURFACE_RADII from constants_new.py. Beyond this surface, plasma
+    can no longer communicate back to the Sun --
     the corona becomes the solar wind.
     Measured directly by NASA's Parker Solar Probe on April 28, 2021.
     MAPS C/2026 A1 crossed inward ~April 3, 2026 -- ~20 hours before disintegration.

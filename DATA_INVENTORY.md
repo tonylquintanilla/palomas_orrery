@@ -7,8 +7,8 @@ Repo copies stale/absent; this reflects the live local stores.
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
 | .vot | 4 | 295.1 MB | gaia_data_magnitude.vot (284.4 MB) | 2026-02-08 |
-| .json | 52 | 262.4 MB | orbit_paths.json (130.4 MB) | 2026-08-19 |
 | .nc | 18 | 161.1 MB | era5_clim_march_day22.nc (27.4 MB) | 2026-04-07 |
+| .json | 51 | 132.0 MB | orbit_paths.json (130.4 MB) | 2026-08-19 |
 | .backup | 4 | 130.8 MB | orbit_paths.json.backup (130.4 MB) | 2026-08-05 |
 | .backup_old | 1 | 130.4 MB | orbit_paths.json.backup_old (130.4 MB) | 2026-08-04 |
 | .csv | 15 | 34.9 MB | 3773_v3_niskin_hot001_yr01_to_hot348_yr35.csv (30.8 MB) | 2026-04-07 |
@@ -127,6 +127,6 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 | repo | served size | ceiling | headroom | used |
 |---|---|---|---|---|
 | gallery | 438.1 MB | 1024 MB | 586 MB | 42.8% |
-| orrery (gitignored data) | 1.1 GB | n/a (not served) | -- | -- |
+| orrery (gitignored data) | 965.3 MB | n/a (not served) | -- | -- |
 
 Note: orrery data is local/gitignored. If orbit cache files are pushed to either repo for web serving, re-run this inventory to update headroom.

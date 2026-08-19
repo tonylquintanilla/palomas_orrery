@@ -1501,7 +1501,8 @@ def get_comet_disintegration_preset(obj_name):
 
     Source: SOHO/LASCO (CCOR-1) Event Report 2026-04;
             Parker Solar Probe Alfven boundary data (2021).
-            8.33 R_sun confirmed between Alfven surface (~18.8 R_sun) and
+            8.33 R_sun confirmed between the Alfven surface (see
+            ALFVEN_SURFACE_RADII in constants_new.py) and
             Streamer Belt (~4-6 R_sun). Perihelion tp 14:22 UTC April 4 confirmed.
     """
     DISINTEGRATION_PRESETS = {

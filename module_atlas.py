@@ -230,6 +230,8 @@ ROLE_MAP = {
     'measure_animation_html':                 'devtool',
     'measure_perframe_elements':              'devtool',
     'module_atlas':                           'devtool',
+    'patch_L209_2_alfven_migration':          'devtool',
+    'patch_L213_3_cache_line_and_close':      'devtool',
     'provenance_history':                     'devtool',
     'provenance_scanner':                     'devtool',
     'skills_index':                           'devtool',

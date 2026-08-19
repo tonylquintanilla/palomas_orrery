@@ -221,7 +221,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*125 live items; 113 need attention (`!`); 124 RICE-scored; 83 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*125 live items; 113 need attention (`!`); 124 RICE-scored; 84 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -237,6 +237,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
+| ! | L-214 | The request builder drops the comment lines that matter | OPEN | 3.8 | 2026-08-19 |
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
 | ! | L-210 | Pilot citation findings -- four rows in constants_new.py | OPEN | 3.6 | 2026-08-19 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-06 |
@@ -244,7 +245,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-08-07 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
-| ! | L-213 | Orbit cache backup fires on IMPORT, not on cache write | OPEN | 2.2 | 2026-08-19 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
@@ -457,6 +457,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-116 | New skill: gallery-cache-builder (Move 2 of the skills update) | DONE | 2.5 | 2026-07-12 |
 |  | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | DONE | 2.2 | 2026-07-15 |
 |  | L-202 | JSON worksheet format, with markdown as fallback | DONE | 2.2 | 2026-08-18 |
+|  | L-213 | Orbit cache backup fires on IMPORT, not on cache write | DONE | 2.2 | 2026-08-19 |
 |  | L-063 | Orrery GUI Note text update | DONE | 2.0 | 2026-07-17 |
 |  | L-072 | Gallery Studio WYSIWYG preview -- render through the real index.html viewer | DONE | 2.0 | 2026-06-26 |
 |  | L-169 | Gallery/Studio track -- repo structure reference | DONE | 1.9 | 2026-07-28 |
@@ -2532,14 +2533,87 @@ pointing at it, so name the pilot's return by hand at dispatch time.
   Kasper et al. 2021 does not itself print 18.8 R_sun. That figure is
   from the press release, so the row cites the paper for a number only
   the release states.
+- **Confirmed, and the render WAS wrong.** `shell_configs.py` builds the
+  Alfven shell as `ALFVEN_SURFACE_RADII * SOLAR_RADIUS_AU`, a sphere
+  centred on the Sun, so the constant is consumed heliocentrically and
+  the shell rendered one solar radius small.
+- **The correction was ALREADY IN THE FILE, on lines the check could not
+  see.** Two comment lines under the constant read "HELIOCENTRIC: from
+  Sun center ... Kasper's paper says 18.4-19.7 R_sun from center." A
+  previous session found the distinction, wrote the paper's own range
+  down, and left the value at 18.8 anyway. See L-214: those lines rode
+  on a bare `Note:` and an invented `HELIOCENTRIC:` label, neither of
+  which the request builder reads, so no responder ever saw them.
+- **Resolved at 19.7** (Tony, 2026-08-19), sourced to the PRL body text
+  rather than to the press release. Two independent routes agree: the
+  paper gives the sub-Alfvenic interval as 19.7 to 18.4 solar radii from
+  the center of the Sun, and converting the release's 18.8 R_sun of
+  altitude gives 19.8. Taking the paper drops the release as an
+  authority, which also answers GPT's separate PARTIAL: the paper does
+  not itself print 18.8.
+- **The two `# Cross-checked:` legs dated 2026-08-02 were stripped with
+  the value.** They certified 18.8. A check of the old value is not a
+  check of the new one -- the exact ride-along the skill warns about.
+  No new leg was written from the pilot: Claude returned APPROX and GPT
+  PARTIAL, neither of which earns one, and Gemini's CONFIRMED rests on
+  a note reading "Recollection of the Parker Solar Probe 8th encounter
+  results."
+- **As built** (`patch_L209_2_alfven_migration.py`). The value and the
+  whole explanation live in `constants_new.py`; every display site now
+  READS the constant rather than holding a copy. 12 typed instances
+  across four modules became imports: 8 interpolations in
+  `solar_visualization_shells.py`, 1 in `comet_visualization_shells.py`,
+  1 in `info_dictionary.py` (which gained its first import), and 2 sites
+  that cannot read a value -- a docstring and a `# Source:` comment --
+  had the figure dropped and now point at the constant. The derived
+  0.087 AU and 13 million km figures are computed from the constant, so
+  they moved with it.
+- **Found and NOT touched, deliberately.** The same display strings hold
+  other typed constants -- `ROCHE_LIMIT_RADII` as "3.45 R_sun", the
+  streamer belt as both "4-6" and "6.0". Migrating them is L-181 and
+  L-191, not this item.
 **Note:** RICE is Claude's proposal, unratified.
-**Gap:** unverified whether the shell renders from Sun centre. That
-check comes first and may close this as comment-only.
+**Gap:** none. Mode 5 outstanding: the Alfven shell should render one
+solar radius larger, still nested inside the 50 R_sun outer corona.
 **Ref:** `documentation/PILOT_CONVERGENCE_20260819.md` Part 4;
 `documentation/worksheets/`
 `worksheet_claude-opus-5_pilot_constants_new_20260818.jsonl` R12;
-L-206 (the filename convention these were renamed to obey);
-L-207 (the run that produced it).
+L-214 (the builder gap this exposed); L-181 and L-191 (the remaining
+shadow constants); L-207 (the run that produced it).
+
+#### [L-214] The request builder drops the comment lines that matter
+<!-- L:214 status:OPEN upd:2026-08-19 section:A flag: rice:3/3/85/2 -->
+- **Found by L-209, 2026-08-19.** The dispatched row for
+  `ALFVEN_SURFACE_RADII` carried two context lines. The three comment
+  lines that stated the answer -- a `# Note:` and two under an invented
+  `# HELIOCENTRIC:` label -- were dropped silently, and the worksheet
+  that resulted looked complete.
+- **The mechanism.** `worksheet_keys.py` defines `VERDICTED_LEG =
+  'Source'` and `CONTEXT_LEGS = ('Ref', 'Also', 'See', 'Derived',
+  'Calculation')`. Anything else closes the run. An unrecognised LABEL
+  is not an unmarked continuation either, so the builder's refusal path
+  never fires: the text is not joined, not reported, and not refused.
+- **This is the Visibility Convention's own case.** A failure that
+  reaches no reader should REFUSE, not proceed. The builder refuses on
+  unmarked continuation text for exactly this reason and then walks past
+  a whole dropped label.
+- **It bears on the pilot result.** The traps did not spring, but at
+  least one row was checked against a redacted version of itself and
+  nothing in the returns could have said so. Three models spent a
+  dispatch rediscovering what the row already said, and the leg with the
+  least to work with confirmed the wrong value.
+- **Not yet decided:** whether the fix is to widen the recognised label
+  set, to refuse on any unrecognised label under a claim, or to report
+  dropped labels into the worksheet where a responder can name them. The
+  Visibility Convention argues for refusing, and the count of affected
+  rows across the corpus is unmeasured.
+**Note:** RICE is Claude's proposal, unratified.
+**Gap:** unmeasured -- how many rows in the 23-row pilot corpus, and how
+many across `constants_new.py`, carry a label the builder does not read.
+That count comes before the design.
+**Ref:** `worksheet_keys.py` `LEG_RE` / `legs_of` / `continues_a_leg`;
+L-209 (the row that exposed it); L-203 (the Visibility Convention);
+L-204; L-207.
 
 #### [L-210] Pilot citation findings -- four rows in constants_new.py
 <!-- L:210 status:OPEN upd:2026-08-19 section:A flag: rice:3/3/80/2 -->
@@ -2639,58 +2713,6 @@ the token exists.
 `documentation/PILOT_CONVERGENCE_20260819.md` Part 5; L-207.
 
 ## PENDING ACTION (Tony-side)
-
-#### [L-213] Orbit cache backup fires on IMPORT, not on cache write
-<!-- L:213 status:OPEN upd:2026-08-19 section:A flag: rice:2/3/75/2 -->
-- **Found by L-212 on its second day.** The FILES WRITTEN block
-  reported `data/orbit_paths_backup.json` rewritten with identical
-  bytes on every maintenance run. Tony asked what was triggering it,
-  since the intent is for the backup to be rewritten when the CACHE is
-  updated.
-- **The trigger, traced.** `create_orbit_backup()` is called at MODULE
-  LEVEL in `palomas_orrery.py:3649` -- not inside a function, not
-  behind an `if __name__` guard. `test_reset_completeness.py:39` does
-  `importlib.import_module('palomas_orrery')`, and that test is in the
-  maintenance suite. So importing the orrery runs the backup, and the
-  suite imports the orrery every run. The cache is never touched; only
-  the module is loaded.
-- **Why this is more than a pointless rewrite.** The backup is
-  `shutil.copy` of `data/orbit_paths.json` over
-  `data/orbit_paths_backup.json`, unconditional. If the cache is ever
-  corrupted and ANYTHING imports the orrery afterwards -- a GUI
-  launch, a test run, a maintenance run -- the good backup is
-  overwritten with the corrupted file. The window between corruption
-  and loss is one import, and the maintenance suite makes an import
-  routine.
-- **Nothing has gone wrong yet**, and that is the shape of the risk
-  rather than a reason to discount it: the defect costs nothing until
-  the cache goes bad once.
-- **Two repairs, different sizes.** The SMALL one: make the copy
-  conditional on the source differing from the existing backup, which
-  stops the rewrite and nothing else. The REAL one: back up when the
-  cache is WRITTEN, which means moving the call out of module import
-  and next to whatever saves `orbit_paths.json` (see
-  `orbit_data_manager.py`, `ORBIT_PATHS_FILE` and the
-  `save_orbit_paths` path), and keeping a copy that a later import
-  cannot clobber.
-- **Design pass first** (Tony, 2026-08-19). This touches
-  `palomas_orrery.py`, which is Mode 1 territory -- targeted snippets,
-  never a full-file rewrite -- and moving a module-level call changes
-  startup behaviour for the GUI as well as the tests. Iterate the
-  design in conversation before any code.
-- **Confirm the dispatch before editing the leaf.** The same rule that
-  opens L-209. `create_orbit_backup()` lives in
-  `palomas_orrery_helpers.py:791` and is called from exactly one
-  place; check that is still true at the time of the fix rather than
-  trusting this note.
-**Note:** RICE is Claude's proposal, unratified.
-**Gap:** unmeasured -- how large the cache is, how often it is written
-in a session, and whether any other module-level side effect in
-`palomas_orrery.py` fires on the same import. The third question is
-the one worth asking early, because a module-level call that runs
-during a test suite is a pattern rather than an instance.
-**Ref:** L-212 (the block that surfaced it); `palomas_orrery.py:3649`;
-`palomas_orrery_helpers.py:791`; `test_reset_completeness.py:39`.
 
 ## C. RECONCILED LEDGER -- DONE (closed; for the record, do not re-do)
 
@@ -5503,6 +5525,102 @@ verdict caused); L-202 (the JSON schema it reads); L-206 (the return
 filenames a review will come back under); `documentation/
 DESIGN_20260818_citation_prompt.md`; `documentation/patch_L207_1_
 citation_prompt.py`.
+
+#### [L-213] Orbit cache backup fires on IMPORT, not on cache write
+<!-- L:213 status:DONE upd:2026-08-19 section:C flag: rice:2/3/75/2 -->
+- **Found by L-212 on its second day.** The FILES WRITTEN block
+  reported `data/orbit_paths_backup.json` rewritten with identical
+  bytes on every maintenance run. Tony asked what was triggering it,
+  since the intent is for the backup to be rewritten when the CACHE is
+  updated.
+- **The trigger, traced.** `create_orbit_backup()` is called at MODULE
+  LEVEL in `palomas_orrery.py:3649` -- not inside a function, not
+  behind an `if __name__` guard. `test_reset_completeness.py:39` does
+  `importlib.import_module('palomas_orrery')`, and that test is in the
+  maintenance suite. So importing the orrery runs the backup, and the
+  suite imports the orrery every run. The cache is never touched; only
+  the module is loaded.
+- **Why this is more than a pointless rewrite.** The backup is
+  `shutil.copy` of `data/orbit_paths.json` over
+  `data/orbit_paths_backup.json`, unconditional. If the cache is ever
+  corrupted and ANYTHING imports the orrery afterwards -- a GUI
+  launch, a test run, a maintenance run -- the good backup is
+  overwritten with the corrupted file. The window between corruption
+  and loss is one import, and the maintenance suite makes an import
+  routine.
+- **Nothing has gone wrong yet**, and that is the shape of the risk
+  rather than a reason to discount it: the defect costs nothing until
+  the cache goes bad once.
+- **Two repairs, different sizes.** The SMALL one: make the copy
+  conditional on the source differing from the existing backup, which
+  stops the rewrite and nothing else. The REAL one: back up when the
+  cache is WRITTEN, which means moving the call out of module import
+  and next to whatever saves `orbit_paths.json` (see
+  `orbit_data_manager.py`, `ORBIT_PATHS_FILE` and the
+  `save_orbit_paths` path), and keeping a copy that a later import
+  cannot clobber.
+- **Design pass first** (Tony, 2026-08-19). This touches
+  `palomas_orrery.py`, which is Mode 1 territory -- targeted snippets,
+  never a full-file rewrite -- and moving a module-level call changes
+  startup behaviour for the GUI as well as the tests. Iterate the
+  design in conversation before any code.
+- **Confirm the dispatch before editing the leaf.** The same rule that
+  opens L-209. `create_orbit_backup()` lives in
+  `palomas_orrery_helpers.py:791` and is called from exactly one
+  place; check that is still true at the time of the fix rather than
+  trusting this note.
+- **As built** (`patch_L213_2_remove_startup_backup.py`, run 2026-08-19;
+  pushed at `81108b2f`). `create_orbit_backup()` deleted from
+  `palomas_orrery_helpers.py`, its module-level call and import removed
+  from `palomas_orrery.py`, and the startup summary extended to name the
+  restore points. `data/orbit_paths_backup.json` deleted by hand.
+- **The risk statement above was WRONG, and the correction is the point
+  of this entry.** It said a corrupted cache would overwrite the good
+  backup on the next import. That file was never a recovery source.
+  `load_orbit_paths()` reads `data/orbit_paths.json.backup` and
+  `.backup_old` and nothing else; a repo-wide grep found the only
+  mentions of `orbit_paths_backup.json` were the two lines that wrote
+  it. So the defect was a pointless write of a file no code read, not a
+  live threat to recovery.
+- **The repair L-213 called "the real one" already existed.**
+  `save_orbit_paths()` writes through a temp file, re-reads it to confirm
+  the JSON parses, rotates `.backup` into `.backup_old`, copies the
+  current cache to `.backup`, and refuses any save that shrinks the cache
+  by more than 5 percent. Moving the import-time copy next to the write
+  would have added a third copy of a job already done twice. Tony's
+  ruling, 2026-08-19: two files, not three, and delete the odd one.
+- **Mode 5 confirmed** on the launch log of 2026-08-19: 1,501 orbits
+  loaded, both restore points printed, no `[STARTUP]` backup line, no
+  file written.
+- **The fix's own output then exposed a second defect, in the block this
+  item added.** The two restore points read 130.4 MB dated August 5 and
+  August 4, which looks two weeks stale and is not. `shutil.copy2`
+  preserves mtime, so a backup's date is when its CONTENT was written,
+  not when the copy was taken -- `.backup` carries the previous save,
+  `.backup_old` the one before that, and the most recent save's date
+  lives only on the live cache, which the block did not print. Two
+  readings fitted the same screen: no cache write in two weeks
+  (expected during provenance work) or writes happening without
+  rotation (a defect). Fixed by `patch_L213_3_cache_line_and_close.py`,
+  which prints the live cache alongside its two restore points and
+  relabels the timestamp. Success now carries evidence: three dates read
+  as a sequence and a stalled rotation announces itself.
+- **The module-level answer to the Gap question.** `palomas_orrery.py`
+  has no `if __name__ == "__main__"` guard anywhere -- the whole file
+  runs on import, including the working-directory change and
+  `root.mainloop()`. `test_reset_completeness.py` survives that only by
+  replacing `tk.Misc.mainloop` with a no-op before importing.
+  `create_orbit_backup()` was the ONLY module-level statement that wrote
+  into `data/`. The missing guard is a separate problem and is NOT
+  closed by this item.
+**Note:** RICE is Claude's proposal, unratified.
+**Gap:** the missing `__main__` guard, deliberately left open (see the
+last bullet). Not opened as its own item pending Tony's call on whether
+it is worth the startup-behaviour change to the GUI and the tests.
+**Ref:** L-212 (the block that surfaced it); `orbit_data_manager.py`
+`save_orbit_paths` / `load_orbit_paths` (the real backup chain);
+`documentation/patch_L213_2_remove_startup_backup.py`;
+`documentation/patch_L213_3_cache_line_and_close.py`.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
