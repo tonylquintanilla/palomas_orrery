@@ -10,25 +10,23 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 130  
-**Total Lines of Code (non-blank):** 103,097  
-**Total Public Functions/Classes:** 1,160
+**Total Python Files:** 129  
+**Total Lines of Code (non-blank):** 103,030  
+**Total Public Functions/Classes:** 1,159
 
 ## Classification Coverage
 
-**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L210_2_mark_continuations.py`
-- `patch_L221_1_master_plan_sequencing.py`
+- `patch_L222_1_docstring_lines_in_change_report.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 - `worksheet_keys.py`
 
-**Undetermined domain (2).** No valid `Domain:` tag.
+**Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L210_2_mark_continuations.py`
-- `patch_L221_1_master_plan_sequencing.py`
+- `patch_L222_1_docstring_lines_in_change_report.py`
 
 
 ---
@@ -194,7 +192,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `add_docstrings.py` | Two related tools for module-level docstrings. (1,210 lines) |
-| `constants_change_report.py` | - what moved in constants_new.py, and why. (263 lines) |
+| `constants_change_report.py` | - what moved in constants_new.py, and why. (336 lines) |
 | `convert_hot_ph_to_json.py` | Convert HOT ocean pH data to JSON format Manual converter for ocean acidification visualization (199 lines) |
 | `create_cache_backups.py` | One-shot script to create timestamped backups of star data caches. (10 lines) |
 | `create_ephemeris_database.py` | Create satellite_ephemerides.json from multiple sources (245 lines) |
@@ -231,8 +229,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L210_2_mark_continuations.py` | Built on eee4cc61a66607c2533549361c11be6af0aec15d at https://github.com/tonylquintanilla/palomas_orrery (branch main). Written August 20, 2026 with Anthropic's Claude Opus 5. (179 lines) |
-| `patch_L221_1_master_plan_sequencing.py` | Built on eee4cc61a66607c2533549361c11be6af0aec15d at https://github.com/tonylquintanilla/palomas_orrery (branch main). Written August 20, 2026 with Anthropic's Claude Opus 5. (381 lines) |
+| `patch_L222_1_docstring_lines_in_change_report.py` | Built on 762aa5dde5aea87cc6e513fc4841c6937366a6b4 at https://github.com/tonylquintanilla/palomas_orrery (branch main). Written August 20, 2026 with Anthropic's Claude Opus 5. (420 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |

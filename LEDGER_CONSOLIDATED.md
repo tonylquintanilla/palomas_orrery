@@ -4,6 +4,8 @@ Tony Quintanilla, PE | Claude | Palomas Orrery Project
 Consolidated: June 7, 2026 from handoff v28; supersedes all prior in-handoff
 ledgers. Current HEAD: see git log (repo is the source of truth).
 Module updated: June 2026 with Anthropic's Claude Sonnet 4.6, Opus 4.8 + Claude Fable 5
+Module updated: August 20, 2026 with Anthropic's Claude Opus 5 (L-222:
+docstring lines in the constants change report), built on 762aa5dd.
 Module updated: August 20, 2026 with Anthropic's Claude Opus 5 (L-221:
 master plan as sequencing authority; L-214 correction and scoping),
 built on 3586970d.
@@ -224,7 +226,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*129 live items; 117 need attention (`!`); 128 RICE-scored; 87 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*129 live items; 117 need attention (`!`); 128 RICE-scored; 88 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -434,6 +436,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-117 | Offline suite red at HEAD: Encke id drift (2P -> 90000091) not mirrored in the mock | DONE | 34.2 | 2026-07-12 |
 |  | L-114 | objects_config.json stranded by the atomic swap; also blocks crash-recovery (gallery builder) | DONE | 16.2 | 2026-07-27 |
 |  | L-182 | Mars Hill sphere -- cross-check correction lost across the config pipeline | DONE | 12.0 | 2026-08-05 |
+|  | L-222 | The constants change report fails on every currency stamp | DONE | 11.4 | 2026-08-20 |
 |  | L-198 | Claim vocabulary: the units the scanner could not see | DONE | 10.2 | 2026-08-17 |
 |  | L-217 | The Part A / Part B dispatch split is a check that cannot fail | DONE | 8.1 | 2026-08-19 |
 |  | L-207 | The citation prompt -- the checker asks the fuzzy question | DONE | 7.6 | 2026-08-18 |
@@ -6181,6 +6184,56 @@ Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
 `skills/orrery-coding-conventions/SKILL.md` credit lines (the
 attribution convention this generalises); L-219 (the other open
 safe-file-editing gap, now targeting 1.6).
+
+#### [L-222] The constants change report fails on every currency stamp
+<!-- L:222 status:DONE upd:2026-08-20 section:C flag: rice:3/2/95/0.5 -->
+- **Found 2026-08-20, immediately after L-220 landed.**
+  `constants_change_report.py` parses three line shapes: `NAME =
+  <number>`, `'Key': <number>`, and anything opening with `#`. A
+  module DOCSTRING line is none of them, so a changed docstring line
+  carrying a digit went to the UNPARSED bucket and exited 1.
+- **Which made it a permanent failure, not an occasional one.** Stamp
+  What You Change requires the docstring to move in the same
+  transaction as any edit to the file, and every `Module updated:
+  <date>` stamp carries digits. So the checker was going to fail on
+  every future patch to `constants_new.py`, on a line that is not a
+  value edit and never could be.
+- **Two rules collided and neither was wrong.** L-220 is right that
+  the stamp must move with the body. The report is right that a
+  changed line it cannot read must not report clean. The defect was
+  that the report had no third category for a line that is neither a
+  value nor evidence about one.
+- **A checker that ALWAYS fails is the mirror of one that CANNOT
+  fail.** Both are unread within a week, and neither announces the
+  thing it was built to announce. That is why this was fixed the same
+  day rather than filed: the cost is not the red line, it is the
+  habit of scrolling past it.
+- **Fixed by DERIVING the docstring line set, not by matching a stamp
+  pattern.** The tool reads the module docstring at the base revision
+  (`git show <base>:constants_new.py`) and in the working copy, via
+  `ast.get_docstring` -- the same call `module_atlas.py` uses -- and
+  treats a changed line as a docstring line if it appears in either.
+  A stamp pattern would have drifted the first time a stamp was
+  worded differently. This cannot, because it reads the thing it
+  describes. Both revisions are needed because a stamp edit changes a
+  line on both sides of the diff.
+- **Three properties that keep the fix honest.** Value parsing runs
+  FIRST, so the docstring test can only reclassify a line already
+  bound for the unparsed bucket and can never swallow a value edit. A
+  docstring edit does NOT set `comment_moved`, because the module
+  stamp documents no particular constant and crediting one with it
+  would be a false clear. And the docstring lines are COUNTED AND
+  PRINTED rather than dropped, with a note saying which revisions
+  were actually read -- a fallback to the working copy alone says so.
+**Note:** RICE is Claude's proposal, unratified.
+**Gap:** none. Built and verified the same day at `762aa5dd`:
+the stamp is accepted, and a mutation putting a real value edit in an
+unreadable shape still fails the run.
+**Ref:** `constants_change_report.py` `docstring_lines` /
+`read_changes`; L-220 (Stamp What You Change, the rule it collided
+with); L-210 (the patch whose stamp exposed it); the resident A Check
+That Cannot Fail Is Not Passing gate, of which this is the mirror
+case.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

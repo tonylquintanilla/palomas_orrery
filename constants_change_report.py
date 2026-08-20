@@ -77,6 +77,7 @@ Module created: August 2026 with Anthropic's Claude Opus 5.
 """
 
 import os
+import ast
 import re
 import subprocess
 import sys
@@ -94,6 +95,58 @@ DICT_RE = re.compile(
     r'(-?\d+\.?\d*(?:[eE][-+]?\d+)?)\s*,?\s*(?:#.*)?$')
 
 COMMENT_RE = re.compile(r'^\s*#')
+
+
+def docstring_lines(here, base):
+    """Every line of TARGET's module docstring, at base and as it is now.
+
+    Returns (set_of_stripped_lines, note). The note says what was
+    actually read, so a caller can print it rather than infer it.
+
+    Why this exists (L-222, 2026-08-20). A module docstring line is
+    not an assignment and not a comment, so before this it fell into
+    the UNPARSED bucket and failed the run. Since Stamp What You
+    Change requires the docstring to move on EVERY edit to this file,
+    that made the checker fail permanently on a line that is not a
+    value edit. A checker that always fails is as unread as one that
+    cannot fail.
+
+    The set is DERIVED from the real docstrings rather than matched
+    against a stamp pattern. A pattern would drift the first time a
+    stamp was worded differently; this cannot, because it reads the
+    thing it describes. Both revisions are read because a stamp edit
+    changes a line on BOTH sides of the diff.
+    """
+    lines = set()
+    notes = []
+
+    def collect(source, label):
+        try:
+            doc = ast.get_docstring(ast.parse(source), clean=False)
+        except Exception as exc:
+            notes.append('%s unreadable (%s)' % (label, exc.__class__.__name__))
+            return 0
+        if not doc:
+            notes.append('%s has no docstring' % label)
+            return 0
+        found = set(l.strip() for l in doc.split('\n') if l.strip())
+        lines.update(found)
+        notes.append('%s %d line(s)' % (label, len(found)))
+        return len(found)
+
+    ok, shown = git(['show', '%s:%s' % (base, TARGET)], here)
+    if ok:
+        collect(shown, 'base')
+    else:
+        notes.append('base UNAVAILABLE -- working copy only')
+
+    try:
+        with open(os.path.join(here, TARGET), 'rb') as handle:
+            collect(handle.read().decode('utf-8', 'replace'), 'working')
+    except OSError as exc:
+        notes.append('working copy unreadable (%s)' % exc)
+
+    return lines, '; '.join(notes)
 
 
 def git(args, cwd):
@@ -138,7 +191,7 @@ def split_hunks(diff_text):
     return hunks
 
 
-def read_changes(diff_text):
+def read_changes(diff_text, docstrings=frozenset()):
     """Value changes, additions, removals, and everything not understood.
 
     Provenance is judged per HUNK: if the hunk carrying a value change
@@ -161,11 +214,13 @@ def read_changes(diff_text):
     like no change at all.
     """
     changed, added, removed, unparsed = [], [], [], []
+    docstring_seen = []
 
     for hunk in split_hunks(diff_text):
         old_vals, new_vals = {}, {}
         comment_moved = False
         hunk_unparsed = []
+        hunk_docstring = []
         for line in hunk:
             if not line or line[0] not in '+- ':
                 continue
@@ -177,6 +232,15 @@ def read_changes(diff_text):
                 continue
             parsed = parse_line(body)
             if parsed is None:
+                # Value parsing ran FIRST, so this test can only
+                # reclassify a line already bound for the unparsed
+                # bucket -- it can never swallow a real value edit.
+                # Note it does NOT set comment_moved: the module's
+                # currency stamp documents no particular constant,
+                # and crediting one with it would be a false clear.
+                if body.strip() in docstrings:
+                    hunk_docstring.append(sign + body.rstrip())
+                    continue
                 if any(ch.isdigit() for ch in body) and body.strip():
                     hunk_unparsed.append(sign + body.rstrip())
                 continue
@@ -184,6 +248,7 @@ def read_changes(diff_text):
             (old_vals if sign == '-' else new_vals)[name] = value
 
         unparsed.extend(hunk_unparsed)
+        docstring_seen.extend(hunk_docstring)
 
         moved_here = [n for n in set(old_vals) & set(new_vals)
                       if old_vals[n] != new_vals[n]]
@@ -202,7 +267,7 @@ def read_changes(diff_text):
             else:
                 removed.append((name, before))
 
-    return changed, added, removed, unparsed
+    return changed, added, removed, unparsed, docstring_seen
 
 
 def main():
@@ -253,11 +318,17 @@ def main():
         print('  No changes to %s since %s.' % (TARGET, base))
         return 0
 
-    changed, added, removed, unparsed = read_changes(out)
+    docstrings, doc_note = docstring_lines(here, base)
+    changed, added, removed, unparsed, doc_lines = read_changes(
+        out, docstrings)
 
     if not (changed or added or removed or unparsed):
         print('  %s changed, but no numeric value moved.' % TARGET)
-        print('  (Comments, formatting, or non-numeric edits only.)')
+        print('  (Comments, docstring stamp, formatting, or other'
+              ' non-numeric edits only.)')
+        if doc_lines:
+            print('  %d of the changed line(s) are module docstring text'
+                  ' (%s).' % (len(doc_lines), doc_note))
         return 0
 
     bare, unclear = [], []
@@ -294,6 +365,18 @@ def main():
             print('      %s' % line[:66])
         if len(unparsed) > 10:
             print('      ... and %d more' % (len(unparsed) - 10))
+        print()
+
+    if doc_lines:
+        print('  %d changed line(s) are module docstring text, not value'
+              % len(doc_lines))
+        print('  edits -- the currency stamp L-220 requires. Read from the'
+              ' docstring')
+        print('  itself, not matched against a pattern: %s.' % doc_note)
+        for line in doc_lines[:6]:
+            print('      %s' % line[:66])
+        if len(doc_lines) > 6:
+            print('      ... and %d more' % (len(doc_lines) - 6))
         print()
 
     print('-' * 70)

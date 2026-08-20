@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: August 20, 2026
-Files scanned: 128
+Files scanned: 129
 Total findings: 1033
 Constants: 108 | Dicts: 38 | Display strings: 887
 
@@ -19,12 +19,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260820T231922Z | `762aa5d` | 129 | 1033 | 292 | 626 | 113 | 2 |
 | 20260820T225549Z | `eee4cc6` | 128 | 1033 | 292 | 626 | 113 | 2 |
 | 20260820T215945Z | `3586970` | 128 | 1033 | 292 | 626 | 113 | 2 |
 | 20260820T215806Z | `3586970` | 128 | 1033 | 292 | 626 | 113 | 2 |
 | 20260820T162813Z | `ef3bd13` | 128 | 1033 | 292 | 626 | 113 | 2 |
 | 20260820T161029Z | `50438c6` | 129 | 1033 | 292 | 626 | 113 | 2 |
-| 20260820T151729Z | `f603be3` | 130 | 1033 | 292 | 626 | 113 | 2 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
