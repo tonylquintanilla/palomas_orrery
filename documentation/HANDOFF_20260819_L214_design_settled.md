@@ -2,8 +2,10 @@
 
 **Built on `f603be381d447137a45f59310157391d2ce2ad9a` at
 https://github.com/tonylquintanilla/palomas_orrery (branch main).
-Gallery unchanged at `8a4aa41268ed9efadea9ad6b40fabe880ce8bef8` at
-https://github.com/tonylquintanilla/tonyquintanilla.github.io.**
+Gallery at `109162bbb8d291bce615d888557498a9342d4642` at
+https://github.com/tonylquintanilla/tonyquintanilla.github.io -- moved
+by a fetch Tony ran BY HAND at the start of the session, not by this
+session's work and not automatically.**
 
 One patch was delivered after that anchor was read and is expected to
 land in the commit carrying this file:
@@ -31,19 +33,45 @@ builder work.** [CRITICAL, Stale Skill = Stop.] Same shape, same reason.
 Bumped 1.3 -> 1.4 earlier in this session and reinstalled. The manifest
 and the repo copy at HEAD both say 1.4.
 
-Two pending skill confirmations is one more than this project usually
-carries, and the previous session deliberately held one back to avoid
-exactly that. It is acceptable here because the gate is per-skill and
-load-triggered: each fires independently when its own skill loads, so
-they do not compound. Discharge whichever loads first; neither blocks
-the other.
+**2b. Confirm the loaded `safe-file-editing` reads 1.5 before editing
+existing files.** [CRITICAL, Stale Skill = Stop.] Bumped 1.4 -> 1.5 in
+this session's last patch, carrying Stamp What You Change (L-220). This
+one fires on nearly any build work, so it will almost certainly be the
+first of the three to load.
 
-**3. Archive `patch_L217_1_two_dispatch_rule_and_close.py` to
-`documentation/`** once run. The maintenance run does this
-automatically; confirm rather than assume.
+THREE pending skill confirmations is two more than this project usually
+carries, and the previous session deliberately held one back to avoid
+even two. It is acceptable because the gate is per-skill and
+load-triggered: each fires independently when its own skill loads, so
+they do not compound. Discharge whichever loads first; none blocks the
+others. It is still worth noticing that the count grew in a session that
+had already been declared closed.
+
+**3. DISCHARGED.** `patch_L217_1_two_dispatch_rule_and_close.py` is
+archived to `documentation/` and gone from the root, confirmed at
+`50438c65`.
 
 **4. Do not run the gallery builder with `--commit` while L-216 is
-open.** Unchanged from the previous handoff. The discard-and-re-run
+open.** Unchanged, and L-216 FIRED AGAIN on 2026-08-20 --
+`[RECOVER] could not remove retained data/solar-system.prev (WinError 5
+Access is denied)`, quarantined as `solar-system.quarantine_
+20260820T151459Z`, run completed with 12 objects. That is the harmless
+victim of the two, as L-216 predicts.
+
+**Tony's working practice around this, recorded because it is an
+operational decision and not an accident.** He runs the gallery fetch
+BY HAND at the start of a session, deliberately first thing, for two
+reasons: so it does not get forgotten later, and so that if the swap
+fails he still has room to re-run it -- which is the discard-and-re-run
+recovery in `gallery-cache-builder` 1.4, and which he exercised the day
+before.
+
+**A reading trap in that log line, for whoever meets it next.** The run
+stamp says `run 20260820T151459Z (nightly)`. That word names the
+builder's MODE, not its trigger. A manually started run in nightly mode
+prints exactly what a scheduled one prints. Do not infer from the log
+that nothing human started it -- Claude did infer that in this session
+and Tony corrected it. The discard-and-re-run
 recovery depends on nothing reaching the remote until Tony commits by
 hand. That rule now lives in `gallery-cache-builder` 1.4.
 
@@ -163,6 +191,20 @@ rule from L-216, with its three safety conditions.
 **`provenance-discipline` 2.5 -> 2.6.** The Two-Dispatch Rule
 [CRITICAL], from L-217.
 
+**`safe-file-editing` 1.4 -> 1.5, and L-220 opened and closed.** After
+the session was declared over, Tony raised that this project updates
+document BODIES more reliably than it updates their anchors, dates and
+module descriptions -- the master plans confirm it, one carrying no
+anchor at 2010 lines and another an anchor six weeks stale. Claude
+proposed a session-start anchor check; Tony's own observation kills it,
+because if anchors are updated only sometimes then a mismatch cannot
+distinguish a stale document from an un-restamped one. Claude then
+proposed a generated currency stamp. Tony's rule is better than both:
+the patch that changes a file updates that file's currency block in the
+same transaction, names the model, and prints what it stamped. It cannot
+drift, because there is no second step to forget. Recorded as Stamp What
+You Change; L-219's target version rebased to 1.6.
+
 ---
 
 ## Key documents
@@ -180,7 +222,7 @@ rule from L-216, with its three safety conditions.
 | `documentation/patch_L214_2_rationale_and_L219.py` | As-run. |
 
 Skills that fire on this work: `provenance-discipline` (2.6),
-`safe-file-editing` (1.4), `ledger-and-session-records` (1.7),
+`safe-file-editing` (1.5), `ledger-and-session-records` (1.7),
 `orrery-coding-conventions` (1.4), `gallery-cache-builder` (1.4).
 Compare each against the manifest at load.
 
@@ -232,9 +274,10 @@ fresh-chat rule.
 
 - **(do)** Run `patch_L217_1_two_dispatch_rule_and_close.py`, then
   `ledger_index.py`, then `skills_index.py`. Confirm the archive.
-- **(do)** Reinstall `provenance-discipline` at Settings > Skills.
+- **(do)** Reinstall `provenance-discipline` and `safe-file-editing` at
+  Settings > Skills.
 - **(decide)** L-219: which of three options for expressing a
-  cross-handle run order.
+  cross-handle run order. Lands as `safe-file-editing` 1.6.
 - **(decide)** L-211 UNKNOWN verdict token: designed, unbuilt, unchanged
   this session.
 
@@ -256,5 +299,6 @@ or with the marker sweep, not after it.
 ---
 
 *Written August 19, 2026 with Anthropic's Claude Opus 5. Built on
-`f603be381d447137a45f59310157391d2ce2ad9a`; gallery at
-`8a4aa41268ed9efadea9ad6b40fabe880ce8bef8`.*
+`f603be381d447137a45f59310157391d2ce2ad9a`, pushed at
+`50438c6505e40bb814166cfa2ead086d1986262d`; gallery at
+`109162bbb8d291bce615d888557498a9342d4642`.*

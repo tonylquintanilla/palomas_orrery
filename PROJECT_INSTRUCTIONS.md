@@ -425,7 +425,7 @@ what it is.
 Skill                        Ver  Fires when
 orrery-coding-conventions    1.4  Markers, hover text, axes, shells,
                                   legendgroups, docstrings, new visuals
-safe-file-editing            1.4  Editing existing files, patch scripts,
+safe-file-editing            1.5  Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
 agentic-pre-test             1.2  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps

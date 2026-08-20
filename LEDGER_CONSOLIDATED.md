@@ -221,7 +221,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*128 live items; 116 need attention (`!`); 127 RICE-scored; 86 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*128 live items; 116 need attention (`!`); 127 RICE-scored; 87 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -433,6 +433,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-198 | Claim vocabulary: the units the scanner could not see | DONE | 10.2 | 2026-08-17 |
 |  | L-217 | The Part A / Part B dispatch split is a check that cannot fail | DONE | 8.1 | 2026-08-19 |
 |  | L-207 | The citation prompt -- the checker asks the fuzzy question | DONE | 7.6 | 2026-08-18 |
+|  | L-220 | A patch updates the body but not the anchor, date or description | DONE | 7.6 | 2026-08-20 |
 |  | L-204 | The worksheet reference may be JSON | DONE | 5.7 | 2026-08-18 |
 |  | L-196 | Citation continuations: mark, join, refuse | DONE | 5.4 | 2026-08-17 |
 |  | L-197 | Maintenance runner output: say what passed | DONE | 5.4 | 2026-08-17 |
@@ -3029,7 +3030,7 @@ announced); L-214.
   the person about to run it will see it.
 **Note:** RICE is Claude's proposal, unratified.
 **Gap:** pick one of the three and write it into `safe-file-editing`,
-which would be 1.5.
+which would be 1.6 -- 1.5 is taken by L-220.
 **Tony-action (decide):** which option.
 **Ref:** `skills/safe-file-editing/SKILL.md` "Naming and Archiving a
 Patch Script"; `documentation/patch_L209_2_alfven_migration.py` and
@@ -6008,6 +6009,55 @@ it is worth the startup-behaviour change to the GUI and the tests.
   (L-215), not by anyone reading the list.
 Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
 **Gap:** fix on next touch (binary-mode).
+
+#### [L-220] A patch updates the body but not the anchor, date or description
+<!-- L:220 status:DONE upd:2026-08-20 section:C flag: rice:3/3/85/1 -->
+- **Tony's observation, 2026-08-20, and it is about the project rather
+  than about any one file.** "We do not update these documents with
+  every session, nor do we always update the module description,
+  history, dates, etc. -- we tend to update the body more than the
+  anchors." Confirmed across the three master plans:
+  `MASTER_PLAN_CRITICAL_PATH_SUMMARY.md` carries both SHAs and a
+  live-check note, `MASTER_PLAN_INTERACTIVE_GALLERY.md` carries no
+  anchor at 2010 lines, and `MASTER_PLAN_WEB_PUBLICATION.md` carries an
+  anchor six weeks stale. The ledger is the most current document
+  because its index is machine-maintained, not because anyone is more
+  disciplined about it.
+- **Why a session-start anchor check was proposed and then dropped.**
+  Claude proposed comparing every Context document's anchor against
+  live HEAD. Tony's correction makes that unworkable: if anchors are
+  updated only sometimes, a mismatch means EITHER the document is stale
+  OR nobody re-stamped it, and nothing distinguishes them. Two
+  conditions, one signal -- a check that fires constantly and means
+  nothing, which is worse than no check.
+- **Why a generated currency stamp was also rejected.** It needs its own
+  generator to maintain. A stamp written by the patch that caused the
+  staleness cannot drift, because there is no second step to forget.
+  Tony's framing is the better one and it is the protocol's own "put the
+  check where it runs," one layer over.
+- **CLOSED 2026-08-20 in `safe-file-editing` 1.5, Stamp What You
+  Change.** The patch updates the file's currency block -- version line,
+  anchor, history, date, and the module description where behaviour
+  changed -- in the same transaction as the body, names the model, and
+  prints which stamps it updated. The module description is called out
+  as the highest-stakes half because `module_atlas.py` regenerates
+  MODULE_ATLAS.md and MODULE_INDEX.md from module docstrings, so a stale
+  description propagates into a generated document that presents itself
+  as current.
+- **A limit Claude proposed and Tony declined.** Claude wanted "stamp
+  only what the patch actually touches," on the grounds that stamping an
+  untouched file is a false provenance claim. Tony: "I don't see when
+  this would happen. Your patches are not incidental, always for a
+  purpose." Recorded because the reasoning generalises -- the rule was
+  written for an imagined failure, not an observed one, which is what
+  Extend a Boundary Before Adding a Path exists to refuse. If it ever
+  happens it earns a field note then.
+**Note:** RICE is Claude's proposal, unratified.
+**Ref:** `skills/safe-file-editing/SKILL.md` "Stamp What You Change" and
+"Fix In Passing, Report It"; `module_atlas.py` header (L-163 Phase 3);
+`skills/orrery-coding-conventions/SKILL.md` credit lines (the
+attribution convention this generalises); L-219 (the other open
+safe-file-editing gap, now targeting 1.6).
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

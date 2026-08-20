@@ -6,8 +6,9 @@ fires_when: Editing existing files, patch scripts, sed/regex edits, encoding che
 
 # Safe File Editing
 
-Skill version: 1.4 | Cut from palomas_orrery @ a872205 (v1.4), earlier @
-1ba20c3 (v1.3), 3398970 (v1.2), bdaaa0c (v1.1) | August 16, 2026
+Skill version: 1.5 | Cut from palomas_orrery @ 50438c6 (v1.5), earlier @
+a872205 (v1.4), 1ba20c3 (v1.3), 3398970 (v1.2), bdaaa0c (v1.1)
+| August 20, 2026, with Anthropic's Claude Opus 5
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;
 v1.1 adds the delivery-format convention from a same-day incident (a
 transactional patch silently never run; see Field Notes). v1.3 adds
@@ -16,7 +17,9 @@ CRLF working copy whose bytes were identical to the repo's. v1.4 adds
 Fix In Passing, Report It, after a patch blocked itself on two Unicode
 arrows that predated it by months, and Naming and Archiving a Patch
 Script, an unstated convention 96 scripts deep that Tony had been
-following alone.
+following alone. v1.5 adds Stamp What You Change (L-220), after Tony
+observed that this project updates bodies more reliably than it updates
+anchors, dates and module descriptions.
 Portable: applies to any project, not only Paloma's Orrery.
 
 ## Bottom-Up Editing [QUALITY]
@@ -245,6 +248,50 @@ clean file.
 repairs a Unicode character has to CARRY that character to match on it.
 Write it escaped (a `\uXXXX` literal) so the deliverable stays ASCII and
 does not fail the gate it exists to enforce.
+
+### Stamp What You Change [QUALITY]
+
+A patch that edits a file also updates that file's own currency block,
+in the SAME transaction as the body. Whichever of these the file
+carries: the version line, the anchor SHA, the history or changelog
+paragraph, the date, and -- where the change alters what the file DOES
+-- the module description at the top.
+
+The stamp names the model that made the change, e.g. "with Anthropic's
+Claude Opus 5". Attribution is a partnership value here, and it is also
+provenance: a reader can tell whether a human or a model last touched
+the header, which matters most when the header is the thing being
+trusted.
+
+The patch PRINTS which stamps it updated, so the operator sees it
+happened rather than trusting that it did.
+
+**Why it belongs in the patch and nowhere else.** Nobody schedules a
+separate pass to re-stamp headers, so a body-only edit leaves the file
+describing a state that no longer exists, permanently. The patch is
+already fingerprinting the file and already knows the anchor it was
+built on. That is the only moment where the stamp is free and correct.
+Same reasoning as Fix In Passing, Report It, one field over: the file is
+open, the obligation is adjacent, and a separate sweep for it would
+never be scheduled.
+
+**The module description is the highest-stakes half.** A stale date
+makes a file look older than it is, which is recoverable. A stale
+DESCRIPTION misdirects a reader about what the file does -- and in this
+project it propagates: `module_atlas.py` builds MODULE_ATLAS.md and
+MODULE_INDEX.md from each module's own docstring, and the atlas says so
+in its own header ("the source of truth is each module's own docstring
+... do not hand-edit it"). So a description left stale after a
+behaviour change is not one wrong line; it is a wrong line reproduced
+into a generated document that presents itself as current.
+
+(Origin: Tony's rule, 2026-08-20, from the observation that this project
+"tends to update the body more than the anchors" -- master plan headers,
+module histories and dates drift while their bodies stay current. The
+alternative considered and rejected was a generated currency stamp
+rebuilt by the maintenance run. It was rejected because it needs its own
+generator to maintain, while a stamp written by the patch that caused
+the staleness cannot drift: there is no second step to forget.)
 
 ## grep -c in && Chains [QUALITY]
 

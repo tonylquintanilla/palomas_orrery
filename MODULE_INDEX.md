@@ -10,25 +10,23 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 130  
-**Total Lines of Code (non-blank):** 102,816  
-**Total Public Functions/Classes:** 1,161
+**Total Python Files:** 129  
+**Total Lines of Code (non-blank):** 102,753  
+**Total Public Functions/Classes:** 1,160
 
 ## Classification Coverage
 
-**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L214_2_rationale_and_L219.py`
-- `patch_L217_1_two_dispatch_rule_and_close.py`
+- `patch_L220_1_stamp_what_you_change.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 - `worksheet_keys.py`
 
-**Undetermined domain (2).** No valid `Domain:` tag.
+**Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L214_2_rationale_and_L219.py`
-- `patch_L217_1_two_dispatch_rule_and_close.py`
+- `patch_L220_1_stamp_what_you_change.py`
 
 
 ---
@@ -231,8 +229,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L214_2_rationale_and_L219.py` | Ledger patch -- Tony's report-not-reject rationale into L-214, the legs_of docstring folded into L-214's Gap, and L-219 opened. (157 lines) |
-| `patch_L217_1_two_dispatch_rule_and_close.py` | Ledger + skill patch -- L-217 closed, provenance-discipline 2.5 -> 2.6. (160 lines) |
+| `patch_L220_1_stamp_what_you_change.py` | Skill + ledger patch -- safe-file-editing 1.4 -> 1.5 (Stamp What You Change), L-220 opened, L-219's target version rebased to 1.6. (254 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |
