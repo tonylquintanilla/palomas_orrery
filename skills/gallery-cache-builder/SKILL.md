@@ -6,7 +6,11 @@ fires_when: Nightly builder, atomic swap, coverage_index, serving cache, objects
 
 # Gallery Cache Builder (Phase 1b data serving)
 
-Skill version: 1.3 | Cut from tonyquintanilla.github.io @ 02d7163 (code) and palomas_orrery @ 8e4b5ca (context) | 2026-08-11
+Skill version: 1.4 | Cut from tonyquintanilla.github.io @ 02d7163 (code) and palomas_orrery @ 2f0aabe (context), earlier @ 8e4b5ca (v1.3) | 2026-08-19
+v1.4 adds Recovery from a failed swap: discard and re-run -- Tony's
+operational rule of 2026-08-19, after a nightly run wiped the served tree
+and the ~30 quarantine directories turned out to be the same mechanism
+printing harmlessly every night since July 21 (L-216).
 
 The standalone builder that fetches fresh JPL Horizons data and deploys the
 web gallery's served cache. Tony runs it MANUALLY and commits the result
@@ -95,6 +99,43 @@ existing -- which is what used to deadlock: config-inside-the-swap-dir meant a
 crash mid-swap left load_config unable to read the config before recovery could
 restore the directory. Moving the config out (L-114) closed that; a crash
 mid-swap now self-heals on the next run.
+
+## Recovery from a failed swap: discard and re-run [QUALITY]
+
+Tony's operational rule, 2026-08-19 (L-216). When a run leaves the gallery
+repo showing deletions -- most visibly `data/solar-system/` gone, with
+GitHub Desktop reporting deletions and no additions -- DISCARD the changes
+in GitHub Desktop and RE-RUN the builder. Discard restores the live tree
+from HEAD byte for byte; the re-run builds a fresh generation.
+
+Three conditions make that safe, and they travel WITH the rule because the
+rule is only safe while all three hold:
+
+- the live tree is committed, so HEAD has something to restore from;
+- the swap is all-or-nothing, so a failed run leaves a COMPLETE `.prev` or
+  a complete staging directory and never a mixed one;
+- nothing reaches the remote until Tony commits by hand.
+
+Running with `--commit` breaks the third condition and therefore breaks
+the rule. Do not use `--commit` while L-216 is open.
+
+What causes it, as far as it is measured: a filesystem lock -- almost
+certainly OneDrive -- makes directory renames fail. WHICH of the swap's
+three renames the lock catches decides the damage. Catching the `.prev`
+cleanup is harmless and self-heals, and it has been happening every night
+since 2026-07-21; the roughly 30 `solar-system.quarantine_*` directories
+are that, one per night, printing as normal because the builder is built
+to survive it. Catching `staging -> live` has no in-run recovery and
+leaves the live directory missing. Same cause, different victim.
+
+Two things are NOT established and should not be asserted. Whether the
+`staging -> live` rename is exposed to the same lock as the cleanup, or
+was unlucky once, is one data point. And the run record is written INSIDE
+the generation, so a run whose swap fails strands its own record in a
+directory `.gitignore` hides -- meaning the committed history shows no
+sign that a run lost its data. Recording the swap OUTCOME outside the
+generation comes BEFORE fixing the cause; otherwise every recurrence costs
+another evening of inference.
 
 ## Validation stance
 

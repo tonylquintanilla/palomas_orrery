@@ -1,5 +1,5 @@
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.41 | August 18, 2026
+Tony Quintanilla, PE | Claude | v3.41 | August 19, 2026
 
 Cut from b65ac115 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
@@ -444,7 +444,7 @@ gallery-assembler            1.1  render_orbits.py, resolver.py,
                                   cache_reader.py, propagation math, golden
                                   artifact builds, Mode 5 acceptance,
                                   orrery/assembler boundary questions
-gallery-cache-builder        1.3  Nightly builder, atomic swap, coverage_index,
+gallery-cache-builder        1.4  Nightly builder, atomic swap, coverage_index,
                                   serving cache, objects_config,
                                   dry-run/first-build/nightly, builder testing
                                   layers

@@ -10,23 +10,18 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 129  
-**Total Lines of Code (non-blank):** 102,742  
-**Total Public Functions/Classes:** 1,160
+**Total Python Files:** 128  
+**Total Lines of Code (non-blank):** 102,499  
+**Total Public Functions/Classes:** 1,159
 
 ## Classification Coverage
 
-**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L214_1_design_settled_and_two_items.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 - `worksheet_keys.py`
-
-**Undetermined domain (1).** No valid `Domain:` tag.
-
-- `patch_L214_1_design_settled_and_two_items.py`
 
 
 ---
@@ -229,7 +224,6 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L214_1_design_settled_and_two_items.py` | Ledger patch -- L-214 design settled after Mode 7 review; L-217 and L-218 opened. (243 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |
