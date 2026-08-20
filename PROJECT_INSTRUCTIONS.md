@@ -1,5 +1,5 @@
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.41 | August 19, 2026
+Tony Quintanilla, PE | Claude | v3.41 | August 20, 2026
 
 Cut from b65ac115 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
@@ -431,7 +431,7 @@ agentic-pre-test             1.2  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
 horizons-orbital-mechanics   1.1  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning
-provenance-discipline        2.5  Scanner runs, audits, citations, constants,
+provenance-discipline        2.6  Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
 earth-system-pipeline        1.1  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY

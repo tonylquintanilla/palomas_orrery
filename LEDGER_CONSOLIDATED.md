@@ -221,13 +221,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*129 live items; 117 need attention (`!`); 128 RICE-scored; 85 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*128 live items; 116 need attention (`!`); 127 RICE-scored; 86 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
-| ! | L-217 | The Part A / Part B dispatch split is a check that cannot fail | OPEN | 8.1 | 2026-08-19 |
 | ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-19 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
 | ! | L-206 | Worksheet return filenames carry model and session | OPEN | 5.1 | 2026-08-18 |
@@ -432,6 +431,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-114 | objects_config.json stranded by the atomic swap; also blocks crash-recovery (gallery builder) | DONE | 16.2 | 2026-07-27 |
 |  | L-182 | Mars Hill sphere -- cross-check correction lost across the config pipeline | DONE | 12.0 | 2026-08-05 |
 |  | L-198 | Claim vocabulary: the units the scanner could not see | DONE | 10.2 | 2026-08-17 |
+|  | L-217 | The Part A / Part B dispatch split is a check that cannot fail | DONE | 8.1 | 2026-08-19 |
 |  | L-207 | The citation prompt -- the checker asks the fuzzy question | DONE | 7.6 | 2026-08-18 |
 |  | L-204 | The worksheet reference may be JSON | DONE | 5.7 | 2026-08-18 |
 |  | L-196 | Citation continuations: mark, join, refuse | DONE | 5.4 | 2026-08-17 |
@@ -2981,47 +2981,6 @@ the token exists.
 **Ref:** `documentation/DESIGN_20260818_unknown_verdict.md`;
 `documentation/PILOT_CONVERGENCE_20260819.md` Part 5; L-207.
 
-#### [L-217] The Part A / Part B dispatch split is a check that cannot fail
-<!-- L:217 status:OPEN upd:2026-08-19 section:A flag: rice:3/3/90/1 -->
-- **Found by the reviewer it was meant to constrain, 2026-08-19.** The
-  L-214 review prompt asked each model leg to answer Part A (derive
-  your own structure) BEFORE reading Part B (critique ours), to stop
-  the reviewer anchoring on Claude's proposal. Fable's disclosure: the
-  prompt arrives as ONE document in ONE context, so there is no way for
-  a model to write Part A without Part B already read, and NOTHING IN
-  ANY ANSWER DISTINGUISHES A REVIEWER WHO COMPLIED FROM ONE WHO COULD
-  NOT.
-- **The corroboration is in the other leg.** GPT's A3 opens with "my
-  prediction before consulting the measured result is" and then states
-  the measured result to the digit. That is the tell. It is not GPT's
-  fault -- the instruction asked for something the format made
-  impossible.
-- **This is an instance of the protocol's own CRITICAL gate**, A Check
-  That Cannot Fail Is Not Passing, in the dispatch layer rather than in
-  code. The prompt was authored in this session, so the gate did not
-  fire on its own author.
-- **Fable's remedy:** two physical dispatches. Part A sent alone,
-  answer collected, THEN Part B sent. Anything less is the ritual
-  without the check.
-- **The related contamination finding, same review.** Fable ran INSIDE
-  the Paloma's Orrery project and disclosed it unprompted: it carried
-  resident memory of the protocol and the general state of the
-  provenance work, though not the L-214 design conversation. The
-  fresh-chat-outside-any-project rule exists for exactly this and was
-  not followed for that leg. Its review was still the sharper of the
-  two, which is worth noting and is not a reason to relax the rule.
-**Note:** RICE is Claude's proposal, unratified.
-**Gap:** decide whether the two-dispatch protocol becomes standing
-practice for any prompt carrying Claude's own proposal, and if so
-record it in `provenance-discipline` or
-`ledger-and-session-records` -- whichever fires at dispatch time.
-**Tony-action (decide):** which skill hosts it, or whether a
-one-document prompt simply stops claiming the split.
-**Ref:** `documentation/REVIEW_PROMPT_L214_20260819.md` (the prompt
-that carried the defect); `documentation/L214_REVIEW_RECONCILIATION_
-20260819.md` Part 4; L-214; L-203 (the Visibility Convention, same
-family of reasoning).
-
 #### [L-218] 22 Cross-checked lines attach to no unit
 <!-- L:218 status:OPEN upd:2026-08-19 section:A flag: rice:2/3/70/2 -->
 - **Announced by the L-214 measurement, 2026-08-19, and parked there.**
@@ -3080,6 +3039,58 @@ exposed it); HANDOFF_20260819_alfven_and_the_swap.md, error 4.
 ## PENDING ACTION (Tony-side)
 
 ## C. RECONCILED LEDGER -- DONE (closed; for the record, do not re-do)
+
+#### [L-217] The Part A / Part B dispatch split is a check that cannot fail
+<!-- L:217 status:DONE upd:2026-08-19 section:C flag: rice:3/3/90/1 -->
+- **Found by the reviewer it was meant to constrain, 2026-08-19.** The
+  L-214 review prompt asked each model leg to answer Part A (derive
+  your own structure) BEFORE reading Part B (critique ours), to stop
+  the reviewer anchoring on Claude's proposal. Fable's disclosure: the
+  prompt arrives as ONE document in ONE context, so there is no way for
+  a model to write Part A without Part B already read, and NOTHING IN
+  ANY ANSWER DISTINGUISHES A REVIEWER WHO COMPLIED FROM ONE WHO COULD
+  NOT.
+- **The corroboration is in the other leg.** GPT's A3 opens with "my
+  prediction before consulting the measured result is" and then states
+  the measured result to the digit. That is the tell. It is not GPT's
+  fault -- the instruction asked for something the format made
+  impossible.
+- **This is an instance of the protocol's own CRITICAL gate**, A Check
+  That Cannot Fail Is Not Passing, in the dispatch layer rather than in
+  code. The prompt was authored in this session, so the gate did not
+  fire on its own author.
+- **Fable's remedy:** two physical dispatches. Part A sent alone,
+  answer collected, THEN Part B sent. Anything less is the ritual
+  without the check.
+- **The related contamination finding, same review.** Fable ran INSIDE
+  the Paloma's Orrery project and disclosed it unprompted: it carried
+  resident memory of the protocol and the general state of the
+  provenance work, though not the L-214 design conversation. The
+  fresh-chat-outside-any-project rule exists for exactly this and was
+  not followed for that leg. Its review was still the sharper of the
+  two, which is worth noting and is not a reason to relax the rule.
+**Note:** RICE is Claude's proposal, unratified.
+- **CLOSED 2026-08-19. Tony's ruling: yes, do it.** The two-dispatch
+  protocol is standing practice for any prompt that carries Claude's own
+  proposal alongside a request for an independent derivation. Recorded
+  in `provenance-discipline` 2.6, under Model Roles in the Competitive
+  Pattern, which is the section that already owns Mode 7 dispatch
+  mechanics and the skill that fires at dispatch time. The alternative
+  host, `ledger-and-session-records`, owns document FORMAT (the anchor
+  line, handoff shape); this is dispatch SEQUENCE, so it belongs beside
+  the model-roles table.
+- **What the rule says.** Either send Part A alone, collect the answer,
+  and then send Part B -- or do not claim the split. A single document
+  asking a model to answer one half before reading the other is a check
+  that cannot fail, and stating the instruction is worse than omitting
+  it, because the instruction makes the prompt look controlled.
+- **The obligation this creates.** A mid-session reinstall cannot be
+  verified from inside the session that makes it, so the NEXT session
+  confirms its own loaded copy reads 2.6 before doing provenance work.
+**Ref:** `documentation/REVIEW_PROMPT_L214_20260819.md` (the prompt
+that carried the defect); `documentation/L214_REVIEW_RECONCILIATION_
+20260819.md` Part 4; L-214; L-203 (the Visibility Convention, same
+family of reasoning).
 
 #### [L-212] maintenance_run names every file the run wrote
 <!-- L:212 status:DONE upd:2026-08-19 section:C flag: rice:2/3/90/1 -->

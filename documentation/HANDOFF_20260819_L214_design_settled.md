@@ -1,16 +1,17 @@
 # HANDOFF 2026-08-19 (evening) -- L-214 designed, not built
 
-**Built on `5859e15097b92bbb5ebd9ebb7a8fe78fdea85aac` at
+**Built on `f603be381d447137a45f59310157391d2ce2ad9a` at
 https://github.com/tonylquintanilla/palomas_orrery (branch main).
 Gallery unchanged at `8a4aa41268ed9efadea9ad6b40fabe880ce8bef8` at
 https://github.com/tonylquintanilla/tonyquintanilla.github.io.**
 
 One patch was delivered after that anchor was read and is expected to
 land in the commit carrying this file:
-`patch_L214_2_rationale_and_L219.py`. **Confirm HEAD, then confirm it
-ran** -- L-219 should be in the ledger index table and L-214's Gap
-should mention the `legs_of` docstring. If HEAD is not what this file
-expects, reconcile before building.
+`patch_L217_1_two_dispatch_rule_and_close.py`. **Confirm HEAD, then
+confirm it ran** -- L-217 should read DONE and sit in section C, and
+`provenance-discipline` should read 2.6 in both the SKILL.md and the
+manifest. If HEAD is not what this file expects, reconcile before
+building.
 
 Readable cold. Nothing below assumes the reader was present.
 
@@ -18,19 +19,30 @@ Readable cold. Nothing below assumes the reader was present.
 
 ## Carried obligations
 
-**1. Confirm the loaded `gallery-cache-builder` reads 1.4 before doing
-builder work.** [CRITICAL, Stale Skill = Stop.] This session bumped it
-1.3 -> 1.4 and Tony reinstalled it to the account profile, but a
-mid-session reinstall cannot be verified from inside the session that
-makes it. The manifest in `PROJECT_INSTRUCTIONS.md` was regenerated and
-says 1.4, and the repo copy at HEAD says 1.4. Check your own loaded copy
-against the manifest at load time.
+**1. Confirm the loaded `provenance-discipline` reads 2.6 before doing
+provenance work.** [CRITICAL, Stale Skill = Stop.] Bumped 2.5 -> 2.6 in
+this session's last patch, carrying the Two-Dispatch Rule from L-217.
+Tony reinstalls it to the account profile, but a mid-session reinstall
+cannot be verified from inside the session that makes it. Check your own
+loaded copy against the manifest at load time.
 
-**2. Archive `patch_L214_2_rationale_and_L219.py` to `documentation/`**
-once run. The maintenance run does this automatically; confirm rather
-than assume.
+**2. Confirm the loaded `gallery-cache-builder` reads 1.4 before doing
+builder work.** [CRITICAL, Stale Skill = Stop.] Same shape, same reason.
+Bumped 1.3 -> 1.4 earlier in this session and reinstalled. The manifest
+and the repo copy at HEAD both say 1.4.
 
-**3. Do not run the gallery builder with `--commit` while L-216 is
+Two pending skill confirmations is one more than this project usually
+carries, and the previous session deliberately held one back to avoid
+exactly that. It is acceptable here because the gate is per-skill and
+load-triggered: each fires independently when its own skill loads, so
+they do not compound. Discharge whichever loads first; neither blocks
+the other.
+
+**3. Archive `patch_L217_1_two_dispatch_rule_and_close.py` to
+`documentation/`** once run. The maintenance run does this
+automatically; confirm rather than assume.
+
+**4. Do not run the gallery builder with `--commit` while L-216 is
 open.** Unchanged from the previous handoff. The discard-and-re-run
 recovery depends on nothing reaching the remote until Tony commits by
 hand. That rule now lives in `gallery-cache-builder` 1.4.
@@ -117,7 +129,8 @@ neither and its `LEG_RE` is case-SENSITIVE. Claude's proposed
 `RECORD_LEGS` of four was inventing two of them. Deciding the form for
 `Removed` and `Corrected` is part of the build, not a precondition.
 
-**L-217 opened, and it is a defect in this session's own work.** The
+**L-217 opened AND CLOSED, and it is a defect in this session's own
+work.** The
 review prompt asked each leg to answer Part A before reading Part B, to
 prevent anchoring. Fable's disclosure: the prompt arrives as one
 document in one context, so a model cannot comply, and nothing in any
@@ -125,6 +138,16 @@ answer distinguishes a reviewer who complied from one who could not.
 GPT's A3 corroborates -- it opens "my prediction before consulting the
 measured result" and then states the measured result to the digit. A
 check that cannot fail, in the dispatch layer, authored this session.
+
+Tony's ruling closed it the same evening: the two-dispatch protocol is
+standing practice for any prompt carrying Claude's own proposal
+alongside a request for an independent derivation. Part A alone, answer
+collected, then Part B -- or do not claim the split, because stating an
+instruction the format cannot honour is worse than omitting it. Recorded
+in `provenance-discipline` 2.6 under Model Roles in the Competitive
+Pattern, which already owns Mode 7 dispatch mechanics. The alternative
+host, `ledger-and-session-records`, owns document FORMAT; this is
+dispatch SEQUENCE.
 
 **L-218 opened.** 22 `# Cross-checked:` lines attach to no unit. The
 measurement announced the number and parked it; Fable called that a
@@ -136,6 +159,9 @@ where it was named as a gap and noted as having no item.
 
 **`gallery-cache-builder` 1.3 -> 1.4.** The discard-and-re-run recovery
 rule from L-216, with its three safety conditions.
+
+**`provenance-discipline` 2.5 -> 2.6.** The Two-Dispatch Rule
+[CRITICAL], from L-217.
 
 ---
 
@@ -151,8 +177,9 @@ rule from L-216, with its three safety conditions.
 | `documentation/PILOT_CONVERGENCE_20260819.md` | The reconciliation queue. |
 | `documentation/patch_L214_1_design_settled_and_two_items.py` | As-run. |
 | `documentation/patch_L216_2_cache_builder_skill_1_4.py` | As-run. |
+| `documentation/patch_L214_2_rationale_and_L219.py` | As-run. |
 
-Skills that fire on this work: `provenance-discipline` (2.5),
+Skills that fire on this work: `provenance-discipline` (2.6),
 `safe-file-editing` (1.4), `ledger-and-session-records` (1.7),
 `orrery-coding-conventions` (1.4), `gallery-cache-builder` (1.4).
 Compare each against the manifest at load.
@@ -203,12 +230,11 @@ fresh-chat rule.
 
 ## Tony-action rollup
 
-- **(do)** Run `patch_L214_2_rationale_and_L219.py`, then
-  `ledger_index.py`. Confirm the archive.
+- **(do)** Run `patch_L217_1_two_dispatch_rule_and_close.py`, then
+  `ledger_index.py`, then `skills_index.py`. Confirm the archive.
+- **(do)** Reinstall `provenance-discipline` at Settings > Skills.
 - **(decide)** L-219: which of three options for expressing a
   cross-handle run order.
-- **(decide)** L-217: whether the two-dispatch protocol becomes standing
-  practice, and which skill hosts it.
 - **(decide)** L-211 UNKNOWN verdict token: designed, unbuilt, unchanged
   this session.
 
@@ -230,5 +256,5 @@ or with the marker sweep, not after it.
 ---
 
 *Written August 19, 2026 with Anthropic's Claude Opus 5. Built on
-`5859e15097b92bbb5ebd9ebb7a8fe78fdea85aac`; gallery at
+`f603be381d447137a45f59310157391d2ce2ad9a`; gallery at
 `8a4aa41268ed9efadea9ad6b40fabe880ce8bef8`.*

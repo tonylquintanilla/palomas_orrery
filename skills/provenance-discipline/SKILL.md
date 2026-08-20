@@ -6,9 +6,13 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 2.5 | Cut from palomas_orrery @ 731066f (v2.5), earlier
-@ 6b99ace (v2.2), @ 00219d9 (v2.1), @ eb77c83 (v2.0), @ cdcdb4b (v1.9)
-| August 18, 2026
+Skill version: 2.6 | Cut from palomas_orrery @ f603be3 (v2.6), earlier
+@ 731066f (v2.5), @ 6b99ace (v2.2), @ 00219d9 (v2.1), @ eb77c83 (v2.0),
+@ cdcdb4b (v1.9) | August 19, 2026
+v2.6 adds The Two-Dispatch Rule [CRITICAL] under Model Roles in the
+Competitive Pattern -- L-217, after a Mode 7 review prompt asked two
+model legs to answer Part A before reading Part B, which neither could
+do and neither answer could be distinguished on.
 Source: project_instructions_v3_29.md Part 3 (Provenance Audit, Fetched vs
 Recalled) + food insecurity build handoff + scanner source at HEAD. v1.1
 adds the report domain-classification mechanics, the Review-Repair
@@ -331,6 +335,28 @@ that neither Claude nor GPT could reach via web search. This is a real,
 tested capability -- not assumed from marketing. Use Gemini specifically
 for book-citation verification and domain claims that rest on textbook
 authority.
+
+### The Two-Dispatch Rule [CRITICAL]
+
+When a prompt carries Claude's own proposal AND asks the reviewer for an
+independent derivation, the two halves go out as TWO PHYSICAL
+DISPATCHES: Part A alone, answer collected, then Part B. A single
+document that instructs a model to answer one half before reading the
+other is a check that cannot fail -- both halves arrive in one context,
+the model cannot comply, and nothing in any answer distinguishes a
+reviewer who complied from one who could not.
+
+Stating the instruction anyway is WORSE than omitting it, because the
+instruction makes the prompt look controlled. If two dispatches are not
+worth the round trip, drop the claim and ask only for critique.
+
+(Origin, L-217, 2026-08-19. The L-214 review prompt asked both legs for
+Part A before Part B. Fable disclosed that the ordering was unexecutable
+and named it as a check that cannot fail. GPT's answer corroborated it
+without meaning to: its Part A opens "my prediction before consulting
+the measured result is" and then states the measured result to the
+digit. The prompt was authored in the session that dispatched it, so the
+resident CRITICAL gate never fired on its own author.)
 
 ### Worksheet Types
 
