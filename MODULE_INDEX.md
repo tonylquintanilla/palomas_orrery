@@ -11,14 +11,14 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 129  
-**Total Lines of Code (non-blank):** 103,030  
+**Total Lines of Code (non-blank):** 102,883  
 **Total Public Functions/Classes:** 1,159
 
 ## Classification Coverage
 
 **Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L222_1_docstring_lines_in_change_report.py`
+- `patch_L221_2_critical_path_update.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
@@ -26,7 +26,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 **Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L222_1_docstring_lines_in_change_report.py`
+- `patch_L221_2_critical_path_update.py`
 
 
 ---
@@ -229,7 +229,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L222_1_docstring_lines_in_change_report.py` | Built on 762aa5dde5aea87cc6e513fc4841c6937366a6b4 at https://github.com/tonylquintanilla/palomas_orrery (branch main). Written August 20, 2026 with Anthropic's Claude Opus 5. (420 lines) |
+| `patch_L221_2_critical_path_update.py` | Built on 79729c98fd6bec8703fcc3bbc0806e6ee5226770 at https://github.com/tonylquintanilla/palomas_orrery (branch main). Gallery at 109162bbb8d291bce615d888557498a9342d4642. Written August 20, 2026 with Anthropic's Claude Opus 5. (273 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |

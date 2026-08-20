@@ -1,11 +1,18 @@
 # The critical path -- where we are and what stands between here and the end
 
-**Updated August 19, 2026.** Orrery at
-`9ffb9b403a7d62090b30a9acf9adbc6180a6baec`, gallery at
-`ff18d3e6fa31f70a8f525df471e751d046cf14fa`. Both confirmed by live
+**Updated August 20, 2026.** Orrery at
+`79729c98fd6bec8703fcc3bbc0806e6ee5226770`, gallery at
+`109162bbb8d291bce615d888557498a9342d4642`. Both confirmed by live
 check. First written August 16 at `227f5b2d`; the structure below is
-unchanged from that version. The figures moved, and one claim
-reversed: the first dispatch has now gone out and come back.
+unchanged from that version -- the five steps have not moved, only
+our position along them.
+
+Two things changed on August 20. The reconciliation queue that had
+been open for two sessions is CLOSED: four rows decided, three
+values changed, one held. And a claim this document carried about
+`STREAMER_BELT_RADII` turned out to be wrong and is corrected below
+-- it had travelled here from a session reading rather than from a
+source.
 
 **Lands in `documentation/` as `CRITICAL_PATH_SUMMARY.md`.** Section 5a
 of the master plan and the readable snapshot both cite it by that exact
@@ -82,7 +89,7 @@ the one Saturn and Jupiter need.
 The checker, the worksheet builder and the dispatch loop are the
 machinery of this step, not a step of their own. They exist because
 reconciling worksheets against the code by hand does not scale, and the
-scale is measured: 110 claims scored, eight of them clean.
+scale is measured: 107 claims scored, eight of them clean.
 
 That machinery was finished and unused for one day. A request can be
 built for a chosen slice of rows, carried out as JSON, returned,
@@ -148,13 +155,40 @@ It also drew no features at all, which is how the feature path stayed
 broken without anyone noticing.
 
 **Step one is in progress, the backlog is visible, and the loop has now
-run end to end.** Of 110
+run end to end.** Of 107
 verification claims, eight are clean, forty-eight need to go back to
-whoever filled them in, twenty need a conversation, thirty-four are
-noted without a route, and twenty-four are not reachable by the scanner
+whoever filled them in, nineteen need a conversation, thirty-two are
+noted without a route, and twenty-two are not reachable by the scanner
 at all. That is not a discouraging result -- it is the first time the
 number has been knowable. Before the checker existed, the same claims
 were unexamined and looked fine.
+
+**And on August 20 the loop closed for the first time.** The four
+rows the pilot ranked as worth acting on had sat undecided for two
+sessions. All four are now decided, and the shape of the decisions is
+the useful part: `EARTH_EQUATORIAL_RADIUS_KM` moved to IERS
+precision because its source line credited a resolution that does
+not publish that many digits; `BENNU_RADIUS_KM` moved to the
+OSIRIS-REx figure, which supersedes the pre-encounter radar value the
+row carried; `HAUMEA_RADIUS_KM` moved to the 2017 occultation, the
+only direct measurement, with the competing solution named in the
+row; and `STREAMER_BELT_RADII` HELD, because the number was never
+the problem. Three of the four kept their value or changed it by
+less than a part in ten thousand. What changed was what the code
+claims about where its numbers came from.
+
+**Three of those four turned on material the request builder had
+been dropping** (L-214). The rows carried `# Note:` lines answering
+the exact question the responders spent a dispatch re-deriving, and
+the builder silently withheld them because the label was outside its
+vocabulary. So one of the pilot's most useful results is a
+measurement of its own instrument. L-214 is designed and unbuilt,
+and it is the next scheduled work.
+
+The values were confirmed against primary sources by an independent
+read rather than by asking a second model whether ours were right --
+a blind read can disagree, and a confirmation request mostly cannot.
+It disagreed twice.
 
 The corpus grew from 102 and the clean count nearly tripled. Neither is
 a change in the world: L-198 taught the scanner to read units it could
@@ -166,9 +200,30 @@ caught. `ALFVEN_SURFACE_RADII` measures from the photosphere while its
 sibling `PARKER_CLOSEST_RADII` measures from Sun centre -- two constants
 in one file, same spacecraft, one solar radius apart, which is a
 rendering defect rather than a documentation one if that shell draws
-from centre (L-209). And `STREAMER_BELT_RADII` cites a paper
-inverted: the cited 6 R_sun is that paper's FLOOR, and its actual
-result is a lower bound three times larger (L-210).
+from centre (L-209). And `STREAMER_BELT_RADII` carried a citation that
+did not support the claim attached to it (L-210).
+
+**That second sentence used to say something sharper and it was
+wrong.** Until August 20 this file reported that the row cited its
+paper INVERTED -- that the cited 6 R_sun was the paper's floor being
+used as a ceiling. That was a session reading, written down here as
+though it were a finding. An independent source read on August 20
+found otherwise: DeForest, Howard & McComas (2014) uses 6 R_sun as
+the threshold at which inbound wave motion first became detectable,
+which is neither a floor nor a ceiling on streamer extent, and that
+paper's streamer-belt result is an Alfven surface at 17 R_sun or
+more -- a result that belongs to `ALFVEN_SURFACE_RADII`, not here.
+The companion citation did not carry the row either: Golub &
+Pasachoff bound coronal structure at roughly 5-10 R_sun and state no
+4-6 R_sun streamer range at all. So the 4-6 range in the code was
+sourced to nothing. The value held at 6.0 as a declared drawing
+choice, both citations were repaired, and the range was withdrawn
+with a note saying why.
+
+It is worth leaving that visible rather than quietly restating it.
+A wrong claim in a summary document outlives the conversation it
+came from, because the next reader has nothing else to check it
+against.
 
 **Step two is designed, not built.**
 
@@ -195,7 +250,8 @@ has been baked into a hundred worksheets and a fingerprinted artifact.
 ---
 
 *Prepared August 16, 2026 with Anthropic's Claude Opus 5; figures
-updated August 18, dispatch result added August 19. Built on
-`9ffb9b403a7d62090b30a9acf9adbc6180a6baec` at
+updated August 18, dispatch result added August 19, reconciliation
+closed and the streamer-belt claim corrected August 20. Built on
+`79729c98fd6bec8703fcc3bbc0806e6ee5226770` at
 https://github.com/tonylquintanilla/palomas_orrery, gallery at
-`ff18d3e6fa31f70a8f525df471e751d046cf14fa`.*
+`109162bbb8d291bce615d888557498a9342d4642`.*
