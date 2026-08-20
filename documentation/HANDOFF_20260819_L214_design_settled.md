@@ -314,11 +314,14 @@ or with the marker sweep, not after it.
 
 *Written August 19-20, 2026 with Anthropic's Claude Opus 5. Built on
 `f603be381d447137a45f59310157391d2ce2ad9a`, pushed at
-`ef3bd13d8582865bec47e6da1d862b28ab745bb6`; gallery at
+`3586970dd841d5b417f8e6f59de4d3e3d440d001`; gallery at
 `109162bbb8d291bce615d888557498a9342d4642`.*
 
-*This footer was itself re-stamped under Stamp What You Change: the
-session ran past midnight into August 20 and three patches landed after
-the first draft, so the date and the pushed-at SHA both moved while the
-body was being revised. That is the drift the rule exists to catch,
-found in the document that argues for it.*
+*This footer was re-stamped THREE TIMES under Stamp What You Change.
+The session ran past midnight into August 20, and five patches landed
+after the first draft, so the date and the pushed-at SHA kept moving
+while the body was revised. Each re-stamp was a correction to a line
+that had been accurate when written. That is the drift the rule exists
+to catch, and the document arguing for the rule is where it showed up
+most often -- which is the point: the files that change are exactly the
+files whose headers go stale.*

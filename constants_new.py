@@ -38,6 +38,11 @@ Domain: orrery
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 Reviewed: April 2026 by Google Gemini (Mode 7 cross-verification)
 
+Module updated: August 20, 2026 with Anthropic's Claude Opus 5 (L-210:
+EARTH_EQUATORIAL_RADIUS_KM to IERS precision, BENNU_RADIUS_KM to the
+OSIRIS-REx figure, HAUMEA_RADIUS_KM to the 2017 occultation,
+STREAMER_BELT_RADII held with its unsourced range withdrawn). Built on
+3586970d.
 Module updated: July 2026 with Anthropic's Claude Sonnet 5 (L-162: 14
 remaining CENTER_BODY_RADII bodies promoted to named constants; value
 and citation carried forward unchanged from each dict entry)
@@ -69,11 +74,16 @@ SUN_RADIUS_KM = 695700.0
 # measurement. The measured photospheric radius is ~696,340 km
 # (Haberreiter et al. 2008). Use nominal for all calculations.
 
-EARTH_EQUATORIAL_RADIUS_KM = 6378.137
-# Source: IAU 2015 Resolution B3 -- nominal terrestrial equatorial radius
+EARTH_EQUATORIAL_RADIUS_KM = 6378.1366
+# Source: IERS Conventions (2010), Petit & Luzum (eds.), IERS Technical
+#   Note No. 36, Table 1.1; IAU B3 rounds to 6378.1 km
 # Ref: Prsa et al. 2016, AJ 152:41 (arXiv:1605.09788)
 # Also: https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html
-# Note: B3 rounds to 6378.1 km; full precision from IERS Conventions
+# Note: IERS publishes 6378136.6 +/- 0.1 m. IAU B3's 6.3781e6 m is an
+#   exact nominal conversion constant, not a measurement, and the two
+#   differ by 36.6 m.
+# Resolved: worksheet_gemini-3-1-pro_reconciliation_sources_20260820.md constants_new.py::EARTH_EQUATORIAL_RADIUS_KM -- Source
+#   moved from IAU B3 to IERS and value taken to IERS precision (L-210)
 # Cross-checked: Claude 2026-08-02 -- IAU B3 / IERS (worksheet_claude_constants_new.md)
 # Cross-checked: GPT 2026-08-02 -- IAU B3 / IERS (constants_new_citation_verification_gpt.md)
 
@@ -195,10 +205,20 @@ OUTER_CORONA_RADII = 50
 
 # New shells (added April 2026)
 STREAMER_BELT_RADII = 6.0
-# Source: Golub & Pasachoff (2010); DeForest, Howard & McComas (2014), ApJ 787:124
-# See: Eclipse observations; helmet streamers extend 4-6 R_sun
-# Note: Visualization cutoff at upper end of 4-6 R_sun observed range;
-#   streamer-belt structure remains observable beyond 6 R_sun.
+# Source: Golub & Pasachoff, "The Solar Corona" (2nd ed., 2010) --
+#   coronal structure bounded at roughly 5-10 R_sun
+# Note: VISUALIZATION BOUNDARY, not a physical edge. 6.0 is a drawing
+#   choice inside the range Golub & Pasachoff bound; streamer-belt
+#   structure continues beyond it.
+# Review-note: the previous "helmet streamers extend 4-6 R_sun" range
+#   was removed 2026-08-20 -- an independent source read found it in
+#   neither cited work. DeForest, Howard & McComas (2014), ApJ 787:124
+#   was removed with it: its 6 R_sun is the inbound-wave DETECTION
+#   THRESHOLD, not a streamer extent, and its streamer-belt result is
+#   an Alfven surface at >= 17 R_sun. That result belongs to
+#   ALFVEN_SURFACE_RADII (L-209), where it is owed, not to this row.
+# Resolved: worksheet_gemini-3-1-pro_reconciliation_sources_20260820.md constants_new.py::STREAMER_BELT_RADII -- value held,
+#   inverted citation removed, range withdrawn as unsourced (L-210)
 # Cross-checked: Gemini 2026-08-02 -- Golub & Pasachoff (worksheet_gemini_constants_remaining.md)
 # Cross-checked: GPT 2026-08-02 -- DeForest et al. (constants_remaining_independent_verification_gpt.md)
 
@@ -381,21 +401,49 @@ NEPTUNE_RADIUS_KM = 24764
 PLUTO_RADIUS_KM = 1188.3
 # Source: New Horizons occultation (Nimmo et al. 2017)
 
-BENNU_RADIUS_KM = 0.246
-# Source: Nolan et al. 2013 (radar shape model), mean diameter 492 +/- 20 m
-# Source+: Confirmed by OSIRIS-REx OLA: mean radius 246 +/- 10 m, V = 0.062 km^3
+BENNU_RADIUS_KM = 0.24503
+# Source: Barnouin et al. 2019, Nature Geoscience 12:247, Table 1 --
+#   mean radius 245.03 +/- 0.08 m from OSIRIS-REx OLA and imaging
+# Note: supersedes the pre-encounter radar shape model of Nolan et al.
+#   2013, Icarus 226:629 (mean diameter 492 +/- 20 m, implying ~0.246
+#   km), which this row previously carried. The mission figure is
+#   independently derived, not a restatement of the radar result.
 # Corrected 2026-08-02: 0.262 -> 0.246 (prior value matched no published source)
+# Corrected 2026-08-20: 0.246 -> 0.24503 (OSIRIS-REx supersedes radar)
 # Cross-checked: Claude 2026-08-02 -- Nolan et al. (worksheet_claude_constants_new.md)
-# Cross-checked: GPT 2026-08-02 -- OSIRIS-REx (constants_new_citation_verification_gpt.md)
+# Review-note: a `Cross-checked: GPT 2026-08-02 -- OSIRIS-REx` leg was
+#   removed here 2026-08-20. GPT REFUSED this row in that worksheet;
+#   the row was then corrected in response. A verdict that causes an
+#   edit is Resolved, not Cross-checked -- but Resolved did not exist
+#   until L-200 (2026-08-17), so there was no correct leg to write at
+#   the time. Recorded rather than treated as bad faith.
+# Resolved: worksheet_gemini-3-1-pro_reconciliation_sources_20260820.md constants_new.py::BENNU_RADIUS_KM -- value superseded by
+#   mission data, misattributed OLA confirmation removed (L-210)
 
 ERIS_RADIUS_KM = 1163
 # Source: Volumetric mean (Sicardy et al. 2011 occultation)
 
-HAUMEA_RADIUS_KM = 715
-# Source: JPL SSD mean radius (Lockwood et al. 2014)
-# Source+: Highly ellipsoidal: 1050x840x537 km -> geometric mean 779.5 km
-# Source+: JPL SSD publishes 715; equatorial 870
+HAUMEA_RADIUS_KM = 798
+# Source: Ortiz et al. 2017, Nature 550:219 (stellar occultation) --
+#   semi-axes 1161 +/- 30, 852 +/- 4, 513 +/- 16 km
+# Derived: volume-equivalent radius (1161 * 852 * 513)^(1/3) = 797.6 km,
+#   rounded to 798. Ortiz publishes the semi-axes and no mean radius, so
+#   this value is COMPUTED here rather than quoted.
+# Note: VISUALIZATION VALUE, and the two shape solutions differ by ~11%
+#   in radius. Lockwood et al. 2014, Earth Moon Planets 111:127 publishes
+#   715 km directly and is what JPL SSD adopted; the 2017 occultation is
+#   the only direct measurement. 798 is chosen for that reason.
+# Review-note: an unsourced "1050x840x537 km -> geometric mean 779.5 km"
+#   line was removed 2026-08-20. Those axes match NO published shape
+#   model -- Lockwood gives 960x770x495, Ortiz 1161x852x513 -- yet the
+#   779.5 computes correctly FROM them, so valid arithmetic on numbers
+#   with no source left no trace a reader or scanner could catch.
+#   Beware also the widespread secondary-source error of reading Ortiz's
+#   semi-axes as full axes, which halves Haumea to ~399 km.
 # Corrected 2026-08-02: 816 -> 715 per JPL SSD (prior value matched neither axes nor database)
+# Corrected 2026-08-20: 715 -> 798 per the 2017 occultation
+# Resolved: worksheet_gemini-3-1-pro_reconciliation_sources_20260820.md constants_new.py::HAUMEA_RADIUS_KM -- moved to the
+#   occultation solution, unsourced axes removed (L-210)
 # Cross-checked: Claude 2026-08-02 -- JPL SSD (worksheet_claude_constants_new.md)
 # Cross-checked: GPT 2026-08-02 -- JPL SSD (constants_new_citation_verification_gpt.md)
 

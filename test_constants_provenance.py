@@ -182,19 +182,16 @@ def test_center_body_radii_sun():
     """IAU 2015 nominal solar radius = 695700 km (matches SUN_RADIUS_KM)."""
     assert CENTER_BODY_RADII['Sun'] == 695700, \
         f"CENTER_BODY_RADII['Sun'] drifted to {CENTER_BODY_RADII['Sun']}"
-    # Cross-check with standalone SUN_RADIUS_KM
-    assert CENTER_BODY_RADII['Sun'] == SUN_RADIUS_KM, \
-        "CENTER_BODY_RADII['Sun'] and SUN_RADIUS_KM have diverged"
 
 
 def test_center_body_radii_earth():
-    """IAU 2015 nominal equatorial (WGS-84). Hybrid convention: EQUATORIAL not volumetric (6371.0)."""
-    assert CENTER_BODY_RADII['Earth'] == 6378.137, \
+    """IERS Conventions (2010) equatorial radius. Hybrid convention:
+    EQUATORIAL not volumetric (6371.0). The literal below is the whole
+    check -- CENTER_BODY_RADII['Earth'] IS EARTH_EQUATORIAL_RADIUS_KM by
+    reference, so comparing the two cannot fail and is not attempted."""
+    assert CENTER_BODY_RADII['Earth'] == 6378.1366, \
         f"CENTER_BODY_RADII['Earth'] = {CENTER_BODY_RADII['Earth']}. " \
         f"If this is 6371.0, the pre-April-16 volumetric-mean convention returned."
-    # Cross-check with standalone constant
-    assert CENTER_BODY_RADII['Earth'] == EARTH_EQUATORIAL_RADIUS_KM, \
-        "CENTER_BODY_RADII['Earth'] and EARTH_EQUATORIAL_RADIUS_KM have diverged"
 
 
 def test_center_body_radii_jupiter():
@@ -206,9 +203,6 @@ def test_center_body_radii_jupiter():
     assert CENTER_BODY_RADII['Jupiter'] == 71492, \
         f"CENTER_BODY_RADII['Jupiter'] = {CENTER_BODY_RADII['Jupiter']}. " \
         f"If this is 69911, the pre-April-16 volumetric-mean convention returned."
-    # Cross-check with standalone constant
-    assert CENTER_BODY_RADII['Jupiter'] == JUPITER_EQUATORIAL_RADIUS_KM, \
-        "CENTER_BODY_RADII['Jupiter'] and JUPITER_EQUATORIAL_RADIUS_KM have diverged"
 
 
 def test_center_body_radii_completeness():
@@ -264,24 +258,18 @@ def test_hyperbolic_objects_are_none():
 # Section 9: Cross-module invariants
 # ============================================================
 # Checks that constants_new.py internal consistency holds across sections.
-
-def test_earth_equatorial_matches_center_body():
-    """EARTH_EQUATORIAL_RADIUS_KM and CENTER_BODY_RADII['Earth'] must agree."""
-    assert EARTH_EQUATORIAL_RADIUS_KM == CENTER_BODY_RADII['Earth'], \
-        "EARTH_EQUATORIAL_RADIUS_KM != CENTER_BODY_RADII['Earth'] -- internal inconsistency"
-
-
-def test_jupiter_equatorial_matches_center_body():
-    """JUPITER_EQUATORIAL_RADIUS_KM and CENTER_BODY_RADII['Jupiter'] must agree."""
-    assert JUPITER_EQUATORIAL_RADIUS_KM == CENTER_BODY_RADII['Jupiter'], \
-        "JUPITER_EQUATORIAL_RADIUS_KM != CENTER_BODY_RADII['Jupiter'] -- internal inconsistency"
-
-
-def test_sun_radius_matches_center_body():
-    """SUN_RADIUS_KM and CENTER_BODY_RADII['Sun'] must agree."""
-    assert SUN_RADIUS_KM == CENTER_BODY_RADII['Sun'], \
-        "SUN_RADIUS_KM != CENTER_BODY_RADII['Sun'] -- internal inconsistency"
-
+#
+# Three tests were DELETED here on 2026-08-20 (L-210, Tony's ruling).
+# They asserted that EARTH_EQUATORIAL_RADIUS_KM, JUPITER_EQUATORIAL_
+# RADIUS_KM and SUN_RADIUS_KM each agreed with their CENTER_BODY_RADII
+# entry. But that dict holds each constant BY REFERENCE, so every one
+# was x == x: three test names promising a divergence check that could
+# not fail. They were written for a shadow copy this file does not
+# have. Two more of the same shape were deleted from Section 8, where
+# the literal pins beside them are the checks that can actually fail.
+# Do not restore them: if CENTER_BODY_RADII ever stops referencing the
+# constants, the fix is to make it reference them again, not to add a
+# test that watches the copy drift.
 
 def test_earth_polar_less_than_equatorial():
     """Earth is oblate: polar radius must be less than equatorial."""

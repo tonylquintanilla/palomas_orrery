@@ -10,25 +10,18 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 130  
-**Total Lines of Code (non-blank):** 102,979  
-**Total Public Functions/Classes:** 1,161
+**Total Python Files:** 128  
+**Total Lines of Code (non-blank):** 102,541  
+**Total Public Functions/Classes:** 1,156
 
 ## Classification Coverage
 
-**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L220_1_stamp_what_you_change.py`
-- `patch_L220_2_stamp_all_file_types.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 - `worksheet_keys.py`
-
-**Undetermined domain (2).** No valid `Domain:` tag.
-
-- `patch_L220_1_stamp_what_you_change.py`
-- `patch_L220_2_stamp_all_file_types.py`
 
 
 ---
@@ -125,7 +118,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,250 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (515 lines) |
-| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (789 lines) |
+| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (837 lines) |
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (401 lines) |
 | `exoplanet_stellar_properties.py` | Stellar Properties for Exoplanet Host Stars (484 lines) |
 | `exoplanet_systems.py` | Hardcoded Exoplanet System Catalog (572 lines) |
@@ -214,7 +207,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,038 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (342 lines) |
 | `test_citation_inheritance.py` | Regression tests for citation-block inheritance. (516 lines) |
-| `test_constants_provenance.py` | Regression tests for verified numeric constants. (289 lines) |
+| `test_constants_provenance.py` | Regression tests for verified numeric constants. (283 lines) |
 | `test_cross_checked.py` | Regression tests for cross-check annotations. (501 lines) |
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (224 lines) |
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (485 lines) |
@@ -231,8 +224,6 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L220_1_stamp_what_you_change.py` | Skill + ledger patch -- safe-file-editing 1.4 -> 1.5 (Stamp What You Change), L-220 opened, L-219's target version rebased to 1.6. (254 lines) |
-| `patch_L220_2_stamp_all_file_types.py` | Skill + ledger patch -- safe-file-editing 1.5 -> 1.6. Stamp What You Change generalised to every file type, not just .py. L-219 rebased to 1.7. (226 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |
