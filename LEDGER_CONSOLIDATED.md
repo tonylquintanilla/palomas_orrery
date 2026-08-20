@@ -221,7 +221,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*128 live items; 116 need attention (`!`); 127 RICE-scored; 85 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*129 live items; 117 need attention (`!`); 128 RICE-scored; 85 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -244,6 +244,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-210 | Pilot citation findings -- four rows in constants_new.py | OPEN | 3.6 | 2026-08-19 |
 | ! | L-215 | Ledger cleanup by topic, not by age | OPEN | 3.6 | 2026-08-19 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-06 |
+| ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
 | ! | L-176 | Shell hover text: add illustrated dimensions (radius_fraction -> km) | OPEN | 2.8 | 2026-08-04 |
 | ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-08-07 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
@@ -2729,15 +2730,40 @@ shadow constants); L-207 (the run that produced it).
   the existing refusal print, rather than in a new file. That is the
   surface already in Tony's routine when he presses Run; a report in a
   store nobody opens is a check that cannot fail.
+- **WHY REPORT RATHER THAN REJECT -- Tony's rationale, 2026-08-19,
+  recorded because it is the argument and not just the ruling.** A
+  reported label is one this project can then READ and decide about:
+  alias it, or unify it under a single label the way `Note` was
+  unified. A rejected label forecloses that -- the run stops and the
+  decision never gets made. The reading step is where the judgment
+  lives, and reporting is what delivers material to it.
+- **The `Corrected` drift is the worked example** [verified
+  @2f0aabe]. Corpus-wide the label appears in FOUR spellings with no
+  validator behind any of them: `# Corrected:` (7), `# Corrected
+  2026-08-02:` (5), `# Corrected 2026-08-05:` (1), `# Corrected in
+  Phase B:` (1). Three of the four would classify as unknown under the
+  new design, while a human reading them sees an obvious record leg.
+  That is exactly the case reporting is for: the reader sees all four,
+  and then decides between aliasing the dated forms and unifying them
+  on one label. Rejecting would have stopped the run and produced no
+  decision. Note also that this drift happened in the two record
+  labels that have no compiled pattern -- the two nothing was
+  watching.
 **Gap:** the BUILD. Design is settled and nothing is built. In order:
 generic label detection separated from policy; one home for the
 vocabulary with the scanner and the checker importing rather than
 compiling their own; `Note` admitted to context; `# Review-note:`
 added as withheld free-form; the moon line rehomed; the four odd
-labels fixed at source; the 12-line marker sweep. Re-dispatching the
-affected rows afterwards is still a separate decision, because a
-second dispatch of a row this project has already argued about in
-writing is not an independent leg.
+labels fixed at source; the 12-line marker sweep. Deciding the form of
+`Removed` and `Corrected` is part of the build, not a precondition of
+it -- there is no agreed form to register yet. One word also changes
+while the file is open: `legs_of`'s docstring says of malformed
+continuation markers that "their text is reported and NOT joined,"
+where the code appends only a message naming the label; the accurate
+sentence is "their label is reported and their text is NOT joined."
+Re-dispatching the affected rows afterwards is still a separate
+decision, because a second dispatch of a row this project has already
+argued about in writing is not an independent leg.
 **Ref:** `worksheet_keys.py` `LEG_RE` / `legs_of` / `continues_a_leg`;
 `provenance_scanner.py` `CROSS_CHECK_LINE_RE` / `RESOLVED_LINE_RE`;
 `documentation/L214_MEASUREMENT_20260819.md`;
@@ -3020,6 +3046,36 @@ decide from the classification rather than in advance.
 **Ref:** `worksheet_checker.py` `collect_claims`;
 `documentation/L214_MEASUREMENT_20260819.md` (where the number is
 announced); L-214.
+
+#### [L-219] Patch-script naming cannot express a cross-handle run order
+<!-- L:219 status:OPEN upd:2026-08-19 section:A flag: rice:2/2/85/1 -->
+- **Recorded 2026-08-19, from the 2026-08-19 handoff's own error log,
+  where it was named as a real gap and explicitly noted as not yet
+  having an item.** Two patches were delivered with a cross-handle
+  dependency -- `patch_L209_2` had to run AFTER `patch_L213_3` -- but
+  the `safe-file-editing` sequence number is scoped to its own ledger
+  handle, so alphabetical sort order contradicted run order. Only the
+  prose carried the real sequence.
+- **What saved it, and why that is not enough.** The base fingerprint
+  guard caught the out-of-order run and wrote nothing, which is the
+  guard working. But an abort tells you the order was wrong without
+  telling you what the right order was, and the convention's own
+  promise is that "sort order is then run order."
+- **The convention as written cannot express this.** `patch_<handle>_
+  <n>_<what>.py` numbers within one handle. Nothing in the filename
+  ranks two handles against each other. Options not yet weighed: a
+  session-scoped prefix ahead of the handle; a single script spanning
+  both handles when the dependency is real; or accepting the limit and
+  requiring the dependency in the docstring of the LATER script, where
+  the person about to run it will see it.
+**Note:** RICE is Claude's proposal, unratified.
+**Gap:** pick one of the three and write it into `safe-file-editing`,
+which would be 1.5.
+**Tony-action (decide):** which option.
+**Ref:** `skills/safe-file-editing/SKILL.md` "Naming and Archiving a
+Patch Script"; `documentation/patch_L209_2_alfven_migration.py` and
+`documentation/patch_L213_3_cache_line_and_close.py` (the pair that
+exposed it); HANDOFF_20260819_alfven_and_the_swap.md, error 4.
 
 ## PENDING ACTION (Tony-side)
 
