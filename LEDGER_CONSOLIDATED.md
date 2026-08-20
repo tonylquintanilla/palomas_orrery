@@ -4,6 +4,9 @@ Tony Quintanilla, PE | Claude | Palomas Orrery Project
 Consolidated: June 7, 2026 from handoff v28; supersedes all prior in-handoff
 ledgers. Current HEAD: see git log (repo is the source of truth).
 Module updated: June 2026 with Anthropic's Claude Sonnet 4.6, Opus 4.8 + Claude Fable 5
+Module updated: August 20, 2026 with Anthropic's Claude Opus 5 (L-221:
+master plan as sequencing authority; L-214 correction and scoping),
+built on 3586970d.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -221,11 +224,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*128 live items; 116 need attention (`!`); 127 RICE-scored; 87 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*129 live items; 117 need attention (`!`); 128 RICE-scored; 87 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-221 | The master plan is the roadmap, and it outranks RICE | OPEN | 10.8 | 2026-08-20 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-19 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
@@ -2750,12 +2754,59 @@ shadow constants); L-207 (the run that produced it).
   decision. Note also that this drift happened in the two record
   labels that have no compiled pattern -- the two nothing was
   watching.
+- **CORRECTION, 2026-08-20: nobody is compiling the vocabulary
+  twice** [verified @3586970d]. The build-step wording above said
+  the scanner and the checker should import "rather than compiling
+  their own." That overstated the problem. `worksheet_checker.py`
+  already imports both record patterns from `provenance_scanner`
+  (`ps.CROSS_CHECK_LINE_RE` at line 1190, `ps.RESOLVED_LINE_RE` at
+  line 1623) and compiles no copies of its own. The state is not
+  one duplicated set. It is TWO single homes that DISAGREE: the
+  scanner's patterns are compiled `(?mi)`, case-INsensitive, while
+  `LEG_RE` in `worksheet_keys.py` carries no flags and is
+  case-SENSITIVE. The wording is corrected above.
+- **That disagreement is NOT a new decision, and reopening it as
+  one would have undone a measured build step.** Step 6 already
+  fixes the four odd labels at source, and the 12-lines-at-8-sites
+  count depends on that relabelling. Relaxing the shared matcher to
+  ignore case would make `# NOTE:` work without being edited,
+  remove part of step 6's reason to exist, and invalidate the
+  count Fable had already caught this project undercounting once.
+  The ruling stands as made: edit at source, do not alias, do not
+  relax the matcher. The scanner keeps its existing
+  case-insensitive behaviour by default, and after step 6 nothing
+  case-odd remains on the builder's side to disagree about.
+- **SCOPING: move the label SET, not the body grammar** [verified
+  @3586970d]. "One home for the vocabulary" can be read as "move
+  the regexes," which would drag semantics into a keys module. The
+  scanner's constants are label names PLUS a body contract:
+  `RESOLVED_LINE_RE` has a companion `RESOLVED_BODY_RE` enforcing
+  `<worksheet> <key> -- <what> (L-nnn)` with ISO-only dates. What
+  moves to `worksheet_keys.py` is the label set and its TRANSPORT
+  policy -- which labels exist, and for each, whether it travels to
+  a responder or is withheld. What stays in `provenance_scanner.py`
+  is the body GRAMMAR and its validation, with the scanner's line
+  patterns derived from the shared label names rather than from its
+  own literals. That is the same transport/grammar split the Mode 7
+  review settled on, applied one layer down.
+- **`worksheet_keys.py` carries no `Role:` tag** [verified
+  @3586970d]. `Domain: dev_tools` is present and `Role:` is absent,
+  so `module_atlas.py` files it under "Undetermined role (6)" on
+  the atlas's own front page -- together with
+  `worksheet_key_aliases.py`, `test_worksheet_keys.py` and
+  `test_extractor_pins.py`, the whole worksheet-keys cluster
+  untagged as a group. The build opens that docstring anyway for
+  the SECOND JOB section, so the tag goes in the same patch under
+  Fix In Passing, Report It. `TAG_RE` requires `Role:` alone on a
+  line with a SINGLE-token value drawn from `VALID_ROLES`, read via
+  `ast.get_docstring` -- a two-word value or a comment-block header
+  reads as absent rather than as an error.
 **Gap:** the BUILD. Design is settled and nothing is built. In order:
 generic label detection separated from policy; one home for the
-vocabulary with the scanner and the checker importing rather than
-compiling their own; `Note` admitted to context; `# Review-note:`
-added as withheld free-form; the moon line rehomed; the four odd
-labels fixed at source; the 12-line marker sweep. Deciding the form of
+vocabulary that both the scanner and the checker read from; `Note`
+admitted to context; `# Review-note:` added as withheld free-form; the
+moon line rehomed; the four odd labels fixed at source; the 12-line
+marker sweep. Deciding the form of
 `Removed` and `Corrected` is part of the build, not a precondition of
 it -- there is no agreed form to register yet. One word also changes
 while the file is open: `legs_of`'s docstring says of malformed
@@ -3036,6 +3087,52 @@ which would be 1.7 -- 1.5 and 1.6 are taken by L-220.
 Patch Script"; `documentation/patch_L209_2_alfven_migration.py` and
 `documentation/patch_L213_3_cache_line_and_close.py` (the pair that
 exposed it); HANDOFF_20260819_alfven_and_the_swap.md, error 4.
+
+#### [L-221] The master plan is the roadmap, and it outranks RICE
+<!-- L:221 status:OPEN upd:2026-08-20 section:A flag: rice:3/2/90/0.5 -->
+- **Tony's ruling, 2026-08-20.** The document stack in
+  `ledger-and-session-records` is an AUTHORITY ordering -- who wins
+  when two documents disagree about status. The master plan is not
+  in it and does not belong in it, because it is not competing on
+  that axis. It has a different authority: SEQUENCING.
+- **What the master plan is for.** It is the roadmap -- where we
+  are and where we are going, not what is directly in front. It is
+  traced at three levels of zoom: the full plan
+  (`MASTER_PLAN_INTERACTIVE_GALLERY.md`), its summary, and the
+  critical path (`MASTER_PLAN_CRITICAL_PATH_SUMMARY.md`).
+- **It updates at key junctures, not at every change.** Stepwise
+  updating is the ledger's job. That cadence is a property of what
+  the plan is for, not a defect to be corrected by restamping it
+  more often -- a juncture is its unit.
+- **It outranks RICE on sequencing.** RICE ranks items in
+  isolation. Bundling several items to complete a planned step
+  SUPERSEDES RICE order. The ledger header already calls RICE
+  "prioritization for planning"; this names what the planning is
+  and says it wins. Where the plan and the ledger disagree about
+  STATUS, the ledger still wins -- the two authorities do not
+  overlap.
+- **Why it came up.** A session read the missing anchor on the
+  2,010-line gallery master plan as evidence the plan was stale and
+  proposed ranking it below the ledger on currency. That framing
+  implies the plan is deficient and should update more often, which
+  would manufacture work. Tony's correction supplied the right
+  axis. (The missing anchor itself is not a finding: it is the
+  founding case of L-220, already ruled.)
+- **Confirmed the same day: the status rule covers session
+  DOCUMENTS, not just handoffs and manifests.** The skill stated it
+  for handoff-vs-manifest only. Any document written in a live
+  session -- a review return, a design note, an analysis -- can
+  assert that a question is open when the ledger has settled it.
+  Newest bytes are not a claim about what was decided. Recorded in
+  `ledger-and-session-records` 1.8 beside the ruling above.
+**Note:** RICE is Claude's proposal, unratified.
+**Gap:** none -- both rulings are recorded in
+`ledger-and-session-records` 1.8 by this patch. Close once a session
+confirms its loaded copy reads 1.8.
+**Ref:** `skills/ledger-and-session-records/SKILL.md` "The Document
+Stack"; LEDGER_CONSOLIDATED.md "RICE scoring -- prioritization for
+planning"; L-220 (Stamp What You Change); L-215 (the RICE tail
+measurement); L-214 (the session this surfaced in).
 
 ## PENDING ACTION (Tony-side)
 

@@ -10,18 +10,25 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 128  
-**Total Lines of Code (non-blank):** 102,541  
-**Total Public Functions/Classes:** 1,156
+**Total Python Files:** 130  
+**Total Lines of Code (non-blank):** 103,097  
+**Total Public Functions/Classes:** 1,160
 
 ## Classification Coverage
 
-**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
+- `patch_L210_2_mark_continuations.py`
+- `patch_L221_1_master_plan_sequencing.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 - `worksheet_keys.py`
+
+**Undetermined domain (2).** No valid `Domain:` tag.
+
+- `patch_L210_2_mark_continuations.py`
+- `patch_L221_1_master_plan_sequencing.py`
 
 
 ---
@@ -118,7 +125,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,250 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (515 lines) |
-| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (837 lines) |
+| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (833 lines) |
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (401 lines) |
 | `exoplanet_stellar_properties.py` | Stellar Properties for Exoplanet Host Stars (484 lines) |
 | `exoplanet_systems.py` | Hardcoded Exoplanet System Catalog (572 lines) |
@@ -224,6 +231,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
+| `patch_L210_2_mark_continuations.py` | Built on eee4cc61a66607c2533549361c11be6af0aec15d at https://github.com/tonylquintanilla/palomas_orrery (branch main). Written August 20, 2026 with Anthropic's Claude Opus 5. (179 lines) |
+| `patch_L221_1_master_plan_sequencing.py` | Built on eee4cc61a66607c2533549361c11be6af0aec15d at https://github.com/tonylquintanilla/palomas_orrery (branch main). Written August 20, 2026 with Anthropic's Claude Opus 5. (381 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |

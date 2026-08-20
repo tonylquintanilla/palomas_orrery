@@ -38,11 +38,7 @@ Domain: orrery
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 Reviewed: April 2026 by Google Gemini (Mode 7 cross-verification)
 
-Module updated: August 20, 2026 with Anthropic's Claude Opus 5 (L-210:
-EARTH_EQUATORIAL_RADIUS_KM to IERS precision, BENNU_RADIUS_KM to the
-OSIRIS-REx figure, HAUMEA_RADIUS_KM to the 2017 occultation,
-STREAMER_BELT_RADII held with its unsourced range withdrawn). Built on
-3586970d.
+Module updated: August 20, 2026 with Anthropic's Claude Opus 5 (L-210 reconciliation; see the Resolved legs on the affected rows)
 Module updated: July 2026 with Anthropic's Claude Sonnet 5 (L-162: 14
 remaining CENTER_BODY_RADII bodies promoted to named constants; value
 and citation carried forward unchanged from each dict entry)
@@ -76,7 +72,7 @@ SUN_RADIUS_KM = 695700.0
 
 EARTH_EQUATORIAL_RADIUS_KM = 6378.1366
 # Source: IERS Conventions (2010), Petit & Luzum (eds.), IERS Technical
-#   Note No. 36, Table 1.1; IAU B3 rounds to 6378.1 km
+# Source+: Note No. 36, Table 1.1; IAU B3 rounds to 6378.1 km
 # Ref: Prsa et al. 2016, AJ 152:41 (arXiv:1605.09788)
 # Also: https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html
 # Note: IERS publishes 6378136.6 +/- 0.1 m. IAU B3's 6.3781e6 m is an
@@ -206,7 +202,7 @@ OUTER_CORONA_RADII = 50
 # New shells (added April 2026)
 STREAMER_BELT_RADII = 6.0
 # Source: Golub & Pasachoff, "The Solar Corona" (2nd ed., 2010) --
-#   coronal structure bounded at roughly 5-10 R_sun
+# Source+: coronal structure bounded at roughly 5-10 R_sun
 # Note: VISUALIZATION BOUNDARY, not a physical edge. 6.0 is a drawing
 #   choice inside the range Golub & Pasachoff bound; streamer-belt
 #   structure continues beyond it.
@@ -403,7 +399,7 @@ PLUTO_RADIUS_KM = 1188.3
 
 BENNU_RADIUS_KM = 0.24503
 # Source: Barnouin et al. 2019, Nature Geoscience 12:247, Table 1 --
-#   mean radius 245.03 +/- 0.08 m from OSIRIS-REx OLA and imaging
+# Source+: mean radius 245.03 +/- 0.08 m from OSIRIS-REx OLA and imaging
 # Note: supersedes the pre-encounter radar shape model of Nolan et al.
 #   2013, Icarus 226:629 (mean diameter 492 +/- 20 m, implying ~0.246
 #   km), which this row previously carried. The mission figure is
@@ -425,10 +421,10 @@ ERIS_RADIUS_KM = 1163
 
 HAUMEA_RADIUS_KM = 798
 # Source: Ortiz et al. 2017, Nature 550:219 (stellar occultation) --
-#   semi-axes 1161 +/- 30, 852 +/- 4, 513 +/- 16 km
+# Source+: semi-axes 1161 +/- 30, 852 +/- 4, 513 +/- 16 km
 # Derived: volume-equivalent radius (1161 * 852 * 513)^(1/3) = 797.6 km,
-#   rounded to 798. Ortiz publishes the semi-axes and no mean radius, so
-#   this value is COMPUTED here rather than quoted.
+# Derived+: rounded to 798. Ortiz publishes the semi-axes and no mean
+# Derived+: radius, so this value is COMPUTED here rather than quoted.
 # Note: VISUALIZATION VALUE, and the two shape solutions differ by ~11%
 #   in radius. Lockwood et al. 2014, Earth Moon Planets 111:127 publishes
 #   715 km directly and is what JPL SSD adopted; the 2017 occultation is

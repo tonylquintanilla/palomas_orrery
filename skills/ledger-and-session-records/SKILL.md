@@ -6,8 +6,9 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Skill version: 1.7 | Cut from palomas_orrery @ 434a712b (v1.7), earlier
-@ 305b269 (v1.6), @ 3398970 (v1.5) | August 19, 2026
+Skill version: 1.8 | Cut from palomas_orrery @ 3586970d (v1.8), earlier
+@ 434a712b (v1.7), @ 305b269 (v1.6), @ 3398970 (v1.5) | August 20,
+2026, with Anthropic's Claude Opus 5
 Sources: LEDGER_CONSOLIDATED.md header, ledger_index.py at HEAD, handoff
 v28 (consolidation) and v29 (cleanup), food insecurity handoffs. v1.3
 adds the Tony-action (do)/(decide) tag convention and its rollup rule,
@@ -21,7 +22,13 @@ ROLE_MAP entry, because ROLE_MAP became a regenerated mirror that the
 next module_atlas.py run overwrites. v1.7 adds Cluster the Tail by
 Topic, Not by Age -- Tony's ruling of August 19, 2026, replacing a
 by-age triage, after a measurement found 54 of 107 open items both
-below RICE 3.0 and untouched for a month (L-215).
+below RICE 3.0 and untouched for a month (L-215). v1.8 adds the
+master plan to The Document Stack as a SEQUENCING authority rather
+than a rung in the status ordering, with Tony's ruling that
+bundling items to complete a planned step supersedes RICE order,
+and extends the status rule from handoff-vs-manifest to any session
+document contradicting a settled ledger decision (both L-221,
+August 20, 2026).
 
 Note: READING the ledger at session start is resident Part-1 behavior,
 not this skill's job. This skill carries the maintenance mechanics.
@@ -41,6 +48,36 @@ protocol -> ledger -> handoff -> manifest -> code -> repo -> ledger.
   time (never on an un-pushed base); opens with the anchor (built on
   <SHA> at <URL>) per the requirement below. If handoff and manifest
   disagree, that is a flag to raise, not a thing to silently resolve.
+
+**The master plan is not a rung in that ordering** (Tony's ruling,
+2026-08-20, L-221). It is the ROADMAP -- where we are and where we
+are going, not what is directly in front -- traced at three levels
+of zoom: the full plan, its summary, and the critical path. It
+restamps at key junctures rather than at every change, because a
+juncture is its unit; stepwise updating is the ledger's job. That
+cadence is not staleness to be corrected by restamping more often.
+
+It does not compete on the axis above, which is about STATUS: where
+any two documents disagree about what is done, the ledger wins. The
+plan carries a different authority, SEQUENCING. RICE ranks items in
+isolation; bundling several items to complete a planned step
+SUPERSEDES RICE order. The ledger already calls RICE
+"prioritization for planning" -- this names what the planning is
+and says it outranks the score.
+
+**The same rule reaches past handoffs and manifests** (Tony's
+ruling, 2026-08-20, L-221). Any session document -- a review
+return, a design note, an analysis written this session -- can
+assert that a question is open when the ledger has already settled
+it. Being the newest file in the room makes a document's BYTES
+current; it does not make it right about what was decided. Context
+Priority ranks uploads above the repo for exactly the first reason
+and not the second. So check a document's status claims against the
+ledger before acting on them, and raise the disagreement rather
+than resolving it silently. (Origin, 2026-08-20: a document's
+closing section said a decision "belongs to Tony"; the ledger had
+ruled it two sessions earlier and a build step depended on the
+ruling.)
 
 ## Ledger Block Format
 

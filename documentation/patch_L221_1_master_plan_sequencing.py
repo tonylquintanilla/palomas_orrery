@@ -1,6 +1,6 @@
 """patch_L221_1_master_plan_sequencing.py
 
-Built on 3586970dd841d5b417f8e6f59de4d3e3d440d001 at
+Built on eee4cc61a66607c2533549361c11be6af0aec15d at
 https://github.com/tonylquintanilla/palomas_orrery (branch main).
 Written August 20, 2026 with Anthropic's Claude Opus 5.
 
@@ -43,7 +43,7 @@ import hashlib
 import os
 import sys
 
-BASE_SHA = '3586970dd841d5b417f8e6f59de4d3e3d440d001'
+BASE_SHA = 'eee4cc61a66607c2533549361c11be6af0aec15d'
 MODEL = "Anthropic's Claude Opus 5"
 
 LEDGER = 'LEDGER_CONSOLIDATED.md'
@@ -321,18 +321,28 @@ def main():
             fail('%s not found. Run this from the repo root.' % path)
 
     # --- Gate 1: base fingerprints ---------------------------------
+    # Read binary and normalise to LF before fingerprinting. The ledger
+    # is CRLF on Tony's working copy while the repo stores LF, so a raw
+    # md5 of the bytes on disk cannot match a fingerprint taken from
+    # GitHub -- which is exactly how this patch aborted on its first run
+    # (2026-08-20). Line endings are restored per file on write.
     originals = {}
+    endings = {}
     for path, expected in FINGERPRINTS.items():
         with open(path, 'rb') as handle:
             data = handle.read()
+        endings[path] = b'\r\n' if b'\r\n' in data else b'\n'
+        data = data.replace(b'\r\n', b'\n')
         actual = hashlib.md5(data).hexdigest()
         if actual != expected:
-            fail('%s does not match the base at %s.\n'
+            fail('%s does not match the base at %s (compared in LF form, so '
+                 'a CRLF checkout is not the cause).\n'
                  '  expected md5 %s\n  actual   md5 %s\n'
                  '  Reconcile against HEAD before running this.'
                  % (path, BASE_SHA[:8], expected, actual))
         originals[path] = data
-        print('[base ok] %s  md5 %s' % (path, actual))
+        print('[base ok] %-44s md5 %s  (%s on disk)'
+              % (path, actual, 'CRLF' if endings[path] == b'\r\n' else 'LF'))
 
     # --- Gate 2: encoding -------------------------------------------
     for path, data in originals.items():
@@ -380,9 +390,13 @@ def main():
 
     # --- Write, all or nothing --------------------------------------
     for path in (LEDGER, SKILL):
+        out = working[path].encode('ascii')
+        if endings[path] == b'\r\n':
+            out = out.replace(b'\n', b'\r\n')
         with open(path, 'wb') as handle:
-            handle.write(working[path].encode('ascii'))
-        print('[written] %s' % path)
+            handle.write(out)
+        print('[written] %-44s (%s preserved)'
+              % (path, 'CRLF' if endings[path] == b'\r\n' else 'LF'))
 
     print('')
     print('CURRENCY STAMPS UPDATED (Stamp What You Change, '
