@@ -221,7 +221,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*125 live items; 113 need attention (`!`); 124 RICE-scored; 85 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*126 live items; 114 need attention (`!`); 125 RICE-scored; 85 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -238,6 +238,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
 | ! | L-214 | The request builder drops the comment lines that matter | OPEN | 3.8 | 2026-08-19 |
+| ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-08-19 |
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
 | ! | L-210 | Pilot citation findings -- four rows in constants_new.py | OPEN | 3.6 | 2026-08-19 |
 | ! | L-215 | Ledger cleanup by topic, not by age | OPEN | 3.6 | 2026-08-19 |
@@ -2618,12 +2619,117 @@ shadow constants); L-207 (the run that produced it).
   Visibility Convention argues for refusing, and the count of affected
   rows across the corpus is unmeasured.
 **Note:** RICE is Claude's proposal, unratified.
-**Gap:** unmeasured -- how many rows in the 23-row pilot corpus, and how
-many across `constants_new.py`, carry a label the builder does not read.
-That count comes before the design.
+- **COUNTED 2026-08-19 at `d25b5368`, using the project's own
+  `collect_claims` and `LEG_RE`.** 12 of 55 claim sites carry a label
+  the builder cannot read; 9 of the 12 are in `constants_new.py`, the
+  others one each in the Mercury, Venus and Moon shell modules.
+- **Two kinds of dropped label, and only one is a defect.** The RECORD
+  legs -- `Cross-checked` (216 lines), `Removed` (18), `Corrected` (16)
+  -- are deliberately invisible to the request, so a second reader
+  cannot see what the last one concluded. That is correct behaviour.
+  What remains after excluding them is almost one label: `Note` at 17
+  lines, plus `HELIOCENTRIC` at 2 and `NOTE` at 2.
+- **The finding that reframes the pilot: THREE of the five rows still
+  on the reconciliation queue are on this list, and in each case the
+  redacted Note is what the responders spent the dispatch
+  rediscovering.**
+  - `STREAMER_BELT_RADII` -- "Visualization cutoff at upper end of 4-6
+    R_sun observed range." The row where the citation was found
+    inverted. No leg was told the value was a drawing choice.
+  - `EARTH_EQUATORIAL_RADIUS_KM` -- "B3 rounds to 6378.1 km; full
+    precision from IERS Conventions." All three legs flagged exactly
+    this by three different routes. The file already said it.
+  - `INNER_CORONA_RADII` -- "Visualization boundary for inner
+    (K-)corona; physical extent 2-3 R_sun." The row where all three
+    legs split on whether a visualization boundary is verdictable at
+    all, which is an open ruling. The file answers it in a line none of
+    them could see.
+- **Two more worth naming.** `HELIOPAUSE_RADII`, the canary row, hides
+  its conversion arithmetic in a Note -- two legs reproduced that
+  arithmetic to the digit rather than reading it. And `HELIOCENTRIC`
+  appears TWICE, on `ALFVEN_SURFACE_RADII` and `PARKER_CLOSEST_RADII`:
+  the same invented label, both times on the origin question that
+  produced L-209.
+- **What the count changes.** Adding `Note` to `CONTEXT_LEGS` is one
+  label and would have altered what three of the pilot's hardest rows
+  were checked against. The Visibility Convention still argues for
+  REFUSING on an unrecognised label rather than walking past it
+  silently, since a label nobody reads has no correction path. Widen,
+  refuse, or report-into-the-worksheet remains undecided -- but it is
+  now a design conversation with a measurement under it.
+**Note:** RICE is Claude's proposal, unratified.
+**Gap:** the design choice itself. Counting is done; nothing is built.
+Re-dispatching the affected rows after the fix is a separate decision,
+because a second dispatch of a row this project has already argued
+about is not an independent leg.
 **Ref:** `worksheet_keys.py` `LEG_RE` / `legs_of` / `continues_a_leg`;
 L-209 (the row that exposed it); L-203 (the Visibility Convention);
-L-204; L-207.
+L-204; L-207; L-210 (three of whose rows this count implicates).
+
+#### [L-216] Gallery swap fails under a filesystem lock (OneDrive)
+<!-- L:216 status:OPEN upd:2026-08-19 section:A flag: rice:3/3/85/2 -->
+- **2026-08-19: the nightly run wiped the served tree.** GitHub Desktop
+  showed 56 deletions in the gallery repo and zero additions.
+  `data/solar-system/` was absent while BOTH halves of the generation
+  survived: `solar-system.prev` (the previous generation) and
+  `.staging_solar-system_20260819T214723Z` (the new one). Nothing was
+  committed and nothing was lost.
+- **The zero-additions reading was an artifact.** The gallery
+  `.gitignore` hides `data/.staging_*/`, `data/solar-system.prev/` and
+  `data/solar-system.quarantine_*/`, so a half-completed swap looks
+  exactly like total loss.
+- **The build was clean; only the swap failed.** Run record
+  `20260819T214723Z.json`: `structural_validation: pass`,
+  `guard_warnings: []`, finished 13.8 s after start. Good data that
+  never landed -- not the guard catching a bad build.
+- **Reproduced the same evening, and it named itself.** A manual re-run
+  printed: `[RECOVER] could not remove retained data\solar-system.prev
+  ([WinError 5] Access is denied: data\solar-system.prev\raw\elements);
+  swap will quarantine it`. The lock is real and persistent. The repo
+  lives under `C:\Users\tonyq\OneDrive\...`, and a sync engine holding
+  a handle on a directory is what makes a rename fail.
+- **WHICH rename it catches is the whole difference.** The re-run hit
+  the CLEANUP rmtree, which the code handles by design -- quarantine
+  and carry on -- and the swap completed. The failing run hit
+  `staging -> live`, which has no in-run recovery and leaves the live
+  directory missing. Same cause, different victim.
+- **The pile was the signal all along.** ~30 `solar-system.quarantine_*`
+  directories run back to 2026-07-21, one per night. Each is a run
+  where the retained `.prev` could not be removed. The mechanism has
+  been printing every night for a month and reading as normal, because
+  the builder is built to survive it.
+- **Recovery, and it is the operational rule (Tony, 2026-08-19):** for
+  a cache hiccup, DISCARD the deletions in GitHub Desktop and RE-RUN.
+  Discard restores the live tree from HEAD byte for byte; the re-run
+  builds a fresh generation. Three conditions make it safe and they
+  should travel with the rule: the live tree is committed, the swap is
+  all-or-nothing so a failure leaves a COMPLETE `.prev` or staging and
+  never a mixed one, and nothing reaches the remote until Tony commits.
+  Running with `--commit` would break the third.
+- **The visibility gap, and it comes BEFORE the swap fix.** The run
+  record is written INSIDE the generation, so a run whose swap fails
+  strands its own record in a directory `.gitignore` hides. The
+  committed history will show the 18th, the 19th 23:10 run, and no sign
+  that a run in between lost its data. The swap OUTCOME needs recording
+  outside the generation, or every recurrence costs another evening of
+  inference. Same Visibility Convention shape as L-214, one layer out.
+- **Then the cause.** Retry the renames with backoff if the lock is
+  transient at the moment of the swap, or move the repo off OneDrive if
+  it is not. WinError 5 on the cleanup proves persistence at run START;
+  it does not prove the swap window is equally exposed.
+- **Tony-action (do):** the operational rule above belongs in
+  `gallery-cache-builder`, which would be 1.4. NOT bumped tonight:
+  `ledger-and-session-records` went to 1.7 today and that reinstall is
+  unverified from inside this session. Discharge that first, then bump
+  this one. Same pattern as the dispatch-hygiene rule on 2026-08-19.
+**Note:** RICE is Claude's proposal, unratified.
+**Gap:** unmeasured -- whether the `staging -> live` rename is exposed
+to the same lock as the cleanup, or was unlucky once. One data point.
+**Ref:** `tools/gallery_cache_builder.py` `atomic_swap_dir` (~1176),
+`recover_incomplete_swap` (~1223), `_sweep_siblings` (~1241) in the
+gallery repo; run records `20260819T214723Z.json` (failed) and
+`20260819T231042Z.json` (recovered); gallery at `8a4aa41`; L-098 (the
+builder); L-214 (the same visibility shape).
 
 #### [L-215] Ledger cleanup by topic, not by age
 <!-- L:215 status:OPEN upd:2026-08-19 section:A flag: rice:3/3/80/2 -->

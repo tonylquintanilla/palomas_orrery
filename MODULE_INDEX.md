@@ -11,7 +11,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 128  
-**Total Lines of Code (non-blank):** 102,501  
+**Total Lines of Code (non-blank):** 102,499  
 **Total Public Functions/Classes:** 1,159
 
 ## Classification Coverage
@@ -202,7 +202,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `maintenance_run.py` | - L-188. One command, the whole maintenance suite. (477 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (957 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (955 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,038 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (342 lines) |
