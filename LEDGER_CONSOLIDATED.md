@@ -3030,7 +3030,7 @@ announced); L-214.
   the person about to run it will see it.
 **Note:** RICE is Claude's proposal, unratified.
 **Gap:** pick one of the three and write it into `safe-file-editing`,
-which would be 1.6 -- 1.5 is taken by L-220.
+which would be 1.7 -- 1.5 and 1.6 are taken by L-220.
 **Tony-action (decide):** which option.
 **Ref:** `skills/safe-file-editing/SKILL.md` "Naming and Archiving a
 Patch Script"; `documentation/patch_L209_2_alfven_migration.py` and
@@ -6052,6 +6052,32 @@ Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
   written for an imagined failure, not an observed one, which is what
   Extend a Boundary Before Adding a Path exists to refuse. If it ever
   happens it earns a field note then.
+- **AMENDED 2026-08-20 in `safe-file-editing` 1.6, same day, on Tony's
+  question: "shouldn't the anchoring etc apply to md files too, not just
+  py files?"** It should, and 1.5 would not have made a reader think so.
+  Its opening sentence was file-agnostic but its only concrete example
+  was a Python module docstring, and the skill's own description says
+  "especially .py" -- so the rule covered Markdown in principle and
+  would not have fired on it in practice, which is the prose form of a
+  check that cannot fail. 1.6 names the currency block for each file
+  type in a table and says outright that Markdown is where the rule was
+  earned.
+- **The error that proved it, and it was in the patch that introduced
+  the rule.** `patch_L220_1` printed "LEDGER_CONSOLIDATED.md -- no
+  currency block of its own." False. The ledger header carries `Module
+  updated: June 2026 with Anthropic's Claude Sonnet 4.6, Opus 4.8 +
+  Claude Fable 5`, a Consolidated date, and Tony's own RICE review line.
+  Claude asserted an absence without looking -- the same shape as the
+  truncated-grep false absence in the 2026-08-19 handoff, error 2. The
+  ledger's stamp still reads June while the file was edited four times
+  on 2026-08-20; whether a nightly-regenerated file should carry a
+  hand-maintained stamp at all is left for whoever next touches that
+  header.
+- **Tony's reason for doing it immediately rather than folding it into
+  the next bump.** "The documentation is what keeps our conversation
+  targeted, clear and trackable." Recorded in the skill section itself,
+  because a rule whose cost is visible and whose reason is not gets
+  quietly dropped.
 **Note:** RICE is Claude's proposal, unratified.
 **Ref:** `skills/safe-file-editing/SKILL.md` "Stamp What You Change" and
 "Fix In Passing, Report It"; `module_atlas.py` header (L-163 Phase 3);

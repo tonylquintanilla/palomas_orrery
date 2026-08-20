@@ -1,4 +1,4 @@
-# HANDOFF 2026-08-19 (evening) -- L-214 designed, not built
+# HANDOFF 2026-08-19/20 -- L-214 designed, not built
 
 **Built on `f603be381d447137a45f59310157391d2ce2ad9a` at
 https://github.com/tonylquintanilla/palomas_orrery (branch main).
@@ -33,11 +33,13 @@ builder work.** [CRITICAL, Stale Skill = Stop.] Same shape, same reason.
 Bumped 1.3 -> 1.4 earlier in this session and reinstalled. The manifest
 and the repo copy at HEAD both say 1.4.
 
-**2b. Confirm the loaded `safe-file-editing` reads 1.5 before editing
-existing files.** [CRITICAL, Stale Skill = Stop.] Bumped 1.4 -> 1.5 in
-this session's last patch, carrying Stamp What You Change (L-220). This
-one fires on nearly any build work, so it will almost certainly be the
-first of the three to load.
+**2b. Confirm the loaded `safe-file-editing` reads 1.6 before editing
+existing files.** [CRITICAL, Stale Skill = Stop.] Bumped 1.4 -> 1.5 ->
+1.6 in this session's last two patches, carrying Stamp What You Change
+(L-220). 1.6, not 1.5 -- the same-day amendment generalised the rule
+from Python modules to every file type. This skill fires on nearly any
+build work, so it will almost certainly be the first of the three to
+load.
 
 THREE pending skill confirmations is two more than this project usually
 carries, and the previous session deliberately held one back to avoid
@@ -203,7 +205,19 @@ proposed a generated currency stamp. Tony's rule is better than both:
 the patch that changes a file updates that file's currency block in the
 same transaction, names the model, and prints what it stamped. It cannot
 drift, because there is no second step to forget. Recorded as Stamp What
-You Change; L-219's target version rebased to 1.6.
+You Change; L-219's target version rebased to 1.7.
+
+Amended the same day as 1.6, on Tony's question of whether the rule
+covers `.md` as well as `.py`. It should and 1.5 would not have made a
+reader think so: the opening sentence was file-agnostic but the only
+concrete example was a Python module docstring, and the founding case
+was stale Markdown headers. Proof arrived from the patch that introduced
+the rule -- it printed "LEDGER_CONSOLIDATED.md -- no currency block of
+its own," which is false; the ledger header carries a `Module updated:
+June 2026` stamp, a Consolidated date and Tony's RICE review line. 1.6
+names the currency block per file type and states Tony's reason for the
+rule in the section itself: the documentation is what keeps the
+conversation targeted, clear and trackable.
 
 ---
 
@@ -222,7 +236,7 @@ You Change; L-219's target version rebased to 1.6.
 | `documentation/patch_L214_2_rationale_and_L219.py` | As-run. |
 
 Skills that fire on this work: `provenance-discipline` (2.6),
-`safe-file-editing` (1.5), `ledger-and-session-records` (1.7),
+`safe-file-editing` (1.6), `ledger-and-session-records` (1.7),
 `orrery-coding-conventions` (1.4), `gallery-cache-builder` (1.4).
 Compare each against the manifest at load.
 
@@ -277,7 +291,7 @@ fresh-chat rule.
 - **(do)** Reinstall `provenance-discipline` and `safe-file-editing` at
   Settings > Skills.
 - **(decide)** L-219: which of three options for expressing a
-  cross-handle run order. Lands as `safe-file-editing` 1.6.
+  cross-handle run order. Lands as `safe-file-editing` 1.7.
 - **(decide)** L-211 UNKNOWN verdict token: designed, unbuilt, unchanged
   this session.
 
@@ -298,7 +312,13 @@ or with the marker sweep, not after it.
 
 ---
 
-*Written August 19, 2026 with Anthropic's Claude Opus 5. Built on
+*Written August 19-20, 2026 with Anthropic's Claude Opus 5. Built on
 `f603be381d447137a45f59310157391d2ce2ad9a`, pushed at
-`50438c6505e40bb814166cfa2ead086d1986262d`; gallery at
+`ef3bd13d8582865bec47e6da1d862b28ab745bb6`; gallery at
 `109162bbb8d291bce615d888557498a9342d4642`.*
+
+*This footer was itself re-stamped under Stamp What You Change: the
+session ran past midnight into August 20 and three patches landed after
+the first draft, so the date and the pushed-at SHA both moved while the
+body was being revised. That is the drift the rule exists to catch,
+found in the document that argues for it.*

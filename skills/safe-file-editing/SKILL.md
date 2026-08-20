@@ -6,9 +6,9 @@ fires_when: Editing existing files, patch scripts, sed/regex edits, encoding che
 
 # Safe File Editing
 
-Skill version: 1.5 | Cut from palomas_orrery @ 50438c6 (v1.5), earlier @
-a872205 (v1.4), 1ba20c3 (v1.3), 3398970 (v1.2), bdaaa0c (v1.1)
-| August 20, 2026, with Anthropic's Claude Opus 5
+Skill version: 1.6 | Cut from palomas_orrery @ ef3bd13 (v1.6), earlier @
+50438c6 (v1.5), a872205 (v1.4), 1ba20c3 (v1.3), 3398970 (v1.2),
+bdaaa0c (v1.1) | August 20, 2026, with Anthropic's Claude Opus 5
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;
 v1.1 adds the delivery-format convention from a same-day incident (a
 transactional patch silently never run; see Field Notes). v1.3 adds
@@ -19,7 +19,10 @@ arrows that predated it by months, and Naming and Archiving a Patch
 Script, an unstated convention 96 scripts deep that Tony had been
 following alone. v1.5 adds Stamp What You Change (L-220), after Tony
 observed that this project updates bodies more reliably than it updates
-anchors, dates and module descriptions.
+anchors, dates and module descriptions. v1.6 generalises that section to
+every file type, because 1.5's only concrete example was a Python module
+docstring and the rule's founding case was stale Markdown headers -- it
+would not have fired on the files it was written for.
 Portable: applies to any project, not only Paloma's Orrery.
 
 ## Bottom-Up Editing [QUALITY]
@@ -252,10 +255,31 @@ does not fail the gate it exists to enforce.
 ### Stamp What You Change [QUALITY]
 
 A patch that edits a file also updates that file's own currency block,
-in the SAME transaction as the body. Whichever of these the file
-carries: the version line, the anchor SHA, the history or changelog
-paragraph, the date, and -- where the change alters what the file DOES
--- the module description at the top.
+in the SAME transaction as the body. THIS APPLIES TO EVERY FILE TYPE.
+Markdown is not an exception -- it is where the rule was earned.
+
+The currency block is whatever the file carries to say what it is and
+when it was last true:
+
+| File | Currency block |
+|---|---|
+| `.py` module | docstring: the `Module updated: <date> with <model>` line, and the description of what the module does |
+| `SKILL.md` | the `Skill version:` line, its cut-from SHA list, the date, and the `vN.M adds...` paragraph |
+| plan, handoff, review prompt, manifest | the `Built on <SHA> at <URL>` line and the status or "last updated" line |
+| the protocol | its header anchor and version |
+| ledger, atlas, any generated file | the header stamp, where one exists and is hand-maintained |
+
+Where the change alters what the file DOES, the description at the top
+moves with it -- a module docstring and a master plan's status line do
+the same job and go stale the same way.
+
+**Why this is worth the bump it costs** (Tony, 2026-08-20): the
+documentation is what keeps the conversation targeted, clear and
+trackable. Every session starts cold and reads these headers to work out
+what it is looking at. A stale one does not merely misinform -- it costs
+the next session the orientation the document exists to give, and the
+error compounds because the next session writes its own documents on top
+of that misreading.
 
 The stamp names the model that made the change, e.g. "with Anthropic's
 Claude Opus 5". Attribution is a partnership value here, and it is also
