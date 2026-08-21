@@ -1503,7 +1503,9 @@ def get_comet_disintegration_preset(obj_name):
             Parker Solar Probe Alfven boundary data (2021).
             8.33 R_sun confirmed between the Alfven surface (see
             ALFVEN_SURFACE_RADII in constants_new.py) and
-            Streamer Belt (~4-6 R_sun). Perihelion tp 14:22 UTC April 4 confirmed.
+            Streamer Belt (drawn at 6.0 R_sun, an approximation -- the closed
+            helmet stays below 2-4 R_sun and its stalk reaches many R_sun;
+            Suess & Nerney 2004). Perihelion tp 14:22 UTC April 4 confirmed.
     """
     DISINTEGRATION_PRESETS = {
         'MAPS': {

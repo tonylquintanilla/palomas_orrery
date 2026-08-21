@@ -10,23 +10,27 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 129  
-**Total Lines of Code (non-blank):** 102,883  
-**Total Public Functions/Classes:** 1,159
+**Total Python Files:** 131  
+**Total Lines of Code (non-blank):** 103,296  
+**Total Public Functions/Classes:** 1,163
 
 ## Classification Coverage
 
-**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (7).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L221_2_critical_path_update.py`
+- `patch_L210_3_unwrap_resolved_legs.py`
+- `patch_L210_4_streamer_belt_unsourced.py`
+- `patch_L210_5_streamer_hover_two_part.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 - `worksheet_keys.py`
 
-**Undetermined domain (1).** No valid `Domain:` tag.
+**Undetermined domain (3).** No valid `Domain:` tag.
 
-- `patch_L221_2_critical_path_update.py`
+- `patch_L210_3_unwrap_resolved_legs.py`
+- `patch_L210_4_streamer_belt_unsourced.py`
+- `patch_L210_5_streamer_hover_two_part.py`
 
 
 ---
@@ -90,7 +94,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `planet9_visualization_shells.py` | Hypothetical Planet 9 shell traces. (269 lines) |
 | `pluto_visualization_shells.py` | Pluto interior and atmosphere shell traces. (615 lines) |
 | `saturn_visualization_shells.py` | Saturn interior, ring, and magnetosphere shell traces. (1,088 lines) |
-| `solar_visualization_shells.py` | Sun interior, corona, and heliosphere shell traces. (1,382 lines) |
+| `solar_visualization_shells.py` | Sun interior, corona, and heliosphere shell traces. (1,412 lines) |
 | `uranus_visualization_shells.py` | Uranus interior, ring, and magnetosphere shell traces. (1,083 lines) |
 | `venus_visualization_shells.py` | Venus interior and atmosphere shell traces. (645 lines) |
 
@@ -123,7 +127,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,250 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (515 lines) |
-| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (833 lines) |
+| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (846 lines) |
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (401 lines) |
 | `exoplanet_stellar_properties.py` | Stellar Properties for Exoplanet Host Stars (484 lines) |
 | `exoplanet_systems.py` | Hardcoded Exoplanet System Catalog (572 lines) |
@@ -131,7 +135,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `messier_catalog.py` | Static catalog of Messier objects and bright deep-sky objects. (406 lines) |
 | `sgr_a_star_data.py` | S-star catalog and orbital mechanics for Sagittarius A*. (574 lines) |
 | `shell_configs.py` | Shell configuration data for all celestial bodies. (2,575 lines) |
-| `spacecraft_encounters.py` | Tagged encounter data for spacecraft missions in Paloma's Orrery. (1,296 lines) |
+| `spacecraft_encounters.py` | Tagged encounter data for spacecraft missions in Paloma's Orrery. (1,298 lines) |
 | `star_notes.py` | Curated hover text annotations for notable stars. (1,158 lines) |
 | `star_properties.py` | SIMBAD stellar property queries with local caching. (340 lines) |
 | `stellar_data_patches.py` | Manual corrections for stars with known bad catalog data. (43 lines) |
@@ -229,7 +233,9 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L221_2_critical_path_update.py` | Built on 79729c98fd6bec8703fcc3bbc0806e6ee5226770 at https://github.com/tonylquintanilla/palomas_orrery (branch main). Gallery at 109162bbb8d291bce615d888557498a9342d4642. Written August 20, 2026 with Anthropic's Claude Opus 5. (273 lines) |
+| `patch_L210_3_unwrap_resolved_legs.py` | Built on 9b9743d300070a69aac11229b9392845edb3488a at https://github.com/tonylquintanilla/palomas_orrery (branch main). Written August 20, 2026 with Anthropic's Claude Opus 5. (169 lines) |
+| `patch_L210_4_streamer_belt_unsourced.py` | Built on 9b9743d300070a69aac11229b9392845edb3488a at https://github.com/tonylquintanilla/palomas_orrery (branch main), AFTER patch_L210_3_unwrap_resolved_legs.py has run. (223 lines) |
+| `patch_L210_5_streamer_hover_two_part.py` | Built on 9b9743d300070a69aac11229b9392845edb3488a at https://github.com/tonylquintanilla/palomas_orrery (branch main), AFTER patch_L210_3 and patch_L210_4 have run, in that order. (249 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |

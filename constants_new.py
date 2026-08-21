@@ -78,8 +78,7 @@ EARTH_EQUATORIAL_RADIUS_KM = 6378.1366
 # Note: IERS publishes 6378136.6 +/- 0.1 m. IAU B3's 6.3781e6 m is an
 #   exact nominal conversion constant, not a measurement, and the two
 #   differ by 36.6 m.
-# Resolved: worksheet_gemini-3-1-pro_reconciliation_sources_20260820.md constants_new.py::EARTH_EQUATORIAL_RADIUS_KM -- Source
-#   moved from IAU B3 to IERS and value taken to IERS precision (L-210)
+# Resolved: worksheet_claude-opus-5_pilot_constants_new_20260818.jsonl constants_new.py::EARTH_EQUATORIAL_RADIUS_KM -- Source moved from IAU B3 to IERS and the value taken to IERS precision (L-210)
 # Cross-checked: Claude 2026-08-02 -- IAU B3 / IERS (worksheet_claude_constants_new.md)
 # Cross-checked: GPT 2026-08-02 -- IAU B3 / IERS (constants_new_citation_verification_gpt.md)
 
@@ -201,22 +200,38 @@ OUTER_CORONA_RADII = 50
 
 # New shells (added April 2026)
 STREAMER_BELT_RADII = 6.0
-# Source: Golub & Pasachoff, "The Solar Corona" (2nd ed., 2010) --
-# Source+: coronal structure bounded at roughly 5-10 R_sun
-# Note: VISUALIZATION BOUNDARY, not a physical edge. 6.0 is a drawing
-#   choice inside the range Golub & Pasachoff bound; streamer-belt
-#   structure continues beyond it.
-# Review-note: the previous "helmet streamers extend 4-6 R_sun" range
-#   was removed 2026-08-20 -- an independent source read found it in
-#   neither cited work. DeForest, Howard & McComas (2014), ApJ 787:124
-#   was removed with it: its 6 R_sun is the inbound-wave DETECTION
-#   THRESHOLD, not a streamer extent, and its streamer-belt result is
-#   an Alfven surface at >= 17 R_sun. That result belongs to
-#   ALFVEN_SURFACE_RADII (L-209), where it is owed, not to this row.
-# Resolved: worksheet_gemini-3-1-pro_reconciliation_sources_20260820.md constants_new.py::STREAMER_BELT_RADII -- value held,
-#   inverted citation removed, range withdrawn as unsourced (L-210)
-# Cross-checked: Gemini 2026-08-02 -- Golub & Pasachoff (worksheet_gemini_constants_remaining.md)
-# Cross-checked: GPT 2026-08-02 -- DeForest et al. (constants_remaining_independent_verification_gpt.md)
+# ASSUMPTION -- NO VERIFIED SOURCE (Tony's ruling, 2026-08-20, L-210).
+# Note: 6.0 R_sun is a VISUALIZATION BOUNDARY carried as a working
+#   assumption, not a sourced value. It is not a physical edge:
+#   streamer-belt structure continues beyond whatever radius is
+#   drawn. The value is unchanged from what this row has always
+#   rendered; what changed is that the file now says we cannot show
+#   where it came from. Retire this note by citing a work that
+#   states a helmet-streamer radial extent, with a locatable
+#   position in the text -- then the value follows the source
+#   rather than the source being fitted to the value.
+# Review-note: this row's entire citation stack was removed on
+#   2026-08-20 after an independent nine-source read. Recorded here
+#   because a removal leaves no trace otherwise, and the next reader
+#   should not have to re-derive why an uncited constant is uncited.
+#   (a) "helmet streamers extend 4-6 R_sun" appeared in neither
+#   cited work. (b) DeForest, Howard & McComas (2014), ApJ 787:124
+#   was removed: its 6 R_sun is the inbound-wave DETECTION
+#   THRESHOLD, not a streamer extent, and its streamer-belt result
+#   is an Alfven surface at >= 17 R_sun -- a result that belongs to
+#   ALFVEN_SURFACE_RADII (L-209), where it is owed. (c) Golub &
+#   Pasachoff, "The Solar Corona" (2010) was removed last: asked
+#   for helmet-streamer extent it returned a cavity height near 1
+#   R_sun and a loose 5-10 R_sun corona bound, located only as
+#   "Chapter 1" -- the one return in nine that gave no figure, no
+#   uncertainty and no findable position. (d) The two Cross-checked
+#   legs went with them: Gemini 2026-08-02 against Golub &
+#   Pasachoff, GPT 2026-08-02 against DeForest. A cross-check of a
+#   citation that no longer exists grants credit for nothing.
+#   The read was decisive about what to REMOVE and silent about what
+#   to KEEP. Those need different evidence: a removal needs only the
+#   absence of support, a citation needs its presence.
+# Resolved: worksheet_claude-opus-5_pilot_constants_new_20260818.jsonl constants_new.py::STREAMER_BELT_RADII -- value held, unsupported citation removed, 4-6 R_sun range withdrawn (L-210)
 
 ROCHE_LIMIT_RADII = 3.45
 # Source: Murray & Dermott, "Solar System Dynamics" (1999), Sec. 4.6
@@ -413,8 +428,7 @@ BENNU_RADIUS_KM = 0.24503
 #   edit is Resolved, not Cross-checked -- but Resolved did not exist
 #   until L-200 (2026-08-17), so there was no correct leg to write at
 #   the time. Recorded rather than treated as bad faith.
-# Resolved: worksheet_gemini-3-1-pro_reconciliation_sources_20260820.md constants_new.py::BENNU_RADIUS_KM -- value superseded by
-#   mission data, misattributed OLA confirmation removed (L-210)
+# Resolved: worksheet_claude-opus-5_pilot_constants_new_20260818.jsonl constants_new.py::BENNU_RADIUS_KM -- value superseded by OSIRIS-REx, misattributed OLA confirmation removed (L-210)
 
 ERIS_RADIUS_KM = 1163
 # Source: Volumetric mean (Sicardy et al. 2011 occultation)
@@ -438,8 +452,7 @@ HAUMEA_RADIUS_KM = 798
 #   semi-axes as full axes, which halves Haumea to ~399 km.
 # Corrected 2026-08-02: 816 -> 715 per JPL SSD (prior value matched neither axes nor database)
 # Corrected 2026-08-20: 715 -> 798 per the 2017 occultation
-# Resolved: worksheet_gemini-3-1-pro_reconciliation_sources_20260820.md constants_new.py::HAUMEA_RADIUS_KM -- moved to the
-#   occultation solution, unsourced axes removed (L-210)
+# Resolved: worksheet_claude-opus-5_pilot_constants_new_20260818.jsonl constants_new.py::HAUMEA_RADIUS_KM -- moved to the 2017 occultation solution, unsourced axes removed (L-210)
 # Cross-checked: Claude 2026-08-02 -- JPL SSD (worksheet_claude_constants_new.md)
 # Cross-checked: GPT 2026-08-02 -- JPL SSD (constants_new_citation_verification_gpt.md)
 

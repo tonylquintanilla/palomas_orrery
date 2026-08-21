@@ -300,7 +300,8 @@ outer_corona_info = (
     "At this distance the corona is extremely tenuous -- the F-corona (dust-scattered<br>"
     "sunlight showing Fraunhofer absorption lines) dominates over the electron K-corona.<br><br>"
 
-    "* The visible structured corona (helmet streamers) extends to ~4-6 R_sun.<br>"
+    "* Helmet streamers have two parts: closed loops below 2-4 R_sun, then<br>"
+    "  an open-field stalk reaching many R_sun (Suess & Nerney 2004).<br>"
     "* The Alfven surface -- the true corona/solar wind boundary -- is ~10-20 R_sun.<br>"
     f"  Parker Solar Probe measured this at {ALFVEN_SURFACE_RADII} R_sun on April 28, 2021.<br>"
     "* Beyond the Alfven surface, plasma is solar wind, not corona.<br>"
@@ -598,7 +599,8 @@ outer_corona_info_hover = (
     "F-corona (dust-scattered sunlight with Fraunhofer lines) dominates at this distance.<br><br>"
 
     "Layer hierarchy within this shell:<br>"
-    "* Visible streamer belt: 4-6 R_sun (see Streamer Belt shell)<br>"
+    "* Visible streamer belt: drawn at 6.0 R_sun, an approximation<br>"
+    "  (see Streamer Belt shell)<br>"
     "* Alfven surface (corona/solar wind boundary): ~15-20 R_sun (see Alfven Surface shell)<br>"
     f"  Parker Solar Probe first crossing: {ALFVEN_SURFACE_RADII} R_sun, April 28, 2021<br>"
     "* F-corona (dust-scattered): 3-50+ R_sun -- this shell's extent<br><br>"
@@ -612,13 +614,32 @@ outer_corona_info_hover = (
     "already inside this shell and approaching the Alfven surface."
 )
 
-# Source: constants_new.py STREAMER_BELT_RADII=6.0; NASA Solar Wind / SOHO LASCO observations
+# Source: constants_new.py STREAMER_BELT_RADII=6.0 -- a VISUALIZATION
+#   ASSUMPTION with no verified source (L-210). Ranges quoted below:
+#   Suess & Nerney 2004, Adv. Space Res. 33:668 (helmets below 2-4
+#   R_sun; streamers to many R_sun); Suess & Nerney 2005, Solar Wind
+#   11 / SOHO 16 (boundaries and stalks studied 2-10 R_sun);
+#   Decraemer et al. 2019, ApJ 883:152 (stalk as a plasma slab around
+#   a current sheet). See documentation/worksheets/
+#   worksheet_gemini-3-1-pro_streamer_extent_20260820.md
 streamer_belt_info = (
     "Sun: Streamer Belt / Visible Corona:<br><br>"
 
-    "The streamer belt is the brightest, most structured region of the visible solar corona,<br>"
-    "extending from the inner corona out to about 4-6 solar radii. This is the corona that<br>"
-    "observers see during total solar eclipses as a pearly white halo around the Sun.<br><br>"
+    "The streamer belt is the brightest, most structured region of the visible<br>"
+    "solar corona, seen at total eclipse as a pearly white halo.<br><br>"
+
+    "IT HAS NO SINGLE OUTER RADIUS, and this shell is drawn at one anyway.<br>"
+    "A streamer is two structures stacked. The HELMET, a dome of closed<br>"
+    "magnetic loops, reaches no higher than 2-4 R_sun. Above its cusp the<br>"
+    "field opens and the solar wind draws it out into a STALK -- a thin<br>"
+    "current sheet reaching many solar radii, studied between 2 and 10.<br>"
+    "This shell sits at 6.0 R_sun: above the helmet, inside the stalk, and<br>"
+    "not a boundary anybody has measured. It is a drawing choice.<br>"
+    "(Suess & Nerney 2004, Adv. Space Res. 33:668; 2005, Solar Wind 11.)<br><br>"
+
+    "What you see at eclipse is a BRIGHTNESS boundary, and it divides two<br>"
+    "flow regimes rather than separating plasma from empty space. There is<br>"
+    "no surface there to get right.<br><br>"
 
     "Three components of white-light corona:<br>"
     "* K-corona (kontinuierlich): Sunlight scattered off free electrons. Dominates within 2-3 R_sun.<br>"
@@ -627,7 +648,8 @@ streamer_belt_info = (
     "  Dominates beyond ~3 R_sun and extends to ~15 R_sun. Has an oval shape.<br>"
     "* E-corona (emission): Line emission from highly ionized Fe, Ni, Ca atoms. Visible to ~2 R_sun.<br><br>"
 
-    "* Helmet streamers: Bottle-shaped, dense magnetic structures extending to 4-6 R_sun.<br>"
+    "* Helmet streamers: Bottle-shaped, dense magnetic structures. The closed<br>"
+    "  helmet stays below 2-4 R_sun; its stalk continues far beyond.<br>"
     "  Source of slow solar wind. Visible in coronagraphs and at eclipse.<br>"
     "* Temperature: ~1-2 million K<br>"
     "* MAPS C/2026 A1 was first detected in SOHO/LASCO C3 at ~0.15 AU (~33 R_sun) on April 2, 2026.<br>"
@@ -637,8 +659,12 @@ streamer_belt_info = (
 streamer_belt_info_hover = (
     "Sun: Streamer Belt / Visible Corona:<br><br>"
 
-    "The streamer belt is the brightest, most structured region of the visible solar corona,<br>"
-    "extending from the inner corona out to about 4-6 solar radii. This is the corona that<br>"
+    "The brightest, most structured region of the visible solar corona. It has<br>"
+    "NO single outer radius: the closed helmet stays below 2-4 R_sun and its<br>"
+    "open stalk reaches many R_sun (Suess & Nerney 2004). This shell is drawn<br>"
+    "at 6.0 R_sun -- above the first, inside the second, and a drawing choice<br>"
+    "rather than a measured boundary. The eclipse edge divides two flow<br>"
+    "regimes, not plasma from vacuum. This is the corona that<br>"
     "observers see during total solar eclipses as a pearly white halo around the Sun.<br><br>"
 
     "Three components of white-light corona:<br>"
@@ -648,7 +674,8 @@ streamer_belt_info_hover = (
     "  Dominates beyond ~3 R_sun, extends to ~15 R_sun. Has an oval shape.<br>"
     "* E-corona (emission): Line emission from ionized Fe, Ni, Ca. Visible to ~2 R_sun.<br><br>"
 
-    "* Helmet streamers: Dense magnetic structures extending 4-6 R_sun. Source of slow solar wind.<br>"
+    "* Helmet streamers: closed loops below 2-4 R_sun, then a stalk reaching<br>"
+    "  many R_sun. Source of slow solar wind.<br>"
     "* Temperature: ~1-2 million K<br><br>"
     "MAPS C/2026 A1 context:<br>"
     "MAPS was detected in SOHO/LASCO C3 (~33 R_sun field) from April 2, 2026.<br>"
@@ -918,7 +945,7 @@ hover_text_sun_and_corona = (
     'Five corona/boundary layers now visualized separately:<br>'
     '* Inner Corona (K-corona): 1-3 R_sun, ~1-3 million K<br>'
     '* Roche Limit: 3.45 R_sun -- tidal disruption threshold for comets<br>'
-    '* Streamer Belt (Visible Corona): 4-6 R_sun -- eclipse white-light corona<br>'
+    '* Streamer Belt (Visible Corona): drawn at 6.0 R_sun, approximate<br>'
     f'* Alfven Surface: ~{ALFVEN_SURFACE_RADII} R_sun -- true corona/solar wind boundary<br>'
     '  (Parker Solar Probe first crossing: April 28, 2021)<br>'
     '* Extended Corona (F-corona): ~50 R_sun -- faint dust-scattered envelope<br><br>'
@@ -945,7 +972,7 @@ hover_text_sun_and_corona_tooltip = (
     'Five corona/boundary layers now visualized separately:<br>'
     '* Inner Corona (K-corona): 1-3 R_sun, ~1-3 million K<br>'
     '* Roche Limit: 3.45 R_sun -- tidal disruption threshold for comets<br>'
-    '* Streamer Belt (Visible Corona): 4-6 R_sun -- eclipse white-light corona<br>'
+    '* Streamer Belt (Visible Corona): drawn at 6.0 R_sun, approximate<br>'
     f'* Alfven Surface: ~{ALFVEN_SURFACE_RADII} R_sun -- true corona/solar wind boundary<br>'
     '  (Parker Solar Probe first crossing: April 28, 2021)<br>'
     '* Extended Corona (F-corona): ~50 R_sun -- faint dust-scattered envelope<br><br>'
@@ -1198,7 +1225,12 @@ def create_sun_inner_corona_shell():
 
 def create_sun_streamer_belt_shell():
     """
-    Visible white-light corona / helmet streamer belt: ~4-6 solar radii.
+    Visible white-light corona / helmet streamer belt, drawn at 6.0 R_sun.
+    That radius is a VISUALIZATION ASSUMPTION, not a measured boundary
+    (L-210). The structure has two parts and no single outer radius: the
+    closed helmet stays below 2-4 R_sun and its open stalk reaches many
+    R_sun (Suess & Nerney 2004, Adv. Space Res. 33:668). 6.0 sits above
+    the first and inside the second.
     This is the corona seen during total solar eclipses. Distinct from the
     Alfven surface (plasma boundary) and the extended F-corona (dust-scattered).
     """

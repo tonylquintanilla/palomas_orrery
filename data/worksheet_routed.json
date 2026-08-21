@@ -5,7 +5,6 @@
     "constants_new.py::EARTH_EQUATORIAL_RADIUS_KM",
     "constants_new.py::EARTH_POLAR_RADIUS_KM",
     "constants_new.py::PARKER_CLOSEST_RADII",
-    "constants_new.py::STREAMER_BELT_RADII",
     "eris_visualization_shells.py::eris_crust_info",
     "eris_visualization_shells.py::eris_hill_sphere_info",
     "mars_visualization_shells.py::create_mars_magnetosphere_shell::bow_shock_text",
@@ -41,6 +40,6 @@
     "venus_visualization_shells.py::venus_core_info::c2",
     "venus_visualization_shells.py::venus_hill_sphere_info"
   ],
-  "send_back_count": 40,
+  "send_back_count": 39,
   "written_by": "worksheet_checker.py"
 }
