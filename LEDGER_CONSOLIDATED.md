@@ -9,6 +9,9 @@ docstring lines in the constants change report), built on 762aa5dd.
 Module updated: August 20, 2026 with Anthropic's Claude Opus 5 (L-221:
 master plan as sequencing authority; L-214 correction and scoping),
 built on 3586970d.
+Module updated: August 21, 2026 with Anthropic's Claude Opus 5 (L-210:
+block reconciled against the four decisions that landed 2026-08-20; the
+withdrawn streamer-belt claim marked as withdrawn), built on d2e6457a.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -245,7 +248,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
 | ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-08-19 |
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
-| ! | L-210 | Pilot citation findings -- four rows in constants_new.py | OPEN | 3.6 | 2026-08-19 |
+| ! | L-210 | Pilot citation findings -- four rows in constants_new.py | OPEN | 3.6 | 2026-08-21 |
 | ! | L-215 | Ledger cleanup by topic, not by age | OPEN | 3.6 | 2026-08-19 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-06 |
 | ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
@@ -2716,21 +2719,34 @@ L-028 (closed by the first sweep); L-187; `ledger-and-session-records`
 v1.7, which carries the convention.
 
 #### [L-210] Pilot citation findings -- four rows in constants_new.py
-<!-- L:210 status:OPEN upd:2026-08-19 section:A flag: rice:3/3/80/2 -->
+<!-- L:210 status:OPEN upd:2026-08-21 section:A flag: rice:3/3/80/2 -->
 - **Grouped on purpose.** Four findings, same file, same shape of
   work: the value is defensible and the authority attached to it is
   not. One pass, one patch. The rendering defect from the same run is
   L-209 and is deliberately NOT here.
-- **`STREAMER_BELT_RADII` -- inverted citation. Take this one first.**
-  DeForest, Howard & McComas 2014 does not support "4-6 R_sun" for
-  streamers. The paper's 6 R_sun is an INNER bound beyond which
-  inbound wave motion was first detected; its streamer-belt result is
-  a LOWER bound of 17 R_sun on the Alfven surface, 12.5 over the polar
-  holes. A bounding figure was taken from the wrong end of the result,
-  and the paper's point is that the structure extends further out, not
-  that it stops there. The value 6.0 may survive as a drawing choice
-  for the top of the closed helmet structure; the citation does not.
-  Note it is the same paper cited on the Alfven row, where it belongs.
+- **`STREAMER_BELT_RADII` -- CLAIM WITHDRAWN 2026-08-20. Row resolved
+  as a declared assumption.** This bullet used to say the row cited its
+  paper INVERTED -- that DeForest's 6 R_sun was the paper's floor being
+  used as a ceiling. That was a session reading written down as a
+  finding, and an independent nine-source blind read on 2026-08-20
+  found otherwise. DeForest, Howard & McComas 2014 uses 6 R_sun as the
+  threshold at which inbound wave motion first became DETECTABLE, which
+  is neither a floor nor a ceiling on streamer extent; its actual
+  streamer-belt result is an Alfven surface at 17 R_sun or more, and
+  that result belongs to L-209. Golub & Pasachoff, asked the same
+  question, bound coronal structure loosely at 5-10 R_sun and state no
+  4-6 R_sun streamer range at all. So the range in the code was sourced
+  to nothing, both citations were removed, and the range was withdrawn.
+  Reads two and three then found why nobody could answer it: the
+  quantity is not single-valued. Closed helmets reach no higher than
+  2-4 R_sun while stalks and boundaries run to roughly 2-10, so 6.0
+  sits above the one and inside the other and represents neither.
+  **Tony's ruling:** hold 6.0 as a VISUALIZATION ASSUMPTION carrying no
+  Source leg, and let the hover text explain the two-part reality. The
+  withdrawn wording is left visible above rather than quietly restated,
+  for the reason the master plan gives for doing the same: a wrong
+  claim in a stored document outlives the conversation it came from,
+  because the next reader has nothing else to check it against.
 - **`EARTH_EQUATORIAL_RADIUS_KM` -- Shape A swap, with its own
   template one row below.** IAU 2015 B3 states 6378.1; the third
   decimal comes from IERS/WGS84, named in a `# Note:` but not on the
@@ -2766,11 +2782,47 @@ v1.7, which carries the convention.
   phrase about a 9.1 km equivalent sphere appear verbatim in Amarante
   & Winter 2022 working from Spencer et al. 2020, not in the cited
   Keane et al. 2022.
-**Note:** RICE is Claude's proposal, unratified.
-**Gap:** every item above is a RESPONDER's claim, not a verdict. Each
-needs Tony's judgment per row before any patch is written.
+**Resolved 2026-08-20 -- four of the five rows above.** Tony ruled per
+row. The changes landed in `constants_new.py`, and each of the four
+carries a `# Resolved:` annotation naming this handle.
+[verified @d2e6457a -- read at HEAD, not carried from a session record]
+- `EARTH_EQUATORIAL_RADIUS_KM` 6378.137 -> 6378.1366. Source moved from
+  IAU B3 to IERS Conventions (2010), with B3's rounding kept as the
+  aside, matching `EARTH_POLAR_RADIUS_KM` directly below it.
+- `STREAMER_BELT_RADII` HELD at 6.0. Both citations removed, the 4-6
+  R_sun range withdrawn, the row recorded as an explicit assumption.
+- `BENNU_RADIUS_KM` 0.246 -> 0.24503, Barnouin et al. 2019. The
+  `Source+:` line that credited OSIRIS-REx OLA with Nolan's restated
+  radar figures is gone, so the row no longer reads as independent
+  confirmation it never received.
+- `HAUMEA_RADIUS_KM` 715 -> 798, the Ortiz et al. 2017 occultation. The
+  unsourced axes are removed and the volume-equivalent radius is now
+  marked DERIVED from the published semi-axes rather than quoted.
+Patches `patch_L210_1` through `_5`, archived in `documentation/`, at
+`762aa5dd` and `e1c64dc9`. `_5` is the one worth remembering: the
+withdrawn "4-6 R_sun" claim was still rendering at ten sites across two
+shell modules after the constant had been fixed -- the parallel-pipeline
+failure in its plainest form, the constant repaired and the text that
+reaches the user not.
+**Note:** RICE is Claude's proposal, unratified -- and it was NOT
+re-scored when the four rows closed. The 3.6 in the index still prices
+the original five-row item rather than the ARROKOTH remainder.
+**Gap:** `ARROKOTH_RADIUS_KM` only. It is a WATCH flag, not a pending
+fix: the row is not known to be wrong, and a newer New Horizons shape
+model moving 9 percent the OTHER way from the 2026-04-15 correction is
+a reason to look rather than a reason to edit. The attribution drift is
+the firmer half -- the volume figure and the equivalent-sphere phrasing
+appear in Amarante & Winter 2022, not in the cited Keane et al. 2022.
+Needs a source read before any value moves. **Tony-action (decide):**
+dispatch this row, or leave it watched.
 **Ref:** `documentation/PILOT_CONVERGENCE_20260819.md` Parts 3-4;
-L-195 (Shape A swaps); L-209 (the rendering half of the same run).
+`documentation/HANDOFF_20260820_reconciliation_closed.md` (the
+decisions, and part 6 on what the streamer row cost);
+`documentation/MASTER_PLAN_CRITICAL_PATH_SUMMARY.md` (carries the same
+correction); L-195 (Shape A swaps); L-209 (the rendering half of the
+same run, and the row DeForest's result is owed to); L-221 (the ledger
+outranks a session document about a settled decision -- this block was
+the counter-case, stale where the session documents were current).
 
 #### [L-211] UNKNOWN -- the verdict for "checked, could not determine"
 <!-- L:211 status:OPEN upd:2026-08-19 section:A flag: rice:3/3/85/2 -->
