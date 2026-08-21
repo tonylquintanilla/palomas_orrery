@@ -10,22 +10,24 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 129  
-**Total Lines of Code (non-blank):** 102,987  
-**Total Public Functions/Classes:** 1,164
+**Total Python Files:** 130  
+**Total Lines of Code (non-blank):** 103,136  
+**Total Public Functions/Classes:** 1,166
 
 ## Classification Coverage
 
-**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L214_2_scanner_derives.py`
+- `patch_L223_1_safe_file_editing_paste_rule.py`
+- `patch_L223_2_ledger_paste_instance.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (1).** No valid `Domain:` tag.
+**Undetermined domain (2).** No valid `Domain:` tag.
 
-- `patch_L214_2_scanner_derives.py`
+- `patch_L223_1_safe_file_editing_paste_rule.py`
+- `patch_L223_2_ledger_paste_instance.py`
 
 
 ---
@@ -229,7 +231,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L214_2_scanner_derives.py` | L-214 patch 2 of 2 -- the scanner derives its record-label names. (141 lines) |
+| `patch_L223_1_safe_file_editing_paste_rule.py` | L-223 patch 1 of 2 -- safe-file-editing gains the paste rule (v1.7). (152 lines) |
+| `patch_L223_2_ledger_paste_instance.py` | L-223 patch 2 of 2 -- the ledger records the paste instance. (138 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |

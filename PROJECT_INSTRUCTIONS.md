@@ -1,5 +1,5 @@
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.41 | August 20, 2026
+Tony Quintanilla, PE | Claude | v3.41 | August 21, 2026
 
 Cut from b65ac115 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
@@ -425,7 +425,7 @@ what it is.
 Skill                        Ver  Fires when
 orrery-coding-conventions    1.4  Markers, hover text, axes, shells,
                                   legendgroups, docstrings, new visuals
-safe-file-editing            1.6  Editing existing files, patch scripts,
+safe-file-editing            1.7  Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
 agentic-pre-test             1.2  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps

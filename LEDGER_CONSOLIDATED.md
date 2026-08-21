@@ -226,7 +226,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*128 live items; 116 need attention (`!`); 127 RICE-scored; 89 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*128 live items; 116 need attention (`!`); 127 RICE-scored; 90 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -507,6 +507,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-054 | Gate 5(b): full resolution ships, rounded -- render-confirmed | DONE | -- | 2026-06-13 |
 |  | L-055 | O14/O15 verdicts arrive with the v4 gate (comet legend churn; sodium particle count) | DONE | -- | 2026-06-17 |
 |  | L-057 | Animation auto-scale-vs-shells + Phase 3 tier decision -- CLOSED | DONE | -- | 2026-06-11 |
+|  | L-223 | A paste into the ledger is an unverified transfer | DONE | -- | 2026-08-21 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -5959,6 +5960,70 @@ Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
 `skills/orrery-coding-conventions/SKILL.md` credit lines (the
 attribution convention this generalises); L-219 (the other open
 safe-file-editing gap, now targeting 1.6).
+
+#### [L-223] A paste into the ledger is an unverified transfer
+<!-- L:223 status:DONE upd:2026-08-21 section:C flag: -->
+- **Observed 2026-08-21, editing LEDGER_CONSOLIDATED.md in VS Code.**
+  Tony selected a block and pasted over it. Nothing appeared. He
+  repeated the paste several times, still with no visible effect, and
+  raised it. He then cut, pasted again, and WAITED -- and the text
+  arrived roughly a minute later, complete and correct. He also
+  noticed that the spinner ended when he refocused the cursor.
+- **What was actually observed, kept separate from what it might
+  mean.** Four things: a paste that showed no effect for about a
+  minute; a completed, correct paste at the end of that; no
+  duplicates from the repeated attempts; and a spinner that resolved
+  on refocus. Tony checked for the duplicates specifically, because
+  Claude had raised multiple pending pastes as a risk. They were not
+  there. Recorded as a checked negative rather than left standing as
+  speculation.
+- **The mechanism was never verified and this entry does not claim
+  one.** Claude's account -- that modern VS Code negotiates several
+  clipboard formats with the source application before inserting, and
+  that serving a rich flavour from a browser can block -- fits the
+  refocus detail and the browser-to-editor path, and is offered as
+  plausibility only. Nobody instrumented the editor. A future session
+  reading this should treat it as an unexplained observation with a
+  candidate attached, not as a diagnosis. If it recurs, one setting
+  worth trying is `editor.pasteAs.enabled` set to false, which turns
+  off the alternative-paste offers and keeps plain paste.
+- **THE FINDING IS NOT THE DELAY. It is that nothing reports the
+  outcome.** A paste that dropped and a paste that landed produce the
+  same evidence, which is none: no participant in the chain -- source
+  application, OS clipboard, editor paste handling, buffer, save --
+  owns saying whether the transfer completed. Tony caught this one
+  only because he happened to be comparing the paste against the
+  copy. That is this project's own confirming question, "what tells
+  us it is working," asked of a text editor. Same shape as A Check
+  That Cannot Fail Is Not Passing, one layer out from the code.
+- **The retry instinct is the hazard the delay creates.** Repeating a
+  paste that seems not to have happened is the natural response, and
+  it is how one pending transfer becomes two. It did not happen here.
+  It is written down because the next person to meet this cold will
+  reach for the same response.
+- **PROMOTED to `safe-file-editing` 1.7, same day** (Tony's ruling).
+  The durable rule is that an edit to a version-controlled file is
+  delivered as a patch script INCLUDING prose, markdown and ledger
+  files -- because a hand-paste is an unverified transfer, not
+  because any editor is buggy. The skill had never said patch
+  discipline was for `.py` files only, but every example in it was
+  code, and this project had been hand-editing a 579 KB markdown
+  ledger on that silence. The rule as written outlives whatever this
+  particular stall turns out to be.
+- **The human fallback, in Tony's own terms, for when a hand edit is
+  unavoidable:** watch until the text actually appears before
+  clicking or typing anything else, and do not retry on silence. It
+  is what caught this. It is also a person looking, standing in for a
+  check the tooling does not perform, which is why it is the fallback
+  and the patch is the default.
+**Note:** RICE not scored. The item was closed on arrival -- the
+observation is recorded and its rule promoted in the same session, so
+there is no work to prioritise.
+**Ref:** `skills/safe-file-editing/SKILL.md` (A Paste Is An Unverified
+Transfer, v1.7); `documentation/patch_L223_1_safe_file_editing_paste_
+rule.py`; `documentation/patch_L223_2_ledger_paste_instance.py`;
+L-214 (the block being pasted when this surfaced); the resident A
+Check That Cannot Fail Is Not Passing gate.
 
 #### [L-222] The constants change report fails on every currency stamp
 <!-- L:222 status:DONE upd:2026-08-20 section:C flag: rice:3/2/95/0.5 -->

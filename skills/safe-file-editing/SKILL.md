@@ -6,9 +6,10 @@ fires_when: Editing existing files, patch scripts, sed/regex edits, encoding che
 
 # Safe File Editing
 
-Skill version: 1.6 | Cut from palomas_orrery @ ef3bd13 (v1.6), earlier @
-50438c6 (v1.5), a872205 (v1.4), 1ba20c3 (v1.3), 3398970 (v1.2),
-bdaaa0c (v1.1) | August 20, 2026, with Anthropic's Claude Opus 5
+Skill version: 1.7 | Cut from palomas_orrery @ d424c459 (v1.7),
+earlier @ ef3bd13 (v1.6), 50438c6 (v1.5), a872205 (v1.4), 1ba20c3
+(v1.3), 3398970 (v1.2), bdaaa0c (v1.1) | August 21, 2026, with
+Anthropic's Claude Opus 5
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;
 v1.1 adds the delivery-format convention from a same-day incident (a
 transactional patch silently never run; see Field Notes). v1.3 adds
@@ -22,7 +23,10 @@ observed that this project updates bodies more reliably than it updates
 anchors, dates and module descriptions. v1.6 generalises that section to
 every file type, because 1.5's only concrete example was a Python module
 docstring and the rule's founding case was stale Markdown headers -- it
-would not have fired on the files it was written for.
+would not have fired on the files it was written for. v1.7 adds A Paste
+Is An Unverified Transfer (L-223), which extends the delivery rule to
+prose, markdown and ledger files -- every example in 1.6 was code, and
+this project had been hand-editing a 579 KB ledger on that silence.
 Portable: applies to any project, not only Paloma's Orrery.
 
 ## Bottom-Up Editing [QUALITY]
@@ -191,6 +195,49 @@ EVERY file, not just the last one. A later, unrelated success (a passing
 test suite, a clean compile) does not confirm an earlier patch actually
 executed; each deliverable needs its own confirmed evidence.
 
+
+### A Paste Is An Unverified Transfer [QUALITY]
+
+The delivery rule above covers PROSE too -- markdown, documentation,
+the ledger. An edit to any version-controlled file is delivered as a
+patch script, not as text for Tony to paste into an editor.
+
+The reason is not that any editor is buggy. It is what a paste is.
+
+Text on a clipboard passes through several participants -- the source
+application, the OS clipboard, the editor's own paste handling, the
+buffer, the save. Not one of them owns reporting the outcome. Nothing
+anywhere compares what arrived against what was sent. So a paste that
+silently dropped and a paste that landed perfectly produce the same
+evidence, which is none. That is true on a good day; a slow or failed
+paste only makes the property briefly visible.
+
+A patch script has the opposite shape. The text is already inside the
+file when it reaches the machine, having travelled as a file rather
+than through the clipboard. The script opens the target, writes bytes
+through one synchronous call that either returns or raises, and then
+prints what it changed. Success carries evidence.
+
+So: **a document edit is a patch, the same as a code edit.** Anchor on
+structure rather than on exact line wrapping when the target is prose
+that may have been reflowed -- find the heading, find the next
+heading, work between them -- and require every anchor to match
+exactly once.
+
+WHEN A HAND EDIT IS UNAVOIDABLE, the human check is to watch until the
+text actually appears before clicking or typing anything else, and to
+NOT retry on silence. Retrying is the natural response to a paste that
+seems not to have happened, and it is how one pending transfer becomes
+two. Name this for what it is: a person looking, standing in for a
+check the tooling does not perform. It works, and it holds right up
+until the session where someone is tired or moving fast. That is the
+argument for the patch being the default rather than the fallback.
+
+(Origin: L-223, 2026-08-21. A paste into LEDGER_CONSOLIDATED.md
+appeared to do nothing several times, then completed about a minute
+later. Tony caught it only because he was comparing the paste against
+the copy -- which is this project's own confirming question, asked of
+a text editor.)
 
 ## Encoding Gate [QUALITY]
 
