@@ -14,7 +14,7 @@ values changed, one held. And a claim this document carried about
 -- it had travelled here from a session reading rather than from a
 source.
 
-**Lands in `documentation/` as `CRITICAL_PATH_SUMMARY.md`.** Section 5a
+**Lands in `documentation/` as `MASTER_PLAN_CRITICAL_PATH_SUMMARY.md`.** Section 5a
 of the master plan and the readable snapshot both cite it by that exact
 name, so it belongs in the repo before either is pushed.
 
