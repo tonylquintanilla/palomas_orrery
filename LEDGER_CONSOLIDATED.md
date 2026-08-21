@@ -226,7 +226,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*129 live items; 117 need attention (`!`); 128 RICE-scored; 88 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*128 live items; 116 need attention (`!`); 127 RICE-scored; 89 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -243,7 +243,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
-| ! | L-214 | The request builder drops the comment lines that matter | OPEN | 3.8 | 2026-08-19 |
 | ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-08-19 |
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
 | ! | L-210 | Pilot citation findings -- four rows in constants_new.py | OPEN | 3.6 | 2026-08-19 |
@@ -457,6 +456,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-064 | Provenance-scanner format sweep -- Earth System family | DONE | 4.5 | 2026-06-30 |
 |  | L-075 | KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine) | DONE | 4.3 | 2026-06-30 |
 |  | L-076 | Earth System shared module (earth_system_common) + 3+5 generalized to food | DONE | 4.3 | 2026-06-30 |
+|  | L-214 | The request builder drops the comment lines that matter | DONE | 3.8 | 2026-08-21 |
 |  | L-106 | Gallery-cache backup + gitignore discipline | DONE | 3.6 | 2026-07-12 |
 |  | L-115 | Skills v1.1 batch: accuracy fixes + two seed blocks (Fable Mode 7) | DONE | 3.6 | 2026-07-12 |
 |  | L-097 | skills_index.py -- Skill Manifest auto-generation (process/tooling) | DONE | 3.2 | 2026-07-04 |
@@ -2602,231 +2602,6 @@ solar radius larger, still nested inside the 50 R_sun outer corona.
 `worksheet_claude-opus-5_pilot_constants_new_20260818.jsonl` R12;
 L-214 (the builder gap this exposed); L-181 and L-191 (the remaining
 shadow constants); L-207 (the run that produced it).
-
-#### [L-214] The request builder drops the comment lines that matter
-<!-- L:214 status:OPEN upd:2026-08-19 section:A flag: rice:3/3/85/2 -->
-- **Found by L-209, 2026-08-19.** The dispatched row for
-  `ALFVEN_SURFACE_RADII` carried two context lines. The three comment
-  lines that stated the answer -- a `# Note:` and two under an invented
-  `# HELIOCENTRIC:` label -- were dropped silently, and the worksheet
-  that resulted looked complete.
-- **The mechanism.** `worksheet_keys.py` defines `VERDICTED_LEG =
-  'Source'` and `CONTEXT_LEGS = ('Ref', 'Also', 'See', 'Derived',
-  'Calculation')`. Anything else closes the run. An unrecognised LABEL
-  is not an unmarked continuation either, so the builder's refusal path
-  never fires: the text is not joined, not reported, and not refused.
-- **This is the Visibility Convention's own case.** A failure that
-  reaches no reader should REFUSE, not proceed. The builder refuses on
-  unmarked continuation text for exactly this reason and then walks past
-  a whole dropped label.
-- **It bears on the pilot result.** The traps did not spring, but at
-  least one row was checked against a redacted version of itself and
-  nothing in the returns could have said so. Three models spent a
-  dispatch rediscovering what the row already said, and the leg with the
-  least to work with confirmed the wrong value.
-- **Not yet decided:** whether the fix is to widen the recognised label
-  set, to refuse on any unrecognised label under a claim, or to report
-  dropped labels into the worksheet where a responder can name them. The
-  Visibility Convention argues for refusing, and the count of affected
-  rows across the corpus is unmeasured.
-**Note:** RICE is Claude's proposal, unratified.
-- **COUNTED 2026-08-19 at `d25b5368`, using the project's own
-  `collect_claims` and `LEG_RE`.** 12 of 55 claim sites carry a label
-  the builder cannot read; 9 of the 12 are in `constants_new.py`, the
-  others one each in the Mercury, Venus and Moon shell modules.
-- **Two kinds of dropped label, and only one is a defect.** The RECORD
-  legs -- `Cross-checked` (216 lines), `Removed` (18), `Corrected` (16)
-  -- are deliberately invisible to the request, so a second reader
-  cannot see what the last one concluded. That is correct behaviour.
-  What remains after excluding them is almost one label: `Note` at 17
-  lines, plus `HELIOCENTRIC` at 2 and `NOTE` at 2.
-- **The finding that reframes the pilot: THREE of the five rows still
-  on the reconciliation queue are on this list, and in each case the
-  redacted Note is what the responders spent the dispatch
-  rediscovering.**
-  - `STREAMER_BELT_RADII` -- "Visualization cutoff at upper end of 4-6
-    R_sun observed range." The row where the citation was found
-    inverted. No leg was told the value was a drawing choice.
-  - `EARTH_EQUATORIAL_RADIUS_KM` -- "B3 rounds to 6378.1 km; full
-    precision from IERS Conventions." All three legs flagged exactly
-    this by three different routes. The file already said it.
-  - `INNER_CORONA_RADII` -- "Visualization boundary for inner
-    (K-)corona; physical extent 2-3 R_sun." The row where all three
-    legs split on whether a visualization boundary is verdictable at
-    all, which is an open ruling. The file answers it in a line none of
-    them could see.
-- **Two more worth naming.** `HELIOPAUSE_RADII`, the canary row, hides
-  its conversion arithmetic in a Note -- two legs reproduced that
-  arithmetic to the digit rather than reading it. And `HELIOCENTRIC`
-  appears TWICE, on `ALFVEN_SURFACE_RADII` and `PARKER_CLOSEST_RADII`:
-  the same invented label, both times on the origin question that
-  produced L-209.
-- **What the count changes.** Adding `Note` to `CONTEXT_LEGS` is one
-  label and would have altered what three of the pilot's hardest rows
-  were checked against. The Visibility Convention still argues for
-  REFUSING on an unrecognised label rather than walking past it
-  silently, since a label nobody reads has no correction path. Widen,
-  refuse, or report-into-the-worksheet remains undecided -- but it is
-  now a design conversation with a measurement under it.
-**Note:** RICE is Claude's proposal, unratified.
-- **DESIGN SETTLED 2026-08-19, after a Mode 7 review by Claude Fable 5
-  and GPT.** Both legs reviewed the same two documents and both
-  disagreed with Claude's six-part proposal in the same place. Tony's
-  rulings this session are recorded below; the reconciliation of the
-  two returns is `documentation/L214_REVIEW_RECONCILIATION_20260819.md`
-  and the measurement under it is
-  `documentation/L214_MEASUREMENT_20260819.md`.
-- **The root cause is one layer below where the proposal was working.**
-  `LEG_RE` is BUILT FROM the policy sets, so "the label is not in our
-  vocabulary" and "this is not a labelled line" are the same condition.
-  That is why deliberate withholding and silent dropping share one code
-  path and are indistinguishable from inside it. The fix is to detect
-  any `# Label:` line generically FIRST, then classify it. The invariant
-  both legs propose: every syntactically labelled line attached to a
-  claim finishes the builder in ONE NAMED DISPOSITION. There is no
-  disposition called "fell through the regex."
-- **Transport and grammar are two axes, not one list** (GPT's framing;
-  Fable reaches the same two-by-two and calls the empty cell a fourth
-  state). TRANSPORT says travels or withheld. GRAMMAR says validated or
-  free-form. `Source` travels and is verdicted. `Note` travels as
-  context. `Resolved` is withheld with a strict linkage grammar. The
-  cell nothing occupied is withheld-and-free-form, which is where the
-  moon line has been trying to live.
-- **Tony's ruling: the free-form record label is `# Review-note:`.**
-- **Tony's ruling: unclassified text is WITHHELD from the request and
-  surfaced to Tony and Claude before dispatch.** This corrects Claude's
-  reading of the earlier report-not-refuse ruling, which had routed
-  unclassified text to the outside responder. Tony, asked directly who
-  "we" was in "report so we can deal with it by reading": "I meant you
-  and me reading fuzzy responses." Fable's asymmetry argument is the
-  reason it matters -- withhold-by-default fails visibly and
-  recoverably, ship-by-default fails invisibly and unrecoverably,
-  because a contaminated leg does not error, it CONVERGES, and
-  convergence is this system's success signal.
-- **Tony's ruling: the registry work stays in L-214** rather than
-  splitting into its own item, even though the review grew this from a
-  label-set fix into a change of how a labelled line is recognised.
-- **One home for the vocabulary, and it does not exist yet.** Checked
-  at `97c52017`: `CROSS_CHECK_LINE_RE` and `RESOLVED_LINE_RE` are
-  compiled in `provenance_scanner.py`, case-INsensitive.
-  `worksheet_keys.py` names neither, and its `LEG_RE` is
-  case-SENSITIVE. `Removed` and `Corrected` have NO pattern anywhere --
-  they are prose conventions that happen to fall through. So the record
-  set is two enforced labels plus two conventions, not four peers, and
-  Claude's proposed `RECORD_LEGS = (four labels)` was inventing two of
-  them. Fable's sharp version of the risk: the hazard is not naming the
-  set twice in prose, it is COMPILING it twice from two literals.
-- **The marker sweep is 12 lines at 8 sites, not 10 at 6.** Fable
-  predicted the undercount; re-run with the project's own tooling at
-  `97c52017` confirms it exactly. Relabelling the odd spellings to
-  `# Note:` brings their own continuation lines into the unmarked set
-  -- one under `PARKER_CLOSEST_RADII`, one under
-  `venus_atmosphere_info`. [verified @97c52017]
-- **The build carries an ORDER CONSTRAINT, not just a list** (Fable).
-  The moon line must leave `Note` BEFORE or in the same transaction as
-  the marker sweep. Sequenced the other way there is a window in which
-  it carries valid `Note+:` markers and travels cleanly on the next
-  moon-row dispatch; the ratchet protects only until the sweep
-  completes, and after that nothing refuses.
-- **The moon line has no other home** [verified @97c52017]. Fable
-  raised the cheaper instance-level answer -- if the ledger already
-  carried "second independent leg owed" for that row, the comment would
-  be a redundant mirror to delete. It does not. No ledger item carries
-  it. The comment is the sole record, so it is rehomed under
-  `# Review-note:` rather than deleted.
-- **The project-side report lands on the console at dispatch**, beside
-  the existing refusal print, rather than in a new file. That is the
-  surface already in Tony's routine when he presses Run; a report in a
-  store nobody opens is a check that cannot fail.
-- **WHY REPORT RATHER THAN REJECT -- Tony's rationale, 2026-08-19,
-  recorded because it is the argument and not just the ruling.** A
-  reported label is one this project can then READ and decide about:
-  alias it, or unify it under a single label the way `Note` was
-  unified. A rejected label forecloses that -- the run stops and the
-  decision never gets made. The reading step is where the judgment
-  lives, and reporting is what delivers material to it.
-- **The `Corrected` drift is the worked example** [verified
-  @2f0aabe]. Corpus-wide the label appears in FOUR spellings with no
-  validator behind any of them: `# Corrected:` (7), `# Corrected
-  2026-08-02:` (5), `# Corrected 2026-08-05:` (1), `# Corrected in
-  Phase B:` (1). Three of the four would classify as unknown under the
-  new design, while a human reading them sees an obvious record leg.
-  That is exactly the case reporting is for: the reader sees all four,
-  and then decides between aliasing the dated forms and unifying them
-  on one label. Rejecting would have stopped the run and produced no
-  decision. Note also that this drift happened in the two record
-  labels that have no compiled pattern -- the two nothing was
-  watching.
-- **CORRECTION, 2026-08-20: nobody is compiling the vocabulary
-  twice** [verified @3586970d]. The build-step wording above said
-  the scanner and the checker should import "rather than compiling
-  their own." That overstated the problem. `worksheet_checker.py`
-  already imports both record patterns from `provenance_scanner`
-  (`ps.CROSS_CHECK_LINE_RE` at line 1190, `ps.RESOLVED_LINE_RE` at
-  line 1623) and compiles no copies of its own. The state is not
-  one duplicated set. It is TWO single homes that DISAGREE: the
-  scanner's patterns are compiled `(?mi)`, case-INsensitive, while
-  `LEG_RE` in `worksheet_keys.py` carries no flags and is
-  case-SENSITIVE. The wording is corrected above.
-- **That disagreement is NOT a new decision, and reopening it as
-  one would have undone a measured build step.** Step 6 already
-  fixes the four odd labels at source, and the 12-lines-at-8-sites
-  count depends on that relabelling. Relaxing the shared matcher to
-  ignore case would make `# NOTE:` work without being edited,
-  remove part of step 6's reason to exist, and invalidate the
-  count Fable had already caught this project undercounting once.
-  The ruling stands as made: edit at source, do not alias, do not
-  relax the matcher. The scanner keeps its existing
-  case-insensitive behaviour by default, and after step 6 nothing
-  case-odd remains on the builder's side to disagree about.
-- **SCOPING: move the label SET, not the body grammar** [verified
-  @3586970d]. "One home for the vocabulary" can be read as "move
-  the regexes," which would drag semantics into a keys module. The
-  scanner's constants are label names PLUS a body contract:
-  `RESOLVED_LINE_RE` has a companion `RESOLVED_BODY_RE` enforcing
-  `<worksheet> <key> -- <what> (L-nnn)` with ISO-only dates. What
-  moves to `worksheet_keys.py` is the label set and its TRANSPORT
-  policy -- which labels exist, and for each, whether it travels to
-  a responder or is withheld. What stays in `provenance_scanner.py`
-  is the body GRAMMAR and its validation, with the scanner's line
-  patterns derived from the shared label names rather than from its
-  own literals. That is the same transport/grammar split the Mode 7
-  review settled on, applied one layer down.
-- **`worksheet_keys.py` carries no `Role:` tag** [verified
-  @3586970d]. `Domain: dev_tools` is present and `Role:` is absent,
-  so `module_atlas.py` files it under "Undetermined role (6)" on
-  the atlas's own front page -- together with
-  `worksheet_key_aliases.py`, `test_worksheet_keys.py` and
-  `test_extractor_pins.py`, the whole worksheet-keys cluster
-  untagged as a group. The build opens that docstring anyway for
-  the SECOND JOB section, so the tag goes in the same patch under
-  Fix In Passing, Report It. `TAG_RE` requires `Role:` alone on a
-  line with a SINGLE-token value drawn from `VALID_ROLES`, read via
-  `ast.get_docstring` -- a two-word value or a comment-block header
-  reads as absent rather than as an error.
-**Gap:** the BUILD. Design is settled and nothing is built. In order:
-generic label detection separated from policy; one home for the
-vocabulary that both the scanner and the checker read from; `Note`
-admitted to context; `# Review-note:` added as withheld free-form; the
-moon line rehomed; the four odd labels fixed at source; the 12-line
-marker sweep. Deciding the form of
-`Removed` and `Corrected` is part of the build, not a precondition of
-it -- there is no agreed form to register yet. One word also changes
-while the file is open: `legs_of`'s docstring says of malformed
-continuation markers that "their text is reported and NOT joined,"
-where the code appends only a message naming the label; the accurate
-sentence is "their label is reported and their text is NOT joined."
-Re-dispatching the affected rows afterwards is still a separate
-decision, because a second dispatch of a row this project has already
-argued about in writing is not an independent leg.
-**Ref:** `worksheet_keys.py` `LEG_RE` / `legs_of` / `continues_a_leg`;
-`provenance_scanner.py` `CROSS_CHECK_LINE_RE` / `RESOLVED_LINE_RE`;
-`documentation/L214_MEASUREMENT_20260819.md`;
-`documentation/L214_REVIEW_RECONCILIATION_20260819.md`;
-`documentation/REVIEW_PROMPT_L214_20260819.md`;
-L-209 (the row that exposed it); L-203 (the Visibility Convention);
-L-204; L-207; L-210 (three of whose rows this count implicates);
-L-217 (the dispatch defect this review surfaced).
 
 #### [L-216] Gallery swap fails under a filesystem lock (OneDrive)
 <!-- L:216 status:OPEN upd:2026-08-19 section:A flag: rice:3/3/85/2 -->
@@ -6234,6 +6009,314 @@ unreadable shape still fails the run.
 with); L-210 (the patch whose stamp exposed it); the resident A Check
 That Cannot Fail Is Not Passing gate, of which this is the mirror
 case.
+
+#### [L-214] The request builder drops the comment lines that matter
+<!-- L:214 status:DONE upd:2026-08-21 section:C flag: rice:3/3/85/2 -->
+- **Found by L-209, 2026-08-19.** The dispatched row for
+  `ALFVEN_SURFACE_RADII` carried two context lines. The three comment
+  lines that stated the answer -- a `# Note:` and two under an invented
+  `# HELIOCENTRIC:` label -- were dropped silently, and the worksheet
+  that resulted looked complete.
+- **The mechanism.** `worksheet_keys.py` defines `VERDICTED_LEG =
+  'Source'` and `CONTEXT_LEGS = ('Ref', 'Also', 'See', 'Derived',
+  'Calculation')`. Anything else closes the run. An unrecognised LABEL
+  is not an unmarked continuation either, so the builder's refusal path
+  never fires: the text is not joined, not reported, and not refused.
+- **This is the Visibility Convention's own case.** A failure that
+  reaches no reader should REFUSE, not proceed. The builder refuses on
+  unmarked continuation text for exactly this reason and then walks past
+  a whole dropped label.
+- **It bears on the pilot result.** The traps did not spring, but at
+  least one row was checked against a redacted version of itself and
+  nothing in the returns could have said so. Three models spent a
+  dispatch rediscovering what the row already said, and the leg with the
+  least to work with confirmed the wrong value.
+- **Not yet decided:** whether the fix is to widen the recognised label
+  set, to refuse on any unrecognised label under a claim, or to report
+  dropped labels into the worksheet where a responder can name them. The
+  Visibility Convention argues for refusing, and the count of affected
+  rows across the corpus is unmeasured.
+**Note:** RICE is Claude's proposal, unratified.
+- **COUNTED 2026-08-19 at `d25b5368`, using the project's own
+  `collect_claims` and `LEG_RE`.** 12 of 55 claim sites carry a label
+  the builder cannot read; 9 of the 12 are in `constants_new.py`, the
+  others one each in the Mercury, Venus and Moon shell modules.
+- **Two kinds of dropped label, and only one is a defect.** The RECORD
+  legs -- `Cross-checked` (216 lines), `Removed` (18), `Corrected` (16)
+  -- are deliberately invisible to the request, so a second reader
+  cannot see what the last one concluded. That is correct behaviour.
+  What remains after excluding them is almost one label: `Note` at 17
+  lines, plus `HELIOCENTRIC` at 2 and `NOTE` at 2.
+- **The finding that reframes the pilot: THREE of the five rows still
+  on the reconciliation queue are on this list, and in each case the
+  redacted Note is what the responders spent the dispatch
+  rediscovering.**
+  - `STREAMER_BELT_RADII` -- "Visualization cutoff at upper end of 4-6
+    R_sun observed range." The row where the citation was found
+    inverted. No leg was told the value was a drawing choice.
+  - `EARTH_EQUATORIAL_RADIUS_KM` -- "B3 rounds to 6378.1 km; full
+    precision from IERS Conventions." All three legs flagged exactly
+    this by three different routes. The file already said it.
+  - `INNER_CORONA_RADII` -- "Visualization boundary for inner
+    (K-)corona; physical extent 2-3 R_sun." The row where all three
+    legs split on whether a visualization boundary is verdictable at
+    all, which is an open ruling. The file answers it in a line none of
+    them could see.
+- **Two more worth naming.** `HELIOPAUSE_RADII`, the canary row, hides
+  its conversion arithmetic in a Note -- two legs reproduced that
+  arithmetic to the digit rather than reading it. And `HELIOCENTRIC`
+  appears TWICE, on `ALFVEN_SURFACE_RADII` and `PARKER_CLOSEST_RADII`:
+  the same invented label, both times on the origin question that
+  produced L-209.
+- **What the count changes.** Adding `Note` to `CONTEXT_LEGS` is one
+  label and would have altered what three of the pilot's hardest rows
+  were checked against. The Visibility Convention still argues for
+  REFUSING on an unrecognised label rather than walking past it
+  silently, since a label nobody reads has no correction path. Widen,
+  refuse, or report-into-the-worksheet remains undecided -- but it is
+  now a design conversation with a measurement under it.
+**Note:** RICE is Claude's proposal, unratified.
+- **DESIGN SETTLED 2026-08-19, after a Mode 7 review by Claude Fable 5
+  and GPT.** Both legs reviewed the same two documents and both
+  disagreed with Claude's six-part proposal in the same place. Tony's
+  rulings this session are recorded below; the reconciliation of the
+  two returns is `documentation/L214_REVIEW_RECONCILIATION_20260819.md`
+  and the measurement under it is
+  `documentation/L214_MEASUREMENT_20260819.md`.
+- **The root cause is one layer below where the proposal was working.**
+  `LEG_RE` is BUILT FROM the policy sets, so "the label is not in our
+  vocabulary" and "this is not a labelled line" are the same condition.
+  That is why deliberate withholding and silent dropping share one code
+  path and are indistinguishable from inside it. The fix is to detect
+  any `# Label:` line generically FIRST, then classify it. The invariant
+  both legs propose: every syntactically labelled line attached to a
+  claim finishes the builder in ONE NAMED DISPOSITION. There is no
+  disposition called "fell through the regex."
+- **Transport and grammar are two axes, not one list** (GPT's framing;
+  Fable reaches the same two-by-two and calls the empty cell a fourth
+  state). TRANSPORT says travels or withheld. GRAMMAR says validated or
+  free-form. `Source` travels and is verdicted. `Note` travels as
+  context. `Resolved` is withheld with a strict linkage grammar. The
+  cell nothing occupied is withheld-and-free-form, which is where the
+  moon line has been trying to live.
+- **Tony's ruling: the free-form record label is `# Review-note:`.**
+- **Tony's ruling: unclassified text is WITHHELD from the request and
+  surfaced to Tony and Claude before dispatch.** This corrects Claude's
+  reading of the earlier report-not-refuse ruling, which had routed
+  unclassified text to the outside responder. Tony, asked directly who
+  "we" was in "report so we can deal with it by reading": "I meant you
+  and me reading fuzzy responses." Fable's asymmetry argument is the
+  reason it matters -- withhold-by-default fails visibly and
+  recoverably, ship-by-default fails invisibly and unrecoverably,
+  because a contaminated leg does not error, it CONVERGES, and
+  convergence is this system's success signal.
+- **Tony's ruling: the registry work stays in L-214** rather than
+  splitting into its own item, even though the review grew this from a
+  label-set fix into a change of how a labelled line is recognised.
+- **One home for the vocabulary, and it does not exist yet.** Checked
+  at `97c52017`: `CROSS_CHECK_LINE_RE` and `RESOLVED_LINE_RE` are
+  compiled in `provenance_scanner.py`, case-INsensitive.
+  `worksheet_keys.py` names neither, and its `LEG_RE` is
+  case-SENSITIVE. `Removed` and `Corrected` have NO pattern anywhere --
+  they are prose conventions that happen to fall through. So the record
+  set is two enforced labels plus two conventions, not four peers, and
+  Claude's proposed `RECORD_LEGS = (four labels)` was inventing two of
+  them. Fable's sharp version of the risk: the hazard is not naming the
+  set twice in prose, it is COMPILING it twice from two literals.
+- **The marker sweep is 12 lines at 8 sites, not 10 at 6.** Fable
+  predicted the undercount; re-run with the project's own tooling at
+  `97c52017` confirms it exactly. Relabelling the odd spellings to
+  `# Note:` brings their own continuation lines into the unmarked set
+  -- one under `PARKER_CLOSEST_RADII`, one under
+  `venus_atmosphere_info`. [verified @97c52017]
+- **The build carries an ORDER CONSTRAINT, not just a list** (Fable).
+  The moon line must leave `Note` BEFORE or in the same transaction as
+  the marker sweep. Sequenced the other way there is a window in which
+  it carries valid `Note+:` markers and travels cleanly on the next
+  moon-row dispatch; the ratchet protects only until the sweep
+  completes, and after that nothing refuses.
+- **The moon line has no other home** [verified @97c52017]. Fable
+  raised the cheaper instance-level answer -- if the ledger already
+  carried "second independent leg owed" for that row, the comment would
+  be a redundant mirror to delete. It does not. No ledger item carries
+  it. The comment is the sole record, so it is rehomed under
+  `# Review-note:` rather than deleted.
+- **The project-side report lands on the console at dispatch**, beside
+  the existing refusal print, rather than in a new file. That is the
+  surface already in Tony's routine when he presses Run; a report in a
+  store nobody opens is a check that cannot fail.
+- **WHY REPORT RATHER THAN REJECT -- Tony's rationale, 2026-08-19,
+  recorded because it is the argument and not just the ruling.** A
+  reported label is one this project can then READ and decide about:
+  alias it, or unify it under a single label the way `Note` was
+  unified. A rejected label forecloses that -- the run stops and the
+  decision never gets made. The reading step is where the judgment
+  lives, and reporting is what delivers material to it.
+- **The `Corrected` drift is the worked example** [verified
+  @2f0aabe]. Corpus-wide the label appears in FOUR spellings with no
+  validator behind any of them: `# Corrected:` (7), `# Corrected
+  2026-08-02:` (5), `# Corrected 2026-08-05:` (1), `# Corrected in
+  Phase B:` (1). Three of the four would classify as unknown under the
+  new design, while a human reading them sees an obvious record leg.
+  That is exactly the case reporting is for: the reader sees all four,
+  and then decides between aliasing the dated forms and unifying them
+  on one label. Rejecting would have stopped the run and produced no
+  decision. Note also that this drift happened in the two record
+  labels that have no compiled pattern -- the two nothing was
+  watching.
+- **CORRECTION, 2026-08-20: nobody is compiling the vocabulary
+  twice** [verified @3586970d]. The build-step wording above said
+  the scanner and the checker should import "rather than compiling
+  their own." That overstated the problem. `worksheet_checker.py`
+  already imports both record patterns from `provenance_scanner`
+  (`ps.CROSS_CHECK_LINE_RE` at line 1190, `ps.RESOLVED_LINE_RE` at
+  line 1623) and compiles no copies of its own. The state is not
+  one duplicated set. It is TWO single homes that DISAGREE: the
+  scanner's patterns are compiled `(?mi)`, case-INsensitive, while
+  `LEG_RE` in `worksheet_keys.py` carries no flags and is
+  case-SENSITIVE. The wording is corrected above.
+- **That disagreement is NOT a new decision, and reopening it as
+  one would have undone a measured build step.** Step 6 already
+  fixes the four odd labels at source, and the 12-lines-at-8-sites
+  count depends on that relabelling. Relaxing the shared matcher to
+  ignore case would make `# NOTE:` work without being edited,
+  remove part of step 6's reason to exist, and invalidate the
+  count Fable had already caught this project undercounting once.
+  The ruling stands as made: edit at source, do not alias, do not
+  relax the matcher. The scanner keeps its existing
+  case-insensitive behaviour by default, and after step 6 nothing
+  case-odd remains on the builder's side to disagree about.
+- **SCOPING: move the label SET, not the body grammar** [verified
+  @3586970d]. "One home for the vocabulary" can be read as "move
+  the regexes," which would drag semantics into a keys module. The
+  scanner's constants are label names PLUS a body contract:
+  `RESOLVED_LINE_RE` has a companion `RESOLVED_BODY_RE` enforcing
+  `<worksheet> <key> -- <what> (L-nnn)` with ISO-only dates. What
+  moves to `worksheet_keys.py` is the label set and its TRANSPORT
+  policy -- which labels exist, and for each, whether it travels to
+  a responder or is withheld. What stays in `provenance_scanner.py`
+  is the body GRAMMAR and its validation, with the scanner's line
+  patterns derived from the shared label names rather than from its
+  own literals. That is the same transport/grammar split the Mode 7
+  review settled on, applied one layer down.
+- **`worksheet_keys.py` carries no `Role:` tag** [verified
+  @3586970d]. `Domain: dev_tools` is present and `Role:` is absent,
+  so `module_atlas.py` files it under "Undetermined role (6)" on
+  the atlas's own front page -- together with
+  `worksheet_key_aliases.py`, `test_worksheet_keys.py` and
+  `test_extractor_pins.py`, the whole worksheet-keys cluster
+  untagged as a group. The build opens that docstring anyway for
+  the SECOND JOB section, so the tag goes in the same patch under
+  Fix In Passing, Report It. `TAG_RE` requires `Role:` alone on a
+  line with a SINGLE-token value drawn from `VALID_ROLES`, read via
+  `ast.get_docstring` -- a two-word value or a comment-block header
+  reads as absent rather than as an error.
+- **BUILT 2026-08-21, in two patches, both landed and verified against
+  the pushed bytes.** `patch_L214_1_vocabulary_registry.py` at
+  `dbe50bc9` (nine files, one transaction) and
+  `patch_L214_2_scanner_derives.py` at `c214da50` (one file,
+  behavior-preserving). Both archived to `documentation/`.
+- **What patch 1 changed.** `worksheet_keys.py` gained the label
+  registry: `RECORD_LEGS`, `LABEL_TRANSPORT`, and `ANY_LABEL_RE` as a
+  generic `# Label:` detector that runs AHEAD of classification.
+  `Note` joined `CONTEXT_LEGS`; `Review-note` entered `RECORD_LEGS` as
+  the withheld free-form label. `legs_of` now returns a named
+  `Legs(cited, context, problems, unmarked, joined, unknown)`, and its
+  sixth field is the disposition this item existed to create. Its two
+  consumers and its 15 test unpacks moved with it in the same
+  transaction. The `Role: devtool` tag went in under Fix In Passing.
+- **PADDING IS CHECKED BEFORE THE LABEL PATTERN, and that ordering is
+  now load-bearing.** With a generic detector, `#   Highly
+  ellipsoidal: 1050x840x537 km` would read as a label called `Highly
+  ellipsoidal`. Before L-214 the vocabulary itself prevented that by
+  accident. The `PADDED_RE` test is what prevents it now, and the
+  reason is written into the code beside it.
+- **THE MARKING OBLIGATION WAS 17 LINES AT 9 SITES, NOT 28 AT 10**
+  [verified @`e1c64dc9`]. The 2026-08-21 handoff's 28 counted wrapped
+  lines under WITHHELD labels. The settled design says a withheld
+  label's continuations are withheld with it and are never flagged
+  unmarked -- nothing is being dropped from a request the text was
+  never entering. Excluding them, and accounting for the moon line
+  leaving `Note` for `Review-note` while the two relabelled odd
+  spellings joined it, gives 17 at 9. Re-measured with the project's
+  own `collect_claims` and `PADDED_RE`; the live builder run after the
+  patch joined exactly 17 more continuation lines, at exactly those
+  nine sites, with no other site moving.
+- **Tony's ruling on packaging, 2026-08-21: two patch scripts.** One
+  all-or-nothing transaction for the vocabulary and the corpus
+  together, because a signature change with four consumers has no
+  valid intermediate state and the admit/mark ordering fails in both
+  directions if split. The scanner derivation follows separately
+  because it is behavior-preserving.
+- **Tony's ruling on the form of `Removed` and `Corrected`,
+  2026-08-21: option B.** Register both as withheld free-form record
+  labels AND unify the dated spellings at source in the same corpus
+  patch, so the date moves into the body (`# Corrected: 2026-08-02 --
+  ...`). The argument that decided it: the new report's value is that
+  a non-empty run means something, and shipping it on day one already
+  listing seven known lines would teach its reader that its contents
+  are usually noise. `Removed` had one spelling and no drift;
+  `Corrected` had four, and a fifth (`# Corrected 2026-08-20:`)
+  appeared the day AFTER the design was settled, which is what made
+  the set worth closing rather than watching.
+  Eight dated lines were unified across `constants_new.py` and
+  `mars_visualization_shells.py` -- all of them in files the patch
+  already opened, one more than the seven attached to scored values,
+  under Fix In Passing.
+- **`# Corrected in Phase B:` in `shell_configs.py` was left alone**
+  [verified @`e1c64dc9`]. It is not attached to a scored value, so the
+  builder never sees it, and the file was outside the patch. If that
+  site is ever scored, the new report names it. The Artifact Bounds
+  the Audit.
+- **The verification that mattered.** Live builder run against the
+  pushed bytes at `dbe50bc9`: 98 rows, 176 continuation lines joined,
+  `0 unrecognised label(s) at 0 site(s)`. The ratchet did not refuse,
+  which is what proves all 17 markers landed on the right lines. The
+  `Note` under `SOLAR_RADIUS_KM` travels as context where it was
+  silently dropped before; the moon's rehomed single-leg comment
+  travels nowhere and does not trip the ratchet either. For patch 2,
+  old literal patterns and new derived patterns were compared over
+  every `.py` file in the tree: 127 cross-check matches, 5 resolved
+  matches, zero disagreements. Tier-1 stayed at 292 across both
+  patches -- checked against a pre-patch clone, not assumed.
+- **The import guard in patch 2 was tested by making it fail.**
+  Deriving a pattern from a shared name is decorative unless a rename
+  that never reaches the scanner can actually break the import. The
+  membership check against `RECORD_LEGS` was probed with a misspelled
+  name in a throwaway copy; it raised and named both sides. A Check
+  That Cannot Fail Is Not Passing, applied to the patch's own guard.
+- **A defect found by the pre-test, not by a check** -- recorded
+  because it is the third instance of this shape in this project. The
+  first build of patch 1 rewrote the test file's unpack lines by
+  matching a list of six literal spellings, counted nine matches,
+  compared that against its own expected nine, and passed -- while
+  leaving six of the fifteen sites unconverted. The count check was
+  built from the same list as the rewrite, so it could not have
+  failed. The xvfb-less runtime test caught it when the suite crashed
+  on the seventh site. The shipped version matches by pattern and
+  asserts the full population of 15, with the reason written in beside
+  it.
+**Note:** the `Legs` namedtuple is the shape that keeps this from
+recurring. A seventh field can be added without breaking any consumer
+that reads by attribute; the 15 test unpacks that had to move this
+time were positional.
+**Note:** re-dispatching the affected rows is a SEPARATE decision and
+is not closed by this build. A second dispatch of a row this project
+has already argued about in writing is not an independent leg.
+**Ref:** `worksheet_keys.py` (`LABEL_TRANSPORT`, `ANY_LABEL_RE`,
+`legs_of`, `continues_a_leg`); `worksheet_request_builder.py` (the
+report in `main()`); `provenance_scanner.py` (`_record_line_re`,
+`CROSS_CHECK_LINE_RE`, `RESOLVED_LINE_RE`);
+`documentation/patch_L214_1_vocabulary_registry.py`;
+`documentation/patch_L214_2_scanner_derives.py`;
+`documentation/L214_MEASUREMENT_20260819.md`;
+`documentation/L214_REVIEW_RECONCILIATION_20260819.md`;
+`documentation/REVIEW_PROMPT_L214_20260819.md`;
+L-209 (the row that exposed it); L-203 (the Visibility Convention);
+L-195 (the ratchet this preserves); L-204; L-207; L-210 (three of
+whose rows this count implicates); L-217 (the dispatch defect this
+review surfaced); L-219 (patch naming -- both scripts follow the
+convention and self-archived).
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
