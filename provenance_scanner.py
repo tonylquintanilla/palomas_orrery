@@ -294,6 +294,7 @@ inherits nothing, which is what keeps the genuinely uncited blocks tracked
 as L-173 visible).
 
 Module updated: August 2026 with Anthropic's Claude Opus 5 (Task 2a:
+Module updated: August 21, 2026 with Anthropic's Claude Opus 5 (L-214).
 per-domain split printed under each console tier line;
 MODULE_DOMAIN_MAP entries added for orrery_rendering and shell_configs,
 and two entries removed for smoke_* files no longer in the repo.
@@ -316,6 +317,12 @@ from module_atlas import build_dependency_graph, classify_role
 # L-189: run history and run-to-run delta. Informational only --
 # nothing imported here touches the exit code.
 import provenance_history
+
+# L-214: the label VOCABULARY has one home, and this is not it. The
+# names of the record legs come from there; what a record leg's body
+# is allowed to say stays here. worksheet_keys imports nothing from
+# this module, so the dependency runs one way only.
+import worksheet_keys as wk
 
 
 # ============================================================
@@ -717,8 +724,36 @@ def has_citation(text, is_docstring=False):
 # module's own units and grant them V2 on themselves. The annotation
 # form is documented in the provenance-discipline skill instead.
 
-CROSS_CHECK_LINE_RE = re.compile(
-    r'(?mi)^[ \t]*#[ \t]*cross-checked[ \t]*:(?P<body>[^\n]*)$')
+# The two record legs this module parses, named from the registry
+# rather than spelled again here. The membership check is what makes
+# the derivation real: rename a leg in worksheet_keys without updating
+# this list and the import fails loudly, where a bare literal would go
+# on compiling a pattern for a label nothing writes any more.
+RECORD_CROSS_CHECK = 'Cross-checked'
+RECORD_RESOLVED = 'Resolved'
+for _leg in (RECORD_CROSS_CHECK, RECORD_RESOLVED):
+    if _leg not in wk.RECORD_LEGS:
+        raise ImportError(
+            '%s parses a %r leg, but worksheet_keys.RECORD_LEGS does not '
+            'carry that name. One of the two moved without the other.'
+            % (__name__, _leg))
+del _leg
+
+
+def _record_line_re(label):
+    """The line pattern for one record leg, built from its NAME.
+
+    Case-insensitive, as these patterns have always been. The shared
+    matcher in worksheet_keys is case-SENSITIVE and is deliberately
+    not relaxed to agree: odd spellings are fixed at source instead.
+    (Ruled 2026-08-20; see L-214.)
+    """
+    return re.compile(
+        r'(?mi)^[ \t]*#[ \t]*%s[ \t]*:(?P<body>[^\n]*)$'
+        % re.escape(label))
+
+
+CROSS_CHECK_LINE_RE = _record_line_re(RECORD_CROSS_CHECK)
 
 # ISO only: a four-digit year, optionally -MM, optionally -DD. Prose
 # dates are rejected on purpose -- "April 2026" leaves no deterministic
@@ -774,8 +809,7 @@ WORKSHEET_REFERENCE_SUFFIXES = ('.md', '.jsonl', '.json')
 # The Resolved leg (L-200, 2026-08-17). Record-only: it grants no
 # source credit, is deliberately absent from SOURCE_PATTERNS, and is
 # read by worksheet_checker for linkage. See parse_resolved below.
-RESOLVED_LINE_RE = re.compile(
-    r'(?mi)^[ \t]*#[ \t]*resolved[ \t]*:(?P<body>[^\n]*)$')
+RESOLVED_LINE_RE = _record_line_re(RECORD_RESOLVED)
 
 RESOLVED_BODY_RE = re.compile(
     r'^\s*(?P<worksheet>\S+)\s+(?P<key>\S+)\s+--\s+(?P<what>.+?)'

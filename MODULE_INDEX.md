@@ -10,17 +10,22 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 128  
-**Total Lines of Code (non-blank):** 102,817  
-**Total Public Functions/Classes:** 1,161
+**Total Python Files:** 129  
+**Total Lines of Code (non-blank):** 102,987  
+**Total Public Functions/Classes:** 1,164
 
 ## Classification Coverage
 
-**Undetermined role (3).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
+- `patch_L214_2_scanner_derives.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
+
+**Undetermined domain (1).** No valid `Domain:` tag.
+
+- `patch_L214_2_scanner_derives.py`
 
 
 ---
@@ -201,9 +206,9 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `maintenance_run.py` | - L-188. One command, the whole maintenance suite. (477 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (955 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (956 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
-| `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,038 lines) |
+| `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,066 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (342 lines) |
 | `test_citation_inheritance.py` | Regression tests for citation-block inheritance. (516 lines) |
 | `test_constants_provenance.py` | Regression tests for verified numeric constants. (283 lines) |
@@ -224,6 +229,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
+| `patch_L214_2_scanner_derives.py` | L-214 patch 2 of 2 -- the scanner derives its record-label names. (141 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |
