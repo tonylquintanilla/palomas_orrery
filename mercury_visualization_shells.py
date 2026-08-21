@@ -89,8 +89,8 @@ mercury_atmosphere_info = (
 # Source: Baumgardner et al. 2008, GRL 35 -- sodium tail observed to ~1,400 R_M;
 # Source+: Schmidt et al. 2010, Icarus -- tail >1,000 R_M, highly variable.
 # Note: Potter & Morgan 1985 is the exosphere sodium DISCOVERY paper; it does not
-#       establish tail extent. The former "10,000 R_M" was unsupported by either
-#       source and has been replaced with the observed range.
+# Note+: establish tail extent. The former "10,000 R_M" was unsupported by either
+# Note+: source and has been replaced with the observed range.
 # Cross-checked: Claude 2026-08-03 -- Baumgardner et al. 2008 (worksheet_claude_batch1_blind_lookup.md)
 # Cross-checked: GPT 2026-08-03 -- Baumgardner et al. 2008 (batch1_blind_source_lookup_gpt.md)
 mercury_sodium_tail_info = (

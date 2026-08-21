@@ -5,6 +5,7 @@ Domain: dev_tools
 
 Module created: August 2026 with Anthropic's Claude Opus 5.
 Module updated: August 18, 2026 with Anthropic's Claude Opus 5 (L-207).
+Module updated: August 21, 2026 with Anthropic's Claude Opus 5 (L-214).
 
 WHAT THIS IS FOR
 
@@ -140,7 +141,7 @@ class Request(object):
     """One pre-printed row: a key, a claim, and the code's value."""
 
     def __init__(self, key, claim, code_value, where, cited, context,
-                 problems=(), unmarked=(), joined=0):
+                 problems=(), unmarked=(), joined=0, unknown=()):
         self.key = key
         self.claim = claim
         self.code_value = code_value
@@ -150,6 +151,7 @@ class Request(object):
         self.problems = list(problems)  # markers that could not join
         self.unmarked = list(unmarked)  # continuation text with no marker
         self.joined = joined        # continuation lines joined on
+        self.unknown = list(unknown)    # labels the registry does not carry
         self.row_id = ''
 
 
@@ -160,8 +162,10 @@ def requests_for_claim(claim, source_text):
     claim it makes, numbered from 1 in the order the scanner finds
     them -- the same order the checker's ordinal means.
     """
-    cited, context, problems, unmarked, joined = legs_of(
-        claim.unit.attached_text)
+    legs = legs_of(claim.unit.attached_text)
+    cited, context = legs.cited, legs.context
+    problems, unmarked, joined = legs.problems, legs.unmarked, legs.joined
+    unknown = legs.unknown
     where = '%s:%d' % (os.path.basename(claim.path), claim.unit.line_start)
 
     if claim.unit.kind == 'constant':
@@ -169,7 +173,7 @@ def requests_for_claim(claim, source_text):
                               claim.unit.line_start, claim.label, None)
         return [Request(key, claim.label,
                         claim.unit.value_str, where, cited, context,
-                        problems, unmarked, joined)]
+                        problems, unmarked, joined, unknown)]
 
     rows = []
     values, _dropped = wc.physical_claims(claim.unit)
@@ -178,7 +182,8 @@ def requests_for_claim(claim, source_text):
         key = wk.key_for_site(claim.path, source_text,
                               claim.unit.line_start, claim.label, index)
         rows.append(Request(key, excerpt(text), raw, where,
-                            cited, context, problems, unmarked, joined))
+                            cited, context, problems, unmarked, joined,
+                            unknown))
     return rows
 
 
@@ -626,6 +631,28 @@ def main():
     if skipped:
         print('%d file(s) not reached -- listed in the output.'
               % len(skipped))
+
+    # The L-214 report. A label the registry does not carry is withheld
+    # from the request rather than dropped in silence, and its name is
+    # printed here so it can be read and decided about -- aliased,
+    # unified onto an existing label, or registered. Printed on every
+    # run including zero, because a report that only appears when it
+    # has something to say is indistinguishable from one that never
+    # ran. It prints BEFORE the ratchet so a refusing run still shows
+    # it.
+    unknown_at = {}
+    for request in requests:
+        for label in request.unknown:
+            unknown_at.setdefault(request.where, [])
+            if label not in unknown_at[request.where]:
+                unknown_at[request.where].append(label)
+    print('%d unrecognised label(s) at %d site(s), withheld from the '
+          'request.' % (sum(len(v) for v in unknown_at.values()),
+                        len(unknown_at)))
+    for where in sorted(unknown_at):
+        print('  %s' % where)
+        for label in unknown_at[where]:
+            print('      # %s:' % label)
 
     # The ratchet (L-195). An unmarked continuation is text that reaches
     # nobody: not joined onto its leg, not printed into the worksheet.

@@ -838,7 +838,7 @@ def create_mars_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0, 
 # Source+: Hill sphere varies with eccentricity (~0.98 Mkm perihelion to ~1.19 Mkm aphelion);
 # Source+: ~1.084 Mkm / ~319.2 R_Mars is the semi-major axis average, using the
 # Source+: project equatorial radius 3,396.2 km (Archinal et al. 2018).
-# Corrected 2026-08-05: the former ~324.5 R_Mars matched no published source
+# Corrected: 2026-08-05 -- the former ~324.5 R_Mars matched no published source
 #         (1.5% high). The Aug-1 cross-check derived ~1.084 Mkm; that correction
 #         reached this module but never reached shell_configs.py, and was then
 #         reverted here by the Aug-4 consistency patch. Both copies now agree.

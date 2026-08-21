@@ -96,6 +96,7 @@ Domain: dev_tools
 
 Module created: August 2026 with Anthropic's Claude Opus 5.
 Module updated: August 18, 2026 with Anthropic's Claude Opus 5 (L-207).
+Module updated: August 21, 2026 with Anthropic's Claude Opus 5 (L-214).
 """
 
 import hashlib
@@ -2136,8 +2137,8 @@ def citation_prompt_rows(claims):
         if not claim.citation_rows:
             not_included['annotations_with_no_matched_row'] += 1
             continue
-        cited, context, _problems, _unmarked, _joined = wk.legs_of(
-            claim.unit.attached_text)
+        _legs = wk.legs_of(claim.unit.attached_text)
+        cited, context = _legs.cited, _legs.context
         for captured in claim.citation_rows:
             if not captured['source'] and not captured['citation_verdict']:
                 not_included[

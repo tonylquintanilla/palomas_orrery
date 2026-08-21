@@ -333,8 +333,8 @@ def create_venus_crust_shell(center_position=(0, 0, 0)):
 # Source+: Sanchez-Lavega 2018 -- troposphere/tropopause top range 60-65 km.
 # Cross-checked: Claude 2026-08-03 -- NSSDCA Venus Fact Sheet (worksheet_claude_batch1_tier1_sourcing.md)
 # Cross-checked: GPT 2026-08-03 -- NSSDCA Venus Fact Sheet (batch1_tier1_sourcing_gpt_independent.md)
-# NOTE: duplicated text -- the description entry in create_venus_atmosphere_shell
-#       below carries a <br> copy of this block. Edit both copies together.
+# Note: duplicated text -- the description entry in create_venus_atmosphere_shell
+# Note+: below carries a <br> copy of this block. Edit both copies together.
 venus_atmosphere_info = (
             "Venus boasts an extremely dense atmosphere, about 92 to 93 times the pressure of Earth's atmosphere at the \n" 
             "surface. It is composed primarily of carbon dioxide (about 96.5%) and nitrogen (about 3.5%), with trace \n" 

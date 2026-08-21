@@ -1,6 +1,6 @@
 # Paloma's Orrery -- Provenance Audit
 
-Generated: August 20, 2026
+Generated: August 21, 2026
 Files scanned: 128
 Total findings: 1034
 Constants: 108 | Dicts: 38 | Display strings: 888
@@ -19,14 +19,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260821T201828Z | `e1c64dc` | 128 | 1034 | 292 | 628 | 112 | 2 |
 | 20260821T032058Z | `9b9743d` | 128 | 1034 | 292 | 628 | 112 | 2 |
 | 20260820T233411Z | `79729c9` | 128 | 1033 | 292 | 626 | 113 | 2 |
 | 20260820T231922Z | `762aa5d` | 129 | 1033 | 292 | 626 | 113 | 2 |
 | 20260820T225549Z | `eee4cc6` | 128 | 1033 | 292 | 626 | 113 | 2 |
 | 20260820T215945Z | `3586970` | 128 | 1033 | 292 | 626 | 113 | 2 |
-| 20260820T215806Z | `3586970` | 128 | 1033 | 292 | 626 | 113 | 2 |
 
-Change since the previous run: total +1, Tier-1 +0.
+Change since the previous run: total +0, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -1751,9 +1751,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 103 | dict | ROLE_MAP[...] | (124 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 368 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 391 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 103 | dict | ROLE_MAP[...] | (125 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 369 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 392 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 
@@ -1897,24 +1897,24 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 419 | constant | HASH_CHARS | 8 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 651 | constant | MIN_PROSE_FRAGMENT | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 842 | constant | QUOTE_LIMIT | 160 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 1001 | constant | INSTRUCTION_LOOKBACK | 30 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 1002 | constant | INSTRUCTION_LOOKAHEAD | 25 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 420 | constant | HASH_CHARS | 8 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 652 | constant | MIN_PROSE_FRAGMENT | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 843 | constant | QUOTE_LIMIT | 160 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 1002 | constant | INSTRUCTION_LOOKBACK | 30 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 1003 | constant | INSTRUCTION_LOOKAHEAD | 25 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### worksheet_keys.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 138 | constant | EXTRACTOR_VERSION | 2 | 4 | 2 | **8** | No source citation (recalled) | Internal use (name vocabulary) |
+| 140 | constant | EXTRACTOR_VERSION | 2 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### worksheet_request_builder.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 123 | constant | CLAIM_EXCERPT | 90 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 316 | constant | HASH_CHARS | 8 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 124 | constant | CLAIM_EXCERPT | 90 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 321 | constant | HASH_CHARS | 8 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ---
 

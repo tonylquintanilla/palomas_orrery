@@ -1,6 +1,6 @@
 # Paloma's Orrery - Module Index
 
-**Generated:** August 20, 2026 by `module_atlas.py`  
+**Generated:** August 21, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -10,27 +10,17 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 131  
-**Total Lines of Code (non-blank):** 103,296  
-**Total Public Functions/Classes:** 1,163
+**Total Python Files:** 128  
+**Total Lines of Code (non-blank):** 102,817  
+**Total Public Functions/Classes:** 1,161
 
 ## Classification Coverage
 
-**Undetermined role (7).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (3).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L210_3_unwrap_resolved_legs.py`
-- `patch_L210_4_streamer_belt_unsourced.py`
-- `patch_L210_5_streamer_hover_two_part.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
-- `worksheet_keys.py`
-
-**Undetermined domain (3).** No valid `Domain:` tag.
-
-- `patch_L210_3_unwrap_resolved_legs.py`
-- `patch_L210_4_streamer_belt_unsourced.py`
-- `patch_L210_5_streamer_hover_two_part.py`
 
 
 ---
@@ -222,10 +212,11 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (485 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (119 lines) |
 | `test_worksheet_checker.py` | - L-192. Can each layer actually fail? (972 lines) |
-| `test_worksheet_request_builder.py` | - L-195 / L-192. Does the marker join actually join, and can it fail? (393 lines) |
+| `test_worksheet_request_builder.py` | - L-195 / L-192. Does the marker join actually join, and can it fail? (439 lines) |
 | `verify_orbit_cache.py` | Safely verify and repair orbit_paths.json (172 lines) |
-| `worksheet_checker.py` | - L-192. Does the worksheet say what the annotation claims it says? (2,112 lines) |
-| `worksheet_request_builder.py` | Worksheet request builder -- ask the question the checker can read. (626 lines) |
+| `worksheet_checker.py` | - L-192. Does the worksheet say what the annotation claims it says? (2,113 lines) |
+| `worksheet_keys.py` | Worksheet row keys -- one owner for the syntax and the resolution. (481 lines) |
+| `worksheet_request_builder.py` | Worksheet request builder -- ask the question the checker can read. (652 lines) |
 
 ---
 
@@ -233,13 +224,9 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L210_3_unwrap_resolved_legs.py` | Built on 9b9743d300070a69aac11229b9392845edb3488a at https://github.com/tonylquintanilla/palomas_orrery (branch main). Written August 20, 2026 with Anthropic's Claude Opus 5. (169 lines) |
-| `patch_L210_4_streamer_belt_unsourced.py` | Built on 9b9743d300070a69aac11229b9392845edb3488a at https://github.com/tonylquintanilla/palomas_orrery (branch main), AFTER patch_L210_3_unwrap_resolved_legs.py has run. (223 lines) |
-| `patch_L210_5_streamer_hover_two_part.py` | Built on 9b9743d300070a69aac11229b9392845edb3488a at https://github.com/tonylquintanilla/palomas_orrery (branch main), AFTER patch_L210_3 and patch_L210_4 have run, in that order. (249 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |
-| `worksheet_keys.py` | Worksheet row keys -- one owner for the syntax and the resolution. (392 lines) |
 
 ---
 

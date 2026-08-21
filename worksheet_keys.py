@@ -1,5 +1,6 @@
 """Worksheet row keys -- one owner for the syntax and the resolution.
 
+Role: devtool
 Domain: dev_tools
 
 A cross-check worksheet row has to name the thing it checked, and the
@@ -110,6 +111,7 @@ goes red rather than quietly giving two answers to one question.
 
 Module created: August 2026 with Anthropic's Claude Opus 5 (L-192).
 Module updated: August 18, 2026 with Anthropic's Claude Opus 5 (L-207).
+Module updated: August 21, 2026 with Anthropic's Claude Opus 5 (L-214).
 """
 
 import ast
@@ -158,10 +160,46 @@ RETIRED_TAG = 'RETIRED'
 # CITATION LEGS (moved from worksheet_request_builder.py, L-207)
 # ============================================================
 
+# THE LABEL REGISTRY (L-214)
+#
+# Two axes, not one list. TRANSPORT says whether a label's text is
+# shown to an outside responder or kept at home. GRAMMAR -- whether a
+# body is validated, and against what -- is not here: it stays in
+# provenance_scanner.py, with the scanner's line patterns derived from
+# these names. Moving the names without the grammar is deliberate; a
+# keys module that owned the semantics would be a second place for the
+# meaning of a leg to drift.
+#
+# Before this registry existed, a label outside the set was not
+# recognised as a LABEL at all, so deliberate withholding and silent
+# dropping shared one code path and could not be told apart from
+# inside it. That is L-209, and it is why the registry names the
+# withheld labels explicitly rather than leaving them to fall through.
+
 # The leg the citation verdict answers, and the legs that are shown
-# but never verdicted. Break 5, 2026-08-15.
+# but never verdicted. Break 5, 2026-08-15. `Note` joined them in
+# L-214: it was already the corpus's most-used context label and was
+# being dropped in silence on every dispatch.
 VERDICTED_LEG = 'Source'
-CONTEXT_LEGS = ('Ref', 'Also', 'See', 'Derived', 'Calculation')
+CONTEXT_LEGS = ('Ref', 'Also', 'See', 'Derived', 'Calculation', 'Note')
+
+# Labels whose text is deliberately NOT shown to a responder. A second
+# reader must not see what the last one concluded, or the leg stops
+# being independent. `Review-note` is the free-form one -- withheld,
+# with no body grammar -- and it exists because a record that is not a
+# cross-check and not a resolution had nowhere to live.
+RECORD_LEGS = ('Cross-checked', 'Resolved', 'Removed', 'Corrected',
+               'Review-note')
+
+TRAVELS = 'travels'
+WITHHELD = 'withheld'
+
+LABEL_TRANSPORT = {}
+for _name in (VERDICTED_LEG,) + CONTEXT_LEGS:
+    LABEL_TRANSPORT[_name] = TRAVELS
+for _name in RECORD_LEGS:
+    LABEL_TRANSPORT[_name] = WITHHELD
+del _name
 
 # The optional `+` is the continuation marker stage 1 placed on wrapped
 # citation lines (L-195). It is leg-specific on purpose: a `# Ref+:`
@@ -190,6 +228,21 @@ COMMENT_RE = re.compile(r'^\s*#')
 PADDED_RE = re.compile(r'^\s*#\s{2,}\S')
 OTHER_LABEL_RE = re.compile(r'^\s*#\s*([A-Za-z][A-Za-z0-9_ /.-]{0,30})\+?:')
 
+# Generic detection, ahead of classification. This matches the SHAPE of
+# a labelled line and says nothing about whether the label is known.
+# The invariant it buys: every syntactically labelled line attached to
+# a claim finishes legs_of() in one named disposition. There is no
+# disposition called `fell through the regex`.
+ANY_LABEL_RE = re.compile(
+    r'^\s*#\s*([A-Za-z][A-Za-z0-9_ /.-]{0,30})(\+)?:\s*(.*)$')
+
+# Kept for the travelling set, and still what a caller asking `is this
+# a citation leg` should use. It is no longer what legs_of() dispatches
+# on -- that is ANY_LABEL_RE -- because building the detector from the
+# vocabulary is the defect L-214 removed.
+Legs = namedtuple(
+    'Legs', 'cited context problems unmarked joined unknown')
+
 
 def continues_a_leg(line):
     """True when this comment line is unlabelled continuation text."""
@@ -201,7 +254,7 @@ def continues_a_leg(line):
 
 
 def legs_of(attached_text):
-    """(verdicted, context, problems, unmarked, joined) from a run.
+    """Legs(cited, context, problems, unmarked, joined, unknown).
 
     Returns the `# Source:` lines and, separately, every other leg.
     Both are lists: a run carrying two Source lines is a malformation
@@ -214,7 +267,8 @@ def legs_of(attached_text):
 
     `problems` holds continuation markers that could not be joined: one
     naming a different leg than the line above it, or one with no leg
-    above it at all. Their text is reported and NOT joined, because
+    above it at all. Their label is reported and their text is NOT
+    joined, because
     attaching it to the wrong authority is the failure this marker was
     made leg-specific to catch. `joined` counts the lines that did join,
     so a run that joins nothing says so rather than looking identical to
@@ -224,36 +278,77 @@ def legs_of(attached_text):
     text is invisible everywhere -- not joined, and not printed into the
     worksheet the way a mismatched marker is -- so the builder refuses
     to write a request while any exists, rather than reporting it. Each
-    entry is the offending line, stripped.
+    entry is the offending line, stripped. Only a TRAVELLING leg can
+    carry one: text under a withheld label is withheld with it, and
+    nothing is being dropped from a request it was never entering.
+
+    `unknown` holds the names of labels the registry does not carry.
+    Their text is withheld -- never shipped to a responder on the
+    strength of a label nobody has classified -- and the name is
+    returned so the builder can print it. Report, not reject: a
+    reported label is one this project can then read and decide about,
+    where a rejected one stops the run and the decision never gets
+    made. (Tony's ruling, 2026-08-19.)
     """
     verdicted = []
     context = []
     problems = []
     unmarked = []
+    unknown = []
     joined = 0
     open_label = None
     open_leg = None
+    open_travels = False
     for line in (attached_text or '').splitlines():
-        match = LEG_RE.match(line)
+        # PADDING IS CHECKED FIRST, and the order is load-bearing.
+        # `#   Highly ellipsoidal: 1050x840x537 km` is continuation
+        # text, not a label called `Highly ellipsoidal`. Before L-214
+        # the label test could not see it because the label had to be
+        # in the vocabulary; now that ANY_LABEL_RE matches any
+        # `# Word:` shape, the padding test is what keeps that line a
+        # continuation.
+        match = None if PADDED_RE.match(line) else ANY_LABEL_RE.match(line)
         if not match:
-            # A line that continues the leg above it but carries no
-            # marker is the failure this refuses on. Anything else
-            # closes the run, so a marker separated from its leg by
-            # unrelated prose cannot join across the gap.
+            # A line that continues a TRAVELLING leg but carries no
+            # marker is the failure this refuses on. Under a withheld
+            # leg the same line is withheld with it and is not a
+            # defect -- nothing is being dropped from a request the
+            # text was never going into. Anything else closes the run,
+            # so a marker separated from its leg by unrelated prose
+            # cannot join across the gap.
             if open_label is not None and continues_a_leg(line):
-                unmarked.append(line.strip())
+                if open_travels:
+                    unmarked.append(line.strip())
                 continue
             open_label = None
             open_leg = None
+            open_travels = False
             continue
-        label = match.group(1)
+        label = match.group(1).strip()
         marker = match.group(2)
         body = match.group(3).strip()
+        transport = LABEL_TRANSPORT.get(label)
+        if transport is None:
+            # The disposition L-214 exists to create. An unrecognised
+            # label is WITHHELD, never silently dropped, and its name
+            # is reported so a reader can decide what it should be.
+            if label not in unknown:
+                unknown.append(label)
+            transport = WITHHELD
+        if transport == WITHHELD:
+            open_label = label
+            open_leg = None
+            open_travels = False
+            continue
         if marker:
             if open_label is None:
                 problems.append(
                     '`%s+:` continuation with no leg above it to join'
                     % label)
+            elif not open_travels:
+                problems.append(
+                    '`%s+:` continuation under a withheld `%s:` leg'
+                    % (label, open_label))
             elif label != open_label:
                 problems.append(
                     '`%s+:` continuation under a `%s:` leg'
@@ -269,7 +364,8 @@ def legs_of(attached_text):
             context.append('%s: %s' % (label, body))
             open_leg = context
         open_label = label
-    return verdicted, context, problems, unmarked, joined
+        open_travels = True
+    return Legs(verdicted, context, problems, unmarked, joined, unknown)
 
 
 

@@ -579,7 +579,7 @@ def create_moon_exosphere_shell(center_position=(0, 0, 0)):
 # Source+: ~64,901 km (apogee). The shell uses 34.53 lunar radii = ~59,992 km
 # Source+: (Moon mean radius 1,737.4 km), which lies inside that range.
 # Cross-checked: Claude 2026-08-03 -- derived Hill radius (worksheet_claude_batch1_tier2.md)
-# Note: SINGLE-LEG. Only the Claude tier-2 worksheet carries the 58,147-64,901 km
+# Review-note: SINGLE-LEG. Only the Claude tier-2 worksheet carries the 58,147-64,901 km
 #       range. GPT and Gemini converged on method and inputs but did not publish
 #       this range. A second independent leg is still owed for V2 scoring.
 moon_hill_sphere_info = (

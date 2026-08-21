@@ -64,7 +64,7 @@ def run(*lines):
 
 def test_join():
     """A marked continuation joins onto the leg it names."""
-    cited, _context, problems, _unmarked, joined = run(
+    cited, _context, problems, _unmarked, joined, _unknown = run(
         '# Source: Nolan et al. 2013 (radar shape model),',
         '# Source+: mean diameter 492 +/- 20 m.')
     check('join: two lines become one citation',
@@ -74,7 +74,7 @@ def test_join():
     check('join: reports one joined line', joined == 1, repr(joined))
     check('join: reports no problem', problems == [], repr(problems))
 
-    cited, _context, _problems, _unmarked, joined = run(
+    cited, _context, _problems, _unmarked, joined, _unknown = run(
         '# Source: one',
         '# Source+: two',
         '# Source+: three')
@@ -82,7 +82,7 @@ def test_join():
           cited == ['one two three'], repr(cited))
     check('join: chain counts both lines', joined == 2, repr(joined))
 
-    _cited, context, _problems, _unmarked, joined = run(
+    _cited, context, _problems, _unmarked, joined, _unknown = run(
         '# Ref: Archinal et al. 2011,',
         '# Ref+: IAU/LRO reference radius.')
     check('join: a context leg joins too',
@@ -98,7 +98,7 @@ def test_unmarked_is_caught():
     the builder can refuse, which is the ratchet that keeps the next
     unmarked continuation from reaching a worksheet.
     """
-    cited, _context, problems, unmarked, joined = run(
+    cited, _context, problems, unmarked, joined, _unknown = run(
         '# Source: Nolan et al. 2013 (radar shape model),',
         '#         mean diameter 492 +/- 20 m.')
     check('unmarked: padding does not join',
@@ -112,7 +112,7 @@ def test_unmarked_is_caught():
 
     # An unpadded comment line continuing a leg -- the other shape the
     # marking patches treated as continuation.
-    _c, _x, _p, unmarked, _j = run(
+    _c, _x, _p, unmarked, _j, _unknown = run(
         '# Derived: 63,241.077 AU per light-year',
         '# Previous hardcoded value was 8.3167')
     check('unmarked: an unpadded continuation is caught too',
@@ -121,26 +121,26 @@ def test_unmarked_is_caught():
 
 def test_what_is_not_a_continuation():
     """The negative half. Over-eager detection would refuse forever."""
-    _c, _x, _p, unmarked, _j = run(
+    _c, _x, _p, unmarked, _j, _unknown = run(
         '# Source: Nolan et al. 2013,',
         '# Note: an unrelated remark about the shape model')
     check('not-continuation: a new label closes the run',
           unmarked == [], repr(unmarked))
 
-    _c, _x, _p, unmarked, _j = run(
+    _c, _x, _p, unmarked, _j, _unknown = run(
         '# Source: Nolan et al. 2013,',
         '# Cross-checked: Claude 2026-08-03 -- Nolan (worksheet.md)')
     check('not-continuation: Cross-checked closes the run',
           unmarked == [], repr(unmarked))
 
-    _c, _x, _p, unmarked, _j = run(
+    _c, _x, _p, unmarked, _j, _unknown = run(
         '# Source: Nolan et al. 2013,',
         '#',
         '#         orphaned text after a blank comment')
     check('not-continuation: a bare # closes the run',
           unmarked == [], repr(unmarked))
 
-    _c, _x, _p, unmarked, _j = run(
+    _c, _x, _p, unmarked, _j, _unknown = run(
         '# Source: Nolan et al. 2013,',
         'BENNU_RADIUS_KM = 0.246')
     check('not-continuation: a code line closes the run',
@@ -148,7 +148,7 @@ def test_what_is_not_a_continuation():
 
     # The case that broke the first detector: padded text whose own
     # words end in a colon. Padding wins, so this is continuation.
-    _c, _x, _p, unmarked, _j = run(
+    _c, _x, _p, unmarked, _j, _unknown = run(
         '# Source: JPL SSD mean radius (Lockwood et al. 2014)',
         '#         Highly ellipsoidal: 1050x840x537 km')
     check('not-continuation: padded text with a colon is still '
@@ -157,7 +157,7 @@ def test_what_is_not_a_continuation():
 
 def test_label_mismatch():
     """A continuation naming a different leg is reported, never joined."""
-    cited, context, problems, _unmarked, joined = run(
+    cited, context, problems, _unmarked, joined, _unknown = run(
         '# Source: Nolan et al. 2013,',
         '# Ref+: mean diameter 492 +/- 20 m.')
     check('mismatch: reported', len(problems) == 1, repr(problems))
@@ -173,14 +173,14 @@ def test_label_mismatch():
 
 def test_orphan():
     """A continuation with no leg above it is reported, never joined."""
-    cited, context, problems, _unmarked, joined = run(
+    cited, context, problems, _unmarked, joined, _unknown = run(
         '# Source+: mean diameter 492 +/- 20 m.')
     check('orphan: reported', len(problems) == 1, repr(problems))
     check('orphan: nothing cited', cited == [], repr(cited))
     check('orphan: nothing in context', context == [], repr(context))
     check('orphan: nothing counted as joined', joined == 0, repr(joined))
 
-    _cited, _context, problems, _unmarked, joined = run(
+    _cited, _context, problems, _unmarked, joined, _unknown = run(
         '# Source: Nolan et al. 2013,',
         '# Note: unrelated prose about the shape model',
         '# Source+: mean diameter 492 +/- 20 m.')
@@ -196,7 +196,7 @@ def test_two_source_malformation():
     The join must not paper over it: both are still reported, and a
     continuation attaches to the leg immediately above it.
     """
-    cited, _context, problems, _unmarked, joined = run(
+    cited, _context, problems, _unmarked, joined, _unknown = run(
         '# Source: first authority',
         '# Source: second authority',
         '# Source+: continued.')
@@ -212,11 +212,11 @@ def test_two_source_malformation():
 
 def test_empty_and_bare():
     """Degenerate input does not raise."""
-    check('empty: no text', b.legs_of('') == ([], [], [], [], 0),
+    check('empty: no text', b.legs_of('') == ([], [], [], [], 0, []),
           repr(b.legs_of('')))
-    check('empty: None', b.legs_of(None) == ([], [], [], [], 0),
+    check('empty: None', b.legs_of(None) == ([], [], [], [], 0, []),
           repr(b.legs_of(None)))
-    cited, _context, problems, _unmarked, joined = run(
+    cited, _context, problems, _unmarked, joined, _unknown = run(
         '# Source: authority',
         '# Source+:')
     check('empty: a marker with no body joins nothing visible',
@@ -444,6 +444,10 @@ def main():
     test_orphan()
     test_two_source_malformation()
     test_empty_and_bare()
+    test_note_travels()
+    test_withheld_label_holds_its_continuation()
+    test_unknown_label_is_withheld_and_named()
+    test_unmarked_still_refuses_under_a_travelling_leg()
     test_live_corpus(project_dir)
     test_selection(project_dir)
     test_ratchet_is_not_bypassed_by_selection(project_dir)
@@ -463,6 +467,57 @@ def main():
         return 1
     print('All %d checks passed' % total)
     return 0
+
+
+
+def test_note_travels():
+    """`Note` is context and travels (L-214)."""
+    _cited, context, _problems, unmarked, _joined, unknown = run(
+        '# Note: a drawing choice, not a measurement,',
+        '# Note+: chosen to keep the shell visible.')
+    check('note: travels as context',
+          context == ['Note: a drawing choice, not a measurement, '
+                      'chosen to keep the shell visible.'], repr(context))
+    check('note: nothing unmarked', unmarked == [], repr(unmarked))
+    check('note: nothing unknown', unknown == [], repr(unknown))
+
+
+def test_withheld_label_holds_its_continuation():
+    """A withheld leg keeps its wrapped text and raises no ratchet."""
+    cited, context, problems, unmarked, _joined, unknown = run(
+        '# Review-note: SINGLE-LEG. A second leg is still owed',
+        '#     for V2 scoring.')
+    check('withheld: not shown as context', context == [], repr(context))
+    check('withheld: not shown as citation', cited == [], repr(cited))
+    check('withheld: continuation is not unmarked',
+          unmarked == [], repr(unmarked))
+    check('withheld: not a marker problem', problems == [], repr(problems))
+    check('withheld: a known label is not unknown',
+          unknown == [], repr(unknown))
+
+
+def test_unknown_label_is_withheld_and_named():
+    """The disposition L-214 exists to create."""
+    cited, context, _problems, unmarked, _joined, unknown = run(
+        '# HELIOCENTRIC: 9.86 from Sun center',
+        '#     which is what the shell draws at.')
+    check('unknown: named once', unknown == ['HELIOCENTRIC'], repr(unknown))
+    check('unknown: text does not travel as context',
+          context == [], repr(context))
+    check('unknown: text does not travel as citation',
+          cited == [], repr(cited))
+    check('unknown: continuation withheld, not unmarked',
+          unmarked == [], repr(unmarked))
+
+
+def test_unmarked_still_refuses_under_a_travelling_leg():
+    """The ratchet is unchanged where it applies."""
+    _cited, _context, _problems, unmarked, _joined, _unknown = run(
+        '# Source: an authority',
+        '#     continued with no marker at all.')
+    check('ratchet: still catches an unmarked continuation',
+          unmarked == ['#     continued with no marker at all.'],
+          repr(unmarked))
 
 
 if __name__ == '__main__':

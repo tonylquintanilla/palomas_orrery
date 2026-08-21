@@ -67,8 +67,8 @@ SUN_RADIUS_KM = 695700.0
 # Cross-checked: Claude 2026-08-02 -- IAU B3 (worksheet_claude_constants_new.md)
 # Cross-checked: GPT 2026-08-02 -- IAU B3 (constants_new_citation_verification_gpt.md)
 # Note: This is the IAU nominal value (conversion constant), not a
-# measurement. The measured photospheric radius is ~696,340 km
-# (Haberreiter et al. 2008). Use nominal for all calculations.
+# Note+: measurement. The measured photospheric radius is ~696,340 km
+# Note+: (Haberreiter et al. 2008). Use nominal for all calculations.
 
 EARTH_EQUATORIAL_RADIUS_KM = 6378.1366
 # Source: IERS Conventions (2010), Petit & Luzum (eds.), IERS Technical
@@ -76,8 +76,8 @@ EARTH_EQUATORIAL_RADIUS_KM = 6378.1366
 # Ref: Prsa et al. 2016, AJ 152:41 (arXiv:1605.09788)
 # Also: https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html
 # Note: IERS publishes 6378136.6 +/- 0.1 m. IAU B3's 6.3781e6 m is an
-#   exact nominal conversion constant, not a measurement, and the two
-#   differ by 36.6 m.
+# Note+: exact nominal conversion constant, not a measurement, and the two
+# Note+: differ by 36.6 m.
 # Resolved: worksheet_claude-opus-5_pilot_constants_new_20260818.jsonl constants_new.py::EARTH_EQUATORIAL_RADIUS_KM -- Source moved from IAU B3 to IERS and the value taken to IERS precision (L-210)
 # Cross-checked: Claude 2026-08-02 -- IAU B3 / IERS (worksheet_claude_constants_new.md)
 # Cross-checked: GPT 2026-08-02 -- IAU B3 / IERS (constants_new_citation_verification_gpt.md)
@@ -182,8 +182,8 @@ CHROMOSPHERE_PHYSICAL_KM = 2000.0
 # Source+: Ch. 11 -- chromosphere extends ~2000 km above the photosphere.
 # Cross-checked: Gemini 2026-08-02 -- Carroll & Ostlie (worksheet_gemini_constants_remaining.md)
 # Note: the PHYSICAL extent, and since 2026-08-16 the drawn one too.
-#       CHROMOSPHERE_PHYSICAL_RADII below converts it to solar radii and
-#       is what the shell draws at. The 1.1 stylization is retired.
+# Note+: CHROMOSPHERE_PHYSICAL_RADII below converts it to solar radii and
+# Note+: is what the shell draws at. The 1.1 stylization is retired.
 
 CHROMOSPHERE_PHYSICAL_RADII = 1.0 + CHROMOSPHERE_PHYSICAL_KM / SUN_RADIUS_KM
 # Derived: 1 + 2000 / 695700 = 1.002875... solar radii
@@ -241,7 +241,7 @@ ROCHE_LIMIT_RADII = 3.45
 # Cross-checked: Claude 2026-08-02 -- formula verified (worksheet_claude_constants_new.md)
 # Cross-checked: GPT 2026-08-02 -- formula verified (constants_new_citation_verification_gpt.md)
 # Note: Roche limit is NOT absolute; tensile strength allows survival
-# inside it. Ikeya-Seki survived at 1.66 R_sun.
+# Note+: inside it. Ikeya-Seki survived at 1.66 R_sun.
 
 ALFVEN_SURFACE_RADII = 19.7
 # Source: Kasper et al. (2021), Phys. Rev. Lett. 127:255101 -- first crossing
@@ -284,7 +284,7 @@ HELIOPAUSE_RADII = 26148
 # Note: This is in solar radii, not AU. 121.6 AU * 149597870.7 / 695700 = 26148 R_sun
 # Source: Gurnett et al. (2013), Science 341:1489
 # See: Voyager 1 crossed heliopause at ~121.6 AU (Aug 2012)
-# Corrected 2026-08-02: 26449 -> 26148 (prior comment used 123 AU;
+# Corrected: 2026-08-02 -- 26449 -> 26148 (prior comment used 123 AU;
 #   Gurnett source says 121.6 AU; both checkers independently found the error)
 # Cross-checked: Claude 2026-08-02 -- Gurnett et al. (worksheet_claude_constants_new.md)
 # Cross-checked: GPT 2026-08-02 -- Gurnett et al. (constants_new_citation_verification_gpt.md)
@@ -307,7 +307,7 @@ GRAVITATIONAL_INFLUENCE_AU = 150000
 # Source+: Estimates range 100,000-200,000 AU in the literature;
 # Source+: depends on assumed enclosed galactic mass and Sun's orbital distance.
 # Source+: ~2.4 light-years. Visualization boundary, not a measured value.
-# Corrected 2026-08-02: 126000 -> 150000 (prior value unsourced;
+# Corrected: 2026-08-02 -- 126000 -> 150000 (prior value unsourced;
 #   150000 AU is a round midpoint of the published range)
 # Confirmed 2026-08-07 (Tony, L-179): 150000 stands, chosen as the
 #   midpoint of the published range below. Display text must carry
@@ -328,8 +328,8 @@ PARKER_CLOSEST_RADII = 9.86
 # Corrected: 2026-04-15 per Gemini review -- 8.86 was surface altitude,
 #   9.86 is distance from Sun center (consistent with other shell radii).
 #   Perihelion number corrected from 21 to 22.
-# HELIOCENTRIC: 9.86 from Sun center. NASA press reports ~3.83 Mkm above
-#   the surface = 8.86 R_sun altitude. Same orbit, different reference.
+# Note: 9.86 from Sun center. NASA press reports ~3.83 Mkm above
+# Note+: the surface = 8.86 R_sun altitude. Same orbit, different reference.
 # Cross-checked: Claude 2026-08-02 -- JHUAPL/Riley et al. (worksheet_claude_constants_new.md)
 # Cross-checked: GPT 2026-08-02 -- NASA PSP mission data (constants_new_citation_verification_gpt.md)
 # 9.86 R_sun = 6.86 million km = 0.0459 AU
@@ -416,11 +416,11 @@ BENNU_RADIUS_KM = 0.24503
 # Source: Barnouin et al. 2019, Nature Geoscience 12:247, Table 1 --
 # Source+: mean radius 245.03 +/- 0.08 m from OSIRIS-REx OLA and imaging
 # Note: supersedes the pre-encounter radar shape model of Nolan et al.
-#   2013, Icarus 226:629 (mean diameter 492 +/- 20 m, implying ~0.246
-#   km), which this row previously carried. The mission figure is
-#   independently derived, not a restatement of the radar result.
-# Corrected 2026-08-02: 0.262 -> 0.246 (prior value matched no published source)
-# Corrected 2026-08-20: 0.246 -> 0.24503 (OSIRIS-REx supersedes radar)
+# Note+: 2013, Icarus 226:629 (mean diameter 492 +/- 20 m, implying ~0.246
+# Note+: km), which this row previously carried. The mission figure is
+# Note+: independently derived, not a restatement of the radar result.
+# Corrected: 2026-08-02 -- 0.262 -> 0.246 (prior value matched no published source)
+# Corrected: 2026-08-20 -- 0.246 -> 0.24503 (OSIRIS-REx supersedes radar)
 # Cross-checked: Claude 2026-08-02 -- Nolan et al. (worksheet_claude_constants_new.md)
 # Review-note: a `Cross-checked: GPT 2026-08-02 -- OSIRIS-REx` leg was
 #   removed here 2026-08-20. GPT REFUSED this row in that worksheet;
@@ -440,9 +440,9 @@ HAUMEA_RADIUS_KM = 798
 # Derived+: rounded to 798. Ortiz publishes the semi-axes and no mean
 # Derived+: radius, so this value is COMPUTED here rather than quoted.
 # Note: VISUALIZATION VALUE, and the two shape solutions differ by ~11%
-#   in radius. Lockwood et al. 2014, Earth Moon Planets 111:127 publishes
-#   715 km directly and is what JPL SSD adopted; the 2017 occultation is
-#   the only direct measurement. 798 is chosen for that reason.
+# Note+: in radius. Lockwood et al. 2014, Earth Moon Planets 111:127 publishes
+# Note+: 715 km directly and is what JPL SSD adopted; the 2017 occultation is
+# Note+: the only direct measurement. 798 is chosen for that reason.
 # Review-note: an unsourced "1050x840x537 km -> geometric mean 779.5 km"
 #   line was removed 2026-08-20. Those axes match NO published shape
 #   model -- Lockwood gives 960x770x495, Ortiz 1161x852x513 -- yet the
@@ -450,8 +450,8 @@ HAUMEA_RADIUS_KM = 798
 #   with no source left no trace a reader or scanner could catch.
 #   Beware also the widespread secondary-source error of reading Ortiz's
 #   semi-axes as full axes, which halves Haumea to ~399 km.
-# Corrected 2026-08-02: 816 -> 715 per JPL SSD (prior value matched neither axes nor database)
-# Corrected 2026-08-20: 715 -> 798 per the 2017 occultation
+# Corrected: 2026-08-02 -- 816 -> 715 per JPL SSD (prior value matched neither axes nor database)
+# Corrected: 2026-08-20 -- 715 -> 798 per the 2017 occultation
 # Resolved: worksheet_claude-opus-5_pilot_constants_new_20260818.jsonl constants_new.py::HAUMEA_RADIUS_KM -- moved to the 2017 occultation solution, unsourced axes removed (L-210)
 # Cross-checked: Claude 2026-08-02 -- JPL SSD (worksheet_claude_constants_new.md)
 # Cross-checked: GPT 2026-08-02 -- JPL SSD (constants_new_citation_verification_gpt.md)
@@ -464,7 +464,7 @@ ARROKOTH_RADIUS_KM = 9.1
 # Source+: Volume 3166 km^3 -> equivalent sphere radius 9.1 km
 # Source+: Overall dims 35.95 x 19.90 x 9.75 km (bilobed contact binary)
 # Source+: Corrected 2026-04-15 per Gemini review (was 0.0088 = 8.8 meters!)
-# Corrected 2026-08-02: 9.95 -> 9.1 per Keane shape model (prior dims were wrong)
+# Corrected: 2026-08-02 -- 9.95 -> 9.1 per Keane shape model (prior dims were wrong)
 # Cross-checked: Claude 2026-08-02 -- Keane et al. 2022 (worksheet_claude_constants_new.md)
 # Cross-checked: GPT 2026-08-02 -- Keane et al. 2022 (constants_new_citation_verification_gpt.md)
 
