@@ -15,6 +15,9 @@ withdrawn streamer-belt claim marked as withdrawn), built on d2e6457a.
 Module updated: August 21, 2026 with Anthropic's Claude Opus 5 (L-209:
 Gap corrected -- it recorded "none" a day before the DeForest citation
 became owed to that row), built on 6184b3b9.
+Module updated: August 22, 2026 with Anthropic's Claude Opus 5 (L-209:
+Gap item 1 closed -- the debt it described was discharged the same day
+by patch_L209_4), built on 031f43e7.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -2602,28 +2605,31 @@ pointing at it, so name the pilot's return by hand at dispatch time.
   streamer belt as both "4-6" and "6.0". Migrating them is L-181 and
   L-191, not this item.
 **Note:** RICE is Claude's proposal, unratified.
-**Gap:** two. The first is new, and it was here before this Gap was
-corrected on 2026-08-21 -- the Gap read "none" because it was written
-2026-08-19, a day before the debt existed.
-1. **A CITATION IS OWED to this row.** DeForest, Howard & McComas
-   (2014), ApJ 787:124 was removed from `STREAMER_BELT_RADII` on
-   2026-08-20 at `e1c64dc9`: its 6 R_sun is the threshold at which
-   inbound wave motion first became DETECTABLE, not a streamer extent.
-   The paper's actual streamer-belt result -- an Alfven surface at 17
-   R_sun or more, and 12.5 or more over the polar coronal holes -- is a
-   SECOND independent route to this constant, and it landed nowhere.
-   The removal was executed; the rehoming was not. Three stores say it
-   is owed and one of them is the live code: the streamer row's
-   `# Review-note:` in `constants_new.py` ends "where it is owed".
-   **What it is NOT dischargeable from:** the 2026-08-20 reconciliation
-   read. That is one blind leg from one model, and the rule the same
-   session wrote into `constants_new.py` governs here -- a removal
-   needs only the ABSENCE of support, a citation needs its PRESENCE.
-   `worksheet_gemini-3-1-pro_reconciliation_sources_20260820.md` item 4
-   does quote the abstract and name the location, so the claim is
-   CHECKABLE; it has not been CHECKED. Discharge is a verified read of
-   the paper, then a leg on `ALFVEN_SURFACE_RADII`. Re-using the
-   removal worksheet as that leg would be cite-to-clear.
+**Gap:** one open, one closed. Read item 2; item 1 is kept as record.
+1. **CITATION DEBT -- DISCHARGED 2026-08-21.** DeForest, Howard &
+   McComas (2014), ApJ 787:124 was removed from `STREAMER_BELT_RADII`
+   on 2026-08-20 at `e1c64dc9` -- its 6 R_sun is an inbound-wave
+   DETECTION THRESHOLD, not a streamer extent -- and its own result
+   belongs to this row. The removal ran; the rehoming did not, and this
+   Gap said "none" for a day because it was written before the debt
+   existed. `patch_L209_4_deforest_rehomed.py` closed it: the paper was
+   read at source, and `# Also+:` legs on `ALFVEN_SURFACE_RADII` now
+   carry it as a 2014 remote LOWER BOUND, superseded by Kasper's 2021
+   in-situ crossing and consistent with it. Nothing further is owed.
+   **The figure changed on the way, and this is the part to remember.**
+   This Gap first stated the bound as 17 R_sun in the streamer belt and
+   12.5 over the poles. The published paper says 15 and 12, in its
+   abstract, its Section 5 and its Section 6. The 12.5/17 pair is the
+   arXiv ABSTRACT METADATA at arxiv.org/abs/1404.3235, which does not
+   match the accepted manuscript arXiv itself serves as the PDF; NASA
+   ADS and Cranmer et al. 2016 (ApJ 828:66) both carry 12 and 15. Two
+   earlier reads reported 17 because both quoted that same listing
+   page. Agreement between two reads of one wrong page is not
+   verification. Do NOT restore 17 anywhere.
+   **The rule it tested.** This row is why the discharge needed a real
+   read rather than the removal worksheet: a removal needs only the
+   ABSENCE of support, a citation needs its PRESENCE. Had the worksheet
+   been reused as the leg, 17 would now be in the code.
 2. **MODE 5, unchanged and still outstanding.** The Alfven shell should
    render one solar radius larger than before, still nested inside the
    50 R_sun outer corona. Tony's eyes on a plot, not a build.
