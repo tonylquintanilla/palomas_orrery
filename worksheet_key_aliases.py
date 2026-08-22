@@ -65,4 +65,19 @@ needed.
 Module created: August 2026 with Anthropic's Claude Opus 5 (L-192).
 """
 
-ALIASES = {}
+ALIASES = {
+    # L-224, 2026-08-22. STREAMER_BELT_RADII = 6.0 became
+    # HELMET_CUSP_RADII = 4.0 when the solar streamer belt stopped being
+    # a sphere. The rename was the substance of that item, not
+    # cosmetic: 6.0 was an unsourced drawing choice sitting above the
+    # closed helmet and inside the open stalk, representing neither
+    # (L-210). 4.0 is the top of the helmet range Suess & Nerney (2004)
+    # states, and it names a CUSP rather than an outer edge.
+    #
+    # Added in response to a KEY_STALE finding, per rule 1 above: the
+    # maintenance run of 2026-08-22 reported the stale key at
+    # constants_new.py:195 and on the pinned key, and Tony confirmed
+    # the cause was the rename.
+    'constants_new.py::STREAMER_BELT_RADII':
+        'constants_new.py::HELMET_CUSP_RADII',
+}

@@ -10,26 +10,17 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 131  
-**Total Lines of Code (non-blank):** 104,302  
-**Total Public Functions/Classes:** 1,166
+**Total Python Files:** 128  
+**Total Lines of Code (non-blank):** 103,127  
+**Total Public Functions/Classes:** 1,162
 
 ## Classification Coverage
 
-**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (3).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L224_2_band_generator_and_builder.py`
-- `patch_L224_3_band_switchover.py`
-- `patch_L224_4_design_note_braid.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
-
-**Undetermined domain (3).** No valid `Domain:` tag.
-
-- `patch_L224_2_band_generator_and_builder.py`
-- `patch_L224_3_band_switchover.py`
-- `patch_L224_4_design_note_braid.py`
 
 
 ---
@@ -233,12 +224,9 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L224_2_band_generator_and_builder.py` | L-224 build, patch 1 of 2. PURELY ADDITIVE. (512 lines) |
-| `patch_L224_3_band_switchover.py` | L-224 build, patch 2 of 2. THIS IS THE ONE THAT CHANGES THE RENDER. (576 lines) |
-| `patch_L224_4_design_note_braid.py` | Writes documentation/DESIGN_NOTE_20260822_braid_and_citation_kind.md -- the three rulings settled in conversation on 2026-08-22 that live nowhere else. (102 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
-| `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |
+| `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |
 
 ---
 
