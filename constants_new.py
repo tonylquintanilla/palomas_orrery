@@ -39,6 +39,7 @@ Module updated: April 2026 with Anthropic's Claude Opus 4.6
 Reviewed: April 2026 by Google Gemini (Mode 7 cross-verification)
 
 Module updated: August 20, 2026 with Anthropic's Claude Opus 5 (L-210 reconciliation; see the Resolved legs on the affected rows)
+Module updated: August 21, 2026 with Anthropic's Claude Opus 5 (L-209: DeForest 2014 rehomed to ALFVEN_SURFACE_RADII, and its figure corrected from 17 to the published 15 R_sun)
 Module updated: July 2026 with Anthropic's Claude Sonnet 5 (L-162: 14
 remaining CENTER_BODY_RADII bodies promoted to named constants; value
 and citation carried forward unchanged from each dict entry)
@@ -218,8 +219,10 @@ STREAMER_BELT_RADII = 6.0
 #   cited work. (b) DeForest, Howard & McComas (2014), ApJ 787:124
 #   was removed: its 6 R_sun is the inbound-wave DETECTION
 #   THRESHOLD, not a streamer extent, and its streamer-belt result
-#   is an Alfven surface at >= 17 R_sun -- a result that belongs to
-#   ALFVEN_SURFACE_RADII (L-209), where it is owed. (c) Golub &
+#   is an Alfven surface at >= 15 R_sun -- a result that belongs to
+#   ALFVEN_SURFACE_RADII (L-209), where it was rehomed 2026-08-21.
+#   That figure read ">= 17" here until 2026-08-21; 17 is the arXiv
+#   abstract-metadata value and the published paper says 15. (c) Golub &
 #   Pasachoff, "The Solar Corona" (2010) was removed last: asked
 #   for helmet-streamer extent it returned a cavity height near 1
 #   R_sun and a loose 5-10 R_sun corona bound, located only as
@@ -260,6 +263,25 @@ ALFVEN_SURFACE_RADII = 19.7
 # See+: a pseudostreamer rather than a global shell. 19.7 is the measured
 # See+: first crossing, drawn here as a nominal sphere.
 # Also: https://www.nasa.gov/feature/goddard/2021/nasa-enters-the-solar-atmosphere
+# Also+: DeForest, Howard & McComas (2014), ApJ 787:124 -- the first remote
+# Also+: measurement of the Alfven surface, a LOWER BOUND of 15 R_sun in the
+# Also+: streamer belt and 12 R_sun over the polar coronal holes, from inbound
+# Also+: wave motion in STEREO-A/COR2. It does NOT source the value above: it
+# Also+: is a 2014 bound superseded by Kasper's 2021 in-situ crossing, and it
+# Also+: is consistent with it (19.7 is above 15). Both of its bounds are
+# Also+: INSTRUMENTAL rather than physical -- the paper states the streamer
+# Also+: figure is set by the coronagraph's field of view and the polar figure
+# Also+: by the noise floor, so the true surface lies somewhere above each.
+# Also+: Rehomed here 2026-08-21 from STREAMER_BELT_RADII, where it had been
+# Also+: cited for a claim it does not make (L-210).
+# Review-note: this row previously would have received "17 R_sun in the
+#   streamer belt, 12.5 over the poles". The published paper says 15 and 12,
+#   in its abstract, its Section 5 and its Section 6. The 12.5/17 pair is the
+#   arXiv ABSTRACT METADATA at arxiv.org/abs/1404.3235, which does not match
+#   the accepted manuscript at arxiv.org/pdf/1404.3235; NASA ADS and Cranmer
+#   et al. 2016 (ApJ 828:66) both carry 12 and 15. Two earlier reads reported
+#   17 because both quoted that same listing page -- agreement between two
+#   reads of one wrong page is not verification. Do not "restore" 17.
 # Corrected: 2026-08-19 -- was 18.8, an altitude used as a heliocentric radius.
 #   The prose above was carried on a bare Note: line and an invented
 #   HELIOCENTRIC: label, neither of which the request builder reads, so it

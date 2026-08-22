@@ -12,6 +12,9 @@ built on 3586970d.
 Module updated: August 21, 2026 with Anthropic's Claude Opus 5 (L-210:
 block reconciled against the four decisions that landed 2026-08-20; the
 withdrawn streamer-belt claim marked as withdrawn), built on d2e6457a.
+Module updated: August 21, 2026 with Anthropic's Claude Opus 5 (L-209:
+Gap corrected -- it recorded "none" a day before the DeForest citation
+became owed to that row), built on 6184b3b9.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -236,7 +239,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-221 | The master plan is the roadmap, and it outranks RICE | OPEN | 10.8 | 2026-08-20 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
-| ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-19 |
+| ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-21 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
 | ! | L-206 | Worksheet return filenames carry model and session | OPEN | 5.1 | 2026-08-18 |
 | ! | L-193 | Qualified verdicts -- the token is not the whole answer | OPEN | 4.8 | 2026-08-15 |
@@ -2529,7 +2532,7 @@ pointing at it, so name the pilot's return by hand at dispatch time.
 **Ref:** L-200 (the leg that cites the filename); L-186; L-192.
 
 #### [L-209] ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre
-<!-- L:209 status:OPEN upd:2026-08-19 section:A flag: rice:3/3/85/1 -->
+<!-- L:209 status:OPEN upd:2026-08-21 section:A flag: rice:3/3/85/1 -->
 - **The finding, pilot run 2026-08-18.** `ALFVEN_SURFACE_RADII = 18.8`
   is an ALTITUDE above the photosphere, not a heliocentric radius.
   Both the Kasper et al. 2021 abstract (13 million km above the
@@ -2599,13 +2602,43 @@ pointing at it, so name the pilot's return by hand at dispatch time.
   streamer belt as both "4-6" and "6.0". Migrating them is L-181 and
   L-191, not this item.
 **Note:** RICE is Claude's proposal, unratified.
-**Gap:** none. Mode 5 outstanding: the Alfven shell should render one
-solar radius larger, still nested inside the 50 R_sun outer corona.
+**Gap:** two. The first is new, and it was here before this Gap was
+corrected on 2026-08-21 -- the Gap read "none" because it was written
+2026-08-19, a day before the debt existed.
+1. **A CITATION IS OWED to this row.** DeForest, Howard & McComas
+   (2014), ApJ 787:124 was removed from `STREAMER_BELT_RADII` on
+   2026-08-20 at `e1c64dc9`: its 6 R_sun is the threshold at which
+   inbound wave motion first became DETECTABLE, not a streamer extent.
+   The paper's actual streamer-belt result -- an Alfven surface at 17
+   R_sun or more, and 12.5 or more over the polar coronal holes -- is a
+   SECOND independent route to this constant, and it landed nowhere.
+   The removal was executed; the rehoming was not. Three stores say it
+   is owed and one of them is the live code: the streamer row's
+   `# Review-note:` in `constants_new.py` ends "where it is owed".
+   **What it is NOT dischargeable from:** the 2026-08-20 reconciliation
+   read. That is one blind leg from one model, and the rule the same
+   session wrote into `constants_new.py` governs here -- a removal
+   needs only the ABSENCE of support, a citation needs its PRESENCE.
+   `worksheet_gemini-3-1-pro_reconciliation_sources_20260820.md` item 4
+   does quote the abstract and name the location, so the claim is
+   CHECKABLE; it has not been CHECKED. Discharge is a verified read of
+   the paper, then a leg on `ALFVEN_SURFACE_RADII`. Re-using the
+   removal worksheet as that leg would be cite-to-clear.
+2. **MODE 5, unchanged and still outstanding.** The Alfven shell should
+   render one solar radius larger than before, still nested inside the
+   50 R_sun outer corona. Tony's eyes on a plot, not a build.
 **Ref:** `documentation/PILOT_CONVERGENCE_20260819.md` Part 4;
 `documentation/worksheets/`
 `worksheet_claude-opus-5_pilot_constants_new_20260818.jsonl` R12;
-L-214 (the builder gap this exposed); L-181 and L-191 (the remaining
-shadow constants); L-207 (the run that produced it).
+`documentation/worksheets/`
+`worksheet_gemini-3-1-pro_reconciliation_sources_20260820.md` item 4
+(the checkable, unchecked claim); L-210 (the row DeForest was removed
+from, and the same staleness class corrected one item over on
+2026-08-21); L-214 (the builder gap this exposed); L-181 and L-191 (the
+remaining shadow constants); L-207 (the run that produced it); L-221
+(misapplied against this row before the dates were checked -- it
+governs a session document contradicting a settled decision, not a
+ledger field that predates the event it is silent about).
 
 #### [L-216] Gallery swap fails under a filesystem lock (OneDrive)
 <!-- L:216 status:OPEN upd:2026-08-19 section:A flag: rice:3/3/85/2 -->
