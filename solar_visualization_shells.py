@@ -14,6 +14,10 @@ Consumed by: planet_visualization.py (routing dispatcher),
 Role: rendering/shells
 Domain: orrery
 
+Module updated: August 2026 with Anthropic's Claude Opus 5 (L-224:
+create_sun_streamer_band -- the streamer belt as a warped helmet-and-
+stalk band; the sphere it replaces is retired in patch 2)
+
 Module updated: May 2026 with Anthropic's Claude Opus 4.6
     D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
 May 27, 2026: Stage 3 info-marker standard sweep (Opus 4.7). 9 info
@@ -36,7 +40,9 @@ import math
 import plotly.graph_objs as go
 from orrery_rendering import create_info_marker
 
-from planet_visualization_utilities import (create_sphere_points, SOLAR_RADIUS_AU, CORE_AU, RADIATIVE_ZONE_AU, SUN_RADIUS_KM,
+from planet_visualization_utilities import (create_sphere_points, create_streamer_band_shape,
+                                            STREAMER_BAND_DEFAULTS,
+                                            SOLAR_RADIUS_AU, CORE_AU, RADIATIVE_ZONE_AU, SUN_RADIUS_KM,
                                             INNER_CORONA_RADII, OUTER_CORONA_RADII, STREAMER_BELT_RADII,
                                             ROCHE_LIMIT_RADII, ALFVEN_SURFACE_RADII,
                                             TERMINATION_SHOCK_AU, HELIOPAUSE_RADII,
@@ -1636,4 +1642,128 @@ def create_sun_galactic_tide(center_position=(0, 0, 0), radius=50000, n_points=2
         customdata='Galactic Tide Region'
     )
     return [shell_trace, info_trace]
+
+
+# =========================================================================
+# Streamer band -- CUSTOM_SHELLS builder (L-224)
+# =========================================================================
+# Wired via CUSTOM_SHELLS['Sun']['streamer_belt'] in patch 2. Until then
+# nothing calls this and the render is unchanged.
+#
+# Replaces the sphere that SHELL_CONFIGS['Sun']['streamer_belt'] drew at
+# a single radius. Two things were wrong with that sphere: helmet
+# streamers form only over the magnetic neutral line, so a full sphere
+# asserted them over the poles where coronal holes are instead; and its
+# radius was a drawing choice with no boundary under it (L-210 withdrew
+# the 4-6 R_sun range as unsourced).
+#
+# Source: constants_new.py HELMET_CUSP_RADII (STREAMER_BELT_RADII until
+# patch 2) -- the cusp, not an outer edge.
+
+def create_sun_streamer_band(center_position=(0, 0, 0)):
+    """Streamer belt as one warped band: closed helmet, open stalk.
+
+    Parameters
+    ----------
+    center_position : tuple
+        Sun position. Accepted for interface uniformity with the
+        CUSTOM_SHELLS dispatch contract; geometry translation is
+        deferred here exactly as in the sibling Oort and tide builders.
+
+    Returns a list of plotly traces, per the CUSTOM_SHELLS contract.
+
+    One info marker only, per the single-info-marker convention, sitting
+    just outside the band's edge at the cusp -- the pinch is where the
+    eye goes and where the physics is. It is NOT at a pole: this is a
+    band, and the poles are empty by design.
+    """
+    cusp_rs = float(STREAMER_BELT_RADII)   # patch 2: -> HELMET_CUSP_RADII = 4.0
+    fade_rs = float(ALFVEN_SURFACE_RADII)  # dissolves across the Alfven surface
+
+    params = {'cusp_radius': cusp_rs,
+              'fade_radius': fade_rs,
+              'outer_radius': fade_rs * 1.015}
+    xs, ys, zs, alphas, sizes = create_streamer_band_shape(params)
+
+    scale = SOLAR_RADIUS_AU
+    x_au = [v * scale for v in xs]
+    y_au = [v * scale for v in ys]
+    z_au = [v * scale for v in zs]
+    # Per-point rgba. marker.opacity is a scalar in Plotly; the colour
+    # array is what lets one trace fade to nothing.
+    colors = ['rgba(255, 200, 80, %.4f)' % a for a in alphas]
+
+    # Figures interpolated from the constants, never typed, so the hover
+    # cannot drift from what is drawn (L-179 / L-180 convention).
+    def _km_au(r_solar):
+        return (r_solar * SUN_RADIUS_KM, r_solar * SOLAR_RADIUS_AU)
+
+    cusp_km, cusp_au = _km_au(cusp_rs)
+    fade_km, fade_au = _km_au(fade_rs)
+    fov_km, fov_au = _km_au(15.0)
+
+    band_hover = (
+        "One object with two regimes, not a shell with a radius.<br><br>"
+
+        "CLOSED HELMET -- the dense, wide base. Magnetic arcades stand "
+        "over the neutral line, closed at both ends. They reach no "
+        f"higher than 2-4 R_sun, and the band pinches at {cusp_rs:.1f} "
+        f"R_sun ({cusp_km:,.0f} km, {cusp_au:.6f} AU) where they open.<br>"
+        "Source: Suess & Nerney (2004), Adv. Space Res. 33:668-675 -- "
+        "stated there as established background, not measured by it, so "
+        "the pinch is drawn soft rather than sharp.<br><br>"
+
+        "OPEN STALK -- above the pinch. A thin sheet along the current "
+        "sheet. It has NO outer edge: it thins into the slow solar wind, "
+        "so this drawing dissolves instead of stopping. Nothing is drawn "
+        f"past the Alfven surface at {fade_rs:.1f} R_sun ({fade_km:,.0f} "
+        f"km, {fade_au:.6f} AU), where the corona becomes wind. Beyond "
+        "that the sheet continues as the heliospheric current sheet, out "
+        "to the heliopause.<br><br>"
+
+        "THE VISIBLE EDGE. That a sharp brightness boundary exists is a "
+        "coronagraph observation. What it DIVIDES is an interpretation: "
+        "Suess & Nerney take it as reasonable to assume it separates "
+        "fast coronal-hole wind from slow wind. Slow-wind origin is not "
+        "settled, so the edge is drawn and its meaning is attributed.<br><br>"
+
+        "DeForest, Howard & McComas (2014), ApJ 787:124 followed inbound "
+        f"wave motion out to 15 R_sun ({fov_km:,.0f} km, {fov_au:.6f} "
+        "AU). That is the coronagraph's field of view, not an extent -- "
+        "a floor, not an edge.<br><br>"
+
+        "THE WARP is drawn in ONE configuration, near solar minimum. The "
+        "neutral line's tilt sweeps toward the poles across the 11-year "
+        "cycle; this is the shape, not a measurement of today's.<br><br>"
+
+        "Drawn as a visualization assumption where no measured boundary "
+        "exists (L-224)."
+    )
+
+    band_trace = go.Scatter3d(
+        x=x_au, y=y_au, z=z_au,
+        mode='markers',
+        marker=dict(size=sizes, color=colors, symbol='circle'),
+        name='Sun: Streamer Belt',
+        legendgroup='Sun: Streamer Belt',
+        hoverinfo='skip',
+        showlegend=True
+    )
+
+    # Info marker: at the cusp, at the longitude where the warp peaks,
+    # stepped just outside the band edge so it is not buried in points.
+    lon_i = math.pi / 4.0
+    lat_i = math.radians(STREAMER_BAND_DEFAULTS['warp_amp_deg']
+                         + STREAMER_BAND_DEFAULTS['cusp_half_width_deg'] + 6.0)
+    r_i = cusp_rs * SOLAR_RADIUS_AU * 1.02
+    info_trace = create_info_marker(
+        r_i * math.cos(lat_i) * math.cos(lon_i),
+        r_i * math.cos(lat_i) * math.sin(lon_i),
+        r_i * math.sin(lat_i),
+        'rgb(255, 200, 80)',
+        f"Sun: Streamer Belt<br><br>{band_hover}",
+        'Sun: Streamer Belt',
+        customdata='Streamer Belt'
+    )
+    return [band_trace, info_trace]
 

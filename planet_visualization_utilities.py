@@ -35,6 +35,10 @@ radius aliases -- Mercury, Venus, Moon, Mars, Saturn, Uranus, Neptune,
 Pluto, Eris -- now imported directly from constants_new.py instead of
 re-derived from CENTER_BODY_RADII; same values, same names)
 
+Module updated: August 2026 with Anthropic's Claude Opus 5 (L-224:
+create_streamer_band_shape -- helmet-and-stalk band geometry for the
+solar streamer belt, per-point alpha so the stalk has no visible edge)
+
 Role: rendering
 Domain: orrery
 """
@@ -900,3 +904,160 @@ def build_dipole_cone_traces(center_position=(0, 0, 0), planet_name=None,
         text=[hover], hovertemplate='%{text}<extra></extra>'))
 
     return traces
+
+
+# =========================================================================
+# Streamer band geometry (L-224)
+# =========================================================================
+# Shared shape generator, same contract as create_magnetosphere_shape and
+# create_bow_shock_shape above: a params dict in, body-frame point arrays
+# out, and the CALLER does placement, scaling and trace construction.
+# Placed here rather than inline in solar_visualization_shells.py for the
+# reason create_bow_shock_shape was extracted from four inline copies in
+# June 2026 -- shaped geometry has one home.
+#
+# It returns FIVE arrays where its siblings return three. The extra two
+# are per-point alpha and marker size, and they are the whole point: the
+# streamer stalk has no outer edge, so it must dissolve rather than stop,
+# and Plotly's marker.opacity is a scalar while marker.color and
+# marker.size accept per-point arrays. Fading through a colour array is
+# therefore the only way to draw an edgeless object in one trace.
+#
+# Units are SOLAR RADII throughout. The caller scales to AU.
+
+STREAMER_BAND_DEFAULTS = {
+    # --- radial structure -------------------------------------------
+    'base_radius': 1.0,        # photosphere; the band starts at the surface
+    'cusp_radius': 4.0,        # the pinch -- where closed loops open
+    'fade_radius': 19.7,       # alpha reaches ZERO here (Alfven surface)
+    'outer_radius': 20.0,      # last generated point, already invisible
+    # --- the silhouette ---------------------------------------------
+    'base_half_width_deg': 38.0,   # arcade footprint along the neutral line
+    'cusp_half_width_deg': 9.0,    # the narrowest point
+    'helmet_exponent': 1.7,        # >1 stays wide, then pinches near the cusp
+    'stalk_taper': 0.45,           # further narrowing of the stalk, fractional
+    'fade_exponent': 1.8,          # >1 dissolves; 1.0 smears
+    # --- the warp (ONE configuration, near solar minimum) ------------
+    'warp_amp_deg': 15.0,      # neutral-line tilt off the equator
+    'warp_lobes': 2,           # two-lobe warp: the ballerina skirt
+    # --- sampling ----------------------------------------------------
+    'n_radial_helmet': 12,
+    'n_radial_stalk': 30,
+    'n_lon': 32,
+    'n_lat': 5,
+    'jitter': 0.42,            # fraction of local spacing; kills ring artifacts
+    'seed': 20260822,          # seeded so the render is reproducible
+    # --- appearance ---------------------------------------------------
+    'max_alpha': 0.55,
+    'base_marker_size': 3.2,
+    'tip_marker_size': 1.4,
+}
+
+
+def create_streamer_band_shape(params=None):
+    """Point cloud for a helmet-and-stalk streamer band (L-224).
+
+    The streamer belt is not a shell and has no single radius. Below the
+    cusp it is a closed magnetic arcade over the neutral line -- wide,
+    dense, and bounded. Above the cusp it is an open stalk along the
+    current sheet, which thins into the slow solar wind and has no outer
+    edge at all. This generator draws both as ONE object whose character
+    changes with radius, which is what they are.
+
+    Returns
+    -------
+    (xs, ys, zs, alphas, sizes) : five equal-length lists
+        Positions in SOLAR RADII in the body frame; per-point alpha in
+        [0, max_alpha]; per-point marker size. Feed alphas into an rgba
+        colour array and sizes into marker.size -- see
+        solar_visualization_shells.create_sun_streamer_band.
+
+    Two invariants worth knowing before changing anything here.
+
+    NO VISIBLE EDGE, BY CONSTRUCTION. Alpha is evaluated at each point's
+    OWN jittered radius, never at the radius of the shell it was sampled
+    from. That is deliberate: with per-shell alpha, a point jittered
+    outward past fade_radius would carry a non-zero alpha from inside it
+    and draw a stray edge. Evaluating per point makes that impossible
+    rather than unlikely. Points continue to outer_radius with alpha
+    already at zero, so the array has a terminus and the screen does not.
+
+    REPRODUCIBLE. Jitter comes from a seeded RandomState, not the global
+    one, so two runs give byte-identical geometry. The sibling Oort
+    builders in solar_visualization_shells.py use unseeded np.random and
+    do re-roll every render; that is their existing behaviour, not a
+    pattern to copy for anything a reference artifact will fingerprint.
+    """
+    import math
+
+    p = dict(STREAMER_BAND_DEFAULTS)
+    if params:
+        p.update(params)
+
+    base_r, cusp_r = float(p['base_radius']), float(p['cusp_radius'])
+    fade_r, out_r = float(p['fade_radius']), float(p['outer_radius'])
+    base_w = math.radians(float(p['base_half_width_deg']))
+    cusp_w = math.radians(float(p['cusp_half_width_deg']))
+    warp = math.radians(float(p['warp_amp_deg']))
+    lobes = int(p['warp_lobes'])
+    helm_e, fade_e = float(p['helmet_exponent']), float(p['fade_exponent'])
+    taper, a_max = float(p['stalk_taper']), float(p['max_alpha'])
+    s0, s1 = float(p['base_marker_size']), float(p['tip_marker_size'])
+    jit = float(p['jitter'])
+    n_h, n_s = int(p['n_radial_helmet']), int(p['n_radial_stalk'])
+    rs = np.random.RandomState(int(p['seed']))
+
+    span = max(1e-9, fade_r - cusp_r)
+
+    def _fade_fraction(r):
+        return min(1.0, max(0.0, (r - cusp_r) / span))
+
+    def alpha_at(r):
+        if r <= cusp_r:
+            return a_max
+        return a_max * (1.0 - _fade_fraction(r)) ** fade_e
+
+    def size_at(r):
+        if r <= cusp_r:
+            return s0
+        return s0 + (s1 - s0) * _fade_fraction(r)
+
+    d_h = (cusp_r - base_r) / max(1, n_h - 1)
+    d_s = (out_r - cusp_r) / max(1, n_s - 1)
+    shells = ([(r, True) for r in np.linspace(base_r, cusp_r, n_h)] +
+              [(r, False) for r in np.linspace(cusp_r, out_r, n_s)[1:]])
+
+    xs, ys, zs, alphas, sizes = [], [], [], [], []
+    for r_shell, in_helmet in shells:
+        if in_helmet:
+            t = 0.0 if cusp_r == base_r else (r_shell - base_r) / (cusp_r - base_r)
+            t = min(1.0, max(0.0, t))
+            half_w = cusp_w + (base_w - cusp_w) * (1.0 - t) ** helm_e
+            n_lon, n_lat, step = int(p['n_lon']), int(p['n_lat']), d_h
+        else:
+            u = min(1.0, max(0.0,
+                             (r_shell - cusp_r) / max(1e-9, out_r - cusp_r)))
+            half_w = cusp_w * (1.0 - taper * u)
+            # Density thins outward as well as alpha. Opacity alone reads
+            # as a uniform sheet turned down; thinning reads as a sheet
+            # coming apart, which is what actually happens.
+            n_lon = max(10, int(round(int(p['n_lon']) * (1.0 - 0.70 * u))))
+            n_lat = max(3, int(round(int(p['n_lat']) * (1.0 - 0.45 * u))))
+            step = d_s
+        lat_jit = half_w * jit / max(1, n_lat - 1)
+        for lon in np.linspace(0.0, 2 * math.pi, n_lon, endpoint=False):
+            # The neutral line is warped, not flat. This is the ballerina
+            # skirt at its origin, in ONE configuration near solar minimum.
+            lam0 = warp * math.sin(lobes * lon)
+            for off in np.linspace(-half_w, half_w, n_lat):
+                r_pt = min(out_r, max(base_r,
+                                      r_shell + jit * step * rs.uniform(-1.0, 1.0)))
+                lam = lam0 + off + lat_jit * rs.uniform(-1.0, 1.0)
+                cos_lam = math.cos(lam)
+                xs.append(r_pt * cos_lam * math.cos(lon))
+                ys.append(r_pt * cos_lam * math.sin(lon))
+                zs.append(r_pt * math.sin(lam))
+                alphas.append(round(alpha_at(r_pt), 4))
+                sizes.append(round(size_at(r_pt), 3))
+
+    return xs, ys, zs, alphas, sizes
