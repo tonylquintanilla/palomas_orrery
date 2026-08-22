@@ -18,6 +18,9 @@ became owed to that row), built on 6184b3b9.
 Module updated: August 22, 2026 with Anthropic's Claude Opus 5 (L-209:
 Gap item 1 closed -- the debt it described was discharged the same day
 by patch_L209_4), built on 031f43e7.
+Module updated: August 22, 2026 with Anthropic's Claude Opus 5 (L-224
+opened -- streamer band redesign; L-221 closed on its skill-version
+condition), built on af09de62.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -235,12 +238,11 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*128 live items; 116 need attention (`!`); 127 RICE-scored; 90 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*128 live items; 116 need attention (`!`); 127 RICE-scored; 91 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-221 | The master plan is the roadmap, and it outranks RICE | OPEN | 10.8 | 2026-08-20 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-21 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
@@ -253,6 +255,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
 | ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-08-19 |
+| ! | L-224 | Streamer belt: one warped band, not a sphere | OPEN | 3.8 | 2026-08-22 |
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
 | ! | L-210 | Pilot citation findings -- four rows in constants_new.py | OPEN | 3.6 | 2026-08-21 |
 | ! | L-215 | Ledger cleanup by topic, not by age | OPEN | 3.6 | 2026-08-19 |
@@ -445,6 +448,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-114 | objects_config.json stranded by the atomic swap; also blocks crash-recovery (gallery builder) | DONE | 16.2 | 2026-07-27 |
 |  | L-182 | Mars Hill sphere -- cross-check correction lost across the config pipeline | DONE | 12.0 | 2026-08-05 |
 |  | L-222 | The constants change report fails on every currency stamp | DONE | 11.4 | 2026-08-20 |
+|  | L-221 | The master plan is the roadmap, and it outranks RICE | DONE | 10.8 | 2026-08-22 |
 |  | L-198 | Claim vocabulary: the units the scanner could not see | DONE | 10.2 | 2026-08-17 |
 |  | L-217 | The Part A / Part B dispatch split is a check that cannot fail | DONE | 8.1 | 2026-08-19 |
 |  | L-207 | The citation prompt -- the checker asks the fuzzy question | DONE | 7.6 | 2026-08-18 |
@@ -2958,51 +2962,108 @@ Patch Script"; `documentation/patch_L209_2_alfven_migration.py` and
 `documentation/patch_L213_3_cache_line_and_close.py` (the pair that
 exposed it); HANDOFF_20260819_alfven_and_the_swap.md, error 4.
 
-#### [L-221] The master plan is the roadmap, and it outranks RICE
-<!-- L:221 status:OPEN upd:2026-08-20 section:A flag: rice:3/2/90/0.5 -->
-- **Tony's ruling, 2026-08-20.** The document stack in
-  `ledger-and-session-records` is an AUTHORITY ordering -- who wins
-  when two documents disagree about status. The master plan is not
-  in it and does not belong in it, because it is not competing on
-  that axis. It has a different authority: SEQUENCING.
-- **What the master plan is for.** It is the roadmap -- where we
-  are and where we are going, not what is directly in front. It is
-  traced at three levels of zoom: the full plan
-  (`MASTER_PLAN_INTERACTIVE_GALLERY.md`), its summary, and the
-  critical path (`MASTER_PLAN_CRITICAL_PATH_SUMMARY.md`).
-- **It updates at key junctures, not at every change.** Stepwise
-  updating is the ledger's job. That cadence is a property of what
-  the plan is for, not a defect to be corrected by restamping it
-  more often -- a juncture is its unit.
-- **It outranks RICE on sequencing.** RICE ranks items in
-  isolation. Bundling several items to complete a planned step
-  SUPERSEDES RICE order. The ledger header already calls RICE
-  "prioritization for planning"; this names what the planning is
-  and says it wins. Where the plan and the ledger disagree about
-  STATUS, the ledger still wins -- the two authorities do not
-  overlap.
-- **Why it came up.** A session read the missing anchor on the
-  2,010-line gallery master plan as evidence the plan was stale and
-  proposed ranking it below the ledger on currency. That framing
-  implies the plan is deficient and should update more often, which
-  would manufacture work. Tony's correction supplied the right
-  axis. (The missing anchor itself is not a finding: it is the
-  founding case of L-220, already ruled.)
-- **Confirmed the same day: the status rule covers session
-  DOCUMENTS, not just handoffs and manifests.** The skill stated it
-  for handoff-vs-manifest only. Any document written in a live
-  session -- a review return, a design note, an analysis -- can
-  assert that a question is open when the ledger has settled it.
-  Newest bytes are not a claim about what was decided. Recorded in
-  `ledger-and-session-records` 1.8 beside the ruling above.
-**Note:** RICE is Claude's proposal, unratified.
-**Gap:** none -- both rulings are recorded in
-`ledger-and-session-records` 1.8 by this patch. Close once a session
-confirms its loaded copy reads 1.8.
-**Ref:** `skills/ledger-and-session-records/SKILL.md` "The Document
-Stack"; LEDGER_CONSOLIDATED.md "RICE scoring -- prioritization for
-planning"; L-220 (Stamp What You Change); L-215 (the RICE tail
-measurement); L-214 (the session this surfaced in).
+#### [L-224] Streamer belt: one warped band, not a sphere
+<!-- L:224 status:OPEN upd:2026-08-22 section:A flag: rice:3/3/85/2 -->
+- **What is on screen now, and why it is wrong twice.**
+  `create_sun_streamer_belt_shell` draws a full sphere of points at
+  `STREAMER_BELT_RADII = 6.0`. Helmet streamers form only over the
+  magnetic neutral line; the poles carry coronal holes instead. So the
+  sphere asserts helmets exactly where there are none. And 6.0 is not
+  a boundary of anything: L-210 withdrew its 4-6 R_sun range as
+  unsourced and held 6.0 as a declared drawing choice above the closed
+  structure and inside the open one.
+- **The physical split, from Suess & Nerney (2004), Adv. Space Res.
+  33:668-675, bibcode 2004AdSpR..33..668S.** Streamers reach many
+  solar radii but the CLOSED-field helmet reaches no higher than 2-4.
+  Above the cusp there is a stalk -- a thin sheet along the current
+  sheet with no outer edge, thinning into the slow solar wind. Source
+  record: `documentation/SOURCE_suess_nerney_2004_helmet_extent_
+  20260821.md`. The figure is stated there as established background
+  in a modelling paper, NOT measured by it.
+- **DECISION -- one trace, not two.** Both halves are band-shaped, so
+  this is one object whose character changes with radius, not two
+  shells. One legend entry. Splitting the legend would undo the point.
+- **DECISION -- the silhouette carries the physics.** Wide and dense
+  at the base along the neutral line; pinching to a minimum width at
+  the cusp; thin above it. The pinch is where the loops open, which is
+  a claim a paper supports, unlike "where the belt ends." It is also
+  the eclipse silhouette, so it reads as familiar and is correct.
+- **DECISION -- cusp at 4.0 R_sun**, the top of the stated 2-4 range.
+  `STREAMER_BELT_RADII = 6.0` becomes `HELMET_CUSP_RADII = 4.0`. The
+  rename is Tony's call and load-bearing: a constant named for the
+  belt while holding the helmet cusp is the same name-meaning drift
+  that produced the citation failure. Eight live consumers across six
+  modules -- `shell_configs.py`, `comet_visualization_shells.py` and
+  its hover text, `solar_visualization_shells.py`,
+  `test_constants_provenance.py`. MEASURED, not assumed: the suite's
+  ordering assertion holds at 4.0 (3.0 < 3.45 < 4.0 < 19.7 < 50), all
+  15 tests pass with the value substituted.
+- **DECISION -- the stalk attenuates and never terminates.** Opacity
+  AND point density both fall with radius; the outer edge dissolves.
+  This is the one non-negotiable. DeForest's 15 R_sun is the
+  coronagraph's FIELD OF VIEW, not an extent, so drawing an edge there
+  would repeat the withdrawn 4-6 range in pixels. Points generate to
+  roughly 20 R_sun with alpha already at zero before the array ends,
+  so the terminus exists in code and never on screen.
+- **DECISION -- it dissolves across the Alfven surface.** 19.7 R_sun
+  (L-209) is the one real boundary out there. The stalk is seen losing
+  definition as it crosses from corona into wind, which makes the
+  Alfven shell mean something instead of hanging alone. Hover carries
+  what happens next: it does not end, it becomes the heliospheric
+  current sheet and runs to the heliopause.
+- **DECISION -- warp: one configuration near solar minimum**, with the
+  solar-cycle sweep explained in hover rather than drawn. The swept
+  envelope is the more conservative claim but smears the skirt into a
+  torus that teaches nothing, and the skirt's shape is the thing that
+  teaches.
+- **DECISION -- the boundary is drawn, its meaning is labelled.** Two
+  claims ride together and they are not the same kind. That a sharp
+  brightness boundary exists is a coronagraph OBSERVATION and needs no
+  further source. What it divides is an INTERPRETATION -- Suess &
+  Nerney state it is reasonable to ASSUME the boundary separates fast
+  coronal-hole wind from slow, and slow-wind origin is unsettled in
+  the field. So draw the edge; let hover attribute the flow-regime
+  reading to them as a reading. Uncertainty stays first-class.
+- **DECISION -- legend renamed to "Sun: Streamer Belt."** Drop
+  "(Visible Corona)": the visible corona is broader than the belt and
+  separating them is the point. The legendgroup is a key in
+  `shell_configs.py`, the checkbox and the tooltip, so it ripples --
+  but through files this work opens anyway.
+- **Where the generator goes.** `planet_visualization_utilities.py`,
+  beside `create_magnetosphere_shape` and `create_bow_shock_shape`,
+  same signature shape: params dict in, body-frame `(x, y, z)` out,
+  caller places it. The bow-shock generator was extracted in June 2026
+  from four duplicated inline copies precisely so shaped geometry has
+  one home; a one-off in the shells module would undo that.
+- **Mechanism note.** Plotly's `marker.opacity` is scalar, but
+  `marker.color` and `marker.size` both take per-point arrays, so
+  radial fade, size taper and density thinning all fit one trace and
+  one legend entry.
+- **Already true in the hover text, which is ahead of the picture.**
+  The current hover already cites Suess & Nerney for 2-4 R_sun and
+  already says the eclipse edge divides two flow regimes rather than
+  plasma from vacuum. The words describe the band. Only the geometry
+  is still a sphere.
+**Note:** RICE is Claude's proposal, unratified. Confidence 85 rather
+than higher because the fade PROFILE is unsettled -- linear will
+probably read as a smear and something steeper as a stalk. Build it
+adjustable and let Mode 5 pick; that is the render's call, not a
+design one.
+**Gap:** build it. The design is settled and sourced; nothing is
+blocked and no further source read is owed. Two things want the render
+rather than a decision: the fade curve, and whether the cusp pinch
+reads at all at 4.0 against `INNER_CORONA_RADII` at 3.0 and
+`ROCHE_LIMIT_RADII` at 3.45. Marker separation, if needed, is angular
+and never radial.
+**Ref:** `solar_visualization_shells.py::create_sun_streamer_belt_
+shell`; `constants_new.py::STREAMER_BELT_RADII`;
+`planet_visualization_utilities.py::create_magnetosphere_shape` and
+`create_bow_shock_shape` (the pattern to follow);
+`documentation/SOURCE_suess_nerney_2004_helmet_extent_20260821.md`;
+L-210 (the withdrawn range and the held 6.0 this replaces); L-209 (the
+Alfven surface it dissolves across); L-221 (the ruling that sequenced
+it); `orrery-coding-conventions` (single info marker, marker
+separation for near-equal radii, hover AU convention).
 
 ## PENDING ACTION (Tony-side)
 
@@ -6473,6 +6534,60 @@ L-195 (the ratchet this preserves); L-204; L-207; L-210 (three of
 whose rows this count implicates); L-217 (the dispatch defect this
 review surfaced); L-219 (patch naming -- both scripts follow the
 convention and self-archived).
+
+#### [L-221] The master plan is the roadmap, and it outranks RICE
+<!-- L:221 status:DONE upd:2026-08-22 section:C flag: rice:3/2/90/0.5 -->
+- **Tony's ruling, 2026-08-20.** The document stack in
+  `ledger-and-session-records` is an AUTHORITY ordering -- who wins
+  when two documents disagree about status. The master plan is not
+  in it and does not belong in it, because it is not competing on
+  that axis. It has a different authority: SEQUENCING.
+- **What the master plan is for.** It is the roadmap -- where we
+  are and where we are going, not what is directly in front. It is
+  traced at three levels of zoom: the full plan
+  (`MASTER_PLAN_INTERACTIVE_GALLERY.md`), its summary, and the
+  critical path (`MASTER_PLAN_CRITICAL_PATH_SUMMARY.md`).
+- **It updates at key junctures, not at every change.** Stepwise
+  updating is the ledger's job. That cadence is a property of what
+  the plan is for, not a defect to be corrected by restamping it
+  more often -- a juncture is its unit.
+- **It outranks RICE on sequencing.** RICE ranks items in
+  isolation. Bundling several items to complete a planned step
+  SUPERSEDES RICE order. The ledger header already calls RICE
+  "prioritization for planning"; this names what the planning is
+  and says it wins. Where the plan and the ledger disagree about
+  STATUS, the ledger still wins -- the two authorities do not
+  overlap.
+- **Why it came up.** A session read the missing anchor on the
+  2,010-line gallery master plan as evidence the plan was stale and
+  proposed ranking it below the ledger on currency. That framing
+  implies the plan is deficient and should update more often, which
+  would manufacture work. Tony's correction supplied the right
+  axis. (The missing anchor itself is not a finding: it is the
+  founding case of L-220, already ruled.)
+- **Confirmed the same day: the status rule covers session
+  DOCUMENTS, not just handoffs and manifests.** The skill stated it
+  for handoff-vs-manifest only. Any document written in a live
+  session -- a review return, a design note, an analysis -- can
+  assert that a question is open when the ledger has settled it.
+  Newest bytes are not a claim about what was decided. Recorded in
+  `ledger-and-session-records` 1.8 beside the ruling above.
+**Note:** RICE is Claude's proposal, unratified.
+**Gap:** none -- both rulings are recorded in
+`ledger-and-session-records` 1.8 by this patch. Close once a session
+confirms its loaded copy reads 1.8.
+**CLOSED 2026-08-22.** The condition fired. The session that closed
+this loaded `ledger-and-session-records` at 1.8 against a manifest
+expecting 1.8, at session start, before any ledger work -- which is
+the only place that check CAN fire, because the gate is load-triggered
+and a skill copy is bound when the conversation starts. Deferred
+verification, carried in writing, settled against the one thing a
+later session can actually read. Same structure as the SHA round trip.
+**Ref:** `skills/ledger-and-session-records/SKILL.md` "The Document
+Stack"; LEDGER_CONSOLIDATED.md "RICE scoring -- prioritization for
+planning"; L-220 (Stamp What You Change); L-215 (the RICE tail
+measurement); L-214 (the session this surfaced in); L-224 (the first
+item sequenced under this ruling).
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
