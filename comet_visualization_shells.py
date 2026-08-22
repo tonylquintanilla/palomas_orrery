@@ -41,7 +41,7 @@ from shared_utilities import create_sun_direction_indicator
 from orrery_rendering import create_info_marker
 from planet_visualization_utilities import (
     KM_PER_AU, SUN_RADIUS_KM, SOLAR_RADIUS_AU,
-    ALFVEN_SURFACE_RADII, STREAMER_BELT_RADII)
+    ALFVEN_SURFACE_RADII, HELMET_CUSP_RADII)
 
 # Comet nucleus sizes (approximate, in km)
 COMET_NUCLEUS_SIZES = {
@@ -508,6 +508,20 @@ def create_maps_disintegration_marker(position_au, comet_name='MAPS'):
 
     # How deep into the corona? (corona base is ~2,100 km above photosphere)
     depth_into_corona_km = max(0.0, dist_photosphere_km - CORONA_BASE_KM)
+    # L-224: helmet-cusp status, computed the same way as roche_status
+    # below rather than typed. NOTE: the disintegration radius this is
+    # evaluated against is itself under review (L-225) -- the repo's
+    # 8.33 R_sun does not agree with a perihelion of 1.23 R_sun. This
+    # line will report correctly for whatever position is passed; it is
+    # the INPUT that is in question, not the comparison.
+    HELMET_CUSP_KM = HELMET_CUSP_RADII * SUN_RADIUS_KM
+    inside_helmet = r_km < HELMET_CUSP_KM
+    helmet_status = (
+        f"YES -- {HELMET_CUSP_KM - r_km:,.0f} km inside"
+        if inside_helmet else
+        f"NO -- {r_km - HELMET_CUSP_KM:,.0f} km outside"
+    )
+
     # Roche status -- disintegration was OUTSIDE the Roche limit
     inside_roche = r_km < ROCHE_KM
     roche_status = (
@@ -529,14 +543,18 @@ def create_maps_disintegration_marker(position_au, comet_name='MAPS'):
         f"Distance from Sun center: {r_au:.6f} AU ({r_km:,.0f} km)<br>"
         f"Distance from photosphere: {dist_photosphere_km:,.0f} km "
         f"({dist_photosphere_au:.6f} AU) = {r_solar_radii:.2f} R_sun<br>"
-        f"Layer: between Alfven Surface (~{ALFVEN_SURFACE_RADII} R_sun, "
-        f"~{ALFVEN_SURFACE_RADII * SOLAR_RADIUS_AU:.3f} AU) and Streamer Belt "
-        f"(~{STREAMER_BELT_RADII} R_sun, ~{STREAMER_BELT_RADII * SOLAR_RADIUS_AU:.3f} AU)<br>"
+        f"Layer: between the Alfven Surface (~{ALFVEN_SURFACE_RADII} R_sun, "
+        f"~{ALFVEN_SURFACE_RADII * SOLAR_RADIUS_AU:.3f} AU) and the helmet cusp "
+        f"(~{HELMET_CUSP_RADII} R_sun, ~{HELMET_CUSP_RADII * SOLAR_RADIUS_AU:.3f} AU)<br>"
     #    f"<br>"
         f"<b>Solar environment:</b><br>"
         f"Corona temperature at this distance: ~1-2 million K<br>"
         f"Inside Alfven surface (crossed ~April 3 18:00 UTC): YES<br>"
-        f"Inside Streamer Belt (~6.0 R_sun, ~0.028 AU): NO -- died before reaching it<br>"
+        # L-224: was a typed "~6.0 R_sun, ~0.028 AU" plus a typed verdict,
+        # both of which would have gone stale silently when the constant
+        # moved. Computed from the constant now. No Shadow Constants.
+        f"Inside the helmet cusp (~{HELMET_CUSP_RADII} R_sun, "
+        f"~{HELMET_CUSP_RADII * SOLAR_RADIUS_AU:.3f} AU): {helmet_status}<br>"
         f"Inside Roche limit (~3.45 R_sun, ~0.016 AU): {roche_status}<br>"
         f"Inside Inner K-corona (~3.0 R_sun, ~0.014 AU): NO<br>"
     #    f"<br>"
@@ -709,7 +727,8 @@ def create_maps_ghost_tail_trace(fig=None):
         "<b>MAPS: Ghost Tail (debris arc)</b><br>"
         "April 4 08:15 UTC to April 6 01:00 UTC (~40 hours)<br>"
         "After disintegration at ~8.33 R_sun (~0.039 AU), debris swept<br>"
-        "inbound through Streamer Belt (6 R_sun, 0.028 AU),<br>"
+        f"inbound through the streamer band, past its helmet cusp<br>"
+        f"({HELMET_CUSP_RADII} R_sun, {HELMET_CUSP_RADII * SOLAR_RADIUS_AU:.3f} AU),<br>"
         "Roche limit (3.45 R_sun, 0.016 AU), inner K-corona (3.0 R_sun, 0.014 AU),<br>"
         "and perihelion (1.23 R_sun, 0.006 AU) at 556 km/s. Then outbound<br>"
         "until dispersed to ~29 R_sun (~0.132 AU) by April 6.<br>"

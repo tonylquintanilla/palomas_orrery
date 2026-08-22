@@ -9032,7 +9032,7 @@ sun_roche_limit_checkbutton.pack(anchor='w')
 CreateToolTip(sun_roche_limit_checkbutton, roche_limit_info)
 
 sun_streamer_belt_checkbutton = tk.Checkbutton(shell_options_frame,
-    text="-- Streamer Belt (Visible Corona)", variable=sun_streamer_belt_var)
+    text="-- Streamer Belt", variable=sun_streamer_belt_var)
 sun_streamer_belt_checkbutton.pack(anchor='w')
 CreateToolTip(sun_streamer_belt_checkbutton, streamer_belt_info)
 

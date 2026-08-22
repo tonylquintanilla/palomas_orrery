@@ -62,7 +62,7 @@ from planet_visualization_utilities import (
     # Solar structure and atmosphere
     SOLAR_RADIUS_AU, CORE_AU, RADIATIVE_ZONE_AU,
     INNER_CORONA_RADII, OUTER_CORONA_RADII,
-    STREAMER_BELT_RADII, ROCHE_LIMIT_RADII, ALFVEN_SURFACE_RADII,
+    HELMET_CUSP_RADII, ROCHE_LIMIT_RADII, ALFVEN_SURFACE_RADII,
     # Heliosphere and beyond
     TERMINATION_SHOCK_AU, HELIOPAUSE_RADII,
     INNER_LIMIT_OORT_CLOUD_AU, INNER_OORT_CLOUD_AU, OUTER_OORT_CLOUD_AU,
@@ -87,7 +87,6 @@ from solar_visualization_shells import (create_sun_core_shell,
                                         create_sun_photosphere_shell,
                                         create_sun_chromosphere_shell,
                                         create_sun_inner_corona_shell,
-                                        create_sun_streamer_belt_shell,
                                         create_sun_roche_limit_shell,
                                         create_sun_alfven_surface_shell,                                        
                                         create_sun_outer_corona_shell,

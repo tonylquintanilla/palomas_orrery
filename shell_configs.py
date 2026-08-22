@@ -50,7 +50,7 @@ from solar_visualization_shells import (
     # hover_text (Plotly hover, <br> line breaks)
     core_info_hover, radiative_zone_info_hover,
     photosphere_info_hover, chromosphere_info_hover,
-    inner_corona_info_hover, streamer_belt_info_hover,
+    inner_corona_info_hover,
     roche_limit_info_hover, alfven_surface_info_hover,
     outer_corona_info_hover, termination_shock_info_hover,
     solar_wind_info_hover,                      # heliopause hover (legacy name)
@@ -73,7 +73,7 @@ from solar_visualization_shells import (
 from planet_visualization_utilities import (
     SOLAR_RADIUS_AU, CORE_AU, RADIATIVE_ZONE_AU,
     CHROMOSPHERE_PHYSICAL_RADII, INNER_CORONA_RADII, OUTER_CORONA_RADII,
-    STREAMER_BELT_RADII, ROCHE_LIMIT_RADII, ALFVEN_SURFACE_RADII,
+    ROCHE_LIMIT_RADII, ALFVEN_SURFACE_RADII,
     TERMINATION_SHOCK_AU, HELIOPAUSE_RADII,
     INNER_LIMIT_OORT_CLOUD_AU, INNER_OORT_CLOUD_AU, OUTER_OORT_CLOUD_AU,
     GRAVITATIONAL_INFLUENCE_AU,
@@ -1938,16 +1938,13 @@ SHELL_CONFIGS = {
             'tooltip': inner_corona_info,
         },
 
-        'streamer_belt': {
-            'name': 'Streamer Belt (Visible Corona)',
-            'radius_au': STREAMER_BELT_RADII * SOLAR_RADIUS_AU,
-            'color': 'rgb(255, 200, 80)',
-            'opacity': 0.45,
-            'n_points': 20,
-            'marker_size': 3.0,
-            'hover_text': streamer_belt_info_hover,
-            'tooltip': streamer_belt_info,
-        },
+        # 'streamer_belt' MOVED to CUSTOM_SHELLS['Sun'] on 2026-08-22
+        # (L-224). It is no longer a sphere: helmet streamers form only
+        # over the magnetic neutral line, so a full sphere asserted them
+        # over the poles, where coronal holes are instead. Its radius was
+        # also a drawing choice with nothing under it (L-210). It is now
+        # a warped band pinching at the helmet cusp and dissolving across
+        # the Alfven surface. Do not re-add a sphere entry here.
 
         'roche_limit': {
             'name': 'Roche Limit (Comets)',
@@ -2738,6 +2735,11 @@ CUSTOM_SHELLS = {
     # lives inside the builder functions.
     # Module updated: May 2026 with Anthropic's Claude Opus 4.6
     'Sun': {
+
+        'streamer_belt': {
+            'builder': 'solar_visualization_shells.create_sun_streamer_band',
+            'tooltip': streamer_belt_info,
+        },
 
         'rotation_axis': {
             'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive

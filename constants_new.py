@@ -199,20 +199,32 @@ OUTER_CORONA_RADII = 50
 # See: Various; F-corona envelope extends to ~50 R_sun
 # Note: Visualization boundary for F-corona envelope; not a sharp physical edge
 
-# New shells (added April 2026)
-STREAMER_BELT_RADII = 6.0
-# ASSUMPTION -- NO VERIFIED SOURCE (Tony's ruling, 2026-08-20, L-210).
-# Note: 6.0 R_sun is a VISUALIZATION BOUNDARY carried as a working
-#   assumption, not a sourced value. It is not a physical edge:
-#   streamer-belt structure continues beyond whatever radius is
-#   drawn. The value is unchanged from what this row has always
-#   rendered; what changed is that the file now says we cannot show
-#   where it came from. Retire this note by citing a work that
-#   states a helmet-streamer radial extent, with a locatable
-#   position in the text -- then the value follows the source
-#   rather than the source being fitted to the value.
+# New shells (added April 2026); renamed and resourced 2026-08-22 (L-224)
+HELMET_CUSP_RADII = 4.0
+# Source: Suess & Nerney (2004), Adv. Space Res. 33:668-675, bibcode
+#   2004AdSpR..33..668S -- "the closed field regions, or helmets, reach
+#   no higher than 2-4 solar radii". 4.0 is the TOP of that stated
+#   range, chosen so the drawn cusp does not understate the helmet.
+# Note: this is the CUSP -- where the closed loops open -- not an outer
+#   edge of the streamer belt. The belt has no outer edge: above the
+#   cusp an open stalk continues into the slow solar wind. The renderer
+#   draws the transition and dissolves the stalk rather than stopping
+#   it (L-224, solar_visualization_shells.create_sun_streamer_band).
+# Note: the source STATES 2-4 as established background; the paper's own
+#   result is an analytic stagnation-flow model. Correctly cited, but do
+#   not read 2-4 as this paper's measurement. Modelled, so the rendered
+#   pinch is drawn soft rather than sharp.
+# Corrected: 2026-08-22 -- was STREAMER_BELT_RADII = 6.0, an unsourced
+#   visualization assumption sitting above the helmet and inside the
+#   stalk, representing neither (L-210). The rename is the substance:
+#   a constant named for the belt while holding the helmet cusp is the
+#   name-meaning drift that produced the citation failure it replaces.
+# Record: documentation/SOURCE_suess_nerney_2004_helmet_extent_20260821.md
 # Review-note: this row's entire citation stack was removed on
-#   2026-08-20 after an independent nine-source read. Recorded here
+#   2026-08-20 after an independent nine-source read, when it was
+#   STREAMER_BELT_RADII = 6.0. Kept because the removals still stand
+#   and the reasoning is why this row is now cited to a different work
+#   for a different quantity. Recorded here
 #   because a removal leaves no trace otherwise, and the next reader
 #   should not have to re-derive why an uncited constant is uncited.
 #   (a) "helmet streamers extend 4-6 R_sun" appeared in neither
@@ -234,7 +246,7 @@ STREAMER_BELT_RADII = 6.0
 #   The read was decisive about what to REMOVE and silent about what
 #   to KEEP. Those need different evidence: a removal needs only the
 #   absence of support, a citation needs its presence.
-# Resolved: worksheet_claude-opus-5_pilot_constants_new_20260818.jsonl constants_new.py::STREAMER_BELT_RADII -- value held, unsupported citation removed, 4-6 R_sun range withdrawn (L-210)
+# Resolved: worksheet_claude-opus-5_pilot_constants_new_20260818.jsonl constants_new.py::HELMET_CUSP_RADII (as STREAMER_BELT_RADII) -- value held, unsupported citation removed, 4-6 R_sun range withdrawn (L-210); renamed and resourced 2026-08-22 (L-224)
 
 ROCHE_LIMIT_RADII = 3.45
 # Source: Murray & Dermott, "Solar System Dynamics" (1999), Sec. 4.6
@@ -272,7 +284,8 @@ ALFVEN_SURFACE_RADII = 19.7
 # Also+: INSTRUMENTAL rather than physical -- the paper states the streamer
 # Also+: figure is set by the coronagraph's field of view and the polar figure
 # Also+: by the noise floor, so the true surface lies somewhere above each.
-# Also+: Rehomed here 2026-08-21 from STREAMER_BELT_RADII, where it had been
+# Also+: Rehomed here 2026-08-21 from HELMET_CUSP_RADII (then named
+# Also+: STREAMER_BELT_RADII), where it had been
 # Also+: cited for a claim it does not make (L-210).
 # Review-note: this row previously would have received "17 R_sun in the
 #   streamer belt, 12.5 over the poles". The published paper says 15 and 12,

@@ -10,22 +10,26 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 129  
-**Total Lines of Code (non-blank):** 103,631  
-**Total Public Functions/Classes:** 1,165
+**Total Python Files:** 131  
+**Total Lines of Code (non-blank):** 104,302  
+**Total Public Functions/Classes:** 1,166
 
 ## Classification Coverage
 
-**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `patch_L224_2_band_generator_and_builder.py`
+- `patch_L224_3_band_switchover.py`
+- `patch_L224_4_design_note_braid.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (1).** No valid `Domain:` tag.
+**Undetermined domain (3).** No valid `Domain:` tag.
 
 - `patch_L224_2_band_generator_and_builder.py`
+- `patch_L224_3_band_switchover.py`
+- `patch_L224_4_design_note_braid.py`
 
 
 ---
@@ -56,7 +60,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `paleoclimate_visualization.py` | Paleoclimate Visualization for Paloma's Orrery Cenozoic temperature and CO₂ reconstruction (66 Ma - present) (480 lines) |
 | `paleoclimate_visualization_full.py` | Paleoclimate Visualization for Paloma's Orrery Phanerozoic temperature reconstruction (540 Ma - present) (1,489 lines) |
 | `paleoclimate_wet_bulb_full.py` | Paleoclimate + Wet Bulb Visualization for Paloma's Orrery Phanerozoic temperature reconstruction (540 Ma - present) with human survivability context (2,226 lines) |
-| `planet_visualization.py` | High-level planet and Sun visualization orchestration. (713 lines) |
+| `planet_visualization.py` | High-level planet and Sun visualization orchestration. (712 lines) |
 | `planet_visualization_utilities.py` | Shared geometry helpers and body-radius aliases. (921 lines) |
 | `planetarium_apparent_magnitude.py` | Create 3D visualization for stars brighter than specified apparent magnitude. (355 lines) |
 | `planetarium_distance.py` | 3D star field pipeline for distance-based queries. (401 lines) |
@@ -78,7 +82,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `asteroid_belt_visualization_shells.py` | Asteroid Belt Visualization Module Functions for creating visualizations of asteroid belt structures in 3D plots. Includes Main Belt, Hildas, Trojans, and Greeks. Also includes helper functions for dynamic Trojan positioning based on Jupiter's location. (403 lines) |
-| `comet_visualization_shells.py` | Comet visual components for 3D orrery plots. (1,860 lines) |
+| `comet_visualization_shells.py` | Comet visual components for 3D orrery plots. (1,878 lines) |
 | `earth_visualization_shells.py` | Earth interior and orbital shell traces. (1,003 lines) |
 | `eris_visualization_shells.py` | Eris interior and boundary shell traces. (482 lines) |
 | `jupiter_visualization_shells.py` | Jupiter interior, ring, and magnetosphere shell traces. (897 lines) |
@@ -89,7 +93,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `planet9_visualization_shells.py` | Hypothetical Planet 9 shell traces. (269 lines) |
 | `pluto_visualization_shells.py` | Pluto interior and atmosphere shell traces. (615 lines) |
 | `saturn_visualization_shells.py` | Saturn interior, ring, and magnetosphere shell traces. (1,088 lines) |
-| `solar_visualization_shells.py` | Sun interior, corona, and heliosphere shell traces. (1,522 lines) |
+| `solar_visualization_shells.py` | Sun interior, corona, and heliosphere shell traces. (1,484 lines) |
 | `uranus_visualization_shells.py` | Uranus interior, ring, and magnetosphere shell traces. (1,083 lines) |
 | `venus_visualization_shells.py` | Venus interior and atmosphere shell traces. (645 lines) |
 
@@ -122,14 +126,14 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,250 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (515 lines) |
-| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (868 lines) |
+| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (881 lines) |
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (401 lines) |
 | `exoplanet_stellar_properties.py` | Stellar Properties for Exoplanet Host Stars (484 lines) |
 | `exoplanet_systems.py` | Hardcoded Exoplanet System Catalog (572 lines) |
 | `info_dictionary.py` | Descriptive text and narrative content for Paloma's Orrery. (2,050 lines) |
 | `messier_catalog.py` | Static catalog of Messier objects and bright deep-sky objects. (406 lines) |
 | `sgr_a_star_data.py` | S-star catalog and orbital mechanics for Sagittarius A*. (574 lines) |
-| `shell_configs.py` | Shell configuration data for all celestial bodies. (2,575 lines) |
+| `shell_configs.py` | Shell configuration data for all celestial bodies. (2,576 lines) |
 | `spacecraft_encounters.py` | Tagged encounter data for spacecraft missions in Paloma's Orrery. (1,298 lines) |
 | `star_notes.py` | Curated hover text annotations for notable stars. (1,158 lines) |
 | `star_properties.py` | SIMBAD stellar property queries with local caching. (340 lines) |
@@ -230,6 +234,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `patch_L224_2_band_generator_and_builder.py` | L-224 build, patch 1 of 2. PURELY ADDITIVE. (512 lines) |
+| `patch_L224_3_band_switchover.py` | L-224 build, patch 2 of 2. THIS IS THE ONE THAT CHANGES THE RENDER. (576 lines) |
+| `patch_L224_4_design_note_braid.py` | Writes documentation/DESIGN_NOTE_20260822_braid_and_citation_kind.md -- the three rulings settled in conversation on 2026-08-22 that live nowhere else. (102 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (52 lines) |

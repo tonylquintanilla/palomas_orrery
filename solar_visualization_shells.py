@@ -43,7 +43,7 @@ from orrery_rendering import create_info_marker
 from planet_visualization_utilities import (create_sphere_points, create_streamer_band_shape,
                                             STREAMER_BAND_DEFAULTS,
                                             SOLAR_RADIUS_AU, CORE_AU, RADIATIVE_ZONE_AU, SUN_RADIUS_KM,
-                                            INNER_CORONA_RADII, OUTER_CORONA_RADII, STREAMER_BELT_RADII,
+                                            INNER_CORONA_RADII, OUTER_CORONA_RADII, HELMET_CUSP_RADII,
                                             ROCHE_LIMIT_RADII, ALFVEN_SURFACE_RADII,
                                             TERMINATION_SHOCK_AU, HELIOPAUSE_RADII,
                                             INNER_LIMIT_OORT_CLOUD_AU, INNER_OORT_CLOUD_AU, OUTER_OORT_CLOUD_AU, 
@@ -584,7 +584,7 @@ solar_wind_info_hover = (
         )
 
 # Source: Stone et al. (2005) Science -- Voyager 1/2 termination shock;
-# Source+: TERMINATION_SHOCK_AU=94, STREAMER_BELT_RADII=6 in constants_new.py
+# Source+: TERMINATION_SHOCK_AU=94 in constants_new.py
 termination_shock_info_hover = (
             "Solar Wind: Termination Shock:<br><br>"
 
@@ -620,27 +620,32 @@ outer_corona_info_hover = (
     "already inside this shell and approaching the Alfven surface."
 )
 
-# Source: constants_new.py STREAMER_BELT_RADII=6.0 -- a VISUALIZATION
-#   ASSUMPTION with no verified source (L-210). Ranges quoted below:
-#   Suess & Nerney 2004, Adv. Space Res. 33:668 (helmets below 2-4
-#   R_sun; streamers to many R_sun); Suess & Nerney 2005, Solar Wind
-#   11 / SOHO 16 (boundaries and stalks studied 2-10 R_sun);
-#   Decraemer et al. 2019, ApJ 883:152 (stalk as a plasma slab around
-#   a current sheet). See documentation/worksheets/
-#   worksheet_gemini-3-1-pro_streamer_extent_20260820.md
+# Source: constants_new.py HELMET_CUSP_RADII=4.0 -- Suess & Nerney 2004,
+#   Adv. Space Res. 33:668-675, helmets reach no higher than 2-4 R_sun.
+#   Further ranges quoted below: Suess & Nerney 2005, Solar Wind 11 /
+#   SOHO 16 (boundaries and stalks studied 2-10 R_sun); Decraemer et al.
+#   2019, ApJ 883:152 (stalk as a plasma slab around a current sheet).
+#   See documentation/worksheets/
+#   worksheet_gemini-3-1-pro_streamer_extent_20260820.md and
+#   documentation/SOURCE_suess_nerney_2004_helmet_extent_20260821.md
+# L-191 note: this string reaches a Tk tooltip and carries literal <br>.
+#   Left as-is deliberately -- it is one of 58 such strings and the sweep
+#   is L-191's, not this item's. Fixing one out of step would hide it.
 streamer_belt_info = (
     "Sun: Streamer Belt / Visible Corona:<br><br>"
 
     "The streamer belt is the brightest, most structured region of the visible<br>"
     "solar corona, seen at total eclipse as a pearly white halo.<br><br>"
 
-    "IT HAS NO SINGLE OUTER RADIUS, and this shell is drawn at one anyway.<br>"
-    "A streamer is two structures stacked. The HELMET, a dome of closed<br>"
-    "magnetic loops, reaches no higher than 2-4 R_sun. Above its cusp the<br>"
-    "field opens and the solar wind draws it out into a STALK -- a thin<br>"
-    "current sheet reaching many solar radii, studied between 2 and 10.<br>"
-    "This shell sits at 6.0 R_sun: above the helmet, inside the stalk, and<br>"
-    "not a boundary anybody has measured. It is a drawing choice.<br>"
+    "IT HAS NO SINGLE OUTER RADIUS, and since 2026-08-22 it is no longer<br>"
+    "drawn as if it did. A streamer is two structures stacked. The HELMET,<br>"
+    "a dome of closed magnetic loops, reaches no higher than 2-4 R_sun.<br>"
+    "Above its cusp the field opens and the solar wind draws it out into a<br>"
+    "STALK -- a thin current sheet reaching many solar radii, studied<br>"
+    "between 2 and 10. The band drawn here is ONE object with both: wide<br>"
+    "and dense at the base, pinching at the cusp at 4.0 R_sun where the<br>"
+    "loops open, then thinning and dissolving across the Alfven surface.<br>"
+    "It has no drawn outer edge, because there is no edge to draw.<br>"
     "(Suess & Nerney 2004, Adv. Space Res. 33:668; 2005, Solar Wind 11.)<br><br>"
 
     "What you see at eclipse is a BRIGHTNESS boundary, and it divides two<br>"
@@ -662,31 +667,12 @@ streamer_belt_info = (
     "  By April 3-4 it was passing through this visible streamer belt region."
 )
 
-streamer_belt_info_hover = (
-    "Sun: Streamer Belt / Visible Corona:<br><br>"
-
-    "The brightest, most structured region of the visible solar corona. It has<br>"
-    "NO single outer radius: the closed helmet stays below 2-4 R_sun and its<br>"
-    "open stalk reaches many R_sun (Suess & Nerney 2004). This shell is drawn<br>"
-    "at 6.0 R_sun -- above the first, inside the second, and a drawing choice<br>"
-    "rather than a measured boundary. The eclipse edge divides two flow<br>"
-    "regimes, not plasma from vacuum. This is the corona that<br>"
-    "observers see during total solar eclipses as a pearly white halo around the Sun.<br><br>"
-
-    "Three components of white-light corona:<br>"
-    "* K-corona (kontinuierlich): Sunlight scattered off free electrons. Dominates within 2-3 R_sun.<br>"
-    "  Spectrum is continuous -- electrons move too fast to preserve absorption lines.<br>"
-    "* F-corona (Fraunhofer): Sunlight scattered off dust. Shows Fraunhofer absorption lines.<br>"
-    "  Dominates beyond ~3 R_sun, extends to ~15 R_sun. Has an oval shape.<br>"
-    "* E-corona (emission): Line emission from ionized Fe, Ni, Ca. Visible to ~2 R_sun.<br><br>"
-
-    "* Helmet streamers: closed loops below 2-4 R_sun, then a stalk reaching<br>"
-    "  many R_sun. Source of slow solar wind.<br>"
-    "* Temperature: ~1-2 million K<br><br>"
-    "MAPS C/2026 A1 context:<br>"
-    "MAPS was detected in SOHO/LASCO C3 (~33 R_sun field) from April 2, 2026.<br>"
-    "It passed through this visible streamer belt on April 3-4 before perihelion."
-)
+# streamer_belt_info_hover was DELETED 2026-08-22 (L-224). It fed only
+# create_sun_streamer_belt_shell, which was dead code; the live band
+# builder composes its own hover from the constants. Deleted rather than
+# annotated: it demonstrates the sphere pattern this item exists to
+# retire, and a worked example of the wrong shape one screen from the
+# right one is a trap, not a reference.
 
 # Source: constants_new.py ROCHE_LIMIT_RADII=3.45 (Ida et al. 2020); Ikeya-Seki survived at 1.66 R_sun (tensile strength)
 roche_limit_info = (
@@ -1229,37 +1215,11 @@ def create_sun_inner_corona_shell():
     return [shell_trace, info_trace]
 
 
-def create_sun_streamer_belt_shell():
-    """
-    Visible white-light corona / helmet streamer belt, drawn at 6.0 R_sun.
-    That radius is a VISUALIZATION ASSUMPTION, not a measured boundary
-    (L-210). The structure has two parts and no single outer radius: the
-    closed helmet stays below 2-4 R_sun and its open stalk reaches many
-    R_sun (Suess & Nerney 2004, Adv. Space Res. 33:668). 6.0 sits above
-    the first and inside the second.
-    This is the corona seen during total solar eclipses. Distinct from the
-    Alfven surface (plasma boundary) and the extended F-corona (dust-scattered).
-    """
-    x, y, z = create_sphere_points(STREAMER_BELT_RADII * SOLAR_RADIUS_AU, n_points=20)
-    r_info = STREAMER_BELT_RADII * SOLAR_RADIUS_AU * 1.05
-
-    shell_trace = go.Scatter3d(
-        x=x, y=y, z=z,
-        mode='markers',
-        marker=dict(size=3.0, color='rgb(255, 200, 80)', opacity=0.45),
-        name='Sun: Streamer Belt (Visible Corona)',
-        legendgroup='Sun: Streamer Belt (Visible Corona)',
-        hoverinfo='skip',
-        showlegend=True
-    )
-    # Phase 1 re-pipe (May 28, 2026): factory-routed.
-    info_trace = create_info_marker(
-        0, 0, r_info,
-        'rgb(255, 200, 80)',
-        f"Sun: Streamer Belt (Visible Corona)<br><br>{streamer_belt_info_hover}",
-        'Sun: Streamer Belt (Visible Corona)'
-    )
-    return [shell_trace, info_trace]
+# create_sun_streamer_belt_shell was DELETED 2026-08-22 (L-224). It was
+# defined here, imported once by planet_visualization.py, and never
+# called: the sphere it drew came from SHELL_CONFIGS['Sun']
+# ['streamer_belt'] via build_sphere_shell. Its replacement is
+# create_sun_streamer_band below, wired through CUSTOM_SHELLS.
 
 
 # Source: ROCHE_LIMIT_RADII=3.45 in constants_new.py; Ida et al. (2020);
@@ -1647,8 +1607,7 @@ def create_sun_galactic_tide(center_position=(0, 0, 0), radius=50000, n_points=2
 # =========================================================================
 # Streamer band -- CUSTOM_SHELLS builder (L-224)
 # =========================================================================
-# Wired via CUSTOM_SHELLS['Sun']['streamer_belt'] in patch 2. Until then
-# nothing calls this and the render is unchanged.
+# Wired via CUSTOM_SHELLS['Sun']['streamer_belt']. This is the live path.
 #
 # Replaces the sphere that SHELL_CONFIGS['Sun']['streamer_belt'] drew at
 # a single radius. Two things were wrong with that sphere: helmet
@@ -1657,8 +1616,7 @@ def create_sun_galactic_tide(center_position=(0, 0, 0), radius=50000, n_points=2
 # radius was a drawing choice with no boundary under it (L-210 withdrew
 # the 4-6 R_sun range as unsourced).
 #
-# Source: constants_new.py HELMET_CUSP_RADII (STREAMER_BELT_RADII until
-# patch 2) -- the cusp, not an outer edge.
+# Source: constants_new.py HELMET_CUSP_RADII -- the cusp, not an edge.
 
 def create_sun_streamer_band(center_position=(0, 0, 0)):
     """Streamer belt as one warped band: closed helmet, open stalk.
@@ -1677,7 +1635,7 @@ def create_sun_streamer_band(center_position=(0, 0, 0)):
     eye goes and where the physics is. It is NOT at a pole: this is a
     band, and the poles are empty by design.
     """
-    cusp_rs = float(STREAMER_BELT_RADII)   # patch 2: -> HELMET_CUSP_RADII = 4.0
+    cusp_rs = float(HELMET_CUSP_RADII)     # the cusp, not an outer edge
     fade_rs = float(ALFVEN_SURFACE_RADII)  # dissolves across the Alfven surface
 
     params = {'cusp_radius': cusp_rs,

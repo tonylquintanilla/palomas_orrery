@@ -70,7 +70,7 @@ from constants_new import (
     CHROMOSPHERE_PHYSICAL_RADII,
     INNER_CORONA_RADII,
     OUTER_CORONA_RADII,
-    STREAMER_BELT_RADII,
+    HELMET_CUSP_RADII,
     ROCHE_LIMIT_RADII,
     ALFVEN_SURFACE_RADII,
     # Heliosphere and Oort
@@ -146,10 +146,10 @@ def test_radiative_zone_au_derived_from_solar_radius():
 
 def test_solar_shell_ordering():
     """Solar atmosphere shells must nest outward: chromosphere < corona < streamer < alfven."""
-    assert CHROMOSPHERE_PHYSICAL_RADII < INNER_CORONA_RADII < ROCHE_LIMIT_RADII < STREAMER_BELT_RADII, \
-        "Solar atmosphere shell ordering violated (chromo -> inner corona -> roche -> streamer)"
-    assert STREAMER_BELT_RADII < ALFVEN_SURFACE_RADII < OUTER_CORONA_RADII, \
-        "Solar atmosphere shell ordering violated (streamer -> alfven -> outer corona)"
+    assert CHROMOSPHERE_PHYSICAL_RADII < INNER_CORONA_RADII < ROCHE_LIMIT_RADII < HELMET_CUSP_RADII, \
+        "Solar atmosphere shell ordering violated (chromo -> inner corona -> roche -> helmet cusp)"
+    assert HELMET_CUSP_RADII < ALFVEN_SURFACE_RADII < OUTER_CORONA_RADII, \
+        "Solar atmosphere shell ordering violated (helmet cusp -> alfven -> outer corona)"
 
 
 # ============================================================
