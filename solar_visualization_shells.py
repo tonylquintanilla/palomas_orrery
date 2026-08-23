@@ -1660,41 +1660,44 @@ def create_sun_streamer_band(center_position=(0, 0, 0)):
     fade_km, fade_au = _km_au(fade_rs)
     fov_km, fov_au = _km_au(15.0)
 
+    # Every line carries its own <br>: in this file the SOURCE wrap and
+    # the RENDERED wrap are one act, and a line without a break renders
+    # as part of a run that can reach hundreds of characters (L-227).
     band_hover = (
         "One object with two regimes, not a shell with a radius.<br><br>"
 
-        "CLOSED HELMET -- the dense, wide base. Magnetic arcades stand "
-        "over the neutral line, closed at both ends. They reach no "
-        f"higher than 2-4 R_sun, and the band pinches at {cusp_rs:.1f} "
-        f"R_sun ({cusp_km:,.0f} km, {cusp_au:.6f} AU) where they open.<br>"
-        "Source: Suess & Nerney (2004), Adv. Space Res. 33:668-675 -- "
-        "stated there as established background, not measured by it, so "
+        "CLOSED HELMET -- the dense, wide base. Magnetic arcades stand<br>"
+        "over the neutral line, closed at both ends. They reach no<br>"
+        f"higher than 2-4 R_sun, and the band pinches at {cusp_rs:.1f} R_sun<br>"
+        f"({cusp_km:,.0f} km, {cusp_au:.6f} AU) where they open.<br>"
+        "Source: Suess & Nerney (2004), Adv. Space Res. 33:668-675 --<br>"
+        "stated there as established background, not measured by it, so<br>"
         "the pinch is drawn soft rather than sharp.<br><br>"
 
-        "OPEN STALK -- above the pinch. A thin sheet along the current "
-        "sheet. It has NO outer edge: it thins into the slow solar wind, "
-        "so this drawing dissolves instead of stopping. Nothing is drawn "
-        f"past the Alfven surface at {fade_rs:.1f} R_sun ({fade_km:,.0f} "
-        f"km, {fade_au:.6f} AU), where the corona becomes wind. Beyond "
-        "that the sheet continues as the heliospheric current sheet, out "
-        "to the heliopause.<br><br>"
+        "OPEN STALK -- above the pinch. A thin sheet along the current<br>"
+        "sheet. It has NO outer edge: it thins into the slow solar wind,<br>"
+        "so this drawing dissolves instead of stopping. Nothing is drawn<br>"
+        f"past the Alfven surface at {fade_rs:.1f} R_sun<br>"
+        f"({fade_km:,.0f} km, {fade_au:.6f} AU), where the corona becomes<br>"
+        "wind. Beyond that the sheet continues as the heliospheric<br>"
+        "current sheet, out to the heliopause.<br><br>"
 
-        "THE VISIBLE EDGE. That a sharp brightness boundary exists is a "
-        "coronagraph observation. What it DIVIDES is an interpretation: "
-        "Suess & Nerney take it as reasonable to assume it separates "
-        "fast coronal-hole wind from slow wind. Slow-wind origin is not "
+        "THE VISIBLE EDGE. That a sharp brightness boundary exists is a<br>"
+        "coronagraph observation. What it DIVIDES is an interpretation:<br>"
+        "Suess & Nerney take it as reasonable to assume it separates<br>"
+        "fast coronal-hole wind from slow wind. Slow-wind origin is not<br>"
         "settled, so the edge is drawn and its meaning is attributed.<br><br>"
 
-        "DeForest, Howard & McComas (2014), ApJ 787:124 followed inbound "
-        f"wave motion out to 15 R_sun ({fov_km:,.0f} km, {fov_au:.6f} "
-        "AU). That is the coronagraph's field of view, not an extent -- "
+        "DeForest, Howard & McComas (2014), ApJ 787:124 followed inbound<br>"
+        f"wave motion out to 15 R_sun ({fov_km:,.0f} km, {fov_au:.6f} AU).<br>"
+        "That is the coronagraph's field of view, not an extent --<br>"
         "a floor, not an edge.<br><br>"
 
-        "THE WARP is drawn in ONE configuration, near solar minimum. The "
-        "neutral line's tilt sweeps toward the poles across the 11-year "
+        "THE WARP is drawn in ONE configuration, near solar minimum. The<br>"
+        "neutral line's tilt sweeps toward the poles across the 11-year<br>"
         "cycle; this is the shape, not a measurement of today's.<br><br>"
 
-        "Drawn as a visualization assumption where no measured boundary "
+        "Drawn as a visualization assumption where no measured boundary<br>"
         "exists (L-224)."
     )
 

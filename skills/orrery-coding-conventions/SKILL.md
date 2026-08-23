@@ -6,13 +6,18 @@ fires_when: Markers, hover text, axes, shells, legendgroups, docstrings, new vis
 
 # Orrery Coding Conventions
 
-Skill version: 1.4 | Cut from palomas_orrery @ 86f529a (v1.4), earlier @
-3398970 (v1.3) | 2026-08-16
+Skill version: 1.5 | Cut from palomas_orrery @ 15741822 (v1.5),
+earlier @ 86f529a (v1.4), 3398970 (v1.3) | 2026-08-23
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons.
 v1.4 adds Marker Separation for Near-Equal Radii to the Single Info
 Marker Pattern, earned when the chromosphere moved to true scale and its
 marker landed one pixel from the photosphere's; and Harvest the
 Conventions You Find, which is how this skill grows.
+v1.5 (L-227) adds Hover Line Width Is a Convention, Not an Accident,
+found by Mode 5 when a tooltip ran off the viewport: a hover string had
+been wrapped at 72 characters in the SOURCE with no `<br>` on the
+lines, and rendered as one 378-character run. Canonical Text Format
+already governed `\n` versus `<br>` and said nothing about width.
 Criticality tiers ([CRITICAL]/[QUALITY]/[PRACTICE]) are defined in the
 resident protocol, Part 2.
 
@@ -358,6 +363,64 @@ Migration status at `1e60c783`, verified by runtime object identity:
 One trap: for a body still on `<br>`, the `.replace('\n', '<br>')` in a
 reference-pattern config is a NO-OP. It looks like it is working. It starts
 working only once the module strings carry `\n`.
+
+## Hover Line Width Is a Convention, Not an Accident [QUALITY]
+
+Companion to the section above, which governs WHICH break character to
+use and says nothing about how often. This governs how often.
+
+**Every source line of a hover string carries its own break.** In this
+codebase the source wrap and the rendered wrap are ONE ACT, not two.
+The existing strings are built that way -- `streamer_belt_info`,
+`roche_limit_info`, `alfven_surface_info_hover` -- and their rendered
+lines land between about 60 and 98 characters because their source
+lines do.
+
+**The failure mode is that correct-looking source produces broken
+output.** Python's implicit string concatenation invites wrapping a
+long literal across several source lines for readability. Do that
+without a break on each line and the pieces concatenate into one run.
+The diff looks tidy, the file looks tidy, and the tooltip runs off the
+screen. Paragraph-level `<br><br>` does not save it: a paragraph is
+still a single line.
+
+```python
+# WRONG -- renders as one 378-character line
+"OPEN STALK -- above the pinch. A thin sheet along the current "
+"sheet. It has NO outer edge: it thins into the slow solar wind, "
+
+# RIGHT -- source wrap and rendered wrap are the same act
+"OPEN STALK -- above the pinch. A thin sheet along the current<br>"
+"sheet. It has NO outer edge: it thins into the slow solar wind,<br>"
+```
+
+Two details that follow from it. Put the break where the trailing
+space was rather than after it -- the break IS the separator, so a
+space before it renders as a stray one. And do not let a break fall
+between a number and its unit: `at {cusp_rs:.1f} R_sun<br>` reads,
+`at {cusp_rs:.1f}<br>R_sun` does not.
+
+**Checking it is one line, and worth running after any hover edit:**
+
+```python
+max(len(s) for s in rendered_hover.split('<br>'))   # want <= ~98
+```
+
+Re-flowing an existing string is a BREAKS-ONLY edit. Prove it rather
+than assert it: strip every `<br>`, collapse runs of whitespace, and
+compare old against new. They must be byte-identical. A re-flow that
+quietly reworded something is indistinguishable from one that did not,
+unless the comparison runs.
+
+(Origin, 2026-08-23, L-227. Tony hovered the streamer band during the
+Mode 5 pass on L-224 and the tooltip ran off the viewport. The string
+had been wrapped at 72 characters in the source with breaks only
+between paragraphs; `streamer_belt_info`, forty lines up in the same
+file, was correct. Nothing catches this but a person hovering it --
+no checker reads rendered hover width, and the module compiles and
+the trace builds either way. Tony's ruling, on adding it here: this
+recurs from time to time rather than constantly, which is precisely
+the kind of thing a person forgets and a written convention does not.)
 
 ## Layer Chain Gap Handling [PRACTICE]
 

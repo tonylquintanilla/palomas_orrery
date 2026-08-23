@@ -11,6 +11,9 @@ BLOCKED -> OPEN under the braid; L-225 opened, having been in
 circulation with no entry), built on ce2ff5d1.
 Module updated: August 23, 2026 with Anthropic's Claude Opus 5 (L-226:
 safe-file-editing 1.7 -> 1.8), built on 6d12ecac.
+Module updated: August 23, 2026 with Anthropic's Claude Opus 5 (L-227
+hover wrap + orrery-coding-conventions 1.5; L-228 Alfven ranges),
+built on 15741822.
 Module updated: August 20, 2026 with Anthropic's Claude Opus 5 (L-221:
 master plan as sequencing authority; L-214 correction and scoping),
 built on 3586970d.
@@ -243,7 +246,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*130 live items; 117 need attention (`!`); 129 RICE-scored; 91 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*132 live items; 119 need attention (`!`); 131 RICE-scored; 91 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -262,6 +265,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
 | ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-08-19 |
 | ! | L-224 | Streamer belt: one warped band, not a sphere | OPEN | 3.8 | 2026-08-22 |
+| ! | L-227 | Streamer band hover rendered as one 378-character line | OPEN | 3.8 | 2026-08-23 |
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
 | ! | L-210 | Pilot citation findings -- four rows in constants_new.py | OPEN | 3.6 | 2026-08-21 |
 | ! | L-215 | Ledger cleanup by topic, not by age | OPEN | 3.6 | 2026-08-19 |
@@ -277,6 +281,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
 | ! | L-218 | 22 Cross-checked lines attach to no unit | OPEN | 2.1 | 2026-08-19 |
 | ! | L-187 | info_dictionary numeric-overlap enumeration | OPEN | 1.8 | 2026-08-07 |
+| ! | L-228 | Alfven surface latitude ranges: source them or omit them | OPEN [Tony] | 1.8 | 2026-08-23 |
 |  | L-194 | Text-only assertions -- claims the scanner cannot see | DEFERRED | 1.4 | 2026-08-15 |
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
 | ! | L-129 | Cometary structure constants -- periodic maintenance sweep | OPEN | 1.0 | 2026-07-17 |
@@ -3161,6 +3166,86 @@ separation for near-equal radii, hover AU convention).
   DeForest figure); L-214, L-224 (the other two stale claims);
   L-220 (Stamp What You Change); L-223 (A Paste Is An Unverified
   Transfer).
+
+#### [L-227] Streamer band hover rendered as one 378-character line
+<!-- L:227 status:OPEN upd:2026-08-23 section:A flag: rice:2/2/95/1 -->
+- **Found by Mode 5 on 2026-08-23**, hovering the streamer band during
+  the L-224 acceptance pass. The tooltip ran off the viewport.
+- **Measured as rendered:** `band_hover` had EIGHT segments, longest
+  378 characters, six over 98. `streamer_belt_info`, forty lines up in
+  the same file, tops out at 98. After the fix: 29 segments, longest
+  63, none over 98.
+- **Cause.** The string was written as implicitly-concatenated literals
+  wrapped at ~72 characters FOR SOURCE READABILITY, with `<br><br>`
+  only between paragraphs. In this file the source wrap and the
+  rendered wrap are one act, because each older line carries its own
+  `<br>`. L-224 copied the visual habit without the mechanism, so the
+  source looked correctly wrapped and the output was one long run.
+- **Nothing but a person catches this.** No checker reads rendered
+  hover width; the module compiles and the trace builds either way.
+  Third demonstration this month that the render is the gate.
+- **Breaks only, no wording changed** -- proven mechanically, not
+  asserted: strip every `<br>`, collapse whitespace, compare old to
+  new, byte-identical. The patch re-ran that comparison as a self-check
+  so it could refuse if a word had moved.
+- **Convention recorded:** `orrery-coding-conventions` 1.5, Hover Line
+  Width Is a Convention, Not an Accident. Tony's ruling: this recurs
+  from time to time rather than constantly, which is the kind of thing
+  a person forgets and a written convention does not.
+- **Note:** RICE 2/2/95/1 -> 3.8 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect, then re-run
+  `ledger_index.py`.
+- **Tony-action (do):** run `skills_index.py`, reinstall
+  orrery-coding-conventions at Settings > Skills, and hover the band
+  once more to confirm it wraps.
+- **Ref:** `solar_visualization_shells.py::create_sun_streamer_band_shell`;
+  `skills/orrery-coding-conventions/SKILL.md` v1.5; L-224 (the build
+  that introduced it); L-191 (the `<br>`-in-tooltip sweep, separate).
+
+#### [L-228] Alfven surface latitude ranges: source them or omit them
+<!-- L:228 status:OPEN upd:2026-08-23 section:A flag:Tony rice:2/3/60/2 -->
+- **Surfaced 2026-08-23** while reading the hover strings for L-227.
+- **THE DRAWN VALUE IS NOT AT ISSUE.** `ALFVEN_SURFACE_RADII` is
+  interpolated into every hover that quotes it, including the derived
+  million-km figure, and carries a `# Source+:` leg saying so (L-209).
+  When it moved 18.8 -> 19.7 the hovers followed by construction. No
+  shadow constant. This item is about PROSE ranges only.
+- **Three different ranges are hardcoded across hover strings in one
+  module**, all for the same quantity: `~15-20 R_sun` in
+  `outer_corona_info_hover`; `~10-20 solar radii` in
+  `alfven_surface_info`; and `Polar coronal holes: ~12-15 R_sun |
+  Streamer belt: ~17-19 R_sun` in BOTH Alfven strings. The `# Source:`
+  above them reads Cranmer et al. (2007), with no position given.
+- **Why it is worth a look rather than a shrug.** `~17-19` sits close
+  to the 17 R_sun corrected at source on 2026-08-22, and DeForest,
+  Howard & McComas (2014) give 12 polar and 15 streamer-belt as
+  INSTRUMENTAL FLOORS -- a noise floor and a coronagraph field of view,
+  not a shape. A range that looks like a measured latitude variation
+  and is actually two instrument limits is the exact confusion the
+  citation-KIND rule was drafted for (design note 2026-08-22,
+  Section 2).
+- **Disposition is already decided; only the citation is open.**
+  Tony's rule, restated 2026-08-23: a range may be NOTED where it has
+  a citation, the VISUALIZATION uses the interpolated constant, and
+  where the citation is insufficient the values are OMITTED. So:
+  read Cranmer et al. (2007) for a locatable position stating the
+  latitude variation. If it carries it, cite it properly and keep the
+  range as prose. If it does not, remove all three ranges and note the
+  gap. Do not reconcile them against each other -- three unsourced
+  numbers agreeing is not evidence.
+- **Tony-action (do):** the source read. Claude cannot clear this by
+  reasoning about it, and guessing here is the failure this week was
+  spent on.
+- **Note:** RICE 2/3/60/2 -> 3.0 is Claude's proposed score.
+  Confidence is 60 because whether Cranmer carries the claim is
+  unknown until somebody reads it. **Tony-action (decide):** confirm
+  or redirect.
+- **Ref:** `solar_visualization_shells.py` (`outer_corona_info_hover`,
+  `alfven_surface_info`, `alfven_surface_info_hover`);
+  `constants_new.py::ALFVEN_SURFACE_RADII`; L-209 (the DeForest
+  correction and the interpolation leg); L-210;
+  `documentation/DESIGN_NOTE_20260822_braid_and_citation_kind.md`
+  Section 2 (value, source, KIND).
 
 ## PENDING ACTION (Tony-side)
 

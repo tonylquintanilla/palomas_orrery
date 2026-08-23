@@ -10,24 +10,22 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 130  
-**Total Lines of Code (non-blank):** 103,876  
+**Total Python Files:** 129  
+**Total Lines of Code (non-blank):** 103,677  
 **Total Public Functions/Classes:** 1,166
 
 ## Classification Coverage
 
-**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L221_4_ledger_l154_l225.py`
-- `patch_L221_6_safe_file_editing_1_8.py`
+- `patch_L227_1_hover_wrap_and_conventions_1_5.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (2).** No valid `Domain:` tag.
+**Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L221_4_ledger_l154_l225.py`
-- `patch_L221_6_safe_file_editing_1_8.py`
+- `patch_L227_1_hover_wrap_and_conventions_1_5.py`
 
 
 ---
@@ -91,7 +89,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `planet9_visualization_shells.py` | Hypothetical Planet 9 shell traces. (269 lines) |
 | `pluto_visualization_shells.py` | Pluto interior and atmosphere shell traces. (615 lines) |
 | `saturn_visualization_shells.py` | Saturn interior, ring, and magnetosphere shell traces. (1,088 lines) |
-| `solar_visualization_shells.py` | Sun interior, corona, and heliosphere shell traces. (1,484 lines) |
+| `solar_visualization_shells.py` | Sun interior, corona, and heliosphere shell traces. (1,487 lines) |
 | `uranus_visualization_shells.py` | Uranus interior, ring, and magnetosphere shell traces. (1,083 lines) |
 | `venus_visualization_shells.py` | Venus interior and atmosphere shell traces. (645 lines) |
 
@@ -231,8 +229,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L221_4_ledger_l154_l225.py` | Built on ce2ff5d15d4e2bb682d5603c3b945a6f0f5f8ff4 at https://github.com/tonylquintanilla/palomas_orrery (branch main). Gallery at 02aefc0cefbf334889b7c6b3b05bf8fdfab74fa6. Both confirmed by live git ls-remote. Written August 23, 2026 with Anthropic's Claude Opus 5. (316 lines) |
-| `patch_L221_6_safe_file_editing_1_8.py` | Built on 6d12ecace4c5867d4d718466c7ef5923fc47622e at https://github.com/tonylquintanilla/palomas_orrery (branch main). Gallery at 02aefc0cefbf334889b7c6b3b05bf8fdfab74fa6. Both confirmed by live git ls-remote. Written August 23, 2026 with Anthropic's Claude Opus 5. (433 lines) |
+| `patch_L227_1_hover_wrap_and_conventions_1_5.py` | Built on 15741822cb8f54ac26fc252aa8382cd90534570d at https://github.com/tonylquintanilla/palomas_orrery (branch main). Gallery at 8ec4f261013f09697d649efd25c8a746bffeff64. Both confirmed by live git ls-remote. Written August 23, 2026 with Anthropic's Claude Opus 5. (547 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |
