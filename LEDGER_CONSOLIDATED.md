@@ -14,6 +14,9 @@ safe-file-editing 1.7 -> 1.8), built on 6d12ecac.
 Module updated: August 23, 2026 with Anthropic's Claude Opus 5 (L-227
 hover wrap + orrery-coding-conventions 1.5; L-228 Alfven ranges),
 built on 15741822.
+Module updated: August 23, 2026 with Anthropic's Claude Opus 5 (L-229:
+streamer band rotated into the solar equatorial frame; the L-227
+citation-window follow-on), built on 851224c6.
 Module updated: August 20, 2026 with Anthropic's Claude Opus 5 (L-221:
 master plan as sequencing authority; L-214 correction and scoping),
 built on 3586970d.
@@ -246,11 +249,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*132 live items; 119 need attention (`!`); 131 RICE-scored; 91 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*133 live items; 120 need attention (`!`); 132 RICE-scored; 91 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-229 | Streamer band drawn in the ecliptic plane, not the solar equator | OPEN | 11.4 | 2026-08-23 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-226 | safe-file-editing 1.8 -- encoding gate covers prose; corrections do not travel | OPEN | 8.1 | 2026-08-23 |
 | ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-21 |
@@ -3184,6 +3188,14 @@ separation for near-equal radii, hover AU convention).
 - **Nothing but a person catches this.** No checker reads rendered
   hover width; the module compiles and the trace builds either way.
   Third demonstration this month that the render is the gate.
+- **A RE-FLOW IS NOT COSMETIC IN THIS PROJECT** (learned 2026-08-23,
+  after this item shipped). The provenance scanner decides whether a
+  claim is cited by how many LINES away the nearest `# Source:`
+  comment is. Breaking one long line into six moved a computed figure
+  past that window, and the tree count went 292 -> 294 on a change
+  that altered no wording at all. Fixed under L-229. The general
+  form: when line positions move, provenance state can move with
+  them, so re-run the scanner after any re-flow and read the delta.
 - **Breaks only, no wording changed** -- proven mechanically, not
   asserted: strip every `<br>`, collapse whitespace, compare old to
   new, byte-identical. The patch re-ran that comparison as a self-check
@@ -3246,6 +3258,67 @@ separation for near-equal radii, hover AU convention).
   correction and the interpolation leg); L-210;
   `documentation/DESIGN_NOTE_20260822_braid_and_citation_kind.md`
   Section 2 (value, source, KIND).
+
+#### [L-229] Streamer band drawn in the ecliptic plane, not the solar equator
+<!-- L:229 status:OPEN upd:2026-08-23 section:A flag: rice:3/4/95/1 -->
+- **Found by Mode 5 on 2026-08-23.** Tony looked at the render and
+  asked whether the belt should lie in the ecliptic rather than the
+  solar equatorial plane. It should not, and the same figure already
+  carried the proof.
+- **The defect.** `create_streamer_band_shape` returns points whose own
+  docstring says "Positions in SOLAR RADII in the body frame." The
+  caller scaled them and handed them to Plotly with NO rotation, so
+  the band's plane of symmetry landed on the ecliptic. Meanwhile
+  `build_rotation_axis_traces` takes the Sun's spin pole from
+  `create_planet_transformation_matrix('Sun')` and is correctly
+  tilted. The axis leaned; the band lay flat.
+- **Measured, by fitting the point cloud's plane:** before, normal
+  (-0.0003, -0.0004, 1.0000), tilt 0.03 deg from the ecliptic; after,
+  normal (0.1227, -0.0314, 0.9920), tilt 7.27 deg. Angle between the
+  band normal and the Sun's spin pole after the fix: 0.028 deg. The
+  solar equator is inclined 7.25 deg to the ecliptic.
+- **Both traces now read ONE matrix**, so they cannot disagree again.
+  That is the structural half of the fix and it matters more than the
+  seven degrees.
+- **Why the solar equator is the right plane.** The streamer belt
+  follows the heliospheric current sheet, which tracks the solar
+  MAGNETIC equator. Near solar minimum the dipole lies close to the
+  spin axis, so the magnetic equator tracks the rotation equator, and
+  this module already commits to that regime: `warp_amp_deg` is the
+  neutral line's tilt OFF THE EQUATOR and the hover says the warp is
+  one configuration near solar minimum. The band is "equator plus
+  warp" and it was warping around the wrong equator. Honest caveat:
+  the magnetic equator is not exactly the rotation equator even at
+  minimum. The ecliptic has no claim on it at all.
+- **The info marker rotates with the band.** Rotating one and not the
+  other would leave the marker off the band edge -- geometry right,
+  affordance wrong. Verified unchanged at 2.038e-03 AU to the nearest
+  band point, before and after.
+- **Nothing automated could have caught this.** The module compiles,
+  the trace builds, the geometry is internally consistent, and no
+  checker compares two traces' frames. Fourth instance this month of
+  the render being the only gate: L-227 (hover width), L-224 (band
+  shape), L-209 (shell radius), and now the frame.
+- **Also fixed here (L-227 follow-on):** the L-227 re-flow moved a
+  computed figure out of the scanner's citation window, taking the
+  tree count 292 -> 294. A `# Source:` comment now sits mid-string
+  above that line. Measured on a live scanner run: this file's Tier-1
+  count 7 -> 6. The first attempt used `# Derived:` and did NOT clear
+  it -- that token is worksheet-leg vocabulary, not scanner
+  `SOURCE_PATTERNS`. The two overlap enough to mislead.
+- **Note:** RICE 3/4/95/1 -> 11.4 is Claude's proposed score. Impact 4
+  because a wrong frame is a wrong physical claim on screen, not a
+  cosmetic one. **Tony-action (decide):** confirm or redirect, then
+  re-run `ledger_index.py`.
+- **Tony-action (do): Mode 5.** Relaunch and look at the Sun. The band
+  should lean with the yellow rotation axis instead of lying flat on
+  the ecliptic grid -- about 7 degrees, visible but not dramatic.
+- **Ref:** `solar_visualization_shells.py::create_sun_streamer_band`;
+  `planet_visualization_utilities.py::create_streamer_band_shape` and
+  `build_rotation_axis_traces`;
+  `idealized_orbits.py::create_planet_transformation_matrix` and
+  `planet_poles['Sun']` (IAU 2018); L-224 (the band build); L-227 (the
+  re-flow); L-209 (the Alfven constant this cites).
 
 ## PENDING ACTION (Tony-side)
 

@@ -1643,10 +1643,37 @@ def create_sun_streamer_band(center_position=(0, 0, 0)):
               'outer_radius': fade_rs * 1.015}
     xs, ys, zs, alphas, sizes = create_streamer_band_shape(params)
 
+    # BODY FRAME -> ECLIPTIC. create_streamer_band_shape returns points in
+    # the SUN'S frame, so the band's plane of symmetry is the solar
+    # equator -- inclined about 7.25 deg to the ecliptic. Until 2026-08-23
+    # these points were scaled and handed to Plotly UNROTATED, which laid
+    # the band flat in the ecliptic while the Sun's rotation axis trace,
+    # built from the very matrix used here, was correctly tilted. Two
+    # traces in one figure disagreeing about where the Sun's equator is.
+    # Found by Mode 5, not by any check (L-229).
+    # Source: IAU 2018 solar pole, via idealized_orbits.planet_poles['Sun']
+    #   (ra 286.13, dec 63.87) -- the SAME source build_rotation_axis_traces
+    #   reads, so the band and the axis now derive from one matrix and
+    #   cannot drift apart again.
+    # The import is lazy for the same reason it is lazy in
+    #   build_rotation_axis_traces: idealized_orbits is heavy.
+    from idealized_orbits import create_planet_transformation_matrix
+
+    M = np.asarray(create_planet_transformation_matrix('Sun'), dtype=float)
+
+    def _to_ecliptic(bx, by, bz):
+        """Rotate one body-frame point into ecliptic coordinates."""
+        v = M @ np.array([bx, by, bz], dtype=float)
+        return float(v[0]), float(v[1]), float(v[2])
+
+    rot = M @ np.vstack([np.asarray(xs, dtype=float),
+                         np.asarray(ys, dtype=float),
+                         np.asarray(zs, dtype=float)])
+
     scale = SOLAR_RADIUS_AU
-    x_au = [v * scale for v in xs]
-    y_au = [v * scale for v in ys]
-    z_au = [v * scale for v in zs]
+    x_au = (rot[0] * scale).tolist()
+    y_au = (rot[1] * scale).tolist()
+    z_au = (rot[2] * scale).tolist()
     # Per-point rgba. marker.opacity is a scalar in Plotly; the colour
     # array is what lets one trace fade to nothing.
     colors = ['rgba(255, 200, 80, %.4f)' % a for a in alphas]
@@ -1678,6 +1705,13 @@ def create_sun_streamer_band(center_position=(0, 0, 0)):
         "sheet. It has NO outer edge: it thins into the slow solar wind,<br>"
         "so this drawing dissolves instead of stopping. Nothing is drawn<br>"
         f"past the Alfven surface at {fade_rs:.1f} R_sun<br>"
+        # Source: constants_new.py ALFVEN_SURFACE_RADII -- the km and AU
+        #   figures on the next line are COMPUTED from it, not typed, so
+        #   this line restates a cited constant rather than making an
+        #   independent claim. See the Source+ leg on that constant
+        #   (L-209). The comment sits HERE, mid-string, because the
+        #   scanner judges citation by line distance and the L-227
+        #   re-flow moved this line out of the window (L-229).
         f"({fade_km:,.0f} km, {fade_au:.6f} AU), where the corona becomes<br>"
         "wind. Beyond that the sheet continues as the heliospheric<br>"
         "current sheet, out to the heliopause.<br><br>"
@@ -1717,10 +1751,15 @@ def create_sun_streamer_band(center_position=(0, 0, 0)):
     lat_i = math.radians(STREAMER_BAND_DEFAULTS['warp_amp_deg']
                          + STREAMER_BAND_DEFAULTS['cusp_half_width_deg'] + 6.0)
     r_i = cusp_rs * SOLAR_RADIUS_AU * 1.02
+    # The marker is placed in the SAME body frame as the band and rotated
+    # with it. Rotating one and not the other would leave the marker
+    # floating off the band edge: the geometry would be right and the
+    # affordance would be wrong, which is the harder kind of bug to see.
+    mx, my, mz = _to_ecliptic(r_i * math.cos(lat_i) * math.cos(lon_i),
+                              r_i * math.cos(lat_i) * math.sin(lon_i),
+                              r_i * math.sin(lat_i))
     info_trace = create_info_marker(
-        r_i * math.cos(lat_i) * math.cos(lon_i),
-        r_i * math.cos(lat_i) * math.sin(lon_i),
-        r_i * math.sin(lat_i),
+        mx, my, mz,
         'rgb(255, 200, 80)',
         f"Sun: Streamer Belt<br><br>{band_hover}",
         'Sun: Streamer Belt',
