@@ -6,6 +6,9 @@ ledgers. Current HEAD: see git log (repo is the source of truth).
 Module updated: June 2026 with Anthropic's Claude Sonnet 4.6, Opus 4.8 + Claude Fable 5
 Module updated: August 20, 2026 with Anthropic's Claude Opus 5 (L-222:
 docstring lines in the constants change report), built on 762aa5dd.
+Module updated: August 23, 2026 with Anthropic's Claude Opus 5 (L-154
+BLOCKED -> OPEN under the braid; L-225 opened, having been in
+circulation with no entry), built on ce2ff5d1.
 Module updated: August 20, 2026 with Anthropic's Claude Opus 5 (L-221:
 master plan as sequencing authority; L-214 correction and scoping),
 built on 3586970d.
@@ -238,7 +241,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*128 live items; 116 need attention (`!`); 127 RICE-scored; 91 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*129 live items; 116 need attention (`!`); 128 RICE-scored; 91 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -265,6 +268,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-08-07 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
+|  | L-225 | Migrate the comet shell constants into `constants_new.py`, then dispatch | DEFERRED | 2.4 | 2026-08-23 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
@@ -415,7 +419,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-166 | F1b: per-object trust enforcement + soft-edge trust UX (resolver/client consumption of served trust blocks) | OPEN | 2.4 | 2026-07-28 |
 | ! | L-121 | Slim plotly wheel not deployed anywhere (F4, ships-nothing gate) | OPEN | 2.2 | 2026-07-15 |
 | ! | L-150 | Multi-orbit trust model for near-equal-mass binaries (Pluto/Charon and future onboards) | OPEN | 2.2 | 2026-07-20 |
-| ! | L-154 | Gallery feature-rendering JS layer (shells, rings, radiation belts -- Artifact 2 prerequisite) | BLOCKED | 2.1 | 2026-08-07 |
+| ! | L-154 | Gallery feature-rendering JS layer (shells, rings, radiation belts -- Artifact 2 prerequisite) | OPEN | 2.1 | 2026-08-23 |
 | ! | L-173 | shell_configs.py -- 8 body blocks missing... source citations entirely (found during 1c predesign measurement) | OPEN | 2.1 | 2026-07-30 |
 | ! | L-122 | Stray data/solar-system.prev_old/ committed to the repo (F6, non-blocking) | OPEN | 1.9 | 2026-07-15 |
 | ! | L-123 | Object info card -- serve info_dictionary.py as JSON, click-to-open (rides with F1) | OPEN | 1.8 | 2026-07-15 |
@@ -3064,6 +3068,51 @@ L-210 (the withdrawn range and the held 6.0 this replaces); L-209 (the
 Alfven surface it dissolves across); L-221 (the ruling that sequenced
 it); `orrery-coding-conventions` (single info marker, marker
 separation for near-equal radii, hover AU convention).
+
+#### [L-225] Migrate the comet shell constants into `constants_new.py`, then dispatch
+<!-- L:225 status:DEFERRED upd:2026-08-23 section:A flag: rice:2/3/80/2 -->
+- **Opened 2026-08-23, and late.** The design note of 2026-08-22 cites
+  L-225 four times and the session queue carried it as
+  deferred-with-shape-settled, but no ledger entry existed -- the
+  highest handle was L-224. Surfaced by the v19 full-document sweep.
+  Recorded here rather than quietly created, because "capture on first
+  mention" exists precisely so a handle cannot be in circulation while
+  the ledger has never heard of it.
+- **What.** `MAPS_DISINTEGRATION_RADII` and its siblings live in
+  `comet_visualization_shells.py`, which is outside the tree
+  `worksheet_request_builder` reaches. A constant the builder cannot
+  see cannot be put in a worksheet, so it cannot be dispatched, so it
+  can never be cleared -- it is invisible to the loop rather than
+  merely unscored. Migrate them into `constants_new.py`, where the
+  builder already reaches, and only then dispatch.
+- **This is the No Shadow Constants rule [CRITICAL] applied to a
+  specific file**, not a new decision. The migration is the work; the
+  dispatch is the follow-on.
+- **`patch_L225_1_dispatch_request.py` is WITHDRAWN. Do not run it.**
+  It dispatched against the constants in their current home and so
+  would have asked for verdicts on rows that cannot be written back.
+  Recorded here because a withdrawn script is exactly the kind of fact
+  that resurfaces from a stale copy of a design note.
+- **Part A must go out blind.** The dispatch carries a Claude proposal,
+  so it splits into two physical dispatches under the Two-Dispatch Rule
+  [CRITICAL] (`provenance-discipline` 2.6, section 2.6): Part A sent
+  alone, the answer collected, then Part B. Sending them together lets
+  the proposal contaminate the answer, which is a check that cannot
+  fail. The questions themselves are in the design note, Section 4.
+- **Note:** RICE 2/3/80/2 -> 2.4 is Claude's proposed score, not a
+  ruling. Reach 2 (one shell family), Impact 3 (an unmigrated constant
+  is invisible to the builder, not merely unscored), Confidence 80
+  (shape settled, dispatch outcome not), Effort 2 (mechanical migration
+  plus a known loop). **Tony-action (decide):** confirm or redirect,
+  then re-run `ledger_index.py`.
+- **Gap:** the migration is not written. Deferred deliberately -- the
+  braid puts L-154 and Artifact 2's thirty-number slice ahead of it,
+  and these constants are not in Artifact 2.
+- **Ref:** `comet_visualization_shells.py`; `constants_new.py`;
+  `worksheet_request_builder`;
+  `documentation/DESIGN_NOTE_20260822_braid_and_citation_kind.md`
+  Section 4; `provenance-discipline` 2.6; L-221 (sequencing authority);
+  L-224 (the session that surfaced it).
 
 ## PENDING ACTION (Tony-side)
 
@@ -7986,7 +8035,7 @@ checks one global bound regardless of scene composition -- same limitation noted
 (pluto/charon, barycentric-only today); "Pluto/Charon two-view" golden artifact.
 
 #### [L-154] Gallery feature-rendering JS layer (shells, rings, radiation belts -- Artifact 2 prerequisite)
-<!-- L:154 status:BLOCKED upd:2026-08-07 section:W.Active flag: rice:3/3/70/3 -->
+<!-- L:154 status:OPEN upd:2026-08-23 section:W.Active flag: rice:3/3/70/3 -->
 - **RE-VERIFIED 2026-08-07 at gallery HEAD `33fc7d6`, and the block is
   reclassified.** `gallery/assembler/resolver.py` line 133 STILL reads
   `features = tuple(rec.get("features") or ())`. Failure reproduced
@@ -8014,6 +8063,28 @@ checks one global bound regardless of scene composition -- same limitation noted
   feature dispatch as data; nothing draws it yet.
 - **Blocked on:** the L-155-162 provenance-scoring cluster below (data/
   scoring settled before this gets built, not the other way around).
+- **SUPERSEDED 2026-08-23 -- the bullet above is reversed, and left in
+  place because it was the standing rule for six weeks.** Tony's
+  ruling of 2026-08-22 (the braid): provenance stops being a GATE and
+  becomes a per-artifact slice, and this item is the FIRST work rather
+  than the last. Status moved BLOCKED -> OPEN the same day. Three
+  reasons, in the order they carry weight. (a) Nothing in the
+  provenance cluster changes a line of this item's code -- the
+  resolver discards parameters regardless of whether the values behind
+  them are sourced. (b) A ring drawn from an unsourced number freezes
+  nothing; only a FINGERPRINTED artifact does, so the sourcing
+  requirement belongs to L-080/Artifact 2 and not here. (c) Until this
+  is built, ring provenance is text checked against text -- once it
+  draws, a wrong radius becomes something Tony's eyes can catch, which
+  is this project's own ground truth. Verified again at gallery
+  `02aefc0` on 2026-08-23: `resolver.py` line 133 still reads
+  `tuple(rec.get("features") or ())`, `models.py` line 91 still types
+  the field `Tuple[str, ...]` to match, and nothing in the gallery repo
+  reads `feature_configs.json` -- only the builder writes it. Fourth
+  independent verification, fourth different HEAD.
+  **Ref:** `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md` Section
+  5a, "The order of execution" (v19); `documentation/DESIGN_NOTE_20260822_braid_and_citation_kind.md`
+  Section 1; L-221 (sequencing authority).
 - **Correction (2026-07-27, Fable 5 review + Sonnet 5 independent
   verification, both against live HEAD):**
   `documentation/HANDOFF_gallery_feature_layer_L154_resume.md` claimed the
