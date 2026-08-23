@@ -17,7 +17,8 @@ reference document; this is the readable snapshot.
 
 Section 5a of the plan was rewritten on August 16 as the critical
 path -- end goal, one-way pipeline, five segments, and a "you are
-here" table. CRITICAL_PATH_SUMMARY.md is its readable companion and
+here" table. MASTER_PLAN_CRITICAL_PATH_SUMMARY.md is its readable
+companion and
 answers "how far to the end." THIS document answers "what is being
 tracked right now." Read 5a for the shape of the work; read this for
 its state.
@@ -758,3 +759,11 @@ WHAT IS TRACKED RIGHT NOW -- 2026-08-19
 Entry written August 2026 with Anthropic's Claude Opus 5. Updated
 August 19, 2026, built on 9ffb9b403a7d62090b30a9acf9adbc6180a6baec;
 gallery at ff18d3e6fa31f70a8f525df471e751d046cf14fa.
+
+[Pointer correction, 2026-08-23 at f504c06446edddb19dce0c906b229c96387a8406:
+the readable companion named above was written as CRITICAL_PATH_SUMMARY.md.
+No file of that name has ever existed; it is
+MASTER_PLAN_CRITICAL_PATH_SUMMARY.md, in documentation/. A broken pointer
+is not an overtaken claim, so it is corrected in place rather than
+bracketed, and the dated stamp above is deliberately left as it stood --
+this document does not restamp itself for a correction to a filename.]

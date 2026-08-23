@@ -60,8 +60,10 @@ core mechanism was proven -- unattended trigger, Horizons fetch, and data
 assembly all confirmed working end to end -- but the final promotion step
 had a known intermittent failure under the scheduler's execution context
 (see S3a addendum, July 24).
-**Base:** orrery @ `38923c1`, gallery @ `493a0bd` (v19; both confirmed
-against the live remote, not carried forward. Design ratified at orrery
+**Base:** orrery @ `38923c1`, gallery @ `493a0bd` -- v19 was BUILT on
+those and PUSHED at orrery `f504c06` / gallery `02aefc0` on 2026-08-23.
+(Both bases confirmed against the live remote, not carried forward.
+Design ratified at orrery
 `c10a424` / gallery `e864fd42`; Artifact 1 built+pushed at orrery
 `6fc52b9a` / gallery `f89d83c4`; v18 stood at orrery `ee0da47c` /
 gallery `61a78c00`. F1a (M2) fully closed: L-149 and L-118 both DONE,
@@ -70,7 +72,7 @@ text here read "enabled with a known open issue", contradicting its own
 header forty lines below. L-151 (gallery-assembler skill) DONE
 2026-07-27; L-150 (multi-orbit binaries) still decided, not yet built.)
 **Date begun:** July 3, 2026
-**Last updated:** August 22, 2026
+**Last updated:** August 23, 2026
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
 Claude Opus 5, Claude Fable 5, Claude Sonnet 5, GPT
 
@@ -121,7 +123,7 @@ and the assembler runs, it runs in their browser via Pyodide (Python compiled
 to WebAssembly). No server. The gallery stays a static site on GitHub Pages.
 Pyodide loads from CDN, the assembler and orbit cache are static files in the
 repo. **Phase 0 confirmed Pyodide is acceptable** (2.1-3.3 s cold-start on
-iPhone WiFi, including plotly via micropip). The B′ architecture (shared
+iPhone WiFi, including plotly via micropip). The B' architecture (shared
 desktop engines running in Pyodide) is the Phase 2 path. Frozen pedagogical
 demos (like the Phase 0 Solar System Explorer) stay on the lightweight A path
 (NumPy only, JS figure builder) -- a two-tier model.
@@ -134,7 +136,7 @@ their bounds simply: stars state distance and magnitude limits, orbital
 parameters are always available, Earth system lists available scenarios.
 
 **GitHub Pages hosting.** The gallery is 439 MB against Pages' 1 GB ceiling,
-with ~585 MB of headroom (measured at gallery `493a0bd`, 2026-08-22;
+with ~585 MB of headroom (measured at gallery `493a0bd`, 2026-08-23;
 ~436 MB post-cleanup in July 2026). This is the document's ONE size
 figure -- Section 3a used to carry a second, disagreeing one. The largest remaining
 files are pre-refactoring exports that will shrink further when re-exported
@@ -296,7 +298,7 @@ Created `300ac30c`, updated `a85a4fa` (July 6, 2026).
 
 ---
 
-## Section 3 -- The Shared Assembler Architecture (settled -- architecture B′)
+## Section 3 -- The Shared Assembler Architecture (settled -- architecture B')
 
 **One shared assembler per domain, called by Pyodide in the browser.**
 
@@ -519,10 +521,10 @@ held as optimization). Deferred to Phase 3.
   assumes.
 - Provenance source: hybrid string/structured object (Horizons-derived data
   carries `{query_target, center, epoch, retrieved}` for re-verification).
-- Feature rendering: always JS in interactive layer (both A and B′). Python
+- Feature rendering: always JS in interactive layer (both A and B'). Python
   assembler handles orbits only. Feature configs in separate
   `feature_configs.json`. Three-context table: static gallery (pre-baked) /
-  interactive A (JS everything) / interactive B′ (Python orbits + JS
+  interactive A (JS everything) / interactive B' (Python orbits + JS
   features).
 - 8 validation invariants the export script asserts before emitting the index.
 - 9 test objects covering every schema class and edge case.
@@ -640,11 +642,11 @@ about unnamed downloads.
 math, JavaScript builds Plotly figure) avoids loading the full `plotly` Python
 package -- dramatically faster than loading plotly in Pyodide.
 
-**Architecture A vs B fork -- RESOLVED: B′.** Phase 0 proved architecture A
+**Architecture A vs B fork -- RESOLVED: B'.** Phase 0 proved architecture A
 (Python/NumPy computes arrays, JS builds Plotly traces). Fable 5 identified
 that A creates a parallel rendering pipeline -- convention duplication across
 Python and JavaScript for the life of the project (the protocol's own anti-
-pattern). A B′ measurement page (`measure_plotly.html`) timed the full
+pattern). A B' measurement page (`measure_plotly.html`) timed the full
 plotly-in-Pyodide cold-start on iPhone Safari WiFi:
 
 - Pyodide runtime: 929-959 ms
@@ -655,14 +657,14 @@ plotly-in-Pyodide cold-start on iPhone Safari WiFi:
 - **Total: 2.1-3.3 s** (acceptance threshold was <=15 s)
 
 Fable verified plotly 6 imports lazy (0.06 s native); the WASM multiplier is
-~1:1. The feared cold-start cost dissolved. B′ uses a slim self-hosted wheel
+~1:1. The feared cold-start cost dissolved. B' uses a slim self-hosted wheel
 (~3.9 MB, stripped of dead JS bundles and Jupyter extras) from the Phase 1b
 serving home -- no PyPI runtime dependency.
 
 **Two-tier model:** frozen pedagogical demos (Phase 0 Solar System Explorer,
 eccentricity demo) stay on A -- instant-loading, convention-light, no sync tax
 because frozen exhibits don't change. Data-backed catalog exhibits (Phase 2+)
-take B′ -- shared desktop engines, one codebase, scene equivalence by
+take B' -- shared desktop engines, one codebase, scene equivalence by
 construction.
 
 **Attribution gate (L-086):** `interactive.html` is publicly reachable with
@@ -714,7 +716,7 @@ Deliverables:
 4. **Serving home** -- OQ-E resolved (H2): the cache lives in the GALLERY repo `data/`
    subfolder -- same repo, same origin, NO CORS question (the dedicated
    `palomas-orrery-data` repo, option H1, was superseded). Deploy first web cache.
-   The slim plotly wheel (~3.9 MB, B′) also lives here.
+   The slim plotly wheel (~3.9 MB, B') also lives here.
 
 Requires: Fable analysis (delivered), design handoff (converged v0.4),
 gitignore updates (done @ `6368c87`).
@@ -734,7 +736,7 @@ the user can view as-is or modify.
 
 Requires: Phase 1b data pipeline (done). The helpers split (L-087) is
 DISCHARGED -- closed 2026-07-15; see Section 2, seam 2, for what
-remains transitively. Architecture B′
+remains transitively. Architecture B'
 confirmed (measurement passed July 6, 2026 -- 2.1-3.3 s on iPhone).
 
 
@@ -829,7 +831,8 @@ and its NEXT named work that L-192 superseded. More importantly it
 described the provenance refactor as though that were the path, when the
 refactor is one segment of it.
 
-**Amended 2026-08-22 at `38923c1` -- the braid.** Provenance stops being
+**Amended 2026-08-23 at `38923c1`, implementing the braid ruled
+2026-08-22.** Provenance stops being
 a GATE and becomes a per-artifact slice, and segment 3 is worked first.
 The five segments below do NOT move: they are the SHAPE of the work and
 they were confirmed unchanged on 2026-08-16. What moved is the order
@@ -888,9 +891,9 @@ never consulted for them. **An error in the orrery becomes an error in
 the gallery, permanently and silently.**
 
 That asymmetry is why the provenance work exists and why its target is
-the ORRERY. Until 2026-08-22 this paragraph drew a second conclusion
-from it -- that the refactor must PRECEDE the assembler work rather than
-run beside it -- and that conclusion is withdrawn.
+the ORRERY. Until v19 this paragraph drew a second conclusion from it --
+that the refactor must PRECEDE the assembler work rather than run beside
+it -- and the 2026-08-22 ruling withdrew that conclusion.
 
 The asymmetry governs what an artifact may LOCK, not what may be BUILT.
 A fingerprinted artifact freezes its values, so it must not be locked on
@@ -951,7 +954,7 @@ rather than editing a number (Tony, August 2026). And an artifact
 defined as *Jupiter and Saturn with rings and radiation belts* cannot be
 Mode 5 accepted while nothing renders them.
 
-One precision, measured 2026-08-22: **Saturn has no radiation belts** in
+One precision, measured 2026-08-23: **Saturn has no radiation belts** in
 the served cache or in `objects_config.json`. Only Jupiter's are served.
 The phrase above reads as though both bodies have them.
 
@@ -959,7 +962,7 @@ The phrase above reads as though both bodies have them.
 exoplanets and Sgr A*, Phase 5 Earth system. Phase 6 dissolves into
 continuous refinement (Section 5).
 
-### The order of execution -- amended 2026-08-22
+### The order of execution -- the braid, ruled 2026-08-22
 
 The five segments above are the SHAPE: what depends on what. They are
 unchanged. This is the ORDER they are worked in, which is not the same
@@ -982,7 +985,7 @@ in the ledger, and this order unblocks it. The plan carries SEQUENCING
 authority and the ledger carries STATUS authority (L-221), so that is a
 ledger edit, not something this section may assert around.
 
-### You are here -- 2026-08-22, orrery `38923c1`, gallery `493a0bd`
+### You are here -- read 2026-08-23 at orrery `38923c1`, gallery `493a0bd`
 
 | | State |
 |---|---|
@@ -1239,16 +1242,16 @@ which cites this item's coverage-gap pattern as its own precedent.
 9. ~~**Matplotlib in Phase 0.**~~ **Dissolved.** The gallery is Plotly. The
    eccentricity demo converts to Plotly as part of Phase 0 -- not a separate
    decision.
-10. ~~**Pyodide package weight + cold-start.**~~ **Resolved: B′.** Measured
+10. ~~**Pyodide package weight + cold-start.**~~ **Resolved: B'.** Measured
     on iPhone Safari WiFi (July 6, 2026): Pyodide v314.0.2 + NumPy +
     micropip + plotly (stock wheel from PyPI) = **2.1-3.3 s total cold
     start**. `import plotly.graph_objects` = 57-59 ms (plotly 6 lazy-loads;
-    WASM multiplier ~1:1). B′ uses a slim self-hosted wheel (~3.9 MB,
+    WASM multiplier ~1:1). B' uses a slim self-hosted wheel (~3.9 MB,
     stripped of dead JS bundles and Jupyter extras per Fable's strip spec)
     from the Phase 1b serving home -- no PyPI dependency. Two-tier model:
-    frozen A exhibits (instant, convention-light) + data-backed B′ exhibits
+    frozen A exhibits (instant, convention-light) + data-backed B' exhibits
     (shared engines, one codebase). Fable's convention-duplication analysis
-    confirmed A's parallel-pipeline cost outweighs B′'s cold-start cost for
+    confirmed A's parallel-pipeline cost outweighs the B' cold-start cost for
     a solo developer at Phase 2 scale. OQ-i through OQ-v (from Fable A/B
     analysis) carry to Phase 2 start.
 11. ~~**Gallery viewer architecture for interactive pages.**~~ **Resolved:
@@ -1278,7 +1281,7 @@ which cites this item's coverage-gap pattern as its own precedent.
     constructor-call count was left as an open question -- the plan said
     two, that measurement found one -- with the instruction to resolve it
     by looking, not by patching.
-    **Resolved by looking, 2026-08-22 at `38923c1`: TWO is right.**
+    **Resolved by looking, 2026-08-23 at `38923c1`: TWO is right.**
     `constants_new.py` holds 48 top-level assignments; the six arithmetic
     derivations are unchanged; and TWO assignments contain constructor
     calls -- `HORIZONS_MAX_DATE = datetime(...)` at line 141, and
@@ -1356,7 +1359,7 @@ which cites this item's coverage-gap pattern as its own precedent.
     below is what Tony ruled on, and it stands as written except for one
     number: it says Jupiter has 5 entries, and the August 10 session
     counted 4 ring entries.
-    **Confirmed 2026-08-22: FOUR.** `main_ring`, `halo_ring`,
+    **Confirmed 2026-08-23: FOUR.** `main_ring`, `halo_ring`,
     `amalthea_gossamer`, `thebe_gossamer` -- identical in
     `objects_config.json` and in the served `feature_configs.json` at
     gallery `493a0bd`. The "5 entries" in the recommendation below is
@@ -1545,20 +1548,20 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
   decision to Phase 2 start with measurement gate. All findings accepted.
 - **Fable 5 A/B architecture analysis** (July 6, 2026): Convention-duplication
   inventory at Phase 2 scale. Proved duplication is conserved across the A
-  family (A, A′, A″ relocate it; only engine reuse eliminates it). Verified
+  family (A, A', A'' relocate it; only engine reuse eliminates it). Verified
   plotly wheel is 9.9 MB (not 15), import is 0.06 s native (lazy in plotly 6),
   dead JS bundles are 19.5 MB of 43.2 MB uncompressed. Built and tested slim
-  B′ wheel: 3.9 MB, fully functional for `go.Scatter3d` + `fig.to_json()`.
-  Recommended B′ with A retained for frozen pedagogical demos (two-tier model).
+  B' wheel: 3.9 MB, fully functional for `go.Scatter3d` + `fig.to_json()`.
+  Recommended B' with A retained for frozen pedagogical demos (two-tier model).
   OQ-i through OQ-v for Phase 2 start. (`AB_FORK_ANALYSIS.md`, built on
   `873c6cd` / `827d0b3` -- **that file is in NEITHER repo as of
-  2026-08-22**, and no near-match name exists. The lineage entry stays
+  2026-08-23**, and no near-match name exists. The lineage entry stays
   because the analysis happened and its results are recorded above; the
   gap is noted rather than the citation quietly dropped.)
-- **B′ cold-start measurement** (July 6, 2026): `measure_plotly.html` deployed,
+- **B' cold-start measurement** (July 6, 2026): `measure_plotly.html` deployed,
   timed on iPhone Safari WiFi. Stock plotly from PyPI: 2.1-3.3 s total cold
   start. `import plotly.graph_objects` = 57-59 ms. WASM multiplier ~1:1.
-  Acceptance threshold <=15 s -- passed at one-seventh. A/B fork resolved: B′.
+  Acceptance threshold <=15 s -- passed at one-seventh. A/B fork resolved: B'.
   Phase 0 closed.
 
 **Decisions made (cumulative):**
@@ -1595,8 +1598,8 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
 *New in v9:*
 - Phase 0 proven: Pyodide v314.0.2 + NumPy + Plotly.js on static GitHub Pages (Section 5)
 - Server/serverless resolved in practice: Pyodide (Section 7 #1)
-- A/B architecture fork resolved: B′ (Section 5, Section 7 #10, measurement: 2.1-3.3 s)
-- Two-tier model: frozen A exhibits + data-backed B′ exhibits (Section 1, Section 5)
+- A/B architecture fork resolved: B' (Section 5, Section 7 #10, measurement: 2.1-3.3 s)
+- Two-tier model: frozen A exhibits + data-backed B' exhibits (Section 1, Section 5)
 - F2 canonical per-object storage adopted (Section 3a)
 - Three trace types: actual positions, osculating at epoch, mean elements (Section 3a)
 - Two data types to serve: osculating elements + position vectors (Section 3a)
@@ -2056,7 +2059,7 @@ bodies and counted in neither figure. See L-181 and L-190.
   it explicitly did not perform. Now carried in
   provenance-discipline v2.3.
 
-*New in v19 (August 22, 2026):*
+*New in v19 (August 23, 2026, implementing the 2026-08-22 ruling):*
 - **The braid: provenance stops being a gate and becomes a per-artifact
   slice** (Tony's ruling, 2026-08-22). Step one of the critical path had
   8 clean rows of 105 and 292 Tier-1 findings tree-wide, and a full
@@ -2082,13 +2085,26 @@ bodies and counted in neither figure. See L-181 and L-190.
   two questions the plan told a future session to resolve by looking were
   answered by looking.
 - **The skill-version list is deleted, not updated** (Tony's ruling,
-  2026-08-22). The closing block restated ten skill versions by hand and
+  2026-08-23). The closing block restated ten skill versions by hand and
   five had drifted, provenance-discipline worst at 1.8 against an actual
   2.6. It is a second store for a value the protocol's generated Skill
   Manifest already owns, and Stale Skill = Stop compares against that
   manifest, not against this document. Fix the producer, not N consumers.
 - **An unmatched code fence removed.** The file carried five ``` markers,
   an odd count; the last opened a block that never closed.
+- **The document is now pure ASCII.** 22 U+2032 PRIME and one U+2033
+  DOUBLE PRIME, all in the B-prime architecture name, became ASCII `'`
+  and `''`. The first v19 patch reported them and declined to sweep
+  them, reading the encoding gate as scoped to delivered code. Tony's
+  ruling, 2026-08-23: a patch already holding a file open fixes
+  incidental non-ASCII, and markdown is not an exception to Stamp What
+  You Change. Section 5a already spelled the name `B'`, so this makes
+  the document self-consistent rather than imposing a new convention.
+- **Authorship dates corrected.** The first v19 patch stamped itself
+  2026-08-22 throughout and ran on the 23rd. Ruling dates were right and
+  stand; the eight authorship and measurement dates moved. Recorded
+  rather than quietly fixed, because a document about anchors being true
+  is the wrong place to be casual about which day something happened.
 - **Two consequences recorded rather than resolved here.** L-225 has no
   ledger entry although the design note and the session queue both cite
   it; and L-154 is ledger-BLOCKED while this plan now makes it the first
@@ -2125,11 +2141,13 @@ prompts.
 
 ---
 
-Base: orrery @ `38923c1` / gallery @ `493a0bd` (v19, confirmed against
-the live remote; v17-v18 stood at orrery `ee0da47` / gallery `61a78c0`;
+Base: orrery @ `38923c1` / gallery @ `493a0bd` -- v19 built on those,
+pushed at orrery `f504c06` / gallery `02aefc0` on 2026-08-23. (All
+confirmed against the live remote; v17-v18 stood at orrery `ee0da47` /
+gallery `61a78c0`;
 v16 was orrery `4b82384` / gallery `e7e8c5e`; v15 was orrery
 `b59cb72` / gallery `22c947c9`).
-Phase 0 closed. Phase 1a vocabulary delivered. A/B fork resolved: B′.
+Phase 0 closed. Phase 1a vocabulary delivered. A/B fork resolved: B'.
 Phase 1b builder built, offline-verified (L-098), and Layer 2 live-Horizons
 fully tested and closed -- L-149 and L-118 both DONE; L-151 DONE
 2026-07-27; L-150 still decided, not built.
@@ -2150,11 +2168,11 @@ hover text), L-177 (Mercury Hill sphere convention), L-178-180
 layer).
 
 SKILL AND PROTOCOL VERSIONS ARE NOT RESTATED HERE. This block used to
-carry ten of them by hand; five had drifted by 2026-08-22 and nothing
+carry ten of them by hand; five had drifted by 2026-08-23 and nothing
 watched them. The authority is the generated Skill Manifest in
 `PROJECT_INSTRUCTIONS.md`, Part 3 -- rebuilt by `skills_index.py`, and
 the copy Stale Skill = Stop actually compares a loaded skill against.
-Read it there. (Tony's ruling, 2026-08-22: fix the producer, not N
+Read it there. (Tony's ruling, 2026-08-23: fix the producer, not N
 consumers.)
 NEXT, and no longer waiting on the scanner work (the braid,
 2026-08-22): write the feature-rendering JS layer (ring/shell/belt
