@@ -17,6 +17,9 @@ built on 15741822.
 Module updated: August 23, 2026 with Anthropic's Claude Opus 5 (L-229:
 streamer band rotated into the solar equatorial frame; the L-227
 citation-window follow-on), built on 851224c6.
+Module updated: August 23, 2026 with Anthropic's Claude Opus 5 (L-229
+part 2: the orientation is declared an ASSUMPTION; the unsourced
+magnetic-equator argument is withdrawn), built on ca97e81d.
 Module updated: August 20, 2026 with Anthropic's Claude Opus 5 (L-221:
 master plan as sequencing authority; L-214 correction and scoping),
 built on 3586970d.
@@ -3280,16 +3283,40 @@ separation for near-equal radii, hover AU convention).
 - **Both traces now read ONE matrix**, so they cannot disagree again.
   That is the structural half of the fix and it matters more than the
   seven degrees.
-- **Why the solar equator is the right plane.** The streamer belt
-  follows the heliospheric current sheet, which tracks the solar
-  MAGNETIC equator. Near solar minimum the dipole lies close to the
-  spin axis, so the magnetic equator tracks the rotation equator, and
-  this module already commits to that regime: `warp_amp_deg` is the
-  neutral line's tilt OFF THE EQUATOR and the hover says the warp is
-  one configuration near solar minimum. The band is "equator plus
-  warp" and it was warping around the wrong equator. Honest caveat:
-  the magnetic equator is not exactly the rotation equator even at
-  minimum. The ecliptic has no claim on it at all.
+- **WITHDRAWN 2026-08-23, same day, and left visible.** This entry
+  originally carried a bullet titled "Why the solar equator is the
+  right plane", arguing from the heliospheric current sheet, the
+  solar magnetic equator, and the dipole's alignment with the spin
+  axis near solar minimum. **None of that is sourced anywhere in this
+  project.** Tony asked whether there was a reference for the belt's
+  orientation; a repo-wide search found none -- not for the
+  orientation, not for `warp_amp_deg` = 15.0, not for the two-lobe
+  warp, and not for the hover's existing claim that the tilt sweeps
+  toward the poles across the 11-year cycle. The physics may well be
+  right. It was stated as established, which is the failure the
+  resident rule names: wrong-but-asserted is worse than uncited,
+  because the assertion suppresses the suspicion that would catch it.
+  Recorded rather than deleted, because a claim withdrawn silently
+  leaves the next reader nothing to check against.
+- **What actually justifies the rotation, and needs no physics
+  citation.** `create_streamer_band_shape`'s own docstring says it
+  returns points "in the body frame"; the caller treated them as
+  ecliptic. That is an internal contract violation. The Sun's body
+  frame is DEFINED by its rotation pole, and that pole is sourced
+  (IAU 2018, RA 286.13, dec 63.87). So the band belongs in that frame
+  because it is the frame it was built in. Everything past that --
+  that the belt is organized about the solar equator at all -- is a
+  drawing choice, now declared as one in the code comment and in the
+  hover the reader sees.
+- **Tony-action (do): find a citation for the belt's orientation, or
+  leave it declared.** Same shape as L-228 and the same module. If a
+  source states that the streamer belt / heliospheric current sheet
+  is organized about the solar rotation or magnetic equator, cite it
+  and the ASSUMPTION note comes out. If none is found, the note
+  stays and that is an honest ending, not a failure. Unlike a range,
+  an orientation cannot be omitted -- the band has to be drawn
+  somewhere -- so this falls under Show the Envelope of the
+  Unknowable rather than under omit-if-unsourced.
 - **The info marker rotates with the band.** Rotating one and not the
   other would leave the marker off the band edge -- geometry right,
   affordance wrong. Verified unchanged at 2.038e-03 AU to the nearest

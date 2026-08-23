@@ -1643,18 +1643,27 @@ def create_sun_streamer_band(center_position=(0, 0, 0)):
               'outer_radius': fade_rs * 1.015}
     xs, ys, zs, alphas, sizes = create_streamer_band_shape(params)
 
-    # BODY FRAME -> ECLIPTIC. create_streamer_band_shape returns points in
-    # the SUN'S frame, so the band's plane of symmetry is the solar
-    # equator -- inclined about 7.25 deg to the ecliptic. Until 2026-08-23
-    # these points were scaled and handed to Plotly UNROTATED, which laid
-    # the band flat in the ecliptic while the Sun's rotation axis trace,
-    # built from the very matrix used here, was correctly tilted. Two
-    # traces in one figure disagreeing about where the Sun's equator is.
-    # Found by Mode 5, not by any check (L-229).
+    # BODY FRAME -> ECLIPTIC. create_streamer_band_shape's own docstring
+    # says it returns points "in the body frame". Until 2026-08-23 the
+    # caller scaled them and handed them to Plotly UNROTATED, i.e. treated
+    # body-frame points as ecliptic ones. That is an internal contract
+    # violation and it is the whole reason for this rotation -- no claim
+    # about solar physics is needed to justify it, and none is made here.
+    # The Sun's rotation axis trace, built from the very matrix used
+    # below, was already correctly tilted, so two traces in one figure
+    # disagreed about where the Sun's equator is. Found by Mode 5 (L-229).
     # Source: IAU 2018 solar pole, via idealized_orbits.planet_poles['Sun']
     #   (ra 286.13, dec 63.87) -- the SAME source build_rotation_axis_traces
     #   reads, so the band and the axis now derive from one matrix and
     #   cannot drift apart again.
+    # ASSUMPTION: that the streamer belt is organized about the solar
+    #   equator AT ALL is a drawing choice, not a sourced boundary. No
+    #   citation for the belt's orientation exists in this project, nor
+    #   for warp_amp_deg = 15.0, nor for the two-lobe warp. The pole is
+    #   sourced; anchoring the band to it is ours. An earlier version of
+    #   this comment argued the case from magnetic-equator physics that
+    #   nobody had sourced -- withdrawn 2026-08-23, see L-229. The hover
+    #   says the same thing to the reader.
     # The import is lazy for the same reason it is lazy in
     #   build_rotation_axis_traces: idealized_orbits is heavy.
     from idealized_orbits import create_planet_transformation_matrix
@@ -1730,6 +1739,13 @@ def create_sun_streamer_band(center_position=(0, 0, 0)):
         "THE WARP is drawn in ONE configuration, near solar minimum. The<br>"
         "neutral line's tilt sweeps toward the poles across the 11-year<br>"
         "cycle; this is the shape, not a measurement of today's.<br><br>"
+
+        "THE PLANE the band sits in is the SUN'S equatorial plane, tilted<br>"
+        "about 7.25 degrees from the ecliptic by the IAU 2018 solar pole.<br>"
+        "The pole is measured. That the belt is organized about that plane<br>"
+        "at all is an ASSUMPTION -- as are the warp's 15-degree amplitude<br>"
+        "and its two lobes. No source for the belt's orientation is cited<br>"
+        "in this project. The ecliptic was worse, not the alternative.<br><br>"
 
         "Drawn as a visualization assumption where no measured boundary<br>"
         "exists (L-224)."

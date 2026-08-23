@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: August 23, 2026
-Files scanned: 128
+Files scanned: 129
 Total findings: 1039
 Constants: 108 | Dicts: 40 | Display strings: 891
 
@@ -19,14 +19,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260823T223112Z | `ca97e81` | 129 | 1039 | 292 | 631 | 114 | 2 |
 | 20260823T221425Z | `851224c` | 128 | 1039 | 292 | 631 | 114 | 2 |
 | 20260823T213332Z | `1574182` | 129 | 1040 | 294 | 630 | 114 | 2 |
 | 20260823T204857Z | `6d12eca` | 130 | 1039 | 292 | 631 | 114 | 2 |
 | 20260823T204721Z | `6d12eca` | 130 | 1039 | 292 | 631 | 114 | 2 |
 | 20260823T144625Z | `38923c1` | 128 | 1039 | 292 | 631 | 114 | 2 |
-| 20260822T220411Z | `ef3e084` | 128 | 1039 | 292 | 631 | 114 | 2 |
 
-Change since the previous run: total -1, Tier-1 -2.
+Change since the previous run: total +0, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -1524,8 +1524,8 @@ is planned for a future session.
 | 744 | string | display string @ line 744 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 771 | string | display string @ line 771 | (6 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 789 | string | display string @ line 789 | (8 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1694 | string | display string @ line 1694 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1715 | string | display string @ line 1715 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1703 | string | display string @ line 1703 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1724 | string | display string @ line 1724 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
 ### spacecraft_encounters.py
 
