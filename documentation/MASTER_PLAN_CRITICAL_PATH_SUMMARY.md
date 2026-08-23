@@ -1,22 +1,28 @@
 # The critical path -- where we are and what stands between here and the end
 
-**Updated August 20, 2026.** Orrery at
-`79729c98fd6bec8703fcc3bbc0806e6ee5226770`, gallery at
-`109162bbb8d291bce615d888557498a9342d4642`. Both confirmed by live
-check. First written August 16 at `227f5b2d`; the structure below is
-unchanged from that version -- the five steps have not moved, only
-our position along them.
+**Updated August 23, 2026.** Orrery at
+`09736422e8b26d348f539cd8b49628e8a0c670ab`, gallery at
+`02aefc0cefbf334889b7c6b3b05bf8fdfab74fa6`. Both confirmed against
+the live remote. First written August 16 at `227f5b2d`; the five
+steps below still have not moved.
 
-Two things changed on August 20. The reconciliation queue that had
-been open for two sessions is CLOSED: four rows decided, three
-values changed, one held. And a claim this document carried about
-`STREAMER_BELT_RADII` turned out to be wrong and is corrected below
--- it had travelled here from a session reading rather than from a
-source.
+**What changed on August 23 is the order they are worked in.**
+Tony ruled on August 22 that provenance stops being a GATE and
+becomes a per-artifact slice. Step three -- teaching the assembler
+to draw -- goes first. Step one continues and stops blocking
+anything. Section 5a of the master plan carries the same change as
+of v19, and the argument behind it is in
+`documentation/DESIGN_NOTE_20260822_braid_and_citation_kind.md`.
 
-**Lands in `documentation/` as `MASTER_PLAN_CRITICAL_PATH_SUMMARY.md`.** Section 5a
-of the master plan and the readable snapshot both cite it by that exact
-name, so it belongs in the repo before either is pushed.
+The short form: a precondition that does not terminate is not a
+plan. Step one had eight clean rows out of a hundred and five, and
+a full session on August 22 went to one solar shell that Artifact 2
+does not render. Priority becomes what the next artifact actually
+draws.
+
+Three claims in this file have also been corrected against the
+code rather than restated from it. They are marked where they
+appear.
 
 Companion to `MASTER_PLAN_INTERACTIVE_GALLERY.md` Section 5a, which is
 the reference version. This is the readable one.
@@ -67,9 +73,21 @@ copied. Horizons is never consulted for them. If a number is wrong in
 the orrery, it is wrong in the gallery, permanently, and nothing will
 ever notice.
 
-This is why the provenance work comes first. It is not a detour and it
-is not a parallel project. Its target is the orrery, so that importing
-from the orrery blind is a safe thing to do.
+This is why the provenance work exists, and why it aims at the orrery
+rather than anywhere downstream. It is not a detour and it is not a
+parallel project.
+
+**Until August 23 this passage went one sentence further and said the
+provenance work therefore comes FIRST. That does not follow, and it is
+withdrawn.** What the asymmetry governs is what may be LOCKED, not what
+may be BUILT. A fingerprinted artifact freezes its numbers, so it must
+not be locked on unsourced ones. Drawing a ring on screen freezes
+nothing, and it can be un-drawn in an afternoon.
+
+The order also pays for itself. A ring radius nobody can see can only
+be checked as text against text. Once the assembler draws it, a wrong
+radius becomes something a person can look at -- which is this
+project's own definition of ground truth.
 
 ---
 
@@ -83,13 +101,23 @@ The pipeline runs one direction, and the work follows it.
 
 **One. Make the orrery right.** One home for every feature constant,
 each carrying its source as data rather than as a comment somebody has
-to trust. Then the verification batches, of which the gas giants are
-the one Saturn and Jupiter need.
+to trust. Then the verification batches.
+
+**Since August 23 this step is scoped per artifact rather than run to
+completion.** What Artifact 2 needs is not the gas-giant batch -- that
+batch is Jupiter, Saturn, Uranus and Neptune, and the last two are not
+in Artifact 2. It is the slice Artifact 2 renders, and that slice is
+countable, which is the point of scoping it this way. Saturn's seven
+rings carry an inner and an outer radius each; Jupiter's four rings add
+a thickness; the belts carry three distances and one thickness. Thirty
+measured numbers. Two more are drawing parameters rather than
+measurements, and are declared as such.
 
 The checker, the worksheet builder and the dispatch loop are the
 machinery of this step, not a step of their own. They exist because
 reconciling worksheets against the code by hand does not scale, and the
-scale is measured: 107 claims scored, eight of them clean.
+scale is measured: a hundred and five claims scored, eight of them
+clean.
 
 That machinery was finished and unused for one day. A request can be
 built for a chosen slice of rows, carried out as JSON, returned,
@@ -118,20 +146,32 @@ were flagged by all three.
 the gallery's copy of its constants is maintained by hand. The transport
 design is settled; it has not been built.
 
-**Three. Teach the assembler to draw.** This one is independent of the
-first two and could be done tomorrow -- the data is already sitting in
-the served cache. Two lines in the resolver currently throw away every
-ring radius one step before anything could use them, and there is no
-browser code that draws a ring at all.
+**Three. Teach the assembler to draw. This is the next work.** It is
+independent of the first two and could be done tomorrow -- the data is
+already sitting in the served cache. Two lines in the resolver currently
+throw away every ring radius one step before anything could use them,
+and there is no browser code that draws a ring at all. Re-checked at
+gallery `02aefc0` on August 23; both lines still read as described, and
+nothing in the gallery repo reads the served feature file at all.
 
-Fixing it today would put Saturn's rings on screen immediately. They
-would just be rings drawn from unverified numbers, which is exactly what
-should not be locked into a reference artifact.
+Fixing it puts Saturn's rings on screen immediately. They will be rings
+drawn from numbers that are not yet sourced, and **that is fine, because
+drawing is not locking.** Until August 23 this passage ended by calling
+it "exactly what should not be locked into a reference artifact," which
+is true of locking and was being read as an argument against building.
+The two came apart on August 22 and this is the sentence that had
+welded them together.
 
-**Four. Lock Artifact 2.** Jupiter and Saturn with rings and radiation
-belts, fingerprinted as the reference build. It needs all three of the
-above: sourced values, a faithful copy, and something that can actually
-render them.
+**Four. Lock Artifact 2.** Jupiter and Saturn with rings, and Jupiter's
+radiation belts, fingerprinted as the reference build. Saturn has no
+radiation belts in the served cache or in the config behind it, which
+the old phrasing here obscured.
+
+It needs step three, and it needs step one's thirty-number slice. It
+does not need the rest of the audit, and it does not need step two --
+the transport protects a correct orrery from drifting away from its
+copy later, which is a different problem from locking a correct
+artifact now.
 
 **Five. Ship, then repeat.** The first interactive solar system page,
 then stars, then exoplanets and the galactic centre, then the Earth
@@ -155,13 +195,19 @@ It also drew no features at all, which is how the feature path stayed
 broken without anyone noticing.
 
 **Step one is in progress, the backlog is visible, and the loop has now
-run end to end.** Of 107
-verification claims, eight are clean, forty-eight need to go back to
-whoever filled them in, nineteen need a conversation, thirty-two are
-noted without a route, and twenty-two are not reachable by the scanner
-at all. That is not a discouraging result -- it is the first time the
-number has been knowable. Before the checker existed, the same claims
-were unexamined and looked fine.
+run end to end.** Of a hundred and five verification claims, eight are
+clean, forty-seven need to go back to whoever filled them in, nineteen
+need a conversation, thirty-one are noted without a route, and
+twenty-two are not reachable by the scanner at all. That is not a
+discouraging result -- it is the first time the number has been
+knowable. Before the checker existed, the same claims were unexamined
+and looked fine.
+
+(Those figures were read from `WORKSHEET_CHECK.md` on August 23. This
+file carried 107 / 48 / 32 from the August 20 reading, and the master
+plan carried 110 from August 19. All three were true when written; none
+was re-measured before being copied forward, which is how a figure
+drifts without anyone being wrong on the day.)
 
 **And on August 20 the loop closed for the first time.** The four
 rows the pilot ranked as worth acting on had sat undecided for two
@@ -182,8 +228,9 @@ been dropping** (L-214). The rows carried `# Note:` lines answering
 the exact question the responders spent a dispatch re-deriving, and
 the builder silently withheld them because the label was outside its
 vocabulary. So one of the pilot's most useful results is a
-measurement of its own instrument. L-214 is designed and unbuilt,
-and it is the next scheduled work.
+measurement of its own instrument. **L-214 was built on August 21**;
+this file called it "designed and unbuilt, and the next scheduled
+work" until August 23. The next work is now step three.
 
 The values were confirmed against primary sources by an independent
 read rather than by asking a second model whether ours were right --
@@ -203,6 +250,16 @@ rendering defect rather than a documentation one if that shell draws
 from centre (L-209). And `STREAMER_BELT_RADII` carried a citation that
 did not support the claim attached to it (L-210).
 
+**That constant no longer exists, as of August 22.** L-224 renamed it
+`HELMET_CUSP_RADII`, moved it out of the shell configuration into the
+Sun's custom shells, and changed its value from 6.0 to 4.0 on a real
+source -- Suess and Nerney (2004), on the extent of the closed-field
+helmet rather than of the streamer as a whole. The shell it draws is
+now a warped band with a stalk, not a sphere. The name is left in the
+sentences above because those describe what was found on August 20,
+under the name it had then; a reader grepping for it today will not
+find it.
+
 **That second sentence used to say something sharper and it was
 wrong.** Until August 20 this file reported that the row cited its
 paper INVERTED -- that the cited 6 R_sun was the paper's floor being
@@ -211,8 +268,17 @@ though it were a finding. An independent source read on August 20
 found otherwise: DeForest, Howard & McComas (2014) uses 6 R_sun as
 the threshold at which inbound wave motion first became detectable,
 which is neither a floor nor a ceiling on streamer extent, and that
-paper's streamer-belt result is an Alfven surface at 17 R_sun or
+paper's streamer-belt result is an Alfven surface at 15 R_sun or
 more -- a result that belongs to `ALFVEN_SURFACE_RADII`, not here.
+
+**And that figure was wrong too, in the sentence written to fix the
+first error.** It read 17 R_sun until August 23. The published value
+is 15: the paper's arXiv abstract page disagrees with its own accepted
+manuscript, and the manuscript is what the figure comes from. Corrected
+in `constants_new.py` on August 22 under L-209, and only now here --
+which is the more interesting half. A correction written into the code
+does not travel to the prose that describes it unless somebody carries
+it, and nobody is assigned to.
 The companion citation did not carry the row either: Golub &
 Pasachoff bound coronal structure at roughly 5-10 R_sun and state no
 4-6 R_sun streamer range at all. So the 4-6 range in the code was
@@ -225,10 +291,14 @@ A wrong claim in a summary document outlives the conversation it
 came from, because the next reader has nothing else to check it
 against.
 
-**Step two is designed, not built.**
+**Step two is designed, not built**, and is no longer on the path to
+Artifact 2.
 
-**Step three has not been started.** It is the smallest piece of work
-standing between the project and a Saturn that renders.
+**Step three has not been started, and it is now the next thing that
+happens.** It remains the smallest piece of work standing between the
+project and a Saturn that renders. What changed on August 23 is not
+its size but its position: it used to be the last of three
+prerequisites and it is now the first.
 
 ---
 
@@ -251,7 +321,12 @@ has been baked into a hundred worksheets and a fingerprinted artifact.
 
 *Prepared August 16, 2026 with Anthropic's Claude Opus 5; figures
 updated August 18, dispatch result added August 19, reconciliation
-closed and the streamer-belt claim corrected August 20. Built on
-`79729c98fd6bec8703fcc3bbc0806e6ee5226770` at
+closed and the streamer-belt claim corrected August 20. Revised
+August 23 for the braid ruled August 22: the ordering claim
+withdrawn, the corpus re-measured at 105, and three claims corrected
+against the code -- L-214's status, the retired
+`STREAMER_BELT_RADII`, and DeForest's 15 R_sun. Built on
+`09736422e8b26d348f539cd8b49628e8a0c670ab` at
 https://github.com/tonylquintanilla/palomas_orrery, gallery at
-`109162bbb8d291bce615d888557498a9342d4642`.*
+`02aefc0cefbf334889b7c6b3b05bf8fdfab74fa6`. Both confirmed against
+the live remote.*
