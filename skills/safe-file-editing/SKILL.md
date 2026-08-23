@@ -6,10 +6,10 @@ fires_when: Editing existing files, patch scripts, sed/regex edits, encoding che
 
 # Safe File Editing
 
-Skill version: 1.7 | Cut from palomas_orrery @ d424c459 (v1.7),
-earlier @ ef3bd13 (v1.6), 50438c6 (v1.5), a872205 (v1.4), 1ba20c3
-(v1.3), 3398970 (v1.2), bdaaa0c (v1.1) | August 21, 2026, with
-Anthropic's Claude Opus 5
+Skill version: 1.8 | Cut from palomas_orrery @ 6d12ecac (v1.8),
+earlier @ d424c459 (v1.7), ef3bd13 (v1.6), 50438c6 (v1.5), a872205
+(v1.4), 1ba20c3 (v1.3), 3398970 (v1.2), bdaaa0c (v1.1) | August 23,
+2026, with Anthropic's Claude Opus 5
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;
 v1.1 adds the delivery-format convention from a same-day incident (a
 transactional patch silently never run; see Field Notes). v1.3 adds
@@ -27,6 +27,13 @@ would not have fired on the files it was written for. v1.7 adds A Paste
 Is An Unverified Transfer (L-223), which extends the delivery rule to
 prose, markdown and ledger files -- every example in 1.6 was code, and
 this project had been hand-editing a 579 KB ledger on that silence.
+v1.8 (L-226) does two things, both from Tony's rulings of 2026-08-23.
+It rescopes the Encoding Gate to say PROSE explicitly, because a
+session read "delivered code" as excluding markdown and left 23
+non-ASCII characters in a file it was already patching. And it adds
+The Correction Does Not Travel, one scope out from Stamp What You
+Change: that section governs the file the patch is editing, this one
+governs the other files quoting the value it just changed.
 Portable: applies to any project, not only Paloma's Orrery.
 
 ## Bottom-Up Editing [QUALITY]
@@ -241,13 +248,29 @@ a text editor.)
 
 ## Encoding Gate [QUALITY]
 
-LF line endings. ASCII only in delivered code -- no emoji, arrows, degree
-signs, or checkmarks (Windows cp1252 consoles mangle them).
+LF line endings. ASCII only -- no emoji, arrows, degree signs, or
+checkmarks (Windows cp1252 consoles mangle them).
+
+**This covers PROSE, not only code.** Markdown, documentation, plans,
+handoffs and the ledger are all in scope, on the same terms as a .py
+file. Earlier wordings said "delivered code", and that phrasing was
+read as putting markdown outside the gate.
 
 ```bash
 grep -P '[^\x00-\x7F]' filename.py   # Find non-ASCII (should be empty)
 file filename.py                      # Check line endings
 ```
+
+(Tony's ruling, 2026-08-23. A patch revising a master plan found 22
+PRIME characters and one DOUBLE PRIME in an architecture name,
+reported them, and declined to sweep them -- reasoning that the gate
+was scoped to code and that prose typography needed a ruling rather
+than a sweep. All three Fix In Passing conditions held, and the patch
+was holding the fingerprint and the all-or-nothing harness at that
+exact moment. Tony: when touching a file, incidental non-ASCII gets
+fixed. Note that Stamp What You Change already said markdown is not an
+exception -- so the skill's two halves disagreed, and the reader
+followed the narrower one.)
 
 ### Fix In Passing, Report It [QUALITY]
 
@@ -363,6 +386,59 @@ alternative considered and rejected was a generated currency stamp
 rebuilt by the maintenance run. It was rejected because it needs its own
 generator to maintain, while a stamp written by the patch that caused
 the staleness cannot drift: there is no second step to forget.)
+
+### The Correction Does Not Travel [QUALITY]
+
+One scope out from Stamp What You Change. That section governs the
+file the patch is editing. This one governs the OTHER files that
+quote the value the patch just changed.
+
+**When you correct a value, a name, or a status in code, the prose
+describing it does not follow. Nobody is assigned to carry it.**
+
+The asymmetry is what makes this dangerous rather than merely untidy.
+A wrong value in code tends to surface -- something renders oddly, a
+test pins it, a checker reads it. A wrong value in a document that
+DESCRIBES the code surfaces only when a human reads that sentence and
+happens to know better. So the document version outlives the code
+version, and it is the one a future session reads first.
+
+So when a patch changes any of the following, ask what QUOTES it:
+- a numeric value with a source (the documents citing that source)
+- a constant's NAME (anything that told a reader to grep for it)
+- an item's STATUS (plans and summaries describing it as open)
+- a file's location or name (every pointer to it)
+
+Three moves, in the order they are usually available:
+- **Fix it in the same patch** where the quoting file is already a
+  target. Cheapest, and the only version with no second step.
+- **Name the quoting file in the patch's own output** where it is
+  not. "constants_new.py now reads 15; MASTER_PLAN_CRITICAL_PATH_
+  SUMMARY.md still says 17" is a line somebody can act on. Silence
+  is not.
+- **Record the correction VISIBLY when you do fix it**, rather than
+  swapping the digit. A document that silently rewrites its own past
+  stops being evidence of anything, and the next reader has nothing
+  to check it against.
+
+The confirming question is the project's own, pointed sideways:
+WHAT ELSE SAYS THIS? If the answer is "nothing" without having
+looked, that is not an answer.
+
+(Origin, 2026-08-23. `constants_new.py` had read 15 R_sun since
+2026-08-22, when L-209 corrected DeForest, Howard and McComas (2014)
+at source -- the paper's arXiv abstract page disagrees with the
+accepted manuscript arXiv itself serves, and two earlier reads had
+both quoted the listing page. `MASTER_PLAN_CRITICAL_PATH_SUMMARY.md`
+still said 17 the next day, INSIDE the paragraph that file had
+written to correct an earlier wrong claim about the same row, in a
+document whose own text argues that a wrong claim in a summary
+outlives the conversation it came from. The same file named
+`STREAMER_BELT_RADII`, which L-224 had renamed the day before, and
+called L-214 "designed and unbuilt, and the next scheduled work"
+two days after L-214 went DONE. Three instances, one file, one
+cause. The provenance machinery watches the code; nothing watched
+whether the documents describing the code kept up.)
 
 ## grep -c in && Chains [QUALITY]
 

@@ -10,17 +10,24 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 128  
-**Total Lines of Code (non-blank):** 103,127  
-**Total Public Functions/Classes:** 1,162
+**Total Python Files:** 130  
+**Total Lines of Code (non-blank):** 103,876  
+**Total Public Functions/Classes:** 1,166
 
 ## Classification Coverage
 
-**Undetermined role (3).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
+- `patch_L221_4_ledger_l154_l225.py`
+- `patch_L221_6_safe_file_editing_1_8.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
+
+**Undetermined domain (2).** No valid `Domain:` tag.
+
+- `patch_L221_4_ledger_l154_l225.py`
+- `patch_L221_6_safe_file_editing_1_8.py`
 
 
 ---
@@ -224,6 +231,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
+| `patch_L221_4_ledger_l154_l225.py` | Built on ce2ff5d15d4e2bb682d5603c3b945a6f0f5f8ff4 at https://github.com/tonylquintanilla/palomas_orrery (branch main). Gallery at 02aefc0cefbf334889b7c6b3b05bf8fdfab74fa6. Both confirmed by live git ls-remote. Written August 23, 2026 with Anthropic's Claude Opus 5. (316 lines) |
+| `patch_L221_6_safe_file_editing_1_8.py` | Built on 6d12ecace4c5867d4d718466c7ef5923fc47622e at https://github.com/tonylquintanilla/palomas_orrery (branch main). Gallery at 02aefc0cefbf334889b7c6b3b05bf8fdfab74fa6. Both confirmed by live git ls-remote. Written August 23, 2026 with Anthropic's Claude Opus 5. (433 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

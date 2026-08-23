@@ -9,6 +9,8 @@ docstring lines in the constants change report), built on 762aa5dd.
 Module updated: August 23, 2026 with Anthropic's Claude Opus 5 (L-154
 BLOCKED -> OPEN under the braid; L-225 opened, having been in
 circulation with no entry), built on ce2ff5d1.
+Module updated: August 23, 2026 with Anthropic's Claude Opus 5 (L-226:
+safe-file-editing 1.7 -> 1.8), built on 6d12ecac.
 Module updated: August 20, 2026 with Anthropic's Claude Opus 5 (L-221:
 master plan as sequencing authority; L-214 correction and scoping),
 built on 3586970d.
@@ -241,12 +243,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*129 live items; 116 need attention (`!`); 128 RICE-scored; 91 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*130 live items; 117 need attention (`!`); 129 RICE-scored; 91 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
+| ! | L-226 | safe-file-editing 1.8 -- encoding gate covers prose; corrections do not travel | OPEN | 8.1 | 2026-08-23 |
 | ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-21 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
 | ! | L-206 | Worksheet return filenames carry model and session | OPEN | 5.1 | 2026-08-18 |
@@ -3113,6 +3116,51 @@ separation for near-equal radii, hover AU convention).
   `documentation/DESIGN_NOTE_20260822_braid_and_citation_kind.md`
   Section 4; `provenance-discipline` 2.6; L-221 (sequencing authority);
   L-224 (the session that surfaced it).
+
+#### [L-226] safe-file-editing 1.8 -- encoding gate covers prose; corrections do not travel
+<!-- L:226 status:OPEN upd:2026-08-23 section:A flag: rice:3/3/90/1 -->
+- **Two rulings by Tony on 2026-08-23, both from the v19 master plan
+  session.** Recorded here because a skill revision is a ledger entry.
+- **1. The Encoding Gate now says PROSE.** It read "ASCII only in
+  delivered code." `patch_L221_2` found 22 PRIME and one DOUBLE PRIME
+  in the master plan, reported them, and declined to sweep them on the
+  grounds that the gate was scoped to code. All three Fix In Passing
+  conditions held. Tony: a patch already holding a file open fixes
+  incidental non-ASCII. The sharper point is that Stamp What You
+  Change ALREADY said markdown is not an exception -- so the skill's
+  two halves disagreed and the reader followed the narrower one.
+  Swept in `patch_L221_3`; both master plan documents are now pure
+  ASCII.
+- **2. New section: The Correction Does Not Travel.** Scoped one level
+  out from Stamp What You Change -- that governs the file the patch is
+  editing, this governs the other files quoting what it changed.
+  Founding case: `constants_new.py` read 15 R_sun from 2026-08-22
+  (L-209, DeForest corrected at source);
+  `MASTER_PLAN_CRITICAL_PATH_SUMMARY.md` still said 17 the next day,
+  inside the paragraph written to correct an EARLIER wrong claim about
+  the same row. The same file named `STREAMER_BELT_RADII` after L-224
+  renamed it, and called L-214 unbuilt two days after it closed.
+  Three instances, one file, one cause: the provenance machinery
+  watches the code and nothing watched the documents describing it.
+- **Note:** RICE 3/3/90/1 -> 8.1 is Claude's proposed score. Reach 3
+  (every future patch), Impact 3 (a wrong document outlives a wrong
+  constant because nothing surfaces it), Confidence 90 (the rulings
+  are Tony's and the founding cases are measured), Effort 1 (the
+  skill edit is written). **Tony-action (decide):** confirm or
+  redirect, then re-run `ledger_index.py`.
+- **Tony-action (do):** run `skills_index.py`, then reinstall
+  safe-file-editing at Settings > Skills, then commit SKILL.md, this
+  ledger and PROJECT_INSTRUCTIONS.md in ONE commit. A version bump is
+  not done until the manifest agrees.
+- **Gap:** the reinstall cannot be verified from inside the session
+  that makes it. The NEXT session confirms its loaded copy reads 1.8
+  before doing file-editing work. This session loaded 1.7, correctly
+  at the time.
+- **Ref:** `skills/safe-file-editing/SKILL.md` v1.8;
+  `documentation/HANDOFF_20260823_braid_and_v19.md`; L-209 (the
+  DeForest figure); L-214, L-224 (the other two stale claims);
+  L-220 (Stamp What You Change); L-223 (A Paste Is An Unverified
+  Transfer).
 
 ## PENDING ACTION (Tony-side)
 
