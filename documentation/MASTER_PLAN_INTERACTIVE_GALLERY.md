@@ -1,6 +1,12 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** v18 -- Phase 2 (solar system assembler) BUILD UNDERWAY. Design
+**Status:** v19 -- Phase 2 (solar system assembler) BUILD UNDERWAY.
+**The braid, ruled 2026-08-22:** provenance stops being a GATE and
+becomes a per-artifact slice, and the rendering layer is worked first.
+The five segments of Section 5a do NOT move; the order they are worked
+in does. Argument in
+`documentation/DESIGN_NOTE_20260822_braid_and_citation_kind.md`
+Section 1. Design
 handoff v0.1 -> v0.3 resolved every open question (Pluto/Charon composition,
 Apophis close-encounter scope, OQ-4/closeup-shape routing). Competitive
 manifest cross-check (Fable + GPT independent builds) completed two rounds
@@ -12,7 +18,8 @@ locked, Mode 5 confirmed. F1-F4 (+ F6, non-blocking) now have ledger
 handles: L-118 (F1), L-119 (F2), L-120 (F3), L-121 (F4), L-122 (F6) --
 L-118 (F1) now DONE (feature_configs.json serves real ported values,
 served_window populated, both proven live over --first-build AND --nightly
-July 21-22); L-119/L-120/L-121/L-122 still OPEN, none built yet.
+July 21-22); L-120 (F3, Halley in the served index) DONE 2026-07-27;
+L-119, L-121 and L-122 still OPEN.
 F1's own design handoff (PHASE2_F1_FEATURE_SERVING_DESIGN_HANDOFF_v0.4.md)
 CONVERGED July 16, 2026, via the same competitive cross-check pattern as
 Phase 2's assembler design (Fable + GPT independent manifests, comparative
@@ -53,15 +60,17 @@ core mechanism was proven -- unattended trigger, Horizons fetch, and data
 assembly all confirmed working end to end -- but the final promotion step
 had a known intermittent failure under the scheduler's execution context
 (see S3a addendum, July 24).
-**Base:** orrery @ `c10a424`, gallery @ `e864fd42` (design ratified here;
-Artifact 1 built+pushed at orrery `6fc52b9a` / gallery `f89d83c4`; current
-state as of that work, orrery `ee0da47c` / gallery `61a78c00` -- F1a (M2)
-fully closed: L-149
-and L-118 both DONE, Layer 2 Steps 1-5 passed live; Layer 3 enabled with a
-known open issue; L-150 (multi-orbit binaries) and L-151 (gallery-assembler
-skill) still decided, not yet built)
+**Base:** orrery @ `38923c1`, gallery @ `493a0bd` (v19; both confirmed
+against the live remote, not carried forward. Design ratified at orrery
+`c10a424` / gallery `e864fd42`; Artifact 1 built+pushed at orrery
+`6fc52b9a` / gallery `f89d83c4`; v18 stood at orrery `ee0da47c` /
+gallery `61a78c00`. F1a (M2) fully closed: L-149 and L-118 both DONE,
+Layer 2 Steps 1-5 passed live. Layer 3 RETIRED 2026-08-10 -- the v18
+text here read "enabled with a known open issue", contradicting its own
+header forty lines below. L-151 (gallery-assembler skill) DONE
+2026-07-27; L-150 (multi-orbit binaries) still decided, not yet built.)
 **Date begun:** July 3, 2026
-**Last updated:** August 7, 2026
+**Last updated:** August 22, 2026
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
 Claude Opus 5, Claude Fable 5, Claude Sonnet 5, GPT
 
@@ -124,8 +133,10 @@ envelope is complex (object/center/date-range matrix). Other domains declare
 their bounds simply: stars state distance and magnitude limits, orbital
 parameters are always available, Earth system lists available scenarios.
 
-**GitHub Pages hosting.** The gallery is ~436 MB against Pages' 1 GB ceiling,
-with ~588 MB of headroom (post-cleanup, July 2026). The largest remaining
+**GitHub Pages hosting.** The gallery is 439 MB against Pages' 1 GB ceiling,
+with ~585 MB of headroom (measured at gallery `493a0bd`, 2026-08-22;
+~436 MB post-cleanup in July 2026). This is the document's ONE size
+figure -- Section 3a used to carry a second, disagreeing one. The largest remaining
 files are pre-refactoring exports that will shrink further when re-exported
 with the current slimmer plotting functions. Headroom is shared between
 gallery growth, cache data, and the Pyodide assembler code. A separate Pages
@@ -174,9 +185,13 @@ Six modules are import-clean (zero tkinter references): `idealized_orbits.py`,
    Selection/instance half is tk-shaped. The gallery imports the data; it
    supplies its own selection-state injection.
 
-2. `palomas_orrery_helpers.py` -- imports tkinter directly and carries
-   computation the assembler will want. Fix: split computation from GUI helpers
-   (L-087).
+2. `palomas_orrery_helpers.py` -- carries computation the assembler will
+   want. **L-087 CLOSED 2026-07-15 and the file no longer imports tkinter
+   at all** (measured at `38923c1`: zero references; all three functions
+   the assembler needs are present). The seam survives in a different
+   shape: three modules in its TRANSITIVE import closure still import
+   tkinter -- `osculating_cache_manager`, `save_utils`, `shutdown_handler`.
+   So the constraint is real and the reason v18 gave for it was not.
 
 **Desktop migration is deferred, not abandoned.** Over time, the desktop could
 refactor to use the shared assembler, unifying both paths. But this is an
@@ -406,9 +421,9 @@ float64.
 
 **Serving home is a subdirectory of the gallery repo.** The `data/` directory
 in `tonyquintanilla.github.io` serves at `palomasorrery.com/data/`. Same
-origin by construction -- no CORS question. Gallery measured at 474 MB with
-526 MB headroom against the 1 GB GitHub Pages soft limit; all-phase data
-needs are ~72 MB (14% of remaining). Pre-heavy gallery JSONs are cullable
+origin by construction -- no CORS question. Gallery size and headroom are
+stated ONCE, in Section 1, and measured there; all-phase data needs are
+~72 MB. Pre-heavy gallery JSONs are cullable
 via L-074 if headroom tightens. The coverage index's `generated` timestamp
 is the provenance anchor for the data (the data files don't carry their own
 version history).
@@ -461,7 +476,7 @@ held as optimization). Deferred to Phase 3.
 - OQ-D: Moon step size -- 6h default; per-object `step_hours` from day one.
   Io may want 2h. Mode 5 decides. **Positioned, Mode 5.**
 - OQ-E: Serving home -- H2 subfolder in gallery repo (`data/`). Gallery
-  measured at 474 MB, 526 MB headroom, all-phase data needs ~72 MB. No
+  size and headroom per Section 1; all-phase data needs ~72 MB. No
   CORS question (same repo, same origin). **Settled.**
 - OQ-F: Canonical frame -- helio / parent-relative / arc-natural. The v4 model correction
   RETIRED subtraction (catastrophic cancellation + aliasing); osculating-primary
@@ -477,7 +492,8 @@ held as optimization). Deferred to Phase 3.
 > primary), fetched FRESH per object; parents no longer compose moon orbits.
 > Where a bullet conflicts with osculating-primary + fetch-fresh,
 > GALLERY_DATA_SOURCE_HANDOFF v0.4 and the shipped gallery_cache_builder.py are
-> authoritative. Full section-3a rewrite tracked as L-108.
+> authoritative. The full section-3a rewrite was tracked as L-108, which
+> CLOSED 2026-07-12.
 
 > **Addendum (July 20):** OQ-F's frame list above is missing a fourth, real case
 > -- barycenter-relative (Pluto/Charon; future Orcus/Vanth, Patroclus/Menoetius).
@@ -525,7 +541,7 @@ The domains are unchanged from v7. What changes is how each reaches the web.
 
 ### Section 4a -- Solar System (the main build)
 
-**Desktop GUI:** `palomas_orrery.py` (11,110 lines at HEAD). `plot_objects` and
+**Desktop GUI:** `palomas_orrery.py` (11,092 lines at `38923c1`). `plot_objects` and
 `animate_objects` are the orchestration functions.
 
 **Computation engines:** `idealized_orbits.py`, `planet_visualization.py`,
@@ -716,7 +732,9 @@ buttons, center body, date picker. Static scenes only. Presets for encounters,
 comet perihelion, close approaches. Each preset is a pre-filled scene spec that
 the user can view as-is or modify.
 
-Requires: helpers split (L-087), Phase 1b data pipeline. Architecture B′
+Requires: Phase 1b data pipeline (done). The helpers split (L-087) is
+DISCHARGED -- closed 2026-07-15; see Section 2, seam 2, for what
+remains transitively. Architecture B′
 confirmed (measurement passed July 6, 2026 -- 2.1-3.3 s on iPhone).
 
 
@@ -740,6 +758,14 @@ slower one. (Tony, August 2026 session.)
 clear before Artifact 2 proceeds. That instruction is not withdrawn --
 batches still precede the artifact -- but Track 0 now precedes the
 batches. Recorded as a deliberate reversal, not a drift.
+
+**Narrowed 2026-08-22 by the braid (Section 5a).** Track 1's exit
+condition above reads "Batch 2 gas giants verified", which is Jupiter,
+Saturn, Uranus and Neptune. What Artifact 2 needs is a SUBSET of that:
+Saturn's rings, Jupiter's rings, and Jupiter's belts. Uranus and Neptune
+are not in Artifact 2 and do not gate it. The table is left as written
+because it is the record of the August ruling; the scope that applies to
+Artifact 2 is the one in Section 5a.
 
 **Numbering note.** "Track 0" rather than renumbering, because Section 6
 already refers to "Phase 2 Track 1, Batch 1 / Batch 2" and existing
@@ -803,6 +829,16 @@ and its NEXT named work that L-192 superseded. More importantly it
 described the provenance refactor as though that were the path, when the
 refactor is one segment of it.
 
+**Amended 2026-08-22 at `38923c1` -- the braid.** Provenance stops being
+a GATE and becomes a per-artifact slice, and segment 3 is worked first.
+The five segments below do NOT move: they are the SHAPE of the work and
+they were confirmed unchanged on 2026-08-16. What moved is the order
+they are worked in and the scope segment 1 must reach before an artifact
+can lock. The argument, with its reasoning, is in
+`documentation/DESIGN_NOTE_20260822_braid_and_citation_kind.md`
+Section 1; the short form is that a precondition which does not
+terminate is not a plan.
+
 This section is the spine. Detail lives in Sections 5, 6 and 7; history
 of every ruling stays in Section 6. When 5a and another section
 disagree, 5a is the one that was rewritten last -- reconcile, do not
@@ -851,19 +887,50 @@ is. Neither does the resolver, the renderer, or the browser. Horizons is
 never consulted for them. **An error in the orrery becomes an error in
 the gallery, permanently and silently.**
 
-That asymmetry is why the provenance refactor precedes the assembler
-work rather than running beside it. Its target is the ORRERY, so that
-importing from it blind is safe.
+That asymmetry is why the provenance work exists and why its target is
+the ORRERY. Until 2026-08-22 this paragraph drew a second conclusion
+from it -- that the refactor must PRECEDE the assembler work rather than
+run beside it -- and that conclusion is withdrawn.
 
-### The path, in order
+The asymmetry governs what an artifact may LOCK, not what may be BUILT.
+A fingerprinted artifact freezes its values, so it must not be locked on
+unsourced ones. Drawing a ring freezes nothing.
+
+And the order pays for itself, because the render is this project's own
+ground truth. Ring provenance today is an audit of numbers nobody can
+see -- text checked against text, which is precisely the mode that
+produced three separate failures on 2026-08-22. Once the assembler
+draws, a wrong ring radius becomes something Tony's EYES can catch.
+Segment 3 is what gives the provenance work a render to be checked
+against.
+
+### The path -- the five segments
+
+What depends on what. The segments are numbered by DEPENDENCY, not by
+the order they are worked in -- that is the subsection after this one,
+and since 2026-08-22 the two are different.
 
 **Segment 1 -- Make the orrery right.** Track 0 (L-181): one store for
 feature constants, provenance carried as data, display text derived.
-Track 1 (L-156): the provenance batches, Batch 2 gas giants being the
-one Artifact 2 needs. The worksheet checker, the request builder, the
-key rule and the dispatch loop (L-192) are the MACHINERY of Track 1, not
-a phase of their own -- they are how 102 annotations get reconciled at
-scale instead of by hand.
+Track 1 (L-156): the provenance batches. The worksheet checker, the
+request builder, the key rule and the dispatch loop (L-192) are the
+MACHINERY of Track 1, not a phase of their own -- they are how the
+annotations get reconciled at scale instead of by hand.
+
+**Scoped per artifact, since 2026-08-22.** This segment as a whole does
+not gate anything. What gates Artifact 2 is the slice Artifact 2
+RENDERS, and that slice is countable, which is the whole point of
+scoping it this way. Measured in the served cache at gallery
+`493a0bd`: Saturn's seven rings carry `inner_radius_km` and
+`outer_radius_km`; Jupiter's four rings add `thickness_km`; the belts
+carry `belt_distances` (three values) and `belt_thickness`. **Thirty
+measured numbers.** `n_rings` and `n_points` are drawing parameters --
+DECLARED under Section 7 decision 18, and not findings.
+
+The general audit does not stop. It stops being a gate. This is "The
+Artifact Bounds the Audit" (PROJECT_INSTRUCTIONS.md, Part 3) extended by
+one word: that rule bounds WHICH values are in scope, and this bounds
+which are in scope NEXT.
 
 **Segment 2 -- Make the transport faithful.** Track 0's cross-repo
 transport (vendored pull, design endorsed August 8). A correct orrery is
@@ -878,17 +945,44 @@ typing the field to match, so parameters are discarded one step before
 anything could use them. Then L-154: the client feature renderers.
 Nothing in the gallery repo currently reads `feature_configs.json`.
 
-**Segment 4 -- Lock Artifact 2.** Needs all three. A golden artifact is
-fingerprinted, so locking one on values that are not yet sourced means
-redoing the lock rather than editing a number (Tony, August 2026). And
-an artifact defined as *Jupiter and Saturn with rings and radiation
-belts* cannot be Mode 5 accepted while nothing renders them.
+**Segment 4 -- Lock Artifact 2.** A golden artifact is fingerprinted, so
+locking one on values that are not yet sourced means redoing the lock
+rather than editing a number (Tony, August 2026). And an artifact
+defined as *Jupiter and Saturn with rings and radiation belts* cannot be
+Mode 5 accepted while nothing renders them.
+
+One precision, measured 2026-08-22: **Saturn has no radiation belts** in
+the served cache or in `objects_config.json`. Only Jupiter's are served.
+The phrase above reads as though both bodies have them.
 
 **Segment 5 -- Ship the Phase 2 page**, then Phase 3 stars, Phase 4
 exoplanets and Sgr A*, Phase 5 Earth system. Phase 6 dissolves into
 continuous refinement (Section 5).
 
-### You are here -- 2026-08-19, orrery `9ffb9b4`, gallery `ff18d3e`
+### The order of execution -- amended 2026-08-22
+
+The five segments above are the SHAPE: what depends on what. They are
+unchanged. This is the ORDER they are worked in, which is not the same
+thing and which the braid changed.
+
+1. **Segment 3** -- the rendering layer. Two lines in `resolver.py` plus
+   a type, then the client feature renderers (L-154). Saturn on screen,
+   unfingerprinted. This depends on NOTHING: the data is already served.
+2. **Segment 1, sliced to Artifact 2** -- the thirty measured numbers
+   above, and only those.
+3. **Segment 4** -- lock Artifact 2.
+4. **Segment 5** -- ship.
+
+Segment 2 (the transport) is not in that list because it is not on the
+path to Artifact 2 rendering; it is what stops a correct orrery drifting
+from its copy afterwards.
+
+**A consequence to record rather than resolve here:** L-154 is BLOCKED
+in the ledger, and this order unblocks it. The plan carries SEQUENCING
+authority and the ledger carries STATUS authority (L-221), so that is a
+ledger edit, not something this section may assert around.
+
+### You are here -- 2026-08-22, orrery `38923c1`, gallery `493a0bd`
 
 | | State |
 |---|---|
@@ -897,10 +991,10 @@ continuous refinement (Section 5).
 | Phase 1b, serving | DONE. 12 objects served. Saturn's 7 rings, Jupiter's 4 rings and radiation belts, Earth's atmosphere and Van Allen belts all present in `feature_configs.json` with full parameters. |
 | Artifact 1, Earth | LOCKED (`artifact_1_earth_alone.json`). Proved propagation, the harness and the acceptance loop -- on an ORBIT. Exercised no features, which is how the feature path stayed broken unnoticed. |
 | L-207, citation prompt | BUILT August 18. The checker emits `documentation/prompts/citation_review.jsonl` every run -- 53 rows, one per key, carrying what the code cites and what each responder concluded. Closes the last leg of the loop: the citation half of a return now reaches a reader. |
-| Segment 1, orrery | IN PROGRESS. Track 0 has no open rulings. The reconciliation is measured: 110 annotations scored, **8 clean**, 48 SEND BACK, 20 CONVERSATION, 34 noted, 24 not scanner-reachable. The corpus grew and the clean count tripled because L-198 taught the scanner units it could not read -- coverage, not regression. Dispatch machinery COMPLETE as of August 18; 8 of the 9 August-16 blockers closed, the 9th (ordinal context window) deliberately unexercised by the pilot. **The first dispatch went out and returned on August 18**: 23 rows to three models, 69 answered rows, zero format defects, all three trap rows unsprung. Findings at L-209, L-210, L-211; evidence in `documentation/PILOT_CONVERGENCE_20260819.md`. |
+| Segment 1, orrery | IN PROGRESS, and **no longer a gate** (the braid, 2026-08-22). Track 0 has no open rulings. Re-measured at `38923c1` from `WORKSHEET_CHECK.md`: 105 annotations scored, **8 clean**, 47 SEND BACK, 19 CONVERSATION, 31 noted, 22 not scanner-reachable; 292 Tier-1 findings tree-wide. (v18 reported 110/8/48/20/34/24, read on 2026-08-19.) The corpus grew and the clean count tripled because L-198 taught the scanner units it could not read -- coverage, not regression. Dispatch machinery COMPLETE as of August 18; 8 of the 9 August-16 blockers closed, the 9th (ordinal context window) deliberately unexercised by the pilot. **The first dispatch went out and returned on August 18**: 23 rows to three models, 69 answered rows, zero format defects, all three trap rows unsprung. Findings at L-209, L-210, L-211; evidence in `documentation/PILOT_CONVERGENCE_20260819.md`. |
 | Segment 2, transport | DESIGNED, not built. |
-| Segment 3, assembler draw | NOT STARTED. Two lines plus a type, then the renderers. Now the only item anywhere with no ruling outstanding and no dependency on the provenance work. |
-| Segment 4, Artifact 2 | Gated on 1-3. |
+| Segment 3, assembler draw | NOT STARTED, and **now the next work**. Verified at gallery `493a0bd`: `resolver.py:133` still reduces the feature dict to its keys (`tuple(rec.get("features") or ())`), `models.py:91` still types the field `Tuple[str, ...]` to match, and NOTHING in the gallery repo reads `feature_configs.json` -- only the builder writes it. |
+| Segment 4, Artifact 2 | Gated on segment 3 and on segment 1's thirty-number slice. Not on the general audit. |
 
 ### What this section deliberately does not carry
 
@@ -929,13 +1023,17 @@ publicly reachable interactive page.
 
 **L-068 residuals** (L-066, L-016, L-014) -- Desktop cleanup. Not web blockers.
 
-**`palomas_orrery_helpers.py` split** -- [ ] Not started. Separate computation
-from tkinter GUI helpers. Computation the assembler needs:
+**`palomas_orrery_helpers.py` split** -- [x] **DONE 2026-07-15 (L-087).**
+Verified at `38923c1`: the file holds zero tkinter references, and all
+three functions the assembler needs are present --
 `calculate_planet9_position_on_orbit`, `rotate_points2`,
-`calculate_axis_range`. Required before Phase 2.
+`calculate_axis_range`. Residual, not a re-open: three modules in its
+transitive import closure still import tkinter
+(`osculating_cache_manager`, `save_utils`, `shutdown_handler`).
 
-**L-162 -- CENTER_BODY_RADII de-duplication.** [ ] Not started, scoped, now
-with its own ledger entry (previously design-doc only). Promote 15
+**L-162 -- CENTER_BODY_RADII de-duplication.** [x] **DONE 2026-07-29.**
+The description below is preserved as the scope that was executed; it
+read "[ ] Not started" through v18. Promote 15
 remaining bodies (Mercury, Venus, Moon, Mars, Phobos, Saturn, Uranus,
 Neptune, Pluto, Bennu, Eris, Haumea, Makemake, Arrokoth -- Planet 9
 excluded, speculative not measured) to named constants in
@@ -1034,7 +1132,11 @@ to two models independently, Tony compares) replaces the earlier
 "blind-check" framing. Both models see the claims; the discipline is
 independent sourcing, not blindness to the values. Gemini stays in the
 cross-check role alongside Claude. GPT as tiebreaker on divergent claims.
-L-154 unblocks once the scanner work closes.
+L-154 unblocks once the scanner work closes. **Superseded 2026-08-22 by
+the braid (Section 5a):** L-154 is the rendering layer and is now the
+FIRST work, not work waiting on the scanner. Its ledger status still
+reads BLOCKED; the ledger is the status authority, so that edit belongs
+there and not here.
 
 **Decisions locked 2026-07-29 (Tony).** All remaining open forks in the
 cluster are resolved: L-162 naming (plain form) and scope (owns the
@@ -1173,13 +1275,18 @@ which cites this item's coverage-gap pattern as its own precedent.
     **Count correction, 2026-08-11.** Measured at HEAD: 49 assignments, 6
     derived. The plan read 7 of 45. The 45-to-49 gap is exactly the four
     L-179/L-180 additions, so that half was stale rather than wrong. The
-    constructor-call count is a genuine open question rather than a
-    correction: the plan says two, measurement finds one
-    (`HORIZONS_MAX_DATE = datetime(...)`), with no calls nested inside any
-    of the six derived expressions -- and staleness explains a count going
-    UP, not down. Resolve by looking, not by patching. The argument
-    against `ast` is unaffected either way; one non-evaluable constructor
-    is as fatal to it as two.
+    constructor-call count was left as an open question -- the plan said
+    two, that measurement found one -- with the instruction to resolve it
+    by looking, not by patching.
+    **Resolved by looking, 2026-08-22 at `38923c1`: TWO is right.**
+    `constants_new.py` holds 48 top-level assignments; the six arithmetic
+    derivations are unchanged; and TWO assignments contain constructor
+    calls -- `HORIZONS_MAX_DATE = datetime(...)` at line 141, and
+    `stellar_class_labels` at line 902, which holds twelve `dict()` calls
+    inside a list of label specifications. The August 11 count missed the
+    second because it looked only inside the derived expressions. The
+    argument against `ast` is unaffected either way; one non-evaluable
+    constructor is as fatal to it as two.
     Trust argument, recorded because future sessions will re-ask it: the
     builder, the orrery GUI, and every patch script Tony runs already
     come from the same two repos under the same account, so importing one
@@ -1248,8 +1355,13 @@ which cites this item's coverage-gap pattern as its own precedent.
     complete the migration and resolve what surfaces. The recommendation
     below is what Tony ruled on, and it stands as written except for one
     number: it says Jupiter has 5 entries, and the August 10 session
-    counted 4 ring entries. Confirm before the pilot starts, since the
-    pilot is scoped by it.
+    counted 4 ring entries.
+    **Confirmed 2026-08-22: FOUR.** `main_ring`, `halo_ring`,
+    `amalthea_gossamer`, `thebe_gossamer` -- identical in
+    `objects_config.json` and in the served `feature_configs.json` at
+    gallery `493a0bd`. The "5 entries" in the recommendation below is
+    wrong and is left in place because it is a quotation of what was
+    ruled on.
     Fable round 2
     recommends migrating ONE body first (Jupiter, 5 entries) through the
     full Track 0 treatment and building the transport end-to-end against
@@ -1439,7 +1551,10 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
   B′ wheel: 3.9 MB, fully functional for `go.Scatter3d` + `fig.to_json()`.
   Recommended B′ with A retained for frozen pedagogical demos (two-tier model).
   OQ-i through OQ-v for Phase 2 start. (`AB_FORK_ANALYSIS.md`, built on
-  `873c6cd` / `827d0b3`.)
+  `873c6cd` / `827d0b3` -- **that file is in NEITHER repo as of
+  2026-08-22**, and no near-match name exists. The lineage entry stays
+  because the analysis happened and its results are recorded above; the
+  gap is noted rather than the citation quietly dropped.)
 - **B′ cold-start measurement** (July 6, 2026): `measure_plotly.html` deployed,
   timed on iPhone Safari WiFi. Stock plotly from PyPI: 2.1-3.3 s total cold
   start. `import plotly.graph_objects` = 57-59 ms. WASM multiplier ~1:1.
@@ -1941,6 +2056,45 @@ bodies and counted in neither figure. See L-181 and L-190.
   it explicitly did not perform. Now carried in
   provenance-discipline v2.3.
 
+*New in v19 (August 22, 2026):*
+- **The braid: provenance stops being a gate and becomes a per-artifact
+  slice** (Tony's ruling, 2026-08-22). Step one of the critical path had
+  8 clean rows of 105 and 292 Tier-1 findings tree-wide, and a full
+  session on 2026-08-22 went to ONE solar shell that is not in Artifact 2
+  and does not block it. A precondition that does not terminate is not a
+  plan. Priority becomes what the NEXT ARTIFACT renders -- for Artifact 2,
+  thirty measured numbers. The five segments of Section 5a do not move;
+  the order they are worked in does, and segment 3 goes first.
+- **The load-bearing half is the render.** Ring provenance today is text
+  checked against text. Once the assembler draws, a wrong ring radius is
+  something Tony's eyes can catch -- and the resident gate already says
+  the render wins when it disagrees with a code reading. Building the
+  rendering layer is what gives the provenance work something to be
+  checked against. Rings can be drawn without being fingerprinted;
+  BUILDING and LOCKING are separable and v18 conflated them.
+- **A full-document sweep, not a section edit.** Every numeric and status
+  claim in this file was measured against HEAD rather than read forward,
+  and 63 file references were resolved against both repos. Twenty-nine
+  items had moved. The pattern in them is worth more than the list: five
+  ledger items the plan called open had closed (L-087, L-108, L-120,
+  L-151, L-162), one stated REASON was false while its conclusion held
+  (the helpers seam), two size figures disagreed inside one document, and
+  two questions the plan told a future session to resolve by looking were
+  answered by looking.
+- **The skill-version list is deleted, not updated** (Tony's ruling,
+  2026-08-22). The closing block restated ten skill versions by hand and
+  five had drifted, provenance-discipline worst at 1.8 against an actual
+  2.6. It is a second store for a value the protocol's generated Skill
+  Manifest already owns, and Stale Skill = Stop compares against that
+  manifest, not against this document. Fix the producer, not N consumers.
+- **An unmatched code fence removed.** The file carried five ``` markers,
+  an odd count; the last opened a block that never closed.
+- **Two consequences recorded rather than resolved here.** L-225 has no
+  ledger entry although the design note and the session queue both cite
+  it; and L-154 is ledger-BLOCKED while this plan now makes it the first
+  work. The plan carries sequencing authority and the ledger carries
+  status authority (L-221), so both are ledger edits.
+
 ---
 
 ## Section 11 -- Protocol & Skills Review (from Phase 0)
@@ -1958,8 +2112,10 @@ Detailed findings in `PROTOCOL_SKILLS_REVIEW_PHASE0.md`. Summary:
 
 **Skill updates needed:**
 - `gallery-pipeline` v1.1: Option C viewer, consent gate, two-tier model,
-  `interactive.html` conventions, `?exhibit=` parameter.
+  `interactive.html` conventions, `?exhibit=` parameter. **LANDED** -- the
+  skill is at 1.2.
 - Decide: separate `pyodide-interactive` skill or extend `gallery-pipeline`.
+  Still open.
 
 **What worked:** SHA round-trip caught real provenance errors; three-model
 relay produced genuine error correction; "each round simpler" held (feared
@@ -1969,42 +2125,44 @@ prompts.
 
 ---
 
-Base: orrery @ `ee0da47` / gallery @ `61a78c0` (v17; v16 was orrery
-`4b82384` / gallery `e7e8c5e`; v15 was orrery
+Base: orrery @ `38923c1` / gallery @ `493a0bd` (v19, confirmed against
+the live remote; v17-v18 stood at orrery `ee0da47` / gallery `61a78c0`;
+v16 was orrery `4b82384` / gallery `e7e8c5e`; v15 was orrery
 `b59cb72` / gallery `22c947c9`).
 Phase 0 closed. Phase 1a vocabulary delivered. A/B fork resolved: B′.
 Phase 1b builder built, offline-verified (L-098), and Layer 2 live-Horizons
-fully tested and closed -- L-149 and L-118 both DONE; L-150/L-151 still
-decided, not built.
+fully tested and closed -- L-149 and L-118 both DONE; L-151 DONE
+2026-07-27; L-150 still decided, not built.
 Scanner detour: Phase 1 (1a-1f + D8.5) COMPLETE. Phase 2 Piece 1 (D4
 scanner mechanism) COMPLETE -- V2 rung live, zero population. Phase 2
 Track 1 Batch 1 COMPLETE -- three-model competitive cross-check of 5 shell
 modules + Mars, geometry follow-up, Fable consistency audit. Phase 2
-Track 1 Batch 2 NEXT: gas giants (jupiter, saturn, uranus, neptune)
--- and the stated gate before Artifact 2. Push gate for this phase:
+Track 1 Batch 2 (gas giants: jupiter, saturn, uranus, neptune) is NO
+LONGER the gate before Artifact 2 -- the braid narrowed that gate on
+2026-08-22 to the slice Artifact 2 renders (Section 5a). Push gate for
+this phase:
 Tier-1 = 0 ON THE INTERACTIVE BUILD PATH, with the path computed from
 the import graph rather than listed by hand. The gate gets built
 before the batches it scopes.
 New structural items from Fable audit: L-176 (illustrated dimensions in
 hover text), L-177 (Mercury Hill sphere convention), L-178-180
 (Earth/solar inconsistencies), L-181 (single-source-of-truth constant
-layer). Skill updates LANDED 2026-08-05: all ten skills bumped and reconciled
-across repo, manifest, and account install --
-orrery-coding-conventions 1.3, provenance-discipline 1.8,
-ledger-and-session-records 1.5, safe-file-editing 1.3,
-agentic-pre-test 1.2, gallery-pipeline 1.2, gallery-assembler 1.1,
-gallery-cache-builder 1.3, horizons-orbital-mechanics 1.1,
-earth-system-pipeline 1.1. Protocol at v3.37.
-(Versions above current as of 2026-08-11: safe-file-editing 1.2 -> 1.3
-Aug 7; provenance-discipline 1.7 -> 1.8 and gallery-cache-builder
-1.2 -> 1.3 Aug 11; protocol v3.34 -> v3.37 Aug 8-11. All three stores
-reconciled -- repo, manifest, account install.)
-Next after scanner work: write the feature-rendering JS layer
-(ring/shell/belt consumers) -- that's what stands between here and
-attempting Artifact 2 (Jupiter/Saturn) Mode 5. Layer 3 (nightly Task
+layer).
+
+SKILL AND PROTOCOL VERSIONS ARE NOT RESTATED HERE. This block used to
+carry ten of them by hand; five had drifted by 2026-08-22 and nothing
+watched them. The authority is the generated Skill Manifest in
+`PROJECT_INSTRUCTIONS.md`, Part 3 -- rebuilt by `skills_index.py`, and
+the copy Stale Skill = Stop actually compares a loaded skill against.
+Read it there. (Tony's ruling, 2026-08-22: fix the producer, not N
+consumers.)
+NEXT, and no longer waiting on the scanner work (the braid,
+2026-08-22): write the feature-rendering JS layer (ring/shell/belt
+consumers). It is what stands between here and attempting Artifact 2
+(Jupiter/Saturn) Mode 5, it depends on nothing, and the data it needs
+is already served. Layer 3 (nightly Task
 Scheduler) RETIRED 2026-08-10 -- task disabled not deleted, builder run
 manually, first manual build clean 2026-08-11. The known intermittent
 promotion-step glitch (S3a addendum, July 24) is moot while manual and
 returns with the schedule if it ever does.
 Solar System Explorer live at palomasorrery.com/interactive.html.
-```
