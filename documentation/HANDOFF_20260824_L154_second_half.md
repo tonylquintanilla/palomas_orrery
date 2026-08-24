@@ -1,7 +1,7 @@
 # HANDOFF -- 2026-08-24 -- segment 3 closes; Artifact 2 renders
 
 **Orrery: built on `2e40a1ebc3f24b02bc3dc57eeb7f652e61e10be2`, pushed at
-`<NEW_ORRERY_SHA>`**
+`be39d54b3c856a6c1204d3fcbe3184ad7de8ab84`**
 (https://github.com/tonylquintanilla/palomas_orrery, branch main).
 **Gallery: `8ec4f261013f09697d649efd25c8a746bffeff64` to
 `099a85368ce7f467f88a35a65e0580dd97261b37`**
@@ -227,16 +227,25 @@ the center control the Phase 2 spec already names.
 L-231.
 
 **First, three cheap things:**
-1. SHA round trip: orrery `<NEW_ORRERY_SHA>`, gallery `099a8536`.
+1. SHA round trip: orrery `be39d54b` plus the L-233
+   devtool commit that followed it, gallery `099a8536` plus the same.
+   Read both live rather than trusting these.
 2. Confirm the loaded skill versions against the manifest.
 3. Read the ledger before proposing work -- L-231 and L-232 are new since
    the last read.
 
 ---
 
+**Devtool tidy-up followed, after `be39d54b`.** L-233:
+the dashboard's Gallery & Web group gained a Serve Gallery Locally button,
+Inspect Staging learned to ask for its path, and Debug Encke TP came off
+the dashboard with its file left in place. Its own commit SHA is not
+knowable from inside the session that wrote it; the next session's round
+trip settles it.
+
 *Session written August 24, 2026 with Anthropic's Claude Opus 5. Orrery
 built on `2e40a1ebc3f24b02bc3dc57eeb7f652e61e10be2`, pushed at
-`<NEW_ORRERY_SHA>`; gallery
+`be39d54b3c856a6c1204d3fcbe3184ad7de8ab84`; gallery
 `8ec4f261013f09697d649efd25c8a746bffeff64` to
 `099a85368ce7f467f88a35a65e0580dd97261b37`. Gallery SHAs confirmed
 against the live remote; the orrery push SHA is filled in after the

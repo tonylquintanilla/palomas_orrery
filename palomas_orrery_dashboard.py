@@ -153,17 +153,25 @@ LAUNCH_GROUPS = {
         "gallery_json_fixer.py",
         "Fix older gallery JSON files for current viewer",
         GALLERY_TOOLS_DIR),
-        ("Inspect Staging",
-        "inspect_staging.py",
-        "Read-only plain-language report on an existing dry-run staging "
-        "folder. Takes one argument: the staging folder path printed at "
-        "the end of a gallery_cache_builder.py --dry-run.",
+        ("Serve Gallery Locally",
+        "serve_gallery.py",
+        "Serve the gallery repo at http://localhost:8000 and open the "
+        "assembler dev page, where Artifact 1 and the Artifact 2 candidate "
+        "render in the browser. The page fetches the assembler files and "
+        "the served cache, and browsers refuse fetch() from a file:// "
+        "page, so it cannot be opened by double-clicking the HTML. Runs in "
+        "its own console and keeps running -- one line per request is the "
+        "server working, not a hang. Ctrl+C or close the window to stop.",
         GALLERY_TOOLS_DIR,
         True),
-        ("Debug Encke TP",
-        "debug_encke_tp.py",
-        "Run the exact live Horizons query the builder's fetch_solution_tp() "
-        "makes for Encke and print the full raw response. No arguments.",
+        ("Inspect Staging",
+        "inspect_staging.py",
+        "Plain-language report on a dry-run staging folder: real dates "
+        "instead of Julian days, TP values, and point counts per object, "
+        "so a dry-run can be judged without opening the raw JSON. "
+        "Read-only -- fetches nothing, changes nothing, promotes nothing. "
+        "Opens a console and asks for the staging folder path, which the "
+        "builder prints on the last line of a --dry-run.",
         GALLERY_TOOLS_DIR,
         True),
         ("Gallery Cleanup",

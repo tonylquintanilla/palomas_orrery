@@ -258,7 +258,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*135 live items; 121 need attention (`!`); 134 RICE-scored; 92 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*135 live items; 121 need attention (`!`); 134 RICE-scored; 93 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -497,6 +497,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-075 | KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine) | DONE | 4.3 | 2026-06-30 |
 |  | L-076 | Earth System shared module (earth_system_common) + 3+5 generalized to food | DONE | 4.3 | 2026-06-30 |
 |  | L-214 | The request builder drops the comment lines that matter | DONE | 3.8 | 2026-08-21 |
+|  | L-233 | Three dashboard buttons: one fixed, one added, one retired | DONE | 3.8 | 2026-08-24 |
 |  | L-106 | Gallery-cache backup + gitignore discipline | DONE | 3.6 | 2026-07-12 |
 |  | L-115 | Skills v1.1 batch: accuracy fixes + two seed blocks (Fable Mode 7) | DONE | 3.6 | 2026-07-12 |
 |  | L-097 | skills_index.py -- Skill Manifest auto-generation (process/tooling) | DONE | 3.2 | 2026-07-04 |
@@ -7107,6 +7108,60 @@ Stack"; LEDGER_CONSOLIDATED.md "RICE scoring -- prioritization for
 planning"; L-220 (Stamp What You Change); L-215 (the RICE tail
 measurement); L-214 (the session this surfaced in); L-224 (the first
 item sequenced under this ruling).
+
+#### [L-233] Three dashboard buttons: one fixed, one added, one retired
+<!-- L:233 status:DONE upd:2026-08-24 section:C flag: rice:2/2/95/1 -->
+- **Tony asked for a review of four Gallery & Web buttons, 2026-08-24.**
+  Two earned their place unchanged, one had an interface it could not
+  satisfy, and one had outlived the question it was built to answer.
+- **Gallery Builder Offline Tests -- kept, and the strongest of the
+  four.** Run this session: 144 checks, zero failures, no network. It
+  exercises first-build, the nightly shrink gate and the Guard v2
+  monitor path. Worth noting for later that a button someone has to
+  remember is weaker than a checker in the maintenance suite; moving it
+  there is not done and is not tracked here.
+- **Gallery Cleanup -- kept.** Orphan JSON and KMZ accumulate for as
+  long as curation continues, and it confirms before deleting.
+- **Inspect Staging -- the tool was right, the BUTTON could not work.**
+  `main()` required `len(sys.argv) == 2` and the dashboard launches with
+  no argument, so clicking it could only ever print usage. Fixed in the
+  TOOL rather than by special-casing the dashboard, so the VS Code Run
+  button gets the same benefit: it now asks for the staging folder, and
+  a pasted Windows path keeps working because surrounding quotes are
+  stripped. A path on the command line still works unchanged and a
+  flag-shaped argument is still refused.
+- **The description was the other half.** It read "Takes one argument,"
+  which described the tool correctly and the button misleadingly. The
+  new text says what the report contains and that it asks for the path.
+- **Debug Encke TP -- retired from the dashboard, file kept.** It
+  existed to answer one question: which Horizons identifier form
+  resolves Encke's TP. Closed. `objects_config.json` carries
+  `horizons_id: 90000091`, `id_type: smallbody`, the same pattern as
+  Halley's `90000030`, which is the fix the tool's own docstring reasons
+  its way to. It was also the only button on the dashboard that made a
+  live Horizons call, so it was the only one that could fail for reasons
+  unrelated to this code. The file stays as the record of the
+  investigation; deleting it would lose the reasoning.
+- **Serve Gallery Locally -- added.** `tools/serve_gallery.py` serves the
+  gallery repo root at `localhost:8000` and opens the assembler dev
+  page. It serves the ROOT rather than `gallery/` because the page
+  reaches up to `../data/solar-system/`; served from inside `gallery/`
+  the page loads and every fetch 404s, which looks like a broken page
+  rather than a wrong working directory. It refuses to start when the
+  served cache is absent and says which files are missing, and when the
+  port is already taken it opens the browser against the running server
+  instead of failing on a socket error. Both guards were exercised.
+- **A batch-file draft was superseded before it shipped.** The dashboard
+  launches Python scripts, not `.bat` files, so a `.bat` would have been
+  a second implementation of the same checks in a language the dashboard
+  cannot call. One implementation, in Python.
+- **Ref:** `palomas_orrery_dashboard.py` (Gallery & Web group); gallery
+  `tools/serve_gallery.py`, `tools/inspect_staging.py`,
+  `tools/debug_encke_tp.py`, `tools/gallery_cleanup.py`,
+  `tools/test_gallery_cache_builder_offline.py`;
+  `patch_L233_1_gallery_devtools.py` (gallery),
+  `patch_L233_2_dashboard_and_handoff.py` (orrery); L-154; L-188 (the
+  maintenance runner).
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
