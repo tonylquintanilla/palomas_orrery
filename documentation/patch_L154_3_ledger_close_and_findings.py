@@ -28,6 +28,13 @@ Both new entries carry a proposed RICE tagged `**Note:**` so neither reads
 as a ruling. Re-run `ledger_index.py` after this patch: the INDEX zone is
 generated and this patch deliberately does not touch it.
 
+LINE ENDINGS. The first cut of this patch matched anchors against the RAW
+decoded bytes. Its fingerprint gate normalizes CRLF, so a Windows working
+copy passed the gate and then failed every MULTI-LINE anchor, because the
+anchors are written with \n. The sandbox it was tested in had LF, so the
+test could not fail. This version normalizes to \n for all matching and
+editing, then writes back in whatever style the file already used.
+
 Written August 2026 with Anthropic's Claude Opus 5 (L-154).
 """
 
@@ -253,7 +260,10 @@ def main():
             % (LEDGER, EXPECT_MD5, got)
         )
 
-    text = original.decode("utf-8")
+    # Match and edit against LF-normalized text; remember the original style
+    # so the file is written back the way it was found.
+    was_crlf = b"\r\n" in original
+    text = norm(original).decode("utf-8")
     before_nonascii = sum(1 for ch in text if ord(ch) > 127)
 
     for i, (old, new) in enumerate(EDITS, start=1):
@@ -280,23 +290,31 @@ def main():
     if text.count("<!-- L:154 status:DONE") != 1:
         raise SystemExit("ABORT: L-154's DONE line did not land exactly once.")
     # The generated INDEX zone must be untouched -- ledger_index.py owns it.
-    start = original.decode("utf-8").index("<!-- INDEX:START")
-    end = original.decode("utf-8").index("<!-- INDEX:END")
-    if original.decode("utf-8")[start:end] not in text:
+    original_text = norm(original).decode("utf-8")
+    start = original_text.index("<!-- INDEX:START")
+    end = original_text.index("<!-- INDEX:END")
+    if original_text[start:end] not in text:
         raise SystemExit(
             "ABORT: the generated INDEX zone changed. This patch must not "
             "touch it; ledger_index.py regenerates it."
         )
 
+    out = text.encode("utf-8")
+    if was_crlf:
+        out = out.replace(b"\n", b"\r\n")
     with open(LEDGER, "wb") as fh:
-        fh.write(text.encode("utf-8"))
+        fh.write(out)
 
     with open(LEDGER, "rb") as fh:
         on_disk = fh.read()
     if md5(on_disk) == EXPECT_MD5:
         raise SystemExit("ABORT: the ledger still fingerprints as the pre-edit "
                          "file. The write did not land.")
-    disk_text = on_disk.decode("utf-8")
+    if was_crlf and b"\r\n" not in on_disk:
+        raise SystemExit("ABORT: the file was CRLF and was written as LF.")
+    if not was_crlf and b"\r\n" in on_disk:
+        raise SystemExit("ABORT: the file was LF and was written with CRLF.")
+    disk_text = norm(on_disk).decode("utf-8")
     for probe in ("[L-231]", "[L-232]", "Mode 5 PASSED 2026-08-24",
                   "abbd01094852b57f"):
         if probe not in disk_text:
@@ -306,6 +324,8 @@ def main():
     print("  %s: %d edits, %d bytes, %d lines"
           % (LEDGER, len(EDITS), len(on_disk), disk_text.count("\n") + 1))
     print("  non-ASCII %d -> %d" % (before_nonascii, after_nonascii))
+    print("  line endings: %s on disk, written back the same way"
+          % ("CRLF" if was_crlf else "LF"))
     print("  L-154 -> DONE; L-231 and L-232 opened (section A)")
     print("  INDEX zone untouched, as it must be")
     print("")

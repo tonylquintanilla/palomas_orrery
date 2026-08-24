@@ -258,7 +258,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*134 live items; 120 need attention (`!`); 133 RICE-scored; 91 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*135 live items; 121 need attention (`!`); 134 RICE-scored; 92 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -279,6 +279,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-08-19 |
 | ! | L-224 | Streamer belt: one warped band, not a sphere | OPEN | 3.8 | 2026-08-22 |
 |  | L-230 | A skill bump does not reach the protocol's version history | DEFERRED | 3.8 | 2026-08-23 |
+| ! | L-232 | The gallery's served constants carry sources that nothing checks | OPEN | 3.8 | 2026-08-24 |
 | ! | L-227 | Streamer band hover rendered as one 378-character line | OPEN | 3.8 | 2026-08-23 |
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
 | ! | L-210 | Pilot citation findings -- four rows in constants_new.py | OPEN | 3.6 | 2026-08-21 |
@@ -294,6 +295,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
 | ! | L-218 | 22 Cross-checked lines attach to no unit | OPEN | 2.1 | 2026-08-19 |
+| ! | L-231 | Radiation belts are drawn in the ecliptic; the magnetic tilt is an unbuilt intent | OPEN | 1.8 | 2026-08-24 |
 | ! | L-187 | info_dictionary numeric-overlap enumeration | OPEN | 1.8 | 2026-08-07 |
 | ! | L-228 | Alfven surface latitude ranges: source them or omit them | OPEN [Tony] | 1.8 | 2026-08-23 |
 |  | L-194 | Text-only assertions -- claims the scanner cannot see | DEFERRED | 1.4 | 2026-08-15 |
@@ -441,7 +443,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-166 | F1b: per-object trust enforcement + soft-edge trust UX (resolver/client consumption of served trust blocks) | OPEN | 2.4 | 2026-07-28 |
 | ! | L-121 | Slim plotly wheel not deployed anywhere (F4, ships-nothing gate) | OPEN | 2.2 | 2026-07-15 |
 | ! | L-150 | Multi-orbit trust model for near-equal-mass binaries (Pluto/Charon and future onboards) | OPEN | 2.2 | 2026-07-20 |
-| ! | L-154 | Gallery feature-rendering JS layer (shells, rings, radiation belts -- Artifact 2 prerequisite) | OPEN | 2.1 | 2026-08-23 |
 | ! | L-173 | shell_configs.py -- 8 body blocks missing... source citations entirely (found during 1c predesign measurement) | OPEN | 2.1 | 2026-07-30 |
 | ! | L-122 | Stray data/solar-system.prev_old/ committed to the repo (F6, non-blocking) | OPEN | 1.9 | 2026-07-15 |
 | ! | L-123 | Object info card -- serve info_dictionary.py as JSON, click-to-open (rides with F1) | OPEN | 1.8 | 2026-07-15 |
@@ -559,6 +560,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-088 | Gallery integration test (Phase 0) | DONE | 4.0 | 2026-07-06 |
 |  | L-099 | Solar System Explorer interactive exhibit | DONE | 3.2 | 2026-07-06 |
 |  | L-174 | Citation level mismatch -- citations pitched one block too far out | DONE | 2.7 | 2026-07-30 |
+|  | L-154 | Gallery feature-rendering JS layer (shells, rings, radiation belts -- Artifact 2 prerequisite) | DONE | 2.1 | 2026-08-24 |
 |  | L-087 | palomas_orrery_helpers.py computation/GUI split | DONE | 2.0 | 2026-07-15 |
 |  | L-152 | ledger-and-session-records skill bumped to 1.2 -- retroactive ledger entry | DONE | 1.9 | 2026-07-20 |
 |  | L-148 | Staging folder names carry no object identifier -- hard to locate manually (gallery-cache-builder) | DONE | 1.8 | 2026-07-20 |
@@ -3497,6 +3499,90 @@ separation for near-equal radii, hover AU convention).
   `skills/ledger-and-session-records/SKILL.md` v1.9, Protocol and
   Skills Change Log; L-188 (the maintenance runner); L-226, L-227 (the
   two bumps whose absence from the history exposed this).
+
+#### [L-231] Radiation belts are drawn in the ecliptic; the magnetic tilt is an unbuilt intent
+<!-- L:231 status:OPEN upd:2026-08-24 section:A flag: rice:2/2/90/2 -->
+- **Found while porting the belts to the gallery, 2026-08-24, and the
+  first reading of it was WRONG.** Claude reported it as L-229's defect
+  class in two more places: `create_earth_radiation_belts` and Jupiter's
+  belt builder each construct their points in the ecliptic XY plane with
+  a `sin(2*theta)` vertical wobble and never call
+  `orient_to_planet_pole`, while each carries a comment saying the belt
+  is built around the planet's rotational axis.
+- **Tony's correction, same day.** The comment is not a false claim about
+  what the code does. It records an intent that was never built -- adding
+  the small magnetic axial tilt these planets actually have. So this is
+  an unbuilt feature with a breadcrumb, not a frame error.
+- **Why the distinction matters and is not pedantry.** L-229 is a
+  MISTAKE: the streamer band's own docstring said body frame and the
+  caller rotated nothing, so the render contradicted the data. This is a
+  PLACEHOLDER: the current drawing is a defensible approximation and the
+  comment marks where the refinement goes. Filing the second as the first
+  would have put a correct-enough render into a defect queue.
+- **The right rotation is not the pole.** Belts follow the MAGNETIC
+  dipole, so the eventual transform is the dipole tilt applied on top of
+  the spin pole, not the spin pole alone. Approximate magnitudes: Earth
+  about 11 deg from the rotation axis, Jupiter about 10 deg, Saturn under
+  0.1 deg -- which is why Saturn is the one body where using the pole
+  alone (as `saturn_visualization_shells.py` already does) is very nearly
+  right. Those figures are orientation for a future design round, NOT
+  citable values; sourcing them is part of the build.
+- **Scope, when built: BOTH instruments.** The gallery's
+  `feature_renderers.js` deliberately matches the orrery here -- scene
+  equivalence -- so a change to the orrery's belt orientation must be
+  carried to the renderer in the same pass or the two will disagree.
+  The renderer already receives `orientation` for Jupiter and consumes it
+  only for rings.
+- **Note:** RICE 2/2/90/2 -> 1.8 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect, then re-run
+  `ledger_index.py`.
+- **Ref:** `earth_visualization_shells.py` (belt builder);
+  `jupiter_visualization_shells.py` (belt builder);
+  `saturn_visualization_shells.py` (belts DO use the pole);
+  `idealized_orbits.py::orient_to_planet_pole`; gallery
+  `gallery/feature_renderers.js::renderBelts`; L-229 (the genuine frame
+  defect this was mistaken for); L-154.
+
+#### [L-232] The gallery's served constants carry sources that nothing checks
+<!-- L:232 status:OPEN upd:2026-08-24 section:A flag: rice:3/3/85/2 -->
+- **Opened 2026-08-24, as a consequence of Tony's option-(a) ruling.**
+  Two render inputs the served cache lacked were added to the gallery's
+  `data/objects_config.json`: the IAU pole for Jupiter and Saturn, and
+  `planet_radius` for Earth and Jupiter. Both are MEASURED values, both
+  carry a `source` field and an `orrery_constant` field naming where they
+  were copied from.
+- **They are the FIRST `source` fields in that file**, and they sit in a
+  store no checker reads. `provenance_scanner.py` scans Python. The
+  worksheet checker scans Python. Nothing reads JSON in the gallery repo.
+  So a source line there is a claim with no gate behind it -- exactly the
+  shape the resident gate warns about, one repo over.
+- **The value was still worth adding.** The alternative on the table was
+  a JavaScript table, which is a store the transport does not target
+  either AND is invisible to the pinning design. Putting the copy where
+  segment 2 will land is the version that converges.
+- **Earth's radius now appears TWICE in that file**, once in
+  `atmosphere_shell` and once in `van_allen_belts`, because a shared
+  sibling would have meant a third top-level feature key on Earth and
+  L-080's fingerprint hashes that list. The duplication is deliberate and
+  is the transport's to collapse, not a hand edit's.
+- **Not a blocker for Artifact 2.** The artifact's thirty measured
+  numbers are the ring and belt values, which live in the orrery and are
+  in the audit already. These five are drawing inputs that arrived with
+  their sources attached on the day they were written, which is the
+  strongest position a value ever occupies -- the risk is drift later,
+  not error now.
+- **Two candidate shapes, neither designed:** teach the worksheet
+  checker to read `objects_config.json` as a second corpus, or make the
+  transport (segment 2) verify each `orrery_constant` pointer resolves
+  and matches. The second is better if it lands, because it fixes the
+  producer.
+- **Note:** RICE 3/3/85/2 -> 3.8 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect, then re-run
+  `ledger_index.py`.
+- **Ref:** gallery `data/objects_config.json`;
+  `provenance_scanner.py`; `worksheet_keys.py`; L-155 (pinning);
+  L-181 (single home for feature constants); L-154; master plan
+  Section 7 decisions 12 and 18.
 
 ## PENDING ACTION (Tony-side)
 
@@ -8418,106 +8504,6 @@ checks one global bound regardless of scene composition -- same limitation noted
 **Ref:** L-149 (sibling, surfaced during its design discussion); objects_config.json
 (pluto/charon, barycentric-only today); "Pluto/Charon two-view" golden artifact.
 
-#### [L-154] Gallery feature-rendering JS layer (shells, rings, radiation belts -- Artifact 2 prerequisite)
-<!-- L:154 status:OPEN upd:2026-08-23 section:W.Active flag: rice:3/3/70/3 -->
-- **RE-VERIFIED 2026-08-07 at gallery HEAD `33fc7d6`, and the block is
-  reclassified.** `gallery/assembler/resolver.py` line 133 STILL reads
-  `features = tuple(rec.get("features") or ())`. Failure reproduced
-  directly this session: `{'ring_system': {'main_ring':
-  {'inner_radius_km': 122500}}}` collapses to `('ring_system',)`.
-  Third independent verification (2026-07-27 Fable, 2026-07-28 Sonnet,
-  2026-08-07 Opus 5), each at a different HEAD.
-- **Why the reclassification.** This entry is carried as blocked on the
-  L-155-162 provenance cluster. That is true but it is not the NEAREST
-  blocker, and reading it as the only one is misleading. Even with a
-  perfect transport and perfectly sourced values, the resolver discards
-  every parameter one step before anything could draw them. The
-  resolver fix is small, independent of ALL provenance work, and can
-  proceed at any time. Confirmed the same day: nothing on the client
-  reads `feature_configs.json` at all -- zero references in any JS or
-  HTML. The file is written nightly into the cache and no code reads
-  it.
-- Note the surfaces are distinct: `index.html` is the STATIC curated
-  gallery and never needed feature data; `interactive.html` is the
-  assembler surface and is the one that does. Only the Artifact 1 test
-  harness reads the cache today.
-- **What.** The client-side JS that reads `ring_system`, `van_allen_belts`,
-  `atmosphere_shell`, and `radiation_belts` out of the served cache and
-  actually draws them. `assemble.py` already resolves and reports the
-  feature dispatch as data; nothing draws it yet.
-- **Blocked on:** the L-155-162 provenance-scoring cluster below (data/
-  scoring settled before this gets built, not the other way around).
-- **SUPERSEDED 2026-08-23 -- the bullet above is reversed, and left in
-  place because it was the standing rule for six weeks.** Tony's
-  ruling of 2026-08-22 (the braid): provenance stops being a GATE and
-  becomes a per-artifact slice, and this item is the FIRST work rather
-  than the last. Status moved BLOCKED -> OPEN the same day. Three
-  reasons, in the order they carry weight. (a) Nothing in the
-  provenance cluster changes a line of this item's code -- the
-  resolver discards parameters regardless of whether the values behind
-  them are sourced. (b) A ring drawn from an unsourced number freezes
-  nothing; only a FINGERPRINTED artifact does, so the sourcing
-  requirement belongs to L-080/Artifact 2 and not here. (c) Until this
-  is built, ring provenance is text checked against text -- once it
-  draws, a wrong radius becomes something Tony's eyes can catch, which
-  is this project's own ground truth. Verified again at gallery
-  `02aefc0` on 2026-08-23: `resolver.py` line 133 still reads
-  `tuple(rec.get("features") or ())`, `models.py` line 91 still types
-  the field `Tuple[str, ...]` to match, and nothing in the gallery repo
-  reads `feature_configs.json` -- only the builder writes it. Fourth
-  independent verification, fourth different HEAD.
-  **Ref:** `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md` Section
-  5a, "The order of execution" (v19); `documentation/DESIGN_NOTE_20260822_braid_and_citation_kind.md`
-  Section 1; L-221 (sequencing authority).
-- **Correction (2026-07-27, Fable 5 review + Sonnet 5 independent
-  verification, both against live HEAD):**
-  `documentation/HANDOFF_gallery_feature_layer_L154_resume.md` claimed the
-  resolver bug (params dropped by `tuple(dict)` in `resolver.py`) was
-  "fixed and settled." It is NOT -- `resolver.py` line 133 still reads
-  `tuple(rec.get("features") or ())`, and `objects_config.json`'s
-  `features` values are genuinely nested dicts (Earth's atmosphere
-  fractions, Jupiter's ring radii, all present), so the line still drops
-  every parameter to bare category-name keys. The resume handoff is
-  corrected in place (Part 3 below) -- this entry is the ledger-side
-  record so the claim can't resurface from a stale copy of that handoff.
-**Claude:** [re-verified 2026-07-28, live HEAD, independently of the
-2026-07-27 correction above] Confirmed still accurate, not stale.
-`gallery/assembler/resolver.py` line 133 is still exactly
-`features = tuple(rec.get("features") or ())` -- reproduced the failure
-mode directly: `tuple()` on a dict yields only its keys, so a real nested
-value like `{'ring_system': {'main_ring': {'inner_radius_km': 122500}}}`
-collapses to `('ring_system',)`, every parameter lost. Also checked
-whether the blocking cluster had cleared since: L-155 through L-162 are
-still open or pending-gate, L-156 touched as recently as today
-(2026-07-28). BLOCKED remains the correct status on both counts.
-- **Open design questions once unblocked:** geometry-building approach
-  (port the orrery's shell/belt/ring math into JS literally, or design
-  fresh JS-native trace builders -- "knowledge transfers, not code");
-  legend behavior (shared legendgroup vs. independently-toggleable rows);
-  sequencing (validate on Earth's already-closed Mode-5 harness first, or
-  build straight into Jupiter/Saturn since that's what's gating Artifact 2).
-**Gap:** wait on the cluster below; land the one-line resolver fix in the
-first gallery session that resumes this item -- before anything else in
-the resume handoff is acted on; then a design session for the three open
-questions above; then build (Opus 5) + Mode 5 acceptance.
-**Note (2026-07-29, Tony's explicit sequencing call):** "the cluster
-below" means the WHOLE thing, Phase 4 included -- not just Phases 1-3.
-Once the scanner build ships, this item's own technical blocker (the
-resolver bug, the pinning engine) is gone, and it would be defensible to
-call L-154 "unblocked" at that point. Tony's call is stricter than
-defensible: no interactive/Artifact-2 work resumes until both Gemini
-worksheets (L-157, then L-161+L-078a) are also closed. Deliberate, not an
-oversight -- avoid interleaving data-integrity work with visual-feature
-work; finish one before starting the other. Do not read "Phase 3 shipped"
-as a green light on its own.
-**Ref:** `assemble.py`, `resolver.py`, `render_objects.py`, `presentation.py`;
-`data/solar-system/feature_configs.json`; `data/objects_config.json`;
-`documentation/HANDOFF_gallery_feature_layer_L154_resume.md`;
-`documentation/REVIEW_provenance_refactor_cluster_scoping.md` (section 5);
-L-149/L-150/L-151 (M2 track); L-155-L-162.
-
----
-
 #### [L-155] Cross-repo constants/geometry pinning checks -- built INTO provenance_scanner.py, not a standalone script
 <!-- L:155 status:PENDING-GATE upd:2026-07-27 section:W.Active flag: rice:3/4/75/2 -->
 - **What.** Pinning-test logic ("did this specific value drift," binary
@@ -10037,6 +10023,179 @@ find_shadowing_block, _record_deep_citations); jupiter_visualization_shells.py
 planet_visualization_utilities.py (PLANET_ROTATION); idealized_orbits.py
 (planet_poles); test_citation_inheritance.py; L-156 Gap item 6; L-173;
 documentation/AS_BUILT_L156_phase1c.md.
+
+#### [L-154] Gallery feature-rendering JS layer (shells, rings, radiation belts -- Artifact 2 prerequisite)
+<!-- L:154 status:DONE upd:2026-08-24 section:W.Done flag: rice:3/3/70/3 -->
+- **DONE 2026-08-24. Both halves shipped and Mode 5 passed.** The
+  close block is at the end of this entry; everything above it is the
+  record of the item while it was open, left as written.
+- **RE-VERIFIED 2026-08-07 at gallery HEAD `33fc7d6`, and the block is
+  reclassified.** `gallery/assembler/resolver.py` line 133 STILL reads
+  `features = tuple(rec.get("features") or ())`. Failure reproduced
+  directly this session: `{'ring_system': {'main_ring':
+  {'inner_radius_km': 122500}}}` collapses to `('ring_system',)`.
+  Third independent verification (2026-07-27 Fable, 2026-07-28 Sonnet,
+  2026-08-07 Opus 5), each at a different HEAD.
+- **Why the reclassification.** This entry is carried as blocked on the
+  L-155-162 provenance cluster. That is true but it is not the NEAREST
+  blocker, and reading it as the only one is misleading. Even with a
+  perfect transport and perfectly sourced values, the resolver discards
+  every parameter one step before anything could draw them. The
+  resolver fix is small, independent of ALL provenance work, and can
+  proceed at any time. Confirmed the same day: nothing on the client
+  reads `feature_configs.json` at all -- zero references in any JS or
+  HTML. The file is written nightly into the cache and no code reads
+  it.
+- Note the surfaces are distinct: `index.html` is the STATIC curated
+  gallery and never needed feature data; `interactive.html` is the
+  assembler surface and is the one that does. Only the Artifact 1 test
+  harness reads the cache today.
+- **What.** The client-side JS that reads `ring_system`, `van_allen_belts`,
+  `atmosphere_shell`, and `radiation_belts` out of the served cache and
+  actually draws them. `assemble.py` already resolves and reports the
+  feature dispatch as data; nothing draws it yet.
+- **Blocked on:** the L-155-162 provenance-scoring cluster below (data/
+  scoring settled before this gets built, not the other way around).
+- **SUPERSEDED 2026-08-23 -- the bullet above is reversed, and left in
+  place because it was the standing rule for six weeks.** Tony's
+  ruling of 2026-08-22 (the braid): provenance stops being a GATE and
+  becomes a per-artifact slice, and this item is the FIRST work rather
+  than the last. Status moved BLOCKED -> OPEN the same day. Three
+  reasons, in the order they carry weight. (a) Nothing in the
+  provenance cluster changes a line of this item's code -- the
+  resolver discards parameters regardless of whether the values behind
+  them are sourced. (b) A ring drawn from an unsourced number freezes
+  nothing; only a FINGERPRINTED artifact does, so the sourcing
+  requirement belongs to L-080/Artifact 2 and not here. (c) Until this
+  is built, ring provenance is text checked against text -- once it
+  draws, a wrong radius becomes something Tony's eyes can catch, which
+  is this project's own ground truth. Verified again at gallery
+  `02aefc0` on 2026-08-23: `resolver.py` line 133 still reads
+  `tuple(rec.get("features") or ())`, `models.py` line 91 still types
+  the field `Tuple[str, ...]` to match, and nothing in the gallery repo
+  reads `feature_configs.json` -- only the builder writes it. Fourth
+  independent verification, fourth different HEAD.
+  **Ref:** `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md` Section
+  5a, "The order of execution" (v19); `documentation/DESIGN_NOTE_20260822_braid_and_citation_kind.md`
+  Section 1; L-221 (sequencing authority).
+- **Correction (2026-07-27, Fable 5 review + Sonnet 5 independent
+  verification, both against live HEAD):**
+  `documentation/HANDOFF_gallery_feature_layer_L154_resume.md` claimed the
+  resolver bug (params dropped by `tuple(dict)` in `resolver.py`) was
+  "fixed and settled." It is NOT -- `resolver.py` line 133 still reads
+  `tuple(rec.get("features") or ())`, and `objects_config.json`'s
+  `features` values are genuinely nested dicts (Earth's atmosphere
+  fractions, Jupiter's ring radii, all present), so the line still drops
+  every parameter to bare category-name keys. The resume handoff is
+  corrected in place (Part 3 below) -- this entry is the ledger-side
+  record so the claim can't resurface from a stale copy of that handoff.
+**Claude:** [re-verified 2026-07-28, live HEAD, independently of the
+2026-07-27 correction above] Confirmed still accurate, not stale.
+`gallery/assembler/resolver.py` line 133 is still exactly
+`features = tuple(rec.get("features") or ())` -- reproduced the failure
+mode directly: `tuple()` on a dict yields only its keys, so a real nested
+value like `{'ring_system': {'main_ring': {'inner_radius_km': 122500}}}`
+collapses to `('ring_system',)`, every parameter lost. Also checked
+whether the blocking cluster had cleared since: L-155 through L-162 are
+still open or pending-gate, L-156 touched as recently as today
+(2026-07-28). BLOCKED remains the correct status on both counts.
+- **Open design questions once unblocked:** geometry-building approach
+  (port the orrery's shell/belt/ring math into JS literally, or design
+  fresh JS-native trace builders -- "knowledge transfers, not code");
+  legend behavior (shared legendgroup vs. independently-toggleable rows);
+  sequencing (validate on Earth's already-closed Mode-5 harness first, or
+  build straight into Jupiter/Saturn since that's what's gating Artifact 2).
+**Gap:** wait on the cluster below; land the one-line resolver fix in the
+first gallery session that resumes this item -- before anything else in
+the resume handoff is acted on; then a design session for the three open
+questions above; then build (Opus 5) + Mode 5 acceptance.
+**Note (2026-07-29, Tony's explicit sequencing call):** "the cluster
+below" means the WHOLE thing, Phase 4 included -- not just Phases 1-3.
+Once the scanner build ships, this item's own technical blocker (the
+resolver bug, the pinning engine) is gone, and it would be defensible to
+call L-154 "unblocked" at that point. Tony's call is stricter than
+defensible: no interactive/Artifact-2 work resumes until both Gemini
+worksheets (L-157, then L-161+L-078a) are also closed. Deliberate, not an
+oversight -- avoid interleaving data-integrity work with visual-feature
+work; finish one before starting the other. Do not read "Phase 3 shipped"
+as a green light on its own.
+**SUPERSEDED, and the supersession is the point.** The 2026-07-29 note
+above makes this item wait on the whole provenance cluster. Tony's braid
+ruling of 2026-08-22 replaced that: provenance stops being a GATE and
+becomes a per-artifact slice, and this item moves to the FRONT of the
+order rather than the back. The note is kept because a ruling that was
+later changed is part of the record; it is no longer in force.
+
+**CLOSE BLOCK -- 2026-08-24.**
+- **First half, gallery `8ec4f261` (2026-08-23).** `resolver.py` kept the
+  feature mapping instead of reducing it to a tuple of category names, and
+  populated `FeatureRequest.params`. The field had been declared in
+  `models.py` and emitted by `assemble.py` since the beginning and had
+  never been filled: the pipe was built, wired, and shipping empty dicts.
+- **Second half, gallery `099a8536` (2026-08-24)**, via
+  `patch_L154_2_feature_render_layer.py`. `gallery/feature_renderers.js`
+  (536 lines) draws ring systems, radiation belts and atmosphere shells
+  from the report; `gallery/solar_system_earth_test2.html` gained a scene
+  selector, a `Frame on` axis control, and the call into the renderers.
+- **Two render inputs were missing from the served cache and were added
+  to `data/objects_config.json`** under Tony's ruling of 2026-08-24
+  (option (a) of three: put the copy in the store the project already
+  watches, not in a JavaScript table nothing scans). The IAU pole for
+  Jupiter and Saturn as a new `orientation` feature key, and
+  `planet_radius` on the three feature nodes whose numbers are expressed
+  in multiples of it. See L-232.
+- **Earth deliberately gained NO new feature key.** The L-080 fingerprint
+  hashes the sorted set of feature keys, so a third key on Earth would
+  have broken Artifact 1's lock -- for a rotation the orrery does not
+  apply to Earth's belts in the first place (L-231). The patch asserts
+  Earth's key list rather than trusting the reasoning.
+- **Measured, not asserted.** Ring plane normals fitted from three drawn
+  points by cross product, independent of the renderer's own basis
+  function: Saturn 28.049 deg from the ecliptic, Jupiter 2.222 deg, both
+  matching `idealized_orbits.py`'s pole table and obliquity rotation
+  computed separately. A Ring inner/outer radii read back off the drawn
+  points at 122,340 and 136,800 km. Jupiter's inner belt at 1.750 R_J.
+  Earth's lower atmosphere at 1.0500 R_E.
+- **28.05 deg is correct and is not 26.73.** The familiar figure is
+  Saturn's tilt against its own ORBIT; these plots are ecliptic-framed.
+  Recorded here because a future Mode 5 will otherwise flag a correct
+  render as wrong.
+- **Mode 5 PASSED 2026-08-24** (Tony), on Earth alone, Jupiter + Saturn
+  whole-scene, and framed on each of Jupiter and Saturn. Browser trace
+  counts matched the offline harness exactly -- 8 traces from 2 requests
+  for Earth, 28 from 5 for Jupiter + Saturn -- and the framing half-spans
+  agreed to three figures (Jupiter 0.00358 AU, Saturn 0.00384 AU, Earth
+  0.000243 AU).
+- **Artifact 1's lock was verified IN THE BROWSER**, not only in Python:
+  `abbd01094852b57f` recomputed through Pyodide against the rebuilt cache.
+  That is a stronger check than the container test, because it proves the
+  browser path produces the same scene spec.
+- **One visual oddity, checked and NOT a defect.** Saturn's seven ring
+  info markers fall along one ray at increasing radii, because each sits
+  at the first point of its own ring. `create_saturn_ring_system` does
+  exactly the same thing, and the comment there records that the May 2026
+  Neptune 2C fix was specifically to stop them collapsing onto one
+  another. Scene-equivalent. Changing it is a change to both instruments.
+- **Not done here, and next:** Artifact 2's thirty-number provenance
+  slice, then the lock (segment 4), then the page (segment 5). The
+  renderers draw from numbers that are not yet sourced, which v19 allows
+  explicitly -- drawing is not locking.
+- **Patches:** `patch_L154_1_resolver_feature_params.py`,
+  `patch_L154_2_feature_render_layer.py`, both archived to
+  `documentation/` in the GALLERY repo. Smoke tests
+  `smoke_features.js` (23 checks) and `smoke_framing.js` (12 checks)
+  archived beside them; they run under Node, which is outside Tony's
+  working set, so they are session evidence rather than a routine gate.
+  Where a runnable home for them belongs is open.
+
+**Ref:** `assemble.py`, `resolver.py`, `render_objects.py`, `presentation.py`;
+`gallery/feature_renderers.js`; `gallery/solar_system_earth_test2.html`;
+`data/solar-system/feature_configs.json`; `data/objects_config.json`;
+`documentation/HANDOFF_gallery_feature_layer_L154_resume.md`;
+`documentation/REVIEW_provenance_refactor_cluster_scoping.md` (section 5);
+L-149/L-150/L-151 (M2 track); L-155-L-162.
+
+---
 ### W.Cross-references -- existing items that interact with the web track
 
 - **L-026** -- CRLF to LF on `palomas_orrery_helpers.py`. Companion to L-087.
