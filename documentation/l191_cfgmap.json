@@ -1,0 +1,759 @@
+[
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Mercury",
+  "shell": "inner_core",
+  "line": 108,
+  "kind": "lit",
+  "module_def": "mercury_visualization_shells.py:38",
+  "agrees_normalized": true
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Mercury",
+  "shell": "outer_core",
+  "line": 128,
+  "kind": "lit",
+  "module_def": "mercury_visualization_shells.py:48",
+  "agrees_normalized": true
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Mercury",
+  "shell": "mantle",
+  "line": 146,
+  "kind": "lit",
+  "module_def": "mercury_visualization_shells.py:58",
+  "agrees_normalized": true
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Mercury",
+  "shell": "crust",
+  "line": 168,
+  "kind": "lit",
+  "module_def": "mercury_visualization_shells.py:70",
+  "agrees_normalized": false,
+  "ratio": 0.794
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Mercury",
+  "shell": "atmosphere",
+  "line": 186,
+  "kind": "lit",
+  "module_def": "mercury_visualization_shells.py:78",
+  "agrees_normalized": false,
+  "ratio": 0.32
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Mercury",
+  "shell": "hill_sphere",
+  "line": 218,
+  "kind": "lit",
+  "module_def": "mercury_visualization_shells.py:423",
+  "agrees_normalized": false,
+  "ratio": 0.522
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Moon",
+  "shell": "inner_core",
+  "line": 263,
+  "kind": "lit",
+  "module_def": "moon_visualization_shells.py:46",
+  "agrees_normalized": false,
+  "ratio": 0.765
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Moon",
+  "shell": "outer_core",
+  "line": 283,
+  "kind": "lit",
+  "module_def": "moon_visualization_shells.py:117",
+  "agrees_normalized": false,
+  "ratio": 0.453
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Moon",
+  "shell": "mantle",
+  "line": 311,
+  "kind": "lit",
+  "module_def": "moon_visualization_shells.py:227",
+  "agrees_normalized": false,
+  "ratio": 0.54
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Moon",
+  "shell": "crust",
+  "line": 350,
+  "kind": "lit",
+  "module_def": "moon_visualization_shells.py:314",
+  "agrees_normalized": false,
+  "ratio": 0.029
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Moon",
+  "shell": "exosphere",
+  "line": 385,
+  "kind": "lit",
+  "module_def": "moon_visualization_shells.py:493",
+  "agrees_normalized": false,
+  "ratio": 0.597
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Moon",
+  "shell": "hill_sphere",
+  "line": 417,
+  "kind": "lit",
+  "module_def": "moon_visualization_shells.py:585",
+  "agrees_normalized": false,
+  "ratio": 0.946
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Planet 9",
+  "shell": "surface",
+  "line": 452,
+  "kind": "lit",
+  "module_def": "planet9_visualization_shells.py:37",
+  "agrees_normalized": false,
+  "ratio": 0.264
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Planet 9",
+  "shell": "hill_sphere",
+  "line": 495,
+  "kind": "lit",
+  "module_def": "planet9_visualization_shells.py:214",
+  "agrees_normalized": false,
+  "ratio": 0.296
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Pluto",
+  "shell": "core",
+  "line": 537,
+  "kind": "lit",
+  "module_def": "pluto_visualization_shells.py:40",
+  "agrees_normalized": false,
+  "ratio": 0.267
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Pluto",
+  "shell": "mantle",
+  "line": 574,
+  "kind": "lit",
+  "module_def": "pluto_visualization_shells.py:135",
+  "agrees_normalized": false,
+  "ratio": 0.475
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Pluto",
+  "shell": "crust",
+  "line": 603,
+  "kind": "lit",
+  "module_def": "pluto_visualization_shells.py:226",
+  "agrees_normalized": false,
+  "ratio": 0.462
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Pluto",
+  "shell": "haze_layer",
+  "line": 638,
+  "kind": "lit",
+  "module_def": "pluto_visualization_shells.py:399",
+  "agrees_normalized": false,
+  "ratio": 0.414
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Pluto",
+  "shell": "atmosphere",
+  "line": 687,
+  "kind": "lit",
+  "module_def": "pluto_visualization_shells.py:508",
+  "agrees_normalized": false,
+  "ratio": 0.517
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Pluto",
+  "shell": "hill_sphere",
+  "line": 729,
+  "kind": "lit",
+  "module_def": "pluto_visualization_shells.py:613",
+  "agrees_normalized": false,
+  "ratio": 0.971
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Eris",
+  "shell": "core",
+  "line": 763,
+  "kind": "lit",
+  "module_def": "eris_visualization_shells.py:43",
+  "agrees_normalized": false,
+  "ratio": 0.248
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Eris",
+  "shell": "mantle",
+  "line": 811,
+  "kind": "lit",
+  "module_def": "eris_visualization_shells.py:139",
+  "agrees_normalized": false,
+  "ratio": 0.973
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Eris",
+  "shell": "crust",
+  "line": 835,
+  "kind": "lit",
+  "module_def": "eris_visualization_shells.py:217",
+  "agrees_normalized": false,
+  "ratio": 0.466
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Eris",
+  "shell": "atmosphere",
+  "line": 863,
+  "kind": "lit",
+  "module_def": "eris_visualization_shells.py:378",
+  "agrees_normalized": false,
+  "ratio": 0.403
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Eris",
+  "shell": "hill_sphere",
+  "line": 906,
+  "kind": "lit",
+  "module_def": "eris_visualization_shells.py:477",
+  "agrees_normalized": false,
+  "ratio": 0.66
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Venus",
+  "shell": "core",
+  "line": 939,
+  "kind": "lit",
+  "module_def": "venus_visualization_shells.py:42",
+  "agrees_normalized": true
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Venus",
+  "shell": "mantle",
+  "line": 961,
+  "kind": "lit",
+  "module_def": "venus_visualization_shells.py:114",
+  "agrees_normalized": true
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Venus",
+  "shell": "crust",
+  "line": 984,
+  "kind": "lit",
+  "module_def": "venus_visualization_shells.py:180",
+  "agrees_normalized": false,
+  "ratio": 0.898
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Venus",
+  "shell": "atmosphere",
+  "line": 1007,
+  "kind": "lit",
+  "module_def": "venus_visualization_shells.py:338",
+  "agrees_normalized": false,
+  "ratio": 0.831
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Venus",
+  "shell": "upper_atmosphere",
+  "line": 1034,
+  "kind": "lit",
+  "module_def": "venus_visualization_shells.py:413",
+  "agrees_normalized": false,
+  "ratio": 0.11
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Venus",
+  "shell": "hill_sphere",
+  "line": 1061,
+  "kind": "lit",
+  "module_def": "venus_visualization_shells.py:680",
+  "agrees_normalized": false,
+  "ratio": 0.073
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Mars",
+  "shell": "inner_core",
+  "line": 1092,
+  "kind": "lit",
+  "module_def": "mars_visualization_shells.py:40",
+  "agrees_normalized": false,
+  "ratio": 0.146
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Mars",
+  "shell": "outer_core",
+  "line": 1136,
+  "kind": "lit",
+  "module_def": "mars_visualization_shells.py:130",
+  "agrees_normalized": false,
+  "ratio": 0.329
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Mars",
+  "shell": "mantle",
+  "line": 1175,
+  "kind": "lit",
+  "module_def": "mars_visualization_shells.py:215",
+  "agrees_normalized": false,
+  "ratio": 0.421
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Mars",
+  "shell": "crust",
+  "line": 1197,
+  "kind": "lit",
+  "module_def": "mars_visualization_shells.py:283",
+  "agrees_normalized": false,
+  "ratio": 0.477
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Mars",
+  "shell": "atmosphere",
+  "line": 1222,
+  "kind": "lit",
+  "module_def": "mars_visualization_shells.py:440",
+  "agrees_normalized": false,
+  "ratio": 0.264
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Mars",
+  "shell": "upper_atmosphere",
+  "line": 1249,
+  "kind": "lit",
+  "module_def": "mars_visualization_shells.py:517",
+  "agrees_normalized": false,
+  "ratio": 0.848
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Mars",
+  "shell": "hill_sphere",
+  "line": 1282,
+  "kind": "lit",
+  "module_def": "mars_visualization_shells.py:849",
+  "agrees_normalized": false,
+  "ratio": 0.142
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Earth",
+  "shell": "inner_core",
+  "line": 1330,
+  "kind": "lit",
+  "module_def": "earth_visualization_shells.py:55",
+  "agrees_normalized": true
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Earth",
+  "shell": "outer_core",
+  "line": 1354,
+  "kind": "lit",
+  "module_def": "earth_visualization_shells.py:127",
+  "agrees_normalized": true
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Earth",
+  "shell": "lower_mantle",
+  "line": 1378,
+  "kind": "lit",
+  "module_def": "earth_visualization_shells.py:199",
+  "agrees_normalized": true
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Earth",
+  "shell": "upper_mantle",
+  "line": 1400,
+  "kind": "lit",
+  "module_def": "earth_visualization_shells.py:269",
+  "agrees_normalized": true
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Earth",
+  "shell": "crust",
+  "line": 1421,
+  "kind": "lit",
+  "module_def": "earth_visualization_shells.py:339",
+  "agrees_normalized": false,
+  "ratio": 0.882
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Earth",
+  "shell": "atmosphere",
+  "line": 1444,
+  "kind": "lit",
+  "module_def": "earth_visualization_shells.py:492",
+  "agrees_normalized": true
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Earth",
+  "shell": "upper_atmosphere",
+  "line": 1467,
+  "kind": "lit",
+  "module_def": "earth_visualization_shells.py:564",
+  "agrees_normalized": true
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Earth",
+  "shell": "hill_sphere",
+  "line": 1490,
+  "kind": "lit",
+  "module_def": "earth_visualization_shells.py:1097",
+  "agrees_normalized": false,
+  "ratio": 0.164
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Jupiter",
+  "shell": "core",
+  "line": 1523,
+  "kind": "lit",
+  "module_def": "jupiter_visualization_shells.py:76",
+  "agrees_normalized": false,
+  "ratio": 0.963
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Jupiter",
+  "shell": "metallic_hydrogen",
+  "line": 1545,
+  "kind": "lit",
+  "module_def": "jupiter_visualization_shells.py:147",
+  "agrees_normalized": false,
+  "ratio": 0.08
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Jupiter",
+  "shell": "molecular_hydrogen",
+  "line": 1566,
+  "kind": "lit",
+  "module_def": "jupiter_visualization_shells.py:217",
+  "agrees_normalized": false,
+  "ratio": 0.936
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Jupiter",
+  "shell": "cloud_layer",
+  "line": 1589,
+  "kind": "lit",
+  "module_def": "jupiter_visualization_shells.py:289",
+  "agrees_normalized": false,
+  "ratio": 0.828
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Jupiter",
+  "shell": "upper_atmosphere",
+  "line": 1616,
+  "kind": "lit",
+  "module_def": "jupiter_visualization_shells.py:446",
+  "agrees_normalized": false,
+  "ratio": 0.965
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Jupiter",
+  "shell": "hill_sphere",
+  "line": 1640,
+  "kind": "lit",
+  "module_def": "jupiter_visualization_shells.py:791",
+  "agrees_normalized": false,
+  "ratio": 0.259
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Saturn",
+  "shell": "core",
+  "line": 1673,
+  "kind": "ref-replace",
+  "ref_name": "saturn_core_info"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Saturn",
+  "shell": "metallic_hydrogen",
+  "line": 1684,
+  "kind": "ref-replace",
+  "ref_name": "saturn_metallic_hydrogen_info"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Saturn",
+  "shell": "molecular_hydrogen",
+  "line": 1695,
+  "kind": "ref-replace",
+  "ref_name": "saturn_molecular_hydrogen_info"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Saturn",
+  "shell": "cloud_layer",
+  "line": 1706,
+  "kind": "ref-replace",
+  "ref_name": "saturn_cloud_layer_info"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Saturn",
+  "shell": "upper_atmosphere",
+  "line": 1717,
+  "kind": "ref-replace",
+  "ref_name": "saturn_upper_atmosphere_info"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Saturn",
+  "shell": "hill_sphere",
+  "line": 1728,
+  "kind": "ref-replace",
+  "ref_name": "saturn_hill_sphere_info"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Uranus",
+  "shell": "core",
+  "line": 1750,
+  "kind": "ref-replace",
+  "ref_name": "uranus_core_info"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Uranus",
+  "shell": "mantle",
+  "line": 1762,
+  "kind": "ref-replace",
+  "ref_name": "uranus_mantle_info"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Uranus",
+  "shell": "cloud_layer",
+  "line": 1773,
+  "kind": "ref-replace",
+  "ref_name": "uranus_cloud_layer_info"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Uranus",
+  "shell": "upper_atmosphere",
+  "line": 1784,
+  "kind": "ref-replace",
+  "ref_name": "uranus_upper_atmosphere_info"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Uranus",
+  "shell": "hill_sphere",
+  "line": 1795,
+  "kind": "ref-replace",
+  "ref_name": "uranus_hill_sphere_info"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Neptune",
+  "shell": "core",
+  "line": 1817,
+  "kind": "ref-replace",
+  "ref_name": "neptune_core_info"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Neptune",
+  "shell": "mantle",
+  "line": 1829,
+  "kind": "ref-replace",
+  "ref_name": "neptune_mantle_info"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Neptune",
+  "shell": "cloud_layer",
+  "line": 1840,
+  "kind": "ref-replace",
+  "ref_name": "neptune_cloud_layer_info"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Neptune",
+  "shell": "upper_atmosphere",
+  "line": 1851,
+  "kind": "ref-replace",
+  "ref_name": "neptune_upper_atmosphere_info"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Neptune",
+  "shell": "hill_sphere",
+  "line": 1862,
+  "kind": "ref-replace",
+  "ref_name": "neptune_hill_sphere_info"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Sun",
+  "shell": "core",
+  "line": 1891,
+  "kind": "ref",
+  "ref_name": "core_info_hover"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Sun",
+  "shell": "radiative",
+  "line": 1902,
+  "kind": "ref",
+  "ref_name": "radiative_zone_info_hover"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Sun",
+  "shell": "photosphere",
+  "line": 1915,
+  "kind": "ref",
+  "ref_name": "photosphere_info_hover"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Sun",
+  "shell": "chromosphere",
+  "line": 1926,
+  "kind": "ref",
+  "ref_name": "chromosphere_info_hover"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Sun",
+  "shell": "inner_corona",
+  "line": 1937,
+  "kind": "ref",
+  "ref_name": "inner_corona_info_hover"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Sun",
+  "shell": "streamer_belt",
+  "line": 1948,
+  "kind": "ref",
+  "ref_name": "streamer_belt_info_hover"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Sun",
+  "shell": "roche_limit",
+  "line": 1960,
+  "kind": "ref",
+  "ref_name": "roche_limit_info_hover"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Sun",
+  "shell": "alfven_surface",
+  "line": 1971,
+  "kind": "ref",
+  "ref_name": "alfven_surface_info_hover"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Sun",
+  "shell": "outer_corona",
+  "line": 1982,
+  "kind": "ref",
+  "ref_name": "outer_corona_info_hover"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Sun",
+  "shell": "termination_shock",
+  "line": 1993,
+  "kind": "ref",
+  "ref_name": "termination_shock_info_hover"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Sun",
+  "shell": "heliopause",
+  "line": 2004,
+  "kind": "ref",
+  "ref_name": "solar_wind_info_hover"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Sun",
+  "shell": "inner_oort_limit",
+  "line": 2015,
+  "kind": "ref",
+  "ref_name": "inner_limit_oort_info_hover"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Sun",
+  "shell": "inner_oort",
+  "line": 2026,
+  "kind": "ref",
+  "ref_name": "inner_oort_info_hover"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Sun",
+  "shell": "outer_oort",
+  "line": 2037,
+  "kind": "ref",
+  "ref_name": "outer_oort_info_hover"
+ },
+ {
+  "cfg": "SHELL_CONFIGS",
+  "body": "Sun",
+  "shell": "gravitational",
+  "line": 2048,
+  "kind": "ref",
+  "ref_name": "gravitational_influence_info_hover"
+ }
+]

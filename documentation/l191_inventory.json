@@ -1,0 +1,1293 @@
+[
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Mercury",
+  "name": "mercury_inner_core_info",
+  "def": "mercury_visualization_shells.py:38",
+  "fmt": "NL",
+  "len": 262
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Mercury",
+  "name": "mercury_outer_core_info",
+  "def": "mercury_visualization_shells.py:48",
+  "fmt": "NL",
+  "len": 208
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Mercury",
+  "name": "mercury_mantle_info",
+  "def": "mercury_visualization_shells.py:58",
+  "fmt": "NL",
+  "len": 147
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Mercury",
+  "name": "mercury_crust_info",
+  "def": "mercury_visualization_shells.py:70",
+  "fmt": "NL",
+  "len": 169
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Mercury",
+  "name": "mercury_atmosphere_info",
+  "def": "mercury_visualization_shells.py:78",
+  "fmt": "NL",
+  "len": 348
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Mercury",
+  "name": "mercury_sodium_tail_info",
+  "def": "mercury_visualization_shells.py:96",
+  "fmt": "NL",
+  "len": 804
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Mercury",
+  "name": "mercury_magnetosphere_info",
+  "def": "mercury_visualization_shells.py:253",
+  "fmt": "NL",
+  "len": 233
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Mercury",
+  "name": "mercury_hill_sphere_info",
+  "def": "mercury_visualization_shells.py:423",
+  "fmt": "NL",
+  "len": 467
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Venus",
+  "name": "venus_core_info",
+  "def": "venus_visualization_shells.py:42",
+  "fmt": "NL",
+  "len": 468
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Venus",
+  "name": "venus_mantle_info",
+  "def": "venus_visualization_shells.py:114",
+  "fmt": "NL",
+  "len": 350
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Venus",
+  "name": "venus_crust_info",
+  "def": "venus_visualization_shells.py:180",
+  "fmt": "NL",
+  "len": 438
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Venus",
+  "name": "venus_atmosphere_info",
+  "def": "venus_visualization_shells.py:338",
+  "fmt": "NL",
+  "len": 601
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Venus",
+  "name": "venus_upper_atmosphere_info",
+  "def": "venus_visualization_shells.py:413",
+  "fmt": "NL",
+  "len": 423
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Venus",
+  "name": "venus_magnetosphere_info",
+  "def": "venus_visualization_shells.py:527",
+  "fmt": "NL",
+  "len": 482
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Venus",
+  "name": "venus_hill_sphere_info",
+  "def": "venus_visualization_shells.py:680",
+  "fmt": "NL",
+  "len": 485
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Moon",
+  "name": "moon_inner_core_info",
+  "def": "moon_visualization_shells.py:46",
+  "fmt": "NL",
+  "len": 220
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Moon",
+  "name": "moon_outer_core_info",
+  "def": "moon_visualization_shells.py:117",
+  "fmt": "NL",
+  "len": 220
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Moon",
+  "name": "moon_mantle_info",
+  "def": "moon_visualization_shells.py:227",
+  "fmt": "NL",
+  "len": 696
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Moon",
+  "name": "moon_crust_info",
+  "def": "moon_visualization_shells.py:314",
+  "fmt": "NL",
+  "len": 1177
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Moon",
+  "name": "moon_exosphere_info",
+  "def": "moon_visualization_shells.py:493",
+  "fmt": "NL",
+  "len": 758
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Moon",
+  "name": "moon_hill_sphere_info",
+  "def": "moon_visualization_shells.py:585",
+  "fmt": "BR",
+  "len": 525
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Mars",
+  "name": "mars_inner_core_info",
+  "def": "mars_visualization_shells.py:40",
+  "fmt": "NL",
+  "len": 217
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Mars",
+  "name": "mars_outer_core_info",
+  "def": "mars_visualization_shells.py:130",
+  "fmt": "NL",
+  "len": 383
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Mars",
+  "name": "mars_mantle_info",
+  "def": "mars_visualization_shells.py:215",
+  "fmt": "NL",
+  "len": 160
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Mars",
+  "name": "mars_crust_info",
+  "def": "mars_visualization_shells.py:283",
+  "fmt": "NL",
+  "len": 267
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Mars",
+  "name": "mars_atmosphere_info",
+  "def": "mars_visualization_shells.py:440",
+  "fmt": "NL",
+  "len": 181
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Mars",
+  "name": "mars_upper_atmosphere_info",
+  "def": "mars_visualization_shells.py:517",
+  "fmt": "NL",
+  "len": 787
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Mars",
+  "name": "mars_magnetosphere_info",
+  "def": "mars_visualization_shells.py:598",
+  "fmt": "NL",
+  "len": 770
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Mars",
+  "name": "mars_hill_sphere_info",
+  "def": "mars_visualization_shells.py:849",
+  "fmt": "NL",
+  "len": 215
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Jupiter",
+  "name": "jupiter_core_info",
+  "def": "jupiter_visualization_shells.py:76",
+  "fmt": "BR",
+  "len": 395
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Jupiter",
+  "name": "jupiter_metallic_hydrogen_info",
+  "def": "jupiter_visualization_shells.py:147",
+  "fmt": "BR",
+  "len": 275
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Jupiter",
+  "name": "jupiter_molecular_hydrogen_info",
+  "def": "jupiter_visualization_shells.py:217",
+  "fmt": "BR",
+  "len": 350
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Jupiter",
+  "name": "jupiter_cloud_layer_info",
+  "def": "jupiter_visualization_shells.py:289",
+  "fmt": "BR",
+  "len": 508
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Jupiter",
+  "name": "jupiter_upper_atmosphere_info",
+  "def": "jupiter_visualization_shells.py:446",
+  "fmt": "BR",
+  "len": 423
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Jupiter",
+  "name": "jupiter_ring_system_info",
+  "def": "jupiter_visualization_shells.py:868",
+  "fmt": "BR",
+  "len": 702
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Jupiter",
+  "name": "jupiter_radiation_belts_info",
+  "def": "jupiter_visualization_shells.py:701",
+  "fmt": "BR",
+  "len": 147
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Jupiter",
+  "name": "jupiter_io_plasma_torus_info",
+  "def": "jupiter_visualization_shells.py:624",
+  "fmt": "BR",
+  "len": 97
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Jupiter",
+  "name": "jupiter_magnetosphere_info",
+  "def": "jupiter_visualization_shells.py:1030",
+  "fmt": "BR",
+  "len": 862
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Jupiter",
+  "name": "jupiter_hill_sphere_info",
+  "def": "jupiter_visualization_shells.py:791",
+  "fmt": "BR",
+  "len": 176
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Saturn",
+  "name": "saturn_core_info",
+  "def": "saturn_visualization_shells.py:38",
+  "fmt": "BR",
+  "len": 362
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Saturn",
+  "name": "saturn_metallic_hydrogen_info",
+  "def": "saturn_visualization_shells.py:124",
+  "fmt": "BR",
+  "len": 369
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Saturn",
+  "name": "saturn_molecular_hydrogen_info",
+  "def": "saturn_visualization_shells.py:201",
+  "fmt": "BR",
+  "len": 376
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Saturn",
+  "name": "saturn_cloud_layer_info",
+  "def": "saturn_visualization_shells.py:277",
+  "fmt": "BR",
+  "len": 717
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Saturn",
+  "name": "saturn_upper_atmosphere_info",
+  "def": "saturn_visualization_shells.py:484",
+  "fmt": "BR",
+  "len": 348
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Saturn",
+  "name": "saturn_ring_system_info",
+  "def": "saturn_visualization_shells.py:1012",
+  "fmt": "BR",
+  "len": 700
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Saturn",
+  "name": "saturn_radiation_belts_info",
+  "def": "saturn_visualization_shells.py:810",
+  "fmt": "BR",
+  "len": 98
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Saturn",
+  "name": "saturn_enceladus_plasma_torus_info",
+  "def": "saturn_visualization_shells.py:707",
+  "fmt": "BR",
+  "len": 96
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Saturn",
+  "name": "saturn_magnetosphere_info",
+  "def": "saturn_visualization_shells.py:1230",
+  "fmt": "BR",
+  "len": 500
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Saturn",
+  "name": "saturn_hill_sphere_info",
+  "def": "saturn_visualization_shells.py:931",
+  "fmt": "BR",
+  "len": 453
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Uranus",
+  "name": "uranus_core_info",
+  "def": "uranus_visualization_shells.py:38",
+  "fmt": "BR",
+  "len": 354
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Uranus",
+  "name": "uranus_mantle_info",
+  "def": "uranus_visualization_shells.py:106",
+  "fmt": "BR",
+  "len": 534
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Uranus",
+  "name": "uranus_cloud_layer_info",
+  "def": "uranus_visualization_shells.py:183",
+  "fmt": "BR",
+  "len": 714
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Uranus",
+  "name": "uranus_upper_atmosphere_info",
+  "def": "uranus_visualization_shells.py:360",
+  "fmt": "BR",
+  "len": 873
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Uranus",
+  "name": "uranus_ring_system_info",
+  "def": "uranus_visualization_shells.py:770",
+  "fmt": "BR",
+  "len": 2581
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Uranus",
+  "name": "uranus_radiation_belts_info",
+  "def": "uranus_visualization_shells.py:616",
+  "fmt": "BR",
+  "len": 98
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Uranus",
+  "name": "uranus_magnetosphere_info",
+  "def": "uranus_visualization_shells.py:448",
+  "fmt": "BR",
+  "len": 939
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Uranus",
+  "name": "uranus_hill_sphere_info",
+  "def": "uranus_visualization_shells.py:1145",
+  "fmt": "BR",
+  "len": 580
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Neptune",
+  "name": "neptune_core_info",
+  "def": "neptune_visualization_shells.py:39",
+  "fmt": "BR",
+  "len": 352
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Neptune",
+  "name": "neptune_mantle_info",
+  "def": "neptune_visualization_shells.py:112",
+  "fmt": "BR",
+  "len": 555
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Neptune",
+  "name": "neptune_cloud_layer_info",
+  "def": "neptune_visualization_shells.py:196",
+  "fmt": "BR",
+  "len": 1104
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Neptune",
+  "name": "neptune_upper_atmosphere_info",
+  "def": "neptune_visualization_shells.py:369",
+  "fmt": "BR",
+  "len": 283
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Neptune",
+  "name": "neptune_ring_system_info",
+  "def": "neptune_visualization_shells.py:1170",
+  "fmt": "BR",
+  "len": 2034
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Neptune",
+  "name": "neptune_radiation_belts_info",
+  "def": "neptune_visualization_shells.py:824",
+  "fmt": "BR",
+  "len": 99
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Neptune",
+  "name": "neptune_magnetosphere_info",
+  "def": "neptune_visualization_shells.py:461",
+  "fmt": "BR",
+  "len": 577
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Neptune",
+  "name": "neptune_hill_sphere_info",
+  "def": "neptune_visualization_shells.py:1682",
+  "fmt": "BR",
+  "len": 611
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Pluto",
+  "name": "pluto_core_info",
+  "def": "pluto_visualization_shells.py:40",
+  "fmt": "NL",
+  "len": 339
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Pluto",
+  "name": "pluto_mantle_info",
+  "def": "pluto_visualization_shells.py:135",
+  "fmt": "NL",
+  "len": 386
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Pluto",
+  "name": "pluto_crust_info",
+  "def": "pluto_visualization_shells.py:226",
+  "fmt": "NL",
+  "len": 531
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Pluto",
+  "name": "pluto_haze_layer_info",
+  "def": "pluto_visualization_shells.py:399",
+  "fmt": "NL",
+  "len": 814
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Pluto",
+  "name": "pluto_atmosphere_info",
+  "def": "pluto_visualization_shells.py:508",
+  "fmt": "NL",
+  "len": 814
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Pluto",
+  "name": "pluto_hill_sphere_info",
+  "def": "pluto_visualization_shells.py:613",
+  "fmt": "NL",
+  "len": 579
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Eris",
+  "name": "eris_core_info",
+  "def": "eris_visualization_shells.py:43",
+  "fmt": "NL",
+  "len": 430
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Eris",
+  "name": "eris_mantle_info",
+  "def": "eris_visualization_shells.py:139",
+  "fmt": "NL",
+  "len": 520
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Eris",
+  "name": "eris_crust_info",
+  "def": "eris_visualization_shells.py:217",
+  "fmt": "NL",
+  "len": 388
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Eris",
+  "name": "eris_atmosphere_info",
+  "def": "eris_visualization_shells.py:378",
+  "fmt": "NL",
+  "len": 634
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Eris",
+  "name": "eris_hill_sphere_info",
+  "def": "eris_visualization_shells.py:477",
+  "fmt": "NL",
+  "len": 358
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Planet 9",
+  "name": "planet9_surface_info",
+  "def": "planet9_visualization_shells.py:37",
+  "fmt": "BR",
+  "len": 459
+ },
+ {
+  "surface": "shell_checkbox_loop",
+  "body": "Planet 9",
+  "name": "planet9_hill_sphere_info",
+  "def": "planet9_visualization_shells.py:214",
+  "fmt": "BR",
+  "len": 344
+ },
+ {
+  "surface": "palomas_orrery.py:8658",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:8658",
+  "fmt": "NEITHER",
+  "len": 30
+ },
+ {
+  "surface": "palomas_orrery.py:8662",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:8662",
+  "fmt": "NEITHER",
+  "len": 58
+ },
+ {
+  "surface": "palomas_orrery.py:8666",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:8666",
+  "fmt": "NEITHER",
+  "len": 95
+ },
+ {
+  "surface": "palomas_orrery.py:8771",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:8771",
+  "fmt": "NL",
+  "len": 251
+ },
+ {
+  "surface": "palomas_orrery.py:8780",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:8780",
+  "fmt": "NEITHER",
+  "len": 308
+ },
+ {
+  "surface": "palomas_orrery.py:8828",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:8829",
+  "fmt": "NL",
+  "len": 343
+ },
+ {
+  "surface": "palomas_orrery.py:8838",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:8839",
+  "fmt": "NL",
+  "len": 168
+ },
+ {
+  "surface": "palomas_orrery.py:8847",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:8848",
+  "fmt": "NL",
+  "len": 91
+ },
+ {
+  "surface": "palomas_orrery.py:8855",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:8856",
+  "fmt": "NL",
+  "len": 232
+ },
+ {
+  "surface": "palomas_orrery.py:8866",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:8867",
+  "fmt": "NL",
+  "len": 356
+ },
+ {
+  "surface": "palomas_orrery.py:8879",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:8880",
+  "fmt": "NL",
+  "len": 308
+ },
+ {
+  "surface": "palomas_orrery.py:8993",
+  "name": "hover_text_sun_and_corona_tooltip",
+  "def": "solar_visualization_shells.py:970",
+  "status": "NON-LITERAL:JoinedStr",
+  "expr": "f\"The Sun and Its Atmosphere<br><br>Five corona/boundary layers now visualized separately:<br>* Inner Corona (K-corona):"
+ },
+ {
+  "surface": "palomas_orrery.py:9006",
+  "name": "core_info",
+  "def": "solar_visualization_shells.py:445",
+  "fmt": "BR",
+  "len": 2352
+ },
+ {
+  "surface": "palomas_orrery.py:9010",
+  "name": "radiative_zone_info",
+  "def": "solar_visualization_shells.py:416",
+  "fmt": "BR",
+  "len": 2320
+ },
+ {
+  "surface": "palomas_orrery.py:9014",
+  "name": "photosphere_info",
+  "def": "solar_visualization_shells.py:383",
+  "fmt": "BR",
+  "len": 2595
+ },
+ {
+  "surface": "palomas_orrery.py:9023",
+  "name": "chromosphere_info",
+  "def": "solar_visualization_shells.py:354",
+  "status": "NON-LITERAL:BinOp",
+  "expr": "'Sun: Chromosphere:<br><br>The chromosphere is a dynamic and visually stunning layer of the Sun\\'s atmosphere, sandwiche"
+ },
+ {
+  "surface": "palomas_orrery.py:9027",
+  "name": "inner_corona_info",
+  "def": "solar_visualization_shells.py:317",
+  "fmt": "BR",
+  "len": 2227
+ },
+ {
+  "surface": "palomas_orrery.py:9032",
+  "name": "roche_limit_info",
+  "def": "solar_visualization_shells.py:686",
+  "fmt": "BR",
+  "len": 1482
+ },
+ {
+  "surface": "palomas_orrery.py:9037",
+  "name": "streamer_belt_info",
+  "def": "solar_visualization_shells.py:625",
+  "fmt": "BR",
+  "len": 1879
+ },
+ {
+  "surface": "palomas_orrery.py:9042",
+  "name": "alfven_surface_info",
+  "def": "solar_visualization_shells.py:743",
+  "status": "NON-LITERAL:JoinedStr",
+  "expr": "f\"Sun: Alfven Surface:<br><br>The Alfven surface is the true outer boundary of the solar corona -- the point where<br>th"
+ },
+ {
+  "surface": "palomas_orrery.py:9046",
+  "name": "outer_corona_info",
+  "def": "solar_visualization_shells.py:296",
+  "status": "NON-LITERAL:JoinedStr",
+  "expr": "f\"Sun: Extended Corona (F-corona / Outer):<br><br>This shell marks the extended outer solar corona at ~50 solar radii (~"
+ },
+ {
+  "surface": "palomas_orrery.py:9054",
+  "name": "main_belt_info",
+  "def": "asteroid_belt_visualization_shells.py:131",
+  "fmt": "NL",
+  "len": 624
+ },
+ {
+  "surface": "palomas_orrery.py:9062",
+  "name": "hilda_group_info",
+  "def": "asteroid_belt_visualization_shells.py:247",
+  "fmt": "NL",
+  "len": 541
+ },
+ {
+  "surface": "palomas_orrery.py:9067",
+  "name": "jupiter_trojans_greeks_info",
+  "def": "asteroid_belt_visualization_shells.py:334",
+  "fmt": "NL",
+  "len": 615
+ },
+ {
+  "surface": "palomas_orrery.py:9072",
+  "name": "jupiter_trojans_trojans_info",
+  "def": "asteroid_belt_visualization_shells.py:422",
+  "fmt": "NL",
+  "len": 556
+ },
+ {
+  "surface": "palomas_orrery.py:9080",
+  "name": "termination_shock_info",
+  "def": "solar_visualization_shells.py:282",
+  "fmt": "BR",
+  "len": 489
+ },
+ {
+  "surface": "palomas_orrery.py:9084",
+  "name": "solar_wind_info",
+  "def": "solar_visualization_shells.py:249",
+  "fmt": "BR",
+  "len": 2517
+ },
+ {
+  "surface": "palomas_orrery.py:9092",
+  "name": "inner_limit_oort_info",
+  "def": "solar_visualization_shells.py:155",
+  "fmt": "BR",
+  "len": 722
+ },
+ {
+  "surface": "palomas_orrery.py:9096",
+  "name": "hills_cloud_torus_info",
+  "def": "solar_visualization_shells.py:170",
+  "fmt": "BR",
+  "len": 982
+ },
+ {
+  "surface": "palomas_orrery.py:9100",
+  "name": "inner_oort_info",
+  "def": "solar_visualization_shells.py:140",
+  "fmt": "BR",
+  "len": 742
+ },
+ {
+  "surface": "palomas_orrery.py:9104",
+  "name": "outer_oort_clumpy_info",
+  "def": "solar_visualization_shells.py:195",
+  "fmt": "BR",
+  "len": 968
+ },
+ {
+  "surface": "palomas_orrery.py:9108",
+  "name": "galactic_tide_info",
+  "def": "solar_visualization_shells.py:224",
+  "fmt": "BR",
+  "len": 953
+ },
+ {
+  "surface": "palomas_orrery.py:9112",
+  "name": "outer_oort_info",
+  "def": "solar_visualization_shells.py:122",
+  "fmt": "BR",
+  "len": 859
+ },
+ {
+  "surface": "palomas_orrery.py:9120",
+  "name": "gravitational_influence_info",
+  "def": "solar_visualization_shells.py:96",
+  "status": "NON-LITERAL:BinOp",
+  "expr": "\"SELECT A MANUAL SCALE OF AT LEAST 160,000 AU TO VISUALIZE.<br><br>Sun: Outer Limit of Gravitational Influence:<br><br>T"
+ },
+ {
+  "surface": "palomas_orrery.py:9142",
+  "name": "earth_inner_core_info",
+  "def": "earth_visualization_shells.py:55",
+  "fmt": "NL",
+  "len": 345
+ },
+ {
+  "surface": "palomas_orrery.py:9146",
+  "name": "earth_outer_core_info",
+  "def": "earth_visualization_shells.py:127",
+  "fmt": "NL",
+  "len": 335
+ },
+ {
+  "surface": "palomas_orrery.py:9150",
+  "name": "earth_lower_mantle_info",
+  "def": "earth_visualization_shells.py:199",
+  "fmt": "NL",
+  "len": 338
+ },
+ {
+  "surface": "palomas_orrery.py:9154",
+  "name": "earth_upper_mantle_info",
+  "def": "earth_visualization_shells.py:269",
+  "fmt": "NL",
+  "len": 312
+ },
+ {
+  "surface": "palomas_orrery.py:9158",
+  "name": "earth_crust_info",
+  "def": "earth_visualization_shells.py:339",
+  "fmt": "NL",
+  "len": 371
+ },
+ {
+  "surface": "palomas_orrery.py:9177",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:9179",
+  "fmt": "NL",
+  "len": 212
+ },
+ {
+  "surface": "palomas_orrery.py:9188",
+  "name": "earth_atmosphere_info",
+  "def": "earth_visualization_shells.py:492",
+  "fmt": "NL",
+  "len": 410
+ },
+ {
+  "surface": "palomas_orrery.py:9193",
+  "name": "earth_upper_atmosphere_info",
+  "def": "earth_visualization_shells.py:564",
+  "fmt": "NL",
+  "len": 392
+ },
+ {
+  "surface": "palomas_orrery.py:9198",
+  "name": "earth_leo_shell_info",
+  "def": "earth_visualization_shells.py:870",
+  "fmt": "NL",
+  "len": 1056
+ },
+ {
+  "surface": "palomas_orrery.py:9203",
+  "name": "earth_magnetosphere_info",
+  "def": "earth_visualization_shells.py:637",
+  "fmt": "NL",
+  "len": 736
+ },
+ {
+  "surface": "palomas_orrery.py:9208",
+  "name": "earth_geostationary_belt_info",
+  "def": "earth_visualization_shells.py:986",
+  "fmt": "NL",
+  "len": 784
+ },
+ {
+  "surface": "palomas_orrery.py:9213",
+  "name": "earth_hill_sphere_info",
+  "def": "earth_visualization_shells.py:1097",
+  "fmt": "NL",
+  "len": 126
+ },
+ {
+  "surface": "palomas_orrery.py:9405",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:9405",
+  "fmt": "NEITHER",
+  "len": 274
+ },
+ {
+  "surface": "palomas_orrery.py:9848",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:9848",
+  "fmt": "NEITHER",
+  "len": 262
+ },
+ {
+  "surface": "palomas_orrery.py:9941",
+  "name": "f'{info_text}\\nPerihelion: April 4, 2026 ~14:22 UTC'",
+  "status": "DYNAMIC-ARG"
+ },
+ {
+  "surface": "palomas_orrery.py:9950",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:9950",
+  "fmt": "NL",
+  "len": 137
+ },
+ {
+  "surface": "palomas_orrery.py:9958",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:9958",
+  "fmt": "NL",
+  "len": 183
+ },
+ {
+  "surface": "palomas_orrery.py:9966",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:9966",
+  "fmt": "NEITHER",
+  "len": 274
+ },
+ {
+  "surface": "palomas_orrery.py:10077",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10078",
+  "fmt": "NL",
+  "len": 340
+ },
+ {
+  "surface": "palomas_orrery.py:10167",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10168",
+  "fmt": "NL",
+  "len": 556
+ },
+ {
+  "surface": "palomas_orrery.py:10242",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10243",
+  "fmt": "NL",
+  "len": 326
+ },
+ {
+  "surface": "palomas_orrery.py:10258",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10259",
+  "fmt": "NL",
+  "len": 404
+ },
+ {
+  "surface": "palomas_orrery.py:10300",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10300",
+  "fmt": "NEITHER",
+  "len": 52
+ },
+ {
+  "surface": "palomas_orrery.py:10310",
+  "name": "f\"\"\"Some key mean distances for custom scaling: \\n* Mercury: 0.39 AU\\n* Venus: 0",
+  "status": "DYNAMIC-ARG"
+ },
+ {
+  "surface": "palomas_orrery.py:10338",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10339",
+  "fmt": "NL",
+  "len": 359
+ },
+ {
+  "surface": "palomas_orrery.py:10433",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10433",
+  "fmt": "NEITHER",
+  "len": 90
+ },
+ {
+  "surface": "palomas_orrery.py:10505",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10506",
+  "fmt": "NL",
+  "len": 477
+ },
+ {
+  "surface": "palomas_orrery.py:10527",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10528",
+  "fmt": "NL",
+  "len": 548
+ },
+ {
+  "surface": "palomas_orrery.py:10544",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10545",
+  "fmt": "NL",
+  "len": 686
+ },
+ {
+  "surface": "palomas_orrery.py:10568",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10569",
+  "fmt": "NL",
+  "len": 167
+ },
+ {
+  "surface": "palomas_orrery.py:10579",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10580",
+  "fmt": "NL",
+  "len": 279
+ },
+ {
+  "surface": "palomas_orrery.py:10592",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10593",
+  "fmt": "NL",
+  "len": 348
+ },
+ {
+  "surface": "palomas_orrery.py:10605",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10606",
+  "fmt": "NL",
+  "len": 165
+ },
+ {
+  "surface": "palomas_orrery.py:10620",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10620",
+  "fmt": "NEITHER",
+  "len": 63
+ },
+ {
+  "surface": "palomas_orrery.py:10640",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10641",
+  "fmt": "NEITHER",
+  "len": 349
+ },
+ {
+  "surface": "palomas_orrery.py:10657",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10658",
+  "fmt": "NEITHER",
+  "len": 495
+ },
+ {
+  "surface": "palomas_orrery.py:10680",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10681",
+  "fmt": "NEITHER",
+  "len": 334
+ },
+ {
+  "surface": "palomas_orrery.py:10697",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10698",
+  "fmt": "NL",
+  "len": 637
+ },
+ {
+  "surface": "palomas_orrery.py:10839",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10839",
+  "fmt": "NEITHER",
+  "len": 60
+ },
+ {
+  "surface": "palomas_orrery.py:10852",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10853",
+  "fmt": "NL",
+  "len": 294
+ },
+ {
+  "surface": "palomas_orrery.py:10910",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10910",
+  "fmt": "NEITHER",
+  "len": 91
+ },
+ {
+  "surface": "palomas_orrery.py:10924",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10924",
+  "fmt": "NEITHER",
+  "len": 57
+ },
+ {
+  "surface": "palomas_orrery.py:10929",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10929",
+  "fmt": "NEITHER",
+  "len": 97
+ },
+ {
+  "surface": "palomas_orrery.py:10933",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10933",
+  "fmt": "NEITHER",
+  "len": 98
+ },
+ {
+  "surface": "palomas_orrery.py:10938",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10938",
+  "fmt": "NEITHER",
+  "len": 99
+ },
+ {
+  "surface": "palomas_orrery.py:10942",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:10942",
+  "fmt": "NEITHER",
+  "len": 98
+ },
+ {
+  "surface": "palomas_orrery.py:11055",
+  "name": "(inline literal)",
+  "def": "palomas_orrery.py:11055",
+  "fmt": "NEITHER",
+  "len": 71
+ },
+ {
+  "surface": "palomas_orrery.py:9418",
+  "name": "tooltip_text",
+  "def": "palomas_orrery.py:9994",
+  "status": "NON-LITERAL:JoinedStr",
+  "expr": "f'{info_text}\\nPerihelion: {perihelion}'"
+ },
+ {
+  "surface": "palomas_orrery.py:9877",
+  "name": "tooltip_text",
+  "def": "palomas_orrery.py:9994",
+  "status": "NON-LITERAL:JoinedStr",
+  "expr": "f'{info_text}\\nPerihelion: {perihelion}'"
+ },
+ {
+  "surface": "palomas_orrery.py:9887",
+  "name": "f'Preset view: {name} at perihelion ({perihelion})\\nCenter: Sun, Apsidal markers",
+  "status": "DYNAMIC-ARG"
+ },
+ {
+  "surface": "palomas_orrery.py:9995",
+  "name": "tooltip_text",
+  "def": "palomas_orrery.py:9994",
+  "status": "NON-LITERAL:JoinedStr",
+  "expr": "f'{info_text}\\nPerihelion: {perihelion}'"
+ },
+ {
+  "surface": "palomas_orrery.py:10005",
+  "name": "f'Preset view: {name} at perihelion ({perihelion})\\nCenter: Sun, Apsidal markers",
+  "status": "DYNAMIC-ARG"
+ },
+ {
+  "surface": "palomas_orrery.py:10043",
+  "name": "f'{frag_label}\\n{INFO.get(frag_name, 'No information available.')}'",
+  "status": "DYNAMIC-ARG"
+ },
+ {
+  "surface": "palomas_orrery.py:8915",
+  "name": "info_text",
+  "def": "palomas_orrery.py:10102",
+  "status": "NON-LITERAL:Call",
+  "expr": "INFO.get(name.strip('- '), 'Exoplanet')"
+ },
+ {
+  "surface": "palomas_orrery.py:8925",
+  "name": "info_text",
+  "def": "palomas_orrery.py:10102",
+  "status": "NON-LITERAL:Call",
+  "expr": "INFO.get(name.strip('- '), 'Exoplanet')"
+ },
+ {
+  "surface": "palomas_orrery.py:10097",
+  "name": "info_text",
+  "def": "palomas_orrery.py:10102",
+  "status": "NON-LITERAL:Call",
+  "expr": "INFO.get(name.strip('- '), 'Exoplanet')"
+ },
+ {
+  "surface": "palomas_orrery.py:10103",
+  "name": "info_text",
+  "def": "palomas_orrery.py:10102",
+  "status": "NON-LITERAL:Call",
+  "expr": "INFO.get(name.strip('- '), 'Exoplanet')"
+ },
+ {
+  "surface": "palomas_orrery.py:8976",
+  "name": "tip",
+  "def": "palomas_orrery.py:9456",
+  "status": "NON-LITERAL:JoinedStr",
+  "expr": "f'{enc_label}: {enc.get('date', '')}\\nTarget: {enc.get('target', '')}, Distance: {dist_au:.7f} AU ({dist_km:,.0f} km)\\nC"
+ },
+ {
+  "surface": "palomas_orrery.py:9440",
+  "name": "f'Full mission overview: {full_preset.get('start_date', '')} to {full_preset.get",
+  "status": "DYNAMIC-ARG"
+ },
+ {
+  "surface": "palomas_orrery.py:9475",
+  "name": "tip",
+  "def": "palomas_orrery.py:9456",
+  "status": "NON-LITERAL:JoinedStr",
+  "expr": "f'{enc_label}: {enc.get('date', '')}\\nTarget: {enc.get('target', '')}, Distance: {dist_au:.7f} AU ({dist_km:,.0f} km)\\nC"
+ },
+ {
+  "surface": "orbital_param_viz.py:1882",
+  "name": "(inline literal)",
+  "def": "orbital_param_viz.py:1883",
+  "fmt": "NL",
+  "len": 93
+ },
+ {
+  "surface": "orbital_param_viz.py:2158",
+  "name": "(inline literal)",
+  "def": "orbital_param_viz.py:2159",
+  "fmt": "NL",
+  "len": 153
+ },
+ {
+  "surface": "palomas_orrery_dashboard.py:926",
+  "name": "hover",
+  "def": "palomas_orrery_dashboard.py:925",
+  "status": "NON-LITERAL:BinOp",
+  "expr": "'Not found: %s' % script_path"
+ }
+]
