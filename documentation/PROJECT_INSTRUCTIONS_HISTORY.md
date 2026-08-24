@@ -129,9 +129,9 @@ mismatch was caught (L-152, retroactive entry). Skill Manifest bumped to
 gallery-cache-builder) to match actual repo state, and a new row added
 for gallery-assembler (L-151).
 
-v3.33 (July 30, 2026): The Register Rule added to Part 2. The protocol's compressed reference voice is distinguished from explanation voice — lead with the claim, one idea per sentence, no aphorisms in an explanation, gloss project terms on first use each session. Two yes-or-no checks before sending (does this paragraph do one job; does any sentence point at a label instead of saying the thing), with the test being "can Tony act on this without a follow-up question." Backstop: Tony says "opaque" at the point it fails, Claude rewrites that passage, and the miss is captured as a field note so it accumulates rather than repeating. Manifest table refreshed to 1.2/1.1/1.6.
+v3.33 (July 30, 2026): The Register Rule added to Part 2. The protocol's compressed reference voice is distinguished from explanation voice -- lead with the claim, one idea per sentence, no aphorisms in an explanation, gloss project terms on first use each session. Two yes-or-no checks before sending (does this paragraph do one job; does any sentence point at a label instead of saying the thing), with the test being "can Tony act on this without a follow-up question." Backstop: Tony says "opaque" at the point it fails, Claude rewrites that passage, and the miss is captured as a field note so it accumulates rather than repeating. Manifest table refreshed to 1.2/1.1/1.6.
 
-v3.34 (August 5, 2026): Two amendments, both from the Fable skills-layer review. (1) WHO TONY IS: the GitHub Desktop / Run-button preference is stated as a preference where practical, not a prohibition. The earlier "never the git command line" wording read as a ban and put the section in conflict with safe-file-editing's git apply delivery format (Fable Job 2 #16); Tony's ruling keeps the GUI as default and treats a terminal step as a fallback. The surviving obligation is unchanged: don't hand over an operation outside Tony's known working set without explaining what it does and what could go wrong. (2) Stale Skill = Stop [CRITICAL] added under the Skill Manifest. A skill lives in three stores — repo skills/, the account install Claude actually loads, and the generated manifest table. When a loaded skill's version disagrees with its manifest row, the session STOPS rather than proceeding and mentioning it later, and asks Tony to push to skills/ and reinstall in Settings. The prior wording asked only to "reconcile before trusting it," and the manifest still advertised 1.1/1.4 against an actual 1.2/1.6 for about three weeks with nothing surfacing it. Supporting change outside the protocol: skills_index.py now prints what the manifest was advertising before overwriting it, so running the tool reports drift instead of silently absorbing it; the prevention side is the binding rule in ledger-and-session-records v1.5.
+v3.34 (August 5, 2026): Two amendments, both from the Fable skills-layer review. (1) WHO TONY IS: the GitHub Desktop / Run-button preference is stated as a preference where practical, not a prohibition. The earlier "never the git command line" wording read as a ban and put the section in conflict with safe-file-editing's git apply delivery format (Fable Job 2 #16); Tony's ruling keeps the GUI as default and treats a terminal step as a fallback. The surviving obligation is unchanged: don't hand over an operation outside Tony's known working set without explaining what it does and what could go wrong. (2) Stale Skill = Stop [CRITICAL] added under the Skill Manifest. A skill lives in three stores -- repo skills/, the account install Claude actually loads, and the generated manifest table. When a loaded skill's version disagrees with its manifest row, the session STOPS rather than proceeding and mentioning it later, and asks Tony to push to skills/ and reinstall in Settings. The prior wording asked only to "reconcile before trusting it," and the manifest still advertised 1.1/1.4 against an actual 1.2/1.6 for about three weeks with nothing surfacing it. Supporting change outside the protocol: skills_index.py now prints what the manifest was advertising before overwriting it, so running the tool reports drift instead of silently absorbing it; the prevention side is the binding rule in ledger-and-session-records v1.5.
 
 v3.35 (August 7, 2026): Updated skill safe-file-editing (v1.3).
 
@@ -178,6 +178,23 @@ deferred into the handoff and discharged by the next session's load.
 Skill-layer companion: provenance-discipline v1.9 narrows the push gate
 to the ACTIVE BUILD PATH (L-184, ratified 2026-08-05), keeping global
 Tier-1 = 0 as the destination rather than the firing rule (finding F1).
+
+v3.39 (August 12, 2026): One change. "A Check That Cannot Fail Is Not
+Passing" added to Part 3 as a CRITICAL gate, immediately after Verify
+Execution, Not Appearance, which it extends: that gate asks whether the
+edited code is the code that runs, this one asks whether the check being
+trusted can produce a failure at all. Origin was three instances in a
+single session, each in a different layer and each indistinguishable
+from a pass -- the provenance-discipline skill teaching an annotation
+format its own parser could not read, test_constants_provenance.py
+pinning 55 values in a file no routine executed, and
+constants_change_report.py reporting clean both for an edit shape it
+could not parse and for a path git does not track. The gate's three
+moves are: make success carry evidence, make the blind spot announce,
+and put the check where it actually runs. Tony's confirming question --
+what tells us it is working -- is the one that found the third instance.
+(Moved down from the resident protocol on 2026-08-23 when v3.42 made a
+fourth entry.)
 
 ### Preserved verbatim: v3.29 Technical lessons (now field notes in skills)
 

@@ -6,9 +6,9 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Skill version: 1.8 | Cut from palomas_orrery @ 3586970d (v1.8), earlier
-@ 434a712b (v1.7), @ 305b269 (v1.6), @ 3398970 (v1.5) | August 20,
-2026, with Anthropic's Claude Opus 5
+Skill version: 1.9 | Cut from palomas_orrery @ 41c0b279 (v1.9), earlier
+@ 3586970d (v1.8), @ 434a712b (v1.7), @ 305b269 (v1.6), @ 3398970
+(v1.5) | August 23, 2026, with Anthropic's Claude Opus 5
 Sources: LEDGER_CONSOLIDATED.md header, ledger_index.py at HEAD, handoff
 v28 (consolidation) and v29 (cleanup), food insecurity handoffs. v1.3
 adds the Tony-action (do)/(decide) tag convention and its rollup rule,
@@ -28,7 +28,14 @@ than a rung in the status ordering, with Tony's ruling that
 bundling items to complete a planned step supersedes RICE order,
 and extends the status rule from handoff-vs-manifest to any session
 document contradicting a settled ledger decision (both L-221,
-August 20, 2026).
+August 20, 2026). v1.9 (L-230) does two things to the Protocol and
+Skills Change Log. It adds the FOURTH step to the binding rule -- a
+skill bump also earns a protocol version-history entry, which is
+Tony's observation of August 23, 2026 that three links of a
+four-link chain were firing. And it corrects that section's own
+opening claim, which still said the protocol's version history lives
+in the ledger appendix five days after v3.41 replaced that appendix
+with a pointer.
 
 Note: READING the ledger at session start is resident Part-1 behavior,
 not this skill's job. This skill carries the maintenance mechanics.
@@ -247,8 +254,15 @@ line ("Session/entry written [Month Year] with Anthropic's Claude
 
 ## Protocol and Skills Change Log (v3.30 addition)
 
-The protocol's version history lives in the ledger (appendix section),
-not in the protocol (which keeps the last few entries as a pointer).
+The protocol's version history lives in
+`documentation/PROJECT_INSTRUCTIONS_HISTORY.md`, PART 1. The protocol
+itself keeps the THREE most recent entries resident; a fourth pushes
+the oldest down into that file, so an entry lives in exactly one place
+and never both. (Until 2026-08-23 this paragraph said the history
+lived in the ledger's appendix. v3.41 replaced that appendix with a
+pointer on 2026-08-18 and this sentence did not follow -- the section
+that owns the change-log convention carrying a stale claim about where
+the log lives. The Correction Does Not Travel, safe-file-editing 1.8.)
 Skill revisions are ledger entries too: each skill's SKILL.md carries a
 version line + source SHA; a skill update gets an L-item (or a line in
 the version-history appendix) recording skill name, new version, and the
@@ -258,10 +272,38 @@ resident Stale Skill = Stop [CRITICAL] gate, which also tells Tony the two
 actions needed (push to skills/, reinstall to the account profile).
 
 **Binding rule [QUALITY].** A skill version bump is not done until the
-manifest agrees. The three steps travel in ONE commit: bump the version
-line in SKILL.md -> run `skills_index.py` -> commit SKILL.md and both
-protocol copies together. Do not leave the regeneration to a later
-checkpoint someone has to remember.
+manifest agrees AND the protocol's history says what changed. FOUR
+steps travel in ONE commit:
+
+1. Bump the version line in `SKILL.md`.
+2. Run `skills_index.py`.
+3. Add a **protocol version-history entry** to
+   `PROJECT_INSTRUCTIONS.md` naming the skill, the new version, and
+   WHY -- and push the oldest resident entry down into
+   `documentation/PROJECT_INSTRUCTIONS_HISTORY.md` if that makes a
+   fourth.
+4. Commit `SKILL.md`, `PROJECT_INSTRUCTIONS.md` and the archive
+   together.
+
+Do not leave any of it to a later checkpoint someone has to remember.
+
+**Step 3 is the one that stops firing** (Tony's observation,
+2026-08-23). Steps 1, 2 and 4 are visible -- you are editing the file,
+running the tool, making the commit. Step 3 is the only one with no
+artifact prompting it, so it is the one that gets skipped, and the
+manifest going current on its own DISGUISES the omission: the protocol
+looks updated because half of it was. It is not a new rule --
+`v3.35 (August 7, 2026): Updated skill safe-file-editing (v1.3).`
+is a skill bump earning an entry on its own. It stopped firing, which
+is harder to notice than a rule that never existed.
+
+Detection for step 3 is designed and unbuilt (L-230): a
+maintenance-suite checker that reports when a skill version changed
+since the last run and the protocol version did not. It has to watch
+the TRANSITION -- the naive form, asking whether each manifested
+version appears somewhere in the written history, was measured on
+2026-08-23 and reports 10 of 10 skills, which is a check nobody reads
+twice.
 
 This is the PREVENTION side. Detection is the resident protocol's
 Stale Skill = Stop [CRITICAL] gate, which halts a session outright when a

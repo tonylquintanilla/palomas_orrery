@@ -20,6 +20,9 @@ citation-window follow-on), built on 851224c6.
 Module updated: August 23, 2026 with Anthropic's Claude Opus 5 (L-229
 part 2: the orientation is declared an ASSUMPTION; the unsourced
 magnetic-equator argument is withdrawn), built on ca97e81d.
+Module updated: August 23, 2026 with Anthropic's Claude Opus 5 (L-230
+opened; protocol v3.42; ledger-and-session-records 1.8 -> 1.9),
+built on 41c0b279.
 Module updated: August 20, 2026 with Anthropic's Claude Opus 5 (L-221:
 master plan as sequencing authority; L-214 correction and scoping),
 built on 3586970d.
@@ -252,7 +255,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*133 live items; 120 need attention (`!`); 132 RICE-scored; 91 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*134 live items; 120 need attention (`!`); 133 RICE-scored; 91 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -272,6 +275,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
 | ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-08-19 |
 | ! | L-224 | Streamer belt: one warped band, not a sphere | OPEN | 3.8 | 2026-08-22 |
+|  | L-230 | A skill bump does not reach the protocol's version history | DEFERRED | 3.8 | 2026-08-23 |
 | ! | L-227 | Streamer band hover rendered as one 378-character line | OPEN | 3.8 | 2026-08-23 |
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
 | ! | L-210 | Pilot citation findings -- four rows in constants_new.py | OPEN | 3.6 | 2026-08-21 |
@@ -3346,6 +3350,55 @@ separation for near-equal radii, hover AU convention).
   `idealized_orbits.py::create_planet_transformation_matrix` and
   `planet_poles['Sun']` (IAU 2018); L-224 (the band build); L-227 (the
   re-flow); L-209 (the Alfven constant this cites).
+
+#### [L-230] A skill bump does not reach the protocol's version history
+<!-- L:230 status:DEFERRED upd:2026-08-23 section:A flag: rice:3/3/85/2 -->
+- **Tony's observation, 2026-08-23.** A skill bump runs a four-link
+  chain: `SKILL.md` version line -> `skills_index.py` -> the manifest
+  zone in `PROJECT_INSTRUCTIONS.md` -> a protocol VERSION HISTORY
+  entry. The first three fire. The fourth does not.
+- **Not a new rule -- one that stopped firing.** The archive carries
+  `v3.35 (August 7, 2026): Updated skill safe-file-editing (v1.3).`
+  A skill bump earning an entry on its own. That is harder to notice
+  than a rule that never existed, and the manifest going current by
+  itself DISGUISES the omission: the protocol looks updated because
+  half of it was.
+- **Prevention landed 2026-08-23** in `ledger-and-session-records`
+  1.9: the binding rule gains its fourth step. Detection is this item.
+- **Tony's design instinct, and it is right:** report it in the
+  maintenance runner. That is the tool already in the routine, and
+  the resident gate says put the check where it runs rather than in a
+  document someone has to remember. An earlier Claude proposal to
+  write the convention into the protocol as prose was redirected for
+  exactly that reason.
+- **THE NAIVE CHECKER DOES NOT WORK, and this was measured rather
+  than guessed.** "For each skill in the manifest, does its current
+  version appear anywhere in the written history?" reports **10 of
+  10** skills as unrecorded at `41c0b279`. Three causes: only three
+  entries stay resident, the archive names older versions, and several
+  skills have sat at 1.1 since creation and were never the subject of
+  any entry. A check that fires on everything is ignored by its second
+  run -- the same failure as an audit whose denominator grows whenever
+  someone thinks of something.
+- **The design that does work watches the TRANSITION, not the state.**
+  If a skill version changed since the last run, the protocol version
+  must have changed too. That needs memory of the previous state,
+  which is the pattern the suite already uses
+  (`data/worksheet_check_state.json`, `data/provenance_history.json`)
+  rather than a new store. It can fail, and it fails exactly once per
+  unrecorded bump, which is what makes it worth running.
+- **Deferred deliberately.** A checker module, a state file, runner
+  wiring and its own test is a build, not a patch, and it deserves the
+  design round. The dead end above is recorded so a future session
+  does not re-derive it.
+- **Note:** RICE 3/3/85/2 -> 3.8 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect, then re-run
+  `ledger_index.py`.
+- **Ref:** `PROJECT_INSTRUCTIONS.md` v3.42 and its Skill Manifest;
+  `documentation/PROJECT_INSTRUCTIONS_HISTORY.md`; `skills_index.py`;
+  `skills/ledger-and-session-records/SKILL.md` v1.9, Protocol and
+  Skills Change Log; L-188 (the maintenance runner); L-226, L-227 (the
+  two bumps whose absence from the history exposed this).
 
 ## PENDING ACTION (Tony-side)
 
