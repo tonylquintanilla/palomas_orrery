@@ -4,6 +4,9 @@ Tony Quintanilla, PE | Claude | Palomas Orrery Project
 Consolidated: June 7, 2026 from handoff v28; supersedes all prior in-handoff
 ledgers. Current HEAD: see git log (repo is the source of truth).
 Module updated: June 2026 with Anthropic's Claude Sonnet 4.6, Opus 4.8 + Claude Fable 5
+Module updated: August 24, 2026 with Anthropic's Claude Opus 5 (L-191:
+scope corrected 20 -> 58 on the Fable survey, reproduced
+independently; gas-giant bullet inverted), built on 94ff80f2.
 Module updated: August 20, 2026 with Anthropic's Claude Opus 5 (L-222:
 docstring lines in the constants change report), built on 762aa5dd.
 Module updated: August 23, 2026 with Anthropic's Claude Opus 5 (L-154
@@ -2156,15 +2159,64 @@ and the divergence check); L-156 (Batch 2 worksheet).
   while the names kept implying it held. The regression is 2.5 months
   old.
 
-- **SCOPE, corrected twice.** A first estimate of "772 lines across 17
-  files" was WRONG -- it counted every line in that commit gaining a
-  `<br>`, which sweeps in the `_info_hover` strings where `<br>` is
-  correct. Resolving every name bound to `CreateToolTip` back to its
-  definition gives the real figure: **20 affected strings, all in
-  `solar_visualization_shells.py`.** Earth (11 tooltip strings) and
-  asteroid belt (4) are clean. Grep counted a proxy; the render
-  counted the surface.
+- **SCOPE, corrected three times, and the third correction is the
+  large one.** A first estimate of "772 lines across 17 files" was
+  WRONG -- it counted every line in the May commit gaining a `<br>`,
+  which sweeps in the `_info_hover` strings where `<br>` is correct.
+  Resolving every name bound to `CreateToolTip` back to its
+  definition then gave 20 affected strings, all in
+  `solar_visualization_shells.py`. **That figure was also wrong, and
+  low by more than half. The measured scope is 58 strings across six
+  bodies** (2026-08-21 survey, reproduced 2026-08-24):
 
+  | Source | Strings |
+  |---|---|
+  | `solar_visualization_shells.py` (direct call sites) | 19 |
+  | Jupiter | 10 |
+  | Saturn | 10 |
+  | Uranus | 8 |
+  | Neptune | 8 |
+  | Planet 9 | 2 |
+  | Moon | 1 |
+  | **Total** | **58** |
+
+  Earth (11 tooltip strings) and asteroid belt (4) remain clean.
+  Grep counted a proxy; the render counted the surface -- and the
+  20 was a third proxy, better than grep and still not the surface.
+- **MEASURED TWICE, BY TWO MODELS, AND STILL NOT CONFIRMED.** Claude
+  Fable 5 surveyed at `e1c64dc9` on 2026-08-21 and returned 58. The
+  count was withheld from that request on purpose so the answer could
+  disagree with the ledger, and it did. Claude Opus 5 reproduced it
+  at `94ff80f2` on 2026-08-24 against a tree two days further on, and
+  also got 58. **Two static analyses agreeing is still two static
+  analyses.** The render check is owed: hover a Jupiter shell
+  checkbox and look for a literal `<br>`. Until that happens, 58 is
+  measured and not confirmed, and this bullet says so rather than
+  letting agreement stand in for a look.
+- **The reproduction failed on its first attempt, which is worth
+  recording because it is this item's own lesson a third time.** It
+  returned 53. It resolved each string with `ast.literal_eval` and
+  skipped whatever could not be evaluated -- four solar assignments
+  built as f-strings or concatenations -- silently, with a bare
+  `continue` and no report. Re-measuring from raw source SLICES
+  rather than evaluated VALUES gave 19 solar and reproduced 58. A
+  proxy that cannot say what it skipped is the dangerous kind.
+
+- **WHY TWO SURVEYS MISSED THE SAME 39 STRINGS.** They are never
+  named beside a `CreateToolTip` call. `build_shell_checkboxes()` in
+  `celestial_objects.py` builds the name at RUN TIME from
+  `SHELL_DEFINITIONS`,
+
+      tooltip_name = f"{body_prefix}_{shell['var_suffix']}_info"
+
+  and fetches it from a dict the call site passes as `globals()` --
+  `build_shell_checkboxes('Jupiter', celestial_frame, globals(),
+  globals(), tk, CreateToolTip)`. The string's name exists only as a
+  formatted value during execution. A survey that resolves visible
+  call-site names finds nothing there and records ZERO, which is
+  precisely what the gas-giant bullet below did. Git history puts
+  this path live since January 2026, months before the August 7
+  measurement, so it is a missed surface rather than tree movement.
 - **FOUR PATTERNS EXIST for the same job.** This is the actual finding.
   | Module | Tooltip source | Plot source | State |
   |---|---|---|---|
@@ -2207,8 +2259,18 @@ and the divergence check); L-156 (Batch 2 worksheet).
   shared body. Solar does not surface this requirement; Earth does.
   Design against Earth's harder case, not solar's easier one.
 
-- **Gas giant shells have NO tooltips at all** -- zero `CreateToolTip`
-  bindings for any jupiter/saturn/uranus/neptune shell. Related
+- **CORRECTED 2026-08-24: gas giant shells DO have tooltips, and they
+  are most of this item.** This bullet read "Gas giant shells have NO
+  tooltips at all -- zero `CreateToolTip` bindings for any
+  jupiter/saturn/uranus/neptune shell." The sign was inverted.
+  Jupiter has 10 affected strings, Saturn 10, Uranus 8, Neptune 8 --
+  36 of the 58, in the four bodies the item recorded as having none.
+  There are indeed zero LITERAL bindings in source; they are all
+  built at run time, per the mechanism bullet above. "No binding
+  visible in source" and "no tooltip" are different claims, and this
+  bullet reported the first as the second.
+- The dead-key measurement in the same bullet is UNAFFECTED and
+  stands. Related
   measurement: the `'tooltip'` key in `shell_configs.py` is defined
   **124 times and read by nothing**, confirming L-181's "124 dead
   tooltip fields" as dead. (Corrected 2026-08-11: this bullet had
@@ -2219,17 +2281,46 @@ and the divergence check); L-156 (Batch 2 worksheet).
   strength of a grep.) Whether the gas
   giants SHOULD have tooltips is a separate question for Tony.
 
+- **THE DRIFT IS ALREADY REAL, and it is worse than the format bug.**
+  `shell_configs.py` carries 52 inline `hover_text` literals that
+  duplicate a module string, alongside the 16 correct
+  `.replace('\n', '<br>')` sites. **Only 11 of the 52 still agree
+  with their module twin. 41 have diverged.** Nothing on screen
+  reveals it, because each surface renders its own copy correctly.
+  The visible `<br>` bug is the half that announces itself; this is
+  the half that does not, and it is four times the size. (Measured
+  2026-08-21, structural counts reproduced 2026-08-24.)
+- **The 16 reference-pattern sites are currently NO-OPS.** Their
+  source strings already carry `<br>`, so `.replace('\n', '<br>')`
+  finds nothing to replace. The pattern is correct and the input to
+  it is not, which is why the gas giants look right in the plot and
+  wrong in the tooltip.
+- **Each affected string has exactly ONE live consumer** -- the
+  tooltip. That makes the mechanical half of the sweep safer than the
+  scope correction suggests: 58 is a bigger number than 20, but no
+  string is being read by two places that must stay in step.
 - **The shared-fragment pattern from L-179/L-180 is the precondition.**
   One string serving two surfaces means the boundary conversion is a
   one-line change rather than a per-string rewrite.
 
-**Gap:** TWO JOBS, not one. (1) SOLAR -- visible bug, template exists,
-mechanical: delete the 15 `_info_hover` duplicates, author the 18
-`_info` strings in `\n`, add `.replace('\n', '<br>')` at the solar
-entries in `shell_configs.py`. (2) EARTH -- no visible bug, same
-duplication, and it is the case that decides the shape of the fix
-because of the surface-specific-text requirement. Do the Mode 5
-survey first in both cases.
+**Gap (rewritten 2026-08-24 on the survey):** THREE JOBS, not two,
+and the first is a look rather than a build.
+(0) CONFIRM BY RENDER. Hover a Jupiter shell checkbox -- "-- Core"
+will do. A literal `<br>` there confirms the 58 by the surface
+instead of by two ASTs, and nothing else should move until it does.
+(1) THE 58, not the 20. Solar's 19 through direct call sites and the
+39 reached through `build_shell_checkboxes`. Author the `_info`
+strings in `\n`, delete the `_info_hover` duplicates, and add
+`.replace('\n', '<br>')` at the boundary -- the 16 existing sites are
+the template and are currently no-ops for want of `\n` input.
+(2) EARTH -- no visible bug, same duplication, and still the case
+that decides the SHAPE of the fix because of the surface-specific
+text requirement. Design against Earth; apply to all 58.
+The 41 diverged `hover_text` copies are inside job 2, not a fourth
+job: the mechanism that stops the drift is the same mechanism that
+carries surface-specific text.
+Tony's standing ruling holds throughout -- Mode 5 survey before
+sweep, and it is what produced the correction above.
 **Gap+ (2026-08-19):** replacing a typed constant with a read SPLITS a
 display-string unit and raises the Tier-1 COUNT while the uncited surface
 shrinks. Measured on L-209: `solar_visualization_shells.py` went 3 -> 6
@@ -2242,7 +2333,14 @@ was owed before today.
 **Ref:** origin `e3ca900` (2025-04-05, correct design), `97bbfe3`
 (2026-05-25, the regression); L-181 (canonical `<br>` direction and
 the dead tooltip decision); L-190 (tooling reach); L-182 (the silent
-drift class Earth sits in).
+drift class Earth sits in). Survey:
+`documentation/RELAY_REQUEST_L191_survey_fable_20260820.md` (the
+request, with the count deliberately withheld),
+`documentation/RELAY_RESPONSE_L191_survey_fable_20260821.md`,
+`documentation/l191_inventory.json` and
+`documentation/l191_cfgmap.json` (row-level evidence).
+Mechanism: `celestial_objects.py` `build_shell_checkboxes`;
+`palomas_orrery.py` the `globals()` call sites.
 
 #### [L-193] Qualified verdicts -- the token is not the whole answer
 <!-- L:193 status:OPEN upd:2026-08-15 section:A flag: rice:3/4/80/2 -->
