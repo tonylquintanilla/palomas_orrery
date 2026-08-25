@@ -1,6 +1,6 @@
 # Paloma's Orrery - Module Index
 
-**Generated:** August 24, 2026 by `module_atlas.py`  
+**Generated:** August 25, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -10,17 +10,22 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 128  
-**Total Lines of Code (non-blank):** 103,188  
-**Total Public Functions/Classes:** 1,162
+**Total Python Files:** 129  
+**Total Lines of Code (non-blank):** 103,747  
+**Total Public Functions/Classes:** 1,163
 
 ## Classification Coverage
 
-**Undetermined role (3).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
+- `patch_L234_7_ledger_rows.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
+
+**Undetermined domain (1).** No valid `Domain:` tag.
+
+- `patch_L234_7_ledger_rows.py`
 
 
 ---
@@ -224,6 +229,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
+| `patch_L234_7_ledger_rows.py` | Writes the ledger rows the 2026-08-25 session drafted in its handoff but never patched in. Target: LEDGER_CONSOLIDATED.md in the ORRERY repo (https://github.com/tonylquintanilla/palomas_orrery), built on 4ad78a01a642166cb70218ae5728aa6f6c39d7f4. (559 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

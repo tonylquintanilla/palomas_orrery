@@ -258,21 +258,27 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*135 live items; 121 need attention (`!`); 134 RICE-scored; 93 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*146 live items; 132 need attention (`!`); 145 RICE-scored; 94 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-238 | radius_fraction > 1.0 assumes every shell is above the surface | OPEN | 14.2 | 2026-08-25 |
 | ! | L-229 | Streamer band drawn in the ecliptic plane, not the solar equator | OPEN | 11.4 | 2026-08-23 |
+| ! | L-235 | Checks that cannot fail, gallery side [three instances] | OPEN | 11.4 | 2026-08-25 |
+| ! | L-237 | Artifact 1's golden record is stale and needs re-cutting | OPEN | 10.8 | 2026-08-25 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-226 | safe-file-editing 1.8 -- encoding gate covers prose; corrections do not travel | OPEN | 8.1 | 2026-08-23 |
 | ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-21 |
+| ! | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | OPEN | 6.0 | 2026-08-25 |
+| ! | L-245 | Constants drift check compares against the last COMMIT, not the last RUN | OPEN | 5.4 | 2026-08-25 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
 | ! | L-206 | Worksheet return filenames carry model and session | OPEN | 5.1 | 2026-08-18 |
 | ! | L-193 | Qualified verdicts -- the token is not the whole answer | OPEN | 4.8 | 2026-08-15 |
 | ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
-| ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-07 |
+| ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-08-25 |
+| ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-25 |
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
@@ -281,13 +287,18 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-230 | A skill bump does not reach the protocol's version history | DEFERRED | 3.8 | 2026-08-23 |
 | ! | L-232 | The gallery's served constants carry sources that nothing checks | OPEN | 3.8 | 2026-08-24 |
 | ! | L-227 | Streamer band hover rendered as one 378-character line | OPEN | 3.8 | 2026-08-23 |
+| ! | L-241 | Hills torus hover states the cloud bounds, not the drawn ring | OPEN | 3.8 | 2026-08-25 |
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
 | ! | L-210 | Pilot citation findings -- four rows in constants_new.py | OPEN | 3.6 | 2026-08-21 |
 | ! | L-215 | Ledger cleanup by topic, not by age | OPEN | 3.6 | 2026-08-19 |
-| ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-06 |
+| ! | L-239 | Seed the three Oort builders so a render is reproducible | OPEN | 3.6 | 2026-08-25 |
+| ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-25 |
 | ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
+| ! | L-236 | Gallery maintenance runner [designed, unbuilt] | OPEN | 3.2 | 2026-08-25 |
+| ! | L-240 | Split declared drawing parameters from measured values | OPEN | 2.8 | 2026-08-25 |
 | ! | L-176 | Shell hover text: add illustrated dimensions (radius_fraction -> km) | OPEN | 2.8 | 2026-08-04 |
 | ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-08-07 |
+| ! | L-244 | Sweep for replicated conversion factors as a class [Fable candidate] | OPEN | 2.8 | 2026-08-25 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 |  | L-225 | Migrate the comet shell constants into `constants_new.py`, then dispatch | DEFERRED | 2.4 | 2026-08-23 |
@@ -389,9 +400,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### G. Open Questions / Tony Calls
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-242 | Two convention candidates awaiting a ruling (OPEN QUESTION) | OPEN | 4.8 | 2026-08-25 |
 | ! | L-208 | CRITICAL-gate tier audit + self-report -> visible-evidence pattern extension | OPEN | 2.2 | 2026-08-18 |
-| ! | L-100 | Gallery feature-render surface: shells gallery-side vs interactive-side (OPEN QUESTION) | OPEN | 1.0 | 2026-07-08 |
-|  | L-137 | Heliocentric -> solar barycentric coordinates -- decided against | PARKED | 1.0 | 2026-07-17 |
+|  | L-137 | Heliocentric -> solar barycentric coordinates -- decided against | PARKED | 1.0 | 2026-08-25 |
 | ! | L-053 | AU-convention sweep (section E): keep open, revisit | OPEN | 0.8 | 2026-06-07 |
 | ! | L-056 | Phase 4 residuals: stale O2/O3 console wording; apsidal_markers em-dashes (MAPS per-frame wiring -> L-066) | OPEN | 0.5 | 2026-06-23 |
 
@@ -432,7 +443,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-160 | test_constants_provenance.py -- retire once fully absorbed, not before | OPEN | 8.1 | 2026-07-27 |
 | ! | L-172 | Phase 0 record-hygiene batch (provenance cluster prep) | OPEN | 5.7 | 2026-07-29 |
-| ! | L-158 | Derived-constant vulnerability inheritance rule (revised from a proposed rung, 2026-07-27) | OPEN | 5.6 | 2026-07-27 |
+| ! | L-158 | Derived-constant vulnerability inheritance rule (revised from a proposed rung, 2026-07-27) | OPEN | 5.6 | 2026-08-25 |
 | ! | L-156 | Provenance scanner scoring model fix -- criticality (category-based) + vulnerability recalibration + comprehensive sweep | OPEN | 5.3 | 2026-08-02 |
 | ! | L-155 | Cross-repo constants/geometry pinning checks -- built INTO provenance_scanner.py, not a standalone script | PENDING-GATE | 4.5 | 2026-07-27 |
 | ! | L-119 | event_link hardcoded None in the builder (F2, gates artifact 7) | OPEN | 3.6 | 2026-07-15 |
@@ -524,6 +535,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-028 | ASCII em-dash violation, comet_visualization_shells.py L257/505/519 | DONE | 1.0 | 2026-08-19 |
 |  | L-047 (#N10) | Note-composition structural refactor (behind N6) | DONE | 1.0 | 2026-06-23 |
 |  | L-050 (#N9) | white -> red orbit-marker switch (osculating marker intentionally stays white) | DONE | 1.0 | 2026-06-23 |
+|  | L-100 | Gallery feature-render surface: shells gallery-side vs interactive-side (OPEN QUESTION) | DONE | 1.0 | 2026-08-25 |
 |  | L-134 | Dashboard developer-tools audit | DONE | 1.0 | 2026-07-17 |
 |  | L-138 | Candidate objects & presets for the Objects menu (running list) -- superseded | DONE | 1.0 | 2026-07-17 |
 |  | L-020 (#26) | CUSTOM_SHELLS tooltip verification | DONE | 0.9 | 2026-06-22 |
@@ -994,7 +1006,7 @@ Perihelion is the project convention for Eris and Pluto.
 **Ref:** ASBUILT_geometry_and_br_fix.md, Batch 1 worksheets.
 
 #### [L-181] Complete the single-source-of-truth constant layer
-<!-- L:181 status:OPEN upd:2026-08-06 section:A flag: rice:5/5/70/5 -->
+<!-- L:181 status:OPEN upd:2026-08-25 section:A flag: rice:5/5/70/5 -->
 - Fable audit established the structural problem: up to six independent
   storage locations for one physical value (radius_fraction, hover_text,
   dead tooltip, module _info, CUSTOM_SHELLS tooltip, legacy inline
@@ -1272,6 +1284,17 @@ reversal of "clear all batches first," 2026-08-06.
 **Ref:** FABLE_REVIEW_feature_constant_unification.md (orrery
 `ee0da47c` / gallery `61a78c0`);
 PREDESIGN_HANDOFF_feature_constant_unification.md.
+**Note (2026-08-25) -- two figures above CORRECTED against HEAD.** The
+"about 22 physical values" in the belt and torus surface is 28:
+Neptune's four belt regions were never counted. And "ZERO carry a
+`# Source:`" is no longer true -- at HEAD three of the eight blocks
+do: Jupiter's rings (NASA Ring Fact Sheet, Galileo), Jupiter's belts
+(NASA Magnetosphere Overview, Juno) and Neptune's belts (Voyager 2;
+Ness et al. 1989). Saturn's rings, Saturn's belts, both tori and
+Uranus's belts carry nothing. The bullets above are left as written
+because they record what was found on 2026-08-07. See L-240 for the
+structural recommendation this surface now has, and L-190 for the
+reachability count.
 **Ref:** FABLE_shell_consistency_audit_report.md section 2 (Job 2),
 migration status summary table.
 
@@ -2112,7 +2135,7 @@ Same question as the three in `provenance_history.py`; fold them into
 that decision rather than opening a handle.
 
 #### [L-190] Scanner reach: anything rendered must be reachable
-<!-- L:190 status:OPEN upd:2026-08-07 section:A flag: rice:4/4/80/3 -->
+<!-- L:190 status:OPEN upd:2026-08-25 section:A flag: rice:4/4/80/3 -->
 - **Tony's rule, 2026-08-07:** "anything rendered from sourced data
   should be reached by the scanner." Stated as a general principle, not
   a one-off fix.
@@ -2140,6 +2163,14 @@ that decision rather than opening a handle.
 **Gap:** Extend the scanner to reach bare literals that feed a render.
 Start with the belt and torus values, since they gate Batch 2's
 worksheet completeness. Treat as a shared-CI change.
+**Note (2026-08-25), measured at HEAD.** The scanner extracts only
+DISPLAY STRINGS from the shell modules -- 10 units for Saturn, 20 for
+Jupiter, 116 for `shell_configs.py`, every one of kind `string`. The
+ring, belt and torus NUMBERS are function-local literals and are not
+scored units at all. The surface: 33 ring entries at three fields each
+(99 numbers) plus 28 belt and torus values, across four modules. None
+of it is reachable by `worksheet_request_builder.py`. Same gap as
+stated above, now with a count. See L-181, L-240.
 **Ref:** L-181 (the enumerated belt/torus surface); L-189 (run history
 and the divergence check); L-156 (Batch 2 worksheet).
 
@@ -3584,6 +3615,331 @@ separation for near-equal radii, hover AU convention).
   `provenance_scanner.py`; `worksheet_keys.py`; L-155 (pinning);
   L-181 (single home for feature constants); L-154; master plan
   Section 7 decisions 12 and 18.
+
+#### [L-234] Reopen Artifact 1: recreate the orrery's Sun in the assembler
+<!-- L:234 status:OPEN upd:2026-08-25 section:A flag: rice:4/5/90/3 -->
+- **Tony's ruling, 2026-08-25, in three parts.** (1) The artifact ladder
+  has a SECOND AXIS that was never sequenced. The seven golden artifacts
+  are seven PROPAGATION shapes -- conic, planetocentric, mean elements,
+  spacecraft arc, barycentric binary -- and that ladder is complete and
+  good. What the orrery DRAWS is a different axis entirely: interiors,
+  atmospheres, magnetospheres, belts, tori, rings, comae, solar shells,
+  Hill spheres. Nothing in the five segments or the seven artifacts
+  sequences that axis. (2) Nobody ever decided that some structures
+  would be shown and others not; L-100 carried that as an inherited
+  default, never a ruling. (3) Artifacts REOPEN: reopen Artifact 1, get
+  it right, then Artifact 2, and so on. "Right" means the orrery
+  recreated in the assembler as far as possible. Re-locking is normal,
+  not a failure, and the orrery may improve on the way -- as it did with
+  the streamer belt.
+- **Tony, verbatim:** "it is not my intent. The general intent is to
+  redo the orrery in the assembler. Part by part."
+- **The consequence that arrives first.** The resolver requests EVERY
+  feature key the cache carries for an object, and the golden record
+  hashes `feature_keys`, `trace_role_counts` and `legend_groups`. So
+  adding a feature family to a body FAILS every locked artifact
+  containing it. Under part-by-part that is the normal event, not an
+  edge case.
+- **Sun half: DONE 2026-08-25.** 19 shells in the assembler, 14 spheres
+  and 5 custom. Six gallery-side patches, `patch_L234_1` through `_6`:
+  Sun entry plus builder skip and three gates taught; centre features
+  dispatched; the 14 spheres drawn; the L-227 hover-wrap fix with scoped
+  smoke assertions; IAU solar pole plus the streamer band; the three
+  Oort custom shells (torus, clumps, galactic tide). Also delivered:
+  `smoke_sun_shells.js` (30 checks) and the two payload fixtures
+  `payload_earth.json` and `payload_jupiter_saturn.json`, which had never
+  been committed and without which the two existing smoke suites could
+  not run at all.
+- **Mode 5 passed twice.** 2026-08-24 on the 14 spheres; 2026-08-25 on
+  the complete Sun ("looks great"). 44 traces from 8 requests -- Earth's
+  4 geometry and 4 markers, the Sun's 18 and 18 -- reconciling exactly
+  against the config. Two things the render confirmed that no unit test
+  could: the band reads as a helmet and stalk tilted off the ecliptic,
+  which is what the 7.225 degree plane fit predicted (L-229); and Frame
+  on Sun returned a half-span of 0.279 AU, 1.2 times the outer corona at
+  0.2326 AU, which is the legendonly skip in `frameLayout` working --
+  without it the frame would have ranged to the gravitational influence
+  at 150,000 AU and the Sun would have vanished into a pixel.
+- **Three things the build discovered.** (a) THE SUN WAS NOT AN OBJECT:
+  twelve entries in `objects_config.json` and none of them the Sun,
+  which existed only as a scene centre drawn as a yellow marker, with no
+  catalogue record and therefore no `features` key. (b) `frame-origin`
+  IS LOAD-BEARING, NOT A LABEL: `served_window` is computed from every
+  object whose `canonical_frame` is `heliocentric`, and a participant
+  with no trust measurement NULLS that window for the whole cache,
+  silently disabling the resolver's propagation bound site-wide --
+  tested both ways. (c) THREE BUILDER GATES WOULD HAVE ABORTED THE
+  NIGHTLY and reading the code found none of them; `assert_structural`
+  invariant #3 aborts on any non-spacecraft with no osculating block,
+  which would have killed every build, not just first ones.
+- **Not on this path:** segment 2 (transport), the general provenance
+  audit, L-225, L-231, and the barycentric solar scene (L-137).
+**Gap:** the EARTH half. Inventory measured at orrery HEAD. Already
+served: `atmosphere_shell` (1.05, 1.25) and `van_allen_belts`.
+Interiors, not served: inner_core 0.19, outer_core 0.55, lower_mantle
+0.85, upper_mantle 0.98, crust 1.0. Also not served: hill_sphere 235.0.
+Custom, not served: rotation_axis, dipole_cone, magnetosphere, leo,
+geostationary_belt. Missing: an `orientation` key -- Earth's pole is
+RA 0, Dec 90 (IAU 2018, J2000 celestial north). Two shapes the Sun did
+not need: five of the six new sphere entries sit BELOW the surface, so
+L-238 is the first patch; and the magnetosphere is genuinely new
+geometry -- not a sphere, not a torus, not a band. Earth's block in
+`shell_configs.py` carries a block-level `# Source:` header naming USGS,
+NASA Earth Fact Sheet, NOAA/NCEI and the Van Allen Probes, verified in
+the April 2026 provenance audit; those are the sources the config
+entries should carry, with an `orrery_constant` pointer, same pattern as
+the Sun's.
+- **Note:** RICE 4/5/90/3 -> 6.0 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect, then re-run
+  `ledger_index.py`.
+**Ref:** HANDOFF 2026-08-25 (orrery `4ad78a01`, gallery `64201783` ->
+`88633707`); L-100 (closed by this ruling); L-235, L-237, L-238 (the
+work in front); L-229 (the solar pole the band needed); L-239, L-240,
+L-241 (orrery-side findings); L-080 (the artifact fingerprint's fields).
+
+#### [L-235] Checks that cannot fail, gallery side [three instances]
+<!-- L:235 status:OPEN upd:2026-08-25 section:A flag: rice:3/4/95/1 -->
+- **Found 2026-08-25 while building the Sun.** Three instances of the
+  resident gate A Check That Cannot Fail Is Not Passing, all in the
+  gallery repo, each reporting exactly what a real pass reports.
+- **(1) `test_artifact1_earth.py` T5 reads `fp.compare(golden, golden)`**
+  -- the fingerprint against itself. It cannot return a difference, and
+  the stored `artifact_1_earth_alone.json` is never opened. Passing
+  since July.
+- **(2) `solar_system_earth_test2.html` line 99 prints "matches golden
+  abbd01094852b57f" as a hardcoded `<summary>` caption.** Nothing
+  compares. And `abbd01094852b57f` is `scene_spec_hash` ALONE -- the one
+  field that cannot move when features change, which is precisely what
+  part-by-part will keep changing.
+- **(3) The two smoke suites read `payload_jupiter_saturn.json`,** which
+  was a session artifact and was never committed, so neither suite could
+  run at all. CLOSED 2026-08-25 by regenerating both payload fixtures.
+**Gap:** instances 1 and 2. Point T5 at the STORED file, and either wire
+the HTML caption to a real comparison or delete the claim. Worth pairing
+with L-237, because re-cutting a golden that nothing compares against
+buys very little.
+- **Note:** RICE 3/4/95/1 -> 11.4 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect.
+**Ref:** gallery `test_artifact1_earth.py`,
+`solar_system_earth_test2.html`, `payload_earth.json`,
+`payload_jupiter_saturn.json`; PROJECT_INSTRUCTIONS Part 3, A Check That
+Cannot Fail Is Not Passing; L-236; L-237.
+
+#### [L-236] Gallery maintenance runner [designed, unbuilt]
+<!-- L:236 status:OPEN upd:2026-08-25 section:A flag: rice:4/4/80/4 -->
+- **Shape.** A `maintenance_run.py` in the GALLERY repo, plus a
+  dashboard button in the existing Gallery and Web group.
+- **Why it belongs in the gallery, not the orrery.** Every input it
+  reads is there. A checker run from the orrery would reach a sibling
+  directory that exists only on Tony's machine, and a check that cannot
+  find its target skips quietly -- the same failure class as the three
+  instances in L-235.
+- **First roster:** module atlas and index (generators); the artifact-1
+  golden compared against the STORED file; the three Node suites, with
+  Node's absence REPORTED rather than skipped; served-cache structural
+  validation; config feature-shape validation.
+**Gap:** designed, not built.
+- **Note:** RICE 4/4/80/4 -> 3.2 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect.
+**Ref:** L-188 (the orrery-side maintenance runner this mirrors); L-235.
+
+#### [L-237] Artifact 1's golden record is stale and needs re-cutting
+<!-- L:237 status:OPEN upd:2026-08-25 section:A flag: rice:3/4/90/1 -->
+- **Unblocked 2026-08-25:** Mode 5 passed on the complete Sun, so the
+  gate this was waiting on is discharged.
+- **Cut 2026-07-11; it differs from today in four fields,** three of
+  which predate the 2026-08-25 session: `cache_snapshot_id`;
+  `coordinate_bounds` (the nightly refreshes Earth's osculating
+  elements); `warnings`, which still carries "served_window is null",
+  untrue since 2026-07-22; and `feature_keys`, which gains the Sun's
+  six.
+**Gap:** re-cut it. Pair with the L-235 T5 fix -- re-cutting a record
+that nothing compares against buys very little.
+- **Note:** RICE 3/4/90/1 -> 10.8 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect.
+**Ref:** L-234; L-235; L-080 (the fingerprint's field list).
+
+#### [L-238] radius_fraction > 1.0 assumes every shell is above the surface
+<!-- L:238 status:OPEN upd:2026-08-25 section:A flag: rice:3/5/95/1 -->
+- **`_validate_feature_shapes` in `gallery_cache_builder.py` asserts
+  it.** True of every shell served so far. False of every INTERIOR shell
+  in the orrery.
+- **It blocks the Earth build.** Earth's inner core at 0.19 walks
+  straight into it, and five of the six new sphere entries sit below the
+  surface. This is the Earth half's FIRST patch.
+**Gap:** relax the invariant to admit interior shells without losing
+whatever it was protecting against, then re-run the builder's testing
+layers.
+- **Note:** RICE 3/5/95/1 -> 14.3 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect.
+**Ref:** gallery `tools/gallery_cache_builder.py`;
+`documentation/TESTING_PROTOCOL.md`; L-234 (the Earth half).
+
+#### [L-239] Seed the three Oort builders so a render is reproducible
+<!-- L:239 status:OPEN upd:2026-08-25 section:A flag: rice:2/2/90/1 -->
+- **Orrery-side recommendation from assembler work, 2026-08-25.**
+  `create_sun_hills_cloud_torus`, `create_sun_outer_oort_clumpy` and
+  `create_sun_galactic_tide` in `solar_visualization_shells.py` draw
+  from the GLOBAL numpy RNG, so the same figure looks different on every
+  render.
+- **The streamer band's own docstring already names this and declines to
+  copy it.** The assembler ports are seeded.
+- **Recommendation:** seed all three in the orrery with the same pattern
+  -- a `RandomState` local to the builder, seed in the config -- so the
+  two instruments agree about whether a render is reproducible.
+**Gap:** nothing depends on it today. It will matter the first time an
+Oort scene is fingerprinted.
+- **Note:** RICE 2/2/90/1 -> 3.6 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect.
+**Ref:** `solar_visualization_shells.py` lines ~1411, ~1475, ~1551
+(verified at orrery `4ad78a01`); the gallery's Sun custom shells; L-234;
+L-241 (same three builders).
+
+#### [L-240] Split declared drawing parameters from measured values
+<!-- L:240 status:OPEN upd:2026-08-25 section:A flag: rice:4/4/70/4 -->
+- **Orrery-side recommendation from assembler work, 2026-08-25.** The
+  gallery's `objects_config.json` now stores the two kinds APART: the
+  streamer belt's cusp (Suess and Nerney) and fade (Kasper) sit in
+  `{value, unit, source}` nodes, while the warp amplitude, lobe count
+  and widths sit under a `drawing` block whose `_declared` field says
+  plainly that nobody has sourced them. The orrery mixes both kinds in
+  one dict with comments alongside.
+- **This is the STRUCTURAL half of the reachability problem.** The
+  scanner cannot tell a measurement from a drawing choice because the
+  code does not distinguish them, so the audit either over-counts
+  (chasing citations for `n_points`) or under-counts.
+- **Recommendation:** adopt the same split in `constants_new.py`'s
+  FEATURE_REGISTRY when L-181 designs it -- measured entries carry a
+  source field as DATA, declared entries carry a declaration string. The
+  gallery has now proved the shape works.
+**Gap:** gated on L-181's design pass; not a separate build.
+- **Note:** RICE 4/4/70/4 -> 2.8 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect.
+**Ref:** L-181; L-190; L-232; gallery `data/objects_config.json`.
+
+#### [L-241] Hills torus hover states the cloud bounds, not the drawn ring
+<!-- L:241 status:OPEN upd:2026-08-25 section:A flag: rice:2/2/95/1 -->
+- **`create_sun_hills_cloud_torus` hovers "2,000 to 20,000 AU".** The
+  drawn surface runs 5,570 to 16,953 AU about a ring at 11,000, because
+  a torus built from an inner and an outer bound puts its surface at the
+  MID-radius.
+- **Neither statement is wrong** -- the bounds are the cloud, the ring
+  is the drawing -- but a reader measuring the picture against the hover
+  will find they disagree.
+- **Recommendation: say both.** Identical in the assembler; fix both or
+  neither.
+**Gap:** minor. Fold into the next touch of either instrument.
+- **Note:** RICE 2/2/95/1 -> 3.8 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect.
+**Ref:** `solar_visualization_shells.py`; L-234; L-239 (same builders).
+
+#### [L-243] Retire the replicated AU conversion factor
+<!-- L:243 status:OPEN upd:2026-08-25 section:A flag: rice:3/3/95/2 -->
+- **Tony's instruction, 2026-08-25:** conversion factors live in
+  `constants_new.py`, carry a source, and are CALLED -- not replicated ad
+  hoc.
+- **The definition is already exemplary.** `KM_PER_AU = 149597870.7` at
+  `constants_new.py` line 56, sourced to IAU 2012 Resolution B2 as an
+  exact definition, with two independent cross-checks recorded (Claude
+  and GPT, both 2026-08-02, each naming its worksheet). Nothing to do
+  there.
+- **Thirteen live-code replications across seven modules**, measured at
+  orrery `4ad78a01`: `palomas_orrery.py`, `visualization_utils.py`,
+  `shared_utilities.py`, `spacecraft_encounters.py`,
+  `sgr_a_visualization_core.py`, `sgr_a_visualization_core_arcs.py`,
+  `create_ephemeris_database.py`. Most are an inline `* 149597870.7`
+  inside an f-string. Five of the seven import nothing from
+  `constants_new` today.
+- **One is a NAMED shadow and it is the dangerous one.**
+  `spacecraft_encounters.py` line 70: `AU_KM = 149597870.7  # 1 AU in
+  km`, used 14 times in that module. A grep for `KM_PER_AU` does not
+  find it, which is how it survived a convention that already forbids
+  it. Its schema comment at line 59 states the divisor as a literal too
+  -- The Correction Does Not Travel applies to that line in the same
+  patch.
+- **Recommendation: retire the NAME, not only the value.** An alias
+  (`AU_KM = KM_PER_AU`) would remove the second number while leaving the
+  second name, and a second name is how this one started. Fourteen
+  mechanical substitutions in a data-table module where the diff reads
+  easily.
+- **Two things measured clean and worth recording.** `SUN_RADIUS_KM` has
+  ZERO live replications -- 695700 appears nowhere outside its
+  definition. And `constants_new.py` imports only numpy and datetime, so
+  it is a leaf: importing it into any of the seven carries no
+  circular-import risk.
+- **The gallery's copy cannot be removed.** `feature_renderers.js` line
+  35 holds `var KM_PER_AU = 149597870.7;`. JavaScript cannot import a
+  Python module, so that is segment 2's surface by construction -- and
+  one line is as small as that surface gets.
+**Gap:** one transactional patch across the seven modules. Touches hover
+strings, so the agentic-pre-test data-sweep gate applies: py_compile,
+xvfb run on a throwaway copy, live-dispatch smoke.
+- **Note:** RICE 3/3/95/2 -> 4.3 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect.
+**Ref:** `constants_new.py` line 56; No Shadow Constants [CRITICAL];
+L-178 (the EARTH_RADIUS_KM duplicate, same class); L-244.
+
+#### [L-244] Sweep for replicated conversion factors as a class [Fable candidate]
+<!-- L:244 status:OPEN upd:2026-08-25 section:A flag: rice:3/4/70/3 -->
+- **The companion to L-243, and deliberately separate from it.** L-243
+  is countable today -- thirteen sites, seven modules, one shadow name --
+  and it closes. This one names the CLASS: any conversion factor
+  replicated rather than imported.
+- **Why the two are split.** A class with no detector has no
+  denominator, which is the audit-that-never-closes shape the resident
+  rule warns about. Tony's 2026-08-25 framing: do the narrow one now,
+  carry the broad one as an item.
+- **Candidate route: a Fable sweep.** Broad-reach scoping is what that
+  leg is for, and the question suits it -- enumerate every numeric
+  literal in the codebase that duplicates a value already named in
+  `constants_new.py`, whatever it is called locally. The answer is a
+  list, not a judgment, which is the shape that dispatches well.
+**Gap:** scope the dispatch. Until it runs there is no count, and until
+there is a count this item cannot be sized honestly.
+- **Note:** RICE 3/4/70/3 -> 2.8 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect, and whether Fable
+  carries it.
+**Ref:** L-243 (the narrow instance); L-181; L-190 (scanner reach).
+
+#### [L-245] Constants drift check compares against the last COMMIT, not the last RUN
+<!-- L:245 status:OPEN upd:2026-08-25 section:A flag: rice:3/4/90/2 -->
+- **Raised 2026-08-25 from Tony's question about carrying a backup copy
+  of `constants_new.py` to diff against.** The backup was declined on
+  Tony's own prior ruling; the gap behind the question is real and this
+  is it.
+- **The declined half, for the record.** `constants_change_report.py`
+  states under WHY THERE IS NO SECOND COPY OF ANY NUMBER that a stored
+  list of expected values is a second dictionary, a second dictionary is
+  hand-maintained, and a hand-maintained copy goes stale -- citing
+  `test_constants_provenance.py`, which was that copy: 52 pinned
+  literals, six of them behind an August 2 correction batch for ten
+  days. A backup of the whole file is that failure at maximum size.
+- **The real gap.** The tool compares the WORKING TREE against the LAST
+  COMMIT, and says so: it is a pre-commit reader. That fits Tony's loop
+  exactly -- sandbox, test, local repo, maintenance run, commit, push --
+  but only while the run precedes the commit. Run the suite after
+  committing and the diff is empty. The output still prints "compared
+  against <sha> <subject>", which is honest evidence git resolved and
+  ran, and still reads as nothing changed. Same green, different
+  meaning.
+- **Fix, confirmed by Tony 2026-08-25: store the last-run SHA, not a
+  file.** Compare against the commit the last maintenance run examined
+  rather than against HEAD. Git still holds every prior value, so no
+  second copy of any number exists and the 2026-08-12 ruling stands
+  intact. The window becomes "since anybody last looked" instead of
+  "since the last commit."
+- **Shared state with L-230.** The skill-version transition watcher needs
+  the same "since the last run" anchor to see a version move while the
+  protocol version did not. One small run-state file, two checks reading
+  it. Build them together or the second one invents a second store.
+**Gap:** design the run-state file (location, what it holds, what
+happens on a first run with no prior state), then amend
+`constants_change_report.py` and build L-230's watcher against it.
+- **Note:** RICE 3/4/90/2 -> 5.4 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect.
+**Ref:** `constants_change_report.py`; `maintenance_run.py` CHECKERS row
+1; L-230 (the transition watcher); L-188 (the runner);
+PROJECT_INSTRUCTIONS Part 3, A Check That Cannot Fail Is Not Passing.
 
 ## PENDING ACTION (Tony-side)
 
@@ -7162,6 +7518,26 @@ item sequenced under this ruling).
   `patch_L233_1_gallery_devtools.py` (gallery),
   `patch_L233_2_dashboard_and_handoff.py` (orrery); L-154; L-188 (the
   maintenance runner).
+
+#### [L-100] Gallery feature-render surface: shells gallery-side vs interactive-side (OPEN QUESTION)
+<!-- L:100 status:DONE upd:2026-08-25 section:C flag: rice:2/2/50/2 -->
+- Two-surface principle (L-098) extended to ALL shells (atmospheres,
+  magnetospheres, Van Allen belts, rings, comet nucleus/coma/tail). Default:
+  shells live GALLERY-side (pre-rendered authored artifacts, zero browser code);
+  the interactive stays light (conics + positions). OPEN, TONY'S CALL: which
+  shells (if any) are cheap+static enough to ALSO render interactive-side --
+  candidate: simple scaled-sphere/torus (atmosphere, Van Allen); gallery-only:
+  geometry/physics/animation (magnetosphere bow shock, comet tails, ring
+  structure). Aesthetic (worth showing live) + cost (a browser port per
+  interactive-side shell). Own design pass; do not guess. Flows through
+  feature_configs.json. Ref: GALLERY_DATA_SOURCE_HANDOFF.md v0.3.
+**RULED AND CLOSED 2026-08-25 (Tony).** The default recorded above --
+shells gallery-side, the interactive kept light -- was inherited from
+the Phase-1b cost framing of 2026-07-08 and was never a decision. Tony:
+"it is not my intent. The general intent is to redo the orrery in the
+assembler. Part by part." So the answer to "which shells, if any, also
+render interactive-side" is ALL of them, taken part by part, with
+artifacts reopening as families are added. See L-234.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
@@ -7952,21 +8328,8 @@ of globals(), so a rename surfaces as a missing key, not a silent drop.
 non-visual residuals: O2/O3 console wording (one-line fix on next touch) and
 apsidal_markers.py em-dashes (-> platform-neutrality, L-027). No Mode-5 needed here.
 
-#### [L-100] Gallery feature-render surface: shells gallery-side vs interactive-side (OPEN QUESTION)
-<!-- L:100 status:OPEN upd:2026-07-08 section:G flag: rice:2/2/50/2 -->
-- Two-surface principle (L-098) extended to ALL shells (atmospheres,
-  magnetospheres, Van Allen belts, rings, comet nucleus/coma/tail). Default:
-  shells live GALLERY-side (pre-rendered authored artifacts, zero browser code);
-  the interactive stays light (conics + positions). OPEN, TONY'S CALL: which
-  shells (if any) are cheap+static enough to ALSO render interactive-side --
-  candidate: simple scaled-sphere/torus (atmosphere, Van Allen); gallery-only:
-  geometry/physics/animation (magnetosphere bow shock, comet tails, ring
-  structure). Aesthetic (worth showing live) + cost (a browser port per
-  interactive-side shell). Own design pass; do not guess. Flows through
-  feature_configs.json. Ref: GALLERY_DATA_SOURCE_HANDOFF.md v0.3.
-
 #### [L-137] Heliocentric -> solar barycentric coordinates -- decided against
-<!-- L:137 status:PARKED upd:2026-07-17 section:G flag: rice:2/2/50/2 -->
+<!-- L:137 status:PARKED upd:2026-08-25 section:G flag: rice:2/2/50/2 -->
 - **Decision (Tony + Claude, discussed 4/16/26, pre-ledger note).**
   Switching the orrery's coordinate basis from heliocentric to
   solar-barycentric was discussed and judged unlikely to produce
@@ -7974,6 +8337,15 @@ apsidal_markers.py em-dashes (-> platform-neutrality, L-027). No Mode-5 needed h
   re-proposed without the context of why it was set aside.
 **Gap:** none -- parked by decision, not missing information. Reopen only
 if a specific use case surfaces that heliocentric can't serve.
+**Note (2026-08-25):** the use case this item's Gap names has
+surfaced. The Sun HAS an ephemeris relative to the SSB (target 10,
+origin @0) and the schema would take it -- Pluto and Charon are
+already stored at `@9`. It does not help the Sun scene: the resolver
+refuses any object whose stored centre differs from the scene's, and
+the assembler is built never to transform between frames. So a
+barycentric SOLAR SCENE is a real future artifact rather than a
+coordinate-basis switch. Still PARKED; recorded so the reopening
+condition is visible when that artifact is scheduled. See L-234.
 **Ref:** to_do_ideas.md (pre-ledger, 4/16/26). 
 
 #### [L-208] CRITICAL-gate tier audit + self-report -> visible-evidence pattern extension
@@ -8008,6 +8380,39 @@ primary focus. Rides alongside it.
 check-in framing; no repo pull this session -- design-stage capture
 only); PROJECT_INSTRUCTIONS v3.41, Part 2 (Register Rule) and Part 3
 (Procedural Criticality; Skill Manifest CRITICAL gates).
+
+#### [L-242] Two convention candidates awaiting a ruling (OPEN QUESTION)
+<!-- L:242 status:OPEN upd:2026-08-25 section:G flag: rice:2/3/80/1 -->
+- **Captured 2026-08-25 under capture-on-first-mention.** Both were
+  raised as candidates by the sessions that hit them; neither has been
+  ruled. Promotion is Tony's judgment, not the finder's. They are
+  written here so they do not live only in a handoff -- which is what
+  the first one is about.
+- **(a) A handoff that opens ledger items should either carry the patch
+  that writes them, or say plainly that it does not.** Home would be
+  `ledger-and-session-records`. Origin, 2026-08-25: the handoff of that
+  date drafted eight items and carried a Tony-action (do) reading "run
+  `ledger_index.py` after the ledger patch" while no ledger patch was
+  ever produced. The instruction read as completed work while pointing
+  at nothing. That handoff passed every check a handoff has -- the
+  anchor was there, the (do) list was there, the items were fully
+  drafted -- and nothing in the document could reveal that the rows did
+  not exist. It was caught by the next session reading the ledger at
+  HEAD and finding it stopped at L-233. Same shape as the three
+  instances in L-235: a record reporting complete without the thing it
+  describes ever having run.
+- **(b) A corrected patch built while its predecessor is already
+  running, shipped as a follow-on fingerprinted against the PATCHED
+  state rather than as a revert.** Home would be `safe-file-editing`.
+  Origin, 2026-08-25: it worked, and both routes were proved
+  byte-identical. Whether that makes it a convention or a one-off is the
+  open question.
+**Gap:** **Tony-action (decide)** on each. Either ruling that lands as a
+skill bump runs the four-link chain -- SKILL.md, `skills_index.py`, a
+protocol version-history entry, one commit (L-230).
+- **Note:** RICE 2/3/80/1 -> 4.8 is Claude's proposed score.
+**Ref:** HANDOFF 2026-08-25; L-235; L-230 (the four-link binding rule);
+L-223 (a paste is an unverified transfer).
 
 ## H. GALLERY / STUDIO TRACK (website repo; low-activity)
 
@@ -8957,7 +9362,7 @@ L-156's build defines its form.
 ---
 
 #### [L-158] Derived-constant vulnerability inheritance rule (revised from a proposed rung, 2026-07-27)
-<!-- L:158 status:OPEN upd:2026-07-27 section:W.Active flag: rice:4/2/70/1 -->
+<!-- L:158 status:OPEN upd:2026-08-25 section:W.Active flag: rice:4/2/70/1 -->
 - **What.** Values computed from already-tracked primaries (e.g.
   `SOLAR_RADIUS_AU = SUN_RADIUS_KM / KM_PER_AU`) don't fit the criticality
   question at all -- it's a Vulnerability question.
@@ -9016,6 +9421,15 @@ directly: delete the local shadow constants in
 `SUN_RADIUS_KM` through the `planet_visualization_utilities` shim alongside
 the existing `KM_PER_AU` import (line 42). Small, mechanical, no
 dependency on (1) -- can land anytime.
+**Note (2026-08-25), a measured instance from the assembler build.**
+Four of the Sun's fourteen sphere radii are DERIVED EXPRESSIONS the
+scanner does not score: `SOLAR_RADIUS_AU`, `CORE_AU`,
+`RADIATIVE_ZONE_AU`, `CHROMOSPHERE_PHYSICAL_RADII`. All four are
+richly cited; all four are unreachable, because the scanner scores
+LITERAL ASSIGNMENTS. The claims inside them -- the 0.2 core factor and
+the 0.7 radiative-zone factor -- are already declared as visualization
+boundaries with the measured ranges named, which is the right shape
+and invisible to the tooling. See L-190.
 **Ref:** `constants_new.py` derived-constants section; L-156 (holds the
 full ladder this rule attaches to).
 
