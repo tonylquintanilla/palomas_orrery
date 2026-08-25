@@ -22,11 +22,15 @@ Author: Tony Quintanilla with Claude AI
 
 Role: data
 Domain: stars
+
+Module updated: August 25, 2026 with Anthropic's Claude Opus 5
+    (L-249 step 1: the AU/year to km/s factor is derived from
+    KM_PER_AU instead of typed as 4.74).
 """
 
 import numpy as np
 from datetime import datetime, timezone
-from constants_new import PARSEC_TO_AU
+from constants_new import PARSEC_TO_AU, KM_PER_AU
 
 # ============================================================================
 # PROPER MOTION CORRECTIONS
@@ -369,9 +373,16 @@ def calculate_tangential_velocity(pmra_mas_yr, pmdec_mas_yr, distance_pc):
     pm_rad_yr = pm_arcsec_yr * (np.pi / 648000.0)
     
     # Tangential velocity = distance x angular velocity
-    # 1 AU/year = 4.74 km/s
+    # 1 AU/year in km/s, derived rather than typed. Written inline
+    # rather than as a named constant because it is used once here and
+    # nowhere else; a module-level copy would be a shadow constant.
+    # Derived: KM_PER_AU / (Julian year in seconds)
+    #          149597870.7 / (365.25 x 86400) = 4.740470463...
+    # Derived+: Previous hardcoded value was 4.74 (consistent to 3 sig
+    #          figs). Deriving it raises the returned velocity by
+    #          0.0099%.
     velocity_au_yr = distance_pc * PARSEC_TO_AU * pm_rad_yr
-    velocity_km_s = velocity_au_yr * 4.74
+    velocity_km_s = velocity_au_yr * (KM_PER_AU / (365.25 * 86400.0))
     
     return velocity_km_s
 

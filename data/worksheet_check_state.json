@@ -10,6 +10,8 @@
     "worksheet_prompt_constants_remaining.md"
   ],
   "uncited": [
+    "PREVIEW_REQUEST_L247_sgr_a_constants.md",
+    "REQUEST_L247_sgr_a_constants.md",
     "REQUEST_constants_new_pilot_claude.jsonl",
     "REQUEST_constants_new_pilot_claude.md",
     "REQUEST_constants_new_pilot_gemini.jsonl",
@@ -36,5 +38,5 @@
     "worksheet_mars_visualization.md",
     "worksheet_mercury_visualization.md"
   ],
-  "uncited_changed": "2026-08-20"
+  "uncited_changed": "2026-08-25"
 }

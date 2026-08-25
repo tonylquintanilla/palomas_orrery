@@ -11,25 +11,25 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 131  
-**Total Lines of Code (non-blank):** 104,190  
-**Total Public Functions/Classes:** 1,164
+**Total Lines of Code (non-blank):** 104,256  
+**Total Public Functions/Classes:** 1,169
 
 ## Classification Coverage
 
 **Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L243_2_au_to_km_aliases.py`
-- `patch_L247_1_sgr_a_constants_migration.py`
-- `patch_L250_1_braid_part3_and_L244.py`
+- `patch_L247_2_worksheet_request.py`
+- `patch_L248_1_constants_gate_and_au_yr.py`
+- `patch_L249_1_ledger_rows_248_249.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
 **Undetermined domain (3).** No valid `Domain:` tag.
 
-- `patch_L243_2_au_to_km_aliases.py`
-- `patch_L247_1_sgr_a_constants_migration.py`
-- `patch_L250_1_braid_part3_and_L244.py`
+- `patch_L247_2_worksheet_request.py`
+- `patch_L248_1_constants_gate_and_au_yr.py`
+- `patch_L249_1_ledger_rows_248_249.py`
 
 
 ---
@@ -127,7 +127,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,250 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (512 lines) |
 | `constants_new.py` | Verified numeric constants for Paloma's Orrery. (919 lines) |
-| `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (402 lines) |
+| `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (412 lines) |
 | `exoplanet_stellar_properties.py` | Stellar Properties for Exoplanet Host Stars (484 lines) |
 | `exoplanet_systems.py` | Hardcoded Exoplanet System Catalog (572 lines) |
 | `info_dictionary.py` | Descriptive text and narrative content for Paloma's Orrery. (2,050 lines) |
@@ -195,7 +195,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `add_docstrings.py` | Two related tools for module-level docstrings. (1,210 lines) |
-| `constants_change_report.py` | - what moved in constants_new.py, and why. (336 lines) |
+| `constants_change_report.py` | - what moved in constants_new.py, and why. (510 lines) |
 | `convert_hot_ph_to_json.py` | Convert HOT ocean pH data to JSON format Manual converter for ocean acidification visualization (199 lines) |
 | `create_cache_backups.py` | One-shot script to create timestamped backups of star data caches. (10 lines) |
 | `create_ephemeris_database.py` | Create satellite_ephemerides.json from multiple sources (246 lines) |
@@ -233,9 +233,9 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L243_2_au_to_km_aliases.py` | L-243, second and final pass. Retires the three surviving AU_TO_KM aliases -- names, not values. Each one already imports KM_PER_AU and assigns it to a second name, so no number changes anywhere in this patch. Also corrects the L-243 ledger row, which records one named shadow when there were five... (243 lines) |
-| `patch_L247_1_sgr_a_constants_migration.py` | L-247. Moves the Sagittarius A* physical constants out of sgr_a_star_data.py and into constants_new.py, deletes the two nothing reads, and sweeps the literals that were restating the migrated values in prose and in arithmetic. (379 lines) |
-| `patch_L250_1_braid_part3_and_L244.py` | Protocol v3.43. Adds "The Braid -- The Artifact Orders the Work" to Part 3, moves the v3.40 version-history entry down into PROJECT_INSTRUCTIONS_HISTORY.md to keep three resident, updates L-244 with the enumeration/remediation split, and opens L-250 as the handle for the protocol change. (352 lines) |
+| `patch_L247_2_worksheet_request.py` | - write the L-247 cross-check request. (188 lines) |
+| `patch_L248_1_constants_gate_and_au_yr.py` | - clear the gate, derive 4.74. (427 lines) |
+| `patch_L249_1_ledger_rows_248_249.py` | - write L-248 and L-249 into the ledger. (241 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

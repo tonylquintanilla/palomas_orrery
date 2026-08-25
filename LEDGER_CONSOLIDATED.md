@@ -258,7 +258,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*148 live items; 134 need attention (`!`); 147 RICE-scored; 95 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-248-249. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*150 live items; 136 need attention (`!`); 149 RICE-scored; 95 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -270,6 +270,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-226 | safe-file-editing 1.8 -- encoding gate covers prose; corrections do not travel | OPEN | 8.1 | 2026-08-23 |
 | ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-21 |
+| ! | L-249 | The Earth slice of L-181: interior boundaries as sourced constants | OPEN | 7.2 | 2026-08-25 |
 | ! | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | OPEN | 6.0 | 2026-08-25 |
 | ! | L-245 | Constants drift check compares against the last COMMIT, not the last RUN | OPEN | 5.4 | 2026-08-25 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
@@ -302,6 +303,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-08-07 |
 | ! | L-244 | Sweep for replicated conversion factors as a class [Fable candidate] | OPEN | 2.8 | 2026-08-25 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
+| ! | L-248 | The parsec-to-light-year factor is typed 36 times across the star pipeline | OPEN | 2.5 | 2026-08-25 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 |  | L-225 | Migrate the comet shell constants into `constants_new.py`, then dispatch | DEFERRED | 2.4 | 2026-08-23 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
@@ -4096,6 +4098,111 @@ parsec and 4.74 AU/yr to km/s in `exoplanet_coordinates.py`, and the
 seconds-per-year expression in `energy_imbalance.py` line 65);
 L-246 (S4714); No Shadow Constants [CRITICAL].
 
+#### [L-248] The parsec-to-light-year factor is typed 36 times across the star pipeline
+<!-- L:248 status:OPEN upd:2026-08-25 section:A flag: rice:3/3/85/3 -->
+- **The same class as L-243 and a good deal larger.** The value is
+  correct at every site; there are simply 36 of it, across 11 modules.
+  The whole star pipeline types the parsec-to-light-year conversion by
+  hand.
+- **Measured at `cf865ffc`** by counting occurrences of the literal
+  `3.26156` in tracked `.py` files outside `documentation/`:
+  `messier_object_data_handler` 9, `incremental_cache_manager` 8,
+  `exoplanet_coordinates` 3, `data_acquisition_distance` 3,
+  `vot_cache_manager` 2, `visualization_3d` 2, `star_visualization_gui`
+  2, `simbad_manager` 2, `data_processing` 2, `data_acquisition` 2,
+  `visualization_2d` 1.
+- **It needs no new constant.** Light-years per parsec is
+  `PARSEC_TO_AU / AU_PER_LIGHT_YEAR`, both already in
+  `constants_new.py`. With `PARSEC_TO_AU = 206265.0` (line 1018) and
+  `AU_PER_LIGHT_YEAR` derived at line 125, the quotient is 3.2615668.
+  The literal 3.26156 agrees to a relative 2.1e-06.
+- **Recommended as the first Fable sweep**, on L-244's route.
+  Mechanical, and the answer is a list rather than a judgment.
+- **Six of the eleven modules are CRLF in the repo blob** --
+  `messier_object_data_handler`, `data_acquisition_distance`,
+  `visualization_3d`, `data_processing`, `data_acquisition` and
+  `visualization_2d` -- so the sweeping patch must translate its
+  anchors per safe-file-editing, Line Endings Are Not Content.
+- **Deliberately NOT folded into `patch_L248_1`.** That script is named
+  for this handle and carries none of this sweep; what it does is clear
+  the constants-change gate so L-249 can land. Sweeping 3 of 36 sites
+  because one file happened to be open would leave 33 shadows and a
+  half-migrated constant, which is worse than not starting.
+**Gap:** the sweep itself. Dispatch first, then patch -- detecting line
+endings per file rather than assuming the repo's LF.
+- **Note (correction to the source handoff).** Step 1 of
+  `HANDOFF_20260825_evening_singularity_thread.md` states 38 sites and
+  an exact quotient of 3.2615675. Both are superseded by the
+  measurement above. The handoff is left unedited, being a session
+  record; the correction lives here. The 38 is most probably 36 live
+  sites plus two spent patch scripts in `documentation/` that quote the
+  literal in their own text.
+- **Note:** RICE 3/3/85/3 is Claude's proposed score, which the index
+  renders as 2.5. **Tony-action (decide):** confirm or redirect, and
+  whether Fable carries it.
+**Ref:** L-243 (the AU factor -- the narrow precedent); L-244 (the
+class, and the route); L-250 and PROJECT_INSTRUCTIONS Part 3, The
+Braid; `constants_new.py` lines 104, 125, 1018.
+
+#### [L-249] The Earth slice of L-181: interior boundaries as sourced constants
+<!-- L:249 status:OPEN upd:2026-08-25 section:A flag: rice:4/4/90/2 -->
+- **Confirmed by Tony on 2026-08-25 and then dropped.** The
+  conversation moved to conversion factors and never came back, so it
+  was agreed aloud and written down nowhere -- the same failure class
+  the rest of that day was spent on. This row is the capture.
+- **The shape.** Earth's interior boundary radii move into
+  `constants_new.py` in km with their sources, and `shell_configs.py`
+  derives its `radius_fraction` from them, following
+  `CHROMOSPHERE_PHYSICAL_RADII`'s existing pattern:
+
+      EARTH_INNER_CORE_KM    = <km>   # Source: ...
+      EARTH_INNER_CORE_RADII = EARTH_INNER_CORE_KM / EARTH_EQUATORIAL_RADIUS_KM
+
+- **What it fixes, measured at `cf865ffc`.** `shell_configs.py` stores
+  `radius_fraction: 0.19` for the inner core while the hover prose
+  beside it reads 1,220 km. Those disagree: 0.19 x 6378.1366 draws a
+  sphere at 1,211.8 km, and 1,220 km would be a fraction of 0.19128.
+  The outer core has the same shape -- 0.55 draws 3,508.0 km against a
+  stated 3,500, which is 0.54875. Two copies of one number with nothing
+  holding them together. Afterwards the drawing and the hover read from
+  one place and cannot disagree.
+- **It splits correctly for the scanner without anyone arranging it**
+  (L-240): the km literal is scored, the fraction is a formula.
+  Measured and declared fall out of the shape rather than being imposed
+  on it.
+- **What comes with it.** The km figures are round numbers in prose
+  today, under a block-level `# Source:` header at `shell_configs.py`
+  line 1316 naming USGS Interior of the Earth, the NASA Earth Fact
+  Sheet, NOAA/NCEI, NASA Goddard, the NASA Van Allen Probes and NASA
+  Solar System Dynamics, stamped "Verified: April 2026 provenance
+  audit". Lifting each value gives it its OWN `# Source:` line, which
+  then has to be true of that value specifically -- something a block
+  header covering six sources and nine shells does not establish. That
+  is the Earth slice of the verification loop, and by the 2026-08-22
+  braid ruling it runs before Artifact 1 re-locks, not before the
+  render.
+**Gap:** blocked on `patch_L248_1`, confirmed 2026-08-25 and unbuilt.
+That script clears three things: `constants_change_report.py`'s failure
+on `NAME = EXPR` lines referencing other tracked names, the `4.74`
+literal at `exoplanet_coordinates.py` line 373, and explicitly NOT
+`3.26156` (L-248). The derived lines this item adds are precisely the
+shape that gate cannot read, so building this first would trip it.
+- **Note (measured while writing this row; unresolved).** The two
+  mantle shells disagree with their own prose by far more than the
+  cores do, and whether that is drift or a declared drawing choice
+  under L-240 is not established either way. `lower_mantle` stores
+  0.85, drawing 5,421 km, while its hover puts that boundary 660 km
+  below the surface, which is 5,718 km or 0.8965. `upper_mantle` stores
+  0.98, drawing 6,251 km, against a stated 30 km depth, which is 6,348
+  km or 0.9953. Settle which of the two before the migration rather
+  than during it: a derivation would silently move both spheres.
+- **Note:** RICE 4/4/90/2 -> 7.2 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect.
+**Ref:** L-181 (the parent); L-240 (measured vs declared); L-234 (the
+Earth half of Artifact 1); `shell_configs.py` Earth block, lines
+1316-1512; `constants_new.py` line 74 (`EARTH_EQUATORIAL_RADIUS_KM`);
+`HANDOFF_20260825_evening_singularity_thread.md` step 2.
+
 ## PENDING ACTION (Tony-side)
 
 ## C. RECONCILED LEDGER -- DONE (closed; for the record, do not re-do)
@@ -7725,6 +7832,7 @@ artifacts reopening as families are added. See L-234.
 **Ref:** PROJECT_INSTRUCTIONS v3.43 Part 3; L-244 (the first program the
 rule bounds); L-248; L-199 (the three-resident cap); The Artifact Bounds
 the Audit.
+
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

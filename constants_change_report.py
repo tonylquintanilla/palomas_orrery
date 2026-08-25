@@ -61,12 +61,41 @@ Comparing against something other than the last commit:
 
     python constants_change_report.py <sha>
 
+DERIVED LINES
+-------------
+A constant can be written as an expression over other constants:
+
+    M_PER_AU = KM_PER_AU * 1000
+
+That is not a number, so it used to fall into the unparsed bucket and
+fail the run -- every time the unit-variant convention was followed. It
+is a third case now, beside changed and added, reported with its
+parents and passed:
+
+    M_PER_AU                       DERIVED = KM_PER_AU * 1000
+        parents: KM_PER_AU
+        each is watched here, so this line owes no # Source: of its own
+
+The pass rests entirely on the parents being watched, so the test is
+strict. The expression must parse, must be built from nothing but
+numbers, arithmetic and names assigned at module level in
+constants_new.py, and must reference at least one such name. A function
+call, an attribute, a string, an unknown name -- any of those and the
+line is not a derivation this tool can vouch for, so it goes back to
+announcing.
+
+What still fails is the DERIVATION changing. The same name with a
+different expression on the two sides of the diff is a value edit, and
+it is judged documented-or-bare exactly like a number.
+
 EXIT CODE
 ---------
 0 only when everything was understood and every changed value also moved
 its provenance. 1 when a value moved alone, when a change could not be
-attributed, or when a changed line was not understood at all. The
-maintenance runner surfaces that as a failed checker.
+attributed, or when a changed line was not understood at all. A derived
+line is understood, so it does not fail the run; a derived line whose
+formula moved is a changed value and is judged like one. The
+maintenance runner surfaces a 1 as a failed checker.
 
 A gap announces. Nothing this tool could not read is reported as clean.
 
@@ -74,6 +103,10 @@ Role: devtool
 Domain: dev_tools
 
 Module created: August 2026 with Anthropic's Claude Opus 5.
+Module updated: August 25, 2026 with Anthropic's Claude Opus 5
+    (L-249 step 1: NAME = EXPR over tracked constants is a third case,
+    DERIVED, so following the unit-variant convention no longer fails
+    this gate).
 """
 
 import os
@@ -95,6 +128,106 @@ DICT_RE = re.compile(
     r'(-?\d+\.?\d*(?:[eE][-+]?\d+)?)\s*,?\s*(?:#.*)?$')
 
 COMMENT_RE = re.compile(r'^\s*#')
+
+# NAME = <anything that is not a comment>. Deliberately loose: the test
+# that matters happens in parse_derived(), which parses the right-hand
+# side and refuses everything it cannot account for.
+DERIVED_RE = re.compile(
+    r'^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*([^#]+?)\s*(?:#.*)?$')
+
+# The only node types a derived expression may contain, besides Name and
+# a numeric Constant. Anything else -- a call, an attribute, a
+# subscript, a string -- means this tool cannot vouch for the line, and
+# it goes back to announcing.
+DERIVED_NODES = (
+    ast.Expression, ast.BinOp, ast.UnaryOp, ast.Load,
+    ast.Add, ast.Sub, ast.Mult, ast.Div, ast.FloorDiv,
+    ast.Mod, ast.Pow, ast.USub, ast.UAdd,
+)
+
+
+def module_level_names(here, base):
+    """Every name assigned at module level in TARGET, at base and now.
+
+    Returns (set_of_names, note). The note says what was actually read,
+    so a caller can print it rather than infer it -- the same reason
+    docstring_lines returns one.
+
+    Both revisions are read, and the union is what counts. A derived
+    line can arrive in the same diff that adds the parent it derives
+    from, and a parent added in this very edit is still a parent this
+    tool watches.
+    """
+    names = set()
+    notes = []
+
+    def collect(source, label):
+        try:
+            tree = ast.parse(source)
+        except Exception as exc:
+            notes.append('%s unreadable (%s)' % (label, exc.__class__.__name__))
+            return
+        found = set()
+        for node in tree.body:
+            if isinstance(node, ast.Assign):
+                targets = node.targets
+            elif isinstance(node, ast.AnnAssign):
+                targets = [node.target]
+            else:
+                continue
+            for target in targets:
+                if isinstance(target, ast.Name):
+                    found.add(target.id)
+        names.update(found)
+        notes.append('%s %d name(s)' % (label, len(found)))
+
+    ok, shown = git(['show', '%s:%s' % (base, TARGET)], here)
+    if ok:
+        collect(shown, 'base')
+    else:
+        notes.append('base UNAVAILABLE -- working copy only')
+
+    try:
+        with open(os.path.join(here, TARGET), 'rb') as handle:
+            collect(handle.read().decode('utf-8', 'replace'), 'working')
+    except OSError as exc:
+        notes.append('working copy unreadable (%s)' % exc)
+
+    return names, '; '.join(notes)
+
+
+def parse_derived(line, tracked):
+    """(name, expression, parents) if the line derives a value, else None.
+
+    Strict on purpose. The pass this grants rests on every parent being
+    watched by this same tool, so one name that is not assigned at
+    module level in TARGET is enough to disqualify the line. It then
+    falls through to the unparsed bucket and announces, which is the
+    correct outcome for a value edit written in a shape nobody has
+    vouched for.
+    """
+    match = DERIVED_RE.match(line)
+    if not match:
+        return None
+    name, expr = match.group(1), match.group(2).strip()
+    try:
+        tree = ast.parse(expr, mode='eval')
+    except SyntaxError:
+        return None
+    parents = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Name):
+            parents.add(node.id)
+        elif isinstance(node, ast.Constant):
+            if isinstance(node.value, bool):
+                return None
+            if not isinstance(node.value, (int, float)):
+                return None
+        elif not isinstance(node, DERIVED_NODES):
+            return None
+    if not parents or not parents <= tracked:
+        return None
+    return name, expr, sorted(parents)
 
 
 def docstring_lines(here, base):
@@ -191,7 +324,8 @@ def split_hunks(diff_text):
     return hunks
 
 
-def read_changes(diff_text, docstrings=frozenset()):
+def read_changes(diff_text, docstrings=frozenset(),
+                 tracked=frozenset()):
     """Value changes, additions, removals, and everything not understood.
 
     Provenance is judged per HUNK: if the hunk carrying a value change
@@ -212,12 +346,21 @@ def read_changes(diff_text, docstrings=frozenset()):
     a form this tool does not read, and reporting clean would be the
     silent failure worth fearing most, since a skipped line looks exactly
     like no change at all.
+
+    DERIVED -- a line of the form NAME = <expression over tracked
+    names> is a third case rather than an unparsed one. It is reported
+    with its parents and passes. A CHANGED derivation is a different
+    matter: the same name carrying a different expression on the two
+    sides of the diff is a value edit, judged documented-or-bare
+    exactly like a number.
     """
     changed, added, removed, unparsed = [], [], [], []
     docstring_seen = []
+    derived_changed, derived_added, derived_removed = [], [], []
 
     for hunk in split_hunks(diff_text):
         old_vals, new_vals = {}, {}
+        old_derived, new_derived = {}, {}
         comment_moved = False
         hunk_unparsed = []
         hunk_docstring = []
@@ -240,6 +383,15 @@ def read_changes(diff_text, docstrings=frozenset()):
                 # and crediting one with it would be a false clear.
                 if body.strip() in docstrings:
                     hunk_docstring.append(sign + body.rstrip())
+                    continue
+                found = parse_derived(body, tracked)
+                if found is not None:
+                    # Runs BEFORE the digit test, so a derivation with
+                    # no digit in it (X = A * B) is caught too -- that
+                    # shape used to pass by being silently ignored,
+                    # which is the same failure as an unread value edit.
+                    bucket = old_derived if sign == '-' else new_derived
+                    bucket[found[0]] = (found[1], found[2])
                     continue
                 if any(ch.isdigit() for ch in body) and body.strip():
                     hunk_unparsed.append(sign + body.rstrip())
@@ -267,7 +419,20 @@ def read_changes(diff_text, docstrings=frozenset()):
             else:
                 removed.append((name, before))
 
-    return changed, added, removed, unparsed, docstring_seen
+        for name in sorted(set(old_derived) | set(new_derived)):
+            before, after = old_derived.get(name), new_derived.get(name)
+            if before is not None and after is not None:
+                if before[0] != after[0]:
+                    derived_changed.append(
+                        (name, before[0], after[0], after[1],
+                         'documented' if comment_moved else 'bare'))
+            elif after is not None:
+                derived_added.append((name, after[0], after[1]))
+            else:
+                derived_removed.append((name, before[0]))
+
+    return (changed, added, removed, unparsed, docstring_seen,
+            (derived_changed, derived_added, derived_removed))
 
 
 def main():
@@ -319,10 +484,13 @@ def main():
         return 0
 
     docstrings, doc_note = docstring_lines(here, base)
-    changed, added, removed, unparsed, doc_lines = read_changes(
-        out, docstrings)
+    tracked, tracked_note = module_level_names(here, base)
+    changed, added, removed, unparsed, doc_lines, derived = read_changes(
+        out, docstrings, tracked)
+    derived_changed, derived_added, derived_removed = derived
 
-    if not (changed or added or removed or unparsed):
+    if not (changed or added or removed or unparsed or derived_changed
+            or derived_added or derived_removed):
         print('  %s changed, but no numeric value moved.' % TARGET)
         print('  (Comments, docstring stamp, formatting, or other'
               ' non-numeric edits only.)')
@@ -357,6 +525,30 @@ def main():
         print('  %-30s REMOVED (was %s)' % (name, before))
         print()
 
+    derived_bare = []
+    for name, before, after, parents, state in derived_changed:
+        print('  %-30s %s -> %s' % (name, before, after))
+        print('      DERIVATION CHANGED -- now from %s'
+              % ', '.join(parents))
+        if state == 'documented':
+            print('      provenance also changed -- deliberate correction')
+        else:
+            print('      VALUE MOVED ALONE -- no provenance change in this'
+                  ' block')
+            derived_bare.append(name)
+        print()
+
+    for name, expr, parents in derived_added:
+        print('  %-30s DERIVED = %s' % (name, expr))
+        print('      parents: %s' % ', '.join(parents))
+        print('      each is watched here, so this line owes no'
+              ' # Source: of its own')
+        print()
+
+    for name, expr in derived_removed:
+        print('  %-30s DERIVATION REMOVED (was %s)' % (name, expr))
+        print()
+
     if unparsed:
         print('  %d changed line(s) carry a number but match no shape this'
               % len(unparsed))
@@ -382,6 +574,12 @@ def main():
     print('-' * 70)
     print('  %d changed, %d added, %d removed'
           % (len(changed), len(added), len(removed)))
+    if derived_changed or derived_added or derived_removed:
+        print('  parents read from %s' % tracked_note)
+        print('  %d derived line(s): %d changed, %d added, %d removed'
+              % (len(derived_changed) + len(derived_added)
+                 + len(derived_removed), len(derived_changed),
+                 len(derived_added), len(derived_removed)))
     if unclear:
         print('  %d value(s) could not be attributed: %s'
               % (len(unclear), ', '.join(unclear)))
@@ -396,7 +594,7 @@ def main():
         print('  that moved alone did not come from a documented check.')
     print('-' * 70)
 
-    return 1 if (bare or unclear or unparsed) else 0
+    return 1 if (bare or unclear or unparsed or derived_bare) else 0
 
 
 if __name__ == '__main__':
