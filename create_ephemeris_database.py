@@ -15,6 +15,7 @@ import os
 import re
 from datetime import datetime
 from typing import Dict, Optional
+from constants_new import KM_PER_AU
 
 def parse_horizons_header(filename: str) -> Dict:
     """
@@ -129,8 +130,8 @@ def create_satellite_ephemerides():
     idealized_params = get_idealized_orbits_data()
     
     # Step 2: Convert idealized_orbits data to our format
-    # Note: idealized_orbits.py uses AU, we need km
-    AU_TO_KM = 149597870.7
+    # Note: idealized_orbits.py uses AU, we need km.
+    # KM_PER_AU is imported from constants_new (L-243).
     
     for sat_name, params in idealized_params.items():
         # Skip non-satellite objects
@@ -165,7 +166,7 @@ def create_satellite_ephemerides():
             
             # Semi-major axis (convert from AU to km)
             if 'a' in params:
-                orbital_elements['semi_major_axis_km'] = params['a'] * AU_TO_KM
+                orbital_elements['semi_major_axis_km'] = params['a'] * KM_PER_AU
                 
             if 'e' in params:
                 orbital_elements['eccentricity'] = params['e']

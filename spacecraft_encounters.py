@@ -41,6 +41,7 @@ import plotly.graph_objects as go
 from datetime import datetime, timedelta
 from astroquery.jplhorizons import Horizons
 from astropy.time import Time
+from constants_new import KM_PER_AU
 
 def utc_to_tdb(dt):
     """Convert UTC datetime to TDB for Horizons queries (~69 second offset)."""
@@ -56,7 +57,7 @@ def utc_to_tdb(dt):
 #   type:         flyby | gravity_assist | orbit_insertion | orbit |
 #                 landing | sample | sample_return | end_of_mission | planned
 #   dist_km:      Known closest approach distance (km, center-to-center)
-#   dist_au:      Same in AU (km / 149597870.7)
+#   dist_au:      Same in AU (km / KM_PER_AU)
 #   v_kms:        Relative velocity at encounter (km/s), None if unknown
 #   label:        Display label for GUI and marker
 #   note:         Educational note for hover text (encounter-specific)
@@ -66,8 +67,6 @@ def utc_to_tdb(dt):
 #   select_also:  Objects to auto-select when navigating to this encounter
 #   plot_days:    Suggested plot window (days) -- Stage B GUI preset
 #   plot_scale_au: Suggested manual scale (AU), None for auto -- Stage B
-
-AU_KM = 149597870.7  # 1 AU in km
 
 # ============================================================================
 # DATE SOURCE CONVENTION
@@ -107,7 +106,7 @@ SPACECRAFT_ENCOUNTERS = {
             'date': '2007-02-28 05:43:40',
             'type': 'gravity_assist',
             'dist_km': 2305000,        # 2.3 million km, 32 Jovian radii
-            'dist_au': 2305000 / AU_KM,  # ~0.01541 AU
+            'dist_au': 2305000 / KM_PER_AU,  # ~0.01541 AU
             'v_kms': 21.219,           # relative to Jupiter
             'v_helio_kms': 23.0,       # relative to Sun (post-assist)
             'label': 'Jupiter Gravity Assist',
@@ -137,7 +136,7 @@ SPACECRAFT_ENCOUNTERS = {
             'date': '2015-07-14 11:49:57',
             'type': 'flyby',
             'dist_km': 12472,          # surface distance 12,472 km
-            'dist_au': 12472 / AU_KM,   # ~0.0000834 AU
+            'dist_au': 12472 / KM_PER_AU,   # ~0.0000834 AU
             'v_kms': 13.78,            # relative to Pluto
             'v_helio_kms': 14.52,      # relative to Sun at encounter
             'label': 'Pluto Flyby',
@@ -165,7 +164,7 @@ SPACECRAFT_ENCOUNTERS = {
             'date': '2019-01-01 05:33:22',  # JPL authoritative UTC (05:34:31 TDB)
             'type': 'flyby',
             'dist_km': 3538,           # 3,538.5 km from surface (JPL Horizons header)
-            'dist_au': 3538 / AU_KM,    # ~0.0000236 AU
+            'dist_au': 3538 / KM_PER_AU,    # ~0.0000236 AU
             'v_kms': 14.43,            # relative to Arrokoth
             'v_helio_kms': 13.87,      # relative to Sun at encounter
             'label': 'Arrokoth Flyby',
@@ -202,7 +201,7 @@ SPACECRAFT_ENCOUNTERS = {
             'date': '2026-04-03 00:43:00',    # launch + 1d 1h 8m, TLI burn start
             'type': 'flyby',                   # Earth departure
             'dist_km': 70377,                  # apogee raise altitude (km)
-            'dist_au': 70377 / AU_KM,           # ~0.000470 AU
+            'dist_au': 70377 / KM_PER_AU,           # ~0.000470 AU
             'v_kms': None,                     # TBD from trajectory data
             'date_source': 'authoritative',    # burn time -- not a proximity minimum
             'label': 'Earth Departure (TLI)',
@@ -232,7 +231,7 @@ SPACECRAFT_ENCOUNTERS = {
             'date_source': 'horizons',         # actual time derived from OEM trajectory data
             'type': 'flyby',
             'dist_km': 8900,                  # approximate closest approach to lunar surface
-            'dist_au': 8900 / AU_KM,           # ~0.0000595 AU
+            'dist_au': 8900 / KM_PER_AU,           # ~0.0000595 AU
             'v_kms': None,                     # TBD from trajectory data
             'label': 'Lunar Closest Approach',
             'note': ('Free-return reentry after the lunar flyby. Return '
@@ -261,7 +260,7 @@ SPACECRAFT_ENCOUNTERS = {
             'date': '2026-04-11 00:04:00',    # launch + 9d 1h 29m, entry interface 122 km
             'type': 'flyby',                   # free-return reentry
             'dist_km': 6493,                   # 122 km altitude + 6371 km Earth radius
-            'dist_au': 6493 / AU_KM,            # ~0.0000434 AU
+            'dist_au': 6493 / KM_PER_AU,            # ~0.0000434 AU
             'v_kms': 10.8,                     # approximate reentry velocity
             'date_source': 'authoritative',    # entry interface time -- not a proximity minimum
             'label': 'Reentry & Splashdown',
@@ -299,7 +298,7 @@ SPACECRAFT_ENCOUNTERS = {
             'date': '2026-5-15 9:29:00',
             'type': 'gravity_assist',
             'dist_km': 8009,        
-            'dist_au': 8009 / AU_KM, 
+            'dist_au': 8009 / KM_PER_AU, 
             'v_kms': 5.51,
             'label': 'Mars Gravitational Assist',
             'note': ('Psyche will use Mars\' gravity to increase its speed as it moves to its encounter with asteroid 16 Psyche. It will also test its instruments.'),
@@ -322,7 +321,7 @@ SPACECRAFT_ENCOUNTERS = {
             'date': '2026-05-15 19:51:00',
             'type': 'flyby',
             'dist_km': 1151,        # 1,151 km
-            'dist_au': 1151 / AU_KM,  # ~0.0000077 AU
+            'dist_au': 1151 / KM_PER_AU,  # ~0.0000077 AU
             'v_kms': 6.4,
             'label': 'Flyby of Phobos',
             'note': ('The Psyche mission gravity assist from Mars on 5-15-2026 will also take it through a very close flyby of the moon, Phobos.'),
@@ -346,7 +345,7 @@ SPACECRAFT_ENCOUNTERS = {
     #         'date': '1979-03-05 12:05:26',
     #         'type': 'gravity_assist',
     #         'dist_km': 349000,
-    #         'dist_au': 349000 / AU_KM,
+    #         'dist_au': 349000 / KM_PER_AU,
     #         'v_kms': None,
     #         'label': 'Jupiter Flyby',
     #         'note': '...',
@@ -553,7 +552,7 @@ def _calculate_encounter_resolution(enc):
 
     # 1. CUBE SCALE (framing): 4x flyby distance
     cube_half_width_km = dist_km * 4
-    plot_scale_au = cube_half_width_km / AU_KM
+    plot_scale_au = cube_half_width_km / KM_PER_AU
 
     # 2. ARC RESOLUTION (curvature): semicircle through closest approach
     arc_length_km = math.pi * dist_km
@@ -682,12 +681,12 @@ def resolve_encounter_time(enc, sc_id, obj_start_date, obj_end_date, objects):
         best_dt_str = best_dt.strftime('%Y-%m-%d %H:%M:%S')
 
         print(f"[RESOLVE] Fine minimum: {best_dt_str} UTC "
-              f"({best_range_au:.7f} AU = {best_range_au * AU_KM:,.0f} km)", flush=True)
+              f"({best_range_au:.7f} AU = {best_range_au * KM_PER_AU:,.0f} km)", flush=True)
 
         result = {
             'date':    best_dt_str,
             'dist_au': best_range_au,
-            'dist_km': best_range_au * AU_KM,
+            'dist_km': best_range_au * KM_PER_AU,
         }
         # Cache on the enc dict so the second caller (add_tagged_encounter_markers
         # or C-pre HypOsc block) skips the Horizons round-trip entirely.
@@ -907,7 +906,7 @@ def get_comet_perihelion_preset(obj_name, obj_info=None):
     GM_sun = 0.01720209895**2  # AU^3 / day^2  (Gaussian gravitational constant)
     import math
     v_au_day = math.sqrt(GM_sun * (2.0 / q_au - 1.0 / a_val))
-    v_km_s = v_au_day * AU_KM / 86400.0
+    v_km_s = v_au_day * KM_PER_AU / 86400.0
 
     # ---- Time window: crossing_time * 20, floor 7 days ----------------------
     # crossing_time = 2*q / v_perihelion (time to cross 2*q at perihelion speed)
@@ -926,7 +925,7 @@ def get_comet_perihelion_preset(obj_name, obj_info=None):
 
     print(f"[COMET PRESET] {obj_name} perihelion preset:", flush=True)
     print(f"  Tp: {tp_datetime.strftime('%Y-%m-%d %H:%M')} UTC (source: {tp_source})", flush=True)
-    print(f"  q={q_au:.6f} AU ({q_au * AU_KM:,.0f} km), e={e_val:.6f}", flush=True)
+    print(f"  q={q_au:.6f} AU ({q_au * KM_PER_AU:,.0f} km), e={e_val:.6f}", flush=True)
     print(f"  v_perihelion={v_km_s:,.1f} km/s ({v_au_day:.6f} AU/day)", flush=True)
     print(f"  crossing_time={crossing_time_days:.4f} days, window={window_days:.1f} days", flush=True)
     print(f"  scale={plot_scale:.7f} AU, range: {start_date} to {end_date}", flush=True)
@@ -1456,7 +1455,7 @@ def get_comet_perihelion_preset(obj_name, obj_info=None):
         v_sq = GM_sun * (2.0 / q_au - 1.0 / a_au)
     
     v_au_day = math.sqrt(max(v_sq, 0))
-    v_kms = v_au_day * 149597870.7 / 86400.0
+    v_kms = v_au_day * KM_PER_AU / 86400.0
     
     # Time window: crossing_time * 20, floor 7 days, cap 365 days
     crossing_time_days = (2.0 * q_au / v_au_day) if v_au_day > 0 else 30.0

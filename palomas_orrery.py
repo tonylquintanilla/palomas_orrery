@@ -5123,7 +5123,7 @@ def plot_objects():
                                     'distance_lh': (r_orcus * LIGHT_MINUTES_PER_AU) / 60,
                                     'derived_from_vanth': True
                                 }
-                                print(f"  -> Orcus position: ({x_orcus:.7f}, {y_orcus:.7f}, {z_orcus:.7f}) AU, r={r_orcus:.7f} AU (~{r_orcus * 149597870.7:.0f} km)", flush=True)
+                                print(f"  -> Orcus position: ({x_orcus:.7f}, {y_orcus:.7f}, {z_orcus:.7f}) AU, r={r_orcus:.7f} AU (~{r_orcus * KM_PER_AU:.0f} km)", flush=True)
 
                             else:
                                 print(f"  -> Could not fetch Vanth position to derive Orcus", flush=True)
@@ -5556,7 +5556,7 @@ def plot_objects():
                                 'distance_lh': (r_orcus * LIGHT_MINUTES_PER_AU) / 60,
                                 'derived_from_vanth': True
                             }
-                            print(f"  -> Orcus: r={r_orcus:.7f} AU (~{r_orcus * 149597870.7:.0f} km)", flush=True)
+                            print(f"  -> Orcus: r={r_orcus:.7f} AU (~{r_orcus * KM_PER_AU:.0f} km)", flush=True)
 
                 # Fallback for objects without JPL ephemeris (e.g., MK2, 6AC4721)
             #    ANALYTICAL_POSITION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Weywot', '6AC4721']

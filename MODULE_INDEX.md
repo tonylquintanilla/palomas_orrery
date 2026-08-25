@@ -10,22 +10,17 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 129  
-**Total Lines of Code (non-blank):** 103,747  
-**Total Public Functions/Classes:** 1,163
+**Total Python Files:** 128  
+**Total Lines of Code (non-blank):** 103,193  
+**Total Public Functions/Classes:** 1,162
 
 ## Classification Coverage
 
-**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (3).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L234_7_ledger_rows.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
-
-**Undetermined domain (1).** No valid `Domain:` tag.
-
-- `patch_L234_7_ledger_rows.py`
 
 
 ---
@@ -63,13 +58,13 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `plot_data_report_widget.py` | Embedded report panel for star visualization results. (562 lines) |
 | `sgr_a_grand_tour.py` | Stage 4 FINAL: The Grand Tour of the Galactic Center (744 lines) |
 | `sgr_a_visualization_animation.py` | Stage 2: Animated visualization of S-Stars orbiting Sagittarius A*. (345 lines) |
-| `sgr_a_visualization_core.py` | Core visualization module for S-Stars orbiting Sagittarius A*. (559 lines) |
+| `sgr_a_visualization_core.py` | Core visualization module for S-Stars orbiting Sagittarius A*. (560 lines) |
 | `sgr_a_visualization_precession.py` | Stage 3: The Relativistic Rosette (Schwarzschild Precession). (379 lines) |
 | `star_sphere_builder.py` | Build and render celestial sphere for Paloma's Orrery. (924 lines) |
 | `visualization_2d.py` | 2D HR diagram (color-magnitude) plot builder. (525 lines) |
 | `visualization_3d.py` | 3D stellar neighborhood and planetarium plot builder. (859 lines) |
 | `visualization_core.py` | Shared data preparation and formatting for star visualizations. (352 lines) |
-| `visualization_utils.py` | Shared Plotly utilities for orrery and star visualizations. (856 lines) |
+| `visualization_utils.py` | Shared Plotly utilities for orrery and star visualizations. (857 lines) |
 
 ---
 
@@ -157,7 +152,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `messier_object_data_handler.py` | Messier object coordinate transforms and data preparation. (331 lines) |
 | `plot_data_exchange.py` | JSON data exchange between subprocess scripts and GUI. (170 lines) |
 | `save_utils.py` | Unified save/export for all Plotly visualizations. (797 lines) |
-| `sgr_a_visualization_core_arcs.py` | Sgr_a_visualization_core.py Core visualization module for S-Stars orbiting Sagittarius A*. (537 lines) |
+| `sgr_a_visualization_core_arcs.py` | Sgr_a_visualization_core.py Core visualization module for S-Stars orbiting Sagittarius A*. (538 lines) |
 | `social_media_export.py` | Generates a second HTML file from an existing Plotly figure, optimized for screen recording Instagram Reels and YouTube Shorts (9:16 portrait). (971 lines) |
 
 ---
@@ -181,7 +176,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `formatting_utils.py` | Basic formatting utilities used by both palomas_orrery.py and visualization_utils.py. (19 lines) |
 | `palomas_orrery_helpers.py` | Support functions extracted from the main orrery monolith. (741 lines) |
 | `report_manager.py` | Scientific Report Manager for Astronomical Data Analysis Manages generation, storage, and retrieval of analysis reports. (126 lines) |
-| `shared_utilities.py` | Small shared helpers used across shell visualization modules. (204 lines) |
+| `shared_utilities.py` | Small shared helpers used across shell visualization modules. (205 lines) |
 | `shutdown_handler.py` | Graceful shutdown and safe figure display for Plotly. (75 lines) |
 
 ---
@@ -194,7 +189,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `constants_change_report.py` | - what moved in constants_new.py, and why. (336 lines) |
 | `convert_hot_ph_to_json.py` | Convert HOT ocean pH data to JSON format Manual converter for ocean acidification visualization (199 lines) |
 | `create_cache_backups.py` | One-shot script to create timestamped backups of star data caches. (10 lines) |
-| `create_ephemeris_database.py` | Create satellite_ephemerides.json from multiple sources (245 lines) |
+| `create_ephemeris_database.py` | Create satellite_ephemerides.json from multiple sources (246 lines) |
 | `data_inventory.py` | Inventory data stores and gallery for handoff and headroom. (247 lines) |
 | `dep_trace.py` | Targeted dependency path tracer for Paloma's Orrery Usage: python dep_trace.py <module_name> [hops] (419 lines) |
 | `diagnose_bcodmo.py` | Diagnostic script to examine BCO-DMO pH data structure (67 lines) |
@@ -229,7 +224,6 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L234_7_ledger_rows.py` | Writes the ledger rows the 2026-08-25 session drafted in its handoff but never patched in. Target: LEDGER_CONSOLIDATED.md in the ORRERY repo (https://github.com/tonylquintanilla/palomas_orrery), built on 4ad78a01a642166cb70218ae5728aa6f6c39d7f4. (559 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

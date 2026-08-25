@@ -17,6 +17,7 @@ import numpy as np
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from save_utils import show_and_save
+from constants_new import KM_PER_AU
 
 # Import our data module
 from sgr_a_star_data import (
@@ -328,7 +329,7 @@ def create_sgr_a_marker(scale_factor=50):
         "<b>Sagittarius A* (Sgr A*)</b><br><br>"
         f"<b>Supermassive Black Hole</b><br>"
         f"Mass: 4.154 million solar masses<br>"
-        f"Schwarzschild Radius: {SCHWARZSCHILD_RADIUS_AU:.4f} AU ({SCHWARZSCHILD_RADIUS_AU * 149597870.7:.0f} km)<br>"
+        f"Schwarzschild Radius: {SCHWARZSCHILD_RADIUS_AU:.4f} AU ({SCHWARZSCHILD_RADIUS_AU * KM_PER_AU:.0f} km)<br>"
         f"Distance from Earth: 26,670 light-years<br><br>"
         f"<b>Visual Representation (scaled {scale_factor}x):</b><br>"
         f"Black sphere: Event horizon (artistic)<br>"
@@ -381,7 +382,7 @@ def create_sgr_a_marker(scale_factor=50):
     actual_hover = (
         "<b>Sgr A* - Actual Size</b><br><br>"
         f"<b>True Schwarzschild Radius:</b><br>"
-        f"{SCHWARZSCHILD_RADIUS_AU:.4f} AU ({SCHWARZSCHILD_RADIUS_AU * 149597870.7:.0f} km)<br><br>"
+        f"{SCHWARZSCHILD_RADIUS_AU:.4f} AU ({SCHWARZSCHILD_RADIUS_AU * KM_PER_AU:.0f} km)<br><br>"
         f"<b>For comparison:</b><br>"
         f"Mercury's orbit: 0.39 AU<br>"
         f"Sun's radius: 0.00465 AU<br>"

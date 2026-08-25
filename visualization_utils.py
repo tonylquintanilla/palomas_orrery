@@ -28,6 +28,7 @@ import numpy as np
 from formatting_utils import format_maybe_float, format_km_float
 from idealized_orbits import planetary_params
 from celestial_coordinates import calculate_radec_for_position, format_radec_hover_component
+from constants_new import KM_PER_AU
 
 def add_hover_toggle_buttons(fig):     
     """
@@ -618,7 +619,7 @@ def add_fly_to_object_buttons(fig, positions, center_object_name='Sun', target_o
         
         # Format tick labels: show km equivalent when zoomed in close
         # At small scales (< 0.1 AU), AU values like 1.357 are hard to interpret
-        zoom_dtick_km = zoom_dtick * 149597870.7
+        zoom_dtick_km = zoom_dtick * KM_PER_AU
         if zoom_dtick < 0.01:
             # Very close: show grid spacing in km in axis title
             axis_title_suffix = f" (grid: {zoom_dtick_km:,.0f} km)"
@@ -648,7 +649,7 @@ def add_fly_to_object_buttons(fig, positions, center_object_name='Sun', target_o
         
         # Format distance for label
         if distance_from_center < 0.01:
-            dist_str = f"{distance_from_center*149597870.7:.0f} km"  # Convert AU to km
+            dist_str = f"{distance_from_center*KM_PER_AU:.0f} km"  # Convert AU to km
         elif distance_from_center < 1:
             dist_str = f"{distance_from_center:.3f} AU"
         else:
@@ -669,7 +670,7 @@ def add_fly_to_object_buttons(fig, positions, center_object_name='Sun', target_o
             # Extract the part in parentheses
             dist_part = label.split('(')[1].split(')')[0]
             if 'km' in dist_part:
-                return float(dist_part.replace(' km', '').replace(',', '')) / 149597870.7
+                return float(dist_part.replace(' km', '').replace(',', '')) / KM_PER_AU
             else:
                 return float(dist_part.replace(' AU', ''))
         except:

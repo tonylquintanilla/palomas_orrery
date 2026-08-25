@@ -16,6 +16,7 @@ Domain: orrery
 import numpy as np
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+from constants_new import KM_PER_AU
 
 # Import our data module
 from sgr_a_star_data import (
@@ -184,7 +185,7 @@ def create_sgr_a_marker(scale_factor=50):
         "<b>Sagittarius A* (Sgr A*)</b><br><br>"
         f"<b>Supermassive Black Hole</b><br>"
         f"Mass: 4.154 million solar masses<br>"
-        f"Schwarzschild Radius: {SCHWARZSCHILD_RADIUS_AU:.4f} AU ({SCHWARZSCHILD_RADIUS_AU * 149597870.7:.0f} km)<br>"
+        f"Schwarzschild Radius: {SCHWARZSCHILD_RADIUS_AU:.4f} AU ({SCHWARZSCHILD_RADIUS_AU * KM_PER_AU:.0f} km)<br>"
         f"Distance from Earth: 26,670 light-years<br><br>"
         f"<b>Visual Representation (scaled {scale_factor}x):</b><br>"
         f"Black sphere: Event horizon<br>"

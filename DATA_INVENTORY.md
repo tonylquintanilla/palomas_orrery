@@ -8,7 +8,7 @@ Repo copies stale/absent; this reflects the live local stores.
 |---|---|---|---|---|
 | .vot | 4 | 295.1 MB | gaia_data_magnitude.vot (284.4 MB) | 2026-02-08 |
 | .nc | 18 | 161.1 MB | era5_clim_march_day22.nc (27.4 MB) | 2026-04-07 |
-| .json | 51 | 132.0 MB | orbit_paths.json (130.4 MB) | 2026-08-24 |
+| .json | 51 | 132.0 MB | orbit_paths.json (130.4 MB) | 2026-08-25 |
 | .backup | 4 | 130.8 MB | orbit_paths.json.backup (130.4 MB) | 2026-08-05 |
 | .backup_old | 1 | 130.4 MB | orbit_paths.json.backup_old (130.4 MB) | 2026-08-04 |
 | .csv | 15 | 34.9 MB | 3773_v3_niskin_hot001_yr01_to_hot348_yr35.csv (30.8 MB) | 2026-04-07 |
@@ -75,7 +75,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 438.7 MB (396 files)
+**Total size:** 438.8 MB (398 files)
 
 **GitHub Pages headroom:** 585 MB remaining of 1024 MB ceiling (42.8% used)
 
@@ -83,12 +83,12 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 263 | 417.4 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-08-25 |
+| .json | 265 | 417.4 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-08-25 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 1 | 5.1 MB | palomas_orrery_logo.png (5.1 MB) | 2025-11-27 |
 | .py | 37 | 789.7 KB | gallery_studio.py (244.1 KB) | 2026-08-25 |
 | .md | 13 | 411.8 KB | web_gallery_handoff.md (242.4 KB) | 2026-08-24 |
-| .jsonl | 22 | 275.3 KB | encke.jsonl (12.9 KB) | 2026-08-25 |
+| .jsonl | 22 | 282.5 KB | encke.jsonl (13.2 KB) | 2026-08-25 |
 | .html | 5 | 190.6 KB | index.html (128.2 KB) | 2026-08-24 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
 | .js | 4 | 61.7 KB | feature_renderers.js (42.0 KB) | 2026-08-25 |
@@ -128,7 +128,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | repo | served size | ceiling | headroom | used |
 |---|---|---|---|---|
-| gallery | 438.7 MB | 1024 MB | 585 MB | 42.8% |
+| gallery | 438.8 MB | 1024 MB | 585 MB | 42.8% |
 | orrery (gitignored data) | 965.3 MB | n/a (not served) | -- | -- |
 
 Note: orrery data is local/gitignored. If orbit cache files are pushed to either repo for web serving, re-run this inventory to update headroom.

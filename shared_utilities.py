@@ -23,6 +23,7 @@ import math
 import plotly.graph_objs as go
 
 from orrery_rendering import create_info_marker
+from constants_new import KM_PER_AU
 
 
 def traces_extent_from_center(traces, center):
@@ -178,7 +179,7 @@ def create_sun_direction_indicator(center_position=(0, 0, 0), sun_position=(0, 0
 
     # Format distances for hover text
     dist_au = dist
-    dist_km = dist * 149597870.7
+    dist_km = dist * KM_PER_AU
     if plot_scale >= 1000:
         scale_text = f"{plot_scale:.2e} AU"
     else:
