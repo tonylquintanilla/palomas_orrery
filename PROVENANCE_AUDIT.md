@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: August 25, 2026
-Files scanned: 128
+Files scanned: 129
 Total findings: 1038
 Constants: 107 | Dicts: 40 | Display strings: 891
 
@@ -19,14 +19,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260825T184837Z | `e5eb3ca` | 129 | 1038 | 292 | 630 | 114 | 2 |
 | 20260825T183423Z | `13fdba4` | 128 | 1038 | 292 | 630 | 114 | 2 |
 | 20260825T181803Z | `4ad78a0` | 129 | 1039 | 292 | 631 | 114 | 2 |
 | 20260825T021135Z | `b050cea` | 128 | 1039 | 292 | 631 | 114 | 2 |
 | 20260824T211609Z | `d5681e1` | 128 | 1039 | 292 | 631 | 114 | 2 |
 | 20260824T005340Z | `41c0b27` | 129 | 1040 | 293 | 631 | 114 | 2 |
-| 20260823T223112Z | `ca97e81` | 129 | 1039 | 292 | 631 | 114 | 2 |
 
-Change since the previous run: total -1, Tier-1 +0.
+Change since the previous run: total +0, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -693,8 +693,8 @@ is planned for a future session.
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 55 | dict | B_STAR_TEMPERATURES[...] | (10 entries) | 4 | 5 | **20** | No source citation (recalled) | MEASURED -- independently catalogued fact (name) |
 | 1 | string | display string @ line 1 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 234 | string | display string @ line 234 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 264 | string | display string @ line 264 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 233 | string | display string @ line 233 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 263 | string | display string @ line 263 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 
 ### sgr_a_visualization_animation.py
 
@@ -1391,13 +1391,13 @@ is planned for a future session.
 | 151 | constant | G_CONST | 6.6743e-11 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
 | 152 | constant | SPEED_OF_LIGHT | 299792458.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
 | 153 | constant | SOLAR_MASS_KG | 1.989e+30 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 164 | constant | PARSEC_TO_AU | 206265.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 165 | constant | YEAR_TO_SECONDS | 365.25 * 24 * 3600 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 171 | constant | SGR_A_MASS_SOLAR | 4154000.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 173 | constant | SGR_A_DISTANCE_PC | 8178.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 174 | constant | SGR_A_DISTANCE_LY | 26670.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 477 | string | display string @ line 477 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 498 | string | display string @ line 498 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 163 | constant | PARSEC_TO_AU | 206265.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 164 | constant | YEAR_TO_SECONDS | 365.25 * 24 * 3600 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 170 | constant | SGR_A_MASS_SOLAR | 4154000.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 172 | constant | SGR_A_DISTANCE_PC | 8178.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 173 | constant | SGR_A_DISTANCE_LY | 26670.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 476 | string | display string @ line 476 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 497 | string | display string @ line 497 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
 ### sgr_a_visualization_core.py
 
@@ -1648,7 +1648,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 68 | dict | CAD_BODY_NAMES[...] | (11 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal use (name vocabulary) |
+| 64 | dict | CAD_BODY_NAMES[...] | (11 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal use (name vocabulary) |
 
 ### constants_new.py
 

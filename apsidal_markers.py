@@ -1892,8 +1892,7 @@ def compute_pairwise_encounter(sc_positions, target_positions, sc_dates, target_
     import numpy as np
     from datetime import datetime
     
-    AU_TO_KM = KM_PER_AU
-    AU_PER_DAY_TO_KM_PER_S = AU_TO_KM / 86400.0
+    AU_PER_DAY_TO_KM_PER_S = KM_PER_AU / 86400.0
     
     if not sc_positions or not target_positions:
         return None
@@ -1964,7 +1963,7 @@ def compute_pairwise_encounter(sc_positions, target_positions, sc_dates, target_
                 'date': sc_dt,
                 'date_str': date_str,
                 'dist_au': best_dist,
-                'dist_km': best_dist * AU_TO_KM,
+                'dist_km': best_dist * KM_PER_AU,
                 'rel_x': dx,
                 'rel_y': dy,
                 'rel_z': dz,

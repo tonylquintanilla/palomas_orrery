@@ -158,7 +158,6 @@ SOLAR_MASS_KG = 1.989e30        # Solar mass (kg)
 # Source: IAU Resolution B2 (2012)
 # Ref: https://www.iau.org/static/resolutions/IAU2012_English.pdf
 # Verified: April 15, 2026
-AU_TO_KM = KM_PER_AU            # 1 AU in kilometers (149,597,870.7)
 AU_TO_METERS = KM_PER_AU * 1000 # 1 AU in meters (1.495978707e11)
 
 PARSEC_TO_AU = 206265.0         # 1 parsec in AU

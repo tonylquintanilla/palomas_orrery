@@ -3878,6 +3878,27 @@ xvfb run on a throwaway copy, live-dispatch smoke.
   **Tony-action (decide):** confirm or redirect.
 **Ref:** `constants_new.py` line 56; No Shadow Constants [CRITICAL];
 L-178 (the EARTH_RADIUS_KM duplicate, same class); L-244.
+**Note (2026-08-25) -- the count above is corrected.** The row
+says thirteen replications and ONE named shadow. Thirteen is
+right for VALUES. The name count is five: `AU_KM` in
+`spacecraft_encounters.py` and `AU_TO_KM` in
+`create_ephemeris_database.py` both held the literal and were
+retired by `patch_L243_1`; three more held no number at all --
+`AU_TO_KM = KM_PER_AU` in `sgr_a_star_data.py` (dead, used
+nowhere), `close_approach_data.py` (3 uses) and
+`apsidal_markers.py` (function-local, 2 uses) -- and were
+retired by `patch_L243_2`.
+The miss is the useful part and it is a measurement error, not
+an oversight: the sweep was scoped by grepping 149597870, and a
+grep for a number cannot find a name that holds no number.
+All three were residue of the April 2026 provenance pass, which
+replaced the values and kept the names on purpose --
+`close_approach_data.py` said so in a comment above its alias.
+Left visible rather than restated, because the next reader has
+nothing else to check the count against.
+**Ref (added):** `patch_L243_2_au_to_km_aliases.py`;
+`provenance_scanner.py` line 2523, whose alias table still
+expects `AU_TO_KM` and `AU_IN_KM` -- routed to L-244.
 
 #### [L-244] Sweep for replicated conversion factors as a class [Fable candidate]
 <!-- L:244 status:OPEN upd:2026-08-25 section:A flag: rice:3/4/70/3 -->

@@ -10,17 +10,22 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 128  
-**Total Lines of Code (non-blank):** 103,193  
-**Total Public Functions/Classes:** 1,162
+**Total Python Files:** 129  
+**Total Lines of Code (non-blank):** 103,431  
+**Total Public Functions/Classes:** 1,163
 
 ## Classification Coverage
 
-**Undetermined role (3).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
+- `patch_L243_2_au_to_km_aliases.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
+
+**Undetermined domain (1).** No valid `Domain:` tag.
+
+- `patch_L243_2_au_to_km_aliases.py`
 
 
 ---
@@ -94,7 +99,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `apsidal_markers.py` | Perihelion, aphelion, perigee, and apogee marker generation. (1,740 lines) |
+| `apsidal_markers.py` | Perihelion, aphelion, perigee, and apogee marker generation. (1,739 lines) |
 | `catalog_selection.py` | Unified star selection from Hipparcos and Gaia catalogs. (94 lines) |
 | `celestial_coordinates.py` | Module for calculating and formatting Right Ascension and Declination coordinates for celestial objects in Paloma's Orrery. (456 lines) |
 | `coordinate_system_guide.py` | Educational reference for J2000 Ecliptic Coordinate System (549 lines) |
@@ -116,14 +121,14 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,250 lines) |
-| `close_approach_data.py` | JPL CAD API client for small-body close approach data. (515 lines) |
+| `close_approach_data.py` | JPL CAD API client for small-body close approach data. (512 lines) |
 | `constants_new.py` | Verified numeric constants for Paloma's Orrery. (881 lines) |
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (401 lines) |
 | `exoplanet_stellar_properties.py` | Stellar Properties for Exoplanet Host Stars (484 lines) |
 | `exoplanet_systems.py` | Hardcoded Exoplanet System Catalog (572 lines) |
 | `info_dictionary.py` | Descriptive text and narrative content for Paloma's Orrery. (2,050 lines) |
 | `messier_catalog.py` | Static catalog of Messier objects and bright deep-sky objects. (406 lines) |
-| `sgr_a_star_data.py` | S-star catalog and orbital mechanics for Sagittarius A*. (574 lines) |
+| `sgr_a_star_data.py` | S-star catalog and orbital mechanics for Sagittarius A*. (573 lines) |
 | `shell_configs.py` | Shell configuration data for all celestial bodies. (2,576 lines) |
 | `spacecraft_encounters.py` | Tagged encounter data for spacecraft missions in Paloma's Orrery. (1,298 lines) |
 | `star_notes.py` | Curated hover text annotations for notable stars. (1,158 lines) |
@@ -224,6 +229,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
+| `patch_L243_2_au_to_km_aliases.py` | L-243, second and final pass. Retires the three surviving AU_TO_KM aliases -- names, not values. Each one already imports KM_PER_AU and assigns it to a second name, so no number changes anywhere in this patch. Also corrects the L-243 ledger row, which records one named shadow when there were five... (243 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

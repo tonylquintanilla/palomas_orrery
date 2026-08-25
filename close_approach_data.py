@@ -55,10 +55,6 @@ from constants_new import KM_PER_AU, CENTER_BODY_RADII
 
 CAD_API_URL = "https://ssd-api.jpl.nasa.gov/cad.api"
 
-# Local alias preserved for minimal churn in existing callsites.
-# Canonical source: constants_new.KM_PER_AU.
-AU_TO_KM = KM_PER_AU
-
 # Surface radii for center bodies now come from constants_new.CENTER_BODY_RADII
 # (canonical, hybrid convention: equatorial for major planets, volumetric for
 # small bodies). Previously a local dict carried pre-April-16 volumetric values.
@@ -270,7 +266,7 @@ def _fetch_from_api(designation, body='Earth', date_min=None, date_max=None,
         if date_str:
             date_str = str(date_str).strip()
 
-        dist_km = dist * AU_TO_KM
+        dist_km = dist * KM_PER_AU
         surface_km = None
         canonical_body = _BODY_CANONICAL.get(cad_body, body)
         if canonical_body in CENTER_BODY_RADII:
@@ -472,7 +468,7 @@ def format_approach_hover(approach, body='Earth', obj_name='Object'):
         lines.append(f"Relative velocity: {v_rel:.3f} km/s")
 
     if dist_min is not None and dist_max is not None:
-        unc_km = (dist_max - dist_min) * AU_TO_KM / 2.0
+        unc_km = (dist_max - dist_min) * KM_PER_AU / 2.0
         lines.append(f"3-sigma uncertainty: +/- {unc_km:.1f} km")
 
     lines += [
@@ -620,7 +616,7 @@ if __name__ == '__main__':
             if a['v_rel_kms'] is not None:
                 print(f"  V_rel:     {a['v_rel_kms']:.3f} km/s")
             if a['dist_min_au'] and a['dist_max_au']:
-                unc = (a['dist_max_au'] - a['dist_min_au']) * AU_TO_KM / 2
+                unc = (a['dist_max_au'] - a['dist_min_au']) * KM_PER_AU / 2
                 print(f"  3-sigma:   +/- {unc:.1f} km")
             print(f"  Orbit ID:  {a['orbit_id']}")
     else:
