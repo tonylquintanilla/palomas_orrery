@@ -258,7 +258,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*147 live items; 133 need attention (`!`); 146 RICE-scored; 94 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*148 live items; 134 need attention (`!`); 147 RICE-scored; 94 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -280,6 +280,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-08-25 |
 | ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-25 |
+| ! | L-247 | Sgr A* constants migrated to the single source of truth | OPEN | 4.0 | 2026-08-25 |
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
@@ -4013,6 +4014,50 @@ Kepler gives 6.7. Route both to a dispatch against Peissker et al.
 `sgr_a_visualization_precession.py`; `sgr_a_visualization_animation.py`;
 L-190 (values the scanner cannot reach); L-240 (measured vs declared);
 The Artifact Bounds the Audit.
+
+#### [L-247] Sgr A* constants migrated to the single source of truth
+<!-- L:247 status:OPEN upd:2026-08-25 section:A flag: rice:3/3/90/2 -->
+- **Tony's ruling, 2026-08-25:** conversion factors and physical
+  constants live in `constants_new.py`, carry a source, and are called
+  rather than replicated. This is that ruling applied to
+  `sgr_a_star_data.py`, which held nine of them.
+- **Seven migrated, two deleted.** `GRAVITATIONAL_CONSTANT_SI`,
+  `SPEED_OF_LIGHT_M_S` (derived from the store's existing
+  `SPEED_OF_LIGHT_KM_S` rather than carried as a second literal),
+  `SOLAR_MASS_KG`, `M_PER_AU` (derived from `KM_PER_AU`),
+  `PARSEC_TO_AU`, `SGR_A_MASS_SOLAR` and `SGR_A_DISTANCE_LY` moved.
+  `YEAR_TO_SECONDS` and `SGR_A_DISTANCE_PC` were DELETED: each appeared
+  exactly once in the whole tree, on its own definition line.
+- **Deleting a dead constant rather than migrating it is the point.**
+  Moving one into the file the scanner treats as the measurement layer
+  grows the audit denominator for a value the orrery never draws --
+  which is what The Artifact Bounds the Audit exists to stop.
+- **Two of the four "dead" names were not dead in VALUE.** `206265`
+  appears three times in arithmetic and once in a docstring in
+  `exoplanet_coordinates.py`; `26,670 light-years` and `4.154 million
+  solar masses` are typed into hover strings in
+  `sgr_a_visualization_core.py` and `_arcs.py`. So the name was dead
+  where the number was alive somewhere else, spelled out. Deleting the
+  name and leaving the literals would have removed the sourced copy and
+  kept the unsourced ones. All seven literal sites are swept; the two
+  hover strings now derive and render the same characters.
+- **What did NOT travel, and is stated rather than invented.** Only one
+  of the seven carried any attribution at all -- `SGR_A_MASS_SOLAR`, as
+  the inline comment "(GRAVITY Collaboration 2019)", which names no
+  paper, DOI or table. It is carried verbatim as a lead. The other six
+  arrive carrying a `# Review-note:` saying plainly that no source came
+  with them. None was given a citation to fill the gap.
+**Gap:** the dispatch. Seven values, six with no source and one with a
+lead. This is the verification loop applied to a family that was
+previously invisible to it, because the values sat in a module the
+worksheet builder does not reach.
+- **Note:** RICE 3/3/90/2 -> 4.1 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect.
+**Ref:** L-243 (the AU factor); L-244 (the class sweep -- three more
+unnamed constants found while building this: 3.26156 light-years per
+parsec and 4.74 AU/yr to km/s in `exoplanet_coordinates.py`, and the
+seconds-per-year expression in `energy_imbalance.py` line 65);
+L-246 (S4714); No Shadow Constants [CRITICAL].
 
 ## PENDING ACTION (Tony-side)
 

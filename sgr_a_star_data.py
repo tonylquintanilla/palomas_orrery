@@ -33,7 +33,11 @@ import math
 import numpy as np
 import re
 
-from constants_new import KM_PER_AU, SPEED_OF_LIGHT_KM_S
+from constants_new import (
+    KM_PER_AU, SPEED_OF_LIGHT_KM_S,
+    GRAVITATIONAL_CONSTANT_SI, SPEED_OF_LIGHT_M_S, SOLAR_MASS_KG,
+    M_PER_AU, PARSEC_TO_AU, SGR_A_MASS_SOLAR, SGR_A_DISTANCE_LY,
+)
 
 # =============================================================================
 # TEMPERATURE AND COLOR UTILITIES
@@ -148,35 +152,22 @@ def get_orbit_color(star_data):
 # PHYSICAL CONSTANTS
 # =============================================================================
 
-G_CONST = 6.67430e-11           # Gravitational constant (m^3 kg^-1 s^-2)
-SPEED_OF_LIGHT = 299792458.0    # Speed of light (m/s)
-SOLAR_MASS_KG = 1.989e30        # Solar mass (kg)
-
-# AU conversion — imported from constants_new.py for single source of truth.
-# IAU 2012 defined value: 1 AU = 149,597,870.7 km exactly.
-# Previous local values (1.496e8, 1.496e11) were off by ~2,129 km per AU.
-# Source: IAU Resolution B2 (2012)
-# Ref: https://www.iau.org/static/resolutions/IAU2012_English.pdf
-# Verified: April 15, 2026
-AU_TO_METERS = KM_PER_AU * 1000 # 1 AU in meters (1.495978707e11)
-
-PARSEC_TO_AU = 206265.0         # 1 parsec in AU
-YEAR_TO_SECONDS = 365.25 * 24 * 3600  # Seconds per Julian year
+# Every physical constant this module used to define now lives in
+# constants_new.py and is imported at the top of this file (L-247,
+# 2026-08-25). YEAR_TO_SECONDS and SGR_A_DISTANCE_PC were deleted rather
+# than migrated: nothing in the tree read either one.
 
 # =============================================================================
 # SAGITTARIUS A* PROPERTIES
 # =============================================================================
 
-SGR_A_MASS_SOLAR = 4.154e6      # Solar masses (GRAVITY Collaboration 2019)
 SGR_A_MASS_KG = SGR_A_MASS_SOLAR * SOLAR_MASS_KG
-SGR_A_DISTANCE_PC = 8178.0      # Distance from Earth (parsecs)
-SGR_A_DISTANCE_LY = 26670.0     # Distance from Earth (light years)
 
 # Schwarzschild Radius: Rs = 2GM / c^2
 # The "point of no return" - event horizon radius
-SCHWARZSCHILD_RADIUS_METERS = (2 * G_CONST * SGR_A_MASS_KG) / (SPEED_OF_LIGHT**2)
+SCHWARZSCHILD_RADIUS_METERS = (2 * GRAVITATIONAL_CONSTANT_SI * SGR_A_MASS_KG) / (SPEED_OF_LIGHT_M_S**2)
 SCHWARZSCHILD_RADIUS_KM = SCHWARZSCHILD_RADIUS_METERS / 1000.0
-SCHWARZSCHILD_RADIUS_AU = SCHWARZSCHILD_RADIUS_METERS / AU_TO_METERS
+SCHWARZSCHILD_RADIUS_AU = SCHWARZSCHILD_RADIUS_METERS / M_PER_AU
 # Result: ~0.08 AU or ~12 million km (about 40x Earth-Moon distance)
 
 # Innermost Stable Circular Orbit (ISCO) for a non-rotating black hole
@@ -457,12 +448,12 @@ def calculate_orbital_velocity(a_au, r_au, M_solar=SGR_A_MASS_SOLAR):
     Returns velocity in km/s.
     """
     # Convert to SI units
-    a_m = a_au * AU_TO_METERS
-    r_m = r_au * AU_TO_METERS
+    a_m = a_au * M_PER_AU
+    r_m = r_au * M_PER_AU
     M_kg = M_solar * SOLAR_MASS_KG
     
     # Vis-viva equation
-    v_squared = G_CONST * M_kg * (2/r_m - 1/a_m)
+    v_squared = GRAVITATIONAL_CONSTANT_SI * M_kg * (2/r_m - 1/a_m)
     v_m_s = math.sqrt(v_squared)
     
     return v_m_s / 1000.0  # Convert to km/s

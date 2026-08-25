@@ -20,7 +20,8 @@ from constants_new import KM_PER_AU
 
 # Import our data module
 from sgr_a_star_data import (
-    S_STAR_CATALOG, SGR_A_MASS_SOLAR, SCHWARZSCHILD_RADIUS_AU,
+    S_STAR_CATALOG, SGR_A_MASS_SOLAR, SGR_A_DISTANCE_LY,
+    SCHWARZSCHILD_RADIUS_AU,
     get_star_data, list_stars,
     calculate_periapsis_au, calculate_apoapsis_au,
     calculate_periapsis_velocity, format_velocity,
@@ -184,9 +185,9 @@ def create_sgr_a_marker(scale_factor=50):
     sgr_a_hover = (
         "<b>Sagittarius A* (Sgr A*)</b><br><br>"
         f"<b>Supermassive Black Hole</b><br>"
-        f"Mass: 4.154 million solar masses<br>"
+        f"Mass: {SGR_A_MASS_SOLAR / 1e6:.3f} million solar masses<br>"
         f"Schwarzschild Radius: {SCHWARZSCHILD_RADIUS_AU:.4f} AU ({SCHWARZSCHILD_RADIUS_AU * KM_PER_AU:.0f} km)<br>"
-        f"Distance from Earth: 26,670 light-years<br><br>"
+        f"Distance from Earth: {SGR_A_DISTANCE_LY:,.0f} light-years<br><br>"
         f"<b>Visual Representation (scaled {scale_factor}x):</b><br>"
         f"Black sphere: Event horizon<br>"
         f"White ring: Event horizon boundary<br>"

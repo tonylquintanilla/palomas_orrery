@@ -986,3 +986,50 @@ spectral_subclass_temps = {
     'L': {0: 2400, 9: 1300},      # L0 to L9
     'T': {0: 1300, 9: 600},       # T0 to T9 (optional)
 }
+
+# ============================================================
+# SAGITTARIUS A* AND GALACTIC-SCALE CONSTANTS
+# Migrated 2026-08-25 from sgr_a_star_data.py under L-247. The values
+# are unchanged; what changed is that there is now one of each.
+# ============================================================
+
+GRAVITATIONAL_CONSTANT_SI = 6.67430e-11
+# Note: units m^3 kg^-1 s^-2.
+# Review-note: no source line travelled with this value from
+#              sgr_a_star_data.py, where it carried only a units
+#              comment. Routed to L-247 for a dispatch. Not cited here,
+#              because a citation written to fill the gap would be a
+#              provenance claim nobody checked.
+
+SPEED_OF_LIGHT_M_S = SPEED_OF_LIGHT_KM_S * 1000
+# Derived: the store already holds this quantity in km/s. Carrying a
+#          second literal would put two spellings of one exact value in
+#          one file, which is the failure L-247 exists to close.
+
+SOLAR_MASS_KG = 1.989e30
+# Review-note: no source line travelled with this value. Routed to
+#              L-247.
+
+M_PER_AU = KM_PER_AU * 1000
+# Derived: 1 AU in metres, from the IAU 2012 definition above.
+# Note: replaces AU_TO_METERS in sgr_a_star_data.py, renamed to match
+#       this file's KM_PER_AU direction rather than the AU_TO_ one.
+
+PARSEC_TO_AU = 206265.0
+# Review-note: no source line travelled with this value. It is the
+#              small-angle arcseconds-per-radian figure and is used as a
+#              bare literal in exoplanet_coordinates.py, swept to this
+#              name by L-247. Routed for a dispatch.
+
+SGR_A_MASS_SOLAR = 4.154e6
+# Source: GRAVITY Collaboration 2019
+# Review-note: the attribution above travelled with the value as an
+#              inline comment and is carried here verbatim. It names no
+#              paper, DOI or table, so it is a lead rather than a
+#              citation. Routed to L-247.
+
+SGR_A_DISTANCE_LY = 26670.0
+# Review-note: no source line travelled with this value. It was restated
+#              as prose in two hover strings, which now derive from it.
+#              Routed to L-247.
+

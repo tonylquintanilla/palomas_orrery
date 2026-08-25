@@ -10,26 +10,24 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 131  
-**Total Lines of Code (non-blank):** 103,965  
-**Total Public Functions/Classes:** 1,164
+**Total Python Files:** 130  
+**Total Lines of Code (non-blank):** 103,838  
+**Total Public Functions/Classes:** 1,163
 
 ## Classification Coverage
 
-**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `patch_L243_2_au_to_km_aliases.py`
-- `patch_L246_1_s4714_declare.py`
-- `patch_L246_2_master_plan_singularity.py`
+- `patch_L247_1_sgr_a_constants_migration.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (3).** No valid `Domain:` tag.
+**Undetermined domain (2).** No valid `Domain:` tag.
 
 - `patch_L243_2_au_to_km_aliases.py`
-- `patch_L246_1_s4714_declare.py`
-- `patch_L246_2_master_plan_singularity.py`
+- `patch_L247_1_sgr_a_constants_migration.py`
 
 
 ---
@@ -67,7 +65,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `plot_data_report_widget.py` | Embedded report panel for star visualization results. (562 lines) |
 | `sgr_a_grand_tour.py` | Stage 4 FINAL: The Grand Tour of the Galactic Center (742 lines) |
 | `sgr_a_visualization_animation.py` | Stage 2: Animated visualization of S-Stars orbiting Sagittarius A*. (345 lines) |
-| `sgr_a_visualization_core.py` | Core visualization module for S-Stars orbiting Sagittarius A*. (560 lines) |
+| `sgr_a_visualization_core.py` | Core visualization module for S-Stars orbiting Sagittarius A*. (561 lines) |
 | `sgr_a_visualization_precession.py` | Stage 3: The Relativistic Rosette (Schwarzschild Precession). (357 lines) |
 | `star_sphere_builder.py` | Build and render celestial sphere for Paloma's Orrery. (924 lines) |
 | `visualization_2d.py` | 2D HR diagram (color-magnitude) plot builder. (525 lines) |
@@ -126,13 +124,13 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,250 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (512 lines) |
-| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (881 lines) |
-| `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (401 lines) |
+| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (919 lines) |
+| `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (402 lines) |
 | `exoplanet_stellar_properties.py` | Stellar Properties for Exoplanet Host Stars (484 lines) |
 | `exoplanet_systems.py` | Hardcoded Exoplanet System Catalog (572 lines) |
 | `info_dictionary.py` | Descriptive text and narrative content for Paloma's Orrery. (2,050 lines) |
 | `messier_catalog.py` | Static catalog of Messier objects and bright deep-sky objects. (406 lines) |
-| `sgr_a_star_data.py` | S-star catalog and orbital mechanics for Sagittarius A*. (591 lines) |
+| `sgr_a_star_data.py` | S-star catalog and orbital mechanics for Sagittarius A*. (584 lines) |
 | `shell_configs.py` | Shell configuration data for all celestial bodies. (2,576 lines) |
 | `spacecraft_encounters.py` | Tagged encounter data for spacecraft missions in Paloma's Orrery. (1,298 lines) |
 | `star_notes.py` | Curated hover text annotations for notable stars. (1,158 lines) |
@@ -161,7 +159,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `messier_object_data_handler.py` | Messier object coordinate transforms and data preparation. (331 lines) |
 | `plot_data_exchange.py` | JSON data exchange between subprocess scripts and GUI. (170 lines) |
 | `save_utils.py` | Unified save/export for all Plotly visualizations. (797 lines) |
-| `sgr_a_visualization_core_arcs.py` | Sgr_a_visualization_core.py Core visualization module for S-Stars orbiting Sagittarius A*. (538 lines) |
+| `sgr_a_visualization_core_arcs.py` | Sgr_a_visualization_core.py Core visualization module for S-Stars orbiting Sagittarius A*. (539 lines) |
 | `social_media_export.py` | Generates a second HTML file from an existing Plotly figure, optimized for screen recording Instagram Reels and YouTube Shorts (9:16 portrait). (971 lines) |
 
 ---
@@ -234,8 +232,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `patch_L243_2_au_to_km_aliases.py` | L-243, second and final pass. Retires the three surviving AU_TO_KM aliases -- names, not values. Each one already imports KM_PER_AU and assigns it to a second name, so no number changes anywhere in this patch. Also corrects the L-243 ledger row, which records one named shadow when there were five... (243 lines) |
-| `patch_L246_1_s4714_declare.py` | L-246, structural half only. Removes the two runtime overrides of S_STAR_CATALOG['S4714']['a_au'] and puts the value in the catalog once, declared as the drawing choice it is. The MEASURED value is not settled by this patch and is routed to a dispatch. (311 lines) |
-| `patch_L246_2_master_plan_singularity.py` | Writes the 2026-08-25 session into the two planning documents. Both were last revised on 2026-08-23 and neither carries the ruling of the 25th, so a note about today's work added on its own would sit inside a plan that contradicts it. (229 lines) |
+| `patch_L247_1_sgr_a_constants_migration.py` | L-247. Moves the Sagittarius A* physical constants out of sgr_a_star_data.py and into constants_new.py, deletes the two nothing reads, and sweeps the literals that were restating the migrated values in prose and in arithmetic. (379 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

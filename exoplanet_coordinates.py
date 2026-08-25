@@ -26,6 +26,7 @@ Domain: stars
 
 import numpy as np
 from datetime import datetime, timezone
+from constants_new import PARSEC_TO_AU
 
 # ============================================================================
 # PROPER MOTION CORRECTIONS
@@ -307,12 +308,12 @@ def lightyears_to_parsecs(distance_ly):
     return distance_ly / 3.26156
 
 def parsecs_to_au(distance_pc):
-    """Convert parsecs to AU (1 pc = 206265 AU)"""
-    return distance_pc * 206265
+    """Convert parsecs to AU (1 pc = PARSEC_TO_AU AU)"""
+    return distance_pc * PARSEC_TO_AU
 
 def au_to_parsecs(distance_au):
     """Convert AU to parsecs"""
-    return distance_au / 206265
+    return distance_au / PARSEC_TO_AU
 
 def stellar_parallax_to_distance(parallax_mas):
     """
@@ -369,7 +370,7 @@ def calculate_tangential_velocity(pmra_mas_yr, pmdec_mas_yr, distance_pc):
     
     # Tangential velocity = distance x angular velocity
     # 1 AU/year = 4.74 km/s
-    velocity_au_yr = distance_pc * 206265 * pm_rad_yr
+    velocity_au_yr = distance_pc * PARSEC_TO_AU * pm_rad_yr
     velocity_km_s = velocity_au_yr * 4.74
     
     return velocity_km_s
