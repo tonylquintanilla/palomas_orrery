@@ -31,12 +31,10 @@ from sgr_a_star_data import get_star_color, get_orbit_color, create_star_hover_t
 import sgr_a_visualization_core as core
 from save_utils import show_and_save
 
-# =============================================================================
-# ACCURACY PATCH (S4714)
-# =============================================================================
-# Adjusting semi-major axis to match literature velocity (~8% c at periapsis)
-# This gives periapsis = 12 AU (matching Peissker et al. 2020)
-data.S_STAR_CATALOG['S4714']['a_au'] = 800.0
+# S4714's semi-major axis lives in sgr_a_star_data.S_STAR_CATALOG with its
+# declaration beside it (L-246). The runtime override that used to sit here
+# is gone: it mutated the shared catalog, so the value another module saw
+# depended on import order.
 
 # =============================================================================
 # CONFIGURATION
@@ -814,7 +812,7 @@ if __name__ == "__main__":
     print("*" * 70)
     print()
     
-    # Verify S4714 patch
+    # Report S4714's drawn geometry from the catalog (L-246).
     s4714 = data.get_star_data('S4714')
     peri = data.calculate_periapsis_au(s4714['a_au'], s4714['e'])
     v_peri = data.calculate_periapsis_velocity(s4714['a_au'], s4714['e'])

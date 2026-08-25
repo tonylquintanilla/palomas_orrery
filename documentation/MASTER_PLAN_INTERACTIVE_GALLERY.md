@@ -999,6 +999,88 @@ ledger edit, not something this section may assert around.
 | Segment 3, assembler draw | NOT STARTED, and **now the next work**. Verified at gallery `493a0bd`: `resolver.py:133` still reduces the feature dict to its keys (`tuple(rec.get("features") or ())`), `models.py:91` still types the field `Tuple[str, ...]` to match, and NOTHING in the gallery repo reads `feature_configs.json` -- only the builder writes it. |
 | Segment 4, Artifact 2 | Gated on segment 3 and on segment 1's thirty-number slice. Not on the general audit. |
 
+### 2026-08-25 -- two changes, and a property the plan never named
+
+Appended, not merged. The tables above were read on 2026-08-23 and two
+of their rows are now wrong; they are named at the end of this
+subsection rather than edited here.
+
+**One. Artifacts reopen, and the ladder has a second axis.** Tony's
+ruling, 2026-08-25. The seven golden artifacts are seven PROPAGATION
+shapes -- conic, planetocentric, mean elements, spacecraft arc,
+barycentric binary. That ladder is complete and unchanged. What the
+orrery DRAWS is a different axis entirely: interiors, atmospheres,
+magnetospheres, belts, tori, rings, comae, solar shells, Hill spheres.
+Nothing in the five segments or the seven artifacts sequences that axis,
+and nobody ever decided that some of it would be shown interactive-side
+and some not. L-100 carried that as an inherited default from the
+Phase-1b cost framing of 2026-07-08; it was never a ruling and is now
+closed. Tony: "it is not my intent. The general intent is to redo the
+orrery in the assembler. Part by part."
+
+The consequence that arrives first: the resolver requests EVERY feature
+key the cache carries for an object, and a golden record hashes
+`feature_keys`, `trace_role_counts` and `legend_groups`. So adding a
+feature family to a body FAILS every locked artifact containing it.
+Under part-by-part that is the normal event, not an edge case, and
+re-locking is normal rather than a failure. L-234 carries the work;
+Artifact 1's Sun half is DONE, its Earth half is open.
+
+**Two. A property this plan has been folding into provenance, and
+should not.** Segment 1 reads "one store for feature constants,
+provenance carried as data." Those are two independent properties and
+only the second has ever had measurement, tooling or a place in the
+order.
+
+  PROVENANCE asks: is this value sourced?
+  SINGULARITY asks: is there ONE of it?
+
+A value can hold either without the other, and on 2026-08-25 one clean
+example of each turned up:
+
+`KM_PER_AU` is cited about as well as anything in the tree -- IAU 2012
+Resolution B2, exact definition, two independent cross-checks recorded.
+It also existed as thirteen literal copies across seven live modules,
+one of them under a different name (`AU_KM`), plus three more names
+aliasing the import. Perfect provenance, five names, sixteen sites.
+
+S4714's semi-major axis is the inverse. Three stores held it: the
+catalog said 520.0 and two consumer modules overwrote it to 800.0 at
+import time, so which value a render used depended on import order. A
+live path saw neither override, so the same star was drawn two ways --
+and each view's prose was correct for its own value, one reporting 8.2%
+of light speed at periapsis and the other 10%. The number drawn was
+unsourced; the citation on file described the number that was not drawn.
+
+**Why the audit could not see either.** The scanner scores literal
+assignments. A second copy of a correctly-cited value is not a finding,
+and a runtime dict mutation is not an assignment at all. So a Tier-1
+count says nothing about how many places a value lives. Neither does the
+drift checker: `constants_change_report.py` watches ONE file, so "No
+changes to constants_new.py" was true and silent while a value moved
+from 520 to 800 in a store it does not read. L-245 widens that check's
+window in time; this widens it in space.
+
+**Where this sits in the order: NOT on the path to Artifact 2.** Nothing
+in it touches Saturn's rings or Jupiter's belts. It is recorded here so
+it is visible, and it is explicitly not a gate -- the same reasoning the
+braid ruling applied to the general audit on 2026-08-22. Handles: L-243
+(the AU factor, closed 2026-08-25), L-244 (the class sweep, a Fable
+candidate), L-246 (S4714, structural half closed), and the migration of
+eight cited scalars out of `sgr_a_star_data.py` into `constants_new.py`.
+The S-star catalog itself does NOT migrate as it stands -- it mixes
+orbital elements with hex colours and prose, and needs L-240's
+measured-versus-declared split first.
+
+**Two rows above are stale and are deliberately left standing.**
+"Segment 3, assembler draw: NOT STARTED" -- the Sun is now complete in
+the assembler, 19 shells, Mode 5 passed on 2026-08-24 and 2026-08-25.
+"Artifact 1, Earth: LOCKED" -- reopened by the ruling above, and its
+golden record is stale in four fields (L-237). Re-measuring those rows
+belongs to a pass that reads the repo, not to this append; a table
+re-stated from memory is how the 105 / 107 / 110 drift happened in this
+document.
+
 ### What this section deliberately does not carry
 
 Model assignments, per-item dependency chains and RICE scores. Those

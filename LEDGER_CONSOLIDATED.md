@@ -258,7 +258,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*146 live items; 132 need attention (`!`); 145 RICE-scored; 94 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*147 live items; 133 need attention (`!`); 146 RICE-scored; 94 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -274,6 +274,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-245 | Constants drift check compares against the last COMMIT, not the last RUN | OPEN | 5.4 | 2026-08-25 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
 | ! | L-206 | Worksheet return filenames carry model and session | OPEN | 5.1 | 2026-08-18 |
+| ! | L-246 | S4714's semi-major axis was three values in three stores | OPEN | 5.1 | 2026-08-25 |
 | ! | L-193 | Qualified verdicts -- the token is not the whole answer | OPEN | 4.8 | 2026-08-15 |
 | ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
@@ -3961,6 +3962,57 @@ happens on a first run with no prior state), then amend
 **Ref:** `constants_change_report.py`; `maintenance_run.py` CHECKERS row
 1; L-230 (the transition watcher); L-188 (the runner);
 PROJECT_INSTRUCTIONS Part 3, A Check That Cannot Fail Is Not Passing.
+
+#### [L-246] S4714's semi-major axis was three values in three stores
+<!-- L:246 status:OPEN upd:2026-08-25 section:A flag: rice:3/4/85/2 -->
+- **Found 2026-08-25 by Mode 5.** Tony sent a Grand Tour screenshot to
+  confirm an unrelated import. The hover read `Semi-major axis: 800 AU`
+  and the catalog read 520.0.
+- **Three stores, one number.** `sgr_a_star_data.py` held
+  `'a_au': 520.0`. Two consumer modules reached into the SHARED dict at
+  import time and set it to 800.0 -- `sgr_a_grand_tour.py` line 39 as a
+  bare statement, and `sgr_a_visualization_precession.py` line 33 as a
+  patch dict plus a function called on import. The second one states its
+  own reasoning: "We apply this patch at runtime so the original data
+  module stays clean." The intent was to protect the source of truth and
+  the effect was to make it depend on import order.
+- **A live path saw neither override.**
+  `sgr_a_visualization_animation.py` imports the data module and the core
+  renderer and no patcher, and calls `get_star_data('S4714')` at four
+  places. So the same star was drawn two ways.
+- **And each view's PROSE was correct for its own value.** The grand
+  tour hover reports 8.2% of light speed at periapsis; the animation's
+  on-plot annotation says 10%. Both are right:
+  `2*pi*sqrt(M/a * (1+e)/(1-e))` with the module's own
+  `SGR_A_MASS_SOLAR = 4.154e6` gives 24,693 km/s for a = 800 and 30,624
+  km/s for a = 520. The first matches the hover to the digit.
+- **The scanner cannot see any of it.** It scores literal assignments. A
+  runtime dict mutation is not one, and a value inside a dict literal is
+  not a scored unit either -- the same reachability class as L-190's
+  ring and belt numbers.
+- **STRUCTURAL HALF CLOSED 2026-08-25** by
+  `patch_L246_1_s4714_declare.py`: both overrides deleted, the value in
+  the catalog once, declared with `# Note:`, `# Calculation:` and
+  `# Review-note:` legs, and the animation's "10% light speed"
+  annotation corrected to 8%. The render does not change; every path now
+  draws what the grand tour already drew.
+**Gap:** the MEASURED value. 800.0 is not sourced and does not close.
+With `SGR_A_MASS_SOLAR = 4.154e6`, Kepler's third law gives P = 11.1 yr
+for a = 800 against the 12.0 yr stored beside it; a 12.0 yr period needs
+a = 842 AU, putting periapsis at 12.6 rather than 12.0. So 800 was
+chosen to land periapsis on a round 12 rather than to satisfy the orbit.
+`S4711` has the same shape -- a = 572 with a stored 7.6 yr period, where
+Kepler gives 6.7. Route both to a dispatch against Peissker et al.
+(2020), which the module cites in a COMMENT
+(`sgr_a_grand_tour.py` line 122) in a different file from the data.
+- **Note:** RICE 3/4/85/2 -> 5.1 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect, and whether the S-star
+  catalog joins the worksheet corpus at all -- today no entry in it
+  carries a `# Source:` line.
+**Ref:** `sgr_a_star_data.py` S_STAR_CATALOG; `sgr_a_grand_tour.py`;
+`sgr_a_visualization_precession.py`; `sgr_a_visualization_animation.py`;
+L-190 (values the scanner cannot reach); L-240 (measured vs declared);
+The Artifact Bounds the Audit.
 
 ## PENDING ACTION (Tony-side)
 

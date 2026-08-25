@@ -20,36 +20,10 @@ import sgr_a_star_data as data
 import sgr_a_visualization_core as core
 from save_utils import show_and_save
 
-# =============================================================================
-# ACCURACY PATCH - S4714
-# =============================================================================
-# Issue: Original a=520 AU, e=0.985 gave periapsis ~7.8 AU and velocity 10.2% c
-# Fix: Raise semi-major axis to 800 AU to match literature:
-#      - Periapsis: ~12 AU (matches Peissker et al. 2020)
-#      - Velocity: ~8% c (matches literature value)
-#
-# We apply this patch at runtime so the original data module stays clean.
-
-S4714_ACCURACY_PATCH = {
-    'a_au': 800.0,  # Was 520.0
-    # This gives periapsis = 800 * (1 - 0.985) = 12 AU
-    # And velocity ~24,000 km/s = 8% c
-}
-
-def apply_accuracy_patches():
-    """Apply literature-based corrections to orbital elements."""
-    # Patch S4714
-    for key, value in S4714_ACCURACY_PATCH.items():
-        data.S_STAR_CATALOG['S4714'][key] = value
-    
-    # Verify the patch
-    star = data.get_star_data('S4714')
-    peri = data.calculate_periapsis_au(star['a_au'], star['e'])
-    v_peri = data.calculate_periapsis_velocity(star['a_au'], star['e'])
-    print(f"S4714 patched: periapsis = {peri:.1f} AU, velocity = {data.format_velocity(v_peri)}")
-
-# Apply patches on import
-apply_accuracy_patches()
+# S4714's semi-major axis lives in sgr_a_star_data.S_STAR_CATALOG with its
+# declaration beside it (L-246). The runtime override that used to sit here
+# is gone: it mutated the shared catalog, so the value another module saw
+# depended on import order.
 
 # =============================================================================
 # ROSETTE GENERATION

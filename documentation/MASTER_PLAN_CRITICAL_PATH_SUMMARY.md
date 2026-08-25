@@ -302,6 +302,69 @@ prerequisites and it is now the first.
 
 ---
 
+## Two properties, not one
+
+**Added 2026-08-25.** The rest of this document was written on
+2026-08-23 and is not re-measured here.
+
+This file opens by saying the assembler creates no data, it imports, and
+that everything except positions travels by being copied. True, and
+incomplete in a way that only became visible on 2026-08-25.
+
+Whether a number is SOURCED and whether there is only ONE of it are
+different questions. The provenance work answers the first. Nothing has
+been answering the second, and no tool in the routine can: the scanner
+scores literal assignments, so a second copy of a correctly-cited value
+raises nothing, and a value overwritten at runtime is not an assignment
+at all.
+
+Two findings on the same day, one of each kind.
+
+**Perfect citation, sixteen sites.** `KM_PER_AU` carries the IAU 2012
+Resolution B2 definition with two independent cross-checks recorded
+beside it. It also appeared as thirteen literal copies across seven live
+modules -- one under a different name -- with three further names
+aliasing the import. Nothing was wrong with the number anywhere. There
+were simply five names for it.
+
+**Three stores, two values, and two renders that disagreed.** The S-star
+catalog held S4714's semi-major axis as 520 AU. Two viewer modules
+reached into that shared dictionary at import time and set it to 800.
+A third viewer imported neither, so it drew the star at 520 -- and said
+so on the plot, annotating 10% of light speed where the others said 8%.
+Both figures were arithmetically right for the value each view was
+holding. The drawn number was unsourced; the citation on file described
+the number that was not drawn.
+
+**And the check that should have caught the second one reported clean.**
+`constants_change_report.py` compares `constants_new.py` against its last
+commit. S4714 does not live there. "No changes to constants_new.py" was
+true, and said nothing at all about a value that moved by 54% in a file
+one directory over. The checker's scope is its denominator, and the
+output does not name it.
+
+**What this does NOT change.** None of it is on the path to Artifact 2.
+Saturn's rings and Jupiter's belts are untouched by any of it. It is
+written here because a reader asking "how far to the end" deserves to
+know that a whole property of the constant layer had no measurement
+until now -- not because it belongs in front of the rendering work. The
+argument is the same one made on 2026-08-22 about the general audit: a
+precondition that does not terminate is not a plan, and this one has no
+denominator yet either.
+
+Handles: L-243 (the AU factor, closed same day), L-244 (the class sweep,
+scoping not started), L-246 (S4714, structural half closed and the
+measured value routed to a dispatch), L-245 (the drift check's window).
+
+One further note, because it is the reason this section exists rather
+than a ledger row alone. Both findings were surfaced by a person
+looking: one by Tony's standing instruction that conversion factors be
+called rather than replicated, one by a Mode 5 screenshot sent to
+confirm something unrelated. Neither came from a passing check, and no
+check in the routine would have produced either.
+
+---
+
 ## What would change the picture
 
 An independent review by two models in August found nine structural

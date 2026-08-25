@@ -358,7 +358,7 @@ def create_animation(stars_to_show=None, reference_year=2024.0):
     
     # Add annotation
     fig.add_annotation(
-        text="Watch S4714 (red): hangs at apoapsis, then SNAPS through periapsis at 10% light speed!",
+        text="Watch S4714 (red): hangs at apoapsis, then SNAPS through periapsis at 8% light speed!",
         xref="paper", yref="paper",
         x=0.5, y=1.02,
         showarrow=False,

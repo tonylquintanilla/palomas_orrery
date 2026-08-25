@@ -249,7 +249,25 @@ S_STAR_CATALOG = {
     },
     'S4714': {
         'name': 'S4714',
-        'a_au': 520.0,
+        'a_au': 800.0,
+        # Note: DECLARED DRAWING VALUE, not a measurement. 800.0 is chosen
+        #       so that periapsis = a * (1 - e) = 12.0 AU, which is the
+        #       figure this project draws and labels. Nobody has sourced
+        #       800.0 itself.
+        # Calculation: with SGR_A_MASS_SOLAR = 4.154e6, Kepler's third law
+        #              gives P = 11.1 yr for a = 800, against the 12.0 yr
+        #              stored below. A 12.0 yr period needs a = 842 AU,
+        #              which puts periapsis at 12.6. So 800 satisfies the
+        #              periapsis label and not the period.
+        # Review-note: 520.0 was stored here until 2026-08-25, and two
+        #              modules overwrote it to 800.0 at import time, so
+        #              which value a render used depended on import order.
+        #              The grand tour and precession views drew 800 and
+        #              8.2% c; the animation drew 520 and 10.2% c, for the
+        #              same star. Both overrides are gone and the value
+        #              lives here.
+        # Ref: L-246 -- the measured value is unverified and routed to a
+        #      dispatch against Peissker et al. (2020).
         'e': 0.985,
         'period_yrs': 12.0,
         't_periapsis': 2017.0,
