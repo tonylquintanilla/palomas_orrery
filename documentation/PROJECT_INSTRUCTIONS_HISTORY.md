@@ -196,6 +196,72 @@ what tells us it is working -- is the one that found the third instance.
 (Moved down from the resident protocol on 2026-08-23 when v3.42 made a
 fourth entry.)
 
+v3.40 (August 16, 2026): No change to the protocol's own rules. Two
+skills gained conventions, and both were earned the same way -- a
+session hit the problem, Tony ruled, the rule went into the skill that
+fires on it rather than into this document.
+
+safe-file-editing 1.3 -> 1.4, two additions. (1) Fix In Passing, Report
+It. Where a patch is already fingerprinting a file and finds a violation
+of an ALREADY-RULED convention in it, fix it in the same patch and say
+so, rather than noting it and moving on. Origin: a patch touching eight
+files blocked itself on two Unicode arrows in a comment that predated
+the work by months. Claude's first instinct was to report and leave it,
+citing "fix only what asked." Tony's ruling: the convention was already
+ruled, the file was already fingerprinted, and a separate sweep for two
+characters would never be scheduled, so leaving it means it never gets
+fixed. The anti-pattern "fix only what asked" guards against is
+unreviewed DESIGN change, not mechanical compliance with a standing
+rule. The encoding gate was rescoped with it -- hard-fail on non-ASCII
+in inserted lines, sweep pre-existing where the conditions hold, and
+print which of the two happened, because a gate that fails on somebody
+else's bug blocks a correct patch and a gate that stays silent is how a
+convention quietly stops being true. (2) Naming and Archiving a Patch
+Script: name it patch_<handle>_<what>.py leading with the ledger handle,
+number a sequence so sort order carries run order, archive to
+documentation/ once run, and state which parts of the change are
+permanent when the script is not. That convention was already 96 scripts
+deep in documentation/ and written down nowhere, so a session that read
+the delivery format still produced three unprefixed scripts and had to
+be told.
+
+orrery-coding-conventions 1.3 -> 1.4, two additions. (1) Marker
+Separation for Near-Equal Radii. Where two shells sit within about 10%
+of each other, the standing r*1.05 north-pole marker puts both in the
+same place and Plotly shows one where the user expects two -- geometry
+correct, legend correct, affordance silently absent. The inner shell
+keeps the pole; each subsequent shell steps 20 degrees in polar angle at
+its own radius. Separate angularly, never radially. Origin: the
+chromosphere moved to true physical scale and its marker landed 0.003
+solar radii from the photosphere's, about one pixel. The section says
+explicitly that this is NOT the May 2026 ring-marker fix, which solved a
+collision radially and cannot help at 0.29% -- reaching for it is the
+trap. (2) Harvest the Conventions You Find. When you touch a file and
+find a convention this skill does not hold, report it in the same
+message as the work; do not silently follow it, because following
+without naming is how it stays invisible. Promotion is Tony's judgment,
+not the finder's. Origin: Tony's observation that "there are many
+unrecorded conventions except in local files," which the patch-script
+naming convention had just demonstrated.
+
+Process note, recorded because it is the reason this entry exists at
+all. Both skill files were delivered wrong before they were delivered
+right, and neither error was caught by a check. The conventions file was
+named for download disambiguation rather than for its destination and
+was filed in documentation/, leaving two pushed source comments citing a
+20-degree rule that existed in no store the skill loader reads --
+cite-to-nonexistent-authority, live in the repo. Then the corrected file
+was built by an insert written as a replace, which deleted its own
+version block, Source line, criticality note, and the paragraph
+recording what v1.2 added. Tony found that by reading the new file
+against its sibling. The rebuild added a pure-addition check -- every
+line of 1.3 must still be present in 1.4 -- which is the check that
+should have run the first time. Deliverables now ship inside a folder
+named for their destination.
+
+(Moved down from the resident protocol on 2026-08-25 when v3.43
+made a fourth entry.)
+
 ### Preserved verbatim: v3.29 Technical lessons (now field notes in skills)
 
 - Cache: cache[name]['elements'] (nested dict)

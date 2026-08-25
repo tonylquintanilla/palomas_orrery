@@ -258,7 +258,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*148 live items; 134 need attention (`!`); 147 RICE-scored; 94 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*148 live items; 134 need attention (`!`); 147 RICE-scored; 95 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-248-249. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -486,6 +486,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |:---:|----|------|-------------|:-----:|---------|
 |  | L-117 | Offline suite red at HEAD: Encke id drift (2P -> 90000091) not mirrored in the mock | DONE | 34.2 | 2026-07-12 |
 |  | L-114 | objects_config.json stranded by the atomic swap; also blocks crash-recovery (gallery builder) | DONE | 16.2 | 2026-07-27 |
+|  | L-250 | The Braid added to Part 3 as a general principle | DONE | 15.2 | 2026-08-25 |
 |  | L-182 | Mars Hill sphere -- cross-check correction lost across the config pipeline | DONE | 12.0 | 2026-08-05 |
 |  | L-222 | The constants change report fails on every currency stamp | DONE | 11.4 | 2026-08-20 |
 |  | L-221 | The master plan is the roadmap, and it outranks RICE | DONE | 10.8 | 2026-08-22 |
@@ -3922,6 +3923,42 @@ there is a count this item cannot be sized honestly.
 - **Note:** RICE 3/4/70/3 -> 2.8 is Claude's proposed score.
   **Tony-action (decide):** confirm or redirect, and whether Fable
   carries it.
+**Note (2026-08-25) -- the dispatch is bounded, and this is its shape.**
+Raised by Tony: a sweep of this kind "can become its own rabbit hole,
+chasing all the findings."
+- **The hole opens only when DISCOVERY and REMEDIATION are the same
+  activity.** That is what happened on 2026-08-25: fixing while
+  searching, so every fix opened the next search, with no stopping
+  condition because "no more findings" cannot be verified. Fable
+  ENUMERATES and fixes nothing. The output is ledger rows; the fixing
+  happens later, in slices, under The Braid (PROJECT_INSTRUCTIONS Part
+  3, added v3.43).
+- **The denominator is finite and measured at `2bf0d06a`:** 55
+  module-level names in `constants_new.py`, four of them derived,
+  against roughly 1,100 distinct multi-decimal literals in the live
+  tree.
+- **The pattern is mechanical:** a numeric literal equal to a value
+  already named in `constants_new.py`, or derivable from named values
+  within one or two steps, within a stated rounding tolerance. That
+  definition catches `3.26156` and `4.74` and needs no judgment about
+  what counts as a physical constant -- which is the wider version that
+  would not terminate.
+- **Report by CONSTANT, not by SITE.** One row per constant-and-module
+  pair with a count, not one per occurrence. `3.26156` is ONE finding
+  across eleven modules, the way L-248 writes it. Otherwise the sweep
+  inflates the ledger by an order of magnitude and creates a second
+  problem while solving the first.
+- **Timing: the enumeration runs BESIDE the Earth build, not before
+  it.** It touches no file and runs outside the project context window,
+  which is what the Mode 7 scoping leg is for. Wait for
+  `patch_L248_1` and L-249 to land so it is not enumerating values
+  about to change; a few days of staleness would not matter for a
+  sizing exercise, but those two are close.
+- **Why the enumeration is worth doing soon even though remediation is
+  not.** The dangerous crack is the undocumented one. A count turns
+  "there may be more of these" into a finite list with RICE scores,
+  which is the difference between a background worry and a backlog.
+**Ref (added):** L-248; L-250; PROJECT_INSTRUCTIONS Part 3, The Braid.
 **Ref:** L-243 (the narrow instance); L-181; L-190 (scanner reach).
 
 #### [L-245] Constants drift check compares against the last COMMIT, not the last RUN
@@ -7656,6 +7693,38 @@ the Phase-1b cost framing of 2026-07-08 and was never a decision. Tony:
 assembler. Part by part." So the answer to "which shells, if any, also
 render interactive-side" is ALL of them, taken part by part, with
 artifacts reopening as families are added. See L-234.
+
+#### [L-250] The Braid added to Part 3 as a general principle
+<!-- L:250 status:DONE upd:2026-08-25 section:C flag: rice:4/4/95/1 -->
+- **Protocol v3.43, 2026-08-25.** "The Braid -- The Artifact Orders the
+  Work" added to Part 3 directly after The Artifact Bounds the Audit,
+  which it extends by one axis: that rule bounds which values are in
+  scope, this one bounds which are in scope NEXT, and it applies to any
+  correctness program rather than to provenance alone.
+- **Why it was not already there.** Tony's ruling of 2026-08-22 lived
+  only in `MASTER_PLAN_INTERACTIVE_GALLERY.md` Section 5a, which carries
+  SEQUENCING authority for the gallery. He was applying it to the
+  constants work as well -- from memory, because it was written nowhere
+  that fires. Tony, 2026-08-25: "it is a meta-principle. its not even in
+  the protocol as such."
+- **What made it urgent.** A constants migration ran global on
+  2026-08-25 and did not terminate. One conversion factor led to a
+  shadow name, to three aliases, to a second constant at 38 sites across
+  11 modules, in a single evening, while the artifact on the critical
+  path moved not at all. Every step was locally justified and nobody
+  chose the day's shape.
+- **Two additions beyond the master plan's version.** The
+  DISCOVERY/REMEDIATION split -- discovery enumerates against a stated
+  pattern and fixes nothing, so it terminates because the tree is finite
+  -- and ONE ledger row per CLASS rather than one per instance, so the
+  backlog grows by kinds instead of counts.
+- **Version history.** v3.40 moved down to
+  `documentation/PROJECT_INSTRUCTIONS_HISTORY.md` PART 1 to keep three
+  entries resident, per the rule L-199 asked for.
+**Gap:** none. Closed on delivery.
+**Ref:** PROJECT_INSTRUCTIONS v3.43 Part 3; L-244 (the first program the
+rule bounds); L-248; L-199 (the three-resident cap); The Artifact Bounds
+the Audit.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

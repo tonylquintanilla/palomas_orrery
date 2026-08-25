@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: August 25, 2026
-Files scanned: 130
+Files scanned: 128
 Total findings: 1033
 Constants: 104 | Dicts: 39 | Display strings: 890
 
@@ -19,20 +19,16 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260825T211858Z | `2bf0d06` | 128 | 1033 | 293 | 625 | 113 | 2 |
 | 20260825T202349Z | `c943c83` | 130 | 1033 | 293 | 625 | 113 | 2 |
 | 20260825T195708Z | `1526a9c` | 129 | 1037 | 291 | 631 | 113 | 2 |
 | 20260825T184837Z | `e5eb3ca` | 129 | 1038 | 292 | 630 | 114 | 2 |
 | 20260825T183423Z | `13fdba4` | 128 | 1038 | 292 | 630 | 114 | 2 |
 | 20260825T181803Z | `4ad78a0` | 129 | 1039 | 292 | 631 | 114 | 2 |
-| 20260825T021135Z | `b050cea` | 128 | 1039 | 292 | 631 | 114 | 2 |
 
-Change since the previous run: total -4, Tier-1 +2.
+Change since the previous run: total +0, Tier-1 +0.
 
-Tier-1 rose in these files:
-
-| File | Before | After |
-|------|-------:|------:|
-| constants_new.py | 0 | 2 |
+No file's Tier-1 count rose.
 
 ---
 

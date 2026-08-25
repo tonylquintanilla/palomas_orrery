@@ -10,24 +10,26 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 130  
-**Total Lines of Code (non-blank):** 103,838  
-**Total Public Functions/Classes:** 1,163
+**Total Python Files:** 131  
+**Total Lines of Code (non-blank):** 104,190  
+**Total Public Functions/Classes:** 1,164
 
 ## Classification Coverage
 
-**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `patch_L243_2_au_to_km_aliases.py`
 - `patch_L247_1_sgr_a_constants_migration.py`
+- `patch_L250_1_braid_part3_and_L244.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (2).** No valid `Domain:` tag.
+**Undetermined domain (3).** No valid `Domain:` tag.
 
 - `patch_L243_2_au_to_km_aliases.py`
 - `patch_L247_1_sgr_a_constants_migration.py`
+- `patch_L250_1_braid_part3_and_L244.py`
 
 
 ---
@@ -233,6 +235,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `patch_L243_2_au_to_km_aliases.py` | L-243, second and final pass. Retires the three surviving AU_TO_KM aliases -- names, not values. Each one already imports KM_PER_AU and assigns it to a second name, so no number changes anywhere in this patch. Also corrects the L-243 ledger row, which records one named shadow when there were five... (243 lines) |
 | `patch_L247_1_sgr_a_constants_migration.py` | L-247. Moves the Sagittarius A* physical constants out of sgr_a_star_data.py and into constants_new.py, deletes the two nothing reads, and sweeps the literals that were restating the migrated values in prose and in arithmetic. (379 lines) |
+| `patch_L250_1_braid_part3_and_L244.py` | Protocol v3.43. Adds "The Braid -- The Artifact Orders the Work" to Part 3, moves the v3.40 version-history entry down into PROJECT_INSTRUCTIONS_HISTORY.md to keep three resident, updates L-244 with the enumeration/remediation split, and opens L-250 as the handle for the protocol change. (352 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |
