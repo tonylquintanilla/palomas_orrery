@@ -196,6 +196,28 @@ what tells us it is working -- is the one that found the third instance.
 (Moved down from the resident protocol on 2026-08-23 when v3.42 made a
 fourth entry.)
 
+v3.41 (August 18, 2026): Records restructure and a skill bump.
+No rule changed. (1) The version history left this document: v1.0-v3.38
+now live in documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1, the
+file that was LESSONS_ARCHIVE.md and still carries the v3.37 lessons
+record verbatim as PART 2. The ledger's appendix is replaced by a
+pointer. Three entries stay resident and a fourth pushes the oldest
+down, which is the cap L-199 asked for; its part 1, a sizing section,
+is still unbuilt. (2) The header gained an anchor and lost a
+contradiction -- the repo copy read August 16 and the copy installed in
+the Claude UI read August 17 under the SAME version, two stores with
+nothing watching them the way Stale Skill = Stop watches the skills.
+(3) provenance-discipline 2.3 -> 2.4 (L-203, L-204): the visibility
+convention got a home, and the annotation grammar now accepts a .jsonl
+or .json worksheet reference, because a returned verdict could be
+checked and routed and then refused when written back into the code.
+The reinstall cannot be verified from inside the session that makes it,
+so the NEXT session confirms its loaded copy reads 2.4 before doing
+provenance work.
+
+(Moved down from the resident protocol on 2026-08-26 when v3.44 made a
+fourth entry.)
+
 v3.40 (August 16, 2026): No change to the protocol's own rules. Two
 skills gained conventions, and both were earned the same way -- a
 session hit the problem, Tony ruled, the rule went into the skill that

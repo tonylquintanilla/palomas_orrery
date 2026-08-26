@@ -6,9 +6,19 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 2.6 | Cut from palomas_orrery @ f603be3 (v2.6), earlier
-@ 731066f (v2.5), @ 6b99ace (v2.2), @ 00219d9 (v2.1), @ eb77c83 (v2.0),
-@ cdcdb4b (v1.9) | August 19, 2026
+Skill version: 2.7 | Cut from palomas_orrery @ 3faa72a0 (v2.7),
+earlier @ f603be3 (v2.6), @ 731066f (v2.5), @ 6b99ace (v2.2),
+@ 00219d9 (v2.1), @ eb77c83 (v2.0), @ cdcdb4b (v1.9) | August 26, 2026
+v2.7 adds three sections from Tony's rulings of 2026-08-26, each of
+them a gap this skill had rather than a refinement of something it
+said. One Value, One Home [CRITICAL] states positively what No Shadow
+Constants only prohibited, and extends it to prose and to dead code.
+Report to the Figures You Have [QUALITY] had no home in any skill.
+A Breadcrumb Must Not Cite [CRITICAL] records why an honest
+"pending sourcing" note cannot carry its own references (L-253).
+Founding case for the first two: Earth's four interior hover strings
+typed their boundary figures for months beside a radius_fraction that
+disagreed with them by up to 297 km, and nothing here covered it.
 v2.6 adds The Two-Dispatch Rule [CRITICAL] under Model Roles in the
 Competitive Pattern -- L-217, after a Mode 7 review prompt asked two
 model legs to answer Part A before reading Part B, which neither could
@@ -810,6 +820,79 @@ phase1_v17.md` and related handoffs. The originating rationale:
 - False positives get provenance_exceptions.json entries, not code
   workarounds.
 
+## One Value, One Home [CRITICAL]
+
+**A numeric value has exactly one home -- `constants_new.py`, with its
+source. Everything else references it: the drawing, the hover string,
+the tooltip, the comment. A number typed anywhere else is a second
+store, whether or not it currently agrees.**
+
+This is the POSITIVE form of the section below, and the difference is
+not stylistic. No Shadow Constants forbids copying a value that ALREADY
+lives in `constants_new.py`. It says nothing about where a value's first
+home is when a new feature introduces one, and a new feature is exactly
+where the second store gets created.
+
+**Prose counts.** A hover string that types `1,220 km` is a store. Build
+the sentence so the number interpolates:
+
+```python
+f"The inner core is {EARTH_INNER_CORE_KM:,.1f} km in radius."
+```
+
+Two strings that both interpolate the same constant cannot disagree
+numerically, which is why prose duplication and value duplication are
+different problems -- the first is L-191, the second is this rule.
+
+**Dead code counts.** A literal in a function nothing calls is still a
+store, and it reads as authoritative to whoever finds it next. Wire it
+or delete it; do not leave it because it cannot run. (L-254.)
+
+**THE SCOPE BOUNDARY, and it must be stated in the same breath.**
+MEASURED values migrate. DECLARED DRAWING PARAMETERS do not:
+`n_points`, `marker_size`, `opacity`, `mesh_resolution`, an angular
+marker step. Those stay where they are drawn. That is L-240's split, and
+without it "only store" reads as hauling 25 and 3.4 into
+`constants_new.py`, which buries the values that matter under the ones
+that do not.
+
+**IN TIME: forward-going on every file touched.** The standing backlog
+carries the sweep -- L-181 is the parent, with L-243, L-244 and L-248 as
+open slices. This rule does NOT open a repo-wide sweep on the day it is
+adopted; that is the denominator that grows whenever someone thinks of
+something. (The Braid, resident protocol Part 3.)
+
+(Tony's ruling, 2026-08-26, stated as general and confirmed with the
+boundary above in the same exchange.)
+
+## Report to the Figures You Have [QUALITY]
+
+**Compute at full precision. Report to the significant figures the least
+precise input supports.** The two halves are separate and a careless
+reader can make them contradict each other, so they are stated together.
+
+Rounding a derived constant in code introduces error AND creates a
+rounded second store of a value that lives elsewhere, so the derivation
+stays symbolic:
+
+```python
+EARTH_INNER_CORE_RADII = EARTH_INNER_CORE_KM / EARTH_EQUATORIAL_RADIUS_KM
+# Derived: 1221.5 / 6378.1366 = 0.19151 -- 5 significant figures, set
+# Derived+: by the numerator. Report no more than that.
+```
+
+Significant figures govern REPORTING: every quotient stated in a
+comment, a hover string or a tooltip, with the figure count named beside
+it so the next reader does not re-derive it.
+
+**A subtraction is governed by decimal PLACES, not significant figures.**
+`6371.0 - 660` is good to units, so 5711 and not 5711.0.
+
+The failure this catches is quiet. Stating `0.8953994` when the inputs
+support `0.8954` is not a small error in the last digits -- it is six
+digits the value was never entitled to, and it reads as a measurement.
+(Tony's ruling, 2026-08-26, after exactly that appeared in a table.)
+
 ## No Shadow Constants [CRITICAL]
 
 Modules must not carry local copies of values that exist in constants_new.py. Import through the established shim (planet_visualization_utilities) or directly from constants_new.py. A local literal that numerically matches a tracked constant is a frozen copy -- it won't follow if the source value updates, and it bypasses the scanner's citation chain even when the number is correct today.
@@ -817,6 +900,39 @@ Modules must not carry local copies of values that exist in constants_new.py. Im
 This is the code-side complement to the scanner's build_pinned_values() check: the scanner can flag a suspicious match, but the standing rule is that these should never be introduced in the first place. When found, delete the local definition and replace it with a proper import -- do not add a # Source: comment to the local copy, because that would cite-to-clear a structural problem rather than fix it.
 
 Known precedent (FIXED in L-156 1f; kept as history): comet_visualization_shells.py lines 492-493 once hardcoded SUN_RADIUS_KM and KM_PER_AU despite KM_PER_AU already being imported, with line 602 deriving SUN_RADIUS_AU from the two local copies. Those lines now carry the fix comment recording the removal -- a reader sent to find shadow constants there will find the repair, not the defect. Same failure class as the close_approach_data.py stale-copy bug that originally motivated test_constants_provenance.py.
+
+### A Breadcrumb Must Not Cite [CRITICAL]
+
+Citations attach at BLOCK level over a thirty-line lookback, and
+`SOURCE_PATTERNS` counts `# Source:`, `# Ref:`, a bare `https://` URL,
+`doi`, `arXiv` and agency names (IAU, JPL, NASA, ESA, NIST, NOAA...) as
+citations. All of that is in the section above. The consequence is not
+obvious and it bites in one specific place.
+
+**An honest "unsourced, pending research" note cannot carry its own
+candidate references.** Put the papers next to the value and the scanner
+reads them as that value's citation, and the unit ends up looking better
+sourced than it is -- which is the wrong-but-cited failure, rebuilt
+deliberately by someone trying to be careful.
+
+So the code carries a HANDLE and nothing else:
+
+```python
+# Review-note: two figures for this boundary's variation, and the
+# Review-note+: papers that may support them, are held in L-253 --
+# Review-note+: unsourced, unused, deliberately not restated here.
+```
+
+The figures, the DOIs and where each actually came from live in the
+ledger row, which is searchable by handle, holds "pending sourcing" as a
+native state, is RICE-scorable against everything else, and sits outside
+the audit entirely. The trail is preserved at zero cost to the
+denominator.
+
+(Tony's ruling, 2026-08-26. Founding case L-253: `EARTH_D660_DEPTH_KM`
+carried a real, correctly transcribed reference to Ishii et al. 2019 --
+true of the 660 km depth, and not the source of either figure in the
+note beneath it. That paper is about the discontinuity's sharpness.)
 
 ## Report Domain Classification (Findings by File / File Type)
 

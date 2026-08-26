@@ -6,8 +6,12 @@ fires_when: Markers, hover text, axes, shells, legendgroups, docstrings, new vis
 
 # Orrery Coding Conventions
 
-Skill version: 1.5 | Cut from palomas_orrery @ 15741822 (v1.5),
-earlier @ 86f529a (v1.4), 3398970 (v1.3) | 2026-08-23
+Skill version: 1.6 | Cut from palomas_orrery @ 3faa72a0 (v1.6),
+earlier @ 15741822 (v1.5), 86f529a (v1.4), 3398970 (v1.3) | 2026-08-26
+v1.6 (L-249) makes the angular step in Marker Separation for
+Near-Equal Radii an OUTCOME rather than a fixed 20 degrees, with 20 and
+10 recorded as the two worked cases. Earned when Earth's upper mantle
+moved to its sourced radius and its cross vanished under the crust's.
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons.
 v1.4 adds Marker Separation for Near-Equal Radii to the Single Info
 Marker Pattern, earned when the chromosphere moved to true scale and its
@@ -119,9 +123,34 @@ two. The geometry is correct, the legend is correct, and the affordance
 silently does not exist -- nothing errors and nothing renders wrong.
 
 **Rule: the inner shell keeps the north pole. Each subsequent shell in
-the stack steps 20 degrees in polar angle along the +x meridian, at its
-own radius.** Separate angularly, never radially -- moving a marker off
-its own shell's radius detaches it from the thing it labels.
+the stack steps in polar angle along the +x meridian, at its own
+radius.** Separate angularly, never radially -- moving a marker off its
+own shell's radius detaches it from the thing it labels.
+
+**HOW FAR is an outcome, not a number: far enough to read as two markers
+at the scale the family actually renders at.** The step needed depends
+on frame width, and frame width depends on which shells the user has
+enabled -- Earth's interior alone frames at about 1 R, but switch the
+magnetosphere on and the same step collapses to nothing. Two worked
+cases:
+
+- **20 degrees, the solar skin stack.** Renders across a 0-3 R_sun view,
+  so the markers land 0.365 R_sun apart, about 12% of the frame.
+- **10 degrees, Earth's crust against the upper mantle.** Interior-only
+  view, so 10 degrees puts them 0.183 R apart -- roughly 1,165 km, 8-9%
+  of the frame, up from 33 km.
+
+Declare it per shell with `'info_polar_deg'` in `SHELL_CONFIGS`;
+`build_sphere_shell()` reads it and places the marker at
+`r*1.05` stepped by that polar angle. Absent or zero reproduces the pole
+exactly, so adding the key to one shell moves nothing else. It is a
+DECLARED drawing parameter under L-240 and stays in `shell_configs.py`,
+never in `constants_new.py`.
+
+(Tony's ruling 2026-08-26, and his Mode 5 call on which shell moves:
+the CRUST, because it is the odd layer visually -- the only mesh3d
+surface in the interior stack. The standing rule would have moved it
+too, being the outer of the pair. Rule and eye agreed.)
 
 ```python
 info_polar_deg = 20.0                       # 0 for the innermost
