@@ -10,26 +10,24 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 131  
-**Total Lines of Code (non-blank):** 104,256  
-**Total Public Functions/Classes:** 1,169
+**Total Python Files:** 130  
+**Total Lines of Code (non-blank):** 104,206  
+**Total Public Functions/Classes:** 1,167
 
 ## Classification Coverage
 
-**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L247_2_worksheet_request.py`
-- `patch_L248_1_constants_gate_and_au_yr.py`
-- `patch_L249_1_ledger_rows_248_249.py`
+- `patch_L247_3_convergence_report.py`
+- `patch_L247_4_repair.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (3).** No valid `Domain:` tag.
+**Undetermined domain (2).** No valid `Domain:` tag.
 
-- `patch_L247_2_worksheet_request.py`
-- `patch_L248_1_constants_gate_and_au_yr.py`
-- `patch_L249_1_ledger_rows_248_249.py`
+- `patch_L247_3_convergence_report.py`
+- `patch_L247_4_repair.py`
 
 
 ---
@@ -126,13 +124,13 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,250 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (512 lines) |
-| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (919 lines) |
+| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (1,021 lines) |
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (412 lines) |
 | `exoplanet_stellar_properties.py` | Stellar Properties for Exoplanet Host Stars (484 lines) |
 | `exoplanet_systems.py` | Hardcoded Exoplanet System Catalog (572 lines) |
 | `info_dictionary.py` | Descriptive text and narrative content for Paloma's Orrery. (2,050 lines) |
 | `messier_catalog.py` | Static catalog of Messier objects and bright deep-sky objects. (406 lines) |
-| `sgr_a_star_data.py` | S-star catalog and orbital mechanics for Sagittarius A*. (584 lines) |
+| `sgr_a_star_data.py` | S-star catalog and orbital mechanics for Sagittarius A*. (590 lines) |
 | `shell_configs.py` | Shell configuration data for all celestial bodies. (2,576 lines) |
 | `spacecraft_encounters.py` | Tagged encounter data for spacecraft missions in Paloma's Orrery. (1,298 lines) |
 | `star_notes.py` | Curated hover text annotations for notable stars. (1,158 lines) |
@@ -233,9 +231,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L247_2_worksheet_request.py` | - write the L-247 cross-check request. (188 lines) |
-| `patch_L248_1_constants_gate_and_au_yr.py` | - clear the gate, derive 4.74. (427 lines) |
-| `patch_L249_1_ledger_rows_248_249.py` | - write L-248 and L-249 into the ledger. (241 lines) |
+| `patch_L247_3_convergence_report.py` | - file the L-247 convergence report. (283 lines) |
+| `patch_L247_4_repair.py` | - the L-247 repair, all five rows. (415 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

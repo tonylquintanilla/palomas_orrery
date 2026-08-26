@@ -27,6 +27,8 @@ Role: data
 Domain: orrery
 
 Module updated: April 15, 2026 with Anthropic's Claude Opus 4.6
+Module updated: August 25, 2026 with Anthropic's Claude Opus 5 (L-247:
+the S4714 Kepler note recomputed against the 2022 black hole mass)
 """
 
 import math
@@ -245,11 +247,15 @@ S_STAR_CATALOG = {
         #       so that periapsis = a * (1 - e) = 12.0 AU, which is the
         #       figure this project draws and labels. Nobody has sourced
         #       800.0 itself.
-        # Calculation: with SGR_A_MASS_SOLAR = 4.154e6, Kepler's third law
-        #              gives P = 11.1 yr for a = 800, against the 12.0 yr
-        #              stored below. A 12.0 yr period needs a = 842 AU,
-        #              which puts periapsis at 12.6. So 800 satisfies the
+        # Calculation: with SGR_A_MASS_SOLAR = 4.297e6, Kepler's third law
+        #              gives P = 10.9 yr for a = 800, against the 12.0 yr
+        #              stored below. A 12.0 yr period needs a = 852 AU,
+        #              which puts periapsis at 12.8. So 800 satisfies the
         #              periapsis label and not the period.
+        # Corrected: read 4.154e6 / 11.1 yr / 842 AU until 2026-08-25,
+        #            when L-247 advanced the black hole mass to the 2022
+        #            GRAVITY value. The gap this comment describes did
+        #            not close; it widened slightly.
         # Review-note: 520.0 was stored here until 2026-08-25, and two
         #              modules overwrote it to 800.0 at import time, so
         #              which value a render used depended on import order.
