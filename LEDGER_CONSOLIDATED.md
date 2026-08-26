@@ -258,7 +258,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*153 live items; 139 need attention (`!`); 152 RICE-scored; 95 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*154 live items; 140 need attention (`!`); 153 RICE-scored; 95 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -300,6 +300,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-25 |
 | ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
 | ! | L-236 | Gallery maintenance runner [designed, unbuilt] | OPEN | 3.2 | 2026-08-25 |
+| ! | L-254 | 76 dead sphere-shell builders, unmarked, across 12 modules | OPEN | 2.8 | 2026-08-26 |
 | ! | L-240 | Split declared drawing parameters from measured values | OPEN | 2.8 | 2026-08-25 |
 | ! | L-176 | Shell hover text: add illustrated dimensions (radius_fraction -> km) | OPEN | 2.8 | 2026-08-04 |
 | ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-08-07 |
@@ -4402,6 +4403,59 @@ as declined. Both are closures; leaving it open is not.
 assertions); L-240 (measured vs declared); Fetched vs Recalled and Show
 the Envelope of the Unknowable, resident protocol Part 3;
 `constants_new.py::EARTH_D660_DEPTH_KM`.
+
+#### [L-254] 76 dead sphere-shell builders, unmarked, across 12 modules
+<!-- L:254 status:OPEN upd:2026-08-26 section:A flag: rice:3/3/95/3 -->
+- **Measured, not recalled, at orrery `fc25ef23`.** 82
+  `create_*_shell` functions are defined across 15
+  `*_visualization_shells` modules. SIX are live, every one reached
+  through a `CUSTOM_SHELLS` `'builder'` string that
+  `planet_visualization.py` line 440 resolves by `rsplit('.', 1)` plus
+  `getattr`: the Earth, Mars, Mercury and Venus magnetospheres, plus
+  Earth's LEO and geostationary belt. The other **76 are dead** --
+  defined, imported, called nowhere.
+- **The count is safe to state because the dispatch is closed.** That
+  builder-string lookup is the ONLY dynamic call route in the codebase:
+  a repo-wide search for `getattr` on a shells module, for
+  `globals()[...]` and for `eval` of a builder name returns nothing
+  else. So a dead builder cannot be rescued by a path the census missed.
+- **Dead by migration, not by abandonment.** Sphere shells render
+  through `SHELL_CONFIGS` -> `build_sphere_shell()` ->
+  `create_info_marker()`, and each per-body builder was superseded when
+  its body moved to `shell_configs.py` in Phases A-D.
+  `planet9_visualization_shells.py` says so in its own docstring:
+  "fully archivable once shell_configs.py migration is complete."
+- **Per module:** earth 8, solar 14, mars 7, jupiter 6, moon 6, pluto 6,
+  saturn 6, venus 6, eris 5, neptune 5, uranus 5, planet9 2.
+- **Why it is not cosmetic.** A dead function is indistinguishable from
+  a live one while reading, and this project has already paid for that
+  twice. In May 2026 an inline-marker sweep edited these dicts and
+  rendered nothing;
+  `orrery_rendering.py`'s docstring still carries the correction. On
+  2026-08-26 `patch_L249_2` found four of them holding their own copies
+  of Earth's interior boundary values -- a second store of a migrated
+  constant, in code that cannot run, which would have read as
+  authoritative to whoever found it next.
+- **Done so far (`patch_L254_1`, 2026-08-26):** Earth's eight are marked
+  in their own docstrings, and a dispatch note above the section names
+  the three that are live. Annotation only. Tony's ruling the same day:
+  annotate now, sweep later.
+- **The remaining 68 carry no marker.** Solar's fourteen are the largest
+  single block.
+- **Note:** RICE 3/3/95/3 is Claude's proposed score. Effort 3 because
+  deletion is not the only option -- archiving the modules, or keeping
+  them as marked reference, are both live choices and that is a
+  judgment call before it is a mechanical one.
+  **Tony-action (decide):** confirm or redirect the score, and rule on
+  whether the sweep deletes, archives, or annotates the remaining 68.
+**Gap:** 68 dead builders across 11 modules are unmarked. Closing this
+means one pass that either removes them or marks them, plus a decision
+on whether the now-unused imports at `planet_visualization.py` lines
+129-139 go with them.
+**Ref:** L-249 (`patch_L249_2`, which surfaced it); L-191 (display-text
+duplication, the same modules); `orrery_rendering.py` docstring, May 28
+2026 correction; Verify Execution, Not Appearance [CRITICAL], resident
+protocol Part 3.
 
 ## PENDING ACTION (Tony-side)
 

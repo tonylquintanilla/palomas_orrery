@@ -40,6 +40,10 @@ May 28, 2026: Phase 1 re-pipe (Opus 4.7). 1 live inline info marker
     Van Allen loop, LEO, GEO) were untouched -- they already use the
     factory default (red border) and Tony's earlier Mode 5 testing
     marked them acceptable.
+August 26, 2026 (L-254, Opus 5): the eight dead create_earth_*_shell
+    functions are marked as dead in their own docstrings, and the
+    dispatch note above the section says which three are live. No
+    function removed and no behaviour changed -- the sweep is L-254.
 August 26, 2026 (L-249, Opus 5): the four interior info strings stop
     typing their boundary figures and interpolate constants_new.py
     instead, and the four dead create_earth_*_shell builders take their
@@ -65,6 +69,28 @@ from constants_new import (
 from orrery_rendering import rotate_to_sunward, create_info_marker
 
 # Earth Shell Creation Functions
+#
+# DISPATCH, read this before editing anything below (L-254, 2026-08-26).
+# Eleven create_earth_*_shell functions live in this file. THREE are on
+# the live render path, all of them reached through a CUSTOM_SHELLS
+# 'builder' string that planet_visualization.py resolves by rsplit and
+# getattr:
+#     create_earth_magnetosphere_shell
+#     create_earth_leo_shell
+#     create_earth_geostationary_belt_shell
+# The other EIGHT are dead. They are imported at planet_visualization.py
+# lines 129-139 and called nowhere. Sphere shells render through
+# SHELL_CONFIGS -> build_sphere_shell() -> create_info_marker() instead,
+# and have since the Phase A-D migration; orrery_rendering.py's docstring
+# has recorded it since May 2026. Each dead function says so in its own
+# docstring below.
+#
+# The _info strings above are NOT dead. They are the canonical `\n` form,
+# read by the Tk checkbox tooltips through celestial_objects.
+# get_shell_tooltip_names() and globals(), and imported by
+# shell_configs.py, which derives `<br>` from them at the Plotly boundary.
+# Editing one changes what the user reads in two places. Editing a dead
+# function below changes nothing at all.
 
 # Source: USGS Interior of the Earth, NASA Earth Fact Sheet
 # Verified: April 2026 via Gemini fact-check
@@ -77,7 +103,14 @@ earth_inner_core_info = (
 )
 
 def create_earth_inner_core_shell(center_position=(0, 0, 0)):
-    """Creates Earth's inner core shell."""
+    """Creates Earth's inner core shell.
+
+    DEAD CODE (L-254, 2026-08-26). Not on the render path: imported at
+    planet_visualization.py and called nowhere. This body renders its
+    sphere shells through SHELL_CONFIGS -> build_sphere_shell(). Edit
+    that config, not this function -- a change here renders nothing.
+    Retained pending the codebase-wide sweep in L-254.
+    """
     # Define layer properties
     layer_info = {
         'radius_fraction': EARTH_INNER_CORE_RADII,  # L-249: derived, not typed
@@ -143,7 +176,14 @@ earth_outer_core_info = (
 )
 
 def create_earth_outer_core_shell(center_position=(0, 0, 0)):
-    """Creates Earth's outer core shell."""
+    """Creates Earth's outer core shell.
+
+    DEAD CODE (L-254, 2026-08-26). Not on the render path: imported at
+    planet_visualization.py and called nowhere. This body renders its
+    sphere shells through SHELL_CONFIGS -> build_sphere_shell(). Edit
+    that config, not this function -- a change here renders nothing.
+    Retained pending the codebase-wide sweep in L-254.
+    """
     # Define layer properties
     layer_info = {
         'radius_fraction': EARTH_OUTER_CORE_RADII,  # L-249: derived, not typed
@@ -209,7 +249,14 @@ earth_lower_mantle_info = (
 )
 
 def create_earth_lower_mantle_shell(center_position=(0, 0, 0)):
-    """Creates Earth's lower mantle shell."""
+    """Creates Earth's lower mantle shell.
+
+    DEAD CODE (L-254, 2026-08-26). Not on the render path: imported at
+    planet_visualization.py and called nowhere. This body renders its
+    sphere shells through SHELL_CONFIGS -> build_sphere_shell(). Edit
+    that config, not this function -- a change here renders nothing.
+    Retained pending the codebase-wide sweep in L-254.
+    """
     # Define layer properties
     layer_info = {
         'radius_fraction': EARTH_LOWER_MANTLE_RADII,  # L-249: derived, not typed
@@ -276,7 +323,14 @@ earth_upper_mantle_info = (
 )
 
 def create_earth_upper_mantle_shell(center_position=(0, 0, 0)):
-    """Creates Earth's upper mantle shell."""
+    """Creates Earth's upper mantle shell.
+
+    DEAD CODE (L-254, 2026-08-26). Not on the render path: imported at
+    planet_visualization.py and called nowhere. This body renders its
+    sphere shells through SHELL_CONFIGS -> build_sphere_shell(). Edit
+    that config, not this function -- a change here renders nothing.
+    Retained pending the codebase-wide sweep in L-254.
+    """
     # Define layer properties
     layer_info = {
         'radius_fraction': EARTH_UPPER_MANTLE_RADII,  # L-249: derived, not typed
@@ -341,7 +395,14 @@ earth_crust_info = (
 )
 
 def create_earth_crust_shell(center_position=(0, 0, 0)):
-    """Creates Earth's crust shell using Mesh3d for better performance with improved hover."""
+    """Creates Earth's crust shell using Mesh3d for better performance with improved hover.
+
+    DEAD CODE (L-254, 2026-08-26). Not on the render path: imported at
+    planet_visualization.py and called nowhere. This body renders its
+    sphere shells through SHELL_CONFIGS -> build_sphere_shell(). Edit
+    that config, not this function -- a change here renders nothing.
+    Retained pending the codebase-wide sweep in L-254.
+    """
     # Define layer properties
     layer_info = {
         'radius_fraction': 1.0,  # Crust: 100% of Mars's radius
@@ -495,7 +556,14 @@ earth_atmosphere_info = (
 )
 
 def create_earth_atmosphere_shell(center_position=(0, 0, 0)):
-    """Creates Earth's lower atmosphere shell."""
+    """Creates Earth's lower atmosphere shell.
+
+    DEAD CODE (L-254, 2026-08-26). Not on the render path: imported at
+    planet_visualization.py and called nowhere. This body renders its
+    sphere shells through SHELL_CONFIGS -> build_sphere_shell(). Edit
+    that config, not this function -- a change here renders nothing.
+    Retained pending the codebase-wide sweep in L-254.
+    """
     # Define layer properties
     layer_info = {
         'radius_fraction': 1.05,  # Troposphere and stratosphere
@@ -567,7 +635,14 @@ earth_upper_atmosphere_info = (
 )
 
 def create_earth_upper_atmosphere_shell(center_position=(0, 0, 0)):
-    """Creates Earth's upper atmosphere shell."""
+    """Creates Earth's upper atmosphere shell.
+
+    DEAD CODE (L-254, 2026-08-26). Not on the render path: imported at
+    planet_visualization.py and called nowhere. This body renders its
+    sphere shells through SHELL_CONFIGS -> build_sphere_shell(). Edit
+    that config, not this function -- a change here renders nothing.
+    Retained pending the codebase-wide sweep in L-254.
+    """
     # Define layer properties
     layer_info = {
         'radius_fraction': 1.25,  # Mesosphere, thermosphere, and exosphere
@@ -1097,7 +1172,14 @@ earth_hill_sphere_info = (
 )
 
 def create_earth_hill_sphere_shell(center_position=(0, 0, 0)):
-    """Creates Earth's Hill sphere."""
+    """Creates Earth's Hill sphere.
+
+    DEAD CODE (L-254, 2026-08-26). Not on the render path: imported at
+    planet_visualization.py and called nowhere. This body renders its
+    sphere shells through SHELL_CONFIGS -> build_sphere_shell(). Edit
+    that config, not this function -- a change here renders nothing.
+    Retained pending the codebase-wide sweep in L-254.
+    """
     # Hill sphere radius in Earth radii
     radius_fraction = 235  # Earth's Hill sphere is about 235 Earth radii
     
