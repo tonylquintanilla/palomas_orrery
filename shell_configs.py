@@ -33,6 +33,10 @@ Module updated: August 26, 2026 with Anthropic's Claude Opus 5 (L-249:
     deliberately untouched -- it draws at the surface by definition and
     its hover carries a toggle-off note the body module's string does
     not have.)
+Module updated: August 26, 2026 with Anthropic's Claude Opus 5 (L-249:
+    Earth's crust declares info_polar_deg 10.0 so its info marker clears
+    the upper mantle's, which it coincided with once the upper mantle
+    moved to its sourced radius. Found by Mode 5, not by any checker.)
 """
 
 # Phase C4: Import hover text strings from body shell modules.
@@ -1394,6 +1398,14 @@ SHELL_CONFIGS = {
             'opacity': 1.0,
             'geometry_type': 'mesh3d',
             'mesh_resolution': 24,
+            # L-249: the upper mantle draws at 0.9950555 of the surface, so
+            # its cross and this one land 0.49% apart -- about 31 km, two
+            # pixels, one visible marker. Stepping this one 10 degrees puts
+            # them ~0.18 R apart. DECLARED drawing parameter (L-240): a
+            # choice about the picture, not a measurement, so it stays here
+            # and not in constants_new.py. Tony's Mode 5 call, 2026-08-26:
+            # move the crust, because it is the odd layer visually.
+            'info_polar_deg': 10.0,
             'hover_text': (
                 "Earth Crust<br>" 
                 "(Note: toggle off the crust layer in the legend to better see the interior structure.)<br><br>"

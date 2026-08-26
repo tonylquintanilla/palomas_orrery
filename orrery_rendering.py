@@ -28,8 +28,14 @@ May 28, 2026: Info-marker contrast fix at the real control point (Opus 4.7).
     shells are NOT on the live dispatch path (dead code) -- the factory
     here controls sphere-shell marker styling. See handoff v14. CUSTOM_SHELLS
     builders (magnetospheres, rings, tori) DO use their own inline markers.
+August 26, 2026 (L-249, Opus 5): build_sphere_shell() gains the optional
+    info_polar_deg key. A shell whose radius sits within ~10% of its
+    neighbour can step its info marker angularly instead of hiding under
+    it. Default 0 reproduces the previous north-pole placement exactly,
+    so no existing shell on any body moves.
 """
 
+import math
 import numpy as np
 import plotly.graph_objs as go
 
@@ -124,6 +130,12 @@ def build_sphere_shell(config, body_name, center_position=(0, 0, 0)):
         geometry_type     str    'scatter3d' (default, dot sphere) or
                                  'mesh3d' (triangulated solid surface)
         mesh_resolution   int    UV sphere resolution for mesh3d (default 24)
+        info_polar_deg    float  polar-angle step for the info marker, in
+                                 degrees along the +x meridian at the
+                                 shell's own radius. Default 0 = north
+                                 pole, unchanged. Set it only where two
+                                 shells sit within ~10% of each other and
+                                 their crosses would coincide.
 
     Returns:
         list of two plotly traces: [geometry, info_marker]
@@ -216,12 +228,34 @@ def build_sphere_shell(config, body_name, center_position=(0, 0, 0)):
     # May 2026 -- fills the dispatch-path blind spot that the per-body
     # sweep missed).
     r_info = radius_au * 1.05
+
+    # Marker Separation for Near-Equal Radii (L-249, 2026-08-26).
+    # Two shells within about 10% of each other put their crosses in the
+    # same place at the pole, and Plotly draws one where the user expects
+    # two -- geometry correct, legend correct, affordance silently absent.
+    # A shell may declare 'info_polar_deg' to step that many degrees of
+    # polar angle along the +x meridian, AT ITS OWN RADIUS. Angular, never
+    # radial: a marker moved off its shell's radius stops labelling it.
+    # Absent or zero reproduces the pole exactly, so no existing shell in
+    # any body moves. How far to step is an outcome, not a fixed number --
+    # far enough to read as separate at the scale the family renders at.
+    # Worked cases: 20 degrees for the solar skin stack (0-3 R_sun view),
+    # 10 for Earth's crust against the upper mantle (interior-only view).
+    info_polar_deg = config.get('info_polar_deg', 0.0)
+    if info_polar_deg:
+        polar = math.radians(info_polar_deg)
+        info_x = center_x + r_info * math.sin(polar)
+        info_z = center_z + r_info * math.cos(polar)
+    else:
+        info_x = center_x
+        info_z = center_z + r_info
+
     # Optional per-shell info-marker overrides. Dense-red shells set
     # 'info_fill' (e.g. 'white') so the cross reads against the red dot field;
     # the shell fill itself is unchanged. See handoff v14 / docstring above.
     # Absent keys -> factory defaults (shell-color fill, red border).
     info_trace = create_info_marker(
-        center_x, center_y, center_z + r_info,
+        info_x, center_y, info_z,
         config['color'],
         "%s<br><br>%s" % (trace_name, config['hover_text']),
         trace_name,
