@@ -10176,45 +10176,49 @@ CreateToolTip(galactic_frame,
     "Opens in your web browser as an interactive 3D visualization.")
 
 def launch_galactic_center():
-    """Launch the Sagittarius A* Grand Tour visualization."""
-    import os
-    import webbrowser
-    
-    # Path to the HTML file (same directory as this script)
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    html_path = os.path.join(script_dir, "sgr_a_grand_tour.html")
-    
-    # Check if HTML exists
-    if os.path.exists(html_path):
-        # Open in default browser
-        webbrowser.open('file://' + os.path.realpath(html_path))
-        print(f"[GALACTIC CENTER] Opened visualization: {html_path}", flush=True)
-    else:
-        # Try to generate it
-        print(f"[GALACTIC CENTER] HTML not found, attempting to generate...", flush=True)
-        try:
-            # Import and run the generator
-            import sgr_a_grand_tour as sgr
-            fig = sgr.create_grand_tour_dashboard()
-            fig.write_html(html_path)
-            print(f"[GALACTIC CENTER] Generated: {html_path}", flush=True)
-            webbrowser.open('file://' + os.path.realpath(html_path))
-        except ImportError as e:
-            print(f"[GALACTIC CENTER] ERROR: Missing module - {e}", flush=True)
-            print("Please ensure sgr_a_grand_tour.py and dependencies are in the same folder.", flush=True)
-            # Show error dialog
-            import tkinter.messagebox as messagebox
-            messagebox.showerror("Galactic Center", 
-                f"Could not launch visualization.\n\n"
-                f"Missing module: {e}\n\n"
-                f"Please ensure these files are in the same folder:\n"
-                f"- sgr_a_star_data.py\n"
-                f"- sgr_a_visualization_core.py\n"
-                f"- sgr_a_grand_tour.py")
-        except Exception as e:
-            print(f"[GALACTIC CENTER] ERROR: {e}", flush=True)
-            import tkinter.messagebox as messagebox
-            messagebox.showerror("Galactic Center", f"Error launching visualization:\n{e}")
+    """Launch the Sagittarius A* Grand Tour visualization.
+
+    Generates the figure every time and hands it to show_and_save --
+    the same path sgr_a_grand_tour.py's own __main__ takes. Nothing is
+    read from or written to a permanent file in the repo root.
+
+    Until 2026-08-25 this opened a saved HTML of the same name in the
+    repo root if one existed, and generated only when it did not -- so
+    the first click wrote that file and every click after served it
+    unchanged. The copy Tony was reading on that date had been written
+    in January 2026 and had survived every constant change since,
+    silently (L-251).
+    """
+    try:
+        # Imported here rather than at module scope: this is the one
+        # place that needs them, and a missing dependency should show
+        # as a dialog on the click, not a failure to start the orrery.
+        import sgr_a_grand_tour as sgr
+        from save_utils import show_and_save
+
+        print("[GALACTIC CENTER] Generating from current data...", flush=True)
+        fig = sgr.create_grand_tour_dashboard()
+        # Opens a temp copy in the browser, then offers the save
+        # dialog. Declining the dialog is a normal outcome.
+        show_and_save(fig, "sgr_a_grand_tour")
+        print("[GALACTIC CENTER] Opened in browser", flush=True)
+    except ImportError as e:
+        print(f"[GALACTIC CENTER] ERROR: Missing module - {e}", flush=True)
+        print("Please ensure sgr_a_grand_tour.py and dependencies are in the same folder.", flush=True)
+        # Show error dialog
+        import tkinter.messagebox as messagebox
+        messagebox.showerror("Galactic Center", 
+            f"Could not launch visualization.\n\n"
+            f"Missing module: {e}\n\n"
+            f"Please ensure these files are in the same folder:\n"
+            f"- sgr_a_star_data.py\n"
+            f"- sgr_a_visualization_core.py\n"
+            f"- sgr_a_grand_tour.py\n"
+            f"- save_utils.py")
+    except Exception as e:
+        print(f"[GALACTIC CENTER] ERROR: {e}", flush=True)
+        import tkinter.messagebox as messagebox
+        messagebox.showerror("Galactic Center", f"Error launching visualization:\n{e}")
 
 # Info label
 sgr_info_label = tk.Label(galactic_frame, 

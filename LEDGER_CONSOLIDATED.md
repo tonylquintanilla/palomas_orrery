@@ -258,14 +258,16 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*150 live items; 136 need attention (`!`); 149 RICE-scored; 95 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*152 live items; 138 need attention (`!`); 151 RICE-scored; 95 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-251 | The galactic centre button served a cached HTML for seven months | OPEN | 15.2 | 2026-08-25 |
 | ! | L-238 | radius_fraction > 1.0 assumes every shell is above the surface | OPEN | 14.2 | 2026-08-25 |
 | ! | L-229 | Streamer band drawn in the ecliptic plane, not the solar equator | OPEN | 11.4 | 2026-08-23 |
 | ! | L-235 | Checks that cannot fail, gallery side [three instances] | OPEN | 11.4 | 2026-08-25 |
+| ! | L-252 | L2b's fourth outcome: an INCOMPLETE verdict is not a confirmation | OPEN | 11.4 | 2026-08-25 |
 | ! | L-237 | Artifact 1's golden record is stale and needs re-cutting | OPEN | 10.8 | 2026-08-25 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-226 | safe-file-editing 1.8 -- encoding gate covers prose; corrections do not travel | OPEN | 8.1 | 2026-08-23 |
@@ -4086,10 +4088,72 @@ The Artifact Bounds the Audit.
   paper, DOI or table. It is carried verbatim as a lead. The other six
   arrive carrying a `# Review-note:` saying plainly that no source came
   with them. None was given a citation to fill the gap.
-**Gap:** the dispatch. Seven values, six with no source and one with a
-lead. This is the verification loop applied to a family that was
-previously invisible to it, because the values sat in a module the
-worksheet builder does not reach.
+- **The dispatch ran, 2026-08-25.** Five values went out as
+  `REQUEST_L247_sgr_a_constants.md` and three returns came back --
+  Claude Opus 5, GPT-5.6-sol, Gemini 2.5 Pro. Compared in
+  `documentation/CONVERGENCE_L247_sgr_a_constants.md`.
+- **The builder could not build the request, and the reason is
+  structural.** `worksheet_checker.collect_claims()` skips any unit
+  whose attached text carries no `# Cross-checked:` record, so the
+  corpus is the ALREADY-annotated set and the builder re-checks rather
+  than first-checks. Measured at `cf865ffc`: 98 corpus rows, 21 of them
+  in `constants_new.py`, none of these five among them. The request was
+  hand-written with no Key column, because minting keys outside
+  `worksheet_keys.py` produces a key born stale.
+- **Rows 1-3 came back unanimous.** G confirmed digit for digit
+  (CODATA 2022). `SOLAR_MASS_KG` APPROX in all three, all three giving
+  1.98841e30 from the IAU-exact `(GM)_sun` over the current G.
+  `PARSEC_TO_AU` a DEFINITION, 648000/pi, in all three.
+- **Rows 4-5 split two against one, on a convention gap rather than a
+  fact.** Every leg agreed that GRAVITY 2019 publishes 4.154e6 and
+  8178 pc and that GRAVITY 2022 publishes 4.297e6 and 8277 pc. GPT
+  judged `Value correct?` against the later measurement and declared
+  that at the top of its return; the other two judged it against the
+  cited one. The v2 vocabulary does not say which, so this was a
+  FINDING for conversation.
+- **Tony's ruling, 2026-08-25 (epoch policy).** The most recent
+  publication is authoritative and the value it replaces is recorded
+  rather than overwritten. Refined in the same breath, because the
+  literal reading does not land anywhere: "most recent publication"
+  means the most recent paper that reports the value AS A RESULT. There
+  are at least two later GRAVITY papers (A&A 692 A242 in 2024, A&A 701
+  89 in 2025) that carry mass and distance as fit parameters while
+  studying something else, and an August 2026 Nature paper on S301 that
+  quotes the figures in passing. None supersedes the 2022 determination.
+  Written into the section header of `constants_new.py`.
+- **Tony's ruling, 2026-08-25 (the solar mass).** Introduce
+  `GM_SUN_SI = 1.3271244e20` as the sourced primary and DERIVE the
+  kilogram value, rather than correcting the literal. The reason is the
+  product: this file holds both factors of a quantity the IAU declares
+  exact, and carried as two literals their product was 1.32751827e20
+  against a defined 1.3271244e20 -- 0.030% off, implicitly, where
+  nothing watched it. Derived, it is exact by construction.
+- **What landed** (`patch_L247_4_repair.py`): G sourced, value
+  unchanged; `GM_SUN_SI` and `SGR_A_DISTANCE_PC` added as sourced
+  primaries; `SOLAR_MASS_KG` and `SGR_A_DISTANCE_LY` derived from them;
+  `PARSEC_TO_AU` to its exact definitional value; `SGR_A_MASS_SOLAR`
+  4.154e6 -> 4.297e6. Tier-1 fell 294 -> 292. Mode 5 confirms the hover
+  reads 4.297 million solar masses and 26,996 light-years.
+- **Three defects in that repair, caught by two checkers, not by
+  reading.** 32 unmarked continuation lines; four missing `# Resolved:`
+  legs; and a `# Cross-checked:` line on `SGR_A_DISTANCE_PC` naming a
+  worksheet whose row is about `SGR_A_DISTANCE_LY` -- an annotation
+  asserting a check never performed on that name, written by the patch
+  closing exactly that failure class. A fourth found while fixing them:
+  `# Superseded:` is not a label; the registry knows twelve and that
+  was an invented thirteenth. All four repaired in
+  `patch_L247_5_annotation_repair.py`, which moves no value and asserts
+  that by fingerprinting all seven assignments.
+**Gap:** a SECOND cross-check leg on `SGR_A_MASS_SOLAR` and on
+`SGR_A_DISTANCE_PC`. Both carry one. Only GPT reached the 2022 value;
+the Claude return noted a successor exists without giving its numbers,
+and the Gemini return gave the 2022 distance in prose but not the mass.
+`SGR_A_DISTANCE_PC` carries NO leg at all, because the name did not
+exist when the request went out. Both are stated in the code as
+`# Review-note:` rather than smoothed over.
+- **Note:** the value verdict on rows 4 and 5 is the ONE place where
+  three complete returns disagreed. Recorded here because the next
+  dispatch on this family will meet it again.
 - **Note:** RICE 3/3/90/2 -> 4.1 is Claude's proposed score.
   **Tony-action (decide):** confirm or redirect.
 **Ref:** L-243 (the AU factor); L-244 (the class sweep -- three more
@@ -4202,6 +4266,91 @@ shape that gate cannot read, so building this first would trip it.
 Earth half of Artifact 1); `shell_configs.py` Earth block, lines
 1316-1512; `constants_new.py` line 74 (`EARTH_EQUATORIAL_RADIUS_KM`);
 `HANDOFF_20260825_evening_singularity_thread.md` step 2.
+
+#### [L-251] The galactic centre button served a cached HTML for seven months
+<!-- L:251 status:OPEN upd:2026-08-25 section:A flag: rice:4/4/95/1 -->
+- **Found by Mode 5, and only because the number it showed was wrong in
+  a way that could be dated.** On 2026-08-25 the Sgr A* hover read
+  4.154 million solar masses after the L-247 repair had moved it to
+  4.297. Two regenerations did not change it.
+- **The mechanism.** `launch_galactic_center()` in `palomas_orrery.py`
+  opened a permanent `sgr_a_grand_tour.html` from the repo root IF ONE
+  EXISTED, and generated only when it did not. So the first click ever
+  wrote that file and every click after served it back, unchanged,
+  forever. Nothing in that path looks at the code again.
+- **A parallel pipeline, in the exact shape the protocol names.**
+  `sgr_a_grand_tour.py`'s own `__main__` already called
+  `show_and_save`, which writes a temp copy, opens THAT, and offers a
+  save dialog. One figure, two entry points, different behaviour, only
+  one of them current.
+- **The rendered value carried its own date stamp.** The hover's
+  Schwarzschild radius read 12,271,267 km. The constants in force the
+  day before give 12,271,442 -- a 175 km gap, relative 1.4e-05. That
+  figure is reproduced to the kilometre by `AU_TO_METERS = 1.496e11`, a
+  rounded astronomical unit the code no longer holds. The file was
+  written in January 2026 and had survived every constant change since.
+  A wrong number turned out to be a timestamp.
+- **The verification instruction was itself a check that could not
+  fail.** "Regenerate and hover the marker" cannot show a change in a
+  file the regeneration does not write. Two Mode 5 passes returned the
+  same stale numbers and neither was wrong to.
+- **The fix** (`patch_L251_1_galactic_center_launcher.py`, Tony's
+  ruling 2026-08-25): the launcher generates every time and hands the
+  figure to `show_and_save`. The stale-file branch is DELETED rather
+  than corrected, so there is nothing left to go stale.
+**Gap:** confirm by clicking Galactic Center in the orrery -- it should
+pause to generate, open a `tmp*.htm` tab, then offer the save dialog.
+The old `sgr_a_grand_tour.html` may still be in the repo root; nothing
+reads it now, and deleting it is Tony's call.
+- **Note:** worth a sweep for the same shape elsewhere. A grep of
+  `palomas_orrery.py` at `8847d6be` found no other launcher with an
+  `os.path.exists(...) -> open` branch, but that grep was one file.
+- **Note:** RICE 4/4/95/1 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect.
+**Ref:** L-247 (the constants whose change it hid); Check All Parallel
+Pipelines [CRITICAL]; Verify Execution, Not Appearance [CRITICAL];
+Observation Override (Tony's eyes won twice here).
+
+#### [L-252] L2b's fourth outcome: an INCOMPLETE verdict is not a confirmation
+<!-- L:252 status:OPEN upd:2026-08-25 section:A flag: rice:3/4/95/1 -->
+- **Found by the pin that exists to be read.** After the L-247 repair,
+  `test_worksheet_checker.py` failed with `no live claim is called
+  DRIFTED without a value verdict -- got: ['PARSEC_TO_AU']`. That
+  check's own comment says a DRIFTED here means a real defect is being
+  reported: read it, do not relax it.
+- **Reading it.** `worksheet_checker.py` maps APPROX and PARTIAL to
+  `V_INCOMPLETE`, then fires DRIFTED for `V_CONFIRMED` and
+  `V_INCOMPLETE` alike -- while its own comment defines DRIFTED as "the
+  worksheet confirmed that value; the code left it anyway." An APPROX
+  worksheet did not confirm anything. It said the number was
+  approximate and supplied the exact one. Three returns verdicted
+  206265.0 APPROX and gave 648000/pi; L-247 took that value; the tool
+  called it drift. A `# Resolved:` leg does not clear it -- that is a
+  separate mechanism.
+- **The same mistake the block already fixed one case over.** Its
+  comment records that all eight L-192 findings were corrections
+  reported as drift, and that "the information needed to tell them
+  apart was already in the matched row." It is here too, in the
+  supplied-value column, read at L2a sixteen lines up.
+- **The fix** (`patch_L252_1_incomplete_outcome.py`, Tony's ruling
+  2026-08-25): a fourth outcome, COMPLETED -- the worksheet called it
+  APPROX or PARTIAL and supplied a value, and the code now reads
+  exactly that. Recorded, not routed.
+- **Narrow on purpose, and pinned in both directions.** INCOMPLETE
+  alone does not earn COMPLETED; the code must equal the value THAT
+  worksheet supplied, by the same `compare()` L2a uses. An APPROX
+  verdict where the code moved somewhere the worksheet never named
+  still reports DRIFTED. Two synthetic checks, one per direction, take
+  the suite 134 -> 136. Widening it to "INCOMPLETE and the code moved"
+  would have made it unfailable, which is not a verdict.
+**Gap:** none in the tool. Whether the four outcomes want a matching
+line in provenance-discipline's verdict vocabulary is unruled --
+COMPLETED is a checker outcome, not a worksheet token, and the two
+vocabularies have stayed separate so far.
+- **Note:** RICE 3/4/95/1 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect.
+**Ref:** L-192 (the three outcomes this extends); L-247 (the founding
+case); A Check That Cannot Fail Is Not Passing [CRITICAL].
 
 ## PENDING ACTION (Tony-side)
 

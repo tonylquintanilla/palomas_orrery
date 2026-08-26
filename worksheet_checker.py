@@ -94,6 +94,10 @@ Every run prints these rather than leaving them silent:
 Role: devtool
 Domain: dev_tools
 
+Module updated: August 25, 2026 with Anthropic's Claude Opus 5 (L-252:
+L2b gains a fourth outcome, COMPLETED, so an INCOMPLETE verdict whose
+supplied value the code then took stops reporting as DRIFTED)
+
 Module created: August 2026 with Anthropic's Claude Opus 5.
 Module updated: August 18, 2026 with Anthropic's Claude Opus 5 (L-207).
 Module updated: August 21, 2026 with Anthropic's Claude Opus 5 (L-214).
@@ -1352,7 +1356,7 @@ def check_claim(claim, worksheets, unregistered):
     # caught directly rather than inferred. It exists only where the
     # schema carries the column, and the coverage count says so.
     #
-    # THREE outcomes, not two. A value that moved away from a number
+    # FOUR outcomes, not two. A value that moved away from a number
     # the worksheet REJECTED is the correction landing -- this whole
     # apparatus working -- and reporting it as drift tells a reader to
     # go re-check a resolution the code already records. All eight L2b
@@ -1360,13 +1364,30 @@ def check_claim(claim, worksheets, unregistered):
     # needed to tell them apart was already in the matched row, three
     # lines further down, and was simply read too late.
     #
-    #   DRIFTED         the worksheet confirmed that value; the code
-    #                   left it anyway. The only defect of the three.
+    # The fourth was the same mistake one case over (L-252). APPROX and
+    # PARTIAL map to V_INCOMPLETE, which was grouped with V_CONFIRMED --
+    # so a worksheet that said "approximately right, here is the exact
+    # value" reported DRIFTED once the code took that exact value. An
+    # INCOMPLETE verdict is not a confirmation, and the value it
+    # supplied is already read at L2a, sixteen lines up.
+    #
+    #   DRIFTED         the worksheet CONFIRMED that value and the code
+    #                   left it anyway, or it was INCOMPLETE and the
+    #                   code moved somewhere the worksheet never named.
+    #                   The only defect of the four.
     #   CORRECTED       the worksheet refuted it and the code moved.
     #                   Recorded, not routed.
+    #   COMPLETED       the worksheet called it APPROX or PARTIAL and
+    #                   supplied a value; the code now reads exactly
+    #                   that. Recorded, not routed.
     #   UNCHECKED_MOVE  the worksheet neither confirmed nor refuted it,
     #                   so neither word is honest. Routed, because
     #                   nobody has established anything.
+    #
+    # COMPLETED is deliberately narrow. INCOMPLETE alone does not earn
+    # it -- the code must equal the value THAT worksheet supplied, by
+    # the same compare() L2a uses. Widening it to "INCOMPLETE and the
+    # code moved" would make it unfailable, which is not a verdict.
     recorded = table.cell(cells, ROLE_CODE)
     if claim.code_value is not None and recorded:
         verdict, detail = compare(claim.code_value, recorded)
@@ -1380,6 +1401,13 @@ def check_claim(claim, worksheets, unregistered):
             elif own == V_REFUTED:
                 claim.fail('L2b', 'CORRECTED',
                            '%s, which it rejected: %s' % (moved, token), '')
+            elif (own == V_INCOMPLETE and evidence
+                  and compare(claim.code_value, evidence)[0]
+                  in ('MATCH', 'CONVERSION')):
+                claim.fail('L2b', 'COMPLETED',
+                           '%s -- the code now reads the value this '
+                           'worksheet supplied, whose verdict was %s'
+                           % (moved, token), '')
             elif own in (V_CONFIRMED, V_INCOMPLETE):
                 claim.fail('L2b', 'DRIFTED', moved, 'CONVERSATION')
             else:

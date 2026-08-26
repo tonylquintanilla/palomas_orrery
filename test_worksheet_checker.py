@@ -398,6 +398,31 @@ def test_layers():
     check('a value nobody checked reports UNCHECKED_MOVE',
           'UNCHECKED_MOVE' in codes(claim), codes(claim))
 
+    # L2b's fourth outcome (L-252). APPROX is not a confirmation. The
+    # worksheet said 137.5 was approximate and supplied 100.0; the code
+    # reads 100.0. That is the verdict landing, not drift.
+    claim = run_layers("""
+| # | Constant | Code value | Your value | Value correct? |
+|---|---|---|---|---|
+| 1 | `TEST_RADIUS_KM` | 137.5 | 100.0 | **APPROX** |
+""")
+    check('an INCOMPLETE verdict whose value the code took reports '
+          'COMPLETED, not DRIFTED',
+          'COMPLETED' in codes(claim) and 'DRIFTED' not in codes(claim),
+          codes(claim))
+
+    # The other direction, and the reason COMPLETED is a verdict rather
+    # than a way of not failing. Same APPROX verdict, but the code went
+    # somewhere this worksheet never named. Still drift.
+    claim = run_layers("""
+| # | Constant | Code value | Your value | Value correct? |
+|---|---|---|---|---|
+| 1 | `TEST_RADIUS_KM` | 137.5 | 42.0 | **APPROX** |
+""")
+    check('an INCOMPLETE verdict the code ignored still reports DRIFTED',
+          'DRIFTED' in codes(claim) and 'COMPLETED' not in codes(claim),
+          codes(claim))
+
     # The live corpus case. A worksheet whose only verdict column asks
     # about the CITATION has not answered the value question at all, so
     # neither DRIFTED nor CORRECTED is honest -- and a NO here routinely
