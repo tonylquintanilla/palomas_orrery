@@ -258,7 +258,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*152 live items; 138 need attention (`!`); 151 RICE-scored; 95 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*153 live items; 139 need attention (`!`); 152 RICE-scored; 95 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -316,6 +316,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-187 | info_dictionary numeric-overlap enumeration | OPEN | 1.8 | 2026-08-07 |
 | ! | L-228 | Alfven surface latitude ranges: source them or omit them | OPEN [Tony] | 1.8 | 2026-08-23 |
 |  | L-194 | Text-only assertions -- claims the scanner cannot see | DEFERRED | 1.4 | 2026-08-15 |
+| ! | L-253 | The 660 discontinuity's depth variation -- held unsourced | OPEN | 1.2 | 2026-08-26 |
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
 | ! | L-129 | Cometary structure constants -- periodic maintenance sweep | OPEN | 1.0 | 2026-07-17 |
 | ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 0.9 | 2026-07-16 |
@@ -4351,6 +4352,56 @@ vocabularies have stayed separate so far.
   **Tony-action (decide):** confirm or redirect.
 **Ref:** L-192 (the three outcomes this extends); L-247 (the founding
 case); A Check That Cannot Fail Is Not Passing [CRITICAL].
+
+#### [L-253] The 660 discontinuity's depth variation -- held unsourced
+<!-- L:253 status:OPEN upd:2026-08-26 section:A flag: rice:2/2/60/2 -->
+- **This row IS the breadcrumb.** Tony's ruling, 2026-08-26: keep the
+  numbers pending sourcing rather than lose them, but keep them out of
+  `constants_new.py`, where a `# Ref:` or a bare URL within thirty lines
+  registers as a citation for the constant beside it. The ledger holds
+  them at no cost to the audit.
+- **What was removed from `constants_new.py`,** and why it had to be.
+  `EARTH_D660_DEPTH_KM`'s Note stated that the 660-km discontinuity
+  varies by up to about +/-60 km and is depressed to roughly 750 km
+  beneath cold subducting slabs. The `# Ref:` beside it -- Ishii, T.,
+  Huang, R., Myhill, R. et al. (2019), "Sharp 660-km discontinuity
+  controlled by extremely narrow binary post-spinel transition", Nature
+  Geoscience 12:869-872, doi 10.1038/s41561-019-0452-1 -- is real and
+  true of the 660 km depth, and supports NEITHER figure. That paper
+  resolves the transition's sharpness to about 250 m. It is not about
+  lateral depth variation at all.
+- **The two figures, and where each actually came from.**
+  - **+/-60 km lateral variation.** Read in a geoneutrino review
+    (arXiv:1310.3732), which states the 660 is a broader transition with
+    depth variation of 60 km or less. A review is a secondary source for
+    a physical claim; sourcing this properly means going to the 660
+    topography seismology literature.
+  - **Depression to ~750 km beneath cold slabs.** Stated in the abstract
+    of a DIFFERENT paper by the same first author: Ishii, T. et al.,
+    "Depressed 660-km discontinuity caused by akimotoite-bridgmanite
+    transition", Nature (2022), doi 10.1038/s41586-021-04157-z. One fetch
+    against a primary source would settle it.
+- **Tony's cost ruling, same day.** The orrery draws one radius. A
+  published range it does not draw is outside the bound the artifact
+  sets on the audit, so adding these as constants would buy three
+  permanent rows against nothing rendered. Qualitative prose carries the
+  honesty at no audit cost (text-only assertions are L-194, deferred).
+  If ONE figure is ever bought, buy the 750: cheapest citation of the
+  three, primary source already located, and the only one that teaches
+  something the sphere cannot -- it is why subducting slabs stagnate at
+  the transition zone instead of sinking straight through.
+- **Note:** RICE 2/2/60/2 is Claude's proposed score. Deliberately low
+  reach and confidence: nothing renders from it and the second figure's
+  sourcing route is not yet known.
+  **Tony-action (decide):** confirm or redirect.
+**Gap:** neither figure is sourced and neither is used. Closing this
+means either sourcing them and deciding they earn a place, or ruling
+that the qualitative statement is the final answer and closing the row
+as declined. Both are closures; leaving it open is not.
+**Ref:** L-249 (the migration that surfaced it); L-194 (text-only
+assertions); L-240 (measured vs declared); Fetched vs Recalled and Show
+the Envelope of the Unknowable, resident protocol Part 3;
+`constants_new.py::EARTH_D660_DEPTH_KM`.
 
 ## PENDING ACTION (Tony-side)
 

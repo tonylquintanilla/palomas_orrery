@@ -55,6 +55,11 @@ annotation repair only, no value moves -- continuation lines marked,
 four Resolved legs added, an invented Superseded label retired into
 Review-note, and an UNMATCHED cross-check on SGR_A_DISTANCE_PC removed)
 Module updated: August 26, 2026 with Anthropic's Claude Opus 5
+(L-253: two figures removed from EARTH_D660_DEPTH_KM's Note that
+the Ishii 2019 reference beside them does not support. The Note
+keeps the qualitative statement; the figures and their candidate
+papers move to the ledger, which is outside the audit)
+Module updated: August 26, 2026 with Anthropic's Claude Opus 5
 (L-249: Earth's four interior boundary radii added as sourced
 primaries with derived shell fractions. Tony's ruling of the same
 day -- the original radius fractions were approximate values taken
@@ -173,15 +178,18 @@ EARTH_D660_DEPTH_KM = 660.0
 # Ref: Ishii, T., Huang, R., Myhill, R. et al. (2019), "Sharp 660-km
 # Ref+: discontinuity controlled by extremely narrow binary post-spinel
 # Ref+: transition", Nature Geoscience 12:869-872.
-# Note: a GLOBAL AVERAGE, not a constant depth. The boundary varies by
-# Note+: up to about +/-60 km with mantle temperature and is depressed to
-# Note+: roughly 750 km beneath cold subducting slabs. That +/-60 km is
-# Note+: an order of magnitude larger than any other uncertainty in this
-# Note+: stack and it governs how the lower mantle shell may be reported:
-# Note+: the sphere is drawn at one radius because a sphere is what the
-# Note+: renderer draws, and the hover says the boundary varies.
+# Note: a GLOBAL AVERAGE, not a constant depth. The boundary is not
+# Note+: uniform: it lies deeper where the mantle is colder and shallower
+# Note+: where it is warmer. The shell is drawn at one radius because a
+# Note+: sphere is what the renderer draws, and no figure for that
+# Note+: variation is stated anywhere in this codebase, because none has
+# Note+: been sourced.
 # Review-note: single leg (Claude, 2026-08-26). A second independent
 # Review-note+: cross-check is owed before this row counts as confirmed.
+# Review-note+: Two figures for the variation, and the papers that may
+# Review-note+: support them, are held in L-253 -- unsourced, unused, and
+# Review-note+: deliberately not restated here or the breadcrumb would
+# Review-note+: itself read as a citation for this value.
 
 EARTH_LOWER_MANTLE_KM = EARTH_MEAN_RADIUS_KM - EARTH_D660_DEPTH_KM
 # Derived: 6371.0 - 660 = 5711 km -- the OUTER boundary of the lower
