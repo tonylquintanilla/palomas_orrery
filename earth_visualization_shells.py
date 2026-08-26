@@ -40,12 +40,28 @@ May 28, 2026: Phase 1 re-pipe (Opus 4.7). 1 live inline info marker
     Van Allen loop, LEO, GEO) were untouched -- they already use the
     factory default (red border) and Tony's earlier Mode 5 testing
     marked them acceptable.
+August 26, 2026 (L-249, Opus 5): the four interior info strings stop
+    typing their boundary figures and interpolate constants_new.py
+    instead, and the four dead create_earth_*_shell builders take their
+    radius_fraction from the same constants. Tony's ruling that day:
+    constants_new.py is the only store for a numeric value, in prose as
+    much as in code, and a literal in dead code is still a store.
 """
 import numpy as np
 import math
 import plotly.graph_objs as go
 from planet_visualization_utilities import (EARTH_RADIUS_AU, create_sphere_points, create_magnetosphere_shape, create_bow_shock_shape)
-from constants_new import KM_PER_AU  # L-178: direct km<->AU conversion, no shadow constant
+from constants_new import (
+    KM_PER_AU,  # L-178: direct km<->AU conversion, no shadow constant
+    # L-249: Earth's interior boundaries have exactly one home. The _KM
+    # values below are quoted in the info strings; the _RADII draw the
+    # dead builders further down. Neither is ever retyped as a literal.
+    EARTH_MEAN_RADIUS_KM,
+    EARTH_INNER_CORE_KM, EARTH_INNER_CORE_RADII,
+    EARTH_OUTER_CORE_KM, EARTH_OUTER_CORE_RADII,
+    EARTH_D660_DEPTH_KM, EARTH_LOWER_MANTLE_RADII,
+    EARTH_UPPER_MANTLE_KM, EARTH_UPPER_MANTLE_RADII,
+)
 from orrery_rendering import rotate_to_sunward, create_info_marker
 
 # Earth Shell Creation Functions
@@ -56,25 +72,19 @@ earth_inner_core_info = (
             "Earth's inner core is a solid sphere composed primarily of iron and nickel.\n"
             "Despite incredible pressure, temperatures of 5,400 degC (9,800 degF) keep it nearly\n"
             "at melting point. It rotates slightly faster than the rest of Earth, creating\n"
-            "complex dynamics in Earth's magnetic field. The inner core is approximately\n"
-            "1,220 km (760 miles) in radius."
+            "complex dynamics in Earth's magnetic field. The inner core is\n"
+            f"{EARTH_INNER_CORE_KM:,.1f} km in radius."
 )
 
 def create_earth_inner_core_shell(center_position=(0, 0, 0)):
     """Creates Earth's inner core shell."""
     # Define layer properties
     layer_info = {
-        'radius_fraction': 0.19,  # Inner core: 0-19% of Earth's radius
+        'radius_fraction': EARTH_INNER_CORE_RADII,  # L-249: derived, not typed
         'color': 'rgb(255, 180, 140)',  # Orange-red for hot iron core
         'opacity': 1.0,
         'name': 'Inner Core',
-        'description': (
-            "Earth's inner core is a solid sphere composed primarily of iron and nickel.<br>"
-            "Despite incredible pressure, temperatures of 5,400 degC (9,800 degF) keep it nearly<br>"
-            "at melting point. It rotates slightly faster than the rest of Earth, creating<br>"
-            "complex dynamics in Earth's magnetic field. The inner core is approximately<br>"
-            "1,220 km (760 miles) in radius."
-        )
+        'description': earth_inner_core_info.replace('\n', '<br>')
     }
     
     # Calculate radius in AU
@@ -128,7 +138,7 @@ earth_outer_core_info = (
             "The outer core is a liquid layer of iron, nickel, and lighter elements.\n"
             "Convection currents in this highly conductive fluid generate Earth's\n"
             "magnetic field through a process called the geodynamo. It extends from\n"
-            "1,220 to 3,500 km from Earth's center and has temperatures ranging from\n"
+            f"{EARTH_INNER_CORE_KM:,.1f} to {EARTH_OUTER_CORE_KM:,.0f} km from Earth's center and has temperatures ranging from\n"
             "4,500 degC (8,100 degF) to 5,400 degC (9,800 degF)."
 )
 
@@ -136,17 +146,11 @@ def create_earth_outer_core_shell(center_position=(0, 0, 0)):
     """Creates Earth's outer core shell."""
     # Define layer properties
     layer_info = {
-        'radius_fraction': 0.55,  # Outer core: 19-55% of Earth's radius
+        'radius_fraction': EARTH_OUTER_CORE_RADII,  # L-249: derived, not typed
         'color': 'rgb(255, 140, 0)',  # Deeper orange for liquid metal
         'opacity': 0.8,
         'name': 'Outer Core',
-        'description': (
-            "The outer core is a liquid layer of iron, nickel, and lighter elements.<br>"
-            "Convection currents in this highly conductive fluid generate Earth's<br>"
-            "magnetic field through a process called the geodynamo. It extends from<br>"
-            "1,220 to 3,500 km from Earth's center and has temperatures ranging from<br>"
-            "4,500 degC (8,100 degF) to 5,400 degC (9,800 degF)."
-        )
+        'description': earth_outer_core_info.replace('\n', '<br>')
     }
     
     # Calculate radius in AU
@@ -199,7 +203,8 @@ def create_earth_outer_core_shell(center_position=(0, 0, 0)):
 earth_lower_mantle_info = (
             "The lower mantle is composed of solid silicate rocks rich in iron and magnesium.\n"
             "Despite being solid, it flows very slowly through convection, driving plate tectonics.\n"
-            "This region extends from 660 to 2,900 km below Earth's surface and experiences\n"
+            f"This region extends from {EARTH_D660_DEPTH_KM:,.0f} to "
+            f"{EARTH_MEAN_RADIUS_KM - EARTH_OUTER_CORE_KM:,.0f} km below Earth's surface and experiences\n"
             "temperatures from 2,200 degC to 4,500 degC (4,000 degF to 8,100 degF) and extreme pressure."
 )
 
@@ -207,16 +212,11 @@ def create_earth_lower_mantle_shell(center_position=(0, 0, 0)):
     """Creates Earth's lower mantle shell."""
     # Define layer properties
     layer_info = {
-        'radius_fraction': 0.85,  # Lower mantle: 55-85% of Earth's radius
+        'radius_fraction': EARTH_LOWER_MANTLE_RADII,  # L-249: derived, not typed
         'color': 'rgb(230, 100, 20)',  # Reddish-brown
         'opacity': 0.7,
         'name': 'Lower Mantle',
-        'description': (
-            "The lower mantle is composed of solid silicate rocks rich in iron and magnesium.<br>"
-            "Despite being solid, it flows very slowly through convection, driving plate tectonics.<br>"
-            "This region extends from 660 to 2,900 km below Earth's surface and experiences<br>"
-            "temperatures from 2,200 degC to 4,500 degC (4,000 degF to 8,100 degF) and extreme pressure."
-        )
+        'description': earth_lower_mantle_info.replace('\n', '<br>')
     }
     
     # Calculate radius in AU
@@ -269,24 +269,21 @@ def create_earth_lower_mantle_shell(center_position=(0, 0, 0)):
 earth_upper_mantle_info = (
             "The upper mantle includes the asthenosphere, a partially molten layer where\n"
             "most magma originates. This region flows more readily than the lower mantle,\n"
-            "allowing tectonic plates to move. It extends from about 30 to 660 km below\n"
-            "the surface, with temperatures from 500 degC to 2,200 degC (900 degF to 4,000 degF)."
+            "allowing tectonic plates to move. It reaches from the base of the crust,\n"
+            f"{EARTH_MEAN_RADIUS_KM - EARTH_UPPER_MANTLE_KM:,.1f} km below the surface in the reference model, down to\n"
+            f"{EARTH_D660_DEPTH_KM:,.0f} km, with temperatures from 500 degC to 2,200 degC\n"
+            "(900 degF to 4,000 degF)."
 )
 
 def create_earth_upper_mantle_shell(center_position=(0, 0, 0)):
     """Creates Earth's upper mantle shell."""
     # Define layer properties
     layer_info = {
-        'radius_fraction': 0.98,  # Upper mantle: 85-98% of Earth's radius
+        'radius_fraction': EARTH_UPPER_MANTLE_RADII,  # L-249: derived, not typed
         'color': 'rgb(205, 85, 85)',  # Lighter reddish-brown
         'opacity': 0.6,
         'name': 'Upper Mantle',
-        'description': (
-            "The upper mantle includes the asthenosphere, a partially molten layer where<br>"
-            "most magma originates. This region flows more readily than the lower mantle,<br>"
-            "allowing tectonic plates to move. It extends from about 30 to 660 km below<br>"
-            "the surface, with temperatures from 500 degC to 2,200 degC (900 degF to 4,000 degF)."
-        )
+        'description': earth_upper_mantle_info.replace('\n', '<br>')
     }
     
     # Calculate radius in AU

@@ -25,6 +25,14 @@ Role: data
 Domain: orrery
 
 Module updated: May 2026 with Anthropic's Claude Opus 4.6
+Module updated: August 26, 2026 with Anthropic's Claude Opus 5 (L-249:
+    Earth's four interior entries join the Phase C4 reference pattern.
+    radius_fraction derives from constants_new.py; hover_text and
+    tooltip come from earth_visualization_shells.py rather than being
+    retyped here. Earth's slice of L-191 closes with it. The crust is
+    deliberately untouched -- it draws at the surface by definition and
+    its hover carries a toggle-off note the body module's string does
+    not have.)
 """
 
 # Phase C4: Import hover text strings from body shell modules.
@@ -67,6 +75,19 @@ from solar_visualization_shells import (
     gravitational_influence_info,
     # custom shell tooltips (source strings, not composed)
     hills_cloud_torus_info, outer_oort_clumpy_info, galactic_tide_info,
+)
+
+# L-249: Earth joins the reference pattern. The four interior boundary
+# fractions derive from constants_new.py, and the prose comes from the
+# body module rather than being retyped here -- same shape Saturn,
+# Uranus, Neptune and the Sun already use above.
+from constants_new import (
+    EARTH_INNER_CORE_RADII, EARTH_OUTER_CORE_RADII,
+    EARTH_LOWER_MANTLE_RADII, EARTH_UPPER_MANTLE_RADII,
+)
+from earth_visualization_shells import (
+    earth_inner_core_info, earth_outer_core_info,
+    earth_lower_mantle_info, earth_upper_mantle_info,
 )
 
 # Phase D1: Import Sun radius constants for radius_au expressions.
@@ -1321,93 +1342,49 @@ SHELL_CONFIGS = {
 
         'inner_core': {
             'name': 'Inner Core',
-            'radius_fraction': 0.19,
+            'radius_fraction': EARTH_INNER_CORE_RADII,
             'color': 'rgb(255, 180, 140)',
             'opacity': 1.0,
             'n_points': 25,
             'marker_size': 4.0,
-            'hover_text': (
-                "Earth's inner core is a solid sphere composed primarily of iron and nickel.<br>"
-                "Despite incredible pressure, temperatures of 5,400 degC (9,800 degF) keep it nearly<br>"
-                "at melting point. It rotates slightly faster than the rest of Earth, creating<br>"
-                "complex dynamics in Earth's magnetic field. The inner core is approximately<br>"
-                "1,220 km (760 miles) in radius."
-            ),
-            'tooltip': (
-                "Earth's inner core is a solid sphere composed primarily of iron and nickel.\n"
-                "Despite incredible pressure, temperatures of 5,400 degC (9,800 degF) keep it nearly\n"
-                "at melting point. It rotates slightly faster than the rest of Earth, creating\n"
-                "complex dynamics in Earth's magnetic field. The inner core is approximately\n"
-                "1,220 km (760 miles) in radius."
-            ),
+            'hover_text': earth_inner_core_info.replace('\n', '<br>'),
+            'tooltip': earth_inner_core_info,
         },
 
         'outer_core': {
             'name': 'Outer Core',
-            'radius_fraction': 0.55,
+            'radius_fraction': EARTH_OUTER_CORE_RADII,
             'color': 'rgb(255, 140, 0)',
             'opacity': 0.8,
             'n_points': 25,
             'marker_size': 3.7,
             'info_border': 'white',  # two-standards (May 29, 2026): bright orange fill
-            'hover_text': (
-                "The outer core is a liquid layer of iron, nickel, and lighter elements.<br>"
-                "Convection currents in this highly conductive fluid generate Earth's<br>"
-                "magnetic field through a process called the geodynamo. It extends from<br>"
-                "1,220 to 3,500 km from Earth's center and has temperatures ranging from<br>"
-                "4,500 degC (8,100 degF) to 5,400 degC (9,800 degF)."
-            ),
-            'tooltip': (
-                "The outer core is a liquid layer of iron, nickel, and lighter elements.\n"
-                "Convection currents in this highly conductive fluid generate Earth's\n"
-                "magnetic field through a process called the geodynamo. It extends from\n"
-                "1,220 to 3,500 km from Earth's center and has temperatures ranging from\n"
-                "4,500 degC (8,100 degF) to 5,400 degC (9,800 degF)."
-            ),
+            'hover_text': earth_outer_core_info.replace('\n', '<br>'),
+            'tooltip': earth_outer_core_info,
         },
 
         'lower_mantle': {
             'name': 'Lower Mantle',
-            'radius_fraction': 0.85,
+            'radius_fraction': EARTH_LOWER_MANTLE_RADII,
             'color': 'rgb(230, 100, 20)',
             'opacity': 0.7,
             'n_points': 25,
             'marker_size': 3.4,
             'info_border': 'white',  # two-standards (May 29, 2026): burnt orange fill
-            'hover_text': (
-                "The lower mantle is composed of solid silicate rocks rich in iron and magnesium.<br>"
-                "Despite being solid, it flows very slowly through convection, driving plate tectonics.<br>"
-                "This region extends from 660 to 2,900 km below Earth's surface and experiences<br>"
-                "temperatures from 2,200 degC to 4,500 degC (4,000 degF to 8,100 degF) and extreme pressure."
-            ),
-            'tooltip': (
-                "The lower mantle is composed of solid silicate rocks rich in iron and magnesium.\n"
-                "Despite being solid, it flows very slowly through convection, driving plate tectonics.\n"
-                "This region extends from 660 to 2,900 km below Earth's surface and experiences\n"
-                "temperatures from 2,200 degC to 4,500 degC (4,000 degF to 8,100 degF) and extreme pressure."
-            ),
+            'hover_text': earth_lower_mantle_info.replace('\n', '<br>'),
+            'tooltip': earth_lower_mantle_info,
         },
 
         'upper_mantle': {
             'name': 'Upper Mantle',
-            'radius_fraction': 0.98,
+            'radius_fraction': EARTH_UPPER_MANTLE_RADII,
             'color': 'rgb(205, 85, 85)',
             'opacity': 0.6,
             'n_points': 25,
             'marker_size': 3.1,
             'info_border': 'white',  # two-standards (May 29, 2026): pink-red fill
-            'hover_text': (
-                "The upper mantle includes the asthenosphere, a partially molten layer where<br>"
-                "most magma originates. This region flows more readily than the lower mantle,<br>"
-                "allowing tectonic plates to move. It extends from about 30 to 660 km below<br>"
-                "the surface, with temperatures from 500 degC to 2,200 degC (900 degF to 4,000 degF)."
-            ),
-            'tooltip': (
-                "The upper mantle includes the asthenosphere, a partially molten layer where\n"
-                "most magma originates. This region flows more readily than the lower mantle,\n"
-                "allowing tectonic plates to move. It extends from about 30 to 660 km below\n"
-                "the surface, with temperatures from 500 degC to 2,200 degC (900 degF to 4,000 degF)."
-            ),
+            'hover_text': earth_upper_mantle_info.replace('\n', '<br>'),
+            'tooltip': earth_upper_mantle_info,
         },
 
         'crust': {
