@@ -1,6 +1,6 @@
 # Paloma's Orrery - Module Index
 
-**Generated:** August 26, 2026 by `module_atlas.py`  
+**Generated:** August 28, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -10,24 +10,17 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 130  
-**Total Lines of Code (non-blank):** 104,605  
-**Total Public Functions/Classes:** 1,179
+**Total Python Files:** 128  
+**Total Lines of Code (non-blank):** 103,889  
+**Total Public Functions/Classes:** 1,169
 
 ## Classification Coverage
 
-**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (3).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L254_1_dead_builder_markers.py`
-- `patch_L255_1_skill_bumps_and_protocol_entry.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
-
-**Undetermined domain (2).** No valid `Domain:` tag.
-
-- `patch_L254_1_dead_builder_markers.py`
-- `patch_L255_1_skill_bumps_and_protocol_entry.py`
 
 
 ---
@@ -231,8 +224,6 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L254_1_dead_builder_markers.py` | - L-254. (286 lines) |
-| `patch_L255_1_skill_bumps_and_protocol_entry.py` | - L-255. (430 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

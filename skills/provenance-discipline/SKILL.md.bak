@@ -1,31 +1,14 @@
 ---
 name: provenance-discipline
-description: Provenance and citation discipline for the Paloma's Orrery project. Use whenever running or discussing provenance_scanner.py, reading PROVENANCE_AUDIT.md, clearing Tier-1 findings, adding or reviewing # Source: citations, editing provenance_exceptions.json, embedding constants or numeric/factual claims in orrery display strings or data modules, or preparing a GitHub push (the gate is Tier-1 = 0 on the active build path, and it binds at SERVING). Also use when composing on-layer or user-facing factual text for any orrery visualization. Do not use for projects other than Paloma's Orrery.
+description: Provenance and citation discipline for the Paloma's Orrery project. Use whenever running or discussing provenance_scanner.py, reading PROVENANCE_AUDIT.md, clearing Tier-1 findings, adding or reviewing # Source: citations, editing provenance_exceptions.json, embedding constants or numeric/factual claims in orrery display strings or data modules, or preparing a GitHub push (the gate is Tier-1 = 0 on the active build path). Also use when composing on-layer or user-facing factual text for any orrery visualization. Do not use for projects other than Paloma's Orrery.
 fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on the active build path)
 ---
 
 # Provenance Discipline
 
-Skill version: 2.8 | Cut from palomas_orrery @ 7f4a2f9f (v2.8),
-earlier @ 3faa72a0 (v2.7), @ f603be3 (v2.6), @ 731066f (v2.5),
-@ 6b99ace (v2.2), @ 00219d9 (v2.1), @ eb77c83 (v2.0),
-@ cdcdb4b (v1.9) | August 27, 2026
-v2.8 adds nine sections and revises four passages, from Tony's
-rulings of 2026-08-27 and the two independent Mode 7 reviews of the
-same date. The Gate Binds at SERVING [CRITICAL] moves the binding
-point from drawing to publication. The Access Standard [CRITICAL]
-makes reachability a precondition of a citation -- no paywalls.
-The Status Line [CRITICAL] has each value declare its own provenance
-state so the scanner reads instead of inferring. Measured Is the
-Goal, Declared Is the Fallback [CRITICAL] carries the range rule.
-The Exhibit Requirement [CRITICAL] makes a verdict without a
-quotation UNVERIFIED. A Cross-Check Retires With Its Value or Its
-Citation [CRITICAL], Observations Are Sourced Facts [CRITICAL],
-Uncited Goes to the Ledger [QUALITY], and Examples Go Stale Like
-Values [QUALITY] complete the set. Revised: the exhibit's reader,
-Gemini's book access (demoted to lead generation), the
-two-annotation criterion for V_CROSS_CHECKED (retired -- it measures
-concurrence), and one stale worked example. Handle L-256.
+Skill version: 2.7 | Cut from palomas_orrery @ 3faa72a0 (v2.7),
+earlier @ f603be3 (v2.6), @ 731066f (v2.5), @ 6b99ace (v2.2),
+@ 00219d9 (v2.1), @ eb77c83 (v2.0), @ cdcdb4b (v1.9) | August 26, 2026
 v2.7 adds three sections from Tony's rulings of 2026-08-26, each of
 them a gap this skill had rather than a refinement of something it
 said. One Value, One Home [CRITICAL] states positively what No Shadow
@@ -259,43 +242,6 @@ unsourceable claims were correctly stripped pending real sourcing. Record
 which. The scanner must stay maintainable with accepted false positives,
 not require regular manual intervention.
 
-
-## The Gate Binds at SERVING [CRITICAL]
-
-Provenance binds where a claim reaches a reader, not where it is drawn.
-
-Drawing a shell locally gates nothing. It costs an afternoon to undo and
-nobody outside the room sees it. SERVING it to the interactive gallery
-is different: a visitor takes what the site shows as true, and there is
-no point downstream of the orrery where a wrong radius is caught -- not
-the builder, not the resolver, not the browser. None of them knows what
-a correct ring radius is.
-
-So each rendering step closes its own provenance slice BEFORE it ships,
-and the slice is bounded by what that step serves.
-
-This EXTENDS the earlier line that the asymmetry "governs what an
-artifact may LOCK, not what may be BUILT." That sentence was about
-fingerprinted golden artifacts and is not withdrawn. Publication is the
-sharper boundary.
-
-The braid is intact: the audit stays bounded by the current artifact,
-stays countable, and stays off the critical path as a gate. What moved
-is where it binds.
-
-**What the provenance leg requires, and what it does not.** It requires
-Tier-1 = 0 on what is served -- cited, and TRUE. It does NOT require a
-cross-check. A cited claim that has not been cross-checked scores 15,
-which is Tier 2 REVIEW, and Tier 2 has never gated a push. Cross-checked
-is a higher rung earned deliberately, not a condition of clearing
-Tier 1.
-
-(Tony's ruling, 2026-08-27. Worked case: the Sun's served features carry
-111 numeric values -- 85 declared drawing parameters, 26 measured sites
-holding 19 distinct values. Each measured field carries both a `source`
-string and an `orrery_constant` pointer, and nine of nine served numbers
-checked matched the store constant they name. That is a closed slice.)
-
 ## Clearing a Flagged Claim (the only two moves)
 
 1. Cite to where the data ACTUALLY came from, or
@@ -305,204 +251,6 @@ Never cite-to-clear. A # Source: over recalled data passes the check while
 asserting a provenance that does not exist -- wrong-but-cited is worse than
 uncited, because the citation suppresses the suspicion that would catch it.
 A blank with a flag is honest; an unsourced assertion is not.
-
-
-## The Access Standard [CRITICAL]
-
-**A citation clears only if its text can be reached and read. No
-paywalls.**
-
-Three routes, in order of preference:
-
-1. **Open full text** -- arXiv, NASA ADS scans, publisher open access,
-   agency documents, IAU and IERS publications.
-2. **A free abstract**, when the claim is stated in it.
-3. **A Google Scholar or Books snippet** showing the sentence in
-   context.
-
-A source reachable only behind a paywall FAILS, whatever its authority.
-Books and papers are held to the same test.
-
-**A snippet must carry the qualifier, not just the number.** Snippets
-truncate, and the truncation is how `ALFVEN_SURFACE_RADII` went wrong:
-the figure was right and the missing words were "above the photosphere."
-A snippet showing a figure without the condition attached to it does not
-clear the claim.
-
-**When a source fails access, re-home the citation to an accessible
-authority carrying the same result. Delete only when none exists.** Most
-failures are re-homeable, because the values that reach this store are
-standard results that open sources also carry. PREM is the model: the
-1981 paper is walled, the tabulation is open in several places, and the
-value survives with a new citation.
-
-**Prefer an accessible non-book authority.** Claude cannot reach Scholar
-or Books, so every surviving book citation lands in Tony's manual queue.
-Re-homing removes it from that queue. Minimising the queue is the point.
-
-**Scope: prospective, at the serving gate, per slice.** This does not
-trigger a sweep of every existing citation. Each body's values meet the
-standard when that body reaches its ladder step. A retroactive pass has
-no denominator and becomes the gate the braid was ruled to end.
-
-**Why access rather than authority.** Two consequences, and the second
-is the one worth keeping. A citation nobody in the loop can open is
-functionally the retired `# Verified:` stamp -- it stops the next reader
-from looking while recording nothing checkable. And every source string
-the served hover shows a visitor becomes one the visitor can open.
-
-(Tony's ruling, 2026-08-27: "If we can't access from an open paper, an
-abstract or a google scholar search with context then the citation
-fails. No paywalls. I don't have access to a research library.")
-
-## Uncited Goes to the Ledger, Not the Bin [QUALITY]
-
-When a claim outside the current slice has no citation, the disposition
-is a DOCUMENTED LEDGER ROW for later sourcing -- not deletion.
-
-Fetched-vs-Recalled's third branch (remove the claim and note the gap)
-governs a claim that cannot be sourced against any authority. It does
-not govern a claim nobody has sourced YET. Those are different states
-and treating them alike destroys content that is merely waiting its
-turn.
-
-Per the braid: ONE ledger row per CLASS, never one per instance, so the
-backlog grows by kinds rather than by counts.
-
-**Before recording anything as uncited, check whether it is cited
-ELSEWHERE in the same file.** The scanner reads a fixed lookback window,
-so a real citation two hundred lines away reads as absent. A run of bare
-string globals can sit far below the Source comments that cover them,
-and the remedy there is to ATTACH the existing citation, not to drop the
-sentence.
-
-(Tony's ruling, 2026-08-27: "not eliminated -- documented for citation,
-just not today." Worked case: `solar_visualization_shells.py` carries 26
-Source blocks, 22 of which already name their store constant, while six
-display-string findings 250 lines below them read as uncited. Tree-wide
-the display-string class is 284 Tier-1 findings holding 553 claims,
-which is why it is recorded by class and worked in slices.)
-
-## Measured Is the Goal, Declared Is the Fallback [CRITICAL]
-
-**A declared value is a placeholder for a measured one wherever a
-measured one exists, and it is promoted as soon as it can be.**
-
-The worked precedent is in the file. `CHROMOSPHERE_PHYSICAL_RADII` drew
-at 1.1 solar radii as a visibility stylization for years; on 2026-08-16
-it was promoted to the physical 1.002875 and the stylization retired.
-That is the move, and it is the default direction of travel.
-
-**Two kinds of declared, and mixing them makes the backlog
-uncountable.**
-
-- **declared pending** -- a fallback standing in for a value that
-  exists and has not been sourced or promoted yet. Carries a ledger
-  handle. It is backlog.
-- **declared** -- a pure drawing choice, or a pick from a range that
-  the source gives as a range on purpose. It never promotes, because
-  there is nothing to promote to. It is not backlog.
-
-Without the split, "declared" is a bucket mixing things that must move
-with things that never will, and the remainder cannot be counted.
-
-```
-# Status: declared 2026-08-28 -- top of measured 2-4 range
-# Status: declared pending 2026-08-28 -- L-2xx
-```
-
-### When the source gives a range
-
-**Store the range as data, derive the drawn value from it by a stated
-rule, and let display text interpolate the range rather than restate the
-drawn value as a measurement.**
-
-This is L-179's mechanism, generalised. `GRAVITATIONAL_INFLUENCE_AU` and
-`GRAVITATIONAL_INFLUENCE_RANGE_AU` are the existing pair: the range
-carries the citation and the access standard, the drawn number is a
-declared midpoint, and the hover shows the envelope.
-
-The rule is NOT which end of the range to draw. Top, midpoint and low
-end are all in the store and all correct for their rows -- the helmet
-cusp takes the top so the drawn cusp does not understate the helmet,
-the gravitational influence takes the midpoint, the core takes the low
-end. The rule is that **the pick is a declared choice and its reason
-lives on the row.**
-
-This supersedes the weaker Batch 1 convention -- best-sourced single
-value in code, range in the description -- for any row where the range
-is genuinely the sourced object. The weaker form leaves the range in
-prose, where it cannot be interpolated and drifts from the number beside
-it.
-
-## The Status Line [CRITICAL]
-
-**Every value in `constants_new.py` declares its own provenance state.
-The scanner reads that declaration instead of inferring one.**
-
-One line, immediately below the assignment, using the existing `+`
-continuation convention:
-
-```
-# Status: <kind> <rung> <ISO date> [-- <pointer>]
-```
-
-`<kind>` is one of three, and they are the registry zones:
-
-- **measured** -- a published value. Carries a rung.
-- **declared** -- a drawing choice or a pick from a range. No rung; a
-  source is not expected and its absence is not a finding.
-- **derived** -- computed from other constants. No rung. Names its
-  inputs and is never cleared on its own; checking it means checking
-  them.
-
-`<rung>` applies to measured values only and is one of the four the
-scanner already defines: `V_FETCHED`, `V_CROSS_CHECKED`, `V_SOURCED`,
-`V_RECALLED`.
-
-The ISO date is when the status was last confirmed under the standard in
-force. **No status line at all means the pass has not reached this
-value** -- which is different from a value that was examined and found
-wanting, and the scanner reports it as unexamined rather than passing
-it.
-
-The optional pointer names a worksheet, a source record, or a ledger
-handle.
-
-```python
-HELMET_CUSP_RADII = 4.0
-# Status: measured V_SOURCED 2026-08-28 -- abstract, open
-
-CHROMOSPHERE_PHYSICAL_KM = 2000.0
-# Status: measured V_SOURCED -- access untested (textbook)
-
-SOLAR_RADIUS_AU = SUN_RADIUS_KM / KM_PER_AU
-# Status: derived -- inherits SUN_RADIUS_KM, KM_PER_AU
-```
-
-**The status line must not be citable.** It carries no source text, no
-agency name, no author-year, and no URL. Those live in `# Source:` and
-in the worksheet. A status line that names an authority becomes a
-citation for the value beside it, which is the failure A Breadcrumb Must
-Not Cite already covers.
-
-**The declaration is the only store, and inference is REMOVED rather
-than kept as a fallback.** If a value declares `V_SOURCED` and the
-scanner also infers a rung from a nearby comment, the two can disagree,
-and that is One Value, One Home violated on a property instead of on a
-number. Deleting the inference is what this section buys: the
-thirty-line lookback crediting a neighbour's annotation, `# Verified:`
-matching the citation pattern, a bare URL in a breadcrumb scoring as a
-source, and orphan section-header annotations all trace to the scanner
-guessing.
-
-**Inside a dict, the status line attaches to the DICT when its entries
-share one kind and one source**, and an entry that differs carries its
-own line, which overrides. This does not reopen the per-value ruling of
-2026-08-13: that ruling addressed annotations sitting inside a
-thirty-line proximity window, where a parser cannot distinguish group
-intent from accident. A status line on a dict is structurally scoped,
-not merely near.
 
 ### Geometry Constants Are First-Class Claims
 
@@ -573,7 +321,7 @@ assumptions.
 |-------|----------------------|---------|
 | Claude (Opus) | Derivations, citation-shape errors (catches when a source cannot contain the claim as written), honest about limitations (marks UNVERIFIED rather than bluffing) | Primary checker: papers, web sources, derivations, structural analysis |
 | GPT | Papers with DOIs, explicit derivations with worked math, thorough web sourcing, catches date/year errors in citations | Primary checker: independent of Claude, complementary source selection |
-| Gemini | Domain knowledge, structural/philosophical dialogue. Book content is LEAD GENERATION only -- see the demotion below | Domain review, tiebreaker when primaries diverge |
+| Gemini | Book citations (can access book content web search cannot reach), domain knowledge, structural/philosophical dialogue | Book-citation verification, domain review, tiebreaker when primaries diverge |
 | Fable | Large-context comprehensive review, far-reaching audits across many files, pattern recognition at scale | Cross-codebase audits, manifest generation, bulk review when scope exceeds a bounded session |
 
 **Default two-leg pattern:** Claude + GPT independently. Covers papers,
@@ -591,20 +339,12 @@ consistency, or pattern-matching across the full codebase. Not for
 per-claim worksheet work (Opus handles that), but for the architectural
 view that requires seeing everything at once.
 
-**Demoted 2026-08-27: Gemini's book access is LEAD GENERATION, not a
-clearing route.** This skill previously recorded that Gemini could
-"open the books" -- reaching Carroll & Ostlie and Golub & Pasachoff
-content neither Claude nor GPT could -- and routed book citations to
-it. Under The Access Standard that is a model's ACCOUNT of a book, not
-the book. It has the same standing as any other free-form model query:
-useful for finding where a claim lives, never citable on its own.
-
-The pilot supports the demotion independently. The Gemini leg returned
-a quotation on 1 percent of 92 rows and a locator on 28 percent.
-
-Book citations now route to RE-HOMING first -- find an accessible
-authority carrying the same result -- and to Tony's Scholar or Books
-queue only when none exists.
+**Key finding (August 2026):** Gemini can "open the books." It
+demonstrated access to Carroll & Ostlie and Golub & Pasachoff content
+that neither Claude nor GPT could reach via web search. This is a real,
+tested capability -- not assumed from marketing. Use Gemini specifically
+for book-citation verification and domain claims that rest on textbook
+authority.
 
 ### The Two-Dispatch Rule [CRITICAL]
 
@@ -952,135 +692,16 @@ For derived values where the source is a computation, not a lookup:
 #         via standard Hill approximation, Claude Opus 5 2026-08-01
 ```
 
-For a value that is a declared drawing choice rather than a
-measurement, name the choice and its reason on the row:
+For visualization boundaries where the value is a display choice, not
+a measured constant:
 ```python
-# Declared: top of the sourced 2-4 R_sun range, so the drawn cusp
-#           does not understate the closed-field helmet
+# Visualization shell radius (physical chromosphere extends ~2000 km
+# above photosphere = ~1.003 R_sun; drawn at 1.1 for visibility)
 ```
 
-(The chromosphere-at-1.1 example that stood here until 2026-08-27 was
-retired in the code on 2026-08-16, when that shell was promoted to the
-physical 1.002875. See Examples Go Stale Like Values.)
-
-**Retired 2026-08-27: two annotations no longer earn V_CROSS_CHECKED.**
-The scanner required two `# Cross-checked:` lines with distinct
-(identity, reference) pairs. That measures CONCURRENCE, and concurrence
-is what failed on `ALFVEN_SURFACE_RADII`: two legs agreed on a wrong
-value and the dissenting leg was the one carrying evidence. The rung
-stays, and stays deliberately earned rather than gated; what earns it
-is an EXHIBIT fetched and read, per The Exhibit Requirement. Both
-independent Mode 7 reviewers reached this conclusion separately on
-2026-08-27. The scanner change is a build with its own handle.
-
-### The Exhibit Requirement [CRITICAL]
-
-**A verdict without a quotation is UNVERIFIED, whatever the verdict
-says.**
-
-A leg that read the document can quote it. A leg that recalled restates
-the citation it was given. That difference is a property of the RETURN,
-not of the claim, so detecting it needs no domain knowledge and no
-second opinion.
-
-The worksheet schema gains two required fields:
-
-- **quote** -- verbatim text from the named source containing the claim.
-- **locator** -- where in the document: DOI, bibcode, section, table,
-  page, or a resolvable URL.
-
-State both IN THE PROMPT alongside the verdict vocabulary, and say that
-a row without them will be recorded UNVERIFIED regardless of its verdict
-token. A missing exhibit is not weighed, not averaged against another
-leg, and not read as weak agreement. It is silence, and silence is the
-correct output for a leg that did not read the source.
-
-**The quotation is a routing aid and a recall tripwire. It is NOT the
-clearance.** It tells us which document and where to look, and a leg
-that cannot produce one is the leg that was recalling.
-
-**The evidence of record is the source text READ IN CONTEXT**, with the
-locator and the retrieval date written into the worksheet. This is
-Fetched vs Recalled applied one layer up -- to verification itself
-rather than to values.
-
-**Division of labour.** Claude fetches anything reachable directly:
-arXiv, NASA ADS, agency documents, open journals. Tony fetches only what
-Claude bounces off -- paywalled pages, Google Scholar, Google Books. That
-queue should be short, and re-homing under The Access Standard is what
-keeps it short.
-
-**Leg counts.**
-
-- **Citation verification: ONE leg with an exhibit is sufficient**,
-  because the exhibit is then fetched and read rather than believed.
-- **Value verification: TWO legs**, and only where a value must be FOUND
-  rather than confirmed -- no source at all, or a citation check
-  returned refuted and a replacement is needed.
-- A leg returning no exhibit does not reduce the count. It contributes
-  nothing.
-
-**Measured, not assumed** (pilot returns at `6ceb3f76`, 138 rows):
-
-| leg | rows | carried a quotation | carried a locator |
-|---|---|---|---|
-| Claude Opus 5 | 23 | 78% | 100% |
-| GPT | 23 | 60% | 73% |
-| Gemini | 92 | 1% | 28% |
-
-The leg with no exhibits is the leg that confirmed `ALFVEN_SURFACE_RADII`
-at 18.8 four times over, once describing it as a heliocentric distance
-when it is an altitude. Its own notes field reads "Recollection of the
-Parker Solar Probe 8th encounter results." Two legs concurring would
-have kept the wrong number; the exhibit test separates them without
-anyone knowing the answer in advance.
-
-**Two limits, stated so they are not read past.** This is one dispatch.
-It shows quote-presence separates a reading leg from a recalling leg; it
-does NOT show quote-presence predicts correctness row by row inside a
-single leg. And it makes Claude the verifier of record, which
-concentrates trust in the component that has actually been failing. The
-mitigation is partial and real: the document is present in the window
-rather than recalled, and its URL and date go into the worksheet so
-anyone can re-open it. What Tony can still catch is whether the document
-is REAL and is the RIGHT one -- which is the fabrication failure this
-project has suffered. What he cannot catch is a misreading of a real
-paper.
-
-**Enforcement is a build, not prose.** This section states the rule. A
-checker that refuses a row lacking `quote` or `locator` is a separate
-item and needs its own handle, because a rule stated only in a skill is
-a check that fires when somebody remembers it.
-
-(Tony's ruling, 2026-08-27, on the failure he has actually seen: models
-guessing and inventing. "Silence is better." Reader and clearance
-revised the same evening: "Honestly I don't intend to go looking for
-quote text. Better would be links that I can go fetch for you to read.")
-
-### A Cross-Check Retires With Its Value or Its Citation [CRITICAL]
-
-A `# Cross-checked:` leg certifies one value against one citation on one
-date. When either the value or the citation is replaced, the leg is
-STRIPPED in the same patch, and the reason is recorded in the block.
-
-Two ways this fires, and the store carries a worked case of each:
-
-- **The value moved.** `ALFVEN_SURFACE_RADII` went 18.8 to 19.7 on
-  2026-08-19 because 18.8 was an altitude used as a heliocentric radius.
-  The two legs dated 2026-08-02 had certified 18.8 and were stripped
-  with it: a check of the old value is not a check of the new one.
-- **The citation went.** `HELMET_CUSP_RADII` held its value while its
-  entire citation stack was removed on 2026-08-20 after an independent
-  nine-source read. Its two legs went with the citations: a cross-check
-  of a citation that no longer exists grants credit for nothing.
-
-Leaving the leg standing is cite-to-clear wearing a checker's name. It
-passes the scanner while certifying something that is no longer in the
-file.
-
-Record the removal in the block with its reasoning, because a removal
-leaves no trace otherwise and the next reader should not have to
-re-derive why a constant is uncited.
+The scanner requires two `# Cross-checked:` lines with distinct
+(identity, reference) pairs for V2 scoring. Same source from different
+worksheets counts as two independent checks.
 
 ### Retired: `# Verified: April 2026 via Gemini fact-check`
 
@@ -1096,12 +717,8 @@ looking. A `# Verified: April 2026` line sat over Eris's Hill sphere
 while it read 9.4 Mkm against a correct ~14.3 Mkm -- a 34% error under a
 verification stamp.
 
-Census re-measured at `7f4a2f9f` (2026-08-27): 42 remaining --
-shell_configs.py 14, earth 13, jupiter 9, comet 6. Unchanged since
-`1e60c783`. Disposal is not a separate deletion patch: the status
-pass REPLACES each stamp with a real `# Status:` line as it passes
-through, which records what the stamp was actually worth instead of
-leaving a blank. Zero in the five Batch 1 modules and zero in Mars,
+Census at `1e60c783`: 42 remaining -- shell_configs.py 14, earth 13,
+jupiter 9, comet 6. Zero in the five Batch 1 modules and zero in Mars,
 which were cleared as those batches landed. (Two came out of
 shell_configs.py with the Mercury and Moon body headers in the geometry
 follow-up, from 16.) The rest clear in Batch 2.
@@ -1248,30 +865,6 @@ something. (The Braid, resident protocol Part 3.)
 (Tony's ruling, 2026-08-26, stated as general and confirmed with the
 boundary above in the same exchange.)
 
-## Observations Are Sourced Facts, and They Migrate [CRITICAL]
-
-An observed event figure is a measured value with a source, and its home
-is `constants_new.py` like any other.
-
-A disintegration radius, a spacecraft's closest approach, a crossing
-distance, a perihelion -- these read as narrative rather than as
-constants, so they get typed into prose and stay there. They are
-observations of the physical world with an authority behind them, and
-One Value, One Home applies to them without exception.
-
-The scope boundary is unchanged: MEASURED values migrate, DECLARED
-drawing parameters stay where they are drawn.
-
-The practical consequence is an ordering one. A citation cannot move
-into the store ahead of the value it cites, because a citation with no
-value beside it has nowhere to sit. So the migration is: value first,
-then its source line, then the prose references the constant.
-
-(Tony's ruling, 2026-08-27. Founding case: MAPS C/2026 A1's
-disintegration at 8.33 R_sun is cited to SOHO/CCOR-1 observations at
-`solar_visualization_shells.py` line 1226, and the figure itself lives
-only in display strings.)
-
 ## Report to the Figures You Have [QUALITY]
 
 **Compute at full precision. Report to the significant figures the least
@@ -1411,42 +1004,7 @@ split by how the words get authority:
   site and clear by TRUE sourcing. A composed sentence that cannot be
   sourced does not ship.
 
-## Examples Go Stale Like Values [QUALITY]
-
-**A worked example in a skill is a claim about the codebase, and it
-decays the same way a constant does.**
-
-This skill taught the chromosphere drawn at 1.1 solar radii as its model
-of a declared visualization boundary, for eleven days after the code
-promoted that exact value to the physical figure. A skill loads every
-session and is normative, so a stale example there is worse than a stale
-line in a plan document: it teaches the retired state as the pattern. A
-session read it and reported the retired value to Tony as current.
-
-When a bump touches a section, re-read its examples against the file.
-When a value moves, grep the skills for it in the same patch. This is
-The Correction Does Not Travel, applied to the skill layer.
-
 ## Field Notes
-
-- **A missing annotation is not missing verification.** The absence of a
-  `# Cross-checked:` line means no ANNOTATION. It does not mean no work.
-  Verification lands in several places the annotation grammar does not
-  count: a `Resolved:` leg naming the returned verdict that caused an
-  edit, a `Record:` leg pointing at a source record in `documentation/`,
-  a `Review-note:` block carrying an independent read, and a convergence
-  report filed after a dispatch. A row can carry all four and still show
-  no cross-check. Before reporting a value as unverified, read the
-  block's other legs and look for its source record. Say which claim is
-  being made -- "carries no cross-check annotation" and "has not been
-  verified" are different statements, and the first said carelessly is
-  heard as the second. (Origin, 2026-08-27: a session reported seven of
-  the Sun's constants as lacking cross-checks in a way that read as
-  unverified. Two of the seven were the most-worked rows in the file --
-  `ALFVEN_SURFACE_RADII` had a three-model pilot dispatch behind it, and
-  `HELMET_CUSP_RADII` rested on a paper Tony retrieved from NASA ADS
-  himself. The annotations were absent because the earlier legs had been
-  correctly stripped, which is A Cross-Check Retires working, not a gap.)
 
 - **An evidence artifact is filed AS RECEIVED.** House style -- ASCII
   rules, naming conventions, header blocks -- applies to code and to
