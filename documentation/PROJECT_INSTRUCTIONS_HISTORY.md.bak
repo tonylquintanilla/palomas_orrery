@@ -284,6 +284,38 @@ named for their destination.
 (Moved down from the resident protocol on 2026-08-25 when v3.43
 made a fourth entry.)
 
+v3.42 (August 23, 2026): No rule changed in this document. THREE skill
+bumps, recorded here because the recording is the point.
+(1) safe-file-editing 1.7 -> 1.8 (L-226), two of Tony's rulings. The
+Encoding Gate now says PROSE explicitly -- it read "ASCII only in
+delivered code" and a session took that as excluding markdown, leaving
+23 non-ASCII characters in a master plan it was already patching, while
+Stamp What You Change had said all along that markdown is not an
+exception. The skill's two halves disagreed and the reader followed the
+narrower one. And a new section, The Correction Does Not Travel, one
+scope out from Stamp What You Change: that governs the file the patch is
+editing, this governs the OTHER files quoting the value it just changed.
+Founding case -- constants_new.py read 15 R_sun from August 22 and the
+critical path summary still said 17 the next day, inside the paragraph
+written to correct an earlier wrong claim about the same row.
+(2) orrery-coding-conventions 1.4 -> 1.5 (L-227): Hover Line Width Is a
+Convention, Not an Accident. Found by Mode 5 when a tooltip ran off the
+viewport -- a hover string wrapped at 72 characters in the SOURCE with
+no breaks on the lines, rendering as one 378-character run. Canonical
+Text Format already governed which break character and said nothing
+about how often.
+(3) ledger-and-session-records 1.8 -> 1.9 (L-230), and it is why this
+entry exists at all. Tony observed that a skill bump runs a four-link
+chain -- SKILL.md, skills_index.py, the manifest zone, a protocol
+version entry -- and that only the first three fire. The binding rule
+gains its fourth step. Detection is designed and unbuilt: a
+maintenance-suite checker that watches the TRANSITION, because the
+naive form reports 10 of 10 skills and would be ignored by its second
+run.
+
+(Moved down from the resident protocol on 2026-08-27 when v3.45
+made a fourth entry.)
+
 ### Preserved verbatim: v3.29 Technical lessons (now field notes in skills)
 
 - Cache: cache[name]['elements'] (nested dict)

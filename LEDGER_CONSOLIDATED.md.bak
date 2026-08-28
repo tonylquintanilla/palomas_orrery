@@ -258,7 +258,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*154 live items; 140 need attention (`!`); 153 RICE-scored; 95 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*156 live items; 142 need attention (`!`); 155 RICE-scored; 95 closed (section C + O.Done/W.Done); 6 retired (never reused): L-059, L-081-084, L-255. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -300,6 +300,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-25 |
 | ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
 | ! | L-236 | Gallery maintenance runner [designed, unbuilt] | OPEN | 3.2 | 2026-08-25 |
+| ! | L-256 | provenance-discipline 2.8, and the status pass it enables | OPEN | 3.1 | 2026-08-27 |
 | ! | L-254 | 76 dead sphere-shell builders, unmarked, across 12 modules | OPEN | 2.8 | 2026-08-26 |
 | ! | L-240 | Split declared drawing parameters from measured values | OPEN | 2.8 | 2026-08-25 |
 | ! | L-176 | Shell hover text: add illustrated dimensions (radius_fraction -> km) | OPEN | 2.8 | 2026-08-04 |
@@ -316,6 +317,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-231 | Radiation belts are drawn in the ecliptic; the magnetic tilt is an unbuilt intent | OPEN | 1.8 | 2026-08-24 |
 | ! | L-187 | info_dictionary numeric-overlap enumeration | OPEN | 1.8 | 2026-08-07 |
 | ! | L-228 | Alfven surface latitude ranges: source them or omit them | OPEN [Tony] | 1.8 | 2026-08-23 |
+| ! | L-257 | Three enforcement builds the 2.8 skill text defers | OPEN | 1.8 | 2026-08-27 |
 |  | L-194 | Text-only assertions -- claims the scanner cannot see | DEFERRED | 1.4 | 2026-08-15 |
 | ! | L-253 | The 660 discontinuity's depth variation -- held unsourced | OPEN | 1.2 | 2026-08-26 |
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
@@ -4456,6 +4458,97 @@ on whether the now-unused imports at `planet_visualization.py` lines
 duplication, the same modules); `orrery_rendering.py` docstring, May 28
 2026 correction; Verify Execution, Not Appearance [CRITICAL], resident
 protocol Part 3.
+
+#### [L-256] provenance-discipline 2.8, and the status pass it enables
+<!-- L:256 status:OPEN upd:2026-08-27 section:A flag: rice:3/3/70/2 -->
+- **What landed.** Nine sections and four revisions, from Tony's rulings
+  of 2026-08-27 and two independent Mode 7 reviews returned the same
+  day. Delivered as `patch_L256_1_provenance_discipline_2_8.py` and
+  `patch_L256_2_protocol_v3_45_and_ledger.py`; drafts at
+  `documentation/DRAFT_provenance_discipline_2_8_sections.md` and its
+  companion additions file.
+- **The load-bearing one is The Status Line.** Every value in
+  `constants_new.py` declares its own kind (measured / declared /
+  derived) and, for measured values, its rung. The scanner READS that
+  instead of inferring it. Four measured failures trace to the
+  inference and all four die with it: the thirty-line lookback
+  crediting a neighbour's annotation (the Oort case, L-192),
+  `# Verified:` matching the citation pattern, a bare URL in a
+  breadcrumb scoring as a source (L-253), and orphan section-header
+  annotations the grammar cannot express.
+- **The Access Standard is Tony's, and it is narrower than it sounds.**
+  No paywalls -- open full text, a free abstract, or a Scholar or Books
+  snippet carrying the qualifier. Measured against the store the same
+  evening: most citations already pass, NASA ADS closes the pre-arXiv
+  astronomy gap, and the casualty list is three textbooks plus PREM.
+  Remedy is re-homing to an accessible authority, not deletion.
+- **The status pass, in two stages, both status-only.** BETA on the
+  Sun's nineteen plus one dict, because the Sun's values happen to
+  contain every hard case -- an exact definition, a frame qualifier, a
+  value re-sourced after an error, a pre-arXiv citation, a textbook, a
+  derived value, a range midpoint, and a pure declared block. Then the
+  FULL store. Measured at `7f4a2f9f`: 67 top-level assignments (46
+  literal scalars, 16 expressions, 3 dicts, 2 lists), with the dicts
+  holding 160 entries and the lists 14 -- about 236 statusable items,
+  of which 160 sit inside dicts. The beta must therefore include a dict
+  or it proves the format for 30 percent of the store.
+- **No value changes in the pass.** Discovery and remediation stay
+  separated per The Braid. Rows that need to move are recorded and
+  fixed later, by the ladder step that serves them.
+- **A second output nobody has counted.** The pass can only status what
+  is IN the store. Measured values living as bare literals inside
+  function bodies (belt distances) and values held in three stores at
+  once (the S4714 case) are outside it. The pass produces that count as
+  a by-product; it is L-181's backlog getting its first denominator.
+  Report the number before acting on it.
+- **Note:** RICE 3/3/70/2 is Claude's proposed score. Reach 70 because
+  the status line changes what every future provenance session reads
+  first.
+  **Tony-action (decide):** confirm or redirect the score, and rule on
+  which dict joins the beta (`spectral_subclass_temps`, 9 entries and
+  flagged by Fable in August as an uncited physical claim inside the
+  store, or `CENTER_BODY_RADII`, 18 entries).
+**Gap:** the status pass has not started. The beta is scoped and
+unscheduled.
+**Ref:** L-181 (single-source-of-truth constant layer); L-192 (the
+attachment window); L-249 (Earth interior, the founding case for
+measured-is-the-goal); L-253 (A Breadcrumb Must Not Cite); L-257 (the
+enforcement builds); The Braid [CRITICAL] and Method Belongs to the
+Skill, resident protocol Part 3.
+
+#### [L-257] Three enforcement builds the 2.8 skill text defers
+<!-- L:257 status:OPEN upd:2026-08-27 section:A flag: rice:2/3/60/2 -->
+- **Why one row and not three.** All three are the same failure shape:
+  a rule stated only in a skill fires when somebody remembers it. Per
+  the braid, one row per class.
+- **(a) Worksheet schema gains required `quote` and `locator`
+  fields**, with a missing exhibit routed to UNVERIFIED rather than
+  weighed. The rule is in The Exhibit Requirement; the checker that
+  refuses such a row does not exist.
+- **(b) Status-line parser.** The scanner reads `# Status:` and reports
+  a measured value carrying none as UNEXAMINED rather than passing it.
+  This is the "make the blind spot announce" half of A Check That
+  Cannot Fail Is Not Passing; without it a partial pass is invisible.
+- **(c) Remove the inference.** The thirty-line lookback and the
+  citation-pattern matching stop scoring rungs once (b) lands.
+  Declaration and inference must not both be live, or the property has
+  two stores and One Value, One Home is violated on a property instead
+  of a number.
+- **Ordering.** (b) and (c) land only AFTER the full status pass
+  completes, because wiring the scanner to read status makes the status
+  authoritative, and a set of claims should not become authoritative
+  before the independent review pass has read them.
+- **The review pass is structural, not factual.** Checking a status
+  assignment asks whether a source exists, whether it has been
+  access-tested, and whether a value is measured or a pick from a
+  range. No astronomy, so ONE leg, no worksheets, and none of the
+  dispatch machinery.
+- **Note:** RICE 2/3/60/2 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect.
+**Gap:** all three unbuilt. (a) is independent and can precede the
+status pass; (b) and (c) are gated on it.
+**Ref:** L-256; A Check That Cannot Fail Is Not Passing [CRITICAL],
+resident protocol Part 3.
 
 ## PENDING ACTION (Tony-side)
 
