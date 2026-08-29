@@ -217,92 +217,6 @@ Earth's distance.
 does not require `quote` and `locator`; nothing parses `# Status:`; the
 scanner still infers.
 
-**Two pinned literals survive in `test_constants_provenance.py`, and
-one of them is failing right now.** `maintenance_run.py` reports
-Constants relations FAILED, 20 of 21, on
-`test_radiative_zone_au_derived_from_solar_radius`. The failure is
-CORRECT and the constant is fine: the test hardcodes
-`expected = 0.7 * SOLAR_RADIUS_AU`.
-
-It is named as a DERIVATION test, but 0.7 is a measured value rather
-than a structural factor. That is why it survived the 2026-08-13
-sweep that retired fifty-five pinned literals and kept eighteen
-structural tests on the stated grounds that none of them holds a copy
-of a measured value. This one did, wearing a structural test's name.
-
-`test_core_au_derived_from_solar_radius` is the identical shape with
-0.2 and passes only because `CORE_AU` has not moved. It will fire the
-moment the core is promoted off the low end of its 0.2-0.25 range.
-
-The structural claim both were reaching for is already covered by
-`test_solar_shell_ordering`, which holds no numbers at all. Restate
-both as ratio bounds rather than delete them.
-
-**The Sun exhibit's axes carry no units.** The tick labels read
-"150k" with nothing saying what of. This is copied from the Solar
-System Explorer's own convention -- blank axis titles, `title:
-{ text: '', font: { size: 1 } }` -- so it is not a deviation the Sun
-exhibit introduced. It lands differently here. The Explorer's frame
-is always about 35 AU; the Sun's moves from 0.26 AU on arrival to
-173,250 AU with the gravitational influence drawn, so a visitor has
-no way to know the number is AU rather than km.
-
-Every hover on the page carries km AND AU, per the standing hover
-convention. The axes are the one surface on the page that does not.
-Small fix, and the only thing currently on the live page that is
-arguably wrong rather than merely unfinished.
-
-**Mobile is untested, and it is a Mode 5 item.** Nobody has opened
-the Sun exhibit on a phone. The legend is an eighteen-entry overlay
-panel and the modebar is hidden below 768 px by the gallery's
-existing convention, so the phone experience is unknown -- on a site
-whose whole premise is that it works on one. Tony deferred this
-deliberately on 2026-08-29 because the major thing was done; it
-cannot be delegated, since Mode 5 is his render and his eyes.
-
-**There is no maintenance runner on the GALLERY side, and the
-asymmetry is backwards.** `maintenance_run.py` runs thirteen
-checkers and lives in the orrery, which is Tony's desktop. The
-gallery is the PUBLIC surface, and it has no runner at all.
-Measured at gallery `c367b262`: nothing named maintenance, runner or
-run_all anywhere in the repo. The one real suite,
-`tools/test_gallery_cache_builder_offline.py` at 149 checks, is a
-file somebody has to remember -- which is A Check That Cannot Fail
-Is Not Passing in its third form: put the check where it runs.
-
-**This session is the argument.** Three of the four defects were on
-the gallery side and no orrery check could reach any of them: Pages
-serving no `.py` at all, the orphan info markers in the shared
-renderer, and `objects_config.json` drifting from `constants_new.py`.
-
-Two candidate checks, named because each would have caught one of
-today's failures and both are cheap:
-
-*(a) A served-reachability check.* Fetch ONE file per critical path
-family from the LIVE site and require 200 -- an assembler module, the
-coverage index, a positions file. The Jekyll failure was invisible to
-`python -m http.server`, where every previous test had run, and would
-have been caught in a single request. The check has to run against
-the CDN, because that is the thing that was broken.
-
-*(b) A store-drift REPORT.* Thirty entries in `objects_config.json`
-already carry `orrery_constant` pointers like
-`constants_new.py::RADIATIVE_ZONE_AU`. Nothing follows them. A
-read-only checker that fetches `constants_new.py` at the orrery HEAD
-SHA and reports every pointer whose value disagrees would have caught
-0.7 against 0.713 the moment it happened.
-
-It is NOT the transport and does not replace segment 2 -- it moves
-nothing and fixes nothing. It converts a silent hole into a loud one
-for a fraction of the cost, and it can be built BEFORE the transport
-rather than instead of it. The pointers are already there; only the
-checker that follows them is missing.
-
-It should not be a copy of the orrery's runner. Different repo,
-different failure modes: the orrery's checkers ask whether a value is
-sourced, and the gallery's would ask whether what is SERVED matches
-what was exported and can actually be fetched. No ledger handle yet.
-
 ---
 
 ## Two measurements corrected
@@ -345,14 +259,6 @@ Tony's "I thought we had already decided on those three" was right about
 2026-08-07 under L-179. The handoff's characterisation had been read
 forward instead of the store being read -- one message after invoking
 the status line as the fix for exactly that.
-
-**A check that could fail, failing.** The pinned derivation test above
-is the counterexample to the rest of this section. Nobody found it by
-reading and it was not caught by judgement. It fired on its own, in
-`maintenance_run.py`, the first time a value it silently depended on
-actually moved. That is the outcome the 2026-08-12 rule was written
-for -- a check whose passing output proves the path was live -- and
-it is worth recording as working, not only recording failures.
 
 **A test harness artifact worth not misreading.** Piping a patch's
 output to `head` killed it on SIGPIPE mid-print, before it wrote. It
