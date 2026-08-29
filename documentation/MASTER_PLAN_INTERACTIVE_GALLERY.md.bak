@@ -1,9 +1,6 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** v20 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
-**the first feature-bearing exhibit is LIVE.** The Sun ships at
-`palomasorrery.com/interactive.html?exhibit=sun`, unlinked from the
-landing page, Mode 5 accepted 2026-08-29 (gallery `ac9a5c7b`).
+**Status:** v19 -- Phase 2 (solar system assembler) BUILD UNDERWAY.
 **The braid, ruled 2026-08-22:** provenance stops being a GATE and
 becomes a per-artifact slice, and the rendering layer is worked first.
 The five segments of Section 5a do NOT move; the order they are worked
@@ -905,24 +902,10 @@ unsourced ones. Drawing a ring freezes nothing.
 And the order pays for itself, because the render is this project's own
 ground truth. Ring provenance today is an audit of numbers nobody can
 see -- text checked against text, which is precisely the mode that
-produced three separate failures on 2026-08-22. Segment 3 is what
-gives the provenance work a render to be checked against.
-
-**One clause here was too strong and is corrected 2026-08-29.** It
-read that a wrong ring radius "becomes something Tony's EYES can
-catch." The GEOMETRY catches gross errors -- a wrong frame, a factor
-of two, a body in the wrong place. It does not catch a few percent.
-Fable's review of 2026-08-27 said so, and this project then produced
-the case: `RADIATIVE_ZONE_AU` moved 0.7 -> 0.713, a 1.9 percent
-change in a drawn radius, invisible at any zoom.
-
-It WAS caught on the render, which is why the argument survives --
-but by READING THE HOVER TEXT, not by seeing the shell. That is the
-mechanism worth naming, because it is the one to design for: the
-hover carries the value, the units and the source, so drawing a
-feature puts its provenance in front of a reader for the first time.
-The Alfven case Fable cited -- one solar radius in fifteen -- would
-have been caught the same way and by nothing else.
+produced three separate failures on 2026-08-22. Once the assembler
+draws, a wrong ring radius becomes something Tony's EYES can catch.
+Segment 3 is what gives the provenance work a render to be checked
+against.
 
 ### The path -- the five segments
 
@@ -1097,73 +1080,6 @@ golden record is stale in four fields (L-237). Re-measuring those rows
 belongs to a pass that reads the repo, not to this append; a table
 re-stated from memory is how the 105 / 107 / 110 drift happened in this
 document.
-
-### 2026-08-29 -- the Sun ships, and four things shipping it found
-
-Measured at orrery `688561ef` and gallery `ac9a5c7b`, both confirmed
-against the live remote. The row above is now stale in a second
-direction and this subsection re-measures it rather than editing the
-table from memory.
-
-**Segment 3 is DONE for the Sun, and segment 5 has begun.** The Sun
-exhibit is live at `interactive.html?exhibit=sun`, unlinked from the
-landing page, carrying inline credit. It runs the shared assembler
-package in Pyodide against the served cache and hands the feature
-report to `feature_renderers.js` -- architecture B', Section 3a's
-Python-assembles / JavaScript-draws split, working end to end in a
-visitor's browser for the first time. Mode 5 accepted.
-
-It is a SECOND exhibit on the page that has been public since July,
-reached by the `?exhibit=` parameter Section 2a designed for exactly
-this. The Solar System Explorer is untouched and still the default.
-
-**The shell count is 18, not 19.** Measured through the real renderer
-at `ac9a5c7b`: 18 drawable shells, 18 named traces plus 18
-info-marker companions. The 2026-08-25 append says 19. Corrected
-here rather than restated.
-
-**Four defects surfaced, three of which nothing could have caught
-earlier.** GitHub Pages served no `.py` file in the repo at all --
-Jekyll runs by default and there was no `.nojekyll`, so the whole
-assembler directory 404'd while working perfectly over a local
-server. Fixed at gallery `833daa9a`. The scene axes were pinned, so
-the legend could not move the frame and a visitor toggling the
-heliopause saw nothing happen. And `feature_renderers.js` sent a
-shell's GEOMETRY to the legend without its info marker, so nine
-markers were being drawn between 94 AU and 150,000 AU, hoverable,
-with nothing around them -- invisible only because the pinned axes
-fell inside them. That one predates the Sun exhibit and was surfaced
-by fixing the second: the protocol's own lesson about an invisible
-thing surfacing its neighbours.
-
-**The fourth is SEGMENT 2, and it stops being theoretical.** The
-session corrected `RADIATIVE_ZONE_AU` in the orrery, pushed, and
-re-ran the cache builder -- and the site went on serving 0.7 for
-hours. The builder passes feature constants THROUGH from
-`data/objects_config.json`, a hand copy in the gallery repo. It has
-never read `constants_new.py`. Fetch-and-import was RATIFIED
-2026-08-08 (Section 7, decision 12) and never built, so the two
-repos have no mechanism connecting them at all.
-
-The value reached the site by a hand patch to `objects_config.json`.
-That is not a workaround, it is the current architecture.
-
-**So segment 2 is repositioned.** It is described in this section as
-protection against a correct orrery drifting from its copy LATER.
-That is too weak. Under the export gate (provenance-discipline 2.9)
-the boundary the gate names is a human copy with no check on it, so
-the transport is the gate's MISSING ENFORCEMENT POINT. The
-2026-08-28 handoff predicted this in the abstract; it failed in its
-first real test the following day. It does not gate the next
-exhibit, and it should be built before the ladder gets long enough
-that hand-copying many bodies becomes routine.
-
-**Handles owed, not minted here.** L-258 (the significant-figures
-rule and its two constants) has no ledger entry; the Sun exhibit has
-no handle at all; and `provenance-discipline` went 2.9 -> 2.10 in a
-session that cannot verify its own reinstall. The ledger carries
-status authority (L-221), so those are ledger edits and this section
-records them rather than asserting around them.
 
 ### What this section deliberately does not carry
 

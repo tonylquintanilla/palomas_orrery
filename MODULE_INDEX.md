@@ -1,6 +1,6 @@
 # Paloma's Orrery - Module Index
 
-**Generated:** August 28, 2026 by `module_atlas.py`  
+**Generated:** August 29, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -11,23 +11,23 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 130  
-**Total Lines of Code (non-blank):** 104,397  
-**Total Public Functions/Classes:** 1,171
+**Total Lines of Code (non-blank):** 104,675  
+**Total Public Functions/Classes:** 1,175
 
 ## Classification Coverage
 
 **Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L255_2_write_missing_ledger_block.py`
-- `patch_L256_3_gate_binds_at_export.py`
+- `patch_L258_significant_figures_at_rest.py`
+- `patch_master_plan_v20_sun_ships.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
 **Undetermined domain (2).** No valid `Domain:` tag.
 
-- `patch_L255_2_write_missing_ledger_block.py`
-- `patch_L256_3_gate_binds_at_export.py`
+- `patch_L258_significant_figures_at_rest.py`
+- `patch_master_plan_v20_sun_ships.py`
 
 
 ---
@@ -124,7 +124,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,250 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (512 lines) |
-| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (1,152 lines) |
+| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (1,196 lines) |
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (412 lines) |
 | `exoplanet_stellar_properties.py` | Stellar Properties for Exoplanet Host Stars (484 lines) |
 | `exoplanet_systems.py` | Hardcoded Exoplanet System Catalog (572 lines) |
@@ -231,8 +231,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L255_2_write_missing_ledger_block.py` | Writes the L-255 DETAIL block, which was never created. (160 lines) |
-| `patch_L256_3_gate_binds_at_export.py` | Provenance-discipline 2.8 -> 2.9, and protocol v3.45 -> v3.46. (348 lines) |
+| `patch_L258_significant_figures_at_rest.py` | Two edits in the ORRERY repo, one transaction. (319 lines) |
+| `patch_master_plan_v20_sun_ships.py` | Updates both plan documents for 2026-08-29, when the Sun went live on the public gallery. (423 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

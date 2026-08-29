@@ -1,16 +1,10 @@
 # The critical path -- where we are and what stands between here and the end
 
-**Updated August 29, 2026.** Orrery at
-`688561ef63706cefcac981e381d794c324033432`, gallery at
-`ac9a5c7baf108b4c90a32ed5c80235e4a1c8625a`. Both confirmed against
-the live remote. First written August 16 at `227f5b2d`.
-
-**On August 29 a step moved for the first time.** Step three is done
-for one body and step five has begun: the Sun is live on the public
-gallery. What that cost, and the three defects it exposed, is at the
-end of this file under "August 29 -- the first one ships." The body
-of the document below is as it stood on August 23 except where a
-correction is marked.
+**Updated August 23, 2026.** Orrery at
+`09736422e8b26d348f539cd8b49628e8a0c670ab`, gallery at
+`02aefc0cefbf334889b7c6b3b05bf8fdfab74fa6`. Both confirmed against
+the live remote. First written August 16 at `227f5b2d`; the five
+steps below still have not moved.
 
 **What changed on August 23 is the order they are worked in.**
 Tony ruled on August 22 that provenance stops being a GATE and
@@ -95,17 +89,6 @@ be checked as text against text. Once the assembler draws it, a wrong
 radius becomes something a person can look at -- which is this
 project's own definition of ground truth.
 
-**That last sentence is too strong and is corrected August 29.** The
-geometry catches gross errors: a wrong frame, a factor of two, a body
-in the wrong place. It does not catch a few percent. The radiative
-zone moved 0.7 -> 0.713 that day -- 1.9 percent of a drawn radius,
-invisible at any zoom -- and it WAS caught on the live page, by
-reading the hover text rather than by looking at the shell. The hover
-carries the value, the units and the source, so drawing a feature is
-what puts its provenance in front of a reader. That is the real
-mechanism and it is worth designing for; "a person can look at it"
-names the wrong half.
-
 ---
 
 ## The path
@@ -163,20 +146,7 @@ were flagged by all three.
 the gallery's copy of its constants is maintained by hand. The transport
 design is settled; it has not been built.
 
-**Raised August 29, on evidence rather than argument.** This step
-was written as protection against drift arriving later. It is not:
-on August 29 a value was corrected in the orrery, pushed, and the
-cache builder re-run, and the public site went on serving the old
-number for hours. The builder has never read `constants_new.py` --
-it copies from `objects_config.json`, which is maintained by hand in
-the other repo. The correction reached the site by a hand patch.
-Under the export gate the transport is not a defence against future
-drift; it is the only place the gate could ever fire.
-
-**Three. Teach the assembler to draw.** DONE for the Sun on August
-29 and live on the public site; see the section at the end of this
-file. The paragraph below is as written on August 23, when it had
-not been started. It is
+**Three. Teach the assembler to draw. This is the next work.** It is
 independent of the first two and could be done tomorrow -- the data is
 already sitting in the served cache. Two lines in the resolver currently
 throw away every ring radius one step before anything could use them,
@@ -412,73 +382,14 @@ has been baked into a hundred worksheets and a fingerprinted artifact.
 
 ---
 
-## August 29 -- the first one ships
-
-**The Sun is live** at `palomasorrery.com/interactive.html?exhibit=sun`,
-unlinked from the landing page, Mode 5 accepted. Eighteen shells from
-the core out to the Sun's gravitational influence at 150,000 AU, each
-carrying its source in its hover text.
-
-What is actually new is not the picture. It is that the shared Python
-assembler ran in a visitor's browser, against the served cache, and
-handed its feature report to JavaScript to draw -- the architecture
-settled in July, working end to end outside this machine for the
-first time. No server, no Horizons call, no ephemeris: a Sun-alone
-scene has no orbit, so every number in it comes from published
-literature.
-
-**Three defects surfaced that nothing had been able to see.**
-
-GitHub Pages was serving no `.py` file in the repository at all.
-Pages runs Jekyll by default, there was no `.nojekyll`, and the whole
-assembler directory returned 404 -- while working perfectly over a
-local server, which is where every previous test had run. One empty
-file fixed it.
-
-The scene axes were pinned, so nothing the legend did could move the
-frame: a visitor turning on the heliopause at 121 AU inside a
-quarter-AU box saw the page do nothing at all.
-
-And each shell is drawn as two traces -- geometry, and one marker
-carrying the hover. The renderer sent the geometry to the legend when
-a shell was too big for the frame and left its marker behind. Nine
-markers were being drawn between 94 AU and 150,000 AU with nothing
-around them, invisible only because the pinned axes fell inside them.
-That defect predates the exhibit and was surfaced by fixing the
-second one: fixing an invisible thing surfaces its neighbours.
-
-**And step two failed in its first real test**, which is recorded
-above where the step is described. The short form: a corrected value
-did not travel, the builder that was supposed to carry it never reads
-the store, and a hand patch to the other repo is what put the right
-number on the site.
-
-**Two values were closed on the way**, both drawn on the page.
-`RADIATIVE_ZONE_AU` went to 0.713, the figure its own source supports,
-with the citation restated to say what the paper says: a
-convection-zone depth of 0.287, base at 1 - 0.287. And
-`INNER_CORONA_RADII` kept its value and changed its citation, from a
-book locatable only as "Chapter 1" to open text stating the same
-boundary. Three cross-check legs retired with the values and
-citations they had certified.
-
-The rule behind the first one is now in the skill rather than in
-anyone's head: a store carries the verified figure, and rounding
-happens at the reporting step, never at rest.
-
----
-
 *Prepared August 16, 2026 with Anthropic's Claude Opus 5; figures
 updated August 18, dispatch result added August 19, reconciliation
 closed and the streamer-belt claim corrected August 20. Revised
 August 23 for the braid ruled August 22: the ordering claim
 withdrawn, the corpus re-measured at 105, and three claims corrected
 against the code -- L-214's status, the retired
-`STREAMER_BELT_RADII`, and DeForest's 15 R_sun. Revised August 29
-for the first shipped exhibit: step three done for one body, step
-two raised on evidence, and the ground-truth claim narrowed to what
-the geometry actually catches. Built on
-`688561ef63706cefcac981e381d794c324033432` at
+`STREAMER_BELT_RADII`, and DeForest's 15 R_sun. Built on
+`09736422e8b26d348f539cd8b49628e8a0c670ab` at
 https://github.com/tonylquintanilla/palomas_orrery, gallery at
-`ac9a5c7baf108b4c90a32ed5c80235e4a1c8625a`. Both confirmed against
+`02aefc0cefbf334889b7c6b3b05bf8fdfab74fa6`. Both confirmed against
 the live remote.*
