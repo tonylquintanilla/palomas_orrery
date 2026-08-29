@@ -258,7 +258,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*156 live items; 142 need attention (`!`); 155 RICE-scored; 96 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*159 live items; 145 need attention (`!`); 158 RICE-scored; 99 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -268,12 +268,15 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-229 | Streamer band drawn in the ecliptic plane, not the solar equator | OPEN | 11.4 | 2026-08-23 |
 | ! | L-235 | Checks that cannot fail, gallery side [three instances] | OPEN | 11.4 | 2026-08-25 |
 | ! | L-252 | L2b's fourth outcome: an INCOMPLETE verdict is not a confirmation | OPEN | 11.4 | 2026-08-25 |
+| ! | L-262 | The framing smoke test has never run against the page | OPEN | 11.4 | 2026-08-29 |
 | ! | L-237 | Artifact 1's golden record is stale and needs re-cutting | OPEN | 10.8 | 2026-08-25 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-226 | safe-file-editing 1.8 -- encoding gate covers prose; corrections do not travel | OPEN | 8.1 | 2026-08-23 |
+| ! | L-260 | Sun exhibit finishing items: axis units and the phone | OPEN | 8.1 | 2026-08-29 |
 | ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-21 |
 | ! | L-249 | The Earth slice of L-181: interior boundaries as sourced constants | OPEN | 7.2 | 2026-08-25 |
 | ! | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | OPEN | 6.0 | 2026-08-25 |
+| ! | L-263 | The served chromosphere value is a rounded copy | OPEN | 5.7 | 2026-08-29 |
 | ! | L-245 | Constants drift check compares against the last COMMIT, not the last RUN | OPEN | 5.4 | 2026-08-25 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
 | ! | L-206 | Worksheet return filenames carry model and session | OPEN | 5.1 | 2026-08-18 |
@@ -495,10 +498,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-117 | Offline suite red at HEAD: Encke id drift (2P -> 90000091) not mirrored in the mock | DONE | 34.2 | 2026-07-12 |
 |  | L-114 | objects_config.json stranded by the atomic swap; also blocks crash-recovery (gallery builder) | DONE | 16.2 | 2026-07-27 |
 |  | L-250 | The Braid added to Part 3 as a general principle | DONE | 15.2 | 2026-08-25 |
+|  | L-261 | Plain speech becomes the default register, not a mode | DONE | 15.2 | 2026-08-29 |
 |  | L-182 | Mars Hill sphere -- cross-check correction lost across the config pipeline | DONE | 12.0 | 2026-08-05 |
 |  | L-222 | The constants change report fails on every currency stamp | DONE | 11.4 | 2026-08-20 |
 |  | L-221 | The master plan is the roadmap, and it outranks RICE | DONE | 10.8 | 2026-08-22 |
 |  | L-198 | Claim vocabulary: the units the scanner could not see | DONE | 10.2 | 2026-08-17 |
+|  | L-259 | The Sun exhibit ships -- the assembler runs in a visitor's browser | DONE | 8.3 | 2026-08-29 |
 |  | L-217 | The Part A / Part B dispatch split is a check that cannot fail | DONE | 8.1 | 2026-08-19 |
 |  | L-207 | The citation prompt -- the checker asks the fuzzy question | DONE | 7.6 | 2026-08-18 |
 |  | L-220 | A patch updates the body but not the anchor, date or description | DONE | 7.6 | 2026-08-20 |
@@ -508,6 +513,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-201 | Request selection -- ask the builder for fewer rows | DONE | 5.4 | 2026-08-18 |
 |  | L-205 | The runner's verdict lines carry evidence | DONE | 5.4 | 2026-08-18 |
 |  | L-212 | maintenance_run names every file the run wrote | DONE | 5.4 | 2026-08-19 |
+|  | L-258 | Significant figures at rest, and the three changes it made | DONE | 5.4 | 2026-08-29 |
 |  | L-003 | Protocol amendment candidates (for v3.29) | DONE | 5.4 | 2026-06-22 |
 |  | L-062 | README refresh -- fold in handoff + ledger developments | DONE | 5.1 | 2026-07-28 |
 |  | L-153 | Restore "Who Tony Is" framing into resident protocol (protocol) | DONE | 5.1 | 2026-07-21 |
@@ -3750,10 +3756,68 @@ Cannot Fail Is Not Passing; L-236; L-237.
   golden compared against the STORED file; the three Node suites, with
   Node's absence REPORTED rather than skipped; served-cache structural
   validation; config feature-shape validation.
-**Gap:** designed, not built.
-- **Note:** RICE 4/4/80/4 -> 3.2 is Claude's proposed score.
-  **Tony-action (decide):** confirm or redirect.
-**Ref:** L-188 (the orrery-side maintenance runner this mirrors); L-235.
+- **Evidence, 2026-08-29.** Three of the four defects in the Sun
+  ship were on the gallery side and no orrery check could reach any
+  of them: Pages serving no `.py` at all, orphan info markers in the
+  shared renderer, and `objects_config.json` drifting from
+  `constants_new.py`. Measured at gallery `c367b262`: nothing named
+  maintenance, runner or run_all anywhere in the repo, and the one
+  real suite -- `tools/test_gallery_cache_builder_offline.py`, 149
+  checks -- sits in no routine.
+- **Two checks the first roster did not have**, each of which would
+  have caught one of that day's failures. *(a) A served-reachability
+  check:* fetch ONE file per critical-path family from the LIVE site
+  and require 200 -- an assembler module, the coverage index, a
+  positions file. It has to run against the CDN, because that is the
+  thing that was broken. *(b) A store-drift REPORT:* thirty entries
+  in `objects_config.json` already carry `orrery_constant` pointers
+  like `constants_new.py::RADIATIVE_ZONE_AU`, and nothing follows
+  them. A read-only checker that fetches `constants_new.py` at the
+  orrery HEAD SHA and reports every pointer whose value disagrees
+  would have caught 0.7 against 0.713 the moment it happened.
+- **(b) is NOT the transport and does not replace segment 2.** It
+  moves nothing and fixes nothing. It converts a silent hole into a
+  loud one for a fraction of the cost, and it can be built BEFORE
+  the transport rather than instead of it.
+- **The 2026-08-29 handoff says this work has no ledger handle. It
+  does** -- this one, opened 2026-08-25. Recorded so the next
+  session does not mint a second.
+- **BUILT 2026-08-29 and delivered as `maintenance_run.py` for the
+  gallery repo root.** Two moments rather than one, which is where
+  it departs from the orrery's runner: the plain run is offline and
+  goes before a commit, and `--live` goes after a push, because the
+  Jekyll failure existed only on the deployed site and only after a
+  push. Three states, not two: PASS, FAIL, and UNREACHABLE, with
+  unreachable counted separately and never folded into a passing
+  total.
+- **Roster.** Offline: the module atlas generator; the 149-check
+  cache builder suite; the three Node smoke suites, with Node's
+  absence REPORTED rather than skipped; and the artifact-1
+  assembler test, report-only. Live: served reachability against
+  the CDN, and the store-drift report.
+- **Two findings on its first run**, both recorded: L-262, the
+  framing smoke test that has never run; and L-263, a rounded copy
+  in `objects_config.json`.
+- **One design change the sandbox forced.** The first version read
+  any non-200 as a missing file, and a blocking proxy answering 403
+  reported as the whole site being gone. Only a 404 is missing now;
+  anything else is unreachable, and a blanket failure across every
+  file reports as unreachable rather than crying wolf. A real
+  Jekyll failure is asymmetric -- the `.py` files 404 while the
+  page returns 200 -- and that asymmetry is the signal.
+- **No dashboard entry, deliberately.** The dashboard lives in the
+  orrery, so a button there would reach into a sibling directory,
+  which is the same cross-repo reach that put this runner in the
+  gallery. VS Code's Run button from the gallery root instead.
+**Gap:** built and delivered, not yet committed. **Tony-action
+(do):** commit `maintenance_run.py` to the gallery repo root; this
+item closes on that commit. Left OPEN rather than marked DONE in
+advance, because a ledger row claiming a file is committed before
+it is committed is a claim nothing can check.
+- **Note:** RICE 4/4/80/4 -> 3.2, confirmed by Tony 2026-08-29.
+**Ref:** L-188 (the orrery-side maintenance runner this mirrors);
+L-235; L-258 (the store drift check would have caught it); L-259;
+L-262 and L-263 (its first two findings).
 
 #### [L-237] Artifact 1's golden record is stale and needs re-cutting
 <!-- L:237 status:OPEN upd:2026-08-25 section:A flag: rice:3/4/90/1 -->
@@ -3765,6 +3829,12 @@ Cannot Fail Is Not Passing; L-236; L-237.
   elements); `warnings`, which still carries "served_window is null",
   untrue since 2026-07-22; and `feature_keys`, which gains the Sun's
   six.
+- **Its T3 check is also stale, surfaced 2026-08-29** by the gallery
+  maintenance runner's first execution (L-236). T3 asserts Earth's
+  feature set and now sees the Sun's five families beside it, so
+  the suite exits 1 on an expectation written before the Sun
+  landed. It is carried as report-only in the runner and does not
+  gate, but it is noise on every run until the expectation moves.
 **Gap:** re-cut it. Pair with the L-235 T5 fix -- re-cutting a record
 that nothing compares against buys very little.
 - **Note:** RICE 3/4/90/1 -> 10.8 is Claude's proposed score.
@@ -4505,12 +4575,27 @@ protocol Part 3.
 - **Note:** RICE 3/3/70/2 is Claude's proposed score. Reach 70 because
   the status line changes what every future provenance session reads
   first.
-  **Tony-action (decide):** confirm or redirect the score, and rule on
+  RICE 3/3/70/2 confirmed by Tony 2026-08-29.
+  **Tony-action (decide):** rule on
   which dict joins the beta (`spectral_subclass_temps`, 9 entries and
   flagged by Fable in August as an uncited physical claim inside the
   store, or `CENTER_BODY_RADII`, 18 entries).
 **Gap:** the status pass has not started. The beta is scoped and
 unscheduled.
+- **2.9 (2026-08-28).** The Gate Binds at SERVING becomes The Gate
+  Binds at EXPORT, on Tony's ruling: provenance is settled before a
+  value leaves the orrery for the gallery cache, because there is no
+  provenance checker in the gallery. Verified before the edit rather
+  than assumed -- `provenance_scanner.py` exists only in the orrery
+  repo, and the nightly builder scores nothing. A gate at
+  publication would sit downstream of the last instrument in
+  existence, which is A Check That Cannot Fail Is Not Passing in the
+  pipeline layer. Recorded in protocol v3.46.
+- **2.10 (2026-08-29).** The Store Carries the Verified Figure
+  [CRITICAL], under Report to the Figures You Have, which governed
+  REPORTING and left the stored value uncovered. Founding case and
+  fallout are at L-258. Recorded in protocol v3.47 -- a day late,
+  and that delay is itself recorded there.
 **Ref:** L-181 (single-source-of-truth constant layer); L-192 (the
 attachment window); L-249 (Earth interior, the founding case for
 measured-is-the-goal); L-253 (A Breadcrumb Must Not Cite); L-257 (the
@@ -4544,16 +4629,249 @@ Skill, resident protocol Part 3.
   access-tested, and whether a value is measured or a pick from a
   range. No astronomy, so ONE leg, no worksheets, and none of the
   dispatch machinery.
-- **Note:** RICE 2/3/60/2 is Claude's proposed score.
-  **Tony-action (decide):** confirm or redirect.
+- **Note:** RICE 2/3/60/2, confirmed by Tony 2026-08-29.
 **Gap:** all three unbuilt. (a) is independent and can precede the
 status pass; (b) and (c) are gated on it.
 **Ref:** L-256; A Check That Cannot Fail Is Not Passing [CRITICAL],
 resident protocol Part 3.
 
+#### [L-260] Sun exhibit finishing items: axis units and the phone
+<!-- L:260 status:OPEN upd:2026-08-29 section:A flag: rice:3/3/90/1 -->
+- **The axes carry no units.** Tick labels read "150k" with nothing
+  saying what of. This is copied from the Solar System Explorer's own
+  convention -- blank axis titles, `title: { text: '', font: { size:
+  1 } }` -- so it is not a deviation the Sun exhibit introduced.
+- **It lands differently here.** The Explorer's frame is always about
+  35 AU. The Sun's runs from 0.26 AU on arrival to 173,250 AU with the
+  gravitational influence drawn, so a visitor has no way to know the
+  number is AU rather than km. Every hover on the page carries km AND
+  AU per the standing convention; the axes are the one surface that
+  does not. It is the only thing on the live page that is arguably
+  wrong rather than merely unfinished.
+- **Mobile is untested, and it cannot be delegated.** Nobody has
+  opened the exhibit on a phone. The legend is an eighteen-entry
+  overlay panel and the modebar is hidden below 768 px by the
+  gallery's existing convention, so the phone experience is unknown --
+  on a site whose whole premise is that it works on one. Deferred
+  deliberately by Tony on 2026-08-29 because the major thing was done.
+  **Tony-action (do):** open
+  `palomasorrery.com/interactive.html?exhibit=sun` on a phone and say
+  what it does. Mode 5 is his render and his eyes.
+- **Note:** RICE 3/3/90/1, confirmed by Tony 2026-08-29.
+**Gap:** both open. The axis fix is small and can ride with any next
+gallery patch; the phone read is Mode 5.
+**Ref:** L-259 (the exhibit itself); orrery-coding-conventions 1.6
+(the AU hover convention the axes do not follow); gallery-pipeline 1.2
+(the 768 px breakpoint).
+
+#### [L-262] The framing smoke test has never run against the page
+<!-- L:262 status:OPEN upd:2026-08-29 section:A flag: rice:3/4/95/1 -->
+- **Found by the gallery maintenance runner's first execution**
+  (L-236), 2026-08-29, which is the argument for the runner made by
+  the runner.
+- **`documentation/smoke_framing.js` slices `interactive.html`
+  between two markers**, `function gridDtick(span) {` and
+  `async function fetchText(url) {`, and exits immediately with
+  "FAIL: helpers not found in page" when it cannot find them.
+- **Neither marker has ever existed in that file.** Measured across
+  the whole history of both files at gallery `c367b262`: `gridDtick`
+  appears in exactly one commit, `0cabfb3` (2026-08-26, L-238), and
+  only inside the smoke test itself. The page has `fetchTextOrThrow`
+  and no `gridDtick` at all. The suite was written against a patched
+  HTML that was never committed in that shape.
+- **It has been dead since the day it landed**, three days, and
+  nothing surfaced it because the file sits in `documentation/` and
+  was in no routine. Put the check where it runs.
+- **Note:** RICE 3/4/95/1, confirmed by Tony 2026-08-29. The fix is
+  either re-pointing the markers at the page's real helpers or
+  extracting those helpers so both the page and the test read one
+  copy -- a design call, not a rename, because the page currently
+  inlines its framing logic.
+**Gap:** the suite cannot run. Decide which fix, then do it.
+**Ref:** L-236 (the runner that found it); L-238 (the commit that
+added the suite); A Check That Cannot Fail Is Not Passing [CRITICAL],
+resident protocol Part 3.
+
+#### [L-263] The served chromosphere value is a rounded copy
+<!-- L:263 status:OPEN upd:2026-08-29 section:A flag: rice:2/3/95/1 -->
+- **Found by the store-drift check** (L-236) on its first run against
+  real data, 2026-08-29.
+- **`CHROMOSPHERE_PHYSICAL_RADII` is 1.00287480236 in the orrery and
+  1.0028748 in the gallery's `data/objects_config.json`.** They agree
+  to nine significant figures, so nothing is drawn wrong -- the
+  difference is about two parts in a billion of a solar radius.
+- **The class is the point, not the size.** 1.0028748 is the correct
+  figure to REPORT; it is not a second thing to STORE. A copy held at
+  a different precision is a shadow constant one digit at a time,
+  which is One Value, One Home (provenance-discipline 2.7).
+- **Tony's ruling, 2026-08-29**, and it is why the check is exact
+  rather than tolerant: significant figures are checked against the
+  store, not against whether a person catches them. How many figures
+  a value should carry is settled once, in the orrery. The gallery
+  carries what the store carries.
+  **Tony-action (do):** set the value in
+  `/objects/0/features/solar_atmosphere/chromosphere` to the store's
+  number. The runner reports it every run until it matches.
+- **It also names the transport hole from the other side.** The
+  orrery holds a DERIVATION and the gallery holds a NUMBER, so
+  changing `CHROMOSPHERE_PHYSICAL_KM` moves one and not the other.
+  Fixing this value does not fix that.
+- **Note:** RICE 2/3/95/1, confirmed by Tony 2026-08-29.
+**Gap:** one value in one file.
+**Ref:** L-236; L-258 (The Store Carries the Verified Figure);
+segment 2 in `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`
+Section 5a.
+
 ## PENDING ACTION (Tony-side)
 
 ## C. RECONCILED LEDGER -- DONE (closed; for the record, do not re-do)
+
+#### [L-258] Significant figures at rest, and the three changes it made
+<!-- L:258 status:DONE upd:2026-08-29 section:C flag: rice:2/3/90/1 -->
+- **The rule.** provenance-discipline 2.10 adds The Store Carries the
+  Verified Figure [CRITICAL] under Report to the Figures You Have,
+  which governed REPORTING and left the stored value uncovered. Where
+  a source gives a verified figure more precise than the stored value,
+  the store carries the verified figure; rounding happens at the
+  reporting step, never at rest.
+- **The founding case is why it is [CRITICAL].** `RADIATIVE_ZONE_AU`
+  held 0.7 beside its own comment recording that it rounded 0.713 --
+  the store saying it was rounding, and rounding anyway, in a value
+  drawn on a public page. A rounded value at rest is a second, less
+  precise store of a number that already exists, and it reads as a
+  measurement to everything downstream.
+- **Narrowed in the same breath**, against the two cases the rule
+  would otherwise damage: a pick from a range stays a declared choice,
+  and a visibility stylization promotes when the physical value
+  becomes drawable rather than for want of digits.
+- **`RADIATIVE_ZONE_AU` 0.7 -> 0.713.** Christensen-Dalsgaard, Gough &
+  Thompson (1991), ApJ 378:413 measure the convection-zone DEPTH at
+  0.287 +/- 0.003 solar radii; the base of the zone is 1 - 0.287. A
+  subtraction, so decimal PLACES govern: three, matching the stated
+  uncertainty. Basu & Antia (2004) give 0.7133 +/- 0.0005 and are NOT
+  adopted -- a different work, so taking it would be a re-sourcing
+  rather than a rounding.
+- **`INNER_CORONA_RADII` re-homed; the value is unchanged at 3.** The
+  citation moved from Golub & Pasachoff (2010) to Lamy, Gilardy,
+  Llebaria, Quemerais & Ernandez, LASCO-C3 24-year photopolarimetry
+  (arXiv:2009.04820), on the access standard: the 2026-08-20
+  nine-source read could locate the textbook only as "Chapter 1",
+  with no figure and no findable position.
+- **An overreach withdrawn in the same pass.** Golub & Pasachoff was
+  first carried here from the `HELMET_CUSP_RADII` finding as though
+  that removal transferred. It does not: that read was decisive about
+  what to REMOVE and silent about what to KEEP, and it concerned
+  helmet-streamer extent, a different claim. The citation still moved,
+  on the narrower and correct access ground.
+- **Three `# Cross-checked:` legs retired**, following 2.9's
+  retirement of the two-annotation criterion for V_CROSS_CHECKED.
+  Concurrence is not evidence.
+- **The corrected value did not reach the site by rebuilding.** The
+  instruction "re-run the cache builder and it will pick up the new
+  value" was wrong: the builder passes feature constants THROUGH from
+  `data/objects_config.json` and has never read `constants_new.py`.
+  The value reached the live page by a hand patch. That is segment 2
+  failing its first real test, one day after the 2026-08-28 handoff
+  predicted it in the abstract.
+- **Two pinned literals, one of which fired.**
+  `test_radiative_zone_au_derived_from_solar_radius` failed correctly
+  the moment the value moved. It is named as a derivation test while
+  holding a MEASURED value, which is how it survived the 2026-08-13
+  sweep of fifty-five pins.
+  `test_core_au_derived_from_solar_radius` is the identical shape with
+  0.2 and was silent only because `CORE_AU` has not moved. Both are
+  now bounds on the RATIO against their published ranges; neither
+  holds a copy of a measured value.
+- **The bump's own record is the last thing that closed, and it is
+  the lesson.** Steps 1, 2 and 4 of the four-step binding rule
+  (ledger-and-session-records 1.9) travelled together on 2026-08-29 --
+  the version line, `skills_index.py`, the commit. Step 3, the
+  protocol version-history entry, did not, and the manifest going
+  current on its own DISGUISED the omission: the protocol looked
+  updated because half of it was. Found the same day by a later
+  session reading the manifest against the history, not by any check.
+  That is L-230 predicting itself, and the detection it designs is
+  still unbuilt.
+- **Note:** RICE 2/3/90/1, confirmed by Tony 2026-08-29, recorded for
+  the archive rather than for scheduling.
+**Closed 2026-08-29** by `patch_ledger_and_protocol_20260829.py`,
+which supplied the last two pieces: the ratio bounds and protocol
+v3.47.
+**Ref:** L-230 (detection for the step that does not fire); L-256
+(the 2.8 and 2.9 bumps); L-253; L-249; L-259; segment 2 in
+`documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md` Section 5a.
+
+#### [L-259] The Sun exhibit ships -- the assembler runs in a visitor's browser
+<!-- L:259 status:DONE upd:2026-08-29 section:C flag: rice:5/5/100/3 -->
+- **Live 2026-08-29** at
+  `palomasorrery.com/interactive.html?exhibit=sun`, unlinked from the
+  landing page, carrying inline credit, Mode 5 accepted by Tony.
+  Eighteen shells from the core to the Sun's gravitational influence
+  at 150,000 AU, each carrying its source in its hover text.
+- **What is new is not the picture.** The shared Python assembler ran
+  in a VISITOR'S browser, against the served cache, and handed its
+  feature report to JavaScript to draw. That is architecture B' and
+  Section 3a's Python-assembles / JavaScript-draws split, working end
+  to end outside Tony's machine for the first time.
+- **A second exhibit on a page public since July**, reached by the
+  `?exhibit=` parameter Section 2a designed for exactly this. The
+  Solar System Explorer is untouched and still loads with no
+  parameter. Nothing was promoted from a dev page.
+- **Four defects, three of which no existing check could reach.**
+  GitHub Pages ran Jekyll and served NO `.py` file in the repository
+  at all, so `gallery/assembler/` returned 404 -- invisible to
+  `python -m http.server`, where every previous test had run, and
+  fixed by one empty `.nojekyll`. The scene axes were pinned, so
+  nothing the legend did could move the frame. Nine info markers were
+  drawn with no shells around them, because `feature_renderers.js`
+  sent a shell's geometry to the legend when it exceeded the frame and
+  left its marker behind -- a defect that PREDATES this exhibit, lives
+  in the shared renderer, and Earth would have hit. And segment 2
+  failed its first real test (L-258).
+- **The Mode 5 claim, narrowed.** Section 5a justifies the braid's
+  ordering by saying a wrong radius becomes something Tony's EYES can
+  catch. `RADIATIVE_ZONE_AU` moved 1.9 percent of a drawn radius --
+  invisible at any zoom -- and was caught on the live page by READING
+  THE HOVER. The argument survives and the mechanism was misnamed: the
+  geometry catches gross errors, and the hover catches everything
+  else, because it carries the value, the units and the source.
+  Drawing a feature is what puts its provenance in front of a reader
+  for the first time.
+- **Measured, not carried:** eighteen drawable shells, not nineteen.
+  Eighteen named traces plus eighteen info-marker companions through
+  the real renderer at gallery `ac9a5c7b`. Counts of "the Sun's
+  nineteen values" elsewhere refer to `constants_new.py` entries, a
+  different denominator.
+- **Note:** RICE 5/5/100/3, confirmed by Tony 2026-08-29.
+**Ref:** L-234 (part-by-part rendering); L-154 (the feature-rendering
+layer this discharges for one body); L-258; L-260 (what the exhibit
+still owes); `documentation/HANDOFF_20260829_sun_ships.md`.
+
+#### [L-261] Plain speech becomes the default register, not a mode
+<!-- L:261 status:DONE upd:2026-08-29 section:C flag: rice:4/4/95/1 -->
+- **Tony's instruction, 2026-08-29:** "please use plain speech in your
+  chat as the default."
+- **What was wrong with the old wording.** The Register Rule scoped its
+  plain-speech rules to an EXPLANATION register -- explanations, design
+  rationale, as-built narrative. Ordinary delivery prose was not in
+  that list, so it sat outside the three checks and passed them by not
+  being subject to them.
+- **The case.** "I left it out of the patch rather than expand scope
+  into the protocol without your word; it's captured as L-258's Gap
+  with a Tony-action." Tony: "I don't follow." Three project labels --
+  scope expansion, the ledger Gap field, the Tony-action tag -- in one
+  clause, in a sentence that was not explaining anything, inside a
+  message that was otherwise readable. Check 2 asks whether a sentence
+  points at a label instead of saying the thing; it never ran, because
+  the register it belonged to had not been entered.
+- **What changed.** The compressed voice keeps its home in
+  `PROJECT_INSTRUCTIONS.md` and in the skills, where a line is
+  reference somebody scans because they already own the idea. It
+  leaves the chat. Recorded in protocol v3.47.
+- **Note:** RICE 4/4/95/1, confirmed by Tony 2026-08-29. Reach 4
+  because the rule applies to every message in every session.
+**Ref:** Register Rule, resident protocol Part 2; L-258 (the patch the
+opaque sentence was about).
 
 #### [L-255] Skill bumps of 2026-08-26 -- handle reserved, block never written
 <!-- L:255 status:DONE upd:2026-08-28 section:C flag: rice:2/3/40/1 -->

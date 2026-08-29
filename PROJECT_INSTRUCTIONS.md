@@ -1,7 +1,7 @@
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.46 | August 28, 2026
+Tony Quintanilla, PE | Claude | v3.47 | August 29, 2026
 
-Cut from a263f73d at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 8b762e04 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -202,15 +202,21 @@ Separate the Problems - Conflated issues lead to complex solutions.
 The Conversation is the Point - Understanding emerges through dialogue. Can't be shortcut.
 
 Register Rule
-The protocol's compressed voice ("the SHA is the round trip") is reference  -- 
-a line you scan when you already own the idea. Explanations, design rationale,
-as-built narrative, and conversational responses are a different job and take
-a different voice.
+PLAIN SPEECH IS THE DEFAULT. Everything Claude says in conversation --
+answers, delivery notes, findings, questions, the sentence explaining
+why something was left out -- is written the way a knowledgeable person
+talks.
 
-In explanation register:
+The protocol's compressed voice ("the SHA is the round trip") keeps its
+home in THIS document and in the skills, where a line is reference
+somebody scans because they already own the idea. It does not belong in
+chat. Plain speech is not a register Claude enters for explanations; it
+is how Claude writes unless Tony asks for something else.
+
+Always, and not only when explaining:
 - Lead with the claim in one plain sentence. Detail after.
 - One idea per sentence. Two subordinate clauses means split it.
-- No aphorisms. In an explanation, say what happened, not the shorthand.
+- No aphorisms. Say what happened, not the shorthand.
 - Project terms get a short gloss on first use every session.
   Claude resets; Tony does not re-read.
 
@@ -255,6 +261,16 @@ general idea and sometimes not even that." He had already tried the
 obvious workarounds: a second model as translator, which added a layer
 and introduced errors, and asking for executive summaries, which helped
 only partly. The rule's own backstop was the part that had failed.)
+
+(Amended August 29, 2026, on Tony's instruction: "please use plain
+speech in your chat as the default." The earlier wording scoped the
+plain-speech rules to an EXPLANATION register, which left ordinary
+delivery prose outside them -- it passed the three checks by not being
+subject to them. The case: "I left it out of the patch rather than
+expand scope into the protocol without your word; it's captured as
+L-258's Gap with a Tony-action." Tony: "I don't follow." Three
+project labels in one clause, in a sentence explaining nothing, in a
+message that was otherwise fine. Handle L-261.)
 
 Procedural Criticality
 Not all rules carry equal weight. The experienced operator knows which checks
@@ -986,6 +1002,59 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.47 (August 29, 2026): One rule amended, and one skill bump
+recorded a day late.
+
+The Register Rule [Part 2] makes PLAIN SPEECH THE DEFAULT. Tony's
+instruction, 2026-08-29: "please use plain speech in your chat as the
+default." The earlier wording made plain speech a REGISTER -- one
+entered for explanations, design rationale and as-built narrative --
+so ordinary delivery prose sat outside the three checks and passed
+them by not being subject to them. The compressed voice keeps its
+home in this document and in the skills, where a line is reference
+somebody scans because they already own the idea. It leaves the chat.
+
+The case that earned it, from the same session and about this same
+patch: "I left it out of the patch rather than expand scope into the
+protocol without your word; it's captured as L-258's Gap with a
+Tony-action." Tony: "I don't follow." Three project labels in one
+clause, in a sentence that was not explaining anything. Handle L-261.
+
+provenance-discipline 2.9 -> 2.10 (L-258). The Store Carries the
+Verified Figure [CRITICAL], added under Report to the Figures You
+Have, which governed REPORTING and left the stored value uncovered.
+Where a source gives a verified figure more precise than the stored
+value, the store carries the verified figure; rounding happens at the
+reporting step, never at rest. Founding case: RADIATIVE_ZONE_AU held
+0.7 beside its own comment saying it rounded 0.713 -- the store
+recording that it was rounding, and rounding anyway, in a value drawn
+on a public page. Narrowed in the same breath against the two cases
+it would damage: a pick from a range stays a declared choice, and a
+visibility stylization promotes when the physical value becomes
+drawable rather than for want of digits.
+
+Tony's ruling, 2026-08-29, and his reason for making it a SKILL rule
+rather than a decision: it resolves the same way next month, for a
+different constant, in a different file. That is Method Belongs to
+the Skill applied to its own layer.
+
+The bump's own record is its own lesson. Steps 1, 2 and 4 travelled
+together on August 29 -- the version line, skills_index.py, the
+commit. Step 3, this entry, did not. The manifest going current on
+its own DISGUISED the omission, exactly as the binding rule warns:
+the protocol looked updated because half of it was. It surfaced the
+same day, in the next session, by reading the manifest against the
+history -- not by any check, because the check that would catch it is
+L-230, designed and unbuilt.
+
+Recorded a day late and said so, rather than backfilled as though it
+had been here. A document whose subject is anchors being true is the
+wrong place to be casual about when something was written.
+
+Version history: v3.44 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.46 (August 28, 2026): No rule changed in this document. One skill
 correction, recorded here because the recording is the fourth link of
 L-230's chain and the only one that does not fire on its own.
@@ -1069,46 +1138,6 @@ instead of as an idea. Examples Go Stale Like Values [QUALITY] is the
 rule that follows.
 
 Version history: v3.42 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.44 (August 26, 2026): No rule changed in this document. TWO skill
-bumps and one long build, recorded here because the recording is the
-fourth link of the chain L-230 named and the only one that does not
-fire on its own.
-
-(1) provenance-discipline 2.6 -> 2.7, three sections, all gaps rather
-than refinements. One Value, One Home [CRITICAL] states positively what
-No Shadow Constants only prohibited: a numeric value's home is
-constants_new.py, and everything else -- drawing, hover string, tooltip,
-comment, and code that cannot run -- references it. Its scope boundary
-is stated in the same breath, because without it the rule reads as
-hauling n_points and marker_size into the constants file: measured
-values migrate, declared drawing parameters do not. Report to the
-Figures You Have [QUALITY] had no home in any skill; compute at full
-precision, report to the figures the least precise input supports, and
-a subtraction is governed by decimal places. A Breadcrumb Must Not Cite
-[CRITICAL] records that a Ref line or a bare URL inside the scanner's
-thirty-line lookback becomes a citation for the unit beside it, so an
-honest pending-sourcing note carries a ledger handle and nothing else.
-
-(2) orrery-coding-conventions 1.5 -> 1.6 (L-249): the angular step in
-Marker Separation for Near-Equal Radii becomes an outcome rather than a
-fixed 20 degrees, with 20 for the solar skin stack and 10 for Earth's
-crust as the two worked cases. The required step depends on frame width
-and frame width depends on which shells are enabled, so one global
-number was always going to be wrong somewhere.
-
-The founding build was L-249, Earth's interior boundaries. Five patches
-in one evening took four radius fractions that had been approximate
-values taken by hand in 2024 and made them derivations of sourced radii
-in constants_new.py, with the hover prose interpolating the same
-constants. Three shells moved; the lower mantle moved 290 km. Two
-defects of the class this protocol exists to catch were found in the
-work itself rather than afterwards: a reference true of a constant and
-false of the note beneath it, and a region check whose slice came out
-empty so it passed having examined nothing. Handles L-249, L-253,
-L-254, L-255. Version history: v3.41 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

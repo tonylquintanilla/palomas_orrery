@@ -316,6 +316,30 @@ run.
 (Moved down from the resident protocol on 2026-08-27 when v3.45
 made a fourth entry.)
 
+v3.43 (August 25, 2026): One rule added, and it is a generalization
+rather than a new idea. "The Braid -- The Artifact Orders the Work"
+enters Part 3 directly after The Artifact Bounds the Audit, which it
+extends by one axis: that rule bounds which values are in scope, this
+one bounds which are in scope NEXT, for any correctness program rather
+than for provenance alone. Origin: Tony's August 22 ruling had lived
+only in the master plan, where it carries SEQUENCING authority for the
+gallery. He was applying it across the constants work too -- from
+memory, because it was written nowhere that fires. On August 25 a
+constants migration ran global and did not terminate: one conversion
+factor led to a shadow name, to three aliases, to a second constant at
+38 sites across 11 modules, in one evening, with zero movement on the
+artifact that ships. Tony's own framing, and the reason this entry
+exists: "it is a meta-principle. its not even in the protocol as such."
+The section's operative additions beyond the master plan's version are
+the discovery/remediation split -- discovery enumerates and fixes
+nothing, so it terminates -- and one ledger row per CLASS rather than
+per instance. Handle L-250. Version history: v3.40 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-08-28 when v3.46
+made a fourth entry.)
+
 ### Preserved verbatim: v3.29 Technical lessons (now field notes in skills)
 
 - Cache: cache[name]['elements'] (nested dict)

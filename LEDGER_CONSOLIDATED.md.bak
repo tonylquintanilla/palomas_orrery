@@ -258,7 +258,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*156 live items; 142 need attention (`!`); 155 RICE-scored; 95 closed (section C + O.Done/W.Done); 6 retired (never reused): L-059, L-081-084, L-255. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*156 live items; 142 need attention (`!`); 155 RICE-scored; 96 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -530,6 +530,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-112 | Gallery builder Pass 5: two-reviewer Pass-2 remediation | DONE | 2.8 | 2026-07-10 |
 |  | L-110 | GPT competitive cross-check remediation (builder Pass 4) | DONE | 2.7 | 2026-07-10 |
 |  | L-116 | New skill: gallery-cache-builder (Move 2 of the skills update) | DONE | 2.5 | 2026-07-12 |
+|  | L-255 | Skill bumps of 2026-08-26 -- handle reserved, block never written | DONE | 2.4 | 2026-08-28 |
 |  | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | DONE | 2.2 | 2026-07-15 |
 |  | L-202 | JSON worksheet format, with markdown as fallback | DONE | 2.2 | 2026-08-18 |
 |  | L-213 | Orbit cache backup fires on IMPORT, not on cache write | DONE | 2.2 | 2026-08-19 |
@@ -4553,6 +4554,56 @@ resident protocol Part 3.
 ## PENDING ACTION (Tony-side)
 
 ## C. RECONCILED LEDGER -- DONE (closed; for the record, do not re-do)
+
+#### [L-255] Skill bumps of 2026-08-26 -- handle reserved, block never written
+<!-- L:255 status:DONE upd:2026-08-28 section:C flag: rice:2/3/40/1 -->
+- **What the handle covers.** The two skill bumps and the protocol
+  version entry delivered by
+  `patch_L255_1_skill_bumps_and_protocol_entry.py` on 2026-08-26, run
+  the same evening. Four files, all-or-nothing:
+  `provenance-discipline` 2.6 -> 2.7, `orrery-coding-conventions`
+  1.5 -> 1.6, `PROJECT_INSTRUCTIONS.md` to v3.44 with v3.41 moving out,
+  and `PROJECT_INSTRUCTIONS_HISTORY.md` receiving it.
+- **provenance-discipline 2.7 -- three sections, all gaps rather than
+  refinements.** One Value, One Home [CRITICAL] states positively what
+  No Shadow Constants only prohibited, with its scope boundary in the
+  same breath: measured values migrate to `constants_new.py`, declared
+  drawing parameters do not. Report to the Figures You Have [QUALITY]
+  had no home in any skill -- compute at full precision, report to the
+  figures the least precise input supports. A Breadcrumb Must Not Cite
+  [CRITICAL] records that a `# Ref:` line or bare URL inside the
+  thirty-line lookback becomes a citation for the unit beside it, so an
+  honest pending-sourcing note carries a ledger handle and nothing else
+  (L-253).
+- **orrery-coding-conventions 1.6.** Marker Separation for Near-Equal
+  Radii keeps its rule and loses its fixed number: the angular step is
+  an OUTCOME, readable separation at the scale the family renders at,
+  with 20 degrees for the solar skin stack and 10 for Earth's crust as
+  the two worked cases. The required step depends on frame width and
+  frame width depends on which shells are enabled, so one global number
+  was always going to be wrong somewhere.
+- **Verified at `a263f73d`, not inferred from the patch's own report.**
+  `orrery-coding-conventions` reads 1.6; the v3.44 entry is resident;
+  v3.41 appears once, in history; the patch script is archived in
+  `documentation/`. `provenance-discipline` reads 2.8 rather than 2.7
+  because L-256 bumped it again on 2026-08-27 -- the 2.7 content is
+  present and intact beneath it.
+- **The failure this row records is the ledger gap itself.** The handle
+  was reserved by a patch filename and cited in the protocol's version
+  entry, and the status authority carried nothing. The plan carries
+  SEQUENCING authority and the ledger carries STATUS authority (L-221),
+  so a handle living only in a plan or a filename is unfindable by the
+  document that is supposed to answer for it. Detected 2026-08-28 by a
+  patch that printed the gap rather than filling it blind.
+- **Why a handle can be reserved before its row exists.** A patch is
+  named for its handle before it runs, and the row is normally written
+  in the same session. Here the session ended at the push. The fourth
+  link of L-230's chain fired; the ledger row is a fifth step nobody
+  had named.
+**Ref:** L-230 (the four-link skill-bump chain); L-253 (A Breadcrumb
+Must Not Cite); L-249 (the Earth interior build this session served);
+L-256 (the 2.8 bump, which records this gap as a class); L-225 (the
+same shape, recorded in the master plan 2026-08-23).
 
 #### [L-217] The Part A / Part B dispatch split is a check that cannot fail
 <!-- L:217 status:DONE upd:2026-08-19 section:C flag: rice:3/3/90/1 -->

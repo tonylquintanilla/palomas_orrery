@@ -736,25 +736,39 @@ MOVED_NOTE = (
 
 
 def read_guarded(path, name, want_md5):
-    """Read a file and refuse unless it is byte-for-byte what we expect."""
+    """Read a file and refuse unless its CONTENT is what we expect.
+
+    The guard is computed on the LF form, not on the raw bytes. A Windows
+    tool that writes in text mode -- ledger_index.py among them -- flips
+    a whole file to CRLF without changing a character of it, and git
+    normalises that back to LF on commit, so the repo and the working
+    copy legitimately disagree byte-for-byte while agreeing completely on
+    content. Guarding the raw bytes refuses that, which is a false alarm
+    on the one check that has to be believed.
+
+    Returns (content, was_crlf). The style is carried so the file is
+    written back the way it was found.
+    """
     print("")
     print("target :", path)
     if not os.path.isfile(path):
         print("REFUSED: no such file.")
-        return None
+        return None, False
     with open(path, "rb") as fh:
         raw = fh.read()
-    actual = hashlib.md5(raw).hexdigest()
-    print("md5    : %s (expected %s)" % (actual, want_md5))
+
+    was_crlf = b"\r\n" in raw
+    content = raw.replace(b"\r\n", b"\n") if was_crlf else raw
+
+    actual = hashlib.md5(content).hexdigest()
+    print("md5    : %s (expected %s)%s"
+          % (actual, want_md5, "   [CRLF working copy]" if was_crlf else ""))
     if actual != want_md5:
         print("REFUSED: %s is not in the state this patch expects." % name)
         print("         Nothing written to any file. Re-cut the patch")
         print("         against the current bytes.")
-        return None
-    if b"\r\n" in raw:
-        print("REFUSED: CRLF line endings; this patch expects LF.")
-        return None
-    return raw
+        return None, False
+    return content, was_crlf
 
 
 def apply_literal(text, edits):
@@ -795,7 +809,7 @@ def main():
 
     # ---- 1. ledger --------------------------------------------------
     path = os.path.join(root, LEDGER)
-    raw = read_guarded(path, LEDGER, LEDGER_MD5)
+    raw, crlf = read_guarded(path, LEDGER, LEDGER_MD5)
     if raw is None:
         return 1
     text = apply_literal(raw.decode("utf-8"), LEDGER_EDITS)
@@ -804,11 +818,11 @@ def main():
     out = text.encode("utf-8")
     if not ascii_ok(raw, out, LEDGER):
         return 1
-    staged.append((path, raw, out))
+    staged.append((path, raw, out, crlf))
 
     # ---- 2. tests ---------------------------------------------------
     path = os.path.join(root, TESTS)
-    raw = read_guarded(path, TESTS, TESTS_MD5)
+    raw, crlf = read_guarded(path, TESTS, TESTS_MD5)
     if raw is None:
         return 1
     text = apply_literal(raw.decode("utf-8"), TESTS_EDITS)
@@ -817,11 +831,11 @@ def main():
     out = text.encode("utf-8")
     if not ascii_ok(raw, out, TESTS):
         return 1
-    staged.append((path, raw, out))
+    staged.append((path, raw, out, crlf))
 
     # ---- 3. protocol: two literal edits, then lift v3.44 out --------
     path = os.path.join(root, PROTO)
-    raw = read_guarded(path, PROTO, PROTO_MD5)
+    raw, crlf = read_guarded(path, PROTO, PROTO_MD5)
     if raw is None:
         return 1
     text = apply_literal(raw.decode("utf-8"), PROTO_EDITS)
@@ -852,11 +866,11 @@ def main():
     out = text.encode("utf-8")
     if not ascii_ok(raw, out, PROTO):
         return 1
-    staged.append((path, raw, out))
+    staged.append((path, raw, out, crlf))
 
     # ---- 4. history: receive v3.44 verbatim -------------------------
     path = os.path.join(root, HISTORY)
-    raw = read_guarded(path, HISTORY, HISTORY_MD5)
+    raw, crlf = read_guarded(path, HISTORY, HISTORY_MD5)
     if raw is None:
         return 1
     text = raw.decode("utf-8")
@@ -871,16 +885,22 @@ def main():
     out = text.encode("utf-8")
     if not ascii_ok(raw, out, HISTORY):
         return 1
-    staged.append((path, raw, out))
+    staged.append((path, raw, out, crlf))
 
     # ---- every guard on every file has passed; now write ------------
     print("")
-    for path, raw, out in staged:
+    for path, raw, out, crlf in staged:
+        # Written back the way it was found. Flipping a 700 KB file's line
+        # endings would show up in GitHub Desktop as every line changed,
+        # burying the eight edits that actually matter.
+        backup = raw.replace(b"\n", b"\r\n") if crlf else raw
+        final = out.replace(b"\n", b"\r\n") if crlf else out
         with open(path + ".bak", "wb") as fh:
-            fh.write(raw)
+            fh.write(backup)
         with open(path, "wb") as fh:
-            fh.write(out)
-        print("WROTE   %s  (%d -> %d bytes)" % (path, len(raw), len(out)))
+            fh.write(final)
+        print("WROTE   %s  (%d -> %d bytes%s)"
+              % (path, len(backup), len(final), ", CRLF" if crlf else ""))
 
     print("")
     print("Next, in this order:")

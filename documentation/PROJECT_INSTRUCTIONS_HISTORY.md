@@ -340,6 +340,49 @@ resident.
 (Moved down from the resident protocol on 2026-08-28 when v3.46
 made a fourth entry.)
 
+v3.44 (August 26, 2026): No rule changed in this document. TWO skill
+bumps and one long build, recorded here because the recording is the
+fourth link of the chain L-230 named and the only one that does not
+fire on its own.
+
+(1) provenance-discipline 2.6 -> 2.7, three sections, all gaps rather
+than refinements. One Value, One Home [CRITICAL] states positively what
+No Shadow Constants only prohibited: a numeric value's home is
+constants_new.py, and everything else -- drawing, hover string, tooltip,
+comment, and code that cannot run -- references it. Its scope boundary
+is stated in the same breath, because without it the rule reads as
+hauling n_points and marker_size into the constants file: measured
+values migrate, declared drawing parameters do not. Report to the
+Figures You Have [QUALITY] had no home in any skill; compute at full
+precision, report to the figures the least precise input supports, and
+a subtraction is governed by decimal places. A Breadcrumb Must Not Cite
+[CRITICAL] records that a Ref line or a bare URL inside the scanner's
+thirty-line lookback becomes a citation for the unit beside it, so an
+honest pending-sourcing note carries a ledger handle and nothing else.
+
+(2) orrery-coding-conventions 1.5 -> 1.6 (L-249): the angular step in
+Marker Separation for Near-Equal Radii becomes an outcome rather than a
+fixed 20 degrees, with 20 for the solar skin stack and 10 for Earth's
+crust as the two worked cases. The required step depends on frame width
+and frame width depends on which shells are enabled, so one global
+number was always going to be wrong somewhere.
+
+The founding build was L-249, Earth's interior boundaries. Five patches
+in one evening took four radius fractions that had been approximate
+values taken by hand in 2024 and made them derivations of sourced radii
+in constants_new.py, with the hover prose interpolating the same
+constants. Three shells moved; the lower mantle moved 290 km. Two
+defects of the class this protocol exists to catch were found in the
+work itself rather than afterwards: a reference true of a constant and
+false of the note beneath it, and a region check whose slice came out
+empty so it passed having examined nothing. Handles L-249, L-253,
+L-254, L-255. Version history: v3.41 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-08-29 when v3.47
+made a fourth entry.)
+
 ### Preserved verbatim: v3.29 Technical lessons (now field notes in skills)
 
 - Cache: cache[name]['elements'] (nested dict)

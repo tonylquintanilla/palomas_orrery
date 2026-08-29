@@ -1,7 +1,7 @@
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.45 | August 27, 2026
+Tony Quintanilla, PE | Claude | v3.46 | August 28, 2026
 
-Cut from 7f4a2f9f at https://github.com/tonylquintanilla/palomas_orrery
+Cut from a263f73d at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -431,7 +431,7 @@ agentic-pre-test             1.2  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
 horizons-orbital-mechanics   1.1  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning
-provenance-discipline        2.8  Scanner runs, audits, citations, constants,
+provenance-discipline        2.10 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
 earth-system-pipeline        1.1  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY
@@ -986,6 +986,43 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.46 (August 28, 2026): No rule changed in this document. One skill
+correction, recorded here because the recording is the fourth link of
+L-230's chain and the only one that does not fire on its own.
+
+provenance-discipline 2.8 -> 2.9 (L-256). The Gate Binds at SERVING
+becomes The Gate Binds at EXPORT. 2.8 was written earlier the same
+evening and placed the gate where the harm lands -- a visitor taking a
+served value as true. Tony's ruling of 2026-08-28 moves it upstream to
+where a check can still run: "I think provenance should be settled
+before it leaves the orrery to the gallery cache. There is no
+provenance checker in the gallery."
+
+Verified rather than assumed before the edit was written.
+provenance_scanner.py exists only in the orrery repo. The nightly
+builder lives in the GALLERY repo and scores nothing -- two mentions of
+provenance in the whole file, one a docstring line recording where its
+copied constants came from, one a warning string. The two repositories
+do not share a checker, so a gate at publication sits downstream of the
+last instrument in existence. That is A Check That Cannot Fail Is Not
+Passing in the pipeline layer rather than in code.
+
+The section now separates WHY from WHERE explicitly, because the
+correction is exactly the kind a future session would undo by
+reasoning from harm rather than from enforceability. Why: serving.
+Where it fires: export. What stays free: drawing.
+
+One consequence raises a priority. objects_config.json is maintained by
+hand in the gallery repo, so the export boundary the gate names is
+today a human copy with no check on it. The cross-repo transport
+becomes the gate's missing enforcement point rather than a defence
+against later drift -- higher than MASTER_PLAN_INTERACTIVE_GALLERY.md
+currently places segment 2, and an amendment that document is owed.
+
+Version history: v3.43 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.45 (August 27, 2026): One rule added, one skill bumped, and the
 rule was earned in the same session that produced the bump.
 
@@ -1072,27 +1109,6 @@ work itself rather than afterwards: a reference true of a constant and
 false of the note beneath it, and a region check whose slice came out
 empty so it passed having examined nothing. Handles L-249, L-253,
 L-254, L-255. Version history: v3.41 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.43 (August 25, 2026): One rule added, and it is a generalization
-rather than a new idea. "The Braid -- The Artifact Orders the Work"
-enters Part 3 directly after The Artifact Bounds the Audit, which it
-extends by one axis: that rule bounds which values are in scope, this
-one bounds which are in scope NEXT, for any correctness program rather
-than for provenance alone. Origin: Tony's August 22 ruling had lived
-only in the master plan, where it carries SEQUENCING authority for the
-gallery. He was applying it across the constants work too -- from
-memory, because it was written nowhere that fires. On August 25 a
-constants migration ran global and did not terminate: one conversion
-factor led to a shadow name, to three aliases, to a second constant at
-38 sites across 11 modules, in one evening, with zero movement on the
-artifact that ships. Tony's own framing, and the reason this entry
-exists: "it is a meta-principle. its not even in the protocol as such."
-The section's operative additions beyond the master plan's version are
-the discovery/remediation split -- discovery enumerates and fixes
-nothing, so it terminates -- and one ledger row per CLASS rather than
-per instance. Handle L-250. Version history: v3.40 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

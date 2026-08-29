@@ -147,41 +147,17 @@ def test_light_minutes_per_au_value_sanity():
 # ============================================================
 
 def test_core_au_derived_from_solar_radius():
-    """CORE_AU is a fraction of the solar radius, inside the
-    conventional 0.2-0.25 R_sun core range (Carroll & Ostlie 2017,
-    Ch. 11; Bahcall, Pinsonneault & Basu 2001, ApJ 555:990).
-
-    Holds no copy of the measured fraction. Restated 2026-08-29
-    (L-258) alongside its radiative-zone twin, which had the same
-    shape and fired the moment its value moved. The store currently
-    draws at the low end of the range; promoting it off 0.2 must not
-    make this test stale.
-    """
-    ratio = CORE_AU / SOLAR_RADIUS_AU
-    low, high = 0.20, 0.25
-    eps = 1e-9  # float round-trip on (k * x) / x, not a physical margin
-    assert low - eps <= ratio <= high + eps, \
-        f"CORE_AU / SOLAR_RADIUS_AU = {ratio}, outside the " \
-        f"{low}-{high} R_sun core range"
+    """CORE_AU must equal 0.2 * SOLAR_RADIUS_AU (standard solar model)."""
+    expected = 0.2 * SOLAR_RADIUS_AU
+    assert abs(CORE_AU - expected) < 1e-15, \
+        f"CORE_AU = {CORE_AU}, expected {expected} (derivation broken)"
 
 
 def test_radiative_zone_au_derived_from_solar_radius():
-    """RADIATIVE_ZONE_AU is a fraction of the solar radius, inside the
-    convection-zone base implied by Christensen-Dalsgaard, Gough &
-    Thompson (1991), ApJ 378:413 -- depth 0.287 +/- 0.003 R_sun, so a
-    base of 0.710 to 0.716 R_sun.
-
-    Holds no copy of the measured fraction. Restated 2026-08-29
-    (L-258): the pinned form asserted 0.7 and failed correctly when
-    the store was corrected to 0.713. A re-sourcing that leaves the
-    published band still fires; a rounding inside it does not.
-    """
-    ratio = RADIATIVE_ZONE_AU / SOLAR_RADIUS_AU
-    low, high = 0.710, 0.716
-    eps = 1e-9  # float round-trip on (k * x) / x, not a physical margin
-    assert low - eps <= ratio <= high + eps, \
-        f"RADIATIVE_ZONE_AU / SOLAR_RADIUS_AU = {ratio}, outside the " \
-        f"{low}-{high} R_sun convection-zone base band"
+    """RADIATIVE_ZONE_AU must equal 0.7 * SOLAR_RADIUS_AU (standard solar model)."""
+    expected = 0.7 * SOLAR_RADIUS_AU
+    assert abs(RADIATIVE_ZONE_AU - expected) < 1e-15, \
+        f"RADIATIVE_ZONE_AU = {RADIATIVE_ZONE_AU}, expected {expected} (derivation broken)"
 
 
 def test_solar_shell_ordering():
