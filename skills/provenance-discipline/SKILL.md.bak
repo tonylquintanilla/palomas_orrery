@@ -1,15 +1,24 @@
 ---
 name: provenance-discipline
-description: Provenance and citation discipline for the Paloma's Orrery project. Use whenever running or discussing provenance_scanner.py, reading PROVENANCE_AUDIT.md, clearing Tier-1 findings, adding or reviewing # Source: citations, editing provenance_exceptions.json, embedding constants or numeric/factual claims in orrery display strings or data modules, or preparing a GitHub push (the gate is Tier-1 = 0 on the active build path, and it binds at SERVING). Also use when composing on-layer or user-facing factual text for any orrery visualization. Do not use for projects other than Paloma's Orrery.
+description: Provenance and citation discipline for the Paloma's Orrery project. Use whenever running or discussing provenance_scanner.py, reading PROVENANCE_AUDIT.md, clearing Tier-1 findings, adding or reviewing # Source: citations, editing provenance_exceptions.json, embedding constants or numeric/factual claims in orrery display strings or data modules, or preparing a GitHub push (the gate is Tier-1 = 0 on the active build path, and it binds at EXPORT from the orrery). Also use when composing on-layer or user-facing factual text for any orrery visualization. Do not use for projects other than Paloma's Orrery.
 fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on the active build path)
 ---
 
 # Provenance Discipline
 
-Skill version: 2.8 | Cut from palomas_orrery @ 7f4a2f9f (v2.8),
-earlier @ 3faa72a0 (v2.7), @ f603be3 (v2.6), @ 731066f (v2.5),
-@ 6b99ace (v2.2), @ 00219d9 (v2.1), @ eb77c83 (v2.0),
-@ cdcdb4b (v1.9) | August 27, 2026
+Skill version: 2.9 | Cut from palomas_orrery @ a263f73d (v2.9),
+earlier @ 7f4a2f9f (v2.8), @ 3faa72a0 (v2.7), @ f603be3 (v2.6),
+@ 731066f (v2.5), @ 6b99ace (v2.2), @ 00219d9 (v2.1),
+@ eb77c83 (v2.0), @ cdcdb4b (v1.9) | August 28, 2026
+v2.9 moves the gate UPSTREAM, from serving to export, on Tony's
+ruling of 2026-08-28. 2.8 put it where the harm lands; 2.9 puts it
+where a check can still run. `provenance_scanner.py` exists only in
+the orrery repo, and `gallery_cache_builder.py` lives in the gallery
+repo and scores nothing, so a gate at serving sits downstream of the
+last checker in existence and across a repository boundary. The WHY
+is unchanged and the WHERE is separated from it explicitly, so the
+gate cannot drift back on the reasoning that publication is where a
+visitor is harmed. One section rewritten, nothing else touched.
 v2.8 adds nine sections and revises four passages, from Tony's
 rulings of 2026-08-27 and the two independent Mode 7 reviews of the
 same date. The Gate Binds at SERVING [CRITICAL] moves the binding
@@ -260,28 +269,63 @@ which. The scanner must stay maintainable with accepted false positives,
 not require regular manual intervention.
 
 
-## The Gate Binds at SERVING [CRITICAL]
+## The Gate Binds at EXPORT [CRITICAL]
 
-Provenance binds where a claim reaches a reader, not where it is drawn.
+**A value's provenance closes before it LEAVES THE ORRERY. Not before it
+is drawn, and not before it is published.**
 
-Drawing a shell locally gates nothing. It costs an afternoon to undo and
-nobody outside the room sees it. SERVING it to the interactive gallery
-is different: a visitor takes what the site shows as true, and there is
-no point downstream of the orrery where a wrong radius is caught -- not
-the builder, not the resolver, not the browser. None of them knows what
-a correct ring radius is.
+Three points, and they are not the same point.
 
-So each rendering step closes its own provenance slice BEFORE it ships,
-and the slice is bounded by what that step serves.
+**Why the gate exists: SERVING.** A visitor takes what the site shows as
+true. There is no place downstream of the orrery where a wrong radius is
+caught -- not the builder, not the resolver, not the browser. None of
+them knows what a correct ring radius is.
+
+**Where the gate FIRES: EXPORT.** The orrery is the last place a check
+can run. `provenance_scanner.py` lives in the orrery repo and scans the
+orrery tree. `gallery_cache_builder.py` lives in the GALLERY repo and
+scores nothing -- it mentions provenance twice, once in a docstring
+recording where its copied constants came from and once in a warning
+string. The two repositories do not share a checker. So a gate placed at
+publication sits downstream of the last instrument in existence, and a
+gate nothing can enforce is A Check That Cannot Fail Is Not Passing
+wearing a different hat.
+
+**What is still free: DRAWING.** A local render gates nothing. It costs
+an afternoon to undo and nobody outside the room sees it.
+
+So the rule in operational form: **a body's slice closes before its
+values enter `objects_config.json` and the served cache** -- not
+afterwards, and not before the page goes live. A body cannot be added to
+the served set and cleared later.
+
+The property this buys is easier to state than the one it replaces. The
+cache becomes, by construction, a set of values whose provenance was
+closed at the moment they entered it. "Everything served has been
+checked" is a claim about a boundary crossing, which happens once and
+can be gated. "Everything published has been checked" is a claim about
+an accumulating set, which has to be re-established on every build.
+
+**A consequence, recorded because it changes a priority.**
+`objects_config.json` is maintained BY HAND in the gallery repo. So the
+export boundary this gate names is, today, a human copy with no check on
+it at all. That makes the cross-repo transport (master plan segment 2)
+the gate's missing enforcement point rather than a defence against
+later drift, which is higher than the plan currently places it.
 
 This EXTENDS the earlier line that the asymmetry "governs what an
 artifact may LOCK, not what may be BUILT." That sentence was about
-fingerprinted golden artifacts and is not withdrawn. Publication is the
-sharper boundary.
+fingerprinted golden artifacts and is not withdrawn.
 
 The braid is intact: the audit stays bounded by the current artifact,
 stays countable, and stays off the critical path as a gate. What moved
 is where it binds.
+
+(Tony's rulings. 2026-08-27, the principle: the gate binds where a
+claim reaches a reader, not where it is drawn. 2026-08-28, the
+placement: "I think provenance should be settled before it leaves the
+orrery to the gallery cache. There is no provenance checker in the
+gallery." The second corrects the first without withdrawing it.)
 
 **What the provenance leg requires, and what it does not.** It requires
 Tier-1 = 0 on what is served -- cited, and TRUE. It does NOT require a

@@ -284,35 +284,11 @@ CORE_AU = 0.2 * SOLAR_RADIUS_AU
 # Cross-checked: Gemini 2026-08-02 -- Carroll & Ostlie (worksheet_gemini_constants_remaining.md)
 # Cross-checked: GPT 2026-08-02 -- NASA solar structure (constants_remaining_independent_verification_gpt.md)
 
-RADIATIVE_ZONE_AU = 0.713 * SOLAR_RADIUS_AU
-# Source: Christensen-Dalsgaard, Gough & Thompson (1991), ApJ 378:413,
-#   "The depth of the solar convection zone" -- convection-zone DEPTH
-#   measured at 0.287 +/- 0.003 solar radii.
-# Derived: base of the convection zone = 1 - 0.287 = 0.713 R_sun. A
-# Derived+: subtraction, so decimal PLACES govern: three, matching the
-# Derived+: stated +/- 0.003.
-# Status: measured 2026-08-29 -- verified against the source
-# Access: free NASA ADS abstract, bibcode 1991ApJ...378..413C. Also
-#   corroborated in open arXiv text (astro-ph/0511779), which gives
-#   the 1991 estimate as 0.713 +/- 0.003 and Basu & Antia (2004) as
-#   0.7133 +/- 0.0005. The tighter figure is NOT adopted: it is a
-#   different work, and taking it is a re-sourcing, not a rounding.
-# Corrected: 2026-08-29 (L-258) -- held 0.7 beside a comment saying
-#   it rounded 0.713, which is the founding case for The Store
-#   Carries the Verified Figure (provenance-discipline 2.10). The
-#   comment also called this the helioseismic TACHOCLINE; the paper
-#   measures the base of the convection zone, and the tachocline is
-#   the shear layer at approximately that depth -- a neighbouring
-#   claim, not the cited one.
-# Cross-check retired: 2026-08-29 -- two legs dated 2026-08-02 were
-#   stripped, per A Cross-Check Retires With Its Value or Its
-#   Citation. Both triggers fired at once: the value moved 0.7 ->
-#   0.713, and the source line was repaired. The GPT leg certified
-#   0.7 against "helioseismology literature" and a check of the old
-#   value is not a check of the new one. The Gemini leg cited
-#   Carroll & Ostlie, which is not the work this row cites, so it
-#   certified a neighbouring claim. Recorded rather than deleted
-#   silently: a removal leaves no trace otherwise.
+RADIATIVE_ZONE_AU = 0.7 * SOLAR_RADIUS_AU
+# Visualization boundary; rounds the helioseismic tachocline at ~0.713 R_sun
+# Source: Christensen-Dalsgaard, Gough & Thompson (1991), ApJ 378:413
+# Cross-checked: GPT 2026-08-02 -- helioseismology literature (constants_remaining_independent_verification_gpt.md)
+# Cross-checked: Gemini 2026-08-02 -- Carroll & Ostlie (worksheet_gemini_constants_remaining.md)
 
 # Solar atmosphere (in solar radii)
 # RETIRED 2026-08-16 -- CHROMOSPHERE_RADII = 1.1, the DRAWN shell radius.
@@ -340,29 +316,9 @@ CHROMOSPHERE_PHYSICAL_RADII = 1.0 + CHROMOSPHERE_PHYSICAL_KM / SUN_RADIUS_KM
 # Derived: 1 + 2000 / 695700 = 1.002875... solar radii
 
 INNER_CORONA_RADII = 3
-# Source: Lamy, Gilardy, Llebaria, Quemerais & Ernandez, "Coronal
-#   Photopolarimetry with the LASCO-C3 Coronagraph over 24 Years
-#   [1996-2019]", Solar Physics -- Sec. 1: the inner solar corona,
-#   "defined here as extending to ~3 R_sun from the center of the
-#   solar disk".
-# Status: declared 2026-08-29 -- a stated CONVENTION, not a
-#   measurement. The inner (K-)corona has no sharp edge; the
-#   boundary is where the F-corona overtakes the K-corona in
-#   brightness, which happens across roughly 2-3 R_sun. 3 is the
-#   top of that transition and the value the cited work adopts.
-# Access: open arXiv full text, arXiv:2009.04820. Companion Paper I
-#   (LASCO-C2) is Lamy et al. (2020), Solar Phys. 295:89.
-# Corrected: 2026-08-29 (L-258) -- previously cited Golub &
-#   Pasachoff, "The Solar Corona" (2010). That work fails the
-#   access standard on its own terms: the independent nine-source
-#   read of 2026-08-20 could locate it only as "Chapter 1", with no
-#   figure and no findable position. The VALUE is unchanged and was
-#   never in doubt; only the citation moved. (That read was about
-#   helmet-streamer extent, a different claim, so its finding does
-#   not transfer -- reachability does.)
-# Cross-check retired: 2026-08-29 -- the Gemini leg of 2026-08-02
-#   was stripped with the citation it checked. A cross-check of a
-#   citation that no longer exists grants credit for nothing.
+# Source: Golub & Pasachoff, "The Solar Corona" (2010)
+# Note: Visualization boundary for inner (K-)corona; physical extent 2-3 R_sun
+# Cross-checked: Gemini 2026-08-02 -- Golub & Pasachoff (worksheet_gemini_constants_remaining.md)
 
 OUTER_CORONA_RADII = 50
 # Source: Mann et al. (2004), A&A 414:1127

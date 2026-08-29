@@ -6,10 +6,23 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 2.9 | Cut from palomas_orrery @ a263f73d (v2.9),
-earlier @ 7f4a2f9f (v2.8), @ 3faa72a0 (v2.7), @ f603be3 (v2.6),
-@ 731066f (v2.5), @ 6b99ace (v2.2), @ 00219d9 (v2.1),
-@ eb77c83 (v2.0), @ cdcdb4b (v1.9) | August 28, 2026
+Skill version: 2.10 | Cut from palomas_orrery @ 071a0a65 (v2.10),
+earlier @ a263f73d (v2.9), @ 7f4a2f9f (v2.8), @ 3faa72a0 (v2.7),
+@ f603be3 (v2.6), @ 731066f (v2.5), @ 6b99ace (v2.2),
+@ 00219d9 (v2.1), @ eb77c83 (v2.0), @ cdcdb4b (v1.9)
+| August 29, 2026
+v2.10 adds The Store Carries the Verified Figure [CRITICAL] under
+Report to the Figures You Have, which governed REPORTING and left
+the stored value uncovered. Founding case: RADIATIVE_ZONE_AU held
+0.7 beside its own comment saying it rounded 0.713 -- the store
+recording that it was rounding, and rounding anyway, in a value
+drawn on a public page. The rule is narrowed in the same breath
+against the two cases it would damage: a pick from a range stays
+a declared choice, and a visibility stylization promotes when the
+physical value becomes drawable rather than for want of digits.
+Tony's ruling, 2026-08-29, and the reason it is a SKILL rule and
+not a decision: it resolves the same way next month, for a
+different constant, in a different file. Handle L-258.
 v2.9 moves the gate UPSTREAM, from serving to export, on Tony's
 ruling of 2026-08-28. 2.8 put it where the harm lands; 2.9 puts it
 where a check can still run. `provenance_scanner.py` exists only in
@@ -1343,6 +1356,56 @@ The failure this catches is quiet. Stating `0.8953994` when the inputs
 support `0.8954` is not a small error in the last digits -- it is six
 digits the value was never entitled to, and it reads as a measurement.
 (Tony's ruling, 2026-08-26, after exactly that appeared in a table.)
+
+### The Store Carries the Verified Figure [CRITICAL]
+
+**Where a source gives a verified figure more precise than the stored
+value, the store carries the verified figure. Rounding happens at the
+reporting step, never at rest.**
+
+The section above governs how many figures a hover, tooltip or comment
+STATES. This governs what the store HOLDS, and the answer is every
+figure the source supports.
+
+A rounded value at rest is a second, less precise store of a number that
+already exists -- the same failure as a shadow constant, one digit at a
+time. It also reads as a measurement to everything downstream: the
+served cache copies it, the assembler draws it, and no layer below the
+orrery knows it was rounded.
+
+**The tell is a value whose own comment names a figure more precise than
+the value beside it.**
+
+```python
+RADIATIVE_ZONE_AU = 0.7 * SOLAR_RADIUS_AU
+# Visualization boundary; rounds the helioseismic tachocline at ~0.713
+```
+
+The store recorded that it was rounding, and rounded anyway. Held from
+first writing until 2026-08-29, in a value drawn on a public page.
+
+**How many figures is set by the source's uncertainty, not by taste.**
+0.713 +/- 0.003 supports three decimal places. Adopting a later,
+tighter figure from a different work is not a precision improvement --
+it changes which work the row cites, and that is a re-sourcing with its
+own access check.
+
+**Two neighbouring cases are NOT this one**, and applying this rule to
+them would be wrong:
+
+- **A pick from a range** is a declared choice and stays one. The range
+  carries the citation; the pick carries its reason. Adding digits to a
+  midpoint does not make it measured.
+- **A visibility stylization** promotes on its own terms, when the
+  physical value becomes drawable -- not because it had too few digits.
+  The chromosphere's 1.1 went to 1.002875 for that reason, on
+  2026-08-16.
+
+The question this rule answers is method, not judgement: it resolves the
+same way next month, for a different constant, in a different file. It
+does not go to Tony. (His ruling, 2026-08-29, sending exactly that
+question back: "we established the rule that significant figures where
+verified should be used.")
 
 ## No Shadow Constants [CRITICAL]
 
