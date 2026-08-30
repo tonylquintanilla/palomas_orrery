@@ -258,7 +258,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*159 live items; 145 need attention (`!`); 158 RICE-scored; 99 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*159 live items; 145 need attention (`!`); 158 RICE-scored; 100 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -501,6 +501,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-261 | Plain speech becomes the default register, not a mode | DONE | 15.2 | 2026-08-29 |
 |  | L-182 | Mars Hill sphere -- cross-check correction lost across the config pipeline | DONE | 12.0 | 2026-08-05 |
 |  | L-222 | The constants change report fails on every currency stamp | DONE | 11.4 | 2026-08-20 |
+|  | L-264 | One name, two programs: the runners get repo-specific names | DONE | 11.4 | 2026-08-29 |
 |  | L-221 | The master plan is the roadmap, and it outranks RICE | DONE | 10.8 | 2026-08-22 |
 |  | L-198 | Claim vocabulary: the units the scanner could not see | DONE | 10.2 | 2026-08-17 |
 |  | L-259 | The Sun exhibit ships -- the assembler runs in a visitor's browser | DONE | 8.3 | 2026-08-29 |
@@ -4658,8 +4659,21 @@ resident protocol Part 3.
   `palomasorrery.com/interactive.html?exhibit=sun` on a phone and say
   what it does. Mode 5 is his render and his eyes.
 - **Note:** RICE 3/3/90/1, confirmed by Tony 2026-08-29.
-**Gap:** both open. The axis fix is small and can ride with any next
-gallery patch; the phone read is Mode 5.
+- **Confirmed by Mode 5, 2026-08-29.** Tony's screenshot of the live
+  page shows tick labels reading 0.2, 0 and -0.2 with no axis names
+  and no unit anywhere. Not inferred from the code this time --
+  seen on the deployed exhibit, which is the gate that counts.
+- **Axis fix BUILT and delivered 2026-08-29** as
+  `patch_gallery_axis_titles_and_chromosphere_20260829.py`.
+  `buildSunLayout` gains X (AU), Y (AU), Z (AU) -- the desktop
+  orrery's own wording from `visualization_utils.py`'s
+  `build_scene_axes`, so this is the established visual language
+  carrying across rather than a new convention. The Solar System
+  Explorer's `buildLayout` has the same blank titles and is NOT
+  touched: it is a frozen exhibit on the A path and changing it is
+  a separate call with its own Mode 5.
+**Gap:** the phone. The axis half is delivered and closes on the
+gallery commit; the phone read is Mode 5 and is Tony's.
 **Ref:** L-259 (the exhibit itself); orrery-coding-conventions 1.6
 (the AU hover convention the axes do not follow); gallery-pipeline 1.2
 (the 768 px breakpoint).
@@ -4717,7 +4731,18 @@ resident protocol Part 3.
   changing `CHROMOSPHERE_PHYSICAL_KM` moves one and not the other.
   Fixing this value does not fix that.
 - **Note:** RICE 2/3/95/1, confirmed by Tony 2026-08-29.
-**Gap:** one value in one file.
+- **BUILT and delivered 2026-08-29** in the same gallery patch as
+  L-260's axis titles. The value becomes 1.002874802357338, which
+  is what `constants_new.py` derives from 1.0 +
+  CHROMOSPHERE_PHYSICAL_KM / SUN_RADIUS_KM. Edited as TEXT rather
+  than by re-serialising the parsed JSON, so one digit changes
+  instead of 1,700 lines reflowing, and the result is re-parsed and
+  the value re-read before the file is written.
+- **Verified against the real store**, not asserted: the drift
+  check re-run after the edit reports 26 match, 0 DRIFT, where it
+  read 25 and 1 before.
+**Gap:** delivered, not yet committed. Closes on the gallery
+commit.
 **Ref:** L-236; L-258 (The Store Carries the Verified Figure);
 segment 2 in `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`
 Section 5a.
@@ -4872,6 +4897,70 @@ still owes); `documentation/HANDOFF_20260829_sun_ships.md`.
   because the rule applies to every message in every session.
 **Ref:** Register Rule, resident protocol Part 2; L-258 (the patch the
 opaque sentence was about).
+
+#### [L-264] One name, two programs: the runners get repo-specific names
+<!-- L:264 status:DONE upd:2026-08-29 section:C flag: rice:3/4/95/1 -->
+- **The incident, 2026-08-29.** Two different programs were both
+  called `maintenance_run.py`, one per repository. The gallery's was
+  downloaded, the orrery's was displaced in the same folder, and the
+  dashboard button reported a file that was not there. The orrery
+  went three commits without its runner (`805f38c`, `c76bfa02`,
+  until `e81059f5`), and the deletion was invisible in the commit
+  that made it because it travelled beside an added patch script.
+- **Renamed.** `orrery_maintenance_run.py` here (L-188: four
+  generators, eleven checkers) and `gallery_maintenance_run.py` in
+  the gallery (L-236: six rows offline, two more under `--live`).
+  Each docstring now names the other, so the distinction does not
+  have to be rebuilt from this entry.
+- **Seven live references swept**, counted before the work rather
+  than after: the dashboard button, `module_atlas.py`'s role map,
+  `worksheet_checker.py` twice, and three test-module docstrings.
+  `MODULE_ATLAS.md` carried four more and was left alone because it
+  is generated. Zero references in any skill and zero in the
+  protocol, which is why the sweep was small.
+- **NOT swept, deliberately:** this ledger, the handoffs, and the
+  spent patch scripts under `documentation/`. They record what
+  happened under the name the file had at the time. Rewriting them
+  would be the item-rebasing leak this ledger already carries a
+  lesson about.
+- **Two dashboard rows added for the gallery runner**, offline and
+  `--live`, both launching in `GALLERY_REPO_DIR`. An earlier session
+  recommended AGAINST a dashboard entry, on the grounds that a
+  button in the orrery would reach into a sibling directory and
+  contradict the reasoning that put the runner in the gallery. That
+  was wrong and was asserted without reading the file: the dashboard
+  already launches gallery-repo tools that way, and Gallery Cache
+  Builder has done so for weeks. Tony caught it.
+- **A dashboard detail worth recording**, because it misled a
+  reading: the fifth element of an entry tuple is `interactive`, not
+  `indent`. Indent is the seventh. Gallery Builder Offline Tests
+  looked indented at a glance and was not.
+- **Nine tracked `.bak` files retired** in the same pass, and
+  `*.bak` added to `.gitignore`. They included 2,268 lines of
+  superseded master plan and a superseded copy of
+  provenance-discipline. A session grepping for a value or a rule
+  could hit one and read a retired state as current, which is The
+  Correction Does Not Travel with the correction sitting in the next
+  file along. Patch scripts still write backups; git no longer sees
+  them.
+- **The wider collision class, measured and left alone.** Six files
+  sit at the root of both repos under identical names:
+  `maintenance_run.py` (now fixed), `module_atlas.py`,
+  `add_docstrings.py`, `MODULE_ATLAS.md`, `MODULE_INDEX.md`,
+  `requirements.txt`. `module_atlas.py` is the same shape -- two
+  different programs, one name, both at a repo root. Recorded as a
+  class rather than renamed on spec.
+- **This block was written late, and that is the second instance
+  today.** L-264 was minted inside two patch scripts and written
+  into both renamed runners' docstrings, and all four were committed
+  before any block existed -- code citing a ledger item that was not
+  there, which is L-225's shape. The earlier instance the same day
+  was protocol v3.47 (L-258). Both were found by a person reading,
+  not by a check.
+- **Note:** RICE 3/4/95/1, confirmed by Tony 2026-08-29.
+**Ref:** L-188 (the orrery runner); L-236 (the gallery runner);
+L-225 (a handle cited with no entry); L-258 (the same failure,
+earlier the same day).
 
 #### [L-255] Skill bumps of 2026-08-26 -- handle reserved, block never written
 <!-- L:255 status:DONE upd:2026-08-28 section:C flag: rice:2/3/40/1 -->

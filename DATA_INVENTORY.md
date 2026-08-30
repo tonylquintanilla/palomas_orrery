@@ -75,7 +75,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 439.1 MB (419 files)
+**Total size:** 439.2 MB (420 files)
 
 **GitHub Pages headroom:** 585 MB remaining of 1024 MB ceiling (42.9% used)
 
@@ -86,14 +86,14 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 | .json | 274 | 417.4 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-08-29 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 1 | 5.1 MB | palomas_orrery_logo.png (5.1 MB) | 2025-11-27 |
-| .py | 45 | 900.7 KB | gallery_studio.py (244.1 KB) | 2026-08-29 |
-| .md | 13 | 410.7 KB | web_gallery_handoff.md (242.4 KB) | 2026-08-29 |
+| .py | 46 | 911.1 KB | gallery_studio.py (244.1 KB) | 2026-08-29 |
+| .md | 13 | 413.9 KB | web_gallery_handoff.md (242.4 KB) | 2026-08-29 |
 | .jsonl | 22 | 325.8 KB | encke.jsonl (15.2 KB) | 2026-08-29 |
-| .html | 5 | 203.3 KB | index.html (128.2 KB) | 2026-08-29 |
+| .html | 5 | 203.8 KB | index.html (128.2 KB) | 2026-08-29 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
 | .bak2 | 2 | 84.6 KB | interactive.html.bak2 (42.6 KB) | 2026-08-29 |
+| .bak | 2 | 69.5 KB | interactive.html.bak (45.7 KB) | 2026-08-29 |
 | .js | 4 | 62.3 KB | feature_renderers.js (42.6 KB) | 2026-08-29 |
-| .bak | 2 | 56.3 KB | interactive.html.bak (33.0 KB) | 2026-08-29 |
 | .bak3 | 1 | 45.0 KB | interactive.html.bak3 (45.0 KB) | 2026-08-29 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |
 | .patch | 3 | 11.7 KB | phaseb_studio.patch (7.0 KB) | 2026-07-29 |
@@ -131,7 +131,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | repo | served size | ceiling | headroom | used |
 |---|---|---|---|---|
-| gallery | 439.1 MB | 1024 MB | 585 MB | 42.9% |
+| gallery | 439.2 MB | 1024 MB | 585 MB | 42.9% |
 | orrery (gitignored data) | 966.8 MB | n/a (not served) | -- | -- |
 
 Note: orrery data is local/gitignored. If orbit cache files are pushed to either repo for web serving, re-run this inventory to update headroom.

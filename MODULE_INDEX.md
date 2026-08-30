@@ -10,24 +10,22 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 130  
-**Total Lines of Code (non-blank):** 105,167  
-**Total Public Functions/Classes:** 1,177
+**Total Python Files:** 129  
+**Total Lines of Code (non-blank):** 104,215  
+**Total Public Functions/Classes:** 1,171
 
 ## Classification Coverage
 
-**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_ledger_and_protocol_20260829.py`
-- `patch_rename_runners_orrery_20260829.py`
+- `patch_ledger_L264_and_delivered_fixes_20260829.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (2).** No valid `Domain:` tag.
+**Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_ledger_and_protocol_20260829.py`
-- `patch_rename_runners_orrery_20260829.py`
+- `patch_ledger_L264_and_delivered_fixes_20260829.py`
 
 
 ---
@@ -231,8 +229,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_ledger_and_protocol_20260829.py` | The record layer of the 2026-08-29 Sun-ship session, brought current in one transaction: the ledger edits owed, the two pinned literals in test_constants_provenance.py restated as ratio bounds, and the protocol version-history entry that the provenance-discipline 2.10 bump never got. (811 lines) |
-| `patch_rename_runners_orrery_20260829.py` | - the ORRERY half. (364 lines) |
+| `patch_ledger_L264_and_delivered_fixes_20260829.py` | Writes the ledger block for L-264, which was cited in four committed docstrings before it existed, and records that the L-260 and L-263 fixes are built and delivered. (223 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |
