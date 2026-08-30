@@ -124,11 +124,34 @@ read one copy. The second is more work and removes the failure class,
 since the test broke precisely because it read a copy of logic that
 lives inline in the page. It touches `interactive.html`, which is live.
 
+There is a timing argument that neither item carries on its own.
+Portrait mobile means editing `interactive.html` anyway. Extracting
+the framing helpers in the same pass costs ONE Mode 5 rather than
+two, and Mode 5 is the step that cannot be delegated, so it is the
+scarce one. If portrait goes first and this waits, that saving is
+gone.
+
 **L-256, which dict joins the status-pass beta.**
 `spectral_subclass_temps` (9 entries, and Fable already flagged it as an
 uncited physical claim inside the store) or `CENTER_BODY_RADII` (18
 well-sourced radii). Open since 2026-08-27 and the single thing blocking
 the item.
+
+Why a dict has to be in the beta at all, measured at `7f4a2f9f` and
+recorded in L-256: the store holds 67 top-level assignments, and its
+three dicts hold 160 entries between them. Of roughly 236 statusable
+items, 160 sit inside dicts. A beta of scalars alone proves the
+format for about a third of the store and says nothing about the
+shape most of it is actually in.
+
+The two candidates differ in what the beta would be FOR.
+`spectral_subclass_temps` is smaller and carries a real finding, so
+the beta would prove the format and clear something at the same
+time -- and the convention ought to hold at home before it is
+enforced on anything downstream. `CENTER_BODY_RADII` is larger,
+already well sourced from the April 2026 verification and the L-162
+promotion, and on the active build path; it would exercise the
+format on easy cases with more of them.
 
 **L-237, when.** Earth's shells will change artifact 1's feature set
 again, so re-cutting the golden record now means re-cutting it twice.
