@@ -180,12 +180,39 @@ LAUNCH_GROUPS = {
         "aren't referenced by gallery_metadata.json, plus stray .json.bak files.",
         GALLERY_TOOLS_DIR,
         True),
+        ("Gallery Maintenance Run -- offline",
+        "gallery_maintenance_run.py",
+        "The gallery repo's own runner (L-236), before you commit. "
+        "Regenerates the module atlas, then runs the 149-check cache "
+        "builder suite, the three Node smoke suites, and the artifact-1 "
+        "assembler test. Three states rather than two: a suite that could "
+        "not run -- Node missing, say -- reports UNREACHABLE and is "
+        "never counted as a pass. Everything indented below is included "
+        "in it.",
+        GALLERY_REPO_DIR,
+        True),
+        ("Gallery Maintenance Run -- live, AFTER a push",
+        "gallery_maintenance_run.py",
+        "The two checks that can only mean something once GitHub Pages "
+        "has deployed. Fetches seven files from palomasorrery.com and "
+        "requires each to be served -- this is what catches Jekyll "
+        "dropping every .py in the repo, which no local test can see. "
+        "Then follows objects_config.json's orrery_constant pointers "
+        "into constants_new.py at the orrery HEAD and reports any value "
+        "that has drifted. If the site is still serving the previous "
+        "deploy it says NOT YET DEPLOYED rather than passing. Report "
+        "only; it gates nothing.",
+        GALLERY_REPO_DIR,
+        True,
+        ["--live"]),
         ("Gallery Builder Offline Tests",
         "test_gallery_cache_builder_offline.py",
         "Offline smoke test for gallery_cache_builder.py: mocks Horizons, "
         "exercises first-build, nightly re-run, and the Guard v2 monitor path. "
         "No network.",
         GALLERY_TOOLS_DIR,
+        True,
+        None,
         True),
     ],
 
@@ -206,7 +233,7 @@ LAUNCH_GROUPS = {
          GALLERY_REPO_DIR,
          True),
         ("MAINTENANCE RUN -- everything indented below",
-         "maintenance_run.py",
+         "orrery_maintenance_run.py",
          "One command for the whole routine: regenerates the four generated "
          "documents, then runs every checker, then prints one summary. It "
          "reports and continues rather than stopping at the first failure, "

@@ -26,3 +26,8 @@ data/*verify_backup*
 
 _export_out/
 data/solar-system/
+
+# Patch-script backups. Nine were tracked until 2026-08-29,
+# including a superseded master plan and a superseded skill. A
+# session grepping for a value can hit one and read it as current.
+*.bak

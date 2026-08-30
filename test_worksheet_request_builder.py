@@ -7,7 +7,7 @@ Open this file in VS Code and click Run. It takes no arguments.
 
     python test_worksheet_request_builder.py
 
-It is also a CHECKERS row in maintenance_run.py, so a normal
+It is also a CHECKERS row in orrery_maintenance_run.py, so a normal
 maintenance run includes it.
 
 WHY IT EXISTS

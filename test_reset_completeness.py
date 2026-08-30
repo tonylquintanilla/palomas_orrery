@@ -126,7 +126,8 @@ if failures:
         print("  -", f)
     sys.exit(1)
 
-# The prefix is what maintenance_run.py matches on. Without it the runner
+# The prefix is what orrery_maintenance_run.py matches on. Without it
+# the runner
 # falls back to the last line of stdout, which is the atexit cleanup
 # message from the PlotlyShutdownHandler that importing palomas_orrery
 # registers -- printed after this one, and not a verdict.

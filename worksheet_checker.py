@@ -7,7 +7,8 @@ Open this file in VS Code and click Run. It takes no arguments.
 
     python worksheet_checker.py
 
-It is also the last CHECKERS row in maintenance_run.py, so a normal
+It is also the last CHECKERS row in orrery_maintenance_run.py, so a
+normal
 maintenance run includes it.
 
 WHAT IT DOES
@@ -2350,7 +2351,8 @@ def run(project_dir, today):
     # always reads the same is wallpaper, and wallpaper is a check that
     # cannot fail.
     #
-    # It is also SHORT on purpose. maintenance_run.py trims a checker's
+    # It is also SHORT on purpose. orrery_maintenance_run.py trims a
+    # checker's
     # verdict to 44 characters, and the first version of this line was
     # 101 -- so the runner row showed the denominator, which never
     # moves, and truncated away the two counts that do. The detail

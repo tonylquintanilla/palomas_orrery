@@ -1,10 +1,18 @@
-"""maintenance_run.py -- L-188. One command, the whole maintenance suite.
+"""orrery_maintenance_run.py -- L-188. One command, the whole
+maintenance suite.
+
+THE OTHER RUNNER
+The gallery repo has its own, gallery_maintenance_run.py (L-236),
+and it is a different program: six rows offline and two more under
+--live, against the gallery's own files and the deployed site. The
+two were both called maintenance_run.py until 2026-08-29, when that
+cost this file three commits of not existing. Renamed under L-264.
 
 RUN COMMAND
 -----------
 Open this file in VS Code and click Run. It takes no arguments.
 
-    python maintenance_run.py
+    python orrery_maintenance_run.py
 
 Run it after any edit session and before a push.
 

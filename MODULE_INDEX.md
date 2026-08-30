@@ -11,23 +11,23 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 130  
-**Total Lines of Code (non-blank):** 104,675  
-**Total Public Functions/Classes:** 1,175
+**Total Lines of Code (non-blank):** 105,167  
+**Total Public Functions/Classes:** 1,177
 
 ## Classification Coverage
 
 **Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L258_significant_figures_at_rest.py`
-- `patch_master_plan_v20_sun_ships.py`
+- `patch_ledger_and_protocol_20260829.py`
+- `patch_rename_runners_orrery_20260829.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
 **Undetermined domain (2).** No valid `Domain:` tag.
 
-- `patch_L258_significant_figures_at_rest.py`
-- `patch_master_plan_v20_sun_ships.py`
+- `patch_ledger_and_protocol_20260829.py`
+- `patch_rename_runners_orrery_20260829.py`
 
 
 ---
@@ -40,7 +40,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,938 lines) |
 | `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,479 lines) |
-| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (1,155 lines) |
+| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (1,182 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
 ---
@@ -205,23 +205,23 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `export_orbit_cache.py` | Phase 1b desktop devtool: read the local orbit caches and write web-servable orbit/position files for the interactive gallery. (617 lines) |
 | `food_insecurity_generator.py` | IPC acute food-insecurity KMZ layer (Sudan, current period). (702 lines) |
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (710 lines) |
-| `maintenance_run.py` | - L-188. One command, the whole maintenance suite. (477 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
 | `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (956 lines) |
+| `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (484 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,066 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (342 lines) |
 | `test_citation_inheritance.py` | Regression tests for citation-block inheritance. (516 lines) |
-| `test_constants_provenance.py` | Regression tests for verified numeric constants. (389 lines) |
+| `test_constants_provenance.py` | Regression tests for verified numeric constants. (411 lines) |
 | `test_cross_checked.py` | Regression tests for cross-check annotations. (501 lines) |
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (224 lines) |
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (485 lines) |
-| `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (119 lines) |
+| `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (120 lines) |
 | `test_worksheet_checker.py` | - L-192. Can each layer actually fail? (995 lines) |
 | `test_worksheet_request_builder.py` | - L-195 / L-192. Does the marker join actually join, and can it fail? (439 lines) |
 | `verify_orbit_cache.py` | Safely verify and repair orbit_paths.json (172 lines) |
-| `worksheet_checker.py` | - L-192. Does the worksheet say what the annotation claims it says? (2,140 lines) |
+| `worksheet_checker.py` | - L-192. Does the worksheet say what the annotation claims it says? (2,142 lines) |
 | `worksheet_keys.py` | Worksheet row keys -- one owner for the syntax and the resolution. (481 lines) |
 | `worksheet_request_builder.py` | Worksheet request builder -- ask the question the checker can read. (652 lines) |
 
@@ -231,8 +231,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L258_significant_figures_at_rest.py` | Two edits in the ORRERY repo, one transaction. (319 lines) |
-| `patch_master_plan_v20_sun_ships.py` | Updates both plan documents for 2026-08-29, when the Sun went live on the public gallery. (423 lines) |
+| `patch_ledger_and_protocol_20260829.py` | The record layer of the 2026-08-29 Sun-ship session, brought current in one transaction: the ledger edits owed, the two pinned literals in test_constants_provenance.py restated as ratio bounds, and the protocol version-history entry that the provenance-discipline 2.10 bump never got. (811 lines) |
+| `patch_rename_runners_orrery_20260829.py` | - the ORRERY half. (364 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |
