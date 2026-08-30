@@ -383,6 +383,58 @@ resident.
 (Moved down from the resident protocol on 2026-08-29 when v3.47
 made a fourth entry.)
 
+v3.45 (August 27, 2026): One rule added, one skill bumped, and the
+rule was earned in the same session that produced the bump.
+
+Method Belongs to the Skill [Part 3, after The Braid]. A question about
+how the work is done is a skill rule; a question about what the project
+should be is Tony's. Origin: three method questions escalated to him in
+one evening -- the status-line format, the mechanism for checking a
+citation, and which end of a sourced range to draw. He sent all three
+back, the third with "Isn't #4 also a skill method?" after Claude had
+conceded the principle two sentences earlier and then escalated anyway.
+Both independent Mode 7 reviewers, working from the same prompt on the
+same day and without seeing each other, had already named this as a
+finding: decisions reach the sole integrator that a rule should absorb.
+
+provenance-discipline 2.7 -> 2.8 (L-256), nine sections and four
+revisions. The Gate Binds at SERVING moves the binding point from
+drawing to publication -- a visitor takes what the site shows as true,
+and nothing downstream of the orrery knows what a correct radius is. The
+Access Standard makes reachability a precondition of a citation: open
+full text, a free abstract, or a Scholar or Books snippet carrying the
+qualifier, and no paywalls, because Tony has no research library. The
+Status Line has every value in constants_new.py declare its own
+provenance state so the scanner reads instead of inferring -- which
+deletes the inference machinery behind four measured failures, the
+thirty-line lookback among them. Measured Is the Goal, Declared Is the
+Fallback carries the range rule: store the range as data, derive the
+drawn value by a stated rule, and put the reason for the pick on the
+row. The Exhibit Requirement makes a verdict without a quotation
+UNVERIFIED, with the quotation demoted from the clearance to a routing
+aid and the source text read in context becoming the evidence of record.
+Retired in the same bump: the two-annotation criterion for
+V_CROSS_CHECKED, which measures concurrence, and concurrence is what
+kept a wrong Alfven surface alive while the dissenting leg carried the
+evidence.
+
+One defect worth recording rather than quietly fixing. The skill had
+taught the chromosphere drawn at 1.1 solar radii as its worked example
+of a declared visualization boundary, for eleven days after the code
+promoted that value to the physical figure. A session read it and
+reported the retired value to Tony as current -- the third superseded
+state that session pulled forward from a document rather than from the
+store, which is the argument for the status line stated as evidence
+instead of as an idea. Examples Go Stale Like Values [QUALITY] is the
+rule that follows.
+
+Version history: v3.42 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-08-29 when v3.48
+made a fourth entry.)
+
 ### Preserved verbatim: v3.29 Technical lessons (now field notes in skills)
 
 - Cache: cache[name]['elements'] (nested dict)

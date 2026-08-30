@@ -6,10 +6,10 @@ fires_when: Editing existing files, patch scripts, sed/regex edits, encoding che
 
 # Safe File Editing
 
-Skill version: 1.8 | Cut from palomas_orrery @ 6d12ecac (v1.8),
-earlier @ d424c459 (v1.7), ef3bd13 (v1.6), 50438c6 (v1.5), a872205
-(v1.4), 1ba20c3 (v1.3), 3398970 (v1.2), bdaaa0c (v1.1) | August 23,
-2026, with Anthropic's Claude Opus 5
+Skill version: 1.9 | Cut from palomas_orrery @ bfa9de2f (v1.9),
+earlier @ 6d12ecac (v1.8), d424c459 (v1.7), ef3bd13 (v1.6),
+50438c6 (v1.5), a872205 (v1.4), 1ba20c3 (v1.3), 3398970 (v1.2),
+bdaaa0c (v1.1) | August 29, 2026, with Anthropic's Claude Opus 5
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;
 v1.1 adds the delivery-format convention from a same-day incident (a
 transactional patch silently never run; see Field Notes). v1.3 adds
@@ -439,6 +439,60 @@ called L-214 "designed and unbuilt, and the next scheduled work"
 two days after L-214 went DONE. Three instances, one file, one
 cause. The provenance machinery watches the code; nothing watched
 whether the documents describing the code kept up.)
+
+## Compare Content, Not Bytes [QUALITY]
+
+A guard, a diff or a reachability check that compares RAW BYTES
+across a Windows working copy will refuse or cry wolf on files
+nobody has changed. Compare the LF-normalised content instead, and
+write each file back in the line-ending style you found it in.
+
+```python
+raw = open(path, "rb").read()
+was_crlf = b"\r\n" in raw
+content = raw.replace(b"\r\n", b"\n") if was_crlf else raw
+actual = hashlib.md5(content).hexdigest()      # guard on THIS
+...
+final = out.replace(b"\n", b"\r\n") if was_crlf else out
+```
+
+**Why the two copies legitimately differ.** Any tool that writes in
+TEXT mode on Windows -- `open(path, 'w')` -- turns every \n into
+\r\n. Git normalises it back on commit, especially under a
+`* text=auto eol=lf` .gitattributes. So the repository holds LF, a
+static host serves LF, and the working copy holds CRLF, with not
+one character different between them. Nobody did anything wrong and
+the byte comparison is simply asking the wrong question.
+
+**Say when normalisation was what saved it.** Print `[CRLF]` beside
+a guard that matched only after normalising, and say "matches (the
+working copy is CRLF)" on a row rather than a bare match. Silently
+swallowing the difference trades a false alarm for a blind spot,
+which is the worse of the two.
+
+**Preserve the style on write.** Flipping a 700 KB file's line
+endings shows in a git GUI as every line changed, which buries the
+eight edits that actually matter. This half is not cosmetic: a diff
+nobody can read is a diff nobody reviews.
+
+**[QUALITY] rather than [CRITICAL], deliberately.** Both failure
+directions are LOUD -- a guard refuses, or a check reports stale --
+so nothing is silently corrupted and nothing passes that should
+not. What it costs is trust in the check, which is why it is worth
+a section at all. The critical tier stays short.
+
+(Two instances, one day, August 29 2026. A four-file patch refused
+to run because `ledger_index.py` had left LEDGER_CONSOLIDATED.md
+CRLF in the working copy; the md5 was reproduced exactly by
+converting the repo copy, proving not one character differed. Then
+the gallery maintenance runner reported two served files stale on
+every live run, because `gallery_cache_builder.py` writes
+coverage_index.json and feature_configs.json in text mode. The
+second is the lesson: the first had already been diagnosed and
+fixed in the patch scripts hours earlier, and was not carried to
+the runner that had already been written. One producer, two
+consumers, one of them moved -- Check All Parallel Pipelines, and
+L-182's shape. L-236.)
 
 ## grep -c in && Chains [QUALITY]
 

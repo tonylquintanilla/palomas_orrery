@@ -258,7 +258,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*159 live items; 145 need attention (`!`); 158 RICE-scored; 100 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*157 live items; 143 need attention (`!`); 156 RICE-scored; 102 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -276,7 +276,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-21 |
 | ! | L-249 | The Earth slice of L-181: interior boundaries as sourced constants | OPEN | 7.2 | 2026-08-25 |
 | ! | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | OPEN | 6.0 | 2026-08-25 |
-| ! | L-263 | The served chromosphere value is a rounded copy | OPEN | 5.7 | 2026-08-29 |
 | ! | L-245 | Constants drift check compares against the last COMMIT, not the last RUN | OPEN | 5.4 | 2026-08-25 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
 | ! | L-206 | Worksheet return filenames carry model and session | OPEN | 5.1 | 2026-08-18 |
@@ -302,7 +301,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-239 | Seed the three Oort builders so a render is reproducible | OPEN | 3.6 | 2026-08-25 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-25 |
 | ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
-| ! | L-236 | Gallery maintenance runner [designed, unbuilt] | OPEN | 3.2 | 2026-08-25 |
 | ! | L-256 | provenance-discipline 2.8, and the status pass it enables | OPEN | 3.1 | 2026-08-27 |
 | ! | L-254 | 76 dead sphere-shell builders, unmarked, across 12 modules | OPEN | 2.8 | 2026-08-26 |
 | ! | L-240 | Split declared drawing parameters from measured values | OPEN | 2.8 | 2026-08-25 |
@@ -509,6 +507,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-207 | The citation prompt -- the checker asks the fuzzy question | DONE | 7.6 | 2026-08-18 |
 |  | L-220 | A patch updates the body but not the anchor, date or description | DONE | 7.6 | 2026-08-20 |
 |  | L-204 | The worksheet reference may be JSON | DONE | 5.7 | 2026-08-18 |
+|  | L-263 | The served chromosphere value is a rounded copy | DONE | 5.7 | 2026-08-29 |
 |  | L-196 | Citation continuations: mark, join, refuse | DONE | 5.4 | 2026-08-17 |
 |  | L-197 | Maintenance runner output: say what passed | DONE | 5.4 | 2026-08-17 |
 |  | L-201 | Request selection -- ask the builder for fewer rows | DONE | 5.4 | 2026-08-18 |
@@ -531,6 +530,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-115 | Skills v1.1 batch: accuracy fixes + two seed blocks (Fable Mode 7) | DONE | 3.6 | 2026-07-12 |
 |  | L-097 | skills_index.py -- Skill Manifest auto-generation (process/tooling) | DONE | 3.2 | 2026-07-04 |
 |  | L-127 | module_atlas.py generates MODULE_INDEX.md too -- single source, eliminate divergence | DONE | 3.2 | 2026-07-28 |
+|  | L-236 | Gallery maintenance runner | DONE | 3.2 | 2026-08-29 |
 |  | L-188 | Maintenance runner -- one command, the whole suite | DONE | 3.1 | 2026-08-12 |
 |  | L-069 | Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan) | DONE | 2.8 | 2026-06-24 |
 |  | L-109 | Fable 5 adversarial review remediation (builder Pass 1+2) | DONE | 2.8 | 2026-07-10 |
@@ -3744,82 +3744,6 @@ buys very little.
 `payload_jupiter_saturn.json`; PROJECT_INSTRUCTIONS Part 3, A Check That
 Cannot Fail Is Not Passing; L-236; L-237.
 
-#### [L-236] Gallery maintenance runner [designed, unbuilt]
-<!-- L:236 status:OPEN upd:2026-08-25 section:A flag: rice:4/4/80/4 -->
-- **Shape.** A `maintenance_run.py` in the GALLERY repo, plus a
-  dashboard button in the existing Gallery and Web group.
-- **Why it belongs in the gallery, not the orrery.** Every input it
-  reads is there. A checker run from the orrery would reach a sibling
-  directory that exists only on Tony's machine, and a check that cannot
-  find its target skips quietly -- the same failure class as the three
-  instances in L-235.
-- **First roster:** module atlas and index (generators); the artifact-1
-  golden compared against the STORED file; the three Node suites, with
-  Node's absence REPORTED rather than skipped; served-cache structural
-  validation; config feature-shape validation.
-- **Evidence, 2026-08-29.** Three of the four defects in the Sun
-  ship were on the gallery side and no orrery check could reach any
-  of them: Pages serving no `.py` at all, orphan info markers in the
-  shared renderer, and `objects_config.json` drifting from
-  `constants_new.py`. Measured at gallery `c367b262`: nothing named
-  maintenance, runner or run_all anywhere in the repo, and the one
-  real suite -- `tools/test_gallery_cache_builder_offline.py`, 149
-  checks -- sits in no routine.
-- **Two checks the first roster did not have**, each of which would
-  have caught one of that day's failures. *(a) A served-reachability
-  check:* fetch ONE file per critical-path family from the LIVE site
-  and require 200 -- an assembler module, the coverage index, a
-  positions file. It has to run against the CDN, because that is the
-  thing that was broken. *(b) A store-drift REPORT:* thirty entries
-  in `objects_config.json` already carry `orrery_constant` pointers
-  like `constants_new.py::RADIATIVE_ZONE_AU`, and nothing follows
-  them. A read-only checker that fetches `constants_new.py` at the
-  orrery HEAD SHA and reports every pointer whose value disagrees
-  would have caught 0.7 against 0.713 the moment it happened.
-- **(b) is NOT the transport and does not replace segment 2.** It
-  moves nothing and fixes nothing. It converts a silent hole into a
-  loud one for a fraction of the cost, and it can be built BEFORE
-  the transport rather than instead of it.
-- **The 2026-08-29 handoff says this work has no ledger handle. It
-  does** -- this one, opened 2026-08-25. Recorded so the next
-  session does not mint a second.
-- **BUILT 2026-08-29 and delivered as `maintenance_run.py` for the
-  gallery repo root.** Two moments rather than one, which is where
-  it departs from the orrery's runner: the plain run is offline and
-  goes before a commit, and `--live` goes after a push, because the
-  Jekyll failure existed only on the deployed site and only after a
-  push. Three states, not two: PASS, FAIL, and UNREACHABLE, with
-  unreachable counted separately and never folded into a passing
-  total.
-- **Roster.** Offline: the module atlas generator; the 149-check
-  cache builder suite; the three Node smoke suites, with Node's
-  absence REPORTED rather than skipped; and the artifact-1
-  assembler test, report-only. Live: served reachability against
-  the CDN, and the store-drift report.
-- **Two findings on its first run**, both recorded: L-262, the
-  framing smoke test that has never run; and L-263, a rounded copy
-  in `objects_config.json`.
-- **One design change the sandbox forced.** The first version read
-  any non-200 as a missing file, and a blocking proxy answering 403
-  reported as the whole site being gone. Only a 404 is missing now;
-  anything else is unreachable, and a blanket failure across every
-  file reports as unreachable rather than crying wolf. A real
-  Jekyll failure is asymmetric -- the `.py` files 404 while the
-  page returns 200 -- and that asymmetry is the signal.
-- **No dashboard entry, deliberately.** The dashboard lives in the
-  orrery, so a button there would reach into a sibling directory,
-  which is the same cross-repo reach that put this runner in the
-  gallery. VS Code's Run button from the gallery root instead.
-**Gap:** built and delivered, not yet committed. **Tony-action
-(do):** commit `maintenance_run.py` to the gallery repo root; this
-item closes on that commit. Left OPEN rather than marked DONE in
-advance, because a ledger row claiming a file is committed before
-it is committed is a claim nothing can check.
-- **Note:** RICE 4/4/80/4 -> 3.2, confirmed by Tony 2026-08-29.
-**Ref:** L-188 (the orrery-side maintenance runner this mirrors);
-L-235; L-258 (the store drift check would have caught it); L-259;
-L-262 and L-263 (its first two findings).
-
 #### [L-237] Artifact 1's golden record is stale and needs re-cutting
 <!-- L:237 status:OPEN upd:2026-08-25 section:A flag: rice:3/4/90/1 -->
 - **Unblocked 2026-08-25:** Mode 5 passed on the complete Sun, so the
@@ -4672,8 +4596,40 @@ resident protocol Part 3.
   Explorer's `buildLayout` has the same blank titles and is NOT
   touched: it is a frozen exhibit on the A path and changing it is
   a separate call with its own Mode 5.
-**Gap:** the phone. The axis half is delivered and closes on the
-gallery commit; the phone read is Mode 5 and is Tony's.
+- **Axis half CLOSED 2026-08-29** at gallery `6c612397`, Mode 5
+  confirmed by Tony against the deployed page: the axes read
+  X (AU), Y (AU), Z (AU).
+- **A suspected tenth orphan marker, checked and cleared.** A red
+  cross appeared in Tony's 2026-08-29 screenshot below and right
+  of the corona, with no shell around it, and was raised as a
+  possible survivor of the nine-marker orphan fix. Tony checked
+  it on the live page: not a defect. Recorded so it is not
+  re-raised from the same screenshot later.
+- **The phone check happened, 2026-08-29**, on iPhone Safari, both
+  orientations. **The exhibit WORKS**: Pyodide loaded, the
+  assembler ran, the shells drew, the axis titles are there. The
+  premise of the whole interactive gallery -- that it works on a
+  phone -- held on its first real test.
+- **LANDSCAPE is usable as it stands.** The legend takes roughly a
+  quarter of the width, scrolls (11 of 18 entries visible with a
+  scrollbar), and the Sun renders clear of it.
+- **PORTRAIT is not.** The legend covers about 58 percent of the
+  width and 58 percent of the height as an overlay, and the Sun
+  sits BEHIND it -- the object of the exhibit is the part you
+  cannot see. All 18 entries render at once rather than scrolling
+  as they do in landscape.
+- **The axis titles clip in portrait.** Only fragments of the
+  X (AU) and Y (AU) labels reach the viewport at the bottom
+  corners. They are correct and they are cut off, which is a
+  narrower problem than the legend and probably the same fix.
+- **Not diagnosed, deliberately.** These are read from two
+  screenshots, not from the page. gallery-pipeline 1.2 carries the
+  768 px breakpoint and a bottom-drawer pattern for exactly this
+  case, and the Sun exhibit does not use it. Whether that is the
+  fix is a design conversation, not a guess to be made here.
+**Gap:** portrait. The legend overlays the object it describes,
+and the axis titles clip. Landscape needs nothing. Deferred by
+Tony to the next session, 2026-08-29.
 **Ref:** L-259 (the exhibit itself); orrery-coding-conventions 1.6
 (the AU hover convention the axes do not follow); gallery-pipeline 1.2
 (the 768 px breakpoint).
@@ -4705,47 +4661,6 @@ gallery commit; the phone read is Mode 5 and is Tony's.
 **Ref:** L-236 (the runner that found it); L-238 (the commit that
 added the suite); A Check That Cannot Fail Is Not Passing [CRITICAL],
 resident protocol Part 3.
-
-#### [L-263] The served chromosphere value is a rounded copy
-<!-- L:263 status:OPEN upd:2026-08-29 section:A flag: rice:2/3/95/1 -->
-- **Found by the store-drift check** (L-236) on its first run against
-  real data, 2026-08-29.
-- **`CHROMOSPHERE_PHYSICAL_RADII` is 1.00287480236 in the orrery and
-  1.0028748 in the gallery's `data/objects_config.json`.** They agree
-  to nine significant figures, so nothing is drawn wrong -- the
-  difference is about two parts in a billion of a solar radius.
-- **The class is the point, not the size.** 1.0028748 is the correct
-  figure to REPORT; it is not a second thing to STORE. A copy held at
-  a different precision is a shadow constant one digit at a time,
-  which is One Value, One Home (provenance-discipline 2.7).
-- **Tony's ruling, 2026-08-29**, and it is why the check is exact
-  rather than tolerant: significant figures are checked against the
-  store, not against whether a person catches them. How many figures
-  a value should carry is settled once, in the orrery. The gallery
-  carries what the store carries.
-  **Tony-action (do):** set the value in
-  `/objects/0/features/solar_atmosphere/chromosphere` to the store's
-  number. The runner reports it every run until it matches.
-- **It also names the transport hole from the other side.** The
-  orrery holds a DERIVATION and the gallery holds a NUMBER, so
-  changing `CHROMOSPHERE_PHYSICAL_KM` moves one and not the other.
-  Fixing this value does not fix that.
-- **Note:** RICE 2/3/95/1, confirmed by Tony 2026-08-29.
-- **BUILT and delivered 2026-08-29** in the same gallery patch as
-  L-260's axis titles. The value becomes 1.002874802357338, which
-  is what `constants_new.py` derives from 1.0 +
-  CHROMOSPHERE_PHYSICAL_KM / SUN_RADIUS_KM. Edited as TEXT rather
-  than by re-serialising the parsed JSON, so one digit changes
-  instead of 1,700 lines reflowing, and the result is re-parsed and
-  the value re-read before the file is written.
-- **Verified against the real store**, not asserted: the drift
-  check re-run after the edit reports 26 match, 0 DRIFT, where it
-  read 25 and 1 before.
-**Gap:** delivered, not yet committed. Closes on the gallery
-commit.
-**Ref:** L-236; L-258 (The Store Carries the Verified Figure);
-segment 2 in `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`
-Section 5a.
 
 ## PENDING ACTION (Tony-side)
 
@@ -8638,6 +8553,156 @@ artifacts reopening as families are added. See L-234.
 rule bounds); L-248; L-199 (the three-resident cap); The Artifact Bounds
 the Audit.
 
+
+#### [L-236] Gallery maintenance runner
+<!-- L:236 status:DONE upd:2026-08-29 section:C flag: rice:4/4/80/4 -->
+- **Shape.** A `maintenance_run.py` in the GALLERY repo, plus a
+  dashboard button in the existing Gallery and Web group.
+- **Why it belongs in the gallery, not the orrery.** Every input it
+  reads is there. A checker run from the orrery would reach a sibling
+  directory that exists only on Tony's machine, and a check that cannot
+  find its target skips quietly -- the same failure class as the three
+  instances in L-235.
+- **First roster:** module atlas and index (generators); the artifact-1
+  golden compared against the STORED file; the three Node suites, with
+  Node's absence REPORTED rather than skipped; served-cache structural
+  validation; config feature-shape validation.
+- **Evidence, 2026-08-29.** Three of the four defects in the Sun
+  ship were on the gallery side and no orrery check could reach any
+  of them: Pages serving no `.py` at all, orphan info markers in the
+  shared renderer, and `objects_config.json` drifting from
+  `constants_new.py`. Measured at gallery `c367b262`: nothing named
+  maintenance, runner or run_all anywhere in the repo, and the one
+  real suite -- `tools/test_gallery_cache_builder_offline.py`, 149
+  checks -- sits in no routine.
+- **Two checks the first roster did not have**, each of which would
+  have caught one of that day's failures. *(a) A served-reachability
+  check:* fetch ONE file per critical-path family from the LIVE site
+  and require 200 -- an assembler module, the coverage index, a
+  positions file. It has to run against the CDN, because that is the
+  thing that was broken. *(b) A store-drift REPORT:* thirty entries
+  in `objects_config.json` already carry `orrery_constant` pointers
+  like `constants_new.py::RADIATIVE_ZONE_AU`, and nothing follows
+  them. A read-only checker that fetches `constants_new.py` at the
+  orrery HEAD SHA and reports every pointer whose value disagrees
+  would have caught 0.7 against 0.713 the moment it happened.
+- **(b) is NOT the transport and does not replace segment 2.** It
+  moves nothing and fixes nothing. It converts a silent hole into a
+  loud one for a fraction of the cost, and it can be built BEFORE
+  the transport rather than instead of it.
+- **The 2026-08-29 handoff says this work has no ledger handle. It
+  does** -- this one, opened 2026-08-25. Recorded so the next
+  session does not mint a second.
+- **BUILT 2026-08-29 and delivered as `maintenance_run.py` for the
+  gallery repo root.** Two moments rather than one, which is where
+  it departs from the orrery's runner: the plain run is offline and
+  goes before a commit, and `--live` goes after a push, because the
+  Jekyll failure existed only on the deployed site and only after a
+  push. Three states, not two: PASS, FAIL, and UNREACHABLE, with
+  unreachable counted separately and never folded into a passing
+  total.
+- **Roster.** Offline: the module atlas generator; the 149-check
+  cache builder suite; the three Node smoke suites, with Node's
+  absence REPORTED rather than skipped; and the artifact-1
+  assembler test, report-only. Live: served reachability against
+  the CDN, and the store-drift report.
+- **Two findings on its first run**, both recorded: L-262, the
+  framing smoke test that has never run; and L-263, a rounded copy
+  in `objects_config.json`.
+- **One design change the sandbox forced.** The first version read
+  any non-200 as a missing file, and a blocking proxy answering 403
+  reported as the whole site being gone. Only a 404 is missing now;
+  anything else is unreachable, and a blanket failure across every
+  file reports as unreachable rather than crying wolf. A real
+  Jekyll failure is asymmetric -- the `.py` files 404 while the
+  page returns 200 -- and that asymmetry is the signal.
+- **No dashboard entry, deliberately.** The dashboard lives in the
+  orrery, so a button there would reach into a sibling directory,
+  which is the same cross-repo reach that put this runner in the
+  gallery. VS Code's Run button from the gallery root instead.
+- **A defect in it, found by its own first two live runs.** The
+  served-reachability check compared the site's bytes against the
+  working copy's bytes, and reported `coverage_index.json` and
+  `feature_configs.json` stale on every run while everything else
+  matched -- including `interactive.html`, freshly pushed, which
+  proved the deploy was current. `gallery_cache_builder.py` writes
+  both with `open(path, 'w')`, so on Windows they land CRLF in the
+  working copy; `.gitattributes` carries `* text=auto eol=lf`, so
+  git stores LF and Pages serves LF. Identical content, and the
+  check was calling a correct deploy stale -- crying wolf on the
+  one check whose whole value is being believed.
+- **Why it shipped that way, which is the part worth keeping.**
+  The same line-ending fault made the first ledger patch refuse to
+  run a few hours earlier the same day. It was diagnosed and fixed
+  in the patch scripts and never carried to the runner, which had
+  already been written. One producer, two consumers, one of them
+  moved: Check All Parallel Pipelines, and L-182's shape.
+- **Fixed 2026-08-29** at gallery `6c612397`. The comparison reads
+  content, and a CRLF-only difference still says so on its row --
+  "matches (the working copy is CRLF)" -- rather than being
+  swallowed. Mutation-tested both ways before delivery: a
+  one-word content difference still reports NOT YET DEPLOYED, and
+  a 404 on the `.py` files while the page returns 200 still
+  reports FAIL.
+- **The portable rule is owed to a skill, not to this row.**
+  Across a Windows working copy, compare CONTENT, never raw bytes.
+  It belongs in safe-file-editing, which is a bump and therefore a
+  four-step binding-rule obligation. **Tony-action (do):** not
+  done in this pass; carried in the 2026-08-29 night handoff.
+**Closed 2026-08-29.** Built, committed at gallery `ae410c29`,
+renamed `gallery_maintenance_run.py` under L-264, and both live
+checks pass against the deployed site: served reachability 7 of 7,
+store drift 30 pointers with 26 match and 0 DRIFT.
+- **Note:** RICE 4/4/80/4 -> 3.2, confirmed by Tony 2026-08-29.
+**Ref:** L-188 (the orrery-side maintenance runner this mirrors);
+L-235; L-258 (the store drift check would have caught it); L-259;
+L-262 and L-263 (its first two findings).
+
+#### [L-263] The served chromosphere value is a rounded copy
+<!-- L:263 status:DONE upd:2026-08-29 section:C flag: rice:2/3/95/1 -->
+- **Found by the store-drift check** (L-236) on its first run against
+  real data, 2026-08-29.
+- **`CHROMOSPHERE_PHYSICAL_RADII` is 1.00287480236 in the orrery and
+  1.0028748 in the gallery's `data/objects_config.json`.** They agree
+  to nine significant figures, so nothing is drawn wrong -- the
+  difference is about two parts in a billion of a solar radius.
+- **The class is the point, not the size.** 1.0028748 is the correct
+  figure to REPORT; it is not a second thing to STORE. A copy held at
+  a different precision is a shadow constant one digit at a time,
+  which is One Value, One Home (provenance-discipline 2.7).
+- **Tony's ruling, 2026-08-29**, and it is why the check is exact
+  rather than tolerant: significant figures are checked against the
+  store, not against whether a person catches them. How many figures
+  a value should carry is settled once, in the orrery. The gallery
+  carries what the store carries.
+  **Tony-action (do):** set the value in
+  `/objects/0/features/solar_atmosphere/chromosphere` to the store's
+  number. The runner reports it every run until it matches.
+- **It also names the transport hole from the other side.** The
+  orrery holds a DERIVATION and the gallery holds a NUMBER, so
+  changing `CHROMOSPHERE_PHYSICAL_KM` moves one and not the other.
+  Fixing this value does not fix that.
+- **Note:** RICE 2/3/95/1, confirmed by Tony 2026-08-29.
+- **BUILT and delivered 2026-08-29** in the same gallery patch as
+  L-260's axis titles. The value becomes 1.002874802357338, which
+  is what `constants_new.py` derives from 1.0 +
+  CHROMOSPHERE_PHYSICAL_KM / SUN_RADIUS_KM. Edited as TEXT rather
+  than by re-serialising the parsed JSON, so one digit changes
+  instead of 1,700 lines reflowing, and the result is re-parsed and
+  the value re-read before the file is written.
+- **Verified against the real store**, not asserted: the drift
+  check re-run after the edit reports 26 match, 0 DRIFT, where it
+  read 25 and 1 before.
+**Closed 2026-08-29** at gallery `6c612397`. The value is
+1.002874802357338, and the drift check re-run against the LIVE
+site -- not against a local copy -- reports 26 match, 0 DRIFT,
+where it read 25 and 1 before. The corrected figure is visible in
+the exhibit's own hover with its citation, which is the first time
+a provenance correction in this project has been readable by a
+visitor.
+**Ref:** L-236; L-258 (The Store Carries the Verified Figure);
+segment 2 in `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`
+Section 5a.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
