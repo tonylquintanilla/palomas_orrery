@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<!-- sun_gui_mockup.html - GUI shape study for the Sun exhibit
+     Paloma's Orrery / interactive gallery
+
+     A THROWAWAY MOCKUP, not a deliverable. It runs real Plotly with the
+     real radii, colours, point counts, opacities and sources read out of
+     data/objects_config.json, and it reuses the live page's own geometry,
+     hover format and framing rules, so the BEHAVIOUR is the behaviour.
+     What it does not do: run Pyodide, read the served cache, or draw the
+     four non-spherical structures exactly (see APPROXIMATED below).
+
+     Open it in a browser. Drag the window narrow to see portrait.
+     Built August 30, 2026 with Anthropic's Claude Opus 5. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Paloma's Orrery - The Sun (GUI study)</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-void:#060a12; --bg-deep:#0a0a0f; --bg-panel:#111827;
+  --bg-surface:#1a1a2e; --accent:#c9a84c; --accent-dim:#8a7535;
+  --text-primary:#e8e6e3; --text-secondary:#9a9a9a; --text-dim:#5a5a6a;
+  --border:#2a2a3a; --interactive:#6d8cff;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100vh;height:100dvh;background:var(--bg-deep);
+  color:var(--text-primary);font-family:'DM Sans',system-ui,sans-serif;
+  overflow:hidden;-webkit-tap-highlight-color:transparent}
+.app{display:flex;flex-direction:column;height:100vh;height:100dvh}
+
+.top-bar{display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;background:var(--bg-panel);
+  border-bottom:1px solid var(--border);flex-shrink:0;min-height:44px}
+.back-link{color:var(--text-secondary);font-size:13px;font-weight:500;
+  text-decoration:none}
+.back-link:hover{color:var(--accent)}
+.top-title{font-family:'Cormorant Garamond',serif;font-size:16px;
+  font-weight:600}
+.info-btn{background:none;border:1px solid var(--border);border-radius:8px;
+  padding:4px 10px;cursor:pointer;color:var(--text-dim);font-size:13px;
+  font-family:inherit}
+.info-btn:hover{color:var(--accent);border-color:var(--accent)}
+.info-btn:focus-visible{outline:2px solid var(--interactive);outline-offset:2px}
+
+.viz-area{flex:1;position:relative;overflow:hidden;min-height:0}
+#plot{width:100%;height:100%}
+
+/* --- 4. focus label ------------------------------------------------- */
+.focus-bar{position:absolute;left:0;right:0;bottom:0;display:flex;
+  justify-content:center;z-index:5;pointer-events:none;
+  padding:12px 12px calc(12px + env(safe-area-inset-bottom))}
+.focus-btn{pointer-events:auto;display:flex;align-items:center;gap:9px;
+  max-width:92%;background:rgba(17,24,39,.94);border:1px solid var(--border);
+  border-radius:20px;padding:8px 15px;color:var(--text-primary);
+  font:500 13px 'DM Sans',system-ui,sans-serif;cursor:pointer;
+  transition:border-color .15s}
+.focus-btn:hover{border-color:var(--accent)}
+.focus-btn:focus-visible{outline:2px solid var(--interactive);outline-offset:2px}
+.focus-btn .swatch{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.focus-btn .fname{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.focus-btn .chev{color:var(--text-dim);font-size:10px;transition:transform .2s}
+.focus-btn.open .chev{transform:rotate(180deg)}
+
+/* --- 3. drawer ------------------------------------------------------ */
+.scrim{position:absolute;inset:0;background:rgba(6,10,18,.55);z-index:6;
+  opacity:0;pointer-events:none;transition:opacity .25s}
+.scrim.open{opacity:1;pointer-events:auto}
+.drawer{position:absolute;left:0;right:0;bottom:0;max-height:60%;
+  background:var(--bg-panel);border-top:1px solid var(--border);z-index:7;
+  transform:translateY(101%);transition:transform .26s ease;
+  display:flex;flex-direction:column;
+  padding-bottom:env(safe-area-inset-bottom)}
+.drawer.open{transform:translateY(0)}
+.drawer-head{flex-shrink:0;display:flex;justify-content:space-between;
+  align-items:center;padding:12px 16px 9px;font-size:10px;font-weight:600;
+  letter-spacing:1.2px;text-transform:uppercase;color:var(--text-dim);
+  border-bottom:1px solid var(--border)}
+.drawer-head button{background:none;border:none;color:var(--interactive);
+  font:600 10px 'DM Sans',sans-serif;letter-spacing:1.2px;cursor:pointer;
+  text-transform:uppercase}
+.drawer-list{overflow-y:auto;padding:4px 0 10px}
+.row{display:flex;align-items:center;gap:10px;width:100%;background:none;
+  border:none;padding:9px 16px;cursor:pointer;text-align:left;
+  color:var(--text-dim);font:400 13px 'DM Sans',system-ui,sans-serif}
+.row:hover{background:var(--bg-surface)}
+.row:focus-visible{outline:2px solid var(--interactive);outline-offset:-2px}
+.row.on{color:var(--text-primary)}
+/* The focused row and the label name the same thing, so they are shown to
+   be the same thing. Tony's G1, 2026-08-30. */
+.row.focused{background:rgba(201,168,76,.10);box-shadow:inset 3px 0 0 var(--accent)}
+.row.focused .rname{color:var(--accent);font-weight:500}
+.row .box{width:18px;height:18px;border-radius:4px;border:1px solid #3a3a4a;
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-size:12px;line-height:1;color:var(--bg-void)}
+.row .box:hover{border-color:var(--accent)}
+.row.on .box{background:var(--accent);border-color:var(--accent)}
+.row .swatch{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.row .rname{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* Red, and always on. The cross markers are outlined in red and "go" does
+   the same job they do -- move the camera -- so the colour is the link
+   between them rather than a third accent for its own sake. */
+.row .go{color:#f0594a;font-size:12px;font-weight:600;letter-spacing:.6px;
+  text-transform:uppercase;flex-shrink:0;opacity:.75;transition:opacity .15s}
+.row:hover .go{opacity:1}
+
+/* --- 2. info panel -------------------------------------------------- */
+.info-panel{position:absolute;top:0;right:0;bottom:0;width:290px;
+  max-width:86vw;background:var(--bg-panel);border-left:1px solid var(--border);
+  padding:20px 16px;z-index:8;overflow-y:auto;
+  transform:translateX(101%);transition:transform .26s ease}
+.info-panel.open{transform:translateX(0)}
+.info-panel h3{font-family:'Cormorant Garamond',serif;font-size:19px;
+  font-weight:600;margin-bottom:4px}
+.info-panel .kicker{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--text-dim);font-weight:600;margin-bottom:14px}
+.info-panel p{font-size:13px;color:var(--text-secondary);line-height:1.6;
+  margin-bottom:12px}
+/* The cross marker carries identity, radius and citation. This panel does
+   NOT repeat them -- it carries the descriptive text, which is the thing
+   a tooltip is the wrong shape for. Tony's ruling, 2026-08-30. */
+.info-panel{width:360px}
+.ip-body{font-size:13px;color:var(--text-secondary);line-height:1.65;
+  white-space:pre-wrap;padding-bottom:14px;border-bottom:1px solid var(--border);
+  margin-bottom:12px}
+.ip-missing{color:var(--text-dim);font-style:italic}
+.ip-close{position:absolute;top:12px;right:12px;background:none;border:none;
+  color:var(--text-dim);font-size:22px;line-height:1;cursor:pointer;padding:0 4px}
+.ip-close:hover{color:var(--accent)}
+.info-panel a{color:var(--interactive);font-size:12px;word-break:break-all;
+  text-decoration:none}
+.info-panel a:hover{text-decoration:underline}
+
+.study{position:absolute;left:12px;top:12px;z-index:4;font-size:10px;
+  color:#3a3a48;max-width:210px;line-height:1.5;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.drawer,.info-panel,.scrim{transition:none}}
+@media (max-width:768px){.modebar{display:none !important}
+  .top-title{font-size:14px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top-bar">
+    <a href="#" class="back-link" onclick="return false">&lsaquo; Gallery</a>
+    <div class="top-title">The Sun</div>
+    <button class="info-btn" id="info-toggle" aria-label="About the focused object">i</button>
+  </div>
+  <div class="viz-area">
+    <div id="plot"></div>
+    <div class="study">GUI study. Real radii and sources; four structures
+      approximated as spheres at their outer limit.</div>
+
+    <div class="focus-bar">
+      <button class="focus-btn" id="focus-btn" aria-expanded="false"
+              aria-controls="drawer">
+        <span class="swatch" id="focus-swatch"></span>
+        <span class="fname" id="focus-name">Loading</span>
+        <span class="chev">&#9662;</span>
+      </button>
+    </div>
+
+    <div class="scrim" id="scrim"></div>
+
+    <div class="drawer" id="drawer" role="group" aria-label="In this scene">
+      <div class="drawer-head">
+        <span>In this scene &mdash; <span id="drawer-count"></span></span>
+        <button id="drawer-all">All / none</button>
+      </div>
+      <div class="drawer-list" id="drawer-list"></div>
+    </div>
+
+    <div class="info-panel" id="info-panel">
+      <button class="ip-close" id="ip-close" aria-label="Close">&times;</button>
+      <div class="kicker">About</div>
+      <h3 id="ip-name"></h3>
+      <p id="ip-note"></p>
+      <div class="ip-body" id="ip-body"></div>
+      <a href="#" id="ip-link" onclick="return false"></a>
+    </div>
+  </div>
+</div>
+<script>
+
+// ====================================================================
+// DATA -- generated from data/objects_config.json, not retyped.
+// [name, color, opacity, marker_size, n_points, radiusAu, radiusText,
+//  source, shape]  sorted by radius.  shape != null means the live page
+// draws something other than a sphere; this study draws a sphere at the
+// structure's outer limit and says so.
+// ====================================================================
+var SHELLS = [
+ ["Core","rgb(70, 130, 180)",1.0,10,25,0.0009300934522,"0.2 solar radii","Bahcall, Pinsonneault & Basu (2001), ApJ 555:990 (radial profiles); drawn at the low end of the conventional 0.2-0.25 R_sun core range",null],
+ ["Radiative Zone","rgb(30, 144, 255)",1.0,7,25,0.003315783157,"0.713 solar radii","Christensen-Dalsgaard, Gough & Thompson (1991), ApJ 378:413, \"The depth of the solar convection zone\" -- convection-zone depth measured at 0.287 +/...",null],
+ ["Photosphere","rgb(255, 244, 214)",1.0,7.0,25,0.004650467261,"1.0 solar radii","IAU 2015 Resolution B3 -- nominal solar radius",null],
+ ["Chromosphere (2,000 km skin)","rgb(30, 144, 255)",0.5,3.0,25,0.004663836435,"1.002874802357338 solar radii","Carroll & Ostlie, An Introduction to Modern Astrophysics, Ch. 11 -- chromosphere extends about 2000 km above the photosphere",null],
+ ["Inner Corona","rgb(0, 0, 255)",0.45,3.0,20,0.01395140178,"3 solar radii","Lamy, Gilardy, Llebaria, Quemerais & Ernandez, \"Coronal Photopolarimetry with the LASCO-C3 Coronagraph over 24 Years [1996-2019]\", Solar Physics (a...",null],
+ ["Roche Limit (Comets)","rgb(200, 60, 60)",0.5,3.0,20,0.01604411205,"3.45 solar radii","Murray & Dermott, Solar System Dynamics (1999), Sec. 4.6",null],
+ ["Streamer Belt (helmet and stalk)","rgb(255, 200, 80)",0.4,2.5,20,0.09161420504,"19.7 R_sun","Kasper et al. (2021), Phys. Rev. Lett. 127:255101 -- the band dissolves across the Alfven surface","streamer_band"],
+ ["Alfven Surface","rgb(0, 200, 200)",0.35,3.5,20,0.09161420504,"19.7 solar radii","Kasper et al. (2021), Phys. Rev. Lett. 127:255101 -- first Parker Solar Probe crossing, 28 April 2021",null],
+ ["Outer Corona","rgb(25, 25, 112)",0.5,3.5,20,0.232523363,"50 solar radii","Mann et al. (2004), A&A 414:1127; F-corona envelope, not a sharp physical edge",null],
+ ["Termination Shock","rgb(240, 244, 255)",0.4,3.0,20,94,"94 AU","Stone et al. (2005), Science 309:2017 -- Voyager 1 crossing at 94 AU",null],
+ ["Heliopause","rgb(135, 206, 250)",0.4,3.0,20,121.6004179,"26148 solar radii","Gurnett et al. (2013), Science 341:1489",null],
+ ["Inner Limit of Oort Cloud","rgb(255, 255, 255)",0.35,3.0,20,2000,"2000 AU","Hills (1981); Oort (1950) -- inner edge estimate",null],
+ ["Hills Cloud (torus)","rgb(180, 160, 255)",0.4,2.5,20,20000,"20000 au","Hills (1981) -- outer edge of the inner (Hills) cloud","torus"],
+ ["Inner Oort Cloud","rgb(255, 255, 255)",0.35,3.0,20,20000,"20000 AU","Hills (1981) -- outer edge of the inner (Hills) cloud",null],
+ ["Galactic Tide (thinned at the plane)","rgb(140, 200, 200)",0.4,2.5,20,50000,"50000 au","DECLARED -- a mid-cloud distance between the Hills cloud and the outer edge, chosen for the illustration. Not a measurement.","tide_field"],
+ ["Outer Oort Cloud (clumps)","rgb(200, 200, 255)",0.4,2.5,20,100000,"100000 au","Oort (1950); Weissman (1996)","clump_field"],
+ ["Outer Oort Cloud","rgb(255, 255, 255)",0.3,3.0,20,100000,"100000 AU","Oort (1950); Weissman (1996)",null],
+ ["Gravitational Influence","rgb(102, 187, 106)",0.3,3.0,20,150000,"150000 AU","Approximate Hill sphere of the Sun in the Milky Way (model-dependent); literature estimates range 100,000-200,000 AU",null]
+];
+
+// Descriptive text, extracted from solar_visualization_shells.py in the
+// ORRERY repo -- 18 strings, one per shell, already written. They are
+// not in the gallery: objects_config.json carries name, radius, colour
+// and source, and no prose. Getting them across is segment 2, the
+// cross-repo transport, which has never been built. Pasted here by hand
+// for the study, which is exactly the hand copy the transport replaces.
+var INFO = {
+"Core": "The Sun's core is where the Sun's energy is generated through nuclear fusion, providing the light and heat that sustain life on Earth:\n* Location: The core is located at the very center of the Sun, extending outward to about 25% of the Sun's radius.\n* Size: While relatively small compared to the Sun's overall size, the core contains about 34% of the Sun's total mass.\n* Temperature: The core is the hottest place in the solar system, with temperatures reaching 15 million Kelvin\n* Density: The core is incredibly dense, about 150 times denser than water. This extreme density is due to the\n  immense pressure exerted by the Sun's outer layers.\n* Composition: The core is primarily composed of hydrogen (about 34% by mass) and helium (about 64% by mass).\n  Trace amounts of heavier elements are also present.\n\nThe dominant fusion process in the Sun's core is the proton-proton chain reaction:\n* Two protons, hydrogen nuclei, collide and fuse to form a deuterium nucleus releasing a positron and a neutrino.\n* The deuterium nucleus collides with another proton to form a helium-3 nucleus, releasing a gamma ray.\n* Two helium-3 nuclei collide to form a helium-4 nucleus, releasing two protons.\n* This process converts a small amount of mass into a tremendous amount of energy\n\nThe energy generated in the core is transported outward through the Sun in two ways:\n* Radiative zone: The energy first travels through the radiative zone, where it is carried by photons that undergo\n  countless absorptions and re-emissions. This process is very slow, taking millions of years for energy to travel\n  from the core to the outer edge of the radiative zone.\n* Convective zone: Once the energy reaches the convective zone, it is transported by convection currents, where hot\n  plasma rises and cooler plasma sinks. This is a much faster process, taking only a few weeks for energy to reach\n  the Sun's surface.\n\n* Helioseismology: By analyzing sound waves traveling through the Sun, scientists can infer the conditions in the core,\n  such as its temperature, density, and composition.\n* Neutrino observations: Neutrinos produced in the core can pass through the Sun almost unimpeded, providing direct\n  information about the nuclear reactions taking place there.",
+"Radiative Zone": "The Solar Radiative Zone extends from about 0.2 to 0.7 solar radii, about 0.00325 AU. Temperature ranges from about\n7M K near the core to about 2M K near the convective zone. Energy is transported by radiative diffusion, through photon\nabsorption and re-emission.\n\nThe radiative zone is a vast region within the Sun, located between the core and the convective zone. It's a place\nof intense heat and density, where energy generated in the core slowly makes its way outward in the form of photons.\n* Density: The density also decreases with distance from the core, but it remains much denser than the convective zone above it.\n\n* Energy transport: The primary mode of energy transport in the radiative zone is radiative diffusion. Photons\n  generated in the core through nuclear fusion undergo countless absorptions and re-emissions as they interact\n  with the dense plasma. This process is incredibly slow, and it can take millions of years for a photon to travel\n  from the core to the outer edge of the radiative zone.\n* Opacity: The radiative zone is highly opaque, meaning that photons can only travel a short distance before being\n  absorbed or scattered. This high opacity is due to the high density and the presence of heavy elements, which are\n  more efficient at absorbing and scattering radiation.\n* Energy transfer: The radiative zone plays a crucial role in transferring energy from the Sun's core to its outer\n  layers. Without it, the Sun would not be able to shine.\n* Stability: The slow and gradual energy transport in the radiative zone helps to maintain the Sun's overall stability.\n* Helioseismology: This technique uses observations of sound waves traveling through the Sun to probe its interior\n  structure, including the radiative zone. By analyzing the frequencies and patterns of these waves, scientists can\n  infer the temperature, density, and composition of the radiative zone.\n* Neutrino observations: Neutrinos are subatomic particles produced in the Sun's core that can pass through the\n  radiative zone almost unimpeded. By detecting and analyzing these neutrinos, scientists can gain information about\n  the nuclear reactions taking place in the core and the conditions in the radiative zone.",
+"Photosphere": "Solar Convective Zone and Photosphere, the visible surface.\n* The photosphere is the visible surface of the Sun. It's a relatively thin layer, only about 500 kilometers thick.\n* Including both the Convective Zone and the Photosphere, the radius is from 0.7 to 1 Solar radii, or about 0.00465 AU.\n* Temperature: from 2M K at the Radiative Zone to ~5,500K at the Photosphere.\n* Convection transports energy to the visible \"surface\" of the Sun. The convection process starts at the Radiative Zone\n* At the Photosphere, the energy is radiated as visible light. Radiation emits at a peak wavelength at 527.32 nm, which\n  is in the green spectrum. The Sun's emitted light is a combination of all visible wavelengths, resulting in a yellowish-white color.\n\n* The photosphere is cooler than the Sun's core and the layers above it, but still hot enough to make the photosphere glow brightly.\n* To the naked eye, the photosphere appears as a smooth, yellow disk. However, closer observations reveal a variety of features, including:\n  * Granulation: This is a pattern of small, bright cells surrounded by darker boundaries, caused by convection\n    currents bringing hot plasma up from the Sun's interior.\n  * Sunspots: These are dark, cooler regions on the photosphere caused by strong magnetic fields. They can be\n    larger than Earth and last for days or weeks.\n  * Faculae: These are bright regions surrounding sunspots, also associated with magnetic fields.\n  * Energy transport: The photosphere is where the Sun's energy, generated in its core through nuclear fusion,\n    is finally released as light. This energy has traveled outward through the Sun's interior in the form of\n    radiation and convection, and it's in the photosphere that it transitions to primarily radiation, allowing it\n    to escape into space.\n  * Spectrum: The photosphere emits a continuous spectrum of light, which includes all colors of the rainbow.\n  * Solar activity: The photosphere is also where many solar activity events originate, such as:\n    * Solar flares: These are sudden, intense bursts of energy and radiation caused by the release of magnetic\n      energy in the solar atmosphere.\n    * Coronal mass ejections (CMEs): These are massive eruptions of plasma and magnetic field from the Sun's corona,\n      often associated with flares.\n    * Solar activity events originating in the photosphere can affect Earth's magnetic field and disrupt satellites,\n      communication systems, and power grids.",
+"Chromosphere (2,000 km skin)": "The chromosphere is a dynamic and visually stunning layer of the Sun's atmosphere, sandwiched between the\nphotosphere (the visible surface) and the corona (the outermost layer). It's a region of dramatic temperature\nchanges, intricate structures, and energetic events.\n\n* The chromosphere is relatively thin, extending only about 2,000 kilometers (1,200 miles) above the photosphere.\n  It's also much less dense than the photosphere.\n* The temperature in the chromosphere increases dramatically with altitude, from around 4,000 Kelvin at the\n  photosphere to about 20,000 Kelvin at the inner corona.\n* The chromosphere gets its name from the Greek word \"chroma,\" meaning color, because of its reddish appearance.\n  This color is primarily due to the strong emission of light from hydrogen atoms\n* The chromosphere is a constantly changing environment, with a variety of features that evolve and erupt on\n  different timescales:\n  * Spicules: These are jet-like eruptions of plasma that rise and fall like geysers, covering the chromosphere\n    in a dynamic, \"grass-like\" pattern.\n  * Filaments and prominences: These are large, cool, dense structures of plasma suspended in the chromosphere\n    and corona by magnetic fields. When seen against the bright disk of the Sun, they appear as dark filaments.\n    When seen extending beyond the Sun's edge, they appear as bright prominences.\n  * Plages: These are bright regions in the chromosphere associated with active regions, where magnetic fields\n    are concentrated.\n\n* Temperature: ~6,000 to 20,000 K, for a average of 10,000 K\n* Radiates at an average peak wavelength of ~290 nm, ultraviolet range, invisible.",
+"Inner Corona": "The solar inner corona is the region of the Sun's atmosphere that lies closest to its surface. It's a dynamic and complex\nenvironment, with temperatures reaching millions of degrees Celsius and a variety of fascinating features:\n* Temperature: While still incredibly hot (around 1-3 million Kelvin), the inner corona is slightly cooler\nthan the outer corona. This temperature difference is one of the factors that drives the solar wind.\n* Density: The inner corona is denser than the outer corona, but still much less dense than the Sun's surface,\nthe photosphere. This low density makes it difficult to observe directly, except during a solar eclipse or\nwith specialized instruments.\n\nMagnetic field: The inner corona is dominated by the Sun's magnetic field, which shapes and controls the\nplasma in this region. The magnetic field lines create a variety of structures, including:\n* Coronal loops: These are closed loops of magnetic flux that trap hot plasma, forming bright arcs that\n  can be seen in ultraviolet and X-ray images.\n* Coronal holes: These are areas where the magnetic field lines are open, allowing plasma to escape into\n  space and contribute to the solar wind.\n* Streamers: These are large, elongated structures that extend outward from the Sun, often associated with\n  active regions and coronal mass ejections (CMEs).\n* Dynamic activity: The inner corona is a constantly changing environment, with features evolving and erupting\n  on different timescales. This activity is driven by the interplay between the magnetic field and the plasma,\n  leading to phenomena like:\n  * Solar flares: These are sudden, intense bursts of energy and radiation caused by the release of magnetic energy.\n  * CMEs: These are massive eruptions of plasma and magnetic field from the corona, which can travel through space\n    and impact Earth, disrupting satellites, communication systems, and power grids.\n\n* Solar Inner Corona (extends to 2-3 solar radii, ~0.014 AU)\n* Temperature: 1-2M K, or an average of about 1.5M K\n* It radiates at an average wavelength of 1.93 nm, within the extreme ultraviolet to soft X-ray regions.",
+"Roche Limit (Comets)": "The Roche limit is the distance within which a fluid body held together only by\nself-gravity will be torn apart by the Sun's tidal forces.\n\nFormula: d = 2.44 x R_sun x (rho_sun / rho_comet)^(1/3)\nSolar density: 1,408 kg/m^3 | Comet density: ~500 kg/m^3\nResult: ~3.45 solar radii = ~2,400,165 km from Sun center\n  = ~1,704,465 km from photosphere (~0.0114 AU)\n\nKey physics:\n* The Roche limit is NOT absolute. It marks where tidal forces overcome SELF-GRAVITY\n  only. Tensile strength -- the material bonds holding the nucleus together -- can\n  allow survival well inside the formal Roche limit.\n* Ikeya-Seki (C/1965 S1, ~5 km nucleus) survived at 1.66 R_sun (0.008 AU).\n* Great Comet of 1843 survived at 1.19 R_sun (0.006 AU) -- deepest ever recorded.\n* Comet Lovejoy (C/2011 W3, ~500 m) survived perihelion briefly at ~1.2 R_sun.\n* Size and structural coherence are decisive: larger nuclei have both stronger\n  self-gravity AND stronger material bonds to resist tidal disruption.\n\nMAPS C/2026 A1 context:\n* MAPS disintegrated at ~8.33 R_sun (0.039 AU) -- OUTSIDE the Roche limit.\n* Primary destruction mechanisms: thermal ablation (1-2 million K corona) and\n  rotational spin-up from outgassing jets. Tidal forces never acted on MAPS.\n* The debris swept THROUGH the Roche limit (3.45 R_sun, 0.016 AU) to perihelion\n  at 1.23 R_sun -- but the nucleus was already gone.",
+"Alfven Surface": "The Alfven surface is the true outer boundary of the solar corona -- the point where\nthe solar wind accelerates past the local Alfven speed and plasma can no longer\ncommunicate back to the Sun. Beyond it, the corona becomes the solar wind.\n\n* Location: ~10-20 solar radii, measured directly by NASA's Parker Solar Probe.\n  On April 28, 2021, Parker Solar Probe crossed inward at (computed) R_sun ((computed) million km from Sun center),\n  spending ~5 hours inside the corona -- the first spacecraft to 'touch the Sun.'\n* This is not a smooth sphere: it has spikes and valleys shaped by solar magnetic activity.\n  At polar coronal holes: ~12-15 R_sun. In the streamer belt: ~17-19 R_sun.\n\nWhy it matters:\n* Inside the Alfven surface: plasma is magnetically connected to the Sun.\n  Perturbations (like a passing comet) can propagate back to the solar surface.\n* Outside it: plasma becomes the solar wind, causally disconnected from the Sun.\n* This boundary governs the Sun's angular momentum loss and spin-down over time.\n\nMAPS C/2026 A1 context:\n* MAPS crossed the Alfven surface approximately April 3, ~18:00 UTC --\n  about 20 hours before its nucleus disintegrated.\n* Inside this boundary, the comet was immersed in magnetically connected coronal plasma\n  at temperatures of 1-2 million K, subject to intense tidal and thermal stresses.\n* The corona it entered here is physically different from the visible outer corona --\n  this is where the Sun 'feels' the comet and vice versa.",
+"Streamer Belt (helmet and stalk)": "The streamer belt is the brightest, most structured region of the visible\nsolar corona, seen at total eclipse as a pearly white halo.\n\nIT HAS NO SINGLE OUTER RADIUS, and since 2026-08-22 it is no longer\ndrawn as if it did. A streamer is two structures stacked. The HELMET,\na dome of closed magnetic loops, reaches no higher than 2-4 R_sun.\nAbove its cusp the field opens and the solar wind draws it out into a\nSTALK -- a thin current sheet reaching many solar radii, studied\nbetween 2 and 10. The band drawn here is ONE object with both: wide\nand dense at the base, pinching at the cusp at 4.0 R_sun where the\nloops open, then thinning and dissolving across the Alfven surface.\nIt has no drawn outer edge, because there is no edge to draw.\n(Suess & Nerney 2004, Adv. Space Res. 33:668; 2005, Solar Wind 11.)\n\nWhat you see at eclipse is a BRIGHTNESS boundary, and it divides two\nflow regimes rather than separating plasma from empty space. There is\nno surface there to get right.\n\nThree components of white-light corona:\n* K-corona (kontinuierlich): Sunlight scattered off free electrons. Dominates within 2-3 R_sun.\n  Spectrum is continuous (blurred absorption lines) -- electrons move too fast to preserve them.\n* F-corona (Fraunhofer): Sunlight scattered off dust particles. Shows Fraunhofer absorption lines.\n  Dominates beyond ~3 R_sun and extends to ~15 R_sun. Has an oval shape.\n* E-corona (emission): Line emission from highly ionized Fe, Ni, Ca atoms. Visible to ~2 R_sun.\n\n* Helmet streamers: Bottle-shaped, dense magnetic structures. The closed\n  helmet stays below 2-4 R_sun; its stalk continues far beyond.\n  Source of slow solar wind. Visible in coronagraphs and at eclipse.\n* Temperature: ~1-2 million K\n* MAPS C/2026 A1 was first detected in SOHO/LASCO C3 at ~0.15 AU (~33 R_sun) on April 2, 2026.\n  By April 3-4 it was passing through this visible streamer belt region.",
+"Outer Corona": "This shell marks the extended outer solar corona at ~50 solar radii (~0.23 AU).\nAt this distance the corona is extremely tenuous -- the F-corona (dust-scattered\nsunlight showing Fraunhofer absorption lines) dominates over the electron K-corona.\n\n* Helmet streamers have two parts: closed loops below 2-4 R_sun, then\n  an open-field stalk reaching many R_sun (Suess & Nerney 2004).\n* The Alfven surface -- the true corona/solar wind boundary -- is ~10-20 R_sun.\n  Parker Solar Probe measured this at (computed) R_sun on April 28, 2021.\n* Beyond the Alfven surface, plasma is solar wind, not corona.\n* This 50 R_sun shell represents the faint, extended F-corona envelope.\n\n* Temperature: ~1-2 million K (the coronal heating paradox -- hotter than the surface)\n* The corona merges gradually into the solar wind beyond ~15-20 R_sun.\n* Parker Solar Probe's closest approach: ~8.8 R_sun as of 2024.\n* The corona radiates at ~1.159 nm average wavelength (extreme ultraviolet to X-ray).",
+"Termination Shock": "The Solar Wind Termination Shock extends from about 75 to 100 AU.\n\nThe Termination Shock is the region where the solar wind slows down from\nsupersonic to subsonic speeds due to interaction with the interstellar\nmedium. The kinetic energy transfers into heat, increasing abruptly.\n\nVoyager 1 encountered the Termination Shock at 94 AU, while Voyager 2 at 84 AU.\nAfter the Termination Shock the speeds slow down to ~100 to 200 km/s.",
+"Heliopause": "The heliosphere is a vast, bubble-like region of space that surrounds the Sun and its planets. It's created by the\nsolar wind, a constant stream of charged particles flowing out from the Sun.\n* Solar Wind: The solar wind is the driving force behind the heliosphere. It consists mostly of protons and electrons,\n  along with heavier elements in smaller numbers. These particles are accelerated to high speeds by the Sun's heat and\n  then escape its gravity, flowing out into space.\n* Shape: The heliosphere isn't perfectly spherical. It's more like a long, teardrop shape with a rounded head and a\n  flowing tail. This shape is due to the Sun's movement through the interstellar medium, the gas and dust that fills the\n  space between stars.\n\nBoundaries: The heliosphere has a few distinct boundaries:\n* Termination Shock: This is where the solar wind abruptly slows down as it encounters the interstellar medium.\n* Heliosheath: This is the turbulent region beyond the termination shock, where the solar wind mixes with the interstellar medium.\n* Heliopause: This is the outermost boundary of the heliosphere, where the solar wind's pressure is balanced by the pressure of\n  the interstellar medium. It's considered the true \"edge\" of our solar system.\n* Protective Shield: The heliosphere acts as a protective bubble, shielding the planets within it from harmful galactic cosmic\n  radiation. This radiation comes from outside our solar system and can be dangerous to life.\n* Influence on Planets: The heliosphere also influences the planets within it. It interacts with planetary magnetic fields,\n  creating phenomena like auroras. It can also affect the atmospheres of planets without strong magnetic fields.\n\nVoyager Missions: Our most valuable information about the heliosheath comes from the Voyager 1 and Voyager 2 spacecraft,\nwhich have been traveling through space since 1977. Both probes have crossed the termination shock and are currently\nexploring the heliosheath, sending back valuable data about this mysterious region. Voyager 1 encountered the Heliopause\nat ~123 AU. This is considered the end of the Sun's influence and the start of interstellar space.\n\n* The heliosheath extends from ~120 to 150 AU at the Heliopause.\n* Temperature: ~1,000,000K on average.\n* Black body radiation at 2.897 nm falls within the X-ray region of the electromagnetic spectrum, which is invisible to the human eye.",
+"Inner Limit of Oort Cloud": "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the\nSolar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.\nPredominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.\nBelieved to be the source of long-period comets that enter the inner Solar System with orbital\nperiods exceeding 200 years.\n\nInner Oort Cloud (Hills Cloud): Extends from about 2,000 AU to 20,000 AU. More tightly bound to the\nSun. More tightly bound to the Solar System compared to the outer Oort Cloud. It serves as an\nintermediate zone between the Kuiper Belt and the outer Oort Cloud.",
+"Hills Cloud (torus)": "Based on dynamical models showing the inner Oort Cloud is more disk-like due to galactic tides.\nStructure:\n* Hills Cloud (Inner Oort): 2,000-20,000 AU, disk-like/toroidal\n* Outer Oort Cloud: 20,000-100,000+ AU, roughly spherical but clumpy\nKey Characteristics:\n* Not uniform shells but complex, structured regions\n* Density varies significantly throughout\n* Influenced by galactic tides and stellar encounters\n* Contains an estimated 1-100 trillion objects >1km\n\nScientific Evidence:\n* Comet orbital inclinations suggest spherical outer region\n* Short-period comet inclinations suggest disk-like inner region\n* Computer simulations show tidal sculpting effects\n* Stellar encounter models predict clumpy structure\nRecent Discoveries:\n* Objects like Sedna may be inner Oort Cloud members\n* 2012 VP113 provides evidence for inner Oort population\n* NEOWISE survey improving population estimates",
+"Inner Oort Cloud": "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the\nSolar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.\nPredominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.\nBelieved to be the source of long-period comets that enter the inner Solar System with orbital\nperiods exceeding 200 years.\n\nInner Oort Cloud (Hills Cloud): Extends from about 2,000 AU to 20,000 AU. More tightly bound to the\nSun. More tightly bound to the Solar System compared to the outer Oort Cloud. It serves as an\nintermediate zone between the Kuiper Belt and the outer Oort Cloud.",
+"Galactic Tide (thinned at the plane)": "Shows how the Milky Way's gravity creates asymmetries.\nStructure:\n* Hills Cloud (Inner Oort): 2,000-20,000 AU, disk-like/toroidal\n* Outer Oort Cloud: 20,000-100,000+ AU, roughly spherical but clumpy\nKey Characteristics:\n* Not uniform shells but complex, structured regions\n* Density varies significantly throughout\n* Influenced by galactic tides and stellar encounters\n* Contains an estimated 1-100 trillion objects >1km\n\nScientific Evidence:\n* Comet orbital inclinations suggest spherical outer region\n* Short-period comet inclinations suggest disk-like inner region\n* Computer simulations show tidal sculpting effects\n* Stellar encounter models predict clumpy structure\nRecent Discoveries:\n* Objects like Sedna may be inner Oort Cloud members\n* 2012 VP113 provides evidence for inner Oort population\n* NEOWISE survey improving population estimates",
+"Outer Oort Cloud": "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the\nSolar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.\n\nPredominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.\nBelieved to be the source of long-period comets that enter the inner Solar System with orbital\nperiods exceeding 200 years.\n\nOort Cloud's Outer Edge: At 100,000 AU, it's about 1.58 light-years from the Sun, placing it just\nbeyond the nearest star systems and marking the boundary between the Solar System and interstellar space.\n\nThe Outer Oort Cloud is the primary source of long-period comets. Objects here are more loosely bound and more\nsusceptible to external gravitational perturbations.",
+"Outer Oort Cloud (clumps)": "Reflects N-body simulations showing stellar encounters create density variations.\nStructure:\n* Hills Cloud (Inner Oort): 2,000-20,000 AU, disk-like/toroidal\n* Outer Oort Cloud: 20,000-100,000+ AU, roughly spherical but clumpy\nKey Characteristics:\n* Not uniform shells but complex, structured regions\n* Density varies significantly throughout\n* Influenced by galactic tides and stellar encounters\n* Contains an estimated 1-100 trillion objects >1km\n\nScientific Evidence:\n* Comet orbital inclinations suggest spherical outer region\n* Short-period comet inclinations suggest disk-like inner region\n* Computer simulations show tidal sculpting effects\n* Stellar encounter models predict clumpy structure\nRecent Discoveries:\n* Objects like Sedna may be inner Oort Cloud members\n* 2012 VP113 provides evidence for inner Oort population\n* NEOWISE survey improving population estimates",
+"Gravitational Influence": "Sun: Outer Limit of Gravitational Influence:\n\nThe Solar System's extent is actually defined in multiple ways. The Heliopause (120-123 AU):\nWhere the solar wind meets interstellar space.\n\nGravitational influence extends much further, including, Sedna's orbit (936 AU), the Hills Cloud/Inner\nOort Cloud (2,000-20,000 AU), and the Outer Oort Cloud (20,000-100,000 AU).\n\nWhile the Heliopause marks where the Sun's particle influence ends, its gravitational influence extends much\nfurther. Sedna and other distant objects remain gravitationally bound to the Sun despite being well beyond\nthe Heliopause. This is why astronomers generally consider the Oort Cloud (and objects like Sedna) to be part\nof our Solar System, even though we've never directly observed the Oort Cloud. The distinction comes down to\ndifferent types of influence:\n* Particle/plasma influence (solar wind) [OK] ends at Heliopause;\n* gravitational influence [OK] extends much further, including Sedna and the theoretical Oort Cloud.\n\nSo the Solar System is generally considered to extend at least as far as these gravitationally bound objects,\neven beyond the Heliopause. Sedna is one of our first glimpses into this very distant region that may connect\nto the Oort Cloud population."
+};
+
+var KM_PER_AU = 149597870.7;
+var HOVER_WIDTH = 70;
+// The arrival frame, matching interactive.html: core out through the
+// outer corona, with the whole streamer belt in view.
+var HALF_RANGE_AU = 0.25;
+
+var shown = SHELLS.map(function (s) { return s[5] <= HALF_RANGE_AU; });
+var focusIdx = -1;
+var gd = null;
+var traceOf = [];     // shell index -> [geometry trace index, marker index]
+var markerTrace = {}; // marker trace index -> shell index (click lookup)
+
+// --- formatting, copied from feature_renderers.js so the hover matches --
+function fmtKm(km) {
+  return km.toLocaleString("en-US", { maximumFractionDigits: 0 }) + " km";
+}
+function kmAndAu(km) {
+  return fmtKm(km) + " (" + (km / KM_PER_AU).toPrecision(3) + " AU)";
+}
+function wrapHover(text) {
+  var words = String(text).split(" "), lines = [], cur = "";
+  for (var i = 0; i < words.length; i++) {
+    if (cur && (cur + " " + words[i]).length > HOVER_WIDTH) {
+      lines.push(cur); cur = words[i];
+    } else { cur = cur ? cur + " " + words[i] : words[i]; }
+  }
+  if (cur) lines.push(cur);
+  return lines.join("<br>");
+}
+// Same construction as feature_renderers.js::spherePoints.
+function spherePoints(radiusAu, nPoints) {
+  var xs = [], ys = [], zs = [];
+  for (var i = 0; i < nPoints; i++) {
+    var theta = -Math.PI / 2 + Math.PI * (i / (nPoints - 1));
+    for (var j = 0; j < nPoints; j++) {
+      var phi = 2 * Math.PI * (j / (nPoints - 1));
+      xs.push(radiusAu * Math.cos(theta) * Math.cos(phi));
+      ys.push(radiusAu * Math.cos(theta) * Math.sin(phi));
+      zs.push(radiusAu * Math.sin(theta));
+    }
+  }
+  return { x: xs, y: ys, z: zs };
+}
+
+// --- traces ----------------------------------------------------------
+function buildTraces() {
+  var traces = [];
+  // Scene centre. Always drawn: it is the origin, inside everything.
+  traces.push({
+    type: "scatter3d", mode: "markers",
+    x: [0], y: [0], z: [0],
+    marker: { symbol: "circle", size: 7, color: "yellow" },
+    name: "Sun", text: ["Sun (scene center)"],
+    hovertemplate: "%{text}<extra></extra>", showlegend: false
+  });
+
+  for (var i = 0; i < SHELLS.length; i++) {
+    var s = SHELLS[i], label = "Sun: " + s[0], r = s[5];
+    var pts = spherePoints(r, s[4]);
+    traces.push({
+      type: "scatter3d", mode: "markers",
+      x: pts.x, y: pts.y, z: pts.z,
+      marker: { size: s[3], color: s[1], opacity: s[2] },
+      name: label, hoverinfo: "skip", showlegend: false
+    });
+
+    // Single info marker: 20 degrees of polar angle apart, at r * 1.05.
+    var polar = (Math.PI / 180) * 20 * i;
+    var hover = label + "<br><br>Radius: " + s[6] + "<br>= "
+              + kmAndAu(r * KM_PER_AU)
+              + "<br><br>" + wrapHover("Source: " + s[7]);
+    if (s[8]) {
+      hover += "<br><br>" + wrapHover("(This study draws this structure as "
+             + "a sphere at its outer limit. The live page draws its real "
+             + "shape.)");
+    }
+    traces.push({
+      type: "scatter3d", mode: "markers",
+      x: [r * 1.05 * Math.sin(polar)], y: [0], z: [r * 1.05 * Math.cos(polar)],
+      marker: { size: 8, color: s[1], opacity: 1.0, symbol: "cross",
+                line: { color: "red", width: 2 } },
+      name: "", text: [hover], customdata: [i],
+      hovertemplate: "%{text}<extra></extra>",
+      hoverlabel: { font: { size: 11 } }, showlegend: false
+    });
+
+    traceOf[i] = [traces.length - 2, traces.length - 1];
+    markerTrace[traces.length - 1] = i;
+  }
+  return traces;
+}
+
+// --- layout ----------------------------------------------------------
+// Portrait clips the 3D axis titles at the corners with a zero margin:
+// Plotly draws them at the edge of the scene box and there is no canvas
+// left. Landscape has the width to spare.
+function margins() {
+  return (window.innerHeight > window.innerWidth)
+    ? { l: 22, r: 22, t: 34, b: 26 }
+    : { l: 0, r: 0, t: 32, b: 0 };
+}
+function buildLayout(halfRangeAu) {
+  var r = halfRangeAu || HALF_RANGE_AU;
+  var ax = {
+    range: [-r, r], showgrid: true, gridcolor: "rgba(255,255,255,0.06)",
+    zerolinecolor: "rgba(255,255,255,0.1)", showbackground: true,
+    backgroundcolor: "#060a12", tickfont: { size: 11, color: "#9a9a9a" },
+    showspikes: false
+  };
+  function title(t) { return { text: t, font: { size: 13, color: "#b8b6b3" } }; }
+  return {
+    scene: {
+      xaxis: Object.assign({}, ax, { title: title("X (AU)") }),
+      yaxis: Object.assign({}, ax, { title: title("Y (AU)") }),
+      zaxis: Object.assign({}, ax, { title: title("Z (AU)") }),
+      camera: { eye: { x: 1.25, y: -1.25, z: 0.75 },
+                center: { x: 0, y: 0, z: 0 } },
+      aspectmode: "manual", aspectratio: { x: 1, y: 1, z: 1 }
+    },
+    paper_bgcolor: "#060a12", plot_bgcolor: "#060a12",
+    font: { family: "DM Sans, system-ui", color: "#e8e6e3" },
+    title: { text: "Paloma's Orrery \u2014 The Sun",
+             font: { family: "Cormorant Garamond, serif", size: 16,
+                     color: "#e8e6e3" },
+             x: 0.5, xanchor: "center", y: 0.97 },
+    showlegend: false,
+    margin: margins()
+  };
+}
+
+// --- the two independent states --------------------------------------
+// WHAT IS DRAWN is the drawer. WHERE THE CAMERA IS is the focus. They do
+// not drive each other, except that hiding the focused shell has to send
+// the focus somewhere real.
+function outermostShown() {
+  var best = -1;
+  for (var i = 0; i < SHELLS.length; i++) { if (shown[i]) best = i; }
+  return best;
+}
+// The frame must be set AFTER the restyle has settled. Firing both at
+// once left the scene showing the old cube until the modebar's reset
+// camera forced a redraw -- the "nothing happens until I click reset"
+// symptom in Tony's Mode 5 report, 2026-08-30.
+function applyVisibility(keepFocus) {
+  var idx = [], vis = [];
+  for (var i = 0; i < SHELLS.length; i++) {
+    idx.push(traceOf[i][0], traceOf[i][1]);
+    vis.push(shown[i] ? true : "legendonly",
+             shown[i] ? true : "legendonly");
+  }
+  // Toggling in the drawer moves the focus to the outermost thing drawn.
+  // Only an explicit focus -- a cross marker or a row's "go" -- pins it,
+  // and the pin lasts until the next toggle or until that shell is hidden.
+  // Toggling moves the focus to the outermost thing drawn. A focus set by
+  // hand survives, even onto a shell that is not drawn, until the next
+  // toggle -- the two states are independent and are allowed to disagree.
+  if (!keepFocus) { focusIdx = outermostShown(); }
+  renderChrome();
+  return Plotly.restyle(gd, { visible: vis }, idx).then(function () {
+    return frameOn(focusIdx);
+  });
+}
+// Tick spacing, 1/2/5 per decade. Same rule as gridDtick() in
+// solar_system_earth_test2.html. Without it the grid keeps whatever
+// spacing it had when the range was six orders of magnitude different.
+function gridDtick(span) {
+  if (span <= 0) { return 1; }
+  var raw = span / 6;
+  var exp = Math.floor(Math.log10(raw));
+  var mant = raw / Math.pow(10, exp);
+  var clean = mant < 1.5 ? 1 : mant < 3.5 ? 2 : mant < 7.5 ? 5 : 10;
+  return clean * Math.pow(10, exp);
+}
+// One half-range on all three axes, so a sphere stays a sphere. Plotly's
+// own autorange fits each axis separately and would draw ellipsoids.
+//
+// NO FLOOR. The live page floors this at HALF_RANGE_AU because its frame
+// only ever widens from a fixed arrival view. Here the frame follows the
+// focused object, and a 0.25 AU floor swallows the inner fifteen shells
+// whole: framing on the core, the radiative zone or the chromosphere all
+// produced the identical 0.25 AU cube, which is why adding them changed
+// nothing on screen. Found by Tony's Mode 5, 2026-08-30.
+function frameOn(i) {
+  var r = (i >= 0) ? SHELLS[i][5] * 1.1 : HALF_RANGE_AU;
+  var d = gridDtick(2 * r);
+  return Plotly.relayout(gd, {
+    "scene.xaxis.range": [-r, r], "scene.xaxis.dtick": d,
+    "scene.yaxis.range": [-r, r], "scene.yaxis.dtick": d,
+    "scene.zaxis.range": [-r, r], "scene.zaxis.dtick": d,
+    "scene.xaxis.tick0": 0, "scene.yaxis.tick0": 0, "scene.zaxis.tick0": 0
+  });
+}
+// Focusing moves the camera and NOTHING ELSE. It used to switch a hidden
+// shell on as well, which was the same conflation the drawer rows had:
+// one gesture quietly doing two jobs. If you send the camera to something
+// you have chosen not to draw, you get an empty frame at that scale --
+// which is an honest answer, not a bug. Tony's G2 ruling, 2026-08-30;
+// it settles G3 the same way and for the same reason.
+function focusOn(i) {
+  if (i < 0 || i >= SHELLS.length) { return; }
+  focusIdx = i;
+  setDrawer(false);
+  renderChrome();
+  return frameOn(i);
+}
+
+// --- chrome ----------------------------------------------------------
+function slugify(name) {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, "-")
+             .replace(/^-+|-+$/g, "");
+}
+function renderChrome() {
+  var s = (focusIdx >= 0) ? SHELLS[focusIdx] : null;
+  var hiddenFocus = (focusIdx >= 0 && !shown[focusIdx]);
+  document.getElementById("focus-name").textContent =
+    s ? (s[0] + (hiddenFocus ? " (not drawn)" : "")) : "Nothing drawn";
+  document.getElementById("focus-swatch").style.background =
+    s ? s[1] : "transparent";
+  document.getElementById("focus-swatch").style.opacity = hiddenFocus ? 0.3 : 1;
+
+  var n = 0;
+  var rows = document.getElementById("drawer-list").children;
+  for (var i = 0; i < rows.length; i++) {
+    rows[i].classList.toggle("on", shown[i]);
+    rows[i].classList.toggle("focused", i === focusIdx);
+    rows[i].querySelector(".box").innerHTML = shown[i] ? "&#10003;" : "";
+    if (shown[i]) { n++; }
+  }
+  document.getElementById("drawer-count").textContent =
+    n + " of " + SHELLS.length;
+
+  document.getElementById("ip-name").textContent = s ? s[0] : "";
+  document.getElementById("ip-note").textContent = s && s[8]
+    ? "Drawn here as a sphere at its outer limit; the live page draws its real shape."
+    : "";
+  var body = document.getElementById("ip-body");
+  var prose = s ? INFO[s[0]] : null;
+  body.className = prose ? "ip-body" : "ip-body ip-missing";
+  body.textContent = prose ? prose
+    : (s ? "No descriptive text has reached the gallery for this one."
+         : "Nothing is focused.");
+  var link = document.getElementById("ip-link");
+  link.textContent = s ? ("palomasorrery.com/sun/" + slugify(s[0])) : "";
+}
+function setDrawer(open) {
+  document.getElementById("drawer").classList.toggle("open", open);
+  document.getElementById("scrim").classList.toggle("open", open);
+  var b = document.getElementById("focus-btn");
+  b.classList.toggle("open", open);
+  b.setAttribute("aria-expanded", open ? "true" : "false");
+  if (open) {
+    var cur = document.getElementById("drawer-list").children[focusIdx];
+    if (cur && cur.scrollIntoView) { cur.scrollIntoView({ block: "nearest" }); }
+  }
+}
+// The panel is an overlay ON the plot. When it opens under the pointer the
+// canvas stops receiving mousemove, so Plotly never learns the pointer has
+// left the point and the last tooltip stays on screen -- Tony's "hovertext
+// seems hung up", 2026-08-30.
+//
+// Worse than the latch: Plotly's 3D hover hit-tests by reading pixels back
+// off the GPU on EVERY mouse move, which the browser console reports as
+// "GPU stall due to ReadPixels". Leaving that running underneath an open
+// overlay is what makes the page feel seized rather than merely stale.
+//
+// So opening the panel clears the tooltip and turns hover off outright,
+// and closing it turns hover back on. Nothing hit-tests while the panel
+// has the screen.
+function setInfo(open) {
+  document.getElementById("info-panel").classList.toggle("open", open);
+  if (!gd || !window.Plotly) { return; }
+  if (open) {
+    if (Plotly.Fx && Plotly.Fx.unhover) { Plotly.Fx.unhover(gd); }
+    Plotly.relayout(gd, { hovermode: false });
+  } else {
+    Plotly.relayout(gd, { hovermode: "closest" });
+  }
+}
+
+function buildDrawer() {
+  var list = document.getElementById("drawer-list");
+  for (var i = 0; i < SHELLS.length; i++) {
+    (function (k) {
+      var row = document.createElement("button");
+      row.type = "button";
+      row.className = "row";
+      row.innerHTML =
+        '<span class="box"></span>' +
+        '<span class="swatch" style="background:' + SHELLS[k][1] + '"></span>' +
+        '<span class="rname"></span>' +
+        '<span class="go">go</span>';
+      row.querySelector(".rname").textContent = SHELLS[k][0];
+      // ONE JOB PER CONTROL. The box decides whether a shell is drawn.
+      // Everything else on the row moves the camera to it. Nothing on
+      // this row does both.
+      //
+      // Before, clicking anywhere on the row toggled the shell, so
+      // reaching for a name made the object vanish. Tony's G2 ruling,
+      // 2026-08-30: "let the row selection just identify the object
+      // being targeted, with the box selecting the object and the go
+      // moving the camera separately."
+      row.onclick = function (ev) {
+        var t = ev.target;
+        var onBox = t && t.className && String(t.className).indexOf("box") >= 0;
+        if (onBox) {
+          shown[k] = !shown[k];
+          applyVisibility(false);
+        } else {
+          focusOn(k);
+        }
+      };
+      list.appendChild(row);
+    })(i);
+  }
+}
+
+// --- boot ------------------------------------------------------------
+var resizeTimer = null;
+function onResize() {
+  if (resizeTimer) { clearTimeout(resizeTimer); }
+  resizeTimer = setTimeout(function () {
+    if (gd) { Plotly.relayout(gd, { margin: margins() }); }
+  }, 180);
+}
+
+function start() {
+  gd = document.getElementById("plot");
+  buildDrawer();
+  Plotly.newPlot(gd, buildTraces(), buildLayout(HALF_RANGE_AU), {
+    responsive: true,
+    displayModeBar: window.innerWidth > 768,
+    displaylogo: true
+  }).then(function () {
+    focusIdx = outermostShown();
+    applyVisibility(false);
+  });
+
+  // Tapping a cross marker moves the camera. It changes nothing about
+  // what is drawn -- that is the whole point of the split.
+  //
+  // Keyed on curveNumber, not customdata: Plotly does not reliably carry
+  // customdata into a gl3d click event, which is why the markers did not
+  // respond at all in Tony's Mode 5 report, 2026-08-30. curveNumber is
+  // the trace index and is always present.
+  gd.on("plotly_click", function (ev) {
+    if (!ev || !ev.points || !ev.points.length) { return; }
+    var k = markerTrace[ev.points[0].curveNumber];
+    if (typeof k === "number") { focusOn(k); }
+  });
+  // A cross marker is a small target. Double-click the shell itself too.
+  gd.on("plotly_doubleclick", function () { return false; });
+
+  document.getElementById("focus-btn").onclick = function () {
+    setDrawer(!document.getElementById("drawer").classList.contains("open"));
+  };
+  document.getElementById("scrim").onclick = function () { setDrawer(false); };
+  document.getElementById("ip-close").onclick = function () { setInfo(false); };
+  document.getElementById("info-toggle").onclick = function () {
+    setInfo(!document.getElementById("info-panel").classList.contains("open"));
+  };
+  document.getElementById("drawer-all").onclick = function () {
+    var any = shown.some(function (v) { return v; });
+    for (var i = 0; i < shown.length; i++) { shown[i] = !any; }
+    applyVisibility(false);
+  };
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { setDrawer(false); setInfo(false); }
+  });
+  window.addEventListener("resize", onResize);
+  window.addEventListener("orientationchange", onResize);
+}
+start();
+</script>
+</body>
+</html>
