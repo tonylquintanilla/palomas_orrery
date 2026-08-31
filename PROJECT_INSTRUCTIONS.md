@@ -564,7 +564,7 @@ exactly what a real pass reports.
 So the test is not "did it pass." It is: WHAT WOULD MAKE THIS FAIL, and
 does the passing output prove that path was live?
 
-Three moves, in order of how often they are the answer:
+Four moves, in order of how often they are the answer:
 - Make success carry evidence. Print what was compared, against what,
   and how many things were examined. "No changes since <sha> <subject>"
   cannot print unless the revision resolved; "no changes" alone can
@@ -575,6 +575,13 @@ Three moves, in order of how often they are the answer:
 - Put the check where it runs. A check in a store nobody opens is a
   check that cannot fail, no matter how correct it is. Prefer the tool
   already in the routine over the file that has to be remembered.
+- Make the delta name what moved. A check that reports a COUNT delta
+  cannot fail: clear one finding and gain another between runs and the
+  total is identical, so a real change and no change print the same
+  line. Compare NAMES. PROVENANCE_AUDIT.md's "No file's Tier-1 count
+  rose" and a run history tracking one number per run are both that
+  shape. (The general habit this is the sharp end of is A Report Names
+  Its Items, below.)
 
 The confirming question, and it is Tony's: what tells us it is working?
 If the only answer is that it did not complain, that is not an answer.
@@ -585,15 +592,16 @@ a 55-pin test file nothing executed for ten days, and a git diff that
 exits 0 with empty output for an untracked path. Each was found by a
 different route and none was found by reading a passing result.)
 
-A Report Names Its Items [CRITICAL]
-Companion to the gate above, and it reaches every report this project
-produces, not only checks. A count states a SIZE. Names state what is
-there. A report that gives the size and withholds the names is complete
-only for a reader who can go and find out WHAT -- and neither reader
-here can. Claude resets every session and will not think to open the
-file. Tony cannot read everything and does not grep: "I can't go grep
-the code for all the instances that built a count. A list is manageable
-and it gives me a sense of the gap."
+A Report Names Its Items [QUALITY]
+The general habit whose sharp end is the fourth move above. It reaches
+every report this project produces, not only checks. A count states a
+SIZE. Names state what is there. A report that gives the size and
+withholds the names is complete only for a reader who can go and find
+out WHAT -- and neither reader here can. Claude resets every session
+and will not think to open the file. Tony cannot read everything and
+does not grep: "I can't go grep the code for all the instances that
+built a count. A list is manageable and it gives me a sense of the
+gap."
 
 So a report has to be complete enough to ACT ON WHERE IT LANDS.
 
@@ -602,21 +610,14 @@ The names also carry the SHAPE, which no number can. "16" is a size.
 whole of one body's ring system, one kind of thing, mechanical rather
 than seven separate judgments.
 
-AND A COUNT CAN BE IDENTICAL ACROSS A REAL CHANGE. Clear one finding in
-a file and introduce another in the same file, and a count-based delta
-reports that nothing moved. That is why this sits beside the gate above
-rather than in a style guide: a count-based report is a check that
-cannot fail.
-
 It is count AND names, not names instead of the count. MODULE_ATLAS.md
 is the worked example -- "Undetermined role (4)" followed immediately by
 the four filenames.
 
 The scope is every place this project reports a set:
-- Scanner and runner summaries, and their run histories. A delta over
-  counts cannot see a swap; a delta over names can.
+- Scanner and runner summaries, and their run histories.
 - Ledger and handoff enumerations, which name the handles.
-- Counted claims in this document and in the skills. "Three moves" and
+- Counted claims in this document and in the skills. "Four moves" and
   "two limits" name what they count; "5 parallel pipelines" does not.
 - Findings, gaps and backlogs -- named by CLASS where the instance list
   is long, since The Braid already rules that a backlog grows by kinds
@@ -633,21 +634,59 @@ A coordinate is not a name. PROVENANCE_AUDIT.md reporting "display
 string @ line 936" is better than a count and still requires opening
 the file to learn the thing is hover_text_sun_and_corona.
 
+[QUALITY] rather than [CRITICAL], on this document's own promotion
+test. The naming half has failed repeatedly and in view, and every one
+of those failures was recoverable -- a report nobody can act on gets
+asked about. The count-delta half can pass while blind, so it lives in
+the gate above. A check moves up when a failure shows it was
+load-bearing, and the critical tier only works while it stays short.
+
 (Tony's ruling, August 30, 2026; L-269. Three instances measured that
 session, spanning the range: MODULE_ATLAS.md doing it right, the
 scanner summary doing it not at all, PROVENANCE_AUDIT.md naming a
-coordinate. This document's own Check All Parallel Pipelines is an
-unmet instance -- it counts five pipelines and names none, in the
-paragraph telling the reader to map ALL consumers -- and a search that
-day across this file, the ten skills and the ledger found the five
-named nowhere. Left standing and carried as L-269's Gap, because
-naming them needs a read of the code rather than an edit here.)
+coordinate. The founding case was this document's own Check All
+Parallel Pipelines, one section down, which said five and named none in
+the sentence telling the reader to map ALL consumers. It is corrected
+now -- and how it was wrong is the lesson. The five WERE named, in
+README.md, which the gate did not point to. And a second candidate list
+existed on a different axis: six FETCHERS inside palomas_orrery.py
+against the README's five CONSUMERS across the project, neither a
+subset of the other. The gate had merged them, a cross-file count
+wearing a single-file scope. A count does not carry the axis it was
+counted on, which is the sharpest form of this rule there is.)
 
 Check All Parallel Pipelines [CRITICAL]
-Position data flows through 5 parallel pipelines in palomas_orrery.py.
-Fixing one does not propagate. Map ALL consumers before patching.
-Same bugs appear independently in gallery_studio.py / json_converter.py
-and in plot_objects / animate_objects. Check both when fixing one.
+Position data reaches a viewer through FIVE parallel consumers. Fixing
+one does not propagate to the others; the same bug appears
+independently in each, and a change as small as hover text can touch
+all five. Map ALL of them before patching anything in the data flow.
+
+  static plot        plot_objects              palomas_orrery.py
+  animation          animate_objects           palomas_orrery.py
+  social export      export_social_view ->     palomas_orrery.py ->
+                     social_media_export.py    orrery repo
+  gallery curation   tools/gallery_studio.py   GALLERY repo
+  JSON conversion    tools/json_converter.py   GALLERY repo
+
+TWO OF THE FIVE ARE IN THE OTHER REPOSITORY. Grep one repo and you find
+three. That is the trap the earlier wording set, by scoping the count
+to palomas_orrery.py.
+
+Fetching is a different question from consuming, and the answer is a
+different list. Six functions in palomas_orrery.py acquire position
+data, and three of the five consumers above fetch nothing at all -- they
+render what was already fetched. The fetcher list is on L-269; do not
+substitute one for the other.
+
+(Corrected August 30, 2026; L-269, and it is that rule's founding case.
+The line had read "5 parallel pipelines in palomas_orrery.py" and named
+none of them, in the sentence telling the reader to map ALL consumers.
+Five was README.md's cross-file consumer count; "in palomas_orrery.py"
+was a single-file scope from the other axis. Together they described a
+set that does not exist, and the next sentence then half-named the real
+list, four of five, missing social export. All five paths were verified
+present at a667e128 before they were written here. A count does not
+carry the axis it was counted on.)
 
 Agentic Pre-Test [CRITICAL -- resident pointer]
 Before delivering ANY complete file or agentic code, and after any
@@ -1060,10 +1099,14 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
-v3.49 (August 30, 2026): One rule added. No skill changed.
+v3.49 (August 30, 2026): One rule added, in two pieces and two tiers.
+No skill changed. Landed in two commits the same evening; this entry
+describes the settled form, and says below what the first commit got
+wrong.
 
-A Report Names Its Items [CRITICAL], Part 3, immediately after A Check
-That Cannot Fail Is Not Passing. Tony's ruling, 2026-08-30. A count
+A Report Names Its Items [QUALITY], Part 3, immediately after A Check
+That Cannot Fail Is Not Passing -- and a FOURTH move inside that gate,
+make the delta name what moved. Tony's ruling, 2026-08-30. A count
 states a size; names state what is there. A report giving only the size
 is complete only for a reader who can go and find out what, and neither
 reader here can -- Claude resets and will not open the file, Tony
@@ -1085,27 +1128,45 @@ instruction of the same day: scanner and runner summaries, ledger and
 handoff enumerations, counted claims in this document and in the
 skills, and findings and backlogs. Not only counts of grouped features.
 
-The load-bearing half is that a count can be identical across a real
-change. Clear one finding and introduce another in the same file and a
-count delta reports nothing moved. PROVENANCE_AUDIT.md's "No file's
-Tier-1 count rose" and the run history's one-number-per-run are both
-that shape, which is why the rule sits beside A Check That Cannot Fail
-Is Not Passing rather than in a style guide.
+THE SPLIT IS THE PART THE FIRST COMMIT GOT WRONG. It put the whole rule
+in at [CRITICAL]. This document's own promotion test is that a check
+moves up when a failure demonstrates it was load-bearing. The naming
+half has failed repeatedly and in view -- the scanner summary, the
+audit's coordinates, the L-268 sweep, the pipeline count below -- and
+every one of those was recoverable. The count-delta half has NOT been
+witnessed here: nobody has yet cleared one Tier-1 finding and gained
+another with the total unchanged. It is inferred, and it is the half
+that can pass while blind. So the sharp case went into a gate that is
+already [CRITICAL] and the general habit went in at [QUALITY], which
+keeps the critical tier short and leaves a promotion path if the delta
+case ever bites. A second Opus session argued it; Tony carried it.
 
-An unmet instance is left standing in this document rather than quietly
-fixed. Check All Parallel Pipelines counts five pipelines in
-palomas_orrery.py and names none, in the paragraph instructing the
-reader to map ALL consumers. A search on 2026-08-30 across this file,
-the ten installed skills and the ledger found the five named nowhere,
-so naming them needs a read of the code and not an edit here. Carried
-as L-269's Gap with a Tony-action.
+THE FOUNDING CASE IS CORRECTED TOO, and how it was wrong is the lesson.
+Check All Parallel Pipelines had read "5 parallel pipelines in
+palomas_orrery.py" and named none, in the sentence telling the reader
+to map ALL consumers. The five WERE named -- in README.md, which the
+gate does not point to. And a second candidate list existed on a
+DIFFERENT AXIS: six FETCHERS inside palomas_orrery.py against the
+README's five CONSUMERS across the project. Two entries appear in both,
+three of the consumers fetch nothing, and neither list is a subset of
+the other. The gate had merged them, taking a cross-file count and
+attaching a single-file scope, describing a set that does not exist --
+then half-naming the real list in the next sentence, four of five,
+missing social export. Tony's ruling: the gate means the CONSUMERS, the
+names belong in the gate rather than in another document, and the
+in-file scoping goes. All five paths were verified present at a667e128
+before being written in, and two of them turn out to live in the
+GALLERY repository under tools/, which the old scoping actively hid.
+The fetcher list is kept on L-269 as the answer to a different
+question. A count does not carry the axis it was counted on.
 
-Ledger, same commit: L-265 through L-269 placed, and L-262's diagnosis
+Ledger, first commit: L-265 through L-269 placed, and L-262's diagnosis
 amended in view rather than corrected in place. The framing smoke test
 was never about interactive.html, its row in the gallery runner gates,
-and the fix is two lines needing no Mode 5.
+and the fix is two lines needing no Mode 5. Confirmed the same evening:
+the Page framing row now passes twelve checks in the gallery runner.
 
-Version history: v3.46 moves down to
+Version history: v3.46 moved down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

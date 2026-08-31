@@ -258,7 +258,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*162 live items; 148 need attention (`!`); 161 RICE-scored; 102 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*163 live items; 149 need attention (`!`); 162 RICE-scored; 102 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -278,6 +278,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-249 | The Earth slice of L-181: interior boundaries as sourced constants | OPEN | 7.2 | 2026-08-25 |
 | ! | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | OPEN | 6.0 | 2026-08-25 |
 | ! | L-269 | A report names its items, not how many there are | OPEN | 6.0 | 2026-08-30 |
+| ! | L-270 | README.md is a stale live store, and a gate depended on it | OPEN | 5.7 | 2026-08-30 |
 | ! | L-245 | Constants drift check compares against the last COMMIT, not the last RUN | OPEN | 5.4 | 2026-08-25 |
 | ! | L-265 | The i panel carries links, not curated prose | OPEN | 5.4 | 2026-08-30 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
@@ -3769,7 +3770,8 @@ Cannot Fail Is Not Passing; L-236; L-237.
 that nothing compares against buys very little.
 - **Note:** RICE 3/4/90/1 -> 10.8 is Claude's proposed score.
   **Tony-action (decide):** confirm or redirect.
-**Ref:** L-234; L-235; L-080 (the fingerprint's field list).
+**Ref:** L-234; L-235; L-080 (the fingerprint's field list); L-270
+(README staleness -- the same class of unwatched record).
 
 #### [L-238] radius_fraction > 1.0 assumes every shell is above the surface
 <!-- L:238 status:OPEN upd:2026-08-25 section:A flag: rice:3/5/95/1 -->
@@ -4709,7 +4711,7 @@ Tony to the next session, 2026-08-29.
 **Ref:** L-236 (the runner that found it); L-238 (the commit that
 added the suite); L-267 (which adds framing logic to the untested
 file); A Check That Cannot Fail Is Not Passing [CRITICAL] and A Report
-Names Its Items [CRITICAL], resident protocol Part 3.
+Names Its Items [QUALITY], resident protocol Part 3.
 
 #### [L-265] The i panel carries links, not curated prose
 <!-- L:265 status:OPEN upd:2026-08-30 section:A flag: rice:4/3/90/2 -->
@@ -5123,25 +5125,94 @@ Names Its Items [CRITICAL], resident protocol Part 3.
 - **Claude:** RICE 5/4/90/3 -> 6.0 proposed, not confirmed. Reach 5
   because it governs every report the project emits. Effort 3 is
   remediation, not the rule -- the rule landed with this entry.
-- **Claude:** the tier is worth a look. [CRITICAL] is proposed because
-  the count-delta case is exactly A Check That Cannot Fail Is Not
-  Passing, and that gate is [CRITICAL]. The counter-argument is real:
-  the critical tier must stay short, and most of this rule's failures
-  are recoverable rather than expensive. Changing it is one word in
-  two places.
-- **Gap: an unmet instance is left standing in the protocol itself,
-  deliberately.** Check All Parallel Pipelines [CRITICAL] says
-  "Position data flows through 5 parallel pipelines in
-  palomas_orrery.py" and names none of the five, in the same paragraph
-  that instructs the reader to map ALL consumers before patching. A
-  search on 2026-08-30 across `PROJECT_INSTRUCTIONS.md`, the ten
-  installed skills and `LEDGER_CONSOLIDATED.md` found the five named
-  nowhere. `documentation/PROJECT_INSTRUCTIONS_HISTORY.md` carries the
-  same unnamed count as a preserved v3.29 field note. Naming them needs
-  a read of `palomas_orrery.py`, which is a judgment call and not a
-  mechanical fix, so it was not folded into this patch.
-  **Tony-action (decide):** whether naming the five is worth a pass of
-  its own or waits for the next job that opens that file.
+- **THE TIER WAS RULED [QUALITY], 2026-08-30, and the reasoning is
+  worth keeping.** The first commit put the whole rule in at
+  [CRITICAL]. The protocol's own promotion test is that a check moves
+  up when a failure demonstrates it was load-bearing. The NAMING half
+  has failed repeatedly and in view -- the scanner summary, the audit's
+  coordinates, the L-268 sweep's first pass, the pipeline count below
+  -- and every one of those failures was recoverable. The COUNT-DELTA
+  half has NOT been witnessed here; nobody has yet cleared one Tier-1
+  finding and gained another with the total unchanged. It is inferred,
+  and it is the half that can pass while blind.
+- **So the rule went in as TWO pieces at TWO tiers.** The count-delta
+  case became the FOURTH move inside A Check That Cannot Fail Is Not
+  Passing, which is already [CRITICAL], beside make success carry
+  evidence, make the blind spot announce, and put the check where it
+  runs. The general habit stayed at [QUALITY]. This keeps the critical
+  tier short and leaves a clean promotion path if the delta case ever
+  bites. (Argued by a second Opus session, 2026-08-30, reviewing the
+  first commit; carried by Tony.)
+- **THE FOUNDING CASE IS THE PROTOCOL'S OWN Check All Parallel
+  Pipelines [CRITICAL]**, and it is a better one than the L-268 sweep
+  that raised the rule. That gate said "Position data flows through 5
+  parallel pipelines in `palomas_orrery.py`" and named none of them --
+  in the same sentence instructing the reader to map ALL consumers
+  before patching. The sweep's count was merely ignorable. This was a
+  count nobody could check, inside a CRITICAL gate.
+- **The first read of it was wrong in BOTH directions, and the
+  correction is the sharpest form of this rule there is.** Patch 1
+  recorded that the five were "named nowhere." They were named -- in
+  `README.md`, which the gate does not point to. And the two candidate
+  lists are not rival readings of one question. THEY SIT ON DIFFERENT
+  AXES:
+  - **README.md's five CONSUMERS, across the project:** static plot,
+    animation, social export, gallery curation, JSON conversion.
+  - **Six FETCHERS inside `palomas_orrery.py`,** the functions that
+    call Horizons for position data:
+    `resolve_shell_sun_position`, `update_orbit_paths`,
+    `plot_actual_orbits`, `plot_objects`, `animate_objects`,
+    `open_orbital_param_visualization`. `plot_objects` alone holds
+    three near-identical branches with the same Vanth special case in
+    each, across four routes -- `fetch_position`, `fetch_trajectory`,
+    `fetch_orbit_path` and `orbit_data_manager`.
+  Static plot and animation appear in both. Social export, gallery
+  curation and JSON conversion fetch nothing; they render what was
+  already fetched. Neither list is a subset of the other.
+- **The gate had MERGED the two.** It took the README's cross-file
+  count of five and attached "in `palomas_orrery.py`", a single-file
+  scope from the other axis, so together they described a set that does
+  not exist. The next sentence then half-named the real list --
+  `gallery_studio.py`, `json_converter.py`, `plot_objects`,
+  `animate_objects` -- four of the README's five, missing social
+  export. A COUNT DOES NOT CARRY THE AXIS IT WAS COUNTED ON.
+- **Tony's ruling, 2026-08-30:** the gate means the CONSUMERS; the
+  names move into the gate itself so a reader is not sent to another
+  document to learn what five means; the in-file scoping goes. Applied
+  in the same commit as the rule, so the founding case is closed by the
+  rule rather than left as an exhibit.
+- **Verified at `a667e128` before the names were written in**, because
+  the ruling turned the remaining work from discovery into checking.
+  All five paths exist: `plot_objects`, `animate_objects` and
+  `export_social_view` in `palomas_orrery.py` (the last delegating to
+  `social_media_export.py`), and `tools/gallery_studio.py` and
+  `tools/json_converter.py` in the GALLERY repo. Two of five are in
+  the other repository, which the old scoping actively hid -- a reader
+  following the instruction as written would grep one repo and find
+  three.
+- **Cross-checked, not taken on report.** A second Opus session
+  enumerated the six fetchers on 2026-08-30 and made the two-axes
+  argument; this entry's fetcher list was measured independently at
+  `ded99fbe` and agrees on all six names and their line numbers. The
+  two sessions disagreed only on how many call sites sit inside
+  `plot_objects` -- itself a count nobody should be carrying, and the
+  reason this row names functions rather than sites.
+- **The correction has not travelled, and that is what remains.** The
+  old sentence appears in 46 documents at `ded99fbe`. Most are frozen
+  archives and session records, correctly left alone. THREE are live
+  stores still carrying it after this commit: `README.md`,
+  `documentation/CLAUDE.md`, and
+  `skills/orrery-coding-conventions/SKILL.md` -- so the merged count
+  also sits in a skill that loads on every orrery visual session.
+  **Tony-action (decide):** whether those three are swept now or when
+  the next job opens each file. The skill copy carries its own
+  four-step bump chain.
+- **Gap: the fetcher list has no home.** It is recorded here and
+  nowhere else. It answers a real question -- which functions must be
+  patched when the FETCH changes rather than the render -- and
+  `orrery-coding-conventions` is the plausible place for it.
+  **Tony-action (decide):** whether it earns a place in that skill or
+  stays a ledger record.
 - **Gap: remediation is separate and is not scheduled here.** Fixing
   the scanner's terminal summary and the audit's unit names is real
   work. Per The Braid it goes in slices and earns its own handle when
@@ -5153,6 +5224,50 @@ Names Its Items [CRITICAL], resident protocol Part 3.
   resident protocol Part 3; L-268 (the sweep that raised it); L-235
   (checks that cannot fail, gallery side); L-230 (skill bumps and the
   protocol history, the same shape of unwatched transition).
+
+#### [L-270] README.md is a stale live store, and a gate depended on it
+<!-- L:270 status:OPEN upd:2026-08-30 section:A flag: rice:4/3/95/2 -->
+- **Surfaced 2026-08-30 while correcting L-269's founding case.** The
+  five consumer names that Check All Parallel Pipelines now carries
+  came from `README.md`. That made the README's freshness a property
+  of a CRITICAL gate, which nobody had noticed it was.
+- **Measured at `a667e128`.** `README.md` says 118 Python modules and
+  roughly 96,000 non-blank lines. `MODULE_ATLAS.md`, regenerated the
+  same day, says 129 modules and 104,494 lines. Elsewhere the README
+  says 90,000 lines. It was last committed 2026-08-11 (`bebf0f7`),
+  nineteen days earlier.
+- **The gate no longer depends on it**, because v3.49 moved the five
+  names INTO the gate. That is the fix for the dependency. It is not a
+  fix for the README.
+- **What is actually at risk is the SHAPE, not the counts.** The
+  gallery moved to the assembler and cache-builder architecture after
+  2026-08-11. The five consumers were verified present at `a667e128`,
+  so the list is right today; whether the README still describes the
+  gallery correctly around them is unexamined, which is not the same
+  as clean.
+- **Two of the five are not where the README's own prose implies.**
+  `gallery_studio.py` and `json_converter.py` live in the GALLERY repo
+  under `tools/`. A reader taking the README's project description at
+  face value would look in the orrery repo.
+- **A smaller instance, and it is self-inflicted.** The atlas run at
+  `a667e128` lists `patch_L269_1_ledger_blocks_and_protocol_v3_49.py`
+  under both Undetermined role and Undetermined domain, because a
+  spent patch script was left at the repo root. It is inflating the
+  module count that L-270 is about.
+  **Tony-action (do):** archive both L-269 patch scripts into
+  `documentation/` per safe-file-editing's Naming and Archiving rule,
+  and re-run `module_atlas.py`.
+- **Tony-action (decide):** whether the README gets a refresh pass of
+  its own or is corrected the next time it is opened. The counts are
+  mechanical; the architecture description is not.
+- **Claude:** RICE 4/3/95/2 -> 5.7 proposed, not confirmed. Reach 4
+  because the README is what a newcomer and a relay partner read
+  first; Confidence 95 because the staleness is measured rather than
+  suspected.
+- **Ref:** L-269 (which surfaced it and removed the gate's dependency
+  on it); L-237 (the other stale-record item); The Correction Does Not
+  Travel, safe-file-editing 1.9; A Report Names Its Items, resident
+  protocol Part 3.
 
 ## PENDING ACTION (Tony-side)
 
