@@ -1,5 +1,26 @@
 # Ledger entries -- 2026-08-30 session
 
+**PLACED 2026-08-30 into `LEDGER_CONSOLIDATED.md`** by
+`patch_L269_1_ledger_blocks_and_protocol_v3_49.py`, built on orrery
+`ded99fbe`. This file is now a RECORD, not a pending input. Do not
+place it a second time.
+
+Two things it got wrong, corrected in view rather than silently:
+
+1. The placement instruction below says "after L-264's block." L-264 is
+   in section C (DONE). The four blocks belong in section A, where
+   L-262 is, and that is where the patch put them -- immediately before
+   `## PENDING ACTION (Tony-side)`.
+2. The INDEX ROWS below were not used. Index rows are generated:
+   `ledger_index.py` rebuilds them from the `<!-- L:... -->` comments,
+   and hand-pasting summary rows is against the ledger convention. The
+   four scores listed there also disagree with the file's own metadata
+   comments -- 12.0, 10.8, 9.6 and 10.8 against the 9.0, 5.4, 3.4 and
+   4.5 the comments compute.
+
+A fifth handle, L-269, was written directly into the ledger by the same
+patch and does not appear below.
+
 **Built on** orrery `70f12a7b5c260288c0fc1a135f45e547651c5d9f` at
 https://github.com/tonylquintanilla/palomas_orrery (branch main),
 gallery `80759493dd03f7005eb9c4baae6448756893f884` at

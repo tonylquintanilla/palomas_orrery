@@ -1,6 +1,6 @@
 # Paloma's Orrery - Module Index
 
-**Generated:** August 29, 2026 by `module_atlas.py`  
+**Generated:** August 30, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -11,21 +11,21 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 129  
-**Total Lines of Code (non-blank):** 104,605  
+**Total Lines of Code (non-blank):** 104,494  
 **Total Public Functions/Classes:** 1,172
 
 ## Classification Coverage
 
 **Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_close_20260829_and_handoff.py`
+- `patch_L269_1_ledger_blocks_and_protocol_v3_49.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
 **Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_close_20260829_and_handoff.py`
+- `patch_L269_1_ledger_blocks_and_protocol_v3_49.py`
 
 
 ---
@@ -229,7 +229,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_close_20260829_and_handoff.py` | Closes the three ledger items whose fixes are now committed, and writes the session handoff. (613 lines) |
+| `patch_L269_1_ledger_blocks_and_protocol_v3_49.py` | Run:  python patch_L269_1_ledger_blocks_and_protocol_v3_49.py From: the ORRERY repo root (the folder holding LEDGER_CONSOLIDATED.md and PROJECT_INSTRUCTIONS.md). In VS Code: open this file from that folder and click Run. (502 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

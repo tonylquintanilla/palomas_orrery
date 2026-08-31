@@ -435,6 +435,47 @@ resident.
 (Moved down from the resident protocol on 2026-08-29 when v3.48
 made a fourth entry.)
 
+v3.46 (August 28, 2026): No rule changed in this document. One skill
+correction, recorded here because the recording is the fourth link of
+L-230's chain and the only one that does not fire on its own.
+
+provenance-discipline 2.8 -> 2.9 (L-256). The Gate Binds at SERVING
+becomes The Gate Binds at EXPORT. 2.8 was written earlier the same
+evening and placed the gate where the harm lands -- a visitor taking a
+served value as true. Tony's ruling of 2026-08-28 moves it upstream to
+where a check can still run: "I think provenance should be settled
+before it leaves the orrery to the gallery cache. There is no
+provenance checker in the gallery."
+
+Verified rather than assumed before the edit was written.
+provenance_scanner.py exists only in the orrery repo. The nightly
+builder lives in the GALLERY repo and scores nothing -- two mentions of
+provenance in the whole file, one a docstring line recording where its
+copied constants came from, one a warning string. The two repositories
+do not share a checker, so a gate at publication sits downstream of the
+last instrument in existence. That is A Check That Cannot Fail Is Not
+Passing in the pipeline layer rather than in code.
+
+The section now separates WHY from WHERE explicitly, because the
+correction is exactly the kind a future session would undo by
+reasoning from harm rather than from enforceability. Why: serving.
+Where it fires: export. What stays free: drawing.
+
+One consequence raises a priority. objects_config.json is maintained by
+hand in the gallery repo, so the export boundary the gate names is
+today a human copy with no check on it. The cross-repo transport
+becomes the gate's missing enforcement point rather than a defence
+against later drift -- higher than MASTER_PLAN_INTERACTIVE_GALLERY.md
+currently places segment 2, and an amendment that document is owed.
+
+Version history: v3.43 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-08-30 when v3.49
+made a fourth entry.)
+
+
 ### Preserved verbatim: v3.29 Technical lessons (now field notes in skills)
 
 - Cache: cache[name]['elements'] (nested dict)

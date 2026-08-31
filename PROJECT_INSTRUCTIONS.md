@@ -1,7 +1,7 @@
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.48 | August 29, 2026
+Tony Quintanilla, PE | Claude | v3.49 | August 30, 2026
 
-Cut from bfa9de2f at https://github.com/tonylquintanilla/palomas_orrery
+Cut from ded99fbe at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -585,6 +585,64 @@ a 55-pin test file nothing executed for ten days, and a git diff that
 exits 0 with empty output for an untracked path. Each was found by a
 different route and none was found by reading a passing result.)
 
+A Report Names Its Items [CRITICAL]
+Companion to the gate above, and it reaches every report this project
+produces, not only checks. A count states a SIZE. Names state what is
+there. A report that gives the size and withholds the names is complete
+only for a reader who can go and find out WHAT -- and neither reader
+here can. Claude resets every session and will not think to open the
+file. Tony cannot read everything and does not grep: "I can't go grep
+the code for all the instances that built a count. A list is manageable
+and it gives me a sense of the gap."
+
+So a report has to be complete enough to ACT ON WHERE IT LANDS.
+
+The names also carry the SHAPE, which no number can. "16" is a size.
+"D Ring, C Ring, B Ring, A Ring, F Ring, G Ring, E Ring" says it is the
+whole of one body's ring system, one kind of thing, mechanical rather
+than seven separate judgments.
+
+AND A COUNT CAN BE IDENTICAL ACROSS A REAL CHANGE. Clear one finding in
+a file and introduce another in the same file, and a count-based delta
+reports that nothing moved. That is why this sits beside the gate above
+rather than in a style guide: a count-based report is a check that
+cannot fail.
+
+It is count AND names, not names instead of the count. MODULE_ATLAS.md
+is the worked example -- "Undetermined role (4)" followed immediately by
+the four filenames.
+
+The scope is every place this project reports a set:
+- Scanner and runner summaries, and their run histories. A delta over
+  counts cannot see a swap; a delta over names can.
+- Ledger and handoff enumerations, which name the handles.
+- Counted claims in this document and in the skills. "Three moves" and
+  "two limits" name what they count; "5 parallel pipelines" does not.
+- Findings, gaps and backlogs -- named by CLASS where the instance list
+  is long, since The Braid already rules that a backlog grows by kinds
+  rather than by counts.
+
+Where the full list genuinely cannot land, name the CLASSES and give
+the exact path where the instances live. A bare pointer is not enough:
+the provenance scanner prints "292 TIER-1 FINDINGS IN THE SCANNED
+TREE", explains that this is not the gate, and sends the reader to
+another document -- the number a reader needs absent, the number
+present wrong, and nothing named at all.
+
+A coordinate is not a name. PROVENANCE_AUDIT.md reporting "display
+string @ line 936" is better than a count and still requires opening
+the file to learn the thing is hover_text_sun_and_corona.
+
+(Tony's ruling, August 30, 2026; L-269. Three instances measured that
+session, spanning the range: MODULE_ATLAS.md doing it right, the
+scanner summary doing it not at all, PROVENANCE_AUDIT.md naming a
+coordinate. This document's own Check All Parallel Pipelines is an
+unmet instance -- it counts five pipelines and names none, in the
+paragraph telling the reader to map ALL consumers -- and a search that
+day across this file, the ten skills and the ledger found the five
+named nowhere. Left standing and carried as L-269's Gap, because
+naming them needs a read of the code rather than an edit here.)
+
 Check All Parallel Pipelines [CRITICAL]
 Position data flows through 5 parallel pipelines in palomas_orrery.py.
 Fixing one does not propagate. Map ALL consumers before patching.
@@ -1002,6 +1060,55 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.49 (August 30, 2026): One rule added. No skill changed.
+
+A Report Names Its Items [CRITICAL], Part 3, immediately after A Check
+That Cannot Fail Is Not Passing. Tony's ruling, 2026-08-30. A count
+states a size; names state what is there. A report giving only the size
+is complete only for a reader who can go and find out what, and neither
+reader here can -- Claude resets and will not open the file, Tony
+cannot read everything and does not grep. A report has to be complete
+enough to act on where it lands.
+
+The first write-up had this as an attention problem, a number being
+easy to skip past. Tony corrected it, and the correction is the rule:
+a count is not a weak signal, it is a signal that only works for a
+reader who can perform a lookup neither reader performs.
+
+NOT a runner convention, and deliberately not a skill. Method Belongs
+to the Skill was applied and answered the other way -- the grounds are
+the two READERS rather than how any one tool reports, and the two
+readers are what this protocol is for.
+
+The scope is broader than the sweep that raised it, on Tony's
+instruction of the same day: scanner and runner summaries, ledger and
+handoff enumerations, counted claims in this document and in the
+skills, and findings and backlogs. Not only counts of grouped features.
+
+The load-bearing half is that a count can be identical across a real
+change. Clear one finding and introduce another in the same file and a
+count delta reports nothing moved. PROVENANCE_AUDIT.md's "No file's
+Tier-1 count rose" and the run history's one-number-per-run are both
+that shape, which is why the rule sits beside A Check That Cannot Fail
+Is Not Passing rather than in a style guide.
+
+An unmet instance is left standing in this document rather than quietly
+fixed. Check All Parallel Pipelines counts five pipelines in
+palomas_orrery.py and names none, in the paragraph instructing the
+reader to map ALL consumers. A search on 2026-08-30 across this file,
+the ten installed skills and the ledger found the five named nowhere,
+so naming them needs a read of the code and not an edit here. Carried
+as L-269's Gap with a Tony-action.
+
+Ledger, same commit: L-265 through L-269 placed, and L-262's diagnosis
+amended in view rather than corrected in place. The framing smoke test
+was never about interactive.html, its row in the gallery runner gates,
+and the fix is two lines needing no Mode 5.
+
+Version history: v3.46 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.48 (August 29, 2026): No rule changed in this document. One skill
 bump, recorded in the same commit that made it -- which is the whole
 of the improvement over this morning.
@@ -1089,43 +1196,6 @@ had been here. A document whose subject is anchors being true is the
 wrong place to be casual about when something was written.
 
 Version history: v3.44 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.46 (August 28, 2026): No rule changed in this document. One skill
-correction, recorded here because the recording is the fourth link of
-L-230's chain and the only one that does not fire on its own.
-
-provenance-discipline 2.8 -> 2.9 (L-256). The Gate Binds at SERVING
-becomes The Gate Binds at EXPORT. 2.8 was written earlier the same
-evening and placed the gate where the harm lands -- a visitor taking a
-served value as true. Tony's ruling of 2026-08-28 moves it upstream to
-where a check can still run: "I think provenance should be settled
-before it leaves the orrery to the gallery cache. There is no
-provenance checker in the gallery."
-
-Verified rather than assumed before the edit was written.
-provenance_scanner.py exists only in the orrery repo. The nightly
-builder lives in the GALLERY repo and scores nothing -- two mentions of
-provenance in the whole file, one a docstring line recording where its
-copied constants came from, one a warning string. The two repositories
-do not share a checker, so a gate at publication sits downstream of the
-last instrument in existence. That is A Check That Cannot Fail Is Not
-Passing in the pipeline layer rather than in code.
-
-The section now separates WHY from WHERE explicitly, because the
-correction is exactly the kind a future session would undo by
-reasoning from harm rather than from enforceability. Why: serving.
-Where it fires: export. What stays free: drawing.
-
-One consequence raises a priority. objects_config.json is maintained by
-hand in the gallery repo, so the export boundary the gate names is
-today a human copy with no check on it. The cross-repo transport
-becomes the gate's missing enforcement point rather than a defence
-against later drift -- higher than MASTER_PLAN_INTERACTIVE_GALLERY.md
-currently places segment 2, and an amendment that document is owed.
-
-Version history: v3.43 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 
