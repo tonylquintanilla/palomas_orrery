@@ -317,11 +317,21 @@ Windows users can also double-click `START_HERE.bat` or `_run_dashboard.bat`.
 5. **Export:** CDN or offline HTML, PNG, 9:16 social view, KML/KMZ
 6. **Gallery:** JSON extraction, GitHub Pages deployment at palomasorrery.com
 
-Position data flows through five parallel pipelines (static plot, animation,
-social export, gallery curation, JSON conversion) -- a change to something
-like hover text can touch all five, each with its own path. This is the
-project's central maintenance discipline: fixes must be checked across every
-consumer.
+Position data flows through five parallel consumers, each with its own
+path, so a change to something as small as hover text can touch all five.
+This is the project's central maintenance discipline: a fix must be
+checked across every consumer, not just the one that reported the bug.
+
+| Consumer | Where |
+|---|---|
+| Static plot | `plot_objects` in `palomas_orrery.py` |
+| Animation | `animate_objects` in `palomas_orrery.py` |
+| Social export | `export_social_view` in `palomas_orrery.py` |
+| Gallery curation | `tools/gallery_studio.py`, in the **gallery** repo |
+| JSON conversion | `tools/json_converter.py`, in the **gallery** repo |
+
+Two of the five live in the gallery repository, so checking only this one
+finds three of five.
 
 ### Development complexity
 

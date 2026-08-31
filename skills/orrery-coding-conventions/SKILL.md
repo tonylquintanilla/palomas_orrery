@@ -6,7 +6,8 @@ fires_when: Markers, hover text, axes, shells, legendgroups, docstrings, new vis
 
 # Orrery Coding Conventions
 
-Skill version: 1.6 | Cut from palomas_orrery @ 3faa72a0 (v1.6),
+Skill version: 1.7 | Cut from palomas_orrery @ 04bba3ca (v1.7),
+earlier @ 3faa72a0 (v1.6),
 earlier @ 15741822 (v1.5), 86f529a (v1.4), 3398970 (v1.3) | 2026-08-26
 v1.6 (L-249) makes the angular step in Marker Separation for
 Near-Equal Radii an OUTCOME rather than a fixed 20 degrees, with 20 and
@@ -491,9 +492,25 @@ The render is the ground truth; Tony's eyes are the gate.
 - A swallowed exception in try/except hides render bugs; an undefined
   variable can drop a marker silently for weeks. Check the console for the
   caught-error print.
-- Position data flows through 5 parallel pipelines in palomas_orrery.py --
-  ALL must be patched. The same bugs appear independently in plot_objects /
-  animate_objects and in the gallery pipeline. Map all consumers first.
+- Position data reaches a viewer through FIVE parallel CONSUMERS, and a
+  fix in one does not propagate. Map ALL of them first. Named here rather
+  than counted, because a count does not say what it counted (L-269):
+    static plot        plot_objects              palomas_orrery.py
+    animation          animate_objects           palomas_orrery.py
+    social export      export_social_view        palomas_orrery.py
+    gallery curation   tools/gallery_studio.py   GALLERY repo
+    JSON conversion    tools/json_converter.py   GALLERY repo
+  TWO OF THE FIVE ARE IN THE OTHER REPOSITORY. Grep one repo and you find
+  three. The old wording said "5 parallel pipelines in palomas_orrery.py",
+  which put a cross-file count inside a single-file scope and hid them.
+- FETCHING is a different question with a different answer. Six functions
+  in palomas_orrery.py acquire position data -- resolve_shell_sun_position,
+  update_orbit_paths, plot_actual_orbits, plot_objects, animate_objects,
+  open_orbital_param_visualization -- across fetch_position,
+  fetch_trajectory, fetch_orbit_path and orbit_data_manager, with
+  plot_objects alone holding three near-identical branches. Three of the
+  five consumers above fetch nothing; they render what was already
+  fetched. Do not substitute one list for the other.
 - Structural fixes scale; data-side fixes don't. A violation in N consumers
   of one producer -> fix the producer (83 sphere-shell pairs brought into
   compliance by 2 edits to the factory). Central factories need explicit

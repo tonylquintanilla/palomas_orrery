@@ -475,6 +475,63 @@ resident.
 (Moved down from the resident protocol on 2026-08-30 when v3.49
 made a fourth entry.)
 
+v3.47 (August 29, 2026): One rule amended, and one skill bump
+recorded a day late.
+
+The Register Rule [Part 2] makes PLAIN SPEECH THE DEFAULT. Tony's
+instruction, 2026-08-29: "please use plain speech in your chat as the
+default." The earlier wording made plain speech a REGISTER -- one
+entered for explanations, design rationale and as-built narrative --
+so ordinary delivery prose sat outside the three checks and passed
+them by not being subject to them. The compressed voice keeps its
+home in this document and in the skills, where a line is reference
+somebody scans because they already own the idea. It leaves the chat.
+
+The case that earned it, from the same session and about this same
+patch: "I left it out of the patch rather than expand scope into the
+protocol without your word; it's captured as L-258's Gap with a
+Tony-action." Tony: "I don't follow." Three project labels in one
+clause, in a sentence that was not explaining anything. Handle L-261.
+
+provenance-discipline 2.9 -> 2.10 (L-258). The Store Carries the
+Verified Figure [CRITICAL], added under Report to the Figures You
+Have, which governed REPORTING and left the stored value uncovered.
+Where a source gives a verified figure more precise than the stored
+value, the store carries the verified figure; rounding happens at the
+reporting step, never at rest. Founding case: RADIATIVE_ZONE_AU held
+0.7 beside its own comment saying it rounded 0.713 -- the store
+recording that it was rounding, and rounding anyway, in a value drawn
+on a public page. Narrowed in the same breath against the two cases
+it would damage: a pick from a range stays a declared choice, and a
+visibility stylization promotes when the physical value becomes
+drawable rather than for want of digits.
+
+Tony's ruling, 2026-08-29, and his reason for making it a SKILL rule
+rather than a decision: it resolves the same way next month, for a
+different constant, in a different file. That is Method Belongs to
+the Skill applied to its own layer.
+
+The bump's own record is its own lesson. Steps 1, 2 and 4 travelled
+together on August 29 -- the version line, skills_index.py, the
+commit. Step 3, this entry, did not. The manifest going current on
+its own DISGUISED the omission, exactly as the binding rule warns:
+the protocol looked updated because half of it was. It surfaced the
+same day, in the next session, by reading the manifest against the
+history -- not by any check, because the check that would catch it is
+L-230, designed and unbuilt.
+
+Recorded a day late and said so, rather than backfilled as though it
+had been here. A document whose subject is anchors being true is the
+wrong place to be casual about when something was written.
+
+Version history: v3.44 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-08-31 when v3.50
+made a fourth entry.)
+
+
 
 ### Preserved verbatim: v3.29 Technical lessons (now field notes in skills)
 

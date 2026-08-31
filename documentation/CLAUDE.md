@@ -147,9 +147,19 @@ highest line number to lowest. Edits shift line numbers below them, not above.
 
 ## Coding Patterns
 
-**Parallel pipelines exist.** palomas_orrery.py routes position data through
-5 parallel pipelines. A fix in one does not propagate to others. Before
-patching data flow, map ALL consumers first.
+**Parallel pipelines exist, and two of them are in the OTHER repo.**
+Position data reaches a viewer through five consumers, and a fix in one
+does not propagate. Map ALL of them before patching data flow:
+static plot (`plot_objects`), animation (`animate_objects`) and social
+export (`export_social_view`) in `palomas_orrery.py`; gallery curation
+(`tools/gallery_studio.py`) and JSON conversion
+(`tools/json_converter.py`) in the GALLERY repo. The old wording here
+said "5 parallel pipelines" in `palomas_orrery.py`, which hid the two
+that are not (L-269).
+
+**Fetching is a different list.** Six functions in `palomas_orrery.py`
+acquire position data; three of the five consumers above fetch nothing.
+The fetcher list is in `orrery-coding-conventions`.
 
 **Cache is nested.** Structure is `cache[name]['elements']` not `cache[name]`.
 
