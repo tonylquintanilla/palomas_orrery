@@ -258,7 +258,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*164 live items; 150 need attention (`!`); 163 RICE-scored; 102 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*165 live items; 151 need attention (`!`); 164 RICE-scored; 103 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -279,7 +279,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-249 | The Earth slice of L-181: interior boundaries as sourced constants | OPEN | 7.2 | 2026-08-25 |
 | ! | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | OPEN | 6.0 | 2026-08-25 |
 | ! | L-269 | A report names its items, not how many there are | OPEN | 6.0 | 2026-08-30 |
-| ! | L-270 | README.md is a stale live store, and a gate depended on it | OPEN | 5.7 | 2026-08-30 |
+| ! | L-272 | The gallery repo had no README | OPEN | 5.7 | 2026-08-31 |
 | ! | L-245 | Constants drift check compares against the last COMMIT, not the last RUN | OPEN | 5.4 | 2026-08-25 |
 | ! | L-265 | The i panel carries links, not curated prose | OPEN | 5.4 | 2026-08-30 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
@@ -316,6 +316,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-244 | Sweep for replicated conversion factors as a class [Fable candidate] | OPEN | 2.8 | 2026-08-25 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-248 | The parsec-to-light-year factor is typed 36 times across the star pipeline | OPEN | 2.5 | 2026-08-25 |
+| ! | L-273 | A document indexer, so the README's document table stops being hand-maintained | OPEN | 2.5 | 2026-08-31 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 |  | L-225 | Migrate the comet shell constants into `constants_new.py`, then dispatch | DEFERRED | 2.4 | 2026-08-23 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
@@ -515,6 +516,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-220 | A patch updates the body but not the anchor, date or description | DONE | 7.6 | 2026-08-20 |
 |  | L-204 | The worksheet reference may be JSON | DONE | 5.7 | 2026-08-18 |
 |  | L-263 | The served chromosphere value is a rounded copy | DONE | 5.7 | 2026-08-29 |
+|  | L-270 | README.md is a stale live store, and a gate depended on it | DONE | 5.7 | 2026-08-31 |
 |  | L-196 | Citation continuations: mark, join, refuse | DONE | 5.4 | 2026-08-17 |
 |  | L-197 | Maintenance runner output: say what passed | DONE | 5.4 | 2026-08-17 |
 |  | L-201 | Request selection -- ask the builder for fewer rows | DONE | 5.4 | 2026-08-18 |
@@ -5226,49 +5228,127 @@ Names Its Items [QUALITY], resident protocol Part 3.
   (checks that cannot fail, gallery side); L-230 (skill bumps and the
   protocol history, the same shape of unwatched transition).
 
-#### [L-270] README.md is a stale live store, and a gate depended on it
-<!-- L:270 status:OPEN upd:2026-08-30 section:A flag: rice:4/3/95/2 -->
-- **Surfaced 2026-08-30 while correcting L-269's founding case.** The
-  five consumer names that Check All Parallel Pipelines now carries
-  came from `README.md`. That made the README's freshness a property
-  of a CRITICAL gate, which nobody had noticed it was.
-- **Measured at `a667e128`.** `README.md` says 118 Python modules and
-  roughly 96,000 non-blank lines. `MODULE_ATLAS.md`, regenerated the
-  same day, says 129 modules and 104,494 lines. Elsewhere the README
-  says 90,000 lines. It was last committed 2026-08-11 (`bebf0f7`),
-  nineteen days earlier.
-- **The gate no longer depends on it**, because v3.49 moved the five
-  names INTO the gate. That is the fix for the dependency. It is not a
-  fix for the README.
-- **What is actually at risk is the SHAPE, not the counts.** The
-  gallery moved to the assembler and cache-builder architecture after
-  2026-08-11. The five consumers were verified present at `a667e128`,
-  so the list is right today; whether the README still describes the
-  gallery correctly around them is unexamined, which is not the same
-  as clean.
-- **Two of the five are not where the README's own prose implies.**
-  `gallery_studio.py` and `json_converter.py` live in the GALLERY repo
-  under `tools/`. A reader taking the README's project description at
-  face value would look in the orrery repo.
-- **A smaller instance, and it is self-inflicted.** The atlas run at
-  `a667e128` lists `patch_L269_1_ledger_blocks_and_protocol_v3_49.py`
-  under both Undetermined role and Undetermined domain, because a
-  spent patch script was left at the repo root. It is inflating the
-  module count that L-270 is about.
-  **Tony-action (do):** archive both L-269 patch scripts into
-  `documentation/` per safe-file-editing's Naming and Archiving rule,
-  and re-run `module_atlas.py`.
-- **Tony-action (decide):** whether the README gets a refresh pass of
-  its own or is corrected the next time it is opened. The counts are
-  mechanical; the architecture description is not.
-- **Claude:** RICE 4/3/95/2 -> 5.7 proposed, not confirmed. Reach 4
-  because the README is what a newcomer and a relay partner read
-  first; Confidence 95 because the staleness is measured rather than
-  suspected.
-- **Ref:** L-269 (which surfaced it and removed the gate's dependency
-  on it); L-237 (the other stale-record item); The Correction Does Not
-  Travel, safe-file-editing 1.9; A Report Names Its Items, resident
-  protocol Part 3.
+#### [L-272] The gallery repo had no README
+<!-- L:272 status:OPEN upd:2026-08-31 section:A flag: rice:3/2/95/1 -->
+- **Found 2026-08-31 while rewriting the orrery's README.** Two public
+  repositories, and `tonyquintanilla.github.io` had no README at all.
+  Someone arriving from palomasorrery.com or from a link in the orrery
+  repo saw a file listing and nothing else.
+- **It is not a summary of the orrery's README.** It describes only
+  what is in that repository and points at the orrery for the project
+  itself: the two galleries and why both are wanted, the
+  objects_config -> cache builder -> served cache -> assembler ->
+  renderer chain, `gallery_maintenance_run.py` and its UNREACHABLE
+  state, the `.nojekyll` requirement, and the layout. It carries a
+  three-row version of the reach-from-where table, noting that the
+  protocol and skills govern work there but have no copy in that repo
+  to find.
+- **It states the transport gap plainly rather than describing the
+  path as automatic.** `data/objects_config.json` is maintained by
+  hand, the cache builder has never read `constants_new.py`, and the
+  site once served a superseded number for hours after the correction
+  was pushed here. A README describing that path as automatic would be
+  a false claim about the thing most likely to produce a wrong number
+  on the public site.
+- **It also names the two position consumers that live in that repo**
+  (`tools/gallery_studio.py`, `tools/json_converter.py`), because a
+  reader following Check All Parallel Pipelines from the orrery side
+  and grepping one repository finds three of five.
+- **Delivered as `patch_L272_1_gallery_readme.py`**, run from the
+  gallery repo root. It refuses to overwrite an existing README.
+- **CLOSING CONDITION:** the gallery push is confirmed. This block is
+  written from the orrery repo, which cannot see that one, so it stays
+  OPEN until Tony confirms rather than being closed on the strength of
+  a patch having been written.
+- **Claude:** RICE 3/2/95/1 -> 5.7 proposed, not confirmed. Reach 3
+  because it is a front door with real traffic from the site; Effort 1
+  because the file is written and the patch is tested.
+- **Ref:** L-270 (the same pass); L-262 (the gallery runner); Check All
+  Parallel Pipelines, resident protocol Part 3.
+
+#### [L-273] A document indexer, so the README's document table stops being hand-maintained
+<!-- L:273 status:OPEN upd:2026-08-31 section:A flag: rice:3/3/85/3 -->
+- **Tony's proposal, 2026-08-31, and it is better than what Claude
+  recommended.** Claude had offered two shapes for keeping the root
+  document set honest: a generator writing a separate DOCUMENT_INDEX.md,
+  or a checker that fails when the README's table and the root document
+  set disagree. Claude recommended the checker. Tony proposed a third:
+  an INDEXER writing into the README in place, the way
+  `skills_index.py` writes the manifest into the protocol and
+  `ledger_index.py` writes the INDEX into this file.
+- **It dissolves Claude's own objection.** The argument against the
+  generator was two hops -- a reader wanting to know what
+  LEDGER_CONSOLIDATED.md is would land on the README and be sent
+  elsewhere. A marker zone inside the README removes that entirely. And
+  the argument against the checker was this project's own rule: fix the
+  producer rather than alarm on the copy. The indexer fixes the
+  producer; the checker only made the duplication loud. Recorded as a
+  Claude error rather than smoothed over, because the recommendation
+  was argued and wrong.
+- **`skills_index.py` is the model, not `ledger_index.py`.** Two
+  mechanics to copy deliberately. Its editorial column (`fires_when`)
+  is hand-tuned but lives in each SKILL's own frontmatter, not in the
+  tool and not in the protocol -- so Tony keeps editorial control of the
+  wording while the target file stays generated. And if the markers are
+  absent it reports and exits WITHOUT writing, because a wrong guess at
+  an insertion point is worse than no write. It also writes LF
+  explicitly so a Windows run does not CRLF-convert the target.
+- **The design: each document declares itself.** A `Kind` and `Purpose`
+  tag in the document's own header; `doc_index.py` reads the
+  declarations and writes the table into README.md between markers. Same
+  shape as the atlas's `Role:`/`Domain:` docstring tags, and for the
+  same reason -- a hand-maintained dict inside the tool is the shadow
+  store this project already deleted from `module_atlas.py` when
+  ROLE_MAP became a regenerated mirror. An untagged document appears in
+  the table as untagged rather than being silently dropped.
+- **The distinction the table should carry, which nothing currently
+  records:** five root documents are GENERATED and must not be
+  hand-edited -- MODULE_ATLAS.md, MODULE_INDEX.md, PROVENANCE_AUDIT.md,
+  DATA_INVENTORY.md, WORKSHEET_CHECK.md -- against seven written by
+  hand: README.md, PROJECT_INSTRUCTIONS.md, PROJECT_ORIGIN.md,
+  LEDGER_CONSOLIDATED.md, ADDING_OBJECTS_GUIDE.md, LICENSE.md,
+  RUNNING_A_PATCH_FILE.md. Hand-editing one of the first five is a real
+  error class and the only warning against it currently lives inside
+  the files themselves.
+- **SCOPE, measured rather than guessed, and it is bigger than it
+  looks.** The seven hand-written documents need a tag added once. The
+  five generated ones cannot be tagged by hand -- the tag is destroyed on
+  the next run -- so four GENERATORS must emit it: `module_atlas.py`
+  (which writes two of the five), `provenance_scanner.py`,
+  `data_inventory.py`, `worksheet_checker.py`. One line each in their
+  header emitters. Then `requirements.txt` is `.txt`, so the tag reader
+  needs a `#` syntax as well as an HTML comment. Then it all applies
+  twice, because the gallery now has a README and its own runner, and
+  its atlas copy already uses different SCAN_PATHS.
+- **Ruled OUT: extending module_atlas.py to markdown.** Tony asked
+  whether root `.md` and `.txt` files should be parsed by the atlas and
+  carry a Role. Three reasons against, and the third decides it. The
+  atlas's value is the Python structure -- import graph, consumers,
+  public functions -- and a document has none, so most columns would be
+  empty. Its role vocabulary (`gui`, `pipeline`, `rendering/shells`)
+  describes no document, so a parallel vocabulary would live in the same
+  ROLE_MAP mirror meaning something else. And it would change what the
+  COUNTS mean: the README now says the atlas counts are the canonical
+  measure of scale, and PROVENANCE_AUDIT.md's run history has a Files
+  column going back weeks. Folding twelve markdown files in would make
+  every prior row measure something different, silently.
+- **Sequencing, Tony's call 2026-08-31:** run the README patches now and
+  build the indexer separately, rather than holding the rewrite to ship
+  one clean pass. The rewrite is wrong today in ~600 lines that do not
+  touch the table, a marker zone is designed to be dropped into a file
+  that already exists, and by The Braid the indexer must not become a
+  gate on the README shipping. The accepted cost is editing README.md
+  twice in two days, the second edit replacing a section the first one
+  wrote.
+- **Not a gate on anything.** General correctness work beside the
+  delivery work, not in front of it.
+- **Claude:** RICE 3/3/85/3 -> 2.6 proposed, not confirmed. Confidence
+  85 rather than 95 because the generator-side tag emission is designed
+  but not built; Effort 3 for the multi-file scope above.
+- **Ref:** L-270 (the Gap that raised it); `skills_index.py` and
+  `ledger_index.py` as the two working precedents; A Report Names Its
+  Items, resident protocol Part 3 -- the indexer's summary names what
+  moved rather than printing a count.
 
 #### [L-271] Patch scripts wrote backups nothing ever removed
 <!-- L:271 status:OPEN upd:2026-08-31 section:A flag: rice:4/3/95/1 -->
@@ -9375,6 +9455,106 @@ visitor.
 **Ref:** L-236; L-258 (The Store Carries the Verified Figure);
 segment 2 in `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`
 Section 5a.
+
+#### [L-270] README.md is a stale live store, and a gate depended on it
+<!-- L:270 status:DONE upd:2026-08-31 section:C flag: rice:4/3/95/2 -->
+- **Surfaced 2026-08-30 while correcting L-269's founding case.** The
+  five consumer names that Check All Parallel Pipelines now carries
+  came from `README.md`. That made the README's freshness a property
+  of a CRITICAL gate, which nobody had noticed it was.
+- **Measured at `a667e128`.** `README.md` says 118 Python modules and
+  roughly 96,000 non-blank lines. `MODULE_ATLAS.md`, regenerated the
+  same day, says 129 modules and 104,494 lines. Elsewhere the README
+  says 90,000 lines. It was last committed 2026-08-11 (`bebf0f7`),
+  nineteen days earlier.
+- **The gate no longer depends on it**, because v3.49 moved the five
+  names INTO the gate. That is the fix for the dependency. It is not a
+  fix for the README.
+- **What is actually at risk is the SHAPE, not the counts.** The
+  gallery moved to the assembler and cache-builder architecture after
+  2026-08-11. The five consumers were verified present at `a667e128`,
+  so the list is right today; whether the README still describes the
+  gallery correctly around them is unexamined, which is not the same
+  as clean.
+- **Two of the five are not where the README's own prose implies.**
+  `gallery_studio.py` and `json_converter.py` live in the GALLERY repo
+  under `tools/`. A reader taking the README's project description at
+  face value would look in the orrery repo.
+- **A smaller instance, and it is self-inflicted.** The atlas run at
+  `a667e128` lists `patch_L269_1_ledger_blocks_and_protocol_v3_49.py`
+  under both Undetermined role and Undetermined domain, because a
+  spent patch script was left at the repo root. It is inflating the
+  module count that L-270 is about.
+  **Tony-action (do):** archive both L-269 patch scripts into
+  `documentation/` per safe-file-editing's Naming and Archiving rule,
+  and re-run `module_atlas.py`.
+- **Tony-action (decide):** whether the README gets a refresh pass of
+  its own or is corrected the next time it is opened. The counts are
+  mechanical; the architecture description is not.
+- **Claude:** RICE 4/3/95/2 -> 5.7 proposed, not confirmed. Reach 4
+  because the README is what a newcomer and a relay partner read
+  first; Confidence 95 because the staleness is measured rather than
+  suspected.
+- **Ref:** L-269 (which surfaced it and removed the gate's dependency
+  on it); L-237 (the other stale-record item); The Correction Does Not
+  Travel, safe-file-editing 1.9; A Report Names Its Items, resident
+  protocol Part 3.
+- **CLOSED 2026-08-31 by `patch_L270_1_readme_rewrite.py`.** The prior
+  version is archived at `documentation/README_archived_20260831.md`.
+  It was a rewrite, not a repair: the fix list below was the occasion,
+  not the scope.
+- **Tony's ruling on purpose, 2026-08-31, and it is what reshaped the
+  file.** The README's original job -- describe the project and how to
+  access the Python -- is largely moot now that the galleries carry the
+  work to everyone who is not the developer. Two purposes replace it:
+  (1) what Paloma's Orrery is and where to find the documents that
+  describe it, and (2) how the codebase is kept correct and the data
+  verified. The file is now organised as those two parts. The feature
+  catalogue, about fifty lines of bullets, collapsed to one paragraph
+  of prose ending in a pointer to MODULE_INDEX.md -- Tony's call, taking
+  the middle option against cutting it entirely.
+- **The five gaps Tony named, all now filled, and one of them was not
+  actually missing.** Provenance discipline (present but a single
+  paragraph, and its push gate stated GLOBALLY when the real gate is
+  Tier-1 = 0 on the active build path -- a reader taking it literally
+  would conclude the project can never push). The protocol and skills
+  layer (present as folders, absent as discipline; PROJECT_INSTRUCTIONS.md
+  was not linked from the README at all, nor was PROJECT_ORIGIN.md).
+  The interactive gallery and the cache transport (wholly absent). The
+  commit and push discipline (wholly absent; the only git content was
+  consumer-facing `git pull`). The maintenance runners (wholly absent,
+  both of them).
+- **A sixth section, and it is Tony's, 2026-08-31: what you can reach
+  from where.** Four contexts, each adding to the one above --
+  palomasorrery.com in a browser, github.com in a browser, a local
+  clone with Python, and a Claude session in the Anthropic project. The
+  load-bearing part is the last row: the protocol and the skills are
+  ordinary files anyone can read on GitHub, but their INSTALLED form --
+  the copy a session actually loads -- lives in the account and is
+  invisible to everyone, including the running session using it. That
+  is the three-store problem stated where a newcomer meets it, and it
+  is why Stale Skill = Stop compares against the manifest and why a
+  mid-session bump is carried forward in writing rather than cleared.
+- **Two defects found by checking rather than by reading.** The single
+  link to the gallery repo was misspelled `tonyquintanilla` for
+  `tonylquintanilla` and returned 404 -- every other GitHub link in the
+  file had the `l`. And the README claimed `tools/gallery_studio.py`
+  imports `social_media_export.py` and `constants_new.py` from this
+  repo; it does not. It walks up looking for a folder CONTAINING
+  `constants_new.py`, uses that as a marker, and imports
+  `info_dictionary` for the Object Encyclopedia, degrading quietly to
+  no encyclopedia if it finds none. Both corrected in the rewrite.
+- **Every hardcoded count is gone, and that is the durable half of this
+  item.** There were sixteen, and two already disagreed with each other
+  (`star_data/` at ~300 MB in one place and ~330 MB in another). The
+  file now names the generated store that owns each number instead of
+  restating it -- the same fix-the-producer rule the project applies to
+  code. The manual "Last Updated" stamp, which had failed, is gone with
+  them. What can still go stale is the architecture and workflow
+  description, and the file says so.
+- **Gap:** the key-documents table is still hand-maintained, which is
+  this same failure in miniature. L-273 replaces it with a generated
+  marker zone.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
