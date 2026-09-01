@@ -1,3 +1,4 @@
+<!-- Doc-Kind: hand | How the project started, in Tony's own words. -->
 PROJECT ORIGINS OF PALOMAS ORRERY by Tony Quintanilla revised 7/21/2026
 
 It might help to outline the evolution of Paloma’s Orrery. I started this project with Chat GPT in September 2024 with probably GPT 4. It began as a question to gpt whether could help me make a digital orrery.

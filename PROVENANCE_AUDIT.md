@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: September 01, 2026
-Files scanned: 128
-Total findings: 1028
-Constants: 109 | Dicts: 39 | Display strings: 880
+Files scanned: 129
+Total findings: 1031
+Constants: 110 | Dicts: 41 | Display strings: 880
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -19,14 +19,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260901T222051Z | `7612a31` | 129 | 1031 | 292 | 621 | 116 | 2 |
 | 20260901T213318Z | `ab1e6ac` | 128 | 1028 | 292 | 621 | 113 | 2 |
 | 20260901T175717Z | `e382650` | 128 | 1028 | 292 | 621 | 113 | 2 |
 | 20260901T011920Z | `ccd1ac9` | 130 | 1030 | 294 | 621 | 113 | 2 |
 | 20260831T132738Z | `a667e12` | 128 | 1028 | 292 | 621 | 113 | 2 |
 | 20260831T031310Z | `ded99fb` | 129 | 1029 | 293 | 621 | 113 | 2 |
-| 20260830T023235Z | `bfa9de2` | 129 | 1028 | 292 | 621 | 113 | 2 |
 
-Change since the previous run: total +0, Tier-1 +0.
+Change since the previous run: total +3, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -61,7 +61,7 @@ No file's Tier-1 count rose.
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 292 |
 | 2 | 10-15 | REVIEW | 621 |
-| 3 | 5-9 | LOW PRIORITY | 113 |
+| 3 | 5-9 | LOW PRIORITY | 116 |
 | 4 | 1-4 | LOWEST PRIORITY | 2 |
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
@@ -128,6 +128,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `sgr_a_visualization_core.py` | orrery | 1 | 2 | 0 | 0 | 3 |
 | `visualization_3d.py` | stars | 0 | 3 | 0 | 0 | 3 |
 | `dep_trace.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
+| `doc_index.py` | orrery | 0 | 0 | 3 | 0 | 3 |
 | `ledger_index.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
 | `measure_perframe_elements.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
 | `module_atlas.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
@@ -165,7 +166,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 43 | 128 | 502 | 66 | 2 | 698 |
+| Orrery (solar system + orbital mechanics) | 44 | 128 | 502 | 69 | 2 | 701 |
 | Earth System | 13 | 150 | 77 | 2 | 0 | 229 |
 | Stars (stellar neighborhood) | 11 | 12 | 42 | 6 | 0 | 60 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 39 | 0 | 39 |
@@ -174,6 +175,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 **Domain coverage gap:** the following files have findings but no entry in `MODULE_DOMAIN_MAP` -- defaulted to `orrery` rather than guessed into a more specific bucket. Add each to `MODULE_DOMAIN_MAP` in provenance_scanner.py with its real domain so this stops silently defaulting:
 
+- `doc_index.py`
 - `orrery_maintenance_run.py`
 - `worksheet_checker.py`
 - `worksheet_key_aliases.py`
@@ -1654,6 +1656,14 @@ is planned for a future session.
 | 52 | dict | _ROLE_TO_VISUAL[...] | (12 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 | 67 | dict | CATEGORY_COLORS[...] | (10 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
+### doc_index.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 81 | dict | KIND_LABEL[...] | (3 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 87 | dict | KIND_ORDER[...] | (4 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 90 | constant | TAG_SCAN_LINES | 40 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+
 ### eris_visualization_shells.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
@@ -1728,9 +1738,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 103 | dict | ROLE_MAP[...] | (125 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 369 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 392 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 103 | dict | ROLE_MAP[...] | (126 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 370 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 393 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 
@@ -1752,10 +1762,10 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 162 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 225 | constant | HASH_LIMIT_BYTES | 2 * 1024 * 1024 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 344 | constant | NOTE_WIDTH | 44 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 345 | constant | NOTE_INDENT | 37 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 169 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 232 | constant | HASH_LIMIT_BYTES | 2 * 1024 * 1024 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 351 | constant | NOTE_WIDTH | 44 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 352 | constant | NOTE_INDENT | 37 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### osculating_cache_manager.py
 

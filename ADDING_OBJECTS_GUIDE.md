@@ -1,3 +1,4 @@
+<!-- Doc-Kind: hand | Step by step for adding a new celestial object. -->
 # Adding New Objects to Paloma's Orrery
 *Guide v1.2 - June 2026 | Tony + Claude*
 

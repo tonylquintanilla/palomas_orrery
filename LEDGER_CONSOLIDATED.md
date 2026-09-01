@@ -1,3 +1,4 @@
+<!-- Doc-Kind: zoned | The running ledger: every open and closed item under a stable handle, with the decisions behind it. Carries a generated INDEX. -->
 # LEDGER_CONSOLIDATED.md -- Paloma's Orrery Backlog
 
 Tony Quintanilla, PE | Claude | Palomas Orrery Project
@@ -258,7 +259,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*166 live items; 152 need attention (`!`); 165 RICE-scored; 103 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*164 live items; 150 need attention (`!`); 163 RICE-scored; 105 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -279,7 +280,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-249 | The Earth slice of L-181: interior boundaries as sourced constants | OPEN | 7.2 | 2026-08-25 |
 | ! | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | OPEN | 6.0 | 2026-08-25 |
 | ! | L-269 | A report names its items, not how many there are | OPEN | 6.0 | 2026-08-30 |
-| ! | L-272 | The gallery repo had no README | OPEN | 5.7 | 2026-08-31 |
 | ! | L-245 | Constants drift check compares against the last COMMIT, not the last RUN | OPEN | 5.4 | 2026-08-25 |
 | ! | L-265 | The i panel carries links, not curated prose | OPEN | 5.4 | 2026-08-30 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
@@ -290,7 +290,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-268 | Sweep: features collapsed out of their own identity | OPEN | 4.5 | 2026-08-30 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-08-25 |
-| ! | L-274 | The cache sweep aged by mtime, which is wrong in both directions | OPEN | 4.3 | 2026-09-01 |
 | ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-25 |
 | ! | L-247 | Sgr A* constants migrated to the single source of truth | OPEN | 4.0 | 2026-08-25 |
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
@@ -317,7 +316,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-244 | Sweep for replicated conversion factors as a class [Fable candidate] | OPEN | 2.8 | 2026-08-25 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-248 | The parsec-to-light-year factor is typed 36 times across the star pipeline | OPEN | 2.5 | 2026-08-25 |
-| ! | L-273 | A document indexer, so the README's document table stops being hand-maintained | OPEN | 2.5 | 2026-08-31 |
+| ! | L-273 | A document indexer, so the README's document table stops being hand-maintained | OPEN | 2.5 | 2026-09-01 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 |  | L-225 | Migrate the comet shell constants into `constants_new.py`, then dispatch | DEFERRED | 2.4 | 2026-08-23 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
@@ -518,6 +517,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-204 | The worksheet reference may be JSON | DONE | 5.7 | 2026-08-18 |
 |  | L-263 | The served chromosphere value is a rounded copy | DONE | 5.7 | 2026-08-29 |
 |  | L-270 | README.md is a stale live store, and a gate depended on it | DONE | 5.7 | 2026-08-31 |
+|  | L-272 | The gallery repo had no README | DONE | 5.7 | 2026-09-01 |
 |  | L-196 | Citation continuations: mark, join, refuse | DONE | 5.4 | 2026-08-17 |
 |  | L-197 | Maintenance runner output: say what passed | DONE | 5.4 | 2026-08-17 |
 |  | L-201 | Request selection -- ask the builder for fewer rows | DONE | 5.4 | 2026-08-18 |
@@ -534,6 +534,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-064 | Provenance-scanner format sweep -- Earth System family | DONE | 4.5 | 2026-06-30 |
 |  | L-075 | KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine) | DONE | 4.3 | 2026-06-30 |
 |  | L-076 | Earth System shared module (earth_system_common) + 3+5 generalized to food | DONE | 4.3 | 2026-06-30 |
+|  | L-274 | The cache sweep aged by mtime, which is wrong in both directions | DONE | 4.3 | 2026-09-01 |
 |  | L-214 | The request builder drops the comment lines that matter | DONE | 3.8 | 2026-08-21 |
 |  | L-233 | Three dashboard buttons: one fixed, one added, one retired | DONE | 3.8 | 2026-08-24 |
 |  | L-106 | Gallery-cache backup + gitignore discipline | DONE | 3.6 | 2026-07-12 |
@@ -5229,132 +5230,8 @@ Names Its Items [QUALITY], resident protocol Part 3.
   (checks that cannot fail, gallery side); L-230 (skill bumps and the
   protocol history, the same shape of unwatched transition).
 
-#### [L-274] The cache sweep aged by mtime, which is wrong in both directions
-<!-- L:274 status:OPEN upd:2026-09-01 section:A flag: rice:3/3/95/2 -->
-- **Tony found it by looking in the folder, 2026-09-01.** Fifteen
-  `solar-system.quarantine_*` directories in the gallery's `data/`,
-  oldest named 20260823. His words: "they are indeed accumulating. i was
-  not even tracking this issue."
-- **The removal already existed and had never been able to work.**
-  `_sweep_siblings()` runs at every build start, immediately after
-  `recover_incomplete_swap`, and reaps siblings older than
-  `keep_days=3`. It aged them by `st_mtime`.
-- **`st_mtime` is not a measure of anything here, and it fails in BOTH
-  directions.** A rename PRESERVES mtime, so a quarantine minted today
-  inherits `solar-system.prev`'s timestamp from days earlier --
-  measured: `quarantine_20260901T180026Z`, created that afternoon, read
-  Date modified 2026-08-30 21:13, two days before it existed. And
-  OneDrive REFRESHES mtime on sync, so four quarantines named 20260829
-  through 20260831 all read 2026-09-01 13:00 in the same listing. One
-  failure reaps an autopsy immediately; the other never reaps at all.
-  Tony's folder is the second kind. The rename half was confirmed by
-  test rather than assumed.
-- **Nobody noticed because the sweep printed NOTHING.** `shutil.rmtree`
-  with `ignore_errors=True` inside `except OSError: pass`. Reaping
-  thirty directories and reaping none produced identical output, which
-  is none. That is A Check That Cannot Fail Is Not Passing in its
-  purest form: the passing output could not prove the path was live,
-  and it was not live for about six weeks.
-- **The timestamp was in the name the whole time.**
-  `quarantine_20260823T144310Z` carries its own run id, and neither a
-  rename nor a sync can alter it. The fix parses the name and falls back
-  to mtime only when there is no run id -- reporting every such fallback
-  rather than taking it silently.
-- **Two name shapes the parser has to accept, both found by reading the
-  code rather than assuming one.** The quarantine call site formats
-  `%Y%m%dT%H%M%S` WITHOUT the trailing Z when `run_id` is None, while
-  the normal path passes a run id WITH it. And a single-object dry-run
-  stages as `.staging_solar-system_<slug>_<runid>` (L-148), so the id is
-  the trailing token, not the one after the prefix. The match is
-  anchored at the end of the name for exactly that reason.
-- **Where the fix went, and it is deliberately split.** The DELETION
-  stays in `tools/gallery_cache_builder.py`, which already owned it --
-  fixing the producer rather than adding a second consumer that would
-  have inherited the same bug if it reached for mtime too. The NOTICING
-  is new: `documentation/check_cache_siblings.py`, wired into
-  `gallery_maintenance_run.py` as a report-only row. Siblings piling up
-  is not a reason to refuse a commit; it is a reason to look. If the
-  sweep goes quiet again, that row says so in a day instead of in six
-  weeks.
-- **Eight pins added to `test_gallery_cache_builder_offline.py`**, which
-  gates the gallery runner: 149 checks -> 158. They cover both name
-  shapes, the interposed slug, an unparseable name, a well-shaped but
-  impossible date, and -- the case that started this -- a twelve-day-old
-  quarantine whose mtime says it was touched seconds ago. One of them
-  failed on first run, on Claude's arithmetic rather than on the code,
-  which is the only evidence that any of them can fail.
-- **The one-time bulk reap is expected and is a one-way action.** About
-  fifteen directories go on the first builder run after this lands.
-  They are gitignored, so git is NOT the backup, unlike the `.bak` case
-  in L-271. They are crash remnants the gallery-cache-builder skill
-  classifies as harmless and throwaway, and the new output names every
-  one as it goes, so the reap is a record rather than a silence.
-  `data/solar-system.prev` is untouched -- different name, different
-  rule, and never hand-deleted.
-- **OPEN CONDITION, and this is why it is not closed on delivery.** The
-  failure is a OneDrive mtime refresh on Windows. It cannot be
-  reproduced in a Linux container, so the sandbox proves the parser and
-  the age decision but not the thing that actually broke. A simulation
-  rebuilt Tony's exact fifteen names with mtimes forced to now, and the
-  fixed sweep reaped twelve and kept three; that is a strong result and
-  it is still a simulation. Close this when a real builder run on Tony's
-  machine prints the reap line and the folder drops to three or four
-  siblings.
-- **Gap:** `data/objects_config.json.bak` was still on disk on
-  2026-09-01. L-271 widened the ignore rule, so git now hides it
-  permanently, which is precisely the hazard that item was about --
-  a stale copy a later session can grep and read as current. Needs a
-  hand delete. (do)
-- **Claude:** RICE 3/3/95/2 -> 4.3 proposed, not confirmed. Confidence
-  95 because the diagnosis is measured on both halves rather than
-  inferred; Effort 2 for four files across two repos.
-- **Ref:** L-216 (the same quarantine mechanism, diagnosed as harmless
-  and correctly so -- what went unexamined was whether anything ever
-  removed them); L-271 (the `.bak` finding, the same shape: a cleanup
-  everyone believed existed); A Check That Cannot Fail Is Not Passing
-  and A Report Names Its Items, resident protocol Part 3;
-  gallery-cache-builder skill 1.4, Sibling directory semantics.
-
-#### [L-272] The gallery repo had no README
-<!-- L:272 status:OPEN upd:2026-08-31 section:A flag: rice:3/2/95/1 -->
-- **Found 2026-08-31 while rewriting the orrery's README.** Two public
-  repositories, and `tonyquintanilla.github.io` had no README at all.
-  Someone arriving from palomasorrery.com or from a link in the orrery
-  repo saw a file listing and nothing else.
-- **It is not a summary of the orrery's README.** It describes only
-  what is in that repository and points at the orrery for the project
-  itself: the two galleries and why both are wanted, the
-  objects_config -> cache builder -> served cache -> assembler ->
-  renderer chain, `gallery_maintenance_run.py` and its UNREACHABLE
-  state, the `.nojekyll` requirement, and the layout. It carries a
-  three-row version of the reach-from-where table, noting that the
-  protocol and skills govern work there but have no copy in that repo
-  to find.
-- **It states the transport gap plainly rather than describing the
-  path as automatic.** `data/objects_config.json` is maintained by
-  hand, the cache builder has never read `constants_new.py`, and the
-  site once served a superseded number for hours after the correction
-  was pushed here. A README describing that path as automatic would be
-  a false claim about the thing most likely to produce a wrong number
-  on the public site.
-- **It also names the two position consumers that live in that repo**
-  (`tools/gallery_studio.py`, `tools/json_converter.py`), because a
-  reader following Check All Parallel Pipelines from the orrery side
-  and grepping one repository finds three of five.
-- **Delivered as `patch_L272_1_gallery_readme.py`**, run from the
-  gallery repo root. It refuses to overwrite an existing README.
-- **CLOSING CONDITION:** the gallery push is confirmed. This block is
-  written from the orrery repo, which cannot see that one, so it stays
-  OPEN until Tony confirms rather than being closed on the strength of
-  a patch having been written.
-- **Claude:** RICE 3/2/95/1 -> 5.7 proposed, not confirmed. Reach 3
-  because it is a front door with real traffic from the site; Effort 1
-  because the file is written and the patch is tested.
-- **Ref:** L-270 (the same pass); L-262 (the gallery runner); Check All
-  Parallel Pipelines, resident protocol Part 3.
-
 #### [L-273] A document indexer, so the README's document table stops being hand-maintained
-<!-- L:273 status:OPEN upd:2026-08-31 section:A flag: rice:3/3/85/3 -->
+<!-- L:273 status:OPEN upd:2026-09-01 section:A flag: rice:3/3/85/3 -->
 - **Tony's proposal, 2026-08-31, and it is better than what Claude
   recommended.** Claude had offered two shapes for keeping the root
   document set honest: a generator writing a separate DOCUMENT_INDEX.md,
@@ -5427,6 +5304,39 @@ Names Its Items [QUALITY], resident protocol Part 3.
   gate on the README shipping. The accepted cost is editing README.md
   twice in two days, the second edit replacing a section the first one
   wrote.
+- **BUILT 2026-09-01 by `patch_L273_1_doc_index.py`, and it works.**
+  `doc_index.py` regenerates README.md's key-documents table from a
+  one-line `Doc-Kind` tag each document carries, wired into
+  `orrery_maintenance_run.py` as a fifth generator. Eight documents
+  tagged; thirteen indexed; `--check` mode reports staleness without
+  writing. The hand-maintained table is gone. STAYS OPEN for the
+  generator half below.
+- **A correction to this block: it is THREE kinds, not two.** The scope
+  paragraph above says five generated against seven hand-written.
+  Measured, there is a third kind the two-way split had no room for, and
+  it is the one most likely to be mishandled -- ZONED: hand-written prose
+  around a marker zone a tool rewrites. README.md, PROJECT_INSTRUCTIONS.md
+  and LEDGER_CONSOLIDATED.md are all zoned. The prose is yours to edit
+  and the zone is not, and nothing recorded that before.
+- **Verified rather than assumed, because it would have failed
+  quietly:** a leading HTML comment in LEDGER_CONSOLIDATED.md and
+  PROJECT_INSTRUCTIONS.md survives `ledger_index.py` and
+  `skills_index.py`. Both are tool-written, and a tag destroyed on the
+  next run would have been worse than no tag.
+- **WHAT REMAINS, and it is deliberately visible rather than silent.**
+  The five GENERATED documents are not tagged, because a tag written
+  into them by hand is destroyed on their generator's next run. They
+  appear in the table marked untagged and `doc_index.py` NAMES them on
+  every run: DATA_INVENTORY.md, MODULE_ATLAS.md, MODULE_INDEX.md,
+  PROVENANCE_AUDIT.md, WORKSHEET_CHECK.md. Closing this item means one
+  line in each of `module_atlas.py` (which writes two of the five),
+  `data_inventory.py`, `provenance_scanner.py` and `worksheet_checker.py`
+  to emit the tag. The GALLERY repo's README wants the same tool with a
+  different scan root, and is part of this item too.
+- **The blind spot announcing itself is the design, not a shortfall.**
+  A table that quietly omitted the five documents it could not read
+  would be exactly the failure A Check That Cannot Fail Is Not Passing
+  exists to prevent.
 - **Not a gate on anything.** General correctness work beside the
   delivery work, not in front of it.
 - **Claude:** RICE 3/3/85/3 -> 2.6 proposed, not confirmed. Confidence
@@ -9642,6 +9552,186 @@ Section 5a.
 - **Gap:** the key-documents table is still hand-maintained, which is
   this same failure in miniature. L-273 replaces it with a generated
   marker zone.
+
+#### [L-272] The gallery repo had no README
+<!-- L:272 status:DONE upd:2026-09-01 section:C flag: rice:3/2/95/1 -->
+- **Found 2026-08-31 while rewriting the orrery's README.** Two public
+  repositories, and `tonyquintanilla.github.io` had no README at all.
+  Someone arriving from palomasorrery.com or from a link in the orrery
+  repo saw a file listing and nothing else.
+- **It is not a summary of the orrery's README.** It describes only
+  what is in that repository and points at the orrery for the project
+  itself: the two galleries and why both are wanted, the
+  objects_config -> cache builder -> served cache -> assembler ->
+  renderer chain, `gallery_maintenance_run.py` and its UNREACHABLE
+  state, the `.nojekyll` requirement, and the layout. It carries a
+  three-row version of the reach-from-where table, noting that the
+  protocol and skills govern work there but have no copy in that repo
+  to find.
+- **It states the transport gap plainly rather than describing the
+  path as automatic.** `data/objects_config.json` is maintained by
+  hand, the cache builder has never read `constants_new.py`, and the
+  site once served a superseded number for hours after the correction
+  was pushed here. A README describing that path as automatic would be
+  a false claim about the thing most likely to produce a wrong number
+  on the public site.
+- **It also names the two position consumers that live in that repo**
+  (`tools/gallery_studio.py`, `tools/json_converter.py`), because a
+  reader following Check All Parallel Pipelines from the orrery side
+  and grepping one repository finds three of five.
+- **Delivered as `patch_L272_1_gallery_readme.py`**, run from the
+  gallery repo root. It refuses to overwrite an existing README.
+- **CLOSING CONDITION:** the gallery push is confirmed. This block is
+  written from the orrery repo, which cannot see that one, so it stays
+  OPEN until Tony confirms rather than being closed on the strength of
+  a patch having been written.
+- **Claude:** RICE 3/2/95/1 -> 5.7 proposed, not confirmed. Reach 3
+  because it is a front door with real traffic from the site; Effort 1
+  because the file is written and the patch is tested.
+- **Ref:** L-270 (the same pass); L-262 (the gallery runner); Check All
+  Parallel Pipelines, resident protocol Part 3.
+- **CLOSED 2026-09-01.** Pushed and confirmed against the live remote;
+  the gallery repo now has a README for the first time. The closing
+  condition this block named -- Tony confirming the push, because the
+  orrery repo cannot see the gallery one -- is met.
+
+#### [L-274] The cache sweep aged by mtime, which is wrong in both directions
+<!-- L:274 status:DONE upd:2026-09-01 section:C flag: rice:3/3/95/2 -->
+- **Tony found it by looking in the folder, 2026-09-01.** Fifteen
+  `solar-system.quarantine_*` directories in the gallery's `data/`,
+  oldest named 20260823. His words: "they are indeed accumulating. i was
+  not even tracking this issue."
+- **The removal already existed and had never been able to work.**
+  `_sweep_siblings()` runs at every build start, immediately after
+  `recover_incomplete_swap`, and reaps siblings older than
+  `keep_days=3`. It aged them by `st_mtime`.
+- **`st_mtime` is not a measure of anything here, and it fails in BOTH
+  directions.** A rename PRESERVES mtime, so a quarantine minted today
+  inherits `solar-system.prev`'s timestamp from days earlier --
+  measured: `quarantine_20260901T180026Z`, created that afternoon, read
+  Date modified 2026-08-30 21:13, two days before it existed. And
+  OneDrive REFRESHES mtime on sync, so four quarantines named 20260829
+  through 20260831 all read 2026-09-01 13:00 in the same listing. One
+  failure reaps an autopsy immediately; the other never reaps at all.
+  Tony's folder is the second kind. The rename half was confirmed by
+  test rather than assumed.
+- **Nobody noticed because the sweep printed NOTHING.** `shutil.rmtree`
+  with `ignore_errors=True` inside `except OSError: pass`. Reaping
+  thirty directories and reaping none produced identical output, which
+  is none. That is A Check That Cannot Fail Is Not Passing in its
+  purest form: the passing output could not prove the path was live,
+  and it was not live for about six weeks.
+- **The timestamp was in the name the whole time.**
+  `quarantine_20260823T144310Z` carries its own run id, and neither a
+  rename nor a sync can alter it. The fix parses the name and falls back
+  to mtime only when there is no run id -- reporting every such fallback
+  rather than taking it silently.
+- **Two name shapes the parser has to accept, both found by reading the
+  code rather than assuming one.** The quarantine call site formats
+  `%Y%m%dT%H%M%S` WITHOUT the trailing Z when `run_id` is None, while
+  the normal path passes a run id WITH it. And a single-object dry-run
+  stages as `.staging_solar-system_<slug>_<runid>` (L-148), so the id is
+  the trailing token, not the one after the prefix. The match is
+  anchored at the end of the name for exactly that reason.
+- **Where the fix went, and it is deliberately split.** The DELETION
+  stays in `tools/gallery_cache_builder.py`, which already owned it --
+  fixing the producer rather than adding a second consumer that would
+  have inherited the same bug if it reached for mtime too. The NOTICING
+  is new: `documentation/check_cache_siblings.py`, wired into
+  `gallery_maintenance_run.py` as a report-only row. Siblings piling up
+  is not a reason to refuse a commit; it is a reason to look. If the
+  sweep goes quiet again, that row says so in a day instead of in six
+  weeks.
+- **Eight pins added to `test_gallery_cache_builder_offline.py`**, which
+  gates the gallery runner: 149 checks -> 158. They cover both name
+  shapes, the interposed slug, an unparseable name, a well-shaped but
+  impossible date, and -- the case that started this -- a twelve-day-old
+  quarantine whose mtime says it was touched seconds ago. One of them
+  failed on first run, on Claude's arithmetic rather than on the code,
+  which is the only evidence that any of them can fail.
+- **The one-time bulk reap is expected and is a one-way action.** About
+  fifteen directories go on the first builder run after this lands.
+  They are gitignored, so git is NOT the backup, unlike the `.bak` case
+  in L-271. They are crash remnants the gallery-cache-builder skill
+  classifies as harmless and throwaway, and the new output names every
+  one as it goes, so the reap is a record rather than a silence.
+  `data/solar-system.prev` is untouched -- different name, different
+  rule, and never hand-deleted.
+- **OPEN CONDITION, and this is why it is not closed on delivery.** The
+  failure is a OneDrive mtime refresh on Windows. It cannot be
+  reproduced in a Linux container, so the sandbox proves the parser and
+  the age decision but not the thing that actually broke. A simulation
+  rebuilt Tony's exact fifteen names with mtimes forced to now, and the
+  fixed sweep reaped twelve and kept three; that is a strong result and
+  it is still a simulation. Close this when a real builder run on Tony's
+  machine prints the reap line and the folder drops to three or four
+  siblings.
+- **Gap:** `data/objects_config.json.bak` was still on disk on
+  2026-09-01. L-271 widened the ignore rule, so git now hides it
+  permanently, which is precisely the hazard that item was about --
+  a stale copy a later session can grep and read as current. Needs a
+  hand delete. (do)
+- **Claude:** RICE 3/3/95/2 -> 4.3 proposed, not confirmed. Confidence
+  95 because the diagnosis is measured on both halves rather than
+  inferred; Effort 2 for four files across two repos.
+- **Ref:** L-216 (the same quarantine mechanism, diagnosed as harmless
+  and correctly so -- what went unexamined was whether anything ever
+  removed them); L-271 (the `.bak` finding, the same shape: a cleanup
+  everyone believed existed); A Check That Cannot Fail Is Not Passing
+  and A Report Names Its Items, resident protocol Part 3;
+  gallery-cache-builder skill 1.4, Sibling directory semantics.
+- **CLOSED 2026-09-01. It was TWO independent bugs stacked, not one
+  cause with a symptom, and the block above says otherwise.** The
+  amendment is recorded rather than the block rewritten, because how the
+  diagnosis was wrong is the useful part. Bug one: the age test selected
+  nothing, because mtime is meaningless here. Bug two, underneath it and
+  invisible until the first was fixed: the deletion could never have
+  worked either. Fixing either alone would have changed nothing on
+  screen. That is why patch 1 appeared to make things WORSE -- 70
+  directories suddenly reported as unremovable -- when it had in fact
+  given a six-week silence its first voice.
+- **The second bug: Windows refuses to DELETE a read-only directory and
+  happily RENAMES one.** Every directory in the served tree carries
+  FILE_ATTRIBUTE_READONLY, set by OneDrive -- the live one included. The
+  builder RENAMES the live tree (os.replace, five sites) and DELETES the
+  siblings (shutil.rmtree, three sites). Same attribute, opposite
+  outcome. The files inside are not read-only; only the directories are,
+  which is exactly why rmtree deleted the contents and died at the first
+  rmdir, always at raw/elements.
+- **A Claude error worth keeping, because it is this project's own
+  failure mode.** The attribute diagnostic printed READONLY IS THE CAUSE
+  while its own instruction -- compare the control row against the stale
+  rows -- showed every row identical, live directory included. The
+  READING section tested for the flag being PRESENT, not for what
+  DIFFERED. A conclusion that fires on presence cannot fail. Shipping a
+  fix on that verdict would have been a citation over recalled data: it
+  would have looked like a diagnosis and been a guess. What actually
+  settled it was reading the deletion sites against the rename sites.
+- **The fix: `_rmtree_force`**, rmtree with a callback that clears the
+  read-only bit on the refused entry and retries, wired into all three
+  deletion sites. It RETURNS the number of entries it had to clear, and
+  the count is reported -- because a clean reap list cannot distinguish
+  the fix working from the attribute never having mattered.
+- **Tony's run, 2026-09-01, and every predicted signal fired.**
+  `[RECOVER] removed retained data\solar-system.prev (cleared read-only
+  on 6 entries)` -- a line that had read "could not remove" since July.
+  70 siblings reaped and named. 394 entries needed the read-only clear,
+  about 5.6 per directory, matching the six the recover line had just
+  demonstrated. The confirming run reports 4 siblings, none stale.
+- **The result nobody predicted, and it is the real one: no new
+  quarantine was minted.** The prior run ended with `[SWAP] stale
+  data\solar-system.prev (suspected file lock) -> quarantining as ...`;
+  this one goes straight from the sweep to done. The quarantine
+  mechanism exists BECAUSE .prev could not be deleted at run start. It
+  can now, so the swap has nothing to quarantine. This did not clean up
+  70 directories -- it switched off the thing producing them. The four
+  survivors are historical and age out on their own.
+- **Testing note.** The retry path was proven live rather than assumed:
+  os.rmdir was forced to refuse each directory once, the way
+  RemoveDirectory refuses a read-only one. Four refusals, count returned
+  4, tree gone; a clean tree returns 0. Two of the checks Claude wrote
+  this session failed first on Claude's own arithmetic and miscounting,
+  which is the only evidence either of them could fail at all.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

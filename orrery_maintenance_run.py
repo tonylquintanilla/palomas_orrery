@@ -125,6 +125,13 @@ GENERATORS = [
      ['MODULE_ATLAS.md', 'MODULE_INDEX.md']),
     ('Data inventory',  ['data_inventory.py'],
      ['DATA_INVENTORY.md']),
+    # L-273: rewrites README.md's key-documents table from the Doc-Kind
+    # tag each document carries. A generator rather than a checker on
+    # Tony's ruling: a checker would leave the hand-maintained copy in
+    # place and only make its drift loud, which is the opposite of
+    # fixing the producer.
+    ('Document index',  ['doc_index.py'],
+     ['README.md']),
 ]
 
 # (label, argv-tail, verdict hint)

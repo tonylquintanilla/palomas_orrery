@@ -221,6 +221,7 @@ ROLE_MAP = {
     'data_inventory':                         'devtool',
     'dep_trace':                              'devtool',
     'diagnose_bcodmo':                        'devtool',
+    'doc_index':                              'devtool',
     'earth_system_generator':                 'devtool',
     'examine_hot_csv':                        'devtool',
     'export_orbit_cache':                     'devtool',

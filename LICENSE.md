@@ -1,3 +1,4 @@
+<!-- Doc-Kind: hand | MIT license. -->
 MIT License
 
 Copyright (c) 2024 Tony Quintanilla

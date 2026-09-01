@@ -1,3 +1,4 @@
+<!-- Doc-Kind: hand | How to run a delivered patch script, and what its guards mean. -->
 # Running a Patch File
 ## Paloma's Orrery | June 16, 2026
 

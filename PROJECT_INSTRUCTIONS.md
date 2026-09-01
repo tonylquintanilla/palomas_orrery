@@ -1,3 +1,4 @@
+<!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
 Tony Quintanilla, PE | Claude | v3.49 | August 30, 2026
 
