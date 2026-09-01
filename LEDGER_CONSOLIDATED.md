@@ -259,7 +259,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*164 live items; 150 need attention (`!`); 163 RICE-scored; 105 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*165 live items; 151 need attention (`!`); 164 RICE-scored; 105 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -323,6 +323,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
 | ! | L-218 | 22 Cross-checked lines attach to no unit | OPEN | 2.1 | 2026-08-19 |
+| ! | L-275 | The dashboard cannot launch a Node tool, so three gallery smoke suites have no button | OPEN | 1.9 | 2026-09-01 |
 | ! | L-231 | Radiation belts are drawn in the ecliptic; the magnetic tilt is an unbuilt intent | OPEN | 1.8 | 2026-08-24 |
 | ! | L-187 | info_dictionary numeric-overlap enumeration | OPEN | 1.8 | 2026-08-07 |
 | ! | L-228 | Alfven surface latitude ranges: source them or omit them | OPEN [Tony] | 1.8 | 2026-08-23 |
@@ -5229,6 +5230,48 @@ Names Its Items [QUALITY], resident protocol Part 3.
   resident protocol Part 3; L-268 (the sweep that raised it); L-235
   (checks that cannot fail, gallery side); L-230 (skill bumps and the
   protocol history, the same shape of unwatched transition).
+
+#### [L-275] The dashboard cannot launch a Node tool, so three gallery smoke suites have no button
+<!-- L:275 status:OPEN upd:2026-09-01 section:A flag: rice:2/2/95/2 -->
+- **Found 2026-09-01, answering Tony's question about missing indented
+  entries.** Measured rather than read: each runner's actual tool list
+  compared against the dashboard's indented entries.
+- **The orrery side is complete.** Eighteen of eighteen -- five
+  generators and thirteen checkers -- all present. Nothing to do.
+- **The gallery side was two of nine.** Only `Module atlas` and
+  `Gallery Builder Offline Tests`. Of the seven absent, two were Python
+  and were added the same evening: `pin_artifact1_known_failure.py` and
+  `check_cache_siblings.py`.
+- **THE ITEM IS THE REMAINING THREE, and they are blocked on the
+  launcher, not on anyone's attention.** `documentation/smoke_features.js`,
+  `documentation/smoke_framing.js` and `documentation/smoke_sun_shells.js`
+  are Node. `palomas_orrery_dashboard.py` builds every launch command as
+  `[sys.executable, script_path] + args`, so it can only run Python. A
+  Node entry needs the launch path to dispatch on file extension, plus a
+  clear message when Node is absent -- the same UNREACHABLE state
+  `gallery_maintenance_run.py` already models, and it should say the same
+  thing rather than inventing a second vocabulary for it.
+- **Deferred deliberately, Tony's call 2026-09-01.** The launcher change
+  touches the code path every button in the dashboard uses, and the file
+  had just been committed at the end of a long session. The three suites
+  already run inside the gallery runner, which is where they gate; the
+  dashboard entry is convenience, not coverage.
+- **TWO MORE ARE ABSENT AND MUST STAY ABSENT. This is a ruling, not a
+  backlog.** `Served reachability` and `Store drift` are in-process
+  Python FUNCTIONS inside `gallery_maintenance_run.py`, reached through
+  its `LIVE_CHECKERS` list. They have no file to launch. The dashboard's
+  indent means two things at once -- the runner covers this, AND you can
+  still run it alone -- and the second is false for them. An entry would
+  be a button that cannot exist. Recorded here so a later session
+  counting nine against seven does not read it as a gap and try to close
+  it.
+- **Claude:** RICE 2/2/95/2 -> 1.9 proposed, not confirmed. Reach 2 and
+  Impact 2 because it is convenience over an existing gate; Effort 2
+  because the launcher change is small but sits under every button.
+- **Ref:** L-237 (the Artifact 1 pin); L-274 (the sibling checker);
+  L-236 (the gallery runner); A Report Names Its Items, resident
+  protocol Part 3 -- the two correctly-absent entries are named here
+  precisely so the count does not mislead.
 
 #### [L-273] A document indexer, so the README's document table stops being hand-maintained
 <!-- L:273 status:OPEN upd:2026-09-01 section:A flag: rice:3/3/85/3 -->

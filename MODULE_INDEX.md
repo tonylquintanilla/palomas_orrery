@@ -10,11 +10,15 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 129  
-**Total Lines of Code (non-blank):** 104,186  
-**Total Public Functions/Classes:** 1,173
+**Total Python Files:** 130  
+**Total Lines of Code (non-blank):** 104,465  
+**Total Public Functions/Classes:** 1,176
 
 ## Classification Coverage
+
+**Patch scripts awaiting archive (1).** A `Role: patch` module is a one-shot script that has already run. Its base fingerprint no longer matches, so it cannot run again. Move each into `documentation/`. While one sits in the scanned tree it inflates the module count here and the file count in the provenance audit.
+
+- `patch_L275_1_gallery_dashboard_entries.py`
 
 **Undetermined role (3).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
@@ -33,7 +37,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,938 lines) |
 | `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,479 lines) |
-| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (1,198 lines) |
+| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (1,223 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
 ---
@@ -218,6 +222,14 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `worksheet_checker.py` | - L-192. Does the worksheet say what the annotation claims it says? (2,142 lines) |
 | `worksheet_keys.py` | Worksheet row keys -- one owner for the syntax and the resolution. (481 lines) |
 | `worksheet_request_builder.py` | Worksheet request builder -- ask the question the checker can read. (652 lines) |
+
+---
+
+## Patch Scripts (transient -- awaiting archive)
+
+| Module | Description |
+|--------|-------------|
+| `patch_L275_1_gallery_dashboard_entries.py` | - two gallery entries in the dashboard, and a ledger block for the three that need a launcher change. (254 lines) |
 
 ---
 

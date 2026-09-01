@@ -214,6 +214,31 @@ LAUNCH_GROUPS = {
         True,
         None,
         True),
+        ("Artifact 1 Assembler Pin",
+        os.path.join("documentation", "pin_artifact1_known_failure.py"),
+        "Runs the Artifact 1 assembler test and compares its five verdicts, "
+        "and T3's feature set, against the 2026-08-31 pin. It GATES the "
+        "gallery runner. Before the pin (L-237) the row printed FAIL every "
+        "single run for a known reason, which made a real regression "
+        "indistinguishable from the old one -- a row that always fails hides "
+        "the next change behind the last. Runs from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Cache Siblings",
+        os.path.join("documentation", "check_cache_siblings.py"),
+        "Reports the served cache's sibling directories -- the .staging_* "
+        "and .quarantine_* remnants -- with each one's age taken from the "
+        "run id in its NAME, and names those the builder's next run should "
+        "reap. Report-only: it exits 0 whatever it finds. It exists because "
+        "the builder's sweep failed silently for six weeks and nothing said "
+        "so (L-274); if it goes quiet again this says so within a day. "
+        "Runs from the gallery repo ROOT and deletes nothing.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
     ],
 
     "Developer Tools": [
