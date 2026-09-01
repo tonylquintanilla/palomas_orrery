@@ -531,6 +531,47 @@ resident.
 (Moved down from the resident protocol on 2026-08-31 when v3.50
 made a fourth entry.)
 
+v3.48 (August 29, 2026): No rule changed in this document. One skill
+bump, recorded in the same commit that made it -- which is the whole
+of the improvement over this morning.
+
+safe-file-editing 1.8 -> 1.9 (L-236). Compare Content, Not Bytes
+[QUALITY]. A guard or a check that compares RAW BYTES across a
+Windows working copy refuses, or cries wolf, on files nobody has
+changed: any tool writing in text mode leaves CRLF behind, git
+normalises it back to LF on commit, and the two copies then differ
+byte-for-byte while agreeing on every character. Compare the
+LF-normalised content, write each file back in the style it was
+found in, and SAY when normalisation was what saved it.
+
+Two instances in one day earned it. A four-file patch refused
+because ledger_index.py had left the ledger CRLF; the md5 was
+reproduced exactly by converting the repo copy, which proved the
+content was identical. Then the new gallery runner called a correct
+deploy stale for the same reason. The second is the lesson: the
+first had been diagnosed and fixed in the patch scripts hours
+earlier and was not carried to the runner already written. One
+producer, two consumers, one of them moved.
+
+Kept at [QUALITY] on purpose. Both failure directions are loud, so
+nothing is silently corrupted and nothing passes that should not;
+what it costs is trust in the check. The critical tier stays short.
+
+One obligation this bump cannot discharge from inside the session
+that made it. A skill lives in three stores, and the account install
+is the copy Claude actually loads; a reinstall is invisible to the
+running conversation. So: safe-file-editing went to 1.9 at
+`bfa9de2f`, the session that bumped it had loaded 1.8, and the next
+session confirms its loaded copy reads 1.9 before doing patch work.
+
+Version history: v3.45 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-08-31 when v3.51
+made a fourth entry.)
+
+
 
 
 ### Preserved verbatim: v3.29 Technical lessons (now field notes in skills)

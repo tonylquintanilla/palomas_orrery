@@ -10,17 +10,24 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 128  
-**Total Lines of Code (non-blank):** 103,992  
-**Total Public Functions/Classes:** 1,169
+**Total Python Files:** 130  
+**Total Lines of Code (non-blank):** 104,750  
+**Total Public Functions/Classes:** 1,173
 
 ## Classification Coverage
 
-**Undetermined role (3).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
+- `patch_L269_4_pipeline_sweep.py`
+- `patch_L271_2_no_bak_and_gitignore.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
+
+**Undetermined domain (2).** No valid `Domain:` tag.
+
+- `patch_L269_4_pipeline_sweep.py`
+- `patch_L271_2_no_bak_and_gitignore.py`
 
 
 ---
@@ -224,6 +231,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
+| `patch_L269_4_pipeline_sweep.py` | Run:  python patch_L269_4_pipeline_sweep.py From: the ORRERY repo root (the folder holding PROJECT_INSTRUCTIONS.md). In VS Code: open this file from that folder and click Run. (329 lines) |
+| `patch_L271_2_no_bak_and_gitignore.py` | Run:  python patch_L271_2_no_bak_and_gitignore.py From: the ORRERY repo root (the folder holding PROJECT_INSTRUCTIONS.md). In VS Code: open this file from that folder and click Run. (429 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

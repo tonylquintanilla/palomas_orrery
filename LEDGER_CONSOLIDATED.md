@@ -258,7 +258,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*163 live items; 149 need attention (`!`); 162 RICE-scored; 102 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*164 live items; 150 need attention (`!`); 163 RICE-scored; 102 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -269,6 +269,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-235 | Checks that cannot fail, gallery side [three instances] | OPEN | 11.4 | 2026-08-25 |
 | ! | L-252 | L2b's fourth outcome: an INCOMPLETE verdict is not a confirmation | OPEN | 11.4 | 2026-08-25 |
 | ! | L-262 | The framing smoke test has never run against the page | OPEN | 11.4 | 2026-08-30 |
+| ! | L-271 | Patch scripts wrote backups nothing ever removed | OPEN | 11.4 | 2026-08-31 |
 | ! | L-237 | Artifact 1's golden record is stale and needs re-cutting | OPEN | 10.8 | 2026-08-25 |
 | ! | L-266 | Nothing checks that a cited link still resolves | OPEN | 9.0 | 2026-08-30 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
@@ -5268,6 +5269,70 @@ Names Its Items [QUALITY], resident protocol Part 3.
   on it); L-237 (the other stale-record item); The Correction Does Not
   Travel, safe-file-editing 1.9; A Report Names Its Items, resident
   protocol Part 3.
+
+#### [L-271] Patch scripts wrote backups nothing ever removed
+<!-- L:271 status:OPEN upd:2026-08-31 section:A flag: rice:4/3/95/1 -->
+- **Tony's question, 2026-08-31, and it is the whole of the finding:**
+  "why do we create them at all?" Asked after
+  `patch_L271_1_gallery_bak_cleanup.py` deleted eight tracked backups
+  from the gallery repo and two more appeared within the hour, written
+  by the next two patches.
+- **There is no cleanup function, and Tony believed there was.** He
+  thought `maintenance_run.py` removed them. Checked at `ccd1ac96`: the
+  word "bak" does not appear in that file, and the repo has no cleanup
+  script. What he was remembering is the ONE-TIME sweep of 2026-08-29,
+  when nine tracked backups were deleted and the `*.bak` rule added.
+  That is how a habit gets mistaken for a mechanism.
+- **They are redundant BY CONSTRUCTION, which is what makes this a rule
+  rather than a preference.** A patch guards on a content fingerprint
+  and refuses when the working copy does not match, so at the moment it
+  writes, the file on disk is the committed version. Git holds it;
+  Discard Changes restores it. The `.bak` can never be the only copy.
+  The one case where it would earn its place, uncommitted work, is
+  exactly the case the gate refuses to run in.
+- **A stale copy is an ACTIVE HAZARD, not clutter.** The reason is
+  already written in the orrery's own `.gitignore` from the August 29
+  sweep: a session grepping for a value can hit one and read it as
+  current. Two of the nine were a superseded master plan and a
+  superseded skill.
+- **CORRECTION, Tony's, 2026-08-31: the rate is days, not weeks.** The
+  handoff of that evening said the eight gallery backups were "what that
+  looks like after a few weeks." Measured: all eight were created
+  between 2026-08-29 and 2026-08-31. Corrected here rather than restated
+  quietly, because the wrong number made the problem look slower than it
+  is.
+- **Why they seem to come and go.** `*.bak` matches a name ENDING in
+  `.bak`, so a plain `interactive.html.bak` is invisible in GitHub
+  Desktop and sits on disk unseen. `.bak1`, `.bak2` and `.bak_L271` are
+  NOT matched, so those surface and get committed. That is exactly the
+  split in the evidence: the orrery kept
+  `data/close_approach_cache.json.bak1` and `.bak2` through the sweep
+  that removed everything else, and the gallery -- whose rule was
+  `*.json.bak` only -- kept all eight.
+- **Fixed in protocol v3.51 / safe-file-editing 1.10.** Patch scripts
+  stop writing `.bak` and print the Discard Changes path. The orrery's
+  ignore rule was widened to all three shapes in the same commit; the
+  gallery's was widened by `patch_L271_1` on 2026-08-31.
+- **The two close-approach cache backups are a different thing and were
+  still deleted.** `close_approach_data.py` keeps a deliberate
+  two-generation rotation, bounded at two and rebuilt by the program
+  that owns it. That is not litter. Being TRACKED is the defect: every
+  fetch committed three files where one would do, and git already holds
+  the previous cache. The rotation is untouched and rebuilds them on
+  disk at the next fetch.
+- **Gap: the spent patch scripts in `documentation/` are not
+  rewritten.** They wrote `.bak` because the rule then said to. Editing
+  a record to match a rule written after it is what Stamp What You
+  Change forbids.
+- **Gap: the gallery repo has no ledger.** L-271's first patch ran there
+  and this block is in the orrery, which is where the ledger lives. The
+  cross-repo record is this line.
+- **Claude:** RICE 4/3/95/1 -> 11.4 proposed, not confirmed. Effort 1
+  because the rule and both ignore rules are written; what remains is
+  habit, and the skill enforces that.
+- **Ref:** L-236 (the runner that first surfaced backup churn); L-269
+  (The Correction Does Not Travel, the same shape one layer over);
+  Stamp What You Change and Git Is the Backup, safe-file-editing 1.10.
 
 ## PENDING ACTION (Tony-side)
 

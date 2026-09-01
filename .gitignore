@@ -30,4 +30,9 @@ data/solar-system/
 # Patch-script backups. Nine were tracked until 2026-08-29,
 # including a superseded master plan and a superseded skill. A
 # session grepping for a value can hit one and read it as current.
+# Widened 2026-08-31 (L-271): *.bak matches only names ENDING in
+# .bak, so .bak1, .bak2 and .bak_L271 slipped through the sweep above
+# and kept getting committed. All three shapes now.
 *.bak
+*.bak[0-9]
+*.bak_*

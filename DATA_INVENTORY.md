@@ -8,7 +8,7 @@ Repo copies stale/absent; this reflects the live local stores.
 |---|---|---|---|---|
 | .vot | 4 | 295.1 MB | gaia_data_magnitude.vot (284.4 MB) | 2026-02-08 |
 | .nc | 18 | 161.1 MB | era5_clim_march_day22.nc (27.4 MB) | 2026-04-07 |
-| .json | 51 | 132.5 MB | orbit_paths.json (130.9 MB) | 2026-08-30 |
+| .json | 51 | 132.5 MB | orbit_paths.json (130.9 MB) | 2026-08-31 |
 | .backup | 4 | 131.2 MB | orbit_paths.json.backup (130.9 MB) | 2026-08-26 |
 | .backup_old | 1 | 130.9 MB | orbit_paths.json.backup_old (130.9 MB) | 2026-08-25 |
 | .csv | 15 | 34.9 MB | 3773_v3_niskin_hot001_yr01_to_hot348_yr35.csv (30.8 MB) | 2026-04-07 |
@@ -19,8 +19,6 @@ Repo copies stale/absent; this reflects the live local stores.
 | .pdf | 1 | 7.1 MB | IPC_Sudan_Acute_Food_Insecurity_Feb2026_Jan2027_Special_Report.pdf (7.1 MB) | 2026-06-22 |
 | .kml | 114 | 1.3 MB | 2015-05-24_spikes_india_pak_2015.kml (107.5 KB) | 2026-06-29 |
 | .geojson | 1 | 700.6 KB | IPC_SD_A_87143417_2026-06-22.geojson (700.6 KB) | 2026-06-22 |
-| .bak1 | 1 | 2.1 KB | close_approach_cache.json.bak1 (2.1 KB) | 2026-06-10 |
-| .bak2 | 1 | 1.8 KB | close_approach_cache.json.bak2 (1.8 KB) | 2026-05-02 |
 
 ## orbit_paths.json
 
@@ -75,7 +73,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 439.4 MB (433 files)
+**Total size:** 439.2 MB (431 files)
 
 **GitHub Pages headroom:** 585 MB remaining of 1024 MB ceiling (42.9% used)
 
@@ -86,17 +84,15 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 | .json | 280 | 417.5 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-08-31 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 1 | 5.1 MB | palomas_orrery_logo.png (5.1 MB) | 2025-11-27 |
-| .py | 50 | 947.9 KB | gallery_studio.py (244.1 KB) | 2026-08-30 |
-| .md | 13 | 416.0 KB | web_gallery_handoff.md (242.4 KB) | 2026-08-30 |
+| .py | 54 | 993.2 KB | gallery_studio.py (244.1 KB) | 2026-08-31 |
+| .md | 13 | 414.2 KB | web_gallery_handoff.md (242.4 KB) | 2026-08-31 |
 | .jsonl | 22 | 340.3 KB | encke.jsonl (15.9 KB) | 2026-08-31 |
-| .html | 5 | 203.8 KB | index.html (128.2 KB) | 2026-08-29 |
+| .html | 5 | 215.9 KB | index.html (128.2 KB) | 2026-08-31 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
-| .bak | 3 | 99.5 KB | interactive.html.bak (45.7 KB) | 2026-08-29 |
-| .bak2 | 2 | 84.6 KB | interactive.html.bak2 (42.6 KB) | 2026-08-29 |
 | .js | 4 | 62.5 KB | feature_renderers.js (42.6 KB) | 2026-08-30 |
-| .bak3 | 1 | 45.0 KB | interactive.html.bak3 (45.0 KB) | 2026-08-29 |
-| .bak_l262 | 2 | 35.3 KB | gallery_maintenance_run.py.bak_L262 (31.1 KB) | 2026-08-30 |
+| .bak_l267a | 1 | 46.3 KB | interactive.html.bak_L267A (46.3 KB) | 2026-08-31 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |
+| .bak | 1 | 23.7 KB | objects_config.json.bak (23.7 KB) | 2026-08-29 |
 | .patch | 3 | 11.7 KB | phaseb_studio.patch (7.0 KB) | 2026-07-29 |
 | .mermaid | 1 | 7.4 KB | gallery_navigation_flowchart.mermaid (7.4 KB) | 2026-03-08 |
 | .txt | 1 | 4.2 KB | requirements.txt (4.2 KB) | 2026-02-28 |
@@ -132,7 +128,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | repo | served size | ceiling | headroom | used |
 |---|---|---|---|---|
-| gallery | 439.4 MB | 1024 MB | 585 MB | 42.9% |
+| gallery | 439.2 MB | 1024 MB | 585 MB | 42.9% |
 | orrery (gitignored data) | 966.8 MB | n/a (not served) | -- | -- |
 
 Note: orrery data is local/gitignored. If orbit cache files are pushed to either repo for web serving, re-run this inventory to update headroom.

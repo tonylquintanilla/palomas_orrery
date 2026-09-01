@@ -6,7 +6,8 @@ fires_when: Editing existing files, patch scripts, sed/regex edits, encoding che
 
 # Safe File Editing
 
-Skill version: 1.9 | Cut from palomas_orrery @ bfa9de2f (v1.9),
+Skill version: 1.10 | Cut from palomas_orrery @ ccd1ac96 (v1.10),
+earlier @ bfa9de2f (v1.9),
 earlier @ 6d12ecac (v1.8), d424c459 (v1.7), ef3bd13 (v1.6),
 50438c6 (v1.5), a872205 (v1.4), 1ba20c3 (v1.3), 3398970 (v1.2),
 bdaaa0c (v1.1) | August 29, 2026, with Anthropic's Claude Opus 5
@@ -75,6 +76,57 @@ for old, new in edits:
     content = content.replace(old, new)
 with open(fn, 'wb') as f: f.write(content)
 ```
+
+### Git Is the Backup [QUALITY]
+
+A patch script does NOT write a `.bak`. It prints how to undo instead.
+
+The reason is structural rather than tidy-minded. A patch guards on a
+content fingerprint before it writes, and refuses when the working copy
+does not match. So at the moment it writes, the file on disk IS the
+committed version -- git holds it, and one button restores it. The
+`.bak` cannot ever be the only copy. The single case where it would
+earn its place, uncommitted work, is precisely the case the fingerprint
+gate refuses to run in.
+
+So say this, in the words of the tool the person actually uses:
+
+```
+FAILURE: ... NOTHING was written.
+Undo is Discard Changes in GitHub Desktop.
+```
+
+Not writing them is worth more than deleting them later, because a
+stale copy is an ACTIVE HAZARD and not just clutter. A session grepping
+for a value can hit one and read it as current; when the nine tracked
+backups were swept from the orrery on 2026-08-29, two of them were a
+superseded master plan and a superseded skill.
+
+The rate is days. All eight backups swept from the gallery on
+2026-08-31 were created in the preceding two days.
+
+**And `*.bak` does not mean what it looks like.** The glob matches a
+name ENDING in `.bak`, so `page.html.bak` is silently ignored and sits
+on disk unseen, while `page.html.bak2` and `page.html.bak_L271` are NOT
+matched and get committed. Any ignore rule for this needs all three
+shapes:
+
+```
+*.bak
+*.bak[0-9]
+*.bak_*
+```
+
+**A rotating runtime backup is a different thing and is fine.**
+`close_approach_data.py` keeps two generations of its cache, bounded at
+two, rebuilt by the program that owns it. That is a program managing its
+own data, not a patch hedging against itself. Keep it out of the
+repository all the same: git already holds the previous cache.
+
+(Tony's question, 2026-08-31: "why do we create them at all?" He also
+believed the maintenance runner cleaned them up. It does not -- the word
+does not appear in it. What existed was one manual sweep, which is how
+a habit gets mistaken for a mechanism. L-271.)
 
 ### Line Endings Are Not Content [QUALITY]
 
