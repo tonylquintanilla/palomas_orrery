@@ -19,14 +19,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260901T223244Z | `0f9a1d3` | 129 | 1031 | 292 | 621 | 116 | 2 |
 | 20260901T222051Z | `7612a31` | 129 | 1031 | 292 | 621 | 116 | 2 |
 | 20260901T213318Z | `ab1e6ac` | 128 | 1028 | 292 | 621 | 113 | 2 |
 | 20260901T175717Z | `e382650` | 128 | 1028 | 292 | 621 | 113 | 2 |
 | 20260901T011920Z | `ccd1ac9` | 130 | 1030 | 294 | 621 | 113 | 2 |
 | 20260831T132738Z | `a667e12` | 128 | 1028 | 292 | 621 | 113 | 2 |
-| 20260831T031310Z | `ded99fb` | 129 | 1029 | 293 | 621 | 113 | 2 |
 
-Change since the previous run: total +3, Tier-1 +0.
+Change since the previous run: total +0, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -1787,8 +1787,8 @@ is planned for a future session.
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 66 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
 | 67 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 513 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 644 | dict | SECTION_SYMBOLS[...] | (4 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 529 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 660 | dict | SECTION_SYMBOLS[...] | (4 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### planet_visualization_utilities.py
 

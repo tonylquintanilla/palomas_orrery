@@ -183,7 +183,7 @@ LAUNCH_GROUPS = {
         ("Gallery Maintenance Run -- offline",
         "gallery_maintenance_run.py",
         "The gallery repo's own runner (L-236), before you commit. "
-        "Regenerates the module atlas, then runs the 149-check cache "
+        "Regenerates the module atlas, then runs the cache "
         "builder suite, the three Node smoke suites, and the artifact-1 "
         "assembler test. Three states rather than two: a suite that could "
         "not run -- Node missing, say -- reports UNREACHABLE and is "
@@ -234,7 +234,7 @@ LAUNCH_GROUPS = {
          True),
         ("MAINTENANCE RUN -- everything indented below",
          "orrery_maintenance_run.py",
-         "One command for the whole routine: regenerates the four generated "
+         "One command for the whole routine: regenerates the generated "
          "documents, then runs every checker, then prints one summary. It "
          "reports and continues rather than stopping at the first failure, "
          "and says which generated files actually moved. About ten seconds. "
@@ -270,6 +270,22 @@ LAUNCH_GROUPS = {
          "data_inventory.py",
          "Inventory the large, gitignored data stores (data/, star_data/). "
          "Writes DATA_INVENTORY.md. Run before handoffs or to check cache state.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Document Index",
+         "doc_index.py",
+         "Regenerate the key-documents table in README.md from the "
+         "one-line Doc-Kind tag each root document carries. The purpose "
+         "text lives in the document it describes, not in this tool and "
+         "not in the README, so the wording stays yours while the table "
+         "stays generated. Three kinds: generated (never hand-edit -- the "
+         "next run destroys the edit), zoned (hand-written prose around a "
+         "marker zone a tool rewrites), and hand. A document with no tag "
+         "is listed as untagged and named in the summary rather than "
+         "quietly dropped. Run after adding, renaming, or retiring a root "
+         "document; --check reports staleness without writing.",
          SCRIPT_DIR,
          True,
          None,
