@@ -19,14 +19,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260901T213318Z | `ab1e6ac` | 128 | 1028 | 292 | 621 | 113 | 2 |
 | 20260901T175717Z | `e382650` | 128 | 1028 | 292 | 621 | 113 | 2 |
 | 20260901T011920Z | `ccd1ac9` | 130 | 1030 | 294 | 621 | 113 | 2 |
 | 20260831T132738Z | `a667e12` | 128 | 1028 | 292 | 621 | 113 | 2 |
 | 20260831T031310Z | `ded99fb` | 129 | 1029 | 293 | 621 | 113 | 2 |
 | 20260830T023235Z | `bfa9de2` | 129 | 1028 | 292 | 621 | 113 | 2 |
-| 20260830T012151Z | `e81059f` | 128 | 1028 | 292 | 621 | 113 | 2 |
 
-Change since the previous run: total -2, Tier-1 -2.
+Change since the previous run: total +0, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
