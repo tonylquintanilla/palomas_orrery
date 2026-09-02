@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: September 02, 2026
-Files scanned: 131
-Total findings: 1033
-Constants: 110 | Dicts: 43 | Display strings: 880
+Files scanned: 129
+Total findings: 1031
+Constants: 110 | Dicts: 41 | Display strings: 880
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -19,20 +19,16 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260902T130030Z | `5639a95` | 129 | 1031 | 292 | 621 | 116 | 2 |
 | 20260902T124439Z | `df80c35` | 131 | 1033 | 294 | 621 | 116 | 2 |
 | 20260901T234519Z | `8459df6` | 130 | 1031 | 292 | 621 | 116 | 2 |
 | 20260901T223244Z | `0f9a1d3` | 129 | 1031 | 292 | 621 | 116 | 2 |
 | 20260901T222051Z | `7612a31` | 129 | 1031 | 292 | 621 | 116 | 2 |
 | 20260901T213318Z | `ab1e6ac` | 128 | 1028 | 292 | 621 | 113 | 2 |
-| 20260901T175717Z | `e382650` | 128 | 1028 | 292 | 621 | 113 | 2 |
 
-Change since the previous run: total +2, Tier-1 +2.
+Change since the previous run: total -2, Tier-1 -2.
 
-Tier-1 rose in these files:
-
-| File | Before | After |
-|------|-------:|------:|
-| patch_L254_2_venus_mars_dead_builders.py | 0 | 2 |
+No file's Tier-1 count rose.
 
 ---
 
@@ -63,7 +59,7 @@ Tier-1 rose in these files:
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 294 |
+| 1 | 16-20 | FIX NOW | 292 |
 | 2 | 10-15 | REVIEW | 621 |
 | 3 | 5-9 | LOW PRIORITY | 116 |
 | 4 | 1-4 | LOWEST PRIORITY | 2 |
@@ -139,7 +135,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `palomas_orrery.py` | orrery | 0 | 0 | 3 | 0 | 3 |
 | `provenance_history.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
 | `exoplanet_systems.py` | stars | 0 | 0 | 3 | 0 | 3 |
-| `patch_L254_2_venus_mars_dead_builders.py` | orrery | 2 | 0 | 0 | 0 | 2 |
 | `energy_imbalance.py` | earth_science | 1 | 1 | 0 | 0 | 2 |
 | `plot_data_report_widget.py` | utilities | 2 | 0 | 0 | 0 | 2 |
 | `sgr_a_visualization_animation.py` | orrery | 1 | 0 | 1 | 0 | 2 |
@@ -171,7 +166,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 45 | 130 | 502 | 69 | 2 | 703 |
+| Orrery (solar system + orbital mechanics) | 44 | 128 | 502 | 69 | 2 | 701 |
 | Earth System | 13 | 150 | 77 | 2 | 0 | 229 |
 | Stars (stellar neighborhood) | 11 | 12 | 42 | 6 | 0 | 60 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 39 | 0 | 39 |
@@ -182,7 +177,6 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 - `doc_index.py`
 - `orrery_maintenance_run.py`
-- `patch_L254_2_venus_mars_dead_builders.py`
 - `worksheet_checker.py`
 - `worksheet_key_aliases.py`
 - `worksheet_keys.py`
@@ -611,13 +605,6 @@ is planned for a future session.
 | 2174 | string | display string @ line 2174 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2197 | string | display string @ line 2197 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2332 | string | display string @ line 2332 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-
-### patch_L254_2_venus_mars_dead_builders.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 48 | dict | EXPECTED[...] | (2 entries) | 4 | 5 | **20** | No source citation; date-sensitive (recalled) | UNDETERMINED -- could not be classified |
-| 56 | dict | LIVE[...] | (2 entries) | 4 | 5 | **20** | No source citation; date-sensitive (recalled) | UNDETERMINED -- could not be classified |
 
 ### planet_visualization_utilities.py
 
@@ -1751,9 +1738,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 103 | dict | ROLE_MAP[...] | (127 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 373 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 396 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 103 | dict | ROLE_MAP[...] | (126 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 370 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 393 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 

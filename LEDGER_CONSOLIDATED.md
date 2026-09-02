@@ -259,7 +259,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*165 live items; 151 need attention (`!`); 164 RICE-scored; 105 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*167 live items; 153 need attention (`!`); 166 RICE-scored; 105 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -273,6 +273,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-271 | Patch scripts wrote backups nothing ever removed | OPEN | 11.4 | 2026-08-31 |
 | ! | L-237 | Artifact 1's golden record is stale and needs re-cutting | OPEN | 10.8 | 2026-08-25 |
 | ! | L-266 | Nothing checks that a cited link still resolves | OPEN | 9.0 | 2026-08-30 |
+| ! | L-276 | Mode 7 tells relay partners they cannot read the repo, and they can | OPEN | 8.5 | 2026-09-02 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-226 | safe-file-editing 1.8 -- encoding gate covers prose; corrections do not travel | OPEN | 8.1 | 2026-08-23 |
 | ! | L-260 | Sun exhibit finishing items: axis units and the phone | OPEN | 8.1 | 2026-08-29 |
@@ -292,6 +293,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-08-25 |
 | ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-25 |
 | ! | L-247 | Sgr A* constants migrated to the single source of truth | OPEN | 4.0 | 2026-08-25 |
+| ! | L-277 | The L-192 site store anchors by line number, so any insertion breaks two checkers | OPEN | 4.0 | 2026-09-02 |
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
@@ -5230,6 +5232,84 @@ Names Its Items [QUALITY], resident protocol Part 3.
   resident protocol Part 3; L-268 (the sweep that raised it); L-235
   (checks that cannot fail, gallery side); L-230 (skill bumps and the
   protocol history, the same shape of unwatched transition).
+
+#### [L-276] Mode 7 tells relay partners they cannot read the repo, and they can
+<!-- L:276 status:OPEN upd:2026-09-02 section:A flag: rice:3/3/95/1 -->
+- **The sentence.** PROJECT_INSTRUCTIONS.md Part 1, Mode 7, Documents as
+  handoffs: "the receiving AI has zero independent repo access, so an
+  un-anchored document is unverifiable input."
+- **It is false for a Claude relay, and this project's own records prove
+  it.** RELAY_RESPONSE_L191_survey_fable_20260821.md reports running
+  `git ls-remote` against the pinned SHA and doing AST analysis of the
+  parsed source. Fable cloned the repo. Tony's ruling 2026-09-02: all the
+  models queried here have repo access, and Claude and GPT reach GitHub
+  natively.
+- **The requirement survives; only its stated reason is wrong.** An
+  anchor records which state a document DESCRIBES, and the repo moves.
+  Proposed replacement for the clause: *the repo moves, so an un-anchored
+  document does not say which state it describes. A partner that can
+  fetch needs the anchor to fetch the right bytes; a partner that cannot
+  needs it to know what it is reading.* That covers both cases instead of
+  assuming the weaker one.
+- **One live store.** PROJECT_INSTRUCTIONS.md at the repo root is the
+  only file carrying the sentence. Nineteen other hits are archived
+  version snapshots (v3_32 through v3_49) and stay as they are. Nothing
+  in the gallery repo. Verified at 5639a952.
+**Note:** the failure that surfaced it is worth keeping. A session read
+the L-191 relay response, which says plainly that Fable cloned the repo,
+and then repeated the blanket sentence anyway -- a general claim in a
+document trusted over specific evidence already in hand. Same shape as
+trusting a handoff over the render, one layer up.
+- Tony-action (do): run the PROJECT_INSTRUCTIONS.md patch when it is
+  built; it is a one-clause edit plus a version bump.
+**Gap:** patch not yet built. Wording above is proposed, not approved.
+**Ref:** PROJECT_INSTRUCTIONS.md Part 1 Mode 7;
+documentation/RELAY_RESPONSE_L191_survey_fable_20260821.md; L-191.
+
+#### [L-277] The L-192 site store anchors by line number, so any insertion breaks two checkers
+<!-- L:277 status:OPEN upd:2026-09-02 section:A flag: rice:3/3/90/2 -->
+- **What happened 2026-09-02.** `patch_L254_2` inserted 31 lines into
+  venus_visualization_shells.py and 31 into mars_visualization_shells.py
+  -- comments and docstrings only, nothing executable. The maintenance
+  run then failed two checkers: Worksheet key round trip (1 unresolved)
+  and Extractor pins (10 PIN UNMATCHED). Same cause, one store.
+- **The mechanism.** documentation/worksheets/L192_annotated_sites.txt
+  holds `module TAB line TAB label` rows, generated once from
+  WORKSHEET_CHECK.md at 305b269 and hand-maintained since. Nothing
+  regenerates it. `key_for_site()` reads the line, asks
+  `enclosing_name()` which def contains it, and mints
+  `module::enclosing::label`. Move the lines and the enclosing scope
+  changes: venus line 62 was a `description` inside
+  `create_venus_core_shell` and now lands in a comment block, where no
+  function encloses it, so the key degrades to
+  `venus_visualization_shells.py::description` and resolves to nothing.
+- **The checkers were right and the repin would have been wrong.** The
+  Extractor pins failure printed a REPIN block that silently omits all
+  ten venus and mars rows -- accepting it would have retired ten live
+  pins to clear a red light. Fixed by correcting the ten line numbers
+  instead; all ten then mint exactly the keys the pin file already holds.
+- **THE FORWARD COST IS THE ITEM.** L-254 has 55 dead builders left
+  across eris, jupiter, moon, neptune, planet9, pluto, saturn, solar and
+  uranus. Every one of those nine modules that also holds an L-192 site
+  will break these two checkers the same way. Four of the nine do:
+  eris, mercury-adjacent moon, pluto and solar all appear in the pin
+  file. So the annotation sweep and this store are coupled, and the
+  coupling is currently discovered at run time by a red light.
+**Note:** two shapes to weigh, and this is a design call rather than a
+method one. (a) Every L-254 slice updates the site store in the same
+patch -- cheap, but it is a rule a session has to remember. (b) The
+store stops anchoring by line and anchors by enclosing name plus label,
+which is what the key already is -- more work once, nothing to remember
+after. Claude's read is (b), because (a) is a convention that fails
+silently the first time somebody forgets, and the whole point of this
+store is to not fail silently.
+- Tony-action (decide): (a) update the store per slice, or (b) reanchor
+  the store to names.
+**Gap:** decision, then a patch. The 2026-09-02 breakage is already
+repaired; this item is about the next eight.
+**Ref:** worksheet_keys.py `key_for_site` / `enclosing_name` /
+`parse_sites_doc`; documentation/worksheets/L192_annotated_sites.txt;
+documentation/worksheets/L192_extractor_pins.txt; L-192; L-254.
 
 #### [L-275] The dashboard cannot launch a Node tool, so three gallery smoke suites have no button
 <!-- L:275 status:OPEN upd:2026-09-01 section:A flag: rice:2/2/95/2 -->

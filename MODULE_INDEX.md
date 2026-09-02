@@ -10,26 +10,17 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 131  
-**Total Lines of Code (non-blank):** 104,925  
-**Total Public Functions/Classes:** 1,185
+**Total Python Files:** 129  
+**Total Lines of Code (non-blank):** 104,352  
+**Total Public Functions/Classes:** 1,173
 
 ## Classification Coverage
 
-**Patch scripts awaiting archive (1).** A `Role: patch` module is a one-shot script that has already run. Its base fingerprint no longer matches, so it cannot run again. Move each into `documentation/`. While one sits in the scanned tree it inflates the module count here and the file count in the provenance audit.
+**Undetermined role (3).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L275_1_gallery_dashboard_entries.py`
-
-**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
-
-- `patch_L254_2_venus_mars_dead_builders.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
-
-**Undetermined domain (1).** No valid `Domain:` tag.
-
-- `patch_L254_2_venus_mars_dead_builders.py`
 
 
 ---
@@ -230,19 +221,10 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 ---
 
-## Patch Scripts (transient -- awaiting archive)
-
-| Module | Description |
-|--------|-------------|
-| `patch_L275_1_gallery_dashboard_entries.py` | - two gallery entries in the dashboard, and a ledger block for the three that need a launcher change. (254 lines) |
-
----
-
 ## Undetermined -- Needs a Role: Tag
 
 | Module | Description |
 |--------|-------------|
-| `patch_L254_2_venus_mars_dead_builders.py` | - L-254, the Venus and Mars slice. (319 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

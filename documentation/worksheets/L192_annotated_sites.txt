@@ -25,10 +25,10 @@ constants_new.py	377	HAUMEA_RADIUS_KM
 constants_new.py	388	ARROKOTH_RADIUS_KM
 eris_visualization_shells.py	218	eris_crust_info
 eris_visualization_shells.py	478	eris_hill_sphere_info
-mars_visualization_shells.py	518	mars_upper_atmosphere_info
-mars_visualization_shells.py	599	mars_magnetosphere_info
-mars_visualization_shells.py	713	bow_shock_text
-mars_visualization_shells.py	850	mars_hill_sphere_info
+mars_visualization_shells.py	586	mars_upper_atmosphere_info
+mars_visualization_shells.py	674	mars_magnetosphere_info
+mars_visualization_shells.py	788	bow_shock_text
+mars_visualization_shells.py	925	mars_hill_sphere_info
 mercury_visualization_shells.py	49	mercury_outer_core_info
 mercury_visualization_shells.py	71	mercury_crust_info
 mercury_visualization_shells.py	97	mercury_sodium_tail_info
@@ -46,12 +46,12 @@ pluto_visualization_shells.py	423	description
 pluto_visualization_shells.py	535	description
 pluto_visualization_shells.py	614	pluto_hill_sphere_info
 pluto_visualization_shells.py	638	description
-venus_visualization_shells.py	43	venus_core_info
-venus_visualization_shells.py	62	description
-venus_visualization_shells.py	339	venus_atmosphere_info
-venus_visualization_shells.py	437	description
-venus_visualization_shells.py	528	venus_magnetosphere_info
-venus_visualization_shells.py	681	venus_hill_sphere_info
+venus_visualization_shells.py	74	venus_core_info
+venus_visualization_shells.py	100	description
+venus_visualization_shells.py	391	venus_atmosphere_info
+venus_visualization_shells.py	503	description
+venus_visualization_shells.py	594	venus_magnetosphere_info
+venus_visualization_shells.py	747	venus_hill_sphere_info
 
 # RETIRED sites -- skipped by the round trip, kept as the record of
 # why the site left the corpus. Format: RETIRED<tab>date<tab>handle<tab>site
