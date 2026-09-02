@@ -73,7 +73,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 438.9 MB (433 files)
+**Total size:** 438.9 MB (435 files)
 
 **GitHub Pages headroom:** 585 MB remaining of 1024 MB ceiling (42.9% used)
 
@@ -81,11 +81,11 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 282 | 417.4 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-01 |
+| .json | 284 | 417.4 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-02 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 1 | 5.1 MB | palomas_orrery_logo.png (5.1 MB) | 2025-11-27 |
 | .py | 59 | 1.0 MB | gallery_studio.py (244.1 KB) | 2026-09-01 |
-| .jsonl | 22 | 362.0 KB | encke.jsonl (16.9 KB) | 2026-09-01 |
+| .jsonl | 22 | 369.2 KB | encke.jsonl (17.2 KB) | 2026-09-02 |
 | .html | 5 | 215.9 KB | index.html (128.2 KB) | 2026-08-31 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
 | .md | 10 | 124.4 KB | MODULE_ATLAS.md (27.0 KB) | 2026-09-01 |

@@ -1,6 +1,6 @@
 # Paloma's Orrery - Module Index
 
-**Generated:** September 01, 2026 by `module_atlas.py`  
+**Generated:** September 02, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -10,9 +10,9 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 130  
-**Total Lines of Code (non-blank):** 104,465  
-**Total Public Functions/Classes:** 1,176
+**Total Python Files:** 131  
+**Total Lines of Code (non-blank):** 104,925  
+**Total Public Functions/Classes:** 1,185
 
 ## Classification Coverage
 
@@ -20,11 +20,16 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 - `patch_L275_1_gallery_dashboard_entries.py`
 
-**Undetermined role (3).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
+- `patch_L254_2_venus_mars_dead_builders.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
+
+**Undetermined domain (1).** No valid `Domain:` tag.
+
+- `patch_L254_2_venus_mars_dead_builders.py`
 
 
 ---
@@ -81,7 +86,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_visualization_shells.py` | Earth interior and orbital shell traces. (1,074 lines) |
 | `eris_visualization_shells.py` | Eris interior and boundary shell traces. (482 lines) |
 | `jupiter_visualization_shells.py` | Jupiter interior, ring, and magnetosphere shell traces. (897 lines) |
-| `mars_visualization_shells.py` | Mars interior and remnant field shell traces. (811 lines) |
+| `mars_visualization_shells.py` | Mars interior and remnant field shell traces. (884 lines) |
 | `mercury_visualization_shells.py` | Mercury interior, exosphere, and unique feature traces. (368 lines) |
 | `moon_visualization_shells.py` | Lunar interior and exosphere shell traces. (571 lines) |
 | `neptune_visualization_shells.py` | Neptune interior, ring, and magnetosphere shell traces. (1,559 lines) |
@@ -90,7 +95,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `saturn_visualization_shells.py` | Saturn interior, ring, and magnetosphere shell traces. (1,088 lines) |
 | `solar_visualization_shells.py` | Sun interior, corona, and heliosphere shell traces. (1,537 lines) |
 | `uranus_visualization_shells.py` | Uranus interior, ring, and magnetosphere shell traces. (1,083 lines) |
-| `venus_visualization_shells.py` | Venus interior and atmosphere shell traces. (645 lines) |
+| `venus_visualization_shells.py` | Venus interior and atmosphere shell traces. (711 lines) |
 
 ---
 
@@ -205,7 +210,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (710 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (957 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (959 lines) |
 | `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (491 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,066 lines) |
@@ -237,6 +242,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
+| `patch_L254_2_venus_mars_dead_builders.py` | - L-254, the Venus and Mars slice. (319 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

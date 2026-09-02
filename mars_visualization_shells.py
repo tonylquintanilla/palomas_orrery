@@ -28,6 +28,13 @@ May 28, 2026: Phase 1 re-pipe (Opus 4.7). 1 live inline info marker
 May 29, 2026: Crustal Magnetic Fields info marker (magnetosphere builder)
     given border_color='white' for contrast against its magenta dots
     (Mode 5). Magnetosphere and bow-shock markers keep factory red.
+September 1, 2026 (L-254, Opus 5): the seven dead create_mars_*_shell
+    functions are marked as dead in their own docstrings, and a dispatch
+    note above the section names the one that is live
+    (create_mars_magnetosphere_shell). An orphaned second docstring in
+    create_mars_hill_sphere_shell, wrongly reading 'Creates Mars's upper
+    atmosphere shell.', was removed in the same pass. Annotation only --
+    no function removed and no behaviour changed.
 """
 import numpy as np
 import math
@@ -37,13 +44,46 @@ from orrery_rendering import rotate_to_sunward, create_info_marker
 
 # Mars Shell Creation Functions
 
+# DISPATCH NOTE (L-254, 2026-09-01). ONE builder in this file is live:
+# create_mars_magnetosphere_shell, reached through the CUSTOM_SHELLS
+# 'builder' string in shell_configs.py that planet_visualization.py
+# resolves by rsplit('.', 1) + getattr. EVERY OTHER create_mars_*_shell
+# function in this file is dead and says so in its own docstring. This
+# body's sphere shells render through SHELL_CONFIGS ->
+# build_sphere_shell(), so editing a dead function here changes nothing.
+#
+# No count is written here, on purpose. A count in a comment is a
+# hand-maintained copy of something the file already reports; add a
+# builder and the number rots with nothing to catch it. The live one is
+# named and the dead ones are marked one by one, so both survive the
+# file changing.
+#
+# ON THE PATTERN: L-254 measures create_*_shell. Live builders that do
+# NOT match that pattern exist in other modules --
+# create_jupiter_ring_system, create_sun_streamer_band and
+# create_mercury_sodium_tail among them. Read "dead" here as "dead, and
+# measured against create_*_shell".
+#
+# The _info strings in this file are NOT dead. They are the canonical `\n`
+# form, read by the Tk checkbox tooltips through celestial_objects.
+# get_shell_tooltip_names() and globals(), and imported by
+# shell_configs.py, which derives `<br>` from them at the Plotly
+# boundary. Editing one changes what the user reads in two places.
+
 mars_inner_core_info = (
             "A Solid Inner Core: Based on seismic data from the InSight lander, scientists have strong evidence that Mars \n" 
             "possesses a solid inner core. This inner core is primarily composed of iron and nickel, similar to Earth's."
 )
 
 def create_mars_inner_core_shell(center_position=(0, 0, 0)):
-    """Creates Mars's inner core shell."""
+    """Creates Mars's inner core shell.
+
+    DEAD CODE (L-254, 2026-09-01). Not on the render path: imported at
+    planet_visualization.py and called nowhere. This body renders its
+    sphere shells through SHELL_CONFIGS -> build_sphere_shell(). Edit
+    that config, not this function -- a change here renders nothing.
+    Retained pending the codebase-wide sweep in L-254.
+    """
     # Define layer properties
     layer_info = {
         'radius_fraction': 0.5,  # Inner core: 0-50% of Mars's radius
@@ -135,7 +175,14 @@ mars_outer_core_info = (
 )
 
 def create_mars_outer_core_shell(center_position=(0, 0, 0)):
-    """Creates Mars's outer core shell."""
+    """Creates Mars's outer core shell.
+
+    DEAD CODE (L-254, 2026-09-01). Not on the render path: imported at
+    planet_visualization.py and called nowhere. This body renders its
+    sphere shells through SHELL_CONFIGS -> build_sphere_shell(). Edit
+    that config, not this function -- a change here renders nothing.
+    Retained pending the codebase-wide sweep in L-254.
+    """
     # Define layer properties
     layer_info = {
         'radius_fraction': 0.8,  # Outer core: 50-80% of Mars's radius
@@ -218,7 +265,14 @@ mars_mantle_info = (
 )
 
 def create_mars_mantle_shell(center_position=(0, 0, 0)):
-    """Creates Mars's mantle shell."""
+    """Creates Mars's mantle shell.
+
+    DEAD CODE (L-254, 2026-09-01). Not on the render path: imported at
+    planet_visualization.py and called nowhere. This body renders its
+    sphere shells through SHELL_CONFIGS -> build_sphere_shell(). Edit
+    that config, not this function -- a change here renders nothing.
+    Retained pending the codebase-wide sweep in L-254.
+    """
     # Define layer properties
     layer_info = {
         'radius_fraction': 0.98,  # Upper mantle: 80-98% of Mars's radius
@@ -287,7 +341,14 @@ mars_crust_info = (
 )
 
 def create_mars_crust_shell(center_position=(0, 0, 0)):
-    """Creates Mars's crust shell using Mesh3d for better performance with improved hover."""
+    """Creates Mars's crust shell using Mesh3d for better performance with improved hover.
+
+    DEAD CODE (L-254, 2026-09-01). Not on the render path: imported at
+    planet_visualization.py and called nowhere. This body renders its
+    sphere shells through SHELL_CONFIGS -> build_sphere_shell(). Edit
+    that config, not this function -- a change here renders nothing.
+    Retained pending the codebase-wide sweep in L-254.
+    """
     # Define layer properties
     layer_info = {
         'radius_fraction': 1.0,  # Crust: 100% of Mars's radius
@@ -443,7 +504,14 @@ mars_atmosphere_info = (
 )
 
 def create_mars_atmosphere_shell(center_position=(0, 0, 0)):
-    """Creates Mars's lower atmosphere shell."""
+    """Creates Mars's lower atmosphere shell.
+
+    DEAD CODE (L-254, 2026-09-01). Not on the render path: imported at
+    planet_visualization.py and called nowhere. This body renders its
+    sphere shells through SHELL_CONFIGS -> build_sphere_shell(). Edit
+    that config, not this function -- a change here renders nothing.
+    Retained pending the codebase-wide sweep in L-254.
+    """
     # Define layer properties
     layer_info = {
         'radius_fraction': 1.02,  # Troposphere
@@ -526,7 +594,14 @@ mars_upper_atmosphere_info = (
 )
 
 def create_mars_upper_atmosphere_shell(center_position=(0, 0, 0)):
-    """Creates Mars's upper atmosphere shell."""
+    """Creates Mars's upper atmosphere shell.
+
+    DEAD CODE (L-254, 2026-09-01). Not on the render path: imported at
+    planet_visualization.py and called nowhere. This body renders its
+    sphere shells through SHELL_CONFIGS -> build_sphere_shell(). Edit
+    that config, not this function -- a change here renders nothing.
+    Retained pending the codebase-wide sweep in L-254.
+    """
     # Define layer properties
     layer_info = {
         'radius_fraction': 1.06,  # Mesosphere, thermosphere, and exosphere
@@ -853,9 +928,14 @@ mars_hill_sphere_info = (
 )
 
 def create_mars_hill_sphere_shell(center_position=(0, 0, 0)):
-    """Creates Mars's Hill sphere."""
+    """Creates Mars's Hill sphere.
 
-    """Creates Mars's upper atmosphere shell."""
+    DEAD CODE (L-254, 2026-09-01). Not on the render path: imported at
+    planet_visualization.py and called nowhere. This body renders its
+    sphere shells through SHELL_CONFIGS -> build_sphere_shell(). Edit
+    that config, not this function -- a change here renders nothing.
+    Retained pending the codebase-wide sweep in L-254.
+    """
     # Define layer properties
     layer_info = {
         'radius_fraction': 319.2,  

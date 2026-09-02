@@ -26,6 +26,11 @@ May 28, 2026: Phase 1 re-pipe (Opus 4.7). 1 live inline info marker
     routed through orrery_rendering.create_info_marker() factory
     (Hill Sphere). Already at factory size 8 / opacity 1.0; no visual
     change beyond factory routing.
+September 1, 2026 (L-254, Opus 5): the six dead create_venus_*_shell
+    functions are marked as dead in their own docstrings, and a dispatch
+    note above the section names the one that is live
+    (create_venus_magnetosphere_shell). Annotation only -- no function
+    removed and no behaviour changed.
 """
 import numpy as np
 import math
@@ -34,6 +39,32 @@ from planet_visualization_utilities import (VENUS_RADIUS_AU, KM_PER_AU, create_s
 from orrery_rendering import rotate_to_sunward, create_info_marker
 
 # Venus Shell Creation Functions
+
+# DISPATCH NOTE (L-254, 2026-09-01). ONE builder in this file is live:
+# create_venus_magnetosphere_shell, reached through the CUSTOM_SHELLS
+# 'builder' string in shell_configs.py that planet_visualization.py
+# resolves by rsplit('.', 1) + getattr. EVERY OTHER create_venus_*_shell
+# function in this file is dead and says so in its own docstring. This
+# body's sphere shells render through SHELL_CONFIGS ->
+# build_sphere_shell(), so editing a dead function here changes nothing.
+#
+# No count is written here, on purpose. A count in a comment is a
+# hand-maintained copy of something the file already reports; add a
+# builder and the number rots with nothing to catch it. The live one is
+# named and the dead ones are marked one by one, so both survive the
+# file changing.
+#
+# ON THE PATTERN: L-254 measures create_*_shell. Live builders that do
+# NOT match that pattern exist in other modules --
+# create_jupiter_ring_system, create_sun_streamer_band and
+# create_mercury_sodium_tail among them. Read "dead" here as "dead, and
+# measured against create_*_shell".
+#
+# The _info strings in this file are NOT dead. They are the canonical `\n`
+# form, read by the Tk checkbox tooltips through celestial_objects.
+# get_shell_tooltip_names() and globals(), and imported by
+# shell_configs.py, which derives `<br>` from them at the Plotly
+# boundary. Editing one changes what the user reads in two places.
 
 # Source: NASA Venus Fact Sheet; NASA Solar System Exploration;
 # Source+: iron-nickel core, radius ~3,200 km, lack of dynamo due to slow rotation or solid core.
@@ -47,7 +78,14 @@ venus_core_info = (
 )
 
 def create_venus_core_shell(center_position=(0, 0, 0)):
-    """Creates Venus's core shell."""
+    """Creates Venus's core shell.
+
+    DEAD CODE (L-254, 2026-09-01). Not on the render path: imported at
+    planet_visualization.py and called nowhere. This body renders its
+    sphere shells through SHELL_CONFIGS -> build_sphere_shell(). Edit
+    that config, not this function -- a change here renders nothing.
+    Retained pending the codebase-wide sweep in L-254.
+    """
     # Define layer properties
     layer_info = {
         'radius_fraction': 0.5,  # Inner core: 0-50% of Venus's radius
@@ -118,7 +156,14 @@ venus_mantle_info = (
 )
 
 def create_venus_mantle_shell(center_position=(0, 0, 0)):
-    """Creates Venus's mantle shell."""
+    """Creates Venus's mantle shell.
+
+    DEAD CODE (L-254, 2026-09-01). Not on the render path: imported at
+    planet_visualization.py and called nowhere. This body renders its
+    sphere shells through SHELL_CONFIGS -> build_sphere_shell(). Edit
+    that config, not this function -- a change here renders nothing.
+    Retained pending the codebase-wide sweep in L-254.
+    """
     # Define layer properties
     layer_info = {
         'radius_fraction': 0.98,  # Lower mantle: 50-98% of Venus's radius; actually it is nearly 100%, but representing as 98%
@@ -185,7 +230,14 @@ venus_crust_info = (
 )
 
 def create_venus_crust_shell(center_position=(0, 0, 0)):
-    """Creates Venus's crust shell using Mesh3d for better performance with improved hover."""
+    """Creates Venus's crust shell using Mesh3d for better performance with improved hover.
+
+    DEAD CODE (L-254, 2026-09-01). Not on the render path: imported at
+    planet_visualization.py and called nowhere. This body renders its
+    sphere shells through SHELL_CONFIGS -> build_sphere_shell(). Edit
+    that config, not this function -- a change here renders nothing.
+    Retained pending the codebase-wide sweep in L-254.
+    """
     # Define layer properties
     layer_info = {
         'radius_fraction': 1.0,  # Crust: 100% of Venus's radius
@@ -345,7 +397,14 @@ venus_atmosphere_info = (
 )
 
 def create_venus_atmosphere_shell(center_position=(0, 0, 0)):
-    """Creates Venus's lower atmosphere shell."""
+    """Creates Venus's lower atmosphere shell.
+
+    DEAD CODE (L-254, 2026-09-01). Not on the render path: imported at
+    planet_visualization.py and called nowhere. This body renders its
+    sphere shells through SHELL_CONFIGS -> build_sphere_shell(). Edit
+    that config, not this function -- a change here renders nothing.
+    Retained pending the codebase-wide sweep in L-254.
+    """
     # Define layer properties
     layer_info = {
         'radius_fraction': 1.01,  
@@ -419,7 +478,14 @@ venus_upper_atmosphere_info = (
 )
 
 def create_venus_upper_atmosphere_shell(center_position=(0, 0, 0)):
-    """Creates Venus's upper atmosphere shell."""
+    """Creates Venus's upper atmosphere shell.
+
+    DEAD CODE (L-254, 2026-09-01). Not on the render path: imported at
+    planet_visualization.py and called nowhere. This body renders its
+    sphere shells through SHELL_CONFIGS -> build_sphere_shell(). Edit
+    that config, not this function -- a change here renders nothing.
+    Retained pending the codebase-wide sweep in L-254.
+    """
     # Define layer properties
     layer_info = {
         'radius_fraction': 1.08,  # Mesosphere, thermosphere, and exosphere
@@ -686,7 +752,14 @@ venus_hill_sphere_info = (
 )
 
 def create_venus_hill_sphere_shell(center_position=(0, 0, 0)):
-    """Creates Venus's Hill sphere."""
+    """Creates Venus's Hill sphere.
+
+    DEAD CODE (L-254, 2026-09-01). Not on the render path: imported at
+    planet_visualization.py and called nowhere. This body renders its
+    sphere shells through SHELL_CONFIGS -> build_sphere_shell(). Edit
+    that config, not this function -- a change here renders nothing.
+    Retained pending the codebase-wide sweep in L-254.
+    """
     # Hill sphere radius in Venus radii
     radius_fraction = 166  # Venus's Hill sphere is about 1 million km or 166 Venus radii
     
