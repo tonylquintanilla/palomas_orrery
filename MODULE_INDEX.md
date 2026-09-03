@@ -10,17 +10,22 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 129  
-**Total Lines of Code (non-blank):** 104,352  
-**Total Public Functions/Classes:** 1,173
+**Total Python Files:** 130  
+**Total Lines of Code (non-blank):** 104,633  
+**Total Public Functions/Classes:** 1,176
 
 ## Classification Coverage
 
-**Undetermined role (3).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
+- `patch_L278_session_ledger_20260902.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
+
+**Undetermined domain (1).** No valid `Domain:` tag.
+
+- `patch_L278_session_ledger_20260902.py`
 
 
 ---
@@ -201,7 +206,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (710 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (959 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (957 lines) |
 | `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (491 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,066 lines) |
@@ -225,6 +230,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
+| `patch_L278_session_ledger_20260902.py` | - the 2026-09-02 session record. (283 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

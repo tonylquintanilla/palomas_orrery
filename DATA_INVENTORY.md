@@ -73,7 +73,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 438.9 MB (435 files)
+**Total size:** 439.4 MB (438 files)
 
 **GitHub Pages headroom:** 585 MB remaining of 1024 MB ceiling (42.9% used)
 
@@ -84,11 +84,11 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 | .json | 284 | 417.4 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-02 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 1 | 5.1 MB | palomas_orrery_logo.png (5.1 MB) | 2025-11-27 |
-| .py | 59 | 1.0 MB | gallery_studio.py (244.1 KB) | 2026-09-01 |
+| .py | 61 | 1.1 MB | gallery_studio.py (244.1 KB) | 2026-09-02 |
+| .md | 11 | 650.8 KB | TEST_PROTOCOL_sun_hang_20260902.md (526.5 KB) | 2026-09-02 |
 | .jsonl | 22 | 369.2 KB | encke.jsonl (17.2 KB) | 2026-09-02 |
-| .html | 5 | 215.9 KB | index.html (128.2 KB) | 2026-08-31 |
+| .html | 5 | 223.3 KB | index.html (128.2 KB) | 2026-09-02 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
-| .md | 10 | 124.4 KB | MODULE_ATLAS.md (27.0 KB) | 2026-09-01 |
 | .js | 4 | 62.5 KB | feature_renderers.js (42.6 KB) | 2026-08-30 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |
 | .patch | 3 | 11.7 KB | phaseb_studio.patch (7.0 KB) | 2026-07-29 |
@@ -126,7 +126,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | repo | served size | ceiling | headroom | used |
 |---|---|---|---|---|
-| gallery | 438.9 MB | 1024 MB | 585 MB | 42.9% |
+| gallery | 439.4 MB | 1024 MB | 585 MB | 42.9% |
 | orrery (gitignored data) | 966.8 MB | n/a (not served) | -- | -- |
 
 Note: orrery data is local/gitignored. If orbit cache files are pushed to either repo for web serving, re-run this inventory to update headroom.

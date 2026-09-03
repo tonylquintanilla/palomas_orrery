@@ -259,7 +259,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*167 live items; 153 need attention (`!`); 166 RICE-scored; 105 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*169 live items; 155 need attention (`!`); 168 RICE-scored; 105 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -277,6 +277,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-226 | safe-file-editing 1.8 -- encoding gate covers prose; corrections do not travel | OPEN | 8.1 | 2026-08-23 |
 | ! | L-260 | Sun exhibit finishing items: axis units and the phone | OPEN | 8.1 | 2026-08-29 |
+| ! | L-278 | A relayout from inside a Plotly event handler re-enters the update machinery | OPEN | 8.1 | 2026-09-02 |
 | ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-21 |
 | ! | L-249 | The Earth slice of L-181: interior boundaries as sourced constants | OPEN | 7.2 | 2026-08-25 |
 | ! | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | OPEN | 6.0 | 2026-08-25 |
@@ -288,6 +289,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-246 | S4714's semi-major axis was three values in three stores | OPEN | 5.1 | 2026-08-25 |
 | ! | L-193 | Qualified verdicts -- the token is not the whole answer | OPEN | 4.8 | 2026-08-15 |
 | ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
+| ! | L-279 | A test protocol that leaves the CONDITIONS uncontrolled produces confident wrong readings | OPEN | 4.8 | 2026-09-02 |
 | ! | L-268 | Sweep: features collapsed out of their own identity | OPEN | 4.5 | 2026-08-30 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-08-25 |
@@ -309,9 +311,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-239 | Seed the three Oort builders so a render is reproducible | OPEN | 3.6 | 2026-08-25 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-25 |
 | ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
-| ! | L-267 | The Sun exhibit GUI shape: drawer, focus label, marker navigation | OPEN | 3.4 | 2026-08-30 |
+| ! | L-267 | The Sun exhibit GUI shape: drawer, focus label, marker navigation | OPEN | 3.4 | 2026-09-02 |
 | ! | L-256 | provenance-discipline 2.8, and the status pass it enables | OPEN | 3.1 | 2026-08-27 |
-| ! | L-254 | 76 dead sphere-shell builders, unmarked, across 12 modules | OPEN | 2.8 | 2026-08-26 |
+| ! | L-254 | 76 dead sphere-shell builders, unmarked, across 12 modules | OPEN | 2.8 | 2026-09-02 |
 | ! | L-240 | Split declared drawing parameters from measured values | OPEN | 2.8 | 2026-08-25 |
 | ! | L-176 | Shell hover text: add illustrated dimensions (radius_fraction -> km) | OPEN | 2.8 | 2026-08-04 |
 | ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-08-07 |
@@ -4418,7 +4420,48 @@ the Envelope of the Unknowable, resident protocol Part 3;
 `constants_new.py::EARTH_D660_DEPTH_KM`.
 
 #### [L-254] 76 dead sphere-shell builders, unmarked, across 12 modules
-<!-- L:254 status:OPEN upd:2026-08-26 section:A flag: rice:3/3/95/3 -->
+<!-- L:254 status:OPEN upd:2026-09-02 section:A flag: rice:3/3/95/3 -->
+**AMENDED 2026-09-02 -- the axis, and the Venus and Mars slice.**
+
+THE COUNT NEEDED ITS AXIS. "SIX are live" is true of
+`create_*_shell` and of nothing else. Nineteen further builders in the
+same modules are on the live dispatch and simply do not carry the
+`_shell` suffix, so 25 builders are live in total: jupiter's
+`io_plasma_torus`, `magnetosphere`, `radiation_belts` and `ring_system`;
+saturn's `enceladus_plasma_torus`, `magnetosphere`, `radiation_belts` and
+`ring_system`; solar's `galactic_tide`, `hills_cloud_torus`,
+`outer_oort_clumpy` and `streamer_band`; uranus's and neptune's
+`magnetosphere`, `radiation_belts` and `ring_system` each; and mercury's
+`sodium_tail`. Verified against shell_configs.py at 5639a952.
+
+The 76 dead are still dead -- nothing about the census was wrong. What
+was wrong was a conclusion drawn from it in session: that the modules
+other than venus and mars were "all dead". Only four are: pluto, eris,
+moon and planet9. The other eight have live builders sitting beside dead
+ones. This is A Report Names Its Items in its sharpest form again -- a
+count does not carry the axis it was counted on -- and the axis is now
+written into the dispatch notes in the code rather than left in a
+document.
+
+DONE THIS SLICE, at `5639a952` via `patch_L254_2`: venus 6 and mars 7
+annotated, with a dispatch note in each naming the live magnetosphere
+builder and stating the census pattern. Deliberately no count in those
+notes; a count in a comment is a hand-maintained copy of something the
+file already reports.
+
+FIXED IN PASSING: `create_mars_hill_sphere_shell` carried a second
+docstring-shaped string reading "Creates Mars's upper atmosphere shell."
+-- a copy-paste orphan with the wrong label and no effect. Removed.
+
+REMAINING 55, counted from disk at 5639a952: solar 14, jupiter 6,
+saturn 6, moon 6, pluto 6, eris 5, neptune 5, uranus 5, planet9 2.
+Solar's fourteen are the only ones the current artifact reaches. The rest
+wait for the ladder, per The Braid.
+
+FORWARD COST, and it is L-277: four of those nine modules also hold
+L-192 sites, so four more slices will break the worksheet key round trip
+and the extractor pins the same way this one did.
+
 - **Measured, not recalled, at orrery `fc25ef23`.** 82
   `create_*_shell` functions are defined across 15
   `*_visualization_shells` modules. SIX are live, every one reached
@@ -4852,7 +4895,39 @@ Names Its Items [QUALITY], resident protocol Part 3.
   nothing enforcing it.
 
 #### [L-267] The Sun exhibit GUI shape: drawer, focus label, marker navigation
-<!-- L:267 status:OPEN upd:2026-08-30 section:A flag: rice:4/3/85/3 -->
+<!-- L:267 status:OPEN upd:2026-09-02 section:A flag: rice:4/3/85/3 -->
+**AMENDED 2026-09-02 -- Stage B shipped, after a hang.**
+
+STAGE A shipped 2026-08-31 at gallery `2ed12564`: the drawer replaced the
+legend and the portrait defect was fixed.
+
+STAGE B shipped 2026-09-02 at gallery `e0edd16c` via `patch_L267_2`, a
+port of `sun_gui_mockup.html`, which Tony accepted at Mode 5 over two
+rounds on 2026-08-30. Ten edits: the row split with a red GO, the focused
+row style, the focus label replacing the count on the drawer handle,
+cross-marker navigation keyed on `curveNumber`, and the framing floor
+removed for focus framing while the arrival floor stays. One job per
+control -- the box draws, everything else moves the camera.
+
+THEN IT HUNG. Clicking a cross marker froze the page with
+`RangeError: Maximum call stack size exceeded` from inside
+plotly-2.35.2. Eight reads to attribute; the finding is portable and is
+recorded separately as L-278. Fixed at gallery `6fd6baaf` via
+`patch_L267_3`, two lines: the click handler defers `sunFocusOn` by one
+tick so Plotly finishes dispatching before the relayout starts.
+
+MODE 5 PASSED, Tony, 2026-09-02, on the live page: markers click freely
+and fast including the outer corona and the Alfven surface with nothing
+freezing; the focus label and camera follow the marker clicked; the
+drawer checkboxes draw and hide without moving the camera.
+
+STAGE C, the i panel, is NOT started and is blocked on L-265. All twenty
+`info_url` values in the served `feature_configs.json` are the
+placeholder `https://www.nasa.gov/`, so wiring the panel now would give
+every shell the same dead link. Tony's stated preference 2026-09-02 is to
+see the info icon working BEFORE the phone and tablet passes, which makes
+L-265's curated links the thing standing between here and mobile.
+
 - **Origin: L-260's portrait defect, which turned out to be a design
   question rather than a layout fix.** The legend covers the picture
   in both orientations and badly in portrait. Moving it was the
@@ -5265,6 +5340,86 @@ trusting a handoff over the render, one layer up.
 **Gap:** patch not yet built. Wording above is proposed, not approved.
 **Ref:** PROJECT_INSTRUCTIONS.md Part 1 Mode 7;
 documentation/RELAY_RESPONSE_L191_survey_fable_20260821.md; L-191.
+
+#### [L-278] A relayout from inside a Plotly event handler re-enters the update machinery
+<!-- L:278 status:OPEN upd:2026-09-02 section:A flag: rice:3/3/90/1 -->
+- **The failure.** Clicking a cross marker in the Sun exhibit froze the
+  page: no rotation, no hover, the modebar reset dead, recoverable only
+  by reload. One error, `RangeError: Maximum call stack size exceeded`,
+  thrown from inside plotly-2.35.2.
+- **The code was correct. The CONTEXT was the bug.** The same
+  `Plotly.relayout` completed cleanly three separate ways -- called from
+  the console with a tooltip up, with the tooltip dismissed, and on a
+  five-second timer while the pointer rested on a marker. In every one
+  the axes took their new tick spacing and the page kept working. It was
+  fatal only when reached from inside `plotly_click`, because Plotly had
+  not finished dispatching the click when `layoutReplot` was sent back
+  into it.
+- **The tell was the stack DEPTH, and it was missed twice.** The recorded
+  stack is about twenty-five frames. A stack overflow on a SHALLOW stack
+  is not runaway recursion -- it is a large array applied as function
+  arguments, which is what a half-finished replot re-entering itself
+  produces. Two hypotheses were pursued and discarded before that was
+  read correctly.
+- **The fix is one tick.** `setTimeout(fn, 0)` around the focus call lets
+  the dispatch return first. Confirmed live from the console, by
+  replacing the handler in the running page, BEFORE any patch was
+  written.
+- **Scope: anything that mutates a plot from a Plotly event.**
+  `plotly_click`, `plotly_hover`, `plotly_selected`, `plotly_relayout`.
+  The gallery has one such handler today; the orrery's Plotly code and
+  any future exhibit can grow more.
+**Note:** two hypotheses died on the way and both are worth keeping.
+Hover hit-testing was blamed first, on the strength of a real 2026-08-30
+finding and the fact that its `Plotly.Fx.unhover` fix never travelled
+from the mockup to `interactive.html` -- but dismissing the tooltip was
+tested directly and changed nothing. Trace size was blamed second, on the
+65,000-argument limit -- but the largest trace in the scene is 4,332
+points and the one that hung is 400. Neither was a bad guess; both were
+testable, and testing is what killed them.
+- Tony-action (do): bump `gallery-pipeline` with this as a field note,
+  since it fires on exactly the code that would hit it again.
+**Gap:** skill patch not written. The finding lives only here and in
+`patch_L267_3`'s comment until it does.
+**Ref:** gallery `6fd6baaf` `interactive.html` the `plotly_click`
+handler; `patch_L267_3_defer_click_focus.py`;
+`TEST_PROTOCOL_sun_hang_20260902.md`; L-267; L-262.
+
+#### [L-279] A test protocol that leaves the CONDITIONS uncontrolled produces confident wrong readings
+<!-- L:279 status:OPEN upd:2026-09-02 section:A flag: rice:3/2/80/1 -->
+- **What happened.** The Sun hang protocol specified what to DO in each
+  trial and not what STATE to do it in. Three readings were wrong as a
+  result, each stated confidently to Tony before he corrected it.
+- **The three.** (1) Trials 1 and 2 were read as exonerating hover and
+  scene weight; both had been run on a light scene, one shell at a time,
+  and Trial 2 never tapped a marker at all -- it exercised the checkbox
+  path. (2) Trial R was then read as running with the full default set;
+  it used the same reduced set as Trial 1, so the drawn set was never the
+  variable. (3) Read 6 was reported by Tony as "both hang" and read that
+  way, when his own notes said the timed relayouts completed -- the
+  secondary ticks appeared -- and the hang came on a click both times.
+- **The pattern.** Each wrong reading came from inferring the test
+  conditions rather than recording them. The trials themselves were
+  sound; what was missing was a stated starting state and a stated
+  gesture.
+- **What would have prevented all three.** Every trial names the drawn
+  set, the gesture, and the pointer's location, and the report form asks
+  for those back rather than only for the outcome.
+**Note:** the deeper version is this project's own rule pointed at its
+own diagnostics. A trial that cannot fail is one thing; a trial that CAN
+fail but whose conditions are unrecorded is worse, because it produces a
+result that looks like evidence. Tony carried the correction three times
+in one session, which is exactly the load the protocol exists to spare
+him.
+- Tony-action (decide): where this lands. It is method, so
+  Method Belongs to the Skill points at a skill -- but no current skill
+  owns diagnostic protocols, and the two readers it protects are the same
+  two A Report Names Its Items was written for, which argues for the
+  resident protocol instead.
+**Gap:** decision, then a patch. Nothing is written anywhere yet.
+**Ref:** `TEST_PROTOCOL_sun_hang_20260902.md`, which carries all three
+corrections in view; L-278; PROJECT_INSTRUCTIONS.md Part 3 A Check That
+Cannot Fail Is Not Passing.
 
 #### [L-277] The L-192 site store anchors by line number, so any insertion breaks two checkers
 <!-- L:277 status:OPEN upd:2026-09-02 section:A flag: rice:3/3/90/2 -->
