@@ -1,12 +1,17 @@
 ---
 name: gallery-assembler
 description: Technical home for the interactive gallery's client-side rendering mechanism -- render_orbits.py (Kepler propagation, orbit-shape sweep), resolver.py (scene resolution, served_window gating), cache_reader.py (read-only served-cache access), the trust/served_window system (M2), and the golden-artifact build+Mode-5 acceptance process. Distinct from gallery-cache-builder (nightly data production) and gallery-pipeline (the older Studio/converter/static-viewer chain). Use for propagation math, resolver/cache_reader internals, golden artifact builds, or orrery-vs-assembler boundary questions. Do not use for projects other than Paloma's Orrery.
-fires_when: render_orbits.py, resolver.py, cache_reader.py, propagation math, golden artifact builds, Mode 5 acceptance, orrery/assembler boundary questions
+fires_when: render_orbits.py, resolver.py, cache_reader.py, propagation math, golden artifact builds, Mode 5 acceptance, orrery/assembler boundary questions, AND any time a served page misbehaves and the cause is unknown -- it hangs, it freezes, it is unresponsive, it worked yesterday, a console error appears, or Claude is about to hand Tony a test to run
 ---
 
 # Gallery Assembler
 
-Skill version: 1.1 | Cut from gallery @ f83a3abc72c5516e6dc2ad264be53ce95b68cf38 / orrery @ 3398970 | August 5, 2026
+Skill version: 1.2 | Cut from orrery @ 5b3fb6b4 (v1.2),
+earlier @ f83a3abc72c5516e6dc2ad264be53ce95b68cf38 (v1.1) | 2026-09-02
+v1.2 (L-279) adds Mode 5 as Measurement and the Plotly event-handler
+field note, both earned by the 2026-09-02 Sun exhibit hang: eight reads
+to attribute a two-line bug, and three wrong readings on the way, every
+one of them from inferring the test conditions instead of stating them.
 Sources: render_orbits.py, resolver.py, cache_reader.py (read live this
 session); master plan sec. 3; L-149/L-150/L-151.
 
@@ -117,3 +122,85 @@ artifact can only be attempted once its objects' served data passes that
 gate. Don't conflate "the cache is good" with "the render is right":
 Pluto/Charon and Moon/Io/Titan are both, as of July 20 2026, in the state of
 "data plumbing partially tested, render never attempted."
+
+## Mode 5 as MEASUREMENT, not just acceptance [QUALITY]
+
+The Mode 5 above is ACCEPTANCE: a finished render, does it look right.
+This section is the other job Tony's eyes do, and it is a different one.
+When a served page misbehaves and neither of us knows why, Tony is not
+the judge -- he is the only INSTRUMENT that can observe the failure at
+all. Claude cannot open the page, cannot hover it, cannot read its
+console. Every trial spends the one resource the project is shortest of,
+so a trial that cannot decide anything is worse than no trial.
+
+Seven rules. Each one is here because skipping it cost a round.
+
+**1. State the CONDITIONS, not just the actions.** Every trial names what
+is drawn, where the pointer rests, and the exact gesture. A trial that
+says only what to click leaves the starting state free, and Tony will
+reasonably pick a value that makes the task possible -- emptying the
+drawer so the cross markers are visible, for instance. Three readings
+were wrong on 2026-09-02 for exactly this, and each was stated
+confidently before Tony corrected it.
+
+**2. Start from the FAILING state and subtract.** Trials that start clean
+and add cannot separate causes that only appear in a loaded scene. The
+first four trials that day all began from a near-empty scene and none of
+them could have reproduced the bug.
+
+**3. A diagnostic must not be able to destroy the state it investigates.**
+`Plotly.relayout(gd, {hovermode:false})` threw inside Plotly, aborted
+partway, and took the scene's `viewInitial` with it -- so the reset
+button stopped working and everything after that failed for a reason
+that had nothing to do with the bug. Before issuing a console command,
+ask what happens if it throws halfway.
+
+**4. Read the reporter's NOTES, not their summary.** "Both hang" and "the
+secondary ticks appeared, rotation works, hovertext appears okay, upon
+clicking the scene hangs" were in the same message. Only one of them was
+the observation. Ticks appearing meant the relayout had COMPLETED, which
+reversed the conclusion entirely.
+
+**5. Read stack DEPTH, not only frame names.** `Maximum call stack size
+exceeded` on a stack about twenty-five frames deep is not runaway
+recursion -- it is a large array applied as function arguments. That tell
+was present in the first stack trace and missed twice, and two
+hypotheses were chased in the gap.
+
+**6. Confirm the fix LIVE before writing the patch.** A handler can be
+replaced from the console in the running page; a relayout can be fired on
+a timer. The 2026-09-02 fix was proven that way before a line was
+written, which turned a patch-and-see cycle into a patch that was already
+known to work.
+
+**7. Every trial names what its outcome RULES OUT.** A trial that only
+confirms "yes it still breaks" has bought nothing. If neither outcome
+eliminates a candidate, the trial does not go in the list.
+
+The report form asks for the conditions back, not just the verdict --
+otherwise rule 1 protects the writing and not the reading.
+
+## Field note: never mutate a plot from inside a Plotly event handler
+
+`Plotly.relayout` called synchronously from `plotly_click` re-enters
+Plotly's `layoutReplot` before the click dispatch has returned, and the
+page dies with `RangeError: Maximum call stack size exceeded` -- no
+rotation, no hover, modebar reset dead, reload the only recovery.
+
+The relayout itself is fine. On 2026-09-02 the identical call completed
+cleanly from the console with a tooltip up, with the tooltip dismissed,
+and on a timer while the pointer rested on a marker. Only the context
+was fatal.
+
+Fix: `setTimeout(fn, 0)` around the mutation, so the dispatch returns
+first. Applies to `plotly_click`, `plotly_hover`, `plotly_selected` and
+`plotly_relayout` alike.
+
+Two hypotheses died before this one was found, and both are worth
+keeping because neither was unreasonable. Hover hit-testing was blamed
+first -- `Plotly.Fx.unhover` was tested directly and changed nothing.
+Trace size was blamed second, on the ~65,000 argument limit -- the
+largest trace in that scene is 4,332 points and the one that hung is 400.
+
+Live example: gallery `6fd6baaf`, `interactive.html`, the `plotly_click`
+handler. L-267, L-278.

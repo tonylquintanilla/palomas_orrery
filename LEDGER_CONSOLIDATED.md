@@ -259,7 +259,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*169 live items; 155 need attention (`!`); 168 RICE-scored; 105 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*168 live items; 154 need attention (`!`); 167 RICE-scored; 106 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -289,7 +289,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-246 | S4714's semi-major axis was three values in three stores | OPEN | 5.1 | 2026-08-25 |
 | ! | L-193 | Qualified verdicts -- the token is not the whole answer | OPEN | 4.8 | 2026-08-15 |
 | ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
-| ! | L-279 | A test protocol that leaves the CONDITIONS uncontrolled produces confident wrong readings | OPEN | 4.8 | 2026-09-02 |
 | ! | L-268 | Sweep: features collapsed out of their own identity | OPEN | 4.5 | 2026-08-30 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-08-25 |
@@ -535,6 +534,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-200 | The `# Resolved:` leg -- record a verdict that landed | DONE | 5.1 | 2026-08-18 |
 |  | L-203 | The visibility convention -- give it a home in the skill | DONE | 5.1 | 2026-08-18 |
 |  | L-189 | Provenance scanner: run history and run-to-run delta | DONE | 4.8 | 2026-08-11 |
+|  | L-279 | A test protocol that leaves the CONDITIONS uncontrolled produces confident wrong readings | DONE | 4.8 | 2026-09-02 |
 |  | L-065 | European heat wave heat map (Earth System track) | DONE | 4.8 | 2026-06-25 |
 |  | L-064 | Provenance-scanner format sweep -- Earth System family | DONE | 4.5 | 2026-06-30 |
 |  | L-075 | KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine) | DONE | 4.3 | 2026-06-30 |
@@ -5377,49 +5377,14 @@ tested directly and changed nothing. Trace size was blamed second, on the
 65,000-argument limit -- but the largest trace in the scene is 4,332
 points and the one that hung is 400. Neither was a bad guess; both were
 testable, and testing is what killed them.
-- Tony-action (do): bump `gallery-pipeline` with this as a field note,
-  since it fires on exactly the code that would hit it again.
-**Gap:** skill patch not written. The finding lives only here and in
-`patch_L267_3`'s comment until it does.
+- Tony-action: DONE 2026-09-02. Written into `gallery-assembler` 1.2 as
+  a field note, not `gallery-pipeline` as first proposed -- L-279 put the
+  diagnostic discipline in the same skill, and splitting the technical
+  finding from the discipline that found it across two skills is the
+  parallel-pipeline anti-pattern in miniature.
 **Ref:** gallery `6fd6baaf` `interactive.html` the `plotly_click`
 handler; `patch_L267_3_defer_click_focus.py`;
 `TEST_PROTOCOL_sun_hang_20260902.md`; L-267; L-262.
-
-#### [L-279] A test protocol that leaves the CONDITIONS uncontrolled produces confident wrong readings
-<!-- L:279 status:OPEN upd:2026-09-02 section:A flag: rice:3/2/80/1 -->
-- **What happened.** The Sun hang protocol specified what to DO in each
-  trial and not what STATE to do it in. Three readings were wrong as a
-  result, each stated confidently to Tony before he corrected it.
-- **The three.** (1) Trials 1 and 2 were read as exonerating hover and
-  scene weight; both had been run on a light scene, one shell at a time,
-  and Trial 2 never tapped a marker at all -- it exercised the checkbox
-  path. (2) Trial R was then read as running with the full default set;
-  it used the same reduced set as Trial 1, so the drawn set was never the
-  variable. (3) Read 6 was reported by Tony as "both hang" and read that
-  way, when his own notes said the timed relayouts completed -- the
-  secondary ticks appeared -- and the hang came on a click both times.
-- **The pattern.** Each wrong reading came from inferring the test
-  conditions rather than recording them. The trials themselves were
-  sound; what was missing was a stated starting state and a stated
-  gesture.
-- **What would have prevented all three.** Every trial names the drawn
-  set, the gesture, and the pointer's location, and the report form asks
-  for those back rather than only for the outcome.
-**Note:** the deeper version is this project's own rule pointed at its
-own diagnostics. A trial that cannot fail is one thing; a trial that CAN
-fail but whose conditions are unrecorded is worse, because it produces a
-result that looks like evidence. Tony carried the correction three times
-in one session, which is exactly the load the protocol exists to spare
-him.
-- Tony-action (decide): where this lands. It is method, so
-  Method Belongs to the Skill points at a skill -- but no current skill
-  owns diagnostic protocols, and the two readers it protects are the same
-  two A Report Names Its Items was written for, which argues for the
-  resident protocol instead.
-**Gap:** decision, then a patch. Nothing is written anywhere yet.
-**Ref:** `TEST_PROTOCOL_sun_hang_20260902.md`, which carries all three
-corrections in view; L-278; PROJECT_INSTRUCTIONS.md Part 3 A Check That
-Cannot Fail Is Not Passing.
 
 #### [L-277] The L-192 site store anchors by line number, so any insertion breaks two checkers
 <!-- L:277 status:OPEN upd:2026-09-02 section:A flag: rice:3/3/90/2 -->
@@ -10010,6 +9975,51 @@ Section 5a.
   4, tree gone; a clean tree returns 0. Two of the checks Claude wrote
   this session failed first on Claude's own arithmetic and miscounting,
   which is the only evidence either of them could fail at all.
+
+#### [L-279] A test protocol that leaves the CONDITIONS uncontrolled produces confident wrong readings
+<!-- L:279 status:DONE upd:2026-09-02 section:C flag: rice:3/2/80/1 -->
+- **What happened.** The Sun hang protocol specified what to DO in each
+  trial and not what STATE to do it in. Three readings were wrong as a
+  result, each stated confidently to Tony before he corrected it.
+- **The three.** (1) Trials 1 and 2 were read as exonerating hover and
+  scene weight; both had been run on a light scene, one shell at a time,
+  and Trial 2 never tapped a marker at all -- it exercised the checkbox
+  path. (2) Trial R was then read as running with the full default set;
+  it used the same reduced set as Trial 1, so the drawn set was never the
+  variable. (3) Read 6 was reported by Tony as "both hang" and read that
+  way, when his own notes said the timed relayouts completed -- the
+  secondary ticks appeared -- and the hang came on a click both times.
+- **The pattern.** Each wrong reading came from inferring the test
+  conditions rather than recording them. The trials themselves were
+  sound; what was missing was a stated starting state and a stated
+  gesture.
+- **What would have prevented all three.** Every trial names the drawn
+  set, the gesture, and the pointer's location, and the report form asks
+  for those back rather than only for the outcome.
+**Note:** the deeper version is this project's own rule pointed at its
+own diagnostics. A trial that cannot fail is one thing; a trial that CAN
+fail but whose conditions are unrecorded is worse, because it produces a
+result that looks like evidence. Tony carried the correction three times
+in one session, which is exactly the load the protocol exists to spare
+him.
+- **DECIDED 2026-09-02, Tony's call: `gallery-assembler`.** Claude had
+  proposed an eleventh skill, then extending Mode 5 in the resident
+  protocol. Tony pointed at `gallery-assembler`, and its own `fires_when`
+  line already said "Mode 5 acceptance" -- the home existed and was not
+  used. Claude version-checked that skill on 2026-09-02 and never opened
+  it, including at the moment of handing over a patch whose own output
+  said "this one needs Mode 5".
+- **So the trigger was widened too.** "Mode 5 acceptance" reads as
+  accepting something FINISHED, which is why it did not fire while
+  chasing a hang. It now names the diagnostic case in the words Tony
+  would use: it hangs, it is unresponsive, it worked yesterday.
+- **Scope accepted, not solved.** `gallery-assembler` is gallery-side, so
+  an orrery-side hang will not reach this section. That is The Braid
+  working as intended -- bound it to the current artifact and handle the
+  orrery case when there is one.
+**Ref:** `TEST_PROTOCOL_sun_hang_20260902.md`, which carries all three
+corrections in view; L-278; PROJECT_INSTRUCTIONS.md Part 3 A Check That
+Cannot Fail Is Not Passing.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

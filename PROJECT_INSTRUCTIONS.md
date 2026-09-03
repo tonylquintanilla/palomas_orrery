@@ -457,10 +457,15 @@ gallery-pipeline             1.2  Gallery Studio, json_converter, index.html
                                   viewer, gallery cards
 ledger-and-session-records   1.9  Ledger edits, ledger_index.py, RICE,
                                   handoffs, manifests, atlas, dep_trace
-gallery-assembler            1.1  render_orbits.py, resolver.py,
+gallery-assembler            1.2  render_orbits.py, resolver.py,
                                   cache_reader.py, propagation math, golden
                                   artifact builds, Mode 5 acceptance,
-                                  orrery/assembler boundary questions
+                                  orrery/assembler boundary questions, AND any
+                                  time a served page misbehaves and the cause
+                                  is unknown -- it hangs, it freezes, it is
+                                  unresponsive, it worked yesterday, a console
+                                  error appears, or Claude is about to hand
+                                  Tony a test to run
 gallery-cache-builder        1.4  Nightly builder, atomic swap, coverage_index,
                                   serving cache, objects_config,
                                   dry-run/first-build/nightly, builder testing

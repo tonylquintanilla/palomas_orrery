@@ -10,22 +10,24 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 130  
-**Total Lines of Code (non-blank):** 104,633  
-**Total Public Functions/Classes:** 1,176
+**Total Python Files:** 131  
+**Total Lines of Code (non-blank):** 104,907  
+**Total Public Functions/Classes:** 1,179
 
 ## Classification Coverage
 
-**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `patch_L278_session_ledger_20260902.py`
+- `patch_L279_gallery_assembler_diagnostics.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (1).** No valid `Domain:` tag.
+**Undetermined domain (2).** No valid `Domain:` tag.
 
 - `patch_L278_session_ledger_20260902.py`
+- `patch_L279_gallery_assembler_diagnostics.py`
 
 
 ---
@@ -231,6 +233,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `patch_L278_session_ledger_20260902.py` | - the 2026-09-02 session record. (283 lines) |
+| `patch_L279_gallery_assembler_diagnostics.py` | - gallery-assembler 1.1 -> 1.2. (274 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |
