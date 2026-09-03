@@ -102,6 +102,7 @@ supplied value the code then took stops reporting as DRIFTED)
 Module created: August 2026 with Anthropic's Claude Opus 5.
 Module updated: August 18, 2026 with Anthropic's Claude Opus 5 (L-207).
 Module updated: August 21, 2026 with Anthropic's Claude Opus 5 (L-214).
+Module updated: September 3, 2026 with Anthropic's Claude Fable 5.1 (L-277: label regexes now come from worksheet_keys).
 """
 
 import hashlib
@@ -962,8 +963,11 @@ def read_verdict(table, cells):
 # THE UNITS AND THEIR ANNOTATIONS
 # ============================================================
 
-ASSIGN_NAME_RE = re.compile(r"^\s*([A-Za-z_][A-Za-z_0-9]*)\s*[:=]")
-DICT_KEY_RE = re.compile(r"^\s*['\"]([^'\"]+)['\"]\s*:")
+# One home (L-277): the same two patterns locate a site by name in
+# worksheet_keys.locate_site, so a site the store names is the site
+# anchor_label below would label. Do not redefine them here.
+ASSIGN_NAME_RE = wk.ASSIGN_NAME_RE
+DICT_KEY_RE = wk.DICT_KEY_RE
 
 
 def anchor_label(lines, anchors, line_start):
@@ -998,7 +1002,7 @@ DISPLAY_INSTRUCTION_RE = re.compile(
 # issued key counts claims AFTER this filter runs -- so retuning
 # either one re-points ordinals corpus-wide with no prose edit at
 # all. test_extractor_pins.py asserts them against
-# documentation/worksheets/L192_extractor_pins.txt on every run.
+# L192_extractor_pins.txt (repo root since L-277) on every run.
 #
 # Tight and directional on purpose. The instruction phrase sits right
 # against its own number -- "MANUAL SCALE OF 0.005 AU", "4.6 MB PER

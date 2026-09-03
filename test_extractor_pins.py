@@ -2,6 +2,11 @@
 
 Domain: dev_tools
 
+Module updated: September 3, 2026 with Anthropic's Claude Fable 5.1
+(L-277: the site store anchors by enclosing name and lives at the repo
+root; measure() finds each string site by name through the checker's
+own anchor map, and a site it cannot find fails the run).
+
 Tony froze INSTRUCTION_LOOKBACK at 30 and INSTRUCTION_LOOKAHEAD at 25
 on 2026-08-14, after a grid measurement showed the drop set unchanged
 across lookback 25 through 60 at every lookahead tested. Current sits
@@ -36,14 +41,13 @@ import provenance_scanner as ps
 import worksheet_checker as wc
 import worksheet_keys as wk
 
-# ACTIVE data, read on every run, so it sits with the worksheets rather
-# than among the session records in documentation/. The checker's
-# loader takes only .md from that directory, so a .txt here raises no
-# phantom uncited worksheet -- the same reason the key pins live there.
-SITES_DOC = os.path.join('documentation', 'worksheets',
-                         'L192_annotated_sites.txt')
-PINS_DOC = os.path.join('documentation', 'worksheets',
-                        'L192_extractor_pins.txt')
+# ACTIVE data, read on every run, and it lives at the repo ROOT
+# (L-277, Tony's ruling 2026-09-03): a live store under documentation/
+# was lost among hundreds of archived files and invisible to
+# doc_index.py, which scans only the root. Each carries a Doc-Kind tag
+# so README.md's key-documents table lists it.
+SITES_DOC = 'L192_annotated_sites.txt'
+PINS_DOC = 'L192_extractor_pins.txt'
 
 SEP = '|'
 
@@ -105,15 +109,23 @@ def dealias(key, aliases, seen=None):
 
 
 def measure(sites):
-    """({key: (kept_raws, dropped)}, unreadable_modules).
+    """({key: (kept_raws, dropped)}, unreadable_modules, lost_sites).
 
     Claim membership is computed by worksheet_checker.physical_claims,
     never re-implemented here. A second implementation would agree with
     itself and prove nothing.
+
+    Since L-277 a site is found by NAME: locate_site turns the row's
+    enclosing and label into the line that introduces the label, and
+    the unit is the one the checker's own anchor map ties to that line.
+    A site that cannot be found, or that matches more than one string
+    unit, is returned in `lost_sites` and fails the run -- never
+    skipped, because a skipped site looks exactly like a constant.
     """
-    modules = sorted({module for module, _line, _label in sites})
+    modules = sorted({module for module, _enclosing, _label in sites})
     sources = {}
     units = {}
+    anchors = {}
     unreadable = []
     for name in modules:
         if not os.path.exists(name):
@@ -122,25 +134,52 @@ def measure(sites):
         try:
             with open(name, encoding='utf-8') as handle:
                 sources[name] = handle.read()
-            for unit in ps.extract_units_from_file(name, name[:-3], 'orrery'):
-                units[(name, unit.line_start)] = unit
+            units[name] = list(ps.extract_units_from_file(name, name[:-3], 'orrery'))
+            anchors[name] = ps.entry_anchor_map(ps.ast.parse(sources[name]))
         except (IOError, OSError, SyntaxError, ValueError) as exc:
             unreadable.append('%s (%s)' % (name, exc))
 
     measured = {}
-    for module, line, label in sites:
-        unit = units.get((module, line))
-        if unit is None or not getattr(unit, 'raw_value', None):
+    lost = []
+    aliases = wk.INSTALLED_ALIASES
+    for module, enclosing, label in sites:
+        if module not in sources:
+            continue                   # already reported as unreadable
+        stored = wk.compose(module, enclosing, label)
+        live = wk.parse(dealias(stored, aliases))
+        if live.module not in sources:
+            lost.append('%s -- alias points at unread module %s'
+                        % (stored, live.module))
+            continue
+        line, reason = wk.locate_site(sources[live.module], live.enclosing,
+                                      live.label)
+        if line is None:
+            lost.append('%s -- %s' % (stored, reason))
+            continue
+        amap = anchors[live.module]
+        hits = [u for u in units[live.module]
+                if getattr(u, 'raw_value', None)
+                and (u.line_start == line
+                     or amap.get(u.line_start, u.line_start) == line)]
+        if not hits:
             continue                   # a constant, not a display string
-        kept, dropped = wc.physical_claims(unit)
-        key = wk.key_for_site(module, sources[module], line, label=label)
+        if len(hits) > 1:
+            lost.append('%s -- %d string units share line %d'
+                        % (stored, len(hits), line))
+            continue
+        kept, dropped = wc.physical_claims(hits[0])
+        key = wk.compose(live.module, live.enclosing, live.label)
         measured[key] = ([raw for _value, raw in kept], dropped)
-    return measured, unreadable
+    return measured, unreadable, lost
 
 
 def repin_text(header, measured):
     """The pin file as it would be written now -- paste, do not retype."""
     lines = [
+        '# Doc-Kind: hand | Extractor pins for the L-192 corpus: what the '
+        'instruction filter keeps and drops at each display-string site, '
+        'frozen by Tony 2026-08-14. Read by test_extractor_pins.py on every '
+        'maintenance run; regenerate only from that test\'s REPIN output.',
         '# Extractor pins -- what the instruction filter keeps and drops.',
         '#',
         '# Frozen by Tony 2026-08-14. The claim ordinals in every issued',
@@ -202,10 +241,13 @@ def main():
                 % (field, pinned_header[field], header[field]))
 
     # 2. What each site currently carries.
-    measured, unreadable = measure(sites)
+    measured, unreadable, lost = measure(sites)
     for name in unreadable:
         failures.append('UNREADABLE %s -- counted as a failure, not skipped'
                         % name)
+    for text in lost:
+        failures.append('SITE NOT FOUND %s -- counted as a failure, not '
+                        'skipped' % text)
 
     aliases = wk.INSTALLED_ALIASES
     resolved_pins = {}

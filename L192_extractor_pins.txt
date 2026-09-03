@@ -1,3 +1,4 @@
+# Doc-Kind: hand | Extractor pins for the L-192 corpus: what the instruction filter keeps and drops at each display-string site, frozen by Tony 2026-08-14. Read by test_extractor_pins.py on every maintenance run; regenerate only from that test's REPIN output.
 # Extractor pins -- what the instruction filter keeps and drops.
 #
 # Frozen by Tony 2026-08-14. The claim ordinals in every issued

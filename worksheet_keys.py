@@ -112,6 +112,7 @@ goes red rather than quietly giving two answers to one question.
 Module created: August 2026 with Anthropic's Claude Opus 5 (L-192).
 Module updated: August 18, 2026 with Anthropic's Claude Opus 5 (L-207).
 Module updated: August 21, 2026 with Anthropic's Claude Opus 5 (L-214).
+Module updated: September 3, 2026 with Anthropic's Claude Fable 5.1 (L-277: the site store anchors by enclosing name; parse_sites_doc refuses the line format; locate_site added; the two label regexes move here from worksheet_checker).
 """
 
 import ast
@@ -140,6 +141,13 @@ ORDINAL_PREFIX = 'c'
 EXTRACTOR_VERSION = 2
 
 Key = namedtuple('Key', 'module enclosing label ordinal')
+
+# The line that INTRODUCES a unit: a dict key or an assignment name.
+# One home since L-277: worksheet_checker.anchor_label labels a unit
+# with these, and locate_site below finds a site by the same two, so
+# a site found by name is the site the checker would label.
+ASSIGN_NAME_RE = re.compile(r"^\s*([A-Za-z_][A-Za-z_0-9]*)\s*[:=]")
+DICT_KEY_RE = re.compile(r"^\s*['\"]([^'\"]+)['\"]\s*:")
 
 # What a shift check can say. NONE is the only one that permits a
 # value comparison downstream.
@@ -370,7 +378,7 @@ def legs_of(attached_text):
 
 
 def parse_sites_doc(path):
-    """[(module, line, label)] from documentation/worksheets/L192_annotated_sites.txt.
+    """[(module, enclosing, label)] from L192_annotated_sites.txt at the repo root.
 
     One parser, because the format has more than one consumer. Both
     test_worksheet_keys.py and test_extractor_pins.py read this file,
@@ -380,6 +388,16 @@ def parse_sites_doc(path):
     Fixing the consumer that broke would have left the same landmine
     for the third consumer. (2026-08-16)
 
+    THE STORE ANCHORS BY NAME, NOT LINE (L-277, 2026-09-03). The
+    second column is the enclosing function or module-level constant,
+    the third the label -- the same two parts the key is made of. A
+    line number went stale on every comment inserted above a site, and
+    for constants it had ALREADY gone stale without the round trip
+    noticing, because a stale line falls back to the label and the
+    label is the key. A second column that is all digits is that old
+    format, and it is refused rather than read: the caller must not
+    be handed rows that look right and mean something else.
+
     A RETIRED row records why a site left the corpus and is skipped
     here. The inverted assertion that gives it teeth lives with the
     pins, in test_worksheet_keys.py -- this loader only has to not
@@ -387,15 +405,21 @@ def parse_sites_doc(path):
     """
     sites = []
     with open(path, encoding='utf-8') as handle:
-        for raw in handle:
+        for number, raw in enumerate(handle, 1):
             raw = raw.rstrip('\n')
             if not raw.strip() or raw.startswith('#'):
                 continue
             if raw.startswith(RETIRED_TAG + '\t'):
                 continue
             parts = raw.split('\t')
-            if len(parts) >= 3:
-                sites.append((parts[0], int(parts[1]), parts[2]))
+            if len(parts) < 3:
+                continue
+            if parts[1].isdigit():
+                raise KeyError_(
+                    '%s line %d anchors by line number (%r); since L-277 the '
+                    'store anchors by enclosing name -- rewrite the row, do '
+                    'not patch the number' % (path, number, raw))
+            sites.append((parts[0], parts[1], parts[2]))
     return sites
 
 
@@ -478,6 +502,62 @@ def enclosing_name(source, line):
                 if isinstance(target, ast.Name):
                     return target.id
     return ''
+
+
+def locate_site(source, enclosing, label):
+    """(line, reason): the line that introduces `label` inside `enclosing`.
+
+    The inverse of key_for_site, and what lets the site store carry a
+    name instead of a line (L-277). Returns the 1-based line of the
+    dict key or assignment that introduces the label -- the same line
+    worksheet_checker.anchor_label reads -- or (None, reason), where
+    the reason names which of three things failed:
+
+      SITE_UNREADABLE  the module does not parse
+      SITE_LOST        no such enclosing, or no such label inside it
+      SITE_AMBIGUOUS   the label is introduced more than once inside it
+
+    A label equal to its enclosing is a module-level assignment (a
+    constant or a module-level string) and resolves to that statement.
+    None of the three is silent, on purpose: a site that cannot be
+    found and reports nothing is the failure this module exists to
+    make impossible.
+    """
+    try:
+        tree = ast.parse(source)
+    except SyntaxError as exc:
+        return None, 'SITE_UNREADABLE: source does not parse (%s)' % exc
+    lines = source.splitlines()
+
+    if label == enclosing:
+        for node in tree.body:
+            if isinstance(node, ast.Assign):
+                for target in node.targets:
+                    if isinstance(target, ast.Name) and target.id == enclosing:
+                        return node.lineno, ''
+
+    span = None
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) \
+                and node.name == enclosing:
+            span = (node.lineno, node.end_lineno)
+            break
+    if span is None:
+        return None, 'SITE_LOST: no %s' % enclosing
+
+    hits = []
+    for number in range(span[0], span[1] + 1):
+        text = lines[number - 1]
+        match = DICT_KEY_RE.match(text) or ASSIGN_NAME_RE.match(text)
+        if match and match.group(1) == label:
+            hits.append(number)
+    if len(hits) == 1:
+        return hits[0], ''
+    if not hits:
+        return None, 'SITE_LOST: no %r inside %s' % (label, enclosing)
+    return None, ('SITE_AMBIGUOUS: %r introduced %d times inside %s (lines %s)'
+                  % (label, len(hits), enclosing,
+                     ', '.join(str(h) for h in hits)))
 
 
 def key_for_site(module_path, source, line, label='', ordinal=None):

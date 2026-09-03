@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
-Generated: September 02, 2026
-Files scanned: 129
-Total findings: 1031
-Constants: 110 | Dicts: 41 | Display strings: 880
+Generated: September 03, 2026
+Files scanned: 132
+Total findings: 1032
+Constants: 110 | Dicts: 42 | Display strings: 880
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -19,16 +19,20 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260903T170222Z | `faac433` | 132 | 1032 | 293 | 621 | 116 | 2 |
 | 20260903T020154Z | `e71f38a` | 129 | 1031 | 292 | 621 | 116 | 2 |
 | 20260903T014550Z | `5b3fb6b` | 131 | 1031 | 292 | 621 | 116 | 2 |
 | 20260903T012354Z | `91735ac` | 130 | 1031 | 292 | 621 | 116 | 2 |
 | 20260902T130030Z | `5639a95` | 129 | 1031 | 292 | 621 | 116 | 2 |
 | 20260902T124439Z | `df80c35` | 131 | 1033 | 294 | 621 | 116 | 2 |
-| 20260901T234519Z | `8459df6` | 130 | 1031 | 292 | 621 | 116 | 2 |
 
-Change since the previous run: total +0, Tier-1 +0.
+Change since the previous run: total +1, Tier-1 +1.
 
-No file's Tier-1 count rose.
+Tier-1 rose in these files:
+
+| File | Before | After |
+|------|-------:|------:|
+| patch_L277_reanchor_site_stores.py | 0 | 1 |
 
 ---
 
@@ -59,7 +63,7 @@ No file's Tier-1 count rose.
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 292 |
+| 1 | 16-20 | FIX NOW | 293 |
 | 2 | 10-15 | REVIEW | 621 |
 | 3 | 5-9 | LOW PRIORITY | 116 |
 | 4 | 1-4 | LOWEST PRIORITY | 2 |
@@ -142,6 +146,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `worksheet_request_builder.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `orbital_elements.py` | orrery | 1 | 0 | 0 | 0 | 1 |
+| `patch_L277_reanchor_site_stores.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `data_acquisition.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `exoplanet_orbits.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `fetch_paleoclimate_data.py` | earth_science | 1 | 0 | 0 | 0 | 1 |
@@ -166,7 +171,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 44 | 128 | 502 | 69 | 2 | 701 |
+| Orrery (solar system + orbital mechanics) | 45 | 129 | 502 | 69 | 2 | 702 |
 | Earth System | 13 | 150 | 77 | 2 | 0 | 229 |
 | Stars (stellar neighborhood) | 11 | 12 | 42 | 6 | 0 | 60 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 39 | 0 | 39 |
@@ -177,6 +182,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 - `doc_index.py`
 - `orrery_maintenance_run.py`
+- `patch_L277_reanchor_site_stores.py`
 - `worksheet_checker.py`
 - `worksheet_key_aliases.py`
 - `worksheet_keys.py`
@@ -605,6 +611,12 @@ is planned for a future session.
 | 2174 | string | display string @ line 2174 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2197 | string | display string @ line 2197 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2332 | string | display string @ line 2332 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+
+### patch_L277_reanchor_site_stores.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 88 | dict | FINGERPRINTS[...] | (5 entries) | 4 | 5 | **20** | No source citation; date-sensitive (recalled) | UNDETERMINED -- could not be classified |
 
 ### planet_visualization_utilities.py
 
@@ -1893,11 +1905,11 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 425 | constant | HASH_CHARS | 8 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 657 | constant | MIN_PROSE_FRAGMENT | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 848 | constant | QUOTE_LIMIT | 160 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 1007 | constant | INSTRUCTION_LOOKBACK | 30 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 1008 | constant | INSTRUCTION_LOOKAHEAD | 25 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 426 | constant | HASH_CHARS | 8 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 658 | constant | MIN_PROSE_FRAGMENT | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 849 | constant | QUOTE_LIMIT | 160 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 1011 | constant | INSTRUCTION_LOOKBACK | 30 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 1012 | constant | INSTRUCTION_LOOKAHEAD | 25 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### worksheet_key_aliases.py
 
@@ -1909,7 +1921,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 140 | constant | EXTRACTOR_VERSION | 2 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 141 | constant | EXTRACTOR_VERSION | 2 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### worksheet_request_builder.py
 

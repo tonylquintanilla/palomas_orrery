@@ -1,6 +1,6 @@
 # Paloma's Orrery - Module Index
 
-**Generated:** September 02, 2026 by `module_atlas.py`  
+**Generated:** September 03, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -11,25 +11,25 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 132  
-**Total Lines of Code (non-blank):** 105,153  
-**Total Public Functions/Classes:** 1,183
+**Total Lines of Code (non-blank):** 105,878  
+**Total Public Functions/Classes:** 1,185
 
 ## Classification Coverage
 
 **Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L278_session_ledger_20260902.py`
-- `patch_L279_gallery_assembler_diagnostics.py`
-- `patch_v352_protocol_version.py`
+- `patch_L276_mode7_repo_access.py`
+- `patch_L277_reanchor_site_stores.py`
+- `patch_L280_284_interactive_wing_capture.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
 **Undetermined domain (3).** No valid `Domain:` tag.
 
-- `patch_L278_session_ledger_20260902.py`
-- `patch_L279_gallery_assembler_diagnostics.py`
-- `patch_v352_protocol_version.py`
+- `patch_L276_mode7_repo_access.py`
+- `patch_L277_reanchor_site_stores.py`
+- `patch_L280_284_interactive_wing_capture.py`
 
 
 ---
@@ -224,8 +224,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_worksheet_checker.py` | - L-192. Can each layer actually fail? (995 lines) |
 | `test_worksheet_request_builder.py` | - L-195 / L-192. Does the marker join actually join, and can it fail? (439 lines) |
 | `verify_orbit_cache.py` | Safely verify and repair orbit_paths.json (172 lines) |
-| `worksheet_checker.py` | - L-192. Does the worksheet say what the annotation claims it says? (2,142 lines) |
-| `worksheet_keys.py` | Worksheet row keys -- one owner for the syntax and the resolution. (481 lines) |
+| `worksheet_checker.py` | - L-192. Does the worksheet say what the annotation claims it says? (2,146 lines) |
+| `worksheet_keys.py` | Worksheet row keys -- one owner for the syntax and the resolution. (551 lines) |
 | `worksheet_request_builder.py` | Worksheet request builder -- ask the question the checker can read. (652 lines) |
 
 ---
@@ -234,11 +234,11 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L278_session_ledger_20260902.py` | - the 2026-09-02 session record. (283 lines) |
-| `patch_L279_gallery_assembler_diagnostics.py` | - gallery-assembler 1.1 -> 1.2. (274 lines) |
-| `patch_v352_protocol_version.py` | - PROJECT_INSTRUCTIONS.md to v3.52. (246 lines) |
-| `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (238 lines) |
-| `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (255 lines) |
+| `patch_L276_mode7_repo_access.py` | Ledger handle L-276. PROJECT_INSTRUCTIONS.md to v3.53. (262 lines) |
+| `patch_L277_reanchor_site_stores.py` | Ledger handle L-277. Three things in one transaction: (784 lines) |
+| `patch_L280_284_interactive_wing_capture.py` | Captures the 2026-09-03 design conversation as FIVE new ledger items. Nothing is built by this patch; it records decisions so they do not float. Capture on first mention. (322 lines) |
+| `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
+| `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |
 
 ---

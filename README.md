@@ -180,6 +180,9 @@ further down this file for the rest.
 | [PROJECT_INSTRUCTIONS.md](PROJECT_INSTRUCTIONS.md) | hand + generated zone | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. |
 | [README.md](README.md) | hand + generated zone | The front door: what the project is, where its pieces are, and how the work is kept correct. |
 | [ADDING_OBJECTS_GUIDE.md](ADDING_OBJECTS_GUIDE.md) | hand-written | Step by step for adding a new celestial object. |
+| [L192_annotated_sites.txt](L192_annotated_sites.txt) | hand-written | The L-192 site store: every annotated provenance site the worksheet checker tracks, anchored by module, enclosing function or constant, and label. Read by test_worksheet_keys.py and test_extractor_pins.py on every maintenance run; edit a row when a site is added, renamed or retired. |
+| [L192_extractor_pins.txt](L192_extractor_pins.txt) | hand-written | Extractor pins for the L-192 corpus: what the instruction filter keeps and drops at each display-string site, frozen by Tony 2026-08-14. Read by test_extractor_pins.py on every maintenance run; regenerate only from that test's REPIN output. |
+| [L192_key_pins.txt](L192_key_pins.txt) | hand-written | Key pins for the L-192 corpus: every worksheet key minted at 305b269, asserted to still resolve by test_worksheet_keys.py on every maintenance run. A rename breaks this loudly; record the alias in worksheet_key_aliases.py, never regenerate to make it quiet. |
 | [LICENSE.md](LICENSE.md) | hand-written | MIT license. |
 | [PROJECT_ORIGIN.md](PROJECT_ORIGIN.md) | hand-written | How the project started, in Tony's own words. |
 | [requirements.txt](requirements.txt) | hand-written | Annotated dependency spec, including the kaleido 0.2.1 pin and the Plotly 5.x constraint. |

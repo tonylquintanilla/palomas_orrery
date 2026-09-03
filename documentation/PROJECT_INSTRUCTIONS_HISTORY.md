@@ -645,6 +645,48 @@ resident.
 (Moved down from the resident protocol on 2026-09-02 when v3.52
 made a fourth entry.)
 
+v3.50 (August 31, 2026): No rule changed in this document. One skill
+bump, and a correction finally travelling.
+
+orrery-coding-conventions 1.6 -> 1.7 (L-269), plus the same correction
+in documentation/CLAUDE.md and README.md. v3.49 fixed Check All
+Parallel Pipelines HERE and left three live stores carrying the old
+merged sentence -- a cross-file count of five wearing a single-file
+scope. One of the three is a skill that loads on every orrery session,
+so the wrong instruction was being handed to whoever read it, including
+Claude.
+
+That is The Correction Does Not Travel in the shape the rule predicts:
+the fix went into the document being edited and stopped there. It was
+found by asking, on the day the rule landed, which OTHER stores carry
+the sentence -- 46 documents, 43 of them archives and session records
+correctly left alone.
+
+All three now name the five consumers with their files and repos, and
+say plainly that two of the five are in the GALLERY repository. That
+last part is the load-bearing half: a reader following the old
+instruction as written would grep one repo and find three of five.
+
+The fetcher list is recorded beside the consumer list in
+orrery-coding-conventions, labelled as the answer to a different
+question, because the two are on different axes and neither is a subset
+of the other.
+
+One obligation this bump cannot discharge from inside the session that
+made it. A skill lives in three stores, and the account install is the
+copy Claude actually loads; a reinstall is invisible to the running
+conversation. So: orrery-coding-conventions went to 1.7 at
+`04bba3ca`, the session that bumped it had loaded 1.6, and the next
+session confirms its loaded copy reads 1.7 before doing orrery visual
+work.
+
+Version history: v3.47 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-09-03 when v3.53
+made a fourth entry.)
+
 
 
 

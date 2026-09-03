@@ -1,0 +1,67 @@
+# Doc-Kind: hand | The L-192 site store: every annotated provenance site the worksheet checker tracks, anchored by module, enclosing function or constant, and label. Read by test_worksheet_keys.py and test_extractor_pins.py on every maintenance run; edit a row when a site is added, renamed or retired.
+# module<TAB>enclosing<TAB>label -- every annotated site the L-192 report names.
+#
+# Generated from WORKSHEET_CHECK.md at 305b269 as module/line/label.
+# Reanchored to ENCLOSING NAMES 2026-09-03 (L-277): a comment or
+# docstring inserted above a site cannot move it any more, and the key
+# a row mints is the row itself -- module::enclosing::label, with the
+# label dropped when it repeats the enclosing (a module-level constant
+# or string is its own enclosing). A row whose second column is a
+# number is the retired format and parse_sites_doc refuses it.
+#
+# RETIRED rows record why a site left the corpus and are skipped here;
+# the pin that gives a retirement teeth lives in L192_key_pins.txt.
+#   RETIRED<TAB>date<TAB>handle<TAB>module<TAB>enclosing<TAB>label
+RETIRED	2026-08-16	L-196	constants_new.py	CHROMOSPHERE_RADII	CHROMOSPHERE_RADII
+constants_new.py	KM_PER_AU	KM_PER_AU
+constants_new.py	SUN_RADIUS_KM	SUN_RADIUS_KM
+constants_new.py	EARTH_EQUATORIAL_RADIUS_KM	EARTH_EQUATORIAL_RADIUS_KM
+constants_new.py	EARTH_POLAR_RADIUS_KM	EARTH_POLAR_RADIUS_KM
+constants_new.py	JUPITER_EQUATORIAL_RADIUS_KM	JUPITER_EQUATORIAL_RADIUS_KM
+constants_new.py	JUPITER_POLAR_RADIUS_KM	JUPITER_POLAR_RADIUS_KM
+constants_new.py	SPEED_OF_LIGHT_KM_S	SPEED_OF_LIGHT_KM_S
+constants_new.py	CHROMOSPHERE_PHYSICAL_KM	CHROMOSPHERE_PHYSICAL_KM
+constants_new.py	INNER_CORONA_RADII	INNER_CORONA_RADII
+constants_new.py	STREAMER_BELT_RADII	STREAMER_BELT_RADII
+constants_new.py	ROCHE_LIMIT_RADII	ROCHE_LIMIT_RADII
+constants_new.py	ALFVEN_SURFACE_RADII	ALFVEN_SURFACE_RADII
+constants_new.py	TERMINATION_SHOCK_AU	TERMINATION_SHOCK_AU
+constants_new.py	HELIOPAUSE_RADII	HELIOPAUSE_RADII
+constants_new.py	PARKER_CLOSEST_RADII	PARKER_CLOSEST_RADII
+constants_new.py	MOON_RADIUS_KM	MOON_RADIUS_KM
+constants_new.py	MARS_RADIUS_KM	MARS_RADIUS_KM
+constants_new.py	SATURN_RADIUS_KM	SATURN_RADIUS_KM
+constants_new.py	URANUS_RADIUS_KM	URANUS_RADIUS_KM
+constants_new.py	NEPTUNE_RADIUS_KM	NEPTUNE_RADIUS_KM
+constants_new.py	BENNU_RADIUS_KM	BENNU_RADIUS_KM
+constants_new.py	HAUMEA_RADIUS_KM	HAUMEA_RADIUS_KM
+constants_new.py	ARROKOTH_RADIUS_KM	ARROKOTH_RADIUS_KM
+eris_visualization_shells.py	eris_crust_info	eris_crust_info
+eris_visualization_shells.py	eris_hill_sphere_info	eris_hill_sphere_info
+mars_visualization_shells.py	mars_upper_atmosphere_info	mars_upper_atmosphere_info
+mars_visualization_shells.py	mars_magnetosphere_info	mars_magnetosphere_info
+mars_visualization_shells.py	create_mars_magnetosphere_shell	bow_shock_text
+mars_visualization_shells.py	mars_hill_sphere_info	mars_hill_sphere_info
+mercury_visualization_shells.py	mercury_outer_core_info	mercury_outer_core_info
+mercury_visualization_shells.py	mercury_crust_info	mercury_crust_info
+mercury_visualization_shells.py	mercury_sodium_tail_info	mercury_sodium_tail_info
+mercury_visualization_shells.py	mercury_magnetosphere_info	mercury_magnetosphere_info
+mercury_visualization_shells.py	mercury_hill_sphere_info	mercury_hill_sphere_info
+moon_visualization_shells.py	moon_mantle_info	moon_mantle_info
+moon_visualization_shells.py	moon_hill_sphere_info	moon_hill_sphere_info
+pluto_visualization_shells.py	pluto_core_info	pluto_core_info
+pluto_visualization_shells.py	create_pluto_core_shell	description
+pluto_visualization_shells.py	pluto_mantle_info	pluto_mantle_info
+pluto_visualization_shells.py	create_pluto_mantle_shell	description
+pluto_visualization_shells.py	pluto_crust_info	pluto_crust_info
+pluto_visualization_shells.py	pluto_haze_layer_info	pluto_haze_layer_info
+pluto_visualization_shells.py	create_pluto_haze_layer_shell	description
+pluto_visualization_shells.py	create_pluto_atmosphere_shell	description
+pluto_visualization_shells.py	pluto_hill_sphere_info	pluto_hill_sphere_info
+pluto_visualization_shells.py	create_pluto_hill_sphere_shell	description
+venus_visualization_shells.py	venus_core_info	venus_core_info
+venus_visualization_shells.py	create_venus_core_shell	description
+venus_visualization_shells.py	venus_atmosphere_info	venus_atmosphere_info
+venus_visualization_shells.py	create_venus_upper_atmosphere_shell	description
+venus_visualization_shells.py	venus_magnetosphere_info	venus_magnetosphere_info
+venus_visualization_shells.py	venus_hill_sphere_info	venus_hill_sphere_info

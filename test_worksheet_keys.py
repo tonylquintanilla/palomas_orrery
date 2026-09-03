@@ -2,6 +2,11 @@
 
 Domain: dev_tools
 
+Module updated: September 3, 2026 with Anthropic's Claude Fable 5.1
+(L-277: the site store anchors by enclosing name and lives at the repo
+root; the round trip re-mints from the located line and compares the
+minted set to the pins by name).
+
 The one-time measurement -- 53 distinct annotated sites, 53 distinct
 keys, zero collisions -- was run twice by hand, once with a regex and
 once with an AST, by two models. That is a fact about one afternoon.
@@ -21,16 +26,13 @@ import sys
 
 import worksheet_keys as wk
 
-# These are ACTIVE data, not archive. documentation/ holds session
-# records that are finished when they are written; these two are read
-# on every run and edited when the corpus changes, so they sit with
-# the worksheets they describe. The checker's loader takes only .md
-# from that directory, so a .txt here is invisible to it -- no phantom
-# uncited worksheet, no unreadable-worksheet finding.
-SITES_DOC = os.path.join('documentation', 'worksheets',
-                         'L192_annotated_sites.txt')
-PINS_DOC = os.path.join('documentation', 'worksheets',
-                        'L192_key_pins.txt')
+# These are ACTIVE data, not archive, and they live at the repo ROOT
+# (L-277, Tony's ruling 2026-09-03): a live store under documentation/
+# was lost among hundreds of archived files and invisible to
+# doc_index.py, which scans only the root. Each carries a Doc-Kind tag
+# so README.md's key-documents table lists it.
+SITES_DOC = 'L192_annotated_sites.txt'
+PINS_DOC = 'L192_key_pins.txt'
 
 
 def load_sources(project_dir, modules):
@@ -43,23 +45,62 @@ def load_sources(project_dir, modules):
     return sources
 
 
+def dealias(key, aliases):
+    """The key in force today for a stored key; cycles return the key."""
+    seen = []
+    while key in aliases:
+        if key in seen:
+            return key
+        seen.append(key)
+        key = aliases[key]
+    return key
+
+
 def check_round_trip(sites, sources):
-    """(minted, failures, collisions) for a list of (module, line, label)."""
+    """(minted, failures, collisions) for a list of (module, enclosing, label).
+
+    Four things per row, each of which can fail on its own (L-277):
+      1. the row composes to a key and that key RESOLVES;
+      2. the site is still FINDABLE by name -- locate_site turns the
+         enclosing and label back into a line, through any alias;
+      3. re-minting from that line gives the SAME key, so the store and
+         the checker agree on what encloses what;
+      4. (in main) the minted SET equals the pinned set, by name.
+    The old round trip did only (1), and a stale line that fell back to
+    its label passed it. Three constants minted wrong keys for weeks.
+    """
     minted = {}
     failures = []
     collisions = []
-    for module, line, label in sites:
+    for module, enclosing, label in sites:
         source = sources.get(module)
         if source is None:
-            failures.append((module, line, 'no source for %s' % module))
+            failures.append((module, enclosing, 'no source for %s' % module))
             continue
-        key = wk.key_for_site(module, source, line, label=label)
-        if key in minted and minted[key] != (module, line):
-            collisions.append((key, minted[key], (module, line)))
-        minted[key] = (module, line)
+        key = wk.compose(module, enclosing, label)
+        if key in minted and minted[key] != (module, enclosing, label):
+            collisions.append((key, minted[key], (module, enclosing, label)))
+        minted[key] = (module, enclosing, label)
         resolved, reason = wk.resolve(key, sources)
         if resolved is None:
-            failures.append((module, line, reason))
+            failures.append((module, enclosing, reason))
+            continue
+        live = wk.parse(dealias(key, wk.INSTALLED_ALIASES))
+        live_source = sources.get(live.module)
+        if live_source is None:
+            failures.append((module, enclosing,
+                             'alias points at unread module %s' % live.module))
+            continue
+        line, reason = wk.locate_site(live_source, live.enclosing, live.label)
+        if line is None:
+            failures.append((module, enclosing, reason))
+            continue
+        remint = wk.key_for_site(live.module, live_source, line, label=live.label)
+        expect = wk.compose(live.module, live.enclosing, live.label)
+        if remint != expect:
+            failures.append((module, enclosing,
+                             'MINT DRIFT: store says %s, line %d mints %s'
+                             % (expect, line, remint)))
     return minted, failures, collisions
 
 
@@ -263,8 +304,8 @@ def main():
     print('  Distinct keys:     %d' % len(minted))
     print('  Unresolved:        %d' % len(rt_failures))
     print('  Key collisions:    %d' % len(collisions))
-    for module, line, reason in rt_failures:
-        print('    %s:%d  %s' % (module, line, reason))
+    for module, enclosing, reason in rt_failures:
+        print('    %s::%s  %s' % (module, enclosing, reason))
     for key, first, second in collisions:
         print('    COLLISION %s  %s and %s' % (key, first, second))
     for name in missing:
@@ -285,6 +326,15 @@ def main():
         # repaired rename shows up as repaired.
         pin_failures = check_pins(pins, sources, aliases=None)
         pin_failures += check_retired_pins(retired, sources)
+        # L-277: the corpus and the pins are the same set, BY NAME. A
+        # count comparison could not fail (lose one, gain one, same
+        # total); these two lists name what moved.
+        for key in sorted(set(minted) - set(pins)):
+            pin_failures.append((key, 'UNPINNED: minted by the site '
+                                      'store, absent from the pins'))
+        for key in sorted(set(pins) - set(minted)):
+            pin_failures.append((key, 'UNMINTED: pinned, but no site '
+                                      'store row composes it'))
         print('  Aliases installed: %d' % len(wk.INSTALLED_ALIASES))
         print('  Pinned keys:       %d live, %d retired'
               % (len(pins), len(retired)))

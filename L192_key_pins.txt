@@ -1,3 +1,4 @@
+# Doc-Kind: hand | Key pins for the L-192 corpus: every worksheet key minted at 305b269, asserted to still resolve by test_worksheet_keys.py on every maintenance run. A rename breaks this loudly; record the alias in worksheet_key_aliases.py, never regenerate to make it quiet.
 # Keys minted at 305b269 and PINNED. Resolved against current
 # source by test_worksheet_keys.py. A rename breaks these
 # loudly; add the alias, do NOT regenerate to make it quiet.
