@@ -571,6 +571,80 @@ resident.
 (Moved down from the resident protocol on 2026-08-31 when v3.51
 made a fourth entry.)
 
+v3.49 (August 30, 2026): One rule added, in two pieces and two tiers.
+No skill changed. Landed in two commits the same evening; this entry
+describes the settled form, and says below what the first commit got
+wrong.
+
+A Report Names Its Items [QUALITY], Part 3, immediately after A Check
+That Cannot Fail Is Not Passing -- and a FOURTH move inside that gate,
+make the delta name what moved. Tony's ruling, 2026-08-30. A count
+states a size; names state what is there. A report giving only the size
+is complete only for a reader who can go and find out what, and neither
+reader here can -- Claude resets and will not open the file, Tony
+cannot read everything and does not grep. A report has to be complete
+enough to act on where it lands.
+
+The first write-up had this as an attention problem, a number being
+easy to skip past. Tony corrected it, and the correction is the rule:
+a count is not a weak signal, it is a signal that only works for a
+reader who can perform a lookup neither reader performs.
+
+NOT a runner convention, and deliberately not a skill. Method Belongs
+to the Skill was applied and answered the other way -- the grounds are
+the two READERS rather than how any one tool reports, and the two
+readers are what this protocol is for.
+
+The scope is broader than the sweep that raised it, on Tony's
+instruction of the same day: scanner and runner summaries, ledger and
+handoff enumerations, counted claims in this document and in the
+skills, and findings and backlogs. Not only counts of grouped features.
+
+THE SPLIT IS THE PART THE FIRST COMMIT GOT WRONG. It put the whole rule
+in at [CRITICAL]. This document's own promotion test is that a check
+moves up when a failure demonstrates it was load-bearing. The naming
+half has failed repeatedly and in view -- the scanner summary, the
+audit's coordinates, the L-268 sweep, the pipeline count below -- and
+every one of those was recoverable. The count-delta half has NOT been
+witnessed here: nobody has yet cleared one Tier-1 finding and gained
+another with the total unchanged. It is inferred, and it is the half
+that can pass while blind. So the sharp case went into a gate that is
+already [CRITICAL] and the general habit went in at [QUALITY], which
+keeps the critical tier short and leaves a promotion path if the delta
+case ever bites. A second Opus session argued it; Tony carried it.
+
+THE FOUNDING CASE IS CORRECTED TOO, and how it was wrong is the lesson.
+Check All Parallel Pipelines had read "5 parallel pipelines in
+palomas_orrery.py" and named none, in the sentence telling the reader
+to map ALL consumers. The five WERE named -- in README.md, which the
+gate does not point to. And a second candidate list existed on a
+DIFFERENT AXIS: six FETCHERS inside palomas_orrery.py against the
+README's five CONSUMERS across the project. Two entries appear in both,
+three of the consumers fetch nothing, and neither list is a subset of
+the other. The gate had merged them, taking a cross-file count and
+attaching a single-file scope, describing a set that does not exist --
+then half-naming the real list in the next sentence, four of five,
+missing social export. Tony's ruling: the gate means the CONSUMERS, the
+names belong in the gate rather than in another document, and the
+in-file scoping goes. All five paths were verified present at a667e128
+before being written in, and two of them turn out to live in the
+GALLERY repository under tools/, which the old scoping actively hid.
+The fetcher list is kept on L-269 as the answer to a different
+question. A count does not carry the axis it was counted on.
+
+Ledger, first commit: L-265 through L-269 placed, and L-262's diagnosis
+amended in view rather than corrected in place. The framing smoke test
+was never about interactive.html, its row in the gallery runner gates,
+and the fix is two lines needing no Mode 5. Confirmed the same evening:
+the Page framing row now passes twelve checks in the gallery runner.
+
+Version history: v3.46 moved down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-09-02 when v3.52
+made a fourth entry.)
+
 
 
 
