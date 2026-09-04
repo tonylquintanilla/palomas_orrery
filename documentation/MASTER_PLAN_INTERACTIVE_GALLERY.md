@@ -1,6 +1,6 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** v21 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
+**Status:** v22 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
 **the first feature-bearing exhibit is LIVE.** The Sun ships at
 `palomasorrery.com/interactive.html?exhibit=sun`, unlinked from the
 landing page, Mode 5 accepted 2026-08-29 (gallery `ac9a5c7b`). Its GUI
@@ -41,14 +41,16 @@ F1a (M2, trust/served_window) fully closed July 21-22: L-149 built, tested
 offline (138/138) AND live -- Layer 2 Steps 1-5 all passed (five dry-runs,
 --first-build, --nightly, resolver date-picker, fetch-cost note). L-118
 closed in the same session.
-**Next: F1's data layer is done, but nothing renders it yet.** A repo-wide
-search (Python and JS/HTML) for anything consuming `ring_system`,
-`van_allen_belts`, `atmosphere_shell`, or `radiation_belts` found nothing.
-Artifact 1 (Earth)'s own acceptance test confirms this by design: features
-dispatch as data only, with "JavaScript rendering them" as the intended
-next step -- and that JS was never written. Writing that feature-rendering
-layer is the real next gate before Artifact 2 (Jupiter/Saturn) can attempt
-Mode 5. Alongside it, the trust system's consumption side is now tracked as L-166
+**Next: the order is in Section 5a, dated 2026-09-03, and it is five
+steps: the Sun room's phone controls, the hall (L-280), Earth into the
+assembler, the transport (segment 2) built alongside Earth, then
+Jupiter and Saturn.** The paragraph that stood here until v22 said the
+feature-rendering JS layer was "never written" and was the gate before
+Artifact 2. That layer is `feature_renderers.js`; it shipped with the
+Sun exhibit on 2026-08-29 and has drawn 18 shells on the live page
+since. The sentence outlived the fact by five days and two plan
+versions -- The Correction Does Not Travel, on this document's own
+front page. Alongside the order, the trust system's consumption side is tracked as L-166
 (F1b: per-object trust enforcement in the resolver + soft-edge date-picker
 UX -- a deliberate golden-fingerprint re-open when it lands; the per-object
 trust blocks are already served nightly, dormant). Independently: Layer 3 (nightly Task Scheduler) is RETIRED as of
@@ -1168,6 +1170,107 @@ no handle at all; and `provenance-discipline` went 2.9 -> 2.10 in a
 session that cannot verify its own reinstall. The ledger carries
 status authority (L-221), so those are ledger edits and this section
 records them rather than asserting around them.
+
+### 2026-09-03 -- the Sun GUI is complete on desktop, the phone pass
+names three defects, and the order to Jupiter
+
+Measured at orrery `def557e6` and gallery `98cc99bd`, both confirmed
+against the live remotes. Appended, not merged, in the shape of the
+August 25 and 29 subsections above.
+
+**What shipped between August 29 and today.** The Sun room's GUI
+(L-267) in three stages: A, the drawer replacing the legend and the
+portrait defect fixed (gallery `2ed12564`); B, the mockup ported --
+row split with a GO, focus label on the drawer handle, cross-marker
+navigation (`e0edd16c`), and the click-hang it exposed fixed by
+deferring the focus call one tick (`6fd6baaf`, recorded portably as
+L-278 and as a field note in gallery-assembler 1.2); C, the i panel
+following the focus with the shell's swatch, name and one link out
+(`0edf4bf4`), the i button wired for the Sun path at all -- it had
+been decoration since Stage A (`42a906f6`) -- and panel and drawer
+sharing the height, 40/60 (`6cfaf318`, `98cc99bd`). The 22 curated
+links (L-265) are served with zero placeholders. Mode 5 passed on
+desktop for every trial, including the hover-seize from the
+2026-08-30 study, which did not reproduce on the live page. The wing
+is designed and recorded in L-280 (door, hall, two rooms, What's New),
+L-281 (guest book), L-282 (lobby), L-283 (theme) and L-284 (retire the
+social export). Nothing of the wing is built.
+
+**The phone pass ran today, and it is not a pass.** Tony, on a phone,
+2026-09-03, Mode 5. Three findings, in his order:
+
+- The Plotly modebar is missing, so there is no way to reset the
+  scene. This is the gallery's own rule, not a Sun defect:
+  `interactive.html` hides the modebar below 768 px (CSS at line 548
+  and `displayModeBar: window.innerWidth > 768` at lines 1070 and
+  1497, measured at `98cc99bd`). On the desktop the modebar was the
+  reset; on the phone nothing replaced it.
+- The two-finger zoom gesture does not work in the 3D scene.
+- Landscape works.
+
+The static gallery already solved both. `index.html` at the same SHA
+carries `zoomIn`, `zoomOut`, `panReset` and `resetStandalone` buttons
+(lines 1572 to 1625) with `touchstart` handlers, and Gallery Studio
+draws the same `+` / `-` pair (`tools/gallery_studio.py` lines 2447
+and 2473). Tony's ruling: land on ONE control set that works for both
+the static gallery and the interactive wing. The Sun room is the
+first room, so whatever it gets, the hall's chrome inherits; that is
+why this is step 1 and not a finishing item.
+
+These findings are Mode 5 results and belong in the ledger, which
+carries status authority (L-221). L-260 still reads "mobile is
+untested" and L-267 still reads "the phone pass is what remains"; both
+are now wrong in the same direction and are owed an amendment. This
+section records that and does not assert around it.
+
+**The order, confirmed by Tony 2026-09-03.** Braided so each step
+feeds the next; the general audit and the constants work continue
+beside it and gate nothing here.
+
+1. **Sun room: phone controls.** Reset and zoom on a phone, one
+   control set shared with the static gallery. Then the phone pass
+   again. This is what stands between the first room and complete.
+2. **The hall (L-280), designed in conversation first, portrait
+   first.** The door card on the main page, the placard, the two
+   rooms, the What's New JSON and the rule that shipping patches
+   append to it. Until this exists the Sun room is a URL nobody can
+   find. The chrome from step 1 is what the hall copies.
+3. **Earth into the assembler.** The next body. Three items travel
+   together: Earth's shells and belts drawn through
+   `feature_renderers.js`, which also exercises the belt path Jupiter
+   will need; the Earth slice of L-268's collapsed-feature
+   remediation; and L-237, Artifact 1's stale golden record, which
+   reopens anyway the moment Earth grows features.
+4. **Segment 2, the transport, built alongside Earth.** Earth would
+   be the second body whose constants reach the gallery by hand-editing
+   `objects_config.json`. The August 29 subsection said the transport
+   should land before hand-copying becomes routine. Two bodies is
+   where it becomes routine.
+5. **Jupiter and Saturn.** Segment 1 sliced to the thirty measured
+   numbers, then segment 4 locks Artifact 2, and the premade Solar
+   System Explorer room starts being replaced by interactive planets
+   as L-280 rules.
+
+Off the path and clustered: L-284 (retire the social export) with
+L-254 (dead sphere-shell builders), both orrery-side, worked the next
+time the orrery side is open for other reasons. Tony's ruling,
+2026-09-03.
+
+**One thing this plan never carried and now does.** The body order for
+the assembler -- Sun, Earth, Jupiter and Saturn -- had lived in
+conversation and in memory. The five segments sequence propagation
+shapes and provenance slices; the August 25 subsection named the
+drawn-feature axis and said nothing sequences it. The list above is
+the first place the order is written down. Bodies after Saturn are
+not ordered here; that is a ruling for when Saturn is on screen.
+
+**Rows in the 2026-08-23 table that are now stale, by name.**
+"Segment 3, assembler draw: NOT STARTED" -- done for the Sun, and
+its GUI is complete on desktop. "Artifact 1, Earth: LOCKED" --
+reopened, and now step 3. "Segment 4, Artifact 2: gated on segment
+3" -- segment 3 is no longer the gate; steps 1 to 4 above are. Left
+standing for the same reason the August 25 append gave: the table is
+re-stated only by a pass that reads the repo.
 
 ### What this section deliberately does not carry
 
@@ -2344,11 +2447,11 @@ watched them. The authority is the generated Skill Manifest in
 the copy Stale Skill = Stop actually compares a loaded skill against.
 Read it there. (Tony's ruling, 2026-08-23: fix the producer, not N
 consumers.)
-NEXT, and no longer waiting on the scanner work (the braid,
-2026-08-22): write the feature-rendering JS layer (ring/shell/belt
-consumers). It is what stands between here and attempting Artifact 2
-(Jupiter/Saturn) Mode 5, it depends on nothing, and the data it needs
-is already served. Layer 3 (nightly Task
+NEXT is not restated here; it drifted the same way the skill versions
+did. Until v22 this line said the feature-rendering JS layer was still
+to be written, five days after it shipped with the Sun exhibit. The
+order lives in Section 5a, dated 2026-09-03, and only there (the
+same fix-the-producer ruling as the paragraph above). Layer 3 (nightly Task
 Scheduler) RETIRED 2026-08-10 -- task disabled not deleted, builder run
 manually, first manual build clean 2026-08-11. The known intermittent
 promotion-step glitch (S3a addendum, July 24) is moot while manual and
