@@ -259,7 +259,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*171 live items; 157 need attention (`!`); 170 RICE-scored; 108 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*170 live items; 156 need attention (`!`); 169 RICE-scored; 110 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -275,7 +275,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-266 | Nothing checks that a cited link still resolves | OPEN | 9.0 | 2026-08-30 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-226 | safe-file-editing 1.8 -- encoding gate covers prose; corrections do not travel | OPEN | 8.1 | 2026-08-23 |
-| ! | L-260 | Sun exhibit finishing items: axis units and the phone | OPEN | 8.1 | 2026-08-29 |
 | ! | L-278 | A relayout from inside a Plotly event handler re-enters the update machinery | OPEN | 8.1 | 2026-09-02 |
 | ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-21 |
 | ! | L-249 | The Earth slice of L-181: interior boundaries as sourced constants | OPEN | 7.2 | 2026-08-25 |
@@ -309,9 +308,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-210 | Pilot citation findings -- four rows in constants_new.py | OPEN | 3.6 | 2026-08-21 |
 | ! | L-215 | Ledger cleanup by topic, not by age | OPEN | 3.6 | 2026-08-19 |
 | ! | L-239 | Seed the three Oort builders so a render is reproducible | OPEN | 3.6 | 2026-08-25 |
+| ! | L-285 | index.html adopts the shared navigation cluster; the fake-wheel dolly retires | OPEN | 3.6 | 2026-09-04 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-25 |
 | ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
-| ! | L-267 | The Sun exhibit GUI shape: drawer, focus label, marker navigation | OPEN | 3.4 | 2026-09-03 |
 | ! | L-283 | Visual theme: dark wall, paper placards, record mode | OPEN | 3.2 | 2026-09-03 |
 | ! | L-256 | provenance-discipline 2.8, and the status pass it enables | OPEN | 3.1 | 2026-08-27 |
 | ! | L-254 | 76 dead sphere-shell builders, unmarked, across 12 modules | OPEN | 2.8 | 2026-09-02 |
@@ -520,6 +519,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-276 | Mode 7 tells relay partners they cannot read the repo, and they can | DONE | 8.5 | 2026-09-03 |
 |  | L-259 | The Sun exhibit ships -- the assembler runs in a visitor's browser | DONE | 8.3 | 2026-08-29 |
 |  | L-217 | The Part A / Part B dispatch split is a check that cannot fail | DONE | 8.1 | 2026-08-19 |
+|  | L-260 | Sun exhibit finishing items: axis units and the phone | DONE | 8.1 | 2026-09-04 |
 |  | L-207 | The citation prompt -- the checker asks the fuzzy question | DONE | 7.6 | 2026-08-18 |
 |  | L-220 | A patch updates the body but not the anchor, date or description | DONE | 7.6 | 2026-08-20 |
 |  | L-204 | The worksheet reference may be JSON | DONE | 5.7 | 2026-08-18 |
@@ -549,6 +549,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-233 | Three dashboard buttons: one fixed, one added, one retired | DONE | 3.8 | 2026-08-24 |
 |  | L-106 | Gallery-cache backup + gitignore discipline | DONE | 3.6 | 2026-07-12 |
 |  | L-115 | Skills v1.1 batch: accuracy fixes + two seed blocks (Fable Mode 7) | DONE | 3.6 | 2026-07-12 |
+|  | L-267 | The Sun exhibit GUI shape: drawer, focus label, marker navigation | DONE | 3.4 | 2026-09-04 |
 |  | L-097 | skills_index.py -- Skill Manifest auto-generation (process/tooling) | DONE | 3.2 | 2026-07-04 |
 |  | L-127 | module_atlas.py generates MODULE_INDEX.md too -- single source, eliminate divergence | DONE | 3.2 | 2026-07-28 |
 |  | L-236 | Gallery maintenance runner | DONE | 3.2 | 2026-08-29 |
@@ -4623,80 +4624,6 @@ status pass; (b) and (c) are gated on it.
 **Ref:** L-256; A Check That Cannot Fail Is Not Passing [CRITICAL],
 resident protocol Part 3.
 
-#### [L-260] Sun exhibit finishing items: axis units and the phone
-<!-- L:260 status:OPEN upd:2026-08-29 section:A flag: rice:3/3/90/1 -->
-- **The axes carry no units.** Tick labels read "150k" with nothing
-  saying what of. This is copied from the Solar System Explorer's own
-  convention -- blank axis titles, `title: { text: '', font: { size:
-  1 } }` -- so it is not a deviation the Sun exhibit introduced.
-- **It lands differently here.** The Explorer's frame is always about
-  35 AU. The Sun's runs from 0.26 AU on arrival to 173,250 AU with the
-  gravitational influence drawn, so a visitor has no way to know the
-  number is AU rather than km. Every hover on the page carries km AND
-  AU per the standing convention; the axes are the one surface that
-  does not. It is the only thing on the live page that is arguably
-  wrong rather than merely unfinished.
-- **Mobile is untested, and it cannot be delegated.** Nobody has
-  opened the exhibit on a phone. The legend is an eighteen-entry
-  overlay panel and the modebar is hidden below 768 px by the
-  gallery's existing convention, so the phone experience is unknown --
-  on a site whose whole premise is that it works on one. Deferred
-  deliberately by Tony on 2026-08-29 because the major thing was done.
-  **Tony-action (do):** open
-  `palomasorrery.com/interactive.html?exhibit=sun` on a phone and say
-  what it does. Mode 5 is his render and his eyes.
-- **Note:** RICE 3/3/90/1, confirmed by Tony 2026-08-29.
-- **Confirmed by Mode 5, 2026-08-29.** Tony's screenshot of the live
-  page shows tick labels reading 0.2, 0 and -0.2 with no axis names
-  and no unit anywhere. Not inferred from the code this time --
-  seen on the deployed exhibit, which is the gate that counts.
-- **Axis fix BUILT and delivered 2026-08-29** as
-  `patch_gallery_axis_titles_and_chromosphere_20260829.py`.
-  `buildSunLayout` gains X (AU), Y (AU), Z (AU) -- the desktop
-  orrery's own wording from `visualization_utils.py`'s
-  `build_scene_axes`, so this is the established visual language
-  carrying across rather than a new convention. The Solar System
-  Explorer's `buildLayout` has the same blank titles and is NOT
-  touched: it is a frozen exhibit on the A path and changing it is
-  a separate call with its own Mode 5.
-- **Axis half CLOSED 2026-08-29** at gallery `6c612397`, Mode 5
-  confirmed by Tony against the deployed page: the axes read
-  X (AU), Y (AU), Z (AU).
-- **A suspected tenth orphan marker, checked and cleared.** A red
-  cross appeared in Tony's 2026-08-29 screenshot below and right
-  of the corona, with no shell around it, and was raised as a
-  possible survivor of the nine-marker orphan fix. Tony checked
-  it on the live page: not a defect. Recorded so it is not
-  re-raised from the same screenshot later.
-- **The phone check happened, 2026-08-29**, on iPhone Safari, both
-  orientations. **The exhibit WORKS**: Pyodide loaded, the
-  assembler ran, the shells drew, the axis titles are there. The
-  premise of the whole interactive gallery -- that it works on a
-  phone -- held on its first real test.
-- **LANDSCAPE is usable as it stands.** The legend takes roughly a
-  quarter of the width, scrolls (11 of 18 entries visible with a
-  scrollbar), and the Sun renders clear of it.
-- **PORTRAIT is not.** The legend covers about 58 percent of the
-  width and 58 percent of the height as an overlay, and the Sun
-  sits BEHIND it -- the object of the exhibit is the part you
-  cannot see. All 18 entries render at once rather than scrolling
-  as they do in landscape.
-- **The axis titles clip in portrait.** Only fragments of the
-  X (AU) and Y (AU) labels reach the viewport at the bottom
-  corners. They are correct and they are cut off, which is a
-  narrower problem than the legend and probably the same fix.
-- **Not diagnosed, deliberately.** These are read from two
-  screenshots, not from the page. gallery-pipeline 1.2 carries the
-  768 px breakpoint and a bottom-drawer pattern for exactly this
-  case, and the Sun exhibit does not use it. Whether that is the
-  fix is a design conversation, not a guess to be made here.
-**Gap:** portrait. The legend overlays the object it describes,
-and the axis titles clip. Landscape needs nothing. Deferred by
-Tony to the next session, 2026-08-29.
-**Ref:** L-259 (the exhibit itself); orrery-coding-conventions 1.6
-(the AU hover convention the axes do not follow); gallery-pipeline 1.2
-(the 768 px breakpoint).
-
 #### [L-262] The framing smoke test has never run against the page
 <!-- L:262 status:OPEN upd:2026-08-30 section:A flag: rice:3/4/95/1 -->
 - **Found by the gallery maintenance runner's first execution**
@@ -4817,150 +4744,6 @@ Names Its Items [QUALITY], resident protocol Part 3.
   gallery side); provenance-discipline 2.8, The Access Standard --
   reachability is already a stated precondition of a citation, with
   nothing enforcing it.
-
-#### [L-267] The Sun exhibit GUI shape: drawer, focus label, marker navigation
-<!-- L:267 status:OPEN upd:2026-09-03 section:A flag: rice:4/3/85/3 -->
-**AMENDED 2026-09-03 -- Stage C shipped; the phone pass is what remains.**
-
-STAGE A shipped 2026-08-31 at gallery `2ed12564`: the drawer replaced the
-legend and the portrait defect was fixed.
-
-STAGE B shipped 2026-09-02 at gallery `e0edd16c` via `patch_L267_2`, a
-port of `sun_gui_mockup.html`, which Tony accepted at Mode 5 over two
-rounds on 2026-08-30. Ten edits: the row split with a red GO, the focused
-row style, the focus label replacing the count on the drawer handle,
-cross-marker navigation keyed on `curveNumber`, and the framing floor
-removed for focus framing while the arrival floor stays. One job per
-control -- the box draws, everything else moves the camera.
-
-THEN IT HUNG. Clicking a cross marker froze the page with
-`RangeError: Maximum call stack size exceeded` from inside
-plotly-2.35.2. Eight reads to attribute; the finding is portable and is
-recorded separately as L-278. Fixed at gallery `6fd6baaf` via
-`patch_L267_3`, two lines: the click handler defers `sunFocusOn` by one
-tick so Plotly finishes dispatching before the relayout starts.
-
-MODE 5 PASSED, Tony, 2026-09-02, on the live page: markers click freely
-and fast including the outer corona and the Alfven surface with nothing
-freezing; the focus label and camera follow the marker clicked; the
-drawer checkboxes draw and hide without moving the camera.
-
-STAGE C shipped 2026-09-03 across three gallery patches, once L-265's
-links were in the served file. `patch_L267_4` (gallery `0edf4bf4`): the
-i panel follows the focus the way the drawer handle does -- the focused
-shell's swatch, name and one link out, over the exhibit description; no
-radius, no citation, because the cross marker's hover already carries
-those and the panel is not a second copy of it. The link reaches the
-page on the trace: `renderShellSet` stamps it in Plotly's `meta`, and
-`buildSunDrawer` reads it there, so there is one source for "which link
-belongs to this group" rather than a second copy of the label formula.
-`patch_L267_5` (`42a906f6`): the i button had NEVER been wired on the
-Sun exhibit -- its listener lived inside `initControls()`, which the Sun
-path does not call, so from Stage A to Tony's Mode 5 of 2026-09-03 the
-button was decoration. Trial 1 found it. The wiring now lives in its own
-function that both launch paths call. `patch_L267_6` (`6cfaf318`) and
-Tony's hand edit (`98cc99bd`): the panel and the drawer SHARE the height
-(Tony's option C) -- while the drawer is open the panel stops at its top
-edge, measured, so no row, GO or All / none is covered; drawer 40%,
-panel 60%, set by hand.
-
-MODE 5 PASSED, Tony, 2026-09-03, on the live page, desktop: the panel
-opens and closes; shows Core with its Wikipedia link, the link opens in a
-new tab and the page still responds; switches to the Alfven surface and
-its NASA link while open; keeps the name and link when the focused shell
-is unticked. Panel open, markers hovered and the scene rotated: NO SEIZE.
-That answers the study's open defect from 2026-08-30 -- the seize was
-most likely the L-278 click re-entry, and the study's `hovermode: false`
-workaround was deliberately NOT ported (Stage B found that exact relayout
-throws inside Plotly and takes `viewInitial` with it).
-
-Two lessons, both already in the protocol and both missed here. The
-Stage C test proved the panel's CONTENTS were right and never asked
-whether the panel could OPEN -- Verify Execution, Not Appearance, on the
-page's own chrome. And "nothing focused" is a state the live page never
-reaches, because arrival focuses the outermost shell drawn; the "Focus a
-shell" text is correct and unreachable. Not a defect; noted so nobody
-hunts for it.
-
-**Tony-action (do):** the portrait pass on a phone -- Stages A, B and C
-are all unverified on a small screen, and the 40/60 split was chosen on a
-desktop. Carried from L-260.
-
-
-- **Origin: L-260's portrait defect, which turned out to be a design
-  question rather than a layout fix.** The legend covers the picture
-  in both orientations and badly in portrait. Moving it was the
-  obvious repair; what to move it INTO was not.
-- **A boundary ladder was proposed and withdrawn.** Because the Sun's
-  eighteen features genuinely nest, "how far out am I looking" fully
-  determines "what am I looking at", and a single ordered control
-  looked elegant. Tony found the flaw: "we are replacing the object
-  list from the orrery that was a completely selectable list with a
-  set determined by a boundary." The collapse is a property of THIS
-  exhibit, not a general truth. Orbits pull the two apart -- "Earth
-  and Jupiter and nothing else" is a sensible request a boundary
-  cannot express.
-- **Tony's ruling, 2026-08-30, on what the gallery is:** "The gallery
-  is meant to produce the orrery to allow the user to assemble their
-  own scene. The question is the gui shape." Free object selection is
-  therefore permanent, and any control that takes it away is wrong
-  however well it suits one exhibit.
-- **The agreed shape, four parts, no two doing the same job.**
-  (1) Cross markers -- one per shell at its own radius, already built,
-  carrying name, radius in km and AU, and citation. Tapping one moves
-  the camera. (2) The i panel -- descriptive material and the link
-  out, NOT a second copy of the marker's hover. (3) The drawer -- what
-  is in the scene, a free multi-select list, the orrery's object list
-  moved out of the picture. (4) The focus label -- one thing, where
-  the camera is, a readout rather than a chooser, and the handle that
-  opens the drawer.
-- **One job per control, and it settled two open questions at once.**
-  Tony, 2026-08-30: "let the row selection just identify the object
-  being targeted, with the box selecting the object and the go moving
-  the camera separately." Applied consistently, this also ruled that
-  focusing no longer draws a hidden shell -- the same conflation, one
-  gesture doing two jobs. Sending the camera to something not drawn
-  gives an empty frame at that scale, which is an honest answer; the
-  label says "(not drawn)" and dims its swatch.
-- **A framing rule was found wrong in the process, and it matters
-  beyond the study.** Framing carried a floor of `SUN_HALF_RANGE_AU`
-  (0.25 AU), inherited from `interactive.html`. Fifteen of the
-  eighteen shells are smaller than that, so framing on the core, the
-  radiative zone or the chromosphere produced the identical 0.25 AU
-  cube and adding any of them changed nothing on screen. The floor is
-  correct on the live page, where the frame only ever widens from a
-  fixed arrival view. It is wrong the moment the frame follows a
-  chosen object -- and it would have followed us into the real build.
-- **Evidence: `sun_gui_mockup.html`**, a throwaway study running real
-  Plotly with radii, colours, opacities, point counts and sources
-  generated from `objects_config.json` rather than retyped, reusing
-  the live page's sphere geometry, hover format and framing rules.
-  Tony ran a written Mode 5 protocol against it over two rounds; all
-  pass/fail checks passed on the second.
-- **Not tested, and recorded as not tested:** the four non-spherical
-  structures are drawn as spheres at their outer limit; no Pyodide,
-  assembler or served cache; nothing here touched `interactive.html`.
-- **Open defect, undiagnosed.** Tony, 2026-08-30: hover text latches
-  and the display seizes when a cross marker and then the i button are
-  used in sequence. A headless browser confirmed Plotly's gl3d hover
-  hit-tests by reading pixels back off the GPU on every mouse move
-  ("GPU stall due to ReadPixels" in the console) across 8,119 points,
-  and that is on the live page's code path too. The exact sequence
-  could NOT be reproduced -- synthetic mouse events do not reach
-  Plotly's 3D hover machinery. The applied fix (clear the tooltip and
-  set `hovermode: false` while the panel is open, restore on close) is
-  reasoned from mechanism, not witnessed. **Tony-action (do):**
-  confirm whether it cures the seize. If not, the next move is taking
-  the panel off the canvas rather than overlaying it.
-- **Tony-action (decide):** whether the drawer's eighteen rows want
-  indentation by the config's five groups. Tony 2026-08-30: "it's
-  okay. it follows the orrery pattern. indentation could work too" --
-  a maybe, left for judging against Earth's shells rather than one
-  body.
-- **Note:** RICE 4/3/85/3 -> 3.4 proposed, not confirmed.
-- **Ref:** L-260 (the portrait defect this answers); L-262 (the
-  framing helpers, and see the correction below); L-265 (what the i
-  panel will carry); L-237.
 
 #### [L-268] Sweep: features collapsed out of their own identity
 <!-- L:268 status:OPEN upd:2026-08-30 section:A flag: rice:4/4/85/3 -->
@@ -5519,6 +5302,42 @@ scanner drop it.
 **Ref:** L-269 (the consumer list and its stores), L-270, L-283;
 social_media_export.py; palomas_orrery.py; star_visualization_gui.py;
 skills/gallery-pipeline; skills/provenance-discipline.
+
+#### [L-285] index.html adopts the shared navigation cluster; the fake-wheel dolly retires
+<!-- L:285 status:OPEN upd:2026-09-04 section:A flag: rice:2/2/90/1 -->
+- **What exists.** `gallery/nav_cluster.js` (L-267 step 7, gallery
+  `2509695d`) is the site's one control set: `+`, `-`, Home, top-left,
+  every screen size. `interactive.html` uses it. `index.html` still
+  draws its own inline cluster (`.zoom-controls`, `.reset-standalone`,
+  lines 857-1090 and 1571-1625 at `963b7a34`) whose 3D `+`/`-` fake a
+  mouse wheel at the WebGL canvas (`zoom3D`, line 2551) and whose
+  reset restores orientation and pan but not zoom level.
+- **Why it is one row and not a fix today.** Same three buttons, two
+  mechanisms underneath -- a parallel pipeline by the protocol's
+  definition, recorded rather than chased (The Braid). The static
+  gallery's `+`/`-` already do two different things on its own pages
+  (2D scales axis ranges, 3D dollies the camera), so the visible
+  inconsistency predates this item. The clean end state is frame zoom
+  everywhere and the dolly gone.
+- **Scope when opened.** `index.html` loads `gallery/nav_cluster.js`,
+  drops its inline cluster markup and CSS, wires `zoomIn`/`zoomOut` to
+  a range-scaling frame zoom for 3D (the 2D and polar paths already
+  scale ranges) and Home to the stored original camera and ranges the
+  fly-to controls already keep (`data-orig-camera`, `data-orig-ranges`).
+  Its own Mode 5, on a 3D static scene and a 2D one.
+- **Carried here from L-267:** on the Solar System Explorer room of
+  `interactive.html` the top-left cluster overlaps Plotly's legend.
+  Tony, 2026-09-04: not critical, a legacy view L-280 replaces. If the
+  Explorer outlives expectations, move its legend or hide the cluster
+  there; do not move the cluster, whose corner the Sun room owns.
+- **Note:** RICE 2/2/90/1 -> 3.6 proposed, not confirmed.
+**Gap:** the adoption patch, when `index.html` is next open for other
+reasons (gallery-pipeline skill fires).
+**Ref:** L-267 (the cluster and its design); L-260 (the phone findings);
+gallery/nav_cluster.js; index.html; gallery-pipeline 1.2 (Mobile and
+Rendering Facts -- the fake-wheel note and the "3D zoom RESET is not
+possible" line, which the Sun room's Home shows is a limit of the
+dolly, not of Plotly).
 
 #### [L-278] A relayout from inside a Plotly event handler re-enters the update machinery
 <!-- L:278 status:OPEN upd:2026-09-02 section:A flag: rice:3/3/90/1 -->
@@ -10390,6 +10209,302 @@ there today and nothing here touches them.
   gate); the cross-repo transport, segment 2 of
   `MASTER_PLAN_INTERACTIVE_GALLERY.md`.
 
+
+#### [L-260] Sun exhibit finishing items: axis units and the phone
+<!-- L:260 status:DONE upd:2026-09-04 section:C flag: rice:3/3/90/1 -->
+- **The axes carry no units.** Tick labels read "150k" with nothing
+  saying what of. This is copied from the Solar System Explorer's own
+  convention -- blank axis titles, `title: { text: '', font: { size:
+  1 } }` -- so it is not a deviation the Sun exhibit introduced.
+- **It lands differently here.** The Explorer's frame is always about
+  35 AU. The Sun's runs from 0.26 AU on arrival to 173,250 AU with the
+  gravitational influence drawn, so a visitor has no way to know the
+  number is AU rather than km. Every hover on the page carries km AND
+  AU per the standing convention; the axes are the one surface that
+  does not. It is the only thing on the live page that is arguably
+  wrong rather than merely unfinished.
+- **Mobile is untested, and it cannot be delegated.** Nobody has
+  opened the exhibit on a phone. The legend is an eighteen-entry
+  overlay panel and the modebar is hidden below 768 px by the
+  gallery's existing convention, so the phone experience is unknown --
+  on a site whose whole premise is that it works on one. Deferred
+  deliberately by Tony on 2026-08-29 because the major thing was done.
+  **Tony-action (do):** open
+  `palomasorrery.com/interactive.html?exhibit=sun` on a phone and say
+  what it does. Mode 5 is his render and his eyes.
+- **Note:** RICE 3/3/90/1, confirmed by Tony 2026-08-29.
+- **Confirmed by Mode 5, 2026-08-29.** Tony's screenshot of the live
+  page shows tick labels reading 0.2, 0 and -0.2 with no axis names
+  and no unit anywhere. Not inferred from the code this time --
+  seen on the deployed exhibit, which is the gate that counts.
+- **Axis fix BUILT and delivered 2026-08-29** as
+  `patch_gallery_axis_titles_and_chromosphere_20260829.py`.
+  `buildSunLayout` gains X (AU), Y (AU), Z (AU) -- the desktop
+  orrery's own wording from `visualization_utils.py`'s
+  `build_scene_axes`, so this is the established visual language
+  carrying across rather than a new convention. The Solar System
+  Explorer's `buildLayout` has the same blank titles and is NOT
+  touched: it is a frozen exhibit on the A path and changing it is
+  a separate call with its own Mode 5.
+- **Axis half CLOSED 2026-08-29** at gallery `6c612397`, Mode 5
+  confirmed by Tony against the deployed page: the axes read
+  X (AU), Y (AU), Z (AU).
+- **A suspected tenth orphan marker, checked and cleared.** A red
+  cross appeared in Tony's 2026-08-29 screenshot below and right
+  of the corona, with no shell around it, and was raised as a
+  possible survivor of the nine-marker orphan fix. Tony checked
+  it on the live page: not a defect. Recorded so it is not
+  re-raised from the same screenshot later.
+- **The phone check happened, 2026-08-29**, on iPhone Safari, both
+  orientations. **The exhibit WORKS**: Pyodide loaded, the
+  assembler ran, the shells drew, the axis titles are there. The
+  premise of the whole interactive gallery -- that it works on a
+  phone -- held on its first real test.
+- **LANDSCAPE is usable as it stands.** The legend takes roughly a
+  quarter of the width, scrolls (11 of 18 entries visible with a
+  scrollbar), and the Sun renders clear of it.
+- **PORTRAIT is not.** The legend covers about 58 percent of the
+  width and 58 percent of the height as an overlay, and the Sun
+  sits BEHIND it -- the object of the exhibit is the part you
+  cannot see. All 18 entries render at once rather than scrolling
+  as they do in landscape.
+- **The axis titles clip in portrait.** Only fragments of the
+  X (AU) and Y (AU) labels reach the viewport at the bottom
+  corners. They are correct and they are cut off, which is a
+  narrower problem than the legend and probably the same fix.
+- **Not diagnosed, deliberately.** These are read from two
+  screenshots, not from the page. gallery-pipeline 1.2 carries the
+  768 px breakpoint and a bottom-drawer pattern for exactly this
+  case, and the Sun exhibit does not use it. Whether that is the
+  fix is a design conversation, not a guess to be made here.
+- **The portrait defect was answered by L-267 Stage A** (gallery
+  `2ed12564`, 2026-08-31): the legend became a drawer, and the
+  picture is no longer behind anything.
+- **The phone pass ran, Tony, 2026-09-03, iPhone, live page.** Three
+  findings, his order: the Plotly modebar is missing so there is no
+  way to reset the scene (the gallery's own 768 px rule hides it, and
+  nothing had replaced it); the two-finger zoom does nothing in the
+  3D scene; landscape works. The first two are the phone half of
+  this item and were fixed under L-267 (step 7, the navigation
+  cluster) at gallery `2509695d` and `963b7a34`, Mode 5 passed
+  2026-09-04.
+**CLOSED 2026-09-04.** Both halves done: axes at `6c612397`
+(2026-08-29), phone at `963b7a34` (2026-09-04), each render-confirmed
+Mode 5 on the live page.
+**Gap:** none -- move to section C.
+**Ref:** L-259 (the exhibit itself); orrery-coding-conventions 1.6
+(the AU hover convention the axes do not follow); gallery-pipeline 1.2
+(the 768 px breakpoint).
+
+#### [L-267] The Sun exhibit GUI shape: drawer, focus label, marker navigation
+<!-- L:267 status:DONE upd:2026-09-04 section:C flag: rice:4/3/85/3 -->
+**CLOSED 2026-09-04 -- the phone pass ran, the navigation cluster
+shipped, and the Sun GUI is complete on phone and desktop.** Record of
+the close is below the Stage C record; the design history follows it.
+
+STAGE A shipped 2026-08-31 at gallery `2ed12564`: the drawer replaced the
+legend and the portrait defect was fixed.
+
+STAGE B shipped 2026-09-02 at gallery `e0edd16c` via `patch_L267_2`, a
+port of `sun_gui_mockup.html`, which Tony accepted at Mode 5 over two
+rounds on 2026-08-30. Ten edits: the row split with a red GO, the focused
+row style, the focus label replacing the count on the drawer handle,
+cross-marker navigation keyed on `curveNumber`, and the framing floor
+removed for focus framing while the arrival floor stays. One job per
+control -- the box draws, everything else moves the camera.
+
+THEN IT HUNG. Clicking a cross marker froze the page with
+`RangeError: Maximum call stack size exceeded` from inside
+plotly-2.35.2. Eight reads to attribute; the finding is portable and is
+recorded separately as L-278. Fixed at gallery `6fd6baaf` via
+`patch_L267_3`, two lines: the click handler defers `sunFocusOn` by one
+tick so Plotly finishes dispatching before the relayout starts.
+
+MODE 5 PASSED, Tony, 2026-09-02, on the live page: markers click freely
+and fast including the outer corona and the Alfven surface with nothing
+freezing; the focus label and camera follow the marker clicked; the
+drawer checkboxes draw and hide without moving the camera.
+
+STAGE C shipped 2026-09-03 across three gallery patches, once L-265's
+links were in the served file. `patch_L267_4` (gallery `0edf4bf4`): the
+i panel follows the focus the way the drawer handle does -- the focused
+shell's swatch, name and one link out, over the exhibit description; no
+radius, no citation, because the cross marker's hover already carries
+those and the panel is not a second copy of it. The link reaches the
+page on the trace: `renderShellSet` stamps it in Plotly's `meta`, and
+`buildSunDrawer` reads it there, so there is one source for "which link
+belongs to this group" rather than a second copy of the label formula.
+`patch_L267_5` (`42a906f6`): the i button had NEVER been wired on the
+Sun exhibit -- its listener lived inside `initControls()`, which the Sun
+path does not call, so from Stage A to Tony's Mode 5 of 2026-09-03 the
+button was decoration. Trial 1 found it. The wiring now lives in its own
+function that both launch paths call. `patch_L267_6` (`6cfaf318`) and
+Tony's hand edit (`98cc99bd`): the panel and the drawer SHARE the height
+(Tony's option C) -- while the drawer is open the panel stops at its top
+edge, measured, so no row, GO or All / none is covered; drawer 40%,
+panel 60%, set by hand.
+
+MODE 5 PASSED, Tony, 2026-09-03, on the live page, desktop: the panel
+opens and closes; shows Core with its Wikipedia link, the link opens in a
+new tab and the page still responds; switches to the Alfven surface and
+its NASA link while open; keeps the name and link when the focused shell
+is unticked. Panel open, markers hovered and the scene rotated: NO SEIZE.
+That answers the study's open defect from 2026-08-30 -- the seize was
+most likely the L-278 click re-entry, and the study's `hovermode: false`
+workaround was deliberately NOT ported (Stage B found that exact relayout
+throws inside Plotly and takes `viewInitial` with it).
+
+Two lessons, both already in the protocol and both missed here. The
+Stage C test proved the panel's CONTENTS were right and never asked
+whether the panel could OPEN -- Verify Execution, Not Appearance, on the
+page's own chrome. And "nothing focused" is a state the live page never
+reaches, because arrival focuses the outermost shell drawn; the "Focus a
+shell" text is correct and unreachable. Not a defect; noted so nobody
+hunts for it.
+
+THE PHONE PASS, Tony, 2026-09-03, iPhone, live page, both orientations.
+Stages A, B and C hold on a small screen; the 40/60 split is fine.
+Three findings, in his order: the Plotly modebar is missing, so there
+is no way to reset the scene -- the gallery's 768 px rule hides it
+(`interactive.html` 548, 1070, 1497 at `98cc99bd`) and nothing had
+replaced it; the two-finger zoom gesture does nothing in the 3D
+scene; landscape works. The static gallery had solved both long ago
+with `+`/`-`/reset buttons (`index.html` 1572-1625) and Gallery Studio
+draws the same pair. Tony's ruling: one control set for the whole
+site.
+
+DESIGN, settled in conversation 2026-09-03/04 before anything was
+built. `+`/`-` step the FRAME (axis ranges), not the camera: the Sun
+spans six orders of magnitude and a camera dolly cannot travel that --
+the near shells vanish into the perspective before the far ones arrive
+and the grid labels never change -- while frame zoom is the mechanism
+the focus already uses (`sunFrameOn`). Tony: this is also the answer
+for future features that need to see past the normal range, comet
+detail for one. Home is the ARRIVAL VIEW (Tony's reading 2): the
+layout's starting camera, which in perspective resets zoom and
+orientation together because the eye distance is the zoom, plus the
+arrival frame, plus focus on the outermost shell shown. Neither
+button changes the focus or switches a shell -- one job per control,
+unchanged. The cluster shows on every screen size, desktop included
+(Tony, 2026-09-04); the modebar stays as it was. Home is a house
+glyph, deliberately not a circular arrow: on a phone the browser's
+own reload sits an inch away. Pinch was NOT built -- Tony recalls,
+and gallery-pipeline 1.2 records, that Plotly does not zoom a 3D scene
+on pinch; a custom two-finger handler was proposed as a second step
+and dropped because the buttons cover the need.
+
+BUILT. `patch_L267_7_nav_cluster.py` at gallery `2509695d`: new
+`gallery/nav_cluster.js` (`GalleryNav.mount(container, {zoomIn,
+zoomOut, home})`, injects its own CSS copied from `index.html`'s
+.zoom-btn, click-only, sibling of the plot so Plotly never sees the
+taps); `interactive.html` gains `navFrameZoom` (factor 1.6 per tap,
+each axis about its own centre so the Explorer's 0.3x z-axis keeps its
+aspect, half-range clamped to 1e-5..5e3 AU, dtick via `sunGridDtick`),
+`navHome`, `navArrivalR` stored at both rooms' arrival, and one mount
+after the exhibit branch so both rooms get the same three buttons.
+Everything is `Plotly.relayout` on public keys; no synthetic events.
+The cluster hides while the drawer is open. `patch_L267_8` at
+`963b7a34`: moved from bottom-right to TOP-LEFT after Tony found it
+under both the drawer and the info panel on the live page -- the
+drawer owns the bottom, the panel owns the right (desktop) or the
+bottom (portrait), the title is centred, so top-left is the corner
+nothing else claims.
+
+MODE 5 PASSED, Tony, 2026-09-04, on the live page, iPhone portrait and
+desktop, conditions stated per gallery-assembler 1.2. Six of seven
+trials correct: rotate then Home restores angle AND size (camera
+relayout resets zoom); five taps of `+` close in on the centre with
+the grid numbers changing and the drawer label unchanged; focused on
+Core, `-` three and `+` three returns to the start still on Core; no
+buttons while the drawer is open, back when closed; buttons usable
+with the i panel open; desktop shows the cluster top-left and Home
+behaves as on the phone. Trial 6 (the Explorer) was NOT run: the
+cluster overlaps that room's legend. Tony: not critical, a legacy view
+L-280 replaces; carried on L-285.
+
+CARRIED OUT of this item on closing: the drawer-row indentation
+question (Tony-action (decide), 2026-08-30, "could work too") waits
+for Earth's shells so it is judged against two bodies, not one --
+raise it when Earth's drawer rows exist. The static gallery's adoption
+of the shared cluster is L-285.
+
+**Gap:** none -- move to section C.
+
+
+- **Origin: L-260's portrait defect, which turned out to be a design
+  question rather than a layout fix.** The legend covers the picture
+  in both orientations and badly in portrait. Moving it was the
+  obvious repair; what to move it INTO was not.
+- **A boundary ladder was proposed and withdrawn.** Because the Sun's
+  eighteen features genuinely nest, "how far out am I looking" fully
+  determines "what am I looking at", and a single ordered control
+  looked elegant. Tony found the flaw: "we are replacing the object
+  list from the orrery that was a completely selectable list with a
+  set determined by a boundary." The collapse is a property of THIS
+  exhibit, not a general truth. Orbits pull the two apart -- "Earth
+  and Jupiter and nothing else" is a sensible request a boundary
+  cannot express.
+- **Tony's ruling, 2026-08-30, on what the gallery is:** "The gallery
+  is meant to produce the orrery to allow the user to assemble their
+  own scene. The question is the gui shape." Free object selection is
+  therefore permanent, and any control that takes it away is wrong
+  however well it suits one exhibit.
+- **The agreed shape, four parts, no two doing the same job.**
+  (1) Cross markers -- one per shell at its own radius, already built,
+  carrying name, radius in km and AU, and citation. Tapping one moves
+  the camera. (2) The i panel -- descriptive material and the link
+  out, NOT a second copy of the marker's hover. (3) The drawer -- what
+  is in the scene, a free multi-select list, the orrery's object list
+  moved out of the picture. (4) The focus label -- one thing, where
+  the camera is, a readout rather than a chooser, and the handle that
+  opens the drawer.
+- **One job per control, and it settled two open questions at once.**
+  Tony, 2026-08-30: "let the row selection just identify the object
+  being targeted, with the box selecting the object and the go moving
+  the camera separately." Applied consistently, this also ruled that
+  focusing no longer draws a hidden shell -- the same conflation, one
+  gesture doing two jobs. Sending the camera to something not drawn
+  gives an empty frame at that scale, which is an honest answer; the
+  label says "(not drawn)" and dims its swatch.
+- **A framing rule was found wrong in the process, and it matters
+  beyond the study.** Framing carried a floor of `SUN_HALF_RANGE_AU`
+  (0.25 AU), inherited from `interactive.html`. Fifteen of the
+  eighteen shells are smaller than that, so framing on the core, the
+  radiative zone or the chromosphere produced the identical 0.25 AU
+  cube and adding any of them changed nothing on screen. The floor is
+  correct on the live page, where the frame only ever widens from a
+  fixed arrival view. It is wrong the moment the frame follows a
+  chosen object -- and it would have followed us into the real build.
+- **Evidence: `sun_gui_mockup.html`**, a throwaway study running real
+  Plotly with radii, colours, opacities, point counts and sources
+  generated from `objects_config.json` rather than retyped, reusing
+  the live page's sphere geometry, hover format and framing rules.
+  Tony ran a written Mode 5 protocol against it over two rounds; all
+  pass/fail checks passed on the second.
+- **Not tested, and recorded as not tested:** the four non-spherical
+  structures are drawn as spheres at their outer limit; no Pyodide,
+  assembler or served cache; nothing here touched `interactive.html`.
+- **Open defect, undiagnosed.** Tony, 2026-08-30: hover text latches
+  and the display seizes when a cross marker and then the i button are
+  used in sequence. A headless browser confirmed Plotly's gl3d hover
+  hit-tests by reading pixels back off the GPU on every mouse move
+  ("GPU stall due to ReadPixels" in the console) across 8,119 points,
+  and that is on the live page's code path too. The exact sequence
+  could NOT be reproduced -- synthetic mouse events do not reach
+  Plotly's 3D hover machinery. The applied fix (clear the tooltip and
+  set `hovermode: false` while the panel is open, restore on close) is
+  reasoned from mechanism, not witnessed. **Tony-action (do):**
+  confirm whether it cures the seize. If not, the next move is taking
+  the panel off the canvas rather than overlaying it.
+- **Tony-action (decide):** whether the drawer's eighteen rows want
+  indentation by the config's five groups. Tony 2026-08-30: "it's
+  okay. it follows the orrery pattern. indentation could work too" --
+  a maybe, left for judging against Earth's shells rather than one
+  body.
+- **Note:** RICE 4/3/85/3 -> 3.4 proposed, not confirmed.
+- **Ref:** L-260 (the portrait defect this answers); L-262 (the
+  framing helpers, and see the correction below); L-265 (what the i
+  panel will carry); L-237.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
