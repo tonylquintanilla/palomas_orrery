@@ -45,6 +45,10 @@ condition), built on af09de62.
 Module updated: September 4, 2026 with Anthropic's Claude Fable 5.1
 (L-280 DONE, retired as a screen; L-282 rewritten around subject doors;
 L-281 note; L-286 and L-287 opened), built on 5955a405.
+Module updated: September 4, 2026 with Anthropic's Claude Fable 5.1
+(L-282 door count two -> three, Earth System is a door; L-283 accents
+realigned; L-286 shape rule 16:9 / 9:16 phone only; L-287 gains the
+desktop/mobile collapse), built on d1b4d3ee.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -5095,15 +5099,25 @@ https://github.com/djyde/cusdis.
 - **DESIGN CLOSED 2026-09-04** (design session, zero code; the reasoning
   trail is HANDOFF 2026-09-04, "the lobby splits by subject"). Nine
   rounds, each simpler. What replaced proposal 1 below:
-  - **Doors are organized by SUBJECT, not by content type.** Two doors:
-    SOLAR SYSTEM and STARS. No Missions door, no Earth System door, no
+  - **Doors are organized by SUBJECT, not by content type.** THREE
+    doors: SOLAR SYSTEM, EARTH SYSTEM and STARS. No Missions door, no
     Interactive Wing door. Tony: "modern museums blend permanent with
     interactive." Each door carries its static cards and whatever live
     scenes exist for that subject, together.
-  - **Earth System is a SPECIAL EXHIBIT inside the Earth room**, under
-    Solar System. **Orbital Mechanics is a special exhibit in the Solar
-    System room.** A special exhibit is a room that hangs off its parent
-    like a side gallery; same chrome, same breadcrumb (L-286).
+    [CORRECTED 2026-09-04, same day, later in the session. The first
+    write said TWO doors, with Earth System as a special exhibit under
+    the Earth room. Tony's concern: its rooms (heating, heatdome, food,
+    ...) would sit at level 4 and get buried. The weight settled it:
+    climate is 76 of 148 cards, half the collection, and carries the
+    museum's only finished sentence. As a door its rooms land at level
+    2, `earth: heatdome`, two taps from the lobby. The four-level rule
+    is a navigation ceiling, not a taxonomy.]
+  - **The Earth room under Solar System keeps its own content** --
+    shells, the Moon, Artemis -- and carries ONE card that is a doorway
+    into the Earth System wing. A cross-link, not a copy.
+  - **Orbital Mechanics is a special exhibit in the Solar System
+    room.** A special exhibit is a room that hangs off its parent like
+    a side gallery; same chrome, same breadcrumb (L-286).
   - **Stars is its own door**, with exhibits for distance, magnitude,
     exoplanets and the galactic center. Exoplanet cards already exist
     and get their own room. The Stars door is BUILT NOW at final shape
@@ -5144,11 +5158,11 @@ https://github.com/djyde/cusdis.
     `other` is the STORAGE ROOM -- where a card lands when created,
     never shown to visitors, visible only in the editor; `featured` is
     a flag the editor sets and What's New reads.
-  - **Consequences for L-283:** the accent list there still names
-    Missions (steel grey) and an under-construction material for the
-    Interactive Wing. Neither is a door now. Tony-action (decide):
-    drop both accents, or keep the construction material for rooms the
-    braid has not reached. Not changed by this patch.
+  - **L-283 realigned 2026-09-04:** the Missions accent is dropped
+    (missions live inside their body's room and take its accent); the
+    Interactive Wing accent is dropped as a wing accent and KEPT as the
+    material for a room the braid has not reached. Earth System's
+    blue-green stands, since it is a door after all.
 
 - **The main page today** (palomasorrery.com, read 2026-09-03): a
   title, a Desktop/Mobile switch, a plot that loads immediately, a menu
@@ -5231,12 +5245,18 @@ gallery_config.json; gallery_metadata.json; skills/gallery-pipeline.
     warm off-white, dark type, a thin rule at the top. Separates "what
     you are looking at" from the thing itself; reads well in portrait
     where the panel covers the plot.
-  - One accent per wing, used sparingly -- a hairline on the door, the
+  - One accent per DOOR, used sparingly -- a hairline on the door, the
     placard rule, the header position, nowhere else. Warm gold Solar
-    System; blue-green Earth System; cool violet Stars and Exoplanets;
-    steel grey Missions; an unfinished material (raw copper or
-    hazard-tape ochre) for the Interactive Wing while under
-    construction -- the scaffolding announces itself without a banner.
+    System; blue-green Earth System; cool violet Stars. A room takes
+    its door's accent; a mission takes its body's room. An unfinished
+    material (raw copper or hazard-tape ochre) marks any ROOM the
+    braid has not reached yet -- the scaffolding announces itself
+    without a banner.
+    [REALIGNED 2026-09-04 to the three-door design in L-282. The
+    original read "one accent per wing" and listed steel grey for a
+    Missions door and the construction material for an Interactive
+    Wing door; neither is a door now. The construction material moves
+    from a door to a room state.]
   - The plots keep their own colors. Traces, shells and markers are
     data ink chosen for meaning; the same body looks the same in every
     room. If chrome color competes with a trace color, the chrome
@@ -5368,9 +5388,11 @@ dolly, not of Plotly).
   special exhibit instead. A mission's room hangs under the body it
   TARGETS (the phase rule, L-282), so New Horizons is under Pluto, not
   under Jupiter.
-- **Special exhibits are rooms too.** Earth System under Earth; Orbital
-  Mechanics under the Solar System overview. Same chrome, same
-  breadcrumb: `solar: Earth: Earth System`.
+- **Special exhibits are rooms too.** Orbital Mechanics under the Solar
+  System overview: `solar: Orbital Mechanics`. Same chrome, same
+  breadcrumb. [CORRECTED 2026-09-04: the first write also listed Earth
+  System under Earth. Earth System is a DOOR (L-282); its rooms are
+  `earth: heating`, `earth: heatdome`, and so on, at level 2.]
 - **Checked against real content** (gallery `e414af13`): three cards
   already blend a body with its shells (Earth-Moon with atmosphere and
   magnetosphere, twice; Sun photosphere and corona) and eleven already
@@ -5398,12 +5420,23 @@ dolly, not of Plotly).
     room's drawer as a body you can focus on. Bold means "can be the
     focus"; the date control appears only when something in the scene
     has a position to move.
-  - Room-shape rule (Tony's breadcrumb 2026-09-03): Earth System
-    exhibits need horizontal room; in portrait a wide room is SWEPT
-    sideways while placard and drawer stay put. A room declares its
-    shape (wide or square) in its config; the chrome never assumes the
-    plot fits the viewport; in wide rooms the plot's own horizontal
-    drag is given to the sweep.
+  - Room-shape rule (Tony's breadcrumb 2026-09-03; values and scope
+    settled 2026-09-04): Earth System exhibits need horizontal room;
+    in portrait a wide room is SWEPT sideways while placard and drawer
+    stay put. Each CARD declares its shape, one of two values, 16:9 or
+    9:16, and the shape governs the PHONE ONLY -- Tony: "the current
+    view on desktop works," so desktop is unchanged whatever the card
+    carries. On a phone: 16:9 sweeps sideways for a 2D plot and scales
+    to fit for a 3D scene (a 3D file stores a camera, not a picture, so
+    it re-frames without distortion); 9:16 shows as it does today.
+    Sweep was chosen over an Instagram-style card flip because the
+    exhibits that run out of room are time series, and sweeping along
+    a time axis is a reading gesture; flip suits separate complete
+    faces, which a continuous plot is not. The chrome never assumes
+    the plot fits the viewport; in a swept room the plot's own
+    horizontal drag is given to the sweep -- the one piece here that
+    intercepts Plotly's drag layer and needs Mode 5 on a real phone
+    before the rule is trusted.
   - The premade Solar System Explorer stays reachable under its own
     parameter and is EVENTUALLY REPLACED as the braid delivers
     interactive planets.
@@ -5431,20 +5464,44 @@ gallery_config.json; gallery_metadata.json.
   move, edit, add, delete, reorder, duplicate to another category, set
   subcategory, and rename category. Run from `tools/` with the VS Code
   Run button.
-- **What changes.** Three things, one migration:
+- **What changes.** Four things, one migration:
+  - **Desktop and mobile collapse to ONE card per exhibit with two
+    file slots** (landscape file, portrait file). Measured at gallery
+    `e414af13`: 148 cards, 105 distinct titles; 33 exhibits appear
+    twice, as a `_gallery.json` landscape card and a `_mobile.json`
+    portrait card with the same title and category. Those 33 pairs
+    become 33 cards with two slots; the rest become cards with one.
+    Where a card has one file the page shows it in both orientations;
+    where it has two the page picks by screen width, which
+    `index.html` already detects (line 1880 at `e414af13`). The
+    Desktop/Mobile toggle goes away (L-282 proposal 4). `mode` values
+    today: portrait 58, landscape 38, both 28, absent 24 (absent reads
+    as landscape, line 1912). [Added 2026-09-04, Tony's question "can
+    we collapse them?"]
   - Each card gets a ROOM PATH in place of category + subcategory:
-    `solar_system/earth`, `solar_system/earth/earth_system`,
-    `stars/exoplanets`. One-time scripted migration of
-    `gallery_metadata.json`, driven by an explicit table from the nine
-    raw categories to rooms (Tony-action (decide): approve the table
-    before it runs). `inner_planets` and `outer_planets` split by body;
-    `missions` split by TARGET body (the phase rule, L-282); `climate`
-    -> Earth System special exhibit; `stellar`, `exoplanets` -> Stars.
+    `solar_system/earth`, `earth_system/heatdome`, `stars/exoplanets`.
+    A one-shot script does the MECHANICAL half only: pairs the 33
+    duplicates, moves every card into the storage room, and writes the
+    three doors with their planet rooms, empty. **The category-to-room
+    mapping is then done IN THE EDITOR, not as a table in
+    conversation** -- Tony's ruling 2026-09-04, replacing the table
+    the first write proposed. Guidance the editor session will follow:
+    `inner_planets` and `outer_planets` go to their body's room;
+    `missions` to the TARGET body (the phase rule, L-282); `climate`
+    -> the Earth System DOOR, its nine subcategories (heating 31,
+    heatdome 18, comets 20, climate 15, narrative 7, general 5,
+    acidification 2, food 2, coral 1; 47 cards none) becoming level-2
+    rooms one-for-one or regrouped -- Tony-action (decide), "very
+    important"; `stellar`, `exoplanets` -> Stars.
   - `gallery_config.json` becomes the ROOM TREE: doors, rooms, exhibits,
-    each with full label, SHORT label (for the breadcrumb, L-286), color
-    and shape (wide or square). Lobby, breadcrumb and editor all read
-    the same tree, so a rename lands everywhere. `index.html` and
-    `json_converter.py` keep reading the same two files.
+    each with full label, SHORT label (for the breadcrumb, L-286) and
+    color; each CARD carries its shape, 16:9 or 9:16 (L-286, phone
+    only). Lobby, breadcrumb and editor all read the same tree, so a
+    rename lands everywhere. `index.html` and `json_converter.py` keep
+    reading the same two files; `interactive.html` will read the tree
+    for its breadcrumb. Grep all three for `category`, `subcategory`
+    and `mode` before changing the schema (Check All Parallel
+    Pipelines).
   - The editor's tree view grows to the depth of the room tree (four
     levels, L-286). "Change category" becomes "move to room"; "new
     category" becomes "new room" at any level. Move, edit, add, delete
@@ -5460,10 +5517,17 @@ gallery_config.json; gallery_metadata.json.
 - **Note:** RICE 3/3/85/2 -> 3.8 proposed, not confirmed. Build FIRST
   in the L-282 order -- rooms cannot be drawn until cards carry a room.
   gallery-pipeline skill fires; safe-file-editing for the migration.
-**Gap:** the category-to-room table (decide); the room-tree schema for
-`gallery_config.json`; the migration script; the editor's deeper tree
-and move-to-room; the storage-room and featured behaviours; a run on
-the real metadata with the result checked in the editor.
+**Gap:** the room-tree schema for `gallery_config.json` and the
+two-slot card schema for `gallery_metadata.json`; the migration script
+(pair, park in storage, write the empty tree); the editor's deeper
+tree, move-to-room, two file slots, shape and featured fields; the
+consumer sweep in `index.html`, `json_converter.py` and
+`interactive.html`; a run on the real metadata with the result checked
+in the editor; then Tony's remodel, moving cards out of storage.
+Editor layout as designed: room tree on the left (doors, rooms,
+exhibits, storage room at the bottom), one card per exhibit on the
+right; save writes both files and prints what changed; git is the
+backup.
 **Ref:** L-282, L-286; tools/gallery_editor.py; tools/json_converter.py;
 gallery/gallery_config.json; gallery/gallery_metadata.json; index.html;
 skills/gallery-pipeline.

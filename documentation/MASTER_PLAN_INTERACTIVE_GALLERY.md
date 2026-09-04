@@ -1,6 +1,6 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** v22 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
+**Status:** v23 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
 **the first feature-bearing exhibit is LIVE.** The Sun ships at
 `palomasorrery.com/interactive.html?exhibit=sun`, unlinked from the
 landing page, Mode 5 accepted 2026-08-29 (gallery `ac9a5c7b`). Its GUI
@@ -42,8 +42,9 @@ offline (138/138) AND live -- Layer 2 Steps 1-5 all passed (five dry-runs,
 --first-build, --nightly, resolver date-picker, fetch-cost note). L-118
 closed in the same session.
 **Next: the order is in Section 5a, dated 2026-09-03, and it is five
-steps: the Sun room's phone controls, the hall (L-280), Earth into the
-assembler, the transport (segment 2) built alongside Earth, then
+steps: the Sun room's phone controls, the lobby with its rooms and
+editor (L-282, L-286, L-287; the hall, L-280, was retired 2026-09-04),
+Earth into the assembler, the transport (segment 2) built alongside Earth, then
 Jupiter and Saturn.** The paragraph that stood here until v22 said the
 feature-rendering JS layer was "never written" and was the gate before
 Artifact 2. That layer is `feature_renderers.js`; it shipped with the
@@ -81,7 +82,9 @@ text here read "enabled with a known open issue", contradicting its own
 header forty lines below. L-151 (gallery-assembler skill) DONE
 2026-07-27; L-150 (multi-orbit binaries) still decided, not yet built.)
 **Date begun:** July 3, 2026
-**Last updated:** September 3, 2026
+**Last updated:** September 4, 2026 (v23: Section 5a step 2 realigned
+from the hall to the lobby, rooms and editor -- L-280 retired, L-282
+rewritten, L-286 and L-287 opened; with Anthropic's Claude Fable 5.1)
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
 Claude Opus 5, Claude Fable 5, Claude Sonnet 5, GPT
 
@@ -1192,9 +1195,13 @@ sharing the height, 40/60 (`6cfaf318`, `98cc99bd`). The 22 curated
 links (L-265) are served with zero placeholders. Mode 5 passed on
 desktop for every trial, including the hover-seize from the
 2026-08-30 study, which did not reproduce on the live page. The wing
-is designed and recorded in L-280 (door, hall, two rooms, What's New),
-L-281 (guest book), L-282 (lobby), L-283 (theme) and L-284 (retire the
-social export). Nothing of the wing is built.
+is designed and recorded in L-282 (the lobby: three subject doors,
+Solar System, Earth System, Stars, each blending static cards with
+live scenes), L-286 (rooms in four levels, breadcrumb), L-287 (the
+editor and room tree), L-281 (guest book), L-283 (theme) and L-284
+(retire the social export). L-280 (door, hall, two rooms) was retired
+2026-09-04: there is no separate interactive wing; live scenes are
+cards inside their subject's rooms. Nothing of it is built.
 
 **The phone pass ran today, and it is not a pass.** Tony, on a phone,
 2026-09-03, Mode 5. Three findings, in his order:
@@ -1230,11 +1237,17 @@ beside it and gate nothing here.
 1. **Sun room: phone controls.** Reset and zoom on a phone, one
    control set shared with the static gallery. Then the phone pass
    again. This is what stands between the first room and complete.
-2. **The hall (L-280), designed in conversation first, portrait
-   first.** The door card on the main page, the placard, the two
-   rooms, the What's New JSON and the rule that shipping patches
-   append to it. Until this exists the Sun room is a URL nobody can
-   find. The chrome from step 1 is what the hall copies.
+2. **The lobby, its rooms and the editor (L-282, L-286, L-287),
+   designed 2026-09-04, portrait first.** In build order: the editor
+   and room tree first (L-287), so cards can be placed and Tony can
+   remodel; then the lobby screen with three doors, What's New and the
+   guest book (L-282); then the four-level drill-down and the
+   short-name breadcrumb (L-286). Until this exists the Sun room is a
+   URL nobody can find. The chrome from step 1 is what the rooms copy.
+   [Until v23 this step read "The hall (L-280)": a door card, a hall
+   listing interactive rooms, two rooms. Retired 2026-09-04 -- doors
+   are by subject and blend static with live, so a hall had no job
+   left; its What's New and guest book moved into the lobby.]
 3. **Earth into the assembler.** The next body. Three items travel
    together: Earth's shells and belts drawn through
    `feature_renderers.js`, which also exercises the belt path Jupiter
@@ -1249,7 +1262,7 @@ beside it and gate nothing here.
 5. **Jupiter and Saturn.** Segment 1 sliced to the thirty measured
    numbers, then segment 4 locks Artifact 2, and the premade Solar
    System Explorer room starts being replaced by interactive planets
-   as L-280 rules.
+   as L-286 rules (carried there from L-280).
 
 Off the path and clustered: L-284 (retire the social export) with
 L-254 (dead sphere-shell builders), both orrery-side, worked the next
