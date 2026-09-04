@@ -259,7 +259,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*172 live items; 158 need attention (`!`); 171 RICE-scored; 107 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*171 live items; 157 need attention (`!`); 170 RICE-scored; 108 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -282,7 +282,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | OPEN | 6.0 | 2026-08-25 |
 | ! | L-269 | A report names its items, not how many there are | OPEN | 6.0 | 2026-08-30 |
 | ! | L-245 | Constants drift check compares against the last COMMIT, not the last RUN | OPEN | 5.4 | 2026-08-25 |
-| ! | L-265 | The i panel carries links, not curated prose | OPEN | 5.4 | 2026-09-03 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
 | ! | L-206 | Worksheet return filenames carry model and session | OPEN | 5.1 | 2026-08-18 |
 | ! | L-246 | S4714's semi-major axis was three values in three stores | OPEN | 5.1 | 2026-08-25 |
@@ -312,7 +311,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-239 | Seed the three Oort builders so a render is reproducible | OPEN | 3.6 | 2026-08-25 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-25 |
 | ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
-| ! | L-267 | The Sun exhibit GUI shape: drawer, focus label, marker navigation | OPEN | 3.4 | 2026-09-02 |
+| ! | L-267 | The Sun exhibit GUI shape: drawer, focus label, marker navigation | OPEN | 3.4 | 2026-09-03 |
 | ! | L-283 | Visual theme: dark wall, paper placards, record mode | OPEN | 3.2 | 2026-09-03 |
 | ! | L-256 | provenance-discipline 2.8, and the status pass it enables | OPEN | 3.1 | 2026-08-27 |
 | ! | L-254 | 76 dead sphere-shell builders, unmarked, across 12 modules | OPEN | 2.8 | 2026-09-02 |
@@ -533,6 +532,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-205 | The runner's verdict lines carry evidence | DONE | 5.4 | 2026-08-18 |
 |  | L-212 | maintenance_run names every file the run wrote | DONE | 5.4 | 2026-08-19 |
 |  | L-258 | Significant figures at rest, and the three changes it made | DONE | 5.4 | 2026-08-29 |
+|  | L-265 | The i panel carries links, not curated prose | DONE | 5.4 | 2026-09-03 |
 |  | L-003 | Protocol amendment candidates (for v3.29) | DONE | 5.4 | 2026-06-22 |
 |  | L-062 | README refresh -- fold in handoff + ledger developments | DONE | 5.1 | 2026-07-28 |
 |  | L-153 | Restore "Who Tony Is" framing into resident protocol (protocol) | DONE | 5.1 | 2026-07-21 |
@@ -4769,104 +4769,6 @@ added the suite); L-267 (which adds framing logic to the untested
 file); A Check That Cannot Fail Is Not Passing [CRITICAL] and A Report
 Names Its Items [QUALITY], resident protocol Part 3.
 
-#### [L-265] The i panel carries links, not curated prose
-<!-- L:265 status:OPEN upd:2026-09-03 section:A flag: rice:4/3/90/2 -->
-- **Curated 2026-09-02/03, patch delivered, not yet run.** Tony's
-  rule: a NASA page where one is specific to the feature (not a hub
-  page about the Sun or the atmosphere in general), else English
-  Wikipedia; one exception by his word -- the corona shells take
-  Wikipedia's Solar corona article because the only NASA corona page
-  is Space Place, written for children. Result: 5 NASA (Alfven
-  surface, Outer Oort Cloud x2, Lower Atmosphere, Upper Atmosphere,
-  plus both radiation belts via the `info_urls` array), 15 Wikipedia.
-  Every URL was returned live by a search or fetch on the day; none
-  recalled. `patch_L265_info_url_curated.py` (gallery repo) edits
-  `objects_config.json` only; the served `feature_configs.json` and
-  `coverage_index.json` are builder outputs and follow on the next
-  builder run. Claude first counted 20 and missed the two belts in
-  `info_urls`; the patch now asserts zero placeholders remain anywhere
-  in the file.
-- **Tony-action (do):** run the patch, run the cache builder, commit
-  and push both. Then Stage C (L-267) is unblocked.
-- **The panel needed content and the obvious content was already
-  written.** `solar_visualization_shells.py` holds eighteen `*_info`
-  strings, one per Sun shell, several thousand words in total. They
-  were extracted this session and shown working in the GUI study.
-- **They cannot ship as they are.** A fresh scanner run over
-  `solar_visualization_shells.py` returns 6 Tier-1 and 29 Tier-2, 35
-  findings. The eighteen info strings are the Tier-2 rows -- each
-  carries a `# Source:` comment, so they score 12, "cited, not
-  independently cross-checked." The `# Source:` line covers the
-  shell's RADIUS. It does not cover the temperatures, densities,
-  dates and distances in the paragraph beneath it.
-- **Tony's account of their origin, 2026-08-30:** "I originally wrote
-  these strings largely using Gemini information." That is the
-  recalled-data case exactly, which means the Tier-2 score is
-  generous rather than harsh.
-- **The gate is the second problem, and it is the harder one.**
-  Provenance binds at EXPORT from the orrery (provenance-discipline
-  2.9) because no checker exists in the gallery repo. Eighteen
-  paragraphs of unverified prose is a far larger export than
-  `objects_config.json`'s eighteen radii and their citations, and
-  once across the boundary nothing scores them again.
-- **Tony's ruling, 2026-08-30: replace the prose with links.**
-  Initially links alone; clarifying text may be added later. The
-  reasoning is the same as not embedding a lookup table from memory
-  -- the liability moves to NASA or Wikipedia, who maintain it.
-- **The scanner needs no change to accept this, which was checked
-  rather than assumed.** Running the scanner's own
-  `extract_numeric_claims` over four candidate strings: the current
-  termination-shock paragraph yields 2 claims (94 AU, 84 AU), a
-  link-only string yields 0, a link plus prose with no figures yields
-  0, and a link with one number left in yields 1. A link-only string
-  does not become an ACCEPTED claim; it stops being a claim. The rule
-  that makes this work is therefore strict -- **a link-only string
-  carries no figures**, and any later clarifying sentence that
-  includes a number puts the liability straight back.
-- **The objects come free; the structures do not.**
-  `celestial_objects.py` holds 193 objects, 184 of them with a
-  `mission_url`, mostly NASA and Wikipedia, already keyed per object
-  and consumed by the orrery's own info tooltips
-  (`palomas_orrery.py` line 9415). The eighteen shells have no
-  equivalent -- `data/objects_config.json` contained the string
-  "http" zero times before this session.
-- **Field added 2026-08-30** by `patch_L265_info_url_placeholder.py`
-  (gallery repo): `info_url` on each of the 20 named features, plus
-  an `info_urls` array on the one grouped block, seeded with
-  `https://www.nasa.gov/`. 22 links, all identical on purpose -- a
-  curated link is never exactly the front page, so counting the
-  unreplaced ones is one search. A plausible per-shell placeholder
-  would have been indistinguishable from a real choice, which is
-  cite-to-clear wearing a URL.
-- **Tony-action (do):** replace all 22 placeholders with curated
-  links. This is the curatorial step and it is his: "That's my
-  curatorial part, selecting the link. I have no expertise for
-  creating new astronomical text."
-- **Tony-action (decide):** whether the eighteen `*_info` strings
-  stay in the orrery's own GUI after the gallery stops using them.
-  They are Tier-2 there today and nothing in this ruling removes
-  them from the desktop tooltips.
-- **Gap: not every feature can hold a link.** Tony's ruling of
-  2026-08-30 is that each distinct feature gets its own link even
-  where features are currently grouped. The patch satisfies that for
-  Earth's two belts with a parallel `info_urls` array. Sixteen other
-  sub-features across Jupiter and Saturn cannot take one at all,
-  because their identity is not in the config. Carried as **L-268**
-  rather than as a gap on this row -- it is a data-shape change to a
-  live renderer, not part of dropping in placeholders.
-- **Gap: two of the eighteen carry live constants.** `outer_corona_info`
-  and `alfven_surface_info` interpolate `ALFVEN_SURFACE_RADII` and
-  friends from `constants_new.py` at render time. The study's hand
-  copy froze those to the literal text "(computed)" -- a shadow
-  constant forming in real time, and the clearest single argument for
-  the cross-repo transport. Moot if the prose is replaced outright;
-  live if any of it is kept.
-- **Note:** RICE 4/3/90/2 -> 5.4 proposed, not confirmed.
-- **Ref:** L-266 (the check this creates the need for); L-267 (the
-  panel that consumes it); provenance-discipline 2.9 (the export
-  gate); the cross-repo transport, segment 2 of
-  `MASTER_PLAN_INTERACTIVE_GALLERY.md`.
-
 #### [L-266] Nothing checks that a cited link still resolves
 <!-- L:266 status:OPEN upd:2026-08-30 section:A flag: rice:5/4/90/2 -->
 - **Raised by Tony, 2026-08-30**, on being told that link rot would be
@@ -4917,8 +4819,8 @@ Names Its Items [QUALITY], resident protocol Part 3.
   nothing enforcing it.
 
 #### [L-267] The Sun exhibit GUI shape: drawer, focus label, marker navigation
-<!-- L:267 status:OPEN upd:2026-09-02 section:A flag: rice:4/3/85/3 -->
-**AMENDED 2026-09-02 -- Stage B shipped, after a hang.**
+<!-- L:267 status:OPEN upd:2026-09-03 section:A flag: rice:4/3/85/3 -->
+**AMENDED 2026-09-03 -- Stage C shipped; the phone pass is what remains.**
 
 STAGE A shipped 2026-08-31 at gallery `2ed12564`: the drawer replaced the
 legend and the portrait defect was fixed.
@@ -4943,12 +4845,47 @@ and fast including the outer corona and the Alfven surface with nothing
 freezing; the focus label and camera follow the marker clicked; the
 drawer checkboxes draw and hide without moving the camera.
 
-STAGE C, the i panel, is NOT started and is blocked on L-265. All twenty
-`info_url` values in the served `feature_configs.json` are the
-placeholder `https://www.nasa.gov/`, so wiring the panel now would give
-every shell the same dead link. Tony's stated preference 2026-09-02 is to
-see the info icon working BEFORE the phone and tablet passes, which makes
-L-265's curated links the thing standing between here and mobile.
+STAGE C shipped 2026-09-03 across three gallery patches, once L-265's
+links were in the served file. `patch_L267_4` (gallery `0edf4bf4`): the
+i panel follows the focus the way the drawer handle does -- the focused
+shell's swatch, name and one link out, over the exhibit description; no
+radius, no citation, because the cross marker's hover already carries
+those and the panel is not a second copy of it. The link reaches the
+page on the trace: `renderShellSet` stamps it in Plotly's `meta`, and
+`buildSunDrawer` reads it there, so there is one source for "which link
+belongs to this group" rather than a second copy of the label formula.
+`patch_L267_5` (`42a906f6`): the i button had NEVER been wired on the
+Sun exhibit -- its listener lived inside `initControls()`, which the Sun
+path does not call, so from Stage A to Tony's Mode 5 of 2026-09-03 the
+button was decoration. Trial 1 found it. The wiring now lives in its own
+function that both launch paths call. `patch_L267_6` (`6cfaf318`) and
+Tony's hand edit (`98cc99bd`): the panel and the drawer SHARE the height
+(Tony's option C) -- while the drawer is open the panel stops at its top
+edge, measured, so no row, GO or All / none is covered; drawer 40%,
+panel 60%, set by hand.
+
+MODE 5 PASSED, Tony, 2026-09-03, on the live page, desktop: the panel
+opens and closes; shows Core with its Wikipedia link, the link opens in a
+new tab and the page still responds; switches to the Alfven surface and
+its NASA link while open; keeps the name and link when the focused shell
+is unticked. Panel open, markers hovered and the scene rotated: NO SEIZE.
+That answers the study's open defect from 2026-08-30 -- the seize was
+most likely the L-278 click re-entry, and the study's `hovermode: false`
+workaround was deliberately NOT ported (Stage B found that exact relayout
+throws inside Plotly and takes `viewInitial` with it).
+
+Two lessons, both already in the protocol and both missed here. The
+Stage C test proved the panel's CONTENTS were right and never asked
+whether the panel could OPEN -- Verify Execution, Not Appearance, on the
+page's own chrome. And "nothing focused" is a state the live page never
+reaches, because arrival focuses the outermost shell drawn; the "Focus a
+shell" text is correct and unreachable. Not a defect; noted so nobody
+hunts for it.
+
+**Tony-action (do):** the portrait pass on a phone -- Stages A, B and C
+are all unverified on a small screen, and the 40/60 split was chosen on a
+desktop. Carried from L-260.
+
 
 - **Origin: L-260's portrait defect, which turned out to be a design
   question rather than a layout fix.** The legend covers the picture
@@ -10337,6 +10274,122 @@ trusting a handoff over the render, one layer up.
 store; Tony re-uploads it after the push.
 **Ref:** PROJECT_INSTRUCTIONS.md Part 1 Mode 7 (v3.53);
 documentation/RELAY_RESPONSE_L191_survey_fable_20260821.md; L-191.
+
+#### [L-265] The i panel carries links, not curated prose
+<!-- L:265 status:DONE upd:2026-09-03 section:C flag: rice:4/3/90/2 -->
+**CLOSED 2026-09-03.** The 22 curated links ran into `objects_config.json`
+via `patch_L265_info_url_curated.py` and were carried into the served
+`feature_configs.json` by the cache builder (gallery `197fd963`; 20
+`info_url` plus the two-entry `info_urls` array, zero placeholders,
+verified against the served file at session start). The Sun exhibit's i
+panel shows them from gallery `0edf4bf4` onward (L-267 Stage C): the
+focused shell's name and one "Read more at NASA" or "Read more at
+Wikipedia" link, read off the trace the renderer stamps it on. All
+eighteen Sun groups carry exactly one link each, checked by feeding the
+served config through the patched renderer. Mode 5 passed on the live
+page 2026-09-03.
+
+One item this row carried is NOT closed by this and is named so it does
+not vanish with the row: **Tony-action (decide):** whether the eighteen
+`*_info` strings stay in the orrery's own desktop GUI. They are Tier-2
+there today and nothing here touches them.
+
+- **Curated 2026-09-02/03, patch delivered, not yet run.** Tony's
+  rule: a NASA page where one is specific to the feature (not a hub
+  page about the Sun or the atmosphere in general), else English
+  Wikipedia; one exception by his word -- the corona shells take
+  Wikipedia's Solar corona article because the only NASA corona page
+  is Space Place, written for children. Result: 5 NASA (Alfven
+  surface, Outer Oort Cloud x2, Lower Atmosphere, Upper Atmosphere,
+  plus both radiation belts via the `info_urls` array), 15 Wikipedia.
+  Every URL was returned live by a search or fetch on the day; none
+  recalled. `patch_L265_info_url_curated.py` (gallery repo) edits
+  `objects_config.json` only; the served `feature_configs.json` and
+  `coverage_index.json` are builder outputs and follow on the next
+  builder run. Claude first counted 20 and missed the two belts in
+  `info_urls`; the patch now asserts zero placeholders remain anywhere
+  in the file.
+- **Tony-action (do):** run the patch, run the cache builder, commit
+  and push both. Then Stage C (L-267) is unblocked.
+- **The panel needed content and the obvious content was already
+  written.** `solar_visualization_shells.py` holds eighteen `*_info`
+  strings, one per Sun shell, several thousand words in total. They
+  were extracted this session and shown working in the GUI study.
+- **They cannot ship as they are.** A fresh scanner run over
+  `solar_visualization_shells.py` returns 6 Tier-1 and 29 Tier-2, 35
+  findings. The eighteen info strings are the Tier-2 rows -- each
+  carries a `# Source:` comment, so they score 12, "cited, not
+  independently cross-checked." The `# Source:` line covers the
+  shell's RADIUS. It does not cover the temperatures, densities,
+  dates and distances in the paragraph beneath it.
+- **Tony's account of their origin, 2026-08-30:** "I originally wrote
+  these strings largely using Gemini information." That is the
+  recalled-data case exactly, which means the Tier-2 score is
+  generous rather than harsh.
+- **The gate is the second problem, and it is the harder one.**
+  Provenance binds at EXPORT from the orrery (provenance-discipline
+  2.9) because no checker exists in the gallery repo. Eighteen
+  paragraphs of unverified prose is a far larger export than
+  `objects_config.json`'s eighteen radii and their citations, and
+  once across the boundary nothing scores them again.
+- **Tony's ruling, 2026-08-30: replace the prose with links.**
+  Initially links alone; clarifying text may be added later. The
+  reasoning is the same as not embedding a lookup table from memory
+  -- the liability moves to NASA or Wikipedia, who maintain it.
+- **The scanner needs no change to accept this, which was checked
+  rather than assumed.** Running the scanner's own
+  `extract_numeric_claims` over four candidate strings: the current
+  termination-shock paragraph yields 2 claims (94 AU, 84 AU), a
+  link-only string yields 0, a link plus prose with no figures yields
+  0, and a link with one number left in yields 1. A link-only string
+  does not become an ACCEPTED claim; it stops being a claim. The rule
+  that makes this work is therefore strict -- **a link-only string
+  carries no figures**, and any later clarifying sentence that
+  includes a number puts the liability straight back.
+- **The objects come free; the structures do not.**
+  `celestial_objects.py` holds 193 objects, 184 of them with a
+  `mission_url`, mostly NASA and Wikipedia, already keyed per object
+  and consumed by the orrery's own info tooltips
+  (`palomas_orrery.py` line 9415). The eighteen shells have no
+  equivalent -- `data/objects_config.json` contained the string
+  "http" zero times before this session.
+- **Field added 2026-08-30** by `patch_L265_info_url_placeholder.py`
+  (gallery repo): `info_url` on each of the 20 named features, plus
+  an `info_urls` array on the one grouped block, seeded with
+  `https://www.nasa.gov/`. 22 links, all identical on purpose -- a
+  curated link is never exactly the front page, so counting the
+  unreplaced ones is one search. A plausible per-shell placeholder
+  would have been indistinguishable from a real choice, which is
+  cite-to-clear wearing a URL.
+- **Tony-action (do):** replace all 22 placeholders with curated
+  links. This is the curatorial step and it is his: "That's my
+  curatorial part, selecting the link. I have no expertise for
+  creating new astronomical text."
+- **Tony-action (decide):** whether the eighteen `*_info` strings
+  stay in the orrery's own GUI after the gallery stops using them.
+  They are Tier-2 there today and nothing in this ruling removes
+  them from the desktop tooltips.
+- **Gap: not every feature can hold a link.** Tony's ruling of
+  2026-08-30 is that each distinct feature gets its own link even
+  where features are currently grouped. The patch satisfies that for
+  Earth's two belts with a parallel `info_urls` array. Sixteen other
+  sub-features across Jupiter and Saturn cannot take one at all,
+  because their identity is not in the config. Carried as **L-268**
+  rather than as a gap on this row -- it is a data-shape change to a
+  live renderer, not part of dropping in placeholders.
+- **Gap: two of the eighteen carry live constants.** `outer_corona_info`
+  and `alfven_surface_info` interpolate `ALFVEN_SURFACE_RADII` and
+  friends from `constants_new.py` at render time. The study's hand
+  copy froze those to the literal text "(computed)" -- a shadow
+  constant forming in real time, and the clearest single argument for
+  the cross-repo transport. Moot if the prose is replaced outright;
+  live if any of it is kept.
+- **Note:** RICE 4/3/90/2 -> 5.4 proposed, not confirmed.
+- **Ref:** L-266 (the check this creates the need for); L-267 (the
+  panel that consumes it); provenance-discipline 2.9 (the export
+  gate); the cross-repo transport, segment 2 of
+  `MASTER_PLAN_INTERACTIVE_GALLERY.md`.
+
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

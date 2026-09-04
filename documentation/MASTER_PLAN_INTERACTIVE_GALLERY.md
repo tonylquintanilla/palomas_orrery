@@ -1,9 +1,13 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** v20 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
+**Status:** v21 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
 **the first feature-bearing exhibit is LIVE.** The Sun ships at
 `palomasorrery.com/interactive.html?exhibit=sun`, unlinked from the
-landing page, Mode 5 accepted 2026-08-29 (gallery `ac9a5c7b`).
+landing page, Mode 5 accepted 2026-08-29 (gallery `ac9a5c7b`). Its GUI
+(L-267) is complete on desktop as of 2026-09-03 (gallery `98cc99bd`): a
+drawer replaces the legend, cross markers and rows move the camera, and
+the i panel follows the focus and carries each shell's curated link
+(L-265, DONE). The phone pass is the one thing carried.
 **The braid, ruled 2026-08-22:** provenance stops being a GATE and
 becomes a per-artifact slice, and the rendering layer is worked first.
 The five segments of Section 5a do NOT move; the order they are worked
@@ -75,7 +79,7 @@ text here read "enabled with a known open issue", contradicting its own
 header forty lines below. L-151 (gallery-assembler skill) DONE
 2026-07-27; L-150 (multi-orbit binaries) still decided, not yet built.)
 **Date begun:** July 3, 2026
-**Last updated:** August 23, 2026
+**Last updated:** September 3, 2026
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
 Claude Opus 5, Claude Fable 5, Claude Sonnet 5, GPT
 
