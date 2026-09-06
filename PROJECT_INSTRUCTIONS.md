@@ -480,6 +480,14 @@ gallery-cache-builder        1.4  Nightly builder, atomic swap, coverage_index,
                                   serving cache, objects_config,
                                   dry-run/first-build/nightly, builder testing
                                   layers
+interactive-exhibit          1.0  adding or changing an exhibit in
+                                  interactive.html; any edit to the Sun's
+                                  chrome (drawer, nav cluster, frame zoom,
+                                  i-panel, HUD, consent, back link); "Earth
+                                  interactive", "?exhibit=", "new room in
+                                  interactive.html"; deciding what numbers an
+                                  exhibit may render and where they come from;
+                                  carding an exhibit in Studio
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]

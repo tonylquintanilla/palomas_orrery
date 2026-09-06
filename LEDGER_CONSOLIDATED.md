@@ -57,6 +57,11 @@ Module updated: September 5, 2026 with Anthropic's Claude Fable 5.1
 (away-session: L-282 rulings and lobby build, L-286 sweep for 2D,
 L-289 designed and built, L-287 note; all render-gated), built on
 9652a43d plus patch_L287_6.
+Module updated: September 6, 2026 with Anthropic's Claude Fable 5.1
+(Mode 5 rounds of 2026-09-05/06: L-282 lobby passed, back link fixed,
+tree order; L-286 sweep confirmed on the phone, sweep_report tool;
+L-289 first build failed on the phone, rebuilt as the frame HUD and
+fixed again; L-290 opened), built on a57e86b8.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -274,7 +279,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*172 live items; 158 need attention (`!`); 171 RICE-scored; 112 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*173 live items; 159 need attention (`!`); 172 RICE-scored; 112 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -287,6 +292,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-262 | The framing smoke test has never run against the page | OPEN | 11.4 | 2026-08-30 |
 | ! | L-271 | Patch scripts wrote backups nothing ever removed | OPEN | 11.4 | 2026-08-31 |
 | ! | L-237 | Artifact 1's golden record is stale and needs re-cutting | OPEN | 10.8 | 2026-08-25 |
+| ! | L-290 | Relay anchors must name the protocol and skills, not the code SHA alone | OPEN | 10.8 | 2026-09-06 |
 | ! | L-266 | Nothing checks that a cited link still resolves | OPEN | 9.0 | 2026-08-30 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-226 | safe-file-editing 1.8 -- encoding gate covers prose; corrections do not travel | OPEN | 8.1 | 2026-08-23 |
@@ -301,7 +307,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-246 | S4714's semi-major axis was three values in three stores | OPEN | 5.1 | 2026-08-25 |
 | ! | L-193 | Qualified verdicts -- the token is not the whole answer | OPEN | 4.8 | 2026-08-15 |
 | ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
-| ! | L-289 | Sun exhibit on the phone: the 3D axis labels are not visible | OPEN | 4.8 | 2026-09-05 |
+| ! | L-289 | Sun exhibit on the phone: the 3D axis labels are not visible | OPEN | 4.8 | 2026-09-06 |
 | ! | L-268 | Sweep: features collapsed out of their own identity | OPEN | 4.5 | 2026-08-30 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-08-25 |
@@ -318,14 +324,14 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-232 | The gallery's served constants carry sources that nothing checks | OPEN | 3.8 | 2026-08-24 |
 | ! | L-227 | Streamer band hover rendered as one 378-character line | OPEN | 3.8 | 2026-08-23 |
 | ! | L-241 | Hills torus hover states the cloud bounds, not the drawn ring | OPEN | 3.8 | 2026-08-25 |
-| ! | L-282 | The lobby: the main page as an entrance hall | OPEN | 3.8 | 2026-09-05 |
+| ! | L-282 | The lobby: the main page as an entrance hall | OPEN | 3.8 | 2026-09-06 |
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
 | ! | L-210 | Pilot citation findings -- four rows in constants_new.py | OPEN | 3.6 | 2026-08-21 |
 | ! | L-215 | Ledger cleanup by topic, not by age | OPEN | 3.6 | 2026-08-19 |
 | ! | L-239 | Seed the three Oort builders so a render is reproducible | OPEN | 3.6 | 2026-08-25 |
 | ! | L-285 | index.html adopts the shared navigation cluster; the fake-wheel dolly retires | OPEN | 3.6 | 2026-09-04 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-25 |
-| ! | L-286 | Rooms in four levels: drill-down, short-name breadcrumb, Home stays a scene reset | OPEN | 3.5 | 2026-09-04 |
+| ! | L-286 | Rooms in four levels: drill-down, short-name breadcrumb, Home stays a scene reset | OPEN | 3.5 | 2026-09-06 |
 | ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
 | ! | L-283 | Visual theme: dark wall, paper placards, record mode | OPEN | 3.2 | 2026-09-03 |
 | ! | L-256 | provenance-discipline 2.8, and the status pass it enables | OPEN | 3.1 | 2026-08-27 |
@@ -5105,7 +5111,7 @@ are read before they appear.
 https://github.com/djyde/cusdis.
 
 #### [L-282] The lobby: the main page as an entrance hall
-<!-- L:282 status:OPEN upd:2026-09-05 section:A flag: rice:5/4/75/4 -->
+<!-- L:282 status:OPEN upd:2026-09-06 section:A flag: rice:5/4/75/4 -->
 - **DESIGN CLOSED 2026-09-04** (design session, zero code; the reasoning
   trail is HANDOFF 2026-09-04, "the lobby splits by subject"). Nine
   rounds, each simpler. What replaced proposal 1 below:
@@ -5277,6 +5283,26 @@ existing cards; then the collections room. Mode 5 on phone first.
 - **Tony-action (decide), after Mode 5:** whether the hamburger stays
   once L-286 lands, and whether the museum sentence gets an editor
   field or is set in the JSON by hand.
+- **Mode 5, 2026-09-05, phone, live at gallery `66087696`:** the lobby
+  renders; doors, a door tap, a Featured card and Home all work. Three
+  findings, one cause (the shim grouped by first appearance in the
+  metadata file, not by the tree): Featured put the Sun sixth where
+  the editor shows it first; rooms behind a door were out of order;
+  cards directly under a door sat under an invented "Other" heading.
+  Tony's ruling: the TREE is the rule -- built under L-286
+  (`patch_L286_1_tree_order.py`, live at `fc8d9fb3`); Featured follows
+  the same walk, so the editor's tree and in-room order ARE the lobby's
+  order and no new field was added.
+- **Back paths, 2026-09-05/06:** Safari's own back control landed on
+  the Sun at Outer Corona from the lobby, whatever page Tony started
+  on. Cause was ours: the Sun page's "Gallery" button was a plain link,
+  so every visit left lobby -> Sun -> lobby in the history and the
+  browser's back walked into the Sun. `patch_L282_5_back_link.py`
+  (live at `fc8d9fb3`): when the page behind is our own gallery the
+  button calls history.back(); opened from a shared link it stays a
+  link. Tony, desktop and phone 2026-09-06: works.
+- **Tony-action (do):** the old-card cleanup in the editor (remove or
+  fix), separate from this item.
 **Ref:** L-286 (rooms, drill-down, breadcrumb), L-287 (editor and room
 tree), L-283, L-281, L-266; HANDOFF 2026-09-04 (design session: the
 lobby splits by subject); index.html; interactive.html;
@@ -5425,7 +5451,7 @@ possible" line, which the Sun room's Home shows is a limit of the
 dolly, not of Plotly).
 
 #### [L-286] Rooms in four levels: drill-down, short-name breadcrumb, Home stays a scene reset
-<!-- L:286 status:OPEN upd:2026-09-04 section:A flag: rice:5/4/70/4 -->
+<!-- L:286 status:OPEN upd:2026-09-06 section:A flag: rice:5/4/70/4 -->
 - **Opened 2026-09-04** from the lobby design session (HANDOFF
   2026-09-04, "the lobby splits by subject"; L-282 carries the doors,
   this item carries what is inside them). Nothing built.
@@ -5512,6 +5538,25 @@ dolly, not of Plotly).
   unchanged. Warming Stripes is stored 1200x1400 so it sweeps only to
   689 px -- a Studio export question if it should be wider. The drag
   handoff is the piece this entry already said needs a real phone.
+- **Sweep CONFIRMED on the phone, 2026-09-05** (Tony, Paleoclimate
+  Cenozoic in portrait: "sweeps correctly"). The drag handoff this
+  entry said needed a real phone has had one. Exceptions exist; Tony
+  is checking them systematically. `tools/sweep_report.py` (built
+  2026-09-06, not yet committed) applies sweepWanted()'s own rule to
+  every card and prints them BY CLASS, names first: sweeps at the
+  file's aspect; sweeps at 16:9 (no stored size); sweeps a little
+  (stored taller than wide, e.g. Warming Stripes 1200x1400 -> 689 px);
+  Mapbox (map has its own drag); fits without scrolling; 3D; portrait
+  file; shape 9:16. A card whose file cannot be read exits non-zero.
+  One card per class on the phone should find the exceptions.
+- **Tree order BUILT 2026-09-05, live at `fc8d9fb3`**
+  (`patch_L286_1_tree_order.py`): ROOM_ORDER from a pre-order walk of
+  `gallery_config.json`; the menu and Featured sort by it; a door
+  precedes its rooms so loose cards list at the door with no heading.
+  Verified headless: 105 cards, Sun first in Featured, zero "Other".
+  Tony's Mode 5 on this is pending.
+- **Tony-action (do):** save `tools/sweep_report.py`, run it, and
+  check one card per class on the phone; report the exception classes.
 **Gap:** the room-path reader in `index.html` (filter a grid to a room);
 the breadcrumb component shared by both pages; the special-exhibit
 placement; the room-shape field; Mode 5 on phone at all four levels.
@@ -5546,7 +5591,7 @@ card in the grid), tools/gallery_studio.py, tools/json_converter.py,
 interactive.html.
 
 #### [L-289] Sun exhibit on the phone: the 3D axis labels are not visible
-<!-- L:289 status:OPEN upd:2026-09-05 section:A flag: rice:3/2/80/1 -->
+<!-- L:289 status:OPEN upd:2026-09-06 section:A flag: rice:3/2/80/1 -->
 - **Opened 2026-09-05** from Tony's phone pass on the live Sun exhibit,
   2026-09-04: on opening the scene no axis label is visible; turning
   the grid brings the x and y labels partly into view; the z label is
@@ -5599,9 +5644,95 @@ interactive.html.
 - **Tony-action (decide), after Mode 5:** tick density (1, 2 or 3),
   label size (one constant, 9 px today), and whether the Explorer
   room should get the same edges.
-**Gap:** Mode 5 on the phone; Tony's density and size rulings; then
-DONE.
-**Ref:** L-267 (Sun exhibit GUI), interactive.html, HANDOFF 2026-09-05.
+- **Mode 5, 2026-09-05, phone, live at `66087696`: the twelve-edge
+  build FAILED.** Tony, with screenshots: the labels were scattered
+  and the every-second pattern hard to read; labels on edges beside
+  the camera floated on nothing; on zoom-out the labels vanished;
+  "this may be worse than the plotly labels." Cause, one choice: the
+  labels were points IN the scene, so they behaved as scenery --
+  shrank with distance, were clipped at the box boundary, projected
+  from behind the camera. Not fixable by thinning or size.
+- **Redesign 2026-09-05 (Tony, by conversation):** the tick numbers
+  repeat one value sixty times, so ONE chip states the uniform
+  spacing ("grid 0.2 AU"); direction is a TRIAD in the corner that
+  turns with the camera (Tony: "can the triad rotate in alignment?"
+  -- yes, it is computed from the camera); the First Point of Aries
+  glyph at the x tip with a note that this is the J2000 ECLIPTIC
+  frame, not a graph frame; grid lines coloured per axis to match.
+  Aspect ratio read from the layout, not assumed 1:1:1 (Tony: "ticks
+  are not always isometric"). Frame VERIFIED before the note was
+  written: `feature_renderers.js` rotates IAU poles into the J2000
+  ecliptic by the mean obliquity; belts are drawn in the ecliptic;
+  the served index stores the Sun as frame-origin. Source for the
+  note: NASA/JPL NAIF frames tutorial (J2000 x axis = vernal equinox).
+  The assembler does not pass through the provenance scanner (Tony),
+  so the citation is hand-carried in the note itself.
+- **Built 2026-09-05, live at gallery `fc8d9fb3`:**
+  `patch_L289_3_frame_hud.py` -- edge labels OUT; sunHud* (triad SVG,
+  chip, note) IN as page chrome that only reads the camera and never
+  calls Plotly (the L-278 hazard does not apply); Plotly tick numbers
+  back on; titles stay blank. Triad orientation CONFIRMED by test:
+  markers at +x, +y, +z in the scene matched the arrows.
+- **Mode 5, 2026-09-06, desktop and phone, at `fc8d9fb3`:** triad
+  moves with the grid (desktop); chip works; back link works. Four
+  defects: (1) the frame note was open on arrival and its X did not
+  close it -- `hidden` lost a CSS specificity contest to the rule that
+  shows Sun chrome; (2) grid colours read as a second key against the
+  triad -- back to white; (3) arrival grid 0.2 AU vs chip 0.1 AU --
+  the arrival layout set no dtick, Plotly and the page chose
+  differently; +/- and Home agree (Home sets dtick); mouse wheel is
+  camera zoom by design; (4) on the phone the triad did not follow a
+  touch rotation -- Plotly fires no camera events during touch.
+- **Built 2026-09-06, delivered NOT run:** `patch_L289_4_hud_fixes.py`
+  (guards on `fc8d9fb3`). Note behaves like every other hover: mouse
+  opens on rest over the glyph or the note, closes on leave; touch
+  taps to toggle, tap elsewhere closes; X removed. Grid white.
+  Arrival dtick set from the same rule Home uses. Triad reads the
+  gl3d scene's live camera (getCamera()) once per animation frame and
+  redraws only on change -- tested with Plotly's events removed: 23
+  redraws in a drag, 0 at rest.
+- **Tony-action (do):** run `patch_L289_4_hud_fixes.py`, push; Mode 5
+  on desktop and phone: note hidden on arrival, hover/tap, arrival
+  grid = chip, triad follows a touch rotation.
+- **Tony-action (decide), after Mode 5:** triad size and colours;
+  whether the Explorer room gets the same HUD.
+**Gap:** Mode 5 on `patch_L289_4`; Tony's rulings above; then DONE.
+**Ref:** L-267 (Sun exhibit GUI), L-278 (why the HUD never calls
+Plotly), interactive.html, feature_renderers.js (poleBasis),
+HANDOFF 2026-09-05 (away session), HANDOFF 2026-09-06.
+
+#### [L-290] Relay anchors must name the protocol and skills, not the code SHA alone
+<!-- L:290 status:OPEN upd:2026-09-06 section:A flag: rice:4/3/90/1 -->
+- **Opened 2026-09-06** from a parallel Claude Sonnet session Tony ran
+  against orrery `a57e86b8` (it proposed the handle L-288, already
+  taken; placed here). The Anchor Requirement pins the CODE repo's
+  SHA and URL on every outbound document and says nothing about the
+  protocol or the skills that govern HOW the work is done. A partner
+  without resident access -- GPT, Gemini, or a Claude session outside
+  this account and Project -- reads the code with none of that
+  context unless the document names PROJECT_INSTRUCTIONS.md and the
+  task-relevant SKILL.md files as fetch targets too. L-191's Fable
+  relay had to fetch source itself despite being a Claude model:
+  resident loading is tied to the account and Project, not the model.
+- **Method Belongs to the Skill:** the answer is the same next month
+  for a different task. Requirement goes resident (Mode 7, "Documents
+  as handoffs"); the wording template goes in
+  ledger-and-session-records (Anchor Requirement section), with two
+  forms: fetch-capable partners are told which files to fetch at the
+  pinned SHA; Gemini (snapshot-only, L-276) gets the relevant excerpt
+  pasted inline with the limitation stated.
+- **Drafts** of both amendments, as the Sonnet session wrote them, are
+  in `documentation/L290_relay_anchor_drafts.md` (delivered
+  2026-09-06). They are proposals until Tony rules. A skill bump
+  (ledger-and-session-records 1.9 -> 1.10) follows the four-step
+  binding rule and is verified by the NEXT session's load, per Stale
+  Skill = Stop.
+- **Tony-action (decide):** accept, amend or decline the two drafts.
+**Gap:** Tony's ruling; then the protocol edit, the skill bump, the
+reinstall, and the manifest regeneration, in one push.
+**Ref:** L-276 (relay partners can read the repo; the Gemini snapshot
+note), L-191 (the Fable relay), Mode 7 Key Principles,
+skills/ledger-and-session-records/SKILL.md.
 
 #### [L-278] A relayout from inside a Plotly event handler re-enters the update machinery
 <!-- L:278 status:OPEN upd:2026-09-02 section:A flag: rice:3/3/90/1 -->

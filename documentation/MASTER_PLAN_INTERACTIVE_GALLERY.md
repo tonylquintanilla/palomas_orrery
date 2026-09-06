@@ -1,6 +1,6 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** v24 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
+**Status:** v25 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
 **the first feature-bearing exhibit is LIVE.** The Sun ships at
 `palomasorrery.com/interactive.html?exhibit=sun`, unlinked from the
 landing page, Mode 5 accepted 2026-08-29 (gallery `ac9a5c7b`). Its GUI
@@ -82,12 +82,15 @@ text here read "enabled with a known open issue", contradicting its own
 header forty lines below. L-151 (gallery-assembler skill) DONE
 2026-07-27; L-150 (multi-orbit binaries) still decided, not yet built.)
 **Date begun:** July 3, 2026
-**Last updated:** September 5, 2026 (v24: Section 5a gains the
-2026-09-05 subsection -- L-287 live; the lobby, the 2D sweep and the
-twelve-edge labels built and render-gated; the order unchanged; with
-Anthropic's Claude Fable 5.1. v23, September 4, 2026: step 2 realigned
-from the hall to the lobby, rooms and editor -- L-280 retired, L-282
-rewritten, L-286 and L-287 opened.)
+**Last updated:** September 6, 2026 (v25: Section 5a gains the
+2026-09-06 subsection -- the phone passed the lobby and the sweep and
+failed the edge labels, rebuilt as the frame HUD; the order unchanged;
+Earth opens as a design conversation next; with Anthropic's Claude
+Fable 5.1. v24, September 5, 2026: the 2026-09-05 subsection -- L-287
+live; lobby, 2D sweep and twelve-edge labels built and render-gated.
+v23, September 4, 2026: step 2 realigned from the hall to the lobby,
+rooms and editor -- L-280 retired, L-282 rewritten, L-286 and L-287
+opened.)
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
 Claude Opus 5, Claude Fable 5, Claude Sonnet 5, GPT
 
@@ -1356,6 +1359,62 @@ System 22 of 57, Stars 3 of 9. It had been in force since the
 Desktop/Mobile toggle was added and nobody had counted, because the
 menu counted only what it showed. The lobby counts what exists, and
 that is how it surfaced.
+
+### 2026-09-06 -- the phone passed the lobby and the sweep, failed the
+edge labels, and the labels were rebuilt as chrome
+
+Measured at orrery `a57e86b8` and gallery `fc8d9fb3`, both confirmed
+against the live remotes. Two Mode 5 rounds since the 2026-09-05
+subsection: the phone on 2026-09-05, the desktop and the phone on
+2026-09-06. Appended, not merged.
+
+**What passed.** The lobby (L-282): doors, a door tap, a Featured card,
+Home. The sweep (L-286): a landscape-only 2D card in portrait sweeps
+and swipes; the drag handoff this plan and the ledger both said needed
+a real thumb has had one. The back link: fixed the same day (the
+Sun's "Gallery" button had been a plain link, so Safari's own back
+walked into the Sun) and confirmed on both devices.
+
+**What failed, and why the failure is the useful part.** The
+twelve-edge axis labels (L-289) were drawn as text INSIDE the scene.
+On the phone they shrank with distance, vanished on zoom-out, were
+sliced at the box boundary, and floated on nothing for edges beside
+the camera. Tony: "this may be worse than the plotly labels." He was
+right, and the lesson is not about labels. Anything drawn in the scene
+behaves as scenery; anything that must stay legible at every zoom and
+angle belongs in the page. The rebuild followed that line: one chip
+naming the uniform grid spacing, a corner triad that turns with the
+camera, the First Point of Aries at the x tip with a note that the
+frame is the J2000 ecliptic (verified in the renderer before it was
+written, sourced to NAIF). A second pass found four defects in the
+rebuild -- the note would not close, the coloured grid read as a
+second key, arrival spacing disagreed with the chip, the triad did not
+follow a touch rotation -- and a fix for all four is delivered and
+waiting for the phone.
+
+**What this does to the order.** Nothing moves. Step 2 is still two of
+three items built (editor, lobby) and one designed-not-started
+(L-286's rooms page, drill-down and breadcrumb, which also retires the
+hamburger and the shim). L-289 is Sun-room chrome and rides beside
+step 1. Step 3, Earth into the assembler, is next after step 2 and
+opens as a DESIGN conversation in the next session -- what Earth's
+room shows on arrival, what it inherits from the Sun (the drawer, the
+frame zoom, the HUD are all reusable now), what is Earth-specific, and
+what the assembler must serve that it does not serve today.
+
+**Two rules this round confirmed, in the plan's own words.** The tree
+is the order: the lobby's menu and Featured grid now follow the room
+tree in `gallery_config.json`, so the editor's order IS the visitor's
+order and no new field was added. And the phone is the gate: three of
+the five things built since 2026-09-05 changed after Tony's eyes saw
+them, and none of the changes could have come from the headless
+renders that preceded them.
+
+**Recorded, not planned.** Tony is checking the sweep's exceptions
+systematically with `tools/sweep_report.py`, which names every card by
+class. The old-card cleanup is his, in the editor, separate from any
+step here. L-290 (relay anchors must name the protocol and skills) is
+a process item from a parallel Sonnet session and waits on his ruling.
 
 ### What this section deliberately does not carry
 
