@@ -157,7 +157,7 @@ into all four of these controls on day one.
 3. It should name an id and report the card landed in Storage. -- correct and confirmed with Editor
 4. Open the gallery editor and move the card to its room. -- done. correct.
 5. Open the gallery and tap the card. It should open the Sun exhibit at
-   the URL you picked. -- pushed. 
+   the URL you picked. -- pushed. correct in both the desktop and phone. 
 
 **What to watch for.** A live card is a placard with an Interactive tag
 and no picture. If it renders as a picture card with an empty image
@@ -167,7 +167,7 @@ one you chose in step 1, not a default.
 **What a pass rules out.** The whole chain from Studio through
 `json_converter.add_live_card` into storage, the editor, and the rendered
 grid. Earth's card gets made this way, so a failure here blocks the last
-step of the Earth build rather than the first.
+step of the Earth build rather than the first. -- i have only followed the interactive path not the json path. 
 
 ---
 
@@ -177,24 +177,24 @@ These are the L-289 items waiting on your eyes. They are judgment calls,
 not pass/fail:
 
 - **Triad size.** Too small to read on a phone, too large on a desktop,
-  or right.
+  or right. -- looks right
 - **Triad colours.** They are now the only thing carrying axis identity,
-  since the grid went back to white.
+  since the grid went back to white. -- it's okay. the user has to compare alignment not color. as noted above alignment looks visually 90 degrees off. but may be correct. adding color would eliminate the ambiguity, but entails its own rendering issues and does not eliminate the framing verification. 
 - **Whether the Explorer room gets the same HUD.** Trial 4's regression
-  check is where you see the alternative.
+  check is where you see the alternative. -- unclear
 - **The note's touch behaviour.** Tap-to-toggle with no X was a design
-  choice, not a constraint. If it feels wrong on the phone, say so.
+  choice, not a constraint. If it feels wrong on the phone, say so. -- works well.
 
 ## Report form
 
 Copy this back, filled in. The conditions matter as much as the verdict.
 
 ```
-Date:
-Device / browser:
-Orientation:
-Gallery SHA served:
-Cache tell (old page ruled out?):
+Date: 9/6/26
+Device / browser: iphone/google chrome
+Orientation: portrait/landscape
+Gallery SHA served: b8c5d4374c8b0e6d7476823719b8dbb771857d52
+Cache tell (old page ruled out?): 
 
 Trial 1 arrival:        pass / fail --
 Trial 2 note:           pass / fail --
@@ -202,7 +202,7 @@ Trial 3 triad:          pass / fail --
 Trial 4 HUD + controls: pass / fail --
 Trial 5 Studio card:    pass / fail --
 
-Conditions I changed, if any:
+Conditions I changed, if any: none
 
 Notes, in my own words (not a summary):
 
