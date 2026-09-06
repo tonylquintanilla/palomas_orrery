@@ -53,6 +53,10 @@ Module updated: September 5, 2026 with Anthropic's Claude Fable 5.1
 (L-287 DONE -- migration, readers, editor and remodel live at gallery
 503fa387; L-288 and L-289 opened; L-282 carries the What's New decision
 and its door count corrected), built on 9652a43d.
+Module updated: September 5, 2026 with Anthropic's Claude Fable 5.1
+(away-session: L-282 rulings and lobby build, L-286 sweep for 2D,
+L-289 designed and built, L-287 note; all render-gated), built on
+9652a43d plus patch_L287_6.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -314,7 +318,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-232 | The gallery's served constants carry sources that nothing checks | OPEN | 3.8 | 2026-08-24 |
 | ! | L-227 | Streamer band hover rendered as one 378-character line | OPEN | 3.8 | 2026-08-23 |
 | ! | L-241 | Hills torus hover states the cloud bounds, not the drawn ring | OPEN | 3.8 | 2026-08-25 |
-| ! | L-282 | The lobby: the main page as an entrance hall | OPEN | 3.8 | 2026-09-04 |
+| ! | L-282 | The lobby: the main page as an entrance hall | OPEN | 3.8 | 2026-09-05 |
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
 | ! | L-210 | Pilot citation findings -- four rows in constants_new.py | OPEN | 3.6 | 2026-08-21 |
 | ! | L-215 | Ledger cleanup by topic, not by age | OPEN | 3.6 | 2026-08-19 |
@@ -5101,7 +5105,7 @@ are read before they appear.
 https://github.com/djyde/cusdis.
 
 #### [L-282] The lobby: the main page as an entrance hall
-<!-- L:282 status:OPEN upd:2026-09-04 section:A flag: rice:5/4/75/4 -->
+<!-- L:282 status:OPEN upd:2026-09-05 section:A flag: rice:5/4/75/4 -->
 - **DESIGN CLOSED 2026-09-04** (design session, zero code; the reasoning
   trail is HANDOFF 2026-09-04, "the lobby splits by subject"). Nine
   rounds, each simpler. What replaced proposal 1 below:
@@ -5234,9 +5238,45 @@ then the lobby screen with its three doors (corrected 2026-09-05 from
 What's New and guest book (L-281); then the drill-down and breadcrumb
 (L-286); then the shared stylesheet (L-283); then the placard format on
 existing cards; then the collections room. Mode 5 on phone first.
-**Tony-action (decide), carried here from L-287 on 2026-09-05:** What's
-New is driven by the `featured` flag (7 cards carry it at `503fa387`),
-by the dated JSON feed from L-280, or by both.
+- **Rulings 2026-09-05 (Tony, away from the machine, by phone):**
+  What's New is retired as a name; the lobby section is FEATURED,
+  driven by the existing `featured` flag alone, no dated feed (a feed
+  would add a step every shipping patch has to remember). Live-scene
+  cards are labelled INTERACTIVE wherever a visitor sees them. Empty
+  rooms show as UNDER CONSTRUCTION. Arrangement approved from a
+  portrait mockup: title, museum sentence, three door rows, Featured
+  grid, guest book row, footer; doors above Featured. Door sentences
+  are Tony's, entered through the editor into the room tree.
+- **Built 2026-09-05, NOT yet run or pushed** [render-gated]:
+  `patch_L282_1_lobby.py` (gallery, guards on `index.html` at
+  `503fa387`). The first screen becomes the lobby: renderLobby() is
+  the ONE writer of the home view (the initial markup, goHome() and
+  the error path had each written it). Door rows read label, colour
+  and sentence from `gallery_config.json` doors; the second line
+  counts exhibits, interactive scenes and rooms under construction
+  (rooms with no card anywhere in their subtree). A door tap opens the
+  existing menu with that door expanded -- the interim until L-286
+  gives each door its rooms page; the hamburger stays as the second
+  path for the same reason. Featured is a two-column grid (three on
+  desktop) of `featured` cards; an Interactive tag on live cards;
+  "Live scene" -> "Interactive" in the menu. Guest book row reads
+  Under construction until L-281. The museum sentence reads a
+  top-level `sentence` in `gallery_config.json` if present, else
+  today's text; the editor has no field for it yet. Tested in
+  headless Chromium at 390x844 and 1280x800 with Plotly served
+  locally: lobby rendered, door tap opened the menu at Stars, a
+  Featured card drew its plot, Home returned to the lobby, the lobby's
+  i button opened About; no script errors. Fonts and the dove wall
+  could not load in the sandbox.
+- **Consumers touched:** `index.html` only. `interactive.html` is
+  unchanged by this item (L-289 edits it separately).
+- **Tony-action (do):** run `patch_L282_1_lobby.py` then
+  `patch_L282_2_sweep.py` (L-286) at the gallery root, commit, push,
+  report the SHA; Mode 5 on the phone: the lobby, a door tap, a
+  Featured card, Home.
+- **Tony-action (decide), after Mode 5:** whether the hamburger stays
+  once L-286 lands, and whether the museum sentence gets an editor
+  field or is set in the JSON by hand.
 **Ref:** L-286 (rooms, drill-down, breadcrumb), L-287 (editor and room
 tree), L-283, L-281, L-266; HANDOFF 2026-09-04 (design session: the
 lobby splits by subject); index.html; interactive.html;
@@ -5453,6 +5493,25 @@ dolly, not of Plotly).
     interactive planets.
 - **Note:** RICE 5/4/70/4 -> 3.5 proposed, not confirmed. Depends on
   L-287 (cards must carry a room path before rooms can be drawn).
+- **Room-shape rule BUILT for 2D, 2026-09-05, NOT yet run or pushed**
+  [render-gated]: `patch_L282_2_sweep.py` (gallery; guards on the
+  file `patch_L282_1` leaves). Tony's ruling by phone: "no squeezed
+  landscape" -- landscape on the phone stays as it is; portrait must
+  sweep, not compress. On a phone (<768 px) in portrait, a 2D plot
+  served from a landscape file with no portrait slot and shape not
+  9:16 is drawn at its own width (the file's width/height where it
+  carries them, else 16:9) at full room height, and `.viz-container`
+  scrolls sideways; Plotly `dragmode` is set false while swept so the
+  horizontal drag goes to the sweep, and restored on rotation to
+  landscape; zoom buttons still work; 3D scenes scale to fit as
+  before; Home clears the room. Also lifts the MODE FILTER (see L-287
+  note): every card shows on the phone, 105 not 56. Tested headless:
+  a 66 Ma paleoclimate card drew 1429 px wide in a 390 px room, a
+  touch swipe scrolled it 288 px, rotation cleared and restored the
+  sweep, a 3D card and a two-slot card did not sweep, desktop
+  unchanged. Warming Stripes is stored 1200x1400 so it sweeps only to
+  689 px -- a Studio export question if it should be wider. The drag
+  handoff is the piece this entry already said needs a real phone.
 **Gap:** the room-path reader in `index.html` (filter a grid to a room);
 the breadcrumb component shared by both pages; the special-exhibit
 placement; the room-shape field; Mode 5 on phone at all four levels.
@@ -5502,7 +5561,46 @@ interactive.html.
   DONE; this is its phone follow-on and stays separate so the closed
   record is not reopened. gallery-assembler skill fires (Mode 5 as
   measurement).
-**Gap:** reproduce on the phone; try the label placement; Tony judges.
+- **Design settled 2026-09-05 (Tony, by phone), replacing the
+  top/back-view idea above.** Two observations first: on desktop the
+  camera zoom shrinks grid and all, so the numbers never change; on
+  the phone the frame zoom re-labels the grid as you go in, which is
+  real information about scale (Tony: better). And the arrival frame
+  is full on purpose, so the box edges Plotly labels sit off-screen.
+  Ruling: labels on ALL TWELVE edges of the box, internal and open,
+  so one is in view at any rotation; tick values as well as the axis
+  name, thinned to every second or third grid line; the page OWNS the
+  ticks (Plotly's one-edge set off on the Sun so no edge carries
+  two); NO label at a vertex; the axis name on the UNLABELED grid
+  line nearest the centre of each edge so no value is lost to it;
+  NO dimming with distance. Clutter is a Mode 5 call.
+- **Built 2026-09-05, NOT yet run or pushed** [render-gated]:
+  `patch_L289_1_edge_labels.py` (gallery; guards on `interactive.html`
+  at `503fa387`) and `patch_L289_2_name_on_skipped_tick.py` (guards
+  on patch 1's output). One scatter3d text trace, hover off, no
+  legend group (the drawer never sees it), added after newPlot and
+  after buildSunDrawer so extents and sunTraceGroup never counted it;
+  rebuilt by sunEdgeLabelsUpdate() after sunFrameOn, navFrameZoom and
+  navHome from the same range and dtick the grid uses; ticks are
+  multiples of dtick clear of both vertices by half a step;
+  `?ticks=N` (1..6, default 2) is the Mode 5 switch. Sun exhibit only;
+  the Explorer's axes are untouched. Tested in a stand-in page (the
+  Sun page cannot run in the sandbox: Pyodide's CDN is blocked) with
+  Plotly, the Sun camera and arrival ranges: 36 labels installed;
+  values re-scaled with the grid (0.2 at arrival, 0.02/0.06 three taps
+  in, 0.5 out); with lines every 0.2 on a -0.7..0.7 range, ticks=2
+  reads -0.4, 0, 0.4 with the name on the -0.2 line, ticks=3 reads
+  -0.4, 0.2 with the name on 0, ticks=1 puts the name between lines
+  at 0.1. No script errors. How it reads over the real shells is
+  unknown until the phone.
+- **Tony-action (do):** run the two L-289 patches at the gallery root
+  (either side of the L-282 patches; different file), commit, push;
+  Mode 5 on the phone: rotate, +, -, Home; try `&ticks=3`.
+- **Tony-action (decide), after Mode 5:** tick density (1, 2 or 3),
+  label size (one constant, 9 px today), and whether the Explorer
+  room should get the same edges.
+**Gap:** Mode 5 on the phone; Tony's density and size rulings; then
+DONE.
 **Ref:** L-267 (Sun exhibit GUI), interactive.html, HANDOFF 2026-09-05.
 
 #### [L-278] A relayout from inside a Plotly event handler re-enters the update machinery
@@ -10854,6 +10952,14 @@ gallery_metadata.json; MASTER_PLAN_INTERACTIVE_GALLERY.md.
   cards). The five spent patch scripts and the migration test output
   sit at the gallery root and in `gallery/`; **Tony-action (do):** move
   them to `documentation/`.
+- **Note 2026-09-05 (after close):** the reader shim kept the page's
+  mode FILTER, so a landscape-only card was still invisible on a
+  phone -- 56 shown of 105 -- against the rule above that a one-file
+  card shows in both orientations. Surfaced by the lobby's counts.
+  Lifted by `patch_L282_2_sweep.py` under L-286, together with the
+  sweep that makes showing them acceptable (Tony: no squeezed
+  landscape). Recorded here so the closed record does not claim the
+  rule was in force before it was.
 **Gap:** none. Closed on the remodel at gallery `503fa387`.
 **Ref:** L-282, L-286, L-288; HANDOFF 2026-09-05 (L-287 build);
 HANDOFF ADDENDUM 2026-09-04 (schemas); tools/gallery_editor.py;
