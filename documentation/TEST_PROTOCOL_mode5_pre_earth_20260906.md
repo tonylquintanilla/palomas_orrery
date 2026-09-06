@@ -157,7 +157,7 @@ into all four of these controls on day one.
 3. It should name an id and report the card landed in Storage. -- correct and confirmed with Editor
 4. Open the gallery editor and move the card to its room. -- done. correct.
 5. Open the gallery and tap the card. It should open the Sun exhibit at
-   the URL you picked. 
+   the URL you picked. -- pushed. 
 
 **What to watch for.** A live card is a placard with an Interactive tag
 and no picture. If it renders as a picture card with an empty image
