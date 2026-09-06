@@ -8,7 +8,7 @@ Repo copies stale/absent; this reflects the live local stores.
 |---|---|---|---|---|
 | .vot | 4 | 295.1 MB | gaia_data_magnitude.vot (284.4 MB) | 2026-02-08 |
 | .nc | 18 | 161.1 MB | era5_clim_march_day22.nc (27.4 MB) | 2026-04-07 |
-| .json | 51 | 132.5 MB | orbit_paths.json (130.9 MB) | 2026-09-02 |
+| .json | 51 | 132.5 MB | orbit_paths.json (130.9 MB) | 2026-09-03 |
 | .backup | 4 | 131.2 MB | orbit_paths.json.backup (130.9 MB) | 2026-08-26 |
 | .backup_old | 1 | 130.9 MB | orbit_paths.json.backup_old (130.9 MB) | 2026-08-25 |
 | .csv | 15 | 34.9 MB | 3773_v3_niskin_hot001_yr01_to_hot348_yr35.csv (30.8 MB) | 2026-04-07 |
@@ -73,27 +73,27 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 439.4 MB (441 files)
+**Total size:** 439.6 MB (461 files)
 
-**GitHub Pages headroom:** 585 MB remaining of 1024 MB ceiling (42.9% used)
+**GitHub Pages headroom:** 584 MB remaining of 1024 MB ceiling (42.9% used)
 
 ### By extension
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 286 | 417.4 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-03 |
+| .json | 286 | 417.3 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-05 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 1 | 5.1 MB | palomas_orrery_logo.png (5.1 MB) | 2025-11-27 |
-| .py | 62 | 1.1 MB | gallery_studio.py (244.1 KB) | 2026-09-03 |
-| .md | 11 | 649.6 KB | TEST_PROTOCOL_sun_hang_20260902.md (526.5 KB) | 2026-09-03 |
-| .jsonl | 22 | 376.5 KB | encke.jsonl (17.5 KB) | 2026-09-03 |
-| .html | 5 | 223.3 KB | index.html (128.2 KB) | 2026-09-02 |
+| .py | 80 | 1.3 MB | gallery_studio.py (244.1 KB) | 2026-09-05 |
+| .md | 11 | 656.3 KB | TEST_PROTOCOL_sun_hang_20260902.md (526.5 KB) | 2026-09-05 |
+| .jsonl | 22 | 390.9 KB | encke.jsonl (18.2 KB) | 2026-09-05 |
+| .html | 5 | 263.6 KB | index.html (150.4 KB) | 2026-09-05 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
-| .js | 4 | 62.5 KB | feature_renderers.js (42.6 KB) | 2026-08-30 |
+| .js | 5 | 69.7 KB | feature_renderers.js (43.9 KB) | 2026-09-04 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |
 | .patch | 3 | 11.7 KB | phaseb_studio.patch (7.0 KB) | 2026-07-29 |
+| .txt | 2 | 7.8 KB | requirements.txt (4.2 KB) | 2026-09-04 |
 | .mermaid | 1 | 7.4 KB | gallery_navigation_flowchart.mermaid (7.4 KB) | 2026-03-08 |
-| .txt | 1 | 4.2 KB | requirements.txt (4.2 KB) | 2026-02-28 |
 | .bat | 1 | 3.7 KB | _run_local_server.bat (3.7 KB) | 2026-08-24 |
 | .url | 1 | 176.0 B | Paloma's Orrery - Interactive Astronomical Visualizations.url (176.0 B) | 2026-02-27 |
 | (none) | 1 | 17.0 B | CNAME (17.0 B) | 2026-02-13 |
@@ -115,10 +115,10 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 ### gallery_metadata.json
 
-- indexed entries: 148
-- fields per entry: ['id', 'title', 'filename', 'category', 'category_label', 'description', 'size_kb', 'converted', 'mode', 'featured', 'subcategory', 'subcategory_label']
-- categories: {'solar_system': 25, 'inner_planets': 10, 'climate': 76, 'outer_planets': 3, 'missions': 24, 'exoplanets': 3, 'stellar': 7}
-- modes: {'landscape': 38, '(none)': 24, 'portrait': 58, 'both': 28}
+- indexed entries: 105
+- fields per entry: ['id', 'title', 'description', 'room', 'shape', 'files', 'live', 'featured', 'sources', 'converted', 'size_kb']
+- categories: {'(none)': 105}
+- modes: {'(none)': 105}
 
 ---
 
@@ -126,7 +126,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | repo | served size | ceiling | headroom | used |
 |---|---|---|---|---|
-| gallery | 439.4 MB | 1024 MB | 585 MB | 42.9% |
+| gallery | 439.6 MB | 1024 MB | 584 MB | 42.9% |
 | orrery (gitignored data) | 966.8 MB | n/a (not served) | -- | -- |
 
 Note: orrery data is local/gitignored. If orbit cache files are pushed to either repo for web serving, re-run this inventory to update headroom.

@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
-Generated: September 03, 2026
-Files scanned: 132
-Total findings: 1032
-Constants: 110 | Dicts: 42 | Display strings: 880
+Generated: September 05, 2026
+Files scanned: 135
+Total findings: 1031
+Constants: 110 | Dicts: 41 | Display strings: 880
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -19,20 +19,16 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260906T001717Z | `9652a43` | 135 | 1031 | 292 | 621 | 116 | 2 |
 | 20260903T170222Z | `faac433` | 132 | 1032 | 293 | 621 | 116 | 2 |
 | 20260903T020154Z | `e71f38a` | 129 | 1031 | 292 | 621 | 116 | 2 |
 | 20260903T014550Z | `5b3fb6b` | 131 | 1031 | 292 | 621 | 116 | 2 |
 | 20260903T012354Z | `91735ac` | 130 | 1031 | 292 | 621 | 116 | 2 |
 | 20260902T130030Z | `5639a95` | 129 | 1031 | 292 | 621 | 116 | 2 |
-| 20260902T124439Z | `df80c35` | 131 | 1033 | 294 | 621 | 116 | 2 |
 
-Change since the previous run: total +1, Tier-1 +1.
+Change since the previous run: total -1, Tier-1 -1.
 
-Tier-1 rose in these files:
-
-| File | Before | After |
-|------|-------:|------:|
-| patch_L277_reanchor_site_stores.py | 0 | 1 |
+No file's Tier-1 count rose.
 
 ---
 
@@ -63,7 +59,7 @@ Tier-1 rose in these files:
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 293 |
+| 1 | 16-20 | FIX NOW | 292 |
 | 2 | 10-15 | REVIEW | 621 |
 | 3 | 5-9 | LOW PRIORITY | 116 |
 | 4 | 1-4 | LOWEST PRIORITY | 2 |
@@ -146,7 +142,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `worksheet_request_builder.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `orbital_elements.py` | orrery | 1 | 0 | 0 | 0 | 1 |
-| `patch_L277_reanchor_site_stores.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `data_acquisition.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `exoplanet_orbits.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `fetch_paleoclimate_data.py` | earth_science | 1 | 0 | 0 | 0 | 1 |
@@ -171,7 +166,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 45 | 129 | 502 | 69 | 2 | 702 |
+| Orrery (solar system + orbital mechanics) | 44 | 128 | 502 | 69 | 2 | 701 |
 | Earth System | 13 | 150 | 77 | 2 | 0 | 229 |
 | Stars (stellar neighborhood) | 11 | 12 | 42 | 6 | 0 | 60 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 39 | 0 | 39 |
@@ -182,7 +177,6 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 - `doc_index.py`
 - `orrery_maintenance_run.py`
-- `patch_L277_reanchor_site_stores.py`
 - `worksheet_checker.py`
 - `worksheet_key_aliases.py`
 - `worksheet_keys.py`
@@ -611,12 +605,6 @@ is planned for a future session.
 | 2174 | string | display string @ line 2174 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2197 | string | display string @ line 2197 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2332 | string | display string @ line 2332 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-
-### patch_L277_reanchor_site_stores.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 88 | dict | FINGERPRINTS[...] | (5 entries) | 4 | 5 | **20** | No source citation; date-sensitive (recalled) | UNDETERMINED -- could not be classified |
 
 ### planet_visualization_utilities.py
 

@@ -1,6 +1,6 @@
 # Paloma's Orrery - Module Index
 
-**Generated:** September 03, 2026 by `module_atlas.py`  
+**Generated:** September 05, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -10,26 +10,32 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 132  
-**Total Lines of Code (non-blank):** 105,878  
-**Total Public Functions/Classes:** 1,185
+**Total Python Files:** 135  
+**Total Lines of Code (non-blank):** 104,989  
+**Total Public Functions/Classes:** 1,181
 
 ## Classification Coverage
 
-**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (9).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L276_mode7_repo_access.py`
-- `patch_L277_reanchor_site_stores.py`
-- `patch_L280_284_interactive_wing_capture.py`
+- `patch_L282_3_ledger_lobby_sweep_edges.py`
+- `patch_L282_4_master_plan_v24.py`
+- `patch_L287_3_hide_storage.py`
+- `patch_L287_4_sentence_sources.py`
+- `patch_L287_5_live_cards.py`
+- `patch_L287_6_ledger_close.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (3).** No valid `Domain:` tag.
+**Undetermined domain (6).** No valid `Domain:` tag.
 
-- `patch_L276_mode7_repo_access.py`
-- `patch_L277_reanchor_site_stores.py`
-- `patch_L280_284_interactive_wing_capture.py`
+- `patch_L282_3_ledger_lobby_sweep_edges.py`
+- `patch_L282_4_master_plan_v24.py`
+- `patch_L287_3_hide_storage.py`
+- `patch_L287_4_sentence_sources.py`
+- `patch_L287_5_live_cards.py`
+- `patch_L287_6_ledger_close.py`
 
 
 ---
@@ -234,9 +240,12 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L276_mode7_repo_access.py` | Ledger handle L-276. PROJECT_INSTRUCTIONS.md to v3.53. (262 lines) |
-| `patch_L277_reanchor_site_stores.py` | Ledger handle L-277. Three things in one transaction: (784 lines) |
-| `patch_L280_284_interactive_wing_capture.py` | Captures the 2026-09-03 design conversation as FIVE new ledger items. Nothing is built by this patch; it records decisions so they do not float. Capture on first mention. (322 lines) |
+| `patch_L282_3_ledger_lobby_sweep_edges.py` | - LEDGER_CONSOLIDATED.md: the 2026-09-05 away-session record. L-282 rulings (Featured, Interactive, Under construction) and the lobby build; L-286's sweep built for 2D; L-289 designed and built (twelve-edge labels); a note on L-287 that the mode filter wa... (195 lines) |
+| `patch_L282_4_master_plan_v24.py` | - MASTER_PLAN_INTERACTIVE_GALLERY.md -> v24: Section 5a gains the 2026-09-05 subsection (L-287 live; the lobby, the sweep and the twelve-edge labels built and render-gated; the step-2 build order half done), and the header moves with it. (130 lines) |
+| `patch_L287_3_hide_storage.py` | - index.html: cards in Storage are not served. (38 lines) |
+| `patch_L287_4_sentence_sources.py` | - index.html shows room sentences and card sources; fixes the "NaN KB" size on schema-v2 cards. (37 lines) |
+| `patch_L287_5_live_cards.py` | - index.html: a card with a live scene URL opens that scene when clicked, wears a "Live scene" badge, and is listed in both Desktop and Mobile even when it has no file. (36 lines) |
+| `patch_L287_6_ledger_close.py` | - LEDGER_CONSOLIDATED.md: L-287 closed on the remodel; L-288 and L-289 opened; L-282 carries What's New and its door count is corrected; header stamped. (43 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

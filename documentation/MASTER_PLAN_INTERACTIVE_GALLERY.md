@@ -1,6 +1,6 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** v23 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
+**Status:** v24 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
 **the first feature-bearing exhibit is LIVE.** The Sun ships at
 `palomasorrery.com/interactive.html?exhibit=sun`, unlinked from the
 landing page, Mode 5 accepted 2026-08-29 (gallery `ac9a5c7b`). Its GUI
@@ -82,9 +82,12 @@ text here read "enabled with a known open issue", contradicting its own
 header forty lines below. L-151 (gallery-assembler skill) DONE
 2026-07-27; L-150 (multi-orbit binaries) still decided, not yet built.)
 **Date begun:** July 3, 2026
-**Last updated:** September 4, 2026 (v23: Section 5a step 2 realigned
+**Last updated:** September 5, 2026 (v24: Section 5a gains the
+2026-09-05 subsection -- L-287 live; the lobby, the 2D sweep and the
+twelve-edge labels built and render-gated; the order unchanged; with
+Anthropic's Claude Fable 5.1. v23, September 4, 2026: step 2 realigned
 from the hall to the lobby, rooms and editor -- L-280 retired, L-282
-rewritten, L-286 and L-287 opened; with Anthropic's Claude Fable 5.1)
+rewritten, L-286 and L-287 opened.)
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
 Claude Opus 5, Claude Fable 5, Claude Sonnet 5, GPT
 
@@ -1284,6 +1287,75 @@ reopened, and now step 3. "Segment 4, Artifact 2: gated on segment
 3" -- segment 3 is no longer the gate; steps 1 to 4 above are. Left
 standing for the same reason the August 25 append gave: the table is
 re-stated only by a pass that reads the repo.
+
+### 2026-09-05 -- L-287 is live, and the lobby, the sweep and the
+twelve-edge labels are built and waiting for the phone
+
+Measured at orrery `9652a43d` and gallery `503fa387`, both confirmed
+against the live remotes at session start; neither moved during the
+session, because Tony was away from his machine. Appended, not merged.
+
+**What shipped on 2026-09-04/05 (the machine session).** Step 2's
+first item, the editor and room tree (L-287), is DONE and live at
+gallery `503fa387`: `gallery_config.json` and `gallery_metadata.json`
+are schema version 2 (a room tree; one card per exhibit with two file
+slots, shape, live, featured, sources); 105 cards, none in storage;
+`tools/gallery_editor.py` rewritten; `index.html` carries a reader
+SHIM that maps rooms onto the old category menu so the schema could
+ship before the lobby. Two corrections to the design record travelled
+with it: 38 landscape/portrait pairs, not 33; seven consumers of the
+metadata, not five (`gallery_cleanup.py`, which deletes orphans, and
+`gallery_json_fixer.py`).
+
+**What was built on 2026-09-05 (the away session), none of it run.**
+Four gallery patches and two orrery patches wait at the repo roots;
+every one guards on the bytes it was built against and refuses
+otherwise. The record of each is in the ledger; the plan's interest
+is what they do to the order.
+
+- **Step 2's second item, the lobby (L-282), is built.** Rulings by
+  phone: the section is FEATURED, from the existing flag, no dated
+  feed; live cards read INTERACTIVE; empty rooms read UNDER
+  CONSTRUCTION; doors above Featured. A door tap opens the existing
+  menu at that door until step 2's third item, the rooms and
+  breadcrumb (L-286), replaces it. So the hamburger and the shim
+  survive one more step, and L-286 retires both.
+- **The room-shape rule (L-286) is built for 2D plots ahead of the
+  rooms it was written for.** The lobby's counts surfaced that the
+  shim still filtered cards by mode, hiding every landscape-only card
+  on a phone, against L-287's own rule. Tony: "no squeezed
+  landscape" -- landscape on the phone stays; portrait sweeps. The
+  filter is lifted and the sweep built in one patch, because showing
+  the cards without the sweep would have shown them compressed.
+- **L-289 (the Sun's axis labels on the phone) is designed and
+  built.** Tony's design, replacing the top-view/back-view idea:
+  labels on all twelve edges of the box, tick values and axis names,
+  thinned by count, no label at a vertex, the name on an unlabeled
+  line, no dimming. The page owns the ticks. This is chrome the
+  future rooms inherit, which is why it belongs beside step 1's nav
+  cluster rather than in a finishing list.
+
+**What this does to the order.** Nothing moves. Step 2 is two of
+three items built and one designed-not-started (L-286's drill-down and
+breadcrumb). Step 3, Earth into the assembler, is unchanged and still
+next after step 2. The guest book (L-281) and the theme (L-283) stay
+where the September 3 list left them.
+
+**The gate on all of it is one phone pass.** The lobby, the sweep and
+the edge labels were each exercised in a headless browser here --
+lobby and sweep on the real page with Plotly served locally, the edge
+labels in a stand-in scene because the Sun page's Pyodide cannot load
+in the sandbox -- with no script errors. What a headless run cannot
+say is how any of it reads in a hand. The sweep intercepts the plot's
+own drag layer, which L-286 already said needs a real phone before the
+rule is trusted. Until Tony's pass, every one of these is a claim.
+
+**One measurement worth keeping.** The mode filter hid 49 of 105
+exhibits from phone visitors: Solar System showed 31 of 39, Earth
+System 22 of 57, Stars 3 of 9. It had been in force since the
+Desktop/Mobile toggle was added and nobody had counted, because the
+menu counted only what it showed. The lobby counts what exists, and
+that is how it surfaced.
 
 ### What this section deliberately does not carry
 

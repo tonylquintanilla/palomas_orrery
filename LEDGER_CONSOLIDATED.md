@@ -49,6 +49,10 @@ Module updated: September 4, 2026 with Anthropic's Claude Fable 5.1
 (L-282 door count two -> three, Earth System is a door; L-283 accents
 realigned; L-286 shape rule 16:9 / 9:16 phone only; L-287 gains the
 desktop/mobile collapse), built on d1b4d3ee.
+Module updated: September 5, 2026 with Anthropic's Claude Fable 5.1
+(L-287 DONE -- migration, readers, editor and remodel live at gallery
+503fa387; L-288 and L-289 opened; L-282 carries the What's New decision
+and its door count corrected), built on 9652a43d.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -266,7 +270,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*171 live items; 157 need attention (`!`); 170 RICE-scored; 111 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*172 live items; 158 need attention (`!`); 171 RICE-scored; 112 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -293,6 +297,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-246 | S4714's semi-major axis was three values in three stores | OPEN | 5.1 | 2026-08-25 |
 | ! | L-193 | Qualified verdicts -- the token is not the whole answer | OPEN | 4.8 | 2026-08-15 |
 | ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
+| ! | L-289 | Sun exhibit on the phone: the 3D axis labels are not visible | OPEN | 4.8 | 2026-09-05 |
 | ! | L-268 | Sweep: features collapsed out of their own identity | OPEN | 4.5 | 2026-08-30 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-08-25 |
@@ -307,7 +312,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-224 | Streamer belt: one warped band, not a sphere | OPEN | 3.8 | 2026-08-22 |
 |  | L-230 | A skill bump does not reach the protocol's version history | DEFERRED | 3.8 | 2026-08-23 |
 | ! | L-232 | The gallery's served constants carry sources that nothing checks | OPEN | 3.8 | 2026-08-24 |
-| ! | L-287 | Gallery editor: the room tree, the storage room, the featured flag | OPEN | 3.8 | 2026-09-04 |
 | ! | L-227 | Streamer band hover rendered as one 378-character line | OPEN | 3.8 | 2026-08-23 |
 | ! | L-241 | Hills torus hover states the cloud bounds, not the drawn ring | OPEN | 3.8 | 2026-08-25 |
 | ! | L-282 | The lobby: the main page as an entrance hall | OPEN | 3.8 | 2026-09-04 |
@@ -321,6 +325,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
 | ! | L-283 | Visual theme: dark wall, paper placards, record mode | OPEN | 3.2 | 2026-09-03 |
 | ! | L-256 | provenance-discipline 2.8, and the status pass it enables | OPEN | 3.1 | 2026-08-27 |
+| ! | L-288 | Gallery Studio creates and edits live-scene cards | OPEN | 3.1 | 2026-09-05 |
 | ! | L-254 | 76 dead sphere-shell builders, unmarked, across 12 modules | OPEN | 2.8 | 2026-09-02 |
 | ! | L-240 | Split declared drawing parameters from measured values | OPEN | 2.8 | 2026-08-25 |
 | ! | L-176 | Shell hover text: add illustrated dimensions (radius_fraction -> km) | OPEN | 2.8 | 2026-08-04 |
@@ -555,6 +560,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-274 | The cache sweep aged by mtime, which is wrong in both directions | DONE | 4.3 | 2026-09-01 |
 |  | L-280 | The Interactive Wing: door, hall, two rooms, What's New | DONE | 4.3 | 2026-09-04 |
 |  | L-214 | The request builder drops the comment lines that matter | DONE | 3.8 | 2026-08-21 |
+|  | L-287 | Gallery editor: the room tree, the storage room, the featured flag | DONE | 3.8 | 2026-09-05 |
 |  | L-233 | Three dashboard buttons: one fixed, one added, one retired | DONE | 3.8 | 2026-08-24 |
 |  | L-106 | Gallery-cache backup + gitignore discipline | DONE | 3.6 | 2026-07-12 |
 |  | L-115 | Skills v1.1 batch: accuracy fixes + two seed blocks (Fable Mode 7) | DONE | 3.6 | 2026-07-12 |
@@ -5222,10 +5228,15 @@ https://github.com/djyde/cusdis.
   rest are consistency. RICE 5/4/75/4 -> 3.75 proposed, not confirmed.
   Portrait first; Mode 5 is Tony's.
 **Gap:** build order, Tony 2026-09-04: L-287 (editor and room tree)
-first, so cards can be placed; then the lobby screen with its two
-doors, What's New and guest book; then the drill-down and breadcrumb
+first, so cards can be placed [DONE 2026-09-05, gallery `503fa387`];
+then the lobby screen with its three doors (corrected 2026-09-05 from
+"two"; decision 14 of HANDOFF 2026-09-04 made Earth System a door),
+What's New and guest book (L-281); then the drill-down and breadcrumb
 (L-286); then the shared stylesheet (L-283); then the placard format on
 existing cards; then the collections room. Mode 5 on phone first.
+**Tony-action (decide), carried here from L-287 on 2026-09-05:** What's
+New is driven by the `featured` flag (7 cards carry it at `503fa387`),
+by the dated JSON feed from L-280, or by both.
 **Ref:** L-286 (rooms, drill-down, breadcrumb), L-287 (editor and room
 tree), L-283, L-281, L-266; HANDOFF 2026-09-04 (design session: the
 lobby splits by subject); index.html; interactive.html;
@@ -5451,86 +5462,48 @@ cluster), L-283 (theme); HANDOFF 2026-09-04 (design session: the lobby
 splits by subject); index.html; interactive.html; gallery/nav_cluster.js;
 gallery_config.json; gallery_metadata.json.
 
-#### [L-287] Gallery editor: the room tree, the storage room, the featured flag
-<!-- L:287 status:OPEN upd:2026-09-04 section:A flag: rice:3/3/85/2 -->
-- **Opened 2026-09-04.** Tony's ruling: the editor is a SEPARATE item
-  from the lobby. "It is there to edit the gallery (remodel?) -- it also
-  allows highlighting special features like new exhibits."
-- **What exists** (`tools/gallery_editor.py` at gallery `e414af13`, read
-  2026-09-04): a Tkinter GUI over `gallery_metadata.json`. Each card
-  carries a `category` key and an optional `subcategory`; the nine
-  categories come from `gallery_config.json`, a FLAT list of key, label
-  and color. The editor shows a two-level tree per mode, and offers
-  move, edit, add, delete, reorder, duplicate to another category, set
-  subcategory, and rename category. Run from `tools/` with the VS Code
-  Run button.
-- **What changes.** Four things, one migration:
-  - **Desktop and mobile collapse to ONE card per exhibit with two
-    file slots** (landscape file, portrait file). Measured at gallery
-    `e414af13`: 148 cards, 105 distinct titles; 33 exhibits appear
-    twice, as a `_gallery.json` landscape card and a `_mobile.json`
-    portrait card with the same title and category. Those 33 pairs
-    become 33 cards with two slots; the rest become cards with one.
-    Where a card has one file the page shows it in both orientations;
-    where it has two the page picks by screen width, which
-    `index.html` already detects (line 1880 at `e414af13`). The
-    Desktop/Mobile toggle goes away (L-282 proposal 4). `mode` values
-    today: portrait 58, landscape 38, both 28, absent 24 (absent reads
-    as landscape, line 1912). [Added 2026-09-04, Tony's question "can
-    we collapse them?"]
-  - Each card gets a ROOM PATH in place of category + subcategory:
-    `solar_system/earth`, `earth_system/heatdome`, `stars/exoplanets`.
-    A one-shot script does the MECHANICAL half only: pairs the 33
-    duplicates, moves every card into the storage room, and writes the
-    three doors with their planet rooms, empty. **The category-to-room
-    mapping is then done IN THE EDITOR, not as a table in
-    conversation** -- Tony's ruling 2026-09-04, replacing the table
-    the first write proposed. Guidance the editor session will follow:
-    `inner_planets` and `outer_planets` go to their body's room;
-    `missions` to the TARGET body (the phase rule, L-282); `climate`
-    -> the Earth System DOOR, its nine subcategories (heating 31,
-    heatdome 18, comets 20, climate 15, narrative 7, general 5,
-    acidification 2, food 2, coral 1; 47 cards none) becoming level-2
-    rooms one-for-one or regrouped -- Tony-action (decide), "very
-    important"; `stellar`, `exoplanets` -> Stars.
-  - `gallery_config.json` becomes the ROOM TREE: doors, rooms, exhibits,
-    each with full label, SHORT label (for the breadcrumb, L-286) and
-    color; each CARD carries its shape, 16:9 or 9:16 (L-286, phone
-    only). Lobby, breadcrumb and editor all read the same tree, so a
-    rename lands everywhere. `index.html` and `json_converter.py` keep
-    reading the same two files; `interactive.html` will read the tree
-    for its breadcrumb. Grep all three for `category`, `subcategory`
-    and `mode` before changing the schema (Check All Parallel
-    Pipelines).
-  - The editor's tree view grows to the depth of the room tree (four
-    levels, L-286). "Change category" becomes "move to room"; "new
-    category" becomes "new room" at any level. Move, edit, add, delete
-    and reorder work as they do now.
-- **The storage room.** `other` is where a new card lands and stays
-  hidden from visitors until moved into a room. Tony: "like the storage
-  room of a museum. Visitors don't see it. It only lives in the gallery
-  editor list." The lobby and breadcrumb skip it.
-- **The featured flag.** `featured` is not a room; it is a flag the
-  editor sets on a card to highlight a new or special exhibit. What's
-  New (L-282) reads it. Tony-action (decide): whether the flag alone
-  drives What's New, or the dated JSON feed from L-280 does, or both.
-- **Note:** RICE 3/3/85/2 -> 3.8 proposed, not confirmed. Build FIRST
-  in the L-282 order -- rooms cannot be drawn until cards carry a room.
-  gallery-pipeline skill fires; safe-file-editing for the migration.
-**Gap:** the room-tree schema for `gallery_config.json` and the
-two-slot card schema for `gallery_metadata.json`; the migration script
-(pair, park in storage, write the empty tree); the editor's deeper
-tree, move-to-room, two file slots, shape and featured fields; the
-consumer sweep in `index.html`, `json_converter.py` and
-`interactive.html`; a run on the real metadata with the result checked
-in the editor; then Tony's remodel, moving cards out of storage.
-Editor layout as designed: room tree on the left (doors, rooms,
-exhibits, storage room at the bottom), one card per exhibit on the
-right; save writes both files and prints what changed; git is the
-backup.
-**Ref:** L-282, L-286; tools/gallery_editor.py; tools/json_converter.py;
-gallery/gallery_config.json; gallery/gallery_metadata.json; index.html;
-skills/gallery-pipeline.
+#### [L-288] Gallery Studio creates and edits live-scene cards
+<!-- L:288 status:OPEN upd:2026-09-05 section:A flag: rice:3/3/70/2 -->
+- **Opened 2026-09-05** on Tony's request after the first live card was
+  made by hand: "add functionality to the gallery studio to create and
+  edit live scenes with urls." Today a live card is made in the editor
+  by setting a Live scene URL on an existing card (and clearing its
+  files if it is scene-only). Studio, which is where exhibits are
+  authored, cannot author one.
+- **Scope, to design first:** a Studio action that writes a schema-v2
+  card with `live` set and no file slots (or a still frame in the
+  landscape slot as the card's picture), landing in storage like any
+  export; the URL list read from `interactive.html` as the editor's
+  picker does (`live_scene_urls()` in `tools/gallery_editor.py` is the
+  reusable piece); title, placard and sources entered in Studio.
+  Whether the card carries a still image of the scene is the design
+  question -- a scene-only card has no picture on the page today.
+- **Note:** RICE 3/3/70/2 -> 3.2 proposed, not confirmed. Waits on the
+  lobby (L-282), which decides how a live card looks in a grid.
+**Gap:** design round, then the Studio action; `json_converter.py` v2
+branch already writes storage cards, so the writer exists.
+**Ref:** L-287 (the editor's live URL picker), L-282 (live scene is one
+card in the grid), tools/gallery_studio.py, tools/json_converter.py,
+interactive.html.
+
+#### [L-289] Sun exhibit on the phone: the 3D axis labels are not visible
+<!-- L:289 status:OPEN upd:2026-09-05 section:A flag: rice:3/2/80/1 -->
+- **Opened 2026-09-05** from Tony's phone pass on the live Sun exhibit,
+  2026-09-04: on opening the scene no axis label is visible; turning
+  the grid brings the x and y labels partly into view; the z label is
+  never visible. Render finding, Mode 5, Tony's eyes.
+- **Tony's suggested fix:** put labels on the TOP view for x and y and
+  the BACK view for z as well, not only on the bottom view for x and y
+  -- the side view that would carry z is never seen at the arrival
+  camera. The exact Plotly mechanism (scene axis `showbackground`,
+  title placement, or duplicate annotations) is to be confirmed
+  against the render, not reasoned.
+- **Note:** RICE 3/2/80/1 -> 4.8 proposed, not confirmed. L-267 is
+  DONE; this is its phone follow-on and stays separate so the closed
+  record is not reopened. gallery-assembler skill fires (Mode 5 as
+  measurement).
+**Gap:** reproduce on the phone; try the label placement; Tony judges.
+**Ref:** L-267 (Sun exhibit GUI), interactive.html, HANDOFF 2026-09-05.
 
 #### [L-278] A relayout from inside a Plotly event handler re-enters the update machinery
 <!-- L:278 status:OPEN upd:2026-09-02 section:A flag: rice:3/3/90/1 -->
@@ -10775,6 +10748,118 @@ L-267 (Sun room), L-265 (i panel links), L-281 (guest book), L-283
 (visual theme), L-268 (feature identity); HANDOFF 2026-09-04 (design
 session: the lobby splits by subject); interactive.html; index.html;
 gallery_metadata.json; MASTER_PLAN_INTERACTIVE_GALLERY.md.
+
+#### [L-287] Gallery editor: the room tree, the storage room, the featured flag
+<!-- L:287 status:DONE upd:2026-09-05 section:C flag: rice:3/3/85/2 -->
+- **Opened 2026-09-04.** Tony's ruling: the editor is a SEPARATE item
+  from the lobby. "It is there to edit the gallery (remodel?) -- it also
+  allows highlighting special features like new exhibits."
+- **What exists** (`tools/gallery_editor.py` at gallery `e414af13`, read
+  2026-09-04): a Tkinter GUI over `gallery_metadata.json`. Each card
+  carries a `category` key and an optional `subcategory`; the nine
+  categories come from `gallery_config.json`, a FLAT list of key, label
+  and color. The editor shows a two-level tree per mode, and offers
+  move, edit, add, delete, reorder, duplicate to another category, set
+  subcategory, and rename category. Run from `tools/` with the VS Code
+  Run button.
+- **What changes.** Four things, one migration:
+  - **Desktop and mobile collapse to ONE card per exhibit with two
+    file slots** (landscape file, portrait file). Measured at gallery
+    `e414af13`: 148 cards, 105 distinct titles; 33 exhibits appear
+    twice, as a `_gallery.json` landscape card and a `_mobile.json`
+    portrait card with the same title and category. Those 33 pairs
+    become 33 cards with two slots; the rest become cards with one.
+    Where a card has one file the page shows it in both orientations;
+    where it has two the page picks by screen width, which
+    `index.html` already detects (line 1880 at `e414af13`). The
+    Desktop/Mobile toggle goes away (L-282 proposal 4). `mode` values
+    today: portrait 58, landscape 38, both 28, absent 24 (absent reads
+    as landscape, line 1912). [Added 2026-09-04, Tony's question "can
+    we collapse them?"]
+  - Each card gets a ROOM PATH in place of category + subcategory:
+    `solar_system/earth`, `earth_system/heatdome`, `stars/exoplanets`.
+    A one-shot script does the MECHANICAL half only: pairs the 33
+    duplicates, moves every card into the storage room, and writes the
+    three doors with their planet rooms, empty. **The category-to-room
+    mapping is then done IN THE EDITOR, not as a table in
+    conversation** -- Tony's ruling 2026-09-04, replacing the table
+    the first write proposed. Guidance the editor session will follow:
+    `inner_planets` and `outer_planets` go to their body's room;
+    `missions` to the TARGET body (the phase rule, L-282); `climate`
+    -> the Earth System DOOR, its nine subcategories (heating 31,
+    heatdome 18, comets 20, climate 15, narrative 7, general 5,
+    acidification 2, food 2, coral 1; 47 cards none) becoming level-2
+    rooms one-for-one or regrouped -- Tony-action (decide), "very
+    important"; `stellar`, `exoplanets` -> Stars.
+  - `gallery_config.json` becomes the ROOM TREE: doors, rooms, exhibits,
+    each with full label, SHORT label (for the breadcrumb, L-286) and
+    color; each CARD carries its shape, 16:9 or 9:16 (L-286, phone
+    only). Lobby, breadcrumb and editor all read the same tree, so a
+    rename lands everywhere. `index.html` and `json_converter.py` keep
+    reading the same two files; `interactive.html` will read the tree
+    for its breadcrumb. Grep all three for `category`, `subcategory`
+    and `mode` before changing the schema (Check All Parallel
+    Pipelines).
+  - The editor's tree view grows to the depth of the room tree (four
+    levels, L-286). "Change category" becomes "move to room"; "new
+    category" becomes "new room" at any level. Move, edit, add, delete
+    and reorder work as they do now.
+- **The storage room.** `other` is where a new card lands and stays
+  hidden from visitors until moved into a room. Tony: "like the storage
+  room of a museum. Visitors don't see it. It only lives in the gallery
+  editor list." The lobby and breadcrumb skip it.
+- **The featured flag.** `featured` is not a room; it is a flag the
+  editor sets on a card to highlight a new or special exhibit. What's
+  New (L-282) reads it. Tony-action (decide): whether the flag alone
+  drives What's New, or the dated JSON feed from L-280 does, or both.
+- **Note:** RICE 3/3/85/2 -> 3.8 proposed, not confirmed. Build FIRST
+  in the L-282 order -- rooms cannot be drawn until cards carry a room.
+  gallery-pipeline skill fires; safe-file-editing for the migration.
+- **Built and live, 2026-09-04/05** [verified: gallery HEAD read live at
+  each step]. Schemas accepted as written in HANDOFF ADDENDUM
+  2026-09-04 (Tony, at the machine), with one addition: `version: 2`
+  at the top of `gallery_metadata.json` too. Five gallery pushes:
+  - `b5622a89`: `patch_L287_1_migrate_schema_v2.py` (148 cards -> 110,
+    all in storage; three doors with empty body rooms) and
+    `patch_L287_2_readers_schema_v2.py` (reader shim in `index.html`;
+    `json_converter.py` writes v2 cards into storage and skips the
+    category prompt; `gallery_cleanup.py` counts `files` slots). Both
+    in one push so the live page never read a file it could not parse
+    (Tony's ruling: widen the slice rather than hold every gallery push
+    until the lobby).
+  - `6a180d83`: `patch_L287_3_hide_storage.py` -- storage cards are not
+    served (Tony's ruling; the page went empty until the remodel).
+  - `02bc69f1`: `patch_L287_4_sentence_sources.py` -- room sentences
+    under headers, card sources under descriptions, size fix.
+  - `2ae29158`: `patch_L287_5_live_cards.py` -- a card with `live` opens
+    its scene; the Sun card is live at `interactive.html?exhibit=sun`.
+  - `503fa387`: `tools/gallery_editor.py` rewritten for schema v2 (two
+    panes, room tree to any depth with a level-4 warning, storage at
+    the bottom, move/copy to room, reorder, two file slots, shape,
+    live URL picker read from `interactive.html`, featured, sources,
+    Preview via `index.html?preview=`, fields apply on focus-out, save
+    prints changes by name, no `.bak`); and Tony's remodel: 105 cards,
+    0 in storage, rooms Comets / Asteroids / Space Missions added under
+    Solar System, four rooms under Earth System, 9 rooms empty.
+- **Corrections to the record above.** The pair count was 38, not 33:
+  pairing by effective mode (absent = landscape) is the rule, not the
+  filename suffix. Four titles were duplicated in the SAME orientation
+  (9 `_copy`-style cards); the migration left them separate and named
+  them, and Tony has since removed several in the editor. The consumer
+  sweep found SEVEN readers, not five: add `tools/gallery_cleanup.py`
+  (it DELETES unreferenced files -- patched before it was next run)
+  and `tools/gallery_json_fixer.py` (reads figure JSON only; clear).
+- **What's New** (flag, dated feed, or both) is carried on L-282, which
+  owns that screen. Editor follow-ons: L-288 (Studio creates live
+  cards). The five spent patch scripts and the migration test output
+  sit at the gallery root and in `gallery/`; **Tony-action (do):** move
+  them to `documentation/`.
+**Gap:** none. Closed on the remodel at gallery `503fa387`.
+**Ref:** L-282, L-286, L-288; HANDOFF 2026-09-05 (L-287 build);
+HANDOFF ADDENDUM 2026-09-04 (schemas); tools/gallery_editor.py;
+tools/json_converter.py; tools/gallery_cleanup.py;
+gallery/gallery_config.json; gallery/gallery_metadata.json; index.html;
+skills/gallery-pipeline.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
