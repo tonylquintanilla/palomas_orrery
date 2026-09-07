@@ -112,7 +112,8 @@ earth_inner_core_info = (
             "Despite incredible pressure, temperatures of 5,400 degC (9,800 degF) keep it nearly\n"
             "at melting point. It rotates slightly faster than the rest of Earth, creating\n"
             "complex dynamics in Earth's magnetic field. The inner core is\n"
-            f"{EARTH_INNER_CORE_KM:,.1f} km in radius."
+            f"{EARTH_INNER_CORE_KM:,.1f} km in radius.\n\n"
+            "Source (radius): Dziewonski & Anderson (1981), PREM, Phys. Earth Planet. Inter. 25:297."
 )
 
 def create_earth_inner_core_shell(center_position=(0, 0, 0)):
@@ -185,7 +186,8 @@ earth_outer_core_info = (
             "Convection currents in this highly conductive fluid generate Earth's\n"
             "magnetic field through a process called the geodynamo. It extends from\n"
             f"{EARTH_INNER_CORE_KM:,.1f} to {EARTH_OUTER_CORE_KM:,.0f} km from Earth's center and has temperatures ranging from\n"
-            "4,500 degC (8,100 degF) to 5,400 degC (9,800 degF)."
+            "4,500 degC (8,100 degF) to 5,400 degC (9,800 degF).\n\n"
+            "Source (radius): Dziewonski & Anderson (1981), PREM, Phys. Earth Planet. Inter. 25:297."
 )
 
 def create_earth_outer_core_shell(center_position=(0, 0, 0)):
@@ -258,7 +260,8 @@ earth_lower_mantle_info = (
             "Despite being solid, it flows very slowly through convection, driving plate tectonics.\n"
             f"This region extends from {EARTH_D660_DEPTH_KM:,.0f} to "
             f"{EARTH_MEAN_RADIUS_KM - EARTH_OUTER_CORE_KM:,.0f} km below Earth's surface and experiences\n"
-            "temperatures from 2,200 degC to 4,500 degC (4,000 degF to 8,100 degF) and extreme pressure."
+            "temperatures from 2,200 degC to 4,500 degC (4,000 degF to 8,100 degF) and extreme pressure.\n\n"
+            "Source (boundaries): Dziewonski & Anderson (1981), PREM, Phys. Earth Planet. Inter. 25:297; Ishii et al. (2019), Nature Geoscience 12:869."
 )
 
 def create_earth_lower_mantle_shell(center_position=(0, 0, 0)):
@@ -332,7 +335,8 @@ earth_upper_mantle_info = (
             "allowing tectonic plates to move. It reaches from the base of the crust,\n"
             f"{EARTH_MEAN_RADIUS_KM - EARTH_UPPER_MANTLE_KM:,.1f} km below the surface in the reference model, down to\n"
             f"{EARTH_D660_DEPTH_KM:,.0f} km, with temperatures from 500 degC to 2,200 degC\n"
-            "(900 degF to 4,000 degF)."
+            "(900 degF to 4,000 degF).\n\n"
+            "Source (boundaries): Ishii et al. (2019), Nature Geoscience 12:869; Dziewonski & Anderson (1981), PREM, Phys. Earth Planet. Inter. 25:297."
 )
 
 def create_earth_upper_mantle_shell(center_position=(0, 0, 0)):
@@ -787,7 +791,9 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     magnetosphere_text = ["Earth: Magnetosphere<br><br>"
                  f"Earth's magnetosphere extends about {EARTH_MAGNETOPAUSE_STANDOFF_RADII:g} Earth radii on the Sun-facing side<br>"
                  "and stretches into a long magnetotail on the night side. It protects Earth<br>"
-                 "from solar radiation and cosmic rays, making complex life possible."]
+                 "from solar radiation and cosmic rays, making complex life possible.<br><br>"
+                 "Source (standoff): Shue et al. (1998), J. Geophys. Res. 103:17691; "
+                 "Lugaz et al. (2016), Nat. Commun. 7:13001."]
     
     magnetosphere_customdata = ['Earth: Magnetosphere']
 
@@ -841,7 +847,8 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
                 f"by Earth's magnetic field, typically located about {EARTH_BOW_SHOCK_STANDOFF_RADII:g} Earth radii upstream<br>"
                 "from Earth on the Sun-facing side.<br>"
                 "Drawn at the midpoint of the 11-14 R_E measured under normal solar wind (Lugaz et al. 2016).<br>"
-                "The Bow Shock points towards the Sun along the X-axis. The XY plane is the ecliptic."]
+                "The Bow Shock points towards the Sun along the X-axis. The XY plane is the ecliptic.<br><br>"
+                "Source (standoff): Lugaz et al. (2016), Nat. Commun. 7:13001, doi:10.1038/ncomms13001."]
     
     bow_shock_customdata = ['Earth: Bow Shock']
 
@@ -874,10 +881,14 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     # Source: NASA Van Allen Probes mission
     # Verified: April 2026 via Gemini fact-check
     belt_texts = [
-        "Inner Van Allen Belt: Region of trapped charged particles (mainly protons)<br>"
-        "extending from about 1,000 km to 6,000 km above Earth's surface.",
-        "Outer Van Allen Belt: Region of trapped charged particles (mainly electrons)<br>"
-        "extending from about 13,000 km to 60,000 km above Earth's surface."
+        f"Inner Van Allen Belt: Region of trapped charged particles (mainly protons).<br>"
+        f"Drawn at the flux peak, {EARTH_VAN_ALLEN_INNER_RADII:g} Earth radii from Earth's centre; the belt<br>"
+        "spans roughly 1.1 to 2 Earth radii.<br>"
+        "Source (peak): Baker et al. (2018), Space Sci. Rev. 214:17, doi:10.1007/s11214-017-0452-7.",
+        f"Outer Van Allen Belt: Region of trapped charged particles (mainly electrons).<br>"
+        f"Drawn at the flux peak, {EARTH_VAN_ALLEN_OUTER_RADII:g} Earth radii from Earth's centre; the belt<br>"
+        "spans roughly 3 to 7 Earth radii and moves with geomagnetic activity.<br>"
+        "Source (peak): J. Geophys. Res. Space Physics (2025), doi:10.1029/2024JA033504; Baker et al. (2018)."
     ]
     
     belt_distances = [
@@ -1046,8 +1057,10 @@ def create_earth_leo_shell(center_position=(0, 0, 0)):
         "Starlink (~550 km), ISS (~400 km), and Hubble (~540 km) all live here.<br><br>"
         "<b>Active satellites:</b> ~11,000 (Starlink alone: ~7,000)<br>"
         "<b>Tracked debris objects (>10 cm):</b> 35,000+<br><br>"
-        "Compare with the Geostationary Belt (GEO) at 42,164 km -- 5x farther out,<br>"
-        "invisible to the naked eye, but controlling global communications."
+        f"Compare with the Geostationary Belt (GEO) at {EARTH_GEOSTATIONARY_RADIUS_KM:,.0f} km -- 5x farther out,<br>"
+        "invisible to the naked eye, but controlling global communications.<br><br>"
+        "Source (upper edge): IADC Space Debris Mitigation Guidelines, IADC-02-01 Rev. 3 (2021), "
+        "sec. 3.3.2. The 200 km floor is a drawing choice, not a measured boundary."
     )
 
     traces = [

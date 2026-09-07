@@ -10,24 +10,28 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 131  
-**Total Lines of Code (non-blank):** 105,134  
-**Total Public Functions/Classes:** 1,177
+**Total Python Files:** 133  
+**Total Lines of Code (non-blank):** 105,639  
+**Total Public Functions/Classes:** 1,179
 
 ## Classification Coverage
 
-**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (7).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `patch_L291_2_earth_shell_migration.py`
 - `patch_L291_3_earth_atmosphere_physical.py`
+- `patch_L291_4_earth_hover_sources.py`
+- `patch_L291_5_ledger_20260907.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (2).** No valid `Domain:` tag.
+**Undetermined domain (4).** No valid `Domain:` tag.
 
 - `patch_L291_2_earth_shell_migration.py`
 - `patch_L291_3_earth_atmosphere_physical.py`
+- `patch_L291_4_earth_hover_sources.py`
+- `patch_L291_5_ledger_20260907.py`
 
 
 ---
@@ -81,7 +85,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `asteroid_belt_visualization_shells.py` | Asteroid Belt Visualization Module Functions for creating visualizations of asteroid belt structures in 3D plots. Includes Main Belt, Hildas, Trojans, and Greeks. Also includes helper functions for dynamic Trojan positioning based on Jupiter's location. (403 lines) |
 | `comet_visualization_shells.py` | Comet visual components for 3D orrery plots. (1,878 lines) |
-| `earth_visualization_shells.py` | Earth interior and orbital shell traces. (1,096 lines) |
+| `earth_visualization_shells.py` | Earth interior and orbital shell traces. (1,109 lines) |
 | `eris_visualization_shells.py` | Eris interior and boundary shell traces. (482 lines) |
 | `jupiter_visualization_shells.py` | Jupiter interior, ring, and magnetosphere shell traces. (897 lines) |
 | `mars_visualization_shells.py` | Mars interior and remnant field shell traces. (884 lines) |
@@ -131,7 +135,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `info_dictionary.py` | Descriptive text and narrative content for Paloma's Orrery. (2,050 lines) |
 | `messier_catalog.py` | Static catalog of Messier objects and bright deep-sky objects. (406 lines) |
 | `sgr_a_star_data.py` | S-star catalog and orbital mechanics for Sagittarius A*. (590 lines) |
-| `shell_configs.py` | Shell configuration data for all celestial bodies. (2,590 lines) |
+| `shell_configs.py` | Shell configuration data for all celestial bodies. (2,596 lines) |
 | `spacecraft_encounters.py` | Tagged encounter data for spacecraft missions in Paloma's Orrery. (1,298 lines) |
 | `star_notes.py` | Curated hover text annotations for notable stars. (1,158 lines) |
 | `star_properties.py` | SIMBAD stellar property queries with local caching. (340 lines) |
@@ -234,6 +238,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `patch_L291_2_earth_shell_migration.py` | - Earth shells read the store (L-291, step 2) (268 lines) |
 | `patch_L291_3_earth_atmosphere_physical.py` | - Earth's atmosphere shells draw the store (L-291 / L-295) (174 lines) |
+| `patch_L291_4_earth_hover_sources.py` | - every live Earth hover names its source (L-291) (205 lines) |
+| `patch_L291_5_ledger_20260907.py` | - ledger entries for the 2026-09-07 Earth session (281 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

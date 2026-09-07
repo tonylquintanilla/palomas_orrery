@@ -279,7 +279,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*178 live items; 164 need attention (`!`); 177 RICE-scored; 113 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*179 live items; 165 need attention (`!`); 178 RICE-scored; 116 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -292,12 +292,11 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-262 | The framing smoke test has never run against the page | OPEN | 11.4 | 2026-08-30 |
 | ! | L-271 | Patch scripts wrote backups nothing ever removed | OPEN | 11.4 | 2026-08-31 |
 | ! | L-237 | Artifact 1's golden record is stale and needs re-cutting | OPEN | 10.8 | 2026-08-25 |
-| ! | L-290 | Relay anchors must name the protocol and skills, not the code SHA alone | PENDING-GATE | 10.8 | 2026-09-06 |
 | ! | L-266 | Nothing checks that a cited link still resolves | OPEN | 9.0 | 2026-08-30 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-226 | safe-file-editing 1.8 -- encoding gate covers prose; corrections do not travel | OPEN | 8.1 | 2026-08-23 |
 | ! | L-278 | A relayout from inside a Plotly event handler re-enters the update machinery | OPEN | 8.1 | 2026-09-02 |
-| ! | L-296 | Every design build earns a master plan version number | PENDING-GATE | 8.1 | 2026-09-06 |
+| ! | L-300 | sweep_collapsed_features.py joins the gallery maintenance runner as a gating checker | OPEN | 8.1 | 2026-09-07 |
 | ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-21 |
 | ! | L-249 | The Earth slice of L-181: interior boundaries as sourced constants | OPEN | 7.2 | 2026-08-25 |
 | ! | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | OPEN | 6.0 | 2026-08-25 |
@@ -306,13 +305,14 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
 | ! | L-206 | Worksheet return filenames carry model and session | OPEN | 5.1 | 2026-08-18 |
 | ! | L-246 | S4714's semi-major axis was three values in three stores | OPEN | 5.1 | 2026-08-25 |
+| ! | L-299 | A hover that quotes a measured number names its source in the hover | OPEN | 5.1 | 2026-09-07 |
 | ! | L-193 | Qualified verdicts -- the token is not the whole answer | OPEN | 4.8 | 2026-08-15 |
 | ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
 | ! | L-268 | Sweep: features collapsed out of their own identity | OPEN | 4.5 | 2026-08-30 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-08-25 |
 | ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-25 |
-| ! | L-291 | Earth exhibit: shells plus the Moon | OPEN | 4.3 | 2026-09-06 |
+| ! | L-291 | Earth exhibit: shells plus the Moon | OPEN | 4.3 | 2026-09-07 |
 | ! | L-281 | The guest book: no-account comments, approve-before-show | OPEN | 4.2 | 2026-09-03 |
 | ! | L-247 | Sgr A* constants migrated to the single source of truth | OPEN | 4.0 | 2026-08-25 |
 | ! | L-277 | The L-192 site store anchors by line number, so any insertion breaks two checkers | OPEN | 4.0 | 2026-09-03 |
@@ -331,7 +331,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-215 | Ledger cleanup by topic, not by age | OPEN | 3.6 | 2026-08-19 |
 | ! | L-239 | Seed the three Oort builders so a render is reproducible | OPEN | 3.6 | 2026-08-25 |
 | ! | L-285 | index.html adopts the shared navigation cluster; the fake-wheel dolly retires | OPEN | 3.6 | 2026-09-04 |
-| ! | L-295 | The upper atmosphere shell disagrees with its own hover text | OPEN | 3.6 | 2026-09-06 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-25 |
 | ! | L-286 | Rooms in four levels: drill-down, short-name breadcrumb, Home stays a scene reset | OPEN | 3.5 | 2026-09-06 |
 | ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
@@ -346,6 +345,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-08-07 |
 | ! | L-244 | Sweep for replicated conversion factors as a class [Fable candidate] | OPEN | 2.8 | 2026-08-25 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
+| ! | L-298 | Seeing the gap between what the orrery draws and what an exhibit serves | OPEN | 2.7 | 2026-09-07 |
 | ! | L-248 | The parsec-to-light-year factor is typed 36 times across the star pipeline | OPEN | 2.5 | 2026-08-25 |
 | ! | L-273 | A document indexer, so the README's document table stops being hand-maintained | OPEN | 2.5 | 2026-09-01 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
@@ -362,6 +362,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-228 | Alfven surface latitude ranges: source them or omit them | OPEN [Tony] | 1.8 | 2026-08-23 |
 | ! | L-257 | Three enforcement builds the 2.8 skill text defers | OPEN | 1.8 | 2026-08-27 |
 |  | L-194 | Text-only assertions -- claims the scanner cannot see | DEFERRED | 1.4 | 2026-08-15 |
+| ! | L-297 | Earth-Moon Lagrange points: serving path sized, deferred from the Earth exhibit | OPEN | 1.4 | 2026-09-07 |
 | ! | L-253 | The 660 discontinuity's depth variation -- held unsourced | OPEN | 1.2 | 2026-08-26 |
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
 | ! | L-129 | Cometary structure constants -- periodic maintenance sweep | OPEN | 1.0 | 2026-07-17 |
@@ -543,11 +544,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-222 | The constants change report fails on every currency stamp | DONE | 11.4 | 2026-08-20 |
 |  | L-264 | One name, two programs: the runners get repo-specific names | DONE | 11.4 | 2026-08-29 |
 |  | L-221 | The master plan is the roadmap, and it outranks RICE | DONE | 10.8 | 2026-08-22 |
+|  | L-290 | Relay anchors must name the protocol and skills, not the code SHA alone | DONE | 10.8 | 2026-09-07 |
 |  | L-198 | Claim vocabulary: the units the scanner could not see | DONE | 10.2 | 2026-08-17 |
 |  | L-276 | Mode 7 tells relay partners they cannot read the repo, and they can | DONE | 8.5 | 2026-09-03 |
 |  | L-259 | The Sun exhibit ships -- the assembler runs in a visitor's browser | DONE | 8.3 | 2026-08-29 |
 |  | L-217 | The Part A / Part B dispatch split is a check that cannot fail | DONE | 8.1 | 2026-08-19 |
 |  | L-260 | Sun exhibit finishing items: axis units and the phone | DONE | 8.1 | 2026-09-04 |
+|  | L-296 | Every design build earns a master plan version number | DONE | 8.1 | 2026-09-07 |
 |  | L-207 | The citation prompt -- the checker asks the fuzzy question | DONE | 7.6 | 2026-08-18 |
 |  | L-220 | A patch updates the body but not the anchor, date or description | DONE | 7.6 | 2026-08-20 |
 |  | L-204 | The worksheet reference may be JSON | DONE | 5.7 | 2026-08-18 |
@@ -580,6 +583,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-233 | Three dashboard buttons: one fixed, one added, one retired | DONE | 3.8 | 2026-08-24 |
 |  | L-106 | Gallery-cache backup + gitignore discipline | DONE | 3.6 | 2026-07-12 |
 |  | L-115 | Skills v1.1 batch: accuracy fixes + two seed blocks (Fable Mode 7) | DONE | 3.6 | 2026-07-12 |
+|  | L-295 | The upper atmosphere shell disagrees with its own hover text | DONE | 3.6 | 2026-09-07 |
 |  | L-267 | The Sun exhibit GUI shape: drawer, focus label, marker navigation | DONE | 3.4 | 2026-09-04 |
 |  | L-097 | skills_index.py -- Skill Manifest auto-generation (process/tooling) | DONE | 3.2 | 2026-07-04 |
 |  | L-127 | module_atlas.py generates MODULE_INDEX.md too -- single source, eliminate divergence | DONE | 3.2 | 2026-07-28 |
@@ -5616,95 +5620,8 @@ gallery_config.json; gallery_metadata.json.
 card in the grid), tools/gallery_studio.py, tools/json_converter.py,
 interactive.html.
 
-#### [L-290] Relay anchors must name the protocol and skills, not the code SHA alone
-<!-- L:290 status:PENDING-GATE upd:2026-09-06 section:A flag: rice:4/3/90/1 -->
-- **Opened 2026-09-06** from a parallel Claude Sonnet session Tony ran
-  against orrery `a57e86b8` (it proposed the handle L-288, already
-  taken; placed here). The Anchor Requirement pins the CODE repo's
-  SHA and URL on every outbound document and says nothing about the
-  protocol or the skills that govern HOW the work is done. A partner
-  without resident access -- GPT, Gemini, or a Claude session outside
-  this account and Project -- reads the code with none of that
-  context unless the document names PROJECT_INSTRUCTIONS.md and the
-  task-relevant SKILL.md files as fetch targets too. L-191's Fable
-  relay had to fetch source itself despite being a Claude model:
-  resident loading is tied to the account and Project, not the model.
-- **Method Belongs to the Skill:** the answer is the same next month
-  for a different task. Requirement goes resident (Mode 7, "Documents
-  as handoffs"); the wording template goes in
-  ledger-and-session-records (Anchor Requirement section), with two
-  forms: fetch-capable partners are told which files to fetch at the
-  pinned SHA; Gemini (snapshot-only, L-276) gets the relevant excerpt
-  pasted inline with the limitation stated.
-- **Drafts** of both amendments, as the Sonnet session wrote them, are
-  in `documentation/L290_relay_anchor_drafts.md` (delivered
-  2026-09-06). They are proposals until Tony rules. A skill bump
-  (ledger-and-session-records 1.9 -> 1.10) follows the four-step
-  binding rule and is verified by the NEXT session's load, per Stale
-  Skill = Stop.
-- **What v3.53 ALREADY covered, checked at orrery `50cbd2df`
-  2026-09-06**, which is what narrowed the amendment to the real gap:
-  HOW each partner reads the repo was already written under AI Roles
-  from L-276 (Claude and GPT fetch live at a pinned SHA; Gemini's web
-  app imports one public repo as a snapshot of HEAD, cannot read a URL
-  given in a prompt, cannot fetch at a SHA, cannot see commit history,
-  and is not on mobile). The "Documents as handoffs" clause already
-  required `built on <SHA> at <URL>` on every outbound document, with a
-  reason covering both kinds of partner, and the Anchor Requirement
-  gate already applied it uniformly. THE GAP WAS NARROWER THAN
-  "anchors": none of it named `PROJECT_INSTRUCTIONS.md` or the
-  task-relevant `SKILL.md` files as fetch targets, so a partner got the
-  code with none of the governance and read what was built without the
-  rules the build ran under.
-- **Tony's ruling 2026-09-06: ACCEPT both drafts, with three
-  amendments.** His reason for doing it now rather than deferring:
-  work is moving between Opus, Fable and GPT under credit limits, so
-  the relay discipline is load-bearing exactly when the flexibility is
-  needed.
-  1. **The Gemini bullet carried a factual error.** The draft said no
-     SHA pin is possible for the protocol or skills "any more than it
-     is for the code", so paste excerpts inline. But
-     `PROJECT_INSTRUCTIONS.md` and `skills/` LIVE IN the orrery repo:
-     if Gemini imported that repo it already HAS both files, just
-     unpinnable, fixed to whenever the import happened. The real
-     pasting case is the one the draft was describing without knowing
-     it -- Gemini imports ONE repository, so a gallery import leaves it
-     with no protocol and no skills at all, because they are in the
-     other repo. The corrected bullet splits by WHICH REPO WAS
-     IMPORTED, not by whether Gemini can fetch.
-  2. **Name the skills by what the TASK fires**, not "the specific
-     files" -- the same judgment the resident protocol already asks for
-     under "Relevant skill unfired -> Load it by name".
-  3. **Ask the partner to state back which rule files it actually
-     read.** A return document that does not name them is telling you
-     it did not read them. This is the only part of the mechanism that
-     can FAIL VISIBLY; without it nothing can (A Check That Cannot Fail
-     Is Not Passing).
-- **Applied 2026-09-06 in one commit, per the four-step binding rule:**
-  the protocol's "Documents as handoffs" bullet extended (v3.54);
-  `ledger-and-session-records` 1.9 -> 1.10 with the two-form template
-  in its Anchor Requirement section; `skills_index.py` regenerates the
-  manifest row; one commit. The bump also carries L-296 -- see below.
-- **Tony-action (do):** run `skills_index.py`, then REINSTALL
-  `ledger-and-session-records` to the account (Settings > Skills), then
-  commit and push. The reinstall is the step with no artifact prompting
-  it.
-- **THIS BUMP CANNOT BE VERIFIED FROM INSIDE THE SESSION THAT MADE IT.**
-  A skill lives in three stores and the account install is the copy
-  Claude actually loads; a reinstall is invisible to the running
-  conversation. So: `ledger-and-session-records` went to 1.10 at the
-  SHA this session pushes, the session that bumped it had loaded 1.9,
-  and THE NEXT SESSION CONFIRMS ITS LOADED COPY READS 1.10 BEFORE DOING
-  LEDGER WORK. Status is PENDING-GATE, not DONE, because that is what
-  the state honestly is.
-**Gap:** `skills_index.py`, the reinstall, the push; then the next
-session's load confirms 1.10 and this closes.
-**Ref:** L-276 (relay partners can read the repo; the Gemini snapshot
-note), L-191 (the Fable relay), Mode 7 Key Principles,
-skills/ledger-and-session-records/SKILL.md.
-
 #### [L-291] Earth exhibit: shells plus the Moon
-<!-- L:291 status:OPEN upd:2026-09-06 section:A flag: rice:4/4/80/3 -->
+<!-- L:291 status:OPEN upd:2026-09-07 section:A flag: rice:4/4/80/3 -->
 - **Design settled 2026-09-06** in a zero-code conversation, step 1 of
   the `interactive-exhibit` skill's order. The full record, with every
   number and its source, is
@@ -5816,8 +5733,30 @@ skills/ledger-and-session-records/SKILL.md.
   `interactive.html` for `sun` inside the shared pieces and decide,
   piece by piece, rename / parametrize / leave.
 - **Note:** RICE 4/4/80/3 -> 4.3 proposed, not confirmed.
-**Gap:** the skill install; then the served-data work (step 2), the
-build (step 3), and Mode 5 on the phone. Closes on Tony's eyes.
+- **Claude, 2026-09-07 -- step 0 passed, step 2's orrery half done.**
+  Both skills loaded at the versions the handoff required. Four
+  orrery patches, each md5-guarded, each Mode-5'd by Tony:
+  `patch_L291_1` (21 constants with sources, orrery `c51761a0`),
+  `patch_L291_2` (shell literals migrated onto them, `fe87147f`),
+  `patch_L291_3` (atmosphere shells draw the store, `5170bec1`, closes
+  L-295), `patch_L291_4` (every live Earth hover names its source;
+  SHA in Tony's next report). Sources were fetched, not recalled:
+  IERS Conventions 2010 TN36 Table 1.1; IADC-02-01 Rev. 3 sec. 3.3.2;
+  Baker et al. 2018 SSR 214:17; doi:10.1029/2024JA033504; Shue et al.
+  1998; Lugaz et al. 2016 Nat. Commun. 7:13001; Baliukin et al. 2019.
+- **Two values moved when sourced.** Bow shock 15 -> 12.5 radii
+  (midpoint of Lugaz's 11-14; a citation saying 11-14 cannot sit under
+  a 15 -- Tony agreed, and ruled the orrery migrate at once under one
+  store, one source of truth). LEO 6571/8371 -> 6578/8378 km (the old
+  figures were the 6371 km MEAN radius plus altitude).
+- **Lagrange points deferred** to L-297 on Tony's ruling; the drawer
+  row waits. **Sun-Earth L-points** stay with L-294.
+**Gap:** the GALLERY half of step 2 -- `data/objects_config.json`
+Earth entry: value/unit/source/orrery_constant on every feature,
+the new rows (magnetosphere as four served rows, LEO, geostationary,
+Hill sphere, geocorona), the `orientation` block, the exosphere shell
+(L-292) -- then store drift MATCH by name on the live run. Then steps
+3-8. Closes on Tony's eyes.
 **Ref:** `documentation/PREDESIGN_earth_exhibit_20260906.md` (gallery),
 L-292 (shells the orrery does not draw), L-293 (lunar standstill),
 L-294 (the Explorer room and the heliocentric view), L-295 (the upper
@@ -5929,65 +5868,126 @@ the Sun-Earth Lagrange points with it.
 **Ref:** L-291 (the frame rule that sent them here), L-289 (the HUD
 question carried out of it), L-286 (rooms), interactive.html.
 
-#### [L-295] The upper atmosphere shell disagrees with its own hover text
-<!-- L:295 status:OPEN upd:2026-09-06 section:A flag: rice:2/2/90/1 -->
-- **Found 2026-09-06** while inventorying Earth's shells for L-291.
-  `create_earth_upper_atmosphere_shell` draws at `radius_fraction` 1.25,
-  which is about 1,595 km altitude. Its own hover text says the upper
-  atmosphere "extends from 50 km to about 1,000 km altitude". Those
-  disagree by a factor of about 1.6.
-- Which one is wrong is not settled here. The 1.25 may be a drawing
-  choice that outran its caption, or the caption may be the stale half.
-  Either way one of them is telling a visitor something the other
-  contradicts, and both are on the page.
-- **Note:** RICE 2/2/90/1 -> 3.6 proposed, not confirmed. Cheap, and it
-  sits in a file L-291 and L-292 will both have open -- a Cluster the
-  Tail candidate rather than a separate errand.
-**Gap:** decide which number is right, fix the other, source the one
-that survives.
-**Ref:** L-291, L-292, earth_visualization_shells.py.
+#### [L-297] Earth-Moon Lagrange points: serving path sized, deferred from the Earth exhibit
+<!-- L:297 status:OPEN upd:2026-09-07 section:A flag: rice:2/3/70/3 -->
+- **Sized 2026-09-07 before any Earth code, on the build order's
+  instruction.** Record:
+  `documentation/SIZING_earth_moon_lagrange_20260907.md` (gallery repo).
+- **The finding.** The builder serves three shapes and its validator
+  enforces them: osculating elements (every non-spacecraft; fetch is
+  unconditional, missing aborts on #3), a positions arc (spacecraft
+  only), and features-only (the Sun). The assembler draws only objects
+  with `osculating`. A Lagrange point fits none of the three, so this is
+  not a config entry: it is a fourth serving shape (skip the elements
+  fetch, keep the vector fetch so `as_of_today` is populated, trust
+  method `epoch_marker`), a validator branch, a fallback branch, five
+  config entries (3011-3015 @399), an assembler branch that renders
+  `as_of_today` as the marker for that shape alone, and one nightly run
+  before anything appears. One session of its own.
+- **What helps:** the exhibit's epoch (today 00:00 UTC) and the cache's
+  epoch are the same instant, so an epoch marker is exactly the scene's
+  epoch, not a stale one.
+- **Rejected:** computing them client-side from the Moon's propagated
+  marker (CR3BP geometry, ~40 lines, no builder change). Smaller, but the
+  orrery already draws these points from Horizons; an approximation of a
+  value that can be fetched is a permanent apology for a shortcut, and
+  it would be replaced later, so the forty lines are spent twice.
+- **Tony's ruling, 2026-09-07:** defer (C) for the Earth build; serve
+  from Horizons (A) as the follow-on. Not B.
+- Sun-Earth L1-L5 transfer the same way when L-294 comes up.
+**Gap:** the builder session described above, after the Earth exhibit
+ships. Tony-action (decide): when.
+**Ref:** L-291, L-294, gallery `tools/gallery_cache_builder.py` (lines
+745-800, 910-935, 1135-1150 at `92e98ca9`), `gallery/assembler/assemble.py`
+(line 54), the sizing note.
 
-#### [L-296] Every design build earns a master plan version number
-<!-- L:296 status:PENDING-GATE upd:2026-09-06 section:A flag: rice:3/3/90/1 -->
-- **Tony's ruling, 2026-09-06:** "I think every design build earns a
-  version number. I don't archive each version but replace them. I only
-  keep each version of the protocol." Given when the Earth design round
-  closed and Claude asked whether it counted as a restamp juncture.
-- **What it sharpens.** `ledger-and-session-records` 1.9 says the plan
-  "restamps at key junctures rather than at every change, because a
-  juncture is its unit." A juncture is not countable, so the rule could
-  not be applied without a judgment call every time -- and the call kept
-  landing on Tony. A DESIGN BUILD is countable. Same rule, mechanical
-  now.
-- **The archiving half is the other half.** Master plan versions are
-  REPLACED, not archived; only the protocol keeps a versioned copy per
-  version. Git holds the superseded bytes either way, so nothing is
-  lost, and it explains why the plan's own rolling stamp keeps three
-  entries and simply drops the fourth rather than pushing it down into
-  a history file the way the protocol does.
-- **Applied immediately:** the plan went v25 -> v26 in this session's
-  patch, with the Earth design round as the build that earned it, and
-  the stale "the phone pass is the one thing carried" sentence in the
-  Status block corrected in the same edit.
-- **VERSION COLLISION, RULED AND DISCHARGED.** This ruling and L-290's
-  relay-anchor amendment both belonged in
-  `ledger-and-session-records`, and both wanted 1.10. Tony,
-  2026-09-06: **"one session - one bump."** A session does not ship two
-  versions of one skill; everything it decides rides one version. Both
-  amendments went into a single 1.10 in the same commit. The rule is
-  written into the skill's own Protocol and Skills Change Log section,
-  since it governs every future bump and not just this one.
-- **Note:** RICE 3/3/90/1 -> 8.1 proposed, not confirmed. High because
-  the effort is one skill paragraph and the reach is every future plan
-  update.
-- **Same verification obligation as L-290:** the 1.10 install cannot be
-  confirmed from inside the session that made it, so this is
-  PENDING-GATE until the next session's load reads 1.10.
-**Gap:** rides L-290's gate -- `skills_index.py`, the reinstall, the
-push, then the next session's load.
-**Ref:** L-290 (the same 1.10 bump), L-291 (the design build that
-earned v26), skills/ledger-and-session-records/SKILL.md,
-documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md.
+#### [L-298] Seeing the gap between what the orrery draws and what an exhibit serves
+<!-- L:298 status:OPEN upd:2026-09-07 section:A flag: rice:3/3/60/2 -->
+- **Tony's question, 2026-09-07:** when a new shell is added to the
+  orrery, does the assembler skill pick it up and draw it too? **Answer:
+  no, and by design.** A feature reaches an exhibit only by hand: a
+  served row with value/unit/source/pointer, a renderer for its geometry
+  type if new, and a ruling that it belongs in that room. Knowledge
+  transfers between the two instruments; machinery does not; no element
+  needs to exist. Neither gallery-assembler nor interactive-exhibit
+  claims otherwise.
+- **What is missing is not migration but VISIBILITY.** Earth had eleven
+  shells in the orrery and two feature groups in the gallery, and nobody
+  could have noticed without comparing the two by hand -- which is how
+  this session found it, at the cost of most of an evening's reading.
+- **Two candidate responses, and Tony has asked that this be DISCUSSED
+  rather than built:**
+  (a) a discovery tool in the L-268 shape -- per body, the orrery's shell
+  keys against the served feature keys, difference printed by name,
+  clean when reconciled or when the difference is on a recorded
+  not-in-scope list; fixes nothing, forces nothing; joins the gallery
+  maintenance runner; plus a rule in interactive-exhibit that a new
+  orrery shell for a body with an exhibit is recorded as a candidate
+  feature for that room and ruled in or out;
+  (b) leave it to judgment, on the ground that a tool here is over-design.
+- **Tony, 2026-09-07 (paraphrased from chat, not his hand):** "We don't
+  want to over design either. It may be best to leave this migration to
+  judgement. On the other hand the gap is hard to see due to the level
+  of detail." Both halves are live.
+- **Claude:** the honest test is whether judgment can act on something
+  it cannot see. If a body's shell-versus-feature difference is short and
+  named once per session start, judgment works; if it takes an evening
+  to assemble, it does not get exercised. The tool's job would be only
+  to make the list short and named. Recommendation offered, not ruled.
+**Gap:** Tony-action (decide): (a), (b), or a third thing. If (a), build
+after the Earth exhibit ships, when there are two bodies to test
+against.
+**Ref:** L-268 (the sweep this would resemble), L-291, L-292,
+gallery-assembler SKILL.md, interactive-exhibit SKILL.md, the protocol's
+"The Orrery and the Assembler".
+
+#### [L-299] A hover that quotes a measured number names its source in the hover
+<!-- L:299 status:OPEN upd:2026-09-07 section:A flag: rice:4/3/85/2 -->
+- **Tony's ruling, 2026-09-07.** The scanner reads the citation in the
+  code comment beside a string; the viewer never sees that comment. A
+  visitor reading "6.61 Earth radii" should be able to read where it
+  came from without opening the repo. Earth's hovers were inconsistent:
+  the geostationary belt carried a Source line (added by hand once),
+  the magnetosphere, bow shock, belts, LEO, Hill sphere and the four
+  interior layers did not.
+- **Applied to Earth** in `patch_L291_4_earth_hover_sources.py`: thirteen
+  live Earth hovers now end in a Source line SCOPED to what it sources
+  ("Source (radius):" where the same hover also quotes temperatures PREM
+  does not give). Two lines were REPLACED under remove-and-note rather
+  than annotated: the belt hovers' altitude ranges (1,000-6,000 km and
+  13,000-60,000 km) matched no source consulted, so they now state the
+  sourced peak distances and spans in Earth radii.
+- **The rule belongs in orrery-coding-conventions** (1.7 -> 1.8), beside
+  the hover-text AU convention. Not bumped this session: one session,
+  one bump, and this session's bump budget is spent on none -- the rule
+  is recorded here so the bump carries it whole.
+- **Remediation for the other bodies is a sweep, in slices, by body**, on
+  the braid: Jupiter and Saturn as their exhibits come up, not globally.
+  Discovery (which hovers quote a number with no Source line) is one
+  grep and terminates.
+**Gap:** Tony-action (do): the skill bump when the next
+orrery-coding-conventions session opens; then the per-body slices.
+**Ref:** L-291, orrery-coding-conventions SKILL.md, provenance-discipline
+SKILL.md ("A Breadcrumb Must Not Cite" -- the Source line must be TRUE,
+so it is scoped).
+
+#### [L-300] sweep_collapsed_features.py joins the gallery maintenance runner as a gating checker
+<!-- L:300 status:OPEN upd:2026-09-07 section:A flag: rice:3/3/90/1 -->
+- **Tony's question, 2026-09-07:** runner or dashboard? **Ruling, on
+  Claude's recommendation: the runner, gating.** The script already has
+  the right shape: it exits 2 only on a feature group it cannot classify
+  -- exactly the case that should stop a push -- and a non-zero
+  collapsed count exits 0 and prints the names, so the sixteen known
+  items report without gating. A check in a store nobody opens cannot
+  fail; the runner is the store that gets opened.
+- Earth's step 2 splits the magnetosphere into four served rows, which
+  retires four of L-268's sixteen; with the sweep in the routine, that
+  delta appears by name the day it lands.
+**Gap:** one small patch to `gallery_maintenance_run.py` registering the
+checker; then a run to confirm it appears in the CHECKERS list with its
+verdict line. Not yet written.
+**Ref:** L-268, gallery `tools/sweep_collapsed_features.py`,
+`gallery_maintenance_run.py`.
 
 #### [L-278] A relayout from inside a Plotly event handler re-enters the update machinery
 <!-- L:278 status:OPEN upd:2026-09-02 section:A flag: rice:3/3/90/1 -->
@@ -11535,6 +11535,172 @@ exhibit item closes on his eyes and not on the push.
 Plotly), L-294 (the Explorer HUD question, carried out of here),
 interactive.html, feature_renderers.js (poleBasis),
 HANDOFF 2026-09-05 (away session), HANDOFF 2026-09-06.
+
+#### [L-290] Relay anchors must name the protocol and skills, not the code SHA alone
+<!-- L:290 status:DONE upd:2026-09-07 section:C flag: rice:4/3/90/1 -->
+- **Opened 2026-09-06** from a parallel Claude Sonnet session Tony ran
+  against orrery `a57e86b8` (it proposed the handle L-288, already
+  taken; placed here). The Anchor Requirement pins the CODE repo's
+  SHA and URL on every outbound document and says nothing about the
+  protocol or the skills that govern HOW the work is done. A partner
+  without resident access -- GPT, Gemini, or a Claude session outside
+  this account and Project -- reads the code with none of that
+  context unless the document names PROJECT_INSTRUCTIONS.md and the
+  task-relevant SKILL.md files as fetch targets too. L-191's Fable
+  relay had to fetch source itself despite being a Claude model:
+  resident loading is tied to the account and Project, not the model.
+- **Method Belongs to the Skill:** the answer is the same next month
+  for a different task. Requirement goes resident (Mode 7, "Documents
+  as handoffs"); the wording template goes in
+  ledger-and-session-records (Anchor Requirement section), with two
+  forms: fetch-capable partners are told which files to fetch at the
+  pinned SHA; Gemini (snapshot-only, L-276) gets the relevant excerpt
+  pasted inline with the limitation stated.
+- **Drafts** of both amendments, as the Sonnet session wrote them, are
+  in `documentation/L290_relay_anchor_drafts.md` (delivered
+  2026-09-06). They are proposals until Tony rules. A skill bump
+  (ledger-and-session-records 1.9 -> 1.10) follows the four-step
+  binding rule and is verified by the NEXT session's load, per Stale
+  Skill = Stop.
+- **What v3.53 ALREADY covered, checked at orrery `50cbd2df`
+  2026-09-06**, which is what narrowed the amendment to the real gap:
+  HOW each partner reads the repo was already written under AI Roles
+  from L-276 (Claude and GPT fetch live at a pinned SHA; Gemini's web
+  app imports one public repo as a snapshot of HEAD, cannot read a URL
+  given in a prompt, cannot fetch at a SHA, cannot see commit history,
+  and is not on mobile). The "Documents as handoffs" clause already
+  required `built on <SHA> at <URL>` on every outbound document, with a
+  reason covering both kinds of partner, and the Anchor Requirement
+  gate already applied it uniformly. THE GAP WAS NARROWER THAN
+  "anchors": none of it named `PROJECT_INSTRUCTIONS.md` or the
+  task-relevant `SKILL.md` files as fetch targets, so a partner got the
+  code with none of the governance and read what was built without the
+  rules the build ran under.
+- **Tony's ruling 2026-09-06: ACCEPT both drafts, with three
+  amendments.** His reason for doing it now rather than deferring:
+  work is moving between Opus, Fable and GPT under credit limits, so
+  the relay discipline is load-bearing exactly when the flexibility is
+  needed.
+  1. **The Gemini bullet carried a factual error.** The draft said no
+     SHA pin is possible for the protocol or skills "any more than it
+     is for the code", so paste excerpts inline. But
+     `PROJECT_INSTRUCTIONS.md` and `skills/` LIVE IN the orrery repo:
+     if Gemini imported that repo it already HAS both files, just
+     unpinnable, fixed to whenever the import happened. The real
+     pasting case is the one the draft was describing without knowing
+     it -- Gemini imports ONE repository, so a gallery import leaves it
+     with no protocol and no skills at all, because they are in the
+     other repo. The corrected bullet splits by WHICH REPO WAS
+     IMPORTED, not by whether Gemini can fetch.
+  2. **Name the skills by what the TASK fires**, not "the specific
+     files" -- the same judgment the resident protocol already asks for
+     under "Relevant skill unfired -> Load it by name".
+  3. **Ask the partner to state back which rule files it actually
+     read.** A return document that does not name them is telling you
+     it did not read them. This is the only part of the mechanism that
+     can FAIL VISIBLY; without it nothing can (A Check That Cannot Fail
+     Is Not Passing).
+- **Applied 2026-09-06 in one commit, per the four-step binding rule:**
+  the protocol's "Documents as handoffs" bullet extended (v3.54);
+  `ledger-and-session-records` 1.9 -> 1.10 with the two-form template
+  in its Anchor Requirement section; `skills_index.py` regenerates the
+  manifest row; one commit. The bump also carries L-296 -- see below.
+- **Tony-action (do):** run `skills_index.py`, then REINSTALL
+  `ledger-and-session-records` to the account (Settings > Skills), then
+  commit and push. The reinstall is the step with no artifact prompting
+  it.
+- **THIS BUMP CANNOT BE VERIFIED FROM INSIDE THE SESSION THAT MADE IT.**
+  A skill lives in three stores and the account install is the copy
+  Claude actually loads; a reinstall is invisible to the running
+  conversation. So: `ledger-and-session-records` went to 1.10 at the
+  SHA this session pushes, the session that bumped it had loaded 1.9,
+  and THE NEXT SESSION CONFIRMS ITS LOADED COPY READS 1.10 BEFORE DOING
+  LEDGER WORK. Status is PENDING-GATE, not DONE, because that is what
+  the state honestly is.
+- **Claude, 2026-09-07 -- GATE FIRED.** The next session loaded
+  `ledger-and-session-records` and it reads 1.10, cut from `50cbd2df`,
+  matching the manifest. That is the only check that could confirm
+  the install, and it passed. Closed.
+**Gap:** none.
+**Ref:** L-276 (relay partners can read the repo; the Gemini snapshot
+note), L-191 (the Fable relay), Mode 7 Key Principles,
+skills/ledger-and-session-records/SKILL.md.
+
+#### [L-295] The upper atmosphere shell disagrees with its own hover text
+<!-- L:295 status:DONE upd:2026-09-07 section:C flag: rice:2/2/90/1 -->
+- **Found 2026-09-06** while inventorying Earth's shells for L-291.
+  `create_earth_upper_atmosphere_shell` draws at `radius_fraction` 1.25,
+  which is about 1,595 km altitude. Its own hover text says the upper
+  atmosphere "extends from 50 km to about 1,000 km altitude". Those
+  disagree by a factor of about 1.6.
+- Which one is wrong is not settled here. The 1.25 may be a drawing
+  choice that outran its caption, or the caption may be the stale half.
+  Either way one of them is telling a visitor something the other
+  contradicts, and both are on the page.
+- **Note:** RICE 2/2/90/1 -> 3.6 proposed, not confirmed. Cheap, and it
+  sits in a file L-291 and L-292 will both have open -- a Cluster the
+  Tail candidate rather than a separate errand.
+- **Claude, 2026-09-07 -- it was BOTH shells, and the drawn fraction was
+  the stale half.** The lower atmosphere had the same defect: drawn at
+  1.05 radii (about 319 km up) under a hover ending at the 50 km
+  stratopause. Both fractions were visibility choices. Tony's ruling:
+  remove the drawing choice and draw the physical boundary, as the
+  Sun's chromosphere does. `EARTH_STRATOPAUSE_ALTITUDE_KM` (50, NOAA
+  JetStream / NASA) and `EARTH_THERMOPAUSE_ALTITUDE_KM` (600, same)
+  entered the store at `c51761a0`; `SHELL_CONFIGS['Earth']` draws
+  their `_RADII` at `5170bec1`, info markers stepped to 20 and 30
+  degrees so the interior-to-atmosphere stack reads as four markers.
+  The live builders were `SHELL_CONFIGS`, not the
+  `create_earth_*_atmosphere_shell` functions the entry named --
+  those are L-254 dead code and were left alone.
+- **Mode 5, Tony, 2026-09-07:** "correct" on the shells hugging the
+  crust and on the three markers being separate.
+**Gap:** none.
+**Ref:** L-291, L-292, shell_configs.py, constants_new.py (Earth
+exhibit block).
+
+#### [L-296] Every design build earns a master plan version number
+<!-- L:296 status:DONE upd:2026-09-07 section:C flag: rice:3/3/90/1 -->
+- **Tony's ruling, 2026-09-06:** "I think every design build earns a
+  version number. I don't archive each version but replace them. I only
+  keep each version of the protocol." Given when the Earth design round
+  closed and Claude asked whether it counted as a restamp juncture.
+- **What it sharpens.** `ledger-and-session-records` 1.9 says the plan
+  "restamps at key junctures rather than at every change, because a
+  juncture is its unit." A juncture is not countable, so the rule could
+  not be applied without a judgment call every time -- and the call kept
+  landing on Tony. A DESIGN BUILD is countable. Same rule, mechanical
+  now.
+- **The archiving half is the other half.** Master plan versions are
+  REPLACED, not archived; only the protocol keeps a versioned copy per
+  version. Git holds the superseded bytes either way, so nothing is
+  lost, and it explains why the plan's own rolling stamp keeps three
+  entries and simply drops the fourth rather than pushing it down into
+  a history file the way the protocol does.
+- **Applied immediately:** the plan went v25 -> v26 in this session's
+  patch, with the Earth design round as the build that earned it, and
+  the stale "the phone pass is the one thing carried" sentence in the
+  Status block corrected in the same edit.
+- **VERSION COLLISION, RULED AND DISCHARGED.** This ruling and L-290's
+  relay-anchor amendment both belonged in
+  `ledger-and-session-records`, and both wanted 1.10. Tony,
+  2026-09-06: **"one session - one bump."** A session does not ship two
+  versions of one skill; everything it decides rides one version. Both
+  amendments went into a single 1.10 in the same commit. The rule is
+  written into the skill's own Protocol and Skills Change Log section,
+  since it governs every future bump and not just this one.
+- **Note:** RICE 3/3/90/1 -> 8.1 proposed, not confirmed. High because
+  the effort is one skill paragraph and the reach is every future plan
+  update.
+- **Same verification obligation as L-290:** the 1.10 install cannot be
+  confirmed from inside the session that made it, so this is
+  PENDING-GATE until the next session's load reads 1.10.
+- **Claude, 2026-09-07:** rode L-290's gate and it fired; the loaded
+  skill reads 1.10. Closed with it.
+**Gap:** none.
+**Ref:** L-290 (the same 1.10 bump), L-291 (the design build that
+earned v26), skills/ledger-and-session-records/SKILL.md,
+documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

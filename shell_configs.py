@@ -98,6 +98,7 @@ from constants_new import (
     # L-291: the Earth tooltips below quote the store, not retyped numbers.
     EARTH_EQUATORIAL_RADIUS_KM,
     EARTH_MAGNETOPAUSE_STANDOFF_RADII, EARTH_BOW_SHOCK_STANDOFF_RADII,
+    EARTH_VAN_ALLEN_INNER_RADII, EARTH_VAN_ALLEN_OUTER_RADII,
     EARTH_LEO_LOWER_ALTITUDE_KM, EARTH_LEO_UPPER_ALTITUDE_KM,
     EARTH_LEO_INNER_RADII, EARTH_LEO_OUTER_RADII,
     EARTH_GEOSTATIONARY_RADIUS_KM,
@@ -1430,13 +1431,17 @@ SHELL_CONFIGS = {
                 "Earth's crust is the thin, solid outer layer where humans live. It's divided into<br>"
                 "oceanic crust (5-10 km thick) made mostly of basalt, and continental crust (30-50 km thick)<br>"
                 "made primarily of granite. The crust contains all known life and the accessible portion<br>"
-                "of Earth's geological resources. Surface temperatures range from -80 degC to 60 degC (-112 degF to 140 degF)."
+                "of Earth's geological resources. Surface temperatures range from -80 degC to 60 degC (-112 degF to 140 degF).<br><br>"
+                "Source (radius): IERS Conventions (2010), TN36 Table 1.1, equatorial radius; "
+                "crust thicknesses: USGS, Interior of the Earth."
             ),
             'tooltip': (
                 "Earth's crust is the thin, solid outer layer where humans live. It's divided into\n"
                 "oceanic crust (5-10 km thick) made mostly of basalt, and continental crust (30-50 km thick)\n"
                 "made primarily of granite. The crust contains all known life and the accessible portion\n"
-                "of Earth's geological resources. Surface temperatures range from -80 degC to 60 degC (-112 degF to 140 degF)."
+                "of Earth's geological resources. Surface temperatures range from -80 degC to 60 degC (-112 degF to 140 degF).\n\n"
+                "Source (radius): IERS Conventions (2010), TN36 Table 1.1, equatorial radius; "
+                "crust thicknesses: USGS, Interior of the Earth."
             ),
         },
 
@@ -1508,7 +1513,8 @@ SHELL_CONFIGS = {
                 "The Hill Sphere radius can be described in words as follows: it is equal to the planet's average distance from the <br>" 
                 "Sun (its orbital semi-major axis) multiplied by the cube root of the ratio between the planet's mass and three times <br>" 
                 "the Sun's mass. In other words, you take how far the planet orbits out from the Sun, then scale that distance by the <br>" 
-                "cube root of (planet mass / [3 x solar mass]) to find the boundary within which the planet's gravity dominates over the Sun's."                  
+                "cube root of (planet mass / [3 x solar mass]) to find the boundary within which the planet's gravity dominates over the Sun's."
+                "<br><br>Source (radius): derived from GM_Earth (IERS Conventions 2010) and GM_Sun (IAU 2015 B3) at a = 1 AU."                  
             ),
             'tooltip': (
                 "SET MANUAL SCALE TO AT LEAST 0.02 AU TO VISUALIZE.\n\n" 
@@ -2293,10 +2299,10 @@ CUSTOM_SHELLS = {
                 "Bow Shock: The boundary where the supersonic solar wind is first slowed\n"
                 f"by Earth's magnetic field, typically located about {EARTH_BOW_SHOCK_STANDOFF_RADII:g} Earth radii upstream\n"
                 "from Earth on the Sun-facing side.\n\n"
-                "Inner Van Allen Belt: Region of trapped charged particles (mainly protons)\n"
-                "extending from about 1,000 km to 6,000 km above Earth's surface.\n"
-                "Outer Van Allen Belt: Region of trapped charged particles (mainly electrons)\n"
-                "extending from about 13,000 km to 60,000 km above Earth's surface.\n\n"
+                f"Inner Van Allen Belt: trapped protons, drawn at the flux peak {EARTH_VAN_ALLEN_INNER_RADII:g} Earth radii out\n"
+                "(Baker et al. 2018). Outer Van Allen Belt: trapped electrons, drawn at the flux peak\n"
+                f"{EARTH_VAN_ALLEN_OUTER_RADII:g} Earth radii out (doi:10.1029/2024JA033504).\n"
+                "Standoffs: Shue et al. (1998); Lugaz et al. (2016).\n\n"
                 "The same builder produces all four traces (separate legend entries):\n"
                 "Magnetosphere, Bow Shock, Inner Radiation Belt, Outer Radiation Belt."
             ),
