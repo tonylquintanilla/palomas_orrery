@@ -1,6 +1,6 @@
 # Paloma's Orrery - Module Index
 
-**Generated:** September 06, 2026 by `module_atlas.py`  
+**Generated:** September 07, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -11,21 +11,21 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 130  
-**Total Lines of Code (non-blank):** 104,731  
+**Total Lines of Code (non-blank):** 104,856  
 **Total Public Functions/Classes:** 1,176
 
 ## Classification Coverage
 
 **Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L289_5_ledger_mode5_rounds.py`
+- `patch_L291_1_earth_exhibit_constants.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
 **Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L289_5_ledger_mode5_rounds.py`
+- `patch_L291_1_earth_exhibit_constants.py`
 
 
 ---
@@ -122,7 +122,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,250 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (512 lines) |
-| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (1,196 lines) |
+| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (1,330 lines) |
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (412 lines) |
 | `exoplanet_stellar_properties.py` | Stellar Properties for Exoplanet Host Stars (484 lines) |
 | `exoplanet_systems.py` | Hardcoded Exoplanet System Catalog (572 lines) |
@@ -230,7 +230,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L289_5_ledger_mode5_rounds.py` | - LEDGER_CONSOLIDATED.md: the two Mode 5 rounds of 2026-09-05/06 and what they produced. L-282: lobby passed, back link fixed, Featured follows the tree. L-286: the sweep CONFIRMED on the phone; the menu follows the tree; a sweep report tool. L-289: the first ... (221 lines) |
+| `patch_L291_1_earth_exhibit_constants.py` | - Earth exhibit constants (L-291, step 2) (212 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

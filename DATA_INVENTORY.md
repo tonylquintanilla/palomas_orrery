@@ -8,7 +8,7 @@ Repo copies stale/absent; this reflects the live local stores.
 |---|---|---|---|---|
 | .vot | 4 | 295.1 MB | gaia_data_magnitude.vot (284.4 MB) | 2026-02-08 |
 | .nc | 18 | 161.1 MB | era5_clim_march_day22.nc (27.4 MB) | 2026-04-07 |
-| .json | 51 | 132.5 MB | orbit_paths.json (130.9 MB) | 2026-09-05 |
+| .json | 51 | 132.5 MB | orbit_paths.json (130.9 MB) | 2026-09-06 |
 | .backup | 4 | 131.2 MB | orbit_paths.json.backup (130.9 MB) | 2026-08-26 |
 | .backup_old | 1 | 130.9 MB | orbit_paths.json.backup_old (130.9 MB) | 2026-08-25 |
 | .csv | 15 | 34.9 MB | 3773_v3_niskin_hot001_yr01_to_hot348_yr35.csv (30.8 MB) | 2026-04-07 |
@@ -73,7 +73,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 439.7 MB (466 files)
+**Total size:** 439.7 MB (432 files)
 
 **GitHub Pages headroom:** 584 MB remaining of 1024 MB ceiling (42.9% used)
 
@@ -81,13 +81,13 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 288 | 417.3 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-06 |
+| .json | 248 | 417.3 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-07 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 1 | 5.1 MB | palomas_orrery_logo.png (5.1 MB) | 2025-11-27 |
-| .py | 83 | 1.3 MB | gallery_studio.py (248.4 KB) | 2026-09-06 |
-| .md | 11 | 651.6 KB | TEST_PROTOCOL_sun_hang_20260902.md (526.5 KB) | 2026-09-06 |
-| .jsonl | 22 | 398.1 KB | encke.jsonl (18.5 KB) | 2026-09-06 |
-| .html | 5 | 275.7 KB | index.html (153.2 KB) | 2026-09-06 |
+| .py | 85 | 1.3 MB | gallery_studio.py (248.4 KB) | 2026-09-06 |
+| .md | 15 | 689.3 KB | TEST_PROTOCOL_sun_hang_20260902.md (526.5 KB) | 2026-09-07 |
+| .jsonl | 22 | 405.4 KB | encke.jsonl (18.9 KB) | 2026-09-07 |
+| .html | 5 | 281.6 KB | index.html (153.2 KB) | 2026-09-06 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
 | .js | 5 | 69.7 KB | feature_renderers.js (43.9 KB) | 2026-09-04 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |
@@ -115,10 +115,10 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 ### gallery_metadata.json
 
-- indexed entries: 105
+- indexed entries: 106
 - fields per entry: ['id', 'title', 'description', 'room', 'shape', 'files', 'live', 'featured', 'sources', 'converted', 'size_kb']
-- categories: {'(none)': 105}
-- modes: {'(none)': 105}
+- categories: {'(none)': 106}
+- modes: {'(none)': 106}
 
 ---
 
