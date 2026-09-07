@@ -10,7 +10,7 @@ Repo copies stale/absent; this reflects the live local stores.
 | .nc | 18 | 161.1 MB | era5_clim_march_day22.nc (27.4 MB) | 2026-04-07 |
 | .json | 51 | 132.5 MB | orbit_paths.json (130.9 MB) | 2026-09-07 |
 | .backup | 4 | 131.2 MB | orbit_paths.json.backup (130.9 MB) | 2026-08-26 |
-| .backup_old | 1 | 130.9 MB | orbit_paths.json.backup_old (130.9 MB) | 2026-08-25 |
+| .backup_old | 1 | 130.9 MB | orbit_paths.json.backup_old (130.9 MB) | 2026-08-26 |
 | .csv | 15 | 34.9 MB | 3773_v3_niskin_hot001_yr01_to_hot348_yr35.csv (30.8 MB) | 2026-04-07 |
 | .pkl | 2 | 33.6 MB | star_properties_magnitude.pkl (31.1 MB) | 2025-09-16 |
 | .png | 159 | 14.6 MB | 2026-03-21_heatmap_western_heatwave_march_21.png (807.0 KB) | 2026-06-30 |
@@ -23,7 +23,7 @@ Repo copies stale/absent; this reflects the live local stores.
 ## orbit_paths.json
 
 - entries: 1501, formats: {'data_points': 1501}
-- points/entry: min 2, max 24479, total 1523360
+- points/entry: min 2, max 24479, total 1523372
 - sample 'Mercury_Sun':
 ```
 {

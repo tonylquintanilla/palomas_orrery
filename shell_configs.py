@@ -37,6 +37,13 @@ Module updated: August 26, 2026 with Anthropic's Claude Opus 5 (L-249:
     Earth's crust declares info_polar_deg 10.0 so its info marker clears
     the upper mantle's, which it coincided with once the upper mantle
     moved to its sourced radius. Found by Mode 5, not by any checker.)
+Module updated: September 7, 2026 with Anthropic's Claude Fable 5.1 (L-295:
+    Earth's two atmosphere shells stop drawing at 1.05 and 1.25 radii,
+    which were visibility choices their own hover contradicted, and draw
+    the stratopause and thermopause from constants_new.py, as the Sun's
+    chromosphere does. Their info markers step to 20 and 30 degrees so
+    the interior-to-atmosphere stack reads as four separate markers.
+    Tony's ruling, 2026-09-07.)
 """
 
 # Phase C4: Import hover text strings from body shell modules.
@@ -95,6 +102,10 @@ from constants_new import (
     EARTH_LEO_INNER_RADII, EARTH_LEO_OUTER_RADII,
     EARTH_GEOSTATIONARY_RADIUS_KM,
     EARTH_HILL_SPHERE_KM, EARTH_HILL_SPHERE_RADII,
+    # L-295: the atmosphere shells draw their sourced boundaries.
+    EARTH_STRATOPAUSE_ALTITUDE_KM, EARTH_STRATOPAUSE_RADII,
+    EARTH_THERMOPAUSE_ALTITUDE_KM, EARTH_THERMOPAUSE_RADII,
+    EARTH_GEOCORONA_RADII,
 )
 from earth_visualization_shells import (
     earth_inner_core_info, earth_outer_core_info,
@@ -1431,20 +1442,23 @@ SHELL_CONFIGS = {
 
         'atmosphere': {
             'name': 'Lower Atmosphere',
-            'radius_fraction': 1.05,
+            'radius_fraction': EARTH_STRATOPAUSE_RADII,  # L-295: was 1.05, a drawing choice
+            'info_polar_deg': 20.0,  # clears the crust's marker at 10
             'color': 'rgb(150, 200, 255)',
             'opacity': 0.5,
             'n_points': 20,
             'marker_size': 2.5,
             'hover_text': (
-                "The lower atmosphere includes the troposphere (0-12 km) where weather occurs, and<br>"
+                f"The lower atmosphere is drawn to the stratopause, {EARTH_STRATOPAUSE_ALTITUDE_KM:,.0f} km up<br>"
+                "(NOAA JetStream; NASA). It holds the troposphere (0-12 km) where weather occurs, and<br>"
                 "the stratosphere (12-50 km) which contains the ozone layer. These regions contain<br>"
                 "99% of atmospheric mass, primarily nitrogen and oxygen. Temperature varies from<br>"
                 "about 15 degC (59 degF) at sea level to -60 degC (-76 degF) at the tropopause (12 km).<br>"
                 "The stratopause (50 km) warms to near 0 degC (32 degF) due to ozone absorption."
             ),
             'tooltip': (
-                "The lower atmosphere includes the troposphere (0-12 km) where weather occurs, and\n"
+                f"The lower atmosphere is drawn to the stratopause, {EARTH_STRATOPAUSE_ALTITUDE_KM:,.0f} km up\n"
+                "(NOAA JetStream; NASA). It holds the troposphere (0-12 km) where weather occurs, and\n"
                 "the stratosphere (12-50 km) which contains the ozone layer. These regions contain\n"
                 "99% of atmospheric mass, primarily nitrogen and oxygen. Temperature varies from\n"
                 "about 15 degC (59 degF) at sea level to -60 degC (-76 degF) at the tropopause (12 km).\n"
@@ -1454,24 +1468,29 @@ SHELL_CONFIGS = {
 
         'upper_atmosphere': {
             'name': 'Upper Atmosphere',
-            'radius_fraction': 1.25,
+            'radius_fraction': EARTH_THERMOPAUSE_RADII,  # L-295: was 1.25, a drawing choice
+            'info_polar_deg': 30.0,  # clears the lower atmosphere's marker at 20
             'color': 'rgb(100, 150, 255)',
             'opacity': 0.3,
             'n_points': 20,
             'marker_size': 2.0,
             'hover_text': (
-                "The upper atmosphere extends from 50 km to about 1,000 km altitude. It includes<br>"
-                "the mesosphere where meteors burn up, the thermosphere where the aurora occurs and<br>"
-                "the International Space Station orbits, and the exosphere which gradually transitions<br>"
-                "to space. In the thermosphere, temperatures can reach 2,000 degC (3,600 degF), though the<br>"
-                "gas is so thin that it would feel cold to human skin."
+                f"The upper atmosphere is drawn from the stratopause ({EARTH_STRATOPAUSE_ALTITUDE_KM:,.0f} km) to the<br>"
+                f"thermopause, about {EARTH_THERMOPAUSE_ALTITUDE_KM:,.0f} km up (NOAA JetStream; NASA). It includes<br>"
+                "the mesosphere where meteors burn up and the thermosphere where the aurora occurs and<br>"
+                "the International Space Station orbits. In the thermosphere, temperatures can reach<br>"
+                "2,000 degC (3,600 degF), though the gas is so thin that it would feel cold to human skin.<br>"
+                "Above the thermopause the exosphere thins into space with no boundary; its hydrogen<br>"
+                f"halo, the geocorona, is detected past {EARTH_GEOCORONA_RADII:.0f} Earth radii."
             ),
             'tooltip': (
-                "The upper atmosphere extends from 50 km to about 1,000 km altitude. It includes\n"
-                "the mesosphere where meteors burn up, the thermosphere where the aurora occurs and\n"
-                "the International Space Station orbits, and the exosphere which gradually transitions\n"
-                "to space. In the thermosphere, temperatures can reach 2,000 degC (3,600 degF), though the\n"
-                "gas is so thin that it would feel cold to human skin."
+                f"The upper atmosphere is drawn from the stratopause ({EARTH_STRATOPAUSE_ALTITUDE_KM:,.0f} km) to the\n"
+                f"thermopause, about {EARTH_THERMOPAUSE_ALTITUDE_KM:,.0f} km up (NOAA JetStream; NASA). It includes\n"
+                "the mesosphere where meteors burn up and the thermosphere where the aurora occurs and\n"
+                "the International Space Station orbits. In the thermosphere, temperatures can reach\n"
+                "2,000 degC (3,600 degF), though the gas is so thin that it would feel cold to human skin.\n"
+                "Above the thermopause the exosphere thins into space with no boundary; its hydrogen\n"
+                f"halo, the geocorona, is detected past {EARTH_GEOCORONA_RADII:.0f} Earth radii."
             ),
         },
 
