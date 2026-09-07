@@ -88,6 +88,13 @@ from solar_visualization_shells import (
 from constants_new import (
     EARTH_INNER_CORE_RADII, EARTH_OUTER_CORE_RADII,
     EARTH_LOWER_MANTLE_RADII, EARTH_UPPER_MANTLE_RADII,
+    # L-291: the Earth tooltips below quote the store, not retyped numbers.
+    EARTH_EQUATORIAL_RADIUS_KM,
+    EARTH_MAGNETOPAUSE_STANDOFF_RADII, EARTH_BOW_SHOCK_STANDOFF_RADII,
+    EARTH_LEO_LOWER_ALTITUDE_KM, EARTH_LEO_UPPER_ALTITUDE_KM,
+    EARTH_LEO_INNER_RADII, EARTH_LEO_OUTER_RADII,
+    EARTH_GEOSTATIONARY_RADIUS_KM,
+    EARTH_HILL_SPHERE_KM, EARTH_HILL_SPHERE_RADII,
 )
 from earth_visualization_shells import (
     earth_inner_core_info, earth_outer_core_info,
@@ -1470,13 +1477,13 @@ SHELL_CONFIGS = {
 
         'hill_sphere': {
             'name': 'Hill Sphere',
-            'radius_fraction': 235,
+            'radius_fraction': EARTH_HILL_SPHERE_RADII,  # L-291: store
             'color': 'rgb(0, 255, 0)',
             'opacity': 0.25,
             'n_points': 20,
             'marker_size': 1.0,
             'hover_text': (
-                "Earth's Hill Sphere (extends to ~235 Earth radii or about 1.5 million km)<br><br>"
+                f"Earth's Hill Sphere (extends to about {EARTH_HILL_SPHERE_RADII:.0f} Earth radii or about {EARTH_HILL_SPHERE_KM / 1e6:.1f} million km)<br><br>"
                 "The Hill sphere is the region around a body where its own gravity is the dominant force in attracting satellites. For <br>" 
                 "a planet orbiting a star, it's the region where the planet's gravity is stronger than the star's tidal forces.<br><br>" 
                 "The Hill Sphere radius can be described in words as follows: it is equal to the planet's average distance from the <br>" 
@@ -1486,7 +1493,7 @@ SHELL_CONFIGS = {
             ),
             'tooltip': (
                 "SET MANUAL SCALE TO AT LEAST 0.02 AU TO VISUALIZE.\n\n" 
-                "Earth's Hill Sphere (extends to ~235 Earth radii or about 1.5 million km)."
+                f"Earth's Hill Sphere (extends to about {EARTH_HILL_SPHERE_RADII:.0f} Earth radii or about {EARTH_HILL_SPHERE_KM / 1e6:.1f} million km)."
             ),
         },
     },
@@ -2261,11 +2268,11 @@ CUSTOM_SHELLS = {
             'per_frame_opt_in': True,   # gated by the 'Animate magnetospheres' checkbox
             'tooltip': (
                 "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n"
-                "Earth's magnetosphere extends about 10 Earth radii on the Sun-facing side\n"
+                f"Earth's magnetosphere extends about {EARTH_MAGNETOPAUSE_STANDOFF_RADII:g} Earth radii on the Sun-facing side\n"
                 "and stretches into a long magnetotail on the night side. It protects Earth\n"
                 "from solar radiation and cosmic rays, making complex life possible.\n\n"
                 "Bow Shock: The boundary where the supersonic solar wind is first slowed\n"
-                "by Earth's magnetic field, typically located about 15 Earth radii upstream\n"
+                f"by Earth's magnetic field, typically located about {EARTH_BOW_SHOCK_STANDOFF_RADII:g} Earth radii upstream\n"
                 "from Earth on the Sun-facing side.\n\n"
                 "Inner Van Allen Belt: Region of trapped charged particles (mainly protons)\n"
                 "extending from about 1,000 km to 6,000 km above Earth's surface.\n"
@@ -2280,8 +2287,8 @@ CUSTOM_SHELLS = {
             'builder': 'earth_visualization_shells.create_earth_leo_shell',
             'tooltip': (
                 "SET MANUAL SCALE TO 0.003 AU TO VISUALIZE.\n\n"
-                "Low Earth Orbit (LEO) is the region from roughly 200 km to 2,000 km altitude\n"
-                "(1.03 to 1.31 Earth radii), where satellites orbit at all inclinations.\n\n"
+                f"Low Earth Orbit (LEO) is the region from roughly {EARTH_LEO_LOWER_ALTITUDE_KM:,.0f} km to {EARTH_LEO_UPPER_ALTITUDE_KM:,.0f} km altitude\n"
+                f"({EARTH_LEO_INNER_RADII:.2f} to {EARTH_LEO_OUTER_RADII:.2f} Earth radii), where satellites orbit at all inclinations.\n\n"
                 "Unlike geostationary orbit, LEO satellites travel at all angles relative to the equator --\n"
                 "forming a true shell around Earth rather than a ring. A LEO satellite completes\n"
                 "one orbit in 90-120 minutes and crosses the sky in about 6 minutes.\n\n"
@@ -2303,8 +2310,8 @@ CUSTOM_SHELLS = {
             'builder': 'earth_visualization_shells.create_earth_geostationary_belt_shell',
             'tooltip': (
                 "SET MANUAL SCALE TO 0.003 AU TO VISUALIZE.\n\n"
-                "The geostationary belt (GEO) is a ring of orbital space at 42,164 km from Earth's center\n"
-                "(35,786 km altitude), where satellites orbit at exactly Earth's rotation rate\n"
+                f"The geostationary belt (GEO) is a ring of orbital space at {EARTH_GEOSTATIONARY_RADIUS_KM:,.0f} km from Earth's center\n"
+                f"({EARTH_GEOSTATIONARY_RADIUS_KM - EARTH_EQUATORIAL_RADIUS_KM:,.0f} km altitude), where satellites orbit at exactly Earth's rotation rate\n"
                 "and appear stationary over a fixed point on the equator.\n\n"
                 "Approximately 550 active geostationary satellites currently occupy this belt --\n"
                 "carrying TV broadcasts, weather imagery, GPS augmentation, and communications\n"

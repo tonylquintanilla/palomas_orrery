@@ -12,6 +12,9 @@ Role: rendering/shells
 Domain: earth_science
 
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
+Module updated: September 2026 with Anthropic's Claude Fable 5.1 --
+    L-291: magnetosphere, bow shock, LEO, geostationary and Hill sphere
+    values read constants_new.py; no drawn literal remains.
     April 17, 2026: provenance audit source citations added, Gemini fact-check applied.
     Stratopause/tropopause temperature label corrected. LEO satellite/debris
     counts updated to 2026 values. Hill sphere typo fixed.
@@ -65,6 +68,16 @@ from constants_new import (
     EARTH_OUTER_CORE_KM, EARTH_OUTER_CORE_RADII,
     EARTH_D660_DEPTH_KM, EARTH_LOWER_MANTLE_RADII,
     EARTH_UPPER_MANTLE_KM, EARTH_UPPER_MANTLE_RADII,
+    # L-291: the orbital and magnetospheric shells read the store too.
+    # Every number a hover quotes below is formatted from these names.
+    EARTH_EQUATORIAL_RADIUS_KM,
+    EARTH_MAGNETOPAUSE_STANDOFF_RADII, EARTH_BOW_SHOCK_STANDOFF_RADII,
+    EARTH_VAN_ALLEN_INNER_RADII, EARTH_VAN_ALLEN_OUTER_RADII,
+    EARTH_LEO_INNER_KM, EARTH_LEO_OUTER_KM,
+    EARTH_LEO_INNER_RADII, EARTH_LEO_OUTER_RADII,
+    EARTH_LEO_LOWER_ALTITUDE_KM, EARTH_LEO_UPPER_ALTITUDE_KM,
+    EARTH_GEOSTATIONARY_RADIUS_KM, EARTH_GEOSTATIONARY_RADII,
+    EARTH_HILL_SPHERE_KM, EARTH_HILL_SPHERE_RADII,
 )
 from orrery_rendering import rotate_to_sunward, create_info_marker
 
@@ -709,12 +722,12 @@ def create_earth_upper_atmosphere_shell(center_position=(0, 0, 0)):
 earth_magnetosphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n" 
 
-            "Earth's magnetosphere extends about 10 Earth radii on the Sun-facing side\n"
+            f"Earth's magnetosphere extends about {EARTH_MAGNETOPAUSE_STANDOFF_RADII:g} Earth radii on the Sun-facing side\n"
             "and stretches into a long magnetotail on the night side. It protects Earth\n"
             "from solar radiation and cosmic rays, making complex life possible.\n\n"
 
             "Bow Shock: The boundary where the supersonic solar wind is first slowed\n"
-            "by Earth's magnetic field, typically located about 15 Earth radii upstream\n"
+            f"by Earth's magnetic field, typically located about {EARTH_BOW_SHOCK_STANDOFF_RADII:g} Earth radii upstream\n"
             "from Earth on the Sun-facing side.\n\n"
 
             "Inner Van Allen Belt: Region of trapped charged particles (mainly protons)\n"
@@ -731,7 +744,7 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     # Parameters for magnetosphere components (in Earth radii)
     params = {
         # Compressed sunward side
-        'sunward_distance': 10,  # Compressed toward the sun
+        'sunward_distance': EARTH_MAGNETOPAUSE_STANDOFF_RADII,  # L-291: store, Shue et al. 1998
         
         # Equatorial extension (wider than polar)
         'equatorial_radius': 12,
@@ -743,8 +756,8 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
         'tail_end_radius': 25,  # Radius at the end of the tail
         
         # Radiation belts
-        'inner_belt_distance': 1.5,  # Distance in Earth radii
-        'outer_belt_distance': 4.5,  # Distance in Earth radii
+        'inner_belt_distance': EARTH_VAN_ALLEN_INNER_RADII,  # L-291: store, flux peak
+        'outer_belt_distance': EARTH_VAN_ALLEN_OUTER_RADII,  # L-291: store, flux peak
         'belt_thickness': 0.5,
     }
     
@@ -772,7 +785,7 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     z = z + center_z
     
     magnetosphere_text = ["Earth: Magnetosphere<br><br>"
-                 "Earth's magnetosphere extends about 10 Earth radii on the Sun-facing side<br>"
+                 f"Earth's magnetosphere extends about {EARTH_MAGNETOPAUSE_STANDOFF_RADII:g} Earth radii on the Sun-facing side<br>"
                  "and stretches into a long magnetotail on the night side. It protects Earth<br>"
                  "from solar radiation and cosmic rays, making complex life possible."]
     
@@ -800,7 +813,10 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     ))
     
     # 2. Create and add bow shock
-    bow_shock_standoff = 15 * EARTH_RADIUS_AU  # Source: textbook ~15 R_E; measured nominal ~11-14 R_E (Nature Comms 2016)
+    # L-291: was a typed 15 R_E (textbook) with a comment conceding the
+    # measured 11-14. The store now holds the measured midpoint; see
+    # EARTH_BOW_SHOCK_STANDOFF_RADII in constants_new.py for the source.
+    bow_shock_standoff = EARTH_BOW_SHOCK_STANDOFF_RADII * EARTH_RADIUS_AU
     bow_shock_width = 25 * EARTH_RADIUS_AU  # legacy flank scale; ignored on conic path
     # Conic-section bow shock via shared builder (planet_visualization_utilities).
     # Module updated: June 2026 with Anthropic's Claude Opus 4.8.
@@ -822,9 +838,9 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     
     bow_shock_text = ["Earth: Bow Shock<br><br>"
                 "Bow Shock: The boundary where the supersonic solar wind is first slowed<br>"
-                "by Earth's magnetic field, typically located about 15 Earth radii upstream<br>"
+                f"by Earth's magnetic field, typically located about {EARTH_BOW_SHOCK_STANDOFF_RADII:g} Earth radii upstream<br>"
                 "from Earth on the Sun-facing side.<br>"
-                "Measured nominal standoff is ~11-14 R_E; the 15 R_E shown is the textbook value (Nature Comms 2016).<br>"
+                "Drawn at the midpoint of the 11-14 R_E measured under normal solar wind (Lugaz et al. 2016).<br>"
                 "The Bow Shock points towards the Sun along the X-axis. The XY plane is the ecliptic."]
     
     bow_shock_customdata = ['Earth: Bow Shock']
@@ -984,8 +1000,11 @@ def create_earth_leo_shell(center_position=(0, 0, 0)):
     AU_PER_KM = 1.0 / KM_PER_AU
 
     # LEO altitude bands in km
-    LEO_LOW_KM  = 6571.0   # 200 km altitude
-    LEO_HIGH_KM = 8371.0   # 2000 km altitude
+    # L-291: were typed 6571 / 8371, which is the 6371 km MEAN radius plus
+    # the altitude -- a shadow of the wrong radius. The store derives
+    # both from the equatorial radius this shell is drawn against.
+    LEO_LOW_KM  = EARTH_LEO_INNER_KM    # 200 km altitude
+    LEO_HIGH_KM = EARTH_LEO_OUTER_KM    # 2000 km altitude
     STARLINK_KM = 6921.0   # ~550 km altitude -- densest population
 
     np.random.seed(7)      # Deterministic scatter
@@ -1018,8 +1037,9 @@ def create_earth_leo_shell(center_position=(0, 0, 0)):
     hover_text = (
         "Earth: Low Earth Orbit (LEO)<br><br>"
         "Low Earth Orbit (LEO)<br>"
-        "Altitude range: 200 km to 2,000 km above surface<br>"
-        "Radius: 6,571 km to 8,371 km from Earth's center (1.03 to 1.31 Earth radii)<br><br>"
+        f"Altitude range: {EARTH_LEO_LOWER_ALTITUDE_KM:,.0f} km to {EARTH_LEO_UPPER_ALTITUDE_KM:,.0f} km above surface<br>"
+        f"Radius: {EARTH_LEO_INNER_KM:,.0f} km to {EARTH_LEO_OUTER_KM:,.0f} km from Earth's center "
+        f"({EARTH_LEO_INNER_RADII:.2f} to {EARTH_LEO_OUTER_RADII:.2f} Earth radii)<br><br>"
         "LEO satellites orbit at all inclinations -- forming a true shell, not a ring.<br>"
         "One orbit takes 90-120 minutes; a satellite crosses the sky in ~6 minutes.<br><br>"
         "The bright moving points visible at dusk and dawn are LEO objects.<br>"
@@ -1091,7 +1111,7 @@ def create_earth_geostationary_belt_shell(center_position=(0, 0, 0)):
     center_x, center_y, center_z = center_position
 
     # Geostationary orbit radius in AU
-    GEO_RADIUS_KM = 42164.0
+    GEO_RADIUS_KM = EARTH_GEOSTATIONARY_RADIUS_KM   # L-291: derived in the store from GM and rotation rate
     # L-178: converted directly via KM_PER_AU. The former local
     # EARTH_RADIUS_KM = 6371.0 (volumetric mean) was a shadow constant, and
     # dividing into the equatorial-based EARTH_RADIUS_AU drew the belt
@@ -1129,8 +1149,10 @@ def create_earth_geostationary_belt_shell(center_position=(0, 0, 0)):
     hover_text = (
         "Earth: Geostationary Belt (GEO)<br><br>"
         "Geostationary Belt (GEO)<br>"
-        "Altitude: 35,786 km / 0.000239 AU above surface<br>"
-        "Radius: 42,164 km / 0.000282 AU from Earth's center (6.62 Earth radii)<br><br>"
+        f"Altitude: {EARTH_GEOSTATIONARY_RADIUS_KM - EARTH_EQUATORIAL_RADIUS_KM:,.0f} km / "
+        f"{(EARTH_GEOSTATIONARY_RADIUS_KM - EARTH_EQUATORIAL_RADIUS_KM) / KM_PER_AU:.6f} AU above surface<br>"
+        f"Radius: {EARTH_GEOSTATIONARY_RADIUS_KM:,.0f} km / {EARTH_GEOSTATIONARY_RADIUS_KM / KM_PER_AU:.6f} AU "
+        f"from Earth's center ({EARTH_GEOSTATIONARY_RADII:.2f} Earth radii)<br><br>"
         "Each point represents a region of this belt populated by active satellites.<br>"
         "Approximately 550 active geostationary satellites carry TV broadcasts,<br>"
         "weather imagery, communications, and GPS augmentation for half the world.<br><br>"
@@ -1168,7 +1190,7 @@ def create_earth_geostationary_belt_shell(center_position=(0, 0, 0)):
 # Verified: April 2026 via Gemini fact-check
 earth_hill_sphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.02 AU TO VISUALIZE.\n\n" 
-            "Earth's Hill Sphere (extends to ~235 Earth radii or about 1.5 million km)."
+            f"Earth's Hill Sphere (extends to about {EARTH_HILL_SPHERE_RADII:.0f} Earth radii or about {EARTH_HILL_SPHERE_KM / 1e6:.1f} million km)."
 )
 
 def create_earth_hill_sphere_shell(center_position=(0, 0, 0)):
@@ -1181,7 +1203,7 @@ def create_earth_hill_sphere_shell(center_position=(0, 0, 0)):
     Retained pending the codebase-wide sweep in L-254.
     """
     # Hill sphere radius in Earth radii
-    radius_fraction = 235  # Earth's Hill sphere is about 235 Earth radii
+    radius_fraction = EARTH_HILL_SPHERE_RADII  # L-291: derived in the store from the two GMs
     
     # Calculate radius in AU
     radius_au = radius_fraction * EARTH_RADIUS_AU
@@ -1197,7 +1219,7 @@ def create_earth_hill_sphere_shell(center_position=(0, 0, 0)):
     z = z + center_z
     
     # Create hover text
-    hover_text = ("Earth's Hill Sphere (extends to ~235 Earth radii or about 1.5 million km)<br><br>"
+    hover_text = (f"Earth's Hill Sphere (extends to about {EARTH_HILL_SPHERE_RADII:.0f} Earth radii or about {EARTH_HILL_SPHERE_KM / 1e6:.1f} million km)<br><br>"
                 "The Hill sphere is the region around a body where its own gravity is the dominant force in attracting satellites. For <br>" 
                 "a planet orbiting a star, it's the region where the planet's gravity is stronger than the star's tidal forces.<br><br>" 
                 "The Hill Sphere radius can be described in words as follows: it is equal to the planet's average distance from the <br>" 
