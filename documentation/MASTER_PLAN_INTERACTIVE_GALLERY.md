@@ -1,13 +1,17 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** v25 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
-**the first feature-bearing exhibit is LIVE.** The Sun ships at
-`palomasorrery.com/interactive.html?exhibit=sun`, unlinked from the
-landing page, Mode 5 accepted 2026-08-29 (gallery `ac9a5c7b`). Its GUI
-(L-267) is complete on desktop as of 2026-09-03 (gallery `98cc99bd`): a
-drawer replaces the legend, cross markers and rows move the camera, and
-the i panel follows the focus and carries each shell's curated link
-(L-265, DONE). The phone pass is the one thing carried.
+**Status:** v26 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
+**the first feature-bearing exhibit is LIVE AND COMPLETE.** The Sun
+ships at `palomasorrery.com/interactive.html?exhibit=sun`, unlinked
+from the landing page, Mode 5 accepted 2026-08-29 (gallery
+`ac9a5c7b`). Its GUI (L-267) is complete on desktop as of 2026-09-03
+(gallery `98cc99bd`): a drawer replaces the legend, cross markers and
+rows move the camera, and the i panel follows the focus and carries
+each shell's curated link (L-265, DONE). The phone pass is DONE as of
+2026-09-06, and the frame HUD with it (L-289, closed on Tony's Mode
+5). **The second exhibit, EARTH, is DESIGNED AND NOT BUILT** (L-291):
+shells plus the Moon, arriving at low Earth orbit, blocked only on the
+`interactive-exhibit` skill install.
 **The braid, ruled 2026-08-22:** provenance stops being a GATE and
 becomes a per-artifact slice, and the rendering layer is worked first.
 The five segments of Section 5a do NOT move; the order they are worked
@@ -82,15 +86,18 @@ text here read "enabled with a known open issue", contradicting its own
 header forty lines below. L-151 (gallery-assembler skill) DONE
 2026-07-27; L-150 (multi-orbit binaries) still decided, not yet built.)
 **Date begun:** July 3, 2026
-**Last updated:** September 6, 2026 (v25: Section 5a gains the
-2026-09-06 subsection -- the phone passed the lobby and the sweep and
-failed the edge labels, rebuilt as the frame HUD; the order unchanged;
-Earth opens as a design conversation next; with Anthropic's Claude
-Fable 5.1. v24, September 5, 2026: the 2026-09-05 subsection -- L-287
-live; lobby, 2D sweep and twelve-edge labels built and render-gated.
-v23, September 4, 2026: step 2 realigned from the hall to the lobby,
-rooms and editor -- L-280 retired, L-282 rewritten, L-286 and L-287
-opened.)
+**Last updated:** September 6, 2026 (v26: the EARTH exhibit designed in
+a zero-code round -- shells plus the Moon, arriving at low Earth orbit;
+a Lagrange point belongs to the frame that defines it; sunlight is
+geometry, not a lighting model; the Moon's 3.37-day trust window found
+unenforced; L-289 closed and the Sun's chrome finished; Section 5a
+gains the 2026-09-06 evening subsection; with Anthropic's Claude Opus
+5. v25, September 6, 2026: Section 5a gains the 2026-09-06 subsection
+-- the phone passed the lobby and the sweep and failed the edge labels,
+rebuilt as the frame HUD; the order unchanged; Earth opens as a design
+conversation next; with Anthropic's Claude Fable 5.1. v24, September 5,
+2026: the 2026-09-05 subsection -- L-287 live; lobby, 2D sweep and
+twelve-edge labels built and render-gated.)
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
 Claude Opus 5, Claude Fable 5, Claude Sonnet 5, GPT
 
@@ -1415,6 +1422,66 @@ systematically with `tools/sweep_report.py`, which names every card by
 class. The old-card cleanup is his, in the editor, separate from any
 step here. L-290 (relay anchors must name the protocol and skills) is
 a process item from a parallel Sonnet session and waits on his ruling.
+
+### 2026-09-06 (evening) -- the Sun's axis question closes, and Earth
+is designed
+
+Measured at orrery `50cbd2df` and gallery `90615b9f`, both confirmed
+against the live remotes. Appended, not merged.
+
+**The Sun's chrome is finished.** L-289 is CLOSED on Tony's Mode 5.
+Patch 4 passed all five trials on the phone in both orientations, and
+then the triad turned out to read as 90 degrees off the grid while
+being provably correct -- an orthographic triad beside a perspective
+box, with every axis title empty and the grid uniform white, so nothing
+in the render could corroborate it. Two more rounds fixed that: box
+edges coloured per axis (right on desktop, off the sides of a portrait
+frame on the phone), then three coloured lines through the origin.
+Tony: "This works. It's a bit unusual but it is correct and one can't
+make a mistake!" That is three Mode 5 rounds on one piece of chrome,
+and none of the three failures was visible headless.
+
+**Earth is designed, zero code.** The full record is
+`documentation/PREDESIGN_earth_exhibit_20260906.md` in the gallery
+repo; L-291 is the handle. The exhibit is Earth's shells plus the
+Moon, arriving at LOW EARTH ORBIT -- Tony's framing was "what we see
+from the ISS" -- with eight shells lit and everything from the Van
+Allen belts outward waiting in the drawer. Four things were added
+during the round: the Sun's direction (not optional, since the
+magnetosphere is compressed sunward and rotated to face it), the axis
+and equator, Earth-Moon Lagrange points, and an exosphere shell that
+does not exist yet.
+
+**Two rulings from that round worth carrying into every later exhibit.**
+A Lagrange point belongs to the FRAME THAT DEFINES IT -- so Earth-Moon
+here and Sun-Earth held for a heliocentric view, one rule with no
+case-by-case exceptions. And sunlight is GEOMETRY, not a lighting
+model: the terminator is a great circle perpendicular to the Sun
+direction, computed rather than shaded, because a shading model on
+Earth alone would break one-chrome-many-rooms and would be a rendering
+effect with nothing to source.
+
+**What the round found that nobody was looking for.** The Moon's
+osculating elements carry a measured trust window of 3.37 days against
+Earth's 365, and NOTHING IN THE SERVING PATH ENFORCES IT -- the
+resolver gates on the cache's global served_window, which is built only
+from heliocentric objects, and the Moon is parent-relative. The Sun
+exhibit never met this because it draws no orbits at all. Earth is the
+first exhibit to exercise the assembler's propagation path, and that is
+a property of step 3 the plan had not named.
+
+**A backlog item became an exhibit.** Tony's question about why one
+year rather than one lunar month led to the lunar standstill: the
+Moon's orbit is nearly circular, so what separates two drawn ellipses
+is the drift of the tilt direction, which comes full circle in 18.6
+years. Four dated orbits fanning apart is a room of its own (L-293),
+and the orrery already does the same trick for comets at perihelion.
+
+**What this does to the order.** Nothing moves. Step 3, Earth into the
+assembler, has had its design conversation and is now blocked on ONE
+Tony-action: installing the `interactive-exhibit` skill to the account,
+since a session can read the repo copy but cannot load it. Step 2's
+remaining item (L-286's rooms page) is unchanged.
 
 ### What this section deliberately does not carry
 

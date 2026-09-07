@@ -687,6 +687,52 @@ resident.
 (Moved down from the resident protocol on 2026-09-03 when v3.53
 made a fourth entry.)
 
+v3.51 (August 31, 2026): No rule changed in this document. One skill
+bump, and the end of a habit nobody had decided on.
+
+safe-file-editing 1.9 -> 1.10 (L-271). Git Is the Backup [QUALITY]:
+patch scripts stop writing `.bak` and print the Discard Changes path
+instead.
+
+The argument is structural, which is what makes it a rule. A patch
+guards on a content fingerprint and refuses when the working copy does
+not match, so at the moment it writes, the file on disk is the committed
+version. Git holds it. The `.bak` can never be the only copy, and the
+one case where it would earn its place -- uncommitted work -- is exactly
+the case the gate refuses to run in.
+
+A stale copy is an active hazard rather than clutter. The orrery's own
+.gitignore records why, from the sweep of 2026-08-29: a session grepping
+for a value can hit one and read it as current, and two of the nine
+swept that day were a superseded master plan and a superseded skill.
+
+Tony's question was the whole of it -- "why do we create them at all?" --
+and his correction to the rate stands with it: days, not weeks. All
+eight swept from the gallery on 2026-08-31 were made in the preceding
+two days. He also believed the maintenance runner cleaned them up. It
+does not; the word does not appear in that file. What existed was one
+manual sweep, which is how a habit gets mistaken for a mechanism.
+
+The .gitignore rule was widened in the same commit. `*.bak` matches only
+names ENDING in .bak, so `.bak1`, `.bak2` and `.bak_L271` slipped
+through the 2026-08-29 sweep and kept being committed -- which is why
+two close-approach cache backups survived it, and why the gallery, whose
+rule was narrower still, kept all eight of its own.
+
+One obligation this bump cannot discharge from inside the session that
+made it. A skill lives in three stores, and the account install is the
+copy Claude actually loads; a reinstall is invisible to the running
+conversation. So: safe-file-editing went to 1.10 at `ccd1ac96`, the
+session that bumped it had loaded 1.9, and the next session confirms its
+loaded copy reads 1.10 before doing patch work.
+
+Version history: v3.48 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-09-06 when v3.54
+made a fourth entry.)
+
 
 
 

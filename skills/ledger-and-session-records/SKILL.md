@@ -6,9 +6,10 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Skill version: 1.9 | Cut from palomas_orrery @ 41c0b279 (v1.9), earlier
-@ 3586970d (v1.8), @ 434a712b (v1.7), @ 305b269 (v1.6), @ 3398970
-(v1.5) | August 23, 2026, with Anthropic's Claude Opus 5
+Skill version: 1.10 | Cut from palomas_orrery @ 50cbd2df (v1.10),
+earlier @ 41c0b279 (v1.9), @ 3586970d (v1.8), @ 434a712b (v1.7),
+@ 305b269 (v1.6), @ 3398970 (v1.5) | September 6, 2026, with
+Anthropic's Claude Opus 5
 Sources: LEDGER_CONSOLIDATED.md header, ledger_index.py at HEAD, handoff
 v28 (consolidation) and v29 (cleanup), food insecurity handoffs. v1.3
 adds the Tony-action (do)/(decide) tag convention and its rollup rule,
@@ -35,7 +36,15 @@ Tony's observation of August 23, 2026 that three links of a
 four-link chain were firing. And it corrects that section's own
 opening claim, which still said the protocol's version history lives
 in the ledger appendix five days after v3.41 replaced that appendix
-with a pointer.
+with a pointer. v1.10 carries THREE changes from one session
+(2026-09-06), which is itself the first of them. ONE SESSION, ONE BUMP
+(L-296): a session does not ship two versions of one skill, so
+everything it decides rides one version. The SECOND ANCHOR LINE for
+relay partners with no resident layer (L-290), in the Anchor
+Requirement section, with two forms and a read-back. And the master
+plan restamps once per DESIGN BUILD (L-296) rather than at "key
+junctures", which was not countable and so kept returning the judgment
+to Tony.
 
 Note: READING the ledger at session start is resident Part-1 behavior,
 not this skill's job. This skill carries the maintenance mechanics.
@@ -60,9 +69,16 @@ protocol -> ledger -> handoff -> manifest -> code -> repo -> ledger.
 2026-08-20, L-221). It is the ROADMAP -- where we are and where we
 are going, not what is directly in front -- traced at three levels
 of zoom: the full plan, its summary, and the critical path. It
-restamps at key junctures rather than at every change, because a
-juncture is its unit; stepwise updating is the ledger's job. That
-cadence is not staleness to be corrected by restamping more often.
+restamps once per DESIGN BUILD; stepwise updating is the ledger's job.
+That is Tony's ruling of 2026-09-06 (L-296), replacing "at key
+junctures": a juncture is not countable, so the rule could not be
+applied without a judgment call every time, and the call kept landing
+on Tony. A design build is countable. Versions are REPLACED, not
+archived -- only the PROTOCOL keeps a versioned copy per version -- and
+git holds the superseded bytes either way, which is why the plan's own
+rolling stamp keeps three entries and simply drops the fourth instead
+of pushing it down into a history file. That cadence is not staleness
+to be corrected by restamping more often.
 
 It does not compete on the axis above, which is about STATUS: where
 any two documents disagree about what is done, the ledger wins. The
@@ -201,6 +217,59 @@ This is the document-layer form of the protocol's SHA Round Trip
 CRITICAL gate -- applies uniformly regardless of document type or
 audience.
 
+**A document leaving this Project needs a SECOND anchor line** when the
+receiving partner has no resident protocol and no installed skills --
+true for GPT, Gemini, and any Claude session outside this account and
+Project (L-290). The code anchor says WHICH BYTES to read; this one
+says WHAT RULES the work runs under. Without it a partner operates on
+the code with none of the conventions governing how the work is done.
+
+NAME THE SKILLS THE TASK FIRES, not a blanket list. Same judgment the
+resident protocol already asks for under "Relevant skill unfired ->
+Load it by name": a provenance review needs provenance-discipline, a
+patch needs safe-file-editing, and sending all ten teaches the partner
+to skim.
+
+The wording depends on what the partner can actually do:
+
+- **Claude or GPT (fetch-capable).** Name the files as fetch targets at
+  the same pinned SHA: "also fetch PROJECT_INSTRUCTIONS.md and
+  skills/<name>/SKILL.md at <SHA>." These partners pull the exact bytes
+  the way they pull code -- L-191 records Fable running `git ls-remote`
+  against a pinned SHA and parsing the source.
+- **Gemini (snapshot-only, L-276).** Split by WHICH REPO WAS IMPORTED,
+  not by whether it can fetch. `PROJECT_INSTRUCTIONS.md` and `skills/`
+  live IN the orrery repo, so a Gemini that imported the orrery ALREADY
+  HAS both -- unpinnable, fixed to whenever the import happened, but
+  present. Name the import state and point at the paths: "operating
+  from an orrery snapshot imported [date]; the protocol and skills are
+  in that snapshot at `PROJECT_INSTRUCTIONS.md` and `skills/`."
+  Gemini imports ONE repository, so a GALLERY import leaves it with no
+  protocol and no skills at all -- they are in the other repo. THAT is
+  the paste case: state the limitation and put the relevant excerpt in
+  the document itself rather than pointing at a path.
+
+**ASK FOR THE READ-BACK.** The outbound document asks the partner to
+state which rule files it actually read. A return document that does
+not name them is telling you it did not read them. This is the only
+part of the mechanism that can FAIL VISIBLY; the anchor line itself
+cannot, because a document that omits it looks exactly like one that
+did not need it (A Check That Cannot Fail Is Not Passing).
+
+Either way the requirement is the one above, one layer up: an
+un-anchored document does not say what it describes, and for a partner
+with no resident layer, "what it describes" includes the rules and not
+only the code.
+
+(Origin, 2026-09-06: a parallel Claude Sonnet session, outside this
+account and Project, reached a correct conclusion and then proposed a
+handle already taken and offered a ledger entry "ready to paste" --
+both exactly the failures this rule prevents. It had the code and none
+of the ledger skill's delivery rules. Tony ruled it in the same
+session, his reason being that work now moves between Opus, Fable and
+GPT under credit limits, so the relay discipline is load-bearing
+precisely when the flexibility is wanted.)
+
 ## Where a File Goes [QUALITY]
 
 Two directories, and the test is not how finished the file is.
@@ -286,6 +355,18 @@ steps travel in ONE commit:
    together.
 
 Do not leave any of it to a later checkpoint someone has to remember.
+
+**ONE SESSION, ONE BUMP [QUALITY].** A session does not ship two
+versions of one skill. Everything a session decides about a given skill
+rides a SINGLE version number, in a single commit, under the four steps
+above. Two amendments arriving the same evening do not become 1.10 and
+1.11; they become one 1.10 carrying both. (Tony's ruling, 2026-09-06,
+when L-290's relay-anchor amendment and L-296's plan-version rule both
+wanted 1.10. Each bump costs a protocol history entry, a manifest
+regeneration and a reinstall, so splitting them multiplies the
+ceremony and the chances of step 3 not firing -- and it makes the
+version history harder to read, since two entries then describe one
+evening.)
 
 **Step 3 is the one that stops firing** (Tony's observation,
 2026-08-23). Steps 1, 2 and 4 are visible -- you are editing the file,

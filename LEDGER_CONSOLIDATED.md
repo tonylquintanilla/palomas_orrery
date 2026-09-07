@@ -279,7 +279,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*173 live items; 159 need attention (`!`); 172 RICE-scored; 112 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*178 live items; 164 need attention (`!`); 177 RICE-scored; 113 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -292,11 +292,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-262 | The framing smoke test has never run against the page | OPEN | 11.4 | 2026-08-30 |
 | ! | L-271 | Patch scripts wrote backups nothing ever removed | OPEN | 11.4 | 2026-08-31 |
 | ! | L-237 | Artifact 1's golden record is stale and needs re-cutting | OPEN | 10.8 | 2026-08-25 |
-| ! | L-290 | Relay anchors must name the protocol and skills, not the code SHA alone | OPEN | 10.8 | 2026-09-06 |
+| ! | L-290 | Relay anchors must name the protocol and skills, not the code SHA alone | PENDING-GATE | 10.8 | 2026-09-06 |
 | ! | L-266 | Nothing checks that a cited link still resolves | OPEN | 9.0 | 2026-08-30 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-226 | safe-file-editing 1.8 -- encoding gate covers prose; corrections do not travel | OPEN | 8.1 | 2026-08-23 |
 | ! | L-278 | A relayout from inside a Plotly event handler re-enters the update machinery | OPEN | 8.1 | 2026-09-02 |
+| ! | L-296 | Every design build earns a master plan version number | PENDING-GATE | 8.1 | 2026-09-06 |
 | ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-21 |
 | ! | L-249 | The Earth slice of L-181: interior boundaries as sourced constants | OPEN | 7.2 | 2026-08-25 |
 | ! | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | OPEN | 6.0 | 2026-08-25 |
@@ -307,11 +308,11 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-246 | S4714's semi-major axis was three values in three stores | OPEN | 5.1 | 2026-08-25 |
 | ! | L-193 | Qualified verdicts -- the token is not the whole answer | OPEN | 4.8 | 2026-08-15 |
 | ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
-| ! | L-289 | Sun exhibit on the phone: the 3D axis labels are not visible | OPEN | 4.8 | 2026-09-06 |
 | ! | L-268 | Sweep: features collapsed out of their own identity | OPEN | 4.5 | 2026-08-30 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-08-25 |
 | ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-25 |
+| ! | L-291 | Earth exhibit: shells plus the Moon | OPEN | 4.3 | 2026-09-06 |
 | ! | L-281 | The guest book: no-account comments, approve-before-show | OPEN | 4.2 | 2026-09-03 |
 | ! | L-247 | Sgr A* constants migrated to the single source of truth | OPEN | 4.0 | 2026-08-25 |
 | ! | L-277 | The L-192 site store anchors by line number, so any insertion breaks two checkers | OPEN | 4.0 | 2026-09-03 |
@@ -330,12 +331,15 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-215 | Ledger cleanup by topic, not by age | OPEN | 3.6 | 2026-08-19 |
 | ! | L-239 | Seed the three Oort builders so a render is reproducible | OPEN | 3.6 | 2026-08-25 |
 | ! | L-285 | index.html adopts the shared navigation cluster; the fake-wheel dolly retires | OPEN | 3.6 | 2026-09-04 |
+| ! | L-295 | The upper atmosphere shell disagrees with its own hover text | OPEN | 3.6 | 2026-09-06 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-25 |
 | ! | L-286 | Rooms in four levels: drill-down, short-name breadcrumb, Home stays a scene reset | OPEN | 3.5 | 2026-09-06 |
 | ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
+| ! | L-292 | Earth shells the orrery does not draw | OPEN | 3.4 | 2026-09-06 |
 | ! | L-283 | Visual theme: dark wall, paper placards, record mode | OPEN | 3.2 | 2026-09-03 |
 | ! | L-256 | provenance-discipline 2.8, and the status pass it enables | OPEN | 3.1 | 2026-08-27 |
 | ! | L-288 | Gallery Studio creates and edits live-scene cards | OPEN | 3.1 | 2026-09-05 |
+| ! | L-294 | The Explorer room's placeholder, and Earth's heliocentric view | OPEN | 3.1 | 2026-09-06 |
 | ! | L-254 | 76 dead sphere-shell builders, unmarked, across 12 modules | OPEN | 2.8 | 2026-09-02 |
 | ! | L-240 | Split declared drawing parameters from measured values | OPEN | 2.8 | 2026-08-25 |
 | ! | L-176 | Shell hover text: add illustrated dimensions (radius_fraction -> km) | OPEN | 2.8 | 2026-08-04 |
@@ -346,6 +350,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-273 | A document indexer, so the README's document table stops being hand-maintained | OPEN | 2.5 | 2026-09-01 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 |  | L-225 | Migrate the comet shell constants into `constants_new.py`, then dispatch | DEFERRED | 2.4 | 2026-08-23 |
+| ! | L-293 | Lunar standstill: an exhibit made of four dated orbits | OPEN | 2.4 | 2026-09-06 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
@@ -563,6 +568,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-203 | The visibility convention -- give it a home in the skill | DONE | 5.1 | 2026-08-18 |
 |  | L-189 | Provenance scanner: run history and run-to-run delta | DONE | 4.8 | 2026-08-11 |
 |  | L-279 | A test protocol that leaves the CONDITIONS uncontrolled produces confident wrong readings | DONE | 4.8 | 2026-09-02 |
+|  | L-289 | Sun exhibit on the phone: the 3D axis labels are not visible | DONE | 4.8 | 2026-09-06 |
 |  | L-065 | European heat wave heat map (Earth System track) | DONE | 4.8 | 2026-06-25 |
 |  | L-064 | Provenance-scanner format sweep -- Earth System family | DONE | 4.5 | 2026-06-30 |
 |  | L-075 | KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine) | DONE | 4.3 | 2026-06-30 |
@@ -5584,125 +5590,34 @@ gallery_config.json; gallery_metadata.json.
   question -- a scene-only card has no picture on the page today.
 - **Note:** RICE 3/3/70/2 -> 3.2 proposed, not confirmed. Waits on the
   lobby (L-282), which decides how a live card looks in a grid.
-**Gap:** design round, then the Studio action; `json_converter.py` v2
-branch already writes storage cards, so the writer exists.
+- **Built and run 2026-09-06**, one all-or-nothing patch over three
+  files (`documentation/patch_L288_1_studio_live_card.py`, written with
+  Anthropic's Claude Fable 5.1). `tools/json_converter.py` gains
+  `live_scene_urls()` -- moved out of the editor so both tools read one
+  list -- and `add_live_card()`, which writes a schema-v2 storage card
+  with `live` set and empty `files`, and refuses a non-v2 config, an
+  empty title, or a scene that already has a card.
+  `tools/gallery_studio.py` gains the "New Interactive Card..." button
+  and its dialog (`_new_live_card`). `tools/gallery_editor.py` now
+  imports the shared function instead of owning it.
+- **The design question is ANSWERED: a live card carries no still
+  picture.** It is a placard with an Interactive tag. Studio authors
+  it, the editor places it. (Tony's rulings; the lobby pass settled the
+  no-picture half on the phone.)
+- **Mode 5, 2026-09-06, iPhone, gallery `b8c5d437`: PASSED** by the
+  Studio path end to end -- Studio wrote the card, it landed in
+  Storage, the editor placed it, the card opened the scene.
+- **Tony-action (do):** exercise the JSON CONVERSION path. The patch
+  edited `json_converter.py`, and only the Studio path was walked.
+  Convert one card through the converter and confirm a v2 config
+  carrying a live card round-trips.
+**Gap:** the converter path above; then DONE.
 **Ref:** L-287 (the editor's live URL picker), L-282 (live scene is one
 card in the grid), tools/gallery_studio.py, tools/json_converter.py,
 interactive.html.
 
-#### [L-289] Sun exhibit on the phone: the 3D axis labels are not visible
-<!-- L:289 status:OPEN upd:2026-09-06 section:A flag: rice:3/2/80/1 -->
-- **Opened 2026-09-05** from Tony's phone pass on the live Sun exhibit,
-  2026-09-04: on opening the scene no axis label is visible; turning
-  the grid brings the x and y labels partly into view; the z label is
-  never visible. Render finding, Mode 5, Tony's eyes.
-- **Tony's suggested fix:** put labels on the TOP view for x and y and
-  the BACK view for z as well, not only on the bottom view for x and y
-  -- the side view that would carry z is never seen at the arrival
-  camera. The exact Plotly mechanism (scene axis `showbackground`,
-  title placement, or duplicate annotations) is to be confirmed
-  against the render, not reasoned.
-- **Note:** RICE 3/2/80/1 -> 4.8 proposed, not confirmed. L-267 is
-  DONE; this is its phone follow-on and stays separate so the closed
-  record is not reopened. gallery-assembler skill fires (Mode 5 as
-  measurement).
-- **Design settled 2026-09-05 (Tony, by phone), replacing the
-  top/back-view idea above.** Two observations first: on desktop the
-  camera zoom shrinks grid and all, so the numbers never change; on
-  the phone the frame zoom re-labels the grid as you go in, which is
-  real information about scale (Tony: better). And the arrival frame
-  is full on purpose, so the box edges Plotly labels sit off-screen.
-  Ruling: labels on ALL TWELVE edges of the box, internal and open,
-  so one is in view at any rotation; tick values as well as the axis
-  name, thinned to every second or third grid line; the page OWNS the
-  ticks (Plotly's one-edge set off on the Sun so no edge carries
-  two); NO label at a vertex; the axis name on the UNLABELED grid
-  line nearest the centre of each edge so no value is lost to it;
-  NO dimming with distance. Clutter is a Mode 5 call.
-- **Built 2026-09-05, NOT yet run or pushed** [render-gated]:
-  `patch_L289_1_edge_labels.py` (gallery; guards on `interactive.html`
-  at `503fa387`) and `patch_L289_2_name_on_skipped_tick.py` (guards
-  on patch 1's output). One scatter3d text trace, hover off, no
-  legend group (the drawer never sees it), added after newPlot and
-  after buildSunDrawer so extents and sunTraceGroup never counted it;
-  rebuilt by sunEdgeLabelsUpdate() after sunFrameOn, navFrameZoom and
-  navHome from the same range and dtick the grid uses; ticks are
-  multiples of dtick clear of both vertices by half a step;
-  `?ticks=N` (1..6, default 2) is the Mode 5 switch. Sun exhibit only;
-  the Explorer's axes are untouched. Tested in a stand-in page (the
-  Sun page cannot run in the sandbox: Pyodide's CDN is blocked) with
-  Plotly, the Sun camera and arrival ranges: 36 labels installed;
-  values re-scaled with the grid (0.2 at arrival, 0.02/0.06 three taps
-  in, 0.5 out); with lines every 0.2 on a -0.7..0.7 range, ticks=2
-  reads -0.4, 0, 0.4 with the name on the -0.2 line, ticks=3 reads
-  -0.4, 0.2 with the name on 0, ticks=1 puts the name between lines
-  at 0.1. No script errors. How it reads over the real shells is
-  unknown until the phone.
-- **Tony-action (do):** run the two L-289 patches at the gallery root
-  (either side of the L-282 patches; different file), commit, push;
-  Mode 5 on the phone: rotate, +, -, Home; try `&ticks=3`.
-- **Tony-action (decide), after Mode 5:** tick density (1, 2 or 3),
-  label size (one constant, 9 px today), and whether the Explorer
-  room should get the same edges.
-- **Mode 5, 2026-09-05, phone, live at `66087696`: the twelve-edge
-  build FAILED.** Tony, with screenshots: the labels were scattered
-  and the every-second pattern hard to read; labels on edges beside
-  the camera floated on nothing; on zoom-out the labels vanished;
-  "this may be worse than the plotly labels." Cause, one choice: the
-  labels were points IN the scene, so they behaved as scenery --
-  shrank with distance, were clipped at the box boundary, projected
-  from behind the camera. Not fixable by thinning or size.
-- **Redesign 2026-09-05 (Tony, by conversation):** the tick numbers
-  repeat one value sixty times, so ONE chip states the uniform
-  spacing ("grid 0.2 AU"); direction is a TRIAD in the corner that
-  turns with the camera (Tony: "can the triad rotate in alignment?"
-  -- yes, it is computed from the camera); the First Point of Aries
-  glyph at the x tip with a note that this is the J2000 ECLIPTIC
-  frame, not a graph frame; grid lines coloured per axis to match.
-  Aspect ratio read from the layout, not assumed 1:1:1 (Tony: "ticks
-  are not always isometric"). Frame VERIFIED before the note was
-  written: `feature_renderers.js` rotates IAU poles into the J2000
-  ecliptic by the mean obliquity; belts are drawn in the ecliptic;
-  the served index stores the Sun as frame-origin. Source for the
-  note: NASA/JPL NAIF frames tutorial (J2000 x axis = vernal equinox).
-  The assembler does not pass through the provenance scanner (Tony),
-  so the citation is hand-carried in the note itself.
-- **Built 2026-09-05, live at gallery `fc8d9fb3`:**
-  `patch_L289_3_frame_hud.py` -- edge labels OUT; sunHud* (triad SVG,
-  chip, note) IN as page chrome that only reads the camera and never
-  calls Plotly (the L-278 hazard does not apply); Plotly tick numbers
-  back on; titles stay blank. Triad orientation CONFIRMED by test:
-  markers at +x, +y, +z in the scene matched the arrows.
-- **Mode 5, 2026-09-06, desktop and phone, at `fc8d9fb3`:** triad
-  moves with the grid (desktop); chip works; back link works. Four
-  defects: (1) the frame note was open on arrival and its X did not
-  close it -- `hidden` lost a CSS specificity contest to the rule that
-  shows Sun chrome; (2) grid colours read as a second key against the
-  triad -- back to white; (3) arrival grid 0.2 AU vs chip 0.1 AU --
-  the arrival layout set no dtick, Plotly and the page chose
-  differently; +/- and Home agree (Home sets dtick); mouse wheel is
-  camera zoom by design; (4) on the phone the triad did not follow a
-  touch rotation -- Plotly fires no camera events during touch.
-- **Built 2026-09-06, delivered NOT run:** `patch_L289_4_hud_fixes.py`
-  (guards on `fc8d9fb3`). Note behaves like every other hover: mouse
-  opens on rest over the glyph or the note, closes on leave; touch
-  taps to toggle, tap elsewhere closes; X removed. Grid white.
-  Arrival dtick set from the same rule Home uses. Triad reads the
-  gl3d scene's live camera (getCamera()) once per animation frame and
-  redraws only on change -- tested with Plotly's events removed: 23
-  redraws in a drag, 0 at rest.
-- **Tony-action (do):** run `patch_L289_4_hud_fixes.py`, push; Mode 5
-  on desktop and phone: note hidden on arrival, hover/tap, arrival
-  grid = chip, triad follows a touch rotation.
-- **Tony-action (decide), after Mode 5:** triad size and colours;
-  whether the Explorer room gets the same HUD.
-**Gap:** Mode 5 on `patch_L289_4`; Tony's rulings above; then DONE.
-**Ref:** L-267 (Sun exhibit GUI), L-278 (why the HUD never calls
-Plotly), interactive.html, feature_renderers.js (poleBasis),
-HANDOFF 2026-09-05 (away session), HANDOFF 2026-09-06.
-
 #### [L-290] Relay anchors must name the protocol and skills, not the code SHA alone
-<!-- L:290 status:OPEN upd:2026-09-06 section:A flag: rice:4/3/90/1 -->
+<!-- L:290 status:PENDING-GATE upd:2026-09-06 section:A flag: rice:4/3/90/1 -->
 - **Opened 2026-09-06** from a parallel Claude Sonnet session Tony ran
   against orrery `a57e86b8` (it proposed the handle L-288, already
   taken; placed here). The Anchor Requirement pins the CODE repo's
@@ -5727,12 +5642,352 @@ HANDOFF 2026-09-05 (away session), HANDOFF 2026-09-06.
   (ledger-and-session-records 1.9 -> 1.10) follows the four-step
   binding rule and is verified by the NEXT session's load, per Stale
   Skill = Stop.
-- **Tony-action (decide):** accept, amend or decline the two drafts.
-**Gap:** Tony's ruling; then the protocol edit, the skill bump, the
-reinstall, and the manifest regeneration, in one push.
+- **What v3.53 ALREADY covered, checked at orrery `50cbd2df`
+  2026-09-06**, which is what narrowed the amendment to the real gap:
+  HOW each partner reads the repo was already written under AI Roles
+  from L-276 (Claude and GPT fetch live at a pinned SHA; Gemini's web
+  app imports one public repo as a snapshot of HEAD, cannot read a URL
+  given in a prompt, cannot fetch at a SHA, cannot see commit history,
+  and is not on mobile). The "Documents as handoffs" clause already
+  required `built on <SHA> at <URL>` on every outbound document, with a
+  reason covering both kinds of partner, and the Anchor Requirement
+  gate already applied it uniformly. THE GAP WAS NARROWER THAN
+  "anchors": none of it named `PROJECT_INSTRUCTIONS.md` or the
+  task-relevant `SKILL.md` files as fetch targets, so a partner got the
+  code with none of the governance and read what was built without the
+  rules the build ran under.
+- **Tony's ruling 2026-09-06: ACCEPT both drafts, with three
+  amendments.** His reason for doing it now rather than deferring:
+  work is moving between Opus, Fable and GPT under credit limits, so
+  the relay discipline is load-bearing exactly when the flexibility is
+  needed.
+  1. **The Gemini bullet carried a factual error.** The draft said no
+     SHA pin is possible for the protocol or skills "any more than it
+     is for the code", so paste excerpts inline. But
+     `PROJECT_INSTRUCTIONS.md` and `skills/` LIVE IN the orrery repo:
+     if Gemini imported that repo it already HAS both files, just
+     unpinnable, fixed to whenever the import happened. The real
+     pasting case is the one the draft was describing without knowing
+     it -- Gemini imports ONE repository, so a gallery import leaves it
+     with no protocol and no skills at all, because they are in the
+     other repo. The corrected bullet splits by WHICH REPO WAS
+     IMPORTED, not by whether Gemini can fetch.
+  2. **Name the skills by what the TASK fires**, not "the specific
+     files" -- the same judgment the resident protocol already asks for
+     under "Relevant skill unfired -> Load it by name".
+  3. **Ask the partner to state back which rule files it actually
+     read.** A return document that does not name them is telling you
+     it did not read them. This is the only part of the mechanism that
+     can FAIL VISIBLY; without it nothing can (A Check That Cannot Fail
+     Is Not Passing).
+- **Applied 2026-09-06 in one commit, per the four-step binding rule:**
+  the protocol's "Documents as handoffs" bullet extended (v3.54);
+  `ledger-and-session-records` 1.9 -> 1.10 with the two-form template
+  in its Anchor Requirement section; `skills_index.py` regenerates the
+  manifest row; one commit. The bump also carries L-296 -- see below.
+- **Tony-action (do):** run `skills_index.py`, then REINSTALL
+  `ledger-and-session-records` to the account (Settings > Skills), then
+  commit and push. The reinstall is the step with no artifact prompting
+  it.
+- **THIS BUMP CANNOT BE VERIFIED FROM INSIDE THE SESSION THAT MADE IT.**
+  A skill lives in three stores and the account install is the copy
+  Claude actually loads; a reinstall is invisible to the running
+  conversation. So: `ledger-and-session-records` went to 1.10 at the
+  SHA this session pushes, the session that bumped it had loaded 1.9,
+  and THE NEXT SESSION CONFIRMS ITS LOADED COPY READS 1.10 BEFORE DOING
+  LEDGER WORK. Status is PENDING-GATE, not DONE, because that is what
+  the state honestly is.
+**Gap:** `skills_index.py`, the reinstall, the push; then the next
+session's load confirms 1.10 and this closes.
 **Ref:** L-276 (relay partners can read the repo; the Gemini snapshot
 note), L-191 (the Fable relay), Mode 7 Key Principles,
 skills/ledger-and-session-records/SKILL.md.
+
+#### [L-291] Earth exhibit: shells plus the Moon
+<!-- L:291 status:OPEN upd:2026-09-06 section:A flag: rice:4/4/80/3 -->
+- **Design settled 2026-09-06** in a zero-code conversation, step 1 of
+  the `interactive-exhibit` skill's order. The full record, with every
+  number and its source, is
+  `documentation/PREDESIGN_earth_exhibit_20260906.md` (GALLERY repo).
+  This entry is the handle; the record is the reasoning.
+- **Scope:** Earth's shells plus the Moon, Earth-centered
+  (`?exhibit=earth`). Chosen over shells alone, Earth-plus-Moon without
+  shells, and Sun-plus-Earth's-orbit (which is L-294, not this).
+  The Moon costs almost nothing: its served entry is already analytic,
+  parent Earth, parent-relative, and its `features` dict is EMPTY, so
+  it is one extra name in the driver's `objects` list. Tony's reason
+  for the pairing: the Hill sphere is not decoration beside the Moon,
+  it is the answer to why the Moon is bound.
+- **Arrival frame: the edge is LOW EARTH ORBIT**, 8,371 km from centre
+  (1.3125 equatorial radii). Half-range 1.1x that = 9,208 km = 1.4437
+  radii = 6.155e-5 AU, which is Earth's floor constant, the analogue of
+  `SUN_HALF_RANGE_AU`. Eight shells lit: inner core, outer core, lower
+  mantle, upper mantle, crust, lower atmosphere, upper atmosphere, LEO.
+  Tony's framing was "what we see from the ISS", and the station at
+  about 400 km sits inside that frame.
+- **Also ON at arrival:** Earth's axis and equator plane (the 23.4
+  degree tilt reads at the surface; both poles are already in
+  `idealized_orbits.py::planet_poles`, IAU 2018) and the Sun's
+  direction.
+- **Everything else in the drawer, unselected**, outward: Van Allen
+  inner (1.5), Van Allen outer (4.5), geostationary belt (6.62),
+  magnetosphere (10 sunward), bow shock (15 standoff), magnetotail (100
+  as drawn), Earth-Moon L1-L5 (about 51-70), the Moon (about 60),
+  exosphere (100), Hill sphere (235).
+- **Four features added during the round.** (1) THE SUN'S DIRECTION is
+  not optional: the orrery's magnetosphere is compressed 10 radii
+  sunward with a tail and a conic bow shock and is rotated by
+  `rotate_to_sunward`, so the exhibit must know where the Sun is. (2)
+  THE AXIS AND EQUATOR -- Earth's served entry has no `orientation`
+  block while the Sun's does. (3) LAGRANGE POINTS, by Tony's frame
+  rule: a Lagrange point belongs to the frame that defines it, so
+  Earth-Moon L1-L5 go here and Sun-Earth L1-L5 wait for L-294. (4)
+  EXOSPHERE / GEOCORONA at 100 radii -- see L-292.
+- **Sunlight is GEOMETRY, not a lighting model** (ruled). No shading:
+  every shell in the gallery is a uniform-colour point cloud, shading
+  Earth alone breaks one-chrome-many-rooms, and lighting is a rendering
+  effect with nothing to source. Instead the terminator drawn as the
+  great circle on the crust perpendicular to the Sun direction, plus a
+  subsolar point marker carrying the hover. The hover SAYS the scene is
+  a single epoch and the terminator is frozen -- the axis beside it
+  implies a rotation the scene does not show.
+- **The Moon's orbit, and a finding worth keeping.** Its osculating
+  elements are served fresh (centre Earth, a = 0.0025481 AU, e =
+  0.0339, i = 5.267 deg, epoch JD 2461289.5) but its measured trust
+  window is 3.37 DAYS against Earth's 365.4 -- its node and apsides
+  precess about a hundred times faster. NOTHING IN THE SERVING PATH
+  ENFORCES THAT: `resolver.py` gates on the cache's global
+  `served_window`, which is built only from objects whose
+  `canonical_frame` is heliocentric, and the Moon is parent-relative,
+  so it is not a participant. Its window is measured, recorded and read
+  by nothing outside the builder's own offline test. The Sun exhibit
+  never met this because it draws no orbits at all; Earth is the first
+  exhibit to exercise the assembler's propagation path.
+- **What the number bounds is the MARKER, not the ellipse**
+  (`render_orbits.py` keeps orbit SHAPE and position MARKER as separate
+  jobs). Tony's correction, and it stands: in the orrery each
+  osculating ellipse is clean, and the perturbation shows as the SPREAD
+  between ellipses fetched at different dates. RULING: full ellipse
+  drawn faint, the arc within the trust window drawn brighter around
+  the marker -- emphasis, not truncation, so it never claims the
+  ellipse stops. No builder change.
+- **The magnetosphere's four traces SPLIT into four drawer rows.** The
+  orrery emits magnetosphere, bow shock, inner belt and outer belt from
+  one call; the belts are trapped particles and the magnetopause is the
+  solar wind meeting the field, and at 1.5 and 4.5 radii the belts sit
+  far inside a magnetosphere starting at 10. Tony's note on why the
+  grouping existed: LEGEND ECONOMY in the orrery, where rows are
+  scarce. The exhibit has a scrolling drawer, so that pressure is gone
+  -- and the general point is worth carrying, that groupings inherited
+  from the orrery may be solving a constraint the exhibit does not
+  have.
+- **Provenance: the SCANNER IS NOT THE MECHANISM here.** It is the
+  orrery's tool and the assembler does not pass through it. The check
+  is the live store-drift run following `orrery_constant` pointers into
+  `constants_new.py` at orrery HEAD, MATCH by name. In the store today:
+  Earth's equatorial, polar and mean radii, the four interior
+  boundaries (the L-249 conversion), `MOON_RADIUS_KM`, and both poles.
+  Everything else is a typed literal in `earth_visualization_shells.py`.
+  The closure plan SORTS BEFORE SOURCING: about six are DERIVED (crust
+  = the radius; the atmosphere tops and LEO edges from altitudes
+  already sourced in the hover text; geostationary from GM and the
+  sidereal day; the Hill sphere from the masses and the semi-major
+  axis); FIVE need a citation (both Van Allen distances, the
+  magnetopause standoff, the bow shock standoff -- half done, the code
+  line already carries a note -- and the geocorona, done, see L-292);
+  the rest are DECLARED (belt thickness, tail radii, tail length,
+  opacities, point counts). Order: one patch to `constants_new.py` with
+  sources inline, scanner clean on the build path, push; then one patch
+  to the gallery's `objects_config.json` adding the pointers; then the
+  live run reads them back MATCH by name.
+- **The magnetotail's 100 radii is RECLASSIFIED as DECLARED.** The real
+  tail runs well past 1,000; 100 is a drawing choice wearing a
+  physical-looking number, the same shape as the streamer belt's warp
+  amplitude. The hover says the tail is drawn truncated.
+- **Tony-action (do), BLOCKING THE BUILD:** install the
+  `interactive-exhibit` skill to the account (Settings > Skills). The
+  repo copy at `skills/interactive-exhibit/SKILL.md` reads 1.0 and
+  matches the manifest; the design session READ it from the repo and
+  could not LOAD it. Per Stale Skill = Stop, the building session
+  confirms its loaded copy reads 1.0 first.
+- **Still open, both downstream of the build:** the i-panel copy per
+  feature with sources inline (writing, not design), and the `sun*`
+  chrome renaming under the skill's One Chrome, Many Rooms rule -- grep
+  `interactive.html` for `sun` inside the shared pieces and decide,
+  piece by piece, rename / parametrize / leave.
+- **Note:** RICE 4/4/80/3 -> 4.3 proposed, not confirmed.
+**Gap:** the skill install; then the served-data work (step 2), the
+build (step 3), and Mode 5 on the phone. Closes on Tony's eyes.
+**Ref:** `documentation/PREDESIGN_earth_exhibit_20260906.md` (gallery),
+L-292 (shells the orrery does not draw), L-293 (lunar standstill),
+L-294 (the Explorer room and the heliocentric view), L-295 (the upper
+atmosphere finding), L-249 (the interior constants conversion), L-289
+(the HUD this exhibit inherits), skills/interactive-exhibit/SKILL.md.
+
+#### [L-292] Earth shells the orrery does not draw
+<!-- L:292 status:OPEN upd:2026-09-06 section:A flag: rice:3/3/75/2 -->
+- **Opened 2026-09-06** during the Earth design round. One row per The
+  Braid: the class is "Earth shells worth adding to the orrery", not
+  one item per shell.
+- **EXOSPHERE / GEOCORONA -- needed by L-291, so this one is not
+  optional.** Earth has no exosphere shell today; it is folded into the
+  "upper atmosphere" shell at 1.25 radii, while Mercury gets its own.
+  SOURCED: the hydrogen geocorona was mapped by SWAN/SOHO Lyman-alpha
+  to at least 100 Earth radii, past the earlier LAICA result of about
+  50, and enclosing the Moon's orbit at about 60 -- Baliukin, Bertaux,
+  Quemerais, Izmodenov and Schmidt (2019), J. Geophys. Res. Space
+  Physics 124, 861-885, doi:10.1029/2018JA026136. The Moon flies
+  through Earth's atmosphere.
+- It earns the Sun direction a second time: solar radiation pressure
+  compresses the exosphere into a DAYSIDE BULGE. Same sunward asymmetry
+  as the magnetosphere, a completely different mechanism -- solar wind
+  versus photon pressure. Drawn together they read as a pair.
+- **MEO / GPS shell** at about 4.2 radii, inside the outer Van Allen
+  belt; the overlap is the teaching point, since the constellation
+  lives in the radiation. Not rendered by L-291, so nothing points at
+  it and store drift will not check it -- harmless to add and park.
+- **EARTH ROCHE LIMIT.** The Sun has one; Earth has none.
+- **Note:** RICE 3/3/75/2 -> 3.4 proposed, not confirmed. The exosphere
+  half is on L-291's critical path; the other two are not and should
+  not be allowed to gate it.
+**Gap:** the exosphere shell, with its constant in `constants_new.py`;
+the other two when a build already has the file open.
+**Ref:** L-291, L-295, earth_visualization_shells.py,
+mercury_visualization_shells.py (the exosphere precedent).
+
+#### [L-293] Lunar standstill: an exhibit made of four dated orbits
+<!-- L:293 status:OPEN upd:2026-09-06 section:A flag: rice:3/4/60/3 -->
+- **Opened 2026-09-06**, split out of the Earth design round so it does
+  not become a drawer row nobody opens. Four osculating orbits at
+  today, one month, one year and 9.3 years, fanning wider and wider.
+  The progression IS the exhibit.
+- **Why those intervals.** The Moon's orbit is nearly circular (served
+  e = 0.034), so the swing of its long axis is almost invisible; what
+  separates two drawn ellipses is the drift of the TILT direction,
+  which goes all the way round in 18.6 years. Two orbits 9.3 years
+  apart are therefore tipped opposite ways -- the widest gap the Moon
+  can show. That cycle is the LUNAR STANDSTILL, watched from stone
+  circles and canyon walls for four thousand years before anyone could
+  say why. That is the exhibit's subject, not element drift.
+- **The precedent already exists in the orrery.** With apsidal markers
+  on, it resolves a comet's perihelion time, fetches the elements AT
+  that moment, and draws that conic as a white dotted arc beside the
+  conic for the plot date (`plot_perihelion_osculating_orbit`, called
+  from palomas_orrery.py Capability D). Two orbits from two instants,
+  each chosen because it means something. Tony's observation, and it is
+  what turned this from a caveat into an exhibit.
+- **Tony-action (decide), later:** whether this is a room in
+  `interactive.html` or a curated card. Four orbits and a story may not
+  need a drawer, a nav cluster and an i-panel. Decide when it is sized.
+- **THE FOUR INTERVALS ARE PICKED BY LOOKING, NOT DECIDED HERE.** The
+  19 and 41 degrees per year quoted in conversation came from the
+  standard cycle lengths (18.6 and 8.85 years), NOT from a source
+  checked that session. There is also a monthly wobble from the Sun's
+  pull that may or may not swamp a one-month pair. The orrery fetches
+  elements at any date, so this is an evening's looking, not a debate.
+- **Builder cost:** the served cache holds ONE osculating block per
+  object per nightly build. This needs several, at chosen epochs --
+  gallery-cache-builder territory, and the reason it is its own item
+  rather than part of L-291.
+- **Note:** RICE 3/4/60/3 -> 2.4 proposed, not confirmed. Low score,
+  high interest; it is a candidate for bundling under the plan's
+  SEQUENCING authority rather than being run by RICE order.
+**Gap:** measure the four intervals against real elements; then decide
+room-or-card; then the builder work.
+**Ref:** L-291 (where it came from), Halley and Encke (better versions
+of the same picture), palomas_orrery.py Capability D,
+idealized_orbits.py::plot_perihelion_osculating_orbit.
+
+#### [L-294] The Explorer room's placeholder, and Earth's heliocentric view
+<!-- L:294 status:OPEN upd:2026-09-06 section:A flag: rice:3/3/70/2 -->
+- **Opened 2026-09-06.** Tony's question from the Mode 5 pass: should
+  the Explorer view carry the home interactive URL at all, since it
+  will eventually be replaced by a real solar-system interactive?
+- **Two things now wait on this**, which is why it stops being a loose
+  end. The Sun-Earth Lagrange points L1-L5 (Horizons 31-35) belong to a
+  heliocentric frame by Tony's frame rule, so they are held here rather
+  than drawn in the Earth room. And whether the EXPLORER gets the Sun's
+  frame HUD -- Tony's answer at Mode 5 was "unclear" -- is really a
+  question about what the Explorer is going to become.
+- **The Hill sphere pairing rides here too.** Sun-Earth L1 and L2 sit
+  at about 235 Earth radii, the same distance as Earth's Hill sphere,
+  and that is not a coincidence -- it is the same balance point
+  measured two ways. The Hill sphere is Earth's feature either way, so
+  the same served entry serves both rooms and L1/L2 sit on its surface
+  where the Sun-Earth line crosses. Scale note: at whole-orbit scale
+  the Hill sphere is about half a percent of the frame, so the pairing
+  only reads after a frame zoom onto Earth.
+- **Note:** RICE 3/3/70/2 -> 3.2 proposed, not confirmed. Lagrange
+  points do not travel on Keplerian orbits about their primary, so they
+  need serving as MARKERS at the epoch rather than as orbits -- a
+  different builder path from Earth and the Moon. Distances above are
+  RECALLED, not checked; verify against Horizons before drawing.
+- **Tony-action (decide):** what the Explorer room becomes, and whether
+  the placeholder URL stays until then.
+**Gap:** Tony's ruling on the Explorer; then the heliocentric view, and
+the Sun-Earth Lagrange points with it.
+**Ref:** L-291 (the frame rule that sent them here), L-289 (the HUD
+question carried out of it), L-286 (rooms), interactive.html.
+
+#### [L-295] The upper atmosphere shell disagrees with its own hover text
+<!-- L:295 status:OPEN upd:2026-09-06 section:A flag: rice:2/2/90/1 -->
+- **Found 2026-09-06** while inventorying Earth's shells for L-291.
+  `create_earth_upper_atmosphere_shell` draws at `radius_fraction` 1.25,
+  which is about 1,595 km altitude. Its own hover text says the upper
+  atmosphere "extends from 50 km to about 1,000 km altitude". Those
+  disagree by a factor of about 1.6.
+- Which one is wrong is not settled here. The 1.25 may be a drawing
+  choice that outran its caption, or the caption may be the stale half.
+  Either way one of them is telling a visitor something the other
+  contradicts, and both are on the page.
+- **Note:** RICE 2/2/90/1 -> 3.6 proposed, not confirmed. Cheap, and it
+  sits in a file L-291 and L-292 will both have open -- a Cluster the
+  Tail candidate rather than a separate errand.
+**Gap:** decide which number is right, fix the other, source the one
+that survives.
+**Ref:** L-291, L-292, earth_visualization_shells.py.
+
+#### [L-296] Every design build earns a master plan version number
+<!-- L:296 status:PENDING-GATE upd:2026-09-06 section:A flag: rice:3/3/90/1 -->
+- **Tony's ruling, 2026-09-06:** "I think every design build earns a
+  version number. I don't archive each version but replace them. I only
+  keep each version of the protocol." Given when the Earth design round
+  closed and Claude asked whether it counted as a restamp juncture.
+- **What it sharpens.** `ledger-and-session-records` 1.9 says the plan
+  "restamps at key junctures rather than at every change, because a
+  juncture is its unit." A juncture is not countable, so the rule could
+  not be applied without a judgment call every time -- and the call kept
+  landing on Tony. A DESIGN BUILD is countable. Same rule, mechanical
+  now.
+- **The archiving half is the other half.** Master plan versions are
+  REPLACED, not archived; only the protocol keeps a versioned copy per
+  version. Git holds the superseded bytes either way, so nothing is
+  lost, and it explains why the plan's own rolling stamp keeps three
+  entries and simply drops the fourth rather than pushing it down into
+  a history file the way the protocol does.
+- **Applied immediately:** the plan went v25 -> v26 in this session's
+  patch, with the Earth design round as the build that earned it, and
+  the stale "the phone pass is the one thing carried" sentence in the
+  Status block corrected in the same edit.
+- **VERSION COLLISION, RULED AND DISCHARGED.** This ruling and L-290's
+  relay-anchor amendment both belonged in
+  `ledger-and-session-records`, and both wanted 1.10. Tony,
+  2026-09-06: **"one session - one bump."** A session does not ship two
+  versions of one skill; everything it decides rides one version. Both
+  amendments went into a single 1.10 in the same commit. The rule is
+  written into the skill's own Protocol and Skills Change Log section,
+  since it governs every future bump and not just this one.
+- **Note:** RICE 3/3/90/1 -> 8.1 proposed, not confirmed. High because
+  the effort is one skill paragraph and the reach is every future plan
+  update.
+- **Same verification obligation as L-290:** the 1.10 install cannot be
+  confirmed from inside the session that made it, so this is
+  PENDING-GATE until the next session's load reads 1.10.
+**Gap:** rides L-290's gate -- `skills_index.py`, the reinstall, the
+push, then the next session's load.
+**Ref:** L-290 (the same 1.10 bump), L-291 (the design build that
+earned v26), skills/ledger-and-session-records/SKILL.md,
+documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md.
 
 #### [L-278] A relayout from inside a Plotly event handler re-enters the update machinery
 <!-- L:278 status:OPEN upd:2026-09-02 section:A flag: rice:3/3/90/1 -->
@@ -11097,6 +11352,189 @@ HANDOFF ADDENDUM 2026-09-04 (schemas); tools/gallery_editor.py;
 tools/json_converter.py; tools/gallery_cleanup.py;
 gallery/gallery_config.json; gallery/gallery_metadata.json; index.html;
 skills/gallery-pipeline.
+
+#### [L-289] Sun exhibit on the phone: the 3D axis labels are not visible
+<!-- L:289 status:DONE upd:2026-09-06 section:C flag: rice:3/2/80/1 -->
+- **Opened 2026-09-05** from Tony's phone pass on the live Sun exhibit,
+  2026-09-04: on opening the scene no axis label is visible; turning
+  the grid brings the x and y labels partly into view; the z label is
+  never visible. Render finding, Mode 5, Tony's eyes.
+- **Tony's suggested fix:** put labels on the TOP view for x and y and
+  the BACK view for z as well, not only on the bottom view for x and y
+  -- the side view that would carry z is never seen at the arrival
+  camera. The exact Plotly mechanism (scene axis `showbackground`,
+  title placement, or duplicate annotations) is to be confirmed
+  against the render, not reasoned.
+- **Note:** RICE 3/2/80/1 -> 4.8 proposed, not confirmed. L-267 is
+  DONE; this is its phone follow-on and stays separate so the closed
+  record is not reopened. gallery-assembler skill fires (Mode 5 as
+  measurement).
+- **Design settled 2026-09-05 (Tony, by phone), replacing the
+  top/back-view idea above.** Two observations first: on desktop the
+  camera zoom shrinks grid and all, so the numbers never change; on
+  the phone the frame zoom re-labels the grid as you go in, which is
+  real information about scale (Tony: better). And the arrival frame
+  is full on purpose, so the box edges Plotly labels sit off-screen.
+  Ruling: labels on ALL TWELVE edges of the box, internal and open,
+  so one is in view at any rotation; tick values as well as the axis
+  name, thinned to every second or third grid line; the page OWNS the
+  ticks (Plotly's one-edge set off on the Sun so no edge carries
+  two); NO label at a vertex; the axis name on the UNLABELED grid
+  line nearest the centre of each edge so no value is lost to it;
+  NO dimming with distance. Clutter is a Mode 5 call.
+- **Built 2026-09-05, NOT yet run or pushed** [render-gated]:
+  `patch_L289_1_edge_labels.py` (gallery; guards on `interactive.html`
+  at `503fa387`) and `patch_L289_2_name_on_skipped_tick.py` (guards
+  on patch 1's output). One scatter3d text trace, hover off, no
+  legend group (the drawer never sees it), added after newPlot and
+  after buildSunDrawer so extents and sunTraceGroup never counted it;
+  rebuilt by sunEdgeLabelsUpdate() after sunFrameOn, navFrameZoom and
+  navHome from the same range and dtick the grid uses; ticks are
+  multiples of dtick clear of both vertices by half a step;
+  `?ticks=N` (1..6, default 2) is the Mode 5 switch. Sun exhibit only;
+  the Explorer's axes are untouched. Tested in a stand-in page (the
+  Sun page cannot run in the sandbox: Pyodide's CDN is blocked) with
+  Plotly, the Sun camera and arrival ranges: 36 labels installed;
+  values re-scaled with the grid (0.2 at arrival, 0.02/0.06 three taps
+  in, 0.5 out); with lines every 0.2 on a -0.7..0.7 range, ticks=2
+  reads -0.4, 0, 0.4 with the name on the -0.2 line, ticks=3 reads
+  -0.4, 0.2 with the name on 0, ticks=1 puts the name between lines
+  at 0.1. No script errors. How it reads over the real shells is
+  unknown until the phone.
+- **Tony-action (do):** run the two L-289 patches at the gallery root
+  (either side of the L-282 patches; different file), commit, push;
+  Mode 5 on the phone: rotate, +, -, Home; try `&ticks=3`.
+- **Tony-action (decide), after Mode 5:** tick density (1, 2 or 3),
+  label size (one constant, 9 px today), and whether the Explorer
+  room should get the same edges.
+- **Mode 5, 2026-09-05, phone, live at `66087696`: the twelve-edge
+  build FAILED.** Tony, with screenshots: the labels were scattered
+  and the every-second pattern hard to read; labels on edges beside
+  the camera floated on nothing; on zoom-out the labels vanished;
+  "this may be worse than the plotly labels." Cause, one choice: the
+  labels were points IN the scene, so they behaved as scenery --
+  shrank with distance, were clipped at the box boundary, projected
+  from behind the camera. Not fixable by thinning or size.
+- **Redesign 2026-09-05 (Tony, by conversation):** the tick numbers
+  repeat one value sixty times, so ONE chip states the uniform
+  spacing ("grid 0.2 AU"); direction is a TRIAD in the corner that
+  turns with the camera (Tony: "can the triad rotate in alignment?"
+  -- yes, it is computed from the camera); the First Point of Aries
+  glyph at the x tip with a note that this is the J2000 ECLIPTIC
+  frame, not a graph frame; grid lines coloured per axis to match.
+  Aspect ratio read from the layout, not assumed 1:1:1 (Tony: "ticks
+  are not always isometric"). Frame VERIFIED before the note was
+  written: `feature_renderers.js` rotates IAU poles into the J2000
+  ecliptic by the mean obliquity; belts are drawn in the ecliptic;
+  the served index stores the Sun as frame-origin. Source for the
+  note: NASA/JPL NAIF frames tutorial (J2000 x axis = vernal equinox).
+  The assembler does not pass through the provenance scanner (Tony),
+  so the citation is hand-carried in the note itself.
+- **Built 2026-09-05, live at gallery `fc8d9fb3`:**
+  `patch_L289_3_frame_hud.py` -- edge labels OUT; sunHud* (triad SVG,
+  chip, note) IN as page chrome that only reads the camera and never
+  calls Plotly (the L-278 hazard does not apply); Plotly tick numbers
+  back on; titles stay blank. Triad orientation CONFIRMED by test:
+  markers at +x, +y, +z in the scene matched the arrows.
+- **Mode 5, 2026-09-06, desktop and phone, at `fc8d9fb3`:** triad
+  moves with the grid (desktop); chip works; back link works. Four
+  defects: (1) the frame note was open on arrival and its X did not
+  close it -- `hidden` lost a CSS specificity contest to the rule that
+  shows Sun chrome; (2) grid colours read as a second key against the
+  triad -- back to white; (3) arrival grid 0.2 AU vs chip 0.1 AU --
+  the arrival layout set no dtick, Plotly and the page chose
+  differently; +/- and Home agree (Home sets dtick); mouse wheel is
+  camera zoom by design; (4) on the phone the triad did not follow a
+  touch rotation -- Plotly fires no camera events during touch.
+- **Built 2026-09-06, delivered NOT run:** `patch_L289_4_hud_fixes.py`
+  (guards on `fc8d9fb3`). Note behaves like every other hover: mouse
+  opens on rest over the glyph or the note, closes on leave; touch
+  taps to toggle, tap elsewhere closes; X removed. Grid white.
+  Arrival dtick set from the same rule Home uses. Triad reads the
+  gl3d scene's live camera (getCamera()) once per animation frame and
+  redraws only on change -- tested with Plotly's events removed: 23
+  redraws in a drag, 0 at rest.
+- **Tony-action (do):** run `patch_L289_4_hud_fixes.py`, push; Mode 5
+  on desktop and phone: note hidden on arrival, hover/tap, arrival
+  grid = chip, triad follows a touch rotation.
+- **Tony-action (decide), after Mode 5:** triad size and colours;
+  whether the Explorer room gets the same HUD.
+- **Mode 5, 2026-09-06, iPhone/Chrome, portrait and landscape, at
+  gallery `b8c5d437`: patch 4 PASSED on all five trials** -- arrival
+  state, the frame note, the triad through a touch rotation and an app
+  switch, the HUD through +/-/Home and the drawer and a shell focus,
+  and the L-288 Studio card. Protocol:
+  `documentation/TEST_PROTOCOL_mode5_pre_earth_20260906.md` (gallery).
+- **Tony-action (decide), DISCHARGED:** triad size "looks right"; the
+  note's tap-toggle "works well"; triad colours accepted. Whether the
+  EXPLORER room gets the same HUD: Tony's answer was "unclear", and it
+  moves to L-294 rather than holding this item open.
+- **The triad read as 90 degrees off the grid, and it was not.**
+  Confirmed correct two independent ways: a hand projection of the
+  arrival camera (eye 1.25/-1.25/0.75, up +z, aspect 1:1:1) predicts x
+  right and about 21 degrees below horizontal, y right and 21 above, z
+  vertical and 20 percent longer; measurement in Tony's screenshots
+  gave 25 below, 22 above, z vertical, matching lengths. THE REAL
+  CAUSE: the triad is an ORTHOGRAPHIC projection of three directions at
+  the origin, while Plotly draws the box in PERSPECTIVE with the eye
+  close in, so box edges at the frame corner project far steeper --
+  measured 25 degrees on desktop, 45 on the phone. Compounding it, the
+  Sun scene sets all three axis titles empty and the grid is uniform
+  white, so nothing in the render could corroborate the triad.
+- **Built and run 2026-09-06:** `patch_L289_5_axis_edge_colours.py`
+  (guards `interactive.html` at `b8c5d437`) colours the three box edges
+  meeting at the near corner -- `showline`/`linecolor`/`linewidth` on
+  the Sun's scene axes, `?edge=N` (1..6, default 2) the Mode 5 switch.
+  Verified against the installed plotly.js 2.35.2 source, not recalled:
+  scene axes carry those keys (`lineEnable`/`lineColor`/`lineWidth` in
+  `src/plots/gl3d/layout/convert.js`) and the edge is camera-selected
+  by `computeLineOffset`, the same edge that carries that axis's tick
+  numbers. Gallery moved to `9325c86f`.
+- **Mode 5 on patch 5: desktop PASSED, phone FAILED.** In portrait the
+  coloured edges run off the sides of the frame. Tony's redirect: draw
+  the lines converging on the ORIGIN instead.
+- **A trap avoided, read out of the bundle rather than recalled.**
+  Plotly's zero lines cannot carry the triad's meaning: in
+  `drawZero(j, i, ...)` the line runs along dimension `j` but takes
+  `zeroLineColor[v]`, where `v` is the PLANE it sits in -- so the x
+  colour would paint lines running along y and z. Separately, Tony's
+  "the origin is half a tick off the centre" resolves as perspective,
+  not as a tick error: Plotly paints grid and zero lines on the three
+  background walls only, never through the interior, and `tick0` is
+  already pinned to 0 on every path that sets spacing. No tick fix
+  would give the cube a centre vertex.
+- **Built and run 2026-09-06:** `patch_L289_6_origin_axes.py` (guards
+  at `9325c86f`) adds three scatter3d line traces through the origin in
+  the triad's hues (`sunOriginAxisPoints`, `sunCurrentHalfRange`,
+  `sunOriginAxesInstall`, `sunOriginAxesUpdate`), installed after
+  `buildSunDrawer` so the drawer gets no row and the arrival extent
+  never counts them, re-cut to the current range on the `sunHudUpdate`
+  hook (a `.then()` continuation, not an event handler -- the L-278
+  hazard does not apply). `?axes=full|pos|off`, and `?edge=0` turns the
+  box-edge colouring off. Rebuilt rather than drawn as one long clipped
+  line because the nav buttons span 1e-5 to 5e3 AU and a two-vertex
+  line loses the precision the clip test needs at the deep end (Plotly
+  DOES clip 3D traces to the axis range -- fragment shader discards
+  outside `clipBounds` -- both verified in 2.35.2).
+- **The pre-test earned its place.** A standalone node exercise of
+  `sunOriginAxisPoints` across three ranges and both forms found
+  `axes=off` drawing the negative half instead of nothing -- unreachable
+  today, since the install path returns early. Fixed before delivery;
+  27 cases then passed.
+- **Mode 5, 2026-09-06, phone: ACCEPTED.** Tony: "This works. It's a
+  bit unusual but it is correct and one can't make a mistake!" All
+  three lines cross at the Sun, z runs the full box height. `&axes=pos`
+  (the three positive rays only, an exact match to the triad) is in the
+  page and left as a non-default by Tony's decision; making it the
+  default would be a one-line patch.
+- **Tony-action (do):** archive `patch_L289_5_axis_edge_colours.py` and
+  `patch_L289_6_origin_axes.py` to `documentation/` in the gallery repo.
+**Gap:** none. CLOSED 2026-09-06 on Tony's Mode 5, per the rule that an
+exhibit item closes on his eyes and not on the push.
+**Ref:** L-267 (Sun exhibit GUI), L-278 (why the HUD never calls
+Plotly), L-294 (the Explorer HUD question, carried out of here),
+interactive.html, feature_renderers.js (poleBasis),
+HANDOFF 2026-09-05 (away session), HANDOFF 2026-09-06.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

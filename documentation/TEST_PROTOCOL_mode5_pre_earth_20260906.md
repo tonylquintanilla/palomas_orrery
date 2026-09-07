@@ -56,13 +56,13 @@ rotated.
 
 **Look at three things, in this order:**
 
-1. The frame note. It should be closed. -- correct
+1. The frame note. It should be closed.
 2. The grid lines. They should be white. Red, green or blue lines mean
-   the colour revert did not take. -- correct
+   the colour revert did not take.
 3. The spacing chip against the grid itself. Read two adjacent tick
    numbers on any axis and subtract. That difference should equal the
    number on the chip. The old failure was a grid drawing at 0.2 AU
-   while the chip read 0.1 AU. -- correct
+   while the chip read 0.1 AU.
 
 **What a pass rules out.** All three fixes are ones that only misbehave
 at arrival -- the CSS rule, the grid colour, and the dtick the arrival
@@ -78,16 +78,16 @@ anywhere else, because everywhere else already set them correctly.
 **Desktop, with a mouse.** Rest the pointer on the Aries glyph: the note
 opens. Move the pointer off the glyph and onto the note itself: it stays
 open. Click the source link in it: the link opens and the page still
-responds behind it. Move the pointer away from both: it closes. -- apparently correct. however, i do have a question. the triad seems to be oriented 90 degrees (right handed) from the orientation of the grid. this may be correct but it does not read visually. can you confirm the triad orientation? alternatively, the standard orientation with the x axis pointing towards the camera should be the initial view. 
+responds behind it. Move the pointer away from both: it closes.
 
 **Phone, portrait.** Tap the glyph: the note opens. Tap anywhere else on
 the page: it closes. There is no X button any more. If you go looking for
-one, that is the finding. -- reads like the one on desktop
+one, that is the finding.
 
 **What a pass rules out.** That the note is still governed by the Sun
 chrome rule that was beating `hidden`. It also confirms the two input
 paths were separated correctly -- hover on a mouse, toggle on touch --
-rather than one being made to serve both. -- correct 
+rather than one being made to serve both.
 
 ---
 
@@ -98,25 +98,25 @@ working, because Plotly reports no camera events during a touch rotation
 and the HUD now reads the camera itself once per animation frame.
 
 **Desktop.** Drag to rotate. The triad turns with the grid. (This passed
-at `fc8d9fb3`; you are re-confirming it survived the rewrite.) -- correct. the triad is slightly off the same visual frame. not significant as long as the alignment is right. 
+at `fc8d9fb3`; you are re-confirming it survived the rewrite.)
 
 **Phone, portrait.** Drag with one finger and watch the triad *during*
 the drag, not after you let go. It should turn continuously. A triad that
 sits still and then snaps into place when you release is the old
-behaviour. -- correct 
+behaviour.
 
 **Phone, after an interruption.** Switch to another app, come back, and
 drag again. The redraw loop only runs while the page is visible, so a
 resumed page is the one place a visibility bug would show. A triad frozen
-after the switch is a finding. -- correct
+after the switch is a finding.
 
 **What a pass rules out.** The per-frame camera read, on both input
 methods and across a visibility change. Earth inherits this loop
-unchanged, so this is the single most transferable trial in the set. -- correct
+unchanged, so this is the single most transferable trial in the set.
 
 ---
 
-## Trial 4 -- the HUD survives the page's own controls, phone portrait -- what does HUD stand for?
+## Trial 4 -- the HUD survives the page's own controls, phone portrait
 
 **Conditions.** Phone, portrait, arrival state. Each action below is
 followed by the same three checks, so run them as a loop rather than
@@ -130,12 +130,12 @@ still present; chip still equal to the grid spacing; note still closed.
 - Press `+` twice. Press `-` twice.
 - Press Home.
 - Open the drawer, focus a different shell, close the drawer.
-- Step forward through the stages and back. -- correct on phone and desktop
+- Step forward through the stages and back.
 
 **Then, one regression check.** Open the Explorer room. It should look
 exactly as it did before -- no triad, no chip, no glyph. The HUD is Sun
 chrome today, and confirming Explorer is untouched is also the ground for
-the decision below about whether it should get one. -- correct. but i question whether this view should carry the home interactive url. eventually it will be repalced by an actual interactive of the solar system. place holder? alternatives?
+the decision below about whether it should get one.
 
 **What a pass rules out.** That any existing control tears down the HUD
 chrome or leaves the chip disagreeing with a grid the control just
@@ -151,13 +151,13 @@ into all four of these controls on day one.
 1. Choose **New Interactive Card**. The scene menu is read out of
    `interactive.html`, so first confirm the Sun scene is listed, with its
    note beside the URL. An empty menu means `live_scene_urls()` is not
-   finding the scenes. -- correct. I duplicated the explorer view.
+   finding the scenes.
 2. Enter a title, a placard of a sentence or two, and one source line.
-   Press Create. -- correct 
-3. It should name an id and report the card landed in Storage. -- correct and confirmed with Editor
-4. Open the gallery editor and move the card to its room. -- done. correct.
+   Press Create.
+3. It should name an id and report the card landed in Storage.
+4. Open the gallery editor and move the card to its room.
 5. Open the gallery and tap the card. It should open the Sun exhibit at
-   the URL you picked. -- pushed. correct in both the desktop and phone. 
+   the URL you picked.
 
 **What to watch for.** A live card is a placard with an Interactive tag
 and no picture. If it renders as a picture card with an empty image
@@ -167,7 +167,7 @@ one you chose in step 1, not a default.
 **What a pass rules out.** The whole chain from Studio through
 `json_converter.add_live_card` into storage, the editor, and the rendered
 grid. Earth's card gets made this way, so a failure here blocks the last
-step of the Earth build rather than the first. -- i have only followed the interactive path not the json path. 
+step of the Earth build rather than the first.
 
 ---
 
@@ -177,24 +177,24 @@ These are the L-289 items waiting on your eyes. They are judgment calls,
 not pass/fail:
 
 - **Triad size.** Too small to read on a phone, too large on a desktop,
-  or right. -- looks right
+  or right.
 - **Triad colours.** They are now the only thing carrying axis identity,
-  since the grid went back to white. -- it's okay. the user has to compare alignment not color. as noted above alignment looks visually 90 degrees off. but may be correct. adding color would eliminate the ambiguity, but entails its own rendering issues and does not eliminate the framing verification. 
+  since the grid went back to white.
 - **Whether the Explorer room gets the same HUD.** Trial 4's regression
-  check is where you see the alternative. -- unclear
+  check is where you see the alternative.
 - **The note's touch behaviour.** Tap-to-toggle with no X was a design
-  choice, not a constraint. If it feels wrong on the phone, say so. -- works well.
+  choice, not a constraint. If it feels wrong on the phone, say so.
 
 ## Report form
 
 Copy this back, filled in. The conditions matter as much as the verdict.
 
 ```
-Date: 9/6/26
-Device / browser: iphone/google chrome
-Orientation: portrait/landscape
-Gallery SHA served: b8c5d4374c8b0e6d7476823719b8dbb771857d52
-Cache tell (old page ruled out?): 
+Date:
+Device / browser:
+Orientation:
+Gallery SHA served:
+Cache tell (old page ruled out?):
 
 Trial 1 arrival:        pass / fail --
 Trial 2 note:           pass / fail --
@@ -202,7 +202,7 @@ Trial 3 triad:          pass / fail --
 Trial 4 HUD + controls: pass / fail --
 Trial 5 Studio card:    pass / fail --
 
-Conditions I changed, if any: none
+Conditions I changed, if any:
 
 Notes, in my own words (not a summary):
 
