@@ -5461,7 +5461,7 @@ possible" line, which the Sun room's Home shows is a limit of the
 dolly, not of Plotly).
 
 #### [L-286] Rooms in four levels: drill-down, short-name breadcrumb, Home stays a scene reset
-<!-- L:286 status:OPEN upd:2026-09-06 section:A flag: rice:5/4/70/4 -->
+<!-- L:286 status:OPEN upd:2026-09-08 section:A flag: rice:5/4/70/4 -->
 - **Opened 2026-09-04** from the lobby design session (HANDOFF
   2026-09-04, "the lobby splits by subject"; L-282 carries the doors,
   this item carries what is inside them). Nothing built.
@@ -5567,6 +5567,18 @@ dolly, not of Plotly).
   Tony's Mode 5 on this is pending.
 - **Tony-action (do):** save `tools/sweep_report.py`, run it, and
   check one card per class on the phone; report the exception classes.
+- **Regression found by Tony 2026-09-07, fixed at gallery `1eb1e084`
+  (`patch_L286_1_viewer_3d_rotation.py`).** Served 3D cards did not
+  rotate on load; the orbit or reset button revived them on the
+  desktop, and the phone has neither. The sweep's `applySweep()` ran
+  after every newPlot and, for a 3D figure with no dragmode, compared
+  "restore null" against the layout's undefined and relayouted
+  `dragmode: null`. In Plotly 2.35.2 that relayout makes gl3d's
+  updateFx copy the LAYOUT dragmode (default "zoom") into every scene,
+  and turntable rotation is gone. Read out of the shipped bundle, not
+  inferred. Fix: a 3D figure never has its dragmode touched by the
+  sweep; for 2D an absent dragmode reads as null. Tony's Mode 5:
+  correct. Field note filed under L-304.
 **Gap:** the room-path reader in `index.html` (filter a grid to a room);
 the breadcrumb component shared by both pages; the special-exhibit
 placement; the room-shape field; Mode 5 on phone at all four levels.
@@ -5577,7 +5589,7 @@ splits by subject); index.html; interactive.html; gallery/nav_cluster.js;
 gallery_config.json; gallery_metadata.json.
 
 #### [L-288] Gallery Studio creates and edits live-scene cards
-<!-- L:288 status:OPEN upd:2026-09-05 section:A flag: rice:3/3/70/2 -->
+<!-- L:288 status:OPEN upd:2026-09-08 section:A flag: rice:3/3/70/2 -->
 - **Opened 2026-09-05** on Tony's request after the first live card was
   made by hand: "add functionality to the gallery studio to create and
   edit live scenes with urls." Today a live card is made in the editor
@@ -5615,13 +5627,30 @@ gallery_config.json; gallery_metadata.json.
   edited `json_converter.py`, and only the Studio path was walked.
   Convert one card through the converter and confirm a v2 config
   carrying a live card round-trips.
-**Gap:** the converter path above; then DONE.
+- **Two Studio-chain defects found by Tony 2026-09-07, fixed at gallery
+  `e6c39a00` (`patch_L288_1_converter_path_and_routed_hover.py`).**
+  (1) `json_converter.py` resolved its output folder against the
+  working directory; run from `tools/` it made `tools/gallery/` and a
+  shadow schema-1 metadata there, so the editor never saw the card.
+  Now resolved against the repo root from the script's own location.
+  (2) Portrait's routed hover suppressed the tooltip by transparency,
+  and Plotly replaces a zero-opacity label background with `#444`
+  grey while the orrery's per-trace `hoverlabel.font.size: 11` beat
+  the size-1 suppression: a large grey box, no text. Fix: strip the
+  per-trace hoverlabel when routing; opacity 0.01, not 0. The prior
+  field note that `hoverinfo='none'` kills 3D events was respected.
+- **Still visible on the site:** the served Earth-and-Moon PORTRAIT
+  file was exported 2026-09-07 17:50, before the fix; it carries the
+  grey box until the scene is re-exported through Studio and
+  re-converted (Tony-action, do).
+**Gap:** the live-card converter path above; the Earth-and-Moon
+portrait re-export; then DONE.
 **Ref:** L-287 (the editor's live URL picker), L-282 (live scene is one
 card in the grid), tools/gallery_studio.py, tools/json_converter.py,
 interactive.html.
 
 #### [L-291] Earth exhibit: shells plus the Moon
-<!-- L:291 status:OPEN upd:2026-09-07 section:A flag: rice:4/4/80/3 -->
+<!-- L:291 status:OPEN upd:2026-09-08 section:A flag: rice:4/4/80/3 -->
 - **Design settled 2026-09-06** in a zero-code conversation, step 1 of
   the `interactive-exhibit` skill's order. The full record, with every
   number and its source, is
@@ -5751,12 +5780,36 @@ interactive.html.
   figures were the 6371 km MEAN radius plus altitude).
 - **Lagrange points deferred** to L-297 on Tony's ruling; the drawer
   row waits. **Sun-Earth L-points** stay with L-294.
-**Gap:** the GALLERY half of step 2 -- `data/objects_config.json`
-Earth entry: value/unit/source/orrery_constant on every feature,
-the new rows (magnetosphere as four served rows, LEO, geostationary,
-Hill sphere, geocorona), the `orientation` block, the exosphere shell
-(L-292) -- then store drift MATCH by name on the live run. Then steps
-3-8. Closes on Tony's eyes.
+- **Claude, 2026-09-08 -- STEP 2 COMPLETE, both halves.**
+  `patch_L291_6_earth_served_entry.py` (gallery `12241c0` -> served
+  live by the 2026-09-08 nightly): Earth's entry rebuilt in the measured
+  shape, nine groups -- earth_interior, earth_atmosphere,
+  earth_exosphere, earth_orbital_zones, earth_geostationary,
+  earth_magnetosphere, van_allen_belts, hill_sphere, orientation. The
+  magnetosphere's one orrery call is four served rows. Seven files
+  moved with it, each found by a check rather than by reading: the
+  drift checker learned Earth radii (`_RADII` on an `EARTH_` name,
+  factor from the store); the shell-set renderer learned `R_earth`,
+  `km` and `planet_radius`, so the Earth groups draw in the Explorer
+  room today with their sources in the hover; the belt renderer reads
+  measured distances; the builder's shape validator reads them too
+  (the Cache builder suite caught that); two test files re-pinned to
+  the served shape; the smoke fixture regenerated from the entry.
+- **Live run, Tony, 2026-09-08:** 53 pointers, 48 MATCH, 0 DRIFT.
+  All 24 Earth constant pointers MATCH by name. The five that could
+  not be examined are the known class (pole pointers into
+  `idealized_orbits.py`, the galactic-tide default) -- none new.
+- **Not drawn yet, and the dispatch says so by name:**
+  earth_geostationary (an equatorial ring) and earth_magnetosphere
+  (the two standoff shapes). Their renderers are step 3.
+**Gap:** STEP 3 -- the `EXHIBIT === "earth"` branch in
+`interactive.html` (driver spec: objects Earth + Moon, center Earth,
+half-range floor 6.155e-5 AU; eight shells lit on arrival; axis,
+equator plane, Sun direction on), the GEO ring and magnetosphere
+renderers, the terminator as geometry, the Moon's orbit with the
+trust-window arc, the frozen-epoch hovers, the `sun*` chrome by
+parameter, i-panel copy with sources. Then steps 4-8. Closes on
+Tony's eyes.
 **Ref:** `documentation/PREDESIGN_earth_exhibit_20260906.md` (gallery),
 L-292 (shells the orrery does not draw), L-293 (lunar standstill),
 L-294 (the Explorer room and the heliocentric view), L-295 (the upper
@@ -5764,7 +5817,7 @@ atmosphere finding), L-249 (the interior constants conversion), L-289
 (the HUD this exhibit inherits), skills/interactive-exhibit/SKILL.md.
 
 #### [L-292] Earth shells the orrery does not draw
-<!-- L:292 status:OPEN upd:2026-09-06 section:A flag: rice:3/3/75/2 -->
+<!-- L:292 status:OPEN upd:2026-09-08 section:A flag: rice:3/3/75/2 -->
 - **Opened 2026-09-06** during the Earth design round. One row per The
   Braid: the class is "Earth shells worth adding to the orrery", not
   one item per shell.
@@ -5789,8 +5842,15 @@ atmosphere finding), L-249 (the interior constants conversion), L-289
 - **Note:** RICE 3/3/75/2 -> 3.4 proposed, not confirmed. The exosphere
   half is on L-291's critical path; the other two are not and should
   not be allowed to gate it.
-**Gap:** the exosphere shell, with its constant in `constants_new.py`;
-the other two when a build already has the file open.
+- **Claude, 2026-09-08:** the constant exists -- `EARTH_GEOCORONA_RADII`
+  (100 R_E, Baliukin et al. 2019) since `c51761a0` -- and the GALLERY
+  serves the exosphere as the `earth_exosphere/geocorona` row, named
+  as a detected extent rather than an edge. The ORRERY still folds the
+  exosphere into the upper-atmosphere hover and draws no shell of its
+  own; that is the remaining half.
+**Gap:** the orrery's exosphere/geocorona shell in
+`SHELL_CONFIGS['Earth']` at `EARTH_GEOCORONA_RADII`; the other two
+when a build already has the file open.
 **Ref:** L-291, L-295, earth_visualization_shells.py,
 mercury_visualization_shells.py (the exosphere precedent).
 
@@ -5988,6 +6048,110 @@ checker; then a run to confirm it appears in the CHECKERS list with its
 verdict line. Not yet written.
 **Ref:** L-268, gallery `tools/sweep_collapsed_features.py`,
 `gallery_maintenance_run.py`.
+
+#### [L-301] Landscape+portrait pairing lost at L-287, restored in the converter
+<!-- L:301 status:DONE upd:2026-09-08 section:C flag: rice:4/4/90/1 -->
+- **Found by Tony 2026-09-08:** the Earth-and-Moon card showed its
+  landscape file on the phone. He converts a landscape export and a
+  portrait export SEPARATELY, as always -- Studio handles each by its
+  own preset, so they are separate scenes -- and that used to give one
+  card serving the right file to each device.
+- **What broke.** Until L-287 (2026-09-04) a card carried a `mode` tag
+  and the viewer FILTERED the grid by device. L-287 made one card carry
+  two `files` slots and its migration paired existing cards BY TITLE
+  (38 pairs). The converter that shipped with it has no pairing rule:
+  `_v2_entry` joins a new file to a card only on a matching filename,
+  and Studio's `<base>_gallery` / `<base>_mobile` never match. Every
+  pair converted since landed as two one-file cards, and the viewer,
+  which now shows every card everywhere, served the landscape one to
+  the phone. Three pairs: Earth and Moon, MAPS disintegration
+  structures, Artemis II moon-centered -- the last two also with
+  titles typed differently between L and P, which a title rule alone
+  would miss.
+- **Fix, gallery `1eb1e084` (`patch_L287_2_converter_pairs_orientations.py`):**
+  a new file joins an existing card by, in order, filename/id; shared
+  STEM (trailing `_gallery|_mobile|_portrait|_landscape` removed) with
+  that orientation empty; exactly one title match with that slot
+  empty. The three stranded pairs merged by the same rule (landscape
+  card survives; two differing titles printed for the editor). 107 ->
+  104 cards. Tested both orders and the title-only case.
+- **Tony's Mode 5, 2026-09-08:** the phone serves the portrait file.
+**Gap:** none. See L-303 for the design question this raised.
+**Ref:** L-287, `tools/json_converter.py`, `gallery_metadata.json`,
+`gallery/patch_L287_1_migrate_schema_v2.py` (the migration's title
+rule, which this generalises).
+
+#### [L-302] The info card closed itself on the tap that opened it
+<!-- L:302 status:DONE upd:2026-09-08 section:C flag: rice:4/4/90/1 -->
+- **Found by Tony 2026-09-08, three symptoms, one cause.** Phone: tapping
+  a marker showed only the hover box; the card came up only after a
+  small upward swipe. Desktop in mobile mode: a left click flashed the
+  card; only a right click kept it. Desktop mode: correct.
+- `index.html` opens the card from `plotly_click`; the same tap or click
+  then bubbles as a DOM `click` to the document listener whose rule is
+  "a click outside the card dismisses it" -- and it dismissed the card
+  it had just opened. A right click fires plotly_click but no DOM click;
+  a tiny drag on release is still a Plotly click and no DOM click. Those
+  were the two accidental workarounds.
+- **Fix, gallery `700b426d` (`patch_viewer_infocard_tap_20260908.py`):**
+  `showInfoCard` stamps its open time; the dismiss listener ignores a
+  click within 400 ms of it. Same patch re-pinned
+  `documentation/pin_artifact1_known_failure.py` to the 13 feature keys
+  served since L-291 (the pin had caught that move, correctly, once the
+  nightly rebuilt the cache).
+- **Tony's Mode 5, 2026-09-08:** correct on mobile.
+**Gap:** none.
+**Ref:** L-288 (the grey box that still shows behind it until the
+portrait re-export), index.html, gallery-pipeline SKILL.md (mobile).
+
+#### [L-303] One card with two files, or one card per orientation? (Tony to decide)
+<!-- L:303 status:OPEN upd:2026-09-08 section:A flag: rice:3/3/60/2 -->
+- **Tony, 2026-09-08 (paraphrased from chat, not his hand):** he would
+  prefer a separate card for each orientation. The single L+P card does
+  not show the details of each file; it shows only 16:9, never 9:16 for
+  the portrait; and replacing or deleting one file should not touch the
+  other. Separate scenes are necessary because Studio handles each by
+  its own preset.
+- **Claude's account of the current model.** L-287's rule is one card,
+  two slots; on a phone the viewer serves the portrait slot, on the
+  desktop the landscape, so the mobile scene stays unique in content.
+  The editor already offers Preview / Replace / Clear per slot and a
+  size per file. The 16:9 / 9:16 radio governs the ONE-file case only.
+- **The fact that bears on the ruling:** the viewer no longer filters
+  the grid by device. Two separate cards would both appear on every
+  device unless device filtering returns (a `shape`- or slot-based
+  filter), which is what the L-286 sweep replaced. So "separate cards"
+  is really "separate cards AND filter by device", and both halves need
+  the ruling.
+- Options: (a) keep one card, improve the editor's display of the two
+  files (show both shapes, per-file dates); (b) one card per
+  orientation, restore device filtering in the viewer, and undo the
+  three merges of L-301; (c) something else.
+**Gap:** Tony-action (decide). No build until ruled.
+**Ref:** L-287, L-301, L-286, `tools/gallery_editor.py`, index.html.
+
+#### [L-304] Plotly relayout field notes for gallery-assembler (bump pending)
+<!-- L:304 status:OPEN upd:2026-09-08 section:A flag: rice:3/2/90/1 -->
+- Three Plotly 2.35.2 behaviours were read out of the shipped bundle
+  this session and each cost a real defect. They belong beside L-278 in
+  the gallery-assembler field notes, one bump, next session that opens
+  that skill (one session, one bump):
+  1. A layout-level `dragmode` relayout -- even to null -- makes gl3d's
+     `updateFx` copy the LAYOUT dragmode (default "zoom") into every
+     scene; turntable rotation is lost until a modebar button restores
+     it (L-286 regression).
+  2. `hoverlabel.bgcolor` with ZERO opacity is replaced by
+     `defaultLine` (#444): "transparent" renders as opaque grey. Use a
+     small non-zero opacity (L-288).
+  3. A per-trace `hoverlabel` overrides the layout's; the orrery writes
+     `{font: {size: 11}}` on many traces, so layout-level suppression
+     never applies to them (L-288).
+  And one viewer lesson, not Plotly's: a `plotly_click` bubbles as a DOM
+  click; a document-level dismiss listener sees the click that opened
+  the thing it dismisses (L-302).
+**Gap:** Tony-action (do): gallery-assembler 1.2 -> 1.3 with these four
+notes, when a session next has that skill open.
+**Ref:** L-278, L-279, L-286, L-288, L-302, skills/gallery-assembler/SKILL.md.
 
 #### [L-278] A relayout from inside a Plotly event handler re-enters the update machinery
 <!-- L:278 status:OPEN upd:2026-09-02 section:A flag: rice:3/3/90/1 -->

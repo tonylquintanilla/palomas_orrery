@@ -1,6 +1,6 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** v26 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
+**Status:** v27 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
 **the first feature-bearing exhibit is LIVE AND COMPLETE.** The Sun
 ships at `palomasorrery.com/interactive.html?exhibit=sun`, unlinked
 from the landing page, Mode 5 accepted 2026-08-29 (gallery
@@ -9,9 +9,12 @@ from the landing page, Mode 5 accepted 2026-08-29 (gallery
 rows move the camera, and the i panel follows the focus and carries
 each shell's curated link (L-265, DONE). The phone pass is DONE as of
 2026-09-06, and the frame HUD with it (L-289, closed on Tony's Mode
-5). **The second exhibit, EARTH, is DESIGNED AND NOT BUILT** (L-291):
-shells plus the Moon, arriving at low Earth orbit, blocked only on the
-`interactive-exhibit` skill install.
+5). **The second exhibit, EARTH, has its DATA SERVED and its CODE NOT
+YET WRITTEN** (L-291): steps 0-2 of the interactive-exhibit skill are
+done on both repos as of 2026-09-08 -- 21 sourced constants in the
+orrery store, every Earth shell reading them, and a nine-group served
+entry whose 24 pointers read MATCH on the live run; step 3, the
+`EXHIBIT === "earth"` branch, is next.
 **The braid, ruled 2026-08-22:** provenance stops being a GATE and
 becomes a per-artifact slice, and the rendering layer is worked first.
 The five segments of Section 5a do NOT move; the order they are worked
@@ -86,7 +89,12 @@ text here read "enabled with a known open issue", contradicting its own
 header forty lines below. L-151 (gallery-assembler skill) DONE
 2026-07-27; L-150 (multi-orbit binaries) still decided, not yet built.)
 **Date begun:** July 3, 2026
-**Last updated:** September 6, 2026 (v26: the EARTH exhibit designed in
+**Last updated:** September 8, 2026 (v27: Earth's step 2 complete on
+both sides -- the store, the shells, the served entry, the live drift
+run; four gallery-pipeline defects found by Tony on the served
+Earth-and-Moon card and fixed the same day; Section 5a gains the
+2026-09-08 subsection; with Anthropic's Claude Fable 5.1. v26,
+September 6, 2026: the EARTH exhibit designed in
 a zero-code round -- shells plus the Moon, arriving at low Earth orbit;
 a Lagrange point belongs to the frame that defines it; sunlight is
 geometry, not a lighting model; the Moon's 3.37-day trust window found
@@ -1482,6 +1490,71 @@ assembler, has had its design conversation and is now blocked on ONE
 Tony-action: installing the `interactive-exhibit` skill to the account,
 since a session can read the repo copy but cannot load it. Step 2's
 remaining item (L-286's rooms page) is unchanged.
+
+### 2026-09-07/08 -- Earth's data lands on both sides, and the served
+card found four defects in the pipeline that serves it
+
+Measured at orrery `af4c604e` and gallery `700b426d`, both confirmed
+against the live remotes at close. Appended, not merged.
+
+**The gate fired.** The session loaded `ledger-and-session-records`
+1.10 and `interactive-exhibit` 1.0, matching the manifest -- the check
+the 2026-09-06 session could not perform from inside itself. L-290
+and L-296 closed on it.
+
+**Step 2, orrery side, in four patches, each Mode-5'd.** Twenty-one
+constants entered `constants_new.py` with fetched sources (IERS 2010
+TN36; IADC-02-01 Rev. 3; Baker et al. 2018; JGR 2025; Shue et al.
+1998; Lugaz et al. 2016; Baliukin et al. 2019). Every Earth shell
+literal that now had a store name was migrated onto it -- Tony's
+ruling: one store, one source of truth, the orrery side not deferred.
+Two values moved when sourced: the bow shock 15 -> 12.5 R_E (a
+citation saying 11-14 cannot sit under a 15) and LEO's edges by 7 km
+(the old figures were mean-radius sums). The atmosphere shells stopped
+drawing at visibility fractions and drew their sourced boundaries,
+as the chromosphere already did (L-295 closed). Every live Earth hover
+now ends in a Source line scoped to what it sources -- Tony's ruling,
+and the rule waits for orrery-coding-conventions 1.8 (L-299).
+
+**Step 2, gallery side, in one patch of seven files.** Earth's served
+entry in the measured shape, nine groups, 24 pointers MATCH by name on
+the live run. The six files beside the config were each found by a
+check: the drift checker did not know Earth radii; the renderers did
+not know `R_earth`, `km` or `planet_radius`; the builder's validator
+threw on measured belts; two test files pinned the old shape. The
+Earth groups draw in the Explorer room today, sources in the hover,
+which answers Tony's question of whether the assembler carries the
+sourcing the orrery now shows: it does, when the served row is
+measured and the renderer reads it.
+
+**Lagrange points sized and deferred (L-297).** Serving them from
+Horizons is a fourth serving shape in the builder plus an assembler
+branch plus one nightly -- a session of its own. Computing them from
+the Moon's marker was rejected: an approximation of a value that can
+be fetched. Tony ruled defer now, Horizons later.
+
+**Four defects the served card surfaced, all Tony's finds, all fixed
+the same day.** The converter wrote to `tools/gallery/` when run from
+`tools/` (L-288). Portrait's routed hover drew an opaque grey box
+because Plotly replaces a zero-opacity label background with grey
+(L-288). Served 3D cards did not rotate until a modebar button was
+pressed, because the sweep relayouted `dragmode` after every render
+(L-286). The landscape+portrait pairing Tony's workflow relies on
+had been lost at L-287 and three pairs were stranded as one-file
+cards (L-301). And the info card closed itself on the tap that
+opened it (L-302). Each Plotly behaviour was read out of the shipped
+bundle; the field notes wait for gallery-assembler 1.3 (L-304).
+
+**One design question raised, not ruled (L-303).** Tony prefers a
+card per orientation; the current model is one card with two slots,
+and the viewer no longer filters by device, so the two halves have to
+be ruled together.
+
+**What this does to the order.** Nothing moves. Step 3 -- the Earth
+branch in `interactive.html`, the GEO ring and magnetosphere
+renderers, the terminator, the Moon's trust-window arc, the chrome by
+parameter -- is next and is unblocked. Handoff:
+`documentation/HANDOFF_earth_step3_20260908.md` in the gallery repo.
 
 ### What this section deliberately does not carry
 
