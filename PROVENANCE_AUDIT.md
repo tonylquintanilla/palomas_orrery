@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
-Generated: September 07, 2026
-Files scanned: 133
-Total findings: 1047
-Constants: 122 | Dicts: 43 | Display strings: 882
+Generated: September 08, 2026
+Files scanned: 129
+Total findings: 1044
+Constants: 121 | Dicts: 41 | Display strings: 882
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -19,21 +19,16 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260908T231842Z | `2075003` | 129 | 1044 | 291 | 635 | 116 | 2 |
 | 20260907T160819Z | `5170bec` | 133 | 1047 | 294 | 635 | 116 | 2 |
 | 20260907T144103Z | `fe87147` | 131 | 1044 | 292 | 634 | 116 | 2 |
 | 20260907T140113Z | `c51761a` | 130 | 1043 | 292 | 633 | 116 | 2 |
 | 20260907T132725Z | `d7151aa` | 130 | 1042 | 292 | 632 | 116 | 2 |
 | 20260906T184655Z | `a57e86b` | 130 | 1031 | 292 | 621 | 116 | 2 |
-| 20260906T001717Z | `9652a43` | 135 | 1031 | 292 | 621 | 116 | 2 |
 
-Change since the previous run: total +3, Tier-1 +2.
+Change since the previous run: total -3, Tier-1 -3.
 
-Tier-1 rose in these files:
-
-| File | Before | After |
-|------|-------:|------:|
-| patch_L291_4_earth_hover_sources.py | 0 | 1 |
-| patch_L291_5_ledger_20260907.py | 0 | 1 |
+No file's Tier-1 count rose.
 
 ---
 
@@ -64,7 +59,7 @@ Tier-1 rose in these files:
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 294 |
+| 1 | 16-20 | FIX NOW | 291 |
 | 2 | 10-15 | REVIEW | 635 |
 | 3 | 5-9 | LOW PRIORITY | 116 |
 | 4 | 1-4 | LOWEST PRIORITY | 2 |
@@ -147,9 +142,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `worksheet_request_builder.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `orbital_elements.py` | orrery | 1 | 0 | 0 | 0 | 1 |
-| `patch_L291_2_earth_shell_migration.py` | orrery | 1 | 0 | 0 | 0 | 1 |
-| `patch_L291_4_earth_hover_sources.py` | orrery | 1 | 0 | 0 | 0 | 1 |
-| `patch_L291_5_ledger_20260907.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `data_acquisition.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `exoplanet_orbits.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `fetch_paleoclimate_data.py` | earth_science | 1 | 0 | 0 | 0 | 1 |
@@ -174,7 +166,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 47 | 131 | 516 | 69 | 2 | 718 |
+| Orrery (solar system + orbital mechanics) | 44 | 128 | 516 | 69 | 2 | 715 |
 | Earth System | 13 | 149 | 77 | 2 | 0 | 228 |
 | Stars (stellar neighborhood) | 11 | 12 | 42 | 6 | 0 | 60 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 39 | 0 | 39 |
@@ -185,9 +177,6 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 - `doc_index.py`
 - `orrery_maintenance_run.py`
-- `patch_L291_2_earth_shell_migration.py`
-- `patch_L291_4_earth_hover_sources.py`
-- `patch_L291_5_ledger_20260907.py`
 - `worksheet_checker.py`
 - `worksheet_key_aliases.py`
 - `worksheet_keys.py`
@@ -610,24 +599,6 @@ is planned for a future session.
 | 2174 | string | display string @ line 2174 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2197 | string | display string @ line 2197 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2332 | string | display string @ line 2332 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-
-### patch_L291_2_earth_shell_migration.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 61 | dict | FILES[...] | (2 entries) | 4 | 5 | **20** | No source citation; date-sensitive (recalled) | UNDETERMINED -- could not be classified |
-
-### patch_L291_4_earth_hover_sources.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 56 | dict | FILES[...] | (2 entries) | 4 | 5 | **20** | No source citation; date-sensitive (recalled) | UNDETERMINED -- could not be classified |
-
-### patch_L291_5_ledger_20260907.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 39 | constant | EXPECTED_MAX_HANDLE | 296 | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
 
 ### planet_visualization_utilities.py
 

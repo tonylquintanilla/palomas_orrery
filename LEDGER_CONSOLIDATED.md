@@ -279,13 +279,14 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*179 live items; 165 need attention (`!`); 178 RICE-scored; 116 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*185 live items; 171 need attention (`!`); 184 RICE-scored; 118 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-251 | The galactic centre button served a cached HTML for seven months | OPEN | 15.2 | 2026-08-25 |
 | ! | L-238 | radius_fraction > 1.0 assumes every shell is above the surface | OPEN | 14.2 | 2026-08-25 |
+| ! | L-306 | Do not promote a drawing approximation into the constants store | OPEN | 13.6 | 2026-09-08 |
 | ! | L-229 | Streamer band drawn in the ecliptic plane, not the solar equator | OPEN | 11.4 | 2026-08-23 |
 | ! | L-235 | Checks that cannot fail, gallery side [three instances] | OPEN | 11.4 | 2026-08-25 |
 | ! | L-252 | L2b's fourth outcome: an INCOMPLETE verdict is not a confirmation | OPEN | 11.4 | 2026-08-25 |
@@ -302,6 +303,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | OPEN | 6.0 | 2026-08-25 |
 | ! | L-269 | A report names its items, not how many there are | OPEN | 6.0 | 2026-08-30 |
 | ! | L-245 | Constants drift check compares against the last COMMIT, not the last RUN | OPEN | 5.4 | 2026-08-25 |
+| ! | L-304 | Plotly relayout field notes for gallery-assembler (bump pending) | OPEN | 5.4 | 2026-09-08 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
 | ! | L-206 | Worksheet return filenames carry model and session | OPEN | 5.1 | 2026-08-18 |
 | ! | L-246 | S4714's semi-major axis was three values in three stores | OPEN | 5.1 | 2026-08-25 |
@@ -312,7 +314,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-08-25 |
 | ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-25 |
-| ! | L-291 | Earth exhibit: shells plus the Moon | OPEN | 4.3 | 2026-09-07 |
+| ! | L-291 | Earth exhibit: shells plus the Moon | OPEN | 4.3 | 2026-09-08 |
+| ! | L-303 | Separate cards per orientation (RULED); the phone hides a landscape card that has a portrait sibling | OPEN | 4.3 | 2026-09-08 |
 | ! | L-281 | The guest book: no-account comments, approve-before-show | OPEN | 4.2 | 2026-09-03 |
 | ! | L-247 | Sgr A* constants migrated to the single source of truth | OPEN | 4.0 | 2026-08-25 |
 | ! | L-277 | The L-192 site store anchors by line number, so any insertion breaks two checkers | OPEN | 4.0 | 2026-09-03 |
@@ -332,13 +335,14 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-239 | Seed the three Oort builders so a render is reproducible | OPEN | 3.6 | 2026-08-25 |
 | ! | L-285 | index.html adopts the shared navigation cluster; the fake-wheel dolly retires | OPEN | 3.6 | 2026-09-04 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-25 |
-| ! | L-286 | Rooms in four levels: drill-down, short-name breadcrumb, Home stays a scene reset | OPEN | 3.5 | 2026-09-06 |
+| ! | L-286 | Rooms in four levels: drill-down, short-name breadcrumb, Home stays a scene reset | OPEN | 3.5 | 2026-09-08 |
 | ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
-| ! | L-292 | Earth shells the orrery does not draw | OPEN | 3.4 | 2026-09-06 |
+| ! | L-292 | Earth shells the orrery does not draw | OPEN | 3.4 | 2026-09-08 |
 | ! | L-283 | Visual theme: dark wall, paper placards, record mode | OPEN | 3.2 | 2026-09-03 |
 | ! | L-256 | provenance-discipline 2.8, and the status pass it enables | OPEN | 3.1 | 2026-08-27 |
-| ! | L-288 | Gallery Studio creates and edits live-scene cards | OPEN | 3.1 | 2026-09-05 |
+| ! | L-288 | Gallery Studio creates and edits live-scene cards | OPEN | 3.1 | 2026-09-08 |
 | ! | L-294 | The Explorer room's placeholder, and Earth's heliocentric view | OPEN | 3.1 | 2026-09-06 |
+| ! | L-307 | Export-age reporting for the static cards that are not migrating | OPEN | 3.1 | 2026-09-08 |
 | ! | L-254 | 76 dead sphere-shell builders, unmarked, across 12 modules | OPEN | 2.8 | 2026-09-02 |
 | ! | L-240 | Split declared drawing parameters from measured values | OPEN | 2.8 | 2026-08-25 |
 | ! | L-176 | Shell hover text: add illustrated dimensions (radius_fraction -> km) | OPEN | 2.8 | 2026-08-04 |
@@ -351,6 +355,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 |  | L-225 | Migrate the comet shell constants into `constants_new.py`, then dispatch | DEFERRED | 2.4 | 2026-08-23 |
 | ! | L-293 | Lunar standstill: an exhibit made of four dated orbits | OPEN | 2.4 | 2026-09-06 |
+| ! | L-305 | Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together | OPEN | 2.4 | 2026-09-08 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
@@ -364,6 +369,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-194 | Text-only assertions -- claims the scanner cannot see | DEFERRED | 1.4 | 2026-08-15 |
 | ! | L-297 | Earth-Moon Lagrange points: serving path sized, deferred from the Earth exhibit | OPEN | 1.4 | 2026-09-07 |
 | ! | L-253 | The 660 discontinuity's depth variation -- held unsourced | OPEN | 1.2 | 2026-08-26 |
+| ! | L-308 | A shell-legend surface for static cards (deferred, with its trigger) | OPEN | 1.2 | 2026-09-08 |
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
 | ! | L-129 | Cometary structure constants -- periodic maintenance sweep | OPEN | 1.0 | 2026-07-17 |
 | ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 0.9 | 2026-07-16 |
@@ -540,6 +546,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-114 | objects_config.json stranded by the atomic swap; also blocks crash-recovery (gallery builder) | DONE | 16.2 | 2026-07-27 |
 |  | L-250 | The Braid added to Part 3 as a general principle | DONE | 15.2 | 2026-08-25 |
 |  | L-261 | Plain speech becomes the default register, not a mode | DONE | 15.2 | 2026-08-29 |
+|  | L-301 | Landscape+portrait pairing lost at L-287, restored in the converter | DONE | 14.4 | 2026-09-08 |
+|  | L-302 | The info card closed itself on the tap that opened it | DONE | 14.4 | 2026-09-08 |
 |  | L-182 | Mars Hill sphere -- cross-check correction lost across the config pipeline | DONE | 12.0 | 2026-08-05 |
 |  | L-222 | The constants change report fails on every currency stamp | DONE | 11.4 | 2026-08-20 |
 |  | L-264 | One name, two programs: the runners get repo-specific names | DONE | 11.4 | 2026-08-29 |
@@ -5802,14 +5810,30 @@ interactive.html.
 - **Not drawn yet, and the dispatch says so by name:**
   earth_geostationary (an equatorial ring) and earth_magnetosphere
   (the two standoff shapes). Their renderers are step 3.
-**Gap:** STEP 3 -- the `EXHIBIT === "earth"` branch in
+- **Tony's ruling, 2026-09-08 (design round, zero code) -- STEP 3
+  PROCEEDS WITHOUT THE MAGNETOSPHERE.** Eleven of Earth's thirteen
+  drawn features are sourced and read MATCH. The two magnetosphere
+  features turned out to be pre-provenance DRAWING, not sourced
+  geometry, and rebuilding them on a cited model is a build of its
+  own (L-305). Holding a well-understood step behind an open
+  modelling question couples them; the exhibit ships with the
+  magnetosphere ABSENT AND NAMED rather than approximate. Tony's
+  framing: this is a layperson's learning tool, not a research
+  tool, and a learning tool may say "not drawn yet" without
+  failing its purpose.
+- **What that does to the smoke fixture.** The two pinned expected
+  warnings become ONE, not zero: `earth_geostationary` gets its
+  renderer in step 3, `earth_magnetosphere` stays a named,
+  expected absence until L-305 lands. An absence the dispatch
+  names is the check working.
+**Gap:** STEP 3, six items -- the `EXHIBIT === "earth"` branch in
 `interactive.html` (driver spec: objects Earth + Moon, center Earth,
 half-range floor 6.155e-5 AU; eight shells lit on arrival; axis,
-equator plane, Sun direction on), the GEO ring and magnetosphere
-renderers, the terminator as geometry, the Moon's orbit with the
-trust-window arc, the frozen-epoch hovers, the `sun*` chrome by
-parameter, i-panel copy with sources. Then steps 4-8. Closes on
-Tony's eyes.
+equator plane, Sun direction on), the GEO ring renderer, the
+terminator as geometry, the Moon's orbit with the trust-window arc,
+the frozen-epoch hovers, the `sun*` chrome by parameter, i-panel
+copy with sources. The magnetosphere renderer is NOT in this step;
+see L-305. Then steps 4-8. Closes on Tony's eyes.
 **Ref:** `documentation/PREDESIGN_earth_exhibit_20260906.md` (gallery),
 L-292 (shells the orrery does not draw), L-293 (lunar standstill),
 L-294 (the Explorer room and the heliocentric view), L-295 (the upper
@@ -6049,63 +6073,8 @@ verdict line. Not yet written.
 **Ref:** L-268, gallery `tools/sweep_collapsed_features.py`,
 `gallery_maintenance_run.py`.
 
-#### [L-301] Landscape+portrait pairing lost at L-287, restored in the converter
-<!-- L:301 status:DONE upd:2026-09-08 section:C flag: rice:4/4/90/1 -->
-- **Found by Tony 2026-09-08:** the Earth-and-Moon card showed its
-  landscape file on the phone. He converts a landscape export and a
-  portrait export SEPARATELY, as always -- Studio handles each by its
-  own preset, so they are separate scenes -- and that used to give one
-  card serving the right file to each device.
-- **What broke.** Until L-287 (2026-09-04) a card carried a `mode` tag
-  and the viewer FILTERED the grid by device. L-287 made one card carry
-  two `files` slots and its migration paired existing cards BY TITLE
-  (38 pairs). The converter that shipped with it has no pairing rule:
-  `_v2_entry` joins a new file to a card only on a matching filename,
-  and Studio's `<base>_gallery` / `<base>_mobile` never match. Every
-  pair converted since landed as two one-file cards, and the viewer,
-  which now shows every card everywhere, served the landscape one to
-  the phone. Three pairs: Earth and Moon, MAPS disintegration
-  structures, Artemis II moon-centered -- the last two also with
-  titles typed differently between L and P, which a title rule alone
-  would miss.
-- **Fix, gallery `1eb1e084` (`patch_L287_2_converter_pairs_orientations.py`):**
-  a new file joins an existing card by, in order, filename/id; shared
-  STEM (trailing `_gallery|_mobile|_portrait|_landscape` removed) with
-  that orientation empty; exactly one title match with that slot
-  empty. The three stranded pairs merged by the same rule (landscape
-  card survives; two differing titles printed for the editor). 107 ->
-  104 cards. Tested both orders and the title-only case.
-- **Tony's Mode 5, 2026-09-08:** the phone serves the portrait file.
-**Gap:** none. See L-303 for the design question this raised.
-**Ref:** L-287, `tools/json_converter.py`, `gallery_metadata.json`,
-`gallery/patch_L287_1_migrate_schema_v2.py` (the migration's title
-rule, which this generalises).
-
-#### [L-302] The info card closed itself on the tap that opened it
-<!-- L:302 status:DONE upd:2026-09-08 section:C flag: rice:4/4/90/1 -->
-- **Found by Tony 2026-09-08, three symptoms, one cause.** Phone: tapping
-  a marker showed only the hover box; the card came up only after a
-  small upward swipe. Desktop in mobile mode: a left click flashed the
-  card; only a right click kept it. Desktop mode: correct.
-- `index.html` opens the card from `plotly_click`; the same tap or click
-  then bubbles as a DOM `click` to the document listener whose rule is
-  "a click outside the card dismisses it" -- and it dismissed the card
-  it had just opened. A right click fires plotly_click but no DOM click;
-  a tiny drag on release is still a Plotly click and no DOM click. Those
-  were the two accidental workarounds.
-- **Fix, gallery `700b426d` (`patch_viewer_infocard_tap_20260908.py`):**
-  `showInfoCard` stamps its open time; the dismiss listener ignores a
-  click within 400 ms of it. Same patch re-pinned
-  `documentation/pin_artifact1_known_failure.py` to the 13 feature keys
-  served since L-291 (the pin had caught that move, correctly, once the
-  nightly rebuilt the cache).
-- **Tony's Mode 5, 2026-09-08:** correct on mobile.
-**Gap:** none.
-**Ref:** L-288 (the grey box that still shows behind it until the
-portrait re-export), index.html, gallery-pipeline SKILL.md (mobile).
-
-#### [L-303] One card with two files, or one card per orientation? (Tony to decide)
-<!-- L:303 status:OPEN upd:2026-09-08 section:A flag: rice:3/3/60/2 -->
+#### [L-303] Separate cards per orientation (RULED); the phone hides a landscape card that has a portrait sibling
+<!-- L:303 status:OPEN upd:2026-09-08 section:A flag: rice:4/4/80/3 -->
 - **Tony, 2026-09-08 (paraphrased from chat, not his hand):** he would
   prefer a separate card for each orientation. The single L+P card does
   not show the details of each file; it shows only 16:9, never 9:16 for
@@ -6123,12 +6092,52 @@ portrait re-export), index.html, gallery-pipeline SKILL.md (mobile).
   filter), which is what the L-286 sweep replaced. So "separate cards"
   is really "separate cards AND filter by device", and both halves need
   the ruling.
-- Options: (a) keep one card, improve the editor's display of the two
-  files (show both shapes, per-file dates); (b) one card per
-  orientation, restore device filtering in the viewer, and undo the
-  three merges of L-301; (c) something else.
-**Gap:** Tony-action (decide). No build until ruled.
-**Ref:** L-287, L-301, L-286, `tools/gallery_editor.py`, index.html.
+- Options were: (a) keep one card, improve the editor's display of
+  the two files; (b) one card per orientation, restore device
+  filtering, undo the three merges of L-301; (c) something else.
+- **TONY'S RULING, 2026-09-08: (b), and the merge was never his.**
+  The two-card model was HIS workflow until L-287 replaced it on
+  2026-09-04 and paired 38 existing cards by title. He is being
+  asked to accept editor work whose only purpose is to make a merge
+  he did not request legible again. His words on the cost: "the
+  issue of clutter is mine."
+- **The filter is NARROWER than the pre-L-287 device model.** Not a
+  per-card device tag. ONE rule: on a phone, hide a landscape card
+  IF IT HAS A PORTRAIT SIBLING. A landscape card with no sibling
+  still shows on the phone and still sweeps, which is the majority
+  of cards and the case the sweep exists for. Desktop shows
+  everything. Tony's correction, and it matters: he sees both views
+  on desktop, only the mobile view on mobile.
+- **The sibling flag is stamped by the CONVERTER, not matched at
+  render time.** L-301's pairing detection is kept and INVERTED:
+  same rule, different action -- create a separate card and stamp
+  the relationship on both, instead of joining into an empty slot.
+  The L-301 work is not wasted.
+- **The editor work from option (a) EVAPORATES.** Per-slot
+  `converted` dates, derived per-slot shape, and greying the shape
+  radio on a paired card were all needed only because two files
+  shared one card. One card, one file, one date, one shape, and the
+  16:9 / 9:16 radio is meaningful again on every card.
+- **What the radio actually does, checked at gallery `700b426d`:**
+  `sweepWanted()` in index.html returns false on `shape === '9:16'`,
+  so 16:9 IS the enable switch for the 2D landscape sweep on a
+  phone. Three further conditions gate it and none is a control:
+  phone width, portrait orientation, no portrait sibling, and
+  `layout.scene` absent (the 3D exclusion).
+- **The surviving population, Tony 2026-09-08:** the static card
+  system is not going away for the 16:9 2D exhibits -- the Earth
+  science cards and the star cards. The shell-heavy 3D bodies are
+  the ones migrating to interactive exhibits. So the split
+  migration is transitional work on a SHRINKING set, and the sweep
+  is the mechanism that keeps the PERMANENT set working on a phone.
+**Gap:** build it -- the converter's inverted pairing and sibling
+stamp; the one viewer rule; the split migration of L-287's 38 pairs
+plus L-301's 3. One known loss to accept: two of L-301's three
+merges had titles typed differently between L and P and the
+landscape title survived, so those portrait titles are gone and get
+retyped. Tony-action (do) at that point, not now.
+**Ref:** L-287, L-301, L-286, L-307, L-308, `tools/json_converter.py`,
+`tools/gallery_editor.py`, index.html.
 
 #### [L-304] Plotly relayout field notes for gallery-assembler (bump pending)
 <!-- L:304 status:OPEN upd:2026-09-08 section:A flag: rice:3/2/90/1 -->
@@ -6152,6 +6161,200 @@ portrait re-export), index.html, gallery-pipeline SKILL.md (mobile).
 **Gap:** Tony-action (do): gallery-assembler 1.2 -> 1.3 with these four
 notes, when a session next has that skill open.
 **Ref:** L-278, L-279, L-286, L-288, L-302, skills/gallery-assembler/SKILL.md.
+
+#### [L-305] Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together
+<!-- L:305 status:OPEN upd:2026-09-08 section:A flag: rice:4/4/60/4 -->
+- **Where this came from.** A design round on 2026-09-08 opened with one
+  hover requirement from the L-291 handoff -- say that the tail is drawn
+  to 100 radii against a real one past 1,000 -- and ended with two stored
+  constants superseded, a miscitation found, and step 3 split. The
+  handoff had framed the magnetosphere renderer as a small step-3 item.
+  It is not, and the next session will read that framing first.
+- **What was checked, at orrery `af4c604e`.** The orrery does NOT use
+  Shue for the magnetopause. `create_magnetosphere_shape` is a half
+  ELLIPSOID -- sunward 10, equatorial radius 12, polar radius 10 -- so
+  not even a surface of revolution, with a separate flared cylinder tail
+  (base 15, end 25, length 100) butted on at the terminator. The bow
+  shock is a conic through `create_bow_shock_shape` with
+  `eccentricity=1.05` typed at the call site and a sweep capped at 0.92
+  of the asymptote, a literal the code itself labels a MODE-5 KNOB. An
+  11 degree dipole tilt is applied via `rotate_to_sunward`. Seven drawn
+  numbers there have no store name; L-291's "no drawn literal remains"
+  was true of the shells, not of the magnetosphere.
+- **Tony's ruling: none of that gets promoted.** Those are Mode 5
+  approximations -- shapes chosen because they looked right. Promoting
+  them into `constants_new.py` would launder an approximation into a
+  sourced constant. See L-306, which is that rule stated generally.
+- **Farris & Russell (1994) is a MISCITATION for a shape.** The bow
+  shock constant's Note cites it as "Model form". Its abstract is a
+  semiempirical Mach-number relation for the STANDOFF DISTANCE; obstacle
+  shape is an input to it, not an output. Remove the claim.
+- **The model taken: Jelinek, Nemecek and Safrankova.** ONE functional
+  form fits BOTH boundaries from Themis crossings, parabolic coordinates
+  with a per-boundary scaling factor. The conference proceeding (WDS'10)
+  reports lambda_y = 1.17 for the bow shock and 1.54 for the
+  magnetopause, R_MP = 12.82 p^(-1/5.26) and R_BS = 15.02 p^(-1/6.55)
+  with R0 at 1 nPa -- about 11.2 and 13.5 R_E at the 2 nPa the store
+  already names. CITE THE PEER-REVIEWED VERSION, Jelinek et al. 2012,
+  JGR 117, doi:10.1029/2011JA017252, read from that paper: its fitted
+  parameters may differ and the numbers above were read from the
+  proceeding.
+- **Why Jelinek and not Lin.** Lin et al. 2010 (JGR 115, A04207,
+  doi:10.1029/2009JA014235) is the better physics -- three-dimensional,
+  asymmetric, parameterized by pressure, IMF Bz AND dipole tilt, and its
+  abstract says the extrapolation for the distant tail magnetopause is
+  considered, so tilt and tail are reconciled inside one published
+  model. It is DEFERRED ON PORTABILITY, not rejected. Jelinek is one
+  formulation for two surfaces, so one function ported twice instead of
+  two; it is simple enough that the port can be checked by eye against
+  the published figures, which matters when the same mathematics has to
+  live in Python and JavaScript and stay identical. Lin's ten-ish
+  coefficients cannot be checked that way, and an unverifiable port in
+  two languages is a defect generator. Tony's framing settled it: this
+  is a layperson's learning tool, not a research tool.
+- **The 11 degree tilt is DROPPED, and that is a correction.** Jelinek
+  assumes a symmetric magnetosphere in GSE. A later study notes that in
+  Lin2010 the dipole tilt does not affect the EQUATORIAL magnetopause at
+  all -- it drives north-south asymmetry and cusp location. So the old
+  drawing's leaning magnetosphere was conveying something the literature
+  does not support.
+- **The tail is drawn, with its extent sourced.** Not omitted: Tony's
+  correction, and the pattern is already in the store -- the geocorona
+  is drawn at a sourced DETECTION FLOOR with the hover saying it is not
+  an edge. Jelinek is a DAYSIDE fit (within about +/- 7 hours of local
+  time around noon); extrapolating its paraboloid to x = -100 R_E gives
+  a cylindrical radius near 46 R_E, well outside what the fit supports.
+  So the tail gets its OWN citation for extent and cross-section, drawn
+  to the sourced figure, with the hover stating where the drawn surface
+  stops against the real one. That citation is not yet fetched.
+- **The flaring parameter is SERVED, not hardcoded** (Tony's ruling the
+  same evening, before the model changed). A shape parameter with a
+  citation behind it belongs in the store with value / source /
+  `orrery_constant`, not in `feature_renderers.js`. The VALIDITY RANGE
+  travels with it, or the Mode-5 knob has simply moved from Python to
+  JavaScript.
+- **Before the config change: read how `check_store_drift` treats a
+  DIMENSIONLESS pointer.** Its unit table is all lengths. A pointer it
+  cannot examine looks exactly like one that passed, which is what the
+  runner's three states exist to prevent.
+- **Orrery and assembler move TOGETHER -- the braid** (Tony's ruling).
+  `EARTH_MAGNETOPAUSE_STANDOFF_RADII` is quoted to the visitor in two
+  hover strings in `earth_visualization_shells.py`. Changing the
+  constant while the old ellipsoid still draws makes the text and the
+  geometry disagree, which is worse than either being stale.
+**Gap:** fetch Jelinek et al. 2012 and read its fitted parameters from
+the paper; fetch a magnetotail extent citation; supersede
+`EARTH_MAGNETOPAUSE_STANDOFF_RADII` (10.0) and
+`EARTH_BOW_SHOCK_STANDOFF_RADII` (12.5) with sources; remove the Farris
+& Russell "Model form" claim; port the one formulation to
+`planet_visualization_utilities.py` and `gallery/feature_renderers.js`;
+serve shape parameters and validity range; drop the tilt; then Mode 5 on
+both. Also clear now, in whichever patch opens the file: the bow shock
+Note still says "the shell's 15 is a migration item" when line 825
+already reads the store.
+**Ref:** L-291, L-292, L-298 (the orrery-vs-exhibit gap, made concrete),
+L-306, `constants_new.py`, `earth_visualization_shells.py`,
+`planet_visualization_utilities.py`, `gallery/feature_renderers.js`,
+`data/objects_config.json` (gallery), skills/interactive-exhibit/SKILL.md.
+
+#### [L-306] Do not promote a drawing approximation into the constants store
+<!-- L:306 status:OPEN upd:2026-09-08 section:A flag: rice:4/4/85/1 -->
+- **Tony's ruling, 2026-09-08:** "We are not promoting Mode 5
+  approximations." And: "not promoting approximations or rounded
+  numbers."
+- The rule generalises past its origin. A number typed into a renderer
+  because the result LOOKED RIGHT is not a constant waiting for a home.
+  Moving it into `constants_new.py` and attaching a plausible citation
+  is worse than leaving it where it is, because the store is the thing
+  the drift checker trusts and the hover quotes. It is the same failure
+  as a `# Source:` over recalled data, one layer over: the promotion
+  suppresses the suspicion that would catch it.
+- Three outcomes for such a number, not two: source the SHAPE it belongs
+  to and recompute; or draw the sourced range and say so in the hover
+  (the geocorona pattern); or remove it and note the absence. Never
+  promote as-is.
+- The tell: a value whose only provenance is that a previous session
+  accepted the render.
+**Gap:** Tony-action (do): provenance-discipline 2.10 -> 2.11 carrying
+this rule, next session that opens that skill (one session, one bump),
+with the four-step binding rule -- version line, `skills_index.py`,
+protocol version-history entry, one commit.
+**Ref:** L-305 (the case that produced it), L-291, L-299,
+skills/provenance-discipline/SKILL.md.
+
+#### [L-307] Export-age reporting for the static cards that are not migrating
+<!-- L:307 status:OPEN upd:2026-09-08 section:A flag: rice:3/3/70/2 -->
+- **The gap, measured at gallery `700b426d`.** Nothing compares an
+  exported card to anything. `gallery_maintenance_run.py` has two checks
+  that SOUND like it and are not: its STALE verdict compares the bytes
+  GitHub Pages serves against the working copy (deploy freshness), and
+  store drift compares `data/objects_config.json` against the orrery's
+  constants. Neither reads `gallery_metadata.json`. Grepped, not
+  assumed.
+- That is why the grey box lived on the site (L-288) and why a
+  superseded number once served for hours: an exported card is a frozen
+  JSON of Plotly traces and no check knows when it was frozen.
+- **This does NOT get absorbed by the assembler, and the reason must
+  survive.** The assembler answers staleness for the SOLAR SYSTEM cards
+  -- which are the ones getting exhibits anyway. Tony's 2026-09-08 note:
+  the surviving static population is the 16:9 2D Earth science cards and
+  star cards. Those will still be frozen JSON in a year with no
+  assembler behind them. Deferred ON PRIORITY, behind step 3. A later
+  session reading "the assembler is the real answer" must not conclude
+  this can be dropped.
+- **It needs a per-slot or per-file date to have anything to compare.**
+  `size_kb` is already a dict keyed by slot; `converted` is one
+  card-level timestamp that whichever file converted last overwrites
+  (`_v2_entry`, json_converter.py). Under L-303's ruling each card
+  carries one file, so the date becomes per-card naturally and no
+  schema work is needed -- one more reason the ruling simplifies rather
+  than adds.
+- **The open question that shapes the checker, and it is its own
+  conversation:** do the Earth science cards carry per-layer data
+  provenance the way the served rows do, or is the provenance only in
+  the KMZ and the placard? If the latter, an AGE check is all that can
+  be built. If the former, something closer to store drift is possible.
+  Neither Tony nor Claude could answer it in the 2026-09-08 round.
+**Gap:** after step 3. A report, not a gate, beside store drift in
+`gallery_maintenance_run.py`; the provenance question above answered
+first.
+**Ref:** L-288, L-303, L-286, `gallery_maintenance_run.py`,
+`tools/json_converter.py`, earth-system-pipeline SKILL.md.
+
+#### [L-308] A shell-legend surface for static cards (deferred, with its trigger)
+<!-- L:308 status:OPEN upd:2026-09-08 section:A flag: rice:2/3/60/3 -->
+- **The problem, Tony 2026-09-08.** On a phone, a static card of a
+  shell-heavy body -- Earth with its interior stack -- shows the inner
+  shells completely obscured and not selectable, not even for their
+  hover text. The static card has no toggleable drawer; the Plotly
+  legend is the only way to reach an inner shell and it is unreachable.
+- **Sweeping is NOT the answer, and the reason is worth keeping.** The
+  sweep widens the plot and lets the room scroll sideways. A Plotly
+  legend is anchored to the plot area, so widening moves the legend
+  right along with everything else. And horizontal scroll over a 3D
+  canvas collides with the turntable drag handler -- `applySweep`
+  already skips 3D, and L-286 is the fresh reminder of what touching a
+  3D figure's interaction layer from the sweep path costs.
+- **The real fix would be a separate legend SURFACE** -- an HTML entry
+  list below or over the figure driving `Plotly.restyle` on trace
+  visibility. A drawer without the assembler. It would work off the
+  served JSON's trace names, so it would reach every multi-shell static
+  card.
+- **Tony's current workaround, and it is accepted:** a portrait sibling
+  card with fewer shells lit. Under L-303 that is a separate card with
+  its own shell selection and the phone hides the landscape one, so it
+  costs no new code. Two costs named and accepted: the portrait card is
+  a DIFFERENT FIGURE rather than a re-layout, so every shell-heavy body
+  needs two curated exports; and when a constant moves, both files need
+  re-exporting, which doubles the exposure L-288 and L-307 describe.
+- **TRIGGER CONDITION for building it:** a shell-heavy body wanted on a
+  phone that is NOT getting an interactive exhibit. If that never
+  happens, this is never built. Recorded so the question is not
+  re-derived.
+**Gap:** none until the trigger fires. Not a design decision awaiting
+Tony; an option with a stated condition.
+**Ref:** L-286, L-303, L-307, index.html (`sweepWanted`, `applySweep`),
+skills/gallery-pipeline/SKILL.md.
 
 #### [L-278] A relayout from inside a Plotly event handler re-enters the update machinery
 <!-- L:278 status:OPEN upd:2026-09-02 section:A flag: rice:3/3/90/1 -->
@@ -11865,6 +12068,61 @@ exhibit block).
 **Ref:** L-290 (the same 1.10 bump), L-291 (the design build that
 earned v26), skills/ledger-and-session-records/SKILL.md,
 documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md.
+
+#### [L-301] Landscape+portrait pairing lost at L-287, restored in the converter
+<!-- L:301 status:DONE upd:2026-09-08 section:C flag: rice:4/4/90/1 -->
+- **Found by Tony 2026-09-08:** the Earth-and-Moon card showed its
+  landscape file on the phone. He converts a landscape export and a
+  portrait export SEPARATELY, as always -- Studio handles each by its
+  own preset, so they are separate scenes -- and that used to give one
+  card serving the right file to each device.
+- **What broke.** Until L-287 (2026-09-04) a card carried a `mode` tag
+  and the viewer FILTERED the grid by device. L-287 made one card carry
+  two `files` slots and its migration paired existing cards BY TITLE
+  (38 pairs). The converter that shipped with it has no pairing rule:
+  `_v2_entry` joins a new file to a card only on a matching filename,
+  and Studio's `<base>_gallery` / `<base>_mobile` never match. Every
+  pair converted since landed as two one-file cards, and the viewer,
+  which now shows every card everywhere, served the landscape one to
+  the phone. Three pairs: Earth and Moon, MAPS disintegration
+  structures, Artemis II moon-centered -- the last two also with
+  titles typed differently between L and P, which a title rule alone
+  would miss.
+- **Fix, gallery `1eb1e084` (`patch_L287_2_converter_pairs_orientations.py`):**
+  a new file joins an existing card by, in order, filename/id; shared
+  STEM (trailing `_gallery|_mobile|_portrait|_landscape` removed) with
+  that orientation empty; exactly one title match with that slot
+  empty. The three stranded pairs merged by the same rule (landscape
+  card survives; two differing titles printed for the editor). 107 ->
+  104 cards. Tested both orders and the title-only case.
+- **Tony's Mode 5, 2026-09-08:** the phone serves the portrait file.
+**Gap:** none. See L-303 for the design question this raised.
+**Ref:** L-287, `tools/json_converter.py`, `gallery_metadata.json`,
+`gallery/patch_L287_1_migrate_schema_v2.py` (the migration's title
+rule, which this generalises).
+
+#### [L-302] The info card closed itself on the tap that opened it
+<!-- L:302 status:DONE upd:2026-09-08 section:C flag: rice:4/4/90/1 -->
+- **Found by Tony 2026-09-08, three symptoms, one cause.** Phone: tapping
+  a marker showed only the hover box; the card came up only after a
+  small upward swipe. Desktop in mobile mode: a left click flashed the
+  card; only a right click kept it. Desktop mode: correct.
+- `index.html` opens the card from `plotly_click`; the same tap or click
+  then bubbles as a DOM `click` to the document listener whose rule is
+  "a click outside the card dismisses it" -- and it dismissed the card
+  it had just opened. A right click fires plotly_click but no DOM click;
+  a tiny drag on release is still a Plotly click and no DOM click. Those
+  were the two accidental workarounds.
+- **Fix, gallery `700b426d` (`patch_viewer_infocard_tap_20260908.py`):**
+  `showInfoCard` stamps its open time; the dismiss listener ignores a
+  click within 400 ms of it. Same patch re-pinned
+  `documentation/pin_artifact1_known_failure.py` to the 13 feature keys
+  served since L-291 (the pin had caught that move, correctly, once the
+  nightly rebuilt the cache).
+- **Tony's Mode 5, 2026-09-08:** correct on mobile.
+**Gap:** none.
+**Ref:** L-288 (the grey box that still shows behind it until the
+portrait re-export), index.html, gallery-pipeline SKILL.md (mobile).
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

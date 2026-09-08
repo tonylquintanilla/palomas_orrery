@@ -1,6 +1,6 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** v27 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
+**Status:** v28 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
 **the first feature-bearing exhibit is LIVE AND COMPLETE.** The Sun
 ships at `palomasorrery.com/interactive.html?exhibit=sun`, unlinked
 from the landing page, Mode 5 accepted 2026-08-29 (gallery
@@ -13,8 +13,11 @@ each shell's curated link (L-265, DONE). The phone pass is DONE as of
 YET WRITTEN** (L-291): steps 0-2 of the interactive-exhibit skill are
 done on both repos as of 2026-09-08 -- 21 sourced constants in the
 orrery store, every Earth shell reading them, and a nine-group served
-entry whose 24 pointers read MATCH on the live run; step 3, the
-`EXHIBIT === "earth"` branch, is next.
+entry whose 24 pointers read MATCH on the live run. Step 3, the
+`EXHIBIT === "earth"` branch, is next AND IS SPLIT: it proceeds on
+the eleven sourced features, and the magnetosphere is deferred to
+L-305 for a rebuild on a cited model, absent and named in the
+meantime rather than approximate.
 **The braid, ruled 2026-08-22:** provenance stops being a GATE and
 becomes a per-artifact slice, and the rendering layer is worked first.
 The five segments of Section 5a do NOT move; the order they are worked
@@ -89,7 +92,16 @@ text here read "enabled with a known open issue", contradicting its own
 header forty lines below. L-151 (gallery-assembler skill) DONE
 2026-07-27; L-150 (multi-orbit binaries) still decided, not yet built.)
 **Date begun:** July 3, 2026
-**Last updated:** September 8, 2026 (v27: Earth's step 2 complete on
+**Last updated:** September 8, 2026 (v28, evening: a DESIGN BUILD,
+zero code. Step 3 split -- the magnetosphere is pre-provenance
+drawing, not sourced geometry, and gets its own build on Jelinek et
+al. 2012 with the dipole tilt dropped and the tail's extent sourced
+(L-305); approximations are not promoted into the store (L-306);
+the card model ruled to one card per orientation (L-303); export-age
+reporting and a static-card legend surface recorded with their
+conditions (L-307, L-308); Section 5a gains the 2026-09-08 evening
+subsection; with Anthropic's Claude Opus 5. v27, September 8, 2026:
+Earth's step 2 complete on
 both sides -- the store, the shells, the served entry, the live drift
 run; four gallery-pipeline defects found by Tony on the served
 Earth-and-Moon card and fixed the same day; Section 5a gains the
@@ -100,12 +112,7 @@ a Lagrange point belongs to the frame that defines it; sunlight is
 geometry, not a lighting model; the Moon's 3.37-day trust window found
 unenforced; L-289 closed and the Sun's chrome finished; Section 5a
 gains the 2026-09-06 evening subsection; with Anthropic's Claude Opus
-5. v25, September 6, 2026: Section 5a gains the 2026-09-06 subsection
--- the phone passed the lobby and the sweep and failed the edge labels,
-rebuilt as the frame HUD; the order unchanged; Earth opens as a design
-conversation next; with Anthropic's Claude Fable 5.1. v24, September 5,
-2026: the 2026-09-05 subsection -- L-287 live; lobby, 2D sweep and
-twelve-edge labels built and render-gated.)
+5.)
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
 Claude Opus 5, Claude Fable 5, Claude Sonnet 5, GPT
 
@@ -1555,6 +1562,60 @@ branch in `interactive.html`, the GEO ring and magnetosphere
 renderers, the terminator, the Moon's trust-window arc, the chrome by
 parameter -- is next and is unblocked. Handoff:
 `documentation/HANDOFF_earth_step3_20260908.md` in the gallery repo.
+
+### 2026-09-08 evening -- a design round splits step 3, and the
+magnetosphere turns out not to be sourced
+
+Measured at orrery `20750034` and gallery `700b426d`, both confirmed
+against the live remotes. Zero code. Appended, not merged.
+
+**The gate fired and discharged v3.54's carried obligation.** The
+session loaded `ledger-and-session-records` 1.10 against a manifest
+expecting 1.10 -- the check the 2026-09-06 session could not perform
+from inside itself.
+
+**One hover requirement unwound two constants.** The L-291 handoff
+asked only that the magnetosphere hover say the tail is drawn to 100
+radii against a real one past 1,000. Reading the code to write it
+found that the orrery's magnetopause is a half ellipsoid with typed
+axes, its bow shock a conic with an eccentricity typed at the call
+site and a sweep cap the code itself labels a Mode-5 knob, and its
+11 degree tilt unsupported by the models that would replace it.
+Farris & Russell, cited in the store as the bow shock's model form,
+is a standoff-distance relation and not a shape at all.
+
+**Tony's ruling: approximations are not promoted** (L-306). The
+seven drawn numbers stay where they are until a sourced model
+replaces the shape they belong to.
+
+**The model taken is Jelinek et al. 2012** -- one functional form
+for both boundaries -- with Lin et al. 2010 recorded as the better
+physics deferred on portability, since the same mathematics has to
+live in Python and JavaScript and stay identical, and ten
+coefficients cannot be checked by eye. Tony's framing decided it:
+a layperson's learning tool, not a research tool. The tail is drawn
+with its extent sourced, the geocorona pattern, because Jelinek is a
+dayside fit and its paraboloid extrapolated downtail is the error
+class just ruled out.
+
+**Step 3 splits rather than waits** (L-291). Eleven sourced features
+proceed; the magnetosphere is absent and named. Orrery and assembler
+move together on L-305 -- the braid -- because the standoff constant
+is quoted to the visitor in two hover strings today.
+
+**The card model is ruled** (L-303): one card per orientation, and
+the viewer rule is one line, not the old device model -- on a phone,
+hide a landscape card that has a portrait sibling. The merge was
+L-287's, not Tony's. The editor work the alternative required
+evaporates with the ruling. The surviving static population is the
+16:9 2D Earth science and star cards, which is also why export-age
+reporting is deferred on priority and not because the assembler
+absorbs it (L-307).
+
+**What this does to the order.** Nothing moves. Step 3 is next and
+is unblocked on six of its seven items. Handoff:
+`documentation/HANDOFF_earth_step3_20260908.md` in the gallery repo,
+superseded in part by this round.
 
 ### What this section deliberately does not carry
 
