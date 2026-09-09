@@ -279,7 +279,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*183 live items; 169 need attention (`!`); 182 RICE-scored; 120 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*184 live items; 169 need attention (`!`); 183 RICE-scored; 120 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -312,8 +312,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-08-25 |
 | ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-25 |
-| ! | L-291 | Earth exhibit: shells plus the Moon | OPEN | 4.3 | 2026-09-08 |
-| ! | L-303 | Separate cards per orientation (RULED); the phone hides a landscape card that has a portrait sibling | OPEN | 4.3 | 2026-09-08 |
+| ! | L-291 | Earth exhibit: shells plus the Moon | OPEN | 4.3 | 2026-09-09 |
+| ! | L-303 | Separate cards per orientation (RULED); the phone hides a landscape card that has a portrait sibling | PENDING-GATE | 4.3 | 2026-09-09 |
 | ! | L-281 | The guest book: no-account comments, approve-before-show | OPEN | 4.2 | 2026-09-03 |
 | ! | L-247 | Sgr A* constants migrated to the single source of truth | OPEN | 4.0 | 2026-08-25 |
 | ! | L-277 | The L-192 site store anchors by line number, so any insertion breaks two checkers | OPEN | 4.0 | 2026-09-03 |
@@ -361,6 +361,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-275 | The dashboard cannot launch a Node tool, so three gallery smoke suites have no button | OPEN | 1.9 | 2026-09-01 |
 | ! | L-284 | Retire the social export; the gallery owns publishing | OPEN | 1.9 | 2026-09-03 |
 | ! | L-231 | Radiation belts are drawn in the ecliptic; the magnetic tilt is an unbuilt intent | OPEN | 1.8 | 2026-08-24 |
+|  | L-309 | The exhibit chrome keeps its sun* names after Earth joined it (rename deferred, with its reason) | DEFERRED | 1.8 | 2026-09-09 |
 | ! | L-187 | info_dictionary numeric-overlap enumeration | OPEN | 1.8 | 2026-08-07 |
 | ! | L-228 | Alfven surface latitude ranges: source them or omit them | OPEN [Tony] | 1.8 | 2026-08-23 |
 | ! | L-257 | Three enforcement builds the 2.8 skill text defers | OPEN | 1.8 | 2026-08-27 |
@@ -5658,7 +5659,7 @@ card in the grid), tools/gallery_studio.py, tools/json_converter.py,
 interactive.html.
 
 #### [L-291] Earth exhibit: shells plus the Moon
-<!-- L:291 status:OPEN upd:2026-09-08 section:A flag: rice:4/4/80/3 -->
+<!-- L:291 status:OPEN upd:2026-09-09 section:A flag: rice:4/4/80/3 -->
 - **Design settled 2026-09-06** in a zero-code conversation, step 1 of
   the `interactive-exhibit` skill's order. The full record, with every
   number and its source, is
@@ -5826,14 +5827,52 @@ interactive.html.
   renderer in step 3, `earth_magnetosphere` stays a named,
   expected absence until L-305 lands. An absence the dispatch
   names is the check working.
-**Gap:** STEP 3, six items -- the `EXHIBIT === "earth"` branch in
-`interactive.html` (driver spec: objects Earth + Moon, center Earth,
-half-range floor 6.155e-5 AU; eight shells lit on arrival; axis,
-equator plane, Sun direction on), the GEO ring renderer, the
-terminator as geometry, the Moon's orbit with the trust-window arc,
-the frozen-epoch hovers, the `sun*` chrome by parameter, i-panel
-copy with sources. The magnetosphere renderer is NOT in this step;
-see L-305. Then steps 4-8. Closes on Tony's eyes.
+- **STEP 3 BUILT 2026-09-09** (`patch_L291_9_earth_step3_20260909.py`,
+  gallery, on `23054535`; not yet run at the time of this entry). All
+  six items. `?exhibit=earth` is a second row in an EXHIBITS table the
+  chrome now reads (title, arrival half-range, Python driver, scene
+  composition); the sun* function names stay, see L-309. New module
+  `gallery/earth_geometry.js`: rotation axis and equator from the
+  served pole; the Sun direction from Earth's Horizons elements in the
+  cache, propagated by the assembler; the terminator as a great circle
+  perpendicular to it with a subsolar marker, no lighting model; the
+  Moon's trusted arc from the served trust window through the same
+  solver that places the Moon. It composes the room and applies the
+  arrival policy. The GEO ring draws as shape `equatorial_ring` in the
+  shell-set renderer, tilted by the pole. The served source string
+  rides in trace meta and the i-panel shows it under the link. The
+  drawer lists the magnetosphere as "not yet drawn" (its two served
+  member names), a row that is not a button. Studio's card picker
+  reads the EXHIBITS table. New gating runner row "Earth scene
+  geometry" (26 checks on the driver's real output); 6 of 6 here.
+- **Three things the handoff had wrong, found by RUNNING the assembler
+  here, not by reading:** (1) "objects Earth and Moon, center Earth" is
+  rejected by the resolver -- Earth is stored relative to the Sun; the
+  room is objects `["moon"]`, center `"earth"`, and Earth's shells
+  arrive by the centre-features path (L-234). (2) The Moon's served
+  trust window is 3.40 days, not the 3.37 the handoff typed; the arc
+  reads the record, so no number is in code. (3) The inner radiation
+  belt at 1.5 R_earth drew LIT on arrival and set the frame: the belt
+  renderer ignored the half-range. Fixed generically (belts beyond the
+  frame go to the drawer, as shells do); Jupiter's belts inherit it.
+  Two more found in passing: Earth's belts carried a served link and a
+  "flux PEAK, not an edge" note the renderer never read -- now in the
+  hover and the i-panel.
+- **What is NOT served and therefore not stated:** the sidereal
+  rotation period and the obliquity as numbers. The axis hover says
+  the rotation is not shown and names no period. The 23.44 deg tilt it
+  states is DERIVED (served pole through the renderer's sourced mean
+  obliquity), and says so. Serving the period is a small orrery
+  constants patch when a session has `constants_new.py` open.
+**Gap:** STEPS 4-8. Tony (do): run the patch, runner (6 of 6), push,
+`--live`, then Mode 5 on the phone at `interactive.html?exhibit=earth`
+-- conditions: arrival shows the eight shells, gold axis and yellow Sun
+line with the grid chip reading in AU and km; the drawer lists the Moon,
+terminator, GEO, belts, geocorona, Hill sphere, and one italic
+"not yet drawn" row; tap GEO and it lies in the equator ring's plane;
+tap the Moon and the brighter arc sits on the faint ellipse around the
+marker; every hover ends in a Source line. Then the Studio card. The
+magnetosphere is L-305. Closes on Tony's eyes.
 **Ref:** `documentation/PREDESIGN_earth_exhibit_20260906.md` (gallery),
 L-292 (shells the orrery does not draw), L-293 (lunar standstill),
 L-294 (the Explorer room and the heliocentric view), L-295 (the upper
@@ -6074,7 +6113,7 @@ verdict line. Not yet written.
 `gallery_maintenance_run.py`.
 
 #### [L-303] Separate cards per orientation (RULED); the phone hides a landscape card that has a portrait sibling
-<!-- L:303 status:OPEN upd:2026-09-08 section:A flag: rice:4/4/80/3 -->
+<!-- L:303 status:PENDING-GATE upd:2026-09-09 section:A flag: rice:4/4/80/3 -->
 - **Tony, 2026-09-08 (paraphrased from chat, not his hand):** he would
   prefer a separate card for each orientation. The single L+P card does
   not show the details of each file; it shows only 16:9, never 9:16 for
@@ -6130,14 +6169,38 @@ verdict line. Not yet written.
   the ones migrating to interactive exhibits. So the split
   migration is transitional work on a SHRINKING set, and the sweep
   is the mechanism that keeps the PERMANENT set working on a phone.
-**Gap:** build it -- the converter's inverted pairing and sibling
-stamp; the one viewer rule; the split migration of L-287's 38 pairs
-plus L-301's 3. One known loss to accept: two of L-301's three
-merges had titles typed differently between L and P and the
-landscape title survived, so those portrait titles are gone and get
-retyped. Tony-action (do) at that point, not now.
+- **Built 2026-09-08, gallery `23054535`** (`patch_L303_1_cards_per_orientation.py`,
+  Tony ran it, runner 5 of 5). The converter keeps L-301's pairing
+  detection and inverts the action: a matching file becomes a separate
+  card stamped `"sibling": <the other id>` on both, inserted right
+  after its partner, inheriting its room, description and sources. The
+  viewer rule in Tony's wording: on a phone (under 768 px, the sweep's
+  own test) hide a landscape card that has a portrait sibling. Three
+  choices not in the ruling, stated for striking: the rule hides only
+  when the sibling is itself SERVED (a portrait in Storage or deleted
+  leaves the landscape showing); the lobby's Featured strip shows one
+  of a featured pair; a card with a sibling shows its shape after its
+  size so two same-title cards read apart on the desktop. A deep link
+  to a hidden card on a phone opens its sibling. `sweep_report.py`
+  gains the class "hidden on the phone (portrait sibling)".
+- **The migration, named.** 104 cards became 144: 40 splits, not 41 --
+  `keeling_curve_co2_concentration` listed the SAME file in both slots
+  and collapsed to one landscape card, no sibling. The phone serves 104
+  as before; Featured stays 7 on both. Portrait ids from the portrait
+  filenames; the one clash rule (`_portrait` suffix) did not fire.
+- **Not done, recorded:** `gallery_editor.py` can still put two files on
+  one card, and its Copy carries a `sibling` stamp onto the copy. The
+  viewer tolerates both (a dangling sibling is ignored). A guard in the
+  editor or a sweep_report class when a session has that file open.
+**Gap:** Mode 5 on the phone -- one card per figure, the portrait file;
+on the desktop two cards side by side tagged 16:9 and 9:16. Tony-action
+(do): retype the portrait title on
+`artemis_ii_20260402-0411_mission_moon_center2_mobile` and
+`maps_disintegration_20260403_07_structures_mobile` in the editor.
+Closes on Tony's eyes.
 **Ref:** L-287, L-301, L-286, L-307, L-308, `tools/json_converter.py`,
-`tools/gallery_editor.py`, index.html.
+`tools/gallery_editor.py`, `tools/sweep_report.py`, index.html,
+`documentation/patch_L303_1_cards_per_orientation.py` (gallery).
 
 #### [L-305] Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together
 <!-- L:305 status:OPEN upd:2026-09-08 section:A flag: rice:4/4/60/4 -->
@@ -6307,6 +6370,32 @@ first.
 Tony; an option with a stated condition.
 **Ref:** L-286, L-303, L-307, index.html (`sweepWanted`, `applySweep`),
 skills/gallery-pipeline/SKILL.md.
+
+#### [L-309] The exhibit chrome keeps its sun* names after Earth joined it (rename deferred, with its reason)
+<!-- L:309 status:DEFERRED upd:2026-09-09 section:A flag: rice:2/2/90/2 -->
+- **What happened.** L-291 step 3 made Earth the second user of the
+  chrome in `interactive.html` -- drawer, nav cluster, frame zoom,
+  i-panel, HUD, consent gate, back link. The handoff left rename vs
+  parametrize as judgment at the point of edit. The edit PARAMETRIZED:
+  an `EXHIBITS` table carries per room the title, arrival half-range,
+  Python driver and scene composition, and `EX` is the current row.
+  The functions (`sunFocusOn`, `buildSunLayout`, `sunHudInstall`, some
+  sixty others), the CSS classes (`.sun-row`, `body.sun-exhibit`) and
+  the element ids (`sun-drawer-list`) keep their names, and Earth's
+  page carries the `sun-exhibit` body class.
+- **Why not renamed now.** A rename touches roughly a hundred
+  identifiers across a working room for no change a visitor can see,
+  and puts the Sun back under Mode 5 on the same day Earth first needs
+  it. Tony confirmed the sequence 2026-09-09.
+- **When to do it.** With the third room (Jupiter, per the ladder), or
+  in a session that has nothing else open in `interactive.html`. Names
+  to reach for then: `exhibit*` for functions, `.ex-row` /
+  `body.exhibit` for CSS, `exhibit-*` for ids. `live_scene_urls` in
+  `tools/json_converter.py` reads the EXHIBITS table and does not care.
+**Gap:** none until a third room or a free session; a rename, not a
+redesign.
+**Ref:** L-291, L-267 (where the chrome came from), interactive.html
+(`EXHIBITS`, `EX`), `tools/json_converter.py::live_scene_urls`.
 
 #### [L-278] A relayout from inside a Plotly event handler re-enters the update machinery
 <!-- L:278 status:OPEN upd:2026-09-02 section:A flag: rice:3/3/90/1 -->

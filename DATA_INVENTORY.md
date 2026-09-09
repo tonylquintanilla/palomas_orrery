@@ -73,23 +73,23 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 441.7 MB (441 files)
+**Total size:** 441.9 MB (448 files)
 
-**GitHub Pages headroom:** 582 MB remaining of 1024 MB ceiling (43.1% used)
+**GitHub Pages headroom:** 582 MB remaining of 1024 MB ceiling (43.2% used)
 
 ### By extension
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 252 | 419.2 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-08 |
+| .json | 255 | 419.2 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-09 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 1 | 5.1 MB | palomas_orrery_logo.png (5.1 MB) | 2025-11-27 |
-| .py | 90 | 1.4 MB | gallery_studio.py (243.1 KB) | 2026-09-08 |
+| .py | 92 | 1.5 MB | gallery_studio.py (243.1 KB) | 2026-09-09 |
 | .md | 15 | 689.4 KB | TEST_PROTOCOL_sun_hang_20260902.md (526.5 KB) | 2026-09-08 |
-| .jsonl | 22 | 412.6 KB | encke.jsonl (19.2 KB) | 2026-09-08 |
-| .html | 5 | 282.9 KB | index.html (154.4 KB) | 2026-09-08 |
+| .jsonl | 22 | 419.8 KB | encke.jsonl (19.5 KB) | 2026-09-09 |
+| .html | 5 | 294.8 KB | index.html (156.6 KB) | 2026-09-09 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
-| .js | 5 | 73.3 KB | feature_renderers.js (46.0 KB) | 2026-09-08 |
+| .js | 7 | 107.5 KB | feature_renderers.js (50.6 KB) | 2026-09-09 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |
 | .patch | 3 | 11.7 KB | phaseb_studio.patch (7.0 KB) | 2026-07-29 |
 | .txt | 2 | 7.8 KB | requirements.txt (4.2 KB) | 2026-09-04 |
@@ -115,10 +115,10 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 ### gallery_metadata.json
 
-- indexed entries: 104
+- indexed entries: 144
 - fields per entry: ['id', 'title', 'description', 'room', 'shape', 'files', 'live', 'featured', 'sources', 'converted', 'size_kb']
-- categories: {'(none)': 104}
-- modes: {'(none)': 104}
+- categories: {'(none)': 144}
+- modes: {'(none)': 144}
 
 ---
 
@@ -126,7 +126,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | repo | served size | ceiling | headroom | used |
 |---|---|---|---|---|
-| gallery | 441.7 MB | 1024 MB | 582 MB | 43.1% |
+| gallery | 441.9 MB | 1024 MB | 582 MB | 43.2% |
 | orrery (gitignored data) | 966.8 MB | n/a (not served) | -- | -- |
 
 Note: orrery data is local/gitignored. If orbit cache files are pushed to either repo for web serving, re-run this inventory to update headroom.
