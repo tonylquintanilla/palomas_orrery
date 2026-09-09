@@ -279,14 +279,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*185 live items; 171 need attention (`!`); 184 RICE-scored; 118 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*183 live items; 169 need attention (`!`); 182 RICE-scored; 120 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-251 | The galactic centre button served a cached HTML for seven months | OPEN | 15.2 | 2026-08-25 |
 | ! | L-238 | radius_fraction > 1.0 assumes every shell is above the surface | OPEN | 14.2 | 2026-08-25 |
-| ! | L-306 | Do not promote a drawing approximation into the constants store | OPEN | 13.6 | 2026-09-08 |
 | ! | L-229 | Streamer band drawn in the ecliptic plane, not the solar equator | OPEN | 11.4 | 2026-08-23 |
 | ! | L-235 | Checks that cannot fail, gallery side [three instances] | OPEN | 11.4 | 2026-08-25 |
 | ! | L-252 | L2b's fourth outcome: an INCOMPLETE verdict is not a confirmation | OPEN | 11.4 | 2026-08-25 |
@@ -303,7 +302,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | OPEN | 6.0 | 2026-08-25 |
 | ! | L-269 | A report names its items, not how many there are | OPEN | 6.0 | 2026-08-30 |
 | ! | L-245 | Constants drift check compares against the last COMMIT, not the last RUN | OPEN | 5.4 | 2026-08-25 |
-| ! | L-304 | Plotly relayout field notes for gallery-assembler (bump pending) | OPEN | 5.4 | 2026-09-08 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
 | ! | L-206 | Worksheet return filenames carry model and session | OPEN | 5.1 | 2026-08-18 |
 | ! | L-246 | S4714's semi-major axis was three values in three stores | OPEN | 5.1 | 2026-08-25 |
@@ -548,6 +546,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-261 | Plain speech becomes the default register, not a mode | DONE | 15.2 | 2026-08-29 |
 |  | L-301 | Landscape+portrait pairing lost at L-287, restored in the converter | DONE | 14.4 | 2026-09-08 |
 |  | L-302 | The info card closed itself on the tap that opened it | DONE | 14.4 | 2026-09-08 |
+|  | L-306 | Do not promote a drawing approximation into the constants store | DONE | 13.6 | 2026-09-08 |
 |  | L-182 | Mars Hill sphere -- cross-check correction lost across the config pipeline | DONE | 12.0 | 2026-08-05 |
 |  | L-222 | The constants change report fails on every currency stamp | DONE | 11.4 | 2026-08-20 |
 |  | L-264 | One name, two programs: the runners get repo-specific names | DONE | 11.4 | 2026-08-29 |
@@ -572,6 +571,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-212 | maintenance_run names every file the run wrote | DONE | 5.4 | 2026-08-19 |
 |  | L-258 | Significant figures at rest, and the three changes it made | DONE | 5.4 | 2026-08-29 |
 |  | L-265 | The i panel carries links, not curated prose | DONE | 5.4 | 2026-09-03 |
+|  | L-304 | Plotly relayout field notes for gallery-assembler (bump pending) | DONE | 5.4 | 2026-09-08 |
 |  | L-003 | Protocol amendment candidates (for v3.29) | DONE | 5.4 | 2026-06-22 |
 |  | L-062 | README refresh -- fold in handoff + ledger developments | DONE | 5.1 | 2026-07-28 |
 |  | L-153 | Restore "Who Tony Is" framing into resident protocol (protocol) | DONE | 5.1 | 2026-07-21 |
@@ -6139,29 +6139,6 @@ retyped. Tony-action (do) at that point, not now.
 **Ref:** L-287, L-301, L-286, L-307, L-308, `tools/json_converter.py`,
 `tools/gallery_editor.py`, index.html.
 
-#### [L-304] Plotly relayout field notes for gallery-assembler (bump pending)
-<!-- L:304 status:OPEN upd:2026-09-08 section:A flag: rice:3/2/90/1 -->
-- Three Plotly 2.35.2 behaviours were read out of the shipped bundle
-  this session and each cost a real defect. They belong beside L-278 in
-  the gallery-assembler field notes, one bump, next session that opens
-  that skill (one session, one bump):
-  1. A layout-level `dragmode` relayout -- even to null -- makes gl3d's
-     `updateFx` copy the LAYOUT dragmode (default "zoom") into every
-     scene; turntable rotation is lost until a modebar button restores
-     it (L-286 regression).
-  2. `hoverlabel.bgcolor` with ZERO opacity is replaced by
-     `defaultLine` (#444): "transparent" renders as opaque grey. Use a
-     small non-zero opacity (L-288).
-  3. A per-trace `hoverlabel` overrides the layout's; the orrery writes
-     `{font: {size: 11}}` on many traces, so layout-level suppression
-     never applies to them (L-288).
-  And one viewer lesson, not Plotly's: a `plotly_click` bubbles as a DOM
-  click; a document-level dismiss listener sees the click that opened
-  the thing it dismisses (L-302).
-**Gap:** Tony-action (do): gallery-assembler 1.2 -> 1.3 with these four
-notes, when a session next has that skill open.
-**Ref:** L-278, L-279, L-286, L-288, L-302, skills/gallery-assembler/SKILL.md.
-
 #### [L-305] Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together
 <!-- L:305 status:OPEN upd:2026-09-08 section:A flag: rice:4/4/60/4 -->
 - **Where this came from.** A design round on 2026-09-08 opened with one
@@ -6256,31 +6233,6 @@ already reads the store.
 L-306, `constants_new.py`, `earth_visualization_shells.py`,
 `planet_visualization_utilities.py`, `gallery/feature_renderers.js`,
 `data/objects_config.json` (gallery), skills/interactive-exhibit/SKILL.md.
-
-#### [L-306] Do not promote a drawing approximation into the constants store
-<!-- L:306 status:OPEN upd:2026-09-08 section:A flag: rice:4/4/85/1 -->
-- **Tony's ruling, 2026-09-08:** "We are not promoting Mode 5
-  approximations." And: "not promoting approximations or rounded
-  numbers."
-- The rule generalises past its origin. A number typed into a renderer
-  because the result LOOKED RIGHT is not a constant waiting for a home.
-  Moving it into `constants_new.py` and attaching a plausible citation
-  is worse than leaving it where it is, because the store is the thing
-  the drift checker trusts and the hover quotes. It is the same failure
-  as a `# Source:` over recalled data, one layer over: the promotion
-  suppresses the suspicion that would catch it.
-- Three outcomes for such a number, not two: source the SHAPE it belongs
-  to and recompute; or draw the sourced range and say so in the hover
-  (the geocorona pattern); or remove it and note the absence. Never
-  promote as-is.
-- The tell: a value whose only provenance is that a previous session
-  accepted the render.
-**Gap:** Tony-action (do): provenance-discipline 2.10 -> 2.11 carrying
-this rule, next session that opens that skill (one session, one bump),
-with the four-step binding rule -- version line, `skills_index.py`,
-protocol version-history entry, one commit.
-**Ref:** L-305 (the case that produced it), L-291, L-299,
-skills/provenance-discipline/SKILL.md.
 
 #### [L-307] Export-age reporting for the static cards that are not migrating
 <!-- L:307 status:OPEN upd:2026-09-08 section:A flag: rice:3/3/70/2 -->
@@ -12123,6 +12075,66 @@ rule, which this generalises).
 **Gap:** none.
 **Ref:** L-288 (the grey box that still shows behind it until the
 portrait re-export), index.html, gallery-pipeline SKILL.md (mobile).
+
+#### [L-304] Plotly relayout field notes for gallery-assembler (bump pending)
+<!-- L:304 status:DONE upd:2026-09-08 section:C flag: rice:3/2/90/1 -->
+- Three Plotly 2.35.2 behaviours were read out of the shipped bundle
+  this session and each cost a real defect. They belong beside L-278 in
+  the gallery-assembler field notes, one bump, next session that opens
+  that skill (one session, one bump):
+  1. A layout-level `dragmode` relayout -- even to null -- makes gl3d's
+     `updateFx` copy the LAYOUT dragmode (default "zoom") into every
+     scene; turntable rotation is lost until a modebar button restores
+     it (L-286 regression).
+  2. `hoverlabel.bgcolor` with ZERO opacity is replaced by
+     `defaultLine` (#444): "transparent" renders as opaque grey. Use a
+     small non-zero opacity (L-288).
+  3. A per-trace `hoverlabel` overrides the layout's; the orrery writes
+     `{font: {size: 11}}` on many traces, so layout-level suppression
+     never applies to them (L-288).
+  And one viewer lesson, not Plotly's: a `plotly_click` bubbles as a DOM
+  click; a document-level dismiss listener sees the click that opened
+  the thing it dismisses (L-302).
+- **DONE 2026-09-08, gallery-assembler 1.3.** Taken BEFORE the build
+  rather than inside it, so the build session loads 1.3 against a
+  manifest saying 1.3 and no confirmation has to travel forward.
+  Protocol v3.55 carries the entry.
+**Gap:** none. Tony-action (do) at the time: reinstall
+gallery-assembler to the account profile (Settings > Skills) -- a
+reinstall is invisible to a running session, so nothing inside the
+bumping session could confirm it.
+**Ref:** L-278, L-279, L-286, L-288, L-302, skills/gallery-assembler/SKILL.md.
+
+#### [L-306] Do not promote a drawing approximation into the constants store
+<!-- L:306 status:DONE upd:2026-09-08 section:C flag: rice:4/4/85/1 -->
+- **Tony's ruling, 2026-09-08:** "We are not promoting Mode 5
+  approximations." And: "not promoting approximations or rounded
+  numbers."
+- The rule generalises past its origin. A number typed into a renderer
+  because the result LOOKED RIGHT is not a constant waiting for a home.
+  Moving it into `constants_new.py` and attaching a plausible citation
+  is worse than leaving it where it is, because the store is the thing
+  the drift checker trusts and the hover quotes. It is the same failure
+  as a `# Source:` over recalled data, one layer over: the promotion
+  suppresses the suspicion that would catch it.
+- Three outcomes for such a number, not two: source the SHAPE it belongs
+  to and recompute; or draw the sourced range and say so in the hover
+  (the geocorona pattern); or remove it and note the absence. Never
+  promote as-is.
+- The tell: a value whose only provenance is that a previous session
+  accepted the render.
+- **DONE 2026-09-08, provenance-discipline 2.11.** The rule landed as
+  A Drawing Approximation Does Not Promote [CRITICAL], placed after
+  Measured Is the Goal, Declared Is the Fallback, whose direction of
+  travel it bounds -- that section promotes a declared value toward a
+  measured one; this one says a number that was never a value has
+  nothing to promote. Narrowed in the same breath against the two
+  cases it would damage: a declared drawing choice stays legal, and a
+  visibility stylization still promotes. Protocol v3.55.
+**Gap:** none. Tony-action (do) at the time: reinstall
+provenance-discipline to the account profile (Settings > Skills).
+**Ref:** L-305 (the case that produced it), L-291, L-299,
+skills/provenance-discipline/SKILL.md.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

@@ -6,8 +6,16 @@ fires_when: render_orbits.py, resolver.py, cache_reader.py, propagation math, go
 
 # Gallery Assembler
 
-Skill version: 1.2 | Cut from orrery @ 5b3fb6b4 (v1.2),
-earlier @ f83a3abc72c5516e6dc2ad264be53ce95b68cf38 (v1.1) | 2026-09-02
+Skill version: 1.3 | Cut from orrery @ 159c5a2c (v1.3),
+earlier @ 5b3fb6b4 (v1.2),
+@ f83a3abc72c5516e6dc2ad264be53ce95b68cf38 (v1.1) | 2026-09-08
+v1.3 (L-304) adds four field notes from the 2026-09-07/08 gallery
+session. Three are Plotly 2.35.2 behaviours READ OUT OF THE SHIPPED
+BUNDLE rather than inferred, and each one cost a real defect Tony
+found on the served Earth-and-Moon card. The fourth is not Plotly's
+at all. They sit beside the event-handler note because they are the
+same class: the library does something reasonable that is not what
+the calling code meant.
 v1.2 (L-279) adds Mode 5 as Measurement and the Plotly event-handler
 field note, both earned by the 2026-09-02 Sun exhibit hang: eight reads
 to attribute a two-line bug, and three wrong readings on the way, every
@@ -204,3 +212,51 @@ largest trace in that scene is 4,332 points and the one that hung is 400.
 
 Live example: gallery `6fd6baaf`, `interactive.html`, the `plotly_click`
 handler. L-267, L-278.
+
+## Field note: three Plotly 2.35.2 behaviours, read out of the bundle
+
+Each of these cost a defect on the served gallery in one day, and each
+was settled by grepping the shipped `plotly-2.35.2.min.js` rather than
+by reasoning about what Plotly ought to do. npm can fetch that bundle
+into the sandbox. Do that before theorising.
+
+**A layout-level `dragmode` relayout kills 3D rotation, even to null.**
+Relayout `dragmode` at the LAYOUT level on a figure with a `scene` and
+gl3d's `updateFx` copies the layout dragmode -- default `"zoom"` --
+into every scene. Turntable rotation is gone until a modebar button
+restores it. On a phone there is no modebar button, so the card simply
+does not rotate. Never touch `dragmode` on a 3D figure; for 2D, read an
+absent dragmode as null rather than as undefined. (L-286, gallery
+`1eb1e084`. The sweep ran `applySweep()` after every newPlot and
+compared "restore null" against the layout's undefined.)
+
+**`hoverlabel.bgcolor` at ZERO opacity renders as opaque grey.** Plotly
+replaces a zero-opacity label background with `defaultLine`, `#444`.
+"Transparent" is not transparent; it is a grey box. Use a small
+non-zero opacity -- 0.01 works -- when suppressing a tooltip by
+appearance. (L-288.)
+
+**A per-trace `hoverlabel` overrides the layout's.** The orrery writes
+`{font: {size: 11}}` on many traces, so a layout-level hover
+suppression never reaches them. Strip the per-trace `hoverlabel` when
+routing hover, rather than trying to beat it from the layout. (L-288.
+The prior field note that `hoverinfo='none'` kills 3D events still
+holds, which is why suppression is done by appearance at all.)
+
+## Field note: a plotly_click bubbles as a DOM click
+
+Not Plotly's doing, and the symptom does not look like a click problem.
+`index.html` opened its info card from `plotly_click`; the same tap then
+bubbled to the document-level listener whose rule is "a click outside
+the card dismisses it," and it dismissed the card it had just opened.
+
+The two accidental workarounds are the tell. A right click fires
+`plotly_click` but no DOM click, so right-click kept the card. A tiny
+drag on release is still a Plotly click and still no DOM click, so a
+small upward swipe on the phone kept it too. Anything that separates
+the two event streams looks like a fix and is not one.
+
+Fix: stamp the open time and have the dismiss listener ignore a click
+within 400 ms of it. (L-302, gallery `700b426d`.)
+
+Live example: gallery `700b426d`, `index.html`.

@@ -736,6 +736,57 @@ made a fourth entry.)
 
 
 
+v3.52 (September 2, 2026): No rule changed in this document. One skill
+bump, and a header that had stopped travelling.
+
+gallery-assembler 1.1 -> 1.2 (L-279). Mode 5 as MEASUREMENT, not just
+acceptance, plus a field note on mutating a plot from inside a Plotly
+event handler.
+
+The skill already owned this and was not used. Its `fires_when` line
+said "Mode 5 acceptance" before tonight, and Claude version-checked the
+skill during a four-hour hang investigation without ever opening it --
+including at the moment of handing over a patch whose own output said
+"this one needs Mode 5". The wording was the reason: acceptance reads as
+judging something FINISHED, and nothing about a page that will not
+respond sounds like acceptance. The trigger now names the diagnostic
+case in the words Tony would use -- it hangs, it is unresponsive, it
+worked yesterday.
+
+The seven rules in that section are each attached to a failure that
+earned them. Three came from stating conclusions about trials whose
+CONDITIONS had been inferred rather than recorded, and Tony carried
+every one of those corrections. That is the load this protocol exists to
+spare him, and it is why the placement question was worth the time it
+took. Tony's ruling: the home existed; use it.
+
+THE HEADER HAD BEEN STALE SINCE v3.50. This line read v3.49 while the
+document's own Version History carried v3.50 and v3.51 entries -- the
+correction travelled into the history and stopped there, which is The
+Correction Does Not Travel pointed at the version stamp itself. Fixed
+here, along with the SHA anchor, which had also sat at `ded99fbe` across
+three versions.
+
+One gap recorded rather than closed: documentation/ has no archived copy
+for v3.50 or v3.51. Their content is carried in full by their resident
+Version History entries and git holds the exact bytes, so nothing is
+lost; reconstructing the two files is a separate decision.
+
+One obligation this bump cannot discharge from inside the session that
+made it. A skill lives in three stores, and the account install is the
+copy Claude actually loads; a reinstall is invisible to the running
+conversation. So: gallery-assembler went to 1.2 at `e71f38ae`, the
+session that bumped it had loaded 1.1, and the next session confirms its
+loaded copy reads 1.2 before doing gallery work.
+
+Version history: v3.49 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-09-08 when v3.55
+made a fourth entry.)
+
+
 ### Preserved verbatim: v3.29 Technical lessons (now field notes in skills)
 
 - Cache: cache[name]['elements'] (nested dict)

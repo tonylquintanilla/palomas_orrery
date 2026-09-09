@@ -6,11 +6,24 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 2.10 | Cut from palomas_orrery @ 071a0a65 (v2.10),
+Skill version: 2.11 | Cut from palomas_orrery @ 159c5a2c (v2.11),
+earlier @ 071a0a65 (v2.10),
 earlier @ a263f73d (v2.9), @ 7f4a2f9f (v2.8), @ 3faa72a0 (v2.7),
 @ f603be3 (v2.6), @ 731066f (v2.5), @ 6b99ace (v2.2),
 @ 00219d9 (v2.1), @ eb77c83 (v2.0), @ cdcdb4b (v1.9)
-| August 29, 2026
+| September 8, 2026
+v2.11 adds A Drawing Approximation Does Not Promote [CRITICAL],
+directly after Measured Is the Goal, Declared Is the Fallback,
+whose direction of travel it bounds. That section says a declared
+value is promoted to a measured one as soon as it can be; this one
+says a number that was never a value -- a shape typed into a
+renderer because the render looked right -- has nothing to promote
+and must not be moved into the store. Founding case: Earth's
+magnetosphere, where a half ellipsoid with typed axes, a conic
+eccentricity typed at the call site and a sweep cap the code itself
+labels a MODE-5 KNOB were all candidates for promotion into
+constants_new.py, and Tony refused it -- "we are not promoting
+Mode 5 approximations." Handle L-306.
 v2.10 adds The Store Carries the Verified Figure [CRITICAL] under
 Report to the Figures You Have, which governed REPORTING and left
 the stored value uncovered. Founding case: RADIATIVE_ZONE_AU held
@@ -491,6 +504,61 @@ value in code, range in the description -- for any row where the range
 is genuinely the sourced object. The weaker form leaves the range in
 prose, where it cannot be interpolated and drifts from the number beside
 it.
+
+## A Drawing Approximation Does Not Promote [CRITICAL]
+
+**A number typed into a renderer because the RESULT LOOKED RIGHT is not
+a constant waiting for a home. It does not promote. It is replaced, or
+it stays where it is.**
+
+This bounds the section above. That one governs a DECLARED value --
+something the store already holds, standing in for a measured value
+that exists. This one governs a number that was never a value at all:
+a shape parameter chosen by eye, an axis ratio that made the render
+read well, a sweep cap whose only justification is that the flank
+stopped flaring where somebody liked it.
+
+Moving such a number into `constants_new.py` and attaching a plausible
+citation is WORSE than leaving it in the renderer, and the reason is
+mechanical. The store is the thing the drift checker follows, the
+thing the hover quotes to a visitor, and the thing a later session
+trusts without re-deriving. Promotion launders the approximation
+through all three. It is the same failure as a `# Source:` over
+recalled data, one layer over -- the promotion suppresses the
+suspicion that would have caught it.
+
+**Three outcomes, and promote-as-is is not among them.**
+
+- **Source the SHAPE it belongs to and recompute.** The number was a
+  parameter of a model nobody had chosen. Choose the model, cite it,
+  and the parameter comes with it or is derived from it.
+- **Draw the sourced range and say so** -- the geocorona pattern. Where
+  the honest object is an extent rather than an edge, draw the sourced
+  figure and let the hover state what it is.
+- **Remove it and note the absence.** The remove-and-note rule,
+  unchanged.
+
+**The tell:** a value whose only provenance is that a previous session
+accepted the render. Mode 5 is the acceptance gate for a VISUALIZATION.
+It is not a source for a NUMBER, and a value that passed it has been
+looked at, not measured.
+
+**Two things this does not forbid**, and both matter or the rule
+overreaches. A DECLARED drawing choice stays legal and stays in the
+store -- opacity, point count, a pick from a sourced range with its
+reason on the row. And a visibility stylization still promotes when the
+physical value becomes drawable, which is the chromosphere precedent
+and the direction the section above sets. The line is whether there is
+a real value the number is standing in FOR. A stylization stands in for
+a measurement. An eyeballed shape parameter stands in for nothing.
+
+(Tony's ruling, 2026-09-08, on Earth's magnetosphere: "We are not
+promoting Mode 5 approximations," and "not promoting approximations or
+rounded numbers." Seven drawn numbers in that one renderer had no store
+name and every one of them was a candidate. The rebuild on a cited
+model is L-305; this rule is what stopped the shortcut. It is a SKILL
+rule and not a decision because it resolves the same way next month,
+for a different body, in a different file.)
 
 ## The Status Line [CRITICAL]
 
