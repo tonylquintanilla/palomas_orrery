@@ -20,7 +20,7 @@ the card that puts it in the gallery, and a card for it already exists
 in a shape that hides it from the desktop lobby. Fixing that is a
 GUI-only job for Tony. After his eyes on the lobby, one close patch
 closes L-291 and L-303 and tidies five small record gaps named below.
-**Tony**: The reason for that is that when i made the card i did not see the button visible in the studio for a new interactive card. so i made one using an existing card i copied to the moon section and transferred to Earth. i then selected the P button for the mode. so it shows up in mobile but not on desktop. checking the studio dashboard again. the studio refuses to create a duplicate card. Deleting the original in Editor first. 
+**Tony**: The reason for that is that when i made the card i did not see the button visible in the studio for a new interactive card. so i made one using an existing card i copied to the moon section and transferred to Earth. i then selected the P button for the mode. so it shows up in mobile but not on desktop. checking the studio dashboard again. the studio refuses to create a duplicate card. Deleting the original in Editor first and pushing. 
 
 ## Gates (checked this session)
 
