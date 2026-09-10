@@ -62,6 +62,12 @@ Module updated: September 6, 2026 with Anthropic's Claude Fable 5.1
 tree order; L-286 sweep confirmed on the phone, sweep_report tool;
 L-289 first build failed on the phone, rebuilt as the frame HUD and
 fixed again; L-290 opened), built on a57e86b8.
+Module updated: September 10, 2026 with Anthropic's Claude Fable 5.1
+(L-310 design ruled and built; L-313 opened), built on 5fea1795.
+Module updated: September 10, 2026 with Anthropic's Claude Opus 5
+(L-305 amended with the Jelinek 2012 read and Tony's Shue/Jelinek
+ruling, corrected where it could not land as written; L-314 and L-315
+opened; L-310's gallery push recorded), built on 5fea1795.
 Module updated: September 10, 2026 with Anthropic's Claude Opus 5
 (L-291 and L-303 closed on Tony's Mode 5; their loose ends re-homed
 to L-311 and L-312, opened here, and to L-237 and L-288; L-310 gains
@@ -283,7 +289,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*184 live items; 169 need attention (`!`); 183 RICE-scored; 123 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*187 live items; 172 need attention (`!`); 186 RICE-scored; 123 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -335,6 +341,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-239 | Seed the three Oort builders so a render is reproducible | OPEN | 3.6 | 2026-08-25 |
 | ! | L-285 | index.html adopts the shared navigation cluster; the fake-wheel dolly retires | OPEN | 3.6 | 2026-09-04 |
 | ! | L-311 | Earth's rotation period and obliquity are not served, so the axis hover names neither | OPEN | 3.6 | 2026-09-10 |
+| ! | L-315 | Chained ledger patches refuse once the indexer runs between them (safe-file-editing field note) | OPEN | 3.6 | 2026-09-10 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-25 |
 | ! | L-286 | Rooms in four levels: drill-down, short-name breadcrumb, Home stays a scene reset | OPEN | 3.5 | 2026-09-08 |
 | ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
@@ -358,7 +365,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 |  | L-225 | Migrate the comet shell constants into `constants_new.py`, then dispatch | DEFERRED | 2.4 | 2026-08-23 |
 | ! | L-293 | Lunar standstill: an exhibit made of four dated orbits | OPEN | 2.4 | 2026-09-06 |
-| ! | L-305 | Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together | OPEN | 2.4 | 2026-09-08 |
+| ! | L-305 | Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together | OPEN | 2.4 | 2026-09-10 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
@@ -370,8 +377,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-187 | info_dictionary numeric-overlap enumeration | OPEN | 1.8 | 2026-08-07 |
 | ! | L-228 | Alfven surface latitude ranges: source them or omit them | OPEN [Tony] | 1.8 | 2026-08-23 |
 | ! | L-257 | Three enforcement builds the 2.8 skill text defers | OPEN | 1.8 | 2026-08-27 |
+| ! | L-313 | Recenter the camera on a chosen feature in the exhibit rooms | OPEN | 1.8 | 2026-09-10 |
 |  | L-194 | Text-only assertions -- claims the scanner cannot see | DEFERRED | 1.4 | 2026-08-15 |
 | ! | L-297 | Earth-Moon Lagrange points: serving path sized, deferred from the Earth exhibit | OPEN | 1.4 | 2026-09-07 |
+| ! | L-314 | Live solar wind conditions for the magnetosphere shells (SWPC through the nightly builder) | OPEN | 1.3 | 2026-09-10 |
 | ! | L-253 | The 660 discontinuity's depth variation -- held unsourced | OPEN | 1.2 | 2026-08-26 |
 | ! | L-308 | A shell-legend surface for static cards (deferred, with its trigger) | OPEN | 1.2 | 2026-09-08 |
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
@@ -5932,7 +5941,7 @@ verdict line. Not yet written.
 `gallery_maintenance_run.py`.
 
 #### [L-305] Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together
-<!-- L:305 status:OPEN upd:2026-09-08 section:A flag: rice:4/4/60/4 -->
+<!-- L:305 status:OPEN upd:2026-09-10 section:A flag: rice:4/4/60/4 -->
 - **Where this came from.** A design round on 2026-09-08 opened with one
   hover requirement from the L-291 handoff -- say that the tail is drawn
   to 100 radii against a real one past 1,000 -- and ended with two stored
@@ -6011,20 +6020,181 @@ verdict line. Not yet written.
   hover strings in `earth_visualization_shells.py`. Changing the
   constant while the old ellipsoid still draws makes the text and the
   geometry disagree, which is worse than either being stale.
-**Gap:** fetch Jelinek et al. 2012 and read its fitted parameters from
-the paper; fetch a magnetotail extent citation; supersede
-`EARTH_MAGNETOPAUSE_STANDOFF_RADII` (10.0) and
-`EARTH_BOW_SHOCK_STANDOFF_RADII` (12.5) with sources; remove the Farris
-& Russell "Model form" claim; port the one formulation to
-`planet_visualization_utilities.py` and `gallery/feature_renderers.js`;
-serve shape parameters and validity range; drop the tilt; then Mode 5 on
-both. Also clear now, in whichever patch opens the file: the bow shock
-Note still says "the shell's 15 is a migration item" when line 825
-already reads the store.
+- **2026-09-10, the paper read: gap item 1 closes by reading.** The
+  peer-reviewed parameters are IDENTICAL to the WDS'10 numbers above:
+  R_MP = 12.82 p^(-1/5.26), R_BS = 15.02 p^(-1/6.55), lambda_MP = 1.54,
+  lambda_BS = 1.17, R0 at p = 1 nPa (eqs. 13-16). The surfaces in
+  aberrated GSE are x = R0 p^(-1/eps) - tau^2/2,
+  R_yz = sqrt(2 R0 p^(-1/eps)) tau / lambda. The paper states its own
+  envelope: dayside only, within +/- 7 h of local noon; solar wind
+  dynamic pressure 0.6-11 nPa; rotational symmetry assumed; no IMF Bz,
+  dipole tilt or Mach dependence (sec. 3, 6, 7). Sec. 7 says parabolic
+  coordinates suit the bow shock and that elliptical coordinates would
+  describe the magnetopause better. [read from Tony's uploaded PDF by a
+  Claude Fable 5.1 session, 2026-09-10; not re-read since]
+- **The reference, and how it is reached.** Jelinek, K., Z. Nemecek,
+  and J. Safrankova (2012), A new approach to magnetopause and bow
+  shock modeling based on automated region identification, J. Geophys.
+  Res. 117, A05208, doi:10.1029/2011JA017252. The Wiley DOI page
+  refuses sandbox fetches. A web search the same day listed the article
+  as free access at
+  https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2011JA017252
+  -- search-result metadata; nobody opened that page. Whether the
+  citation meets the Access Standard is settled when its store row is
+  written.
+- **Tony's ruling (2026-09-10): use each model for the part it fits
+  best, and state the reason.** The magnetopause moves to Shue et al.
+  (1998), doi:10.1029/98JA01103 -- the source the served row ALREADY
+  cites for its standoff: r = r0 (2 / (1 + cos theta))^alpha,
+  r0 = (10.22 + 1.29 tanh(0.184 (Bz + 8.14))) Dp^(-1/6.6),
+  alpha = (0.58 - 0.007 Bz)(1 + 0.024 ln Dp). The bow shock stays
+  Jelinek 2012. This AMENDS the ruling above that one formulation
+  serves both boundaries (under "Why Jelinek and not Lin"). Why it
+  holds against that ruling's own reason (portability): Shue is two
+  lines and eight published coefficients, checkable by eye against the
+  paper's figures, so the bar that deferred Lin is still met. Why it is
+  worth a second function: the tail. At p = 2 nPa, Bz = 0, the
+  cross-section radius at x = -100 R_E is 28.9 R_E under Shue and 45.9
+  under the Jelinek paraboloid (the 46 recorded above), and the paper's
+  own sec. 7 concedes the parabola for the magnetopause. Shue's tail
+  still flares (alpha = 0.59 > 0.5), slowly; it does not close.
+  [computed; reproduced 2026-09-10 by the patch that landed this. The
+  r0 line matches the Source already on
+  `EARTH_MAGNETOPAUSE_STANDOFF_RADII`; the alpha line appears nowhere
+  in the repo and was not read this round -- Gap item 1]
+- **The tail therefore needs no geometry citation of its own.** The
+  "tail gets its OWN citation for extent and cross-section" bullet
+  above narrows to EXTENT only: Shue's surface is drawn to the served
+  100 R_E and the hover says the drawn surface stops there against a
+  real tail past 1,000 R_E, and that Shue was fitted on near-Earth
+  crossings, not the distant tail (Show the Envelope). Two parts of
+  that hover are not yet sourced. The 1,000 R_E entered with L-291's
+  hover requirement and sits in the served magnetotail row's
+  `_declared` text with no citation (Gap item 2); the fitting range
+  comes from the Shue read (Gap item 1). The row's `base_radii` (15)
+  and `end_radii` (25) retire with the old tail, since Shue's surface
+  sets the cross-section. [row verified @57fd93c6, unchanged @4506fb48]
+- **The bow shock stops at the fit limit, and says so.** Jelinek's
+  surface is drawn from the nose to 105 degrees from the nose (the
+  +/- 7 h local-time envelope). At p = 2 nPa that is x = -7.8 R_E,
+  R_yz = 29.0 R_E. Beyond it a paraboloid is unsupported (67 R_E at
+  x = -100) and the real shock follows a Mach cone the paper does not
+  model. The cut angle is SERVED with the shape parameters, per the
+  "flaring parameter is SERVED" ruling above; the hover names it.
+  [computed; reproduced 2026-09-10]
+- **The seam at the nose, stated in the hover.** At p = 2 nPa, Bz = 0:
+  Shue magnetopause nose 10.25 R_E; Jelinek bow shock nose 13.51 R_E;
+  subsolar sheath 3.3 R_E where Jelinek's own pair gives 2.3 (his
+  magnetopause at 2 nPa is 11.24). The two magnetopause noses differ by
+  about 1 R_E against a fit scatter of about 0.7-0.8 R_E (Jelinek
+  Fig. 7, per the read). The two hovers name both papers and the 1 R_E
+  disagreement rather than let the pair read as one measurement.
+  [computed; reproduced 2026-09-10]
+- **Supersessions now fixed in number**, both called for above:
+  `EARTH_MAGNETOPAUSE_STANDOFF_RADII` 10.0 -> 10.25 (Shue at the
+  declared conditions; the served row's source string and the
+  constant's own Source both say 10.2 while the value says 10.0 -- a
+  drift inside one row, cleared by this).
+  `EARTH_BOW_SHOCK_STANDOFF_RADII` 12.5 -> 13.51 (Jelinek at 2 nPa);
+  the bow shock's Lugaz-midpoint derivation and the Farris & Russell
+  "Model form" Note go. New store names, each with value / source /
+  orrery_constant: Shue's eight coefficients; Jelinek's R0, eps and
+  lambda for the bow shock (3); the bow-shock cut angle (105 deg,
+  source: the paper's stated local-time envelope); and the MODEL
+  CONDITIONS p = 2 nPa, Bz = 0 nT, v_sw = 400 km/s, status declared
+  pending -- L-314, stated in every hover as the condition, not a
+  measurement. Each pick's reason goes on its row: 2 nPa is the
+  pressure the store's Shue Source already uses; the reason for
+  400 km/s is not yet written. L-314 replaces the three with measured
+  values. [constant verified @5fea1795; served row @57fd93c6]
+- **Aberration is applied, declared.** Both fits are in ABERRATED GSE.
+  The Sun direction is already in the Earth driver's payload
+  (`payload.sun.dir`, from Earth's served osculating elements)
+  [verified @57fd93c6]; the nose is rotated from it by
+  atan(v_orbit / v_sw), about 4.3 deg at 400 km/s, in the ecliptic
+  plane against Earth's motion. v_sw is one of the declared conditions
+  above. **Tony-action (decide):** apply the 4.3 degrees at the
+  declared 400 km/s (this record's choice, because both models are
+  defined in the aberrated frame), or draw un-aberrated and say so in
+  the hover.
+- **The dipole tilt stays dropped** (ruling above). Shue is also
+  symmetric about the aberrated x axis; nothing in either model draws a
+  lean. The desktop drawing still applies it -- `magnetic_tilt_deg=11`
+  in the `rotate_to_sunward` call at `earth_visualization_shells.py:785`
+  [verified @5fea1795] -- so its removal stays in the Gap.
+- **Arrival: both shells are drawer rows.** The Earth room's floor is
+  6.155e-5 AU, the LEO outer edge [verified @57fd93c6]; the bow shock
+  nose is ten times that. L-291's arrival policy applies without a
+  new ruling. When either row is lit the view rescales to hold it,
+  which is the existing drawer behaviour. `earth_geometry.js` already
+  names the group as an ABSENCE in the drawer until a renderer
+  exists; the new renderer replaces that line, and the i-panel's "The
+  magnetosphere is not drawn yet" paragraph comes out in the same
+  patch (EARTH_INFO_HTML, interactive.html). [both still present
+  @4506fb48]
+- **Still open, unchanged:** how `check_store_drift` treats a
+  DIMENSIONLESS pointer (eps, lambda, alpha, the cut angle, Bz in nT,
+  v_sw in km/s -- its unit table is all lengths). Read before the
+  config change, per the bullet above.
+- **Note:** landed 2026-09-10 by `patch_L305_amendment.py` (Claude
+  Opus 5) from the Fable session's design record, which could not be
+  pasted as written. Corrections, each named: the new solar-wind item
+  is L-314, not L-313 (L-310's patch had already opened L-313 for
+  recentering); the record's replacement Gap had dropped two lines of
+  the old one, the tilt removal and the tail extent citation, and both
+  are restored; Shue's alpha is tagged as not read; the standoff
+  quotes are named by line (four quotes in three strings, where the
+  record said two strings); the model conditions use
+  provenance-discipline's "declared pending" status; a ruling quoted
+  in words that do not appear above is paraphrased. The two earlier
+  L-305 patches, a brief for the read and the reference, never landed
+  and are superseded by the two bullets that open this group. The
+  match with the WDS'10 numbers is not an independent check, because
+  the reading session had this block open; Gap item 1 confirms the
+  values against the PDF before the store takes them. L-315 records
+  why the earlier patches refused.
+**Gap:** (1) Read Shue et al. (1998) for the alpha line and its three
+coefficients, and for the range of the crossings it was fitted on,
+before any store name or renderer uses them; confirm Jelinek's six
+values and the local-time envelope against the PDF in the same read.
+Each row records its equation or table number and its access route.
+**Tony-action (do):** keep the Jelinek PDF where that session can read
+it. (2) Source the tail extent behind "past 1,000 R_E" (the served
+magnetotail row's `_declared` text and L-291's hover requirement), or
+remove the figure from both and note the gap. (3) Read
+`check_store_drift` for dimensionless and non-length units and extend
+its table before any new pointer is served. (4) In `constants_new.py`,
+the single value home: supersede the two standoff constants, add the
+store names listed above, remove the bow shock's Lugaz-midpoint
+derivation and the Farris & Russell "Model form" claim, and clear its
+Note's "the shell's 15 is a migration item" (line 825 of the shells
+file already reads the store). (5) Port Shue (magnetopause, to
+100 R_E) and Jelinek (bow shock, to the 105 deg cut) to
+`planet_visualization_utilities.py` AND `gallery/feature_renderers.js`
+in one patch, with the aberration from `payload.sun.dir` on the
+gallery side and from the orrery's own Sun direction on the desktop
+side; drop the tilt (`magnetic_tilt_deg=11`,
+`earth_visualization_shells.py:785`). (6) Serve the shape parameters,
+the cut angle, the declared conditions and the validity range in
+`data/objects_config.json`; retire the magnetotail row's `base_radii`
+and `end_radii`. (7) Hover text in `earth_visualization_shells.py`
+for the new models, naming both papers and the seam:
+`earth_magnetosphere_info` (standoff quotes at lines 729 and 734),
+`magnetosphere_text` (792), `bow_shock_text` (847, and the Lugaz
+midpoint sentence at 848, which goes) [lines @5fea1795]; the quotes
+follow the constants on their own, the surrounding sentences do not.
+Delete the drawer's magnetosphere absence and the i-panel paragraph.
+(8) Live store-drift run reads MATCH by name for every new pointer;
+then Mode 5 on both, phone first.
 **Ref:** L-291, L-292, L-298 (the orrery-vs-exhibit gap, made concrete),
-L-306, `constants_new.py`, `earth_visualization_shells.py`,
+L-306, L-314, L-315, `constants_new.py`, `earth_visualization_shells.py`,
 `planet_visualization_utilities.py`, `gallery/feature_renderers.js`,
-`data/objects_config.json` (gallery), skills/interactive-exhibit/SKILL.md.
+`data/objects_config.json` (gallery), skills/interactive-exhibit/SKILL.md;
+Jelinek et al. (2012), JGR 117, A05208, doi:10.1029/2011JA017252 (read
+from the PDF, 2026-09-10); Shue et al. (1998), JGR 103:17691,
+doi:10.1029/98JA01103; EARTH_DRIVER and EARTH_INFO_HTML in
+interactive.html; gallery/earth_geometry.js (composeScene, the absence
+list).
 
 #### [L-307] Export-age reporting for the static cards that are not migrating
 <!-- L:307 status:OPEN upd:2026-09-08 section:A flag: rice:3/3/70/2 -->
@@ -6162,10 +6332,71 @@ redesign.
   own inline cluster; the exhibit rooms use `gallery/nav_cluster.js`.
   A camera step designed here lands in the cluster. L-285 already
   records moving `index.html` onto the cluster.
-**Gap:** design round with Tony; then build. Not blocking L-291.
+- **Design round, 2026-09-10, on the phone, and the ruling.** Tony:
+  coarse sweep and rotation are not the need; the hand and the mouse
+  give those. "In full zoom both sweep and rotate are hard to control
+  precisely. It's like moving a telescope on full magnification by
+  hand." So: no hold-to-repeat, and no fixed angle. The step SCALES
+  WITH MAGNIFICATION. A tap turns the camera by a base angle (5
+  degrees, a Mode 5 knob) times the ratio of the live eye distance to
+  the arrival eye distance, so a wheel-dollied view gets a
+  proportionally smaller step and a tap always moves about the same
+  slice of the screen -- the slow-motion knob. Frame zoom (+/-) does
+  not change the eye distance, and a fixed angle already sweeps a
+  fixed slice there, so the two zooms compose.
+- **Settled with it.** Left/right yaw about the up vector; up/down
+  pitch about the eye's horizontal, refused within 2 degrees of the
+  poles. Arrows draw only where the page passes step handlers, so a
+  2D page later gets the three buttons unchanged (the L-285 lesson:
+  one button, one meaning). Layout is a cross with Home at the centre,
+  under + and -. The step reads the live camera through
+  `sunLiveCamera` (L-289), so it is right after a touch rotation. The
+  sign convention and the base angle are Mode 5 knobs
+  (`NAV_STEP_SIGN`, `NAV_STEP_BASE_DEG`).
+- **Recentering was raised and split off.** Rotation orbits the scene
+  centre, so an off-centre feature swings out of view however fine
+  the step; the orrery already has a recenter for its comet-detail
+  views. Tony: capture it as its own item. L-313.
+- **Built 2026-09-10** by `patch_L310_camera_step.py` in the gallery
+  repo (`gallery/nav_cluster.js`, `interactive.html`) against gallery
+  `57fd93c6`; syntax-checked and the cluster's two layouts exercised on
+  a stub DOM in the sandbox. [render-gated]
+- **Pushed 2026-09-10** in the gallery at `4506fb48`: `navCameraStep`
+  and the step handlers are present there and absent at `57fd93c6`.
+  [verified @4506fb48]
+**Gap:** Tony's Mode 5, phone and desktop, on the Earth room at full
+zoom: the step feels right at high magnification, the arrow signs feel
+right, and the cross clears the drawer handle and the title on a
+portrait phone. Then DONE.
 **Ref:** L-267 (nav cluster), L-289 (frame HUD, whose triad shows the
 result of any camera move), L-291, `gallery/nav_cluster.js`,
 interactive.html (`navHome`, `sunFrameOn`).
+
+#### [L-313] Recenter the camera on a chosen feature in the exhibit rooms
+<!-- L:313 status:OPEN upd:2026-09-10 section:A flag: rice:3/3/60/3 -->
+- **Opened 2026-09-10, split from L-310's design round.** A camera
+  step, however fine, orbits the scene centre; a feature off that
+  centre (the Moon in the Earth room) swings across the screen and
+  out on any rotation. A telescope mount has the same limit, which is
+  why the object is centred in the finder before high power. The fix
+  is to move `scene.camera.center` onto the feature so the arrows and
+  the mouse both turn about it.
+- **Prior art, from Tony:** the orrery already recenters for
+  high-zoom views such as comet details. Read that mechanism first
+  (which module, and how it picks the point) before designing the
+  room's version; the module is not yet named here.
+- **Questions for the design round:** how the point is chosen (a tap
+  on a plotted point through Plotly's click event; what a tap on empty
+  space does); where the control lives (a cluster button, or a gesture
+  with no button); how the frame HUD shows that the pivot moved
+  (L-289's triad follows the camera eye, not the centre); and that
+  Home restores the arrival centre as it restores the eye.
+- **Note:** RICE 3/3/60/3 -> 1.8 proposed, not confirmed.
+**Gap:** design round, zero code, after L-310 passes Mode 5. Then one
+patch, shared chrome.
+**Ref:** L-310 (the arrows), L-267 (the cluster), L-289 (the HUD),
+`gallery/nav_cluster.js`, interactive.html (`navCameraStep`,
+`navHome`), the orrery's recenter.
 
 #### [L-311] Earth's rotation period and obliquity are not served, so the axis hover names neither
 <!-- L:311 status:OPEN upd:2026-09-10 section:A flag: rice:2/2/90/1 -->
@@ -6229,6 +6460,75 @@ open.
 **Ref:** L-303, L-291 (step 7), L-288 (the Studio half),
 `tools/gallery_editor.py` (`_copy_to_room`, `_build_toolbar`),
 index.html (the Featured rule), `tools/sweep_report.py`.
+
+#### [L-314] Live solar wind conditions for the magnetosphere shells (SWPC through the nightly builder)
+<!-- L:314 status:OPEN upd:2026-09-10 section:A flag: rice:3/3/60/4 -->
+- **Where this came from.** L-305's 2026-09-10 design round fixed the
+  magnetosphere shells at DECLARED conditions -- p = 2 nPa, Bz = 0 nT,
+  v_sw = 400 km/s -- because that is what the store can source today.
+  Tony's ruling the same round: live if we can, later. This item is
+  the later. (The round's record called it L-313; L-310 had already
+  opened that handle for recentering.)
+- **The shape is driven by three numbers the solar wind actually
+  reports.** Shue takes Dp and Bz; Jelinek takes p; the aberration
+  takes v_sw. NOAA SWPC publishes DSCOVR real-time solar wind (plasma:
+  density, speed, temperature; mag: Bz in GSM) as JSON on
+  services.swpc.noaa.gov [recalled, not fetched: confirm the endpoints
+  and their fields when this opens]. Dynamic pressure is derived from
+  density and speed (p = rho v^2, with the proton mass; the helium
+  fraction is a declared assumption to state). The builder is the
+  right home: it already fetches, stages, guards and swaps served data
+  nightly (gallery-cache-builder), and a value that changes hourly
+  should not be fetched by the visitor's browser.
+- **What it changes for the visitor.** The two shells breathe day to
+  day; each hover carries the measured p, Bz, v_sw AND their timestamp,
+  replacing the "model condition" line. The i-panel gains one sentence
+  saying the shells are drawn for the solar wind as measured at the
+  build time named in the hover.
+- **What it must not do.** Serve a value without its timestamp; fall
+  back silently to the declared conditions when the fetch fails (Guard
+  v2 quarantine and a stated fallback in the hover instead); or push
+  the shells outside the models' validity ranges without saying so
+  (Jelinek 0.6-11 nPa; Shue's Bz range, from L-305's Shue read). Out
+  of range -> draw at the range edge and say so, per Show the Envelope.
+- **Note:** RICE 3/3/60/4 -> 1.35 proposed, not confirmed. Effort is
+  the builder's new data source plus the drift checker's non-length
+  units (L-305 reads them first). Confidence 60: a feed the builder
+  has never read, in a format not yet confirmed. Not started until
+  L-305's renderer is on the phone.
+**Gap:** the whole item; sequenced after L-305 closes.
+**Ref:** L-305, tools/gallery_cache_builder.py, data/objects_config.json,
+gallery/feature_renderers.js, skills/gallery-cache-builder/SKILL.md.
+
+#### [L-315] Chained ledger patches refuse once the indexer runs between them (safe-file-editing field note)
+<!-- L:315 status:OPEN upd:2026-09-10 section:A flag: rice:2/2/90/1 -->
+- **What happened, 2026-09-10.** `patch_L305_brief.py` was
+  fingerprinted against the ledger exactly as `patch_L310_ledger.py`
+  left it, BEFORE `ledger_index.py` ran, and `patch_L305_2_citation.py`
+  against the brief's output the same way -- while each of the three
+  tells the operator to run `ledger_index.py` next. Doing that rewrites
+  the index zone, and the next patch refuses. All three also hashed raw
+  bytes, and `ledger_index.py` writes in text mode (`open(path, 'w')`),
+  so on Windows the working copy goes CRLF and fails a raw-byte guard
+  in any order. Reproduced on throwaway copies of `5fea1795`: the
+  brief's expected md5 is the post-patch, pre-index ledger; after the
+  indexer the same ledger reads `8f4baaa5` (LF). [verified @5fea1795]
+- **What `patch_L305_amendment.py` did instead.** It fingerprints the
+  LF-normalised text OUTSIDE the INDEX zone. A patch that never edits
+  the index, and ends by telling the operator to regenerate it, does
+  not depend on that zone; a guard that includes it refuses for a
+  reason that is not about content -- Line Endings Are Not Content, one
+  layer out. It writes the file back in the line endings it found.
+- **Note:** this is method, so it goes into safe-file-editing as a
+  field note at that skill's next bump, not to Tony as a ruling.
+  `ledger_index.py` writing in binary mode and keeping the file's line
+  endings would remove the CRLF half at its source; the gallery's
+  text-mode writers had the same shape (L-236). RICE 2/2/90/1 -> 3.6
+  proposed, not confirmed.
+**Gap:** the field note, under the four-step skill-bump rule;
+`ledger_index.py` preserving line endings, in the same session.
+**Ref:** L-236, L-305, L-310, `ledger_index.py`, safe-file-editing 1.10
+(Line Endings Are Not Content; Compare Content, Not Bytes).
 
 #### [L-278] A relayout from inside a Plotly event handler re-enters the update machinery
 <!-- L:278 status:OPEN upd:2026-09-02 section:A flag: rice:3/3/90/1 -->
