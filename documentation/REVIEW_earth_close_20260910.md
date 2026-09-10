@@ -20,7 +20,7 @@ the card that puts it in the gallery, and a card for it already exists
 in a shape that hides it from the desktop lobby. Fixing that is a
 GUI-only job for Tony. After his eyes on the lobby, one close patch
 closes L-291 and L-303 and tidies five small record gaps named below.
-**Tony**: The reason for that is that when i made the card i did not see the button visible in the studio for a new interactive card. so i made one using an existing card i copied to the moon section and transferred to Earth. i then selected the P button for the mode. so it shows up in mobile but not on desktop. checking the studio dashboard again. the studio refuses to create a duplicate card. Deleting the original in Editor first and pushing. minor point: i had to relaunch the Editor to see the new card added to Storage. Maybe a refresh button in Editor would be useful. Completed the card in Editor and pushed. 
+**Tony**: The reason for that is that when i made the card i did not see the button visible in the studio for a new interactive card. so i made one using an existing card i copied to the moon section and transferred to Earth. i then selected the P button for the mode. so it shows up in mobile but not on desktop. checking the studio dashboard again. the studio refuses to create a duplicate card. Deleting the original in Editor first and pushing. minor point: i had to relaunch the Editor to see the new card added to Storage. Maybe a refresh button in Editor would be useful. Completed the card in Editor and pushed to gallery at 77165da114b223a991f4613dfb9361d6b009b061. 
 
 ## Gates (checked this session)
 
@@ -81,6 +81,7 @@ on the live data, not a render, so Tony's eyes are still the check:
 After the fix, each screen shows the interactive card beside ONE static
 "Earth and Moon" card (the landscape on desktop, the portrait on the
 phone). Whether that static pair stays featured is Tony's call.
+**Tony**: the new Earth and Moon interactive card is displayed correctly as a featured item on the desktop gallery solar/earth. however it does not appear in the lobby as a featured card. i thought that all featured cards would appear in the lobby. 
 
 **Why the handoff missed it.** The session that wrote it never read
 the metadata, so it still lists step 7 as not started.
@@ -88,6 +89,7 @@ the metadata, so it still lists step 7 as not started.
 **The fix, in order -- the order matters.** Studio refuses to make a
 card for a scene another card already opens, and the editor has no
 field for the sibling tag, so the copy cannot be repaired in place.
+**Tony**: i deleted the original interactive card and redid it. 
 
 1. Open the gallery editor. Select the `__moon` card, Delete, save.
    **Close the editor.** Studio writes the same metadata file, and an
@@ -112,6 +114,7 @@ period" to L-292. L-292 is "Earth shells the orrery does not draw"
 only record is one sentence in L-291's body, which moves to the closed
 section when L-291 closes. Fix in the close patch: write it into L-292
 as a line, or give it its own handle, and correct the pointer.
+**Tony**: confirmed. 
 
 ## Gap 3 -- follow-on work riding inside items that close
 
@@ -127,6 +130,7 @@ to close, where nobody will look for them:
 This is method, not a ruling for Tony. Proposed rule for
 ledger-and-session-records: before an item closes, each of its "not
 done" lines gets a home in an open item, or is struck with a reason.
+**Tony**: confirmed. 
 
 ## Gap 4 -- interactive-exhibit 1.0 describes the old scene picker
 
@@ -137,6 +141,7 @@ has an EXHIBITS table and zero such literals; `live_scene_urls` in
 skill would mislead whoever builds the next exhibit. Bump to 1.1 in
 the close session, before that build, with Gap 1's editor behaviour as
 a field note.
+**Tony**: confirmed. 
 
 ## Gap 5 -- master plan still says Earth's code is not written
 
@@ -159,6 +164,7 @@ before commit `b5622a8`:
 
 The MAPS title differs from its landscape only by the hyphen. The
 Artemis title differs in words.
+**Tony**: deferred to the braid. not critical. 
 
 **Minor, for the same patch:** L-168's title still reads "source fix
 still open."
