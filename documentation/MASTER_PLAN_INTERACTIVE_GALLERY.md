@@ -1,6 +1,6 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** v28 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
+**Status:** v29 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
 **the first feature-bearing exhibit is LIVE AND COMPLETE.** The Sun
 ships at `palomasorrery.com/interactive.html?exhibit=sun`, unlinked
 from the landing page, Mode 5 accepted 2026-08-29 (gallery
@@ -9,15 +9,15 @@ from the landing page, Mode 5 accepted 2026-08-29 (gallery
 rows move the camera, and the i panel follows the focus and carries
 each shell's curated link (L-265, DONE). The phone pass is DONE as of
 2026-09-06, and the frame HUD with it (L-289, closed on Tony's Mode
-5). **The second exhibit, EARTH, has its DATA SERVED and its CODE NOT
-YET WRITTEN** (L-291): steps 0-2 of the interactive-exhibit skill are
-done on both repos as of 2026-09-08 -- 21 sourced constants in the
-orrery store, every Earth shell reading them, and a nine-group served
-entry whose 24 pointers read MATCH on the live run. Step 3, the
-`EXHIBIT === "earth"` branch, is next AND IS SPLIT: it proceeds on
-the eleven sourced features, and the magnetosphere is deferred to
-L-305 for a rebuild on a cited model, absent and named in the
-meantime rather than approximate.
+5). **The second exhibit, EARTH, is LIVE AND COMPLETE** (L-291, closed
+2026-09-10 on Tony's Mode 5): `interactive.html?exhibit=earth`,
+shells plus the Moon, arriving at low Earth orbit -- eleven sourced
+features, the axis, the Sun line and terminator, and the Moon on its
+trusted arc -- with its card featured in the lobby (gallery
+`57fd93c6`). The magnetosphere is absent and named until its rebuild
+on a cited model (L-305). Earth made the rooms a TABLE, `EXHIBITS` in
+`interactive.html`, one row per room, and it found L-168, the
+planetocentric mean-motion bug, on the first moon it drew.
 **The braid, ruled 2026-08-22:** provenance stops being a GATE and
 becomes a per-artifact slice, and the rendering layer is worked first.
 The five segments of Section 5a do NOT move; the order they are worked
@@ -92,7 +92,14 @@ text here read "enabled with a known open issue", contradicting its own
 header forty lines below. L-151 (gallery-assembler skill) DONE
 2026-07-27; L-150 (multi-orbit binaries) still decided, not yet built.)
 **Date begun:** July 3, 2026
-**Last updated:** September 8, 2026 (v28, evening: a DESIGN BUILD,
+**Last updated:** September 10, 2026 (v29: the Earth BUILD closes.
+Step 3 built and through three Mode 5 rounds; L-168 fixed at source
+on the first moon it could affect; the card made in Studio after a
+copied card hid from the desktop lobby; L-291 and L-303 closed on
+Tony's Mode 5; loose ends re-homed to L-311, L-312, L-237 and L-288;
+next track the L-310 camera-step design round; two handoff locations
+corrected; Section 5a gains the 2026-09-09/10 subsection; with
+Anthropic's Claude Opus 5. v28, September 8, 2026, evening: a DESIGN BUILD,
 zero code. Step 3 split -- the magnetosphere is pre-provenance
 drawing, not sourced geometry, and gets its own build on Jelinek et
 al. 2012 with the dipole tilt dropped and the tail's extent sourced
@@ -105,14 +112,7 @@ Earth's step 2 complete on
 both sides -- the store, the shells, the served entry, the live drift
 run; four gallery-pipeline defects found by Tony on the served
 Earth-and-Moon card and fixed the same day; Section 5a gains the
-2026-09-08 subsection; with Anthropic's Claude Fable 5.1. v26,
-September 6, 2026: the EARTH exhibit designed in
-a zero-code round -- shells plus the Moon, arriving at low Earth orbit;
-a Lagrange point belongs to the frame that defines it; sunlight is
-geometry, not a lighting model; the Moon's 3.37-day trust window found
-unenforced; L-289 closed and the Sun's chrome finished; Section 5a
-gains the 2026-09-06 evening subsection; with Anthropic's Claude Opus
-5.)
+2026-09-08 subsection; with Anthropic's Claude Fable 5.1.)
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
 Claude Opus 5, Claude Fable 5, Claude Sonnet 5, GPT
 
@@ -1561,7 +1561,9 @@ be ruled together.
 branch in `interactive.html`, the GEO ring and magnetosphere
 renderers, the terminator, the Moon's trust-window arc, the chrome by
 parameter -- is next and is unblocked. Handoff:
-`documentation/HANDOFF_earth_step3_20260908.md` in the gallery repo.
+`documentation/HANDOFF_earth_step3_20260908.md` in the orrery repo
+[this read "gallery repo" until v29; the file was only ever in the
+orrery].
 
 ### 2026-09-08 evening -- a design round splits step 3, and the
 magnetosphere turns out not to be sourced
@@ -1614,8 +1616,57 @@ absorbs it (L-307).
 
 **What this does to the order.** Nothing moves. Step 3 is next and
 is unblocked on six of its seven items. Handoff:
-`documentation/HANDOFF_earth_step3_20260908.md` in the gallery repo,
-superseded in part by this round.
+`documentation/HANDOFF_earth_step3_20260908.md` in the orrery repo
+["gallery repo" until v29], superseded in part by this round.
+
+### 2026-09-09/10 -- Earth ships, and its card finds a gap in the handoff
+
+Measured at orrery `1ee1cc61` and gallery `57fd93c6`, both confirmed
+against the live remotes. Appended, not merged.
+
+**Step 3 built, then three Mode 5 rounds** (L-291). `?exhibit=earth`
+became the second row of an `EXHIBITS` table the shared chrome reads,
+and `gallery/earth_geometry.js` composes the room: the served shells,
+the axis and equator from the served pole, the Sun line and terminator
+as geometry rather than lighting, the GEO ring, and the Moon on its
+trusted arc. Running the assembler corrected the step-3 handoff three
+times: Earth is the CENTER and not an object, the Moon's trust window
+is read from the record, and a belt beyond the frame goes to the
+drawer. Tony read the Moon's woven arc as points too far apart in
+time. That was L-168 -- solar mean motion applied to a planetocentric
+orbit, caught in July, designed, and left open until the first moon
+rendered. Fixed at source.
+
+**The card was made twice.** The first Earth card was a copy of the
+static Earth-and-Moon portrait with a live URL added, because the
+Studio button was not found. The copy kept the portrait's pairing
+tag, so the lobby's Featured rule hid it on the desktop while the
+phone showed it. The handoff written that night said the card step
+had not started; its session never read the metadata. A review the
+next morning did, replayed the viewer's rule against it, and Tony
+rebuilt the card in Studio. Mode 5 on the lobby, desktop and phone,
+closed L-291 and L-303 (one card per orientation).
+
+**Loose ends became a rule.** Three unfinished tasks were riding
+inside items that had closed or were about to, one of them behind a
+pointer to an item that never mentioned it. They went to L-311 (the
+rotation period), L-312 (the editor's copy defect and two titles),
+L-237 (a planetocentric test) and L-288 (the Studio button and the
+editor's unchecked save). ledger-and-session-records 1.11 makes
+re-homing part of closing; interactive-exhibit 1.1 corrects the
+places that still described one branch per room. Protocol v3.56.
+
+**What this does to the order.** Step 3 of the 2026-09-03 order,
+Earth into the assembler, bundled three items. The room is done.
+L-237, Artifact 1's golden record, is still open and now also carries
+the planetocentric test. L-268 does not record whether Earth's slice
+was discharged by step 2's rebuild of the served entry; that is for
+L-268's next session to settle. Step 4, the transport, was not built
+alongside Earth and still stands before step 5, Jupiter and Saturn.
+Tony's next track is the L-310 camera-step design round -- shared
+chrome, zero code -- taken beside the order, not as a step in it.
+Handoff: `documentation/HANDOFF_earth_close_20260910.md` in the
+orrery repo.
 
 ### What this section deliberately does not carry
 

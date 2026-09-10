@@ -62,6 +62,10 @@ Module updated: September 6, 2026 with Anthropic's Claude Fable 5.1
 tree order; L-286 sweep confirmed on the phone, sweep_report tool;
 L-289 first build failed on the phone, rebuilt as the frame HUD and
 fixed again; L-290 opened), built on a57e86b8.
+Module updated: September 10, 2026 with Anthropic's Claude Opus 5
+(L-291 and L-303 closed on Tony's Mode 5; their loose ends re-homed
+to L-311 and L-312, opened here, and to L-237 and L-288; L-310 gains
+Studio's prior art; L-168's title), built on 1ee1cc61.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -279,7 +283,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*184 live items; 169 need attention (`!`); 183 RICE-scored; 121 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*184 live items; 169 need attention (`!`); 183 RICE-scored; 123 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -291,7 +295,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-252 | L2b's fourth outcome: an INCOMPLETE verdict is not a confirmation | OPEN | 11.4 | 2026-08-25 |
 | ! | L-262 | The framing smoke test has never run against the page | OPEN | 11.4 | 2026-08-30 |
 | ! | L-271 | Patch scripts wrote backups nothing ever removed | OPEN | 11.4 | 2026-08-31 |
-| ! | L-237 | Artifact 1's golden record is stale and needs re-cutting | OPEN | 10.8 | 2026-08-25 |
+| ! | L-237 | Artifact 1's golden record is stale and needs re-cutting | OPEN | 10.8 | 2026-09-10 |
 | ! | L-266 | Nothing checks that a cited link still resolves | OPEN | 9.0 | 2026-08-30 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-226 | safe-file-editing 1.8 -- encoding gate covers prose; corrections do not travel | OPEN | 8.1 | 2026-08-23 |
@@ -312,8 +316,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-08-25 |
 | ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-25 |
-| ! | L-291 | Earth exhibit: shells plus the Moon | PENDING-GATE | 4.3 | 2026-09-09 |
-| ! | L-303 | Separate cards per orientation (RULED); the phone hides a landscape card that has a portrait sibling | PENDING-GATE | 4.3 | 2026-09-09 |
 | ! | L-281 | The guest book: no-account comments, approve-before-show | OPEN | 4.2 | 2026-09-03 |
 | ! | L-247 | Sgr A* constants migrated to the single source of truth | OPEN | 4.0 | 2026-08-25 |
 | ! | L-277 | The L-192 site store anchors by line number, so any insertion breaks two checkers | OPEN | 4.0 | 2026-09-03 |
@@ -332,16 +334,18 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-215 | Ledger cleanup by topic, not by age | OPEN | 3.6 | 2026-08-19 |
 | ! | L-239 | Seed the three Oort builders so a render is reproducible | OPEN | 3.6 | 2026-08-25 |
 | ! | L-285 | index.html adopts the shared navigation cluster; the fake-wheel dolly retires | OPEN | 3.6 | 2026-09-04 |
+| ! | L-311 | Earth's rotation period and obliquity are not served, so the axis hover names neither | OPEN | 3.6 | 2026-09-10 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-25 |
 | ! | L-286 | Rooms in four levels: drill-down, short-name breadcrumb, Home stays a scene reset | OPEN | 3.5 | 2026-09-08 |
 | ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
+| ! | L-312 | The gallery editor's copy and file slots make cards the viewer misreads; two portrait titles to retype | OPEN | 3.4 | 2026-09-10 |
 | ! | L-292 | Earth shells the orrery does not draw | OPEN | 3.4 | 2026-09-08 |
 | ! | L-283 | Visual theme: dark wall, paper placards, record mode | OPEN | 3.2 | 2026-09-03 |
 | ! | L-256 | provenance-discipline 2.8, and the status pass it enables | OPEN | 3.1 | 2026-08-27 |
-| ! | L-288 | Gallery Studio creates and edits live-scene cards | OPEN | 3.1 | 2026-09-08 |
+| ! | L-288 | Gallery Studio creates and edits live-scene cards | OPEN | 3.1 | 2026-09-10 |
 | ! | L-294 | The Explorer room's placeholder, and Earth's heliocentric view | OPEN | 3.1 | 2026-09-06 |
 | ! | L-307 | Export-age reporting for the static cards that are not migrating | OPEN | 3.1 | 2026-09-08 |
-| ! | L-310 | Finer camera control in the exhibit rooms: directional step buttons on the nav cluster | OPEN | 3.1 | 2026-09-09 |
+| ! | L-310 | Finer camera control in the exhibit rooms: directional step buttons on the nav cluster | OPEN | 3.1 | 2026-09-10 |
 | ! | L-254 | 76 dead sphere-shell builders, unmarked, across 12 modules | OPEN | 2.8 | 2026-09-02 |
 | ! | L-240 | Split declared drawing parameters from measured values | OPEN | 2.8 | 2026-08-25 |
 | ! | L-176 | Shell hover text: add illustrated dimensions (radius_fraction -> km) | OPEN | 2.8 | 2026-08-04 |
@@ -587,6 +591,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-076 | Earth System shared module (earth_system_common) + 3+5 generalized to food | DONE | 4.3 | 2026-06-30 |
 |  | L-274 | The cache sweep aged by mtime, which is wrong in both directions | DONE | 4.3 | 2026-09-01 |
 |  | L-280 | The Interactive Wing: door, hall, two rooms, What's New | DONE | 4.3 | 2026-09-04 |
+|  | L-291 | Earth exhibit: shells plus the Moon | DONE | 4.3 | 2026-09-10 |
+|  | L-303 | Separate cards per orientation (RULED); the phone hides a landscape card that has a portrait sibling | DONE | 4.3 | 2026-09-10 |
 |  | L-214 | The request builder drops the comment lines that matter | DONE | 3.8 | 2026-08-21 |
 |  | L-287 | Gallery editor: the room tree, the storage room, the featured flag | DONE | 3.8 | 2026-09-05 |
 |  | L-233 | Three dashboard buttons: one fixed, one added, one retired | DONE | 3.8 | 2026-08-24 |
@@ -656,7 +662,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-170 | Tier-1 exit-code flip -- capture so it doesn't float | DONE | 7.2 | 2026-07-29 |
 |  | L-085 | LICENSE to repo root | DONE | 4.0 | 2026-07-03 |
 |  | L-088 | Gallery integration test (Phase 0) | DONE | 4.0 | 2026-07-06 |
-|  | L-168 | propagate_marker uses solar K_GAUSS mean-motion -- wrong for planetocentric moon markers (FLAG-2; caught in F1 design, avoided in serving, source fix still open) | DONE | 3.6 | 2026-09-09 |
+|  | L-168 | propagate_marker uses solar K_GAUSS mean-motion -- wrong for planetocentric moon markers (FLAG-2; caught in F1 design, avoided in serving, fixed at source 2026-09-09) | DONE | 3.6 | 2026-09-10 |
 |  | L-099 | Solar System Explorer interactive exhibit | DONE | 3.2 | 2026-07-06 |
 |  | L-174 | Citation level mismatch -- citations pitched one block too far out | DONE | 2.7 | 2026-07-30 |
 |  | L-154 | Gallery feature-rendering JS layer (shells, rings, radiation belts -- Artifact 2 prerequisite) | DONE | 2.1 | 2026-08-24 |
@@ -3812,7 +3818,7 @@ buys very little.
 Cannot Fail Is Not Passing; L-236; L-237.
 
 #### [L-237] Artifact 1's golden record is stale and needs re-cutting
-<!-- L:237 status:OPEN upd:2026-08-25 section:A flag: rice:3/4/90/1 -->
+<!-- L:237 status:OPEN upd:2026-09-10 section:A flag: rice:3/4/90/1 -->
 - **Unblocked 2026-08-25:** Mode 5 passed on the complete Sun, so the
   gate this was waiting on is discharged.
 - **Cut 2026-07-11; it differs from today in four fields,** three of
@@ -3827,8 +3833,17 @@ Cannot Fail Is Not Passing; L-236; L-237.
   the suite exits 1 on an expectation written before the Sun
   landed. It is carried as report-only in the runner and does not
   gate, but it is noise on every run until the expectation moves.
-**Gap:** re-cut it. Pair with the L-235 T5 fix -- re-cutting a record
-that nothing compares against buys very little.
+- **Carries a test from L-168, re-homed 2026-09-10.** When
+  `gallery/assembler/tests/test_artifact1_earth.py` is open for the
+  re-cut: a Python-side `as_of_today` check for a PLANETOCENTRIC body.
+  T1 checks Earth only, and the moon marker bug L-168 fixed was right
+  at the fixture's epoch by luck. L-168 records the numbers to pin,
+  as fractions of r against Horizons in the live cache: Earth 8.8e-12,
+  Moon 2.3e-10, Io 2.6e-9, Titan 2.0e-10. The pin compares verdicts by
+  name, so the new verdict is a pin change.
+**Gap:** re-cut it, with the planetocentric test above. Pair with the
+L-235 T5 fix -- re-cutting a record that nothing compares against buys
+very little.
 - **Note:** RICE 3/4/90/1 -> 10.8 is Claude's proposed score.
   **Tony-action (decide):** confirm or redirect.
 **Ref:** L-234; L-235; L-080 (the fingerprint's field list); L-270
@@ -5599,7 +5614,7 @@ splits by subject); index.html; interactive.html; gallery/nav_cluster.js;
 gallery_config.json; gallery_metadata.json.
 
 #### [L-288] Gallery Studio creates and edits live-scene cards
-<!-- L:288 status:OPEN upd:2026-09-08 section:A flag: rice:3/3/70/2 -->
+<!-- L:288 status:OPEN upd:2026-09-10 section:A flag: rice:3/3/70/2 -->
 - **Opened 2026-09-05** on Tony's request after the first live card was
   made by hand: "add functionality to the gallery studio to create and
   edit live scenes with urls." Today a live card is made in the editor
@@ -5653,252 +5668,35 @@ gallery_config.json; gallery_metadata.json.
   file was exported 2026-09-07 17:50, before the fix; it carries the
   grey box until the scene is re-exported through Studio and
   re-converted (Tony-action, do).
+- **From the Earth card, 2026-09-09/10 (L-291, step 7): two controls
+  that were needed existed, and neither was found.** (1) Tony did not
+  see New Interactive Card in Studio on his first look and made the
+  card by copying instead, which is how L-312's pairing-tag defect
+  reached a live card. Measured at gallery `57fd93c6`: the button is
+  fourth of four in the action row (Preview, Export HTML..., Export
+  Encounter..., New Interactive Card...; widths 12, 14, 18 and 20
+  characters) in a 960x720 window with an 800x500 minimum. The row is
+  not wide enough to clip sideways, so the cause is NOT established.
+  Its tooltip still reads "the Sun today; Earth when its exhibit
+  exists." (2) Tony asked for a refresh button after the editor did
+  not show the card Studio had just written. The editor has one: File
+  > Reload from disk (`_reload`). It is not on the toolbar.
+- **The hazard behind (2) is not the missing button.** Save All writes
+  the editor's in-memory copy of both files with no check that the
+  disk changed since it loaded them, so an editor left open while
+  Studio writes a card would save over that card. Two forms, recorded
+  and not ruled: Reload on the toolbar, which works when remembered;
+  or a check at save that the files on disk are still the ones loaded,
+  which fires unprompted.
+- **Studio refused a second card for `?exhibit=earth` while the copy
+  existed** -- correct. The working order is in interactive-exhibit
+  1.1, step 7.
 **Gap:** the live-card converter path above; the Earth-and-Moon
-portrait re-export; then DONE.
+portrait re-export; the 2026-09-10 findings (the Studio button's
+cause and tooltip, the editor's save check); then DONE.
 **Ref:** L-287 (the editor's live URL picker), L-282 (live scene is one
 card in the grid), tools/gallery_studio.py, tools/json_converter.py,
 interactive.html.
-
-#### [L-291] Earth exhibit: shells plus the Moon
-<!-- L:291 status:PENDING-GATE upd:2026-09-09 section:A flag: rice:4/4/80/3 -->
-- **Design settled 2026-09-06** in a zero-code conversation, step 1 of
-  the `interactive-exhibit` skill's order. The full record, with every
-  number and its source, is
-  `documentation/PREDESIGN_earth_exhibit_20260906.md` (GALLERY repo).
-  This entry is the handle; the record is the reasoning.
-- **Scope:** Earth's shells plus the Moon, Earth-centered
-  (`?exhibit=earth`). Chosen over shells alone, Earth-plus-Moon without
-  shells, and Sun-plus-Earth's-orbit (which is L-294, not this).
-  The Moon costs almost nothing: its served entry is already analytic,
-  parent Earth, parent-relative, and its `features` dict is EMPTY, so
-  it is one extra name in the driver's `objects` list. Tony's reason
-  for the pairing: the Hill sphere is not decoration beside the Moon,
-  it is the answer to why the Moon is bound.
-- **Arrival frame: the edge is LOW EARTH ORBIT**, 8,371 km from centre
-  (1.3125 equatorial radii). Half-range 1.1x that = 9,208 km = 1.4437
-  radii = 6.155e-5 AU, which is Earth's floor constant, the analogue of
-  `SUN_HALF_RANGE_AU`. Eight shells lit: inner core, outer core, lower
-  mantle, upper mantle, crust, lower atmosphere, upper atmosphere, LEO.
-  Tony's framing was "what we see from the ISS", and the station at
-  about 400 km sits inside that frame.
-- **Also ON at arrival:** Earth's axis and equator plane (the 23.4
-  degree tilt reads at the surface; both poles are already in
-  `idealized_orbits.py::planet_poles`, IAU 2018) and the Sun's
-  direction.
-- **Everything else in the drawer, unselected**, outward: Van Allen
-  inner (1.5), Van Allen outer (4.5), geostationary belt (6.62),
-  magnetosphere (10 sunward), bow shock (15 standoff), magnetotail (100
-  as drawn), Earth-Moon L1-L5 (about 51-70), the Moon (about 60),
-  exosphere (100), Hill sphere (235).
-- **Four features added during the round.** (1) THE SUN'S DIRECTION is
-  not optional: the orrery's magnetosphere is compressed 10 radii
-  sunward with a tail and a conic bow shock and is rotated by
-  `rotate_to_sunward`, so the exhibit must know where the Sun is. (2)
-  THE AXIS AND EQUATOR -- Earth's served entry has no `orientation`
-  block while the Sun's does. (3) LAGRANGE POINTS, by Tony's frame
-  rule: a Lagrange point belongs to the frame that defines it, so
-  Earth-Moon L1-L5 go here and Sun-Earth L1-L5 wait for L-294. (4)
-  EXOSPHERE / GEOCORONA at 100 radii -- see L-292.
-- **Sunlight is GEOMETRY, not a lighting model** (ruled). No shading:
-  every shell in the gallery is a uniform-colour point cloud, shading
-  Earth alone breaks one-chrome-many-rooms, and lighting is a rendering
-  effect with nothing to source. Instead the terminator drawn as the
-  great circle on the crust perpendicular to the Sun direction, plus a
-  subsolar point marker carrying the hover. The hover SAYS the scene is
-  a single epoch and the terminator is frozen -- the axis beside it
-  implies a rotation the scene does not show.
-- **The Moon's orbit, and a finding worth keeping.** Its osculating
-  elements are served fresh (centre Earth, a = 0.0025481 AU, e =
-  0.0339, i = 5.267 deg, epoch JD 2461289.5) but its measured trust
-  window is 3.37 DAYS against Earth's 365.4 -- its node and apsides
-  precess about a hundred times faster. NOTHING IN THE SERVING PATH
-  ENFORCES THAT: `resolver.py` gates on the cache's global
-  `served_window`, which is built only from objects whose
-  `canonical_frame` is heliocentric, and the Moon is parent-relative,
-  so it is not a participant. Its window is measured, recorded and read
-  by nothing outside the builder's own offline test. The Sun exhibit
-  never met this because it draws no orbits at all; Earth is the first
-  exhibit to exercise the assembler's propagation path.
-- **What the number bounds is the MARKER, not the ellipse**
-  (`render_orbits.py` keeps orbit SHAPE and position MARKER as separate
-  jobs). Tony's correction, and it stands: in the orrery each
-  osculating ellipse is clean, and the perturbation shows as the SPREAD
-  between ellipses fetched at different dates. RULING: full ellipse
-  drawn faint, the arc within the trust window drawn brighter around
-  the marker -- emphasis, not truncation, so it never claims the
-  ellipse stops. No builder change.
-- **The magnetosphere's four traces SPLIT into four drawer rows.** The
-  orrery emits magnetosphere, bow shock, inner belt and outer belt from
-  one call; the belts are trapped particles and the magnetopause is the
-  solar wind meeting the field, and at 1.5 and 4.5 radii the belts sit
-  far inside a magnetosphere starting at 10. Tony's note on why the
-  grouping existed: LEGEND ECONOMY in the orrery, where rows are
-  scarce. The exhibit has a scrolling drawer, so that pressure is gone
-  -- and the general point is worth carrying, that groupings inherited
-  from the orrery may be solving a constraint the exhibit does not
-  have.
-- **Provenance: the SCANNER IS NOT THE MECHANISM here.** It is the
-  orrery's tool and the assembler does not pass through it. The check
-  is the live store-drift run following `orrery_constant` pointers into
-  `constants_new.py` at orrery HEAD, MATCH by name. In the store today:
-  Earth's equatorial, polar and mean radii, the four interior
-  boundaries (the L-249 conversion), `MOON_RADIUS_KM`, and both poles.
-  Everything else is a typed literal in `earth_visualization_shells.py`.
-  The closure plan SORTS BEFORE SOURCING: about six are DERIVED (crust
-  = the radius; the atmosphere tops and LEO edges from altitudes
-  already sourced in the hover text; geostationary from GM and the
-  sidereal day; the Hill sphere from the masses and the semi-major
-  axis); FIVE need a citation (both Van Allen distances, the
-  magnetopause standoff, the bow shock standoff -- half done, the code
-  line already carries a note -- and the geocorona, done, see L-292);
-  the rest are DECLARED (belt thickness, tail radii, tail length,
-  opacities, point counts). Order: one patch to `constants_new.py` with
-  sources inline, scanner clean on the build path, push; then one patch
-  to the gallery's `objects_config.json` adding the pointers; then the
-  live run reads them back MATCH by name.
-- **The magnetotail's 100 radii is RECLASSIFIED as DECLARED.** The real
-  tail runs well past 1,000; 100 is a drawing choice wearing a
-  physical-looking number, the same shape as the streamer belt's warp
-  amplitude. The hover says the tail is drawn truncated.
-- **Tony-action (do), BLOCKING THE BUILD:** install the
-  `interactive-exhibit` skill to the account (Settings > Skills). The
-  repo copy at `skills/interactive-exhibit/SKILL.md` reads 1.0 and
-  matches the manifest; the design session READ it from the repo and
-  could not LOAD it. Per Stale Skill = Stop, the building session
-  confirms its loaded copy reads 1.0 first.
-- **Still open, both downstream of the build:** the i-panel copy per
-  feature with sources inline (writing, not design), and the `sun*`
-  chrome renaming under the skill's One Chrome, Many Rooms rule -- grep
-  `interactive.html` for `sun` inside the shared pieces and decide,
-  piece by piece, rename / parametrize / leave.
-- **Note:** RICE 4/4/80/3 -> 4.3 proposed, not confirmed.
-- **Claude, 2026-09-07 -- step 0 passed, step 2's orrery half done.**
-  Both skills loaded at the versions the handoff required. Four
-  orrery patches, each md5-guarded, each Mode-5'd by Tony:
-  `patch_L291_1` (21 constants with sources, orrery `c51761a0`),
-  `patch_L291_2` (shell literals migrated onto them, `fe87147f`),
-  `patch_L291_3` (atmosphere shells draw the store, `5170bec1`, closes
-  L-295), `patch_L291_4` (every live Earth hover names its source;
-  SHA in Tony's next report). Sources were fetched, not recalled:
-  IERS Conventions 2010 TN36 Table 1.1; IADC-02-01 Rev. 3 sec. 3.3.2;
-  Baker et al. 2018 SSR 214:17; doi:10.1029/2024JA033504; Shue et al.
-  1998; Lugaz et al. 2016 Nat. Commun. 7:13001; Baliukin et al. 2019.
-- **Two values moved when sourced.** Bow shock 15 -> 12.5 radii
-  (midpoint of Lugaz's 11-14; a citation saying 11-14 cannot sit under
-  a 15 -- Tony agreed, and ruled the orrery migrate at once under one
-  store, one source of truth). LEO 6571/8371 -> 6578/8378 km (the old
-  figures were the 6371 km MEAN radius plus altitude).
-- **Lagrange points deferred** to L-297 on Tony's ruling; the drawer
-  row waits. **Sun-Earth L-points** stay with L-294.
-- **Claude, 2026-09-08 -- STEP 2 COMPLETE, both halves.**
-  `patch_L291_6_earth_served_entry.py` (gallery `12241c0` -> served
-  live by the 2026-09-08 nightly): Earth's entry rebuilt in the measured
-  shape, nine groups -- earth_interior, earth_atmosphere,
-  earth_exosphere, earth_orbital_zones, earth_geostationary,
-  earth_magnetosphere, van_allen_belts, hill_sphere, orientation. The
-  magnetosphere's one orrery call is four served rows. Seven files
-  moved with it, each found by a check rather than by reading: the
-  drift checker learned Earth radii (`_RADII` on an `EARTH_` name,
-  factor from the store); the shell-set renderer learned `R_earth`,
-  `km` and `planet_radius`, so the Earth groups draw in the Explorer
-  room today with their sources in the hover; the belt renderer reads
-  measured distances; the builder's shape validator reads them too
-  (the Cache builder suite caught that); two test files re-pinned to
-  the served shape; the smoke fixture regenerated from the entry.
-- **Live run, Tony, 2026-09-08:** 53 pointers, 48 MATCH, 0 DRIFT.
-  All 24 Earth constant pointers MATCH by name. The five that could
-  not be examined are the known class (pole pointers into
-  `idealized_orbits.py`, the galactic-tide default) -- none new.
-- **Not drawn yet, and the dispatch says so by name:**
-  earth_geostationary (an equatorial ring) and earth_magnetosphere
-  (the two standoff shapes). Their renderers are step 3.
-- **Tony's ruling, 2026-09-08 (design round, zero code) -- STEP 3
-  PROCEEDS WITHOUT THE MAGNETOSPHERE.** Eleven of Earth's thirteen
-  drawn features are sourced and read MATCH. The two magnetosphere
-  features turned out to be pre-provenance DRAWING, not sourced
-  geometry, and rebuilding them on a cited model is a build of its
-  own (L-305). Holding a well-understood step behind an open
-  modelling question couples them; the exhibit ships with the
-  magnetosphere ABSENT AND NAMED rather than approximate. Tony's
-  framing: this is a layperson's learning tool, not a research
-  tool, and a learning tool may say "not drawn yet" without
-  failing its purpose.
-- **What that does to the smoke fixture.** The two pinned expected
-  warnings become ONE, not zero: `earth_geostationary` gets its
-  renderer in step 3, `earth_magnetosphere` stays a named,
-  expected absence until L-305 lands. An absence the dispatch
-  names is the check working.
-- **STEP 3 BUILT 2026-09-09** (`patch_L291_9_earth_step3_20260909.py`,
-  gallery, on `23054535`; not yet run at the time of this entry). All
-  six items. `?exhibit=earth` is a second row in an EXHIBITS table the
-  chrome now reads (title, arrival half-range, Python driver, scene
-  composition); the sun* function names stay, see L-309. New module
-  `gallery/earth_geometry.js`: rotation axis and equator from the
-  served pole; the Sun direction from Earth's Horizons elements in the
-  cache, propagated by the assembler; the terminator as a great circle
-  perpendicular to it with a subsolar marker, no lighting model; the
-  Moon's trusted arc from the served trust window through the same
-  solver that places the Moon. It composes the room and applies the
-  arrival policy. The GEO ring draws as shape `equatorial_ring` in the
-  shell-set renderer, tilted by the pole. The served source string
-  rides in trace meta and the i-panel shows it under the link. The
-  drawer lists the magnetosphere as "not yet drawn" (its two served
-  member names), a row that is not a button. Studio's card picker
-  reads the EXHIBITS table. New gating runner row "Earth scene
-  geometry" (26 checks on the driver's real output); 6 of 6 here.
-- **Three things the handoff had wrong, found by RUNNING the assembler
-  here, not by reading:** (1) "objects Earth and Moon, center Earth" is
-  rejected by the resolver -- Earth is stored relative to the Sun; the
-  room is objects `["moon"]`, center `"earth"`, and Earth's shells
-  arrive by the centre-features path (L-234). (2) The Moon's served
-  trust window is 3.40 days, not the 3.37 the handoff typed; the arc
-  reads the record, so no number is in code. (3) The inner radiation
-  belt at 1.5 R_earth drew LIT on arrival and set the frame: the belt
-  renderer ignored the half-range. Fixed generically (belts beyond the
-  frame go to the drawer, as shells do); Jupiter's belts inherit it.
-  Two more found in passing: Earth's belts carried a served link and a
-  "flux PEAK, not an edge" note the renderer never read -- now in the
-  hover and the i-panel.
-- **What is NOT served and therefore not stated:** the sidereal
-  rotation period and the obliquity as numbers. The axis hover says
-  the rotation is not shown and names no period. The 23.44 deg tilt it
-  states is DERIVED (served pole through the renderer's sourced mean
-  obliquity), and says so. Serving the period is a small orrery
-  constants patch when a session has `constants_new.py` open.
-- **MODE 5, 2026-09-09, three rounds, all on the served page
-  [render-confirmed Mode 5 @ gallery `e22cde12`].** Step 3 patch ran on
-  `23054535` -> `97ed2012`; `--live` byte-identical, 8 files. Phone
-  matches desktop (Tony). Round 1 (`patch_L291_11`, -> `bac5a5ee`): the
-  terminator's marker read as detached -- the Sun line now starts at
-  Earth's centre through the circle's middle with a subsolar dot on the
-  crust, the terminator's marker sits ON the circle; frame axes width 3
-  -> 6 (both rooms); the orrery's spin arcs with cone heads at both pole
-  tips, prograde, sense cited (Archinal 2018). Round 2 (`patch_L291_12`,
-  -> `da57d095`): the arc made white and the ellipse faded by rgba --
-  correct changes aimed at the WRONG cause; kept. Round 3
-  (`patch_L291_13`, -> `e22cde12`): Tony read the Moon's woven band as
-  "points too far apart in time", which it was -- L-168, fixed at source
-  (see there). GEO confirmed in the equator's plane; the Moon's arc a
-  clean quarter-orbit with the marker on it. Tony: "looks right."
-- **What the three rounds teach, one sentence each.** Measure the
-  geometry before theorising about the renderer (round 2 guessed at
-  Plotly; one `atan2` sweep in round 3 gave 8,406 degrees). A hover
-  marker belongs on the thing it describes. The frame must read as
-  frame.
-- **Camera control (Tony's question, round 1):** Plotly has no drag
-  sensitivity; directional step buttons on the nav cluster are the
-  practical answer. Opened as L-310, shared chrome, a design round of
-  its own.
-**Gap:** STEP 7 -- the Studio card via New Interactive Card (the picker
-reads the EXHIBITS table now; expect `?exhibit=earth`), placed in the
-editor; then L-291 closes. Tony-action (do). L-305 (magnetosphere) and
-L-310 (camera steps) are their own items; L-292 (serving the rotation
-period) is the small orrery patch the axis hover is waiting for.
-**Ref:** `documentation/PREDESIGN_earth_exhibit_20260906.md` (gallery),
-L-292 (shells the orrery does not draw), L-293 (lunar standstill),
-L-294 (the Explorer room and the heliocentric view), L-295 (the upper
-atmosphere finding), L-249 (the interior constants conversion), L-289
-(the HUD this exhibit inherits), skills/interactive-exhibit/SKILL.md.
 
 #### [L-292] Earth shells the orrery does not draw
 <!-- L:292 status:OPEN upd:2026-09-08 section:A flag: rice:3/3/75/2 -->
@@ -6133,96 +5931,6 @@ verdict line. Not yet written.
 **Ref:** L-268, gallery `tools/sweep_collapsed_features.py`,
 `gallery_maintenance_run.py`.
 
-#### [L-303] Separate cards per orientation (RULED); the phone hides a landscape card that has a portrait sibling
-<!-- L:303 status:PENDING-GATE upd:2026-09-09 section:A flag: rice:4/4/80/3 -->
-- **Tony, 2026-09-08 (paraphrased from chat, not his hand):** he would
-  prefer a separate card for each orientation. The single L+P card does
-  not show the details of each file; it shows only 16:9, never 9:16 for
-  the portrait; and replacing or deleting one file should not touch the
-  other. Separate scenes are necessary because Studio handles each by
-  its own preset.
-- **Claude's account of the current model.** L-287's rule is one card,
-  two slots; on a phone the viewer serves the portrait slot, on the
-  desktop the landscape, so the mobile scene stays unique in content.
-  The editor already offers Preview / Replace / Clear per slot and a
-  size per file. The 16:9 / 9:16 radio governs the ONE-file case only.
-- **The fact that bears on the ruling:** the viewer no longer filters
-  the grid by device. Two separate cards would both appear on every
-  device unless device filtering returns (a `shape`- or slot-based
-  filter), which is what the L-286 sweep replaced. So "separate cards"
-  is really "separate cards AND filter by device", and both halves need
-  the ruling.
-- Options were: (a) keep one card, improve the editor's display of
-  the two files; (b) one card per orientation, restore device
-  filtering, undo the three merges of L-301; (c) something else.
-- **TONY'S RULING, 2026-09-08: (b), and the merge was never his.**
-  The two-card model was HIS workflow until L-287 replaced it on
-  2026-09-04 and paired 38 existing cards by title. He is being
-  asked to accept editor work whose only purpose is to make a merge
-  he did not request legible again. His words on the cost: "the
-  issue of clutter is mine."
-- **The filter is NARROWER than the pre-L-287 device model.** Not a
-  per-card device tag. ONE rule: on a phone, hide a landscape card
-  IF IT HAS A PORTRAIT SIBLING. A landscape card with no sibling
-  still shows on the phone and still sweeps, which is the majority
-  of cards and the case the sweep exists for. Desktop shows
-  everything. Tony's correction, and it matters: he sees both views
-  on desktop, only the mobile view on mobile.
-- **The sibling flag is stamped by the CONVERTER, not matched at
-  render time.** L-301's pairing detection is kept and INVERTED:
-  same rule, different action -- create a separate card and stamp
-  the relationship on both, instead of joining into an empty slot.
-  The L-301 work is not wasted.
-- **The editor work from option (a) EVAPORATES.** Per-slot
-  `converted` dates, derived per-slot shape, and greying the shape
-  radio on a paired card were all needed only because two files
-  shared one card. One card, one file, one date, one shape, and the
-  16:9 / 9:16 radio is meaningful again on every card.
-- **What the radio actually does, checked at gallery `700b426d`:**
-  `sweepWanted()` in index.html returns false on `shape === '9:16'`,
-  so 16:9 IS the enable switch for the 2D landscape sweep on a
-  phone. Three further conditions gate it and none is a control:
-  phone width, portrait orientation, no portrait sibling, and
-  `layout.scene` absent (the 3D exclusion).
-- **The surviving population, Tony 2026-09-08:** the static card
-  system is not going away for the 16:9 2D exhibits -- the Earth
-  science cards and the star cards. The shell-heavy 3D bodies are
-  the ones migrating to interactive exhibits. So the split
-  migration is transitional work on a SHRINKING set, and the sweep
-  is the mechanism that keeps the PERMANENT set working on a phone.
-- **Built 2026-09-08, gallery `23054535`** (`patch_L303_1_cards_per_orientation.py`,
-  Tony ran it, runner 5 of 5). The converter keeps L-301's pairing
-  detection and inverts the action: a matching file becomes a separate
-  card stamped `"sibling": <the other id>` on both, inserted right
-  after its partner, inheriting its room, description and sources. The
-  viewer rule in Tony's wording: on a phone (under 768 px, the sweep's
-  own test) hide a landscape card that has a portrait sibling. Three
-  choices not in the ruling, stated for striking: the rule hides only
-  when the sibling is itself SERVED (a portrait in Storage or deleted
-  leaves the landscape showing); the lobby's Featured strip shows one
-  of a featured pair; a card with a sibling shows its shape after its
-  size so two same-title cards read apart on the desktop. A deep link
-  to a hidden card on a phone opens its sibling. `sweep_report.py`
-  gains the class "hidden on the phone (portrait sibling)".
-- **The migration, named.** 104 cards became 144: 40 splits, not 41 --
-  `keeling_curve_co2_concentration` listed the SAME file in both slots
-  and collapsed to one landscape card, no sibling. The phone serves 104
-  as before; Featured stays 7 on both. Portrait ids from the portrait
-  filenames; the one clash rule (`_portrait` suffix) did not fire.
-- **Not done, recorded:** `gallery_editor.py` can still put two files on
-  one card, and its Copy carries a `sibling` stamp onto the copy. The
-  viewer tolerates both (a dangling sibling is ignored). A guard in the
-  editor or a sweep_report class when a session has that file open.
-**Gap:** Mode 5 on the phone -- one card per figure, the portrait file;
-on the desktop two cards side by side tagged 16:9 and 9:16. Tony-action
-(do): retype the portrait title on
-`artemis_ii_20260402-0411_mission_moon_center2_mobile` and
-`maps_disintegration_20260403_07_structures_mobile` in the editor.
-Closes on Tony's eyes.
-**Ref:** L-287, L-301, L-286, L-307, L-308, `tools/json_converter.py`,
-`tools/gallery_editor.py`, `tools/sweep_report.py`, index.html,
-`documentation/patch_L303_1_cards_per_orientation.py` (gallery).
-
 #### [L-305] Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together
 <!-- L:305 status:OPEN upd:2026-09-08 section:A flag: rice:4/4/60/4 -->
 - **Where this came from.** A design round on 2026-09-08 opened with one
@@ -6419,7 +6127,7 @@ redesign.
 (`EXHIBITS`, `EX`), `tools/json_converter.py::live_scene_urls`.
 
 #### [L-310] Finer camera control in the exhibit rooms: directional step buttons on the nav cluster
-<!-- L:310 status:OPEN upd:2026-09-09 section:A flag: rice:3/3/70/2 -->
+<!-- L:310 status:OPEN upd:2026-09-10 section:A flag: rice:3/3/70/2 -->
 - **Tony, 2026-09-09, Mode 5 of the Earth room:** "the mouse control is
   rough for details. can we activate finer control? there is the
   directional control buttons as an option."
@@ -6434,10 +6142,93 @@ redesign.
   Explorer (the cluster is shared, L-267), touch layout on a portrait
   phone beside the drawer handle, and whether a long press repeats.
   Shared chrome: a design round first, zero code, then one patch.
+- **Tony, 2026-09-10 (from chat, not his hand), confirming this as the
+  next track:** "note that the studio already has directional button
+  option: navigation controls/pan zoom arrows."
+- **What that option does, read at gallery `57fd93c6`.** Studio's
+  Navigation Controls section, "Show pan/zoom arrows"
+  (`show_nav_arrows`), embeds buttons in the HTML that Studio
+  EXPORTS. A 2D chart gets a full D-pad whose arrows shift the axis
+  ranges, plus zoom and reset. On a polar chart, left and right rotate
+  the angular axis 15 degrees a press. A 3D scene gets reset and zoom
+  ONLY, and Studio's own comment and tooltip give the reason: the
+  directional arrows had no detectable effect in 3D, and the D-pad
+  blocked the animation slider. So the prior art is real, and its 3D
+  half was tried and withdrawn. A 3D step has to move
+  `scene.camera.eye` (the bullet above), not the ranges; the polar
+  rotation is the nearer model.
+- **Three control sets exist, one per kind of page.** HTML exported by
+  Studio carries Studio's; the gallery viewer, `index.html`, draws its
+  own inline cluster; the exhibit rooms use `gallery/nav_cluster.js`.
+  A camera step designed here lands in the cluster. L-285 already
+  records moving `index.html` onto the cluster.
 **Gap:** design round with Tony; then build. Not blocking L-291.
 **Ref:** L-267 (nav cluster), L-289 (frame HUD, whose triad shows the
 result of any camera move), L-291, `gallery/nav_cluster.js`,
 interactive.html (`navHome`, `sunFrameOn`).
+
+#### [L-311] Earth's rotation period and obliquity are not served, so the axis hover names neither
+<!-- L:311 status:OPEN upd:2026-09-10 section:A flag: rice:2/2/90/1 -->
+- **Opened 2026-09-10, re-homed from L-291 as it closed.** The Earth
+  room's axis hover says the rotation is not shown and names no
+  period, and the 23.44 degree tilt it states is DERIVED -- the served
+  pole through the renderer's sourced mean obliquity -- and says so
+  (L-291, step 3 record). Neither number is in Earth's served entry.
+- **Why it has its own row.** L-291's Gap and the 2026-09-09 close
+  handoff both sent this to L-292, which is "Earth shells the orrery
+  does not draw" and never mentioned it. Found by the 2026-09-10
+  review.
+- **What the store already holds, read at orrery `1ee1cc61`.**
+  `EARTH_ROTATION_RATE_RAD_S = 7.292115e-5`, sourced to IERS
+  Conventions (2010), TN36 Table 1.1, nominal mean angular velocity.
+  A sidereal period follows from it as a DERIVED constant; nothing new
+  needs sourcing for the period. No obliquity constant was found by
+  name; the renderer's sourced value is the place to start.
+- **Scope when opened.** Period (derived) and obliquity (sourced) in
+  `constants_new.py`; served rows in Earth's entry with value / unit /
+  source / orrery_constant; store drift reads MATCH by name; the axis
+  hover states both with their sources. Orrery and gallery move
+  together.
+- **Note:** RICE 2/2/90/1 -> 3.6 proposed, not confirmed.
+**Gap:** the serving patch above, when a session has `constants_new.py`
+open.
+**Ref:** L-291 (step 3 record), L-292 (not this), provenance-discipline
+(the store), interactive-exhibit (the served-data contract).
+
+#### [L-312] The gallery editor's copy and file slots make cards the viewer misreads; two portrait titles to retype
+<!-- L:312 status:OPEN upd:2026-09-10 section:A flag: rice:2/2/85/1 -->
+- **Opened 2026-09-10, re-homed from L-303 as it closed.** One row for
+  the class: editor-side follow-ons of the card-per-orientation change,
+  cleared the next time a session has `tools/gallery_editor.py` open
+  (The Braid).
+- **(1) Copy Card to Room carries the source card's `sibling`, `files`
+  and `size_kb`.** `_copy_to_room` deep-copies the card and resets only
+  id, room and featured. L-303 recorded it as unguarded. It fired on
+  the first Earth exhibit card, 2026-09-09: a copy of the static
+  Earth-and-Moon portrait with a live URL added kept the portrait's
+  sibling stamp, and index.html's Featured rule (a 9:16 card yields to
+  a featured sibling) dropped it from the desktop lobby (L-291, step
+  7). The toolbar tooltip for Copy to Room reads "Put a second card
+  for this exhibit in another room", which invites exactly that use.
+  Fix shape, not ruled: the copy drops `sibling`; a copy that gains a
+  live URL drops its files too.
+- **(2) The editor can still put two files on one card** (Set Landscape
+  File and Set Portrait File on the same card), which L-303 retired.
+  The viewer tolerates it. A guard in the editor, or a
+  `sweep_report.py` class.
+- **(3) Two portrait titles lost in the L-301 merge, deferred.** Tony,
+  2026-09-10: "deferred to the braid. not critical." The titles
+  before the merge, from gallery metadata before `b5622a8`:
+  - `artemis_ii_20260402-0411_mission_moon_center2_mobile`: Artemis II
+    - Earth to Moon Flyby April 6, 2026
+  - `maps_disintegration_20260403_07_structures_mobile`: MAPS -
+    Disintegration April 4, 2026
+  Tony-action (do), when the editor is next open: retype both.
+- **Note:** RICE 2/2/85/1 -> 3.4 proposed, not confirmed.
+**Gap:** (1) and (2) in the next editor session; (3) at the same time.
+**Ref:** L-303, L-291 (step 7), L-288 (the Studio half),
+`tools/gallery_editor.py` (`_copy_to_room`, `_build_toolbar`),
+index.html (the Featured rule), `tools/sweep_report.py`.
 
 #### [L-278] A relayout from inside a Plotly event handler re-enters the update machinery
 <!-- L:278 status:OPEN upd:2026-09-02 section:A flag: rice:3/3/90/1 -->
@@ -12266,6 +12057,368 @@ bumping session could confirm it.
 provenance-discipline to the account profile (Settings > Skills).
 **Ref:** L-305 (the case that produced it), L-291, L-299,
 skills/provenance-discipline/SKILL.md.
+
+#### [L-291] Earth exhibit: shells plus the Moon
+<!-- L:291 status:DONE upd:2026-09-10 section:C flag: rice:4/4/80/3 -->
+- **Design settled 2026-09-06** in a zero-code conversation, step 1 of
+  the `interactive-exhibit` skill's order. The full record, with every
+  number and its source, is
+  `documentation/PREDESIGN_earth_exhibit_20260906.md` (GALLERY repo).
+  This entry is the handle; the record is the reasoning.
+- **Scope:** Earth's shells plus the Moon, Earth-centered
+  (`?exhibit=earth`). Chosen over shells alone, Earth-plus-Moon without
+  shells, and Sun-plus-Earth's-orbit (which is L-294, not this).
+  The Moon costs almost nothing: its served entry is already analytic,
+  parent Earth, parent-relative, and its `features` dict is EMPTY, so
+  it is one extra name in the driver's `objects` list. Tony's reason
+  for the pairing: the Hill sphere is not decoration beside the Moon,
+  it is the answer to why the Moon is bound.
+- **Arrival frame: the edge is LOW EARTH ORBIT**, 8,371 km from centre
+  (1.3125 equatorial radii). Half-range 1.1x that = 9,208 km = 1.4437
+  radii = 6.155e-5 AU, which is Earth's floor constant, the analogue of
+  `SUN_HALF_RANGE_AU`. Eight shells lit: inner core, outer core, lower
+  mantle, upper mantle, crust, lower atmosphere, upper atmosphere, LEO.
+  Tony's framing was "what we see from the ISS", and the station at
+  about 400 km sits inside that frame.
+- **Also ON at arrival:** Earth's axis and equator plane (the 23.4
+  degree tilt reads at the surface; both poles are already in
+  `idealized_orbits.py::planet_poles`, IAU 2018) and the Sun's
+  direction.
+- **Everything else in the drawer, unselected**, outward: Van Allen
+  inner (1.5), Van Allen outer (4.5), geostationary belt (6.62),
+  magnetosphere (10 sunward), bow shock (15 standoff), magnetotail (100
+  as drawn), Earth-Moon L1-L5 (about 51-70), the Moon (about 60),
+  exosphere (100), Hill sphere (235).
+- **Four features added during the round.** (1) THE SUN'S DIRECTION is
+  not optional: the orrery's magnetosphere is compressed 10 radii
+  sunward with a tail and a conic bow shock and is rotated by
+  `rotate_to_sunward`, so the exhibit must know where the Sun is. (2)
+  THE AXIS AND EQUATOR -- Earth's served entry has no `orientation`
+  block while the Sun's does. (3) LAGRANGE POINTS, by Tony's frame
+  rule: a Lagrange point belongs to the frame that defines it, so
+  Earth-Moon L1-L5 go here and Sun-Earth L1-L5 wait for L-294. (4)
+  EXOSPHERE / GEOCORONA at 100 radii -- see L-292.
+- **Sunlight is GEOMETRY, not a lighting model** (ruled). No shading:
+  every shell in the gallery is a uniform-colour point cloud, shading
+  Earth alone breaks one-chrome-many-rooms, and lighting is a rendering
+  effect with nothing to source. Instead the terminator drawn as the
+  great circle on the crust perpendicular to the Sun direction, plus a
+  subsolar point marker carrying the hover. The hover SAYS the scene is
+  a single epoch and the terminator is frozen -- the axis beside it
+  implies a rotation the scene does not show.
+- **The Moon's orbit, and a finding worth keeping.** Its osculating
+  elements are served fresh (centre Earth, a = 0.0025481 AU, e =
+  0.0339, i = 5.267 deg, epoch JD 2461289.5) but its measured trust
+  window is 3.37 DAYS against Earth's 365.4 -- its node and apsides
+  precess about a hundred times faster. NOTHING IN THE SERVING PATH
+  ENFORCES THAT: `resolver.py` gates on the cache's global
+  `served_window`, which is built only from objects whose
+  `canonical_frame` is heliocentric, and the Moon is parent-relative,
+  so it is not a participant. Its window is measured, recorded and read
+  by nothing outside the builder's own offline test. The Sun exhibit
+  never met this because it draws no orbits at all; Earth is the first
+  exhibit to exercise the assembler's propagation path.
+- **What the number bounds is the MARKER, not the ellipse**
+  (`render_orbits.py` keeps orbit SHAPE and position MARKER as separate
+  jobs). Tony's correction, and it stands: in the orrery each
+  osculating ellipse is clean, and the perturbation shows as the SPREAD
+  between ellipses fetched at different dates. RULING: full ellipse
+  drawn faint, the arc within the trust window drawn brighter around
+  the marker -- emphasis, not truncation, so it never claims the
+  ellipse stops. No builder change.
+- **The magnetosphere's four traces SPLIT into four drawer rows.** The
+  orrery emits magnetosphere, bow shock, inner belt and outer belt from
+  one call; the belts are trapped particles and the magnetopause is the
+  solar wind meeting the field, and at 1.5 and 4.5 radii the belts sit
+  far inside a magnetosphere starting at 10. Tony's note on why the
+  grouping existed: LEGEND ECONOMY in the orrery, where rows are
+  scarce. The exhibit has a scrolling drawer, so that pressure is gone
+  -- and the general point is worth carrying, that groupings inherited
+  from the orrery may be solving a constraint the exhibit does not
+  have.
+- **Provenance: the SCANNER IS NOT THE MECHANISM here.** It is the
+  orrery's tool and the assembler does not pass through it. The check
+  is the live store-drift run following `orrery_constant` pointers into
+  `constants_new.py` at orrery HEAD, MATCH by name. In the store today:
+  Earth's equatorial, polar and mean radii, the four interior
+  boundaries (the L-249 conversion), `MOON_RADIUS_KM`, and both poles.
+  Everything else is a typed literal in `earth_visualization_shells.py`.
+  The closure plan SORTS BEFORE SOURCING: about six are DERIVED (crust
+  = the radius; the atmosphere tops and LEO edges from altitudes
+  already sourced in the hover text; geostationary from GM and the
+  sidereal day; the Hill sphere from the masses and the semi-major
+  axis); FIVE need a citation (both Van Allen distances, the
+  magnetopause standoff, the bow shock standoff -- half done, the code
+  line already carries a note -- and the geocorona, done, see L-292);
+  the rest are DECLARED (belt thickness, tail radii, tail length,
+  opacities, point counts). Order: one patch to `constants_new.py` with
+  sources inline, scanner clean on the build path, push; then one patch
+  to the gallery's `objects_config.json` adding the pointers; then the
+  live run reads them back MATCH by name.
+- **The magnetotail's 100 radii is RECLASSIFIED as DECLARED.** The real
+  tail runs well past 1,000; 100 is a drawing choice wearing a
+  physical-looking number, the same shape as the streamer belt's warp
+  amplitude. The hover says the tail is drawn truncated.
+- **Tony-action (do), BLOCKING THE BUILD:** install the
+  `interactive-exhibit` skill to the account (Settings > Skills). The
+  repo copy at `skills/interactive-exhibit/SKILL.md` reads 1.0 and
+  matches the manifest; the design session READ it from the repo and
+  could not LOAD it. Per Stale Skill = Stop, the building session
+  confirms its loaded copy reads 1.0 first.
+- **Still open, both downstream of the build:** the i-panel copy per
+  feature with sources inline (writing, not design), and the `sun*`
+  chrome renaming under the skill's One Chrome, Many Rooms rule -- grep
+  `interactive.html` for `sun` inside the shared pieces and decide,
+  piece by piece, rename / parametrize / leave.
+- **Note:** RICE 4/4/80/3 -> 4.3 proposed, not confirmed.
+- **Claude, 2026-09-07 -- step 0 passed, step 2's orrery half done.**
+  Both skills loaded at the versions the handoff required. Four
+  orrery patches, each md5-guarded, each Mode-5'd by Tony:
+  `patch_L291_1` (21 constants with sources, orrery `c51761a0`),
+  `patch_L291_2` (shell literals migrated onto them, `fe87147f`),
+  `patch_L291_3` (atmosphere shells draw the store, `5170bec1`, closes
+  L-295), `patch_L291_4` (every live Earth hover names its source;
+  SHA in Tony's next report). Sources were fetched, not recalled:
+  IERS Conventions 2010 TN36 Table 1.1; IADC-02-01 Rev. 3 sec. 3.3.2;
+  Baker et al. 2018 SSR 214:17; doi:10.1029/2024JA033504; Shue et al.
+  1998; Lugaz et al. 2016 Nat. Commun. 7:13001; Baliukin et al. 2019.
+- **Two values moved when sourced.** Bow shock 15 -> 12.5 radii
+  (midpoint of Lugaz's 11-14; a citation saying 11-14 cannot sit under
+  a 15 -- Tony agreed, and ruled the orrery migrate at once under one
+  store, one source of truth). LEO 6571/8371 -> 6578/8378 km (the old
+  figures were the 6371 km MEAN radius plus altitude).
+- **Lagrange points deferred** to L-297 on Tony's ruling; the drawer
+  row waits. **Sun-Earth L-points** stay with L-294.
+- **Claude, 2026-09-08 -- STEP 2 COMPLETE, both halves.**
+  `patch_L291_6_earth_served_entry.py` (gallery `12241c0` -> served
+  live by the 2026-09-08 nightly): Earth's entry rebuilt in the measured
+  shape, nine groups -- earth_interior, earth_atmosphere,
+  earth_exosphere, earth_orbital_zones, earth_geostationary,
+  earth_magnetosphere, van_allen_belts, hill_sphere, orientation. The
+  magnetosphere's one orrery call is four served rows. Seven files
+  moved with it, each found by a check rather than by reading: the
+  drift checker learned Earth radii (`_RADII` on an `EARTH_` name,
+  factor from the store); the shell-set renderer learned `R_earth`,
+  `km` and `planet_radius`, so the Earth groups draw in the Explorer
+  room today with their sources in the hover; the belt renderer reads
+  measured distances; the builder's shape validator reads them too
+  (the Cache builder suite caught that); two test files re-pinned to
+  the served shape; the smoke fixture regenerated from the entry.
+- **Live run, Tony, 2026-09-08:** 53 pointers, 48 MATCH, 0 DRIFT.
+  All 24 Earth constant pointers MATCH by name. The five that could
+  not be examined are the known class (pole pointers into
+  `idealized_orbits.py`, the galactic-tide default) -- none new.
+- **Not drawn yet, and the dispatch says so by name:**
+  earth_geostationary (an equatorial ring) and earth_magnetosphere
+  (the two standoff shapes). Their renderers are step 3.
+- **Tony's ruling, 2026-09-08 (design round, zero code) -- STEP 3
+  PROCEEDS WITHOUT THE MAGNETOSPHERE.** Eleven of Earth's thirteen
+  drawn features are sourced and read MATCH. The two magnetosphere
+  features turned out to be pre-provenance DRAWING, not sourced
+  geometry, and rebuilding them on a cited model is a build of its
+  own (L-305). Holding a well-understood step behind an open
+  modelling question couples them; the exhibit ships with the
+  magnetosphere ABSENT AND NAMED rather than approximate. Tony's
+  framing: this is a layperson's learning tool, not a research
+  tool, and a learning tool may say "not drawn yet" without
+  failing its purpose.
+- **What that does to the smoke fixture.** The two pinned expected
+  warnings become ONE, not zero: `earth_geostationary` gets its
+  renderer in step 3, `earth_magnetosphere` stays a named,
+  expected absence until L-305 lands. An absence the dispatch
+  names is the check working.
+- **STEP 3 BUILT 2026-09-09** (`patch_L291_9_earth_step3_20260909.py`,
+  gallery, on `23054535`; not yet run at the time of this entry). All
+  six items. `?exhibit=earth` is a second row in an EXHIBITS table the
+  chrome now reads (title, arrival half-range, Python driver, scene
+  composition); the sun* function names stay, see L-309. New module
+  `gallery/earth_geometry.js`: rotation axis and equator from the
+  served pole; the Sun direction from Earth's Horizons elements in the
+  cache, propagated by the assembler; the terminator as a great circle
+  perpendicular to it with a subsolar marker, no lighting model; the
+  Moon's trusted arc from the served trust window through the same
+  solver that places the Moon. It composes the room and applies the
+  arrival policy. The GEO ring draws as shape `equatorial_ring` in the
+  shell-set renderer, tilted by the pole. The served source string
+  rides in trace meta and the i-panel shows it under the link. The
+  drawer lists the magnetosphere as "not yet drawn" (its two served
+  member names), a row that is not a button. Studio's card picker
+  reads the EXHIBITS table. New gating runner row "Earth scene
+  geometry" (26 checks on the driver's real output); 6 of 6 here.
+- **Three things the handoff had wrong, found by RUNNING the assembler
+  here, not by reading:** (1) "objects Earth and Moon, center Earth" is
+  rejected by the resolver -- Earth is stored relative to the Sun; the
+  room is objects `["moon"]`, center `"earth"`, and Earth's shells
+  arrive by the centre-features path (L-234). (2) The Moon's served
+  trust window is 3.40 days, not the 3.37 the handoff typed; the arc
+  reads the record, so no number is in code. (3) The inner radiation
+  belt at 1.5 R_earth drew LIT on arrival and set the frame: the belt
+  renderer ignored the half-range. Fixed generically (belts beyond the
+  frame go to the drawer, as shells do); Jupiter's belts inherit it.
+  Two more found in passing: Earth's belts carried a served link and a
+  "flux PEAK, not an edge" note the renderer never read -- now in the
+  hover and the i-panel.
+- **What is NOT served and therefore not stated:** the sidereal
+  rotation period and the obliquity as numbers. The axis hover says
+  the rotation is not shown and names no period. The 23.44 deg tilt it
+  states is DERIVED (served pole through the renderer's sourced mean
+  obliquity), and says so. Serving the period is a small orrery
+  constants patch when a session has `constants_new.py` open.
+- **MODE 5, 2026-09-09, three rounds, all on the served page
+  [render-confirmed Mode 5 @ gallery `e22cde12`].** Step 3 patch ran on
+  `23054535` -> `97ed2012`; `--live` byte-identical, 8 files. Phone
+  matches desktop (Tony). Round 1 (`patch_L291_11`, -> `bac5a5ee`): the
+  terminator's marker read as detached -- the Sun line now starts at
+  Earth's centre through the circle's middle with a subsolar dot on the
+  crust, the terminator's marker sits ON the circle; frame axes width 3
+  -> 6 (both rooms); the orrery's spin arcs with cone heads at both pole
+  tips, prograde, sense cited (Archinal 2018). Round 2 (`patch_L291_12`,
+  -> `da57d095`): the arc made white and the ellipse faded by rgba --
+  correct changes aimed at the WRONG cause; kept. Round 3
+  (`patch_L291_13`, -> `e22cde12`): Tony read the Moon's woven band as
+  "points too far apart in time", which it was -- L-168, fixed at source
+  (see there). GEO confirmed in the equator's plane; the Moon's arc a
+  clean quarter-orbit with the marker on it. Tony: "looks right."
+- **What the three rounds teach, one sentence each.** Measure the
+  geometry before theorising about the renderer (round 2 guessed at
+  Plotly; one `atan2` sweep in round 3 gave 8,406 degrees). A hover
+  marker belongs on the thing it describes. The frame must read as
+  frame.
+- **Camera control (Tony's question, round 1):** Plotly has no drag
+  sensitivity; directional step buttons on the nav cluster are the
+  practical answer. Opened as L-310, shared chrome, a design round of
+  its own.
+- **STEP 7, 2026-09-09/10 -- the card was made twice.** The first
+  Earth card (gallery `97ed2012`, 2026-09-09 12:54) was made in the
+  editor with Copy Card to Room from the static Earth-and-Moon
+  portrait card, plus a live URL: Tony had not found New Interactive
+  Card in Studio. The copy kept the portrait's `sibling` stamp, file
+  and size, so index.html's Featured rule (a 9:16 card yields to a
+  featured sibling) dropped it from the DESKTOP lobby while the phone
+  showed it beside the static card. The 2026-09-09 close handoff said
+  step 7 had not started, because its session never read the
+  metadata. The 2026-09-10 review
+  (`documentation/REVIEW_earth_close_20260910.md`) found the card and
+  replayed the viewer's rule against it. Tony deleted the copy, made
+  the card in Studio (`earth_and_moon`: no files, no sibling, 9:16,
+  featured, room `solar_system/earth`) and placed it in the editor.
+  [verified @ gallery `57fd93c6`]
+- **CLOSED 2026-09-10 on Tony's Mode 5**, the lobby's Featured strip
+  on desktop and phone: eight cards on each, the interactive Earth
+  and Moon among them. [render-confirmed Mode 5 @ gallery `57fd93c6`]
+- **Loose ends re-homed before closing** (ledger-and-session-records
+  1.11). Serving the rotation period and obliquity -> L-311; this Gap
+  had pointed it at L-292, which never mentioned it. The Studio button
+  that was not found and the editor's unchecked save -> L-288. The
+  editor's copy defect -> L-312. Camera steps stay L-310, the
+  magnetosphere L-305, the chrome rename L-309.
+**Gap:** none.
+**Ref:** `documentation/PREDESIGN_earth_exhibit_20260906.md` (gallery),
+`documentation/REVIEW_earth_close_20260910.md` and
+`documentation/HANDOFF_earth_close_20260910.md` (orrery), L-311
+(rotation period), L-312 (editor follow-ons),
+L-292 (shells the orrery does not draw), L-293 (lunar standstill),
+L-294 (the Explorer room and the heliocentric view), L-295 (the upper
+atmosphere finding), L-249 (the interior constants conversion), L-289
+(the HUD this exhibit inherits), skills/interactive-exhibit/SKILL.md.
+
+#### [L-303] Separate cards per orientation (RULED); the phone hides a landscape card that has a portrait sibling
+<!-- L:303 status:DONE upd:2026-09-10 section:C flag: rice:4/4/80/3 -->
+- **Tony, 2026-09-08 (paraphrased from chat, not his hand):** he would
+  prefer a separate card for each orientation. The single L+P card does
+  not show the details of each file; it shows only 16:9, never 9:16 for
+  the portrait; and replacing or deleting one file should not touch the
+  other. Separate scenes are necessary because Studio handles each by
+  its own preset.
+- **Claude's account of the current model.** L-287's rule is one card,
+  two slots; on a phone the viewer serves the portrait slot, on the
+  desktop the landscape, so the mobile scene stays unique in content.
+  The editor already offers Preview / Replace / Clear per slot and a
+  size per file. The 16:9 / 9:16 radio governs the ONE-file case only.
+- **The fact that bears on the ruling:** the viewer no longer filters
+  the grid by device. Two separate cards would both appear on every
+  device unless device filtering returns (a `shape`- or slot-based
+  filter), which is what the L-286 sweep replaced. So "separate cards"
+  is really "separate cards AND filter by device", and both halves need
+  the ruling.
+- Options were: (a) keep one card, improve the editor's display of
+  the two files; (b) one card per orientation, restore device
+  filtering, undo the three merges of L-301; (c) something else.
+- **TONY'S RULING, 2026-09-08: (b), and the merge was never his.**
+  The two-card model was HIS workflow until L-287 replaced it on
+  2026-09-04 and paired 38 existing cards by title. He is being
+  asked to accept editor work whose only purpose is to make a merge
+  he did not request legible again. His words on the cost: "the
+  issue of clutter is mine."
+- **The filter is NARROWER than the pre-L-287 device model.** Not a
+  per-card device tag. ONE rule: on a phone, hide a landscape card
+  IF IT HAS A PORTRAIT SIBLING. A landscape card with no sibling
+  still shows on the phone and still sweeps, which is the majority
+  of cards and the case the sweep exists for. Desktop shows
+  everything. Tony's correction, and it matters: he sees both views
+  on desktop, only the mobile view on mobile.
+- **The sibling flag is stamped by the CONVERTER, not matched at
+  render time.** L-301's pairing detection is kept and INVERTED:
+  same rule, different action -- create a separate card and stamp
+  the relationship on both, instead of joining into an empty slot.
+  The L-301 work is not wasted.
+- **The editor work from option (a) EVAPORATES.** Per-slot
+  `converted` dates, derived per-slot shape, and greying the shape
+  radio on a paired card were all needed only because two files
+  shared one card. One card, one file, one date, one shape, and the
+  16:9 / 9:16 radio is meaningful again on every card.
+- **What the radio actually does, checked at gallery `700b426d`:**
+  `sweepWanted()` in index.html returns false on `shape === '9:16'`,
+  so 16:9 IS the enable switch for the 2D landscape sweep on a
+  phone. Three further conditions gate it and none is a control:
+  phone width, portrait orientation, no portrait sibling, and
+  `layout.scene` absent (the 3D exclusion).
+- **The surviving population, Tony 2026-09-08:** the static card
+  system is not going away for the 16:9 2D exhibits -- the Earth
+  science cards and the star cards. The shell-heavy 3D bodies are
+  the ones migrating to interactive exhibits. So the split
+  migration is transitional work on a SHRINKING set, and the sweep
+  is the mechanism that keeps the PERMANENT set working on a phone.
+- **Built 2026-09-08, gallery `23054535`** (`patch_L303_1_cards_per_orientation.py`,
+  Tony ran it, runner 5 of 5). The converter keeps L-301's pairing
+  detection and inverts the action: a matching file becomes a separate
+  card stamped `"sibling": <the other id>` on both, inserted right
+  after its partner, inheriting its room, description and sources. The
+  viewer rule in Tony's wording: on a phone (under 768 px, the sweep's
+  own test) hide a landscape card that has a portrait sibling. Three
+  choices not in the ruling, stated for striking: the rule hides only
+  when the sibling is itself SERVED (a portrait in Storage or deleted
+  leaves the landscape showing); the lobby's Featured strip shows one
+  of a featured pair; a card with a sibling shows its shape after its
+  size so two same-title cards read apart on the desktop. A deep link
+  to a hidden card on a phone opens its sibling. `sweep_report.py`
+  gains the class "hidden on the phone (portrait sibling)".
+- **The migration, named.** 104 cards became 144: 40 splits, not 41 --
+  `keeling_curve_co2_concentration` listed the SAME file in both slots
+  and collapsed to one landscape card, no sibling. The phone serves 104
+  as before; Featured stays 7 on both. Portrait ids from the portrait
+  filenames; the one clash rule (`_portrait` suffix) did not fire.
+- **Not done, recorded:** `gallery_editor.py` can still put two files on
+  one card, and its Copy carries a `sibling` stamp onto the copy. The
+  viewer tolerates both (a dangling sibling is ignored). A guard in the
+  editor or a sweep_report class when a session has that file open.
+- **CLOSED 2026-09-10 on Tony's Mode 5.** Desktop: the Earth room lists
+  the static pair side by side, tagged 16:9 and 9:16 (Tony's
+  screenshot, gallery `de191147`). Phone: in the lobby's Featured
+  strip the static Earth and Moon and the Sudan cards each appear
+  once. [render-confirmed Mode 5 @ gallery `57fd93c6`]
+- **The editor defect recorded above fired before anyone went
+  looking.** Copy Card to Room put a portrait card's `sibling` stamp
+  on the first Earth exhibit card and hid it from the desktop lobby
+  (L-291, step 7). Re-homed to L-312 with the two-files-on-one-card
+  case.
+- **The two portrait titles are deferred** -- Tony, 2026-09-10, on the
+  review: "deferred to the braid. not critical." Re-homed to L-312,
+  with the titles recovered from git history.
+**Gap:** none.
+**Ref:** L-287, L-301, L-286, L-307, L-308, `tools/json_converter.py`,
+`tools/gallery_editor.py`, `tools/sweep_report.py`, index.html,
+`documentation/patch_L303_1_cards_per_orientation.py` (gallery).
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
@@ -15324,8 +15477,8 @@ L-149/L-150/L-151 (M2 track); L-155-L-162.
 
 ---
 
-#### [L-168] propagate_marker uses solar K_GAUSS mean-motion -- wrong for planetocentric moon markers (FLAG-2; caught in F1 design, avoided in serving, source fix still open)
-<!-- L:168 status:DONE upd:2026-09-09 section:W.Done flag: rice:3/3/80/2 -->
+#### [L-168] propagate_marker uses solar K_GAUSS mean-motion -- wrong for planetocentric moon markers (FLAG-2; caught in F1 design, avoided in serving, fixed at source 2026-09-09)
+<!-- L:168 status:DONE upd:2026-09-10 section:W.Done flag: rice:3/3/80/2 -->
 - **What.** `gallery/assembler/render_orbits.py` `propagate_marker()`
   computes mean motion as `n = K_GAUSS / (a ** 1.5)` (line 90 @ gallery
   f4ce24cb), where `K_GAUSS = sqrt(GM_sun)`. Correct ONLY for heliocentric
@@ -15400,6 +15553,8 @@ in the same window; the underlying finding never changed.
   planetocentric body (the four numbers above, as a test). T1 checks
   Earth only. Add when `test_artifact1_earth.py` is next open; the pin
   compares its verdicts by name, so a new verdict is a pin change.
+  **Re-homed 2026-09-10 to L-237**, which opens that file. (Title
+  corrected the same day: it said the source fix was still open.)
 **Gap:** none -- move to section C.
 
 **Ref:** `gallery/assembler/render_orbits.py` (propagate_marker, line 90 @

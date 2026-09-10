@@ -1,6 +1,6 @@
 # Paloma's Orrery - Module Index
 
-**Generated:** September 09, 2026 by `module_atlas.py`  
+**Generated:** September 10, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -11,21 +11,21 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 130  
-**Total Lines of Code (non-blank):** 104,757  
-**Total Public Functions/Classes:** 1,176
+**Total Lines of Code (non-blank):** 105,646  
+**Total Public Functions/Classes:** 1,177
 
 ## Classification Coverage
 
 **Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L291_14_ledger_mode5_close_20260909.py`
+- `patch_L291_15_close_20260910.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
 **Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L291_14_ledger_mode5_close_20260909.py`
+- `patch_L291_15_close_20260910.py`
 
 
 ---
@@ -230,7 +230,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L291_14_ledger_mode5_close_20260909.py` | - ledger: L-291 Mode 5 passed, L-168 DONE, L-310 opened (46 lines) |
+| `patch_L291_15_close_20260910.py` | - close the Earth exhibit and the card model (935 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

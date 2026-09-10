@@ -787,6 +787,42 @@ resident.
 made a fourth entry.)
 
 
+v3.53 (September 3, 2026): One clause corrected, one note added. No
+skill changed.
+
+MODE 7 SAID RELAY PARTNERS CANNOT READ THE REPO, AND THEY CAN (L-276).
+The "Documents as handoffs" clause gave as its reason that "the
+receiving AI has zero independent repo access." This project's own
+records disproved it: the L-191 relay response records Fable running
+`git ls-remote` against the pinned SHA and parsing the source, and
+Tony ruled 2026-09-02 that every model queried here reaches GitHub.
+The anchor requirement is unchanged. Its reason now covers both kinds
+of partner: the repo moves, so an un-anchored document does not say
+which state it describes; one that can fetch needs the anchor to fetch
+the right bytes, one that cannot needs it to know what it is reading.
+
+The failure that surfaced it is the lesson. A session read the L-191
+relay response, which says plainly that Fable cloned the repo, and
+then repeated the blanket sentence anyway -- a general claim in a
+trusted document held over specific evidence already in hand. The
+same shape as trusting a handoff over the render, one layer up.
+
+THE GEMINI NOTE, on Tony's question 2026-09-03: how does Gemini see the
+repo without an upload or Drive? Google's documentation for the Gemini
+web app answers it: one public repository can be IMPORTED as a
+snapshot, but a GitHub URL in a prompt is not read, nothing is fetched
+at a SHA, commit history is not visible, and the feature is not on
+mobile. Written under AI Roles so the next session does not rediscover
+it. Gemini is the second case in the corrected clause.
+
+Version history: v3.50 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-09-10 when v3.56
+made a fourth entry.)
+
+
 ### Preserved verbatim: v3.29 Technical lessons (now field notes in skills)
 
 - Cache: cache[name]['elements'] (nested dict)

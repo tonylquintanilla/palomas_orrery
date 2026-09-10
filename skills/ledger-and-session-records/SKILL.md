@@ -6,10 +6,10 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Skill version: 1.10 | Cut from palomas_orrery @ 50cbd2df (v1.10),
-earlier @ 41c0b279 (v1.9), @ 3586970d (v1.8), @ 434a712b (v1.7),
-@ 305b269 (v1.6), @ 3398970 (v1.5) | September 6, 2026, with
-Anthropic's Claude Opus 5
+Skill version: 1.11 | Cut from palomas_orrery @ 1ee1cc61 (v1.11),
+earlier @ 50cbd2df (v1.10), @ 41c0b279 (v1.9), @ 3586970d (v1.8),
+@ 434a712b (v1.7), @ 305b269 (v1.6), @ 3398970 (v1.5) | September 10,
+2026, with Anthropic's Claude Opus 5
 Sources: LEDGER_CONSOLIDATED.md header, ledger_index.py at HEAD, handoff
 v28 (consolidation) and v29 (cleanup), food insecurity handoffs. v1.3
 adds the Tony-action (do)/(decide) tag convention and its rollup rule,
@@ -44,7 +44,11 @@ relay partners with no resident layer (L-290), in the Anchor
 Requirement section, with two forms and a read-back. And the master
 plan restamps once per DESIGN BUILD (L-296) rather than at "key
 junctures", which was not countable and so kept returning the judgment
-to Tony.
+to Tony. v1.11 (L-291) adds A Closing Item Re-homes Its Loose Ends:
+before an item goes DONE, each thing its body records as not done gets
+a home in an open item, or is struck with a reason. Three were found
+riding inside closing items on 2026-09-10, one of them behind a pointer
+to an item that never mentioned it.
 
 Note: READING the ledger at session start is resident Part-1 behavior,
 not this skill's job. This skill carries the maintenance mechanics.
@@ -167,6 +171,39 @@ scores, verification results, corrections, open questions for Tony).
 - Verification honesty tags where useful: [verified @<sha>] vs
   [per chain] vs [render-gated] -- the ledger states which of its own
   claims are checked vs carried.
+
+### A Closing Item Re-homes Its Loose Ends [QUALITY]
+
+Before an item's status goes to DONE, read its body for work it
+records as NOT done -- "not done, recorded", "add when X is next
+open", a Gap saying another item carries something. Each one gets one
+of two outcomes in the closing patch:
+
+- a line in an OPEN item whose files that work will open (by files
+  touched, as in the section below), naming the closing item; or
+- struck in the closing item, with the reason.
+
+The closing item's own record then says where each one went, by
+handle.
+
+The reason is where readers look. A closed item moves to section C,
+and section C is institutional memory, not a backlog: no session
+opens it to find the next job. A not-done line inside it is a floating
+item that happens to have a handle -- Capture on First Mention
+satisfied in form and defeated in effect.
+
+Check a pointer as well as a line. A Gap saying "L-NNN carries it" is
+a claim about another block; open that block and find the work in it.
+
+(Origin, 2026-09-10, closing L-291 and L-303; Tony confirmed it as
+method rather than a ruling. Three loose ends: Earth's rotation
+period, recorded in L-291's body and pointed by its Gap and its
+handoff at L-292, which never mentioned it; a planetocentric
+`as_of_today` test inside L-168, closed the day before; and the
+gallery editor's Copy carrying a card's pairing tag, inside L-303 --
+which had already fired on the first Earth card, hiding it from the
+desktop lobby, before anyone looked. L-311, L-237 and L-312 received
+them.)
 
 ### Cluster the Tail by Topic, Not by Age [QUALITY]
 

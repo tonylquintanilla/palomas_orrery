@@ -6,7 +6,19 @@ fires_when: adding or changing an exhibit in interactive.html; any edit to the S
 
 # Interactive Exhibit
 
-Skill version: 1.0 | Cut from gallery @ fc8d9fb3 (interactive.html,
+Skill version: 1.1 | Cut from gallery @ 57fd93c6 (interactive.html,
+index.html, tools/json_converter.py, tools/gallery_studio.py,
+tools/gallery_editor.py) and orrery @ 1ee1cc61 (LEDGER_CONSOLIDATED.md
+L-291, L-303, L-309) | 2026-09-10, with Anthropic's Claude Opus 5
+v1.1 (L-291) corrects what Earth step 3 made untrue and adds what its
+close taught about carding. The page picks a room from an `EXHIBITS`
+table now, not an `EXHIBIT === "<key>"` branch, and four places still
+said branch: the anatomy's switch and class rows, step 3, and step
+7's picker. Step 3 gains the driver rule the build found by running
+the resolver; step 7 gains the check for an existing card and the
+order Studio forces; the rename paragraph points at L-309, which
+deferred it; one field note.
+Earlier: v1.0 cut from gallery @ fc8d9fb3 (interactive.html,
 feature_renderers.js, data/objects_config.json, gallery_maintenance_run.py,
 tools/gallery_studio.py) and orrery @ a57e86b8 (LEDGER_CONSOLIDATED.md
 L-260, L-267, L-278, L-282, L-288, L-289) | 2026-09-06
@@ -33,7 +45,7 @@ Three neighbours own the layers beneath and beside this one:
 - gallery-pipeline: Studio -> json_converter -> index.html for FIGURE
   cards. An exhibit's card is the one place this skill touches Studio.
 
-## The anatomy of an exhibit (the Sun, read at fc8d9fb3)
+## The anatomy of an exhibit (the Sun, read at fc8d9fb3; two rows corrected at 1.1)
 
 Named so a new exhibit can be checked piece by piece against the
 template. "Shared" means one copy serves every room; "per-body" means
@@ -41,8 +53,8 @@ the new exhibit brings its own.
 
 | Piece | Where | Shared or per-body |
 |---|---|---|
-| `EXHIBIT` switch: `?exhibit=` lower-cased, default `solar-system-explorer` | interactive.html, SUN EXHIBIT block | shared; a new room adds one `EXHIBIT === "<key>"` branch |
-| `body.<key>-exhibit` class and `.<key>-chrome` show/hide rule | `applySunChrome()`, CSS | per-body class, shared mechanism |
+| `EXHIBIT` switch: `?exhibit=` lower-cased, default `solar-system-explorer`; `EX = EXHIBITS[EXHIBIT]` is the room | interactive.html, `const EXHIBITS` | shared; a new room adds one ROW to `EXHIBITS` -- title, sceneTitle, pngName, halfRangeAu, driver, infoHtml, compose (since Earth step 3, L-291; at fc8d9fb3 it was one `EXHIBIT === "<key>"` branch per room) |
+| `body.sun-exhibit` class and `.sun-chrome` show/hide rule, added for EVERY room | `applySunChrome()`, CSS | shared; the name stays `sun` until the rename (L-309) -- at fc8d9fb3 this row read per-body `body.<key>-exhibit` |
 | Assembler modules list and the DRIVER: `assemble_scene({domain, content_type, objects, center, epoch}, Catalog(objects_config), CacheReader(coverage_index))` | `SUN_ASSEMBLER_MODULES`, `SUN_DRIVER` | shared code; per-body spec (`objects`, `center`) |
 | Data read at boot: `data/solar-system/coverage_index.json`, `data/objects_config.json` | `initSunExhibit()` | shared |
 | Feature handoff: `GalleryFeatures.buildFeatureTraces(features, positions, {sceneHalfRangeAu})`; anything larger than the frame goes to the drawer, not dropped | feature_renderers.js | shared |
@@ -57,9 +69,13 @@ the new exhibit brings its own.
 | Back link: "Gallery" steps back in history when the gallery is behind it | BACK TO THE GALLERY block | shared |
 
 The naming carries a debt: most shared pieces are called `sun*` because
-the Sun was first. The second exhibit is the moment to rename or
-parametrize them, not to copy them under `earth*`. One drawer, one nav
-cluster, one HUD, one i-panel; the body is a parameter.
+the Sun was first. The rule is to rename or parametrize them, never to
+copy them under `earth*`. One drawer, one nav cluster, one HUD, one
+i-panel; the body is a parameter. Earth, the second room, PARAMETRIZED
+through the `EXHIBITS` table and kept the names: a rename touches about
+a hundred identifiers in a working room for no change a visitor sees,
+and would put the Sun back under Mode 5. It is deferred to the third
+room or a free session, with the names to reach for (L-309).
 
 ## Rules
 
@@ -172,11 +188,15 @@ specific display rule; write the hidden rule at least as specific.
    value / unit / source / orrery_constant; add what is missing to the
    STORE first, then to the entry; confirm the nightly builder covers
    the body (gallery-cache-builder) and `coverage_index.json` lists it.
-3. Code: one `EXHIBIT === "<key>"` branch; a driver spec with the body
-   as `objects` and `center`; the body's half-range floor; the layout
-   builder's per-body values; i-panel copy with sources inline. Reuse
-   the shared chrome by parameter, renaming `sun*` where the second
-   user makes the name wrong.
+3. Code: one row in `EXHIBITS`; a driver spec whose `center` is the
+   body; the body's half-range floor; the layout builder's per-body
+   values; i-panel copy with sources inline. What goes in `objects` is
+   whatever the resolver accepts against that centre -- RUN it, do not
+   infer it. The Sun room passes `["sun"]`. Earth as an object is
+   rejected, because the cache stores it relative to the Sun, so the
+   Earth room passes `["moon"]` and Earth's own shells arrive by the
+   centre-features path (L-291). Reuse the shared chrome by parameter
+   (L-309 on names).
 4. Pre-test here: `node --check` on the page script; a stand-in scene
    for chrome that can run without Pyodide (the CDN is blocked in the
    sandbox, so the exhibit itself cannot start here -- say so in the
@@ -184,11 +204,18 @@ specific display rule; write the hidden rule at least as specific.
 5. Push; `gallery_maintenance_run.py --live`; Store drift reads MATCH
    for the new pointers, by name.
 6. Mode 5 on the phone, sequence above; fix; repeat.
-7. Card: Studio -> New Interactive Card (L-288) -> pick the scene (the
-   picker reads `EXHIBIT === "<key>"` literally from the page source, so
-   the key must appear in that form) -> title, placard, sources -> lands
-   in Storage -> the editor places it; featured if it belongs on the
-   lobby.
+7. Card. FIRST read `gallery/gallery_metadata.json` for a card whose
+   `live` already opens `interactive.html?exhibit=<key>`: Studio
+   refuses a second one, and a card made some other way may already
+   exist. Then Studio -> New Interactive Card (L-288) -> pick the scene
+   (`live_scene_urls()` in `tools/json_converter.py` reads the keys of
+   the page's `EXHIBITS` table, and the older branch form too) ->
+   title, placard, sources -> it lands in Storage -> in the editor,
+   File > Reload from disk (an open editor does not see Studio's
+   write, and its Save All would write over it) -> place it; featured
+   if it belongs on the lobby. Never make an exhibit card with the
+   editor's Copy Card to Room: the copy keeps the source card's
+   pairing tag (field note 2026-09-10).
 8. Ledger: the exhibit's item closes on Tony's Mode 5, not on the push.
 
 ## Field notes
@@ -211,11 +238,23 @@ specific display rule; write the hidden rule at least as specific.
 - 2026-09-06, L-288: Studio authors the exhibit's card; the card is a
   placard with an Interactive tag and needs no picture (the lobby
   settled that on the phone).
+- 2026-09-10, L-291 step 7: the first Earth card was a COPY -- Copy
+  Card to Room on the static Earth-and-Moon portrait, then a live URL
+  -- made because the Studio button was not found. It kept the
+  portrait's `sibling` stamp, file and size, and index.html's Featured
+  rule (a 9:16 card yields to a featured sibling) dropped it from the
+  DESKTOP lobby while the phone showed it. The handoff written the
+  night before said step 7 had not started: its session never read the
+  metadata. A replay of the viewer's rule against the served metadata
+  predicted both screens before Tony looked, and was right. Fixed by
+  delete, then Studio, then the editor, in that order. The editor's
+  Reload from disk existed and was not found either (L-288, L-312).
 
 ## Install and verify
 
 Author here: `skills/interactive-exhibit/SKILL.md` in the orrery repo.
 Install to the account (Settings > Skills). Run `skills_index.py` so the
-manifest in PROJECT_INSTRUCTIONS.md gains the row. Per Stale Skill =
-Stop, the session that installs it cannot verify the install; the Earth
-session confirms its loaded copy reads 1.0 before building.
+manifest in PROJECT_INSTRUCTIONS.md carries the version. Per Stale Skill
+= Stop, the session that installs a version cannot verify the install.
+1.0 was confirmed by the Earth sessions; the first session after 1.1's
+push confirms its loaded copy reads 1.1 before exhibit work.

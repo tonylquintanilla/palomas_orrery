@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
-Generated: September 09, 2026
+Generated: September 10, 2026
 Files scanned: 130
-Total findings: 1044
-Constants: 121 | Dicts: 41 | Display strings: 882
+Total findings: 1045
+Constants: 121 | Dicts: 42 | Display strings: 882
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -19,16 +19,20 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260910T155612Z | `1ee1cc6` | 130 | 1045 | 292 | 635 | 116 | 2 |
 | 20260910T000051Z | `f53273c` | 130 | 1044 | 291 | 635 | 116 | 2 |
 | 20260909T174124Z | `d39cf27` | 129 | 1044 | 291 | 635 | 116 | 2 |
 | 20260909T005807Z | `159c5a2` | 130 | 1045 | 292 | 635 | 116 | 2 |
 | 20260908T231842Z | `2075003` | 129 | 1044 | 291 | 635 | 116 | 2 |
 | 20260907T160819Z | `5170bec` | 133 | 1047 | 294 | 635 | 116 | 2 |
-| 20260907T144103Z | `fe87147` | 131 | 1044 | 292 | 634 | 116 | 2 |
 
-Change since the previous run: total +0, Tier-1 +0.
+Change since the previous run: total +1, Tier-1 +1.
 
-No file's Tier-1 count rose.
+Tier-1 rose in these files:
+
+| File | Before | After |
+|------|-------:|------:|
+| patch_L291_15_close_20260910.py | 0 | 1 |
 
 ---
 
@@ -59,7 +63,7 @@ No file's Tier-1 count rose.
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 291 |
+| 1 | 16-20 | FIX NOW | 292 |
 | 2 | 10-15 | REVIEW | 635 |
 | 3 | 5-9 | LOW PRIORITY | 116 |
 | 4 | 1-4 | LOWEST PRIORITY | 2 |
@@ -142,6 +146,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `worksheet_request_builder.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `orbital_elements.py` | orrery | 1 | 0 | 0 | 0 | 1 |
+| `patch_L291_15_close_20260910.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `data_acquisition.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `exoplanet_orbits.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `fetch_paleoclimate_data.py` | earth_science | 1 | 0 | 0 | 0 | 1 |
@@ -166,7 +171,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 44 | 128 | 516 | 69 | 2 | 715 |
+| Orrery (solar system + orbital mechanics) | 45 | 129 | 516 | 69 | 2 | 716 |
 | Earth System | 13 | 149 | 77 | 2 | 0 | 228 |
 | Stars (stellar neighborhood) | 11 | 12 | 42 | 6 | 0 | 60 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 39 | 0 | 39 |
@@ -177,6 +182,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 - `doc_index.py`
 - `orrery_maintenance_run.py`
+- `patch_L291_15_close_20260910.py`
 - `worksheet_checker.py`
 - `worksheet_key_aliases.py`
 - `worksheet_keys.py`
@@ -599,6 +605,12 @@ is planned for a future session.
 | 2174 | string | display string @ line 2174 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2197 | string | display string @ line 2197 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2332 | string | display string @ line 2332 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+
+### patch_L291_15_close_20260910.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 81 | dict | FILES[...] | (6 entries) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
 
 ### planet_visualization_utilities.py
 
