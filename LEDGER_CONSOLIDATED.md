@@ -279,7 +279,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*184 live items; 169 need attention (`!`); 183 RICE-scored; 120 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*184 live items; 169 need attention (`!`); 183 RICE-scored; 121 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -312,7 +312,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-08-25 |
 | ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-25 |
-| ! | L-291 | Earth exhibit: shells plus the Moon | OPEN | 4.3 | 2026-09-09 |
+| ! | L-291 | Earth exhibit: shells plus the Moon | PENDING-GATE | 4.3 | 2026-09-09 |
 | ! | L-303 | Separate cards per orientation (RULED); the phone hides a landscape card that has a portrait sibling | PENDING-GATE | 4.3 | 2026-09-09 |
 | ! | L-281 | The guest book: no-account comments, approve-before-show | OPEN | 4.2 | 2026-09-03 |
 | ! | L-247 | Sgr A* constants migrated to the single source of truth | OPEN | 4.0 | 2026-08-25 |
@@ -341,6 +341,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-288 | Gallery Studio creates and edits live-scene cards | OPEN | 3.1 | 2026-09-08 |
 | ! | L-294 | The Explorer room's placeholder, and Earth's heliocentric view | OPEN | 3.1 | 2026-09-06 |
 | ! | L-307 | Export-age reporting for the static cards that are not migrating | OPEN | 3.1 | 2026-09-08 |
+| ! | L-310 | Finer camera control in the exhibit rooms: directional step buttons on the nav cluster | OPEN | 3.1 | 2026-09-09 |
 | ! | L-254 | 76 dead sphere-shell builders, unmarked, across 12 modules | OPEN | 2.8 | 2026-09-02 |
 | ! | L-240 | Split declared drawing parameters from measured values | OPEN | 2.8 | 2026-08-25 |
 | ! | L-176 | Shell hover text: add illustrated dimensions (radius_fraction -> km) | OPEN | 2.8 | 2026-08-04 |
@@ -506,7 +507,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-156 | Provenance scanner scoring model fix -- criticality (category-based) + vulnerability recalibration + comprehensive sweep | OPEN | 5.3 | 2026-08-02 |
 | ! | L-155 | Cross-repo constants/geometry pinning checks -- built INTO provenance_scanner.py, not a standalone script | PENDING-GATE | 4.5 | 2026-07-27 |
 | ! | L-119 | event_link hardcoded None in the builder (F2, gates artifact 7) | OPEN | 3.6 | 2026-07-15 |
-| ! | L-168 | propagate_marker uses solar K_GAUSS mean-motion -- wrong for planetocentric moon markers (FLAG-2; caught in F1 design, avoided in serving, source fix still open) | OPEN | 3.6 | 2026-07-28 |
 | ! | L-175 | Newly-visible uncited temperature claims (1d piece 3) | OPEN | 3.6 | 2026-07-31 |
 | ! | L-161 | Gemini sweep -- clear the display-string Tier-2 backlog | OPEN | 3.1 | 2026-07-27 |
 | ! | L-157 | Gemini cross-check of shell config ring/belt/atmosphere geometry values | OPEN | 2.5 | 2026-07-27 |
@@ -656,6 +656,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-170 | Tier-1 exit-code flip -- capture so it doesn't float | DONE | 7.2 | 2026-07-29 |
 |  | L-085 | LICENSE to repo root | DONE | 4.0 | 2026-07-03 |
 |  | L-088 | Gallery integration test (Phase 0) | DONE | 4.0 | 2026-07-06 |
+|  | L-168 | propagate_marker uses solar K_GAUSS mean-motion -- wrong for planetocentric moon markers (FLAG-2; caught in F1 design, avoided in serving, source fix still open) | DONE | 3.6 | 2026-09-09 |
 |  | L-099 | Solar System Explorer interactive exhibit | DONE | 3.2 | 2026-07-06 |
 |  | L-174 | Citation level mismatch -- citations pitched one block too far out | DONE | 2.7 | 2026-07-30 |
 |  | L-154 | Gallery feature-rendering JS layer (shells, rings, radiation belts -- Artifact 2 prerequisite) | DONE | 2.1 | 2026-08-24 |
@@ -5659,7 +5660,7 @@ card in the grid), tools/gallery_studio.py, tools/json_converter.py,
 interactive.html.
 
 #### [L-291] Earth exhibit: shells plus the Moon
-<!-- L:291 status:OPEN upd:2026-09-09 section:A flag: rice:4/4/80/3 -->
+<!-- L:291 status:PENDING-GATE upd:2026-09-09 section:A flag: rice:4/4/80/3 -->
 - **Design settled 2026-09-06** in a zero-code conversation, step 1 of
   the `interactive-exhibit` skill's order. The full record, with every
   number and its source, is
@@ -5864,15 +5865,35 @@ interactive.html.
   states is DERIVED (served pole through the renderer's sourced mean
   obliquity), and says so. Serving the period is a small orrery
   constants patch when a session has `constants_new.py` open.
-**Gap:** STEPS 4-8. Tony (do): run the patch, runner (6 of 6), push,
-`--live`, then Mode 5 on the phone at `interactive.html?exhibit=earth`
--- conditions: arrival shows the eight shells, gold axis and yellow Sun
-line with the grid chip reading in AU and km; the drawer lists the Moon,
-terminator, GEO, belts, geocorona, Hill sphere, and one italic
-"not yet drawn" row; tap GEO and it lies in the equator ring's plane;
-tap the Moon and the brighter arc sits on the faint ellipse around the
-marker; every hover ends in a Source line. Then the Studio card. The
-magnetosphere is L-305. Closes on Tony's eyes.
+- **MODE 5, 2026-09-09, three rounds, all on the served page
+  [render-confirmed Mode 5 @ gallery `e22cde12`].** Step 3 patch ran on
+  `23054535` -> `97ed2012`; `--live` byte-identical, 8 files. Phone
+  matches desktop (Tony). Round 1 (`patch_L291_11`, -> `bac5a5ee`): the
+  terminator's marker read as detached -- the Sun line now starts at
+  Earth's centre through the circle's middle with a subsolar dot on the
+  crust, the terminator's marker sits ON the circle; frame axes width 3
+  -> 6 (both rooms); the orrery's spin arcs with cone heads at both pole
+  tips, prograde, sense cited (Archinal 2018). Round 2 (`patch_L291_12`,
+  -> `da57d095`): the arc made white and the ellipse faded by rgba --
+  correct changes aimed at the WRONG cause; kept. Round 3
+  (`patch_L291_13`, -> `e22cde12`): Tony read the Moon's woven band as
+  "points too far apart in time", which it was -- L-168, fixed at source
+  (see there). GEO confirmed in the equator's plane; the Moon's arc a
+  clean quarter-orbit with the marker on it. Tony: "looks right."
+- **What the three rounds teach, one sentence each.** Measure the
+  geometry before theorising about the renderer (round 2 guessed at
+  Plotly; one `atan2` sweep in round 3 gave 8,406 degrees). A hover
+  marker belongs on the thing it describes. The frame must read as
+  frame.
+- **Camera control (Tony's question, round 1):** Plotly has no drag
+  sensitivity; directional step buttons on the nav cluster are the
+  practical answer. Opened as L-310, shared chrome, a design round of
+  its own.
+**Gap:** STEP 7 -- the Studio card via New Interactive Card (the picker
+reads the EXHIBITS table now; expect `?exhibit=earth`), placed in the
+editor; then L-291 closes. Tony-action (do). L-305 (magnetosphere) and
+L-310 (camera steps) are their own items; L-292 (serving the rotation
+period) is the small orrery patch the axis hover is waiting for.
 **Ref:** `documentation/PREDESIGN_earth_exhibit_20260906.md` (gallery),
 L-292 (shells the orrery does not draw), L-293 (lunar standstill),
 L-294 (the Explorer room and the heliocentric view), L-295 (the upper
@@ -6396,6 +6417,27 @@ skills/gallery-pipeline/SKILL.md.
 redesign.
 **Ref:** L-291, L-267 (where the chrome came from), interactive.html
 (`EXHIBITS`, `EX`), `tools/json_converter.py::live_scene_urls`.
+
+#### [L-310] Finer camera control in the exhibit rooms: directional step buttons on the nav cluster
+<!-- L:310 status:OPEN upd:2026-09-09 section:A flag: rice:3/3/70/2 -->
+- **Tony, 2026-09-09, Mode 5 of the Earth room:** "the mouse control is
+  rough for details. can we activate finer control? there is the
+  directional control buttons as an option."
+- **What is true of the mechanism.** Plotly's 3D camera drag has no
+  sensitivity setting; a small feature at Earth's scale moves out of
+  view in one twitch. The nav cluster (L-267 step 7, `nav_cluster.js`)
+  already steps the FRAME with +/- through `Plotly.relayout`; a camera
+  step is the same move on `scene.camera.eye`, rotated about the up
+  vector (yaw) or the eye's horizontal (pitch) by a fixed angle.
+- **Design questions for the round, not settled here:** step size (5
+  degrees? 15?), whether the buttons appear in both rooms and the
+  Explorer (the cluster is shared, L-267), touch layout on a portrait
+  phone beside the drawer handle, and whether a long press repeats.
+  Shared chrome: a design round first, zero code, then one patch.
+**Gap:** design round with Tony; then build. Not blocking L-291.
+**Ref:** L-267 (nav cluster), L-289 (frame HUD, whose triad shows the
+result of any camera move), L-291, `gallery/nav_cluster.js`,
+interactive.html (`navHome`, `sunFrameOn`).
 
 #### [L-278] A relayout from inside a Plotly event handler re-enters the update machinery
 <!-- L:278 status:OPEN upd:2026-09-02 section:A flag: rice:3/3/90/1 -->
@@ -14403,76 +14445,6 @@ step is the main new wrinkle, given the repo is public.
 **Ref:** L-149/L-118 (served_window/trust), CNAME (confirms the domain),
 M2 testing protocol addendum (Layer 3 background).
 
-#### [L-168] propagate_marker uses solar K_GAUSS mean-motion -- wrong for planetocentric moon markers (FLAG-2; caught in F1 design, avoided in serving, source fix still open)
-<!-- L:168 status:OPEN upd:2026-07-28 section:W.Active flag: rice:3/3/80/2 -->
-- **What.** `gallery/assembler/render_orbits.py` `propagate_marker()`
-  computes mean motion as `n = K_GAUSS / (a ** 1.5)` (line 90 @ gallery
-  f4ce24cb), where `K_GAUSS = sqrt(GM_sun)`. Correct ONLY for heliocentric
-  bodies. For a planetocentric moon -- served from its OWN osculating conic
-  in the parent-relative frame, so `a` is the tiny moon-parent semi-major
-  axis in AU -- solar GM is the wrong gravitational parameter, and the
-  propagated as-of-today marker lands wrong by ~3 orders of magnitude.
-  [verified @f4ce24cb]
-- **Worked number.** Moon a ~ 0.00257 AU -> n = 0.01720209895 / 0.00257^1.5
-  ~ 132 rad/day -> implied period ~ 68 minutes, versus the real 27.32-day
-  sidereal month. Independently re-derived. This is the same catch GPT's F1
-  manifest missed and the Fable/GPT competitive cross-check surfaced (see
-  MASTER_PLAN_INTERACTIVE_GALLERY.md, "New in v14").
-- **Caught != fixed.** F1/M2 (L-118 / L-149) was DESIGNED to avoid this: the
-  serving pipeline captures Horizons' own `n` and emits `n_deg_per_day`, and
-  the builder never calls `propagate_marker` (FLAG-2 comments at
-  gallery_cache_builder.py lines 67, 341, and the derivation note ~372-380).
-  But avoiding it in the serving path did not change `propagate_marker`
-  itself -- render_orbits.py was correctly out of M2's edit scope, so the
-  wrong formula is still at HEAD and `propagate_marker` is on a LIVE
-  dispatch path: `gallery/assembler/assemble.py:62` calls it to place the
-  position marker for every object that has osculating elements.
-  [verified @f4ce24cb]
-- **Dormant, not benign.** Only Artifact 1 (Earth, heliocentric) is built
-  and Mode-5 accepted in the interactive assembler today, so the live path
-  only ever feeds a heliocentric body, where the formula is correct. It
-  becomes a visibly wrong marker the moment a planetocentric moon renders --
-  Artifact 2 (Jupiter/Saturn) and Artifact 3 (Moon/Io/Titan), the objects
-  L-154's feature-rendering layer unblocks. The trigger for this bug and the
-  trigger for L-154 are the same event.
-- **Fix approach (not built; design choice for its session).** The correct
-  `n` is already in the served data (`n_deg_per_day` on the osculating
-  block). Preferred: thread the served `n` into `propagate_marker` and use
-  it directly instead of deriving from `a` ("fetched, not recalled" -- use
-  Horizons' measured mean motion); alternative: pass the correct
-  central-body GM per frame. Either removes the solar-GM assumption. Small,
-  targeted change to one function plus the `obj.osculating` payload that
-  reaches it; guard the no-`n` case (WARN/skip, never a silent solar-GM
-  fallback). Confirm on Earth's existing Mode-5 harness (no heliocentric
-  regression) before a moon artifact.
-
-**Tony:** documentation-only capture (repo moved twice since the original
-F1 build; no code touched this session). Gives the caught-but-unfixed bug
-a handle so it cannot fall through when L-154 / Artifact 2 resumes.
-Renumbered twice on the way in -- L-166 draft -> L-167 draft -> this L-168
--- purely from handle collisions as other sessions landed unrelated items
-in the same window; the underlying finding never changed.
-
-**Gap:** land the `propagate_marker` fix (use served `n`, drop solar-GM
-derivation, guard no-`n`) BEFORE or WITH the L-154 JS feature-rendering
-layer, so the first Jupiter/Saturn/moon render carries correct marker
-positions; re-run Earth Mode-5 as the no-regression gate.
-
-**Ref:** `gallery/assembler/render_orbits.py` (propagate_marker, line 90 @
-f4ce24cb); `gallery/assembler/assemble.py:62` (live call site);
-`gallery/assembler/tests/test_artifact1_earth.py:81` (test call site);
-`tools/gallery_cache_builder.py` FLAG-2 comments (67, 341, ~372-380);
-`documentation/M2_IMPLEMENTATION_REPORT.md`;
-`documentation/PHASE2_F1_BUILD_MANIFEST_v2_2.md` (FLAG-2 origin);
-MASTER_PLAN_INTERACTIVE_GALLERY.md ("New in v14"). Coupled to L-154 (same
-trigger; DISTINCT bug -- L-154's resolver `tuple(dict)` drops feature
-PARAMETERS; this drops marker POSITION accuracy). Sibling to L-166 (F1b
-trust consumption -- distinct concern, same assembler / pre-Artifact-2
-phase). NOT to be confused with L-167 ("Artifact-1 field notes --
-orrery-coding-conventions still missing three entries" -- unrelated
-Plotly-rendering topic, assigned in the same window; pure numbering
-coincidence). Anchored: built on orrery 0d13fbb9 / gallery f4ce24cb.
-
 #### [L-172] Phase 0 record-hygiene batch (provenance cluster prep)
 <!-- L:172 status:OPEN upd:2026-07-29 section:W.Active flag: rice:3/2/95/1 -->
 - **What.** Small, independent, unblocked corrections a later session
@@ -15351,6 +15323,99 @@ later changed is part of the record; it is no longer in force.
 L-149/L-150/L-151 (M2 track); L-155-L-162.
 
 ---
+
+#### [L-168] propagate_marker uses solar K_GAUSS mean-motion -- wrong for planetocentric moon markers (FLAG-2; caught in F1 design, avoided in serving, source fix still open)
+<!-- L:168 status:DONE upd:2026-09-09 section:W.Done flag: rice:3/3/80/2 -->
+- **What.** `gallery/assembler/render_orbits.py` `propagate_marker()`
+  computes mean motion as `n = K_GAUSS / (a ** 1.5)` (line 90 @ gallery
+  f4ce24cb), where `K_GAUSS = sqrt(GM_sun)`. Correct ONLY for heliocentric
+  bodies. For a planetocentric moon -- served from its OWN osculating conic
+  in the parent-relative frame, so `a` is the tiny moon-parent semi-major
+  axis in AU -- solar GM is the wrong gravitational parameter, and the
+  propagated as-of-today marker lands wrong by ~3 orders of magnitude.
+  [verified @f4ce24cb]
+- **Worked number.** Moon a ~ 0.00257 AU -> n = 0.01720209895 / 0.00257^1.5
+  ~ 132 rad/day -> implied period ~ 68 minutes, versus the real 27.32-day
+  sidereal month. Independently re-derived. This is the same catch GPT's F1
+  manifest missed and the Fable/GPT competitive cross-check surfaced (see
+  MASTER_PLAN_INTERACTIVE_GALLERY.md, "New in v14").
+- **Caught != fixed.** F1/M2 (L-118 / L-149) was DESIGNED to avoid this: the
+  serving pipeline captures Horizons' own `n` and emits `n_deg_per_day`, and
+  the builder never calls `propagate_marker` (FLAG-2 comments at
+  gallery_cache_builder.py lines 67, 341, and the derivation note ~372-380).
+  But avoiding it in the serving path did not change `propagate_marker`
+  itself -- render_orbits.py was correctly out of M2's edit scope, so the
+  wrong formula is still at HEAD and `propagate_marker` is on a LIVE
+  dispatch path: `gallery/assembler/assemble.py:62` calls it to place the
+  position marker for every object that has osculating elements.
+  [verified @f4ce24cb]
+- **Dormant, not benign.** Only Artifact 1 (Earth, heliocentric) is built
+  and Mode-5 accepted in the interactive assembler today, so the live path
+  only ever feeds a heliocentric body, where the formula is correct. It
+  becomes a visibly wrong marker the moment a planetocentric moon renders --
+  Artifact 2 (Jupiter/Saturn) and Artifact 3 (Moon/Io/Titan), the objects
+  L-154's feature-rendering layer unblocks. The trigger for this bug and the
+  trigger for L-154 are the same event.
+- **Fix approach (not built; design choice for its session).** The correct
+  `n` is already in the served data (`n_deg_per_day` on the osculating
+  block). Preferred: thread the served `n` into `propagate_marker` and use
+  it directly instead of deriving from `a` ("fetched, not recalled" -- use
+  Horizons' measured mean motion); alternative: pass the correct
+  central-body GM per frame. Either removes the solar-GM assumption. Small,
+  targeted change to one function plus the `obj.osculating` payload that
+  reaches it; guard the no-`n` case (WARN/skip, never a silent solar-GM
+  fallback). Confirm on Earth's existing Mode-5 harness (no heliocentric
+  regression) before a moon artifact.
+
+**Tony:** documentation-only capture (repo moved twice since the original
+F1 build; no code touched this session). Gives the caught-but-unfixed bug
+a handle so it cannot fall through when L-154 / Artifact 2 resumes.
+Renumbered twice on the way in -- L-166 draft -> L-167 draft -> this L-168
+-- purely from handle collisions as other sessions landed unrelated items
+in the same window; the underlying finding never changed.
+
+- **FIXED 2026-09-09, gallery `e22cde12`** (`patch_L291_13_L168_moon_mean_motion`),
+  exactly as designed above: `propagate_marker` reads `n_deg_per_day`
+  from the served block; a block without one raises a plain ValueError
+  naming centre and `a` -- never a quiet solar-GM fallback. `K_GAUSS`
+  stays defined for importers, unused for mean motion. [verified
+  @e22cde12; render-confirmed Mode 5]
+- **The trigger was the one predicted.** The Earth room (L-291) is the
+  first planetocentric render. Its trusted arc -- 121 points across the
+  Moon's 6.84-day served window -- swept 8,406 degrees, 23 orbits, and
+  drew as a lattice of 70-degree chords. Tony read it on sight as points
+  too far apart in time. The Moon's MARKER was wrong too, between 00:00
+  UTC (the page's epoch) and the ~17:40 UTC nightly, when the elements
+  were a day old: 132 rad/day put it anywhere on the orbit; at the
+  fixture's own epoch it happened to be right, which is why no check
+  caught it.
+- **Cross-checked against Horizons' `as_of_today` in the live cache:**
+  Earth 8.8e-12, Moon 2.3e-10, Io 2.6e-9, Titan 2.0e-10 of r. Halley
+  4.96e-3 with the old formula and the new -- unrelated, its elements
+  are pinned at the 1986 perihelion (horizons-orbital-mechanics, comet
+  record pinning). Artifact 1 pin holds: 5 verdicts and T3's feature
+  set unchanged. The Earth smoke pins the arc's sweep at 60-120 degrees;
+  the old arc fails it by a factor of 70.
+- **Not done, recorded:** a Python-side `as_of_today` cross-check for a
+  planetocentric body (the four numbers above, as a test). T1 checks
+  Earth only. Add when `test_artifact1_earth.py` is next open; the pin
+  compares its verdicts by name, so a new verdict is a pin change.
+**Gap:** none -- move to section C.
+
+**Ref:** `gallery/assembler/render_orbits.py` (propagate_marker, line 90 @
+f4ce24cb); `gallery/assembler/assemble.py:62` (live call site);
+`gallery/assembler/tests/test_artifact1_earth.py:81` (test call site);
+`tools/gallery_cache_builder.py` FLAG-2 comments (67, 341, ~372-380);
+`documentation/M2_IMPLEMENTATION_REPORT.md`;
+`documentation/PHASE2_F1_BUILD_MANIFEST_v2_2.md` (FLAG-2 origin);
+MASTER_PLAN_INTERACTIVE_GALLERY.md ("New in v14"). Coupled to L-154 (same
+trigger; DISTINCT bug -- L-154's resolver `tuple(dict)` drops feature
+PARAMETERS; this drops marker POSITION accuracy). Sibling to L-166 (F1b
+trust consumption -- distinct concern, same assembler / pre-Artifact-2
+phase). NOT to be confused with L-167 ("Artifact-1 field notes --
+orrery-coding-conventions still missing three entries" -- unrelated
+Plotly-rendering topic, assigned in the same window; pure numbering
+coincidence). Anchored: built on orrery 0d13fbb9 / gallery f4ce24cb.
 ### W.Cross-references -- existing items that interact with the web track
 
 - **L-026** -- CRLF to LF on `palomas_orrery_helpers.py`. Companion to L-087.
