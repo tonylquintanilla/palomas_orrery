@@ -1,6 +1,6 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** v29 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
+**Status:** v30 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
 **the first feature-bearing exhibit is LIVE AND COMPLETE.** The Sun
 ships at `palomasorrery.com/interactive.html?exhibit=sun`, unlinked
 from the landing page, Mode 5 accepted 2026-08-29 (gallery
@@ -92,7 +92,12 @@ text here read "enabled with a known open issue", contradicting its own
 header forty lines below. L-151 (gallery-assembler skill) DONE
 2026-07-27; L-150 (multi-orbit binaries) still decided, not yet built.)
 **Date begun:** July 3, 2026
-**Last updated:** September 10, 2026 (v29: the Earth BUILD closes.
+**Last updated:** September 10, 2026, evening (v30: L-305's paper read
+landed, corrected; the camera-step track closed on Mode 5 and the phone
+look that closed it added four chrome items, two of them solutions the
+orrery already had; the orrery's hover text joins the braid, Earth first
+(L-321); Section 5a gains the 2026-09-10 evening subsection; with
+Anthropic's Claude Opus 5. v29, September 10, 2026: the Earth BUILD closes.
 Step 3 built and through three Mode 5 rounds; L-168 fixed at source
 on the first moon it could affect; the card made in Studio after a
 copied card hid from the desktop lobby; L-291 and L-303 closed on
@@ -1667,6 +1672,47 @@ Tony's next track is the L-310 camera-step design round -- shared
 chrome, zero code -- taken beside the order, not as a step in it.
 Handoff: `documentation/HANDOFF_earth_close_20260910.md` in the
 orrery repo.
+
+### 2026-09-10 (evening) -- the rooms' chrome after the phone, and the orrery's hover text joins the braid
+
+Measured at orrery `b2c77350` and gallery `9c056d1a`, both confirmed
+against the live remotes. Appended, not merged.
+
+**L-305's paper read landed, corrected.** The Jelinek 2012 read and
+Tony's split -- Shue (1998) for the magnetopause, Jelinek for the bow
+shock -- are in the ledger. The session's design record could not be
+pasted as written: its new item took a handle L-310 had already used,
+and its replacement Gap dropped two open lines. The solar-wind item
+became L-314, and why three chained patches refused became L-315.
+L-305's build is unchanged in the order: read Shue's flaring
+coefficients, then the port.
+
+**The camera-step track closed and grew four items** (L-310, L-316,
+L-317, L-318, L-320). The arrows passed Mode 5. The phone look that
+closed them moved the cross to the top right with the title kept,
+carried the orrery's two-standards marker outline into the gallery,
+started every marker five degrees off the pole, and added a label that
+opens when a shell is named in the drawer, pinned to its marker with an
+arrow. Twice the fix already existed in the orrery and the interactive
+had never received it (L-317, L-320); the first build of L-317 went the
+wrong way until Tony said so.
+
+**The orrery's hover text joins the braid** (L-321). The gallery's hover
+text is built from served, provenance-checked rows; the orrery's is
+fuller hand-written prose. Tony ruled against carrying the prose over:
+accuracy over fullness, the orrery must be as correct as the
+interactive, and the slice starts with Earth. Discovery at orrery
+`b2c77350`: 36 display strings, none Tier 1, all cited but not
+independently cross-checked.
+
+**What this does to the order.** The five segments do not move. The
+braid gains an orrery slice for Earth's hover text, worked beside the
+delivery work and not in front of it: discovery is done, a design round
+for the cross-check is next. L-305's build and L-318's last question (a
+marker tap's own hover box still drops its pointer mid-screen) are the
+Earth room's open data and chrome items; L-316's desktop look and
+L-319's call are Tony's. Handoff:
+`documentation/HANDOFF_L316_L321_20260910.md` in the orrery repo.
 
 ### What this section deliberately does not carry
 

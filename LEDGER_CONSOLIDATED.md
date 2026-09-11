@@ -85,6 +85,10 @@ Module updated: September 10, 2026 with Anthropic's Claude Opus 5
 (L-318 designed in conversation and built in the gallery: naming a shell
 in the drawer opens its hover text as a label), built on b914c3f0.
 Module updated: September 10, 2026 with Anthropic's Claude Opus 5
+(session close: L-318's arrow colour built and through Mode 5; L-320
+closed on Tony's Mode 5; L-321 opened on Tony's ruling -- the orrery's
+hover text joins the provenance braid, Earth first), built on b2c77350.
+Module updated: September 10, 2026 with Anthropic's Claude Opus 5
 (L-291 and L-303 closed on Tony's Mode 5; their loose ends re-homed
 to L-311 and L-312, opened here, and to L-237 and L-288; L-310 gains
 Studio's prior art; L-168's title), built on 1ee1cc61.
@@ -305,7 +309,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*191 live items; 176 need attention (`!`); 190 RICE-scored; 124 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*191 live items; 176 need attention (`!`); 190 RICE-scored; 125 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -336,7 +340,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-193 | Qualified verdicts -- the token is not the whole answer | OPEN | 4.8 | 2026-08-15 |
 | ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
 | ! | L-316 | On a portrait phone the arrow cross moves to the top-right corner | OPEN | 4.8 | 2026-09-10 |
-| ! | L-320 | Info markers on the drawn axis, and the orrery's per-shell marker angles never served | OPEN | 4.8 | 2026-09-10 |
 | ! | L-268 | Sweep: features collapsed out of their own identity | OPEN | 4.5 | 2026-08-30 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-08-25 |
@@ -397,6 +400,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-228 | Alfven surface latitude ranges: source them or omit them | OPEN [Tony] | 1.8 | 2026-08-23 |
 | ! | L-257 | Three enforcement builds the 2.8 skill text defers | OPEN | 1.8 | 2026-08-27 |
 | ! | L-313 | Recenter the camera on a chosen feature in the exhibit rooms | OPEN | 1.8 | 2026-09-10 |
+| ! | L-321 | The orrery's hover text joins the provenance braid, Earth first | OPEN | 1.8 | 2026-09-10 |
 |  | L-194 | Text-only assertions -- claims the scanner cannot see | DEFERRED | 1.4 | 2026-08-15 |
 | ! | L-297 | Earth-Moon Lagrange points: serving path sized, deferred from the Earth exhibit | OPEN | 1.4 | 2026-09-07 |
 | ! | L-314 | Live solar wind conditions for the magnetosphere shells (SWPC through the nightly builder) | OPEN | 1.3 | 2026-09-10 |
@@ -614,6 +618,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-189 | Provenance scanner: run history and run-to-run delta | DONE | 4.8 | 2026-08-11 |
 |  | L-279 | A test protocol that leaves the CONDITIONS uncontrolled produces confident wrong readings | DONE | 4.8 | 2026-09-02 |
 |  | L-289 | Sun exhibit on the phone: the 3D axis labels are not visible | DONE | 4.8 | 2026-09-06 |
+|  | L-320 | Info markers on the drawn axis, and the orrery's per-shell marker angles never served | DONE | 4.8 | 2026-09-10 |
 |  | L-065 | European heat wave heat map (Earth System track) | DONE | 4.8 | 2026-06-25 |
 |  | L-064 | Provenance-scanner format sweep -- Earth System family | DONE | 4.5 | 2026-06-30 |
 |  | L-075 | KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine) | DONE | 4.3 | 2026-06-30 |
@@ -6709,10 +6714,24 @@ skills/orrery-coding-conventions/SKILL.md.
   box, which drops its pointer mid-screen at `HOVER_WIDTH` 70. Narrowing
   it trades a taller box for the pointer; that waits for Tony's look at
   the drawer label.
-**Gap:** Tony's Mode 5 on the phone, both rooms: name a shell and its
-label points at its marker; turn the view and the label stays with it;
-tap the scene and it closes; untick the shell and it closes. Then the
-marker-tap pointer question above.
+- **Mode 5 passes on the phone, 2026-09-10.** Tony, to each check: name
+  a shell and its label points at its marker -- "correct"; turn the view
+  and it stays -- "correct"; tap the scene and it closes -- "correct";
+  untick and it closes -- "correct"; tapping a marker works as before --
+  "correct"; the label's size settings -- "they are correct".
+  [render-confirmed Mode 5 @ gallery `ffcf1630`]
+- **One change from the same look.** Tony: "i would make the arrow the
+  color of the marker for contrast." The marker's fill is the shell's
+  colour, which the arrow already had, so the colour that contrasts is
+  the marker's outline. Built 2026-09-10 by
+  `patch_L318_2_arrow_colour.py` in the gallery: the arrow takes the
+  marker's outline colour, red or white under the two-standards rule,
+  and the box border keeps the shell's colour. The label checks gained
+  one, now 20: a white-outlined marker gets a white arrow and a
+  red-outlined one a red arrow. [verified in the sandbox; render-gated]
+- **The arrow colour passes on the phone, 2026-09-10.** Tony: "perfect".
+  [render-confirmed Mode 5 @ gallery `9c056d1a`]
+**Gap:** the marker-tap pointer question above.
 **Ref:** L-267 (the drawer and focus), L-278, L-316, L-317, L-319, L-320,
 `interactive.html` (`sunFocusOn`, `sunLabelShow`, `sunLabelInstall`),
 `gallery/feature_renderers.js` (`wrapHover`, `HOVER_WIDTH`), plotly.js
@@ -6740,58 +6759,51 @@ changes.
 **Ref:** L-267 (Stage B), L-318, `interactive.html` (`sunFrameOn`,
 `sunGroupRadius`, `sunOutermostShown`).
 
-#### [L-320] Info markers on the drawn axis, and the orrery's per-shell marker angles never served
-<!-- L:320 status:OPEN upd:2026-09-10 section:A flag: rice:3/2/80/1 -->
-- **Tony, 2026-09-10:** the marker at the top of a zoomed shell is
-  visible, "but less when the marker sits on the z axis. An angular
-  offset of maybe 5 degrees would help."
-- **Two rules for one thing, found before building.** The orrery declares
-  a marker angle only where a shell needs one (`info_polar_deg` in
-  `shell_configs.py`, applied by `build_sphere_shell`): Earth's crust 10
-  degrees, lower atmosphere 20, upper atmosphere 30, each clearing the one
-  below, with the cores and mantles on the pole; the Sun's skin stack
-  steps 20 in `solar_visualization_shells.py`. None of that is served to
-  the gallery. The gallery's `renderShellSet` steps each shell in a group
-  20 degrees further than the one before, starting ON the pole, so the
-  first shell of each group sits on the axis the Earth room draws -- the
-  inner core and the lower atmosphere among them -- and the interior
-  angles differ from the orrery's. [verified @ orrery `b914c3f0` and
-  gallery `4add58bc`]
-- **The same lesson as L-317:** the orrery has a solution and the
-  interactive did not carry it, so the ruling came before any build.
-  Offered: the orrery's angles with 5 degrees off the axis in both; the
-  same in the gallery only; or the gallery's own steps shifted 5 degrees.
-- **Tony's ruling, 2026-09-10** (his choice of the three; the degree sign
-  spelled out): "Keep gallery's steps, shift all 5 degrees." The gallery
-  keeps its own 20-degree steps rather than the orrery's per-shell
-  angles. The two rules stay different by his choice, and the orrery is
-  not touched.
-- **Built 2026-09-10** by `patch_L320_marker_offset.py` in the gallery.
-  Measured first, nine markers sat exactly on the z axis -- Sun room:
-  Core, Termination Shock, Gravitational Influence; Earth room: Inner
-  Core, Lower Atmosphere, Exosphere / Geocorona, Low Earth Orbit inner
-  edge, Hill Sphere, Terminator. `INFO_MARKER_OFFSET_DEG` = 5 in
-  `gallery/feature_renderers.js` (MODE-5 KNOB): `renderShellSet`'s steps
-  start there, and `renderAtmosphereShell`, used in neither room, moves
-  off the pole by the same amount. `gallery/earth_geometry.js` steps the
-  terminator's marker along its own circle to the nearest drawn point, so
-  it leaves the axis and stays on the line (Tony's 2026-09-09 ruling that
-  it sit ON the line holds). `smoke_sun_shells.js` and
-  `smoke_earth_geometry.js` each gain a check that no marker is within 4
-  degrees of the axis (now 26 and 32 checks). Both fail with the knob at
-  zero, the Earth check fails with the terminator back at its top point,
-  and both pass with the knob at 10. After the patch the closest marker
-  in each room sits at 5.0 degrees. [verified in the sandbox;
-  render-gated]
-- **Note:** RICE 3/2/80/1 -> 4.8 proposed, not confirmed.
-**Gap:** Mode 5 on the phone, both rooms: a marker at the top of a zoomed
-shell reads clear of the axis line.
-**Ref:** L-317, L-318, `shell_configs.py` (`info_polar_deg`),
-`orrery_rendering.py` (`build_sphere_shell`),
-`gallery/feature_renderers.js` (`renderShellSet`,
-`INFO_MARKER_OFFSET_DEG`), `gallery/earth_geometry.js` (the terminator),
-`documentation/patch_L320_marker_offset.py` (gallery),
-skills/orrery-coding-conventions/SKILL.md (marker separation).
+#### [L-321] The orrery's hover text joins the provenance braid, Earth first
+<!-- L:321 status:OPEN upd:2026-09-10 section:A flag: rice:3/3/60/3 -->
+- **Found 2026-09-10, after the drawer label passed Mode 5.** Tony: "are
+  these the same hovertext that are built for the orrery?" No. The
+  orrery gives each shell a hand-written description -- `hover_text` in
+  `shell_configs.py`, or an `*_info_hover` string in its shell module --
+  which `build_sphere_shell` puts under "Body: Shell". The gallery
+  composes its text from the served, provenance-checked row
+  (`renderShellSet`): the name, the radius in body radii and in km and
+  AU, the altitude where it applies, the `source` line and a short
+  `note`. [verified @ orrery `436fa647` and gallery `ffcf1630`]
+- **Tony's ruling, 2026-09-10:** "no, i don't want the orrery hovertext
+  to come over. if anything we should do the reverse, pass the text that
+  has gone through the provenance scanner only. L-321 should be
+  integrated into the provenance braid. as we ensure that the
+  interactive is correct, we should make sure that the orrery is
+  correct. the orrery hovertext are fuller, which is interesting, but
+  accuracy is more important. so for now, let's do this for Earth."
+- **Discovery for the Earth slice, from `PROVENANCE_AUDIT.md` at orrery
+  `b2c77350`.** 36 display strings hold Earth's hover text, none Tier 1,
+  all Tier 2 at score 12. In `earth_visualization_shells.py`, 22 strings
+  and 100 claims: 20 cited but not independently cross-checked, 2 of
+  them date-sensitive. Inside Earth's two entries in `shell_configs.py`,
+  14 strings and 54 claims: 7 cited only through an enclosing block
+  citation, 5 cited but not cross-checked, 2 date-sensitive. Several are
+  pairs, a shell's `hover_text` and `tooltip` carrying the same claims.
+  The instance lists are those two files' sections of the audit. Cited
+  is not the same as true: the cross-check is the gap Tony's ruling
+  names. [read @ orrery `b2c77350`]
+- **The shape of the slice, per the braid (provenance-discipline 2.11).**
+  Discovery is done and fixed nothing; remediation comes in slices,
+  beside the delivery work and not as a gate in front of it. Accuracy
+  wins over fullness: a claim that cannot be sourced is removed and the
+  gap noted, not kept because the prose reads well. Nothing moves from
+  the orrery into the gallery; text that moves the other way has been
+  through the scanner.
+- **Note:** RICE 3/3/60/3 -> 1.8 proposed, not confirmed. One class row
+  for Earth's slice; other bodies' hover text waits for its own.
+**Gap:** design round for Earth's cross-check -- which of the 36 strings
+first, how the worksheet pipeline takes them, and what a corrected string
+looks like when a claim goes. Then remediation in slices.
+**Ref:** L-317, L-318, L-320, `PROVENANCE_AUDIT.md`, `WORKSHEET_CHECK.md`,
+`shell_configs.py` (`hover_text`, `tooltip`), `earth_visualization_shells.py`,
+`orrery_rendering.py` (`build_sphere_shell`), `gallery/feature_renderers.js`
+(`renderShellSet`), skills/provenance-discipline/SKILL.md (the braid).
 
 #### [L-278] A relayout from inside a Plotly event handler re-enters the update machinery
 <!-- L:278 status:OPEN upd:2026-09-02 section:A flag: rice:3/3/90/1 -->
@@ -13075,6 +13087,63 @@ atmosphere finding), L-249 (the interior constants conversion), L-289
 result of any camera move), L-291, L-313, L-316, L-317,
 `gallery/nav_cluster.js`, interactive.html (`navHome`, `sunFrameOn`),
 `documentation/HANDOFF_L310_camera_step_20260910.md` (orrery).
+
+#### [L-320] Info markers on the drawn axis, and the orrery's per-shell marker angles never served
+<!-- L:320 status:DONE upd:2026-09-10 section:C flag: rice:3/2/80/1 -->
+- **Tony, 2026-09-10:** the marker at the top of a zoomed shell is
+  visible, "but less when the marker sits on the z axis. An angular
+  offset of maybe 5 degrees would help."
+- **Two rules for one thing, found before building.** The orrery declares
+  a marker angle only where a shell needs one (`info_polar_deg` in
+  `shell_configs.py`, applied by `build_sphere_shell`): Earth's crust 10
+  degrees, lower atmosphere 20, upper atmosphere 30, each clearing the one
+  below, with the cores and mantles on the pole; the Sun's skin stack
+  steps 20 in `solar_visualization_shells.py`. None of that is served to
+  the gallery. The gallery's `renderShellSet` steps each shell in a group
+  20 degrees further than the one before, starting ON the pole, so the
+  first shell of each group sits on the axis the Earth room draws -- the
+  inner core and the lower atmosphere among them -- and the interior
+  angles differ from the orrery's. [verified @ orrery `b914c3f0` and
+  gallery `4add58bc`]
+- **The same lesson as L-317:** the orrery has a solution and the
+  interactive did not carry it, so the ruling came before any build.
+  Offered: the orrery's angles with 5 degrees off the axis in both; the
+  same in the gallery only; or the gallery's own steps shifted 5 degrees.
+- **Tony's ruling, 2026-09-10** (his choice of the three; the degree sign
+  spelled out): "Keep gallery's steps, shift all 5 degrees." The gallery
+  keeps its own 20-degree steps rather than the orrery's per-shell
+  angles. The two rules stay different by his choice, and the orrery is
+  not touched.
+- **Built 2026-09-10** by `patch_L320_marker_offset.py` in the gallery.
+  Measured first, nine markers sat exactly on the z axis -- Sun room:
+  Core, Termination Shock, Gravitational Influence; Earth room: Inner
+  Core, Lower Atmosphere, Exosphere / Geocorona, Low Earth Orbit inner
+  edge, Hill Sphere, Terminator. `INFO_MARKER_OFFSET_DEG` = 5 in
+  `gallery/feature_renderers.js` (MODE-5 KNOB): `renderShellSet`'s steps
+  start there, and `renderAtmosphereShell`, used in neither room, moves
+  off the pole by the same amount. `gallery/earth_geometry.js` steps the
+  terminator's marker along its own circle to the nearest drawn point, so
+  it leaves the axis and stays on the line (Tony's 2026-09-09 ruling that
+  it sit ON the line holds). `smoke_sun_shells.js` and
+  `smoke_earth_geometry.js` each gain a check that no marker is within 4
+  degrees of the axis (now 26 and 32 checks). Both fail with the knob at
+  zero, the Earth check fails with the terminator back at its top point,
+  and both pass with the knob at 10. After the patch the closest marker
+  in each room sits at 5.0 degrees. [verified in the sandbox;
+  render-gated]
+- **Note:** RICE 3/2/80/1 -> 4.8 proposed, not confirmed.
+- **CLOSED 2026-09-10 on Tony's Mode 5:** a marker at the top of a
+  zoomed shell reads clear of the axis line -- "desktop and phone are
+  correct". [render-confirmed Mode 5 @ gallery `ffcf1630`] No loose ends:
+  the gallery's steps differing from the orrery's per-shell angles is
+  Tony's ruling, not open work.
+**Gap:** none.
+**Ref:** L-317, L-318, `shell_configs.py` (`info_polar_deg`),
+`orrery_rendering.py` (`build_sphere_shell`),
+`gallery/feature_renderers.js` (`renderShellSet`,
+`INFO_MARKER_OFFSET_DEG`), `gallery/earth_geometry.js` (the terminator),
+`documentation/patch_L320_marker_offset.py` (gallery),
+skills/orrery-coding-conventions/SKILL.md (marker separation).
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
