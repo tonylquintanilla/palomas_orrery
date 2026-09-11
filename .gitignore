@@ -7,7 +7,7 @@ __pycache__/
 *.pkl
 *.csv
 
-# Orbit cache (local desktop data — web-served via separate data repo)
+# Orbit cache (local desktop data -- web-served via separate data repo)
 orbit_paths.json
 orbit_cache/
 
@@ -36,3 +36,10 @@ data/solar-system/
 *.bak
 *.bak[0-9]
 *.bak_*
+
+# Local-only reference papers, never pushed (2026-09-10). This repo is
+# public, and a journal's PDF may not be reposted even when the article
+# is free to read. Keep papers in papers/ beside documentation/; git
+# leaves the folder and everything in it out of every commit. A session
+# that needs a paper gets it uploaded into its chat.
+/papers/
