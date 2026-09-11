@@ -73,7 +73,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 442.2 MB (458 files)
+**Total size:** 442.2 MB (462 files)
 
 **GitHub Pages headroom:** 582 MB remaining of 1024 MB ceiling (43.2% used)
 
@@ -81,15 +81,15 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 259 | 419.3 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-10 |
+| .json | 261 | 419.3 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-11 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 1 | 5.1 MB | palomas_orrery_logo.png (5.1 MB) | 2025-11-27 |
-| .py | 98 | 1.7 MB | gallery_studio.py (243.1 KB) | 2026-09-10 |
-| .md | 15 | 690.2 KB | TEST_PROTOCOL_sun_hang_20260902.md (526.5 KB) | 2026-09-10 |
-| .jsonl | 22 | 434.3 KB | encke.jsonl (20.2 KB) | 2026-09-10 |
-| .html | 5 | 301.8 KB | index.html (156.6 KB) | 2026-09-10 |
+| .py | 100 | 1.7 MB | gallery_studio.py (243.1 KB) | 2026-09-11 |
+| .md | 15 | 689.4 KB | TEST_PROTOCOL_sun_hang_20260902.md (526.5 KB) | 2026-09-11 |
+| .jsonl | 22 | 441.5 KB | encke.jsonl (20.5 KB) | 2026-09-11 |
+| .html | 5 | 310.9 KB | index.html (156.6 KB) | 2026-09-11 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
-| .js | 7 | 123.9 KB | feature_renderers.js (51.9 KB) | 2026-09-10 |
+| .js | 7 | 127.4 KB | feature_renderers.js (53.0 KB) | 2026-09-11 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |
 | .patch | 3 | 11.7 KB | phaseb_studio.patch (7.0 KB) | 2026-07-29 |
 | .txt | 2 | 7.8 KB | requirements.txt (4.2 KB) | 2026-09-04 |
