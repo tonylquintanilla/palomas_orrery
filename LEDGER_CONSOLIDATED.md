@@ -73,6 +73,9 @@ Module updated: September 10, 2026 with Anthropic's Claude Opus 5
 L-317 opened from the same pass and built in the gallery), built on
 08cf822d.
 Module updated: September 10, 2026 with Anthropic's Claude Opus 5
+(L-316 round 2 on Tony's Mode 5: the title stays and the arrow cross
+moves top right; L-317's outlines not yet judged), built on 204d1f5d.
+Module updated: September 10, 2026 with Anthropic's Claude Opus 5
 (L-291 and L-303 closed on Tony's Mode 5; their loose ends re-homed
 to L-311 and L-312, opened here, and to L-237 and L-288; L-310 gains
 Studio's prior art; L-168's title), built on 1ee1cc61.
@@ -323,7 +326,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-299 | A hover that quotes a measured number names its source in the hover | OPEN | 5.1 | 2026-09-07 |
 | ! | L-193 | Qualified verdicts -- the token is not the whole answer | OPEN | 4.8 | 2026-08-15 |
 | ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
-| ! | L-316 | On a portrait phone the arrow cross takes the in-frame title's place | OPEN | 4.8 | 2026-09-10 |
+| ! | L-316 | On a portrait phone the arrow cross moves to the top-right corner | OPEN | 4.8 | 2026-09-10 |
 | ! | L-268 | Sweep: features collapsed out of their own identity | OPEN | 4.5 | 2026-08-30 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-08-25 |
@@ -6460,7 +6463,7 @@ gallery/feature_renderers.js, skills/gallery-cache-builder/SKILL.md.
 **Ref:** L-236, L-305, L-310, `ledger_index.py`, safe-file-editing 1.10
 (Line Endings Are Not Content; Compare Content, Not Bytes).
 
-#### [L-316] On a portrait phone the arrow cross takes the in-frame title's place
+#### [L-316] On a portrait phone the arrow cross moves to the top-right corner
 <!-- L:316 status:OPEN upd:2026-09-10 section:A flag: rice:3/2/80/1 -->
 - **Tony, 2026-09-10, from L-310's Mode 5 (chat, not his hand):**
   "replace the title inside the frame and put the arrow cross there. In
@@ -6499,16 +6502,43 @@ gallery/feature_renderers.js, skills/gallery-cache-builder/SKILL.md.
   arrows on a stub DOM; the rule at five screen sizes; the page's
   inline JS parses; all four smoke tests pass. [render-gated]
 - **Note:** RICE 3/2/80/1 -> 4.8 proposed, not confirmed.
-**Gap:** Tony's Mode 5. Portrait phone, both rooms: no title, the cross
-top-centre, Home still works; rotate to landscape and back and both
-follow. Desktop: title and cross exactly as before -- this also covers
-L-310's desktop check. Then, at interactive-exhibit's next bump, its nav
-cluster row names the arrows (L-310) and the portrait placement (this
-item).
+- **Round 1 on the phone, 2026-09-10 (screenshot, the Earth room zoomed
+  to the inner core).** As built: no title, the cross top-centre, + and
+  - top-left, clear of the drawer handle and the grid chip.
+  [render-confirmed Mode 5 @ gallery `893261db`] But the outer core's
+  info marker -- the one L-317 had just outlined in white -- was nowhere
+  in the frame; by where its dots sat, it was under the cross. That is
+  the trade-off offered before the ruling, now seen: a shell's marker
+  sits at the top of the shell, so whichever shell nearly fills the view
+  puts its marker at the top centre. Tony: "could we move the arrow cross
+  to the right, restore the title. this would help to see the hovertext
+  markers more clearly."
+- **Round 2, built 2026-09-10** by `patch_L316_2_cross_right.py` in the
+  gallery. The in-frame title is back on every screen, its layout line
+  restored exactly. On a portrait phone -- 768 px wide or less, where the
+  page's @media rule hides the mode bar that holds the top-right corner
+  everywhere else -- the cross moves to a top-right holder, and rotating
+  moves it back. `crossTop(on)` is renamed `crossRight(on)`,
+  `sunCrossOnTop` is now `sunCrossRight`, and `sunSceneTitle` is gone.
+  Desktop, landscape and the Explorer are unchanged. Round 1's date fix
+  in `EARTH_INFO_HTML` stays: the title never carried a date. From the
+  title's width in the round-1 screenshot (a 440-px-wide phone), the
+  cross's up arrow should clear the title by about 40 px there and by
+  roughly 7 to 14 px on a 393-px-wide phone, the Sun's title being the
+  longer. [estimate; render-gated] Sandbox: the move, hide/show and a
+  page without arrows on a stub DOM; the rule at five screen sizes; the
+  page's inline JS parses; all four smoke tests pass.
+**Gap:** Tony's Mode 5, round 2. Portrait phone, both rooms: the title
+is back, the cross sits top right clear of it, and the marker at the top
+of a zoomed shell is visible; rotate to landscape and back and the cross
+follows. Desktop: unchanged -- this also covers L-310's desktop check.
+Then, at interactive-exhibit's next bump, its nav cluster row names the
+arrows (L-310) and the portrait placement (this item).
 **Ref:** L-310, L-313 (recentering may add a control to the cluster),
-L-267, L-289, L-317, `gallery/nav_cluster.js`, interactive.html
-(`sunCrossOnTop`, `navPlaceCross`, `EARTH_INFO_HTML`),
-`documentation/patch_L316_cross_and_borders.py` (gallery).
+L-267, L-289, L-317, `gallery/nav_cluster.js` (`crossRight`),
+interactive.html (`sunCrossRight`, `navPlaceCross`, `EARTH_INFO_HTML`),
+`documentation/patch_L316_cross_and_borders.py` and
+`documentation/patch_L316_2_cross_right.py` (gallery).
 
 #### [L-317] The interactive's info markers lacked the orrery's two-standards outline
 <!-- L:317 status:OPEN upd:2026-09-10 section:A flag: rice:4/2/80/1 -->
@@ -6572,6 +6602,9 @@ L-267, L-289, L-317, `gallery/nav_cluster.js`, interactive.html
   6, white border, opacity 0.9). The first build here missed it the same
   way.
 - **Note:** RICE 4/2/80/1 -> 6.4 proposed, not confirmed.
+- **Round 1 on the phone, 2026-09-10: not judged.** The one
+  white-outlined marker in that view, the outer core's, sat under the
+  top-centre arrow cross (L-316). L-316's round 2 moves the cross off it.
 **Gap:** (1) Tony's Mode 5 on the phone, both rooms: the white outlines
 read on the warm shells, and nothing else changed. (2) At
 orrery-coding-conventions' next bump: the two-standards rule, and the
