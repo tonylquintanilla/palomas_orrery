@@ -188,7 +188,6 @@ further down this file for the rest.
 | [requirements.txt](requirements.txt) | hand-written | Annotated dependency spec, including the kaleido 0.2.1 pin and the Plotly 5.x constraint. |
 | [RUNNING_A_PATCH_FILE.md](RUNNING_A_PATCH_FILE.md) | hand-written | How to run a delivered patch script, and what its guards mean. |
 | [DATA_INVENTORY.md](DATA_INVENTORY.md) | **untagged** | _no Doc-Kind tag; add one to describe it here_ |
-| [L-305_amendment_20260910.md](L-305_amendment_20260910.md) | **untagged** | _no Doc-Kind tag; add one to describe it here_ |
 | [MODULE_ATLAS.md](MODULE_ATLAS.md) | **untagged** | _no Doc-Kind tag; add one to describe it here_ |
 | [MODULE_INDEX.md](MODULE_INDEX.md) | **untagged** | _no Doc-Kind tag; add one to describe it here_ |
 | [PROVENANCE_AUDIT.md](PROVENANCE_AUDIT.md) | **untagged** | _no Doc-Kind tag; add one to describe it here_ |

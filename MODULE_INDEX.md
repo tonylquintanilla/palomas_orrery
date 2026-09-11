@@ -10,26 +10,22 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 132  
-**Total Lines of Code (non-blank):** 105,431  
-**Total Public Functions/Classes:** 1,180
+**Total Python Files:** 130  
+**Total Lines of Code (non-blank):** 105,001  
+**Total Public Functions/Classes:** 1,178
 
 ## Classification Coverage
 
-**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L305_2_citation.py`
-- `patch_L305_amendment.py`
-- `patch_L305_brief.py`
+- `patch_L316_ledger_borders.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (3).** No valid `Domain:` tag.
+**Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L305_2_citation.py`
-- `patch_L305_amendment.py`
-- `patch_L305_brief.py`
+- `patch_L316_ledger_borders.py`
 
 
 ---
@@ -234,9 +230,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L305_2_citation.py` | - L-305: the paper's fetched reference and access point. (45 lines) |
-| `patch_L305_amendment.py` | - L-305 amended with the Jelinek 2012 read and Tony's Shue/Jelinek ruling; L-314 (live solar wind) and L-315 (a patch method finding) opened. Replaces patch_L305_brief.py, patch_L305_2_citation.py and the paste steps in L-305_amendment_20260910.md. Do not run those. (588 lines) |
-| `patch_L305_brief.py` | - L-305: the brief for the paper-read session. (87 lines) |
+| `patch_L316_ledger_borders.py` | - L-310 closed on Tony's Mode 5; L-316 and L-317 opened from the same pass. Replaces patch_L316_ledger.py, which must not be run: its L-317 recorded the wrong fix. (290 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

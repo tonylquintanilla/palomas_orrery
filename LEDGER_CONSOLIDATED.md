@@ -69,6 +69,10 @@ Module updated: September 10, 2026 with Anthropic's Claude Opus 5
 ruling, corrected where it could not land as written; L-314 and L-315
 opened; L-310's gallery push recorded), built on 5fea1795.
 Module updated: September 10, 2026 with Anthropic's Claude Opus 5
+(L-310 closed on Tony's Mode 5, its loose ends re-homed; L-316 and
+L-317 opened from the same pass and built in the gallery), built on
+08cf822d.
+Module updated: September 10, 2026 with Anthropic's Claude Opus 5
 (L-291 and L-303 closed on Tony's Mode 5; their loose ends re-homed
 to L-311 and L-312, opened here, and to L-237 and L-288; L-310 gains
 Studio's prior art; L-168's title), built on 1ee1cc61.
@@ -289,7 +293,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*187 live items; 172 need attention (`!`); 186 RICE-scored; 123 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*188 live items; 173 need attention (`!`); 187 RICE-scored; 124 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -309,6 +313,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-300 | sweep_collapsed_features.py joins the gallery maintenance runner as a gating checker | OPEN | 8.1 | 2026-09-07 |
 | ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-21 |
 | ! | L-249 | The Earth slice of L-181: interior boundaries as sourced constants | OPEN | 7.2 | 2026-08-25 |
+| ! | L-317 | The interactive's info markers lacked the orrery's two-standards outline | OPEN | 6.4 | 2026-09-10 |
 | ! | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | OPEN | 6.0 | 2026-08-25 |
 | ! | L-269 | A report names its items, not how many there are | OPEN | 6.0 | 2026-08-30 |
 | ! | L-245 | Constants drift check compares against the last COMMIT, not the last RUN | OPEN | 5.4 | 2026-08-25 |
@@ -318,6 +323,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-299 | A hover that quotes a measured number names its source in the hover | OPEN | 5.1 | 2026-09-07 |
 | ! | L-193 | Qualified verdicts -- the token is not the whole answer | OPEN | 4.8 | 2026-08-15 |
 | ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
+| ! | L-316 | On a portrait phone the arrow cross takes the in-frame title's place | OPEN | 4.8 | 2026-09-10 |
 | ! | L-268 | Sweep: features collapsed out of their own identity | OPEN | 4.5 | 2026-08-30 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-08-25 |
@@ -352,7 +358,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-288 | Gallery Studio creates and edits live-scene cards | OPEN | 3.1 | 2026-09-10 |
 | ! | L-294 | The Explorer room's placeholder, and Earth's heliocentric view | OPEN | 3.1 | 2026-09-06 |
 | ! | L-307 | Export-age reporting for the static cards that are not migrating | OPEN | 3.1 | 2026-09-08 |
-| ! | L-310 | Finer camera control in the exhibit rooms: directional step buttons on the nav cluster | OPEN | 3.1 | 2026-09-10 |
 | ! | L-254 | 76 dead sphere-shell builders, unmarked, across 12 modules | OPEN | 2.8 | 2026-09-02 |
 | ! | L-240 | Split declared drawing parameters from measured values | OPEN | 2.8 | 2026-08-25 |
 | ! | L-176 | Shell hover text: add illustrated dimensions (radius_fraction -> km) | OPEN | 2.8 | 2026-08-04 |
@@ -613,6 +618,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-127 | module_atlas.py generates MODULE_INDEX.md too -- single source, eliminate divergence | DONE | 3.2 | 2026-07-28 |
 |  | L-236 | Gallery maintenance runner | DONE | 3.2 | 2026-08-29 |
 |  | L-188 | Maintenance runner -- one command, the whole suite | DONE | 3.1 | 2026-08-12 |
+|  | L-310 | Finer camera control in the exhibit rooms: directional step buttons on the nav cluster | DONE | 3.1 | 2026-09-10 |
 |  | L-069 | Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan) | DONE | 2.8 | 2026-06-24 |
 |  | L-109 | Fable 5 adversarial review remediation (builder Pass 1+2) | DONE | 2.8 | 2026-07-10 |
 |  | L-112 | Gallery builder Pass 5: two-reviewer Pass-2 remediation | DONE | 2.8 | 2026-07-10 |
@@ -6296,82 +6302,6 @@ redesign.
 **Ref:** L-291, L-267 (where the chrome came from), interactive.html
 (`EXHIBITS`, `EX`), `tools/json_converter.py::live_scene_urls`.
 
-#### [L-310] Finer camera control in the exhibit rooms: directional step buttons on the nav cluster
-<!-- L:310 status:OPEN upd:2026-09-10 section:A flag: rice:3/3/70/2 -->
-- **Tony, 2026-09-09, Mode 5 of the Earth room:** "the mouse control is
-  rough for details. can we activate finer control? there is the
-  directional control buttons as an option."
-- **What is true of the mechanism.** Plotly's 3D camera drag has no
-  sensitivity setting; a small feature at Earth's scale moves out of
-  view in one twitch. The nav cluster (L-267 step 7, `nav_cluster.js`)
-  already steps the FRAME with +/- through `Plotly.relayout`; a camera
-  step is the same move on `scene.camera.eye`, rotated about the up
-  vector (yaw) or the eye's horizontal (pitch) by a fixed angle.
-- **Design questions for the round, not settled here:** step size (5
-  degrees? 15?), whether the buttons appear in both rooms and the
-  Explorer (the cluster is shared, L-267), touch layout on a portrait
-  phone beside the drawer handle, and whether a long press repeats.
-  Shared chrome: a design round first, zero code, then one patch.
-- **Tony, 2026-09-10 (from chat, not his hand), confirming this as the
-  next track:** "note that the studio already has directional button
-  option: navigation controls/pan zoom arrows."
-- **What that option does, read at gallery `57fd93c6`.** Studio's
-  Navigation Controls section, "Show pan/zoom arrows"
-  (`show_nav_arrows`), embeds buttons in the HTML that Studio
-  EXPORTS. A 2D chart gets a full D-pad whose arrows shift the axis
-  ranges, plus zoom and reset. On a polar chart, left and right rotate
-  the angular axis 15 degrees a press. A 3D scene gets reset and zoom
-  ONLY, and Studio's own comment and tooltip give the reason: the
-  directional arrows had no detectable effect in 3D, and the D-pad
-  blocked the animation slider. So the prior art is real, and its 3D
-  half was tried and withdrawn. A 3D step has to move
-  `scene.camera.eye` (the bullet above), not the ranges; the polar
-  rotation is the nearer model.
-- **Three control sets exist, one per kind of page.** HTML exported by
-  Studio carries Studio's; the gallery viewer, `index.html`, draws its
-  own inline cluster; the exhibit rooms use `gallery/nav_cluster.js`.
-  A camera step designed here lands in the cluster. L-285 already
-  records moving `index.html` onto the cluster.
-- **Design round, 2026-09-10, on the phone, and the ruling.** Tony:
-  coarse sweep and rotation are not the need; the hand and the mouse
-  give those. "In full zoom both sweep and rotate are hard to control
-  precisely. It's like moving a telescope on full magnification by
-  hand." So: no hold-to-repeat, and no fixed angle. The step SCALES
-  WITH MAGNIFICATION. A tap turns the camera by a base angle (5
-  degrees, a Mode 5 knob) times the ratio of the live eye distance to
-  the arrival eye distance, so a wheel-dollied view gets a
-  proportionally smaller step and a tap always moves about the same
-  slice of the screen -- the slow-motion knob. Frame zoom (+/-) does
-  not change the eye distance, and a fixed angle already sweeps a
-  fixed slice there, so the two zooms compose.
-- **Settled with it.** Left/right yaw about the up vector; up/down
-  pitch about the eye's horizontal, refused within 2 degrees of the
-  poles. Arrows draw only where the page passes step handlers, so a
-  2D page later gets the three buttons unchanged (the L-285 lesson:
-  one button, one meaning). Layout is a cross with Home at the centre,
-  under + and -. The step reads the live camera through
-  `sunLiveCamera` (L-289), so it is right after a touch rotation. The
-  sign convention and the base angle are Mode 5 knobs
-  (`NAV_STEP_SIGN`, `NAV_STEP_BASE_DEG`).
-- **Recentering was raised and split off.** Rotation orbits the scene
-  centre, so an off-centre feature swings out of view however fine
-  the step; the orrery already has a recenter for its comet-detail
-  views. Tony: capture it as its own item. L-313.
-- **Built 2026-09-10** by `patch_L310_camera_step.py` in the gallery
-  repo (`gallery/nav_cluster.js`, `interactive.html`) against gallery
-  `57fd93c6`; syntax-checked and the cluster's two layouts exercised on
-  a stub DOM in the sandbox. [render-gated]
-- **Pushed 2026-09-10** in the gallery at `4506fb48`: `navCameraStep`
-  and the step handlers are present there and absent at `57fd93c6`.
-  [verified @4506fb48]
-**Gap:** Tony's Mode 5, phone and desktop, on the Earth room at full
-zoom: the step feels right at high magnification, the arrow signs feel
-right, and the cross clears the drawer handle and the title on a
-portrait phone. Then DONE.
-**Ref:** L-267 (nav cluster), L-289 (frame HUD, whose triad shows the
-result of any camera move), L-291, `gallery/nav_cluster.js`,
-interactive.html (`navHome`, `sunFrameOn`).
-
 #### [L-313] Recenter the camera on a chosen feature in the exhibit rooms
 <!-- L:313 status:OPEN upd:2026-09-10 section:A flag: rice:3/3/60/3 -->
 - **Opened 2026-09-10, split from L-310's design round.** A camera
@@ -6529,6 +6459,129 @@ gallery/feature_renderers.js, skills/gallery-cache-builder/SKILL.md.
 `ledger_index.py` preserving line endings, in the same session.
 **Ref:** L-236, L-305, L-310, `ledger_index.py`, safe-file-editing 1.10
 (Line Endings Are Not Content; Compare Content, Not Bytes).
+
+#### [L-316] On a portrait phone the arrow cross takes the in-frame title's place
+<!-- L:316 status:OPEN upd:2026-09-10 section:A flag: rice:3/2/80/1 -->
+- **Tony, 2026-09-10, from L-310's Mode 5 (chat, not his hand):**
+  "replace the title inside the frame and put the arrow cross there. In
+  this image the card title 'Earth' is sufficient." Offered the top-right
+  corner as the alternative -- the top middle is where a zoomed object's
+  top edge lands, and in his screenshot the down arrow would sit near the
+  inner core's pole marker -- he chose **top-centre, where the title
+  was**.
+- **The rule as built.** A portrait phone is `innerHeight > innerWidth`
+  with `innerWidth <= 768`, the width at which the page draws no Plotly
+  mode bar, so no download button is left saving an image without its
+  label. There, in the Sun and Earth rooms, the in-frame title is left
+  empty and the cross, Home with it, moves to a top-centre holder; + and
+  - stay top-left. Rotating redoes both (`onSunResize`). Desktop,
+  landscape, a portrait tablet wider than 768 px and the Explorer are
+  unchanged; the Explorer's title carries the scene date. The Sun room
+  is included because the rooms share the chrome and its title repeats
+  its header the same way.
+- **Found building it: Earth's panel pointed at a date that was never
+  there.** `EARTH_INFO_HTML` said "This scene is one moment -- the date
+  in the title." The Earth title never carried a date; only the
+  Explorer's does. The date is in two hovers, the Sun Direction's and
+  the terminator's. The sentence now points at the Sun Direction's
+  hover. [verified @ gallery `6897c793`] Whether the date should also
+  have a visible place in the frame is open. **Tony-action (decide):**
+  not urgent.
+- **Built 2026-09-10** by `patch_L316_cross_and_borders.py` in the
+  gallery, with L-317. `gallery/nav_cluster.js` gains `crossTop(on)`,
+  which moves the cross element into a `.nav-cross-top` holder or back
+  as the cluster's last child, so the corner layout that passed L-310's
+  Mode 5 is unchanged. interactive.html gains `sunCrossOnTop`,
+  `sunSceneTitle` and `navPlaceCross`. The same patch adds the missing
+  September 9 header line (L-291 step 3; `patch_L291_9` and
+  `patch_L291_11` both credit Claude Opus 5) and normalises the page's
+  32 non-ASCII bytes. Sandbox: the move, hide/show and a page without
+  arrows on a stub DOM; the rule at five screen sizes; the page's
+  inline JS parses; all four smoke tests pass. [render-gated]
+- **Note:** RICE 3/2/80/1 -> 4.8 proposed, not confirmed.
+**Gap:** Tony's Mode 5. Portrait phone, both rooms: no title, the cross
+top-centre, Home still works; rotate to landscape and back and both
+follow. Desktop: title and cross exactly as before -- this also covers
+L-310's desktop check. Then, at interactive-exhibit's next bump, its nav
+cluster row names the arrows (L-310) and the portrait placement (this
+item).
+**Ref:** L-310, L-313 (recentering may add a control to the cluster),
+L-267, L-289, L-317, `gallery/nav_cluster.js`, interactive.html
+(`sunCrossOnTop`, `navPlaceCross`, `EARTH_INFO_HTML`),
+`documentation/patch_L316_cross_and_borders.py` (gallery).
+
+#### [L-317] The interactive's info markers lacked the orrery's two-standards outline
+<!-- L:317 status:OPEN upd:2026-09-10 section:A flag: rice:4/2/80/1 -->
+- **Tony, 2026-09-10, from L-310's Mode 5 (chat, not his hand):** "make
+  the hovertext marker cross more prominent. They get buried in the
+  shell dot patterns."
+- **A first build went the wrong way and was withdrawn.** It filled every
+  gallery marker white at size 14 and recorded the desktop orrery as
+  having the same problem. Tony: "on the orrery side we already have
+  solutions. It was the interactive that did not have them." Asked about
+  the inner core: "There are different borders depending on the
+  predominant hue. White for darks and red for brights."
+- **The orrery's solution, read at `08cf822d`.** Tony's two-standards
+  rule (Mode 5, 2026-05-28/29;
+  `documentation/HANDOFF_shell_consolidation_stage_3_v15.md`): the cross
+  keeps its shell's colour at size 8, and the outline is red, except
+  WHITE on saturated warm fills -- the oranges, the pink-reds, the dense
+  reds -- where red is lost. The pale peach and golden ends of that ramp
+  revert to red, because white is lost there instead; Earth's inner core,
+  rgb(255, 180, 140), is that peach and was reverted in the same round.
+  Judged per shell by eye, "NOT an RGB threshold", so it is declared per
+  shell: 18 `info_border: 'white'` sites in `shell_configs.py`, and set
+  by hand where a builder is not config-driven, Earth's inner radiation
+  belt among them (`earth_visualization_shells.py`).
+  `orrery_rendering.create_info_marker` takes `border_color`, default
+  red. [verified @ `08cf822d`]
+- **What the interactive lacked.** Its served rows carry the orrery's
+  shell colours exactly, but not the outline flags, and its marker
+  builder always drew red. So in the two rooms the Roche limit, the outer
+  core, both mantles and the inner belt had red crosses on red and orange
+  dots.
+- **Built 2026-09-10** by `patch_L316_cross_and_borders.py` in the
+  gallery, with L-316. `data/objects_config.json`: `info_border: "white"`
+  on the four flagged shells these rooms draw (Sun: Roche Limit; Earth:
+  Outer Core, Lower Mantle, Upper Mantle) and `info_borders: ["white",
+  "red"]` on Earth's belt pair; the patch refuses to write unless the
+  edited config carries exactly that roster. `gallery/feature_renderers.js`:
+  `infoMarker()` takes the served outline, red when absent -- the orrery
+  factory's shape -- and every renderer that draws from a served row
+  passes it. `gallery/earth_geometry.js` is untouched: its axis, Sun,
+  terminator and Moon markers are not shells and stay red.
+  `documentation/smoke_sun_shells.js` and `smoke_earth_geometry.js` each
+  gain one check against the LIVE config (now 25 and 31): exactly the
+  flagged markers are white. Both were made to fail -- a flag dropped, a
+  flag added, the belt pair swapped, the renderer ignoring the flag. The
+  cache builder's suite passes 167 of 167 on the edited config.
+  [verified in the sandbox; render-gated]
+- **Two things this does not do, named.** The inner core in Tony's
+  screenshot keeps its red outline, as in the orrery; correct under the
+  rule, and if it still reads as buried on the phone that is a new Mode 5
+  call, not this port. And nothing checks that the gallery's roster keeps
+  matching `shell_configs.py`: the live store-drift run follows constants,
+  not declared drawing choices, and the colours already have that
+  exposure. The roster is pinned in the patch and the two smoke checks as
+  of orrery `08cf822d`.
+- **Why the interactive missed it.** The rule lives in the orrery's code
+  comments, `shell_configs.py` and a May handoff. orrery-coding-conventions
+  -- the skill a session loads for markers -- never states it, and its
+  Single Info Marker Pattern example still shows the style
+  `create_info_marker`'s docstring records as retired in May 2026 (size
+  6, white border, opacity 0.9). The first build here missed it the same
+  way.
+- **Note:** RICE 4/2/80/1 -> 6.4 proposed, not confirmed.
+**Gap:** (1) Tony's Mode 5 on the phone, both rooms: the white outlines
+read on the warm shells, and nothing else changed. (2) At
+orrery-coding-conventions' next bump: the two-standards rule, and the
+example corrected to `create_info_marker`.
+**Ref:** L-310, L-316, `data/objects_config.json` and
+`gallery/feature_renderers.js` (gallery), `shell_configs.py`,
+`orrery_rendering.py` (`create_info_marker`),
+`documentation/HANDOFF_shell_consolidation_stage_3_v15.md` and
+`documentation/border_refinement_test_protocol.md` (orrery),
+skills/orrery-coding-conventions/SKILL.md.
 
 #### [L-278] A relayout from inside a Plotly event handler re-enters the update machinery
 <!-- L:278 status:OPEN upd:2026-09-02 section:A flag: rice:3/3/90/1 -->
@@ -12719,6 +12772,99 @@ atmosphere finding), L-249 (the interior constants conversion), L-289
 **Ref:** L-287, L-301, L-286, L-307, L-308, `tools/json_converter.py`,
 `tools/gallery_editor.py`, `tools/sweep_report.py`, index.html,
 `documentation/patch_L303_1_cards_per_orientation.py` (gallery).
+
+#### [L-310] Finer camera control in the exhibit rooms: directional step buttons on the nav cluster
+<!-- L:310 status:DONE upd:2026-09-10 section:C flag: rice:3/3/70/2 -->
+- **Tony, 2026-09-09, Mode 5 of the Earth room:** "the mouse control is
+  rough for details. can we activate finer control? there is the
+  directional control buttons as an option."
+- **What is true of the mechanism.** Plotly's 3D camera drag has no
+  sensitivity setting; a small feature at Earth's scale moves out of
+  view in one twitch. The nav cluster (L-267 step 7, `nav_cluster.js`)
+  already steps the FRAME with +/- through `Plotly.relayout`; a camera
+  step is the same move on `scene.camera.eye`, rotated about the up
+  vector (yaw) or the eye's horizontal (pitch) by a fixed angle.
+- **Design questions for the round, not settled here:** step size (5
+  degrees? 15?), whether the buttons appear in both rooms and the
+  Explorer (the cluster is shared, L-267), touch layout on a portrait
+  phone beside the drawer handle, and whether a long press repeats.
+  Shared chrome: a design round first, zero code, then one patch.
+- **Tony, 2026-09-10 (from chat, not his hand), confirming this as the
+  next track:** "note that the studio already has directional button
+  option: navigation controls/pan zoom arrows."
+- **What that option does, read at gallery `57fd93c6`.** Studio's
+  Navigation Controls section, "Show pan/zoom arrows"
+  (`show_nav_arrows`), embeds buttons in the HTML that Studio
+  EXPORTS. A 2D chart gets a full D-pad whose arrows shift the axis
+  ranges, plus zoom and reset. On a polar chart, left and right rotate
+  the angular axis 15 degrees a press. A 3D scene gets reset and zoom
+  ONLY, and Studio's own comment and tooltip give the reason: the
+  directional arrows had no detectable effect in 3D, and the D-pad
+  blocked the animation slider. So the prior art is real, and its 3D
+  half was tried and withdrawn. A 3D step has to move
+  `scene.camera.eye` (the bullet above), not the ranges; the polar
+  rotation is the nearer model.
+- **Three control sets exist, one per kind of page.** HTML exported by
+  Studio carries Studio's; the gallery viewer, `index.html`, draws its
+  own inline cluster; the exhibit rooms use `gallery/nav_cluster.js`.
+  A camera step designed here lands in the cluster. L-285 already
+  records moving `index.html` onto the cluster.
+- **Design round, 2026-09-10, on the phone, and the ruling.** Tony:
+  coarse sweep and rotation are not the need; the hand and the mouse
+  give those. "In full zoom both sweep and rotate are hard to control
+  precisely. It's like moving a telescope on full magnification by
+  hand." So: no hold-to-repeat, and no fixed angle. The step SCALES
+  WITH MAGNIFICATION. A tap turns the camera by a base angle (5
+  degrees, a Mode 5 knob) times the ratio of the live eye distance to
+  the arrival eye distance, so a wheel-dollied view gets a
+  proportionally smaller step and a tap always moves about the same
+  slice of the screen -- the slow-motion knob. Frame zoom (+/-) does
+  not change the eye distance, and a fixed angle already sweeps a
+  fixed slice there, so the two zooms compose.
+- **Settled with it.** Left/right yaw about the up vector; up/down
+  pitch about the eye's horizontal, refused within 2 degrees of the
+  poles. Arrows draw only where the page passes step handlers, so a
+  2D page later gets the three buttons unchanged (the L-285 lesson:
+  one button, one meaning). Layout is a cross with Home at the centre,
+  under + and -. The step reads the live camera through
+  `sunLiveCamera` (L-289), so it is right after a touch rotation. The
+  sign convention and the base angle are Mode 5 knobs
+  (`NAV_STEP_SIGN`, `NAV_STEP_BASE_DEG`).
+- **Recentering was raised and split off.** Rotation orbits the scene
+  centre, so an off-centre feature swings out of view however fine
+  the step; the orrery already has a recenter for its comet-detail
+  views. Tony: capture it as its own item. L-313.
+- **Built 2026-09-10** by `patch_L310_camera_step.py` in the gallery
+  repo (`gallery/nav_cluster.js`, `interactive.html`) against gallery
+  `57fd93c6`; syntax-checked and the cluster's two layouts exercised on
+  a stub DOM in the sandbox. [render-gated]
+- **Pushed 2026-09-10** in the gallery at `4506fb48`: `navCameraStep`
+  and the step handlers are present there and absent at `57fd93c6`.
+  [verified @4506fb48]
+- **CLOSED 2026-09-10 on Tony's Mode 5.** Phone, the Earth room at full
+  zoom, the three checks as asked: a tap moves a comfortable amount
+  zoomed in, left and right turn the expected way, and the cross clears
+  the drawer handle and the title. Tony: "all correct" (his screenshot
+  of the Earth room's inner core, 2026-09-10). [render-confirmed Mode 5
+  @ gallery `6897c793`] Desktop was not separately reported; it rides
+  L-316's Mode 5, which checks that desktop is unchanged.
+- **Loose ends re-homed before closing** (ledger-and-session-records
+  1.11). The two suggestions from the same pass -> L-316 (the cross
+  takes the in-frame title's place on a portrait phone) and L-317 (the
+  interactive's markers lacked the orrery's two-standards outline).
+  interactive.html's missing September 9 header line, found in passing
+  by this item's handoff -> fixed by `patch_L316_cross_and_borders.py`
+  from the archived L-291
+  patches. interactive-exhibit's nav cluster row still names + / - /
+  Home only -> L-316's Gap, at that skill's next bump. The step knobs
+  (`NAV_STEP_BASE_DEG` 5, `NAV_STEP_SIGN` +1,
+  `NAV_STEP_POLE_MARGIN_DEG` 2) stay as built -- struck, the pass needed
+  no change [verified @ gallery `6897c793`]. Recentering stays L-313.
+**Gap:** none.
+**Ref:** L-267 (nav cluster), L-289 (frame HUD, whose triad shows the
+result of any camera move), L-291, L-313, L-316, L-317,
+`gallery/nav_cluster.js`, interactive.html (`navHome`, `sunFrameOn`),
+`documentation/HANDOFF_L310_camera_step_20260910.md` (orrery).
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
