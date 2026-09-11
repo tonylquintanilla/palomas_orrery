@@ -805,7 +805,12 @@ def main():
         cut = sep + len('\n---\n') if sep != -1 else len(text)
         new = text[:cut] + '\n' + index + '\n' + text[cut:]
 
-    with open(path, 'w', encoding='utf-8') as f:
+    # L-315: LF enforced, matching skills_index.py, which has done this
+    # since it was written. Plain text mode writes the platform default, so
+    # on Windows this rewrote the whole ledger to CRLF -- a file-sized diff
+    # carrying no change, and a raw-byte guard in the next patch that could
+    # not pass. newline='' preserves the '\n' the code already holds.
+    with open(path, 'w', encoding='utf-8', newline='') as f:
         f.write(new)
 
     # Final problem count reflects post-migration state (auto-fixed placement

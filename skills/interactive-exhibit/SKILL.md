@@ -6,11 +6,16 @@ fires_when: adding or changing an exhibit in interactive.html; any edit to the S
 
 # Interactive Exhibit
 
-Skill version: 1.1 | Cut from gallery @ 57fd93c6 (interactive.html,
-index.html, tools/json_converter.py, tools/gallery_studio.py,
-tools/gallery_editor.py) and orrery @ 1ee1cc61 (LEDGER_CONSOLIDATED.md
-L-291, L-303, L-309) | 2026-09-10, with Anthropic's Claude Opus 5
-v1.1 (L-291) corrects what Earth step 3 made untrue and adds what its
+Skill version: 1.2 | Cut from gallery @ 9c056d1a (interactive.html,
+gallery/nav_cluster.js, gallery/feature_renderers.js) and orrery @
+1fa413d9 (LEDGER_CONSOLIDATED.md L-310, L-316, L-317, L-318, L-320)
+| 2026-09-11, with Anthropic's Claude Opus 5
+v1.2 (L-316, L-318) records what the chrome gained after Tony's phone:
+the nav cluster's four arrow buttons and their portrait placement, the
+drawer label, and two Plotly rules the build found by reading v2.35.2's
+source rather than recalling it -- a scene relayout carries the live
+camera, and a hover box keeps its pointer only when it fits to one side.
+Earlier: v1.1 (L-291) corrects what Earth step 3 made untrue and adds what its
 close taught about carding. The page picks a room from an `EXHIBITS`
 table now, not an `EXHIBIT === "<key>"` branch, and four places still
 said branch: the anatomy's switch and class rows, step 3, and step
@@ -60,8 +65,8 @@ the new exhibit brings its own.
 | Feature handoff: `GalleryFeatures.buildFeatureTraces(features, positions, {sceneHalfRangeAu})`; anything larger than the frame goes to the drawer, not dropped | feature_renderers.js | shared |
 | Arrival frame: measure every trace once (`sunTraceExtentAu`), half-range = 1.1 x the largest visible, floored at the body's constant (`SUN_HALF_RANGE_AU` 0.25) | initSunExhibit | mechanism shared; the floor and what is visible on arrival are per-body rulings |
 | Layout builder: aspect 1:1:1 unless the body's physics says otherwise (the Sun's shells are spheres); axes state their unit; `tick0` 0 and `dtick` from `sunGridDtick(span)` | `buildSunLayout()` | per-body values, shared rules |
-| Drawer replacing the legend: rows from `legendgroup`, `legendonly` hides, All / none, focus row | `buildSunDrawer`, `sunApplyVisibility`, `sunFocusOn` | shared |
-| Nav cluster: + / - / Home = FRAME zoom (range and dtick change together; the grid re-labels) | gallery/nav_cluster.js, `navFrameZoom`, `navHome` | shared |
+| Drawer replacing the legend: rows from `legendgroup`, `legendonly` hides, All / none, focus row; naming a DRAWN shell also opens its hover text as a scene annotation pinned to its info marker, closed by a tap in the scene or by unticking (L-318) | `buildSunDrawer`, `sunApplyVisibility`, `sunFocusOn`, `sunLabelShow`, `sunLabelInstall` | shared |
+| Nav cluster: + / - / Home = FRAME zoom (range and dtick change together; the grid re-labels), plus four arrow buttons that turn the camera by a step scaled to the live eye distance, so a tap moves the same slice of screen at any zoom (L-310); on a portrait phone 768 px or narrower the arrow cross moves to the top-right corner, which the hidden mode bar leaves free, and the in-frame title stays (L-316) | gallery/nav_cluster.js (`crossRight`), `navFrameZoom`, `navHome`, `navCameraStep`, `sunCrossRight`, `navPlaceCross` | shared |
 | Click deferral: `plotly_click` -> `setTimeout(0)` -> focus | initSunExhibit | shared, CRITICAL (L-278) |
 | i-panel follows the focus; curated link per feature stamped into trace `meta` by `stampLink` | `renderSunInfo`, feature_renderers.js | shared mechanism; per-body copy and links |
 | Frame HUD: camera-following triad, Aries glyph with the frame note and its source, grid chip | `sunHud*` | shared; reads the camera, never calls Plotly |
@@ -162,9 +167,11 @@ Standing convention inherited from the orrery (orrery-coding-conventions).
 ### Phone first, and the conditions are stated [QUALITY]
 Mode 5 runs portrait on Tony's phone before desktop. Sequence: arrival
 frame (what is in view, grid = chip); rotate (triad follows; nothing
-floats); + / - / Home (grid re-labels, chip follows); drawer (a hidden
-shell draws and the view rescales to hold it); a shell tap (focus,
-i-panel, link); the HUD note (hover on desktop, tap on phone); Gallery
+floats); + / - / Home and the four arrows (grid re-labels, chip follows;
+a tap turns the same slice of screen at any zoom); drawer (a hidden
+shell draws and the view rescales to hold it); a shell NAME (focus, the
+i-panel, and the label pinned to that shell's marker); a shell tap
+(focus, i-panel, link); the HUD note (hover on desktop, tap on phone); Gallery
 button then browser back; then landscape; then desktop. Report each
 trial with its conditions -- device, orientation, arrival or after
 which action -- per gallery-assembler's Mode 5 as Measurement. A
@@ -178,6 +185,22 @@ follows the camera reads it directly (`scene._scene.getCamera()`) once
 per frame. Touch has no hover; anything that opens on hover opens on
 tap and closes on a tap elsewhere. A `hidden` attribute loses to a more
 specific display rule; write the hidden rule at least as specific.
+
+**A scene relayout must carry the live camera.** A 3D replot re-applies
+the camera stored in the layout (`gl3d/scene.js`, `setViewport`), and a
+touch rotation never updates that stored copy. So any `Plotly.relayout`
+touching the scene -- opening a label, changing margins -- sends
+`scene.camera`, read live, alongside whatever it came to change.
+Otherwise the view snaps back to wherever the last mouse event left it.
+(L-318, read from plotly.js v2.35.2.)
+
+**A hover box keeps its pointer only when it fits to one side.** Plotly
+puts the label to the right of its point if it fits, else to the left if
+it fits, else centres it OVER the point with no pointer at all and nudges
+it back on screen (`fx/hover.js`). So a wide hover string on a narrow
+phone loses the line tying it to its marker, and whether it does depends
+on where the marker sits, not on how much room there is. Wrap narrower,
+or pin a scene annotation, which always points. (L-318.)
 
 ## Adding an exhibit: the order
 

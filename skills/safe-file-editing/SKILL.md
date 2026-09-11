@@ -6,11 +6,16 @@ fires_when: Editing existing files, patch scripts, sed/regex edits, encoding che
 
 # Safe File Editing
 
-Skill version: 1.10 | Cut from palomas_orrery @ ccd1ac96 (v1.10),
-earlier @ bfa9de2f (v1.9),
+Skill version: 1.11 | Cut from palomas_orrery @ 1fa413d9 (v1.11),
+earlier @ ccd1ac96 (v1.10), bfa9de2f (v1.9),
 earlier @ 6d12ecac (v1.8), d424c459 (v1.7), ef3bd13 (v1.6),
 50438c6 (v1.5), a872205 (v1.4), 1ba20c3 (v1.3), 3398970 (v1.2),
 bdaaa0c (v1.1) | August 29, 2026, with Anthropic's Claude Opus 5
+v1.11 (L-315) adds A Guard Must Not Fence What a Generator Rewrites,
+earned when three chained ledger patches all refused: each was
+fingerprinted against the previous one's raw output, while every one of
+them told the operator to run `ledger_index.py` next -- which rewrites
+the zone they were hashing.
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;
 v1.1 adds the delivery-format convention from a same-day incident (a
 transactional patch silently never run; see Field Notes). v1.3 adds
@@ -172,6 +177,52 @@ edit never lands. Agentic string matching can silently fail when the target
 text was reworded in an earlier session -- variables get added to the
 functions that read them but never created where they are defined. Always
 verify the new symbol exists at its definition site, not just at its uses.
+
+### A Guard Must Not Fence What a Generator Rewrites [QUALITY]
+
+Some files carry a zone a tool regenerates: the ledger's INDEX zone
+(`ledger_index.py`), the protocol's Skill Manifest (`skills_index.py`).
+A patch that edits the body and ends by telling the operator to run that
+tool must not fingerprint the zone. Hash the content OUTSIDE it.
+
+```python
+a = lf.index(b"<!-- INDEX:START")
+b = lf.index(b"<!-- INDEX:END -->") + len(b"<!-- INDEX:END -->")
+fp = hashlib.md5(lf[:a] + lf[b:]).hexdigest()
+```
+
+A guard that includes the zone refuses for a reason that is not about
+content -- Line Endings Are Not Content, one layer out.
+
+**A chain is worse than a single patch.** Fingerprint patch 2 against
+patch 1's raw output and the chain works only while nobody runs the
+generator in between. When patch 1's own instructions say to run it, the
+chain cannot run at all. In the case that produced this note three
+patches were chained that way AND hashed raw bytes, so on a Windows
+working copy -- where the generator wrote in text mode and turned the
+file CRLF -- every one of them refused in any order. One patch that
+accepts EITHER starting state replaced all three.
+
+**A generator does not let the platform pick.** `open(path, 'w',
+encoding='utf-8')` writes the platform default, so on Windows an LF file
+comes back CRLF: a file-sized diff carrying no change, and a raw-byte
+guard downstream that cannot pass. Write with `newline=''`, which keeps
+the `'\n'` the code already holds.
+
+```python
+with open(target, 'w', encoding='utf-8', newline='') as f:
+    f.write(new)
+```
+
+`skills_index.py` had done this since it was written, with the reason in
+a comment. `ledger_index.py` had not, and that is half of why the three
+patches above refused; it was matched at `1fa413d9`.
+
+**The asymmetry with Line Endings Are Not Content is deliberate.** A
+PATCH preserves what the file already uses, because it is there to make
+one change and not to restyle 11,000 lines. A GENERATOR that rewrites the
+whole file holds the repo's convention, because rewriting the file IS the
+job. Do not "fix" either one to match the other.
 
 ## Delivery Format -- Runnable by Tony, Not Just Reviewable [CRITICAL]
 

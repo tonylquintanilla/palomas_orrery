@@ -823,6 +823,72 @@ resident.
 made a fourth entry.)
 
 
+v3.54 (September 6, 2026): One clause extended, one skill bumped
+carrying three changes, and a design round that produced no code.
+
+THE RELAY ANCHOR NOW NAMES THE RULES, NOT ONLY THE CODE (L-290).
+"Documents as handoffs" already required built on <SHA> at <URL> on
+every outbound document, and v3.53 had just corrected its reason to
+cover partners that can fetch and partners that cannot. What neither
+said was that PROJECT_INSTRUCTIONS.md and the task-relevant SKILL.md
+files are fetch targets too. So a relay partner got the code with none
+of the governance and worked on it without the rules the work runs
+under.
+
+The failure that earned it is small and exact. A parallel Claude
+Sonnet session, outside this account and Project, reasoned correctly
+to the right conclusion -- and then proposed a ledger handle that was
+already taken and offered its entry "ready to paste", which the ledger
+skill rules out. It had the repo. It did not have the ledger skill or
+the live handle count, and nothing in the document it was given told
+it where to look.
+
+Two amendments beyond the drafts, both Tony's. The skills named are
+the ones THE TASK FIRES, not a blanket list, because sending all ten
+teaches a partner to skim. And the document ASKS FOR A READ-BACK: the
+partner states which rule files it actually read, because a return
+that does not name them is telling you it did not read them. That
+read-back is the only part of the mechanism that can fail visibly --
+an omitted anchor line looks exactly like one that was not needed.
+
+One correction to the draft, and it is the kind this project keeps
+finding. The Gemini bullet said no SHA pin is possible for the
+protocol or skills "any more than it is for the code", so paste them
+inline. But those files LIVE IN the orrery repo: a Gemini that
+imported the orrery already HAS them, unpinnable but present. Gemini
+imports ONE repository (v3.53's own note, L-276), so the real paste
+case is a GALLERY import, which leaves it with no protocol and no
+skills at all because they are in the other repo. The rule now splits
+by which repo was imported.
+
+ledger-and-session-records 1.9 -> 1.10, carrying three things.
+The anchor amendment above; ONE SESSION, ONE BUMP -- a session does
+not ship two versions of one skill, so everything it decides rides a
+single version (Tony's ruling when this amendment and L-296 both
+wanted 1.10); and the master plan restamps once per DESIGN BUILD
+rather than at "key junctures", which was not countable and so kept
+sending the judgment back to Tony.
+
+The Earth exhibit was designed the same evening in a zero-code round
+(L-291) and the Sun's chrome closed (L-289). Neither changed a rule
+here. Record:
+documentation/PREDESIGN_earth_exhibit_20260906.md in the gallery repo.
+
+One obligation this bump cannot discharge from inside the session that
+made it. A skill lives in three stores, and the account install is the
+copy Claude actually loads; a reinstall is invisible to the running
+conversation. So: ledger-and-session-records went to 1.10 at
+`50cbd2df`, the session that bumped it had loaded 1.9, and the next
+session confirms its loaded copy reads 1.10 before doing ledger work.
+
+Version history: v3.51 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-09-11 when v3.57
+made a fourth entry.)
+
+
 ### Preserved verbatim: v3.29 Technical lessons (now field notes in skills)
 
 - Cache: cache[name]['elements'] (nested dict)

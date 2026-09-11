@@ -88,6 +88,9 @@ Module updated: September 10, 2026 with Anthropic's Claude Opus 5
 (session close: L-318's arrow colour built and through Mode 5; L-320
 closed on Tony's Mode 5; L-321 opened on Tony's ruling -- the orrery's
 hover text joins the provenance braid, Earth first), built on b2c77350.
+Module updated: September 11, 2026 with Anthropic's Claude Opus 5
+(skill layer: orrery-coding-conventions 1.8, interactive-exhibit 1.2 and
+safe-file-editing 1.11; L-315 and L-317 closed), built on 1fa413d9.
 Module updated: September 10, 2026 with Anthropic's Claude Opus 5
 (L-291 and L-303 closed on Tony's Mode 5; their loose ends re-homed
 to L-311 and L-312, opened here, and to L-237 and L-288; L-310 gains
@@ -309,7 +312,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*191 live items; 176 need attention (`!`); 190 RICE-scored; 125 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*189 live items; 174 need attention (`!`); 188 RICE-scored; 127 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -329,7 +332,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-300 | sweep_collapsed_features.py joins the gallery maintenance runner as a gating checker | OPEN | 8.1 | 2026-09-07 |
 | ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-21 |
 | ! | L-249 | The Earth slice of L-181: interior boundaries as sourced constants | OPEN | 7.2 | 2026-08-25 |
-| ! | L-317 | The interactive's info markers lacked the orrery's two-standards outline | OPEN | 6.4 | 2026-09-10 |
 | ! | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | OPEN | 6.0 | 2026-08-25 |
 | ! | L-269 | A report names its items, not how many there are | OPEN | 6.0 | 2026-08-30 |
 | ! | L-245 | Constants drift check compares against the last COMMIT, not the last RUN | OPEN | 5.4 | 2026-08-25 |
@@ -363,7 +365,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-239 | Seed the three Oort builders so a render is reproducible | OPEN | 3.6 | 2026-08-25 |
 | ! | L-285 | index.html adopts the shared navigation cluster; the fake-wheel dolly retires | OPEN | 3.6 | 2026-09-04 |
 | ! | L-311 | Earth's rotation period and obliquity are not served, so the axis hover names neither | OPEN | 3.6 | 2026-09-10 |
-| ! | L-315 | Chained ledger patches refuse once the indexer runs between them (safe-file-editing field note) | OPEN | 3.6 | 2026-09-10 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-25 |
 | ! | L-286 | Rooms in four levels: drill-down, short-name breadcrumb, Home stays a scene reset | OPEN | 3.5 | 2026-09-08 |
 | ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
@@ -598,6 +599,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-296 | Every design build earns a master plan version number | DONE | 8.1 | 2026-09-07 |
 |  | L-207 | The citation prompt -- the checker asks the fuzzy question | DONE | 7.6 | 2026-08-18 |
 |  | L-220 | A patch updates the body but not the anchor, date or description | DONE | 7.6 | 2026-08-20 |
+|  | L-317 | The interactive's info markers lacked the orrery's two-standards outline | DONE | 6.4 | 2026-09-11 |
 |  | L-204 | The worksheet reference may be JSON | DONE | 5.7 | 2026-08-18 |
 |  | L-263 | The served chromosphere value is a rounded copy | DONE | 5.7 | 2026-08-29 |
 |  | L-270 | README.md is a stale live store, and a gate depended on it | DONE | 5.7 | 2026-08-31 |
@@ -633,6 +635,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-106 | Gallery-cache backup + gitignore discipline | DONE | 3.6 | 2026-07-12 |
 |  | L-115 | Skills v1.1 batch: accuracy fixes + two seed blocks (Fable Mode 7) | DONE | 3.6 | 2026-07-12 |
 |  | L-295 | The upper atmosphere shell disagrees with its own hover text | DONE | 3.6 | 2026-09-07 |
+|  | L-315 | Chained ledger patches refuse once the indexer runs between them (safe-file-editing field note) | DONE | 3.6 | 2026-09-11 |
 |  | L-267 | The Sun exhibit GUI shape: drawer, focus label, marker navigation | DONE | 3.4 | 2026-09-04 |
 |  | L-097 | skills_index.py -- Skill Manifest auto-generation (process/tooling) | DONE | 3.2 | 2026-07-04 |
 |  | L-127 | module_atlas.py generates MODULE_INDEX.md too -- single source, eliminate divergence | DONE | 3.2 | 2026-07-28 |
@@ -6450,36 +6453,6 @@ index.html (the Featured rule), `tools/sweep_report.py`.
 **Ref:** L-305, tools/gallery_cache_builder.py, data/objects_config.json,
 gallery/feature_renderers.js, skills/gallery-cache-builder/SKILL.md.
 
-#### [L-315] Chained ledger patches refuse once the indexer runs between them (safe-file-editing field note)
-<!-- L:315 status:OPEN upd:2026-09-10 section:A flag: rice:2/2/90/1 -->
-- **What happened, 2026-09-10.** `patch_L305_brief.py` was
-  fingerprinted against the ledger exactly as `patch_L310_ledger.py`
-  left it, BEFORE `ledger_index.py` ran, and `patch_L305_2_citation.py`
-  against the brief's output the same way -- while each of the three
-  tells the operator to run `ledger_index.py` next. Doing that rewrites
-  the index zone, and the next patch refuses. All three also hashed raw
-  bytes, and `ledger_index.py` writes in text mode (`open(path, 'w')`),
-  so on Windows the working copy goes CRLF and fails a raw-byte guard
-  in any order. Reproduced on throwaway copies of `5fea1795`: the
-  brief's expected md5 is the post-patch, pre-index ledger; after the
-  indexer the same ledger reads `8f4baaa5` (LF). [verified @5fea1795]
-- **What `patch_L305_amendment.py` did instead.** It fingerprints the
-  LF-normalised text OUTSIDE the INDEX zone. A patch that never edits
-  the index, and ends by telling the operator to regenerate it, does
-  not depend on that zone; a guard that includes it refuses for a
-  reason that is not about content -- Line Endings Are Not Content, one
-  layer out. It writes the file back in the line endings it found.
-- **Note:** this is method, so it goes into safe-file-editing as a
-  field note at that skill's next bump, not to Tony as a ruling.
-  `ledger_index.py` writing in binary mode and keeping the file's line
-  endings would remove the CRLF half at its source; the gallery's
-  text-mode writers had the same shape (L-236). RICE 2/2/90/1 -> 3.6
-  proposed, not confirmed.
-**Gap:** the field note, under the four-step skill-bump rule;
-`ledger_index.py` preserving line endings, in the same session.
-**Ref:** L-236, L-305, L-310, `ledger_index.py`, safe-file-editing 1.10
-(Line Endings Are Not Content; Compare Content, Not Bytes).
-
 #### [L-316] On a portrait phone the arrow cross moves to the top-right corner
 <!-- L:316 status:OPEN upd:2026-09-10 section:A flag: rice:3/2/80/1 -->
 - **Tony, 2026-09-10, from L-310's Mode 5 (chat, not his hand):**
@@ -6553,94 +6526,16 @@ gallery/feature_renderers.js, skills/gallery-cache-builder/SKILL.md.
   back under + and -. [render-confirmed Mode 5 @ gallery `4add58bc`] He
   asked which two rooms were meant: the Sun and Earth, and his
   screenshots cover both.
+- **In interactive-exhibit 1.2, 2026-09-11.** Its nav cluster row now
+  names the four arrows and the portrait top-right placement, and its
+  Mode 5 sequence names the arrows. [verified @ `1fa413d9` + this patch]
 **Gap:** desktop, not yet looked at: title and cross exactly as before --
-this also covers L-310's desktop check. Then, at interactive-exhibit's
-next bump, its nav cluster row names the arrows (L-310) and the portrait
-placement (this item).
+this also covers L-310's desktop check.
 **Ref:** L-310, L-313 (recentering may add a control to the cluster),
 L-267, L-289, L-317, `gallery/nav_cluster.js` (`crossRight`),
 interactive.html (`sunCrossRight`, `navPlaceCross`, `EARTH_INFO_HTML`),
 `documentation/patch_L316_cross_and_borders.py` and
 `documentation/patch_L316_2_cross_right.py` (gallery).
-
-#### [L-317] The interactive's info markers lacked the orrery's two-standards outline
-<!-- L:317 status:OPEN upd:2026-09-10 section:A flag: rice:4/2/80/1 -->
-- **Tony, 2026-09-10, from L-310's Mode 5 (chat, not his hand):** "make
-  the hovertext marker cross more prominent. They get buried in the
-  shell dot patterns."
-- **A first build went the wrong way and was withdrawn.** It filled every
-  gallery marker white at size 14 and recorded the desktop orrery as
-  having the same problem. Tony: "on the orrery side we already have
-  solutions. It was the interactive that did not have them." Asked about
-  the inner core: "There are different borders depending on the
-  predominant hue. White for darks and red for brights."
-- **The orrery's solution, read at `08cf822d`.** Tony's two-standards
-  rule (Mode 5, 2026-05-28/29;
-  `documentation/HANDOFF_shell_consolidation_stage_3_v15.md`): the cross
-  keeps its shell's colour at size 8, and the outline is red, except
-  WHITE on saturated warm fills -- the oranges, the pink-reds, the dense
-  reds -- where red is lost. The pale peach and golden ends of that ramp
-  revert to red, because white is lost there instead; Earth's inner core,
-  rgb(255, 180, 140), is that peach and was reverted in the same round.
-  Judged per shell by eye, "NOT an RGB threshold", so it is declared per
-  shell: 18 `info_border: 'white'` sites in `shell_configs.py`, and set
-  by hand where a builder is not config-driven, Earth's inner radiation
-  belt among them (`earth_visualization_shells.py`).
-  `orrery_rendering.create_info_marker` takes `border_color`, default
-  red. [verified @ `08cf822d`]
-- **What the interactive lacked.** Its served rows carry the orrery's
-  shell colours exactly, but not the outline flags, and its marker
-  builder always drew red. So in the two rooms the Roche limit, the outer
-  core, both mantles and the inner belt had red crosses on red and orange
-  dots.
-- **Built 2026-09-10** by `patch_L316_cross_and_borders.py` in the
-  gallery, with L-316. `data/objects_config.json`: `info_border: "white"`
-  on the four flagged shells these rooms draw (Sun: Roche Limit; Earth:
-  Outer Core, Lower Mantle, Upper Mantle) and `info_borders: ["white",
-  "red"]` on Earth's belt pair; the patch refuses to write unless the
-  edited config carries exactly that roster. `gallery/feature_renderers.js`:
-  `infoMarker()` takes the served outline, red when absent -- the orrery
-  factory's shape -- and every renderer that draws from a served row
-  passes it. `gallery/earth_geometry.js` is untouched: its axis, Sun,
-  terminator and Moon markers are not shells and stay red.
-  `documentation/smoke_sun_shells.js` and `smoke_earth_geometry.js` each
-  gain one check against the LIVE config (now 25 and 31): exactly the
-  flagged markers are white. Both were made to fail -- a flag dropped, a
-  flag added, the belt pair swapped, the renderer ignoring the flag. The
-  cache builder's suite passes 167 of 167 on the edited config.
-  [verified in the sandbox; render-gated]
-- **Two things this does not do, named.** The inner core in Tony's
-  screenshot keeps its red outline, as in the orrery; correct under the
-  rule, and if it still reads as buried on the phone that is a new Mode 5
-  call, not this port. And nothing checks that the gallery's roster keeps
-  matching `shell_configs.py`: the live store-drift run follows constants,
-  not declared drawing choices, and the colours already have that
-  exposure. The roster is pinned in the patch and the two smoke checks as
-  of orrery `08cf822d`.
-- **Why the interactive missed it.** The rule lives in the orrery's code
-  comments, `shell_configs.py` and a May handoff. orrery-coding-conventions
-  -- the skill a session loads for markers -- never states it, and its
-  Single Info Marker Pattern example still shows the style
-  `create_info_marker`'s docstring records as retired in May 2026 (size
-  6, white border, opacity 0.9). The first build here missed it the same
-  way.
-- **Note:** RICE 4/2/80/1 -> 6.4 proposed, not confirmed.
-- **Round 1 on the phone, 2026-09-10: not judged.** The one
-  white-outlined marker in that view, the outer core's, sat under the
-  top-centre arrow cross (L-316). L-316's round 2 moves the cross off it.
-- **The outlines pass on the phone, 2026-09-10.** Asked whether the
-  marker at the top of a zoomed shell shows, including the outer core's
-  white outline, Tony: "yes". [render-confirmed Mode 5 @ gallery
-  `4add58bc`] How readily a finger reaches those markers is L-318; where
-  they sit against the drawn axis is L-320.
-**Gap:** at orrery-coding-conventions' next bump: the two-standards rule,
-and the example corrected to `create_info_marker`.
-**Ref:** L-310, L-316, `data/objects_config.json` and
-`gallery/feature_renderers.js` (gallery), `shell_configs.py`,
-`orrery_rendering.py` (`create_info_marker`),
-`documentation/HANDOFF_shell_consolidation_stage_3_v15.md` and
-`documentation/border_refinement_test_protocol.md` (orrery),
-skills/orrery-coding-conventions/SKILL.md.
 
 #### [L-318] Reading a shell's hover text on the phone: taps miss in the mesh, and labels mid-screen lose their pointer
 <!-- L:318 status:OPEN upd:2026-09-10 section:A flag: rice:3/2/70/2 -->
@@ -6710,6 +6605,11 @@ skills/orrery-coding-conventions/SKILL.md.
   close on untick, close on a tap, and a drag, a pinch and a cancelled
   touch that do not close it. One check first failed on its own wrong
   expectation and was corrected. Nothing rendered. [render-gated]
+- **In interactive-exhibit 1.2, 2026-09-11.** The drawer row names the
+  label; the touch-path section gains the two Plotly rules this build
+  read from v2.35.2 -- a scene relayout carries the live camera, and a
+  hover box keeps its pointer only when it fits to one side.
+  [verified @ `1fa413d9` + this patch]
 - **Still open here:** a tap on a marker still shows Plotly's own hover
   box, which drops its pointer mid-screen at `HOVER_WIDTH` 70. Narrowing
   it trades a taller box for the pointer; that waits for Tony's look at
@@ -13144,6 +13044,135 @@ result of any camera move), L-291, L-313, L-316, L-317,
 `INFO_MARKER_OFFSET_DEG`), `gallery/earth_geometry.js` (the terminator),
 `documentation/patch_L320_marker_offset.py` (gallery),
 skills/orrery-coding-conventions/SKILL.md (marker separation).
+
+#### [L-315] Chained ledger patches refuse once the indexer runs between them (safe-file-editing field note)
+<!-- L:315 status:DONE upd:2026-09-11 section:C flag: rice:2/2/90/1 -->
+- **What happened, 2026-09-10.** `patch_L305_brief.py` was
+  fingerprinted against the ledger exactly as `patch_L310_ledger.py`
+  left it, BEFORE `ledger_index.py` ran, and `patch_L305_2_citation.py`
+  against the brief's output the same way -- while each of the three
+  tells the operator to run `ledger_index.py` next. Doing that rewrites
+  the index zone, and the next patch refuses. All three also hashed raw
+  bytes, and `ledger_index.py` writes in text mode (`open(path, 'w')`),
+  so on Windows the working copy goes CRLF and fails a raw-byte guard
+  in any order. Reproduced on throwaway copies of `5fea1795`: the
+  brief's expected md5 is the post-patch, pre-index ledger; after the
+  indexer the same ledger reads `8f4baaa5` (LF). [verified @5fea1795]
+- **What `patch_L305_amendment.py` did instead.** It fingerprints the
+  LF-normalised text OUTSIDE the INDEX zone. A patch that never edits
+  the index, and ends by telling the operator to regenerate it, does
+  not depend on that zone; a guard that includes it refuses for a
+  reason that is not about content -- Line Endings Are Not Content, one
+  layer out. It writes the file back in the line endings it found.
+- **Note:** this is method, so it goes into safe-file-editing as a
+  field note at that skill's next bump, not to Tony as a ruling.
+  `ledger_index.py` writing in binary mode and keeping the file's line
+  endings would remove the CRLF half at its source; the gallery's
+  text-mode writers had the same shape (L-236). RICE 2/2/90/1 -> 3.6
+  proposed, not confirmed.
+- **CLOSED 2026-09-11, both halves.** safe-file-editing 1.11 carries A
+  Guard Must Not Fence What a Generator Rewrites: fingerprint the content
+  OUTSIDE a generated zone, a chain whose own instructions run the
+  generator between its links cannot run at all, and a generator holds
+  the repo's line endings rather than the platform's. `ledger_index.py`
+  now writes with `newline=''`, which `skills_index.py` has done since it
+  was written -- the reason was already in a comment there, one file
+  away. Found by testing the fix, not by reading: a first version
+  preserved each file's own endings, which would have left the project's
+  two generators disagreeing. Sandbox: run on an LF copy and a CRLF copy
+  of the ledger at `1fa413d9`, both come back LF with identical content.
+  [verified in the sandbox]
+**Gap:** none.
+**Ref:** L-236, L-305, L-310, `ledger_index.py`, safe-file-editing 1.10
+(Line Endings Are Not Content; Compare Content, Not Bytes).
+
+#### [L-317] The interactive's info markers lacked the orrery's two-standards outline
+<!-- L:317 status:DONE upd:2026-09-11 section:C flag: rice:4/2/80/1 -->
+- **Tony, 2026-09-10, from L-310's Mode 5 (chat, not his hand):** "make
+  the hovertext marker cross more prominent. They get buried in the
+  shell dot patterns."
+- **A first build went the wrong way and was withdrawn.** It filled every
+  gallery marker white at size 14 and recorded the desktop orrery as
+  having the same problem. Tony: "on the orrery side we already have
+  solutions. It was the interactive that did not have them." Asked about
+  the inner core: "There are different borders depending on the
+  predominant hue. White for darks and red for brights."
+- **The orrery's solution, read at `08cf822d`.** Tony's two-standards
+  rule (Mode 5, 2026-05-28/29;
+  `documentation/HANDOFF_shell_consolidation_stage_3_v15.md`): the cross
+  keeps its shell's colour at size 8, and the outline is red, except
+  WHITE on saturated warm fills -- the oranges, the pink-reds, the dense
+  reds -- where red is lost. The pale peach and golden ends of that ramp
+  revert to red, because white is lost there instead; Earth's inner core,
+  rgb(255, 180, 140), is that peach and was reverted in the same round.
+  Judged per shell by eye, "NOT an RGB threshold", so it is declared per
+  shell: 18 `info_border: 'white'` sites in `shell_configs.py`, and set
+  by hand where a builder is not config-driven, Earth's inner radiation
+  belt among them (`earth_visualization_shells.py`).
+  `orrery_rendering.create_info_marker` takes `border_color`, default
+  red. [verified @ `08cf822d`]
+- **What the interactive lacked.** Its served rows carry the orrery's
+  shell colours exactly, but not the outline flags, and its marker
+  builder always drew red. So in the two rooms the Roche limit, the outer
+  core, both mantles and the inner belt had red crosses on red and orange
+  dots.
+- **Built 2026-09-10** by `patch_L316_cross_and_borders.py` in the
+  gallery, with L-316. `data/objects_config.json`: `info_border: "white"`
+  on the four flagged shells these rooms draw (Sun: Roche Limit; Earth:
+  Outer Core, Lower Mantle, Upper Mantle) and `info_borders: ["white",
+  "red"]` on Earth's belt pair; the patch refuses to write unless the
+  edited config carries exactly that roster. `gallery/feature_renderers.js`:
+  `infoMarker()` takes the served outline, red when absent -- the orrery
+  factory's shape -- and every renderer that draws from a served row
+  passes it. `gallery/earth_geometry.js` is untouched: its axis, Sun,
+  terminator and Moon markers are not shells and stay red.
+  `documentation/smoke_sun_shells.js` and `smoke_earth_geometry.js` each
+  gain one check against the LIVE config (now 25 and 31): exactly the
+  flagged markers are white. Both were made to fail -- a flag dropped, a
+  flag added, the belt pair swapped, the renderer ignoring the flag. The
+  cache builder's suite passes 167 of 167 on the edited config.
+  [verified in the sandbox; render-gated]
+- **Two things this does not do, named.** The inner core in Tony's
+  screenshot keeps its red outline, as in the orrery; correct under the
+  rule, and if it still reads as buried on the phone that is a new Mode 5
+  call, not this port. And nothing checks that the gallery's roster keeps
+  matching `shell_configs.py`: the live store-drift run follows constants,
+  not declared drawing choices, and the colours already have that
+  exposure. The roster is pinned in the patch and the two smoke checks as
+  of orrery `08cf822d`.
+- **Why the interactive missed it.** The rule lives in the orrery's code
+  comments, `shell_configs.py` and a May handoff. orrery-coding-conventions
+  -- the skill a session loads for markers -- never states it, and its
+  Single Info Marker Pattern example still shows the style
+  `create_info_marker`'s docstring records as retired in May 2026 (size
+  6, white border, opacity 0.9). The first build here missed it the same
+  way.
+- **Note:** RICE 4/2/80/1 -> 6.4 proposed, not confirmed.
+- **Round 1 on the phone, 2026-09-10: not judged.** The one
+  white-outlined marker in that view, the outer core's, sat under the
+  top-centre arrow cross (L-316). L-316's round 2 moves the cross off it.
+- **The outlines pass on the phone, 2026-09-10.** Asked whether the
+  marker at the top of a zoomed shell shows, including the outer core's
+  white outline, Tony: "yes". [render-confirmed Mode 5 @ gallery
+  `4add58bc`] How readily a finger reaches those markers is L-318; where
+  they sit against the drawn axis is L-320.
+- **CLOSED 2026-09-11.** orrery-coding-conventions 1.8 carries Two
+  Standards for the Info Marker's Outline -- fill is the shell's colour,
+  outline red by default and white on saturated warm fills, judged per
+  shell by eye and declared with `info_border` -- and its Single Info
+  Marker Pattern example now calls `create_info_marker` instead of
+  showing the size-6 white-border style the factory's docstring records
+  as retired in May 2026. The rule closes with the sentence the case
+  earns: a convention that is not in the skill does not travel.
+  [verified @ `1fa413d9` + this patch] The Mode 5 pass is recorded
+  above.
+**Gap:** none.
+**Ref:** L-310, L-316, `data/objects_config.json` and
+`gallery/feature_renderers.js` (gallery), `shell_configs.py`,
+`orrery_rendering.py` (`create_info_marker`),
+`documentation/HANDOFF_shell_consolidation_stage_3_v15.md` and
+`documentation/border_refinement_test_protocol.md` (orrery),
+skills/orrery-coding-conventions/SKILL.md.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

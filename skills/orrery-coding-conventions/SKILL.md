@@ -6,9 +6,16 @@ fires_when: Markers, hover text, axes, shells, legendgroups, docstrings, new vis
 
 # Orrery Coding Conventions
 
-Skill version: 1.7 | Cut from palomas_orrery @ 04bba3ca (v1.7),
-earlier @ 3faa72a0 (v1.6),
-earlier @ 15741822 (v1.5), 86f529a (v1.4), 3398970 (v1.3) | 2026-08-26
+Skill version: 1.8 | Cut from palomas_orrery @ 1fa413d9 (v1.8),
+earlier @ 04bba3ca (v1.7), 3faa72a0 (v1.6),
+earlier @ 15741822 (v1.5), 86f529a (v1.4), 3398970 (v1.3) | 2026-09-11
+v1.8 (L-317) adds Two Standards for the Info Marker's Outline -- Tony's
+Mode 5 ruling of May 28 and 29, 2026, which had lived only in the code
+and in shell_configs.py comments -- and corrects the Single Info Marker
+Pattern example, which still showed the size-6 white-border style that
+create_info_marker's own docstring records as retired in May 2026.
+Earned when the gallery drew every info marker red for two exhibit
+rooms, because the rule a marker session loads was not in this skill.
 v1.6 (L-249) makes the angular step in Marker Separation for
 Near-Equal Radii an OUTCOME rather than a fixed 20 degrees, with 20 and
 10 recorded as the two worked cases. Earned when Earth's upper mantle
@@ -93,16 +100,21 @@ multi-segment lines -- separate geometry from interactivity:
   uncluttered position, carrying the full hover text.
 
 ```python
-go.Scatter3d(
-    x=[0], y=[0], z=[r * 1.05],  # shell: north pole 5% above surface
-    mode='markers',
-    marker=dict(size=6, color=shell_color, symbol='cross',
-                opacity=0.9, line=dict(color='white', width=1)),
-    name='', showlegend=False,
-    text=[info_hover_string],
-    hovertemplate='%{text}<extra></extra>'
+create_info_marker(
+    x=0, y=0, z=r * 1.05,        # shell: north pole, 5% above the surface
+    color=shell_color,           # the cross's FILL is the shell's colour
+    text=info_hover_string,
+    legendgroup=group,           # toggles with the geometry
+    border_color='white',        # only on a saturated warm fill; see below
 )
 ```
+
+`create_info_marker` in `orrery_rendering.py` owns the style -- size 8,
+opacity 1.0, cross, border width 2 -- so it changes in one place. New
+markers call it. An inline dict, where the factory does not fit, matches
+it. (The size-6, white-border, opacity-0.9 pattern this example used to
+show is the pre-May-2026 style the factory's docstring records as
+retired; it was left standing here until 2026-09-11.)
 
 Position choices:
 1. North pole at r*1.05 for sphere shells.
@@ -177,6 +189,45 @@ reaching for it here is the trap. Different mechanism, different trigger.
 **The trigger is measurable, so measure it.** Two shells within 10% is
 the test, not "looks close." A shell whose radius is a derived constant
 can move without anyone editing the marker code.
+
+### Two Standards for the Info Marker's Outline [QUALITY]
+
+The cross's FILL is its shell's colour. That is what ties the marker to
+the thing it labels, and it does not change.
+
+The OUTLINE is red by default, and WHITE on saturated warm fills -- the
+oranges, the pink-reds, the dense reds -- where a red outline is lost
+against the shell's own dot field. The pale peach and golden ends of that
+same ramp keep red, because white is lost there instead: Earth's inner
+core, `rgb(255, 180, 140)`, was tried in white and reverted.
+
+**Judged per shell by eye, NOT by an RGB threshold.** There is no
+lightness cutoff to compute. Tony's Mode 5 of May 28 and 29, 2026 set
+each one, and the results are declared, not derived.
+
+Declare it with `'info_border': 'white'` in `SHELL_CONFIGS`;
+`build_sphere_shell()` passes it to `create_info_marker(border_color=)`,
+whose default is `'red'`. 18 shells carry it at `1fa413d9`, each with a
+comment naming the fill it clears. Where a builder is not config-driven,
+set `border_color` at the call site with the same comment (Earth's inner
+radiation belt, `earth_visualization_shells.py`).
+
+The factory also takes `fill_color`, for the red-on-red exceptions of
+May 2026; no shell config uses it today. Its docstring says FILL is the
+contrast lever because Plotly ignores marker border WIDTH (field note
+below). That is about width, not colour -- a one-pixel white outline
+reads clearly against an orange dot field, which is why the declared
+rule is a border rule.
+
+**A convention that is not in this skill does not travel.** This rule
+lived in the code and in `shell_configs.py` comments for three months
+and was never written here. In September 2026 the gallery served the
+orrery's shell colours for two exhibit rooms with no outline flags at
+all, and every cross drew red -- including the outer core and both
+mantles, where it disappears. The session that built those markers
+loaded this skill and could not have known. The code is not the store a
+fresh session reads. (L-317; the gallery now serves `info_border` per
+shell.)
 
 ## Hover Text AU Convention [QUALITY]
 

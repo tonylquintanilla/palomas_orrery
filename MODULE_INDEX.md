@@ -11,21 +11,21 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 130  
-**Total Lines of Code (non-blank):** 105,090  
-**Total Public Functions/Classes:** 1,178
+**Total Lines of Code (non-blank):** 105,240  
+**Total Public Functions/Classes:** 1,179
 
 ## Classification Coverage
 
 **Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L318_ledger.py`
+- `patch_skills_v357.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
 **Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L318_ledger.py`
+- `patch_skills_v357.py`
 
 
 ---
@@ -203,7 +203,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `examine_hot_csv.py` | Examine the HOT CSV file structure (47 lines) |
 | `export_orbit_cache.py` | Phase 1b desktop devtool: read the local orbit caches and write web-servable orbit/position files for the interactive gallery. (617 lines) |
 | `food_insecurity_generator.py` | IPC acute food-insecurity KMZ layer (Sudan, current period). (702 lines) |
-| `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (710 lines) |
+| `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
 | `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (957 lines) |
@@ -230,7 +230,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L318_ledger.py` | - the 2026-09-10 phone look recorded; L-320 ruled and built; L-318 designed and built. Replaces patch_L316_3_ledger.py and patch_L320_ledger.py, neither of which needs to run. (379 lines) |
+| `patch_skills_v357.py` | - the skill layer of the 2026-09-10 session: three skill bumps under the four-step rule, plus the ledger_index.py fix they name. (524 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |
