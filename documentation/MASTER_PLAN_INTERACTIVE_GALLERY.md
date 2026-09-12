@@ -92,7 +92,19 @@ text here read "enabled with a known open issue", contradicting its own
 header forty lines below. L-151 (gallery-assembler skill) DONE
 2026-07-27; L-150 (multi-orbit binaries) still decided, not yet built.)
 **Date begun:** July 3, 2026
-**Last updated:** September 10, 2026, evening (v30: L-305's paper read
+**Last updated:** September 11, 2026 (v31: a DESIGN SESSION, zero code.
+Both magnetosphere papers read from the PDFs and L-305's Gap items 1 and
+2 closed; every computed figure in that item reproduced from the
+published equations. Gap item 3 asked how the drift check treats a
+dimensionless pointer and opened an architecture: units become a
+DECLARED FIELD in the store, the suffix reader is retired, the orrery
+EXPORTS and the gallery stops parsing orrery source, and the join moves
+to the assembler (L-322, nine rulings). `constants_new.py` becomes
+physical values only. A gallery patch extending the suffix table was
+written, tested and HELD UNRUN. One review round with Claude Fable 5.1;
+all nine rulings held and it caught a two-hop error the record had
+collapsed into one. Section 5a gains the 2026-09-11 subsection; with
+Anthropic's Claude Opus 5. v30: L-305's paper read
 landed, corrected; the camera-step track closed on Mode 5 and the phone
 look that closed it added four chrome items, two of them solutions the
 orrery already had; the orrery's hover text joins the braid, Earth first
@@ -104,20 +116,7 @@ copied card hid from the desktop lobby; L-291 and L-303 closed on
 Tony's Mode 5; loose ends re-homed to L-311, L-312, L-237 and L-288;
 next track the L-310 camera-step design round; two handoff locations
 corrected; Section 5a gains the 2026-09-09/10 subsection; with
-Anthropic's Claude Opus 5. v28, September 8, 2026, evening: a DESIGN BUILD,
-zero code. Step 3 split -- the magnetosphere is pre-provenance
-drawing, not sourced geometry, and gets its own build on Jelinek et
-al. 2012 with the dipole tilt dropped and the tail's extent sourced
-(L-305); approximations are not promoted into the store (L-306);
-the card model ruled to one card per orientation (L-303); export-age
-reporting and a static-card legend surface recorded with their
-conditions (L-307, L-308); Section 5a gains the 2026-09-08 evening
-subsection; with Anthropic's Claude Opus 5. v27, September 8, 2026:
-Earth's step 2 complete on
-both sides -- the store, the shells, the served entry, the live drift
-run; four gallery-pipeline defects found by Tony on the served
-Earth-and-Moon card and fixed the same day; Section 5a gains the
-2026-09-08 subsection; with Anthropic's Claude Fable 5.1.)
+Anthropic's Claude Opus 5.)
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
 Claude Opus 5, Claude Fable 5, Claude Sonnet 5, GPT
 
@@ -1713,6 +1712,48 @@ marker tap's own hover box still drops its pointer mid-screen) are the
 Earth room's open data and chrome items; L-316's desktop look and
 L-319's call are Tony's. Handoff:
 `documentation/HANDOFF_L316_L321_20260910.md` in the orrery repo.
+
+### 2026-09-11 -- units become a field, and the orrery becomes a producer
+
+**A narrow question opened a wide one** (L-305 Gap item 3 -> L-322). The
+gallery's store-drift check reads each constant's unit from a SUFFIX on
+its name and knows four. L-305 is about to serve fifteen values of which
+twelve are not lengths, so twelve would report NO UNIT -- printed,
+counted as unexaminable, and NOT a failure, because only DRIFT fails.
+The run would have gone green with twelve of fifteen unchecked.
+
+**Tony's ruling: a unit is a field, not a literal in a name.** In
+engineering he has always used units, not literals. `# Unit:` becomes a
+fifteenth comment key in the store; the suffix reader is retired rather
+than kept as a cross-check, because two declarations of one fact can
+disagree. And the deeper move: the orrery EXPORTS its values, the
+gallery stops parsing orrery source, and the join with gallery
+presentation happens in the ASSEMBLER rather than mixed into
+`data/objects_config.json`. `constants_new.py` becomes physical values
+only, so every line in it has a unit and a blank is an error.
+
+**What made the export architecture reachable rather than aspirational:**
+nothing generates `objects_config.json` today -- it is hand-maintained,
+and the gallery's per-value check is the net under that hand copy.
+`orrery_maintenance_run.py` already runs five GENERATORS and fourteen
+CHECKERS, so the export is a sixth generator on rails that exist, and
+`doc_index.py`'s own comment already carries Tony's ruling that a
+generator beats a checker because it fixes the producer.
+
+**One review round with Claude Fable 5.1.** All nine rulings held. It
+caught a two-hop error -- the export is the gallery serving what the
+orrery published AND the orrery publishing what the store holds, and the
+record had collapsed them -- and it contributed the whole-store export
+and the one-walk migration. Two of its own numbers were wrong and are
+corrected in the record.
+
+**What this does to the order.** Nothing moves. L-322 is NOT a gate on
+L-305, whose renderer proceeds under today's architecture; the bounded
+cost is twelve values reporting NO UNIT, recorded as one class row. Two
+cheap things go into L-305 now because the export will require them
+anyway: a `# Unit:` line on each new constant, and the bow shock
+standoff written as an expression rather than a typed number. Record:
+`documentation/DESIGN_unit_field_and_export_rev2_20260911.md`.
 
 ### What this section deliberately does not carry
 

@@ -312,7 +312,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*189 live items; 174 need attention (`!`); 188 RICE-scored; 127 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*190 live items; 175 need attention (`!`); 189 RICE-scored; 127 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -388,6 +388,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-225 | Migrate the comet shell constants into `constants_new.py`, then dispatch | DEFERRED | 2.4 | 2026-08-23 |
 | ! | L-293 | Lunar standstill: an exhibit made of four dated orbits | OPEN | 2.4 | 2026-09-06 |
 | ! | L-305 | Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together | OPEN | 2.4 | 2026-09-11 |
+| ! | L-322 | Units declared in the store, and the orrery as producer | OPEN | 2.3 | 2026-09-11 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
@@ -6294,6 +6295,17 @@ verdict line. Not yet written.
   the qualifier in the row's note so a later session does not strip it.
   A fuller-text authority restating the Pioneer 7 result would let the
   hover drop "probable"; that is a nicety, not a gap.
+- **2026-09-11, two things this item carries from the L-322 design
+  round.** Each new constant gets a `# Unit:` line as it is written --
+  the export will require one and writing it at creation is free. And
+  the bow shock standoff is an EXPRESSION, not a typed 13.51: the
+  store's own parser evaluates `15.02 * 2 ** (-1 / 6.55)` to 13.5117
+  [computed 2026-09-11]. Shue's magnetopause standoff cannot follow --
+  it needs a hyperbolic tangent, and the parser allows only add,
+  subtract, multiply, divide and power, so the assignment is DROPPED
+  silently. It stays a literal carrying a `# Calculation:` line until
+  L-322 retires that parser. **Tony's ruling (2026-09-11):** a cited
+  value is a new constant unless it can be derived.
 **Gap:** (1) CLOSED 2026-09-11 by the dated group above -- both papers
 read from the PDFs, every coefficient confirmed against the published
 tables, per-row equation numbers and access routes recorded, and the
@@ -6302,9 +6314,18 @@ the Jelinek PDF available is discharged. (2) CLOSED 2026-09-11 -- the
 tail extent is sourced to Ness et al. (1967) on the abstract route and
 the figure becomes "to about 1,000 R_E" carrying its qualifier, per the
 dated group above; the served row's status moves declared -> V_SOURCED
-when item (6) writes it. (3) Read
-`check_store_drift` for dimensionless and non-length units and extend
-its table before any new pointer is served. (4) In `constants_new.py`,
+when item (6) writes it. (3) CLOSED 2026-09-11 by
+reading the code. `check_store_drift` infers a constant's unit from a
+SUFFIX on its name and knows four (`_RADII`, `_AU`, `_KM`, and an
+Earth-radii special case); everything else returns NO UNIT, which is
+printed and counted as unexaminable but does NOT fail the run, since
+only DRIFT fails. Measured against this item's fifteen new pointers:
+3 MATCH, 12 NO UNIT. The REMEDIATION half of this item, "extend its
+table", is SUPERSEDED and re-homed to L-322: units are being declared
+in the store instead and the suffix reader retired, so the patch that
+would have extended the gallery's table is HELD UNRUN and is not to be
+run. Until L-322 lands the twelve report NO UNIT, recorded as one class
+row THERE, not fifteen here (Tony's sequencing ruling, 2026-09-11). (4) In `constants_new.py`,
 the single value home: supersede the two standoff constants, add the
 store names listed above, remove the bow shock's Lugaz-midpoint
 derivation and the Farris & Russell "Model form" claim, and clear its
@@ -6816,6 +6837,159 @@ looks like when a claim goes. Then remediation in slices.
 `shell_configs.py` (`hover_text`, `tooltip`), `earth_visualization_shells.py`,
 `orrery_rendering.py` (`build_sphere_shell`), `gallery/feature_renderers.js`
 (`renderShellSet`), skills/provenance-discipline/SKILL.md (the braid).
+
+#### [L-322] Units declared in the store, and the orrery as producer
+<!-- L:322 status:OPEN upd:2026-09-11 section:A flag: rice:4/5/70/6 -->
+- **Where this came from.** L-305 Gap item 3 asked a narrow question --
+  how does `check_store_drift` treat a dimensionless pointer -- and the
+  answer opened a wide one. Design session 2026-09-11, zero code. The
+  record is `documentation/DESIGN_unit_field_and_export_rev2_20260911.md`,
+  which supersedes revision 1 of the same date and folds in a Claude
+  Fable 5.1 review.
+- **What the read found.** `gallery_maintenance_run.py` infers a
+  constant's unit from a SUFFIX on its name and knows four: `_RADII`,
+  `_AU`, `_KM`, and an Earth-radii special case. Everything else returns
+  NO UNIT, which is printed and counted as unexaminable but does NOT
+  fail the run -- only DRIFT fails. Measured 2026-09-11 at gallery
+  `9c056d1a` against orrery `2432db64`: 53 served pointers, 48 MATCH,
+  0 DRIFT, 0 NO UNIT, 5 NOT IN STORE; of the 48 matches 44 compare in
+  the same unit, 2 convert and 2 take a coefficient fast path. Of the
+  88 top-level assignments in `constants_new.py`, 71 are suffix-readable
+  and 17 are not. [measured]
+- **Tony's rulings, 2026-09-11.** (1) A unit is a DECLARED FIELD beside
+  the value -- `# Unit:` as a fifteenth comment key -- not a suffix on a
+  name; in engineering he has always used units, not literals. (2) The
+  suffix is DROPPED as a declaration, not kept as a cross-check, because
+  two declarations of one fact can disagree. (3) Order: `# Unit:` lines
+  land first, then missing-unit-fails and suffix-dropping land together
+  -- dropping the suffix first puts 46 of 48 checks dark while the run
+  stays green [measured]. (4) DIMENSIONAL ANALYSIS is the real check on
+  a unit assignment, not a text match, and belongs as its own check in a
+  maintenance runner. (5) A cited value is a NEW CONSTANT unless it can
+  be DERIVED; a number a paper prints that our constants could compute
+  is an expression. (6) The orrery EXPORTS; the gallery does not parse
+  orrery source. (7) The export cannot go stale because the orrery
+  runner keeps it current as a sixth GENERATOR. (8) The JOIN of orrery
+  values with gallery presentation happens in the ASSEMBLER, not mixed
+  in `data/objects_config.json`. (9) `constants_new.py` holds PHYSICAL
+  VALUES ONLY -- the five non-measurements leave the file, so every line
+  has a unit, a blank is unambiguously an error, and the export needs no
+  skip list.
+- **The five leaving the store, with import direction checked**
+  [verified @2432db64]: `stellar_class_labels` -> `visualization_core.py`
+  (2d and 3d already import from core); `HORIZONS_MAX_DATE` ->
+  `celestial_objects.py` (194 objects with Horizons IDs, 65 date-range
+  fields, already imports datetime, imports nothing from
+  `constants_new`); `DEFAULT_MARKER_SIZE` and `CENTER_MARKER_SIZE` ->
+  `palomas_orrery_helpers.py`. The marker sizes were first ruled into
+  `palomas_orrery.py`; that fails, because `palomas_orrery.py` imports
+  FROM helpers at line 84 and helpers cannot import back without a
+  cycle. Tony re-ruled on being shown it. `spectral_subclass_temps`
+  (kelvin) and `KNOWN_ORBITAL_PERIODS` (days) STAY -- they are physical
+  and simply need `# Unit:` lines. Note: the four files importing
+  `stellar_class_labels` are the only ones seen carrying CRLF.
+- **Two additions from the Fable review, adopted.** Export the WHOLE
+  store rather than the 53 pointed-at values, because exporting a subset
+  means the orrery keeps a list of what the gallery wants and that list
+  drifts. And the `# Unit:` walk is the `# Status:` walk -- only 2 of 88
+  assignments carry a `# Status:` line today [measured], and one visit
+  per assignment writes both.
+- **The framing error the review caught, and it is the important one.**
+  Revision 1 called the new gallery check "the SHA round trip" as though
+  it were one hop. It is TWO: the gallery serving what the orrery
+  published, and the orrery publishing what the store holds. The export
+  therefore carries the hash of the `constants_new.py` bytes it was
+  generated from, and a CHECKER in the orrery runner compares that hash
+  to the file on disk. The runner informs the push but is not a hook, so
+  a push without a run would otherwise leave a stale export with nothing
+  saying so.
+- **What the gallery's drift check becomes.** Two checks, neither of
+  them today's: gallery side, the served export's bytes equal the
+  orrery's export at a recorded orrery SHA, printing the SHA compared
+  against so it cannot go green by never resolving; join side, every
+  pointer resolves to a row in the export BY NAME and a pointer with no
+  row FAILS. The per-value comparison is the hand copy's net kept after
+  the hand copy is gone -- retire it.
+- **The held patch.** `patch_L305_store_drift_units.py` extends the
+  gallery's suffix table and makes L-305's fifteen pointers green. It
+  was written, tested (15 of 15 MATCH, no regression on the existing 53)
+  and HELD UNRUN, because it puts a naming vocabulary for orrery
+  constants inside the gallery repo. It is NOT to be run. [Tony's
+  ruling, 2026-09-11]
+- **Sequencing, ruled.** L-305's renderer proceeds under today's
+  architecture; this item is NOT a gate on it. Bounded cost: twelve of
+  L-305's fifteen new values report NO UNIT until the export lands. That
+  is THIS ROW, one row for the class, not fifteen.
+- **Note (Claude):** RICE proposed 4/5/70/6. Reach is every served value
+  and both repos; Effort is the export generator, the store migration
+  over 88 assignments, two parsers deleted, the assembler join and two
+  new checks. Confidence 70 because the design survived one review with
+  all nine rulings intact and the measurements were run against live
+  code, not recalled.
+**Gap:** the whole item, in ruling 3's order. Still open and NOT ruled:
+(a) the five non-top-level served values (`planet_poles` for Sun, Earth,
+Jupiter and Saturn, and a `create_sun_galactic_tide` default) -- the
+review proposes the Status Line dict scoping and One Value One Home,
+moving them into the store, its lean being AFTER L-305 because two are
+the Sun's and Earth's poles and a wrong move puts a closed exhibit back
+under Mode 5; (b) which check a BARE LITERAL gets, now three
+options rather than two. Fable's derive-and-compare is NOT available
+here: Jelinek's R0 IS the standoff at 1 nPa, so deriving it is
+circular, and Shue's redundancy sits in Table 1's SEED column, not the
+fitted values being stored. What remains: Jelinek's eqs. 17-18 refit
+(12.90 and 14.94 against the model's 12.82 and 15.02) as a
+transcription check; provenance alone, stated on the row; or TONY'S OWN
+READ of the paper against the row, recorded with the page or table, the
+date, and that it was his (Tony's ruling, 2026-09-11). The third is the
+only one that catches a correctly-cited, plausibly-rendering,
+slightly-wrong digit. The three checks cover different failures and
+none substitutes: Mode 5 sees a wrong UNIT instantly and a wrong third
+decimal never, so it is a BACKSTOP and not the check; a cross-model
+worksheet reads the digits and is blind to the render; Tony's read is
+the only one that reaches precision. It needs a scope written once
+("where critical") and a RECORDED verdict, or a lapsed habit reads
+exactly like a performed check. A row verified by Tony is a different
+provenance state from one verified by a model and the worksheet schema
+should say which -- provenance-discipline at its next bump; (c) which runner hosts the dimensional check, and
+what it checks for the 57 bare literals, where provenance may be the
+only check a primary datum gets; (d) SIGNIFICANT FIGURES. The
+`Derived:` discipline already rules that a derived value reports no
+more figures than its numerator, but ruling 5 turns derived values into
+EXPRESSIONS, so Python returns full float precision and nobody types a
+rounded figure -- `15.02 * 2 ** (-1 / 6.55)` is 13.511736110493397
+against four-figure inputs. Python can ROUND to significant figures
+(`float("%.4g" % x)`, already used in `export_orbit_cache.py`) but
+cannot TRACK them through arithmetic, so like the unit they have to be
+DECLARED per constant. Dimensional analysis checks a dimension, never a
+precision, so nothing else in this design would catch it. (e) whether
+`astropy.units` hosts the dimensional check rather than a hand-rolled
+one. Astropy is ALREADY a dependency -- five modules import it,
+including `astropy.units` in `hr_diagram_distance.py` [verified
+@2432db64]. It is Python-only, which costs nothing, because under
+ruling 6 dimensional reasoning happens once in the orrery and the
+gallery receives a number and a unit STRING. Two shapes, very different
+sizes: store Quantities (`10.0 * u.R_earth`), which makes dimensional
+errors impossible but returns Quantities to 29 importing modules over
+37 import lines where Plotly wants floats; or keep floats and use
+astropy only INSIDE the check, parsing each `# Unit:` line. The second
+leaves the store untouched, and ruling 6 argues for it -- the export
+unwraps to plain numbers at the boundary either way. Related and worth
+asking in the same round: ruling 9's migration visits all 88
+assignments, which is the natural moment to ask whether the store's
+format should change at all.
+**Tony-action (do):** commit
+`documentation/DESIGN_unit_field_and_export_20260911.md` and
+`documentation/DESIGN_unit_field_and_export_rev2_20260911.md`, and the
+held `patch_L305_store_drift_units.py` into the GALLERY repo's
+`documentation/` UNRUN.
+**Ref:** L-305, L-306 (approximations are not promoted), L-314,
+`constants_new.py`, `provenance_scanner.py`, `orrery_maintenance_run.py`,
+`celestial_objects.py`, `visualization_core.py`,
+`palomas_orrery_helpers.py`, gallery `gallery_maintenance_run.py`,
+gallery `data/objects_config.json`, gallery `gallery/assembler/catalog.py`,
+skills/provenance-discipline/SKILL.md (the Status Line, One Value One
+Home), skills/gallery-cache-builder/SKILL.md,
+skills/gallery-assembler/SKILL.md, skills/interactive-exhibit/SKILL.md.
 
 #### [L-278] A relayout from inside a Plotly event handler re-enters the update machinery
 <!-- L:278 status:OPEN upd:2026-09-02 section:A flag: rice:3/3/90/1 -->

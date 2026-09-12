@@ -8,7 +8,7 @@ Repo copies stale/absent; this reflects the live local stores.
 |---|---|---|---|---|
 | .vot | 4 | 295.1 MB | gaia_data_magnitude.vot (284.4 MB) | 2026-02-08 |
 | .nc | 18 | 161.1 MB | era5_clim_march_day22.nc (27.4 MB) | 2026-04-07 |
-| .json | 51 | 132.5 MB | orbit_paths.json (130.9 MB) | 2026-09-11 |
+| .json | 51 | 132.5 MB | orbit_paths.json (130.9 MB) | 2026-09-12 |
 | .backup | 4 | 131.2 MB | orbit_paths.json.backup (130.9 MB) | 2026-09-07 |
 | .backup_old | 1 | 130.9 MB | orbit_paths.json.backup_old (130.9 MB) | 2026-09-07 |
 | .csv | 15 | 34.9 MB | 3773_v3_niskin_hot001_yr01_to_hot348_yr35.csv (30.8 MB) | 2026-04-07 |
@@ -73,7 +73,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 442.2 MB (463 files)
+**Total size:** 442.2 MB (466 files)
 
 **GitHub Pages headroom:** 582 MB remaining of 1024 MB ceiling (43.2% used)
 
@@ -81,12 +81,12 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 261 | 419.3 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-11 |
+| .json | 263 | 419.3 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-12 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 1 | 5.1 MB | palomas_orrery_logo.png (5.1 MB) | 2025-11-27 |
-| .py | 101 | 1.7 MB | gallery_studio.py (243.1 KB) | 2026-09-11 |
-| .md | 15 | 689.4 KB | TEST_PROTOCOL_sun_hang_20260902.md (526.5 KB) | 2026-09-11 |
-| .jsonl | 22 | 441.5 KB | encke.jsonl (20.5 KB) | 2026-09-11 |
+| .py | 102 | 1.8 MB | gallery_studio.py (243.1 KB) | 2026-09-12 |
+| .md | 15 | 689.4 KB | TEST_PROTOCOL_sun_hang_20260902.md (526.5 KB) | 2026-09-12 |
+| .jsonl | 22 | 448.7 KB | encke.jsonl (20.9 KB) | 2026-09-12 |
 | .html | 5 | 311.5 KB | index.html (156.6 KB) | 2026-09-11 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
 | .js | 7 | 127.4 KB | feature_renderers.js (53.0 KB) | 2026-09-11 |
