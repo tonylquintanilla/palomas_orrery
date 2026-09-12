@@ -6910,12 +6910,28 @@ looks like when a claim goes. Then remediation in slices.
   pointer resolves to a row in the export BY NAME and a pointer with no
   row FAILS. The per-value comparison is the hand copy's net kept after
   the hand copy is gone -- retire it.
-- **The held patch.** `patch_L305_store_drift_units.py` extends the
-  gallery's suffix table and makes L-305's fifteen pointers green. It
-  was written, tested (15 of 15 MATCH, no regression on the existing 53)
-  and HELD UNRUN, because it puts a naming vocabulary for orrery
-  constants inside the gallery repo. It is NOT to be run. [Tony's
-  ruling, 2026-09-11]
+- **The held patch, and it RAN.**
+  `patch_L305_store_drift_units.py` extends the gallery's suffix table
+  and makes L-305's fifteen pointers green. It was written, tested
+  (15 of 15 MATCH, no regression on the existing 53) and HELD UNRUN on
+  2026-09-11, because it puts a naming vocabulary for orrery constants
+  inside the gallery repo. **On 2026-09-12 it was run by mistake and
+  pushed at gallery `e498a763`.** The live maintenance run confirmed no
+  regression: 53 pointers, 48 match, 0 DRIFT, 0 UNIT MISMATCH, 5 could
+  not be examined -- the same result in the new wording. **Tony's
+  ruling on being told (2026-09-12): it STAYS, not reverted.** Retiring
+  the suffix reader now would contradict ruling 3 -- the store has no
+  `# Unit:` lines yet, and dropping the reader before they exist puts
+  46 of 48 checks dark while the run stays green. The code splits in
+  two: the scalar-unit comparison rule and the UNIT MISMATCH verdict
+  SURVIVE this item, being about how two values compare rather than
+  about reading a name; the six suffix entries for non-length units
+  RETIRE with the reader. `patch_L322_mark_transitional.py` (gallery,
+  comments only, no behaviour change) records that split in the file
+  and names the trap: `_DIMENSIONLESS` as a SUFFIX invites renaming a
+  constant to turn it green, and no constant is to be named to satisfy
+  that table. L-305's fifteen get `# Unit:` lines; the twelve that
+  report NO UNIT until the export lands stay one class row here.
 - **Sequencing, ruled.** L-305's renderer proceeds under today's
   architecture; this item is NOT a gate on it. Bounded cost: twelve of
   L-305's fifteen new values report NO UNIT until the export lands. That
@@ -6979,9 +6995,10 @@ assignments, which is the natural moment to ask whether the store's
 format should change at all.
 **Tony-action (do):** commit
 `documentation/DESIGN_unit_field_and_export_20260911.md` and
-`documentation/DESIGN_unit_field_and_export_rev2_20260911.md`, and the
-held `patch_L305_store_drift_units.py` into the GALLERY repo's
-`documentation/` UNRUN.
+`documentation/DESIGN_unit_field_and_export_rev2_20260911.md`. The
+spent `patch_L305_store_drift_units.py` and
+`patch_L322_mark_transitional.py` move into the GALLERY repo's
+`documentation/` as spent patches, not held ones.
 **Ref:** L-305, L-306 (approximations are not promoted), L-314,
 `constants_new.py`, `provenance_scanner.py`, `orrery_maintenance_run.py`,
 `celestial_objects.py`, `visualization_core.py`,
