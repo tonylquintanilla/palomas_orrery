@@ -387,7 +387,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 |  | L-225 | Migrate the comet shell constants into `constants_new.py`, then dispatch | DEFERRED | 2.4 | 2026-08-23 |
 | ! | L-293 | Lunar standstill: an exhibit made of four dated orbits | OPEN | 2.4 | 2026-09-06 |
-| ! | L-305 | Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together | OPEN | 2.4 | 2026-09-10 |
+| ! | L-305 | Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together | OPEN | 2.4 | 2026-09-11 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
@@ -5970,7 +5970,7 @@ verdict line. Not yet written.
 `gallery_maintenance_run.py`.
 
 #### [L-305] Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together
-<!-- L:305 status:OPEN upd:2026-09-10 section:A flag: rice:4/4/60/4 -->
+<!-- L:305 status:OPEN upd:2026-09-11 section:A flag: rice:4/4/60/4 -->
 - **Where this came from.** A design round on 2026-09-08 opened with one
   hover requirement from the L-291 handoff -- say that the tail is drawn
   to 100 radii against a real one past 1,000 -- and ended with two stored
@@ -6060,7 +6060,8 @@ verdict line. Not yet written.
   dipole tilt or Mach dependence (sec. 3, 6, 7). Sec. 7 says parabolic
   coordinates suit the bow shock and that elliptical coordinates would
   describe the magnetopause better. [read from Tony's uploaded PDF by a
-  Claude Fable 5.1 session, 2026-09-10; not re-read since]
+  Claude Fable 5.1 session, 2026-09-10; confirmed against the PDF
+  2026-09-11, see the dated group below]
 - **The reference, and how it is reached.** Jelinek, K., Z. Nemecek,
   and J. Safrankova (2012), A new approach to magnetopause and bow
   shock modeling based on automated region identification, J. Geophys.
@@ -6136,7 +6137,11 @@ verdict line. Not yet written.
   pressure the store's Shue Source already uses; the reason for
   400 km/s is not yet written. L-314 replaces the three with measured
   values. [constant verified @5fea1795; served row @57fd93c6]
-- **Aberration is applied, declared.** Both fits are in ABERRATED GSE.
+- **Aberration is applied, declared.** Both fits are ABERRATED:
+  Shue in aberrated GSM, Jelinek in aberrated GSE (this line read
+  "both fits are in ABERRATED GSE" until 2026-09-11; see the frame
+  correction in the dated group below, which is why it does not
+  change the geometry).
   The Sun direction is already in the Earth driver's payload
   (`payload.sun.dir`, from Earth's served osculating elements)
   [verified @57fd93c6]; the nose is rotated from it by
@@ -6182,15 +6187,122 @@ verdict line. Not yet written.
   the reading session had this block open; Gap item 1 confirms the
   values against the PDF before the store takes them. L-315 records
   why the earlier patches refused.
-**Gap:** (1) Read Shue et al. (1998) for the alpha line and its three
-coefficients, and for the range of the crossings it was fitted on,
-before any store name or renderer uses them; confirm Jelinek's six
-values and the local-time envelope against the PDF in the same read.
-Each row records its equation or table number and its access route.
-**Tony-action (do):** keep the Jelinek PDF where that session can read
-it. (2) Source the tail extent behind "past 1,000 R_E" (the served
-magnetotail row's `_declared` text and L-291's hover requirement), or
-remove the figure from both and note the gap. (3) Read
+- **2026-09-11, both papers read from the PDFs: Gap items 1 and 2
+  close.** Shue's equations 10 and 11 and Table 1 ("After Fit") are
+  confirmed at pp. 17,697-17,698, with the standard deviations from 200
+  Monte Carlo refits: a1 10.22 +/- 0.10, a2 1.29 +/- 0.06, a3 0.184
+  +/- 0.007, a4 8.14 +/- 0.39, a5 6.6 +/- 0.5, a6 0.58 +/- 0.01,
+  a7 -0.007 +/- 0.0005, a8 0.024 +/- 0.0004. Bz in nT, Dp in nPa, r0 in
+  R_E, theta the solar zenith angle from the aberrated Sun-Earth line.
+  The alpha line previously tagged "not read" matches the paper
+  exactly. Jelinek's six values are confirmed at eqs. 13-16 and sec. 4:
+  R_MP = 12.82 p^(-1/5.26), R_BS = 15.02 p^(-1/6.55), lambda_MP = 1.54,
+  lambda_BS = 1.17. [read from Tony's uploaded PDFs, 2026-09-11]
+- **Every computed figure in this item reproduces from the published
+  equations.** Recomputed 2026-09-11 from the papers rather than from
+  this block: Shue r0 = 10.2519 and alpha = 0.5896 at p = 2 nPa,
+  Bz = 0; Shue's cross-section 28.88 R_E at x = -100; Jelinek noses
+  13.5117 (bow shock) and 11.2372 (magnetopause); the 105 degree cut at
+  x = -7.77, R_yz = 28.99; the Jelinek paraboloids at x = -100 giving
+  66.95 (bow shock) and 45.92 (magnetopause). This IS independent of
+  the 2026-09-10 read, which had this block open; this one ran from the
+  equations. [computed 2026-09-11]
+- **Correction: the two fits are NOT in the same frame.** Shue is in
+  aberrated GSM (figs. 2 and 4 captions; cylindric symmetry about the
+  aberrated Sun-Earth line, p. 17,692). Jelinek is in aberrated GSE
+  (sec. 3). The aberration bullet above said both were GSE and is
+  corrected in place. It does not change what is drawn -- the two
+  frames share the X axis and both surfaces are rotationally symmetric
+  about it -- so a later session must not "fix" a frame mismatch that
+  has no geometric effect.
+- **The Shue validity range is readable in the 1998 paper, so Shue
+  (1997) is not needed for it.** P. 17,693 states the fitted ranges as
+  -18 nT < Bz < 15 nT and 0.5 nPa < Dp < 8.5 nPa, over the ISEE 1 and
+  2, AMPTE/IRM and IMP 8 crossings that the 1998 refit reuses. The
+  improved nonlinear forms exist so that extrapolation past that range
+  stays physical (figs. 10 and 13 run to 50-60 nPa), which is an
+  argument about behaviour and not a wider fitted range. The declared
+  conditions p = 2 nPa, Bz = 0 sit inside it.
+- **What supports the tail hover's "fitted on near-Earth crossings".**
+  The paper states no angular range for its crossings. Fig. 6 evaluates
+  the model's own uncertainty against solar zenith angle out to 120
+  degrees at Dp = 2 nPa, and the text says that uncertainty rises
+  rapidly with the angle (p. 17,695). That supports the hover wording
+  already chosen, which carries no number. No number is therefore owed
+  and Shue (1997) stays unread with no gap behind it.
+- **2 nPa is the paper's own average; Bz = 0 and 400 km/s are not.**
+  Shue p. 17,695 uses Dp = 2 nPa as an average value, which is a
+  paper-internal reason for the store's declared pressure. Its average
+  Bz is +/- 4 nT (northward / southward), not 0, so the store's Bz = 0
+  is a neutral midpoint chosen here and its row must say so. The
+  410 km/s on p. 17,694 is the speed during one January 1997 event and
+  does NOT source a nominal 400 km/s; that reason is still unwritten
+  (L-314).
+- **Dp includes helium, by the factor (1 + 0.04 N_alpha).** Shue's
+  fig. 1 caption (p. 17,692) states that the solar wind dynamic
+  pressure includes the helium contribution by a factor
+  (1 + 0.04 N_alpha), where N_alpha is the He++ concentration, an
+  average value of 4 percent being used when N_alpha is missing.
+  N_alpha is a PERCENTAGE, not a fraction: at the paper's own 4 the
+  factor is 1.16, which is the four proton masses per helium nucleus
+  at 4 percent number density. L-314 derives p from SWPC density and
+  speed and inherits this as a declared assumption -- whether that
+  feed carries N_alpha decides between a measured correction and the
+  4 percent default, and which density it reports is a question for
+  that item. [read from the caption, 2026-09-11]
+- **Do not pick up Jelinek's equations 17 and 18.** R_MP = 12.90
+  p^(-1/4.92) and R_BS = 14.94 p^(-1/6.62) are the validation refit
+  against observed crossings (sec. 5.2), not the model. The model is
+  eqs. 13-16. The two pairs are close enough to be mistaken for one
+  another by a session reading the paper quickly.
+- **Shue's own scatter is the larger of the two, which strengthens the
+  seam bullet above.** The improved model's standard deviation against
+  the observed crossings is 1.23 R_E (p. 17,697); Jelinek's
+  magnetopause scatter is 0.76 R_E (fig. 7). So the roughly 1 R_E
+  disagreement between the two magnetopause noses sits inside Shue's
+  scatter alone.
+- **Access routes, for the store rows.** Shue et al. (1998),
+  doi:10.1029/98JA01103 -- OPEN FULL TEXT, Tony's download via Wiley
+  (Readcube), 2026-09-11; sandbox fetches of the DOI page are refused
+  by bot detection, which is not a paywall. Jelinek et al. (2012),
+  doi:10.1029/2011JA017252 -- OPEN FULL TEXT, same route, 2026-09-10.
+  Ness et al. (1967), doi:10.1029/JZ072i015p03769 -- ABSTRACT, open;
+  full text walled (Tony's check, 2026-09-11). Per-row pointers: r0
+  from eq. 10 with Table 1 rows a1-a5; alpha from eq. 11 with rows
+  a6-a8; Jelinek R0 and eps from eqs. 13-14; lambda from sec. 4; the
+  surface from eqs. 15-16; the cut angle from the +/- 7 h local-time
+  envelope, sec. 2 para. 9; the 0.6-11 nPa envelope from the
+  conclusion, para. 30.
+- **Gap item 2, the tail extent: 1,000 R_E is sourced, and the figure
+  changes.** Ness, N. F., C. S. Scearce and S. C. Cantarano (1967),
+  Probable observations of the geomagnetic tail at 10^3 Earth radii by
+  Pioneer 7, J. Geophys. Res. 72(15), 3769-3776,
+  doi:10.1029/JZ072i015p03769. The abstract states that Pioneer 7
+  passed through the downstream interaction region at 900-1,050 R_E
+  (26 September to 3 October 1966); that the field measurements suggest
+  certain lines of force there connect to Earth through the tail; that
+  a coherent, well-ordered tail with an embedded neutral sheet does NOT
+  appear to have been observed; and that the geometry becomes a complex
+  set of intermingled filamentary flux tubes at several hundred R_E.
+  So "past 1,000 R_E" becomes "to about 1,000 R_E" -- the source is a
+  crossing band, not a lower bound -- and the qualifier travels with
+  the figure in the hover: the drawn surface stops at the served
+  100 R_E, the tail's signature reaches roughly ten times that, and by
+  then it is filaments rather than a sheet. The paper's own title says
+  "probable". The served magnetotail row's `_declared` 1,000 R_E takes
+  this row as its source, declared -> V_SOURCED (abstract, open), with
+  the qualifier in the row's note so a later session does not strip it.
+  A fuller-text authority restating the Pioneer 7 result would let the
+  hover drop "probable"; that is a nicety, not a gap.
+**Gap:** (1) CLOSED 2026-09-11 by the dated group above -- both papers
+read from the PDFs, every coefficient confirmed against the published
+tables, per-row equation numbers and access routes recorded, and the
+figures recomputed from the equations. The **Tony-action (do)** to keep
+the Jelinek PDF available is discharged. (2) CLOSED 2026-09-11 -- the
+tail extent is sourced to Ness et al. (1967) on the abstract route and
+the figure becomes "to about 1,000 R_E" carrying its qualifier, per the
+dated group above; the served row's status moves declared -> V_SOURCED
+when item (6) writes it. (3) Read
 `check_store_drift` for dimensionless and non-length units and extend
 its table before any new pointer is served. (4) In `constants_new.py`,
 the single value home: supersede the two standoff constants, add the
