@@ -10,9 +10,9 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 130  
-**Total Lines of Code (non-blank):** 105,198  
-**Total Public Functions/Classes:** 1,181
+**Total Python Files:** 133  
+**Total Lines of Code (non-blank):** 105,696  
+**Total Public Functions/Classes:** 1,184
 
 ## Classification Coverage
 
@@ -117,7 +117,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,250 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (512 lines) |
-| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (1,536 lines) |
+| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (1,534 lines) |
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (412 lines) |
 | `exoplanet_stellar_properties.py` | Stellar Properties for Exoplanet Host Stars (484 lines) |
 | `exoplanet_systems.py` | Hardcoded Exoplanet System Catalog (572 lines) |
@@ -201,8 +201,11 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (957 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (958 lines) |
 | `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (495 lines) |
+| `patch_L305_bow_shock_one_line.py` | Put the bow shock assignment on one line so constants_change_report.py can read it. (118 lines) |
+| `patch_L323_L324_session_20260912.py` | The 2026-09-12 session, in the ledger. (254 lines) |
+| `patch_masterplan_20260912.py` | The 2026-09-12 entry in the master plan. (127 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,066 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (342 lines) |
