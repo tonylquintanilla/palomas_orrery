@@ -53,6 +53,13 @@ August 26, 2026 (L-249, Opus 5): the four interior info strings stop
     radius_fraction from the same constants. Tony's ruling that day:
     constants_new.py is the only store for a numeric value, in prose as
     much as in code, and a literal in dead code is still a store.
+September 12, 2026 (L-305, Opus 5): the two magnetosphere standoffs are
+    superseded in constants_new.py -- Shue et al. (1998) for the
+    magnetopause, Jelinek et al. (2012) for the bow shock -- so the six
+    quotes of them here round to the reporting figure their rows state,
+    the retired Lugaz-midpoint sentence is deleted, and the bow shock's
+    source attribution moves from Lugaz to Jelinek. Deletion and
+    correction only; the rewrite is item 7.
 """
 import numpy as np
 import math
@@ -726,12 +733,12 @@ def create_earth_upper_atmosphere_shell(center_position=(0, 0, 0)):
 earth_magnetosphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n" 
 
-            f"Earth's magnetosphere extends about {EARTH_MAGNETOPAUSE_STANDOFF_RADII:g} Earth radii on the Sun-facing side\n"
+            f"Earth's magnetosphere extends about {EARTH_MAGNETOPAUSE_STANDOFF_RADII:.4g} Earth radii on the Sun-facing side\n"
             "and stretches into a long magnetotail on the night side. It protects Earth\n"
             "from solar radiation and cosmic rays, making complex life possible.\n\n"
 
             "Bow Shock: The boundary where the supersonic solar wind is first slowed\n"
-            f"by Earth's magnetic field, typically located about {EARTH_BOW_SHOCK_STANDOFF_RADII:g} Earth radii upstream\n"
+            f"by Earth's magnetic field, typically located about {EARTH_BOW_SHOCK_STANDOFF_RADII:.4g} Earth radii upstream\n"
             "from Earth on the Sun-facing side.\n\n"
 
             "Inner Van Allen Belt: Region of trapped charged particles (mainly protons)\n"
@@ -789,11 +796,10 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     z = z + center_z
     
     magnetosphere_text = ["Earth: Magnetosphere<br><br>"
-                 f"Earth's magnetosphere extends about {EARTH_MAGNETOPAUSE_STANDOFF_RADII:g} Earth radii on the Sun-facing side<br>"
+                 f"Earth's magnetosphere extends about {EARTH_MAGNETOPAUSE_STANDOFF_RADII:.4g} Earth radii on the Sun-facing side<br>"
                  "and stretches into a long magnetotail on the night side. It protects Earth<br>"
                  "from solar radiation and cosmic rays, making complex life possible.<br><br>"
-                 "Source (standoff): Shue et al. (1998), J. Geophys. Res. 103:17691; "
-                 "Lugaz et al. (2016), Nat. Commun. 7:13001."]
+                 "Source (standoff): Shue et al. (1998), J. Geophys. Res. 103:17691."]
     
     magnetosphere_customdata = ['Earth: Magnetosphere']
 
@@ -820,7 +826,8 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     
     # 2. Create and add bow shock
     # L-291: was a typed 15 R_E (textbook) with a comment conceding the
-    # measured 11-14. The store now holds the measured midpoint; see
+    # measured 11-14. L-305: the midpoint is retired; the store now holds
+    # Jelinek et al. (2012) eq. 14 at the declared pressure. See
     # EARTH_BOW_SHOCK_STANDOFF_RADII in constants_new.py for the source.
     bow_shock_standoff = EARTH_BOW_SHOCK_STANDOFF_RADII * EARTH_RADIUS_AU
     bow_shock_width = 25 * EARTH_RADIUS_AU  # legacy flank scale; ignored on conic path
@@ -844,11 +851,10 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     
     bow_shock_text = ["Earth: Bow Shock<br><br>"
                 "Bow Shock: The boundary where the supersonic solar wind is first slowed<br>"
-                f"by Earth's magnetic field, typically located about {EARTH_BOW_SHOCK_STANDOFF_RADII:g} Earth radii upstream<br>"
+                f"by Earth's magnetic field, typically located about {EARTH_BOW_SHOCK_STANDOFF_RADII:.4g} Earth radii upstream<br>"
                 "from Earth on the Sun-facing side.<br>"
-                "Drawn at the midpoint of the 11-14 R_E measured under normal solar wind (Lugaz et al. 2016).<br>"
                 "The Bow Shock points towards the Sun along the X-axis. The XY plane is the ecliptic.<br><br>"
-                "Source (standoff): Lugaz et al. (2016), Nat. Commun. 7:13001, doi:10.1038/ncomms13001."]
+                "Source (standoff): Jelinek et al. (2012), J. Geophys. Res. 117:A05208, doi:10.1029/2011JA017252."]
     
     bow_shock_customdata = ['Earth: Bow Shock']
 

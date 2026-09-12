@@ -44,6 +44,10 @@ Module updated: September 7, 2026 with Anthropic's Claude Fable 5.1 (L-295:
     chromosphere does. Their info markers step to 20 and 30 degrees so
     the interior-to-atmosphere stack reads as four separate markers.
     Tony's ruling, 2026-09-07.)
+Module updated: September 12, 2026 with Anthropic's Claude Opus 5 (L-305:
+    Earth's magnetosphere tooltip quotes the two superseded standoffs at
+    the reporting figure their store rows state, and its standoff
+    attribution moves from Lugaz to Jelinek.)
 """
 
 # Phase C4: Import hover text strings from body shell modules.
@@ -2293,16 +2297,16 @@ CUSTOM_SHELLS = {
             'per_frame_opt_in': True,   # gated by the 'Animate magnetospheres' checkbox
             'tooltip': (
                 "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n"
-                f"Earth's magnetosphere extends about {EARTH_MAGNETOPAUSE_STANDOFF_RADII:g} Earth radii on the Sun-facing side\n"
+                f"Earth's magnetosphere extends about {EARTH_MAGNETOPAUSE_STANDOFF_RADII:.4g} Earth radii on the Sun-facing side\n"
                 "and stretches into a long magnetotail on the night side. It protects Earth\n"
                 "from solar radiation and cosmic rays, making complex life possible.\n\n"
                 "Bow Shock: The boundary where the supersonic solar wind is first slowed\n"
-                f"by Earth's magnetic field, typically located about {EARTH_BOW_SHOCK_STANDOFF_RADII:g} Earth radii upstream\n"
+                f"by Earth's magnetic field, typically located about {EARTH_BOW_SHOCK_STANDOFF_RADII:.4g} Earth radii upstream\n"
                 "from Earth on the Sun-facing side.\n\n"
                 f"Inner Van Allen Belt: trapped protons, drawn at the flux peak {EARTH_VAN_ALLEN_INNER_RADII:g} Earth radii out\n"
                 "(Baker et al. 2018). Outer Van Allen Belt: trapped electrons, drawn at the flux peak\n"
                 f"{EARTH_VAN_ALLEN_OUTER_RADII:g} Earth radii out (doi:10.1029/2024JA033504).\n"
-                "Standoffs: Shue et al. (1998); Lugaz et al. (2016).\n\n"
+                "Standoffs: Shue et al. (1998); Jelinek et al. (2012).\n\n"
                 "The same builder produces all four traces (separate legend entries):\n"
                 "Magnetosphere, Bow Shock, Inner Radiation Belt, Outer Radiation Belt."
             ),

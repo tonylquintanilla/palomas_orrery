@@ -405,7 +405,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-321 | The orrery's hover text joins the provenance braid, Earth first | OPEN | 1.8 | 2026-09-10 |
 |  | L-194 | Text-only assertions -- claims the scanner cannot see | DEFERRED | 1.4 | 2026-08-15 |
 | ! | L-297 | Earth-Moon Lagrange points: serving path sized, deferred from the Earth exhibit | OPEN | 1.4 | 2026-09-07 |
-| ! | L-314 | Live solar wind conditions for the magnetosphere shells (SWPC through the nightly builder) | OPEN | 1.3 | 2026-09-10 |
+| ! | L-314 | Live solar wind conditions for the magnetosphere shells (SWPC through the nightly builder) | OPEN | 1.3 | 2026-09-12 |
 | ! | L-253 | The 660 discontinuity's depth variation -- held unsourced | OPEN | 1.2 | 2026-08-26 |
 | ! | L-308 | A shell-legend surface for static cards (deferred, with its trigger) | OPEN | 1.2 | 2026-09-08 |
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
@@ -6548,7 +6548,7 @@ open.
 index.html (the Featured rule), `tools/sweep_report.py`.
 
 #### [L-314] Live solar wind conditions for the magnetosphere shells (SWPC through the nightly builder)
-<!-- L:314 status:OPEN upd:2026-09-10 section:A flag: rice:3/3/60/4 -->
+<!-- L:314 status:OPEN upd:2026-09-12 section:A flag: rice:3/3/60/4 -->
 - **Where this came from.** L-305's 2026-09-10 design round fixed the
   magnetosphere shells at DECLARED conditions -- p = 2 nPa, Bz = 0 nT,
   v_sw = 400 km/s -- because that is what the store can source today.
@@ -6571,6 +6571,38 @@ index.html (the Featured rule), `tools/sweep_report.py`.
   replacing the "model condition" line. The i-panel gains one sentence
   saying the shells are drawn for the solar wind as measured at the
   build time named in the hover.
+- **A nightly SPOT value is the wrong sampler; fetch the day's
+  ENVELOPE.** Decided 2026-09-12. A shock passage compresses the
+  magnetosphere for HOURS. A build sampling once a day is most likely
+  to miss exactly the event worth showing, and the viewer then sees a
+  quiet magnetosphere on the day of a severe storm -- which is worse
+  than showing no weather at all, because it is confidently wrong.
+  SWPC publishes at cadence, so the builder takes the last 24 hours
+  and stores the minimum, maximum and mean of each input and of the two
+  derived standoffs. The shells draw at the mean; the hover carries the
+  band. Show the Envelope, and it costs nothing over a spot value
+  because the same fetch returns the series. A rolling history of those
+  daily bands is a second exhibit for almost no extra work, and is NOT
+  part of this item.
+- **What makes this worth a viewer's attention** [measured 2026-09-12
+  by evaluating Shue eq. 10 and Jelinek eq. 14 at the coefficient rows
+  L-305 stores; not a literature claim]. Geostationary orbit sits at
+  6.6 R_E and Earth's exhibit already serves it (`earth_geostationary`).
+  At Dp = 10 nPa with Bz = -20 nT the magnetopause stands off at
+  6.32 R_E -- INSIDE the satellites. Pressure alone barely does it: the
+  exponent is -1/6.6, so a tenfold pressure jump moves the nose only 29
+  percent, and at Bz = 0 it takes 36.6 nPa to reach geostationary
+  against 7.5 nPa at Bz = -20 nT. Southward field is what lets the
+  boundary in, and that asymmetry is the thing a static figure cannot
+  teach and two live numbers can.
+- **What it may NOT say: that a CME did it.** Attributing a compression
+  to a coronal mass ejection rather than to a corotating interaction
+  region is an ANALYSIS, not a measurement, and asserting it is the
+  unsourced-attribution class -- the same one L-305 removed from the
+  bow shock hover on 2026-09-12. What is publishable is what is
+  measured and published: the solar wind at L1, and SWPC's Kp and
+  G-scale storm level. "G3, measured" is sourced; "a CME hit" is not,
+  absent an event catalogue that says so and an access route for it.
 - **What it must not do.** Serve a value without its timestamp; fall
   back silently to the declared conditions when the fetch fails (Guard
   v2 quarantine and a stated fallback in the hover instead); or push

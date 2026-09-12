@@ -103,6 +103,9 @@ Role: devtool
 Domain: dev_tools
 
 Module created: August 2026 with Anthropic's Claude Opus 5.
+Module updated: September 2026 with Anthropic's Claude Opus 5 (L-305: the
+CHECKERS list gains test_status_lines.py, which enforces the Status Line
+grammar on every constants_new.py row that carries one.)
 """
 
 import hashlib
@@ -147,6 +150,7 @@ CHECKERS = [
     ('Constants relations', ['test_constants_provenance.py'], None),
     ('Cross-check annotations', ['test_cross_checked.py'], None),
     ('Citation inheritance', ['test_citation_inheritance.py'], None),
+    ('Status lines', ['test_status_lines.py'], None),
     ('Scanner recognition 1d/1e', ['test_provenance_1d.py'], None),
     ('Reset completeness', ['test_reset_completeness.py'],
      'RESET COMPLETENESS:'),

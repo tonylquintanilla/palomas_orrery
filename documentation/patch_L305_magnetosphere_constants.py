@@ -279,10 +279,13 @@ EARTH_MAGNETOPAUSE_STANDOFF_RADII = 10.251872972379905
 # Derived+: fourth figure is the last one the coefficients support.
 # Note: typed as a literal rather than written as the expression it is,
 # Note+: because the gallery's store parser evaluates only + - * / and **.
-# Note+: A tanh assignment is DROPPED there silently, and this pointer would
-# Note+: leave the drift check without anything saying so. L-322 retires
-# Note+: that parser and this becomes an expression then; the digits here
-# Note+: are the expression's own value, so that swap changes nothing.
+# Note+: A tanh assignment is left out of the parsed set, and the drift check
+# Note+: then reports the pointer as NOT IN STORE. That is announced rather
+# Note+: than silent, but it carries the wrong reason ("not a top-level
+# Note+: constant"), it does not gate, and the value stops being compared at
+# Note+: all. L-322 retires that parser and this becomes an expression then;
+# Note+: the digits here are the expression's own value, so that swap
+# Note+: changes nothing.
 # Note+: Superseded a typed 10.0 on 2026-09-12 (L-305). The old row's own
 # Note+: Source already read 10.2 R_E at these conditions while the value
 # Note+: read 10.0 -- a drift inside one row, cleared here.
@@ -350,6 +353,72 @@ MAGNETOPAUSE_4G = "EARTH_MAGNETOPAUSE_STANDOFF_RADII:.4g}"
 BOW_SHOCK_G = "EARTH_BOW_SHOCK_STANDOFF_RADII:g}"
 BOW_SHOCK_4G = "EARTH_BOW_SHOCK_STANDOFF_RADII:.4g}"
 
+# --- retired claims leaving the four visitor-facing strings (L-305) ---------
+# Deletion and correction only. Nothing new is said; the sentences that make
+# the new numbers false are removed and two attributions are corrected. The
+# rewrite that explains the models is L-305 item 7, after L-321's verdicts.
+
+MAGNETOSPHERE_SRC_OLD = '''                 "Source (standoff): Shue et al. (1998), J. Geophys. Res. 103:17691; "
+                 "Lugaz et al. (2016), Nat. Commun. 7:13001."]'''
+MAGNETOSPHERE_SRC_NEW = '''                 "Source (standoff): Shue et al. (1998), J. Geophys. Res. 103:17691."]'''
+
+BOW_SHOCK_MIDPOINT_OLD = '''                "Drawn at the midpoint of the 11-14 R_E measured under normal solar wind (Lugaz et al. 2016).<br>"
+'''
+BOW_SHOCK_MIDPOINT_NEW = ""
+
+BOW_SHOCK_SRC_OLD = '''                "Source (standoff): Lugaz et al. (2016), Nat. Commun. 7:13001, doi:10.1038/ncomms13001."]'''
+BOW_SHOCK_SRC_NEW = '''                "Source (standoff): Jelinek et al. (2012), J. Geophys. Res. 117:A05208, doi:10.1029/2011JA017252."]'''
+
+SHELL_COMMENT_OLD = """    # L-291: was a typed 15 R_E (textbook) with a comment conceding the
+    # measured 11-14. The store now holds the measured midpoint; see
+    # EARTH_BOW_SHOCK_STANDOFF_RADII in constants_new.py for the source.
+"""
+SHELL_COMMENT_NEW = """    # L-291: was a typed 15 R_E (textbook) with a comment conceding the
+    # measured 11-14. L-305: the midpoint is retired; the store now holds
+    # Jelinek et al. (2012) eq. 14 at the declared pressure. See
+    # EARTH_BOW_SHOCK_STANDOFF_RADII in constants_new.py for the source.
+"""
+
+TOOLTIP_SRC_OLD = '''                "Standoffs: Shue et al. (1998); Lugaz et al. (2016).\\n\\n"'''
+TOOLTIP_SRC_NEW = '''                "Standoffs: Shue et al. (1998); Jelinek et al. (2012).\\n\\n"'''
+
+# --- currency stamps, one per edited file -----------------------------------
+
+SHELLS_STAMP_OLD = """    much as in code, and a literal in dead code is still a store.
+\"\"\"
+"""
+SHELLS_STAMP_NEW = """    much as in code, and a literal in dead code is still a store.
+September 12, 2026 (L-305, Opus 5): the two magnetosphere standoffs are
+    superseded in constants_new.py -- Shue et al. (1998) for the
+    magnetopause, Jelinek et al. (2012) for the bow shock -- so the six
+    quotes of them here round to the reporting figure their rows state,
+    the retired Lugaz-midpoint sentence is deleted, and the bow shock's
+    source attribution moves from Lugaz to Jelinek. Deletion and
+    correction only; the rewrite is item 7.
+\"\"\"
+"""
+
+CONFIGS_STAMP_OLD = """    Tony's ruling, 2026-09-07.)
+\"\"\"
+"""
+CONFIGS_STAMP_NEW = """    Tony's ruling, 2026-09-07.)
+Module updated: September 12, 2026 with Anthropic's Claude Opus 5 (L-305:
+    Earth's magnetosphere tooltip quotes the two superseded standoffs at
+    the reporting figure their store rows state, and its standoff
+    attribution moves from Lugaz to Jelinek.)
+\"\"\"
+"""
+
+RUNNER_STAMP_OLD = """Module created: August 2026 with Anthropic's Claude Opus 5.
+\"\"\"
+"""
+RUNNER_STAMP_NEW = """Module created: August 2026 with Anthropic's Claude Opus 5.
+Module updated: September 2026 with Anthropic's Claude Opus 5 (L-305: the
+CHECKERS list gains test_status_lines.py, which enforces the Status Line
+grammar on every constants_new.py row that carries one.)
+\"\"\"
+"""
+
 # filename -> (md5 of LF-normalised content, [(label, old, new, count)])
 FILES = [
     ("constants_new.py", "3b4c9d4b4a45d6d9033bae5ee7d3a26d", [
@@ -364,16 +433,29 @@ FILES = [
          MAGNETOPAUSE_G, MAGNETOPAUSE_4G, 2),
         ("bow shock hover quotes round to 4 figures",
          BOW_SHOCK_G, BOW_SHOCK_4G, 2),
+        ("Lugaz leaves the magnetosphere standoff source line",
+         MAGNETOSPHERE_SRC_OLD, MAGNETOSPHERE_SRC_NEW, 1),
+        ("the Lugaz-midpoint sentence is deleted from the bow shock hover",
+         BOW_SHOCK_MIDPOINT_OLD, BOW_SHOCK_MIDPOINT_NEW, 1),
+        ("the bow shock standoff source becomes Jelinek",
+         BOW_SHOCK_SRC_OLD, BOW_SHOCK_SRC_NEW, 1),
+        ("the stale 'measured midpoint' code comment is corrected",
+         SHELL_COMMENT_OLD, SHELL_COMMENT_NEW, 1),
+        ("currency stamp", SHELLS_STAMP_OLD, SHELLS_STAMP_NEW, 1),
     ]),
     ("shell_configs.py", "ab8ba1d169ab3a61718d3a0239981a70", [
         ("magnetopause tooltip quote rounds to 4 figures",
          MAGNETOPAUSE_G, MAGNETOPAUSE_4G, 1),
         ("bow shock tooltip quote rounds to 4 figures",
          BOW_SHOCK_G, BOW_SHOCK_4G, 1),
+        ("the tooltip standoff attribution becomes Jelinek",
+         TOOLTIP_SRC_OLD, TOOLTIP_SRC_NEW, 1),
+        ("currency stamp", CONFIGS_STAMP_OLD, CONFIGS_STAMP_NEW, 1),
     ]),
     ("orrery_maintenance_run.py", "6de4c8571a08dec45fc62d51f4ae52ef", [
         ("wire test_status_lines.py into the CHECKERS list",
          RUNNER_OLD, RUNNER_NEW, 1),
+        ("currency stamp", RUNNER_STAMP_OLD, RUNNER_STAMP_NEW, 1),
     ]),
 ]
 
@@ -458,7 +540,7 @@ def main():
 
     print("")
     print("patch applied to 4 files")
-    print("     stamped: constants_new.py module docstring")
+    print("     stamped: all four module docstrings")
     print("")
     print("NEXT: run orrery_maintenance_run.py (Run button). Expect a new")
     print("      'Status lines' row reading 19 checked, 0 failed, and")

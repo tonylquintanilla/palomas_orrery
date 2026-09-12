@@ -10,9 +10,9 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 129  
-**Total Lines of Code (non-blank):** 104,716  
-**Total Public Functions/Classes:** 1,175
+**Total Python Files:** 130  
+**Total Lines of Code (non-blank):** 105,198  
+**Total Public Functions/Classes:** 1,181
 
 ## Classification Coverage
 
@@ -74,7 +74,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `asteroid_belt_visualization_shells.py` | Asteroid Belt Visualization Module Functions for creating visualizations of asteroid belt structures in 3D plots. Includes Main Belt, Hildas, Trojans, and Greeks. Also includes helper functions for dynamic Trojan positioning based on Jupiter's location. (403 lines) |
 | `comet_visualization_shells.py` | Comet visual components for 3D orrery plots. (1,878 lines) |
-| `earth_visualization_shells.py` | Earth interior and orbital shell traces. (1,109 lines) |
+| `earth_visualization_shells.py` | Earth interior and orbital shell traces. (1,115 lines) |
 | `eris_visualization_shells.py` | Eris interior and boundary shell traces. (482 lines) |
 | `jupiter_visualization_shells.py` | Jupiter interior, ring, and magnetosphere shell traces. (897 lines) |
 | `mars_visualization_shells.py` | Mars interior and remnant field shell traces. (884 lines) |
@@ -117,14 +117,14 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,250 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (512 lines) |
-| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (1,330 lines) |
+| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (1,536 lines) |
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (412 lines) |
 | `exoplanet_stellar_properties.py` | Stellar Properties for Exoplanet Host Stars (484 lines) |
 | `exoplanet_systems.py` | Hardcoded Exoplanet System Catalog (572 lines) |
 | `info_dictionary.py` | Descriptive text and narrative content for Paloma's Orrery. (2,050 lines) |
 | `messier_catalog.py` | Static catalog of Messier objects and bright deep-sky objects. (406 lines) |
 | `sgr_a_star_data.py` | S-star catalog and orbital mechanics for Sagittarius A*. (590 lines) |
-| `shell_configs.py` | Shell configuration data for all celestial bodies. (2,596 lines) |
+| `shell_configs.py` | Shell configuration data for all celestial bodies. (2,600 lines) |
 | `spacecraft_encounters.py` | Tagged encounter data for spacecraft missions in Paloma's Orrery. (1,298 lines) |
 | `star_notes.py` | Curated hover text annotations for notable stars. (1,158 lines) |
 | `star_properties.py` | SIMBAD stellar property queries with local caching. (340 lines) |
@@ -202,7 +202,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
 | `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (957 lines) |
-| `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (491 lines) |
+| `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (495 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,066 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (342 lines) |
@@ -212,6 +212,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (224 lines) |
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (485 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (120 lines) |
+| `test_status_lines.py` | Enforce the Status Line grammar in constants_new.py. (262 lines) |
 | `test_worksheet_checker.py` | - L-192. Can each layer actually fail? (995 lines) |
 | `test_worksheet_request_builder.py` | - L-195 / L-192. Does the marker join actually join, and can it fail? (439 lines) |
 | `verify_orbit_cache.py` | Safely verify and repair orbit_paths.json (172 lines) |
