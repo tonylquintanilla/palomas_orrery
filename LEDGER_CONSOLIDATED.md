@@ -127,6 +127,11 @@ Module updated: September 12, 2026 with Anthropic's Claude Opus 5
 (L-325 opened: the two derived rows store their reported figures and
 test_derived_figures.py guards them; L-314 gains the note that a fed
 pressure reopens that decision), built on d2430676.
+Module updated: September 12, 2026 with Anthropic's Claude Opus 5
+(L-305 item 6a recorded after the live gallery run verified it at
+0f51ce4f: two drifted values corrected, three claims retired, and
+Gap (2)'s closing plan marked superseded by L-323), built on
+77eb1439.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -6429,6 +6434,57 @@ follow the constants on their own, the surrounding sentences do not.
 Delete the drawer's magnetosphere absence and the i-panel paragraph.
 (8) Live store-drift run reads MATCH by name for every new pointer;
 then Mode 5 on both, phone first.
+**Note (2026-09-12) -- item 6 is split, and 6a has landed.** 6a is the
+half that was wrong TODAY, independent of anything the L-321
+worksheets return, and it is in the gallery at `0f51ce4f`. Two values
+that had drifted from the store they point at:
+`EARTH_MAGNETOPAUSE_STANDOFF_RADII` served 10.0 against a stored
+10.25, and `EARTH_BOW_SHOCK_STANDOFF_RADII` served 12.5 against a
+stored 13.51. Both now serve the stored figure exactly, which is what
+the drift check compares. Three retired claims went with them: the bow
+shock's source said the value was drawn at the midpoint of Lugaz's
+11-14 R_E, and now names Jelinek eq. 14 with Lugaz as corroboration;
+its note cited Farris & Russell (1994) for the model FORM, which is a
+miscitation because that paper is a standoff relation taking obstacle
+shape as an INPUT; and the magnetotail's `_declared` asserted an
+observed extent for the real tail.
+The tail retirement RESTATES NO FIGURE, on purpose. Writing the old
+number into the served prose to explain its removal would leave the
+same figure in the same place with nothing able to check it, which is
+the failure being fixed. The observed extent arrives at item 7, from a
+store row.
+**Note (2026-09-12) -- verified by the run, not by the patch.** The
+live gallery run at `0f51ce4f`: Served reachability passes with all
+eight probed files byte-identical to the working copy, and Store drift
+reports 48 MATCH, 0 DRIFT, 0 UNIT MISMATCH against orrery `77eb1439`,
+up from 46 MATCH and 2 DRIFT before the patch. The 5 pointers it could
+not examine are the same five L-322 measured on 2026-09-11 -- four
+`planet_poles` entries and a function default, none of them top-level
+constants -- and are unchanged by this work. A first live run was
+inconclusive rather than wrong: three files came back STALE because
+the gallery had not been pushed, and the run declined to call itself a
+pass.
+**Note (2026-09-12) -- Gap (2)'s closing plan is SUPERSEDED by L-323.**
+Gap (2) was closed on 2026-09-11 expecting item 6 to write the
+magnetotail figure as "to about 1,000 R_E" carrying its qualifier, and
+to move the served row from declared to V_SOURCED. L-323's design
+revision of 2026-09-12, reviewed twice, puts that figure in a STORE row
+at item 7 instead, in a different form: ONE SCALAR read "observed to at
+least", because Ness reports one crossing at an uncertain distance and
+a stated extent would assert two edges the source never gives. Serving
+it from prose at item 6 is the shape L-323 exists to remove. Two plans
+for one number were sitting in this block; the later one wins, and 6a
+has already acted on it.
+**Note (2026-09-12) -- what 6b still owes, and what it waits on.**
+Serve the shape parameters, the cut angle, the declared conditions and
+the validity range, and retire the magnetotail row's `base_radii` and
+`end_radii`. All of it describes the Shue and Jelinek models on the
+SERVED side, and `gallery/feature_renderers.js` has no magnetosphere
+code at all yet -- that is item 5, the port. Serving parameters nothing
+reads would publish a claim no one can see. 6b follows item 5.
+The BOUNDARY above held: `van_allen_belts` is byte-identical before and
+after 6a, and so are the magnetotail's drawing parameters. Checked by
+comparing the parsed structures, not by reading the diff.
 **Ref:** L-291, L-292, L-298 (the orrery-vs-exhibit gap, made concrete),
 L-306, L-314, L-315, `constants_new.py`, `earth_visualization_shells.py`,
 `planet_visualization_utilities.py`, `gallery/feature_renderers.js`,
