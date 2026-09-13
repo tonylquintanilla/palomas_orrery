@@ -107,6 +107,10 @@ Module updated: August 25, 2026 with Anthropic's Claude Opus 5
     (L-249 step 1: NAME = EXPR over tracked constants is a third case,
     DERIVED, so following the unit-variant convention no longer fails
     this gate).
+Module updated: September 12, 2026 with Anthropic's Claude Opus 5
+    (L-324: a removal verdict is cross-checked against the working
+    copy before it is printed. A name the diff dropped but the file
+    still assigns is reported unreadable, not removed).
 """
 
 import os
@@ -194,6 +198,36 @@ def module_level_names(here, base):
         notes.append('working copy unreadable (%s)' % exc)
 
     return names, '; '.join(notes)
+
+
+def working_copy_names(here):
+    """Every name assigned at module level in the WORKING copy.
+
+    module_level_names() returns the UNION of base and working, which
+    cannot answer the one question a removal verdict rests on: does
+    this name still exist NOW. So this reads the working copy alone.
+
+    Returns None if the file cannot be read or parsed. None means the
+    cross-check did not happen, and the caller says so rather than
+    letting an unchecked verdict print as if it had been checked.
+    """
+    try:
+        with open(os.path.join(here, TARGET), 'rb') as handle:
+            tree = ast.parse(handle.read().decode('utf-8', 'replace'))
+    except (OSError, SyntaxError, ValueError):
+        return None
+    names = set()
+    for node in tree.body:
+        if isinstance(node, ast.Assign):
+            targets = node.targets
+        elif isinstance(node, ast.AnnAssign):
+            targets = [node.target]
+        else:
+            continue
+        for target in targets:
+            if isinstance(target, ast.Name):
+                names.add(target.id)
+    return names
 
 
 def parse_derived(line, tracked):
@@ -489,8 +523,29 @@ def main():
         out, docstrings, tracked)
     derived_changed, derived_added, derived_removed = derived
 
-    if not (changed or added or removed or unparsed or derived_changed
-            or derived_added or derived_removed):
+    # A name can leave the DIFF without leaving the FILE. The diff
+    # reads lines: rewrite a value in a shape this reader cannot
+    # parse -- a right-hand side spread over several lines, say --
+    # and the name's old line vanishes with no new one to replace
+    # it, which is indistinguishable from a deletion. So ask the
+    # file itself before saying REMOVED. A wrong verdict is worse
+    # than an announced gap: it reads as a fact and nobody
+    # re-checks it. L-324.
+    present = working_copy_names(here)
+    unreadable = []
+    if present is None:
+        removal_note = ('working copy could not be parsed -- removal'
+                        ' verdicts below are from the diff alone and'
+                        ' were NOT cross-checked')
+    else:
+        unreadable = [(n, b) for n, b in removed if n in present]
+        removed = [(n, b) for n, b in removed if n not in present]
+        removal_note = ('%d removal verdict(s) cross-checked against'
+                        ' the %d name(s) the working copy assigns'
+                        % (len(removed) + len(unreadable), len(present)))
+
+    if not (changed or added or removed or unreadable or unparsed
+            or derived_changed or derived_added or derived_removed):
         print('  %s changed, but no numeric value moved.' % TARGET)
         print('  (Comments, docstring stamp, formatting, or other'
               ' non-numeric edits only.)')
@@ -519,6 +574,19 @@ def main():
         print('  %-30s NEW = %s' % (name, value))
         if not comment_moved:
             print('      added with no comment block -- needs a # Source:')
+        print()
+
+    for name, before in unreadable:
+        print('  %-30s STILL PRESENT -- value unreadable' % name)
+        print('      The diff dropped this name (was %s), but the'
+              % before)
+        print('      working copy still assigns it at module level.')
+        print('      Its value is written in a shape this reader')
+        print('      cannot see -- most often a right-hand side')
+        print('      spread over more than one line. This is NOT a')
+        print('      removal, and the value has NOT been checked.')
+        print('      Put the assignment on one line, or read it by')
+        print('      hand before committing.')
         print()
 
     for name, before in removed:
@@ -574,6 +642,11 @@ def main():
     print('-' * 70)
     print('  %d changed, %d added, %d removed'
           % (len(changed), len(added), len(removed)))
+    print('  %s' % removal_note)
+    if unreadable:
+        print('  %d name(s) the diff called gone that the file still'
+              ' assigns: %s'
+              % (len(unreadable), ', '.join(n for n, _ in unreadable)))
     if derived_changed or derived_added or derived_removed:
         print('  parents read from %s' % tracked_note)
         print('  %d derived line(s): %d changed, %d added, %d removed'
@@ -594,7 +667,8 @@ def main():
         print('  that moved alone did not come from a documented check.')
     print('-' * 70)
 
-    return 1 if (bare or unclear or unparsed or derived_bare) else 0
+    return 1 if (bare or unclear or unparsed or derived_bare
+                 or unreadable) else 0
 
 
 if __name__ == '__main__':

@@ -61,11 +61,15 @@ Design (matches test_constants_provenance.py):
     - main() runs all checks and prints a summary naming what it found
 
 Module created: September 2026 with Anthropic's Claude Opus 5.
+Module updated: September 12, 2026 with Anthropic's Claude Opus 5
+    (L-324: a row-shape guard. A value that is not a container
+    literal must fit on the assignment's own line).
 
 Role: devtool
 Domain: dev_tools
 """
 
+import ast
 import os
 import re
 import sys
@@ -237,6 +241,54 @@ def check_rows(rows, known_names):
     return failures, softs
 
 
+def check_row_shape(text):
+    """Return (failures, checked) for the shape of every top-level row.
+
+    A value that is not a container literal must fit on the
+    assignment's own line. constants_change_report.py reads values
+    line by line off a git diff, so a right-hand side spread over
+    several lines leaves the name with nothing readable after the
+    equals sign -- which it once reported as a REMOVED constant.
+
+    Container literals are exempt and must be. A dict or list is a
+    lookup table that cannot fit on one line, and the change report
+    reads its entries separately. Four rows here are exactly that:
+    CENTER_BODY_RADII, KNOWN_ORBITAL_PERIODS, stellar_class_labels
+    and spectral_subclass_temps. A flat one-assignment-per-line rule
+    would be false about all four.
+
+    This runs on the whole file every time rather than on a diff, so
+    it also sees rows nobody touched this session. L-324.
+    """
+    try:
+        tree = ast.parse(text)
+    except SyntaxError as exc:
+        return ([(TARGET, 'could not be parsed (%s)' % exc)], 0)
+    failures = []
+    checked = 0
+    for node in tree.body:
+        if isinstance(node, ast.Assign):
+            targets = node.targets
+        elif isinstance(node, ast.AnnAssign):
+            targets = [node.target]
+        else:
+            continue
+        checked += 1
+        if isinstance(node.value,
+                      (ast.Dict, ast.List, ast.Tuple, ast.Set)):
+            continue
+        if getattr(node, 'end_lineno', node.lineno) == node.lineno:
+            continue
+        for target in targets:
+            if isinstance(target, ast.Name):
+                failures.append((
+                    target.id,
+                    'value spans lines %d-%d; a non-container value '
+                    'must fit on its own line (L-324)'
+                    % (node.lineno, node.end_lineno)))
+    return (failures, checked)
+
+
 def main():
     here = os.path.dirname(os.path.abspath(__file__))
     path = os.path.join(here, TARGET)
@@ -250,6 +302,9 @@ def main():
     rows = parse_rows(text)
     known = set(row.name for row in rows)
     failures, softs = check_rows(rows, known)
+
+    shape_failures, shape_checked = check_row_shape(text)
+    failures = failures + shape_failures
 
     with_status = [r for r in rows if r.status is not None]
     by_kind = {}
@@ -279,6 +334,12 @@ def main():
           % (len(rows) - len(with_status), len(rows)))
     print("  These are scored by the scanner's window inference, which the")
     print("  Status Line rule says to delete. That walk is L-322's.")
+    print("")
+    print("Row shape: %d top-level assignment(s) read, %d failed."
+          % (shape_checked, len(shape_failures)))
+    print("  A value that is not a container literal must fit on the")
+    print("  assignment's own line, because constants_change_report.py")
+    print("  reads values line by line (L-324).")
     print("")
 
     if softs:

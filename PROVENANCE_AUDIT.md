@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: September 12, 2026
-Files scanned: 133
+Files scanned: 130
 Total findings: 1058
 Constants: 135 | Dicts: 41 | Display strings: 882
 
@@ -19,12 +19,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260913T020042Z | `bbd2dbe` | 130 | 1058 | 292 | 648 | 116 | 2 |
 | 20260912T231623Z | `5b88007` | 133 | 1058 | 292 | 648 | 116 | 2 |
 | 20260912T224840Z | `8845b6f` | 130 | 1058 | 292 | 648 | 116 | 2 |
 | 20260912T141129Z | `27ab0f9` | 129 | 1044 | 291 | 635 | 116 | 2 |
 | 20260912T134540Z | `2432db6` | 129 | 1044 | 291 | 635 | 116 | 2 |
 | 20260912T134428Z | `2432db6` | 129 | 1044 | 291 | 635 | 116 | 2 |
-| 20260911T232306Z | `1fa413d` | 130 | 1046 | 293 | 635 | 116 | 2 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
@@ -1765,9 +1765,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 103 | dict | ROLE_MAP[...] | (130 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 374 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 397 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 103 | dict | ROLE_MAP[...] | (127 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 371 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 394 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 

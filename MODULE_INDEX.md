@@ -10,9 +10,9 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 133  
-**Total Lines of Code (non-blank):** 105,696  
-**Total Public Functions/Classes:** 1,184
+**Total Python Files:** 130  
+**Total Lines of Code (non-blank):** 105,323  
+**Total Public Functions/Classes:** 1,183
 
 ## Classification Coverage
 
@@ -186,7 +186,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `add_docstrings.py` | Two related tools for module-level docstrings. (1,210 lines) |
-| `constants_change_report.py` | - what moved in constants_new.py, and why. (510 lines) |
+| `constants_change_report.py` | - what moved in constants_new.py, and why. (578 lines) |
 | `convert_hot_ph_to_json.py` | Convert HOT ocean pH data to JSON format Manual converter for ocean acidification visualization (199 lines) |
 | `create_cache_backups.py` | One-shot script to create timestamped backups of star data caches. (10 lines) |
 | `create_ephemeris_database.py` | Create satellite_ephemerides.json from multiple sources (246 lines) |
@@ -201,11 +201,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (958 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (961 lines) |
 | `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (495 lines) |
-| `patch_L305_bow_shock_one_line.py` | Put the bow shock assignment on one line so constants_change_report.py can read it. (118 lines) |
-| `patch_L323_L324_session_20260912.py` | The 2026-09-12 session, in the ledger. (254 lines) |
-| `patch_masterplan_20260912.py` | The 2026-09-12 entry in the master plan. (127 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,066 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (342 lines) |
@@ -215,7 +212,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (224 lines) |
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (485 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (120 lines) |
-| `test_status_lines.py` | Enforce the Status Line grammar in constants_new.py. (262 lines) |
+| `test_status_lines.py` | Enforce the Status Line grammar in constants_new.py. (317 lines) |
 | `test_worksheet_checker.py` | - L-192. Can each layer actually fail? (995 lines) |
 | `test_worksheet_request_builder.py` | - L-195 / L-192. Does the marker join actually join, and can it fail? (439 lines) |
 | `verify_orbit_cache.py` | Safely verify and repair orbit_paths.json (172 lines) |

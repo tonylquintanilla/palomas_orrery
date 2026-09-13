@@ -100,6 +100,17 @@ Module updated: September 12, 2026 with Anthropic's Claude Opus 5
 four test_status_lines.py rules to L-322, the retired
 "Verified: April 2026" stamp class to L-181; L-323's Gap corrected
 against the repo), built on 56f96004.
+Module updated: September 12, 2026 with Anthropic's Claude Opus 5
+(L-305 item 4: fifteen new magnetosphere rows, both standoffs
+superseded and derived, three retired claims removed; L-323 and
+L-324 opened; the bow shock hover's Lugaz-midpoint sentence deleted
+and its attribution moved to Jelinek), built on 5b88007f. Recorded
+later the same day by a following session, on Tony's approval: that
+build edited this file without stamping it.
+Module updated: September 12, 2026 with Anthropic's Claude Opus 5
+(L-324 built mechanically on Tony's ruling: the change report
+cross-checks a removal against the working copy, and
+test_status_lines.py guards row shape), built on bbd2dbe9.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -7063,7 +7074,42 @@ twin attribute the standoff to Jelinek. [verified @56f96004]
   whichever way this goes. It did not silently skip what it could not
   read; it named the lines and failed. That is A Check That Cannot Fail
   working as intended.
-**Gap:** decide which fix, then do it.
+**Note (2026-09-12) -- Tony's ruling: make it mechanical, not a rule.**
+Asked whether the convention could be a guard rather than a line in a
+skill that a session can overlook. It can, and building it found what
+a written rule would have got wrong. `constants_new.py` holds FOUR
+multi-line top-level assignments today -- `CENTER_BODY_RADII`,
+`KNOWN_ORBITAL_PERIODS`, `stellar_class_labels` and
+`spectral_subclass_temps` -- and all four are container literals, a
+dict or a list. A lookup table cannot fit on one line and should not.
+So the rule is NOT one assignment per line. It is that a value which
+is not a container literal must fit on the assignment's own line. A
+skill sentence saying "one assignment per line" would have been false
+about four rows on the day it was written, and nothing would have
+caught that, because a sentence in a skill is never run against the
+file it describes. [verified @bbd2dbe9]
+**Note (2026-09-12) -- what was built, in two halves.** First, the
+false verdict is gone. `constants_change_report.py` now asks the
+working copy whether a name still exists before printing REMOVED,
+and prints `STILL PRESENT -- value unreadable` instead, which fails
+the run and says the value was not checked. The tool already parsed
+both revisions with `ast` to build its name list; it simply never
+asked it here, so `removed` came from the diff hunk alone. Second,
+the guard. `test_status_lines.py` walks every top-level assignment
+and fails any non-container value spanning more than one line,
+naming the row and its line span. That file reads the whole store
+every maintenance run rather than a diff, so the check cannot be
+skipped by nobody touching the line -- which is the failure mode a
+skill rule has and this does not.
+**Note (2026-09-12) -- the two halves answer different questions.**
+The guard stops the shape being written. The cross-check stops the
+tool lying when it is written anyway -- by a hand edit, a merge, or
+a file the guard does not read. Neither makes the other redundant.
+**Gap:** confirm both on the next maintenance run, then close. The
+change report prints how many removal verdicts it cross-checked and
+against how many names; the checker prints how many assignments it
+read and how many failed. Both are new lines, so a pass carries its
+own evidence rather than being inferred from silence.
 **Ref:** L-305, L-322, `constants_change_report.py`,
 `test_status_lines.py`, `skills/orrery-coding-conventions/SKILL.md`.
 
