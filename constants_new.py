@@ -76,6 +76,11 @@ two standoffs are superseded and are now derived from those rows
 rather than typed. A Lugaz-midpoint derivation and a Farris & Russell
 "Model form" miscitation are removed. Every row written here carries a
 "# Unit:" line, the fifteenth comment key, per L-322 ruling 1)
+Module updated: September 12, 2026 with Anthropic's Claude Opus 5
+(L-325: the two derived rows now STORE the figure they already said
+to report -- 10.25 and 13.51 -- rather than the arithmetic result.
+test_derived_figures.py recomputes each from the inputs its Status
+line names and fails when the rounding stops holding)
 """
 
 import numpy as np
@@ -507,7 +512,7 @@ EARTH_BOW_SHOCK_CUT_ANGLE_DEG = 105.0
 # Note+: shock follows a Mach cone the paper does not model. At the declared
 # Note+: pressure the cut falls at x = -7.8 R_E, R_yz = 29.0 R_E.
 
-EARTH_MAGNETOPAUSE_STANDOFF_RADII = 10.251872972379905
+EARTH_MAGNETOPAUSE_STANDOFF_RADII = 10.25
 # Unit: r_earth
 # Status: derived 2026-09-12 -- inherits EARTH_MAGNETOPAUSE_SHUE_A1_RADII
 # Status+: through EARTH_MAGNETOPAUSE_SHUE_A5, EARTH_SOLAR_WIND_PRESSURE_NPA
@@ -519,15 +524,23 @@ EARTH_MAGNETOPAUSE_STANDOFF_RADII = 10.251872972379905
 # Derived+: REPORT 10.25. Table 1 gives a1 to +/- 0.10 R_E and a5 to
 # Derived+: +/- 0.5, and either one alone moves r0 by about +/- 0.09, so the
 # Derived+: fourth figure is the last one the coefficients support.
-# Note: typed as a literal rather than written as the expression it is,
-# Note+: because the gallery's store parser evaluates only + - * / and **.
-# Note+: A tanh assignment is left out of the parsed set, and the drift check
-# Note+: then reports the pointer as NOT IN STORE. That is announced rather
-# Note+: than silent, but it carries the wrong reason ("not a top-level
-# Note+: constant"), it does not gate, and the value stops being compared at
-# Note+: all. L-322 retires that parser and this becomes an expression then;
-# Note+: the digits here are the expression's own value, so that swap
-# Note+: changes nothing.
+# Note: the STORED value is that reported figure, not the arithmetic
+# Note+: result. Tony's ruling, 2026-09-12 (L-325): a store carries the
+# Note+: figures its sources support. Sixteen digits on a value uncertain
+# Note+: in the first decimal is calculator output, not precision. The
+# Note+: arithmetic stays recorded above, so the row is still auditable.
+# Note+: This row was ALREADY a literal and so already followed nothing:
+# Note+: the Status line above names EARTH_SOLAR_WIND_PRESSURE_NPA, which
+# Note+: is declared pending (L-314), and had it moved this value would
+# Note+: have gone quietly stale with no test anywhere to catch it.
+# Note+: test_derived_figures.py now recomputes this row from the inputs
+# Note+: the Status line names and fails when the rounding stops holding.
+# Note+: That check is what replaces an expression's automatic
+# Note+: recomputation, and it announces rather than moving a published
+# Note+: number quietly. An earlier Note here said L-322 would turn this
+# Note+: row back into an expression once the gallery's parser is retired.
+# Note+: That plan is superseded: the stored form is the reported figure
+# Note+: whatever the parser can read.
 # Note+: Superseded a typed 10.0 on 2026-09-12 (L-305). The old row's own
 # Note+: Source already read 10.2 R_E at these conditions while the value
 # Note+: read 10.0 -- a drift inside one row, cleared here.
@@ -536,7 +549,7 @@ EARTH_MAGNETOPAUSE_STANDOFF_RADII = 10.251872972379905
 # Note+: one. Lugaz et al. (2016), doi:10.1038/ncomms13001, gives 9-11 R_E
 # Note+: as the typical subsolar distance, which contains this.
 
-EARTH_BOW_SHOCK_STANDOFF_RADII = EARTH_BOW_SHOCK_JELINEK_R0_RADII * EARTH_SOLAR_WIND_PRESSURE_NPA ** (-1 / EARTH_BOW_SHOCK_JELINEK_EPS)
+EARTH_BOW_SHOCK_STANDOFF_RADII = 13.51
 # Unit: r_earth
 # Status: derived 2026-09-12 -- inherits EARTH_BOW_SHOCK_JELINEK_R0_RADII,
 # Status+: EARTH_BOW_SHOCK_JELINEK_EPS and EARTH_SOLAR_WIND_PRESSURE_NPA
@@ -544,7 +557,18 @@ EARTH_BOW_SHOCK_STANDOFF_RADII = EARTH_BOW_SHOCK_JELINEK_R0_RADII * EARTH_SOLAR_
 # Derived+: = 13.511736110493397. REPORT 13.51: the paper states no
 # Derived+: uncertainty on R0 or eps, so what bounds this is the crossing
 # Derived+: scatter, 0.69 R_E (fig. 7).
-# Note: superseded a typed 12.5 on 2026-09-12 (L-305). Two claims went with
+# Note: the STORED value is that reported figure, not the arithmetic
+# Note+: result. It was the expression
+# Note+: EARTH_BOW_SHOCK_JELINEK_R0_RADII *
+# Note+: EARTH_SOLAR_WIND_PRESSURE_NPA ** (-1 / EARTH_BOW_SHOCK_JELINEK_EPS)
+# Note+: until 2026-09-12. Tony's ruling (L-325): a store carries the
+# Note+: figures its sources support, and four of them against a crossing
+# Note+: scatter of 0.69 R_E is already generous. Storing the expression
+# Note+: bought an automatic recomputation when an input moved, which is
+# Note+: a published number changing with nobody looking;
+# Note+: test_derived_figures.py recomputes this row from its inputs and
+# Note+: FAILS instead, which is the same protection said out loud.
+# Note+: superseded a typed 12.5 on 2026-09-12 (L-305). Two claims went with
 # Note+: it. The value was the midpoint of Lugaz et al. (2016)'s 11-14 R_E,
 # Note+: which is not a model; and the shape was cited to Farris & Russell
 # Note+: (1994), doi:10.1029/94JA01020, which is a semiempirical relation for

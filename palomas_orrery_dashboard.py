@@ -34,6 +34,8 @@ covers Windows/Mac <MouseWheel>). Audited LAUNCH_GROUPS against both
 repos at HEAD; added the 5 gallery_cache_builder-era tools from the
 gallery repo's tools/ and 8 root-level devtools that were live but
 unlisted.
+September 12, 2026 with Anthropic's Claude Opus 5 (L-325): added the Test
+Derived Figures button, in the indented group under CHECKERS.
 September 12, 2026 with Anthropic's Claude Opus 5 (L-324): added the two
 missing indented buttons, Test Status Lines and Test Row Shape --
 test_status_lines.py had been in the maintenance runner since L-305 with
@@ -397,6 +399,19 @@ LAUNCH_GROUPS = {
          "test_cross_checked.py",
          "Pass/fail tests for the cross-check annotation grammar and V2 "
          "scoring. Run after editing annotations or the scanner's parser.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Test Derived Figures",
+         "test_derived_figures.py",
+         "Recomputes every derived constant in constants_new.py from "
+         "the inputs its Status line names, and checks the result "
+         "against the figure the row declares it reports. A derived "
+         "row stores its reported figure rather than the arithmetic "
+         "result, so nothing recomputes it on import; this is what "
+         "says so when an input moves. Fails on a derived row it does "
+         "not cover, so it cannot pass while blind.",
          SCRIPT_DIR,
          True,
          None,

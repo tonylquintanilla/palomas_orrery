@@ -110,6 +110,11 @@ Module updated: September 12, 2026 with Anthropic's Claude Opus 5 (L-324:
 the CHECKERS list gains Row shape -- the same script run --shape-only --
 so the row-shape guard reports its own numbers here instead of printing
 them above another checker's verdict, where the dashboard never saw them.)
+Module updated: September 12, 2026 with Anthropic's Claude Opus 5 (L-325:
+the CHECKERS list gains Derived figures, which recomputes each derived
+constant from the inputs it names and checks it against the figure it
+declares -- the check that replaces a stored expression's automatic
+recomputation.)
 """
 
 import hashlib
@@ -152,6 +157,12 @@ GENERATORS = [
 CHECKERS = [
     ('Constants change', ['constants_change_report.py'], None),
     ('Constants relations', ['test_constants_provenance.py'], None),
+    # A derived row stores its reported figure, so nothing recomputes
+    # it on import any more. This is what notices when an input moves
+    # and the stored figure stops following from it. It also fails on
+    # a derived row it does not cover, so it cannot pass while blind.
+    # L-325.
+    ('Derived figures', ['test_derived_figures.py'], None),
     ('Cross-check annotations', ['test_cross_checked.py'], None),
     ('Citation inheritance', ['test_citation_inheritance.py'], None),
     ('Status lines', ['test_status_lines.py'], None),

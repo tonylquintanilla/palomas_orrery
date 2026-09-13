@@ -123,6 +123,10 @@ Module updated: September 12, 2026 with Anthropic's Claude Opus 5
 (L-323: the design record's revision 2 and the L-321 worksheet
 prompts' revision 3 are written; the Gap moves to sending them),
 built on 62ee5149.
+Module updated: September 12, 2026 with Anthropic's Claude Opus 5
+(L-325 opened: the two derived rows store their reported figures and
+test_derived_figures.py guards them; L-314 gains the note that a fed
+pressure reopens that decision), built on d2430676.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -6690,6 +6694,16 @@ index.html (the Featured rule), `tools/sweep_report.py`.
   units (L-305 reads them first). Confidence 60: a feed the builder
   has never read, in a format not yet confirmed. Not started until
   L-305's renderer is on the phone.
+**Note (2026-09-12, Tony) -- this item reopens L-325.** We are considering
+serving solar wind SPEED and PRESSURE from the cache. If EARTH_SOLAR_WIND_PRESSURE_NPA
+stops being a declared constant and becomes a fed value, the two derived
+standoffs stop being fixed numbers with a reported figure and become
+quantities that move with the feed. L-325's decision -- store the reported
+figure, let `test_derived_figures.py` catch an input that moves -- is
+written for a pressure that changes rarely and deliberately. A feed changes
+it on a schedule, and a test that fails every time the wind blows is a test
+nobody reads. Re-examine both when this item is designed, not when it is
+built.
 **Gap:** the whole item; sequenced after L-305 closes.
 **Ref:** L-305, tools/gallery_cache_builder.py, data/objects_config.json,
 gallery/feature_renderers.js, skills/gallery-cache-builder/SKILL.md.
@@ -7193,6 +7207,57 @@ build and render without error, which is not the same as looking right.
 Tony's eyes close this one.
 **Ref:** L-305, L-322, `constants_change_report.py`,
 `test_status_lines.py`, `skills/orrery-coding-conventions/SKILL.md`.
+
+#### [L-325] A derived row stores its reported figure, not the arithmetic result
+<!-- L:325 status:OPEN upd:2026-09-12 section:A flag: rice:3/3/90/2 -->
+- **Where this came from.** L-305 item 6 was about to copy two standoff
+  values into the gallery config, and Claude proposed copying them at full
+  stored precision -- 10.251872972379905 and 13.511736110493397 -- on the
+  reasoning that the served copy must equal the store exactly or the live
+  drift check reports DRIFT forever. Tony stopped it: "the store should
+  only carry significant digits not what the calculator generates."
+- **He was right, and the store already half agreed.** Both rows already
+  declared what to report, with the reason. The magnetopause row says
+  REPORT 10.25, because Shue's Table 1 gives a1 to +/- 0.10 R_E and a5 to
+  +/- 0.5 and either alone moves r0 by about +/- 0.09. The bow shock row
+  says REPORT 13.51, because Jelinek states no uncertainty on his fitted
+  numbers and what bounds the value is the 0.69 R_E crossing scatter. The
+  rows said what to report and then stored something else.
+- **What the argument for the expression turned out to be worth.** A
+  stored expression recomputes when an input moves, which a literal does
+  not. That is real. But NOTHING TESTED EITHER ROW: the provenance suite
+  has a derived-constants section and neither standoff is in it. And the
+  magnetopause was already a literal inheriting EARTH_SOLAR_WIND_PRESSURE_NPA,
+  which is declared pending under L-314 -- so the failure mode the ruling
+  was accused of creating already existed in the store, unguarded. Two
+  derived rows in the whole file, one of them already doing it Tony's way.
+- **What was built.** `constants_new.py`: both rows store 10.25 and 13.51.
+  `test_derived_figures.py`: recomputes each derived row from the inputs
+  its own Status line names, rounds to the figures its own REPORT declares,
+  and fails when the two stop agreeing -- and fails on any derived row it
+  does not cover, so it cannot pass while blind. Wired into
+  `orrery_maintenance_run.py` as Derived figures and into the dashboard as
+  Test Derived Figures, on Tony's instruction that a new test gets both.
+**Tony:** "Why do we need to carry a full value that is not supported? Why
+does the calculation need to be re-derived every time creating this
+problem again? Why not do the arithmetic once, correct it to significant
+figures, store it and serve it?"
+**Note:** the trade is an automatic recomputation for a check that
+announces. That is the better half of the trade: a silent recompute
+changes a published number with nobody looking, while a literal plus a
+test FAILS when its inputs move.
+**Note:** nothing visible changed. The only consumers are
+`shell_configs.py` and `earth_visualization_shells.py`, both of which
+already print these at `:.4g` -- which is 10.25 and 13.51. The drawn
+shells move by under 0.002 R_E against a 0.69 R_E scatter.
+**Gap:** the rule belongs in `provenance-discipline` at its next bump --
+a derived row stores the figure its sources support, and a check recomputes
+it. Not taken this session: a skill bump cannot be verified from inside the
+session that makes it. Also open: L-305 item 6 still serves 10.0 and 12.5,
+so the gallery's live Store drift check reports 2 DRIFT until it lands.
+**Ref:** L-305, L-314, L-322, `constants_new.py`,
+`test_derived_figures.py`, `orrery_maintenance_run.py`,
+`palomas_orrery_dashboard.py`, `skills/provenance-discipline/SKILL.md`.
 
 #### [L-322] Units declared in the store, and the orrery as producer
 <!-- L:322 status:OPEN upd:2026-09-12 section:A flag: rice:4/5/70/6 -->
