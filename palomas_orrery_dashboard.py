@@ -34,6 +34,13 @@ covers Windows/Mac <MouseWheel>). Audited LAUNCH_GROUPS against both
 repos at HEAD; added the 5 gallery_cache_builder-era tools from the
 gallery repo's tools/ and 8 root-level devtools that were live but
 unlisted.
+September 12, 2026 with Anthropic's Claude Opus 5 (L-324): added the two
+missing indented buttons, Test Status Lines and Test Row Shape --
+test_status_lines.py had been in the maintenance runner since L-305 with
+no button here. Reordered Developer Tools on Tony's instruction: the
+indented group is GENERATORS then CHECKERS, each alphabetical, and the
+standalone tools below are alphabetical too. A bare string in a
+LAUNCH_GROUPS list is now drawn as a heading.
 """
 
 import os
@@ -267,30 +274,7 @@ LAUNCH_GROUPS = {
          "below is included in it and can still be launched on its own.",
          SCRIPT_DIR,
          True),
-        ("Update Ledger Index",
-         "ledger_index.py",
-         "Regenerate the INDEX in LEDGER_CONSOLIDATED.md from the DETAIL blocks "
-         "and migrate DONE items to section C. Run after editing any ledger block.",
-         SCRIPT_DIR,
-         True,
-         None,
-         True),
-        ("Update Skill Manifest",
-         "skills_index.py",
-         "Regenerate the Skill Manifest table in the protocol from skills/*/SKILL.md. "
-         "Run after adding, renaming, or versioning a skill.",
-         SCRIPT_DIR,
-         True,
-         None,
-         True),
-        ("Regenerate Module Atlas",
-         "module_atlas.py",
-         "Scan codebase, generate MODULE_ATLAS.md. "
-         "Run after significant codebase changes (new modules, reorganizations).",
-         SCRIPT_DIR,
-         True,
-         None,
-         True),
+        "GENERATORS -- regenerated every run; a no-op when nothing moved",
         ("Data Inventory",
          "data_inventory.py",
          "Inventory the large, gitignored data stores (data/, star_data/). "
@@ -315,110 +299,31 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
-        ("Constants Change Report",
-         "constants_change_report.py",
-         "Ask git what changed in constants_new.py since the last commit "
-         "and report each moved value in words. The line that matters "
-         "says whether the provenance moved WITH the number: a deliberate "
-         "correction edits the value and its comment block together, "
-         "while corruption -- a bad merge, a stray keystroke, a copied "
-         "stale value -- moves the number alone and leaves the evidence "
-         "describing the old one. Run before committing a change to "
-         "constants_new.py.",
+        ("Regenerate Module Atlas",
+         "module_atlas.py",
+         "Scan codebase, generate MODULE_ATLAS.md. "
+         "Run after significant codebase changes (new modules, reorganizations).",
          SCRIPT_DIR,
          True,
          None,
          True),
-        ("Test Constants Provenance",
-         "test_constants_provenance.py",
-         "Pass/fail regression tests for constants_new.py. "
-         "Run before committing changes to constants, or first if a plot looks wrong.",
+        ("Update Ledger Index",
+         "ledger_index.py",
+         "Regenerate the INDEX in LEDGER_CONSOLIDATED.md from the DETAIL blocks "
+         "and migrate DONE items to section C. Run after editing any ledger block.",
          SCRIPT_DIR,
          True,
          None,
          True),
-        ("Test Cross-Check Annotations",
-         "test_cross_checked.py",
-         "Pass/fail tests for the cross-check annotation grammar and V2 "
-         "scoring. Run after editing annotations or the scanner's parser.",
+        ("Update Skill Manifest",
+         "skills_index.py",
+         "Regenerate the Skill Manifest table in the protocol from skills/*/SKILL.md. "
+         "Run after adding, renaming, or versioning a skill.",
          SCRIPT_DIR,
          True,
          None,
          True),
-        ("Test Citation Inheritance",
-         "test_citation_inheritance.py",
-         "Pass/fail tests for block-scoped citation inheritance in the "
-         "provenance scanner.",
-         SCRIPT_DIR,
-         True,
-         None,
-         True),
-        ("Test Scanner Recognition",
-         "test_provenance_1d.py",
-         "Proves the provenance scanner still recognizes a real citation "
-         "and still refuses a fake one. Covers shadow constants (a local "
-         "copy of a value already defined and cited in constants_new.py), "
-         "author-year forms like (Nolan et al. 2013), F/C units, and tier "
-         "labels. Half the tests are written backwards on purpose: a regex "
-         "that is too loose clears findings by matching what it should "
-         "not, and the Tier-1 count then falls, which looks like progress. "
-         "Ledger L-156, sub-steps 1d and 1e.",
-         SCRIPT_DIR,
-         True,
-         None,
-         True),
-        ("Test Reset Completeness",
-         "test_reset_completeness.py",
-         "Guard the Reset button against partial-reset drift: dirties every "
-         "tracked control, calls the live reset handler, asserts everything "
-         "returns to its startup default.",
-         SCRIPT_DIR,
-         True,
-         None,
-         True),
-        ("Test Orbit Cache",
-         "test_orbit_cache.py",
-         "Comprehensive test suite for orbit data caching, format conversion, "
-         "and repair. Run alongside Verify Orbit Cache when the cache looks off.",
-         SCRIPT_DIR,
-         True,
-         None,
-         True),
-        ("Worksheet Checker",
-         "worksheet_checker.py",
-         "Open the worksheet each cross-check annotation names and report "
-         "whether that worksheet records the check the annotation claims. "
-         "Catches a value edited AFTER its check, which no diff-based tool "
-         "can see once the edit is committed. Report-only -- it writes "
-         "WORKSHEET_CHECK.md and never gates a push. Run after writing "
-         "annotations, after a value moves, or before a gallery build.",
-         SCRIPT_DIR,
-         True,
-         None,
-         True),
-        ("Test Worksheet Checker",
-         "test_worksheet_checker.py",
-         "Pass/fail tests for the worksheet checker. Every layer is "
-         "exercised twice, once with evidence that clears it and once "
-         "with an injected violation that must not, because zero "
-         "findings and a broken check look identical. Run after editing "
-         "the checker or the worksheet schema.",
-         SCRIPT_DIR,
-         True,
-         None,
-         True),
-        ("Worksheet Key Round Trip",
-         "test_worksheet_keys.py",
-         "Assert that every annotated site mints a key that resolves back "
-         "to it, on every run. A rename breaks it, a split implementation "
-         "between the builder and the checker breaks it, and a change to "
-         "the enclosing-name rule breaks it -- all three loudly, at the "
-         "commit that introduced them, rather than months later when a "
-         "returned worksheet will not bind.",
-         SCRIPT_DIR,
-         True,
-         None,
-         True),
+        "CHECKERS -- these decide the push call",
         ("Builder Marker Join",
          "test_worksheet_request_builder.py",
          "Test that a citation continued onto a marked second line "
@@ -430,6 +335,20 @@ LAUNCH_GROUPS = {
          "negative cases are the test. The last check runs against the "
          "real corpus. Run after editing the builder or relabeling a "
          "continuation.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Constants Change Report",
+         "constants_change_report.py",
+         "Ask git what changed in constants_new.py since the last commit "
+         "and report each moved value in words. The line that matters "
+         "says whether the provenance moved WITH the number: a deliberate "
+         "correction edits the value and its comment block together, "
+         "while corruption -- a bad merge, a stray keystroke, a copied "
+         "stale value -- moves the number alone and leaves the evidence "
+         "describing the old one. Run before committing a change to "
+         "constants_new.py.",
          SCRIPT_DIR,
          True,
          None,
@@ -458,6 +377,178 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
+        ("Test Citation Inheritance",
+         "test_citation_inheritance.py",
+         "Pass/fail tests for block-scoped citation inheritance in the "
+         "provenance scanner.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Test Constants Provenance",
+         "test_constants_provenance.py",
+         "Pass/fail regression tests for constants_new.py. "
+         "Run before committing changes to constants, or first if a plot looks wrong.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Test Cross-Check Annotations",
+         "test_cross_checked.py",
+         "Pass/fail tests for the cross-check annotation grammar and V2 "
+         "scoring. Run after editing annotations or the scanner's parser.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Test Orbit Cache",
+         "test_orbit_cache.py",
+         "Comprehensive test suite for orbit data caching, format conversion, "
+         "and repair. Run alongside Verify Orbit Cache when the cache looks off.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Test Reset Completeness",
+         "test_reset_completeness.py",
+         "Guard the Reset button against partial-reset drift: dirties every "
+         "tracked control, calls the live reset handler, asserts everything "
+         "returns to its startup default.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Test Row Shape",
+         "test_status_lines.py",
+         "The row-shape guard by itself. A value that is not a container "
+         "literal must fit on the assignment's own line, because "
+         "constants_change_report.py reads values line by line off a git "
+         "diff and once reported a constant REMOVED that was only unreadable. "
+         "Dicts and lists are exempt: a lookup table cannot fit on one line. "
+         "Same script as Test Status Lines, run with --shape-only so it ends "
+         "on its own verdict.",
+         SCRIPT_DIR,
+         True,
+         ["--shape-only"],
+         True),
+        ("Test Scanner Recognition",
+         "test_provenance_1d.py",
+         "Proves the provenance scanner still recognizes a real citation "
+         "and still refuses a fake one. Covers shadow constants (a local "
+         "copy of a value already defined and cited in constants_new.py), "
+         "author-year forms like (Nolan et al. 2013), F/C units, and tier "
+         "labels. Half the tests are written backwards on purpose: a regex "
+         "that is too loose clears findings by matching what it should "
+         "not, and the Tier-1 count then falls, which looks like progress. "
+         "Ledger L-156, sub-steps 1d and 1e.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Test Status Lines",
+         "test_status_lines.py",
+         "Pass/fail tests for the Status Line grammar on every "
+         "constants_new.py row that carries one, plus coverage on the rows "
+         "that carry none. Runs the row-shape guard as well; Test Row Shape "
+         "below runs that half on its own.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Test Worksheet Checker",
+         "test_worksheet_checker.py",
+         "Pass/fail tests for the worksheet checker. Every layer is "
+         "exercised twice, once with evidence that clears it and once "
+         "with an injected violation that must not, because zero "
+         "findings and a broken check look identical. Run after editing "
+         "the checker or the worksheet schema.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Worksheet Checker",
+         "worksheet_checker.py",
+         "Open the worksheet each cross-check annotation names and report "
+         "whether that worksheet records the check the annotation claims. "
+         "Catches a value edited AFTER its check, which no diff-based tool "
+         "can see once the edit is committed. Report-only -- it writes "
+         "WORKSHEET_CHECK.md and never gates a push. Run after writing "
+         "annotations, after a value moves, or before a gallery build.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Worksheet Key Round Trip",
+         "test_worksheet_keys.py",
+         "Assert that every annotated site mints a key that resolves back "
+         "to it, on every run. A rename breaks it, a split implementation "
+         "between the builder and the checker breaks it, and a change to "
+         "the enclosing-name rule breaks it -- all three loudly, at the "
+         "commit that introduced them, rather than months later when a "
+         "returned worksheet will not bind.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Add Module Docstrings",
+         "add_docstrings.py",
+         "Add or improve module-level docstrings across the codebase; touches no code. "
+         "Run after adding modules, before regenerating the Module Atlas.",
+         SCRIPT_DIR,
+         True),
+        ("Animation HTML Tool",
+         "measure_animation_html.py",
+         "Measure a saved animation HTML: trace count, frame count, which traces "
+         "are carried inside frames, and frames payload size. Run to compare a "
+         "baseline against a patched export and quantify the frame-fence fix.",
+         SCRIPT_DIR,
+         True),
+        ("Climate Cache Manager",
+         "climate_cache_manager.py",
+         "Safely update the climate data caches, with validation and rollback.",
+         SCRIPT_DIR,
+         True),
+        ("Create Ephemeris Database",
+         "create_ephemeris_database.py",
+         "(Re)build satellite_ephemerides.json from idealized_orbits.py plus "
+         "any downloaded Horizons ephemeris files.",
+         SCRIPT_DIR,
+         True),
+        ("Dependency Trace",
+         "dep_trace.py",
+         "Map who depends on (and is consumed by) a module. "
+         "Run before editing: python dep_trace.py <module_name> [hops]",
+         SCRIPT_DIR,
+         True),
+        ("Export Orbit Cache",
+         "export_orbit_cache.py",
+         "Phase 1b devtool: read the local orbit caches (read-only) and write "
+         "web-servable orbit/position files for the interactive gallery.",
+         SCRIPT_DIR,
+         True),
+        ("Osculating Cache Manager",
+         "osculating_cache_manager.py",
+         "Load and report on the osculating orbital elements cache "
+         "(two-generation backup, always-prompt workflow).",
+         SCRIPT_DIR,
+         True),
+        ("SIMBAD Query Manager",
+         "simbad_manager.py",
+         "Verify SIMBAD querying against a small sample of objects "
+         "(rate limiting and retry logic).",
+         SCRIPT_DIR,
+         True),
+        ("Verify Orbit Cache",
+         "verify_orbit_cache.py",
+         "Back up, validate, and repair orbit_paths.json, reporting any issues. "
+         "Run if orbit plots look wrong or the cache may be corrupted.",
+         SCRIPT_DIR,
+         True),
+        ("VOT Cache Manager",
+         "vot_cache_manager.py",
+         "Verify VizieR VOT cache file integrity.",
+         SCRIPT_DIR,
+         True),
         ("Worksheet Request Builder",
          "worksheet_request_builder.py",
          "Write the cross-check request that goes OUT to a reader. The "
@@ -475,65 +566,6 @@ LAUNCH_GROUPS = {
          "if either name is taken. Send the .jsonl; the .md is the "
          "fallback if a return will not parse. It judges nothing -- "
          "reading the returns is Worksheet Checker, above.",
-         SCRIPT_DIR,
-         True),
-        ("Dependency Trace",
-         "dep_trace.py",
-         "Map who depends on (and is consumed by) a module. "
-         "Run before editing: python dep_trace.py <module_name> [hops]",
-         SCRIPT_DIR,
-         True),
-        ("Animation HTML Tool",
-         "measure_animation_html.py",
-         "Measure a saved animation HTML: trace count, frame count, which traces "
-         "are carried inside frames, and frames payload size. Run to compare a "
-         "baseline against a patched export and quantify the frame-fence fix.",
-         SCRIPT_DIR,
-         True),
-        ("Add Module Docstrings",
-         "add_docstrings.py",
-         "Add or improve module-level docstrings across the codebase; touches no code. "
-         "Run after adding modules, before regenerating the Module Atlas.",
-         SCRIPT_DIR,
-         True),
-        ("Verify Orbit Cache",
-         "verify_orbit_cache.py",
-         "Back up, validate, and repair orbit_paths.json, reporting any issues. "
-         "Run if orbit plots look wrong or the cache may be corrupted.",
-         SCRIPT_DIR,
-         True),
-        ("Export Orbit Cache",
-         "export_orbit_cache.py",
-         "Phase 1b devtool: read the local orbit caches (read-only) and write "
-         "web-servable orbit/position files for the interactive gallery.",
-         SCRIPT_DIR,
-         True),
-        ("Create Ephemeris Database",
-         "create_ephemeris_database.py",
-         "(Re)build satellite_ephemerides.json from idealized_orbits.py plus "
-         "any downloaded Horizons ephemeris files.",
-         SCRIPT_DIR,
-         True),
-        ("Climate Cache Manager",
-         "climate_cache_manager.py",
-         "Safely update the climate data caches, with validation and rollback.",
-         SCRIPT_DIR,
-         True),
-        ("VOT Cache Manager",
-         "vot_cache_manager.py",
-         "Verify VizieR VOT cache file integrity.",
-         SCRIPT_DIR,
-         True),
-        ("Osculating Cache Manager",
-         "osculating_cache_manager.py",
-         "Load and report on the osculating orbital elements cache "
-         "(two-generation backup, always-prompt workflow).",
-         SCRIPT_DIR,
-         True),
-        ("SIMBAD Query Manager",
-         "simbad_manager.py",
-         "Verify SIMBAD querying against a small sample of objects "
-         "(rate limiting and retry logic).",
          SCRIPT_DIR,
          True),
     ],
@@ -931,6 +963,16 @@ class PalomasOrreryDashboardFrame(ctk.CTkFrame):
             cards_frame.pack(fill="x", padx=20, pady=(0, 4))
 
             for i, entry in enumerate(entries):
+                # A bare string is a HEADING inside the group, not a
+                # card. The maintenance runner prints GENERATORS then
+                # CHECKERS, and the indented list here is that same
+                # list, so it reads the same way. Alphabetical order
+                # within each half is Tony's, 2026-09-12: without the
+                # two labels a sorted run of twenty buttons gives no
+                # clue where one kind stops and the other starts.
+                if isinstance(entry, str):
+                    self._build_indent_heading(cards_frame, entry)
+                    continue
                 name, script, desc = entry[0], entry[1], entry[2]
                 base_dir = entry[3] if len(entry) > 3 else SCRIPT_DIR
                 interactive = entry[4] if len(entry) > 4 else False
@@ -939,6 +981,18 @@ class PalomasOrreryDashboardFrame(ctk.CTkFrame):
                 self._build_launch_card(cards_frame, name, script, desc,
                                         base_dir, interactive, args, i,
                                         indent)
+
+    def _build_indent_heading(self, parent, text):
+        """A dim heading inside the indented maintenance-run group.
+
+        Drawn for a bare string in a LAUNCH_GROUPS list. Not a card and
+        not clickable: it names which half of the runner the buttons
+        below it belong to.
+        """
+        ctk.CTkLabel(
+            parent, text=text,
+            font=FONT_DESC, text_color=COLOR_TEXT_DIM, anchor="w"
+        ).pack(anchor="w", padx=(28, 0), pady=(10, 2))
 
     def _build_launch_card(self, parent, name, script, desc, base_dir,
                            interactive, args, index, indent=False):

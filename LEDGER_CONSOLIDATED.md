@@ -115,6 +115,10 @@ Module updated: September 12, 2026 with Anthropic's Claude Opus 5
 (L-324 follow-on: the row-shape guard gets its own dashboard row,
 and a shape failure is no longer counted as a malformed status
 line), built on 6284215b.
+Module updated: September 12, 2026 with Anthropic's Claude Opus 5
+(L-324: the two missing dashboard buttons added, and Developer Tools
+reordered into GENERATORS and CHECKERS, each alphabetical), built on
+a391262e.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -7131,11 +7135,29 @@ denominator: the shape check reads 103 assignments, the grammar
 check judges the 19 rows that carry a status line. Two checks, two
 denominators, now counted and named separately. Caught by running
 the failure path rather than by reading the code.
-**Gap:** confirm `Row shape` appears in the dashboard's checker list
-reporting 103 read and 0 wrong, then close. The first half is
-already confirmed: the run at `6284215b` passed 12 of 12 gating
-checkers, with the change report reporting no changes to
-`constants_new.py` and the status-line checker clean.
+**Note (2026-09-12) -- the runner and the dashboard had drifted, and
+nothing checks that they agree.** Tony went looking for the new check on
+the dashboard and could not find it. The cause was not the row-shape
+guard: `test_status_lines.py` has been in `orrery_maintenance_run.py`
+since L-305 and never had a button in `palomas_orrery_dashboard.py` at
+all, so its `--shape-only` half had nowhere to appear either. Diffing
+the two lists, rather than adding the one button known to be missing, is
+what showed it -- 5 generators and 15 checkers in the runner against 18
+indented buttons on the dashboard, exactly TWO absent: Status lines and
+Row shape. Both added. The lists agree at this SHA and nothing enforces
+that they keep agreeing; that parity check is one row of backlog by
+class, not built here. [verified @a391262e]
+**Note (2026-09-12) -- the dashboard group is reordered, Tony's
+instruction.** The indented group is GENERATORS then CHECKERS, each
+alphabetical, mirroring the runner's own two sections; the standalone
+tools below are alphabetical too, sorted case-insensitively so Verify
+Orbit Cache precedes VOT Cache Manager. Every pre-existing entry was
+carried over byte for byte -- the new list was generated from the file's
+own source text rather than retyped -- so no description, path or flag
+moved with the sort.
+**Gap:** Mode 5 on the dashboard. The two buttons and the two headings
+build and render without error, which is not the same as looking right.
+Tony's eyes close this one.
 **Ref:** L-305, L-322, `constants_change_report.py`,
 `test_status_lines.py`, `skills/orrery-coding-conventions/SKILL.md`.
 
