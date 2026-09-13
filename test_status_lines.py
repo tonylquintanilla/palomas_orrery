@@ -64,6 +64,10 @@ Module created: September 2026 with Anthropic's Claude Opus 5.
 Module updated: September 12, 2026 with Anthropic's Claude Opus 5
     (L-324: a row-shape guard. A value that is not a container
     literal must fit on the assignment's own line).
+Module updated: September 12, 2026 with Anthropic's Claude Opus 5
+    (L-324 follow-on: --shape-only runs the guard alone so the
+    maintenance dashboard can carry it as its own row, and a shape
+    failure is no longer counted as a malformed status line).
 
 Role: devtool
 Domain: dev_tools
@@ -289,6 +293,44 @@ def check_row_shape(text):
     return (failures, checked)
 
 
+def report_shape_only(text):
+    """The row-shape guard alone, for the maintenance dashboard.
+
+    The dashboard prints ONE line per checker -- the last meaningful
+    line of that tool's output -- so a guard reporting from inside
+    another tool's summary never reaches it, even while it gates.
+    A failure was visible, because it failed the row. A PASS was
+    not, and a pass nobody can see is indistinguishable from a
+    check that never ran.
+
+    So this mode ends on its own verdict, and that verdict names
+    how many assignments were read. L-324.
+    """
+    failures, checked = check_row_shape(text)
+    print("=" * 70)
+    print("  ROW SHAPE -- %s" % TARGET)
+    print("=" * 70)
+    print("")
+    print("A value that is not a container literal must fit on the")
+    print("assignment's own line, because constants_change_report.py")
+    print("reads values line by line off a git diff. Container")
+    print("literals -- a dict or a list -- are exempt: a lookup table")
+    print("cannot fit on one line and the report reads its entries")
+    print("separately.")
+    print("")
+    if failures:
+        print("FAILURES (%d):" % len(failures))
+        for name, message in failures:
+            print("  %-44s %s" % (name, message))
+        print("")
+        print("%d of %d row shapes are wrong in %s."
+              % (len(failures), checked, TARGET))
+        return 1
+    print("All %d row shapes in %s fit the assignment's own line."
+          % (checked, TARGET))
+    return 0
+
+
 def main():
     here = os.path.dirname(os.path.abspath(__file__))
     path = os.path.join(here, TARGET)
@@ -299,12 +341,15 @@ def main():
     with open(path, "r") as handle:
         text = handle.read()
 
+    if "--shape-only" in sys.argv[1:]:
+        return report_shape_only(text)
+
     rows = parse_rows(text)
     known = set(row.name for row in rows)
-    failures, softs = check_rows(rows, known)
+    grammar_failures, softs = check_rows(rows, known)
 
     shape_failures, shape_checked = check_row_shape(text)
-    failures = failures + shape_failures
+    failures = grammar_failures + shape_failures
 
     with_status = [r for r in rows if r.status is not None]
     by_kind = {}
@@ -348,19 +393,34 @@ def main():
             print("  %-44s %s" % (name, message))
         print("")
 
+    # Two checks, two denominators. Status-line grammar is judged
+    # against the rows that CARRY a status line; row shape is judged
+    # against every top-level assignment. Merging the counts made a
+    # shape failure print as a malformed status line, which names
+    # the wrong thing and sends the reader to the wrong place.
     if failures:
         print("FAILURES (%d):" % len(failures))
         for name, message in failures:
             print("  %-44s %s" % (name, message))
         print("")
-        print("Results: %d checked, %d failed."
-              % (len(with_status), len(failures)))
+        print("Results: %d status line(s) checked, %d malformed;"
+              " %d row shape(s) read, %d wrong."
+              % (len(with_status), len(grammar_failures),
+                 shape_checked, len(shape_failures)))
         print("")
-        print("%d of %d status lines are malformed in %s."
-              % (len(failures), len(with_status), TARGET))
+        parts = []
+        if grammar_failures:
+            parts.append("%d of %d status lines are malformed"
+                         % (len(grammar_failures), len(with_status)))
+        if shape_failures:
+            parts.append("%d of %d row shapes are wrong"
+                         % (len(shape_failures), shape_checked))
+        print("%s in %s." % (" and ".join(parts), TARGET))
         return 1
 
-    print("Results: %d checked, 0 failed." % len(with_status))
+    print("Results: %d status line(s) checked, 0 malformed;"
+          " %d row shape(s) read, 0 wrong."
+          % (len(with_status), shape_checked))
     print("")
     print("All %d status lines in %s are well formed; %d rows carry none."
           % (len(with_status), TARGET, len(rows) - len(with_status)))

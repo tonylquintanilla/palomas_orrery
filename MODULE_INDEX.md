@@ -11,8 +11,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 130  
-**Total Lines of Code (non-blank):** 105,323  
-**Total Public Functions/Classes:** 1,183
+**Total Lines of Code (non-blank):** 105,386  
+**Total Public Functions/Classes:** 1,184
 
 ## Classification Coverage
 
@@ -201,8 +201,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (961 lines) |
-| `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (495 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (958 lines) |
+| `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (506 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,066 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (342 lines) |
@@ -212,7 +212,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (224 lines) |
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (485 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (120 lines) |
-| `test_status_lines.py` | Enforce the Status Line grammar in constants_new.py. (317 lines) |
+| `test_status_lines.py` | Enforce the Status Line grammar in constants_new.py. (372 lines) |
 | `test_worksheet_checker.py` | - L-192. Can each layer actually fail? (995 lines) |
 | `test_worksheet_request_builder.py` | - L-195 / L-192. Does the marker join actually join, and can it fail? (439 lines) |
 | `verify_orbit_cache.py` | Safely verify and repair orbit_paths.json (172 lines) |

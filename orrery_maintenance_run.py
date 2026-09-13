@@ -106,6 +106,10 @@ Module created: August 2026 with Anthropic's Claude Opus 5.
 Module updated: September 2026 with Anthropic's Claude Opus 5 (L-305: the
 CHECKERS list gains test_status_lines.py, which enforces the Status Line
 grammar on every constants_new.py row that carries one.)
+Module updated: September 12, 2026 with Anthropic's Claude Opus 5 (L-324:
+the CHECKERS list gains Row shape -- the same script run --shape-only --
+so the row-shape guard reports its own numbers here instead of printing
+them above another checker's verdict, where the dashboard never saw them.)
 """
 
 import hashlib
@@ -151,6 +155,13 @@ CHECKERS = [
     ('Cross-check annotations', ['test_cross_checked.py'], None),
     ('Citation inheritance', ['test_citation_inheritance.py'], None),
     ('Status lines', ['test_status_lines.py'], None),
+    # The same script, --shape-only. The row-shape guard also runs
+    # inside the row above and gates there, so this is not what
+    # makes it enforce. It is what makes it VISIBLE: the dashboard
+    # shows one line per checker and that line was the status-line
+    # verdict, so a passing guard printed nothing here and could
+    # not be told from a guard that never ran. L-324.
+    ('Row shape', ['test_status_lines.py', '--shape-only'], None),
     ('Scanner recognition 1d/1e', ['test_provenance_1d.py'], None),
     ('Reset completeness', ['test_reset_completeness.py'],
      'RESET COMPLETENESS:'),

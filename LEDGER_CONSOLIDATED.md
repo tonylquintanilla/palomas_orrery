@@ -111,6 +111,10 @@ Module updated: September 12, 2026 with Anthropic's Claude Opus 5
 (L-324 built mechanically on Tony's ruling: the change report
 cross-checks a removal against the working copy, and
 test_status_lines.py guards row shape), built on bbd2dbe9.
+Module updated: September 12, 2026 with Anthropic's Claude Opus 5
+(L-324 follow-on: the row-shape guard gets its own dashboard row,
+and a shape failure is no longer counted as a malformed status
+line), built on 6284215b.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -7105,11 +7109,33 @@ skill rule has and this does not.
 The guard stops the shape being written. The cross-check stops the
 tool lying when it is written anyway -- by a hand edit, a merge, or
 a file the guard does not read. Neither makes the other redundant.
-**Gap:** confirm both on the next maintenance run, then close. The
-change report prints how many removal verdicts it cross-checked and
-against how many names; the checker prints how many assignments it
-read and how many failed. Both are new lines, so a pass carries its
-own evidence rather than being inferred from silence.
+**Note (2026-09-12) -- the guard gated but did not SHOW, and the
+failure line named the wrong thing.** Tony read the maintenance
+dashboard after the build and could not find the check. The
+dashboard prints one line per checker -- the last meaningful line of
+that tool's output -- so the row-shape numbers printed above
+`test_status_lines.py`'s status-line verdict and never reached it.
+The guard was gating the whole time: a shape failure exits 1 and
+fails the Status lines row. But a PASS showed nothing, and a pass
+nobody can see is indistinguishable from a check that never ran,
+which is this protocol's A Check That Cannot Fail read from the
+visibility side. Fixed with its own row: `test_status_lines.py
+--shape-only`, registered in `orrery_maintenance_run.py` as `Row
+shape`, ending on a verdict that names how many assignments it
+read. Gating checkers go 12 to 13.
+**Note (2026-09-12) -- a defect this item's own build introduced.**
+Shape failures were appended to the status-line failure list, so on
+a shape failure the closing line read "1 of 19 status lines are
+malformed". No status line was malformed, and 19 is the wrong
+denominator: the shape check reads 103 assignments, the grammar
+check judges the 19 rows that carry a status line. Two checks, two
+denominators, now counted and named separately. Caught by running
+the failure path rather than by reading the code.
+**Gap:** confirm `Row shape` appears in the dashboard's checker list
+reporting 103 read and 0 wrong, then close. The first half is
+already confirmed: the run at `6284215b` passed 12 of 12 gating
+checkers, with the change report reporting no changes to
+`constants_new.py` and the status-line checker clean.
 **Ref:** L-305, L-322, `constants_change_report.py`,
 `test_status_lines.py`, `skills/orrery-coding-conventions/SKILL.md`.
 
