@@ -95,6 +95,11 @@ Module updated: September 10, 2026 with Anthropic's Claude Opus 5
 (L-291 and L-303 closed on Tony's Mode 5; their loose ends re-homed
 to L-311 and L-312, opened here, and to L-237 and L-288; L-310 gains
 Studio's prior art; L-168's title), built on 1ee1cc61.
+Module updated: September 12, 2026 with Anthropic's Claude Opus 5
+(five items deferred by the 2026-09-12 build review are homed:
+four test_status_lines.py rules to L-322, the retired
+"Verified: April 2026" stamp class to L-181; L-323's Gap corrected
+against the repo), built on 56f96004.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -366,7 +371,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-285 | index.html adopts the shared navigation cluster; the fake-wheel dolly retires | OPEN | 3.6 | 2026-09-04 |
 | ! | L-311 | Earth's rotation period and obliquity are not served, so the axis hover names neither | OPEN | 3.6 | 2026-09-10 |
 | ! | L-324 | One assignment per line in constants_new.py | OPEN | 3.6 | 2026-09-12 |
-| ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-08-25 |
+| ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-09-12 |
 | ! | L-286 | Rooms in four levels: drill-down, short-name breadcrumb, Home stays a scene reset | OPEN | 3.5 | 2026-09-08 |
 | ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
 | ! | L-312 | The gallery editor's copy and file slots make cards the viewer misreads; two portrait titles to retype | OPEN | 3.4 | 2026-09-10 |
@@ -390,7 +395,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-225 | Migrate the comet shell constants into `constants_new.py`, then dispatch | DEFERRED | 2.4 | 2026-08-23 |
 | ! | L-293 | Lunar standstill: an exhibit made of four dated orbits | OPEN | 2.4 | 2026-09-06 |
 | ! | L-305 | Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together | OPEN | 2.4 | 2026-09-12 |
-| ! | L-322 | Units declared in the store, and the orrery as producer | OPEN | 2.3 | 2026-09-11 |
+| ! | L-322 | Units declared in the store, and the orrery as producer | OPEN | 2.3 | 2026-09-12 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
@@ -1139,7 +1144,7 @@ Perihelion is the project convention for Eris and Pluto.
 **Ref:** ASBUILT_geometry_and_br_fix.md, Batch 1 worksheets.
 
 #### [L-181] Complete the single-source-of-truth constant layer
-<!-- L:181 status:OPEN upd:2026-08-25 section:A flag: rice:5/5/70/5 -->
+<!-- L:181 status:OPEN upd:2026-09-12 section:A flag: rice:5/5/70/5 -->
 - Fable audit established the structural problem: up to six independent
   storage locations for one physical value (radius_fraction, hover_text,
   dead tooltip, module _info, CUSTOM_SHELLS tooltip, legacy inline
@@ -1428,6 +1433,19 @@ Uranus's belts carry nothing. The bullets above are left as written
 because they record what was found on 2026-08-07. See L-240 for the
 structural recommendation this surface now has, and L-190 for the
 reachability count.
+**Note (2026-09-12) -- the retired `# Verified: April 2026` stamp, as
+a CLASS.** The annotation format was retired on 2026-08-02 and 42
+stamps survive in live modules: `shell_configs.py` 14,
+`earth_visualization_shells.py` 13, `jupiter_visualization_shells.py`
+9, `comet_visualization_shells.py` 6. Two more sit in
+`test_citation_inheritance.py` as fixtures and are out of scope. They
+land here because this item already owns the single-source-of-truth
+sweep across those same files: one class row, not 42 instance rows.
+Deferred by the build review of 2026-09-12, which named ONE instance,
+at line 725 of `earth_visualization_shells.py`; that line is blank,
+and the stamp at 725 belongs to `comet_visualization_shells.py`. A
+count of 42 is a size -- the four filenames are what makes it
+actionable. [verified @56f96004]
 **Ref:** FABLE_shell_consistency_audit_report.md section 2 (Job 2),
 migration status summary table.
 
@@ -6980,14 +6998,37 @@ looks like when a claim goes. Then remediation in slices.
   coding skill for hover work would rebuild the failure. One class row:
   a rule stated in two skills, one superseded. RICE 3/4/70/3 -> 2.33
   proposed, not confirmed.
-**Gap:** the design record and the revision 3 worksheet prompts are
-OWED and were not written on 2026-09-12. The 2026-09-11 prompts must
-NOT be sent as they stand: prompt 3 tells the checkers the inner belt
-figures are consistent (converted, 1.1 R_E is 638 km against the
-tooltip's 1,000, so they are not), row 5 hands the inner span a Baker
-citation the string never makes (the string cites Baker for the PEAK;
-row 11 gets the outer belt right), and the belt rows still ask which
-span is correct rather than whether an edge exists at all.
+**Note (2026-09-12) -- the landing commit is not findable by handle.**
+This block and L-324 landed at `56f96004`, whose commit message reads
+"L305 L325 L324". There is no L-325 anywhere in the repo, so a later
+search for this item's landing commit by its own handle finds
+nothing. Recorded rather than fixed: the message is already pushed.
+[verified @56f96004]
+**Gap:** corrected 2026-09-12 against the repo; the prior wording
+described a state that ended at `56f96004`.
+The DESIGN RECORD EXISTS --
+`documentation/DESIGN_a_figure_in_prose_needs_a_home_20260912.md`,
+built on `a4ead59a`. What is owed is a REVISION, not a first draft:
+the record POSES the tuple-versus-two-scalars question (its question
+1) rather than answering it, and the third review round's rulings --
+two scalars, one frame, and the split that leaves the drawn 100 where
+it is drawn -- live only in this block's Notes above. A session
+writing a second record from scratch would not read them.
+The WORKSHEET PROMPTS are at revision 2 --
+`documentation/L321_slice1_prompts_rev2_20260912.md`, superseding the
+2026-09-11 prompts. Rev 2 fixed the first of the three defects: the
+inner-belt conversion is no longer stated as consistent, and both
+belts now carry the conversion on the prompt. TWO survive into rev 3.
+Row 5 still cites Baker et al. (2018) as supporting rows 2 AND 3,
+where the string cites Baker for the PEAK only; row 11 gets the outer
+belt right and is the model. And rows 3 and 8 still ask whether a
+stated span is correct rather than whether an edge exists at all,
+which is the question this item is actually about. Rev 3 is a small
+edit on rev 2, not a rewrite.
+Rev 2's stated dependency is satisfied. At `56f96004` the bow shock's
+Lugaz-midpoint sentence survives only inside archived patch scripts
+in `documentation/`, and both the hover and its `shell_configs.py`
+twin attribute the standoff to Jelinek. [verified @56f96004]
 **Ref:** L-321, L-305 items 6 and 7, L-322, L-249, L-179,
 `constants_new.py` belt rows, `earth_visualization_shells.py`
 `belt_texts`, gallery `data/objects_config.json` `van_allen_belts`,
@@ -7027,7 +7068,7 @@ span is correct rather than whether an edge exists at all.
 `test_status_lines.py`, `skills/orrery-coding-conventions/SKILL.md`.
 
 #### [L-322] Units declared in the store, and the orrery as producer
-<!-- L:322 status:OPEN upd:2026-09-11 section:A flag: rice:4/5/70/6 -->
+<!-- L:322 status:OPEN upd:2026-09-12 section:A flag: rice:4/5/70/6 -->
 - **Where this came from.** L-305 Gap item 3 asked a narrow question --
   how does `check_store_drift` treat a dimensionless pointer -- and the
   answer opened a wide one. Design session 2026-09-11, zero code. The
@@ -7187,9 +7228,22 @@ format should change at all.
 spent `patch_L305_store_drift_units.py` and
 `patch_L322_mark_transitional.py` move into the GALLERY repo's
 `documentation/` as spent patches, not held ones.
+**Note (2026-09-12) -- four deferred rules for `test_status_lines.py`,
+as one class.** Deferred by the build review of 2026-09-12 and homed
+here, because this item owns the checker and its files are the files
+the work opens. Three additions, all of them reporting BY NAME rather
+than by count: the derived rows whose input is `declared pending`;
+the derived rows whose right-hand side is a bare literal; and a check
+that a pending row's handle exists in the ledger. One blind spot: a
+status line attached to a dict rather than to an assignment is
+invisible to the parser. None exist today, so this guards a shape the
+store may grow rather than a defect it has -- and a parser that cannot
+see a shape reports nothing when the shape arrives, which is A Check
+That Cannot Fail. These four were carried only in a handoff until
+now. [verified @56f96004]
 **Ref:** L-305, L-306 (approximations are not promoted), L-314,
 `constants_new.py`, `provenance_scanner.py`, `orrery_maintenance_run.py`,
-`celestial_objects.py`, `visualization_core.py`,
+`test_status_lines.py`, `celestial_objects.py`, `visualization_core.py`,
 `palomas_orrery_helpers.py`, gallery `gallery_maintenance_run.py`,
 gallery `data/objects_config.json`, gallery `gallery/assembler/catalog.py`,
 skills/provenance-discipline/SKILL.md (the Status Line, One Value One
