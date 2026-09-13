@@ -119,6 +119,10 @@ Module updated: September 12, 2026 with Anthropic's Claude Opus 5
 (L-324: the two missing dashboard buttons added, and Developer Tools
 reordered into GENERATORS and CHECKERS, each alphabetical), built on
 a391262e.
+Module updated: September 12, 2026 with Anthropic's Claude Opus 5
+(L-323: the design record's revision 2 and the L-321 worksheet
+prompts' revision 3 are written; the Gap moves to sending them),
+built on 62ee5149.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -6406,7 +6410,12 @@ side; drop the tilt (`magnetic_tilt_deg=11`,
 `earth_visualization_shells.py:785`). (6) Serve the shape parameters,
 the cut angle, the declared conditions and the validity range in
 `data/objects_config.json`; retire the magnetotail row's `base_radii`
-and `end_radii`. (7) Hover text in `earth_visualization_shells.py`
+and `end_radii`. BOUNDARY (2026-09-12, adopted from the review of
+L-323's design revision): item 6 does NOT touch the belt `note`
+fields in that same file that repeat the span prose. Those change at
+item 7 with the edge rows. Editing them at item 6 and again at item 7
+is the double-store failure L-323 names, performed on the fix.
+(7) Hover text in `earth_visualization_shells.py`
 for the new models, naming both papers and the seam:
 `earth_magnetosphere_info` (standoff quotes at lines 729 and 734),
 `magnetosphere_text` (792), `bow_shock_text` (847, and the Lugaz
@@ -7023,31 +7032,55 @@ This block and L-324 landed at `56f96004`, whose commit message reads
 search for this item's landing commit by its own handle finds
 nothing. Recorded rather than fixed: the message is already pushed.
 [verified @56f96004]
-**Gap:** corrected 2026-09-12 against the repo; the prior wording
-described a state that ended at `56f96004`.
-The DESIGN RECORD EXISTS --
-`documentation/DESIGN_a_figure_in_prose_needs_a_home_20260912.md`,
-built on `a4ead59a`. What is owed is a REVISION, not a first draft:
-the record POSES the tuple-versus-two-scalars question (its question
-1) rather than answering it, and the third review round's rulings --
-two scalars, one frame, and the split that leaves the drawn 100 where
-it is drawn -- live only in this block's Notes above. A session
-writing a second record from scratch would not read them.
-The WORKSHEET PROMPTS are at revision 2 --
-`documentation/L321_slice1_prompts_rev2_20260912.md`, superseding the
-2026-09-11 prompts. Rev 2 fixed the first of the three defects: the
-inner-belt conversion is no longer stated as consistent, and both
-belts now carry the conversion on the prompt. TWO survive into rev 3.
-Row 5 still cites Baker et al. (2018) as supporting rows 2 AND 3,
-where the string cites Baker for the PEAK only; row 11 gets the outer
-belt right and is the model. And rows 3 and 8 still ask whether a
-stated span is correct rather than whether an edge exists at all,
-which is the question this item is actually about. Rev 3 is a small
-edit on rev 2, not a rewrite.
-Rev 2's stated dependency is satisfied. At `56f96004` the bow shock's
-Lugaz-midpoint sentence survives only inside archived patch scripts
-in `documentation/`, and both the hover and its `shell_configs.py`
-twin attribute the standoff to Jelinek. [verified @56f96004]
+**Note (2026-09-12) -- both owed documents are written.**
+`documentation/DESIGN_a_figure_in_prose_needs_a_home_rev2_20260912.md`
+supersedes the 2026-09-12 record, which stays as the review request
+that produced it. The revision states the design as settled rather
+than as five questions: the diagnosis corrected to a Note becoming a
+store; three frames named, with L as the store's; ruling B amended so
+the STORE holds one frame and the STRING derives its presentations;
+and the five questions answered -- two scalars named `_INNER_EDGE`
+and `_OUTER_EDGE` in L, interpolation as the rule with the scanner's
+citation window as the real blind spot, the magnetotail split into a
+drawn shape and an observed LOWER BOUND, discovery routed through the
+scanner's existing list, and "3 to 7" over "3.0 to 7.0".
+A second review round read the revision before it landed, and three
+of its corrections are in it. The peak rows are disposed of rather
+than only noted, and they are TWO cases:
+`EARTH_VAN_ALLEN_OUTER_RADII` is the midpoint of an L band by its own
+Source line, so calling it R_E is a conversion nobody performed and
+its unit moves to L with the edge rows; `EARTH_VAN_ALLEN_INNER_RADII`
+carries Baker at geocentric r ~ 1.5 R_E AND the CIRBE paper at
+L = 1.5 for the same number, so its frame is a worksheet question and
+not a relabel. The magnetotail row is given a FORM -- one scalar read
+as "observed to at least" -- because Ness reports ONE crossing at an
+uncertain distance, and a near/far pair would assert two edges of an
+extent the source never states. And the unit token is named
+`l_shell` rather than `l`, so item 7 does not invent one under time
+pressure; the vocabulary itself stays L-322 ruling 1's.
+`documentation/L321_slice1_prompts_rev3_20260912.md` supersedes rev 2
+and is ready to send: the sequencing dependency is discharged, row 5
+cites Baker for the peak only, row 11 names both sources the string
+names, the four extent rows ask whether an EDGE EXISTS rather than
+which span is right and are marked DISCOVERY, and the frame note
+names L. [verified @62ee5149]
+**Note (2026-09-12) -- the altitude figures were never where the
+record said.** Revision 1 placed the belts' kilometre extents in the
+GUI tooltip "and its twin in `shell_configs.py`". They are in
+neither. All four typed extents are in `earth_visualization_shells.py`
+-- 1,000 to 6,000 km and 13,000 to 60,000 km in
+`earth_magnetosphere_info` at lines 745 and 747, and the two Earth-
+radii spans in `belt_texts` at 892 and 896. The `shell_configs.py`
+tooltip carries the two flux peaks, both interpolated, and no span in
+any frame. Re-measured at `a4ead59a`, the record's own SHA, so no
+later patch moved them: the record was wrong when written. The
+tooltip is a PARTIAL twin, and on the figures at issue here it was
+already doing the right thing. Rev 3's prompt 3 pastes it for
+completeness and rows nothing from it. [verified @62ee5149]
+**Gap:** send revision 3 to the checkers -- that round is L-321's,
+competitive pattern, each prompt to two checkers independently. The
+belt edge VALUES come back from it and land with L-305 item 7, which
+is where ruling C puts them. Nothing else in this item is owed.
 **Ref:** L-321, L-305 items 6 and 7, L-322, L-249, L-179,
 `constants_new.py` belt rows, `earth_visualization_shells.py`
 `belt_texts`, gallery `data/objects_config.json` `van_allen_belts`,

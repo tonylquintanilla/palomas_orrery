@@ -1,6 +1,6 @@
 # Paloma's Orrery -- Provenance Audit
 
-Generated: September 12, 2026
+Generated: September 13, 2026
 Files scanned: 130
 Total findings: 1058
 Constants: 135 | Dicts: 41 | Display strings: 882
@@ -19,12 +19,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260913T135130Z | `62ee514` | 130 | 1058 | 292 | 648 | 116 | 2 |
 | 20260913T023031Z | `6284215` | 130 | 1058 | 292 | 648 | 116 | 2 |
 | 20260913T020042Z | `bbd2dbe` | 130 | 1058 | 292 | 648 | 116 | 2 |
 | 20260912T231623Z | `5b88007` | 133 | 1058 | 292 | 648 | 116 | 2 |
 | 20260912T224840Z | `8845b6f` | 130 | 1058 | 292 | 648 | 116 | 2 |
 | 20260912T141129Z | `27ab0f9` | 129 | 1044 | 291 | 635 | 116 | 2 |
-| 20260912T134540Z | `2432db6` | 129 | 1044 | 291 | 635 | 116 | 2 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
@@ -1812,10 +1812,10 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 66 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 67 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 554 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 685 | dict | SECTION_SYMBOLS[...] | (4 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 73 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 74 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 586 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 717 | dict | SECTION_SYMBOLS[...] | (4 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### planet_visualization_utilities.py
 
