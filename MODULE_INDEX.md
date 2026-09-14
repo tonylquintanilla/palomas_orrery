@@ -10,22 +10,17 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 132  
-**Total Lines of Code (non-blank):** 105,991  
-**Total Public Functions/Classes:** 1,197
+**Total Python Files:** 131  
+**Total Lines of Code (non-blank):** 106,002  
+**Total Public Functions/Classes:** 1,191
 
 ## Classification Coverage
 
-**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (3).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L326_protocol_v3_58.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
-
-**Undetermined domain (1).** No valid `Domain:` tag.
-
-- `patch_L326_protocol_v3_58.py`
 
 
 ---
@@ -79,7 +74,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `asteroid_belt_visualization_shells.py` | Asteroid Belt Visualization Module Functions for creating visualizations of asteroid belt structures in 3D plots. Includes Main Belt, Hildas, Trojans, and Greeks. Also includes helper functions for dynamic Trojan positioning based on Jupiter's location. (403 lines) |
 | `comet_visualization_shells.py` | Comet visual components for 3D orrery plots. (1,878 lines) |
-| `earth_visualization_shells.py` | Earth interior and orbital shell traces. (1,115 lines) |
+| `earth_visualization_shells.py` | Earth interior and orbital shell traces. (1,212 lines) |
 | `eris_visualization_shells.py` | Eris interior and boundary shell traces. (482 lines) |
 | `jupiter_visualization_shells.py` | Jupiter interior, ring, and magnetosphere shell traces. (897 lines) |
 | `mars_visualization_shells.py` | Mars interior and remnant field shell traces. (884 lines) |
@@ -122,7 +117,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,250 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (512 lines) |
-| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (1,558 lines) |
+| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (1,743 lines) |
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (412 lines) |
 | `exoplanet_stellar_properties.py` | Stellar Properties for Exoplanet Host Stars (484 lines) |
 | `exoplanet_systems.py` | Hardcoded Exoplanet System Catalog (572 lines) |
@@ -232,7 +227,6 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L326_protocol_v3_58.py` | Records the provenance-discipline 2.12 bump in the protocol and the ledger. Run this AFTER patch_L321_provenance_2_12.py and after skills_index.py (or the maintenance run) has regenerated the manifest. (271 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

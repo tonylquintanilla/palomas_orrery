@@ -353,7 +353,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*193 live items; 178 need attention (`!`); 192 RICE-scored; 128 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*195 live items; 180 need attention (`!`); 194 RICE-scored; 129 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -383,6 +383,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-193 | Qualified verdicts -- the token is not the whole answer | OPEN | 4.8 | 2026-08-15 |
 | ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
 | ! | L-316 | On a portrait phone the arrow cross moves to the top-right corner | OPEN | 4.8 | 2026-09-10 |
+| ! | L-327 | Tool repairs from the rules-vs-reasoning round (tooling track) | OPEN | 4.8 | 2026-09-14 |
 | ! | L-268 | Sweep: features collapsed out of their own identity | OPEN | 4.5 | 2026-08-30 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-08-25 |
@@ -435,6 +436,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-322 | Units declared in the store, and the orrery as producer | OPEN | 2.3 | 2026-09-12 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
+| ! | L-328 | Subtraction pass on the skill layer (protocol/skills track) | OPEN | 2.1 | 2026-09-14 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
 | ! | L-218 | 22 Cross-checked lines attach to no unit | OPEN | 2.1 | 2026-08-19 |
 | ! | L-318 | Reading a shell's hover text on the phone: taps miss in the mesh, and labels mid-screen lose their pointer | OPEN | 2.1 | 2026-09-10 |
@@ -630,6 +632,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-261 | Plain speech becomes the default register, not a mode | DONE | 15.2 | 2026-08-29 |
 |  | L-301 | Landscape+portrait pairing lost at L-287, restored in the converter | DONE | 14.4 | 2026-09-08 |
 |  | L-302 | The info card closed itself on the tap that opened it | DONE | 14.4 | 2026-09-08 |
+|  | L-329 | The Register Rule rewritten: compression is a one-way channel (protocol track) | DONE | 14.4 | 2026-09-14 |
 |  | L-306 | Do not promote a drawing approximation into the constants store | DONE | 13.6 | 2026-09-08 |
 |  | L-182 | Mars Hill sphere -- cross-check correction lost across the config pipeline | DONE | 12.0 | 2026-08-05 |
 |  | L-222 | The constants change report fails on every currency stamp | DONE | 11.4 | 2026-08-20 |
@@ -6430,6 +6433,35 @@ L-323's design revision): item 6 does NOT touch the belt `note`
 fields in that same file that repeat the span prose. Those change at
 item 7 with the edge rows. Editing them at item 6 and again at item 7
 is the double-store failure L-323 names, performed on the fix.
+**Note (2026-09-14) -- item 7 in three parts, and what has landed.**
+PART 1, the store, landed at `773e5c2d` via
+`patch_L305_item7_belt_rows.py`: four belt edge rows in geocentric
+equatorial Earth radii, `EARTH_MAGNETOTAIL_OBSERVED_RADII` at 220 on
+Slavin et al. (1983), and the two peak rows corrected -- the outer moves
+to `# Unit: l_shell` with `# Status: declared` because 4.5 is a midpoint
+of an L band, and Baker comes OFF its citation, his figure 30 using
+L* = 4.5 as a selected analysis location rather than a universal peak.
+`test_status_lines.py` went 19 status lines to 26, none malformed; the
+provenance scanner reported Tier-1 unchanged. [verified @773e5c2d]
+PART 2, the strings, is `patch_L305_item7_strings.py`, pre-tested and
+delivered. The four typed extents and both typed altitude pairs become
+arithmetic on the rows through one helper whose `sig` argument is
+REQUIRED, so a call site that forgets raises rather than inheriting a
+choice. Two claims the L-321 round did not support are gone: "making
+complex life possible" (three legs returned NO against Griessmeier et al.
+2016) and "protects Earth from solar radiation", which reads as sunlight
+rather than particles.
+PART 3, the gallery's belt `note` fields in `data/objects_config.json`,
+is the half item 6 was fenced off so they are edited once.
+**Note (2026-09-14) -- two corrections to what item 5 owns.** Read while
+building item 7 and recorded because a session that reads only item 7 will
+get both wrong. The drawn shape parameters -- the half-ellipsoid axes, the
+conic eccentricity, the tail's length and radii, the 0.92 flank cap -- are
+NOT a settled convention to protect; item 5 retires them when it ports
+Shue and Jelinek into the renderer. And item 5 says DROP
+`magnetic_tilt_deg=11`; it is not a candidate for a store row, because
+both fits are symmetric about the aberrated Sun-Earth line and the dipole
+tilt is not part of that geometry.
 (7) Hover text in `earth_visualization_shells.py`
 for the new models, naming both papers and the seam:
 `earth_magnetosphere_info` (standoff quotes at lines 729 and 734),
@@ -7153,6 +7185,24 @@ later patch moved them: the record was wrong when written. The
 tooltip is a PARTIAL twin, and on the figures at issue here it was
 already doing the right thing. Rev 3's prompt 3 pastes it for
 completeness and rows nothing from it. [verified @62ee5149]
+**Note (2026-09-14) -- revision 3 is written and filed, and one part of
+it is already superseded.**
+`documentation/DESIGN_a_figure_in_prose_needs_a_home_rev3_20260914.md`
+carries ruling B amended a second time (the store holds geocentric
+equatorial Earth radii, each belt row naming the paper its figure
+follows), the four extents sourced rather than removed, row 9's reversal,
+the magnetotail at 220, and the inner span moving from Koskinen and
+Kilpua to Meredith on SCOPE -- Koskinen and Kilpua state 1.1 to 2 R_E for
+the inner ELECTRON belt and put the protons over 1.1 to 3 R_E, so they
+cannot carry a hover calling that belt mainly protons.
+TWO THINGS IN IT ARE WRONG OR MISSING, recorded here rather than left for
+a reader to trip over. Its altitude section rounds every derived kilometre
+figure to two significant figures; Tony ruled on 2026-09-14 that the
+figure count comes from each row's own source instead, which is what
+shipped. And it does not mention L-305 item 5, which retires the drawn
+shape parameters it discusses as settled. A revision 4 is not owed for
+either -- this note is the correction, and item 7's as-built record
+carries what was actually done.
 **Gap:** send revision 3 to the checkers -- that round is L-321's,
 competitive pattern, each prompt to two checkers independently. The
 belt edge VALUES come back from it and land with L-305 item 7, which
@@ -7436,6 +7486,90 @@ the artifact is the fact.
   new checks. Confidence 70 because the design survived one review with
   all nine rulings intact and the measurements were run against live
   code, not recalled.
+**Note (2026-09-14) -- Tony's sequencing ruling: the mechanism whole, the
+store in slices.** Raised because tonight's misses all traced to values
+held as prose rather than as data, and Tony asked why the whole item does
+not simply run next.
+THE MECHANISM IS COMPLETE WITHOUT THE UNITS and is built as one piece: the
+export generator, the bytes-hash check, the join check that every pointer
+resolves to a row by name, and the dimensional check. Only the last reads
+units, and it runs on the rows that have them.
+THE MIGRATION IS THE SWEEP and is walked by BODY, Earth first. Each row is
+visited ONCE, writing `# Unit:`, `# Status:` and the figure count (d)
+settles at that single visit -- so slicing decides WHEN a row is visited,
+never how many times. What would create a second walk is taking (d)
+separately from the unit field, which this avoids. Tony's own note on
+adopting it: slices are consistent with the Braid.
+THE GATE TURNS ON PER SLICE, which ruling 3's order does not yet provide
+for. The runner holds a short list of CLOSED slices: a missing unit FAILS
+for a row inside one, and a row outside one is NAMED as not yet migrated.
+That answers the danger ruling 3 was protecting against -- dropping the
+suffix reader before the units exist puts 46 of 48 checks dark while the
+run stays green -- without waiting for a complete walk, because the check
+knows what it is entitled to judge and says out loud what it is not.
+Ruling 3's ORDER survives inside a slice; what changes is the denominator
+it applies to.
+THE NUMBERS, measured rather than recalled [verified @773e5c2d]:
+`constants_new.py` holds 106 top-level assignments, 53 of them Earth's.
+24 rows carry a `# Unit:` line and ALL 24 ARE EARTH ROWS, written as a
+side effect of L-305's magnetosphere work. The store is already being
+migrated in slices, Earth first, about 45 percent of the way through the
+Earth slice. This ruling names what was happening rather than introducing
+it.
+COST, accepted: a non-Earth row can carry a wrong unit longer than it
+would under one global walk. No non-Earth row carries a unit at all today,
+so the exposure is smaller than it sounds.
+**Note (2026-09-14) -- `l_shell` is the right token and `dimensionless`
+is the defect.** Raised by Tony, against Claude, who proposed retiring
+`l_shell` in favour of `dimensionless` and was wrong. His objection: a
+dimensionless quantity is still a named quantity and has to be tied to
+its name the way any other unit is.
+THE STORE ALREADY SETTLED THIS ONCE, with `deg`. An angle is a ratio of
+arc length to radius, so degrees are dimensionless in the strict sense,
+and the store carries `# Unit: deg` rather than `# Unit: dimensionless`
+because 105 degrees is not interchangeable with 105 of anything else.
+`l_shell` follows that precedent exactly.
+WHY THE WRONG ANSWER WAS TEMPTING, recorded because the reasoning is
+the useful part. The unit field is asked two questions at once. Which
+other numbers may this be compared with, and what algebra is legal on
+it. For a dimensioned quantity one token answers both: `km` names the
+kind AND carries the dimension. For a dimensionless one they separate.
+`l_shell` answers the comparison question and leaves the dimensional
+one open; `dimensionless` answers the dimensional one and throws the
+comparison away, which is the greater loss, because comparison is what
+catches a real error.
+THE DEFECT IS THE FIVE ROWS THAT DECLARE `dimensionless`, among them
+`EARTH_BOW_SHOCK_JELINEK_EPS` (a flaring exponent) and
+`EARTH_BOW_SHOCK_JELINEK_LAMBDA` (a shape parameter). Two different
+quantities wearing one label, and nothing in the check would object if
+one were compared against the other. [verified @773e5c2d]
+WHERE A TOKEN'S MEANING LIVES TODAY, and it is not the store. Two
+pieces, both in `gallery_maintenance_run.py`: `store_conversions()`
+builds factors for au, km, r_sun and r_earth out of the store, and
+membership in that dict is the only thing that makes `r_earth` a
+length; and a hardcoded `SCALAR_UNITS` frozenset (per_nt, nt, npa, deg,
+km_s, dimensionless) meaning "refuse to convert". That encodes ONE
+distinction -- length or not-length -- so a pressure and an angle sit
+in the same bucket and compare by string equality. Both pieces are in
+the gallery repo, which inverts ruling 6. [verified @eab070a9]
+MEASURED, since the token changes the verdict: served as `l_shell` the
+outer peak reports NO UNIT; served as `dimensionless` it reports UNIT
+MISMATCH against the name's `_RADII`. The softer verdict is the one we
+ship, and it is soft because the checker does not recognise the token
+rather than because the row is right. [verified @773e5c2d]
+WHAT THIS ITEM SHOULD BUILD, as a result: one entry per token, in the
+orrery, carried out by the export -- each token declaring its dimension
+and, where it has one, its factor. The comparison check then reads the
+row's token and the dimensional check reads the token's dimension,
+instead of both being inferred from whether a string appears in a
+conversion dict. It REPLACES `SCALAR_UNITS` rather than adding to it,
+and `dimensionless` retires as a token because it names no quantity.
+BEARS ON (e): astropy has no `l_shell`, so a Quantity-based approach
+would have to call it dimensionless and lose the same thing a token
+table keeps.
+**Tony-action (decide) 2026-09-14: (d) is prioritised** within the item.
+It is unruled, so the first session on this item is a design round
+settling (a) through (e), not a patch.
 **Gap:** the whole item, in ruling 3's order. Still open and NOT ruled:
 (a) the five non-top-level served values (`planet_poles` for Sun, Earth,
 Jupiter and Saturn, and a `create_sun_galactic_tide` default) -- the
@@ -13891,6 +14025,126 @@ skills/orrery-coding-conventions/SKILL.md (marker separation).
   `documentation/DRAFT_provenance_discipline_2_12_field_notes_20260913.md`,
   `documentation/HANDOFF_L321_crosscheck_round_20260913.md`,
   `patch_L321_provenance_2_12.py`, `patch_L326_protocol_v3_58.py`.
+
+#### [L-327] Tool repairs from the rules-vs-reasoning round (tooling track)
+<!-- L:327 status:OPEN upd:2026-09-14 section:A flag: rice:3/4/80/2 -->
+- **Where this came from.** Three problems in the 2026-09-14 session were
+  caught by Tony or by a reviewer rather than by the session that made
+  them. Claude proposed writing new rules into the skills. Tony's
+  objection: "are more rules the answer? We already have complex rules.
+  Shouldn't model reasoning cover this?" A review request went to Fable
+  (`documentation/REVIEW_REQUEST_rules_vs_reasoning_20260914.md`,
+  anchored at `773e5c2d`), which read the four named files cold and
+  answered.
+- **The three misses, named.** (1) A kilometre helper rounded every figure
+  to two significant figures, ignoring the per-row REPORT instruction the
+  store already carries. (2) The session built L-305 item 7 and never read
+  item 5, four items above it, which retires the drawn shape parameters
+  and drops the dipole tilt. (3) A hover sentence asserted that a second
+  published fit puts the magnetopause farther out, naming neither the fit
+  nor a source.
+- **The finding that settled it, verified in the file.**
+  `provenance-discipline` 2.12, Composed vs Transcribed On-Layer Text,
+  already ends "A composed sentence that cannot be sourced does not
+  ship." That covers miss (3) exactly. So all three were LOADED RULES
+  MISSED, not gaps -- one kind, not three, and Claude had sorted them
+  three ways. A second copy of a rule that was loaded and missed will be
+  loaded and missed.
+- **The test, replaced.** Claude proposed "would a careful reader with
+  full attention still get this wrong?" Fable rejected it as
+  unfalsifiable after the fact, and Tony agreed. The replacement, adopted:
+  CAN A CHECK BE BUILT THAT FAILS ON THIS, AND TERMINATES? If yes, build
+  the check and write no rule. If no, and the fact cannot be derived from
+  anything loaded, write one line where it fires. If the rule already
+  exists, write nothing and ask why a loaded rule did not fire.
+- **Tony's ruling, 2026-09-14: zero new rules, three tool changes.**
+  (a) `ledger_index.py` prints an item's sub-items with their statuses on
+  lookup, so reading to the edge of one part and stopping is not possible.
+  (b) A constants-without-consumers report: every top-level row in
+  `constants_new.py` that no module imports, NAMED. It REPORTS and does
+  NOT gate -- Claude's amendment, adopted -- because a row written ahead
+  of its renderer is correct sequencing, not a defect. (c)
+  `provenance_scanner.py` announces its own prose blind spot: it reads
+  number-plus-unit tokens, so a factual sentence carrying no numeral is
+  invisible to it and to every other check the project has. Make the blind
+  spot announce.
+- **What (b) would name today**, and it is the finding that earned it:
+  `EARTH_BOW_SHOCK_JELINEK_LAMBDA` (line 606) and
+  `EARTH_BOW_SHOCK_CUT_ANGLE_DEG` (line 618) have no consumer in either
+  repo. They are correct -- L-305 item 4 wrote them for item 5, which has
+  not run -- and nobody had noticed either way. [verified @773e5c2d]
+- **Note (Claude):** RICE proposed 3/4/80/2. Reach is every session that
+  reads the ledger or the store; Impact 4 because each of the three
+  changes converts a miss that needs a reader into one a run reports;
+  Confidence 80 because all three are additive reports over structures
+  that already exist; Effort 2, three small changes in tools already in
+  the routine.
+**Gap:** build (a), (b) and (c). Each is independent of the others and of
+L-305. (c) is the smallest and closes the most recent miss.
+**Ref:** L-305 item 5, L-322(d), L-328,
+`documentation/REVIEW_REQUEST_rules_vs_reasoning_20260914.md`,
+`skills/provenance-discipline/SKILL.md` (Composed vs Transcribed),
+`ledger_index.py`, `provenance_scanner.py`.
+
+#### [L-329] The Register Rule rewritten: compression is a one-way channel (protocol track)
+<!-- L:329 status:DONE upd:2026-09-14 section:C flag: rice:4/4/90/1 -->
+- **Tony's instruction, 2026-09-14.** "On the register, the rule is
+  simple, 'don't use compressed language' can we clarify the register
+  rule? The reason is that I cannot follow compressed language. Only you
+  can."
+- **What the old wording got wrong.** It opened with "plain speech is
+  the default" and then gave the compressed voice a home in the protocol
+  and the skills. Those two sentences together describe a shared
+  shorthand that belongs in a different place. It is not shared. One
+  party can read it.
+- **Why the rule kept decaying.** Compression costs Claude nothing to
+  write and nothing to read back, because it holds the session at once.
+  It costs Tony the reading, and noticing that a sentence is too dense
+  is itself the cost. So there is no signal on the writing side that
+  anything went wrong -- which is the same shape as a check that cannot
+  fail.
+- **Where it failed that evening: summaries.** Four closing round-ups in
+  one session, each naming decisions rather than stating them. A list of
+  names is compressed prose with bullet points on it. The rewrite names
+  summaries, status lines and recaps as the hiding place, because they
+  look like service.
+- **What did NOT change:** the three checks, ANSWER FIRST / EVIDENCE ON
+  REQUEST, CAPTURE GOES IN A FILE, and the backstop paragraph. Only the
+  opening was rewritten, because that is the part that has to carry the
+  rule when a session is moving.
+- **Note (Claude):** RICE proposed 4/4/90/1. Reach is every message;
+  Confidence 90 because the instruction was explicit and the failure was
+  demonstrated in the same session rather than recalled.
+**Ref:** L-261 (the August 2026 amendment this supersedes the opening
+of), `PROJECT_INSTRUCTIONS.md` Register Rule, v3.59.
+
+#### [L-328] Subtraction pass on the skill layer (protocol/skills track)
+<!-- L:328 status:OPEN upd:2026-09-14 section:A flag: rice:3/3/70/3 -->
+- **The measurement.** `provenance-discipline` 2.12 carries 20 section
+  headings tagged [CRITICAL] against 8 tagged [QUALITY]. Four of the
+  twenty landed in one bump. `ledger-and-session-records` 1.11 and
+  `orrery-coding-conventions` 1.8 carry ZERO [CRITICAL] headings between
+  them. [verified @773e5c2d]
+- **Why it matters.** The protocol's own Procedural Criticality says the
+  critical tier must stay short, and that if everything is critical
+  nothing is. That was written about this document and now applies to the
+  skill layer. The Braid applies too: provenance-discipline has grown by
+  INSTANCE rather than by kind, which is the shape that rule exists to
+  stop.
+- **The job.** A pass that demotes, merges, or moves to Field Notes, with
+  one row per class rather than one per section. A demotion is a
+  **Tony-action (decide)** in every case -- a [CRITICAL] tag records that
+  a failure proved a check load-bearing, and only Tony can rule that the
+  proof no longer holds.
+- **What this is NOT.** Not a rewrite, and not a rule cull by length. The
+  question per section is whether its tier is still earned, not whether
+  the skill is long.
+- **Note (Claude):** RICE proposed 3/3/70/3. Confidence 70 because the
+  measurement is mechanical but every judgment in the pass is Tony's.
+**Gap:** the whole item. Sequence it after L-327, whose (c) may itself add
+a line to the skill being pruned.
+**Ref:** L-327, `PROJECT_INSTRUCTIONS.md` Procedural Criticality and The
+Braid, `skills/provenance-discipline/SKILL.md`.
 
 #### [L-315] Chained ledger patches refuse once the indexer runs between them (safe-file-editing field note)
 <!-- L:315 status:DONE upd:2026-09-11 section:C flag: rice:2/2/90/1 -->

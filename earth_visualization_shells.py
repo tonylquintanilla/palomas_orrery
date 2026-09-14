@@ -80,6 +80,16 @@ from constants_new import (
     EARTH_EQUATORIAL_RADIUS_KM,
     EARTH_MAGNETOPAUSE_STANDOFF_RADII, EARTH_BOW_SHOCK_STANDOFF_RADII,
     EARTH_VAN_ALLEN_INNER_RADII, EARTH_VAN_ALLEN_OUTER_RADII,
+    # L-305 item 7: the belt edges and the observed magnetotail extent.
+    # The spans used to be typed into the strings below.
+    EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE, EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE,
+    EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE, EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE,
+    EARTH_MAGNETOTAIL_OBSERVED_RADII,
+    # L-305 item 7 part 4: the conditions a model standoff is evaluated at,
+    # and how far real crossings sit from the surface it draws.
+    EARTH_SOLAR_WIND_PRESSURE_NPA,
+    EARTH_MAGNETOPAUSE_SHUE_SCATTER_RADII,
+    EARTH_BOW_SHOCK_JELINEK_SCATTER_RADII,
     EARTH_LEO_INNER_KM, EARTH_LEO_OUTER_KM,
     EARTH_LEO_INNER_RADII, EARTH_LEO_OUTER_RADII,
     EARTH_LEO_LOWER_ALTITUDE_KM, EARTH_LEO_UPPER_ALTITUDE_KM,
@@ -87,6 +97,40 @@ from constants_new import (
     EARTH_HILL_SPHERE_KM, EARTH_HILL_SPHERE_RADII,
 )
 from orrery_rendering import rotate_to_sunward, create_info_marker
+
+
+def _km_above_surface(radii, sig):
+    """Altitude above Earth's equatorial surface, in km, from a geocentric
+    distance in Earth radii, rounded to `sig` significant figures.
+
+    L-305 item 7 (2026-09-14). Two things live here on purpose.
+
+    The SUBTRAHEND is EARTH_EQUATORIAL_RADIUS_KM, not the mean radius, and
+    that is not a taste. Everything in these shells is scaled by
+    EARTH_RADIUS_AU, which is equatorial; L-178 retired a local mean-radius
+    copy because mixing the two put a small systematic error into every
+    altitude band. A hover that subtracted a different Earth from the one the
+    shell is drawn against would put two Earths in one exhibit.
+
+    The ROUNDING lives here rather than in the text, because a rounded figure
+    typed into a string is exactly the failure this item removes, one digit
+    smaller.
+
+    `sig` is DECLARED, not derived. A Python float cannot say whether its
+    source wrote "2" or "2.0", so nothing here can read the figure count off
+    the input. Two is a choice, made for the callers this helper has: belt
+    rows stated as schematic spans carrying one or two figures each, where a
+    four-digit altitude would claim precision the input does not have. It
+    over-reports the ends their sources state to a single figure, and that
+    is the declared cost of one uniform rule over a per-number judgment.
+    A caller whose row supports more figures must pass its own `sig`; this
+    default must not be read as a claim about that row's source.
+    """
+    km = (radii - 1.0) * EARTH_EQUATORIAL_RADIUS_KM
+    if km <= 0.0:
+        return 0
+    step = 10.0 ** (math.floor(math.log10(km)) - (sig - 1))
+    return int(round(km / step) * step)
 
 # Earth Shell Creation Functions
 #
@@ -727,24 +771,44 @@ def create_earth_upper_atmosphere_shell(center_position=(0, 0, 0)):
     
     return traces
 
-# Source: NASA Goddard Space Flight Center - Magnetosphere
-# Source+: NASA Van Allen Probes (radiation belts)
-# Verified: April 2026 via Gemini fact-check
+# Source: every figure below interpolates a row in constants_new.py, and
+# Source+: each row carries its own citation and access route:
+# Source+: EARTH_MAGNETOPAUSE_STANDOFF_RADII (Shue et al. 1998),
+# Source+: EARTH_BOW_SHOCK_STANDOFF_RADII (Jelinek et al. 2012),
+# Source+: EARTH_MAGNETOTAIL_OBSERVED_RADII (Slavin et al. 1983), and the
+# Source+: four EARTH_VAN_ALLEN_*_EDGE rows (Meredith et al. 2014; Li, Tu
+# Source+: et al. 2024).
+# Note: the two altitude pairs here were typed until 2026-09-14 and rested
+# Note+: on a magazine article, a news article and a university outreach
+# Note+: page. They are arithmetic on the belt rows now, which is why the
+# Note+: outer figure changed. L-305 item 7.
 earth_magnetosphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n" 
 
             f"Earth's magnetosphere extends about {EARTH_MAGNETOPAUSE_STANDOFF_RADII:.4g} Earth radii on the Sun-facing side\n"
-            "and stretches into a long magnetotail on the night side. It protects Earth\n"
-            "from solar radiation and cosmic rays, making complex life possible.\n\n"
+            "and stretches into a long magnetotail on the night side. It deflects the solar\n"
+            "wind and turns aside many of the energetic charged particles that reach Earth\n"
+            "from the Sun and from beyond the solar system.\n\n"
 
-            "Bow Shock: The boundary where the supersonic solar wind is first slowed\n"
-            f"by Earth's magnetic field, typically located about {EARTH_BOW_SHOCK_STANDOFF_RADII:.4g} Earth radii upstream\n"
-            "from Earth on the Sun-facing side.\n\n"
+            f"Magnetotail: observed to at least {EARTH_MAGNETOTAIL_OBSERVED_RADII:g} Earth radii, which is how\n"
+            "far the spacecraft went rather than where the tail ends. The tail drawn\n"
+            "here is shorter, because it is a picture and not a measurement.\n\n"
 
-            "Inner Van Allen Belt: Region of trapped charged particles (mainly protons)\n"
-            "extending from about 1,000 km to 6,000 km above Earth's surface.\n"
-            "Outer Van Allen Belt: Region of trapped charged particles (mainly electrons)\n"
-            "extending from about 13,000 km to 60,000 km above Earth's surface."
+            "Bow Shock: the boundary where the supersonic solar wind first slows\n"
+            f"against Earth's magnetic field, about {EARTH_BOW_SHOCK_STANDOFF_RADII:.4g} Earth radii upstream on the\n"
+            f"Sun-facing side at a nominal solar wind pressure of {EARTH_SOLAR_WIND_PRESSURE_NPA:g} nPa.\n"
+            f"Both standoffs above are models evaluated at that pressure rather than\n"
+            f"measurements: real crossings scatter about the fitted surfaces by\n"
+            f"{EARTH_MAGNETOPAUSE_SHUE_SCATTER_RADII:g} and {EARTH_BOW_SHOCK_JELINEK_SCATTER_RADII:g} Earth radii, and both boundaries move as the pressure\n"
+            "changes.\n\n"
+
+            "Inner Van Allen Belt: Region of trapped charged particles (mainly protons),\n"
+            f"spanning about {EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE:g} to {EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE:g} Earth radii in the geomagnetic equatorial plane --\n"
+            f"roughly {_km_above_surface(EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE, 2):,} to {_km_above_surface(EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE, 1):,} km above the surface at the equator.\n"
+            "Outer Van Allen Belt: Region of trapped charged particles (mainly electrons),\n"
+            f"spanning about {EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE:g} to {EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE:g} Earth radii and moving with geomagnetic\n"
+            f"activity -- roughly {_km_above_surface(EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE, 1):,} to {_km_above_surface(EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE, 1):,} km above the surface at the\n"
+            "equator. Every kilometre figure here is converted from Earth radii."
 )
 
 def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0, 0, 0)):
@@ -772,6 +836,15 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
         'belt_thickness': 0.5,
     }
     
+    # L-305 item 7: the DRAWN tail length, read before params are scaled to
+    # AU so the hover can quote the drawing parameter from where it is drawn
+    # rather than typing it. It stays a local read of the params dict -- a
+    # drawing choice is not a store row (A Drawing Approximation Does Not
+    # Promote), and hoisting it to module level would make it a claim-shaped
+    # constant with no citation, which is a Tier-1 finding the scanner is
+    # right to raise. The OBSERVED extent is the store row.
+    tail_length_radii = params['tail_length']
+
     # Scale everything by Earth's radius in AU
     for key in params:
         params[key] *= EARTH_RADIUS_AU
@@ -796,10 +869,23 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     z = z + center_z
     
     magnetosphere_text = ["Earth: Magnetosphere<br><br>"
-                 f"Earth's magnetosphere extends about {EARTH_MAGNETOPAUSE_STANDOFF_RADII:.4g} Earth radii on the Sun-facing side<br>"
-                 "and stretches into a long magnetotail on the night side. It protects Earth<br>"
-                 "from solar radiation and cosmic rays, making complex life possible.<br><br>"
-                 "Source (standoff): Shue et al. (1998), J. Geophys. Res. 103:17691."]
+                 f"Earth's magnetosphere reaches about {EARTH_MAGNETOPAUSE_STANDOFF_RADII:.4g} Earth radii on the Sun-facing<br>"
+                 f"side at a nominal solar wind pressure of {EARTH_SOLAR_WIND_PRESSURE_NPA:g} nPa. It stretches into a<br>"
+                 "long magnetotail on the night side, deflects the solar wind, and turns<br>"
+                 "aside many of the energetic charged particles that reach Earth.<br><br>"
+                 "That distance is a model evaluated at those conditions, not something<br>"
+                 f"anyone measured. Real crossings of the magnetopause scatter about the<br>"
+                 f"fitted surface by {EARTH_MAGNETOPAUSE_SHUE_SCATTER_RADII:g} Earth radii, and the boundary itself moves in<br>"
+                 "and out as the solar wind pressure changes.<br><br>"
+                 f"The tail is DRAWN to {tail_length_radii:g} Earth radii. It has been OBSERVED to at<br>"
+                 f"least {EARTH_MAGNETOTAIL_OBSERVED_RADII:g} Earth radii, which is how far the spacecraft went rather<br>"
+                 "than where the tail ends.<br><br>"
+                 "The surface drawn through that nose is an approximation of the shape,<br>"
+                 "not the model's own. A second fit, Jelinek et al. (2012), puts the nose<br>"
+                 "about an Earth radius farther out, which is inside the scatter above.<br><br>"
+                 "Source (standoff): Shue et al. (1998), J. Geophys. Res. 103:17691.<br>"
+                 "Source (second fit): Jelinek et al. (2012), J. Geophys. Res. 117:A05208.<br>"
+                 "Source (tail): Slavin et al. (1983), Geophys. Res. Lett. 10:973 -- ISEE-3."]
     
     magnetosphere_customdata = ['Earth: Magnetosphere']
 
@@ -850,10 +936,15 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     bow_shock_z = bow_shock_z + center_z
     
     bow_shock_text = ["Earth: Bow Shock<br><br>"
-                "Bow Shock: The boundary where the supersonic solar wind is first slowed<br>"
-                f"by Earth's magnetic field, typically located about {EARTH_BOW_SHOCK_STANDOFF_RADII:.4g} Earth radii upstream<br>"
-                "from Earth on the Sun-facing side.<br>"
-                "The Bow Shock points towards the Sun along the X-axis. The XY plane is the ecliptic.<br><br>"
+                "Bow Shock: the boundary where the supersonic solar wind first slows<br>"
+                f"against Earth's magnetic field, about {EARTH_BOW_SHOCK_STANDOFF_RADII:.4g} Earth radii upstream on the<br>"
+                f"Sun-facing side at a nominal solar wind pressure of {EARTH_SOLAR_WIND_PRESSURE_NPA:g} nPa.<br><br>"
+                "That distance is a model evaluated at that pressure, not something anyone<br>"
+                f"measured. Real crossings of the bow shock scatter about the fitted<br>"
+                f"surface by {EARTH_BOW_SHOCK_JELINEK_SCATTER_RADII:g} Earth radii, and the shock itself moves in and out as<br>"
+                "the pressure changes.<br><br>"
+                "The bow shock points towards the Sun along the X-axis. The XY plane is<br>"
+                "the ecliptic.<br><br>"
                 "Source (standoff): Jelinek et al. (2012), J. Geophys. Res. 117:A05208, doi:10.1029/2011JA017252."]
     
     bow_shock_customdata = ['Earth: Bow Shock']
@@ -884,17 +975,31 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     # 3. Create and add Van Allen radiation belts
     belt_colors = ['rgb(255, 100, 100)', 'rgb(100, 200, 255)']
     belt_names = ['Earth: Inner Radiation Belt', 'Earth: Outer Radiation Belt']
-    # Source: NASA Van Allen Probes mission
-    # Verified: April 2026 via Gemini fact-check
+    # Source: every figure below interpolates a row in constants_new.py --
+    # Source+: EARTH_VAN_ALLEN_INNER_RADII, EARTH_VAN_ALLEN_OUTER_RADII and
+    # Source+: the four EARTH_VAN_ALLEN_*_EDGE rows, each carrying its own
+    # Source+: citation and access route. The spans were typed here until
+    # Source+: 2026-09-14, when L-305 item 7 gave them rows to read.
+    # Source+: The kilometres are arithmetic on those rows, not a second
+    # Source+: figure: see _km_above_surface() at the top of this module.
     belt_texts = [
         f"Inner Van Allen Belt: Region of trapped charged particles (mainly protons).<br>"
-        f"Drawn at the flux peak, {EARTH_VAN_ALLEN_INNER_RADII:g} Earth radii from Earth's centre; the belt<br>"
-        "spans roughly 1.1 to 2 Earth radii.<br>"
-        "Source (peak): Baker et al. (2018), Space Sci. Rev. 214:17, doi:10.1007/s11214-017-0452-7.",
+        f"Drawn at the flux peak, {EARTH_VAN_ALLEN_INNER_RADII:g} Earth radii from Earth's centre, about<br>"
+        f"{_km_above_surface(EARTH_VAN_ALLEN_INNER_RADII, 2):,} km above the surface at the equator.<br>"
+        f"The belt spans about {EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE:g} to {EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE:g} Earth radii in the geomagnetic<br>"
+        f"equatorial plane -- roughly {_km_above_surface(EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE, 2):,} to {_km_above_surface(EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE, 1):,} km above the surface<br>"
+        f"(every kilometre figure here converted from Earth radii).<br>"
+        "Source (peak): Baker et al. (2018), Space Sci. Rev. 214:17, doi:10.1007/s11214-017-0452-7.<br>"
+        "Source (extent): Meredith et al. (2014), J. Geophys. Res. Space Physics 119:5328.",
         f"Outer Van Allen Belt: Region of trapped charged particles (mainly electrons).<br>"
-        f"Drawn at the flux peak, {EARTH_VAN_ALLEN_OUTER_RADII:g} Earth radii from Earth's centre; the belt<br>"
-        "spans roughly 3 to 7 Earth radii and moves with geomagnetic activity.<br>"
-        "Source (peak): J. Geophys. Res. Space Physics (2025), doi:10.1029/2024JA033504; Baker et al. (2018)."
+        f"Drawn at the flux peak, L = {EARTH_VAN_ALLEN_OUTER_RADII:g} -- about {_km_above_surface(EARTH_VAN_ALLEN_OUTER_RADII, 2):,} km above the<br>"
+        "surface at the equator, where L equals geocentric distance in Earth radii.<br>"
+        f"The belt spans about {EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE:g} to {EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE:g} Earth radii and moves with geomagnetic<br>"
+        f"activity -- roughly {_km_above_surface(EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE, 1):,} to {_km_above_surface(EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE, 1):,} km above the surface<br>"
+        f"(every kilometre figure here converted from Earth radii).<br>"
+        "Source (peak): Li et al. (2025), doi:10.1029/2024JA033504 -- most intense across<br>"
+        f"the L = 4 to 5 band; the drawn {EARTH_VAN_ALLEN_OUTER_RADII:g} is our midpoint of it.<br>"
+        "Source (extent): Meredith et al. (2014); Li, Tu et al. (2024), doi:10.1029/2023JA032171."
     ]
     
     belt_distances = [

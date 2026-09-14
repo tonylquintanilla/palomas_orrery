@@ -968,6 +968,48 @@ Version history: v3.52 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 
+v3.56 (September 10, 2026): No rule changed in this document. TWO skill
+bumps, both from closing the Earth exhibit (L-291).
+
+interactive-exhibit 1.0 -> 1.1. Earth step 3 moved the page from one
+`EXHIBIT === "<key>"` branch per room to an `EXHIBITS` table, and the
+skill still described the branch in four places: the anatomy's switch
+and class rows, step 3, and step 7's scene picker. Step 3 also gains
+the driver rule the build found by running the resolver -- the body is
+the CENTER, and `objects` is whatever the resolver accepts against it --
+and step 7 gains a check for an existing card before Studio is opened,
+with the order Studio forces. The rename paragraph now points at L-309,
+which deferred the rename with its trigger.
+
+ledger-and-session-records 1.10 -> 1.11. A Closing Item Re-homes Its
+Loose Ends [QUALITY]: before an item goes DONE, each thing its body
+records as not done gets a home in an open item, or is struck with a
+reason. Three were riding inside closing items, one behind a pointer to
+an item that never mentioned it, and one had already fired -- the
+gallery editor's copy defect, recorded inside L-303, hid the first Earth
+card from the desktop lobby.
+
+THE CARD IS THE LESSON, and it is Verify Execution, Not Appearance one
+layer out. The 2026-09-09 handoff said step 7, the card, had not
+started. A card for the exhibit had been in the gallery since that
+afternoon, made by copying a static card, and the session never read
+the metadata that showed it. A review read it the next morning,
+replayed the viewer's Featured rule against it, and predicted what each
+screen would show; Tony's eyes then agreed. A handoff's claim about a
+step is checked against the artifact that step produces.
+
+Both skills read the same in all three stores before the bump. This
+session loaded 1.0 and 1.10, so the obligation travels as usual:
+interactive-exhibit went to 1.1 and ledger-and-session-records to 1.11
+in patch_L291_15; the next session confirms its loaded copies read 1.1
+and 1.11 before exhibit or ledger work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.53 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

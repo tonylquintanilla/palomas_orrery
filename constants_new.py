@@ -632,6 +632,22 @@ EARTH_BOW_SHOCK_CUT_ANGLE_DEG = 105.0
 # Note+: shock follows a Mach cone the paper does not model. At the declared
 # Note+: pressure the cut falls at x = -7.8 R_E, R_yz = 29.0 R_E.
 
+EARTH_MAGNETOPAUSE_SHUE_SCATTER_RADII = 1.23
+# Unit: r_earth
+# Status: measured V_SOURCED 2026-09-14 -- open full text
+# Source: Shue et al. (1998), doi:10.1029/98JA01103, p. 17,697 -- the
+# Source+: improved model's standard deviation against the observed
+# Source+: magnetopause crossings it was fitted to is 1.23 R_E.
+# Access: open full text, https://doi.org/10.1029/98JA01103, read from the
+# Access+: PDF 2026-09-11.
+# Note: a spread of real crossings about the fitted surface, not an
+# Note+: uncertainty on the standoff below, which is an evaluation of eq. 10
+# Note+: at the declared conditions and carries its own inputs' figures.
+# Note+: It is also the yardstick for the seam between the two published
+# Note+: fits: Shue and Jelinek disagree about the magnetopause nose by
+# Note+: about 1 R_E, which sits inside this one figure alone.
+# Record: documentation/L305_gap1_read_record_20260911.md
+
 EARTH_MAGNETOPAUSE_STANDOFF_RADII = 10.25
 # Unit: r_earth
 # Status: derived 2026-09-12 -- inherits EARTH_MAGNETOPAUSE_SHUE_A1_RADII
@@ -668,6 +684,22 @@ EARTH_MAGNETOPAUSE_STANDOFF_RADII = 10.25
 # Note+: inside geostationary orbit (6.6 R_E); the drawn shape is the quiet
 # Note+: one. Lugaz et al. (2016), doi:10.1038/ncomms13001, gives 9-11 R_E
 # Note+: as the typical subsolar distance, which contains this.
+
+EARTH_BOW_SHOCK_JELINEK_SCATTER_RADII = 0.69
+# Unit: r_earth
+# Status: measured V_SOURCED 2026-09-14 -- open full text
+# Source: Jelinek, Nemecek and Safrankova (2012), J. Geophys. Res. 117,
+# Source+: A05208, doi:10.1029/2011JA017252 -- fig. 7: the scatter of
+# Source+: observed crossings about the bow shock model is 0.69 R_E. The
+# Source+: same figure gives 0.76 R_E for their magnetopause.
+# Access: open full text, https://doi.org/10.1029/2011JA017252 (2026-09-10).
+# Note: this is NOT an uncertainty on the model's own numbers -- the paper
+# Note+: states none for its six fitted values. It is how far real crossings
+# Note+: sit from the surface the model draws, which is a different quantity
+# Note+: and the one a visitor needs in order not to read an evaluated model
+# Note+: as a measurement. The standoff below therefore keeps the figures its
+# Note+: inputs support and prints this beside it.
+# Record: documentation/L305_gap1_read_record_20260911.md
 
 EARTH_BOW_SHOCK_STANDOFF_RADII = 13.51
 # Unit: r_earth
