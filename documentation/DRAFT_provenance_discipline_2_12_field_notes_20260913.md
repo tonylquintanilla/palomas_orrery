@@ -80,14 +80,22 @@ Proposed home: with the worksheet prompt mechanics in step 1.
 
 > Ask for bare URLs inside a code block. A hyperlink pasted out of a
 > chat interface arrives as a chip carrying no address, and the loss is
-> silent: source names and access words survive, addresses do not.
+> silent: source names and access words survive, addresses do not. A
+> checker asked afterwards to reprint them has nothing left to reprint.
 >
-> It is not recoverable after the fact. A checker asked to reprint them
-> has nothing left to reprint.
+> But the paste is not the only artifact. KEEP THE FILE THE CHECKER
+> EXPORTED. An export preserves addresses a paste destroys, so the
+> authored file is the record and any transcription is derived from it;
+> where the two disagree, the authored file wins. Downloading it is an
+> operator action and belongs in the Mode 7 reminder, not only in the
+> prompt.
 >
-> (L-321, 2026-09-13. Three returns lost every URL in transfer. The
-> analysis was sound and unusable, because an access word with no
-> address is an assertion about a read rather than a record of one.)
+> (L-321, 2026-09-13. Three returns lost every URL in transfer and the
+> checker could not recover them. Twenty addresses came back anyway,
+> out of its own exported markdown, after the recommendation to delete
+> the authored copies as redundant was declined. One of those addresses
+> matched, character for character, a URL an independent search pass
+> had reached without seeing it.)
 
 ## 4. Model roster -- two corrections
 

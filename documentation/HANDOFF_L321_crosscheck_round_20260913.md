@@ -117,8 +117,18 @@ repeated in full here; the draft carries the wording.
   named Usanova where the PDF was Meredith, and Ganushkina where it was
   Li and Tu. Right URL, right access word, right figure, wrong
   attribution -- invisible without a second fetch.
-- **A link is an object, not text.** It dies in the clipboard and
-  cannot be recovered afterwards.
+- **A link is an object, not text -- but the export is not the paste.**
+  A hyperlink copied out of a chat arrives as a chip carrying no
+  address, and the loss is silent. It is recoverable, from the file the
+  checker itself exported, because a paste and an export fail
+  differently. Ask for bare URLs in a code block AND keep the authored
+  file; treat any transcription as derived from it.
+- **A redundant artifact was the only copy of something.** Claude
+  recommended deleting all six raw GPT copies as duplicates. Tony
+  declined, on the argument that the checker's own files are the actual
+  record. One of them held twenty addresses, including all four
+  DISCOVERY-row sources. Redundancy looked like clutter right up to the
+  moment it was the only copy.
 - **Capability is a tier property, not a vendor property.** Gemini
   Flash 3.8 cannot fetch; Gemini 3.1 Pro Extended Thinking can. L-276's
   constraint is about the interface and the tier.
@@ -176,12 +186,14 @@ repeated in full here; the draft carries the wording.
 
 ### Deferred with a home
 
-- **Seven of GPT's sources were never opened**, named at the end of the
-  source-recovery finding: Maiti and Ramachandran (2023), the
-  University of Minnesota page, Y. X. Li et al. (2023), Selesnick et
-  al. (2014), Li et al. (2015), Shi et al. (2020), Urbar et al. (2019),
-  Ingale et al., Kumar and Pulkkinen (2025). None is load-bearing now
-  that three open sources state the extents.
+- **Three of GPT's sources remain without an address**, all from
+  worksheets 1 and 2, which exported with no links at all: Urbar et al.
+  (2019), Ingale et al., and Kumar and Pulkkinen (2025). The six named
+  in the source-recovery finding for worksheet 3 -- Maiti and
+  Ramachandran (2023), the University of Minnesota page, Y. X. Li et
+  al. (2023), Selesnick et al. (2014), Li et al. (2015) and Shi et al.
+  (2020) -- now carry URLs, recovered at `7bd5b1e8`. None of the three
+  is load-bearing.
 - **The two altitude pairs** (1,000-6,000 km and 13,000-60,000 km) rest
   on a magazine article, a news article and a university outreach page
   across three legs. No peer-reviewed source states either as written.
