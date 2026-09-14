@@ -7312,12 +7312,22 @@ test FAILS when its inputs move.
 `shell_configs.py` and `earth_visualization_shells.py`, both of which
 already print these at `:.4g` -- which is 10.25 and 13.51. The drawn
 shells move by under 0.002 R_E against a 0.69 R_E scatter.
-**Gap (half closed 2026-09-14).** The rule LANDED: A Derived Row Stores
-the Figure Its Sources Support [CRITICAL] is in `provenance-discipline`
-2.12, under The Store Carries the Verified Figure, carrying the scope
-paragraph about L-314 unchanged. See L-326. Still open: L-305 item 6
-still serves 10.0 and 12.5, so the gallery's live Store drift check
-reports 2 DRIFT until it lands.
+**Gap (both halves closed 2026-09-14).** The RULE landed: A Derived Row
+Stores the Figure Its Sources Support [CRITICAL] is in
+`provenance-discipline` 2.12, under The Store Carries the Verified
+Figure, carrying the scope paragraph about L-314 unchanged. See L-326.
+The SERVING half landed too: the gallery serves 10.25 and 13.51 at
+`/features/earth/earth_magnetosphere/magnetopause/standoff/value` and
+`.../bow_shock/standoff/value`, and the live Store drift run against
+orrery `047d676d` reports 53 pointers, 48 match, 0 DRIFT, 0 UNIT
+MISMATCH, 5 not examined. [verified @eab070a9]
+**Correction (2026-09-14).** This Gap was rewritten earlier the same day
+to say that L-305 item 6 still served 10.0 and 12.5 and that the drift
+check reported 2 DRIFT. That sentence was carried out of the 2026-09-12
+handoff and never checked against the served file. It was already false
+when it was written, and the live gallery run falsified it within the
+hour. Fetched vs Recalled, at the ledger layer: a handoff is a claim,
+the artifact is the fact.
 **Ref:** L-305, L-314, L-322, `constants_new.py`,
 `test_derived_figures.py`, `orrery_maintenance_run.py`,
 `palomas_orrery_dashboard.py`, `skills/provenance-discipline/SKILL.md`.
