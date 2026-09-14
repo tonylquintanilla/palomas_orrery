@@ -51,6 +51,14 @@ round with four checker legs.
 5. **Gemini Flash 3.8 returned nothing usable** and said so plainly: it
    cannot fetch, so every Source cell reads WALLED. Gemini 3.1 Pro
    Extended Thinking, sent later, fetched three PDFs successfully.
+   **The Flash returns are NOT filed in this repo** -- only the Pro
+   ones are. That is deliberate and it is the one place this session
+   leaves a claim without its artifact. The reason it is acceptable
+   here and would not be for a citation: a CAPABILITY claim is
+   re-testable in a single question, which is what the pre-flight rule
+   in the 2.12 draft asks for, whereas a citation claim cannot be
+   re-derived and has to be on disk. If the roster note is ever
+   doubted, re-run the pre-flight rather than looking for the file.
 6. **A source-recovery pass opened GPT's named sources by search**, on
    Tony's ruling, no additional cross check. Six real URLs recovered.
    Koskinen and Kilpua (2022) chapter 1, open access at Springer, was
@@ -151,7 +159,16 @@ repeated in full here; the draft carries the wording.
    on Russell's UCLA site after Wiley blocked it, dropped row 3 to
    APPROX, and added ISEE-3 to row 7, where Medium had done none of
    those.
-2. **Bump `provenance-discipline` to 2.12.** Nothing blocks it now.
+2. **Bump `provenance-discipline` to 2.12 -- the NEXT SESSION'S FIRST
+   ACTION, ahead of item 7.** Nothing blocks it now, and the ordering
+   is v3.55's: a bump taken before the build it serves is checked by
+   the stale-skill gate against a matching manifest, instead of
+   travelling as a promise. It was not taken in this session because
+   the context was nearly spent, and a rushed edit to a 1712-line
+   CRITICAL skill is how a bad rule ships. Note 3 of the draft was
+   FALSE when written and was falsified four hours later in the same
+   session; the draft-then-review gap is what caught it, which is the
+   argument for the gap and against writing straight into the skill.
    Contents: the five method notes, the tier rule above, L-325's parked
    Gap, a Mode 7 reminder, and three field notes. Sequence is in the
    draft: patch SKILL.md, run `skills_index.py` (do not hand-edit the
