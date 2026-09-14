@@ -132,6 +132,10 @@ Module updated: September 12, 2026 with Anthropic's Claude Opus 5
 0f51ce4f: two drifted values corrected, three claims retired, and
 Gap (2)'s closing plan marked superseded by L-323), built on
 77eb1439.
+Module updated: September 14, 2026 with Anthropic's Claude Opus 5
+(L-326: provenance-discipline 2.11 -> 2.12, protocol v3.58; L-325's
+Gap half-closed -- the rule landed, the serving half stays open),
+built on bfc0505e.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -349,7 +353,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*193 live items; 178 need attention (`!`); 192 RICE-scored; 127 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*193 live items; 178 need attention (`!`); 192 RICE-scored; 128 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -670,6 +674,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-280 | The Interactive Wing: door, hall, two rooms, What's New | DONE | 4.3 | 2026-09-04 |
 |  | L-291 | Earth exhibit: shells plus the Moon | DONE | 4.3 | 2026-09-10 |
 |  | L-303 | Separate cards per orientation (RULED); the phone hides a landscape card that has a portrait sibling | DONE | 4.3 | 2026-09-10 |
+|  | L-326 | provenance-discipline 2.11 -> 2.12, taken before the build it serves | DONE | 4.0 | 2026-09-14 |
 |  | L-214 | The request builder drops the comment lines that matter | DONE | 3.8 | 2026-08-21 |
 |  | L-287 | Gallery editor: the room tree, the storage room, the featured flag | DONE | 3.8 | 2026-09-05 |
 |  | L-233 | Three dashboard buttons: one fixed, one added, one retired | DONE | 3.8 | 2026-08-24 |
@@ -7307,11 +7312,12 @@ test FAILS when its inputs move.
 `shell_configs.py` and `earth_visualization_shells.py`, both of which
 already print these at `:.4g` -- which is 10.25 and 13.51. The drawn
 shells move by under 0.002 R_E against a 0.69 R_E scatter.
-**Gap:** the rule belongs in `provenance-discipline` at its next bump --
-a derived row stores the figure its sources support, and a check recomputes
-it. Not taken this session: a skill bump cannot be verified from inside the
-session that makes it. Also open: L-305 item 6 still serves 10.0 and 12.5,
-so the gallery's live Store drift check reports 2 DRIFT until it lands.
+**Gap (half closed 2026-09-14).** The rule LANDED: A Derived Row Stores
+the Figure Its Sources Support [CRITICAL] is in `provenance-discipline`
+2.12, under The Store Carries the Verified Figure, carrying the scope
+paragraph about L-314 unchanged. See L-326. Still open: L-305 item 6
+still serves 10.0 and 12.5, so the gallery's live Store drift check
+reports 2 DRIFT until it lands.
 **Ref:** L-305, L-314, L-322, `constants_new.py`,
 `test_derived_figures.py`, `orrery_maintenance_run.py`,
 `palomas_orrery_dashboard.py`, `skills/provenance-discipline/SKILL.md`.
@@ -13838,6 +13844,43 @@ result of any camera move), L-291, L-313, L-316, L-317,
 `INFO_MARKER_OFFSET_DEG`), `gallery/earth_geometry.js` (the terminator),
 `documentation/patch_L320_marker_offset.py` (gallery),
 skills/orrery-coding-conventions/SKILL.md (marker separation).
+
+#### [L-326] provenance-discipline 2.11 -> 2.12, taken before the build it serves
+<!-- L:326 status:DONE upd:2026-09-14 section:C flag: rice:3/3/90/2 -->
+- **What landed.** Five rules from the L-321 cross-check round and one
+  from L-325's Gap. A Negative Verdict Shows Its Search [CRITICAL] and
+  Route the Effort Tier by Job Type [QUALITY] in Worksheet Types; A
+  Source Names What Was Opened, Not What It Cites [CRITICAL] in The
+  Access Standard; A Link Is an Object, Not Text [QUALITY] and the
+  three things the prompt must require, in step 1 of the Review-Repair
+  Protocol; two roster corrections under Model Roles; and A Derived Row
+  Stores the Figure Its Sources Support [CRITICAL] under The Store
+  Carries the Verified Figure.
+- **One addition beyond the reviewed draft.** Notes 1 and 5 both used
+  "DISCOVERY row" as established vocabulary and the skill did not
+  define it -- the term lived in the L-321 prompt and never travelled.
+  Worksheet Types therefore also gains the [CITATION] / [DISCOVERY]
+  definitions and the ten-column schema the three worksheets ran,
+  transcribed from `documentation/L321_slice1_prompts_rev3_20260912.md`
+  and the worksheet tables, not composed. Same lesson as L-317: a
+  convention that is not in the skill does not travel.
+- **Why it was taken first.** v3.55's ordering. A bump before the build
+  it serves is checked by the stale-skill gate against a matching
+  manifest; a bump inside the build travels as a promise. The build it
+  serves is L-305 item 7.
+- **Why it was not taken on 2026-09-13.** The context was nearly spent
+  and the target is a CRITICAL skill. The draft-then-review gap earned
+  its keep in the same session: the draft's note 3 was false when
+  written and was falsified four hours later, when twenty addresses
+  came back out of a checker's own exported markdown.
+- **Obligation.** The session that made this bump had loaded 2.11, and
+  a reinstall is invisible to the session that makes it. The next
+  session confirms its loaded copy reads 2.12 before provenance work.
+- **Ref:** L-321, L-325, L-314, L-276, L-305 item 7,
+  `skills/provenance-discipline/SKILL.md`,
+  `documentation/DRAFT_provenance_discipline_2_12_field_notes_20260913.md`,
+  `documentation/HANDOFF_L321_crosscheck_round_20260913.md`,
+  `patch_L321_provenance_2_12.py`, `patch_L326_protocol_v3_58.py`.
 
 #### [L-315] Chained ledger patches refuse once the indexer runs between them (safe-file-editing field note)
 <!-- L:315 status:DONE upd:2026-09-11 section:C flag: rice:2/2/90/1 -->

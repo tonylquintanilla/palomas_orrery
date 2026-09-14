@@ -10,6 +10,16 @@
     "worksheet_prompt_constants_remaining.md"
   ],
   "uncited": [
+    "Fable51_medium_citation_worksheet_1_magnetopause_magnetotail_RETURN.md",
+    "Fable51_medium_citation_worksheet_2_bow_shock_RETURN.md",
+    "Fable51_medium_citation_worksheet_3_van_allen_belts_RETURN.md",
+    "GPT6_medium_worksheet_1_magnetopause_and_magnetotail.md",
+    "GPT6_medium_worksheet_2_bow_shock.md",
+    "GPT6_medium_worksheet_3_van_allen_belts.md",
+    "Gemini_pro_extended_magnetosphere.md",
+    "Gemini_pro_extended_van_allen_belts.md",
+    "L321_worksheet_1_magnetopause_fable_high_recheck_20260913.md",
+    "L321_worksheet_3_van_allen_gemini31pro_20260913.md",
     "PREVIEW_CONVERGENCE_L247.md",
     "PREVIEW_REQUEST_L247_sgr_a_constants.md",
     "REQUEST_L247_sgr_a_constants.md",
@@ -35,9 +45,12 @@
     "worksheet_gemini-3-1-pro_reconciliation_sources_20260820.md",
     "worksheet_gemini-3-1-pro_streamer_extent_20260820.md",
     "worksheet_gpt-5-6-sol_pilot_constants_new_20260818.jsonl",
+    "worksheet_gpt-6-medium_L321_bow_shock_20260913.md",
+    "worksheet_gpt-6-medium_L321_magnetopause_magnetotail_20260913.md",
+    "worksheet_gpt-6-medium_L321_van_allen_belts_20260913.md",
     "worksheet_jupiter_visualization.md",
     "worksheet_mars_visualization.md",
     "worksheet_mercury_visualization.md"
   ],
-  "uncited_changed": "2026-08-25"
+  "uncited_changed": "2026-09-14"
 }

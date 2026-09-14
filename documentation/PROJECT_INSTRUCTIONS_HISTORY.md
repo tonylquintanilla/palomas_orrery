@@ -919,6 +919,55 @@ made a fourth entry.)
 - GitHub is reachable in-environment: git ls-remote gives branch+HEAD SHA with no auth; raw.githubusercontent.com fetches files byte-exact. The HEAD SHA is the unforgeable current-state token AND the round-trip check -- a matching remote HEAD confirms commit + push + sync at once (project knowledge auto-syncs from the repo as of v3.27)
 - The two surviving store failures are honest and visible -- no push, or no sync -- both show as a HEAD mismatch. (v3.26's stale-snapshot + served-ghost failures came from the manual step, retired in v3.27)
 
+v3.55 (September 8, 2026): No rule changed in this document. TWO skill
+bumps, taken BEFORE the build they serve rather than inside it.
+
+gallery-assembler 1.2 -> 1.3 (L-304) and provenance-discipline
+2.10 -> 2.11 (L-306). The assembler skill gains four field notes from
+the 2026-09-07/08 gallery session -- three Plotly 2.35.2 behaviours read
+out of the shipped bundle, one viewer lesson that is not Plotly's. The
+provenance skill gains A Drawing Approximation Does Not Promote
+[CRITICAL].
+
+THE SEQUENCING IS THE POINT, and it is a correction to a habit rather
+than to a rule. This protocol already records, twice, that a bump made
+mid-build cannot be verified from inside the session that made it: the
+session loads the old copy, the reinstall lands invisibly, and the
+confirmation has to be written forward as an obligation the NEXT
+session discharges. v3.52 did that for gallery-assembler 1.2 and v3.54
+for ledger-and-session-records 1.10. Both discharged correctly. But an
+obligation that travels is a check deferred, and it only works because
+somebody reads the handoff.
+
+Tony asked whether the bump could be taken first. It can, and it is
+strictly better: the build session loads 1.3 and 2.11 against a
+manifest that says 1.3 and 2.11, and the gate fires on something it can
+actually read rather than on a promise. Nothing travels. The obligation
+paragraph is absent from this entry for the first time in four
+versions, and that absence is the whole of the improvement.
+
+Two bumps in one session is not a violation of ONE SESSION, ONE BUMP.
+That rule is per SKILL -- a session does not ship two versions of one
+skill. Two different skills ride one protocol entry, which is what this
+one is.
+
+THE RULE ADDED TO THE PROVENANCE SKILL, in one sentence: a number typed
+into a renderer because the result looked right is not a constant
+waiting for a home. Earth's magnetosphere is the founding case -- a half
+ellipsoid with typed axes, a conic eccentricity typed at the call site,
+and a sweep cap the code itself labels a MODE-5 KNOB, all of them
+candidates for promotion into constants_new.py during L-291's
+migration. Tony refused it. The rebuild on a cited model is L-305; the
+step-3 split that followed is in L-291.
+
+The header stamp and the SHA anchor move with this entry. v3.52 records
+that they sat stale for three versions because the correction travelled
+into the version history and stopped there.
+
+Version history: v3.52 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================
