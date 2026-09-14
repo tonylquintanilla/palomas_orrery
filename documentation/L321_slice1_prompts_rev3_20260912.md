@@ -1,12 +1,24 @@
 # L-321 slice 1 -- worksheet prompts, revision 3
 
-Built on orrery `62ee5149e611e325455e56bb3b09486daeea0040`
+Built on orrery `f1bceefd05eeee0cac38fd519dd207314acb2383`
 at https://github.com/tonylquintanilla/palomas_orrery
 
 Tony Quintanilla, PE | Claude Opus 5 | 2026-09-12
 Type: DISCOVERY for L-321 (zero code).
 **Supersedes** `L321_slice1_prompts_rev2_20260912.md`. Revision 1's
 enumeration of the six strings still stands and is not repeated here.
+
+**Anchor moved forward 2026-09-13**, from `62ee5149` to the SHA above.
+No prompt text changed. The reason is the store, not the strings: the
+three files these prompts quote are byte-identical between those two
+commits, and `constants_new.py` is not. L-325 (`c0bb91a0`) replaced the
+magnetopause row's sixteen-digit literal with 10.25 and the bow shock
+row's expression with 13.51. Four claim rows below carry `[store value]`
+and the strings interpolate their constants, so a checker resolving them
+at the old anchor would have read back the form that ruling retired. The
+rendered figure is the same either way -- `:.4g` prints 10.25 and 13.51
+from both forms -- so what moved is what a checker reads out of the
+store, not what a visitor sees.
 
 These are ready to send. Revision 2's one blocking dependency is
 discharged, and every string below was read at the SHA in the header,
@@ -55,7 +67,7 @@ it is pasted for completeness and holds no rowed extent.
 
 ## Common header, prepended to each prompt
 
-> Built on `62ee5149e611e325455e56bb3b09486daeea0040`
+> Built on `f1bceefd05eeee0cac38fd519dd207314acb2383`
 > at https://github.com/tonylquintanilla/palomas_orrery. Read
 > `PROJECT_INSTRUCTIONS.md` (Fetched vs Recalled Convention) and
 > `skills/provenance-discipline/SKILL.md` (The Access Standard, Worksheet
