@@ -1293,3 +1293,124 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 - the finger gestures are ackward. it is hard to select the box. the finger tends to select the title. however, selecting the title with without the box results in the figure not being drawn nor the hovertext displaying. the required order seems to be a) the box to select the figure b) the title to select the hovertext. i suggest one gesture that selects all of it with the finger pointing at any part of the row. all is selected including the hovertext. that is more natural. 
 2) on desktop
 - mostly correct. the initial box is a bit large with the top cropped. it is centered. the arrow is visible. to see the whole box one has to zoom a little. not a major issue, but centering would help. 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L231_hover_to_panel.py
+OK: 6 file(s) written.
+    documentation/smoke_earth_geometry.js      (LF)
+    documentation/smoke_features.js            (LF)
+    documentation/smoke_hover_budget.js        (LF)
+    gallery/earth_geometry.js                  (LF)
+    gallery/feature_renderers.js               (LF)
+    interactive.html                           (LF)
+
+Next: python gallery_maintenance_run.py, then look at a hover and the i panel on the phone.
+-- 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              0.9s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite       8.8s  PASS (167 checks, 0 failures)
+  PASS Feature renderers         1.0s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.1s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.1s  === ALL CHECKS PASSED ===
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: no sibling directories;
+                                    nothing for the sweep to do.
+
+======================================================================
+  7 of 7 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories; nothing
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+97867f3efdf22cffc3cbb56ce46c10cb16d3e663
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 8 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+
+  PASS Served reachability       1.4s  all 8 files served and
+                                    byte-identical to the working copy
+
+  orrery HEAD c354a2d2
+    NOT IN STORE  create_sun_galactic_tide default not a top-level constant in the store
+                  /objects/0/features/oort_cloud/galactic_tide/typical_radius
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NO UNIT       EARTH_MAGNETOPAUSE_SHUE_A6       the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/magnetopause/surface/a6
+    NO UNIT       EARTH_MAGNETOPAUSE_SHUE_A8       the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/magnetopause/surface/a8
+    NO UNIT       EARTH_BOW_SHOCK_JELINEK_EPS      the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/bow_shock/surface/epsilon
+    NO UNIT       EARTH_BOW_SHOCK_JELINEK_LAMBDA   the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/bow_shock/surface/lambda
+    NO UNIT       EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE the constant's name declares no unit
+                  /objects/1/features/van_allen_belts/inner_belt_inner_edge
+    NO UNIT       EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE the constant's name declares no unit
+                  /objects/1/features/van_allen_belts/inner_belt_outer_edge
+    UNIT MISMATCH EARTH_VAN_ALLEN_OUTER_RADII      the name declares r_earth, the config says 'l_shell'
+                  /objects/1/features/van_allen_belts/outer_belt_distance
+    NO UNIT       EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE the constant's name declares no unit
+                  /objects/1/features/van_allen_belts/outer_belt_inner_edge
+    NO UNIT       EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE the constant's name declares no unit
+                  /objects/1/features/van_allen_belts/outer_belt_outer_edge
+    NOT IN STORE  planet_poles['Earth']            not a top-level constant in the store
+                  /objects/1/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  70 pointers: 56 match, 0 DRIFT, 1 UNIT MISMATCH, 13 could not be examined.
+
+  FAIL Store drift               0.7s  70 pointers against orrery
+                                    c354a2d2 -- 56 match, 0 DRIFT, 1
+                                    UNIT MISMATCH, 13 could not be
+                                    examined.
+
+======================================================================
+  1 of 1 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    FAIL Store drift            70 pointers against orrery c354a2d2 --
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+Mode 5:
+1) desktop: correct
+2) phone: (see uploaded images)
+- clicking anywhere on the bow shock line selects the shell (not drawn)
+- clicking on the selection box then Go opens the scene with the full hovertext -- correct; the minor conflict with the triad is acceptable
+- doing with same thing with the magnetosphere creates a significant conflic with the arrow cross, which obscures much of the text -- suggestion, move the arrow cross to the bottom left above the drawer. 
