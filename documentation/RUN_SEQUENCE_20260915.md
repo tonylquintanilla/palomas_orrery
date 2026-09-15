@@ -1106,7 +1106,20 @@ Open the Earth exhibit. Two things are new in the drawer:
   fact about the two boundaries.
 - The belts are now in the same plane as the geostationary ring.
 
--- I tested in both Chrome and Safari: the new shells are not displayed. 
+-- nightly cache builder needs to run first:
+[RECOVER] removed retained data\solar-system.prev (cleared read-only on 6 entries)
+[sweep] no sibling directories present
+[warn] sun: features-only entry; no Horizons fetch
+[done] run 20260915T194144Z (nightly): 13 objects
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+orrery moved to 409a0e73e174a2bc6680be428132db0811351292
+
+gallery moved to c2155b4525c7a27716abde3926ec7da376d31675
+
+-- both shell display correctly
+-- the only issue is that the hovertext boxes are larger than the screen can handle even by optimal positioning. see uploaded images. 
 
 ---
 
@@ -1125,3 +1138,73 @@ it expected. Send it over and I will look.
   five of the thirteen unexamined pointers and the one unit mismatch.
 - **L-305 item 6b** remainder and the handoff edits from the start of the
   session.
+
+ PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L305_item5_feature_pin.py
+OK: 1 file(s) written.
+    documentation/smoke_features.js            (LF)
+
+Next: node documentation/smoke_features.js gallery/feature_renderers.js
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L231_hover_length.py
+OK: 2 file(s) written.
+    gallery/feature_renderers.js               (LF)
+    interactive.html                           (LF)
+
+Next: run both node checkers, then look at a hover on the phone.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L231_hover_budget_checker.py
+OK: two files created, one edited (LF).
+    documentation\smoke_hover_budget.js
+    documentation\run_hover_budget.py
+    gallery_maintenance_run.py -- one new gating row, "Hover budget"
+
+Next:
+  node documentation/smoke_hover_budget.js \
+    gallery/feature_renderers.js gallery/earth_geometry.js
+  python gallery_maintenance_run.py
+  Expect 78 hovers measured and SEVEN gating checkers.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.0s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite       8.8s  PASS (167 checks, 0 failures)
+  PASS Feature renderers         1.0s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.1s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.1s  === ALL CHECKS PASSED ===
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: no sibling directories;
+                                    nothing for the sweep to do.
+
+======================================================================
+  7 of 7 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories; nothing
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L231_dashboard_hover_budget.py
+OK: palomas_orrery_dashboard.py written (LF).
+    Hover Budget added, indented, in Gallery & Web,
+    between the Artifact 1 Assembler Pin and Cache Siblings.
+
+Next: open the dashboard and check the button is there and
+      indented with its neighbours, then press it.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+

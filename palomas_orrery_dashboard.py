@@ -235,6 +235,25 @@ LAUNCH_GROUPS = {
         True,
         None,
         True),
+        ("Hover Budget",
+        os.path.join("documentation", "run_hover_budget.py"),
+        "Counts the LINES in every hover the renderers produce -- 78 of "
+        "them, across the composed Earth room, Earth's features on their "
+        "own, and the two ringed planets -- and prints the longest ten so "
+        "the offender is named rather than implied. It GATES the gallery "
+        "runner. It exists because its sibling checks hover WIDTH, no line "
+        "over 90 characters, and on 2026-09-15 a 32-line bow shock hover "
+        "passed that comfortably while the box ran off the bottom of the "
+        "phone: a hover can be perfectly narrow and still overflow. The "
+        "ceiling is a RATCHET -- lower it when the worst hover comes down, "
+        "never raise it to admit a new one, which is how the old ones "
+        "reached 32. The suite is Node; this is the Python wrapper the "
+        "dashboard needs, the same shape as the Artifact 1 pin. Runs from "
+        "the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
         ("Cache Siblings",
         os.path.join("documentation", "check_cache_siblings.py"),
         "Reports the served cache's sibling directories -- the .staging_* "
