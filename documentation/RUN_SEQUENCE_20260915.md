@@ -501,6 +501,13 @@ git ls-remote origin HEAD
 
 Note the new SHA. The gallery's drift check will read it.
 
+df1219cf743b50064bc2703ad1c023d157f2941e
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>git ls-remote origin HEAD
+df1219cf743b50064bc2703ad1c023d157f2941e        HEAD
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
 ---
 
 ## Part 2 — the gallery
@@ -514,6 +521,55 @@ fingerprints** — each patch expects the tree the previous one left.
 python patch_L305_item6b_served_surface_rows.py
 python gallery_maintenance_run.py
 ```
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>git status --porcelain
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>git checkout -- data/objects_config.json
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python patch_L305_item6b_served_surface_rows.py
+OK: 11 shape rows added to data\objects_config.json
+    line endings preserved (LF)
+    the result parses as JSON and carries 11 new rows
+
+Next, in this order:
+  1. python gallery_maintenance_run.py
+     The Earth scene must be UNCHANGED -- 18 drawer groups.
+     This patch adds no names, so it must not move the picture.
+  2. push, then python gallery_maintenance_run.py --live
+     Expect 69 pointers, 55 match, 0 DRIFT, 1 UNIT MISMATCH,
+     13 could not be examined.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python gallery_maintenance_run.py
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.8s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      10.7s  PASS (167 checks, 0 failures)
+  PASS Feature renderers         1.3s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.3s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
+  PASS Artifact 1 assembler      0.4s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: no sibling directories;
+                                    nothing for the sweep to do.
+
+======================================================================
+  6 of 6 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories; nothing
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
 
 Expect: 11 rows added, and the Earth scene UNCHANGED at 18 drawer groups.
 This patch adds no names, so it must not move the picture at all.
@@ -528,6 +584,73 @@ node documentation/smoke_earth_geometry.js gallery/feature_renderers.js gallery/
 Expect: ALL CHECKS PASSED, 20 drawer groups, no warnings, nothing named
 absent, and ten new legs about the two surfaces.
 
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python patch_L305_item5_magnetosphere_render.py
+OK: five files written.
+    data/objects_config.json                   (LF)
+    documentation/payload_earth_scene.json     (LF)
+    documentation/smoke_earth_geometry.js      (LF)
+    gallery/earth_geometry.js                  (LF)
+    gallery/feature_renderers.js               (LF)
+
+Next, in this order:
+  1. node documentation/smoke_earth_geometry.js \
+       gallery/feature_renderers.js gallery/earth_geometry.js
+     Expect ALL CHECKS PASSED: 20 drawer groups, no warnings,
+     nothing named absent, and ten new legs about the two
+     surfaces -- nose on the standoff, cut angle respected,
+     a true surface of revolution with no tilt.
+  2. python gallery_maintenance_run.py
+  3. push, then look at it. Mode 5 is the only thing that can
+     judge whether the two surfaces read well together.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>node documentation/smoke_earth_geometry.js gallery/feature_renderers.js gallery/earth_geometry.js
+  OK   no warnings: every served group has a renderer
+  OK   nothing is named absent  [[]]
+  OK   no scene-centre marker survives
+  OK   drawer rows: 16 served + axis + Sun + terminator + Moon = 20 groups  [20: moon, Earth: Inner Core, Earth: Outer Core, Earth: Lower Mantle, Earth: Upper Mantle, Earth: Crust, Earth: Lower Atmosphere (to the stratopause), Earth: Upper Atmosphere (to the thermopause), Earth: Exosphere / Geocorona (hydrogen halo, detected extent), Earth: Low Earth Orbit, inner edge (200 km), Earth: Low Earth Orbit, outer edge (2,000 km), Earth: Geostationary Belt (GEO), Earth: Magnetopause, Earth: Bow Shock, Earth: Inner Radiation Belt, Earth: Outer Radiation Belt, Earth: Hill Sphere (gravitational dominance over the Sun), Earth: Rotation Axis and Equator, Earth: Sun Direction, Earth: Terminator (day-night line)]
+  OK   arrival lights exactly the eight shells (LEO as two edges) plus axis and Sun direction  [Earth: Inner Core, Earth: Outer Core, Earth: Lower Mantle, Earth: Upper Mantle, Earth: Crust, Earth: Lower Atmosphere (to the stratopause), Earth: Upper Atmosphere (to the thermopause), Earth: Low Earth Orbit, inner edge (200 km), Earth: Low Earth Orbit, outer edge (2,000 km), Earth: Rotation Axis and Equator, Earth: Sun Direction]
+  OK   Moon, terminator, GEO, belts, geocorona, Hill sphere and both magnetosphere surfaces wait in the drawer
+  OK   rotation axis tilted 23.44 deg from the ecliptic pole (served pole through the sourced obliquity)  [23.439]
+  OK   equator ring is perpendicular to the axis  [0.0000 deg]
+  OK   GEO ring and the equator share one plane
+  OK   equator drawn on the crust (1.002 R_earth)  [1.00200]
+  OK   Sun line points along the driver's Sun direction
+  OK   Sun line runs from Earth's centre to 92% of the frame
+  OK   subsolar dot sits on the Sun line just above the crust, in the Sun group
+  OK   Sun hover gives the Earth-Sun distance in km AND AU
+  OK   terminator plane is perpendicular to the Sun direction  [0.0000 deg]
+  OK   terminator hover marker lies ON the circle (perpendicular to the Sun line, at the crust)
+  OK   terminator hover says it is FROZEN and that there is no lighting model
+  OK   rotation axis carries a spin arc and a cone head at each pole
+  OK   spin arcs are centred on the pole tips at 0.28 of the axis half-length
+  OK   spin arcs run prograde: the arc's motion is omega x r about the north pole
+  OK   axis hover cites the sense of rotation
+  OK   axis hover says the rotation is not shown and states no period
+  OK   Moon: ellipse faint by rgba (no trace opacity), arc white and wide, dates in the hover
+  OK   arc is the served trust window: 3.42 days either side
+  OK   the Moon's marker lies on its trusted arc (within one sample step)  [0.000 steps]
+  OK   the trusted arc sweeps one short piece of the orbit (60-120 deg for a ~6.8-day window)  [96.3 deg]
+  OK   every renderer/geometry info marker is a cross with a red border and hover text
+  OK   two-standards outlines: white on Earth's saturated warm shells, red on the rest  [white: Earth: Inner Radiation Belt, Earth: Lower Mantle, Earth: Outer Core, Earth: Upper Mantle]
+  OK   no Earth info marker within 4 degrees of the z axis  [closest: Earth: Inner Core at 5.0 deg]
+  OK   every hover with km also gives AU
+  OK   no hover line exceeds 90 characters
+  OK   Earth: Magnetopause: the nose sits on the served standoff  [10.250 R_E vs served 10.25]
+  OK   Earth: Magnetopause: drawn out to its served cut angle and no further  [120.00 deg, served 120]
+  OK   Earth: Magnetopause: a true surface of revolution about the Sun line, no tilt  [8.89e-16]
+  OK   Earth: Magnetopause: its one info marker lies ON the surface
+  OK   Earth: Magnetopause: the hover says the cut is a drawing limit, not an edge
+  OK   Earth: Bow Shock: the nose sits on the served standoff  [13.512 R_E vs served 13.51]
+  OK   Earth: Bow Shock: drawn out to its served cut angle and no further  [105.00 deg, served 105]
+  OK   Earth: Bow Shock: a true surface of revolution about the Sun line, no tilt  [9.21e-16]
+  OK   Earth: Bow Shock: its one info marker lies ON the surface
+  OK   Earth: Bow Shock: the hover says the cut is a drawing limit, not an edge
+  OK   every geometry trace skips hover (lines, dots and cones alike)
+
+=== ALL CHECKS PASSED ===
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
 ### 9. The fixture sync
 
 ```
@@ -537,6 +660,65 @@ node documentation/smoke_earth_geometry.js gallery/feature_renderers.js gallery/
 
 Expect: ALL CHECKS PASSED, and the border leg listing twenty markers —
 sixteen red and four white.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python patch_L305_item5_fixture_sync.py
+OK: two files written.
+    fixture synced for: earth_interior, van_allen_belts
+    border leg rewritten (LF)
+
+Next:
+  node documentation/smoke_earth_geometry.js \
+    gallery/feature_renderers.js gallery/earth_geometry.js
+  Expect ALL CHECKS PASSED and twenty markers listed on the
+  border leg: sixteen red, four white.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>node documentation/smoke_earth_geometry.js gallery/feature_renderers.js gallery/earth_geometry.js
+  OK   no warnings: every served group has a renderer
+  OK   nothing is named absent  [[]]
+  OK   no scene-centre marker survives
+  OK   drawer rows: 16 served + axis + Sun + terminator + Moon = 20 groups  [20: moon, Earth: Inner Core, Earth: Outer Core, Earth: Lower Mantle, Earth: Upper Mantle, Earth: Crust, Earth: Lower Atmosphere (to the stratopause), Earth: Upper Atmosphere (to the thermopause), Earth: Exosphere / Geocorona (hydrogen halo, detected extent), Earth: Low Earth Orbit, inner edge (200 km), Earth: Low Earth Orbit, outer edge (2,000 km), Earth: Geostationary Belt (GEO), Earth: Magnetopause, Earth: Bow Shock, Earth: Inner Radiation Belt, Earth: Outer Radiation Belt, Earth: Hill Sphere (gravitational dominance over the Sun), Earth: Rotation Axis and Equator, Earth: Sun Direction, Earth: Terminator (day-night line)]
+  OK   arrival lights exactly the eight shells (LEO as two edges) plus axis and Sun direction  [Earth: Inner Core, Earth: Outer Core, Earth: Lower Mantle, Earth: Upper Mantle, Earth: Crust, Earth: Lower Atmosphere (to the stratopause), Earth: Upper Atmosphere (to the thermopause), Earth: Low Earth Orbit, inner edge (200 km), Earth: Low Earth Orbit, outer edge (2,000 km), Earth: Rotation Axis and Equator, Earth: Sun Direction]
+  OK   Moon, terminator, GEO, belts, geocorona, Hill sphere and both magnetosphere surfaces wait in the drawer
+  OK   rotation axis tilted 23.44 deg from the ecliptic pole (served pole through the sourced obliquity)  [23.439]
+  OK   equator ring is perpendicular to the axis  [0.0000 deg]
+  OK   GEO ring and the equator share one plane
+  OK   equator drawn on the crust (1.002 R_earth)  [1.00200]
+  OK   Sun line points along the driver's Sun direction
+  OK   Sun line runs from Earth's centre to 92% of the frame
+  OK   subsolar dot sits on the Sun line just above the crust, in the Sun group
+  OK   Sun hover gives the Earth-Sun distance in km AND AU
+  OK   terminator plane is perpendicular to the Sun direction  [0.0000 deg]
+  OK   terminator hover marker lies ON the circle (perpendicular to the Sun line, at the crust)
+  OK   terminator hover says it is FROZEN and that there is no lighting model
+  OK   rotation axis carries a spin arc and a cone head at each pole
+  OK   spin arcs are centred on the pole tips at 0.28 of the axis half-length
+  OK   spin arcs run prograde: the arc's motion is omega x r about the north pole
+  OK   axis hover cites the sense of rotation
+  OK   axis hover says the rotation is not shown and states no period
+  OK   Moon: ellipse faint by rgba (no trace opacity), arc white and wide, dates in the hover
+  OK   arc is the served trust window: 3.42 days either side
+  OK   the Moon's marker lies on its trusted arc (within one sample step)  [0.000 steps]
+  OK   the trusted arc sweeps one short piece of the orbit (60-120 deg for a ~6.8-day window)  [96.3 deg]
+  OK   every renderer/geometry info marker is a cross with a served border and hover text  [red, white, white, white, red, red, red, red, red, red, red, red, red, white, red, red, red, red, red, red]
+  OK   two-standards outlines: white on Earth's saturated warm shells, red on the rest  [white: Earth: Inner Radiation Belt, Earth: Lower Mantle, Earth: Outer Core, Earth: Upper Mantle]
+  OK   no Earth info marker within 4 degrees of the z axis  [closest: Earth: Inner Core at 5.0 deg]
+  OK   every hover with km also gives AU
+  OK   no hover line exceeds 90 characters
+  OK   Earth: Magnetopause: the nose sits on the served standoff  [10.250 R_E vs served 10.25]
+  OK   Earth: Magnetopause: drawn out to its served cut angle and no further  [120.00 deg, served 120]
+  OK   Earth: Magnetopause: a true surface of revolution about the Sun line, no tilt  [8.89e-16]
+  OK   Earth: Magnetopause: its one info marker lies ON the surface
+  OK   Earth: Magnetopause: the hover says the cut is a drawing limit, not an edge
+  OK   Earth: Bow Shock: the nose sits on the served standoff  [13.512 R_E vs served 13.51]
+  OK   Earth: Bow Shock: drawn out to its served cut angle and no further  [105.00 deg, served 105]
+  OK   Earth: Bow Shock: a true surface of revolution about the Sun line, no tilt  [9.21e-16]
+  OK   Earth: Bow Shock: its one info marker lies ON the surface
+  OK   Earth: Bow Shock: the hover says the cut is a drawing limit, not an edge
+  OK   every geometry trace skips hover (lines, dots and cones alike)
+
+=== ALL CHECKS PASSED ===
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 ### 10. The belts into Earth's equatorial plane
 
@@ -549,6 +731,75 @@ Expect: ALL CHECKS PASSED, with ten more legs — each belt shares a plane
 with the equator and the geostationary ring, each is flat, each hover names
 the drawn width as a choice and gives the sourced span.
 
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python patch_L231_belt_plane_gallery.py
+OK: two files written.
+    documentation/smoke_earth_geometry.js      (LF)
+    gallery/feature_renderers.js               (LF)
+
+Next:
+  node documentation/smoke_earth_geometry.js \
+    gallery/feature_renderers.js gallery/earth_geometry.js
+  Then STOP. Do not push until the orrery half is in -- the two
+  instruments must not disagree about where the belts are.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>node documentation/smoke_earth_geometry.js gallery/feature_renderers.js gallery/earth_geometry.js
+  OK   no warnings: every served group has a renderer
+  OK   nothing is named absent  [[]]
+  OK   no scene-centre marker survives
+  OK   drawer rows: 16 served + axis + Sun + terminator + Moon = 20 groups  [20: moon, Earth: Inner Core, Earth: Outer Core, Earth: Lower Mantle, Earth: Upper Mantle, Earth: Crust, Earth: Lower Atmosphere (to the stratopause), Earth: Upper Atmosphere (to the thermopause), Earth: Exosphere / Geocorona (hydrogen halo, detected extent), Earth: Low Earth Orbit, inner edge (200 km), Earth: Low Earth Orbit, outer edge (2,000 km), Earth: Geostationary Belt (GEO), Earth: Magnetopause, Earth: Bow Shock, Earth: Inner Radiation Belt, Earth: Outer Radiation Belt, Earth: Hill Sphere (gravitational dominance over the Sun), Earth: Rotation Axis and Equator, Earth: Sun Direction, Earth: Terminator (day-night line)]
+  OK   arrival lights exactly the eight shells (LEO as two edges) plus axis and Sun direction  [Earth: Inner Core, Earth: Outer Core, Earth: Lower Mantle, Earth: Upper Mantle, Earth: Crust, Earth: Lower Atmosphere (to the stratopause), Earth: Upper Atmosphere (to the thermopause), Earth: Low Earth Orbit, inner edge (200 km), Earth: Low Earth Orbit, outer edge (2,000 km), Earth: Rotation Axis and Equator, Earth: Sun Direction]
+  OK   Moon, terminator, GEO, belts, geocorona, Hill sphere and both magnetosphere surfaces wait in the drawer
+  OK   rotation axis tilted 23.44 deg from the ecliptic pole (served pole through the sourced obliquity)  [23.439]
+  OK   equator ring is perpendicular to the axis  [0.0000 deg]
+  OK   GEO ring and the equator share one plane
+  OK   equator drawn on the crust (1.002 R_earth)  [1.00200]
+  OK   Sun line points along the driver's Sun direction
+  OK   Sun line runs from Earth's centre to 92% of the frame
+  OK   subsolar dot sits on the Sun line just above the crust, in the Sun group
+  OK   Sun hover gives the Earth-Sun distance in km AND AU
+  OK   terminator plane is perpendicular to the Sun direction  [0.0000 deg]
+  OK   terminator hover marker lies ON the circle (perpendicular to the Sun line, at the crust)
+  OK   terminator hover says it is FROZEN and that there is no lighting model
+  OK   rotation axis carries a spin arc and a cone head at each pole
+  OK   spin arcs are centred on the pole tips at 0.28 of the axis half-length
+  OK   spin arcs run prograde: the arc's motion is omega x r about the north pole
+  OK   axis hover cites the sense of rotation
+  OK   axis hover says the rotation is not shown and states no period
+  OK   Moon: ellipse faint by rgba (no trace opacity), arc white and wide, dates in the hover
+  OK   arc is the served trust window: 3.42 days either side
+  OK   the Moon's marker lies on its trusted arc (within one sample step)  [0.000 steps]
+  OK   the trusted arc sweeps one short piece of the orbit (60-120 deg for a ~6.8-day window)  [96.3 deg]
+  OK   every renderer/geometry info marker is a cross with a served border and hover text  [red, white, white, white, red, red, red, red, red, red, red, red, red, white, red, red, red, red, red, red]
+  OK   two-standards outlines: white on Earth's saturated warm shells, red on the rest  [white: Earth: Inner Radiation Belt, Earth: Lower Mantle, Earth: Outer Core, Earth: Upper Mantle]
+  OK   no Earth info marker within 4 degrees of the z axis  [closest: Earth: Inner Core at 5.0 deg]
+  OK   every hover with km also gives AU
+  OK   no hover line exceeds 90 characters
+  OK   Earth: Magnetopause: the nose sits on the served standoff  [10.250 R_E vs served 10.25]
+  OK   Earth: Magnetopause: drawn out to its served cut angle and no further  [120.00 deg, served 120]
+  OK   Earth: Magnetopause: a true surface of revolution about the Sun line, no tilt  [8.89e-16]
+  OK   Earth: Magnetopause: its one info marker lies ON the surface
+  OK   Earth: Magnetopause: the hover says the cut is a drawing limit, not an edge
+  OK   Earth: Bow Shock: the nose sits on the served standoff  [13.512 R_E vs served 13.51]
+  OK   Earth: Bow Shock: drawn out to its served cut angle and no further  [105.00 deg, served 105]
+  OK   Earth: Bow Shock: a true surface of revolution about the Sun line, no tilt  [9.21e-16]
+  OK   Earth: Bow Shock: its one info marker lies ON the surface
+  OK   Earth: Bow Shock: the hover says the cut is a drawing limit, not an edge
+  OK   Earth: Inner Radiation Belt: shares a plane with the equator and the GEO ring  [0.0000 deg from the equator]
+  OK   Earth: Inner Radiation Belt: flat in that plane -- no saddle warp  [9.08e-17 of its radius out of plane]
+  OK   Earth: Inner Radiation Belt: the hover names the drawn width as a drawing choice
+  OK   Earth: Inner Radiation Belt: the hover gives the sourced span from the served edges  [true]
+  OK   Earth: Inner Radiation Belt: the hover does NOT claim the ring is drawn at the magnetic equator
+  OK   Earth: Outer Radiation Belt: shares a plane with the equator and the GEO ring  [0.0000 deg from the equator]
+  OK   Earth: Outer Radiation Belt: flat in that plane -- no saddle warp  [6.69e-17 of its radius out of plane]
+  OK   Earth: Outer Radiation Belt: the hover names the drawn width as a drawing choice
+  OK   Earth: Outer Radiation Belt: the hover gives the sourced span from the served edges  [true]
+  OK   Earth: Outer Radiation Belt: the hover does NOT claim the ring is drawn at the magnetic equator
+  OK   every geometry trace skips hover (lines, dots and cones alike)
+
+=== ALL CHECKS PASSED ===
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
 ### 11. Serve and quote the tilt
 
 ```
@@ -558,6 +809,80 @@ node documentation/smoke_earth_geometry.js gallery/feature_renderers.js gallery/
 
 Expect: ALL CHECKS PASSED, including one leg per belt confirming the hover
 carries 9.6 degrees with its model and epoch.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python patch_L231_serve_and_quote_tilt.py
+OK: four files written.
+    data/objects_config.json                   (LF)
+    documentation/payload_earth_scene.json     (LF)
+    documentation/smoke_earth_geometry.js      (LF)
+    gallery/feature_renderers.js               (LF)
+
+Next:
+  node documentation/smoke_earth_geometry.js \
+    gallery/feature_renderers.js gallery/earth_geometry.js
+  Then STOP. The orrery half of the belt plane change is still
+  outstanding; pushing now leaves the two instruments drawing
+  the belts in different planes.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>node documentation/smoke_earth_geometry.js gallery/feature_renderers.js gallery/earth_geometry.js
+  OK   no warnings: every served group has a renderer
+  OK   nothing is named absent  [[]]
+  OK   no scene-centre marker survives
+  OK   drawer rows: 16 served + axis + Sun + terminator + Moon = 20 groups  [20: moon, Earth: Inner Core, Earth: Outer Core, Earth: Lower Mantle, Earth: Upper Mantle, Earth: Crust, Earth: Lower Atmosphere (to the stratopause), Earth: Upper Atmosphere (to the thermopause), Earth: Exosphere / Geocorona (hydrogen halo, detected extent), Earth: Low Earth Orbit, inner edge (200 km), Earth: Low Earth Orbit, outer edge (2,000 km), Earth: Geostationary Belt (GEO), Earth: Magnetopause, Earth: Bow Shock, Earth: Inner Radiation Belt, Earth: Outer Radiation Belt, Earth: Hill Sphere (gravitational dominance over the Sun), Earth: Rotation Axis and Equator, Earth: Sun Direction, Earth: Terminator (day-night line)]
+  OK   arrival lights exactly the eight shells (LEO as two edges) plus axis and Sun direction  [Earth: Inner Core, Earth: Outer Core, Earth: Lower Mantle, Earth: Upper Mantle, Earth: Crust, Earth: Lower Atmosphere (to the stratopause), Earth: Upper Atmosphere (to the thermopause), Earth: Low Earth Orbit, inner edge (200 km), Earth: Low Earth Orbit, outer edge (2,000 km), Earth: Rotation Axis and Equator, Earth: Sun Direction]
+  OK   Moon, terminator, GEO, belts, geocorona, Hill sphere and both magnetosphere surfaces wait in the drawer
+  OK   rotation axis tilted 23.44 deg from the ecliptic pole (served pole through the sourced obliquity)  [23.439]
+  OK   equator ring is perpendicular to the axis  [0.0000 deg]
+  OK   GEO ring and the equator share one plane
+  OK   equator drawn on the crust (1.002 R_earth)  [1.00200]
+  OK   Sun line points along the driver's Sun direction
+  OK   Sun line runs from Earth's centre to 92% of the frame
+  OK   subsolar dot sits on the Sun line just above the crust, in the Sun group
+  OK   Sun hover gives the Earth-Sun distance in km AND AU
+  OK   terminator plane is perpendicular to the Sun direction  [0.0000 deg]
+  OK   terminator hover marker lies ON the circle (perpendicular to the Sun line, at the crust)
+  OK   terminator hover says it is FROZEN and that there is no lighting model
+  OK   rotation axis carries a spin arc and a cone head at each pole
+  OK   spin arcs are centred on the pole tips at 0.28 of the axis half-length
+  OK   spin arcs run prograde: the arc's motion is omega x r about the north pole
+  OK   axis hover cites the sense of rotation
+  OK   axis hover says the rotation is not shown and states no period
+  OK   Moon: ellipse faint by rgba (no trace opacity), arc white and wide, dates in the hover
+  OK   arc is the served trust window: 3.42 days either side
+  OK   the Moon's marker lies on its trusted arc (within one sample step)  [0.000 steps]
+  OK   the trusted arc sweeps one short piece of the orbit (60-120 deg for a ~6.8-day window)  [96.3 deg]
+  OK   every renderer/geometry info marker is a cross with a served border and hover text  [red, white, white, white, red, red, red, red, red, red, red, red, red, white, red, red, red, red, red, red]
+  OK   two-standards outlines: white on Earth's saturated warm shells, red on the rest  [white: Earth: Inner Radiation Belt, Earth: Lower Mantle, Earth: Outer Core, Earth: Upper Mantle]
+  OK   no Earth info marker within 4 degrees of the z axis  [closest: Earth: Inner Core at 5.0 deg]
+  OK   every hover with km also gives AU
+  OK   no hover line exceeds 90 characters
+  OK   Earth: Magnetopause: the nose sits on the served standoff  [10.250 R_E vs served 10.25]
+  OK   Earth: Magnetopause: drawn out to its served cut angle and no further  [120.00 deg, served 120]
+  OK   Earth: Magnetopause: a true surface of revolution about the Sun line, no tilt  [8.89e-16]
+  OK   Earth: Magnetopause: its one info marker lies ON the surface
+  OK   Earth: Magnetopause: the hover says the cut is a drawing limit, not an edge
+  OK   Earth: Bow Shock: the nose sits on the served standoff  [13.512 R_E vs served 13.51]
+  OK   Earth: Bow Shock: drawn out to its served cut angle and no further  [105.00 deg, served 105]
+  OK   Earth: Bow Shock: a true surface of revolution about the Sun line, no tilt  [9.21e-16]
+  OK   Earth: Bow Shock: its one info marker lies ON the surface
+  OK   Earth: Bow Shock: the hover says the cut is a drawing limit, not an edge
+  OK   Earth: Inner Radiation Belt: shares a plane with the equator and the GEO ring  [0.0000 deg from the equator]
+  OK   Earth: Inner Radiation Belt: flat in that plane -- no saddle warp  [9.08e-17 of its radius out of plane]
+  OK   Earth: Inner Radiation Belt: the hover names the drawn width as a drawing choice
+  OK   Earth: Inner Radiation Belt: the hover gives the sourced span from the served edges  [true]
+  OK   Earth: Inner Radiation Belt: the hover quotes the served magnetic tilt with its model and epoch
+  OK   Earth: Inner Radiation Belt: the hover does NOT claim the ring is drawn at the magnetic equator
+  OK   Earth: Outer Radiation Belt: shares a plane with the equator and the GEO ring  [0.0000 deg from the equator]
+  OK   Earth: Outer Radiation Belt: flat in that plane -- no saddle warp  [6.69e-17 of its radius out of plane]
+  OK   Earth: Outer Radiation Belt: the hover names the drawn width as a drawing choice
+  OK   Earth: Outer Radiation Belt: the hover gives the sourced span from the served edges  [true]
+  OK   Earth: Outer Radiation Belt: the hover quotes the served magnetic tilt with its model and epoch
+  OK   Earth: Outer Radiation Belt: the hover does NOT claim the ring is drawn at the magnetic equator
+  OK   every geometry trace skips hover (lines, dots and cones alike)
+
+=== ALL CHECKS PASSED ===
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 ### 12. The full offline run
 
@@ -571,12 +896,188 @@ Expect: all six gating checkers pass.
 outline finding if that turns out to be a real disagreement rather than
 local drift. It gates. If it fires, Step 0 is the first thing to re-check.
 
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python gallery_maintenance_run.py
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.0s  no change to MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite       9.6s  PASS (167 checks, 0 failures)
+  FAIL Feature renderers         0.1s  === 1 FAILURE(S) ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.1s  === ALL CHECKS PASSED ===
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: no sibling directories;
+                                    nothing for the sweep to do.
+
+======================================================================
+  1 of 6 gating checkers FAILED
+  Feature renderers
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories; nothing
+======================================================================
+
+----------------------------------------------------------------------
+Feature renderers -- === 1 FAILURE(S) ===
+----------------------------------------------------------------------
+  OK   no unread inputs reported for jupiter+saturn
+  OK   11 geometry traces (7 Saturn rings + 4 Jupiter rings) + 3 belts = 14  [got 14]
+  OK   one info marker per geometry trace  [28 vs 28]
+  OK   every geometry trace skips hover
+  OK   every info marker is a cross with a red border
+  OK   every info marker carries hover text
+  OK   hover text carries AU alongside km
+  OK   no hover line exceeds 90 characters  [L-227 line-width convention]
+  OK   Saturn's A Ring exists
+  OK   Jupiter's Main Ring exists
+  OK   Saturn ring plane at 28.05 deg from the ecliptic (orrery value)  [28.049 deg]
+  OK   Jupiter ring plane at 2.22 deg from the ecliptic (orrery value)  [2.222 deg]
+  OK   Saturn's rings are centred on Saturn, not the Sun  [centroid x offset -8.52e-6 AU]
+  OK   A Ring inner radius = 122340 km  [122340]
+  OK   A Ring outer radius = 136800 km  [136800]
+  OK   inner belt sits at ~1.75 Jupiter radii (1.5 + half the 0.5 band)  [1.750 R_J]
+  FAIL earth reports exactly one no-renderer group, the magnetosphere, by name  [earth/earth_magnetosphere: no Sun direction reached the renderer -- the magnetopause and bow shock are surfaces of revolution about the Sun line and nothing is drawn without it]
+  OK   5 interior + 2 atmosphere + 1 geocorona + 2 LEO + 1 GEO ring + 2 belts + 1 Hill = 14 Earth geometry traces  [got 14: Earth: Inner Core, Earth: Outer Core, Earth: Lower Mantle, Earth: Upper Mantle, Earth: Crust, Earth: Lower Atmosphere (to the stratopause), Earth: Upper Atmosphere (to the thermopause), Earth: Exosphere / Geocorona (hydrogen halo, detected extent), Earth: Low Earth Orbit, inner edge (200 km), Earth: Low Earth Orbit, outer edge (2,000 km), Earth: Geostationary Belt (GEO), Earth: Inner Radiation Belt, Earth: Outer Radiation Belt, Earth: Hill Sphere (gravitational dominance over the Sun)]
+  OK   every Earth info marker carries a Source line (14 of 14)  [got 14]
+  OK   GEO ring exists and is a single-radius ring
+  OK   GEO ring plane at 23.44 deg from the ecliptic (Earth's equator)  [23.439 deg]
+  OK   GEO ring at the served radius (6.6107 R_earth)  [6.6107]
+  OK   every Earth info marker carries the served source in meta for the i-panel
+  OK   the scene centre contributes 14 solar shells  [got 14]
+  OK   lower atmosphere at the served stratopause radius (1.0078 R_earth)  [1.0078]
+  OK   missing pole is reported, not silently ignored  [8 warnings]
+  OK   missing planet_radius stops the belts and says so
+  OK   an unknown feature key is reported
+  OK   rings still drawn without a pole (degraded, not dropped)
+
+=== 1 FAILURE(S) ===
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
 ### 13. Push the gallery
 
 ```
 git add -A && git commit && git push
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#       modified:   MODULE_ATLAS.md
+#       modified:   MODULE_INDEX.md
+#       modified:   data/objects_config.json
+#       modified:   documentation/payload_earth_scene.json
+#       modified:   documentation/smoke_earth_geometry.js
+#       modified:   gallery/earth_geometry.js
+#       modified:   gallery/feature_renderers.js
+#       new file:   patch_L231_belt_plane_gallery.py
+#       new file:   patch_L231_serve_and_quote_tilt.py
+#       new file:   patch_L305_item5_fixture_sync.py
+#       new file:   patch_L305_item5_magnetosphere_render.py
+#       new file:   patch_L305_item6b_served_surface_rows.py
+#       new file:   patch_L305_l_shell_scalar_unit.py
+#
+~
+~
+~
+~
+~
+~
+.git/COMMIT_EDITMSG [unix] (14:21 15/09/2026)                                                                  1,0-1 All
+"~/OneDrive/Desktop/python_work/tonyquintanilla.github.io/.git/COMMIT_EDITMSG" [unix] 22L, 822B
+
+80520996b072622fc1f365e04fe7de88adf9d200
+
 python gallery_maintenance_run.py --live
 ```
+
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python gallery_maintenance_run.py --live
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 8 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    STALE    gallery/feature_renderers.js                   differs from the working copy
+    STALE    gallery/earth_geometry.js                      differs from the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+
+  N-A  Served reachability       1.8s  all 8 files served, but 2 differ
+                                    from your working copy, so this
+                                    describes an older deploy or you
+                                    have uncommitted edits. NOT YET
+                                    DEPLOYED, not a pass.
+
+  orrery HEAD df1219cf
+    NOT IN STORE  create_sun_galactic_tide default not a top-level constant in the store
+                  /objects/0/features/oort_cloud/galactic_tide/typical_radius
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NO UNIT       EARTH_MAGNETOPAUSE_SHUE_A6       the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/magnetopause/surface/a6
+    NO UNIT       EARTH_MAGNETOPAUSE_SHUE_A8       the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/magnetopause/surface/a8
+    NO UNIT       EARTH_BOW_SHOCK_JELINEK_EPS      the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/bow_shock/surface/epsilon
+    NO UNIT       EARTH_BOW_SHOCK_JELINEK_LAMBDA   the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/bow_shock/surface/lambda
+    NO UNIT       EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE the constant's name declares no unit
+                  /objects/1/features/van_allen_belts/inner_belt_inner_edge
+    NO UNIT       EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE the constant's name declares no unit
+                  /objects/1/features/van_allen_belts/inner_belt_outer_edge
+    UNIT MISMATCH EARTH_VAN_ALLEN_OUTER_RADII      the name declares r_earth, the config says 'l_shell'
+                  /objects/1/features/van_allen_belts/outer_belt_distance
+    NO UNIT       EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE the constant's name declares no unit
+                  /objects/1/features/van_allen_belts/outer_belt_inner_edge
+    NO UNIT       EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE the constant's name declares no unit
+                  /objects/1/features/van_allen_belts/outer_belt_outer_edge
+    NOT IN STORE  planet_poles['Earth']            not a top-level constant in the store
+                  /objects/1/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  70 pointers: 56 match, 0 DRIFT, 1 UNIT MISMATCH, 13 could not be examined.
+
+  FAIL Store drift               0.9s  70 pointers against orrery
+                                    df1219cf -- 56 match, 0 DRIFT, 1
+                                    UNIT MISMATCH, 13 could not be
+                                    examined.
+
+======================================================================
+  NO gating checker was able to run.
+  1 UNREACHABLE -- did not run, so they neither passed nor failed:
+    Served reachability    all 8 files served, but 2 differ from
+  1 report-only -- these do not gate, whatever they exit with:
+    FAIL Store drift            70 pointers against orrery df1219cf --
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 Expect, and this is a prediction stated before the run:
 
@@ -604,6 +1105,8 @@ Open the Earth exhibit. Two things are new in the drawer:
   magnetopause; that is correct and is two papers' drawing limits, not a
   fact about the two boundaries.
 - The belts are now in the same plane as the geostationary ring.
+
+-- I tested in both Chrome and Safari: the new shells are not displayed. 
 
 ---
 
