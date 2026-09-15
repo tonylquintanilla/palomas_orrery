@@ -49,6 +49,9 @@ import plotly.graph_objs as go
 from constants_new import (
     KM_PER_AU, SUN_RADIUS_KM, LIGHT_MINUTES_PER_AU, KNOWN_ORBITAL_PERIODS,
     CENTER_BODY_RADII,
+    # L-231 (2026-09-15): Earth's dipole tilt moved to the store so the web
+    # page can quote it. One value, one home; this table reads it.
+    EARTH_DIPOLE_TILT_DEG,
     # L-162 (2026-07-29): named directly in constants_new.py now; these
     # nine no longer derive from a CENTER_BODY_RADII lookup below.
     MERCURY_RADIUS_KM, VENUS_RADIUS_KM, MOON_RADIUS_KM, MARS_RADIUS_KM,
@@ -681,8 +684,13 @@ def build_rotation_axis_traces(center_position=(0, 0, 0), planet_name=None,
 # stays at center until the direction is sourced (Mode-7), per Fetched-vs-Recalled.
 #
 # Only bodies with a sourced dipole tilt appear. Others are omitted, the gap left
-# visible rather than guessed (Earth ~11 deg, Jupiter ~10 deg, Saturn <1 deg,
-# Mercury ~0 deg: deferred pending sourced tilt + sense, their own entries later).
+# visible rather than guessed.
+# CORRECTED 2026-09-15 (L-231): this paragraph used to list Earth at ~11 deg,
+# Jupiter ~10, Saturn <1 and Mercury ~0 as DEFERRED pending a sourced tilt.
+# All four have been in the table with sourced tilts since 2026-06-22, eleven
+# lines below. The paragraph sat there contradicting them, and it is one of
+# the places the stale "Earth 11 degrees" keeps being read from. Earth's tilt
+# is 9.6 deg and now lives in the store as EARTH_DIPOLE_TILT_DEG.
 # ---------------------------------------------------------------------------
 # Movement 2, dipole cluster (L-009 / L-006). Tilts, offsets, and sources are
 # peer-reviewed mission data (Gemini de-novo, June 2026); the recalled values
@@ -703,7 +711,11 @@ PLANET_DIPOLE = {
                         '(< 1 deg); modeled as a purely axial offset dipole -- '
                         'the envelope of a zero-tilt dipole is the axis line itself',
                 'source': 'Anderson et al. 2011, MESSENGER (Science 333, 1859)'},
-    'Earth':   {'tilt_deg': 9.6, 'azimuth_deg': 0.0, 'offset_fraction': 0.085,
+    # L-231 (2026-09-15): the tilt is read from the store, not repeated
+    # here. The note and source below say more than the store row does and
+    # are what the cone's hover reads, so they stay.
+    'Earth':   {'tilt_deg': EARTH_DIPOLE_TILT_DEG, 'azimuth_deg': 0.0,
+                'offset_fraction': 0.085,
                 'offset_note': 'Center offset: ~0.085 R_E northward, axial '
                                'approximation (~540 km); the true center is also '
                                'displaced laterally toward ~22 N, 140 E '

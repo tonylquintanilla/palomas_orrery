@@ -460,6 +460,35 @@ EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE = 7.0
 # The declared conditions come first because the standoffs are evaluated at
 # them. L-314 replaces all three with a measured feed.
 
+EARTH_DIPOLE_TILT_DEG = 9.6
+# Unit: deg
+# Status: measured V_SOURCED 2026-06-22 -- promoted to the store 2026-09-15
+# Source: Alken et al. (2021), "International Geomagnetic Reference Field:
+# Source+: the thirteenth generation", Earth Planets Space 73:49,
+# Source+: doi:10.1186/s40623-020-01288-x. The angle between the geomagnetic
+# Source+: dipole axis and Earth's rotation axis, for epoch 2020-2025.
+# Note: 9.6 is rounded to a tenth of a degree, which is the precision the
+# Note+: dipole cone's projection can honour; the cone is what this value
+# Note+: was sourced for (L-009, cleared 2026-06-22, cross-checked de novo
+# Note+: by a second model in June 2026).
+# Note+: The tilt DRIFTS, slowly decreasing by about 0.05 deg per decade,
+# Note+: so this row carries its epoch and any quotation of it should too.
+# Note+: Other authorities give slightly different figures for the same
+# Note+: quantity -- NOAA states 9.41 deg from the WMM2020 coefficients and
+# Note+: 9.21 from WMM2025, and the British Geological Survey says about
+# Note+: ten. The spread is about which coefficients and which epoch define
+# Note+: "the dipole", not about the belts, and at drawing precision it
+# Note+: does not move anything. Quote this row's figure with its model and
+# Note+: epoch, or say "about ten degrees" and quote nothing.
+# Note: promoted here 2026-09-15 (L-231) because a value cannot be quoted
+# Note+: on the web page unless the store carries it. It previously lived
+# Note+: only as a literal in PLANET_DIPOLE, which made it a sourced value
+# Note+: with a home outside the citation home. PLANET_DIPOLE now reads
+# Note+: this row; the fuller note and source strings stay in that table
+# Note+: because the cone's hover reads them.
+# Note+: The 11 degrees still typed at earth_visualization_shells.py:865 is
+# Note+: a DIFFERENT, uncited number and is ruled for removal (L-305).
+
 EARTH_SOLAR_WIND_PRESSURE_NPA = 2.0
 # Unit: npa
 # Status: declared pending 2026-09-12 -- L-314

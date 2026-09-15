@@ -97,6 +97,9 @@ from constants_new import (
     EARTH_HILL_SPHERE_KM, EARTH_HILL_SPHERE_RADII,
 )
 from orrery_rendering import rotate_to_sunward, create_info_marker
+# L-231 (2026-09-15): the belts are drawn in Earth's equatorial plane now,
+# using the same call Saturn's belt builder has always used.
+from idealized_orbits import orient_to_planet_pole
 
 
 def _km_above_surface(radii, sig):
@@ -862,7 +865,14 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     # is tilted ~11 deg from its rotation axis.
     x, y, z = rotate_to_sunward(
         x, y, z, center_position=center_position,
-        sun_position=sun_position, magnetic_tilt_deg=11,
+        # L-305 (2026-09-15): magnetic_tilt_deg=11 removed. It was uncited,
+        # it disagreed with the sourced 9.6 in PLANET_DIPOLE, and the bow
+        # shock call below passes no tilt at all -- so this leaned the
+        # magnetopause inside an upright bow shock. Both boundary models
+        # are fitted symmetric about the Sun line from crossings taken at
+        # every dipole tilt, so the tilt is already averaged into their
+        # coefficients. The dipole cone is where Earth's tilt is shown.
+        sun_position=sun_position,
     )
     x = x + center_x
     y = y + center_y
@@ -1023,19 +1033,38 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
             for j in range(n_points):
                 angle = (j / n_points) * 2 * np.pi
                 
-                # Create a belt around Earth's rotational axis
+                # A flat ring in the body frame. It becomes a ring around
+                # Earth's rotational axis a few lines below, where
+                # orient_to_planet_pole rotates it -- which is what the
+                # old comment here claimed and the code never did.
                 x = belt_radius * np.cos(angle)
                 y = belt_radius * np.sin(angle)
                 
-                # Add some z variation based on angle to create the shape of a belt
-                # rather than a perfect torus (thinner near poles)
-                z_scale = 0.2 * belt_radius  # Controls how flat the belts are
-                z = z_scale * np.sin(2 * angle)
+                # L-231 (Tony's ruling, 2026-09-15): the saddle is gone.
+                # This was z = 0.2 * belt_radius * sin(2 * angle), lifting
+                # the ring a fifth of its radius TWICE per circuit -- more
+                # vertical swing than the real 9.6-degree magnetic tilt
+                # would give, at twice the frequency, meaning nothing. The
+                # comment here said it made the belt "thinner near poles";
+                # it changed no cross-section, it moved the whole ring.
+                # Any real vertical extent is L-330's question.
+                z = 0.0
                 
                 belt_x.append(x)
                 belt_y.append(y)
                 belt_z.append(z)
         
+        # L-231 (Tony's ruling, 2026-09-15): into Earth's EQUATORIAL
+        # plane, before the centre offset. The deciding argument is the
+        # geostationary ring, which is drawn in that plane at 6.6 R_E,
+        # inside an outer belt whose sources span 3 to 7 -- the ecliptic
+        # put those two 23.4 degrees apart in one picture. The magnetic
+        # equator would be better still, but it needs a DIRECTION as well
+        # as an angle and that direction turns once a day; the spin
+        # equator is its daily average. Same call Saturn's belts use.
+        belt_x, belt_y, belt_z = orient_to_planet_pole(
+            np.array(belt_x), np.array(belt_y), np.array(belt_z), 'Earth')
+
         # Apply center position offset
         belt_x = np.array(belt_x) + center_x
         belt_y = np.array(belt_y) + center_y
