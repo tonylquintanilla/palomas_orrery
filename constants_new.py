@@ -577,6 +577,36 @@ EARTH_MAGNETOPAUSE_SHUE_A8 = 0.024
 # Note+: as 0.24. That is a typo in the preprint; the primary says 0.024.
 # Note+: Recorded so nobody re-derives the doubt.
 
+EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG = 120.0
+# Unit: deg
+# Status: declared 2026-09-14 -- a drawing limit, not an edge
+# Declared: where the drawn magnetopause stops, measured from the nose.
+# Declared+: Shue's surface has no end. At the store's declared conditions
+# Declared+: the flaring is 0.5896, and for any flaring at or above 0.5 the
+# Declared+: radius grows without bound as theta approaches 180 degrees, so
+# Declared+: a drawing must choose a stop.
+# Declared+: Shue et al. (1998), doi:10.1029/98JA01103 -- fig. 6, p. 17,695,
+# Declared+: plots the model's own uncertainty out to 120 degrees solar
+# Declared+: zenith angle, the furthest the authors evaluate their own model.
+# Declared+: Past that the drawing would show a surface the paper does not.
+# Declared+: The paper states no angular range for the crossings it was
+# Declared+: fitted to; that number exists only in Shue et al. (1997), which
+# Declared+: is not read.
+# Access: open full text, https://doi.org/10.1029/98JA01103 (2026-09-11).
+# Record: documentation/L305_gap1_read_record_20260911.md
+# Note: the same shape as EARTH_BOW_SHOCK_CUT_ANGLE_DEG and a different
+# Note+: kind of reason. The bow shock stops where its crossings stopped,
+# Note+: within 7 hours of local noon. The magnetopause stops where its
+# Note+: authors stopped plotting. Both are drawing limits; neither is an
+# Note+: edge of anything physical, and the hover has to say so.
+# Note+: At the declared conditions the cut falls at r = 23.2 R_E,
+# Note+: x = -11.6 R_E, R_yz = 20.1 R_E. For comparison the bow shock cut
+# Note+: falls at x = -7.8 R_E, R_yz = 29.0 R_E, so the drawn shock is the
+# Note+: wider and shorter of the two. That is not a physical statement
+# Note+: about the two boundaries; it is two drawing limits set by two
+# Note+: different papers for two different reasons.
+# Note: Tony's ruling, 2026-09-14 (L-305 item 6b).
+
 EARTH_BOW_SHOCK_JELINEK_R0_RADII = 15.02
 # Unit: r_earth
 # Status: measured V_SOURCED 2026-09-10 -- open full text
