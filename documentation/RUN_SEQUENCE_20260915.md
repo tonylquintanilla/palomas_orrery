@@ -1205,6 +1205,91 @@ OK: palomas_orrery_dashboard.py written (LF).
 
 Next: open the dashboard and check the button is there and
       indented with its neighbours, then press it.
+-- confirmed. indented under gallery maintenance run -- live
+
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
+orrery moved to 042e869e6656ca15ed581392242214ad0a7aacd2
 
+nightly re-run:
+[RECOVER] removed retained data\solar-system.prev (cleared read-only on 6 entries)
+[sweep] no sibling directories present
+[warn] sun: features-only entry; no Horizons fetch
+[done] run 20260915T213228Z (nightly): 13 objects
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+gallery moved to 1e53d9ef96ba861655db2d500a15a41bebd1016a
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 8 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+
+  PASS Served reachability       1.5s  all 8 files served and
+                                    byte-identical to the working copy
+
+  orrery HEAD 042e869e
+    NOT IN STORE  create_sun_galactic_tide default not a top-level constant in the store
+                  /objects/0/features/oort_cloud/galactic_tide/typical_radius
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NO UNIT       EARTH_MAGNETOPAUSE_SHUE_A6       the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/magnetopause/surface/a6
+    NO UNIT       EARTH_MAGNETOPAUSE_SHUE_A8       the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/magnetopause/surface/a8
+    NO UNIT       EARTH_BOW_SHOCK_JELINEK_EPS      the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/bow_shock/surface/epsilon
+    NO UNIT       EARTH_BOW_SHOCK_JELINEK_LAMBDA   the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/bow_shock/surface/lambda
+    NO UNIT       EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE the constant's name declares no unit
+                  /objects/1/features/van_allen_belts/inner_belt_inner_edge
+    NO UNIT       EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE the constant's name declares no unit
+                  /objects/1/features/van_allen_belts/inner_belt_outer_edge
+    UNIT MISMATCH EARTH_VAN_ALLEN_OUTER_RADII      the name declares r_earth, the config says 'l_shell'
+                  /objects/1/features/van_allen_belts/outer_belt_distance
+    NO UNIT       EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE the constant's name declares no unit
+                  /objects/1/features/van_allen_belts/outer_belt_inner_edge
+    NO UNIT       EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE the constant's name declares no unit
+                  /objects/1/features/van_allen_belts/outer_belt_outer_edge
+    NOT IN STORE  planet_poles['Earth']            not a top-level constant in the store
+                  /objects/1/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  70 pointers: 56 match, 0 DRIFT, 1 UNIT MISMATCH, 13 could not be examined.
+
+  FAIL Store drift               0.8s  70 pointers against orrery
+                                    042e869e -- 56 match, 0 DRIFT, 1
+                                    UNIT MISMATCH, 13 could not be
+                                    examined.
+
+======================================================================
+  1 of 1 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    FAIL Store drift            70 pointers against orrery 042e869e --
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+-- mode 5: on phone 
+1) the boxes are still too large. issues:
+- they are aligned with the right side and this conflicts with the arrow cross on the top or with the triad on the bottom. this is being done in order to draw the arrow to the hovercross. i think that is secondary. suggest aligning in the center as with the body shells. if the arrow is visible that is good. if not, the centering is primary. we should not remove so much information that it is less useful. keep what we have. -- see uploaded images.
+- the finger gestures are ackward. it is hard to select the box. the finger tends to select the title. however, selecting the title with without the box results in the figure not being drawn nor the hovertext displaying. the required order seems to be a) the box to select the figure b) the title to select the hovertext. i suggest one gesture that selects all of it with the finger pointing at any part of the row. all is selected including the hovertext. that is more natural. 
+2) on desktop
+- mostly correct. the initial box is a bit large with the top cropped. it is centered. the arrow is visible. to see the whole box one has to zoom a little. not a major issue, but centering would help. 
