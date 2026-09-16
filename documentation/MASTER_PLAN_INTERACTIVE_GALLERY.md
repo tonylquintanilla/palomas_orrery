@@ -1,6 +1,6 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** v30 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
+**Status:** v32 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
 **the first feature-bearing exhibit is LIVE AND COMPLETE.** The Sun
 ships at `palomasorrery.com/interactive.html?exhibit=sun`, unlinked
 from the landing page, Mode 5 accepted 2026-08-29 (gallery
@@ -14,8 +14,9 @@ each shell's curated link (L-265, DONE). The phone pass is DONE as of
 shells plus the Moon, arriving at low Earth orbit -- eleven sourced
 features, the axis, the Sun line and terminator, and the Moon on its
 trusted arc -- with its card featured in the lobby (gallery
-`57fd93c6`). The magnetosphere is absent and named until its rebuild
-on a cited model (L-305). Earth made the rooms a TABLE, `EXHIBITS` in
+`57fd93c6`). Its magnetosphere, absent and named at launch, has been
+drawn from the store since 2026-09-15 -- Shue's magnetopause and
+Jelinek's bow shock (L-305). Earth made the rooms a TABLE, `EXHIBITS` in
 `interactive.html`, one row per room, and it found L-168, the
 planetocentric mean-motion bug, on the first moon it drew.
 **The braid, ruled 2026-08-22:** provenance stops being a GATE and
@@ -92,7 +93,24 @@ text here read "enabled with a known open issue", contradicting its own
 header forty lines below. L-151 (gallery-assembler skill) DONE
 2026-07-27; L-150 (multi-orbit binaries) still decided, not yet built.)
 **Date begun:** July 3, 2026
-**Last updated:** September 11, 2026 (v31: a DESIGN SESSION, zero code.
+**Last updated:** September 16, 2026 (v32: two BUILD sessions and the
+record that closes them. Earth's magnetosphere is drawn from the store --
+Shue's magnetopause and Jelinek's bow shock, eleven served rows, no
+number typed into the renderer (L-305 items 5 and 6b, 2026-09-15) -- and
+Earth's belts moved into its equatorial plane (L-231). Citations left the
+hover for the i panel, and a hover budget suite joined the maintenance
+run. Then the phone chrome settled on Tony's Mode 5 (2026-09-15/16): the
+drawer row became easy to hit, text boxes stopped breaking mid-sentence,
+the phone's text box lost its arrow and moved mid-view, the arrow cross
+went back to the top right, and a phone tap now reaches a shell's marker
+instead of its dots (L-316 rounds 3 and 4, L-318 rounds 3 to 6). The
+front page no longer says the magnetosphere is absent, and the status
+line, which said v30 under a v31 stamp, now matches. The 2026-09-12
+subsection went in without a stamp; the 2026-09-13/14 sessions (L-305
+item 7) are recorded in the ledger and in
+`HANDOFF_L305_item7_built_20260914.md`, not in Section 5a. Section 5a
+gains the 2026-09-15/16 subsection; with Anthropic's Claude Opus 5.
+v31, September 11, 2026: a DESIGN SESSION, zero code.
 Both magnetosphere papers read from the PDFs and L-305's Gap items 1 and
 2 closed; every computed figure in that item reproduced from the
 published equations. Gap item 3 asked how the drift check treats a
@@ -109,13 +127,6 @@ landed, corrected; the camera-step track closed on Mode 5 and the phone
 look that closed it added four chrome items, two of them solutions the
 orrery already had; the orrery's hover text joins the braid, Earth first
 (L-321); Section 5a gains the 2026-09-10 evening subsection; with
-Anthropic's Claude Opus 5. v29, September 10, 2026: the Earth BUILD closes.
-Step 3 built and through three Mode 5 rounds; L-168 fixed at source
-on the first moon it could affect; the card made in Studio after a
-copied card hid from the desktop lobby; L-291 and L-303 closed on
-Tony's Mode 5; loose ends re-homed to L-311, L-312, L-237 and L-288;
-next track the L-310 camera-step design round; two handoff locations
-corrected; Section 5a gains the 2026-09-09/10 subsection; with
 Anthropic's Claude Opus 5.)
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
 Claude Opus 5, Claude Fable 5, Claude Sonnet 5, GPT
@@ -1825,6 +1836,58 @@ drift, then Mode 5 on the phone first). L-323's design record and
 revision 3 prompts are owed and the 2026-09-11 prompts must not be sent
 as they stand. Handoff:
 `documentation/HANDOFF_L305_L323_20260912.md`.
+
+### 2026-09-15/16 -- the magnetosphere is drawn, and the phone chrome settles
+
+**Earth's magnetosphere reached the exhibit on 2026-09-15** (L-305 items
+5 and 6b; `HANDOFF_L231_L305_magnetosphere_and_belts_20260915.md`). The
+research had been done on the tenth and eleventh; nobody had served the
+coefficients or written the code that turns them into a shape. Both
+surfaces are now drawn from eleven served rows with no number typed into
+the renderer, and the magnetopause stops at 120 degrees from the nose --
+the furthest the authors plot their own model, declared, not measured.
+The same session put Earth's belts in its equatorial plane (L-231): the
+geostationary ring is drawn there at 6.6 Earth radii, inside an outer
+belt served as spanning 3 to 7, and the ecliptic had put the two 23.4
+degrees apart in one picture. Earth's dipole tilt became a store row,
+quoted in the belt hover with its epoch. And the hover became the
+glance: every citation, equation and served caveat moved to the i panel,
+with one pointer line under each hover.
+
+**That session's lesson: a checker exists for the failure you already
+had.** Three checks passed while the thing they guarded was broken -- a
+line-width rule on a hover that ran off the phone, a scene checker on a
+month-old fixture, a "Source:" leg true only because the fixture had no
+sources. It showed again on 2026-09-16: the new hover budget suite never
+builds the Sun room, and four Sun hovers had missed the move to the panel
+(L-331).
+
+**The phone chrome settled on 2026-09-15/16, on Tony's Mode 5 each
+round.** The drawer row got a finger-sized selection target, and a name
+tap on an unticked shell now ticks it (L-318 round 3, amending L-267's
+G2). Text boxes stopped breaking mid-sentence: a break that only keeps a
+desktop line short is now soft, and the phone rejoins it (round 4). On a
+portrait phone the text box lost its arrow and moved to the middle of the
+view, where a tall box fits (round 5). With the box mid-view, the arrow
+cross went back to the top right (L-316 round 4). And a phone tap now
+reaches a shell's marker instead of its dots, which Plotly had let win
+the tap (round 6) -- Tony: "always opens on first tap." Rounds 5 and 6
+apply to a portrait phone only, on Tony's word; the desktop is as it was.
+
+**The two instruments now disagree about Jupiter's belts** (L-231): the
+gallery's shared belt renderer moved Jupiter's too, and the orrery's
+Jupiter builder was not touched. No room shows Jupiter yet, and Tony
+ruled that it can wait for Jupiter's room.
+
+**Tony's standing rule of 2026-09-16: no compressed language in hover
+text.** What the protocol asks of Claude's replies to Tony, the hovers now
+owe the visitor (L-331).
+
+**Next.** L-332 (the interactive-exhibit skill), then L-331 (the visitor
+text, the four Sun hovers, and a plain-language pass over the hovers --
+the Sun room is live, so it should be correct), Tony's calls on closing
+L-316 and L-318, then L-330 (the belts' shape) and L-322. Handoff:
+`documentation/HANDOFF_L316_L318_phone_chrome_20260916.md`.
 
 ### What this section deliberately does not carry
 

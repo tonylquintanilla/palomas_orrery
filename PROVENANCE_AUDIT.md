@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Provenance Audit
 
-Generated: September 15, 2026
-Files scanned: 137
+Generated: September 16, 2026
+Files scanned: 133
 Total findings: 1065
 Constants: 145 | Dicts: 41 | Display strings: 879
 
@@ -19,14 +19,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260916T161047Z | `cce6a93` | 133 | 1065 | 292 | 655 | 116 | 2 |
 | 20260915T190119Z | `7205820` | 137 | 1065 | 292 | 655 | 116 | 2 |
 | 20260915T041248Z | `68102e1` | 132 | 1064 | 292 | 654 | 116 | 2 |
 | 20260914T234540Z | `773e5c2` | 131 | 1063 | 292 | 653 | 116 | 2 |
 | 20260914T164751Z | `bfc0505` | 132 | 1059 | 293 | 648 | 116 | 2 |
 | 20260914T163841Z | `bfc0505` | 131 | 1059 | 293 | 648 | 116 | 2 |
-| 20260913T153301Z | `c0bb91a` | 131 | 1059 | 293 | 648 | 116 | 2 |
 
-Change since the previous run: total +1, Tier-1 +0.
+Change since the previous run: total +0, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -1821,8 +1821,8 @@ is planned for a future session.
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 75 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
 | 76 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 601 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 732 | dict | SECTION_SYMBOLS[...] | (4 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 620 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 751 | dict | SECTION_SYMBOLS[...] | (4 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### planet_visualization_utilities.py
 

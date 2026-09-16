@@ -353,7 +353,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*196 live items; 181 need attention (`!`); 195 RICE-scored; 129 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*198 live items; 183 need attention (`!`); 197 RICE-scored; 129 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -382,7 +382,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-299 | A hover that quotes a measured number names its source in the hover | OPEN | 5.1 | 2026-09-07 |
 | ! | L-193 | Qualified verdicts -- the token is not the whole answer | OPEN | 4.8 | 2026-08-15 |
 | ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
-| ! | L-316 | On a portrait phone the arrow cross moves to the top-right corner | OPEN | 4.8 | 2026-09-10 |
+| ! | L-316 | On a portrait phone the arrow cross moves to the top-right corner | OPEN | 4.8 | 2026-09-16 |
 | ! | L-327 | Tool repairs from the rules-vs-reasoning round (tooling track) | OPEN | 4.8 | 2026-09-14 |
 | ! | L-268 | Sweep: features collapsed out of their own identity | OPEN | 4.5 | 2026-08-30 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
@@ -392,6 +392,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-247 | Sgr A* constants migrated to the single source of truth | OPEN | 4.0 | 2026-08-25 |
 | ! | L-277 | The L-192 site store anchors by line number, so any insertion breaks two checkers | OPEN | 4.0 | 2026-09-03 |
 | ! | L-325 | A derived row stores its reported figure, not the arithmetic result | OPEN | 4.0 | 2026-09-12 |
+| ! | L-331 | Visitor-facing text: stale info text, four Sun hovers outside the i-panel move, and hovers in plain language (exhibits) | OPEN | 4.0 | 2026-09-16 |
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
@@ -409,6 +410,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-285 | index.html adopts the shared navigation cluster; the fake-wheel dolly retires | OPEN | 3.6 | 2026-09-04 |
 | ! | L-311 | Earth's rotation period and obliquity are not served, so the axis hover names neither | OPEN | 3.6 | 2026-09-10 |
 | ! | L-324 | One assignment per line in constants_new.py | OPEN | 3.6 | 2026-09-12 |
+| ! | L-332 | interactive-exhibit skill 1.3: carry the phone chrome of 2026-09-15/16 (skills) | OPEN | 3.6 | 2026-09-16 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-09-12 |
 | ! | L-286 | Rooms in four levels: drill-down, short-name breadcrumb, Home stays a scene reset | OPEN | 3.5 | 2026-09-08 |
 | ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
@@ -432,17 +434,17 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 |  | L-225 | Migrate the comet shell constants into `constants_new.py`, then dispatch | DEFERRED | 2.4 | 2026-08-23 |
 | ! | L-293 | Lunar standstill: an exhibit made of four dated orbits | OPEN | 2.4 | 2026-09-06 |
-| ! | L-305 | Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together | OPEN | 2.4 | 2026-09-12 |
+| ! | L-305 | Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together | OPEN | 2.4 | 2026-09-16 |
 | ! | L-322 | Units declared in the store, and the orrery as producer | OPEN | 2.3 | 2026-09-12 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
 | ! | L-328 | Subtraction pass on the skill layer (protocol/skills track) | OPEN | 2.1 | 2026-09-14 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
 | ! | L-218 | 22 Cross-checked lines attach to no unit | OPEN | 2.1 | 2026-08-19 |
-| ! | L-318 | Reading a shell's hover text on the phone: taps miss in the mesh, and labels mid-screen lose their pointer | OPEN | 2.1 | 2026-09-10 |
+| ! | L-318 | Reading a shell's hover text on the phone: taps miss in the mesh, and labels mid-screen lose their pointer | OPEN | 2.1 | 2026-09-16 |
 | ! | L-275 | The dashboard cannot launch a Node tool, so three gallery smoke suites have no button | OPEN | 1.9 | 2026-09-01 |
 | ! | L-284 | Retire the social export; the gallery owns publishing | OPEN | 1.9 | 2026-09-03 |
-| ! | L-231 | Radiation belts are drawn in the ecliptic; the magnetic tilt is an unbuilt intent | OPEN | 1.8 | 2026-09-15 |
+| ! | L-231 | Radiation belts are drawn in the ecliptic; the magnetic tilt is an unbuilt intent | OPEN | 1.8 | 2026-09-16 |
 |  | L-309 | The exhibit chrome keeps its sun* names after Earth joined it (rename deferred, with its reason) | DEFERRED | 1.8 | 2026-09-09 |
 | ! | L-187 | info_dictionary numeric-overlap enumeration | OPEN | 1.8 | 2026-08-07 |
 | ! | L-228 | Alfven surface latitude ranges: source them or omit them | OPEN [Tony] | 1.8 | 2026-08-23 |
@@ -686,7 +688,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-115 | Skills v1.1 batch: accuracy fixes + two seed blocks (Fable Mode 7) | DONE | 3.6 | 2026-07-12 |
 |  | L-295 | The upper atmosphere shell disagrees with its own hover text | DONE | 3.6 | 2026-09-07 |
 |  | L-315 | Chained ledger patches refuse once the indexer runs between them (safe-file-editing field note) | DONE | 3.6 | 2026-09-11 |
-|  | L-267 | The Sun exhibit GUI shape: drawer, focus label, marker navigation | DONE | 3.4 | 2026-09-04 |
+|  | L-267 | The Sun exhibit GUI shape: drawer, focus label, marker navigation | DONE | 3.4 | 2026-09-16 |
 |  | L-097 | skills_index.py -- Skill Manifest auto-generation (process/tooling) | DONE | 3.2 | 2026-07-04 |
 |  | L-127 | module_atlas.py generates MODULE_INDEX.md too -- single source, eliminate divergence | DONE | 3.2 | 2026-07-28 |
 |  | L-236 | Gallery maintenance runner | DONE | 3.2 | 2026-08-29 |
@@ -768,6 +770,108 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-332] interactive-exhibit skill 1.3: carry the phone chrome of 2026-09-15/16 (skills)
+<!-- L:332 status:OPEN upd:2026-09-16 section:A flag: rice:2/2/90/1 -->
+- `skills/interactive-exhibit/SKILL.md` 1.2 (2026-09-11) describes the
+  rooms' chrome as L-316 round 2 and L-318 rounds 1 and 2 left it. Since
+  then [verified @ gallery `52e953a7`]:
+  - the arrow cross is placed by `crossApart(on)` and the CSS rule
+    `.nav-cross-apart`, called with `sunPhonePortrait()`, the phone test
+    the text box also uses. The corner is top right again (L-316 rounds
+    3 and 4); `crossRight` and `sunCrossRight` no longer exist;
+  - a drawer row has a selection target about 65 px wide, rows are at
+    least 44 px tall, and the name or GO on an unticked shell ticks it
+    (L-318 round 3, amending L-267's G2 in that case);
+  - line breaks inside a sentence are `GalleryFeatures.SOFT_BR`, and the
+    phone's text box rejoins them (L-318 round 4);
+  - on a portrait phone the text box has no arrow and sits mid-view; the
+    desktop keeps the arrowed scene label (L-318 round 5);
+  - on a portrait phone a tap can pick only markers that carry text,
+    within 22 px, through Plotly's internals -- a second Plotly rule for
+    the touch-path section (L-318 round 6);
+  - the hover budget suite takes `interactive.html` and has three more
+    legs;
+  - Tony's standing rule of 2026-09-16: no compressed language in hover
+    text (L-331). `orrery-coding-conventions` carries the orrery's hover
+    conventions and may need the same line.
+**Note:** RICE 2/2/90/1 -> 3.6 is Claude's proposed score. The
+pre-built-session rule says to bump a skill before the next build that
+relies on it; the next build touching the rooms' chrome is L-331.
+**Gap:** the skill edit, then `skills_index.py`.
+  **Tony-action (do):** reinstall the skill after the bump.
+**Ref:** L-316, L-318, L-331, `skills/interactive-exhibit/SKILL.md`,
+`skills_index.py`, `PROJECT_INSTRUCTIONS.md`.
+
+#### [L-331] Visitor-facing text: stale info text, four Sun hovers outside the i-panel move, and hovers in plain language (exhibits)
+<!-- L:331 status:OPEN upd:2026-09-16 section:A flag: rice:3/3/90/2 -->
+- **Found 2026-09-15/16, reading the code for the 2026-09-15 handoff's
+  change (c).** The handoff named one stale sentence. There are more, in
+  `interactive.html` [verified @ gallery `52e953a7`]:
+  - `EARTH_INFO_HTML` still says the magnetosphere is not drawn yet and
+    describes what the desktop orrery draws instead, and its list of what
+    waits in the drawer leaves out the magnetopause and the bow shock;
+  - `EARTH_INFO_HTML` and `SUN_INFO_HTML` both say a shell carries its
+    source in its hover text, and the Sun's says the sources are named in
+    each hover. Since the 2026-09-15 hover-to-panel move (L-231) the i
+    panel carries them;
+  - the drawer sentence ("Tap one and it draws; the view rescales to hold
+    it") should be re-read against L-318 round 3.
+- **Four Sun hovers missed that move.** `renderStreamerBand` and
+  `renderOortShape` in `gallery/feature_renderers.js` never call
+  `withTail`. So the Streamer Belt, the Hills Cloud torus, the Outer Oort
+  Cloud clumps and the Galactic Tide keep their citations in the hover
+  and lack the pointer line. [verified @ gallery `52e953a7`]
+- **The check that should have caught it never looks.**
+  `documentation/smoke_hover_budget.js` builds the Earth scene, Earth's
+  features, and Jupiter and Saturn -- never the Sun room -- so its "every
+  hover points at the i panel" leg passes. [verified @ gallery `52e953a7`]
+- **Tony, 2026-09-16:** "galactic tide is a built interactive and should
+  be correct. But declared not measured means little to a visitor." The
+  Sun room is live, so this is not a nice-to-have. The Galactic Tide's
+  hover opens "DECLARED --" and closes "Not a measurement."; the caveat
+  stays beside the number, but in words a visitor can use.
+- **Proposed wording (Claude), for Tony's word:** "Drawn at 50,000 AU
+  (7.48e+12 km): a point chosen for the picture, midway between the Hills
+  cloud and the cloud's outer edge. It is not a measured distance." --
+  "Drawn at" as the belts' hovers already say it, and no capitalised
+  label.
+- **Tony, 2026-09-16, a standing rule: "In general we should avoid
+  compressed language in the hovertext."** It is the protocol's Register
+  Rule, which governs how Claude writes to Tony, applied to what a
+  visitor reads. A hover names the thing and says it plainly; project
+  vocabulary and capitalised labels are compression. Counted in the hovers
+  the gallery builds [verified @ gallery `52e953a7`]: "served" in 14
+  hovers ("the served pole", "served as L = 4.5", "none is served"),
+  "sourced" in 5 ("the sourced flux peak", "Sourced span"), "drawing
+  choice" and "illustrative" in 5 each (the belts, Earth's and Jupiter's),
+  capitalised labels in 4 ("DECLARED" on the Galactic Tide, "A DRAWING
+  LIMIT" on the magnetopause and the bow shock, "FROZEN" on the
+  terminator), and "L shell", "osculating" and "trusted arc" once each.
+  The Moon's hover is built by the assembler (`render_orbits.py`), not the
+  renderers, and the orrery's own hovers (L-321) are where the rule
+  reaches next; neither was counted here.
+- **Proposed (Claude) for the build.** Move the other three Sun hovers'
+  citations to the panel, add the pointer line to all four, and add the
+  Sun room to the hover budget suite. Then a plain-language pass over
+  every hover the renderers and `earth_geometry.js` build, keeping each
+  hover's facts and its caveats -- the rule changes the words, not what
+  is said. Then rewrite the stale info sentences the same way. Wording
+  goes to Tony before it ships.
+- **Recorded, not taken.** Tony's idea of 2026-09-16, to trim every text
+  box to its key data and move the rest to the i panel (see L-318).
+**Note:** RICE 3/3/90/2 -> 4.05 is Claude's proposed score: Impact raised
+from 2 on Tony's remark that the Sun room is a built interactive, Effort
+raised from 1 by the plain-language pass.
+**Gap:** the build above, then Mode 5 on the phone in both rooms.
+  **Tony-action (decide):** the reworded hovers, starting with the
+  Galactic Tide's.
+**Ref:** L-231 (the hover-to-panel move), L-305, L-318, L-332,
+`interactive.html` (`EARTH_INFO_HTML`, `SUN_INFO_HTML`),
+`gallery/feature_renderers.js` (`renderStreamerBand`, `renderOortShape`,
+`withTail`, `HOVER_TAIL`), `documentation/smoke_hover_budget.js`,
+`documentation/HANDOFF_L231_L305_magnetosphere_and_belts_20260915.md`
+(STILL OPEN, item 1c).
 
 #### [L-330] Belt shape: rings at the peaks, not the served region (Earth exhibit)
 <!-- L:330 status:OPEN upd:2026-09-15 section:A flag: rice:3/3/60/3 -->
@@ -3772,7 +3876,7 @@ separation for near-equal radii, hover AU convention).
   two bumps whose absence from the history exposed this).
 
 #### [L-231] Radiation belts are drawn in the ecliptic; the magnetic tilt is an unbuilt intent
-<!-- L:231 status:OPEN upd:2026-09-15 section:A flag: rice:2/2/90/2 -->
+<!-- L:231 status:OPEN upd:2026-09-16 section:A flag: rice:2/2/90/2 -->
 - **Found while porting the belts to the gallery, 2026-08-24, and the
   first reading of it was WRONG.** Claude reported it as L-229's defect
   class in two more places: `create_earth_radiation_belts` and Jupiter's
@@ -3895,12 +3999,41 @@ separation for near-equal radii, hover AU convention).
   unless something calls `orient_to_planet_pole`, and the belt builders
   never did, while Saturn's did. Correct that comment rather than
   preserving it.
+- **Built 2026-09-15**
+  [per `documentation/HANDOFF_L231_L305_magnetosphere_and_belts_20260915.md`].
+  Earth's belts are drawn about the spin axis in both instruments; the
+  dipole tilt is a store row (IGRF-13), quoted with its epoch in the belt
+  hover; a flat unit ring through `orient_to_planet_pole` measured 23.439
+  degrees from the ecliptic pole. The same session moved every citation,
+  model equation and served caveat from the hover to the i panel, with
+  one pointer line under each hover (`patch_L231_hover_to_panel.py`), and
+  added the hover budget suite, the line-width rule's missing twin
+  (`patch_L231_hover_budget_checker.py`; ceiling 17, a ratchet that only
+  comes down); `patch_L231_dashboard_hover_budget.py` is its orrery
+  companion. Tony's phone screenshots of 2026-09-15 and 2026-09-16 show
+  the belts' text boxes quoting 9.6 degrees with IGRF-13 and its epoch.
+- **Found 2026-09-16: the two instruments now disagree about JUPITER's
+  belts.** The gallery's `renderBelts` serves every planet, so the pass
+  flattened Jupiter's belts too and put them in Jupiter's equatorial
+  plane. The orrery's `create_jupiter_radiation_belts` was not touched:
+  it still adds `0.2 * r * sin(2 * angle)` of warp and applies no pole
+  rotation. No visitor sees it yet -- Jupiter has no room -- but this
+  item's own record says a change to the belts' orientation must reach
+  both instruments in the same pass. [verified @ orrery `cce6a933`,
+  gallery `52e953a7`]
+- **Found 2026-09-16: the hover-to-panel move missed two renderers.**
+  `renderStreamerBand` and `renderOortShape` never call `withTail`, so
+  four Sun hovers keep their citations and lack the pointer line, and
+  the hover budget suite never builds the Sun room, which is why it
+  passed. Carried by L-331. [verified @ gallery `52e953a7`]
 **Note:** RICE 2/2/90/2 -> 1.8 is Claude's proposed score.
-**Gap:** not a sourcing round and no longer a question. BUILD: spin-axis
-basis in both instruments, warp removed, hover reworded (the false L
-sentence, the typed width named as a drawing choice beside the sourced
-span, the 9.6 degrees as a sentence), both code comments corrected. One
-pass, then Mode 5.
+**Gap:** Earth is built. What remains is Jupiter's orrery belt builder --
+spin axis, warp removed, hover reworded -- to match the gallery. Tony,
+2026-09-16: "Jupiter can wait." It waits for Jupiter's room, and that
+room's build must do it before the room ships. (The build Gap this
+replaced: spin-axis basis in both instruments, warp removed, hover
+reworded, both code comments corrected, one pass, then Mode 5 -- done for
+Earth.)
 **Ref:** L-009 (closed) for the sourced tilts and the cone precedent;
 L-061 (open) for the rolling frame; L-305 for the typed 11 in the desktop
 magnetopause; L-330 (open) for the belt's SHAPE, deliberately separated
@@ -6182,7 +6315,7 @@ verdict line. Not yet written.
 `gallery_maintenance_run.py`.
 
 #### [L-305] Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together
-<!-- L:305 status:OPEN upd:2026-09-12 section:A flag: rice:4/4/60/4 -->
+<!-- L:305 status:OPEN upd:2026-09-16 section:A flag: rice:4/4/60/4 -->
 - **2026-09-12, Gap item 4 LANDED** (`patch_L305_magnetosphere_constants.py`,
   four files, eighteen edits, pushed at `5b88007f`). Fifteen rows added
   -- Shue's eight coefficients, Jelinek's R0 / eps / lambda, the bow
@@ -6682,6 +6815,20 @@ reads would publish a claim no one can see. 6b follows item 5.
 The BOUNDARY above held: `van_allen_belts` is byte-identical before and
 after 6a, and so are the magnetotail's drawing parameters. Checked by
 comparing the parsed structures, not by reading the diff.
+**Note (2026-09-16) -- items 5 and 6b shipped on 2026-09-15**
+[per `documentation/HANDOFF_L231_L305_magnetosphere_and_belts_20260915.md`].
+The renderer draws Shue's magnetopause and Jelinek's bow shock from
+eleven served rows, with no number typed into it; the magnetopause stops
+at 120 degrees from the nose, the furthest the authors plot their own
+model, declared rather than measured. That session measured each nose on
+its served standoff within a fifth of a percent, each cut within half a
+degree, and each surface a true surface of revolution about the Sun line.
+Since then the Earth scene checker passes with the magnetosphere drawn
+and 20 drawer groups [verified @ gallery `97867f3e`, and on every patched
+tree through `52e953a7`], and Tony opened the magnetopause's text box on
+the phone on 2026-09-16: "all look good". What else item 6b owes was not
+re-derived here; read that handoff's STILL OPEN list before working this
+item.
 **Ref:** L-291, L-292, L-298 (the orrery-vs-exhibit gap, made concrete),
 L-306, L-314, L-315, `constants_new.py`, `earth_visualization_shells.py`,
 `planet_visualization_utilities.py`, `gallery/feature_renderers.js`,
@@ -6963,7 +7110,7 @@ built.
 gallery/feature_renderers.js, skills/gallery-cache-builder/SKILL.md.
 
 #### [L-316] On a portrait phone the arrow cross moves to the top-right corner
-<!-- L:316 status:OPEN upd:2026-09-10 section:A flag: rice:3/2/80/1 -->
+<!-- L:316 status:OPEN upd:2026-09-16 section:A flag: rice:3/2/80/1 -->
 - **Tony, 2026-09-10, from L-310's Mode 5 (chat, not his hand):**
   "replace the title inside the frame and put the arrow cross there. In
   this image the card title 'Earth' is sufficient." Offered the top-right
@@ -7038,16 +7185,53 @@ gallery/feature_renderers.js, skills/gallery-cache-builder/SKILL.md.
 - **In interactive-exhibit 1.2, 2026-09-11.** Its nav cluster row now
   names the four arrows and the portrait top-right placement, and its
   Mode 5 sequence names the arrows. [verified @ `1fa413d9` + this patch]
-**Gap:** desktop, not yet looked at: title and cross exactly as before --
-this also covers L-310's desktop check.
+- **Round 3, built 2026-09-15** by `patch_L316_3_cross_bottom_left.py`
+  in the gallery. Tony, from the phone on 2026-09-15: "move the arrow
+  cross to the bottom left above the drawer." A text box that could not
+  fit beside its marker opened over it, and at the top right the cross was
+  drawn over the magnetopause's text. The cross alone moved, and only on
+  a portrait phone; + and - stayed at the top left. The 2026-09-15
+  handoff had widened the ruling to "the navigation cluster"; the next
+  session caught that before building. The build also found that the
+  page's drawer-open rule hid the cluster but never reached the moved
+  cross's own holder, and gave the holder its own rule. `crossRight`
+  became `crossBottomLeft`. Sandbox: a stand-in page using the page's own
+  style block -- the holder's corner and height, hidden while the drawer
+  is open, back under + and - in landscape, the phone test at four screen
+  sizes. The cross appears there in Tony's phone screenshots of
+  2026-09-15. [verified in the sandbox @ gallery `97867f3e` + the patch]
+- **Round 4, built 2026-09-16** by
+  `patch_L316_4_cross_top_right_again.py` in the gallery. Once the
+  phone's text box sat mid-view with no arrow (L-318 round 5), Tony:
+  "let's put the arrow cross back where it was on the top right. there is
+  more room for it there in terms of the figure itself, if we are not
+  accommodating the text box." Round 2's corner is restored exactly. The
+  drawer-open rule is kept, so all of the navigation steps aside together
+  (Tony: "it's okay as-is"). The method is renamed a last time, to
+  `crossApart(on)` with the class `nav-cross-apart`: names that say
+  nothing about the corner, which is now set only by that class's CSS
+  rule in `gallery/nav_cluster.js`. The page's `sunCrossBottomLeft()` is
+  gone; `navPlaceCross()` asks `sunPhonePortrait()`, the test the text
+  box also uses.
+- **Round 4 passes on the phone, 2026-09-16.** Tony: "correct. this is a
+  more intuitive and elegant view. and hides less." A marker tapped near
+  the top right, whose Plotly box could open under the cross: "no issues
+  detected". [render-confirmed Mode 5 @ gallery `082dff59`]
+**Gap:** desktop, not yet looked at on its own: title and cross exactly as
+before -- this also covers L-310's desktop check. The 2026-09-16 look
+covered the desktop's mouse hover, not the title and the cross.
+  **Tony-action (decide):** after that look, close L-316.
 **Ref:** L-310, L-313 (recentering may add a control to the cluster),
-L-267, L-289, L-317, `gallery/nav_cluster.js` (`crossRight`),
-interactive.html (`sunCrossRight`, `navPlaceCross`, `EARTH_INFO_HTML`),
-`documentation/patch_L316_cross_and_borders.py` and
-`documentation/patch_L316_2_cross_right.py` (gallery).
+L-267, L-289, L-317, L-318 (its round 5 is why round 4 happened),
+`gallery/nav_cluster.js` (`crossApart`, `.nav-cross-apart`),
+interactive.html (`sunPhonePortrait`, `navPlaceCross`, `EARTH_INFO_HTML`),
+`documentation/patch_L316_cross_and_borders.py`,
+`documentation/patch_L316_2_cross_right.py`,
+`patch_L316_3_cross_bottom_left.py` and
+`patch_L316_4_cross_top_right_again.py` (gallery).
 
 #### [L-318] Reading a shell's hover text on the phone: taps miss in the mesh, and labels mid-screen lose their pointer
-<!-- L:318 status:OPEN upd:2026-09-10 section:A flag: rice:3/2/70/2 -->
+<!-- L:318 status:OPEN upd:2026-09-16 section:A flag: rice:3/2/70/2 -->
 - **Tony, 2026-09-10, from the L-316 round-2 phone look (chat, not his
   hand):** "The hovermarker are still frustrating to trigger with a finger
   gesture. Sometimes they work especially if isolated, and sometimes not
@@ -7140,13 +7324,115 @@ interactive.html (`sunCrossRight`, `navPlaceCross`, `EARTH_INFO_HTML`),
   red-outlined one a red arrow. [verified in the sandbox; render-gated]
 - **The arrow colour passes on the phone, 2026-09-10.** Tony: "perfect".
   [render-confirmed Mode 5 @ gallery `9c056d1a`]
-**Gap:** the marker-tap pointer question above.
-**Ref:** L-267 (the drawer and focus), L-278, L-316, L-317, L-319, L-320,
-`interactive.html` (`sunFocusOn`, `sunLabelShow`, `sunLabelInstall`),
-`gallery/feature_renderers.js` (`wrapHover`, `HOVER_WIDTH`), plotly.js
-v2.35.2 `src/components/fx/hover.js`, `src/plots/gl3d/scene.js` and
+- **Round 3, built 2026-09-15: the drawer row.** Tony, from the phone:
+  the selection box was hard to hit, the finger landed on the name, and a
+  name tap on an unticked shell moved the camera but drew nothing -- a tap
+  that read as doing nothing. Measured in the page: the box was 18 px
+  square, and every pixel around it, the 16 px to its left included,
+  belonged to the name; "go" was only a label, and the name did exactly
+  what GO did. A first idea, a one-target row with no box, was withdrawn
+  once Tony described his use: tick several shells, then go to one. His
+  rulings, each "yes": (1) the row's whole left end -- its edge, the box
+  and the colour dot, the full row height, about 65 px -- ticks and
+  unticks; (2) rows are at least 44 px tall; (3) the name or GO on an
+  unticked shell ticks it too, which AMENDS L-267's G2 in that one case,
+  and GO still never hides anything; (4) ticking never closes the drawer;
+  (5) GO frames on the shell, in or out, as before -- an earlier "move
+  only when too big" ruling, made for the one-target row, went with it.
+  And one detail: "when we tap outside the drawer or outside the text
+  box, it closes the text box and the drawer if still open." The
+  backdrop now closes both; a tap on the text box itself still closes it,
+  as before. Built by `patch_L318_3_drawer_row_targets.py` in the
+  gallery. Sandbox: a stand-in page running the page's own drawer
+  functions, markup and styles, 25 checks, failing on the unpatched page.
+  A leftover copy from an abandoned attempt,
+  `patch_L331_drawer_row_targets.py`, missed the backdrop detail; it was
+  never run or committed. Mode 5, 2026-09-15, each check: "correct".
+  [render-confirmed Mode 5 @ gallery `c730a6ab`]
+- **Round 4, built 2026-09-15: soft line breaks.** Tony, with phone
+  screenshots: the belts' text boxes ran off the screen, full of orphan
+  words, and the crust showed the same. The text was wrapped twice: at 70
+  characters for the desktop box (and by hand inside sentences in places)
+  and again at 34 by the phone's label. A break that only keeps a desktop
+  line short is now `GalleryFeatures.SOFT_BR` (`<br soft>`). Plotly draws
+  it as a line break -- its text splitter reads a tag's name up to the
+  first space (plotly.js 2.35.2, `src/lib/svg_text_utils.js`) -- and the
+  label turns it back into a space. Swept through `wrapHover`, the pointer
+  line under every hover, the belts, the GEO ring, the magnetopause, the
+  bow shock and the Earth scene's four hand-wrapped hovers. All 68 desktop
+  boxes are unchanged, line for line. The hover budget suite now counts a
+  soft break as a line, fails on a hard break inside a sentence, and
+  measures the phone's labels with the page's own wrapper;
+  `gallery_maintenance_run.py` passes it `interactive.html`. Label lines
+  at 34 characters, measured: outer belt 28 -> 26, rotation axis
+  28 -> 26, inner belt 25 -> 23, the Sun's galactic tide 11 -> 10; 34 of
+  38 unchanged. Built by `patch_L318_4_soft_breaks.py` in the gallery.
+  Tony, after: the text reads in sentences, but "some text boxes remain
+  too large even after line break adjustment". [render-seen @ gallery
+  `29614e5`]
+- **Round 5, built 2026-09-15: on a portrait phone the text box has no
+  arrow and sits mid-view.** Tony's screenshots showed a tall box cut off
+  at the side (the outer belt, the Sun's gravitational influence) and at
+  the bottom (both belts), and a view where Plotly drew no arrow. Beside
+  its marker a box held about 16 lines (Tony). Tony: the arrow "is very
+  useful but it is not indispensable"; "Why don't we start by just
+  removing the arrow to the marker. And we can see how it reads."; and
+  "can we leave the desktop as-is?" On a portrait phone
+  (`sunPhonePortrait()`) the box is a page-level annotation centred in
+  the view -- same text, same width, border in the shell's colour. The
+  desktop and a phone held landscape keep the scene label with its arrow;
+  the desktop label is the same object as before. Turning the phone swaps
+  the two forms and empties the one not in use. Knobs:
+  `SUN_LABEL_PHONE_X` and `SUN_LABEL_PHONE_Y` (0.5 each), and
+  `SUN_LABEL_WRAP_CHARS` (34, which also sets the desktop label's width).
+  Built by `patch_L318_5_phone_label_no_arrow.py` in the gallery; a
+  stand-in ran 16 checks of the page's own label functions. Mode 5,
+  2026-09-16: "all look good"; the whole box on screen -- "yes"; without
+  the arrow -- "it read okay"; it can cover the arrow buttons and the
+  grid chip -- "correct". [render-confirmed Mode 5 @ gallery `a4ef8cfc`]
+- **Round 6, built 2026-09-16: a phone tap reaches the marker.** Without
+  the arrow, Tony: tapping a marker cross is "trial and error". Read from
+  plotly.js 2.35.2: a 3D tap takes the drawn point nearest the finger
+  within gl-plot3d's `pickRadius` (10 px, set by
+  `src/plots/gl3d/scene.js`; the pick buffer is in screen pixels) from
+  every trace, and only then does scene.js drop a pick whose trace has
+  hoverinfo 'skip' -- so a shell's text-less dots win the tap. On a
+  portrait phone only (Tony: "leave the desktop as-is. the reason is that
+  the mouse pointer is fine enough to pick out the marker"), text-less
+  traces draw nothing into the pick buffer, and the search widens to
+  `SUN_PICK_RADIUS_PX` = 22 px. This reaches into Plotly's internals
+  (`gd._fullLayout.scene._scene`: `glplot.pickRadius`, `glplot.update`,
+  each WebGL object's `drawPick`); it is re-applied after every plot and
+  does nothing if those are not where 2.35.2 keeps them. Built by
+  `patch_L318_6_phone_tap_picking.py` in the gallery; a stand-in with a
+  tap search copied from Plotly's rule ran 22 checks. Mode 5, 2026-09-16:
+  "always opens on first tap. much improved."; a tap on empty space still
+  closes a box -- "correct"; landscape and the desktop's mouse hover --
+  "correct". [render-confirmed Mode 5 @ gallery `52e953a7`]
+- **What this leaves.** The "still open" line above, a marker tap's own
+  Plotly box losing its pointer, is overtaken: the phone's taps now land,
+  and Tony saw no problem with that box. Two loose ends go to open items:
+  the four Sun hovers and the stale visitor text (L-331), and the
+  interactive-exhibit skill, which still describes rounds 1 and 2
+  (L-332). An idea Tony raised and did not take is recorded in L-331:
+  trim each text box to its key data and move the rest to the i panel.
+  Tony: "16 lines is the limit with an arrow to its marker. Without that
+  constraint it could be longer."
+**Gap:** none left here once L-331 and L-332 carry the two loose ends.
+  **Tony-action (decide):** close L-318.
+**Ref:** L-267 (the drawer and focus; G2 amended by round 3), L-278,
+L-316, L-317, L-319, L-320, L-331, L-332, `interactive.html`
+(`sunFocusOn`, `sunLabelShow`, `sunLabelWrap`, `sunLabelRefresh`,
+`sunLabelRelayout`, `sunPhonePortrait`, `sunTapPicking`,
+`buildSunDrawer`), `gallery/feature_renderers.js` (`wrapHover`,
+`HOVER_WIDTH`, `SOFT_BR`), `gallery/earth_geometry.js`,
+`documentation/smoke_hover_budget.js`; plotly.js v2.35.2
+`src/components/fx/hover.js`, `src/plots/gl3d/scene.js`,
 `src/components/annotations3d/attributes.js`,
-`documentation/patch_L318_drawer_label.py` (gallery).
+`src/lib/svg_text_utils.js` and `stackgl_modules/index.js` (the pick
+pass); `documentation/patch_L318_drawer_label.py` and
+`patch_L318_2_arrow_colour.py` through
+`patch_L318_6_phone_tap_picking.py` (gallery).
 
 #### [L-319] Focusing a smaller shell cuts larger lit shells flat at the frame's box
 <!-- L:319 status:OPEN upd:2026-09-10 section:A flag: rice:2/1/70/2 -->
@@ -12767,7 +13053,7 @@ Mode 5 on the live page.
 (the 768 px breakpoint).
 
 #### [L-267] The Sun exhibit GUI shape: drawer, focus label, marker navigation
-<!-- L:267 status:DONE upd:2026-09-04 section:C flag: rice:4/3/85/3 -->
+<!-- L:267 status:DONE upd:2026-09-16 section:C flag: rice:4/3/85/3 -->
 **CLOSED 2026-09-04 -- the phone pass ran, the navigation cluster
 shipped, and the Sun GUI is complete on phone and desktop.** Record of
 the close is below the Stage C record; the design history follows it.
@@ -12971,6 +13257,10 @@ of the shared cluster is L-285.
   okay. it follows the orrery pattern. indentation could work too" --
   a maybe, left for judging against Earth's shells rather than one
   body.
+- **Note (2026-09-16):** G2 is amended in one case by L-318 round 3
+  (Tony, 2026-09-15): a tap on the name or GO of an UNTICKED shell now
+  ticks it before going there. GO still never hides anything, and
+  `sunFocusOn` itself still switches nothing on; the drawer does it.
 - **Note:** RICE 4/3/85/3 -> 3.4 proposed, not confirmed.
 - **Ref:** L-260 (the portrait defect this answers); L-262 (the
   framing helpers, and see the correction below); L-265 (what the i
