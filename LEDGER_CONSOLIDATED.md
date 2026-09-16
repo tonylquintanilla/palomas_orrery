@@ -159,6 +159,10 @@ Module updated: September 16, 2026 with Anthropic's Claude Opus 5
 (L-331: both gallery builds recorded, Mode 5 passed in both rooms, Gap
 narrowed to the page-built hovers; L-334 opened -- an editor for the
 exhibits' served store), built on bfc1706b.
+Module updated: September 16, 2026 with Anthropic's Claude Opus 5
+(L-316 and L-318 closed on Tony's word; L-334 question 1 ruled, numbers
+locked; the order for the next sessions recorded on L-322 and L-334:
+L-322 first, then the editor), built on 85c308cf.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -376,7 +380,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*194 live items; 179 need attention (`!`); 193 RICE-scored; 135 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*192 live items; 177 need attention (`!`); 191 RICE-scored; 137 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -402,7 +406,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-299 | A hover that quotes a measured number names its source in the hover | OPEN | 5.1 | 2026-09-07 |
 | ! | L-193 | Qualified verdicts -- the token is not the whole answer | OPEN | 4.8 | 2026-08-15 |
 | ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
-| ! | L-316 | On a portrait phone the arrow cross moves to the top-right corner | OPEN | 4.8 | 2026-09-16 |
 | ! | L-327 | Tool repairs from the rules-vs-reasoning round (tooling track) | OPEN | 4.8 | 2026-09-14 |
 | ! | L-268 | Sweep: features collapsed out of their own identity | OPEN | 4.5 | 2026-08-30 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
@@ -460,7 +463,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-328 | Subtraction pass on the skill layer (protocol/skills track) | OPEN | 2.1 | 2026-09-14 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
 | ! | L-218 | 22 Cross-checked lines attach to no unit | OPEN | 2.1 | 2026-08-19 |
-| ! | L-318 | Reading a shell's hover text on the phone: taps miss in the mesh, and labels mid-screen lose their pointer | OPEN | 2.1 | 2026-09-16 |
 | ! | L-275 | The dashboard cannot launch a Node tool, so three gallery smoke suites have no button | OPEN | 1.9 | 2026-09-01 |
 | ! | L-284 | Retire the social export; the gallery owns publishing | OPEN | 1.9 | 2026-09-03 |
 | ! | L-231 | Radiation belts are drawn in the ecliptic; the magnetic tilt is an unbuilt intent | OPEN | 1.8 | 2026-09-16 |
@@ -693,6 +695,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-189 | Provenance scanner: run history and run-to-run delta | DONE | 4.8 | 2026-08-11 |
 |  | L-279 | A test protocol that leaves the CONDITIONS uncontrolled produces confident wrong readings | DONE | 4.8 | 2026-09-02 |
 |  | L-289 | Sun exhibit on the phone: the 3D axis labels are not visible | DONE | 4.8 | 2026-09-06 |
+|  | L-316 | On a portrait phone the arrow cross moves to the top-right corner | DONE | 4.8 | 2026-09-16 |
 |  | L-320 | Info markers on the drawn axis, and the orrery's per-shell marker angles never served | DONE | 4.8 | 2026-09-10 |
 |  | L-065 | European heat wave heat map (Earth System track) | DONE | 4.8 | 2026-06-25 |
 |  | L-064 | Provenance-scanner format sweep -- Earth System family | DONE | 4.5 | 2026-06-30 |
@@ -728,6 +731,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | DONE | 2.2 | 2026-07-15 |
 |  | L-202 | JSON worksheet format, with markdown as fallback | DONE | 2.2 | 2026-08-18 |
 |  | L-213 | Orbit cache backup fires on IMPORT, not on cache write | DONE | 2.2 | 2026-08-19 |
+|  | L-318 | Reading a shell's hover text on the phone: taps miss in the mesh, and labels mid-screen lose their pointer | DONE | 2.1 | 2026-09-16 |
 |  | L-063 | Orrery GUI Note text update | DONE | 2.0 | 2026-07-17 |
 |  | L-072 | Gallery Studio WYSIWYG preview -- render through the real index.html viewer | DONE | 2.0 | 2026-06-26 |
 |  | L-169 | Gallery/Studio track -- repo structure reference | DONE | 1.9 | 2026-07-28 |
@@ -861,12 +865,23 @@ as an archive of the prioritization thinking -- no cleanup on close.
   Reach 4 because it changes who can maintain the rooms, not how many
   visitors see them; Effort 4 for the form, the arrival block, the page
   change and a suite that opens and saves the store round-trip.
-**Gap:** the five design questions above, in conversation; then the
+- **Question 1 RULED, Tony, 2026-09-16:** yes, numbers are locked.
+  Values, units and `orrery_constant` pointers are displayed and not
+  editable; a number changes in the orrery and comes through the
+  pipeline. Words, links and the arrival settings are the editor's.
+  Questions 2 to 5 are settled at the start of the build session, on
+  Tony's word, before any code.
+- **Order, Tony, 2026-09-16:** L-322 comes FIRST -- "get the number right
+  first" -- because the editor's locked numbers show what Store drift
+  reads, and 13 of its 70 pointers cannot be examined until the unit
+  field lands. Then this item. L-333 waits; Jupiter's room behind all
+  of it. The next session starts fresh on L-322's design round.
+**Gap:** L-322 first; then questions 2 to 5 in conversation; then the
 build, in this order: the arrival block and its page reader (3), the
-editor over prose and links (1, 2, 5), the measure and the checks
-button (4).
-  **Tony-action (decide):** the five questions, starting with 1 --
-  whether numbers are locked.
+editor over prose and links (2, 5), the measure and the checks button
+(4).
+  **Tony-action (decide):** questions 2 to 5, at the start of the build
+  session.
 **Ref:** gallery `data/objects_config.json`, `tools/gallery_cache_builder.py`,
 `interactive.html` (`SUN_HALF_RANGE_AU`, `EXHIBITS`, `buildSunDrawer`),
 `gallery/feature_renderers.js` (`descLine`, `stampLink`);
@@ -7230,331 +7245,6 @@ built.
 **Ref:** L-305, tools/gallery_cache_builder.py, data/objects_config.json,
 gallery/feature_renderers.js, skills/gallery-cache-builder/SKILL.md.
 
-#### [L-316] On a portrait phone the arrow cross moves to the top-right corner
-<!-- L:316 status:OPEN upd:2026-09-16 section:A flag: rice:3/2/80/1 -->
-- **Tony, 2026-09-10, from L-310's Mode 5 (chat, not his hand):**
-  "replace the title inside the frame and put the arrow cross there. In
-  this image the card title 'Earth' is sufficient." Offered the top-right
-  corner as the alternative -- the top middle is where a zoomed object's
-  top edge lands, and in his screenshot the down arrow would sit near the
-  inner core's pole marker -- he chose **top-centre, where the title
-  was**.
-- **The rule as built.** A portrait phone is `innerHeight > innerWidth`
-  with `innerWidth <= 768`, the width at which the page draws no Plotly
-  mode bar, so no download button is left saving an image without its
-  label. There, in the Sun and Earth rooms, the in-frame title is left
-  empty and the cross, Home with it, moves to a top-centre holder; + and
-  - stay top-left. Rotating redoes both (`onSunResize`). Desktop,
-  landscape, a portrait tablet wider than 768 px and the Explorer are
-  unchanged; the Explorer's title carries the scene date. The Sun room
-  is included because the rooms share the chrome and its title repeats
-  its header the same way.
-- **Found building it: Earth's panel pointed at a date that was never
-  there.** `EARTH_INFO_HTML` said "This scene is one moment -- the date
-  in the title." The Earth title never carried a date; only the
-  Explorer's does. The date is in two hovers, the Sun Direction's and
-  the terminator's. The sentence now points at the Sun Direction's
-  hover. [verified @ gallery `6897c793`] Whether the date should also
-  have a visible place in the frame is open. **Tony-action (decide):**
-  not urgent.
-- **Built 2026-09-10** by `patch_L316_cross_and_borders.py` in the
-  gallery, with L-317. `gallery/nav_cluster.js` gains `crossTop(on)`,
-  which moves the cross element into a `.nav-cross-top` holder or back
-  as the cluster's last child, so the corner layout that passed L-310's
-  Mode 5 is unchanged. interactive.html gains `sunCrossOnTop`,
-  `sunSceneTitle` and `navPlaceCross`. The same patch adds the missing
-  September 9 header line (L-291 step 3; `patch_L291_9` and
-  `patch_L291_11` both credit Claude Opus 5) and normalises the page's
-  32 non-ASCII bytes. Sandbox: the move, hide/show and a page without
-  arrows on a stub DOM; the rule at five screen sizes; the page's
-  inline JS parses; all four smoke tests pass. [render-gated]
-- **Note:** RICE 3/2/80/1 -> 4.8 proposed, not confirmed.
-- **Round 1 on the phone, 2026-09-10 (screenshot, the Earth room zoomed
-  to the inner core).** As built: no title, the cross top-centre, + and
-  - top-left, clear of the drawer handle and the grid chip.
-  [render-confirmed Mode 5 @ gallery `893261db`] But the outer core's
-  info marker -- the one L-317 had just outlined in white -- was nowhere
-  in the frame; by where its dots sat, it was under the cross. That is
-  the trade-off offered before the ruling, now seen: a shell's marker
-  sits at the top of the shell, so whichever shell nearly fills the view
-  puts its marker at the top centre. Tony: "could we move the arrow cross
-  to the right, restore the title. this would help to see the hovertext
-  markers more clearly."
-- **Round 2, built 2026-09-10** by `patch_L316_2_cross_right.py` in the
-  gallery. The in-frame title is back on every screen, its layout line
-  restored exactly. On a portrait phone -- 768 px wide or less, where the
-  page's @media rule hides the mode bar that holds the top-right corner
-  everywhere else -- the cross moves to a top-right holder, and rotating
-  moves it back. `crossTop(on)` is renamed `crossRight(on)`,
-  `sunCrossOnTop` is now `sunCrossRight`, and `sunSceneTitle` is gone.
-  Desktop, landscape and the Explorer are unchanged. Round 1's date fix
-  in `EARTH_INFO_HTML` stays: the title never carried a date. From the
-  title's width in the round-1 screenshot (a 440-px-wide phone), the
-  cross's up arrow should clear the title by about 40 px there and by
-  roughly 7 to 14 px on a 393-px-wide phone, the Sun's title being the
-  longer. [estimate; render-gated] Sandbox: the move, hide/show and a
-  page without arrows on a stub DOM; the rule at five screen sizes; the
-  page's inline JS parses; all four smoke tests pass.
-- **Round 2 passes on the phone, 2026-09-10** (screenshots of both
-  rooms, portrait and landscape). Tony, to each check: the title is back
-  and the cross sits top right, clear of it -- "yes"; the marker at the
-  top of a zoomed-in shell is visible -- "yes"; rotating to landscape and
-  back moves the cross -- "Yes". The landscape screenshot shows the cross
-  back under + and -. [render-confirmed Mode 5 @ gallery `4add58bc`] He
-  asked which two rooms were meant: the Sun and Earth, and his
-  screenshots cover both.
-- **In interactive-exhibit 1.2, 2026-09-11.** Its nav cluster row now
-  names the four arrows and the portrait top-right placement, and its
-  Mode 5 sequence names the arrows. [verified @ `1fa413d9` + this patch]
-- **Round 3, built 2026-09-15** by `patch_L316_3_cross_bottom_left.py`
-  in the gallery. Tony, from the phone on 2026-09-15: "move the arrow
-  cross to the bottom left above the drawer." A text box that could not
-  fit beside its marker opened over it, and at the top right the cross was
-  drawn over the magnetopause's text. The cross alone moved, and only on
-  a portrait phone; + and - stayed at the top left. The 2026-09-15
-  handoff had widened the ruling to "the navigation cluster"; the next
-  session caught that before building. The build also found that the
-  page's drawer-open rule hid the cluster but never reached the moved
-  cross's own holder, and gave the holder its own rule. `crossRight`
-  became `crossBottomLeft`. Sandbox: a stand-in page using the page's own
-  style block -- the holder's corner and height, hidden while the drawer
-  is open, back under + and - in landscape, the phone test at four screen
-  sizes. The cross appears there in Tony's phone screenshots of
-  2026-09-15. [verified in the sandbox @ gallery `97867f3e` + the patch]
-- **Round 4, built 2026-09-16** by
-  `patch_L316_4_cross_top_right_again.py` in the gallery. Once the
-  phone's text box sat mid-view with no arrow (L-318 round 5), Tony:
-  "let's put the arrow cross back where it was on the top right. there is
-  more room for it there in terms of the figure itself, if we are not
-  accommodating the text box." Round 2's corner is restored exactly. The
-  drawer-open rule is kept, so all of the navigation steps aside together
-  (Tony: "it's okay as-is"). The method is renamed a last time, to
-  `crossApart(on)` with the class `nav-cross-apart`: names that say
-  nothing about the corner, which is now set only by that class's CSS
-  rule in `gallery/nav_cluster.js`. The page's `sunCrossBottomLeft()` is
-  gone; `navPlaceCross()` asks `sunPhonePortrait()`, the test the text
-  box also uses.
-- **Round 4 passes on the phone, 2026-09-16.** Tony: "correct. this is a
-  more intuitive and elegant view. and hides less." A marker tapped near
-  the top right, whose Plotly box could open under the cross: "no issues
-  detected". [render-confirmed Mode 5 @ gallery `082dff59`]
-**Gap:** desktop, not yet looked at on its own: title and cross exactly as
-before -- this also covers L-310's desktop check. The 2026-09-16 look
-covered the desktop's mouse hover, not the title and the cross.
-  **Tony-action (decide):** after that look, close L-316.
-**Ref:** L-310, L-313 (recentering may add a control to the cluster),
-L-267, L-289, L-317, L-318 (its round 5 is why round 4 happened),
-`gallery/nav_cluster.js` (`crossApart`, `.nav-cross-apart`),
-interactive.html (`sunPhonePortrait`, `navPlaceCross`, `EARTH_INFO_HTML`),
-`documentation/patch_L316_cross_and_borders.py`,
-`documentation/patch_L316_2_cross_right.py`,
-`patch_L316_3_cross_bottom_left.py` and
-`patch_L316_4_cross_top_right_again.py` (gallery).
-
-#### [L-318] Reading a shell's hover text on the phone: taps miss in the mesh, and labels mid-screen lose their pointer
-<!-- L:318 status:OPEN upd:2026-09-16 section:A flag: rice:3/2/70/2 -->
-- **Tony, 2026-09-10, from the L-316 round-2 phone look (chat, not his
-  hand):** "The hovermarker are still frustrating to trigger with a finger
-  gesture. Sometimes they work especially if isolated, and sometimes not
-  especially if they are in the mesh. Suggestion: activate the hovertext
-  when the user selects a shell on the drawer. It would deselect as
-  usual. Keep the marker selection method too." And: "the hoverbox for
-  the sun shell points at the hovermarker but the earth's does not.
-  Pointing helps to associate the shell with the description."
-- **Why a label loses its pointer, read from Plotly 2.35.2's source**
-  (`src/components/fx/hover.js`, where a label's anchor is chosen): the
-  label goes to the right of its point if it fits, else to the left if it
-  fits, else it is centred over the point with no pointer and nudged back
-  on screen. So it is position, not room. The Sun's outer corona marker
-  sat near the right edge, with room to its left; Earth's upper
-  atmosphere marker was not near an edge. `gallery/feature_renderers.js`
-  wraps hover text at `HOVER_WIDTH` = 70 characters, wider than half a
-  portrait phone, so a marker away from the edges loses its pointer.
-  [verified @ plotly.js `v2.35.2` and gallery `4add58bc`]
-- **What a drawer row tap does today.** It FOCUSES: the camera frames
-  that shell and nothing else changes (`sunFocusOn`; Tony's G2 ruling,
-  2026-08-30, in the code's words "Focusing moves the camera and NOTHING
-  ELSE"). A label on focus adds a second effect to that gesture on Tony's
-  word now; the design round records it as an amendment to G2, not a
-  quiet exception. [verified @ gallery `4add58bc`]
-- **Mechanism, not chosen.** A 3D hover label comes from Plotly's WebGL
-  picking: `src/plots/gl3d/scene.js` calls `Fx.loneHover` with screen
-  coordinates it computes itself. Showing one on request means computing
-  those in the page, or using `layout.scene.annotations`, which the gl3d
-  layout accepts; its attributes are to be read before the design round.
-  [verified @ plotly.js `v2.35.2`]
-- **Questions for the design round:** what shows on focus (the full hover
-  text, or less); what clears it (another focus, closing the drawer, a
-  tap on the scene); a focused shell that is not drawn (G2's honest empty
-  frame suggests no label); and the wrap width on narrow screens, which
-  trades a taller label for keeping the pointer.
-- **Note:** RICE 3/2/70/2 -> 2.1 proposed, not confirmed.
-- **Design settled in conversation, 2026-09-10.** Proposed and accepted:
-  a tap on a shell's name frames the shell as before and also opens its
-  hover text as a label pinned to its info marker, with an arrow; a tap
-  on another name moves it; unticking the shell closes it; a shell that
-  is not drawn gets no label; tapping a marker works as before. Tony,
-  asked what else closes it: "A tap anywhere in the scene." This amends
-  G2 on his word -- the name still never switches a shell on or off.
-- **Built 2026-09-10** by `patch_L318_drawer_label.py` in the gallery,
-  `interactive.html` only. The label is a Plotly scene annotation at the
-  marker's 3D point (`layout.scene.annotations` carries x, y, z, ax, ay,
-  the anchors and `showarrow`, read @ plotly.js `v2.35.2`
-  `src/components/annotations3d/attributes.js`), with the marker's own
-  hover text rewrapped at 34 characters and its border and arrow in the
-  shell's colour. The box goes toward the middle of the screen, chosen
-  from the marker's place against the live camera, and re-anchors after
-  a drag or any relayout. Every label update also sends the live camera:
-  Plotly's 3D replot re-applies the layout's stored camera (`scene.js`,
-  `setViewport`), which a touch rotation never updates, so without it the
-  view would snap back. A tap is one pointer moving 10 px or less within
-  500 ms; a drag, a pinch and a cancelled touch are not. Close and
-  re-anchor run a tick later, out of Plotly's own handling (the L-278
-  lesson). The G2 comment above the row handler is amended in place.
-  MODE-5 KNOBS: `SUN_LABEL_WRAP_CHARS`, `SUN_LABEL_OFFSET_PX`,
-  `SUN_LABEL_FONT_PX`, `SUN_LABEL_TAP_PX`, `SUN_LABEL_TAP_MS`. Sandbox:
-  the page's script parses; 19 checks of the label functions against a
-  stub plot pass -- the wrap, the box's side in four positions, open,
-  move, a refresh that sends nothing, no label for an undrawn shell,
-  close on untick, close on a tap, and a drag, a pinch and a cancelled
-  touch that do not close it. One check first failed on its own wrong
-  expectation and was corrected. Nothing rendered. [render-gated]
-- **In interactive-exhibit 1.2, 2026-09-11.** The drawer row names the
-  label; the touch-path section gains the two Plotly rules this build
-  read from v2.35.2 -- a scene relayout carries the live camera, and a
-  hover box keeps its pointer only when it fits to one side.
-  [verified @ `1fa413d9` + this patch]
-- **Still open here:** a tap on a marker still shows Plotly's own hover
-  box, which drops its pointer mid-screen at `HOVER_WIDTH` 70. Narrowing
-  it trades a taller box for the pointer; that waits for Tony's look at
-  the drawer label.
-- **Mode 5 passes on the phone, 2026-09-10.** Tony, to each check: name
-  a shell and its label points at its marker -- "correct"; turn the view
-  and it stays -- "correct"; tap the scene and it closes -- "correct";
-  untick and it closes -- "correct"; tapping a marker works as before --
-  "correct"; the label's size settings -- "they are correct".
-  [render-confirmed Mode 5 @ gallery `ffcf1630`]
-- **One change from the same look.** Tony: "i would make the arrow the
-  color of the marker for contrast." The marker's fill is the shell's
-  colour, which the arrow already had, so the colour that contrasts is
-  the marker's outline. Built 2026-09-10 by
-  `patch_L318_2_arrow_colour.py` in the gallery: the arrow takes the
-  marker's outline colour, red or white under the two-standards rule,
-  and the box border keeps the shell's colour. The label checks gained
-  one, now 20: a white-outlined marker gets a white arrow and a
-  red-outlined one a red arrow. [verified in the sandbox; render-gated]
-- **The arrow colour passes on the phone, 2026-09-10.** Tony: "perfect".
-  [render-confirmed Mode 5 @ gallery `9c056d1a`]
-- **Round 3, built 2026-09-15: the drawer row.** Tony, from the phone:
-  the selection box was hard to hit, the finger landed on the name, and a
-  name tap on an unticked shell moved the camera but drew nothing -- a tap
-  that read as doing nothing. Measured in the page: the box was 18 px
-  square, and every pixel around it, the 16 px to its left included,
-  belonged to the name; "go" was only a label, and the name did exactly
-  what GO did. A first idea, a one-target row with no box, was withdrawn
-  once Tony described his use: tick several shells, then go to one. His
-  rulings, each "yes": (1) the row's whole left end -- its edge, the box
-  and the colour dot, the full row height, about 65 px -- ticks and
-  unticks; (2) rows are at least 44 px tall; (3) the name or GO on an
-  unticked shell ticks it too, which AMENDS L-267's G2 in that one case,
-  and GO still never hides anything; (4) ticking never closes the drawer;
-  (5) GO frames on the shell, in or out, as before -- an earlier "move
-  only when too big" ruling, made for the one-target row, went with it.
-  And one detail: "when we tap outside the drawer or outside the text
-  box, it closes the text box and the drawer if still open." The
-  backdrop now closes both; a tap on the text box itself still closes it,
-  as before. Built by `patch_L318_3_drawer_row_targets.py` in the
-  gallery. Sandbox: a stand-in page running the page's own drawer
-  functions, markup and styles, 25 checks, failing on the unpatched page.
-  A leftover copy from an abandoned attempt,
-  `patch_L331_drawer_row_targets.py`, missed the backdrop detail; it was
-  never run or committed. Mode 5, 2026-09-15, each check: "correct".
-  [render-confirmed Mode 5 @ gallery `c730a6ab`]
-- **Round 4, built 2026-09-15: soft line breaks.** Tony, with phone
-  screenshots: the belts' text boxes ran off the screen, full of orphan
-  words, and the crust showed the same. The text was wrapped twice: at 70
-  characters for the desktop box (and by hand inside sentences in places)
-  and again at 34 by the phone's label. A break that only keeps a desktop
-  line short is now `GalleryFeatures.SOFT_BR` (`<br soft>`). Plotly draws
-  it as a line break -- its text splitter reads a tag's name up to the
-  first space (plotly.js 2.35.2, `src/lib/svg_text_utils.js`) -- and the
-  label turns it back into a space. Swept through `wrapHover`, the pointer
-  line under every hover, the belts, the GEO ring, the magnetopause, the
-  bow shock and the Earth scene's four hand-wrapped hovers. All 68 desktop
-  boxes are unchanged, line for line. The hover budget suite now counts a
-  soft break as a line, fails on a hard break inside a sentence, and
-  measures the phone's labels with the page's own wrapper;
-  `gallery_maintenance_run.py` passes it `interactive.html`. Label lines
-  at 34 characters, measured: outer belt 28 -> 26, rotation axis
-  28 -> 26, inner belt 25 -> 23, the Sun's galactic tide 11 -> 10; 34 of
-  38 unchanged. Built by `patch_L318_4_soft_breaks.py` in the gallery.
-  Tony, after: the text reads in sentences, but "some text boxes remain
-  too large even after line break adjustment". [render-seen @ gallery
-  `29614e5`]
-- **Round 5, built 2026-09-15: on a portrait phone the text box has no
-  arrow and sits mid-view.** Tony's screenshots showed a tall box cut off
-  at the side (the outer belt, the Sun's gravitational influence) and at
-  the bottom (both belts), and a view where Plotly drew no arrow. Beside
-  its marker a box held about 16 lines (Tony). Tony: the arrow "is very
-  useful but it is not indispensable"; "Why don't we start by just
-  removing the arrow to the marker. And we can see how it reads."; and
-  "can we leave the desktop as-is?" On a portrait phone
-  (`sunPhonePortrait()`) the box is a page-level annotation centred in
-  the view -- same text, same width, border in the shell's colour. The
-  desktop and a phone held landscape keep the scene label with its arrow;
-  the desktop label is the same object as before. Turning the phone swaps
-  the two forms and empties the one not in use. Knobs:
-  `SUN_LABEL_PHONE_X` and `SUN_LABEL_PHONE_Y` (0.5 each), and
-  `SUN_LABEL_WRAP_CHARS` (34, which also sets the desktop label's width).
-  Built by `patch_L318_5_phone_label_no_arrow.py` in the gallery; a
-  stand-in ran 16 checks of the page's own label functions. Mode 5,
-  2026-09-16: "all look good"; the whole box on screen -- "yes"; without
-  the arrow -- "it read okay"; it can cover the arrow buttons and the
-  grid chip -- "correct". [render-confirmed Mode 5 @ gallery `a4ef8cfc`]
-- **Round 6, built 2026-09-16: a phone tap reaches the marker.** Without
-  the arrow, Tony: tapping a marker cross is "trial and error". Read from
-  plotly.js 2.35.2: a 3D tap takes the drawn point nearest the finger
-  within gl-plot3d's `pickRadius` (10 px, set by
-  `src/plots/gl3d/scene.js`; the pick buffer is in screen pixels) from
-  every trace, and only then does scene.js drop a pick whose trace has
-  hoverinfo 'skip' -- so a shell's text-less dots win the tap. On a
-  portrait phone only (Tony: "leave the desktop as-is. the reason is that
-  the mouse pointer is fine enough to pick out the marker"), text-less
-  traces draw nothing into the pick buffer, and the search widens to
-  `SUN_PICK_RADIUS_PX` = 22 px. This reaches into Plotly's internals
-  (`gd._fullLayout.scene._scene`: `glplot.pickRadius`, `glplot.update`,
-  each WebGL object's `drawPick`); it is re-applied after every plot and
-  does nothing if those are not where 2.35.2 keeps them. Built by
-  `patch_L318_6_phone_tap_picking.py` in the gallery; a stand-in with a
-  tap search copied from Plotly's rule ran 22 checks. Mode 5, 2026-09-16:
-  "always opens on first tap. much improved."; a tap on empty space still
-  closes a box -- "correct"; landscape and the desktop's mouse hover --
-  "correct". [render-confirmed Mode 5 @ gallery `52e953a7`]
-- **What this leaves.** The "still open" line above, a marker tap's own
-  Plotly box losing its pointer, is overtaken: the phone's taps now land,
-  and Tony saw no problem with that box. Two loose ends go to open items:
-  the four Sun hovers and the stale visitor text (L-331), and the
-  interactive-exhibit skill, which still describes rounds 1 and 2
-  (L-332). An idea Tony raised and did not take is recorded in L-331:
-  trim each text box to its key data and move the rest to the i panel.
-  Tony: "16 lines is the limit with an arrow to its marker. Without that
-  constraint it could be longer."
-**Gap:** none left here once L-331 and L-332 carry the two loose ends.
-  **Tony-action (decide):** close L-318.
-**Ref:** L-267 (the drawer and focus; G2 amended by round 3), L-278,
-L-316, L-317, L-319, L-320, L-331, L-332, `interactive.html`
-(`sunFocusOn`, `sunLabelShow`, `sunLabelWrap`, `sunLabelRefresh`,
-`sunLabelRelayout`, `sunPhonePortrait`, `sunTapPicking`,
-`buildSunDrawer`), `gallery/feature_renderers.js` (`wrapHover`,
-`HOVER_WIDTH`, `SOFT_BR`), `gallery/earth_geometry.js`,
-`documentation/smoke_hover_budget.js`; plotly.js v2.35.2
-`src/components/fx/hover.js`, `src/plots/gl3d/scene.js`,
-`src/components/annotations3d/attributes.js`,
-`src/lib/svg_text_utils.js` and `stackgl_modules/index.js` (the pick
-pass); `documentation/patch_L318_drawer_label.py` and
-`patch_L318_2_arrow_colour.py` through
-`patch_L318_6_phone_tap_picking.py` (gallery).
-
 #### [L-319] Focusing a smaller shell cuts larger lit shells flat at the frame's box
 <!-- L:319 status:OPEN upd:2026-09-10 section:A flag: rice:2/1/70/2 -->
 - **Tony, 2026-09-10:** "This lower mantle view is clipped." His portrait
@@ -8137,6 +7827,14 @@ table keeps.
 **Tony-action (decide) 2026-09-14: (d) is prioritised** within the item.
 It is unruled, so the first session on this item is a design round
 settling (a) through (e), not a patch.
+**Tony, 2026-09-16: this item is priority 1** -- "get the number right
+first" -- ahead of L-334, the exhibits' store editor, whose locked
+numbers would display what this item makes checkable. At gallery
+`72a49552` against orrery `85c308cf` the live run still reads 70
+pointers, 56 match, 0 drift, 1 unit mismatch, 13 not examined: the same
+13 named in ruling 3's (a), plus the six magnetosphere and belt-edge
+constants whose names declare no unit. The next session opens here,
+with the design round, fresh.
 **Gap:** the whole item, in ruling 3's order. Still open and NOT ruled:
 (a) the five non-top-level served values (`planet_poles` for Sun, Earth,
 Jupiter and Saturn, and a `create_sun_galactic_tide` default) -- the
@@ -15048,6 +14746,338 @@ relies on it; the next build touching the rooms' chrome is L-331.
   work.
 **Ref:** L-316, L-318, L-331, `skills/interactive-exhibit/SKILL.md`,
 `skills_index.py`, `PROJECT_INSTRUCTIONS.md`.
+
+#### [L-316] On a portrait phone the arrow cross moves to the top-right corner
+<!-- L:316 status:DONE upd:2026-09-16 section:C flag: rice:3/2/80/1 -->
+- **Tony, 2026-09-10, from L-310's Mode 5 (chat, not his hand):**
+  "replace the title inside the frame and put the arrow cross there. In
+  this image the card title 'Earth' is sufficient." Offered the top-right
+  corner as the alternative -- the top middle is where a zoomed object's
+  top edge lands, and in his screenshot the down arrow would sit near the
+  inner core's pole marker -- he chose **top-centre, where the title
+  was**.
+- **The rule as built.** A portrait phone is `innerHeight > innerWidth`
+  with `innerWidth <= 768`, the width at which the page draws no Plotly
+  mode bar, so no download button is left saving an image without its
+  label. There, in the Sun and Earth rooms, the in-frame title is left
+  empty and the cross, Home with it, moves to a top-centre holder; + and
+  - stay top-left. Rotating redoes both (`onSunResize`). Desktop,
+  landscape, a portrait tablet wider than 768 px and the Explorer are
+  unchanged; the Explorer's title carries the scene date. The Sun room
+  is included because the rooms share the chrome and its title repeats
+  its header the same way.
+- **Found building it: Earth's panel pointed at a date that was never
+  there.** `EARTH_INFO_HTML` said "This scene is one moment -- the date
+  in the title." The Earth title never carried a date; only the
+  Explorer's does. The date is in two hovers, the Sun Direction's and
+  the terminator's. The sentence now points at the Sun Direction's
+  hover. [verified @ gallery `6897c793`] Whether the date should also
+  have a visible place in the frame is open. **Tony-action (decide):**
+  not urgent.
+- **Built 2026-09-10** by `patch_L316_cross_and_borders.py` in the
+  gallery, with L-317. `gallery/nav_cluster.js` gains `crossTop(on)`,
+  which moves the cross element into a `.nav-cross-top` holder or back
+  as the cluster's last child, so the corner layout that passed L-310's
+  Mode 5 is unchanged. interactive.html gains `sunCrossOnTop`,
+  `sunSceneTitle` and `navPlaceCross`. The same patch adds the missing
+  September 9 header line (L-291 step 3; `patch_L291_9` and
+  `patch_L291_11` both credit Claude Opus 5) and normalises the page's
+  32 non-ASCII bytes. Sandbox: the move, hide/show and a page without
+  arrows on a stub DOM; the rule at five screen sizes; the page's
+  inline JS parses; all four smoke tests pass. [render-gated]
+- **Note:** RICE 3/2/80/1 -> 4.8 proposed, not confirmed.
+- **Round 1 on the phone, 2026-09-10 (screenshot, the Earth room zoomed
+  to the inner core).** As built: no title, the cross top-centre, + and
+  - top-left, clear of the drawer handle and the grid chip.
+  [render-confirmed Mode 5 @ gallery `893261db`] But the outer core's
+  info marker -- the one L-317 had just outlined in white -- was nowhere
+  in the frame; by where its dots sat, it was under the cross. That is
+  the trade-off offered before the ruling, now seen: a shell's marker
+  sits at the top of the shell, so whichever shell nearly fills the view
+  puts its marker at the top centre. Tony: "could we move the arrow cross
+  to the right, restore the title. this would help to see the hovertext
+  markers more clearly."
+- **Round 2, built 2026-09-10** by `patch_L316_2_cross_right.py` in the
+  gallery. The in-frame title is back on every screen, its layout line
+  restored exactly. On a portrait phone -- 768 px wide or less, where the
+  page's @media rule hides the mode bar that holds the top-right corner
+  everywhere else -- the cross moves to a top-right holder, and rotating
+  moves it back. `crossTop(on)` is renamed `crossRight(on)`,
+  `sunCrossOnTop` is now `sunCrossRight`, and `sunSceneTitle` is gone.
+  Desktop, landscape and the Explorer are unchanged. Round 1's date fix
+  in `EARTH_INFO_HTML` stays: the title never carried a date. From the
+  title's width in the round-1 screenshot (a 440-px-wide phone), the
+  cross's up arrow should clear the title by about 40 px there and by
+  roughly 7 to 14 px on a 393-px-wide phone, the Sun's title being the
+  longer. [estimate; render-gated] Sandbox: the move, hide/show and a
+  page without arrows on a stub DOM; the rule at five screen sizes; the
+  page's inline JS parses; all four smoke tests pass.
+- **Round 2 passes on the phone, 2026-09-10** (screenshots of both
+  rooms, portrait and landscape). Tony, to each check: the title is back
+  and the cross sits top right, clear of it -- "yes"; the marker at the
+  top of a zoomed-in shell is visible -- "yes"; rotating to landscape and
+  back moves the cross -- "Yes". The landscape screenshot shows the cross
+  back under + and -. [render-confirmed Mode 5 @ gallery `4add58bc`] He
+  asked which two rooms were meant: the Sun and Earth, and his
+  screenshots cover both.
+- **In interactive-exhibit 1.2, 2026-09-11.** Its nav cluster row now
+  names the four arrows and the portrait top-right placement, and its
+  Mode 5 sequence names the arrows. [verified @ `1fa413d9` + this patch]
+- **Round 3, built 2026-09-15** by `patch_L316_3_cross_bottom_left.py`
+  in the gallery. Tony, from the phone on 2026-09-15: "move the arrow
+  cross to the bottom left above the drawer." A text box that could not
+  fit beside its marker opened over it, and at the top right the cross was
+  drawn over the magnetopause's text. The cross alone moved, and only on
+  a portrait phone; + and - stayed at the top left. The 2026-09-15
+  handoff had widened the ruling to "the navigation cluster"; the next
+  session caught that before building. The build also found that the
+  page's drawer-open rule hid the cluster but never reached the moved
+  cross's own holder, and gave the holder its own rule. `crossRight`
+  became `crossBottomLeft`. Sandbox: a stand-in page using the page's own
+  style block -- the holder's corner and height, hidden while the drawer
+  is open, back under + and - in landscape, the phone test at four screen
+  sizes. The cross appears there in Tony's phone screenshots of
+  2026-09-15. [verified in the sandbox @ gallery `97867f3e` + the patch]
+- **Round 4, built 2026-09-16** by
+  `patch_L316_4_cross_top_right_again.py` in the gallery. Once the
+  phone's text box sat mid-view with no arrow (L-318 round 5), Tony:
+  "let's put the arrow cross back where it was on the top right. there is
+  more room for it there in terms of the figure itself, if we are not
+  accommodating the text box." Round 2's corner is restored exactly. The
+  drawer-open rule is kept, so all of the navigation steps aside together
+  (Tony: "it's okay as-is"). The method is renamed a last time, to
+  `crossApart(on)` with the class `nav-cross-apart`: names that say
+  nothing about the corner, which is now set only by that class's CSS
+  rule in `gallery/nav_cluster.js`. The page's `sunCrossBottomLeft()` is
+  gone; `navPlaceCross()` asks `sunPhonePortrait()`, the test the text
+  box also uses.
+- **Round 4 passes on the phone, 2026-09-16.** Tony: "correct. this is a
+  more intuitive and elegant view. and hides less." A marker tapped near
+  the top right, whose Plotly box could open under the cross: "no issues
+  detected". [render-confirmed Mode 5 @ gallery `082dff59`]
+- **CLOSED 2026-09-16, Tony's ruling:** "done. just needs updating."
+  Four rounds on the phone, the cross back at the top right since round
+  4 in the corner one CSS rule names, and both rooms passed on
+  2026-09-16 with the cross in place. The desktop title-and-cross look
+  the Gap asked for is folded into the ordinary desktop Mode 5 that
+  every room build runs; nothing here waits on it. The chrome as it
+  stands is in interactive-exhibit 1.3 (L-332).
+**Ref:** L-310, L-313 (recentering may add a control to the cluster),
+L-267, L-289, L-317, L-318 (its round 5 is why round 4 happened),
+`gallery/nav_cluster.js` (`crossApart`, `.nav-cross-apart`),
+interactive.html (`sunPhonePortrait`, `navPlaceCross`, `EARTH_INFO_HTML`),
+`documentation/patch_L316_cross_and_borders.py`,
+`documentation/patch_L316_2_cross_right.py`,
+`patch_L316_3_cross_bottom_left.py` and
+`patch_L316_4_cross_top_right_again.py` (gallery).
+
+#### [L-318] Reading a shell's hover text on the phone: taps miss in the mesh, and labels mid-screen lose their pointer
+<!-- L:318 status:DONE upd:2026-09-16 section:C flag: rice:3/2/70/2 -->
+- **Tony, 2026-09-10, from the L-316 round-2 phone look (chat, not his
+  hand):** "The hovermarker are still frustrating to trigger with a finger
+  gesture. Sometimes they work especially if isolated, and sometimes not
+  especially if they are in the mesh. Suggestion: activate the hovertext
+  when the user selects a shell on the drawer. It would deselect as
+  usual. Keep the marker selection method too." And: "the hoverbox for
+  the sun shell points at the hovermarker but the earth's does not.
+  Pointing helps to associate the shell with the description."
+- **Why a label loses its pointer, read from Plotly 2.35.2's source**
+  (`src/components/fx/hover.js`, where a label's anchor is chosen): the
+  label goes to the right of its point if it fits, else to the left if it
+  fits, else it is centred over the point with no pointer and nudged back
+  on screen. So it is position, not room. The Sun's outer corona marker
+  sat near the right edge, with room to its left; Earth's upper
+  atmosphere marker was not near an edge. `gallery/feature_renderers.js`
+  wraps hover text at `HOVER_WIDTH` = 70 characters, wider than half a
+  portrait phone, so a marker away from the edges loses its pointer.
+  [verified @ plotly.js `v2.35.2` and gallery `4add58bc`]
+- **What a drawer row tap does today.** It FOCUSES: the camera frames
+  that shell and nothing else changes (`sunFocusOn`; Tony's G2 ruling,
+  2026-08-30, in the code's words "Focusing moves the camera and NOTHING
+  ELSE"). A label on focus adds a second effect to that gesture on Tony's
+  word now; the design round records it as an amendment to G2, not a
+  quiet exception. [verified @ gallery `4add58bc`]
+- **Mechanism, not chosen.** A 3D hover label comes from Plotly's WebGL
+  picking: `src/plots/gl3d/scene.js` calls `Fx.loneHover` with screen
+  coordinates it computes itself. Showing one on request means computing
+  those in the page, or using `layout.scene.annotations`, which the gl3d
+  layout accepts; its attributes are to be read before the design round.
+  [verified @ plotly.js `v2.35.2`]
+- **Questions for the design round:** what shows on focus (the full hover
+  text, or less); what clears it (another focus, closing the drawer, a
+  tap on the scene); a focused shell that is not drawn (G2's honest empty
+  frame suggests no label); and the wrap width on narrow screens, which
+  trades a taller label for keeping the pointer.
+- **Note:** RICE 3/2/70/2 -> 2.1 proposed, not confirmed.
+- **Design settled in conversation, 2026-09-10.** Proposed and accepted:
+  a tap on a shell's name frames the shell as before and also opens its
+  hover text as a label pinned to its info marker, with an arrow; a tap
+  on another name moves it; unticking the shell closes it; a shell that
+  is not drawn gets no label; tapping a marker works as before. Tony,
+  asked what else closes it: "A tap anywhere in the scene." This amends
+  G2 on his word -- the name still never switches a shell on or off.
+- **Built 2026-09-10** by `patch_L318_drawer_label.py` in the gallery,
+  `interactive.html` only. The label is a Plotly scene annotation at the
+  marker's 3D point (`layout.scene.annotations` carries x, y, z, ax, ay,
+  the anchors and `showarrow`, read @ plotly.js `v2.35.2`
+  `src/components/annotations3d/attributes.js`), with the marker's own
+  hover text rewrapped at 34 characters and its border and arrow in the
+  shell's colour. The box goes toward the middle of the screen, chosen
+  from the marker's place against the live camera, and re-anchors after
+  a drag or any relayout. Every label update also sends the live camera:
+  Plotly's 3D replot re-applies the layout's stored camera (`scene.js`,
+  `setViewport`), which a touch rotation never updates, so without it the
+  view would snap back. A tap is one pointer moving 10 px or less within
+  500 ms; a drag, a pinch and a cancelled touch are not. Close and
+  re-anchor run a tick later, out of Plotly's own handling (the L-278
+  lesson). The G2 comment above the row handler is amended in place.
+  MODE-5 KNOBS: `SUN_LABEL_WRAP_CHARS`, `SUN_LABEL_OFFSET_PX`,
+  `SUN_LABEL_FONT_PX`, `SUN_LABEL_TAP_PX`, `SUN_LABEL_TAP_MS`. Sandbox:
+  the page's script parses; 19 checks of the label functions against a
+  stub plot pass -- the wrap, the box's side in four positions, open,
+  move, a refresh that sends nothing, no label for an undrawn shell,
+  close on untick, close on a tap, and a drag, a pinch and a cancelled
+  touch that do not close it. One check first failed on its own wrong
+  expectation and was corrected. Nothing rendered. [render-gated]
+- **In interactive-exhibit 1.2, 2026-09-11.** The drawer row names the
+  label; the touch-path section gains the two Plotly rules this build
+  read from v2.35.2 -- a scene relayout carries the live camera, and a
+  hover box keeps its pointer only when it fits to one side.
+  [verified @ `1fa413d9` + this patch]
+- **Still open here:** a tap on a marker still shows Plotly's own hover
+  box, which drops its pointer mid-screen at `HOVER_WIDTH` 70. Narrowing
+  it trades a taller box for the pointer; that waits for Tony's look at
+  the drawer label.
+- **Mode 5 passes on the phone, 2026-09-10.** Tony, to each check: name
+  a shell and its label points at its marker -- "correct"; turn the view
+  and it stays -- "correct"; tap the scene and it closes -- "correct";
+  untick and it closes -- "correct"; tapping a marker works as before --
+  "correct"; the label's size settings -- "they are correct".
+  [render-confirmed Mode 5 @ gallery `ffcf1630`]
+- **One change from the same look.** Tony: "i would make the arrow the
+  color of the marker for contrast." The marker's fill is the shell's
+  colour, which the arrow already had, so the colour that contrasts is
+  the marker's outline. Built 2026-09-10 by
+  `patch_L318_2_arrow_colour.py` in the gallery: the arrow takes the
+  marker's outline colour, red or white under the two-standards rule,
+  and the box border keeps the shell's colour. The label checks gained
+  one, now 20: a white-outlined marker gets a white arrow and a
+  red-outlined one a red arrow. [verified in the sandbox; render-gated]
+- **The arrow colour passes on the phone, 2026-09-10.** Tony: "perfect".
+  [render-confirmed Mode 5 @ gallery `9c056d1a`]
+- **Round 3, built 2026-09-15: the drawer row.** Tony, from the phone:
+  the selection box was hard to hit, the finger landed on the name, and a
+  name tap on an unticked shell moved the camera but drew nothing -- a tap
+  that read as doing nothing. Measured in the page: the box was 18 px
+  square, and every pixel around it, the 16 px to its left included,
+  belonged to the name; "go" was only a label, and the name did exactly
+  what GO did. A first idea, a one-target row with no box, was withdrawn
+  once Tony described his use: tick several shells, then go to one. His
+  rulings, each "yes": (1) the row's whole left end -- its edge, the box
+  and the colour dot, the full row height, about 65 px -- ticks and
+  unticks; (2) rows are at least 44 px tall; (3) the name or GO on an
+  unticked shell ticks it too, which AMENDS L-267's G2 in that one case,
+  and GO still never hides anything; (4) ticking never closes the drawer;
+  (5) GO frames on the shell, in or out, as before -- an earlier "move
+  only when too big" ruling, made for the one-target row, went with it.
+  And one detail: "when we tap outside the drawer or outside the text
+  box, it closes the text box and the drawer if still open." The
+  backdrop now closes both; a tap on the text box itself still closes it,
+  as before. Built by `patch_L318_3_drawer_row_targets.py` in the
+  gallery. Sandbox: a stand-in page running the page's own drawer
+  functions, markup and styles, 25 checks, failing on the unpatched page.
+  A leftover copy from an abandoned attempt,
+  `patch_L331_drawer_row_targets.py`, missed the backdrop detail; it was
+  never run or committed. Mode 5, 2026-09-15, each check: "correct".
+  [render-confirmed Mode 5 @ gallery `c730a6ab`]
+- **Round 4, built 2026-09-15: soft line breaks.** Tony, with phone
+  screenshots: the belts' text boxes ran off the screen, full of orphan
+  words, and the crust showed the same. The text was wrapped twice: at 70
+  characters for the desktop box (and by hand inside sentences in places)
+  and again at 34 by the phone's label. A break that only keeps a desktop
+  line short is now `GalleryFeatures.SOFT_BR` (`<br soft>`). Plotly draws
+  it as a line break -- its text splitter reads a tag's name up to the
+  first space (plotly.js 2.35.2, `src/lib/svg_text_utils.js`) -- and the
+  label turns it back into a space. Swept through `wrapHover`, the pointer
+  line under every hover, the belts, the GEO ring, the magnetopause, the
+  bow shock and the Earth scene's four hand-wrapped hovers. All 68 desktop
+  boxes are unchanged, line for line. The hover budget suite now counts a
+  soft break as a line, fails on a hard break inside a sentence, and
+  measures the phone's labels with the page's own wrapper;
+  `gallery_maintenance_run.py` passes it `interactive.html`. Label lines
+  at 34 characters, measured: outer belt 28 -> 26, rotation axis
+  28 -> 26, inner belt 25 -> 23, the Sun's galactic tide 11 -> 10; 34 of
+  38 unchanged. Built by `patch_L318_4_soft_breaks.py` in the gallery.
+  Tony, after: the text reads in sentences, but "some text boxes remain
+  too large even after line break adjustment". [render-seen @ gallery
+  `29614e5`]
+- **Round 5, built 2026-09-15: on a portrait phone the text box has no
+  arrow and sits mid-view.** Tony's screenshots showed a tall box cut off
+  at the side (the outer belt, the Sun's gravitational influence) and at
+  the bottom (both belts), and a view where Plotly drew no arrow. Beside
+  its marker a box held about 16 lines (Tony). Tony: the arrow "is very
+  useful but it is not indispensable"; "Why don't we start by just
+  removing the arrow to the marker. And we can see how it reads."; and
+  "can we leave the desktop as-is?" On a portrait phone
+  (`sunPhonePortrait()`) the box is a page-level annotation centred in
+  the view -- same text, same width, border in the shell's colour. The
+  desktop and a phone held landscape keep the scene label with its arrow;
+  the desktop label is the same object as before. Turning the phone swaps
+  the two forms and empties the one not in use. Knobs:
+  `SUN_LABEL_PHONE_X` and `SUN_LABEL_PHONE_Y` (0.5 each), and
+  `SUN_LABEL_WRAP_CHARS` (34, which also sets the desktop label's width).
+  Built by `patch_L318_5_phone_label_no_arrow.py` in the gallery; a
+  stand-in ran 16 checks of the page's own label functions. Mode 5,
+  2026-09-16: "all look good"; the whole box on screen -- "yes"; without
+  the arrow -- "it read okay"; it can cover the arrow buttons and the
+  grid chip -- "correct". [render-confirmed Mode 5 @ gallery `a4ef8cfc`]
+- **Round 6, built 2026-09-16: a phone tap reaches the marker.** Without
+  the arrow, Tony: tapping a marker cross is "trial and error". Read from
+  plotly.js 2.35.2: a 3D tap takes the drawn point nearest the finger
+  within gl-plot3d's `pickRadius` (10 px, set by
+  `src/plots/gl3d/scene.js`; the pick buffer is in screen pixels) from
+  every trace, and only then does scene.js drop a pick whose trace has
+  hoverinfo 'skip' -- so a shell's text-less dots win the tap. On a
+  portrait phone only (Tony: "leave the desktop as-is. the reason is that
+  the mouse pointer is fine enough to pick out the marker"), text-less
+  traces draw nothing into the pick buffer, and the search widens to
+  `SUN_PICK_RADIUS_PX` = 22 px. This reaches into Plotly's internals
+  (`gd._fullLayout.scene._scene`: `glplot.pickRadius`, `glplot.update`,
+  each WebGL object's `drawPick`); it is re-applied after every plot and
+  does nothing if those are not where 2.35.2 keeps them. Built by
+  `patch_L318_6_phone_tap_picking.py` in the gallery; a stand-in with a
+  tap search copied from Plotly's rule ran 22 checks. Mode 5, 2026-09-16:
+  "always opens on first tap. much improved."; a tap on empty space still
+  closes a box -- "correct"; landscape and the desktop's mouse hover --
+  "correct". [render-confirmed Mode 5 @ gallery `52e953a7`]
+- **What this leaves.** The "still open" line above, a marker tap's own
+  Plotly box losing its pointer, is overtaken: the phone's taps now land,
+  and Tony saw no problem with that box. Two loose ends go to open items:
+  the four Sun hovers and the stale visitor text (L-331), and the
+  interactive-exhibit skill, which still describes rounds 1 and 2
+  (L-332). An idea Tony raised and did not take is recorded in L-331:
+  trim each text box to its key data and move the rest to the i panel.
+  Tony: "16 lines is the limit with an arrow to its marker. Without that
+  constraint it could be longer."
+- **CLOSED 2026-09-16, Tony's ruling:** "done. just needs updating."
+  Six rounds on the phone; the two loose ends live where the Gap said
+  they would -- the hover wording and the ceiling on L-331, the skill
+  on L-332 (1.3 shipped). Tony's Mode 5 of both rooms at gallery
+  `bbf46429`, with the drawer, the text box and the tap as this item
+  left them: "correct."
+**Ref:** L-267 (the drawer and focus; G2 amended by round 3), L-278,
+L-316, L-317, L-319, L-320, L-331, L-332, `interactive.html`
+(`sunFocusOn`, `sunLabelShow`, `sunLabelWrap`, `sunLabelRefresh`,
+`sunLabelRelayout`, `sunPhonePortrait`, `sunTapPicking`,
+`buildSunDrawer`), `gallery/feature_renderers.js` (`wrapHover`,
+`HOVER_WIDTH`, `SOFT_BR`), `gallery/earth_geometry.js`,
+`documentation/smoke_hover_budget.js`; plotly.js v2.35.2
+`src/components/fx/hover.js`, `src/plots/gl3d/scene.js`,
+`src/components/annotations3d/attributes.js`,
+`src/lib/svg_text_utils.js` and `stackgl_modules/index.js` (the pick
+pass); `documentation/patch_L318_drawer_label.py` and
+`patch_L318_2_arrow_colour.py` through
+`patch_L318_6_phone_tap_picking.py` (gallery).
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

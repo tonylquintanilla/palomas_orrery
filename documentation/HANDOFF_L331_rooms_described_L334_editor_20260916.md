@@ -1,16 +1,18 @@
 # The rooms say what they show, and the store gets an editor next
 
-Built on orrery `bfc1706b8b0f14ce28cee893381ca3d511fea9ce`
+Built on orrery `85c308cfbb773782901ff94d00f9cd0638082e06`
 at https://github.com/tonylquintanilla/palomas_orrery
-Gallery at `bbf46429df4cccb4b2e0b7305056684081c67334`
+Gallery at `72a49552aa6ba4b21c2f58e3c5fe53f7d198590c`
 at https://github.com/tonylquintanilla/tonyquintanilla.github.io
 
 The session opened at orrery `d99d8db1` and gallery `b375cfe1`. The
-orrery moved once, to `bfc1706b` (skills, protocol, generators, ledger).
-The gallery moved twice: `744ad578` (the Sun's four hovers to the panel)
-and `bbf46429` (every Sun and Earth feature described). Every HEAD was
-read back with `ls-remote`. After Tony runs this session's last ledger
-patch the orrery moves again; that SHA is his to report.
+orrery moved three times: `bfc1706b` (skills, protocol, generators,
+ledger), `85c308cf` (L-331 recorded, L-334 opened, cleanup), and once
+more after this evening's closing patch -- that SHA is Tony's to
+report. The gallery moved three times: `744ad578` (the Sun's four
+hovers to the panel), `bbf46429` (every Sun and Earth feature
+described), `72a49552` (cleanup). Every HEAD was read back with
+`ls-remote`.
 
 Tony Quintanilla, PE | Claude Opus 5 | 2026-09-16, one session in two halves
 Type: DOCUMENTATION + BUILD.
@@ -24,13 +26,14 @@ rollup; everything else in it stands.
 ## STEP 0 -- before you do anything
 
 1. `git status --porcelain` in both repositories. Expect nothing.
-2. `git ls-remote` both. Expect gallery `bbf46429` and the orrery at the
-   SHA Tony reports after `patch_L331_3_ledger_20260916.py`.
+2. `git ls-remote` both. Expect gallery `72a49552` and the orrery at the
+   SHA Tony reports after `patch_L316_L318_close_20260916.py`.
 3. Version-check every skill at load. This session installed
    interactive-exhibit **1.3** and orrery-coding-conventions **1.9** and
    cannot verify the install. Confirm the loaded copies read 1.3 and 1.9
    before exhibit or hover work; if they read 1.2 and 1.8, stop.
-4. `ledger_index.py` after the ledger patch: one run, `OK: 329`.
+4. `ledger_index.py` after the closing patch: two runs; the second is
+   `OK: 329`, with 192 live items.
 
 ---
 
@@ -109,42 +112,44 @@ here were content and stayed, the third was vocabulary and moved.
 
 ---
 
-## STILL OPEN, in the order Claude would take them
+## STILL OPEN, in Tony's order (ruled 2026-09-16, evening)
 
-1. **L-334, the editor** -- Tony's stated next need, and it changes who
-   can maintain the rooms. Start with the five design questions in the
-   ledger item, not with code. Question 1 (numbers locked) decides the
-   shape of everything else. Claude's view: yes, build it now; the
-   rooms are done and the store is stable.
-2. **L-322, the unit field** -- the Store drift check prints FAIL on
-   every live run because 13 pointers cannot be examined. Report-only,
-   so nothing stops, but a red line nobody reads is a check that cannot
-   fail. Clearing it makes drift a gate. Also what the editor's locked
-   numbers would display.
-3. **L-333** -- Tony decides: restamp both plan companions, or retire
-   the critical-path one.
-4. **L-331's residue** -- the four page-built hovers and the Moon's;
+1. **L-322, the unit field -- FIRST.** Tony: "get the number right
+   first." Store drift prints FAIL on every live run because 13 of 70
+   pointers cannot be examined; clearing it lets drift become a gate,
+   and the editor's locked numbers would display what it reads. The
+   item's own note says the first session on it is a DESIGN ROUND
+   settling (a) through (e), not a patch. Open it fresh.
+2. **L-334, the editor.** Question 1 is ruled: numbers are locked
+   (values, units, `orrery_constant` pointers displayed, not editable).
+   Questions 2 to 5 -- the file's format, serving the arrival settings,
+   a line-count measure instead of a preview, Tkinter from the Run
+   button -- are settled at the start of the build session, before code.
+3. **L-331's residue** -- the four page-built hovers and the Moon's;
    whether they get a served `description` too (then L-334 reaches
-   them). Cheap once L-334's shape is settled.
-5. **Carried:** L-330 (the belts' shape), L-231 (Jupiter's room and its
-   belt builder), L-273's gallery half, L-061, L-316/L-318 closures.
+   them).
+4. **L-333** -- waits. Tony: "the master plan is the critical one."
+5. **Carried:** L-330 (the belts' shape), L-231 (Jupiter's room, behind
+   all of the above), L-273's gallery half, L-061.
+
+L-316 and L-318 are CLOSED on Tony's word, by
+`patch_L316_L318_close_20260916.py`.
 
 ---
 
 ## TONY-ACTION ROLLUP
 
-1. **(do)** ORRERY: run `patch_L331_3_ledger_20260916.py`, then
-   `python ledger_index.py LEDGER_CONSOLIDATED.md` (expect OK: 329);
-   commit, push, report the SHA. The maintenance run archives the
-   patch itself.
-2. **(do)** File this handoff to the orrery's `documentation/`. In the
-   gallery, archive `patch_L331_1_sun_hovers_to_panel.py` and
-   `patch_L331_2_what_you_are_looking_at.py` to `documentation/`.
-3. **(decide)** L-334, question 1: are the numbers locked in the editor?
-   Then questions 2 to 5, at the start of the next session.
-4. **(decide)** L-333: restamp or retire.
-5. **(decide)** Close L-318. Close L-316 after the desktop title and
-   cross are looked at on their own.
+1. **(do)** ORRERY: run `patch_L316_L318_close_20260916.py`, then
+   `python ledger_index.py LEDGER_CONSOLIDATED.md` TWICE (the first run
+   files the two closed items; the second prints OK: 329); commit,
+   push, report the SHA.
+2. **(do)** File this handoff to the orrery's `documentation/`; it
+   replaces the copy filed earlier this evening, which carried Claude's
+   order rather than Tony's. The maintenance run archives the patch.
+3. **(do)** GALLERY: archive `patch_L331_1_sun_hovers_to_panel.py` and
+   `patch_L331_2_what_you_are_looking_at.py` to `documentation/` if the
+   cleanup commit did not already.
+4. Next session: open on L-322's design round, fresh, with STEP 0.
 
 ---
 
