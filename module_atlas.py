@@ -63,6 +63,9 @@ as `patch` and is reported under "Patch scripts awaiting archive"
 with the action named, instead of landing in `undetermined` -- which
 had been carrying two unrelated meanings at once.
 
+Module updated: September 16, 2026 with Anthropic's Claude Opus 5 (L-273: the output opens with a Doc-Kind: generated tag, read by
+doc_index.py; hand-editing the output is an error the tag now names).
+
 Role: devtool
 Domain: dev_tools
 """
@@ -839,6 +842,9 @@ def generate_atlas(modules, output_path):
     lines = []
     now = datetime.now().strftime('%B %d, %Y')
 
+    lines.append("<!-- Doc-Kind: generated | The module atlas: every "
+                 "module's role, functions and dependencies, rebuilt by "
+                 "module_atlas.py from the docstrings. Do not hand-edit. -->")
     lines.append("# Paloma's Orrery -- Module Atlas")
     lines.append("")
     lines.append(f"Generated: {now}")
@@ -1019,6 +1025,9 @@ def generate_index(modules, output_path):
     lines = []
     now = datetime.now().strftime('%B %d, %Y')
 
+    lines.append("<!-- Doc-Kind: generated | The human-browsable module "
+                 "index, rebuilt by module_atlas.py alongside the atlas. "
+                 "Do not hand-edit. -->")
     lines.append("# Paloma's Orrery - Module Index")
     lines.append("")
     lines.append(f"**Generated:** {now} by `module_atlas.py`  ")

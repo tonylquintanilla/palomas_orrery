@@ -294,10 +294,12 @@ inherits nothing, which is what keeps the genuinely uncited blocks tracked
 as L-173 visible).
 
 Module updated: August 2026 with Anthropic's Claude Opus 5 (Task 2a:
-Module updated: August 21, 2026 with Anthropic's Claude Opus 5 (L-214).
 per-domain split printed under each console tier line;
 MODULE_DOMAIN_MAP entries added for orrery_rendering and shell_configs,
 and two entries removed for smoke_* files no longer in the repo.
+Module updated: August 21, 2026 with Anthropic's Claude Opus 5 (L-214).
+Module updated: September 16, 2026 with Anthropic's Claude Opus 5 (L-273: the output opens with a Doc-Kind: generated tag, read by
+doc_index.py; hand-editing the output is an error the tag now names).
 Report-only grouping -- no scanning or scoring behaviour changed).
 
 Role: devtool
@@ -2898,6 +2900,9 @@ def generate_report(units, consistent_dups, inconsistencies,
     out = []
 
     # ---- Header ----
+    out.append("<!-- Doc-Kind: generated | The provenance audit: every "
+               "numeric claim scored against its citation, rebuilt by "
+               "provenance_scanner.py on each run. Do not hand-edit. -->")
     out.append("# Paloma's Orrery -- Provenance Audit")
     out.append("")
     out.append(f"Generated: {now}")

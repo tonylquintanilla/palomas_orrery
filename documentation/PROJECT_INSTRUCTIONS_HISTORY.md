@@ -1010,6 +1010,66 @@ Version history: v3.53 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 
+v3.57 (September 11, 2026): No rule changed in this document. THREE
+skill bumps, taken together at the close of the 2026-09-10 evening
+session and BEFORE the builds they serve.
+
+orrery-coding-conventions 1.7 -> 1.8 (L-317), interactive-exhibit
+1.1 -> 1.2 (L-316, L-318), safe-file-editing 1.10 -> 1.11 (L-315).
+
+TWICE IN ONE EVENING THE INTERACTIVE LACKED A SOLUTION THE ORRERY
+ALREADY HAD, and that is what the first bump is for. The gallery drew
+every info marker red, against orange and red shells, because Tony's
+two-standards outline rule of May 2026 lived in the code and in
+shell_configs.py comments and had never been written into the skill a
+marker session loads (L-317). Separately, the orrery declares a marker
+angle per shell where one is needed, while the gallery stepped from the
+pole and left nine markers on the drawn axis (L-320). Only the first
+was a skill gap; Tony ruled the second directly, keeping the gallery's
+own steps.
+
+The rule the first case earns is this document's own Context Priority
+read from the other end: A CONVENTION THAT IS NOT IN THE SKILL DOES NOT
+TRAVEL. The code is not the store a fresh session reads. The session
+that drew those markers loaded the skill and could not have known.
+
+interactive-exhibit gains the chrome the phone changed -- the arrow
+cluster and its portrait placement, the drawer label -- and two Plotly
+rules read out of v2.35.2's own source rather than recalled: a scene
+relayout must carry the live camera, because a 3D replot re-applies the
+layout's stored copy and a touch rotation never updates it; and a hover
+box keeps its pointer only when it fits to one side of its point.
+
+safe-file-editing gains A Guard Must Not Fence What a Generator
+Rewrites. Three chained ledger patches refused this session: each was
+fingerprinted against the previous one's raw output, while every one of
+them told Tony to run ledger_index.py next -- which rewrites the zone
+they were hashing. ledger_index.py now holds LF on write, as
+skills_index.py already did one file away.
+
+THREE BUMPS IN ONE ENTRY IS NOT A VIOLATION OF ONE SESSION, ONE BUMP.
+That rule is per SKILL: a session does not ship two versions of one
+skill. Three different skills ride one protocol entry, as two did at
+v3.55 and v3.56.
+
+These bumps are taken at the session's close rather than before its
+builds, which v3.55 recorded as the better order. The builds they
+describe had already happened; taking them now is what makes them
+available to the NEXT session. So the obligation travels as usual: this
+session loaded 1.7, 1.1 and 1.10, and a reinstall cannot be verified
+from inside the session that made it. The next session confirms its
+loaded copies read 1.8, 1.2 and 1.11 before doing marker, exhibit or
+patch work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.54 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-09-16 when v3.60
+made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

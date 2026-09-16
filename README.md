@@ -187,9 +187,9 @@ further down this file for the rest.
 | [PROJECT_ORIGIN.md](PROJECT_ORIGIN.md) | hand-written | How the project started, in Tony's own words. |
 | [requirements.txt](requirements.txt) | hand-written | Annotated dependency spec, including the kaleido 0.2.1 pin and the Plotly 5.x constraint. |
 | [RUNNING_A_PATCH_FILE.md](RUNNING_A_PATCH_FILE.md) | hand-written | How to run a delivered patch script, and what its guards mean. |
-| [DATA_INVENTORY.md](DATA_INVENTORY.md) | **untagged** | _no Doc-Kind tag; add one to describe it here_ |
-| [MODULE_ATLAS.md](MODULE_ATLAS.md) | **untagged** | _no Doc-Kind tag; add one to describe it here_ |
-| [MODULE_INDEX.md](MODULE_INDEX.md) | **untagged** | _no Doc-Kind tag; add one to describe it here_ |
+| [DATA_INVENTORY.md](DATA_INVENTORY.md) | generated | The data inventory: the state of the local, gitignored data stores, rebuilt by data_inventory.py. Do not hand-edit. |
+| [MODULE_ATLAS.md](MODULE_ATLAS.md) | generated | The module atlas: every module's role, functions and dependencies, rebuilt by module_atlas.py from the docstrings. Do not hand-edit. |
+| [MODULE_INDEX.md](MODULE_INDEX.md) | generated | The human-browsable module index, rebuilt by module_atlas.py alongside the atlas. Do not hand-edit. |
 | [PROVENANCE_AUDIT.md](PROVENANCE_AUDIT.md) | **untagged** | _no Doc-Kind tag; add one to describe it here_ |
 | [WORKSHEET_CHECK.md](WORKSHEET_CHECK.md) | **untagged** | _no Doc-Kind tag; add one to describe it here_ |
 <!-- DOC-INDEX:END -->

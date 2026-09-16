@@ -1,3 +1,4 @@
+<!-- Doc-Kind: generated | The human-browsable module index, rebuilt by module_atlas.py alongside the atlas. Do not hand-edit. -->
 # Paloma's Orrery - Module Index
 
 **Generated:** September 16, 2026 by `module_atlas.py`  
@@ -10,24 +11,26 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 133  
-**Total Lines of Code (non-blank):** 106,774  
-**Total Public Functions/Classes:** 1,194
+**Total Python Files:** 134  
+**Total Lines of Code (non-blank):** 107,149  
+**Total Public Functions/Classes:** 1,196
 
 ## Classification Coverage
 
-**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `patch_L231_dashboard_hover_budget.py`
-- `patch_L316_L318_ledger_and_plan_20260916.py`
+- `patch_L332_1_skills_protocol_generators_20260916.py`
+- `patch_L332_2_ledger_20260916.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (2).** No valid `Domain:` tag.
+**Undetermined domain (3).** No valid `Domain:` tag.
 
 - `patch_L231_dashboard_hover_budget.py`
-- `patch_L316_L318_ledger_and_plan_20260916.py`
+- `patch_L332_1_skills_protocol_generators_20260916.py`
+- `patch_L332_2_ledger_20260916.py`
 
 
 ---
@@ -197,7 +200,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `convert_hot_ph_to_json.py` | Convert HOT ocean pH data to JSON format Manual converter for ocean acidification visualization (199 lines) |
 | `create_cache_backups.py` | One-shot script to create timestamped backups of star data caches. (10 lines) |
 | `create_ephemeris_database.py` | Create satellite_ephemerides.json from multiple sources (246 lines) |
-| `data_inventory.py` | Inventory data stores and gallery for handoff and headroom. (247 lines) |
+| `data_inventory.py` | Inventory data stores and gallery for handoff and headroom. (252 lines) |
 | `dep_trace.py` | Targeted dependency path tracer for Paloma's Orrery Usage: python dep_trace.py <module_name> [hops] (419 lines) |
 | `diagnose_bcodmo.py` | Diagnostic script to examine BCO-DMO pH data structure (67 lines) |
 | `doc_index.py` | - regenerate README.md's key-documents table from the documents themselves. (170 lines) |
@@ -208,10 +211,10 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (959 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (967 lines) |
 | `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (517 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
-| `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,066 lines) |
+| `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,071 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (342 lines) |
 | `test_citation_inheritance.py` | Regression tests for citation-block inheritance. (516 lines) |
 | `test_constants_provenance.py` | Regression tests for verified numeric constants. (411 lines) |
@@ -224,7 +227,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_worksheet_checker.py` | - L-192. Can each layer actually fail? (995 lines) |
 | `test_worksheet_request_builder.py` | - L-195 / L-192. Does the marker join actually join, and can it fail? (439 lines) |
 | `verify_orbit_cache.py` | Safely verify and repair orbit_paths.json (172 lines) |
-| `worksheet_checker.py` | - L-192. Does the worksheet say what the annotation claims it says? (2,146 lines) |
+| `worksheet_checker.py` | - L-192. Does the worksheet say what the annotation claims it says? (2,151 lines) |
 | `worksheet_keys.py` | Worksheet row keys -- one owner for the syntax and the resolution. (551 lines) |
 | `worksheet_request_builder.py` | Worksheet request builder -- ask the question the checker can read. (652 lines) |
 
@@ -235,7 +238,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `patch_L231_dashboard_hover_budget.py` | Add the hover budget checker to the dashboard, indented under the runner. (90 lines) |
-| `patch_L316_L318_ledger_and_plan_20260916.py` | Record the 2026-09-15/16 sessions in the ledger and the master plan. (566 lines) |
+| `patch_L332_1_skills_protocol_generators_20260916.py` | - ORRERY repo. (557 lines) |
+| `patch_L332_2_ledger_20260916.py` | - ORRERY repo, LEDGER_CONSOLIDATED.md only. (361 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

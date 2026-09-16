@@ -1,3 +1,4 @@
+<!-- Doc-Kind: generated | The data inventory: the state of the local, gitignored data stores, rebuilt by data_inventory.py. Do not hand-edit. -->
 # Data Inventory (local, gitignored -- CURRENT state)
 
 Repo copies stale/absent; this reflects the live local stores.
@@ -8,7 +9,7 @@ Repo copies stale/absent; this reflects the live local stores.
 |---|---|---|---|---|
 | .vot | 4 | 295.1 MB | gaia_data_magnitude.vot (284.4 MB) | 2026-02-08 |
 | .nc | 18 | 161.1 MB | era5_clim_march_day22.nc (27.4 MB) | 2026-04-07 |
-| .json | 51 | 132.5 MB | orbit_paths.json (130.9 MB) | 2026-09-15 |
+| .json | 51 | 132.5 MB | orbit_paths.json (130.9 MB) | 2026-09-16 |
 | .backup | 4 | 131.2 MB | orbit_paths.json.backup (130.9 MB) | 2026-09-14 |
 | .backup_old | 1 | 130.9 MB | orbit_paths.json.backup_old (130.9 MB) | 2026-09-14 |
 | .csv | 15 | 34.9 MB | 3773_v3_niskin_hot001_yr01_to_hot348_yr35.csv (30.8 MB) | 2026-04-07 |
@@ -73,7 +74,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 442.7 MB (502 files)
+**Total size:** 442.7 MB (505 files)
 
 **GitHub Pages headroom:** 581 MB remaining of 1024 MB ceiling (43.2% used)
 
@@ -81,14 +82,14 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 277 | 419.4 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-16 |
+| .json | 279 | 419.4 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-16 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 1 | 5.1 MB | palomas_orrery_logo.png (5.1 MB) | 2025-11-27 |
-| .py | 123 | 2.0 MB | gallery_studio.py (243.1 KB) | 2026-09-16 |
-| .md | 15 | 690.7 KB | TEST_PROTOCOL_sun_hang_20260902.md (526.5 KB) | 2026-09-16 |
-| .jsonl | 22 | 499.3 KB | encke.jsonl (23.2 KB) | 2026-09-16 |
-| .html | 5 | 324.8 KB | index.html (156.6 KB) | 2026-09-16 |
-| .js | 8 | 171.2 KB | feature_renderers.js (76.1 KB) | 2026-09-16 |
+| .py | 124 | 2.0 MB | gallery_studio.py (243.1 KB) | 2026-09-16 |
+| .md | 15 | 689.9 KB | TEST_PROTOCOL_sun_hang_20260902.md (526.5 KB) | 2026-09-16 |
+| .jsonl | 22 | 506.5 KB | encke.jsonl (23.5 KB) | 2026-09-16 |
+| .html | 5 | 325.3 KB | index.html (156.6 KB) | 2026-09-16 |
+| .js | 8 | 175.9 KB | feature_renderers.js (79.3 KB) | 2026-09-16 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |
 | .patch | 3 | 11.7 KB | phaseb_studio.patch (7.0 KB) | 2026-07-29 |

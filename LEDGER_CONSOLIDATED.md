@@ -136,6 +136,25 @@ Module updated: September 14, 2026 with Anthropic's Claude Opus 5
 (L-326: provenance-discipline 2.11 -> 2.12, protocol v3.58; L-325's
 Gap half-closed -- the rule landed, the serving half stays open),
 built on bfc0505e.
+Module updated: September 14, 2026 with Anthropic's Claude Opus 5
+(L-305 item 7 recorded; L-327, L-328 opened; L-329 opened and closed
+with protocol v3.59), built on 773e5c2d. Recorded 2026-09-16 by a later
+session: that patch edited this file without stamping it.
+Module updated: September 15, 2026 with Anthropic's Claude Opus 5
+(L-231 built for Earth's belts; L-305 items 5 and 6b built; L-330
+opened), built on 72058200. Recorded 2026-09-16 by a later session:
+that patch edited this file without stamping it.
+Module updated: September 16, 2026 with Anthropic's Claude Opus 5
+(L-316 rounds 3 and 4 and L-318 rounds 3 to 6 on Tony's Mode 5; L-331
+and L-332 opened; L-267's G2 amended), built on cce6a933. Recorded
+later the same day by a following session: that patch edited this file
+without stamping it.
+Module updated: September 16, 2026 with Anthropic's Claude Opus 5
+(ledger review: L-226, L-232, L-271, L-277 and L-278 closed, each
+verified done at HEAD; L-332 built -- interactive-exhibit 1.3,
+orrery-coding-conventions 1.9, protocol v3.60 -- and closed; L-273's
+orrery generators emit their tag; L-333 opened; the three stamps
+above added), built on d99d8db1.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -353,7 +372,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*198 live items; 183 need attention (`!`); 197 RICE-scored; 129 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*193 live items; 178 need attention (`!`); 192 RICE-scored; 135 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -364,12 +383,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-235 | Checks that cannot fail, gallery side [three instances] | OPEN | 11.4 | 2026-08-25 |
 | ! | L-252 | L2b's fourth outcome: an INCOMPLETE verdict is not a confirmation | OPEN | 11.4 | 2026-08-25 |
 | ! | L-262 | The framing smoke test has never run against the page | OPEN | 11.4 | 2026-08-30 |
-| ! | L-271 | Patch scripts wrote backups nothing ever removed | OPEN | 11.4 | 2026-08-31 |
 | ! | L-237 | Artifact 1's golden record is stale and needs re-cutting | OPEN | 10.8 | 2026-09-10 |
 | ! | L-266 | Nothing checks that a cited link still resolves | OPEN | 9.0 | 2026-08-30 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
-| ! | L-226 | safe-file-editing 1.8 -- encoding gate covers prose; corrections do not travel | OPEN | 8.1 | 2026-08-23 |
-| ! | L-278 | A relayout from inside a Plotly event handler re-enters the update machinery | OPEN | 8.1 | 2026-09-02 |
 | ! | L-300 | sweep_collapsed_features.py joins the gallery maintenance runner as a gating checker | OPEN | 8.1 | 2026-09-07 |
 | ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-21 |
 | ! | L-249 | The Earth slice of L-181: interior boundaries as sourced constants | OPEN | 7.2 | 2026-08-25 |
@@ -390,7 +406,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-25 |
 | ! | L-281 | The guest book: no-account comments, approve-before-show | OPEN | 4.2 | 2026-09-03 |
 | ! | L-247 | Sgr A* constants migrated to the single source of truth | OPEN | 4.0 | 2026-08-25 |
-| ! | L-277 | The L-192 site store anchors by line number, so any insertion breaks two checkers | OPEN | 4.0 | 2026-09-03 |
 | ! | L-325 | A derived row stores its reported figure, not the arithmetic result | OPEN | 4.0 | 2026-09-12 |
 | ! | L-331 | Visitor-facing text: stale info text, four Sun hovers outside the i-panel move, and hovers in plain language (exhibits) | OPEN | 4.0 | 2026-09-16 |
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
@@ -399,7 +414,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-08-19 |
 | ! | L-224 | Streamer belt: one warped band, not a sphere | OPEN | 3.8 | 2026-08-22 |
 |  | L-230 | A skill bump does not reach the protocol's version history | DEFERRED | 3.8 | 2026-08-23 |
-| ! | L-232 | The gallery's served constants carry sources that nothing checks | OPEN | 3.8 | 2026-08-24 |
 | ! | L-227 | Streamer band hover rendered as one 378-character line | OPEN | 3.8 | 2026-08-23 |
 | ! | L-241 | Hills torus hover states the cloud bounds, not the drawn ring | OPEN | 3.8 | 2026-08-25 |
 | ! | L-282 | The lobby: the main page as an entrance hall | OPEN | 3.8 | 2026-09-06 |
@@ -410,7 +424,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-285 | index.html adopts the shared navigation cluster; the fake-wheel dolly retires | OPEN | 3.6 | 2026-09-04 |
 | ! | L-311 | Earth's rotation period and obliquity are not served, so the axis hover names neither | OPEN | 3.6 | 2026-09-10 |
 | ! | L-324 | One assignment per line in constants_new.py | OPEN | 3.6 | 2026-09-12 |
-| ! | L-332 | interactive-exhibit skill 1.3: carry the phone chrome of 2026-09-15/16 (skills) | OPEN | 3.6 | 2026-09-16 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-09-12 |
 | ! | L-286 | Rooms in four levels: drill-down, short-name breadcrumb, Home stays a scene reset | OPEN | 3.5 | 2026-09-08 |
 | ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
@@ -428,6 +441,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-244 | Sweep for replicated conversion factors as a class [Fable candidate] | OPEN | 2.8 | 2026-08-25 |
 | ! | L-323 | A figure in prose needs a home (the Note is not a store) | OPEN | 2.8 | 2026-09-12 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
+| ! | L-333 | The master plan's two companion summaries have not moved since August (planning documents) | OPEN | 2.7 | 2026-09-16 |
 | ! | L-298 | Seeing the gap between what the orrery draws and what an exhibit serves | OPEN | 2.7 | 2026-09-07 |
 | ! | L-248 | The parsec-to-light-year factor is typed 36 times across the star pipeline | OPEN | 2.5 | 2026-08-25 |
 | ! | L-273 | A document indexer, so the README's document table stops being hand-maintained | OPEN | 2.5 | 2026-09-01 |
@@ -640,13 +654,16 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-182 | Mars Hill sphere -- cross-check correction lost across the config pipeline | DONE | 12.0 | 2026-08-05 |
 |  | L-222 | The constants change report fails on every currency stamp | DONE | 11.4 | 2026-08-20 |
 |  | L-264 | One name, two programs: the runners get repo-specific names | DONE | 11.4 | 2026-08-29 |
+|  | L-271 | Patch scripts wrote backups nothing ever removed | DONE | 11.4 | 2026-09-16 |
 |  | L-221 | The master plan is the roadmap, and it outranks RICE | DONE | 10.8 | 2026-08-22 |
 |  | L-290 | Relay anchors must name the protocol and skills, not the code SHA alone | DONE | 10.8 | 2026-09-07 |
 |  | L-198 | Claim vocabulary: the units the scanner could not see | DONE | 10.2 | 2026-08-17 |
 |  | L-276 | Mode 7 tells relay partners they cannot read the repo, and they can | DONE | 8.5 | 2026-09-03 |
 |  | L-259 | The Sun exhibit ships -- the assembler runs in a visitor's browser | DONE | 8.3 | 2026-08-29 |
 |  | L-217 | The Part A / Part B dispatch split is a check that cannot fail | DONE | 8.1 | 2026-08-19 |
+|  | L-226 | safe-file-editing 1.8 -- encoding gate covers prose; corrections do not travel | DONE | 8.1 | 2026-09-16 |
 |  | L-260 | Sun exhibit finishing items: axis units and the phone | DONE | 8.1 | 2026-09-04 |
+|  | L-278 | A relayout from inside a Plotly event handler re-enters the update machinery | DONE | 8.1 | 2026-09-16 |
 |  | L-296 | Every design build earns a master plan version number | DONE | 8.1 | 2026-09-07 |
 |  | L-207 | The citation prompt -- the checker asks the fuzzy question | DONE | 7.6 | 2026-08-18 |
 |  | L-220 | A patch updates the body but not the anchor, date or description | DONE | 7.6 | 2026-08-20 |
@@ -680,14 +697,17 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-280 | The Interactive Wing: door, hall, two rooms, What's New | DONE | 4.3 | 2026-09-04 |
 |  | L-291 | Earth exhibit: shells plus the Moon | DONE | 4.3 | 2026-09-10 |
 |  | L-303 | Separate cards per orientation (RULED); the phone hides a landscape card that has a portrait sibling | DONE | 4.3 | 2026-09-10 |
+|  | L-277 | The L-192 site store anchors by line number, so any insertion breaks two checkers | DONE | 4.0 | 2026-09-16 |
 |  | L-326 | provenance-discipline 2.11 -> 2.12, taken before the build it serves | DONE | 4.0 | 2026-09-14 |
 |  | L-214 | The request builder drops the comment lines that matter | DONE | 3.8 | 2026-08-21 |
+|  | L-232 | The gallery's served constants carry sources that nothing checks | DONE | 3.8 | 2026-09-16 |
 |  | L-287 | Gallery editor: the room tree, the storage room, the featured flag | DONE | 3.8 | 2026-09-05 |
 |  | L-233 | Three dashboard buttons: one fixed, one added, one retired | DONE | 3.8 | 2026-08-24 |
 |  | L-106 | Gallery-cache backup + gitignore discipline | DONE | 3.6 | 2026-07-12 |
 |  | L-115 | Skills v1.1 batch: accuracy fixes + two seed blocks (Fable Mode 7) | DONE | 3.6 | 2026-07-12 |
 |  | L-295 | The upper atmosphere shell disagrees with its own hover text | DONE | 3.6 | 2026-09-07 |
 |  | L-315 | Chained ledger patches refuse once the indexer runs between them (safe-file-editing field note) | DONE | 3.6 | 2026-09-11 |
+|  | L-332 | interactive-exhibit skill 1.3: carry the phone chrome of 2026-09-15/16 (skills) | DONE | 3.6 | 2026-09-16 |
 |  | L-267 | The Sun exhibit GUI shape: drawer, focus label, marker navigation | DONE | 3.4 | 2026-09-16 |
 |  | L-097 | skills_index.py -- Skill Manifest auto-generation (process/tooling) | DONE | 3.2 | 2026-07-04 |
 |  | L-127 | module_atlas.py generates MODULE_INDEX.md too -- single source, eliminate divergence | DONE | 3.2 | 2026-07-28 |
@@ -771,37 +791,46 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
-#### [L-332] interactive-exhibit skill 1.3: carry the phone chrome of 2026-09-15/16 (skills)
-<!-- L:332 status:OPEN upd:2026-09-16 section:A flag: rice:2/2/90/1 -->
-- `skills/interactive-exhibit/SKILL.md` 1.2 (2026-09-11) describes the
-  rooms' chrome as L-316 round 2 and L-318 rounds 1 and 2 left it. Since
-  then [verified @ gallery `52e953a7`]:
-  - the arrow cross is placed by `crossApart(on)` and the CSS rule
-    `.nav-cross-apart`, called with `sunPhonePortrait()`, the phone test
-    the text box also uses. The corner is top right again (L-316 rounds
-    3 and 4); `crossRight` and `sunCrossRight` no longer exist;
-  - a drawer row has a selection target about 65 px wide, rows are at
-    least 44 px tall, and the name or GO on an unticked shell ticks it
-    (L-318 round 3, amending L-267's G2 in that case);
-  - line breaks inside a sentence are `GalleryFeatures.SOFT_BR`, and the
-    phone's text box rejoins them (L-318 round 4);
-  - on a portrait phone the text box has no arrow and sits mid-view; the
-    desktop keeps the arrowed scene label (L-318 round 5);
-  - on a portrait phone a tap can pick only markers that carry text,
-    within 22 px, through Plotly's internals -- a second Plotly rule for
-    the touch-path section (L-318 round 6);
-  - the hover budget suite takes `interactive.html` and has three more
-    legs;
-  - Tony's standing rule of 2026-09-16: no compressed language in hover
-    text (L-331). `orrery-coding-conventions` carries the orrery's hover
-    conventions and may need the same line.
-**Note:** RICE 2/2/90/1 -> 3.6 is Claude's proposed score. The
-pre-built-session rule says to bump a skill before the next build that
-relies on it; the next build touching the rooms' chrome is L-331.
-**Gap:** the skill edit, then `skills_index.py`.
-  **Tony-action (do):** reinstall the skill after the bump.
-**Ref:** L-316, L-318, L-331, `skills/interactive-exhibit/SKILL.md`,
-`skills_index.py`, `PROJECT_INSTRUCTIONS.md`.
+#### [L-333] The master plan's two companion summaries have not moved since August (planning documents)
+<!-- L:333 status:OPEN upd:2026-09-16 section:A flag: rice:2/3/90/2 -->
+- **Found 2026-09-16 in the ledger review.** The plan itself is current
+  (v32, 2026-09-16). Its two companions are not:
+  `documentation/MASTER_PLAN_CRITICAL_PATH_SUMMARY.md` is stamped
+  August 29, 2026 (orrery `688561ef`, gallery `ac9a5c7b`) and says step
+  three is done "for one body"; `MASTER_PLAN_INTERACTIVE_GALLERY_SUMMARY.md`
+  is stamped August 19 (orrery `9ffb9b40`). Since then: Earth shipped
+  as the second room (L-291, 2026-09-10), its magnetosphere landed
+  (L-305), the phone chrome settled (L-316, L-318), units became a
+  field (L-322) and the orrery's hovers joined the braid (L-321).
+  [verified @ `d99d8db1`]
+- **Why it matters.** The ledger skill names the three documents as one
+  plan at three zooms; a reader who opens the critical-path companion
+  for "how far to the end" gets an answer eighteen days old that
+  undercounts the bodies through step three. It is The Correction Does
+  Not Travel on the plan's own companions -- the same file was the
+  founding case for that rule (L-226).
+- **What it is not.** The plan restamps once per DESIGN BUILD (L-296),
+  and that cadence is not staleness. But the companions restamped with
+  v19 and v20 and not with v21 through v32, so the rule that keeps the
+  plan honest has no counterpart for them. Proposed (Claude): the
+  companions restamp when the plan does, in the same patch, and the
+  ledger skill's Document Stack paragraph says so -- a method question,
+  which is the skill's to absorb. Both files keep overtaken claims in
+  place with a bracketed note rather than deleting them, by their own
+  headers; a restamp adds, it does not rewrite.
+- **Note:** RICE 2/3/90/2 -> 2.7 is Claude's proposed score. Not on the
+  critical path; a documentation session, or the next design build.
+**Gap:** restamp both companions to the plan's v32 state, or rule that
+one of them is retired (the critical-path companion answers a question
+the plan's Section 5a now answers itself); then the skill line.
+  **Tony-action (decide):** restamp both, or retire one.
+**Ref:** `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md` (v32),
+`documentation/MASTER_PLAN_CRITICAL_PATH_SUMMARY.md`,
+`documentation/MASTER_PLAN_INTERACTIVE_GALLERY_SUMMARY.md`;
+`skills/ledger-and-session-records/SKILL.md` (The Document Stack);
+L-221 (the plan as sequencing authority), L-296 (restamp per design
+build), L-226 (The Correction Does Not Travel, whose founding case was
+the critical-path companion).
 
 #### [L-331] Visitor-facing text: stale info text, four Sun hovers outside the i-panel move, and hovers in plain language (exhibits)
 <!-- L:331 status:OPEN upd:2026-09-16 section:A flag: rice:3/3/90/2 -->
@@ -863,7 +892,48 @@ relies on it; the next build touching the rooms' chrome is L-331.
 **Note:** RICE 3/3/90/2 -> 4.05 is Claude's proposed score: Impact raised
 from 2 on Tony's remark that the Sun room is a built interactive, Effort
 raised from 1 by the plain-language pass.
-**Gap:** the build above, then Mode 5 on the phone in both rooms.
+- **Re-homed here 2026-09-16, from L-231's body and the 2026-09-15 and
+  -16 handoffs' STILL OPEN lists:** `documentation/smoke_hover_budget.js`
+  holds `CEILING = 17` lines per hover, a ratchet that only comes down.
+  The plain-language pass above is what shortens the tallest hover;
+  when it does, lower the ceiling to the new tallest in the same patch.
+  It is still 17 at gallery `b375cfe1`.
+- **The rule is in the skills now** (2026-09-16): interactive-exhibit
+  1.3, Hover text is written for the visitor; orrery-coding-conventions
+  1.9, Hover Text Is Written for the Visitor. L-332 records the bump.
+- **The mechanical half BUILT 2026-09-16** by
+  `patch_L331_1_sun_hovers_to_panel.py` in the gallery, delivered with
+  this patch. `renderStreamerBand` and `renderOortShape` now end their
+  hovers with the pointer line; their citations reach the i panel
+  through a new `withGatheredSource()`, which collects the source strings
+  the config keeps on measured fields (`cusp_radius`, `fade_radius`,
+  `inner_radius`, `outer_radius`, `typical_radius`) into the top-level
+  `source` that `stampLink` reads. Found building it: the torus and
+  clump `note` fields were read by nothing, so their caveats had been
+  absent from hover AND panel; they reach the panel now. Each of the
+  four hovers carries its caveat in plain words -- the Galactic Tide in
+  the wording proposed above, the other three in one sentence each,
+  all in a VISITOR_WORDING block for Tony to edit before running.
+  `smoke_hover_budget.js` builds the Sun room from the served store;
+  its pointer leg fails on the tree before the patch, naming the four,
+  and passes after. Both info texts corrected: source is in the panel,
+  the magnetopause and bow shock are drawn, the drawer sentence says
+  what a tap does. Sandbox at gallery `b375cfe1` + the patch: the
+  renderers and the page's inline script parse; hover budget (96
+  hovers, ceiling still 17), features, Sun shells and framing suites all
+  pass. [render-gated: nothing seen on a phone]
+- **Not in that patch, still here:** the plain-language pass over the
+  remaining hovers ("served" x14, "sourced" x5, "drawing choice" x5,
+  capitalised labels on the magnetopause, bow shock and terminator);
+  the Galactic Tide's served `source` string in `objects_config.json`,
+  which still reads "DECLARED -- ..." and now shows in the panel's
+  Source line; the Moon's hover in `render_orbits.py`.
+**Gap:** Mode 5 on the phone in the Sun room for the four hovers and the
+panel, and in both rooms for the info text; then the plain-language pass
+over the remaining hovers, wording to Tony first; the ceiling comes down
+with the tallest hover.
+  **Tony-action (decide):** the four VISITOR_WORDING sentences, by
+  running the patch as written or editing them first.
   **Tony-action (decide):** the reworded hovers, starting with the
   Galactic Tide's.
 **Ref:** L-231 (the hover-to-panel move), L-305, L-318, L-332,
@@ -3453,7 +3523,9 @@ announced); L-214.
   the person about to run it will see it.
 **Note:** RICE is Claude's proposal, unratified.
 **Gap:** pick one of the three and write it into `safe-file-editing`,
-which would be 1.7 -- 1.5 and 1.6 are taken by L-220.
+which would be the next version (1.12 as of 2026-09-16; this line said
+1.7 when 1.5 and 1.6 were the latest, and the skill moved on without it
+-- corrected, not silently, on 2026-09-16).
 **Tony-action (decide):** which option.
 **Ref:** `skills/safe-file-editing/SKILL.md` "Naming and Archiving a
 Patch Script"; `documentation/patch_L209_2_alfven_migration.py` and
@@ -3607,51 +3679,6 @@ separation for near-equal radii, hover AU convention).
   `documentation/DESIGN_NOTE_20260822_braid_and_citation_kind.md`
   Section 4; `provenance-discipline` 2.6; L-221 (sequencing authority);
   L-224 (the session that surfaced it).
-
-#### [L-226] safe-file-editing 1.8 -- encoding gate covers prose; corrections do not travel
-<!-- L:226 status:OPEN upd:2026-08-23 section:A flag: rice:3/3/90/1 -->
-- **Two rulings by Tony on 2026-08-23, both from the v19 master plan
-  session.** Recorded here because a skill revision is a ledger entry.
-- **1. The Encoding Gate now says PROSE.** It read "ASCII only in
-  delivered code." `patch_L221_2` found 22 PRIME and one DOUBLE PRIME
-  in the master plan, reported them, and declined to sweep them on the
-  grounds that the gate was scoped to code. All three Fix In Passing
-  conditions held. Tony: a patch already holding a file open fixes
-  incidental non-ASCII. The sharper point is that Stamp What You
-  Change ALREADY said markdown is not an exception -- so the skill's
-  two halves disagreed and the reader followed the narrower one.
-  Swept in `patch_L221_3`; both master plan documents are now pure
-  ASCII.
-- **2. New section: The Correction Does Not Travel.** Scoped one level
-  out from Stamp What You Change -- that governs the file the patch is
-  editing, this governs the other files quoting what it changed.
-  Founding case: `constants_new.py` read 15 R_sun from 2026-08-22
-  (L-209, DeForest corrected at source);
-  `MASTER_PLAN_CRITICAL_PATH_SUMMARY.md` still said 17 the next day,
-  inside the paragraph written to correct an EARLIER wrong claim about
-  the same row. The same file named `STREAMER_BELT_RADII` after L-224
-  renamed it, and called L-214 unbuilt two days after it closed.
-  Three instances, one file, one cause: the provenance machinery
-  watches the code and nothing watched the documents describing it.
-- **Note:** RICE 3/3/90/1 -> 8.1 is Claude's proposed score. Reach 3
-  (every future patch), Impact 3 (a wrong document outlives a wrong
-  constant because nothing surfaces it), Confidence 90 (the rulings
-  are Tony's and the founding cases are measured), Effort 1 (the
-  skill edit is written). **Tony-action (decide):** confirm or
-  redirect, then re-run `ledger_index.py`.
-- **Tony-action (do):** run `skills_index.py`, then reinstall
-  safe-file-editing at Settings > Skills, then commit SKILL.md, this
-  ledger and PROJECT_INSTRUCTIONS.md in ONE commit. A version bump is
-  not done until the manifest agrees.
-- **Gap:** the reinstall cannot be verified from inside the session
-  that makes it. The NEXT session confirms its loaded copy reads 1.8
-  before doing file-editing work. This session loaded 1.7, correctly
-  at the time.
-- **Ref:** `skills/safe-file-editing/SKILL.md` v1.8;
-  `documentation/HANDOFF_20260823_braid_and_v19.md`; L-209 (the
-  DeForest figure); L-214, L-224 (the other two stale claims);
-  L-220 (Stamp What You Change); L-223 (A Paste Is An Unverified
-  Transfer).
 
 #### [L-227] Streamer band hover rendered as one 378-character line
 <!-- L:227 status:OPEN upd:2026-08-23 section:A flag: rice:2/2/95/1 -->
@@ -4049,47 +4076,6 @@ was drafted as L-330 on 2026-09-14 and withdrawn unrun.
   `idealized_orbits.py::orient_to_planet_pole`; gallery
   `gallery/feature_renderers.js::renderBelts`; L-229 (the genuine frame
   defect this was mistaken for); L-154.
-
-#### [L-232] The gallery's served constants carry sources that nothing checks
-<!-- L:232 status:OPEN upd:2026-08-24 section:A flag: rice:3/3/85/2 -->
-- **Opened 2026-08-24, as a consequence of Tony's option-(a) ruling.**
-  Two render inputs the served cache lacked were added to the gallery's
-  `data/objects_config.json`: the IAU pole for Jupiter and Saturn, and
-  `planet_radius` for Earth and Jupiter. Both are MEASURED values, both
-  carry a `source` field and an `orrery_constant` field naming where they
-  were copied from.
-- **They are the FIRST `source` fields in that file**, and they sit in a
-  store no checker reads. `provenance_scanner.py` scans Python. The
-  worksheet checker scans Python. Nothing reads JSON in the gallery repo.
-  So a source line there is a claim with no gate behind it -- exactly the
-  shape the resident gate warns about, one repo over.
-- **The value was still worth adding.** The alternative on the table was
-  a JavaScript table, which is a store the transport does not target
-  either AND is invisible to the pinning design. Putting the copy where
-  segment 2 will land is the version that converges.
-- **Earth's radius now appears TWICE in that file**, once in
-  `atmosphere_shell` and once in `van_allen_belts`, because a shared
-  sibling would have meant a third top-level feature key on Earth and
-  L-080's fingerprint hashes that list. The duplication is deliberate and
-  is the transport's to collapse, not a hand edit's.
-- **Not a blocker for Artifact 2.** The artifact's thirty measured
-  numbers are the ring and belt values, which live in the orrery and are
-  in the audit already. These five are drawing inputs that arrived with
-  their sources attached on the day they were written, which is the
-  strongest position a value ever occupies -- the risk is drift later,
-  not error now.
-- **Two candidate shapes, neither designed:** teach the worksheet
-  checker to read `objects_config.json` as a second corpus, or make the
-  transport (segment 2) verify each `orrery_constant` pointer resolves
-  and matches. The second is better if it lands, because it fixes the
-  producer.
-- **Note:** RICE 3/3/85/2 -> 3.8 is Claude's proposed score.
-  **Tony-action (decide):** confirm or redirect, then re-run
-  `ledger_index.py`.
-- **Ref:** gallery `data/objects_config.json`;
-  `provenance_scanner.py`; `worksheet_keys.py`; L-155 (pinning);
-  L-181 (single home for feature constants); L-154; master plan
-  Section 7 decisions 12 and 18.
 
 #### [L-234] Reopen Artifact 1: recreate the orrery's Sun in the assembler
 <!-- L:234 status:OPEN upd:2026-08-25 section:A flag: rice:4/5/90/3 -->
@@ -5182,6 +5168,12 @@ Names Its Items [QUALITY], resident protocol Part 3.
   any of it is built.
 - **Note:** RICE 5/4/90/2 -> 9.0 proposed, not confirmed. Reach is
   high because it covers every URL in both repos, not only the 22.
+- **From L-232, closed 2026-09-16:** the gallery's
+  `data/objects_config.json` carries a `source` string beside each
+  measured value. Store drift checks the VALUE against the orrery by
+  pointer; nothing checks the source text, and a URL there is in the
+  same position as the roughly 470 in the orrery's Python. Whatever
+  shape this item takes should read that file as a second corpus.
 - **Ref:** L-265 (what makes it urgent); L-236 (the gallery runner and
   its three-state convention); L-235 (checks that cannot fail,
   gallery side); provenance-discipline 2.8, The Access Standard --
@@ -8095,131 +8087,6 @@ skills/provenance-discipline/SKILL.md (the Status Line, One Value One
 Home), skills/gallery-cache-builder/SKILL.md,
 skills/gallery-assembler/SKILL.md, skills/interactive-exhibit/SKILL.md.
 
-#### [L-278] A relayout from inside a Plotly event handler re-enters the update machinery
-<!-- L:278 status:OPEN upd:2026-09-02 section:A flag: rice:3/3/90/1 -->
-- **The failure.** Clicking a cross marker in the Sun exhibit froze the
-  page: no rotation, no hover, the modebar reset dead, recoverable only
-  by reload. One error, `RangeError: Maximum call stack size exceeded`,
-  thrown from inside plotly-2.35.2.
-- **The code was correct. The CONTEXT was the bug.** The same
-  `Plotly.relayout` completed cleanly three separate ways -- called from
-  the console with a tooltip up, with the tooltip dismissed, and on a
-  five-second timer while the pointer rested on a marker. In every one
-  the axes took their new tick spacing and the page kept working. It was
-  fatal only when reached from inside `plotly_click`, because Plotly had
-  not finished dispatching the click when `layoutReplot` was sent back
-  into it.
-- **The tell was the stack DEPTH, and it was missed twice.** The recorded
-  stack is about twenty-five frames. A stack overflow on a SHALLOW stack
-  is not runaway recursion -- it is a large array applied as function
-  arguments, which is what a half-finished replot re-entering itself
-  produces. Two hypotheses were pursued and discarded before that was
-  read correctly.
-- **The fix is one tick.** `setTimeout(fn, 0)` around the focus call lets
-  the dispatch return first. Confirmed live from the console, by
-  replacing the handler in the running page, BEFORE any patch was
-  written.
-- **Scope: anything that mutates a plot from a Plotly event.**
-  `plotly_click`, `plotly_hover`, `plotly_selected`, `plotly_relayout`.
-  The gallery has one such handler today; the orrery's Plotly code and
-  any future exhibit can grow more.
-**Note:** two hypotheses died on the way and both are worth keeping.
-Hover hit-testing was blamed first, on the strength of a real 2026-08-30
-finding and the fact that its `Plotly.Fx.unhover` fix never travelled
-from the mockup to `interactive.html` -- but dismissing the tooltip was
-tested directly and changed nothing. Trace size was blamed second, on the
-65,000-argument limit -- but the largest trace in the scene is 4,332
-points and the one that hung is 400. Neither was a bad guess; both were
-testable, and testing is what killed them.
-- Tony-action: DONE 2026-09-02. Written into `gallery-assembler` 1.2 as
-  a field note, not `gallery-pipeline` as first proposed -- L-279 put the
-  diagnostic discipline in the same skill, and splitting the technical
-  finding from the discipline that found it across two skills is the
-  parallel-pipeline anti-pattern in miniature.
-**Ref:** gallery `6fd6baaf` `interactive.html` the `plotly_click`
-handler; `patch_L267_3_defer_click_focus.py`;
-`TEST_PROTOCOL_sun_hang_20260902.md`; L-267; L-262.
-
-#### [L-277] The L-192 site store anchors by line number, so any insertion breaks two checkers
-<!-- L:277 status:OPEN upd:2026-09-03 section:A flag: rice:3/3/90/2 -->
-- **Tony's ruling, 2026-09-03: (b), and move the stores.** "I agree
-  with (b). What I am surprised by is that I was not aware of this
-  important file lost among hundreds of archived files. This file
-  should at least be located in the root not in documentation/ and it
-  should be tracked by the document tracker." Widened on Claude's
-  recommendation to all three live L-192 stores, since the sites and
-  the two pin files work as one set.
-- **Found while building it: the store was ALREADY stale and the
-  round trip could not see it.** All 23 `constants_new.py` rows
-  pointed at lines that no longer held the named constant, left over
-  from the August constants migration. `key_for_site` falls back to
-  the label when no enclosing is found at a stale line, and for a
-  constant the label IS the key, so the test stayed green. Three rows
-  sat inside OTHER constants' statements and minted wrong keys --
-  `constants_new.py::KM_PER_AU::EARTH_POLAR_RADIUS_KM`,
-  `::EARTH_EQUATORIAL_RADIUS_KM::SPEED_OF_LIGHT_KM_S`,
-  `::OUTER_CORONA_RADII::BENNU_RADIUS_KM` -- and nothing reported it,
-  because the round trip checked that minted keys RESOLVE and never
-  compared them to the pinned set. A Check That Cannot Fail, in the
-  test built to be the check.
-- **`patch_L277_reanchor_site_stores.py` (2026-09-03):** the site
-  store rows become `module TAB enclosing TAB label`;
-  `parse_sites_doc` refuses a numeric second column; `locate_site()`
-  turns a name back into a line (SITE_LOST / SITE_AMBIGUOUS, never
-  silent); the round trip re-mints from that line and compares the
-  minted set to the pins BY NAME; `measure()` in the extractor test
-  finds each string site by name through the checker's own anchor
-  map. The 52 new rows were derived from the pins and verified to
-  mint exactly the 52 live pins. All three stores moved to the repo
-  root with `Doc-Kind: hand` tags. Tested on a throwaway clone: both
-  tests green, doc_index lists the three.
-- **Tony-action (do):** run the patch, then the maintenance run.
-  Expect README.md's key-documents table to gain three rows.
-- **What happened 2026-09-02.** `patch_L254_2` inserted 31 lines into
-  venus_visualization_shells.py and 31 into mars_visualization_shells.py
-  -- comments and docstrings only, nothing executable. The maintenance
-  run then failed two checkers: Worksheet key round trip (1 unresolved)
-  and Extractor pins (10 PIN UNMATCHED). Same cause, one store.
-- **The mechanism.** documentation/worksheets/L192_annotated_sites.txt
-  holds `module TAB line TAB label` rows, generated once from
-  WORKSHEET_CHECK.md at 305b269 and hand-maintained since. Nothing
-  regenerates it. `key_for_site()` reads the line, asks
-  `enclosing_name()` which def contains it, and mints
-  `module::enclosing::label`. Move the lines and the enclosing scope
-  changes: venus line 62 was a `description` inside
-  `create_venus_core_shell` and now lands in a comment block, where no
-  function encloses it, so the key degrades to
-  `venus_visualization_shells.py::description` and resolves to nothing.
-- **The checkers were right and the repin would have been wrong.** The
-  Extractor pins failure printed a REPIN block that silently omits all
-  ten venus and mars rows -- accepting it would have retired ten live
-  pins to clear a red light. Fixed by correcting the ten line numbers
-  instead; all ten then mint exactly the keys the pin file already holds.
-- **THE FORWARD COST IS THE ITEM.** L-254 has 55 dead builders left
-  across eris, jupiter, moon, neptune, planet9, pluto, saturn, solar and
-  uranus. Every one of those nine modules that also holds an L-192 site
-  will break these two checkers the same way. Four of the nine do:
-  eris, mercury-adjacent moon, pluto and solar all appear in the pin
-  file. So the annotation sweep and this store are coupled, and the
-  coupling is currently discovered at run time by a red light.
-**Note:** two shapes to weigh, and this is a design call rather than a
-method one. (a) Every L-254 slice updates the site store in the same
-patch -- cheap, but it is a rule a session has to remember. (b) The
-store stops anchoring by line and anchors by enclosing name plus label,
-which is what the key already is -- more work once, nothing to remember
-after. Claude's read is (b), because (a) is a convention that fails
-silently the first time somebody forgets, and the whole point of this
-store is to not fail silently.
-- Tony-action (decide): (a) update the store per slice, or (b) reanchor
-  the store to names.
-**Gap:** the patch has run and the maintenance run is green with the
-three stores in README.md's table. Close then. Decided and built
-2026-09-03; the 2026-09-02 breakage was already repaired by hand.
-**Ref:** worksheet_keys.py `key_for_site` / `enclosing_name` /
-`locate_site` / `parse_sites_doc`; L192_annotated_sites.txt,
-L192_extractor_pins.txt, L192_key_pins.txt (repo root since
-2026-09-03); doc_index.py; L-192; L-254; L-273.
-
 #### [L-275] The dashboard cannot launch a Node tool, so three gallery smoke suites have no button
 <!-- L:275 status:OPEN upd:2026-09-01 section:A flag: rice:2/2/95/2 -->
 - **Found 2026-09-01, answering Tony's question about missing indented
@@ -8374,74 +8241,22 @@ L192_extractor_pins.txt, L192_key_pins.txt (repo root since
 - **Claude:** RICE 3/3/85/3 -> 2.6 proposed, not confirmed. Confidence
   85 rather than 95 because the generator-side tag emission is designed
   but not built; Effort 3 for the multi-file scope above.
+- **Orrery half built 2026-09-16** by `patch_L332_1_...` : `module_atlas.py`
+  (both outputs), `provenance_scanner.py`, `data_inventory.py` and
+  `worksheet_checker.py` each write `<!-- Doc-Kind: generated | ... -->`
+  as the first line of the file they produce. Run on a throwaway copy
+  at `d99d8db1` + the patch: all five outputs open with the tag, and
+  `doc_index.py` reports "generated 5" with no untagged row where
+  README.md's table had shown five. The maintenance run carries
+  `doc_index.py` as a generator, so the table follows the next run.
+- **Gap:** the GALLERY half. The gallery has a README and its own
+  runner and no `doc_index.py`; its atlas copy would need the same tag
+  emission. Not scheduled; opens when the gallery README is next
+  edited.
 - **Ref:** L-270 (the Gap that raised it); `skills_index.py` and
   `ledger_index.py` as the two working precedents; A Report Names Its
   Items, resident protocol Part 3 -- the indexer's summary names what
   moved rather than printing a count.
-
-#### [L-271] Patch scripts wrote backups nothing ever removed
-<!-- L:271 status:OPEN upd:2026-08-31 section:A flag: rice:4/3/95/1 -->
-- **Tony's question, 2026-08-31, and it is the whole of the finding:**
-  "why do we create them at all?" Asked after
-  `patch_L271_1_gallery_bak_cleanup.py` deleted eight tracked backups
-  from the gallery repo and two more appeared within the hour, written
-  by the next two patches.
-- **There is no cleanup function, and Tony believed there was.** He
-  thought `maintenance_run.py` removed them. Checked at `ccd1ac96`: the
-  word "bak" does not appear in that file, and the repo has no cleanup
-  script. What he was remembering is the ONE-TIME sweep of 2026-08-29,
-  when nine tracked backups were deleted and the `*.bak` rule added.
-  That is how a habit gets mistaken for a mechanism.
-- **They are redundant BY CONSTRUCTION, which is what makes this a rule
-  rather than a preference.** A patch guards on a content fingerprint
-  and refuses when the working copy does not match, so at the moment it
-  writes, the file on disk is the committed version. Git holds it;
-  Discard Changes restores it. The `.bak` can never be the only copy.
-  The one case where it would earn its place, uncommitted work, is
-  exactly the case the gate refuses to run in.
-- **A stale copy is an ACTIVE HAZARD, not clutter.** The reason is
-  already written in the orrery's own `.gitignore` from the August 29
-  sweep: a session grepping for a value can hit one and read it as
-  current. Two of the nine were a superseded master plan and a
-  superseded skill.
-- **CORRECTION, Tony's, 2026-08-31: the rate is days, not weeks.** The
-  handoff of that evening said the eight gallery backups were "what that
-  looks like after a few weeks." Measured: all eight were created
-  between 2026-08-29 and 2026-08-31. Corrected here rather than restated
-  quietly, because the wrong number made the problem look slower than it
-  is.
-- **Why they seem to come and go.** `*.bak` matches a name ENDING in
-  `.bak`, so a plain `interactive.html.bak` is invisible in GitHub
-  Desktop and sits on disk unseen. `.bak1`, `.bak2` and `.bak_L271` are
-  NOT matched, so those surface and get committed. That is exactly the
-  split in the evidence: the orrery kept
-  `data/close_approach_cache.json.bak1` and `.bak2` through the sweep
-  that removed everything else, and the gallery -- whose rule was
-  `*.json.bak` only -- kept all eight.
-- **Fixed in protocol v3.51 / safe-file-editing 1.10.** Patch scripts
-  stop writing `.bak` and print the Discard Changes path. The orrery's
-  ignore rule was widened to all three shapes in the same commit; the
-  gallery's was widened by `patch_L271_1` on 2026-08-31.
-- **The two close-approach cache backups are a different thing and were
-  still deleted.** `close_approach_data.py` keeps a deliberate
-  two-generation rotation, bounded at two and rebuilt by the program
-  that owns it. That is not litter. Being TRACKED is the defect: every
-  fetch committed three files where one would do, and git already holds
-  the previous cache. The rotation is untouched and rebuilds them on
-  disk at the next fetch.
-- **Gap: the spent patch scripts in `documentation/` are not
-  rewritten.** They wrote `.bak` because the rule then said to. Editing
-  a record to match a rule written after it is what Stamp What You
-  Change forbids.
-- **Gap: the gallery repo has no ledger.** L-271's first patch ran there
-  and this block is in the orrery, which is where the ledger lives. The
-  cross-repo record is this line.
-- **Claude:** RICE 4/3/95/1 -> 11.4 proposed, not confirmed. Effort 1
-  because the rule and both ignore rules are written; what remains is
-  habit, and the skill enforces that.
-- **Ref:** L-236 (the runner that first surfaced backup churn); L-269
-  (The Correction Does Not Travel, the same shape one layer over);
-  Stamp What You Change and Git Is the Backup, safe-file-editing 1.10.
 
 ## PENDING ACTION (Tony-side)
 
@@ -14724,6 +14539,386 @@ Braid, `skills/provenance-discipline/SKILL.md`.
 `documentation/HANDOFF_shell_consolidation_stage_3_v15.md` and
 `documentation/border_refinement_test_protocol.md` (orrery),
 skills/orrery-coding-conventions/SKILL.md.
+
+#### [L-226] safe-file-editing 1.8 -- encoding gate covers prose; corrections do not travel
+<!-- L:226 status:DONE upd:2026-09-16 section:C flag: rice:3/3/90/1 -->
+- **Two rulings by Tony on 2026-08-23, both from the v19 master plan
+  session.** Recorded here because a skill revision is a ledger entry.
+- **1. The Encoding Gate now says PROSE.** It read "ASCII only in
+  delivered code." `patch_L221_2` found 22 PRIME and one DOUBLE PRIME
+  in the master plan, reported them, and declined to sweep them on the
+  grounds that the gate was scoped to code. All three Fix In Passing
+  conditions held. Tony: a patch already holding a file open fixes
+  incidental non-ASCII. The sharper point is that Stamp What You
+  Change ALREADY said markdown is not an exception -- so the skill's
+  two halves disagreed and the reader followed the narrower one.
+  Swept in `patch_L221_3`; both master plan documents are now pure
+  ASCII.
+- **2. New section: The Correction Does Not Travel.** Scoped one level
+  out from Stamp What You Change -- that governs the file the patch is
+  editing, this governs the other files quoting what it changed.
+  Founding case: `constants_new.py` read 15 R_sun from 2026-08-22
+  (L-209, DeForest corrected at source);
+  `MASTER_PLAN_CRITICAL_PATH_SUMMARY.md` still said 17 the next day,
+  inside the paragraph written to correct an EARLIER wrong claim about
+  the same row. The same file named `STREAMER_BELT_RADII` after L-224
+  renamed it, and called L-214 unbuilt two days after it closed.
+  Three instances, one file, one cause: the provenance machinery
+  watches the code and nothing watched the documents describing it.
+- **Note:** RICE 3/3/90/1 -> 8.1 is Claude's proposed score. Reach 3
+  (every future patch), Impact 3 (a wrong document outlives a wrong
+  constant because nothing surfaces it), Confidence 90 (the rulings
+  are Tony's and the founding cases are measured), Effort 1 (the
+  skill edit is written). **Tony-action (decide):** confirm or
+  redirect, then re-run `ledger_index.py`.
+- **Tony-action (do):** run `skills_index.py`, then reinstall
+  safe-file-editing at Settings > Skills, then commit SKILL.md, this
+  ledger and PROJECT_INSTRUCTIONS.md in ONE commit. A version bump is
+  not done until the manifest agrees.
+- **Gap:** the reinstall cannot be verified from inside the session
+  that makes it. The NEXT session confirms its loaded copy reads 1.8
+  before doing file-editing work. This session loaded 1.7, correctly
+  at the time.
+- **CLOSED 2026-09-16.** The Gap was the next session confirming its
+  loaded copy reads 1.8. The skill has since gone to 1.9, 1.10 and 1.11
+  (L-315), each confirmed by the sessions that followed, and the
+  2026-09-16 session loaded 1.11 and matched the manifest. Both
+  rulings are in the skill's Encoding Gate and The Correction Does Not
+  Travel sections. Nothing recorded here as not done remains; the
+  entry sat open for three weeks because no session closed a bump
+  item after confirming the load. [verified @ `d99d8db1`]
+- **Ref:** `skills/safe-file-editing/SKILL.md` v1.8;
+  `documentation/HANDOFF_20260823_braid_and_v19.md`; L-209 (the
+  DeForest figure); L-214, L-224 (the other two stale claims);
+  L-220 (Stamp What You Change); L-223 (A Paste Is An Unverified
+  Transfer).
+
+#### [L-232] The gallery's served constants carry sources that nothing checks
+<!-- L:232 status:DONE upd:2026-09-16 section:C flag: rice:3/3/85/2 -->
+- **Opened 2026-08-24, as a consequence of Tony's option-(a) ruling.**
+  Two render inputs the served cache lacked were added to the gallery's
+  `data/objects_config.json`: the IAU pole for Jupiter and Saturn, and
+  `planet_radius` for Earth and Jupiter. Both are MEASURED values, both
+  carry a `source` field and an `orrery_constant` field naming where they
+  were copied from.
+- **They are the FIRST `source` fields in that file**, and they sit in a
+  store no checker reads. `provenance_scanner.py` scans Python. The
+  worksheet checker scans Python. Nothing reads JSON in the gallery repo.
+  So a source line there is a claim with no gate behind it -- exactly the
+  shape the resident gate warns about, one repo over.
+- **The value was still worth adding.** The alternative on the table was
+  a JavaScript table, which is a store the transport does not target
+  either AND is invisible to the pinning design. Putting the copy where
+  segment 2 will land is the version that converges.
+- **Earth's radius now appears TWICE in that file**, once in
+  `atmosphere_shell` and once in `van_allen_belts`, because a shared
+  sibling would have meant a third top-level feature key on Earth and
+  L-080's fingerprint hashes that list. The duplication is deliberate and
+  is the transport's to collapse, not a hand edit's.
+- **Not a blocker for Artifact 2.** The artifact's thirty measured
+  numbers are the ring and belt values, which live in the orrery and are
+  in the audit already. These five are drawing inputs that arrived with
+  their sources attached on the day they were written, which is the
+  strongest position a value ever occupies -- the risk is drift later,
+  not error now.
+- **Two candidate shapes, neither designed:** teach the worksheet
+  checker to read `objects_config.json` as a second corpus, or make the
+  transport (segment 2) verify each `orrery_constant` pointer resolves
+  and matches. The second is better if it lands, because it fixes the
+  producer.
+- **Note:** RICE 3/3/85/2 -> 3.8 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect, then re-run
+  `ledger_index.py`.
+- **CLOSED 2026-09-16, built under another handle.** The second
+  candidate shape above -- make the transport verify each
+  `orrery_constant` pointer resolves and matches -- is
+  `gallery_maintenance_run.py`'s Store drift check: it fetches
+  `constants_new.py` at orrery HEAD, follows every pointer in
+  `objects_config.json` by name, and reports MATCH, DRIFT or NOT IN
+  STORE per pointer (built as L-236 on 2026-08-25, widened by L-291 for
+  Earth radii and by L-305 for the magnetosphere's scalars). The
+  sentence "nothing reads JSON in the gallery repo" has been false
+  since then. The `source` STRING beside each value -- the citation
+  itself -- is still checked by nothing; that residue is re-homed to
+  L-266, whose link check is the shape that would reach it. The
+  duplicated Earth radius is L-322's (the join moves to the assembler).
+  [verified @ gallery `b375cfe1`, `check_store_drift`]
+- **Ref:** gallery `data/objects_config.json`;
+  `provenance_scanner.py`; `worksheet_keys.py`; L-155 (pinning);
+  L-181 (single home for feature constants); L-154; master plan
+  Section 7 decisions 12 and 18.
+
+#### [L-271] Patch scripts wrote backups nothing ever removed
+<!-- L:271 status:DONE upd:2026-09-16 section:C flag: rice:4/3/95/1 -->
+- **Tony's question, 2026-08-31, and it is the whole of the finding:**
+  "why do we create them at all?" Asked after
+  `patch_L271_1_gallery_bak_cleanup.py` deleted eight tracked backups
+  from the gallery repo and two more appeared within the hour, written
+  by the next two patches.
+- **There is no cleanup function, and Tony believed there was.** He
+  thought `maintenance_run.py` removed them. Checked at `ccd1ac96`: the
+  word "bak" does not appear in that file, and the repo has no cleanup
+  script. What he was remembering is the ONE-TIME sweep of 2026-08-29,
+  when nine tracked backups were deleted and the `*.bak` rule added.
+  That is how a habit gets mistaken for a mechanism.
+- **They are redundant BY CONSTRUCTION, which is what makes this a rule
+  rather than a preference.** A patch guards on a content fingerprint
+  and refuses when the working copy does not match, so at the moment it
+  writes, the file on disk is the committed version. Git holds it;
+  Discard Changes restores it. The `.bak` can never be the only copy.
+  The one case where it would earn its place, uncommitted work, is
+  exactly the case the gate refuses to run in.
+- **A stale copy is an ACTIVE HAZARD, not clutter.** The reason is
+  already written in the orrery's own `.gitignore` from the August 29
+  sweep: a session grepping for a value can hit one and read it as
+  current. Two of the nine were a superseded master plan and a
+  superseded skill.
+- **CORRECTION, Tony's, 2026-08-31: the rate is days, not weeks.** The
+  handoff of that evening said the eight gallery backups were "what that
+  looks like after a few weeks." Measured: all eight were created
+  between 2026-08-29 and 2026-08-31. Corrected here rather than restated
+  quietly, because the wrong number made the problem look slower than it
+  is.
+- **Why they seem to come and go.** `*.bak` matches a name ENDING in
+  `.bak`, so a plain `interactive.html.bak` is invisible in GitHub
+  Desktop and sits on disk unseen. `.bak1`, `.bak2` and `.bak_L271` are
+  NOT matched, so those surface and get committed. That is exactly the
+  split in the evidence: the orrery kept
+  `data/close_approach_cache.json.bak1` and `.bak2` through the sweep
+  that removed everything else, and the gallery -- whose rule was
+  `*.json.bak` only -- kept all eight.
+- **Fixed in protocol v3.51 / safe-file-editing 1.10.** Patch scripts
+  stop writing `.bak` and print the Discard Changes path. The orrery's
+  ignore rule was widened to all three shapes in the same commit; the
+  gallery's was widened by `patch_L271_1` on 2026-08-31.
+- **The two close-approach cache backups are a different thing and were
+  still deleted.** `close_approach_data.py` keeps a deliberate
+  two-generation rotation, bounded at two and rebuilt by the program
+  that owns it. That is not litter. Being TRACKED is the defect: every
+  fetch committed three files where one would do, and git already holds
+  the previous cache. The rotation is untouched and rebuilds them on
+  disk at the next fetch.
+- **Gap: the spent patch scripts in `documentation/` are not
+  rewritten.** They wrote `.bak` because the rule then said to. Editing
+  a record to match a rule written after it is what Stamp What You
+  Change forbids.
+- **Gap: the gallery repo has no ledger.** L-271's first patch ran there
+  and this block is in the orrery, which is where the ledger lives. The
+  cross-repo record is this line.
+- **Claude:** RICE 4/3/95/1 -> 11.4 proposed, not confirmed. Effort 1
+  because the rule and both ignore rules are written; what remains is
+  habit, and the skill enforces that.
+- **CLOSED 2026-09-16.** Everything with a build behind it is built and
+  checked at HEAD: Git Is the Backup in safe-file-editing 1.10; both
+  ignore rules carry the three shapes (`*.bak`, `*.bak[0-9]`,
+  `*.bak_*`) -- orrery `.gitignore` lines 36-38, gallery lines 10-12;
+  no tracked `*.bak*` file in either tree. The two Gaps above are
+  struck, each for the reason it states: the spent scripts are records
+  and are not rewritten; the gallery has no ledger and this block is
+  the cross-repo record. Neither is work for anyone.
+  [verified @ orrery `d99d8db1`, gallery `b375cfe1`]
+- **Ref:** L-236 (the runner that first surfaced backup churn); L-269
+  (The Correction Does Not Travel, the same shape one layer over);
+  Stamp What You Change and Git Is the Backup, safe-file-editing 1.10.
+
+#### [L-277] The L-192 site store anchors by line number, so any insertion breaks two checkers
+<!-- L:277 status:DONE upd:2026-09-16 section:C flag: rice:3/3/90/2 -->
+- **Tony's ruling, 2026-09-03: (b), and move the stores.** "I agree
+  with (b). What I am surprised by is that I was not aware of this
+  important file lost among hundreds of archived files. This file
+  should at least be located in the root not in documentation/ and it
+  should be tracked by the document tracker." Widened on Claude's
+  recommendation to all three live L-192 stores, since the sites and
+  the two pin files work as one set.
+- **Found while building it: the store was ALREADY stale and the
+  round trip could not see it.** All 23 `constants_new.py` rows
+  pointed at lines that no longer held the named constant, left over
+  from the August constants migration. `key_for_site` falls back to
+  the label when no enclosing is found at a stale line, and for a
+  constant the label IS the key, so the test stayed green. Three rows
+  sat inside OTHER constants' statements and minted wrong keys --
+  `constants_new.py::KM_PER_AU::EARTH_POLAR_RADIUS_KM`,
+  `::EARTH_EQUATORIAL_RADIUS_KM::SPEED_OF_LIGHT_KM_S`,
+  `::OUTER_CORONA_RADII::BENNU_RADIUS_KM` -- and nothing reported it,
+  because the round trip checked that minted keys RESOLVE and never
+  compared them to the pinned set. A Check That Cannot Fail, in the
+  test built to be the check.
+- **`patch_L277_reanchor_site_stores.py` (2026-09-03):** the site
+  store rows become `module TAB enclosing TAB label`;
+  `parse_sites_doc` refuses a numeric second column; `locate_site()`
+  turns a name back into a line (SITE_LOST / SITE_AMBIGUOUS, never
+  silent); the round trip re-mints from that line and compares the
+  minted set to the pins BY NAME; `measure()` in the extractor test
+  finds each string site by name through the checker's own anchor
+  map. The 52 new rows were derived from the pins and verified to
+  mint exactly the 52 live pins. All three stores moved to the repo
+  root with `Doc-Kind: hand` tags. Tested on a throwaway clone: both
+  tests green, doc_index lists the three.
+- **Tony-action (do):** run the patch, then the maintenance run.
+  Expect README.md's key-documents table to gain three rows.
+- **What happened 2026-09-02.** `patch_L254_2` inserted 31 lines into
+  venus_visualization_shells.py and 31 into mars_visualization_shells.py
+  -- comments and docstrings only, nothing executable. The maintenance
+  run then failed two checkers: Worksheet key round trip (1 unresolved)
+  and Extractor pins (10 PIN UNMATCHED). Same cause, one store.
+- **The mechanism.** documentation/worksheets/L192_annotated_sites.txt
+  holds `module TAB line TAB label` rows, generated once from
+  WORKSHEET_CHECK.md at 305b269 and hand-maintained since. Nothing
+  regenerates it. `key_for_site()` reads the line, asks
+  `enclosing_name()` which def contains it, and mints
+  `module::enclosing::label`. Move the lines and the enclosing scope
+  changes: venus line 62 was a `description` inside
+  `create_venus_core_shell` and now lands in a comment block, where no
+  function encloses it, so the key degrades to
+  `venus_visualization_shells.py::description` and resolves to nothing.
+- **The checkers were right and the repin would have been wrong.** The
+  Extractor pins failure printed a REPIN block that silently omits all
+  ten venus and mars rows -- accepting it would have retired ten live
+  pins to clear a red light. Fixed by correcting the ten line numbers
+  instead; all ten then mint exactly the keys the pin file already holds.
+- **THE FORWARD COST IS THE ITEM.** L-254 has 55 dead builders left
+  across eris, jupiter, moon, neptune, planet9, pluto, saturn, solar and
+  uranus. Every one of those nine modules that also holds an L-192 site
+  will break these two checkers the same way. Four of the nine do:
+  eris, mercury-adjacent moon, pluto and solar all appear in the pin
+  file. So the annotation sweep and this store are coupled, and the
+  coupling is currently discovered at run time by a red light.
+**Note:** two shapes to weigh, and this is a design call rather than a
+method one. (a) Every L-254 slice updates the site store in the same
+patch -- cheap, but it is a rule a session has to remember. (b) The
+store stops anchoring by line and anchors by enclosing name plus label,
+which is what the key already is -- more work once, nothing to remember
+after. Claude's read is (b), because (a) is a convention that fails
+silently the first time somebody forgets, and the whole point of this
+store is to not fail silently.
+- Tony-action (decide): (a) update the store per slice, or (b) reanchor
+  the store to names.
+**Gap:** the patch has run and the maintenance run is green with the
+three stores in README.md's table. Close then. Decided and built
+2026-09-03; the 2026-09-02 breakage was already repaired by hand.
+- **CLOSED 2026-09-16, on the Gap's own three conditions.** The patch
+  ran (`documentation/patch_L277_reanchor_site_stores.py`, archived);
+  README.md's document table carries the three stores at rows 183-185;
+  and both checkers are green at `d99d8db1`, run directly:
+  `test_worksheet_keys.py` -- 52 sites minted 52 distinct keys, all
+  resolved, 52 pinned keys resolve, 1 retired confirmed gone;
+  `test_extractor_pins.py` -- 29 string sites carry the pinned 73 claims
+  and 14 instruction drops. The forward cost named above -- L-254's
+  slices breaking the store -- is dissolved by (b): the store anchors
+  by name now, so a docstring insertion moves nothing.
+  [verified @ `d99d8db1`]
+**Ref:** worksheet_keys.py `key_for_site` / `enclosing_name` /
+`locate_site` / `parse_sites_doc`; L192_annotated_sites.txt,
+L192_extractor_pins.txt, L192_key_pins.txt (repo root since
+2026-09-03); doc_index.py; L-192; L-254; L-273.
+
+#### [L-278] A relayout from inside a Plotly event handler re-enters the update machinery
+<!-- L:278 status:DONE upd:2026-09-16 section:C flag: rice:3/3/90/1 -->
+- **The failure.** Clicking a cross marker in the Sun exhibit froze the
+  page: no rotation, no hover, the modebar reset dead, recoverable only
+  by reload. One error, `RangeError: Maximum call stack size exceeded`,
+  thrown from inside plotly-2.35.2.
+- **The code was correct. The CONTEXT was the bug.** The same
+  `Plotly.relayout` completed cleanly three separate ways -- called from
+  the console with a tooltip up, with the tooltip dismissed, and on a
+  five-second timer while the pointer rested on a marker. In every one
+  the axes took their new tick spacing and the page kept working. It was
+  fatal only when reached from inside `plotly_click`, because Plotly had
+  not finished dispatching the click when `layoutReplot` was sent back
+  into it.
+- **The tell was the stack DEPTH, and it was missed twice.** The recorded
+  stack is about twenty-five frames. A stack overflow on a SHALLOW stack
+  is not runaway recursion -- it is a large array applied as function
+  arguments, which is what a half-finished replot re-entering itself
+  produces. Two hypotheses were pursued and discarded before that was
+  read correctly.
+- **The fix is one tick.** `setTimeout(fn, 0)` around the focus call lets
+  the dispatch return first. Confirmed live from the console, by
+  replacing the handler in the running page, BEFORE any patch was
+  written.
+- **Scope: anything that mutates a plot from a Plotly event.**
+  `plotly_click`, `plotly_hover`, `plotly_selected`, `plotly_relayout`.
+  The gallery has one such handler today; the orrery's Plotly code and
+  any future exhibit can grow more.
+**Note:** two hypotheses died on the way and both are worth keeping.
+Hover hit-testing was blamed first, on the strength of a real 2026-08-30
+finding and the fact that its `Plotly.Fx.unhover` fix never travelled
+from the mockup to `interactive.html` -- but dismissing the tooltip was
+tested directly and changed nothing. Trace size was blamed second, on the
+65,000-argument limit -- but the largest trace in the scene is 4,332
+points and the one that hung is 400. Neither was a bad guess; both were
+testable, and testing is what killed them.
+- Tony-action: DONE 2026-09-02. Written into `gallery-assembler` 1.2 as
+  a field note, not `gallery-pipeline` as first proposed -- L-279 put the
+  diagnostic discipline in the same skill, and splitting the technical
+  finding from the discipline that found it across two skills is the
+  parallel-pipeline anti-pattern in miniature.
+- **CLOSED 2026-09-16.** The fix shipped 2026-09-02 and the lesson is
+  in `skills/gallery-assembler/SKILL.md` as a field note (its own
+  Tony-action line above says so, marked DONE the same day); the
+  interactive-exhibit skill carries it as a [CRITICAL] rule and points
+  here. The item had no Gap and no remaining work; it was open because
+  nobody closed it. [verified @ `d99d8db1`, skill 1.3 lines 203-214]
+**Ref:** gallery `6fd6baaf` `interactive.html` the `plotly_click`
+handler; `patch_L267_3_defer_click_focus.py`;
+`TEST_PROTOCOL_sun_hang_20260902.md`; L-267; L-262.
+
+#### [L-332] interactive-exhibit skill 1.3: carry the phone chrome of 2026-09-15/16 (skills)
+<!-- L:332 status:DONE upd:2026-09-16 section:C flag: rice:2/2/90/1 -->
+- `skills/interactive-exhibit/SKILL.md` 1.2 (2026-09-11) describes the
+  rooms' chrome as L-316 round 2 and L-318 rounds 1 and 2 left it. Since
+  then [verified @ gallery `52e953a7`]:
+  - the arrow cross is placed by `crossApart(on)` and the CSS rule
+    `.nav-cross-apart`, called with `sunPhonePortrait()`, the phone test
+    the text box also uses. The corner is top right again (L-316 rounds
+    3 and 4); `crossRight` and `sunCrossRight` no longer exist;
+  - a drawer row has a selection target about 65 px wide, rows are at
+    least 44 px tall, and the name or GO on an unticked shell ticks it
+    (L-318 round 3, amending L-267's G2 in that case);
+  - line breaks inside a sentence are `GalleryFeatures.SOFT_BR`, and the
+    phone's text box rejoins them (L-318 round 4);
+  - on a portrait phone the text box has no arrow and sits mid-view; the
+    desktop keeps the arrowed scene label (L-318 round 5);
+  - on a portrait phone a tap can pick only markers that carry text,
+    within 22 px, through Plotly's internals -- a second Plotly rule for
+    the touch-path section (L-318 round 6);
+  - the hover budget suite takes `interactive.html` and has three more
+    legs;
+  - Tony's standing rule of 2026-09-16: no compressed language in hover
+    text (L-331). `orrery-coding-conventions` carries the orrery's hover
+    conventions and may need the same line.
+**Note:** RICE 2/2/90/1 -> 3.6 is Claude's proposed score. The
+pre-built-session rule says to bump a skill before the next build that
+relies on it; the next build touching the rooms' chrome is L-331.
+- **BUILT 2026-09-16** by `patch_L332_1_skills_protocol_generators_20260916.py`
+  in the orrery, taken before L-331's build (v3.55's ordering).
+  interactive-exhibit 1.2 -> 1.3: the drawer and nav-cluster rows of
+  the anatomy table rewritten to what the code does at gallery
+  `b375cfe1` (`crossApart` / `.nav-cross-apart`, `sunPhonePortrait`,
+  the 65 px / 44 px row targets, GO ticking an unticked shell, the
+  phone's arrowless box and its knobs); the touch-path section gains
+  the soft-break rule and the pick-pass rule; the Mode 5 sequence
+  names the drawer target, the phone's box and a marker tap; step 4
+  gains the hover budget suite with the note that it does not build
+  the Sun room; a new rule, Hover text is written for the visitor;
+  three field notes. orrery-coding-conventions 1.8 -> 1.9 (L-331's
+  rule as a section, Hover Text Is Written for the Visitor), because a
+  convention that is not in the skill a hover session loads does not
+  travel, and L-321 is that session. Protocol v3.60 names both and
+  why; v3.57 moved down to the history file; `skills_index.py`
+  reported the manifest stale on both rows and corrected it. The
+  L-316 "still to look at" desktop check is untouched by this.
+  [verified in the sandbox on a throwaway copy @ `d99d8db1` + this
+  patch: both SKILL.md files parse, the manifest reads 1.3 and 1.9,
+  three entries resident, the four-step rule met in one commit]
+- **CLOSED 2026-09-16.** The reinstall cannot be verified from inside
+  the session that made it; the handoff carries it.
+  **Tony-action (do):** reinstall interactive-exhibit and
+  orrery-coding-conventions at Settings > Skills. The next session
+  confirms its loaded copies read 1.3 and 1.9 before exhibit or hover
+  work.
+**Ref:** L-316, L-318, L-331, `skills/interactive-exhibit/SKILL.md`,
+`skills_index.py`, `PROJECT_INSTRUCTIONS.md`.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

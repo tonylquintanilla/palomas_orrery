@@ -6,9 +6,14 @@ fires_when: Markers, hover text, axes, shells, legendgroups, docstrings, new vis
 
 # Orrery Coding Conventions
 
-Skill version: 1.8 | Cut from palomas_orrery @ 1fa413d9 (v1.8),
-earlier @ 04bba3ca (v1.7), 3faa72a0 (v1.6),
-earlier @ 15741822 (v1.5), 86f529a (v1.4), 3398970 (v1.3) | 2026-09-11
+Skill version: 1.9 | Cut from palomas_orrery @ d99d8db1 (v1.9),
+earlier @ 1fa413d9 (v1.8), 04bba3ca (v1.7), 3faa72a0 (v1.6),
+earlier @ 15741822 (v1.5), 86f529a (v1.4), 3398970 (v1.3) | 2026-09-16
+v1.9 (L-331) adds Hover Text Is Written for the Visitor -- Tony's
+standing rule of 2026-09-16, "In general we should avoid compressed
+language in the hovertext." It was ruled over the gallery's hovers and
+reaches the orrery's own next (L-321); a convention that is not in the
+skill does not travel, and this is the skill a hover session loads.
 v1.8 (L-317) adds Two Standards for the Info Marker's Outline -- Tony's
 Mode 5 ruling of May 28 and 29, 2026, which had lived only in the code
 and in shell_configs.py comments -- and corrects the Single Info Marker
@@ -502,6 +507,48 @@ no checker reads rendered hover width, and the module compiles and
 the trace builds either way. Tony's ruling, on adding it here: this
 recurs from time to time rather than constantly, which is precisely
 the kind of thing a person forgets and a written convention does not.)
+
+## Hover Text Is Written for the Visitor [QUALITY]
+
+The two sections above govern a hover's BREAKS. This one governs its
+WORDS.
+
+**Tony's standing rule, 2026-09-16: "In general we should avoid
+compressed language in the hovertext."** It is the resident protocol's
+Register Rule -- which governs how Claude writes to Tony -- applied to
+the person reading the plot. A visitor has not been through the
+conversation that gave a project word its meaning, so to them it is a
+label pointing at nothing.
+
+Compression, in a hover, is any of these:
+- project vocabulary: "served", "sourced", "trusted arc", "drawing
+  choice", "illustrative", "osculating" without a gloss, "L shell"
+  without saying what it measures;
+- a capitalised label standing in for a sentence: "DECLARED --",
+  "A DRAWING LIMIT", "FROZEN", "STYLIZED";
+- a caveat that names its kind instead of saying what is true: "Not a
+  measurement." says less than "It is not a measured distance; the
+  ring is drawn here so the picture reads."
+
+**The rule changes the words, not the facts or the caveats.** Every
+number keeps its value, unit and AU; every caveat stays beside its
+number, in plain words. Show the Envelope of the Unknowable still
+applies -- silence about an approximation reads as precision -- so the
+plain sentence says that the thing is drawn, chosen or approximate, and
+why, in words a visitor can use.
+
+Two things follow. A hover is the glance; the citation, the equation
+and the served or sourced detail belong in the i panel (gallery) or the
+`_info` text (orrery), with a pointer under the hover -- the L-231 move.
+And a reworded hover is a visitor-facing change: it goes to Tony before
+it ships, with the old and the new side by side.
+
+(Origin, 2026-09-16, L-331. Tony, on the Sun room's Galactic Tide hover,
+which opened "DECLARED --" and closed "Not a measurement.": "declared
+not measured means little to a visitor." Counted in the gallery's hovers
+the same day: "served" in 14, "sourced", "drawing choice" and
+"illustrative" in 5 each, capitalised labels in 4. The orrery's hovers
+were not counted; they are where the rule reaches next.)
 
 ## Layer Chain Gap Handling [PRACTICE]
 

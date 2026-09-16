@@ -16,6 +16,8 @@ Role: devtool
 Domain: dev_tools
 
 Module updated: July 2026 with Anthropic's Claude Opus 4.6
+Module updated: September 16, 2026 with Anthropic's Claude Opus 5 (L-273: the output opens with a Doc-Kind: generated tag, read by
+doc_index.py; hand-editing the output is an error the tag now names).
 """
 
 import os, json, pickle, sys, argparse
@@ -194,6 +196,9 @@ def main():
 
     with open(OUT, "w", newline="\n") as out:
         # -- Orrery data (gitignored, local only) --
+        out.write("<!-- Doc-Kind: generated | The data inventory: the "
+                  "state of the local, gitignored data stores, rebuilt "
+                  "by data_inventory.py. Do not hand-edit. -->\n")
         out.write("# Data Inventory (local, gitignored -- CURRENT state)\n\n")
         out.write("Repo copies stale/absent; this reflects the live "
                   "local stores.\n\n")
