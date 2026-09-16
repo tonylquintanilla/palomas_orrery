@@ -11,26 +11,24 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 134  
-**Total Lines of Code (non-blank):** 107,149  
-**Total Public Functions/Classes:** 1,196
+**Total Python Files:** 133  
+**Total Lines of Code (non-blank):** 106,741  
+**Total Public Functions/Classes:** 1,197
 
 ## Classification Coverage
 
-**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L231_dashboard_hover_budget.py`
-- `patch_L332_1_skills_protocol_generators_20260916.py`
-- `patch_L332_2_ledger_20260916.py`
+- `patch_L322_1_figures_skill_protocol_20260916.py`
+- `patch_L322_2_ledger_20260916.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (3).** No valid `Domain:` tag.
+**Undetermined domain (2).** No valid `Domain:` tag.
 
-- `patch_L231_dashboard_hover_budget.py`
-- `patch_L332_1_skills_protocol_generators_20260916.py`
-- `patch_L332_2_ledger_20260916.py`
+- `patch_L322_1_figures_skill_protocol_20260916.py`
+- `patch_L322_2_ledger_20260916.py`
 
 
 ---
@@ -237,9 +235,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L231_dashboard_hover_budget.py` | Add the hover budget checker to the dashboard, indented under the runner. (90 lines) |
-| `patch_L332_1_skills_protocol_generators_20260916.py` | - ORRERY repo. (557 lines) |
-| `patch_L332_2_ledger_20260916.py` | - ORRERY repo, LEDGER_CONSOLIDATED.md only. (361 lines) |
+| `patch_L322_1_figures_skill_protocol_20260916.py` | - ORRERY repo. (419 lines) |
+| `patch_L322_2_ledger_20260916.py` | - ORRERY repo. Run AFTER patch_L322_1_figures_skill_protocol_20260916.py. (181 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

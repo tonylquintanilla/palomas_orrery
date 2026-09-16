@@ -74,7 +74,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 442.7 MB (505 files)
+**Total size:** 442.8 MB (508 files)
 
 **GitHub Pages headroom:** 581 MB remaining of 1024 MB ceiling (43.2% used)
 
@@ -82,14 +82,14 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 279 | 419.4 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-16 |
+| .json | 281 | 419.4 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-16 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 1 | 5.1 MB | palomas_orrery_logo.png (5.1 MB) | 2025-11-27 |
-| .py | 124 | 2.0 MB | gallery_studio.py (243.1 KB) | 2026-09-16 |
-| .md | 15 | 689.9 KB | TEST_PROTOCOL_sun_hang_20260902.md (526.5 KB) | 2026-09-16 |
-| .jsonl | 22 | 506.5 KB | encke.jsonl (23.5 KB) | 2026-09-16 |
-| .html | 5 | 325.3 KB | index.html (156.6 KB) | 2026-09-16 |
-| .js | 8 | 175.9 KB | feature_renderers.js (79.3 KB) | 2026-09-16 |
+| .py | 125 | 2.1 MB | gallery_studio.py (243.1 KB) | 2026-09-16 |
+| .md | 15 | 690.1 KB | TEST_PROTOCOL_sun_hang_20260902.md (526.5 KB) | 2026-09-16 |
+| .jsonl | 22 | 513.8 KB | encke.jsonl (23.9 KB) | 2026-09-16 |
+| .html | 5 | 326.2 KB | index.html (156.6 KB) | 2026-09-16 |
+| .js | 8 | 180.1 KB | feature_renderers.js (81.8 KB) | 2026-09-16 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |
 | .patch | 3 | 11.7 KB | phaseb_studio.patch (7.0 KB) | 2026-07-29 |
@@ -127,7 +127,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | repo | served size | ceiling | headroom | used |
 |---|---|---|---|---|
-| gallery | 442.7 MB | 1024 MB | 581 MB | 43.2% |
+| gallery | 442.8 MB | 1024 MB | 581 MB | 43.2% |
 | orrery (gitignored data) | 966.8 MB | n/a (not served) | -- | -- |
 
 Note: orrery data is local/gitignored. If orbit cache files are pushed to either repo for web serving, re-run this inventory to update headroom.

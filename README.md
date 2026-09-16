@@ -190,8 +190,8 @@ further down this file for the rest.
 | [DATA_INVENTORY.md](DATA_INVENTORY.md) | generated | The data inventory: the state of the local, gitignored data stores, rebuilt by data_inventory.py. Do not hand-edit. |
 | [MODULE_ATLAS.md](MODULE_ATLAS.md) | generated | The module atlas: every module's role, functions and dependencies, rebuilt by module_atlas.py from the docstrings. Do not hand-edit. |
 | [MODULE_INDEX.md](MODULE_INDEX.md) | generated | The human-browsable module index, rebuilt by module_atlas.py alongside the atlas. Do not hand-edit. |
-| [PROVENANCE_AUDIT.md](PROVENANCE_AUDIT.md) | **untagged** | _no Doc-Kind tag; add one to describe it here_ |
-| [WORKSHEET_CHECK.md](WORKSHEET_CHECK.md) | **untagged** | _no Doc-Kind tag; add one to describe it here_ |
+| [PROVENANCE_AUDIT.md](PROVENANCE_AUDIT.md) | generated | The provenance audit: every numeric claim scored against its citation, rebuilt by provenance_scanner.py on each run. Do not hand-edit. |
+| [WORKSHEET_CHECK.md](WORKSHEET_CHECK.md) | generated | The worksheet check: every annotated claim scored against its worksheet evidence, rebuilt by worksheet_checker.py. Do not hand-edit. |
 <!-- DOC-INDEX:END -->
 
 The deep-dive documents, which live in `documentation/`:

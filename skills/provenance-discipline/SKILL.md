@@ -6,12 +6,26 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 2.12 | Cut from palomas_orrery @ bfc0505e (v2.12),
-earlier @ 159c5a2c (v2.11), @ 071a0a65 (v2.10),
+Skill version: 2.13 | Cut from palomas_orrery @ ebdc55cc (v2.13),
+earlier @ bfc0505e (v2.12), @ 159c5a2c (v2.11), @ 071a0a65 (v2.10),
 earlier @ a263f73d (v2.9), @ 7f4a2f9f (v2.8), @ 3faa72a0 (v2.7),
 @ f603be3 (v2.6), @ 731066f (v2.5), @ 6b99ace (v2.2),
 @ 00219d9 (v2.1), @ eb77c83 (v2.0), @ cdcdb4b (v1.9)
-| September 14, 2026
+| September 16, 2026
+v2.13 settles L-322 (d), significant figures, on Tony's rulings of
+2026-09-16. The Figure Count Is a Declared Field [QUALITY] joins
+Report to the Figures You Have: a "# Figures:" line beside every
+value, counted by the standard rules (fewest figures for products
+and quotients, coarsest decimal place for sums and differences,
+exact and declared numbers never limit a result), computed from the
+primary inputs at full precision and rounded ONCE at the reporting
+step, half to even. A Derived Row Stores the Figure Its Sources
+Support [CRITICAL] is WITHDRAWN on Tony's word of the same day: a
+rounded literal at rest is a rounded intermediate for every row that
+chains from it, which is the error the procedure exists to prevent.
+The store holds the derivation; the export rounds. The Status Line
+gains The Unit Field, carrying L-322 ruling 1 into the skill, where
+it had not travelled. Handles L-322, L-325, L-335.
 v2.12 adds five rules from the L-321 cross-check round and one
 carried from L-325's Gap. Worksheet Types gains the row-job
 vocabulary the round actually ran -- [CITATION] and [DISCOVERY] --
@@ -659,6 +673,23 @@ thirty-line lookback crediting a neighbour's annotation, `# Verified:`
 matching the citation pattern, a bare URL in a breadcrumb scoring as a
 source, and orphan section-header annotations all trace to the scanner
 guessing.
+
+### The Unit Field
+
+**A unit is a declared field beside the value, `# Unit:`, never a
+suffix on the name.** Two declarations of one fact can disagree, so the
+suffix is dropped as a declaration once the field exists. The token
+names the QUANTITY, which is what makes comparison possible: `deg`
+rather than `dimensionless` for an angle, `l_shell` rather than
+`dimensionless` for a McIlwain L, because 105 degrees is not
+interchangeable with 105 of anything else. `dimensionless` names no
+quantity and retires as a token. The migration is walked by body,
+Earth first, and each row is visited once: `# Unit:`, `# Status:` and
+`# Figures:` (below) are written at that single visit.
+
+(Tony's rulings, 2026-09-11 and 2026-09-14, recorded on L-322 and until
+this version living only there. In engineering he has always used
+units, not literals.)
 
 **Inside a dict, the status line attaches to the DICT when its entries
 share one kind and one source**, and an entry that differs carries its
@@ -1558,13 +1589,15 @@ stays symbolic:
 
 ```python
 EARTH_INNER_CORE_RADII = EARTH_INNER_CORE_KM / EARTH_EQUATORIAL_RADIUS_KM
-# Derived: 1221.5 / 6378.1366 = 0.19151 -- 5 significant figures, set
-# Derived+: by the numerator. Report no more than that.
+# Figures: 5 -- set by EARTH_INNER_CORE_KM (1221.5, 5)
+# Derived: 1221.5 / 6378.1366 = 0.19151
 ```
 
 Significant figures govern REPORTING: every quotient stated in a
-comment, a hover string or a tooltip, with the figure count named beside
-it so the next reader does not re-derive it.
+comment, a hover string or a tooltip carries no more figures than the
+row's `# Figures:` line declares. The count is a field, not prose, so
+the next reader does not re-derive it and a checker can read it; the
+section below says how the field is written and counted.
 
 **A subtraction is governed by decimal PLACES, not significant figures.**
 `6371.0 - 660` is good to units, so 5711 and not 5711.0.
@@ -1573,6 +1606,91 @@ The failure this catches is quiet. Stating `0.8953994` when the inputs
 support `0.8954` is not a small error in the last digits -- it is six
 digits the value was never entitled to, and it reads as a measurement.
 (Tony's ruling, 2026-08-26, after exactly that appeared in a table.)
+
+### The Figure Count Is a Declared Field [QUALITY]
+
+Python can round a number to N figures but cannot count them through
+arithmetic, so the count is declared per row, the way the unit is.
+These are the textbook rules (Wikipedia, Significant figures; ASTM
+E29), written down once so they resolve the same way for every row.
+
+**Rule 1. `# Figures:` is a comment key beside the value.** Three forms:
+
+```
+# Figures: 5 -- set by EARTH_INNER_CORE_KM (1221.5, 5)
+# Figures: 4 -- source states 4; the trailing zero in 3480 is significant
+# Figures: exact -- IAU 2012 definition
+```
+
+A derived row names the input that set its count. A measured row
+states what the source supports, and says in words whether a trailing
+zero counts, because an integer literal cannot. A defined constant says
+`exact`. The field is needed because a float cannot hold a significant
+trailing zero (13.50 is stored as 13.5) and the export would otherwise
+lose the count.
+
+**Rule 2. Counting a literal follows the standard rules.** Non-zero
+digits count; zeros between them count; leading zeros never count;
+zeros after the decimal point at the end count; trailing zeros in an
+integer count only if the source says so. An exact number has unlimited
+figures. A DECLARED drawing condition (a chosen solar wind pressure, a
+chosen cut angle) is exact for counting: it is a choice, not a
+measurement, so all of its digits are known.
+
+**Rule 3. A derived row's count is set by its least precise MEASURED
+input.** Products and quotients keep the fewest figures among the
+inputs. Sums and differences are good to the coarsest decimal place
+among the inputs (`6371.0 - 660` is good to units: 5711). Exact inputs
+and declared conditions are skipped when finding the minimum. For a
+power, an exponential or another function, the fewest-figures rule is
+the default; where the function magnifies the input's uncertainty (an
+exponent above one in magnitude), drop a figure and say why on the
+row. Where an input carries a stated uncertainty, the uncertainty
+decides instead and counting is the fallback.
+
+**Rule 4. Compute from the PRIMARY inputs at full precision; round
+once.** A derived row that feeds a second derived row does not chain
+through a rounded copy. The second row's `# Derived:` line goes back to
+the measured primaries. Rounding an intermediate puts a rounding error
+inside the store.
+
+**Rule 5. Round half to even**, implemented as `float("%.*g" % (n, x))`.
+This is what Python's `round()` and `%g` already do; the schoolroom
+half-away-from-zero is not, so the rule is named to avoid an argument
+with the interpreter.
+
+**Rule 6. The store holds the derivation, never a rounded copy.** A
+derived row stays an expression at full float precision and follows its
+inputs automatically. Rounding happens at the reporting step, and the
+EXPORT is a reporting step: it rounds each value to its declared count
+and carries the count beside the value and the unit, so the gallery
+formats without guessing and no downstream copy holds digits the row
+never had. (This is what Tony's 2026-09-12 objection was about --
+sixteen digits copied into a gallery config -- and Rule 6 answers it at
+the boundary rather than at rest.) The two magnetosphere standoffs
+stored as literals under the withdrawn ruling stay literals until the
+export lands and the gallery stops parsing the store (L-322 ruling 6);
+they revert to expressions at their slice visit.
+
+**Rule 7. The declared count governs reporting; a display may show
+fewer, never more.** A hover formats to the served count or to a shorter
+readable count; a shorter display is not a precision claim. A display
+with more figures than the row declares is the failure.
+
+**Rule 8. The checker reads the field and names every derived row it
+cannot see.** `test_derived_figures.py` checks the DECLARATION rather
+than a rounded literal: a derived row's count may not exceed the least
+count among the non-exact inputs it names, each named input appears in
+the expression, and a `# Derived:` row with no `# Figures:` line prints
+NOT YET MIGRATED with its name -- a FAIL inside a closed slice, a named
+gap outside one. Enumeration is by the `# Derived:` line, not by a
+`# Status:` word: at 2.12 the checker found derived rows by Status and
+saw 2 of 27.
+
+(Tony's rulings, 2026-09-16, adopting the procedure in
+`documentation/DESIGN_L322_d_significant_figures_20260916.md` "as
+recommended" and withdrawing the ruling of 2026-09-12 in the same
+message. Handle L-322 (d).)
 
 ### The Store Carries the Verified Figure [CRITICAL]
 
@@ -1624,30 +1742,17 @@ does not go to Tony. (His ruling, 2026-08-29, sending exactly that
 question back: "we established the rule that significant figures where
 verified should be used.")
 
-### A Derived Row Stores the Figure Its Sources Support [CRITICAL]
+### A Derived Row Stores the Figure Its Sources Support -- WITHDRAWN
 
-A derived constant stores the figure its inputs actually support, not
-the arithmetic result. Sixteen digits on a value uncertain in the first
-decimal is calculator output, not precision. The arithmetic stays
-recorded on the row, so it remains auditable, and a check recomputes
-the row from the inputs its Status line names and FAILS when the
-rounding stops holding.
-
-An expression recomputes silently when an input moves, which is a
-published number changing with nobody looking. A literal plus a test
-announces instead.
-
-**Scope: this governs rows whose inputs are DECLARED CONSTANTS.** L-314
-may serve solar wind speed and pressure from the cache, and a stored
-literal guarded by a test that fails every time the wind changes is a
-test nobody reads. Re-examine when L-314 is designed.
-
-(Tony's ruling, 2026-09-12, stopping two standoff values from being
-copied into the gallery config at full stored precision: "the store
-should only carry significant digits not what the calculator
-generates." Both rows already declared what to report and stored
-something else. Handle L-325; the scope paragraph is his own ledger
-note under L-314.)
+Ruled by Tony on 2026-09-12 (L-325) and WITHDRAWN by him on 2026-09-16
+as counter-productive under The Figure Count Is a Declared Field. The
+rule said a derived row stores a literal rounded to its declared count,
+so that a test could announce when an input moved. Under Rule 4 a
+rounded literal at rest is a rounded intermediate for every row that
+chains from it, and under Rule 6 the objection that earned the ruling
+-- sixteen digits copied into a gallery config -- is answered at the
+export instead. The stub stays so a reader who finds L-325 or the two
+literal rows knows what happened to the rule.
 
 ## No Shadow Constants [CRITICAL]
 

@@ -380,7 +380,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*192 live items; 177 need attention (`!`); 191 RICE-scored; 137 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*192 live items; 177 need attention (`!`); 191 RICE-scored; 138 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -413,7 +413,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-25 |
 | ! | L-281 | The guest book: no-account comments, approve-before-show | OPEN | 4.2 | 2026-09-03 |
 | ! | L-247 | Sgr A* constants migrated to the single source of truth | OPEN | 4.0 | 2026-08-25 |
-| ! | L-325 | A derived row stores its reported figure, not the arithmetic result | OPEN | 4.0 | 2026-09-12 |
+| ! | L-325 | A derived row stores its reported figure, not the arithmetic result | OPEN | 4.0 | 2026-09-16 |
 | ! | L-331 | Visitor-facing text: stale info text, four Sun hovers outside the i-panel move, and hovers in plain language (exhibits) | OPEN | 4.0 | 2026-09-16 |
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
@@ -457,7 +457,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-225 | Migrate the comet shell constants into `constants_new.py`, then dispatch | DEFERRED | 2.4 | 2026-08-23 |
 | ! | L-293 | Lunar standstill: an exhibit made of four dated orbits | OPEN | 2.4 | 2026-09-06 |
 | ! | L-305 | Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together | OPEN | 2.4 | 2026-09-16 |
-| ! | L-322 | Units declared in the store, and the orrery as producer | OPEN | 2.3 | 2026-09-12 |
+| ! | L-322 | Units declared in the store, and the orrery as producer | OPEN | 2.3 | 2026-09-16 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
 | ! | L-328 | Subtraction pass on the skill layer (protocol/skills track) | OPEN | 2.1 | 2026-09-14 |
@@ -687,6 +687,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-258 | Significant figures at rest, and the three changes it made | DONE | 5.4 | 2026-08-29 |
 |  | L-265 | The i panel carries links, not curated prose | DONE | 5.4 | 2026-09-03 |
 |  | L-304 | Plotly relayout field notes for gallery-assembler (bump pending) | DONE | 5.4 | 2026-09-08 |
+|  | L-335 | provenance-discipline 2.12 -> 2.13, taken before the store work it serves | DONE | 5.4 | 2026-09-16 |
 |  | L-003 | Protocol amendment candidates (for v3.29) | DONE | 5.4 | 2026-06-22 |
 |  | L-062 | README refresh -- fold in handoff + ledger developments | DONE | 5.1 | 2026-07-28 |
 |  | L-153 | Restore "Who Tony Is" framing into resident protocol (protocol) | DONE | 5.1 | 2026-07-21 |
@@ -7578,7 +7579,7 @@ Tony's eyes close this one.
 `test_status_lines.py`, `skills/orrery-coding-conventions/SKILL.md`.
 
 #### [L-325] A derived row stores its reported figure, not the arithmetic result
-<!-- L:325 status:OPEN upd:2026-09-12 section:A flag: rice:3/3/90/2 -->
+<!-- L:325 status:OPEN upd:2026-09-16 section:A flag: rice:3/3/90/2 -->
 - **Where this came from.** L-305 item 6 was about to copy two standoff
   values into the gallery config, and Claude proposed copying them at full
   stored precision -- 10.251872972379905 and 13.511736110493397 -- on the
@@ -7635,12 +7636,29 @@ handoff and never checked against the served file. It was already false
 when it was written, and the live gallery run falsified it within the
 hour. Fetched vs Recalled, at the ledger layer: a handoff is a claim,
 the artifact is the fact.
+**Note (2026-09-16) -- the RULE is WITHDRAWN by Tony**, in the message
+that adopted L-322 (d)'s procedure: "i withdraw my september 12 ruling
+as it may be counter productive given the new procedure." Why it is
+counter-productive: a literal rounded at rest is a rounded intermediate
+for every row that chains from it (EARTH_GEOSTATIONARY_RADII divides a
+derived row), and the standard method rounds once, at the end. The
+objection that earned the ruling -- sixteen digits copied into a
+gallery config -- is answered instead at the export, which rounds to
+the declared `# Figures:` count. The skill section landed at 2.12 is
+replaced by a WITHDRAWN stub at 2.13. What this item BUILT stays in the
+tree for now and is re-homed to L-322's Earth slice: the two literals
+revert to expressions when the export lands (the gallery parses the
+store until then and cannot evaluate a tanh); `test_derived_figures.py`
+is rewritten to judge the declaration rather than recompute a literal,
+and its wiring into the runner and the dashboard stays. **Tony-action
+(decide):** close this item as SUPERSEDED by L-322 now, or leave it OPEN
+until the two rows revert. Neither changes the work.
 **Ref:** L-305, L-314, L-322, `constants_new.py`,
 `test_derived_figures.py`, `orrery_maintenance_run.py`,
 `palomas_orrery_dashboard.py`, `skills/provenance-discipline/SKILL.md`.
 
 #### [L-322] Units declared in the store, and the orrery as producer
-<!-- L:322 status:OPEN upd:2026-09-12 section:A flag: rice:4/5/70/6 -->
+<!-- L:322 status:OPEN upd:2026-09-16 section:A flag: rice:4/5/70/6 -->
 - **Where this came from.** L-305 Gap item 3 asked a narrow question --
   how does `check_store_drift` treat a dimensionless pointer -- and the
   answer opened a wide one. Design session 2026-09-11, zero code. The
@@ -7905,6 +7923,34 @@ store may grow rather than a defect it has -- and a parser that cannot
 see a shape reports nothing when the shape arrives, which is A Check
 That Cannot Fail. These four were carried only in a handoff until
 now. [verified @56f96004]
+**Note (2026-09-16) -- (d) is RULED.** Tony: "confirmed as recommended.
+and i withdraw my september 12 ruling as it may be counter productive
+given the new procedure." The procedure is the textbook one, in
+`documentation/DESIGN_L322_d_significant_figures_20260916.md`, and it
+is now in provenance-discipline 2.13 as The Figure Count Is a Declared
+Field (L-335). What each row's single visit writes is therefore three
+fields: `# Unit:`, `# Status:` and `# Figures:`. Two of the eight rules
+changed shape at the withdrawal and the file records the revised form:
+the store HOLDS the derivation as an expression and the EXPORT rounds
+each value to its declared count, carrying the count beside the value
+and the unit; and the checker judges the declaration (a derived row's
+count may not exceed the least count among its non-exact named inputs)
+rather than recomputing a literal. MEASURED at ebdc55cc, the reason it
+was urgent: 27 rows carry a `# Derived:` line -- 21 are expressions, 4
+are literals with no Status line, 2 are L-325's literals -- and
+`test_derived_figures.py` could see 2 of the 27, because it enumerates
+by a Status word. It ran green on those 2. The full 27 are named in the
+design file, section 2. Consequences for this item's build, in ruling
+3's order: (1) the Earth slice's 12 derived rows (10 interior and
+near-space, 2 Hill sphere) get `# Figures:` and stay expressions;
+(2) the 5 exact conversions get `# Figures: exact`; (3) L-325's two
+literals stay literals until the export lands and revert at their
+visit, because the gallery still parses the store today;
+(4) `test_derived_figures.py` is rewritten to Rule 8 in the same slice,
+enumerating by `# Derived:` and naming NOT YET MIGRATED rows, and its
+DERIVATIONS formula table goes; (5) the export (ruling 6) carries
+`figures` beside `value` and `unit`, which is a dependency on (c) and
+(e), not a ruling on them. (a), (b), (c) and (e) stay open.
 **Ref:** L-305, L-306 (approximations are not promoted), L-314,
 `constants_new.py`, `provenance_scanner.py`, `orrery_maintenance_run.py`,
 `test_status_lines.py`, `celestial_objects.py`, `visualization_core.py`,
@@ -14080,6 +14126,44 @@ result of any camera move), L-291, L-313, L-316, L-317,
 `INFO_MARKER_OFFSET_DEG`), `gallery/earth_geometry.js` (the terminator),
 `documentation/patch_L320_marker_offset.py` (gallery),
 skills/orrery-coding-conventions/SKILL.md (marker separation).
+
+#### [L-335] provenance-discipline 2.12 -> 2.13, taken before the store work it serves
+<!-- L:335 status:DONE upd:2026-09-16 section:C flag: rice:3/4/90/2 -->
+- **What landed.** L-322 (d), significant figures, ruled by Tony on
+  2026-09-16 "as recommended" from
+  `documentation/DESIGN_L322_d_significant_figures_20260916.md`. The
+  Figure Count Is a Declared Field [QUALITY] joins Report to the Figures
+  You Have with eight rules: the `# Figures:` key and its three forms;
+  counting a literal by the standard rules; a derived row's count set by
+  its least precise measured input (fewest figures for a product or
+  quotient, coarsest decimal place for a sum or difference, exact and
+  declared numbers skipped); compute from the primaries and round once;
+  round half to even; the store holds the derivation and the export
+  rounds; a display shows fewer figures, never more; the checker judges
+  the declaration and names every derived row it cannot see. The
+  reference Tony named is Wikipedia's Significant figures page; the
+  engineering standard behind it is ASTM E29.
+- **One rule withdrawn.** A Derived Row Stores the Figure Its Sources
+  Support [CRITICAL], landed at 2.12 from L-325, is replaced by a stub
+  saying it was withdrawn on 2026-09-16 and why. See L-325.
+- **One addition beyond the eight rules.** The new section says the
+  field works "like `# Unit:`", and the skill had never defined
+  `# Unit:` -- L-322 ruling 1 lived only in the ledger. The Status Line
+  gains The Unit Field. A convention that is not in the skill does not
+  travel (L-317, L-326, now here).
+- **Why it was taken first.** v3.55's ordering: the bump precedes the
+  Earth-slice walk that writes the field, so the stale-skill gate fires
+  on a matching manifest. Protocol entry v3.61.
+- **Obligation.** The session that made this bump had loaded 2.12, and
+  a reinstall is invisible to the session that makes it. The next
+  session confirms its loaded copy reads 2.13 before provenance or
+  store work.
+- **Ref:** L-322, L-325, L-326, L-327 (Tony's question whether more
+  rules are the answer -- this one was asked for by name),
+  `skills/provenance-discipline/SKILL.md`,
+  `documentation/DESIGN_L322_d_significant_figures_20260916.md`,
+  `patch_L322_1_figures_skill_protocol_20260916.py`,
+  `patch_L322_2_ledger_20260916.py`.
 
 #### [L-326] provenance-discipline 2.11 -> 2.12, taken before the build it serves
 <!-- L:326 status:DONE upd:2026-09-14 section:C flag: rice:3/3/90/2 -->

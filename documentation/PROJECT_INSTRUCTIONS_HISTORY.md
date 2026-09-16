@@ -1070,6 +1070,74 @@ resident.
 (Moved down from the resident protocol on 2026-09-16 when v3.60
 made a fourth entry.)
 
+v3.58 (September 14, 2026): No rule changed in this document. ONE
+skill bump, taken as the session's FIRST action, ahead of the build it
+serves.
+
+provenance-discipline 2.11 -> 2.12 (L-326). Five rules from the L-321
+cross-check round, and one that L-325 parked for this bump.
+
+THE ROUND THAT EARNED THEM SURVIVED BECAUSE ITS LEGS FAILED
+DIFFERENTLY, and that is the entry's one idea. Four checkers took the
+same three worksheets on Earth's magnetosphere. One had the discipline
+and marked three belt-extent rows UNSOURCED, where three open
+full-text sources state those figures. One found the sources and lost
+every URL in the clipboard. One could not fetch at all and said so
+plainly. One found the thing nobody else did and misnamed two of the
+three others. No single leg would have got there, and that was luck
+rather than design.
+
+Each rule is the shape of one of those failures. A Negative Verdict
+Shows Its Search [CRITICAL], because UNSOURCED is the only verdict
+pointing at no document anybody can open, so a DISCOVERY row carries
+its search log. A Source Names What Was Opened, Not What It Cites
+[CRITICAL], because the right URL under the wrong author name is
+invisible without a second fetch. A Link Is an Object, Not Text
+[QUALITY], with the file the checker exported kept as the record
+rather than the paste. Two roster corrections: Gemini's fetching is
+TIER-dependent, so L-276's constraint is about the interface and the
+tier rather than the vendor, and a checker inside this Project is not
+independent for a rerun, because past chats are searchable. And Route
+the Effort Tier by Job Type [QUALITY], Tony's ruling of 2026-09-13.
+
+A DERIVED ROW STORES THE FIGURE ITS SOURCES SUPPORT [CRITICAL] is the
+sixth, and it is not from the round. It is L-325's Gap, parked on
+2026-09-12 on the rule that a skill bump cannot be verified from
+inside the session that makes it.
+
+ONE ADDITION THE DRAFT DID NOT ASK FOR, recorded because a later
+reader will find it and wonder. The draft's first and fifth notes both
+use "DISCOVERY row" as established vocabulary. It was not: the term
+was defined in the L-321 worksheet prompt and never travelled into the
+skill. So Worksheet Types also gains the [CITATION] / [DISCOVERY]
+definitions and the ten-column schema the three worksheets actually
+ran, transcribed from the prompt rather than composed. This is v3.57's
+lesson in a second store: A CONVENTION THAT IS NOT IN THE SKILL DOES
+NOT TRAVEL.
+
+THE ORDERING IS v3.55's, and this is the second entry to use it. The
+bump is taken before the build it serves -- L-305 item 7, the citation
+job on Earth's belt scalars -- so the stale-skill gate fires on a
+matching manifest instead of on a promise carried in a handoff. The
+2026-09-13 handoff made it the next session's first action for exactly
+that reason, and declined to take it in the session that drafted it,
+because a rushed edit to a CRITICAL skill is how a bad rule ships.
+That gap earned its keep: the draft's third note was false when
+written and was falsified four hours later in the same session.
+
+The obligation still travels, because reinstalling is not something a
+session can check on itself. This session loaded 2.11; the next
+session confirms its loaded copy reads 2.12 before provenance work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.55 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-09-16 when v3.61
+made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================
