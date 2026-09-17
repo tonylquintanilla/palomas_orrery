@@ -11,11 +11,17 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 136  
-**Total Lines of Code (non-blank):** 107,967  
-**Total Public Functions/Classes:** 1,220
+**Total Python Files:** 139  
+**Total Lines of Code (non-blank):** 112,210  
+**Total Public Functions/Classes:** 1,233
 
 ## Classification Coverage
+
+**Patch scripts awaiting archive (3).** A `Role: patch` module is a one-shot script that has already run. Its base fingerprint no longer matches, so it cannot run again. Move each into `documentation/`. While one sits in the scanned tree it inflates the module count here and the file count in the provenance audit.
+
+- `patch_L322_4_mechanism_20260916.py`
+- `patch_L322_5_export_slice_lists_20260917.py`
+- `patch_L322_7_dashboard_gallery_tools_20260917.py`
 
 **Undetermined role (3).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
@@ -199,19 +205,19 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `doc_index.py` | - regenerate README.md's key-documents table from the documents themselves. (170 lines) |
 | `earth_system_generator.py` | Paloma's Orrery: Earth System Generator Engine Architecture: The Teaser (Plotly) & Blockbuster (KMZ) Pipeline (673 lines) |
 | `examine_hot_csv.py` | Examine the HOT CSV file structure (47 lines) |
-| `export_constants.py` | - write data/constants_export.json from constants_new.py. The orrery is the producer of its numbers; the gallery reads this file and never reads orrery source. (276 lines) |
+| `export_constants.py` | - write data/constants_export.json from constants_new.py. The orrery is the producer of its numbers; the gallery reads this file and never reads orrery source. (291 lines) |
 | `export_orbit_cache.py` | Phase 1b desktop devtool: read the local orbit caches and write web-servable orbit/position files for the interactive gallery. (617 lines) |
 | `food_insecurity_generator.py` | IPC acute food-insecurity KMZ layer (Sudan, current period). (702 lines) |
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (967 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (972 lines) |
 | `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (542 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,071 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (342 lines) |
 | `test_citation_inheritance.py` | Regression tests for citation-block inheritance. (516 lines) |
-| `test_constants_export.py` | - data/constants_export.json says what constants_new.py holds. (211 lines) |
+| `test_constants_export.py` | - data/constants_export.json says what constants_new.py holds. (225 lines) |
 | `test_constants_provenance.py` | Regression tests for verified numeric constants. (411 lines) |
 | `test_cross_checked.py` | Regression tests for cross-check annotations. (501 lines) |
 | `test_derived_figures.py` | - a derived constant declares no more significant figures than its inputs support, and names every derived row it cannot judge. (545 lines) |
@@ -226,6 +232,16 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `worksheet_checker.py` | - L-192. Does the worksheet say what the annotation claims it says? (2,151 lines) |
 | `worksheet_keys.py` | Worksheet row keys -- one owner for the syntax and the resolution. (551 lines) |
 | `worksheet_request_builder.py` | Worksheet request builder -- ask the question the checker can read. (652 lines) |
+
+---
+
+## Patch Scripts (transient -- awaiting archive)
+
+| Module | Description |
+|--------|-------------|
+| `patch_L322_4_mechanism_20260916.py` | - ORRERY repo. L-322, the mechanism, orrery half (pieces 1 to 5 and 7 of documentation/BUILD_MANIFEST_L322_mechanism_20260916.md). (2,157 lines) |
+| `patch_L322_5_export_slice_lists_20260917.py` | - ORRERY repo. L-322, the gallery half, piece 0 of documentation/BUILD_MANIFEST_L322_gallery_half_20260917.md. (679 lines) |
+| `patch_L322_7_dashboard_gallery_tools_20260917.py` | - ORRERY repo. The shared dashboard gains the five gallery tools of L-322's gallery half, and two stale descriptions are corrected. (1,373 lines) |
 
 ---
 

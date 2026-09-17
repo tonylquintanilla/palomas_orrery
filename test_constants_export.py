@@ -31,7 +31,9 @@ WHAT IT CHECKS, each printing what it compared
        and no fewer, with the same reasons. Every row in the store is in
        exactly one of the two lists.
     4. Every token's defining_constant is a row in the store. Whether that
-       row is itself exported yet is printed beside it.
+       row is itself exported yet is printed beside it. The export's
+       closed_slices and transitional lists equal the store's own, so the
+       gallery cannot read a stale copy of either.
     5. The per-slice gate (Tony's ruling of 2026-09-14): a row inside a
        CLOSED slice must be exported and carry a status and a figure
        count. Outside a closed slice a missing field is a named gap, not a
@@ -53,6 +55,9 @@ Domain: dev_tools
 
 Module created: September 16, 2026 with Anthropic's Claude Opus 5
 (L-322, the mechanism: piece 3 of the build manifest).
+Module updated: September 17, 2026 with Anthropic's Claude Opus 5
+(L-322, the gallery half: piece 0. Check 4 also compares the export's
+closed_slices and transitional against constants_rows.py.)
 """
 
 import json
@@ -62,8 +67,8 @@ import sys
 import constants_rows
 import export_constants
 
-REQUIRED = ("schema", "store", "store_sha256", "tokens", "rows",
-            "not_exported")
+REQUIRED = ("schema", "store", "store_sha256", "tokens", "closed_slices",
+            "transitional", "rows", "not_exported")
 ROW_FIELDS = ("value", "unit", "figures", "status", "derived")
 
 
@@ -146,7 +151,14 @@ def check(project_dir, closed=None):
             failures.append((name, "named in the file, not a row in %s"
                              % constants_rows.STORE))
 
-    # 4. defining constants
+    # 4. defining constants and the two lists the gallery reads
+    for field, actual in (("closed_slices", constants_rows.CLOSED_SLICES),
+                          ("transitional", constants_rows.TRANSITIONAL)):
+        if list(on_disk.get(field, [])) != list(actual):
+            failures.append((field, "the export says %r; constants_rows.py "
+                             "says %r" % (on_disk.get(field), list(actual))))
+    facts["lists"] = (list(constants_rows.CLOSED_SLICES),
+                      list(constants_rows.TRANSITIONAL))
     defining = []
     if on_disk["tokens"] != fresh["tokens"]:
         failures.append(("(tokens)", "the file's token table differs from "
@@ -202,7 +214,9 @@ def main():
               % facts["rows_examined"])
         print("3. rows not exported: %d; store rows placed: %d"
               % (facts["not_exported"], facts["store_rows"]))
-        print("4. defining constants:")
+        print("4. closed slices %r; transitional %r"
+              % (facts["lists"][0], facts["lists"][1]))
+        print("   defining constants:")
         for token, name, exported in facts["defining"]:
             print("     %-8s %-28s %s" % (token, name,
                                          "exported" if exported else

@@ -8100,6 +8100,81 @@ promised on 2026-09-11: Rule 8's enumeration sentence should say BOTH
 routes (arithmetic and `# Derived:` line); The Unit Field could point at
 `constants_tokens.py` and name RETIRED_TOKENS and the "named number"
 marker.
+**Note (2026-09-17) -- the gallery half is specified, reviewed and
+under build; four decisions recorded.** The order question of the
+previous note was answered by Fable's reply
+(`documentation/REPLY_L322_order_question_Fable_20260917.md`) with a
+third order, C: the gallery half is built now, and Store drift is not
+retired but NARROWED to the links the export cannot serve yet,
+retiring itself when that set is empty. Tony concurred. The build
+contract is `documentation/BUILD_MANIFEST_L322_gallery_half_20260917.md`,
+which SUPERSEDES section 9 of the mechanism manifest, plus Fable's
+addendum of the same day answering five findings Opus measured against
+it.
+TONY'S RULING, 2026-09-17, in his words: "my ruling was intended to
+insure that constants_new.py remained the single source of truth.
+however, a tool reading and writing is not creating a second store, it
+is just transmitting. so, i concur with your option 2." The served
+numbers therefore stay in `data/objects_config.json`, the file the page
+reads at boot, written there by a tool from the export and never by
+hand; a hand edit fails the next run. Ruling 8 of 2026-09-11 is read in
+that light: its target was the hand copy, and a generated, checked
+mirror is not one.
+THE FIVE FINDINGS, measured at gallery `cb1762a7`, all accepted by the
+addendum: (1) the config's pointers sit in FIVE value-slot shapes, not
+three, and the two the manifest misplaced are served today, so the
+mirror finds a slot by the rule `config_value()` already uses rather
+than by a census of shapes; (2) the unit-token spelling is compared or
+asserted in SIX files, not two -- `feature_renderers.js`,
+`earth_geometry.js`, `tools/test_gallery_cache_builder_offline.py` and
+the three smoke suites; (3) a token change needs a guard, below; (4)
+the config is hand-formatted, so the mirror edits it IN PLACE, a
+scanner recording where each value sits and only the changed bytes
+replaced (measured: 30 insertions, 13 deletions, nothing else moved);
+(5) the manifest's five formatting sites were a reading, not a method,
+and the method is to trace each slot field to every print --
+`interactive.html` is out of scope by measurement, its ten formatting
+calls being propagated orbital elements, an axis label, SVG coordinates
+and a cache key.
+THE GUARD, two verdicts, Tony's decision of 2026-09-17 on Fable's
+proposal: a change of SPELLING is ordinary; a different token with the
+SAME number is a RELABEL, refused by default and written when the run
+names the link, because the page asserts the old name by hand; a
+different token with a DIFFERENT number is a UNIT CONFLICT, refused
+always, because nothing in the gallery converts units. The comparison
+allows for the export being rounded to declared figures while the
+config holds the unrounded hand copy. Refusal is per link: every other
+link is still written and the run exits non-zero.
+A LINK TO THE ROW THAT DEFINES ITS OWN UNIT IS EXACTLY 1, Tony's
+decision of 2026-09-17, choosing Fable's fix over Opus's reference-only
+marker. Earth's crust is 1.0 r_earth and points at
+EARTH_EQUATORIAL_RADIUS_KM, the row the token table names as one
+r_earth; the mirror transmits 1 with `# Figures: exact`, reading the
+defining constant from the token table the export already carries, so
+no factor is typed in the gallery and the 1.0 is sourced rather than
+asserted. The pointer keeps one meaning.
+WHAT THE SLICES WILL MEET, measured: four RELABELS in the Earth slice
+-- EARTH_MAGNETOPAUSE_SHUE_A6 (0.58), SHUE_A8 (0.024),
+EARTH_BOW_SHOCK_JELINEK_EPS (6.55) and JELINEK_LAMBDA (1.17) hold
+`dimensionless` in the config and the page asserts that name at
+`feature_renderers.js` 1642, 1644, 1703 and 1705, so the four rows, the
+four config links and the four asserts move in one commit. Two UNIT
+CONFLICTS in the Sun slice: CORE_AU (config 0.2 r_sun) and
+RADIATIVE_ZONE_AU (config 0.713 r_sun) are coefficients the store holds
+in au, and each wants a derived store row in solar radii. One CONFIG
+LINK MOVE in the Sun slice: the photosphere points at SOLAR_RADIUS_AU
+and should point at SUN_RADIUS_KM, the row that defines r_sun, so the
+definition rule can serve it as 1.
+BUILT SO FAR, tested in a sandbox, not yet delivered: piece 0 of the
+gallery manifest, in this patch -- the export carries `closed_slices`
+and `transitional` from `constants_rows.py` and its checker compares
+both against the store, so the gallery's pointer join reads the slice
+list from the one place that owns it; SCHEMA moves to 2. In the gallery
+repo: `tools/mirror_constants.py` and `tools/test_mirror_constants.py`,
+39 fixture checks covering every verdict. Still to build: the runner
+wiring (pull, mirror, mirror check, pointer join, export freshness,
+Store drift narrowed) and the page's unit vocabulary and figure
+formatting.
 **Ref:** L-305, L-306 (approximations are not promoted), L-314,
 `constants_new.py`, `provenance_scanner.py`, `orrery_maintenance_run.py`,
 `test_status_lines.py`, `celestial_objects.py`, `visualization_core.py`,

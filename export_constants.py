@@ -22,6 +22,14 @@ One JSON file, data/constants_export.json:
                    moved after the export was made
     tokens         constants_tokens.TOKENS, verbatim: what each unit
                    token means
+    closed_slices  the slices whose walk is finished, from
+                   constants_rows.CLOSED_SLICES. The gallery's pointer
+                   join needs them to know when a row that is not
+                   exported is a failure rather than a named gap, and
+                   the store's own list is the only honest source
+    transitional   the rows stored as rounded literals until the
+                   gallery stops parsing the store, from
+                   constants_rows.TRANSITIONAL
     rows           one entry per exported row, in store order:
                      value    the number, rounded to its declared figures
                      unit     the token from the row's "# Unit:" line
@@ -79,6 +87,11 @@ Domain: dev_tools
 Module created: September 16, 2026 with Anthropic's Claude Opus 5
 (L-322, the mechanism: piece 2 of the build manifest, the sixth
 generator).
+Module updated: September 17, 2026 with Anthropic's Claude Opus 5
+(L-322, the gallery half: piece 0 of
+documentation/BUILD_MANIFEST_L322_gallery_half_20260917.md. The export
+carries closed_slices and transitional, so the gallery reads both from
+the store rather than keeping its own copy. SCHEMA moves to 2.)
 """
 
 import json
@@ -90,7 +103,7 @@ import constants_rows
 from constants_tokens import RETIRED_TOKENS, TOKENS
 
 EXPORT_PATH = os.path.join("data", "constants_export.json")
-SCHEMA = 1
+SCHEMA = 2
 
 
 def round_to(value, figures):
@@ -217,6 +230,8 @@ def build_export(project_dir, tokens=None, retired=None):
                      "rounded, and null means the row has not declared a "
                      "count yet"),
         "tokens": tokens,
+        "closed_slices": list(constants_rows.CLOSED_SLICES),
+        "transitional": list(constants_rows.TRANSITIONAL),
         "rows": exported,
         "not_exported": not_exported,
     }

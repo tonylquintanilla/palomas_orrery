@@ -47,6 +47,12 @@ September 16, 2026 with Anthropic's Claude Opus 5 (L-322): added
 Constants Export under GENERATORS and Test Constants Export and Test
 Dimensions under CHECKERS, matching the maintenance runner, and rewrote
 Test Derived Figures' description for its Rule 8 rewrite.
+September 17, 2026 with Anthropic's Claude Opus 5 (L-322, the gallery
+half): added the five gallery tools the shared dashboard was missing --
+Constants Export Pull, Config Mirror (report only), Mirror Suite,
+Config Mirror Check and Pointer Join -- and corrected both Gallery
+Maintenance Run descriptions, which still described a runner without
+them and a Store drift that examined every link.
 """
 
 import os
@@ -196,9 +202,12 @@ LAUNCH_GROUPS = {
         ("Gallery Maintenance Run -- offline",
         "gallery_maintenance_run.py",
         "The gallery repo's own runner (L-236), before you commit. "
-        "Regenerates the module atlas, then runs the cache "
-        "builder suite, the three Node smoke suites, and the artifact-1 "
-        "assembler test. Three states rather than two: a suite that could "
+        "Regenerates the module atlas, pulls the orrery's constants "
+        "export at its HEAD SHA and mirrors the served numbers into "
+        "data/objects_config.json, then runs the cache builder suite, "
+        "the mirror suite, the config mirror check, the pointer join, "
+        "the three Node smoke suites, and the artifact-1 assembler "
+        "test. Three states rather than two: a suite that could "
         "not run -- Node missing, say -- reports UNREACHABLE and is "
         "never counted as a pass. Everything indented below is included "
         "in it.",
@@ -210,14 +219,80 @@ LAUNCH_GROUPS = {
         "has deployed. Fetches seven files from palomasorrery.com and "
         "requires each to be served -- this is what catches Jekyll "
         "dropping every .py in the repo, which no local test can see. "
-        "Then follows objects_config.json's orrery_constant pointers "
-        "into constants_new.py at the orrery HEAD and reports any value "
-        "that has drifted. If the site is still serving the previous "
-        "deploy it says NOT YET DEPLOYED rather than passing. Report "
-        "only; it gates nothing.",
+        "Then refetches the orrery's constants export at the SHA the "
+        "pull recorded, and fails if the served copy differs. Store "
+        "drift then follows objects_config.json's pointers into "
+        "constants_new.py at the orrery HEAD, but ONLY for the links "
+        "the export cannot serve yet (L-322): it prints how many of the "
+        "70 it is examining, and when that reaches zero it says so and "
+        "can be retired. If the site is still serving the previous "
+        "deploy it says NOT YET DEPLOYED rather than passing.",
         GALLERY_REPO_DIR,
         True,
         ["--live"]),
+        ("Constants Export Pull",
+        os.path.join("tools", "pull_constants_export.py"),
+        "Fetches the orrery's data/constants_export.json at the orrery's "
+        "HEAD SHA and writes it, with that SHA, into the gallery's data/. "
+        "This is how the orrery's numbers reach the page: the gallery "
+        "reads the export and never parses orrery source (L-322). With no "
+        "network it reports N-A and leaves the previous pull alone. If the "
+        "orrery does not yet carry the two slice lists it says so and "
+        "writes nothing.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Config Mirror -- report only",
+        os.path.join("tools", "mirror_constants.py"),
+        "Lists what the mirror WOULD write into data/objects_config.json "
+        "from the pulled export, field by field, and writes nothing. This "
+        "is the report to read before a maintenance run does the writing. "
+        "It names every link the export cannot serve yet with the reason, "
+        "every link pointing outside the store, and any link it refuses: a "
+        "relabel, where the number is the same and only the unit's name "
+        "moved, and a unit conflict, where the number changes too and "
+        "nothing here converts.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Mirror Suite",
+        os.path.join("tools", "test_mirror_constants.py"),
+        "42 checks over the mirror, on made-up configs and exports rather "
+        "than the real ones. It exists because no link in the real config "
+        "can produce a relabel, a conflict or a definition until those "
+        "rows are exported, so a run over the real file would exercise one "
+        "path and say nothing about the other five. GATES the gallery "
+        "runner.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Config Mirror Check",
+        os.path.join("tools", "check_constants_links.py"),
+        "Checks that every served link in data/objects_config.json holds "
+        "exactly what the export says -- value, unit and figure count -- "
+        "and prints how many it compared. A difference is a hand edit or a "
+        "pull without a mirror run, and it says which. GATES the gallery "
+        "runner.",
+        GALLERY_REPO_DIR,
+        True,
+        ["--mirror"],
+        True),
+        ("Pointer Join",
+        os.path.join("tools", "check_constants_links.py"),
+        "Classifies all 70 of the config's links into the store: served "
+        "from the export, waiting for their row's slice visit, or pointing "
+        "outside the store. The waiting count is the measure of the store "
+        "walk's progress, and when it reaches zero Store drift has nothing "
+        "left to examine. Fails on a link waiting inside a CLOSED slice, "
+        "and on a blocked transmission whatever the slice. GATES the "
+        "gallery runner.",
+        GALLERY_REPO_DIR,
+        True,
+        ["--join"],
+        True),
         ("Gallery Builder Offline Tests",
         "test_gallery_cache_builder_offline.py",
         "Offline smoke test for gallery_cache_builder.py: mocks Horizons, "
