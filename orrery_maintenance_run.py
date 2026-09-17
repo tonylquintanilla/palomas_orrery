@@ -18,7 +18,7 @@ Run it after any edit session and before a push.
 
 WHAT IT DOES
 ------------
-Runs the four GENERATORS, then the CHECKERS, and prints one summary at
+Runs the six GENERATORS, then the CHECKERS, and prints one summary at
 the end. Nothing stops on a failure -- every tool runs every time, so a
 single pass shows the whole picture rather than the first problem in it.
 
@@ -38,6 +38,12 @@ fingerprinted before and after, so the summary says which ones actually
 moved -- that is the regenerate-then-read-back half, and it is there
 because generated documents went stale four separate times in one
 evening while nothing noticed.
+
+Constants export is a generator because the export has to follow the
+store on every run: it writes data/constants_export.json, the file the
+gallery reads instead of parsing constants_new.py (L-322 ruling 7).
+Constants export check, among the checkers, then confirms the file
+matches the store it was made from.
 
 CHECKERS report a problem and inform the push call. They run last so
 their verdict is the last thing on screen.
@@ -80,11 +86,11 @@ artifact, and it is short enough to copy.
 
 GATING AND REPORT-ONLY
 ----------------------
-Eleven checkers are pass/fail: a problem makes them exit non-zero.
+Sixteen checkers are pass/fail: a problem makes them exit non-zero.
 Two are REPORT-ONLY -- worksheet_checker.py and provenance_scanner.py
 exit 0 whatever they find, and exit 1 only when they could not run.
 They are marked in the CHECKERS table, and the summary counts the
-gating eleven in its headline and quotes the two report-only verdicts
+gating sixteen in its headline and quotes the two report-only verdicts
 underneath.
 
 The block quotes each tool's own note rather than restating it. A
@@ -115,6 +121,14 @@ the CHECKERS list gains Derived figures, which recomputes each derived
 constant from the inputs it names and checks it against the figure it
 declares -- the check that replaces a stored expression's automatic
 recomputation.)
+Module updated: September 16, 2026 with Anthropic's Claude Opus 5 (L-322:
+GENERATORS gains Constants export, which writes data/constants_export.json
+so the gallery reads the orrery's numbers without parsing its source.
+CHECKERS gains Constants export check and Dimensions, and Derived figures
+now judges each derived row's declared figure count (provenance-discipline
+2.13, Rule 8) instead of recomputing two literals. The counts in this
+docstring had drifted to four generators and eleven gating checkers;
+they are six and sixteen.)
 """
 
 import hashlib
@@ -133,6 +147,12 @@ GENERATORS = [
      ['LEDGER_CONSOLIDATED.md']),
     ('Skill manifest',  ['skills_index.py', 'PROJECT_INSTRUCTIONS.md'],
      ['PROJECT_INSTRUCTIONS.md']),
+    # L-322 ruling 7: the orrery exports its constants and this runner
+    # keeps the export current, so the gallery never parses orrery
+    # source. Placed before Module atlas and Data inventory, which index
+    # the modules and the data file it adds.
+    ('Constants export', ['export_constants.py'],
+     ['data/constants_export.json']),
     ('Module atlas',    ['module_atlas.py'],
      ['MODULE_ATLAS.md', 'MODULE_INDEX.md']),
     ('Data inventory',  ['data_inventory.py'],
@@ -157,12 +177,18 @@ GENERATORS = [
 CHECKERS = [
     ('Constants change', ['constants_change_report.py'], None),
     ('Constants relations', ['test_constants_provenance.py'], None),
-    # A derived row stores its reported figure, so nothing recomputes
-    # it on import any more. This is what notices when an input moves
-    # and the stored figure stops following from it. It also fails on
-    # a derived row it does not cover, so it cannot pass while blind.
-    # L-325.
+    # Each derived row's declared figure count may not exceed what its
+    # inputs support (provenance-discipline 2.13, Rule 8). It names
+    # every derived row it cannot judge yet, finding them both by
+    # expression and by "# Derived:" line. L-322, replacing L-325's
+    # recompute-a-literal version.
     ('Derived figures', ['test_derived_figures.py'], None),
+    # The export matches the store it was made from: hash, rows, the
+    # not-exported list, and the per-slice gate. L-322.
+    ('Constants export check', ['test_constants_export.py'], None),
+    # Each derived row's unit follows from its arithmetic, by astropy
+    # inside the check. L-322 rulings 4 and (c)+(e).
+    ('Dimensions', ['test_dimensions.py'], None),
     ('Cross-check annotations', ['test_cross_checked.py'], None),
     ('Citation inheritance', ['test_citation_inheritance.py'], None),
     ('Status lines', ['test_status_lines.py'], None),

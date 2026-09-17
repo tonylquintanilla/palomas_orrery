@@ -43,6 +43,10 @@ no button here. Reordered Developer Tools on Tony's instruction: the
 indented group is GENERATORS then CHECKERS, each alphabetical, and the
 standalone tools below are alphabetical too. A bare string in a
 LAUNCH_GROUPS list is now drawn as a heading.
+September 16, 2026 with Anthropic's Claude Opus 5 (L-322): added
+Constants Export under GENERATORS and Test Constants Export and Test
+Dimensions under CHECKERS, matching the maintenance runner, and rewrote
+Test Derived Figures' description for its Rule 8 rewrite.
 """
 
 import os
@@ -296,6 +300,19 @@ LAUNCH_GROUPS = {
          SCRIPT_DIR,
          True),
         "GENERATORS -- regenerated every run; a no-op when nothing moved",
+        ("Constants Export",
+         "export_constants.py",
+         "Write data/constants_export.json from constants_new.py: every "
+         "row that declares a unit, with its value rounded to the figures "
+         "it declares, its unit, its figure count and its status, plus the "
+         "table saying what each unit means. The gallery reads this file "
+         "instead of parsing orrery source. Rows not exported yet are "
+         "listed by name with the reason. Writes nothing if the store has "
+         "a problem, and nothing if the content would not change.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
         ("Data Inventory",
          "data_inventory.py",
          "Inventory the large, gitignored data stores (data/, star_data/). "
@@ -406,6 +423,17 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
+        ("Test Constants Export",
+         "test_constants_export.py",
+         "Check that data/constants_export.json matches constants_new.py: "
+         "the store hash it was made from, every exported row re-read, the "
+         "list of rows not exported, the rows that define each unit, and "
+         "the per-slice gate. Prints both hashes, so a pass shows what it "
+         "compared. Run after editing the store; Constants Export first.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
         ("Test Constants Provenance",
          "test_constants_provenance.py",
          "Pass/fail regression tests for constants_new.py. "
@@ -424,13 +452,25 @@ LAUNCH_GROUPS = {
          True),
         ("Test Derived Figures",
          "test_derived_figures.py",
-         "Recomputes every derived constant in constants_new.py from "
-         "the inputs its Status line names, and checks the result "
-         "against the figure the row declares it reports. A derived "
-         "row stores its reported figure rather than the arithmetic "
-         "result, so nothing recomputes it on import; this is what "
-         "says so when an input moves. Fails on a derived row it does "
-         "not cover, so it cannot pass while blind.",
+         "Check that no derived constant declares more significant "
+         "figures than its inputs support: fewest figures for products "
+         "and quotients, coarsest decimal place for sums and "
+         "differences. Names every derived row it cannot judge yet, "
+         "found both by its arithmetic and by its # Derived: line. A "
+         "built-in set of test rows runs first and must give every "
+         "verdict, so a pass means the check can fail.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Test Dimensions",
+         "test_dimensions.py",
+         "Check that each derived constant's unit follows from its "
+         "arithmetic, in dimension and in size, using astropy inside the "
+         "check. Dividing by the row that defines a unit counts as "
+         "converting into it. Rows with no unit yet are named, not "
+         "failed, outside a finished slice. A built-in set of test rows "
+         "runs first and must give every verdict.",
          SCRIPT_DIR,
          True,
          None,

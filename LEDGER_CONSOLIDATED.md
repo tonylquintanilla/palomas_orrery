@@ -7653,6 +7653,12 @@ is rewritten to judge the declaration rather than recompute a literal,
 and its wiring into the runner and the dashboard stays. **Tony-action
 (decide):** close this item as SUPERSEDED by L-322 now, or leave it OPEN
 until the two rows revert. Neither changes the work.
+**Note (2026-09-16, late evening):** the rewrite this item re-homed to
+L-322 has landed -- `test_derived_figures.py` now judges each derived
+row's declared figure count (Rule 8) and no longer recomputes the two
+literals. Its runner row and dashboard button stay, with new wording.
+The two literal rows are unchanged and revert at their Earth-slice
+visit. The (decide) above still stands.
 **Ref:** L-305, L-314, L-322, `constants_new.py`,
 `test_derived_figures.py`, `orrery_maintenance_run.py`,
 `palomas_orrery_dashboard.py`, `skills/provenance-discipline/SKILL.md`.
@@ -7972,9 +7978,18 @@ unwraps to plain numbers at the boundary either way. Related and worth
 asking in the same round: ruling 9's migration visits all 88
 assignments, which is the natural moment to ask whether the store's
 format should change at all.
-**Gap (current, 2026-09-16):** the build named at the end of the Note
-above -- mechanism whole, then the Earth slice. Nothing in this item is
-awaiting a ruling.
+**Gap (current, 2026-09-16, after the orrery half of the build):** three
+things remain, in this order, and none awaits a ruling. (1) The GALLERY
+half of the mechanism, piece 6 of
+`documentation/BUILD_MANIFEST_L322_mechanism_20260916.md`: pull the
+export, replace Store drift with Export freshness and Pointer join, fill
+served numbers from the export by name in the builder, format hovers to
+the served figure count; the suffix reader and `SCALAR_UNITS` retire
+there. (2) The Earth slice: every EARTH_ row visited once for
+`# Unit:`, `# Status:`, `# Figures:` and, where a person has read the
+source, `# Read:`; the two standoffs revert to expressions and leave
+`constants_rows.TRANSITIONAL`; `constants_rows.CLOSED_SLICES` becomes
+("EARTH",). (3) The other bodies' slices.
 **Tony-action (do):** commit
 `documentation/DESIGN_unit_field_and_export_20260911.md` and
 `documentation/DESIGN_unit_field_and_export_rev2_20260911.md`. The
@@ -8022,6 +8037,69 @@ enumerating by `# Derived:` and naming NOT YET MIGRATED rows, and its
 DERIVATIONS formula table goes; (5) the export (ruling 6) carries
 `figures` beside `value` and `unit`, which is a dependency on (c) and
 (e), not a ruling on them. (a), (b), (c) and (e) stay open.
+**Note (2026-09-16, late evening) -- the ORRERY half of the mechanism is
+BUILT** (pieces 1 to 5 and 7 of the build manifest), built on
+`6b282b2e`, delivered as `patch_L322_4_mechanism_20260916.py`. What now
+exists: `constants_tokens.py`, the unit token table (twelve tokens, each
+with its dimension, and for au, r_earth and r_sun the store row that
+defines it); `constants_rows.py`, the one shared reader of the store,
+which also holds CLOSED_SLICES (empty) and TRANSITIONAL (the two
+standoffs) so the checkers cannot disagree about either;
+`export_constants.py`, the sixth generator, writing
+`data/constants_export.json`; `test_constants_export.py`;
+`test_dimensions.py`, with astropy inside the check, comparing dimension
+AND size, carrying both hand rules; `test_derived_figures.py` rewritten
+to Rule 8. Both unit and figure checkers run a built-in set of test rows
+first on every run (13 and 22 rows), because every real verdict today is
+a named gap and a pass would otherwise prove nothing. Runner and
+dashboard are wired. MEASURED at `6b282b2e` in the sandbox: the export
+carries 23 of 112 rows and names the other 89 (5 still declaring the
+retired `dimensionless`, 84 with no unit line); the unit checker reads
+31 derived rows, 25 NO UNIT and 6 NOT CHECKABLE; the figures checker
+reads the same 31, all NOT YET MIGRATED, 4 of them with NO DERIVED LINE.
+FOUR PLACES THE BUILD DEPARTED FROM THE MANIFEST, all method and all
+recorded in the modules' docstrings. (1) Derived rows are found both by
+their arithmetic and by their `# Derived:` line: 31 rows, not 27. Four
+expressions have no `# Derived:` line of their own and a checker looking
+only for the line would not see them: EARTH_LEO_INNER_KM,
+EARTH_LEO_INNER_RADII, EARTH_STRATOPAUSE_RADII, CORE_AU. (2) The export
+as specified would have failed every run on the five `dimensionless`
+rows; that token is listed as RETIRED, so those rows are named as
+waiting for their slice visit, and any OTHER unknown token still fails.
+(3) The token `au` has dimension km, not au, since its defining row is in
+kilometres; and a named pure number (l_shell) is marked "named number"
+rather than by its own name, which collided with km and deg -- the
+built-in test rows caught that. (4) The export carries no timestamp and
+no git SHA, so the same store always gives the same file; the gallery
+records the orrery SHA when it pulls.
+COUNT CORRECTED, not carried: 57 rows carry the EARTH_ prefix at
+`6b282b2e`. The 53 in the design-round handoff was an older measurement.
+WHAT THE EARTH WALK WILL MEET, from a dry run on a throwaway copy with
+plausible units written onto the Earth rows (the extra tokens used there
+are NOT in the table): 15 derived rows pass and 2 fail, and both
+failures are properties of the arithmetic. EARTH_GEOSTATIONARY_RADIUS_KM:
+if the rotation rate is declared in radians per second, the cube root
+leaves radians to the two-thirds. EARTH_HILL_SPHERE_KM: the typed
+1.0e-9 that converts cubic metres to cubic kilometres is counted a
+second time once units are attached, a factor of 1,000. The second is a
+class, not a row: the typed 1000s in SPEED_OF_LIGHT_M_S and M_PER_AU, the
+60 in LIGHT_MINUTES_PER_AU and the 365.25 x 86400 in AU_PER_LIGHT_YEAR
+are the same shape, and the built-in test row FIX_EMBEDDED shows the
+verdict they will get. Separately, EARTH_D660_DEPTH_KM's Source says two
+significant figures while EARTH_LOWER_MANTLE_KM's `# Derived:` line
+treats 660 as good to units; once figures are written the checker
+reports that as OVER-DECLARED (test row FIX_DIFF is that case).
+NOT EDITED, and says something now false: `constants_new.py` states, in
+its module docstring's L-325 paragraph and in the Notes of both
+standoffs, that `test_derived_figures.py` recomputes those rows and
+fails when the rounding stops holding. The store is not a target of
+this build; the Earth-slice visit that reverts both rows rewrites those
+Notes.
+FOR provenance-discipline 2.14, beside the worksheet schema column
+promised on 2026-09-11: Rule 8's enumeration sentence should say BOTH
+routes (arithmetic and `# Derived:` line); The Unit Field could point at
+`constants_tokens.py` and name RETIRED_TOKENS and the "named number"
+marker.
 **Ref:** L-305, L-306 (approximations are not promoted), L-314,
 `constants_new.py`, `provenance_scanner.py`, `orrery_maintenance_run.py`,
 `test_status_lines.py`, `celestial_objects.py`, `visualization_core.py`,
