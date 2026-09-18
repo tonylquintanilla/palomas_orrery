@@ -63,6 +63,17 @@ Exhibit Store Editor to Developer Tools, under Gallery Cache Builder --
 Manual Run, so the two by-hand gallery tools sit together. It is a
 window rather than a console tool, so it is declared the way Gallery
 Studio is, with no interactive flag.
+September 18, 2026 with Anthropic's Claude Opus 5 (L-334), same day, on
+Tony's second thought: MOVED Exhibit Store Editor to Gallery & Web,
+beside the other gallery content tools, and sorted that group the way
+Developer Tools was sorted on 2026-09-12 -- the offline runner, then
+its indented checkers alphabetically, then the live runner, then the
+standalone tools alphabetically. Added Store Writer Suite and Store
+Editor Suite, two of the six gallery checkers that had no button. The
+other four, and Feature renderers, Page framing, Sun shells and Earth
+scene geometry, are Node and this dashboard launches everything with
+Python; Hover Budget has a button only because someone wrote
+documentation/run_hover_budget.py to wrap it.
 """
 
 import os
@@ -165,50 +176,6 @@ LAUNCH_GROUPS = {
     ],
 
     "Gallery & Web": [
-        ("Gallery Studio",
-        "gallery_studio.py",
-        "Curate and export plots for the web gallery",
-        GALLERY_TOOLS_DIR),
-        ("JSON Converter",
-        "json_converter.py",
-        "Convert HTML exports to gallery-ready JSON",
-        GALLERY_TOOLS_DIR,
-        True),  # interactive -- needs its own console
-        ("Gallery Editor",
-        "gallery_editor.py",
-        "Edit gallery metadata, categories, and featured items",
-        GALLERY_TOOLS_DIR),
-        ("Gallery JSON Fixer",
-        "gallery_json_fixer.py",
-        "Fix older gallery JSON files for current viewer",
-        GALLERY_TOOLS_DIR),
-        ("Serve Gallery Locally",
-        "serve_gallery.py",
-        "Serve the gallery repo at http://localhost:8000 and open the "
-        "assembler dev page, where Artifact 1 and the Artifact 2 candidate "
-        "render in the browser. The page fetches the assembler files and "
-        "the served cache, and browsers refuse fetch() from a file:// "
-        "page, so it cannot be opened by double-clicking the HTML. Runs in "
-        "its own console and keeps running -- one line per request is the "
-        "server working, not a hang. Ctrl+C or close the window to stop.",
-        GALLERY_TOOLS_DIR,
-        True),
-        ("Inspect Staging",
-        "inspect_staging.py",
-        "Plain-language report on a dry-run staging folder: real dates "
-        "instead of Julian days, TP values, and point counts per object, "
-        "so a dry-run can be judged without opening the raw JSON. "
-        "Read-only -- fetches nothing, changes nothing, promotes nothing. "
-        "Opens a console and asks for the staging folder path, which the "
-        "builder prints on the last line of a --dry-run.",
-        GALLERY_TOOLS_DIR,
-        True),
-        ("Gallery Cleanup",
-        "gallery_cleanup.py",
-        "Find and (with confirmation) delete gallery JSON/KMZ files that "
-        "aren't referenced by gallery_metadata.json, plus stray .json.bak files.",
-        GALLERY_TOOLS_DIR,
-        True),
         ("Gallery Maintenance Run -- offline",
         "gallery_maintenance_run.py",
         "The gallery repo's own runner (L-236), before you commit. "
@@ -225,32 +192,40 @@ LAUNCH_GROUPS = {
         "in it.",
         GALLERY_REPO_DIR,
         True),
-        ("Gallery Maintenance Run -- live, AFTER a push",
-        "gallery_maintenance_run.py",
-        "The two checks that can only mean something once GitHub Pages "
-        "has deployed. Fetches seven files from palomasorrery.com and "
-        "requires each to be served -- this is what catches Jekyll "
-        "dropping every .py in the repo, which no local test can see. "
-        "Then refetches the orrery's constants export at the SHA the "
-        "pull recorded, and fails if the served copy differs. Store "
-        "drift then follows objects_config.json's pointers into "
-        "constants_new.py at the orrery HEAD, but ONLY for the links "
-        "the export cannot serve yet (L-322): it prints how many of the "
-        "70 it is examining, and when that reaches zero it says so and "
-        "can be retired. If the site is still serving the previous "
-        "deploy it says NOT YET DEPLOYED rather than passing.",
+        ("Artifact 1 Assembler Pin",
+        os.path.join("documentation", "pin_artifact1_known_failure.py"),
+        "Runs the Artifact 1 assembler test and compares its five verdicts, "
+        "and T3's feature set, against the 2026-08-31 pin. It GATES the "
+        "gallery runner. Before the pin (L-237) the row printed FAIL every "
+        "single run for a known reason, which made a real regression "
+        "indistinguishable from the old one -- a row that always fails hides "
+        "the next change behind the last. Runs from the gallery repo ROOT.",
         GALLERY_REPO_DIR,
         True,
-        ["--live"]),
-        ("Constants Export Pull",
-        os.path.join("tools", "pull_constants_export.py"),
-        "Fetches the orrery's data/constants_export.json at the orrery's "
-        "HEAD SHA and writes it, with that SHA, into the gallery's data/. "
-        "This is how the orrery's numbers reach the page: the gallery "
-        "reads the export and never parses orrery source (L-322). With no "
-        "network it reports N-A and leaves the previous pull alone. If the "
-        "orrery does not yet carry the two slice lists it says so and "
-        "writes nothing.",
+        None,
+        True),
+        ("Cache In Step",
+        os.path.join("tools", "check_cache_in_step.py"),
+        "Checks that the served cache holds the same shells as "
+        "data/objects_config.json, value for value. The rooms draw from "
+        "the cache, not from the config, so a config change reaches a "
+        "visitor only after the cache builder has run. When this fails, "
+        "run the cache builder and commit its output with the config; do "
+        "not push the config alone. Names each difference by its path. "
+        "GATES the gallery runner.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Cache Siblings",
+        os.path.join("documentation", "check_cache_siblings.py"),
+        "Reports the served cache's sibling directories -- the .staging_* "
+        "and .quarantine_* remnants -- with each one's age taken from the "
+        "run id in its NAME, and names those the builder's next run should "
+        "reap. Report-only: it exits 0 whatever it finds. It exists because "
+        "the builder's sweep failed silently for six weeks and nothing said "
+        "so (L-274); if it goes quiet again this says so within a day. "
+        "Runs from the gallery repo ROOT and deletes nothing.",
         GALLERY_REPO_DIR,
         True,
         None,
@@ -269,18 +244,6 @@ LAUNCH_GROUPS = {
         True,
         None,
         True),
-        ("Mirror Suite",
-        os.path.join("tools", "test_mirror_constants.py"),
-        "42 checks over the mirror, on made-up configs and exports rather "
-        "than the real ones. It exists because no link in the real config "
-        "can produce a relabel, a conflict or a definition until those "
-        "rows are exported, so a run over the real file would exercise one "
-        "path and say nothing about the other five. GATES the gallery "
-        "runner.",
-        GALLERY_REPO_DIR,
-        True,
-        None,
-        True),
         ("Config Mirror Check",
         os.path.join("tools", "check_constants_links.py"),
         "Checks that every served link in data/objects_config.json holds "
@@ -292,28 +255,15 @@ LAUNCH_GROUPS = {
         True,
         ["--mirror"],
         True),
-        ("Pointer Join",
-        os.path.join("tools", "check_constants_links.py"),
-        "Classifies all 70 of the config's links into the store: served "
-        "from the export, waiting for their row's slice visit, or pointing "
-        "outside the store. The waiting count is the measure of the store "
-        "walk's progress, and when it reaches zero Store drift has nothing "
-        "left to examine. Fails on a link waiting inside a CLOSED slice, "
-        "and on a blocked transmission whatever the slice. GATES the "
-        "gallery runner.",
-        GALLERY_REPO_DIR,
-        True,
-        ["--join"],
-        True),
-        ("Cache In Step",
-        os.path.join("tools", "check_cache_in_step.py"),
-        "Checks that the served cache holds the same shells as "
-        "data/objects_config.json, value for value. The rooms draw from "
-        "the cache, not from the config, so a config change reaches a "
-        "visitor only after the cache builder has run. When this fails, "
-        "run the cache builder and commit its output with the config; do "
-        "not push the config alone. Names each difference by its path. "
-        "GATES the gallery runner.",
+        ("Constants Export Pull",
+        os.path.join("tools", "pull_constants_export.py"),
+        "Fetches the orrery's data/constants_export.json at the orrery's "
+        "HEAD SHA and writes it, with that SHA, into the gallery's data/. "
+        "This is how the orrery's numbers reach the page: the gallery "
+        "reads the export and never parses orrery source (L-322). With no "
+        "network it reports N-A and leaves the previous pull alone. If the "
+        "orrery does not yet carry the two slice lists it says so and "
+        "writes nothing.",
         GALLERY_REPO_DIR,
         True,
         None,
@@ -324,18 +274,6 @@ LAUNCH_GROUPS = {
         "exercises first-build, nightly re-run, and the Guard v2 monitor path. "
         "No network.",
         GALLERY_TOOLS_DIR,
-        True,
-        None,
-        True),
-        ("Artifact 1 Assembler Pin",
-        os.path.join("documentation", "pin_artifact1_known_failure.py"),
-        "Runs the Artifact 1 assembler test and compares its five verdicts, "
-        "and T3's feature set, against the 2026-08-31 pin. It GATES the "
-        "gallery runner. Before the pin (L-237) the row printed FAIL every "
-        "single run for a known reason, which made a real regression "
-        "indistinguishable from the old one -- a row that always fails hides "
-        "the next change behind the last. Runs from the gallery repo ROOT.",
-        GALLERY_REPO_DIR,
         True,
         None,
         True),
@@ -358,37 +296,79 @@ LAUNCH_GROUPS = {
         True,
         None,
         True),
-        ("Cache Siblings",
-        os.path.join("documentation", "check_cache_siblings.py"),
-        "Reports the served cache's sibling directories -- the .staging_* "
-        "and .quarantine_* remnants -- with each one's age taken from the "
-        "run id in its NAME, and names those the builder's next run should "
-        "reap. Report-only: it exits 0 whatever it finds. It exists because "
-        "the builder's sweep failed silently for six weeks and nothing said "
-        "so (L-274); if it goes quiet again this says so within a day. "
-        "Runs from the gallery repo ROOT and deletes nothing.",
+        ("Mirror Suite",
+        os.path.join("tools", "test_mirror_constants.py"),
+        "42 checks over the mirror, on made-up configs and exports rather "
+        "than the real ones. It exists because no link in the real config "
+        "can produce a relabel, a conflict or a definition until those "
+        "rows are exported, so a run over the real file would exercise one "
+        "path and say nothing about the other five. GATES the gallery "
+        "runner.",
         GALLERY_REPO_DIR,
         True,
         None,
         True),
-    ],
-
-    "Developer Tools": [
-        ("Gallery Cache Builder -- Manual Run",
-         os.path.join("tools", "gallery_cache_builder.py"),
-         "Manual serving-cache build. Runs from the gallery repo ROOT: the "
-         "builder resolves its data/ paths from the working directory, so "
-         "launching it from tools/ cannot find data/objects_config.json. "
-         "With no flags it fetches from Horizons, validates, atomic-swaps "
-         "the new cache into data/solar-system, and STOPS -- it does not "
-         "commit or push. Commit it yourself in GitHub Desktop after the "
-         "run finishes. Do not commit while it is still running: mid-build "
-         "the working tree shows deletions only, which is the swap in "
-         "progress, not data loss. The console stays open at the repo root "
-         "if you want a flagged re-run (--dry-run --object <slug>, "
-         "--first-build).",
-         GALLERY_REPO_DIR,
-         True),
+        ("Pointer Join",
+        os.path.join("tools", "check_constants_links.py"),
+        "Classifies all 70 of the config's links into the store: served "
+        "from the export, waiting for their row's slice visit, or pointing "
+        "outside the store. The waiting count is the measure of the store "
+        "walk's progress, and when it reaches zero Store drift has nothing "
+        "left to examine. Fails on a link waiting inside a CLOSED slice, "
+        "and on a blocked transmission whatever the slice. GATES the "
+        "gallery runner.",
+        GALLERY_REPO_DIR,
+        True,
+        ["--join"],
+        True),
+        ("Store Editor Suite",
+        os.path.join("tools", "test_exhibit_store_editor.py"),
+        "Checks the editor window's logic WITHOUT opening the window: "
+        "that every box the form offers is a path the writer will "
+        "accept, that Earth's word list and its tick list differ by the "
+        "two radiation belts on purpose, that nothing typed saves "
+        "nothing, that the save message never claims a visitor sees what "
+        "they cannot yet, and that a red Cache in step is explained "
+        "rather than just shown. Run it by hand with --window to also "
+        "open a real window and walk every row and every tick; the "
+        "runner does not, because that would put a window on your screen "
+        "in the middle of a check. GATES the gallery runner.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Store Writer Suite",
+        os.path.join("tools", "test_store_writer.py"),
+        "Checks the writer that the Exhibit Store Editor saves through: "
+        "that it changes only the one line it was asked to, that it ADDS "
+        "a word a shell does not carry yet, and that it refuses "
+        "everything outside a served shell's words, a belt's words and "
+        "the arrival settings -- slugs, colours and every number among "
+        "them. Its own fixtures run first each time, so a pass means each "
+        "refusal actually ran rather than merely being declared; then "
+        "every shell and every word field of the real config, both "
+        "rooms. GATES the gallery runner.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Gallery Maintenance Run -- live, AFTER a push",
+        "gallery_maintenance_run.py",
+        "The two checks that can only mean something once GitHub Pages "
+        "has deployed. Fetches seven files from palomasorrery.com and "
+        "requires each to be served -- this is what catches Jekyll "
+        "dropping every .py in the repo, which no local test can see. "
+        "Then refetches the orrery's constants export at the SHA the "
+        "pull recorded, and fails if the served copy differs. Store "
+        "drift then follows objects_config.json's pointers into "
+        "constants_new.py at the orrery HEAD, but ONLY for the links "
+        "the export cannot serve yet (L-322): it prints how many of the "
+        "70 it is examining, and when that reaches zero it says so and "
+        "can be retired. If the site is still serving the previous "
+        "deploy it says NOT YET DEPLOYED rather than passing.",
+        GALLERY_REPO_DIR,
+        True,
+        ["--live"]),
         ("Exhibit Store Editor",
          "exhibit_store_editor.py",
          "Edit the words a visitor reads in the exhibit rooms, and tick "
@@ -409,6 +389,68 @@ LAUNCH_GROUPS = {
          "start the cache builder -- that stays a hand run with OneDrive "
          "paused (L-216).",
          GALLERY_TOOLS_DIR),
+        ("Gallery Cleanup",
+        "gallery_cleanup.py",
+        "Find and (with confirmation) delete gallery JSON/KMZ files that "
+        "aren't referenced by gallery_metadata.json, plus stray .json.bak files.",
+        GALLERY_TOOLS_DIR,
+        True),
+        ("Gallery Editor",
+        "gallery_editor.py",
+        "Edit gallery metadata, categories, and featured items",
+        GALLERY_TOOLS_DIR),
+        ("Gallery JSON Fixer",
+        "gallery_json_fixer.py",
+        "Fix older gallery JSON files for current viewer",
+        GALLERY_TOOLS_DIR),
+        ("Gallery Studio",
+        "gallery_studio.py",
+        "Curate and export plots for the web gallery",
+        GALLERY_TOOLS_DIR),
+        ("Inspect Staging",
+        "inspect_staging.py",
+        "Plain-language report on a dry-run staging folder: real dates "
+        "instead of Julian days, TP values, and point counts per object, "
+        "so a dry-run can be judged without opening the raw JSON. "
+        "Read-only -- fetches nothing, changes nothing, promotes nothing. "
+        "Opens a console and asks for the staging folder path, which the "
+        "builder prints on the last line of a --dry-run.",
+        GALLERY_TOOLS_DIR,
+        True),
+        ("JSON Converter",
+        "json_converter.py",
+        "Convert HTML exports to gallery-ready JSON",
+        GALLERY_TOOLS_DIR,
+        True),  # interactive -- needs its own console
+        ("Serve Gallery Locally",
+        "serve_gallery.py",
+        "Serve the gallery repo at http://localhost:8000 and open the "
+        "assembler dev page, where Artifact 1 and the Artifact 2 candidate "
+        "render in the browser. The page fetches the assembler files and "
+        "the served cache, and browsers refuse fetch() from a file:// "
+        "page, so it cannot be opened by double-clicking the HTML. Runs in "
+        "its own console and keeps running -- one line per request is the "
+        "server working, not a hang. Ctrl+C or close the window to stop.",
+        GALLERY_TOOLS_DIR,
+        True),
+    ],
+
+    "Developer Tools": [
+        ("Gallery Cache Builder -- Manual Run",
+         os.path.join("tools", "gallery_cache_builder.py"),
+         "Manual serving-cache build. Runs from the gallery repo ROOT: the "
+         "builder resolves its data/ paths from the working directory, so "
+         "launching it from tools/ cannot find data/objects_config.json. "
+         "With no flags it fetches from Horizons, validates, atomic-swaps "
+         "the new cache into data/solar-system, and STOPS -- it does not "
+         "commit or push. Commit it yourself in GitHub Desktop after the "
+         "run finishes. Do not commit while it is still running: mid-build "
+         "the working tree shows deletions only, which is the swap in "
+         "progress, not data loss. The console stays open at the repo root "
+         "if you want a flagged re-run (--dry-run --object <slug>, "
+         "--first-build).",
+         GALLERY_REPO_DIR,
+         True),
         ("MAINTENANCE RUN -- everything indented below",
          "orrery_maintenance_run.py",
          "One command for the whole routine: regenerates the generated "
