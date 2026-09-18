@@ -53,6 +53,11 @@ Constants Export Pull, Config Mirror (report only), Mirror Suite,
 Config Mirror Check and Pointer Join -- and corrected both Gallery
 Maintenance Run descriptions, which still described a runner without
 them and a Store drift that examined every link.
+September 17, 2026 with Anthropic's Claude Fable 5.1 (L-334 session):
+added Cache In Step, the gallery check that the served cache holds what
+data/objects_config.json says, written after a config change reached
+the live site ahead of the cache. The Gallery Maintenance Run
+description said three Node smoke suites; it now names all six.
 """
 
 import os
@@ -206,7 +211,9 @@ LAUNCH_GROUPS = {
         "export at its HEAD SHA and mirrors the served numbers into "
         "data/objects_config.json, then runs the cache builder suite, "
         "the mirror suite, the config mirror check, the pointer join, "
-        "the three Node smoke suites, and the artifact-1 assembler "
+        "the cache-in-step check, the six Node suites (feature "
+        "renderers, page framing, Sun shells, Earth scene geometry, "
+        "hover budget, arrival), and the artifact-1 assembler "
         "test. Three states rather than two: a suite that could "
         "not run -- Node missing, say -- reports UNREACHABLE and is "
         "never counted as a pass. Everything indented below is included "
@@ -292,6 +299,19 @@ LAUNCH_GROUPS = {
         GALLERY_REPO_DIR,
         True,
         ["--join"],
+        True),
+        ("Cache In Step",
+        os.path.join("tools", "check_cache_in_step.py"),
+        "Checks that the served cache holds the same shells as "
+        "data/objects_config.json, value for value. The rooms draw from "
+        "the cache, not from the config, so a config change reaches a "
+        "visitor only after the cache builder has run. When this fails, "
+        "run the cache builder and commit its output with the config; do "
+        "not push the config alone. Names each difference by its path. "
+        "GATES the gallery runner.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
         True),
         ("Gallery Builder Offline Tests",
         "test_gallery_cache_builder_offline.py",
