@@ -74,7 +74,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 444.3 MB (582 files)
+**Total size:** 444.3 MB (586 files)
 
 **GitHub Pages headroom:** 580 MB remaining of 1024 MB ceiling (43.4% used)
 
@@ -82,14 +82,14 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 333 | 420.2 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-17 |
+| .json | 335 | 420.2 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-18 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 1 | 5.1 MB | palomas_orrery_logo.png (5.1 MB) | 2025-11-27 |
-| .py | 134 | 2.4 MB | gallery_studio.py (243.1 KB) | 2026-09-17 |
-| .jsonl | 33 | 793.2 KB | encke.jsonl (24.5 KB) | 2026-09-17 |
-| .md | 15 | 695.5 KB | TEST_PROTOCOL_sun_hang_20260902.md (526.5 KB) | 2026-09-17 |
-| .html | 5 | 332.2 KB | index.html (156.6 KB) | 2026-09-17 |
-| .js | 9 | 188.6 KB | feature_renderers.js (83.0 KB) | 2026-09-17 |
+| .py | 135 | 2.5 MB | gallery_studio.py (243.1 KB) | 2026-09-18 |
+| .jsonl | 33 | 800.4 KB | encke.jsonl (24.8 KB) | 2026-09-18 |
+| .md | 15 | 695.4 KB | TEST_PROTOCOL_sun_hang_20260902.md (526.5 KB) | 2026-09-18 |
+| .html | 5 | 328.3 KB | index.html (156.6 KB) | 2026-09-18 |
+| .js | 10 | 202.3 KB | feature_renderers.js (85.9 KB) | 2026-09-18 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |
 | .patch | 3 | 11.7 KB | phaseb_studio.patch (7.0 KB) | 2026-07-29 |
@@ -97,7 +97,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 | .mermaid | 1 | 7.4 KB | gallery_navigation_flowchart.mermaid (7.4 KB) | 2026-03-08 |
 | .bat | 1 | 3.7 KB | _run_local_server.bat (3.7 KB) | 2026-08-24 |
 | .url | 1 | 176.0 B | Paloma's Orrery - Interactive Astronomical Visualizations.url (176.0 B) | 2026-02-27 |
-| .sha | 1 | 41.0 B | constants_export.sha (41.0 B) | 2026-09-17 |
+| .sha | 1 | 41.0 B | constants_export.sha (41.0 B) | 2026-09-18 |
 | (none) | 1 | 17.0 B | CNAME (17.0 B) | 2026-02-13 |
 
 ### Largest files (top 10)

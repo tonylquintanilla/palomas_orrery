@@ -1,8 +1,8 @@
 <!-- Doc-Kind: generated | The provenance audit: every numeric claim scored against its citation, rebuilt by provenance_scanner.py on each run. Do not hand-edit. -->
 # Paloma's Orrery -- Provenance Audit
 
-Generated: September 17, 2026
-Files scanned: 137
+Generated: September 18, 2026
+Files scanned: 136
 Total findings: 1067
 Constants: 147 | Dicts: 41 | Display strings: 879
 
@@ -20,14 +20,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260918T175223Z | `3863473` | 136 | 1067 | 292 | 655 | 118 | 2 |
 | 20260918T015421Z | `bb481bf` | 137 | 1067 | 292 | 655 | 118 | 2 |
 | 20260917T223354Z | `9dabda9` | 139 | 1068 | 293 | 655 | 118 | 2 |
 | 20260917T170625Z | `06236b7` | 136 | 1067 | 292 | 655 | 118 | 2 |
 | 20260917T032206Z | `7ccb878` | 131 | 1065 | 292 | 655 | 116 | 2 |
 | 20260916T232628Z | `ebdc55c` | 133 | 1065 | 292 | 655 | 116 | 2 |
-| 20260916T175817Z | `d99d8db` | 132 | 1065 | 292 | 655 | 116 | 2 |
 
-Change since the previous run: total -1, Tier-1 -1.
+Change since the previous run: total +0, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -1783,9 +1783,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 106 | dict | ROLE_MAP[...] | (134 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 383 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 406 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 106 | dict | ROLE_MAP[...] | (133 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 380 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 403 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 

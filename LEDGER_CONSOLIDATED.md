@@ -380,13 +380,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*195 live items; 180 need attention (`!`); 194 RICE-scored; 139 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*194 live items; 179 need attention (`!`); 193 RICE-scored; 140 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-251 | The galactic centre button served a cached HTML for seven months | OPEN | 15.2 | 2026-08-25 |
-| ! | L-339 | The live check does not read every file the browser fetches | OPEN | 14.4 | 2026-09-17 |
 | ! | L-238 | radius_fraction > 1.0 assumes every shell is above the surface | OPEN | 14.2 | 2026-08-25 |
 | ! | L-229 | Streamer band drawn in the ecliptic plane, not the solar equator | OPEN | 11.4 | 2026-08-23 |
 | ! | L-235 | Checks that cannot fail, gallery side [three instances] | OPEN | 11.4 | 2026-08-25 |
@@ -398,10 +397,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-300 | sweep_collapsed_features.py joins the gallery maintenance runner as a gating checker | OPEN | 8.1 | 2026-09-07 |
 | ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-21 |
 | ! | L-249 | The Earth slice of L-181: interior boundaries as sourced constants | OPEN | 7.2 | 2026-08-25 |
+| ! | L-338 | Logic that needs no browser lives in its own file (Tony's rule, 2026-09-18) | OPEN | 7.2 | 2026-09-18 |
 | ! | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | OPEN | 6.0 | 2026-08-25 |
 | ! | L-269 | A report names its items, not how many there are | OPEN | 6.0 | 2026-08-30 |
 | ! | L-245 | Constants drift check compares against the last COMMIT, not the last RUN | OPEN | 5.4 | 2026-08-25 |
-| ! | L-338 | Logic that needs no browser lives in its own file -- a PROPOSAL, not yet a rule | OPEN | 5.4 | 2026-09-17 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
 | ! | L-206 | Worksheet return filenames carry model and session | OPEN | 5.1 | 2026-08-18 |
 | ! | L-246 | S4714's semi-major axis was three values in three stores | OPEN | 5.1 | 2026-08-25 |
@@ -410,6 +409,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
 | ! | L-327 | Tool repairs from the rules-vs-reasoning round (tooling track) | OPEN | 4.8 | 2026-09-14 |
 | ! | L-268 | Sweep: features collapsed out of their own identity | OPEN | 4.5 | 2026-08-30 |
+| ! | L-334 | An editor for the interactive exhibits' served store (gallery tooling) | OPEN | 4.5 | 2026-09-18 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-08-25 |
 | ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-25 |
@@ -439,7 +439,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-312 | The gallery editor's copy and file slots make cards the viewer misreads; two portrait titles to retype | OPEN | 3.4 | 2026-09-10 |
 | ! | L-292 | Earth shells the orrery does not draw | OPEN | 3.4 | 2026-09-08 |
 | ! | L-283 | Visual theme: dark wall, paper placards, record mode | OPEN | 3.2 | 2026-09-03 |
-| ! | L-334 | An editor for the interactive exhibits' served store (gallery tooling) | OPEN | 3.2 | 2026-09-17 |
 | ! | L-256 | provenance-discipline 2.8, and the status pass it enables | OPEN | 3.1 | 2026-08-27 |
 | ! | L-288 | Gallery Studio creates and edits live-scene cards | OPEN | 3.1 | 2026-09-10 |
 | ! | L-294 | The Explorer room's placeholder, and Earth's heliocentric view | OPEN | 3.1 | 2026-09-06 |
@@ -660,6 +659,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-301 | Landscape+portrait pairing lost at L-287, restored in the converter | DONE | 14.4 | 2026-09-08 |
 |  | L-302 | The info card closed itself on the tap that opened it | DONE | 14.4 | 2026-09-08 |
 |  | L-329 | The Register Rule rewritten: compression is a one-way channel (protocol track) | DONE | 14.4 | 2026-09-14 |
+|  | L-339 | The live check does not read every file the browser fetches | DONE | 14.4 | 2026-09-18 |
 |  | L-306 | Do not promote a drawing approximation into the constants store | DONE | 13.6 | 2026-09-08 |
 |  | L-182 | Mars Hill sphere -- cross-check correction lost across the config pipeline | DONE | 12.0 | 2026-08-05 |
 |  | L-222 | The constants change report fails on every currency stamp | DONE | 11.4 | 2026-08-20 |
@@ -805,44 +805,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
-#### [L-339] The live check does not read every file the browser fetches
-<!-- L:339 status:OPEN upd:2026-09-17 section:A flag: rice:4/4/90/1 -->
-- **Measured at gallery `1b077401`.** `gallery_maintenance_run.py --live`
-  compares EIGHT served files against the working copy (`SERVED_FILES`,
-  line 254): `interactive.html`, `gallery/feature_renderers.js`,
-  `gallery/earth_geometry.js`, `gallery/assembler/resolver.py`,
-  `gallery/assembler/__init__.py`,
-  `data/solar-system/coverage_index.json`,
-  `data/solar-system/feature_configs.json` and
-  `data/solar-system/positions/voyager_1.json`. The list does NOT include
-  `data/objects_config.json` or `gallery/nav_cluster.js`, and the page
-  fetches both -- the script tag at `interactive.html` line 132 and the
-  config read at line 2251. [verified @1b077401]
-- **It is the same fault as L-336, one size smaller.** There, no check
-  read the cache the browser draws from, and both rooms broke while
-  eleven checks passed. Here, the check that exists precisely to compare
-  what is SERVED with what is in the working copy skips two files the
-  browser asks for. A file nobody compares can go stale on the live site
-  with nothing saying so.
-- **Stage B of L-334's build contract closes it**, adding
-  `gallery/arrival.js` (new in that stage), `gallery/nav_cluster.js` and
-  `data/objects_config.json` to `SERVED_FILES`.
-- **Claude:** RICE 4/4/90/1 -> 14.4 proposed, unratified, and the score
-  is descriptive rather than a scheduling claim -- stage B already
-  carries it. Reach 4 and Impact 4 for the reason above: the arrival
-  block is read from `data/objects_config.json` by the page itself, so a
-  stale served copy changes what a visitor sees on opening. Effort 1
-  because it is three names added to a list, though a first run may need
-  a reconciliation if a served copy has already drifted.
-- **Ref:** L-336 (the same fault, full size), L-235 (checks that cannot
-  fail, gallery side), L-334 (stage B, which closes this), L-267 (the nav
-  cluster); gallery `gallery_maintenance_run.py` (`SERVED_FILES`),
-  `interactive.html`, `gallery/nav_cluster.js`,
-  `data/objects_config.json`; resident protocol Part 3, A Check That
-  Cannot Fail Is Not Passing.
-
-#### [L-338] Logic that needs no browser lives in its own file -- a PROPOSAL, not yet a rule
-<!-- L:338 status:OPEN upd:2026-09-17 section:A flag: rice:3/3/60/1 -->
+#### [L-338] Logic that needs no browser lives in its own file (Tony's rule, 2026-09-18)
+<!-- L:338 status:OPEN upd:2026-09-18 section:A flag: rice:3/3/80/1 -->
 - **Tony asked, 2026-09-17,** whether `interactive.html` should be
   modularized. The page is 3436 lines at gallery `1b077401` and holds
   logic that no browser is needed to run.
@@ -868,9 +832,30 @@ as an archive of the prioritization thinking -- no cleanup on close.
   adopting it costs a sentence in a skill; the moves themselves are paid
   for by the builds that were already opening those files, which is the
   whole point of the proposal.
-- **Ref:** L-334 (stage B, the first instance), L-339, L-235; gallery
-  `interactive.html`, `gallery/feature_renderers.js`,
-  `documentation/smoke_arrival.js`; resident protocol Part 3, A Check
+- **RULED, Tony, 2026-09-18:** yes. His words, and his reason: "the idea
+  is to limit the increasing size of the interactive.html file, so yes."
+- **His reason is not the one the proposal argued from, and the
+  difference matters.** The proposal above argued from TESTABILITY -- a
+  function inside the page can only be tested by cutting text out of the
+  page. Tony's reason is SIZE. They point the same way for the arrival
+  function and they part company at the edges: size also covers bulk
+  that is not logic at all, a long block of styling for one, which
+  testability says nothing about. The rule is written with his reason
+  first and the second reason after it, and the wording goes to him when
+  the skill is bumped, because that is where the scope question has to
+  be answered rather than left to whoever reads it next.
+- **First instance, done.** L-334 stage B moved the arrival function into
+  `gallery/arrival.js` at gallery `2f971040`. 118 lines left
+  `interactive.html`, `documentation/smoke_arrival.js` now requires the
+  file instead of cutting text out of the page, and Tony's phone found
+  both rooms unchanged.
+**Gap:** the rule does not travel until it is in a skill a page edit
+loads. It goes into interactive-exhibit 1.4 as piece 6 of L-334's stage
+C, with the wording above for Tony to read. A convention that is not in
+the skill does not travel (L-317, L-326, L-335, now here).
+**Ref:** L-334 (stage B, the first instance), L-339, L-235; gallery
+`interactive.html`, `gallery/feature_renderers.js`, `gallery/arrival.js`,
+`documentation/smoke_arrival.js`; resident protocol Part 3, A Check
   That Cannot Fail Is Not Passing; interactive-exhibit skill.
 
 #### [L-337] A centre marker for bodies without shells in the exhibit rooms
@@ -898,7 +883,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
   gallery `gallery/feature_renderers.js` (`infoMarker`), `interactive.html`.
 
 #### [L-334] An editor for the interactive exhibits' served store (gallery tooling)
-<!-- L:334 status:OPEN upd:2026-09-17 section:A flag: rice:4/4/80/4 -->
+<!-- L:334 status:OPEN upd:2026-09-18 section:A flag: rice:4/4/85/3 -->
 - **Tony, 2026-09-16, after Mode 5 of both rooms:** "For the static
   gallery we have a Studio editor that edits the html before json
   conversion. Could we do something similar for the interactive
@@ -1020,7 +1005,57 @@ questions 2 to 5 in conversation; then the build, in this order: the
 arrival block and its page reader (3), the editor over prose and links
 (2, 5), the measure and the checks button (4).
   **Tony-action (decide) -- DONE 2026-09-17:** questions 2 to 5.
-**Gap (current, 2026-09-17):** stages B and C of
+- **STAGE B BUILT, PUSHED and SEEN, 2026-09-18.** Delivered as
+  `patch_L334_3_arrival_module_20260918.py`, pushed at gallery
+  `2f971040`. What exists now: `gallery/arrival.js`, holding the arrival
+  function whole and attached as `GalleryArrival.applyArrival`;
+  `stampShell()` in `gallery/feature_renderers.js`, putting
+  `meta.shell_key` on every trace that belongs to a served shell at nine
+  sites; `stampLink()` giving each trace its own `meta` object and
+  carrying an existing key across, so the two stamps cannot overwrite
+  each other in either order; the end-of-legend-group-name match GONE,
+  leaving one way of matching instead of two; `SERVED_FILES` at eleven
+  names (L-339); and a rewritten `documentation/smoke_arrival.js` that
+  requires the new file and checks that every trace the feature
+  renderers build carries a key.
+- **A visitor sees no difference, and that was measured, not judged.**
+  Every trace in both rooms was compared before and after for its legend
+  group and its arrival visibility: 86 traces, all identical. The
+  offline run was 12 of 12 with Cache in step passing, which confirms
+  the cache did not need to change -- the key is stamped in the browser
+  and never stored. The four deliberate breaks each failed the check and
+  named the cause, the fourth of them -- a shell trace with its stamp
+  removed -- being the one the old name match could not have seen. Mode
+  5 on the phone, both rooms, Tony: "correct". [render-confirmed Mode 5]
+- **TWO PLACES THE BUILD CONTRACT DISAGREED WITH THE CODE.** Recorded
+  because the second decides what stage C's arrival panel can offer.
+  (1) The contract says `renderShellSet` already receives the shell's key
+  as `featureKey`. It does not: `featureKey` is the GROUP -- `earth_interior`,
+  `solar_atmosphere` -- and the shell key is the loop variable inside it.
+  The stamping follows the file.
+  (2) Earth's two radiation belts have NO key of their own in the served
+  config. Their names and colours come from parallel lists, so there is
+  nothing per-belt to stamp, and both carry the feature key
+  `van_allen_belts`. An arrival block naming it draws both belts
+  together. Stage C's panel therefore cannot offer one tick box per
+  drawer row for the belts; it offers one box for the pair, unless Tony
+  wants the served shape changed first.
+  **Tony-action (decide), stage C:** one box for both belts, or a served
+  change that gives each belt a key.
+**Gap (current, 2026-09-18):** STAGE C, the editor itself. Stage B is
+done and its description is kept below as the record of what it was
+contracted to do. Stage C is pieces 2 to 6 of the editor manifest with
+its section 6 as the test list: the writer, which gains a true-or-false
+operation for the arrival block's `moon` and refuses `_declared` and
+`_comment` as well as `value`, `unit`, `figures` and `orrery_constant`;
+the window, with one tick box per served shell by key and one for the
+Moon; a Save message that tells the truth about what reaches a visitor
+when, since words go through the cache builder and arrival ticks do not;
+a Run-the-checks button that explains a red Cache in step rather than
+just showing it; the suite; and piece 6's records, including the two
+skill bumps under one protocol entry, v3.62. The editor does NOT start
+the cache builder.
+**Gap (as contracted on 2026-09-17; stage B is DONE):** stages B and C of
 `documentation/BUILD_MANIFEST_L334_editor_build_20260917.md`, in that
 order, each pushed and confirmed before the next starts. STAGE B, the
 arrival tidy-up, a visitor seeing no difference: `sunApplyArrival` moves
@@ -7254,6 +7289,14 @@ skills/gallery-pipeline/SKILL.md.
   to reach for then: `exhibit*` for functions, `.ex-row` /
   `body.exhibit` for CSS, `exhibit-*` for ids. `live_scene_urls` in
   `tools/json_converter.py` reads the EXHIBITS table and does not care.
+- **2026-09-18, L-334 stage B: the first piece to leave the page took a
+  name without the prefix.** The arrival function moved into
+  `gallery/arrival.js` and is reached as `GalleryArrival.applyArrival`,
+  not `sunApplyArrival`. It cost nothing, because a new file and one
+  caller are not a hundred identifiers in a working room. So this item
+  is one identifier smaller, and it has a precedent to follow: a piece
+  that MOVES gets the new name in the move. `GalleryFeatures` and
+  `GalleryArrival` are the shape for the rest.
 **Gap:** none until a third room or a free session; a rename, not a
 redesign.
 **Ref:** L-291, L-267 (where the chrome came from), interactive.html
@@ -15641,6 +15684,59 @@ L-316, L-317, L-319, L-320, L-331, L-332, `interactive.html`
 pass); `documentation/patch_L318_drawer_label.py` and
 `patch_L318_2_arrow_colour.py` through
 `patch_L318_6_phone_tap_picking.py` (gallery).
+
+#### [L-339] The live check does not read every file the browser fetches
+<!-- L:339 status:DONE upd:2026-09-18 section:C flag: rice:4/4/90/1 -->
+- **Measured at gallery `1b077401`.** `gallery_maintenance_run.py --live`
+  compares EIGHT served files against the working copy (`SERVED_FILES`,
+  line 254): `interactive.html`, `gallery/feature_renderers.js`,
+  `gallery/earth_geometry.js`, `gallery/assembler/resolver.py`,
+  `gallery/assembler/__init__.py`,
+  `data/solar-system/coverage_index.json`,
+  `data/solar-system/feature_configs.json` and
+  `data/solar-system/positions/voyager_1.json`. The list does NOT include
+  `data/objects_config.json` or `gallery/nav_cluster.js`, and the page
+  fetches both -- the script tag at `interactive.html` line 132 and the
+  config read at line 2251. [verified @1b077401]
+- **It is the same fault as L-336, one size smaller.** There, no check
+  read the cache the browser draws from, and both rooms broke while
+  eleven checks passed. Here, the check that exists precisely to compare
+  what is SERVED with what is in the working copy skips two files the
+  browser asks for. A file nobody compares can go stale on the live site
+  with nothing saying so.
+- **Stage B of L-334's build contract closes it**, adding
+  `gallery/arrival.js` (new in that stage), `gallery/nav_cluster.js` and
+  `data/objects_config.json` to `SERVED_FILES`.
+- **Claude:** RICE 4/4/90/1 -> 14.4 proposed, unratified, and the score
+  is descriptive rather than a scheduling claim -- stage B already
+  carries it. Reach 4 and Impact 4 for the reason above: the arrival
+  block is read from `data/objects_config.json` by the page itself, so a
+  stale served copy changes what a visitor sees on opening. Effort 1
+  because it is three names added to a list, though a first run may need
+  a reconciliation if a served copy has already drifted.
+- **CLOSED 2026-09-18, and closed by measurement rather than by
+  inspection.** Stage B of L-334 added the three names to
+  `SERVED_FILES`. The live maintenance run at gallery `2f971040` fetched
+  ELEVEN files from palomasorrery.com instead of eight and reported
+  every one of them byte-identical to the working copy -- the three new
+  ones among them: `gallery/arrival.js`, `gallery/nav_cluster.js` and
+  `data/objects_config.json`. The check that compares what is served
+  with what is committed now reads every file the page asks for.
+  [verified @2f971040]
+- **What it does NOT cover, said so the green is not read as wider than
+  it is.** The list is files the page fetches BY NAME. The served cache
+  under `data/solar-system/` is covered by two entries and by Cache in
+  step, not file by file; a position file for an object nobody has drawn
+  yet is not compared. That is a bound, not a gap: L-336's lesson is
+  about the file the browser reads, and every one of those is now on the
+  list.
+**Gap:** none -- move to section C.
+**Ref:** L-336 (the same fault, full size), L-235 (checks that cannot
+fail, gallery side), L-334 (stage B, which closed this), L-267 (the nav
+cluster); gallery `gallery_maintenance_run.py` (`SERVED_FILES`),
+  `interactive.html`, `gallery/nav_cluster.js`,
+  `data/objects_config.json`; resident protocol Part 3, A Check That
+  Cannot Fail Is Not Passing.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
