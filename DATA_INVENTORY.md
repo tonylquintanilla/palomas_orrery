@@ -9,7 +9,7 @@ Repo copies stale/absent; this reflects the live local stores.
 |---|---|---|---|---|
 | .vot | 4 | 295.1 MB | gaia_data_magnitude.vot (284.4 MB) | 2026-02-08 |
 | .nc | 18 | 161.1 MB | era5_clim_march_day22.nc (27.4 MB) | 2026-04-07 |
-| .json | 52 | 132.5 MB | orbit_paths.json (130.9 MB) | 2026-09-17 |
+| .json | 52 | 132.5 MB | orbit_paths.json (130.9 MB) | 2026-09-18 |
 | .backup | 4 | 131.2 MB | orbit_paths.json.backup (130.9 MB) | 2026-09-14 |
 | .backup_old | 1 | 130.9 MB | orbit_paths.json.backup_old (130.9 MB) | 2026-09-14 |
 | .csv | 15 | 34.9 MB | 3773_v3_niskin_hot001_yr01_to_hot348_yr35.csv (30.8 MB) | 2026-04-07 |
@@ -74,7 +74,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 444.3 MB (586 files)
+**Total size:** 444.5 MB (591 files)
 
 **GitHub Pages headroom:** 580 MB remaining of 1024 MB ceiling (43.4% used)
 
@@ -85,9 +85,9 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 | .json | 335 | 420.2 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-18 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 1 | 5.1 MB | palomas_orrery_logo.png (5.1 MB) | 2025-11-27 |
-| .py | 135 | 2.5 MB | gallery_studio.py (243.1 KB) | 2026-09-18 |
+| .py | 140 | 2.6 MB | gallery_studio.py (243.1 KB) | 2026-09-18 |
 | .jsonl | 33 | 800.4 KB | encke.jsonl (24.8 KB) | 2026-09-18 |
-| .md | 15 | 695.4 KB | TEST_PROTOCOL_sun_hang_20260902.md (526.5 KB) | 2026-09-18 |
+| .md | 15 | 701.3 KB | TEST_PROTOCOL_sun_hang_20260902.md (526.5 KB) | 2026-09-18 |
 | .html | 5 | 328.3 KB | index.html (156.6 KB) | 2026-09-18 |
 | .js | 10 | 202.3 KB | feature_renderers.js (85.9 KB) | 2026-09-18 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
@@ -128,7 +128,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | repo | served size | ceiling | headroom | used |
 |---|---|---|---|---|
-| gallery | 444.3 MB | 1024 MB | 580 MB | 43.4% |
+| gallery | 444.5 MB | 1024 MB | 580 MB | 43.4% |
 | orrery (gitignored data) | 966.8 MB | n/a (not served) | -- | -- |
 
 Note: orrery data is local/gitignored. If orbit cache files are pushed to either repo for web serving, re-run this inventory to update headroom.

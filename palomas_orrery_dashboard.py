@@ -58,6 +58,11 @@ added Cache In Step, the gallery check that the served cache holds what
 data/objects_config.json says, written after a config change reached
 the live site ahead of the cache. The Gallery Maintenance Run
 description said three Node smoke suites; it now names all six.
+September 18, 2026 with Anthropic's Claude Opus 5 (L-334): added
+Exhibit Store Editor to Developer Tools, under Gallery Cache Builder --
+Manual Run, so the two by-hand gallery tools sit together. It is a
+window rather than a console tool, so it is declared the way Gallery
+Studio is, with no interactive flag.
 """
 
 import os
@@ -384,6 +389,26 @@ LAUNCH_GROUPS = {
          "--first-build).",
          GALLERY_REPO_DIR,
          True),
+        ("Exhibit Store Editor",
+         "exhibit_store_editor.py",
+         "Edit the words a visitor reads in the exhibit rooms, and tick "
+         "what each room opens on. A window: pick a room, pick a shell, "
+         "type. It writes data/objects_config.json IN PLACE, changing "
+         "only the line it was asked to, so the diff stays readable. It "
+         "will write a shell's name, description, about, note, source "
+         "and link, a radiation belt's words, and the arrival block's "
+         "shells and Moon -- and nothing else. Numbers, their units, "
+         "their figure counts and their orrery_constant links are shown "
+         "in grey and cannot be typed into; a number changes in "
+         "constants_new.py and arrives here through the export and the "
+         "mirror. SAVING IS NOT DEPLOYING: words reach a visitor only "
+         "after the cache builder has run, because the rooms draw their "
+         "shells from the served cache, while the opening-view ticks are "
+         "read from the config by the page itself and need only the "
+         "push. The window says which after every save. It does NOT "
+         "start the cache builder -- that stays a hand run with OneDrive "
+         "paused (L-216).",
+         GALLERY_TOOLS_DIR),
         ("MAINTENANCE RUN -- everything indented below",
          "orrery_maintenance_run.py",
          "One command for the whole routine: regenerates the generated "
