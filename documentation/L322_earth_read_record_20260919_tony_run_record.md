@@ -928,6 +928,15 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
+orrery moved to 4f547285d03ef3d58e7d7c7f2a2eb0e52e071e0c
+
 Then in the gallery: run `tools/pull_constants_export.py`, commit `data/constants_export.json` and `data/constants_export.sha`, and push.
 
-Nothing else changes. No cache rebuild, and no need to pause OneDrive — I tested that on clones before saying it: with the new export in place the gallery still passes all 14 of its offline checkers, Cache in step included, because no exported row value moves.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/tools/pull_constants_export.py
+Pulled from orrery 4f547285: 55 row(s), 58 not exported, store 179dbd5877b8. The SHA is in data/constants_export.sha.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools> 
+
+-- is this tool in the dashboard? could we add a search function in the dashboard to find the right button? 
+-- gallery moved to 2ead992b055054956816ddda3544e849e9789d9a
+
+Nothing else changes. No cache rebuild, and no need to pause OneDrive — I tested that on clones before saying it: with the new export in place the gallery still passes all 14 of its offline checkers, Cache in step included, because no exported row value moves. -- sync reinitiated
