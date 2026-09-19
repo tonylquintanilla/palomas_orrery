@@ -16,8 +16,8 @@ Claude Opus 5. Companion to
 **What this file is.** `# Read:` records that somebody opened a source
 and checked it against the number beside it. This file is the long form:
 what was opened, where in it, what it says, and the verdict. Section 2 is
-Tony's reading list -- the rows this session could not open. There is one
-of them.
+Tony's reading list. It had one row on it; Tony read it on 2026-09-19
+and section 2 now records that read rather than asking for it.
 
 **Who read.** Under provenance-discipline 2.14, The Read Field, the
 reader is decided by ACCESS. Where the builder can open the source it
@@ -176,46 +176,53 @@ store has the right one.
 
 ---
 
-## 2. For Tony to read
+## 2. Read by Tony, 2026-09-19 -- DONE
 
-One row. This is your whole share of the reading for C1.
+One row, and it is closed. The link was alive.
 
 ### `EARTH_LEO_UPPER_ALTITUDE_KM` = 2000.0 km
 
-**Where to look:** the IADC Space Debris Mitigation Guidelines,
-IADC-02-01. The row's own `# Ref:` line points at
+**What Tony opened.** The IADC Space Debris Mitigation Guidelines at the
+row's own `# Ref:` address,
 https://orbitaldebris.jsc.nasa.gov/library/iadc-space-debris-guidelines-revision-2.pdf
+He downloaded it, read section 3.3.2 on page 8 of 14, and imaged the
+paragraph.
 
-**What to look for:** the definition of the LEO Protected Region, in the
-section on protected regions (section 3.3.2 in the revision the row
-cites). It is usually labelled "Region A".
+**Where the local copies live.** `documentation/papers/` on Tony's disk,
+as `iadc-space-debris-guidelines-revision-2.pdf` and
+`EARTH_LEO_UPPER_ALTITUDE_KM_2000_km_tony_read.png`. **Neither is in the
+repository, and that is deliberate** -- `documentation/papers/` is
+gitignored, so a later reader will not find them by path. The address
+above is what travels.
 
-**The number you should expect to see:** an altitude of **2,000 km**,
-with the region extending from the Earth's surface up to it. The row also
-claims the guidelines take the **equatorial radius** as the reference
-surface, so that is worth confirming in the same place.
+**What it says.** Section 3.3.2 (1): "Region A, Low Earth Orbit (or LEO)
+Protected Region -- spherical region that extends from the Earth's
+surface up to an altitude (Z) of 2,000 km". AGREES with 2000.0.
+Exact -- a defined region boundary, not a measurement.
 
-**Why it is on your list and not read above.** This session could not
-open the primary document. The definition was confirmed in several
-independent reproductions of it, including a reproduction of the IADC
-2007 protected-regions figure, and every one of them says 2,000 km from
-the surface. But a reproduction is not the document, and The Access
-Standard says a read records what was OPENED. So the row carries no
-`# Read:` line naming a model; it carries a pointer to this file instead.
+**Two findings this read turned up, neither visible in the imaged
+paragraph.** After Tony confirmed the number, this session opened the
+same document at the same address -- it was reachable on a second attempt
+-- and read it through.
 
-**If the link is dead** -- the row's URL says "revision-2" while the
-source line says "Rev. 3 (June 2021)", so it may well be -- then the
-citation fails The Access Standard and the row should be re-homed to
-whatever the current IADC publication is, or to a standards body that
-restates it. Tell me which and I will do it in C2.
+- **The revision was wrong, and is corrected.** The row's source line
+  said "IADC-02-01 Rev. 3 (June 2021)". The document is IADC-02-01
+  **Revision 2, March 2020**. Its revision history table lists exactly
+  three issues -- 2002-10-15 initial, 2007-09-01 first revision,
+  2020-03-01 update to section 5.3.2 -- and stops. There is no Rev. 3.
+  The number, the section and the link were all right, which is why
+  nothing looked odd.
+- **The equatorial-radius claim is right, and is now quoted.** Section
+  3.3.1: "the equatorial radius of the Earth is taken as 6,378 km and
+  this radius is used as the reference for the Earth's surface from which
+  the orbit regions are defined." The row said so already; it now carries
+  the figure too.
 
-**When you have read it,** the line to add is:
-
-```
-# Read: IADC Space Debris Mitigation Guidelines, LEO Protected Region,
-# Read+: <the section number you actually found it in>, <date>, Tony
-# Read+: Quintanilla
-```
+**Who read, and why the line names Tony.** Tony opened the document and
+read the paragraph the row depends on. That is the read the row needed
+and the `# Read:` line names him. The corroborating pass is recorded here
+rather than on the row, because a read line names a reader and a place,
+not an audit trail.
 
 ---
 

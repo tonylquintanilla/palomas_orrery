@@ -614,3 +614,147 @@ Your reading list has one row on it. EARTH_LEO_UPPER_ALTITUDE_KM, the 2,000 km L
 **Tony**: correct. I read the paper downloaded to orrery documentation/papers as iadc-space-debris-guidelines-revision-2.pdf in the link provided https://orbitaldebris.jsc.nasa.gov/library/iadc-space-debris-guidelines-revision-2.pdf and I imaged the specific paragraph referenced and saved it in the same directory as EARTH_LEO_UPPER_ALTITUDE_KM_2000_km_tony_read.png 
 
 Still open for C2, unchanged: the 28 magnetosphere rows, the five retired dimensionless tokens, the two standoffs reverting to expressions, and the read check I told you I would build before Earth closes.
+
+==============================
+
+Opus: 
+Reading the run record from disk — only the image landed in my context.Reading both remotes live before anything else — the offline run in your record ended on a red Cache in step.The cache is the live-site problem. Confirmed: the deployed rooms serve the old value. Now checking the orrery side and the row Tony read.Trying the IADC document myself now that you've given the link — it should settle two smaller things on that row.That search result is the document itself, and its revision table settles one thing already. Fetching it to check the other.The document settles both. Section 3.3.1 says exactly what the row claims — but the revision is wrong. Building the patch.**The live site is still serving the old numbers.** That is the one thing to fix, and it is the failure gallery-cache-builder 1.5 was bumped to prevent. I cloned the gallery at `b1c11cc7` and ran Cache in step against it: 18 differences, the same 18 your offline run reported. The config went out and the cache did not. Right now the Earth room draws the lower mantle at 5711 km with the wrong author list, because the rooms read the cache.
+
+The live run passed because it only checks that the served files match your working copy. Both are stale in the same way, so it cannot see this — another check that cannot fail for this particular thing, which is worth a line on L-336 when you next touch it.
+
+**What to do, in this order.** Run the orrery patch above first: it changes comments only, no value moves, and the export comes out byte-identical apart from the store hash. Push it. 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L322_12_iadc_read_20260919.py
+  ok  STORE  EARTH_LEO_UPPER_ALTITUDE_KM  the read line, Tony's read
+  ok  STORE  EARTH_LEO_UPPER_ALTITUDE_KM  revision corrected Rev. 3 -> Revision 2
+  ok  RECORD  section 2 becomes the record of the read
+  ok  RECORD  the header stops promising a list that no longer exists
+
+      constants_new.py                                      116443 ->  117113 bytes
+      documentation/L322_earth_read_record_20260919.md       13260 ->   13797 bytes
+
+patch applied (2 files, 4 edits)
+
+NOW, in order:
+  1. Run the orrery maintenance run. Nothing should change
+     except the two files above: this patch touches no value,
+     so the export and every checker should be unmoved.
+  2. Move this script into documentation/.
+  3. Commit and push. Report the new SHA.
+
+Undo at any point is Discard Changes in GitHub Desktop.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+Then do the gallery in one pass — pull the export, run the mirror, 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L322_11_lower_mantle_citation_20260919.py
+ERROR: that entry does not hold the text this patch was cut against.
+  expected 'Ishii, Kumagai, Sugiura & Tsuchiya (2019), Nature Geoscience 12:869 -- the 660-km discontinuity'
+  found    "Ishii, Huang, Myhill et al. (2019), Nature Geoscience 12:869-872 -- the sharp 660-km discontinuity; the global average depth of 660 +/- 10 km is from the same group's open companion, Ishii et al. (2018), Scientific Reports 8:6358"
+If the patch already ran, this is what a second run looks like: it refuses.
+NOTHING was written. Undo is Discard Changes in GitHub Desktop.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+pause OneDrive, -- paused for 2 hours
+
+rebuild the cache, 
+
+[RECOVER] removed retained data\solar-system.prev (cleared read-only on 6 entries)
+[sweep] kept 1 recent sibling(s) as autopsies: .staging_solar-system_20260917T234936Z
+[warn] sun: features-only entry; no Horizons fetch
+[done] run 20260919T210317Z (nightly): 13 objects
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+run the offline maintenance run until Cache in step is green, 
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              0.7s  no change to MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     0.8s  rewrote data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite       6.7s  PASS (167 checks, 0 failures)
+  PASS Mirror suite              0.1s  All 42 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing.
+  PASS Store writer suite        2.8s  All 245 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 246 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 37 link(s) compared, store
+                                    b70f2c56756b.
+  PASS Pointer join              0.1s  Every link is accounted for: 70
+                                    link(s) against orrery 6071df8e,
+                                    28 fallback named.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's features exactly: 4
+                                    object(s), 34 named shell(s), in
+                                    both cache files.
+  PASS Feature renderers         0.7s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.1s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.1s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.1s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.1s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: 1 sibling(s), none stale.
+                                    The sweep is keeping up.
+
+======================================================================
+  14 of 14 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: 1 sibling(s), none stale. The
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+and commit the config and the cache together. Doing the orrery first means the gallery only needs one cycle.
+
+
+
+**Your read is recorded, and it found two more things.** The number is confirmed and the row now carries a real read line naming you, with the section and its words. After you confirmed it I tried the same link again and it worked this time, so I read the document through — which turned up what your paragraph could not show.
+
+The revision was wrong. The row cited "IADC-02-01 Rev. 3 (June 2021)". The document is **Revision 2, March 2020**, and its revision history table lists three issues and stops at 2020. There is no Rev. 3. The number, the section and the link were all correct, which is exactly why nobody looked twice at the revision.
+
+The other claim on that row turned out right, and I had flagged it as unverified. Section 3.3.1 says the equatorial radius "is taken as 6,378 km and this radius is used as the reference for the Earth's surface from which the orbit regions are defined." The row said so already; it now carries the figure too.
+
+**On where the paper lives.** `documentation/papers/` is gitignored, so your PDF and image stay on your disk and never reach the repository. That is the right arrangement and I have not tried to change it — but it means a later reader cannot follow a path to them, so the read record now says the address is what travels, not the filename.
+
+C2 is unchanged: the 28 magnetosphere rows, the five retired `dimensionless` tokens (your live run already names four of them as NO UNIT), the two standoffs reverting to expressions, and the read check before Earth closes.

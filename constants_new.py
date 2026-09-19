@@ -363,13 +363,23 @@ EARTH_LEO_UPPER_ALTITUDE_KM = 2000.0
 # Status: measured V_SOURCED 2026-09-19
 # Figures: exact -- the IADC protected region is DEFINED at an altitude
 # Figures+: of 2,000 km. A definition, not a measurement.
-# Read: for Tony -- see documentation/L322_earth_read_record_20260919.md.
-# Read+: The primary IADC document could not be opened from this session;
-# Read+: the definition was confirmed only in reproductions of it.
-# Source: IADC Space Debris Mitigation Guidelines, IADC-02-01 Rev. 3
-# Source+: (June 2021), section 3.3.2 -- the LEO Protected Region extends
-# Source+: from the surface to an altitude of 2,000 km. Section 3.3.1 takes
-# Source+: the equatorial radius as the reference surface, as this file does.
+# Read: IADC-02-01 Revision 2, section 3.3.2 (1), p. 8 -- "Region A,
+# Read+: Low Earth Orbit (or LEO) Protected Region -- spherical region
+# Read+: that extends from the Earth's surface up to an altitude (Z) of
+# Read+: 2,000 km", 2026-09-19, Tony Quintanilla. Corroborated the same
+# Read+: day by Claude Opus 5, which read the whole document and found
+# Read+: the revision error corrected below. Detail, and where Tony's
+# Read+: local copies of the paper and his image of the paragraph sit,
+# Read+: are in documentation/L322_earth_read_record_20260919.md.
+# Source: IADC Space Debris Mitigation Guidelines, IADC-02-01 REVISION
+# Source+: 2, March 2020, section 3.3.2 (1) -- the LEO Protected Region
+# Source+: extends from the Earth's surface to an altitude of 2,000 km.
+# Source+: Section 3.3.1 takes the equatorial radius as the reference
+# Source+: surface, as this file does, and gives it as 6,378 km.
+# Source+: Corrected 2026-09-19: the old line said "Rev. 3 (June 2021)".
+# Source+: The document at the Ref link below, which is the one that was
+# Source+: read, is Revision 2 of March 2020, and its revision history
+# Source+: table ends there. No Rev. 3 was involved.
 # Ref: https://orbitaldebris.jsc.nasa.gov/library/iadc-space-debris-guidelines-revision-2.pdf
 EARTH_LEO_LOWER_ALTITUDE_KM = 200.0
 # Unit: km
