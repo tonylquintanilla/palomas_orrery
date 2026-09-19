@@ -1138,6 +1138,42 @@ resident.
 (Moved down from the resident protocol on 2026-09-16 when v3.61
 made a fourth entry.)
 
+v3.59 (September 14, 2026): ONE RULE REWRITTEN, the Register Rule, on
+Tony's instruction of the same evening. No skill bumped.
+
+WHAT THE OLD WORDING GOT WRONG. It opened "plain speech is the default"
+and then gave the compressed voice a home in this document and in the
+skills. Read together, those two sentences describe a shared shorthand
+that simply belongs in a different place. Tony's correction: it is not
+shared. He cannot read it and Claude can, so it is a channel with one
+party on it.
+
+THE ASYMMETRY IS NOW THE RULE'S REASON rather than a footnote to it.
+Claude holds the whole session at once and unpacks a compressed phrase
+without effort. Tony is living through the session and cannot, and
+noticing that a sentence is too dense already costs him the reading.
+Compression is therefore free on one side and expensive on the other,
+which is why every earlier version of this rule decayed: nothing in
+writing a compressed sentence tells the writer it failed.
+
+SUMMARIES ARE NAMED as where it fails, because that is where it failed
+on 2026-09-14. A closing list of decisions names each one rather than
+stating it, and a list of names is compressed prose wearing bullet
+points. The evening produced four of those before Tony said so.
+
+The three checks, the two supporting defaults and the backstop are
+unchanged. What changed is the opening, which is the part that has to
+carry the rule when a session is moving.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.56 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-09-19 when v3.62
+made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

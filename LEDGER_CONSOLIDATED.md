@@ -824,6 +824,20 @@ as an archive of the prioritization thinking -- no cleanup on close.
   (3) The Sun's room shows a Moon tick. Its arrival block carries a
   `moon` key, so the panel offers it, but the Sun's scene has no Moon
   trace -- ticking it writes `true` and changes nothing.
+- **A SKILL DESCRIPTION IS CAPPED AT 1024 CHARACTERS**, learned
+  2026-09-19 by the upload refusing: "field 'description' in SKILL.md
+  must be at most 1024 characters". interactive-exhibit 1.4 came out at
+  1042 and would not install; the 35 kB body was never the problem, and
+  gallery-cache-builder at 788 went in fine. Every other skill sits
+  between 550 and 813, so this is the first time the ceiling has been
+  met. Trimmed to 991 in
+  `patch_L334_10_skill_description_and_history_20260919.py`.
+  **Claude proposes, unratified:** `skills_index.py` should FAIL a run
+  whose SKILL.md description exceeds 1024. It already reads every one of
+  them to build the manifest, so it is the place where the check would
+  actually run rather than be remembered -- and the failure it catches
+  is a skill that cannot be installed, which is invisible until someone
+  tries and is easy to abandon halfway.
 - **AND THE MODE 5 PASS ITSELF**, which is the point of this item. Tony
   has seen the window in a screenshot and not yet used it. A checklist
   pass over both rooms will find things this list does not have, and

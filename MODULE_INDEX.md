@@ -12,21 +12,21 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 137  
-**Total Lines of Code (non-blank):** 108,785  
-**Total Public Functions/Classes:** 1,225
+**Total Lines of Code (non-blank):** 108,366  
+**Total Public Functions/Classes:** 1,223
 
 ## Classification Coverage
 
 **Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L334_9_records_20260919.py`
+- `patch_L334_10_skill_description_and_history_20260919.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
 **Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L334_9_records_20260919.py`
+- `patch_L334_10_skill_description_and_history_20260919.py`
 
 
 ---
@@ -238,7 +238,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L334_9_records_20260919.py` | - ORRERY repo. (622 lines) |
+| `patch_L334_10_skill_description_and_history_20260919.py` | - ORRERY repo. (203 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |
