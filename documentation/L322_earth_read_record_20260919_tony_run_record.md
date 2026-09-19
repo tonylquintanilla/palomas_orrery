@@ -824,3 +824,110 @@ The other claim on that row turned out right, and I had flagged it as unverified
 **On where the paper lives.** `documentation/papers/` is gitignored, so your PDF and image stay on your disk and never reach the repository. That is the right arrangement and I have not tried to change it — but it means a later reader cannot follow a path to them, so the read record now says the address is what travels, not the filename.
 
 C2 is unchanged: the 28 magnetosphere rows, the five retired `dimensionless` tokens (your live run already names four of them as NO UNIT), the two standoffs reverting to expressions, and the read check before Earth closes. -- confirmed
+
+=====================================================
+
+Opus: 
+Let me re-measure before explaining, and look at what was actually in your last commit.Two answers, and the second one is my mistake, not yours.
+
+**Where the heading is.** In the orrery, at `documentation/L322_earth_read_record_20260919.md`. It is the heading of section 2, roughly two thirds of the way down. That file is the read record. The other one, with `_tony_run_record` on the end, is the transcript you filed beside it. -- confirmed
+
+**Why the export is stale: I told you it would not move, and it did.** You followed the outline exactly. The outline was wrong.
+
+Step 1 of that patch printed this: *"Run the orrery maintenance run. Nothing should change except the two files above: this patch touches no value, so the export and every checker should be unmoved."* If you ran the run, it would have reported that it rewrote `data/constants_export.json` — and my sentence had just told you that file should not have moved. Leaving it out of the commit is the sensible thing to do after reading what I wrote. -- i ran the maintenance runner without removing anything from the commit. the record above should confirm that. 
+
+The commit confirms it. `4417217` carries four files: `constants_new.py`, the read record, the run record, and the patch script. `data/constants_export.json` is not among them.
+
+**Why I was wrong, specifically.** The export file stamps itself with a hash of `constants_new.py`. That hash covers the whole file, comment lines included, not only the values. My patch changed comment lines, so the hash changed, so the export needed regenerating even though not one number moved. I had already measured exactly this earlier in the session — I watched the hash go from `b70f2c56` to `179dbd58` on my own test copy — and then wrote an instruction saying the opposite. Having the evidence and writing the contrary is the part I got wrong, not the reasoning about values.
+
+**The fix is one file in each repository.**
+
+In the orrery: run the maintenance run as usual. It will report that it rewrote `data/constants_export.json`. **Commit that file this time** and push. -- again, i commited everything last time. i did not exclude anything. 
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20260919T195956Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 0.7s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Skill manifest               0.1s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             0.3s  rewrote data/constants_export.json
+  Module atlas                 5.3s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               3.9s  rewrote DATA_INVENTORY.md
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.2s  21 of 21 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.4s  No figure count exceeds its inputs: 31
+                                     derived row(s) read, 15 judged OK -- 15 OK,
+                                     16 NOT YET MIGRATED, 1 NO DERIVED LINE.
+  Constants export check       0.6s  Export matches the store: sha256
+                                     179dbd5877b8 on both sides; 55 rows re-read,
+                                     58 not exported, 16 tokens.
+  Dimensions                   0.7s  No unit contradicts its arithmetic: 31
+                                     derived row(s) read -- 15 OK, 10 NO UNIT, 6
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 62 status lines in constants_new.py are
+                                     well formed; 49 rows carry none.
+  Row shape                    0.1s  All 113 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.2s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Reset completeness          10.5s  PASS -- all 309 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  1.4s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Worksheet checker            7.1s  76 of 114 routed, 8 clean
+  Worksheet checker tests     12.5s  All 136 checks passed
+  Worksheet key round trip     0.7s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         16.4s  All 76 checks passed
+  Extractor pins               0.3s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner           8.1s  292 TIER-1 FINDINGS IN THE SCANNED TREE
+
+======================================================================
+  16 of 16 gating checkers passed -- 70.1s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           76 of 114 routed, 8 clean
+    Provenance scanner          292 TIER-1 FINDINGS IN THE SCANNED TREE
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  1890 file(s) examined, 8 written, 0 created, 0 removed, 5 rewritten identically
+    written   DATA_INVENTORY.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/constants_export.json
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      LEDGER_CONSOLIDATED.md
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+Then in the gallery: run `tools/pull_constants_export.py`, commit `data/constants_export.json` and `data/constants_export.sha`, and push.
+
+Nothing else changes. No cache rebuild, and no need to pause OneDrive — I tested that on clones before saying it: with the new export in place the gallery still passes all 14 of its offline checkers, Cache in step included, because no exported row value moves.
