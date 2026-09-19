@@ -397,9 +397,211 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
 move the script into documentation/, commit and push. The script prints the rest of the sequence when it finishes. 
 
-
+-- orrery moved to 903f9013ac81e58c2050d2aade61763d2c5ff64a
 
 The gallery patch and the read record are for after that push; the read record is a documentation/ file with nothing to run.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L322_11_lower_mantle_citation_20260919.py
+  ok  1 change written
+
+      was: Ishii, Kumagai, Sugiura & Tsuchiya (2019), Nature Geoscience 12:869 -- the 660-km discontinuity
+      now: Ishii, Huang, Myhill et al. (2019), Nature Geoscience 12:869-872 -- the sharp 660-km discontinuity; the global average depth of 660 +/- 10 km is from the same group's open companion, Ishii et al. (2018), Scientific Reports 8:6358
+
+NOW, in order -- this is the rest of the gallery half of C1:
+  1. Pull the orrery's export: python tools/pull_constants_export.py
+  2. Run the mirror: python tools/mirror_constants.py --write
+     It writes the NUMBERS. Expect the lower mantle shell to
+     move from 5711.0 to 5710.0 km, and expect many Earth
+     links to start being served by the export rather than
+     going through the older drift check.
+  3. PAUSE OneDrive syncing, then rebuild the served cache.
+  4. Run the gallery maintenance run. Expect 'Cache in step'.
+  5. Move this script into documentation/.
+  6. Commit the config AND the cache TOGETHER, and push. A
+     config change is not deployed until the cache is rebuilt.
+  7. Look at both rooms on the phone.
+
+Undo at any point is Discard Changes in GitHub Desktop.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.1s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     0.6s  rewrote
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.1s  rewrote data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite       7.7s  PASS (167 checks, 0 failures)
+  PASS Mirror suite              0.1s  All 42 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing.
+  PASS Store writer suite        3.1s  All 245 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 246 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 37 link(s) compared, store
+                                    b70f2c56756b.
+  PASS Pointer join              0.1s  Every link is accounted for: 70
+                                    link(s) against orrery 903f9013,
+                                    28 fallback named.
+  FAIL Cache in step             0.1s  18 difference(s): the served cache
+                                    is NOT what the config says. The
+                                    live rooms draw from the cache.
+                                    Run the cache builder and commit
+                                    its output with the config.
+  PASS Feature renderers         0.8s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.1s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.1s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: 1 sibling(s), none stale.
+                                    The sweep is keeping up.
+
+======================================================================
+  1 of 14 gating checkers FAILED
+  Cache in step
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: 1 sibling(s), none stale. The
+======================================================================
+
+----------------------------------------------------------------------
+Cache in step -- 18 difference(s): the served cache is NOT what the config says. The live rooms draw from the cache. Run the cache builder and commit its output with the config.
+----------------------------------------------------------------------
+======================================================================
+  CACHE IN STEP -- the served cache against data/objects_config.json
+======================================================================
+
+Compared 4 object(s) serving features (sun, earth, jupiter, saturn), 34 named shell(s),
+against data/solar-system/coverage_index.json and data/solar-system/feature_configs.json.
+
+FAILURES (18):
+  data/solar-system/coverage_index.json        earth/earth_interior/inner_core/radius/figures: config present, cache absent
+  data/solar-system/coverage_index.json        earth/earth_interior/outer_core/radius/figures: config present, cache absent
+  data/solar-system/coverage_index.json        earth/earth_interior/lower_mantle/radius/value: config 5710.0, cache 5711.0
+  data/solar-system/coverage_index.json        earth/earth_interior/lower_mantle/radius/figures: config present, cache absent
+  data/solar-system/coverage_index.json        earth/earth_interior/lower_mantle/source: config "Ishii, Huang, Myhill et al. (2019), Nature G..., cache "Ishii, Kumagai, Sugiura & Tsuchiya (2019), N...
+  data/solar-system/coverage_index.json        earth/earth_interior/upper_mantle/radius/figures: config present, cache absent
+  data/solar-system/coverage_index.json        earth/earth_interior/crust/radius/figures: config present, cache absent
+  data/solar-system/coverage_index.json        earth/earth_interior/planet_radius/figures: config present, cache absent
+  data/solar-system/coverage_index.json        earth: and 20 more difference(s)
+  data/solar-system/feature_configs.json       earth/earth_interior/inner_core/radius/figures: config present, cache absent
+  data/solar-system/feature_configs.json       earth/earth_interior/outer_core/radius/figures: config present, cache absent
+  data/solar-system/feature_configs.json       earth/earth_interior/lower_mantle/radius/value: config 5710.0, cache 5711.0
+  data/solar-system/feature_configs.json       earth/earth_interior/lower_mantle/radius/figures: config present, cache absent
+  data/solar-system/feature_configs.json       earth/earth_interior/lower_mantle/source: config "Ishii, Huang, Myhill et al. (2019), Nature G..., cache "Ishii, Kumagai, Sugiura & Tsuchiya (2019), N...
+  data/solar-system/feature_configs.json       earth/earth_interior/upper_mantle/radius/figures: config present, cache absent
+  data/solar-system/feature_configs.json       earth/earth_interior/crust/radius/figures: config present, cache absent
+  data/solar-system/feature_configs.json       earth/earth_interior/planet_radius/figures: config present, cache absent
+  data/solar-system/feature_configs.json       earth: and 20 more difference(s)
+
+18 difference(s): the served cache is NOT what the config says. The live rooms draw from the cache. Run the cache builder and commit its output with the config.
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+gallery moved to b1c11cc7300c8fa943e1c9358d0ce699b94cf19b
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 11 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+
+  PASS Served reachability       1.5s  all 11 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 903f9013
+
+  PASS Export freshness          0.1s  the served export is the orrery's
+                                    at 903f9013, byte for byte
+
+  orrery HEAD 903f9013
+  examining 33 of 70 links; the other 37 are served from the export
+    NOT IN STORE  create_sun_galactic_tide default not a top-level constant in the store
+                  /objects/0/features/oort_cloud/galactic_tide/typical_radius
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NO UNIT       EARTH_MAGNETOPAUSE_SHUE_A6       the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/magnetopause/surface/a6
+    NO UNIT       EARTH_MAGNETOPAUSE_SHUE_A8       the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/magnetopause/surface/a8
+    NO UNIT       EARTH_BOW_SHOCK_JELINEK_EPS      the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/bow_shock/surface/epsilon
+    NO UNIT       EARTH_BOW_SHOCK_JELINEK_LAMBDA   the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/bow_shock/surface/lambda
+    NOT IN STORE  planet_poles['Earth']            not a top-level constant in the store
+                  /objects/1/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  33 pointers: 24 match, 0 DRIFT, 0 UNIT MISMATCH, 9 could not be examined.
+
+  PASS Store drift               0.6s  33 pointers against orrery
+                                    903f9013 -- 24 match, 0 DRIFT, 0
+                                    UNIT MISMATCH, 9 could not be
+                                    examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            33 pointers against orrery 903f9013 --
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 What C1 does. All 57 Earth rows now carry a unit and a status, up from 28. The 29 that had nothing now have figure counts too, and 12 carry a read line naming who read the source. The export goes from 23 rows served to 55, of which 52 are Earth's — so most of those links move off the old drift check onto the new ones. All three constants checkers pass, and I made each one fail on purpose on an Earth row and watched it name the row: the unit checker on a broken _RADII, the figures checker on an over-declared count, the export checker on a value I altered by hand.
 
@@ -408,5 +610,7 @@ Corrections I made as I went, beyond the lower mantle you approved. Three citati
 One thing turned out better than the skill says. provenance-discipline records the 1981 PREM paper as walled, with its tables open elsewhere. The paper itself is open in full at Harvard, and I read Table I directly rather than through a secondary tabulation. That is worth correcting at the skill's next bump, and the read record says so.
 
 Your reading list has one row on it. EARTH_LEO_UPPER_ALTITUDE_KM, the 2,000 km LEO ceiling. I could not open the primary IADC document, and several faithful reproductions of it are still not the document. The read record's section 2 gives you the link, where to look, and the number to expect. I suspect the link is dead — the URL says revision 2 while the citation says Rev. 3 — in which case tell me and I will re-home it in C2.
+
+**Tony**: correct. I read the paper downloaded to orrery documentation/papers as iadc-space-debris-guidelines-revision-2.pdf in the link provided https://orbitaldebris.jsc.nasa.gov/library/iadc-space-debris-guidelines-revision-2.pdf and I imaged the specific paragraph referenced and saved it in the same directory as EARTH_LEO_UPPER_ALTITUDE_KM_2000_km_tony_read.png 
 
 Still open for C2, unchanged: the 28 magnetosphere rows, the five retired dimensionless tokens, the two standoffs reverting to expressions, and the read check I told you I would build before Earth closes.
