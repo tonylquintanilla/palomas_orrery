@@ -1174,6 +1174,57 @@ resident.
 (Moved down from the resident protocol on 2026-09-19 when v3.62
 made a fourth entry.)
 
+v3.60 (September 16, 2026): No rule changed in this document. TWO
+skill bumps, taken as the session's first action, ahead of the build
+they serve.
+
+interactive-exhibit 1.2 -> 1.3 (L-332) and orrery-coding-conventions
+1.8 -> 1.9 (L-331).
+
+THE EXHIBIT SKILL WAS FIVE ROUNDS STALE. Version 1.2 was cut on
+2026-09-11 and described the rooms' chrome as L-316 round 2 and L-318
+rounds 1 and 2 left it. Six more rounds ran on Tony's phone on
+2026-09-15/16, each checked before the next was built, and the skill
+that fires on any edit to that chrome did not know any of them: the
+arrow cross's corner is now one CSS rule; a drawer row has a finger-
+sized target and GO ticks an unticked shell; a break inside a sentence
+is soft; the portrait phone's text box has no arrow and sits mid-view;
+and a phone tap reaches a marker through a second Plotly rule read from
+v2.35.2's pick pass. The skill also gains the hover budget suite in its
+pre-test step, with the note that the suite does not build the Sun
+room -- which is how four Sun hovers missed the move to the i panel
+(L-331). A checker passes on what it does not look at.
+
+THE ONE NEW RULE IS TONY'S, and it rides both skills. On 2026-09-16,
+reading the Sun room's Galactic Tide hover -- "DECLARED --" at the top,
+"Not a measurement." at the bottom -- he said that declared-not-
+measured means little to a visitor, and then made it general: "In
+general we should avoid compressed language in the hovertext." That is
+this document's Register Rule pointed the other way: the Register Rule
+governs what Claude writes to Tony; this governs what the plot says to
+a visitor, who has been through none of the conversation. It is written
+into interactive-exhibit for the gallery's hovers and into
+orrery-coding-conventions for the orrery's, because the orrery's hovers
+are where it reaches next (L-321), and a convention that is not in the
+skill a hover session loads does not travel. The rule changes the
+words, not the facts or the caveats; reworded hovers go to Tony first.
+
+THE ORDERING IS v3.55's: the bumps precede L-331's build, so the next
+exhibit session's stale-skill gate fires on a matching manifest. The
+obligation still travels: this session loaded 1.2 and 1.8, and a
+reinstall cannot be verified from inside the session that makes it. The
+next session confirms its loaded copies read 1.3 and 1.9 before exhibit
+or hover work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.57 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-09-19 when v3.63
+made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

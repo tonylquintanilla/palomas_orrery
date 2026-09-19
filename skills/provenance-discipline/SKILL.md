@@ -6,12 +6,32 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 2.13 | Cut from palomas_orrery @ ebdc55cc (v2.13),
-earlier @ bfc0505e (v2.12), @ 159c5a2c (v2.11), @ 071a0a65 (v2.10),
-earlier @ a263f73d (v2.9), @ 7f4a2f9f (v2.8), @ 3faa72a0 (v2.7),
-@ f603be3 (v2.6), @ 731066f (v2.5), @ 6b99ace (v2.2),
-@ 00219d9 (v2.1), @ eb77c83 (v2.0), @ cdcdb4b (v1.9)
-| September 16, 2026
+Skill version: 2.14 | Cut from palomas_orrery @ dfa779bd (v2.14),
+earlier @ ebdc55cc (v2.13), @ bfc0505e (v2.12), @ 159c5a2c (v2.11),
+earlier @ 071a0a65 (v2.10), @ a263f73d (v2.9), @ 7f4a2f9f (v2.8),
+@ 3faa72a0 (v2.7), @ f603be3 (v2.6), @ 731066f (v2.5),
+@ 6b99ace (v2.2), @ 00219d9 (v2.1), @ eb77c83 (v2.0), @ cdcdb4b (v1.9)
+| September 19, 2026
+v2.14 writes down L-322 ruling (b), the read. It has been a ruling
+since 2026-09-11 and lived only in the ledger, and a convention that is
+not in the skill does not travel -- the protocol has recorded that
+lesson three times. The Status Line gains The Read Field: a
+"# Read: <page or table>, <date>, <reader>" line on a measured row
+whose value is DRAWN in a published exhibit, or that feeds one. WHO
+DOES THE READING IS DECIDED BY ACCESS, on Tony's ruling of 2026-09-19,
+so the builder reads what it can open and names itself, a row only Tony
+can open goes to him in a FILE and never as a list in chat, and a
+source neither can open fails The Access Standard. A model's read
+counts and the line says so; a read reconstructed from training is
+worse than no read, because it stops the next reader from looking. The
+Unit Field now points at constants_tokens.py, which owns the token
+table, the RETIRED_TOKENS list and the "named number" marker, and names
+"# Read:" among the fields a row's single slice visit writes. Rule 8's
+enumeration names BOTH routes to a derived row -- its arithmetic and
+its "# Derived:" line -- because a typed number carrying a
+"# Derived:" note is a literal whose arithmetic lives in prose, and the
+checker must still name it. The worksheet schema gains the "Read by"
+column promised on 2026-09-11 and missed by 2.13. Handle L-322.
 v2.13 settles L-322 (d), significant figures, on Tony's rulings of
 2026-09-16. The Figure Count Is a Declared Field [QUALITY] joins
 Report to the Figures You Have: a "# Figures:" line beside every
@@ -683,9 +703,22 @@ names the QUANTITY, which is what makes comparison possible: `deg`
 rather than `dimensionless` for an angle, `l_shell` rather than
 `dimensionless` for a McIlwain L, because 105 degrees is not
 interchangeable with 105 of anything else. `dimensionless` names no
-quantity and retires as a token. The migration is walked by body,
-Earth first, and each row is visited once: `# Unit:`, `# Status:` and
-`# Figures:` (below) are written at that single visit.
+quantity and retires as a token.
+
+**`constants_tokens.py` owns the token table.** One entry per token,
+carrying its dimension -- an astropy unit string, or the words `named
+number` for a quantity with no physical dimension that is still a named
+thing, which is what `l_shell` is -- and, for a unit defined by a value
+in the store, the row that defines it. A retired token is not simply
+absent: `RETIRED_TOKENS` holds it with the reason, so a checker meeting
+`dimensionless` on a row says what is wrong with it instead of saying
+the token is unknown. A token in neither table is a failure. That file
+replaces two pieces of the gallery that did this job by inference,
+`SCALAR_UNITS` and the suffix reader.
+
+The migration is walked by body, Earth first, and each row is visited
+ONCE: `# Unit:`, `# Status:`, `# Figures:` (below) and, where the row is
+in scope, `# Read:` (below) are all written at that single visit.
 
 (Tony's rulings, 2026-09-11 and 2026-09-14, recorded on L-322 and until
 this version living only there. In engineering he has always used
@@ -698,6 +731,74 @@ own line, which overrides. This does not reopen the per-value ruling of
 thirty-line proximity window, where a parser cannot distinguish group
 intent from accident. A status line on a dict is structurally scoped,
 not merely near.
+
+### The Read Field
+
+**A typed-in number can be checked by a person or a model reading the
+source against it, and `# Read:` records that this happened.** One line
+beside the value, in the same comment block as `# Unit:`, `# Status:`
+and `# Figures:`:
+
+```
+# Read: <page or table>, <date>, <reader>
+```
+
+```python
+EARTH_MAGNETOPAUSE_SHUE_A1_RADII = 10.22
+# Read: Table 1 "After Fit", p. 17,698, 2026-09-11, Claude Fable 5.1
+```
+
+**Scope: a measured row whose value is DRAWN in a published exhibit,
+and any row that feeds one.** Not every row in the store. A declared
+drawing choice has nothing to read against, and a measured row nobody
+draws is outside the bound, by The Artifact Bounds the Audit.
+
+**Who does the reading is decided by ACCESS, not by importance.** The
+scope of 2026-09-11 said the check applies "where critical" and never
+defined the word. Tony's ruling, 2026-09-19:
+
+> what I meant by critical is where your own search tools cannot read a
+> needed source but I can.
+
+He glossed "need" in the same message: a number is in the store and
+needs a source. So the question is never how important the number is.
+An unimportant number behind a wall only Tony can open still goes to
+him, and a load-bearing number the builder can open never does.
+
+Three branches, and a row takes whichever applies:
+
+- **The builder can open the source.** The builder reads it against the
+  row and writes the line, naming ITSELF as the reader. A model's read
+  is a real read, recorded as a model's.
+- **The builder cannot open it and Tony can.** The row goes on a
+  reading list for him: one file, one row per constant, with the link,
+  where to look in it, and the number he should expect to see. That
+  list is Tony's WHOLE share of the reading -- nothing else in a slice
+  walk asks him to read a source -- and it is a file he opens at his
+  machine, never a list in chat. His line carries his name and the date
+  he read.
+- **Neither can open it.** The citation fails The Access Standard.
+  Re-home it to an open authority carrying the same value, or remove
+  the claim and note the gap.
+
+**A read counts only if the source was actually OPENED.** The line
+records what was opened, with the title as printed and the table or
+page, under The Access Standard's rule that a source names what was
+opened rather than what it cites. A read reconstructed from training is
+worse than no read, because the line stops the next reader from looking
+while recording nothing that was checked. This is a `# Source:` over
+recalled data, one layer out.
+
+**No line at all means the row has not been read**, the way a missing
+`# Status:` means the pass has not reached the value. Inside a closed
+slice a missing line on an in-scope row FAILS; outside one it is named
+as not yet migrated.
+
+(Tony's rulings, 2026-09-11 and 2026-09-19, on L-322 ruling (b),
+confirmed point by point on 2026-09-19 before this section was written.
+The fourteen magnetosphere rows already carry a dated per-row record in
+`documentation/L305_gap1_read_record_20260911.md`, a model's read of
+Tony's PDFs; their lines name the model.)
 
 ### Geometry Constants Are First-Class Claims
 
@@ -889,7 +990,16 @@ AU where the source says 121.6).
 
 Both types use the same worksheet table format:
 
-| # | Job | Claim | Code value | Your value | Source unit | Source (URL opened, access word) | Value correct? | Citation correct? | Notes |
+| # | Job | Claim | Code value | Your value | Source unit | Source (URL opened, access word) | Value correct? | Citation correct? | Read by | Notes |
+
+**`Read by` names WHO opened the source**, a model by name or Tony, and
+it is not optional. A verdict is only as good as the reading behind it,
+and the two readings are reached differently: a model reads what its
+search tools can open, and Tony reads what only he can (The Read Field,
+above). A worksheet that does not say which happened cannot be turned
+into a `# Read:` line without guessing, and guessing there is the
+failure that rule exists to prevent. (Promised on 2026-09-11; it did
+not ride 2.13.)
 
 **Every row says which job it is.** The two types above describe what a
 whole worksheet is FOR; a real worksheet usually needs both, and the
@@ -1683,9 +1793,16 @@ than a rounded literal: a derived row's count may not exceed the least
 count among the non-exact inputs it names, each named input appears in
 the expression, and a `# Derived:` row with no `# Figures:` line prints
 NOT YET MIGRATED with its name -- a FAIL inside a closed slice, a named
-gap outside one. Enumeration is by the `# Derived:` line, not by a
-`# Status:` word: at 2.12 the checker found derived rows by Status and
-saw 2 of 27.
+gap outside one. ENUMERATION NAMES BOTH ROUTES TO A DERIVED ROW, never
+a `# Status:` word: a row whose right-hand side is ARITHMETIC over other
+store rows, and a row carrying a `# Derived:` line. They are not the
+same set. `constants_rows.py` treats a typed number with a `# Derived:`
+note as a LITERAL whose arithmetic lives in prose rather than in the
+expression, so it is invisible to a walk that looks only at right-hand
+sides -- and the two `TRANSITIONAL` standoffs are exactly that shape
+until they revert. The checker names rows found by either route, and an
+expression with no `# Derived:` line is itself a named gap. (At 2.12
+enumeration went by Status and saw 2 of 27.)
 
 (Tony's rulings, 2026-09-16, adopting the procedure in
 `documentation/DESIGN_L322_d_significant_figures_20260916.md` "as

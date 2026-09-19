@@ -8249,6 +8249,24 @@ shell that used them -- 9 drawer rows instead of 18 in the Sun's room, 8
 in Earth's, while the maintenance run printed 11 of 11. The rule this
 item now inherits: a config change is not deployed until the cache is
 rebuilt, and the config and the cache are committed together.
+**Note (2026-09-19) -- the ruling below is now IN THE SKILL, which is
+where it fires.** provenance-discipline 2.13 -> 2.14, cut from orrery
+`dfa779bd`, under protocol entry v3.63 and the four binding steps in
+ledger-and-session-records. The Status Line gains The Read Field: the
+form, the scope, Tony's ruling in his words, the three access branches,
+and that a model's read counts and names the model. Tony approved the
+wording before it was cut, answering four questions about it point by
+point, and glossed "need" as a number that is in the store and needs a
+source. Three smaller things ride the same bump: The Unit Field points
+at `constants_tokens.py` and its retired list and "named number"
+marker; Rule 8's enumeration names both routes to a derived row, its
+arithmetic and its `# Derived:` line; and the worksheet schema gains
+the "Read by" column promised on 2026-09-11 and missed by 2.13.
+**Tony-action (do):** reinstall provenance-discipline 2.14 from
+Settings > Skills after the push, then START A NEW SESSION for Stage C.
+A mid-session reinstall cannot be verified from inside the session that
+makes it, so THE NEXT SESSION confirms its loaded copy reads 2.14
+before any provenance or store work.
 **Tony's ruling, 2026-09-19 -- what "critical" means in ruling (b).**
 The 2026-09-11 scope said a typed-in number gets read against its source
 "where critical", and that word was never defined. Asked on 2026-09-19,
