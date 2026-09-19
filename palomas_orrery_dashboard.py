@@ -74,6 +74,32 @@ other four, and Feature renderers, Page framing, Sun shells and Earth
 scene geometry, are Node and this dashboard launches everything with
 Python; Hover Budget has a button only because someone wrote
 documentation/run_hover_budget.py to wrap it.
+September 19, 2026 with Anthropic's Claude Opus 5 (L-341): a Find a tool
+search box above the groups, and the two oversized groups split. Tony
+had just run a tool from a terminal that this dashboard already carried
+a button for, and asked for both. The search filters on NAME AND
+DESCRIPTION and draws each match under its own group heading rather
+than in one flat list, so it answers "where does this live" as well as
+"where is it" -- his choice, because he prefers a visual check and
+because the second answer is the one that makes the search unnecessary
+next time. Gallery & Web became Gallery -- checks and data and Gallery
+-- authoring; Developer Tools became Maintenance Run and Tools and
+Caches; Gallery Cache Builder -- Manual Run moved to the gallery group,
+where its GALLERY_REPO_DIR base always said it belonged. NO entry was
+reordered and no description was touched: in particular the twenty
+checkers under the maintenance runner stay in one alphabetical run,
+because that arrangement is Tony's ruling of 2026-09-12 and re-sorting
+them by kind would overturn it silently. The groups now draw into their
+own container frame so a search can rebuild them without disturbing the
+header, the resources section or the footer.
+September 19, 2026 with Anthropic's Claude Opus 5 (L-341), same day, on
+Tony's suggestion: a FIND button beside Clear, and the search now runs
+on demand rather than on every keystroke. Enter in the box does the
+same thing. Typing now changes one short label, which says "press Find,
+or Enter" whenever the box and the drawn list disagree -- without it a
+typed-but-unsearched box would sit above a list that silently did not
+match it. Clear empties the box and brings every group back in one
+action.
 """
 
 import os
@@ -175,7 +201,22 @@ LAUNCH_GROUPS = {
          "HR diagrams, stellar neighborhoods, and the Milky Way"),
     ],
 
-    "Gallery & Web": [
+    "Gallery -- checks and data": [
+        ("Gallery Cache Builder -- Manual Run",
+         os.path.join("tools", "gallery_cache_builder.py"),
+         "Manual serving-cache build. Runs from the gallery repo ROOT: the "
+         "builder resolves its data/ paths from the working directory, so "
+         "launching it from tools/ cannot find data/objects_config.json. "
+         "With no flags it fetches from Horizons, validates, atomic-swaps "
+         "the new cache into data/solar-system, and STOPS -- it does not "
+         "commit or push. Commit it yourself in GitHub Desktop after the "
+         "run finishes. Do not commit while it is still running: mid-build "
+         "the working tree shows deletions only, which is the swap in "
+         "progress, not data loss. The console stays open at the repo root "
+         "if you want a flagged re-run (--dry-run --object <slug>, "
+         "--first-build).",
+         GALLERY_REPO_DIR,
+         True),
         ("Gallery Maintenance Run -- offline",
         "gallery_maintenance_run.py",
         "The gallery repo's own runner (L-236), before you commit. "
@@ -369,6 +410,8 @@ LAUNCH_GROUPS = {
         GALLERY_REPO_DIR,
         True,
         ["--live"]),
+    ],
+    "Gallery -- authoring": [
         ("Exhibit Store Editor",
          "exhibit_store_editor.py",
          "Edit the words a visitor reads in the exhibit rooms, and tick "
@@ -435,22 +478,7 @@ LAUNCH_GROUPS = {
         True),
     ],
 
-    "Developer Tools": [
-        ("Gallery Cache Builder -- Manual Run",
-         os.path.join("tools", "gallery_cache_builder.py"),
-         "Manual serving-cache build. Runs from the gallery repo ROOT: the "
-         "builder resolves its data/ paths from the working directory, so "
-         "launching it from tools/ cannot find data/objects_config.json. "
-         "With no flags it fetches from Horizons, validates, atomic-swaps "
-         "the new cache into data/solar-system, and STOPS -- it does not "
-         "commit or push. Commit it yourself in GitHub Desktop after the "
-         "run finishes. Do not commit while it is still running: mid-build "
-         "the working tree shows deletions only, which is the swap in "
-         "progress, not data loss. The console stays open at the repo root "
-         "if you want a flagged re-run (--dry-run --object <slug>, "
-         "--first-build).",
-         GALLERY_REPO_DIR,
-         True),
+    "Maintenance Run": [
         ("MAINTENANCE RUN -- everything indented below",
          "orrery_maintenance_run.py",
          "One command for the whole routine: regenerates the generated "
@@ -726,6 +754,8 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
+    ],
+    "Tools and Caches": [
         ("Add Module Docstrings",
          "add_docstrings.py",
          "Add or improve module-level docstrings across the codebase; touches no code. "
@@ -954,8 +984,18 @@ SECTION_SYMBOLS = {
     "Solar System": "",
     "Earth System": "",
     "Stars": "",
-    "Gallery & Web": "",
+    "Gallery -- checks and data": "",
+    "Gallery -- authoring": "",
+    "Maintenance Run": "",
+    "Tools and Caches": "",
 }
+
+# The groups whose buttons audit THIS repository. The heading carries a
+# "Running from:" reminder for these, because several copies of the repo
+# exist -- sandbox, clean repo, cloud snapshots -- and running against
+# the wrong one produces misleading results. Split out of the single
+# "Developer Tools" test when that group became two (L-341).
+REPO_AUDIT_GROUPS = ("Maintenance Run", "Tools and Caches")
 
 
 # ============================================================
@@ -1160,63 +1200,218 @@ class PalomasOrreryDashboardFrame(ctk.CTkFrame):
     # LAUNCH SECTION
     # ----------------------------------------------------------
     def _build_launch_section(self):
-        """Four domain groups with launch buttons."""
+        """The search row, then the launch groups under it.
+
+        The groups are drawn into their own container frame so that a
+        search can throw them away and draw them again without touching
+        the header, the resources section or the footer, which are
+        packed into _main_frame before and after this.
+        """
+        self._build_launch_search()
+
+        self._launch_container = ctk.CTkFrame(self._main_frame,
+                                              fg_color="transparent")
+        self._launch_container.pack(fill="x")
+
+        self._render_launch("")
+
+    def _build_launch_search(self):
+        """A search box above the groups, and a line saying what it found.
+
+        It searches ON DEMAND -- Find, or Enter -- and not while you
+        type. See _search_hint for why.
+
+        WHY A FILTER AND NOT A FLAT RESULT LIST. A match is shown in its
+        own group, under that group's own heading, rather than in one
+        undifferentiated list. Finding the button is half the job; the
+        other half is learning WHERE it lives, so that the next time you
+        do not need the search at all. A flat list answers the first
+        question every time and never answers the second. (Tony's
+        choice, 2026-09-19, L-341.)
+
+        It searches the description as well as the name. The
+        descriptions in this file are long and specific, which makes
+        them the part worth searching: the tool that pulls the orrery's
+        export is called "Constants Export Pull", and somebody looking
+        for it is at least as likely to type "gallery numbers" or
+        "sha" as to type its name.
+        """
+        row = ctk.CTkFrame(self._main_frame, fg_color="transparent")
+        row.pack(fill="x", padx=20, pady=(16, 0))
+
+        ctk.CTkLabel(
+            row, text="Find a tool",
+            font=FONT_SECTION, text_color=COLOR_TEXT, anchor="w"
+        ).pack(side="left")
+
+        self._search_var = ctk.StringVar()
+        entry = ctk.CTkEntry(
+            row, textvariable=self._search_var, width=280,
+            placeholder_text="name or description, e.g. export"
+        )
+        entry.pack(side="left", padx=(12, 0))
+        entry.bind("<Return>", lambda _event: self._run_search())
+
+        find = ctk.CTkButton(
+            row, text="Find", width=64, font=FONT_DESC,
+            fg_color=COLOR_BUTTON_BG, hover_color=COLOR_BUTTON_HOVER,
+            command=self._run_search
+        )
+        find.pack(side="left", padx=(8, 0))
+
+        clear = ctk.CTkButton(
+            row, text="Clear", width=64, font=FONT_DESC,
+            fg_color=COLOR_BUTTON_BG, hover_color=COLOR_BUTTON_HOVER,
+            command=self._clear_search
+        )
+        clear.pack(side="left", padx=(8, 0))
+
+        self._search_status = ctk.CTkLabel(
+            row, text="", font=FONT_DESC, text_color=COLOR_TEXT_DIM,
+            anchor="w"
+        )
+        self._search_status.pack(side="left", padx=(12, 0))
+
+        self._rendered_query = ""
+        self._search_var.trace_add("write", lambda *_: self._search_hint())
+
+    def _run_search(self):
+        """Filter the groups to what is in the box. Find, or Enter."""
+        self._render_launch(self._search_var.get())
+
+    def _clear_search(self):
+        """Empty the box and bring every group back."""
+        self._search_var.set("")
+        self._render_launch("")
+
+    def _search_hint(self):
+        """Typing changes the box; it does not redraw the list.
+
+        The list is redrawn on Find or on Enter, not on every keystroke
+        -- Tony's ruling of 2026-09-19. Two reasons, and the second is
+        the one that matters to him. A redraw destroys and rebuilds all
+        sixty-odd cards, which is real work to do once per letter. And
+        the groups shuffle and vanish under the cursor while a word is
+        still half typed, which is the opposite of a page you can scan.
+
+        What this leaves is a screen that can disagree with the box, so
+        this says so. It is the only thing a keystroke changes, and it
+        is one short label rather than the whole section.
+        """
+        if self._search_var.get().strip().lower() == self._rendered_query:
+            return
+        self._search_status.configure(text="press Find, or Enter")
+
+    def _launch_entry_total(self):
+        """How many launchable buttons exist. Bare strings are headings."""
+        return sum(1 for entries in LAUNCH_GROUPS.values()
+                   for entry in entries if not isinstance(entry, str))
+
+    def _entry_matches(self, entry, needle):
+        """Name or description contains `needle`, case-insensitively."""
+        return needle in entry[0].lower() or needle in entry[2].lower()
+
+    def _render_launch(self, query):
+        """Draw the groups, filtered by `query`.
+
+        An empty query draws everything, which is the ordinary view. A
+        non-empty one draws only the groups that still have a match, and
+        only the matching buttons inside them. A group with nothing left
+        is not drawn at all, so the headings that remain are themselves
+        the answer to "where does this live".
+        """
+        for child in self._launch_container.winfo_children():
+            child.destroy()
+
+        needle = (query or "").strip().lower()
+        self._rendered_query = needle
+        shown = 0
 
         for group_name, entries in LAUNCH_GROUPS.items():
-            # Section header
-            section_frame = ctk.CTkFrame(self._main_frame,
-                                         fg_color="transparent")
-            section_frame.pack(fill="x", padx=20, pady=(16, 4))
+            if not needle:
+                drawn = list(entries)
+            elif needle in group_name.lower():
+                # The GROUP NAME counts as a match, and takes the whole
+                # group with it. Typing "stars" found nothing before
+                # this: the Stars group exists, but its one button is
+                # called Star Visualization and no description says
+                # "stars". Somebody typing a category name means the
+                # category. (Found by testing, 2026-09-19.)
+                drawn = list(entries)
+            else:
+                drawn = [e for e in entries
+                         if not isinstance(e, str)
+                         and self._entry_matches(e, needle)]
+            if not drawn:
+                continue
+            shown += sum(1 for e in drawn if not isinstance(e, str))
+            self._build_group(group_name, drawn)
 
-            symbol = SECTION_SYMBOLS.get(group_name, "")
+        if not needle:
+            self._search_status.configure(
+                text="%d buttons in %d groups"
+                     % (self._launch_entry_total(), len(LAUNCH_GROUPS)))
+        elif shown:
+            self._search_status.configure(
+                text="%d of %d match \u2014 shown under their own headings"
+                     % (shown, self._launch_entry_total()))
+        else:
+            self._search_status.configure(
+                text="nothing matches \u2014 try fewer letters, or Clear")
+
+    def _build_group(self, group_name, entries):
+        """One group heading, its divider, and its cards."""
+        section_frame = ctk.CTkFrame(self._launch_container,
+                                     fg_color="transparent")
+        section_frame.pack(fill="x", padx=20, pady=(16, 4))
+
+        symbol = SECTION_SYMBOLS.get(group_name, "")
+        ctk.CTkLabel(
+            section_frame,
+            text=f"{symbol}  {group_name}",
+            font=FONT_SECTION, text_color=COLOR_TEXT,
+            anchor="w"
+        ).pack(side="left")
+
+        # The repo-auditing groups remind the user which codebase
+        # directory these tools examine. Multiple copies of the repo
+        # exist (sandbox, clean repo, cloud snapshots) and running
+        # against the wrong one produces misleading results.
+        if group_name in REPO_AUDIT_GROUPS:
             ctk.CTkLabel(
                 section_frame,
-                text=f"{symbol}  {group_name}",
-                font=FONT_SECTION, text_color=COLOR_TEXT,
+                text=f"  Running from: {SCRIPT_DIR}",
+                font=FONT_DESC, text_color=COLOR_TEXT_DIM,
                 anchor="w"
-            ).pack(side="left")
+            ).pack(side="left", padx=(8, 0))
 
-            # Developer Tools: remind the user which codebase directory
-            # these tools should audit. Multiple copies of the repo exist
-            # (sandbox, clean repo, Google Drive snapshots) and running
-            # against the wrong one produces misleading results.
-            if group_name == "Developer Tools":
-                ctk.CTkLabel(
-                    section_frame,
-                    text=f"  Running from: {SCRIPT_DIR}",
-                    font=FONT_DESC, text_color=COLOR_TEXT_DIM,
-                    anchor="w"
-                ).pack(side="left", padx=(8, 0))
+        div = ctk.CTkFrame(self._launch_container, fg_color=COLOR_DIVIDER,
+                           height=1)
+        div.pack(fill="x", padx=20, pady=(0, 8))
 
-            # Divider
-            div = ctk.CTkFrame(self._main_frame, fg_color=COLOR_DIVIDER,
-                               height=1)
-            div.pack(fill="x", padx=20, pady=(0, 8))
+        cards_frame = ctk.CTkFrame(self._launch_container,
+                                   fg_color="transparent")
+        cards_frame.pack(fill="x", padx=20, pady=(0, 4))
 
-            # Cards grid
-            cards_frame = ctk.CTkFrame(self._main_frame,
-                                       fg_color="transparent")
-            cards_frame.pack(fill="x", padx=20, pady=(0, 4))
-
-            for i, entry in enumerate(entries):
-                # A bare string is a HEADING inside the group, not a
-                # card. The maintenance runner prints GENERATORS then
-                # CHECKERS, and the indented list here is that same
-                # list, so it reads the same way. Alphabetical order
-                # within each half is Tony's, 2026-09-12: without the
-                # two labels a sorted run of twenty buttons gives no
-                # clue where one kind stops and the other starts.
-                if isinstance(entry, str):
-                    self._build_indent_heading(cards_frame, entry)
-                    continue
-                name, script, desc = entry[0], entry[1], entry[2]
-                base_dir = entry[3] if len(entry) > 3 else SCRIPT_DIR
-                interactive = entry[4] if len(entry) > 4 else False
-                args = entry[5] if len(entry) > 5 else None
-                indent = entry[6] if len(entry) > 6 else False
-                self._build_launch_card(cards_frame, name, script, desc,
-                                        base_dir, interactive, args, i,
-                                        indent)
+        for i, entry in enumerate(entries):
+            # A bare string is a HEADING inside the group, not a
+            # card. The maintenance runner prints GENERATORS then
+            # CHECKERS, and the indented list here is that same
+            # list, so it reads the same way. Alphabetical order
+            # within each half is Tony's, 2026-09-12: without the
+            # two labels a sorted run of twenty buttons gives no
+            # clue where one kind stops and the other starts.
+            if isinstance(entry, str):
+                self._build_indent_heading(cards_frame, entry)
+                continue
+            name, script, desc = entry[0], entry[1], entry[2]
+            base_dir = entry[3] if len(entry) > 3 else SCRIPT_DIR
+            interactive = entry[4] if len(entry) > 4 else False
+            args = entry[5] if len(entry) > 5 else None
+            indent = entry[6] if len(entry) > 6 else False
+            self._build_launch_card(cards_frame, name, script, desc,
+                                    base_dir, interactive, args, i,
+                                    indent)
 
     def _build_indent_heading(self, parent, text):
         """A dim heading inside the indented maintenance-run group.

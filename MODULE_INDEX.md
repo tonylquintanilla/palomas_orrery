@@ -11,17 +11,24 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 136  
-**Total Lines of Code (non-blank):** 108,387  
-**Total Public Functions/Classes:** 1,220
+**Total Python Files:** 138  
+**Total Lines of Code (non-blank):** 108,822  
+**Total Public Functions/Classes:** 1,224
 
 ## Classification Coverage
 
-**Undetermined role (3).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
+- `patch_L341_1_dashboard_search_and_groups_20260919.py`
+- `patch_L341_2_dashboard_find_button_20260919.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
+
+**Undetermined domain (2).** No valid `Domain:` tag.
+
+- `patch_L341_1_dashboard_search_and_groups_20260919.py`
+- `patch_L341_2_dashboard_find_button_20260919.py`
 
 
 ---
@@ -34,7 +41,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,938 lines) |
 | `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,479 lines) |
-| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (1,511 lines) |
+| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (1,680 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
 ---
@@ -233,6 +240,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
+| `patch_L341_1_dashboard_search_and_groups_20260919.py` | - ORRERY repo. (141 lines) |
+| `patch_L341_2_dashboard_find_button_20260919.py` | - ORRERY repo. (125 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |
