@@ -747,7 +747,73 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 and commit the config and the cache together. Doing the orrery first means the gallery only needs one cycle.
 
+orrery moved to 4417217b9d3ee2fe4b275e62b99ed789f86a464b
+gallery moved to ddda2893c0ed3bd552fefacca745cbfcfd6aa9d7
 
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 11 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+
+  PASS Served reachability       1.5s  all 11 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 6071df8e
+
+  PASS Export freshness          0.1s  the served export is the orrery's
+                                    at 6071df8e, byte for byte
+
+  orrery HEAD 4417217b
+  examining 33 of 70 links; the other 37 are served from the export
+    NOT IN STORE  create_sun_galactic_tide default not a top-level constant in the store
+                  /objects/0/features/oort_cloud/galactic_tide/typical_radius
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NO UNIT       EARTH_MAGNETOPAUSE_SHUE_A6       the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/magnetopause/surface/a6
+    NO UNIT       EARTH_MAGNETOPAUSE_SHUE_A8       the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/magnetopause/surface/a8
+    NO UNIT       EARTH_BOW_SHOCK_JELINEK_EPS      the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/bow_shock/surface/epsilon
+    NO UNIT       EARTH_BOW_SHOCK_JELINEK_LAMBDA   the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/bow_shock/surface/lambda
+    NOT IN STORE  planet_poles['Earth']            not a top-level constant in the store
+                  /objects/1/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  33 pointers: 24 match, 0 DRIFT, 0 UNIT MISMATCH, 9 could not be examined.
+
+  PASS Store drift               0.8s  33 pointers against orrery
+                                    4417217b -- 24 match, 0 DRIFT, 0
+                                    UNIT MISMATCH, 9 could not be
+                                    examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            33 pointers against orrery 4417217b --
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 **Your read is recorded, and it found two more things.** The number is confirmed and the row now carries a real read line naming you, with the section and its words. After you confirmed it I tried the same link again and it worked this time, so I read the document through — which turned up what your paragraph could not show.
 
@@ -757,4 +823,4 @@ The other claim on that row turned out right, and I had flagged it as unverified
 
 **On where the paper lives.** `documentation/papers/` is gitignored, so your PDF and image stay on your disk and never reach the repository. That is the right arrangement and I have not tried to change it — but it means a later reader cannot follow a path to them, so the read record now says the address is what travels, not the filename.
 
-C2 is unchanged: the 28 magnetosphere rows, the five retired `dimensionless` tokens (your live run already names four of them as NO UNIT), the two standoffs reverting to expressions, and the read check before Earth closes.
+C2 is unchanged: the 28 magnetosphere rows, the five retired `dimensionless` tokens (your live run already names four of them as NO UNIT), the two standoffs reverting to expressions, and the read check before Earth closes. -- confirmed
