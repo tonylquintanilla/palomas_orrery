@@ -380,7 +380,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*193 live items; 178 need attention (`!`); 192 RICE-scored; 142 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*192 live items; 177 need attention (`!`); 191 RICE-scored; 143 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -397,7 +397,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-300 | sweep_collapsed_features.py joins the gallery maintenance runner as a gating checker | OPEN | 8.1 | 2026-09-07 |
 | ! | L-340 | The exhibit store editor: what the first screenshot showed, and the Mode 5 pass | OPEN | 8.1 | 2026-09-19 |
 | ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-21 |
-| ! | L-249 | The Earth slice of L-181: interior boundaries as sourced constants | OPEN | 7.2 | 2026-08-25 |
 | ! | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | OPEN | 6.0 | 2026-08-25 |
 | ! | L-269 | A report names its items, not how many there are | OPEN | 6.0 | 2026-08-30 |
 | ! | L-245 | Constants drift check compares against the last COMMIT, not the last RUN | OPEN | 5.4 | 2026-08-25 |
@@ -457,7 +456,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-225 | Migrate the comet shell constants into `constants_new.py`, then dispatch | DEFERRED | 2.4 | 2026-08-23 |
 | ! | L-293 | Lunar standstill: an exhibit made of four dated orbits | OPEN | 2.4 | 2026-09-06 |
 | ! | L-305 | Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together | OPEN | 2.4 | 2026-09-16 |
-| ! | L-322 | Units declared in the store, and the orrery as producer | OPEN | 2.3 | 2026-09-17 |
+| ! | L-322 | Units declared in the store, and the orrery as producer | OPEN | 2.3 | 2026-09-19 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
 | ! | L-328 | Subtraction pass on the skill layer (protocol/skills track) | OPEN | 2.1 | 2026-09-14 |
@@ -473,7 +472,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-313 | Recenter the camera on a chosen feature in the exhibit rooms | OPEN | 1.8 | 2026-09-10 |
 | ! | L-321 | The orrery's hover text joins the provenance braid, Earth first | OPEN | 1.8 | 2026-09-12 |
 | ! | L-330 | Belt shape: rings at the peaks, not the served region (Earth exhibit) | OPEN | 1.8 | 2026-09-15 |
-| ! | L-337 | A centre marker for bodies without shells in the exhibit rooms | OPEN | 1.8 | 2026-09-17 |
+| ! | L-337 | A centre marker for bodies without shells in the exhibit rooms | OPEN | 1.8 | 2026-09-19 |
 |  | L-194 | Text-only assertions -- claims the scanner cannot see | DEFERRED | 1.4 | 2026-08-15 |
 | ! | L-297 | Earth-Moon Lagrange points: serving path sized, deferred from the Earth exhibit | OPEN | 1.4 | 2026-09-07 |
 | ! | L-314 | Live solar wind conditions for the magnetosphere shells (SWPC through the nightly builder) | OPEN | 1.3 | 2026-09-12 |
@@ -677,6 +676,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-207 | The citation prompt -- the checker asks the fuzzy question | DONE | 7.6 | 2026-08-18 |
 |  | L-220 | A patch updates the body but not the anchor, date or description | DONE | 7.6 | 2026-08-20 |
 |  | L-336 | The served cache went out of step with the config, and no check read the file the browser reads (gallery) | DONE | 7.6 | 2026-09-17 |
+|  | L-249 | The Earth slice of L-181: interior boundaries as sourced constants | DONE | 7.2 | 2026-09-19 |
 |  | L-338 | Logic that needs no browser lives in its own file (Tony's rule, 2026-09-18) | DONE | 7.2 | 2026-09-19 |
 |  | L-317 | The interactive's info markers lacked the orrery's two-standards outline | DONE | 6.4 | 2026-09-11 |
 |  | L-204 | The worksheet reference may be JSON | DONE | 5.7 | 2026-08-18 |
@@ -838,6 +838,52 @@ as an archive of the prioritization thinking -- no cleanup on close.
   actually run rather than be remembered -- and the failure it catches
   is a skill that cannot be installed, which is invisible until someone
   tries and is easy to abandon halfway.
+- **ALL THREE ARE FIXED**, by `patch_L340_1_editor_polish_20260919.py`
+  at gallery `2ebd001f`, and two of the three were bigger than the
+  screenshot suggested. The shell list now sizes itself to the room it is
+  showing, between 24 and 58 characters: the longest Earth label is 54,
+  "Exosphere / Geocorona (hydrogen halo, detected extent)", not the 36
+  the Sun's room showed. The `source` field is a wrapped box like
+  `description` and `about`, because the longest served citation is 489
+  characters against a 54-character line. And the Sun's arrival block
+  lost its `moon` key, while the window now draws the tick only where the
+  key exists -- so it can never again offer a control with nowhere to
+  save it. [verified @ gallery `2ebd001f`]
+- **THAT PATCH WROTE `data/objects_config.json` DIRECTLY, AND THAT IS AN
+  EXCEPTION WORTH NAMING.** interactive-exhibit 1.4 says two tools write
+  that file: the mirror writes the numbers from the orrery's export, the
+  store writer writes the words and the arrival settings. Neither can do
+  this one. The writer replaces a value and cannot REMOVE a key, and it
+  should not learn how for a single correction. So a one-off correction
+  patch wrote the file and named itself the exception in its own
+  description. **Owed to interactive-exhibit's next bump:** a one-off
+  correction patch may write the file where the writer cannot express the
+  change, and it says so in its own description.
+  **Tony-action (decide):** whether that exception stays narrow in those
+  words. Claude Fable 5.1's view, 2026-09-19, is that it should -- a
+  deletion is rare enough that teaching the writer to delete buys less
+  than the new ways it could go wrong.
+- **THIS RECORD WAS MISSING UNTIL 2026-09-19, AND THE REASON IS TIMING.**
+  `documentation/HANDOFF_L334_editor_built_20260919.md` states the
+  exception is recorded on this item, and
+  `documentation/BUILD_MANIFEST_L322_earth_slice_20260919.md` copied that
+  and asked its builder to confirm it and add nothing. It was not here.
+  The orrery ledger went out at `bb614c7f` at 22:07 on 2026-09-18 and the
+  gallery patch at `2ebd001f` at 22:22, and no ledger patch followed.
+  Fable's own words on finding it, 2026-09-19: "I trusted a handoff's
+  claim over the file itself." A handoff is a claim; the file is the
+  fact, and this is the same failure class the protocol names.
+- **A FOURTH FINDING, NOT FROM THE SCREENSHOT**, from Claude Fable 5.1's
+  review of 2026-09-19 and reproduced on a throwaway copy of gallery
+  `2ebd001f`. `documentation/smoke_arrival.js` compares each room's
+  opening against a list written into the check itself -- `EXPECTED`,
+  keyed by slug and holding DISPLAY NAMES: "Sun: Photosphere" for the
+  Sun, and four names for Earth including "Earth: Crust". So ticking
+  another shell to open drawn in the editor, or renaming "Crust" or
+  "Photosphere", turns the Arrival check red for a change that is
+  correct. A cache build does not clear it and the editor does not
+  explain it. The fix: the check reads what it expects from the config's
+  own arrival block, BY KEY. Recorded, not built.
 - **AND THE MODE 5 PASS ITSELF**, which is the point of this item. Tony
   has seen the window in a screenshot and not yet used it. A checklist
   pass over both rooms will find things this list does not have, and
@@ -845,31 +891,61 @@ as an archive of the prioritization thinking -- no cleanup on close.
 - **Claude:** RICE 3/3/90/1 -> 8.1 proposed, unratified. Effort 1
   because all three are layout, in one file, with a suite that already
   walks every row; the Mode 5 pass is Tony's time rather than build
-  time.
+  time. (2026-09-19: the three layout items are now DONE, so what this
+  score covers is the Mode 5 pass and the fourth finding above.
+  Unratified either way.)
 - **Ref:** L-334 (the build this hands over from), L-291 (the Earth
   room), L-320 (info markers); gallery `tools/exhibit_store_editor.py`,
   `tools/test_exhibit_store_editor.py`, `data/objects_config.json`;
   interactive-exhibit skill 1.4.
 
 #### [L-337] A centre marker for bodies without shells in the exhibit rooms
-<!-- L:337 status:OPEN upd:2026-09-17 section:A flag: rice:3/2/60/2 -->
+<!-- L:337 status:OPEN upd:2026-09-19 section:A flag: rice:3/2/60/2 -->
 - **Tony, 2026-09-17, at the phone check of both rooms:** the Sun's room
   has a "Sun" object at the centre, as the orrery does, and Earth's room
   has none; "that might be a useful object to add for future solar system
   scenes without shells."
 - **Recorded, not built.** L-334's build contract puts it out of scope
   for that build (its section 7).
-- **What a build would have to settle first.** What the marker IS -- the
-  Sun's centre object may already be that thing, or may be a shell like
-  any other, and nobody has looked. Where it comes from: drawn by the
-  renderer from the served record, or a served feature in its own right.
-  What it says on hover, under the exhibit's provenance contract, since a
-  marker at the centre of a body is a natural place to put the body's own
-  numbers and those numbers have to be served with their source.
+- **Tony added to this on 2026-09-19,** and his words settle what the
+  marker IS. Quoted as he typed them;
+  `documentation/HANDOFF_L334_editor_built_20260919.md` asked the next
+  ledger patch to carry this and transcribes the inner quotes as single:
+
+      while it is not a shell or a tick, the "sun" object is useful for
+      centering the scene nominally. the earth should have one too in
+      case we wish to display no shells. this is an option in the
+      orrery.
+
+  And, confirming it the same day for this record, where the orrery
+  already draws one:
+
+      the orrery has this too. each object has a symbol, a circle for
+      the sun and planets, without any dimension whether or not it has
+      any shells. most objects have no drawn shells.
+
+  So the marker is a CENTRING object: a symbol at the body's position
+  carrying no dimension, drawn whether or not the body has shells, and
+  most objects have none. It is not a shell and it is not a drawer tick.
+  The orrery's own per-object symbol is the worked example, which is
+  where to look for the shape of the answer.
+- **What a build would have to settle first.** What the marker IS is
+  ANSWERED as of 2026-09-19, by Tony above: a dimensionless centring
+  symbol, not a shell. (Until his answer this bullet read "the Sun's
+  centre object may already be that thing, or may be a shell like any
+  other, and nobody has looked" -- kept here so the correction is
+  visible rather than silent.) STILL OPEN: where it comes from -- drawn
+  by the renderer from the served record, or a served feature in its own
+  right. And what it says on hover, under the exhibit's provenance
+  contract, since a marker at the centre of a body is a natural place to
+  put the body's own numbers and those numbers have to be served with
+  their source.
 - **Claude:** RICE 3/2/60/2 -> 1.8 proposed, unratified. Reach 3 because
   it is every future room rather than only Earth's; Impact 2 because a
   room without it is complete, not broken; Confidence 60 because nothing
-  above is settled; Effort 2.
+  above was settled when it was scored; Effort 2. Tony's answer of
+  2026-09-19 settles what the marker is, which argues Confidence up; the
+  score is unratified either way.
 - **Ref:** L-334 (the contract that scoped it out), L-320 (info markers
   and the served marker angles), L-291 (the Earth room), interactive-exhibit
   skill (what an exhibit may render and where its numbers come from);
@@ -4816,65 +4892,6 @@ endings per file rather than assuming the repo's LF.
 class, and the route); L-250 and PROJECT_INSTRUCTIONS Part 3, The
 Braid; `constants_new.py` lines 104, 125, 1018.
 
-#### [L-249] The Earth slice of L-181: interior boundaries as sourced constants
-<!-- L:249 status:OPEN upd:2026-08-25 section:A flag: rice:4/4/90/2 -->
-- **Confirmed by Tony on 2026-08-25 and then dropped.** The
-  conversation moved to conversion factors and never came back, so it
-  was agreed aloud and written down nowhere -- the same failure class
-  the rest of that day was spent on. This row is the capture.
-- **The shape.** Earth's interior boundary radii move into
-  `constants_new.py` in km with their sources, and `shell_configs.py`
-  derives its `radius_fraction` from them, following
-  `CHROMOSPHERE_PHYSICAL_RADII`'s existing pattern:
-
-      EARTH_INNER_CORE_KM    = <km>   # Source: ...
-      EARTH_INNER_CORE_RADII = EARTH_INNER_CORE_KM / EARTH_EQUATORIAL_RADIUS_KM
-
-- **What it fixes, measured at `cf865ffc`.** `shell_configs.py` stores
-  `radius_fraction: 0.19` for the inner core while the hover prose
-  beside it reads 1,220 km. Those disagree: 0.19 x 6378.1366 draws a
-  sphere at 1,211.8 km, and 1,220 km would be a fraction of 0.19128.
-  The outer core has the same shape -- 0.55 draws 3,508.0 km against a
-  stated 3,500, which is 0.54875. Two copies of one number with nothing
-  holding them together. Afterwards the drawing and the hover read from
-  one place and cannot disagree.
-- **It splits correctly for the scanner without anyone arranging it**
-  (L-240): the km literal is scored, the fraction is a formula.
-  Measured and declared fall out of the shape rather than being imposed
-  on it.
-- **What comes with it.** The km figures are round numbers in prose
-  today, under a block-level `# Source:` header at `shell_configs.py`
-  line 1316 naming USGS Interior of the Earth, the NASA Earth Fact
-  Sheet, NOAA/NCEI, NASA Goddard, the NASA Van Allen Probes and NASA
-  Solar System Dynamics, stamped "Verified: April 2026 provenance
-  audit". Lifting each value gives it its OWN `# Source:` line, which
-  then has to be true of that value specifically -- something a block
-  header covering six sources and nine shells does not establish. That
-  is the Earth slice of the verification loop, and by the 2026-08-22
-  braid ruling it runs before Artifact 1 re-locks, not before the
-  render.
-**Gap:** blocked on `patch_L248_1`, confirmed 2026-08-25 and unbuilt.
-That script clears three things: `constants_change_report.py`'s failure
-on `NAME = EXPR` lines referencing other tracked names, the `4.74`
-literal at `exoplanet_coordinates.py` line 373, and explicitly NOT
-`3.26156` (L-248). The derived lines this item adds are precisely the
-shape that gate cannot read, so building this first would trip it.
-- **Note (measured while writing this row; unresolved).** The two
-  mantle shells disagree with their own prose by far more than the
-  cores do, and whether that is drift or a declared drawing choice
-  under L-240 is not established either way. `lower_mantle` stores
-  0.85, drawing 5,421 km, while its hover puts that boundary 660 km
-  below the surface, which is 5,718 km or 0.8965. `upper_mantle` stores
-  0.98, drawing 6,251 km, against a stated 30 km depth, which is 6,348
-  km or 0.9953. Settle which of the two before the migration rather
-  than during it: a derivation would silently move both spheres.
-- **Note:** RICE 4/4/90/2 -> 7.2 is Claude's proposed score.
-  **Tony-action (decide):** confirm or redirect.
-**Ref:** L-181 (the parent); L-240 (measured vs declared); L-234 (the
-Earth half of Artifact 1); `shell_configs.py` Earth block, lines
-1316-1512; `constants_new.py` line 74 (`EARTH_EQUATORIAL_RADIUS_KM`);
-`HANDOFF_20260825_evening_singularity_thread.md` step 2.
-
 #### [L-251] The galactic centre button served a cached HTML for seven months
 <!-- L:251 status:OPEN upd:2026-08-25 section:A flag: rice:4/4/95/1 -->
 - **Found by Mode 5, and only because the number it showed was wrong in
@@ -7683,7 +7700,7 @@ visit. The (decide) above still stands.
 `palomas_orrery_dashboard.py`, `skills/provenance-discipline/SKILL.md`.
 
 #### [L-322] Units declared in the store, and the orrery as producer
-<!-- L:322 status:OPEN upd:2026-09-17 section:A flag: rice:4/5/70/6 -->
+<!-- L:322 status:OPEN upd:2026-09-19 section:A flag: rice:4/5/70/6 -->
 - **Where this came from.** L-305 Gap item 3 asked a narrow question --
   how does `check_store_drift` treat a dimensionless pointer -- and the
   answer opened a wide one. Design session 2026-09-11, zero code. The
@@ -7997,7 +8014,28 @@ unwraps to plain numbers at the boundary either way. Related and worth
 asking in the same round: ruling 9's migration visits all 88
 assignments, which is the natural moment to ask whether the store's
 format should change at all.
-**Gap (current, 2026-09-16, after the orrery half of the build):** three
+**Gap (current, 2026-09-19):** the EARTH SLICE, contracted by
+`documentation/BUILD_MANIFEST_L322_earth_slice_20260919.md` (written on
+orrery `bb614c7f` and gallery `2ebd001f`; filed at `189c2987`). Four
+stages. A: this ledger patch. B: provenance-discipline goes to 2.14 and
+learns the `# Read:` field BEFORE the walk, with Tony approving its
+wording, and the session ends there because a reinstall cannot be
+verified from inside the session that makes it. C: the walk, in two
+pushes -- first the 29 Earth rows carrying no fields at all, plus
+`KM_PER_AU` and `GM_SUN_SI` which feed the Hill sphere and belong to no
+body's slice; then the 28 magnetosphere rows, where the five
+`dimensionless` tokens become real ones and the two standoffs revert to
+expressions and leave `constants_rows.TRANSITIONAL`, ending with
+`constants_rows.CLOSED_SLICES` set to ("EARTH",). D: Earth's pole moves
+out of `idealized_orbits.py` into the store, its own push, because it
+draws a closed room's axis. MEASURED at `bb614c7f` and unchanged at
+`189c2987`: the store holds 112 top-level rows, 57 of them Earth's; unit
+and status are on 28 of those 57; figures and read are on 0 of all 112.
+On the gallery side, the config makes 70 links to store rows and 53 of
+them still go through the older drift check, 24 of those Earth's.
+**Gap (2026-09-16, after the orrery half of the build; SUPERSEDED by
+the 2026-09-19 Gap above, which carries (2) and (3) -- (1) is DONE and
+deployed, see the 2026-09-17 note below):** three
 things remain, in this order, and none awaits a ruling. (1) The GALLERY
 half of the mechanism, piece 6 of
 `documentation/BUILD_MANIFEST_L322_mechanism_20260916.md`: pull the
@@ -8211,6 +8249,27 @@ shell that used them -- 9 drawer rows instead of 18 in the Sun's room, 8
 in Earth's, while the maintenance run printed 11 of 11. The rule this
 item now inherits: a config change is not deployed until the cache is
 rebuilt, and the config and the cache are committed together.
+**Tony's ruling, 2026-09-19 -- what "critical" means in ruling (b).**
+The 2026-09-11 scope said a typed-in number gets read against its source
+"where critical", and that word was never defined. Asked on 2026-09-19,
+his answer:
+
+      what I meant by critical is where your own search tools cannot
+      read a needed source but I can.
+
+So the word is about ACCESS, not importance, and it splits three ways.
+Where the builder can open the source, the builder reads it against the
+row and the row's `# Read:` line names the model. Where the builder
+cannot open it and Tony can, the row goes on a reading list for him, and
+that list is his whole share of the reading. Where neither can open it,
+the citation fails provenance-discipline's Access Standard: re-home it to
+an open authority carrying the same value, or remove the claim and note
+the gap. The SCOPE of rows needing a read at all is unchanged from ruling
+(b): a measured row whose value is drawn in a published exhibit, and any
+row that feeds one. One caution rides with it -- a model's read counts
+only if the source was actually OPENED, with the title as printed and the
+table or page recorded. A read reconstructed from training is worse than
+no read, because it stops the next reader from looking.
 **Ref:** L-305, L-306 (approximations are not promoted), L-314,
 `constants_new.py`, `provenance_scanner.py`, `orrery_maintenance_run.py`,
 `test_status_lines.py`, `celestial_objects.py`, `visualization_core.py`,
@@ -15842,6 +15901,101 @@ skill 1.3 (the provenance contract an exhibit renders under).
 `interactive.html`, `gallery/feature_renderers.js`, `gallery/arrival.js`,
 `documentation/smoke_arrival.js`; resident protocol Part 3, A Check
   That Cannot Fail Is Not Passing; interactive-exhibit skill.
+
+#### [L-249] The Earth slice of L-181: interior boundaries as sourced constants
+<!-- L:249 status:DONE upd:2026-09-19 section:C flag: rice:4/4/90/2 -->
+- **Confirmed by Tony on 2026-08-25 and then dropped.** The
+  conversation moved to conversion factors and never came back, so it
+  was agreed aloud and written down nowhere -- the same failure class
+  the rest of that day was spent on. This row is the capture.
+- **The shape.** Earth's interior boundary radii move into
+  `constants_new.py` in km with their sources, and `shell_configs.py`
+  derives its `radius_fraction` from them, following
+  `CHROMOSPHERE_PHYSICAL_RADII`'s existing pattern:
+
+      EARTH_INNER_CORE_KM    = <km>   # Source: ...
+      EARTH_INNER_CORE_RADII = EARTH_INNER_CORE_KM / EARTH_EQUATORIAL_RADIUS_KM
+
+- **What it fixes, measured at `cf865ffc`.** `shell_configs.py` stores
+  `radius_fraction: 0.19` for the inner core while the hover prose
+  beside it reads 1,220 km. Those disagree: 0.19 x 6378.1366 draws a
+  sphere at 1,211.8 km, and 1,220 km would be a fraction of 0.19128.
+  The outer core has the same shape -- 0.55 draws 3,508.0 km against a
+  stated 3,500, which is 0.54875. Two copies of one number with nothing
+  holding them together. Afterwards the drawing and the hover read from
+  one place and cannot disagree.
+- **It splits correctly for the scanner without anyone arranging it**
+  (L-240): the km literal is scored, the fraction is a formula.
+  Measured and declared fall out of the shape rather than being imposed
+  on it.
+- **What comes with it.** The km figures are round numbers in prose
+  today, under a block-level `# Source:` header at `shell_configs.py`
+  line 1316 naming USGS Interior of the Earth, the NASA Earth Fact
+  Sheet, NOAA/NCEI, NASA Goddard, the NASA Van Allen Probes and NASA
+  Solar System Dynamics, stamped "Verified: April 2026 provenance
+  audit". Lifting each value gives it its OWN `# Source:` line, which
+  then has to be true of that value specifically -- something a block
+  header covering six sources and nine shells does not establish. That
+  is the Earth slice of the verification loop, and by the 2026-08-22
+  braid ruling it runs before Artifact 1 re-locks, not before the
+  render.
+- **BUILT 2026-08-26, AND THIS ROW DID NOT SAY SO UNTIL 2026-09-19.**
+  Measured at orrery `189c2987` rather than carried from a handoff. The
+  four interior boundaries are in `constants_new.py` with their own
+  `# Source:` lines: `EARTH_INNER_CORE_KM` 1221.5 and
+  `EARTH_OUTER_CORE_KM` to PREM (Dziewonski and Anderson 1981),
+  `EARTH_D660_DEPTH_KM` 660.0 to the 660-km seismic discontinuity, and
+  `EARTH_UPPER_MANTLE_KM` 6346.6 to PREM's Mohorovicic discontinuity.
+  `shell_configs.py`'s Earth block takes all four `radius_fraction`
+  values from the matching `_RADII` expressions rather than from typed
+  decimals, so the drawing and the hover read from one place and cannot
+  disagree -- which is what this item was for. The five `patch_L249_*`
+  scripts and
+  `HANDOFF_20260826_L249_earth_interior_and_the_road_to_artifact_1.md`
+  are filed in `documentation/`. [verified @189c2987]
+- **THE BLOCKER CLEARED.**
+  `patch_L248_1_constants_gate_and_au_yr.py` is filed in
+  `documentation/`, so the gate this item waited on was built.
+- **THE MANTLE DISAGREEMENT THE NOTE BELOW LEFT OPEN IS SETTLED IN THE
+  CODE**, and settled the way that Note asked -- by derivation rather
+  than by keeping two numbers that can drift apart.
+  `EARTH_LOWER_MANTLE_KM` is `EARTH_MEAN_RADIUS_KM -
+  EARTH_D660_DEPTH_KM`, carrying a `# Derived:` line saying that a
+  subtraction is governed by decimal places and not by significant
+  figures. `EARTH_UPPER_MANTLE_KM` is PREM's 6346.6 rather than a 30 km
+  depth read off prose.
+**Gap:** none -- move to section C. ONE LIVE RESIDUE, re-homed by name
+rather than left inside a closed item: the cross-check owed on
+`EARTH_D660_DEPTH_KM`. L-253 holds it (the +/-60 km lateral variation
+and the depression to roughly 750 km under cold slabs, both held
+unsourced), and L-322's Earth slice visits that row again when it
+declares its figures and its read line.
+**Gap (as it stood 2026-08-25, DISCHARGED):** blocked on
+`patch_L248_1`, confirmed 2026-08-25 and unbuilt.
+That script clears three things: `constants_change_report.py`'s failure
+on `NAME = EXPR` lines referencing other tracked names, the `4.74`
+literal at `exoplanet_coordinates.py` line 373, and explicitly NOT
+`3.26156` (L-248). The derived lines this item adds are precisely the
+shape that gate cannot read, so building this first would trip it.
+- **Note (measured while writing this row; it read "unresolved" until
+  2026-09-19, and was in fact SETTLED on 2026-08-26 -- see the built
+  record above).** The two
+  mantle shells disagree with their own prose by far more than the
+  cores do, and whether that is drift or a declared drawing choice
+  under L-240 is not established either way. `lower_mantle` stores
+  0.85, drawing 5,421 km, while its hover puts that boundary 660 km
+  below the surface, which is 5,718 km or 0.8965. `upper_mantle` stores
+  0.98, drawing 6,251 km, against a stated 30 km depth, which is 6,348
+  km or 0.9953. Settle which of the two before the migration rather
+  than during it: a derivation would silently move both spheres.
+- **Note:** RICE 4/4/90/2 -> 7.2 was Claude's proposed score. The
+  **Tony-action (decide)** that stood here -- confirm or redirect that
+  score -- is STRUCK on 2026-09-19 with the reason: the work is built
+  and the item is closed, so there is no longer anything to prioritise.
+**Ref:** L-181 (the parent); L-240 (measured vs declared); L-234 (the
+Earth half of Artifact 1); `shell_configs.py` Earth block, lines
+1316-1512; `constants_new.py` line 74 (`EARTH_EQUATORIAL_RADIUS_KM`);
+`HANDOFF_20260825_evening_singularity_thread.md` step 2.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
