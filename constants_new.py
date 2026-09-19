@@ -92,6 +92,13 @@ from datetime import datetime, timedelta
 # ============================================================
 
 KM_PER_AU = 149597870.7
+# Unit: km
+# Status: measured V_CROSS_CHECKED 2026-09-19 -- belongs to no body's slice; it
+# Status+: is visited with Earth's because the Hill sphere needs it.
+# Figures: exact -- IAU 2012 Resolution B2 fixes 1 au at 149 597 870 700 m
+# Figures+: exactly, so every digit is known.
+# Read: Resolution B2, "on the re-definition of the astronomical unit of
+# Read+: length", IAU 2012 resolutions text, 2026-09-19, Claude Opus 5
 # Source: IAU 2012 Resolution B2 -- exact definition
 # Ref: https://syrte.obspm.fr/IAU_resolutions/Res_IAU2012_B2.pdf
 # Also: https://nssdc.gsfc.nasa.gov/planetary/factsheet/fact_notes.html
@@ -110,6 +117,12 @@ SUN_RADIUS_KM = 695700.0
 # Note+: (Haberreiter et al. 2008). Use nominal for all calculations.
 
 EARTH_EQUATORIAL_RADIUS_KM = 6378.1366
+# Unit: km
+# Status: measured V_CROSS_CHECKED 2026-09-19
+# Figures: 8 -- IERS gives 6378136.6 m with an uncertainty of 0.1 m, so
+# Figures+: the last significant digit is the tenth of a metre.
+# Read: Table 1.1 "IERS numerical standards", IERS Technical Note 36
+# Read+: p. 18, 2026-09-19, Claude Opus 5
 # Source: IERS Conventions (2010), Petit & Luzum (eds.), IERS Technical
 # Source+: Note No. 36, Table 1.1; IAU B3 rounds to 6378.1 km
 # Ref: Prsa et al. 2016, AJ 152:41 (arXiv:1605.09788)
@@ -122,7 +135,15 @@ EARTH_EQUATORIAL_RADIUS_KM = 6378.1366
 # Cross-checked: GPT 2026-08-02 -- IAU B3 / IERS (constants_new_citation_verification_gpt.md)
 
 EARTH_POLAR_RADIUS_KM = 6356.752
-# Source: IERS Conventions (Petit & Luzum 2010); IAU B3 rounds to 6356.8 km
+# Source: NASA Planetary Fact Sheet, Earth -- polar radius, 6356.752 km.
+# Source+: IERS Technical Note 36 does NOT tabulate a polar radius; it
+# Source+: follows from that table's equatorial radius and flattening
+# Source+: factor, 6378136.6 m x (1 - 1/298.25642) = 6356751.86 m, which
+# Source+: agrees with the fact sheet to the metre. Corrected 2026-09-19: the
+# Source+: old line named IERS as though it printed this number.
+# Unit: km
+# Status: measured V_CROSS_CHECKED 2026-09-19
+# Figures: 7 -- as printed on the fact sheet.
 # Ref: Prsa et al. 2016, AJ 152:41 (arXiv:1605.09788)
 # Cross-checked: Claude 2026-08-02 -- IAU B3 / IERS (worksheet_claude_constants_new.md)
 # Cross-checked: GPT 2026-08-02 -- IAU B3 / IERS (constants_new_citation_verification_gpt.md)
@@ -155,6 +176,13 @@ EARTH_POLAR_RADIUS_KM = 6356.752
 # next reader does not have to re-derive it.
 
 EARTH_MEAN_RADIUS_KM = 6371.0
+# Unit: km
+# Status: measured V_SOURCED 2026-09-19
+# Figures: 4 -- the fact sheet prints 6371.000 in a table padded to three
+# Figures+: decimals throughout, so the trailing zeros are formatting and
+# Figures+: not precision. PREM quotes the same sphere as 6371 km.
+# Read: Earth Fact Sheet, bulk parameters, volumetric mean radius,
+# Read+: 2026-09-19, Claude Opus 5
 # Source: NASA Planetary Fact Sheet, Earth -- volumetric mean radius
 # Ref: https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html
 # Note: the reference sphere that PREM and the seismological depth scale
@@ -162,6 +190,11 @@ EARTH_MEAN_RADIUS_KM = 6371.0
 # Note+: the frame note above.
 
 EARTH_INNER_CORE_KM = 1221.5
+# Unit: km
+# Status: measured V_SOURCED 2026-09-19
+# Figures: 5 -- PREM Table I gives the inner-core boundary as 1221.5 km.
+# Read: Table I, "Preliminary reference Earth model", Phys. Earth Planet.
+# Read+: Inter. 25:297-356, p. 308, 2026-09-19, Claude Opus 5
 # Source: Dziewonski, A. M. & Anderson, D. L. (1981), "Preliminary
 # Source+: reference Earth model", Phys. Earth Planet. Inter. 25:297-356
 # Source+: -- inner core boundary (ICB) at r = 1221.5 km (5 sig figs).
@@ -169,10 +202,21 @@ EARTH_INNER_CORE_KM = 1221.5
 # Note+: approximate value taken by hand when the shells were first
 # Note+: drawn (Tony's account, 2026-08-26). It drew 1211.8 km.
 EARTH_INNER_CORE_RADII = EARTH_INNER_CORE_KM / EARTH_EQUATORIAL_RADIUS_KM
+# Unit: r_earth
+# Status: derived -- inherits EARTH_INNER_CORE_KM, EARTH_EQUATORIAL_RADIUS_KM
+# Figures: 5 -- set by EARTH_INNER_CORE_KM (1221.5, 5)
 # Derived: 1221.5 / 6378.1366 = 0.19151 -- 5 significant figures, set
 # Derived+: by the numerator. Report no more than that.
 
 EARTH_OUTER_CORE_KM = 3480.0
+# Unit: km
+# Status: measured V_SOURCED 2026-09-19
+# Figures: 4 -- PREM Table I prints 3480.0, but it pads every boundary
+# Figures+: radius to one decimal, so that trailing zero is the table's
+# Figures+: format rather than a claim to 100 m. A non-zero digit in that
+# Figures+: place does count, which is why 1221.5 and 6346.6 carry five.
+# Read: Table I, "Preliminary reference Earth model", Phys. Earth Planet.
+# Read+: Inter. 25:297-356, p. 308, 2026-09-19, Claude Opus 5
 # Source: Dziewonski & Anderson (1981), PREM, Phys. Earth Planet. Inter.
 # Source+: 25:297-356 -- core-mantle boundary (CMB) at r = 3480 km
 # Source+: (4 sig figs).
@@ -182,10 +226,23 @@ EARTH_OUTER_CORE_KM = 3480.0
 # Note+: is the class of inconsistency this migration exists to remove.
 # Note+: The 5 km difference is below the drawn resolution either way.
 EARTH_OUTER_CORE_RADII = EARTH_OUTER_CORE_KM / EARTH_EQUATORIAL_RADIUS_KM
+# Unit: r_earth
+# Status: derived -- inherits EARTH_OUTER_CORE_KM, EARTH_EQUATORIAL_RADIUS_KM
+# Figures: 4 -- set by EARTH_OUTER_CORE_KM (3480, 4)
 # Derived: 3480 / 6378.1366 = 0.5456 -- 4 significant figures, set by
 # Derived+: the numerator. Report no more than that.
 
 EARTH_D660_DEPTH_KM = 660.0
+# Unit: km
+# Status: measured V_SOURCED 2026-09-19 -- L-253
+# Figures: 2 -- the global average depth is 660 +/- 10 km, so the last
+# Figures+: significant digit is the tens place. The trailing zero is not
+# Figures+: significant, which the source line above already said; the
+# Figures+: +/- 10 km behind it is now sourced (see the read line).
+# Read: Ishii et al. (2018), "Complete agreement of the post-spinel
+# Read+: transition with the 660-km seismic discontinuity", Sci. Rep.
+# Read+: 8:6358, results section -- "the global average depth of the
+# Read+: discontinuity is 660 +/- 10 km", 2026-09-19, Claude Opus 5
 # Source: the 660-km seismic discontinuity, ringwoodite dissociating to
 # Source+: bridgmanite plus ferropericlase; global average depth 660 km
 # Source+: (2 sig figs -- the trailing zero is not significant).
@@ -206,16 +263,29 @@ EARTH_D660_DEPTH_KM = 660.0
 # Review-note+: itself read as a citation for this value.
 
 EARTH_LOWER_MANTLE_KM = EARTH_MEAN_RADIUS_KM - EARTH_D660_DEPTH_KM
-# Derived: 6371.0 - 660 = 5711 km -- the OUTER boundary of the lower
+# Derived: 6371.0 - 660 = 5710 km -- the OUTER boundary of the lower
 # Derived+: mantle shell, which is the 660 discontinuity. A SUBTRACTION is
-# Derived+: governed by decimal places, not significant figures: 6371.0 is
-# Derived+: good to tenths and 660 to units, so the difference is good to
-# Derived+: units. Physical uncertainty is far larger; see the note above.
+# Derived+: governed by decimal places, not significant figures. Corrected
+# Derived+: 2026-09-19: the old line said 660 was good to units and read off
+# Derived+: 5711. It is good to TENS -- its source gives 660 +/- 10 km --
+# Derived+: so the difference is good to tens and the value is 5710 km.
+# Unit: km
+# Status: derived -- inherits EARTH_MEAN_RADIUS_KM, EARTH_D660_DEPTH_KM
+# Figures: 3 -- 5710, the tens place, set by EARTH_D660_DEPTH_KM.
 EARTH_LOWER_MANTLE_RADII = EARTH_LOWER_MANTLE_KM / EARTH_EQUATORIAL_RADIUS_KM
-# Derived: 5711 / 6378.1366 = 0.8954 -- 4 significant figures, set by
-# Derived+: the numerator. Report no more than that.
+# Derived: 5710 / 6378.1366 = 0.895 -- 3 significant figures, set by
+# Derived+: the numerator. Report no more than that. Corrected 2026-09-19 with
+# Derived+: EARTH_LOWER_MANTLE_KM above.
+# Unit: r_earth
+# Status: derived -- inherits EARTH_LOWER_MANTLE_KM, EARTH_EQUATORIAL_RADIUS_KM
+# Figures: 3 -- set by EARTH_LOWER_MANTLE_KM
 
 EARTH_UPPER_MANTLE_KM = 6346.6
+# Unit: km
+# Status: measured V_SOURCED 2026-09-19
+# Figures: 5 -- PREM Table I gives the crust/LID boundary as 6346.6 km.
+# Read: Table I, "Preliminary reference Earth model", Phys. Earth Planet.
+# Read+: Inter. 25:297-356, p. 308, 2026-09-19, Claude Opus 5
 # Source: Dziewonski & Anderson (1981), PREM, Phys. Earth Planet. Inter.
 # Source+: 25:297-356 -- base of the crust (Mohorovicic discontinuity) in
 # Source+: the reference model, r = 6346.6 km (5 sig figs), i.e. 24.4 km
@@ -226,6 +296,9 @@ EARTH_UPPER_MANTLE_KM = 6346.6
 # Note+: and the shell's hover text says so rather than implying a
 # Note+: precision the boundary does not have.
 EARTH_UPPER_MANTLE_RADII = EARTH_UPPER_MANTLE_KM / EARTH_EQUATORIAL_RADIUS_KM
+# Unit: r_earth
+# Status: derived -- inherits EARTH_UPPER_MANTLE_KM, EARTH_EQUATORIAL_RADIUS_KM
+# Figures: 5 -- set by EARTH_UPPER_MANTLE_KM (6346.6, 5)
 # Derived: 6346.6 / 6378.1366 = 0.99506 -- 5 significant figures, set by
 # Derived+: the numerator. Report no more than that.
 
@@ -238,64 +311,146 @@ EARTH_UPPER_MANTLE_RADII = EARTH_UPPER_MANTLE_KM / EARTH_EQUATORIAL_RADIUS_KM
 # these names is a follow-on patch, not this one.
 
 EARTH_GM_KM3_S2 = 398600.4418
+# Unit: km3_s2
+# Status: measured V_SOURCED 2026-09-19
+# Figures: 9 -- the tabulated uncertainty, 8e5 m^3 s^-2 on 3.986004418e14,
+# Figures+: is about 2 parts in 1e9, so it falls in the ninth figure.
+# Read: Table 1.1 "IERS numerical standards", IERS Technical Note 36
+# Read+: p. 18, 2026-09-19, Claude Opus 5
 # Source: IERS Conventions (2010), IERS Technical Note 36, Table 1.1 --
 # Source+: geocentric gravitational constant GM_E = 3.986004418e14 m^3 s^-2
 # Source+: (uncertainty 8e5 m^3 s^-2). Converted to km^3 s^-2 here.
 # Ref: https://iers-conventions.obspm.fr/content/tn36.pdf
-# Note: TCB-compatible value as tabulated; the TT-compatible value differs
+# Note: TCG-compatible value as tabulated; the TT-compatible value differs
 # Note+: in the ninth figure, below anything this file derives from it.
+# Note+: Corrected 2026-09-19 -- the old line said TCB. Table 1.1's own footnote
+# Note+: reads "The value for GM(Earth) is TCG-compatible."
 
 EARTH_ROTATION_RATE_RAD_S = 7.292115e-5
-# Source: IERS Conventions (2010), TN36 Table 1.1 -- nominal mean Earth
-# Source+: angular velocity, 7.292115e-5 rad s^-1.
+# Unit: rad_s
+# Status: measured V_SOURCED 2026-09-19
+# Figures: 7 -- as printed.
+# Read: Table 1.2 "Parameters of the Geodetic Reference System GRS80",
+# Read+: IERS Technical Note 36 p. 19, 2026-09-19, Claude Opus 5
+# Source: IERS Conventions (2010), IERS Technical Note 36, Table 1.2
+# Source+: "Parameters of the Geodetic Reference System GRS80" -- nominal
+# Source+: mean Earth angular velocity, 7.292115e-5 rad s^-1. Corrected
+# Source+: 2026-09-19: the old line said Table 1.1, which has no angular
+# Source+: velocity in it. The value is unchanged; only the table is.
 # Ref: https://iers-conventions.obspm.fr/content/tn36.pdf
 
 EARTH_GEOSTATIONARY_RADIUS_KM = (EARTH_GM_KM3_S2 / EARTH_ROTATION_RATE_RAD_S ** 2) ** (1.0 / 3.0)
 # Derived: (398600.4418 / 7.292115e-5^2)^(1/3) = 42164.17 km -- the
-# Derived+: circular orbit whose period is one sidereal rotation. Seven
-# Derived+: figures in both inputs; report 42,164 km.
+# Derived+: circular orbit whose period is one sidereal rotation. The
+# Derived+: rotation rate carries seven figures and the GM nine, so seven
+# Derived+: is the count; report 42,164 km.
+# Unit: km
+# Status: derived -- inherits EARTH_GM_KM3_S2, EARTH_ROTATION_RATE_RAD_S
+# Figures: 7 -- set by EARTH_ROTATION_RATE_RAD_S (7.292115e-5, 7). The
+# Figures+: cube root damps rather than magnifies, so no figure is dropped.
 # Note: the orrery's geostationary shell types 42164.0 km and quotes
 # Note+: 6.62 radii, a ratio taken against the 6371 km mean radius. Against
 # Note+: the equatorial radius this file draws to, it is 6.611.
 EARTH_GEOSTATIONARY_RADII = EARTH_GEOSTATIONARY_RADIUS_KM / EARTH_EQUATORIAL_RADIUS_KM
+# Unit: r_earth
+# Status: derived -- inherits EARTH_GEOSTATIONARY_RADIUS_KM,
+# Status+: EARTH_EQUATORIAL_RADIUS_KM
+# Figures: 7 -- set by EARTH_GEOSTATIONARY_RADIUS_KM
 # Derived: 42164.17 / 6378.1366 = 6.6107 -- report no more than five figures.
 
 EARTH_LEO_UPPER_ALTITUDE_KM = 2000.0
+# Unit: km
+# Status: measured V_SOURCED 2026-09-19
+# Figures: exact -- the IADC protected region is DEFINED at an altitude
+# Figures+: of 2,000 km. A definition, not a measurement.
+# Read: for Tony -- see documentation/L322_earth_read_record_20260919.md.
+# Read+: The primary IADC document could not be opened from this session;
+# Read+: the definition was confirmed only in reproductions of it.
 # Source: IADC Space Debris Mitigation Guidelines, IADC-02-01 Rev. 3
 # Source+: (June 2021), section 3.3.2 -- the LEO Protected Region extends
 # Source+: from the surface to an altitude of 2,000 km. Section 3.3.1 takes
 # Source+: the equatorial radius as the reference surface, as this file does.
 # Ref: https://orbitaldebris.jsc.nasa.gov/library/iadc-space-debris-guidelines-revision-2.pdf
 EARTH_LEO_LOWER_ALTITUDE_KM = 200.0
+# Unit: km
+# Status: declared 2026-09-19 -- a drawing floor, not a measured boundary, so
+# Status+: there is no source to read against and none is expected.
+# Figures: exact -- a drawing choice, so all of its digits are known.
 # Declared: the floor the orrery's LEO shell draws from. The IADC region
 # Declared+: starts at the surface; 200 km is a drawing choice marking where
 # Declared+: orbits stop decaying within days. Not a measured boundary.
 EARTH_LEO_INNER_KM = EARTH_EQUATORIAL_RADIUS_KM + EARTH_LEO_LOWER_ALTITUDE_KM
+# Derived: 6378.1366 + 200 = 6578.1366 km. A SUM is good to the coarsest
+# Derived+: decimal place among its MEASURED inputs; the 200 km floor is a
+# Derived+: declared choice and exact, so the equatorial radius sets it.
+# Unit: km
+# Status: derived -- inherits EARTH_EQUATORIAL_RADIUS_KM,
+# Status+: EARTH_LEO_LOWER_ALTITUDE_KM
+# Figures: 8 -- set by EARTH_EQUATORIAL_RADIUS_KM
 EARTH_LEO_OUTER_KM = EARTH_EQUATORIAL_RADIUS_KM + EARTH_LEO_UPPER_ALTITUDE_KM
+# Unit: km
+# Status: derived -- inherits EARTH_EQUATORIAL_RADIUS_KM,
+# Status+: EARTH_LEO_UPPER_ALTITUDE_KM
+# Figures: 8 -- set by EARTH_EQUATORIAL_RADIUS_KM; the 2,000 km IADC
+# Figures+: altitude is exact and does not limit the sum.
 # Derived: 6378.1366 + 200 = 6578.1 km; 6378.1366 + 2000 = 8378.1 km.
 # Note: the orrery's LEO shell types 6571 and 8371 km, which is 6371 + the
 # Note+: altitude -- the mean radius, not the equatorial one the shell is
 # Note+: drawn against. Seven km, below the drawn resolution, but the
 # Note+: hover text quotes those numbers. Follow-on with the migration.
 EARTH_LEO_INNER_RADII = EARTH_LEO_INNER_KM / EARTH_EQUATORIAL_RADIUS_KM
+# Derived: 6578.1366 / 6378.1366 = 1.0313571
+# Unit: r_earth
+# Status: derived -- inherits EARTH_LEO_INNER_KM, EARTH_EQUATORIAL_RADIUS_KM
+# Figures: 8 -- set by EARTH_LEO_INNER_KM
 EARTH_LEO_OUTER_RADII = EARTH_LEO_OUTER_KM / EARTH_EQUATORIAL_RADIUS_KM
+# Unit: r_earth
+# Status: derived -- inherits EARTH_LEO_OUTER_KM, EARTH_EQUATORIAL_RADIUS_KM
+# Figures: 8 -- set by EARTH_LEO_OUTER_KM
 # Derived: 1.0314 and 1.3136 -- report 1.03 and 1.31, as the hover does.
 
 EARTH_STRATOPAUSE_ALTITUDE_KM = 50.0
+# Unit: km
+# Status: measured V_SOURCED 2026-09-19
+# Figures: 2 -- NOAA gives the top of the stratosphere as "around 31 miles
+# Figures+: (50 km)"; 31 miles is 49.9 km, so two figures is what it says.
+# Read: "Layers of the Atmosphere", NOAA JetStream, stratosphere section,
+# Read+: 2026-09-19, Claude Opus 5
 # Source: NOAA JetStream, "Layers of the Atmosphere" -- stratosphere to
 # Source+: about 50 km; and NASA, "Earth's Atmospheric Layers" -- the
 # Source+: stratosphere extends to 50 km.
 # Ref: https://www.noaa.gov/jetstream/atmosphere/layers-of-atmosphere
 # Ref: https://www.nasa.gov/image-article/earths-atmospheric-layers-3/
 EARTH_THERMOPAUSE_ALTITUDE_KM = 600.0
+# Unit: km
+# Status: measured V_SOURCED 2026-09-19
+# Figures: 2 -- NOAA gives the thermopause at "about 375 miles (600 km)";
+# Figures+: 375 miles is 603.5 km, so the km figure carries two.
+# Read: "Layers of the Atmosphere", NOAA JetStream, thermosphere and
+# Read+: exosphere sections, 2026-09-19, Claude Opus 5
 # Source: NOAA JetStream, same page -- thermosphere from about 85 km to
 # Source+: about 600 km, the exosphere beyond; NASA, same page -- the
 # Source+: thermosphere extends to 600 km.
 # Note: a nominal figure. The thermopause moves with solar activity over
 # Note+: roughly 500 to 1,000 km; the drawn shell is not that precise.
 EARTH_STRATOPAUSE_RADII = (EARTH_EQUATORIAL_RADIUS_KM + EARTH_STRATOPAUSE_ALTITUDE_KM) / EARTH_EQUATORIAL_RADIUS_KM
+# Derived: (6378.1366 + 50) / 6378.1366 = 1.008. The 50 km altitude
+# Derived+: carries two figures, so its last significant digit is the ones
+# Derived+: place and the sum is good to units: 6428 km.
+# Unit: r_earth
+# Status: derived -- inherits EARTH_EQUATORIAL_RADIUS_KM,
+# Status+: EARTH_STRATOPAUSE_ALTITUDE_KM
+# Figures: 4 -- set by the sum, which EARTH_STRATOPAUSE_ALTITUDE_KM limits.
 EARTH_THERMOPAUSE_RADII = (EARTH_EQUATORIAL_RADIUS_KM + EARTH_THERMOPAUSE_ALTITUDE_KM) / EARTH_EQUATORIAL_RADIUS_KM
-# Derived: 1.0078 and 1.0941.
+# Derived: (6378.1366 + 600) / 6378.1366 = 1.09. The 600 km altitude
+# Derived+: carries two figures, so its last significant digit is the tens
+# Derived+: place and the sum is good to tens: 6980 km. Corrected 2026-09-19 --
+# Derived+: the old line read 1.0078 and 1.0941, which declared more
+# Derived+: figures than either altitude supports, and covered two rows.
+# Unit: r_earth
+# Status: derived -- inherits EARTH_EQUATORIAL_RADIUS_KM,
+# Status+: EARTH_THERMOPAUSE_ALTITUDE_KM
+# Figures: 3 -- set by the sum, which EARTH_THERMOPAUSE_ALTITUDE_KM limits.
 # Note: SHELL_CONFIGS['Earth'] draws the lower atmosphere at 1.05 radii
 # Note+: (about 319 km up) and the upper atmosphere at 1.25 radii (about
 # Note+: 1,595 km up) while their own hover text ends at 50 km and about
@@ -832,6 +987,14 @@ EARTH_MAGNETOTAIL_OBSERVED_RADII = 220.0
 # Record: documentation/worksheets/L321_worksheet_1_magnetopause_fable_high_recheck_20260913.md
 
 EARTH_GEOCORONA_RADII = 100.0
+# Unit: r_earth
+# Status: measured V_SOURCED 2026-09-19
+# Figures: 1 -- Baliukin reports a detection FLOOR, "at least 100 Earth
+# Figures+: radii". The trailing zeros are not significant, and the note
+# Figures+: below says what the number is rather than implying an edge.
+# Read: abstract, Baliukin et al. (2019), J. Geophys. Res. Space Physics
+# Read+: 124:861-885 -- "found to extend at least up to 100 Earth Radii
+# Read+: ... encompassing the orbit of the Moon", 2026-09-19, Claude Opus 5
 # Source: Baliukin, I. I., Bertaux, J.-L., Quemerais, E., Izmodenov, V.
 # Source+: V. & Schmidt, W. (2019), "SWAN/SOHO Lyman-alpha mapping: the
 # Source+: hydrogen geocorona extends well beyond the Moon", J. Geophys.
@@ -1820,6 +1983,12 @@ SPEED_OF_LIGHT_M_S = SPEED_OF_LIGHT_KM_S * 1000
 #          one file, which is the failure L-247 exists to close.
 
 GM_SUN_SI = 1.3271244e20
+# Unit: m3_s2
+# Status: measured V_CROSS_CHECKED 2026-09-19 -- belongs to no body's slice; it
+# Status+: is visited with Earth's because the Hill sphere needs it.
+# Figures: exact -- IAU 2015 Resolution B3 nominal values are exact by
+# Figures+: definition and are conversion factors, not measurements.
+# Read: Table 1, Prsa et al. 2016, AJ 152:41 (arXiv:1605.09788), 2026-09-19, Claude Opus 5
 # Note: the nominal solar mass parameter, units m^3 s^-2. EXACT by
 # Note+: definition -- it is a conversion constant, not a measurement
 # Note+: of the Sun.
@@ -1829,7 +1998,24 @@ GM_SUN_SI = 1.3271244e20
 # Cross-checked: GPT 2026-08-25 -- IAU 2015 B3 (worksheet_gpt-5.6-sol_L247_sgr_a_constants_20260825.md)
 # Cross-checked: Gemini 2026-08-25 -- IAU 2015 B3 (worksheet_gemini-2.5-pro_L247_sgr_a_constants_20260825.md)
 
-EARTH_HILL_SPHERE_KM = KM_PER_AU * (EARTH_GM_KM3_S2 / (3.0 * GM_SUN_SI * 1.0e-9)) ** (1.0 / 3.0)
+M3_PER_KM3 = 1.0e9
+# Unit: m3_per_km3
+# Status: declared 2026-09-19 -- an exact unit conversion, 1 km^3 = 1e9 m^3.
+# Status+: Belongs to no body's slice. It exists because a bare 1.0e-9
+# Status+: inside the Hill sphere expression converted cubic metres to
+# Status+: cubic kilometres where nothing could see that it carried a
+# Status+: unit, and test_dimensions.py read the result as a MISMATCH of
+# Status+: exactly 1000x. Naming the factor is the fix.
+# Figures: exact -- a definition, not a measurement.
+
+EARTH_HILL_SPHERE_KM = KM_PER_AU * (EARTH_GM_KM3_S2 * M3_PER_KM3 / (3.0 * GM_SUN_SI)) ** (1.0 / 3.0)
+# Unit: km
+# Status: derived -- inherits KM_PER_AU, EARTH_GM_KM3_S2, M3_PER_KM3, GM_SUN_SI
+# Figures: 7 -- EARTH_GM_KM3_S2 carries nine and every other input is
+# Figures+: exact, but a = 1 AU is a substitution for Earth's semi-major
+# Figures+: axis and agrees with it only to seven figures (see the note
+# Figures+: below), so seven is the count. The formula's own idealisation
+# Figures+: is coarser than any of this; report 1.50e6 km.
 # Derived: r_H = a (m / 3M)^(1/3) with a = 1 AU, m/M = GM_E / GM_Sun =
 # Derived+: 398600.4418 / 1.3271244e11 = 3.00349e-6; (m/3M)^(1/3) =
 # Derived+: 0.0100039; x 149,597,870.7 km = 1,496,559 km. Report 1.50e6 km.
@@ -1840,6 +2026,9 @@ EARTH_HILL_SPHERE_KM = KM_PER_AU * (EARTH_GM_KM3_S2 / (3.0 * GM_SUN_SI * 1.0e-9)
 # Note+: below everything else in the derivation.
 # Ref: https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html
 EARTH_HILL_SPHERE_RADII = EARTH_HILL_SPHERE_KM / EARTH_EQUATORIAL_RADIUS_KM
+# Unit: r_earth
+# Status: derived -- inherits EARTH_HILL_SPHERE_KM, EARTH_EQUATORIAL_RADIUS_KM
+# Figures: 7 -- set by EARTH_HILL_SPHERE_KM
 # Derived: 1,496,559 / 6378.1366 = 234.64 -- the "about 235 radii" the
 # Derived+: orrery's Hill sphere shell types as radius_fraction = 235.
 

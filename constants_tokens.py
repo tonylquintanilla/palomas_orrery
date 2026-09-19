@@ -89,6 +89,32 @@ TOKENS = {
         "defining_constant": "KM_PER_AU",
         "meaning": "astronomical units",
     },
+    "km3_s2": {
+        "dimension": "km3 / s2",
+        "defining_constant": None,
+        "meaning": "cubic kilometres per second squared, a gravitational "
+                   "parameter",
+    },
+    "m3_s2": {
+        "dimension": "m3 / s2",
+        "defining_constant": None,
+        "meaning": "cubic metres per second squared, a gravitational "
+                   "parameter",
+    },
+    "rad_s": {
+        "dimension": "1 / s",
+        "defining_constant": None,
+        "meaning": "radians per second. The radian is dimensionless in "
+                   "SI, so the DIMENSION of an angular rate is a "
+                   "reciprocal second, which is what lets the "
+                   "geostationary cube root come out in kilometres",
+    },
+    "m3_per_km3": {
+        "dimension": "m3 / km3",
+        "defining_constant": None,
+        "meaning": "cubic metres per cubic kilometre, an exact unit "
+                   "conversion",
+    },
     "r_earth": {
         "dimension": "km",
         "defining_constant": "EARTH_EQUATORIAL_RADIUS_KM",
