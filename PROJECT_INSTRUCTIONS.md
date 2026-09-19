@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.61 | September 16, 2026
+Tony Quintanilla, PE | Claude | v3.62 | September 19, 2026
 
-Cut from ebdc55cc at https://github.com/tonylquintanilla/palomas_orrery
+Cut from e1a79f67 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -506,18 +506,22 @@ gallery-assembler            1.3  render_orbits.py, resolver.py,
                                   unresponsive, it worked yesterday, a console
                                   error appears, or Claude is about to hand
                                   Tony a test to run
-gallery-cache-builder        1.4  Nightly builder, atomic swap, coverage_index,
+gallery-cache-builder        1.5  Nightly builder, atomic swap, coverage_index,
                                   serving cache, objects_config,
                                   dry-run/first-build/nightly, builder testing
                                   layers
-interactive-exhibit          1.3  adding or changing an exhibit in
+interactive-exhibit          1.4  adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
                                   interactive", "?exhibit=", "new room in
                                   interactive.html"; deciding what numbers an
                                   exhibit may render and where they come from;
-                                  carding an exhibit in Studio
+                                  what a room opens on (arrival block, drawn,
+                                  moon); meta.shell_key and the trace stamp;
+                                  editing the served words with store_writer or
+                                  exhibit_store_editor; carding an exhibit in
+                                  Studio
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1153,6 +1157,49 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.62 (September 19, 2026): No rule changed in this document. TWO skill
+bumps, taken after the build they record rather than before it, which is
+the exception to v3.55's ordering and is stated here so it is not read as
+a precedent: these rules were LEARNED in the build, and there was nothing
+to write before it ran.
+
+interactive-exhibit 1.3 -> 1.4 (L-334) and gallery-cache-builder
+1.4 -> 1.5 (L-336, L-216).
+
+WHAT THE EXHIBIT SKILL GAINS is what a room opens on and who may write
+the file it is read from. The arrival block is served rather than coded,
+and it is the one part of a room's data the page reads directly, so a
+change to it reaches a visitor on the push while a change to a shell's
+words waits for the cache builder. Every trace belonging to a served
+shell now carries that shell's key, and a trace that loses its stamp is
+DRAWN rather than hidden, which is why that rule is CRITICAL and why a
+check reads every trace the renderers build. Two tools write the served
+config and each has an ALLOW list rather than a refusal list. And Tony's
+ruling of 2026-09-18 is in it: logic that needs no browser lives in its
+own file, his reason -- the size of interactive.html -- first, and the
+testability reason second.
+
+WHAT THE BUILDER SKILL GAINS was true long before anyone wrote it down.
+A CONFIG CHANGE IS NOT DEPLOYED UNTIL THE CACHE IS REBUILT, and the two
+are committed together. On 2026-09-17 the config went out ahead of the
+cache and both rooms broke on the live site -- the Sun showing 9 drawer
+rows instead of 18 -- while eleven checks passed, because every one of
+them read the config or a fixture and none read the file the browser
+fetches. The same bump corrects this skill's own claim that the failed
+folder swap was "one data point": there have been three, and the
+exposure is established rather than unlucky.
+
+THE OBLIGATION TRAVELS, as it always does. This session loaded 1.3 and
+1.4, and a reinstall cannot be verified from inside the session that
+makes it. The next session confirms its loaded copies read 1.4 and 1.5
+before exhibit or cache work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.59 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.61 (September 16, 2026): No rule changed in this document. ONE
 skill bump, taken ahead of the store work it serves.
 
@@ -1254,37 +1301,5 @@ Version history: v3.57 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 
-v3.59 (September 14, 2026): ONE RULE REWRITTEN, the Register Rule, on
-Tony's instruction of the same evening. No skill bumped.
-
-WHAT THE OLD WORDING GOT WRONG. It opened "plain speech is the default"
-and then gave the compressed voice a home in this document and in the
-skills. Read together, those two sentences describe a shared shorthand
-that simply belongs in a different place. Tony's correction: it is not
-shared. He cannot read it and Claude can, so it is a channel with one
-party on it.
-
-THE ASYMMETRY IS NOW THE RULE'S REASON rather than a footnote to it.
-Claude holds the whole session at once and unpacks a compressed phrase
-without effort. Tony is living through the session and cannot, and
-noticing that a sentence is too dense already costs him the reading.
-Compression is therefore free on one side and expensive on the other,
-which is why every earlier version of this rule decayed: nothing in
-writing a compressed sentence tells the writer it failed.
-
-SUMMARIES ARE NAMED as where it fails, because that is where it failed
-on 2026-09-14. A closing list of decisions names each one rather than
-stating it, and a list of names is compressed prose wearing bullet
-points. The evening produced four of those before Tony said so.
-
-The three checks, the two supporting defaults and the backstop are
-unchanged. What changed is the opening, which is the part that has to
-carry the rule when a session is moving.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.56 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
 
 Functional for Claude, readable for human, signal preserved.

@@ -380,7 +380,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*194 live items; 179 need attention (`!`); 193 RICE-scored; 140 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*193 live items; 178 need attention (`!`); 192 RICE-scored; 142 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -395,9 +395,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-266 | Nothing checks that a cited link still resolves | OPEN | 9.0 | 2026-08-30 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-300 | sweep_collapsed_features.py joins the gallery maintenance runner as a gating checker | OPEN | 8.1 | 2026-09-07 |
+| ! | L-340 | The exhibit store editor: what the first screenshot showed, and the Mode 5 pass | OPEN | 8.1 | 2026-09-19 |
 | ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-21 |
 | ! | L-249 | The Earth slice of L-181: interior boundaries as sourced constants | OPEN | 7.2 | 2026-08-25 |
-| ! | L-338 | Logic that needs no browser lives in its own file (Tony's rule, 2026-09-18) | OPEN | 7.2 | 2026-09-18 |
 | ! | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | OPEN | 6.0 | 2026-08-25 |
 | ! | L-269 | A report names its items, not how many there are | OPEN | 6.0 | 2026-08-30 |
 | ! | L-245 | Constants drift check compares against the last COMMIT, not the last RUN | OPEN | 5.4 | 2026-08-25 |
@@ -409,7 +409,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
 | ! | L-327 | Tool repairs from the rules-vs-reasoning round (tooling track) | OPEN | 4.8 | 2026-09-14 |
 | ! | L-268 | Sweep: features collapsed out of their own identity | OPEN | 4.5 | 2026-08-30 |
-| ! | L-334 | An editor for the interactive exhibits' served store (gallery tooling) | OPEN | 4.5 | 2026-09-18 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-08-25 |
 | ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-25 |
@@ -420,7 +419,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
-| ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-09-17 |
+| ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-09-19 |
 | ! | L-224 | Streamer belt: one warped band, not a sphere | OPEN | 3.8 | 2026-08-22 |
 |  | L-230 | A skill bump does not reach the protocol's version history | DEFERRED | 3.8 | 2026-08-23 |
 | ! | L-227 | Streamer band hover rendered as one 378-character line | OPEN | 3.8 | 2026-08-23 |
@@ -678,6 +677,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-207 | The citation prompt -- the checker asks the fuzzy question | DONE | 7.6 | 2026-08-18 |
 |  | L-220 | A patch updates the body but not the anchor, date or description | DONE | 7.6 | 2026-08-20 |
 |  | L-336 | The served cache went out of step with the config, and no check read the file the browser reads (gallery) | DONE | 7.6 | 2026-09-17 |
+|  | L-338 | Logic that needs no browser lives in its own file (Tony's rule, 2026-09-18) | DONE | 7.2 | 2026-09-19 |
 |  | L-317 | The interactive's info markers lacked the orrery's two-standards outline | DONE | 6.4 | 2026-09-11 |
 |  | L-204 | The worksheet reference may be JSON | DONE | 5.7 | 2026-08-18 |
 |  | L-263 | The served chromosphere value is a rounded copy | DONE | 5.7 | 2026-08-29 |
@@ -703,6 +703,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-316 | On a portrait phone the arrow cross moves to the top-right corner | DONE | 4.8 | 2026-09-16 |
 |  | L-320 | Info markers on the drawn axis, and the orrery's per-shell marker angles never served | DONE | 4.8 | 2026-09-10 |
 |  | L-065 | European heat wave heat map (Earth System track) | DONE | 4.8 | 2026-06-25 |
+|  | L-334 | An editor for the interactive exhibits' served store (gallery tooling) | DONE | 4.5 | 2026-09-19 |
 |  | L-064 | Provenance-scanner format sweep -- Earth System family | DONE | 4.5 | 2026-06-30 |
 |  | L-075 | KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine) | DONE | 4.3 | 2026-06-30 |
 |  | L-076 | Earth System shared module (earth_system_common) + 3+5 generalized to food | DONE | 4.3 | 2026-06-30 |
@@ -805,58 +806,36 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
-#### [L-338] Logic that needs no browser lives in its own file (Tony's rule, 2026-09-18)
-<!-- L:338 status:OPEN upd:2026-09-18 section:A flag: rice:3/3/80/1 -->
-- **Tony asked, 2026-09-17,** whether `interactive.html` should be
-  modularized. The page is 3436 lines at gallery `1b077401` and holds
-  logic that no browser is needed to run.
-- **Claude's proposal, and it is a proposal.** No general reorganisation.
-  Instead: logic that needs no browser MOVES OUT of the page into its own
-  file WHEN A BUILD ALREADY TOUCHES IT, so a check can reach it. The
-  reasoning is the same one behind A Check That Cannot Fail Is Not
-  Passing -- `documentation/smoke_arrival.js` today tests the arrival
-  function by CUTTING THE TEXT between two comment lines out of the page
-  and running it in node, which is a check whose subject is a substring
-  rather than a file, and it stops being true the moment the comment
-  lines move.
-- **This is recorded as awaiting a ruling, not as a rule in force.** It is
-  written here so that a later session does not read a one-off move as a
-  standing convention, or the reverse.
-- **Its first instance is already scheduled either way.** Stage B of
-  L-334's build contract moves `sunApplyArrival` into `gallery/arrival.js`
-  and has `smoke_arrival.js` require the file instead of cutting text out
-  of the page. Stage B goes ahead whether or not this becomes a rule.
-  **Tony-action (decide):** whether it does. If adopted it belongs in the
-  interactive-exhibit skill, where a page edit will load it.
-- **Claude:** RICE 3/3/60/1 -> 5.4 proposed, unratified. Effort 1 because
-  adopting it costs a sentence in a skill; the moves themselves are paid
-  for by the builds that were already opening those files, which is the
-  whole point of the proposal.
-- **RULED, Tony, 2026-09-18:** yes. His words, and his reason: "the idea
-  is to limit the increasing size of the interactive.html file, so yes."
-- **His reason is not the one the proposal argued from, and the
-  difference matters.** The proposal above argued from TESTABILITY -- a
-  function inside the page can only be tested by cutting text out of the
-  page. Tony's reason is SIZE. They point the same way for the arrival
-  function and they part company at the edges: size also covers bulk
-  that is not logic at all, a long block of styling for one, which
-  testability says nothing about. The rule is written with his reason
-  first and the second reason after it, and the wording goes to him when
-  the skill is bumped, because that is where the scope question has to
-  be answered rather than left to whoever reads it next.
-- **First instance, done.** L-334 stage B moved the arrival function into
-  `gallery/arrival.js` at gallery `2f971040`. 118 lines left
-  `interactive.html`, `documentation/smoke_arrival.js` now requires the
-  file instead of cutting text out of the page, and Tony's phone found
-  both rooms unchanged.
-**Gap:** the rule does not travel until it is in a skill a page edit
-loads. It goes into interactive-exhibit 1.4 as piece 6 of L-334's stage
-C, with the wording above for Tony to read. A convention that is not in
-the skill does not travel (L-317, L-326, L-335, now here).
-**Ref:** L-334 (stage B, the first instance), L-339, L-235; gallery
-`interactive.html`, `gallery/feature_renderers.js`, `gallery/arrival.js`,
-`documentation/smoke_arrival.js`; resident protocol Part 3, A Check
-  That Cannot Fail Is Not Passing; interactive-exhibit skill.
+#### [L-340] The exhibit store editor: what the first screenshot showed, and the Mode 5 pass
+<!-- L:340 status:OPEN upd:2026-09-19 section:A flag: rice:3/3/90/1 -->
+- **Opened 2026-09-19 because L-334 closed.** The editor is built,
+  pushed and working; these are the things left, and a pointer in a
+  closed item is not a home for them.
+- **THREE THINGS VISIBLE IN TONY'S FIRST SCREENSHOT**, measured at
+  gallery `d9d7a48f`, none of which he had hit yet:
+  (1) Three shell names are cut off in the left list -- Streamer Belt
+  (helmet and stalk), Chromosphere (2,000 km skin) and Galactic Tide
+  (thinned at the plane), the longest 36 characters against a
+  26-character listbox.
+  (2) The `source` field is a single-line box 54 characters wide, and
+  the Sun core's citation is 134 characters, so about a third of it is
+  readable. A citation is a sentence; it wants a wrapped box like
+  `description` and `about`.
+  (3) The Sun's room shows a Moon tick. Its arrival block carries a
+  `moon` key, so the panel offers it, but the Sun's scene has no Moon
+  trace -- ticking it writes `true` and changes nothing.
+- **AND THE MODE 5 PASS ITSELF**, which is the point of this item. Tony
+  has seen the window in a screenshot and not yet used it. A checklist
+  pass over both rooms will find things this list does not have, and
+  those belong here.
+- **Claude:** RICE 3/3/90/1 -> 8.1 proposed, unratified. Effort 1
+  because all three are layout, in one file, with a suite that already
+  walks every row; the Mode 5 pass is Tony's time rather than build
+  time.
+- **Ref:** L-334 (the build this hands over from), L-291 (the Earth
+  room), L-320 (info markers); gallery `tools/exhibit_store_editor.py`,
+  `tools/test_exhibit_store_editor.py`, `data/objects_config.json`;
+  interactive-exhibit skill 1.4.
 
 #### [L-337] A centre marker for bodies without shells in the exhibit rooms
 <!-- L:337 status:OPEN upd:2026-09-17 section:A flag: rice:3/2/60/2 -->
@@ -881,208 +860,6 @@ the skill does not travel (L-317, L-326, L-335, now here).
   and the served marker angles), L-291 (the Earth room), interactive-exhibit
   skill (what an exhibit may render and where its numbers come from);
   gallery `gallery/feature_renderers.js` (`infoMarker`), `interactive.html`.
-
-#### [L-334] An editor for the interactive exhibits' served store (gallery tooling)
-<!-- L:334 status:OPEN upd:2026-09-18 section:A flag: rice:4/4/85/3 -->
-- **Tony, 2026-09-16, after Mode 5 of both rooms:** "For the static
-  gallery we have a Studio editor that edits the html before json
-  conversion. Could we do something similar for the interactive
-  exhibits, where I can edit features like the hover text, the info
-  panel text, the url link, which shells are displayed upon opening, the
-  initial view scale, etc." And, on being told the store is
-  hand-maintained: "while you say it is hand maintained, you do all the
-  maintenance. What I am thinking of is an editor that can serve the
-  correct json and allows me to revise certain parameters and text."
-- **Why it is the right next build.** The Sun and Earth rooms are done.
-  Every visitor-facing word in them now lives in one file,
-  `data/objects_config.json` (name, description, about, note, source,
-  link, per shell), and that file is edited only through Claude's patch
-  scripts. The protocol's Roles section is explicit that Tony owns the
-  workflow and every integration judgment; the words a visitor reads
-  are his to change without a session. An editor moves that point of
-  maintenance to him. It is also where L-331's last residue lands if
-  the page-built hovers are served (see that item's Tony-action).
-- **The pipeline it sits on** (gallery README, "objects_config.json ->
-  gallery_cache_builder.py -> data/solar-system/"): the store is copied
-  verbatim by the nightly into the served `feature_configs.json`, and
-  `interactive.html` with `gallery/feature_renderers.js` draws what is
-  served. So the editor is a form over the store; nothing downstream
-  changes for the text fields.
-- **Design questions to settle in conversation before a build (Claude's
-  proposals, for Tony to redirect):**
-  1. WHAT IT MAY EDIT. Prose and links (name, description, about, note,
-     source text, info_url), and the arrival settings once served.
-     Numbers -- value, unit, orrery_constant -- shown but LOCKED: they
-     are the provenance contract, checked by Store drift against the
-     orrery's constant store, and an editor that can change them is a
-     new way to drift. A number changes in the orrery, then the
-     pipeline.
-  2. THE FILE'S SHAPE. The store is hand-formatted with `_comment` and
-     `_declared` keys. An editor that saves through `json.dump` rewrites
-     the whole file in one canonical layout, once; the comment keys are
-     data and survive. Proposal: accept the one-time reformat rather
-     than build a formatting-preserving writer; every patch after that
-     targets the canonical layout.
-  3. ARRIVAL SETTINGS ARE NOT SERVED YET. Which shells draw on arrival
-     and the arrival scale live in the page (`SUN_HALF_RANGE_AU`, the
-     drawer's rule that a shell larger than the frame starts hidden).
-     Proposal: an `arrival` block per object -- `half_range_au` and a
-     `drawn` list of shell keys -- read by the page, with the current
-     behaviour as the default when the block is absent. A small page
-     change, and it is what makes those two items editable at all.
-  4. NO PREVIEW, BUT A MEASURE. Studio's preview does not carry: the
-     room runs on Pyodide in a browser. What can carry is the hover
-     budget's arithmetic -- desktop lines at 70 characters, phone lines
-     at 34, the ceiling of 17 -- shown beside the field as it is typed,
-     and a Run-the-checks button that runs `gallery_maintenance_run.py`
-     offline and shows its verdict. That is the check the patches run
-     now, put where Tony edits.
-  5. THE SHELL. Studio is Tkinter and Tony runs it from VS Code's Run
-     button; same here. Pick a body, pick a shell, edit, save, and the
-     usual loop after: nightly, offline run, commit, push, live run.
-- **Not this item:** the static gallery's Studio (gallery-pipeline);
-  Jupiter's and Saturn's rings, which have no room and no served names
-  (L-231 for Jupiter).
-- **Note:** RICE 4/4/80/4 -> 3.2 is Claude's proposed score, unratified.
-  Reach 4 because it changes who can maintain the rooms, not how many
-  visitors see them; Effort 4 for the form, the arrival block, the page
-  change and a suite that opens and saves the store round-trip.
-- **Question 1 RULED, Tony, 2026-09-16:** yes, numbers are locked.
-  Values, units and `orrery_constant` pointers are displayed and not
-  editable; a number changes in the orrery and comes through the
-  pipeline. Words, links and the arrival settings are the editor's.
-  Questions 2 to 5 are settled at the start of the build session, on
-  Tony's word, before any code.
-- **Order, Tony, 2026-09-16:** L-322 comes FIRST -- "get the number right
-  first" -- because the editor's locked numbers show what Store drift
-  reads, and 13 of its 70 pointers cannot be examined until the unit
-  field lands. Then this item. L-333 waits; Jupiter's room behind all
-  of it. The next session starts fresh on L-322's design round.
-- **Design SETTLED and piece 1 BUILT, 2026-09-17.** The contract is three
-  files read together:
-  `documentation/BUILD_MANIFEST_L334_store_editor_20260917.md` (the editor
-  manifest, whose sections 3, 6 and 7 stand as written), amended by
-  `documentation/HANDOFF_L334_arrival_and_cache_check_20260917.md`, and
-  with its sections 2, 4, 5, 8, 9 and 10 REPLACED by
-  `documentation/BUILD_MANIFEST_L334_editor_build_20260917.md`, the build
-  contract this item now runs under.
-- **Questions 2 to 5, RULED by Tony 2026-09-17.** (2) The file is EDITED
-  IN PLACE by the scanner in the gallery's `tools/mirror_constants.py`,
-  which the editor's writer shares; the proposal above, to accept a
-  one-time reformat through `json.dump`, is SUPERSEDED, because the L-322
-  mirror already edits the hand-formatted config in place and two writers
-  with two layouts would fight. (3) The arrival settings ARE served now --
-  piece 1 shipped the block. (4) The measure is a per-field line count
-  shown beside the field as it is typed, plus a button that runs the
-  offline checks and shows their verdicts. (5) Tkinter, started from VS
-  Code's Run button, the same way Studio is.
-- **Tony's arrival ruling, 2026-09-17, in his words:** a room opens on
-  "the surface shell plus frame elements like sun direction, axes,
-  terminator", and "exclude the moon with its box not selected." This
-  SUPERSEDES two earlier rulings of his own -- the Sun's 0.25 AU arrival
-  of 2026-08-29 and the L-291 eight-shell Earth arrival of 2026-09-06/08,
-  where the terminator started off.
-- **Piece 1 shipped** as gallery `7c95435` with `59ba809`. Each room's
-  object in `data/objects_config.json` carries an `arrival` block naming
-  the shells drawn when the room opens; `sunApplyArrival` in
-  `interactive.html` applies it before the opening view is measured, so
-  the view fits what is drawn. With no block the page behaves as before.
-  Mode 5 on the phone, both rooms, Tony: "yes, perfect. beautiful."
-  There is NO floor under the opening view, which settles the editor
-  manifest's section 8 item 1. [render-confirmed Mode 5]
-- **What the shipped block actually holds**, and it differs from the
-  editor manifest's plan: `drawn` (a list of shell KEYS) and `moon` (true
-  or false), plus an optional `min_half_range_au` that the page reads and
-  neither room uses. The arrival block is read straight from
-  `data/objects_config.json` by the page, so a change to it reaches a
-  visitor on the push alone; the shells and their words come from the
-  served cache and reach a visitor only after the cache builder has run.
-  That split is the fact the editor's Save message has to tell the truth
-  about (stage C). [verified @1b077401]
-**Gap (as it stood on 2026-09-16, now DISCHARGED -- kept as the record of
-what the order was before the arrival scene shipped):** L-322 first; then
-questions 2 to 5 in conversation; then the build, in this order: the
-arrival block and its page reader (3), the editor over prose and links
-(2, 5), the measure and the checks button (4).
-  **Tony-action (decide) -- DONE 2026-09-17:** questions 2 to 5.
-- **STAGE B BUILT, PUSHED and SEEN, 2026-09-18.** Delivered as
-  `patch_L334_3_arrival_module_20260918.py`, pushed at gallery
-  `2f971040`. What exists now: `gallery/arrival.js`, holding the arrival
-  function whole and attached as `GalleryArrival.applyArrival`;
-  `stampShell()` in `gallery/feature_renderers.js`, putting
-  `meta.shell_key` on every trace that belongs to a served shell at nine
-  sites; `stampLink()` giving each trace its own `meta` object and
-  carrying an existing key across, so the two stamps cannot overwrite
-  each other in either order; the end-of-legend-group-name match GONE,
-  leaving one way of matching instead of two; `SERVED_FILES` at eleven
-  names (L-339); and a rewritten `documentation/smoke_arrival.js` that
-  requires the new file and checks that every trace the feature
-  renderers build carries a key.
-- **A visitor sees no difference, and that was measured, not judged.**
-  Every trace in both rooms was compared before and after for its legend
-  group and its arrival visibility: 86 traces, all identical. The
-  offline run was 12 of 12 with Cache in step passing, which confirms
-  the cache did not need to change -- the key is stamped in the browser
-  and never stored. The four deliberate breaks each failed the check and
-  named the cause, the fourth of them -- a shell trace with its stamp
-  removed -- being the one the old name match could not have seen. Mode
-  5 on the phone, both rooms, Tony: "correct". [render-confirmed Mode 5]
-- **TWO PLACES THE BUILD CONTRACT DISAGREED WITH THE CODE.** Recorded
-  because the second decides what stage C's arrival panel can offer.
-  (1) The contract says `renderShellSet` already receives the shell's key
-  as `featureKey`. It does not: `featureKey` is the GROUP -- `earth_interior`,
-  `solar_atmosphere` -- and the shell key is the loop variable inside it.
-  The stamping follows the file.
-  (2) Earth's two radiation belts have NO key of their own in the served
-  config. Their names and colours come from parallel lists, so there is
-  nothing per-belt to stamp, and both carry the feature key
-  `van_allen_belts`. An arrival block naming it draws both belts
-  together. Stage C's panel therefore cannot offer one tick box per
-  drawer row for the belts; it offers one box for the pair, unless Tony
-  wants the served shape changed first.
-  **Tony-action (decide), stage C:** one box for both belts, or a served
-  change that gives each belt a key.
-**Gap (current, 2026-09-18):** STAGE C, the editor itself. Stage B is
-done and its description is kept below as the record of what it was
-contracted to do. Stage C is pieces 2 to 6 of the editor manifest with
-its section 6 as the test list: the writer, which gains a true-or-false
-operation for the arrival block's `moon` and refuses `_declared` and
-`_comment` as well as `value`, `unit`, `figures` and `orrery_constant`;
-the window, with one tick box per served shell by key and one for the
-Moon; a Save message that tells the truth about what reaches a visitor
-when, since words go through the cache builder and arrival ticks do not;
-a Run-the-checks button that explains a red Cache in step rather than
-just showing it; the suite; and piece 6's records, including the two
-skill bumps under one protocol entry, v3.62. The editor does NOT start
-the cache builder.
-**Gap (as contracted on 2026-09-17; stage B is DONE):** stages B and C of
-`documentation/BUILD_MANIFEST_L334_editor_build_20260917.md`, in that
-order, each pushed and confirmed before the next starts. STAGE B, the
-arrival tidy-up, a visitor seeing no difference: `sunApplyArrival` moves
-whole into a new `gallery/arrival.js`; `gallery/feature_renderers.js`
-stamps each shell trace with its own `meta.shell_key`; the arrival
-function matches on that key and the end-of-legend-group match is
-removed; `documentation/smoke_arrival.js` requires the new file and gains
-a fourth deliberate break (an unstamped shell trace); `SERVED_FILES`
-gains three names (L-339). STAGE C, the editor itself: pieces 2 to 6 of
-the editor manifest, its section 6 as the test list, with the writer
-gaining a true-or-false operation for `moon` and refusing `_declared` and
-`_comment` as well as `value`, `unit`, `figures` and `orrery_constant`;
-one tick box per served shell by key and one for the Moon; a Save message
-that says truthfully what reaches a visitor when; and piece 6's records,
-which include the two skill bumps that make this session's lessons travel
--- interactive-exhibit 1.3 to 1.4 (the arrival block, the trace stamp, who
-may write the config, and the rule that one check must read the file the
-browser fetches) and gallery-cache-builder 1.4 to 1.5 (a config change is
-not deployed until the cache is rebuilt, and the corrected occurrence
-count for L-216), both carried by ONE protocol entry, v3.62.
-**Ref:** gallery `data/objects_config.json`, `tools/gallery_cache_builder.py`,
-`interactive.html` (`SUN_HALF_RANGE_AU`, `EXHIBITS`, `buildSunDrawer`),
-`gallery/feature_renderers.js` (`descLine`, `stampLink`);
-`tools/gallery_studio.py` (the shape to copy); L-331 (the served prose
-this edits), L-267 (the drawer), L-322 (the unit field the locked
-numbers would show), gallery-pipeline skill (Studio), interactive-exhibit
-skill 1.3 (the provenance contract an exhibit renders under).
 
 #### [L-333] The master plan's two companion summaries have not moved since August (planning documents)
 <!-- L:333 status:OPEN upd:2026-09-16 section:A flag: rice:2/3/90/2 -->
@@ -3557,7 +3334,7 @@ governs a session document contradicting a settled decision, not a
 ledger field that predates the event it is silent about).
 
 #### [L-216] Gallery swap fails under a filesystem lock (OneDrive)
-<!-- L:216 status:OPEN upd:2026-09-17 section:A flag: rice:3/3/85/2 -->
+<!-- L:216 status:OPEN upd:2026-09-19 section:A flag: rice:3/3/85/2 -->
 - **2026-08-19: the nightly run wiped the served tree.** GitHub Desktop
   showed 56 deletions in the gallery repo and zero additions.
   `data/solar-system/` was absent while BOTH halves of the generation
@@ -3631,9 +3408,11 @@ MOVING THE REPOSITORIES OUT OF ONEDRIVE was raised as the lasting fix.
 Tony, 2026-09-17: "not at this time." It is a change to his machine
 outside his usual working set and needs its steps and risks written out
 before he decides.
-**Tony-action (do) -- SCHEDULED:** the skill sentence that calls this
-"one data point" is corrected in gallery-cache-builder 1.5, together with
-the hand routine above, as piece 6 of L-334's stage C.
+**Tony-action (do) -- DONE 2026-09-19:** gallery-cache-builder 1.5 now
+says three occurrences and that the exposure is established rather than
+unlucky, and carries the hand routine above, including the step that
+commits non-cache files before discarding. This item stays OPEN for the
+CAUSE, not for the record of it.
 **Gap (corrected 2026-09-17):** the CAUSE, not the exposure. Three
 occurrences settle what one did not: the `staging -> live` rename IS
 exposed to the same lock as the cleanup, and it is not bad luck. What
@@ -15737,6 +15516,318 @@ cluster); gallery `gallery_maintenance_run.py` (`SERVED_FILES`),
   `interactive.html`, `gallery/nav_cluster.js`,
   `data/objects_config.json`; resident protocol Part 3, A Check That
   Cannot Fail Is Not Passing.
+
+#### [L-334] An editor for the interactive exhibits' served store (gallery tooling)
+<!-- L:334 status:DONE upd:2026-09-19 section:C flag: rice:4/4/85/3 -->
+- **Tony, 2026-09-16, after Mode 5 of both rooms:** "For the static
+  gallery we have a Studio editor that edits the html before json
+  conversion. Could we do something similar for the interactive
+  exhibits, where I can edit features like the hover text, the info
+  panel text, the url link, which shells are displayed upon opening, the
+  initial view scale, etc." And, on being told the store is
+  hand-maintained: "while you say it is hand maintained, you do all the
+  maintenance. What I am thinking of is an editor that can serve the
+  correct json and allows me to revise certain parameters and text."
+- **Why it is the right next build.** The Sun and Earth rooms are done.
+  Every visitor-facing word in them now lives in one file,
+  `data/objects_config.json` (name, description, about, note, source,
+  link, per shell), and that file is edited only through Claude's patch
+  scripts. The protocol's Roles section is explicit that Tony owns the
+  workflow and every integration judgment; the words a visitor reads
+  are his to change without a session. An editor moves that point of
+  maintenance to him. It is also where L-331's last residue lands if
+  the page-built hovers are served (see that item's Tony-action).
+- **The pipeline it sits on** (gallery README, "objects_config.json ->
+  gallery_cache_builder.py -> data/solar-system/"): the store is copied
+  verbatim by the nightly into the served `feature_configs.json`, and
+  `interactive.html` with `gallery/feature_renderers.js` draws what is
+  served. So the editor is a form over the store; nothing downstream
+  changes for the text fields.
+- **Design questions to settle in conversation before a build (Claude's
+  proposals, for Tony to redirect):**
+  1. WHAT IT MAY EDIT. Prose and links (name, description, about, note,
+     source text, info_url), and the arrival settings once served.
+     Numbers -- value, unit, orrery_constant -- shown but LOCKED: they
+     are the provenance contract, checked by Store drift against the
+     orrery's constant store, and an editor that can change them is a
+     new way to drift. A number changes in the orrery, then the
+     pipeline.
+  2. THE FILE'S SHAPE. The store is hand-formatted with `_comment` and
+     `_declared` keys. An editor that saves through `json.dump` rewrites
+     the whole file in one canonical layout, once; the comment keys are
+     data and survive. Proposal: accept the one-time reformat rather
+     than build a formatting-preserving writer; every patch after that
+     targets the canonical layout.
+  3. ARRIVAL SETTINGS ARE NOT SERVED YET. Which shells draw on arrival
+     and the arrival scale live in the page (`SUN_HALF_RANGE_AU`, the
+     drawer's rule that a shell larger than the frame starts hidden).
+     Proposal: an `arrival` block per object -- `half_range_au` and a
+     `drawn` list of shell keys -- read by the page, with the current
+     behaviour as the default when the block is absent. A small page
+     change, and it is what makes those two items editable at all.
+  4. NO PREVIEW, BUT A MEASURE. Studio's preview does not carry: the
+     room runs on Pyodide in a browser. What can carry is the hover
+     budget's arithmetic -- desktop lines at 70 characters, phone lines
+     at 34, the ceiling of 17 -- shown beside the field as it is typed,
+     and a Run-the-checks button that runs `gallery_maintenance_run.py`
+     offline and shows its verdict. That is the check the patches run
+     now, put where Tony edits.
+  5. THE SHELL. Studio is Tkinter and Tony runs it from VS Code's Run
+     button; same here. Pick a body, pick a shell, edit, save, and the
+     usual loop after: nightly, offline run, commit, push, live run.
+- **Not this item:** the static gallery's Studio (gallery-pipeline);
+  Jupiter's and Saturn's rings, which have no room and no served names
+  (L-231 for Jupiter).
+- **Note:** RICE 4/4/80/4 -> 3.2 is Claude's proposed score, unratified.
+  Reach 4 because it changes who can maintain the rooms, not how many
+  visitors see them; Effort 4 for the form, the arrival block, the page
+  change and a suite that opens and saves the store round-trip.
+- **Question 1 RULED, Tony, 2026-09-16:** yes, numbers are locked.
+  Values, units and `orrery_constant` pointers are displayed and not
+  editable; a number changes in the orrery and comes through the
+  pipeline. Words, links and the arrival settings are the editor's.
+  Questions 2 to 5 are settled at the start of the build session, on
+  Tony's word, before any code.
+- **Order, Tony, 2026-09-16:** L-322 comes FIRST -- "get the number right
+  first" -- because the editor's locked numbers show what Store drift
+  reads, and 13 of its 70 pointers cannot be examined until the unit
+  field lands. Then this item. L-333 waits; Jupiter's room behind all
+  of it. The next session starts fresh on L-322's design round.
+- **Design SETTLED and piece 1 BUILT, 2026-09-17.** The contract is three
+  files read together:
+  `documentation/BUILD_MANIFEST_L334_store_editor_20260917.md` (the editor
+  manifest, whose sections 3, 6 and 7 stand as written), amended by
+  `documentation/HANDOFF_L334_arrival_and_cache_check_20260917.md`, and
+  with its sections 2, 4, 5, 8, 9 and 10 REPLACED by
+  `documentation/BUILD_MANIFEST_L334_editor_build_20260917.md`, the build
+  contract this item now runs under.
+- **Questions 2 to 5, RULED by Tony 2026-09-17.** (2) The file is EDITED
+  IN PLACE by the scanner in the gallery's `tools/mirror_constants.py`,
+  which the editor's writer shares; the proposal above, to accept a
+  one-time reformat through `json.dump`, is SUPERSEDED, because the L-322
+  mirror already edits the hand-formatted config in place and two writers
+  with two layouts would fight. (3) The arrival settings ARE served now --
+  piece 1 shipped the block. (4) The measure is a per-field line count
+  shown beside the field as it is typed, plus a button that runs the
+  offline checks and shows their verdicts. (5) Tkinter, started from VS
+  Code's Run button, the same way Studio is.
+- **Tony's arrival ruling, 2026-09-17, in his words:** a room opens on
+  "the surface shell plus frame elements like sun direction, axes,
+  terminator", and "exclude the moon with its box not selected." This
+  SUPERSEDES two earlier rulings of his own -- the Sun's 0.25 AU arrival
+  of 2026-08-29 and the L-291 eight-shell Earth arrival of 2026-09-06/08,
+  where the terminator started off.
+- **Piece 1 shipped** as gallery `7c95435` with `59ba809`. Each room's
+  object in `data/objects_config.json` carries an `arrival` block naming
+  the shells drawn when the room opens; `sunApplyArrival` in
+  `interactive.html` applies it before the opening view is measured, so
+  the view fits what is drawn. With no block the page behaves as before.
+  Mode 5 on the phone, both rooms, Tony: "yes, perfect. beautiful."
+  There is NO floor under the opening view, which settles the editor
+  manifest's section 8 item 1. [render-confirmed Mode 5]
+- **What the shipped block actually holds**, and it differs from the
+  editor manifest's plan: `drawn` (a list of shell KEYS) and `moon` (true
+  or false), plus an optional `min_half_range_au` that the page reads and
+  neither room uses. The arrival block is read straight from
+  `data/objects_config.json` by the page, so a change to it reaches a
+  visitor on the push alone; the shells and their words come from the
+  served cache and reach a visitor only after the cache builder has run.
+  That split is the fact the editor's Save message has to tell the truth
+  about (stage C). [verified @1b077401]
+**Gap (as it stood on 2026-09-16, now DISCHARGED -- kept as the record of
+what the order was before the arrival scene shipped):** L-322 first; then
+questions 2 to 5 in conversation; then the build, in this order: the
+arrival block and its page reader (3), the editor over prose and links
+(2, 5), the measure and the checks button (4).
+  **Tony-action (decide) -- DONE 2026-09-17:** questions 2 to 5.
+- **STAGE B BUILT, PUSHED and SEEN, 2026-09-18.** Delivered as
+  `patch_L334_3_arrival_module_20260918.py`, pushed at gallery
+  `2f971040`. What exists now: `gallery/arrival.js`, holding the arrival
+  function whole and attached as `GalleryArrival.applyArrival`;
+  `stampShell()` in `gallery/feature_renderers.js`, putting
+  `meta.shell_key` on every trace that belongs to a served shell at nine
+  sites; `stampLink()` giving each trace its own `meta` object and
+  carrying an existing key across, so the two stamps cannot overwrite
+  each other in either order; the end-of-legend-group-name match GONE,
+  leaving one way of matching instead of two; `SERVED_FILES` at eleven
+  names (L-339); and a rewritten `documentation/smoke_arrival.js` that
+  requires the new file and checks that every trace the feature
+  renderers build carries a key.
+- **A visitor sees no difference, and that was measured, not judged.**
+  Every trace in both rooms was compared before and after for its legend
+  group and its arrival visibility: 86 traces, all identical. The
+  offline run was 12 of 12 with Cache in step passing, which confirms
+  the cache did not need to change -- the key is stamped in the browser
+  and never stored. The four deliberate breaks each failed the check and
+  named the cause, the fourth of them -- a shell trace with its stamp
+  removed -- being the one the old name match could not have seen. Mode
+  5 on the phone, both rooms, Tony: "correct". [render-confirmed Mode 5]
+- **TWO PLACES THE BUILD CONTRACT DISAGREED WITH THE CODE.** Recorded
+  because the second decides what stage C's arrival panel can offer.
+  (1) The contract says `renderShellSet` already receives the shell's key
+  as `featureKey`. It does not: `featureKey` is the GROUP -- `earth_interior`,
+  `solar_atmosphere` -- and the shell key is the loop variable inside it.
+  The stamping follows the file.
+  (2) Earth's two radiation belts have NO key of their own in the served
+  config. Their names and colours come from parallel lists, so there is
+  nothing per-belt to stamp, and both carry the feature key
+  `van_allen_belts`. An arrival block naming it draws both belts
+  together. Stage C's panel therefore cannot offer one tick box per
+  drawer row for the belts; it offers one box for the pair, unless Tony
+  wants the served shape changed first.
+  **Tony-action (decide), stage C:** one box for both belts, or a served
+  change that gives each belt a key.
+- **STAGE C BUILT, PUSHED and SEEN, 2026-09-18/19, in three pushes.**
+  The writer at gallery `d3e90bae`
+  (`patch_L334_5_store_writer_20260918.py`), the window at
+  `dcdeea35` (`patch_L334_8_store_editor_20260919.py`), and the
+  dashboard button in the orrery at `8989b13d` and `e1a79f67`
+  (`patch_L334_6`, then `patch_L334_7` moving it to Gallery & Web on
+  Tony's second thought and sorting that group). Tony, on the first
+  screenshot of the window with both rooms loading: "looks great... both
+  sun and earth! good job." [render-confirmed Mode 5]
+- **WHAT EXISTS NOW.** `tools/store_writer.py`, which edits
+  `data/objects_config.json` in place through the mirror's scanner;
+  `tools/exhibit_store_editor.py`, the window, one panel on Tony's
+  ruling of 2026-09-18 with the shells at the left, the form in the
+  middle and the arrival ticks at the right on their own ground;
+  `tools/test_store_writer.py` (245 checks) and
+  `tools/test_exhibit_store_editor.py` (240 without a window, 280 with
+  one), both gating the gallery runner, which is 14 of 14.
+- **THE DESIGN CHANGED ONCE, ON REVIEW, AND THE CHANGE WAS RIGHT.**
+  Claude Fable 5.1 reviewed the writer on 2026-09-18 and found that a
+  REFUSAL list of six field names accepted everything else -- it would
+  change a room's `slug` to "earthx" or a shell's `color` to "zzz",
+  either of which breaks a room. Reproduced, then rebuilt around an
+  ALLOW list read from the config: 204 paths. The weakness came from the
+  manifest asking for a refusal list, and the general form is worth
+  keeping: a refusal list has to anticipate every way of being wrong; an
+  allow list only has to know what is right. Fable's other two notes are
+  in as well -- an empty word is not added, and a belt's words turn out
+  to be reachable, which made leaving the belts out of the editor a
+  choice rather than a limit. Tony ruled them IN on 2026-09-18.
+- **THREE THINGS THE BUILD FOUND THAT THE CONTRACT HAD WRONG.** (1) Not
+  every shell carries all six words -- the Sun's core has no `note` --
+  so the writer ADDS a missing word rather than refusing it; 23 of 192
+  shell-and-field combinations are additions. (2) The shell list cannot
+  be a plain config walk, which gives 22 for Earth where the renderers
+  draw 16; the rule that matches is `check_cache_in_step.py`'s, a member
+  carrying a display `name`. (3) Earth's belts have no per-belt key, so
+  the word list holds 16 rows against 15 tick boxes, on purpose.
+- **AND ONE OF CLAUDE'S OWN CHECKS COULD NOT FAIL.** The writer's suite
+  asserted that refusing `value` produced a message MENTIONING "value".
+  "value" is in the path, so emptying the refusal list left the suite
+  green. Found by emptying it on purpose. The suite now asserts the
+  reason. Same session, a second instance: the stamp check built Earth's
+  features without the Sun direction, so two of Earth's sixteen shells
+  were never examined by the check written to examine all of them.
+- **RECORDS, and this note is them.** interactive-exhibit 1.3 -> 1.4 and
+  gallery-cache-builder 1.4 -> 1.5, under one protocol entry, v3.62.
+  **Tony-action (do):** reinstall both from Settings > Skills after the
+  push. A mid-session reinstall cannot be verified from inside the
+  session that makes it, so THE NEXT SESSION confirms its loaded copies
+  read 1.4 and 1.5 before exhibit or cache work.
+**Gap:** none -- move to section C. What is left is cosmetic and is
+carried by L-340, opened in the same patch: three things Tony's first
+screenshot showed, plus the Mode 5 pass, listed there rather than
+holding this item open.
+**Gap (as it stood on 2026-09-18, DISCHARGED):** STAGE C, the editor
+itself. Stage B is done and its description is kept below as the record
+of what it was contracted to do. Stage C is pieces 2 to 6 of the editor manifest with
+its section 6 as the test list: the writer, which gains a true-or-false
+operation for the arrival block's `moon` and refuses `_declared` and
+`_comment` as well as `value`, `unit`, `figures` and `orrery_constant`;
+the window, with one tick box per served shell by key and one for the
+Moon; a Save message that tells the truth about what reaches a visitor
+when, since words go through the cache builder and arrival ticks do not;
+a Run-the-checks button that explains a red Cache in step rather than
+just showing it; the suite; and piece 6's records, including the two
+skill bumps under one protocol entry, v3.62. The editor does NOT start
+the cache builder.
+**Gap (as contracted on 2026-09-17; stage B is DONE):** stages B and C of
+`documentation/BUILD_MANIFEST_L334_editor_build_20260917.md`, in that
+order, each pushed and confirmed before the next starts. STAGE B, the
+arrival tidy-up, a visitor seeing no difference: `sunApplyArrival` moves
+whole into a new `gallery/arrival.js`; `gallery/feature_renderers.js`
+stamps each shell trace with its own `meta.shell_key`; the arrival
+function matches on that key and the end-of-legend-group match is
+removed; `documentation/smoke_arrival.js` requires the new file and gains
+a fourth deliberate break (an unstamped shell trace); `SERVED_FILES`
+gains three names (L-339). STAGE C, the editor itself: pieces 2 to 6 of
+the editor manifest, its section 6 as the test list, with the writer
+gaining a true-or-false operation for `moon` and refusing `_declared` and
+`_comment` as well as `value`, `unit`, `figures` and `orrery_constant`;
+one tick box per served shell by key and one for the Moon; a Save message
+that says truthfully what reaches a visitor when; and piece 6's records,
+which include the two skill bumps that make this session's lessons travel
+-- interactive-exhibit 1.3 to 1.4 (the arrival block, the trace stamp, who
+may write the config, and the rule that one check must read the file the
+browser fetches) and gallery-cache-builder 1.4 to 1.5 (a config change is
+not deployed until the cache is rebuilt, and the corrected occurrence
+count for L-216), both carried by ONE protocol entry, v3.62.
+**Ref:** gallery `data/objects_config.json`, `tools/gallery_cache_builder.py`,
+`interactive.html` (`SUN_HALF_RANGE_AU`, `EXHIBITS`, `buildSunDrawer`),
+`gallery/feature_renderers.js` (`descLine`, `stampLink`);
+`tools/gallery_studio.py` (the shape to copy); L-331 (the served prose
+this edits), L-267 (the drawer), L-322 (the unit field the locked
+numbers would show), gallery-pipeline skill (Studio), interactive-exhibit
+skill 1.3 (the provenance contract an exhibit renders under).
+
+#### [L-338] Logic that needs no browser lives in its own file (Tony's rule, 2026-09-18)
+<!-- L:338 status:DONE upd:2026-09-19 section:C flag: rice:3/3/80/1 -->
+- **Tony asked, 2026-09-17,** whether `interactive.html` should be
+  modularized. The page is 3436 lines at gallery `1b077401` and holds
+  logic that no browser is needed to run.
+- **Claude's proposal, and it is a proposal.** No general reorganisation.
+  Instead: logic that needs no browser MOVES OUT of the page into its own
+  file WHEN A BUILD ALREADY TOUCHES IT, so a check can reach it. The
+  reasoning is the same one behind A Check That Cannot Fail Is Not
+  Passing -- `documentation/smoke_arrival.js` today tests the arrival
+  function by CUTTING THE TEXT between two comment lines out of the page
+  and running it in node, which is a check whose subject is a substring
+  rather than a file, and it stops being true the moment the comment
+  lines move.
+- **This is recorded as awaiting a ruling, not as a rule in force.** It is
+  written here so that a later session does not read a one-off move as a
+  standing convention, or the reverse.
+- **Its first instance is already scheduled either way.** Stage B of
+  L-334's build contract moves `sunApplyArrival` into `gallery/arrival.js`
+  and has `smoke_arrival.js` require the file instead of cutting text out
+  of the page. Stage B goes ahead whether or not this becomes a rule.
+  **Tony-action (decide):** whether it does. If adopted it belongs in the
+  interactive-exhibit skill, where a page edit will load it.
+- **Claude:** RICE 3/3/60/1 -> 5.4 proposed, unratified. Effort 1 because
+  adopting it costs a sentence in a skill; the moves themselves are paid
+  for by the builds that were already opening those files, which is the
+  whole point of the proposal.
+- **RULED, Tony, 2026-09-18:** yes. His words, and his reason: "the idea
+  is to limit the increasing size of the interactive.html file, so yes."
+- **His reason is not the one the proposal argued from, and the
+  difference matters.** The proposal above argued from TESTABILITY -- a
+  function inside the page can only be tested by cutting text out of the
+  page. Tony's reason is SIZE. They point the same way for the arrival
+  function and they part company at the edges: size also covers bulk
+  that is not logic at all, a long block of styling for one, which
+  testability says nothing about. The rule is written with his reason
+  first and the second reason after it, and the wording goes to him when
+  the skill is bumped, because that is where the scope question has to
+  be answered rather than left to whoever reads it next.
+- **First instance, done.** L-334 stage B moved the arrival function into
+  `gallery/arrival.js` at gallery `2f971040`. 118 lines left
+  `interactive.html`, `documentation/smoke_arrival.js` now requires the
+  file instead of cutting text out of the page, and Tony's phone found
+  both rooms unchanged.
+- **CLOSED 2026-09-19.** The rule is in interactive-exhibit 1.4, under
+  its own heading, with Tony's reason first and the testability reason
+  second, and with the scope question named as open rather than settled
+  quietly: his reason covers bulk that is not logic, and the
+  testability reason does not. A page edit loads that skill, so the rule
+  now travels.
+**Gap:** none -- move to section C.
+**Ref:** L-334 (stage B, the first instance), L-339, L-235; gallery
+`interactive.html`, `gallery/feature_renderers.js`, `gallery/arrival.js`,
+`documentation/smoke_arrival.js`; resident protocol Part 3, A Check
+  That Cannot Fail Is Not Passing; interactive-exhibit skill.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

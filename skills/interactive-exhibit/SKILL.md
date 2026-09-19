@@ -1,16 +1,26 @@
 ---
 name: interactive-exhibit
-description: How an interactive exhibit (a room in interactive.html such as ?exhibit=sun) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster and frame zoom, i-panel, frame HUD, consent gate, back link), what is per-body, the served-data provenance contract (value / unit / source / orrery_constant pointer, checked by the live store-drift run), the Mode 5 sequence on the phone, and how the exhibit becomes a gallery card through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), when touching sun* chrome in interactive.html, or when deciding what an exhibit may render. Not for propagation math (gallery-assembler), the nightly data builder (gallery-cache-builder), or the Studio/converter chain for figure cards (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; carding an exhibit in Studio
+description: How an interactive exhibit (a room in interactive.html such as ?exhibit=sun) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster and frame zoom, i-panel, frame HUD, consent gate, back link), what is per-body, the served-data provenance contract (value / unit / source / orrery_constant pointer, checked by the live store-drift run), the Mode 5 sequence on the phone, and how the exhibit becomes a gallery card through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), when touching sun* chrome in interactive.html, or when deciding what an exhibit may render; when touching the arrival block, the shell-key stamp, or the store editor and its writer. Not for propagation math (gallery-assembler), the nightly data builder (gallery-cache-builder), or the Studio/converter chain for figure cards (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; carding an exhibit in Studio
 ---
 
 # Interactive Exhibit
 
-Skill version: 1.3 | Cut from gallery @ b375cfe1 (interactive.html,
-gallery/nav_cluster.js, gallery/feature_renderers.js,
-documentation/smoke_hover_budget.js) and orrery @ d99d8db1
-(LEDGER_CONSOLIDATED.md L-316, L-318, L-331, L-332) | 2026-09-16, with
-Anthropic's Claude Opus 5
+Skill version: 1.4 | Cut from gallery @ d9d7a48f (interactive.html,
+gallery/arrival.js, gallery/feature_renderers.js, gallery/nav_cluster.js,
+tools/store_writer.py, tools/exhibit_store_editor.py,
+gallery_maintenance_run.py, documentation/smoke_arrival.js) and orrery @
+e1a79f67 (LEDGER_CONSOLIDATED.md L-334, L-336, L-338, L-339) |
+2026-09-19, with Anthropic's Claude Opus 5
+v1.4 (L-334) carries what a room OPENS on and who may write the file it
+is read from. Five rules: the arrival block is served, not coded; every
+trace belonging to a served shell carries that shell's key, and one that
+loses it is DRAWN rather than hidden; only two tools write
+data/objects_config.json, and each has an allow list rather than a
+refusal list; one check must read the file the browser actually fetches;
+and logic that needs no browser lives in its own file, which is Tony's
+ruling of 2026-09-18. Built through three pushes on 2026-09-18/19,
+Mode 5 on Tony's phone between each.
 v1.3 (L-332) carries the phone chrome as six rounds on Tony's phone left
 it on 2026-09-15/16 (L-316 rounds 3 and 4, L-318 rounds 3 to 6). The
 arrow cross's corner is set by one CSS rule and the method that moves it
@@ -148,6 +158,128 @@ page:
   while building it is recorded, one ledger row per CLASS, not chased.
   This is the same discipline the orrery reached retroactively, applied
   to the assembler as it is built (Tony, 2026-09-06).
+
+### What a room opens on is SERVED, not coded [QUALITY]
+Each room's object in `data/objects_config.json` carries an `arrival`
+block: `drawn`, a list of shell KEYS, and `moon`, true or false.
+`GalleryArrival.applyArrival` in `gallery/arrival.js` applies it before
+the opening view is measured, so the view fits what is drawn. With no
+block the page behaves as it did before arrival blocks existed --
+nothing is hidden.
+
+Tony's ruling, 2026-09-17, and it supersedes two earlier rulings of his
+own (the Sun's 0.25 AU arrival of 2026-08-29 and L-291's eight-shell
+Earth arrival): a room opens on "the surface shell plus frame elements
+like sun direction, axes, terminator", and the Moon starts "with its box
+not selected". There is NO floor under the opening view.
+
+THE ARRIVAL BLOCK IS THE ONE PART OF A ROOM'S DATA THE PAGE READS
+DIRECTLY. Everything else a room draws comes from the served cache under
+`data/solar-system/`, which the cache builder writes. So a change to
+`drawn` or `moon` reaches a visitor on the PUSH ALONE, while a change to
+a shell's words does not reach them until the cache has been rebuilt.
+Say which when telling anyone what a change will do.
+
+### A shell trace carries its key [CRITICAL]
+`gallery/feature_renderers.js` stamps `meta.shell_key` on every trace
+belonging to a served shell -- the key it sits under in the object's
+features, not its display name. `stampShell()` does it at nine sites,
+and `stampLink()` carries an existing key across so the two stamps
+cannot overwrite each other in either order.
+
+The arrival rule tells three kinds of trace apart by that stamp: a
+SERVED SHELL carries a key and is drawn only if `drawn` names it; the
+MOON is legend group `moon`; a FRAME ELEMENT carries no key and is
+always drawn.
+
+THAT IS WHY THIS IS CRITICAL. A shell trace that loses its stamp reads
+as a frame element and is DRAWN -- the failure is a room opening on more
+than it should, which no compiler and no page error will mention.
+`documentation/smoke_arrival.js` therefore checks that EVERY trace the
+feature renderers build carries a key, and names by legend group any
+that does not. Add a renderer, or a branch inside one, and stamp it.
+
+Before 2026-09-18 a shell was found by the END of its legend group name,
+which was a second reading of the label formula the renderers build. Two
+readings of one formula is how they come to disagree. There is one way
+of matching now; do not add a second.
+
+### Only two tools write the served config [QUALITY]
+`data/objects_config.json` is hand-formatted and a person reads its
+diffs, so nothing rewrites it wholesale. Two tools edit it IN PLACE,
+sharing one scanner (`tools/mirror_constants.py`'s `parse_with_spans`)
+so they cannot come to disagree about the file's layout:
+
+- `tools/mirror_constants.py` writes the NUMBERS, pulled from the
+  orrery's export. A number changes in `constants_new.py`, never here.
+- `tools/store_writer.py` writes the WORDS and the arrival settings, and
+  `tools/exhibit_store_editor.py` is the window over it.
+
+WHAT THE WRITER MAY TOUCH IS AN ALLOW LIST BUILT BY READING THE CONFIG,
+not a list of exceptions -- 204 paths at gallery `d9d7a48f`: a served
+shell's six words, a belt's parallel words, and `drawn` and `moon`. The
+first design was a refusal list of six field names, and Claude Fable 5.1
+found on 2026-09-18 that it would happily change a room's `slug` to
+"earthx" or a shell's `color` to "zzz". A refusal list has to anticipate
+every way of being wrong; an allow list only has to know what is right.
+Keep it that way.
+
+A SERVED SHELL IS A MEMBER CARRYING A DISPLAY `name`. That is the rule
+`tools/check_cache_in_step.py` counts by and the set the renderers
+stamp, so the editor's list, that check's count and what a visitor can
+tick all mean one thing. A plain walk of the config gives 22 for Earth
+where the renderers draw 16; the name rule gives 18 for the Sun and 14
+for Earth.
+
+EARTH'S TWO RADIATION BELTS ARE THE EXCEPTION AND ALWAYS WILL BE while
+they are served as they are. Their names, descriptions, abouts and links
+are PARALLEL LISTS under one group key rather than a member each, so
+they have no per-belt key: both carry the feature key
+`van_allen_belts`, they tick together as one arrival choice, and they
+serve no note and no source. Earth's word list therefore holds 16 rows
+against 15 tick boxes. The counts differ ON PURPOSE; a change that makes
+them match has probably dropped the belts from one list.
+
+### One check reads the file the browser fetches [CRITICAL]
+On 2026-09-17 both rooms broke on the live site -- the Sun showing 9
+drawer rows instead of 18 -- while eleven checks passed. Every one of
+them built its scene from the config or from a recorded fixture, and
+none read the served cache, which is the file the browser fetches
+(L-336).
+
+So: for anything a visitor sees, ask WHICH FILE THE BROWSER ACTUALLY
+FETCHES, and make one check read that file. Two exist now and both gate
+the gallery runner. `tools/check_cache_in_step.py` compares the served
+cache against the config it was built from. `gallery_maintenance_run.py
+--live` fetches the served page's files and compares them with the
+working copy; its list is eleven files as of `d9d7a48f`, and a new file
+the page fetches by name is added to `SERVED_FILES` in the same push
+that adds it (L-339).
+
+### Logic that needs no browser lives in its own file [QUALITY]
+Tony's ruling, 2026-09-18 (L-338). His reason first, because it is his:
+to limit the growing size of `interactive.html`. The second reason is
+that a check can then reach the logic as a FILE --
+`documentation/smoke_arrival.js` used to test the arrival function by
+cutting the text between two comment lines out of the page, which is a
+check whose subject is a substring and which stops being true the moment
+a comment line moves.
+
+It is not a call for a general reorganisation. Logic moves out WHEN A
+BUILD ALREADY TOUCHES IT. `gallery/arrival.js` is the first instance:
+118 lines left the page, the smoke check now requires the file, and a
+visitor saw no difference.
+
+ONE SCOPE QUESTION IS OPEN and Tony should settle it the first time it
+matters: his reason covers bulk that is not logic at all -- a long block
+of styling, say -- and the testability reason says nothing about that.
+Ask rather than assume.
+
+ONE FLOOR OVER, the same rule applies to a Tkinter tool: everything in
+`tools/exhibit_store_editor.py` above the window class runs without Tk,
+and its suite exercises it there. Logic that needs no WINDOW must be
+reachable without one, or the only way to test it is to open it and
+look.
 
 ### Never mutate a plot from inside a Plotly event handler [CRITICAL]
 A relayout from inside `plotly_click` re-enters the update machinery
@@ -314,6 +446,29 @@ follow under orrery-coding-conventions 1.9 and L-321.)
 
 ## Field notes
 
+- 2026-09-17, L-334: Tony ruled the config is EDITED IN PLACE with the
+  mirror's scanner, not dumped through `json.dump`. The manifest had
+  proposed accepting a one-time reformat of all 929 lines; the mirror
+  already edits in place, and two writers with two layouts would fight.
+- 2026-09-18, L-334: not every shell is served with all six words --
+  the Sun's core has no `note`. A form that shows a field it can never
+  save is a trap, so the writer ADDS a missing word using the mirror's
+  own insertion. 23 of the 192 shell-and-field combinations in the real
+  config are additions.
+- 2026-09-18, L-334: a check that could not fail. The writer's suite
+  asserted that refusing `value` produced a message MENTIONING "value"
+  -- and "value" is in the path, so emptying the refusal list left the
+  suite green. It now asserts the reason. Found by emptying the list on
+  purpose, which is the only way that class of hole is ever found.
+- 2026-09-18, L-334: the stamp check had a blind spot of its own. It
+  built Earth's features without the Sun direction, so the magnetopause
+  and the bow shock drew nothing and two of Earth's sixteen shells were
+  never examined. A check that examines less than it appears to is the
+  same failure as a check that cannot fail.
+- 2026-09-19, L-334: two copies of the editor lived in the gallery for
+  a day -- `tools/exhibit_store_editor.py` from the patch and a stray
+  at the repo root, saved from a file handed over for reading. They
+  were byte-identical, which is exactly the trap. Deleted.
 - 2026-09-02, L-278: `sunFocusOn` called from inside `plotly_click`
   killed the page with "Maximum call stack size exceeded" on a stack 25
   frames deep. Not recursion; a large array applied as arguments inside

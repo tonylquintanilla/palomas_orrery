@@ -1,12 +1,19 @@
 ---
 name: gallery-cache-builder
-description: Nightly data-serving pipeline for the Paloma's Orrery web gallery (Phase 1b, ledger L-098). Use for any task touching tools/gallery_cache_builder.py, tools/test_gallery_cache_builder_offline.py, inspect_staging.py, debug_encke_tp.py, gallery_cleanup.py, data/objects_config.json, the data/solar-system/ serving cache (coverage_index.json, feature_configs.json, positions/, raw/), atomic-swap / .prev / .staging_* / .quarantine_* semantics, Guard v2, dry-run / first-build / nightly modes, documentation/TESTING_PROTOCOL.md layers, or wiring interactive.html to the served data. Do NOT use for the Studio/converter/viewer curation chain (that is gallery-pipeline) or for projects other than Paloma's Orrery.
+description: Nightly data-serving pipeline for the Paloma's Orrery web gallery (Phase 1b, ledger L-098). Use for any task touching tools/gallery_cache_builder.py, tools/test_gallery_cache_builder_offline.py, inspect_staging.py, debug_encke_tp.py, gallery_cleanup.py, data/objects_config.json, the data/solar-system/ serving cache (coverage_index.json, feature_configs.json, positions/, raw/), atomic-swap / .prev / .staging_* / .quarantine_* semantics, Guard v2, dry-run / first-build / nightly modes, documentation/TESTING_PROTOCOL.md layers, or wiring interactive.html to the served data; and for the rule that a config change is not deployed until the cache is rebuilt. Do NOT use for the Studio/converter/viewer curation chain (that is gallery-pipeline) or for projects other than Paloma's Orrery.
 fires_when: Nightly builder, atomic swap, coverage_index, serving cache, objects_config, dry-run/first-build/nightly, builder testing layers
 ---
 
 # Gallery Cache Builder (Phase 1b data serving)
 
-Skill version: 1.4 | Cut from tonyquintanilla.github.io @ 02d7163 (code) and palomas_orrery @ 2f0aabe (context), earlier @ 8e4b5ca (v1.3) | 2026-08-19
+Skill version: 1.5 | Cut from tonyquintanilla.github.io @ d9d7a48f (tools/check_cache_in_step.py, gallery_maintenance_run.py, data/objects_config.json) and palomas_orrery @ e1a79f67 (LEDGER_CONSOLIDATED.md L-216, L-322, L-334, L-336) | 2026-09-19, with Anthropic's Claude Opus 5
+v1.5 adds the rule the project did not have written down anywhere until
+a config change reached the live site ahead of the cache and broke both
+exhibit rooms: A CONFIG CHANGE IS NOT DEPLOYED UNTIL THE CACHE IS
+REBUILT (L-336). It also corrects this skill's own claim that the failed
+`staging -> live` rename was "one data point" -- there have been three,
+the third on 2026-09-17 -- and writes down the hand routine Tony
+actually uses now.
 v1.4 adds Recovery from a failed swap: discard and re-run -- Tony's
 operational rule of 2026-08-19, after a nightly run wiped the served tree
 and the ~30 quarantine directories turned out to be the same mechanism
@@ -128,14 +135,69 @@ are that, one per night, printing as normal because the builder is built
 to survive it. Catching `staging -> live` has no in-run recovery and
 leaves the live directory missing. Same cause, different victim.
 
-Two things are NOT established and should not be asserted. Whether the
-`staging -> live` rename is exposed to the same lock as the cleanup, or
-was unlucky once, is one data point. And the run record is written INSIDE
-the generation, so a run whose swap fails strands its own record in a
-directory `.gitignore` hides -- meaning the committed history shows no
-sign that a run lost its data. Recording the swap OUTCOME outside the
-generation comes BEFORE fixing the cause; otherwise every recurrence costs
-another evening of inference.
+THREE OCCURRENCES, so the exposure IS established (corrected 2026-09-19;
+this skill said "one data point" until then and that was already false).
+The `staging -> live` rename is exposed to the same lock as the cleanup.
+It is not bad luck. The third was 2026-09-17, during the rebuild L-336's
+deployment fault made necessary; Tony: "This is like the third time."
+
+WHAT IS STILL NOT ESTABLISHED is the fix, and one thing that is NOT a fix
+is a louder failure. The run record is written INSIDE the generation, so
+a run whose swap fails strands its own record in a directory `.gitignore`
+hides -- meaning the committed history shows no sign that a run lost its
+data. Recording the swap OUTCOME outside the generation comes BEFORE
+fixing the cause; otherwise every recurrence costs another evening of
+inference.
+
+TONY'S HAND ROUTINE, 2026-09-17, and it is deliberate rather than a
+workaround he would rather not need. The scheduled nightly is SUSPENDED.
+He pauses OneDrive syncing FIRST, runs the builder by hand, and watches
+GitHub Desktop's change list, stopping if the commit does not form
+correctly. Pausing sync before a re-run worked.
+
+ONE STEP IS ADDED TO THE DISCARD RULE ABOVE when the change list also
+holds work that is not the cache -- which it did on 2026-09-17, because
+the arrival work was sitting beside the wreckage. COMMIT THE NON-CACHE
+FILES FIRST, then discard the rest, then re-run. A blanket discard would
+have thrown away committed-worthy work.
+
+MOVING THE REPOSITORIES OFF ONEDRIVE is the lasting fix and Tony's answer
+on 2026-09-17 was "not at this time". It changes his machine outside his
+usual working set and needs its steps and risks written out before he
+decides. Do not propose it casually.
+
+## A config change is not deployed until the cache is rebuilt [CRITICAL]
+
+The rooms in `interactive.html` draw their shells from the SERVED CACHE,
+`data/solar-system/coverage_index.json`, which this builder copies from
+`data/objects_config.json`. Pushing the config alone changes nothing a
+visitor sees -- except where the two disagree, and there it breaks the
+page.
+
+WHAT HAPPENED, 2026-09-17 (L-336). L-322's gallery half was pushed at
+gallery `d2ca28b6` before the builder had run. The unit spellings had
+changed in the config and in the renderers (`R_sun` to `r_sun`); the
+cache still held the old spelling; the renderers refused every shell
+that used it. Tony's phone showed the Sun's room with 9 drawer rows
+instead of 18 and Earth's with 8, on the live site, while the
+maintenance run printed 11 of 11.
+
+THE ROUTINE, and it is one routine rather than a judgement call:
+
+  1. Change `data/objects_config.json`.
+  2. Run this builder. By hand -- see Operating mode.
+  3. Run `python gallery_maintenance_run.py`.
+  4. Commit the CONFIG AND THE CACHE TOGETHER, and push.
+
+`tools/check_cache_in_step.py` gates step 3 and compares the served
+cache against the config it was built from. A red "Cache in step" right
+after a config change is CORRECT and means step 2 has not happened yet.
+
+THE ONE EXCEPTION, and it is worth knowing because it is the only part
+of a room's data the page reads directly: the `arrival` block --
+`drawn` and `moon` -- is fetched from `data/objects_config.json` by
+`gallery/arrival.js`, not from the cache. A change to what a room OPENS
+on needs only the push. Everything else needs the builder.
 
 ## Validation stance
 

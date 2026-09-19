@@ -74,9 +74,9 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 444.5 MB (591 files)
+**Total size:** 444.5 MB (592 files)
 
-**GitHub Pages headroom:** 580 MB remaining of 1024 MB ceiling (43.4% used)
+**GitHub Pages headroom:** 579 MB remaining of 1024 MB ceiling (43.4% used)
 
 ### By extension
 
@@ -85,7 +85,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 | .json | 335 | 420.2 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-18 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 1 | 5.1 MB | palomas_orrery_logo.png (5.1 MB) | 2025-11-27 |
-| .py | 140 | 2.6 MB | gallery_studio.py (243.1 KB) | 2026-09-18 |
+| .py | 141 | 2.6 MB | gallery_studio.py (243.1 KB) | 2026-09-18 |
 | .jsonl | 33 | 800.4 KB | encke.jsonl (24.8 KB) | 2026-09-18 |
 | .md | 15 | 701.3 KB | TEST_PROTOCOL_sun_hang_20260902.md (526.5 KB) | 2026-09-18 |
 | .html | 5 | 328.3 KB | index.html (156.6 KB) | 2026-09-18 |
@@ -128,7 +128,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | repo | served size | ceiling | headroom | used |
 |---|---|---|---|---|
-| gallery | 444.5 MB | 1024 MB | 580 MB | 43.4% |
+| gallery | 444.5 MB | 1024 MB | 579 MB | 43.4% |
 | orrery (gitignored data) | 966.8 MB | n/a (not served) | -- | -- |
 
 Note: orrery data is local/gitignored. If orbit cache files are pushed to either repo for web serving, re-run this inventory to update headroom.
