@@ -1148,18 +1148,222 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-7. Move all three scripts into `documentation/`, commit everything together, push, tell me the SHA.
+7. Move all three scripts into `documentation/`, commit everything together, push, tell me the SHA. -- a9d02017588874e5e2a31174321122bdf82658db
 
-**Then reinstall the skill.** provenance-discipline 2.15 from Settings > Skills, and the Project instructions to v3.64. I cannot verify either from inside this session, so it travels as an obligation to the next one.
+**Then reinstall the skill.** provenance-discipline 2.15 from Settings > Skills, and the Project instructions to v3.64. I cannot verify either from inside this session, so it travels as an obligation to the next one. -- done
 
 **Gallery, one push.** Doing it after the orrery means one cache rebuild instead of two.
 
 8. `patch_L342_1` — the formatter and its check.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L342_1_served_figures_formatter_20260919.py
+  ok  RENDER  fmtServed prints plain digits, never an exponent
+  ok  RENDER  _fmtServed exported for the smoke test
+  ok  SMOKE  every served figure count goes through the real formatter
+
+      documentation/smoke_hover_budget.js    14155 ->   16419 bytes
+      gallery/feature_renderers.js           88010 ->   89868 bytes
+
+patch applied (2 files, 3 edits)
+
+NOW, in order:
+  1. Run the gallery maintenance run -- offline. The hover
+     suite should report the new check passing over 12
+     declared counts, and Cache in step should be RED,
+     because the renderers changed and the cache has not.
+  2. PAUSE OneDrive syncing, then rebuild the served cache.
+  3. Run the offline run again. Everything green.
+  4. Move this script into documentation/.
+  5. Commit the renderers, the suite AND the cache together,
+     and push.
+  6. Open Earth's room, turn on the geocorona, hover it. It
+     should read 100 Earth radii, not 1e+2.
+
+Undo at any point is Discard Changes in GitHub Desktop.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
 9. `patch_L342_4` — the visitor note.
-10. `tools/pull_constants_export.py`, then `tools/mirror_constants.py --write`.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L342_4_visitor_precision_note_20260919.py
+  ok  SUN ROOM   the precision-versus-accuracy sentences
+  ok  EARTH ROOM  the precision-versus-accuracy sentences
+
+      interactive.html          145718 ->  146384 bytes
+
+patch applied (1 file, 2 edits)
+
+NOW, in order:
+  1. Run the gallery maintenance run -- offline.
+  2. Move this script into documentation/.
+  3. Commit and push.
+  4. OPEN BOTH ROOMS AND READ THE PANEL. This is prose a
+     visitor reads, so it is yours to judge, not a check's.
+
+Undo at any point is Discard Changes in GitHub Desktop.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+10. `tools/pull_constants_export.py`, then `tools/mirror_constants.py --write`. -- could we add to mirror_constants.py the ability to accept the --write argument running from the main module instead of as a python command?
+
+Pulled from orrery a9d02017: 55 row(s), 58 not exported, store 248541a9ba5d. The SHA is in data/constants_export.sha.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>cd tools/mirror_constants.py --write
+The system cannot find the path specified.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>cd tools/
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools>python mirror_constants.py --write
+======================================================================
+  CONFIG MIRROR -- data/constants_export.json -> data/objects_config.json
+======================================================================
+
+70 link(s): 37 served, 28 fallback, 5 outside the store.
+
+DEFINITION, 1 link(s) transmitted as exactly 1:
+  EARTH_EQUATORIAL_RADIUS_KM         1 r_earth by definition: this row is what the token table calls one r_earth
+
+SERVED, 2 with something to write:
+  EARTH_OUTER_CORE_KM                figures  4 -> 5
+  EARTH_HILL_SPHERE_RADII            value    234.6388 -> 235.0
+  EARTH_HILL_SPHERE_RADII            figures  7 -> 3
+
+FALLBACK, 28 link(s) the export cannot serve yet:
+  ALFVEN_SURFACE_RADII               no # Unit: line
+  ALFVEN_SURFACE_RADII               no # Unit: line
+  CHROMOSPHERE_PHYSICAL_RADII        no # Unit: line
+  CORE_AU                            no # Unit: line
+  EARTH_BOW_SHOCK_JELINEK_EPS        unit token 'dimensionless' is retired: names no quantity, so
+  EARTH_BOW_SHOCK_JELINEK_LAMBDA     unit token 'dimensionless' is retired: names no quantity, so
+  EARTH_MAGNETOPAUSE_SHUE_A6         unit token 'dimensionless' is retired: names no quantity, so
+  EARTH_MAGNETOPAUSE_SHUE_A8         unit token 'dimensionless' is retired: names no quantity, so
+  GRAVITATIONAL_INFLUENCE_AU         no # Unit: line
+  HELIOPAUSE_RADII                   no # Unit: line
+  HELMET_CUSP_RADII                  no # Unit: line
+  INNER_CORONA_RADII                 no # Unit: line
+  INNER_LIMIT_OORT_CLOUD_AU          no # Unit: line
+  INNER_LIMIT_OORT_CLOUD_AU          no # Unit: line
+  INNER_OORT_CLOUD_AU                no # Unit: line
+  INNER_OORT_CLOUD_AU                no # Unit: line
+  INNER_OORT_CLOUD_AU                no # Unit: line
+  JUPITER_EQUATORIAL_RADIUS_KM       no # Unit: line
+  OUTER_CORONA_RADII                 no # Unit: line
+  OUTER_OORT_CLOUD_AU                no # Unit: line
+  OUTER_OORT_CLOUD_AU                no # Unit: line
+  RADIATIVE_ZONE_AU                  no # Unit: line
+  ROCHE_LIMIT_RADII                  no # Unit: line
+  SOLAR_RADIUS_AU                    no # Unit: line
+  SUN_RADIUS_KM                      no # Unit: line
+  SUN_RADIUS_KM                      no # Unit: line
+  SUN_RADIUS_KM                      no # Unit: line
+  TERMINATION_SHOCK_AU               no # Unit: line
+
+OUTSIDE THE STORE, 5 link(s):
+  create_sun_galactic_tide default   points outside constants_new.py
+  planet_poles['Earth']              points outside constants_new.py
+  planet_poles['Jupiter']            points outside constants_new.py
+  planet_poles['Saturn']             points outside constants_new.py
+  planet_poles['Sun']                points outside constants_new.py
+
+Wrote 3 field(s) across 2 served link(s); 28 fallback left alone, 5 outside the store.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools>
+
 11. **Pause OneDrive**, then rebuild the cache.
+
+[RECOVER] removed retained data\solar-system.prev (cleared read-only on 6 entries)
+[sweep] kept 1 recent sibling(s) as autopsies: .staging_solar-system_20260917T234936Z
+[warn] sun: features-only entry; no Horizons fetch
+[done] run 20260920T024750Z (nightly): 13 objects
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
 12. The gallery maintenance run, offline. Expect 14 of 14. If Cache in step is red, the rebuild did not take — do not push past it.
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              0.9s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     0.7s  no change to
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite       6.8s  PASS (167 checks, 0 failures)
+  PASS Mirror suite              0.1s  All 42 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing.
+  PASS Store writer suite        2.9s  All 245 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 246 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 37 link(s) compared, store
+                                    248541a9ba5d.
+  PASS Pointer join              0.1s  Every link is accounted for: 70
+                                    link(s) against orrery a9d02017,
+                                    28 fallback named.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's features exactly: 4
+                                    object(s), 34 named shell(s), in
+                                    both cache files.
+  PASS Feature renderers         0.8s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.1s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.1s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: 1 sibling(s), none stale.
+                                    The sweep is keeping up.
+
+======================================================================
+  14 of 14 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: 1 sibling(s), none stale. The
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
 13. Move both scripts into `documentation/`, commit the renderers, the suite, the page, the config and the cache **together**, push. Resume OneDrive.
+
+gallery moved to ea125402cacea78e66b74f6d208379b80d220331
+
 14. The live run.
 
 **What to look at with your own eyes, and it is the point of the whole exercise.** Open Earth's room. The geocorona should read **100 Earth radii**, not `1e+2`. The Hill sphere should read **235**, not 234.6388. The outer core gains a digit, **3480.0**. Then read the panel note at the bottom of both rooms and decide whether that prose stays.
