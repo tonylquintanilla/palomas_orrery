@@ -493,6 +493,6 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-**14. File and push.** Move the script into `documentation/`, then commit and push.
+**14. File and push.** Move the script into `documentation/`, then commit and push. -- ee37cc1ff911d96e87fd5d714a456b53f2aef50e
 
 Both patches refuse to run twice and write nothing at all if an anchor does not match, so a failed step leaves the working copy exactly as it was. Undo at any point is Discard Changes in GitHub Desktop.

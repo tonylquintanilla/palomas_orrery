@@ -163,6 +163,11 @@ Module updated: September 16, 2026 with Anthropic's Claude Opus 5
 (L-316 and L-318 closed on Tony's word; L-334 question 1 ruled, numbers
 locked; the order for the next sessions recorded on L-322 and L-334:
 L-322 first, then the editor), built on 85c308cf.
+Module updated: September 20, 2026 with Anthropic's Claude Opus 5
+(L-216: occurrences four and five recorded, the three OneDrive options
+weighed and Tony's ruling written down; the 38-day hole in the committed
+run history measured and its only copy named; the 2026-07-24 occurrence
+corrected on Fable 5.1's review), built on ee37cc1f.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -419,7 +424,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
-| ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-09-19 |
+| ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-09-20 |
 | ! | L-224 | Streamer belt: one warped band, not a sphere | OPEN | 3.8 | 2026-08-22 |
 |  | L-230 | A skill bump does not reach the protocol's version history | DEFERRED | 3.8 | 2026-08-23 |
 | ! | L-227 | Streamer band hover rendered as one 378-character line | OPEN | 3.8 | 2026-08-23 |
@@ -3568,7 +3573,7 @@ governs a session document contradicting a settled decision, not a
 ledger field that predates the event it is silent about).
 
 #### [L-216] Gallery swap fails under a filesystem lock (OneDrive)
-<!-- L:216 status:OPEN upd:2026-09-19 section:A flag: rice:3/3/85/2 -->
+<!-- L:216 status:OPEN upd:2026-09-20 section:A flag: rice:3/3/85/2 -->
 - **2026-08-19: the nightly run wiped the served tree.** GitHub Desktop
   showed 56 deletions in the gallery repo and zero additions.
   `data/solar-system/` was absent while BOTH halves of the generation
@@ -3647,12 +3652,104 @@ says three occurrences and that the exposure is established rather than
 unlucky, and carries the hand routine above, including the step that
 commits non-cache files before discarding. This item stays OPEN for the
 CAUSE, not for the record of it.
-**Gap (corrected 2026-09-17):** the CAUSE, not the exposure. Three
-occurrences settle what one did not: the `staging -> live` rename IS
-exposed to the same lock as the cleanup, and it is not bad luck. What
-remains is the fix -- retry the renames with backoff, or move the
-repository off OneDrive (Tony: not at this time) -- and the visibility
-gap above, which still comes first.
+**Note (2026-09-20) -- OCCURRENCES FOUR AND FIVE, and the OneDrive
+question written out so it need not be argued from memory again.** The
+swap failed twice more on 2026-09-20, both times at `staging -> live`
+with "Access is denied", and both times with OneDrive syncing PAUSED.
+Pausing is therefore not a reliable cure. The two staging directories
+are 1 hour 57 minutes apart and a OneDrive pause lasts 2 hours, so the
+pause may have expired about when the second run reached its swap. That
+is a possibility worth carrying, not a finding; nobody checked the clock
+at the time.
+THE ONLY BARRIER SO FAR HAS BEEN A PERSON NOTICING, AND IT HAS ALREADY
+FAILED ONCE. Tony, 2026-09-20: "catching the failures depended on me
+stopping with the malformed commit lists, but the fix was not obvious."
+The four occurrences from 2026-08-19 onward were each caught that way --
+Tony read GitHub Desktop's change list and declined to commit, on a run
+he had started himself. THE FIRST ONE WAS NOT. The 2026-07-24 run was
+SCHEDULED, nobody knew a build was in flight, and the mass deletion was
+read as routine cleanup: it was committed and pushed, then reverted
+after the fact. The account is in the gallery repo, in the Origin
+paragraph of `documentation/AS_BUILT_L173_numbering_fix.md` and in the
+`verify_promoted_data` docstring in `tools/gallery_cache_builder.py`.
+Retiring the schedule on 2026-08-10 is what made Tony present for every
+run since. It is still one person looking, with nothing behind him, and
+that is what stage B of the build manifest removes.
+A SECOND RECOVERY ROUTE WAS MEASURED. Tony renamed the staging folder to
+`solar-system` by hand in File Explorer, minutes after Python had been
+refused, and it worked. So the lock is brief. The rule of 2026-08-19 --
+discard the deletions in GitHub Desktop and re-run -- is unchanged and
+still sound; this is a second way out, not a replacement for it.
+THREE OPTIONS WERE WEIGHED, 2026-09-20.
+- ONE, harden the swap. Retry each rename, put the old cache back if the
+  swap still fails, and record every swap's outcome in a tracked file
+  outside the generation. Makes a failure rare, and makes it visible
+  without anyone having to notice anything. Does NOT remove the cause.
+- TWO, keep the repositories under OneDrive and have the builder avoid
+  the swap altogether. Not favoured. The all-or-nothing swap is the
+  builder's main protection -- it is what guarantees that a failure
+  leaves a complete old generation or a complete new one and never a
+  mixture -- and the conflict copies dated 2026-09-05 onward show
+  OneDrive fighting that folder independently of the builder anyway.
+- THREE, move both repositories out of OneDrive. Removes the cause.
+WHAT STANDS IN THE WAY OF THREE. GitHub holds everything that is
+committed. OneDrive is today the only second copy of what `.gitignore`
+excludes. `DATA_INVENTORY.md`, generated 2026-09-20, counts 966.8 MB of
+local orrery data, including the Gaia star tables (`.vot`, 295.1 MB),
+the star property files (`.pkl`, 33.6 MB), `orbit_paths.json`
+(130.9 MB), the ERA5 climate files (`.nc`, 161.1 MB), and the `papers/`
+folder. Tony, 2026-09-20: the large star data files are "difficult to
+rebuild". A move needs a backup plan for these BEFORE it happens.
+TWO FACTS THAT BEAR ON IT, Tony, 2026-09-20. He works on the repositories
+from one computer. A Mac kept for Mac and Linux Python is rarely used and
+its copy is badly stale. So OneDrive is not carrying the work between
+machines; here it is buying a second copy, not portability.
+**Tony's ruling, 2026-09-20:** "let's put your analysis in the ledger, do
+option 1, and take it from there as needed." Option THREE is NOT decided
+and is not to be pressed. If Tony raises it, what he wants first is the
+inventory, a backup plan for the files above, the steps in GitHub
+Desktop's own terms, and what could go wrong at each step -- all written
+out before he decides anything.
+
+**Note (2026-09-20) -- the committed run history has a 38-day hole, and
+the only copy of it sits inside the conflict copy the build manifest
+proposes to delete.** Measured at gallery `1061ae4d`.
+`data/solar-system/raw/runs/` holds 37 run records: 2026-07-11 to
+2026-07-28, then nothing at all until 2026-09-05, then near-daily to
+2026-09-20. The TRACKED conflict copy
+`data/1260806133443-solar-system/raw/runs/` holds 42 run records,
+2026-07-29 to 2026-09-04, and not one of them appears in the live tree.
+The two sets are disjoint and the second exactly fills the first's hole.
+That window contains the 2026-08-19 occurrence and the whole of the
+L-274 silent-sweep period.
+WHY IT BEARS ON THE DECISION IN STAGE B. The manifest recommends
+deleting `data/1260806133443-solar-system/` as 42 published files that
+serve nothing. Serving nothing is correct -- they are records, not
+served data. Deleting them would destroy the only committed evidence for
+exactly the stretch this item is investigating, inside the build whose
+stated purpose is that a recurrence should stop costing an evening of
+inference.
+HOW IT CAME TO BE RECOMMENDED is an instance of a rule this project
+already holds. The manifest described the folder by a COUNT and its
+author had not opened the files. Fable 5.1, reviewing this patch on
+2026-09-20: "I counted the files and never opened them... I gave you a
+count." A Report Names Its Items, measured once more.
+**Claude's recommendation, for Tony to rule on:** keep the records and
+move them. Copy the 42 files to `documentation/cache_run_history/` in
+the gallery repo -- a name that is not a cache sibling, so it stops
+reading as a stray generation and is not caught by the new ignore rules
+-- and then delete the folder. Putting them back inside the live cache
+is the worse option: nothing should write into that tree by hand.
+**Tony-action (decide)**, due with stage B.
+
+**Gap (corrected 2026-09-20):** the CAUSE, and now a specified fix for
+the exposure. `documentation/BUILD_MANIFEST_L216_cache_swap_20260920.md`
+carries the build: retry each rename, put the old cache back if the swap
+still fails, record every swap's outcome in a tracked file outside the
+generation, and keep OneDrive's conflict copies out of git. Until that
+lands, the only thing between a failed swap and a bad commit is Tony
+reading the change list. The move off OneDrive stays Tony's and is
+undecided.
 **Ref:** `tools/gallery_cache_builder.py` `atomic_swap_dir` (~1176),
 `recover_incomplete_swap` (~1223), `_sweep_siblings` (~1241) in the
 gallery repo; run records `20260819T214723Z.json` (failed) and
