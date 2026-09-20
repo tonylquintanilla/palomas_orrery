@@ -168,6 +168,9 @@ Module updated: September 20, 2026 with Anthropic's Claude Opus 5
 weighed and Tony's ruling written down; the 38-day hole in the committed
 run history measured and its only copy named; the 2026-07-24 occurrence
 corrected on Fable 5.1's review), built on ee37cc1f.
+Module updated: September 20, 2026 with Anthropic's Claude Opus 5 (L-216
+as built: the swap retries, rolls back and logs; the run history kept;
+gallery-cache-builder 1.5 -> 1.6 and protocol v3.65), built on ba94e80e.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -3742,14 +3745,66 @@ reading as a stray generation and is not caught by the new ignore rules
 is the worse option: nothing should write into that tree by hand.
 **Tony-action (decide)**, due with stage B.
 
-**Gap (corrected 2026-09-20):** the CAUSE, and now a specified fix for
-the exposure. `documentation/BUILD_MANIFEST_L216_cache_swap_20260920.md`
-carries the build: retry each rename, put the old cache back if the swap
-still fails, record every swap's outcome in a tracked file outside the
-generation, and keep OneDrive's conflict copies out of git. Until that
-lands, the only thing between a failed swap and a bad commit is Tony
-reading the change list. The move off OneDrive stays Tony's and is
-undecided.
+**Note (2026-09-20) -- AS BUILT.** The build in
+`documentation/BUILD_MANIFEST_L216_cache_swap_20260920.md` is done, in
+three gallery pushes: `d0317aa3` (the hardening), then `a1a516cf` (the
+run history moved and the conflict copy removed). Built by Claude Opus 5
+from a manifest written by Claude Fable 5.1, Tony integrating.
+WHAT THE BUILDER DOES NOW. Each rename inside the swap is retried six
+times over about fifty seconds. A swap that still cannot finish renames
+`.prev` back to live, so the working copy is never left without a served
+cache and GitHub Desktop never shows the pile of deletions; the staging
+directory is kept. Every run that reaches the swap writes ONE line to
+`data/cache_swap_log.jsonl` -- tracked, and a sibling of the served
+directory rather than part of it -- appended as `started` before the swap
+and rewritten with the outcome after. A dry run writes nothing. When the
+roll-back also fails the builder prints, in plain words, that nothing is
+lost and which two hand recoveries to use; it never says "will self-heal"
+without saying what Tony does.
+HOW WE WILL KNOW IT WORKS, and it is the only evidence there is, because
+a retry that worked looks exactly like a run with no problem: A LINE IN
+THE LOG WITH MORE THAN ONE ATTEMPT AND OUTCOME `ok` IS A FAILURE THIS
+BUILD ABSORBED. `gallery_maintenance_run.py` prints the last line's
+verdict at the end of its summary. If the log only ever shows one
+attempt, the lock has not recurred and nothing is proven either way.
+TESTED. The offline suite went from 167 checks to 190. Each of the three
+pieces was then removed on purpose and the matching checks went red BY
+NAME -- 4 for the retry, 5 for the roll-back, 7 for the log. One of those
+runs found a real weakness first: a missing log crashed the suite instead
+of failing a named check, which is the blind spot not announcing, and it
+was fixed before delivery.
+PIECE 4. `.gitignore` gains `data/solar-system (*)/` and
+`data/[0-9]*-solar-system/`, and `documentation/check_cache_siblings.py`
+now classifies EVERY directory in `data/` and names anything the builder
+did not make. It found four on Tony's machine at the first run, having
+reported "no sibling directories" the day before.
+THE RUN HISTORY IS KEPT. The 42 records are at
+`documentation/cache_run_history/` in the gallery repo with a README, and
+`data/1260806133443-solar-system/` is gone.
+**Note (2026-09-20) -- two mistakes made during this build, both recorded
+because they are the same shape.** A patch script called plain
+`shutil.rmtree` on the cache tree and was refused by the Windows
+read-only attribute -- the exact failure `_rmtree_force` was written for,
+in a docstring the session had read an hour earlier. Nothing was lost
+(rmtree unlinks files before removing directories, and it failed at the
+rmdir of a folder it had just emptied), but a second patch was needed to
+finish. And the build manifest described the conflict copy by a COUNT,
+"42 published files that serve nothing", written by an author who had not
+opened them. Fable 5.1 named its own error on review: "I counted the
+files and never opened them." Knowledge that lives only inside a function
+does not fire, and a count does not say what is there. Both rules are now
+in `gallery-cache-builder` 1.6.
+**Tony-action (do) -- carried, not cleared:** this session loaded
+gallery-cache-builder 1.5 and bumped it to 1.6. A reinstall cannot be
+verified from inside the session that makes it. The next session confirms
+its loaded copy reads 1.6 before cache work.
+**Gap (corrected 2026-09-20, after the build):** the CAUSE. The exposure
+is handled and the fix is in; what remains is whether the repositories
+stay under OneDrive. WATCH THE SWAP LOG: a line with more than one
+attempt and outcome `ok` is the fix doing its job, and Tony should expect
+one within a few weeks. The move off OneDrive is Tony's and is UNDECIDED;
+the analysis, the inventory and what a move would need first are in the
+2026-09-20 notes above, so it need not be argued from memory.
 **Ref:** `tools/gallery_cache_builder.py` `atomic_swap_dir` (~1176),
 `recover_incomplete_swap` (~1223), `_sweep_siblings` (~1241) in the
 gallery repo; run records `20260819T214723Z.json` (failed) and

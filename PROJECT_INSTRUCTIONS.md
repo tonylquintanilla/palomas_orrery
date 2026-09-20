@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.64 | September 19, 2026
+Tony Quintanilla, PE | Claude | v3.65 | September 20, 2026
 
-Cut from 21065c5d at https://github.com/tonylquintanilla/palomas_orrery
+Cut from ba94e80e at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -506,10 +506,11 @@ gallery-assembler            1.3  render_orbits.py, resolver.py,
                                   unresponsive, it worked yesterday, a console
                                   error appears, or Claude is about to hand
                                   Tony a test to run
-gallery-cache-builder        1.5  Nightly builder, atomic swap, coverage_index,
-                                  serving cache, objects_config,
-                                  dry-run/first-build/nightly, builder testing
-                                  layers
+gallery-cache-builder        1.6  Nightly builder, atomic swap and its
+                                  retry/roll-back/swap log, "Access is denied"
+                                  under data/, coverage_index, serving cache,
+                                  objects_config, dry-run/first-build/nightly,
+                                  builder testing layers
 interactive-exhibit          1.4  adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
@@ -1157,6 +1158,62 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.65 (September 20, 2026): No rule changed in this document. ONE
+skill bump, taken AFTER the build it records, which is v3.62's
+exception rather than v3.55's ordering: three of these rules were
+learned while the build ran and there was nothing to write before it.
+
+gallery-cache-builder 1.5 -> 1.6 (L-216). THE CACHE SWAP STOPS
+DEPENDING ON TONY NOTICING.
+
+WHAT LANDED, in the gallery at `a1a516cf`. Each rename inside the swap
+is retried for about fifty seconds. A swap that still cannot finish
+renames the previous generation back, so the working copy is never left
+without a served cache and GitHub Desktop never shows the pile of
+deletions. And every run that reaches the swap writes one line to
+`data/cache_swap_log.jsonl`, a tracked file OUTSIDE the generation --
+which L-216 has said since 2026-08-19 must come first, because a run
+whose swap fails strands its own record where `.gitignore` hides it.
+The offline suite went from 167 checks to 190, and each of the three
+pieces was removed on purpose to confirm the matching checks go red by
+name.
+
+THE COUNT IS FIVE, and the two ends of the list are the argument. The
+first occurrence, 2026-07-24, was a SCHEDULED run: nobody knew a build
+was in flight, the mass deletion was read as routine cleanup, and it
+was committed and pushed before being reverted. The human check did not
+merely risk failing; it failed once. The last two, both on 2026-09-20,
+happened with OneDrive syncing PAUSED, so pausing is not the cure it
+looked like. Tony's words are in L-216: "catching the failures depended
+on me stopping with the malformed commit lists, but the fix was not
+obvious."
+
+TWO RULES IN THE SKILL CAME FROM MISTAKES MADE DURING THE BUILD, and
+both are the same shape. A patch script called plain `shutil.rmtree` on
+the cache tree and was refused by the read-only attribute OneDrive sets
+-- the exact failure `_rmtree_force` was written for, in a docstring
+the session had read an hour earlier. And the build manifest described
+a folder by a COUNT, "42 published files that serve nothing", written
+by an author who had not opened them; they were the only copy of 38
+days of run history. Knowledge that lives only inside a function does
+not fire, and a count does not say what is there. Both now live in the
+skill.
+
+THE MOVE OFF ONEDRIVE IS NOT DECIDED and is not to be pressed. Tony
+ruled "do option 1 and take it from there as needed" on 2026-09-20; the
+analysis he asked to have recorded, including what a move would need
+first, is written into L-216.
+
+THE OBLIGATION TRAVELS, as it always does. This session loaded 1.5, and
+a reinstall cannot be verified from inside the session that makes it.
+The next session confirms its loaded copy reads 1.6 before cache work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.62 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.64 (September 19, 2026): No rule changed in this document. ONE
 skill bump, taken after a review found a rule being decided in the
 wrong place.
@@ -1261,49 +1318,6 @@ provenance or store work, and that session is Stage C, the walk itself.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.60 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.62 (September 19, 2026): No rule changed in this document. TWO skill
-bumps, taken after the build they record rather than before it, which is
-the exception to v3.55's ordering and is stated here so it is not read as
-a precedent: these rules were LEARNED in the build, and there was nothing
-to write before it ran.
-
-interactive-exhibit 1.3 -> 1.4 (L-334) and gallery-cache-builder
-1.4 -> 1.5 (L-336, L-216).
-
-WHAT THE EXHIBIT SKILL GAINS is what a room opens on and who may write
-the file it is read from. The arrival block is served rather than coded,
-and it is the one part of a room's data the page reads directly, so a
-change to it reaches a visitor on the push while a change to a shell's
-words waits for the cache builder. Every trace belonging to a served
-shell now carries that shell's key, and a trace that loses its stamp is
-DRAWN rather than hidden, which is why that rule is CRITICAL and why a
-check reads every trace the renderers build. Two tools write the served
-config and each has an ALLOW list rather than a refusal list. And Tony's
-ruling of 2026-09-18 is in it: logic that needs no browser lives in its
-own file, his reason -- the size of interactive.html -- first, and the
-testability reason second.
-
-WHAT THE BUILDER SKILL GAINS was true long before anyone wrote it down.
-A CONFIG CHANGE IS NOT DEPLOYED UNTIL THE CACHE IS REBUILT, and the two
-are committed together. On 2026-09-17 the config went out ahead of the
-cache and both rooms broke on the live site -- the Sun showing 9 drawer
-rows instead of 18 -- while eleven checks passed, because every one of
-them read the config or a fixture and none read the file the browser
-fetches. The same bump corrects this skill's own claim that the failed
-folder swap was "one data point": there have been three, and the
-exposure is established rather than unlucky.
-
-THE OBLIGATION TRAVELS, as it always does. This session loaded 1.3 and
-1.4, and a reinstall cannot be verified from inside the session that
-makes it. The next session confirms its loaded copies read 1.4 and 1.5
-before exhibit or cache work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.59 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

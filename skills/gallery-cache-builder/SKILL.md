@@ -1,12 +1,21 @@
 ---
 name: gallery-cache-builder
-description: Nightly data-serving pipeline for the Paloma's Orrery web gallery (Phase 1b, ledger L-098). Use for any task touching tools/gallery_cache_builder.py, tools/test_gallery_cache_builder_offline.py, inspect_staging.py, debug_encke_tp.py, gallery_cleanup.py, data/objects_config.json, the data/solar-system/ serving cache (coverage_index.json, feature_configs.json, positions/, raw/), atomic-swap / .prev / .staging_* / .quarantine_* semantics, Guard v2, dry-run / first-build / nightly modes, documentation/TESTING_PROTOCOL.md layers, or wiring interactive.html to the served data; and for the rule that a config change is not deployed until the cache is rebuilt. Do NOT use for the Studio/converter/viewer curation chain (that is gallery-pipeline) or for projects other than Paloma's Orrery.
-fires_when: Nightly builder, atomic swap, coverage_index, serving cache, objects_config, dry-run/first-build/nightly, builder testing layers
+description: Nightly data-serving pipeline for the Paloma's Orrery web gallery (Phase 1b, ledger L-098). Use for any task touching tools/gallery_cache_builder.py, tools/test_gallery_cache_builder_offline.py, inspect_staging.py, debug_encke_tp.py, gallery_cleanup.py, data/objects_config.json, the data/solar-system/ serving cache (coverage_index.json, feature_configs.json, positions/, raw/), atomic-swap / .prev / .staging_* / .quarantine_* semantics, Guard v2, dry-run / first-build / nightly modes, documentation/TESTING_PROTOCOL.md layers, or wiring interactive.html to the served data; for the rule that a config change is not deployed until the cache is rebuilt; and whenever a rename or a delete under data/ is refused with "Access is denied" (WinError 5), or the swap log data/cache_swap_log.jsonl is being read or written. Do NOT use for the Studio/converter/viewer curation chain (that is gallery-pipeline) or for projects other than Paloma's Orrery.
+fires_when: Nightly builder, atomic swap and its retry/roll-back/swap log, "Access is denied" under data/, coverage_index, serving cache, objects_config, dry-run/first-build/nightly, builder testing layers
 ---
 
 # Gallery Cache Builder (Phase 1b data serving)
 
-Skill version: 1.5 | Cut from tonyquintanilla.github.io @ d9d7a48f (tools/check_cache_in_step.py, gallery_maintenance_run.py, data/objects_config.json) and palomas_orrery @ e1a79f67 (LEDGER_CONSOLIDATED.md L-216, L-322, L-334, L-336) | 2026-09-19, with Anthropic's Claude Opus 5
+Skill version: 1.6 | Cut from tonyquintanilla.github.io @ a1a516cf (tools/gallery_cache_builder.py, tools/test_gallery_cache_builder_offline.py, documentation/check_cache_siblings.py, gallery_maintenance_run.py, .gitignore) and palomas_orrery @ ba94e80e (LEDGER_CONSOLIDATED.md L-216) | 2026-09-20, with Anthropic's Claude Opus 5
+v1.6 records the build that stops a failed swap depending on a person
+noticing (L-216): each rename is retried, a swap that still cannot finish
+puts the previous generation back, and every run that reaches the swap
+writes one line to `data/cache_swap_log.jsonl`, a tracked file outside the
+generation. The count goes to FIVE occurrences, and pausing OneDrive did
+not prevent the last two. It adds what Tony does before and after a hand
+build, and it writes down two things that had lived only in code or only
+in a ledger block: never `shutil.rmtree` anything in this tree, and judge
+a conflict copy by what is inside it.
 v1.5 adds the rule the project did not have written down anywhere until
 a config change reached the live site ahead of the cache and broke both
 exhibit rooms: A CONFIG CHANGE IS NOT DEPLOYED UNTIL THE CACHE IS
@@ -70,7 +79,9 @@ hard-won fetch specifics are provenance-copied from the orrery with per-function
 
 Key functions: run_build (orchestrator), derive_served (raw -> served files),
 assert_structural + shrink_gate (validation), atomic_swap_dir /
-recover_incomplete_swap / _sweep_siblings (deployment), guard_monitor /
+_rename_with_retry / restore_after_failed_swap / swap_log_write /
+print_failed_swap_advice / recover_incomplete_swap / _sweep_siblings
+(deployment), guard_monitor /
 emit_guard_warnings (Guard v2), git_commit (push with round-trip verify),
 douglas_peucker (glide thinning), load_config, main.
 
@@ -107,16 +118,72 @@ crash mid-swap left load_config unable to read the config before recovery could
 restore the directory. Moving the config out (L-114) closed that; a crash
 mid-swap now self-heals on the next run.
 
-## Recovery from a failed swap: discard and re-run [QUALITY]
+## The swap retries, rolls back, and leaves a record [QUALITY]
 
-Tony's operational rule, 2026-08-19 (L-216). When a run leaves the gallery
-repo showing deletions -- most visibly `data/solar-system/` gone, with
-GitHub Desktop reporting deletions and no additions -- DISCARD the changes
-in GitHub Desktop and RE-RUN the builder. Discard restores the live tree
-from HEAD byte for byte; the re-run builds a fresh generation.
+Built 2026-09-20 (L-216), at gallery `a1a516cf`. Before it, a refused
+`staging -> live` rename left the working copy with no served cache, a
+change list that looked like total loss, and the run's own record stranded
+inside a directory `.gitignore` hides. Whether anything bad happened next
+depended on Tony reading that change list correctly.
 
-Three conditions make that safe, and they travel WITH the rule because the
-rule is only safe while all three hold:
+THREE THINGS THE BUILDER NOW DOES, in the order L-216 asked for them.
+
+- EVERY RUN THAT REACHES THE SWAP WRITES ONE LINE to
+  `data/cache_swap_log.jsonl`, a TRACKED file that is a SIBLING of the
+  served directory rather than part of it -- same blast-radius reasoning
+  as the config (L-114). The line is appended with outcome `started`
+  before the swap and that same line is rewritten with the outcome after,
+  so a process killed outright mid-swap leaves a `started` line saying a
+  run reached the swap and never reported back. A dry run writes nothing.
+  This came FIRST because without it nothing else here is observable.
+- EACH RENAME IS RETRIED. `SWAP_RENAME_ATTEMPTS` is 6 and
+  `SWAP_RENAME_WAITS` spends about fifty seconds in total, which is longer
+  than any refusal measured. Every attempt after the first prints.
+- A SWAP THAT STILL CANNOT FINISH PUTS THE OLD CACHE BACK.
+  `restore_after_failed_swap` renames `.prev` back to live with the same
+  retries and returns one word -- `live_intact`, `rolled_back`,
+  `nothing_to_restore` or `rollback_refused` -- read off the filesystem
+  rather than off whichever rename raised. The staging directory is KEPT;
+  the sweep reaps it after keep_days.
+
+READING THE LOG IS THE ONLY EVIDENCE THERE IS, because a retry that worked
+looks exactly like a run with no problem at all. A LINE WITH MORE THAN ONE
+ATTEMPT AND OUTCOME `ok` IS A FAILURE THIS BUILD ABSORBED. A log that only
+ever shows one attempt means the lock has not recurred, and proves nothing
+either way -- say that rather than claiming success.
+`gallery_maintenance_run.py` prints the last line's verdict at the end of
+its summary, so it lands on a screen Tony already reads.
+
+WHAT TONY DOES, and it is a routine rather than a judgement call:
+
+  1. Pause OneDrive syncing, and NOTE THE TIME. A pause lasts 2 hours.
+  2. Run the builder by hand -- see Operating mode.
+  3. Watch GitHub Desktop's change list; do not commit if it looks wrong.
+  4. Afterwards, read the last line of `data/cache_swap_log.jsonl`.
+
+Step 4 is new with this version and it is the point of the whole build:
+it is the one step that does not depend on anyone noticing anything.
+
+## Recovery by hand, when the roll-back also fails [QUALITY]
+
+The builder now prints these in plain words when it needs them. They are
+here too, because a session explaining them should not have to read the
+source to do it.
+
+- DISCARD AND RE-RUN. In GitHub Desktop, discard the changes, then run the
+  builder again; discard restores the live tree from HEAD byte for byte.
+  ONE STEP IS ADDED when the change list also holds work that is NOT the
+  cache -- which it did on 2026-09-17, because the arrival work was
+  sitting beside the wreckage. COMMIT THE NON-CACHE FILES FIRST, then
+  discard the rest, then re-run. A blanket discard throws away
+  committed-worthy work.
+- RENAME THE STAGING FOLDER. In File Explorer, rename
+  `.staging_solar-system_<runid>` to `solar-system`. Tony did this on
+  2026-09-20, minutes after Python had been refused, and it worked -- so
+  the lock is brief, and Windows will rename a directory it refuses to
+  delete.
+
+Three conditions make the discard rule safe and they travel WITH it:
 
 - the live tree is committed, so HEAD has something to restore from;
 - the swap is all-or-nothing, so a failed run leaves a COMPLETE `.prev` or
@@ -126,45 +193,93 @@ rule is only safe while all three hold:
 Running with `--commit` breaks the third condition and therefore breaks
 the rule. Do not use `--commit` while L-216 is open.
 
-What causes it, as far as it is measured: a filesystem lock -- almost
-certainly OneDrive -- makes directory renames fail. WHICH of the swap's
-three renames the lock catches decides the damage. Catching the `.prev`
-cleanup is harmless and self-heals, and it has been happening every night
-since 2026-07-21; the roughly 30 `solar-system.quarantine_*` directories
-are that, one per night, printing as normal because the builder is built
-to survive it. Catching `staging -> live` has no in-run recovery and
-leaves the live directory missing. Same cause, different victim.
+## The cause, and what is still open
 
-THREE OCCURRENCES, so the exposure IS established (corrected 2026-09-19;
-this skill said "one data point" until then and that was already false).
-The `staging -> live` rename is exposed to the same lock as the cleanup.
-It is not bad luck. The third was 2026-09-17, during the rebuild L-336's
-deployment fault made necessary; Tony: "This is like the third time."
+A filesystem lock -- OneDrive -- makes directory renames fail. WHICH of
+the swap's renames it catches decides the damage. Catching the `.prev`
+cleanup is harmless and self-heals; the roughly 30
+`solar-system.quarantine_*` directories from 2026-07-21 onward are that,
+one per night, printing as normal because the builder is built to survive
+it. Catching `staging -> live` is the one that hurts.
 
-WHAT IS STILL NOT ESTABLISHED is the fix, and one thing that is NOT a fix
-is a louder failure. The run record is written INSIDE the generation, so
-a run whose swap fails strands its own record in a directory `.gitignore`
-hides -- meaning the committed history shows no sign that a run lost its
-data. Recording the swap OUTCOME outside the generation comes BEFORE
-fixing the cause; otherwise every recurrence costs another evening of
-inference.
+FIVE OCCURRENCES: 2026-07-24, 2026-08-19, 2026-09-17, and TWICE on
+2026-09-20. The exposure is established, not bad luck, and both ends of
+that list carry a fact worth keeping.
 
-TONY'S HAND ROUTINE, 2026-09-17, and it is deliberate rather than a
-workaround he would rather not need. The scheduled nightly is SUSPENDED.
-He pauses OneDrive syncing FIRST, runs the builder by hand, and watches
-GitHub Desktop's change list, stopping if the commit does not form
-correctly. Pausing sync before a re-run worked.
+THE FIRST ONE WAS NOT CAUGHT. On 2026-07-24 a SCHEDULED run's swap failed
+with nobody aware a build was in flight; the mass deletion was read as
+routine cleanup and was committed and pushed, then reverted after the
+fact. So the human check has not merely risked failing -- it failed once,
+and retiring the schedule on 2026-08-10 is what made Tony present for the
+four since. (The account is in the gallery repo, in the Origin paragraph
+of `documentation/AS_BUILT_L173_numbering_fix.md` and the
+`verify_promoted_data` docstring.)
 
-ONE STEP IS ADDED TO THE DISCARD RULE ABOVE when the change list also
-holds work that is not the cache -- which it did on 2026-09-17, because
-the arrival work was sitting beside the wreckage. COMMIT THE NON-CACHE
-FILES FIRST, then discard the rest, then re-run. A blanket discard would
-have thrown away committed-worthy work.
+THE LAST TWO HAPPENED WITH SYNCING PAUSED. Both 2026-09-20 failures came
+with OneDrive paused, so pausing is not a reliable cure. Unconfirmed and
+worth carrying: the two staging directories are 1 hour 57 minutes apart
+and a pause lasts 2 hours, so the pause may have expired about when the
+second run reached its swap. That is why step 1 of the routine above says
+to note the time.
 
-MOVING THE REPOSITORIES OFF ONEDRIVE is the lasting fix and Tony's answer
-on 2026-09-17 was "not at this time". It changes his machine outside his
-usual working set and needs its steps and risks written out before he
-decides. Do not propose it casually.
+MOVING THE REPOSITORIES OFF ONEDRIVE is the lasting fix and it is
+UNDECIDED. Tony, 2026-09-17: "not at this time"; on 2026-09-20, having
+seen occurrences four and five, he ruled "do option 1" -- harden the swap
+-- "and take it from there as needed". It changes his machine outside his
+usual working set. Do NOT propose it casually. If he raises it, what he
+wants first is the data inventory, a backup plan for the gitignored local
+data (966.8 MB, including star tables he says are difficult to rebuild),
+the steps in GitHub Desktop's own terms, and what could go wrong at each
+step. The whole analysis is written out in L-216 so it need not be argued
+from memory again.
+
+## Never shutil.rmtree anything in this tree [QUALITY]
+
+Every directory under `data/` here carries the Windows read-only attribute
+OneDrive sets. Windows permits RENAMING a read-only directory and REFUSES
+to delete one, so a plain `shutil.rmtree` dies with `[WinError 5] Access
+is denied` at the first subdirectory it reaches. The files inside are not
+read-only; only the directories are. Use the `_rmtree_force` pattern: an
+`onexc`/`onerror` callback that ADDS the write bit and retries, returning
+the count of entries that needed it so a recovery that fired is reported
+rather than silent.
+
+THIS APPLIES TO ANY CODE TOUCHING THE TREE, not only the builder. On
+2026-09-20 a patch script moving 42 run records out of a conflict copy
+called plain `shutil.rmtree` and failed exactly this way, after the
+records had been copied and verified. Nothing was lost and the commit was
+unaffected -- rmtree unlinks files before it removes directories, and it
+failed at the rmdir of a folder it had just emptied -- but a second patch
+was needed to finish. The fix already existed in `_rmtree_force` with the
+reason in its docstring, and the session that wrote the patch had read
+that function an hour earlier. Knowledge that lives only inside a function
+does not fire; that is why it is in the skill now.
+
+[QUALITY] rather than [CRITICAL] on this document's own promotion test:
+the failure is LOUD and recoverable, and the critical tier only works
+while it stays short.
+
+## The sibling report names what the builder did not make [QUALITY]
+
+`documentation/check_cache_siblings.py` globbed only the two name shapes
+the BUILDER makes, so four OneDrive conflict copies sitting beside the
+cache -- `solar-system (1)`, `(2)`, `(3)` and `1260806133443-solar-system`
+-- printed as "no sibling directories". It was a report that could not see
+the thing it exists to report. Since 2026-09-20 it classifies EVERY
+directory in `data/` and names anything that is neither the live cache,
+nor `.prev`, nor a builder-made sibling, under its own heading. `.gitignore`
+carries the two known conflict-copy shapes, `data/solar-system (*)/` and
+`data/[0-9]*-solar-system/`. Neither the rules nor the report removes
+anything; they make it visible.
+
+JUDGE A CONFLICT COPY BY WHAT IS INSIDE IT, not by its name. One of those
+four had been committed and published by accident and was described as 42
+published files that serve nothing -- a count, from someone who had not
+opened them. They turned out to be the ONLY copy of the run history for
+2026-07-29 to 2026-09-04, 38 days the live cache's own records skip,
+including the 2026-08-19 failure. Those 42 records now live at
+`documentation/cache_run_history/` in the gallery repo, with a README
+saying where they came from.
 
 ## A config change is not deployed until the cache is rebuilt [CRITICAL]
 

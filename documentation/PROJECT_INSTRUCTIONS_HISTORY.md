@@ -1281,6 +1281,52 @@ resident.
 (Moved down from the resident protocol on 2026-09-19 when v3.64
 made a fourth entry.)
 
+v3.62 (September 19, 2026): No rule changed in this document. TWO skill
+bumps, taken after the build they record rather than before it, which is
+the exception to v3.55's ordering and is stated here so it is not read as
+a precedent: these rules were LEARNED in the build, and there was nothing
+to write before it ran.
+
+interactive-exhibit 1.3 -> 1.4 (L-334) and gallery-cache-builder
+1.4 -> 1.5 (L-336, L-216).
+
+WHAT THE EXHIBIT SKILL GAINS is what a room opens on and who may write
+the file it is read from. The arrival block is served rather than coded,
+and it is the one part of a room's data the page reads directly, so a
+change to it reaches a visitor on the push while a change to a shell's
+words waits for the cache builder. Every trace belonging to a served
+shell now carries that shell's key, and a trace that loses its stamp is
+DRAWN rather than hidden, which is why that rule is CRITICAL and why a
+check reads every trace the renderers build. Two tools write the served
+config and each has an ALLOW list rather than a refusal list. And Tony's
+ruling of 2026-09-18 is in it: logic that needs no browser lives in its
+own file, his reason -- the size of interactive.html -- first, and the
+testability reason second.
+
+WHAT THE BUILDER SKILL GAINS was true long before anyone wrote it down.
+A CONFIG CHANGE IS NOT DEPLOYED UNTIL THE CACHE IS REBUILT, and the two
+are committed together. On 2026-09-17 the config went out ahead of the
+cache and both rooms broke on the live site -- the Sun showing 9 drawer
+rows instead of 18 -- while eleven checks passed, because every one of
+them read the config or a fixture and none read the file the browser
+fetches. The same bump corrects this skill's own claim that the failed
+folder swap was "one data point": there have been three, and the
+exposure is established rather than unlucky.
+
+THE OBLIGATION TRAVELS, as it always does. This session loaded 1.3 and
+1.4, and a reinstall cannot be verified from inside the session that
+makes it. The next session confirms its loaded copies read 1.4 and 1.5
+before exhibit or cache work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.59 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-09-20 when
+v3.65 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================
