@@ -381,37 +381,117 @@ LIVE -- what the deployed site actually serves
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
-**5. Resume OneDrive** once the push is done.
+**5. Resume OneDrive** once the push is done. -- done
 
-**6. Look at Earth's room on your phone.** The two quickest tells are the upper atmosphere, which should read 600 km where it said 574, and the outer core at 3,480.0 km.
-
-**5.** Keep the sync paused through the maintenance run, the commit and the push. Resume it only once both commits are on the remote.
-
-The difference from the failed attempt is the settling time, and you already have it.
-
-**5. Resume OneDrive** once the swap has finished.
-
-**6. Run the maintenance run.** Open `gallery_maintenance_run.py` and Run.
-
-Expect: `15 of 15 gating checkers passed`, which is one more row than before. The two to look at by name are **Cache in step** and **Display figures**. If Display figures is red and says the cache and the config build different hovers, step 4 did not complete — run it again rather than pushing.
-
-Expect one file to change that you did not edit: `data/constants_export.sha`. The run pulls the export at orrery HEAD, and that moved when you filed the manifest. The export's contents are identical; only the recorded SHA advances.
-
-**7. File the patch.** Move `patch_L342_2_display_figures_20260920.py` into `documentation/`.
-
-**8. Commit and push** in GitHub Desktop. Commit the config and the cache **together** in one commit. That is the 2026-09-17 lesson: a config that goes out ahead of its cache breaks both rooms while every check passes.
-
-**9. Run the live pass.** `gallery_maintenance_run.py --live`.
-
-**10. Look at Earth's room on your phone**, with the table in section 2 of the handoff beside you. The two quickest tells are the upper atmosphere, which should read 600 km where it said 574, and the outer core, which should read 3,480.0 km.
+**6. Look at Earth's room on your phone.** The two quickest tells are the upper atmosphere, which should read 600 km where it said 574, and the outer core at 3,480.0 km. -- correct
 
 ## Orrery repo
 
 **11. Install the ledger patch.** Save `patch_L342_3_ledger_display_figures_20260920.py` into the orrery repo root, next to `palomas_orrery.py`. Open it in VS Code and click Run.
 
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L342_3_ledger_display_figures_20260920.py
+ok  LEDGER_CONSOLIDATED.md   - **STILL OPEN.** The read check: the skill says a missi
+ok  LEDGER_CONSOLIDATED.md   **Tony-action (decide):** whether that exception stays n
+
+patch applied (2 edits)
+
+NEXT:
+  1. python ledger_index.py
+  2. python orrery_maintenance_run.py
+  3. Move this script into documentation/, commit, push.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
 **12. Rebuild the ledger index.** Open `ledger_index.py` and Run. Expect it to parse cleanly and regenerate the index.
 
+OK: 337 L-blocks parsed, no consistency problems.
+Index regenerated (193 live items) in C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\LEDGER_CONSOLIDATED.md.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
 **13. Run the orrery maintenance run.**
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20260920T014823Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 0.9s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Skill manifest               0.1s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             0.4s  unchanged (1 checked, not written)
+  Module atlas                 6.4s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               4.7s  rewrote DATA_INVENTORY.md
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.2s  21 of 21 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.5s  No figure count exceeds its inputs: 31
+                                     derived row(s) read, 15 judged OK -- 15 OK,
+                                     16 NOT YET MIGRATED, 1 NO DERIVED LINE.
+  Constants export check       0.8s  Export matches the store: sha256
+                                     248541a9ba5d on both sides; 55 rows re-read,
+                                     58 not exported, 16 tokens.
+  Dimensions                   1.1s  No unit contradicts its arithmetic: 31
+                                     derived row(s) read -- 15 OK, 10 NO UNIT, 6
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.2s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.2s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 62 status lines in constants_new.py are
+                                     well formed; 49 rows carry none.
+  Row shape                    0.1s  All 113 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Reset completeness          17.7s  PASS -- all 309 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.0s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Worksheet checker            9.1s  76 of 114 routed, 8 clean
+  Worksheet checker tests     15.8s  All 136 checks passed
+  Worksheet key round trip     0.8s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         19.6s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner           9.5s  293 TIER-1 FINDINGS IN THE SCANNED TREE
+
+======================================================================
+  16 of 16 gating checkers passed -- 91.2s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           76 of 114 routed, 8 clean
+    Provenance scanner          293 TIER-1 FINDINGS IN THE SCANNED TREE
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  1902 file(s) examined, 7 written, 0 created, 0 removed, 5 rewritten identically
+    written   DATA_INVENTORY.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      LEDGER_CONSOLIDATED.md
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
 **14. File and push.** Move the script into `documentation/`, then commit and push.
 

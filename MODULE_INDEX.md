@@ -1,7 +1,7 @@
 <!-- Doc-Kind: generated | The human-browsable module index, rebuilt by module_atlas.py alongside the atlas. Do not hand-edit. -->
 # Paloma's Orrery - Module Index
 
-**Generated:** September 19, 2026 by `module_atlas.py`  
+**Generated:** September 20, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -11,26 +11,22 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 139  
-**Total Lines of Code (non-blank):** 109,124  
-**Total Public Functions/Classes:** 1,228
+**Total Python Files:** 137  
+**Total Lines of Code (non-blank):** 108,765  
+**Total Public Functions/Classes:** 1,223
 
 ## Classification Coverage
 
-**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L341_3b_ledger_20260919.py`
-- `patch_L342_2_figure_counts_20260919.py`
-- `patch_L342_3_skill_215_20260919.py`
+- `patch_L342_3_ledger_display_figures_20260920.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (3).** No valid `Domain:` tag.
+**Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L341_3b_ledger_20260919.py`
-- `patch_L342_2_figure_counts_20260919.py`
-- `patch_L342_3_skill_215_20260919.py`
+- `patch_L342_3_ledger_display_figures_20260920.py`
 
 
 ---
@@ -242,9 +238,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L341_3b_ledger_20260919.py` | - ORRERY repo. (183 lines) |
-| `patch_L342_2_figure_counts_20260919.py` | - ORRERY repo. (157 lines) |
-| `patch_L342_3_skill_215_20260919.py` | - ORRERY repo. (206 lines) |
+| `patch_L342_3_ledger_display_figures_20260920.py` | - ORRERY repo. (187 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |
