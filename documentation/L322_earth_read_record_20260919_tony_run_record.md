@@ -1364,8 +1364,178 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 gallery moved to ea125402cacea78e66b74f6d208379b80d220331
 
+orrery moved to 439f33f0fa5095412742786519ff07d537e3ed01
+
 14. The live run.
 
-**What to look at with your own eyes, and it is the point of the whole exercise.** Open Earth's room. The geocorona should read **100 Earth radii**, not `1e+2`. The Hill sphere should read **235**, not 234.6388. The outer core gains a digit, **3480.0**. Then read the panel note at the bottom of both rooms and decide whether that prose stays.
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 11 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+
+  PASS Served reachability       1.6s  all 11 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at a9d02017
+
+  PASS Export freshness          0.1s  the served export is the orrery's
+                                    at a9d02017, byte for byte
+
+  orrery HEAD 439f33f0
+  examining 33 of 70 links; the other 37 are served from the export
+    NOT IN STORE  create_sun_galactic_tide default not a top-level constant in the store
+                  /objects/0/features/oort_cloud/galactic_tide/typical_radius
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NO UNIT       EARTH_MAGNETOPAUSE_SHUE_A6       the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/magnetopause/surface/a6
+    NO UNIT       EARTH_MAGNETOPAUSE_SHUE_A8       the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/magnetopause/surface/a8
+    NO UNIT       EARTH_BOW_SHOCK_JELINEK_EPS      the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/bow_shock/surface/epsilon
+    NO UNIT       EARTH_BOW_SHOCK_JELINEK_LAMBDA   the constant's name declares no unit
+                  /objects/1/features/earth_magnetosphere/bow_shock/surface/lambda
+    NOT IN STORE  planet_poles['Earth']            not a top-level constant in the store
+                  /objects/1/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  33 pointers: 24 match, 0 DRIFT, 0 UNIT MISMATCH, 9 could not be examined.
+
+  PASS Store drift               1.0s  33 pointers against orrery
+                                    439f33f0 -- 24 match, 0 DRIFT, 0
+                                    UNIT MISMATCH, 9 could not be
+                                    examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            33 pointers against orrery 439f33f0 --
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+**What to look at with your own eyes, and it is the point of the whole exercise.** Open Earth's room. The geocorona should read **100 Earth radii**, not `1e+2`. The Hill sphere should read **235**, not 234.6388. -- correct
+
+The outer core gains a digit, **3480.0**. -- still reads "3,480 km (0.0000233 AU)"
+
+Then read the panel note at the bottom of both rooms and decide whether that prose stays. -- yes, but the sentence about osculating orbits elements should be put in plain language; the visitor has no knowledge about the served cache or propagation. let's rewrite the paragraph in plain language and more concise.  
 
 **Two things I expect and you should not be alarmed by.** The maintenance run here failed two checkers, Reset completeness and Orbit cache, and both fail identically on an unpatched clone because this sandbox has no `astroquery`. On your machine they passed last time and should again. And the ledger count depends on order: 337 only if you run the two record patches in the sequence above.
+
+=========================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L342_5_panel_notes_repair_20260919.py
+  ok  SUN ROOM    the note made whole, in plain language
+  ok  EARTH ROOM  the note made whole, in plain language
+
+      interactive.html          146384 ->  146471 bytes
+
+patch applied (1 file, 2 edits)
+
+NOW, in order:
+  1. Run the gallery maintenance run -- offline.
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              0.8s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     0.6s  rewrote data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite       7.3s  PASS (167 checks, 0 failures)
+  PASS Mirror suite              0.1s  All 42 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing.
+  PASS Store writer suite        3.0s  All 245 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 246 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 37 link(s) compared, store
+                                    248541a9ba5d.
+  PASS Pointer join              0.1s  Every link is accounted for: 70
+                                    link(s) against orrery 439f33f0,
+                                    28 fallback named.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's features exactly: 4
+                                    object(s), 34 named shell(s), in
+                                    both cache files.
+  PASS Feature renderers         0.1s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.1s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.1s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.1s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: 1 sibling(s), none stale.
+                                    The sweep is keeping up.
+
+======================================================================
+  14 of 14 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: 1 sibling(s), none stale. The
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  2. Move this script into documentation/.
+  3. Commit and push. -- 7ee912e592450b7fee6cde9befd115f599fed247
+  4. READ BOTH PANELS END TO END. This is the second time
+     this prose has been edited without being read whole,
+     and reading it whole is the only check there is. -- good. thanks. 
+
+Undo at any point is Discard Changes in GitHub Desktop.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
