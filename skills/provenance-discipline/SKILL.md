@@ -6,12 +6,29 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 2.14 | Cut from palomas_orrery @ dfa779bd (v2.14),
-earlier @ ebdc55cc (v2.13), @ bfc0505e (v2.12), @ 159c5a2c (v2.11),
-earlier @ 071a0a65 (v2.10), @ a263f73d (v2.9), @ 7f4a2f9f (v2.8),
-@ 3faa72a0 (v2.7), @ f603be3 (v2.6), @ 731066f (v2.5),
-@ 6b99ace (v2.2), @ 00219d9 (v2.1), @ eb77c83 (v2.0), @ cdcdb4b (v1.9)
+Skill version: 2.15 | Cut from palomas_orrery @ 21065c5d (v2.15),
+earlier @ dfa779bd (v2.14), @ ebdc55cc (v2.13), @ bfc0505e (v2.12),
+earlier @ 159c5a2c (v2.11), @ 071a0a65 (v2.10), @ a263f73d (v2.9),
+@ 7f4a2f9f (v2.8), @ 3faa72a0 (v2.7), @ f603be3 (v2.6),
+@ 731066f (v2.5), @ 6b99ace (v2.2), @ 00219d9 (v2.1), @ eb77c83 (v2.0)
 | September 19, 2026
+v2.15 repairs the figure rules against the source they cite, after
+Claude Fable 5.1's review of L-322 Stage C1 found the walk deciding a
+rule inside one constant's comment. RULE 2 GAINS THE CONDITION IT HAD
+DROPPED: a trailing zero after a decimal point is significant when it
+falls within the source's reporting resolution, which is what the cited
+page says and what makes 1500 m two figures rather than four. Without
+it the rule was simply wrong, and the walk's invented alternative --
+that a padded zero never counts -- was wrong the other way. RULE 3
+GAINS a sentence it never had: a row may declare FEWER figures than its
+inputs support when the relation is itself approximate, with the reason
+in words on the row. Earth's Hill sphere is the case; it declared seven
+and told the reader to report three. THE ASTM REFERENCE IS DEMOTED TO
+AN ASIDE on Tony's ruling of 2026-09-19: E29 costs $86, so a rule this
+project works from could not be opened by anybody in the loop, which
+fails our own Access Standard; and its scope is conformance with
+specification limits, which the orrery does not have. Two stale
+examples are corrected. Handle L-342.
 v2.14 writes down L-322 ruling (b), the read. It has been a ruling
 since 2026-09-11 and lived only in the ledger, and a convention that is
 not in the skill does not travel -- the protocol has recorded that
@@ -1710,7 +1727,8 @@ the next reader does not re-derive it and a checker can read it; the
 section below says how the field is written and counted.
 
 **A subtraction is governed by decimal PLACES, not significant figures.**
-`6371.0 - 660` is good to units, so 5711 and not 5711.0.
+`6371.0 - 660` is good to TENS, because its 660 km input is good to
+tens, so 5710 and not 5711.
 
 The failure this catches is quiet. Stating `0.8953994` when the inputs
 support `0.8954` is not a small error in the last digits -- it is six
@@ -1721,14 +1739,29 @@ digits the value was never entitled to, and it reads as a measurement.
 
 Python can round a number to N figures but cannot count them through
 arithmetic, so the count is declared per row, the way the unit is.
-These are the textbook rules (Wikipedia, Significant figures; ASTM
-E29), written down once so they resolve the same way for every row.
+These are the textbook rules, written down once so they resolve the
+same way for every row. The reference is **Wikipedia, Significant
+figures**, which Tony named and which is open: every rule below can be
+checked against it by anybody, which is the point. The same rules
+appear in ASTM E29, but that is an aside and NOT the reference we work
+from -- it costs $86, so a rule the project depends on could not be
+opened by any of us, which fails our own Access Standard; and its scope
+is conformance with specification limits, which this store has none of.
+(Tony's ruling, 2026-09-19, L-342.)
+
+**Where a rule below states a condition, the condition is load-bearing
+and is not to be trimmed.** v2.14's Rule 2 said trailing zeros after a
+decimal point count, full stop. The page says they count WHEN THEY ARE
+WITHIN THE REPORTING RESOLUTION. Dropping four words made the rule
+wrong, and nobody could see it without opening the source -- which is
+the argument for citing something openable rather than for copying a
+standard verbatim.
 
 **Rule 1. `# Figures:` is a comment key beside the value.** Three forms:
 
 ```
 # Figures: 5 -- set by EARTH_INNER_CORE_KM (1221.5, 5)
-# Figures: 4 -- source states 4; the trailing zero in 3480 is significant
+# Figures: 5 -- PREM reports to 0.1 km, so 3480.0's trailing zero counts
 # Figures: exact -- IAU 2012 definition
 ```
 
@@ -1741,22 +1774,46 @@ lose the count.
 
 **Rule 2. Counting a literal follows the standard rules.** Non-zero
 digits count; zeros between them count; leading zeros never count;
-zeros after the decimal point at the end count; trailing zeros in an
-integer count only if the source says so. An exact number has unlimited
-figures. A DECLARED drawing condition (a chosen solar wind pressure, a
+trailing zeros in an integer count only if the source says so. An exact
+number has unlimited figures.
+
+**Trailing zeros after a decimal point count WHEN THEY FALL WITHIN THE
+SOURCE'S MEASUREMENT OR REPORTING RESOLUTION**, and that condition is
+the rule, not a refinement of it. 1500 m measured to a resolution of
+100 m has TWO figures, not four, and the page lists exactly that case
+among the digits which are not significant: trailing zeros serving as
+placeholders. So the question to ask of a row is never "where does the
+last digit fall" but "to what resolution does this source report". PREM
+Table I reports every boundary radius to 0.1 km, so `3480.0` carries
+five. The NASA fact sheet prints `6371.000` in a block that also prints
+3485, 5513, 20.4 and 11.186, so it is not padding and the value carries
+seven. A DECLARED drawing condition (a chosen solar wind pressure, a
 chosen cut angle) is exact for counting: it is a choice, not a
 measurement, so all of its digits are known.
 
 **Rule 3. A derived row's count is set by its least precise MEASURED
 input.** Products and quotients keep the fewest figures among the
 inputs. Sums and differences are good to the coarsest decimal place
-among the inputs (`6371.0 - 660` is good to units: 5711). Exact inputs
+among the inputs (`6371.0 - 660` is good to tens: 5710, because its
+660 km input carries two figures). Exact inputs
 and declared conditions are skipped when finding the minimum. For a
 power, an exponential or another function, the fewest-figures rule is
 the default; where the function magnifies the input's uncertainty (an
 exponent above one in magnitude), drop a figure and say why on the
 row. Where an input carries a stated uncertainty, the uncertainty
 decides instead and counting is the fallback.
+
+**A row may declare FEWER figures than its inputs support when the
+RELATION ITSELF is approximate, with the reason in words on the row.**
+Counting governs how precision flows through arithmetic; it says
+nothing about a formula that is an idealisation to begin with. Earth's
+Hill sphere is the case: every input is exact or carries nine figures,
+so counting gives seven, but substituting Earth's perihelion distance
+for its mean distance moves the answer by more than one percent. Seven
+figures would claim a precision the relation cannot deliver whatever
+its inputs carry. This is a floor on honesty, not a licence to round to
+taste: the row must say WHICH approximation caps it and by roughly how
+much. (L-342, Fable's review of C1, Finding 3.)
 
 **Rule 4. Compute from the PRIMARY inputs at full precision; round
 once.** A derived row that feeds a second derived row does not chain

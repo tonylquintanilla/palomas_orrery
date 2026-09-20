@@ -1225,6 +1225,62 @@ resident.
 (Moved down from the resident protocol on 2026-09-19 when v3.63
 made a fourth entry.)
 
+v3.61 (September 16, 2026): No rule changed in this document. ONE
+skill bump, taken ahead of the store work it serves.
+
+provenance-discipline 2.12 -> 2.13 (L-335). L-322 (d), significant
+figures, is ruled, and one ruling of four days earlier is withdrawn.
+
+THE PROCEDURE IS THE TEXTBOOK ONE, written down once. Tony asked for
+standard methods and named the reference. The skill now says: the
+figure count is a declared field, "# Figures:", beside every value, the
+way the unit is; a literal is counted by the standard rules; a derived
+row keeps the fewest figures of its measured inputs for a product or
+quotient and the coarsest decimal place for a sum or difference, with
+exact and declared numbers never limiting the result; the arithmetic
+runs from the primary inputs at full precision and rounds ONCE, half to
+even; and the export is where that rounding happens, carrying the count
+beside the value so the gallery formats without guessing.
+
+THE RULING WITHDRAWN IS L-325's, that a derived row stores a rounded
+literal so a test can announce when an input moves. Tony withdrew it in
+the same message that adopted the procedure, because a rounded literal
+at rest is a rounded intermediate for every row that chains from it.
+The objection that earned the ruling, sixteen digits copied into a
+gallery config, is now answered at the export rather than at rest. The
+skill keeps a stub where the rule stood, so a reader who meets the two
+literal rows knows why they look the way they do.
+
+WHAT MADE IT URGENT was measured, not recalled. The store holds 27
+derived rows and the checker could see 2 of them, because it found
+derived rows by a word on a Status line that 25 rows do not carry. It
+ran green this session on the 2. The skill also disagreed with itself:
+one section said a derived row stays an expression and the withdrawn
+one said it stores a literal, and 21 rows followed the first while 2
+followed the second. Rule 8 has the checker enumerate by the
+"# Derived:" line and name every row it cannot judge.
+
+ONE ADDITION BEYOND THE EIGHT RULES. The new section says the figure
+field works "like # Unit:", and the skill had never defined "# Unit:";
+L-322 ruling 1 lived only in the ledger. The Status Line gains The Unit
+Field. A convention that is not in the skill does not travel -- v3.57's
+lesson, a third time.
+
+THE ORDERING IS v3.55's: the bump precedes the Earth-slice walk that
+writes the field. The obligation travels: this session loaded 2.12, and
+a reinstall cannot be verified from inside the session that makes it.
+The next session confirms its loaded copy reads 2.13 before provenance
+or store work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.58 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-09-19 when v3.64
+made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

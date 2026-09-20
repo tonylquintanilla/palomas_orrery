@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.63 | September 19, 2026
+Tony Quintanilla, PE | Claude | v3.64 | September 19, 2026
 
-Cut from dfa779bd at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 21065c5d at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -488,7 +488,7 @@ agentic-pre-test             1.2  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
 horizons-orbital-mechanics   1.1  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning
-provenance-discipline        2.14 Scanner runs, audits, citations, constants,
+provenance-discipline        2.15 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
 earth-system-pipeline        1.1  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY
@@ -1157,6 +1157,58 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.64 (September 19, 2026): No rule changed in this document. ONE
+skill bump, taken after a review found a rule being decided in the
+wrong place.
+
+provenance-discipline 2.14 -> 2.15 (L-342). THE FIGURE RULES ARE
+REPAIRED AGAINST THE SOURCE THEY CITE.
+
+WHAT WENT WRONG IS INSTRUCTIVE AND IS NOT A COUNTING ERROR. L-322's
+Earth walk met PREM's `3480.0` and had to decide whether that trailing
+zero counted. The skill's Rule 2 said it did, full stop. The walk
+decided it did not, wrote a reason into that one constant's comment
+line -- that a zero in a padded decimal place is the table's formatting
+-- and moved on. Both were wrong, and the page the skill cites settles
+it: a trailing zero after a decimal point counts WHEN IT FALLS WITHIN
+THE SOURCE'S REPORTING RESOLUTION. Rule 2 had dropped four words, which
+made it wrong for the page's own example of 1500 m; the walk's
+replacement was wrong the other way and, worse, was settled inside a
+comment where it read as fact and would have been followed without
+being noticed. That is the second failure direction Method Belongs to
+the Skill names, and this is what it looks like in practice.
+
+RULE 3 GAINS A SENTENCE IT NEVER HAD: a row may declare fewer figures
+than its inputs support when the relation ITSELF is approximate, with
+the reason in words on the row. Counting governs how precision flows
+through arithmetic and says nothing about a formula that is an
+idealisation to begin with. Earth's Hill sphere declared seven figures
+by counting and told the reader in its own next sentence to report
+three, and the gallery, which formats from the declared count, showed a
+visitor 234.6388 Earth radii.
+
+THE ASTM REFERENCE IS DEMOTED TO AN ASIDE, on Tony's ruling. E29 costs
+$86, so a rule this project works from could not be opened by anybody
+in the loop -- the skill-layer form of a citation nobody read, and a
+failure of our own Access Standard. Its scope is conformance with
+specification limits, which this store does not have. The reference is
+now the open page alone, so every rule can be checked against it by
+anybody. Asked whether to adopt the standard verbatim instead of
+restating it, the answer is that verbatim would not have helped: what
+failed was that nobody could check the restatement against its source
+without opening the source.
+
+THE OBLIGATION TRAVELS, as it always does. This session loaded 2.14,
+and a reinstall cannot be verified from inside the session that makes
+it. The next session confirms its loaded copy reads 2.15 before any
+provenance or store work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.61 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.63 (September 19, 2026): No rule changed in this document. ONE
 skill bump, taken ahead of the walk it serves, which is v3.55's
 ordering.
@@ -1252,59 +1304,6 @@ before exhibit or cache work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.59 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.61 (September 16, 2026): No rule changed in this document. ONE
-skill bump, taken ahead of the store work it serves.
-
-provenance-discipline 2.12 -> 2.13 (L-335). L-322 (d), significant
-figures, is ruled, and one ruling of four days earlier is withdrawn.
-
-THE PROCEDURE IS THE TEXTBOOK ONE, written down once. Tony asked for
-standard methods and named the reference. The skill now says: the
-figure count is a declared field, "# Figures:", beside every value, the
-way the unit is; a literal is counted by the standard rules; a derived
-row keeps the fewest figures of its measured inputs for a product or
-quotient and the coarsest decimal place for a sum or difference, with
-exact and declared numbers never limiting the result; the arithmetic
-runs from the primary inputs at full precision and rounds ONCE, half to
-even; and the export is where that rounding happens, carrying the count
-beside the value so the gallery formats without guessing.
-
-THE RULING WITHDRAWN IS L-325's, that a derived row stores a rounded
-literal so a test can announce when an input moves. Tony withdrew it in
-the same message that adopted the procedure, because a rounded literal
-at rest is a rounded intermediate for every row that chains from it.
-The objection that earned the ruling, sixteen digits copied into a
-gallery config, is now answered at the export rather than at rest. The
-skill keeps a stub where the rule stood, so a reader who meets the two
-literal rows knows why they look the way they do.
-
-WHAT MADE IT URGENT was measured, not recalled. The store holds 27
-derived rows and the checker could see 2 of them, because it found
-derived rows by a word on a Status line that 25 rows do not carry. It
-ran green this session on the 2. The skill also disagreed with itself:
-one section said a derived row stays an expression and the withdrawn
-one said it stores a literal, and 21 rows followed the first while 2
-followed the second. Rule 8 has the checker enumerate by the
-"# Derived:" line and name every row it cannot judge.
-
-ONE ADDITION BEYOND THE EIGHT RULES. The new section says the figure
-field works "like # Unit:", and the skill had never defined "# Unit:";
-L-322 ruling 1 lived only in the ledger. The Status Line gains The Unit
-Field. A convention that is not in the skill does not travel -- v3.57's
-lesson, a third time.
-
-THE ORDERING IS v3.55's: the bump precedes the Earth-slice walk that
-writes the field. The obligation travels: this session loaded 2.12, and
-a reinstall cannot be verified from inside the session that makes it.
-The next session confirms its loaded copy reads 2.13 before provenance
-or store work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.58 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

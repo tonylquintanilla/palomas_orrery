@@ -11,24 +11,26 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 138  
-**Total Lines of Code (non-blank):** 108,822  
-**Total Public Functions/Classes:** 1,224
+**Total Python Files:** 139  
+**Total Lines of Code (non-blank):** 109,124  
+**Total Public Functions/Classes:** 1,228
 
 ## Classification Coverage
 
-**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L341_1_dashboard_search_and_groups_20260919.py`
-- `patch_L341_2_dashboard_find_button_20260919.py`
+- `patch_L341_3b_ledger_20260919.py`
+- `patch_L342_2_figure_counts_20260919.py`
+- `patch_L342_3_skill_215_20260919.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (2).** No valid `Domain:` tag.
+**Undetermined domain (3).** No valid `Domain:` tag.
 
-- `patch_L341_1_dashboard_search_and_groups_20260919.py`
-- `patch_L341_2_dashboard_find_button_20260919.py`
+- `patch_L341_3b_ledger_20260919.py`
+- `patch_L342_2_figure_counts_20260919.py`
+- `patch_L342_3_skill_215_20260919.py`
 
 
 ---
@@ -125,7 +127,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,250 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (512 lines) |
-| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (1,998 lines) |
+| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (2,020 lines) |
 | `constants_tokens.py` | - what each "# Unit:" token in constants_new.py means. (162 lines) |
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (412 lines) |
 | `exoplanet_stellar_properties.py` | Stellar Properties for Exoplanet Host Stars (484 lines) |
@@ -240,8 +242,9 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L341_1_dashboard_search_and_groups_20260919.py` | - ORRERY repo. (141 lines) |
-| `patch_L341_2_dashboard_find_button_20260919.py` | - ORRERY repo. (125 lines) |
+| `patch_L341_3b_ledger_20260919.py` | - ORRERY repo. (183 lines) |
+| `patch_L342_2_figure_counts_20260919.py` | - ORRERY repo. (157 lines) |
+| `patch_L342_3_skill_215_20260919.py` | - ORRERY repo. (206 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

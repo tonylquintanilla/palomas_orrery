@@ -940,3 +940,228 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools>
 -- gallery moved to 2ead992b055054956816ddda3544e849e9789d9a
 
 Nothing else changes. No cache rebuild, and no need to pause OneDrive — I tested that on clones before saying it: with the new export in place the gallery still passes all 14 of its offline checkers, Cache in step included, because no exported row value moves. -- sync reinitiated
+
+==================================
+
+Opus:
+
+Both unchanged, so all five patches still apply. Re-cutting the L-341 ledger patch so the two can run in sequence.That file doesn't exist — my typo, not a failure. Running the real maintenance run, which is what you'll run.Two failures. Checking whether they're mine or the sandbox's.Both fail identically on an unpatched clone — `astroquery` is missing here, not a fault in the patches. Everything that can run in this sandbox passes.Five patches, in this order. The files are above in the order you run them. Neither repo has moved, so all five still apply.
+
+**Discard the old `patch_L341_3_ledger_20260919.py`.** It is replaced by `patch_L341_3b`, re-cut to run after the skill patch. Running the old one now would refuse on its fingerprint.
+
+I rehearsed the whole orrery half on a clone, in this exact order, and everything that can run in this sandbox passes.
+
+**Orrery, one push.**
+
+1. `patch_L342_3` — skill 2.15, protocol v3.64, history, and the L-342 block.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L342_3_skill_215_20260919.py
+  ok  SKILL  version line 2.14 -> 2.15 with the v2.15 paragraph
+  ok  SKILL  citation line: Wikipedia is the reference, ASTM an aside
+  ok  SKILL  Rule 1 example corrected to the real row
+  ok  SKILL  Rule 2 gains the reporting-resolution condition
+  ok  SKILL  the 5711 example corrected, first place
+  ok  SKILL  the 5711 example corrected, second place
+  ok  SKILL  Rule 3 gains the approximate-relation sentence
+  ok  PROTOCOL  header stamp and SHA anchor move to v3.64 / 21065c5d
+  ok  PROTOCOL  the v3.64 entry
+  ok  PROTOCOL  v3.61 removed, a fourth entry pushes the oldest down
+  ok  HISTORY  v3.61 lands at the end of PART 1
+  ok  LEDGER  [L-342] opened in section A
+
+      LEDGER_CONSOLIDATED.md                         1226444 -> 1231254 bytes
+      PROJECT_INSTRUCTIONS.md                          72332 ->   72248 bytes
+      documentation/PROJECT_INSTRUCTIONS_HISTORY.md    80166 ->   83048 bytes
+      skills/provenance-discipline/SKILL.md           110491 ->  114031 bytes
+
+patch applied (4 files, 12 edits)
+
+NOW, in order:
+  1. Run skills_index.py. Expect it to report the manifest
+     was advertising provenance-discipline 2.14 before it
+     overwrites it with 2.15. That report is the tool working.
+  2. Run ledger_index.py. Expect L-342 OPEN in section A.
+     The block count is 336 if this patch ran before
+     patch_L341_3, and 337 if that one ran first.
+  3. Run the orrery maintenance run.
+  4. Move this script into documentation/.
+  5. Commit ALL of it together -- skill, protocol, history,
+     ledger -- and push. The four travel in ONE commit.
+  6. REINSTALL provenance-discipline 2.15 from Settings >
+     Skills, and update the Project instructions to v3.64.
+     This session cannot verify either.
+
+Undo at any point is Discard Changes in GitHub Desktop.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. `patch_L341_3b` — the L-341 block.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L341_3b_ledger_20260919.py
+  ok  LEDGER  [L-341] written into section C, before [L-249]
+
+      LEDGER_CONSOLIDATED.md       1231254 -> 1236128 bytes
+
+patch applied (1 file, 1 edit)
+
+NOW, in order:
+  1. Run ledger_index.py from this folder. It rebuilds the
+     INDEX table. Expect the L-block count to go from 336 to
+     337, and L-341 to appear as DONE in section C.
+  2. Run the orrery maintenance run.
+  3. Move this script into documentation/.
+  4. Commit everything the run touched and push. Report the
+     new SHA.
+
+Undo at any point is Discard Changes in GitHub Desktop.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+3. `patch_L342_2` — the figure counts.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L342_2_figure_counts_20260919.py
+  ok  OUTER_CORE_KM  4 -> 5, on the reporting-resolution clause
+  ok  OUTER_CORE_RADII  4 -> 5, inherited
+  ok  MEAN_RADIUS_KM  4 -> 7, and a false premise removed
+  ok  HILL_SPHERE_KM  7 -> 3, the relation is the limit
+  ok  HILL_SPHERE_RADII  7 -> 3, inherited
+  ok  HILL_SPHERE_KM  the derived line rounds to the declared three
+
+      constants_new.py          117113 ->  118692 bytes
+
+patch applied (1 file, 6 edits)
+
+NOW, in order:
+  1. Run the orrery maintenance run. It REGENERATES THE
+     EXPORT -- commit that file this time; the figure counts
+     are what changed.
+  2. Move this script into documentation/.
+  3. Commit everything the run touched and push.
+  4. Gallery: run patch_L342_1 first if it has not run, then
+     pull the export, mirror, rebuild the cache with OneDrive
+     PAUSED, and commit config and cache together.
+
+Undo at any point is Discard Changes in GitHub Desktop.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+4. `skills_index.py`. It will report that the manifest was advertising 2.14 before it overwrites with 2.15. That report is the tool working. -- by the way, the search tool in the dashboard works great!
+
+OK: 11 skills parsed, no consistency problems.
+MANIFEST WAS STALE -- corrected below:
+  - provenance-discipline: manifest said 2.14, SKILL.md says 2.15
+  Commit the protocol copies together with the SKILL.md
+  change -- see the binding rule in ledger-and-session-records.
+Skill Manifest regenerated (11 skills) in PROJECT_INSTRUCTIONS.md.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+5. `ledger_index.py`. Expect **337 blocks**, up from 335.
+
+OK: 337 L-blocks parsed, no consistency problems.
+Index regenerated (193 live items) in C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\LEDGER_CONSOLIDATED.md.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+6. The orrery maintenance run. **It regenerates the export — commit that file.** That is the step that went wrong last time, and it went wrong because I told you nothing would change.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20260919T224124Z, 1 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 0.9s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Skill manifest               0.1s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             0.4s  rewrote data/constants_export.json
+  Module atlas                 5.7s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               3.7s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.3s  (Comments, docstring stamp, formatting, or
+                                     other non-numeric edits only.)
+  Constants relations          0.2s  21 of 21 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.4s  No figure count exceeds its inputs: 31
+                                     derived row(s) read, 15 judged OK -- 15 OK,
+                                     16 NOT YET MIGRATED, 1 NO DERIVED LINE.
+  Constants export check       0.6s  Export matches the store: sha256
+                                     248541a9ba5d on both sides; 55 rows re-read,
+                                     58 not exported, 16 tokens.
+  Dimensions                   0.8s  No unit contradicts its arithmetic: 31
+                                     derived row(s) read -- 15 OK, 10 NO UNIT, 6
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.2s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.2s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 62 status lines in constants_new.py are
+                                     well formed; 49 rows carry none.
+  Row shape                    0.1s  All 113 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.2s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Reset completeness          10.4s  PASS -- all 309 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  1.8s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Worksheet checker            8.2s  76 of 114 routed, 8 clean
+  Worksheet checker tests     13.2s  All 136 checks passed
+  Worksheet key round trip     0.8s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         19.9s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          10.6s  293 TIER-1 FINDINGS IN THE SCANNED TREE
+
+======================================================================
+  16 of 16 gating checkers passed -- 79.1s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           76 of 114 routed, 8 clean
+    Provenance scanner          293 TIER-1 FINDINGS IN THE SCANNED TREE
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  1895 file(s) examined, 7 written, 0 created, 0 removed, 6 rewritten identically
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/constants_export.json
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      DATA_INVENTORY.md
+      LEDGER_CONSOLIDATED.md
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+7. Move all three scripts into `documentation/`, commit everything together, push, tell me the SHA.
+
+**Then reinstall the skill.** provenance-discipline 2.15 from Settings > Skills, and the Project instructions to v3.64. I cannot verify either from inside this session, so it travels as an obligation to the next one.
+
+**Gallery, one push.** Doing it after the orrery means one cache rebuild instead of two.
+
+8. `patch_L342_1` — the formatter and its check.
+9. `patch_L342_4` — the visitor note.
+10. `tools/pull_constants_export.py`, then `tools/mirror_constants.py --write`.
+11. **Pause OneDrive**, then rebuild the cache.
+12. The gallery maintenance run, offline. Expect 14 of 14. If Cache in step is red, the rebuild did not take — do not push past it.
+13. Move both scripts into `documentation/`, commit the renderers, the suite, the page, the config and the cache **together**, push. Resume OneDrive.
+14. The live run.
+
+**What to look at with your own eyes, and it is the point of the whole exercise.** Open Earth's room. The geocorona should read **100 Earth radii**, not `1e+2`. The Hill sphere should read **235**, not 234.6388. The outer core gains a digit, **3480.0**. Then read the panel note at the bottom of both rooms and decide whether that prose stays.
+
+**Two things I expect and you should not be alarmed by.** The maintenance run here failed two checkers, Reset completeness and Orbit cache, and both fail identically on an unpatched clone because this sandbox has no `astroquery`. On your machine they passed last time and should again. And the ledger count depends on order: 337 only if you run the two record patches in the sequence above.

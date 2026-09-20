@@ -178,9 +178,17 @@ EARTH_POLAR_RADIUS_KM = 6356.752
 EARTH_MEAN_RADIUS_KM = 6371.0
 # Unit: km
 # Status: measured V_SOURCED 2026-09-19
-# Figures: 4 -- the fact sheet prints 6371.000 in a table padded to three
-# Figures+: decimals throughout, so the trailing zeros are formatting and
-# Figures+: not precision. PREM quotes the same sphere as 6371 km.
+# Figures: 7 -- the fact sheet prints 6371.000, and trailing zeros after
+# Figures+: the decimal point are significant when they are within the
+# Figures+: source's reporting resolution. Corrected 2026-09-19 from 4 on
+# Figures+: two counts. The rule was wrong: a trailing zero does not stop
+# Figures+: counting because of where it happens to fall. AND THE PREMISE
+# Figures+: WAS FALSE -- the old line said the sheet is "padded to three
+# Figures+: decimals throughout", and the same block prints core radius
+# Figures+: 3485, mean density 5513, topographic range 20.4 and escape
+# Figures+: velocity 11.186. It is not uniformly padded, so 6371.000 is a
+# Figures+: deliberate seven figures. PREM quotes the same sphere as
+# Figures+: 6371 km, to four, for its own purposes.
 # Read: Earth Fact Sheet, bulk parameters, volumetric mean radius,
 # Read+: 2026-09-19, Claude Opus 5
 # Source: NASA Planetary Fact Sheet, Earth -- volumetric mean radius
@@ -211,10 +219,14 @@ EARTH_INNER_CORE_RADII = EARTH_INNER_CORE_KM / EARTH_EQUATORIAL_RADIUS_KM
 EARTH_OUTER_CORE_KM = 3480.0
 # Unit: km
 # Status: measured V_SOURCED 2026-09-19
-# Figures: 4 -- PREM Table I prints 3480.0, but it pads every boundary
-# Figures+: radius to one decimal, so that trailing zero is the table's
-# Figures+: format rather than a claim to 100 m. A non-zero digit in that
-# Figures+: place does count, which is why 1221.5 and 6346.6 carry five.
+# Figures: 5 -- PREM Table I prints 3480.0, and a trailing zero after the
+# Figures+: decimal point is significant when it is within the source's
+# Figures+: reporting resolution. That table reports every boundary radius
+# Figures+: to 0.1 km, so the zero is within it and counts. Corrected
+# Figures+: 2026-09-19 from 4: the old line said the zero was the table's
+# Figures+: padding and did not count, which is a rule this project never
+# Figures+: made. See Wikipedia, Significant figures, the trailing-zeros
+# Figures+: clause, which Tony named as the reference.
 # Read: Table I, "Preliminary reference Earth model", Phys. Earth Planet.
 # Read+: Inter. 25:297-356, p. 308, 2026-09-19, Claude Opus 5
 # Source: Dziewonski & Anderson (1981), PREM, Phys. Earth Planet. Inter.
@@ -228,7 +240,7 @@ EARTH_OUTER_CORE_KM = 3480.0
 EARTH_OUTER_CORE_RADII = EARTH_OUTER_CORE_KM / EARTH_EQUATORIAL_RADIUS_KM
 # Unit: r_earth
 # Status: derived -- inherits EARTH_OUTER_CORE_KM, EARTH_EQUATORIAL_RADIUS_KM
-# Figures: 4 -- set by EARTH_OUTER_CORE_KM (3480, 4)
+# Figures: 5 -- set by EARTH_OUTER_CORE_KM (3480.0, 5)
 # Derived: 3480 / 6378.1366 = 0.5456 -- 4 significant figures, set by
 # Derived+: the numerator. Report no more than that.
 
@@ -2021,14 +2033,24 @@ M3_PER_KM3 = 1.0e9
 EARTH_HILL_SPHERE_KM = KM_PER_AU * (EARTH_GM_KM3_S2 * M3_PER_KM3 / (3.0 * GM_SUN_SI)) ** (1.0 / 3.0)
 # Unit: km
 # Status: derived -- inherits KM_PER_AU, EARTH_GM_KM3_S2, M3_PER_KM3, GM_SUN_SI
-# Figures: 7 -- EARTH_GM_KM3_S2 carries nine and every other input is
-# Figures+: exact, but a = 1 AU is a substitution for Earth's semi-major
-# Figures+: axis and agrees with it only to seven figures (see the note
-# Figures+: below), so seven is the count. The formula's own idealisation
-# Figures+: is coarser than any of this; report 1.50e6 km.
+# Figures: 3 -- THE RELATION ITSELF IS THE LIMIT, not the inputs. Rule 3
+# Figures+: counts measured inputs, and by that route this would be seven:
+# Figures+: EARTH_GM_KM3_S2 carries nine, every other input is exact, and
+# Figures+: a = 1 AU agrees with Earth's semi-major axis to seven. But the
+# Figures+: Hill radius is an approximation in its own right -- using
+# Figures+: Earth's perihelion distance instead of its mean distance moves
+# Figures+: it by more than one percent -- so seven figures claim a
+# Figures+: precision the formula cannot deliver whatever its inputs carry.
+# Figures+: Corrected 2026-09-19 from 7: the old line declared seven and
+# Figures+: then said in its own next sentence to report three, and the
+# Figures+: gallery formats from the declared count, so a visitor was shown
+# Figures+: 234.6388 Earth radii. Owed to provenance-discipline's next
+# Figures+: bump: a row may declare FEWER figures than its inputs support
+# Figures+: when the relation is itself approximate, with the reason in
+# Figures+: words on the row. (Fable's review of C1, Finding 3.)
 # Derived: r_H = a (m / 3M)^(1/3) with a = 1 AU, m/M = GM_E / GM_Sun =
 # Derived+: 398600.4418 / 1.3271244e11 = 3.00349e-6; (m/3M)^(1/3) =
-# Derived+: 0.0100039; x 149,597,870.7 km = 1,496,559 km. Report 1.50e6 km.
+# Derived+: 0.0100039; x 149,597,870.7 km = 1,500,000 km, three figures.
 # Derived+: Placed here, not in the Earth block above, because it needs
 # Derived+: GM_SUN_SI and this file is read top-down (L-291).
 # Note: a = 1 AU exactly. Earth's semi-major axis is 1.00000011 AU (NASA
@@ -2038,7 +2060,7 @@ EARTH_HILL_SPHERE_KM = KM_PER_AU * (EARTH_GM_KM3_S2 * M3_PER_KM3 / (3.0 * GM_SUN
 EARTH_HILL_SPHERE_RADII = EARTH_HILL_SPHERE_KM / EARTH_EQUATORIAL_RADIUS_KM
 # Unit: r_earth
 # Status: derived -- inherits EARTH_HILL_SPHERE_KM, EARTH_EQUATORIAL_RADIUS_KM
-# Figures: 7 -- set by EARTH_HILL_SPHERE_KM
+# Figures: 3 -- set by EARTH_HILL_SPHERE_KM
 # Derived: 1,496,559 / 6378.1366 = 234.64 -- the "about 235 radii" the
 # Derived+: orrery's Hill sphere shell types as radius_fraction = 235.
 

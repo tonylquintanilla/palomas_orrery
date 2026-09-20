@@ -380,7 +380,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*192 live items; 177 need attention (`!`); 191 RICE-scored; 143 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*193 live items; 178 need attention (`!`); 192 RICE-scored; 144 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -397,6 +397,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-300 | sweep_collapsed_features.py joins the gallery maintenance runner as a gating checker | OPEN | 8.1 | 2026-09-07 |
 | ! | L-340 | The exhibit store editor: what the first screenshot showed, and the Mode 5 pass | OPEN | 8.1 | 2026-09-19 |
 | ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-21 |
+| ! | L-342 | What C1 put on the live site, and the figure rules repaired | OPEN [!] | 7.6 | 2026-09-19 |
 | ! | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | OPEN | 6.0 | 2026-08-25 |
 | ! | L-269 | A report names its items, not how many there are | OPEN | 6.0 | 2026-08-30 |
 | ! | L-245 | Constants drift check compares against the last COMMIT, not the last RUN | OPEN | 5.4 | 2026-08-25 |
@@ -667,6 +668,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-290 | Relay anchors must name the protocol and skills, not the code SHA alone | DONE | 10.8 | 2026-09-07 |
 |  | L-198 | Claim vocabulary: the units the scanner could not see | DONE | 10.2 | 2026-08-17 |
 |  | L-276 | Mode 7 tells relay partners they cannot read the repo, and they can | DONE | 8.5 | 2026-09-03 |
+|  | L-341 | The dashboard: a search that names the group, and two rulings | DONE | 8.5 | 2026-09-19 |
 |  | L-259 | The Sun exhibit ships -- the assembler runs in a visitor's browser | DONE | 8.3 | 2026-08-29 |
 |  | L-217 | The Part A / Part B dispatch split is a check that cannot fail | DONE | 8.1 | 2026-08-19 |
 |  | L-226 | safe-file-editing 1.8 -- encoding gate covers prose; corrections do not travel | DONE | 8.1 | 2026-09-16 |
@@ -805,6 +807,81 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-342] What C1 put on the live site, and the figure rules repaired
+<!-- L:342 status:OPEN upd:2026-09-19 section:A flag:! rice:4/4/95/2 -->
+- **Opened 2026-09-19** from Claude Fable 5.1's review of L-322 Stage
+  C1, reviewed at orrery `21065c5d` and gallery `2ead992b`. The review
+  confirmed the walk's constants and its reads independently, and found
+  one visitor-visible defect and three other things.
+- **A DEFECT THAT WAS LIVE.** Earth's geocorona hover read "Radius:
+  1e+2 Earth radii"; before C1 it read "100.0000 Earth radii".
+  `fmtServed` used `value.toPrecision(figures)`, and JavaScript switches
+  that to exponent notation whenever the integer part has more digits
+  than the figure count. C1 declared the first figure counts this store
+  has ever carried, so it is the first time a served value met the
+  condition. ALL FOURTEEN GALLERY CHECKS PASSED OVER IT, because none of
+  them reads the numbers inside a hover. Fixed by
+  `patch_L342_1_served_figures_formatter_20260919.py`.
+- **THE CHECK THE REVIEW ASKED FOR WAS NOT THE CHECK BUILT, and the
+  measurement is why.** A check that fails on any hover containing
+  exponent notation was written first and run: it fails on TWENTY hovers
+  that are correct -- the Oort cloud's "2.00e+3 AU", the Sun's
+  gravitational influence at "1.50e+5", Jupiter's main ring at
+  "2.01e-7", the Moon at "3.684e+05" -- all written deliberately by
+  other code at magnitudes where the notation is right. A check with
+  twenty standing exceptions is not a check. What was built runs every
+  served value carrying a figure count through the renderers' own
+  formatter and fails if one returns an exponent. Demonstrated failing
+  by restoring the old formatter: it named the geocorona AND the lower
+  mantle, which does not reach a hover today because the interior shells
+  are served in kilometres.
+- **THE WALK DECIDED A RULE IN THE WRONG PLACE.** Meeting PREM's
+  `3480.0`, it wrote into that constant's own comment that a trailing
+  zero in a padded decimal place does not count. The skill said the
+  opposite. Both were wrong. The cited page says a trailing zero after a
+  decimal point is significant WHEN IT FALLS WITHIN THE SOURCE'S
+  REPORTING RESOLUTION -- which is why 1500 m at 100 m resolution has
+  two figures. Rule 2 had dropped that condition; the walk's replacement
+  ignored it. Settled by Tony 2026-09-19: implement the rules as the
+  page states them. `EARTH_OUTER_CORE_KM` 4 -> 5,
+  `EARTH_MEAN_RADIUS_KM` 4 -> 7, both inherited by their `_RADII` rows.
+- **ONE PREMISE WAS ALSO FACTUALLY FALSE**, and the review caught it:
+  the mean radius row claimed the NASA fact sheet is "padded to three
+  decimals throughout", and the same block prints 3485, 5513, 20.4 and
+  11.186.
+- **THE HILL SPHERE DECLARED SEVEN FIGURES AND DISOWNED THEM** in its
+  own next sentence, and the gallery formats from the declared count, so
+  a visitor saw 234.6388 Earth radii. Corrected to three. The rule this
+  needed did not exist and is now in the skill: a row may declare fewer
+  figures than its inputs support when the RELATION is itself
+  approximate.
+- **RULING: ASTM E29 IS AN ASIDE, NOT THE REFERENCE.** Asked whether to
+  adopt the standard verbatim rather than restate it, Tony confirmed the
+  recommendation against. It costs $86, so a rule the project works from
+  could not be opened by anybody in the loop, which fails our own Access
+  Standard; and its scope is conformance with specification limits,
+  which this store does not have. Verbatim would not have prevented this
+  failure anyway: what failed is that nobody could check the
+  restatement against its source without opening the source.
+  provenance-discipline 2.14 -> 2.15 carries all of it.
+- **THE DISPUTED COMMIT, settled by the commits.** Orrery `4417217`
+  holds four files and none of the files a maintenance run always
+  rewrites; `4f54728` holds all of them. So Tony excluded nothing, as he
+  said twice, and the run had not been run. The builder's explanation --
+  that a file was left out of the commit -- was a guess and was wrong,
+  and the patch's own closing text, which said nothing would change, is
+  what made the run look optional. **Worth keeping:** a commit made
+  without the maintenance run is visible afterwards by the absence of
+  the files the run always rewrites.
+- **STILL OPEN.** The read check: the skill says a missing `# Read:` on
+  an in-scope row inside a closed slice FAILS, and no check does that
+  yet. It must be demonstrated failing before `CLOSED_SLICES` changes.
+  Also open: the geocorona hover gives its altitude as 631,436 km, six
+  figures beside a one-figure floor, which predates C1.
+- **Ref:** `gallery/feature_renderers.js`;
+  `documentation/smoke_hover_budget.js`; `constants_new.py`;
+  `skills/provenance-discipline/SKILL.md`.
 
 #### [L-340] The exhibit store editor: what the first screenshot showed, and the Mode 5 pass
 <!-- L:340 status:OPEN upd:2026-09-19 section:A flag: rice:3/3/90/1 -->
@@ -15919,6 +15996,80 @@ skill 1.3 (the provenance contract an exhibit renders under).
 `interactive.html`, `gallery/feature_renderers.js`, `gallery/arrival.js`,
 `documentation/smoke_arrival.js`; resident protocol Part 3, A Check
   That Cannot Fail Is Not Passing; interactive-exhibit skill.
+
+#### [L-341] The dashboard: a search that names the group, and two rulings
+<!-- L:341 status:DONE upd:2026-09-19 section:C flag: rice:3/3/95/1 -->
+- **Opened and closed 2026-09-19.** Tony had just run
+  `tools/pull_constants_export.py` from a terminal. The dashboard
+  already carried a button for it -- Constants Export Pull -- and he
+  had not found it. He asked whether the tool was on the dashboard and
+  whether a search could be added to find the right button.
+- **THE GROUPS WERE BADLY UNEVEN, measured rather than recalled:**
+  Solar System 2, Earth System 5, Stars 1, Gallery & Web 22, Developer
+  Tools 37. Sixty-seven buttons, and fifty-nine of them in two groups.
+  They are now seven: Gallery -- checks and data 15, Gallery --
+  authoring 8, Maintenance Run 25, Tools and Caches 11, and the three
+  small ones untouched. `Gallery Cache Builder -- Manual Run` moved to
+  the gallery group, where its `GALLERY_REPO_DIR` base always said it
+  belonged. [verified @ `21065c5d`]
+- **THE SEARCH DRAWS EACH MATCH UNDER ITS OWN GROUP HEADING**, rather
+  than in one flat list, and that was Tony's choice between the two
+  shapes offered. Finding the button is half the job; the other half is
+  learning WHERE it lives, so that next time the search is not needed.
+  A flat list answers the first question every time and never answers
+  the second. A group with no match is not drawn, so the headings left
+  on screen are themselves the answer.
+- **IT RUNS ON DEMAND, NOT WHILE YOU TYPE** -- Tony's suggestion on
+  seeing the first version: "add a Find button before the Clear button.
+  that way the search function does not update with every character
+  typed only at the end." Two reasons, and the second is his. A redraw
+  destroys and rebuilds all sixty-odd cards, which is real work once
+  per letter. And the groups shuffle and vanish under the cursor while
+  a word is half typed, which is the opposite of a page you can scan.
+  Enter does what Find does. What remains is a screen that can disagree
+  with the box, so the status line says "press Find, or Enter" while
+  they differ -- one short label, the only thing a keystroke touches.
+- **TWO THINGS TESTING TURNED UP THAT READING DID NOT.**
+  (1) Typing "stars" matched NOTHING. The Stars group exists, but its
+  one button is called Star Visualization and no description carries
+  the word. A group name now counts as a match and takes its whole
+  group. Found by a behaviour test that happened to use that word.
+  (2) Searching descriptions as well as names is broad: "export"
+  matches 14 of the 67 buttons, because the descriptions in that file
+  are long and specific. That breadth is the reason the search works at
+  all -- it is how "Constants Export Pull" is findable from "export" --
+  and the status line reports the count so the breadth is visible
+  rather than surprising.
+- **RULING: THE DASHBOARD IS NOT WHERE "WHAT SHOULD I RUN NOW" GETS
+  ANSWERED.** A state-aware dashboard was offered as a fourth option --
+  the window reading the current state and saying "the export is stale,
+  run this". Tony: "the current state is the right question, but i am
+  not sure that the dashboard is the place to answer it. ultimately
+  this is our conversation." Recorded as a DECISION and not as backlog,
+  so that a later session does not build it believing it was merely
+  deferred. The question stays live; its home is the conversation.
+- **RULING: THE TWENTY CHECKERS WERE NOT RE-SORTED**, although sorting
+  them by kind would have cut the longest group from 25 to about 14.
+  The alphabetical run with its GENERATORS and CHECKERS labels is
+  Tony's own ruling of 2026-09-12, written into the file's comments: a
+  sorted run of twenty buttons gives no clue where one kind stops and
+  the other starts, and the two labels are what fixed that. Maintenance
+  Run stays long on purpose, and reads as a runner with its contents
+  indented under it rather than a flat list. A tidy-up that quietly
+  overturns a prior ruling is worse than a group that stays long.
+- **Tony at the window, 2026-09-19:** "perfect. good update."
+- **Claude proposes, unratified:** the behaviour test that found the
+  "stars" gap exists only in the session that wrote it. It drives the
+  real widget under a virtual display and asserts that typing does not
+  redraw, that Find and Enter do, that Clear restores, and that a group
+  name matches; it was confirmed able to fail by putting the live-typing
+  behaviour back on purpose. Nothing in the repository checks any of
+  that now. Whether it earns a place among the checkers is Tony's call,
+  and the argument against is that a GUI behaviour test is a new kind of
+  thing for this runner to carry.
+- **Ref:** `palomas_orrery_dashboard.py`;
+  `documentation/patch_L341_1_dashboard_search_and_groups_20260919.py`;
+  `documentation/patch_L341_2_dashboard_find_button_20260919.py`.
 
 #### [L-249] The Earth slice of L-181: interior boundaries as sourced constants
 <!-- L:249 status:DONE upd:2026-09-19 section:C flag: rice:4/4/90/2 -->
