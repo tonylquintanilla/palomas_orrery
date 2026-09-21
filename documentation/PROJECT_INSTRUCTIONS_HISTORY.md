@@ -1327,6 +1327,64 @@ resident.
 (Moved down from the resident protocol on 2026-09-20 when
 v3.65 made a fourth entry.)
 
+v3.63 (September 19, 2026): No rule changed in this document. ONE
+skill bump, taken ahead of the walk it serves, which is v3.55's
+ordering.
+
+provenance-discipline 2.13 -> 2.14 (L-322). The READ is written down.
+
+IT HAD BEEN A RULING SINCE 2026-09-11 AND LIVED ONLY IN THE LEDGER.
+L-322 ruling (b) said a bare literal's check is a human reading the
+source against it, "where critical", and the skill that fires on every
+constants session did not carry any of it. This is the same lesson as
+v3.57 and v3.61: a convention that is not in the skill does not travel,
+and the field the walk is about to write has to be defined before the
+walk writes it.
+
+WHAT "CRITICAL" MEANS IS TONY'S, AND IT IS ABOUT ACCESS. Asked on
+2026-09-19 what the word meant, he said it is "where your own search
+tools cannot read a needed source but I can", and glossed "need" in the
+same message: a number is in the store and needs a source. So the split
+is not by importance. An unimportant number behind a wall only Tony can
+open still goes to him; a load-bearing number Claude can open never
+does. Three branches follow -- the builder reads what it can open and
+names itself on the row, a row only Tony can open goes to him in a FILE
+with the link, where to look and the number to expect, and a source
+neither can open fails The Access Standard and is re-homed or removed.
+His reading list is his WHOLE share: nothing else in a slice walk asks
+him to read a source.
+
+A MODEL'S READ COUNTS, AND THE LINE SAYS SO. Tony confirmed this
+directly rather than leaving it to be inferred: the model may read a
+source. The fourteen magnetosphere rows already work that way. What
+does NOT count is a read reconstructed from training, because the line
+then stops the next reader from looking while recording nothing that
+was checked -- a `# Source:` over recalled data, one layer out.
+
+THE WORDING WAS APPROVED BEFORE IT WAS CUT. It is his ruling being
+written down, so the section was brought to him in full and he answered
+four questions about it point by point. Three smaller things ride the
+same bump: The Unit Field now points at `constants_tokens.py`, which
+owns the token table, the retired list and the "named number" marker;
+Rule 8's enumeration names both routes to a derived row, its arithmetic
+and its `# Derived:` line, which are not the same set; and the
+worksheet schema gains the "Read by" column promised on 2026-09-11 and
+missed by 2.13.
+
+THE OBLIGATION TRAVELS, as it always does. This session loaded 2.13,
+and a reinstall cannot be verified from inside the session that makes
+it. The next session confirms its loaded copy reads 2.14 before any
+provenance or store work, and that session is Stage C, the walk itself.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.60 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-09-21 when
+v3.66 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

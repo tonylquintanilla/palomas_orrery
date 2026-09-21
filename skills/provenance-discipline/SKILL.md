@@ -6,12 +6,36 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 2.15 | Cut from palomas_orrery @ 21065c5d (v2.15),
-earlier @ dfa779bd (v2.14), @ ebdc55cc (v2.13), @ bfc0505e (v2.12),
+Skill version: 2.16 | Cut from palomas_orrery @ a7014abb (v2.16),
+earlier @ 21065c5d (v2.15), @ dfa779bd (v2.14), @ ebdc55cc (v2.13),
+@ bfc0505e (v2.12),
 earlier @ 159c5a2c (v2.11), @ 071a0a65 (v2.10), @ a263f73d (v2.9),
 @ 7f4a2f9f (v2.8), @ 3faa72a0 (v2.7), @ f603be3 (v2.6),
 @ 731066f (v2.5), @ 6b99ace (v2.2), @ 00219d9 (v2.1), @ eb77c83 (v2.0)
-| September 19, 2026
+| September 21, 2026
+v2.16 writes down how a stated uncertainty decides a figure count,
+before L-322 Stage C2 builds the check for it. Rule 3 already said the
+uncertainty decides and counting is the fallback, and the procedure it
+was adopted from says to propagate; neither said how, and the checker
+counts only. On Tony's instruction of 2026-09-20, "See the Skill on
+significant digits", the magnetopause standoff was worked by the rule:
+Shue's five coefficient uncertainties propagate to +/- 0.13 Earth
+radii, which the reference page's single-number rule reports to
+tenths, 10.3 -- the stored 10.25 was a figure too many. RULE 3 GAINS
+THE CEILING, in five parts: which uncertainty is propagated (the
+inputs', not a model's scatter about its data); show or cap for an
+approximate relation; when propagation sets the ceiling and when
+counting does; how to propagate (central difference, root-sum-square,
+from full digits, independence stated with its bound, an implied
+half-unit for a primary that states none); and how to report, with
+the page's words kept apart from the log-scale measure this project
+adds. RULE 1 gains the field form of an uncertainty, so a checker
+reads a field and never prose. RULE 8 gains the ceiling check,
+specified here and built at C2. Claude Fable 5.1 reviewed the text
+twice before it was cut; its second look found that an earlier form
+of the ceiling rule would have failed fifteen finished C1 rows, and
+the rule now fails a row only for claiming more than its uncertainty
+supports. Handle L-322.
 v2.15 repairs the figure rules against the source they cite, after
 Claude Fable 5.1's review of L-322 Stage C1 found the walk deciding a
 rule inside one constant's comment. RULE 2 GAINS THE CONDITION IT HAD
@@ -1757,18 +1781,26 @@ wrong, and nobody could see it without opening the source -- which is
 the argument for citing something openable rather than for copying a
 standard verbatim.
 
-**Rule 1. `# Figures:` is a comment key beside the value.** Three forms:
+**Rule 1. `# Figures:` is a comment key beside the value.** Five forms:
 
 ```
 # Figures: 5 -- set by EARTH_INNER_CORE_KM (1221.5, 5)
 # Figures: 5 -- PREM reports to 0.1 km, so 3480.0's trailing zero counts
 # Figures: exact -- IAU 2012 definition
+# Figures: 4 -- Table 1 prints 10.22, uncertainty 0.10
+# Figures: 3 -- uncertainty 0.13, root-sum-square of Shue's a1 to a5
 ```
 
 A derived row names the input that set its count. A measured row
 states what the source supports, and says in words whether a trailing
 zero counts, because an integer literal cannot. A defined constant says
-`exact`. The field is needed because a float cannot hold a significant
+`exact`. A measured row whose source STATES an uncertainty writes it
+as a FIELD: the word `uncertainty` followed directly by the number, in
+the row's own unit, on its `# Figures:` line. A checker reads that
+field and never the prose around it, so "an uncertainty of 0.1 m" in
+words is not read. A derived row writes the uncertainty form only when
+it declares more figures than counting alone allows, and then the
+number is the one recomputed from full digits (Rule 3, The ceiling). The field is needed because a float cannot hold a significant
 trailing zero (13.50 is stored as 13.5) and the export would otherwise
 lose the count.
 
@@ -1801,7 +1833,8 @@ power, an exponential or another function, the fewest-figures rule is
 the default; where the function magnifies the input's uncertainty (an
 exponent above one in magnitude), drop a figure and say why on the
 row. Where an input carries a stated uncertainty, the uncertainty
-decides instead and counting is the fallback.
+decides instead and counting is the fallback; how is set out under The
+ceiling, below.
 
 **A row may declare FEWER figures than its inputs support when the
 RELATION ITSELF is approximate, with the reason in words on the row.**
@@ -1814,6 +1847,74 @@ figures would claim a precision the relation cannot deliver whatever
 its inputs carry. This is a floor on honesty, not a licence to round to
 taste: the row must say WHICH approximation caps it and by roughly how
 much. (L-342, Fable's review of C1, Finding 3.)
+
+**The ceiling: where an uncertainty is stated, propagate it** (v2.16).
+The procedure these rules were adopted from says it in one line:
+"Where any input carries a stated uncertainty, propagate that instead
+and let it decide." Five parts make that usable. What the reference
+page says is kept apart from what this project adds, and the project's
+part is marked as its own.
+
+- **Which uncertainty.** Propagate the stated uncertainties of the
+  INPUTS: how well each was measured or fitted. A model's scatter about
+  the data it was fitted to is a different quantity. It describes the
+  real thing around the model, and it is shown beside the value, not
+  propagated into it.
+- **Show or cap.** Where the source publishes the size of a relation's
+  mismatch as a number the store can hold and the page can show, show
+  it beside the value: real magnetopause crossings scatter 1.23 Earth
+  radii about Shue's model, and the hover says so. Where it does not,
+  cap the count and say why on the row, as the Hill sphere's is in the
+  paragraph above. This decides which of the two answers applies.
+- **When propagation sets the ceiling.** A derived row's ceiling -- the
+  most figures it may declare -- is set by propagation whenever at
+  least one measured primary in its chain STATES an uncertainty, and by
+  counting otherwise. A row may always declare its ceiling or fewer. It
+  writes the uncertainty form of Rule 1 only when it declares MORE than
+  counting alone allows, so the reason for the extra figures is on the
+  row; a row that counts and stays within its ceiling keeps its
+  counting line. Implied uncertainties alone never set a ceiling:
+  Jelinek's bow shock standoff, whose chain states none, is 13.5 by
+  counting and would be 13.51 if they did.
+- **Propagate.** Trace the row to its primaries. Move each up and down
+  by its uncertainty and take the half-difference, a central
+  difference; a one-sided step gives a different answer wherever the
+  relation curves (Shue's standoff gives 0.129 up and 0.136 down).
+  Combine by root-sum-square, re-evaluating through the chain from full
+  digits: Rule 4 applies to an uncertainty exactly as to a value, and
+  an uncertainty converted from a rounded one is the same failure.
+  Root-sum-square assumes independent inputs; where the source gives no
+  correlations the row says so, and where the reported place would not
+  survive the plain sum of the effects, the row gives both numbers. A
+  primary that states no uncertainty contributes its implied one, half
+  a unit in its last significant place, as the page allows; that is a
+  full half-width rather than a standard deviation, so it errs large.
+  Declared conditions and exact numbers contribute nothing.
+- **Report. What the page says:** to report a single number, choose
+  the one whose implied range is close to the measured range, since
+  going coarser loses a lot of information; its examples are
+  3.78 +/- 0.07 kg and 3.78 +/- 0.09 kg, both best quoted as 3.8 kg.
+  Where the uncertainty is printed beside the value, it takes one or
+  two figures and the value ends in the same place. **What this project
+  adds, and why:** "close" is measured on a log scale, because implied
+  uncertainties step by factors of ten, and a tie goes to the coarser
+  place; a linear measure would keep the tenths place up to +/- 0.27
+  and overstate the precision five-fold. Each unit is reported by its
+  own uncertainty, so a value and its conversion can carry different
+  counts; the page warns of exactly this for unit conversions.
+
+The magnetopause standoff is the worked case. Shue's Table 1 states a
+standard deviation on every coefficient; propagated at the declared
+solar wind they give 10.2518729724 +/- 0.1326 Earth radii, reported
+10.3 -- the tenths place implies +/- 0.05 and the units place +/- 0.5,
+and the tenths is closer. The store had carried 10.25, a figure too
+many even by the largest single effect, +/- 0.09. In kilometres the
+same uncertainty is +/- 846 km, so 65,000 km at two figures; in AU,
+0.00044. The plain sum of the effects is 0.25 and the tenths place
+holds only to 0.158, which the row states. (Tony's instruction of
+2026-09-20, "See the Skill on significant digits"; worked in
+`documentation/BUILD_MANIFEST_L322_C2_magnetosphere_20260920.md`,
+section 2.1, and reviewed twice by Claude Fable 5.1. Handle L-322.)
 
 **Rule 4. Compute from the PRIMARY inputs at full precision; round
 once.** A derived row that feeds a second derived row does not chain
@@ -1860,6 +1961,20 @@ sides -- and the two `TRANSITIONAL` standoffs are exactly that shape
 until they revert. The checker names rows found by either route, and an
 expression with no `# Derived:` line is itself a named gap. (At 2.12
 enumeration went by Status and saw 2 of 27.)
+
+**The checker also enforces the ceiling of Rule 3.** It is specified
+here at 2.16 and built at L-322 Stage C2; until that build the checker
+counts only, and a row relying on the uncertainty route fails it. For
+every derived row it works out the ceiling -- by propagation where any
+measured primary in the chain states an uncertainty in the field
+form, by counting otherwise -- and FAILS a row only for declaring MORE
+than its ceiling; where the two ceilings differ it prints both. A row
+declaring more than counting allows must carry the uncertainty form,
+and its stated number must match the recomputed one to the digits
+stated, which is how a one-sided step or a rounded intermediate is
+caught. It reads uncertainties only from the field, never from prose,
+and names any primary whose figures line mentions an uncertainty in
+words without the field, so the blind spot announces.
 
 (Tony's rulings, 2026-09-16, adopting the procedure in
 `documentation/DESIGN_L322_d_significant_figures_20260916.md` "as

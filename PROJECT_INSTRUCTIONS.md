@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.65 | September 20, 2026
+Tony Quintanilla, PE | Claude | v3.66 | September 21, 2026
 
-Cut from ba94e80e at https://github.com/tonylquintanilla/palomas_orrery
+Cut from a7014abb at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -488,7 +488,7 @@ agentic-pre-test             1.2  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
 horizons-orbital-mechanics   1.1  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning
-provenance-discipline        2.15 Scanner runs, audits, citations, constants,
+provenance-discipline        2.16 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
 earth-system-pipeline        1.1  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY
@@ -1158,6 +1158,61 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.66 (September 21, 2026): No rule changed in this document. ONE
+skill bump, taken ahead of the build it serves, which is v3.55's
+ordering.
+
+provenance-discipline 2.15 -> 2.16 (L-322). HOW A STATED UNCERTAINTY
+DECIDES A FIGURE COUNT IS WRITTEN DOWN.
+
+THE RULE WAS ALREADY THERE, AND IT WAS NOT APPLIED. Rule 3 said a
+stated uncertainty decides and counting is the fallback, and the
+procedure it was adopted from says to propagate. The C2 design session
+missed both and put a choice to Tony between counting digits and two
+uncertainty conventions. His answer was "See the Skill on significant
+digits." It was method, which Method Belongs to the Skill had already
+said. What the skill lacked was HOW -- which uncertainty, how to
+propagate it, how to report it, and when it applies -- and the
+checker counts only, so the C2 build implements the new text.
+
+THE WORKED CASE. Shue's five coefficient uncertainties propagate to
++/- 0.13 Earth radii at the declared solar wind, which the reference
+page's single-number rule reports to tenths: 10.3, where the store had
+carried 10.25. In kilometres the same uncertainty supports two
+figures, 65,000 km. Two more of Tony's corrections the same day shaped
+the design around it: compute with all the digits and round only at
+the end, which is Rule 4, and "The single source of truth is
+constants_new.py", which put the kilometre and AU figures in the store
+rather than in the page.
+
+WHAT IS OURS IS MARKED AS OURS. The page says to report so that the
+implied range is close to the measured one. That closeness is measured
+on a log scale is this project's choice, and it is written apart from
+the page's words with its reason -- 2.14 went wrong by restating a
+source with words changed and nobody able to see it.
+
+TWO REVIEWS BEFORE THE CUT. Claude Fable 5.1 reviewed the text in the
+C2 manifest twice. The first review found that the propagated figure
+is the fit's precision and not the magnetopause's -- real crossings
+scatter 1.23 Earth radii -- which became the show-or-cap sentence and,
+on Tony's ruling, a scatter line in each hover. The second found that
+an earlier form of the ceiling rule would have failed fifteen finished
+C1 rows; the rule now fails a row only for claiming more than its
+uncertainty supports, and measured over every derived Earth row, none
+does.
+
+THE OBLIGATION TRAVELS, as it always does. This session loaded 2.15,
+and a reinstall cannot be verified from inside the session that makes
+it. The next session confirms its loaded copy reads 2.16 before any
+provenance or store work, and that session is the C2 build, from
+documentation/BUILD_MANIFEST_L322_C2_magnetosphere_20260920.md.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.63 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.65 (September 20, 2026): No rule changed in this document. ONE
 skill bump, taken AFTER the build it records, which is v3.62's
 exception rather than v3.55's ordering: three of these rules were
@@ -1263,61 +1318,6 @@ provenance or store work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.61 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.63 (September 19, 2026): No rule changed in this document. ONE
-skill bump, taken ahead of the walk it serves, which is v3.55's
-ordering.
-
-provenance-discipline 2.13 -> 2.14 (L-322). The READ is written down.
-
-IT HAD BEEN A RULING SINCE 2026-09-11 AND LIVED ONLY IN THE LEDGER.
-L-322 ruling (b) said a bare literal's check is a human reading the
-source against it, "where critical", and the skill that fires on every
-constants session did not carry any of it. This is the same lesson as
-v3.57 and v3.61: a convention that is not in the skill does not travel,
-and the field the walk is about to write has to be defined before the
-walk writes it.
-
-WHAT "CRITICAL" MEANS IS TONY'S, AND IT IS ABOUT ACCESS. Asked on
-2026-09-19 what the word meant, he said it is "where your own search
-tools cannot read a needed source but I can", and glossed "need" in the
-same message: a number is in the store and needs a source. So the split
-is not by importance. An unimportant number behind a wall only Tony can
-open still goes to him; a load-bearing number Claude can open never
-does. Three branches follow -- the builder reads what it can open and
-names itself on the row, a row only Tony can open goes to him in a FILE
-with the link, where to look and the number to expect, and a source
-neither can open fails The Access Standard and is re-homed or removed.
-His reading list is his WHOLE share: nothing else in a slice walk asks
-him to read a source.
-
-A MODEL'S READ COUNTS, AND THE LINE SAYS SO. Tony confirmed this
-directly rather than leaving it to be inferred: the model may read a
-source. The fourteen magnetosphere rows already work that way. What
-does NOT count is a read reconstructed from training, because the line
-then stops the next reader from looking while recording nothing that
-was checked -- a `# Source:` over recalled data, one layer out.
-
-THE WORDING WAS APPROVED BEFORE IT WAS CUT. It is his ruling being
-written down, so the section was brought to him in full and he answered
-four questions about it point by point. Three smaller things ride the
-same bump: The Unit Field now points at `constants_tokens.py`, which
-owns the token table, the retired list and the "named number" marker;
-Rule 8's enumeration names both routes to a derived row, its arithmetic
-and its `# Derived:` line, which are not the same set; and the
-worksheet schema gains the "Read by" column promised on 2026-09-11 and
-missed by 2.13.
-
-THE OBLIGATION TRAVELS, as it always does. This session loaded 2.13,
-and a reinstall cannot be verified from inside the session that makes
-it. The next session confirms its loaded copy reads 2.14 before any
-provenance or store work, and that session is Stage C, the walk itself.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.60 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 
