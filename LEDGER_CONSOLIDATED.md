@@ -171,6 +171,11 @@ corrected on Fable 5.1's review), built on ee37cc1f.
 Module updated: September 20, 2026 with Anthropic's Claude Opus 5 (L-216
 as built: the swap retries, rolls back and logs; the run history kept;
 gallery-cache-builder 1.5 -> 1.6 and protocol v3.65), built on ba94e80e.
+Module updated: September 21, 2026 with Anthropic's Claude Opus 5 (L-216:
+the first real build on the new code, with what it proves and what it
+does not; the empty " (N)" folders measured, cause undetermined; patches
+5 to 7 recorded; the skill wording owed to its next bump), built on
+b9cd4844.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -427,7 +432,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
-| ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-09-20 |
+| ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-09-21 |
 | ! | L-224 | Streamer belt: one warped band, not a sphere | OPEN | 3.8 | 2026-08-22 |
 |  | L-230 | A skill bump does not reach the protocol's version history | DEFERRED | 3.8 | 2026-08-23 |
 | ! | L-227 | Streamer band hover rendered as one 378-character line | OPEN | 3.8 | 2026-08-23 |
@@ -3576,7 +3581,7 @@ governs a session document contradicting a settled decision, not a
 ledger field that predates the event it is silent about).
 
 #### [L-216] Gallery swap fails under a filesystem lock (OneDrive)
-<!-- L:216 status:OPEN upd:2026-09-20 section:A flag: rice:3/3/85/2 -->
+<!-- L:216 status:OPEN upd:2026-09-21 section:A flag: rice:3/3/85/2 -->
 - **2026-08-19: the nightly run wiped the served tree.** GitHub Desktop
   showed 56 deletions in the gallery repo and zero additions.
   `data/solar-system/` was absent while BOTH halves of the generation
@@ -3798,13 +3803,95 @@ in `gallery-cache-builder` 1.6.
 gallery-cache-builder 1.5 and bumped it to 1.6. A reinstall cannot be
 verified from inside the session that makes it. The next session confirms
 its loaded copy reads 1.6 before cache work.
-**Gap (corrected 2026-09-20, after the build):** the CAUSE. The exposure
-is handled and the fix is in; what remains is whether the repositories
-stay under OneDrive. WATCH THE SWAP LOG: a line with more than one
-attempt and outcome `ok` is the fix doing its job, and Tony should expect
-one within a few weeks. The move off OneDrive is Tony's and is UNDECIDED;
-the analysis, the inventory and what a move would need first are in the
-2026-09-20 notes above, so it need not be argued from memory.
+**Note (2026-09-21) -- the first real build on the new code, and what it
+does and does not prove.** Run `20260921T173303Z`, a hand build with
+OneDrive paused beforehand, pushed at gallery `39bde09d`. Its swap log
+line reads one attempt on each rename and outcome `ok`. The change list
+held 25 changed files and 2 added -- this run's own record and the swap
+log itself -- and no deletions. WHAT IT PROVES: the new code works on
+Tony's machine. The swap log was written where it should be, as a tracked
+file, one line; the `started` line was rewritten in place with the
+outcome, which until then had only been tested in a sandbox; the
+run-start recovery and the sweep each cleared the read-only bit on 6
+entries and said so; and the live check confirmed the site serves the new
+cache byte for byte. WHAT IT DOES NOT PROVE: the retry or the roll-back
+against a real refusal, because nothing was refused. The only evidence of
+those is still a line with more than one attempt.
+**Note (2026-09-21) -- the empty "solar-system (N)" folders, measured.**
+Four sat beside the cache, `(1)` to `(4)`; `(4)` appeared the same
+afternoon as the build above. A report-only script,
+`report_L216_stray_folders_20260921.py` in the gallery, captured what
+only the folders could say before they were deleted. ALL FOUR WERE EMPTY,
+hidden and system files counted, and each was empty from the start:
+created at most four minutes before it was last modified, so nothing was
+made at the swap and emptied later. EACH WAS CREATED 36 TO 39 MINUTES
+AFTER A BUILD STARTED -- 36.9, 35.9, 38.6 and 38.2 minutes, after the
+builds of 2026-09-05, 09-10, 09-18 and 09-21 -- on 4 of the 26 builds since
+2026-09-05, with no pattern in the time of day. NOT TIED TO A COMMIT: the
+nearest preceding commit was 2.7 minutes, 35.1 minutes, 11 seconds and
+14.1 minutes earlier, and on 09-10 there was no commit anywhere near. NOT
+MADE BY OUR CODE: Python never names a folder with " (N)", and nothing in
+either repository creates a folder beside the cache; only Windows and
+OneDrive name folders that way. PAUSING DOES NOT PREVENT IT: `(4)`
+appeared with syncing paused the whole time. Every one carried OneDrive's
+"always keep on this device" flag, but so does the live cache folder, so
+the flag does not settle who made them.
+CAUSE: UNDETERMINED. The strongest suspect is OneDrive, or the Windows
+cloud-files layer beneath it, catching up on the swap after a delay.
+That is a suspicion, not a finding. They are harmless as measured --
+empty, kept out of git by `data/solar-system (*)/`, and named by the
+sibling report whenever one appears -- so expect another now and then.
+Tony was cleared to delete these four by hand on 2026-09-21, once the
+report had been sent. IF THEY BECOME A NUISANCE, the choice is Tony's:
+delete them by hand, or let the builder's sweep remove EMPTY ones -- which
+would change the rule that the sweep never touches what the builder did
+not make, the rule that kept the 42 run records safe. Not pressed.
+A WRONG CLAIM, recorded because it nearly landed here. Claude told Tony
+that OneDrive made `(4)` when his sync pause ran out. His pause never ran
+out; it was a guess stated as likely. It was withdrawn, with the patch
+that carried it, before that patch ran.
+THREE CHANGES FOLLOWED THE AS-BUILT, recorded here so this block is
+complete. PATCH 5, orrery `ac397e52`: the dashboard's descriptions of
+three buttons, which the build never opened and so still described the
+tools as they were the morning before. PATCH 6, gallery `06fdad8c`, Fable
+5.1's final line break in `.gitignore`: stage B had kept the file's
+missing final newline, which left the new `data/[0-9]*-solar-system/`
+rule as the unterminated last line, so the next line anyone appended
+would have joined it and broken it silently. PATCH 7, gallery `8a38a917`,
+on Tony's two requests of 2026-09-21: the builder prints a `[SWAP]` line
+after every good swap, so a clean swap is SAID rather than silent; it
+ends a good hand run with its own numbered next steps, the maintenance
+run BEFORE the commit; and the maintenance run's swap line reads EVERY
+rename. Stage B's version read only `staging -> live`, so a refusal the
+retry absorbed on the `.prev` cleanup -- the rename the lock catches most
+-- would have printed "succeeded first time". A named check now fails if
+that code comes back. The offline suite is at 201.
+**Owed to gallery-cache-builder's next bump** (ONE SESSION, ONE BUMP --
+this session already shipped 1.6). The routine should say the builder now
+prints a `[SWAP]` line and its own next steps; that the maintenance run
+comes BEFORE the commit; and that its last line should agree with the
+`[SWAP]` line. "Reading the log" should say the maintenance run reads
+every rename, not only the last. And the sibling-report section should
+say the " (N)" folders measured on 2026-09-21 are empty and appear on a
+delay after some builds -- it currently calls them conflict copies, which
+the report does not support. The builder's printout and the dashboard
+carry the routine meanwhile.
+**The same "conflict copy" wording lives in four more places**, found by
+search on 2026-09-21 and left for a pass that touches them anyway: the
+comment above the two rules in the gallery's `.gitignore`; the docstring
+of the gallery's `documentation/check_cache_siblings.py`; the orrery
+dashboard's Cache Siblings description; and
+`documentation/L342_install_test_run_sequence.md` in the orrery. It is
+right for `1260806133443-solar-system`, which held real run records, and
+unsupported for the empty " (N)" folders, whose maker is unknown.
+**Gap (corrected 2026-09-21):** the CAUSE, unchanged. WATCH FOR A SWAP
+THAT TOOK MORE THAN ONE ATTEMPT -- the builder's `[SWAP]` line now says it
+on screen, and the maintenance run's last line reads it back from the
+log. That is the fix doing its job, and until one appears the retry is
+unproven. The empty " (N)" folders are a second, smaller symptom with the
+same suspected cause and no known harm. The move off OneDrive is Tony's
+and is UNDECIDED; the analysis, the inventory and what a move would need
+first are in the 2026-09-20 notes above.
 **Ref:** `tools/gallery_cache_builder.py` `atomic_swap_dir` (~1176),
 `recover_incomplete_swap` (~1223), `_sweep_siblings` (~1241) in the
 gallery repo; run records `20260819T214723Z.json` (failed) and

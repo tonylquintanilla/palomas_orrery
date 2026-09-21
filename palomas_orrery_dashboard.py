@@ -111,6 +111,11 @@ No button added, removed or reordered, and no code path touched. The
 dashboard was not in that build's manifest and the build never opened
 it, which is how three descriptions came to describe tools as they were
 the morning before.
+September 21, 2026 with Anthropic's Claude Opus 5 (L-216, patch 8b): the
+builder button's routine now matches what the builder prints -- a [SWAP]
+line, then its own numbered steps, the maintenance run BEFORE the commit
+-- and Gallery Builder Offline Tests no longer carries a check count,
+which went stale the day after it was written.
 """
 
 import os
@@ -228,15 +233,16 @@ LAUNCH_GROUPS = {
          "--first-build).\n"
          "\n"
          "THE ROUTINE (L-216). Pause OneDrive syncing and NOTE THE TIME -- "
-         "a pause lasts 2 hours -- then run the build and watch GitHub "
-         "Desktop's change list. Afterwards run Gallery Maintenance Run -- "
-         "offline; its last line reports the swap. The swap now retries a "
-         "refused rename for about fifty seconds, and puts the PREVIOUS "
-         "cache back if it still cannot finish, so you are never left "
-         "without one. A line in data/cache_swap_log.jsonl showing more "
-         "than one attempt and outcome \"ok\" is a refusal it absorbed -- "
-         "and that line is the only way you will know, because a retry "
-         "that worked looks like an ordinary run.",
+         "a pause lasts 2 hours -- then run the build. It ends with a "
+         "[SWAP] line saying how the swap went, and then prints its own "
+         "numbered next steps. Follow them: run Gallery Maintenance Run -- "
+         "offline BEFORE you commit, and check that its last line agrees "
+         "with the [SWAP] line; then look at GitHub Desktop's change list, "
+         "commit and push. The swap retries a refused rename for about "
+         "fifty seconds and puts the PREVIOUS cache back if it still "
+         "cannot finish, so you are never left without one. A swap that "
+         "took more than one attempt is a refusal the builder absorbed, "
+         "and those two lines are the only way you will know.",
          GALLERY_REPO_DIR,
          True),
         ("Gallery Maintenance Run -- offline",
@@ -344,13 +350,15 @@ LAUNCH_GROUPS = {
         "test_gallery_cache_builder_offline.py",
         "Offline smoke test for gallery_cache_builder.py: mocks Horizons, "
         "exercises first-build, nightly re-run, and the Guard v2 monitor path. "
-        "No network. 190 checks as of 2026-09-20, up from 167: the new 23 "
-        "cover the swap's retries, the roll-back that puts the previous "
-        "cache back, the swap log, a dry run leaving that log alone, and "
-        "the sibling report naming folders the builder did not make "
-        "(L-216). The lock itself cannot be produced in a sandbox, so a "
-        "refused rename is simulated through the builder's own _rename "
-        "seam -- the same name the real build path goes through.",
+        "No network. Since L-216 it also covers the swap's retries, the "
+        "roll-back that puts the previous cache back, the swap log, a dry "
+        "run leaving that log alone, the sibling report naming folders the "
+        "builder did not make, the builder SAYING how each swap went, the "
+        "maintenance run reading every rename, and the next steps printing "
+        "only after a good hand run. The lock itself cannot be produced in "
+        "a sandbox, so a refused rename is simulated through the builder's "
+        "own _rename seam -- the same name the real build path goes "
+        "through. The run itself prints the current count of checks.",
         GALLERY_TOOLS_DIR,
         True,
         None,
