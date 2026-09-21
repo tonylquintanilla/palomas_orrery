@@ -100,6 +100,17 @@ or Enter" whenever the box and the drawn list disagree -- without it a
 typed-but-unsearched box would sit above a list that silently did not
 match it. Clear empties the box and brings every group back in one
 action.
+September 20, 2026 with Anthropic's Claude Opus 5 (L-216): rewrote three
+descriptions the L-216 build had made stale, and put Tony's four-step
+cache-build routine on Gallery Cache Builder -- Manual Run, which is the
+screen he launches the build from. Gallery Cache Builder now carries the
+routine and what the hardened swap does; Cache Siblings says it names
+every other directory in data/, not only the builder's own leftovers;
+Gallery Builder Offline Tests says 190 checks and what the new 23 cover.
+No button added, removed or reordered, and no code path touched. The
+dashboard was not in that build's manifest and the build never opened
+it, which is how three descriptions came to describe tools as they were
+the morning before.
 """
 
 import os
@@ -214,7 +225,18 @@ LAUNCH_GROUPS = {
          "the working tree shows deletions only, which is the swap in "
          "progress, not data loss. The console stays open at the repo root "
          "if you want a flagged re-run (--dry-run --object <slug>, "
-         "--first-build).",
+         "--first-build).\n"
+         "\n"
+         "THE ROUTINE (L-216). Pause OneDrive syncing and NOTE THE TIME -- "
+         "a pause lasts 2 hours -- then run the build and watch GitHub "
+         "Desktop's change list. Afterwards run Gallery Maintenance Run -- "
+         "offline; its last line reports the swap. The swap now retries a "
+         "refused rename for about fifty seconds, and puts the PREVIOUS "
+         "cache back if it still cannot finish, so you are never left "
+         "without one. A line in data/cache_swap_log.jsonl showing more "
+         "than one attempt and outcome \"ok\" is a refusal it absorbed -- "
+         "and that line is the only way you will know, because a retry "
+         "that worked looks like an ordinary run.",
          GALLERY_REPO_DIR,
          True),
         ("Gallery Maintenance Run -- offline",
@@ -266,7 +288,16 @@ LAUNCH_GROUPS = {
         "reap. Report-only: it exits 0 whatever it finds. It exists because "
         "the builder's sweep failed silently for six weeks and nothing said "
         "so (L-274); if it goes quiet again this says so within a day. "
-        "Runs from the gallery repo ROOT and deletes nothing.",
+        "Runs from the gallery repo ROOT and deletes nothing.\n"
+        "\n"
+        "SINCE 2026-09-20 (L-216) it also names every OTHER directory in "
+        "data/, under its own heading -- OneDrive's conflict copies land "
+        "there and the sweep will never touch them. It used to look only "
+        "for the builder's own name shapes, so four of them printed as "
+        "\"no sibling directories\". One had been published by accident "
+        "and held the only copy of 38 days of run history, now kept at "
+        "documentation/cache_run_history/. Judge a copy by what is inside "
+        "it, not by its name.",
         GALLERY_REPO_DIR,
         True,
         None,
@@ -313,7 +344,13 @@ LAUNCH_GROUPS = {
         "test_gallery_cache_builder_offline.py",
         "Offline smoke test for gallery_cache_builder.py: mocks Horizons, "
         "exercises first-build, nightly re-run, and the Guard v2 monitor path. "
-        "No network.",
+        "No network. 190 checks as of 2026-09-20, up from 167: the new 23 "
+        "cover the swap's retries, the roll-back that puts the previous "
+        "cache back, the swap log, a dry run leaving that log alone, and "
+        "the sibling report naming folders the builder did not make "
+        "(L-216). The lock itself cannot be produced in a sandbox, so a "
+        "refused rename is simulated through the builder's own _rename "
+        "seam -- the same name the real build path goes through.",
         GALLERY_TOOLS_DIR,
         True,
         None,
