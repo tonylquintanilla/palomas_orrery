@@ -1,0 +1,19 @@
+Tony, **I agree with the review’s central conclusion: Findings A and B need resolution before this design proceeds.** The review identifies an actual conflict between the rules and their implementation. I would accept it with two clarifications.
+
+I read `PROJECT_INSTRUCTIONS.md`, specifically “Fetched vs Recalled Convention” and “The Braid,” and `skills/provenance-discipline/SKILL.md` v2.16, specifically “When the source gives a range,” Rules 1–8, and “The ceiling,” at the named orrery commit `a318b3ec…`. I also inspected the figure walker, dimensional checker, exporter, and outer-belt drawing reference. My assessment covers this review and those pinned files; I did not have the original rev2 addendum to independently check its complete wording.
+
+**Finding A is substantiated and is the most consequential issue.** I ran the pinned figure walker on `(L4 + L5) / 2` with one-figure endpoints: it returns 4.5 with a one-figure allowance. The pinned exporter then rounds that to 4.0. The orrery reads the store value directly. The described design therefore creates a real discrepancy between drawing consumers.
+
+My recommended resolution is to distinguish the precision of a measured claim from the numerical definition of a drawing choice. The midpoint is a reproducible placement rule; it does not establish a measured peak at precisely 4.5. Both consumers should receive the same computed placement, while the hover reports the sourced range. This needs an explicit rule and corresponding checker/export behavior. Simply marking the existing expression “exact” would conceal the unresolved distinction. Any exactness must mean **exact as a declared construction**, with the measured endpoints’ provenance preserved.
+
+**Finding B is also substantially correct, but its suggested equivalency remedy needs tightening.** Both function tables lack `hypot`. Using a reconstructed derivative expression and stand-in coefficient rows, I reproduced the reported tilt, 9.410531…, and rate, −0.049276605…, with walker counts of five and three respectively. That verifies the counting behavior, not the scientific provenance of the proposed inputs.
+
+I also tested the angular-unit issue. `np.degrees()` rejects a per-year quantity **even with `dimensionless_angles()` enabled**. An explicit conversion to degrees per year using that equivalency succeeds; attaching the mathematically justified radian unit and converting radians per year also succeeds. Thus, the review identifies the right problem, but enabling an equivalency alone does not repair the expression. The adopted method must preserve inverse time throughout the conversion. Astropy documents that its angle equivalency supports compound units. ([Astropy v8.0.1][1])
+
+The other clarification concerns the quoted uncertainty of approximately 0.00013 degrees per year. That is a check based on **input reporting resolution**, not an established uncertainty of the geomagnetic model or a guarantee about future drift. Under “The ceiling,” implied uncertainties alone do not replace the counting route. The review should describe that calculation as corroboration and show its assumptions if retained.
+
+Findings C and D are sensible corrections. C should describe excess displayed precision rather than promise a particular obsolete number. D should explicitly record that the deferred display-formatting class has no automated coverage, so closing the Earth slice cannot be mistaken for checking those sites.
+
+My recommendation is to accept the review, tighten those qualifications, and request a bounded revision addressing the midpoint’s meaning and export behavior, the angular-rate conversion, and the coverage statement. No broader rewrite is warranted by these findings.
+
+[1]: https://docs.astropy.org/en/stable/api/astropy.units.dimensionless_angles.html?utm_source=chatgpt.com "dimensionless_angles"
