@@ -19,15 +19,17 @@ serves at `26f26fdb`; none is typed.
 Mark anything you want changed. Anything you do not mark ships as
 written.
 
+**Tony**: see -- notes 9-22-26
+
 ---
 
 ## 1. Magnetopause hover
 
 | Line | Today | After |
 | --- | --- | --- |
-| standoff | Sunward standoff: 10.25 Earth radii | Sunward standoff: 10.3 Earth radii |
-| distance | = 65,376 km (0.000437 AU) | That is about 65,000 km (0.00044 AU). |
-| NEW | -- | Spacecraft that cross the real boundary typically find it within 1.23 Earth radii of this model. |
+| standoff | Sunward standoff: 10.25 Earth radii | Sunward standoff: 10.3 Earth radii | -- correct
+| distance | = 65,376 km (0.000437 AU) | That is about 65,000 km (0.00044 AU). | -- correct
+| NEW | -- | Spacecraft that cross the real boundary typically find it within 1.23 Earth radii of this model. | -- correct
 
 Why "about": a visitor who multiplies 10.3 by Earth's radius gets
 65,700, which reads as 66,000. The page prints 65,000 because the store
@@ -49,9 +51,9 @@ without the statistics word.
 
 | Line | Today | After |
 | --- | --- | --- |
-| standoff | Sunward standoff: 13.51 Earth radii | Sunward standoff: 13.5 Earth radii |
-| distance | = 86,180 km (0.000576 AU) | That is about 86,200 km (0.000576 AU). |
-| NEW | -- | Spacecraft that cross the real shock typically find it within 0.69 Earth radii of this model. |
+| standoff | Sunward standoff: 13.51 Earth radii | Sunward standoff: 13.5 Earth radii | -- correct
+| distance | = 86,180 km (0.000576 AU) | That is about 86,200 km (0.000576 AU). | -- correct
+| NEW | -- | Spacecraft that cross the real shock typically find it within 0.69 Earth radii of this model. | -- correct
 
 Same reasons as the magnetopause. "About" is kept here too so the two
 hovers read alike.
@@ -64,7 +66,7 @@ Today, one sentence:
 > magnetic equator, which is tilted 9.6 degrees from it (IGRF-13, epoch
 > 2020-2025) and turns with Earth once a day.
 
-After, split into two so each does one job:
+After, split into two so each does one job: -- correct
 
 > The ring lies in Earth's equatorial plane, the daily average of the
 > magnetic equator, which is tilted 9.4105 degrees from it and turns
@@ -86,7 +88,7 @@ Today, two lines:
 > (given as L = 4.5: where that field line crosses the magnetic equator)
 > = 28,702 km (0.000192 AU)
 
-After, two lines, and the kilometre line goes:
+After, two lines, and the kilometre line goes: -- correct
 
 > Drawn at 4.5 Earth radii: halfway across the band, 4 to 5 Earth radii
 > out at the magnetic equator, where the belt is most intense.
@@ -109,9 +111,9 @@ phone surprises you.
 
 | Hover | Today | After |
 | --- | --- | --- |
-| Inner belt, distance | = 9,567 km (0.0000640 AU) | = 9,600 km (0.000064 AU) |
-| Inner belt, extent | Measured extent: 1.1 to 2.0 Earth radii | Measured extent: 1.1 to 2 Earth radii |
-| Outer belt, extent | Measured extent: 3.0 to 7.0 Earth radii | Measured extent: 3 to 7 Earth radii |
+| Inner belt, distance | = 9,567 km (0.0000640 AU) | = 9,600 km (0.000064 AU) | -- correct
+| Inner belt, extent | Measured extent: 1.1 to 2.0 Earth radii | Measured extent: 1.1 to 2 Earth radii | -- correct
+| Outer belt, extent | Measured extent: 3.0 to 7.0 Earth radii | Measured extent: 3 to 7 Earth radii | -- correct
 
 "1.1 to 2" will look uneven. It is what the sources print: Meredith
 (2014) gives "1.1" and "2", and the store now declares each end by what
@@ -127,13 +129,13 @@ These are read in the "i" panel, not the hover. The change removes the
 sentence that typed the old standoff and claimed four figures. Nothing
 else is reworded.
 
-**Magnetopause**, the sentence removed:
+**Magnetopause**, the sentence removed: 
 
 > ...gives 10.25 R_E. Reported to four figures: Table 1 gives a1 to
 > +/- 0.10 R_E and a5 to +/- 0.5, and either alone moves the result by
 > about +/- 0.09.
 
-After:
+After: -- correct
 
 > Shue et al. (1998), J. Geophys. Res. 103:17691, doi:10.1029/98JA01103
 > -- eq. 10 evaluated at the declared conditions (Bz = 0 nT, Dp = 2
@@ -146,7 +148,7 @@ After:
 > uncertainty on its fitted numbers, and what bounds this is the
 > crossing scatter of 0.69 R_E (fig. 7).
 
-After:
+After: -- correct
 
 > Jelinek, Nemecek and Safrankova (2012), J. Geophys. Res. 117:A05208,
 > doi:10.1029/2011JA017252 -- eq. 14, R_BS = 15.02 p^(-1/6.55),
