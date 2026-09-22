@@ -1,7 +1,7 @@
 <!-- Doc-Kind: generated | The provenance audit: every numeric claim scored against its citation, rebuilt by provenance_scanner.py on each run. Do not hand-edit. -->
 # Paloma's Orrery -- Provenance Audit
 
-Generated: September 21, 2026
+Generated: September 22, 2026
 Files scanned: 137
 Total findings: 1068
 Constants: 148 | Dicts: 41 | Display strings: 879
@@ -20,12 +20,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260922T150258Z | `1f6e55a` | 137 | 1068 | 293 | 655 | 118 | 2 |
 | 20260921T215335Z | `a7014ab` | 137 | 1068 | 293 | 655 | 118 | 2 |
 | 20260921T195156Z | `b9cd484` | 136 | 1068 | 293 | 655 | 118 | 2 |
 | 20260921T032857Z | `d426ec0` | 136 | 1068 | 293 | 655 | 118 | 2 |
 | 20260920T233517Z | `ba94e80` | 136 | 1068 | 293 | 655 | 118 | 2 |
 | 20260920T195152Z | `ee37cc1` | 136 | 1068 | 293 | 655 | 118 | 2 |
-| 20260920T181013Z | `46ead2f` | 137 | 1068 | 293 | 655 | 118 | 2 |
 
 Change since the previous run: total +0, Tier-1 +0.
 

@@ -74,7 +74,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 445.0 MB (624 files)
+**Total size:** 445.0 MB (626 files)
 
 **GitHub Pages headroom:** 579 MB remaining of 1024 MB ceiling (43.5% used)
 
@@ -82,12 +82,12 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 351 | 420.3 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-21 |
+| .json | 353 | 420.3 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-09-22 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 1 | 5.1 MB | palomas_orrery_logo.png (5.1 MB) | 2025-11-27 |
 | .py | 154 | 3.0 MB | gallery_studio.py (243.1 KB) | 2026-09-21 |
-| .jsonl | 34 | 854.3 KB | encke.jsonl (26.5 KB) | 2026-09-21 |
-| .md | 16 | 703.4 KB | TEST_PROTOCOL_sun_hang_20260902.md (526.5 KB) | 2026-09-21 |
+| .jsonl | 34 | 861.7 KB | encke.jsonl (26.8 KB) | 2026-09-22 |
+| .md | 16 | 703.4 KB | TEST_PROTOCOL_sun_hang_20260902.md (526.5 KB) | 2026-09-22 |
 | .html | 5 | 329.0 KB | index.html (156.6 KB) | 2026-09-19 |
 | .js | 11 | 244.6 KB | feature_renderers.js (99.4 KB) | 2026-09-20 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
@@ -97,7 +97,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 | .mermaid | 1 | 7.4 KB | gallery_navigation_flowchart.mermaid (7.4 KB) | 2026-03-08 |
 | .bat | 1 | 3.7 KB | _run_local_server.bat (3.7 KB) | 2026-08-24 |
 | .url | 1 | 176.0 B | Paloma's Orrery - Interactive Astronomical Visualizations.url (176.0 B) | 2026-02-27 |
-| .sha | 1 | 41.0 B | constants_export.sha (41.0 B) | 2026-09-21 |
+| .sha | 1 | 41.0 B | constants_export.sha (41.0 B) | 2026-09-22 |
 | (none) | 1 | 17.0 B | CNAME (17.0 B) | 2026-02-13 |
 
 ### Largest files (top 10)

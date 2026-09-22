@@ -1385,6 +1385,61 @@ resident.
 (Moved down from the resident protocol on 2026-09-21 when
 v3.66 made a fourth entry.)
 
+v3.64 (September 19, 2026): No rule changed in this document. ONE
+skill bump, taken after a review found a rule being decided in the
+wrong place.
+
+provenance-discipline 2.14 -> 2.15 (L-342). THE FIGURE RULES ARE
+REPAIRED AGAINST THE SOURCE THEY CITE.
+
+WHAT WENT WRONG IS INSTRUCTIVE AND IS NOT A COUNTING ERROR. L-322's
+Earth walk met PREM's `3480.0` and had to decide whether that trailing
+zero counted. The skill's Rule 2 said it did, full stop. The walk
+decided it did not, wrote a reason into that one constant's comment
+line -- that a zero in a padded decimal place is the table's formatting
+-- and moved on. Both were wrong, and the page the skill cites settles
+it: a trailing zero after a decimal point counts WHEN IT FALLS WITHIN
+THE SOURCE'S REPORTING RESOLUTION. Rule 2 had dropped four words, which
+made it wrong for the page's own example of 1500 m; the walk's
+replacement was wrong the other way and, worse, was settled inside a
+comment where it read as fact and would have been followed without
+being noticed. That is the second failure direction Method Belongs to
+the Skill names, and this is what it looks like in practice.
+
+RULE 3 GAINS A SENTENCE IT NEVER HAD: a row may declare fewer figures
+than its inputs support when the relation ITSELF is approximate, with
+the reason in words on the row. Counting governs how precision flows
+through arithmetic and says nothing about a formula that is an
+idealisation to begin with. Earth's Hill sphere declared seven figures
+by counting and told the reader in its own next sentence to report
+three, and the gallery, which formats from the declared count, showed a
+visitor 234.6388 Earth radii.
+
+THE ASTM REFERENCE IS DEMOTED TO AN ASIDE, on Tony's ruling. E29 costs
+$86, so a rule this project works from could not be opened by anybody
+in the loop -- the skill-layer form of a citation nobody read, and a
+failure of our own Access Standard. Its scope is conformance with
+specification limits, which this store does not have. The reference is
+now the open page alone, so every rule can be checked against it by
+anybody. Asked whether to adopt the standard verbatim instead of
+restating it, the answer is that verbatim would not have helped: what
+failed was that nobody could check the restatement against its source
+without opening the source.
+
+THE OBLIGATION TRAVELS, as it always does. This session loaded 2.14,
+and a reinstall cannot be verified from inside the session that makes
+it. The next session confirms its loaded copy reads 2.15 before any
+provenance or store work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.61 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-09-22 when
+v3.67 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

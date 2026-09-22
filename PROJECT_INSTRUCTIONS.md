@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.66 | September 21, 2026
+Tony Quintanilla, PE | Claude | v3.67 | September 22, 2026
 
-Cut from a7014abb at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 1f6e55a9 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -488,7 +488,7 @@ agentic-pre-test             1.2  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
 horizons-orbital-mechanics   1.1  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning
-provenance-discipline        2.16 Scanner runs, audits, citations, constants,
+provenance-discipline        2.17 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
 earth-system-pipeline        1.1  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY
@@ -1158,6 +1158,86 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.67 (September 22, 2026): No rule changed in this document. ONE
+skill bump, the second taken ahead of the C2 build, which is v3.55's
+ordering applied twice to one build.
+
+provenance-discipline 2.16 -> 2.17 (L-322). A DISPLAY NEVER CHOOSES A
+COUNT, AND THREE STORAGE FORMS ARE WRITTEN DOWN.
+
+THE QUESTION THAT STARTED IT WAS TONY'S. Asked whether Earth's dipole
+tilt should print 9.4 or 9.4105, the reviewing session offered a
+readability call. Tony, 2026-09-21: "when it comes to a decision,
+what is the basis? the basis should be in the skill not arbitrary."
+There was none. Rule 7 let a display show fewer figures and said
+nothing about when, so every use of it reached the integrator, which
+is the failure Method Belongs to the Skill names. Rule 7 is replaced
+whole: a display prints the declared count; a number that reads as
+too many figures is a finding about the row, fixed under Rule 3 where
+it is recorded, never by the page. That takes item 9 -- the
+geocorona, LEO's inner edge, the outer belt -- off Tony's decision
+list, because each resolves on its row.
+
+THE TILT WAS THE WORKED CASE, AND IT WAS WRONG IN THE STORE. IGRF-13
+prints no tilt; it prints the three degree-1 coefficients and says the
+pole is computed from them. The stored 9.6 is in no epoch of the
+cited source, and the row's drift rate was off by a factor of ten.
+Three forms are now in the skill. A whole the source defines from
+parts it prints is a derived row over rows for the parts, never a
+typed result with its working in a comment. A rate is the derivative
+expression, never a difference of two evaluations, because the
+difference form takes its count from the largest inputs and not from
+the quantities the rate rests on. An angle computed from a pure
+number multiplies by the exact row DEG_PER_RAD instead of calling
+degrees, because the unit check sees a bare number and refuses the
+call -- found only when Opus ran the unit checker on the tilt, which
+nobody had done, including the session that had said the checkers
+accepted everything the tilt needed.
+
+THE OUTER BELT TAUGHT THE DECLARED CONSTRUCTION. Its peak is typed
+4.5 with its L = 4 to 5 band in prose, which When the source gives a
+range already did not allow. Making it an expression over two
+one-figure band rows met three rules at once: Rule 2 says a declared
+pick is exact, the checker counts an expression from its measured
+inputs, and the export rounds to the count -- and measured, that
+exported 4.0 for the gallery while the orrery drew 4.5 from the
+float, two consumers drawing two rings. Rule 2 now names a declared
+construction: exact as a rule, accepted by the checker only on a row
+whose status begins declared, served unrounded so every consumer
+draws the same value, and shown to the visitor as the range and the
+rule rather than as a measurement.
+
+EACH ROUND WAS TESTED BEFORE THE NEXT. Five documents on 2026-09-21,
+by Claude Fable 5.1 and Claude Opus 5 with one round reviewed by GPT
+6, and each one's proposals were run through the figures walker, the
+unit checker and the export on a throwaway copy of the store before
+the next was written. Three of Fable's own proposals failed those
+runs and were corrected in the next revision: a row that was at once
+an expression over measured rows and exact, a rate counted at two
+figures where the sum inside it carries three, and a function the
+checkers do not know. The reach of the new Rule 7 was enumerated
+before it was adopted, as The Braid requires: the gallery's Earth
+room gains no failure, and the orrery's Earth hovers carry 47 format
+sites on 35 lines, named by line in the rev2 addendum, of which four
+come into C2 and the rest are one ledger class with no automated
+coverage, stated as such so a closed slice is not read as covering
+them.
+
+THE OBLIGATION TRAVELS, as it always does. The session that cut this
+bump had 2.15 mounted, the protocol in its context having refreshed
+to 2.16 mid-session, which is the note owed to Stale Skill = Stop
+since the C2 manifest; it worked from the repo copy at 1f6e55a9 and
+said so. The next session confirms its loaded copy reads 2.17 before
+any provenance or store work, and that session is the C2 build, from
+documentation/BUILD_MANIFEST_L322_C2_magnetosphere_20260920.md with
+its section 17.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.64 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.66 (September 21, 2026): No rule changed in this document. ONE
 skill bump, taken ahead of the build it serves, which is v3.55's
 ordering.
@@ -1266,58 +1346,6 @@ The next session confirms its loaded copy reads 1.6 before cache work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.62 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.64 (September 19, 2026): No rule changed in this document. ONE
-skill bump, taken after a review found a rule being decided in the
-wrong place.
-
-provenance-discipline 2.14 -> 2.15 (L-342). THE FIGURE RULES ARE
-REPAIRED AGAINST THE SOURCE THEY CITE.
-
-WHAT WENT WRONG IS INSTRUCTIVE AND IS NOT A COUNTING ERROR. L-322's
-Earth walk met PREM's `3480.0` and had to decide whether that trailing
-zero counted. The skill's Rule 2 said it did, full stop. The walk
-decided it did not, wrote a reason into that one constant's comment
-line -- that a zero in a padded decimal place is the table's formatting
--- and moved on. Both were wrong, and the page the skill cites settles
-it: a trailing zero after a decimal point counts WHEN IT FALLS WITHIN
-THE SOURCE'S REPORTING RESOLUTION. Rule 2 had dropped four words, which
-made it wrong for the page's own example of 1500 m; the walk's
-replacement was wrong the other way and, worse, was settled inside a
-comment where it read as fact and would have been followed without
-being noticed. That is the second failure direction Method Belongs to
-the Skill names, and this is what it looks like in practice.
-
-RULE 3 GAINS A SENTENCE IT NEVER HAD: a row may declare fewer figures
-than its inputs support when the relation ITSELF is approximate, with
-the reason in words on the row. Counting governs how precision flows
-through arithmetic and says nothing about a formula that is an
-idealisation to begin with. Earth's Hill sphere declared seven figures
-by counting and told the reader in its own next sentence to report
-three, and the gallery, which formats from the declared count, showed a
-visitor 234.6388 Earth radii.
-
-THE ASTM REFERENCE IS DEMOTED TO AN ASIDE, on Tony's ruling. E29 costs
-$86, so a rule this project works from could not be opened by anybody
-in the loop -- the skill-layer form of a citation nobody read, and a
-failure of our own Access Standard. Its scope is conformance with
-specification limits, which this store does not have. The reference is
-now the open page alone, so every rule can be checked against it by
-anybody. Asked whether to adopt the standard verbatim instead of
-restating it, the answer is that verbatim would not have helped: what
-failed was that nobody could check the restatement against its source
-without opening the source.
-
-THE OBLIGATION TRAVELS, as it always does. This session loaded 2.14,
-and a reinstall cannot be verified from inside the session that makes
-it. The next session confirms its loaded copy reads 2.15 before any
-provenance or store work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.61 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

@@ -1124,7 +1124,141 @@ findings:
   5.2 heading records the ruling; section 8 says "rolls back"; the
   closing stamp carries both dates.
 
+## 17. The tilt rounds of 2026-09-21, consolidated for the build
+
+Written September 22, 2026 by Claude Fable 5.1 at the 2.17 cut. Five
+documents in `documentation/` carry the working: the reply
+(`REPLY_L322_C2_dipole_tilt_method_fable_20260921.md`), three
+addendum revisions (`ADDENDUM_L322_C2_dipole_tilt_display_rule_fable
+_20260921.md`, `_rev2_`, `_rev3_`), Opus's two reviews and its note
+(`NOTE_L322_C2_rev3_check_opus_20260921.md`), and GPT 6's review.
+Where this section and an earlier section disagree, this section
+governs. Rules named below are provenance-discipline 2.17.
+
+### 17.1 Rows added or changed, beyond section 4
+
+| Row | Form | Figures | Read |
+| --- | --- | --- | --- |
+| `DEG_PER_RAD` (new) | `180.0 / np.pi`, unit `deg` | exact -- a definition; no store inputs, so its unit is asserted, and the row says so | none |
+| `EARTH_IGRF13_G10_NT`, `_G11_NT`, `_H11_NT` (new) | measured, 2020.0 column: -29404.8, -1450.9, 4652.5 | 6, 5, 5 -- the file prints the 2020.0 column to 0.1 nT, its REPORTING resolution (definitive epochs print to 0.01); Lowes (2000), the error budget the paper names, not opened, recorded as a class | NOAA `igrf13coeffs.txt`, opened 2026-09-21 by Claude Opus 5 |
+| `EARTH_IGRF13_G10_SV_NT_PER_YEAR`, `_G11_SV_`, `_H11_SV_` (new) | measured, 2020-25 column: 5.7, 7.4, -25.9; token `nt_per_year` | 2, 2, 3 | same file, same read |
+| `EARTH_DIPOLE_TILT_DEG` | `np.arctan(np.sqrt(G11**2 + H11**2) / abs(G10)) * DEG_PER_RAD`, over the three main-field rows | 5 -- set by G11 and H11 (5); 9.4105 at epoch 2020.0 | none; derived. Source: Alken et al. (2021), full text, for the RELATION -- the poles are computed from the degree-1 coefficients |
+| `EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR` (new) | the derivative, section 17.2; token `deg_per_year` | 3 -- set by the sum `G11*G11' + H11*H11'`, good to thousands; -0.0493 | none; derived |
+| `EARTH_VAN_ALLEN_OUTER_BAND_LOW_L`, `_HIGH_L` (new) | measured, 4 and 5, unit `l_shell` | 1 each | builder opens Li et al. (2025) sec. 1 at the row's par.nsf.gov link; Li et al. (2015) and Kellerman (2014, via arXiv 1809.00902) as `# Source+:` |
+| `EARTH_VAN_ALLEN_OUTER_RADII` | `(LOW + HIGH) / 2`; status `declared` naming the rule | exact -- declared construction: midpoint of the two band rows | none; declared |
+
+The tilt row's note loses its sentences on rounding to a tenth, on
+"0.05 deg per decade" (the source gives 0.05 per YEAR), and on NOAA's
+WMM figures, which were never opened (A Breadcrumb Must Not Cite).
+Its words say epoch 2020.0 and IGRF-13 by name; IGRF-14 (June 2026)
+is recorded as a re-sourcing, not done. Tokens `nt_per_year`
+(nT/yr) and `deg_per_year` (deg/yr) join 4.1, each mapped to its
+astropy unit.
+
+### 17.2 The rate row, as it passed both checkers
+
+```python
+EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR = (
+    (abs(EARTH_IGRF13_G10_NT)
+     * (EARTH_IGRF13_G11_NT * EARTH_IGRF13_G11_SV_NT_PER_YEAR
+        + EARTH_IGRF13_H11_NT * EARTH_IGRF13_H11_SV_NT_PER_YEAR)
+     / np.sqrt(EARTH_IGRF13_G11_NT**2 + EARTH_IGRF13_H11_NT**2)
+     + np.sqrt(EARTH_IGRF13_G11_NT**2 + EARTH_IGRF13_H11_NT**2)
+     * EARTH_IGRF13_G10_SV_NT_PER_YEAR)
+    / (EARTH_IGRF13_G11_NT**2 + EARTH_IGRF13_H11_NT**2
+       + EARTH_IGRF13_G10_NT**2)
+) * DEG_PER_RAD
+```
+
+Opus ran this and the tilt on a throwaway store at `a318b3ec`: unit
+check OK (deg_per_year, -0.0492766; deg, 9.41053), figures check
+within what the inputs support (3; 5). `np.degrees` on either FAILS
+the unit check and is not used. The second term is `- H * d|g10|/dt`
+with `d|g10|/dt = -g10'` for negative g10, hence the plus sign.
+
+### 17.3 The checker, beyond 4.7
+
+- `test_derived_figures.py` accepts `exact` on a row whose `# Status:`
+  begins `declared` (not `declared pending`) when every row its
+  `# Figures:` line names is in the expression; it lists every such
+  declared construction by name in its output; and it is shown
+  failing on a `measured` row declaring exact over a measured input.
+
+### 17.4 Hovers, beyond section 6
+
+- Both belts, tilt line: the served tilt at its count, the epoch and
+  the served rate, all from the store: "tilted 9.4105 degrees from
+  it (IGRF-13, epoch 2020.0), decreasing about 0.0493 degrees a
+  year". Words Tony's. The renderer's typed "(IGRF-13, epoch
+  2020-2025)" goes; the epoch is served.
+- Outer belt: the line "Drawn at 4.5 Earth radii ... = 28,701.615 km
+  (0.000192 AU)" is replaced by the rule and the band from served
+  rows: "Drawn at the midpoint of the L = 4 to 5 band in which the
+  sources place the outer belt's greatest intensity". A declared
+  construction is not printed as a measurement, so it has no km line.
+  The existing "where the measured particle flux peaks" wording is
+  the class already in section 11; Tony's words.
+- Section 13, item 9 is removed: the geocorona and LEO's inner edge
+  print as their rows declare, and the outer belt resolves above.
+
+### 17.5 Orrery display sites that come into C2
+
+- `earth_visualization_shells.py`, the four `:.4g` sites on the two
+  standoffs (lines 791, 801, 882, 950 at `a318b3ec`): after C2 they
+  print the new expressions to four figures, more than the declared
+  three. They format by the export's declared count instead.
+- `earth_visualization_shells.py` line 1011, the typed "L = 4 to 5
+  band": printed from the two band rows.
+- `planet_visualization_utilities.py`, the `PLANET_DIPOLE['Earth']`
+  note and hover strings typing "~9.6 deg" and the drift, and the
+  comment near line 693; `earth_visualization_shells.py` comments
+  near lines 869 and 1046 naming 9.6.
+
+### 17.6 Reads already done, and the one that was Tony's
+
+The Opus session of 2026-09-21 read, and the C2 read record takes
+from `NOTE_L322_C2_rev3_check_opus_20260921.md` without repeating:
+Baker (2018) sec. 2; Meredith (2014) intro para. 1 (via the Wiley
+page, the NORA PDF refusing); Li, Tu et al. (2024) intro para. 1;
+Alken et al. (2021) full text; the NOAA file; and Alken Table 4's
+2020.0 row via a ResearchGate copy, north geomagnetic pole at 80.65
+N, -72.68 E, which the coefficients reproduce as 80.6512, -72.6797.
+That last read was the "For Tony to read" entry the reply proposed;
+it is done, and the section is expected empty again. NOT yet read:
+the magnetotail (NTRS 19830066648) and the outer-belt band sources,
+which the builder opens.
+
+### 17.7 Ledger classes added to section 11
+
+- The orrery's Earth display sites format by fixed width: 47 sites on
+  35 lines of `earth_visualization_shells.py`, four kinds, named by
+  line in the rev2 addendum. NO automated coverage: no checker reads
+  orrery display formatting, so a closed Earth slice does not cover
+  them. A helper that formats a row by the export's declared count is
+  the follow-on's mechanism, not designed here.
+- A count taken from a file's print resolution where a published
+  error budget exists and is unopened (IGRF-13 and Lowes 2000).
+- Declared picks with their range in prose on other bodies (the Sun's
+  helmet cusp, "top of measured 2-4 range").
+- Rate rows and angle rows on other bodies (Earth's pole at Stage D,
+  the Moon's node) follow the two Rule 3 forms.
+- The two static gallery card exports typing "~9.6 deg" twice each,
+  and `documentation/fixture_hovers_cdfa74c3.json` if nothing
+  references it.
+- IGRF-14 as a re-sourcing of the six coefficient rows.
+
+### 17.8 Section 12 and section 14, amended
+
+Section 12: not "any new measured or declared constant" -- a row that
+feeds a drawn value is in bound whatever its count (The Read Field's
+scope sentence). C2 adds eight measured rows and one exact definition
+under that principle. Section 14 gains: the figures checker's output
+names the outer-belt peak as a declared construction; both belt
+hovers print the tilt, epoch and rate from served rows; the four
+`:.4g` sites format by the declared count.
+
 ---
 
 Written September 20, 2026, and revised September 21, 2026, with
-Anthropic's Claude Opus 5.
+Anthropic's Claude Opus 5. Section 17 added September 22, 2026 with
+Anthropic's Claude Fable 5.1.

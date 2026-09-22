@@ -1,7 +1,7 @@
 <!-- Doc-Kind: generated | The human-browsable module index, rebuilt by module_atlas.py alongside the atlas. Do not hand-edit. -->
 # Paloma's Orrery - Module Index
 
-**Generated:** September 21, 2026 by `module_atlas.py`  
+**Generated:** September 22, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -12,21 +12,21 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 137  
-**Total Lines of Code (non-blank):** 109,057  
+**Total Lines of Code (non-blank):** 109,244  
 **Total Public Functions/Classes:** 1,225
 
 ## Classification Coverage
 
 **Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L322_C2_0_skill_2_16_20260921.py`
+- `patch_L322_C2_0b_skill_2_17_20260922.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
 **Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L322_C2_0_skill_2_16_20260921.py`
+- `patch_L322_C2_0b_skill_2_17_20260922.py`
 
 
 ---
@@ -238,7 +238,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L322_C2_0_skill_2_16_20260921.py` | - ORRERY repo. (434 lines) |
+| `patch_L322_C2_0b_skill_2_17_20260922.py` | - ORRERY repo. (621 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |

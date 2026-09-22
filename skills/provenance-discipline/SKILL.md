@@ -6,13 +6,44 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 2.16 | Cut from palomas_orrery @ a7014abb (v2.16),
-earlier @ 21065c5d (v2.15), @ dfa779bd (v2.14), @ ebdc55cc (v2.13),
-@ bfc0505e (v2.12),
+Skill version: 2.17 | Cut from palomas_orrery @ 1f6e55a9 (v2.17),
+earlier @ a7014abb (v2.16), @ 21065c5d (v2.15), @ dfa779bd (v2.14),
+@ ebdc55cc (v2.13), @ bfc0505e (v2.12),
 earlier @ 159c5a2c (v2.11), @ 071a0a65 (v2.10), @ a263f73d (v2.9),
 @ 7f4a2f9f (v2.8), @ 3faa72a0 (v2.7), @ f603be3 (v2.6),
 @ 731066f (v2.5), @ 6b99ace (v2.2), @ 00219d9 (v2.1), @ eb77c83 (v2.0)
-| September 21, 2026
+| September 22, 2026
+v2.17 closes the gap a display decision opened. Asked whether Earth's
+dipole tilt should print 9.4 or 9.4105, a reviewer offered a
+readability call; Tony asked what the basis was -- "the basis should
+be in the skill not arbitrary" -- and there was none: Rule 7
+permitted a shorter display and gave no method. RULE 7 IS REPLACED
+WHOLE: a display prints the declared count and never chooses fewer;
+a number that reads as too many figures is a finding about the ROW,
+fixed under Rule 3, never by the page. RULE 2 GAINS THE DECLARED
+CONSTRUCTION: a drawing value that is a stated rule over measured
+rows is exact as a construction, the checker accepts exact on it
+only when its status begins declared, and the export serves it
+unrounded so every consumer draws the same value. RULE 3 GAINS two
+rules for a derived quantity: a rate is written as the derivative,
+never as a difference of two evaluations, because the difference
+form takes its count from the largest inputs rather than from the
+quantities the rate rests on; and an angle computed from a pure
+number multiplies by the exact row DEG_PER_RAD instead of calling
+degrees, because the unit check sees a bare number and refuses the
+call. SHOW OR CAP gains the snapshot of a moving quantity: where the
+source publishes the rate, the store holds its inputs and the page
+shows the epoch and the rate. RULE 6 says a whole the source defines
+from parts it prints is a derived row over rows for the parts, never
+a typed result with its working in a comment. WHEN THE SOURCE GIVES A
+RANGE says a pick typed as a literal with its range in prose does not
+meet it. The worked cases: Earth's dipole tilt, which IGRF-13 does
+not print and which the store held at 9.6, a figure in no epoch of
+the cited source; its rate; and the outer belt's peak, a midpoint of
+the L = 4 to 5 band typed as a literal with the band in prose. Five
+documents by Claude Fable 5.1 and Claude Opus 5 on 2026-09-21, each
+tested against the checkers before the next was written; GPT 6
+reviewed one round. Handle L-322.
 v2.16 writes down how a stated uncertainty decides a figure count,
 before L-322 Stage C2 builds the check for it. Rule 3 already said the
 uncertainty decides and counting is the fallback, and the procedure it
@@ -618,6 +649,14 @@ value in code, range in the description -- for any row where the range
 is genuinely the sourced object. The weaker form leaves the range in
 prose, where it cannot be interpolated and drifts from the number beside
 it.
+
+A pick typed as a literal with its range in `# Declared:` prose does
+not meet this section, however well the prose cites (v2.17): the range
+is rows, the pick is an expression over them -- a declared
+construction, Rule 2 -- and the display shows the range from those
+rows. Earth's outer-belt peak, typed 4.5 with its L = 4 to 5 band in
+prose and the band typed again as literal text in the orrery's own
+hover, was the corrected case at L-322 C2.
 
 ## A Drawing Approximation Does Not Promote [CRITICAL]
 
@@ -1823,6 +1862,25 @@ seven. A DECLARED drawing condition (a chosen solar wind pressure, a
 chosen cut angle) is exact for counting: it is a choice, not a
 measurement, so all of its digits are known.
 
+**A DECLARED CONSTRUCTION is exact in the same way** (v2.17). A drawing
+value that is a stated rule over measured rows -- the midpoint of a
+sourced band, the top of a sourced range -- is a choice, not a
+measurement, and its `# Figures:` line names the rule and the rows:
+`exact -- declared construction: midpoint of <row>, <row>`. The
+checker accepts `exact` only on a row whose `# Status:` begins
+`declared` (not `declared pending`), with every named row in the
+expression; a `measured` or `derived` row cannot declare exact over a
+measured input. The export serves an exact row unrounded, so every
+consumer draws the same value. The alternative was measured before
+this was written: counted to its rows' one figure, the outer belt's
+4.5 exported as 4.0 for the gallery while the orrery drew 4.5 from
+the float -- two consumers, two rings. The construction is not a
+measurement and the hover does not print it as one: it shows the
+range from the rows and states the rule (When the source gives a
+range). The checker lists every declared construction by name in its
+output, so each use is seen. Earth's outer-belt peak is the case
+(L-322 C2).
+
 **Rule 3. A derived row's count is set by its least precise MEASURED
 input.** Products and quotients keep the fewest figures among the
 inputs. Sums and differences are good to the coarsest decimal place
@@ -1848,6 +1906,32 @@ its inputs carry. This is a floor on honesty, not a licence to round to
 taste: the row must say WHICH approximation caps it and by roughly how
 much. (L-342, Fable's review of C1, Finding 3.)
 
+**A rate or other derivative row is written as the derivative
+expression over the rows, never as a difference of two evaluations**
+(v2.17). The difference form is counted by decimal place from the two
+evaluated values, whose places come from the largest inputs, so the
+quantities the rate rests on set no count and the row claims a
+precision it borrowed. Earth's dipole tilt rate is the case: as a
+one-year difference of two tilts it would carry the main field's
+places; as the derivative over the six IGRF-13 rows it carries three
+figures, set by the sum inside it, -0.0493 degrees per year.
+Time-rate rows use time-rate tokens (`nt_per_year`, `deg_per_year`).
+
+**An angle computed from a pure number never applies `degrees` to the
+result.** An inverse trigonometric function of a ratio, or a rate
+derived from one, comes out of the arithmetic as a bare number or an
+inverse time. The unit check reduces a ratio whose units cancel to a
+plain float before the function, so `degrees` of the result is a bare
+number declared in `deg`, a MISMATCH; `degrees` of an inverse time it
+refuses outright, CANNOT EVALUATE, which fails inside a closed slice.
+The row multiplies by the exact row `DEG_PER_RAD` instead, whose unit
+is `deg` and which carries the radian, so the unit check follows the
+chain to degrees, or degrees per time, with no equivalency. Both the
+tilt and its rate are written this way, and both were run through
+both checkers before this was written. `DEG_PER_RAD` has no store
+inputs, so neither checker judges it and its unit is asserted; the
+row says so in words, as a definition.
+
 **The ceiling: where an uncertainty is stated, propagate it** (v2.16).
 The procedure these rules were adopted from says it in one line:
 "Where any input carries a stated uncertainty, propagate that instead
@@ -1865,7 +1949,14 @@ part is marked as its own.
   it beside the value: real magnetopause crossings scatter 1.23 Earth
   radii about Shue's model, and the hover says so. Where it does not,
   cap the count and say why on the row, as the Hill sphere's is in the
-  paragraph above. This decides which of the two answers applies.
+  paragraph above. This decides which of the two answers applies. It
+  also decides a snapshot of a quantity that moves (v2.17): where the
+  source publishes the rate, the store holds the rate's inputs and the
+  page shows the epoch and the rate beside the value; where it does
+  not, the count is capped to the place the movement over the model's
+  validity span supports. Earth's dipole tilt is the case: IGRF-13
+  prints the secular variation, so the tilt prints at its full count
+  with its epoch and its rate.
 - **When propagation sets the ceiling.** A derived row's ceiling -- the
   most figures it may declare -- is set by propagation whenever at
   least one measured primary in its chain STATES an uncertainty, and by
@@ -1940,10 +2031,37 @@ stored as literals under the withdrawn ruling stay literals until the
 export lands and the gallery stops parsing the store (L-322 ruling 6);
 they revert to expressions at their slice visit.
 
-**Rule 7. The declared count governs reporting; a display may show
-fewer, never more.** A hover formats to the served count or to a shorter
-readable count; a shorter display is not a precision claim. A display
-with more figures than the row declares is the failure.
+**Where a source prints the parts and states the relation that makes
+the whole, the whole is a derived row over measured rows for the
+parts** (v2.17) -- never a typed result with its working in a comment,
+which a closed slice does not accept (Rule 8 names that shape).
+IGRF-13 prints the three degree-1 coefficients and says the pole is
+computed from them, so Earth's dipole tilt is an expression over
+three coefficient rows; the stored 9.6 it replaced was in no epoch of
+the cited source.
+
+**Rule 7. A display prints the declared count, never more, and never
+chooses fewer** (v2.17). A hover formats to the served count. A display
+with more figures than the row declares is the failure. A display that
+reads as too many figures is a finding about the ROW, not the page:
+the row's count comes down under Rule 3 -- by the ceiling where an
+uncertainty is stated, or by a cap with the reason on the row where
+the relation is approximate and its mismatch cannot be shown -- and
+the page then prints the shorter count because the row declares it.
+The page never shortens on its own, because a shortening the row does
+not record is a judgment nobody can find later, and the served count
+is what every checker reads. One format exception, named where it
+occurs: a display of fixed width truncates a longer served count and
+says so in its comment; the gallery's AU line at min(3, count) is
+that case. A display that FORMATS by a fixed number of places or
+figures rather than by the served count is not that exception; it is
+a site to be listed and assigned when the rule reaches it, as the
+orrery's Earth hovers were at L-322 C2: 47 sites, four kinds, one
+ledger class with no automated coverage, and the four that print more
+than the row declares pulled into the build. (Until v2.17 this rule
+let a display show fewer with no method for choosing, and every use
+of that permission reached Tony as a readability call. Tony,
+2026-09-21: "the basis should be in the skill not arbitrary.")
 
 **Rule 8. The checker reads the field and names every derived row it
 cannot see.** `test_derived_figures.py` checks the DECLARATION rather
