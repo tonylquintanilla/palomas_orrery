@@ -48,6 +48,10 @@ Module updated: September 12, 2026 with Anthropic's Claude Opus 5 (L-305:
     Earth's magnetosphere tooltip quotes the two superseded standoffs at
     the reporting figure their store rows state, and its standoff
     attribution moves from Lugaz to Jelinek.)
+Module updated: September 22, 2026 with Anthropic's Claude Opus 5 (L-322
+    Stage C2: that tooltip prints the two standoffs at the count their
+    rows declare, read with constants_rows.figures_of, where it printed
+    four figures by a fixed format.)
 """
 
 # Phase C4: Import hover text strings from body shell modules.
@@ -96,6 +100,12 @@ from solar_visualization_shells import (
 # fractions derive from constants_new.py, and the prose comes from the
 # body module rather than being retyped here -- same shape Saturn,
 # Uranus, Neptune and the Sun already use above.
+# L-322 Stage C2: the magnetosphere tooltip prints the two standoffs at
+# the count their rows declare, as their live twin in
+# earth_visualization_shells.py does. The tooltip field is dead data (no
+# consumer), kept in agreement with the live hover because a migration
+# would promote it.
+from constants_rows import figures_of
 from constants_new import (
     EARTH_INNER_CORE_RADII, EARTH_OUTER_CORE_RADII,
     EARTH_LOWER_MANTLE_RADII, EARTH_UPPER_MANTLE_RADII,
@@ -2297,11 +2307,11 @@ CUSTOM_SHELLS = {
             'per_frame_opt_in': True,   # gated by the 'Animate magnetospheres' checkbox
             'tooltip': (
                 "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n"
-                f"Earth's magnetosphere extends about {EARTH_MAGNETOPAUSE_STANDOFF_RADII:.4g} Earth radii on the Sun-facing side\n"
+                f"Earth's magnetosphere extends about {EARTH_MAGNETOPAUSE_STANDOFF_RADII:.{figures_of('EARTH_MAGNETOPAUSE_STANDOFF_RADII')}g} Earth radii on the Sun-facing side\n"
                 "and stretches into a long magnetotail on the night side. It protects Earth\n"
                 "from solar radiation and cosmic rays, making complex life possible.\n\n"
                 "Bow Shock: The boundary where the supersonic solar wind is first slowed\n"
-                f"by Earth's magnetic field, typically located about {EARTH_BOW_SHOCK_STANDOFF_RADII:.4g} Earth radii upstream\n"
+                f"by Earth's magnetic field, typically located about {EARTH_BOW_SHOCK_STANDOFF_RADII:.{figures_of('EARTH_BOW_SHOCK_STANDOFF_RADII')}g} Earth radii upstream\n"
                 "from Earth on the Sun-facing side.\n\n"
                 f"Inner Van Allen Belt: trapped protons, drawn at the flux peak {EARTH_VAN_ALLEN_INNER_RADII:g} Earth radii out\n"
                 "(Baker et al. 2018). Outer Van Allen Belt: trapped electrons, drawn at the flux peak\n"

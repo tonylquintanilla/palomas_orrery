@@ -37,6 +37,13 @@ One JSON file, data/constants_export.json:
                               null when the row has no such line yet
                      status   the "# Status:" text, or null
                      derived  true when the row is computed from others
+                     read     the row's "# Read:" lines, a list, empty
+                              when the row has none (schema 3)
+                     inputs   the store rows its expression uses, a list,
+                              empty for a typed number (schema 3). The
+                              gallery's read check walks these, so a
+                              drawn row's measured sources are examined
+                              through every derived row between them
     not_exported   every row that is NOT in rows, by name, with the reason
 
 ROUNDING HAPPENS HERE, AND ONLY HERE
@@ -92,6 +99,9 @@ Module updated: September 17, 2026 with Anthropic's Claude Opus 5
 documentation/BUILD_MANIFEST_L322_gallery_half_20260917.md. The export
 carries closed_slices and transitional, so the gallery reads both from
 the store rather than keeping its own copy. SCHEMA moves to 2.)
+Module updated: September 22, 2026 with Anthropic's Claude Opus 5
+(L-322 Stage C2: every exported row also carries "read" and "inputs",
+which the gallery's read check needs. SCHEMA moves to 3.)
 """
 
 import json
@@ -103,7 +113,7 @@ import constants_rows
 from constants_tokens import RETIRED_TOKENS, TOKENS
 
 EXPORT_PATH = os.path.join("data", "constants_export.json")
-SCHEMA = 2
+SCHEMA = 3
 
 
 def round_to(value, figures):
@@ -211,6 +221,8 @@ def build_export(project_dir, tokens=None, retired=None):
             "figures": row.figures,
             "status": row.status,
             "derived": row.is_derived,
+            "read": list(row.read_text),
+            "inputs": list(row.inputs),
         }
 
     if failures:

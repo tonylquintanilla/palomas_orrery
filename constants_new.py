@@ -81,10 +81,30 @@ Module updated: September 12, 2026 with Anthropic's Claude Opus 5
 to report -- 10.25 and 13.51 -- rather than the arithmetic result.
 test_derived_figures.py recomputes each from the inputs its Status
 line names and fails when the rounding stops holding)
+Module updated: September 22, 2026 with Anthropic's Claude Opus 5
+(L-322 Stage C2: Earth's magnetosphere rows get their figure counts and
+reads, and the Earth slice closes. The two standoffs are arithmetic
+again; the L-325 entry above describes the version of
+test_derived_figures.py that Tony's withdrawal of 2026-09-16 replaced,
+so its last sentence no longer describes anything that runs. Earth's
+dipole tilt is computed from six IGRF-13 coefficient rows (the typed 9.6
+was in no epoch of that model) with its rate beside it, the outer
+belt's drawn peak is a declared midpoint over two band rows, four
+kilometre and AU rows let the magnetosphere hovers print served numbers,
+and DEG_PER_RAD joins as an exact conversion. Five rows leave the
+retired "dimensionless" token for tokens that name the quantity)
 """
 
+import math
 import numpy as np
 from datetime import datetime, timedelta
+
+# L-322 Stage C2: the store's expressions call math, not numpy. A numpy
+# function returns a numpy scalar, and a comparison on one gives a numpy
+# boolean, which plotly refuses where it wants True or False -- found when
+# Earth's dipole cone stopped building in the live-dispatch test. Every
+# value here stays a plain Python float, as every value was before the
+# first expression that called a function.
 
 
 # ============================================================
@@ -119,8 +139,11 @@ SUN_RADIUS_KM = 695700.0
 EARTH_EQUATORIAL_RADIUS_KM = 6378.1366
 # Unit: km
 # Status: measured V_CROSS_CHECKED 2026-09-19
-# Figures: 8 -- IERS gives 6378136.6 m with an uncertainty of 0.1 m, so
-# Figures+: the last significant digit is the tenth of a metre.
+# Figures: 8 -- uncertainty 0.0001 km. IERS gives 6378136.6 m with an
+# Figures+: uncertainty of 0.1 m, so the last significant digit is the tenth
+# Figures+: of a metre. The field at the head of this line is that 0.1 m in
+# Figures+: this row's own unit, so test_derived_figures.py can read it
+# Figures+: (L-322 C2); the words after it are unchanged.
 # Read: Table 1.1 "IERS numerical standards", IERS Technical Note 36
 # Read+: p. 18, 2026-09-19, Claude Opus 5
 # Source: IERS Conventions (2010), Petit & Luzum (eds.), IERS Technical
@@ -247,10 +270,12 @@ EARTH_OUTER_CORE_RADII = EARTH_OUTER_CORE_KM / EARTH_EQUATORIAL_RADIUS_KM
 EARTH_D660_DEPTH_KM = 660.0
 # Unit: km
 # Status: measured V_SOURCED 2026-09-19 -- L-253
-# Figures: 2 -- the global average depth is 660 +/- 10 km, so the last
-# Figures+: significant digit is the tens place. The trailing zero is not
-# Figures+: significant, which the source line above already said; the
-# Figures+: +/- 10 km behind it is now sourced (see the read line).
+# Figures: 2 -- uncertainty 10 km. The global average depth is 660 +/- 10
+# Figures+: km, so the last significant digit is the tens place. The
+# Figures+: trailing zero is not significant, which the source line above
+# Figures+: already said; the +/- 10 km behind it is now sourced (see the
+# Figures+: read line). The field at the head of this line is that 10 km,
+# Figures+: written so test_derived_figures.py can read it (L-322 C2).
 # Read: Ishii et al. (2018), "Complete agreement of the post-spinel
 # Read+: transition with the 660-km seismic discontinuity", Sci. Rep.
 # Read+: 8:6358, results section -- "the global average depth of the
@@ -325,8 +350,10 @@ EARTH_UPPER_MANTLE_RADII = EARTH_UPPER_MANTLE_KM / EARTH_EQUATORIAL_RADIUS_KM
 EARTH_GM_KM3_S2 = 398600.4418
 # Unit: km3_s2
 # Status: measured V_SOURCED 2026-09-19
-# Figures: 9 -- the tabulated uncertainty, 8e5 m^3 s^-2 on 3.986004418e14,
-# Figures+: is about 2 parts in 1e9, so it falls in the ninth figure.
+# Figures: 9 -- uncertainty 0.0008 km^3 s^-2. The tabulated uncertainty,
+# Figures+: 8e5 m^3 s^-2 on 3.986004418e14, is about 2 parts in 1e9, so it
+# Figures+: falls in the ninth figure. The field at the head of this line
+# Figures+: is that 8e5 m^3 s^-2 in this row's own unit (L-322 C2).
 # Read: Table 1.1 "IERS numerical standards", IERS Technical Note 36
 # Read+: p. 18, 2026-09-19, Claude Opus 5
 # Source: IERS Conventions (2010), IERS Technical Note 36, Table 1.1 --
@@ -484,6 +511,9 @@ EARTH_THERMOPAUSE_RADII = (EARTH_EQUATORIAL_RADIUS_KM + EARTH_THERMOPAUSE_ALTITU
 EARTH_VAN_ALLEN_INNER_RADII = 1.5
 # Unit: r_earth
 # Status: measured V_SOURCED 2026-09-14 -- open full text
+# Figures: 2 -- the source prints 1.5.
+# Read: sec. 2, Baker et al. (2018) at the Springer link below,
+# Read+: 2026-09-21, Claude Opus 5
 # Source: Baker, D. N. et al. (2018), "Space Weather Effects in the
 # Source+: Earth's Radiation Belts", Space Sci. Rev. 214:17,
 # Source+: doi:10.1007/s11214-017-0452-7 -- sec. 2: inner-zone proton fluxes
@@ -502,24 +532,65 @@ EARTH_VAN_ALLEN_INNER_RADII = 1.5
 # Note+: L and geocentric radii coincide at the magnetic equator, so the
 # Note+: agreement here is arithmetic rather than evidence about the frame.
 # Record: documentation/worksheets/L321_worksheet_3_van_allen_gemini31pro_20260913.md
-EARTH_VAN_ALLEN_OUTER_RADII = 4.5
+# --- the outer belt's band, L-322 C2 (2026-09-22) ---------------------------
+# The two ends of the band the outer belt's peak is drawn in. They were prose
+# on the peak row's "# Declared:" line, and the orrery's hover typed the band
+# again as literal text. Rows now, so the drawn midpoint is an expression
+# over them and every display reads the band from here
+# (provenance-discipline 2.17, When the source gives a range).
+
+EARTH_VAN_ALLEN_OUTER_BAND_LOW_L = 4.0
 # Unit: l_shell
-# Status: declared 2026-09-14 -- a pick from a range, L-305 item 7
-# Declared: the midpoint of an L band, not a measured peak, and the pick is
-# Declared+: ours. Li et al. (2025), "A New Electron and Proton Radiation
-# Declared+: Belt Identified by CIRBE/REPTile-2 Measurements After the
-# Declared+: Magnetic Super Storm of 10 May 2024", J. Geophys. Res. Space
-# Declared+: Physics, doi:10.1029/2024JA033504, sec. 1 -- the outer belt is
-# Declared+: most intense around L = 4 and 5. Li et al. (2015),
-# Declared+: doi:10.1002/2014JA020777, sec. 1 -- greatest intensity between
-# Declared+: 4 and 5 equatorial R_E for electrons above 500 keV.
-# Declared+: Kellerman et al. (2014), as reported in "Electron intensity
-# Declared+: measurements by the Cluster/RAPID/IES instrument in Earth's
-# Declared+: radiation belts and ring current" (2018, arXiv:1809.00902) --
-# Declared+: maximum electron flux at L = 4-5. The arXiv paper is the
-# Declared+: document opened; Kellerman is the layer below it.
+# Status: measured V_SOURCED 2026-09-22 -- open full text
+# Figures: 1 -- the source prints "4".
+# Read: sec. 1 para. 1, p. 1, the par.nsf.gov copy of Li et al. (2025),
+# Read+: 2026-09-22, Claude Opus 5
+# Source: Li, X., Xiang, Z., Mei, Y., O'Brien, D., Brennan, D., Zhao, H.,
+# Source+: Baker, D. N. and Temerin, M. A. (2025), "A New Electron and
+# Source+: Proton Radiation Belt Identified by CIRBE/REPTile-2 Measurements
+# Source+: After the Magnetic Super Storm of 10 May 2024", J. Geophys. Res.
+# Source+: Space Physics 130, e2024JA033504, doi:10.1029/2024JA033504 --
+# Source+: sec. 1: the outer radiation belt is most intense around L = 4
+# Source+: and 5. This row is the lower end of that band.
+# Source+: Li et al. (2015), doi:10.1002/2014JA020777, sec. 1 -- greatest
+# Source+: intensity between 4 and 5 equatorial R_E for electrons above
+# Source+: 500 keV. Kellerman et al. (2014), as reported in "Electron
+# Source+: intensity measurements by the Cluster/RAPID/IES instrument in
+# Source+: Earth's radiation belts and ring current" (2018,
+# Source+: arXiv:1809.00902) -- maximum electron flux at L = 4-5. The arXiv
+# Source+: paper is the document opened; Kellerman is the layer below it.
+# Source+: These two corroborate; they were carried on the peak row's
+# Source+: "# Declared:" line until 2026-09-22 and were not re-read here.
 # Access: open full text, https://par.nsf.gov/servlets/purl/10575739
-# Access+: (2026-09-13), the same paper Wiley serves.
+# Access+: (2026-09-22), the same paper Wiley serves.
+
+EARTH_VAN_ALLEN_OUTER_BAND_HIGH_L = 5.0
+# Unit: l_shell
+# Status: measured V_SOURCED 2026-09-22 -- open full text
+# Figures: 1 -- the source prints "5".
+# Read: sec. 1 para. 1, p. 1, the par.nsf.gov copy of Li et al. (2025),
+# Read+: 2026-09-22, Claude Opus 5
+# Source: Li et al. (2025), doi:10.1029/2024JA033504 -- sec. 1: the outer
+# Source+: radiation belt is most intense around L = 4 and 5. This row is
+# Source+: the upper end of that band. Corroborated as the row above.
+# Access: open full text, https://par.nsf.gov/servlets/purl/10575739
+# Access+: (2026-09-22).
+
+EARTH_VAN_ALLEN_OUTER_RADII = (EARTH_VAN_ALLEN_OUTER_BAND_LOW_L + EARTH_VAN_ALLEN_OUTER_BAND_HIGH_L) / 2.0
+# Derived: the midpoint rule over the two band rows -- (4 + 5) / 2 = 4.5
+# Unit: l_shell
+# Status: declared 2026-09-22 -- the midpoint of the band held in the two
+# Status+: rows above, L-305 item 7
+# Figures: exact -- declared construction: midpoint of
+# Figures+: EARTH_VAN_ALLEN_OUTER_BAND_LOW_L, EARTH_VAN_ALLEN_OUTER_BAND_HIGH_L
+# Declared: the midpoint of an L band, not a measured peak, and the pick is
+# Declared+: ours. The band is the two rows above, each measured and read;
+# Declared+: this row carries only the rule. It was typed 4.5 until
+# Declared+: 2026-09-22, with the band in prose on this line (L-322 C2).
+# Declared+: As an expression it is exact as a construction, so the export
+# Declared+: serves 4.5 unrounded and the gallery and the orrery draw the
+# Declared+: same ring; counted from its one-figure rows it would have
+# Declared+: exported as 4.0 while the orrery drew 4.5.
 # Note: a peak, not an edge; the edges are their own rows since 2026-09-14.
 # Note+: The unit is L, the McIlwain parameter, because the value is the
 # Note+: midpoint of an L band. L equals geocentric distance in Earth radii
@@ -551,6 +622,10 @@ EARTH_VAN_ALLEN_OUTER_RADII = 4.5
 EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE = 1.1
 # Unit: r_earth
 # Status: measured V_SOURCED 2026-09-14 -- open full text
+# Figures: 2 -- the source prints 1.1.
+# Read: introduction para. 1, Meredith et al. (2014), read through the Wiley
+# Read+: article page (the NORA PDF below did not open that day),
+# Read+: 2026-09-21, Claude Opus 5
 # Source: Meredith, N. P., Horne, R. B., Kersten, T., Fraser, B. J. and
 # Source+: Grew, R. S. (2014), "Global morphology and spectral properties of
 # Source+: EMIC waves derived from CRRES observations", J. Geophys. Res.
@@ -572,6 +647,11 @@ EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE = 1.1
 EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE = 2.0
 # Unit: r_earth
 # Status: measured V_SOURCED 2026-09-14 -- open full text
+# Figures: 1 -- the source prints "2", not "2.0", so the stored trailing
+# Figures+: zero falls outside its reporting resolution and does not count
+# Figures+: (Rule 2). The float keeps 2.0; the count says it is one figure.
+# Read: introduction para. 1, Meredith et al. (2014), read through the Wiley
+# Read+: article page, 2026-09-21, Claude Opus 5
 # Source: Meredith et al. (2014), doi:10.1002/2014JA020064 -- introduction,
 # Source+: first paragraph, the outer end of the same stated span.
 # Access: open full text,
@@ -585,6 +665,11 @@ EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE = 2.0
 EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE = 3.0
 # Unit: r_earth
 # Status: measured V_SOURCED 2026-09-14 -- open full text
+# Figures: 1 -- both sources print "3", so the stored trailing zero does not
+# Figures+: count (Rule 2).
+# Read: introduction para. 1, Meredith et al. (2014), read through the Wiley
+# Read+: article page, and introduction para. 1, Li, Tu et al. (2024) at
+# Read+: par.nsf.gov, 2026-09-21, Claude Opus 5
 # Source: Meredith et al. (2014), doi:10.1002/2014JA020064 -- introduction,
 # Source+: first paragraph: the outer belt extends from 3 to 7 R_E. Li, Tu,
 # Source+: Selesnick and Huang (2024), "Modeling the contribution of
@@ -605,6 +690,11 @@ EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE = 3.0
 EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE = 7.0
 # Unit: r_earth
 # Status: measured V_SOURCED 2026-09-14 -- open full text
+# Figures: 1 -- both sources print "7", so the stored trailing zero does not
+# Figures+: count (Rule 2).
+# Read: introduction para. 1, Meredith et al. (2014), read through the Wiley
+# Read+: article page, and introduction para. 1, Li, Tu et al. (2024) at
+# Read+: par.nsf.gov, 2026-09-21, Claude Opus 5
 # Source: Meredith et al. (2014), doi:10.1002/2014JA020064, and Li, Tu et
 # Source+: al. (2024), doi:10.1029/2023JA032171 -- both state the outer belt
 # Source+: extending to 7 Earth radii, in their introductions.
@@ -630,45 +720,177 @@ EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE = 7.0
 # aberrated Sun-Earth line, so the two frames share the X axis and nothing
 # drawn depends on the difference. Do not "fix" a frame mismatch here; there
 # is none to fix. The two models disagree about the magnetopause nose by
-# about 1 R_E (Shue 10.25, Jelinek 11.24), which is inside Shue's own fit
-# scatter of 1.23 R_E, and the hovers say so rather than letting the pair
-# read as one measurement.
+# about 1 R_E (Shue's standoff below against Jelinek's own magnetopause fit,
+# which this file does not store), which is inside Shue's own fit scatter
+# below, and the hovers say so rather than letting the pair read as one
+# measurement. (The figures typed here until L-322 C2 were 10.25 and 11.24;
+# the first is no longer what the store computes.)
 #
 # The declared conditions come first because the standoffs are evaluated at
 # them. L-314 replaces all three with a measured feed.
 
-EARTH_DIPOLE_TILT_DEG = 9.6
+# --- Earth's dipole tilt, from IGRF-13's degree-1 coefficients (L-322 C2) --
+# IGRF-13 prints no tilt. It prints the three degree-1 Gauss coefficients
+# for each epoch, and their secular variation, and Alken et al. (2021) say
+# the geomagnetic poles are computed from those three. So the tilt is an
+# expression over three coefficient rows, and its rate is the derivative
+# over those three and their three rates (provenance-discipline 2.17,
+# Rule 6 and Rule 3). The typed 9.6 this block replaces, stored until
+# 2026-09-22, was in no epoch of the cited model.
+# Epoch 2020.0 of IGRF-13 throughout. A later IGRF generation exists;
+# moving these six rows to it is a re-sourcing with its own access check,
+# recorded on L-322 and not done here.
+
+DEG_PER_RAD = 180.0 / math.pi
 # Unit: deg
-# Status: measured V_SOURCED 2026-06-22 -- promoted to the store 2026-09-15
+# Status: declared 2026-09-22 -- an exact unit conversion, one radian in
+# Status+: degrees. Belongs to no body's slice.
+# Figures: exact -- a definition, not a measurement.
+# Note: neither checker judges this row, because it uses no other store
+# Note+: row; its unit is asserted here, not checked. It exists because an
+# Note+: angle computed from a pure number cannot take np.degrees under the
+# Note+: unit check, so the tilt and its rate multiply by this row instead
+# Note+: (provenance-discipline 2.17, Rule 3).
+
+EARTH_IGRF13_G10_NT = -29404.8
+# Unit: nt
+# Status: measured V_SOURCED 2026-09-22 -- open file
+# Figures: 6 -- the file prints the 2020.0 column to 0.1 nT, its reporting
+# Figures+: resolution (the definitive epochs print to 0.01 nT). A published
+# Figures+: error budget for the model exists and was not opened; recorded
+# Figures+: on L-322 as a class.
+# Read: row "g 1 0", column 2020.0, igrf13coeffs.txt, 2026-09-21,
+# Read+: Claude Opus 5
+# Source: IGRF-13 coefficient file igrf13coeffs.txt (IAGA Working Group
+# Source+: V-MOD, served by NOAA NCEI) -- g(1,0) at epoch 2020.0 is
+# Source+: -29404.8 nT. The model is Alken, P. et al. (2021), "International
+# Source+: Geomagnetic Reference Field: the thirteenth generation", Earth
+# Source+: Planets Space 73:49, doi:10.1186/s40623-020-01288-x, which names
+# Source+: this file as the digital form of its Table 2.
+# Access: open, https://www.ngdc.noaa.gov/IAGA/vmod/coeffs/igrf13coeffs.txt
+# Access+: (2026-09-21).
+
+EARTH_IGRF13_G11_NT = -1450.9
+# Unit: nt
+# Status: measured V_SOURCED 2026-09-22 -- open file
+# Figures: 5 -- the file prints the 2020.0 column to 0.1 nT, as above.
+# Read: row "g 1 1", column 2020.0, igrf13coeffs.txt, 2026-09-21,
+# Read+: Claude Opus 5
+# Source: IGRF-13 coefficient file igrf13coeffs.txt -- g(1,1) at epoch
+# Source+: 2020.0 is -1450.9 nT. Alken et al. (2021),
+# Source+: doi:10.1186/s40623-020-01288-x.
+# Access: open, https://www.ngdc.noaa.gov/IAGA/vmod/coeffs/igrf13coeffs.txt
+# Access+: (2026-09-21).
+
+EARTH_IGRF13_H11_NT = 4652.5
+# Unit: nt
+# Status: measured V_SOURCED 2026-09-22 -- open file
+# Figures: 5 -- the file prints the 2020.0 column to 0.1 nT, as above.
+# Read: row "h 1 1", column 2020.0, igrf13coeffs.txt, 2026-09-21,
+# Read+: Claude Opus 5
+# Source: IGRF-13 coefficient file igrf13coeffs.txt -- h(1,1) at epoch
+# Source+: 2020.0 is 4652.5 nT. Alken et al. (2021),
+# Source+: doi:10.1186/s40623-020-01288-x.
+# Access: open, https://www.ngdc.noaa.gov/IAGA/vmod/coeffs/igrf13coeffs.txt
+# Access+: (2026-09-21).
+
+EARTH_IGRF13_G10_SV_NT_PER_YEAR = 5.7
+# Unit: nt_per_year
+# Status: measured V_SOURCED 2026-09-22 -- open file
+# Figures: 2 -- the file prints the 2020-25 secular variation to 0.1 nT
+# Figures+: per year.
+# Read: row "g 1 0", column "SV 2020-25", igrf13coeffs.txt, 2026-09-21,
+# Read+: Claude Opus 5
+# Source: IGRF-13 coefficient file igrf13coeffs.txt -- the predicted rate
+# Source+: of change of g(1,0) over 2020-2025 is 5.7 nT per year. Alken et
+# Source+: al. (2021), doi:10.1186/s40623-020-01288-x.
+# Access: open, https://www.ngdc.noaa.gov/IAGA/vmod/coeffs/igrf13coeffs.txt
+# Access+: (2026-09-21).
+
+EARTH_IGRF13_G11_SV_NT_PER_YEAR = 7.4
+# Unit: nt_per_year
+# Status: measured V_SOURCED 2026-09-22 -- open file
+# Figures: 2 -- the file prints the 2020-25 secular variation to 0.1 nT
+# Figures+: per year.
+# Read: row "g 1 1", column "SV 2020-25", igrf13coeffs.txt, 2026-09-21,
+# Read+: Claude Opus 5
+# Source: IGRF-13 coefficient file igrf13coeffs.txt -- the predicted rate
+# Source+: of change of g(1,1) over 2020-2025 is 7.4 nT per year. Alken et
+# Source+: al. (2021), doi:10.1186/s40623-020-01288-x.
+# Access: open, https://www.ngdc.noaa.gov/IAGA/vmod/coeffs/igrf13coeffs.txt
+# Access+: (2026-09-21).
+
+EARTH_IGRF13_H11_SV_NT_PER_YEAR = -25.9
+# Unit: nt_per_year
+# Status: measured V_SOURCED 2026-09-22 -- open file
+# Figures: 3 -- the file prints the 2020-25 secular variation to 0.1 nT
+# Figures+: per year.
+# Read: row "h 1 1", column "SV 2020-25", igrf13coeffs.txt, 2026-09-21,
+# Read+: Claude Opus 5
+# Source: IGRF-13 coefficient file igrf13coeffs.txt -- the predicted rate
+# Source+: of change of h(1,1) over 2020-2025 is -25.9 nT per year. Alken
+# Source+: et al. (2021), doi:10.1186/s40623-020-01288-x.
+# Access: open, https://www.ngdc.noaa.gov/IAGA/vmod/coeffs/igrf13coeffs.txt
+# Access+: (2026-09-21).
+
+EARTH_DIPOLE_TILT_DEG = math.atan(math.sqrt(EARTH_IGRF13_G11_NT**2 + EARTH_IGRF13_H11_NT**2) / abs(EARTH_IGRF13_G10_NT)) * DEG_PER_RAD
+# Derived: the angle between the dipole axis and the rotation axis at epoch
+# Derived+: 2020.0, arctan(sqrt(g11^2 + h11^2) / |g10|) in degrees
+# Derived+: = 9.4105
+# Unit: deg
+# Status: derived 2026-09-22 -- inherits EARTH_IGRF13_G10_NT,
+# Status+: EARTH_IGRF13_G11_NT, EARTH_IGRF13_H11_NT, DEG_PER_RAD
+# Figures: 5 -- set by EARTH_IGRF13_G11_NT and EARTH_IGRF13_H11_NT (5 each),
+# Figures+: through the sum of their squares. The tilt moves, and IGRF-13
+# Figures+: publishes the rate, so the value is shown at this count with its
+# Figures+: epoch and the rate row below beside it rather than capped
+# Figures+: (provenance-discipline 2.17, Show or cap).
 # Source: Alken et al. (2021), "International Geomagnetic Reference Field:
 # Source+: the thirteenth generation", Earth Planets Space 73:49,
-# Source+: doi:10.1186/s40623-020-01288-x. The angle between the geomagnetic
-# Source+: dipole axis and Earth's rotation axis, for epoch 2020-2025.
-# Note: 9.6 is rounded to a tenth of a degree, which is the precision the
-# Note+: dipole cone's projection can honour; the cone is what this value
-# Note+: was sourced for (L-009, cleared 2026-06-22, cross-checked de novo
-# Note+: by a second model in June 2026).
-# Note+: The tilt DRIFTS, slowly decreasing by about 0.05 deg per decade,
-# Note+: so this row carries its epoch and any quotation of it should too.
-# Note+: Other authorities give slightly different figures for the same
-# Note+: quantity -- NOAA states 9.41 deg from the WMM2020 coefficients and
-# Note+: 9.21 from WMM2025, and the British Geological Survey says about
-# Note+: ten. The spread is about which coefficients and which epoch define
-# Note+: "the dipole", not about the belts, and at drawing precision it
-# Note+: does not move anything. Quote this row's figure with its model and
-# Note+: epoch, or say "about ten degrees" and quote nothing.
-# Note: promoted here 2026-09-15 (L-231) because a value cannot be quoted
-# Note+: on the web page unless the store carries it. It previously lived
-# Note+: only as a literal in PLANET_DIPOLE, which made it a sourced value
-# Note+: with a home outside the citation home. PLANET_DIPOLE now reads
+# Source+: doi:10.1186/s40623-020-01288-x -- for the RELATION: the
+# Source+: geomagnetic poles are computed from the three degree-1 Gauss
+# Source+: coefficients, which is what this row does. The paper prints no
+# Source+: tilt of its own. Its Table 4 gives the 2020.0 north geomagnetic
+# Source+: pole at 80.65 N, -72.68 E; these coefficients reproduce it as
+# Source+: 80.6512 N, -72.6797 E (read 2026-09-21 by Claude Opus 5).
+# Access: open full text,
+# Access+: https://link.springer.com/article/10.1186/s40623-020-01288-x
+# Access+: (2026-09-21).
+# Note: promoted to the store 2026-09-15 (L-231) because a value cannot be
+# Note+: quoted on the web page unless the store carries it. It previously
+# Note+: lived only as a literal in PLANET_DIPOLE, which made it a sourced
+# Note+: value with a home outside the citation home. PLANET_DIPOLE reads
 # Note+: this row; the fuller note and source strings stay in that table
 # Note+: because the cone's hover reads them.
-# Note+: The 11 degrees still typed at earth_visualization_shells.py:865 is
-# Note+: a DIFFERENT, uncited number and is ruled for removal (L-305).
+# Note+: An uncited 11 degrees once typed in earth_visualization_shells.py
+# Note+: was removed from the code by L-305 and from its last comment at
+# Note+: L-322 C2.
+
+EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR = ((abs(EARTH_IGRF13_G10_NT) * (EARTH_IGRF13_G11_NT * EARTH_IGRF13_G11_SV_NT_PER_YEAR + EARTH_IGRF13_H11_NT * EARTH_IGRF13_H11_SV_NT_PER_YEAR) / math.sqrt(EARTH_IGRF13_G11_NT**2 + EARTH_IGRF13_H11_NT**2) + math.sqrt(EARTH_IGRF13_G11_NT**2 + EARTH_IGRF13_H11_NT**2) * EARTH_IGRF13_G10_SV_NT_PER_YEAR) / (EARTH_IGRF13_G11_NT**2 + EARTH_IGRF13_H11_NT**2 + EARTH_IGRF13_G10_NT**2)) * DEG_PER_RAD
+# Derived: the time derivative of EARTH_DIPOLE_TILT_DEG at epoch 2020.0,
+# Derived+: from the three coefficients and their three rates. With
+# Derived+: H = sqrt(g11^2 + h11^2), d(tilt)/dt is
+# Derived+: (|g10| (g11 g11' + h11 h11') / H - H d|g10|/dt) / (H^2 + g10^2),
+# Derived+: in radians per year, and d|g10|/dt is -g10' because g10 is
+# Derived+: negative, which is why the second term is added in the code.
+# Derived+: Negative: the tilt is decreasing. = -0.0493
+# Unit: deg_per_year
+# Status: derived 2026-09-22 -- inherits EARTH_IGRF13_G10_NT,
+# Status+: EARTH_IGRF13_G11_NT, EARTH_IGRF13_H11_NT,
+# Status+: EARTH_IGRF13_G10_SV_NT_PER_YEAR, EARTH_IGRF13_G11_SV_NT_PER_YEAR,
+# Status+: EARTH_IGRF13_H11_SV_NT_PER_YEAR, DEG_PER_RAD
+# Figures: 3 -- set by the sum EARTH_IGRF13_G11_NT *
+# Figures+: EARTH_IGRF13_G11_SV_NT_PER_YEAR + EARTH_IGRF13_H11_NT *
+# Figures+: EARTH_IGRF13_H11_SV_NT_PER_YEAR, whose two terms are each good
+# Figures+: to the thousands of nT^2 per year. Written as the derivative and
+# Figures+: never as a difference of two evaluated tilts, which would take
+# Figures+: its count from the main field's places instead
+# Figures+: (provenance-discipline 2.17, Rule 3).
 
 EARTH_SOLAR_WIND_PRESSURE_NPA = 2.0
 # Unit: npa
 # Status: declared pending 2026-09-12 -- L-314
+# Figures: exact -- a declared condition, not a measurement (Rule 2).
 # Declared: the solar wind dynamic pressure both fits are evaluated at.
 # Declared+: Shue et al. (1998) p. 17,695 uses Dp = 2 nPa as an average
 # Declared+: value, which is the paper's own reason for this pick. It sits
@@ -684,6 +906,7 @@ EARTH_SOLAR_WIND_PRESSURE_NPA = 2.0
 EARTH_SOLAR_WIND_BZ_NT = 0.0
 # Unit: nt
 # Status: declared pending 2026-09-12 -- L-314
+# Figures: exact -- a declared condition, not a measurement (Rule 2).
 # Declared: a neutral midpoint chosen here, NOT a figure from the paper.
 # Declared+: Shue's own averages are +/- 4 nT, northward and southward taken
 # Declared+: separately (p. 17,695). Zero is the unloaded case the drawn
@@ -693,6 +916,7 @@ EARTH_SOLAR_WIND_BZ_NT = 0.0
 EARTH_SOLAR_WIND_SPEED_KM_S = 400.0
 # Unit: km_s
 # Status: declared pending 2026-09-12 -- L-314
+# Figures: exact -- a declared condition, not a measurement (Rule 2).
 # Declared: a nominal speed whose reason is NOT YET WRITTEN, and that is the
 # Declared+: honest state of this row. The 410 km/s on Shue p. 17,694 is the
 # Declared+: speed during one January 1997 event and does not source a
@@ -703,6 +927,8 @@ EARTH_SOLAR_WIND_SPEED_KM_S = 400.0
 EARTH_MAGNETOPAUSE_SHUE_A1_RADII = 10.22
 # Unit: r_earth
 # Status: measured V_SOURCED 2026-09-11 -- open full text
+# Figures: 4 -- Table 1 prints 10.22, uncertainty 0.10
+# Read: Table 1 "After Fit", p. 17,698, 2026-09-11, Claude Fable 5.1
 # Source: Shue, J.-H., Song, P., Russell, C. T., Steinberg, J. T., Chao,
 # Source+: J. K., Zastenker, G., Vaisberg, O. L., Kokubun, S., Singer, H. J.,
 # Source+: Detman, T. R. and Kawano, H. (1998), "Magnetopause location under
@@ -721,6 +947,8 @@ EARTH_MAGNETOPAUSE_SHUE_A1_RADII = 10.22
 EARTH_MAGNETOPAUSE_SHUE_A2_RADII = 1.29
 # Unit: r_earth
 # Status: measured V_SOURCED 2026-09-11 -- open full text
+# Figures: 3 -- Table 1 prints 1.29, uncertainty 0.06
+# Read: Table 1 "After Fit", p. 17,698, 2026-09-11, Claude Fable 5.1
 # Source: Shue et al. (1998), doi:10.1029/98JA01103 -- Table 1 "After Fit"
 # Source+: row a2, p. 17,698: 1.29 +/- 0.06 R_E. The amplitude of eq. 10's
 # Source+: Bz term.
@@ -729,6 +957,8 @@ EARTH_MAGNETOPAUSE_SHUE_A2_RADII = 1.29
 EARTH_MAGNETOPAUSE_SHUE_A3_PER_NT = 0.184
 # Unit: per_nt
 # Status: measured V_SOURCED 2026-09-11 -- open full text
+# Figures: 3 -- Table 1 prints 0.184, uncertainty 0.007
+# Read: Table 1 "After Fit", p. 17,698, 2026-09-11, Claude Fable 5.1
 # Source: Shue et al. (1998), doi:10.1029/98JA01103 -- Table 1 "After Fit"
 # Source+: row a3, p. 17,698: 0.184 +/- 0.007 per nT. The scale inside
 # Source+: eq. 10's hyperbolic tangent.
@@ -737,25 +967,33 @@ EARTH_MAGNETOPAUSE_SHUE_A3_PER_NT = 0.184
 EARTH_MAGNETOPAUSE_SHUE_A4_NT = 8.14
 # Unit: nt
 # Status: measured V_SOURCED 2026-09-11 -- open full text
+# Figures: 3 -- Table 1 prints 8.14, uncertainty 0.39
+# Read: Table 1 "After Fit", p. 17,698, 2026-09-11, Claude Fable 5.1
 # Source: Shue et al. (1998), doi:10.1029/98JA01103 -- Table 1 "After Fit"
 # Source+: row a4, p. 17,698: 8.14 +/- 0.39 nT. The Bz offset inside
 # Source+: eq. 10's hyperbolic tangent.
 # Access: open full text, https://doi.org/10.1029/98JA01103 (2026-09-11).
 
 EARTH_MAGNETOPAUSE_SHUE_A5 = 6.6
-# Unit: dimensionless
+# Unit: inverse_exponent
 # Status: measured V_SOURCED 2026-09-11 -- open full text
+# Figures: 2 -- Table 1 prints 6.6, uncertainty 0.5
+# Read: Table 1 "After Fit", p. 17,698, 2026-09-11, Claude Fable 5.1
 # Source: Shue et al. (1998), doi:10.1029/98JA01103 -- Table 1 "After Fit"
 # Source+: row a5, p. 17,698: 6.6 +/- 0.5. The pressure exponent, r0 varying
 # Source+: as Dp^(-1/a5).
 # Access: open full text, https://doi.org/10.1029/98JA01103 (2026-09-11).
-# Note: the name carries no unit suffix because the value has no unit. The
-# Note+: "# Unit:" line above is the declaration; nothing is renamed to suit
+# Note: the name carries no unit suffix because the value has no physical
+# Note+: dimension. The "# Unit:" line above is the declaration, and since
+# Note+: L-322 C2 its token names what the number is -- the n in a power law
+# Note+: Dp^(-1/n) -- instead of "dimensionless"; nothing is renamed to suit
 # Note+: a reader of names (L-322).
 
 EARTH_MAGNETOPAUSE_SHUE_A6 = 0.58
-# Unit: dimensionless
+# Unit: flaring_exponent
 # Status: measured V_SOURCED 2026-09-11 -- open full text
+# Figures: 2 -- Table 1 prints 0.58, uncertainty 0.01
+# Read: Table 1 "After Fit", p. 17,698, 2026-09-11, Claude Fable 5.1
 # Source: Shue et al. (1998), doi:10.1029/98JA01103 -- Table 1 "After Fit"
 # Source+: row a6, p. 17,698: 0.58 +/- 0.01. The leading term of eq. 11.
 # Access: open full text, https://doi.org/10.1029/98JA01103 (2026-09-11).
@@ -767,6 +1005,8 @@ EARTH_MAGNETOPAUSE_SHUE_A6 = 0.58
 EARTH_MAGNETOPAUSE_SHUE_A7_PER_NT = -0.007
 # Unit: per_nt
 # Status: measured V_SOURCED 2026-09-11 -- open full text
+# Figures: 1 -- Table 1 prints -0.007, uncertainty 0.0005
+# Read: Table 1 "After Fit", p. 17,698, 2026-09-11, Claude Fable 5.1
 # Source: Shue et al. (1998), doi:10.1029/98JA01103 -- Table 1 "After Fit"
 # Source+: row a7, p. 17,698: -0.007 +/- 0.0005 per nT. Eq. 11 prints it as
 # Source+: the subtraction (0.58 - 0.007 Bz); the table carries the sign, so
@@ -774,8 +1014,10 @@ EARTH_MAGNETOPAUSE_SHUE_A7_PER_NT = -0.007
 # Access: open full text, https://doi.org/10.1029/98JA01103 (2026-09-11).
 
 EARTH_MAGNETOPAUSE_SHUE_A8 = 0.024
-# Unit: dimensionless
+# Unit: log_pressure_coefficient
 # Status: measured V_SOURCED 2026-09-11 -- open full text
+# Figures: 2 -- Table 1 prints 0.024, uncertainty 0.0004
+# Read: Table 1 "After Fit", p. 17,698, 2026-09-11, Claude Fable 5.1
 # Source: Shue et al. (1998), doi:10.1029/98JA01103 -- Table 1 "After Fit"
 # Source+: row a8, p. 17,698: 0.024 +/- 0.0004. The pressure term of eq. 11.
 # Access: open full text, https://doi.org/10.1029/98JA01103 (2026-09-11).
@@ -786,6 +1028,7 @@ EARTH_MAGNETOPAUSE_SHUE_A8 = 0.024
 EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG = 120.0
 # Unit: deg
 # Status: declared 2026-09-14 -- a drawing limit, not an edge
+# Figures: exact -- a declared drawing limit (Rule 2).
 # Declared: where the drawn magnetopause stops, measured from the nose.
 # Declared+: Shue's surface has no end. At the store's declared conditions
 # Declared+: the flaring is 0.5896, and for any flaring at or above 0.5 the
@@ -816,6 +1059,8 @@ EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG = 120.0
 EARTH_BOW_SHOCK_JELINEK_R0_RADII = 15.02
 # Unit: r_earth
 # Status: measured V_SOURCED 2026-09-10 -- open full text
+# Figures: 4 -- eq. 14 prints 15.02.
+# Read: eq. 14, p. 5, 2026-09-11, Claude Fable 5.1
 # Source: Jelinek, K., Nemecek, Z. and Safrankova, J. (2012), "A new
 # Source+: approach to magnetopause and bow shock modeling based on automated
 # Source+: region identification", J. Geophys. Res. 117, A05208,
@@ -833,15 +1078,19 @@ EARTH_BOW_SHOCK_JELINEK_R0_RADII = 15.02
 # Note+: two pairs are close enough to be mistaken for one another.
 
 EARTH_BOW_SHOCK_JELINEK_EPS = 6.55
-# Unit: dimensionless
+# Unit: inverse_exponent
 # Status: measured V_SOURCED 2026-09-10 -- open full text
+# Figures: 3 -- eq. 14 prints 6.55.
+# Read: eq. 14, p. 5, 2026-09-11, Claude Fable 5.1
 # Source: Jelinek et al. (2012), doi:10.1029/2011JA017252 -- eq. 14, p. 5:
 # Source+: the pressure exponent of R_BS = 15.02 p^(-1/6.55).
 # Access: open full text, https://doi.org/10.1029/2011JA017252 (2026-09-10).
 
 EARTH_BOW_SHOCK_JELINEK_LAMBDA = 1.17
-# Unit: dimensionless
+# Unit: shape_factor
 # Status: measured V_SOURCED 2026-09-10 -- open full text
+# Figures: 3 -- sec. 4 prints 1.17.
+# Read: sec. 4, text after eq. 11, p. 4, 2026-09-11, Claude Fable 5.1
 # Source: Jelinek et al. (2012), doi:10.1029/2011JA017252 -- sec. 4, in the
 # Source+: text after eq. 11: lambda = 1.17 for the bow shock (1.54 for the
 # Source+: magnetopause, which this file does not store because the
@@ -853,15 +1102,23 @@ EARTH_BOW_SHOCK_JELINEK_LAMBDA = 1.17
 
 EARTH_BOW_SHOCK_CUT_ANGLE_DEG = 105.0
 # Unit: deg
-# Status: measured V_SOURCED 2026-09-11 -- open full text
+# Status: declared 2026-09-21 -- a drawing limit, not an edge
+# Declared: where the drawn bow shock stops, measured from the nose. Tony's
+# Declared+: ruling of 2026-09-21 (L-322 C2) made this row declared, the same
+# Declared+: shape as EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG: a choice of where to
+# Declared+: stop drawing, taken from where the fit's crossings stopped.
+# Declared+: 7 h x 15 deg/h = 105 deg from the nose. The paper gives the
+# Declared+: hours; the degrees are this file's conversion, exact by
+# Declared+: definition (360 deg / 24 h). Until 2026-09-21 this conversion
+# Declared+: sat on a "# Derived:" line and the row was measured; counted as
+# Declared+: measured it would carry the one figure of "7 hours", export as
+# Declared+: 100 and stop the drawn shock five degrees short.
+# Figures: exact -- a declared drawing limit (Rule 2).
+# Read: sec. 2 para. 9, p. 2, 2026-09-11, Claude Fable 5.1
 # Source: Jelinek et al. (2012), doi:10.1029/2011JA017252 -- sec. 2 para. 9,
 # Source+: p. 2: the regions are identified on the whole dayside and toward
 # Source+: the flanks within +/- 7 hours of local time about local noon.
 # Source+: That envelope is the extent over which the fit is supported.
-# Derived: 7 h x 15 deg/h = 105 deg from the nose. The paper gives the
-# Derived+: hours; the degrees are this file's conversion, exact by
-# Derived+: definition (360 deg / 24 h). Same shape as EARTH_GM_KM3_S2,
-# Derived+: which converts IERS's m^3 s^-2 and stays one measured row.
 # Access: open full text, https://doi.org/10.1029/2011JA017252 (2026-09-11).
 # Note: the drawn bow shock stops here. Beyond it the paraboloid is
 # Note+: unsupported -- it reaches 67 R_E at x = -100 R_E -- and the real
@@ -871,6 +1128,8 @@ EARTH_BOW_SHOCK_CUT_ANGLE_DEG = 105.0
 EARTH_MAGNETOPAUSE_SHUE_SCATTER_RADII = 1.23
 # Unit: r_earth
 # Status: measured V_SOURCED 2026-09-14 -- open full text
+# Figures: 3 -- p. 17,697 prints 1.23.
+# Read: p. 17,697, 2026-09-11, Claude Fable 5.1
 # Source: Shue et al. (1998), doi:10.1029/98JA01103, p. 17,697 -- the
 # Source+: improved model's standard deviation against the observed
 # Source+: magnetopause crossings it was fitted to is 1.23 R_E.
@@ -884,35 +1143,35 @@ EARTH_MAGNETOPAUSE_SHUE_SCATTER_RADII = 1.23
 # Note+: about 1 R_E, which sits inside this one figure alone.
 # Record: documentation/L305_gap1_read_record_20260911.md
 
-EARTH_MAGNETOPAUSE_STANDOFF_RADII = 10.25
+EARTH_MAGNETOPAUSE_STANDOFF_RADII = (EARTH_MAGNETOPAUSE_SHUE_A1_RADII + EARTH_MAGNETOPAUSE_SHUE_A2_RADII * math.tanh(EARTH_MAGNETOPAUSE_SHUE_A3_PER_NT * (EARTH_SOLAR_WIND_BZ_NT + EARTH_MAGNETOPAUSE_SHUE_A4_NT))) * EARTH_SOLAR_WIND_PRESSURE_NPA ** (-1.0 / EARTH_MAGNETOPAUSE_SHUE_A5)
 # Unit: r_earth
-# Status: derived 2026-09-12 -- inherits EARTH_MAGNETOPAUSE_SHUE_A1_RADII
+# Status: derived 2026-09-22 -- inherits EARTH_MAGNETOPAUSE_SHUE_A1_RADII
 # Status+: through EARTH_MAGNETOPAUSE_SHUE_A5, EARTH_SOLAR_WIND_PRESSURE_NPA
 # Status+: and EARTH_SOLAR_WIND_BZ_NT
 # Derived: Shue eq. 10 at the declared conditions --
 # Derived+: (a1 + a2 tanh[a3 (Bz + a4)]) Dp^(-1/a5)
-# Derived+: = (10.22 + 1.29 tanh(0.184 x 8.14)) x 2^(-1/6.6)
-# Derived+: = 10.251872972379905.
-# Derived+: REPORT 10.25. Table 1 gives a1 to +/- 0.10 R_E and a5 to
-# Derived+: +/- 0.5, and either one alone moves r0 by about +/- 0.09, so the
-# Derived+: fourth figure is the last one the coefficients support.
-# Note: the STORED value is that reported figure, not the arithmetic
-# Note+: result. Tony's ruling, 2026-09-12 (L-325): a store carries the
-# Note+: figures its sources support. Sixteen digits on a value uncertain
-# Note+: in the first decimal is calculator output, not precision. The
-# Note+: arithmetic stays recorded above, so the row is still auditable.
-# Note+: This row was ALREADY a literal and so already followed nothing:
-# Note+: the Status line above names EARTH_SOLAR_WIND_PRESSURE_NPA, which
-# Note+: is declared pending (L-314), and had it moved this value would
-# Note+: have gone quietly stale with no test anywhere to catch it.
-# Note+: test_derived_figures.py now recomputes this row from the inputs
-# Note+: the Status line names and fails when the rounding stops holding.
-# Note+: That check is what replaces an expression's automatic
-# Note+: recomputation, and it announces rather than moving a published
-# Note+: number quietly. An earlier Note here said L-322 would turn this
-# Note+: row back into an expression once the gallery's parser is retired.
-# Note+: That plan is superseded: the stored form is the reported figure
-# Note+: whatever the parser can read.
+# Derived+: = (10.22 + 1.29 tanh(0.184 x 8.14)) x 2^(-1/6.6) = 10.3
+# Figures: 3 -- uncertainty 0.13, root-sum-square of the Table 1 standard
+# Figures+: deviations of EARTH_MAGNETOPAUSE_SHUE_A1_RADII through
+# Figures+: EARTH_MAGNETOPAUSE_SHUE_A5, each coefficient moved up and down
+# Figures+: by its own and the half-difference taken (a central difference),
+# Figures+: from full digits. The five are taken as independent because the
+# Figures+: paper gives no correlations between them; their plain sum is
+# Figures+: 0.25, and the tenths place holds only up to 0.158, so the
+# Figures+: reported place survives the independence assumption and would
+# Figures+: not survive the plain sum. The tenths place is the one whose
+# Figures+: implied half-unit is closest on a log scale (provenance-
+# Figures+: discipline 2.17, Rule 3, The ceiling). This is how well Shue's
+# Figures+: MODEL surface is pinned down at these conditions; real crossings
+# Figures+: scatter about it by the scatter row above, which the hovers
+# Figures+: print beside the value rather than propagate into it.
+# Note: arithmetic again since L-322 C2 (2026-09-22). The row is Shue's
+# Note+: eq. 10 at the declared conditions at full float precision, and
+# Note+: export_constants.py rounds it once, to the count above, when it
+# Note+: writes the export (Rule 6). It was a typed 10.25 from 2026-09-12
+# Note+: under the L-325 ruling that a derived row stores a rounded literal.
+# Note+: Tony withdrew that ruling on 2026-09-16, and 10.25 was in any case
+# Note+: a figure more than the coefficients' uncertainty supports.
 # Note+: Superseded a typed 10.0 on 2026-09-12 (L-305). The old row's own
 # Note+: Source already read 10.2 R_E at these conditions while the value
 # Note+: read 10.0 -- a drift inside one row, cleared here.
@@ -921,9 +1180,42 @@ EARTH_MAGNETOPAUSE_STANDOFF_RADII = 10.25
 # Note+: one. Lugaz et al. (2016), doi:10.1038/ncomms13001, gives 9-11 R_E
 # Note+: as the typical subsolar distance, which contains this.
 
+EARTH_MAGNETOPAUSE_STANDOFF_KM = EARTH_MAGNETOPAUSE_STANDOFF_RADII * EARTH_EQUATORIAL_RADIUS_KM
+# Derived: the standoff in Earth radii times Earth's equatorial radius,
+# Derived+: from full digits = 65,000
+# Unit: km
+# Status: derived 2026-09-22 -- inherits EARTH_MAGNETOPAUSE_STANDOFF_RADII,
+# Status+: EARTH_EQUATORIAL_RADIUS_KM
+# Figures: 2 -- uncertainty 850, carried through
+# Figures+: EARTH_MAGNETOPAUSE_STANDOFF_RADII from Shue's five stated
+# Figures+: uncertainties and Earth's radius, recomputed from full digits
+# Figures+: rather than converted from the standoff's rounded 0.13 (Rule 4
+# Figures+: applies to an uncertainty as to a value). The thousands place is
+# Figures+: the one whose implied half-unit, 500 km, is closest, so this
+# Figures+: row carries fewer figures than the standoff it converts: each
+# Figures+: unit is reported by its own uncertainty.
+# Note: exists so that every number the gallery's magnetopause hover prints
+# Note+: is computed here from full digits and rounded once at the export,
+# Note+: instead of the page multiplying a rounded standoff (L-322 C2, Tony's
+# Note+: instruction of 2026-09-20: the single source of truth is this file).
+
+EARTH_MAGNETOPAUSE_STANDOFF_AU = EARTH_MAGNETOPAUSE_STANDOFF_KM / KM_PER_AU
+# Derived: the kilometre row divided by the exact astronomical unit
+# Derived+: = 0.00044
+# Unit: au
+# Status: derived 2026-09-22 -- inherits EARTH_MAGNETOPAUSE_STANDOFF_KM,
+# Status+: KM_PER_AU
+# Figures: 2 -- uncertainty 0.0000057, carried through
+# Figures+: EARTH_MAGNETOPAUSE_STANDOFF_KM from the same primaries and
+# Figures+: recomputed from full digits; the fifth decimal place is the one
+# Figures+: whose implied half-unit is closest.
+# Note: the AU line of the same hover, for the same reason as the row above.
+
 EARTH_BOW_SHOCK_JELINEK_SCATTER_RADII = 0.69
 # Unit: r_earth
 # Status: measured V_SOURCED 2026-09-14 -- open full text
+# Figures: 2 -- fig. 7 prints 0.69.
+# Read: fig. 7, 2026-09-11, Claude Fable 5.1
 # Source: Jelinek, Nemecek and Safrankova (2012), J. Geophys. Res. 117,
 # Source+: A05208, doi:10.1029/2011JA017252 -- fig. 7: the scatter of
 # Source+: observed crossings about the bow shock model is 0.69 R_E. The
@@ -937,25 +1229,23 @@ EARTH_BOW_SHOCK_JELINEK_SCATTER_RADII = 0.69
 # Note+: inputs support and prints this beside it.
 # Record: documentation/L305_gap1_read_record_20260911.md
 
-EARTH_BOW_SHOCK_STANDOFF_RADII = 13.51
+EARTH_BOW_SHOCK_STANDOFF_RADII = EARTH_BOW_SHOCK_JELINEK_R0_RADII * EARTH_SOLAR_WIND_PRESSURE_NPA ** (-1.0 / EARTH_BOW_SHOCK_JELINEK_EPS)
 # Unit: r_earth
-# Status: derived 2026-09-12 -- inherits EARTH_BOW_SHOCK_JELINEK_R0_RADII,
+# Status: derived 2026-09-22 -- inherits EARTH_BOW_SHOCK_JELINEK_R0_RADII,
 # Status+: EARTH_BOW_SHOCK_JELINEK_EPS and EARTH_SOLAR_WIND_PRESSURE_NPA
 # Derived: Jelinek eq. 14 at the declared pressure -- 15.02 x 2^(-1/6.55)
-# Derived+: = 13.511736110493397. REPORT 13.51: the paper states no
-# Derived+: uncertainty on R0 or eps, so what bounds this is the crossing
-# Derived+: scatter, 0.69 R_E (fig. 7).
-# Note: the STORED value is that reported figure, not the arithmetic
-# Note+: result. It was the expression
-# Note+: EARTH_BOW_SHOCK_JELINEK_R0_RADII *
-# Note+: EARTH_SOLAR_WIND_PRESSURE_NPA ** (-1 / EARTH_BOW_SHOCK_JELINEK_EPS)
-# Note+: until 2026-09-12. Tony's ruling (L-325): a store carries the
-# Note+: figures its sources support, and four of them against a crossing
-# Note+: scatter of 0.69 R_E is already generous. Storing the expression
-# Note+: bought an automatic recomputation when an input moved, which is
-# Note+: a published number changing with nobody looking;
-# Note+: test_derived_figures.py recomputes this row from its inputs and
-# Note+: FAILS instead, which is the same protection said out loud.
+# Derived+: = 13.5
+# Figures: 3 -- set by EARTH_BOW_SHOCK_JELINEK_EPS (6.55, 3). Rule 3's fewest
+# Figures+: figures, over R0 (4) and epsilon (3); the pressure is declared
+# Figures+: and skipped. The exponent -1/6.55 is 0.153 in size, below one, so
+# Figures+: Rule 3 drops no figure. Jelinek states no uncertainty on either
+# Figures+: coefficient, so counting sets this and propagation does not.
+# Note: arithmetic again since L-322 C2 (2026-09-22). The row is Jelinek's
+# Note+: eq. 14 at the declared pressure at full float precision, and
+# Note+: export_constants.py rounds it once, to the count above, when it
+# Note+: writes the export (Rule 6). It was a typed 13.51 from 2026-09-12
+# Note+: under the L-325 ruling that a derived row stores a rounded literal;
+# Note+: Tony withdrew that ruling on 2026-09-16.
 # Note+: superseded a typed 12.5 on 2026-09-12 (L-305). Two claims went with
 # Note+: it. The value was the midpoint of Lugaz et al. (2016)'s 11-14 R_E,
 # Note+: which is not a model; and the shape was cited to Farris & Russell
@@ -967,9 +1257,35 @@ EARTH_BOW_SHOCK_STANDOFF_RADII = 13.51
 # Note+: The stale Note saying the shell draws 15 R_E is gone too:
 # Note+: earth_visualization_shells.py has read this constant since L-291.
 
+EARTH_BOW_SHOCK_STANDOFF_KM = EARTH_BOW_SHOCK_STANDOFF_RADII * EARTH_EQUATORIAL_RADIUS_KM
+# Derived: the standoff in Earth radii times Earth's equatorial radius,
+# Derived+: from full digits = 86,200
+# Unit: km
+# Status: derived 2026-09-22 -- inherits EARTH_BOW_SHOCK_STANDOFF_RADII,
+# Status+: EARTH_EQUATORIAL_RADIUS_KM
+# Figures: 3 -- set by EARTH_BOW_SHOCK_JELINEK_EPS (3) through
+# Figures+: EARTH_BOW_SHOCK_STANDOFF_RADII. Earth's radius in this chain
+# Figures+: states an uncertainty, so propagation also sets a ceiling here;
+# Figures+: it is three as well.
+# Note: exists so the gallery's bow shock hover prints a kilometre figure
+# Note+: computed here from full digits and rounded once at the export
+# Note+: (L-322 C2).
+
+EARTH_BOW_SHOCK_STANDOFF_AU = EARTH_BOW_SHOCK_STANDOFF_KM / KM_PER_AU
+# Derived: the kilometre row divided by the exact astronomical unit
+# Derived+: = 0.000576
+# Unit: au
+# Status: derived 2026-09-22 -- inherits EARTH_BOW_SHOCK_STANDOFF_KM,
+# Status+: KM_PER_AU
+# Figures: 3 -- set by EARTH_BOW_SHOCK_JELINEK_EPS through
+# Figures+: EARTH_BOW_SHOCK_STANDOFF_KM; the astronomical unit is exact.
+# Note: the AU line of the same hover, for the same reason as the row above.
+
 EARTH_MAGNETOTAIL_OBSERVED_RADII = 220.0
 # Unit: r_earth
 # Status: measured V_SOURCED 2026-09-14 -- abstract, open
+# Figures: 2 -- the abstract prints 220; its zero is not stated significant.
+# Read: abstract, NTRS document 19830066648, 2026-09-22, Claude Opus 5
 # Source: Slavin, J. A., Tsurutani, B. T., Smith, E. J., Jones, D. E. and
 # Source+: Sibeck, D. G. (1983), "Average configuration of the distant (less
 # Source+: than 220-earth-radii) magnetotail - Initial ISEE-3 magnetic field

@@ -60,6 +60,14 @@ September 12, 2026 (L-305, Opus 5): the two magnetosphere standoffs are
     the retired Lugaz-midpoint sentence is deleted, and the bow shock's
     source attribution moves from Lugaz to Jelinek. Deletion and
     correction only; the rewrite is item 7.
+September 22, 2026 (L-322 Stage C2, Opus 5): the four quotes of the two
+    standoffs print at the count their rows declare, read from the store
+    by _declared(), where they printed four figures by a fixed format
+    (provenance-discipline 2.17, Rule 7) -- the rows are arithmetic again
+    and declare three. The outer belt's typed "L = 4 to 5" band prints
+    from the two band rows now in the store. Three comments that typed a
+    dipole tilt in degrees now name the store row instead.
+Module updated: September 22, 2026 with Anthropic's Claude Opus 5
 """
 import numpy as np
 import math
@@ -85,6 +93,9 @@ from constants_new import (
     EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE, EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE,
     EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE, EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE,
     EARTH_MAGNETOTAIL_OBSERVED_RADII,
+    # L-322 Stage C2: the band the outer belt's drawn peak is the midpoint
+    # of. The hover typed it as literal text until then.
+    EARTH_VAN_ALLEN_OUTER_BAND_LOW_L, EARTH_VAN_ALLEN_OUTER_BAND_HIGH_L,
     # L-305 item 7 part 4: the conditions a model standoff is evaluated at,
     # and how far real crossings sit from the surface it draws.
     EARTH_SOLAR_WIND_PRESSURE_NPA,
@@ -97,6 +108,23 @@ from constants_new import (
     EARTH_HILL_SPHERE_KM, EARTH_HILL_SPHERE_RADII,
 )
 from orrery_rendering import rotate_to_sunward, create_info_marker
+import constants_new as _store
+from constants_rows import figures_of
+
+
+def _declared(name):
+    """Store row `name` as text, at the figure count its row declares.
+
+    L-322 Stage C2. The provenance skill's display rule: a display prints
+    the declared count, never more, and never chooses fewer. The value is
+    taken from the store by the same name as the count, so the two cannot
+    come from different rows. It formats with the skill's rounding rule,
+    percent-g, which switches to exponent notation when the count is
+    below a number's whole digits, so it is used only for the small
+    numbers at the sites below. A way for every orrery display to format
+    by the declared count is the follow-on recorded on L-322, not this.
+    """
+    return "%.*g" % (figures_of(name), getattr(_store, name))
 # L-231 (2026-09-15): the belts are drawn in Earth's equatorial plane now,
 # using the same call Saturn's belt builder has always used.
 from idealized_orbits import orient_to_planet_pole
@@ -788,7 +816,7 @@ def create_earth_upper_atmosphere_shell(center_position=(0, 0, 0)):
 earth_magnetosphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n" 
 
-            f"Earth's magnetosphere extends about {EARTH_MAGNETOPAUSE_STANDOFF_RADII:.4g} Earth radii on the Sun-facing side\n"
+            f"Earth's magnetosphere extends about {_declared('EARTH_MAGNETOPAUSE_STANDOFF_RADII')} Earth radii on the Sun-facing side\n"
             "and stretches into a long magnetotail on the night side. It deflects the solar\n"
             "wind and turns aside many of the energetic charged particles that reach Earth\n"
             "from the Sun and from beyond the solar system.\n\n"
@@ -798,7 +826,7 @@ earth_magnetosphere_info = (
             "here is shorter, because it is a picture and not a measurement.\n\n"
 
             "Bow Shock: the boundary where the supersonic solar wind first slows\n"
-            f"against Earth's magnetic field, about {EARTH_BOW_SHOCK_STANDOFF_RADII:.4g} Earth radii upstream on the\n"
+            f"against Earth's magnetic field, about {_declared('EARTH_BOW_SHOCK_STANDOFF_RADII')} Earth radii upstream on the\n"
             f"Sun-facing side at a nominal solar wind pressure of {EARTH_SOLAR_WIND_PRESSURE_NPA:g} nPa.\n"
             f"Both standoffs above are models evaluated at that pressure rather than\n"
             f"measurements: real crossings scatter about the fitted surfaces by\n"
@@ -861,12 +889,13 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     # 1. Add the main magnetosphere structure
     # Rotate to actual sunward direction, then offset to center position
     x, y, z = np.array(x), np.array(y), np.array(z)
-    # Phase D2: sun_position + magnetic tilt. Earth's magnetic dipole
-    # is tilted ~11 deg from its rotation axis.
+    # Phase D2: sun_position. No magnetic tilt is applied here; see the
+    # L-305 note below. (This comment said the dipole was tilted ~11 deg
+    # until L-322 C2; that figure was uncited and the code dropped it.)
     x, y, z = rotate_to_sunward(
         x, y, z, center_position=center_position,
         # L-305 (2026-09-15): magnetic_tilt_deg=11 removed. It was uncited,
-        # it disagreed with the sourced 9.6 in PLANET_DIPOLE, and the bow
+        # it disagreed with the sourced tilt in PLANET_DIPOLE, and the bow
         # shock call below passes no tilt at all -- so this leaned the
         # magnetopause inside an upright bow shock. Both boundary models
         # are fitted symmetric about the Sun line from crossings taken at
@@ -879,7 +908,7 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     z = z + center_z
     
     magnetosphere_text = ["Earth: Magnetosphere<br><br>"
-                 f"Earth's magnetosphere reaches about {EARTH_MAGNETOPAUSE_STANDOFF_RADII:.4g} Earth radii on the Sun-facing<br>"
+                 f"Earth's magnetosphere reaches about {_declared('EARTH_MAGNETOPAUSE_STANDOFF_RADII')} Earth radii on the Sun-facing<br>"
                  f"side at a nominal solar wind pressure of {EARTH_SOLAR_WIND_PRESSURE_NPA:g} nPa. It stretches into a<br>"
                  "long magnetotail on the night side, deflects the solar wind, and turns<br>"
                  "aside many of the energetic charged particles that reach Earth.<br><br>"
@@ -947,7 +976,7 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     
     bow_shock_text = ["Earth: Bow Shock<br><br>"
                 "Bow Shock: the boundary where the supersonic solar wind first slows<br>"
-                f"against Earth's magnetic field, about {EARTH_BOW_SHOCK_STANDOFF_RADII:.4g} Earth radii upstream on the<br>"
+                f"against Earth's magnetic field, about {_declared('EARTH_BOW_SHOCK_STANDOFF_RADII')} Earth radii upstream on the<br>"
                 f"Sun-facing side at a nominal solar wind pressure of {EARTH_SOLAR_WIND_PRESSURE_NPA:g} nPa.<br><br>"
                 "That distance is a model evaluated at that pressure, not something anyone<br>"
                 f"measured. Real crossings of the bow shock scatter about the fitted<br>"
@@ -992,6 +1021,10 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     # Source+: 2026-09-14, when L-305 item 7 gave them rows to read.
     # Source+: The kilometres are arithmetic on those rows, not a second
     # Source+: figure: see _km_above_surface() at the top of this module.
+    # L-322 Stage C2: the band's two ends, from their store rows at their
+    # declared counts, for the outer belt's source line below.
+    _band_low = _declared('EARTH_VAN_ALLEN_OUTER_BAND_LOW_L')
+    _band_high = _declared('EARTH_VAN_ALLEN_OUTER_BAND_HIGH_L')
     belt_texts = [
         f"Inner Van Allen Belt: Region of trapped charged particles (mainly protons).<br>"
         f"Drawn at the flux peak, {EARTH_VAN_ALLEN_INNER_RADII:g} Earth radii from Earth's centre, about<br>"
@@ -1008,7 +1041,7 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
         f"activity -- roughly {_km_above_surface(EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE, 1):,} to {_km_above_surface(EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE, 1):,} km above the surface<br>"
         f"(every kilometre figure here converted from Earth radii).<br>"
         "Source (peak): Li et al. (2025), doi:10.1029/2024JA033504 -- most intense across<br>"
-        f"the L = 4 to 5 band; the drawn {EARTH_VAN_ALLEN_OUTER_RADII:g} is our midpoint of it.<br>"
+        f"the L = {_band_low} to {_band_high} band; the drawn {EARTH_VAN_ALLEN_OUTER_RADII:g} is our midpoint of it.<br>"
         "Source (extent): Meredith et al. (2014); Li, Tu et al. (2024), doi:10.1029/2023JA032171."
     ]
     
@@ -1043,7 +1076,7 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
                 # L-231 (Tony's ruling, 2026-09-15): the saddle is gone.
                 # This was z = 0.2 * belt_radius * sin(2 * angle), lifting
                 # the ring a fifth of its radius TWICE per circuit -- more
-                # vertical swing than the real 9.6-degree magnetic tilt
+                # vertical swing than Earth's real magnetic tilt
                 # would give, at twice the frequency, meaning nothing. The
                 # comment here said it made the belt "thinner near poles";
                 # it changed no cross-section, it moved the whole ring.

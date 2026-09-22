@@ -39,6 +39,12 @@ Module updated: August 2026 with Anthropic's Claude Opus 5 (L-224:
 create_streamer_band_shape -- helmet-and-stalk band geometry for the
 solar streamer belt, per-point alpha so the stalk has no visible edge)
 
+Module updated: September 22, 2026 with Anthropic's Claude Opus 5 (L-322
+Stage C2: PLANET_DIPOLE['Earth']'s note prints the tilt, its epoch and
+its rate from constants_new.py at their declared counts, where it typed
+a tilt in degrees and a drift per decade that the source gives per year;
+_declared_count() does the formatting)
+
 Role: rendering
 Domain: orrery
 """
@@ -46,12 +52,15 @@ Domain: orrery
 import math
 import numpy as np
 import plotly.graph_objs as go
+from constants_rows import figures_of
 from constants_new import (
     KM_PER_AU, SUN_RADIUS_KM, LIGHT_MINUTES_PER_AU, KNOWN_ORBITAL_PERIODS,
     CENTER_BODY_RADII,
     # L-231 (2026-09-15): Earth's dipole tilt moved to the store so the web
     # page can quote it. One value, one home; this table reads it.
     EARTH_DIPOLE_TILT_DEG,
+    # L-322 Stage C2: the tilt's rate, printed beside it on the cone's hover.
+    EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR,
     # L-162 (2026-07-29): named directly in constants_new.py now; these
     # nine no longer derive from a CENTER_BODY_RADII lookup below.
     MERCURY_RADIUS_KM, VENUS_RADIUS_KM, MOON_RADIUS_KM, MARS_RADIUS_KM,
@@ -663,6 +672,31 @@ def build_rotation_axis_traces(center_position=(0, 0, 0), planet_name=None,
     return traces
 
 
+def _declared_count(name, value):
+    """`value` as text at the figure count store row `name` declares.
+
+    L-322 Stage C2. The provenance skill's display rule: a display prints
+    the declared count, never more, and never chooses fewer. The value is
+    passed separately because the tilt rate prints as its size, with its
+    sign said in words. Used only on the two small numbers in the Earth
+    dipole note below.
+    """
+    return "%.*g" % (figures_of(name), value)
+
+
+# Source: Alken et al. 2021, IGRF-13 (Earth Planets Space 73, 49) -- epoch
+# Source+: 2020.0. The two numbers are EARTH_DIPOLE_TILT_DEG and
+# Source+: EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR in constants_new.py, computed
+# Source+: there from the IGRF-13 coefficient rows, each with its citation.
+# L-322 Stage C2: this note typed "~9.6 deg" and a drift of "~0.05
+# deg/decade" until then; the source gives about 0.05 deg a YEAR.
+_EARTH_DIPOLE_NOTE = 'Tilt %s deg at epoch 2020.0 (IGRF-13); %s about %s deg a year' % (
+    _declared_count('EARTH_DIPOLE_TILT_DEG', EARTH_DIPOLE_TILT_DEG),
+    'decreasing' if EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR < 0 else 'increasing',
+    _declared_count('EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR',
+                    abs(EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR)))
+
+
 # ---------------------------------------------------------------------------
 # Magnetic dipole-cone primitive (Movement 2).
 # Module section added: June 2026 with Anthropic's Claude Opus 4.8.
@@ -690,7 +724,9 @@ def build_rotation_axis_traces(center_position=(0, 0, 0), planet_name=None,
 # All four have been in the table with sourced tilts since 2026-06-22, eleven
 # lines below. The paragraph sat there contradicting them, and it is one of
 # the places the stale "Earth 11 degrees" keeps being read from. Earth's tilt
-# is 9.6 deg and now lives in the store as EARTH_DIPOLE_TILT_DEG.
+# now lives in the store as EARTH_DIPOLE_TILT_DEG, computed there from
+# IGRF-13's degree-1 coefficients since L-322 C2; the 9.6 once typed here
+# was in no epoch of that model.
 # ---------------------------------------------------------------------------
 # Movement 2, dipole cluster (L-009 / L-006). Tilts, offsets, and sources are
 # peer-reviewed mission data (Gemini de-novo, June 2026); the recalled values
@@ -713,15 +749,15 @@ PLANET_DIPOLE = {
                 'source': 'Anderson et al. 2011, MESSENGER (Science 333, 1859)'},
     # L-231 (2026-09-15): the tilt is read from the store, not repeated
     # here. The note and source below say more than the store row does and
-    # are what the cone's hover reads, so they stay.
+    # are what the cone's hover reads, so they stay. L-322 C2: the note is
+    # built above the table from the store (_EARTH_DIPOLE_NOTE).
     'Earth':   {'tilt_deg': EARTH_DIPOLE_TILT_DEG, 'azimuth_deg': 0.0,
                 'offset_fraction': 0.085,
                 'offset_note': 'Center offset: ~0.085 R_E northward, axial '
                                'approximation (~540 km); the true center is also '
                                'displaced laterally toward ~22 N, 140 E '
                                '(secular variation, unmodeled here)',
-                'note': 'Tilt ~9.6 deg for epoch 2020-2025 (IGRF-13); slowly '
-                        'decreasing ~0.05 deg/decade',
+                'note': _EARTH_DIPOLE_NOTE,
                 'source': 'Alken et al. 2021, IGRF-13 (Earth Planets Space 73, 49)'},
     'Jupiter': {'tilt_deg': 10.3, 'azimuth_deg': 0.0, 'offset_fraction': 0.12,
                 'offset_note': 'Center offset: ~0.12 R_J, axial approximation; the '

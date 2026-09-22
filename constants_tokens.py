@@ -56,11 +56,13 @@ THE TWO FIELDS
 WHAT IS NOT A TOKEN
 
     "dimensionless" names no quantity, so it is not a token (Tony's
-    ruling, 2026-09-14). Five rows in the store still declare it and are
-    replaced at their slice visit. RETIRED_TOKENS below lets the checkers
-    say so by name, rather than reporting those five as unknown -- which
-    would turn every maintenance run red until the Earth slice is walked,
-    the exact outcome the per-slice gate of 2026-09-14 exists to avoid.
+    ruling, 2026-09-14). Five rows in the store declared it until the
+    Earth slice visit of L-322 Stage C2 (2026-09-22) gave each a token
+    naming what the number is; none declares it now. RETIRED_TOKENS
+    below stays, so a checker meeting the word again says what is wrong
+    with it by name rather than reporting an unknown token -- which
+    would turn every maintenance run red, the exact outcome the
+    per-slice gate of 2026-09-14 exists to avoid.
     A token that is neither in TOKENS nor in RETIRED_TOKENS is a failure
     everywhere, so this table grows by failing rather than by guessing.
 
@@ -76,6 +78,11 @@ Domain: orrery
 
 Module created: September 16, 2026 with Anthropic's Claude Opus 5
 (L-322, the mechanism: piece 1 of the build manifest).
+Module updated: September 22, 2026 with Anthropic's Claude Opus 5
+(L-322 Stage C2: six tokens. Four named pure numbers replace
+"dimensionless" on Shue's and Jelinek's coefficients, and two time-rate
+tokens carry Earth's dipole tilt rate and the coefficient rates it is
+computed from.)
 """
 
 TOKENS = {
@@ -166,6 +173,43 @@ TOKENS = {
         "dimension": "K",
         "defining_constant": None,
         "meaning": "kelvin",
+    },
+    # L-322 Stage C2 (2026-09-22): four named pure numbers, replacing the
+    # retired "dimensionless" on five fitted coefficients, and two
+    # time-rate tokens for Earth's dipole tilt rate and its inputs.
+    "inverse_exponent": {
+        "dimension": "named number",
+        "defining_constant": None,
+        "meaning": ("the n in a power law p^(-1/n): a pure number saying "
+                    "how weakly a distance follows the pressure"),
+    },
+    "flaring_exponent": {
+        "dimension": "named number",
+        "defining_constant": None,
+        "meaning": ("how fast the magnetopause widens away from its nose; "
+                    "the leading term of Shue's alpha"),
+    },
+    "log_pressure_coefficient": {
+        "dimension": "named number",
+        "defining_constant": None,
+        "meaning": ("a pure number multiplying the natural logarithm of a "
+                    "pressure in nanopascals"),
+    },
+    "shape_factor": {
+        "dimension": "named number",
+        "defining_constant": None,
+        "meaning": ("the ratio setting how wide Jelinek's paraboloid opens "
+                    "against its length"),
+    },
+    "nt_per_year": {
+        "dimension": "nT / yr",
+        "defining_constant": None,
+        "meaning": "nanotesla per year, a rate of change of a field",
+    },
+    "deg_per_year": {
+        "dimension": "deg / yr",
+        "defining_constant": None,
+        "meaning": "degrees of angle per year",
     },
 }
 

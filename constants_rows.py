@@ -31,7 +31,8 @@ WHAT A ROW CARRIES
     status                 the "# Status:" line joined with "# Status+:"
                            lines, the same join test_status_lines.py makes
     derived_text           the "# Derived:" block, or None
-    read_text              the "# Read:" lines, a list
+    read_text              the "# Read:" lines, a list, one entry per
+                           read with its "# Read+:" lines joined to it
 
     A row is DERIVED when its right-hand side is an expression, or when
     it is on the TRANSITIONAL list below. A row that only carries a
@@ -42,19 +43,20 @@ THE TWO SHARED LISTS
 
     CLOSED_SLICES   slices whose walk is finished. Inside one, a row with
                     no unit, no status or no figure count FAILS; outside,
-                    it is named as not yet migrated. Empty until the
-                    Earth walk finishes, then ("EARTH",). Tony's
+                    it is named as not yet migrated. ("EARTH",) since
+                    L-322 Stage C2, 2026-09-22; empty before. Tony's
                     per-slice gate, 2026-09-14. One home, here, so the
                     three checkers that apply it cannot disagree.
 
-    TRANSITIONAL    the two magnetosphere standoffs. They were stored as
+    TRANSITIONAL    EMPTY since L-322 Stage C2 (2026-09-22). It held the
+                    two magnetosphere standoffs, which were stored as
                     rounded literals under the ruling of 2026-09-12
-                    (L-325), which Tony withdrew on 2026-09-16. They stay
-                    literals until the gallery stops parsing this store
-                    (the gallery session of this build), then revert to
-                    expressions at their Earth-slice visit, and this list
-                    empties. Their arithmetic lives only in their
-                    "# Derived:" lines until then.
+                    (L-325) that Tony withdrew on 2026-09-16. Their
+                    arithmetic lived only in their "# Derived:" lines
+                    until the Earth slice visit made them expressions
+                    again. The list and the code that reads it stay, so a
+                    later literal awaiting its visit has somewhere to go
+                    and the checkers still say what it is.
 
     A row's slice is its name up to the first underscore: EARTH for
     every Earth row. That rule is enough for the Earth slice. It is not
@@ -67,6 +69,11 @@ Domain: dev_tools
 
 Module created: September 16, 2026 with Anthropic's Claude Opus 5
 (L-322, the mechanism: the shared reader the build manifest names).
+Module updated: September 22, 2026 with Anthropic's Claude Opus 5
+(L-322 Stage C2: Earth is a closed slice, TRANSITIONAL is empty,
+figures_of() lets a display format a row by the count the row declares,
+and a "# Read:" line's "+" continuations join it, so the export's read
+list holds one entry per read.)
 """
 
 import ast
@@ -76,12 +83,9 @@ import re
 
 STORE = "constants_new.py"
 
-CLOSED_SLICES = ()
+CLOSED_SLICES = ("EARTH",)
 
-TRANSITIONAL = (
-    "EARTH_MAGNETOPAUSE_STANDOFF_RADII",
-    "EARTH_BOW_SHOCK_STANDOFF_RADII",
-)
+TRANSITIONAL = ()
 
 TOKEN_RE = re.compile(r"^[a-z][a-z0-9_]*$")
 KEY_RE = re.compile(r"^#\s*([A-Z][A-Za-z-]*)(\+?):\s?(.*)$")
@@ -232,7 +236,13 @@ def _fill_fields(row):
 
     row.status = row.field("Status")
     row.derived_text = row.field("Derived", loose=True)
-    row.read_text = [t for k, plus, t in row.entries if k == "Read"]
+    reads = []
+    for key, plus, text in row.entries:
+        if key == "Read" and not plus:
+            reads.append(text.strip())
+        elif key == "Read" and plus and reads:
+            reads[-1] = (reads[-1] + " " + text.strip()).strip()
+    row.read_text = reads
 
 
 def parse_store_text(text):
@@ -310,6 +320,35 @@ def load_values(project_dir):
     namespace = {"__name__": "constants_new_snapshot", "__file__": path}
     exec(compile(read_text(path), path, "exec"), namespace)
     return namespace
+
+
+_FIGURES_BY_DIR = {}
+
+
+def figures_of(name, project_dir=None):
+    """The figure count row `name` declares: an int, "exact", or None.
+
+    For a display that has only the Python float and must print it at
+    the count its row declares (provenance-discipline 2.17, Rule 7). The
+    caller formats, with Rule 5's "%.*g" or an f-string's ".{n}g".
+
+    Reads constants_new.py beside this file once per process and keeps
+    the table. A name that is not a row raises KeyError, so a display
+    that names the wrong row fails where it is built instead of quietly
+    printing some other row's count.
+
+    This is the smallest thing L-322 Stage C2's four standoff sites need.
+    A general way for every orrery display to format by the declared
+    count is the follow-on recorded on L-322, not designed here.
+    """
+    project_dir = project_dir or os.path.dirname(os.path.abspath(__file__))
+    table = _FIGURES_BY_DIR.get(project_dir)
+    if table is None:
+        _text, _rows, by_name = read_store(project_dir)
+        table = dict((row_name, row.figures)
+                     for row_name, row in by_name.items())
+        _FIGURES_BY_DIR[project_dir] = table
+    return table[name]
 
 
 def names_in(text, known):

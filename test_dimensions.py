@@ -37,7 +37,7 @@ HOW IT WORKS
     alone would pass. It also proves this check evaluated the same
     arithmetic Python did.
 
-TWO RULES NO UNIT ALGEBRA CARRIES (build manifest, section 7)
+RULES NO UNIT ALGEBRA CARRIES (build manifest, section 7; one more at L-322 C2)
 
     Dividing by a defining constant is a CONVERSION. EARTH_INNER_CORE_KM /
     EARTH_EQUATORIAL_RADIUS_KM is km/km to astropy and Earth radii to the
@@ -45,6 +45,17 @@ TWO RULES NO UNIT ALGEBRA CARRIES (build manifest, section 7)
     numerator is converted into that token instead. The defining row must
     itself declare the token's dimension; otherwise the conversion would
     rest on a unit nobody declared.
+
+    Multiplying by a defining constant is the SAME conversion run back.
+    EARTH_MAGNETOPAUSE_STANDOFF_RADII * EARTH_EQUATORIAL_RADIUS_KM is
+    Earth radii times kilometres -- an area -- to astropy, and kilometres
+    to the store. When one factor is a defining constant and the other is
+    a quantity in exactly that constant's token, the product is the other
+    factor converted out of the token into the token's dimension. A
+    factor in any other unit multiplies as usual, so kilometres times
+    Earth's radius still reads as an area and fails. (L-322 Stage C2,
+    2026-09-22: the manifest's four new kilometre rows are the first rows
+    of this shape, and without the rule they are MISMATCH.)
 
     A non-integer power of a single declared input is taken on the number
     in its declared unit. Shue's Dp^(-1/a5) and Jelinek's p^(-1/eps) are
@@ -95,6 +106,10 @@ Domain: dev_tools
 
 Module created: September 16, 2026 with Anthropic's Claude Opus 5
 (L-322, the mechanism: piece 4 of the build manifest).
+Module updated: September 22, 2026 with Anthropic's Claude Opus 5
+(L-322 Stage C2: multiplying by a defining constant converts out of its
+token, the division rule run back, with a fixture that passes and one
+that fails.)
 """
 
 import ast
@@ -294,6 +309,28 @@ class Evaluator(object):
                 return left.to(self.units[token])
             right = self.ev(node.right)
             return left / right
+        if isinstance(op, ast.Mult):
+            left = self.ev(node.left)
+            right = self.ev(node.right)
+            for const_node, const, other in ((node.right, right, left),
+                                             (node.left, left, right)):
+                if not (isinstance(const_node, ast.Name)
+                        and const_node.id in self.defining
+                        and isinstance(other, u.Quantity)):
+                    continue
+                token = self.defining[const_node.id]
+                if other.unit != self.units[token]:
+                    continue
+                wanted = u.Unit(self.tokens[token]["dimension"])
+                if not math.isclose(const.unit.to(wanted), 1.0,
+                                    rel_tol=REL_TOL):
+                    raise Verdict("MISMATCH", "%s defines '%s' in %s but "
+                                  "declares %s" % (const_node.id, token,
+                                                   wanted, const.unit))
+                self.notes.append("multiplied by %s: converted out of %s "
+                                  "into %s" % (const_node.id, token, wanted))
+                return other.to(wanted)
+            return left * right
         if isinstance(op, ast.Pow):
             base = self.ev(node.left)
             exponent = self.plain(self.ev(node.right), "the exponent")
@@ -464,6 +501,10 @@ FIX_UNKNOWN = FIX_A_KM * 2
 # Unit: furlong
 FIX_CALL = FIX_A_KM * round(FIX_A5)
 # Unit: km
+FIX_BACK = FIX_CONVERTED * FIX_R_KM
+# Unit: km
+FIX_BACK_AREA = FIX_A_KM * FIX_R_KM
+# Unit: km
 '''
 
 FIXTURE_EXPECTED = {
@@ -480,6 +521,8 @@ FIXTURE_EXPECTED = {
     "FIX_INPUT_RETIRED": ["RETIRED TOKEN"],
     "FIX_UNKNOWN": ["UNKNOWN TOKEN"],
     "FIX_CALL": ["CANNOT EVALUATE"],
+    "FIX_BACK": ["OK"],
+    "FIX_BACK_AREA": ["MISMATCH"],
 }
 
 
@@ -510,6 +553,8 @@ def run_fixtures():
         problems.append("FIX_GEO: the power rule fired on a computed base")
     if "converted into fx_r" not in got.get("FIX_CONVERTED", ("", "", 0))[1]:
         problems.append("FIX_CONVERTED: the conversion rule did not fire")
+    if "converted out of fx_r" not in got.get("FIX_BACK", ("", "", 0))[1]:
+        problems.append("FIX_BACK: the multiplication rule did not fire")
     if got.get("FIX_UNIT_MISSING", ("", "", True))[2]:
         problems.append("FIX_UNIT_MISSING: a gap failed outside a closed "
                         "slice")
@@ -545,7 +590,7 @@ def main():
         print("")
     else:
         print("Fixtures: %d built-in rows gave their expected verdicts, "
-              "including both hand rules and a gap failing inside a "
+              "including the hand rules and a gap failing inside a "
               "closed slice." % fixture_count)
         print("")
 

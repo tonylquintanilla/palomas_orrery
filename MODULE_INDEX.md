@@ -11,22 +11,17 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 137  
-**Total Lines of Code (non-blank):** 109,244  
-**Total Public Functions/Classes:** 1,225
+**Total Python Files:** 136  
+**Total Lines of Code (non-blank):** 109,557  
+**Total Public Functions/Classes:** 1,228
 
 ## Classification Coverage
 
-**Undetermined role (4).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (3).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
-- `patch_L322_C2_0b_skill_2_17_20260922.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
-
-**Undetermined domain (1).** No valid `Domain:` tag.
-
-- `patch_L322_C2_0b_skill_2_17_20260922.py`
 
 
 ---
@@ -58,7 +53,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `paleoclimate_visualization_full.py` | Paleoclimate Visualization for Paloma's Orrery Phanerozoic temperature reconstruction (540 Ma - present) (1,489 lines) |
 | `paleoclimate_wet_bulb_full.py` | Paleoclimate + Wet Bulb Visualization for Paloma's Orrery Phanerozoic temperature reconstruction (540 Ma - present) with human survivability context (2,226 lines) |
 | `planet_visualization.py` | High-level planet and Sun visualization orchestration. (712 lines) |
-| `planet_visualization_utilities.py` | Shared geometry helpers and body-radius aliases. (933 lines) |
+| `planet_visualization_utilities.py` | Shared geometry helpers and body-radius aliases. (963 lines) |
 | `planetarium_apparent_magnitude.py` | Create 3D visualization for stars brighter than specified apparent magnitude. (355 lines) |
 | `planetarium_distance.py` | 3D star field pipeline for distance-based queries. (401 lines) |
 | `plot_data_report_widget.py` | Embedded report panel for star visualization results. (562 lines) |
@@ -80,7 +75,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `asteroid_belt_visualization_shells.py` | Asteroid Belt Visualization Module Functions for creating visualizations of asteroid belt structures in 3D plots. Includes Main Belt, Hildas, Trojans, and Greeks. Also includes helper functions for dynamic Trojan positioning based on Jupiter's location. (403 lines) |
 | `comet_visualization_shells.py` | Comet visual components for 3D orrery plots. (1,878 lines) |
-| `earth_visualization_shells.py` | Earth interior and orbital shell traces. (1,240 lines) |
+| `earth_visualization_shells.py` | Earth interior and orbital shell traces. (1,270 lines) |
 | `eris_visualization_shells.py` | Eris interior and boundary shell traces. (482 lines) |
 | `jupiter_visualization_shells.py` | Jupiter interior, ring, and magnetosphere shell traces. (897 lines) |
 | `mars_visualization_shells.py` | Mars interior and remnant field shell traces. (884 lines) |
@@ -123,15 +118,15 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,250 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (512 lines) |
-| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (2,020 lines) |
-| `constants_tokens.py` | - what each "# Unit:" token in constants_new.py means. (162 lines) |
+| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (2,319 lines) |
+| `constants_tokens.py` | - what each "# Unit:" token in constants_new.py means. (206 lines) |
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (412 lines) |
 | `exoplanet_stellar_properties.py` | Stellar Properties for Exoplanet Host Stars (484 lines) |
 | `exoplanet_systems.py` | Hardcoded Exoplanet System Catalog (572 lines) |
 | `info_dictionary.py` | Descriptive text and narrative content for Paloma's Orrery. (2,050 lines) |
 | `messier_catalog.py` | Static catalog of Messier objects and bright deep-sky objects. (406 lines) |
 | `sgr_a_star_data.py` | S-star catalog and orbital mechanics for Sagittarius A*. (590 lines) |
-| `shell_configs.py` | Shell configuration data for all celestial bodies. (2,600 lines) |
+| `shell_configs.py` | Shell configuration data for all celestial bodies. (2,610 lines) |
 | `spacecraft_encounters.py` | Tagged encounter data for spacecraft missions in Paloma's Orrery. (1,298 lines) |
 | `star_notes.py` | Curated hover text annotations for notable stars. (1,158 lines) |
 | `star_properties.py` | SIMBAD stellar property queries with local caching. (340 lines) |
@@ -179,7 +174,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `constants_rows.py` | - read constants_new.py as rows: each top-level assignment, its right-hand side, and the comment fields beneath it. (277 lines) |
+| `constants_rows.py` | - read constants_new.py as rows: each top-level assignment, its right-hand side, and the comment fields beneath it. (309 lines) |
 | `earth_system_common.py` | Shared, engine-agnostic helpers for the Earth System KMZ generators (climate/heat and food insecurity). (134 lines) |
 | `formatting_utils.py` | Basic formatting utilities used by both palomas_orrery.py and visualization_utils.py. (19 lines) |
 | `palomas_orrery_helpers.py` | Support functions extracted from the main orrery monolith. (741 lines) |
@@ -204,7 +199,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `doc_index.py` | - regenerate README.md's key-documents table from the documents themselves. (170 lines) |
 | `earth_system_generator.py` | Paloma's Orrery: Earth System Generator Engine Architecture: The Teaser (Plotly) & Blockbuster (KMZ) Pipeline (673 lines) |
 | `examine_hot_csv.py` | Examine the HOT CSV file structure (47 lines) |
-| `export_constants.py` | - write data/constants_export.json from constants_new.py. The orrery is the producer of its numbers; the gallery reads this file and never reads orrery source. (291 lines) |
+| `export_constants.py` | - write data/constants_export.json from constants_new.py. The orrery is the producer of its numbers; the gallery reads this file and never reads orrery source. (303 lines) |
 | `export_orbit_cache.py` | Phase 1b desktop devtool: read the local orbit caches and write web-servable orbit/position files for the interactive gallery. (617 lines) |
 | `food_insecurity_generator.py` | IPC acute food-insecurity KMZ layer (Sudan, current period). (702 lines) |
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
@@ -216,11 +211,11 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,071 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (342 lines) |
 | `test_citation_inheritance.py` | Regression tests for citation-block inheritance. (516 lines) |
-| `test_constants_export.py` | - data/constants_export.json says what constants_new.py holds. (225 lines) |
+| `test_constants_export.py` | - data/constants_export.json says what constants_new.py holds. (230 lines) |
 | `test_constants_provenance.py` | Regression tests for verified numeric constants. (411 lines) |
 | `test_cross_checked.py` | Regression tests for cross-check annotations. (501 lines) |
-| `test_derived_figures.py` | - a derived constant declares no more significant figures than its inputs support, and names every derived row it cannot judge. (545 lines) |
-| `test_dimensions.py` | - a derived constant's unit follows from its arithmetic. (547 lines) |
+| `test_derived_figures.py` | - a derived constant declares no more significant figures than its inputs support, and names every derived row it cannot judge. (973 lines) |
+| `test_dimensions.py` | - a derived constant's unit follows from its arithmetic. (591 lines) |
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (224 lines) |
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (485 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (120 lines) |
@@ -238,7 +233,6 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L322_C2_0b_skill_2_17_20260922.py` | - ORRERY repo. (621 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |
