@@ -410,3 +410,161 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 TONY-ACTION ROLLUP for this patch:
   (do)     steps 1 to 6 above.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+====================================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L303_phone_setting_and_turn_card_20260922.py
+  ok  index.html: header Updated stamp
+  ok  index.html: style for the turn-the-phone card
+  ok  index.html: the phone leaves out a card set to none
+  ok  index.html: turnWanted() beside sweepWanted()
+  ok  index.html: the loader holds a 3D landscape figure on an upright phone
+  ok  index.html: rotation redraws when the answer changes
+  ok  editor: docstring stamp
+  ok  editor: the shape values
+  ok  editor: a helper that reads whether a card's landscape figure is 3D
+  ok  editor: the phone setting in the card form
+  ok  editor: saving maps the two 16:9 choices to one value
+  ok  converter: docstring stamp
+  ok  converter: a re-export keeps shape none
+  ok  sweep report: the rule list
+  ok  sweep report: docstring stamp
+  ok  sweep report: shape none is its own class
+  ok  sweep report: the 3D class names what the phone does
+  ok  sweep report: the class order
+  ok  encoding gate: inserted text is ASCII, and no file holds
+      a non-ASCII byte.
+  ok  the three Python files compile after the edit
+  wrote index.html (167803 bytes)
+  wrote tools/gallery_editor.py (55703 bytes)
+  wrote tools/json_converter.py (36327 bytes)
+  wrote tools/sweep_report.py (7282 bytes)
+
+patch applied to 4 file(s)
+
+Stamps updated: the 'Updated' line at the top of index.html and the
+'Module updated' line in each of the three tools.
+
+WHAT TO DO NEXT, in this order:
+
+  1. Move THIS script into documentation/. It has run. -- run and stored 9/23/26
+  2. Run the gallery maintenance run:
+         python gallery_maintenance_run.py
+     Expect every gating checker to pass, as before. None of them
+     opens a card on a phone, so a pass does not speak for this
+     change; your eyes in step 7 do.
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.5s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     1.3s  rewrote data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      13.9s  PASS (201 checks, 0 failures)
+  PASS Mirror suite              0.1s  All 42 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing.
+  PASS Store writer suite        4.2s  All 245 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 246 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 58 link(s) compared, store
+                                    7fb7a1b666d4.
+  PASS Pointer join              0.1s  Every link is accounted for: 87
+                                    link(s) against orrery 751aff3f,
+                                    24 fallback named; read check: 41
+                                    of 41 measured rows reached carry
+                                    a read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's features exactly: 4
+                                    object(s), 34 named shell(s), in
+                                    both cache files.
+  PASS Feature renderers         1.1s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.2s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.3s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.3s  === PASS: 55 hover(s) and 267
+                                    number(s) examined; 12 graded, 4
+                                    graded by line, 43 held to the
+                                    fixture ===
+  PASS Artifact 1 assembler      0.3s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: 1 sibling(s), none stale,
+                                    and nothing in data/ the builder
+                                    did not make. The sweep is keeping
+                                    up.
+
+======================================================================
+  15 of 15 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: 1 sibling(s), none stale, and
+  last swap 2026-09-23T13:09:46.835195+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  3. In GitHub Desktop the change list should show exactly five
+     files: index.html, the three tools, and this script under
+     documentation/. Commit and push.
+-- gallery moved to 4c20194a69f6cb57ff19a33ffa2f64a320fd8a41
+--
+
+  4. After the push, check what the live site serves:
+         python gallery_maintenance_run.py --live
+  5. Open the gallery editor (tools/gallery_editor.py, Run) and click
+     the Mercury card. 'Shape (phone only)' should show four
+     choices, with '16:9 3D' picked and '16:9 2D' greyed out.
+  6. Pick 'none', Save All, then commit and push
+     gallery/gallery_metadata.json.
+  7. On the phone, held upright:
+       - Orbital Mechanics should no longer list the Mercury card.
+       - Open Trappist1 Exoplanet System. It should show its title
+         and 'Turn your phone to landscape to view this card.'
+         Turn the phone: the figure is drawn. Turn it back: the
+         card returns.
+       - A 2D card should sweep sideways as before, and a 9:16 card
+         should look as before.
+     On the desktop, both tabs should look as before, Mercury
+     included.
+  8. Tell Claude the new gallery SHA and what you saw.
+
+TONY-ACTION ROLLUP for this patch:
+  (do)     steps 1 to 8 above.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
