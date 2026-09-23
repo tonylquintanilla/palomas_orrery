@@ -276,20 +276,87 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
      script under documentation/. Commit and push.
 
 gallery moved to 2a80a68c6db57414757d372f424b77162bf4b2db
+orrery moved to cb254b0163317509a82a647e5b0bfdc54c171d6c
 
   4. After the push, check what the live site serves:
          python gallery_maintenance_run.py --live
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 11 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+
+  PASS Served reachability       1.4s  all 11 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at dcc36e38
+
+  PASS Export freshness          0.1s  the served export is the orrery's
+                                    at dcc36e38, byte for byte
+
+  orrery HEAD cb254b01
+  examining 29 of 87 links; the other 58 are served from the export
+    NOT IN STORE  create_sun_galactic_tide default not a top-level constant in the store
+                  /objects/0/features/oort_cloud/galactic_tide/typical_radius
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NOT IN STORE  planet_poles['Earth']            not a top-level constant in the store
+                  /objects/1/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  29 pointers: 24 match, 0 DRIFT, 0 UNIT MISMATCH, 5 could not be examined.
+
+  PASS Store drift               0.8s  29 pointers against orrery
+                                    cb254b01 -- 24 match, 0 DRIFT, 0
+                                    UNIT MISMATCH, 5 could not be
+                                    examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            29 pointers against orrery cb254b01 --
+  last swap 2026-09-22T23:33:39.924967+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
   5. Open https://palomasorrery.com/ on the desktop and look at
      both tabs. Desktop should list 104 exhibits and Mobile 104,
      where both said 145 before; the welcome line carries the
      count. (These numbers were worked out just now from your
      metadata, so a card you edit later can change them.)
+-- correct. although it is noted that the front page is not yet divided into desktop and mobile. that happens only when opening one of the three doors. 
+-- this points to a gap in the front page. the guest book is under construction. 
+
      The Featured strip should show 5 cards on Desktop and 5 on
-     Mobile. Inner Solar System Animation should appear once in
-     each, the 16:9 view on Desktop and the 9:16 on Mobile. On
-     the phone the 16:9 animation card should now be gone --
+     Mobile. -- correct
+     
+     Inner Solar System Animation should appear once in
+     each, the 16:9 view on Desktop and the 9:16 on Mobile. -- correct
+     
+     On the phone the 16:9 animation card should now be gone --
      that is the other half of this patch -- and nothing else
-     there should have changed.
+     there should have changed. -- correct
+     
   6. Tell Claude the new gallery SHA and what you saw.
 
 TONY-ACTION ROLLUP for this patch:
