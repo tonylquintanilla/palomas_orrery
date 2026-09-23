@@ -356,8 +356,9 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
      On the phone the 16:9 animation card should now be gone --
      that is the other half of this patch -- and nothing else
      there should have changed. -- correct
-     
-  6. Tell Claude the new gallery SHA and what you saw.
+
+  6. Tell Claude the new gallery SHA and what you saw: 1a12cadedf49fcc959a67ceb52fcb7916741d5c8
+  -- in addition to the checks, i deleted the static inner solar system visualization.
 
 TONY-ACTION ROLLUP for this patch:
   (do)     steps 1 to 6 above.
