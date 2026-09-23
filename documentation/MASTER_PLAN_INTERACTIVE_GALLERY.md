@@ -1,6 +1,6 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** v32 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
+**Status:** v33 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
 **the first feature-bearing exhibit is LIVE AND COMPLETE.** The Sun
 ships at `palomasorrery.com/interactive.html?exhibit=sun`, unlinked
 from the landing page, Mode 5 accepted 2026-08-29 (gallery
@@ -16,7 +16,11 @@ features, the axis, the Sun line and terminator, and the Moon on its
 trusted arc -- with its card featured in the lobby (gallery
 `57fd93c6`). Its magnetosphere, absent and named at launch, has been
 drawn from the store since 2026-09-15 -- Shue's magnetopause and
-Jelinek's bow shock (L-305). Earth made the rooms a TABLE, `EXHIBITS` in
+Jelinek's bow shock (L-305). **Since 2026-09-22 Earth is the first
+CLOSED SLICE of the store** (L-322 Stage C2): every number its room
+prints comes from `constants_new.py` at the figure count its row
+declares, and every measured row behind a served number records who
+read its source. Earth made the rooms a TABLE, `EXHIBITS` in
 `interactive.html`, one row per room, and it found L-168, the
 planetocentric mean-motion bug, on the first moon it drew.
 **The braid, ruled 2026-08-22:** provenance stops being a GATE and
@@ -52,11 +56,12 @@ F1a (M2, trust/served_window) fully closed July 21-22: L-149 built, tested
 offline (138/138) AND live -- Layer 2 Steps 1-5 all passed (five dry-runs,
 --first-build, --nightly, resolver date-picker, fetch-cost note). L-118
 closed in the same session.
-**Next: the order is in Section 5a, dated 2026-09-03, and it is five
-steps: the Sun room's phone controls, the lobby with its rooms and
-editor (L-282, L-286, L-287; the hall, L-280, was retired 2026-09-04),
-Earth into the assembler, the transport (segment 2) built alongside Earth, then
-Jupiter and Saturn.** The paragraph that stood here until v22 said the
+**Next: the order is in Section 5a's newest subsection, 2026-09-17 to
+22.** The five-step order dated 2026-09-03 -- the Sun room's phone
+controls, the lobby with its rooms and editor (L-282, L-286, L-287;
+the hall, L-280, was retired 2026-09-04), Earth into the assembler, the
+transport (segment 2) built alongside Earth, then Jupiter and Saturn --
+stands in its own subsection as it was written. The paragraph that stood here until v22 said the
 feature-rendering JS layer was "never written" and was the gate before
 Artifact 2. That layer is `feature_renderers.js`; it shipped with the
 Sun exhibit on 2026-08-29 and has drawn 18 shells on the live page
@@ -93,7 +98,18 @@ text here read "enabled with a known open issue", contradicting its own
 header forty lines below. L-151 (gallery-assembler skill) DONE
 2026-07-27; L-150 (multi-orbit binaries) still decided, not yet built.)
 **Date begun:** July 3, 2026
-**Last updated:** September 16, 2026 (v32: two BUILD sessions and the
+**Last updated:** September 22, 2026 (v33: a DESIGN BUILD, L-322 Stage
+C2, in two pushes and two models. Earth's magnetosphere rows got their
+figure counts and reads, the two standoffs became arithmetic again with
+Shue's uncertainties propagated (10.3 and 13.5 Earth radii), the dipole
+tilt became a calculation from IGRF-13's coefficients (9.4105 degrees
+for 2020, where the old 9.6 was in no epoch of the model), and Earth
+became the store's first closed slice. The gallery's pointer join gained
+a read check and its display check grades the four changed hovers
+against Tony's approved words. Section 5a gains the 2026-09-17 to 22
+subsection; with Anthropic's Claude Opus 5 (the orrery half) and Claude
+Opus 5.5 (the gallery half and this update). v32, September 16, 2026:
+two BUILD sessions and the
 record that closes them. Earth's magnetosphere is drawn from the store --
 Shue's magnetopause and Jelinek's bow shock, eleven served rows, no
 number typed into the renderer (L-305 items 5 and 6b, 2026-09-15) -- and
@@ -122,14 +138,10 @@ physical values only. A gallery patch extending the suffix table was
 written, tested and HELD UNRUN. One review round with Claude Fable 5.1;
 all nine rulings held and it caught a two-hop error the record had
 collapsed into one. Section 5a gains the 2026-09-11 subsection; with
-Anthropic's Claude Opus 5. v30: L-305's paper read
-landed, corrected; the camera-step track closed on Mode 5 and the phone
-look that closed it added four chrome items, two of them solutions the
-orrery already had; the orrery's hover text joins the braid, Earth first
-(L-321); Section 5a gains the 2026-09-10 evening subsection; with
 Anthropic's Claude Opus 5.)
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
-Claude Opus 5, Claude Fable 5, Claude Sonnet 5, GPT
+Claude Opus 5, Claude Opus 5.5, Claude Fable 5, Claude Fable 5.1,
+Claude Sonnet 5, GPT
 
 **Pivot (v8):** The gallery is no longer a stepping stone to a separate web
 application. The gallery IS the web publication -- growing interactive
@@ -1888,6 +1900,65 @@ text, the four Sun hovers, and a plain-language pass over the hovers --
 the Sun room is live, so it should be correct), Tony's calls on closing
 L-316 and L-318, then L-330 (the belts' shape) and L-322. Handoff:
 `documentation/HANDOFF_L316_L318_phone_chrome_20260916.md`.
+
+### 2026-09-17 to 22 -- the store becomes the producer, and Earth is the first closed slice
+
+**The orrery now EXPORTS its numbers and the gallery stops reading
+orrery source** (L-322, gallery half deployed 2026-09-17). The gallery
+pulls `data/constants_export.json`, the mirror writes each served number
+from it with its unit and figure count, and two checks replace the old
+drift check: Export freshness and the Pointer join. Two checks built
+that week found the served cache out of step with the config (L-336)
+and the live check not reading every file the browser fetches (L-339).
+
+**Then the store was walked, one body at a time, Earth first.** Every
+Earth row now carries a unit, a status and a figure count, and every
+measured row a record of who opened its source and checked it (the
+`# Read:` field). Stage C1, the 29 rows with nothing declared, landed on
+2026-09-19; Claude Fable 5.1's review of it found a hover that was wrong
+on the live site, the geocorona's, and the fix led to the figure rules
+being rebuilt (L-342). Stage C2, the 28 magnetosphere rows, landed on
+2026-09-22:
+
+- The two standoffs are computed again rather than typed, and Shue's
+  published uncertainties decide their figures: the magnetopause reads
+  10.3 Earth radii where it read 10.25, the bow shock 13.5 where it read
+  13.51. Each hover now says how far real crossings typically fall from
+  the model.
+- Earth's dipole tilt is computed from IGRF-13's coefficients: 9.4105
+  degrees for 2020. The 9.6 it replaced was in no epoch of the model,
+  and the drift the old note gave was ten times too small.
+- The outer belt is drawn at the halfway point of its measured band,
+  and the hover says that is a choice, not a measured peak.
+- Earth became the store's first CLOSED SLICE: from now on a missing
+  field on an Earth row fails the orrery's maintenance run, and the
+  gallery fails a measured row behind a served number that nobody has
+  recorded reading.
+
+**Tony's rule behind the figure work, 2026-09-21:** "when it comes to a
+decision, what is the basis? the basis should be in the skill not
+arbitrary." provenance-discipline went from 2.14 to 2.17 in four days;
+the last two were written down before the build that needed them, and
+the questions they absorbed stopped reaching Tony.
+
+**The swap stopped depending on Tony noticing** (L-216, 2026-09-20):
+each rename retries, a failed swap puts the old cache back, and every
+run writes a line to a tracked swap log. C2-b was the first build on it;
+the swap worked on the first try, which proves nothing either way.
+
+**The build's lesson: a check has to be visible where it is read.** The
+new read check ran and passed on Tony's machine, and his screen showed
+nothing of it, because the maintenance run prints only a check's last
+line. A pass with the check and a pass without it looked the same. Its
+counts now ride on that line (gallery `386a44ff`).
+
+**Next.** Stage D of L-322 -- Earth's pole moves from
+`idealized_orbits.py` into the store, because it draws a closed room's
+axis. Before the next body, the conversion question on L-345: a km and AU
+row per shell, or the export converting from full digits. Then the Sun's
+slice, since its room is live, and after it the order of 2026-09-03
+resumes with Jupiter and Saturn. The classes C2 found are L-343 to
+L-361, recorded and not chased.
 
 ### What this section deliberately does not carry
 

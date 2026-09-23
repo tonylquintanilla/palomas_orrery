@@ -20,20 +20,16 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260923T032527Z | `60d3578` | 136 | 1071 | 293 | 658 | 118 | 2 |
 | 20260922T192031Z | `32750e5` | 136 | 1071 | 293 | 658 | 118 | 2 |
 | 20260922T150258Z | `1f6e55a` | 137 | 1068 | 293 | 655 | 118 | 2 |
 | 20260921T215335Z | `a7014ab` | 137 | 1068 | 293 | 655 | 118 | 2 |
 | 20260921T195156Z | `b9cd484` | 136 | 1068 | 293 | 655 | 118 | 2 |
 | 20260921T032857Z | `d426ec0` | 136 | 1068 | 293 | 655 | 118 | 2 |
-| 20260920T233517Z | `ba94e80` | 136 | 1068 | 293 | 655 | 118 | 2 |
 
-Change since the previous run: total +3, Tier-1 +0.
+Change since the previous run: total +0, Tier-1 +0.
 
-Tier-1 rose in these files:
-
-| File | Before | After |
-|------|-------:|------:|
-| constants_new.py | 2 | 4 |
+No file's Tier-1 count rose.
 
 ---
 

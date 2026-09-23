@@ -393,7 +393,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*193 live items; 178 need attention (`!`); 192 RICE-scored; 144 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*213 live items; 198 need attention (`!`); 192 RICE-scored; 144 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -408,9 +408,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-266 | Nothing checks that a cited link still resolves | OPEN | 9.0 | 2026-08-30 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-300 | sweep_collapsed_features.py joins the gallery maintenance runner as a gating checker | OPEN | 8.1 | 2026-09-07 |
-| ! | L-340 | The exhibit store editor: what the first screenshot showed, and the Mode 5 pass | OPEN | 8.1 | 2026-09-19 |
+| ! | L-340 | The exhibit store editor: what the first screenshot showed, and the Mode 5 pass | OPEN | 8.1 | 2026-09-22 |
 | ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-21 |
-| ! | L-342 | What C1 put on the live site, and the figure rules repaired | OPEN [!] | 7.6 | 2026-09-19 |
+| ! | L-342 | What C1 put on the live site, and the figure rules repaired | OPEN [!] | 7.6 | 2026-09-22 |
 | ! | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | OPEN | 6.0 | 2026-08-25 |
 | ! | L-269 | A report names its items, not how many there are | OPEN | 6.0 | 2026-08-30 |
 | ! | L-245 | Constants drift check compares against the last COMMIT, not the last RUN | OPEN | 5.4 | 2026-08-25 |
@@ -427,12 +427,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-25 |
 | ! | L-281 | The guest book: no-account comments, approve-before-show | OPEN | 4.2 | 2026-09-03 |
 | ! | L-247 | Sgr A* constants migrated to the single source of truth | OPEN | 4.0 | 2026-08-25 |
-| ! | L-325 | A derived row stores its reported figure, not the arithmetic result | OPEN | 4.0 | 2026-09-16 |
+| ! | L-325 | A derived row stores its reported figure, not the arithmetic result | OPEN | 4.0 | 2026-09-22 |
 | ! | L-331 | Visitor-facing text: stale info text, four Sun hovers outside the i-panel move, and hovers in plain language (exhibits) | OPEN | 4.0 | 2026-09-16 |
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
-| ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-09-21 |
+| ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-09-22 |
 | ! | L-224 | Streamer belt: one warped band, not a sphere | OPEN | 3.8 | 2026-08-22 |
 |  | L-230 | A skill bump does not reach the protocol's version history | DEFERRED | 3.8 | 2026-08-23 |
 | ! | L-227 | Streamer band hover rendered as one 378-character line | OPEN | 3.8 | 2026-08-23 |
@@ -470,7 +470,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-225 | Migrate the comet shell constants into `constants_new.py`, then dispatch | DEFERRED | 2.4 | 2026-08-23 |
 | ! | L-293 | Lunar standstill: an exhibit made of four dated orbits | OPEN | 2.4 | 2026-09-06 |
 | ! | L-305 | Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together | OPEN | 2.4 | 2026-09-16 |
-| ! | L-322 | Units declared in the store, and the orrery as producer | OPEN | 2.3 | 2026-09-19 |
+| ! | L-322 | Units declared in the store, and the orrery as producer | OPEN | 2.3 | 2026-09-22 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
 | ! | L-328 | Subtraction pass on the skill layer (protocol/skills track) | OPEN | 2.1 | 2026-09-14 |
@@ -497,6 +497,26 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 0.9 | 2026-07-16 |
 | ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-06-24 |
 | ! | L-319 | Focusing a smaller shell cuts larger lit shells flat at the frame's box | OPEN | 0.7 | 2026-09-10 |
+| ! | L-343 | A figure count can describe the arithmetic and not the claim (store) | OPEN | -- | 2026-09-22 |
+| ! | L-344 | A stated uncertainty computed from a rounded intermediate (store) | OPEN | -- | 2026-09-22 |
+| ! | L-345 | Unit-conversion rows multiply by shell: rows per shell, or the export converts? (store, decide before the next slice) | OPEN | -- | 2026-09-22 |
+| ! | L-346 | A derived row with empty inputs is invisible to a walk by inputs (checks) | OPEN | -- | 2026-09-22 |
+| ! | L-347 | The page re-derives the bow shock standoff to draw its shape (gallery) | OPEN | -- | 2026-09-22 |
+| ! | L-348 | Derived rows outside Earth were counted, not propagated (store) | OPEN | -- | 2026-09-22 |
+| ! | L-349 | The inner belt's hover says "where the measured particle flux peaks" (words, Tony's) | OPEN | -- | 2026-09-22 |
+| ! | L-350 | The magnetotail's observed extent is served and shown nowhere (gallery) | OPEN | -- | 2026-09-22 |
+| ! | L-351 | Rules learned at C2, owed to the next bumps of their stores (skills, protocol) | OPEN | -- | 2026-09-22 |
+| ! | L-352 | The orrery's display sites format by fixed width, with no check reading them (orrery) | OPEN | -- | 2026-09-22 |
+| ! | L-353 | A count taken from a file's print resolution where a published error budget exists unopened (store) | OPEN | -- | 2026-09-22 |
+| ! | L-354 | Declared picks with their range in prose, on other bodies (store) | OPEN | -- | 2026-09-22 |
+| ! | L-355 | Rate rows and angle rows on other bodies follow the two Rule 3 forms (store) | OPEN | -- | 2026-09-22 |
+| ! | L-356 | IGRF-14 as a re-sourcing of the six coefficient rows (store) | OPEN | -- | 2026-09-22 |
+| ! | L-357 | Stale gallery artifacts that no check reads (gallery) | OPEN | -- | 2026-09-22 |
+| ! | L-358 | The constants change report cannot read a formula that calls a function, or a literal that became a formula (checks) | OPEN | -- | 2026-09-22 |
+| ! | L-359 | Served text beside a served number can go stale where no tool may edit it (gallery) | OPEN | -- | 2026-09-22 |
+| ! | L-360 | The hover budget measures recorded payloads, so it cannot see a line added by newly served data (checks) | OPEN | -- | 2026-09-22 |
+| ! | L-361 | An epoch typed in the page, with no store row (gallery, store) | OPEN | -- | 2026-09-22 |
+| ! | L-362 | The master plan's two summaries are a month behind the plan (documentation) | OPEN | -- | 2026-09-22 |
 
 ### B. Pending Action (Tony-side)
 
@@ -821,8 +841,289 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-362] The master plan's two summaries are a month behind the plan (documentation)
+<!-- L:362 status:OPEN upd:2026-09-22 section:A flag: rice: -->
+- **Found 2026-09-22** while restamping the plan to v33.
+  `documentation/MASTER_PLAN_INTERACTIVE_GALLERY_SUMMARY.md` and
+  `documentation/MASTER_PLAN_CRITICAL_PATH_SUMMARY.md` both read "Where we
+  are 8/19/2026" or earlier, while the plan is at v33. The skill says
+  the plan is traced at three levels of zoom -- the plan, its summary,
+  and the critical path -- and restamps once per design build; the two
+  smaller levels have not moved since August 19.
+- **Tony-action (decide):** whether the summaries restamp with the plan
+  from now on, or are retired as dated snapshots with a line saying so.
+**Gap:** The decision above; then either a restamp of both or a retirement line in each.
+**Ref:** `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`; the two summaries; skills/ledger-and-session-records/SKILL.md (The Document Stack).
+
+#### [L-361] An epoch typed in the page, with no store row (gallery, store)
+<!-- L:361 status:OPEN upd:2026-09-22 section:A flag: rice: -->
+- **Recorded, not built.** A class found while building L-322 Stage C2
+  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
+  Braid: it waits until the artifact on the critical path reaches it.
+- "That tilt is for 2020 (IGRF-13 model)" is typed in
+  `feature_renderers.js`. The store computes the tilt from the epoch
+  2020.0 coefficients and says so only in comments. A fact the page
+  prints that the store does not carry.
+**Gap:** An epoch row, or the tilt row's served entry carrying its model and epoch; the hover then reads it.
+**Ref:** gallery `gallery/feature_renderers.js::renderBelts`; `constants_new.py`; L-356.
+
+#### [L-360] The hover budget measures recorded payloads, so it cannot see a line added by newly served data (checks)
+<!-- L:360 status:OPEN upd:2026-09-22 section:A flag: rice: -->
+- **Recorded, not built.** A class found while building L-322 Stage C2
+  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
+  Braid: it waits until the artifact on the critical path reaches it.
+- `smoke_hover_budget.js` measured Earth's magnetopause at 16 lines at
+  C2-b; the visitor sees 17, at the ceiling, because the scatter line
+  exists only where the new entry is served. It was counted by hand this
+  time. A Check That Cannot Fail, in its plainest form.
+**Gap:** Have the budget also measure hovers built from the live config, as the Earth scene check already does for one leg.
+**Ref:** gallery `documentation/smoke_hover_budget.js`; `documentation/RUN_RECORD_L322_C2b_20260922.md` sec. 8.
+
+#### [L-359] Served text beside a served number can go stale where no tool may edit it (gallery)
+<!-- L:359 status:OPEN upd:2026-09-22 section:A flag: rice: -->
+- **Recorded, not built.** A class found while building L-322 Stage C2
+  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
+  Braid: it waits until the artifact on the critical path reaches it.
+- The config's `van_allen_belts/magnetic_tilt` entry has a `source`
+  string saying the tilt is "rounded to a tenth" and drifts "about
+  0.05 deg per decade", beside the served 9.4105 and a rate of 0.0493
+  degrees a YEAR. No hover or panel shows it. The words tool edits only
+  entries that carry a display name, and this one has none, so the
+  sanctioned route cannot reach it.
+**Gap:** Either the words tool learns entries like this, or a pointer-only rule covers text too; then correct it.
+**Ref:** gallery `tools/store_writer.py`; gallery `data/objects_config.json`; `documentation/RUN_RECORD_L322_C2b_20260922.md` sec. 3.
+
+#### [L-358] The constants change report cannot read a formula that calls a function, or a literal that became a formula (checks)
+<!-- L:358 status:OPEN upd:2026-09-22 section:A flag: rice: -->
+- **Recorded, not built.** A class found while building L-322 Stage C2
+  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
+  Braid: it waits until the artifact on the critical path reaches it.
+- At C2-a it named eight lines as unreadable or as names the diff
+  dropped: `DEG_PER_RAD`, the dipole tilt, the tilt rate and the
+  magnetopause standoff; and the outer belt's peak, the tilt and the
+  two standoffs. All were intended, and the run was read past by hand
+  against a list the patch printed. It goes quiet after the commit, so
+  the only moment it can catch a real mistake of that shape is the one
+  where it is certain to cry wolf.
+**Gap:** Teach it the two shapes, or have it defer them to Derived figures by name.
+**Ref:** `constants_change_report.py`; `documentation/RUN_RECORD_L322_C2a_20260922.md` sec. 5.
+
+#### [L-357] Stale gallery artifacts that no check reads (gallery)
+<!-- L:357 status:OPEN upd:2026-09-22 section:A flag: rice: -->
+- **Recorded, not built.** A class found while building L-322 Stage C2
+  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
+  Braid: it waits until the artifact on the critical path reaches it.
+- Two static gallery card exports each type "~9.6 deg" twice; the
+  served tilt is now 9.4105.
+- `documentation/fixture_hovers_cdfa74c3.json` is no longer referenced;
+  the display check reads `fixture_hovers_L322c2_on_42fd97dd.json`.
+- Two gallery code comments name the C2-b words note as
+  `documentation/NOTE_L322_C2b_gallery_words_20260922.md`, which reads
+  as the gallery's folder; under Tony's practice (L-351) the note lives
+  in the ORRERY's documentation/. In `gallery/feature_renderers.js`
+  and `documentation/smoke_display_figures.js`.
+**Gap:** **Tony-action (decide):** whether the unreferenced fixture is deleted. The card exports and the two comments go with the next patch that opens those files.
+**Ref:** gallery `documentation/`; gallery `gallery/feature_renderers.js`; manifest sec. 17.7.
+
+#### [L-356] IGRF-14 as a re-sourcing of the six coefficient rows (store)
+<!-- L:356 status:OPEN upd:2026-09-22 section:A flag: rice: -->
+- **Recorded, not built.** A class found while building L-322 Stage C2
+  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
+  Braid: it waits until the artifact on the critical path reaches it.
+- The tilt is computed from IGRF-13's 2020.0 coefficients, whose
+  secular variation was a forecast for 2020 to 2025. IGRF-14 supersedes
+  them and revises 2020.0 as definitive. The hover says "for 2020
+  (IGRF-13 model)", so what is shown is honest; it is also dated.
+**Gap:** Re-source the six rows to IGRF-14 and move the epoch; the hover words move with it.
+**Ref:** `constants_new.py`; gallery `gallery/feature_renderers.js`; L-361.
+
+#### [L-355] Rate rows and angle rows on other bodies follow the two Rule 3 forms (store)
+<!-- L:355 status:OPEN upd:2026-09-22 section:A flag: rice: -->
+- **Recorded, not built.** A class found while building L-322 Stage C2
+  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
+  Braid: it waits until the artifact on the critical path reaches it.
+- C2 wrote Earth's tilt rate as the derivative expression and its angle
+  through `DEG_PER_RAD`, the two forms provenance-discipline 2.17 now
+  requires. Earth's pole (Stage D of L-322) and the Moon's node are the
+  next rows of that shape.
+**Gap:** Stage D uses them; the Moon's slice after it.
+**Ref:** L-322 Stage D; `constants_new.py`; manifest sec. 17.7.
+
+#### [L-354] Declared picks with their range in prose, on other bodies (store)
+<!-- L:354 status:OPEN upd:2026-09-22 section:A flag: rice: -->
+- **Recorded, not built.** A class found while building L-322 Stage C2
+  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
+  Braid: it waits until the artifact on the critical path reaches it.
+- C2 made Earth's outer belt a declared construction over two band rows
+  instead of a typed 4.5 with its band in a comment. The same shape
+  stands elsewhere: the Sun's helmet cusp, "top of measured 2-4
+  range", and others the Sun's slice will find.
+**Gap:** The Sun's slice, and each body's, applies the declared-construction form.
+**Ref:** `constants_new.py`; provenance-discipline 2.17 Rule 2; manifest sec. 17.7.
+
+#### [L-353] A count taken from a file's print resolution where a published error budget exists unopened (store)
+<!-- L:353 status:OPEN upd:2026-09-22 section:A flag: rice: -->
+- **Recorded, not built.** A class found while building L-322 Stage C2
+  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
+  Braid: it waits until the artifact on the critical path reaches it.
+- The six IGRF-13 coefficient rows take their figure counts from the
+  0.1 nT the NOAA file prints. Alken et al. (2021) publish an error
+  budget for the model that was not opened; Lowes (2000) is the same
+  shape. The counts are rule-correct as the fallback, and may claim
+  more than the model's accuracy supports.
+**Gap:** Open the error budget when the rows are next visited.
+**Ref:** `constants_new.py` (`EARTH_IGRF13_*`); manifest sec. 17.7.
+
+#### [L-352] The orrery's display sites format by fixed width, with no check reading them (orrery)
+<!-- L:352 status:OPEN upd:2026-09-22 section:A flag: rice: -->
+- **Recorded, not built.** A class found while building L-322 Stage C2
+  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
+  Braid: it waits until the artifact on the critical path reaches it.
+- 47 format sites on 35 lines of `earth_visualization_shells.py`, four
+  kinds, named by line in the C2 rev2 addendum; four came into C2 and
+  print by the row's count now. Also the dipole cone's first line in
+  `planet_visualization_utilities.py`, shared by every planet, which
+  prints the tilt to one decimal ("~9.4") while the note under it prints
+  9.4105 -- the same row at two counts in one hover.
+- No checker reads orrery display formatting, so a closed Earth slice
+  does not cover these. A helper that formats a row by the export's
+  declared count is the likely mechanism; not designed.
+**Gap:** Design the helper, then sweep the sites; the cone line changes Jupiter's, Saturn's, Uranus's and Neptune's hovers too.
+**Ref:** `earth_visualization_shells.py`; `planet_visualization_utilities.py`; `documentation/NOTE_L322_C2a_orrery_words_20260922.md`; manifest sec. 17.7.
+
+#### [L-351] Rules learned at C2, owed to the next bumps of their stores (skills, protocol)
+<!-- L:351 status:OPEN upd:2026-09-22 section:A flag: rice: -->
+- **Recorded, not built.** A class found while building L-322 Stage C2
+  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
+  Braid: it waits until the artifact on the critical path reaches it.
+- **interactive-exhibit, next bump:** a hover prints a served primary
+  where the store has one and computes with figure propagation where
+  it does not; and a figure count is READ from the served entry, never
+  recounted in the browser. (Carried from the C2 brief.)
+- **ledger-and-session-records, next bump -- Tony's practice, stated
+  2026-09-22:** "my practice is to put all documentation in the orrery
+  documentation/ folder. i reserve the gallery documentation/ folder
+  for the patch files." Where a File Goes names only
+  documentation/ and documentation/worksheets/, and says nothing about
+  which repository. One thing to settle when it is written: the
+  gallery's documentation/ also holds the smoke suites, fixtures and
+  recorded payloads its maintenance run reads, so the rule as it will
+  be written needs to say whether tool inputs are the exception.
+- **The protocol, next bump touching Stale Skill = Stop:** a running
+  session's mounted skills stay at the version it started with, while
+  the project instructions in its context refresh.
+**Gap:** Each lands with its store's next bump.
+**Ref:** skills/interactive-exhibit/SKILL.md; skills/ledger-and-session-records/SKILL.md; PROJECT_INSTRUCTIONS.md.
+
+#### [L-350] The magnetotail's observed extent is served and shown nowhere (gallery)
+<!-- L:350 status:OPEN upd:2026-09-22 section:A flag: rice: -->
+- **Recorded, not built.** A class found while building L-322 Stage C2
+  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
+  Braid: it waits until the artifact on the critical path reaches it.
+- `EARTH_MAGNETOTAIL_OBSERVED_RADII` (220, Slavin et al. 1983, read
+  2026-09-22) reaches the served config and no hover or panel prints
+  it. A served number nobody sees is either a missing line or a row the
+  gallery does not need.
+**Gap:** Decide whether the magnetotail hover should print it; if not, stop serving it.
+**Ref:** L-305; gallery `data/objects_config.json`; `documentation/L322_earth_read_record_C2_20260922.md`.
+
+#### [L-349] The inner belt's hover says "where the measured particle flux peaks" (words, Tony's)
+<!-- L:349 status:OPEN upd:2026-09-22 section:A flag: rice: -->
+- **Recorded, not built.** A class found while building L-322 Stage C2
+  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
+  Braid: it waits until the artifact on the critical path reaches it.
+- The OUTER belt's version of this line was replaced at C2-b with the
+  words Tony approved on 2026-09-22, because its drawn distance became a
+  declared midpoint. The INNER belt keeps the line. Whether its drawn
+  1.5 Earth radii is a measured peak or a declared pick is a question
+  about its store row; the wording, once that is known, is Tony's.
+**Gap:** Read the inner belt's row, then bring Tony the wording if it needs to change.
+**Ref:** L-330; gallery `gallery/feature_renderers.js::renderBelts`; `documentation/NOTE_L322_C2b_gallery_words_20260922.md`.
+
+#### [L-348] Derived rows outside Earth were counted, not propagated (store)
+<!-- L:348 status:OPEN upd:2026-09-22 section:A flag: rice: -->
+- **Recorded, not built.** A class found while building L-322 Stage C2
+  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
+  Braid: it waits until the artifact on the critical path reaches it.
+- Any derived row outside Earth whose inputs state an uncertainty had
+  its figure count set by counting, not by propagation, so it may claim
+  more figures than its uncertainty supports. Earth's were all checked
+  at C2 (20 set by propagation). The rest wait for their slices.
+**Gap:** Each body's slice propagates its own.
+**Ref:** L-322; `test_derived_figures.py`; manifest sec. 11.
+
+#### [L-347] The page re-derives the bow shock standoff to draw its shape (gallery)
+<!-- L:347 status:OPEN upd:2026-09-22 section:A flag: rice: -->
+- **Recorded, not built.** A class found while building L-322 Stage C2
+  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
+  Braid: it waits until the artifact on the critical path reaches it.
+- `feature_renderers.js` works Jelinek's equation 14 in the browser to
+  draw the surface, a second working beside the store's. A consistency
+  warning compares the two and the display check fails on it (drill:
+  the standoff served at 13.6). Guarded, not removed.
+**Gap:** Nothing unless the guard fires; a design question only if a shape row is ever served.
+**Ref:** gallery `gallery/feature_renderers.js`; manifest sec. 11.
+
+#### [L-346] A derived row with empty inputs is invisible to a walk by inputs (checks)
+<!-- L:346 status:OPEN upd:2026-09-22 section:A flag: rice: -->
+- **Recorded, not built.** A class found while building L-322 Stage C2
+  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
+  Braid: it waits until the artifact on the critical path reaches it.
+- A typed number with its arithmetic in a comment has no inputs, so any
+  check that walks inputs stops at it and never reaches the measured
+  rows underneath. PARTLY ANSWERED at C2-b: the gallery pointer join's
+  read check now FAILS a derived row with empty inputs reached from a
+  served link (drill: the Hill sphere, gallery `813fc542`). Not covered:
+  such a row that no served link reaches, and the orrery side, which
+  has no equivalent check. (Finding 7.)
+**Gap:** An orrery-side check, or a ruling that the gallery's is enough.
+**Ref:** L-322; gallery `tools/check_constants_links.py::read_walk`; manifest sec. 11.
+
+#### [L-345] Unit-conversion rows multiply by shell: rows per shell, or the export converts? (store, decide before the next slice)
+<!-- L:345 status:OPEN upd:2026-09-22 section:A flag: rice: -->
+- **Recorded, not built.** A class found while building L-322 Stage C2
+  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
+  Braid: it waits until the artifact on the critical path reaches it.
+- C2 added a kilometre row and an AU row for each standoff, so the page
+  never converts a rounded number. Every other shell that prints km and
+  AU from a rounded value needs the same. Two ways: a row per conversion
+  per shell, or the export converting each row itself from full digits.
+- **Tony-action (decide), before the next slice:** which of the two.
+  Not decided at C2, on purpose. (Finding 9.)
+**Gap:** The decision above, then the next slice builds to it.
+**Ref:** L-322; `export_constants.py`; `constants_new.py`; manifest sec. 11.
+
+#### [L-344] A stated uncertainty computed from a rounded intermediate (store)
+<!-- L:344 status:OPEN upd:2026-09-22 section:A flag: rice: -->
+- **Recorded, not built.** A class found while building L-322 Stage C2
+  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
+  Braid: it waits until the artifact on the critical path reaches it.
+- Rule 4 applies to an uncertainty as it does to a value: propagate from
+  full digits and round once. The C2 figures checker now recomputes an
+  uncertainty and fails a row whose stated one disagrees (the drill with
+  840 km, converted from the rounded 0.13, failed as it should). Rows
+  outside Earth have not been walked for it. (Finding 2.)
+**Gap:** Each remaining body's slice checks its stated uncertainties when it is walked.
+**Ref:** L-322; `test_derived_figures.py`; manifest sec. 11.
+
+#### [L-343] A figure count can describe the arithmetic and not the claim (store)
+<!-- L:343 status:OPEN upd:2026-09-22 section:A flag: rice: -->
+- **Recorded, not built.** A class found while building L-322 Stage C2
+  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
+  Braid: it waits until the artifact on the critical path reaches it.
+- A model's value printed beside a much larger published scatter, or a
+  declared pick from a coarse range, printed at full arithmetic
+  precision. Answered at C2 for the two standoffs (their scatter is now
+  in the hover) and the outer belt (its kilometre line is gone). Still
+  standing: LEO's inner edge at 6,578.1366 km and the geocorona at
+  600,000 km twice. Under provenance-discipline 2.17 Rule 7 each is a
+  finding about its ROW, fixed where the row is recorded, never by the
+  page. (Fable's review of the C2 manifest, Finding 1.)
+**Gap:** LEO's inner edge and the geocorona, each resolved on its own row when a slice reaches it.
+**Ref:** L-322, L-342; `constants_new.py`; `documentation/BUILD_MANIFEST_L322_C2_magnetosphere_20260920.md` sec. 11.
+
 #### [L-342] What C1 put on the live site, and the figure rules repaired
-<!-- L:342 status:OPEN upd:2026-09-19 section:A flag:! rice:4/4/95/2 -->
+<!-- L:342 status:OPEN upd:2026-09-22 section:A flag:! rice:4/4/95/2 -->
 - **Opened 2026-09-19** from Claude Fable 5.1's review of L-322 Stage
   C1, reviewed at orrery `21065c5d` and gallery `2ead992b`. The review
   confirmed the walk's constants and its reads independently, and found
@@ -946,12 +1247,32 @@ as an archive of the prioritization thinking -- no cleanup on close.
   worth looking at on the phone -- the geocorona, whose altitude and
   radius now both read 600,000 km, and LEO's inner edge at
   6,578.1366 km.
+- **2026-09-22 -- BOTH "STILL OPEN" POINTS ARE ANSWERED.** The read
+  check is built, in the gallery's pointer join, and was shown failing
+  five ways before it was trusted (gallery `813fc542`; see L-322's note
+  of the same date for the ordering against `CLOSED_SLICES`). The
+  (decide) on showing a rule-correct number shorter is dissolved by
+  provenance-discipline 2.17 Rule 7: the geocorona and LEO's inner edge
+  are findings about their rows, now L-343, and the outer belt's
+  28,701.615 km is gone from the hover.
+  Two lines from the C2 manifest's section 11 belong here. The page
+  converts a served km value to AU in several shell hovers; where the km
+  is itself a rounded derived value, that is a rounded number used in a
+  calculation. Measured it moves no digit today (the Hill sphere gives
+  0.0100 AU both ways), which is luck; C2 fixed its own two hovers by
+  serving the AU, and the rest wait on L-345. And two corrections to this
+  item's as-built: the Sun's hovers did not move at C2, and "the renderer
+  already drops a figure" for the bow shock never fired -- the drop
+  needed an exponent above one, this one is 0.153, and its count left
+  epsilon out. That branch was removed at C2-b.
+  **Tony-action (decide):** close this item. Its remaining work is L-343
+  and L-345.
 - **Ref:** `gallery/feature_renderers.js`;
   `documentation/smoke_hover_budget.js`; `constants_new.py`;
   `skills/provenance-discipline/SKILL.md`.
 
 #### [L-340] The exhibit store editor: what the first screenshot showed, and the Mode 5 pass
-<!-- L:340 status:OPEN upd:2026-09-19 section:A flag: rice:3/3/90/1 -->
+<!-- L:340 status:OPEN upd:2026-09-22 section:A flag: rice:3/3/90/1 -->
 - **Opened 2026-09-19 because L-334 closed.** The editor is built,
   pushed and working; these are the things left, and a pointer in a
   closed item is not a home for them.
@@ -1051,6 +1372,16 @@ as an archive of the prioritization thinking -- no cleanup on close.
   time. (2026-09-19: the three layout items are now DONE, so what this
   score covers is the Mode 5 pass and the fourth finding above.
   Unratified either way.)
+- **2026-09-21 -- THE POINTER-ONLY ENTRY IS THE STANDING RULE.** Tony,
+  on the C2 manifest's question 2.2: "Confirmed as recommended." A patch
+  may add an entry to gallery `data/objects_config.json` that holds a
+  pointer to a store row, a unit, and `"value": null` -- no number and no
+  figure count; the mirror fills both from the export. Anything more is
+  still not allowed without a ruling. First used at C2-b, 2026-09-22, for
+  nine entries: the km, AU and scatter rows beside each standoff, Earth's
+  tilt rate, and the outer belt's two band ends. The narrower question
+  above, whether the one-off correction exception stays narrow in its own
+  words, is separate and still Tony's.
 - **Ref:** L-334 (the build this hands over from), L-291 (the Earth
   room), L-320 (info markers); gallery `tools/exhibit_store_editor.py`,
   `tools/test_exhibit_store_editor.py`, `data/objects_config.json`;
@@ -3581,7 +3912,7 @@ governs a session document contradicting a settled decision, not a
 ledger field that predates the event it is silent about).
 
 #### [L-216] Gallery swap fails under a filesystem lock (OneDrive)
-<!-- L:216 status:OPEN upd:2026-09-21 section:A flag: rice:3/3/85/2 -->
+<!-- L:216 status:OPEN upd:2026-09-22 section:A flag: rice:3/3/85/2 -->
 - **2026-08-19: the nightly run wiped the served tree.** GitHub Desktop
   showed 56 deletions in the gallery repo and zero additions.
   `data/solar-system/` was absent while BOTH halves of the generation
@@ -3884,6 +4215,12 @@ dashboard's Cache Siblings description; and
 `documentation/L342_install_test_run_sequence.md` in the orrery. It is
 right for `1260806133443-solar-system`, which held real run records, and
 unsupported for the empty " (N)" folders, whose maker is unknown.
+**Note (2026-09-22) -- the first real build on the hardened swap.** Run
+`20260922T233338Z`, by hand during L-322 C2-b, OneDrive paused: the swap
+log reads one attempt for each rename and outcome `ok`. One attempt proves
+nothing either way -- no lock was there to absorb. The sweep kept one
+sibling as an autopsy, `.staging_solar-system_20260920T150019Z`, and
+Cache siblings reported none stale.
 **Gap (corrected 2026-09-21):** the CAUSE, unchanged. WATCH FOR A SWAP
 THAT TOOK MORE THAN ONE ATTEMPT -- the builder's `[SWAP]` line now says it
 on screen, and the maintenance run's last line reads it back from the
@@ -7998,7 +8335,7 @@ Tony's eyes close this one.
 `test_status_lines.py`, `skills/orrery-coding-conventions/SKILL.md`.
 
 #### [L-325] A derived row stores its reported figure, not the arithmetic result
-<!-- L:325 status:OPEN upd:2026-09-16 section:A flag: rice:3/3/90/2 -->
+<!-- L:325 status:OPEN upd:2026-09-22 section:A flag: rice:3/3/90/2 -->
 - **Where this came from.** L-305 item 6 was about to copy two standoff
   values into the gallery config, and Claude proposed copying them at full
   stored precision -- 10.251872972379905 and 13.511736110493397 -- on the
@@ -8078,12 +8415,18 @@ row's declared figure count (Rule 8) and no longer recomputes the two
 literals. Its runner row and dashboard button stay, with new wording.
 The two literal rows are unchanged and revert at their Earth-slice
 visit. The (decide) above still stands.
+**Note (2026-09-22):** the condition this item waited on is met. At L-322
+Stage C2-a (orrery `26f26fdb`) both standoff rows became expressions again,
+computed from Shue's and Jelinek's coefficients at the declared solar
+wind, and left `constants_rows.TRANSITIONAL`, which is now empty. The
+(decide) above is due. The C2 manifest recommends closing this item as
+SUPERSEDED by L-322; nothing it built is still in the tree.
 **Ref:** L-305, L-314, L-322, `constants_new.py`,
 `test_derived_figures.py`, `orrery_maintenance_run.py`,
 `palomas_orrery_dashboard.py`, `skills/provenance-discipline/SKILL.md`.
 
 #### [L-322] Units declared in the store, and the orrery as producer
-<!-- L:322 status:OPEN upd:2026-09-19 section:A flag: rice:4/5/70/6 -->
+<!-- L:322 status:OPEN upd:2026-09-22 section:A flag: rice:4/5/70/6 -->
 - **Where this came from.** L-305 Gap item 3 asked a narrow question --
   how does `check_store_drift` treat a dimensionless pointer -- and the
   answer opened a wide one. Design session 2026-09-11, zero code. The
@@ -8397,7 +8740,8 @@ unwraps to plain numbers at the boundary either way. Related and worth
 asking in the same round: ruling 9's migration visits all 88
 assignments, which is the natural moment to ask whether the store's
 format should change at all.
-**Gap (current, 2026-09-19):** the EARTH SLICE, contracted by
+**Gap (2026-09-19; SUPERSEDED by the 2026-09-22 Gap below, which records
+stages A to C DONE):** the EARTH SLICE, contracted by
 `documentation/BUILD_MANIFEST_L322_earth_slice_20260919.md` (written on
 orrery `bb614c7f` and gallery `2ebd001f`; filed at `189c2987`). Four
 stages. A: this ledger patch. B: provenance-discipline goes to 2.14 and
@@ -8671,6 +9015,63 @@ row that feeds one. One caution rides with it -- a model's read counts
 only if the source was actually OPENED, with the title as printed and the
 table or page recorded. A read reconstructed from training is worse than
 no read, because it stops the next reader from looking.
+**Note (2026-09-22) -- Stage C2 is BUILT AND DEPLOYED, and Earth is the
+first closed slice.** C2-a in the orrery at `26f26fdb` (Claude Opus 5,
+from `patch_L322_C2_1_orrery_store_and_checkers_20260922.py`); C2-b in the
+gallery at `813fc542`, with its follow-up at `386a44ff` (Claude Opus 5.5,
+from `patch_L322_C2_2_gallery_hovers_and_read_check_20260922.py` and
+`patch_L322_C2_3_join_names_read_check_20260922.py`). The contract was
+`documentation/BUILD_MANIFEST_L322_C2_magnetosphere_20260920.md`, with its
+section 17; the records are `documentation/RUN_RECORD_L322_C2a_20260922.md`,
+`documentation/RUN_RECORD_L322_C2b_20260922.md`, the two words notes and
+the read record `documentation/L322_earth_read_record_C2_20260922.md`.
+- **Tony's rulings, in his words.** 2026-09-20, on the magnetopause's
+  figure count: "See the Skill on significant digits." The skill gave
+  three figures by propagating Shue's stated uncertainties: 10.3 Earth
+  radii, +/- 0.13. 2026-09-20: "The single source of truth is
+  constants_new.py." Every number the hovers print, the kilometre and AU
+  figures included, is computed in the store and served. 2026-09-21, on
+  telling the visitor about the scatter, option A, one line each:
+  "Confirmed as recommended." 2026-09-21, the bow shock's cut angle
+  becomes declared: "Confirmed as recommended." 2026-09-21, the
+  pointer-only config entry as the standing rule: recorded on L-340.
+  2026-09-22, the hover words: "Confirmed as recommended"; and after the
+  phone look, every line marked "correct".
+- **What a visitor sees move.** The magnetopause standoff reads 10.3
+  (was 10.25) and the bow shock 13.5 (was 13.51), each with its distance
+  "about" in km and AU and a line saying how far real crossings
+  typically fall from the model. Earth's dipole tilt reads 9.4105
+  degrees for 2020 (was 9.6): IGRF-13 prints no tilt, 9.6 was in no
+  epoch of it, and the drift the old note gave was ten times too small
+  and per decade instead of per year; the store now computes both from
+  the six degree-one coefficients, checked against NOAA's file. The
+  outer belt is drawn at the halfway point of its measured 4 to 5 band,
+  said as a choice, with no kilometre line.
+- **What the checks now enforce.** Earth is in `CLOSED_SLICES`, so a
+  missing unit, status or figure count on an Earth row fails the orrery
+  run. The gallery's pointer join walks every served Earth link through
+  its inputs and fails a measured row with no read (41 of 41 carry one).
+  The display check grades the four changed hovers line by line against
+  the approved words. Every new check was shown failing on purpose
+  before it was trusted; both run records list the breaks.
+- **One ordering, stated honestly.** L-342 asked for the read check to
+  be shown failing BEFORE `CLOSED_SLICES` changed. The slice closed at
+  C2-a on 2026-09-22 and the read check was shown failing at C2-b the
+  same evening, a few hours later. In that window the gallery was
+  serving the older config and nothing a visitor saw depended on it.
+- **Decisions 8 and 9 of the manifest.** Decision 9, whether any
+  rule-correct number is shown shorter, is dissolved by
+  provenance-discipline 2.17 Rule 7 (protocol v3.67): a display prints
+  the declared count, and a number that reads as too many figures is a
+  finding about its row (L-343). Decision 8, closing L-325, is Tony's
+  and is due now; it is recorded on L-325.
+**Gap (2026-09-22):** Stage D, and then the other bodies. (1) Stage D:
+Earth's pole moves out of `idealized_orbits.py` into the store, its own
+push, because it draws a closed room's axis; its rate and angle rows
+take the two Rule 3 forms (L-355). (2) Before the NEXT body's slice, the
+conversion question on L-345 is decided. (3) The other bodies' slices,
+the Sun's first, since its room is live. The classes found at C2 are
+L-343 to L-361, one row each.
 **Ref:** L-305, L-306 (approximations are not promoted), L-314,
 `constants_new.py`, `provenance_scanner.py`, `orrery_maintenance_run.py`,
 `test_status_lines.py`, `celestial_objects.py`, `visualization_core.py`,
