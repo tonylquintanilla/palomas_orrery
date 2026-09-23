@@ -1,0 +1,297 @@
+# Gallery card pass -- run record: every card looked at, what was changed, what was found
+
+Built on gallery `386a44ff4e0aa4b03624a3e1cf1f38c65081dfcd`
+at https://github.com/tonylquintanilla/tonyquintanilla.github.io
+and orrery `dcc36e38b73bdb59a97f035aa600e6892170d3c9`
+at https://github.com/tonylquintanilla/palomas_orrery (read, not changed).
+Both HEADs read live with `git ls-remote` on 2026-09-22 when this record
+was started. The pass itself began earlier the same day on gallery
+`1ae9de50` and orrery `efd2e2ba`.
+
+**Type: RUN RECORD, kept open.** Begun September 22, 2026, Tony with
+Anthropic's Claude. It is rewritten as each card is finished, and each
+new copy replaces the last. It closes when the last card is done, and the
+ledger patch that follows it is written from section 5.
+
+**Rules this work ran under**, each loaded in this session and each
+matching the protocol's manifest table at v3.67: safe-file-editing 1.11,
+gallery-pipeline 1.2, ledger-and-session-records 1.11.
+
+**Where the earlier part comes from.** Sections 2 and 3 up to the refusal
+were done in the previous session ("Gallery editor card cleanup and
+layout fixes"). Its running notes lived in that session's sandbox and are
+gone; what is written here was read back from that chat and from the
+gallery's commits. It is a claim about that session, not a re-measurement,
+except where a line says it was checked here.
+
+---
+
+## 1. What the pass is
+
+Tony goes through the gallery card by card and says what looks wrong.
+Each finding is either fixed as a patch, changed by Tony in the gallery
+editor, or recorded for the ledger. Tony's eyes are the check: none of the
+gallery's gating checks reads what the lists show or where buttons sit.
+
+At gallery `386a44ff` the metadata holds 145 cards, and all 145 are
+served (none is in Storage). Three are live rooms with no file: Solar
+System Explorer, Solar Structures, and Earth and Moon.
+
+## 2. Card 1 -- Solar System Explorer
+
+**Changed in the editor by Tony**, both checked here against the commits:
+its shape from 16:9 to 9:16 (gallery `1ae9de50`), and its Featured flag
+turned on (gallery `42fd97dd`).
+
+**Patched:** `patch_L285_explorer_buttons_to_bottom_20260922.py`, built on
+`1ae9de50`, moved the Explorer's buttons to the bottom of the screen. It
+also hid two pieces of room chrome that had been showing on the Explorer
+since 2026-08-31, the "In this scene" button and an empty grey pill, and
+tightened the legend so ten planets no longer reach the + button on a
+phone. Pushed at gallery `83a72d11`. Tony: "both desktop and phone look
+right, as expected."
+
+**Recorded, not fixed:**
+- Still crowded on a small phone (375 by 553 pixels, where the legend
+  meets the + button by about 32 pixels) and on any phone held sideways,
+  where the picture is about 160 pixels tall and Plotly's toolbar covers
+  the arrow cross. Sideways was crowded before this patch too.
+- Two files in the orrery still describe the old layout: the Nav cluster
+  row in `skills/interactive-exhibit/SKILL.md`, which says a button
+  holder's corner is set only by `.nav-cross-apart`, and L-285's ledger
+  note, which says the Explorer's overlap is open.
+
+## 3. Cards 2 and 3 -- Inner Solar System Animation, the 16:9 and 9:16 pair
+
+**What Tony saw.** The 16:9 card is too compressed on the phone and should
+not be offered there. The 9:16 card works on the phone but not on the
+desktop, because its hover text only appears through the phone's info
+card. The editor has no control to take a card off one device.
+
+**Why.** The two cards were converted on 2026-02-17, before the gallery
+linked a figure's two shapes, and their file names share no stem, so
+nothing ever linked them. Every trace in the 9:16 file has empty hover
+text; the words were moved into a hidden data field for the info card,
+and the page wires that card only in Mobile mode.
+
+**Tony's ruling, 2026-09-22:** the Desktop tab lists the 16:9 cards and
+the Mobile tab the 9:16 cards. A card with no counterpart in the other
+shape, and a live room, list in both. This replaces L-287's rule of
+2026-09-05, that every card shows in every mode.
+
+**Patched:** `patch_L303_tab_shows_its_own_shape_20260922.py`. It
+rewrites one function in `index.html`, `inCurrentMode()`, which the room
+lists, the lobby and the welcome count all read, and it links the two
+animation cards to each other in `gallery/gallery_metadata.json`.
+
+**The first cut refused**, built on `83a72d11`. It said BASE MOVED
+because it fingerprinted the whole metadata file, and Tony's two editor
+saves in between (section 2) had changed it. Neither save touched the
+lines the patch edits. The second cut, built on `386a44ff`, checks the
+metadata only for what the patch needs, keeps the whole-file check on
+`index.html`, works out the tab counts when it runs, and says so plainly
+if it has already been applied. Tested here on copies of both files, with
+LF and with Windows line endings plus a further editor save: it applied,
+and the only metadata change was the two new link lines. A second run
+refused, saying it had already been applied.
+
+**What the site should show after the push**, computed here from the
+metadata at `386a44ff`: 104 exhibits in each tab, where both show 145
+today. What leaves Desktop is the 41 portrait twins, and what leaves
+Mobile is their 41 landscape partners. 46 landscape-only cards, 14
+portrait-only cards and the 3 live rooms stay in both. The Featured strip
+shows 5 cards in each tab; the previous session said 4, before Tony
+featured the Explorer.
+
+**Status: waiting for Tony's run of the second cut.**
+
+## 4. Cards still to look at
+
+The rest of the 145. Each gets a section here as it is done.
+
+## 5. For the ledger, one row per class
+
+Each of these is a kind of problem, not a single instance. None has a
+ledger handle yet; the ledger patch at the end of the pass assigns them.
+
+- **Hover text kept only in the hidden data field, so a desktop hover box
+  is empty.** The previous session counted 20 served files, 14 portrait
+  and 6 landscape, not re-measured here. Twelve of the portrait files had
+  no landscape twin: 3D Stars to 20 light years; 3D Stars to Visual
+  Magnitude 4.0; Paleoclimage and Extreme Heating Events (in two rooms);
+  Earth-Moon System 2026-02-10; Inner Solar System Animation; Inner Solar
+  System; Pluto System Barycenter; Voyager 1 and 2 Missions; Jupiter
+  System; Near Earth Asteroids; Current Comets 2-10-2026. Once the tab
+  patch lands, Inner Solar System Animation has a twin and leaves the
+  Desktop tab, so eleven stay on the desktop with empty hover boxes. The
+  six landscape files show an empty box on the desktop: Paleoclimate 540
+  Ma; Orbital Transformation of Mercury; HR Diagram Magnitude 4.0;
+  Paleoclimate Human Origins; Paleoclimate and Extreme Heating Events (two).
+- **The editor cannot link or unlink a card's twin.** Any other pair made
+  before the linking existed needs a metadata patch, as this one did.
+- **Nothing checks which cards each tab lists, or where the room buttons
+  sit.** Both changes in this pass are checked only by Tony looking.
+- **A patch that fingerprints a whole file the editor saves refuses on
+  any save.** safe-file-editing already has this rule; its examples name
+  the ledger's index and the protocol's skill table, not the gallery
+  metadata. A candidate field note for that skill.
+- **Files quoting a layout or a rule this pass changed** (The Correction
+  Does Not Travel): the interactive-exhibit Nav cluster row and L-285's
+  note (section 2), and the ledger's L-286 and L-287 text on the mode
+  rule, which the tab ruling replaces.
+
+---
+
+Record started September 2026 with Anthropic's Claude Opus 5.5.
+
+============================
+**Tony**:
+
+Card 1, after the push to 83a72d11: "both desktop and phone look right,
+as expected. thanks! head is at 83a72d11523c417027d0a325bb0f2531256bd0b4"
+
+Cards 2 and 3, the tab patch (second cut): your run output and what both
+tabs show go here.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L303_tab_shows_its_own_shape_20260922.py
+  ok  index.html: header Updated stamp
+  ok  index.html: the note above treeRank points at the new rule
+  ok  index.html: inCurrentMode() lists the tab's own shape
+  ok  index.html: renderNavList's note matches
+note: gallery/gallery_metadata.json is CRLF here; compared normalised, written back
+      CRLF exactly as found.
+  ok  metadata: the 16:9 animation card names its 9:16 twin
+  ok  metadata: the 9:16 animation card names its 16:9 twin
+  ok  encoding gate: inserted text is ASCII, and neither file
+      holds a non-ASCII byte.
+  ok  metadata parses, and the two cards name each other
+  wrote index.html (162633 bytes)
+  wrote gallery/gallery_metadata.json (81063 bytes) [CRLF, as found]
+
+patch applied to 2 file(s)
+
+Stamps updated: the 'Updated' line at the top of index.html.
+gallery_metadata.json's 'last_updated' is the editor's to set and
+is left alone; no card was added, removed or moved.
+
+WHAT TO DO NEXT, in this order:
+
+  1. Move THIS script into documentation/. It has run. -- done
+  2. Run the gallery maintenance run:
+         python gallery_maintenance_run.py
+     Expect every gating checker to pass, as before. None of them
+     reads the card lists, so a pass does not speak for this
+     change; your eyes in step 5 do.
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              0.9s  no change to MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     0.5s  no change to
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite       9.3s  PASS (201 checks, 0 failures)
+  PASS Mirror suite              0.1s  All 42 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing.
+  PASS Store writer suite        3.2s  All 245 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 246 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 58 link(s) compared, store
+                                    7fb7a1b666d4.
+  PASS Pointer join              0.1s  Every link is accounted for: 87
+                                    link(s) against orrery dcc36e38,
+                                    24 fallback named; read check: 41
+                                    of 41 measured rows reached carry
+                                    a read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's features exactly: 4
+                                    object(s), 34 named shell(s), in
+                                    both cache files.
+  PASS Feature renderers         0.1s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.1s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.1s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.1s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 55 hover(s) and 267
+                                    number(s) examined; 12 graded, 4
+                                    graded by line, 43 held to the
+                                    fixture ===
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: 1 sibling(s), none stale,
+                                    and nothing in data/ the builder
+                                    did not make. The sweep is keeping
+                                    up.
+
+======================================================================
+  15 of 15 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: 1 sibling(s), none stale, and
+  last swap 2026-09-22T23:33:39.924967+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  3. In GitHub Desktop the change list should show exactly three
+     files: index.html, gallery/gallery_metadata.json, and this
+     script under documentation/. Commit and push.
+
+gallery moved to 2a80a68c6db57414757d372f424b77162bf4b2db
+
+  4. After the push, check what the live site serves:
+         python gallery_maintenance_run.py --live
+  5. Open https://palomasorrery.com/ on the desktop and look at
+     both tabs. Desktop should list 104 exhibits and Mobile 104,
+     where both said 145 before; the welcome line carries the
+     count. (These numbers were worked out just now from your
+     metadata, so a card you edit later can change them.)
+     The Featured strip should show 5 cards on Desktop and 5 on
+     Mobile. Inner Solar System Animation should appear once in
+     each, the 16:9 view on Desktop and the 9:16 on Mobile. On
+     the phone the 16:9 animation card should now be gone --
+     that is the other half of this patch -- and nothing else
+     there should have changed.
+  6. Tell Claude the new gallery SHA and what you saw.
+
+TONY-ACTION ROLLUP for this patch:
+  (do)     steps 1 to 6 above.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
