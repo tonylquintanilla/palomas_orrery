@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.67 | September 22, 2026
+Tony Quintanilla, PE | Claude | v3.68 | September 23, 2026
 
-Cut from 1f6e55a9 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from ac25d4f4 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -488,7 +488,7 @@ agentic-pre-test             1.2  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
 horizons-orbital-mechanics   1.1  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning
-provenance-discipline        2.17 Scanner runs, audits, citations, constants,
+provenance-discipline        2.18 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
 earth-system-pipeline        1.1  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY
@@ -1158,6 +1158,64 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.68 (September 23, 2026): No rule changed in this document. ONE
+skill bump, taken ahead of the build it serves, which is v3.55's
+ordering.
+
+provenance-discipline 2.17 -> 2.18 (L-322). WHERE A DRAWING NUMBER
+LIVES, AND HOW AN EXACT NUMBER PRINTS.
+
+THREE KINDS OF DRAWING NUMBER ARE TONY'S RULING. A physical value, such
+as a size, an edge or a cut angle, lives in constants_new.py, sourced
+or declared. A value chosen by eye does not promote, and is replaced as
+the braid reaches it, published rooms first. A rendering setting, such
+as opacity, point count, colour, marker or font, stays in the drawing
+code. Tony, 2026-09-22: "these are defined in the code not in
+constants new." The skill had contradicted itself on this for two
+versions, one section keeping opacity and point count in the drawing
+code and another listing them as stored. The test between the kinds is
+whether changing the number moves where something is drawn. Earth's
+belt thickness was the case that needed it: it looks like a setting,
+it moves where the rings sit, and with no source it is replaced by the
+belts' served edges.
+
+THE EXACT ROW CAME FROM A QUESTION NOBODY COULD ANSWER. The Stage D
+manifest asked how many figures Earth's obliquity should print. It is
+exact, because Horizons defines its ecliptic frame by it, and Rule 7
+said nothing about exact rows. Measured, the gallery printed every
+exact row by a width chosen at each call site. Claude Fable 5.1's
+answer: store a definition in the form it is printed, 84381.448
+arcseconds, and print its own digits. Claude Opus 5.5 added the print
+count as a field on the row, because a Python literal cannot tell a
+meant trailing zero from a typing habit: counted from the literal, a
+floor chosen as 200 km would print as 200.0.
+
+THE CONVERSION ROW CAME FROM A CHECK THAT PASSED WHILE WRONG. Fable
+ran the unit checker on the draft rotation-period row, written with a
+bare divide-by-3600, and it failed: the checker converts units by
+itself and found 0.0066 hours against 23.93 stored. The figures checker
+passed the same row, so one checker alone looked green. A conversion is
+now an exact row with its own unit.
+
+THE MIDPOINT BECAME THE DEFAULT ON TONY'S READING. Asked where the
+magnetotail's flare should end inside its sourced 100 to 120 Earth
+radii, Tony said he thought the midpoint was already the skill's rule.
+It was the practice in every case and not written anywhere. It is
+written now: the midpoint, unless the row states a reason for an end.
+
+THE OBLIGATION TRAVELS, as it always does. This session loaded 2.17,
+and a reinstall cannot be verified from inside the session that makes
+it. The next session confirms its loaded copy reads 2.18 before any
+provenance or constants_new.py work, and that session is the Stage D
+build, from documentation/BUILD_MANIFEST_L322_D_earth_pole_20260922.md
+revision 2, with Fable's review filed beside it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.65 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.67 (September 22, 2026): No rule changed in this document. ONE
 skill bump, the second taken ahead of the C2 build, which is v3.55's
 ordering applied twice to one build.
@@ -1290,62 +1348,6 @@ documentation/BUILD_MANIFEST_L322_C2_magnetosphere_20260920.md.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.63 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.65 (September 20, 2026): No rule changed in this document. ONE
-skill bump, taken AFTER the build it records, which is v3.62's
-exception rather than v3.55's ordering: three of these rules were
-learned while the build ran and there was nothing to write before it.
-
-gallery-cache-builder 1.5 -> 1.6 (L-216). THE CACHE SWAP STOPS
-DEPENDING ON TONY NOTICING.
-
-WHAT LANDED, in the gallery at `a1a516cf`. Each rename inside the swap
-is retried for about fifty seconds. A swap that still cannot finish
-renames the previous generation back, so the working copy is never left
-without a served cache and GitHub Desktop never shows the pile of
-deletions. And every run that reaches the swap writes one line to
-`data/cache_swap_log.jsonl`, a tracked file OUTSIDE the generation --
-which L-216 has said since 2026-08-19 must come first, because a run
-whose swap fails strands its own record where `.gitignore` hides it.
-The offline suite went from 167 checks to 190, and each of the three
-pieces was removed on purpose to confirm the matching checks go red by
-name.
-
-THE COUNT IS FIVE, and the two ends of the list are the argument. The
-first occurrence, 2026-07-24, was a SCHEDULED run: nobody knew a build
-was in flight, the mass deletion was read as routine cleanup, and it
-was committed and pushed before being reverted. The human check did not
-merely risk failing; it failed once. The last two, both on 2026-09-20,
-happened with OneDrive syncing PAUSED, so pausing is not the cure it
-looked like. Tony's words are in L-216: "catching the failures depended
-on me stopping with the malformed commit lists, but the fix was not
-obvious."
-
-TWO RULES IN THE SKILL CAME FROM MISTAKES MADE DURING THE BUILD, and
-both are the same shape. A patch script called plain `shutil.rmtree` on
-the cache tree and was refused by the read-only attribute OneDrive sets
--- the exact failure `_rmtree_force` was written for, in a docstring
-the session had read an hour earlier. And the build manifest described
-a folder by a COUNT, "42 published files that serve nothing", written
-by an author who had not opened them; they were the only copy of 38
-days of run history. Knowledge that lives only inside a function does
-not fire, and a count does not say what is there. Both now live in the
-skill.
-
-THE MOVE OFF ONEDRIVE IS NOT DECIDED and is not to be pressed. Tony
-ruled "do option 1 and take it from there as needed" on 2026-09-20; the
-analysis he asked to have recorded, including what a move would need
-first, is written into L-216.
-
-THE OBLIGATION TRAVELS, as it always does. This session loaded 1.5, and
-a reinstall cannot be verified from inside the session that makes it.
-The next session confirms its loaded copy reads 1.6 before cache work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.62 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

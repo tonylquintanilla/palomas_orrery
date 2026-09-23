@@ -1440,6 +1440,65 @@ resident.
 (Moved down from the resident protocol on 2026-09-22 when
 v3.67 made a fourth entry.)
 
+v3.65 (September 20, 2026): No rule changed in this document. ONE
+skill bump, taken AFTER the build it records, which is v3.62's
+exception rather than v3.55's ordering: three of these rules were
+learned while the build ran and there was nothing to write before it.
+
+gallery-cache-builder 1.5 -> 1.6 (L-216). THE CACHE SWAP STOPS
+DEPENDING ON TONY NOTICING.
+
+WHAT LANDED, in the gallery at `a1a516cf`. Each rename inside the swap
+is retried for about fifty seconds. A swap that still cannot finish
+renames the previous generation back, so the working copy is never left
+without a served cache and GitHub Desktop never shows the pile of
+deletions. And every run that reaches the swap writes one line to
+`data/cache_swap_log.jsonl`, a tracked file OUTSIDE the generation --
+which L-216 has said since 2026-08-19 must come first, because a run
+whose swap fails strands its own record where `.gitignore` hides it.
+The offline suite went from 167 checks to 190, and each of the three
+pieces was removed on purpose to confirm the matching checks go red by
+name.
+
+THE COUNT IS FIVE, and the two ends of the list are the argument. The
+first occurrence, 2026-07-24, was a SCHEDULED run: nobody knew a build
+was in flight, the mass deletion was read as routine cleanup, and it
+was committed and pushed before being reverted. The human check did not
+merely risk failing; it failed once. The last two, both on 2026-09-20,
+happened with OneDrive syncing PAUSED, so pausing is not the cure it
+looked like. Tony's words are in L-216: "catching the failures depended
+on me stopping with the malformed commit lists, but the fix was not
+obvious."
+
+TWO RULES IN THE SKILL CAME FROM MISTAKES MADE DURING THE BUILD, and
+both are the same shape. A patch script called plain `shutil.rmtree` on
+the cache tree and was refused by the read-only attribute OneDrive sets
+-- the exact failure `_rmtree_force` was written for, in a docstring
+the session had read an hour earlier. And the build manifest described
+a folder by a COUNT, "42 published files that serve nothing", written
+by an author who had not opened them; they were the only copy of 38
+days of run history. Knowledge that lives only inside a function does
+not fire, and a count does not say what is there. Both now live in the
+skill.
+
+THE MOVE OFF ONEDRIVE IS NOT DECIDED and is not to be pressed. Tony
+ruled "do option 1 and take it from there as needed" on 2026-09-20; the
+analysis he asked to have recorded, including what a move would need
+first, is written into L-216.
+
+THE OBLIGATION TRAVELS, as it always does. This session loaded 1.5, and
+a reinstall cannot be verified from inside the session that makes it.
+The next session confirms its loaded copy reads 1.6 before cache work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.62 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-09-23 when
+v3.68 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

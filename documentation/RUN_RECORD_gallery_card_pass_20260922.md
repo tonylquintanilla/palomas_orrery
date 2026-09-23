@@ -1,10 +1,10 @@
 # Gallery card pass -- run record: every card looked at, what was changed, what was found
 
-Built on gallery `1a12cadedf49fcc959a67ceb52fcb7916741d5c8`
+Built on gallery `2e0fa8f5de7ec1dc99597dc302e4e4c4eb745e72`
 at https://github.com/tonylquintanilla/tonyquintanilla.github.io
-and orrery `60d3578723c6b60d1f0c779853fd8e0ea2a20e63`
+and orrery `ac25d4f44a0607f734fdf98f21095e869abe790b`
 at https://github.com/tonylquintanilla/palomas_orrery (read, not changed).
-Both HEADs read live with `git ls-remote` on 2026-09-22 for this copy.
+Both HEADs read live with `git ls-remote` on 2026-09-23 for this copy.
 The record was started on gallery `386a44ff` and orrery `dcc36e38`, and
 the pass itself began earlier the same day on gallery `1ae9de50` and
 orrery `efd2e2ba`.
@@ -128,8 +128,10 @@ cards. Computed here from the metadata at `1a12cade`: 103 exhibits in
 each tab, 5 Featured in each.
 
 Its file, `gallery/paloma_social_view_2005_02_04.json`, is still in the
-repo. No card points at it, so no list shows it, but it is still on the
-site at its own address. Recorded in section 5.
+repo. That is the editor working as designed, not a problem: its Delete
+leaves the file on purpose, and `tools/gallery_cleanup.py` removes files
+no card uses. (The previous copy of this record listed it as a problem;
+corrected here.)
 
 ## 3b. Housekeeping done alongside
 
@@ -145,9 +147,123 @@ gallery_subcategory_handoff, index_transform_audit and
 non_destructive_routing_handoff. The spent tab patch was filed in the
 orrery's `documentation/` too, where the patch said the gallery's.
 
+## 3c. Card 5 -- Orbital Transformation of Mercury
+
+**What Tony saw.** It reads well on the desktop, in both tabs, and not
+at all on the phone. It is a 16:9 3D figure with no 9:16 twin, so the
+phone squeezed the scene to fit, which looks like a broken card. The
+editor offered no way to keep a card off the phone.
+
+**Tony's ruling, 2026-09-22.** The editor's "Shape (phone only)" setting
+has four choices: "16:9 2D" sweeps sideways as before; "16:9 3D" shows,
+on a phone held upright, a card saying "Turn your phone to landscape to
+view this card", and draws the figure when the phone is turned; "9:16"
+shows as before; and "none" keeps the card off the phone. The desktop
+keeps both tabs as they are, because space there is not limited. Tony
+asked for the phone setting to allow no choice at all; a radio button
+cannot be unticked, so "none" is a fourth button that does it.
+
+**How the two 16:9 choices are decided.** The page chooses between
+sweeping and the turn card by looking inside the figure for a 3D scene.
+The editor reads the figure the same way and greys out the 16:9 choice
+that does not match, so it cannot save a choice the page would not
+follow, and no existing card had to be set by hand. At the time, 31
+landscape cards were 3D; 23 of those have a 9:16 twin the phone shows
+instead, and 8 did not: Orbital Transformation of Mercury, Earth
+Barycenter Shells, Near Earth Asteroids, Pluto Barycenter System,
+Trappist1 Exoplanet System, 3D Stars Distance to 20 Light Years, 3D
+Stars Magnitude 4.0, and 3D Stars Magnitude 4.0 1400Ly.
+
+**Patched:** `patch_L303_phone_setting_and_turn_card_20260922.py`, built
+on `1a12cade`: `index.html`, the gallery editor, the JSON converter (a
+re-export now keeps "none") and the sweep report. Tested here in a
+stand-in phone and desktop and with the editor run headless. Pushed at
+gallery `4c20194a`, alongside that morning's nightly run. Tony then set
+Mercury to "none" in the editor, at gallery `e823e738`. His full run is
+in the Tony section.
+
+**What Tony saw on the phone:**
+- **Mercury still opened**, as the turn card, and turned sideways it was
+  drawn squeezed. He read this as "none" acting like "16:9 3D". The
+  metadata at `e823e738` does say "none", and in the stand-in phone
+  that card is gone from every list. Two things fit what he saw, and
+  neither could be settled from here. The site can serve the old
+  metadata for up to about ten minutes after a push, and he tested soon
+  after his save. And a page first opened with the phone held sideways
+  was taken for a tablet, which lists every card. The second is fixed
+  in the follow-up below; the first needs only a reload.
+- **After turning back upright there was no way back.** The turn card
+  showed, but the menu button at the top left was gone and the
+  browser's back button did nothing; only a reload brought the menu
+  back. In the stand-in phone the menu stayed in place through the same
+  turns, so the cause on his phone is not known. A page left zoomed or
+  shifted by the turn fits what he saw.
+- **The 2D sweep and the 9:16 view still work:** he checked the Keeling
+  Curve and the featured Planetary Boundaries card. The other Planetary
+  Boundaries card, a 2D figure that sweeps, does not look right (section 4).
+- **The desktop, both tabs, is as before**, Mercury included.
+
+**Follow-up patch:** `patch_L303_turn_card_way_back_20260923.py`, built
+on `e823e738`, `index.html` only. The turn card carries its own "Back to
+the gallery" button and scrolls itself to the top, so it no longer
+relies on the menu button. And a touch screen whose short side is under
+768 pixels counts as a phone when the page loads, so a phone opened
+sideways leaves out what a phone leaves out; a narrow desktop window
+still counts as before, and a short one does not. Tested here in the
+stand-in: the button returns to the lobby, a turn made in the lobby
+opens nothing, a phone loaded sideways does not list Mercury, and the
+desktop at 1280 by 700 and 1280 by 800 lists all 142 cards.
+
+**The follow-up, pushed at gallery `2e0fa8f5`.** Tony's run and both
+maintenance runs are in the Tony section: 15 of 15 offline checks and 2
+of 2 live checks passed. What he saw on the phone:
+- **Mercury is gone from the phone**, held upright. So "none" works, and
+  the earlier sighting was most likely the site serving the old
+  metadata for a few minutes after his save.
+- **Loaded sideways**, the phone shows the desktop-style menu with both
+  tabs, and Mercury is not listed in either, the Desktop tab included.
+  That is the follow-up doing what it says: a phone is a phone however
+  it is held. The tab toggle appears because the page's layout still
+  treats a sideways phone as a tablet; recorded in section 5.
+- **The menu button still disappears** after turning the phone
+  sideways and back upright. A reload held upright brings it back.
+
+**A likely cause, not confirmed.** The page asks the phone to draw it
+edge to edge, under the status bar and the notch, and gives its top bar
+no room for them. Held sideways, the phone's browser shrinks its own
+bars; turned back, it can stay that way, and then the page's top bar,
+with the menu button in it, sits under the clock where it can neither
+be seen nor tapped. A reload restores the browser's bars. If that is
+it, the same would happen on any card, not only the turn card. A
+screenshot of the phone at that moment would settle it.
+
+**Status: waiting for Tony's screenshot after turning back upright, and
+whether the turn card's "Back to the gallery" button worked.**
+
+## 3d. Two broken cards deleted by Tony
+
+Both were cards whose file was not in the repo, found while checking
+card 5. Deleted in the editor; the metadata holds 142 cards at
+`e823e738`, and each tab lists 102 on the desktop.
+
+- **Psyche - Mars Gravitational Assist 5-15-26 animated** (9:16). Its
+  file was about 98 MB; Tony deleted it, probably because GitHub would
+  not take a file that size.
+- **Comet C/2025 K1 Breakup 10-16-2025**, the 16:9 card. Its file had
+  been deleted from the gallery on 2026-04-05 and the card left behind.
+  Before the tab change the desktop also listed the working 9:16 card,
+  so nobody noticed; after it, the Desktop tab showed only the broken
+  one. With it gone, the 9:16 card lists in both tabs, and its hover
+  text is ordinary text, so it works on the desktop too.
+
 ## 4. Cards still to look at
 
-The rest of the 145. Each gets a section here as it is done.
+The rest of the gallery. Each gets a section here as it is done. Two are
+queued from Tony's notes:
+- **Trappist1 Exoplanet System**: not suited to the phone; Tony will set
+  it to "none".
+- **Planetary Boundaries, the 2D card that sweeps** (not the featured
+  9:16 one): does not look right on the phone.
 
 ## 5. For the ledger, one row per class
 
@@ -171,8 +287,16 @@ ledger handle yet; the ledger patch at the end of the pass assigns them.
 - **The front page does not show the tab split** (Tony, section 3). It
   appears only inside a door. Tony links it to a wider gap in the front
   page; the guest book is L-281, still open.
-- **Deleting a card in the editor leaves its file behind.** The file
-  is unlisted but still served at its own address (section 3a).
+- **A 3D figure drawn on a phone held sideways needs editing for that
+  screen to look right** (Tony, cards 5 and queued Trappist1). "none" is
+  the tool until a card is edited for it.
+- **A phone first opened sideways gets the tablet layout**, with the
+  Desktop and Mobile tabs, although it now lists only what a phone
+  lists (section 3c).
+- **On a card, the browser's back button does nothing useful.** Seen on
+  the turn card (section 3c). The page opens every card by replacing the
+  current address rather than adding one, which is the likely reason;
+  not checked on a real phone.
 - **The editor cannot link or unlink a card's twin.** Any other pair made
   before the linking existed needs a metadata patch, as this one did.
 - **Nothing checks which cards each tab lists, or where the room buttons
@@ -189,7 +313,7 @@ ledger handle yet; the ledger patch at the end of the pass assigns them.
 ---
 
 Record started September 2026 with Anthropic's Claude Opus 5.5, and
-updated the same day after cards 2 to 4.
+updated after cards 2 to 4, and twice on 2026-09-23 during card 5.
 
 ============================
 **Tony**:
@@ -543,28 +667,290 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
   3. In GitHub Desktop the change list should show exactly five
      files: index.html, the three tools, and this script under
      documentation/. Commit and push.
+-- One Drive sync paused     
 -- gallery moved to 4c20194a69f6cb57ff19a33ffa2f64a320fd8a41
---
+-- orrery moved to ac25d4f44a0607f734fdf98f21095e869abe790b
 
   4. After the push, check what the live site serves:
          python gallery_maintenance_run.py --live
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 11 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+
+  PASS Served reachability       2.0s  all 11 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 751aff3f
+
+  PASS Export freshness          0.2s  the served export is the orrery's
+                                    at 751aff3f, byte for byte
+
+  orrery HEAD ac25d4f4
+  examining 29 of 87 links; the other 58 are served from the export
+    NOT IN STORE  create_sun_galactic_tide default not a top-level constant in the store
+                  /objects/0/features/oort_cloud/galactic_tide/typical_radius
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NOT IN STORE  planet_poles['Earth']            not a top-level constant in the store
+                  /objects/1/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  29 pointers: 24 match, 0 DRIFT, 0 UNIT MISMATCH, 5 could not be examined.
+
+  PASS Store drift               0.8s  29 pointers against orrery
+                                    ac25d4f4 -- 24 match, 0 DRIFT, 0
+                                    UNIT MISMATCH, 5 could not be
+                                    examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            29 pointers against orrery ac25d4f4 --
+  last swap 2026-09-23T13:09:46.835195+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
   5. Open the gallery editor (tools/gallery_editor.py, Run) and click
      the Mercury card. 'Shape (phone only)' should show four
      choices, with '16:9 3D' picked and '16:9 2D' greyed out.
+-- correct. None selected.
+
   6. Pick 'none', Save All, then commit and push
      gallery/gallery_metadata.json.
+-- e823e7383915b00f29aefd54f0cfbaed7bb4cedb
+
   7. On the phone, held upright:
-       - Orbital Mechanics should no longer list the Mercury card.
+       - Orbital Mechanics should no longer list the Mercury card. -- not quite. on the phone held upright, it says, "Turn your phone to landscape to view this card." On desktop both tabs show the same landscape view; this is okay. on the phone when i turn the phone to landscape, the figure is drawn sized to fit, but it does not look good. i need to edit it specifically for the phone. so the None radio button is functioning as the 16:9 3D button. please review. 
+       -- another issue. on the phone when i turn the phone upright again, the view goes back to the "turn your phone...." card, however, from there there is no way back to the gallery front page. the < button at the bottom does not work and there is no hamburger menu at the top left. what i have to do is press the refresh arrow then the hamburger displays
        - Open Trappist1 Exoplanet System. It should show its title
          and 'Turn your phone to landscape to view this card.'
          Turn the phone: the figure is drawn. Turn it back: the
          card returns.
+         -- i have not reviewed this card yet, but it suffers from the same issues as the orbital transformation card. it is not suited for the phone and i will removed it. 
        - A 2D card should sweep sideways as before, and a 9:16 card
          should look as before.
+         -- for a 2D landscape sweep i looked at the earth science keeling curve. that works correctly.
+         -- for the 9:16 card i looked at the featured planetary boundaries card. that works correctly. it should be noted that the other (not featured) planetary boundaries 2D card that requires a sweep does not look right.
      On the desktop, both tabs should look as before, Mercury
-     included.
+     included. -- correct
   8. Tell Claude the new gallery SHA and what you saw.
 
 TONY-ACTION ROLLUP for this patch:
   (do)     steps 1 to 8 above.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+=================================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L303_turn_card_way_back_20260923.py
+  ok  index.html: header Updated stamp
+  ok  index.html: style for the turn card's way back
+  ok  index.html: a phone held sideways at load still counts as a phone
+  ok  index.html: the turn card gets its own way back, and scrolls to the top
+  ok  encoding gate: index.html is ASCII after the edit
+  wrote index.html (169983 bytes)
+
+patch applied to 1 file -- 9/23/26
+
+Stamps updated: the 'Updated' line at the top of index.html.
+
+WHAT TO DO NEXT, in this order:
+
+  1. Move THIS script into documentation/. It has run. -- done
+  2. Run the gallery maintenance run:
+         python gallery_maintenance_run.py
+     Expect every gating checker to pass, as before. None of them
+     opens a card on a phone; your eyes in step 5 do.
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.2s  no change to MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     0.7s  rewrote data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      10.7s  PASS (201 checks, 0 failures)
+  PASS Mirror suite              0.1s  All 42 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing.
+  PASS Store writer suite        3.3s  All 245 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 246 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 58 link(s) compared, store
+                                    7fb7a1b666d4.
+  PASS Pointer join              0.1s  Every link is accounted for: 87
+                                    link(s) against orrery ac25d4f4,
+                                    24 fallback named; read check: 41
+                                    of 41 measured rows reached carry
+                                    a read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's features exactly: 4
+                                    object(s), 34 named shell(s), in
+                                    both cache files.
+  PASS Feature renderers         0.8s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.1s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.1s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 55 hover(s) and 267
+                                    number(s) examined; 12 graded, 4
+                                    graded by line, 43 held to the
+                                    fixture ===
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: 1 directory in data/ the
+                                    builder did not make: solar-system
+                                    (1). Check whether they belong
+                                    there; the newer .gitignore rules
+                                    keep the known conflict-copy
+                                    shapes out of git but do not
+                                    remove anything.
+
+======================================================================
+  15 of 15 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: 1 directory in data/ the builder
+  last swap 2026-09-23T13:09:46.835195+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  3. In GitHub Desktop the change list should show exactly two
+     files: index.html and this script under documentation/.
+     Commit and push. -- 2e0fa8f5de7ec1dc99597dc302e4e4c4eb745e72
+
+  4. After the push, check what the live site serves:
+         python gallery_maintenance_run.py --live
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 11 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+
+  PASS Served reachability       1.6s  all 11 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at ac25d4f4
+
+  PASS Export freshness          0.1s  the served export is the orrery's
+                                    at ac25d4f4, byte for byte
+
+  orrery HEAD ac25d4f4
+  examining 29 of 87 links; the other 58 are served from the export
+    NOT IN STORE  create_sun_galactic_tide default not a top-level constant in the store
+                  /objects/0/features/oort_cloud/galactic_tide/typical_radius
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NOT IN STORE  planet_poles['Earth']            not a top-level constant in the store
+                  /objects/1/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  29 pointers: 24 match, 0 DRIFT, 0 UNIT MISMATCH, 5 could not be examined.
+
+  PASS Store drift               0.6s  29 pointers against orrery
+                                    ac25d4f4 -- 24 match, 0 DRIFT, 0
+                                    UNIT MISMATCH, 5 could not be
+                                    examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            29 pointers against orrery ac25d4f4 --
+  last swap 2026-09-23T13:09:46.835195+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  5. On the phone, wait about ten minutes after the push (the site
+     can serve the old files that long), then RELOAD the page -- wait, i thought that a hard refresh (swipe up to remove the app from the running apps on the phone) was enough? 
+     held upright:
+       - Orbital Mechanics should not list the Mercury card. -- correct. not listed on the phone. 
+       - Open Trappist1 while it is still 16:9. The turn card
+         should now have a 'Back to the gallery' button. Turn
+         the phone, turn it back, and press the button: you
+         should land in the lobby. Note whether the menu button
+         at the top left is there this time. -- if i just use phone gestures: portrait to landscape back to portrait, no. if i refresh in portrait, the menu button comes back.
+       - Reload the page with the phone held SIDEWAYS: Mercury
+         should still not be listed. -- interesting. with the phone held sideways, the menu looks like the desktop menu, with both tabs available. however, even if i select the "desktop" tab in this view, the mercury orbital mechanics card is not listed. 
+
+  6. Tell Claude the new gallery SHA and what you saw.
+
+TONY-ACTION ROLLUP for this patch:
+  (do)     steps 1 to 6 above.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 

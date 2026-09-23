@@ -6,13 +6,38 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 2.17 | Cut from palomas_orrery @ 1f6e55a9 (v2.17),
-earlier @ a7014abb (v2.16), @ 21065c5d (v2.15), @ dfa779bd (v2.14),
+Skill version: 2.18 | Cut from palomas_orrery @ ac25d4f4 (v2.18),
+earlier @ 1f6e55a9 (v2.17), @ a7014abb (v2.16), @ 21065c5d (v2.15), @ dfa779bd (v2.14),
 @ ebdc55cc (v2.13), @ bfc0505e (v2.12),
 earlier @ 159c5a2c (v2.11), @ 071a0a65 (v2.10), @ a263f73d (v2.9),
 @ 7f4a2f9f (v2.8), @ 3faa72a0 (v2.7), @ f603be3 (v2.6),
 @ 731066f (v2.5), @ 6b99ace (v2.2), @ 00219d9 (v2.1), @ eb77c83 (v2.0)
-| September 22, 2026
+| September 23, 2026
+v2.18 settles where a drawing number lives and how an exact number
+prints, before L-322 Stage D builds on both. THE SCOPE BOUNDARY in One
+Value, One Home becomes THREE KINDS OF DRAWING NUMBER, Tony's ruling
+of 2026-09-22: a physical value (a size, an edge, a cut angle) lives
+in constants_new.py, sourced or declared; an eyeballed value does not
+promote and is cleaned up as the braid reaches it; a rendering setting
+(point count, opacity, colour, marker, font) stays in the drawing
+code. The test is whether changing the number moves WHERE something
+is drawn. This removes a contradiction: A Drawing Approximation Does
+Not Promote said opacity and point count stay in the store, while One
+Value, One Home kept them in the drawing code. RULE 7 GAINS THE EXACT
+ROW: an exact quantity is stored in the form its definition prints,
+every exact row a display prints states a print count as a field, and
+the page prints by that count instead of by a width chosen at each
+call site. RULE 1 gains the sixth form that carries it. RULE 3 GAINS
+THE CONVERSION ROW: a unit conversion inside an expression is an
+exact row with a compound-unit token, never a bare 3600, because the
+unit check converts units by itself. WHEN THE SOURCE GIVES A RANGE
+gains its default: the midpoint, unless the row states a reason for
+an end. Worked cases: Earth's obliquity, which Horizons defines as
+84381.448 arcseconds, and Earth's sidereal rotation period, whose
+bare-divisor draft failed the unit check while the figures check
+passed it. From Claude Fable 5.1's review of the Stage D manifest and
+Claude Opus 5.5's answers to it, 2026-09-23; every form was run
+through both checkers on a throwaway copy at ac25d4f4. Handle L-322.
 v2.17 closes the gap a display decision opened. Asked whether Earth's
 dipole tilt should print 9.4 or 9.4105, a reviewer offered a
 readability call; Tony asked what the basis was -- "the basis should
@@ -644,6 +669,18 @@ the gravitational influence takes the midpoint, the core takes the low
 end. The rule is that **the pick is a declared choice and its reason
 lives on the row.**
 
+**Where nothing in the source favours an end, the pick is the
+midpoint** (v2.18). That is the construction the outer belt's peak and
+the gravitational influence already use. An end is picked only for a
+reason the row states, as the helmet cusp's top and the core's low end
+do. So the question "which point in the range" is answered by this
+section and does not go to Tony; a reason to leave the midpoint is
+written on the row, where the next reader can check it. (Tony,
+2026-09-23, on the magnetotail's flare, which Slavin et al. (1983)
+place at 100 to 120 Earth radii: "I thought the midpoint
+interpolation is in the skill." It was the practice and not the rule;
+it is the rule now.)
+
 This supersedes the weaker Batch 1 convention -- best-sourced single
 value in code, range in the description -- for any row where the range
 is genuinely the sourced object. The weaker form leaves the range in
@@ -697,9 +734,12 @@ It is not a source for a NUMBER, and a value that passed it has been
 looked at, not measured.
 
 **Two things this does not forbid**, and both matter or the rule
-overreaches. A DECLARED drawing choice stays legal and stays in the
-store -- opacity, point count, a pick from a sourced range with its
-reason on the row. And a visibility stylization still promotes when the
+overreaches. A DECLARED pick that stands for a physical size -- a
+pick from a sourced range with its reason on the row -- stays legal
+and lives in constants_new.py. (Until v2.18 this sentence also listed
+opacity and point count as staying "in the store"; they are rendering
+settings, and One Value, One Home's Three Kinds of Drawing Number keeps
+them in the drawing code.) And a visibility stylization still promotes when the
 physical value becomes drawable, which is the chromosphere precedent
 and the direction the section above sets. The line is whether there is
 a real value the number is standing in FOR. A stylization stands in for
@@ -1726,13 +1766,44 @@ different problems -- the first is L-191, the second is this rule.
 store, and it reads as authoritative to whoever finds it next. Wire it
 or delete it; do not leave it because it cannot run. (L-254.)
 
-**THE SCOPE BOUNDARY, and it must be stated in the same breath.**
-MEASURED values migrate. DECLARED DRAWING PARAMETERS do not:
-`n_points`, `marker_size`, `opacity`, `mesh_resolution`, an angular
-marker step. Those stay where they are drawn. That is L-240's split, and
-without it "only store" reads as hauling 25 and 3.4 into
-`constants_new.py`, which buries the values that matter under the ones
-that do not.
+**THE SCOPE BOUNDARY, and it must be stated in the same breath:
+THREE KINDS OF DRAWING NUMBER** (v2.18, Tony's ruling of 2026-09-22).
+Every number a drawing uses is one of three kinds, and each kind has
+one home.
+
+- **A PHYSICAL value** -- a size, an edge, a distance, a cut angle, a
+  width -- lives in `constants_new.py`. A measured one is sourced. A
+  decided one is declared, with its reason and the range it was picked
+  from on the row (When the Source Gives a Range).
+- **An EYEBALLED value** -- a physical value chosen because the render
+  looked right, usually before the sourcing rules existed -- does not
+  promote (A Drawing Approximation Does Not Promote). It is replaced by
+  one of that section's three outcomes as the braid reaches it, and a
+  published room is reached first.
+- **A RENDERING SETTING** -- `n_points`, `n_rings`, `marker_size`,
+  marker type, `opacity`, colour, font, `mesh_resolution`, an angular
+  marker step -- makes no claim about the object. It stays in the
+  drawing code where it is drawn. Tony: "these are defined in the code
+  not in constants new."
+
+**The test between the first kind and the third: does changing the
+number move WHERE something is drawn, or only change HOW it looks?**
+Earth's radiation-belt thickness of 0.5 Earth radii was the case that
+needed the test. It looks like a drawing setting, but it moves where the
+rings sit, so it is physical; with no recorded origin it is eyeballed,
+and Stage D replaces it by the belts' served edges. A point count only
+makes the same ring smoother.
+
+Two notes on the third kind. A colour is a rendering setting, but a
+hover sentence saying what colour the object IS is a claim and needs a
+source like any other. And two rendering settings were still in
+`constants_new.py` when this was written, `DEFAULT_MARKER_SIZE` and
+`CENTER_MARKER_SIZE`; they are one ledger class and move to the drawing
+code when their files are next touched.
+
+This is L-240's split, sharpened. Without it "only store" reads as
+hauling 25 and 3.4 into `constants_new.py`, which buries the values
+that matter under the ones that do not.
 
 **IN TIME: forward-going on every file touched.** The standing backlog
 carries the sweep -- L-181 is the parent, with L-243, L-244 and L-248 as
@@ -1820,12 +1891,13 @@ wrong, and nobody could see it without opening the source -- which is
 the argument for citing something openable rather than for copying a
 standard verbatim.
 
-**Rule 1. `# Figures:` is a comment key beside the value.** Five forms:
+**Rule 1. `# Figures:` is a comment key beside the value.** Six forms:
 
 ```
 # Figures: 5 -- set by EARTH_INNER_CORE_KM (1221.5, 5)
 # Figures: 5 -- PREM reports to 0.1 km, so 3480.0's trailing zero counts
 # Figures: exact -- IAU 2012 definition
+# Figures: exact -- prints 8, the definition's own digits (84381.448)
 # Figures: 4 -- Table 1 prints 10.22, uncertainty 0.10
 # Figures: 3 -- uncertainty 0.13, root-sum-square of Shue's a1 to a5
 ```
@@ -1833,7 +1905,8 @@ standard verbatim.
 A derived row names the input that set its count. A measured row
 states what the source supports, and says in words whether a trailing
 zero counts, because an integer literal cannot. A defined constant says
-`exact`. A measured row whose source STATES an uncertainty writes it
+`exact`, and when a display prints it, also how many figures it prints
+(`prints N`, Rule 7's exact row). A measured row whose source STATES an uncertainty writes it
 as a FIELD: the word `uncertainty` followed directly by the number, in
 the row's own unit, on its `# Figures:` line. A checker reads that
 field and never the prose around it, so "an uncertainty of 0.1 m" in
@@ -1931,6 +2004,24 @@ tilt and its rate are written this way, and both were run through
 both checkers before this was written. `DEG_PER_RAD` has no store
 inputs, so neither checker judges it and its unit is asserted; the
 row says so in words, as a definition.
+
+**A unit conversion inside an expression is an exact row, never a bare
+number** (v2.18). The unit check converts units by itself, so dividing
+seconds by a bare 3600 leaves seconds. Earth's sidereal rotation period
+was drafted as `2 * math.pi / EARTH_ROTATION_RATE_RAD_S / 3600.0` and
+declared in hours; the unit check failed it as a MISMATCH, the
+arithmetic giving 0.006648 hours against 23.93447 stored, while the
+figures check passed the same row. The conversion is an exact row with
+a compound-unit token -- `S_PER_HOUR` in `s_per_h`, `ARCSEC_PER_DEG` in
+`arcsec_per_deg` -- and the expression divides by the row. A pure number
+that belongs to the physics, like the two pi in a period, stays bare,
+because the token it meets already treats the radian as dimensionless;
+giving it a unit fails the check the other way ("declares s; the
+arithmetic gives rad s"). Both forms were run through both checkers
+before this was written. (Claude Fable 5.1's review of the Stage D
+manifest, Finding 1, re-run by Claude Opus 5.5 at ac25d4f4. Other rows
+that convert by a bare number, such as `LIGHT_MINUTES_PER_AU`, are one
+ledger class.)
 
 **The ceiling: where an uncertainty is stated, propagate it** (v2.16).
 The procedure these rules were adopted from says it in one line:
@@ -2062,6 +2153,46 @@ than the row declares pulled into the build. (Until v2.17 this rule
 let a display show fewer with no method for choosing, and every use
 of that permission reached Tony as a readability call. Tony,
 2026-09-21: "the basis should be in the skill not arbitrary.")
+
+**An exact row prints the digits its definition states** (v2.18). An
+exact quantity has unlimited figures, so a served count of `exact`
+cannot tell a page how many to print. Until v2.18 the gallery's
+`fmtServed` printed every exact row with `toFixed` and a number of
+places chosen at each of its call sites, which is the page choice this
+rule forbids; nobody noticed while the exact rows were numbers like
+2.0 and 120. Three parts:
+
+- **Stored in the form its definition prints.** A quantity defined in
+  arcseconds is a row in arcseconds, and its degree form is an
+  expression over it and an exact conversion row (Rule 3). Horizons
+  defines its ecliptic of J2000 by an obliquity of 84381.448
+  arcseconds, so `EARTH_OBLIQUITY_J2000_ARCSEC` holds that and
+  `EARTH_OBLIQUITY_J2000_DEG` divides it by `ARCSEC_PER_DEG`. The unit
+  check then judges the degree row, instead of trusting a literal that
+  has no inputs.
+- **The print count is a field.** Every exact row a display prints
+  states it on its `# Figures:` line as `exact -- prints N`, and a
+  derived exact row inherits the print count of its defining input.
+  It has to be a field because the literal cannot carry it. Python
+  types whole numbers with a trailing `.0` by habit, and for a declared
+  pick there is no source resolution to say whether that zero counts
+  (Rule 2), so a count read from the literal would print a floor chosen
+  as 200 km as "200.0 km". The checker refuses a print count larger
+  than the significant digits the literal actually has. A zero prints
+  as 0. An exact row no display prints carries no print count, and a
+  page that reaches an exact row with none reports it rather than
+  choosing a width.
+- **The export carries it and the page prints by it.** The export
+  serves the print count beside the value, and the page prints an
+  exact row to that many significant figures. `toFixed` goes for exact
+  rows. Earth's obliquity prints 23.439291 degrees, eight figures from
+  84381.448.
+
+(Claude Fable 5.1's review of the Stage D manifest, 2026-09-23,
+Finding 2; the print-count field is Claude Opus 5.5's amendment to it
+in the same round, because Fable's form counted from the literal.
+Tony accepted both on 2026-09-23. The checker, the export and the page
+implement this in the Stage D build.)
 
 **Rule 8. The checker reads the field and names every derived row it
 cannot see.** `test_derived_figures.py` checks the DECLARATION rather
