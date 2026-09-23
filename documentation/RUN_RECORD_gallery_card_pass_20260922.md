@@ -1,12 +1,13 @@
 # Gallery card pass -- run record: every card looked at, what was changed, what was found
 
-Built on gallery `386a44ff4e0aa4b03624a3e1cf1f38c65081dfcd`
+Built on gallery `1a12cadedf49fcc959a67ceb52fcb7916741d5c8`
 at https://github.com/tonylquintanilla/tonyquintanilla.github.io
-and orrery `dcc36e38b73bdb59a97f035aa600e6892170d3c9`
+and orrery `60d3578723c6b60d1f0c779853fd8e0ea2a20e63`
 at https://github.com/tonylquintanilla/palomas_orrery (read, not changed).
-Both HEADs read live with `git ls-remote` on 2026-09-22 when this record
-was started. The pass itself began earlier the same day on gallery
-`1ae9de50` and orrery `efd2e2ba`.
+Both HEADs read live with `git ls-remote` on 2026-09-22 for this copy.
+The record was started on gallery `386a44ff` and orrery `dcc36e38`, and
+the pass itself began earlier the same day on gallery `1ae9de50` and
+orrery `efd2e2ba`.
 
 **Type: RUN RECORD, kept open.** Begun September 22, 2026, Tony with
 Anthropic's Claude. It is rewritten as each card is finished, and each
@@ -103,7 +104,46 @@ portrait-only cards and the 3 live rooms stay in both. The Featured strip
 shows 5 cards in each tab; the previous session said 4, before Tony
 featured the Explorer.
 
-**Status: waiting for Tony's run of the second cut.**
+**Done.** Pushed at gallery `2a80a68c`. Checked here at that commit:
+`index.html` holds the new `inCurrentMode()`, and the two animation
+cards name each other in the metadata. Tony's run of the patch, his
+maintenance runs and what he saw are in the Tony section below: 15 of 15
+offline checks and 2 of 2 live checks passed, and all four things step 5
+asked him to look at were as expected (104 in each tab, 5 Featured cards
+in each, the animation once per tab in its own shape, and the 16:9
+animation gone from the phone).
+
+**Tony's observation from the same look:** the tab split does not show
+on the front page. It appears only once a visitor opens one of the three
+doors. Tony adds that this points to a gap in the front page, and that
+the guest book is still under construction. Recorded in section 5; no
+ruling yet on what the front page should do.
+
+## 3a. Card 4 -- Inner Solar System (the static 9:16 view of 2005-02-04)
+
+**Deleted by Tony in the editor**, at gallery `1a12cade`. Card
+`paloma_social_view_2005_02_04`, portrait only, no twin, one of the
+cards whose desktop hover box was empty. The metadata now holds 144
+cards. Computed here from the metadata at `1a12cade`: 103 exhibits in
+each tab, 5 Featured in each.
+
+Its file, `gallery/paloma_social_view_2005_02_04.json`, is still in the
+repo. No card points at it, so no list shows it, but it is still on the
+site at its own address. Recorded in section 5.
+
+## 3b. Housekeeping done alongside
+
+Tony moved twelve documents out of the gallery's `documentation/` and
+into the orrery's (gallery `2a80a68c`, orrery `cb254b01`). Checked here:
+all twelve are in the orrery, each identical to the gallery copy apart
+from line endings. They are 3d_axis_control_handoff,
+AS_BUILT_L173_numbering_fix, HANDOFF_earth_build_order_20260906,
+M2_IMPLEMENTATION_REPORT, PREDESIGN_earth_exhibit_20260906,
+SIZING_earth_moon_lagrange_20260907, TEST_PROTOCOL_mode5_pre_earth_20260906,
+TEST_PROTOCOL_sun_hang_20260902, flyto_mobile_handoff,
+gallery_subcategory_handoff, index_transform_audit and
+non_destructive_routing_handoff. The spent tab patch was filed in the
+orrery's `documentation/` too, where the patch said the gallery's.
 
 ## 4. Cards still to look at
 
@@ -121,12 +161,18 @@ ledger handle yet; the ledger patch at the end of the pass assigns them.
   Magnitude 4.0; Paleoclimage and Extreme Heating Events (in two rooms);
   Earth-Moon System 2026-02-10; Inner Solar System Animation; Inner Solar
   System; Pluto System Barycenter; Voyager 1 and 2 Missions; Jupiter
-  System; Near Earth Asteroids; Current Comets 2-10-2026. Once the tab
-  patch lands, Inner Solar System Animation has a twin and leaves the
-  Desktop tab, so eleven stay on the desktop with empty hover boxes. The
+  System; Near Earth Asteroids; Current Comets 2-10-2026. Since then
+  Inner Solar System Animation has its twin and has left the Desktop tab
+  (section 3), and Inner Solar System has been deleted (section 3a), so
+  ten stay on the desktop with empty hover boxes. The
   six landscape files show an empty box on the desktop: Paleoclimate 540
   Ma; Orbital Transformation of Mercury; HR Diagram Magnitude 4.0;
   Paleoclimate Human Origins; Paleoclimate and Extreme Heating Events (two).
+- **The front page does not show the tab split** (Tony, section 3). It
+  appears only inside a door. Tony links it to a wider gap in the front
+  page; the guest book is L-281, still open.
+- **Deleting a card in the editor leaves its file behind.** The file
+  is unlisted but still served at its own address (section 3a).
 - **The editor cannot link or unlink a card's twin.** Any other pair made
   before the linking existed needs a metadata patch, as this one did.
 - **Nothing checks which cards each tab lists, or where the room buttons
@@ -142,7 +188,8 @@ ledger handle yet; the ledger patch at the end of the pass assigns them.
 
 ---
 
-Record started September 2026 with Anthropic's Claude Opus 5.5.
+Record started September 2026 with Anthropic's Claude Opus 5.5, and
+updated the same day after cards 2 to 4.
 
 ============================
 **Tony**:
