@@ -25,6 +25,10 @@ Updated 5/20/26 with Claude 4.6
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
 (D3.1 follow-up: Sun Direction indicator fixes -- custom-only fallback for
 outermost_radius_au, body_name passed for distinct multi-body indicators)
+Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D, patch D4: records fig._body_feature_extent_au, the reach
+of everything the dispatch drew for a body EXCEPT the Sun direction
+indicator, for the Auto scale in palomas_orrery.py)
 
 Role: rendering
 Domain: orrery
@@ -341,6 +345,23 @@ def _append_inertial_note(trace):
         pass
 
 
+def auto_cube_half_width(shell_outermost_au, feature_extent_au):
+    """Half-width, in AU, of the Auto cube for a center body.
+
+    L-322 Stage D, patch D4, on Tony's ruling of 2026-09-23 that the Auto
+    scale shows every rendered feature. The larger of two sizes: twice the
+    outermost sphere shell, which is what Auto used before, so nothing that
+    fitted gets smaller; and 1.2 times the farthest vertex of every feature
+    the dispatch drew for the body except the Sun direction indicator (see
+    fig._body_feature_extent_au below). 1.2 is Fly To's own margin. Both
+    factors are rendering settings: they frame the drawing and move
+    nothing in it. One rule, used by the indicator here and by the axis
+    ranges in palomas_orrery.py.
+    """
+    return max(2.0 * (shell_outermost_au or 0.0),
+               1.2 * (feature_extent_au or 0.0))
+
+
 def create_celestial_body_visualization(fig, body_name, shell_vars, animate=False, frames=None,
                                         center_position=(0, 0, 0), sun_position=(0, 0, 0),
                                         object_type=None, center_object=None,
@@ -491,6 +512,27 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
                 _append_inertial_note(t)
             fig.add_trace(t)
 
+    # L-322 Stage D, patch D4: the reach of every feature drawn so far --
+    # shells, magnetosphere, belts, rotation axis, dipole cone -- before
+    # the Sun direction indicator is added. The Auto scale fits this
+    # (Tony, 2026-09-23: Auto shows every rendered feature). The indicator
+    # is left out on purpose: it only points, it has a 0.001 AU minimum
+    # length and it is clamped to whatever cube it is drawn in, so fitting
+    # the cube to it would shrink Earth to a speck (0.0012 AU against
+    # 0.00016 AU with the crust alone) and it shows either way.
+    try:
+        from shared_utilities import traces_extent_from_center
+        _feat_ext = traces_extent_from_center(
+            list(fig.data)[_dispatch_start_idx:], center_position)
+        if _feat_ext > 0:
+            if not hasattr(fig, '_body_feature_extent_au'):
+                fig._body_feature_extent_au = {}
+            if _feat_ext > fig._body_feature_extent_au.get(body_name, 0.0):
+                fig._body_feature_extent_au[body_name] = _feat_ext
+    except Exception as _feat_err:
+        print(f"[DISPATCH] feature-extent record skipped for {body_name}: "
+              f"{_feat_err}", flush=True)
+
     # ONE sun direction indicator per body (replaces ~50 per-shell calls).
     # Uses outermost active shell radius for scaling. Suppresses at origin
     # (body-centered view) and for Sun shells.
@@ -511,14 +553,28 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
 
     if outermost_radius_au > 0 and not (skip_elements
             and 'sun_direction_indicator' in skip_elements):
+        # L-322 Stage D, patch D4: under Auto (axis_range is None) for the
+        # center body, the cube is already known here -- it is
+        # auto_cube_half_width() of what was just drawn -- so the arrow is
+        # fitted inside it, and its hover marker at the tip is drawn. Before
+        # this, the arrow's 0.001 AU minimum carried the tip outside a small
+        # body's cube, and Plotly does not draw what falls outside.
+        _ind_range, _ind_fit = axis_range, False
+        if axis_range is None and center_object == body_name:
+            _half = auto_cube_half_width(
+                outermost_radius_au,
+                getattr(fig, '_body_feature_extent_au', {}).get(body_name, 0.0))
+            if _half > 0:
+                _ind_range, _ind_fit = [-_half, _half], True
         indicator_traces = create_sun_direction_indicator(
             center_position=center_position,
             sun_position=sun_position,
-            axis_range=axis_range,
+            axis_range=_ind_range,
             shell_radius=outermost_radius_au,
             object_type=object_type if object_type is not None else body_name,
             center_object=center_object,
             body_name=body_name,
+            fit_to_range=_ind_fit,
         )
         for t in indicator_traces:
 

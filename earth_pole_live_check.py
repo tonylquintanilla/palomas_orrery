@@ -16,12 +16,16 @@ WHAT IT PRINTS
       - the pole Horizons returns (quantity 32, target 399);
       - the tilt against the Earth-Moon barycenter's orbit (target 3), the
         value the orrery prints;
-      - the IAU 2006 mean obliquity and the true obliquity of the same
-        date, from ERFA (the SOFA routines astropy ships), and how far the
-        tilt is from each, in arcseconds.
-    The build manifest (rev 3, section 5) allows about 10 arcseconds
-    against the MEAN value, because the fetched pole carries Earth's nod.
-    Each date reports PASS or FAIL on that allowance.
+      - the true obliquity of the same date from ERFA (the SOFA routines
+        astropy ships), which includes Earth's nod as the fetched pole
+        does, and how far the tilt is from it, in arcseconds. Each date
+        reports PASS or FAIL on that difference.
+      - the IAU 2006 mean obliquity, the smoothed textbook value, for
+        information only. It differs from the tilt by Earth's nod on the
+        day (8.46 arcseconds on 2026-09-24), so it cannot be a tight test.
+    Patch D3 tested against the mean with a 10-arcsecond allowance; on
+    2026-09-24 today's nod used 8.46 of it, so a pass said little. Patch
+    D4 tests against the true value instead (Tony, 2026-09-23).
 
     Then, for eight dates a few days apart across one month, the tilt
     measured against Earth's own orbit (target 399) beside the tilt
@@ -40,6 +44,10 @@ Domain: orrery
 
 Module created: September 23, 2026 with Anthropic's Claude Opus 5.5
 (L-322 Stage D, patch D3)
+Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D, patch D4: PASS and FAIL judged against ERFA's true
+obliquity with a 1-arcsecond allowance, where D3 judged against the
+mean with 10; the mean is still printed)
 """
 
 import math
@@ -48,11 +56,17 @@ from datetime import datetime, timedelta, timezone
 
 import earth_pole_of_date as epd
 
-# Source: build manifest L-322 Stage D rev 3, section 5 -- the declared
-# allowance against the smoothed IAU 2006 value, about 10 arcseconds,
-# because the fetched pole carries Earth's nod (nutation). A test
-# allowance, not a measurement.
-ALLOWANCE_ARCSEC = 10.0
+# Source: declared 2026-09-23, L-322 Stage D patch D4 -- a test allowance,
+# not a measurement. Tony's live run of 2026-09-24 put the fetched tilt
+# within 0.25 arcseconds of ERFA's true obliquity on all five dates, 2000
+# to 2100. What is left comes from two known differences: Horizons uses
+# the IAU 1976/1980 precession and nutation (Horizons manual, Reference
+# Frames), ERFA the IAU 2006/2000A models; and the barycenter's
+# osculating orbit plane is not quite the mean ecliptic. One arcsecond is
+# four times the largest difference seen, and an eighth of the 8.46
+# arcseconds of nod the same run measured on 2026-09-24, so a pass
+# means the tilt tracks the nod.
+ALLOWANCE_ARCSEC = 1.0
 
 
 def _earth_orbit(jd):
@@ -91,14 +105,15 @@ def main():
         mean, true = _erfa(jd)
         d_mean = (tilt - mean) * 3600.0
         d_true = (tilt - true) * 3600.0
-        ok = abs(d_mean) <= ALLOWANCE_ARCSEC
+        ok = abs(d_true) <= ALLOWANCE_ARCSEC
         failures += 0 if ok else 1
         print('%s  pole %.5f / %.5f   tilt %.7f deg' % (d.date(), ra, dec,
                                                          tilt))
-        print('            ERFA mean %.7f (tilt minus mean %+.2f arcsec, %s)'
-              % (mean, d_mean, 'PASS' if ok else 'FAIL'))
-        print('            ERFA true %.7f (tilt minus true %+.2f arcsec)'
-              % (true, d_true))
+        print('            ERFA true %.7f (tilt minus true %+.2f arcsec, %s)'
+              % (true, d_true, 'PASS' if ok else 'FAIL'))
+        print('            ERFA mean %.7f (tilt minus mean %+.2f arcsec, '
+              'information only: the difference is Earth\'s nod)'
+              % (mean, d_mean))
     print('')
     print('Monthly wobble: tilt against Earth\'s own orbit minus tilt '
           'against the barycenter\'s')
@@ -126,8 +141,8 @@ def main():
         print('EARTH POLE LIVE CHECK: %d date(s) FAILED or could not be '
               'fetched. Copy this whole output into the chat.' % failures)
         return 1
-    print('EARTH POLE LIVE CHECK: every date within %.0f arcseconds of the '
-          'IAU 2006 mean. Copy this whole output into the chat.'
+    print('EARTH POLE LIVE CHECK: every date within %.0f arcsecond of '
+          'ERFA\'s true obliquity. Copy this whole output into the chat.'
           % ALLOWANCE_ARCSEC)
     return 0
 

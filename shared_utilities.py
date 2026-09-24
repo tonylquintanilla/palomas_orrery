@@ -16,6 +16,11 @@ Domain: utilities
 Module updated: May 2026 with Anthropic's Claude Opus 4.6
                 Anthropic's Claude Opus 4.7 (D3.1 follow-up: body_name parameter
                 for distinct multi-body Sun Direction indicators)
+Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D, patch D4: create_sun_direction_indicator takes
+fit_to_range; when True the arrow is shortened to fit the given cube even
+below its 0.001 AU minimum. Default False keeps every other caller as it
+was.)
 """
 
 import numpy as np
@@ -61,7 +66,7 @@ def traces_extent_from_center(traces, center):
 def create_sun_direction_indicator(center_position=(0, 0, 0), sun_position=(0, 0, 0),
                               axis_range=None, shell_radius=None,
                               object_type=None, center_object=None,
-                              body_name=None):
+                              body_name=None, fit_to_range=False):
     """
     Creates a visual indicator arrow pointing from the body toward the Sun.
 
@@ -91,6 +96,11 @@ def create_sun_direction_indicator(center_position=(0, 0, 0), sun_position=(0, 0
         center_object (str): Name of the object at the center of the plot
         body_name (str): Optional body name for body-prefixed legend label.
                          When provided, legend reads "{body_name}: Sun Direction".
+        fit_to_range (bool): L-322 Stage D, patch D4. True when axis_range
+                         is the Auto cube fitted to the drawing: the arrow
+                         then always ends inside it, below the 0.001 AU
+                         minimum if need be, so its tip and hover marker
+                         are drawn. False (default) keeps the minimum.
     """
     center_x, center_y, center_z = center_position
     sun_x, sun_y, sun_z = sun_position
@@ -166,7 +176,8 @@ def create_sun_direction_indicator(center_position=(0, 0, 0), sun_position=(0, 0
                 if _t >= 0:
                     _t_exit = min(_t_exit, _t)
             if _t_exit != float('inf') and plot_scale > 0.95 * _t_exit:
-                plot_scale = max(min_scale, 0.95 * _t_exit)
+                plot_scale = (0.95 * _t_exit if fit_to_range
+                              else max(min_scale, 0.95 * _t_exit))
                 print(f"Sun direction indicator: Clamped to axis range, "
                       f"scale = {plot_scale:.5f} AU")
     except Exception as _clamp_err:

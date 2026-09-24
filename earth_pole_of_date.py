@@ -39,10 +39,11 @@ HOW THE TILT IS COMPUTED
     inclination and node into the pole of its orbit in the same frame. The
     tilt is the angle between the two directions. Nothing here types a
     tilt, a rate or a textbook formula. The value includes Earth's nod at
-    that instant, so it is not the smoothed mean value a textbook gives;
-    test_earth_pole_of_date.py compares it with the IAU 2006 mean formula
-    (through ERFA, the library astropy already uses) only as an independent
-    check.
+    that instant, so it is not the smoothed mean value a textbook gives.
+    ERFA, the IAU's SOFA routines as astropy ships them, is the independent
+    check: test_earth_pole_of_date.py tests this geometry against ERFA's
+    true obliquity of date offline, and earth_pole_live_check.py tests the
+    fetched values against it live.
 
 WHAT HAPPENS WHEN HORIZONS CANNOT BE REACHED
 
@@ -81,6 +82,12 @@ Domain: orrery
 Module created: September 23, 2026 with Anthropic's Claude Opus 5.5
 (L-322 Stage D, patch D3: Earth's pole of date and tilt of date, fetched
 from Horizons, from build manifest rev 3 sections 0 and 4.4)
+Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D, patch D4: the hover names the Earth-Moon barycenter,
+the gravitational center of the Earth-Moon system, where it said the
+Earth-Moon orbit; and the paragraph on the
+independent check named the mean formula where the tests use ERFA's
+true obliquity)
 """
 
 import json
@@ -312,8 +319,14 @@ def tilt_hover_text():
     if got['tilt_deg'] is None:
         return ('not shown: %s,<br>so the axis drawn is the frame\'s axis, '
                 'Earth\'s average pole of the year 2000' % got['reason'])
-    return ('%.*g deg on %s,<br>measured against the Earth-Moon orbit that '
-            'day (JPL Horizons).<br>It includes Earth\'s small nod, so it '
+    # L-322 Stage D, patch D4, Tony's wording of 2026-09-23: the orbit is
+    # the Earth-Moon BARYCENTER's, the gravitational center of the
+    # Earth-Moon system. "Earth-Moon orbit" could be read as the Moon's
+    # orbit around Earth, a different plane about five degrees away.
+    return ('%.*g deg on %s,<br>measured against the orbit of the '
+            'Earth-Moon barycenter,<br>the gravitational center of the '
+            'Earth-Moon system,<br>around the Sun that day (JPL Horizons).'
+            '<br>It includes Earth\'s small nod, so it '
             'differs slightly<br>from the smoothed textbook value. The axis '
             'also circles<br>slowly over thousands of years'
             % (TILT_FIGURES, got['tilt_deg'], got['day']))

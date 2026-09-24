@@ -27,6 +27,12 @@ Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5 (L-322
 Stage D, patch D3: both pipelines tell earth_pole_of_date.py the plot's
 date before building the center-body shells, so Earth's axis is drawn
 for that date; the animation uses its first frame's date).
+Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5 (L-322
+Stage D, patch D4: the Auto scale for a center body now fits every
+feature the shell dispatch draws, not only the sphere shells, so a
+rotation axis or dipole cone that reaches past the outermost shell is no
+longer cut off with its hover marker, and the Sun direction arrow is
+fitted inside the cube. Tony's ruling, 2026-09-23.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -112,6 +118,7 @@ from comet_visualization_shells import (
 )
 from planet_visualization import (              # the greyed out imports are created in runtime with celestial_objects.py
     create_celestial_body_visualization,
+    auto_cube_half_width,   # L-322 Stage D, patch D4: one Auto-cube rule
     create_planet_shell_traces,
 
     mercury_inner_core_info,
@@ -1972,6 +1979,32 @@ def add_center_body_marker(fig, center_object_name, params=None):
     )
 
 
+def _auto_center_half_range(fig, body_name):
+    """Half-width of the Auto cube for a center body, in AU (0.0 if unknown).
+
+    Tony's ruling, 2026-09-23: Auto scale shows every rendered feature.
+    Until then Auto sized the cube to twice the outermost SPHERE shell
+    only, so anything drawn past it -- a rotation axis three body radii
+    long, a dipole cone, a magnetotail -- ran out of the cube, and Plotly
+    does not draw what falls outside the axis ranges. The hover markers at
+    the axis and cone tips disappeared with them (Earth with only its crust
+    shown: cube 0.000085 AU, tips at about 0.000117 AU).
+
+    Now the cube is the larger of two sizes. Twice the outermost sphere
+    shell, as before, so nothing that fitted gets smaller. And 1.2 times
+    the farthest vertex of every feature the shell dispatch drew for this
+    body, which create_celestial_body_visualization records in
+    fig._body_feature_extent_au; 1.2 is Fly To's own margin. The Sun
+    direction indicator is not counted: it only points, and it is clamped
+    to whatever cube it is drawn in. Both factors are rendering settings:
+    they set how much empty space frames the drawing, not where anything
+    is.
+    """
+    shell_r = getattr(fig, '_shell_outermost_radius_au', 0.0) or 0.0
+    extents = getattr(fig, '_body_feature_extent_au', None) or {}
+    return auto_cube_half_width(shell_r, extents.get(body_name, 0.0))
+
+
 def add_center_body_shells(fig, center_object_name, sun_shell_vars_map,
                            planet_shell_vars_map, sun_position,
                            scale_value, axis_range, log_prefix='',
@@ -2019,10 +2052,13 @@ def add_center_body_shells(fig, center_object_name, sun_shell_vars_map,
             axis_range=(None if scale_value == 'Auto' else axis_range),
         )
         center_shells_added = True
-        # Auto-scale axis to shell radius (same as planet path)
-        if hasattr(fig, '_shell_outermost_radius_au') and scale_value == 'Auto':
-            shell_r = fig._shell_outermost_radius_au * 2
-            axis_range = [-shell_r, shell_r]
+        # Auto-scale the cube to fit every rendered feature (same as the
+        # planet path). L-322 Stage D, patch D4: was 2x the outermost
+        # sphere shell only.
+        if scale_value == 'Auto':
+            shell_r = _auto_center_half_range(fig, 'Sun')
+            if shell_r > 0:
+                axis_range = [-shell_r, shell_r]
         # Asteroid belts: standalone geometry, not part of unified shell dispatch
         if sun_shell_vars_map.get('main_belt') and sun_shell_vars_map['main_belt'].get() == 1:
             for t in create_main_asteroid_belt():
@@ -2059,10 +2095,14 @@ def add_center_body_shells(fig, center_object_name, sun_shell_vars_map,
             center_shells_added = True
             if log_prefix:
                 print(f"{log_prefix}Added {center_object_name} shells ({len(fig.data)} static traces)", flush=True)
-            # Auto-scale axis to shell radius for migrated bodies
-            if hasattr(fig, '_shell_outermost_radius_au') and scale_value == 'Auto':
-                shell_r = fig._shell_outermost_radius_au * 2
-                axis_range = [-shell_r, shell_r]
+            # Auto-scale the cube to fit every rendered feature for
+            # migrated bodies. L-322 Stage D, patch D4: was 2x the
+            # outermost sphere shell only, which cut off Earth's axis and
+            # dipole cone with their hover markers.
+            if scale_value == 'Auto':
+                shell_r = _auto_center_half_range(fig, center_object_name)
+                if shell_r > 0:
+                    axis_range = [-shell_r, shell_r]
 
     return fig, center_shells_added, axis_range
 

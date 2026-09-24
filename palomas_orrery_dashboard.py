@@ -116,6 +116,12 @@ builder button's routine now matches what the builder prints -- a [SWAP]
 line, then its own numbered steps, the maintenance run BEFORE the commit
 -- and Gallery Builder Offline Tests no longer carries a check count,
 which went stale the day after it was written.
+September 23, 2026 with Anthropic's Claude Opus 5.5 (L-322 Stage D, patch
+D4), on Tony's request: added Earth Pole Live Check to Tools and Caches,
+the script that fetches Earth's pole and orbit from Horizons and checks
+the tilt against ERFA; and Test Earth Pole of Date to the checkers under
+the maintenance runner, which patch D3 put in the runner with no button
+here. Both in alphabetical place.
 """
 
 import os
@@ -710,6 +716,18 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
+        ("Test Earth Pole of Date",
+         "test_earth_pole_of_date.py",
+         "Offline checks of Earth's pole and tilt of the plot's date: the "
+         "build manifest's worked case, the geometry against ERFA's true "
+         "obliquity for 2000, 2026 and 2100, the fall-back to the frame's "
+         "year-2000 axis when Horizons cannot be reached, the cache, the "
+         "hover words, and that Earth's axis really uses the pole of date. "
+         "Never contacts Horizons; Earth Pole Live Check does.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
         ("Test Orbit Cache",
          "test_orbit_cache.py",
          "Comprehensive test suite for orbit data caching, format conversion, "
@@ -829,6 +847,17 @@ LAUNCH_GROUPS = {
          "dep_trace.py",
          "Map who depends on (and is consumed by) a module. "
          "Run before editing: python dep_trace.py <module_name> [hops]",
+         SCRIPT_DIR,
+         True),
+        ("Earth Pole Live Check",
+         "earth_pole_live_check.py",
+         "Fetch Earth's pole and the orbit of the Earth-Moon barycenter from "
+         "Horizons for five "
+         "dates, 2000 to 2100, and check the tilt of date against ERFA's "
+         "true obliquity (1 arcsecond allowance), then measure the monthly "
+         "wobble of Earth's own orbit. Needs the internet, takes a minute or "
+         "two, writes nothing. Run after any change to earth_pole_of_date.py "
+         "or when Horizons may have changed; paste its output into the chat.",
          SCRIPT_DIR,
          True),
         ("Export Orbit Cache",

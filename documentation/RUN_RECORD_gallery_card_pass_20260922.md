@@ -1,8 +1,8 @@
 # Gallery card pass -- run record: every card looked at, what was changed, what was found
 
-Built on gallery `2e0fa8f5de7ec1dc99597dc302e4e4c4eb745e72`
+Built on gallery `27838dda474b1fb8aeb721147d563369826c1f03`
 at https://github.com/tonylquintanilla/tonyquintanilla.github.io
-and orrery `ac25d4f44a0607f734fdf98f21095e869abe790b`
+and orrery `1319e4962e8761dc9d1e7f00ee01f371ce5737a7`
 at https://github.com/tonylquintanilla/palomas_orrery (read, not changed).
 Both HEADs read live with `git ls-remote` on 2026-09-23 for this copy.
 The record was started on gallery `386a44ff` and orrery `dcc36e38`, and
@@ -317,7 +317,12 @@ check is not conclusive for a real phone.
 desktop logs one error in the browser's console, with no visible
 effect. It appears with or without the patch.
 
-**Status: waiting for Tony's run and his check on the phone.**
+**Done.** Pushed at gallery `27838dda`; the `index.html` served there
+is byte for byte the copy tested here. Tony's check on the phone: the
+render is correct. The same commit also carries
+`data/constants_export.sha`, which moved from orrery `ac25d4f4` to
+`bba21459`; that is the orrery's constants export recording its own
+commit, not this patch.
 
 ## 4. Cards still to look at
 
@@ -382,7 +387,7 @@ ledger handle yet; the ledger patch at the end of the pass assigns them.
 
 Record started September 2026 with Anthropic's Claude Opus 5.5, and
 updated after cards 2 to 4, three times on 2026-09-23 during card 5,
-and again when card 6 was patched.
+and twice for card 6.
 
 ============================
 **Tony**:
