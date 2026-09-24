@@ -53,11 +53,21 @@ Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5 (L-322
 Stage D, patch D3: Earth's axis hover prints the tilt of the plot's date,
 from earth_pole_of_date.py, where it typed a fixed tilt)
 
+Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5 (L-322
+Stage D, patch D5, Earth's dipole cone hover, on Tony's instruction that
+the Earth slice is the time to clean it: the tilt prints once, from the
+row, at its declared count, where it printed a rounded copy beside it;
+the line about the drawn instant is in plain words; the typed centre
+offset is removed, the cone's apex goes back to Earth's centre, and the
+hover says the offset is not drawn and why. And every cone hover wraps
+long lines.)
+
 Role: rendering
 Domain: orrery
 """
 
 import math
+import textwrap
 import numpy as np
 import plotly.graph_objs as go
 from constants_rows import figures_of
@@ -701,8 +711,8 @@ def _declared_count(name, value):
     L-322 Stage C2. The provenance skill's display rule: a display prints
     the declared count, never more, and never chooses fewer. The value is
     passed separately because the tilt rate prints as its size, with its
-    sign said in words. Used only on the two small numbers in the Earth
-    dipole note below.
+    sign said in words. Used on Earth's dipole tilt line and on the rate
+    in the Earth dipole note below.
     """
     return "%.*g" % (figures_of(name), value)
 
@@ -713,8 +723,13 @@ def _declared_count(name, value):
 # Source+: there from the IGRF-13 coefficient rows, each with its citation.
 # L-322 Stage C2: this note typed "~9.6 deg" and a drift of "~0.05
 # deg/decade" until then; the source gives about 0.05 deg a YEAR.
-_EARTH_DIPOLE_NOTE = 'Tilt %s deg at epoch 2020.0 (IGRF-13); %s about %s deg a year' % (
-    _declared_count('EARTH_DIPOLE_TILT_DEG', EARTH_DIPOLE_TILT_DEG),
+# L-322 Stage D, patch D5: the tilt itself is printed once, on the first
+# line of the hover (_EARTH_DIPOLE_TILT_LINE); this note carries its epoch
+# and its rate, and no longer repeats it.
+_EARTH_DIPOLE_TILT_LINE = 'Dipole tilt: %s deg from the spin axis' % (
+    _declared_count('EARTH_DIPOLE_TILT_DEG', EARTH_DIPOLE_TILT_DEG))
+_EARTH_DIPOLE_NOTE = ('The tilt is for epoch 2020.0 (IGRF-13) and is %s by '
+                      'about %s deg a year') % (
     'decreasing' if EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR < 0 else 'increasing',
     _declared_count('EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR',
                     abs(EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR)))
@@ -774,12 +789,23 @@ PLANET_DIPOLE = {
     # here. The note and source below say more than the store row does and
     # are what the cone's hover reads, so they stay. L-322 C2: the note is
     # built above the table from the store (_EARTH_DIPOLE_NOTE).
+    # L-322 Stage D, patch D5 (2026-09-23): the offset_fraction of 0.085 and
+    # the note's 540 km and 22 N 140 E were typed, with no row and no read
+    # (A Drawing Approximation Does Not Promote). The drawing was also wrong
+    # in shape: it moved the apex along the spin axis by the whole offset,
+    # while the note itself said the offset points mostly sideways. The
+    # sideways part turns with Earth once a day, and the orrery does not
+    # draw Earth turning. So the apex is at the centre, and the hover says
+    # the offset exists and why it is not drawn. The paper to source it
+    # from, Koochak and Fraser-Smith (2017), Earth and Space Science 4,
+    # 626, doi:10.1002/2017EA000280, could not be opened from this session;
+    # the gap is recorded on L-322.
     'Earth':   {'tilt_deg': EARTH_DIPOLE_TILT_DEG, 'azimuth_deg': 0.0,
-                'offset_fraction': 0.085,
-                'offset_note': 'Center offset: ~0.085 R_E northward, axial '
-                               'approximation (~540 km); the true center is also '
-                               'displaced laterally toward ~22 N, 140 E '
-                               '(secular variation, unmodeled here)',
+                'tilt_line': _EARTH_DIPOLE_TILT_LINE,
+                'offset_note': 'The magnetic centre is not exactly at '
+                               'Earth\'s centre. That offset is not drawn, '
+                               'because its size and direction are not yet '
+                               'sourced here.',
                 'note': _EARTH_DIPOLE_NOTE,
                 'source': 'Alken et al. 2021, IGRF-13 (Earth Planets Space 73, 49)'},
     'Jupiter': {'tilt_deg': 10.3, 'azimuth_deg': 0.0, 'offset_fraction': 0.12,
@@ -953,10 +979,18 @@ def build_dipole_cone_traces(center_position=(0, 0, 0), planet_name=None,
         lines.append('Dipole tilt: ~%.1f deg -- magnetic axis is co-axial with '
                      'the spin pole to within measurement' % dip['tilt_deg'])
     else:
-        lines.append('Dipole tilt: ~%.1f deg from the spin axis' % dip['tilt_deg'])
+        # L-322 Stage D, patch D5: a body whose tilt is a row prints it
+        # from the row ('tilt_line'); the others keep the old line until
+        # their own slice reaches them.
+        lines.append(dip.get('tilt_line',
+                             'Dipole tilt: ~%.1f deg from the spin axis'
+                             % dip['tilt_deg']))
         lines.append('Swept about the spin axis once per rotation (sense: %s)'
                      % rot.get('sense'))
-        lines.append('Drawn axis is ONE arbitrary instant; the cone is the honest sweep')
+        # Plain words for what was "Drawn axis is ONE arbitrary instant;
+        # the cone is the honest sweep" (Tony's hover-text rule).
+        lines.append('The line shows the magnetic axis at one moment; the '
+                     'cone shows every direction it points during one turn')
     if 'offset_note' in dip:
         lines.append(dip['offset_note'])
     elif offset_frac > 0:
@@ -966,7 +1000,13 @@ def build_dipole_cone_traces(center_position=(0, 0, 0), planet_name=None,
     if 'note' in dip:
         lines.append(dip['note'])
     lines.append('Source: %s' % dip['source'])
-    hover = '<br>'.join(lines)
+    # L-322 Stage D, patch D5: a hover does not wrap by itself, so a long
+    # line runs across the screen. Earth's centre-offset line was 167
+    # characters; Mercury's, Jupiter's and Saturn's notes ran past 150.
+    # Each line is broken at spaces to at most 70 characters (a rendering
+    # setting). Words and numbers are unchanged by the wrap.
+    hover = '<br>'.join('<br>'.join(textwrap.wrap(line, 70)) or line
+                        for line in lines)
     traces.append(go.Scatter3d(
         x=[tip[0]], y=[tip[1]], z=[tip[2]], mode='markers',
         marker=dict(size=5, color=color, symbol='cross',

@@ -1,10 +1,10 @@
 <!-- Doc-Kind: generated | The provenance audit: every numeric claim scored against its citation, rebuilt by provenance_scanner.py on each run. Do not hand-edit. -->
 # Paloma's Orrery -- Provenance Audit
 
-Generated: September 23, 2026
-Files scanned: 140
-Total findings: 1081
-Constants: 159 | Dicts: 44 | Display strings: 878
+Generated: September 24, 2026
+Files scanned: 141
+Total findings: 1080
+Constants: 159 | Dicts: 44 | Display strings: 877
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,16 +20,20 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260924T174742Z | `50343e0` | 141 | 1080 | 295 | 665 | 118 | 2 |
 | 20260924T034040Z | `0ab14d8` | 140 | 1081 | 293 | 668 | 118 | 2 |
 | 20260924T013317Z | `8fffbe1` | 139 | 1081 | 293 | 668 | 118 | 2 |
 | 20260924T012434Z | `bba2145` | 138 | 1076 | 293 | 663 | 118 | 2 |
 | 20260923T032527Z | `60d3578` | 136 | 1071 | 293 | 658 | 118 | 2 |
 | 20260922T192031Z | `32750e5` | 136 | 1071 | 293 | 658 | 118 | 2 |
-| 20260922T150258Z | `1f6e55a` | 137 | 1068 | 293 | 655 | 118 | 2 |
 
-Change since the previous run: total +0, Tier-1 +0.
+Change since the previous run: total -1, Tier-1 +2.
 
-No file's Tier-1 count rose.
+Tier-1 rose in these files:
+
+| File | Before | After |
+|------|-------:|------:|
+| planet_visualization_utilities.py | 2 | 4 |
 
 ---
 
@@ -60,8 +64,8 @@ No file's Tier-1 count rose.
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 293 |
-| 2 | 10-15 | REVIEW | 668 |
+| 1 | 16-20 | FIX NOW | 295 |
+| 2 | 10-15 | REVIEW | 665 |
 | 3 | 5-9 | LOW PRIORITY | 118 |
 | 4 | 1-4 | LOWEST PRIORITY | 2 |
 
@@ -93,7 +97,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `uranus_visualization_shells.py` | orrery | 1 | 24 | 0 | 0 | 25 |
 | `earth_visualization_shells.py` | earth_science | 0 | 19 | 0 | 0 | 19 |
 | `jupiter_visualization_shells.py` | orrery | 0 | 19 | 0 | 0 | 19 |
-| `planet_visualization_utilities.py` | orrery | 2 | 15 | 1 | 0 | 18 |
+| `planet_visualization_utilities.py` | orrery | 4 | 12 | 1 | 0 | 17 |
 | `provenance_scanner.py` | dev_tools | 0 | 0 | 16 | 0 | 16 |
 | `venus_visualization_shells.py` | orrery | 3 | 4 | 6 | 0 | 13 |
 | `scenarios_heatwaves.py` | earth_science | 3 | 9 | 0 | 0 | 12 |
@@ -171,7 +175,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 48 | 130 | 552 | 71 | 2 | 755 |
+| Orrery (solar system + orbital mechanics) | 48 | 132 | 549 | 71 | 2 | 754 |
 | Earth System | 13 | 149 | 74 | 2 | 0 | 225 |
 | Stars (stellar neighborhood) | 11 | 12 | 42 | 6 | 0 | 60 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 39 | 0 | 39 |
@@ -238,16 +242,16 @@ The string sits in a block with no citation, inside a block that has one. Fix by
 | `comet_visualization_shells.py` | 296 | `HISTORICAL_TAIL_DATA` | 82 |
 | `comet_visualization_shells.py` | 307 | `HISTORICAL_TAIL_DATA` | 82 |
 | `comet_visualization_shells.py` | 336 | `HISTORICAL_TAIL_DATA` | 82 |
-| `planet_visualization_utilities.py` | 529 | `PLANET_ROTATION` | 520 |
-| `planet_visualization_utilities.py` | 533 | `PLANET_ROTATION` | 520 |
-| `planet_visualization_utilities.py` | 537 | `PLANET_ROTATION` | 520 |
-| `planet_visualization_utilities.py` | 552 | `PLANET_ROTATION` | 520 |
-| `planet_visualization_utilities.py` | 556 | `PLANET_ROTATION` | 520 |
-| `planet_visualization_utilities.py` | 560 | `PLANET_ROTATION` | 520 |
-| `planet_visualization_utilities.py` | 564 | `PLANET_ROTATION` | 520 |
-| `planet_visualization_utilities.py` | 568 | `PLANET_ROTATION` | 520 |
-| `planet_visualization_utilities.py` | 572 | `PLANET_ROTATION` | 520 |
-| `planet_visualization_utilities.py` | 576 | `PLANET_ROTATION` | 520 |
+| `planet_visualization_utilities.py` | 539 | `PLANET_ROTATION` | 530 |
+| `planet_visualization_utilities.py` | 543 | `PLANET_ROTATION` | 530 |
+| `planet_visualization_utilities.py` | 547 | `PLANET_ROTATION` | 530 |
+| `planet_visualization_utilities.py` | 562 | `PLANET_ROTATION` | 530 |
+| `planet_visualization_utilities.py` | 566 | `PLANET_ROTATION` | 530 |
+| `planet_visualization_utilities.py` | 570 | `PLANET_ROTATION` | 530 |
+| `planet_visualization_utilities.py` | 574 | `PLANET_ROTATION` | 530 |
+| `planet_visualization_utilities.py` | 578 | `PLANET_ROTATION` | 530 |
+| `planet_visualization_utilities.py` | 582 | `PLANET_ROTATION` | 530 |
+| `planet_visualization_utilities.py` | 586 | `PLANET_ROTATION` | 530 |
 
 ---
 
@@ -635,8 +639,10 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 583 | dict | ROTATION_AXIS_OMITTED[...] | (2 entries) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
-| 480 | string | display string @ line 480 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 593 | dict | ROTATION_AXIS_OMITTED[...] | (2 entries) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
+| 490 | string | display string @ line 490 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 782 | string | display string @ line 782 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 784 | string | display string @ line 784 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 
 ### planetarium_distance.py
 
@@ -1404,21 +1410,18 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 529 | string | display string @ line 529 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 533 | string | display string @ line 533 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 537 | string | display string @ line 537 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 552 | string | display string @ line 552 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 556 | string | display string @ line 556 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 560 | string | display string @ line 560 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 564 | string | display string @ line 564 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 568 | string | display string @ line 568 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 572 | string | display string @ line 572 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 576 | string | display string @ line 576 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 767 | string | display string @ line 767 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 769 | string | display string @ line 769 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 779 | string | display string @ line 779 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 790 | string | display string @ line 790 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 798 | string | display string @ line 798 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 539 | string | display string @ line 539 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 543 | string | display string @ line 543 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 547 | string | display string @ line 547 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 562 | string | display string @ line 562 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 566 | string | display string @ line 566 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 570 | string | display string @ line 570 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 574 | string | display string @ line 574 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 578 | string | display string @ line 578 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 582 | string | display string @ line 582 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 586 | string | display string @ line 586 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 816 | string | display string @ line 816 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 824 | string | display string @ line 824 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
 ### saturn_visualization_shells.py
 
@@ -1880,7 +1883,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 999 | dict | STREAMER_BAND_DEFAULTS[...] | (20 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal use (name vocabulary) |
+| 1039 | dict | STREAMER_BAND_DEFAULTS[...] | (20 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal use (name vocabulary) |
 
 ### pluto_visualization_shells.py
 

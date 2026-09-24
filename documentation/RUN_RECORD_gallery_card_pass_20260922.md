@@ -324,6 +324,49 @@ render is correct. The same commit also carries
 `bba21459`; that is the orrery's constants export recording its own
 commit, not this patch.
 
+## 3f. Card 7 -- Earth and Moon, the 9:16 card
+
+**What Tony saw, on the phone** (two screenshots). Tapping a marker
+opens the info card, and also draws an empty grey box over the render.
+The box hides the figure and says nothing the card does not.
+
+**Why.** Studio exports a figure whose hover goes to the info card with
+a see-through Plotly hover label: colour `rgba(0,0,0,0)`, text 1 pixel
+and see-through. Two things undo that. Plotly 2.35.2 draws a label
+whose colour has zero opacity in grey (#444) instead, and every trace
+carries its own hover font size of 11, which outranks the layout's 1
+pixel. So each tap drew a grey box the size of the hover text, with the
+text itself invisible. Checked two ways here: a bare Plotly page with
+the figure's own settings draws the box in rgb(68, 68, 68) with
+11-pixel text, and in the stand-in phone the unpatched page, on a tap
+of Earth's Hill sphere, drew a grey box of that colour 607 by 190
+pixels beside the card.
+
+**How far it reaches.** 64 served figures were exported this way, 34 of
+them 9:16. 21 of the 9:16 ones use the see-through colour and show the
+grey box. The other 13 use a visible dark label. Whether that label
+carries text was not measured figure by figure; the ones that are
+empty are the "hover text kept only in the hidden field" class in
+section 5. In Mobile mode the patch turns those labels off too.
+
+**Patched:** `patch_L303_no_grey_hover_box_20260923.py`, built on
+gallery `27838dda`, `index.html` only. In Mobile mode the page wires
+the info card for exactly these figures, and for them it now turns
+Plotly's own label off: a 3D scene's hover mode is set off, which
+stops the label while a tap still opens the card, and a 2D plot's
+traces show no label while their click is still sent. The figure files
+do not change, and the Desktop tab is unchanged.
+
+Tested here on a copy. On the stand-in phone, Earth and Moon: a tap
+opens the Hill sphere card with no label drawn, where the unpatched
+page drew the grey box. On the desktop, a 2D info-card figure
+(Paleoclimate and Extreme Heating Events, 9:16): no label in the Mobile
+tab, and its click still reaches the card; the Desktop tab still shows
+its label as before. The checks for cards 5 and 6 still pass, including
+a finger's tilt kept through Play.
+
+**Status: waiting for Tony's run and his check on the phone.**
+
 ## 4. Cards still to look at
 
 The rest of the gallery. Each gets a section here as it is done. Two are
@@ -387,7 +430,7 @@ ledger handle yet; the ledger patch at the end of the pass assigns them.
 
 Record started September 2026 with Anthropic's Claude Opus 5.5, and
 updated after cards 2 to 4, three times on 2026-09-23 during card 5,
-and twice for card 6.
+twice for card 6, and once for card 7.
 
 ============================
 **Tony**:
@@ -1024,6 +1067,199 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
          should still not be listed. -- interesting. with the phone held sideways, the menu looks like the desktop menu, with both tabs available. however, even if i select the "desktop" tab in this view, the mercury orbital mechanics card is not listed. 
 
   6. Tell Claude the new gallery SHA and what you saw.
+
+TONY-ACTION ROLLUP for this patch:
+  (do)     steps 1 to 6 above.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+==================================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L303_no_grey_hover_box_20260923.py
+  ok  index.html: header Updated stamp
+  ok  index.html: Plotly's hover label is off where the info card serves
+  ok  encoding gate: index.html is ASCII after the edit
+  wrote index.html (174935 bytes)
+
+patch applied to 1 file
+
+Stamps updated: the 'Updated' line at the top of index.html.
+
+WHAT TO DO NEXT, in this order:
+
+  1. Move THIS script into documentation/. It has run. -- done
+  2. Run the gallery maintenance run:
+         python gallery_maintenance_run.py
+     Expect every gating checker to pass, as before. None of them
+     opens a card on a phone; your eyes in step 5 do.
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              2.0s  no change to MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     1.0s  rewrote
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      11.9s  PASS (201 checks, 0 failures)
+  PASS Mirror suite              0.1s  All 42 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing.
+  PASS Store writer suite        3.9s  All 245 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 246 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 58 link(s) compared, store
+                                    6d4bb4fd4f54.
+  PASS Pointer join              0.1s  Every link is accounted for: 87
+                                    link(s) against orrery 50343e03,
+                                    24 fallback named; read check: 41
+                                    of 41 measured rows reached carry
+                                    a read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's features exactly: 4
+                                    object(s), 34 named shell(s), in
+                                    both cache files.
+  PASS Feature renderers         1.0s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.3s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 55 hover(s) and 267
+                                    number(s) examined; 12 graded, 4
+                                    graded by line, 43 held to the
+                                    fixture ===
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: 1 directory in data/ the
+                                    builder did not make: solar-system
+                                    (1). Check whether they belong
+                                    there; the newer .gitignore rules
+                                    keep the known conflict-copy
+                                    shapes out of git but do not
+                                    remove anything.
+
+======================================================================
+  15 of 15 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: 1 directory in data/ the builder
+  last swap 2026-09-23T13:09:46.835195+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  3. In GitHub Desktop the change list should show exactly two
+     files: index.html and this script under documentation/.
+     Commit and push.
+
+2bd01fe50e323d70ab7bc0f549188b40512666cd
+
+  4. After the push, check what the live site serves:
+         python gallery_maintenance_run.py --live
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 11 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+
+  PASS Served reachability       1.6s  all 11 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 50343e03
+
+  PASS Export freshness          0.1s  the served export is the orrery's
+                                    at 50343e03, byte for byte
+
+  orrery HEAD 50343e03
+  examining 29 of 87 links; the other 58 are served from the export
+    NOT IN STORE  create_sun_galactic_tide default not a top-level constant in the store
+                  /objects/0/features/oort_cloud/galactic_tide/typical_radius
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NOT IN STORE  planet_poles['Earth']            not a top-level constant in the store
+                  /objects/1/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  29 pointers: 24 match, 0 DRIFT, 0 UNIT MISMATCH, 5 could not be examined.
+
+  PASS Store drift               0.8s  29 pointers against orrery
+                                    50343e03 -- 24 match, 0 DRIFT, 0
+                                    UNIT MISMATCH, 5 could not be
+                                    examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            29 pointers against orrery 50343e03 --
+  last swap 2026-09-23T13:09:46.835195+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  5. On the phone, wait about ten minutes after the push, then
+     reload the page and open Earth and Moon:
+       - Tap a marker. The info card should open, with no grey box
+         over the render.
+       - Tap another marker: the card should change to it.
+       - Tap Inner Solar System Animation's markers too, a 3D
+         animation, and one 2D card with an info card, such as
+         Paleoclimate and Extreme Heating Events.
+     On the desktop, the Desktop tab should hover as before.
+  6. Tell Claude the new gallery SHA and what you saw. -- 2bd01fe50e323d70ab7bc0f549188b40512666cd
 
 TONY-ACTION ROLLUP for this patch:
   (do)     steps 1 to 6 above.
