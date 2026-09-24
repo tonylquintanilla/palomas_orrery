@@ -1,0 +1,26 @@
+{
+ "2026-09-23": {
+  "orbit": {
+   "incl_deg": 0.003483908571180248,
+   "node_deg": 174.2797971115044
+  },
+  "orbit_source": {
+   "center": "@sun",
+   "epoch_jd": 2461306.5,
+   "query_target": "3",
+   "refplane": "ecliptic",
+   "retrieved": "2026-09-24T01:37:48.624292+00:00"
+  },
+  "pole": {
+   "dec_deg": 89.85021,
+   "ra_deg": 0.71476
+  },
+  "pole_source": {
+   "epoch_jd_ut": 2461306.5,
+   "observer": "@sun",
+   "quantity": "32",
+   "query_target": "399",
+   "retrieved": "2026-09-24T01:37:48.624292+00:00"
+  }
+ }
+}
