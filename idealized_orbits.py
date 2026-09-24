@@ -16,6 +16,11 @@ Module updated: June 2026 with Anthropic's Claude Sonnet 4.6
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
 (provenance audit; 45 hardcoded AU-in-km values replaced with KM_PER_AU
 import from constants_new.py)
+Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D: planet_poles moved to constants_new.py and imported
+here; the rotation of a pole into the ecliptic frame reads
+EARTH_OBLIQUITY_J2000_DEG, the frame's defining angle, where it typed
+23.439291 labelled IAU 2006)
 
 Role: computation
 Domain: orrery
@@ -27,7 +32,7 @@ import plotly.graph_objs as go
 import traceback  # Add this import
 from datetime import datetime, timedelta
 from osculating_cache_manager import get_elements_with_prompt
-from constants_new import color_map, KNOWN_ORBITAL_PERIODS, KM_PER_AU
+from constants_new import color_map, KNOWN_ORBITAL_PERIODS, KM_PER_AU, EARTH_OBLIQUITY_J2000_DEG
 from orbital_elements import planetary_params as ORIGINAL_planetary_params
 from apsidal_markers import (
     add_perihelion_marker,
@@ -46,26 +51,12 @@ import io
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 # Import orbital element dictionaries from standalone module (no dependencies)
 from orbital_elements import planetary_params, parent_planets, planet_tilts
-# Dictionary of planet pole directions (J2000)
-# IAU north-pole directions (ICRF equatorial, J2000). RA/Dec in degrees.
-# Source: IAU WGCCRE report, Archinal et al. 2018, Cel. Mech. Dyn. Astron. 130:22
-# Source+: (Table 1, planets/Sun; Table 2, Moon mean pole 269.9949/66.5392, E-terms dropped).
-# Source+: N15+ (June 2026): Sun/Mercury/Venus/Earth/Moon added so create_planet_transformation_matrix
-# Source+: yields a correct spin pole for every shell body (rotation-axis primitive). The six prior
-# Source+: entries are unchanged and cross-check exactly against the same IAU table.
-planet_poles = {
-    'Sun': {'ra': 286.13, 'dec': 63.87},      # Source: IAU 2018 (Archinal et al.)
-    'Mercury': {'ra': 281.01, 'dec': 61.45},  # Source: IAU 2018 (MESSENGER-updated)
-    'Venus': {'ra': 272.76, 'dec': 67.16},    # Source: IAU 2018 (retrograde; pole is IAU-north)
-    'Earth': {'ra': 0.00, 'dec': 90.00},      # Source: IAU 2018 (J2000 celestial north)
-    'Moon': {'ra': 269.99, 'dec': 66.54},     # Source: IAU 2018 Table 2 mean pole (librates)
-    'Mars': {'ra': 317.68, 'dec': 52.89},
-    'Jupiter': {'ra': 268.05, 'dec': 64.49},
-    'Saturn': {'ra': 40.58, 'dec': 83.54},
-    'Uranus': {'ra': 257.43, 'dec': -15.10},
-    'Neptune': {'ra': 299.36, 'dec': 43.46},
-    'Pluto': {'ra': 132.99, 'dec': -6.16}
-}
+# Planet pole directions (ICRF right ascension and declination, degrees).
+# L-322 Stage D (2026-09-23): the dict moved to constants_new.py, which is
+# its citation home, and is imported here under the same name. Earth's
+# entry there is the frame's own axis, drawn only when the pole of the
+# scene's date cannot be fetched.
+from constants_new import planet_poles
 import numpy as np
 from datetime import datetime, timedelta
 JUPITER_MOONS = ['Metis', 'Adrastea', 'Amalthea', 'Thebe', 
@@ -3349,7 +3340,11 @@ def create_planet_transformation_matrix(planet_name):
     # above is in the EQUATORIAL frame. Rotate it into ecliptic by the mean obliquity
     # before building the basis. Omitting this left belts/rings ~23.4 deg off the
     # (ecliptic-native) moon orbits -- caught by Tony's Mode-5 render, not the container test.
-    _OBLIQUITY = np.radians(23.439291)  # IAU 2006 / J2000 mean obliquity of the ecliptic
+    # L-322 Stage D (2026-09-23): the angle Horizons builds its ecliptic of
+    # J2000 with, read from constants_new.py. It is the frame's angle, the
+    # IAU 1976 value, not Earth's tilt; the label "IAU 2006" that stood
+    # here named a standard whose value is 84381.406 arcseconds, not this.
+    _OBLIQUITY = np.radians(EARTH_OBLIQUITY_J2000_DEG)
     _ce, _se = np.cos(_OBLIQUITY), np.sin(_OBLIQUITY)
     y_pole, z_pole = (y_pole * _ce + z_pole * _se,
                       -y_pole * _se + z_pole * _ce)

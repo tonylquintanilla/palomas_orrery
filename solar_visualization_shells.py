@@ -34,6 +34,8 @@ May 28, 2026: Phase 1 re-pipe (Opus 4.7). 18 live inline info markers
     two-standards). Five gray-border sites (Outer/Inner/Inner Limit
     Oort, Termination Shock, Photosphere) lose their inherited gray
     border to factory default red. Four sites size 6->8 visual bump.
+September 23, 2026 (Claude Opus 5.5, L-322 Stage D): one comment names
+    the pole dict's new home, constants_new.planet_poles. No code changed.
 """
 import numpy as np
 import math
@@ -1652,7 +1654,7 @@ def create_sun_streamer_band(center_position=(0, 0, 0)):
     # The Sun's rotation axis trace, built from the very matrix used
     # below, was already correctly tilted, so two traces in one figure
     # disagreed about where the Sun's equator is. Found by Mode 5 (L-229).
-    # Source: IAU 2018 solar pole, via idealized_orbits.planet_poles['Sun']
+    # Source: IAU 2018 solar pole, via constants_new.planet_poles['Sun']
     #   (ra 286.13, dec 63.87) -- the SAME source build_rotation_axis_traces
     #   reads, so the band and the axis now derive from one matrix and
     #   cannot drift apart again.

@@ -83,6 +83,10 @@ Module updated: September 22, 2026 with Anthropic's Claude Opus 5
 "dimensionless" on Shue's and Jelinek's coefficients, and two time-rate
 tokens carry Earth's dipole tilt rate and the coefficient rates it is
 computed from.)
+Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D: four tokens. arcsec and hours for the frame's obliquity
+and Earth's rotation period, and arcsec_per_deg and s_per_h for the two
+exact conversion rows those are converted through.)
 """
 
 TOKENS = {
@@ -210,6 +214,29 @@ TOKENS = {
         "dimension": "deg / yr",
         "defining_constant": None,
         "meaning": "degrees of angle per year",
+    },
+    # L-322 Stage D (2026-09-23): two quantities and the two exact
+    # conversions they go through, so no expression divides by a bare
+    # 3600 (provenance-discipline 2.18).
+    "arcsec": {
+        "dimension": "arcsec",
+        "defining_constant": None,
+        "meaning": "arcseconds of angle",
+    },
+    "arcsec_per_deg": {
+        "dimension": "arcsec / deg",
+        "defining_constant": None,
+        "meaning": "arcseconds per degree, an exact unit conversion",
+    },
+    "hours": {
+        "dimension": "h",
+        "defining_constant": None,
+        "meaning": "hours",
+    },
+    "s_per_h": {
+        "dimension": "s / h",
+        "defining_constant": None,
+        "meaning": "seconds per hour, an exact unit conversion",
     },
 }
 

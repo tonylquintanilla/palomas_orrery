@@ -93,6 +93,14 @@ belt's drawn peak is a declared midpoint over two band rows, four
 kilometre and AU rows let the magnetosphere hovers print served numbers,
 and DEG_PER_RAD joins as an exact conversion. Five rows leave the
 retired "dimensionless" token for tokens that name the quantity)
+Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D, patch D2: Earth's sidereal rotation period is derived
+from the rotation rate through an exact S_PER_HOUR row; Earth's pole
+rows are the frame's own axis, drawn only when the pole of the scene's
+date cannot be fetched; the frame's defining obliquity is stored in
+arcseconds, the form Horizons prints, and is never Earth's tilt; and the
+planet_poles dict moves here from idealized_orbits.py, with its false
+cross-check sentence removed)
 """
 
 import math
@@ -396,6 +404,171 @@ EARTH_GEOSTATIONARY_RADII = EARTH_GEOSTATIONARY_RADIUS_KM / EARTH_EQUATORIAL_RAD
 # Status+: EARTH_EQUATORIAL_RADIUS_KM
 # Figures: 7 -- set by EARTH_GEOSTATIONARY_RADIUS_KM
 # Derived: 42164.17 / 6378.1366 = 6.6107 -- report no more than five figures.
+
+# --- Earth's rotation axis and period (L-322 Stage D, 2026-09-23) ------------
+# Three kinds of number live here, and none of them is Earth's tilt.
+# The period is derived from the rotation rate above. The pole rows are the
+# frame's own axis, drawn only when the pole of the scene's date cannot be
+# fetched from Horizons. The obliquity rows are the angle that DEFINES the
+# drawing's frame from the ICRF; they turn Horizons' sky directions into
+# that frame. Earth's actual tilt on a date is not stored anywhere: it is
+# the angle between the fetched pole of that date and the fetched orbit of
+# that date (Tony's ruling, 2026-09-23, build manifest rev 3 section 0).
+
+S_PER_HOUR = 3600.0
+# Unit: s_per_h
+# Status: declared 2026-09-23 -- an exact unit conversion, seconds in one
+# Status+: hour. Belongs to no body's slice.
+# Figures: exact -- a definition, not a measurement.
+# Read: Table 6, sec. 5.1.1, NIST Guide to the SI (SP 811), chapter 5,
+# Read+: 2026-09-23, Claude Opus 5.5
+# Source: NIST Special Publication 811, Guide for the Use of the SI, sec.
+# Source+: 5.1.1, Table 6 (units the CIPM accepts for use with the SI) --
+# Source+: the hour is 60 minutes, 3600 seconds, by definition.
+# Ref: https://www.nist.gov/pml/special-publication-811/nist-guide-si-chapter-5-units-outside-si
+# Note: exists so the period below converts through a row and not a bare
+# Note+: 3600, because the unit check converts units by itself and a bare
+# Note+: divisor makes the stored value disagree with the arithmetic
+# Note+: (provenance-discipline 2.18, a unit conversion inside an
+# Note+: expression is an exact row). Neither checker judges this row; its
+# Note+: unit is asserted here, as DEG_PER_RAD's is.
+
+EARTH_SIDEREAL_ROTATION_PERIOD_H = 2.0 * math.pi / EARTH_ROTATION_RATE_RAD_S / S_PER_HOUR
+# Derived: one full turn, two pi radians, divided by the angular rate, in
+# Derived+: hours = 23.93447
+# Unit: hours
+# Status: derived 2026-09-23 -- inherits EARTH_ROTATION_RATE_RAD_S,
+# Status+: S_PER_HOUR
+# Figures: 7 -- set by EARTH_ROTATION_RATE_RAD_S (7.292115e-5, 7)
+# Note: the SIDEREAL period, one turn measured against the stars. The
+# Note+: 24-hour day a visitor knows is the turn measured against the Sun,
+# Note+: which is longer because Earth moves along its orbit while it
+# Note+: turns. The two pi stays a bare number on purpose: the rad_s token
+# Note+: already treats the radian as dimensionless, so giving two pi a
+# Note+: unit fails the unit check the other way.
+
+EARTH_POLE_RA_J2000_DEG = 0.0
+# Unit: deg
+# Status: declared 2026-09-23 -- a frame definition, the FALLBACK only
+# Figures: exact -- the ICRF's z-axis, by the frame's construction.
+# Declared: the right ascension of the axis drawn for Earth when the pole of
+# Declared+: the scene's date cannot be fetched from Horizons. At declination
+# Declared+: 90 every right ascension names the same direction, so this 0.0
+# Declared+: is a placeholder the transform ignores. The displays that draw
+# Declared+: this fallback say the axis shown is the frame's year-2000 axis
+# Declared+: because Horizons could not be reached.
+# Read: IERS Technical Note 36, chapter 2, section 2.1.1 "Equator", pp.
+# Read+: 21-22, 2026-09-23, Claude Opus 5.5; and the Horizons manual,
+# Read+: "Reference Frames", sections "International Celestial Reference
+# Read+: Frame (ICRF)" and "Ecliptic of Standard Epoch", 2026-09-23, Claude
+# Read+: Opus 5.5.
+# Source: IERS Conventions (2010), IERS Technical Note 36, sec. 2.1.1 -- the
+# Source+: ICRS principal plane is held close to the mean equator at
+# Source+: J2000.0, and the mean pole at J2000.0 sits 17.1 mas toward 12h and
+# Source+: 5.0 mas toward 18h from the ICRS pole (IERS 1996 nutation), or
+# Source+: 16.6 mas and 6.8 mas (MHB2000): about 0.02 arcseconds, some five
+# Source+: millionths of a degree. The Horizons manual: the ICRF was built to
+# Source+: align with FK5/J2000 and differs from it by at most 0.02
+# Source+: arcseconds.
+# Ref: https://iers-conventions.obspm.fr/content/tn36.pdf
+# Ref: https://ssd.jpl.nasa.gov/horizons/manual.html
+# Note: until 2026-09-23 this direction was typed in the planet_poles dict
+# Note+: in idealized_orbits.py and cited to the IAU working group report of
+# Note+: 2015 (Archinal et al. 2018), which says in its abstract, Table 1
+# Note+: footnote 2 and section 10 that it no longer gives Earth's pole.
+
+EARTH_POLE_DEC_J2000_DEG = 90.0
+# Unit: deg
+# Status: declared 2026-09-23 -- a frame definition, the FALLBACK only
+# Figures: exact -- the ICRF's z-axis, by the frame's construction.
+# Declared: the declination of the axis drawn for Earth when the pole of the
+# Declared+: scene's date cannot be fetched. The ICRF's z-axis is Earth's
+# Declared+: mean pole of the year 2000 to within the offset in the Source
+# Declared+: line of the row above, far below anything a drawing shows.
+# Read: as EARTH_POLE_RA_J2000_DEG, 2026-09-23, Claude Opus 5.5.
+# Source: as EARTH_POLE_RA_J2000_DEG.
+# Ref: https://iers-conventions.obspm.fr/content/tn36.pdf
+
+ARCSEC_PER_DEG = 3600.0
+# Unit: arcsec_per_deg
+# Status: declared 2026-09-23 -- an exact unit conversion, arcseconds in
+# Status+: one degree. Belongs to no body's slice.
+# Figures: exact -- a definition, not a measurement.
+# Read: Table 6, sec. 5.1.1, NIST Guide to the SI (SP 811), chapter 5,
+# Read+: 2026-09-23, Claude Opus 5.5
+# Source: NIST Special Publication 811, sec. 5.1.1, Table 6 -- the second
+# Source+: of arc is one sixtieth of the minute of arc, which is one
+# Source+: sixtieth of the degree, so a degree is 3600 arcseconds by
+# Source+: definition.
+# Ref: https://www.nist.gov/pml/special-publication-811/nist-guide-si-chapter-5-units-outside-si
+# Note: neither checker judges this row; its unit is asserted here.
+
+EARTH_OBLIQUITY_J2000_ARCSEC = 84381.448
+# Unit: arcsec
+# Status: declared 2026-09-23 -- a frame definition, not a measurement
+# Figures: exact -- a frame definition.
+# Declared: the angle Horizons rotates about the ICRF x-axis to build the
+# Declared+: frame it calls the ecliptic of J2000, which is the frame both
+# Declared+: drawings place everything in. It is the IAU 1976 value, and it
+# Declared+: is NOT Earth's tilt: IERS Technical Note 36, Table 1.1, gives
+# Declared+: Earth's obliquity at J2000.0 as 84381.406 arcseconds (IAU
+# Declared+: 2006), and the tilt on any other date moves further. This row
+# Declared+: is used to turn Horizons' ICRF directions into the drawing's
+# Declared+: frame and is never printed as Earth's tilt (build manifest rev
+# Declared+: 3, section 0).
+# Read: the Horizons manual, "General Definitions", "Ecliptic", and
+# Read+: "Reference Frames", "Ecliptic of Standard Epoch (J2000 or B1950)",
+# Read+: 2026-09-23, Claude Opus 5.5.
+# Source: JPL Horizons manual -- Horizons turns the ICRF into its ecliptic
+# Source+: of J2000 with the fixed IAU 1976/1980 obliquity of 84381.448
+# Source+: arcseconds at the J2000.0 epoch, a rotation about the ICRF x-axis.
+# Ref: https://ssd.jpl.nasa.gov/horizons/manual.html
+
+EARTH_OBLIQUITY_J2000_DEG = EARTH_OBLIQUITY_J2000_ARCSEC / ARCSEC_PER_DEG
+# Derived: the frame's defining angle in degrees, 84381.448 / 3600
+# Derived+: = 23.439291111
+# Unit: deg
+# Status: derived 2026-09-23 -- inherits EARTH_OBLIQUITY_J2000_ARCSEC,
+# Status+: ARCSEC_PER_DEG
+# Figures: exact -- both inputs are exact.
+# Note: replaces the 23.439291 typed in idealized_orbits.py (the rotation
+# Note+: into the ecliptic frame) and in the gallery's feature_renderers.js,
+# Note+: both labelled "IAU 2006". The value was the frame's and the label
+# Note+: was wrong: the IAU 2006 value is 84381.406 arcseconds. Not printed
+# Note+: by any display, so it carries no print count.
+
+# The pole directions of the bodies the orrery draws with an axis, as ICRF
+# right ascension and declination in degrees. Moved here from
+# idealized_orbits.py on 2026-09-23 (L-322 ruling (a) of 2026-09-14), which
+# now imports it. Earth's entry reads the two fallback rows above; the
+# orrery draws Earth's pole of the scene's date from Horizons when it can.
+# Every other entry keeps the value it had and has no status line, which is
+# how this file says the provenance pass has not reached it. The checkers
+# read only top-level rows, so no checker sees these entries: the move
+# changes where they live, not whether anything checks them. Each is
+# checked when its own body is walked.
+# Source: IAU WGCCRE report, Archinal et al. (2018), Cel. Mech. Dyn. Astron.
+# Source+: 130:22, Table 1 (Sun and planets). Not for Earth, which the report
+# Source+: no longer gives, and not for the Moon, whose Table 2 row now reads
+# Source+: "See Sect. 3".
+# Note: compared with Table 1 at the year 2000 on 2026-09-22 (build manifest
+# Note+: section 2.5): Mercury, Uranus and Neptune disagree with the table and
+# Note+: are recorded on L-322 as one class, not fixed here. An earlier
+# Note+: comment said six entries cross-check exactly against the table; for
+# Note+: Uranus and Neptune that was false, and it is removed.
+planet_poles = {
+    'Sun': {'ra': 286.13, 'dec': 63.87},      # Source: IAU 2018 (Archinal et al.)
+    'Mercury': {'ra': 281.01, 'dec': 61.45},  # Source: IAU 2018 (MESSENGER-updated)
+    'Venus': {'ra': 272.76, 'dec': 67.16},    # Source: IAU 2018 (retrograde; pole is IAU-north)
+    'Earth': {'ra': EARTH_POLE_RA_J2000_DEG, 'dec': EARTH_POLE_DEC_J2000_DEG},  # the frame's axis; fallback only
+    'Moon': {'ra': 269.99, 'dec': 66.54},     # the cited Table 2 no longer has a row for the Moon ("See Sect. 3")
+    'Mars': {'ra': 317.68, 'dec': 52.89},
+    'Jupiter': {'ra': 268.05, 'dec': 64.49},
+    'Saturn': {'ra': 40.58, 'dec': 83.54},
+    'Uranus': {'ra': 257.43, 'dec': -15.10},
+    'Neptune': {'ra': 299.36, 'dec': 43.46},
+    'Pluto': {'ra': 132.99, 'dec': -6.16}
+}
 
 EARTH_LEO_UPPER_ALTITUDE_KM = 2000.0
 # Unit: km

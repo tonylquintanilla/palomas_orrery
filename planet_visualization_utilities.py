@@ -45,6 +45,10 @@ its rate from constants_new.py at their declared counts, where it typed
 a tilt in degrees and a drift per decade that the source gives per year;
 _declared_count() does the formatting)
 
+Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5 (L-322
+Stage D: Earth's rotation period on the axis hover is the sidereal period
+row in constants_new.py at its declared count, where it typed 23.93 h)
+
 Role: rendering
 Domain: orrery
 """
@@ -61,6 +65,8 @@ from constants_new import (
     EARTH_DIPOLE_TILT_DEG,
     # L-322 Stage C2: the tilt's rate, printed beside it on the cone's hover.
     EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR,
+    # L-322 Stage D: Earth's sidereal period, printed on the axis hover.
+    EARTH_SIDEREAL_ROTATION_PERIOD_H,
     # L-162 (2026-07-29): named directly in constants_new.py now; these
     # nine no longer derive from a CENTER_BODY_RADII lookup below.
     MERCURY_RADIUS_KM, VENUS_RADIUS_KM, MOON_RADIUS_KM, MARS_RADIUS_KM,
@@ -527,7 +533,13 @@ PLANET_ROTATION = {
                 'sense': 'retrograde', 'obliquity_str': '177.4 deg',
                 'note': 'Retrograde: spins backwards, axis points nearly south.',
                 'half_len_frac': 2.0},
-    'Earth':   {'period_str': '23.93 h',
+    # L-322 Stage D: the period is the store's sidereal row at its declared
+    # count (seven figures), and says which turn it is. The tilt below is
+    # still typed; the pole-of-date patch replaces it with the tilt of the
+    # plot's date.
+    'Earth':   {'period_str': '%.*g h (one turn against the stars)' % (
+                    figures_of('EARTH_SIDEREAL_ROTATION_PERIOD_H'),
+                    EARTH_SIDEREAL_ROTATION_PERIOD_H),
                 'sense': 'prograde', 'obliquity_str': '23.44 deg',
                 'note': 'The familiar tilt that drives the seasons.',
                 'half_len_frac': 3.0},
