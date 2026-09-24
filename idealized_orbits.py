@@ -21,6 +21,10 @@ Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5
 here; the rotation of a pole into the ecliptic frame reads
 EARTH_OBLIQUITY_J2000_DEG, the frame's defining angle, where it typed
 23.439291 labelled IAU 2006)
+Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D, patch D3: create_planet_transformation_matrix('Earth')
+draws Earth's pole of the plot's date from earth_pole_of_date.py, and
+the frame's year-2000 axis when Horizons cannot be reached)
 
 Role: computation
 Domain: orrery
@@ -3321,7 +3325,15 @@ def create_planet_transformation_matrix(planet_name):
         return np.identity(3)  # Identity matrix if no data available
     
     # Get pole direction
-    pole = planet_poles[planet_name]
+    # L-322 Stage D (2026-09-23): Earth's pole is the pole of the plot's
+    # date, fetched from Horizons by earth_pole_of_date.py; with no date,
+    # or no connection, that module returns the fallback pair the
+    # planet_poles entry also holds. Every other body reads its entry.
+    if planet_name == 'Earth':
+        import earth_pole_of_date
+        pole = earth_pole_of_date.pole_of_scene_date()
+    else:
+        pole = planet_poles[planet_name]
     ra_pole = np.radians(pole['ra'])
     dec_pole = np.radians(pole['dec'])
     

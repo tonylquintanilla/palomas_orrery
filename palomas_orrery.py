@@ -23,6 +23,10 @@ Updated June 15, 2026 with Opus 4.8: item 19.3 Phase A -- user-settable grid
 spacing (dtick) GUI field threaded to the static plot (S1), free-camera
 animation (S2), and the exoplanet static plot (S3, now routed through
 build_scene for a readable auto/manual grid).
+Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5 (L-322
+Stage D, patch D3: both pipelines tell earth_pole_of_date.py the plot's
+date before building the center-body shells, so Earth's axis is drawn
+for that date; the animation uses its first frame's date).
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -5271,6 +5275,10 @@ def plot_objects():
             # Reused later by comet tails section.
             _sun_pos_tuple = resolve_shell_sun_position(
                 center_object_name, positions.get('Sun'), date_obj, center_id)
+            # L-322 Stage D, patch D3: Earth's axis and tilt are drawn for
+            # this date (earth_pole_of_date.py), set here for the shells.
+            import earth_pole_of_date
+            earth_pole_of_date.set_scene_date(date_obj)
 
             # (2c) Center-body shell dispatch -- one implementation for both
             # pipelines (add_center_body_shells). The returned axis_range
@@ -6828,6 +6836,10 @@ def animate_objects(step, label):
             _sun_entry = _sun_traj[0] if _sun_traj and len(_sun_traj) > 0 else None
             _sun_pos_tuple = resolve_shell_sun_position(
                 center_object_name, _sun_entry, dates_list[0], center_id)
+            # L-322 Stage D, patch D3: the animation draws Earth's axis and
+            # tilt for its first frame's date; the hover names that date.
+            import earth_pole_of_date
+            earth_pole_of_date.set_scene_date(dates_list[0])
 
             # (2c) Center-body shell dispatch -- one implementation for both
             # pipelines (add_center_body_shells). The returned

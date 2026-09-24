@@ -175,6 +175,7 @@ ROLE_MAP = {
     'close_approach_data':                    'data',
     'constants_new':                          'data',
     'constants_tokens':                       'data',
+    'earth_pole_of_date':                     'data',
     'exoplanet_coordinates':                  'data',
     'exoplanet_stellar_properties':           'data',
     'exoplanet_systems':                      'data',

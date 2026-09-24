@@ -129,6 +129,10 @@ now judges each derived row's declared figure count (provenance-discipline
 2.13, Rule 8) instead of recomputing two literals. The counts in this
 docstring had drifted to four generators and eleven gating checkers;
 they are six and sixteen.)
+Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5 (L-322
+Stage D, patch D3: CHECKERS gains Earth pole of date,
+test_earth_pole_of_date.py, which checks the pole-of-date geometry against
+ERFA and the fallback without contacting Horizons.)
 """
 
 import hashlib
@@ -203,6 +207,11 @@ CHECKERS = [
     ('Reset completeness', ['test_reset_completeness.py'],
      'RESET COMPLETENESS:'),
     ('Orbit cache', ['test_orbit_cache.py'], None),
+    # Earth's pole and tilt of the plot's date: geometry against ERFA,
+    # fallback, cache, hover and the Earth transform, all offline.
+    # L-322 Stage D, patch D3.
+    ('Earth pole of date', ['test_earth_pole_of_date.py'],
+     'EARTH POLE OF DATE:'),
     # A fourth field marks a tool REPORT-ONLY: it exits 0 whatever it
     # finds, so "passed" says only that it ran. Exactly two are, and
     # both are deliberate -- their numbers are the verdict, not their

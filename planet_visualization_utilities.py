@@ -49,6 +49,10 @@ Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5 (L-322
 Stage D: Earth's rotation period on the axis hover is the sidereal period
 row in constants_new.py at its declared count, where it typed 23.93 h)
 
+Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5 (L-322
+Stage D, patch D3: Earth's axis hover prints the tilt of the plot's date,
+from earth_pole_of_date.py, where it typed a fixed tilt)
+
 Role: rendering
 Domain: orrery
 """
@@ -534,13 +538,14 @@ PLANET_ROTATION = {
                 'note': 'Retrograde: spins backwards, axis points nearly south.',
                 'half_len_frac': 2.0},
     # L-322 Stage D: the period is the store's sidereal row at its declared
-    # count (seven figures), and says which turn it is. The tilt below is
-    # still typed; the pole-of-date patch replaces it with the tilt of the
-    # plot's date.
+    # count (seven figures), and says which turn it is. Earth's tilt is not
+    # typed here: build_rotation_axis_traces() asks earth_pole_of_date.py
+    # for the tilt of the plot's date when it builds the hover (L-322
+    # Stage D, patch D3), so obliquity_str is None for Earth.
     'Earth':   {'period_str': '%.*g h (one turn against the stars)' % (
                     figures_of('EARTH_SIDEREAL_ROTATION_PERIOD_H'),
                     EARTH_SIDEREAL_ROTATION_PERIOD_H),
-                'sense': 'prograde', 'obliquity_str': '23.44 deg',
+                'sense': 'prograde', 'obliquity_str': None,
                 'note': 'The familiar tilt that drives the seasons.',
                 'half_len_frac': 3.0},
     'Moon':    {'period_str': '27.32 d (spin-orbit locked)',
@@ -668,12 +673,18 @@ def build_rotation_axis_traces(center_position=(0, 0, 0), planet_name=None,
             name=legend, legendgroup=legend, showlegend=False, hoverinfo='skip'))
 
     # 4) single info marker at the north tip (hub of the spin ring)
+    obliquity_text = info['obliquity_str']
+    if planet_name == 'Earth':
+        # L-322 Stage D, patch D3: the tilt of the plot's date, or why
+        # none is shown.
+        import earth_pole_of_date
+        obliquity_text = earth_pole_of_date.tilt_hover_text()
     hover = ('<b>%s -- Rotation Axis</b><br>'
              'Sidereal rotation: %s<br>'
              'Direction: %s<br>'
              'Obliquity: %s<br>'
              '%s') % (planet_name, info['period_str'], info['sense'],
-                      info['obliquity_str'], info['note'])
+                      obliquity_text, info['note'])
     traces.append(go.Scatter3d(
         x=[p_hi[0]], y=[p_hi[1]], z=[p_hi[2]], mode='markers',
         marker=dict(size=5, color=color, symbol='cross',
