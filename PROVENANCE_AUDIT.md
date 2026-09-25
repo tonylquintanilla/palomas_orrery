@@ -2,7 +2,7 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: September 24, 2026
-Files scanned: 141
+Files scanned: 140
 Total findings: 1080
 Constants: 159 | Dicts: 44 | Display strings: 877
 
@@ -20,20 +20,16 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260925T023903Z | `fb8d927` | 140 | 1080 | 295 | 665 | 118 | 2 |
 | 20260924T174742Z | `50343e0` | 141 | 1080 | 295 | 665 | 118 | 2 |
 | 20260924T034040Z | `0ab14d8` | 140 | 1081 | 293 | 668 | 118 | 2 |
 | 20260924T013317Z | `8fffbe1` | 139 | 1081 | 293 | 668 | 118 | 2 |
 | 20260924T012434Z | `bba2145` | 138 | 1076 | 293 | 663 | 118 | 2 |
 | 20260923T032527Z | `60d3578` | 136 | 1071 | 293 | 658 | 118 | 2 |
-| 20260922T192031Z | `32750e5` | 136 | 1071 | 293 | 658 | 118 | 2 |
 
-Change since the previous run: total -1, Tier-1 +2.
+Change since the previous run: total +0, Tier-1 +0.
 
-Tier-1 rose in these files:
-
-| File | Before | After |
-|------|-------:|------:|
-| planet_visualization_utilities.py | 2 | 4 |
+No file's Tier-1 count rose.
 
 ---
 

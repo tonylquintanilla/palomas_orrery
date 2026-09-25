@@ -11,26 +11,24 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 141  
-**Total Lines of Code (non-blank):** 110,961  
-**Total Public Functions/Classes:** 1,252
+**Total Python Files:** 140  
+**Total Lines of Code (non-blank):** 110,656  
+**Total Public Functions/Classes:** 1,250
 
 ## Classification Coverage
 
-**Undetermined role (7).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L322_D_4_orrery_autoscale_and_live_check_20260923.py`
-- `patch_L322_D_5_orrery_earth_cone_hover_20260923.py`
+- `patch_L286_2_ledger_rooms_ruling_20260924.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (2).** No valid `Domain:` tag.
+**Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L322_D_4_orrery_autoscale_and_live_check_20260923.py`
-- `patch_L322_D_5_orrery_earth_cone_hover_20260923.py`
+- `patch_L286_2_ledger_rooms_ruling_20260924.py`
 
 
 ---
@@ -244,8 +242,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L322_D_4_orrery_autoscale_and_live_check_20260923.py` | - L-322 Stage D, patch D4. (232 lines) |
-| `patch_L322_D_5_orrery_earth_cone_hover_20260923.py` | - L-322 Stage D, patch D5. (168 lines) |
+| `patch_L286_2_ledger_rooms_ruling_20260924.py` | - L-286 and L-283, the record. (95 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |

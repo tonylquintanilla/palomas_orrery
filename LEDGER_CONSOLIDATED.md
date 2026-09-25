@@ -446,11 +446,11 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-311 | Earth's rotation period and obliquity are not served, so the axis hover names neither | OPEN | 3.6 | 2026-09-10 |
 | ! | L-324 | One assignment per line in constants_new.py | OPEN | 3.6 | 2026-09-12 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-09-12 |
-| ! | L-286 | Rooms in four levels: drill-down, short-name breadcrumb, Home stays a scene reset | OPEN | 3.5 | 2026-09-08 |
+| ! | L-286 | Rooms in four levels: drill-down, short-name breadcrumb, Home stays a scene reset | OPEN | 3.5 | 2026-09-24 |
 | ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
 | ! | L-312 | The gallery editor's copy and file slots make cards the viewer misreads; two portrait titles to retype | OPEN | 3.4 | 2026-09-10 |
 | ! | L-292 | Earth shells the orrery does not draw | OPEN | 3.4 | 2026-09-08 |
-| ! | L-283 | Visual theme: dark wall, paper placards, record mode | OPEN | 3.2 | 2026-09-03 |
+| ! | L-283 | Visual theme: dark wall, paper placards, record mode | OPEN | 3.2 | 2026-09-24 |
 | ! | L-256 | provenance-discipline 2.8, and the status pass it enables | OPEN | 3.1 | 2026-08-27 |
 | ! | L-288 | Gallery Studio creates and edits live-scene cards | OPEN | 3.1 | 2026-09-10 |
 | ! | L-294 | The Explorer room's placeholder, and Earth's heliocentric view | OPEN | 3.1 | 2026-09-06 |
@@ -6612,7 +6612,7 @@ lobby splits by subject); index.html; interactive.html;
 gallery_config.json; gallery_metadata.json; skills/gallery-pipeline.
 
 #### [L-283] Visual theme: dark wall, paper placards, record mode
-<!-- L:283 status:OPEN upd:2026-09-03 section:A flag: rice:4/3/80/3 -->
+<!-- L:283 status:OPEN upd:2026-09-24 section:A flag: rice:4/3/80/3 -->
 - **Tony's ruling 2026-09-03: "dark wall with paper placards -- let's
   go with this."** Mode 5 throughout; Claude proposes, Tony's eye
   judges.
@@ -6663,6 +6663,29 @@ gallery_config.json; gallery_metadata.json; skills/gallery-pipeline.
   solved the still version of this; record mode is the moving version
   and it lives in the gallery (see L-284).
 - **Note:** RICE 4/3/80/3 -> 3.2 proposed, not confirmed.
+- **2026-09-24 -- THE WALL IS DUSK BLUE, NOT BLACK, AND THE ART IS
+  MORE PROMINENT.** Tony, looking at the L-286 rooms mockup
+  (https://claude.ai/artifact/DLMy8Vu3nV5dNKPU4vFE8X, private to him):
+  "make the background favicon image more prominent and maybe adopt its
+  dusk sky blue tone rather than pure black." Shown a revised mockup:
+  "i like it the way you have designed it." This changes "Dark void
+  background" in The bones stay above; the fonts do not change.
+  - As drawn: a vertical gradient from #050c1a at the top through
+    #0a1829 at 45% and #132a45 at 78% to #1d3a5a at the bottom, tones
+    sampled from the logo art. The art over it at 60% opacity on the
+    lobby, 35% on the room screens, 15% behind an open card. The header
+    and cards are tinted blue to match and slightly see-through. Today
+    the page shows the art at 14%, from `favicon.ico`, which at 256
+    pixels is too small to show larger.
+  - The art is Tony's original, uploaded 2026-09-24 as
+    `Gemini_palomas_orrery_logo.png`, 1024 by 1024, carrying Gemini's
+    mark in its lower right corner. Tony: "we should keep the Gemini
+    mark not the generic ai mark." The mockup had used
+    `palomas_orrery_logo.png` from the gallery repo, cropped to drop a
+    generic "ai" mark; the build uses the original with its mark.
+  - Not ruled: whether the exhibit rooms in `interactive.html` take the
+    dusk wall too; the mockup covered `index.html` only.
+  - Built as the third of L-286's `index.html` patches.
 **Gap:** a shared stylesheet carrying the palette, the accents, the
 placard card and the three type sizes; a record-mode toggle in the
 shared chrome; Mode 5 passes on phone and tablet.
@@ -6754,7 +6777,7 @@ possible" line, which the Sun room's Home shows is a limit of the
 dolly, not of Plotly).
 
 #### [L-286] Rooms in four levels: drill-down, short-name breadcrumb, Home stays a scene reset
-<!-- L:286 status:OPEN upd:2026-09-08 section:A flag: rice:5/4/70/4 -->
+<!-- L:286 status:OPEN upd:2026-09-24 section:A flag: rice:5/4/70/4 -->
 - **Opened 2026-09-04** from the lobby design session (HANDOFF
   2026-09-04, "the lobby splits by subject"; L-282 carries the doors,
   this item carries what is inside them). Nothing built.
@@ -6834,7 +6857,11 @@ dolly, not of Plotly).
   horizontal drag goes to the sweep, and restored on rotation to
   landscape; zoom buttons still work; 3D scenes scale to fit as
   before; Home clears the room. Also lifts the MODE FILTER (see L-287
-  note): every card shows on the phone, 105 not 56. Tested headless:
+  note): every card shows on the phone, 105 not 56. [SUPERSEDED
+  2026-09-22 by Tony's tab ruling in the gallery card pass: the Desktop
+  tab lists the 16:9 cards and the Mobile tab the 9:16 cards, and the
+  phone drops a 16:9 card whose 9:16 twin is served. See the
+  2026-09-24 note below for where the tabs now live.] Tested headless:
   a 66 Ma paleoclimate card drew 1429 px wide in a 390 px room, a
   touch swipe scrolled it 288 px, rotation cleared and restored the
   sweep, a 3D card and a two-slot card did not sweep, desktop
@@ -6872,7 +6899,84 @@ dolly, not of Plotly).
   inferred. Fix: a 3D figure never has its dragmode touched by the
   sweep; for 2D an absent dragmode reads as null. Tony's Mode 5:
   correct. Field note filed under L-304.
-**Gap:** the room-path reader in `index.html` (filter a grid to a room);
+- **2026-09-24 -- FOUND AGAIN, AND TONY RULED TO BUILD IT NOW.** Found
+  during the gallery card pass (orrery
+  `documentation/RUN_RECORD_gallery_card_pass_20260922.md`, section
+  3i), at gallery `9c61fb21`. Tony saw the editor show a Moon room under
+  Earth while the served page listed the Moon's six cards directly under
+  Earth. The cause is this item's unbuilt part: `normalizeSchemaV2()` in
+  `index.html` keeps only the first two parts of a card's room path, so
+  `solar_system/earth/moon` reads as `solar_system/earth`, and the menu
+  draws only a door and one level of room. The Moon room was added on
+  2026-09-04 and its cards moved in on 2026-09-05, so the page has folded
+  them into Earth since then. The editor was built ahead of the page.
+- **Why it was not seen.** The master plan's order of 2026-09-03 puts
+  this item third in step 2. The notes of 2026-09-05 and 2026-09-06 say
+  step 2 is two of three items done. Step 3, Earth, went ahead while
+  this waited, every later "what this does to the order" paragraph
+  discusses steps 3 to 5 only, and the plan's newest "Next" paragraph
+  (2026-09-17 to 22) goes from Stage D to Jupiter and Saturn. No update
+  ruled it dropped; it stopped being mentioned. Tony, 2026-09-24: "this
+  is the gallery sweep and we found L286 again, so i would say we should
+  build it so it is not left behind."
+- **Tony's ruling on the tabs, 2026-09-24.** Removing the side menu
+  would remove the Desktop and Mobile tabs, which sit at the top of its
+  panel and are hidden on phones. Tony: "why can't the desktop room keep
+  both views? both have positives and negatives. the phone is limited
+  the desktop is not." Asked to confirm the tabs in the header on every
+  desktop screen, lobby and rooms alike, and none on the phone: "yes".
+  This replaces decision 10 of the 2026-09-04 design session, which had
+  the tabs going away, and answers the card pass's finding that the
+  front page does not show the tab split.
+- **The mockup, approved 2026-09-24.** A Design canvas, private to Tony:
+  https://claude.ai/artifact/DLMy8Vu3nV5dNKPU4vFE8X, seven screens drawn
+  from the real cards at gallery `9c61fb21`: on the desktop the lobby,
+  the Solar System door, the Earth room and the Moon room; on the phone
+  the Earth room, the Moon room and an open card. Tony: "Yes."
+  - Each room is its own screen: its title and counts, its own cards,
+    then the rooms inside it. Cards come first, as the tree order rule
+    already lists a room's own cards before its rooms.
+  - A room with no cards stays in the list, greyed, marked "under
+    construction", as the lobby does today.
+  - A special exhibit is a room row marked "special exhibit" (Orbital
+    Mechanics, under the Solar System door).
+  - The header carries the chain on the left and, on the desktop, the
+    two tabs on the right. The chain uses the config's short labels as
+    they are stored ("Solar: Earth: Moon"). On the phone the cards stack
+    in one column, and an open card keeps the chain with the card's
+    title under it.
+  - ONE DEPARTURE FROM THE 2026-09-04 WORDING, shown in the mockup and
+    approved with it. This block said the chain's first crumb returns a
+    visitor to the lobby; then nothing in the chain reaches the door's
+    own screen. In the mockup "Paloma's Orrery" at the far left of the
+    header goes to the lobby, and the first crumb, the door's short
+    name, opens the door's screen.
+  - The side menu is retired, as the master plan's note of 2026-09-05
+    already said this item would do.
+- **The look changed with it** (Tony's ruling of the same day, recorded
+  on L-283): a dusk-blue wall and the logo art more prominent.
+- **Build order, agreed 2026-09-24.** Three `index.html` patches, each
+  applied and looked at on Tony's phone before the next: (1) rooms, each
+  its own screen, four levels, the side menu retired; (2) the header,
+  the chain and the tabs; (3) the look, from L-283's note. Then the
+  chain in `interactive.html`, after checking that file's latest commit,
+  since the Earth work runs in another conversation and may be changing
+  it.
+- **Found in the files this build opens** (Cluster the Tail by Topic),
+  all in `index.html` and all from the card pass's section 5: the
+  browser's back button does nothing useful on a card, because the page
+  replaces the address instead of adding one; a phone first opened
+  sideways gets the tablet layout with the tabs; the front page does not
+  show the tab split (answered above). Rooms with their own addresses
+  are the natural place to take the first; the second moves with the
+  tabs.
+**Gap (2026-09-24):** the four pieces above, then Mode 5 on phone and
+desktop at all four levels. The room-shape field is done (every card
+carries `shape`); the special-exhibit placement is settled by the
+mockup. The master plan's next restamp puts step 2 back into its "Next"
+paragraph; it is not edited now because the Earth work, in another
+conversation, restamps the plan with Stage D.
+**Gap (2026-09-04; SUPERSEDED by the 2026-09-24 Gap above):** the room-path reader in `index.html` (filter a grid to a room);
 the breadcrumb component shared by both pages; the special-exhibit
 placement; the room-shape field; Mode 5 on phone at all four levels.
 **Ref:** L-282 (doors, phases, pages), L-287 (room tree and editor),

@@ -1,10 +1,12 @@
 # Gallery card pass -- run record: every card looked at, what was changed, what was found
 
-Built on gallery `27838dda474b1fb8aeb721147d563369826c1f03`
+Built on gallery `9c61fb21`, read live with `git ls-remote` on
+2026-09-24 for this copy (it was `ff324a0ec51bb4d19f728e41d8d4dbdad98b9ebf`
+for the copy before)
 at https://github.com/tonylquintanilla/tonyquintanilla.github.io
-and orrery `1319e4962e8761dc9d1e7f00ee01f371ce5737a7`
+and orrery `fb8d927e1581f6ad2fe49aa04a8d30d50e7f8d71`
 at https://github.com/tonylquintanilla/palomas_orrery (read, not changed).
-Both HEADs read live with `git ls-remote` on 2026-09-23 for this copy.
+Both HEADs read live with `git ls-remote` on 2026-09-24 for this copy.
 The record was started on gallery `386a44ff` and orrery `dcc36e38`, and
 the pass itself began earlier the same day on gallery `1ae9de50` and
 orrery `efd2e2ba`.
@@ -16,7 +18,10 @@ ledger patch that follows it is written from section 5.
 
 **Rules this work ran under**, each loaded in this session and each
 matching the protocol's manifest table at v3.67: safe-file-editing 1.11,
-gallery-pipeline 1.2, ledger-and-session-records 1.11.
+gallery-pipeline 1.2, ledger-and-session-records 1.11. For section 3i,
+loaded in the session of 2026-09-24 and each matching the table at
+v3.68: gallery-pipeline 1.2, interactive-exhibit 1.4,
+ledger-and-session-records 1.11, safe-file-editing 1.11.
 
 **Where the earlier part comes from.** Sections 2 and 3 up to the refusal
 were done in the previous session ("Gallery editor card cleanup and
@@ -365,7 +370,115 @@ tab, and its click still reaches the card; the Desktop tab still shows
 its label as before. The checks for cards 5 and 6 still pass, including
 a finger's tilt kept through Play.
 
-**Status: waiting for Tony's run and his check on the phone.**
+**Done.** Pushed at gallery `2bd01fe`, 2026-09-23; the `index.html`
+served there is byte for byte the copy tested here. The same commit
+carries `data/constants_export.json` and `.sha`, the orrery's constants
+export, not this patch. A second run of the patch on 2026-09-24, from a
+copy left in the gallery's top folder, refused as already applied,
+which is its guard working. Tony's check on the phone: a tap opens the
+info card with no grey box over the render.
+
+A commit Tony named, `ae96df03`, was not on GitHub when first checked;
+it was a local commit, since pushed. It files a copy of the patch
+script in the gallery's top folder, which `ff324a0e` then removes.
+
+## 3g. Editor changes by Tony, gallery `ff324a0e`
+
+Checked here against the commit. Set to "none" (not on the phone):
+Earth Barycenter Shells 20260207 1635 and Near Earth Asteroids 20260207
+2114, both 16:9 3D figures from the list in section 3c. Deleted: Near
+Earth Asteroids on 2026 02 11 00:24, a 9:16 card. So Near Earth
+Asteroids is no longer on the phone in either shape. The metadata holds
+141 cards.
+
+## 3h. Card 8 -- Apophis Closest Approach, the 16:9 and 9:16 pair
+
+**What Tony saw.** Only the 9:16 card shows on the phone, which is
+right. But in the editor the 16:9 card's phone setting still had
+"16:9 3D" picked, which says the phone asks the visitor to turn it and
+then shows this card. The phone never shows it.
+
+**Why.** On a phone the page drops a 16:9 card whose 9:16 twin is
+served, whatever the 16:9 card's phone setting says. The editor built
+at card 5 read the setting from the card's own figure and never looked
+at the twin.
+
+**Patched:** `patch_L303_editor_twin_phone_note_20260924.py`, built on
+gallery `ff324a0e`, `tools/gallery_editor.py` only. For a 16:9 card
+whose 9:16 twin is in a room, the four phone choices are greyed out
+with none picked, and the note says the phone shows the twin instead,
+naming it; if the twin is set to "none", it says the phone shows
+neither. It is the same test the page's phone filter makes, so a twin
+kept in Storage does not count. Saving such a card keeps whatever it
+already stores. Nothing the site serves changes.
+
+Tested here with the editor run headless: the 16:9 Apophis card and the
+16:9 Inner Solar System Animation card show the note with all four
+choices greyed; the 9:16 Apophis card and Mercury are unchanged; the
+twin-set-to-none and twin-in-Storage cases give the notes above; and
+applying the form to the 16:9 card leaves it unchanged and unsaved.
+
+**Found along the way, not changed:** the page builds its list of
+served twins after it removes Storage, so it agrees with the editor.
+No card's twin is in Storage today.
+
+**Status: pushed.** Gallery HEAD read live on 2026-09-24 is `9c61fb21`,
+Tony's push of this patch.
+
+## 3i. The Moon room, and L-286 found again
+
+**What Tony saw.** The editor shows a Moon room under the Earth room. The
+served gallery does not, and lists all the Moon's cards directly under
+Earth.
+
+**Why.** The page knows only two levels of rooms, and the Moon is at the
+third. In `gallery/gallery_config.json` the Moon is a room inside Earth,
+inside the Solar System door. `normalizeSchemaV2()` in `index.html` keeps
+only the first two parts of a card's room path, so
+`solar_system/earth/moon` reads as `solar_system/earth`, and the side
+menu draws only a door and one level of room under it. The six Moon cards
+(Earth-Moon System on 2026 02 10 and the five Artemis II cards) list
+beside Earth's own five, in both tabs. The Moon room was added on
+2026-09-04 (gallery `b5622a8`) and its cards moved in on 2026-09-05
+(gallery `2130a3f`), so the page has done this since then. No other room
+is three levels deep yet. Nothing in this pass caused it.
+
+**It is L-286, which the master plan had stopped mentioning.** L-286,
+"Rooms in four levels", is the third item of step 2 in the master plan's
+order of 2026-09-03. The notes of 2026-09-05 and 2026-09-06 say step 2 is
+two of three items done. After that every update discusses steps 3 to 5,
+and the newest "Next" paragraph goes from Stage D to Jupiter and Saturn.
+No update ruled it dropped.
+
+**Tony's rulings, 2026-09-24.**
+- Build it now: "this is the gallery sweep and we found L286 again, so i
+  would say we should build it so it is not left behind."
+- The Desktop and Mobile tabs, which live in the side menu the rooms
+  replace, move to the header on every desktop screen, the lobby
+  included, and stay off the phone: "why can't the desktop room keep both
+  views? both have positives and negatives. the phone is limited the
+  desktop is not." Then "yes" to that placement. This also answers the
+  finding in section 5 that the front page does not show the tab split.
+- The rooms mockup, a Design canvas private to Tony
+  (https://claude.ai/artifact/DLMy8Vu3nV5dNKPU4vFE8X): "Yes." It draws the
+  real cards at gallery `9c61fb21`. It departs from the 2026-09-04 wording
+  in one place: "Paloma's Orrery" at the far left of the header returns
+  to the lobby, and the chain's first link opens the door's own screen.
+- The look: "make the background favicon image more prominent and maybe
+  adopt its dusk sky blue tone rather than pure black." Shown a revision:
+  "i like it the way you have designed it."
+- The art: Tony uploaded the original, `Gemini_palomas_orrery_logo.png`,
+  1024 by 1024: "we should keep the Gemini mark not the generic ai mark."
+
+**Recorded:** `patch_L286_2_ledger_rooms_ruling_20260924.py`, built on
+orrery `fb8d927e`, `LEDGER_CONSOLIDATED.md` only, with the full rulings,
+the mockup's contents and the build order on L-286 and the look on L-283.
+The master plan is not edited, because the Earth work restamps it with
+Stage D; L-286's Gap asks that restamp to put step 2 back.
+
+**Next:** three `index.html` patches, each looked at on Tony's phone
+before the next -- the rooms, the header, the look -- and then the chain
+in `interactive.html`.
 
 ## 4. Cards still to look at
 
@@ -397,7 +510,9 @@ ledger handle yet; the ledger patch at the end of the pass assigns them.
   Paleoclimate Human Origins; Paleoclimate and Extreme Heating Events (two).
 - **The front page does not show the tab split** (Tony, section 3). It
   appears only inside a door. Tony links it to a wider gap in the front
-  page; the guest book is L-281, still open.
+  page; the guest book is L-281, still open. ANSWERED for the tabs by
+  Tony's ruling of 2026-09-24 (section 3i): they move to the header on
+  every desktop screen, the lobby included; recorded on L-286.
 - **A 3D figure drawn on a phone held sideways needs editing for that
   screen to look right** (Tony, cards 5 and queued Trappist1). "none" is
   the tool until a card is edited for it.
@@ -408,11 +523,13 @@ ledger handle yet; the ledger patch at the end of the pass assigns them.
   phone; the stand-in has no Safari bars.
 - **A phone first opened sideways gets the tablet layout**, with the
   Desktop and Mobile tabs, although it now lists only what a phone
-  lists (section 3c).
+  lists (section 3c). Named on L-286 on 2026-09-24, since the tabs move
+  in that build.
 - **On a card, the browser's back button does nothing useful.** Seen on
   the turn card (section 3c). The page opens every card by replacing the
   current address rather than adding one, which is the likely reason;
-  not checked on a real phone.
+  not checked on a real phone. Named on L-286 on 2026-09-24: rooms with
+  their own addresses are the natural place to take it.
 - **The editor cannot link or unlink a card's twin.** Any other pair made
   before the linking existed needs a metadata patch, as this one did.
 - **Nothing checks which cards each tab lists, or where the room buttons
@@ -424,13 +541,15 @@ ledger handle yet; the ledger patch at the end of the pass assigns them.
 - **Files quoting a layout or a rule this pass changed** (The Correction
   Does Not Travel): the interactive-exhibit Nav cluster row and L-285's
   note (section 2), and the ledger's L-286 and L-287 text on the mode
-  rule, which the tab ruling replaces.
+  rule, which the tab ruling replaces. L-286's line is marked superseded
+  by `patch_L286_2_ledger_rooms_ruling_20260924.py`; L-287's is not yet.
 
 ---
 
 Record started September 2026 with Anthropic's Claude Opus 5.5, and
 updated after cards 2 to 4, three times on 2026-09-23 during card 5,
-twice for card 6, and once for card 7.
+twice for card 6, twice for card 7, once for card 8, and on 2026-09-24
+for card 8's push and the Moon room (section 3i).
 
 ============================
 **Tony**:
@@ -1072,25 +1191,32 @@ TONY-ACTION ROLLUP for this patch:
   (do)     steps 1 to 6 above.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
 
-==================================================================================
+================================================================================
 
-PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L303_no_grey_hover_box_20260923.py
-  ok  index.html: header Updated stamp
-  ok  index.html: Plotly's hover label is off where the info card serves
-  ok  encoding gate: index.html is ASCII after the edit
-  wrote index.html (174935 bytes)
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L303_editor_twin_phone_note_20260924.py
+  ok  editor: docstring stamp
+  ok  editor: a 16:9 card with a 9:16 twin says the phone shows the twin
+  ok  editor: saving a card that gives way to its twin keeps its stored shape
+  ok  encoding gate: the editor is ASCII after the edit
+  ok  the editor compiles after the edit
+  wrote tools/gallery_editor.py (58017 bytes)
 
 patch applied to 1 file
 
-Stamps updated: the 'Updated' line at the top of index.html.
+Stamps updated: the 'Module updated' line in the editor.
 
 WHAT TO DO NEXT, in this order:
 
   1. Move THIS script into documentation/. It has run. -- done
-  2. Run the gallery maintenance run:
+  2. Open the gallery editor (tools/gallery_editor.py, Run).
+     Click the 16:9 Apophis Closest Approach card. Under 'Shape
+     (phone only)' all four choices should be greyed out, and the
+     note should say the phone shows its 9:16 twin instead.
+     Click the 9:16 Apophis card: its choices should work as
+     before. Close the editor without saving. -- correct
+  3. Run the gallery maintenance run:
          python gallery_maintenance_run.py
-     Expect every gating checker to pass, as before. None of them
-     opens a card on a phone; your eyes in step 5 do.
+     Expect every gating checker to pass, as before.
 
 ======================================================================
   gallery maintenance run -- OFFLINE (before a commit)
@@ -1098,16 +1224,14 @@ WHAT TO DO NEXT, in this order:
 ======================================================================
 
 GENERATORS -- rewritten every time; a no-op when nothing moved
-  PASS Module atlas              2.0s  no change to MODULE_ATLAS.md,
+  PASS Module atlas              1.1s  rewrote MODULE_ATLAS.md,
                                     MODULE_INDEX.md
-  PASS Constants export pull     1.0s  rewrote
-                                    data/constants_export.json,
-                                    data/constants_export.sha
+  PASS Constants export pull     1.0s  rewrote data/constants_export.sha
   PASS Config mirror             0.1s  no change to
                                     data/objects_config.json
 
 CHECKERS -- the verdict informs the push call
-  PASS Cache builder suite      11.9s  PASS (201 checks, 0 failures)
+  PASS Cache builder suite      10.8s  PASS (201 checks, 0 failures)
   PASS Mirror suite              0.1s  All 42 mirror checks passed:
                                     served, spelling, relabel refused
                                     and accepted, conflict refused,
@@ -1115,7 +1239,7 @@ CHECKERS -- the verdict informs the push call
                                     and absent named, no-slot refused,
                                     five shapes, formatting kept,
                                     idempotent, report writes nothing.
-  PASS Store writer suite        3.9s  All 245 store-writer checks
+  PASS Store writer suite        2.9s  All 245 store-writer checks
                                     passed: an allow list that lets
                                     through only a shell's words, a
                                     belt's words and the arrival
@@ -1140,7 +1264,7 @@ CHECKERS -- the verdict informs the push call
                                     count; 58 link(s) compared, store
                                     6d4bb4fd4f54.
   PASS Pointer join              0.1s  Every link is accounted for: 87
-                                    link(s) against orrery 50343e03,
+                                    link(s) against orrery fb8d927e,
                                     24 fallback named; read check: 41
                                     of 41 measured rows reached carry
                                     a read.
@@ -1148,12 +1272,12 @@ CHECKERS -- the verdict informs the push call
                                     config's features exactly: 4
                                     object(s), 34 named shell(s), in
                                     both cache files.
-  PASS Feature renderers         1.0s  === ALL CHECKS PASSED ===
+  PASS Feature renderers         0.7s  === ALL CHECKS PASSED ===
   PASS Page framing              0.1s  === ALL CHECKS PASSED ===
   PASS Sun shells                0.2s  ALL CHECKS PASSED
-  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
-  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
-  PASS Arrival                   0.3s  Arrival: both rooms open on the
+  PASS Earth scene geometry      0.1s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.1s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
                                     right things; every shell trace
                                     carries its key; the fallback with
                                     no arrival block is unchanged.
@@ -1176,91 +1300,116 @@ CHECKERS -- the verdict informs the push call
   15 of 15 gating checkers passed
   1 report-only -- these do not gate, whatever they exit with:
     PASS Cache siblings         RESULT: 1 directory in data/ the builder
-  last swap 2026-09-23T13:09:46.835195+00:00: succeeded first time
+  last swap 2026-09-24T18:01:35.153393+00:00: succeeded first time
 ======================================================================
 
   After you push: python gallery_maintenance_run.py --live
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
-  3. In GitHub Desktop the change list should show exactly two
-     files: index.html and this script under documentation/.
-     Commit and push.
-
-2bd01fe50e323d70ab7bc0f549188b40512666cd
-
-  4. After the push, check what the live site serves:
-         python gallery_maintenance_run.py --live
-
-======================================================================
-  gallery maintenance run -- LIVE (after a push)
-  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
-======================================================================
-
-LIVE -- what the deployed site actually serves
-
-  fetching 11 files from https://palomasorrery.com/
-    SERVED   interactive.html                               matches the working copy
-    SERVED   gallery/feature_renderers.js                   matches the working copy
-    SERVED   gallery/earth_geometry.js                      matches the working copy
-    SERVED   gallery/assembler/resolver.py                  matches the working copy
-    SERVED   gallery/assembler/__init__.py                  matches the working copy
-    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
-    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
-    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
-    SERVED   gallery/arrival.js                             matches the working copy
-    SERVED   gallery/nav_cluster.js                         matches the working copy
-    SERVED   data/objects_config.json                       matches the working copy
-
-  PASS Served reachability       1.6s  all 11 files served and
-                                    byte-identical to the working copy
-
-  orrery export pinned at 50343e03
-
-  PASS Export freshness          0.1s  the served export is the orrery's
-                                    at 50343e03, byte for byte
-
-  orrery HEAD 50343e03
-  examining 29 of 87 links; the other 58 are served from the export
-    NOT IN STORE  create_sun_galactic_tide default not a top-level constant in the store
-                  /objects/0/features/oort_cloud/galactic_tide/typical_radius
-    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
-                  /objects/0/features/orientation
-    NOT IN STORE  planet_poles['Earth']            not a top-level constant in the store
-                  /objects/1/features/orientation
-    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
-                  /objects/2/features/orientation/pole
-    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
-                  /objects/3/features/orientation/pole
-  29 pointers: 24 match, 0 DRIFT, 0 UNIT MISMATCH, 5 could not be examined.
-
-  PASS Store drift               0.8s  29 pointers against orrery
-                                    50343e03 -- 24 match, 0 DRIFT, 0
-                                    UNIT MISMATCH, 5 could not be
-                                    examined.
-
-======================================================================
-  2 of 2 gating checkers passed
-  1 report-only -- these do not gate, whatever they exit with:
-    PASS Store drift            29 pointers against orrery 50343e03 --
-  last swap 2026-09-23T13:09:46.835195+00:00: succeeded first time
-======================================================================
-
-  Offline pass: python gallery_maintenance_run.py
-
-C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
-
-  5. On the phone, wait about ten minutes after the push, then
-     reload the page and open Earth and Moon:
-       - Tap a marker. The info card should open, with no grey box
-         over the render.
-       - Tap another marker: the card should change to it.
-       - Tap Inner Solar System Animation's markers too, a 3D
-         animation, and one 2D card with an info card, such as
-         Paleoclimate and Extreme Heating Events.
-     On the desktop, the Desktop tab should hover as before.
-  6. Tell Claude the new gallery SHA and what you saw. -- 2bd01fe50e323d70ab7bc0f549188b40512666cd
+  4. In GitHub Desktop the change list should show exactly two
+     files: tools/gallery_editor.py and this script under
+     documentation/. Commit and push. -- 9c61fb216544ee92c581086789958949b941d859
+  5. Tell Claude the new gallery SHA and what the editor showed.
 
 TONY-ACTION ROLLUP for this patch:
-  (do)     steps 1 to 6 above.
+  (do)     steps 1 to 5 above.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+================================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L286_2_ledger_rooms_ruling_20260924.py
+ok  LEDGER_CONSOLIDATED.md  5 edit(s): L-286 note and Gap, L-286 mode line marked, L-283 note
+
+DO THESE, IN THIS ORDER:
+  1. Run the orrery maintenance run. Its 'Ledger index' generator rewrites the index tables for L-286 and L-283.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20260924T174742Z, 1 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 0.9s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.1s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.1s  unchanged (1 checked, not written)
+  Module atlas                 5.8s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               4.5s  rewrote DATA_INVENTORY.md
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.2s  21 of 21 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.6s  No figure count exceeds its inputs: 39
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     13 NOT YET MIGRATED, 1 NO DERIVED LINE.
+  Constants export check       0.9s  Export matches the store: sha256
+                                     6d4bb4fd4f54 on both sides; 81 rows re-read,
+                                     54 not exported, 26 tokens.
+  Dimensions                   1.0s  No unit contradicts its arithmetic: 39
+                                     derived row(s) read -- 26 OK, 10 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 83 status lines in constants_new.py are
+                                     well formed; 49 rows carry none.
+  Row shape                    0.1s  All 135 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.2s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Reset completeness          17.8s  PASS -- all 309 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  1.8s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Worksheet checker            8.4s  76 of 114 routed, 8 clean
+  Worksheet checker tests     15.5s  All 136 checks passed
+  Worksheet key round trip     0.9s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         19.4s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner           9.3s  295 TIER-1 FINDINGS IN THE SCANNED TREE
+
+======================================================================
+  17 of 17 gating checkers passed -- 89.5s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           76 of 114 routed, 8 clean
+    Provenance scanner          295 TIER-1 FINDINGS IN THE SCANNED TREE
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  1961 file(s) examined, 8 written, 0 created, 0 removed, 4 rewritten identically
+    written   DATA_INVENTORY.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Move this script into documentation/. -- done
+  3. Move the new run record into documentation/, replacing RUN_RECORD_gallery_card_pass_20260922.md there. -- done
+  4. Commit and push.
+Undo before committing is Discard Changes in GitHub Desktop.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
