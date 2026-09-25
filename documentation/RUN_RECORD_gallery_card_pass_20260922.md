@@ -1410,6 +1410,6 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
   2. Move this script into documentation/. -- done
   3. Move the new run record into documentation/, replacing RUN_RECORD_gallery_card_pass_20260922.md there. -- done
-  4. Commit and push.
-Undo before committing is Discard Changes in GitHub Desktop.
+  4. Commit and push. -- c6cbacaeae5ca3d3e0d2cc5aa20842222aa472e3
+Undo before committing is Discard Changes in GitHub Desktop. 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
