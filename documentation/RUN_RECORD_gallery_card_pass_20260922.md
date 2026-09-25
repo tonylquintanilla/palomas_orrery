@@ -476,9 +476,28 @@ the mockup's contents and the build order on L-286 and the look on L-283.
 The master plan is not edited, because the Earth work restamps it with
 Stage D; L-286's Gap asks that restamp to put step 2 back.
 
-**Next:** three `index.html` patches, each looked at on Tony's phone
-before the next -- the rooms, the header, the look -- and then the chain
-in `interactive.html`.
+**Built: the rooms and the header, one patch.**
+`patch_L286_3_rooms_and_header_20260924.py`, built on gallery `a2f84a0`,
+`index.html` only. The rooms and the header went together, not as two
+patches as first planned: the tabs lived in the side menu, and a room
+screen with no header would have left no way back up from a card but the
+browser's Back. Each room is its own screen at any depth, the header
+carries the chain and, on the desktop, the tabs, a card's buttons sit in
+the header, the side menu is hidden, and rooms and cards have their own
+addresses so Back from a card returns to its room. Tested headless as a
+desktop, a phone and a phone held sideways before delivery.
+
+Tony ran it, both maintenance runs passed (16 of 16 offline, 2 of 2
+live), and he pushed it with the L-322 gallery work at gallery
+`2e164816`. The live `index.html` is byte-identical to the tested file.
+Tony's look on the phone and the desktop, 2026-09-24: "looks great."
+
+Two small things from the commit: the script sits at the gallery repo
+root rather than in `documentation/`; and the empty file named `python`
+that appeared before the run was discarded, not committed.
+
+**Next:** the look (L-283's note: the dusk wall and the art), then the
+chain in `interactive.html`.
 
 ## 4. Cards still to look at
 
@@ -548,8 +567,9 @@ ledger handle yet; the ledger patch at the end of the pass assigns them.
 
 Record started September 2026 with Anthropic's Claude Opus 5.5, and
 updated after cards 2 to 4, three times on 2026-09-23 during card 5,
-twice for card 6, twice for card 7, once for card 8, and on 2026-09-24
-for card 8's push and the Moon room (section 3i).
+twice for card 6, twice for card 7, once for card 8, and twice on
+2026-09-24, for card 8's push and the Moon room and then for the rooms
+patch (section 3i).
 
 ============================
 **Tony**:
@@ -1413,3 +1433,208 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
   4. Commit and push. -- c6cbacaeae5ca3d3e0d2cc5aa20842222aa472e3
 Undo before committing is Discard Changes in GitHub Desktop. 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+========================================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L286_3_rooms_and_header_20260924.py
+  ok  the page's Updated stamp
+  ok  styles for the header and the room screens; the side menu hidden
+  ok  the header element, first in the page
+  ok  room records and the room on show
+  ok  the tree walk records each room
+  ok  the tabs and a card's buttons move into the header; a phone shows no tabs
+  ok  a door opens its screen; the lobby sets the header
+  ok  setHeader, openCard, leaveCard, showRoom, renderRoom
+  ok  an open card shows its room and title in the header
+  ok  switching tabs redraws the room on show
+  ok  room addresses, and Back to the lobby
+  ok  goHome shares its clean-up with showRoom
+  ok  the turn card goes back to its room
+  ok  the links list opens under its button
+  ok  encoding gate: index.html is ASCII after the edit
+  ok  the result is the file that was tested
+  wrote index.html (195190 bytes)
+
+patch applied to 1 file
+
+Stamps updated: the 'Updated' line at the top of index.html.
+
+WHAT TO DO NEXT, in this order:
+
+  1. Move THIS script into documentation/. It has run.-- done
+  2. Run the gallery maintenance run:
+         python gallery_maintenance_run.py
+     Expect every gating checker to pass, as before. None of them
+     opens the gallery page; your eyes in step 5 do.
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              0.9s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     0.7s  rewrote data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite       9.3s  PASS (210 checks, 0 failures)
+  PASS Pole of date              0.2s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.1s  All 42 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing.
+  PASS Store writer suite        2.9s  All 245 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 246 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 58 link(s) compared, store
+                                    6d4bb4fd4f54.
+  PASS Pointer join              0.1s  Every link is accounted for: 87
+                                    link(s) against orrery 7a44f6a3,
+                                    24 fallback named; read check: 41
+                                    of 41 measured rows reached carry
+                                    a read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's features exactly: 4
+                                    object(s), 34 named shell(s), in
+                                    both cache files.
+  PASS Feature renderers         0.1s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.1s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.1s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.1s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.1s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.1s  === PASS: 55 hover(s) and 267
+                                    number(s) examined; 12 graded, 4
+                                    graded by line, 43 held to the
+                                    fixture ===
+  PASS Artifact 1 assembler      0.1s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: no sibling directories and
+                                    nothing in data/ the builder did
+                                    not make.
+
+======================================================================
+  16 of 16 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories and
+  last swap 2026-09-25T02:58:37.226714+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  3. In GitHub Desktop the change list should show exactly two
+     files: index.html and this script under documentation/.
+     Commit and push. -- 2e1648169f621e5c5624f02ed71edaea13a33734
+  4. After the push, check what the live site serves:
+         python gallery_maintenance_run.py --live
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 11 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+
+  PASS Served reachability       1.7s  all 11 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 7a44f6a3
+
+  PASS Export freshness          0.1s  the served export is the orrery's
+                                    at 7a44f6a3, byte for byte
+
+  orrery HEAD 7a44f6a3
+  examining 29 of 87 links; the other 58 are served from the export
+    NOT IN STORE  create_sun_galactic_tide default not a top-level constant in the store
+                  /objects/0/features/oort_cloud/galactic_tide/typical_radius
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NOT IN STORE  planet_poles['Earth']            not a top-level constant in the store
+                  /objects/1/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  29 pointers: 24 match, 0 DRIFT, 0 UNIT MISMATCH, 5 could not be examined.
+
+  PASS Store drift               0.8s  29 pointers against orrery
+                                    7a44f6a3 -- 24 match, 0 DRIFT, 0
+                                    UNIT MISMATCH, 5 could not be
+                                    examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            29 pointers against orrery 7a44f6a3 --
+  last swap 2026-09-25T02:58:37.226714+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  5. On the phone, wait about ten minutes after the push, close the
+     page and open it again, then:
+       - The header shows Paloma's Orrery and no tabs.
+       - Tap Solar System: its own screen, with Earth among the
+         rooms and the empty planets greyed.
+       - Tap Earth, then The Moon: the six Moon cards, and the
+         header reads Solar : Earth : Moon.
+       - Open a Moon card: its title and Share sit under the chain.
+         Swipe back (or the browser's Back): the Moon room again.
+       - Tap Earth in the header, then Paloma's Orrery.
+     On the desktop: the Desktop and Mobile tabs sit at the top
+     right of the lobby and every room; switching tabs redraws the
+     room; a card's Share and other buttons sit in the header. -- looks great. 
+  6. Tell Claude the new gallery SHA and what you saw. -- 2e1648169f621e5c5624f02ed71edaea13a33734
+
+TONY-ACTION ROLLUP for this patch:
+  (do)     steps 1 to 6 above.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
