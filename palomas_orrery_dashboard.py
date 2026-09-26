@@ -122,6 +122,10 @@ the script that fetches Earth's pole and orbit from Horizons and checks
 the tilt against ERFA; and Test Earth Pole of Date to the checkers under
 the maintenance runner, which patch D3 put in the runner with no button
 here. Both in alphabetical place.
+September 25, 2026 with Anthropic's Claude Opus 5.5 (L-322 Stage D, patch
+D12), on Tony's request: added Exact Rows Report beside the other
+generators, in alphabetical place. It writes EXACT_ROWS_PRINTED.md in the
+orrery root. No other entry touched.
 """
 
 import os
@@ -558,6 +562,21 @@ LAUNCH_GROUPS = {
          "data_inventory.py",
          "Inventory the large, gitignored data stores (data/, star_data/). "
          "Writes DATA_INVENTORY.md. Run before handoffs or to check cache state.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Exact Rows Report",
+         "exact_rows_report.py",
+         "List every place the orrery or the gallery prints an exact row of "
+         "constants_new.py -- a definition or a stated rule, such as a cut "
+         "angle -- with the code on each line, so the width it prints at "
+         "can be read. Rule 7 of provenance-discipline says such a row "
+         "prints by a print count it states, not a width chosen where it "
+         "is printed; this is the list that work moves from. Reads the "
+         "gallery folder beside the orrery and says so at the top if it is "
+         "missing. Report-only: writes EXACT_ROWS_PRINTED.md and never "
+         "gates a push. The maintenance run runs it every time.",
          SCRIPT_DIR,
          True,
          None,

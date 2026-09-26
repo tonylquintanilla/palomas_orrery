@@ -1499,6 +1499,64 @@ resident.
 (Moved down from the resident protocol on 2026-09-23 when
 v3.68 made a fourth entry.)
 
+v3.66 (September 21, 2026): No rule changed in this document. ONE
+skill bump, taken ahead of the build it serves, which is v3.55's
+ordering.
+
+provenance-discipline 2.15 -> 2.16 (L-322). HOW A STATED UNCERTAINTY
+DECIDES A FIGURE COUNT IS WRITTEN DOWN.
+
+THE RULE WAS ALREADY THERE, AND IT WAS NOT APPLIED. Rule 3 said a
+stated uncertainty decides and counting is the fallback, and the
+procedure it was adopted from says to propagate. The C2 design session
+missed both and put a choice to Tony between counting digits and two
+uncertainty conventions. His answer was "See the Skill on significant
+digits." It was method, which Method Belongs to the Skill had already
+said. What the skill lacked was HOW -- which uncertainty, how to
+propagate it, how to report it, and when it applies -- and the
+checker counts only, so the C2 build implements the new text.
+
+THE WORKED CASE. Shue's five coefficient uncertainties propagate to
++/- 0.13 Earth radii at the declared solar wind, which the reference
+page's single-number rule reports to tenths: 10.3, where the store had
+carried 10.25. In kilometres the same uncertainty supports two
+figures, 65,000 km. Two more of Tony's corrections the same day shaped
+the design around it: compute with all the digits and round only at
+the end, which is Rule 4, and "The single source of truth is
+constants_new.py", which put the kilometre and AU figures in the store
+rather than in the page.
+
+WHAT IS OURS IS MARKED AS OURS. The page says to report so that the
+implied range is close to the measured one. That closeness is measured
+on a log scale is this project's choice, and it is written apart from
+the page's words with its reason -- 2.14 went wrong by restating a
+source with words changed and nobody able to see it.
+
+TWO REVIEWS BEFORE THE CUT. Claude Fable 5.1 reviewed the text in the
+C2 manifest twice. The first review found that the propagated figure
+is the fit's precision and not the magnetopause's -- real crossings
+scatter 1.23 Earth radii -- which became the show-or-cap sentence and,
+on Tony's ruling, a scatter line in each hover. The second found that
+an earlier form of the ceiling rule would have failed fifteen finished
+C1 rows; the rule now fails a row only for claiming more than its
+uncertainty supports, and measured over every derived Earth row, none
+does.
+
+THE OBLIGATION TRAVELS, as it always does. This session loaded 2.15,
+and a reinstall cannot be verified from inside the session that makes
+it. The next session confirms its loaded copy reads 2.16 before any
+provenance or store work, and that session is the C2 build, from
+documentation/BUILD_MANIFEST_L322_C2_magnetosphere_20260920.md.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.63 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-09-25 when
+v3.69 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

@@ -229,6 +229,7 @@ ROLE_MAP = {
     'diagnose_bcodmo':                        'devtool',
     'doc_index':                              'devtool',
     'earth_system_generator':                 'devtool',
+    'exact_rows_report':                      'devtool',
     'examine_hot_csv':                        'devtool',
     'export_constants':                       'devtool',
     'export_orbit_cache':                     'devtool',

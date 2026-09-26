@@ -18,7 +18,7 @@ Run it after any edit session and before a push.
 
 WHAT IT DOES
 ------------
-Runs the six GENERATORS, then the CHECKERS, and prints one summary at
+Runs the seven GENERATORS, then the CHECKERS, and prints one summary at
 the end. Nothing stops on a failure -- every tool runs every time, so a
 single pass shows the whole picture rather than the first problem in it.
 
@@ -133,6 +133,14 @@ Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5 (L-322
 Stage D, patch D3: CHECKERS gains Earth pole of date,
 test_earth_pole_of_date.py, which checks the pole-of-date geometry against
 ERFA and the fallback without contacting Horizons.)
+Module updated: September 25, 2026 with Anthropic's Claude Opus 5.5 (L-322
+Stage D, patch D12: GENERATORS gains Exact rows report,
+exact_rows_report.py, which writes EXACT_ROWS_PRINTED.md: every place the
+orrery or the gallery prints an exact row of constants_new.py. It runs
+before Document index, so README.md lists the report on the same run. A
+generator row may now carry a fourth field, a verdict hint, as a checker
+row does; its line is added to the row's note, so this report's summary
+shows in the run instead of only in a file nobody opens.)
 """
 
 import hashlib
@@ -161,6 +169,14 @@ GENERATORS = [
      ['MODULE_ATLAS.md', 'MODULE_INDEX.md']),
     ('Data inventory',  ['data_inventory.py'],
      ['DATA_INVENTORY.md']),
+    # L-322 Stage D: every place the orrery or the gallery prints an exact
+    # row, which provenance-discipline Rule 7 says prints by a print count
+    # the row states. Reads the gallery folder beside this one, as Data
+    # inventory does. Before Document index, so README.md lists the report
+    # on the same run. The fourth field is a verdict hint: its line joins
+    # the note, so the count shows here and not only in the file.
+    ('Exact rows report', ['exact_rows_report.py'],
+     ['EXACT_ROWS_PRINTED.md'], 'EXACT ROWS PRINTED:'),
     # L-273: rewrites README.md's key-documents table from the Doc-Kind
     # tag each document carries. A generator rather than a checker on
     # Tony's ruling: a checker would leave the hand-maintained copy in
@@ -521,7 +537,11 @@ def main():
     # ---- generators ---------------------------------------------------
     print('GENERATORS -- regenerate every time; a no-op when nothing moved')
     print('-' * 70)
-    for label, argv_tail, outputs in GENERATORS:
+    for entry in GENERATORS:
+        # An optional fourth field is a verdict hint, as on a checker row
+        # (L-322 Stage D, patch D12). Read with a length guard.
+        label, argv_tail, outputs = entry[0], entry[1], entry[2]
+        gen_hint = entry[3] if len(entry) > 3 else None
         before = dict((path, snapshot(path)) for path in outputs)
         rc, output, seconds = run_tool(project_dir, argv_tail)
         after = dict((path, snapshot(path)) for path in outputs)
@@ -541,6 +561,11 @@ def main():
         else:
             note = ('unchanged (%d checked, not written)'
                     % len(outputs))
+        if gen_hint and rc == 0:
+            verdict = line_containing(output, gen_hint)
+            if verdict.startswith(gen_hint):
+                verdict = verdict[len(gen_hint):].strip()
+            note += ' -- ' + (verdict or 'no summary line printed')
         print_row(label, seconds, note)
         results.append((label, rc, seconds, note, output, False))
     print()

@@ -188,6 +188,7 @@ further down this file for the rest.
 | [requirements.txt](requirements.txt) | hand-written | Annotated dependency spec, including the kaleido 0.2.1 pin and the Plotly 5.x constraint. |
 | [RUNNING_A_PATCH_FILE.md](RUNNING_A_PATCH_FILE.md) | hand-written | How to run a delivered patch script, and what its guards mean. |
 | [DATA_INVENTORY.md](DATA_INVENTORY.md) | generated | The data inventory: the state of the local, gitignored data stores, rebuilt by data_inventory.py. Do not hand-edit. |
+| [EXACT_ROWS_PRINTED.md](EXACT_ROWS_PRINTED.md) | generated | Which exact rows of constants_new.py a display prints, and where, in the orrery and the gallery; rebuilt by exact_rows_report.py. Do not hand-edit. |
 | [MODULE_ATLAS.md](MODULE_ATLAS.md) | generated | The module atlas: every module's role, functions and dependencies, rebuilt by module_atlas.py from the docstrings. Do not hand-edit. |
 | [MODULE_INDEX.md](MODULE_INDEX.md) | generated | The human-browsable module index, rebuilt by module_atlas.py alongside the atlas. Do not hand-edit. |
 | [PROVENANCE_AUDIT.md](PROVENANCE_AUDIT.md) | generated | The provenance audit: every numeric claim scored against its citation, rebuilt by provenance_scanner.py on each run. Do not hand-edit. |

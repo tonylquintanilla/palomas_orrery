@@ -6,13 +6,25 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 2.18 | Cut from palomas_orrery @ ac25d4f4 (v2.18),
-earlier @ 1f6e55a9 (v2.17), @ a7014abb (v2.16), @ 21065c5d (v2.15), @ dfa779bd (v2.14),
+Skill version: 2.19 | Cut from palomas_orrery @ de4eadc5 (v2.19),
+earlier @ ac25d4f4 (v2.18), @ 1f6e55a9 (v2.17), @ a7014abb (v2.16), @ 21065c5d (v2.15), @ dfa779bd (v2.14),
 @ ebdc55cc (v2.13), @ bfc0505e (v2.12),
 earlier @ 159c5a2c (v2.11), @ 071a0a65 (v2.10), @ a263f73d (v2.9),
 @ 7f4a2f9f (v2.8), @ 3faa72a0 (v2.7), @ f603be3 (v2.6),
 @ 731066f (v2.5), @ 6b99ace (v2.2), @ 00219d9 (v2.1), @ eb77c83 (v2.0)
-| September 23, 2026
+| September 25, 2026
+v2.19 replaces one worked example that had gone stale. Rule 7's exact
+row said Earth's obliquity "prints 23.439291 degrees". Since the Stage
+D manifest's revision 3 (2026-09-23) no display prints the obliquity:
+the axis hovers print the tilt of date, worked out from the pole
+Horizons serves, and the obliquity row is used only as the angle that
+defines the ecliptic frame. The rule itself stands; the example now is
+the gallery's magnetopause hover, which prints the exact row
+EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG today with a width chosen at the call
+site. Found carried in two handoffs; checked against the skill, the
+manifest and the code on 2026-09-25, where every consumer of the
+obliquity was also confirmed to use the right value for the right job.
+Handle L-322.
 v2.18 settles where a drawing number lives and how an exact number
 prints, before L-322 Stage D builds on both. THE SCOPE BOUNDARY in One
 Value, One Home becomes THREE KINDS OF DRAWING NUMBER, Tony's ruling
@@ -2185,8 +2197,19 @@ rule forbids; nobody noticed while the exact rows were numbers like
 - **The export carries it and the page prints by it.** The export
   serves the print count beside the value, and the page prints an
   exact row to that many significant figures. `toFixed` goes for exact
-  rows. Earth's obliquity prints 23.439291 degrees, eight figures from
-  84381.448.
+  rows. The gallery's magnetopause hover is the case: it prints
+  `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG`, a declared limit typed 120.0, as
+  "Drawn to 120 degrees", today by a width of 0 decimals chosen at the
+  call site. Under this rule the row states `exact -- prints 3` and the
+  page prints three figures; counted from the literal it would print
+  "120.0".
+- **Earth's obliquity carries no print count.** It is the row this
+  rule was first written on, and it was the example until v2.19. Since
+  the Stage D manifest's revision 3 no display prints it: the axis
+  hovers print the tilt of date, worked out from Horizons' pole, and
+  `EARTH_OBLIQUITY_J2000_DEG` is used only as the angle that defines
+  the ecliptic frame. An exact row no display prints carries no print
+  count, as the second part above says.
 
 (Claude Fable 5.1's review of the Stage D manifest, 2026-09-23,
 Finding 2; the print-count field is Claude Opus 5.5's amendment to it
