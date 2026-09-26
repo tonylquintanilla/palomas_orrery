@@ -560,7 +560,53 @@ record): offline 16 of 16, live 2 of 2, pushed at gallery `1a816f24`
 (commit titled "L238_2"), and the lobby looks exactly as before on the
 phone. The served JPEG is byte-identical to the tested file.
 
-**Next:** the chain in `interactive.html`.
+**Built: the chain in the exhibit rooms.**
+`patch_L286_4_exhibit_chain_20260925.py`, built on gallery `a21680ab`:
+`interactive.html` and one line of `index.html`. The exhibit's top bar
+reads "Paloma's Orrery | Solar : Earth" with the room's title under it,
+read from `gallery_config.json` and the card whose live link opens the
+room; a link steps back in history when it names the gallery screen the
+visitor came from, which `index.html` records in sessionStorage when it
+opens a live card. Tested headless as a phone and a desktop; the
+maintenance run passed 16 of 16 on the patched copy.
+
+Tony ran it, offline 16 of 16 and live 2 of 2, pushed at gallery
+`42a17abe`; both pages are byte-identical to the tested files. His look,
+2026-09-26: phone "all correct", desktop "correct". The script was filed
+in the orrery's `documentation/` (committed at orrery `9f3b5afb`) rather
+than the gallery's, which is why the gallery's change list never showed
+it; it moves to the gallery's `documentation/` with the next commits.
+
+**L-286 is built**: rooms at any depth, the header and its chain, the
+tabs in the header, the side menu retired, room addresses and Back, and
+the chain in the exhibit rooms. The ledger patch at the end of this pass
+closes it, with L-283's look.
+
+**Found on the way: the exhibit's grid numbers are hard to read on the
+desktop.** Tony, 2026-09-26: "the grid tic labels are too small and
+faint to read in desktop. in the phone the grid labels are off screen.
+this was the original reason for the triad and grid label. however, on
+desktop the grid tic labels are visible, but indistinct. zooming has no
+effect on grid tic labels." Not caused by this pass: `buildSunLayout()`
+has set them to 9 px in #5a5a6a on the scene's #060a12 since gallery
+`3b97153` (2026-08-29). The frame zoom changes the axes' range, not the
+numbers' size, so zooming cannot help.
+
+Tony's screenshot of the Sun on the desktop, 2026-09-25, shows it. His
+ruling, 2026-09-26, "Confirmed as recommended": everywhere but a
+portrait phone, 12 px in the page's secondary grey #9a9a9a; the portrait
+phone unchanged.
+
+**Built: the grid numbers.** `patch_L289_grid_numbers_desktop_20260926.py`,
+built on gallery `42a17abe`, `interactive.html` only. One function,
+`axisTickFont()`, beside the page's own phone test `sunPhonePortrait()`,
+serves the Explorer's axes and the exhibit rooms'; a room re-reads it
+when the window turns. Tested on a copy as a desktop, a portrait phone
+and a sideways phone, by calling the two layout builders and the turn
+handler directly; the full rooms could not be drawn in the sandbox,
+whose network cannot reach the CDN their Python runtime loads from. The
+maintenance run passed 16 of 16 on the patched copy. Waiting for Tony's
+run and his look on the desktop.
 
 ## 4. Cards still to look at
 
@@ -2108,3 +2154,249 @@ TONY-ACTION ROLLUP for this patch:
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
 
 -- one new issue detected. the grid tic labels are too small and faint to read in desktop. in the phone the grid labels are off screen. this was the original reason for the triad and grid label. however, on desktop the grid tic labels are visible, but indistinct. zooming has no effect on grid tic labels. 
+
+====================================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L289_grid_numbers_desktop_20260926.py
+  ok  interactive.html: the page's Updated stamp
+  ok  interactive.html: the Explorer's axes take the new numbers
+  ok  interactive.html: the exhibit rooms' axes take the new numbers
+  ok  interactive.html: axisTickFont(), beside the phone test it uses
+  ok  interactive.html: a room re-reads the numbers when the window turns
+  ok  interactive.html is the file that was tested, and ASCII
+  wrote interactive.html (158546 bytes)
+
+patch applied to 1 file
+
+Stamps updated: the 'Updated' line at the top of interactive.html.
+
+WHAT TO DO NEXT, in this order:
+
+  1. Move THIS script into the GALLERY's documentation/ folder
+     (not the orrery's). It has run. -- done
+  2. Run the gallery maintenance run:
+         python gallery_maintenance_run.py
+     Expect 16 of 16 gating checkers to pass, as before.
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              2.0s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     1.7s  rewrote data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      15.6s  PASS (210 checks, 0 failures)
+  PASS Pole of date              0.2s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.1s  All 42 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing.
+  PASS Store writer suite        4.6s  All 245 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 246 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 58 link(s) compared, store
+                                    a2d6b97d161e.
+  PASS Pointer join              0.1s  Every link is accounted for: 87
+                                    link(s) against orrery de4eadc5,
+                                    24 fallback named; read check: 41
+                                    of 41 measured rows reached carry
+                                    a read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's features exactly: 4
+                                    object(s), 34 named shell(s), in
+                                    both cache files.
+  PASS Feature renderers         1.3s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.3s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.3s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.3s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.3s  === PASS: 56 hover(s) and 270
+                                    number(s) examined; 13 graded, 4
+                                    graded by line, 43 held to the
+                                    fixture ===
+  PASS Artifact 1 assembler      0.3s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: no sibling directories and
+                                    nothing in data/ the builder did
+                                    not make.
+
+======================================================================
+  16 of 16 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories and
+  last swap 2026-09-26T01:21:27.979604+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+[RECOVER] removed retained data\solar-system.prev (cleared read-only on 6 entries)
+[sweep] no sibling directories present
+[POLE] earth: pole of 2026-09-26 served (RA 0.72394, Dec 89.85020 deg); tilt 23.43816 deg
+[SWAP] the new cache is in place; every rename worked on the first try. Recorded in data/cache_swap_log.jsonl
+[warn] sun: features-only entry; no Horizons fetch
+[done] run 20260926T175215Z (nightly): 13 objects
+
+----------------------------------------------------------------------
+WHAT TO DO NEXT, before you commit anything:
+
+  1. Run the gallery maintenance run, from this same folder:
+         python gallery_maintenance_run.py
+     Every gating checker should pass. Its LAST line reads the
+     swap log back and should agree with the [SWAP] line above.
+  2. In GitHub Desktop, look at the change list. A good build
+     shows changed and added files and NO pile of deletions.
+  3. Commit and push.
+  4. After the push, check what the live site serves:
+         python gallery_maintenance_run.py --live
+
+TONY-ACTION ROLLUP for this run:
+  (do)     steps 1 to 4 above, in that order.
+----------------------------------------------------------------------
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.0s  no change to MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     0.6s  no change to
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      12.5s  PASS (210 checks, 0 failures)
+  PASS Pole of date              0.2s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.1s  All 42 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing.
+  PASS Store writer suite        3.8s  All 245 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 246 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 58 link(s) compared, store
+                                    a2d6b97d161e.
+  PASS Pointer join              0.1s  Every link is accounted for: 87
+                                    link(s) against orrery de4eadc5,
+                                    24 fallback named; read check: 41
+                                    of 41 measured rows reached carry
+                                    a read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's features exactly: 4
+                                    object(s), 34 named shell(s), in
+                                    both cache files.
+  PASS Feature renderers         0.1s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.1s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 56 hover(s) and 270
+                                    number(s) examined; 13 graded, 4
+                                    graded by line, 43 held to the
+                                    fixture ===
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: no sibling directories and
+                                    nothing in data/ the builder did
+                                    not make.
+
+======================================================================
+  16 of 16 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories and
+  last swap 2026-09-26T17:52:22.035705+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  3. In GitHub Desktop, in the gallery, the change list should show
+     interactive.html and this script under documentation/, plus
+     whatever the maintenance run rewrites as usual. Commit and push.
+
+
+     
+  4. After the push: python gallery_maintenance_run.py --live
+  5. On the desktop, after about ten minutes, reload the Sun: the
+     numbers along the box edges are larger and lighter. The same
+     in Earth and the Explorer. On the phone, held upright, nothing
+     changes.
+  6. Tell Claude the new gallery SHA and what you saw.
+
+TONY-ACTION ROLLUP for this patch:
+  (do)     steps 1 to 6 above.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
