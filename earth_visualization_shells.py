@@ -80,6 +80,13 @@ September 25, 2026 (L-322 Stage D, patch D8, Opus 5.5): Earth's
     chosen by eye (belt_thickness). The hover and the checkbox tooltip
     say what is measured and what is our rule. Earth no longer calls the
     shared create_magnetosphere_shape; the other planets still do.
+September 25, 2026 (L-322 Stage D, patch D9, Opus 5.5): the belts' rings
+    are evenly spaced, on a step that lands on both edge rows and on the
+    peak row, so the brighter ring sits at the peak's true place and no
+    gap is uneven (Tony's Mode 5 note on D8: the uneven gaps read as a
+    physical feature). The peak ring is fully opaque and drawn with larger
+    points. The hover says the belt is one continuous region and the
+    rings only mark its extent.
 Module updated: September 25, 2026 with Anthropic's Claude Opus 5.5
 """
 import numpy as np
@@ -197,6 +204,51 @@ def _whole_figures(name):
         raise ValueError("%s is not a whole number at %s figures"
                          % (name, figures))
     return "%d" % int(value)
+
+
+def _even_belt_rings(inner, peak, outer):
+    """Ring radii for one radiation belt, and which ring is the peak.
+
+    The rings are evenly spaced from the inner edge to the outer edge, on
+    the largest step that also lands exactly on the peak: the greatest
+    common divisor of the two distances, edge to peak and peak to edge,
+    taken on the rows' decimal values. At the rows as they stand, the
+    inner belt gets ten rings with the peak fifth from the inside, and the
+    outer belt nine with the peak fourth. Both peaks sit nearer the inner
+    edge than the middle, and the drawing shows that. (The rows' values
+    are not repeated here: this comment would be a second home for them.)
+
+    L-322 Stage D, patch D9 (Tony, 2026-09-25, option 2 of two: "even
+    spacing with enough rings so that the peak ring can be identified at
+    the correct radius fraction"). D8 added the peak ring on top of five
+    evenly spaced rings, so it landed beside one of them and the gaps
+    stopped being equal, which read as a physical feature.
+
+    The ring positions are the rows' own values; only the ring COUNT is a
+    rendering matter, and it follows from the rows. max_rings is a
+    rendering cap: a row typed with more decimals would make the step
+    tiny and the count huge, and this refuses rather than drawing
+    hundreds of rings.
+    """
+    from fractions import Fraction
+    max_rings = 25
+    a = Fraction(inner).limit_denominator(1000)
+    p = Fraction(peak).limit_denominator(1000)
+    b = Fraction(outer).limit_denominator(1000)
+    if not a < p < b:
+        raise ValueError("belt rows out of order: inner %g, peak %g, "
+                         "outer %g" % (inner, peak, outer))
+    low, high = p - a, b - p
+    step = Fraction(math.gcd(low.numerator * high.denominator,
+                             high.numerator * low.denominator),
+                    low.denominator * high.denominator)
+    count = int((b - a) / step) + 1
+    if count > max_rings:
+        raise ValueError("a belt from %g to %g with its peak at %g needs %d "
+                         "evenly spaced rings to put one on the peak; the "
+                         "cap is %d" % (inner, outer, peak, count, max_rings))
+    radii = [float(a + step * k) for k in range(count)]
+    return radii, int((p - a) / step)
 
 
 # L-231 (2026-09-15): the belts are drawn in Earth's equatorial plane now,
@@ -1226,8 +1278,9 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     _band_high = _declared('EARTH_VAN_ALLEN_OUTER_BAND_HIGH_L')
     belt_texts = [
         f"Inner Van Allen Belt: Region of trapped charged particles (mainly protons).<br>"
-        "The rings run across the belt from edge to edge. The brighter ring is the<br>"
-        f"flux peak, {EARTH_VAN_ALLEN_INNER_RADII:g} Earth radii from Earth's centre, about<br>"
+        "The belt is one continuous region. The rings only mark its extent: they<br>"
+        "are evenly spaced from its inner edge to its outer edge, and the brighter<br>"
+        f"ring is the flux peak, {EARTH_VAN_ALLEN_INNER_RADII:g} Earth radii from Earth's centre, about<br>"
         f"{_km_above_surface(EARTH_VAN_ALLEN_INNER_RADII, 2):,} km above the surface at the equator.<br>"
         f"The belt spans about {EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE:g} to {EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE:g} Earth radii in the geomagnetic<br>"
         f"equatorial plane -- roughly {_km_above_surface(EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE, 2):,} to {_km_above_surface(EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE, 1):,} km above the surface<br>"
@@ -1235,8 +1288,9 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
         "Source (peak): Baker et al. (2018), Space Sci. Rev. 214:17, doi:10.1007/s11214-017-0452-7.<br>"
         "Source (extent): Meredith et al. (2014), J. Geophys. Res. Space Physics 119:5328.",
         f"Outer Van Allen Belt: Region of trapped charged particles (mainly electrons).<br>"
-        "The rings run across the belt from edge to edge. The brighter ring is the<br>"
-        f"flux peak, L = {EARTH_VAN_ALLEN_OUTER_RADII:g} -- about {_km_above_surface(EARTH_VAN_ALLEN_OUTER_RADII, 2):,} km above the<br>"
+        "The belt is one continuous region. The rings only mark its extent: they<br>"
+        "are evenly spaced from its inner edge to its outer edge, and the brighter<br>"
+        f"ring is the flux peak, L = {EARTH_VAN_ALLEN_OUTER_RADII:g} -- about {_km_above_surface(EARTH_VAN_ALLEN_OUTER_RADII, 2):,} km above the<br>"
         "surface at the equator, where L equals geocentric distance in Earth radii.<br>"
         f"The belt spans about {EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE:g} to {EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE:g} Earth radii and moves with geomagnetic<br>"
         f"activity -- roughly {_km_above_surface(EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE, 1):,} to {_km_above_surface(EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE, 1):,} km above the surface<br>"
@@ -1249,11 +1303,12 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     # L-322 Stage D, patch D8 (2026-09-25): each belt is drawn across its
     # edge rows. It was a spread of 0.5 Earth radii around the peak
     # (belt_thickness), chosen by eye, and it is removed rather than
-    # promoted (A Drawing Approximation Does Not Promote). The rings run
-    # evenly from the inner edge row to the outer edge row, and one more
-    # ring sits at the peak row, drawn brighter; it comes first, so its
-    # first point carries the info marker. The ring count, the point count
-    # and the two brightnesses are rendering settings.
+    # promoted (A Drawing Approximation Does Not Promote). Since patch D9
+    # the rings are evenly spaced from the inner edge row to the outer edge
+    # row on a step that also lands on the peak row, and the peak ring is
+    # drawn brighter and larger (_even_belt_rings). The point count, the
+    # brightnesses and the sizes are rendering settings; the ring count
+    # follows from the rows.
     belt_bands = [
         (EARTH_VAN_ALLEN_INNER_RADII,
          EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE,
@@ -1262,26 +1317,35 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
          EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE,
          EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE),
     ]
+    # L-322 Stage D, patch D9: the rings are evenly spaced on a step that
+    # lands on the edges and the peak (_even_belt_rings), and the peak ring
+    # is fully opaque with larger points. At D8 it was 0.6 against 0.2 at
+    # the same size, which Tony could barely see. Rendering settings.
     belt_edge_alpha = 0.2   # the rings across the belt (the old opacity)
-    belt_peak_alpha = 0.6   # the ring at the peak
+    belt_peak_alpha = 1.0   # the ring at the peak
+    belt_edge_size = 1.5    # the old point size
+    belt_peak_size = 3.0
 
     for i, (belt_peak, belt_inner, belt_outer) in enumerate(belt_bands):
         belt_x = []
         belt_y = []
         belt_z = []
         belt_point_colors = []
+        belt_point_sizes = []
         belt_rgb = belt_colors[i].replace('rgb(', '').replace(')', '')
         
-        n_points = 80
-        n_rings = 5
+        # 48 points a ring (80 at D8, with 6 rings): with 11 and 9 rings
+        # the two belts stay near D8's size per animation frame.
+        n_points = 48
         
-        ring_radii = [belt_peak] + [
-            belt_inner + (belt_outer - belt_inner) * i_ring / (n_rings - 1)
-            for i_ring in range(n_rings)]
+        ring_radii, peak_ring = _even_belt_rings(belt_inner, belt_peak,
+                                                 belt_outer)
         for i_ring, ring_radius in enumerate(ring_radii):
             belt_radius = ring_radius * EARTH_RADIUS_AU
-            ring_alpha = belt_peak_alpha if i_ring == 0 else belt_edge_alpha
-            ring_color = 'rgba(%s, %g)' % (belt_rgb, ring_alpha)
+            is_peak = i_ring == peak_ring
+            ring_color = 'rgba(%s, %g)' % (
+                belt_rgb, belt_peak_alpha if is_peak else belt_edge_alpha)
+            ring_size = belt_peak_size if is_peak else belt_edge_size
             
             for j in range(n_points):
                 angle = (j / n_points) * 2 * np.pi
@@ -1307,6 +1371,7 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
                 belt_y.append(y)
                 belt_z.append(z)
                 belt_point_colors.append(ring_color)
+                belt_point_sizes.append(ring_size)
         
         # L-231 (Tony's ruling, 2026-09-15): into Earth's EQUATORIAL
         # plane, before the centre offset. The deciding argument is the
@@ -1334,9 +1399,9 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
                 z=belt_z,
                 mode='markers',
                 marker=dict(
-                    size=1.5,
-                    # One colour per point, so the peak ring can be
-                    # brighter than the rest (L-322 Stage D, patch D8).
+                    # One colour and one size per point, so the peak ring
+                    # stands out from the rest (L-322 Stage D, D8 and D9).
+                    size=belt_point_sizes,
                     color=belt_point_colors,
                 ),
                 name=belt_names[i],
@@ -1350,8 +1415,11 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
         # rgb(255,100,100)), red on outer blue belt (i=1,
         # rgb(100,200,255)). Inner belt is the borderline-reddish case
         # the two-standards convention exists for.
+        # L-322 Stage D, patch D9: the marker sits on the peak ring's first
+        # point; the rings are in order of radius now, not peak first.
+        marker_index = peak_ring * n_points
         traces.append(create_info_marker(
-            belt_x[0], belt_y[0], belt_z[0],
+            belt_x[marker_index], belt_y[marker_index], belt_z[marker_index],
             belt_colors[i], belt_text[0], belt_names[i],
             border_color='white' if i == 0 else 'red'
         ))

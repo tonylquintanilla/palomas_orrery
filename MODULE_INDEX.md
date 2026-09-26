@@ -12,7 +12,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 140  
-**Total Lines of Code (non-blank):** 111,163  
+**Total Lines of Code (non-blank):** 111,181  
 **Total Public Functions/Classes:** 1,251
 
 ## Classification Coverage
@@ -20,7 +20,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 **Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L322_D_8_orrery_magnetosphere_20260925.py`
+- `patch_L322_D_9_orrery_belt_rings_20260925.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
@@ -28,7 +28,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 **Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L322_D_8_orrery_magnetosphere_20260925.py`
+- `patch_L322_D_9_orrery_belt_rings_20260925.py`
 
 
 ---
@@ -82,7 +82,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `asteroid_belt_visualization_shells.py` | Asteroid Belt Visualization Module Functions for creating visualizations of asteroid belt structures in 3D plots. Includes Main Belt, Hildas, Trojans, and Greeks. Also includes helper functions for dynamic Trojan positioning based on Jupiter's location. (403 lines) |
 | `comet_visualization_shells.py` | Comet visual components for 3D orrery plots. (1,878 lines) |
-| `earth_visualization_shells.py` | Earth interior and orbital shell traces. (1,473 lines) |
+| `earth_visualization_shells.py` | Earth interior and orbital shell traces. (1,536 lines) |
 | `eris_visualization_shells.py` | Eris interior and boundary shell traces. (482 lines) |
 | `jupiter_visualization_shells.py` | Jupiter interior, ring, and magnetosphere shell traces. (897 lines) |
 | `mars_visualization_shells.py` | Mars interior and remnant field shell traces. (884 lines) |
@@ -212,7 +212,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `food_insecurity_generator.py` | IPC acute food-insecurity KMZ layer (Sudan, current period). (702 lines) |
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
-| `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (125 lines) |
+| `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (129 lines) |
 | `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (973 lines) |
 | `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (551 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
@@ -242,7 +242,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L322_D_8_orrery_magnetosphere_20260925.py` | - L-322 Stage D, patch D8. (227 lines) |
+| `patch_L322_D_9_orrery_belt_rings_20260925.py` | - L-322 Stage D, patch D9. (178 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |

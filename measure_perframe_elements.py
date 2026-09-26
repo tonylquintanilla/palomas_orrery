@@ -29,6 +29,10 @@ Role: devtool
 Domain: dev_tools
 
 Module updated: June 2026 with Anthropic's Claude Fable 5
+Module updated: September 25, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D, patch D9: Earth's belts now draw a ring count that
+follows from their rows, so the reduced variant halves the points per
+ring, 48 -> 24, and no longer patches a ring count; the row labels say so.)
 """
 
 import importlib.util
@@ -57,16 +61,16 @@ def row(name, traces):
 
 def patched_earth_module():
     """Import a throwaway copy of earth_visualization_shells with reduced
-    density: belts 80x5 -> 40x3; the bow-shock call gains n_phi=15,
+    density: belts 48 -> 24 points a ring (their ring count follows from
+    the belt rows since L-322 Stage D, patch D9, and is not patched); the
+    bow-shock call gains n_phi=15,
     n_theta=15. The envelope (create_magnetosphere_shape, a shared producer
     with internal density) is left as-is -- its parameter promotion is the
     one remaining producer change of the resolution sweep."""
     with open('earth_visualization_shells.py', 'rb') as f:
         src = f.read()
-    assert src.count(b'n_points = 80') == 1, 'belt n_points literal moved'
-    assert src.count(b'n_rings = 5') == 1, 'belt n_rings literal moved'
-    patched = (src.replace(b'n_points = 80', b'n_points = 40')
-                  .replace(b'n_rings = 5', b'n_rings = 3')
+    assert src.count(b'n_points = 48') == 1, 'belt n_points literal moved'
+    patched = (src.replace(b'n_points = 48', b'n_points = 24')
                   .replace(b'width=bow_shock_width, eccentricity=1.05',
                            b'width=bow_shock_width, eccentricity=1.05, '
                            b'n_phi=15, n_theta=15'))
@@ -125,7 +129,7 @@ def main():
         create_mercury_sodium_tail(center_position=origin, sun_position=sunpos))
 
     print('MEASURED FOLLOW-ON (reduced-resolution shells; gate 5a):')
-    row('Earth magnetosphere FULL (belts 80x5, shock 30x30)',
+    row('Earth magnetosphere FULL (belts 48/ring, shock 30x30)',
         create_earth_magnetosphere_shell(center_position=origin,
                                          sun_position=sunpos))
     for n in (30, 20, 15):
@@ -135,7 +139,7 @@ def main():
         row('Bow shock conic alone (%dx%d, %d pts)' % (n, n, len(x)),
             [go.Scatter3d(x=x, y=y, z=z, mode='lines')])
     mod = patched_earth_module()
-    row('Earth magnetosphere REDUCED (belts 40x3, shock 15x15)',
+    row('Earth magnetosphere REDUCED (belts 24/ring, shock 15x15)',
         mod.create_earth_magnetosphere_shell(center_position=origin,
                                              sun_position=sunpos))
 
