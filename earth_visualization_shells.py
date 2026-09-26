@@ -67,12 +67,27 @@ September 22, 2026 (L-322 Stage C2, Opus 5): the four quotes of the two
     and declare three. The outer belt's typed "L = 4 to 5" band prints
     from the two band rows now in the store. Three comments that typed a
     dipole tilt in degrees now name the store row instead.
-Module updated: September 22, 2026 with Anthropic's Claude Opus 5
+September 25, 2026 (L-322 Stage D, patch D8, Opus 5.5): Earth's
+    magnetosphere is drawn from constants_new.py. The magnetopause is
+    Shue's own surface, stopped at the store's cut angle, where it was an
+    ellipsoid with widths chosen by eye; the tail starts where that
+    surface stops, widens in a straight line to where Slavin et al. (1985)
+    found it stops widening, keeps the width they measured, and ends
+    where ISEE-3 stopped observing it. Five numbers chosen by eye are
+    gone: the 12 and 10 widths and the tail's 100, 15 and 25. Each
+    radiation belt is drawn across its inner and outer edge rows, with a
+    brighter ring at the peak, where it was a 0.5 Earth-radius spread
+    chosen by eye (belt_thickness). The hover and the checkbox tooltip
+    say what is measured and what is our rule. Earth no longer calls the
+    shared create_magnetosphere_shape; the other planets still do.
+Module updated: September 25, 2026 with Anthropic's Claude Opus 5.5
 """
 import numpy as np
 import math
 import plotly.graph_objs as go
-from planet_visualization_utilities import (EARTH_RADIUS_AU, create_sphere_points, create_magnetosphere_shape, create_bow_shock_shape)
+# L-322 Stage D, patch D8: create_magnetosphere_shape is no longer
+# imported; Earth draws Shue's surface itself (_earth_magnetosphere_points).
+from planet_visualization_utilities import (EARTH_RADIUS_AU, create_sphere_points, create_bow_shock_shape)
 from constants_new import (
     KM_PER_AU,  # L-178: direct km<->AU conversion, no shadow constant
     # L-249: Earth's interior boundaries have exactly one home. The _KM
@@ -93,6 +108,15 @@ from constants_new import (
     EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE, EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE,
     EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE, EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE,
     EARTH_MAGNETOTAIL_OBSERVED_RADII,
+    # L-322 Stage D, patch D8: the magnetopause's shape and the tail's.
+    # Shue's flaring coefficients and the declared north-south field give
+    # the surface; the cut angle stops it; the four tail rows build the
+    # tail.
+    EARTH_MAGNETOPAUSE_SHUE_A6, EARTH_MAGNETOPAUSE_SHUE_A7_PER_NT,
+    EARTH_MAGNETOPAUSE_SHUE_A8, EARTH_SOLAR_WIND_BZ_NT,
+    EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG,
+    EARTH_MAGNETOTAIL_FLARE_END_RADII, EARTH_MAGNETOTAIL_DIAMETER_RADII,
+    EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII, EARTH_MAGNETOTAIL_DRAWN_END_RADII,
     # L-322 Stage C2: the band the outer belt's drawn peak is the midpoint
     # of. The hover typed it as literal text until then.
     EARTH_VAN_ALLEN_OUTER_BAND_LOW_L, EARTH_VAN_ALLEN_OUTER_BAND_HIGH_L,
@@ -109,7 +133,7 @@ from constants_new import (
 )
 from orrery_rendering import rotate_to_sunward, create_info_marker
 import constants_new as _store
-from constants_rows import figures_of
+from constants_rows import figures_of, uncertainty_of
 
 
 def _declared(name):
@@ -125,6 +149,56 @@ def _declared(name):
     by the declared count is the follow-on recorded on L-322, not this.
     """
     return "%.*g" % (figures_of(name), getattr(_store, name))
+
+
+def _with_uncertainty(name):
+    """A row's value and its stated uncertainty as text, for a hover:
+    ("120", "10") for EARTH_MAGNETOTAIL_FLARE_END_RADII.
+
+    The value ends in the same decimal place as the uncertainty, which is
+    how the reference page on significant figures says a value is printed
+    with its uncertainty beside it. That place must also be the one the
+    row's declared figure count gives, or the row and the hover would say
+    different things; a mismatch raises instead of printing either one
+    (provenance-discipline Rule 7: a display prints the declared count).
+    L-322 Stage D, patch D8.
+    """
+    value = getattr(_store, name)
+    stated = uncertainty_of(name)
+    if stated is None:
+        raise ValueError("%s states no uncertainty" % name)
+    number, literal = stated
+    if "." in literal:
+        place = -len(literal.split(".", 1)[1])
+    else:
+        # A whole number's trailing zeros are placeholders: "10" states
+        # the tens place, as the figures checker reads it.
+        place = len(literal) - len(literal.rstrip("0"))
+    figures = figures_of(name)
+    count_place = int(math.floor(math.log10(abs(value)))) - figures + 1
+    if count_place != place:
+        raise ValueError(
+            "%s declares %s figures, which end at 10^%d, but its "
+            "uncertainty %s ends at 10^%d" % (name, figures, count_place,
+                                             literal, place))
+    if place >= 0:
+        return "%.0f" % round(value, -place), literal
+    return "%.*f" % (-place, value), literal
+
+
+def _whole_figures(name):
+    """A row at its declared count, written out in full rather than in
+    exponent form: 220 at two figures prints "220", where percent-g would
+    print "2.2e+02". For whole-number rows only. L-322 Stage D, patch D8.
+    """
+    figures = figures_of(name)
+    value = float("%.*g" % (figures, getattr(_store, name)))
+    if value != int(value):
+        raise ValueError("%s is not a whole number at %s figures"
+                         % (name, figures))
+    return "%d" % int(value)
+
+
 # L-231 (2026-09-15): the belts are drawn in Earth's equatorial plane now,
 # using the same call Saturn's belt builder has always used.
 from idealized_orbits import orient_to_planet_pole
@@ -806,9 +880,13 @@ def create_earth_upper_atmosphere_shell(center_position=(0, 0, 0)):
 # Source+: each row carries its own citation and access route:
 # Source+: EARTH_MAGNETOPAUSE_STANDOFF_RADII (Shue et al. 1998),
 # Source+: EARTH_BOW_SHOCK_STANDOFF_RADII (Jelinek et al. 2012),
-# Source+: EARTH_MAGNETOTAIL_OBSERVED_RADII (Slavin et al. 1983), and the
+# Source+: EARTH_MAGNETOTAIL_OBSERVED_RADII (Slavin et al. 1983),
+# Source+: EARTH_MAGNETOTAIL_FLARE_END_RADII and
+# Source+: EARTH_MAGNETOTAIL_DIAMETER_RADII (Slavin et al. 1985), and the
 # Source+: four EARTH_VAN_ALLEN_*_EDGE rows (Meredith et al. 2014; Li, Tu
-# Source+: et al. 2024).
+# Source+: et al. 2024). The tail's drawn shape follows the rules declared
+# Source+: on EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII and
+# Source+: EARTH_MAGNETOTAIL_DRAWN_END_RADII.
 # Note: the two altitude pairs here were typed until 2026-09-14 and rested
 # Note+: on a magazine article, a news article and a university outreach
 # Note+: page. They are arithmetic on the belt rows now, which is why the
@@ -821,9 +899,13 @@ earth_magnetosphere_info = (
             "wind and turns aside many of the energetic charged particles that reach Earth\n"
             "from the Sun and from beyond the solar system.\n\n"
 
-            f"Magnetotail: observed to at least {EARTH_MAGNETOTAIL_OBSERVED_RADII:g} Earth radii, which is how\n"
-            "far the spacecraft went rather than where the tail ends. The tail drawn\n"
-            "here is shorter, because it is a picture and not a measurement.\n\n"
+            f"Magnetotail: spacecraft found it stops widening about {_with_uncertainty('EARTH_MAGNETOTAIL_FLARE_END_RADII')[0]} Earth radii\n"
+            f"behind Earth, plus or minus {_with_uncertainty('EARTH_MAGNETOTAIL_FLARE_END_RADII')[1]}, and is about {_with_uncertainty('EARTH_MAGNETOTAIL_DIAMETER_RADII')[0]} Earth radii wide beyond\n"
+            f"there, plus or minus {_with_uncertainty('EARTH_MAGNETOTAIL_DIAMETER_RADII')[1]}. It is drawn widening in a straight line to that\n"
+            "point, which is our choice, and drawn round, which is close to its shape\n"
+            "under average conditions.\n"
+            f"The drawing stops at {_whole_figures('EARTH_MAGNETOTAIL_OBSERVED_RADII')} Earth radii, which is how far the spacecraft\n"
+            "went rather than where the tail ends.\n\n"
 
             "Bow Shock: the boundary where the supersonic solar wind first slows\n"
             f"against Earth's magnetic field, about {_declared('EARTH_BOW_SHOCK_STANDOFF_RADII')} Earth radii upstream on the\n"
@@ -842,53 +924,146 @@ earth_magnetosphere_info = (
             "equator. Every kilometre figure here is converted from Earth radii."
 )
 
+def _shue_flaring():
+    """Shue et al. (1998) eq. 11, the flaring exponent at the declared
+    solar wind: alpha = (a6 + a7 Bz)(1 + a8 ln Dp).
+
+    Evaluated here from the coefficient rows, not stored: nothing prints
+    it, and the gallery evaluates the same expression from the same served
+    rows. At the declared conditions it is 0.5896, the figure the cut
+    angle's row quotes.
+    """
+    return ((EARTH_MAGNETOPAUSE_SHUE_A6
+             + EARTH_MAGNETOPAUSE_SHUE_A7_PER_NT * EARTH_SOLAR_WIND_BZ_NT)
+            * (1.0 + EARTH_MAGNETOPAUSE_SHUE_A8
+               * math.log(EARTH_SOLAR_WIND_PRESSURE_NPA)))
+
+
+def _shue_radius(theta_rad, alpha):
+    """Shue et al. (1998) eq. 10, in Earth radii, at angle theta from the
+    nose: r = r0 * (2 / (1 + cos theta)) ** alpha."""
+    return (EARTH_MAGNETOPAUSE_STANDOFF_RADII
+            * (2.0 / (1.0 + math.cos(theta_rad))) ** alpha)
+
+
+def _earth_magnetosphere_points():
+    """Earth's magnetopause and magnetotail as points, in Earth radii, in
+    the default frame: -X toward the Sun, +X down the tail, Z up.
+
+    Returns (x, y, z, marker), where marker is the info marker's
+    (x, y, z) in the same frame.
+
+    L-322 Stage D, patch D8. Two pieces, one surface of revolution about
+    the Sun line.
+
+    THE MAGNETOPAUSE is Shue's own surface, from the nose to
+    EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG, where the paper stops plotting its
+    model. It was an ellipsoid with widths of 12 and 10 Earth radii chosen
+    by eye, which the hover itself called "an approximation of the
+    shape, not the model's own".
+
+    THE TAIL starts where the surface stops. Its starting radius and its
+    starting distance are computed here from Shue's surface at the cut,
+    about 20.1 and 11.6 Earth radii at the declared solar wind; they are
+    not typed and not stored. From there its radius grows in a straight
+    line to EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII at
+    EARTH_MAGNETOTAIL_FLARE_END_RADII behind Earth, then stays at that
+    radius to EARTH_MAGNETOTAIL_DRAWN_END_RADII. It is round. Those three
+    rules are declared on their rows in constants_new.py with their
+    reasons. The tail was 100 Earth radii long, 15 wide at its base and
+    25 at its end, all chosen by eye.
+    """
+    # Rendering settings. They change how the drawing looks, not where
+    # anything is, so they stay here in the drawing code
+    # (provenance-discipline 2.18, Three Kinds of Drawing Number), and
+    # inside the function, as the belts' n_points and n_rings are: at
+    # module level the provenance scanner cannot tell them from claims.
+    n_theta = 12          # rows of points from the nose to the cut
+    n_phi = 24            # points round each row and each tail ring
+    n_tail_rings = 20     # rings from the cut to the end of the drawing
+    # The info marker sits on the surface 60 degrees from the nose, rolled
+    # a quarter turn, so it is off the Sun line where the Sun direction
+    # arrow runs. The gallery's Earth room puts its magnetopause marker
+    # there too.
+    marker_theta_deg = 60.0
+    marker_roll_deg = 90.0
+
+    alpha = _shue_flaring()
+    cut = math.radians(EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG)
+    x, y, z = [], [], []
+
+    def ring(x_value, radius):
+        for j in range(n_phi):
+            phi = 2.0 * math.pi * j / n_phi
+            x.append(x_value)
+            y.append(radius * math.cos(phi))
+            z.append(radius * math.sin(phi))
+
+    # The nose, then rings out to the cut.
+    x.append(-EARTH_MAGNETOPAUSE_STANDOFF_RADII)
+    y.append(0.0)
+    z.append(0.0)
+    for i in range(1, n_theta + 1):
+        theta = cut * i / n_theta
+        r = _shue_radius(theta, alpha)
+        ring(-r * math.cos(theta), r * math.sin(theta))
+
+    # The tail, from the cut (its first ring is the surface's last, so it
+    # is not drawn twice).
+    r_cut = _shue_radius(cut, alpha)
+    tail_start_x = -r_cut * math.cos(cut)
+    tail_start_radius = r_cut * math.sin(cut)
+    flare_end = EARTH_MAGNETOTAIL_FLARE_END_RADII
+    tail_radius = EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII
+    tail_end = EARTH_MAGNETOTAIL_DRAWN_END_RADII
+    if not tail_start_x < flare_end < tail_end:
+        raise ValueError(
+            "Earth's magnetotail rows are out of order: the surface stops "
+            "%.1f Earth radii behind Earth, the widening ends at %g and the "
+            "drawing at %g" % (tail_start_x, flare_end, tail_end))
+    for k in range(1, n_tail_rings + 1):
+        tail_x = tail_start_x + (tail_end - tail_start_x) * k / n_tail_rings
+        if tail_x < flare_end:
+            radius = (tail_start_radius + (tail_radius - tail_start_radius)
+                      * (tail_x - tail_start_x) / (flare_end - tail_start_x))
+        else:
+            radius = tail_radius
+        ring(tail_x, radius)
+
+    theta = math.radians(marker_theta_deg)
+    roll = math.radians(marker_roll_deg)
+    r = _shue_radius(theta, alpha)
+    rho = r * math.sin(theta)
+    marker = (-r * math.cos(theta), rho * math.cos(roll), rho * math.sin(roll))
+    return x, y, z, marker
+
+
 def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0, 0, 0)):
 
-    """Creates Earth's magnetosphere."""
-    traces = []
-    
-    # Parameters for magnetosphere components (in Earth radii)
-    params = {
-        # Compressed sunward side
-        'sunward_distance': EARTH_MAGNETOPAUSE_STANDOFF_RADII,  # L-291: store, Shue et al. 1998
-        
-        # Equatorial extension (wider than polar)
-        'equatorial_radius': 12,
-        'polar_radius': 10,
-        
-        # Magnetotail parameters
-        'tail_length': 100,  # Length of visible magnetotail
-        'tail_base_radius': 15,  # Radius at the base of the tail
-        'tail_end_radius': 25,  # Radius at the end of the tail
-        
-        # Radiation belts
-        'inner_belt_distance': EARTH_VAN_ALLEN_INNER_RADII,  # L-291: store, flux peak
-        'outer_belt_distance': EARTH_VAN_ALLEN_OUTER_RADII,  # L-291: store, flux peak
-        'belt_thickness': 0.5,
-    }
-    
-    # L-305 item 7: the DRAWN tail length, read before params are scaled to
-    # AU so the hover can quote the drawing parameter from where it is drawn
-    # rather than typing it. It stays a local read of the params dict -- a
-    # drawing choice is not a store row (A Drawing Approximation Does Not
-    # Promote), and hoisting it to module level would make it a claim-shaped
-    # constant with no citation, which is a Tier-1 finding the scanner is
-    # right to raise. The OBSERVED extent is the store row.
-    tail_length_radii = params['tail_length']
+    """Creates Earth's magnetosphere: the magnetopause and its tail, the
+    bow shock, and the two radiation belts, as four traces each with its
+    info marker.
 
-    # Scale everything by Earth's radius in AU
-    for key in params:
-        params[key] *= EARTH_RADIUS_AU
-    
-    # Create magnetosphere main shape (generated with -X as sunward)
-    x, y, z = create_magnetosphere_shape(params)
-    
+    L-322 Stage D, patch D8 (2026-09-25): the magnetopause is Shue's own
+    surface and the tail is built from Slavin et al. (1985), both from
+    constants_new.py; see _earth_magnetosphere_points(). The belts are
+    drawn across their served edges.
+    """
+    traces = []
+
     # Unpack center position
     center_x, center_y, center_z = center_position
-    
-    # 1. Add the main magnetosphere structure
-    # Rotate to actual sunward direction, then offset to center position
-    x, y, z = np.array(x), np.array(y), np.array(z)
+
+    # 1. The magnetopause and its tail, generated in Earth radii with -X
+    # sunward, then scaled to AU.
+    x, y, z, marker = _earth_magnetosphere_points()
+    x = np.array(x) * EARTH_RADIUS_AU
+    y = np.array(y) * EARTH_RADIUS_AU
+    z = np.array(z) * EARTH_RADIUS_AU
+    marker_x = np.array([marker[0]]) * EARTH_RADIUS_AU
+    marker_y = np.array([marker[1]]) * EARTH_RADIUS_AU
+    marker_z = np.array([marker[2]]) * EARTH_RADIUS_AU
+    # Rotate to the actual sunward direction, then offset to the centre.
     # Phase D2: sun_position. No magnetic tilt is applied here; see the
     # L-305 note below. (This comment said the dipole was tilted ~11 deg
     # until L-322 C2; that figure was uncited and the code dropped it.)
@@ -903,10 +1078,18 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
         # coefficients. The dipole cone is where Earth's tilt is shown.
         sun_position=sun_position,
     )
+    marker_x, marker_y, marker_z = rotate_to_sunward(
+        marker_x, marker_y, marker_z, center_position=center_position,
+        sun_position=sun_position,
+    )
     x = x + center_x
     y = y + center_y
     z = z + center_z
-    
+
+    flare_value, flare_unc = _with_uncertainty('EARTH_MAGNETOTAIL_FLARE_END_RADII')
+    width_value, width_unc = _with_uncertainty('EARTH_MAGNETOTAIL_DIAMETER_RADII')
+    observed = _whole_figures('EARTH_MAGNETOTAIL_OBSERVED_RADII')
+
     magnetosphere_text = ["Earth: Magnetosphere<br><br>"
                  f"Earth's magnetosphere reaches about {_declared('EARTH_MAGNETOPAUSE_STANDOFF_RADII')} Earth radii on the Sun-facing<br>"
                  f"side at a nominal solar wind pressure of {EARTH_SOLAR_WIND_PRESSURE_NPA:g} nPa. It stretches into a<br>"
@@ -916,16 +1099,29 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
                  f"anyone measured. Real crossings of the magnetopause scatter about the<br>"
                  f"fitted surface by {EARTH_MAGNETOPAUSE_SHUE_SCATTER_RADII:g} Earth radii, and the boundary itself moves in<br>"
                  "and out as the solar wind pressure changes.<br><br>"
-                 f"The tail is DRAWN to {tail_length_radii:g} Earth radii. It has been OBSERVED to at<br>"
-                 f"least {EARTH_MAGNETOTAIL_OBSERVED_RADII:g} Earth radii, which is how far the spacecraft went rather<br>"
-                 "than where the tail ends.<br><br>"
-                 "The surface drawn through that nose is an approximation of the shape,<br>"
-                 "not the model's own. A second fit, Jelinek et al. (2012), puts the nose<br>"
+                 "The Sun-facing surface is the model's own shape, drawn only as far round<br>"
+                 "as the paper plots it. A second fit, Jelinek et al. (2012), puts the nose<br>"
                  "about an Earth radius farther out, which is inside the scatter above.<br><br>"
+                 f"Spacecraft found that the tail stops widening about {flare_value} Earth radii<br>"
+                 f"behind Earth, plus or minus {flare_unc}, and that beyond there it is about {width_value}<br>"
+                 f"Earth radii wide, plus or minus {width_unc}. The tail is drawn widening in a<br>"
+                 f"straight line from where the surface stops out to {flare_value} Earth radii, then<br>"
+                 "at a constant width. The straight line is our choice; the measurements<br>"
+                 "give only its two ends.<br><br>"
+                 f"The drawing stops at {observed} Earth radii, which is how far the spacecraft<br>"
+                 "went, not where the tail ends.<br><br>"
+                 "The tail is drawn round. The real tail is often flattened, in a direction<br>"
+                 "set by the solar wind's own magnetic field, which keeps changing. Under<br>"
+                 "average conditions, measurements far down the tail find it about as tall<br>"
+                 "as it is wide.<br><br>"
                  "Source (standoff): Shue et al. (1998), J. Geophys. Res. 103:17691.<br>"
                  "Source (second fit): Jelinek et al. (2012), J. Geophys. Res. 117:A05208.<br>"
-                 "Source (tail): Slavin et al. (1983), Geophys. Res. Lett. 10:973 -- ISEE-3."]
-    
+                 "Source (tail width, end of widening): Slavin et al. (1985),<br>"
+                 "J. Geophys. Res. 90:10875 -- ISEE-3.<br>"
+                 "Source (how far observed): Slavin et al. (1983), Geophys. Res. Lett. 10:973.<br>"
+                 "Source (tail shape): Sibeck and Lin (2014), doi:10.1002/2013JA019471;<br>"
+                 "Maezawa et al. (1997), Adv. Space Res. 20:949 -- GEOTAIL."]
+
     magnetosphere_customdata = ['Earth: Magnetosphere']
 
     traces.append(
@@ -943,12 +1139,15 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
             showlegend=True
         )
     )
-    # Info marker at first point on magnetosphere structure
+    # Info marker on the surface, off the Sun line (see
+    # _earth_magnetosphere_points). It was the first point of the old shape,
+    # the nose, which sits on the Sun direction arrow.
     traces.append(create_info_marker(
-        x[0], y[0], z[0],
+        marker_x[0] + center_x, marker_y[0] + center_y, marker_z[0] + center_z,
         'rgb(180, 180, 255)', magnetosphere_text[0], 'Earth: Magnetosphere'
     ))
-    
+
+
     # 2. Create and add bow shock
     # L-291: was a typed 15 R_E (textbook) with a comment conceding the
     # measured 11-14. L-305: the midpoint is retired; the store now holds
@@ -1027,7 +1226,8 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     _band_high = _declared('EARTH_VAN_ALLEN_OUTER_BAND_HIGH_L')
     belt_texts = [
         f"Inner Van Allen Belt: Region of trapped charged particles (mainly protons).<br>"
-        f"Drawn at the flux peak, {EARTH_VAN_ALLEN_INNER_RADII:g} Earth radii from Earth's centre, about<br>"
+        "The rings run across the belt from edge to edge. The brighter ring is the<br>"
+        f"flux peak, {EARTH_VAN_ALLEN_INNER_RADII:g} Earth radii from Earth's centre, about<br>"
         f"{_km_above_surface(EARTH_VAN_ALLEN_INNER_RADII, 2):,} km above the surface at the equator.<br>"
         f"The belt spans about {EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE:g} to {EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE:g} Earth radii in the geomagnetic<br>"
         f"equatorial plane -- roughly {_km_above_surface(EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE, 2):,} to {_km_above_surface(EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE, 1):,} km above the surface<br>"
@@ -1035,7 +1235,8 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
         "Source (peak): Baker et al. (2018), Space Sci. Rev. 214:17, doi:10.1007/s11214-017-0452-7.<br>"
         "Source (extent): Meredith et al. (2014), J. Geophys. Res. Space Physics 119:5328.",
         f"Outer Van Allen Belt: Region of trapped charged particles (mainly electrons).<br>"
-        f"Drawn at the flux peak, L = {EARTH_VAN_ALLEN_OUTER_RADII:g} -- about {_km_above_surface(EARTH_VAN_ALLEN_OUTER_RADII, 2):,} km above the<br>"
+        "The rings run across the belt from edge to edge. The brighter ring is the<br>"
+        f"flux peak, L = {EARTH_VAN_ALLEN_OUTER_RADII:g} -- about {_km_above_surface(EARTH_VAN_ALLEN_OUTER_RADII, 2):,} km above the<br>"
         "surface at the equator, where L equals geocentric distance in Earth radii.<br>"
         f"The belt spans about {EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE:g} to {EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE:g} Earth radii and moves with geomagnetic<br>"
         f"activity -- roughly {_km_above_surface(EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE, 1):,} to {_km_above_surface(EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE, 1):,} km above the surface<br>"
@@ -1045,23 +1246,42 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
         "Source (extent): Meredith et al. (2014); Li, Tu et al. (2024), doi:10.1029/2023JA032171."
     ]
     
-    belt_distances = [
-        params['inner_belt_distance'],
-        params['outer_belt_distance']
+    # L-322 Stage D, patch D8 (2026-09-25): each belt is drawn across its
+    # edge rows. It was a spread of 0.5 Earth radii around the peak
+    # (belt_thickness), chosen by eye, and it is removed rather than
+    # promoted (A Drawing Approximation Does Not Promote). The rings run
+    # evenly from the inner edge row to the outer edge row, and one more
+    # ring sits at the peak row, drawn brighter; it comes first, so its
+    # first point carries the info marker. The ring count, the point count
+    # and the two brightnesses are rendering settings.
+    belt_bands = [
+        (EARTH_VAN_ALLEN_INNER_RADII,
+         EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE,
+         EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE),
+        (EARTH_VAN_ALLEN_OUTER_RADII,
+         EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE,
+         EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE),
     ]
-    
-    for i, belt_distance in enumerate(belt_distances):
+    belt_edge_alpha = 0.2   # the rings across the belt (the old opacity)
+    belt_peak_alpha = 0.6   # the ring at the peak
+
+    for i, (belt_peak, belt_inner, belt_outer) in enumerate(belt_bands):
         belt_x = []
         belt_y = []
         belt_z = []
+        belt_point_colors = []
+        belt_rgb = belt_colors[i].replace('rgb(', '').replace(')', '')
         
         n_points = 80
         n_rings = 5
         
-        for i_ring in range(n_rings):
-            # Vary the radius slightly to create thickness
-            radius_offset = (i_ring / (n_rings-1) - 0.5) * params['belt_thickness']
-            belt_radius = belt_distance + radius_offset
+        ring_radii = [belt_peak] + [
+            belt_inner + (belt_outer - belt_inner) * i_ring / (n_rings - 1)
+            for i_ring in range(n_rings)]
+        for i_ring, ring_radius in enumerate(ring_radii):
+            belt_radius = ring_radius * EARTH_RADIUS_AU
+            ring_alpha = belt_peak_alpha if i_ring == 0 else belt_edge_alpha
+            ring_color = 'rgba(%s, %g)' % (belt_rgb, ring_alpha)
             
             for j in range(n_points):
                 angle = (j / n_points) * 2 * np.pi
@@ -1086,6 +1306,7 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
                 belt_x.append(x)
                 belt_y.append(y)
                 belt_z.append(z)
+                belt_point_colors.append(ring_color)
         
         # L-231 (Tony's ruling, 2026-09-15): into Earth's EQUATORIAL
         # plane, before the centre offset. The deciding argument is the
@@ -1114,8 +1335,9 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
                 mode='markers',
                 marker=dict(
                     size=1.5,
-                    color=belt_colors[i],
-                    opacity=0.2
+                    # One colour per point, so the peak ring can be
+                    # brighter than the rest (L-322 Stage D, patch D8).
+                    color=belt_point_colors,
                 ),
                 name=belt_names[i],
                 legendgroup=belt_names[i],

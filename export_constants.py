@@ -44,6 +44,11 @@ One JSON file, data/constants_export.json:
                               gallery's read check walks these, so a
                               drawn row's measured sources are examined
                               through every derived row between them
+                     uncertainty  the stated uncertainty from the
+                              "# Figures:" line's field, as the text the
+                              row writes ("10", "0.13"), or null when the
+                              row states none (schema 4). A display prints
+                              it beside the value, as written
     not_exported   every row that is NOT in rows, by name, with the reason
 
 ROUNDING HAPPENS HERE, AND ONLY HERE
@@ -102,6 +107,10 @@ the store rather than keeping its own copy. SCHEMA moves to 2.)
 Module updated: September 22, 2026 with Anthropic's Claude Opus 5
 (L-322 Stage C2: every exported row also carries "read" and "inputs",
 which the gallery's read check needs. SCHEMA moves to 3.)
+Module updated: September 25, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D, patch D8: every exported row also carries
+"uncertainty", so the gallery can print Earth's magnetotail rows with
+their stated uncertainties as the orrery does. SCHEMA moves to 4.)
 """
 
 import json
@@ -113,7 +122,7 @@ import constants_rows
 from constants_tokens import RETIRED_TOKENS, TOKENS
 
 EXPORT_PATH = os.path.join("data", "constants_export.json")
-SCHEMA = 3
+SCHEMA = 4
 
 
 def round_to(value, figures):
@@ -223,6 +232,7 @@ def build_export(project_dir, tokens=None, retired=None):
             "derived": row.is_derived,
             "read": list(row.read_text),
             "inputs": list(row.inputs),
+            "uncertainty": row.uncertainty,
         }
 
     if failures:

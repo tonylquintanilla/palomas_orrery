@@ -101,6 +101,14 @@ date cannot be fetched; the frame's defining obliquity is stored in
 arcseconds, the form Horizons prints, and is never Earth's tilt; and the
 planet_poles dict moves here from idealized_orbits.py, with its false
 cross-check sentence removed)
+Module updated: September 25, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D, patch D8: four magnetotail rows. The end of flaring and
+the tail's width are measured, from Slavin et al. (1985) with their
+stated uncertainties; the drawn radius and the drawn end are declared,
+and carry the three rules the orrery's tail drawing adds -- round, a
+straight line from Shue's cut to the end of flaring, and a stop at the
+observed reach. They replace five numbers chosen by eye in
+earth_visualization_shells.py)
 """
 
 import math
@@ -1491,11 +1499,125 @@ EARTH_MAGNETOTAIL_OBSERVED_RADII = 220.0
 # Note+: tail-ASSOCIATED phenomena near 3,100 R_E, read by later work as
 # Note+: signatures disconnected from Earth rather than a tail. Abstract
 # Note+: open, https://ntrs.nasa.gov/citations/19790061874
-# Note+: The DRAWN tail length is 100 R_E, a drawing parameter at
-# Note+: earth_visualization_shells.py line 765, and it is NOT promoted here
-# Note+: (A Drawing Approximation Does Not Promote). It sits inside the
-# Note+: coherent range this row records.
+# Note+: The orrery's tail drawing ends at this row, through
+# Note+: EARTH_MAGNETOTAIL_DRAWN_END_RADII below, since L-322 Stage D
+# Note+: (2026-09-25). Until then it ended at a typed 100 R_E chosen by eye,
+# Note+: which was removed rather than promoted (A Drawing Approximation
+# Note+: Does Not Promote).
+# Note+: This row's 100-120 R_E for the end of flaring is superseded as a
+# Note+: value by EARTH_MAGNETOTAIL_FLARE_END_RADII, the same mission's
+# Note+: later average with a stated uncertainty (Tony, 2026-09-25). This
+# Note+: row keeps only the reach.
 # Record: documentation/worksheets/L321_worksheet_1_magnetopause_fable_high_recheck_20260913.md
+
+# --- the magnetotail's shape, L-322 Stage D (2026-09-25) -------------------
+# The orrery drew the tail from five numbers chosen by eye. These rows
+# replace them: two measured sizes from Slavin et al. (1985) and two
+# declared rows holding the three rules the drawing adds. The tail's
+# starting radius is not a row: the drawing computes it from Shue's
+# surface at EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG, where the surface stops.
+
+EARTH_MAGNETOTAIL_FLARE_END_RADII = 120.0
+# Unit: r_earth
+# Status: measured V_SOURCED 2026-09-25 -- abstract, open
+# Figures: 2 -- uncertainty 10 R_E. The abstract prints 120 +/- 10 R_E, so the
+# Figures+: last significant digit is the tens place and the trailing zero
+# Figures+: is not significant.
+# Read: abstract, the Wiley abstract page of Slavin et al. (1985) as a web
+# Read+: search returned it (the page blocks a direct fetch), 2026-09-25,
+# Read+: Claude Opus 5.5
+# Source: Slavin, J. A., Smith, E. J., Sibeck, D. G., Baker, D. N.,
+# Source+: Zwickl, R. D. and Akasofu, S.-I. (1985), "An ISEE 3 study of
+# Source+: average and substorm conditions in the distant magnetotail",
+# Source+: J. Geophys. Res. 90(A11), 10875-10895,
+# Source+: doi:10.1029/JA090iA11p10875 -- abstract: flaring ceases on
+# Source+: average at |X| = 120 +/- 10 R_E.
+# Access: abstract, open,
+# Access+: https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/ja090ia11p10875
+# Access+: (2026-09-25). A browser opens it; the sandbox's fetch is refused
+# Access+: as a bot, so the abstract was read as the search engine served it.
+# Note: Slavin et al. (1983), the source of EARTH_MAGNETOTAIL_OBSERVED_RADII,
+# Note+: gave 100-120 R_E from ISEE-3's first two passes. This row is the
+# Note+: 1985 average from the same mission, with its uncertainty, and is
+# Note+: the value (Tony, 2026-09-25). The 1983 abstract, as NTRS prints it,
+# Note+: says "Beyond X = -100 to -1200 earth radii" the diameter settles.
+# Note+: Read as -120, because the same abstract gives the end of flaring as
+# Note+: 100-120 earth radii. Quoted as printed, not corrected.
+# Note+: The 1983 abstract also says the tail's radius grows about 30
+# Note+: percent between X = -20 and -120 R_E. The drawn straight line grows
+# Note+: about 44 percent over that span at the declared solar wind, and
+# Note+: about 32 percent at the low end of the 1985 width's uncertainty, so
+# Note+: the 1983 figure lies inside the 1985 envelope and the line is kept.
+# Note+: Recorded for whoever revisits the construction
+# Note+: (documentation/RUN_RECORD_L322_D8_20260925.md).
+
+EARTH_MAGNETOTAIL_DIAMETER_RADII = 60.0
+# Unit: r_earth
+# Status: measured V_SOURCED 2026-09-25 -- abstract, open
+# Figures: 2 -- uncertainty 5 R_E. The abstract prints 60 +/- 5 R_E; the
+# Figures+: uncertainty is in the units place, so the trailing zero counts.
+# Read: abstract, the Wiley abstract page of Slavin et al. (1985) as a web
+# Read+: search returned it (the page blocks a direct fetch), 2026-09-25,
+# Read+: Claude Opus 5.5
+# Source: Slavin et al. (1985), doi:10.1029/JA090iA11p10875 -- abstract:
+# Source+: from 756 magnetopause crossings, a low-latitude magnetotail
+# Source+: diameter of 60 +/- 5 R_E at |X| = 130 - 225 R_E.
+# Access: abstract, open, as EARTH_MAGNETOTAIL_FLARE_END_RADII (2026-09-25).
+# Note: LOW-LATITUDE. The crossings were near the plane of Earth's orbit, so
+# Note+: this is the tail's width, side to side, not its height.
+# Note+: EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII says how the drawing uses it.
+
+EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII = EARTH_MAGNETOTAIL_DIAMETER_RADII / 2.0
+# Derived: half the measured low-latitude diameter = 30
+# Unit: r_earth
+# Status: declared 2026-09-25 -- the drawn tail's radius and how it is
+# Status+: reached, L-322 Stage D
+# Figures: exact -- declared construction: half of
+# Figures+: EARTH_MAGNETOTAIL_DIAMETER_RADII
+# Declared: two rules, both ours, over the measured rows above.
+# Declared+: ROUND. The tail is drawn as a round tube with this radius all
+# Declared+: the way round. The diameter was measured near the plane of
+# Declared+: Earth's orbit, as a width. The real distant tail is often
+# Declared+: flattened into an ellipse whose long axis follows the part of the
+# Declared+: solar wind's magnetic field that lies across the Sun-Earth line,
+# Declared+: and that field keeps changing: Sibeck, D. G. and Lin, R.-Q.
+# Declared+: (2014), "Size and shape of the distant magnetotail", J. Geophys.
+# Declared+: Res. Space Physics 119, doi:10.1002/2013JA019471, abstract. The
+# Declared+: store declares no dawn-dusk part of that field, so there is no
+# Declared+: direction to flatten along. Under average conditions GEOTAIL
+# Declared+: found the distant tail (x < -150 R_E) almost the same size in
+# Declared+: both directions: Maezawa, K., Hori, T., Mukai, T., Saito, Y.,
+# Declared+: Yamamoto, T., Kokubun, S. and Nishida, A. (1997), "Structure of
+# Declared+: the distant magnetotail and its dependence on the IMF By
+# Declared+: component: GEOTAIL observations", Adv. Space Res. 20(4-5),
+# Declared+: 949-959, doi:10.1016/S0273-1177(97)00503-6, abstract. Round is
+# Declared+: therefore the average shape, not the shape at any moment, and
+# Declared+: the hover says so (Tony, 2026-09-25).
+# Declared+: STRAIGHT. From where Shue's surface stops, at
+# Declared+: EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG, the radius grows in a straight
+# Declared+: line to this value at EARTH_MAGNETOTAIL_FLARE_END_RADII, then
+# Declared+: stays at it. The measurements give the two ends and nothing
+# Declared+: between them; the straight line is the simplest join and makes
+# Declared+: no claim about the shape in between (Tony, 2026-09-25).
+# Access: abstracts, open. Maezawa et al. (1997):
+# Access+: https://www.sciencedirect.com/science/article/abs/pii/S0273117797005036
+# Access+: (fetched 2026-09-25). Sibeck and Lin (2014):
+# Access+: https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2013JA019471
+# Access+: (as a web search returned it, 2026-09-25); an open copy is
+# Access+: https://ntrs.nasa.gov/api/citations/20140009185/downloads/20140009185.pdf
+
+EARTH_MAGNETOTAIL_DRAWN_END_RADII = EARTH_MAGNETOTAIL_OBSERVED_RADII
+# Derived: equal to the observed reach = 220
+# Unit: r_earth
+# Status: declared 2026-09-25 -- where the drawing stops, not an edge,
+# Status+: L-322 Stage D
+# Figures: exact -- declared construction: equal to
+# Figures+: EARTH_MAGNETOTAIL_OBSERVED_RADII
+# Declared: the drawn tail stops where ISEE-3 stopped observing it. That is
+# Declared+: how far the spacecraft went, not where the tail ends, and the
+# Declared+: hover says so. The same kind of stop as
+# Declared+: EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG: a drawing limit, not an edge
+# Declared+: of anything physical (Tony, 2026-09-25).
 
 EARTH_GEOCORONA_RADII = 100.0
 # Unit: r_earth

@@ -33,6 +33,12 @@ WHAT A ROW CARRIES
     derived_text           the "# Derived:" block, or None
     read_text              the "# Read:" lines, a list, one entry per
                            read with its "# Read+:" lines joined to it
+    uncertainty            the stated uncertainty on the "# Figures:" line,
+                           as the literal written there ("10", "0.13"),
+                           or None. The field form is the word
+                           "uncertainty" followed directly by the number,
+                           in the row's own unit (provenance-discipline
+                           Rule 1); prose around it is never read
 
     A row is DERIVED when its right-hand side is an expression, or when
     it is on the TRANSITIONAL list below. A row that only carries a
@@ -74,6 +80,12 @@ Module updated: September 22, 2026 with Anthropic's Claude Opus 5
 figures_of() lets a display format a row by the count the row declares,
 and a "# Read:" line's "+" continuations join it, so the export's read
 list holds one entry per read.)
+Module updated: September 25, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D, patch D8: the uncertainty field on a "# Figures:" line
+is read here, once, as Row.uncertainty; UNCERTAINTY_FIELD_RE is the one
+pattern for it, which test_derived_figures.py now imports instead of
+keeping its own; and uncertainty_of() lets a display print a row's
+stated uncertainty beside its value, as Earth's magnetotail hover does.)
 """
 
 import ast
@@ -90,6 +102,11 @@ TRANSITIONAL = ()
 TOKEN_RE = re.compile(r"^[a-z][a-z0-9_]*$")
 KEY_RE = re.compile(r"^#\s*([A-Z][A-Za-z-]*)(\+?):\s?(.*)$")
 NAME_RE = re.compile(r"\b[A-Za-z][A-Za-z0-9_]*\b")
+# The field form of a stated uncertainty (provenance-discipline 2.16,
+# Rule 1): the word, then the number, in the row's own unit. One pattern
+# for every reader: the figures checker, the export and the displays.
+UNCERTAINTY_FIELD_RE = re.compile(
+    r"\buncertainty\s+([-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?)")
 
 
 class Row(object):
@@ -111,6 +128,7 @@ class Row(object):
         self.figures = None
         self.figures_text = None
         self.figures_error = None
+        self.uncertainty = None
         self.status = None
         self.derived_text = None
         self.read_text = []
@@ -233,6 +251,9 @@ def _fill_fields(row):
         else:
             row.figures_error = ("'# Figures: %s' is neither a positive "
                                  "whole number nor 'exact'" % head)
+        match = UNCERTAINTY_FIELD_RE.search(row.figures_text)
+        if match:
+            row.uncertainty = match.group(1)
 
     row.status = row.field("Status")
     row.derived_text = row.field("Derived", loose=True)
@@ -349,6 +370,31 @@ def figures_of(name, project_dir=None):
                      for row_name, row in by_name.items())
         _FIGURES_BY_DIR[project_dir] = table
     return table[name]
+
+
+_UNCERTAINTY_BY_DIR = {}
+
+
+def uncertainty_of(name, project_dir=None):
+    """The uncertainty row `name` states, as (number, literal), or None.
+
+    For a display that prints a value with its stated uncertainty beside
+    it, such as "120 Earth radii, plus or minus 10". The literal is what
+    the row writes, so the display prints the uncertainty with the digits
+    the source gave it. A name that is not a row raises KeyError, as in
+    figures_of(). L-322 Stage D, patch D8.
+    """
+    project_dir = project_dir or os.path.dirname(os.path.abspath(__file__))
+    table = _UNCERTAINTY_BY_DIR.get(project_dir)
+    if table is None:
+        _text, _rows, by_name = read_store(project_dir)
+        table = dict((row_name, row.uncertainty)
+                     for row_name, row in by_name.items())
+        _UNCERTAINTY_BY_DIR[project_dir] = table
+    literal = table[name]
+    if literal is None:
+        return None
+    return abs(float(literal)), literal
 
 
 def names_in(text, known):

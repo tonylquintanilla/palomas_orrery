@@ -137,6 +137,9 @@ Module updated: September 22, 2026 with Anthropic's Claude Opus 5
 it is read from; declared constructions accepted as exact and listed;
 a named input may be anywhere in the row's chain. Section 4.7 and 17.3
 of documentation/BUILD_MANIFEST_L322_C2_magnetosphere_20260920.md.)
+Module updated: September 25, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D, patch D8: the uncertainty field's pattern is imported
+from constants_rows.py, its one home, rather than kept here.)
 """
 
 import ast
@@ -155,9 +158,10 @@ GAPS = ("NOT YET MIGRATED", "INPUT NOT YET MIGRATED", "NO DERIVED LINE",
         "UNCERTAINTY IN PROSE")
 
 # The field form of a stated uncertainty (provenance-discipline 2.16,
-# Rule 1): the word, then the number, in the row's own unit.
-FIELD_RE = re.compile(
-    r"\buncertainty\s+([-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?)")
+# Rule 1): the word, then the number, in the row's own unit. The pattern
+# lives in constants_rows.py since L-322 Stage D patch D8, so the export
+# and the displays read the field exactly as this checker does.
+FIELD_RE = constants_rows.UNCERTAINTY_FIELD_RE
 # Words that say a primary states an uncertainty. Read only to NAME a
 # primary that has no field; never to take a number.
 PROSE_RE = re.compile(r"uncertaint|\+/-|standard deviation", re.IGNORECASE)

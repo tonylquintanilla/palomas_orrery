@@ -496,8 +496,47 @@ Two small things from the commit: the script sits at the gallery repo
 root rather than in `documentation/`; and the empty file named `python`
 that appeared before the run was discarded, not committed.
 
-**Next:** the look (L-283's note: the dusk wall and the art), then the
-chain in `interactive.html`.
+**Tony's ruling on the mark, 2026-09-24, replacing his earlier one.**
+"perhaps we should add the Gemini credit to the i info card, 'Created by
+Tony Quintanilla with Claude (Anthropic). Logo created with Gemini
+(Google).' and leave the logo without a mark. the reason is that the
+naive visitor may read the Gemini mark as a general credit, which it is
+not." L-283's note of the same day, which keeps the mark, is superseded
+by this; see section 5.
+
+**Built: the look.** `patch_L283_1_dusk_wall_20260924.py`, built on
+gallery `2e164816`: `index.html` and a new `palomas_orrery_wall.jpg`,
+Tony's original cropped from 1024 to 920 pixels square from the top left
+to take off the corner with the mark (97 KB). The lobby and the rooms
+stand on the dusk wall with the art at 60 and 35 percent, as in the
+mockup, and the About card carries Tony's credit line. One departure
+from the mockup, stated in the patch: behind an open card the wall stays
+black with no art, where the mockup had the art at 15 percent, because
+the figures' colors were chosen against black and L-283's rule is that
+the chrome loses when it competes with a trace. Tested headless as a
+desktop and a phone.
+
+Tony ran it, both maintenance runs passed (16 of 16 offline, 2 of 2
+live), and he pushed at gallery `199b8d9f`; the live `index.html` and
+`palomas_orrery_wall.jpg` are byte-identical to the tested files. His
+look on the phone, 2026-09-24: the lobby "beautiful", a room "okay", an
+open card on black "correct", the About credit "correct", and a
+question: "is this sufficent credit in general?"
+
+**The credit question, and a gap it found.** Google made the visible mark
+optional in August 2026 (Settings > Media Watermark in Gemini), keeping
+its invisible SynthID watermark and C2PA Content Credentials for
+transparency. Checked on 2026-09-25: Tony's original PNG carries both
+kinds of machine-readable label -- a C2PA manifest (a `caBX` chunk) and
+an XMP packet giving the digital source type as "composite with trained
+algorithmic media" and the credit "Edited with Google AI", dated
+2025-11-28. The served `palomas_orrery_wall.jpg` carries neither: saving
+the crop as a JPEG dropped all metadata. SynthID sits in the pixels and
+is built to survive cropping and compression, but that was not checked.
+The C2PA manifest cannot simply be copied across, because its signature
+binds it to the original's bytes. The XMP label can.
+
+**Next:** the chain in `interactive.html`.
 
 ## 4. Cards still to look at
 
@@ -562,14 +601,17 @@ ledger handle yet; the ledger patch at the end of the pass assigns them.
   note (section 2), and the ledger's L-286 and L-287 text on the mode
   rule, which the tab ruling replaces. L-286's line is marked superseded
   by `patch_L286_2_ledger_rooms_ruling_20260924.py`; L-287's is not yet.
+  And L-283's note of 2026-09-24, which says the art keeps Gemini's mark:
+  Tony's later ruling the same day moves the credit to the About card
+  and takes the mark off (section 3i).
 
 ---
 
 Record started September 2026 with Anthropic's Claude Opus 5.5, and
 updated after cards 2 to 4, three times on 2026-09-23 during card 5,
 twice for card 6, twice for card 7, once for card 8, and twice on
-2026-09-24, for card 8's push and the Moon room and then for the rooms
-patch (section 3i).
+2026-09-24, for card 8's push and the Moon room, for the rooms patch,
+and for the mark ruling and the look patch (section 3i).
 
 ============================
 **Tony**:
@@ -1634,6 +1676,203 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
      right of the lobby and every room; switching tabs redraws the
      room; a card's Share and other buttons sit in the header. -- looks great. 
   6. Tell Claude the new gallery SHA and what you saw. -- 2e1648169f621e5c5624f02ed71edaea13a33734
+
+TONY-ACTION ROLLUP for this patch:
+  (do)     steps 1 to 6 above.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+================================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L283_1_dusk_wall_20260924.py
+  ok  the page's Updated stamp
+  ok  the old faint art in the lobby is retired
+  ok  the dusk wall, the art, and the tints
+  ok  the body starts as the lobby
+  ok  setHeader marks the screen
+  ok  the About card credits the logo
+  ok  encoding gate: index.html is ASCII after the edit
+  ok  the result is the file that was tested
+  wrote palomas_orrery_wall.jpg (96687 bytes)
+  wrote index.html (197877 bytes)
+
+patch applied to 2 files
+
+Stamps updated: the 'Updated' line at the top of index.html.
+
+WHAT TO DO NEXT, in this order:
+
+  1. Move THIS script into documentation/. It has run. Move
+     patch_L286_3_rooms_and_header_20260924.py there too; it was
+     committed at the repo root. -- done
+
+  2. Run the gallery maintenance run:
+         python gallery_maintenance_run.py
+     Expect every gating checker to pass, as before.
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              0.9s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     3.2s  no change to
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite       9.2s  PASS (210 checks, 0 failures)
+  PASS Pole of date              0.2s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.1s  All 42 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing.
+  PASS Store writer suite        2.9s  All 245 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 246 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 58 link(s) compared, store
+                                    6d4bb4fd4f54.
+  PASS Pointer join              0.1s  Every link is accounted for: 87
+                                    link(s) against orrery 62e93856,
+                                    24 fallback named; read check: 41
+                                    of 41 measured rows reached carry
+                                    a read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's features exactly: 4
+                                    object(s), 34 named shell(s), in
+                                    both cache files.
+  PASS Feature renderers         0.1s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.1s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.1s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.1s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.1s  === PASS: 56 hover(s) and 270
+                                    number(s) examined; 13 graded, 4
+                                    graded by line, 43 held to the
+                                    fixture ===
+  PASS Artifact 1 assembler      0.1s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: no sibling directories and
+                                    nothing in data/ the builder did
+                                    not make.
+
+======================================================================
+  16 of 16 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories and
+  last swap 2026-09-25T18:42:47.090627+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  3. In GitHub Desktop the change list should show index.html,
+     palomas_orrery_wall.jpg (new), this script under
+     documentation/, and the rooms script moving into
+     documentation/. Commit and push. -- 199b8d9fc9de65154e23c47f33e16641f7ff1047
+  4. After the push, check what the live site serves:
+         python gallery_maintenance_run.py --live
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 11 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+
+  PASS Served reachability       5.5s  all 11 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 62e93856
+
+  PASS Export freshness          0.1s  the served export is the orrery's
+                                    at 62e93856, byte for byte
+
+  orrery HEAD 62e93856
+  examining 29 of 87 links; the other 58 are served from the export
+    NOT IN STORE  create_sun_galactic_tide default not a top-level constant in the store
+                  /objects/0/features/oort_cloud/galactic_tide/typical_radius
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NOT IN STORE  planet_poles['Earth']            not a top-level constant in the store
+                  /objects/1/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  29 pointers: 24 match, 0 DRIFT, 0 UNIT MISMATCH, 5 could not be examined.
+
+  PASS Store drift               1.6s  29 pointers against orrery
+                                    62e93856 -- 24 match, 0 DRIFT, 0
+                                    UNIT MISMATCH, 5 could not be
+                                    examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            29 pointers against orrery 62e93856 --
+  last swap 2026-09-25T18:42:47.090627+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  5. On the phone, wait about ten minutes after the push, close the
+     page and open it again, then:
+       - The lobby stands on the dusk sky with the moon and birds. -- beautiful
+       - A room shows them fainter. -- okay
+       - An open card is on black, as before. -- correct
+       - The i button in the lobby: the credit names Gemini. -- correct. (is this sufficent credit in general?)
+     The same on the desktop.
+  6. Tell Claude the new gallery SHA and what you saw. -- 199b8d9fc9de65154e23c47f33e16641f7ff1047
 
 TONY-ACTION ROLLUP for this patch:
   (do)     steps 1 to 6 above.
