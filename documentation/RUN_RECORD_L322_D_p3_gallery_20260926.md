@@ -221,3 +221,447 @@ the Sun room.)
 ---
 
 Session written September 2026 with Anthropic's Claude Opus 5.5.
+
+===============================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L322_D_p3_gallery_tail_belts_20260926.py
+  ok  data/objects_config.json: 18 edit(s)
+  ok  gallery/feature_renderers.js: 17 edit(s)
+  ok  gallery/earth_geometry.js: 6 edit(s)
+  ok  tools/mirror_constants.py: 6 edit(s)
+  ok  tools/test_mirror_constants.py: 8 edit(s)
+  ok  documentation/smoke_earth_geometry.js: 8 edit(s)
+  ok  documentation/smoke_hover_budget.js: 1 edit(s)
+  ok  documentation/smoke_display_figures.js: 10 edit(s)
+  ok  documentation/fixture_hovers_L322d_p3_on_c6000f03.json: new file (18843 bytes)
+  ok  stamps: 'Module updated' / 'Updated' lines added to
+      feature_renderers.js, earth_geometry.js, mirror_constants.py,
+      test_mirror_constants.py and the three smoke checks
+
+PATCH APPLIED
+
+NEXT STEPS, in this order
+  1. Pause OneDrive syncing, and note the time (a pause lasts
+     2 hours).
+  2. Run the cache builder: open tools/gallery_cache_builder.py and
+     click Run, from the gallery repo root, or use the dashboard's
+     button. The config changed, so nothing reaches a visitor until
+     this has run.
+
+[RECOVER] removed retained data\solar-system.prev (cleared read-only on 6 entries)
+[sweep] no sibling directories present
+[POLE] earth: pole of 2026-09-26 served (RA 0.72394, Dec 89.85020 deg); tilt 23.43816 deg
+[SWAP] the new cache is in place; every rename worked on the first try. Recorded in data/cache_swap_log.jsonl
+[warn] sun: features-only entry; no Horizons fetch
+[done] run 20260926T213000Z (nightly): 13 objects
+
+----------------------------------------------------------------------
+WHAT TO DO NEXT, before you commit anything:
+
+  1. Run the gallery maintenance run, from this same folder:
+         python gallery_maintenance_run.py
+     Every gating checker should pass. Its LAST line reads the
+     swap log back and should agree with the [SWAP] line above.
+  2. In GitHub Desktop, look at the change list. A good build
+     shows changed and added files and NO pile of deletions.
+  3. Commit and push.
+  4. After the push, check what the live site serves:
+         python gallery_maintenance_run.py --live
+
+TONY-ACTION ROLLUP for this run:
+  (do)     steps 1 to 4 above, in that order.
+----------------------------------------------------------------------
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+
+  3. Read the last line of data/cache_swap_log.jsonl: the swap
+     should say it succeeded.
+
+{"attempts": {"live_to_prev": 1, "staging_to_live": 1}, "error": null, "mode": "nightly", "outcome": "ok", "reached": "staging_to_live", "run_id": "20260926T213000Z", "time": "2026-09-26T21:30:02.295547+00:00"}
+
+  4. Run gallery_maintenance_run.py with the Run button. All 16
+     gating checkers should pass. A red 'Cache in step' means
+     step 2 has not happened.
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.6s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     0.9s  rewrote data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      11.2s  PASS (210 checks, 0 failures)
+  PASS Pole of date              0.2s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.1s  All 51 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served.
+  PASS Store writer suite        4.5s  All 251 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 252 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 65 link(s) compared, store
+                                    a2d6b97d161e.
+  PASS Pointer join              0.1s  Every link is accounted for: 93
+                                    link(s) against orrery 43ba290b,
+                                    24 fallback named; read check: 43
+                                    of 43 measured rows reached carry
+                                    a read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's features exactly: 4
+                                    object(s), 35 named shell(s), in
+                                    both cache files.
+  PASS Feature renderers         1.0s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.3s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 57 hover(s) and 288
+                                    number(s) examined; 13 graded, 5
+                                    graded by line, 44 held to the
+                                    fixture ===
+  PASS Artifact 1 assembler      0.3s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: no sibling directories and
+                                    nothing in data/ the builder did
+                                    not make.
+
+======================================================================
+  16 of 16 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories and
+  last swap 2026-09-26T21:30:02.295547+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  5. Now the orrery: save patch_L322_D_13_exact_rows_drawn_20260926.py
+     in the orrery root, run it, 
+     
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L322_D_13_exact_rows_drawn_20260926.py
+  ok  exact_rows_report.py: 15 edit(s)
+  ok  documentation/RUN_RECORD_L322_D13_20260926.md: new file (3437 bytes)
+  ok  documentation/RUN_RECORD_L322_D_p3_gallery_20260926.md: new file (11959 bytes)
+  ok  stamps: the module history line added to exact_rows_report.py
+
+PATCH APPLIED
+
+NEXT STEPS
+  1. Run orrery_maintenance_run.py with the Run button. Its 'Exact
+     rows report' line should say '4 drawn only, 0 not followed,
+     0 map entries broken'. If it says 4 not followed, gallery
+     patch 3 has not run in the gallery folder beside the orrery.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20260926T183557Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.0s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Skill manifest               0.1s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             0.6s  unchanged (1 checked, not written)
+  Module atlas                 6.9s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.0s  rewrote DATA_INVENTORY.md
+  Exact rows report            0.9s  rewrote EXACT_ROWS_PRINTED.md -- 7 of 20
+                                     exact rows printed at 18 lines (8 orrery, 10
+                                     gallery); 4 drawn only, 0 not followed, 0
+                                     map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.2s  21 of 21 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.7s  No figure count exceeds its inputs: 41
+                                     derived row(s) read, 28 judged OK -- 28 OK,
+                                     13 NOT YET MIGRATED, 1 NO DERIVED LINE.
+  Constants export check       1.3s  Export matches the store: sha256
+                                     a2d6b97d161e on both sides; 85 rows re-read,
+                                     54 not exported, 26 tokens.
+  Dimensions                   1.1s  No unit contradicts its arithmetic: 41
+                                     derived row(s) read -- 28 OK, 10 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.2s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 87 status lines in constants_new.py are
+                                     well formed; 49 rows carry none.
+  Row shape                    0.1s  All 139 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Reset completeness          16.3s  PASS -- all 309 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  1.6s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Worksheet checker            8.8s  76 of 114 routed, 8 clean
+  Worksheet checker tests     13.6s  All 136 checks passed
+  Worksheet key round trip     0.8s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         17.1s  All 76 checks passed
+  Extractor pins               0.3s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          13.9s  295 TIER-1 FINDINGS IN THE SCANNED TREE
+
+======================================================================
+  17 of 17 gating checkers passed -- 91.4s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           76 of 114 routed, 8 clean
+    Provenance scanner          295 TIER-1 FINDINGS IN THE SCANNED TREE
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  1983 file(s) examined, 8 written, 0 created, 0 removed, 5 rewritten identically
+    written   DATA_INVENTORY.md
+    written   EXACT_ROWS_PRINTED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      LEDGER_CONSOLIDATED.md
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Move this script into documentation/. Commit the orrery,
+     with the rewritten EXACT_ROWS_PRINTED.md, and push. -- 56c4b30e430bda1d2f621aa3bfb9678ac769dcd9
+  3. Append your run to the two new run records in documentation/.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+     then run orrery_maintenance_run.py.
+     Its 'Exact rows report' line should say '4 drawn only,
+     0 not followed, 0 map entries broken'.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20260926T213640Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 0.9s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Skill manifest               0.1s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             0.6s  unchanged (1 checked, not written)
+  Module atlas                 5.8s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               3.8s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Exact rows report            0.7s  unchanged (1 checked, not written) -- 7 of
+                                     20 exact rows printed at 18 lines (8 orrery,
+                                     10 gallery); 4 drawn only, 0 not followed, 0
+                                     map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.2s  21 of 21 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.5s  No figure count exceeds its inputs: 41
+                                     derived row(s) read, 28 judged OK -- 28 OK,
+                                     13 NOT YET MIGRATED, 1 NO DERIVED LINE.
+  Constants export check       0.9s  Export matches the store: sha256
+                                     a2d6b97d161e on both sides; 85 rows re-read,
+                                     54 not exported, 26 tokens.
+  Dimensions                   0.8s  No unit contradicts its arithmetic: 41
+                                     derived row(s) read -- 28 OK, 10 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 87 status lines in constants_new.py are
+                                     well formed; 49 rows carry none.
+  Row shape                    0.1s  All 139 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.2s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Reset completeness          10.5s  PASS -- all 309 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  1.5s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Worksheet checker            8.2s  76 of 114 routed, 8 clean
+  Worksheet checker tests     13.8s  All 136 checks passed
+  Worksheet key round trip     0.8s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         16.9s  All 76 checks passed
+  Extractor pins               0.3s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner           8.2s  295 TIER-1 FINDINGS IN THE SCANNED TREE
+
+======================================================================
+  17 of 17 gating checkers passed -- 75.9s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           76 of 114 routed, 8 clean
+    Provenance scanner          295 TIER-1 FINDINGS IN THE SCANNED TREE
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  1983 file(s) examined, 6 written, 0 created, 0 removed, 6 rewritten identically
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      DATA_INVENTORY.md
+      LEDGER_CONSOLIDATED.md
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  6. Move this script into the gallery's documentation/ folder.
+     Commit the gallery (config, cache, code, fixture, this
+     script) and push. Commit and push the orrery.
+
+-- gallery moved to 93d8ae9caead6ab801d854b46fae5b297747fc6c
+-- orrery moved to e21d9dd9b185996995a90a0e53b589c84d7932d3
+
+  7. Run python gallery_maintenance_run.py --live once the site
+     has updated.
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 11 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+
+  PASS Served reachability       1.5s  all 11 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 43ba290b
+
+  PASS Export freshness          0.1s  the served export is the orrery's
+                                    at 43ba290b, byte for byte
+
+  orrery HEAD e21d9dd9
+  examining 28 of 93 links; the other 65 are served from the export
+    NOT IN STORE  create_sun_galactic_tide default not a top-level constant in the store
+                  /objects/0/features/oort_cloud/galactic_tide/typical_radius
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  28 pointers: 24 match, 0 DRIFT, 0 UNIT MISMATCH, 4 could not be examined.
+
+  PASS Store drift               1.0s  28 pointers against orrery
+                                    e21d9dd9 -- 24 match, 0 DRIFT, 0
+                                    UNIT MISMATCH, 4 could not be
+                                    examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            28 pointers against orrery e21d9dd9 --
+  last swap 2026-09-26T21:30:02.295547+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  8. On your phone, in the Earth room: tick Magnetotail in the
+     drawer and tap GO. The tail should run from the back of the
+     magnetopause out to about 220 Earth radii, widening and then
+     straight, in the magnetopause's colour; tap its cross for the
+     hover. -- correct
+     
+     Tick each radiation belt: evenly spaced rings with one
+     brighter, larger ring. -- correct
+     
+     Tap the rotation axis: the hover gives
+     23.93447 hours. -- correct
+     
+     Then open the Sun room; it should look as it
+     did. --correct
+     
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+

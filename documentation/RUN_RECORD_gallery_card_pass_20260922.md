@@ -618,7 +618,23 @@ in the Explorer and the exhibit rooms ends in " AU" and is written out
 in full (`exponentformat: none`), because Plotly's shorthand would have
 read "50u AU" in Earth's frame and "200k AU" at the Oort cloud's edge;
 checked with Plotly's own formatting from 0.0001 AU to 200,000 AU.
-Tested as before; 16 of 16. Waiting for Tony's run and his look.
+Tested as before; 16 of 16.
+
+Tony ran it and pushed at gallery `c6000f0`; the served
+`interactive.html` is the tested file. He sent two screenshots of Earth
+on his phone, upright and sideways, with the unit showing on every
+number, and ruled: "I think we should add the larger numbers to the
+upright phone view also because this is relevant too." The upright
+screenshot shows the numbers along the left and bottom edges, so the
+comment in `axisTickFont()` saying they fall off screen on a portrait
+phone was wrong.
+
+**Built: the upright phone too.** `patch_L289_grid_numbers_phone_20260926.py`,
+built on gallery `93d8ae9`, `interactive.html` only: `axisTickFont()`
+returns 12 px #9a9a9a on every screen, and its comment is corrected.
+Tested as before; 16 of 16. Waiting for Tony's run and his look, in
+particular at the bottom-left corner of the upright view, where two
+edges' labels meet and were already crowded at 9 px.
 
 ## 4. Cards still to look at
 
@@ -2167,14 +2183,13 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 -- one new issue detected. the grid tic labels are too small and faint to read in desktop. in the phone the grid labels are off screen. this was the original reason for the triad and grid label. however, on desktop the grid tic labels are visible, but indistinct. zooming has no effect on grid tic labels. 
 
-===============================================================================
+===========================================================================
 
-PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L289_grid_numbers_unit_20260926.py
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L289_grid_numbers_phone_20260926.py
   ok  interactive.html: the page's Updated stamp
-  ok  interactive.html: the Explorer's axis numbers say AU
-  ok  interactive.html: the exhibit rooms' axis numbers say AU
+  ok  interactive.html: every screen gets the larger numbers
   ok  interactive.html is the file that was tested, and ASCII
-  wrote interactive.html (159350 bytes)
+  wrote interactive.html (159947 bytes)
 
 patch applied to 1 file
 
@@ -2194,26 +2209,28 @@ WHAT TO DO NEXT, in this order:
 ======================================================================
 
 GENERATORS -- rewritten every time; a no-op when nothing moved
-  PASS Module atlas              1.1s  no change to MODULE_ATLAS.md,
+  PASS Module atlas              0.8s  rewrote MODULE_ATLAS.md,
                                     MODULE_INDEX.md
   PASS Constants export pull     0.7s  rewrote data/constants_export.sha
   PASS Config mirror             0.1s  no change to
                                     data/objects_config.json
 
 CHECKERS -- the verdict informs the push call
-  PASS Cache builder suite      17.3s  PASS (210 checks, 0 failures)
+  PASS Cache builder suite      10.0s  PASS (210 checks, 0 failures)
   PASS Pole of date              0.2s  POLE OF DATE: all 11 checks passed
                                     (frame angle, orrery, ERFA, block
                                     checker, and each shown able to
                                     fail).
-  PASS Mirror suite              0.1s  All 42 mirror checks passed:
+  PASS Mirror suite              0.1s  All 51 mirror checks passed:
                                     served, spelling, relabel refused
                                     and accepted, conflict refused,
                                     definition as exactly 1, fallback
                                     and absent named, no-slot refused,
                                     five shapes, formatting kept,
-                                    idempotent, report writes nothing.
-  PASS Store writer suite        3.7s  All 245 store-writer checks
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served.
+  PASS Store writer suite        3.9s  All 251 store-writer checks
                                     passed: an allow list that lets
                                     through only a shell's words, a
                                     belt's words and the arrival
@@ -2223,7 +2240,7 @@ CHECKERS -- the verdict informs the push call
                                     nothing; awkward text; and the
                                     shell list matching the cache
                                     check's rule.
-  PASS Store editor suite        0.1s  All 246 store-editor checks
+  PASS Store editor suite        0.1s  All 252 store-editor checks
                                     passed: every box the form offers
                                     is one the writer allows; the word
                                     list and the tick list differ by
@@ -2235,34 +2252,34 @@ CHECKERS -- the verdict informs the push call
                                     rather than just shown.
   PASS Config mirror check       0.1s  Every served link holds the
                                     export's value, unit and figure
-                                    count; 58 link(s) compared, store
+                                    count; 65 link(s) compared, store
                                     a2d6b97d161e.
-  PASS Pointer join              0.1s  Every link is accounted for: 87
-                                    link(s) against orrery aae17579,
-                                    24 fallback named; read check: 41
-                                    of 41 measured rows reached carry
+  PASS Pointer join              0.1s  Every link is accounted for: 93
+                                    link(s) against orrery e21d9dd9,
+                                    24 fallback named; read check: 43
+                                    of 43 measured rows reached carry
                                     a read.
   PASS Cache in step             0.1s  The served cache holds the
                                     config's features exactly: 4
-                                    object(s), 34 named shell(s), in
+                                    object(s), 35 named shell(s), in
                                     both cache files.
   PASS Feature renderers         0.1s  === ALL CHECKS PASSED ===
   PASS Page framing              0.1s  === ALL CHECKS PASSED ===
-  PASS Sun shells                0.2s  ALL CHECKS PASSED
-  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
-  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
-  PASS Arrival                   0.4s  Arrival: both rooms open on the
+  PASS Sun shells                0.1s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.1s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.1s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
                                     right things; every shell trace
                                     carries its key; the fallback with
                                     no arrival block is unchanged.
-  PASS Display figures           0.5s  === PASS: 56 hover(s) and 270
-                                    number(s) examined; 13 graded, 4
-                                    graded by line, 43 held to the
+  PASS Display figures           0.2s  === PASS: 57 hover(s) and 288
+                                    number(s) examined; 13 graded, 5
+                                    graded by line, 44 held to the
                                     fixture ===
-  PASS Artifact 1 assembler      0.5s  === ALL CHECKS PASSED -- 5
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
                                     verdicts and T3's feature set
                                     match the 2026-08-31 pin ===
-  PASS Cache siblings            0.2s  RESULT: no sibling directories and
+  PASS Cache siblings            0.1s  RESULT: no sibling directories and
                                     nothing in data/ the builder did
                                     not make.
 
@@ -2270,7 +2287,7 @@ CHECKERS -- the verdict informs the push call
   16 of 16 gating checkers passed
   1 report-only -- these do not gate, whatever they exit with:
     PASS Cache siblings         RESULT: no sibling directories and
-  last swap 2026-09-26T17:52:22.035705+00:00: succeeded first time
+  last swap 2026-09-26T21:30:02.295547+00:00: succeeded first time
 ======================================================================
 
   After you push: python gallery_maintenance_run.py --live
@@ -2279,70 +2296,15 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
   3. In GitHub Desktop, in the gallery, the change list should show
      interactive.html and this script under documentation/, plus
-     whatever the maintenance run rewrites as usual. Commit and push. -- c6000f03324fc6cdf1d192d0c1c77b91c10dd25f
+     whatever the maintenance run rewrites as usual. Commit and push. -- correct
+-- gallery moved to a5c35f5fcde47b3648040a5aec8724d58416d2d4
+
   4. After the push: python gallery_maintenance_run.py --live
-
-======================================================================
-  gallery maintenance run -- LIVE (after a push)
-  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
-======================================================================
-
-LIVE -- what the deployed site actually serves
-
-  fetching 11 files from https://palomasorrery.com/
-    SERVED   interactive.html                               matches the working copy
-    SERVED   gallery/feature_renderers.js                   matches the working copy
-    SERVED   gallery/earth_geometry.js                      matches the working copy
-    SERVED   gallery/assembler/resolver.py                  matches the working copy
-    SERVED   gallery/assembler/__init__.py                  matches the working copy
-    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
-    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
-    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
-    SERVED   gallery/arrival.js                             matches the working copy
-    SERVED   gallery/nav_cluster.js                         matches the working copy
-    SERVED   data/objects_config.json                       matches the working copy
-
-  PASS Served reachability       2.8s  all 11 files served and
-                                    byte-identical to the working copy
-
-  orrery export pinned at aae17579
-
-  PASS Export freshness          0.1s  the served export is the orrery's
-                                    at aae17579, byte for byte
-
-  orrery HEAD aae17579
-  examining 29 of 87 links; the other 58 are served from the export
-    NOT IN STORE  create_sun_galactic_tide default not a top-level constant in the store
-                  /objects/0/features/oort_cloud/galactic_tide/typical_radius
-    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
-                  /objects/0/features/orientation
-    NOT IN STORE  planet_poles['Earth']            not a top-level constant in the store
-                  /objects/1/features/orientation
-    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
-                  /objects/2/features/orientation/pole
-    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
-                  /objects/3/features/orientation/pole
-  29 pointers: 24 match, 0 DRIFT, 0 UNIT MISMATCH, 5 could not be examined.
-
-  PASS Store drift               0.9s  29 pointers against orrery
-                                    aae17579 -- 24 match, 0 DRIFT, 0
-                                    UNIT MISMATCH, 5 could not be
-                                    examined.
-
-======================================================================
-  2 of 2 gating checkers passed
-  1 report-only -- these do not gate, whatever they exit with:
-    PASS Store drift            29 pointers against orrery aae17579 --
-  last swap 2026-09-26T17:52:22.035705+00:00: succeeded first time
-======================================================================
-
-  Offline pass: python gallery_maintenance_run.py
-
-C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
-
-  5. On the desktop, after about ten minutes, reload the Sun: every
-     number along the box edges ends in AU. Then Earth, where the
-     numbers are small (0.00005 AU and the like), and the Explorer. -- correct
+  5. On the phone held upright, after about ten minutes, close the
+     page and open it again, then open Earth: the numbers along the
+     left and bottom edges are larger and lighter, as they are
+     sideways. Look at the bottom-left corner, where the labels of
+     two edges meet and were already crowded.
   6. Tell Claude the new gallery SHA and what you saw.
 
 TONY-ACTION ROLLUP for this patch:
