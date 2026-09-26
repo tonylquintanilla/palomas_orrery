@@ -2026,9 +2026,68 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
      whatever the maintenance run rewrites as usual. Commit and push.
 
 -- gallery moved to 42a17abe16eebe5f03c790ad2a8f39f918c1ba7b
--- orrery moved to 
+-- orrery moved to 9f3b5afbbb79aab7af081957dc20abd9262933d2
 
-  4. After the push: python gallery_maintenance_run.py --live
+  1. After the push: python gallery_maintenance_run.py --live
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 11 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+
+  PASS Served reachability       2.2s  all 11 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 4bab8c04
+
+  PASS Export freshness          0.2s  the served export is the orrery's
+                                    at 4bab8c04, byte for byte
+
+  orrery HEAD 9f3b5afb
+  examining 29 of 87 links; the other 58 are served from the export
+    NOT IN STORE  create_sun_galactic_tide default not a top-level constant in the store
+                  /objects/0/features/oort_cloud/galactic_tide/typical_radius
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NOT IN STORE  planet_poles['Earth']            not a top-level constant in the store
+                  /objects/1/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  29 pointers: 24 match, 0 DRIFT, 0 UNIT MISMATCH, 5 could not be examined.
+
+  PASS Store drift               1.0s  29 pointers against orrery
+                                    9f3b5afb -- 24 match, 0 DRIFT, 0
+                                    UNIT MISMATCH, 5 could not be
+                                    examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            29 pointers against orrery 9f3b5afb --
+  last swap 2026-09-26T01:21:27.979604+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
   5. On the phone, after about ten minutes, close the page and
      open it again, then:
        - Open the Earth room and its Earth and Moon card. The top
@@ -2040,9 +2099,12 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
          System screen.
        - Check the room still works as before: the drawer, the
          i panel, a marker tap.
-     The same on the desktop.
+         -- all correct.
+     The same on the desktop. -- correct
   6. Tell Claude the new gallery SHA and what you saw.
 
 TONY-ACTION ROLLUP for this patch:
   (do)     steps 1 to 6 above.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+-- one new issue detected. the grid tic labels are too small and faint to read in desktop. in the phone the grid labels are off screen. this was the original reason for the triad and grid label. however, on desktop the grid tic labels are visible, but indistinct. zooming has no effect on grid tic labels. 
