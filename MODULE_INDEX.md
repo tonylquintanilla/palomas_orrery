@@ -11,24 +11,19 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 140  
-**Total Lines of Code (non-blank):** 111,181  
-**Total Public Functions/Classes:** 1,251
+**Total Python Files:** 139  
+**Total Lines of Code (non-blank):** 111,124  
+**Total Public Functions/Classes:** 1,249
 
 ## Classification Coverage
 
-**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L322_D_9_orrery_belt_rings_20260925.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
-
-**Undetermined domain (1).** No valid `Domain:` tag.
-
-- `patch_L322_D_9_orrery_belt_rings_20260925.py`
 
 
 ---
@@ -161,7 +156,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `messier_object_data_handler.py` | Messier object coordinate transforms and data preparation. (331 lines) |
 | `plot_data_exchange.py` | JSON data exchange between subprocess scripts and GUI. (170 lines) |
-| `save_utils.py` | Unified save/export for all Plotly visualizations. (797 lines) |
+| `save_utils.py` | Unified save/export for all Plotly visualizations. (918 lines) |
 | `sgr_a_visualization_core_arcs.py` | Sgr_a_visualization_core.py Core visualization module for S-Stars orbiting Sagittarius A*. (539 lines) |
 | `social_media_export.py` | Generates a second HTML file from an existing Plotly figure, optimized for screen recording Instagram Reels and YouTube Shorts (9:16 portrait). (971 lines) |
 
@@ -242,7 +237,6 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L322_D_9_orrery_belt_rings_20260925.py` | - L-322 Stage D, patch D9. (178 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |

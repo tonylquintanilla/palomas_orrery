@@ -21,6 +21,11 @@ Role: pipeline
 Domain: utilities
 
 Module updated: May 2026 with Anthropic's Claude Opus 4.6
+Module updated: September 25, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D, patch D10: every HTML page whose 3D scene is drawn in AU
+also gets a small label naming the grid spacing, as the gallery's rooms
+have, read from what Plotly drew so it stays right under Auto scale, Fly
+To and camera tracking; see _inject_grid_label.)
 """
 
 import tkinter as tk
@@ -544,6 +549,128 @@ def _inject_camera_tracking(fig, html_str):
     return html_str.replace('</body>', block + '\n</body>')
 
 
+def _grid_label_unit(fig):
+    """The unit of a figure's 3D scene when it is drawn in AU, else None.
+
+    The grid label is for the orrery's own scenes, whose axes are titled
+    "X (AU)" by visualization_utils.build_scene_axis. Other plots that
+    come through this writer -- star maps in light-years, 2D charts --
+    have no such title and get no label, rather than a label with the
+    wrong unit. (L-322 Stage D, patch D10.)
+    """
+    try:
+        title = fig.layout.scene.xaxis.title.text
+    except (AttributeError, ValueError):
+        return None
+    if title and '(AU)' in title:
+        return 'AU'
+    return None
+
+
+def _inject_grid_label(fig, html_str):
+    """Inject a small label naming the grid spacing of the 3D scene.
+
+    Shows, for example, "grid 0.0002 AU (29,920 km)", as the gallery's
+    rooms do. Tony, 2026-09-25: it "helps greatly in orientation
+    especially in close views."
+
+    The script reads the spacing Plotly ACTUALLY drew, from the page's
+    own layout after each redraw, not the one Python asked for. Three
+    cases need that: Auto scale, where Python sets no spacing and Plotly
+    picks its own; the Fly To buttons, which change the scale after the
+    plot is made; and camera tracking in animations, which changes it on
+    every frame. It only reads Plotly's layout and writes one small box,
+    so it cannot change the plot.
+
+    Below a thousandth of an AU the kilometre figure is shown too, from
+    KM_PER_AU in constants_new.py, exact, so the page never types its own
+    copy. The label is hidden when the grid is hidden. Where it sits on
+    the page is a rendering setting, for Tony's eye.
+
+    Returns the HTML unchanged when the figure has no 3D scene in AU.
+    (L-322 Stage D, patch D10, September 25, 2026, with Anthropic's
+    Claude Opus 5.5.)
+    """
+    unit = _grid_label_unit(fig)
+    if unit is None:
+        return html_str
+    from constants_new import KM_PER_AU
+    block = """
+<!-- ===== GRID LABEL ===== -->
+<div id="orrery-grid-label" style="position:fixed; left:21%; bottom:14px;
+  z-index:1000; padding:3px 9px; border-radius:4px;
+  background:rgba(0,0,0,0.65); border:1px solid #555; color:#ddd;
+  font:13px Arial, sans-serif; pointer-events:none; display:none"></div>
+<script>
+(function() {
+  var UNIT = __UNIT__;
+  var KM_PER_AU = __KM_PER_AU__;
+  var label = document.getElementById('orrery-grid-label');
+  function spacing(ax) {
+    // Plotly writes the spacing it drew into the full layout, whether it
+    // was asked for (dtick) or chosen by Plotly (Auto scale).
+    if (!ax || ax.visible === false || ax.showgrid === false) return null;
+    var d = Number(ax.dtick);
+    return (d > 0 && isFinite(d)) ? d : null;
+  }
+  function text(d) {
+    // As many digits as the spacing has and no more: 0.0002, 0.25, 5.
+    return String(Number(d.toPrecision(12))) + ' ' + UNIT;
+  }
+  function update() {
+    var gd = document.querySelector('.plotly-graph-div');
+    var sc = gd && gd._fullLayout && gd._fullLayout.scene;
+    if (!sc) { label.style.display = 'none'; return; }
+    var dx = spacing(sc.xaxis), dy = spacing(sc.yaxis), dz = spacing(sc.zaxis);
+    if (dx === null && dy === null && dz === null) {
+      label.style.display = 'none'; return;
+    }
+    var html;
+    if (dx !== null && dx === dy && dx === dz) {
+      html = 'grid <b>' + text(dx) + '</b>';
+      if (dx < 1e-3) {
+        html += ' (' + (dx * KM_PER_AU).toLocaleString('en-US',
+                {maximumFractionDigits: 0}) + ' km)';
+      }
+    } else {
+      // The three axes do not share one spacing (possible under Auto
+      // scale): name each rather than pretend.
+      var parts = [];
+      [['x', dx], ['y', dy], ['z', dz]].forEach(function(p) {
+        if (p[1] !== null) parts.push(p[0] + ' ' + text(p[1]));
+      });
+      html = 'grid <b>' + parts.join(', ') + '</b>';
+    }
+    if (label.innerHTML !== html) label.innerHTML = html;
+    label.style.display = 'block';
+  }
+  function later() {
+    // After a redraw Plotly has written the new spacing; read it on the
+    // next frame, and once more shortly after for slow redraws.
+    window.requestAnimationFrame(update);
+    setTimeout(update, 300);
+  }
+  function wire() {
+    var gd = document.querySelector('.plotly-graph-div');
+    if (gd && typeof gd.on === 'function' && gd._fullLayout) {
+      ['plotly_afterplot', 'plotly_relayout', 'plotly_redraw',
+       'plotly_animated', 'plotly_animatingframe'].forEach(function(ev) {
+        gd.on(ev, later);
+      });
+      later();
+    } else {
+      setTimeout(wire, 100);
+    }
+  }
+  wire();
+})();
+</script>
+<!-- ===== END GRID LABEL ===== -->
+""".replace('__UNIT__', json.dumps(unit)).replace(
+        '__KM_PER_AU__', repr(float(KM_PER_AU)))
+    return html_str.replace('</body>', block + '\n</body>')
+
+
 def _write_html(fig, file_path, offline=False, auto_play=False):
     """Write HTML file with appropriate settings and encyclopedia overlay.
     
@@ -574,6 +701,10 @@ def _write_html(fig, file_path, offline=False, auto_play=False):
 
     # Inject camera-tracking relayout script if tracking data is present
     html_str = _inject_camera_tracking(fig, html_str)
+
+    # Inject the grid-spacing label when the 3D scene is drawn in AU
+    # (L-322 Stage D, patch D10).
+    html_str = _inject_grid_label(fig, html_str)
     
     # Write with binary mode to preserve encoding
     with open(file_path, 'wb') as f:
