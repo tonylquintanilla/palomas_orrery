@@ -439,10 +439,11 @@ LIVE -- what the deployed site actually serves
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
   5. On the phone, after about ten minutes, close the page and
-     open it again: the lobby should look exactly as before.
+     open it again: the lobby should look exactly as before. -- yes
   6. Tell Claude the new gallery SHA.
 
 TONY-ACTION ROLLUP for this patch:
   (do)     steps 1 to 6 above.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
 

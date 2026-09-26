@@ -536,6 +536,30 @@ is built to survive cropping and compression, but that was not checked.
 The C2PA manifest cannot simply be copied across, because its signature
 binds it to the original's bytes. The XMP label can.
 
+Tony, 2026-09-25, on the label's wording: "this was not edited. this was
+an original Gemini image. there was no other original." Then: "Gemini
+created the original image but i asked for modifications. so the one we
+are using is not version 1, maybe version 3 or 4." So every version was
+made in Gemini, and the one in use is Gemini's edit of its own earlier
+output. Google's label, "Edited with Google AI", fits that, and so does
+the About card's "Logo created with Gemini (Google)".
+
+**Built: the label put back.** `patch_L283_2_wall_art_label_20260925.py`,
+built on gallery `199b8d9f`, `palomas_orrery_wall.jpg` only. It reads
+Google's XMP block from `Gemini_palomas_orrery_logo.png` in the repo and
+places it, unchanged, in the JPEG after the JFIF header: credit "Edited
+with Google AI", digital source type composite with trained algorithmic
+media, created 2025-11-28 05:51:15 UTC. The decoded picture is identical;
+the file grows from 96,687 to 97,516 bytes. Google's signed Content
+Credentials are not carried across, since cropping breaks their
+signature; the original PNG keeps them.
+
+Tony ran it on 2026-09-25 (his output is at the end of the orrery's
+`RUN_RECORD_gallery_tap_lag_20260925.md`, the other conversation's
+record): offline 16 of 16, live 2 of 2, pushed at gallery `1a816f24`
+(commit titled "L238_2"), and the lobby looks exactly as before on the
+phone. The served JPEG is byte-identical to the tested file.
+
 **Next:** the chain in `interactive.html`.
 
 ## 4. Cards still to look at
@@ -611,7 +635,8 @@ Record started September 2026 with Anthropic's Claude Opus 5.5, and
 updated after cards 2 to 4, three times on 2026-09-23 during card 5,
 twice for card 6, twice for card 7, once for card 8, and twice on
 2026-09-24, for card 8's push and the Moon room, for the rooms patch,
-and for the mark ruling and the look patch (section 3i).
+and for the mark ruling and the look patch, and on 2026-09-25 for the
+look's result, the credit question and the label (section 3i).
 
 ============================
 **Tony**:
