@@ -44,6 +44,17 @@ BROKEN. Neither is ever dropped quietly. A new exact row printed by the
 gallery therefore shows up first as NOT FOLLOWED, which is the prompt
 to add its entry.
 
+DRAWN, NOT PRINTED. Some gallery pointers to exact rows are read only to
+place a drawing and never printed: the magnetotail's drawn radius and
+drawn end, which shape the tail while the hover prints the measured rows
+beside them, and Earth's fallback pole, which places the axis when no
+pole of date is served. A second hand-kept table, DRAWN, names for each
+the page script, the function and a piece of the line that reads the
+value. The tool checks it the same way: an entry whose line is gone is
+BROKEN, and so is one whose line turns out to be a print line, because
+then the value is printed after all and belongs in PRINTS. A drawn-only
+row is listed under "Not printed", with the line that reads it.
+
 CONSOLE LINES. A tool that prints an exact row to the terminal, such
 as export_orbit_cache.py logging KM_PER_AU, is not a display a visitor
 sees. Lines that begin with print( are listed under their own heading
@@ -66,6 +77,11 @@ Domain: dev_tools
 
 Module updated: September 25, 2026 with Anthropic's Claude Opus 5.5
 (L-322 Stage D, patch D12: new.)
+Module updated: September 26, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D, patch D13: the DRAWN table, for gallery pointers to exact
+rows that are read only to place a drawing -- gallery patch 3 added four
+-- checked like PRINTS, so they are reported as drawn and not as NOT
+FOLLOWED.)
 """
 
 import os
@@ -120,6 +136,24 @@ PRINTS = {
         ('gallery/feature_renderers.js', 'renderShellSet', 'km.altitudeKm'),
     'earth_orbital_zones/leo_outer/altitude':
         ('gallery/feature_renderers.js', 'renderShellSet', 'km.altitudeKm'),
+}
+
+# Gallery pointers to exact rows that are read only to place a drawing
+# and never printed. Same key and value as PRINTS, but the piece of code
+# is on the line that READS the value. Checked every run: an entry whose
+# line is gone, or whose line is a print line, is BROKEN. (L-322 Stage D,
+# patch D13, for the four pointers gallery patch 3 added.)
+DRAWN = {
+    'earth_magnetosphere/magnetotail/drawn_radius':
+        ('gallery/feature_renderers.js', 'renderMagnetosphere',
+         'tl.drawn_radius'),
+    'earth_magnetosphere/magnetotail/drawn_end':
+        ('gallery/feature_renderers.js', 'renderMagnetosphere',
+         'tl.drawn_end'),
+    'orientation/pole/ra':
+        ('gallery/feature_renderers.js', 'basisFor', 'pole.ra'),
+    'orientation/pole/dec':
+        ('gallery/feature_renderers.js', 'basisFor', 'pole.dec'),
 }
 
 # A top-level function in a gallery script: two spaces of indent, which
@@ -235,17 +269,21 @@ def gallery_scripts():
     return out
 
 
-def map_entry(path):
-    """The PRINTS entry for a pointer path, or None."""
-    for suffix, entry in PRINTS.items():
+def map_entry(path, table=None):
+    """The PRINTS (or given table's) entry for a pointer path, or None."""
+    for suffix, entry in (PRINTS if table is None else table).items():
         if path.endswith('/' + suffix):
             return suffix, entry
     return None
 
 
 def gallery_sites(pointers):
-    """({row: [(file, line, code, path)]}, not_followed, broken)."""
+    """({row: [(file, line, code, path)]}, not_followed, broken, drawn).
+
+    drawn is {row: [(file, line, code, path)]} for pointers the DRAWN
+    table names, each the line that reads the value."""
     print_lines = []
+    code_lines = []
     for rel in gallery_scripts():
         owner = None
         for number, line in enumerate(
@@ -256,16 +294,37 @@ def gallery_sites(pointers):
             stripped = line.strip()
             if stripped.startswith('//') or stripped.startswith('*'):
                 continue
-            if GALLERY_PRINT_RE.search(line):
+            is_print = bool(GALLERY_PRINT_RE.search(line))
+            code_lines.append((rel, owner, number, stripped, is_print))
+            if is_print:
                 print_lines.append((rel, owner, number, stripped))
 
     sites = {}
+    drawn = {}
     not_followed = []
     used = set()
+    drawn_broken = []
     for row, path, _key in pointers:
         found = map_entry(path)
         if found is None:
-            not_followed.append((row, path))
+            as_drawn = map_entry(path, DRAWN)
+            if as_drawn is None:
+                not_followed.append((row, path))
+                continue
+            suffix, (script, function, marker) = as_drawn
+            hits = [(f, n, code, is_print)
+                    for f, owner, n, code, is_print in code_lines
+                    if f == script and owner == function and marker in code]
+            if not hits:
+                drawn_broken.append((suffix, marker + ' (no line reads it)'))
+                continue
+            if any(is_print for _f, _n, _c, is_print in hits):
+                drawn_broken.append((suffix, marker + ' (on a print line: '
+                                     'it is printed, so it belongs in '
+                                     'PRINTS)'))
+                continue
+            for f, n, code, _p in hits:
+                drawn.setdefault(row, []).append((f, n, code, path))
             continue
         suffix, (script, function, marker) = found
         hits = [(f, n, code) for f, owner, n, code in print_lines
@@ -279,7 +338,17 @@ def gallery_sites(pointers):
     # removed) is broken too, since it can no longer vouch for anything.
     broken = [(suffix, PRINTS[suffix][2]) for suffix in PRINTS
               if suffix not in used]
-    return sites, not_followed, broken
+    # A DRAWN entry that no pointer reaches can no longer vouch for
+    # anything either.
+    reached = set()
+    for _row, path, _key in pointers:
+        found = map_entry(path, DRAWN)
+        if found is not None:
+            reached.add(found[0])
+    broken += drawn_broken
+    broken += [(suffix, DRAWN[suffix][2] + ' (no pointer reaches it)')
+               for suffix in DRAWN if suffix not in reached]
+    return sites, not_followed, broken, drawn
 
 
 def short(code, width=96):
@@ -292,14 +361,14 @@ def main():
     o_sites, o_console, o_uses = orrery_sites(names)
 
     gallery_read = os.path.exists(os.path.join(GALLERY_DIR, GALLERY_CONFIG))
-    g_sites, not_followed, broken, pointers = {}, [], [], []
+    g_sites, not_followed, broken, pointers, g_drawn = {}, [], [], [], {}
     if gallery_read:
         import json
         with open(os.path.join(GALLERY_DIR, GALLERY_CONFIG), 'r',
                   encoding='utf-8') as handle:
             config = json.load(handle)
         pointers = config_pointers(config, names)
-        g_sites, not_followed, broken = gallery_sites(pointers)
+        g_sites, not_followed, broken, g_drawn = gallery_sites(pointers)
 
     printed = [n for n in names if o_sites[n] or g_sites.get(n)]
     unprinted = [n for n in names if n not in printed]
@@ -340,8 +409,12 @@ def main():
             'FOLLOWED): %d%s.' % (len(not_followed), (': ' + ', '.join(
                 '`%s` at `%s`' % (r, p) for r, p in not_followed))
                 if not_followed else ''))
-        add('- PRINTS entries that no longer match a pointer or a print line '
-            '(BROKEN): %d%s.'
+        add('- Gallery pointers to exact rows read only to place a drawing '
+            '(DRAWN, not printed): %d%s.'
+            % (len(g_drawn), (': ' + ', '.join('`%s`' % r for r in g_drawn))
+               if g_drawn else ''))
+        add('- PRINTS or DRAWN entries that no longer match a pointer or '
+            'their line (BROKEN): %d%s.'
             % (len(broken), (': ' + ', '.join(
                 '`%s` -> `%s`' % (k, m) for k, m in broken))
                 if broken else ''))
@@ -378,6 +451,9 @@ def main():
     add('')
     for n in unprinted:
         add('- `%s`: named on %d other orrery line(s).' % (n, o_uses[n]))
+        for f, l, code, path in g_drawn.get(n, []):
+            add('  - gallery: read to draw, not printed, at `%s` line %d '
+                '(config `%s`): `%s`' % (f, l, path, short(code)))
     add('')
     add('## How the search works')
     add('')
@@ -390,6 +466,9 @@ def main():
     add('Gallery: each pointer in `data/objects_config.json` to an exact '
         'row, followed to its print lines by the PRINTS table in the tool: '
         'the page script, the function and a piece of the print line. '
+        'A pointer read only to place a drawing is named instead in the '
+        'DRAWN table, by the line that reads it, and that line must not '
+        'be a print line. '
         'A pointer with no entry, or an entry that matches nothing, is '
         'reported above rather than dropped. '
         'Page scripts read: %s.'
@@ -414,8 +493,8 @@ def main():
                % (len(printed), len(names), len(o_lines) + len(g_lines),
                   len(o_lines), len(g_lines) if gallery_read else 'NOT READ'))
     if gallery_read:
-        summary += '; %d not followed, %d map entries broken' % (
-            len(not_followed), len(broken))
+        summary += ('; %d drawn only, %d not followed, %d map entries broken'
+                    % (len(g_drawn), len(not_followed), len(broken)))
     else:
         summary += '; the gallery folder was not found'
     print(summary)
