@@ -2300,13 +2300,607 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 -- gallery moved to a5c35f5fcde47b3648040a5aec8724d58416d2d4
 
   4. After the push: python gallery_maintenance_run.py --live
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 11 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+
+  PASS Served reachability       1.8s  all 11 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at e21d9dd9
+
+  PASS Export freshness          0.1s  the served export is the orrery's
+                                    at e21d9dd9, byte for byte
+
+  orrery HEAD 907436a8
+  examining 28 of 93 links; the other 65 are served from the export
+    NOT IN STORE  create_sun_galactic_tide default not a top-level constant in the store
+                  /objects/0/features/oort_cloud/galactic_tide/typical_radius
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  28 pointers: 24 match, 0 DRIFT, 0 UNIT MISMATCH, 4 could not be examined.
+
+  PASS Store drift               0.9s  28 pointers against orrery
+                                    907436a8 -- 24 match, 0 DRIFT, 0
+                                    UNIT MISMATCH, 4 could not be
+                                    examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            28 pointers against orrery 907436a8 --
+  last swap 2026-09-26T21:30:02.295547+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
   5. On the phone held upright, after about ten minutes, close the
      page and open it again, then open Earth: the numbers along the
      left and bottom edges are larger and lighter, as they are
      sideways. Look at the bottom-left corner, where the labels of
-     two edges meet and were already crowded.
+     two edges meet and were already crowded. -- correct
+     
   6. Tell Claude the new gallery SHA and what you saw.
 
 TONY-ACTION ROLLUP for this patch:
   (do)     steps 1 to 6 above.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+===============================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_solar_system_room_half1_20260926.py
+  ok  interactive.html: the page's Updated stamp
+  ok  interactive.html: the Solar System room: its constants, driver, source line and panel copy
+  ok  interactive.html: the room's row in the EXHIBITS table
+  ok  interactive.html: a room's own inputs to its driver, in the boot path
+  ok  interactive.html: a room can name the marker a text box belongs to
+  ok  interactive.html: the info panel says 'body' in this room
+  ok  interactive.html: the info panel shows a source when there is no link
+  ok  interactive.html is the file that was tested, and ASCII
+  wrote interactive.html (168308 bytes)
+
+patch applied to 1 file
+
+Stamps updated: the 'Updated' line at the top of interactive.html.
+
+WHAT TO DO NEXT, in this order:
+
+  1. Move THIS script into the GALLERY's documentation/ folder
+     (not the orrery's). It has run. -- done
+  2. Run the gallery maintenance run:
+         python gallery_maintenance_run.py
+     Expect 16 of 16 gating checkers to pass, as before.
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.3s  no change to MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     0.9s  rewrote data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      12.3s  PASS (210 checks, 0 failures)
+  PASS Pole of date              0.2s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.1s  All 51 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served.
+  PASS Store writer suite        4.3s  All 251 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 252 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 65 link(s) compared, store
+                                    a2d6b97d161e.
+  PASS Pointer join              0.1s  Every link is accounted for: 93
+                                    link(s) against orrery 907436a8,
+                                    24 fallback named; read check: 43
+                                    of 43 measured rows reached carry
+                                    a read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's features exactly: 4
+                                    object(s), 35 named shell(s), in
+                                    both cache files.
+  PASS Feature renderers         0.9s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 57 hover(s) and 288
+                                    number(s) examined; 13 graded, 5
+                                    graded by line, 44 held to the
+                                    fixture ===
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: no sibling directories and
+                                    nothing in data/ the builder did
+                                    not make.
+
+======================================================================
+  16 of 16 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories and
+  last swap 2026-09-26T21:30:02.295547+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  3. In GitHub Desktop, in the gallery, the change list should show
+     interactive.html and this script under documentation/, plus
+     whatever the maintenance run rewrites as usual. Commit and push.-- 8545cbd7d34b98f1de5ff93615c5da5e3e5b75c3
+  4. After the push: python gallery_maintenance_run.py --live
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 11 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+
+  PASS Served reachability       1.5s  all 11 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 907436a8
+
+  PASS Export freshness          0.1s  the served export is the orrery's
+                                    at 907436a8, byte for byte
+
+  orrery HEAD 907436a8
+  examining 28 of 93 links; the other 65 are served from the export
+    NOT IN STORE  create_sun_galactic_tide default not a top-level constant in the store
+                  /objects/0/features/oort_cloud/galactic_tide/typical_radius
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  28 pointers: 24 match, 0 DRIFT, 0 UNIT MISMATCH, 4 could not be examined.
+
+  PASS Store drift               1.0s  28 pointers against orrery
+                                    907436a8 -- 24 match, 0 DRIFT, 0
+                                    UNIT MISMATCH, 4 could not be
+                                    examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            28 pointers against orrery 907436a8 --
+  last swap 2026-09-26T21:30:02.295547+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  5. After about ten minutes, on your phone, open
+         palomasorrery.com/interactive.html?exhibit=solar-system
+     and go through the Mode 5 list Claude gave you.
+
+Now a headless run of the patched copy, with Pyodide and Plotly served locally.Now the patch script itself, built from those seven anchored edits.The patch for the new room is ready. It's built on gallery `a5c35f5f`, which is still the current commit. Run it from the gallery folder with VS Code's Run button, and it will print its own next steps.
+
+**What it does:** it adds the room at `interactive.html?exhibit=solar-system`, titled "The Solar System." The room shows the Sun, Earth, Jupiter, Saturn and Apophis on their orbits, where they are today, with no shells. Nothing under `data/` changes, so it reaches the site on the push alone, with no cache rebuild. The Explorer is untouched.
+
+**A correction.** I told you the room would show 25 percent beyond the largest orbit. That's the rule for the static assembler scenes, not the rooms. The rooms open at 10 percent beyond the largest thing drawn, and this room follows that rule, so it opens at about 11 AU around Saturn's orbit.
+
+**One fix beyond the plan.** When you tap a body's name, a text box opens. At first the box described an arbitrary point on the orbit, not the body. For Earth it read 0.98 AU when Earth today is at 1.003 AU. I pointed the box at the body itself. That touched a small piece of the shared page, and I confirmed the Sun and Earth rooms come out identical before and after.
+
+**What was tested.** I loaded the room headless as a desktop and as an upright phone, with no errors. The gallery maintenance run on a patched copy passed 16 of 16. None of those checkers opens the new room, though, so that result only says nothing else broke. The Explorer couldn't be run here at all, so it needs your phone.
+
+**What to look at on your phone:**
+- **The opening view.** Saturn's orbit fills the view, and Earth and Apophis sit crowded near the Sun. That's expected at this scale.
+- **The drawer.** It shows five rows: Earth, Jupiter, Saturn, Apophis, Sun. Tap Earth's name; its box should say about 1.00 AU.
+- **The title inside the scene.** On an upright phone, "Paloma's Orrery — The Solar System" runs under the arrow buttons and reads "The Solar Sys…". Tell me if you want it shorter.
+- **The info panel's words.** Read them, since visitors will. Each body says "No link on file for this body," because bodies have no links in the config yet. Adding links is config work, which puts it in Half 2.
+- **The other rooms.** Check that the Explorer, the Sun and Earth look as they did.
+
+  6. Open the Explorer (the gallery's Explorer card) and the Sun and
+     Earth rooms, and confirm each looks as it did.
+  7. Tell Claude the new gallery SHA and what you saw. -- correct. 8545cbd7d34b98f1de5ff93615c5da5e3e5b75c3
+  -- ledger update for this work? 
+
+TONY-ACTION ROLLUP for this patch:
+  (do)     steps 1 to 7 above.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+===============================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L363_2_studio_lists_quoted_room_keys_20260926.py
+  ok  tools/json_converter.py: the module's update stamp
+  ok  tools/json_converter.py: live_scene_urls() reads a quoted room key
+  ok  tools/json_converter.py is the file that was tested, and ASCII
+  wrote tools/json_converter.py (36827 bytes)
+
+patch applied to 1 file
+
+Stamps updated: the 'Module updated' line in tools/json_converter.py.
+
+WHAT TO DO NEXT, in this order:
+
+  1. Move THIS script into the GALLERY's documentation/ folder. -- done
+  2. Run the gallery maintenance run:
+         python gallery_maintenance_run.py
+     Expect 16 of 16, as before. None of them reads Studio's list.
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.3s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     0.9s  no change to
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      12.7s  PASS (210 checks, 0 failures)
+  PASS Pole of date              0.2s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.1s  All 51 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served.
+  PASS Store writer suite        4.1s  All 251 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 252 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 65 link(s) compared, store
+                                    a2d6b97d161e.
+  PASS Pointer join              0.1s  Every link is accounted for: 93
+                                    link(s) against orrery 907436a8,
+                                    24 fallback named; read check: 43
+                                    of 43 measured rows reached carry
+                                    a read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's features exactly: 4
+                                    object(s), 35 named shell(s), in
+                                    both cache files.
+  PASS Feature renderers         0.9s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 57 hover(s) and 288
+                                    number(s) examined; 13 graded, 5
+                                    graded by line, 44 held to the
+                                    fixture ===
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: no sibling directories and
+                                    nothing in data/ the builder did
+                                    not make.
+
+======================================================================
+  16 of 16 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories and
+  last swap 2026-09-26T21:30:02.295547+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  3. Open Gallery Studio. Click New Interactive Card... (the purple
+     button). The scene list now includes
+         interactive.html?exhibit=solar-system
+     Pick it, give the title and placard, and create. The card
+     lands in Storage. 
+  4. In the gallery editor: File > Reload from disk FIRST (an open
+     editor does not see Studio's write, and its Save All would
+     write over it). Then place the card in its room.
+  5. Commit and push. Tell Claude the new gallery SHA. -- 3f7f50ab0dcc53bc989983913644be28621e9acd
+
+TONY-ACTION ROLLUP for this patch:
+  (do)     steps 1 to 5 above.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+==============================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L363_3_date_line_and_editor_save_check_20260926.py
+  ok  interactive.html: the page's Updated stamp
+  ok  interactive.html: the date line, worked out from the epoch the driver returns
+  ok  interactive.html: the room's panel words: 'where it is now'
+  ok  interactive.html: the panel's note: 'where it sits now'
+  ok  interactive.html: the room asks for the current minute
+  ok  interactive.html: the room's compose returns the date line
+  ok  interactive.html: where the title sits: clear of the arrow cross on an upright phone
+  ok  interactive.html: the title carries the date line
+  ok  interactive.html: the boot path asks for the current minute when a room says so
+  ok  interactive.html: the boot path keeps the room's date line
+  ok  interactive.html: the title stays clear of the cross when the phone turns
+  ok  interactive.html is the file that was tested, and ASCII
+  ok  tools/gallery_editor.py: the module's update stamp
+  ok  tools/gallery_editor.py: hashlib is imported; disk_fingerprint() reads what a file is now
+  ok  tools/gallery_editor.py: the load records what both files were, and names the file
+  ok  tools/gallery_editor.py: Save All refuses a file that changed on disk since it was loaded
+  ok  tools/gallery_editor.py: after a save, the record moves to what was written
+  ok  tools/gallery_editor.py is the file that was tested, and ASCII
+  wrote interactive.html (172822 bytes)
+  wrote tools/gallery_editor.py (60411 bytes)
+
+patch applied to 2 files
+
+Stamps updated: the 'Updated' line at the top of interactive.html,
+and the 'Module updated' line in tools/gallery_editor.py.
+
+WHAT TO DO NEXT, in this order:
+
+  1. Move THIS script into the GALLERY's documentation/ folder. -- done
+  2. Run the gallery maintenance run:
+         python gallery_maintenance_run.py
+     Expect 16 of 16, as before.
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.5s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     1.0s  no change to
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      15.5s  PASS (210 checks, 0 failures)
+  PASS Pole of date              0.3s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.1s  All 51 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served.
+  PASS Store writer suite        5.6s  All 251 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 252 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 65 link(s) compared, store
+                                    a2d6b97d161e.
+  PASS Pointer join              0.1s  Every link is accounted for: 93
+                                    link(s) against orrery 907436a8,
+                                    24 fallback named; read check: 43
+                                    of 43 measured rows reached carry
+                                    a read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's features exactly: 4
+                                    object(s), 35 named shell(s), in
+                                    both cache files.
+  PASS Feature renderers         1.3s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.3s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.3s  === PASS: 57 hover(s) and 288
+                                    number(s) examined; 13 graded, 5
+                                    graded by line, 44 held to the
+                                    fixture ===
+  PASS Artifact 1 assembler      0.3s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: no sibling directories and
+                                    nothing in data/ the builder did
+                                    not make.
+
+======================================================================
+  16 of 16 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories and
+  last swap 2026-09-26T21:30:02.295547+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  3. In GitHub Desktop the change list should show interactive.html,
+     tools/gallery_editor.py and this script, plus what the run
+     rewrites as usual. Commit and push. -- 74624c0c085b3f42b4bbf028a5a603c626ee5bd9
+  4. After the push: python gallery_maintenance_run.py --live
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 11 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+
+  PASS Served reachability       1.6s  all 11 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 907436a8
+
+  PASS Export freshness          0.1s  the served export is the orrery's
+                                    at 907436a8, byte for byte
+
+  orrery HEAD 907436a8
+  examining 28 of 93 links; the other 65 are served from the export
+    NOT IN STORE  create_sun_galactic_tide default not a top-level constant in the store
+                  /objects/0/features/oort_cloud/galactic_tide/typical_radius
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  28 pointers: 24 match, 0 DRIFT, 0 UNIT MISMATCH, 4 could not be examined.
+
+  PASS Store drift               0.9s  28 pointers against orrery
+                                    907436a8 -- 24 match, 0 DRIFT, 0
+                                    UNIT MISMATCH, 4 could not be
+                                    examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            28 pointers against orrery 907436a8 --
+  last swap 2026-09-26T21:30:02.295547+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  5. After about ten minutes, open the Solar System room on your
+     phone, upright and then sideways, and on the desktop. The date
+     line should sit right under the title, clear of every button,
+     and give the current minute in UTC. -- correct.
+  6. Open the gallery editor: its status bar should end with the
+     path of the gallery_metadata.json it opened.
+  7. Tell Claude the new gallery SHA and what you saw.
+
+TONY-ACTION ROLLUP for this patch:
+  (do)     steps 1 to 7 above.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
