@@ -393,7 +393,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*213 live items; 198 need attention (`!`); 192 RICE-scored; 144 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*218 live items; 203 need attention (`!`); 192 RICE-scored; 144 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -517,6 +517,11 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-360 | The hover budget measures recorded payloads, so it cannot see a line added by newly served data (checks) | OPEN | -- | 2026-09-22 |
 | ! | L-361 | An epoch typed in the page, with no store row (gallery, store) | OPEN | -- | 2026-09-22 |
 | ! | L-362 | The master plan's two summaries are a month behind the plan (documentation) | OPEN | -- | 2026-09-22 |
+| ! | L-363 | The Solar System room: the bodies as symbols, before their shells (gallery, exhibits) | OPEN | -- | 2026-09-26 |
+| ! | L-364 | A comet's own trust window can exclude today while the served window passes the scene (gallery, trust) | OPEN | -- | 2026-09-26 |
+| ! | L-365 | The assembler leaves out a body it cannot draw, without a warning (gallery, assembler) | OPEN | -- | 2026-09-26 |
+| ! | L-366 | An orbit's info marker describes an arbitrary point on the orbit (gallery, assembler) | OPEN | -- | 2026-09-26 |
+| ! | L-367 | No checker opens a new room (checks, gallery) | OPEN | -- | 2026-09-26 |
 
 ### B. Pending Action (Tony-side)
 
@@ -840,6 +845,132 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-367] No checker opens a new room (checks, gallery)
+<!-- L:367 status:OPEN upd:2026-09-26 section:A flag: rice: -->
+- **Found 2026-09-26** delivering L-363. The gallery maintenance run
+  passed 16 of 16 on the patched copy, and none of its checkers boots a
+  room from the page's `EXHIBITS` table. They read recorded payloads
+  (`payload_earth_scene.json`, `payload_earth.json`,
+  `payload_jupiter_saturn.json`) or the served cache, and Arrival says
+  so in its own words: "both rooms". So the 16 said the patch broke
+  nothing else, not that the new room works. The room's checks were a
+  headless run in the session and Tony's phone.
+- A class, not an instance: Jupiter's and Saturn's rooms will enter the
+  same blind spot.
+- Related, for Claude sessions: the Solar System Explorer cannot be
+  rendered headless in the sandbox, because it needs Pyodide's numpy,
+  which the sandbox cannot fetch. The exhibit rooms need only the
+  standard library and can be.
+**Gap:** A check that lists `EXHIBITS` and fails on a room no checker boots, or one smoke that boots every room.
+**Ref:** gallery `gallery_maintenance_run.py`; gallery `documentation/smoke_*.js`; L-363.
+
+#### [L-366] An orbit's info marker describes an arbitrary point on the orbit (gallery, assembler)
+<!-- L:366 status:OPEN upd:2026-09-26 section:A flag: rice: -->
+- **Found 2026-09-26** building L-363, at gallery `a5c35f5f`.
+  `render_orbits.build_orbit_traces` puts each orbit's single info
+  marker at the 11th of its sampled points (`idx = min(10, n - 1)`),
+  and its hover gives that point's distance and coordinates, labelled
+  only "(osculating orbit)". It is true of that point, and the point
+  means nothing. Every osculating orbit the assembler draws carries one,
+  the golden artifacts included.
+- In the Solar System room the page's text box pinned to it, so naming
+  Earth read "r = 0.982514 AU" while Earth was at 1.002730 AU. Fixed in
+  that room only: the room names each body's position marker as the
+  box's target (`meta.label_target`, read by `sunLabelMarker`). The
+  cross itself is still drawn.
+**Gap:** Decide what the orbit's info marker is for -- a named point, such as perihelion, with its name in the hover, or orbit facts only -- then change `render_orbits.py` once.
+**Ref:** gallery `gallery/assembler/render_orbits.py`; gallery `interactive.html::sunLabelMarker`; L-363.
+
+#### [L-365] The assembler leaves out a body it cannot draw, without a warning (gallery, assembler)
+<!-- L:365 status:OPEN upd:2026-09-26 section:A flag: rice: -->
+- **Found 2026-09-26** asking for Voyager 1 in L-363, at gallery
+  `a5c35f5f`. `assemble_scene` draws only objects that carry an
+  osculating block. Anything else -- Voyager 1 is served as positions,
+  frame `arc-natural` -- is skipped with no trace and no warning.
+  `render_spacecraft.py` is a placeholder that raises
+  NotImplementedError until artifact 5.
+- The Solar System room guards itself: its compose counts one position
+  marker per body it asks for and reports a miss in the info panel. The
+  assembler still does not, for any other caller.
+**Gap:** `assemble_scene` warns, or refuses, for every requested object it does not draw; Voyager 1 waits for `render_spacecraft` (artifact 5).
+**Ref:** gallery `gallery/assembler/assemble.py`; `gallery/assembler/render_spacecraft.py`; L-363.
+
+#### [L-364] A comet's own trust window can exclude today while the served window passes the scene (gallery, trust)
+<!-- L:364 status:OPEN upd:2026-09-26 section:A flag: rice: -->
+- **Found 2026-09-26** building L-363, at gallery `a5c35f5f`. Each
+  heliocentric object's trust record carries its own window, centred on
+  its element epoch. Halley's (anchored at its 1986 perihelion, capped
+  at half its period) ends JD 2460350.6, February 2024. Encke's ends JD
+  2460843.5, June 2025. Both exclude today.
+- The cache's global `served_window` is built in
+  `tools/gallery_cache_builder.py` from the SHORTEST window's LENGTH
+  (`window_days`, Apophis's today), centred on the build time. It does
+  not look at where each object's window falls, and `resolver.py`
+  checks a scene's date only against that global window. So a scene of
+  today with a comet in it passes, and draws a position the comet's own
+  trust record does not vouch for: a check that passes while blind.
+- Nothing served draws a comet today. L-363 left both out for this
+  reason.
+- Tony, 2026-09-26: the trust window will need changes once the
+  encounter work starts; not today.
+**Gap:** The scene date checked against each drawn object's own window, or a served window built from where the windows fall; taken up with the encounter work.
+**Ref:** gallery `tools/gallery_cache_builder.py` (served_window, M2 section 5.5); gallery `gallery/assembler/resolver.py`, step 3; skills/gallery-assembler/SKILL.md; L-363.
+
+#### [L-363] The Solar System room: the bodies as symbols, before their shells (gallery, exhibits)
+<!-- L:363 status:OPEN upd:2026-09-26 section:A flag: rice: -->
+- **What it is.** A third room in `interactive.html`,
+  `?exhibit=solar-system`, titled "The Solar System". It draws the
+  bodies as their symbols on their orbits, from the served cache, on
+  today's date, with no shells. Tony, 2026-09-26: symbols first, the
+  way the orrery itself grew, as a quick win while each body's shells
+  wait for its own room. It is the top level L-286's drill-down needs.
+- **Tony's rulings, 2026-09-26:**
+  - Two halves, because L-322 Stage D shares `data/objects_config.json`
+    and the cache rebuild. Half 1 touches only `interactive.html`.
+    Half 2 waits for L-322's manifest section 6 to push.
+  - Plan B for the key: `solar-system` is permanent. The Explorer keeps
+    `solar-system-explorer` and stays the default until Half 2 and
+    Tony's acceptance; then the default switches, and the Explorer
+    card's live link is changed in Studio.
+  - Only bodies the cache stands behind today: the Sun, Earth, Jupiter,
+    Saturn and Apophis. The Moon, Io, Titan and Charon are left out;
+    at this scale each sits on its planet, and they belong in their
+    planets' rooms.
+  - Today's date, the method every room uses (`resolver.py` checks the
+    served window once for the scene). No date control: adding one is
+    a decision for all rooms at once.
+  - The opening view is the rooms' rule, 1.1 x the largest thing drawn.
+    Claude first cited 25 percent, the static artifacts' rule, and
+    corrected it before delivery.
+  - Shells are kept out by the room's compose using the assembler's
+    figure only and building no features. No arrival block.
+- **Half 1 shipped at gallery `8545cbd7`** from
+  `patch_solar_system_room_half1_20260926.py`, built on `a5c35f5f`.
+  The pushed `interactive.html` is byte-identical to the tested file
+  [verified @8545cbd7]. Beyond the plan, naming a body opens its text
+  box at the body, not at its orbit's info cross (L-366). Two shared
+  changes that alter nothing in the Sun or Earth rooms, confirmed
+  identical before and after in the headless run: the info panel shows
+  a source when there is no link, and a room can name the marker a
+  text box belongs to. Tony's Mode 5 on the phone: "correct for our
+  scope."
+- **Seen in the headless phone run, not ruled:** on an upright phone
+  the in-scene title "Paloma's Orrery -- The Solar System" runs under
+  the arrow buttons. For Half 2's Mode 5.
+- **Half 2, still to do:**
+  - Mercury, Venus, Mars, Uranus and Neptune in
+    `data/objects_config.json`, and one cache rebuild.
+  - Pluto: a Sun-centred entry for the Pluto system. Pluto is served
+    relative to the Pluto-Charon barycentre, and the assembler refuses,
+    by design, to translate it into a Sun-centred scene.
+  - A link for each body in the config. The panel reads "No link on
+    file for this body" today.
+  - A gallery card for the room, which gives it its L-286 chain.
+  - Tony's Mode 5, then **Tony-action (decide):** the default switch.
+  - The comets return with L-364; Voyager 1 with L-365.
+**Gap:** Half 2 (above), after L-322 section 6 pushes; then Tony's decision on the default.
+**Ref:** `documentation/HANDOFF_explorer_symbols_half1_20260926.md` (rev 2); gallery `documentation/patch_solar_system_room_half1_20260926.py`; L-286; L-099; L-322; L-364 to L-367.
 
 #### [L-362] The master plan's two summaries are a month behind the plan (documentation)
 <!-- L:362 status:OPEN upd:2026-09-22 section:A flag: rice: -->
