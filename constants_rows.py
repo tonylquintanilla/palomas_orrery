@@ -39,6 +39,12 @@ WHAT A ROW CARRIES
                            "uncertainty" followed directly by the number,
                            in the row's own unit (provenance-discipline
                            Rule 1); prose around it is never read
+    prints                 the print count of an exact row a display
+                           prints, an int, or None. Read ONLY in the field
+                           form directly after "exact --", as
+                           "exact -- prints 3", because measured rows'
+                           "# Figures:" lines say "the source prints 1.5"
+                           in prose (provenance-discipline 2.20, Rule 7)
 
     A row is DERIVED when its right-hand side is an expression, or when
     it is on the TRANSITIONAL list below. A row that only carries a
@@ -86,10 +92,17 @@ is read here, once, as Row.uncertainty; UNCERTAINTY_FIELD_RE is the one
 pattern for it, which test_derived_figures.py now imports instead of
 keeping its own; and uncertainty_of() lets a display print a row's
 stated uncertainty beside its value, as Earth's magnetotail hover does.)
+Module updated: September 27, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D, patch D15: an exact row's print count is read here as
+Row.prints; print_count_problem() is the one check of it, which the
+export runs on every row; prints_of() and exact_text() let an orrery
+display print an exact row by its count instead of by a width chosen on
+its own line. provenance-discipline 2.20, Rule 7.)
 """
 
 import ast
 import hashlib
+import math
 import os
 import re
 
@@ -107,6 +120,10 @@ NAME_RE = re.compile(r"\b[A-Za-z][A-Za-z0-9_]*\b")
 # for every reader: the figures checker, the export and the displays.
 UNCERTAINTY_FIELD_RE = re.compile(
     r"\buncertainty\s+([-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?)")
+# The print count of an exact row (provenance-discipline 2.20, Rule 7):
+# anchored directly after "exact --", so the prose "the source prints
+# 1.5" on a measured row's line is never read as one.
+PRINTS_FIELD_RE = re.compile(r"^exact\s*--\s*prints\s+(\d+)\b")
 
 
 class Row(object):
@@ -129,6 +146,7 @@ class Row(object):
         self.figures_text = None
         self.figures_error = None
         self.uncertainty = None
+        self.prints = None
         self.status = None
         self.derived_text = None
         self.read_text = []
@@ -254,6 +272,13 @@ def _fill_fields(row):
         match = UNCERTAINTY_FIELD_RE.search(row.figures_text)
         if match:
             row.uncertainty = match.group(1)
+        if row.figures == "exact":
+            match = PRINTS_FIELD_RE.match(row.figures_text)
+            if match:
+                row.prints = int(match.group(1))
+                if row.prints < 1:
+                    row.figures_error = ("'prints %s': a print count is at "
+                                         "least 1" % match.group(1))
 
     row.status = row.field("Status")
     row.derived_text = row.field("Derived", loose=True)
@@ -395,6 +420,111 @@ def uncertainty_of(name, project_dir=None):
     if literal is None:
         return None
     return abs(float(literal)), literal
+
+
+_PRINTS_BY_DIR = {}
+
+
+def prints_of(name, project_dir=None):
+    """The print count exact row `name` states, an int, or None.
+
+    A name that is not a row raises KeyError, as in figures_of().
+    L-322 Stage D, patch D15.
+    """
+    project_dir = project_dir or os.path.dirname(os.path.abspath(__file__))
+    table = _PRINTS_BY_DIR.get(project_dir)
+    if table is None:
+        _text, _rows, by_name = read_store(project_dir)
+        table = dict((row_name, row.prints)
+                     for row_name, row in by_name.items())
+        _PRINTS_BY_DIR[project_dir] = table
+    return table[name]
+
+
+def _written_digits(text):
+    """How many digits a number, as written, has from its first non-zero
+    digit to its last digit, trailing zeros included: 200.0 has four,
+    2.0 two, 4.5 two, 0.0 none. The ceiling a print count may not pass.
+    """
+    mantissa = text.strip().lstrip("+-").split("e")[0].split("E")[0]
+    digits = mantissa.replace(".", "").lstrip("0")
+    return len(digits)
+
+
+def print_count_problem(row, value):
+    """Why `row`'s print count is wrong for `value`, or None.
+
+    Three refusals (provenance-discipline 2.20, Rule 7):
+      - a count larger than the digits the number has. For a typed
+        number these are the digits of the literal as written; for an
+        expression, the digits of the value it computes. So 200.0 allows
+        up to four, and a declared construction giving 4.5 up to two;
+      - a count too small to write the number out in full, because an
+        exact number printed rounded is a different number: 105 at two
+        figures would print 100;
+      - any count but 1 on a zero, which prints as 0.
+    A row with no print count has nothing to check here; whether a
+    display reaches it is exact_rows_report.py's question.
+    """
+    if row.prints is None:
+        return None
+    if (isinstance(value, bool) or not isinstance(value, (int, float))
+            or value != value):
+        return ("states 'prints %d', but its value is not one number"
+                % row.prints)
+    if value == 0:
+        if row.prints != 1:
+            return ("states 'prints %d', but a zero prints as 0, so its "
+                    "print count is 1" % row.prints)
+        return None
+    if row.kind == "literal":
+        written = row.rhs
+    else:
+        written = repr(float(value))
+    ceiling = _written_digits(written)
+    if row.prints > ceiling:
+        return ("states 'prints %d', but %s has only %d digit(s) to print"
+                % (row.prints, written.strip(), ceiling))
+    if float("%.*g" % (row.prints, value)) != float(value):
+        return ("states 'prints %d', which would print %r as %s: an exact "
+                "number prints in full" % (row.prints, value,
+                                           format_prints(value, row.prints)))
+    return None
+
+
+def format_prints(value, prints, grouping=False):
+    """`value` at `prints` significant figures, in plain digits.
+
+    The same result as the gallery's sigFigures(): 4.5 at two figures is
+    "4.5", 2.0 at one is "2", 120.0 at three is "120", 0.0 at one is "0".
+    grouping=True adds a thousands separator, "2,000".
+    """
+    rounded = float("%.*g" % (prints, value))
+    if rounded == 0:
+        decimals = prints - 1
+    else:
+        decimals = prints - 1 - int(math.floor(math.log10(abs(rounded))))
+    decimals = max(0, min(20, decimals))
+    if grouping:
+        return "{:,.{d}f}".format(rounded, d=decimals)
+    return "{:.{d}f}".format(rounded, d=decimals)
+
+
+def exact_text(name, grouping=False):
+    """Exact row `name` as text, at the print count its row states.
+
+    For an orrery display (provenance-discipline 2.20, Rule 7). The value
+    and the count are read by the same name, so they cannot come from
+    different rows. A row that states no print count raises ValueError
+    where the display is built, instead of a width being chosen for it.
+    L-322 Stage D, patch D15.
+    """
+    import constants_new
+    prints = prints_of(name)
+    if prints is None:
+        raise ValueError("%s states no print count; add 'prints N' after "
+                         "'exact --' on its # Figures: line" % name)
+    return format_prints(getattr(constants_new, name), prints, grouping)
 
 
 def names_in(text, known):

@@ -25,7 +25,8 @@ WHAT IT CHECKS, each printing what it compared
     1. The export's store_sha256 equals the sha256 of constants_new.py on
        disk, CRLF normalised to LF. Both hashes are printed.
     2. Re-reading the store now gives the same rows as the file: value,
-       unit, figures, status, derived, read and inputs, for every row.
+       unit, figures, status, derived, read, inputs, uncertainty and
+       prints, for every row.
        The count examined is printed and every disagreement is named. An
        export made before schema 3 lacks read and inputs, so it fails
        here by name on every row rather than passing as current.
@@ -62,6 +63,10 @@ Module updated: September 17, 2026 with Anthropic's Claude Opus 5
 closed_slices and transitional against constants_rows.py.)
 Module updated: September 22, 2026 with Anthropic's Claude Opus 5
 (L-322 Stage C2: check 2 compares "read" and "inputs" too.)
+Module updated: September 27, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D, patch D15: check 2 compares "prints", new in schema 5,
+and "uncertainty", which the export has served since schema 4 and this
+check did not compare until now.)
 """
 
 import json
@@ -74,7 +79,7 @@ import export_constants
 REQUIRED = ("schema", "store", "store_sha256", "tokens", "closed_slices",
             "transitional", "rows", "not_exported")
 ROW_FIELDS = ("value", "unit", "figures", "status", "derived", "read",
-              "inputs")
+              "inputs", "uncertainty", "prints")
 
 
 def check(project_dir, closed=None):

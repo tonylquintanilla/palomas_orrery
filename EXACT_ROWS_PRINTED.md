@@ -12,25 +12,51 @@ Rebuilt by `exact_rows_report.py` on every orrery maintenance run. An exact row 
 - Gallery pointers to exact rows read only to place a drawing (DRAWN, not printed): 4: `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`, `EARTH_MAGNETOTAIL_DRAWN_END_RADII`, `EARTH_POLE_RA_J2000_DEG`, `EARTH_POLE_DEC_J2000_DEG`.
 - PRINTS or DRAWN entries that no longer match a pointer or their line (BROKEN): 0.
 
+## Printed by the count
+
+Rule 7: each printed exact row states a print count, each orrery line prints it through `exact_text()`, and the gallery serves the count beside it. **FAILING -- the items below are named.**
+
+- `EARTH_LEO_UPPER_ALTITUDE_KM`: prints 4
+- `EARTH_LEO_LOWER_ALTITUDE_KM`: prints 3
+- `EARTH_VAN_ALLEN_OUTER_RADII`: prints 2
+- `EARTH_SOLAR_WIND_PRESSURE_NPA`: prints 1
+- `EARTH_SOLAR_WIND_BZ_NT`: prints 1
+- `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG`: prints 3
+- `EARTH_BOW_SHOCK_CUT_ANGLE_DEG`: prints 3
+
+Gallery lines whose served entry does not carry the row's count ("prints" in `data/objects_config.json`):
+
+- `EARTH_LEO_UPPER_ALTITUDE_KM` at `gallery/feature_renderers.js` line 2022 (config `/objects/1/features/earth_orbital_zones/leo_outer/altitude`): serves None, the row states 4
+- `EARTH_LEO_LOWER_ALTITUDE_KM` at `gallery/feature_renderers.js` line 2022 (config `/objects/1/features/earth_orbital_zones/leo_inner/altitude`): serves None, the row states 3
+- `EARTH_VAN_ALLEN_OUTER_RADII` at `gallery/feature_renderers.js` line 1130 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): serves None, the row states 2
+- `EARTH_VAN_ALLEN_OUTER_RADII` at `gallery/feature_renderers.js` line 1137 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): serves None, the row states 2
+- `EARTH_VAN_ALLEN_OUTER_RADII` at `gallery/feature_renderers.js` line 1140 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): serves None, the row states 2
+- `EARTH_VAN_ALLEN_OUTER_RADII` at `gallery/feature_renderers.js` line 1143 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): serves None, the row states 2
+- `EARTH_SOLAR_WIND_PRESSURE_NPA` at `gallery/feature_renderers.js` line 2278 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/pressure`): serves None, the row states 1
+- `EARTH_SOLAR_WIND_PRESSURE_NPA` at `gallery/feature_renderers.js` line 2489 (config `/objects/1/features/earth_magnetosphere/bow_shock/surface/pressure`): serves None, the row states 1
+- `EARTH_SOLAR_WIND_BZ_NT` at `gallery/feature_renderers.js` line 2277 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/bz`): serves None, the row states 1
+- `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG` at `gallery/feature_renderers.js` line 2280 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/cut_angle`): serves None, the row states 3
+- `EARTH_BOW_SHOCK_CUT_ANGLE_DEG` at `gallery/feature_renderers.js` line 2491 (config `/objects/1/features/earth_magnetosphere/bow_shock/surface/cut_angle`): serves None, the row states 3
+
 ## Printed
 
 ### `EARTH_LEO_UPPER_ALTITUDE_KM`
 
-- orrery `earth_visualization_shells.py` line 1514: `f"Altitude range: {EARTH_LEO_LOWER_ALTITUDE_KM:,.0f} km to {EARTH_LEO_UPPER_ALTITUDE_KM:,.0f}...`
-- orrery `shell_configs.py` line 2329: `f"Low Earth Orbit (LEO) is the region from roughly {EARTH_LEO_LOWER_ALTITUDE_KM:,.0f} km to {...`
+- orrery `earth_visualization_shells.py` line 1520: `f"Altitude range: {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=True)} km to {exact_tex...`
+- orrery `shell_configs.py` line 2334: `f"Low Earth Orbit (LEO) is the region from roughly {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM',...`
 - gallery `gallery/feature_renderers.js` line 2022 (config `/objects/1/features/earth_orbital_zones/leo_outer/altitude`): `kmAndAu(km.altitudeKm, km.altitudeFigures) + "<br>";`
 
 ### `EARTH_LEO_LOWER_ALTITUDE_KM`
 
-- orrery `earth_visualization_shells.py` line 1514: `f"Altitude range: {EARTH_LEO_LOWER_ALTITUDE_KM:,.0f} km to {EARTH_LEO_UPPER_ALTITUDE_KM:,.0f}...`
-- orrery `shell_configs.py` line 2329: `f"Low Earth Orbit (LEO) is the region from roughly {EARTH_LEO_LOWER_ALTITUDE_KM:,.0f} km to {...`
+- orrery `earth_visualization_shells.py` line 1520: `f"Altitude range: {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=True)} km to {exact_tex...`
+- orrery `shell_configs.py` line 2334: `f"Low Earth Orbit (LEO) is the region from roughly {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM',...`
 - gallery `gallery/feature_renderers.js` line 2022 (config `/objects/1/features/earth_orbital_zones/leo_inner/altitude`): `kmAndAu(km.altitudeKm, km.altitudeFigures) + "<br>";`
 
 ### `EARTH_VAN_ALLEN_OUTER_RADII`
 
-- orrery `earth_visualization_shells.py` line 1293: `f"ring is the flux peak, L = {EARTH_VAN_ALLEN_OUTER_RADII:g} -- about {_km_above_surface(EART...`
-- orrery `earth_visualization_shells.py` line 1299: `f"the L = {_band_low} to {_band_high} band; the drawn {EARTH_VAN_ALLEN_OUTER_RADII:g} is our ...`
-- orrery `shell_configs.py` line 2318: `f"{EARTH_VAN_ALLEN_OUTER_RADII:g} Earth radii out (doi:10.1029/2024JA033504).\n"`
+- orrery `earth_visualization_shells.py` line 1299: `f"ring is the flux peak, L = {exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} -- about {_km_above_...`
+- orrery `earth_visualization_shells.py` line 1305: `f"the L = {_band_low} to {_band_high} band; the drawn {exact_text('EARTH_VAN_ALLEN_OUTER_RADI...`
+- orrery `shell_configs.py` line 2323: `f"{exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} Earth radii out (doi:10.1029/2024JA033504).\n"`
 - gallery `gallery/feature_renderers.js` line 1130 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `? wrapHover("Drawn at " + fmtServed(distances[i], figures[i], 1) +`
 - gallery `gallery/feature_renderers.js` line 1137 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `: "Drawn at " + fmtServed(distances[i], figures[i], 1) + " " +`
 - gallery `gallery/feature_renderers.js` line 1140 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `? SOFT_BR + "(given as L = " + fmtServed(distances[i], figures[i], 1) +`
@@ -38,9 +64,9 @@ Rebuilt by `exact_rows_report.py` on every orrery maintenance run. An exact row 
 
 ### `EARTH_SOLAR_WIND_PRESSURE_NPA`
 
-- orrery `earth_visualization_shells.py` line 964: `f"Sun-facing side at a nominal solar wind pressure of {EARTH_SOLAR_WIND_PRESSURE_NPA:g} nPa.\n"`
-- orrery `earth_visualization_shells.py` line 1147: `f"side at a nominal solar wind pressure of {EARTH_SOLAR_WIND_PRESSURE_NPA:g} nPa. It stretche...`
-- orrery `earth_visualization_shells.py` line 1231: `f"Sun-facing side at a nominal solar wind pressure of {EARTH_SOLAR_WIND_PRESSURE_NPA:g} nPa.<...`
+- orrery `earth_visualization_shells.py` line 970: `f"Sun-facing side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_...`
+- orrery `earth_visualization_shells.py` line 1153: `f"side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_NPA')} nPa....`
+- orrery `earth_visualization_shells.py` line 1237: `f"Sun-facing side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_...`
 - gallery `gallery/feature_renderers.js` line 2278 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/pressure`): `" nT, dynamic pressure " + fmtServed(dp, servedFigures(mpS.pressure), 1) +`
 - gallery `gallery/feature_renderers.js` line 2489 (config `/objects/1/features/earth_magnetosphere/bow_shock/surface/pressure`): `fmtServed(bsP, servedFigures(bsS.pressure), 1) +`
 
@@ -88,6 +114,6 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
 
 Orrery: every tracked `.py` file outside `documentation/`, except `constants_new.py` and this tool, searched for each exact row's name inside `{...}` in a formatted string, as the argument of `_declared`, `_whole_figures` or `_with_uncertainty`, after `%`, or inside `str(...)` or `format(...)`. Comment lines are skipped.
 
-Gallery: each pointer in `data/objects_config.json` to an exact row, followed to its print lines by the PRINTS table in the tool: the page script, the function and a piece of the print line. A pointer read only to place a drawing is named instead in the DRAWN table, by the line that reads it, and that line must not be a print line. A pointer with no entry, or an entry that matches nothing, is reported above rather than dropped. Page scripts read: `gallery/arrival.js`, `gallery/earth_geometry.js`, `gallery/feature_renderers.js`, `gallery/nav_cluster.js`, `interactive.html`.
+Gallery: each pointer in `data/objects_config.json` to an exact row, followed to its print lines by the PRINTS table in the tool: the page script, the function and a piece of the print line. A pointer read only to place a drawing is named instead in the DRAWN table, by the line that reads it, and that line must not be a print line. A pointer with no entry, or an entry that matches nothing, is reported above rather than dropped. Page scripts read: `gallery/arrival.js`, `gallery/earth_geometry.js`, `gallery/feature_renderers.js`, `gallery/guestbook.js`, `gallery/nav_cluster.js`, `interactive.html`.
 
 Not searched: an exact row's value typed into text as words or digits instead of read from the row.

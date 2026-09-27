@@ -49,6 +49,11 @@ One JSON file, data/constants_export.json:
                               row writes ("10", "0.13"), or null when the
                               row states none (schema 4). A display prints
                               it beside the value, as written
+                     prints   the print count an exact row states, or
+                              null (schema 5). A display prints an exact
+                              row to that many significant figures,
+                              never by a width of its own
+                              (provenance-discipline 2.20, Rule 7)
     not_exported   every row that is NOT in rows, by name, with the reason
 
 ROUNDING HAPPENS HERE, AND ONLY HERE
@@ -73,6 +78,9 @@ WHAT MAKES IT FAIL (exit 1, and NOTHING is written)
 ---------------------------------------------------
     - a "# Unit:" token that is neither defined nor retired
     - a "# Unit:" or "# Figures:" line that cannot be read
+    - a print count constants_rows.print_count_problem() refuses: larger
+      than the digits the number has, too small to write it in full, or
+      anything but 1 on a zero
     - a token whose defining_constant is not a row in the store
     - an exported value that is not a number, a list or dict of
       numbers, or null
@@ -111,6 +119,11 @@ Module updated: September 25, 2026 with Anthropic's Claude Opus 5.5
 (L-322 Stage D, patch D8: every exported row also carries
 "uncertainty", so the gallery can print Earth's magnetotail rows with
 their stated uncertainties as the orrery does. SCHEMA moves to 4.)
+Module updated: September 27, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D, patch D15: every exported row also carries "prints",
+the print count of an exact row a display prints, and a count
+constants_rows.print_count_problem() refuses stops the export. SCHEMA
+moves to 5.)
 """
 
 import json
@@ -122,7 +135,7 @@ import constants_rows
 from constants_tokens import RETIRED_TOKENS, TOKENS
 
 EXPORT_PATH = os.path.join("data", "constants_export.json")
-SCHEMA = 4
+SCHEMA = 5
 
 
 def round_to(value, figures):
@@ -224,6 +237,11 @@ def build_export(project_dir, tokens=None, retired=None):
         if problem:
             failures.append((row.name, problem))
             continue
+        problem = constants_rows.print_count_problem(
+            row, values.get(row.name))
+        if problem:
+            failures.append((row.name, problem))
+            continue
         exported[row.name] = {
             "value": value,
             "unit": row.unit,
@@ -233,6 +251,7 @@ def build_export(project_dir, tokens=None, retired=None):
             "read": list(row.read_text),
             "inputs": list(row.inputs),
             "uncertainty": row.uncertainty,
+            "prints": row.prints,
         }
 
     if failures:

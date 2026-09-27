@@ -1557,6 +1557,89 @@ resident.
 (Moved down from the resident protocol on 2026-09-25 when
 v3.69 made a fourth entry.)
 
+v3.67 (September 22, 2026): No rule changed in this document. ONE
+skill bump, the second taken ahead of the C2 build, which is v3.55's
+ordering applied twice to one build.
+
+provenance-discipline 2.16 -> 2.17 (L-322). A DISPLAY NEVER CHOOSES A
+COUNT, AND THREE STORAGE FORMS ARE WRITTEN DOWN.
+
+THE QUESTION THAT STARTED IT WAS TONY'S. Asked whether Earth's dipole
+tilt should print 9.4 or 9.4105, the reviewing session offered a
+readability call. Tony, 2026-09-21: "when it comes to a decision,
+what is the basis? the basis should be in the skill not arbitrary."
+There was none. Rule 7 let a display show fewer figures and said
+nothing about when, so every use of it reached the integrator, which
+is the failure Method Belongs to the Skill names. Rule 7 is replaced
+whole: a display prints the declared count; a number that reads as
+too many figures is a finding about the row, fixed under Rule 3 where
+it is recorded, never by the page. That takes item 9 -- the
+geocorona, LEO's inner edge, the outer belt -- off Tony's decision
+list, because each resolves on its row.
+
+THE TILT WAS THE WORKED CASE, AND IT WAS WRONG IN THE STORE. IGRF-13
+prints no tilt; it prints the three degree-1 coefficients and says the
+pole is computed from them. The stored 9.6 is in no epoch of the
+cited source, and the row's drift rate was off by a factor of ten.
+Three forms are now in the skill. A whole the source defines from
+parts it prints is a derived row over rows for the parts, never a
+typed result with its working in a comment. A rate is the derivative
+expression, never a difference of two evaluations, because the
+difference form takes its count from the largest inputs and not from
+the quantities the rate rests on. An angle computed from a pure
+number multiplies by the exact row DEG_PER_RAD instead of calling
+degrees, because the unit check sees a bare number and refuses the
+call -- found only when Opus ran the unit checker on the tilt, which
+nobody had done, including the session that had said the checkers
+accepted everything the tilt needed.
+
+THE OUTER BELT TAUGHT THE DECLARED CONSTRUCTION. Its peak is typed
+4.5 with its L = 4 to 5 band in prose, which When the source gives a
+range already did not allow. Making it an expression over two
+one-figure band rows met three rules at once: Rule 2 says a declared
+pick is exact, the checker counts an expression from its measured
+inputs, and the export rounds to the count -- and measured, that
+exported 4.0 for the gallery while the orrery drew 4.5 from the
+float, two consumers drawing two rings. Rule 2 now names a declared
+construction: exact as a rule, accepted by the checker only on a row
+whose status begins declared, served unrounded so every consumer
+draws the same value, and shown to the visitor as the range and the
+rule rather than as a measurement.
+
+EACH ROUND WAS TESTED BEFORE THE NEXT. Five documents on 2026-09-21,
+by Claude Fable 5.1 and Claude Opus 5 with one round reviewed by GPT
+6, and each one's proposals were run through the figures walker, the
+unit checker and the export on a throwaway copy of the store before
+the next was written. Three of Fable's own proposals failed those
+runs and were corrected in the next revision: a row that was at once
+an expression over measured rows and exact, a rate counted at two
+figures where the sum inside it carries three, and a function the
+checkers do not know. The reach of the new Rule 7 was enumerated
+before it was adopted, as The Braid requires: the gallery's Earth
+room gains no failure, and the orrery's Earth hovers carry 47 format
+sites on 35 lines, named by line in the rev2 addendum, of which four
+come into C2 and the rest are one ledger class with no automated
+coverage, stated as such so a closed slice is not read as covering
+them.
+
+THE OBLIGATION TRAVELS, as it always does. The session that cut this
+bump had 2.15 mounted, the protocol in its context having refreshed
+to 2.16 mid-session, which is the note owed to Stale Skill = Stop
+since the C2 manifest; it worked from the repo copy at 1f6e55a9 and
+said so. The next session confirms its loaded copy reads 2.17 before
+any provenance or store work, and that session is the C2 build, from
+documentation/BUILD_MANIFEST_L322_C2_magnetosphere_20260920.md with
+its section 17.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.64 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-09-27 when
+v3.70 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

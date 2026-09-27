@@ -86,11 +86,11 @@ artifact, and it is short enough to copy.
 
 GATING AND REPORT-ONLY
 ----------------------
-Sixteen checkers are pass/fail: a problem makes them exit non-zero.
+Eighteen checkers are pass/fail: a problem makes them exit non-zero.
 Two are REPORT-ONLY -- worksheet_checker.py and provenance_scanner.py
 exit 0 whatever they find, and exit 1 only when they could not run.
 They are marked in the CHECKERS table, and the summary counts the
-gating sixteen in its headline and quotes the two report-only verdicts
+gating eighteen in its headline and quotes the two report-only verdicts
 underneath.
 
 The block quotes each tool's own note rather than restating it. A
@@ -141,6 +141,12 @@ before Document index, so README.md lists the report on the same run. A
 generator row may now carry a fourth field, a verdict hint, as a checker
 row does; its line is added to the row's note, so this report's summary
 shows in the run instead of only in a file nobody opens.)
+Module updated: September 27, 2026 with Anthropic's Claude Opus 5.5 (L-322
+Stage D, patch D15: CHECKERS gains Exact rows by the count,
+exact_rows_report.py --check, so a printed exact row with no print count,
+or printed by a width of its own, fails the run; as a generator the same
+script's exit code did not count. The gating count above said sixteen,
+one behind since patch D3 added Earth pole of date; it is eighteen.)
 """
 
 import hashlib
@@ -206,6 +212,13 @@ CHECKERS = [
     # The export matches the store it was made from: hash, rows, the
     # not-exported list, and the per-slice gate. L-322.
     ('Constants export check', ['test_constants_export.py'], None),
+    # Rule 7's exact row, built: every printed exact row states a print
+    # count, every orrery line prints it through exact_text(), and the
+    # gallery serves the count. The same script as the Exact rows report
+    # generator, run with --check so its failure fails this run; as a
+    # generator its exit code would not count. L-322 Stage D, patch D15.
+    ('Exact rows by the count', ['exact_rows_report.py', '--check'],
+     'EXACT ROWS BY THE COUNT:'),
     # Each derived row's unit follows from its arithmetic, by astropy
     # inside the check. L-322 rulings 4 and (c)+(e).
     ('Dimensions', ['test_dimensions.py'], None),

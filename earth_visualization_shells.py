@@ -87,7 +87,13 @@ September 25, 2026 (L-322 Stage D, patch D9, Opus 5.5): the belts' rings
     physical feature). The peak ring is fully opaque and drawn with larger
     points. The hover says the belt is one continuous region and the
     rings only mark its extent.
-Module updated: September 25, 2026 with Anthropic's Claude Opus 5.5
+September 27, 2026 (L-322 Stage D, patch D15, Opus 5.5): the six hover
+    lines that print an exact row -- the solar wind pressure three times,
+    the outer belt's drawn peak twice and the LEO altitudes once -- print
+    it through constants_rows.exact_text(), at the print count its row
+    states, where they used a width chosen on the line (":g", ",.0f").
+    The text shown does not change.
+Module updated: September 27, 2026 with Anthropic's Claude Opus 5.5
 """
 import numpy as np
 import math
@@ -140,7 +146,7 @@ from constants_new import (
 )
 from orrery_rendering import rotate_to_sunward, create_info_marker
 import constants_new as _store
-from constants_rows import figures_of, uncertainty_of
+from constants_rows import figures_of, uncertainty_of, exact_text
 
 
 def _declared(name):
@@ -961,7 +967,7 @@ earth_magnetosphere_info = (
 
             "Bow Shock: the boundary where the supersonic solar wind first slows\n"
             f"against Earth's magnetic field, about {_declared('EARTH_BOW_SHOCK_STANDOFF_RADII')} Earth radii upstream on the\n"
-            f"Sun-facing side at a nominal solar wind pressure of {EARTH_SOLAR_WIND_PRESSURE_NPA:g} nPa.\n"
+            f"Sun-facing side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_NPA')} nPa.\n"
             f"Both standoffs above are models evaluated at that pressure rather than\n"
             f"measurements: real crossings scatter about the fitted surfaces by\n"
             f"{EARTH_MAGNETOPAUSE_SHUE_SCATTER_RADII:g} and {EARTH_BOW_SHOCK_JELINEK_SCATTER_RADII:g} Earth radii, and both boundaries move as the pressure\n"
@@ -1144,7 +1150,7 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
 
     magnetosphere_text = ["Earth: Magnetosphere<br><br>"
                  f"Earth's magnetosphere reaches about {_declared('EARTH_MAGNETOPAUSE_STANDOFF_RADII')} Earth radii on the Sun-facing<br>"
-                 f"side at a nominal solar wind pressure of {EARTH_SOLAR_WIND_PRESSURE_NPA:g} nPa. It stretches into a<br>"
+                 f"side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_NPA')} nPa. It stretches into a<br>"
                  "long magnetotail on the night side, deflects the solar wind, and turns<br>"
                  "aside many of the energetic charged particles that reach Earth.<br><br>"
                  "That distance is a model evaluated at those conditions, not something<br>"
@@ -1228,7 +1234,7 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     bow_shock_text = ["Earth: Bow Shock<br><br>"
                 "Bow Shock: the boundary where the supersonic solar wind first slows<br>"
                 f"against Earth's magnetic field, about {_declared('EARTH_BOW_SHOCK_STANDOFF_RADII')} Earth radii upstream on the<br>"
-                f"Sun-facing side at a nominal solar wind pressure of {EARTH_SOLAR_WIND_PRESSURE_NPA:g} nPa.<br><br>"
+                f"Sun-facing side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_NPA')} nPa.<br><br>"
                 "That distance is a model evaluated at that pressure, not something anyone<br>"
                 f"measured. Real crossings of the bow shock scatter about the fitted<br>"
                 f"surface by {EARTH_BOW_SHOCK_JELINEK_SCATTER_RADII:g} Earth radii, and the shock itself moves in and out as<br>"
@@ -1290,13 +1296,13 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
         f"Outer Van Allen Belt: Region of trapped charged particles (mainly electrons).<br>"
         "The belt is one continuous region. The rings only mark its extent: they<br>"
         "are evenly spaced from its inner edge to its outer edge, and the brighter<br>"
-        f"ring is the flux peak, L = {EARTH_VAN_ALLEN_OUTER_RADII:g} -- about {_km_above_surface(EARTH_VAN_ALLEN_OUTER_RADII, 2):,} km above the<br>"
+        f"ring is the flux peak, L = {exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} -- about {_km_above_surface(EARTH_VAN_ALLEN_OUTER_RADII, 2):,} km above the<br>"
         "surface at the equator, where L equals geocentric distance in Earth radii.<br>"
         f"The belt spans about {EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE:g} to {EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE:g} Earth radii and moves with geomagnetic<br>"
         f"activity -- roughly {_km_above_surface(EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE, 1):,} to {_km_above_surface(EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE, 1):,} km above the surface<br>"
         f"(every kilometre figure here converted from Earth radii).<br>"
         "Source (peak): Li et al. (2025), doi:10.1029/2024JA033504 -- most intense across<br>"
-        f"the L = {_band_low} to {_band_high} band; the drawn {EARTH_VAN_ALLEN_OUTER_RADII:g} is our midpoint of it.<br>"
+        f"the L = {_band_low} to {_band_high} band; the drawn {exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} is our midpoint of it.<br>"
         "Source (extent): Meredith et al. (2014); Li, Tu et al. (2024), doi:10.1029/2023JA032171."
     ]
     
@@ -1511,7 +1517,7 @@ def create_earth_leo_shell(center_position=(0, 0, 0)):
     hover_text = (
         "Earth: Low Earth Orbit (LEO)<br><br>"
         "Low Earth Orbit (LEO)<br>"
-        f"Altitude range: {EARTH_LEO_LOWER_ALTITUDE_KM:,.0f} km to {EARTH_LEO_UPPER_ALTITUDE_KM:,.0f} km above surface<br>"
+        f"Altitude range: {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=True)} km to {exact_text('EARTH_LEO_UPPER_ALTITUDE_KM', grouping=True)} km above surface<br>"
         f"Radius: {EARTH_LEO_INNER_KM:,.0f} km to {EARTH_LEO_OUTER_KM:,.0f} km from Earth's center "
         f"({EARTH_LEO_INNER_RADII:.2f} to {EARTH_LEO_OUTER_RADII:.2f} Earth radii)<br><br>"
         "LEO satellites orbit at all inclinations -- forming a true shell, not a ring.<br>"

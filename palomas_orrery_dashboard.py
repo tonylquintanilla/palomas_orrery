@@ -126,6 +126,10 @@ September 25, 2026 with Anthropic's Claude Opus 5.5 (L-322 Stage D, patch
 D12), on Tony's request: added Exact Rows Report beside the other
 generators, in alphabetical place. It writes EXACT_ROWS_PRINTED.md in the
 orrery root. No other entry touched.
+September 27, 2026 with Anthropic's Claude Opus 5.5 (L-322 Stage D, patch
+D15): added Test Exact Rows By The Count to the checkers, in alphabetical
+place, matching the maintenance runner's new checker; and Exact Rows
+Report's description no longer says it is report-only.
 """
 
 import os
@@ -575,8 +579,9 @@ LAUNCH_GROUPS = {
          "prints by a print count it states, not a width chosen where it "
          "is printed; this is the list that work moves from. Reads the "
          "gallery folder beside the orrery and says so at the top if it is "
-         "missing. Report-only: writes EXACT_ROWS_PRINTED.md and never "
-         "gates a push. The maintenance run runs it every time.",
+         "missing. Writes EXACT_ROWS_PRINTED.md and prints whether every "
+         "printed exact row prints by its count; this button never fails. "
+         "Test Exact Rows By The Count is the same check as a pass/fail.",
          SCRIPT_DIR,
          True,
          None,
@@ -746,6 +751,17 @@ LAUNCH_GROUPS = {
          SCRIPT_DIR,
          True,
          None,
+         True),
+        ("Test Exact Rows By The Count",
+         "exact_rows_report.py",
+         "Fails when a printed exact row of constants_new.py states no "
+         "print count, when an orrery line prints one by a width of its "
+         "own instead of through exact_text(), or when the gallery does not "
+         "serve the count beside it. Names every failing item. The same "
+         "script as Exact Rows Report, run with --check.",
+         SCRIPT_DIR,
+         True,
+         ["--check"],
          True),
         ("Test Orbit Cache",
          "test_orbit_cache.py",

@@ -109,6 +109,12 @@ and carry the three rules the orrery's tail drawing adds -- round, a
 straight line from Shue's cut to the end of flaring, and a stop at the
 observed reach. They replace five numbers chosen by eye in
 earth_visualization_shells.py)
+Module updated: September 27, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D, patch D15: the seven exact rows a display prints state
+their print count on their "# Figures:" line, directly after "exact --",
+from the digits each was defined or chosen with. The trailing .0 each
+is typed with is Python's, not a figure (provenance-discipline 2.20,
+Rule 2).)
 """
 
 import math
@@ -581,8 +587,9 @@ planet_poles = {
 EARTH_LEO_UPPER_ALTITUDE_KM = 2000.0
 # Unit: km
 # Status: measured V_SOURCED 2026-09-19
-# Figures: exact -- the IADC protected region is DEFINED at an altitude
-# Figures+: of 2,000 km. A definition, not a measurement.
+# Figures: exact -- prints 4, the definition's own digits (2,000 km). The
+# Figures+: IADC protected region is DEFINED at that altitude. A definition,
+# Figures+: not a measurement; the .0 is Python's (Rule 2).
 # Read: IADC-02-01 Revision 2, section 3.3.2 (1), p. 8 -- "Region A,
 # Read+: Low Earth Orbit (or LEO) Protected Region -- spherical region
 # Read+: that extends from the Earth's surface up to an altitude (Z) of
@@ -605,7 +612,9 @@ EARTH_LEO_LOWER_ALTITUDE_KM = 200.0
 # Unit: km
 # Status: declared 2026-09-19 -- a drawing floor, not a measured boundary, so
 # Status+: there is no source to read against and none is expected.
-# Figures: exact -- a drawing choice, so all of its digits are known.
+# Figures: exact -- prints 3, the digits it was chosen with (200 km). A
+# Figures+: drawing choice, so all of its digits are known; the .0 is
+# Figures+: Python's (Rule 2).
 # Declared: the floor the orrery's LEO shell draws from. The IADC region
 # Declared+: starts at the surface; 200 km is a drawing choice marking where
 # Declared+: orbits stop decaying within days. Not a measured boundary.
@@ -762,7 +771,8 @@ EARTH_VAN_ALLEN_OUTER_RADII = (EARTH_VAN_ALLEN_OUTER_BAND_LOW_L + EARTH_VAN_ALLE
 # Unit: l_shell
 # Status: declared 2026-09-22 -- the midpoint of the band held in the two
 # Status+: rows above, L-305 item 7
-# Figures: exact -- declared construction: midpoint of
+# Figures: exact -- prints 2, the digits of the value its rule gives
+# Figures+: (4.5); declared construction: midpoint of
 # Figures+: EARTH_VAN_ALLEN_OUTER_BAND_LOW_L, EARTH_VAN_ALLEN_OUTER_BAND_HIGH_L
 # Declared: the midpoint of an L band, not a measured peak, and the pick is
 # Declared+: ours. The band is the two rows above, each measured and read;
@@ -1071,7 +1081,9 @@ EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR = ((abs(EARTH_IGRF13_G10_NT) * (EARTH_IGRF13
 EARTH_SOLAR_WIND_PRESSURE_NPA = 2.0
 # Unit: npa
 # Status: declared pending 2026-09-12 -- L-314
-# Figures: exact -- a declared condition, not a measurement (Rule 2).
+# Figures: exact -- prints 1, the digits it was chosen with: Shue et al.
+# Figures+: (1998) use Dp = 2 nPa. A declared condition, not a measurement;
+# Figures+: the .0 is Python's (Rule 2).
 # Declared: the solar wind dynamic pressure both fits are evaluated at.
 # Declared+: Shue et al. (1998) p. 17,695 uses Dp = 2 nPa as an average
 # Declared+: value, which is the paper's own reason for this pick. It sits
@@ -1087,7 +1099,9 @@ EARTH_SOLAR_WIND_PRESSURE_NPA = 2.0
 EARTH_SOLAR_WIND_BZ_NT = 0.0
 # Unit: nt
 # Status: declared pending 2026-09-12 -- L-314
-# Figures: exact -- a declared condition, not a measurement (Rule 2).
+# Figures: exact -- prints 1, because a zero prints as 0 (Rule 7). A
+# Figures+: declared condition, not a measurement; the .0 is Python's
+# Figures+: (Rule 2).
 # Declared: a neutral midpoint chosen here, NOT a figure from the paper.
 # Declared+: Shue's own averages are +/- 4 nT, northward and southward taken
 # Declared+: separately (p. 17,695). Zero is the unloaded case the drawn
@@ -1209,7 +1223,8 @@ EARTH_MAGNETOPAUSE_SHUE_A8 = 0.024
 EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG = 120.0
 # Unit: deg
 # Status: declared 2026-09-14 -- a drawing limit, not an edge
-# Figures: exact -- a declared drawing limit (Rule 2).
+# Figures: exact -- prints 3, the digits it was chosen with (120
+# Figures+: degrees). A declared drawing limit; the .0 is Python's (Rule 2).
 # Declared: where the drawn magnetopause stops, measured from the nose.
 # Declared+: Shue's surface has no end. At the store's declared conditions
 # Declared+: the flaring is 0.5896, and for any flaring at or above 0.5 the
@@ -1294,7 +1309,9 @@ EARTH_BOW_SHOCK_CUT_ANGLE_DEG = 105.0
 # Declared+: sat on a "# Derived:" line and the row was measured; counted as
 # Declared+: measured it would carry the one figure of "7 hours", export as
 # Declared+: 100 and stop the drawn shock five degrees short.
-# Figures: exact -- a declared drawing limit (Rule 2).
+# Figures: exact -- prints 3, the digits of the conversion that sets it
+# Figures+: (7 h x 15 deg/h = 105 degrees). A declared drawing limit; the
+# Figures+: .0 is Python's (Rule 2).
 # Read: sec. 2 para. 9, p. 2, 2026-09-11, Claude Fable 5.1
 # Source: Jelinek et al. (2012), doi:10.1029/2011JA017252 -- sec. 2 para. 9,
 # Source+: p. 2: the regions are identified on the whole dayside and toward

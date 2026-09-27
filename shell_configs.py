@@ -52,6 +52,11 @@ Module updated: September 22, 2026 with Anthropic's Claude Opus 5 (L-322
     Stage C2: that tooltip prints the two standoffs at the count their
     rows declare, read with constants_rows.figures_of, where it printed
     four figures by a fixed format.)
+Module updated: September 27, 2026 with Anthropic's Claude Opus 5.5 (L-322
+    Stage D, patch D15: the magnetosphere tooltip's outer belt peak and
+    the LEO tooltip's two altitudes, which are exact rows, print through
+    constants_rows.exact_text() at the print count their rows state,
+    where they used ":g" and ",.0f". The text does not change.)
 """
 
 # Phase C4: Import hover text strings from body shell modules.
@@ -105,7 +110,7 @@ from solar_visualization_shells import (
 # earth_visualization_shells.py does. The tooltip field is dead data (no
 # consumer), kept in agreement with the live hover because a migration
 # would promote it.
-from constants_rows import figures_of
+from constants_rows import figures_of, exact_text
 from constants_new import (
     EARTH_INNER_CORE_RADII, EARTH_OUTER_CORE_RADII,
     EARTH_LOWER_MANTLE_RADII, EARTH_UPPER_MANTLE_RADII,
@@ -2315,7 +2320,7 @@ CUSTOM_SHELLS = {
                 "from Earth on the Sun-facing side.\n\n"
                 f"Inner Van Allen Belt: trapped protons, drawn at the flux peak {EARTH_VAN_ALLEN_INNER_RADII:g} Earth radii out\n"
                 "(Baker et al. 2018). Outer Van Allen Belt: trapped electrons, drawn at the flux peak\n"
-                f"{EARTH_VAN_ALLEN_OUTER_RADII:g} Earth radii out (doi:10.1029/2024JA033504).\n"
+                f"{exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} Earth radii out (doi:10.1029/2024JA033504).\n"
                 "Standoffs: Shue et al. (1998); Jelinek et al. (2012).\n\n"
                 "The same builder produces all four traces (separate legend entries):\n"
                 "Magnetosphere, Bow Shock, Inner Radiation Belt, Outer Radiation Belt."
@@ -2326,7 +2331,7 @@ CUSTOM_SHELLS = {
             'builder': 'earth_visualization_shells.create_earth_leo_shell',
             'tooltip': (
                 "SET MANUAL SCALE TO 0.003 AU TO VISUALIZE.\n\n"
-                f"Low Earth Orbit (LEO) is the region from roughly {EARTH_LEO_LOWER_ALTITUDE_KM:,.0f} km to {EARTH_LEO_UPPER_ALTITUDE_KM:,.0f} km altitude\n"
+                f"Low Earth Orbit (LEO) is the region from roughly {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=True)} km to {exact_text('EARTH_LEO_UPPER_ALTITUDE_KM', grouping=True)} km altitude\n"
                 f"({EARTH_LEO_INNER_RADII:.2f} to {EARTH_LEO_OUTER_RADII:.2f} Earth radii), where satellites orbit at all inclinations.\n\n"
                 "Unlike geostationary orbit, LEO satellites travel at all angles relative to the equator --\n"
                 "forming a true shell around Earth rather than a ring. A LEO satellite completes\n"

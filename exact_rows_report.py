@@ -21,13 +21,41 @@ display prints an exact row, in the orrery AND in the gallery, so the
 work that moves those places onto a print count has a list to work
 from and a way to tell when it is finished.
 
-It changes nothing and chooses no width. It is a report.
+It changes nothing and chooses no width.
+
+IT IS ALSO A CHECK (patch D15). Rule 7's exact row is built: a printed
+exact row states its print count on its "# Figures:" line, the export
+serves it as "prints", orrery displays print through
+constants_rows.exact_text(), and the gallery prints by the served
+count. Every run prints the check's verdict, a line beginning "EXACT
+ROWS BY THE COUNT:", and names each failing item. Run with --check,
+
+    python exact_rows_report.py --check
+
+it also exits 1 when the check fails. Without --check it exits 0, which
+is how the maintenance run calls it among its GENERATORS, where an exit
+code does not count; it calls it again with --check among its
+CHECKERS, as "Exact rows by the count", where it does. The check
+fails when:
+
+    - a printed exact row states no print count;
+    - an orrery line prints an exact row any way but exact_text() -- a
+      "{...}" format, _declared, %, str() or format(): a width chosen
+      on the line;
+    - a gallery pointer to a printed exact row serves no "prints", or
+      serves a different count from the row's.
+
+The gallery half checks that the count is SERVED beside the value. That
+the page's line prints by it is checked by the gallery's own
+documentation/smoke_display_figures.js, which grades the built hovers'
+text; this tool reads code, not output, and says so rather than
+claiming more.
 
 THE ORRERY HALF. Every tracked .py file outside documentation/, except
 constants_new.py, is searched for each exact row's name in a printing
 form: inside {...} in a formatted string, as the argument of
-_declared, _whole_figures or _with_uncertainty, after %, or inside
-str(...) or format(...).
+exact_text, _declared, _whole_figures or _with_uncertainty, after %,
+or inside str(...) or format(...). Only exact_text prints by the count.
 
 THE GALLERY HALF. The gallery sits beside the orrery on Tony's
 computer, at ../tonyquintanilla.github.io, as data_inventory.py and the
@@ -82,6 +110,10 @@ Module updated: September 26, 2026 with Anthropic's Claude Opus 5.5
 rows that are read only to place a drawing -- gallery patch 3 added four
 -- checked like PRINTS, so they are reported as drawn and not as NOT
 FOLLOWED.)
+Module updated: September 27, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D, patch D15, manifest section 6: the check above, so the
+report says when section 6 is finished and the maintenance run fails
+while it is not. The orrery search also finds exact_text().)
 """
 
 import os
@@ -196,9 +228,38 @@ def orrery_print_pattern(name):
     n = re.escape(name)
     return re.compile(
         r'\{\s*%s\b[^}]*\}' % n
+        + r'|exact_text\(\s*[\'"]%s[\'"]' % n
         + r'|(?:_declared|_whole_figures|_with_uncertainty)\(\s*[\'"]%s[\'"]' % n
         + r'|%%\s*\(?\s*%s\b' % n
         + r'|(?:str|format)\(\s*%s\b' % n)
+
+
+def by_count(name, code):
+    """True when no print of `name` on this line uses a width of its
+    own: every printing form but exact_text() is one. A name passed to
+    arithmetic on the same line, such as _km_above_surface(NAME, 2), is
+    not a print of it."""
+    n = re.escape(name)
+    by_width = re.compile(
+        r'\{\s*%s\b[^}]*\}' % n
+        + r'|(?:_declared|_whole_figures|_with_uncertainty)\(\s*[\'"]%s[\'"]' % n
+        + r'|%%\s*\(?\s*%s\b' % n
+        + r'|(?:str|format)\(\s*%s\b' % n)
+    return not by_width.search(code)
+
+
+def served_node(config, path):
+    """The node at a config_pointers() path, or None."""
+    node = config
+    for part in path.strip('/').split('/'):
+        if isinstance(node, dict) and part in node:
+            node = node[part]
+        elif isinstance(node, list) and part.isdigit() \
+                and int(part) < len(node):
+            node = node[int(part)]
+        else:
+            return None
+    return node
 
 
 def read_lines(path):
@@ -372,6 +433,22 @@ def main():
 
     printed = [n for n in names if o_sites[n] or g_sites.get(n)]
     unprinted = [n for n in names if n not in printed]
+
+    # The check (patch D15): named items, never a count alone.
+    no_count = [n for n in printed if constants_rows.prints_of(n, HERE)
+                is None]
+    by_width = [(n, f, l, code) for n in printed
+                for f, l, code in o_sites[n] if not by_count(n, code)]
+    not_served = []
+    if gallery_read:
+        for n in printed:
+            want = constants_rows.prints_of(n, HERE)
+            for f, l, code, path in g_sites.get(n, []):
+                node = served_node(config, path)
+                got = node.get('prints') if isinstance(node, dict) else None
+                if got != want:
+                    not_served.append((n, f, l, path, got, want))
+    failing = bool(no_count or by_width or not_served)
     o_lines = set((f, l) for n in names for f, l, _c in o_sites[n])
     g_lines = set((f, l) for n in names for f, l, _c, _p in g_sites.get(n, []))
 
@@ -418,6 +495,38 @@ def main():
             % (len(broken), (': ' + ', '.join(
                 '`%s` -> `%s`' % (k, m) for k, m in broken))
                 if broken else ''))
+    add('')
+    add('## Printed by the count')
+    add('')
+    add('Rule 7: each printed exact row states a print count, each orrery '
+        'line prints it through `exact_text()`, and the gallery serves '
+        'the count beside it. **%s**'
+        % ('FAILING -- the items below are named.' if failing
+           else 'PASSING: %d rows, every one counted, on %d lines.'
+           % (len(printed), len(o_lines) + len(g_lines))))
+    add('')
+    for n in printed:
+        add('- `%s`: prints %s' % (n, constants_rows.prints_of(n, HERE)
+                                   if n not in no_count
+                                   else 'NO COUNT STATED'))
+    if by_width:
+        add('')
+        add('Orrery lines that print an exact row by a width of their own:')
+        add('')
+        for n, f, l, code in by_width:
+            add('- `%s` at `%s` line %d: `%s`' % (n, f, l, short(code)))
+    if not_served:
+        add('')
+        add('Gallery lines whose served entry does not carry the row\'s '
+            'count ("prints" in `data/objects_config.json`):')
+        add('')
+        for n, f, l, path, got, want in not_served:
+            add('- `%s` at `%s` line %d (config `%s`): serves %s, the row '
+                'states %s' % (n, f, l, path, got, want))
+    if not gallery_read:
+        add('')
+        add('The gallery half was not read, so this check covers the '
+            'orrery only.')
     add('')
     add('## Printed')
     add('')
@@ -498,6 +607,24 @@ def main():
     else:
         summary += '; the gallery folder was not found'
     print(summary)
+    if failing:
+        for n in no_count:
+            print('  FAIL %s: printed, but states no print count' % n)
+        for n, f, l, _code in by_width:
+            print('  FAIL %s: %s line %d prints it by a width of its own'
+                  % (n, f, l))
+        for n, f, l, path, got, want in not_served:
+            print('  FAIL %s: gallery %s line %d, served prints %s, the row '
+                  'states %s' % (n, f, l, got, want))
+        print('EXACT ROWS BY THE COUNT: FAILING -- %d row(s) with no count, '
+              '%d orrery print(s) by a width, %d gallery print(s) not served '
+              'the count' % (len(no_count), len(by_width), len(not_served)))
+        return 1 if '--check' in sys.argv[1:] else 0
+    print('EXACT ROWS BY THE COUNT: PASSING -- %d printed exact rows each '
+          'state a count; %d orrery lines print through exact_text(); %s'
+          % (len(printed), len(o_lines),
+             '%d gallery lines are served the count' % len(g_lines)
+             if gallery_read else 'the gallery half was not read'))
     return 0
 
 

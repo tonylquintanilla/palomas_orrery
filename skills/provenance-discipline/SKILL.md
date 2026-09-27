@@ -6,13 +6,32 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 2.19 | Cut from palomas_orrery @ de4eadc5 (v2.19),
-earlier @ ac25d4f4 (v2.18), @ 1f6e55a9 (v2.17), @ a7014abb (v2.16), @ 21065c5d (v2.15), @ dfa779bd (v2.14),
+Skill version: 2.20 | Cut from palomas_orrery @ 0e3d05fd (v2.20),
+earlier @ de4eadc5 (v2.19), @ ac25d4f4 (v2.18), @ 1f6e55a9 (v2.17), @ a7014abb (v2.16), @ 21065c5d (v2.15), @ dfa779bd (v2.14),
 @ ebdc55cc (v2.13), @ bfc0505e (v2.12),
 earlier @ 159c5a2c (v2.11), @ 071a0a65 (v2.10), @ a263f73d (v2.9),
 @ 7f4a2f9f (v2.8), @ 3faa72a0 (v2.7), @ f603be3 (v2.6),
 @ 731066f (v2.5), @ 6b99ace (v2.2), @ 00219d9 (v2.1), @ eb77c83 (v2.0)
-| September 25, 2026
+| September 27, 2026
+v2.20 writes down where a trailing ".0" comes from, in Rule 2. It is
+Python, by three routes, and none of them is a statement about
+significant figures: a decimal point is typed to make a number a
+float, Python's division always returns a float, and a float printed
+without a format always shows ".0". So a row's figure count is never
+read from its literal, its printed form or its exported form, which is
+why the count and an exact row's print count are both fields. Tony
+asked for the claim to be checked and added on 2026-09-27, when the
+Stage D print counts were settled from what each row says it was
+chosen with. Checked by running Python 3 and Node. RULE 7'S EXACT ROW
+is brought into line with the code that builds it, orrery patch D15:
+the print count is read only directly after "exact --"; a declared
+construction prints the digits of the value its rule gives, so the
+outer belt's midpoint of 4 and 5 prints 4.5; the checker refuses a
+count with more digits than the number has, one too small to write it
+in full, and anything but 1 on a zero; and exact_rows_report.py
+--check fails the maintenance run while any printed exact row is not
+printed by its count. The last two are Claude Opus 5.5's additions in
+building D15, approved by Tony the same day. Handle L-322.
 v2.19 replaces one worked example that had gone stale. Rule 7's exact
 row said Earth's obliquity "prints 23.439291 degrees". Since the Stage
 D manifest's revision 3 (2026-09-23) no display prints the obliquity:
@@ -1947,6 +1966,41 @@ seven. A DECLARED drawing condition (a chosen solar wind pressure, a
 chosen cut angle) is exact for counting: it is a choice, not a
 measurement, so all of its digits are known.
 
+**A trailing `.0` in this store is Python's, not a figure** (v2.20).
+The digits of a choice are the digits it was chosen with, and a decimal
+point Python needs is not one of them. A trailing `.0` reaches this
+store and its displays by three routes, and none of them says anything
+about significant figures:
+
+- **Typing.** Python treats a number written with a decimal point as a
+  float and one without as a whole number, so rows are typed `200.0`
+  to make them floats. `200`, `200.0` and `200.00` are the same stored
+  number; the float keeps no record of how it was typed. That is also
+  why `13.50` is stored as `13.5` (Rule 1).
+- **Arithmetic.** Division in Python always returns a float, even
+  between whole numbers: `4 / 2` is `2.0`. A derived row can gain a
+  `.0` from its expression without anyone typing one.
+- **Printing.** A float printed with no format always shows at least
+  one decimal place, so a whole-number float prints as `2.0`. That
+  covers `str()`, a bare f-string `{x}`, and `json.dumps`, which
+  writes `constants_export.json`. A format can remove it (`:g` prints
+  `2`) and a page can put it back: the gallery printed the declared
+  solar wind pressure as "2.0 nPa" by its own `toFixed(1)`, from a
+  value JavaScript had read out of the export as plain 2.
+
+So the literal, the printed value, the exported value and the page's
+output cannot say which trailing zeros are meant. For a measured row
+the source's reporting resolution says (above). For an exact row the
+digits it was defined or chosen with say: the declared pressure is
+2 nPa because Shue et al. (1998) use Dp = 2 nPa, and the `.0` in
+`2.0` is Python's. That is why the count is a field on the
+`# Figures:` line and an exact row's print count is a field too
+(Rule 7), never read from the value. A choice that really was made to
+a trailing zero says so on its `# Declared:` line, and its print count
+states it. (Checked by running Python 3 and Node on 2026-09-27, at
+Tony's request, when the Stage D print counts were settled. Handle
+L-322.)
+
 **A DECLARED CONSTRUCTION is exact in the same way** (v2.17). A drawing
 value that is a stated rule over measured rows -- the midpoint of a
 sourced band, the top of a sourced range -- is a choice, not a
@@ -2172,7 +2226,7 @@ cannot tell a page how many to print. Until v2.18 the gallery's
 `fmtServed` printed every exact row with `toFixed` and a number of
 places chosen at each of its call sites, which is the page choice this
 rule forbids; nobody noticed while the exact rows were numbers like
-2.0 and 120. Three parts:
+2.0 and 120. The parts:
 
 - **Stored in the form its definition prints.** A quantity defined in
   arcseconds is a row in arcseconds, and its degree form is an
@@ -2183,26 +2237,49 @@ rule forbids; nobody noticed while the exact rows were numbers like
   check then judges the degree row, instead of trusting a literal that
   has no inputs.
 - **The print count is a field.** Every exact row a display prints
-  states it on its `# Figures:` line as `exact -- prints N`, and a
-  derived exact row inherits the print count of its defining input.
-  It has to be a field because the literal cannot carry it. Python
-  types whole numbers with a trailing `.0` by habit, and for a declared
-  pick there is no source resolution to say whether that zero counts
-  (Rule 2), so a count read from the literal would print a floor chosen
-  as 200 km as "200.0 km". The checker refuses a print count larger
-  than the significant digits the literal actually has. A zero prints
-  as 0. An exact row no display prints carries no print count, and a
-  page that reaches an exact row with none reports it rather than
-  choosing a width.
+  states it on its `# Figures:` line directly after `exact --`, as
+  `exact -- prints N`. That is the only place a checker reads it:
+  measured rows' lines say "the source prints 1.5" in prose, and
+  prose is never read. It has to be a field because the literal cannot
+  carry it. A trailing `.0` is Python's, not a figure (Rule 2), and for
+  a declared pick there is no source resolution to say whether a zero
+  counts, so a count read from the literal would print a floor chosen
+  as 200 km as "200.0 km". The count is the digits the definition or
+  the choice was stated with: 3 for that floor, 1 for Shue's 2 nPa. An
+  exact row defined from another exact row writes its defining input's
+  count on its own line; nothing carries a count between rows. A
+  DECLARED CONSTRUCTION (Rule 2) prints the digits of the value its
+  rule gives, not the counts of the measured rows its rule is over,
+  which are figure counts and not print counts: the midpoint of 4 and
+  5 prints 4.5, two figures. Its line carries both fields:
+  `exact -- prints 2, the digits of the value its rule gives (4.5);
+  declared construction: midpoint of <row>, <row>`.
+- **The checker refuses three counts** (v2.20). A count with more
+  digits than the number has: for a typed number, the digits of the
+  literal as written, trailing zeros included, so 200.0 allows up to
+  four; for an expression, the digits of the value it computes. A
+  count too small to write the number out in full, because an exact
+  number printed rounded is a different number: 105 at two figures
+  would print 100. And any count but 1 on a zero, which prints as 0.
+  `constants_rows.print_count_problem()` makes all three, and the
+  export stops on any of them. An exact row no display prints carries
+  no print count. A display that reaches an exact row with none
+  reports it rather than choosing a width: in the orrery,
+  `constants_rows.exact_text()` raises where the display is built.
+  `exact_rows_report.py --check` fails, naming each item, when a
+  printed exact row states no count, when an orrery line prints one
+  any way but `exact_text()`, or when the gallery does not serve the
+  count beside it; the maintenance run runs it as "Exact rows by the
+  count".
 - **The export carries it and the page prints by it.** The export
   serves the print count beside the value, and the page prints an
   exact row to that many significant figures. `toFixed` goes for exact
   rows. The gallery's magnetopause hover is the case: it prints
   `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG`, a declared limit typed 120.0, as
-  "Drawn to 120 degrees", today by a width of 0 decimals chosen at the
-  call site. Under this rule the row states `exact -- prints 3` and the
-  page prints three figures; counted from the literal it would print
-  "120.0".
+  "Drawn to 120 degrees", until Stage D by a width of 0 decimals chosen
+  at the call site. Under this rule the row states `exact -- prints 3`
+  and the page prints three figures; counted from the literal it would
+  print "120.0".
 - **Earth's obliquity carries no print count.** It is the row this
   rule was first written on, and it was the example until v2.19. Since
   the Stage D manifest's revision 3 no display prints it: the axis
