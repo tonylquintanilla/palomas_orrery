@@ -3479,7 +3479,6 @@ Here's step 5, then the email column, then one thing I need to change on my side
 4. Click **Publish**. When Google asks if you're sure, click **OK**.
 5. A long address appears in the box. Copy it and keep it somewhere private until the updater asks for it. Leave "Automatically republish when changes are made" ticked, so new submissions reach the address on their own.
 
-https://docs.google.com/spreadsheets/d/e/2PACX-1vRif3gd7JB28ffoGNYOx04b39TpIJ3TPRo3_qi_syzHZqZLG3es0zSyVMhX7SapGsg0V1nWecaqA0Dq/pub?gid=483580803&single=true&output=csv
 
 **The email column is a question on the form, not the email setting.** The setting you turned off only stops Google from recording each visitor's account email by itself. "Your Email Address" is a separate question that asks visitors to type theirs, and that setting doesn't touch it. To remove it, open the form, click that question, and click the trash-can icon. The empty column will stay in the sheet, which is harmless because nothing will fill it or read it.
 
@@ -3834,8 +3833,148 @@ EXACT ROWS BY THE COUNT: FAILING -- 0 row(s) with no count, 0 orrery print(s) by
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-
+orrery moved to b81137e0d28cc0a6853786c9ff41bde8f4cabc19
 
 3. Then finish the form at step 5, and try the Daily Run from its new button for the first run of the updater.
 
 Tell me both new SHAs when they're pushed.
+
+====================================================
+
+Both pushes landed: the gallery is at 38cb8b41 and the orrery at b81137e0. Your orrery run's one failure, "Exact rows by the count", isn't from these patches. It's waiting on the Stage D gallery work that's still open. The provenance count stayed at 295, so patch 4 added nothing.
+
+Now, publishing. There are two different "publishes", and the purple button in your screenshot is the second one:
+
+- **Step 5 publishes the sheet**, so the updater can read the submissions. It isn't done in the form. It's done in the other tab, the green spreadsheet one.
+- **Step 6 publishes the form**, so visitors can fill it in. That's the purple Publish button you're looking at.
+
+Since you're on the form, do step 6 first:
+
+1. Click **Publish** (top right).
+2. In the box that opens, click **Manage** and set responders to **Anyone with the link**. Click **Done**, then **Publish**. The button changes to "Published".
+3. Click the **link icon** (the chain, left of the person-with-plus icon). Tick **Shorten URL**, then **Copy**. Save that forms.gle link. It's the public one for the lobby, so it's fine to share.
+
+https://forms.gle/Wi95M97iXcWjQDSU8
+
+Then switch to the green spreadsheet tab for step 5: -- already done; see above. 
+
+1. **File**, then **Share**, then **Publish to web**.
+2. First drop-down: **Form Responses 1**. Second drop-down: **Comma-separated values (.csv)**.
+3. Click **Publish**, then **OK**.
+4. Copy the long address it shows. Keep that one private. It goes only into the updater, when the updater asks for it.
+
+5. A long address appears in the box. Copy it and keep it somewhere private until the updater asks for it. Leave "Automatically republish when changes are made" ticked, so new submissions reach the address on their own.
+
+
+Your form's description reads well. It tells visitors their message is reviewed for the public lobby, which covers what they need to know.
+
+Once both are published, send yourself a test message through the forms.gle link, wait about five minutes, and run the Daily Run.
+
+===============================================
+
+
+======================================================================
+  guest book updater -- C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io
+======================================================================
+1 entry in the guest book; 172 gallery pages a link may point at.
+
+No link to the form's responses yet. In the Google Sheet the form
+writes to: File > Share > Publish to web, choose the responses
+sheet and Comma-separated values (.csv), click Publish, and copy
+the address it gives. Paste it here, or press Enter to skip
+visitor messages this time.
+
+Saved in tools\guestbook_local.json (kept off the public repo).
+
+Fetching the form's responses...
+1 new message. The oldest has waited 0 days.
+
+-- 1 of 1 -- Tony, 9/27/2026 22:51:18
+   This is a test of the Paloma's Orrery Guest Book.
+   (private, not published) Overall Gallery Experience Rating: 5
+a approve, d decline, l later, q stop > a
+   Approved.
+   Reply to it now? y/n > y
+   Type your reply. Press Enter on an empty line to finish.
+   > Successful!
+   >
+   Links (optional). Type a room such as solar_system/earth, a
+   card's id, or a live exhibit such as earth or sun. Press Enter
+   on an empty line when done.
+   link > solar_system/earth
+   label [Earth] >
+   added: Earth -> #room=solar_system/earth
+   link >
+   Reply added.
+
+w write an entry, r reply, x remove an entry, f form address, q finish > q
+
+======================================================================
+  approved 1, declined 0, waiting 0; the guest book now has 2 entries
+  CHANGED: commit data/guestbook.json in GitHub Desktop and push.
+======================================================================
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+==============================================================================
+
+Your message isn't live yet because data/guestbook.json hasn't been pushed. The updater saved your approval and reply on your computer, but GitHub still has the file with only the welcome entry, and the gallery is still at 38cb8b41.
+
+But first, something more urgent: the private sheet address is now public. You pasted it into the run record, the maintenance run copies the run record into the orrery's documentation folder, and your last orrery push put it on GitHub. I checked, and it's there at b81137e0. Anyone who finds that address can read every submission, approved or not. Today that's only your test, but it's the address every future message would pass through.
+
+**To close it:**
+1. In the green sheet: **File**, **Share**, **Publish to web**. Open "Published content and settings" and click **Stop publishing**. The old address stops working.
+2. Click **Publish** again with the same choices (Form Responses 1, CSV), and compare the new address with the old one. I'm not certain Google gives a new one. If it gives back the same address, stop publishing again right away and tell me, and we'll move the form to a fresh sheet instead.
+3. Open **tools/guestbook_local.json** in VS Code. Replace the old address between the quotes after "csv_url" with the new one, and save. That file never leaves your computer. Don't paste the new address anywhere else, including the run record.
+4. Delete the old address from your run record, so the next orrery push doesn't carry it again. It will stay in GitHub's history, but once publishing is stopped it leads nowhere.
+
+**Then, to see your message live:** run the Guest Book Updater once more. Choose f and paste https://forms.gle/Wi95M97iXcWjQDSU8, then q. That turns on the "Sign the guest book" link in the same push. Commit data/guestbook.json and push. The lobby updates a minute or two after the push. If it doesn't, reload the page.
+
+Start with the leak. When you've stopped and republished, does the new address differ from the old one?
+
+================================================================
+
+The same address means it's live again, so first: go back to the sheet and **stop publishing right away**. The fix is to give the form a brand-new sheet, which gets its own address.**1. Stop publishing the old sheet.** File, Share, Publish to web, then Stop publishing. Leave it that way for good.
+
+**2. Give the form a new sheet.** In the form's Responses tab, click the three-dot menu next to the green Sheets icon, select Unlink form, and click Unlink to confirm. Nothing is lost: the existing spreadsheet remains in your Google Drive, but it will no longer receive new submissions. Then click **Link to Sheets** again and choose **Create a new spreadsheet**. The form pushes all its earlier responses into the new file, so your test message will be there too.
+
+https://docs.google.com/spreadsheets/d/1lkhbkvSBHJ4UBV1kIccz1Mlq0Zc4FReVx8gS-dEPaNM/edit?resourcekey=&gid=2117585803#gid=2117585803
+
+**3. Publish the new sheet.** In the new sheet: File, Share, Publish to web, "Form Responses 1", CSV, Publish. Because it's a different file, it gets a different address. Check that it doesn't start the same way as the old one. Don't paste it anywhere yet.
+
+**4. Run the attached patch** in the gallery repo, then Gallery Maintenance Run -- offline. "Guest book updater" should now report 39 checks.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L281_5_sheet_address.py
+ok   replaced tools/guestbook_updater.py (22478 bytes)
+ok   replaced tools/test_guestbook_updater.py (14240 bytes)
+stamps: both files carry a September 28 line
+patch applied
+
+NEXT: run gallery_maintenance_run.py -- 'Guest book updater'
+should say 39 checks. Then the updater, s, and the new address.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+**5. Give the updater the new address.** Run the Guest Book Updater and, at the menu, choose **s** and paste the new address. It saves the address and fetches from it right away. Your test message won't come back for approval, because the updater recognizes it as already decided. While you're in the menu, choose **f** and paste the forms.gle link too. Then choose **q**.
+
+
+https://forms.gle/JD6iLZRoZd5UHmJA9
+
+**6. Commit and push the gallery.** That carries your approved test message, your reply and the "Sign the guest book" link to the lobby.
+
+IThe same address means it's live again, so first: go back to the sheet and **stop publishing right away**. The fix is to give the form a brand-new sheet, which gets its own address.**1. Stop publishing the old sheet.** File, Share, Publish to web, then Stop publishing. Leave it that way for good.
+
+**2. Give the form a new sheet.** In the form's Responses tab, click the three-dot menu next to the green Sheets icon, select Unlink form, and click Unlink to confirm. Nothing is lost: the existing spreadsheet remains in your Google Drive, but it will no longer receive new submissions. Then click **Link to Sheets** again and choose **Create a new spreadsheet**. The form pushes all its earlier responses into the new file, so your test message will be there too.
+
+**3. Publish the new sheet.** In the new sheet: File, Share, Publish to web, "Form Responses 1", CSV, Publish. Because it's a different file, it gets a different address. Check that it doesn't start the same way as the old one. Don't paste it anywhere yet.
+
+**4. Run the attached patch** in the gallery repo, then Gallery Maintenance Run -- offline. "Guest book updater" should now report 39 checks.
+
+**5. Give the updater the new address.** Run the Guest Book Updater and, at the menu, choose **s** and paste the new address. It saves the address and fetches from it right away. Your test message won't come back for approval, because the updater recognizes it as already decided. While you're in the menu, choose **f** and paste the forms.gle link too. Then choose **q**.
+
+**6. Commit and push the gallery.** That carries your approved test message, your reply and the "Sign the guest book" link to the lobby.
+
+If you'd like, you can move the old sheet to the trash in Google Drive afterward. Once it's unpublished it's harmless either way.
+
+When the push is done, tell me the new gallery SHA and I'll check the live lobby.f you'd like, you can move the old sheet to the trash in Google Drive afterward. Once it's unpublished it's harmless either way.
+
+When the push is done, tell me the new gallery SHA and I'll check the live lobby.
