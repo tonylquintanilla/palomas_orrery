@@ -407,5 +407,142 @@ EXACT ROWS BY THE COUNT: FAILING -- 0 row(s) with no count, 0 orrery print(s) by
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
   3. Move this script into documentation/. Commit and push.
-  4. Tell Claude the new orrery SHA.
+  4. Tell Claude the new orrery SHA. -- 714293a901159be25074a95662526e4703cc92fc
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+==============================================================================
+
+The first patch of the new design is ready. It is built to Fable's rule as you confirmed it.
+
+**What it does.** `constants_export.json` now serves every length row in kilometres, AU, Earth radii and solar radii, worked out from the full digits and rounded once. It takes its figure count from the source row alone. The skill changes land with it: provenance-discipline 2.22, interactive-exhibit 1.5, and protocol v3.72. Nothing on screen changes yet. The gallery starts using the new values in its own patch, and that is when the bow shock's line will change from "86,200 km (0.000576 AU)" to "86,000 km (0.00058 AU)". It is the only gallery hover that prints those numbers; the orrery's bow shock hover gives Earth radii only.
+
+**Where I departed from Fable's text, and why.** There are three places, and none of them changes a number in Fable's table:
+
+- **One sentence of the rule was worded more loosely than Fable's own numbers.** Read literally, it would have given the bow shock 0.000576 AU, not the 0.00058 in Fable's table. I wrote it the way the table actually works and recorded the correction in the skill.
+- **I did not act on Fable's claim about the LEO edges.** Fable said their rows should be exact because Earth's equatorial radius is exact. It isn't: `constants_new.py` gives it as 6,378.1366 km with a stated uncertainty of 0.0001 km. Your ruling of 2026-09-27 made the unit exact, meaning one Earth radius equals 1 Earth radius by definition. It did not make the kilometre value exact. So the LEO rows keep their eight figures. The reason is written on L-345.
+- **I added one clarification the rule needed.** A converted value never shows fewer than one figure. The geocorona, at 100 Earth radii with one figure, would otherwise round to nothing in AU. With the clarification it reads 0.004 AU.
+
+**Testing.** I ran the patch on a fresh copy of the orrery and then the full maintenance run: all 18 gating checks passed. I also broke the rule on purpose, and changed a served value, to confirm the new check fails and names what is wrong.
+
+On your machine, expect 19 of 20 passing. The one failure is still "Exact rows by the count," as before. It passed in my sandbox only because the gallery wasn't beside the orrery there.
+
+**To run it:** put the file in the orrery root, click Run, -- i overwrote the output and cannot record it here. 
+
+then run the orrery maintenance run. 
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20260928T210920Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.5s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Skill manifest               0.1s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             0.7s  unchanged (1 checked, not written)
+  Module atlas                 7.1s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               4.5s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Exact rows report            1.4s  unchanged (1 checked, not written) -- 8 of
+                                     21 exact rows printed at 19 lines (9 orrery,
+                                     10 gallery); 5 drawn only, 0 not followed, 0
+                                     map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  21 of 21 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.7s  No figure count exceeds its inputs: 42
+                                     derived row(s) read, 30 judged OK -- 30 OK,
+                                     12 NOT YET MIGRATED, 1 NO DERIVED LINE.
+  Constants export check       1.2s  Export matches the store: sha256
+                                     278aa6650315 on both sides; 89 rows re-read,
+                                     51 not exported, 26 tokens.
+  Exact rows by the count      1.3s  FAILED (exit 1) -- FAILING -- 0 row(s)
+                                     with...
+  Dimensions                   1.1s  No unit contradicts its arithmetic: 42
+                                     derived row(s) read -- 30 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.2s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.2s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 91 status lines in constants_new.py are
+                                     well formed; 46 rows carry none.
+  Row shape                    0.1s  All 140 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Reset completeness          13.4s  PASS -- all 309 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.0s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Worksheet checker            9.3s  76 of 114 routed, 8 clean
+  Worksheet checker tests     15.7s  All 136 checks passed
+  Worksheet key round trip     1.0s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         22.3s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          11.2s  296 TIER-1 FINDINGS IN THE SCANNED TREE
+
+======================================================================
+  1 of 20 checkers FAILED -- 96.6s total
+  Exact rows by the count
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           76 of 114 routed, 8 clean
+    Provenance scanner          296 TIER-1 FINDINGS IN THE SCANNED TREE
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  1999 file(s) examined, 6 written, 0 created, 0 removed, 7 rewritten identically
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   data/provenance_history.json
+    written   documentation/HANDOFF_L322_D_print_counts_orrery_done_20260928.md
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      DATA_INVENTORY.md
+      LEDGER_CONSOLIDATED.md
+      PROJECT_INSTRUCTIONS.md
+      WORKSHEET_CHECK.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+----------------------------------------------------------------------
+Exact rows by the count -- FAILED (exit 1) -- FAILING -- 0 row(s) with...
+----------------------------------------------------------------------
+EXACT ROWS PRINTED: 8 of 21 exact rows printed at 19 lines (9 orrery, 10 gallery); 5 drawn only, 0 not followed, 0 map entries broken
+  FAIL EARTH_LEO_UPPER_ALTITUDE_KM: gallery gallery/feature_renderers.js line 2022, served prints None, the row states 4
+  FAIL EARTH_LEO_LOWER_ALTITUDE_KM: gallery gallery/feature_renderers.js line 2022, served prints None, the row states 3
+  FAIL EARTH_VAN_ALLEN_OUTER_RADII: gallery gallery/feature_renderers.js line 1130, served prints None, the row states 2
+  FAIL EARTH_VAN_ALLEN_OUTER_RADII: gallery gallery/feature_renderers.js line 1137, served prints None, the row states 2
+  FAIL EARTH_VAN_ALLEN_OUTER_RADII: gallery gallery/feature_renderers.js line 1140, served prints None, the row states 2
+  FAIL EARTH_VAN_ALLEN_OUTER_RADII: gallery gallery/feature_renderers.js line 1143, served prints None, the row states 2
+  FAIL EARTH_SOLAR_WIND_PRESSURE_NPA: gallery gallery/feature_renderers.js line 2278, served prints None, the row states 1
+  FAIL EARTH_SOLAR_WIND_PRESSURE_NPA: gallery gallery/feature_renderers.js line 2489, served prints None, the row states 1
+  FAIL EARTH_SOLAR_WIND_BZ_NT: gallery gallery/feature_renderers.js line 2277, served prints None, the row states 1
+  FAIL EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG: gallery gallery/feature_renderers.js line 2280, served prints None, the row states 3
+  FAIL EARTH_BOW_SHOCK_CUT_ANGLE_DEG: gallery gallery/feature_renderers.js line 2491, served prints None, the row states 3
+EXACT ROWS BY THE COUNT: FAILING -- 0 row(s) with no count, 0 orrery print(s) by a width, 11 gallery print(s) not served the count
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+Then move the script into `documentation/`, commit, and push. 
+
+After that, reinstall provenance-discipline and interactive-exhibit from `skills/` in Settings > Skills, and tell me the new SHA. The next patch retires the 13 duplicate rows.
+
+
