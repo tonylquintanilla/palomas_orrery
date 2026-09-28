@@ -130,6 +130,17 @@ September 27, 2026 with Anthropic's Claude Opus 5.5 (L-322 Stage D, patch
 D15): added Test Exact Rows By The Count to the checkers, in alphabetical
 place, matching the maintenance runner's new checker; and Exact Rows
 Report's description no longer says it is report-only.
+September 27, 2026 with Anthropic's Claude Opus 5.5 (L-281, patch 4),
+on Tony's design: a Daily Run group above the gallery groups. Its top
+button runs daily_run.py in the gallery repo -- the guest book updater,
+then the cache build after the OneDrive pause, then the offline
+maintenance run -- and the three are indented under it. Gallery Cache
+Builder -- Manual Run MOVED here from Gallery -- checks and data, its
+description unchanged; the offline runner appears in both groups, the
+full description staying in the gallery group. Guest Book Checks added
+to the checkers in alphabetical place, on Tony's request. The offline
+runner's description now names all it runs: it said "six Node suites"
+while the runner had eight.
 """
 
 import os
@@ -231,7 +242,45 @@ LAUNCH_GROUPS = {
          "HR diagrams, stellar neighborhoods, and the Milky Way"),
     ],
 
-    "Gallery -- checks and data": [
+    "Daily Run": [
+        ("Daily Run -- everything indented below",
+         "daily_run.py",
+         "What the gallery needs once a day, in one window, in this order "
+         "(L-281, Tony's design of 2026-09-27). First the Guest Book "
+         "Updater: approve or decline each new message, and write entries "
+         "or replies if you like. Then it asks you to pause OneDrive and "
+         "note the time, and runs the Gallery Cache Builder; type s at "
+         "that question to skip the build today. Then the Gallery "
+         "Maintenance Run, offline, which the builder's own next steps "
+         "ask for before a commit. A step that reports a problem does not "
+         "stop the next one. It ends with one summary naming each step's "
+         "result and what is left for you: commit and push in GitHub "
+         "Desktop, the live maintenance run, and resuming OneDrive. It "
+         "opens by saying when the last cache build was, so a missed day "
+         "shows. It never commits or pushes. Everything indented below is "
+         "included in it and can still be run on its own.",
+         GALLERY_REPO_DIR,
+         True),
+        ("Guest Book Updater",
+         os.path.join("tools", "guestbook_updater.py"),
+         "The lobby's guest book (L-281). Fetches the messages visitors "
+         "sent through the Google Form and shows each one you have not "
+         "decided on: a to approve, d to decline, l to decide later. A "
+         "rating or other answer the form collects is shown to you beside "
+         "the message and never published. Then a menu: write an entry of "
+         "your own, reply under an entry, remove an entry, or set the "
+         "form's address, which turns on the lobby's Sign the guest book "
+         "link. Your entries and replies can link to gallery pages -- type "
+         "a room such as solar_system/earth, a card's id, or an exhibit "
+         "such as earth -- and a misspelt one is refused. It changes only "
+         "data/guestbook.json and says when that needs a commit. Run it "
+         "alone as often as you like; it is also the Daily Run's first "
+         "step. The private address of the form's responses is kept in "
+         "tools/guestbook_local.json, which git ignores.",
+         GALLERY_REPO_DIR,
+         True,
+         None,
+         True),
         ("Gallery Cache Builder -- Manual Run",
          os.path.join("tools", "gallery_cache_builder.py"),
          "Manual serving-cache build. Runs from the gallery repo ROOT: the "
@@ -258,21 +307,39 @@ LAUNCH_GROUPS = {
          "took more than one attempt is a refusal the builder absorbed, "
          "and those two lines are the only way you will know.",
          GALLERY_REPO_DIR,
+         True,
+         None,
          True),
+        ("Gallery Maintenance Run -- offline",
+         "gallery_maintenance_run.py",
+         "The Daily Run's third step: the same button as Gallery "
+         "Maintenance Run -- offline under Gallery -- checks and data, "
+         "which describes it in full. Run after the build and before you "
+         "commit.",
+         GALLERY_REPO_DIR,
+         True,
+         None,
+         True),
+    ],
+
+    "Gallery -- checks and data": [
         ("Gallery Maintenance Run -- offline",
         "gallery_maintenance_run.py",
         "The gallery repo's own runner (L-236), before you commit. "
         "Regenerates the module atlas, pulls the orrery's constants "
         "export at its HEAD SHA and mirrors the served numbers into "
-        "data/objects_config.json, then runs the cache builder suite, "
-        "the mirror suite, the config mirror check, the pointer join, "
-        "the cache-in-step check, the six Node suites (feature "
+        "data/objects_config.json, then runs every checker and prints "
+        "one line each. Python: the cache builder suite, pole of date, "
+        "the mirror suite, the store writer and store editor suites, "
+        "the config mirror check, the pointer join, cache in step, the "
+        "guest book updater, the Daily Run's steps, the artifact-1 "
+        "assembler pin, and cache siblings (report only). Node: feature "
         "renderers, page framing, Sun shells, Earth scene geometry, "
-        "hover budget, arrival), and the artifact-1 assembler "
-        "test. Three states rather than two: a suite that could "
-        "not run -- Node missing, say -- reports UNREACHABLE and is "
-        "never counted as a pass. Everything indented below is included "
-        "in it.",
+        "hover budget, arrival, display figures, and the guest book. "
+        "Three states rather than two: a suite that could not run -- "
+        "Node missing, say -- reports UNREACHABLE and is never counted "
+        "as a pass. The indented buttons below launch some of these "
+        "one at a time.",
         GALLERY_REPO_DIR,
         True),
         ("Artifact 1 Assembler Pin",
@@ -374,6 +441,23 @@ LAUNCH_GROUPS = {
         "own _rename seam -- the same name the real build path goes "
         "through. The run itself prints the current count of checks.",
         GALLERY_TOOLS_DIR,
+        True,
+        None,
+        True),
+        ("Guest Book Checks",
+        os.path.join("documentation", "run_guestbook_checks.py"),
+        "Both checks for the lobby's guest book (L-281), which the "
+        "gallery runner also runs. Guest book: the page's own drawing "
+        "code on the real data/guestbook.json -- newest first, every "
+        "piece of text escaped so nothing a visitor types can become part "
+        "of the page, no link ever drawn on a visitor's entry, and only "
+        "links to this gallery's own pages. Guest book updater: the tool "
+        "in three scripted runs on made-up messages, including the case "
+        "where the form has no message or note column, which it must "
+        "refuse rather than guess. Each suite first proves it can fail. "
+        "The first is Node; this is the Python wrapper the dashboard "
+        "needs. GATES the gallery runner.",
+        GALLERY_REPO_DIR,
         True,
         None,
         True),
@@ -1093,6 +1177,7 @@ SECTION_SYMBOLS = {
     "Solar System": "",
     "Earth System": "",
     "Stars": "",
+    "Daily Run": "",
     "Gallery -- checks and data": "",
     "Gallery -- authoring": "",
     "Maintenance Run": "",

@@ -20,14 +20,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260928T033520Z | `e0a0c7c` | 140 | 1083 | 295 | 668 | 118 | 2 |
 | 20260927T192707Z | `c5db543` | 140 | 1083 | 295 | 668 | 118 | 2 |
 | 20260927T190127Z | `8b32a46` | 143 | 1084 | 296 | 668 | 118 | 2 |
 | 20260927T184931Z | `8b32a46` | 143 | 1084 | 296 | 668 | 118 | 2 |
 | 20260926T214314Z | `56c4b30` | 140 | 1083 | 295 | 668 | 118 | 2 |
 | 20260926T213640Z | `43ba290` | 141 | 1084 | 295 | 669 | 118 | 2 |
-| 20260926T183557Z | `aae1757` | 142 | 1083 | 295 | 668 | 118 | 2 |
 
-Change since the previous run: total -1, Tier-1 -1.
+Change since the previous run: total +0, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -1873,10 +1873,10 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 162 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 163 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 961 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 1092 | dict | SECTION_SYMBOLS[...] | (7 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 173 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 174 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 1045 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 1176 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### planet_visualization_utilities.py
 

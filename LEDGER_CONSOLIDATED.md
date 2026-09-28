@@ -176,6 +176,10 @@ the first real build on the new code, with what it proves and what it
 does not; the empty " (N)" folders measured, cause undetermined; patches
 5 to 7 recorded; the skill wording owed to its next bump), built on
 b9cd4844.
+Module updated: September 27, 2026 with Anthropic's Claude Opus 5.5
+(L-281 as built: Cusdis dropped because it has shut down; the guest book
+kept in the gallery repo, fed by a Google Form and Tony's approval; the
+Daily Run), built on e0a0c7cc.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -425,7 +429,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-08-25 |
 | ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-25 |
-| ! | L-281 | The guest book: no-account comments, approve-before-show | OPEN | 4.2 | 2026-09-03 |
+| ! | L-281 | The guest book: no-account comments, approve-before-show | OPEN | 4.2 | 2026-09-27 |
 | ! | L-247 | Sgr A* constants migrated to the single source of truth | OPEN | 4.0 | 2026-08-25 |
 | ! | L-325 | A derived row stores its reported figure, not the arithmetic result | OPEN | 4.0 | 2026-09-22 |
 | ! | L-331 | Visitor-facing text: stale info text, four Sun hovers outside the i-panel move, and hovers in plain language (exhibits) | OPEN | 4.0 | 2026-09-16 |
@@ -6510,7 +6514,7 @@ Names Its Items [QUALITY], resident protocol Part 3.
   protocol history, the same shape of unwatched transition).
 
 #### [L-281] The guest book: no-account comments, approve-before-show
-<!-- L:281 status:OPEN upd:2026-09-03 section:A flag: rice:3/2/70/1 -->
+<!-- L:281 status:OPEN upd:2026-09-27 section:A flag: rice:3/2/70/1 -->
 - **Tony's ask, 2026-09-03:** a visitor comments blog, "if possible."
   Then the bar: "I would prefer a low bar no sign up option to post
   with my moderators option to delete."
@@ -6532,17 +6536,78 @@ Names Its Items [QUALITY], resident protocol Part 3.
   GitHub so it will not disappear; but a visitor needs a GitHub account
   to post). Rejected for now on the sign-up bar. Disqus rejected on ads
   and tracking.
-- **Tony-action (decide):** Cusdis hosted free tier to start, or wait
-  until the hall exists. Adds a third-party script to a public page.
+- **Tony-action (decide), SUPERSEDED 2026-09-26:** Cusdis hosted free
+  tier to start, or wait until the hall exists. Adds a third-party
+  script to a public page. (Cusdis has shut down; see the 2026-09-26
+  note below for what replaced it.)
 - **Note:** RICE 3/2/70/1 -> 4.2 proposed, not confirmed.
 - **Note 2026-09-04:** the hall (L-280) was retired as a screen. The
   guest book embeds at the bottom of the LOBBY (L-282) instead. The
   decision above is unchanged.
-**Gap:** decision; then a Cusdis account, the two-line embed at the
-bottom of the lobby (L-282), and a line in the placard saying comments
-are read before they appear.
-**Ref:** L-282 (was L-280); https://cusdis.com/;
-https://github.com/djyde/cusdis.
+- **Note 2026-09-26: Cusdis has shut down.** Its own GitHub README now
+  opens by saying the project is deprecated and asks users to email for
+  an export of their data [verified 2026-09-26, github.com/djyde/cusdis].
+  A competitor's blog dates the archive to 2026-07-17 [not independently
+  confirmed]. If that date is right, the recommendation above was
+  written after the shutdown and was never checked against it.
+- **Tony's decision, 2026-09-26: the entries are kept in the gallery
+  repo.** No outside service on the page and no email in the loop. A
+  visitor fills in a Google Form. The form's responses sheet is
+  published as CSV at a private address. A tool Tony runs fetches the
+  submissions, and he approves, declines or defers each one. Approved
+  entries go into data/guestbook.json, which the lobby reads. Tony can
+  also write his own entries and public replies, with links to gallery
+  pages. Entries show newest first (Tony, 2026-09-26). A Daily Run
+  umbrella groups the updater with the cache builder, to be run first
+  thing each day; the updater can also be run alone (Tony, 2026-09-27).
+- **Built, four patches:**
+  - Patch 1, gallery, pushed at 70a77347: gallery/guestbook.js draws
+    the book; data/guestbook.json holds it; the check
+    documentation/smoke_guestbook.js (7 checks, which first prove they
+    can fail on a broken renderer); the lobby's "Under construction" row
+    replaced; the --live pass fetches both files. [verified: Tony's run
+    record, the live pass matched both files byte for byte]
+  - Patch 2, gallery, pushed at 9b787f99: tools/guestbook_updater.py
+    and tools/test_guestbook_updater.py; .gitignore keeps
+    tools/guestbook_local.json -- the private address and fingerprints
+    of decided messages, never their words -- out of the public repo.
+  - Patch 3, gallery, built on 9b787f99: daily_run.py and its
+    --check row in the gallery runner; documentation/
+    run_guestbook_checks.py for the dashboard; the updater finds the
+    message by a heading containing "message" or "note", with no
+    fallback to a column by position, and shows the form's other
+    answers to Tony privately.
+  - Patch 4, orrery, built on e0a0c7cc: the dashboard's Daily Run
+    group (the Gallery Cache Builder button moved into it), Guest Book
+    Checks, and this block.
+- **The safety rules live in the page, not only in the tool.** All text
+  is escaped. Links are drawn only on Tony's entries and replies, and
+  only to #card, #room=path or interactive.html?exhibit=name. The sign
+  link appears only for a Google Forms address.
+- **The form as Tony built it, 2026-09-27:** a name, an overall rating,
+  and "Leave a note about the gallery". An email question and a
+  favourite-exhibit question were deleted from the form. Their columns
+  stay hidden in the sheet, because Google will not delete a column
+  linked to a form. The first updater would have read the email column
+  as the message: no heading contained "message", and it fell back to
+  the third column. Caught from Tony's screenshot before any run; patch
+  3 removes the fallback, and the test now covers that sheet.
+- **Note:** the .lobby-row styles in index.html are no longer used by
+  anything. Left in place; remove on the next index.html patch.
+**Gap:**
+- Tony-action (do): run patch 3 in the gallery and patch 4 in the
+  orrery; each repo's maintenance run; commit and push both.
+- Tony-action (do): finish the form setup at step 5 -- publish the
+  responses sheet as CSV -- then send a test message, and run the
+  updater once: paste the address, decline the test, set the form
+  address with f, commit and push.
+- Mode 5: Tony looks at the lobby once the Sign the guest book link is
+  live, on the desktop and the phone.
+- Close when a real visitor's message has been approved and appears.
+**Ref:** L-282 (the lobby); L-216 (the OneDrive pause before a build);
+gallery 70a77347 and 9b787f99. The form lives in Tony's Google account
+as "Paloma's Orrery Guest Book". Kept for the record:
+https://cusdis.com/; https://github.com/djyde/cusdis.
 
 #### [L-282] The lobby: the main page as an entrance hall
 <!-- L:282 status:OPEN upd:2026-09-06 section:A flag: rice:5/4/75/4 -->

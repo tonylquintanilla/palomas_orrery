@@ -3236,4 +3236,606 @@ The sample entry's wording is mine, placed there so you'd have something to look
 
 After running the patch, run Gallery Maintenance Run -- offline, which should show the new "Guest book" row passing. Then open the lobby through Serve Gallery Locally, on your desktop and your phone. What do you see? -- correct as described. 
 
+===========================================================================================
 
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L281_2_guestbook_updater.py
+ok   created tools/guestbook_updater.py (18843 bytes)
+ok   created tools/test_guestbook_updater.py (10865 bytes)
+ok   gallery_maintenance_run.py: header stamp
+ok   gallery_maintenance_run.py: updater checker
+     gallery_maintenance_run.py written (53003 bytes)
+ok   .gitignore: guest book local file
+     .gitignore written (1678 bytes, CRLF kept)
+stamps updated: gallery_maintenance_run.py docstring
+patch applied
+
+NEXT: run gallery_maintenance_run.py. It should show a new row,
+'Guest book updater', passing. 
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.4s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     1.3s  rewrote
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      14.7s  PASS (210 checks, 0 failures)
+  PASS Pole of date              0.3s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.1s  All 51 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served.
+  PASS Store writer suite        5.5s  All 251 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 252 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 65 link(s) compared, store
+                                    eafacc8cec4b.
+  PASS Pointer join              0.1s  Every link is accounted for: 93
+                                    link(s) against orrery e0a0c7cc,
+                                    24 fallback named; read check: 43
+                                    of 43 measured rows reached carry
+                                    a read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's features exactly: 4
+                                    object(s), 35 named shell(s), in
+                                    both cache files.
+  PASS Feature renderers         1.4s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 57 hover(s) and 288
+                                    number(s) examined; 13 graded, 5
+                                    graded by line, 44 held to the
+                                    fixture ===
+  PASS Guest book                0.1s  === GUEST BOOK: all 7 checks
+                                    passed
+  PASS Guest book updater        0.3s  === GUEST BOOK UPDATER: all 29
+                                    checks passed (3 scripted runs,
+                                    self-test first)
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: no sibling directories and
+                                    nothing in data/ the builder did
+                                    not make.
+
+======================================================================
+  18 of 18 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories and
+  last swap 2026-09-27T13:55:01.594465+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+Then commit and push. -- 9b787f99f78fbde9f09f896804fd4cb8fee3e3f1
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 13 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+
+  PASS Served reachability       3.2s  all 13 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at e0a0c7cc
+
+  PASS Export freshness          0.1s  the served export is the orrery's
+                                    at e0a0c7cc, byte for byte
+
+  orrery HEAD e0a0c7cc
+  examining 28 of 93 links; the other 65 are served from the export
+    NOT IN STORE  create_sun_galactic_tide default not a top-level constant in the store
+                  /objects/0/features/oort_cloud/galactic_tide/typical_radius
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  28 pointers: 24 match, 0 DRIFT, 0 UNIT MISMATCH, 4 could not be examined.
+
+  PASS Store drift               1.5s  28 pointers against orrery
+                                    e0a0c7cc -- 24 match, 0 DRIFT, 0
+                                    UNIT MISMATCH, 4 could not be
+                                    examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            28 pointers against orrery e0a0c7cc --
+  last swap 2026-09-27T13:55:01.594465+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+**Step 2, attached, is the guest book updater.** It's built on 70a77347. Save it in the gallery repo's top folder and click Run, as before. It creates two files and edits two:
+
+- **tools/guestbook_updater.py**, the tool itself. It fetches the form's submissions and shows each new one. You answer a to approve, d to decline, l to decide later, or q to stop. After approving, it offers to let you reply right away. Then it gives a small menu:
+  - write an entry of your own;
+  - reply under any entry;
+  - remove an entry;
+  - set the form's address, which turns on the lobby's "Sign the guest book" link.
+
+  It ends by telling you whether the guest book changed and needs a commit. I added the remove option myself. Approving before publishing covers new messages, but you also need a way to take down something already published.
+- **tools/test_guestbook_updater.py**, its check. It runs the tool three times in a temporary folder, with scripted answers and made-up submissions in place of Google.
+- **.gitignore** keeps the tool's private file off the public repo. That file holds the sheet's address and a list of messages you've already decided on. The list keeps only a short fingerprint of each message, not its words, so a declined message isn't saved anywhere.
+- **gallery_maintenance_run.py** gets a new row, "Guest book updater".
+
+**Links are typed simply.** For your entries and replies, you type a room (solar_system/earth), a card's id, or a live exhibit (earth, sun). The tool checks each against the gallery's own list of 172 pages. A misspelling is refused, and the tool asks you again.
+
+**What I tested:**
+- The check passes all 29 of its tests.
+- A guest book written by the updater also passes the page's own "Guest book" check, and it displays newest first.
+- A first run with nothing set up asks for the sheet's address. If you skip it, it finishes without changing anything.
+
+**Next**, I'll give you the steps to create the Google Form and its sheet. That's the one part only you can do, since it lives in your Google account. After that come the Daily Run and the dashboard patch.
+
+For now: run the patch, then Gallery Maintenance Run -- offline, which should show "Guest book updater" passing. Then commit and push, and tell me the new gallery SHA.
+
+=========================================================================================
+
+1
+Create the form
+Go to forms.google.com and choose Blank form. Title it "Paloma's Orrery guest book". For the description, a suggestion you can change: "Leave a note about the gallery. Every message is read before it appears, and messages that appear in the lobby are public."
+2
+Add the two questions
+First question: "Your name", type Short answer, Required on. Second: "Your message", type Paragraph, Required on. Keep the words "name" and "message" in the titles, because the updater finds the columns by those words. Delete any other question.
+3
+Turn off email collection
+In the Settings tab, under Responses, set Collect email addresses to "Do not collect". Leave "Limit to 1 response" off, because it makes visitors sign in to Google.
+4
+Link the form to a sheet
+In the Responses tab, click Link to Sheets and choose Create a new spreadsheet. Every submission will now arrive there as a row.
+5
+Publish the sheet as CSV
+In that sheet: File, Share, Publish to web. Choose the "Form Responses 1" sheet (not Entire document) and "Comma-separated values (.csv)", then Publish. Copy the address it gives. Keep it private: don't paste it into chat, email or anywhere public.
+6
+Publish the form
+Back in the form, click Publish at the top right, then Manage, and set responders to "Anyone with the link". Publish again. Then click the link icon, tick Shorten URL, and copy the responder link (it starts with forms.gle).
+7
+Send yourself a test
+Open the responder link in a private browser window and submit a test message. Google can take a few minutes to update the published CSV, so wait about five minutes before the next step.
+8
+Run the updater
+Open tools/guestbook_updater.py in VS Code and click Run. Paste the sheet address when it asks. It should show your test message: answer d to decline it. Then choose f and paste the forms.gle link, then q. Commit data/guestbook.json and push.
+
+After you push, the lobby's note should change to a "Sign the guest book" link that opens your form.
+
+While you do this, I'll build the Daily Run and the dashboard patch. It will add the Daily Run group with the updater, the cache builder and the maintenance checks under it, plus the "Guest book" check you asked for.
+
+Tell me what the updater printed when it showed your test message, and the new gallery SHA.
+
+==============================================
+
+Here's step 5, then the email column, then one thing I need to change on my side.
+
+**Step 5, in the sheet you have open:**
+
+1. Click **File** in the menu bar (top left, under the title).
+2. Point to **Share**, then click **Publish to web**.
+3. A box opens with two drop-down menus side by side. In the first, which says "Entire Document", choose **Form Responses 1**. In the second, which says "Web page", choose **Comma-separated values (.csv)**.
+4. Click **Publish**. When Google asks if you're sure, click **OK**.
+5. A long address appears in the box. Copy it and keep it somewhere private until the updater asks for it. Leave "Automatically republish when changes are made" ticked, so new submissions reach the address on their own.
+
+https://docs.google.com/spreadsheets/d/e/2PACX-1vRif3gd7JB28ffoGNYOx04b39TpIJ3TPRo3_qi_syzHZqZLG3es0zSyVMhX7SapGsg0V1nWecaqA0Dq/pub?gid=483580803&single=true&output=csv
+
+**The email column is a question on the form, not the email setting.** The setting you turned off only stops Google from recording each visitor's account email by itself. "Your Email Address" is a separate question that asks visitors to type theirs, and that setting doesn't touch it. To remove it, open the form, click that question, and click the trash-can icon. The empty column will stay in the sheet, which is harmless because nothing will fill it or read it.
+
+**Please don't run the updater until I've changed it (step 8).** Your form differs from what I built for in one way that matters. The message question is titled "Leave a note about the gallery", and the updater looks for a column with "message" in its title. Finding none, it would fall back to the third column, which is the email column. It would then show you email addresses as if they were messages. I'll change the updater to recognize "note" as well, and put that in the Daily Run patch.
+
+Your two extra questions, the rating and the favorite exhibit, are a nice addition. My plan: the updater shows you both when you review a message, but never publishes them. They stay private to you in the sheet. If you'd rather have either one show in the lobby, tell me.
+
+For now, do step 5 and delete the email question from the form.
+
+======================================================================
+
+That message is expected. It came from the sheet, and Google doesn't let you delete a column that's linked to a form. Hiding it there is fine. But the question itself lives in the form, which is a separate page, and that's where it has to be deleted.
+
+1. Switch to the other Google tab, the one titled "Paloma's Orrery Guest Book" with the purple form icon.
+2. Make sure you're on the **Questions** tab at the top of the form.
+3. Click the "Your Email Address" question so its box is highlighted.
+4. At the bottom of that box, click the **trash can** icon.
+
+Google saves the change on its own. If the button at the top right changes from "Published" to something asking you to publish again, click it.
+
+If you also meant to drop the favorite-exhibit question when you hid column E, delete it from the form the same way.
+
+After that, nothing new will go into the hidden columns, and they can stay hidden in the sheet. Tell me when the email question is gone from the form.
+
+==============================================================================
+
+Now the updater change for your form's column names, and the Daily Run itself.Now the Daily Run itself.Gallery half tested. Now the dashboard and ledger patch for the orrery repo.Good, the form now asks only for a name, a rating and a note. The Daily Run is built as two patches, one for each repo.
+
+**Patch 3, for the gallery repo** (built on 9b787f99):
+- **daily_run.py** runs the three steps in order. First the guest book updater. Then it asks you to pause OneDrive and press Enter, or type s to skip the build that day, and runs the cache builder. Then the offline maintenance run. If one step has a problem, the next still runs. It ends with a summary of each step and what's left for you: commit and push, the live check, and resuming OneDrive. It opens by saying when the last cache build was, so a missed day shows.
+- **The updater now reads your form correctly.** It takes the message from the column whose heading contains "note" or "message", and it will never guess a column by position. The rating is shown to you beside each message and never published.
+- **A new maintenance-run check, "Daily run steps"**, fails if any of the Daily Run's three scripts goes missing, say after a rename.
+
+**Patch 4, for the orrery repo** (built on e0a0c7cc):
+- **A new "Daily Run" group on the dashboard**, above the gallery groups. Its main button runs the whole Daily Run. Indented under it are the Guest Book Updater, the Gallery Cache Builder (moved here from the gallery group, description unchanged) and the offline maintenance run.
+- **The "Guest Book Checks" button you asked for**, among the gallery checkers.
+- **The offline maintenance run's description** now names everything it runs. It said "six Node suites" when there are eight.
+- **L-281 in the ledger, rewritten as built.** Cusdis's shutdown, your design, the four patches, and what's left. The old Cusdis text is kept and marked as replaced.
+
+**What I tested:**
+- I drove the Daily Run through a real terminal, with the builder made to fail on purpose. The maintenance run still ran, and the summary named the builder as the problem.
+- I also ran it skipping the build. Both guest book checks pass.
+- I opened the dashboard on a virtual screen, and every button in both groups found its script.
+- The orrery maintenance run gives the same results with and without patch 4, with one catch. The patch script itself counts as one extra finding for the provenance scanner while it sits in the repo's top folder. Once it's moved into documentation/, the count is back to normal.
+
+**Order:**
+1. Gallery: run patch 3, then Gallery Maintenance Run -- offline. Move the patch into documentation/, then commit and push.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L281_3_daily_run.py
+ok   created daily_run.py (7297 bytes)
+ok   created documentation/run_guestbook_checks.py (2638 bytes)
+ok   replaced tools/guestbook_updater.py (20746 bytes)
+ok   replaced tools/test_guestbook_updater.py (12942 bytes)
+ok   gallery_maintenance_run.py: header stamp
+ok   gallery_maintenance_run.py: daily run checker
+     gallery_maintenance_run.py written (53408 bytes)
+stamps: gallery_maintenance_run.py docstring; the new and replaced
+files carry their own
+patch applied
+
+NEXT: run gallery_maintenance_run.py. New row 'Daily run steps'
+should pass, and 'Guest book updater' should say 34 checks.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.5s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     1.0s  no change to
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      12.8s  PASS (210 checks, 0 failures)
+  PASS Pole of date              0.2s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.1s  All 51 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served.
+  PASS Store writer suite        4.3s  All 251 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 252 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 65 link(s) compared, store
+                                    eafacc8cec4b.
+  PASS Pointer join              0.1s  Every link is accounted for: 93
+                                    link(s) against orrery e0a0c7cc,
+                                    24 fallback named; read check: 43
+                                    of 43 measured rows reached carry
+                                    a read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's features exactly: 4
+                                    object(s), 35 named shell(s), in
+                                    both cache files.
+  PASS Feature renderers         1.0s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 57 hover(s) and 288
+                                    number(s) examined; 13 graded, 5
+                                    graded by line, 44 held to the
+                                    fixture ===
+  PASS Guest book                0.1s  === GUEST BOOK: all 7 checks
+                                    passed
+  PASS Guest book updater        0.3s  === GUEST BOOK UPDATER: all 34
+                                    checks passed (3 scripted runs,
+                                    self-test first)
+  PASS Daily run steps           0.1s  === DAILY RUN: all 3 step scripts
+                                    found
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: no sibling directories and
+                                    nothing in data/ the builder did
+                                    not make.
+
+======================================================================
+  19 of 19 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories and
+  last swap 2026-09-27T13:55:01.594465+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+-- gallery moved to 38cb8b41c1016714b4923022fccadfbe8d7e8497
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 13 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+
+  PASS Served reachability       2.1s  all 13 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at e0a0c7cc
+
+  PASS Export freshness          0.1s  the served export is the orrery's
+                                    at e0a0c7cc, byte for byte
+
+  orrery HEAD e0a0c7cc
+  examining 28 of 93 links; the other 65 are served from the export
+    NOT IN STORE  create_sun_galactic_tide default not a top-level constant in the store
+                  /objects/0/features/oort_cloud/galactic_tide/typical_radius
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  28 pointers: 24 match, 0 DRIFT, 0 UNIT MISMATCH, 4 could not be examined.
+
+  PASS Store drift               0.7s  28 pointers against orrery
+                                    e0a0c7cc -- 24 match, 0 DRIFT, 0
+                                    UNIT MISMATCH, 4 could not be
+                                    examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            28 pointers against orrery e0a0c7cc --
+  last swap 2026-09-27T13:55:01.594465+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+2. Orrery: run patch 4, and move it into documentation/ **before** the orrery maintenance run. The maintenance run also rebuilds the ledger's index. Then commit and push.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L281_4_dashboard_and_ledger.py
+ok   palomas_orrery_dashboard.py: change note
+ok   palomas_orrery_dashboard.py: Daily Run group; builder moved into it
+ok   palomas_orrery_dashboard.py: offline runner description
+ok   palomas_orrery_dashboard.py: Guest Book Checks
+ok   palomas_orrery_dashboard.py: section symbol
+     palomas_orrery_dashboard.py written (91327 bytes)
+ok   LEDGER_CONSOLIDATED.md: header stamp
+ok   LEDGER_CONSOLIDATED.md: L-281 metadata
+ok   LEDGER_CONSOLIDATED.md: L-281 Cusdis decision superseded
+ok   LEDGER_CONSOLIDATED.md: L-281 as built
+     LEDGER_CONSOLIDATED.md written (1304552 bytes)
+stamps updated: dashboard docstring change note, ledger header
+patch applied
+
+NEXT: run the orrery maintenance run -- it regenerates the ledger
+index from the new L-281 block -- then commit and push.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20260927T192707Z, 1 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 0.9s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.1s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             0.6s  unchanged (1 checked, not written)
+  Module atlas                 6.9s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.5s  rewrote DATA_INVENTORY.md
+  Exact rows report            1.7s  unchanged (1 checked, not written) -- 7 of
+                                     20 exact rows printed at 18 lines (8 orrery,
+                                     10 gallery); 4 drawn only, 0 not followed, 0
+                                     map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  21 of 21 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.9s  No figure count exceeds its inputs: 41
+                                     derived row(s) read, 28 judged OK -- 28 OK,
+                                     13 NOT YET MIGRATED, 1 NO DERIVED LINE.
+  Constants export check       1.3s  Export matches the store: sha256
+                                     eafacc8cec4b on both sides; 85 rows re-read,
+                                     54 not exported, 26 tokens.
+  Exact rows by the count      1.4s  FAILED (exit 1) -- FAILING -- 0 row(s)
+                                     with...
+  Dimensions                   1.1s  No unit contradicts its arithmetic: 41
+                                     derived row(s) read -- 28 OK, 10 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.2s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.2s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 87 status lines in constants_new.py are
+                                     well formed; 49 rows carry none.
+  Row shape                    0.1s  All 139 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Reset completeness          21.3s  PASS -- all 309 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  1.8s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Worksheet checker            9.4s  76 of 114 routed, 8 clean
+  Worksheet checker tests     16.5s  All 136 checks passed
+  Worksheet key round trip     0.9s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         20.2s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          10.2s  295 TIER-1 FINDINGS IN THE SCANNED TREE
+
+======================================================================
+  1 of 20 checkers FAILED -- 102.9s total
+  Exact rows by the count
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           76 of 114 routed, 8 clean
+    Provenance scanner          295 TIER-1 FINDINGS IN THE SCANNED TREE
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  1989 file(s) examined, 8 written, 0 created, 0 removed, 5 rewritten identically
+    written   DATA_INVENTORY.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   data/provenance_history.json
+    written   documentation/RUN_RECORD_gallery_card_pass_20260922.md
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      PROJECT_INSTRUCTIONS.md
+      WORKSHEET_CHECK.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+----------------------------------------------------------------------
+Exact rows by the count -- FAILED (exit 1) -- FAILING -- 0 row(s) with...
+----------------------------------------------------------------------
+EXACT ROWS PRINTED: 7 of 20 exact rows printed at 18 lines (8 orrery, 10 gallery); 4 drawn only, 0 not followed, 0 map entries broken
+  FAIL EARTH_LEO_UPPER_ALTITUDE_KM: gallery gallery/feature_renderers.js line 2022, served prints None, the row states 4
+  FAIL EARTH_LEO_LOWER_ALTITUDE_KM: gallery gallery/feature_renderers.js line 2022, served prints None, the row states 3
+  FAIL EARTH_VAN_ALLEN_OUTER_RADII: gallery gallery/feature_renderers.js line 1130, served prints None, the row states 2
+  FAIL EARTH_VAN_ALLEN_OUTER_RADII: gallery gallery/feature_renderers.js line 1137, served prints None, the row states 2
+  FAIL EARTH_VAN_ALLEN_OUTER_RADII: gallery gallery/feature_renderers.js line 1140, served prints None, the row states 2
+  FAIL EARTH_VAN_ALLEN_OUTER_RADII: gallery gallery/feature_renderers.js line 1143, served prints None, the row states 2
+  FAIL EARTH_SOLAR_WIND_PRESSURE_NPA: gallery gallery/feature_renderers.js line 2278, served prints None, the row states 1
+  FAIL EARTH_SOLAR_WIND_PRESSURE_NPA: gallery gallery/feature_renderers.js line 2489, served prints None, the row states 1
+  FAIL EARTH_SOLAR_WIND_BZ_NT: gallery gallery/feature_renderers.js line 2277, served prints None, the row states 1
+  FAIL EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG: gallery gallery/feature_renderers.js line 2280, served prints None, the row states 3
+  FAIL EARTH_BOW_SHOCK_CUT_ANGLE_DEG: gallery gallery/feature_renderers.js line 2491, served prints None, the row states 3
+EXACT ROWS BY THE COUNT: FAILING -- 0 row(s) with no count, 0 orrery print(s) by a width, 11 gallery print(s) not served the count
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+
+
+3. Then finish the form at step 5, and try the Daily Run from its new button for the first run of the updater.
+
+Tell me both new SHAs when they're pushed.
