@@ -3,8 +3,8 @@
 
 Generated: September 28, 2026
 Files scanned: 141
-Total findings: 1085
-Constants: 161 | Dicts: 45 | Display strings: 879
+Total findings: 1084
+Constants: 161 | Dicts: 44 | Display strings: 879
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,20 +20,16 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260928T210920Z | `f7fa06f` | 141 | 1084 | 296 | 668 | 118 | 2 |
 | 20260928T200218Z | `13bc29a` | 141 | 1085 | 296 | 669 | 118 | 2 |
 | 20260928T194652Z | `95b394f` | 141 | 1083 | 295 | 668 | 118 | 2 |
 | 20260928T033520Z | `e0a0c7c` | 140 | 1083 | 295 | 668 | 118 | 2 |
 | 20260927T192707Z | `c5db543` | 140 | 1083 | 295 | 668 | 118 | 2 |
 | 20260927T190127Z | `8b32a46` | 143 | 1084 | 296 | 668 | 118 | 2 |
-| 20260927T184931Z | `8b32a46` | 143 | 1084 | 296 | 668 | 118 | 2 |
 
-Change since the previous run: total +2, Tier-1 +1.
+Change since the previous run: total -1, Tier-1 +0.
 
-Tier-1 rose in these files:
-
-| File | Before | After |
-|------|-------:|------:|
-| solar_visualization_shells.py | 6 | 7 |
+No file's Tier-1 count rose.
 
 ---
 
@@ -65,7 +61,7 @@ Tier-1 rose in these files:
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 296 |
-| 2 | 10-15 | REVIEW | 669 |
+| 2 | 10-15 | REVIEW | 668 |
 | 3 | 5-9 | LOW PRIORITY | 118 |
 | 4 | 1-4 | LOWEST PRIORITY | 2 |
 
@@ -157,7 +153,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `visualization_core.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `visualization_utils.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `earth_pole_live_check.py` | orrery | 0 | 1 | 0 | 0 | 1 |
-| `patch_L322_D_17_chromosphere_rows_20260928.py` | orrery | 0 | 1 | 0 | 0 | 1 |
 | `add_docstrings.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `data_inventory.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `export_constants.py` | orrery | 0 | 0 | 1 | 0 | 1 |
@@ -176,7 +171,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 49 | 133 | 552 | 71 | 2 | 758 |
+| Orrery (solar system + orbital mechanics) | 48 | 133 | 551 | 71 | 2 | 757 |
 | Earth System | 13 | 149 | 75 | 2 | 0 | 226 |
 | Stars (stellar neighborhood) | 11 | 12 | 42 | 6 | 0 | 60 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 39 | 0 | 39 |
@@ -190,7 +185,6 @@ Same data again, grouped by subject-matter domain rather than by individual file
 - `earth_pole_of_date.py`
 - `export_constants.py`
 - `orrery_maintenance_run.py`
-- `patch_L322_D_17_chromosphere_rows_20260928.py`
 - `test_dimensions.py`
 - `worksheet_checker.py`
 - `worksheet_key_aliases.py`
@@ -1401,12 +1395,6 @@ is planned for a future session.
 | 2303 | string | display string @ line 2303 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2341 | string | display string @ line 2341 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2416 | string | display string @ line 2416 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-
-### patch_L322_D_17_chromosphere_rows_20260928.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 66 | dict | FINGERPRINTS[...] | (4 entries) | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | UNDETERMINED -- could not be classified |
 
 ### planet9_visualization_shells.py
 

@@ -227,3 +227,185 @@ Re-read the ledger index before assigning one.
 ---
 
 Session written September 2026 with Anthropic's Claude Opus 5.5.
+
+==========================================================================
+
+The ledger patch is ready. It is larger than the handoff suggested, and here is why.
+
+While checking which rows were owed, I found that nothing from Stage D had ever been filed in `LEDGER_CONSOLIDATED.md`. Five handoffs and the Stage D manifest each carried a list "for the ledger" and passed it on to the next session. That is how items get lost, so this patch files all of them at once:
+
+- **18 new items, L-368 to L-385.** Each covers one kind of problem. One of them is L-385, the Sun's Auto view decision you've been carrying for four handoffs. It now has a home in the ledger.
+- **A line added to six existing items.** These are cases where the new finding is the same kind of problem as one already recorded. For example, the gallery cache builder's own copy of the AU conversion joins L-243, which already tracks those copies.
+- **A status note on L-322** saying where Stage D stands.
+- **L-311, L-325 and L-342 closed**, per your rulings of 2026-09-22.
+
+Where I could check a claim against the repositories today, the ledger text marks it as verified. Where the claim is carried over from a handoff, it says so. The script lists every new item by name at its top.
+
+I tested it on a copy of the orrery. It applied cleanly. `ledger_index.py` then moved the three closed items to the archive section and indexed all 18 new ones. A second run refuses and writes nothing, as it should.
+
+**To run it:** put the file in the orrery root, click Run, then run `ledger_index.py` and the orrery maintenance run. The maintenance run should still show 19 of 20 passing. The one failure is "Exact rows by the count," and it clears only when the gallery patch lands. Then move the script into `documentation/`, commit, push, and tell me the new orrery SHA. After that I'll turn to the gallery patch.
+
+===========================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L322_D_18_ledger_stage_d_rows_20260928.py
+ok  LEDGER_CONSOLIDATED.md   <!-- L:360 status:OPEN upd:2026-09-22 section:A flag: ri
+ok  LEDGER_CONSOLIDATED.md   **Gap:** Have the budget also measure hovers
+ok  LEDGER_CONSOLIDATED.md   <!-- L:352 status:OPEN upd:2026-09-22 section:A flag: ri
+ok  LEDGER_CONSOLIDATED.md   **Gap:** Design the helper, then sweep
+ok  LEDGER_CONSOLIDATED.md   <!-- L:351 status:OPEN upd:2026-09-22 section:A flag: ri
+ok  LEDGER_CONSOLIDATED.md   **Gap:** Each lands with its store's next bump.
+ok  LEDGER_CONSOLIDATED.md   <!-- L:350 status:OPEN upd:2026-09-22 section:A flag: ri
+ok  LEDGER_CONSOLIDATED.md   **Gap:** Decide whether the magnetotail hover should pri
+ok  LEDGER_CONSOLIDATED.md   <!-- L:345 status:OPEN upd:2026-09-22 section:A flag: ri
+ok  LEDGER_CONSOLIDATED.md   **Gap:** The decision above, then the next slice builds 
+ok  LEDGER_CONSOLIDATED.md   <!-- L:342 status:OPEN upd:2026-09-22 section:A flag:! r
+ok  LEDGER_CONSOLIDATED.md   - **Ref:** `gallery/feature_renderers.js`;
+ok  LEDGER_CONSOLIDATED.md   <!-- L:325 status:OPEN upd:2026-09-22 section:A flag: ri
+ok  LEDGER_CONSOLIDATED.md   **Ref:** L-305, L-314, L-322, `constants_new.py`,
+ok  LEDGER_CONSOLIDATED.md   <!-- L:322 status:OPEN upd:2026-09-22 section:A flag: ri
+ok  LEDGER_CONSOLIDATED.md   **Ref:** L-305, L-306 (approximations are not promoted),
+ok  LEDGER_CONSOLIDATED.md   <!-- L:311 status:OPEN upd:2026-09-10 section:A flag: ri
+ok  LEDGER_CONSOLIDATED.md   **Ref:** L-291 (step 3 record), L-292 (not this), proven
+ok  LEDGER_CONSOLIDATED.md   <!-- L:243 status:OPEN upd:2026-08-25 section:A flag: ri
+ok  LEDGER_CONSOLIDATED.md   routed to L-244.
+ok  LEDGER_CONSOLIDATED.md   #### [L-367] No checker opens a new room (checks, galler
+
+patch applied (21 edits)
+
+NEXT:
+  1. python ledger_index.py   (moves L-311, L-325, L-342 to C)
+
+CONSISTENCY PROBLEMS:
+  - [auto-fix] L-342: status DONE, tagged 'A', but not physically inside any track's own span, so the general archive -- correct tag is 'C'
+  - [auto-fix] L-342: belongs in closed bucket 'C' but is not physically located in its destination heading
+  - [auto-fix] L-311: status DONE, tagged 'A', but not physically inside any track's own span, so the general archive -- correct tag is 'C'
+  - [auto-fix] L-311: belongs in closed bucket 'C' but is not physically located in its destination heading
+  - [auto-fix] L-325: status DONE, tagged 'A', but not physically inside any track's own span, so the general archive -- correct tag is 'C'
+  - [auto-fix] L-325: belongs in closed bucket 'C' but is not physically located in its destination heading
+Retagged 3 block(s) to their correct closed bucket; physically moved 3 block(s) into their bucket's destination heading.
+Index regenerated (233 live items) in C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\LEDGER_CONSOLIDATED.md.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+OK: 380 L-blocks parsed, no consistency problems.
+Index regenerated (233 live items) in C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\LEDGER_CONSOLIDATED.md.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. python orrery_maintenance_run.py
+     Expect 19 of 20 as before: 'Exact rows by the count'
+     still fails until the gallery patch lands.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20260928T200218Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 0.9s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Skill manifest               0.1s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.2s  unchanged (1 checked, not written)
+  Module atlas                 6.1s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               4.3s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Exact rows report            1.3s  unchanged (1 checked, not written) -- 8 of
+                                     21 exact rows printed at 19 lines (9 orrery,
+                                     10 gallery); 5 drawn only, 0 not followed, 0
+                                     map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.2s  21 of 21 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.6s  No figure count exceeds its inputs: 42
+                                     derived row(s) read, 30 judged OK -- 30 OK,
+                                     12 NOT YET MIGRATED, 1 NO DERIVED LINE.
+  Constants export check       1.0s  Export matches the store: sha256
+                                     278aa6650315 on both sides; 89 rows re-read,
+                                     51 not exported, 26 tokens.
+  Exact rows by the count      1.2s  FAILED (exit 1) -- FAILING -- 0 row(s)
+                                     with...
+  Dimensions                   1.1s  No unit contradicts its arithmetic: 42
+                                     derived row(s) read -- 30 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 91 status lines in constants_new.py are
+                                     well formed; 46 rows carry none.
+  Row shape                    0.1s  All 140 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.2s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Reset completeness          17.9s  PASS -- all 309 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  1.8s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Worksheet checker            8.9s  76 of 114 routed, 8 clean
+  Worksheet checker tests     14.3s  All 136 checks passed
+  Worksheet key round trip     0.9s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         20.4s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner           9.9s  296 TIER-1 FINDINGS IN THE SCANNED TREE
+
+======================================================================
+  1 of 20 checkers FAILED -- 93.6s total
+  Exact rows by the count
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           76 of 114 routed, 8 clean
+    Provenance scanner          296 TIER-1 FINDINGS IN THE SCANNED TREE
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  1996 file(s) examined, 5 written, 0 created, 0 removed, 7 rewritten identically
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      DATA_INVENTORY.md
+      LEDGER_CONSOLIDATED.md
+      PROJECT_INSTRUCTIONS.md
+      WORKSHEET_CHECK.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+----------------------------------------------------------------------
+Exact rows by the count -- FAILED (exit 1) -- FAILING -- 0 row(s) with...
+----------------------------------------------------------------------
+EXACT ROWS PRINTED: 8 of 21 exact rows printed at 19 lines (9 orrery, 10 gallery); 5 drawn only, 0 not followed, 0 map entries broken
+  FAIL EARTH_LEO_UPPER_ALTITUDE_KM: gallery gallery/feature_renderers.js line 2022, served prints None, the row states 4
+  FAIL EARTH_LEO_LOWER_ALTITUDE_KM: gallery gallery/feature_renderers.js line 2022, served prints None, the row states 3
+  FAIL EARTH_VAN_ALLEN_OUTER_RADII: gallery gallery/feature_renderers.js line 1130, served prints None, the row states 2
+  FAIL EARTH_VAN_ALLEN_OUTER_RADII: gallery gallery/feature_renderers.js line 1137, served prints None, the row states 2
+  FAIL EARTH_VAN_ALLEN_OUTER_RADII: gallery gallery/feature_renderers.js line 1140, served prints None, the row states 2
+  FAIL EARTH_VAN_ALLEN_OUTER_RADII: gallery gallery/feature_renderers.js line 1143, served prints None, the row states 2
+  FAIL EARTH_SOLAR_WIND_PRESSURE_NPA: gallery gallery/feature_renderers.js line 2278, served prints None, the row states 1
+  FAIL EARTH_SOLAR_WIND_PRESSURE_NPA: gallery gallery/feature_renderers.js line 2489, served prints None, the row states 1
+  FAIL EARTH_SOLAR_WIND_BZ_NT: gallery gallery/feature_renderers.js line 2277, served prints None, the row states 1
+  FAIL EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG: gallery gallery/feature_renderers.js line 2280, served prints None, the row states 3
+  FAIL EARTH_BOW_SHOCK_CUT_ANGLE_DEG: gallery gallery/feature_renderers.js line 2491, served prints None, the row states 3
+EXACT ROWS BY THE COUNT: FAILING -- 0 row(s) with no count, 0 orrery print(s) by a width, 11 gallery print(s) not served the count
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  3. Move this script into documentation/. Commit and push.
+  4. Tell Claude the new orrery SHA.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
