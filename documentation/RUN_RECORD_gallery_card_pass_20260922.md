@@ -3978,3 +3978,21 @@ If you'd like, you can move the old sheet to the trash in Google Drive afterward
 When the push is done, tell me the new gallery SHA and I'll check the live lobby.f you'd like, you can move the old sheet to the trash in Google Drive afterward. Once it's unpublished it's harmless either way.
 
 When the push is done, tell me the new gallery SHA and I'll check the live lobby.
+
+====================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L281_6_guestbook_white_text.py
+ok   index.html: header stamp
+ok   index.html: guest book text styles
+ok   index.html: guest book message text
+ok   index.html: reply name
+     index.html written (202462 bytes)
+stamps updated: index.html header
+patch applied
+
+NEXT: Gallery Maintenance Run -- offline, commit and push, then look
+at the lobby on the desktop and the phone.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+
+
