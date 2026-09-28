@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.70 | September 27, 2026
+Tony Quintanilla, PE | Claude | v3.71 | September 28, 2026
 
-Cut from 0e3d05fd at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 95b394f8 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -488,7 +488,7 @@ agentic-pre-test             1.2  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
 horizons-orbital-mechanics   1.1  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning
-provenance-discipline        2.20 Scanner runs, audits, citations, constants,
+provenance-discipline        2.21 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
 earth-system-pipeline        1.1  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY
@@ -1158,6 +1158,49 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.71 (September 28, 2026): No rule changed in this document. ONE
+skill bump, provenance-discipline 2.20 -> 2.21 (L-322). A SUM SCALED
+BY AN EXACT NUMBER KEEPS ITS DECIMAL PLACE.
+
+WHAT PROMPTED IT. Settling the Sun room's chromosphere hover, which
+printed its radius as 1.002874802357338 solar radii. The top of the
+chromosphere is the Sun's radius, 695,700 km, exact by the IAU's
+definition, plus a depth Carroll & Ostlie give as about 2,000 km, one
+figure. The sum is good to thousands of kilometres, 698,000 km. Divided
+by the exact solar radius, the counting rule as written gave 1.00:
+three figures, an implied error of about 3,500 km on a 2,000 km layer.
+Written the other way, 1 + 2,000 / 695,700, the same rule gave 1.003,
+and the unit check forced the coarser form. And the export rounds each
+row to its count, so at 1.00 the chromosphere would have been drawn on
+the photosphere, erasing the 2,000 km hairline ruled on 2026-08-16.
+
+WHAT THE SKILL NOW SAYS. Rule 3 gains one paragraph: a sum or
+difference, scaled by an exact row, keeps its decimal place carried
+through the scaling, not its figure count. 1,000 km is 0.0014 solar
+radii, nearest the thousandths, so the chromosphere prints 1.003. The
+reference page, Wikipedia's Significant figures, names this as the
+unit-conversion exception to its multiplication guideline: 8 inches
+becomes 20. cm, not 20 cm. A single measured value scaled by an exact
+row is deliberately left under the fewest-figures rule for now. Rule 1
+gains the form that carries it, the ceiling says a converted place is
+not an implied uncertainty, and Rule 8 specifies the checker, which is
+built with the chromosphere rows.
+
+WHO DECIDED. Claude Fable 5.1 recommended the rule; Tony ruled for it
+on 2026-09-28. Claude Opus 5.5 checked the reference and the numbers
+the same day and added the scope sentence, which Tony confirmed.
+
+THE OBLIGATION TRAVELS. This bump was written in Fable's session and
+lands from this one, which had already shipped 2.20. The next session
+confirms its loaded copy reads 2.21 before any provenance or
+constants_new.py work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.68 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.70 (September 27, 2026): No rule changed in this document. ONE
 skill bump, provenance-discipline 2.19 -> 2.20 (L-322). WHERE A
 TRAILING ".0" COMES FROM IS WRITTEN DOWN.
@@ -1256,64 +1299,6 @@ provenance or constants_new.py work, and that session is gallery patch
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.66 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.68 (September 23, 2026): No rule changed in this document. ONE
-skill bump, taken ahead of the build it serves, which is v3.55's
-ordering.
-
-provenance-discipline 2.17 -> 2.18 (L-322). WHERE A DRAWING NUMBER
-LIVES, AND HOW AN EXACT NUMBER PRINTS.
-
-THREE KINDS OF DRAWING NUMBER ARE TONY'S RULING. A physical value, such
-as a size, an edge or a cut angle, lives in constants_new.py, sourced
-or declared. A value chosen by eye does not promote, and is replaced as
-the braid reaches it, published rooms first. A rendering setting, such
-as opacity, point count, colour, marker or font, stays in the drawing
-code. Tony, 2026-09-22: "these are defined in the code not in
-constants new." The skill had contradicted itself on this for two
-versions, one section keeping opacity and point count in the drawing
-code and another listing them as stored. The test between the kinds is
-whether changing the number moves where something is drawn. Earth's
-belt thickness was the case that needed it: it looks like a setting,
-it moves where the rings sit, and with no source it is replaced by the
-belts' served edges.
-
-THE EXACT ROW CAME FROM A QUESTION NOBODY COULD ANSWER. The Stage D
-manifest asked how many figures Earth's obliquity should print. It is
-exact, because Horizons defines its ecliptic frame by it, and Rule 7
-said nothing about exact rows. Measured, the gallery printed every
-exact row by a width chosen at each call site. Claude Fable 5.1's
-answer: store a definition in the form it is printed, 84381.448
-arcseconds, and print its own digits. Claude Opus 5.5 added the print
-count as a field on the row, because a Python literal cannot tell a
-meant trailing zero from a typing habit: counted from the literal, a
-floor chosen as 200 km would print as 200.0.
-
-THE CONVERSION ROW CAME FROM A CHECK THAT PASSED WHILE WRONG. Fable
-ran the unit checker on the draft rotation-period row, written with a
-bare divide-by-3600, and it failed: the checker converts units by
-itself and found 0.0066 hours against 23.93 stored. The figures checker
-passed the same row, so one checker alone looked green. A conversion is
-now an exact row with its own unit.
-
-THE MIDPOINT BECAME THE DEFAULT ON TONY'S READING. Asked where the
-magnetotail's flare should end inside its sourced 100 to 120 Earth
-radii, Tony said he thought the midpoint was already the skill's rule.
-It was the practice in every case and not written anywhere. It is
-written now: the midpoint, unless the row states a reason for an end.
-
-THE OBLIGATION TRAVELS, as it always does. This session loaded 2.17,
-and a reinstall cannot be verified from inside the session that makes
-it. The next session confirms its loaded copy reads 2.18 before any
-provenance or constants_new.py work, and that session is the Stage D
-build, from documentation/BUILD_MANIFEST_L322_D_earth_pole_20260922.md
-revision 2, with Fable's review filed beside it.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.65 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

@@ -1640,6 +1640,67 @@ resident.
 (Moved down from the resident protocol on 2026-09-27 when
 v3.70 made a fourth entry.)
 
+v3.68 (September 23, 2026): No rule changed in this document. ONE
+skill bump, taken ahead of the build it serves, which is v3.55's
+ordering.
+
+provenance-discipline 2.17 -> 2.18 (L-322). WHERE A DRAWING NUMBER
+LIVES, AND HOW AN EXACT NUMBER PRINTS.
+
+THREE KINDS OF DRAWING NUMBER ARE TONY'S RULING. A physical value, such
+as a size, an edge or a cut angle, lives in constants_new.py, sourced
+or declared. A value chosen by eye does not promote, and is replaced as
+the braid reaches it, published rooms first. A rendering setting, such
+as opacity, point count, colour, marker or font, stays in the drawing
+code. Tony, 2026-09-22: "these are defined in the code not in
+constants new." The skill had contradicted itself on this for two
+versions, one section keeping opacity and point count in the drawing
+code and another listing them as stored. The test between the kinds is
+whether changing the number moves where something is drawn. Earth's
+belt thickness was the case that needed it: it looks like a setting,
+it moves where the rings sit, and with no source it is replaced by the
+belts' served edges.
+
+THE EXACT ROW CAME FROM A QUESTION NOBODY COULD ANSWER. The Stage D
+manifest asked how many figures Earth's obliquity should print. It is
+exact, because Horizons defines its ecliptic frame by it, and Rule 7
+said nothing about exact rows. Measured, the gallery printed every
+exact row by a width chosen at each call site. Claude Fable 5.1's
+answer: store a definition in the form it is printed, 84381.448
+arcseconds, and print its own digits. Claude Opus 5.5 added the print
+count as a field on the row, because a Python literal cannot tell a
+meant trailing zero from a typing habit: counted from the literal, a
+floor chosen as 200 km would print as 200.0.
+
+THE CONVERSION ROW CAME FROM A CHECK THAT PASSED WHILE WRONG. Fable
+ran the unit checker on the draft rotation-period row, written with a
+bare divide-by-3600, and it failed: the checker converts units by
+itself and found 0.0066 hours against 23.93 stored. The figures checker
+passed the same row, so one checker alone looked green. A conversion is
+now an exact row with its own unit.
+
+THE MIDPOINT BECAME THE DEFAULT ON TONY'S READING. Asked where the
+magnetotail's flare should end inside its sourced 100 to 120 Earth
+radii, Tony said he thought the midpoint was already the skill's rule.
+It was the practice in every case and not written anywhere. It is
+written now: the midpoint, unless the row states a reason for an end.
+
+THE OBLIGATION TRAVELS, as it always does. This session loaded 2.17,
+and a reinstall cannot be verified from inside the session that makes
+it. The next session confirms its loaded copy reads 2.18 before any
+provenance or constants_new.py work, and that session is the Stage D
+build, from documentation/BUILD_MANIFEST_L322_D_earth_pole_20260922.md
+revision 2, with Fable's review filed beside it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.65 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-09-28 when
+v3.71 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

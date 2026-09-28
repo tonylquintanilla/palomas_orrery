@@ -6,13 +6,34 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 2.20 | Cut from palomas_orrery @ 0e3d05fd (v2.20),
-earlier @ de4eadc5 (v2.19), @ ac25d4f4 (v2.18), @ 1f6e55a9 (v2.17), @ a7014abb (v2.16), @ 21065c5d (v2.15), @ dfa779bd (v2.14),
+Skill version: 2.21 | Cut from palomas_orrery @ 95b394f8 (v2.21),
+earlier @ 0e3d05fd (v2.20), @ de4eadc5 (v2.19), @ ac25d4f4 (v2.18), @ 1f6e55a9 (v2.17), @ a7014abb (v2.16), @ 21065c5d (v2.15), @ dfa779bd (v2.14),
 @ ebdc55cc (v2.13), @ bfc0505e (v2.12),
 earlier @ 159c5a2c (v2.11), @ 071a0a65 (v2.10), @ a263f73d (v2.9),
 @ 7f4a2f9f (v2.8), @ 3faa72a0 (v2.7), @ f603be3 (v2.6),
 @ 731066f (v2.5), @ 6b99ace (v2.2), @ 00219d9 (v2.1), @ eb77c83 (v2.0)
-| September 27, 2026
+| September 28, 2026
+v2.21 adds one paragraph to Rule 3: a value good to a decimal place,
+scaled by an exact row, keeps its place and not its figure count. A
+sum good to thousands of kilometres divided by the nominal solar
+radius is good to thousandths of a solar radius; counted by fewest
+figures it would keep three, and three figures of 1.003 is a factor
+of seven coarser than three figures of 698,000, because the leading
+digit went from 6 to 1. The reference page names the case as its
+unit-conversion exception (8 inches converts to 20. cm, not 20 cm).
+It reaches sums and differences only; a single measured value scaled
+by an exact row stays under fewest figures for now.
+Rule 1 gains the seventh form that carries it; the ceiling's
+implied-uncertainty bullet says a converted place is not that; the
+Report bullet cross-links; Rule 8 says how the checker finds the
+place and prints it. The worked case is the top of the chromosphere,
+which prints 1.003 and not 1.00: at 1.00 the export, which rounds to
+the count, would have drawn it on the photosphere and erased the
+2,000 km hairline promoted on 2026-08-16. Before this the two forms
+of the same expression counted differently, 1.00 sum-first and 1.003
+divide-first, and the unit check forced the coarser. Tony's ruling,
+2026-09-28, on Claude Fable 5.1's recommendation, checked against
+the reference page the same day. Handle L-322.
 v2.20 writes down where a trailing ".0" comes from, in Rule 2. It is
 Python, by three routes, and none of them is a statement about
 significant figures: a decimal point is typed to make a number a
@@ -1922,7 +1943,7 @@ wrong, and nobody could see it without opening the source -- which is
 the argument for citing something openable rather than for copying a
 standard verbatim.
 
-**Rule 1. `# Figures:` is a comment key beside the value.** Six forms:
+**Rule 1. `# Figures:` is a comment key beside the value.** Seven forms:
 
 ```
 # Figures: 5 -- set by EARTH_INNER_CORE_KM (1221.5, 5)
@@ -1931,9 +1952,12 @@ standard verbatim.
 # Figures: exact -- prints 8, the definition's own digits (84381.448)
 # Figures: 4 -- Table 1 prints 10.22, uncertainty 0.10
 # Figures: 3 -- uncertainty 0.13, root-sum-square of Shue's a1 to a5
+# Figures: 4 -- thousandths: thousands place of the sum, set by CHROMOSPHERE_PHYSICAL_KM (2000, 1), carried through the exact SUN_RADIUS_KM
 ```
 
-A derived row names the input that set its count. A measured row
+A derived row names the input that set its count. A place-governed
+row scaled by an exact row names the place it keeps, the input that
+set the place, and the exact row it was scaled by (Rule 3, scaling). A measured row
 states what the source supports, and says in words whether a trailing
 zero counts, because an integer literal cannot. A defined constant says
 `exact`, and when a display prints it, also how many figures it prints
@@ -2033,6 +2057,56 @@ row. Where an input carries a stated uncertainty, the uncertainty
 decides instead and counting is the fallback; how is set out under The
 ceiling, below.
 
+**A place-governed value scaled by an exact row keeps its place, not
+its count** (v2.21). A sum or difference is good to a decimal place
+(above). Multiplying or dividing it by an exact row -- a unit
+conversion, a nominal radius -- moves that place with the value, and
+the row keeps the place the scaling gives: a sum good to thousands of
+kilometres, divided by 695,700 km per solar radius, is good to
+thousandths of a solar radius, because 1,000 km is 0.0014 solar
+radii. Counting the quotient by fewest figures instead keeps three on
+either side of the division, and three figures of 698,000 is
++/- 500 km while three figures of 1.003 is +/- 3,500 km: the leading
+digit went from 6 to 1 and the count lost a factor of seven. The
+reference page names this case. Its arithmetic guidelines do not
+ensure the result's implied uncertainty is close to the measured one,
+it says the problem shows up in unit conversion, and its example is
+8 inches (+/- 0.5 in) converted by the guideline to 20 cm (+/- 5 cm)
+when the proper result is 20. cm (+/- 0.5 cm). The place kept is the
+power of ten nearest, on a log scale, to the sum's place unit carried
+through the scaling, a tie going to the coarser -- the same measure
+the Report bullet under The ceiling uses: 1,000 km / 695,700 km is
+0.0014, nearer 0.001 than 0.01, so thousandths. The row states the
+place it keeps, the input that set the sum's place, and the exact row
+it was scaled by (Rule 1, seventh form). The two forms of one
+expression now count the same: 1 + 2000 / 695700 and
+(695700 + 2000) / 695700 both keep thousandths, so whichever form the
+unit check accepts, the count is 4. This is not an implied
+uncertainty raising a count; it is the sum's own place, converted,
+and it reaches nothing but a sum or difference scaled by exact rows.
+A product or quotient of measured quantities keeps fewest figures as
+before, and Jelinek's bow shock stays 13.5. Here a place-governed
+value means a sum or a difference. A single measured value scaled by
+an exact row, which is what the reference page's 8-inch example is,
+is deliberately left under the fewest-figures rule for now.
+
+The top of the chromosphere is the worked case. `SUN_RADIUS_KM +
+CHROMOSPHERE_PHYSICAL_KM` is good to thousands, set by the depth
+Carroll & Ostlie give as about 2,000 km (one figure), so 698,000 km at
+three figures; divided by the exact `SUN_RADIUS_KM` it keeps
+thousandths, 1.003 at four figures -- one more figure than the
+kilometre line, and the figure the drawing needs. The export rounds
+to the count (Rule 6): at three figures the served value is 1.00,
+which draws the chromosphere on the photosphere and erases the
+2,000 km hairline promoted on 2026-08-16; at 1.003 it draws 2,087 km
+above the photosphere, inside the source's "about". The hover still
+says about 2,000 km deep, and the radius line no longer contradicts
+it with an implied +/- 3,500 km. Before this paragraph the rule as
+written gave 1.00 by the sum-first form and 1.003 by the divide-first
+form, and the unit check forced the first. (Tony's ruling,
+2026-09-28, confirming Claude Fable 5.1's recommendation, checked
+against the reference page the same day. Handle L-322.)
+
 **A row may declare FEWER figures than its inputs support when the
 RELATION ITSELF is approximate, with the reason in words on the row.**
 Counting governs how precision flows through arithmetic; it says
@@ -2123,7 +2197,9 @@ part is marked as its own.
   row; a row that counts and stays within its ceiling keeps its
   counting line. Implied uncertainties alone never set a ceiling:
   Jelinek's bow shock standoff, whose chain states none, is 13.5 by
-  counting and would be 13.51 if they did.
+  counting and would be 13.51 if they did. A place carried through an
+  exact scaling is not this: it is the sum's own place, converted
+  (Rule 3, scaling).
 - **Propagate.** Trace the row to its primaries. Move each up and down
   by its uncertainty and take the half-difference, a central
   difference; a one-sided step gives a different answer wherever the
@@ -2149,7 +2225,9 @@ part is marked as its own.
   place; a linear measure would keep the tenths place up to +/- 0.27
   and overstate the precision five-fold. Each unit is reported by its
   own uncertainty, so a value and its conversion can carry different
-  counts; the page warns of exactly this for unit conversions.
+  counts; the page warns of exactly this for unit conversions, and on
+  the counting route the same exception is Rule 3's scaling
+  paragraph.
 
 The magnetopause standoff is the worked case. Shue's Table 1 states a
 standard deviation on every coefficient; propagated at the declared
@@ -2324,6 +2402,19 @@ stated, which is how a one-sided step or a rounded intermediate is
 caught. It reads uncertainties only from the field, never from prose,
 and names any primary whose figures line mentions an uncertainty in
 words without the field, so the blind spot announces.
+
+**The checker also applies Rule 3's scaling paragraph** (v2.21,
+specified here and built with the chromosphere row). For a derived
+row whose expression is a sum or difference of rows scaled only by
+exact rows, the ceiling by counting is not the fewest figures among
+the inputs but the place: the coarsest last place among the sum's
+measured inputs, carried through the exact factors, snapped to the
+nearest power of ten on the log scale with a tie to the coarser; the
+count is the figures of the computed value down to that place. It
+prints the place it found beside the count, so a wrong ceiling is
+visible and not only a pass. Until it is built the chromosphere row
+fails the counting check at four figures; the build that adds the
+row adds the check.
 
 (Tony's rulings, 2026-09-16, adopting the procedure in
 `documentation/DESIGN_L322_d_significant_figures_20260916.md` "as
