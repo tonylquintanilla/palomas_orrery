@@ -1701,6 +1701,57 @@ resident.
 (Moved down from the resident protocol on 2026-09-28 when
 v3.71 made a fourth entry.)
 
+v3.69 (September 25, 2026): No rule changed in this document. ONE
+skill bump, taken ahead of the build that will next read the rule it
+touches.
+
+provenance-discipline 2.18 -> 2.19 (L-322). A WORKED EXAMPLE THAT HAD
+GONE STALE IS REPLACED.
+
+WHAT WAS WRONG. Rule 7's exact row gave Earth's obliquity as its
+example: it "prints 23.439291 degrees". That was written on the
+morning of 2026-09-23. Later that day the Stage D manifest's revision 3
+changed the axis hover to print the tilt of date, worked out from the
+pole Horizons serves, and D6 and D7 built it. Since then no display
+prints the obliquity; its row is only the angle that defines the
+ecliptic frame. The example described a hover that no longer exists.
+
+HOW IT WAS FOUND. Two handoffs carried it as a ledger class, the
+second without re-checking it. Tony asked what "stale" meant, and then
+two questions: were the consumers of the obliquity using a correct
+number, and should the skill change now so it is not forgotten. The
+consumers were checked in the orrery, in the export and in the
+gallery's served cache: all carry 23.439291111 degrees, and all use it
+to turn equatorial directions into Horizons' ecliptic frame, never as
+Earth's tilt and never printed. Nothing on screen was wrong.
+
+THE NEW EXAMPLE is the gallery's magnetopause hover, which prints the
+exact row EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG today with a width chosen at
+its call site, the thing the rule forbids. The obliquity stays in the
+text as the case of an exact row no display prints, which carries no
+print count.
+
+WHY NOW. Tony: update it now so it is not forgotten. The next two
+Stage D sessions both reach this rule: gallery patch 3 edits the Earth
+room's hovers, where the cut angle is printed, and manifest section 6
+builds the print-count field itself. A stale example in a skill that
+loads every session is followed without being noticed.
+
+THE OBLIGATION TRAVELS, as it always does. This session loaded 2.18,
+and a reinstall cannot be verified from inside the session that makes
+it. The next session confirms its loaded copy reads 2.19 before any
+provenance or constants_new.py work, and that session is gallery patch
+3, from documentation/HANDOFF_L322_D_orrery_magnetosphere_built_20260925.md.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.66 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-09-28 when
+v3.72 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

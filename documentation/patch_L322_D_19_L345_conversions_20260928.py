@@ -7,6 +7,8 @@ The mechanism, and the two skill bumps that state it.
 
 Built on orrery 714293a901159be25074a95662526e4703cc92fc
 at https://github.com/tonylquintanilla/palomas_orrery
+-- its eight target files are byte-identical at orrery
+3e9e9d13aad685b854469e41e3f27a3b8061dae3, checked, so it applies there
 (gallery 2df02f3baead894ff40922bcadef9cb84c49fa07
 at https://github.com/tonylquintanilla/tonyquintanilla.github.io,
 read only).
@@ -72,6 +74,8 @@ RUN COMMAND
     Changes in GitHub Desktop.
 
 Written September 28, 2026 with Anthropic's Claude Opus 5.5.
+Revised the same day: the two documentation files may already be filed.
+The first version refused when they were, and wrote nothing.
 """
 
 import base64
@@ -171,11 +175,22 @@ def main():
     new_out = []
     for rel, md5, blob in NEW_FILES:
         path = os.path.join(HERE, rel)
-        if os.path.exists(path):
-            fail("%s already exists" % rel)
         data = zlib.decompress(base64.b64decode(blob))
         if hashlib.md5(data).hexdigest() != md5:
             fail("the embedded %s does not match its checksum" % rel)
+        if os.path.exists(path):
+            # Already filed by hand is fine when it is the same document;
+            # only a DIFFERENT file of that name stops the patch. (The
+            # first version of this patch refused any existing file, and
+            # these two had already been filed, so it wrote nothing.)
+            with open(path, "rb") as handle:
+                there = handle.read().replace(b"\r\n", b"\n")
+            if there != data:
+                fail("%s already exists and differs from the copy in this "
+                     "patch" % rel)
+            print("ok    %s: already filed, identical, left as it is"
+                  % rel)
+            continue
         new_out.append((path, data))
         print("ok    %s: new, %d bytes" % (rel, len(data)))
     for path, data in results + new_out:
@@ -183,6 +198,8 @@ def main():
             handle.write(data)
     print("PATCH APPLIED: %d files changed, %d new." % (len(results),
                                                         len(new_out)))
+    print("CHECK: skills/provenance-discipline/SKILL.md now reads 2.22 and "
+          "skills/interactive-exhibit/SKILL.md 1.5.")
     print(NEXT_STEPS)
 
 

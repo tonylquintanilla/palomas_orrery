@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.71 | September 28, 2026
+Tony Quintanilla, PE | Claude | v3.72 | September 28, 2026
 
-Cut from 95b394f8 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 714293a9 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -488,7 +488,7 @@ agentic-pre-test             1.2  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
 horizons-orbital-mechanics   1.1  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning
-provenance-discipline        2.21 Scanner runs, audits, citations, constants,
+provenance-discipline        2.22 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
 earth-system-pipeline        1.1  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY
@@ -511,7 +511,7 @@ gallery-cache-builder        1.6  Nightly builder, atomic swap and its
                                   under data/, coverage_index, serving cache,
                                   objects_config, dry-run/first-build/nightly,
                                   builder testing layers
-interactive-exhibit          1.4  adding or changing an exhibit in
+interactive-exhibit          1.5  adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -1158,6 +1158,63 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.72 (September 28, 2026): No rule changed in this document. TWO
+skill bumps, one version each, for one ruling (L-345):
+provenance-discipline 2.21 -> 2.22 and interactive-exhibit 1.4 -> 1.5.
+A VALUE IN ANOTHER UNIT IS COMPUTED, NEVER STORED.
+
+WHAT PROMPTED IT. Planning the Sun room's chromosphere hover. Served
+from its own kilometre row, the kilometre line would read 698,000 km,
+but the page works out the AU by dividing the kilometre figure it is
+served, and the served figure is already rounded: 0.00467 AU, where
+the full digits give 0.00466. That was ledger item L-345's open
+question -- a second row per unit, or the export doing the
+conversion. And constants_new.py already held 13 rows that were
+another row in a different unit, each stating its own precision a
+second time.
+
+TONY'S RULING, 2026-09-28: "follow the single source of truth
+principle. use the single best source for the store with provenance.
+compute all conversions instead of duplicating. we should build this
+architecture now. add to the skill if clarification is needed." Then,
+on the count rule, after Claude Fable 5.1's review: "confirmed as
+recommended", as the skill's method rather than his judgment.
+
+WHAT THE SKILLS NOW SAY. provenance-discipline Rule 3 gains the rule
+and replaces 2.21's "for now" sentence: each quantity is one row, in
+the unit its best source gives it; its value in any other unit is
+worked out from the row's full digits and rounded once, and its count
+comes from the source row alone -- the source's uncertainty scaled by
+the exact factor, then the Report test's place. The chromosphere
+keeps 1.003 solar radii and 0.00466 AU; the bow shock's 13.5 Earth
+radii becomes 86,000 km, two figures, because its last figure is
+worth 638 km. Rule 8's checker paragraph is widened to match.
+interactive-exhibit gains one rule: a hover prints a unit it is
+served and never converts a served number to print it.
+
+ONE WORDING CORRECTION to Fable's text, recorded in the skill. It said
+"the power of ten nearest that scaled uncertainty"; its own worked
+numbers and the Report test it names compare the uncertainty with
+half a unit in each place. Read literally, the bow shock's AU would
+have kept three figures, against the ruling's own table.
+
+THE BUILD. Orrery patch D19 carries the mechanism with these bumps:
+constants_rows.conversions() and the export's "in" field, schema 6,
+with test_constants_export.py re-computing every served conversion
+and holding eight worked cases. D20 retires the 13 conversion rows;
+one gallery patch then prints from "in".
+
+THE OBLIGATION TRAVELS. This session loaded 2.21 and 1.4. The next
+session confirms its loaded copies read provenance-discipline 2.22 and
+interactive-exhibit 1.5 before any provenance, constants_new.py or
+exhibit work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.69 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.71 (September 28, 2026): No rule changed in this document. ONE
 skill bump, provenance-discipline 2.20 -> 2.21 (L-322). A SUM SCALED
 BY AN EXACT NUMBER KEEPS ITS DECIMAL PLACE.
@@ -1251,54 +1308,6 @@ the gallery half of section 6.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.67 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.69 (September 25, 2026): No rule changed in this document. ONE
-skill bump, taken ahead of the build that will next read the rule it
-touches.
-
-provenance-discipline 2.18 -> 2.19 (L-322). A WORKED EXAMPLE THAT HAD
-GONE STALE IS REPLACED.
-
-WHAT WAS WRONG. Rule 7's exact row gave Earth's obliquity as its
-example: it "prints 23.439291 degrees". That was written on the
-morning of 2026-09-23. Later that day the Stage D manifest's revision 3
-changed the axis hover to print the tilt of date, worked out from the
-pole Horizons serves, and D6 and D7 built it. Since then no display
-prints the obliquity; its row is only the angle that defines the
-ecliptic frame. The example described a hover that no longer exists.
-
-HOW IT WAS FOUND. Two handoffs carried it as a ledger class, the
-second without re-checking it. Tony asked what "stale" meant, and then
-two questions: were the consumers of the obliquity using a correct
-number, and should the skill change now so it is not forgotten. The
-consumers were checked in the orrery, in the export and in the
-gallery's served cache: all carry 23.439291111 degrees, and all use it
-to turn equatorial directions into Horizons' ecliptic frame, never as
-Earth's tilt and never printed. Nothing on screen was wrong.
-
-THE NEW EXAMPLE is the gallery's magnetopause hover, which prints the
-exact row EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG today with a width chosen at
-its call site, the thing the rule forbids. The obliquity stays in the
-text as the case of an exact row no display prints, which carries no
-print count.
-
-WHY NOW. Tony: update it now so it is not forgotten. The next two
-Stage D sessions both reach this rule: gallery patch 3 edits the Earth
-room's hovers, where the cut angle is printed, and manifest section 6
-builds the print-count field itself. A stale example in a skill that
-loads every session is followed without being noticed.
-
-THE OBLIGATION TRAVELS, as it always does. This session loaded 2.18,
-and a reinstall cannot be verified from inside the session that makes
-it. The next session confirms its loaded copy reads 2.19 before any
-provenance or constants_new.py work, and that session is gallery patch
-3, from documentation/HANDOFF_L322_D_orrery_magnetosphere_built_20260925.md.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.66 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

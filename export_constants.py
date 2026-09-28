@@ -54,6 +54,18 @@ One JSON file, data/constants_export.json:
                               row to that many significant figures,
                               never by a width of its own
                               (provenance-discipline 2.20, Rule 7)
+                     in       the row's value in every unit of its
+                              dimension -- for a length, km, au,
+                              r_earth and r_sun -- each as {value,
+                              figures, prints}, or null when the row's
+                              unit has no other unit to convert into
+                              (schema 6). Computed by
+                              constants_rows.conversions() from the
+                              row's FULL digits and rounded once, each
+                              count from the source row alone
+                              (provenance-discipline 2.22, Rule 3). A
+                              display prints a unit from here and never
+                              converts a served number itself (L-345)
     not_exported   every row that is NOT in rows, by name, with the reason
 
 ROUNDING HAPPENS HERE, AND ONLY HERE
@@ -82,6 +94,9 @@ WHAT MAKES IT FAIL (exit 1, and NOTHING is written)
       than the digits the number has, too small to write it in full, or
       anything but 1 on a zero
     - a token whose defining_constant is not a row in the store
+    - a conversion constants_rows.conversions() cannot make: a dimension
+      without exactly one base token, a defining row whose unit is not
+      the base, or a value smaller than its own uncertainty in a unit
     - an exported value that is not a number, a list or dict of
       numbers, or null
     - constants_new.py does not parse or does not run
@@ -124,6 +139,11 @@ Module updated: September 27, 2026 with Anthropic's Claude Opus 5.5
 the print count of an exact row a display prints, and a count
 constants_rows.print_count_problem() refuses stops the export. SCHEMA
 moves to 5.)
+Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
+(L-345, patch L322_D_19: every exported row also carries "in", its
+value in every unit of its dimension, computed from full digits by
+constants_rows.conversions(). Tony's ruling of 2026-09-28: a value in
+another unit is computed, never stored. SCHEMA moves to 6.)
 """
 
 import json
@@ -135,7 +155,7 @@ import constants_rows
 from constants_tokens import RETIRED_TOKENS, TOKENS
 
 EXPORT_PATH = os.path.join("data", "constants_export.json")
-SCHEMA = 5
+SCHEMA = 6
 
 
 def round_to(value, figures):
@@ -209,6 +229,7 @@ def build_export(project_dir, tokens=None, retired=None):
             failures.append((token, "defining_constant %s is not a row in %s"
                              % (defining, constants_rows.STORE)))
 
+    units_by_name = dict((name, row.unit) for name, row in by_name.items())
     exported = {}
     not_exported = {}
     for row in rows:
@@ -242,6 +263,13 @@ def build_export(project_dir, tokens=None, retired=None):
         if problem:
             failures.append((row.name, problem))
             continue
+        # L-345: the row in every unit of its dimension, computed here
+        # from full digits, never stored as a second row.
+        converted, problem = constants_rows.conversions(
+            row, values.get(row.name), values, units_by_name, tokens)
+        if problem:
+            failures.append((row.name, problem))
+            continue
         exported[row.name] = {
             "value": value,
             "unit": row.unit,
@@ -252,6 +280,7 @@ def build_export(project_dir, tokens=None, retired=None):
             "inputs": list(row.inputs),
             "uncertainty": row.uncertainty,
             "prints": row.prints,
+            "in": converted,
         }
 
     if failures:
@@ -335,7 +364,9 @@ def main():
                "exact" if figures == "exact" else "rounded to its figures")
         counted[key] = counted.get(key, 0) + 1
 
-    print("Exported %d row(s):" % len(rows))
+    converted = sum(1 for name in rows if rows[name].get("in"))
+    print("Exported %d row(s), %d with their value in every unit of their "
+          "dimension (\"in\"):" % (len(rows), converted))
     for key in ("rounded to its figures", "exact", "no # Figures: line"):
         if counted.get(key):
             print("  %-26s %d" % (key, counted[key]))

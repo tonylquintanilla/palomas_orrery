@@ -98,6 +98,12 @@ Row.prints; print_count_problem() is the one check of it, which the
 export runs on every row; prints_of() and exact_text() let an orrery
 display print an exact row by its count instead of by a width chosen on
 its own line. provenance-discipline 2.20, Rule 7.)
+Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
+(L-345, patch L322_D_19: conversions() computes a row's value in every
+unit of its dimension from the row's full digits, with the count its
+source row alone gives -- provenance-discipline 2.22, Rule 3. A value
+in another unit is computed, never stored; the export serves these as
+"in", and it is the one implementation of the rule.)
 """
 
 import ast
@@ -550,3 +556,163 @@ def wrap_names(names, width=66, indent="      "):
     if current:
         lines.append(indent + current)
     return lines
+
+
+# ---------------------------------------------------------------------
+# A value in another unit is computed, never stored
+# (provenance-discipline 2.22, Rule 3; L-345, Tony's ruling 2026-09-28)
+# ---------------------------------------------------------------------
+
+def place_nearest(scaled):
+    """The power of ten nearest `scaled` on a log scale, as an exponent,
+    a tie going to the coarser: 0.0014 gives -3, 0.0067 gives -2,
+    4.26e-6 gives -5. `scaled` is a PLACE UNIT carried through an exact
+    factor: a unit in the source's last declared place, or twice a
+    stated uncertainty, so that comparing it with powers of ten is the
+    Report test's comparison of an uncertainty with half a unit in each
+    candidate place.
+    """
+    return int(math.floor(math.log10(scaled) + 0.5))
+
+
+def _to_place(value, place):
+    """`value` rounded half to even at 10**place (Rule 5), and the count
+    of significant figures that leaves. A rounding that carries into a
+    new leading digit (9.996 to 10.00) keeps the place and gains the
+    figure. Never fewer than one figure: where the place is coarser than
+    the value's leading digit -- a one-figure 100 Earth radii is +/- 50,
+    as large as 0.002 AU on a value of 0.004 -- the value keeps its one
+    leading figure rather than rounding to nothing.
+    """
+    figures = int(math.floor(math.log10(abs(value)))) - place + 1
+    if figures < 1:
+        figures = 1
+        return float("%.*g" % (1, value)), 1
+    rounded = float("%.*g" % (figures, value))
+    if int(math.floor(math.log10(abs(rounded)))) - place + 1 != figures:
+        figures += 1
+        rounded = float("%.*g" % (figures, value))
+    return rounded, figures
+
+
+def conversion_units(unit, tokens):
+    """The tokens a row in `unit` converts into, as {token: the name of
+    its defining constant, or None for the base}: the dimension's base
+    token (km for a length) and every token defined as a multiple of it.
+    None when there is nothing to convert to.
+    """
+    spec = tokens.get(unit)
+    if spec is None:
+        return None
+    dimension = spec.get("dimension")
+    # A token belongs to a conversion group when it IS its dimension's
+    # base (km for a length) or is defined as a multiple of it (au,
+    # r_earth, r_sun). Tokens that merely share a dimension -- the
+    # dimensionless fit coefficients, each its own kind of number -- are
+    # not conversions of one another.
+    group = dict((token, other.get("defining_constant"))
+                 for token, other in tokens.items()
+                 if other.get("dimension") == dimension
+                 and (token == dimension
+                      or other.get("defining_constant") is not None))
+    if unit not in group or len(group) < 2:
+        return None
+    return group
+
+
+def conversions(row, value, values, units_by_name, tokens):
+    """Row `row`'s value in every unit of its dimension, computed.
+
+    Returns (entries, problem). `entries` is None when the row has no
+    unit to convert into or is not one number; otherwise
+    {token: {"value": v, "figures": f, "prints": p}} with the row's own
+    unit among them, carrying the row's own value and counts unchanged.
+
+    THE COUNT COMES FROM THE SOURCE ROW ALONE (provenance-discipline
+    2.22, Rule 3). The source's uncertainty, scaled by the exact factor,
+    sets the place each unit prints to:
+      - a stated uncertainty (the \"uncertainty\" field): the Report
+        test, the place whose implied half unit is nearest it on a log
+        scale;
+      - otherwise the source's last declared place, carried through the
+        factor to the nearest power of ten -- the same measure;
+      - an exact source: its conversions are exact, unrounded, and a
+        print count is found by the same place rule from the last place
+        of its own print count; with no print count, none.
+    The row that defines a token, in that token, is 1 by definition:
+    exact, printing 1.
+    A row with no figure count converts unrounded, with none.
+    The value is always the source's FULL digits times the exact factor,
+    rounded once (Rule 4).
+    """
+    group = conversion_units(row.unit, tokens)
+    if group is None:
+        return None, None
+    if (isinstance(value, bool) or not isinstance(value, (int, float))
+            or value != value):
+        return None, None
+    bases = [token for token, defining in group.items() if defining is None]
+    if len(bases) != 1:
+        return None, ("dimension of '%s' has %d base token(s), needs "
+                      "exactly one to convert through" % (row.unit,
+                                                          len(bases)))
+    base = bases[0]
+    size = {}
+    for token, defining in group.items():
+        if defining is None:
+            size[token] = 1.0
+            continue
+        if units_by_name.get(defining) != base:
+            return None, ("token '%s' is defined by %s, whose unit is %r, "
+                          "not the base '%s'" % (token, defining,
+                                                 units_by_name.get(defining),
+                                                 base))
+        size[token] = float(values[defining])
+    in_base = float(value) * size[row.unit]
+
+    own_prints = row.prints
+    entries = {}
+    for token in sorted(group):
+        if token == row.unit:
+            if isinstance(row.figures, int):
+                shown = float("%.*g" % (row.figures, value))
+            else:
+                shown = float(value)
+            entries[token] = {"value": shown, "figures": row.figures,
+                              "prints": own_prints}
+            continue
+        if group[token] == row.name:
+            # The row that DEFINES this token, in that token: one, by
+            # definition, whatever the row's own precision -- as the
+            # crust reads "1 Earth radius" (Tony, 2026-09-27).
+            entries[token] = {"value": 1.0, "figures": "exact",
+                              "prints": 1}
+            continue
+        full = in_base / size[token]
+        factor = size[row.unit] / size[token]
+        if row.figures is None or value == 0:
+            entries[token] = {"value": full, "figures": row.figures,
+                              "prints": None}
+            continue
+        if row.figures == "exact":
+            prints = None
+            if own_prints is not None:
+                own_place = (int(math.floor(math.log10(abs(value))))
+                             - own_prints + 1)
+                place = place_nearest((10.0 ** own_place) * factor)
+                prints = max(1, int(math.floor(math.log10(abs(full))))
+                             - place + 1)
+            entries[token] = {"value": full, "figures": "exact",
+                              "prints": prints}
+            continue
+        if row.uncertainty is not None:
+            unit_width = 2.0 * abs(float(row.uncertainty))
+        else:
+            shown = float("%.*g" % (row.figures, value))
+            unit_width = 10.0 ** (int(math.floor(math.log10(abs(shown))))
+                                  - row.figures + 1)
+        place = place_nearest(unit_width * factor)
+        rounded, figures = _to_place(full, place)
+        entries[token] = {"value": rounded, "figures": figures,
+                          "prints": None}
+    return entries, None

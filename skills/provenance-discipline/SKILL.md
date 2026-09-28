@@ -6,13 +6,28 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 2.21 | Cut from palomas_orrery @ 95b394f8 (v2.21),
-earlier @ 0e3d05fd (v2.20), @ de4eadc5 (v2.19), @ ac25d4f4 (v2.18), @ 1f6e55a9 (v2.17), @ a7014abb (v2.16), @ 21065c5d (v2.15), @ dfa779bd (v2.14),
+Skill version: 2.22 | Cut from palomas_orrery @ 714293a9 (v2.22),
+earlier @ 95b394f8 (v2.21), @ 0e3d05fd (v2.20), @ de4eadc5 (v2.19), @ ac25d4f4 (v2.18), @ 1f6e55a9 (v2.17), @ a7014abb (v2.16), @ 21065c5d (v2.15), @ dfa779bd (v2.14),
 @ ebdc55cc (v2.13), @ bfc0505e (v2.12),
 earlier @ 159c5a2c (v2.11), @ 071a0a65 (v2.10), @ a263f73d (v2.9),
 @ 7f4a2f9f (v2.8), @ 3faa72a0 (v2.7), @ f603be3 (v2.6),
 @ 731066f (v2.5), @ 6b99ace (v2.2), @ 00219d9 (v2.1), @ eb77c83 (v2.0)
 | September 28, 2026
+v2.22 settles L-345: A VALUE IN ANOTHER UNIT IS COMPUTED, NEVER STORED,
+AND ITS COUNT COMES FROM ITS SOURCE ROW ALONE. Each quantity is one row,
+in the unit its best source gives it, with that source. Its value in
+any other unit is worked out from the row's full digits and rounded
+once, by constants_rows.conversions(), and the export serves it as
+"in" (schema 6); no second row states it. The count: the source row's
+uncertainty -- stated, or half a unit of its last declared place, or
+half a unit of the last place of an exact row's print count -- scaled
+by the exact factor, then the Report test's place. It replaces 2.21's
+"for now" sentence, so a single measured value scaled by an exact row
+is no longer left under fewest figures. It cuts both ways: the
+chromosphere keeps 1.003 solar radii, and the bow shock's 13.5 Earth
+radii is 86,000 km (two figures), not 86,200. Rule 8's checker
+paragraph is widened to match. Tony's ruling, 2026-09-28, on Claude
+Fable 5.1's recommendation; handle L-345.
 v2.21 adds one paragraph to Rule 3: a value good to a decimal place,
 scaled by an exact row, keeps its place and not its figure count. A
 sum good to thousands of kilometres divided by the nominal solar
@@ -2085,10 +2100,46 @@ unit check accepts, the count is 4. This is not an implied
 uncertainty raising a count; it is the sum's own place, converted,
 and it reaches nothing but a sum or difference scaled by exact rows.
 A product or quotient of measured quantities keeps fewest figures as
-before, and Jelinek's bow shock stays 13.5. Here a place-governed
-value means a sum or a difference. A single measured value scaled by
-an exact row, which is what the reference page's 8-inch example is,
-is deliberately left under the fewest-figures rule for now.
+before, and Jelinek's bow shock stays 13.5.
+
+**A value in another unit is computed, never stored, and its count
+comes from its source row alone** (v2.22). Each quantity is ONE row,
+in the unit its best source gives it, carrying that source. Its value
+in any other unit is not a row: `constants_rows.conversions()` works it
+out from the source row's full digits times the exact factor, rounds
+once, and the export serves it as `"in"` (schema 6). A name the
+orrery's drawing code keeps for such a value is computed from the one
+row and states no precision of its own. A conversion has no chain. Its
+uncertainty is its source row's, scaled by the exact factor: the stated
+uncertainty, where the source's figures field has one; otherwise half a
+unit of the source's last declared place; for an exact source, half a
+unit of the last place of its print count. The place printed is the one
+whose implied uncertainty, half a unit in that place, is nearest that
+scaled uncertainty on a log scale, a tie going to the coarser -- the
+Report test under The ceiling. Where the uncertainty is half a unit of
+a place, that is the same as carrying the place itself through the
+factor to the nearest power of ten, which is the measure the paragraph
+above uses. The count is the figures of the full-digit value down to
+that place, and never fewer than one: where the place is coarser than
+the value's leading digit, the value keeps its one leading figure
+(a one-figure 100 Earth radii is 0.004 AU, not 0.00). An exact source's
+conversions are exact, unrounded, with a print count found the same
+way; the row that defines a unit is 1 in that unit, printing 1. The
+sum rule above is one instance of this: a sum's declared place is the
+place its count names. This reads a row's declared precision; it never
+sets a row's ceiling from its chain, so the implied-uncertainty bullet
+under The ceiling stands and Jelinek's bow shock stays 13.5 Earth
+radii. The exception cuts both ways. The chromosphere gains a figure
+(698,000 km at three, 1.003 solar radii at four); the bow shock loses
+one (13.5 Earth radii at three, 86,000 km at two, because the source's
+last figure is worth 638 km and "86,200" would claim fifty). A
+conversion whose source row is wrong is fixed at the source row, once.
+(Tony's ruling, 2026-09-28, on Claude Fable 5.1's recommendation;
+L-345. Fable's text said "the power of ten nearest that scaled
+uncertainty"; its own worked numbers, and the Report test it names,
+compare the uncertainty with half a unit in each place, which is the
+wording here. Read the other way, the bow shock's AU would print
+0.000576 at three figures, against the ruling's 0.00058.)
 
 The top of the chromosphere is the worked case. `SUN_RADIUS_KM +
 CHROMOSPHERE_PHYSICAL_KM` is good to thousands, set by the depth
@@ -2404,17 +2455,19 @@ and names any primary whose figures line mentions an uncertainty in
 words without the field, so the blind spot announces.
 
 **The checker also applies Rule 3's scaling paragraph** (v2.21,
-specified here and built with the chromosphere row). For a derived
-row whose expression is a sum or difference of rows scaled only by
-exact rows, the ceiling by counting is not the fewest figures among
-the inputs but the place: the coarsest last place among the sum's
-measured inputs, carried through the exact factors, snapped to the
-nearest power of ten on the log scale with a tie to the coarser; the
-count is the figures of the computed value down to that place. It
-prints the place it found beside the count, so a wrong ceiling is
-visible and not only a pass. Until it is built the chromosphere row
-fails the counting check at four figures; the build that adds the
-row adds the check.
+specified here and built with the chromosphere row; widened at v2.22).
+For a derived row that is a source row, or a sum or difference of
+rows, scaled only by exact rows, the ceiling by counting is not the
+fewest figures among the inputs but the place: the source's
+uncertainty, or the coarsest last place among the sum's measured
+inputs, carried through the exact factors and placed by the conversion
+rule in Rule 3; the count is the figures of the computed value down to
+that place. It prints the place it found beside the count, so a wrong
+ceiling is visible and not only a pass. The widening is built with the
+patch that retires the store's conversion rows (L-345, D20), because
+until then those rows declare counts the widened check would refuse.
+The export's conversions are checked separately, value and count, by
+`test_constants_export.py` check 6.
 
 (Tony's rulings, 2026-09-16, adopting the procedure in
 `documentation/DESIGN_L322_d_significant_figures_20260916.md` "as

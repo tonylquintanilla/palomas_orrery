@@ -397,7 +397,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*233 live items; 218 need attention (`!`); 189 RICE-scored; 147 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*234 live items; 219 need attention (`!`); 189 RICE-scored; 148 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -539,8 +539,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-381 | The uncertainty field's pattern reads a sentence's full stop as a decimal point (export, checks) | OPEN | -- | 2026-09-28 |
 | ! | L-382 | Earth's magnetosphere costs about 42 percent more per orrery animation frame since D8 (orrery, rendering) | OPEN | -- | 2026-09-28 |
 | ! | L-383 | shell_configs.py's magnetosphere tooltip says nothing of the tail and puts the belts at the flux peak (orrery, words) | OPEN | -- | 2026-09-28 |
-| ! | L-384 | The scaling rule stops short of a single measured value scaled by an exact row (skills, store) | OPEN | -- | 2026-09-28 |
 | ! | L-385 | The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye) | OPEN | -- | 2026-09-28 |
+| ! | L-386 | The Sun's conversion rows, not yet exported (store, the Sun's slice) | OPEN | -- | 2026-09-28 |
+| ! | L-387 | The orrery's hovers print the conversion names by their own formats, not by the computed count (orrery) | OPEN | -- | 2026-09-28 |
 
 ### B. Pending Action (Tony-side)
 
@@ -839,6 +840,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-055 | O14/O15 verdicts arrive with the v4 gate (comet legend churn; sodium particle count) | DONE | -- | 2026-06-17 |
 |  | L-057 | Animation auto-scale-vs-shells + Phase 3 tier decision -- CLOSED | DONE | -- | 2026-06-11 |
 |  | L-223 | A paste into the ledger is an unverified transfer | DONE | -- | 2026-08-21 |
+|  | L-384 | The scaling rule stops short of a single measured value scaled by an exact row (skills, store) | DONE | -- | 2026-09-28 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -868,6 +870,36 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-387] The orrery's hovers print the conversion names by their own formats, not by the computed count (orrery)
+<!-- L:387 status:OPEN upd:2026-09-28 section:A flag: rice: -->
+- **Recorded, not built.** From the Claude Fable 5.1 ruling of
+  2026-09-28 on L-345, section 5. The orrery's own hovers are a fifth
+  consumer of the numbers the export now converts (Check All Parallel
+  Pipelines): `shell_configs.py` and `earth_visualization_shells.py`
+  print names such as `EARTH_OUTER_CORE_RADII` by the count their rows
+  declare today, through `figures_of()` and `_declared()`.
+- When D20 retires those rows, their names stay as computed aliases and
+  the orrery's hovers are held byte for byte. They do not print by the
+  computed count until the orrery prints conversions through
+  `constants_rows.conversions()` as the export does.
+**Gap:** The orrery prints each converted value through `constants_rows.conversions()`; with L-352, since both are the orrery's display formatting.
+**Ref:** `shell_configs.py`; `earth_visualization_shells.py`; `constants_rows.py`; L-345; L-352.
+
+#### [L-386] The Sun's conversion rows, not yet exported (store, the Sun's slice)
+<!-- L:386 status:OPEN upd:2026-09-28 section:A flag: rice: -->
+- **Recorded, not built.** Under Tony's ruling of 2026-09-28 (L-345) a
+  value in another unit is computed, never stored. The Sun's rows are
+  not exported yet, and several are another row in a different unit:
+  `SOLAR_RADIUS_AU` (the solar radius in AU), `CORE_AU`,
+  `RADIATIVE_ZONE_AU`, the Oort cloud and termination shock rows in AU,
+  and their neighbours. The Sun room's photosphere points at
+  `SOLAR_RADIUS_AU` today.
+- Each is re-homed to the unit its source gives when the Sun's slice
+  walks it; the export then serves its other units as `"in"`.
+- The same class reaches every body not yet walked.
+**Gap:** The Sun's slice.
+**Ref:** `constants_new.py`; gallery `data/objects_config.json`; L-345; L-371; L-322.
+
 #### [L-385] The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye)
 <!-- L:385 status:OPEN upd:2026-09-28 section:A flag: rice: -->
 - **Found 2026-09-24** building L-322 Stage D's orrery autoscale (D4).
@@ -883,19 +915,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
   shorter. A drawing choice for Tony's eye.
 **Gap:** Tony's decision above; if shorter, one change to `half_len_frac` for the Sun.
 **Ref:** `documentation/HANDOFF_L322_D_orrery_pole_built_20260924.md` sec. 3; L-322.
-
-#### [L-384] The scaling rule stops short of a single measured value scaled by an exact row (skills, store)
-<!-- L:384 status:OPEN upd:2026-09-28 section:A flag: rice: -->
-- **Recorded, not built.** provenance-discipline 2.21 (L-322 D16,
-  2026-09-28) says a sum or difference scaled by an exact row keeps its
-  decimal place, carried through the scaling, not its figure count. On
-  purpose, it leaves a SINGLE measured value scaled by an exact row
-  under the fewest-figures rule. The reference page, Wikipedia's
-  Significant figures, allows more in its unit-conversion exception
-  (8 inches becomes 20. cm).
-- Nothing needs the wider form today.
-**Gap:** When a row needs the page's full unit-conversion exception, widen Rule 3 then, deliberately, with that row as the case.
-**Ref:** skills/provenance-discipline/SKILL.md, Rule 3; PROJECT_INSTRUCTIONS.md v3.71; L-322.
 
 #### [L-383] shell_configs.py's magnetosphere tooltip says nothing of the tail and puts the belts at the flux peak (orrery, words)
 <!-- L:383 status:OPEN upd:2026-09-28 section:A flag: rice: -->
@@ -1375,6 +1394,11 @@ as an archive of the prioritization thinking -- no cleanup on close.
   where the store has one and computes with figure propagation where
   it does not; and a figure count is READ from the served entry, never
   recounted in the browser. (Carried from the C2 brief.)
+  **Partly landed at interactive-exhibit 1.5 (2026-09-28, L-345):** the
+  count is read from the served entry, and a value in another unit is
+  printed from the served `"in"`, never computed in the page. What
+  remains is the first half for arithmetic that is not a unit
+  conversion, such as an altitude from a radius.
 - **ledger-and-session-records, next bump -- Tony's practice, stated
   2026-09-22:** "my practice is to put all documentation in the orrery
   documentation/ folder. i reserve the gallery documentation/ folder
@@ -1469,6 +1493,30 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 #### [L-345] Unit-conversion rows multiply by shell: rows per shell, or the export converts? (store, decide before the next slice)
 <!-- L:345 status:OPEN upd:2026-09-28 section:A flag: rice: -->
+- **DECIDED 2026-09-28, and being built.** Tony: "follow the single
+  source of truth principle. use the single best source for the store
+  with provenance. compute all conversions instead of duplicating. we
+  should build this architecture now. add to the skill if
+  clarification is needed." The count rule followed from Claude Fable
+  5.1's review, which Tony confirmed as the skill's method: a
+  conversion takes its count from its source row alone. Records:
+  `documentation/DESIGN_L345_conversions_computed_20260928.md` and
+  `documentation/RULING_L345_conversion_count_rule_20260928.md`; the
+  ruling replaces the design's section 4 and withdraws its section 7
+  third bullet.
+- **Patch D19 (orrery):** `constants_rows.conversions()`, the export's
+  `"in"` field (schema 6), `test_constants_export.py` check 6,
+  provenance-discipline 2.22, interactive-exhibit 1.5, protocol v3.72.
+- **Still to build:** D20 retires the store's 13 conversion rows and
+  widens the figures checker; then one gallery patch prints from
+  `"in"`. The bow shock's hover then reads 86,000 km (0.00058 AU).
+- **One finding of the ruling not taken, with the reason.** It said
+  `EARTH_LEO_INNER_KM` and `EARTH_LEO_OUTER_KM` should be exact, because
+  the equatorial radius is exact. The row says otherwise:
+  `EARTH_EQUATORIAL_RADIUS_KM` states 8 figures and an uncertainty of
+  0.0001 km [verified @714293a9]. Tony's ruling of 2026-09-27 made the
+  UNIT exact -- one Earth radius is 1 Earth radius by definition -- not
+  the kilometre value. So the LEO edges' 8 figures stand.
 - **Recorded, not built.** A class found while building L-322 Stage C2
   (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
   Braid: it waits until the artifact on the critical path reaches it.
@@ -1484,7 +1532,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
   declared count, as the standoffs got at C2, or the export converting.
   Found 2026-09-25.
 **Gap:** The decision above, then the next slice builds to it.
-**Ref:** L-322; `export_constants.py`; `constants_new.py`; manifest sec. 11.
+**Gap (2026-09-28):** D20, then the gallery patch; closes when the gallery prints from `"in"`.
+**Ref:** L-322; `export_constants.py`; `constants_new.py`; manifest sec. 11; L-386; L-387.
 
 #### [L-344] A stated uncertainty computed from a rounded intermediate (store)
 <!-- L:344 status:OPEN upd:2026-09-22 section:A flag: rice: -->
@@ -17478,6 +17527,24 @@ Loose ends: none.
 - **Ref:** `gallery/feature_renderers.js`;
   `documentation/smoke_hover_budget.js`; `constants_new.py`;
   `skills/provenance-discipline/SKILL.md`.
+
+#### [L-384] The scaling rule stops short of a single measured value scaled by an exact row (skills, store)
+<!-- L:384 status:DONE upd:2026-09-28 section:C flag: rice: -->
+- **Recorded, not built.** provenance-discipline 2.21 (L-322 D16,
+  2026-09-28) says a sum or difference scaled by an exact row keeps its
+  decimal place, carried through the scaling, not its figure count. On
+  purpose, it leaves a SINGLE measured value scaled by an exact row
+  under the fewest-figures rule. The reference page, Wikipedia's
+  Significant figures, allows more in its unit-conversion exception
+  (8 inches becomes 20. cm).
+- Nothing needs the wider form today.
+**Gap:** When a row needs the page's full unit-conversion exception, widen Rule 3 then, deliberately, with that row as the case.
+**Note (2026-09-28) -- CLOSED, the same day.** L-345's ruling needed
+the wider form at once: every conversion is now counted from its source
+row alone, a single measured value included (provenance-discipline
+2.22, Rule 3). The bow shock is the case that shows it: 13.5 Earth
+radii converts to 86,000 km, two figures. Loose ends: none.
+**Ref:** skills/provenance-discipline/SKILL.md, Rule 3; PROJECT_INSTRUCTIONS.md v3.71; L-322.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

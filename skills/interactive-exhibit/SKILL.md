@@ -6,7 +6,11 @@ fires_when: adding or changing an exhibit in interactive.html; any edit to the S
 
 # Interactive Exhibit
 
-Skill version: 1.4 | Cut from gallery @ d9d7a48f (interactive.html,
+Skill version: 1.5 | 2026-09-28, with Anthropic's Claude Opus 5.5, from
+orrery @ 714293a9 and gallery @ 2df02f3b. v1.5 (L-345) adds one rule
+under Provenance is part of the build: a hover prints a number in a unit
+from the served "in" and never converts a served number itself.
+Earlier: 1.4 | Cut from gallery @ d9d7a48f (interactive.html,
 gallery/arrival.js, gallery/feature_renderers.js, gallery/nav_cluster.js,
 tools/store_writer.py, tools/exhibit_store_editor.py,
 gallery_maintenance_run.py, documentation/smoke_arrival.js) and orrery @
@@ -153,6 +157,19 @@ page:
 - Where a value is unknowable or stylized (a dipole azimuth, the
   streamer belt's warp), the hover says so; silence reads as precision
   the model lacks (Show the Envelope of the Unknowable).
+- **A hover prints a unit it is served; it never converts a served
+  number to print it** (v1.5, L-345). The orrery's export serves each
+  length row's value in km, AU, Earth radii and solar radii as `"in"`
+  (schema 6), each worked out from the row's full digits and rounded
+  once (provenance-discipline 2.22, Rule 3), and the mirror copies it
+  onto the served node. A served number is already rounded, so
+  multiplying or dividing it to print another unit is the rounded
+  intermediate Rule 4 forbids -- the chromosphere read 0.00467 AU that
+  way where its full digits give 0.00466. The page still converts
+  freely to DRAW, where a rounded number moves nothing a visitor can
+  see. A figure count is READ from the served entry, never recounted
+  in the browser. A node with no `"in"` (an unvisited slice) prints as
+  it did before.
 - The Artifact Bounds the Audit, and The Braid orders it: the new
   exhibit's pointers are the slice; a provenance gap found elsewhere
   while building it is recorded, one ledger row per CLASS, not chased.

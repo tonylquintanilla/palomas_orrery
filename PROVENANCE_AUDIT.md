@@ -2,7 +2,7 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: September 28, 2026
-Files scanned: 141
+Files scanned: 140
 Total findings: 1084
 Constants: 161 | Dicts: 44 | Display strings: 879
 
@@ -20,12 +20,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20260928T225125Z | `3e9e9d1` | 140 | 1084 | 296 | 668 | 118 | 2 |
 | 20260928T224041Z | `714293a` | 141 | 1084 | 296 | 668 | 118 | 2 |
 | 20260928T210920Z | `f7fa06f` | 141 | 1084 | 296 | 668 | 118 | 2 |
 | 20260928T200218Z | `13bc29a` | 141 | 1085 | 296 | 669 | 118 | 2 |
 | 20260928T194652Z | `95b394f` | 141 | 1083 | 295 | 668 | 118 | 2 |
 | 20260928T033520Z | `e0a0c7c` | 140 | 1083 | 295 | 668 | 118 | 2 |
-| 20260927T192707Z | `c5db543` | 140 | 1083 | 295 | 668 | 118 | 2 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
@@ -1766,7 +1766,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 138 | constant | SCHEMA | 5 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 158 | constant | SCHEMA | 6 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### export_orbit_cache.py
 

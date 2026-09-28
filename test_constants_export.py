@@ -37,6 +37,16 @@ WHAT IT CHECKS, each printing what it compared
        row is itself exported yet is printed beside it. The export's
        closed_slices and transitional lists equal the store's own, so the
        gallery cannot read a stale copy of either.
+    6. Every conversion the export serves as "in" (schema 6, L-345) is
+       re-computed here from the store's full digits, by arithmetic
+       written in this file rather than by the export's own function,
+       and must equal the served value at its served count. A row whose
+       unit has another unit of its dimension must carry "in", and one
+       whose unit has none must not. Five worked cases of the count rule
+       (provenance-discipline 2.22, Rule 3) are pinned by value and
+       count, so a change to the rule fails here by name: the
+       chromosphere's top, the bow shock and magnetopause standoffs, the
+       LEO floor's print count, and one Earth radius in Earth radii.
     5. The per-slice gate (Tony's ruling of 2026-09-14): a row inside a
        CLOSED slice must be exported and carry a status and a figure
        count. Outside a closed slice a missing field is a named gap, not a
@@ -67,6 +77,10 @@ Module updated: September 27, 2026 with Anthropic's Claude Opus 5.5
 (L-322 Stage D, patch D15: check 2 compares "prints", new in schema 5,
 and "uncertainty", which the export has served since schema 4 and this
 check did not compare until now.)
+Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
+(L-345, patch L322_D_19: check 2 compares "in", new in schema 6, and
+check 6 re-computes every served conversion and holds five worked cases
+of the count rule.)
 """
 
 import json
@@ -79,7 +93,103 @@ import export_constants
 REQUIRED = ("schema", "store", "store_sha256", "tokens", "closed_slices",
             "transitional", "rows", "not_exported")
 ROW_FIELDS = ("value", "unit", "figures", "status", "derived", "read",
-              "inputs", "uncertainty", "prints")
+              "inputs", "uncertainty", "prints", "in")
+
+# Check 6's worked cases of provenance-discipline 2.22, Rule 3: (row,
+# unit, value served, figures served, prints served). Written out here,
+# not computed, so a change to the rule fails by name.
+CONVERSION_PINS = (
+    ("CHROMOSPHERE_TOP_KM", "r_sun", 1.003, 4, None),
+    ("CHROMOSPHERE_TOP_KM", "au", 0.00466, 3, None),
+    ("EARTH_BOW_SHOCK_STANDOFF_RADII", "km", 86000.0, 2, None),
+    ("EARTH_BOW_SHOCK_STANDOFF_RADII", "au", 0.00058, 2, None),
+    ("EARTH_MAGNETOPAUSE_STANDOFF_RADII", "km", 65000.0, 2, None),
+    ("EARTH_MAGNETOPAUSE_STANDOFF_RADII", "au", 0.00044, 2, None),
+    ("EARTH_LEO_LOWER_ALTITUDE_KM", "r_earth", None, "exact", 3),
+    ("EARTH_EQUATORIAL_RADIUS_KM", "r_earth", 1.0, "exact", 1),
+)
+
+
+def _check_conversions(on_disk, values, by_name, failures, facts):
+    """Check 6. Every served conversion re-computed from full digits."""
+    tokens = on_disk["tokens"]
+    size = {}
+    for token, spec in tokens.items():
+        defining = spec.get("defining_constant")
+        size[token] = 1.0 if defining is None else float(values[defining])
+    recomputed = 0
+    for name, served in on_disk["rows"].items():
+        unit = served.get("unit")
+        spec = tokens.get(unit, {})
+        same = [t for t, s in tokens.items()
+                if s.get("dimension") == spec.get("dimension")
+                and (t == s.get("dimension")
+                     or s.get("defining_constant") is not None)]
+        if unit not in same:
+            same = []
+        entries = served.get("in")
+        full = values.get(name)
+        one_number = (isinstance(full, (int, float))
+                      and not isinstance(full, bool))
+        if len(same) < 2 or not one_number:
+            if entries is not None:
+                failures.append((name, "serves \"in\" but its unit %r has "
+                                 "no other unit to convert into" % unit))
+            continue
+        if not isinstance(entries, dict) or sorted(entries) != sorted(same):
+            failures.append((name, "\"in\" should hold %s; it holds %r"
+                             % (", ".join(sorted(same)),
+                                sorted(entries) if isinstance(entries, dict)
+                                else entries)))
+            continue
+        for token, entry in entries.items():
+            recomputed += 1
+            if token == unit:
+                expect = (served["value"], served["figures"],
+                          served["prints"])
+                got = (entry.get("value"), entry.get("figures"),
+                       entry.get("prints"))
+                if got != expect:
+                    failures.append((name, "\"in\" %s is %r; the row "
+                                     "itself is %r" % (token, got, expect)))
+                continue
+            if tokens[token].get("defining_constant") == name:
+                if (entry.get("value"), entry.get("figures"),
+                        entry.get("prints")) != (1.0, "exact", 1):
+                    failures.append((name, "defines %s, so in %s it is 1, "
+                                     "exact, printing 1; served %r"
+                                     % (token, token, entry)))
+                continue
+            want = float(full) * size[unit] / size[token]
+            figures = entry.get("figures")
+            if isinstance(figures, int):
+                want = float("%.*g" % (figures, want))
+                ok = entry.get("value") == want
+            else:
+                got = entry.get("value")
+                ok = (isinstance(got, float) and
+                      abs(got - want) <= 1e-12 * max(abs(want), 1e-300))
+            if not ok:
+                failures.append((name, "\"in\" %s is %r; re-computed from "
+                                 "full digits it is %r" % (token,
+                                                           entry.get("value"),
+                                                           want)))
+    held = 0
+    for name, token, value, figures, prints in CONVERSION_PINS:
+        entry = ((on_disk["rows"].get(name) or {}).get("in") or {}).get(token)
+        if entry is None:
+            failures.append((name, "PIN: no \"in\" %s served" % token))
+            continue
+        got = (entry.get("value") if value is not None else None,
+               entry.get("figures"), entry.get("prints"))
+        if got != (value, figures, prints):
+            failures.append((name, "PIN: %s should serve value %r, figures "
+                             "%r, prints %r; it serves %r"
+                             % (token, value, figures, prints, entry)))
+            continue
+        held += 1
+    facts["conversions"] = recomputed
+    facts["pins"] = (held, len(CONVERSION_PINS))
 
 
 def check(project_dir, closed=None):
@@ -184,6 +294,10 @@ def check(project_dir, closed=None):
         defining.append((token, name, name in new_rows))
     facts["defining"] = defining
 
+    # 6. conversions (schema 6, L-345)
+    _check_conversions(on_disk, constants_rows.load_values(project_dir),
+                       by_name, failures, facts)
+
     # 5. closed slices
     closed = constants_rows.CLOSED_SLICES if closed is None else closed
     facts["closed"] = closed
@@ -237,6 +351,11 @@ def main():
         else:
             print("5. closed slices: none yet, so no row is gated; the "
                   "gaps are named by export_constants.py")
+        if "conversions" in facts:
+            print("6. conversions re-computed from full digits: %d; worked "
+                  "cases of the count rule holding: %d of %d"
+                  % (facts["conversions"], facts["pins"][0],
+                     facts["pins"][1]))
         print("")
 
     if failures:
@@ -257,9 +376,11 @@ def main():
         return 1
 
     print("Export matches the store: sha256 %s on both sides; %d rows "
-          "re-read, %d not exported, %d tokens."
+          "re-read, %d not exported, %d tokens; %d conversions "
+          "re-computed, %d of %d worked cases hold."
           % (facts["hash_store"][:12], facts["rows_examined"],
-             facts["not_exported"], facts["tokens"]))
+             facts["not_exported"], facts["tokens"], facts["conversions"],
+             facts["pins"][0], facts["pins"][1]))
     return 0
 
 
