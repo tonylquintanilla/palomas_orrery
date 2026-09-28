@@ -5,17 +5,18 @@ Rebuilt by `exact_rows_report.py` on every orrery maintenance run. An exact row 
 
 ## Summary
 
-- 20 exact rows in `constants_new.py`.
-- 7 printed by at least one display: `EARTH_LEO_UPPER_ALTITUDE_KM`, `EARTH_LEO_LOWER_ALTITUDE_KM`, `EARTH_VAN_ALLEN_OUTER_RADII`, `EARTH_SOLAR_WIND_PRESSURE_NPA`, `EARTH_SOLAR_WIND_BZ_NT`, `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG`, `EARTH_BOW_SHOCK_CUT_ANGLE_DEG`.
-- 18 printing lines: 8 in the orrery, 10 in the gallery.
+- 21 exact rows in `constants_new.py`.
+- 8 printed by at least one display: `SUN_RADIUS_KM`, `EARTH_LEO_UPPER_ALTITUDE_KM`, `EARTH_LEO_LOWER_ALTITUDE_KM`, `EARTH_VAN_ALLEN_OUTER_RADII`, `EARTH_SOLAR_WIND_PRESSURE_NPA`, `EARTH_SOLAR_WIND_BZ_NT`, `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG`, `EARTH_BOW_SHOCK_CUT_ANGLE_DEG`.
+- 19 printing lines: 9 in the orrery, 10 in the gallery.
 - Gallery pointers to exact rows with no PRINTS entry (NOT FOLLOWED): 0.
-- Gallery pointers to exact rows read only to place a drawing (DRAWN, not printed): 4: `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`, `EARTH_MAGNETOTAIL_DRAWN_END_RADII`, `EARTH_POLE_RA_J2000_DEG`, `EARTH_POLE_DEC_J2000_DEG`.
+- Gallery pointers to exact rows read only to place a drawing (DRAWN, not printed): 5: `SUN_RADIUS_KM`, `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`, `EARTH_MAGNETOTAIL_DRAWN_END_RADII`, `EARTH_POLE_RA_J2000_DEG`, `EARTH_POLE_DEC_J2000_DEG`.
 - PRINTS or DRAWN entries that no longer match a pointer or their line (BROKEN): 0.
 
 ## Printed by the count
 
 Rule 7: each printed exact row states a print count, each orrery line prints it through `exact_text()`, and the gallery serves the count beside it. **FAILING -- the items below are named.**
 
+- `SUN_RADIUS_KM`: prints 4
 - `EARTH_LEO_UPPER_ALTITUDE_KM`: prints 4
 - `EARTH_LEO_LOWER_ALTITUDE_KM`: prints 3
 - `EARTH_VAN_ALLEN_OUTER_RADII`: prints 2
@@ -39,6 +40,10 @@ Gallery lines whose served entry does not carry the row's count ("prints" in `da
 - `EARTH_BOW_SHOCK_CUT_ANGLE_DEG` at `gallery/feature_renderers.js` line 2491 (config `/objects/1/features/earth_magnetosphere/bow_shock/surface/cut_angle`): serves None, the row states 3
 
 ## Printed
+
+### `SUN_RADIUS_KM`
+
+- orrery `solar_visualization_shells.py` line 104: `f"{exact_text('SUN_RADIUS_KM', grouping=True)} km in radius --<br>"`
 
 ### `EARTH_LEO_UPPER_ALTITUDE_KM`
 

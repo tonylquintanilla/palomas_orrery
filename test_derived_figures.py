@@ -50,6 +50,10 @@ WHAT IT CHECKS, per row
          figures among their measured inputs;
          sums and differences are good to the coarsest decimal place
          among their measured inputs;
+         a sum or difference multiplied or divided by an exact number
+         keeps its decimal place, carried through the scaling and
+         snapped to the nearest power of ten (provenance-discipline
+         2.21, Rule 3, scaling); the OK line prints the place it kept;
          exact inputs, declared conditions and numbers typed into the
          expression never limit the result.
        A lower declared count is always allowed; Rule 3 asks for one
@@ -140,6 +144,11 @@ of documentation/BUILD_MANIFEST_L322_C2_magnetosphere_20260920.md.)
 Module updated: September 25, 2026 with Anthropic's Claude Opus 5.5
 (L-322 Stage D, patch D8: the uncertainty field's pattern is imported
 from constants_rows.py, its one home, rather than kept here.)
+Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D, patch D17: check 3 applies provenance-discipline 2.21's
+scaling paragraph, and five fixtures test it, including the two forms
+of the chromosphere's arithmetic counting the same and a single measured
+value scaled by an exact number still keeping fewest figures.)
 """
 
 import ast
@@ -387,6 +396,9 @@ class Figures(object):
         self.by_name = by_name
         self.values = values
         self.embedded = []
+        # Places found by scaled_by_exact(), printed on the OK line so a
+        # wrong ceiling is seen and not only passed (2.21, Rule 8).
+        self.places = []
 
     def leaf(self, name):
         row = self.by_name[name]
@@ -410,38 +422,52 @@ class Figures(object):
 
     def ev(self, node):
         """(value, figures or EXACT, decimal place or None)."""
+        return self._ev(node)[:3]
+
+    def _ev(self, node):
+        """(value, figures or EXACT, place or None, place-governed).
+
+        The fourth item is True for a sum or difference with a measured
+        part, and it stays True while the sum is scaled by exact parts:
+        such a value keeps its decimal place, carried through the
+        scaling, not its figure count (provenance-discipline 2.21,
+        Rule 3, scaling). A single measured value is not place-governed:
+        scaled by an exact row it keeps fewest figures, as 2.21 leaves it.
+        L-322 Stage D, patch D17.
+        """
         if isinstance(node, ast.Constant) and isinstance(
                 node.value, (int, float)) and not isinstance(
                 node.value, bool):
-            return float(node.value), EXACT, None
+            return float(node.value), EXACT, None, False
         if isinstance(node, ast.Name):
             if node.id in self.by_name:
-                return self.leaf(node.id)
+                return self.leaf(node.id) + (False,)
             if node.id in self.NUMBERS:
-                return self.NUMBERS[node.id], EXACT, None
+                return self.NUMBERS[node.id], EXACT, None, False
             raise Stop("CANNOT JUDGE", "the name %s" % node.id)
         if isinstance(node, ast.Attribute) and node.attr in self.NUMBERS:
-            return self.NUMBERS[node.attr], EXACT, None
+            return self.NUMBERS[node.attr], EXACT, None, False
         if isinstance(node, ast.UnaryOp) and isinstance(
                 node.op, (ast.USub, ast.UAdd)):
-            value, figs, place = self.ev(node.operand)
+            value, figs, place, governed = self._ev(node.operand)
             return (-value if isinstance(node.op, ast.USub) else value,
-                    figs, place)
+                    figs, place, governed)
         if isinstance(node, ast.BinOp):
-            left = self.ev(node.left)
-            right = self.ev(node.right)
+            left = self._ev(node.left)
+            right = self._ev(node.right)
             op = node.op
             if isinstance(op, (ast.Add, ast.Sub)):
                 value = (left[0] + right[0] if isinstance(op, ast.Add)
                          else left[0] - right[0])
                 places = [p for p in (left[2], right[2]) if p is not None]
                 if not places:
-                    return value, EXACT, None
+                    return value, EXACT, None, False
                 place = max(places)
                 if value == 0:
                     raise Stop("CANNOT JUDGE", "a sum or difference in the "
                                "expression is exactly zero")
-                return value, max(0, magnitude(value) - place + 1), place
+                return (value, max(0, magnitude(value) - place + 1), place,
+                        True)
             if isinstance(op, ast.Mult):
                 value = left[0] * right[0]
             elif isinstance(op, ast.Div):
@@ -451,17 +477,50 @@ class Figures(object):
             else:
                 raise Stop("CANNOT JUDGE", "a %s operator"
                            % type(op).__name__)
-            return self.limited(value, [left[1], right[1]])
+            scaled = self.scaled_by_exact(value, left, right, op)
+            if scaled is not None:
+                return scaled
+            return self.limited(value, [left[1], right[1]]) + (False,)
         if isinstance(node, ast.Call):
             func = node.func
             fname = (func.attr if isinstance(func, ast.Attribute) else
                      func.id if isinstance(func, ast.Name) else None)
             if fname not in self.FUNCS or node.keywords:
                 raise Stop("CANNOT JUDGE", "the call %s()" % fname)
-            parts = [self.ev(arg) for arg in node.args]
+            parts = [self._ev(arg) for arg in node.args]
             value = self.FUNCS[fname](*[p[0] for p in parts])
-            return self.limited(value, [p[1] for p in parts])
+            return self.limited(value, [p[1] for p in parts]) + (False,)
         raise Stop("CANNOT JUDGE", "a %s node" % type(node).__name__)
+
+    def scaled_by_exact(self, value, left, right, op):
+        """A place-governed part times, or divided by, an exact part.
+
+        provenance-discipline 2.21, Rule 3, scaling: the sum's place unit
+        is carried through the exact factor and snapped to the nearest
+        power of ten on a log scale, a tie going to the coarser place;
+        the count is the figures of the value down to that place. None
+        when the step is not that shape (then fewest figures applies).
+        Only a sum DIVIDED BY an exact part is a scaling; an exact part
+        divided by a sum is not. L-322 Stage D, patch D17.
+        """
+        if isinstance(op, ast.Mult):
+            pairs = ((left, right), (right, left))
+        elif isinstance(op, ast.Div):
+            pairs = ((left, right),)
+        else:
+            return None
+        for part, factor in pairs:
+            if (part[3] and part[1] is not EXACT and part[2] is not None
+                    and factor[1] is EXACT and factor[0] != 0
+                    and value != 0):
+                ratio = (abs(factor[0]) if isinstance(op, ast.Mult)
+                         else 1.0 / abs(factor[0]))
+                unit = 10.0 ** part[2] * ratio
+                place = int(math.floor(math.log10(unit) + 0.5))
+                self.places.append(place)
+                return (value, max(1, magnitude(value) - place + 1), place,
+                        True)
+        return None
 
     def limited(self, value, counts):
         """Fewest figures among the non-exact counts."""
@@ -563,6 +622,8 @@ def judge_row(row, by_name, values, transitional):
         if is_expr:
             walker = Figures(by_name, values)
             value, supported, _place = walker.ev(row.node)
+            if walker.places:
+                info["place"] = walker.places[-1]
         else:
             value = values.get(row.name)
             counts = []
@@ -669,8 +730,13 @@ def ok_detail(row, kind, info):
         return "%s figures; a typed number, check 1 only" % row.figures
     counting = info.get("counting")
     ceiling_u = info.get("ceiling_u")
+    place = info.get("place")
+    scaled = ("" if place is None else
+              "; a sum scaled by an exact row, kept to place 10^%d "
+              "(Rule 3, scaling)" % place)
     if ceiling_u is None:
-        return "%s figures, within what its inputs support" % row.figures
+        return ("%s figures, within what its inputs support%s"
+                % (row.figures, scaled))
     return ("%s figures; counting allows %s, propagation allows %d "
             "(uncertainty %.3g)" % (row.figures,
                                      "any" if counting is EXACT else counting,
@@ -877,6 +943,25 @@ FIX_MID_NONAME = (FIX_BAND_LO + FIX_BAND_HI) / 2.0
 # Status: declared 2026-09-22 -- the midpoint of the band
 # Figures: exact -- a declared construction
 # Derived: = 4.5
+FIX_SUN_KM = 695700.0
+# Figures: exact -- a defined conversion constant
+FIX_SKIN_KM = 2000.0
+# Figures: 1 -- about 2000 km; the zeros are placeholders
+FIX_SCALED_SUM = (FIX_SUN_KM + FIX_SKIN_KM) / FIX_SUN_KM
+# Figures: 4 -- thousandths, set by FIX_SKIN_KM, through the exact FIX_SUN_KM
+# Derived: = 1.003
+FIX_SCALED_OVER = (FIX_SUN_KM + FIX_SKIN_KM) / FIX_SUN_KM
+# Figures: 5 -- set by FIX_SKIN_KM
+# Derived: = 1.0029
+FIX_SCALED_OTHER_FORM = 1.0 + FIX_SKIN_KM / FIX_SUN_KM
+# Figures: 4 -- set by FIX_SKIN_KM, thousandths
+# Derived: = 1.003
+FIX_SCALED_TIMES = 2.0 * (FIX_SUN_KM + FIX_SKIN_KM)
+# Figures: 4 -- set by FIX_SKIN_KM, the thousands place doubled
+# Derived: = 1.395e6
+FIX_SINGLE_SCALED = FIX_SKIN_KM * 2.54
+# Figures: 2 -- set by FIX_SKIN_KM
+# Derived: = 5100
 '''
 
 FIXTURE_TRANSITIONAL = ("FIX_TRANS", "FIX_TRANS_OVER")
@@ -921,6 +1006,15 @@ FIXTURE_EXPECTED = {
     "FIX_MID_MEASURED": ["OVER-DECLARED"],
     "FIX_MID_PENDING": ["OVER-DECLARED"],
     "FIX_MID_NONAME": ["NAMES NO INPUT"],
+    # L-322 Stage D, patch D17: provenance-discipline 2.21, Rule 3,
+    # scaling. Both forms of the chromosphere's arithmetic keep the
+    # thousandths; one more figure is refused; a sum doubled keeps the
+    # doubled place; a single measured value scaled keeps fewest figures.
+    "FIX_SCALED_SUM": ["OK"],
+    "FIX_SCALED_OVER": ["OVER-DECLARED"],
+    "FIX_SCALED_OTHER_FORM": ["OK"],
+    "FIX_SCALED_TIMES": ["OK"],
+    "FIX_SINGLE_SCALED": ["OVER-DECLARED"],
 }
 
 
@@ -963,7 +1057,8 @@ def run_fixtures():
         problems.append("declared constructions listed as %r, expected "
                         "['FIX_MID']" % constructions)
     for name, words in (("FIX_SHUE_OK", "propagation allows 3"),
-                        ("FIX_LEO_OK", "propagation allows 10")):
+                        ("FIX_LEO_OK", "propagation allows 10"),
+                        ("FIX_SCALED_SUM", "kept to place 10^-3")):
         details = [d for _v, d, _f in got.get(name, [])]
         if not any(words in d for d in details):
             problems.append("%s: its line does not say %r (%s)"

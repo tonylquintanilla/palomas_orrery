@@ -73,7 +73,9 @@ gallery therefore shows up first as NOT FOLLOWED, which is the prompt
 to add its entry.
 
 DRAWN, NOT PRINTED. Some gallery pointers to exact rows are read only to
-place a drawing and never printed: the magnetotail's drawn radius and
+place a drawing, or only as a unit to convert with, and never printed as
+themselves: the Sun's nominal radius, which turns a radius in solar
+radii into kilometres (patch D17); the magnetotail's drawn radius and
 drawn end, which shape the tail while the hover prints the measured rows
 beside them, and Earth's fallback pole, which places the axis when no
 pole of date is served. A second hand-kept table, DRAWN, names for each
@@ -114,6 +116,10 @@ Module updated: September 27, 2026 with Anthropic's Claude Opus 5.5
 (L-322 Stage D, patch D15, manifest section 6: the check above, so the
 report says when section 6 is finished and the maintenance run fails
 while it is not. The orrery search also finds exact_text().)
+Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D, patch D17: the three gallery pointers to SUN_RADIUS_KM,
+an exact row since D17, are in DRAWN: the Sun room reads it only as the
+kilometres per solar radius.)
 """
 
 import os
@@ -186,6 +192,19 @@ DRAWN = {
         ('gallery/feature_renderers.js', 'basisFor', 'pole.ra'),
     'orientation/pole/dec':
         ('gallery/feature_renderers.js', 'basisFor', 'pole.dec'),
+    # L-322 Stage D, patch D17: the Sun's nominal radius, exact since D17,
+    # is read by the Sun room only as the kilometres a served radius in
+    # solar radii is converted with; the hover prints the product, never
+    # the row itself.
+    'sun_structures/sun_radius':
+        ('gallery/feature_renderers.js', 'renderShellSet',
+         'params.sun_radius'),
+    'solar_atmosphere/sun_radius':
+        ('gallery/feature_renderers.js', 'renderShellSet',
+         'params.sun_radius'),
+    'solar_wind/sun_radius':
+        ('gallery/feature_renderers.js', 'renderShellSet',
+         'params.sun_radius'),
 }
 
 # A top-level function in a gallery script: two spaces of indent, which

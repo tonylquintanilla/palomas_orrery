@@ -14,6 +14,12 @@ Consumed by: planet_visualization.py (routing dispatcher),
 Role: rendering/shells
 Domain: orrery
 
+Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D, patch D17: the chromosphere hover prints its radius by
+its row's count, 1.003 solar radii (was 1.002875); the Sun's radius
+through exact_text(), 695,700 km as before; and the skin as a share of
+the radius at the depth's one figure, 0.3% (was 0.29%).)
+
 Module updated: August 2026 with Anthropic's Claude Opus 5 (L-224:
 create_sun_streamer_band -- the streamer belt as a warped helmet-and-
 stalk band; the sphere it replaces is retired in patch 2)
@@ -52,6 +58,8 @@ from planet_visualization_utilities import (create_sphere_points, create_streame
                                             GRAVITATIONAL_INFLUENCE_AU, GRAVITATIONAL_INFLUENCE_RANGE_AU,
                                             AU_PER_LIGHT_YEAR,
                                             CHROMOSPHERE_PHYSICAL_KM, CHROMOSPHERE_PHYSICAL_RADII)
+# L-322 Stage D, patch D17: print rows by the counts their rows state.
+from constants_rows import figures_of, exact_text, format_prints
 
 #####################################
 # Sun Visualization Functions
@@ -89,11 +97,12 @@ GRAVITATIONAL_INFLUENCE_SENTENCE = (
 # Source+: constants_new.py. The shell draws at TRUE SCALE as of
 # Source+: 2026-08-16; the 1.1 stylization is retired (L-180 dormant).
 CHROMOSPHERE_RADIUS_LINE = (
-    f"* Radius: drawn at true scale, {CHROMOSPHERE_PHYSICAL_RADII:.6f} solar radii<br>"
+    f"* Radius: drawn at true scale, "
+    f"{format_prints(CHROMOSPHERE_PHYSICAL_RADII, figures_of('CHROMOSPHERE_PHYSICAL_RADII'))} solar radii<br>"
     f"  (~{SOLAR_RADIUS_AU:.5f} - {CHROMOSPHERE_PHYSICAL_RADII * SOLAR_RADIUS_AU:.5f} AU).<br>"
     f"  The chromosphere is a skin about {CHROMOSPHERE_PHYSICAL_KM:,.0f} km deep on a star "
-    f"{SUN_RADIUS_KM:,.0f} km in radius --<br>"
-    f"  roughly {100.0 * (CHROMOSPHERE_PHYSICAL_RADII - 1.0):.2f}% of the solar radius. At any scale that "
+    f"{exact_text('SUN_RADIUS_KM', grouping=True)} km in radius --<br>"
+    f"  roughly {format_prints(100.0 * CHROMOSPHERE_PHYSICAL_KM / SUN_RADIUS_KM, figures_of('CHROMOSPHERE_PHYSICAL_KM'))}% of the solar radius. At any scale that "
     f"also shows the corona<br>"
     f"  it is too thin to resolve, which is why this shell appears welded to the<br>"
     f"  photosphere.<br>"

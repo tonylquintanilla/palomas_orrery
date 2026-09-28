@@ -109,6 +109,12 @@ and carry the three rules the orrery's tail drawing adds -- round, a
 straight line from Shue's cut to the end of flaring, and a stop at the
 observed reach. They replace five numbers chosen by eye in
 earth_visualization_shells.py)
+Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
+(L-322 Stage D, patch D17: the Sun's nominal radius, the chromosphere's
+depth and radius gain units and figure counts, and the top of the
+chromosphere gets its own row, CHROMOSPHERE_TOP_KM, 698,000 km. The
+chromosphere's radius counts to 1.003 solar radii under
+provenance-discipline 2.21's scaling rule.)
 Module updated: September 27, 2026 with Anthropic's Claude Opus 5.5
 (L-322 Stage D, patch D15: the seven exact rows a display prints state
 their print count on their "# Figures:" line, directly after "exact --",
@@ -149,6 +155,12 @@ KM_PER_AU = 149597870.7
 # Note: 1 AU = 149,597,870,700 m exactly. We use km (divide by 1000).
 
 SUN_RADIUS_KM = 695700.0
+# Unit: km
+# Status: measured V_CROSS_CHECKED 2026-08-02
+# Figures: exact -- prints 4, the definition's own digits (6.957 x 10^5
+# Figures+: km). IAU 2015 Resolution B3 defines the nominal solar radius
+# Figures+: as exactly 6.957 x 10^8 m, a conversion constant, so every
+# Figures+: digit is known; the .0 is Python's (Rule 2).
 # Source: IAU 2015 Resolution B3 -- nominal solar radius
 # Ref: Prsa et al. 2016, AJ 152:41 (arXiv:1605.09788)
 # Also: https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html
@@ -1769,6 +1781,11 @@ RADIATIVE_ZONE_AU = 0.713 * SOLAR_RADIUS_AU
 # with it; the physical value below carries its own.
 
 CHROMOSPHERE_PHYSICAL_KM = 2000.0
+# Unit: km
+# Status: measured V_CROSS_CHECKED 2026-08-02
+# Figures: 1 -- Carroll & Ostlie give about 2,000 km, so the zeros are
+# Figures+: placeholders and only the 2 counts (Rule 2); good to
+# Figures+: thousands of kilometres.
 # Source: Carroll & Ostlie, An Introduction to Modern Astrophysics,
 # Source+: Ch. 11 -- chromosphere extends ~2000 km above the photosphere.
 # Cross-checked: Gemini 2026-08-02 -- Carroll & Ostlie (worksheet_gemini_constants_remaining.md)
@@ -1776,8 +1793,27 @@ CHROMOSPHERE_PHYSICAL_KM = 2000.0
 # Note+: CHROMOSPHERE_PHYSICAL_RADII below converts it to solar radii and
 # Note+: is what the shell draws at. The 1.1 stylization is retired.
 
-CHROMOSPHERE_PHYSICAL_RADII = 1.0 + CHROMOSPHERE_PHYSICAL_KM / SUN_RADIUS_KM
-# Derived: 1 + 2000 / 695700 = 1.002875... solar radii
+CHROMOSPHERE_TOP_KM = SUN_RADIUS_KM + CHROMOSPHERE_PHYSICAL_KM
+# Unit: km
+# Status: derived -- inherits SUN_RADIUS_KM, CHROMOSPHERE_PHYSICAL_KM
+# Figures: 3 -- set by CHROMOSPHERE_PHYSICAL_KM (2000, 1), good to
+# Figures+: thousands; SUN_RADIUS_KM is exact.
+# Derived: 695700 + 2000 = 698000 km from the Sun's centre
+# Note: the top of the chromosphere, for the hover's kilometre line.
+# Note+: L-322 Stage D, patch D17.
+
+CHROMOSPHERE_PHYSICAL_RADII = (SUN_RADIUS_KM + CHROMOSPHERE_PHYSICAL_KM) / SUN_RADIUS_KM
+# Unit: r_sun
+# Status: derived -- inherits SUN_RADIUS_KM, CHROMOSPHERE_PHYSICAL_KM
+# Figures: 4 -- thousandths: thousands place of the sum, set by
+# Figures+: CHROMOSPHERE_PHYSICAL_KM (2000, 1), carried through the exact
+# Figures+: SUN_RADIUS_KM (Rule 3, scaling, provenance-discipline 2.21)
+# Derived: (695700 + 2000) / 695700 = 1.003 solar radii
+# Note: written as the sum over the radius, not 1 + depth / radius: the
+# Note+: unit check refuses a bare 1 added to a ratio, and under 2.21 the
+# Note+: two forms count the same. It stays an expression over the
+# Note+: primaries, not CHROMOSPHERE_TOP_KM / SUN_RADIUS_KM, so the
+# Note+: checker follows it to them (Rule 4). L-322 Stage D, patch D17.
 
 INNER_CORONA_RADII = 3
 # Source: Lamy, Gilardy, Llebaria, Quemerais & Ernandez, "Coronal
