@@ -42,11 +42,12 @@ WHAT IT CHECKS, each printing what it compared
        written in this file rather than by the export's own function,
        and must equal the served value at its served count. A row whose
        unit has another unit of its dimension must carry "in", and one
-       whose unit has none must not. Five worked cases of the count rule
+       whose unit has none must not. Six worked cases of the count rule
        (provenance-discipline 2.22, Rule 3) are pinned by value and
        count, so a change to the rule fails here by name: the
        chromosphere's top, the bow shock and magnetopause standoffs, the
-       LEO floor's print count, and one Earth radius in Earth radii.
+       LEO floor's print count, one Earth radius in Earth radii, and the
+       tops of the lower and upper atmosphere in Earth radii.
     5. The per-slice gate (Tony's ruling of 2026-09-14): a row inside a
        CLOSED slice must be exported and carry a status and a figure
        count. Outside a closed slice a missing field is a named gap, not a
@@ -81,6 +82,10 @@ Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
 (L-345, patch L322_D_19: check 2 compares "in", new in schema 6, and
 check 6 re-computes every served conversion and holds five worked cases
 of the count rule.)
+Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
+(L-345, patch L322_D_19a: two more pins, the tops of the lower and
+upper atmosphere in Earth radii, 1.0078 at five figures and 1.094 at
+four -- the numbers the gallery's two radius lines will print.)
 """
 
 import json
@@ -107,6 +112,10 @@ CONVERSION_PINS = (
     ("EARTH_MAGNETOPAUSE_STANDOFF_RADII", "au", 0.00044, 2, None),
     ("EARTH_LEO_LOWER_ALTITUDE_KM", "r_earth", None, "exact", 3),
     ("EARTH_EQUATORIAL_RADIUS_KM", "r_earth", 1.0, "exact", 1),
+    # L-345, patch D19a: a sum good to the kilometre, and one good to
+    # tens of kilometres, each in Earth radii.
+    ("EARTH_STRATOPAUSE_RADIUS_KM", "r_earth", 1.0078, 5, None),
+    ("EARTH_THERMOPAUSE_RADIUS_KM", "r_earth", 1.094, 4, None),
 )
 
 

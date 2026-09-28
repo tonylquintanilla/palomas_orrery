@@ -12,7 +12,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 141  
-**Total Lines of Code (non-blank):** 112,643  
+**Total Lines of Code (non-blank):** 112,666  
 **Total Public Functions/Classes:** 1,273
 
 ## Classification Coverage
@@ -20,7 +20,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 **Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L322_D_19_L345_conversions_20260928.py`
+- `patch_L322_D_19a_L345_atmosphere_km_rows_20260928.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
@@ -28,7 +28,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 **Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L322_D_19_L345_conversions_20260928.py`
+- `patch_L322_D_19a_L345_atmosphere_km_rows_20260928.py`
 
 
 ---
@@ -125,7 +125,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,250 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (512 lines) |
-| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (2,652 lines) |
+| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (2,684 lines) |
 | `constants_tokens.py` | - what each "# Unit:" token in constants_new.py means. (233 lines) |
 | `earth_pole_of_date.py` | Earth's rotation pole and tilt for the date of a plot. (269 lines) |
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (412 lines) |
@@ -220,7 +220,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,071 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (342 lines) |
 | `test_citation_inheritance.py` | Regression tests for citation-block inheritance. (516 lines) |
-| `test_constants_export.py` | - data/constants_export.json says what constants_new.py holds. (352 lines) |
+| `test_constants_export.py` | - data/constants_export.json says what constants_new.py holds. (361 lines) |
 | `test_constants_provenance.py` | Regression tests for verified numeric constants. (411 lines) |
 | `test_cross_checked.py` | Regression tests for cross-check annotations. (501 lines) |
 | `test_derived_figures.py` | - a derived constant declares no more significant figures than its inputs support, and names every derived row it cannot judge. (1,068 lines) |
@@ -243,7 +243,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L322_D_19_L345_conversions_20260928.py` | - ORRERY repo. (173 lines) |
+| `patch_L322_D_19a_L345_atmosphere_km_rows_20260928.py` | - ORRERY repo. (155 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |

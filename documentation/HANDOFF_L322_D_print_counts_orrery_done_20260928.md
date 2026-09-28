@@ -708,11 +708,157 @@ EXACT ROWS BY THE COUNT: FAILING -- 0 row(s) with no count, 0 orrery print(s) by
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
   2. (do) Move this script into documentation/. Commit everything and
-     push. -- 
+     push. -- 807e9dd535211b2bdb91263b49988e1494c308a8
   3. (do) Reinstall the two skills to your account (Settings > Skills):
      provenance-discipline 2.22 and interactive-exhibit 1.5, from
-     skills/ in the orrery.
+     skills/ in the orrery. -- done and project instructions to v3.72
   4. Tell Claude the new orrery SHA.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+=================================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L322_D_19a_L345_atmosphere_km_rows_20260928.py
+ok    constants_new.py: two kilometre rows
+ok    constants_new.py: stamp
+ok    test_constants_export.py: docstring: check 6 names the atmosphere cases
+ok    test_constants_export.py: stamp
+ok    test_constants_export.py: two pins
+ok    LEDGER_CONSOLIDATED.md: L-345: D19a and the order
+ok    LEDGER_CONSOLIDATED.md: L-345 gap: the order
+ok    documentation/PREBUILD_L345_gallery_hover_changes_20260928.md: already filed, identical
+stamp constants_new.py, test_constants_export.py: updated September 28, 2026 (patch D19a)
+PATCH APPLIED: 3 files changed, 0 new.
+
+NEXT STEPS, in this order:
+
+  1. (do) Run the orrery maintenance run (orrery_maintenance_run.py).
+     It rewrites data/constants_export.json with the two new rows.
+     Expect 19 of 20 checkers passing, as before. "Constants export
+     check" should end "... 220 conversions re-computed, 10 of 10 worked
+     cases hold." "Derived figures" should say 44 derived rows read, 32
+     OK. The one failure is still "Exact rows by the count", naming the
+     Earth room's eleven lines; the gallery patch clears it.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20260928T225125Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.0s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Skill manifest               0.1s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             0.7s  rewrote data/constants_export.json
+  Module atlas                 6.4s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               4.4s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Exact rows report            1.3s  unchanged (1 checked, not written) -- 8 of
+                                     21 exact rows printed at 19 lines (9 orrery,
+                                     10 gallery); 5 drawn only, 0 not followed, 0
+                                     map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.3s  2 derived line(s): 0 changed, 2 added, 0
+                                     removed
+  Constants relations          0.2s  21 of 21 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.7s  No figure count exceeds its inputs: 44
+                                     derived row(s) read, 32 judged OK -- 32 OK,
+                                     12 NOT YET MIGRATED, 1 NO DERIVED LINE.
+  Constants export check       1.1s  Export matches the store: sha256
+                                     eacb85b01d2c on both sides; 91 rows re-read,
+                                     51 not exported, 26 tokens; 220 conversions
+                                     re-computed, 10 of 10 worked cases hold.
+  Exact rows by the count      1.3s  FAILED (exit 1) -- FAILING -- 0 row(s)
+                                     with...
+  Dimensions                   1.2s  No unit contradicts its arithmetic: 44
+                                     derived row(s) read -- 32 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.2s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 93 status lines in constants_new.py are
+                                     well formed; 46 rows carry none.
+  Row shape                    0.1s  All 142 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.2s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Reset completeness          13.9s  PASS -- all 309 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  1.9s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Worksheet checker            9.3s  76 of 114 routed, 8 clean
+  Worksheet checker tests     15.8s  All 136 checks passed
+  Worksheet key round trip     1.0s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         22.2s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner           9.7s  296 TIER-1 FINDINGS IN THE SCANNED TREE
+
+======================================================================
+  1 of 20 checkers FAILED -- 94.0s total
+  Exact rows by the count
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           76 of 114 routed, 8 clean
+    Provenance scanner          296 TIER-1 FINDINGS IN THE SCANNED TREE
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2003 file(s) examined, 7 written, 1 created, 1 removed, 6 rewritten identically
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/constants_export.json
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    created   documentation/patch_L322_D_19a_L345_atmosphere_km_rows_20260928.py
+    removed   patch_L322_D_19a_L345_atmosphere_km_rows_20260928.py
+    rewritten with identical bytes, no action needed:
+      DATA_INVENTORY.md
+      LEDGER_CONSOLIDATED.md
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+----------------------------------------------------------------------
+Exact rows by the count -- FAILED (exit 1) -- FAILING -- 0 row(s) with...
+----------------------------------------------------------------------
+EXACT ROWS PRINTED: 8 of 21 exact rows printed at 19 lines (9 orrery, 10 gallery); 5 drawn only, 0 not followed, 0 map entries broken
+  FAIL EARTH_LEO_UPPER_ALTITUDE_KM: gallery gallery/feature_renderers.js line 2022, served prints None, the row states 4
+  FAIL EARTH_LEO_LOWER_ALTITUDE_KM: gallery gallery/feature_renderers.js line 2022, served prints None, the row states 3
+  FAIL EARTH_VAN_ALLEN_OUTER_RADII: gallery gallery/feature_renderers.js line 1130, served prints None, the row states 2
+  FAIL EARTH_VAN_ALLEN_OUTER_RADII: gallery gallery/feature_renderers.js line 1137, served prints None, the row states 2
+  FAIL EARTH_VAN_ALLEN_OUTER_RADII: gallery gallery/feature_renderers.js line 1140, served prints None, the row states 2
+  FAIL EARTH_VAN_ALLEN_OUTER_RADII: gallery gallery/feature_renderers.js line 1143, served prints None, the row states 2
+  FAIL EARTH_SOLAR_WIND_PRESSURE_NPA: gallery gallery/feature_renderers.js line 2278, served prints None, the row states 1
+  FAIL EARTH_SOLAR_WIND_PRESSURE_NPA: gallery gallery/feature_renderers.js line 2489, served prints None, the row states 1
+  FAIL EARTH_SOLAR_WIND_BZ_NT: gallery gallery/feature_renderers.js line 2277, served prints None, the row states 1
+  FAIL EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG: gallery gallery/feature_renderers.js line 2280, served prints None, the row states 3
+  FAIL EARTH_BOW_SHOCK_CUT_ANGLE_DEG: gallery gallery/feature_renderers.js line 2491, served prints None, the row states 3
+EXACT ROWS BY THE COUNT: FAILING -- 0 row(s) with no count, 0 orrery print(s) by a width, 11 gallery print(s) not served the count
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. (do) Move this script into documentation/. Commit everything and
+     push.
+  3. Tell Claude the new orrery SHA. The gallery patch is built next,
+     against it.
 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 

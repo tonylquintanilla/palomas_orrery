@@ -1510,6 +1510,17 @@ as an archive of the prioritization thinking -- no cleanup on close.
 - **Still to build:** D20 retires the store's 13 conversion rows and
   widens the figures checker; then one gallery patch prints from
   `"in"`. The bow shock's hover then reads 86,000 km (0.00058 AU).
+- **The order, Tony 2026-09-28 ("confirmed as recommended"):** patch
+  D19a, then the gallery patch, then D20. D19a only ADDS
+  `EARTH_STRATOPAUSE_RADIUS_KM` (6428 km) and
+  `EARTH_THERMOPAUSE_RADIUS_KM` (6980 km), so the gallery can move all
+  eleven of its conversion pointers in one patch and every visible
+  change reaches one phone check. Measured before building, the gallery
+  patch moves six hover lines beyond the handoff's seven: the
+  magnetotail's two km and AU figures, the inner belt's AU, the LEO
+  edges' radii, and the two atmosphere radii (1.0078 and 1.094). All
+  six are the 2.22 rule; the list is
+  `documentation/PREBUILD_L345_gallery_hover_changes_20260928.md`.
 - **One finding of the ruling not taken, with the reason.** It said
   `EARTH_LEO_INNER_KM` and `EARTH_LEO_OUTER_KM` should be exact, because
   the equatorial radius is exact. The row says otherwise:
@@ -1532,7 +1543,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
   declared count, as the standoffs got at C2, or the export converting.
   Found 2026-09-25.
 **Gap:** The decision above, then the next slice builds to it.
-**Gap (2026-09-28):** D20, then the gallery patch; closes when the gallery prints from `"in"`.
+**Gap (2026-09-28):** D19a, the gallery patch, then D20; closes when the gallery prints from `"in"` and D20 has landed.
 **Ref:** L-322; `export_constants.py`; `constants_new.py`; manifest sec. 11; L-386; L-387.
 
 #### [L-344] A stated uncertainty computed from a rounded intermediate (store)

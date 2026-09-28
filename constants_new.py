@@ -121,6 +121,13 @@ their print count on their "# Figures:" line, directly after "exact --",
 from the digits each was defined or chosen with. The trailing .0 each
 is typed with is Python's, not a figure (provenance-discipline 2.20,
 Rule 2).)
+Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
+(L-345, patch L322_D_19a: the tops of the lower and upper atmosphere
+gain kilometre rows, EARTH_STRATOPAUSE_RADIUS_KM (6428 km) and
+EARTH_THERMOPAUSE_RADIUS_KM (6980 km), each Earth's radius plus the
+altitude. The export works out their values in Earth radii and AU, so
+the gallery can point at them; the two _RADII rows become conversions
+of them at D20.)
 """
 
 import math
@@ -684,6 +691,31 @@ EARTH_THERMOPAUSE_ALTITUDE_KM = 600.0
 # Source+: thermosphere extends to 600 km.
 # Note: a nominal figure. The thermopause moves with solar activity over
 # Note+: roughly 500 to 1,000 km; the drawn shell is not that precise.
+EARTH_STRATOPAUSE_RADIUS_KM = EARTH_EQUATORIAL_RADIUS_KM + EARTH_STRATOPAUSE_ALTITUDE_KM
+# Derived: 6378.1366 + 50 = 6428 km from Earth's centre. A SUM is good
+# Derived+: to the coarsest decimal place among its measured inputs, and
+# Derived+: the 50 km altitude carries two figures, so the ones place.
+# Unit: km
+# Status: derived -- inherits EARTH_EQUATORIAL_RADIUS_KM,
+# Status+: EARTH_STRATOPAUSE_ALTITUDE_KM
+# Figures: 4 -- set by EARTH_STRATOPAUSE_ALTITUDE_KM (50, 2), good to the
+# Figures+: kilometre.
+# Note: the top of the lower atmosphere, measured from Earth's centre.
+# Note+: Its value in Earth radii and AU is computed from this row
+# Note+: (L-345); EARTH_STRATOPAUSE_RADII below becomes that conversion
+# Note+: at patch D20. Added at patch D19a.
+EARTH_THERMOPAUSE_RADIUS_KM = EARTH_EQUATORIAL_RADIUS_KM + EARTH_THERMOPAUSE_ALTITUDE_KM
+# Derived: 6378.1366 + 600 = 6980 km from Earth's centre. The 600 km
+# Derived+: altitude carries two figures, so the sum is good to tens.
+# Unit: km
+# Status: derived -- inherits EARTH_EQUATORIAL_RADIUS_KM,
+# Status+: EARTH_THERMOPAUSE_ALTITUDE_KM
+# Figures: 3 -- set by EARTH_THERMOPAUSE_ALTITUDE_KM (600, 2), good to
+# Figures+: tens of kilometres.
+# Note: the top of the upper atmosphere, measured from Earth's centre.
+# Note+: Its value in Earth radii and AU is computed from this row
+# Note+: (L-345); EARTH_THERMOPAUSE_RADII below becomes that conversion
+# Note+: at patch D20. Added at patch D19a.
 EARTH_STRATOPAUSE_RADII = (EARTH_EQUATORIAL_RADIUS_KM + EARTH_STRATOPAUSE_ALTITUDE_KM) / EARTH_EQUATORIAL_RADIUS_KM
 # Derived: (6378.1366 + 50) / 6378.1366 = 1.008. The 50 km altitude
 # Derived+: carries two figures, so its last significant digit is the ones
