@@ -858,8 +858,275 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
   2. (do) Move this script into documentation/. Commit everything and
      push.
   3. Tell Claude the new orrery SHA. The gallery patch is built next,
-     against it.
+     against it. -- b61d19821009f5edc183fed4aa7bbfb81ff21c3b
 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+================================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L345_gallery_conversions_served_20260928.py
+ok    data/objects_config.json: 53 edit(s)
+ok    gallery/feature_renderers.js: 22 edit(s)
+ok    tools/mirror_constants.py: 7 edit(s)
+ok    tools/test_mirror_constants.py: 5 edit(s)
+ok    documentation/smoke_display_figures.js: 24 edit(s)
+ok    data/constants_export.json: replaced with the copy from b61d1982
+ok    data/constants_export.sha: replaced with the copy from b61d1982
+ok    documentation/fixture_hovers_L345_on_2df02f3b.json: new, 18822 bytes
+stamp gallery/feature_renderers.js, tools/mirror_constants.py, tools/test_mirror_constants.py, documentation/smoke_display_figures.js: updated September 28, 2026 (L-345)
+PATCH APPLIED: 7 file(s) written, 1 new.
+
+NEXT STEPS, in this order (a config change is not deployed until the
+cache is rebuilt):
+
+  1. (do) Run the cache builder by hand, as you do each night. It copies
+     the new config into the served cache.
+
+-- sync paused
+
+[RECOVER] removed retained data\solar-system.prev (cleared read-only on 6 entries)
+[sweep] no sibling directories present
+[POLE] earth: pole of 2026-09-29 served (RA 0.71204, Dec 89.85020 deg); tilt 23.43812 deg
+[SWAP] the new cache is in place; every rename worked on the first try. Recorded in data/cache_swap_log.jsonl
+[warn] sun: features-only entry; no Horizons fetch
+[done] run 20260929T032200Z (nightly): 13 objects
+
+----------------------------------------------------------------------
+WHAT TO DO NEXT, before you commit anything:
+
+  1. Run the gallery maintenance run, from this same folder:
+         python gallery_maintenance_run.py
+     Every gating checker should pass. Its LAST line reads the
+     swap log back and should agree with the [SWAP] line above.
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.3s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     0.9s  no change to
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      10.3s  PASS (210 checks, 0 failures)
+  PASS Pole of date              0.2s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.1s  All 64 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served, print count
+                                    written as served, "in" written as
+                                    served and a slot served in
+                                    another unit from it.
+  PASS Store writer suite        4.6s  All 251 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 252 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 65 link(s) compared, store
+                                    eacb85b01d2c.
+  PASS Pointer join              0.1s  Every link is accounted for: 89
+                                    link(s) against orrery b61d1982,
+                                    20 fallback named; read check: 43
+                                    of 43 measured rows reached carry
+                                    a read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's features exactly: 4
+                                    object(s), 35 named shell(s), in
+                                    both cache files.
+  PASS Feature renderers         0.9s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 57 hover(s) and 296
+                                    number(s) examined; 13 graded, 7
+                                    graded by line, 44 held to the
+                                    fixture ===
+  PASS Guest book                0.1s  === GUEST BOOK: all 8 checks
+                                    passed
+  PASS Guest book updater        0.3s  === GUEST BOOK UPDATER: all 43
+                                    checks passed (6 scripted runs,
+                                    self-test first)
+  PASS Daily run steps           0.1s  === DAILY RUN: all 3 step scripts
+                                    found
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: no sibling directories and
+                                    nothing in data/ the builder did
+                                    not make.
+
+======================================================================
+  19 of 19 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories and
+  last swap 2026-09-29T03:22:10.391361+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  2. In GitHub Desktop, look at the change list. A good build
+     shows changed and added files and NO pile of deletions.
+  3. Commit and push. -- 7b230cf8fa30ca38738f4460e57f1746e6f4bc22
+  4. After the push, check what the live site serves:
+         python gallery_maintenance_run.py --live
+
+TONY-ACTION ROLLUP for this run:
+  (do)     steps 1 to 4 above, in that order.
+----------------------------------------------------------------------
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  2. (do) Run python gallery_maintenance_run.py. Expect 19 of 19 gating
+     checkers passing. "Constants export pull" brings the orrery's
+     export at b61d1982, which this patch already wrote, so it and
+     "Config mirror" should both say no change.
+     "Display figures" should end "57 hover(s) ... 13 graded, 7 graded
+     by line, 44 held to the fixture", and list 1 served AU printed in
+     full: Earth: Inner Core.
+  3. (do) Commit the config, the cache and the rest together, and push.
+  4. (do) On your phone, close the tab and reopen the Earth room, then
+     the Sun room. Check each line in the orrery's
+     documentation/PREBUILD_L345_gallery_hover_changes_20260928.md, plus
+     the crust's new sentence and the inner core's 0.000008165 AU. -- correct
+  5. (do) In the ORRERY folder, run the orrery maintenance run.
+     "Exact rows by the count" should now PASS: 20 of 20.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20260928T234242Z, 1 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.4s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Skill manifest               0.1s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             0.7s  unchanged (1 checked, not written)
+  Module atlas                 5.7s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               4.1s  rewrote DATA_INVENTORY.md
+  Exact rows report            1.2s  rewrote EXACT_ROWS_PRINTED.md -- 8 of 21
+                                     exact rows printed at 19 lines (9 orrery, 10
+                                     gallery); 5 drawn only, 0 not followed, 0
+                                     map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.2s  21 of 21 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.6s  No figure count exceeds its inputs: 44
+                                     derived row(s) read, 32 judged OK -- 32 OK,
+                                     12 NOT YET MIGRATED, 1 NO DERIVED LINE.
+  Constants export check       1.0s  Export matches the store: sha256
+                                     eacb85b01d2c on both sides; 91 rows re-read,
+                                     51 not exported, 26 tokens; 220 conversions
+                                     re-computed, 10 of 10 worked cases hold.
+  Exact rows by the count      1.4s  PASSING -- 8 printed exact rows each state a
+                                     count; 9 orrery lines print through
+                                     exact_text(); 10 gallery lines are served
+                                     the count
+  Dimensions                   1.0s  No unit contradicts its arithmetic: 44
+                                     derived row(s) read -- 32 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 93 status lines in constants_new.py are
+                                     well formed; 46 rows carry none.
+  Row shape                    0.1s  All 142 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.2s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Reset completeness          11.8s  PASS -- all 309 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  1.6s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.2s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Worksheet checker            8.2s  76 of 114 routed, 8 clean
+  Worksheet checker tests     14.3s  All 136 checks passed
+  Worksheet key round trip     0.8s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         17.2s  All 76 checks passed
+  Extractor pins               0.3s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner           8.4s  296 TIER-1 FINDINGS IN THE SCANNED TREE
+
+======================================================================
+  18 of 18 gating checkers passed -- 81.3s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           76 of 114 routed, 8 clean
+    Provenance scanner          296 TIER-1 FINDINGS IN THE SCANNED TREE
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2003 file(s) examined, 8 written, 0 created, 0 removed, 5 rewritten identically
+    written   DATA_INVENTORY.md
+    written   EXACT_ROWS_PRINTED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      LEDGER_CONSOLIDATED.md
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  6. (do) Move this script, and the unrun patch 4, into documentation/.
+  7. Tell Claude the new gallery SHA. Orrery patch D20 is next.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
 
 
