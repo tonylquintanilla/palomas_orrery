@@ -1,12 +1,12 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-## Executive summary -- v34, September 28, 2026
+## Executive summary -- v35, September 29, 2026
 
-Built on orrery `2a7d26b9fc200a1ceae6afb3af541e5d60c33f54` at
+Built on orrery `e5c3f92a2ad1dd47ad8cb35d17c159e07f1a9cf9` at
 https://github.com/tonylquintanilla/palomas_orrery and gallery
-`a484172fc17ec73ed801fbeab8eae2ebf0c945e1` at
+`f46cf299c2b6e93e5f3ba405c4ad62032e7666ae` at
 https://github.com/tonylquintanilla/tonyquintanilla.github.io, read live
-on 2026-09-28. This summary is rewritten at every restamp. It replaces
+on 2026-09-29. This summary is rewritten at every restamp. It replaces
 `MASTER_PLAN_INTERACTIVE_GALLERY_SUMMARY.md`, and Section 5a of this
 document replaces `MASTER_PLAN_CRITICAL_PATH_SUMMARY.md`; both are kept
 as dated records (Tony's ruling of 2026-09-28, L-333 and L-362).
@@ -22,9 +22,16 @@ what is done; this plan says what order the work goes in.
 - Two rooms are live and complete in `interactive.html`: the Sun,
   since 2026-08-29, and Earth, since 2026-09-10, each accepted on
   Tony's phone and desktop check (Mode 5).
-- A third, the Solar System room, draws the bodies as symbols on their
-  orbits (L-363). Its first half has shipped; its second half waits on
-  its own item.
+- A third, the Solar System room, draws the Sun, Earth, Jupiter, Saturn
+  and Apophis as symbols on their orbits, at the minute it is opened,
+  and says so under its title (L-363). Its first half is finished: six
+  gallery patches and its card, the last at gallery `f46cf299`.
+- On 2026-09-29 a design session made the Solar System room the
+  gallery's FRONT DOOR: a second way in beside the card taxonomy, which
+  stays the complete index. A visitor sees the Sun and Earth, opens a
+  drawer of the planets, ticks one to draw it, and reaches that body's
+  room and cards. The record is
+  `documentation/DESIGN_solar_system_room_front_door_20260929.md`.
 - The numbers reach the gallery through one route. The orrery exports
   them from `constants_new.py` into `constants_export.json`, with each
   number's unit and figure count; the gallery pulls that file and writes
@@ -34,25 +41,49 @@ what is done; this plan says what order the work goes in.
   its room prints has a unit, a status, a figure count, and a record of
   who opened its source. A missing field on an Earth row fails the
   maintenance run.
-- L-322 Stage D finished on 2026-09-28. Earth's pole is worked out from
-  Horizons for the date shown; an exact number prints the digits it was
-  defined with; and a value in another unit is computed from its one
-  source row instead of being stored twice (L-345). Earth's crust is
-  now drawn at the mean radius in both the orrery and the gallery.
+- L-322 Stage D finished on 2026-09-28, and L-345 closed with patch D20
+  at orrery `e5c3f92a`: a value in another unit is computed from its
+  one source row instead of being stored twice. Earth's crust is drawn
+  at the mean radius in both the orrery and the gallery.
 
-**What comes next, in order.**
+**What comes next, in order** (Tony's ruling of 2026-09-29, option C:
+"confirmed as recommended").
 
-1. **The Sun's slice.** Its room is live, so its rows are walked next,
-   the way Earth's were: each row gets its unit, status and count, and
-   each value the Sun's store keeps in a second unit becomes a
-   conversion of its source row (L-371, L-386).
-2. **Jupiter and Saturn, Artifact 2.** Their rings and belts are drawn,
-   the numbers those rooms print are walked, and the artifact is locked
-   and shipped (segments 1, 4 and 5 of Section 5a).
-3. **The Solar System room's second half** (L-363), beside those.
+1. **The Solar System room's second half, up to Tony's phone check**
+   (L-363). Mercury, Venus, Mars, Uranus, Neptune and then Pluto join
+   the room; the drawer gets its ten rows with tick boxes; the room
+   opens on the Sun and Earth; Home follows the design's rule. It is
+   built and accepted, but not yet the page a bare link opens.
+2. **The Sun's slice** (L-371, L-386). Its rows are walked the way
+   Earth's were: each gets its unit, status and figure count, and each
+   value the Sun's store keeps in a second unit becomes a conversion of
+   its source row.
+3. **The swap.** The Solar System room becomes the page
+   `interactive.html` opens when no room is named, and the Explorer
+   stays a card with its own link. It waits for step 2 so that the front
+   door leads only into rooms whose numbers are served from the export.
+4. **After the Sun: the orrery's objects, rebuilt in the gallery**
+   (Tony's direction of 2026-09-29, in outline; L-395). The gallery
+   grows the way the orrery did: symbols with positions from Horizons
+   and osculating orbits first, moons with them; then encounters,
+   comets and spacecraft; then shells and slices for the graphical
+   detail, which is where Jupiter and Saturn's Artifact 2 now falls.
+   The objects come from the orrery's own dictionary,
+   `celestial_objects.py`, exported the way the constants are and
+   checked against JPL Horizons. It opens with its own design round.
 
-**Open decisions for Tony.** The orrery's Auto view of the Sun opens
-about 31 times wider since Stage D (L-385).
+Steps 1 and 2 are never in progress at the same time: both write
+`data/objects_config.json` and both end in a cache rebuild. Step 4's
+design round takes in the questions the front-door design left open:
+groups, the drawer's list, encounters and cards (L-391 to L-394, with
+L-364 and L-365).
+
+**Open decisions for Tony.** Two at Half 2: whether ticking a drawer
+row also opens it, and whether Apophis keeps a row until the near-Earth
+asteroids round (L-363). Two in the orrery, neither on the critical
+path: the Sun's Auto view opens about 31 times wider since Stage D
+(L-385), and whether Earth's atmosphere tops are measured from the
+equatorial or the mean radius (L-389).
 
 **How to read the rest.** Section 5a is the critical path: the end
 goal, the five segments, the order they are worked in, and a dated
@@ -63,7 +94,7 @@ restamps have kept since July; this summary is the short form of it.
 
 ---
 
-**Status:** v34 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
+**Status:** v35 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
 **the first feature-bearing exhibit is LIVE AND COMPLETE.** The Sun
 ships at `palomasorrery.com/interactive.html?exhibit=sun`, unlinked
 from the landing page, Mode 5 accepted 2026-08-29 (gallery
@@ -120,7 +151,7 @@ offline (138/138) AND live -- Layer 2 Steps 1-5 all passed (five dry-runs,
 --first-build, --nightly, resolver date-picker, fetch-cost note). L-118
 closed in the same session.
 **Next: the order is in the executive summary above and in Section
-5a's newest subsection, 2026-09-23 to 28.** The five-step order dated 2026-09-03 -- the Sun room's phone
+5a's newest subsection, 2026-09-29.** The five-step order dated 2026-09-03 -- the Sun room's phone
 controls, the lobby with its rooms and editor (L-282, L-286, L-287;
 the hall, L-280, was retired 2026-09-04), Earth into the assembler, the
 transport (segment 2) built alongside Earth, then Jupiter and Saturn --
@@ -161,7 +192,16 @@ text here read "enabled with a known open issue", contradicting its own
 header forty lines below. L-151 (gallery-assembler skill) DONE
 2026-07-27; L-150 (multi-orbit binaries) still decided, not yet built.)
 **Date begun:** July 3, 2026
-**Last updated:** September 28, 2026 (v34: a DESIGN BUILD, L-345,
+**Last updated:** September 29, 2026 (v35: a DESIGN BUILD, L-363. The
+Solar System room becomes the gallery's front door (the design session
+of 2026-09-29), and the order changes on Tony's ruling C: the room's
+second half through his Mode 5 first, then the Sun's slice, then the
+swap that makes the room the default. After the Sun, in outline: the
+orrery's objects rebuilt in the gallery from its own dictionary and
+checked against Horizons, then encounters, then shells and slices. The
+executive summary is rewritten and Section 5a gains the 2026-09-29
+subsection; with Anthropic's Claude Opus 5.5, from a review Claude
+Fable 5.1 did in parallel. v34, September 28, 2026: a DESIGN BUILD, L-345,
 which finished L-322 Stage D. A value in another unit is computed from
 its one source row and never stored as a second row: the orrery
 exports each row's value in every length unit as "in" (patch D19),
@@ -180,27 +220,10 @@ became the store's first closed slice. The gallery's pointer join gained
 a read check and its display check grades the four changed hovers
 against Tony's approved words. Section 5a gains the 2026-09-17 to 22
 subsection; with Anthropic's Claude Opus 5 (the orrery half) and Claude
-Opus 5.5 (the gallery half and this update). v32, September 16, 2026:
-two BUILD sessions and the
-record that closes them. Earth's magnetosphere is drawn from the store --
-Shue's magnetopause and Jelinek's bow shock, eleven served rows, no
-number typed into the renderer (L-305 items 5 and 6b, 2026-09-15) -- and
-Earth's belts moved into its equatorial plane (L-231). Citations left the
-hover for the i panel, and a hover budget suite joined the maintenance
-run. Then the phone chrome settled on Tony's Mode 5 (2026-09-15/16): the
-drawer row became easy to hit, text boxes stopped breaking mid-sentence,
-the phone's text box lost its arrow and moved mid-view, the arrow cross
-went back to the top right, and a phone tap now reaches a shell's marker
-instead of its dots (L-316 rounds 3 and 4, L-318 rounds 3 to 6). The
-front page no longer says the magnetosphere is absent, and the status
-line, which said v30 under a v31 stamp, now matches. The 2026-09-12
-subsection went in without a stamp; the 2026-09-13/14 sessions (L-305
-item 7) are recorded in the ledger and in
-`HANDOFF_L305_item7_built_20260914.md`, not in Section 5a. Section 5a
-gains the 2026-09-15/16 subsection; with Anthropic's Claude Opus 5.)
+Opus 5.5 (the gallery half and this update).)
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
 Claude Opus 5, Claude Opus 5.5, Claude Fable 5, Claude Fable 5.1,
-Claude Sonnet 5, GPT
+Claude Sonnet 5, Claude Sonnet 5.5, GPT
 
 **Pivot (v8):** The gallery is no longer a stepping stone to a separate web
 application. The gallery IS the web publication -- growing interactive
@@ -2078,6 +2101,79 @@ the ledger, under A Check That Cannot Fail Is Not Passing.
 Artifact 2 -- the order in the executive summary. The orrery's own
 hovers still print most converted values by a width chosen on the line
 (L-352, L-387); that class waits for the orrery's display work.
+
+### 2026-09-29 -- the Solar System room becomes the front door, and the order changes
+
+**A design session made the room the gallery's front door.** Zero
+code, recorded in
+`documentation/DESIGN_solar_system_room_front_door_20260929.md`. Until
+now the gallery had one way in, the card taxonomy of doors, rooms and
+cards. Tony's idea is a second, more intuitive one: the solar system
+itself. The taxonomy stays the complete index; nothing is removed. The
+rulings, in short:
+
+- The scene stays a clean orrery. Everything about where to go next
+  lives in the drawer.
+- The room opens on the Sun and Earth, the drawer closed and Earth's
+  row highlighted, the view fitting 1.1 times Earth's distance. The aim
+  is curiosity, not the whole system at once.
+- The drawer opens on ten rows: the Sun, the eight planets and Pluto.
+  "See more" adds the groups in place along the spine, outward from the
+  Sun.
+- Tapping a body selects it and highlights its row; ticking a row draws
+  it and reframes the view. Everything ticks except the Sun.
+- Groups (the main belt, the Trojans, near-Earth asteroids,
+  trans-Neptunian objects) become rooms with a cloud, served once and
+  drawn like a shell. Encounters draw the whole room at their date.
+  Only what JPL Horizons can place is in scope.
+- The swap: the room becomes the default once its nine bodies are in,
+  without waiting for a date picker. The Explorer stays a card.
+
+**Three strands met the same day.** Stage D had finished and patch D20
+had landed (orrery `e5c3f92a`), which opened the gate the room's second
+half had waited on. Patch 6 had finished the first half (gallery
+`f46cf299`). And the design had changed what the second half is. Two
+sessions, Claude Fable 5.1 and Claude Opus 5.5, reviewed the three
+records against both repositories independently and agreed on the
+substance. The filed result is
+`documentation/HANDOFF_L363_three_strands_integrated_20260929.md`.
+
+**The order changed, on Tony's ruling.** v34 put the room's second
+half third, beside the Sun's slice and Artifact 2, when the room had no
+purpose beyond itself. As the front door it sends visitors into the
+other rooms, and the Sun room still prints numbers typed into the
+gallery rather than served from the export (L-371). Three options went
+to Tony: the second half next, swap included; the v34 order; or the
+second half next with the swap held until the Sun's slice closes. Tony,
+2026-09-29: "C. Confirmed as recommended." So the room is built and
+accepted now, and becomes the default only when every room it leads
+into prints served numbers.
+
+**One constraint travels with the order.** The second half adds object
+entries to `data/objects_config.json`; the Sun's slice rewrites the
+Sun's served values in the same file through the gallery's mirror. Both
+end in a cache rebuild. They are never in progress at once: one is
+pushed and live-checked before the other starts.
+
+**After the Sun, a direction in outline** (Tony, 2026-09-29, L-395).
+"In the original orrery the shells came late." The gallery grows the
+same way: symbols with positions from Horizons and osculating orbits
+first, moons with them; then encounters; then shells and slices. The
+objects come from the orrery's own dictionary, `celestial_objects.py`,
+exported the way the constants are, so the gallery stops keeping a
+hand-copied list; already the two copies disagree on Apophis's ID.
+And because the dictionary itself can go stale, the check reaches past
+it to JPL Horizons. Jupiter and Saturn's Artifact 2, v34's next step,
+now falls in the shells phase. The details are that design round's.
+
+**This restamp is at Tony's direction.** The design asked whether it
+counted as a design build for the plan's restamp (L-296); Tony answered
+by asking for the plan to reflect the ruling.
+
+**Next.** The second half of L-363, from the integrated handoff's
+section 4, step 1: a short design round, the five planets and one cache
+rebuild, the drawer, and Tony's Mode 5. Then the Sun's slice, then the
+swap, then the design round for the orrery's objects (L-395).
 
 ### What this section deliberately does not carry
 

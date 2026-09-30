@@ -448,8 +448,8 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
      crust should look the same; its hover should end with the new
      paragraph about the mean radius, 6,371.000 km. -- correct
   3. (do) Move this script into documentation/. Commit everything and
-     push.
+     push. -- e5c3f92a2ad1dd47ad8cb35d17c159e07f1a9cf9
   4. (do) Reinstall ledger-and-session-records and interactive-exhibit
-     from skills/ to Settings > Skills.
+     from skills/ to Settings > Skills. -- done
 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 

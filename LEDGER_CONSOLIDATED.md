@@ -183,6 +183,13 @@ Daily Run), built on e0a0c7cc.
 Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
 (patch D20: L-345, L-333 and L-362 closed; L-388, L-389 and L-390
 opened; L-322 and L-387 noted), built on 2a7d26b9.
+Module updated: September 29, 2026 with Anthropic's Claude Opus 5.5
+(L-363: Half 1 recorded as finished, the front-door design, and Tony's
+ruling C on the order -- Half 2 through his Mode 5, then the Sun's
+slice, then the swap; after the Sun, in outline, the orrery's objects
+rebuilt from its own dictionary and checked against Horizons; L-391 to
+L-395 opened; L-322, L-364, L-365, L-367, L-371 and L-378 noted; master
+plan v35), built on e5c3f92a.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -400,7 +407,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*234 live items; 219 need attention (`!`); 188 RICE-scored; 151 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*239 live items; 224 need attention (`!`); 188 RICE-scored; 151 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -473,7 +480,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-225 | Migrate the comet shell constants into `constants_new.py`, then dispatch | DEFERRED | 2.4 | 2026-08-23 |
 | ! | L-293 | Lunar standstill: an exhibit made of four dated orbits | OPEN | 2.4 | 2026-09-06 |
 | ! | L-305 | Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together | OPEN | 2.4 | 2026-09-16 |
-| ! | L-322 | Units declared in the store, and the orrery as producer | OPEN | 2.3 | 2026-09-28 |
+| ! | L-322 | Units declared in the store, and the orrery as producer | OPEN | 2.3 | 2026-09-29 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
 | ! | L-328 | Subtraction pass on the skill layer (protocol/skills track) | OPEN | 2.1 | 2026-09-14 |
@@ -518,22 +525,22 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-359 | Served text beside a served number can go stale where no tool may edit it (gallery) | OPEN | -- | 2026-09-22 |
 | ! | L-360 | The hover budget measures recorded payloads, so it cannot see a line added by newly served data (checks) | OPEN | -- | 2026-09-28 |
 | ! | L-361 | An epoch typed in the page, with no store row (gallery, store) | OPEN | -- | 2026-09-22 |
-| ! | L-363 | The Solar System room: the bodies as symbols, before their shells (gallery, exhibits) | OPEN | -- | 2026-09-26 |
-| ! | L-364 | A comet's own trust window can exclude today while the served window passes the scene (gallery, trust) | OPEN | -- | 2026-09-26 |
-| ! | L-365 | The assembler leaves out a body it cannot draw, without a warning (gallery, assembler) | OPEN | -- | 2026-09-26 |
+| ! | L-363 | The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits) | OPEN | -- | 2026-09-29 |
+| ! | L-364 | A comet's own trust window can exclude today while the served window passes the scene (gallery, trust) | OPEN | -- | 2026-09-29 |
+| ! | L-365 | The assembler leaves out a body it cannot draw, without a warning (gallery, assembler) | OPEN | -- | 2026-09-29 |
 | ! | L-366 | An orbit's info marker describes an arbitrary point on the orbit (gallery, assembler) | OPEN | -- | 2026-09-26 |
-| ! | L-367 | No checker opens a new room (checks, gallery) | OPEN | -- | 2026-09-26 |
+| ! | L-367 | No checker opens a new room (checks, gallery) | OPEN | -- | 2026-09-29 |
 | ! | L-368 | Other bodies' typed poles disagree with their cited table or cite a withdrawn report (orrery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-369 | Earth's obliquity typed outside constants_new.py (orrery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-370 | Jupiter and Saturn numbers typed only in objects_config.json (gallery, store) | OPEN | -- | 2026-09-28 |
-| ! | L-371 | The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice) | OPEN | -- | 2026-09-28 |
+| ! | L-371 | The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice) | OPEN | -- | 2026-09-29 |
 | ! | L-372 | Two drawing settings live in constants_new.py (orrery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-373 | A unit conversion by a bare number inside a constants_new.py expression (store) | OPEN | -- | 2026-09-28 |
 | ! | L-374 | Showing Earth's precession over time (orrery, idea) | OPEN | -- | 2026-09-28 |
 | ! | L-375 | Earth's eccentric dipole offset is not drawn (store, Earth) | OPEN | -- | 2026-09-28 |
 | ! | L-376 | Other bodies' dipole-cone hovers: typed offsets and abbreviated radii (orrery, words) | OPEN | -- | 2026-09-28 |
 | ! | L-377 | The provenance scanner's proximity rule can count a string as cited by a neighbour's source (checks) | OPEN | -- | 2026-09-28 |
-| ! | L-378 | Phone behaviour of the rooms has no automated check (checks, gallery) | OPEN | -- | 2026-09-28 |
+| ! | L-378 | Phone behaviour of the rooms has no automated check (checks, gallery) | OPEN | -- | 2026-09-29 |
 | ! | L-379 | The recorded Earth scene payload is aging, and three checks patch it piece by piece (checks, gallery) | OPEN | -- | 2026-09-28 |
 | ! | L-380 | The gallery maintenance routine pulls the constants export after the cache build (gallery, routine) | OPEN | -- | 2026-09-28 |
 | ! | L-381 | The uncertainty field's pattern reads a sentence's full stop as a decimal point (export, checks) | OPEN | -- | 2026-09-28 |
@@ -545,6 +552,11 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-388 | The gallery's export pull can print success when it could not fetch, and the mirror then writes from the old export (gallery, tooling) | OPEN | -- | 2026-09-28 |
 | ! | L-389 | Earth's atmosphere shells are measured from the equatorial radius, and the crust now sits at the mean radius (store, Tony's eye) | OPEN | -- | 2026-09-28 |
 | ! | L-390 | provenance-discipline does not yet name the conversion marker or say the widening is built (skills) | OPEN | -- | 2026-09-28 |
+| ! | L-391 | Group clouds: the Trojans' sources, and the shapes of the three other groups (gallery, exhibits) | OPEN | -- | 2026-09-29 |
+| ! | L-392 | The Solar System room's drawer list is page code, not served data (gallery, exhibits) | OPEN | -- | 2026-09-29 |
+| ! | L-393 | Encounter data: dates, spacecraft records centred on their targets, and how far the cache reaches in time (gallery, cache) | OPEN | -- | 2026-09-29 |
+| ! | L-394 | A card cannot say which body it belongs to (gallery, Studio) | OPEN | -- | 2026-09-29 |
+| ! | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | OPEN | -- | 2026-09-29 |
 
 ### B. Pending Action (Tony-side)
 
@@ -876,6 +888,172 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-395] The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects)
+<!-- L:395 status:OPEN upd:2026-09-29 section:A flag: rice: -->
+- **The direction after the Sun, Tony 2026-09-29, in outline.** After
+  the Sun's slice and the Solar System room's swap, the gallery grows
+  the way the orrery did: symbols with positions from Horizons and
+  osculating orbits first, moons with them; then encounters (comets and
+  spacecraft); then shells and slices for the graphical detail. Tony:
+  "In the original orrery the shells came late."
+- **The source of truth, Tony 2026-09-29: "an excellent improvement."**
+  `OBJECT_DEFINITIONS` in `celestial_objects.py` becomes the one
+  definition of each object. An export written on every orrery
+  maintenance run is pulled by the gallery, the way `constants_new.py`
+  reaches it (`export_constants.py`, `pull_constants_export.py`,
+  `mirror_constants.py`). The gallery keeps only its serving choices:
+  which objects it serves, how it fetches them, trust tuning, shells
+  and arrival views. A checker fails when the two disagree.
+- **Horizons as the outside authority, Tony 2026-09-29.** The dictionary
+  can go stale -- legacy entries, the orrery's own evolution, errors --
+  so the check includes cross-checking JPL Horizons, not only the
+  gallery against the dictionary.
+- **Revisit the dictionary's structure and role, Tony 2026-09-29.** It
+  is one of the oldest parts of the orrery, dating from the move from
+  the Keplerian model to Horizons. So the round is not only an export
+  of what is there. Found in a first look [verified @ orrery
+  e5c3f92a]: an object's facts are spread across several tables keyed
+  by name strings -- `OBJECT_DEFINITIONS` (182; identity, symbol, hover
+  text, link, dates), `orbital_elements.planetary_params` (120; typed
+  mean elements from the Keplerian era),
+  `orbital_elements.parent_planets` (17 parents; the satellite-to-planet
+  link the dictionary lacks), `KNOWN_ORBITAL_PERIODS` (133) and
+  `CENTER_BODY_RADII` (18) in `constants_new.py`, and
+  `export_orbit_cache.CENTER_SLUG_MAP`. The dictionary also carries two
+  GUI concerns, the Tk variable name (`var_name`) and the colour key.
+- **The orrery already draws osculating orbits; the mean elements are
+  not the drawing source** [traced @ orrery e5c3f92a]. Before a plot,
+  `palomas_orrery.py` copies `planetary_params` into
+  `active_planetary_params` and replaces each selected object's entry
+  with osculating elements from Horizons for the plot date
+  (`get_elements_with_prompt`); `plot_idealized_orbits` receives the
+  working copy. The mean table remains as: the seed and the fallback
+  when a fetch fails; the mean orbit drawn beside the osculating one
+  to show perturbation (`ORIGINAL_planetary_params`); and the only
+  source for the moons the prefetch skips (`SKIP_HORIZONS_PREFETCH`:
+  MK2, Xiangliu, Vanth, Gonggong) and the analytic orbits labelled as
+  from Hubble or occultation observations. What the table is still
+  for, and what replaces it where, is the round's question -- not
+  whether the orrery migrated, which it did. (Claude first reported
+  the table as widely read without saying for what; Tony caught it.)
+- **Found comparing the two copies** [verified @ orrery e5c3f92a,
+  gallery f46cf299]: Apophis is `'2004 MN4'` in the dictionary and
+  `'99942'` in the gallery; Pluto has no ID type in the dictionary and
+  is a major body measured from the Pluto-Charon barycentre in the
+  gallery; Voyager 1's gallery note says "confirm against the object
+  definition", a hand sync; Earth's dictionary entry carries
+  `mission_info` twice, and Python keeps the second. The dictionary
+  holds 182 entries: 66 orbital, 46 satellites, 38 trajectories, 11
+  exoplanets, 10 Lagrange points, 4 barycentres and 7 others (exoplanet
+  hosts, the Sun, one hypothetical). The gallery serves 13.
+- **Questions for its design round:**
+  - Which facts belong to the object (its ID, its parent body, its
+    kind) and which to the gallery (fetch cadence, trace style, trust
+    anchors).
+  - Fields the dictionary lacks: a satellite does not name its planet,
+    and comets share `object_type 'orbital'` with asteroids, told apart
+    only by their symbol. And one stable key: the gallery says
+    `apophis`, the dictionary `Apophis` and `apophis_var`.
+  - What Horizons can confirm -- that an ID resolves to exactly one
+    object, its name and designation, its kind -- and what it cannot:
+    the project's modelling choices, such as drawing Pluto about its
+    barycentre. For small bodies, JPL's Small-Body Database may give an
+    orbit class that could source the drawer's groups; to be verified
+    before it is relied on.
+  - Where the Horizons check runs. It needs the network, so when it
+    cannot reach Horizons it says so and does not pass. It records the
+    date each object was last confirmed, the way a store row records
+    who read its source, and re-confirms on a cadence rather than
+    querying every object on every run.
+  - Pinned records (Halley `90000030`, Encke `90000091`): flagged when
+    JPL has a newer solution, for a person to decide.
+- **Discovery before remediation** (The Braid): the first run lists
+  every disagreement and fixes nothing; each gets a ruling; fixes land
+  in slices.
+**Gap:** Its design round, after the Solar System room's swap; it takes in L-391 to L-394.
+**Ref:** `celestial_objects.py`; gallery `data/objects_config.json`; `export_constants.py`; gallery `tools/pull_constants_export.py` and `tools/mirror_constants.py` (the model); skills/horizons-orbital-mechanics/SKILL.md; L-363; L-364; L-391 to L-394.
+
+#### [L-394] A card cannot say which body it belongs to (gallery, Studio)
+<!-- L:394 status:OPEN upd:2026-09-29 section:A flag: rice: -->
+- **From the front-door design, 2026-09-29** (question 15 of
+  `documentation/DESIGN_solar_system_room_front_door_20260929.md`). In
+  the Solar System room each drawer row shows whether its body has a
+  room and whether it has cards, and expands to their titles. The
+  design rules that this is READ from the exhibits table and the card
+  metadata, so a new room or card lights up its row and nothing is kept
+  in two places; and that each thing has one address, the same one the
+  taxonomy uses.
+- "Has a room" can be read from `EXHIBITS` in `interactive.html` today.
+  "Has cards" cannot: nothing in `gallery/gallery_metadata.json` says
+  which body a card belongs to. "Earth science" cards, for example, are
+  to be listed under Earth.
+- It may ship inside L-363's Half 2 if the field is small, or as the
+  first round after it. Not a gate on the swap. [per the integrated
+  handoff, section 4 step 6]
+**Gap:** A field on each card naming its body, Studio writing it, and the drawer reading it.
+**Ref:** gallery `gallery/gallery_metadata.json`; gallery `tools/gallery_studio.py`; gallery `interactive.html` (`EXHIBITS`); skills/gallery-pipeline/SKILL.md; L-363.
+
+#### [L-393] Encounter data: dates, spacecraft records centred on their targets, and how far the cache reaches in time (gallery, cache)
+<!-- L:393 status:OPEN upd:2026-09-29 section:A flag: rice: -->
+- **From the front-door design, 2026-09-29** (its section 5 and
+  questions 9 to 11). An encounter is a dated event: ticking it moves
+  the whole Solar System room to the flyby date, and unticking returns
+  it to now. One record is listed in the room of each body involved,
+  the target's room centres the view, and each encounter carries its
+  own opening view, modelled on the arrival block.
+- Three things the design did not read, each to be read before the
+  encounter round is designed:
+  - How far the assembler's dates reach. A 1979 flyby needs served
+    positions for every body drawn at that date.
+  - How the cache holds spacecraft. The assembler never translates
+    between centres, so one mission may need a record centred on each
+    target.
+  - The trust check per encounter: each drawn body's own window must
+    cover the encounter's date, not only the cache's overall window
+    (the L-364 class).
+**Gap:** Read the three, then the encounter design round (Voyager 1 first, with L-365).
+**Ref:** gallery `gallery/assembler/`; gallery `tools/gallery_cache_builder.py`; skills/gallery-assembler/SKILL.md; skills/horizons-orbital-mechanics/SKILL.md; L-363; L-364; L-365.
+
+#### [L-392] The Solar System room's drawer list is page code, not served data (gallery, exhibits)
+<!-- L:392 status:OPEN upd:2026-09-29 section:A flag: rice: -->
+- **From the front-door design, 2026-09-29** (question 3). The drawer
+  lists the Sun, the eight planets and Pluto, with a "See more" that
+  adds the groups in place along the spine, outward from the Sun
+  (design section 3, item 4). Today the room's bodies are one list in
+  the page, `SOLAR_SYSTEM_BODIES` in `interactive.html`, and the room
+  has no entry in `data/objects_config.json`. Left that way, every new
+  group means editing the page.
+- L-363's Half 2 needs at least the ten rows, so the shape is chosen
+  there, with room for the spine to grow; whatever Half 2 does not take
+  stays here. Who may write `data/objects_config.json` is in
+  interactive-exhibit.
+**Gap:** A served shape for the spine, groups and "See more"; the page reads it.
+**Ref:** gallery `interactive.html`; gallery `data/objects_config.json`; skills/interactive-exhibit/SKILL.md; L-363.
+
+#### [L-391] Group clouds: the Trojans' sources, and the shapes of the three other groups (gallery, exhibits)
+<!-- L:391 status:OPEN upd:2026-09-29 section:A flag: rice: -->
+- **From the front-door design, 2026-09-29** (its section 5 and
+  questions 2, 4 to 6 and 12). A group is its own room with a cloud,
+  served once and drawn like a shell: off when a room opens, ticked by
+  the visitor, translucent, stackable. A cloud is a portrait, not data:
+  its points come from a seed, its hover says its proportions are
+  approximate, and its extents are sourced or left out. The Oort cloud
+  is the served model.
+- **The Jupiter Trojans are the settled pattern**, still to be sourced:
+  which camp leads Jupiter and which trails it, each body's camp, and
+  the lobes' extent. None is to be served from memory.
+  **Tony-action (decide), in the Trojans round:** Patroclus and
+  Menoetius, a binary that overlaps at this scale -- one row for the
+  pair, or two rows that say they overlap.
+- **The three other groups**, each its own design round: the main
+  asteroid belt, the near-Earth asteroids and the trans-Neptunian
+  objects -- shape, extents, sources.
+- To read first: how the orrery defines its group shells; and whether
+  the + and - buttons reach hundreds of AU with orbits drawn at full
+  length (Sedna would need a served orbit with its own trust window).
+**Gap:** The Trojans round, then one round per group.
+**Ref:** gallery `data/objects_config.json` (the Oort cloud's shapes); skills/provenance-discipline/SKILL.md; skills/interactive-exhibit/SKILL.md; L-363.
+
 #### [L-390] provenance-discipline does not yet name the conversion marker or say the widening is built (skills)
 <!-- L:390 status:OPEN upd:2026-09-28 section:A flag: rice: -->
 - **Found 2026-09-28 building patch D20.** D20 made a new comment key in
@@ -1066,11 +1244,14 @@ section 5.
 **Ref:** gallery `documentation/payload_earth_scene.json`; gallery `documentation/smoke_*.js`; L-360; L-367.
 
 #### [L-378] Phone behaviour of the rooms has no automated check (checks, gallery)
-<!-- L:378 status:OPEN upd:2026-09-28 section:A flag: rice: -->
+<!-- L:378 status:OPEN upd:2026-09-29 section:A flag: rice: -->
 - **Found 2026-09-25.** The phone tap lag fixed at gallery `ce09f789`
   was found and measured only in a headless browser with WebGL. The
   maintenance run has no such browser, so nothing in it would see a
   phone-only regression. Tony's phone is the only check.
+- **2026-09-29, from L-363's Half 1:** the sandbox cannot load Google
+  Fonts, so whether a line of text fits a phone is settled only on the
+  phone.
 **Gap:** A phone-sized headless run in the maintenance suite, or a stated decision that the phone check stays manual.
 **Ref:** gallery `interactive.html`; gallery `gallery_maintenance_run.py`; L-367.
 
@@ -1136,7 +1317,7 @@ section 5.
 **Ref:** `constants_new.py`; `palomas_orrery.py`; `palomas_orrery_helpers.py`.
 
 #### [L-371] The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice)
-<!-- L:371 status:OPEN upd:2026-09-28 section:A flag: rice: -->
+<!-- L:371 status:OPEN upd:2026-09-29 section:A flag: rice: -->
 - **Found 2026-09-22 and 2026-09-28.** In `data/objects_config.json`
   the Sun carries 43 numbers with no link to a store row, not yet sorted
   into measurements and drawing choices (manifest section 2.6). [per
@@ -1148,6 +1329,9 @@ section 5.
   Alfven surface at 19.7, stay as they are until their rows carry
   counts.
 - The Sun is the next body's slice, since its room is published.
+- **Note (2026-09-29, the order):** the Sun's slice now follows L-363's
+  Half 2 through Tony's Mode 5, on his ruling C; see L-322's note of
+  the same date.
 **Gap:** The Sun's slice: sort the 43, give each measured one a row and a count, and print by the count.
 **Ref:** gallery `data/objects_config.json`; gallery `gallery/feature_renderers.js`; L-322 Gap (3); L-345.
 
@@ -1190,7 +1374,7 @@ section 5.
 **Ref:** `idealized_orbits.py`; `documentation/BUILD_MANIFEST_L322_D_earth_pole_20260922.md` sec. 2.5 and 7; L-322.
 
 #### [L-367] No checker opens a new room (checks, gallery)
-<!-- L:367 status:OPEN upd:2026-09-26 section:A flag: rice: -->
+<!-- L:367 status:OPEN upd:2026-09-29 section:A flag: rice: -->
 - **Found 2026-09-26** delivering L-363. The gallery maintenance run
   passed 16 of 16 on the patched copy, and none of its checkers boots a
   room from the page's `EXHIBITS` table. They read recorded payloads
@@ -1205,6 +1389,9 @@ section 5.
   rendered headless in the sandbox, because it needs Pyodide's numpy,
   which the sandbox cannot fetch. The exhibit rooms need only the
   standard library and can be.
+- **2026-09-29:** meanwhile the rooms were checked by the headless
+  recipe in `documentation/HANDOFF_L363_half1_done_half2_after_stage_d_20260928.md`,
+  section 7. L-363's Half 2 drawer enters the same blind spot.
 **Gap:** A check that lists `EXHIBITS` and fails on a room no checker boots, or one smoke that boots every room.
 **Ref:** gallery `gallery_maintenance_run.py`; gallery `documentation/smoke_*.js`; L-363.
 
@@ -1226,7 +1413,7 @@ section 5.
 **Ref:** gallery `gallery/assembler/render_orbits.py`; gallery `interactive.html::sunLabelMarker`; L-363.
 
 #### [L-365] The assembler leaves out a body it cannot draw, without a warning (gallery, assembler)
-<!-- L:365 status:OPEN upd:2026-09-26 section:A flag: rice: -->
+<!-- L:365 status:OPEN upd:2026-09-29 section:A flag: rice: -->
 - **Found 2026-09-26** asking for Voyager 1 in L-363, at gallery
   `a5c35f5f`. `assemble_scene` draws only objects that carry an
   osculating block. Anything else -- Voyager 1 is served as positions,
@@ -1236,11 +1423,15 @@ section 5.
 - The Solar System room guards itself: its compose counts one position
   marker per body it asks for and reports a miss in the info panel. The
   assembler still does not, for any other caller.
+- **2026-09-29:** part of the Solar System room's future under the
+  front-door design: space missions get their own drawer, by launch
+  date, and Voyager 1's Jupiter and Saturn flybys are among the first
+  encounters (L-393).
 **Gap:** `assemble_scene` warns, or refuses, for every requested object it does not draw; Voyager 1 waits for `render_spacecraft` (artifact 5).
 **Ref:** gallery `gallery/assembler/assemble.py`; `gallery/assembler/render_spacecraft.py`; L-363.
 
 #### [L-364] A comet's own trust window can exclude today while the served window passes the scene (gallery, trust)
-<!-- L:364 status:OPEN upd:2026-09-26 section:A flag: rice: -->
+<!-- L:364 status:OPEN upd:2026-09-29 section:A flag: rice: -->
 - **Found 2026-09-26** building L-363, at gallery `a5c35f5f`. Each
   heliocentric object's trust record carries its own window, centred on
   its element epoch. Halley's (anchored at its 1986 perihelion, capped
@@ -1257,25 +1448,33 @@ section 5.
   reason.
 - Tony, 2026-09-26: the trust window will need changes once the
   encounter work starts; not today.
+- **2026-09-29:** part of the Solar System room's future under the
+  front-door design: each comet apparition becomes a room that opens on
+  its perihelion, so this check becomes per apparition (L-393).
 **Gap:** The scene date checked against each drawn object's own window, or a served window built from where the windows fall; taken up with the encounter work.
 **Ref:** gallery `tools/gallery_cache_builder.py` (served_window, M2 section 5.5); gallery `gallery/assembler/resolver.py`, step 3; skills/gallery-assembler/SKILL.md; L-363.
 
-#### [L-363] The Solar System room: the bodies as symbols, before their shells (gallery, exhibits)
-<!-- L:363 status:OPEN upd:2026-09-26 section:A flag: rice: -->
+#### [L-363] The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits)
+<!-- L:363 status:OPEN upd:2026-09-29 section:A flag: rice: -->
 - **What it is.** A third room in `interactive.html`,
   `?exhibit=solar-system`, titled "The Solar System". It draws the
   bodies as their symbols on their orbits, from the served cache, on
   today's date, with no shells. Tony, 2026-09-26: symbols first, the
   way the orrery itself grew, as a quick win while each body's shells
   wait for its own room. It is the top level L-286's drill-down needs.
+  Since 2026-09-29 it is also designed as the gallery's front door
+  (below).
 - **Tony's rulings, 2026-09-26:**
   - Two halves, because L-322 Stage D shares `data/objects_config.json`
     and the cache rebuild. Half 1 touches only `interactive.html`.
-    Half 2 waits for L-322's manifest section 6 to push.
+    Half 2 waits for L-322's manifest section 6 to push. [Superseded
+    2026-09-28: after Stage D COMPLETES. It completed at orrery
+    `2a7d26b9`, and D20 landed at `e5c3f92a`, so the gate is open.]
   - Plan B for the key: `solar-system` is permanent. The Explorer keeps
     `solar-system-explorer` and stays the default until Half 2 and
     Tony's acceptance; then the default switches, and the Explorer
-    card's live link is changed in Studio.
+    card's live link is changed in Studio. [Superseded 2026-09-29 by
+    the swap in the front-door design, below.]
   - Only bodies the cache stands behind today: the Sun, Earth, Jupiter,
     Saturn and Apophis. The Moon, Io, Titan and Charon are left out;
     at this scale each sits on its planet, and they belong in their
@@ -1300,20 +1499,118 @@ section 5.
   scope."
 - **Seen in the headless phone run, not ruled:** on an upright phone
   the in-scene title "Paloma's Orrery -- The Solar System" runs under
-  the arrow buttons. For Half 2's Mode 5.
-- **Half 2, still to do:**
-  - Mercury, Venus, Mars, Uranus and Neptune in
-    `data/objects_config.json`, and one cache rebuild.
-  - Pluto: a Sun-centred entry for the Pluto system. Pluto is served
-    relative to the Pluto-Charon barycentre, and the assembler refuses,
-    by design, to translate it into a Sun-centred scene.
-  - A link for each body in the config. The panel reads "No link on
-    file for this body" today.
-  - A gallery card for the room, which gives it its L-286 chain.
-  - Tony's Mode 5, then **Tony-action (decide):** the default switch.
-  - The comets return with L-364; Voyager 1 with L-365.
-**Gap:** Half 2 (above), after L-322 section 6 pushes; then Tony's decision on the default.
-**Ref:** `documentation/HANDOFF_explorer_symbols_half1_20260926.md` (rev 2); gallery `documentation/patch_solar_system_room_half1_20260926.py`; L-286; L-099; L-322; L-364 to L-367.
+  the arrow buttons. [Resolved by patch 5 below.]
+- **Half 1 finished, 2026-09-26 to 29: five more gallery patches and
+  the card.** Each was run by Tony, followed by the gallery maintenance
+  run, pushed, and checked on his phone. The scripts are in the
+  gallery's `documentation/`; the SHAs are the commits that carried
+  each script [verified @f46cf299 from the gallery's history].
+  - Patch 2, `patch_L363_2_studio_lists_quoted_room_keys_20260926.py`
+    (gallery `5a534d7`): Studio's New Interactive Card list, and the
+    editor's live-link list, read a room key written in quotes. The
+    room's key has a hyphen, so it needs the quotes, and the list had
+    skipped it without saying so.
+  - Patch 3, `patch_L363_3_date_line_and_editor_save_check_20260926.py`
+    (`74624c0`): the room draws now, the minute it is opened, and says
+    so under its title; the gallery editor refuses to save over a file
+    that changed on disk since it loaded it.
+  - Patch 4, `patch_L363_4_date_line_every_room_20260927.py`
+    (`70a7734`): every room carries the line; the Earth room draws now
+    too; the Sun room's line says it has no date.
+  - Patch 5, `patch_L363_5_short_scene_titles_20260927.py`
+    (`a484172f`): the scene titles drop "Paloma's Orrery --", and on an
+    upright phone the title and line clear the buttons. Tony's phone:
+    all three rooms correct.
+  - Patch 6, `patch_L363_6_site_credit_and_camera_20260928.py`
+    (`f46cf299`): every relayout the rooms and the Explorer make carries
+    the live camera -- the + and - buttons had snapped a turned view
+    back to its opening angle -- and a small palomasorrery.com link
+    sits under the grid chip, drawn in the scene so the camera's
+    picture carries it. Tony's phone and desktop: "correct". The
+    live-camera rule was already in interactive-exhibit; the zoom caller
+    had missed it. Worth a line naming every caller in that skill's
+    touch-path section at its next bump.
+  - The card "Solar System", 9:16, in the `solar_system` door, live
+    link `interactive.html?exhibit=solar-system`, placard "Live data
+    from JPL Horizons. Work in progress." Made in Studio once patch 2
+    let Studio list the room; pushed at gallery `3f7f50ab`.
+- **Tony's rulings in Half 1, 2026-09-27 and 28.** The line under the
+  title is the reason for the exhibits: "it is the reason for the
+  exhibit at all." The rooms draw now, not at midnight, in UTC only.
+  Every room has the line; the Sun room's says it has no date, since it
+  draws nothing that changes with time. Scene titles drop "Paloma's
+  Orrery --", which the top bar and the address already say. The
+  camera's picture is what the scene shows: "why would the camera
+  button snapshot something that is not displayed?" So the site credit
+  went into the scene rather than into the download alone. The full
+  list is section 2 of
+  `documentation/HANDOFF_L363_half1_done_half2_after_stage_d_20260928.md`.
+- **The lost card, 2026-09-26.** Studio wrote the card into
+  `gallery/gallery_metadata.json` at 22:03 and Tony's commit at 22:05
+  captured it. At 22:06 the file was rewritten from an older copy
+  without the card, carrying the gallery editor's save signature,
+  though Tony had answered No to its save prompt. The cause was not
+  found; Tony restored the card with Discard changes. Patch 3 closed
+  how it could happen: Save All compares both files on disk with what
+  it loaded and saves nothing if either changed. [tested headless, per
+  that handoff, section 3]
+- **The front door: design session, 2026-09-29** (zero code;
+  `documentation/DESIGN_solar_system_room_front_door_20260929.md`,
+  written with Claude Sonnet 5.5). The room becomes a second way into
+  the gallery beside the card taxonomy, which stays the complete index.
+  Tony's rulings are in that document's sections 3 to 5 and 7 and are
+  not restated here. In short: the scene stays a clean orrery and
+  everything about where to go next lives in the drawer; the room opens
+  on the Sun and Earth with Earth's row highlighted; the drawer opens
+  on ten rows (the Sun, the eight planets, Pluto) with "See more" for
+  the groups; tapping a body selects it and ticking a row draws it;
+  Home follows the last ticked body; groups are rooms with a cloud
+  (L-391); encounters draw the room at their date (L-393); only what
+  JPL Horizons can place is in scope.
+  - **The swap** (design section 7) replaces plan B's last step. The
+    room becomes the default once its nine bodies are in, not waiting
+    for a date picker. In one commit: the Explorer card's live link
+    becomes `interactive.html?exhibit=solar-system-explorer`; the
+    page's fallback key becomes `solar-system` -- it occurs TWICE in
+    `interactive.html`, lines 1091 and 1589 at gallery `f46cf299`
+    [verified @f46cf299], and the swap patch counts two; the README's
+    bare `interactive.html` link is checked. The Explorer stays a card
+    in the `solar_system` door.
+- **Three strands integrated, 2026-09-29.** D20 finishing Stage D,
+  patch 6 finishing Half 1, and the design changing what Half 2 is,
+  were reviewed against both repositories by two sessions in parallel,
+  Claude Fable 5.1 and Claude Opus 5.5, which agreed on the substance.
+  The filed result is
+  `documentation/HANDOFF_L363_three_strands_integrated_20260929.md`; it
+  supersedes the Half 1 handoff's sections 5 and 6.
+- **Tony's ruling on the order, 2026-09-29: option C, "confirmed as
+  recommended."** Half 2 is built through Tony's Mode 5 first; then the
+  Sun's slice (L-322 point 3, L-371, L-386); then the swap, as a small
+  patch of its own. After the Sun, in outline: the orrery's objects
+  rebuilt in the gallery from its own dictionary, then encounters, then
+  shells and slices (L-395). The reason: as the front
+  door, the room sends visitors into the other rooms, so it becomes the
+  default only once every room it leads into prints numbers served from
+  the export. Half 2 and the Sun's slice both write
+  `data/objects_config.json`, so they are never in progress at once.
+  The master plan restamped to v35 at Tony's direction, which also
+  answers the design's question whether it counted as a design build.
+- **Half 2 as listed on 2026-09-26, superseded.** The card is done
+  (`3f7f50ab`). "A link for each body" is replaced by the design's rule
+  that a row's links are read from the exhibits and the card metadata
+  (L-394). The five planets and Pluto remain, inside the design's list,
+  Pluto last. The comets and Voyager 1 are part of the room's future
+  (L-364, L-365).
+- **Tony-action (decide), at Half 2:** whether ticking a drawer row
+  also opens it (design question 13).
+- **Tony-action (decide), at Half 2:** Apophis is drawn today but has
+  no place in the ten-row drawer: one row under "See more" until the
+  near-Earth asteroids round, or out of Half 2 until then.
+- **For Half 2's Mode 5:** on a phone with many bodies ticked, a tap
+  may pick the wrong one (design question 7).
+**Gap (2026-09-26; SUPERSEDED):** Half 2 (above), after L-322 section 6 pushes; then Tony's decision on the default.
+**Gap (2026-09-29):** Half 2 as section 4 of `documentation/HANDOFF_L363_three_strands_integrated_20260929.md` sets it out, from step 1 (step 0 was this entry): a short design round, the five planets and one cache rebuild, the drawer, Tony's Mode 5. The swap after the Sun's slice closes.
+**Ref:** `documentation/HANDOFF_L363_three_strands_integrated_20260929.md`; `documentation/DESIGN_solar_system_room_front_door_20260929.md`; `documentation/HANDOFF_L363_half1_done_half2_after_stage_d_20260928.md`; `documentation/HANDOFF_explorer_symbols_half1_20260926.md` (rev 2); gallery `documentation/patch_solar_system_room_half1_20260926.py` and `patch_L363_2` to `_6`; L-286; L-099; L-322; L-364 to L-367; L-391 to L-395.
 
 #### [L-361] An epoch typed in the page, with no store row (gallery, store)
 <!-- L:361 status:OPEN upd:2026-09-22 section:A flag: rice: -->
@@ -8761,7 +9058,7 @@ Tony's eyes close this one.
 `test_status_lines.py`, `skills/orrery-coding-conventions/SKILL.md`.
 
 #### [L-322] Units declared in the store, and the orrery as producer
-<!-- L:322 status:OPEN upd:2026-09-28 section:A flag: rice:4/5/70/6 -->
+<!-- L:322 status:OPEN upd:2026-09-29 section:A flag: rice:4/5/70/6 -->
 - **Where this came from.** L-305 Gap item 3 asked a narrow question --
   how does `check_store_drift` treat a dimensionless pointer -- and the
   answer opened a wide one. Design session 2026-09-11, zero code. The
@@ -9445,6 +9742,14 @@ passes with the gallery beside it and the gallery maintenance run passes
 Sun row once (L-371), re-home each of its conversion rows to the unit
 its source gives (L-386), give the Sun an explicit slice list in
 `constants_rows.py` (its rows are not all named SUN_), then close it.
+- **Note (2026-09-29, the order):** Tony's ruling C on L-363, "confirmed
+  as recommended": the Solar System room's Half 2 goes through his Mode
+  5 first, then point (3), the Sun's slice, then the room's swap to the
+  default. Half 2 adds object entries to gallery
+  `data/objects_config.json`; the Sun's slice rewrites the Sun's served
+  values in the same file through the mirror; both end in a cache
+  rebuild. So the two are never in progress at once: one is pushed and
+  live-checked before the other starts. Master plan v35.
 **Ref:** L-305, L-306 (approximations are not promoted), L-314,
 `constants_new.py`, `provenance_scanner.py`, `orrery_maintenance_run.py`,
 `test_status_lines.py`, `celestial_objects.py`, `visualization_core.py`,
