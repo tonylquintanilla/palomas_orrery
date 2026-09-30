@@ -236,3 +236,220 @@ closes. The chromosphere is already done, which is a start.
 ---
 
 Session written September 2026 with Anthropic's Claude Opus 5.5.
+
+========================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L322_D_20_L345_conversions_retired_20260928.py
+ok    constants_new.py: edit 1
+ok    constants_new.py: edit 2
+ok    constants_new.py: edit 3
+ok    constants_new.py: edit 4
+ok    constants_new.py: edit 5
+ok    constants_new.py: edit 6
+ok    constants_new.py: edit 7
+ok    constants_new.py: edit 8
+ok    constants_new.py: edit 9
+ok    constants_new.py: edit 10
+ok    constants_new.py: edit 11
+ok    constants_new.py: edit 12
+ok    constants_new.py: edit 13
+ok    constants_new.py: edit 14
+ok    constants_new.py: edit 15
+ok    constants_new.py: edit 16
+ok    constants_rows.py: edit 1
+ok    constants_rows.py: edit 2
+ok    constants_rows.py: edit 3
+ok    constants_rows.py: edit 4
+ok    constants_rows.py: edit 5
+ok    constants_rows.py: edit 6
+ok    export_constants.py: edit 1
+ok    export_constants.py: edit 2
+ok    export_constants.py: edit 3
+ok    export_constants.py: edit 4
+ok    export_constants.py: edit 5
+ok    export_constants.py: edit 6
+ok    test_constants_export.py: edit 1
+ok    test_constants_export.py: edit 2
+ok    test_constants_export.py: edit 3
+ok    test_constants_export.py: edit 4
+ok    test_constants_export.py: edit 5
+ok    test_derived_figures.py: edit 1
+ok    test_derived_figures.py: edit 2
+ok    test_derived_figures.py: edit 3
+ok    test_derived_figures.py: edit 4
+ok    test_derived_figures.py: edit 5
+ok    test_derived_figures.py: edit 6
+ok    test_derived_figures.py: edit 7
+ok    test_derived_figures.py: edit 8
+ok    test_derived_figures.py: edit 9
+ok    test_derived_figures.py: edit 10
+ok    test_derived_figures.py: edit 11
+ok    test_derived_figures.py: edit 12
+ok    test_derived_figures.py: edit 13
+ok    test_derived_figures.py: edit 14
+ok    test_derived_figures.py: edit 15
+ok    test_derived_figures.py: edit 16
+ok    test_derived_figures.py: edit 17
+ok    test_derived_figures.py: edit 18
+ok    test_derived_figures.py: edit 19
+ok    test_derived_figures.py: edit 20
+ok    test_derived_figures.py: edit 21
+ok    test_derived_figures.py: edit 22
+ok    test_derived_figures.py: edit 23
+ok    test_derived_figures.py: edit 24
+ok    shell_configs.py: edit 1
+ok    shell_configs.py: edit 2
+ok    shell_configs.py: edit 3
+ok    shell_configs.py: edit 4
+ok    shell_configs.py: edit 5
+ok    solar_visualization_shells.py: edit 1
+ok    solar_visualization_shells.py: edit 2
+ok    solar_visualization_shells.py: edit 3
+ok    LEDGER_CONSOLIDATED.md: edit 1
+ok    LEDGER_CONSOLIDATED.md: edit 2
+ok    LEDGER_CONSOLIDATED.md: edit 3
+ok    LEDGER_CONSOLIDATED.md: edit 4
+ok    LEDGER_CONSOLIDATED.md: edit 5
+ok    LEDGER_CONSOLIDATED.md: edit 6
+ok    LEDGER_CONSOLIDATED.md: edit 7
+ok    LEDGER_CONSOLIDATED.md: edit 8
+ok    LEDGER_CONSOLIDATED.md: edit 9
+ok    PROJECT_INSTRUCTIONS.md: edit 1
+ok    PROJECT_INSTRUCTIONS.md: edit 2
+ok    PROJECT_INSTRUCTIONS.md: edit 3
+ok    documentation/PROJECT_INSTRUCTIONS_HISTORY.md: edit 1
+ok    documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md: edit 1
+ok    documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md: edit 2
+ok    documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md: edit 3
+ok    documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md: edit 4
+ok    documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md: edit 5
+ok    documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md: edit 6
+ok    documentation/MASTER_PLAN_INTERACTIVE_GALLERY_SUMMARY.md: edit 1
+ok    documentation/MASTER_PLAN_CRITICAL_PATH_SUMMARY.md: edit 1
+ok    skills/ledger-and-session-records/SKILL.md: edit 1
+ok    skills/ledger-and-session-records/SKILL.md: edit 2
+ok    skills/ledger-and-session-records/SKILL.md: edit 3
+ok    skills/interactive-exhibit/SKILL.md: edit 1
+ok    skills/interactive-exhibit/SKILL.md: edit 2
+ok    documentation/HANDOFF_L345_D20_done_20260928.md: new, 9868 bytes
+ok    documentation/project_instructions_v3_73.md: new, 71885 bytes
+PATCH APPLIED: 15 files changed, 2 new.
+
+NEXT STEPS, in this order:
+
+  1. (do) Run the orrery maintenance run (orrery_maintenance_run.py).
+     It rewrites data/constants_export.json (76 rows exported, was 91),
+     the ledger index and the skill manifest. Expect every checker to
+     pass. "Derived figures" should end "... 29 derived row(s) read, 17
+     judged OK -- ... 1 UNMARKED CONVERSION; 15 conversion(s) checked."
+     The one UNMARKED CONVERSION is the Sun's SOLAR_RADIUS_AU, a named
+     gap, not a failure. "Constants export check" should end "... 76
+     rows re-read, 66 not exported, 26 tokens; 160 conversions
+     re-computed, 10 of 10 worked cases hold."
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20260929T033343Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 0.9s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.1s  rewrote PROJECT_INSTRUCTIONS.md
+  Constants export             0.6s  rewrote data/constants_export.json
+  Module atlas                 6.2s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               4.2s  rewrote DATA_INVENTORY.md
+  Exact rows report            1.3s  rewrote EXACT_ROWS_PRINTED.md -- 8 of 21
+                                     exact rows printed at 19 lines (9 orrery, 10
+                                     gallery); 5 drawn only, 0 not followed, 0
+                                     map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.3s  5 derived line(s): 5 changed, 0 added, 0
+                                     removed
+  Constants relations          0.2s  21 of 21 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.8s  No figure count exceeds its inputs: 29
+                                     derived row(s) read, 17 judged OK -- 17 OK,
+                                     12 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 15 conversion(s)
+                                     checked.
+  Constants export check       1.0s  Export matches the store: sha256
+                                     b6d8bfdb21f6 on both sides; 76 rows re-read,
+                                     66 not exported, 26 tokens; 160 conversions
+                                     re-computed, 10 of 10 worked cases hold.
+  Exact rows by the count      1.1s  PASSING -- 8 printed exact rows each state a
+                                     count; 9 orrery lines print through
+                                     exact_text(); 10 gallery lines are served
+                                     the count
+  Dimensions                   1.0s  No unit contradicts its arithmetic: 44
+                                     derived row(s) read -- 32 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 78 status lines in constants_new.py are
+                                     well formed; 61 rows carry none.
+  Row shape                    0.1s  All 142 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.2s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Reset completeness          18.0s  PASS -- all 309 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  1.7s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Worksheet checker            8.1s  76 of 114 routed, 8 clean
+  Worksheet checker tests     14.7s  All 136 checks passed
+  Worksheet key round trip     0.9s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         19.9s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner           9.7s  296 TIER-1 FINDINGS IN THE SCANNED TREE
+
+======================================================================
+  18 of 18 gating checkers passed -- 92.2s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           76 of 114 routed, 8 clean
+    Provenance scanner          296 TIER-1 FINDINGS IN THE SCANNED TREE
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2008 file(s) examined, 11 written, 0 created, 0 removed, 3 rewritten identically
+    written   DATA_INVENTORY.md
+    written   EXACT_ROWS_PRINTED.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROJECT_INSTRUCTIONS.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/constants_export.json
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. (do) Open the orrery and look at Earth's interior (Mode 5). The
+     crust should look the same; its hover should end with the new
+     paragraph about the mean radius, 6,371.000 km. -- correct
+  3. (do) Move this script into documentation/. Commit everything and
+     push.
+  4. (do) Reinstall ledger-and-session-records and interactive-exhibit
+     from skills/ to Settings > Skills.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 

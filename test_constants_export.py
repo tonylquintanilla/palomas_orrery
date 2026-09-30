@@ -52,7 +52,11 @@ WHAT IT CHECKS, each printing what it compared
        CLOSED slice must be exported and carry a status and a figure
        count. Outside a closed slice a missing field is a named gap, not a
        failure. constants_rows.CLOSED_SLICES is empty until the Earth walk
-       finishes, and the output says so.
+       finishes, and the output says so. A CONVERSION (L-345, patch D20)
+       is the one kind of row the gate skips, and only when
+       constants_rows.conversion_problem() finds nothing wrong with it:
+       it is served as its source row's "in", which check 6 re-computes.
+       Each one skipped is named in the output.
 
 WHAT MAKES IT FAIL
 
@@ -86,6 +90,10 @@ Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
 (L-345, patch L322_D_19a: two more pins, the tops of the lower and
 upper atmosphere in Earth radii, 1.0078 at five figures and 1.094 at
 four -- the numbers the gallery's two radius lines will print.)
+Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
+(L-345, patch L322_D_20: check 5 skips a conversion inside a closed
+slice only when constants_rows.conversion_problem() passes it, and names
+each one it skipped.)
 """
 
 import json
@@ -311,8 +319,21 @@ def check(project_dir, closed=None):
     closed = constants_rows.CLOSED_SLICES if closed is None else closed
     facts["closed"] = closed
     gated = 0
+    skipped = []
+    from constants_tokens import TOKENS
+    values = constants_rows.load_values(project_dir)
     for row in rows:
         if not constants_rows.in_closed_slice(row.name, closed):
+            continue
+        if row.conversion_of is not None or row.conversion_error:
+            problem = constants_rows.conversion_problem(row, by_name, values,
+                                                        TOKENS)
+            if problem:
+                failures.append((row.name, "GATE: in closed slice %s, "
+                                 "marked as a conversion; it %s"
+                                 % (row.slice, problem)))
+            else:
+                skipped.append(row.name)
             continue
         gated += 1
         if row.name not in new_rows:
@@ -326,6 +347,7 @@ def check(project_dir, closed=None):
             failures.append((row.name, "GATE: in closed slice %s with no "
                              "# Figures: line" % row.slice))
     facts["gated"] = gated
+    facts["conversions_skipped"] = skipped
     facts["tokens"] = len(fresh["tokens"])
     return failures, facts
 
@@ -357,6 +379,12 @@ def main():
         if facts["closed"]:
             print("5. closed slices: %s; %d row(s) gated"
                   % (", ".join(facts["closed"]), facts["gated"]))
+            skipped = facts.get("conversions_skipped") or []
+            print("   conversions skipped, each checked and served as its "
+                  "source row's \"in\" (%d)%s"
+                  % (len(skipped), ":" if skipped else ""))
+            for line in constants_rows.wrap_names(skipped, indent="     "):
+                print(line)
         else:
             print("5. closed slices: none yet, so no row is gated; the "
                   "gaps are named by export_constants.py")

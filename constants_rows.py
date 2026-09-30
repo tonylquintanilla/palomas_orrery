@@ -45,6 +45,29 @@ WHAT A ROW CARRIES
                            "exact -- prints 3", because measured rows'
                            "# Figures:" lines say "the source prints 1.5"
                            in prose (provenance-discipline 2.20, Rule 7)
+    conversion_of          the source row a CONVERSION names, or None. Read
+                           from "# Conversion: of <ROW> -- ..." (below)
+    conversion_error       why that line cannot be read, or None
+
+A CONVERSION IS A NAME, NOT A ROW (L-345, patch D20)
+
+    A value in another unit is computed, never stored (provenance-
+    discipline 2.22, Rule 3). The orrery's drawing code still uses names
+    such as EARTH_INNER_CORE_RADII, so the name stays in the store, as an
+    expression over ONE row and the rows that define units, marked:
+
+        EARTH_INNER_CORE_RADII = EARTH_INNER_CORE_KM / EARTH_EQUATORIAL_RADIUS_KM
+        # Unit: r_earth
+        # Conversion: of EARTH_INNER_CORE_KM -- computed from that row ...
+
+    It carries no "# Figures:", "# Status:", "# Derived:", "# Source:",
+    "# Read:" or "# Cross-checked:" line, because it states no precision
+    and no provenance of its own: both are its source row's. The export
+    serves it only as that row's "in"; the closed-slice gate skips it
+    once conversion_problem() finds nothing wrong with it; and
+    test_derived_figures.py names every row shaped like a conversion that
+    carries no marker. A display prints one by conversion_text(), which
+    reads the count the source row gives it.
 
     A row is DERIVED when its right-hand side is an expression, or when
     it is on the TRANSITIONAL list below. A row that only carries a
@@ -104,6 +127,12 @@ unit of its dimension from the row's full digits, with the count its
 source row alone gives -- provenance-discipline 2.22, Rule 3. A value
 in another unit is computed, never stored; the export serves these as
 "in", and it is the one implementation of the rule.)
+Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
+(L-345, patch L322_D_20: a conversion is a name, not a row. The
+"# Conversion: of <ROW>" marker is read here as Row.conversion_of;
+conversion_shape() finds every row shaped like one, conversion_problem()
+is the one check of a marked one, and conversion_text() prints one at
+the count its source row gives it.)
 """
 
 import ast
@@ -130,6 +159,13 @@ UNCERTAINTY_FIELD_RE = re.compile(
 # anchored directly after "exact --", so the prose "the source prints
 # 1.5" on a measured row's line is never read as one.
 PRINTS_FIELD_RE = re.compile(r"^exact\s*--\s*prints\s+(\d+)\b")
+# The marker of a conversion (L-345, patch D20): "of", then the one row it
+# is computed from, before any " -- " prose.
+CONVERSION_FIELD_RE = re.compile(r"^of\s+([A-Za-z][A-Za-z0-9_]*)$")
+# Fields a conversion must not carry: each states a precision or a
+# provenance, and a conversion's are its source row's.
+CONVERSION_FORBIDS = ("Figures", "Status", "Derived", "Source", "Read",
+                      "Cross-checked")
 
 
 class Row(object):
@@ -156,6 +192,8 @@ class Row(object):
         self.status = None
         self.derived_text = None
         self.read_text = []
+        self.conversion_of = None
+        self.conversion_error = None
 
     @property
     def slice(self):
@@ -285,6 +323,18 @@ def _fill_fields(row):
                 if row.prints < 1:
                     row.figures_error = ("'prints %s': a print count is at "
                                          "least 1" % match.group(1))
+
+    conversion = row.field("Conversion")
+    if conversion is not None:
+        if row.count("Conversion") > 1:
+            row.conversion_error = "more than one '# Conversion:' line"
+        head = conversion.split("--")[0].strip()
+        match = CONVERSION_FIELD_RE.match(head)
+        if match:
+            row.conversion_of = match.group(1)
+        else:
+            row.conversion_error = ("'# Conversion: %s' does not read "
+                                    "'of <ROW>'" % head)
 
     row.status = row.field("Status")
     row.derived_text = row.field("Derived", loose=True)
@@ -716,3 +766,174 @@ def conversions(row, value, values, units_by_name, tokens):
         entries[token] = {"value": rounded, "figures": figures,
                           "prints": None}
     return entries, None
+
+
+# ---------------------------------------------------------------------
+# A conversion is a name, not a row (L-345, patch D20)
+# ---------------------------------------------------------------------
+
+def defining_rows(tokens):
+    """{row name: token} for every row that defines a unit."""
+    return dict((spec.get("defining_constant"), token)
+                for token, spec in tokens.items()
+                if spec.get("defining_constant"))
+
+
+def _scaled_parts(node, parts):
+    """Split a product or quotient into its factors. True when `node` is
+    only multiplication and division; `parts` then holds each factor as
+    (node, divides)."""
+    if isinstance(node, ast.BinOp) and isinstance(node.op,
+                                                  (ast.Mult, ast.Div)):
+        if not _scaled_parts(node.left, parts):
+            return False
+        right = []
+        if not _scaled_parts(node.right, right):
+            return False
+        divide = isinstance(node.op, ast.Div)
+        parts.extend((n, d != divide) for n, d in right)
+        return True
+    parts.append((node, False))
+    return True
+
+
+def _is_sum_of_names(node, names):
+    if isinstance(node, ast.BinOp) and isinstance(node.op, (ast.Add,
+                                                            ast.Sub)):
+        return (_is_sum_of_names(node.left, names)
+                and _is_sum_of_names(node.right, names))
+    return isinstance(node, ast.Name) and node.id in names
+
+
+def conversion_shape(row, by_name, tokens):
+    """("row", source) when `row` is ONE store row multiplied or divided
+    only by rows that define units; ("sum", None) when it is a sum or
+    difference of store rows scaled that way; (None, None) otherwise.
+
+    Scaled means at least one unit-defining factor and nothing else: no
+    typed number, no other row, no function. Where every row in a "row"
+    shape defines a unit (the Sun's radius in AU is SUN_RADIUS_KM over
+    KM_PER_AU), the source is the first one written. A shape is only a
+    candidate; whether it is really a value in another unit is what the
+    marker states and conversion_problem() checks.
+    """
+    if row.kind != "expression":
+        return None, None
+    defining = defining_rows(tokens)
+    parts = []
+    if not _scaled_parts(row.node, parts) or len(parts) < 2:
+        return None, None
+    names = set(by_name)
+    scales = [n for n, _d in parts
+              if isinstance(n, ast.Name) and n.id in defining]
+    bases = [(n, d) for n, d in parts
+             if not (isinstance(n, ast.Name) and n.id in defining)]
+    if not bases:
+        first, divides = parts[0]
+        return ("row", first.id) if not divides else (None, None)
+    if len(bases) != 1 or not scales or bases[0][1]:
+        return None, None
+    base = bases[0][0]
+    if isinstance(base, ast.Name) and base.id in names:
+        return "row", base.id
+    if _is_sum_of_names(base, names):
+        return "sum", None
+    return None, None
+
+
+def conversion_problem(row, by_name, values, tokens):
+    """Why `row`, marked as a conversion, is not one, or None.
+
+    A conversion names one row, is that row scaled only by rows that
+    define units, is in a unit of the same dimension other than the
+    row's own, equals the row's full digits times the exact factor, and
+    carries no field stating a precision or provenance of its own.
+    """
+    if row.conversion_error:
+        return row.conversion_error
+    if row.conversion_of is None:
+        return None
+    source = by_name.get(row.conversion_of)
+    if source is None:
+        return "names %s, which is not a row" % row.conversion_of
+    if source.conversion_of is not None:
+        return ("names %s, which is itself a conversion; name the row it "
+                "comes from" % source.name)
+    shape, from_row = conversion_shape(row, by_name, tokens)
+    if shape != "row":
+        return ("is not one row scaled only by rows that define units: "
+                "%s" % row.rhs)
+    if from_row != source.name:
+        return ("names %s, but its expression scales %s"
+                % (source.name, from_row))
+    carried = [key for key in CONVERSION_FORBIDS if row.count(key)]
+    if carried:
+        return ("carries # %s: -- a conversion states no precision or "
+                "provenance of its own; its source row's are the ones"
+                % ": and # ".join(carried))
+    if row.unit is None:
+        return "has no # Unit: line"
+    group = conversion_units(source.unit, tokens)
+    if group is None or row.unit not in group:
+        return ("is in %r, which is not a unit %s's %r converts into"
+                % (row.unit, source.name, source.unit))
+    if row.unit == source.unit:
+        return ("is in %r, the unit of %s itself" % (row.unit,
+                                                     source.name))
+    size = {}
+    for token, defining in group.items():
+        size[token] = 1.0 if defining is None else float(values[defining])
+    want = float(values[source.name]) * size[source.unit] / size[row.unit]
+    have = values.get(row.name)
+    if (isinstance(have, bool) or not isinstance(have, (int, float))
+            or not math.isclose(float(have), want, rel_tol=1e-12,
+                                abs_tol=0.0)):
+        return ("is %r, but %s in %s is %r" % (have, source.name,
+                                               row.unit, want))
+    return None
+
+
+def conversion_entry(name, project_dir=None, tokens=None):
+    """The served {"value", "figures", "prints"} of conversion `name`:
+    its source row's value in the conversion's unit, with the count the
+    source row alone gives (provenance-discipline 2.22, Rule 3). Raises
+    ValueError where the name is not a sound conversion.
+    """
+    if tokens is None:
+        from constants_tokens import TOKENS as tokens
+    project_dir = project_dir or os.path.dirname(os.path.abspath(__file__))
+    _text, _rows, by_name = read_store(project_dir)
+    values = load_values(project_dir)
+    row = by_name[name]
+    if row.conversion_of is None:
+        raise ValueError("%s is not marked as a conversion" % name)
+    problem = conversion_problem(row, by_name, values, tokens)
+    if problem:
+        raise ValueError("%s %s" % (name, problem))
+    source = by_name[row.conversion_of]
+    units = dict((n, r.unit) for n, r in by_name.items())
+    entries, problem = conversions(source, values[source.name], values,
+                                   units, tokens)
+    if problem or not entries or row.unit not in entries:
+        raise ValueError("%s: %s gives no value in %r (%s)"
+                         % (name, source.name, row.unit, problem))
+    return entries[row.unit]
+
+
+def conversion_text(name, grouping=False, project_dir=None):
+    """Conversion `name` as text, at the count its source row gives it.
+
+    For an orrery display that prints a value in another unit: the Sun's
+    chromosphere hover prints CHROMOSPHERE_PHYSICAL_RADII as "1.003". The
+    number is the served one, so the orrery and the gallery print the
+    same digits. L-345, patch D20.
+    """
+    entry = conversion_entry(name, project_dir)
+    if entry["figures"] == "exact":
+        if entry["prints"] is None:
+            raise ValueError("%s converts an exact row with no print "
+                             "count" % name)
+        return format_prints(entry["value"], entry["prints"], grouping)
+    if not isinstance(entry["figures"], int):
+        raise ValueError("%s: its source row declares no count" % name)
+    return format_prints(entry["value"], entry["figures"], grouping)

@@ -180,6 +180,9 @@ Module updated: September 27, 2026 with Anthropic's Claude Opus 5.5
 (L-281 as built: Cusdis dropped because it has shut down; the guest book
 kept in the gallery repo, fed by a Google Form and Tony's approval; the
 Daily Run), built on e0a0c7cc.
+Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
+(patch D20: L-345, L-333 and L-362 closed; L-388, L-389 and L-390
+opened; L-322 and L-387 noted), built on 2a7d26b9.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -397,7 +400,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*234 live items; 219 need attention (`!`); 189 RICE-scored; 148 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*234 live items; 219 need attention (`!`); 188 RICE-scored; 151 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -463,7 +466,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-244 | Sweep for replicated conversion factors as a class [Fable candidate] | OPEN | 2.8 | 2026-08-25 |
 | ! | L-323 | A figure in prose needs a home (the Note is not a store) | OPEN | 2.8 | 2026-09-12 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
-| ! | L-333 | The master plan's two companion summaries have not moved since August (planning documents) | OPEN | 2.7 | 2026-09-16 |
 | ! | L-298 | Seeing the gap between what the orrery draws and what an exhibit serves | OPEN | 2.7 | 2026-09-07 |
 | ! | L-248 | The parsec-to-light-year factor is typed 36 times across the star pipeline | OPEN | 2.5 | 2026-08-25 |
 | ! | L-273 | A document indexer, so the README's document table stops being hand-maintained | OPEN | 2.5 | 2026-09-01 |
@@ -500,7 +502,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-319 | Focusing a smaller shell cuts larger lit shells flat at the frame's box | OPEN | 0.7 | 2026-09-10 |
 | ! | L-343 | A figure count can describe the arithmetic and not the claim (store) | OPEN | -- | 2026-09-22 |
 | ! | L-344 | A stated uncertainty computed from a rounded intermediate (store) | OPEN | -- | 2026-09-22 |
-| ! | L-345 | Unit-conversion rows multiply by shell: rows per shell, or the export converts? (store, decide before the next slice) | OPEN | -- | 2026-09-28 |
 | ! | L-346 | A derived row with empty inputs is invisible to a walk by inputs (checks) | OPEN | -- | 2026-09-22 |
 | ! | L-347 | The page re-derives the bow shock standoff to draw its shape (gallery) | OPEN | -- | 2026-09-22 |
 | ! | L-348 | Derived rows outside Earth were counted, not propagated (store) | OPEN | -- | 2026-09-22 |
@@ -517,7 +518,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-359 | Served text beside a served number can go stale where no tool may edit it (gallery) | OPEN | -- | 2026-09-22 |
 | ! | L-360 | The hover budget measures recorded payloads, so it cannot see a line added by newly served data (checks) | OPEN | -- | 2026-09-28 |
 | ! | L-361 | An epoch typed in the page, with no store row (gallery, store) | OPEN | -- | 2026-09-22 |
-| ! | L-362 | The master plan's two summaries are a month behind the plan (documentation) | OPEN | -- | 2026-09-22 |
 | ! | L-363 | The Solar System room: the bodies as symbols, before their shells (gallery, exhibits) | OPEN | -- | 2026-09-26 |
 | ! | L-364 | A comet's own trust window can exclude today while the served window passes the scene (gallery, trust) | OPEN | -- | 2026-09-26 |
 | ! | L-365 | The assembler leaves out a body it cannot draw, without a warning (gallery, assembler) | OPEN | -- | 2026-09-26 |
@@ -542,6 +542,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-385 | The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye) | OPEN | -- | 2026-09-28 |
 | ! | L-386 | The Sun's conversion rows, not yet exported (store, the Sun's slice) | OPEN | -- | 2026-09-28 |
 | ! | L-387 | The orrery's hovers print the conversion names by their own formats, not by the computed count (orrery) | OPEN | -- | 2026-09-28 |
+| ! | L-388 | The gallery's export pull can print success when it could not fetch, and the mirror then writes from the old export (gallery, tooling) | OPEN | -- | 2026-09-28 |
+| ! | L-389 | Earth's atmosphere shells are measured from the equatorial radius, and the crust now sits at the mean radius (store, Tony's eye) | OPEN | -- | 2026-09-28 |
+| ! | L-390 | provenance-discipline does not yet name the conversion marker or say the widening is built (skills) | OPEN | -- | 2026-09-28 |
 
 ### B. Pending Action (Tony-side)
 
@@ -795,6 +798,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-109 | Fable 5 adversarial review remediation (builder Pass 1+2) | DONE | 2.8 | 2026-07-10 |
 |  | L-112 | Gallery builder Pass 5: two-reviewer Pass-2 remediation | DONE | 2.8 | 2026-07-10 |
 |  | L-110 | GPT competitive cross-check remediation (builder Pass 4) | DONE | 2.7 | 2026-07-10 |
+|  | L-333 | The master plan's two companion summaries have not moved since August (planning documents) | DONE | 2.7 | 2026-09-28 |
 |  | L-116 | New skill: gallery-cache-builder (Move 2 of the skills update) | DONE | 2.5 | 2026-07-12 |
 |  | L-255 | Skill bumps of 2026-08-26 -- handle reserved, block never written | DONE | 2.4 | 2026-08-28 |
 |  | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | DONE | 2.2 | 2026-07-15 |
@@ -840,6 +844,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-055 | O14/O15 verdicts arrive with the v4 gate (comet legend churn; sodium particle count) | DONE | -- | 2026-06-17 |
 |  | L-057 | Animation auto-scale-vs-shells + Phase 3 tier decision -- CLOSED | DONE | -- | 2026-06-11 |
 |  | L-223 | A paste into the ledger is an unverified transfer | DONE | -- | 2026-08-21 |
+|  | L-345 | Unit-conversion rows multiply by shell: rows per shell, or the export converts? (store, DONE 2026-09-28) | DONE | -- | 2026-09-28 |
+|  | L-362 | The master plan's two summaries are a month behind the plan (documentation) | DONE | -- | 2026-09-28 |
 |  | L-384 | The scaling rule stops short of a single measured value scaled by an exact row (skills, store) | DONE | -- | 2026-09-28 |
 
 ### W.Done -- Web Publication track, closed items
@@ -870,6 +876,71 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-390] provenance-discipline does not yet name the conversion marker or say the widening is built (skills)
+<!-- L:390 status:OPEN upd:2026-09-28 section:A flag: rice: -->
+- **Found 2026-09-28 building patch D20.** D20 made a new comment key in
+  `constants_new.py`, `# Conversion: of <ROW>`, and a rule for it: a
+  conversion carries no `# Figures:`, `# Status:`, `# Derived:`,
+  `# Source:`, `# Read:` or `# Cross-checked:` line, and is one row
+  scaled only by rows that define units. The rule lives in
+  `constants_rows.py` (`conversion_problem()`) and its docstring, and in
+  `test_derived_figures.py`. provenance-discipline 2.22 says a
+  conversion name "states no precision of its own" but names no marker,
+  and its Rule 8 still says the widening "is built with the patch that
+  retires the store's conversion rows (L-345, D20)", in the future.
+- It is method, so it belongs in the skill (Method Belongs to the
+  Skill). It was not bumped at D20 because the handoff scoped that
+  patch to two bumps, and adding a third would have expanded scope
+  without Tony's word.
+**Gap:** at provenance-discipline's next bump: Rule 1 gains the
+`# Conversion:` form beside the seven `# Figures:` forms, and Rule 8
+says the widening and the conversion check are built (orrery patch D20)
+and names `UNMARKED CONVERSION` and `CONVERSION WRONG`.
+**Ref:** `constants_rows.py`; `test_derived_figures.py`;
+`skills/provenance-discipline/SKILL.md` Rules 1, 3 and 8; L-345.
+
+#### [L-389] Earth's atmosphere shells are measured from the equatorial radius, and the crust now sits at the mean radius (store, Tony's eye)
+<!-- L:389 status:OPEN upd:2026-09-28 section:A flag: rice: -->
+- **Found 2026-09-28 building patch D20.** The tops of the lower and
+  upper atmosphere are `EARTH_STRATOPAUSE_RADIUS_KM` and
+  `EARTH_THERMOPAUSE_RADIUS_KM`: the EQUATORIAL radius plus an altitude
+  (D19a). Since D20 the crust is drawn at the MEAN radius, about 7 km
+  lower. So the drawn gap between the crust and each atmosphere top is
+  about 7 km more than the altitude. [computed at 2a7d26b9 plus D20]
+- **Why it may be right as it is.** An altitude is measured above sea
+  level where you stand, and at the equator sea level IS the equatorial
+  radius. 7 km is invisible at any zoom, as the crust's own move was.
+- **Tony-action (decide):** leave the altitudes on the equatorial
+  radius, or measure them from the mean radius as the crust now is.
+  Not on the critical path; recorded so it is not rediscovered.
+**Gap:** the decision above.
+**Ref:** `constants_new.py` (the two atmosphere rows); `shell_configs.py`
+(the crust); L-345.
+
+#### [L-388] The gallery's export pull can print success when it could not fetch, and the mirror then writes from the old export (gallery, tooling)
+<!-- L:388 status:OPEN upd:2026-09-28 section:A flag: rice: -->
+- **Found 2026-09-28** building the L-345 gallery patch. In a sandbox
+  that could not reach GitHub, the gallery maintenance run's "Constants
+  export pull" reported PASS "no change", with an N-A inside it, and
+  "Config mirror" then rewrote `data/objects_config.json` from the
+  older `data/constants_export.json` still on disk: 36 fields written
+  backwards and 5 links refused. [measured in the sandbox at gallery
+  `2df02f3b`]
+- **It has not happened on Tony's machine**, which reaches GitHub. The
+  gallery patch shipped its own export and `.sha` so it could not
+  happen that time.
+- **The class:** a generator whose failure prints as success, followed
+  by a writer that trusts it. A Check That Cannot Fail Is Not Passing
+  (protocol, Part 3): the pull's success line does not prove it
+  compared anything.
+**Gap:** the pull fails, by name, when it cannot fetch, and the mirror
+does not run after a pull that did not complete. Show it failing with
+the network off before trusting it.
+**Ref:** gallery `tools/pull_constants_export.py`,
+`tools/mirror_constants.py`, `gallery_maintenance_run.py`; L-345;
+`documentation/HANDOFF_L345_gallery_done_D20_next_20260928.md`
+section 5.
+
 #### [L-387] The orrery's hovers print the conversion names by their own formats, not by the computed count (orrery)
 <!-- L:387 status:OPEN upd:2026-09-28 section:A flag: rice: -->
 - **Recorded, not built.** From the Claude Fable 5.1 ruling of
@@ -882,7 +953,25 @@ as an archive of the prioritization thinking -- no cleanup on close.
   the orrery's hovers are held byte for byte. They do not print by the
   computed count until the orrery prints conversions through
   `constants_rows.conversions()` as the export does.
-**Gap:** The orrery prints each converted value through `constants_rows.conversions()`; with L-352, since both are the orrery's display formatting.
+- **Corrected 2026-09-28 at patch D20, measured at `2a7d26b9`.** The
+  first bullet above says these hovers print conversion names "by the
+  count their rows declare, through `figures_of()` and `_declared()`".
+  Only one did: the Sun's chromosphere, `CHROMOSPHERE_PHYSICAL_RADII`.
+  It now prints through `constants_rows.conversion_text()`, new at D20,
+  which reads the count the source row gives it (still 1.003). Every
+  other orrery line that prints a conversion name uses a width chosen
+  on the line, and D20 held them byte for byte:
+  `shell_configs.py` -- the LEO edges (`.2f`) and the Hill sphere
+  (`.0f`, twice); `earth_visualization_shells.py` -- the LEO edges
+  (`.2f`), geostationary (`.2f`) and the Hill sphere (`.0f`, twice);
+  `solar_visualization_shells.py` -- the chromosphere's AU (`.5f`).
+  The LEO edges read "1.03 to 1.31 Earth radii", shorter than the
+  gallery's served count: same value, a width chosen on the line.
+- **Re-homed from L-345 at its close:** the ORRERY's magnetosphere hover
+  gives its distances in Earth radii only, with no kilometres or AU. With
+  conversions computed, those lines can print `conversion_text()` or the
+  export's value for the unit, when this item is built.
+**Gap:** The orrery prints each converted value through `constants_rows.conversion_text()` (or `conversions()` for a row with no conversion name); with L-352, since both are the orrery's display formatting.
 **Ref:** `shell_configs.py`; `earth_visualization_shells.py`; `constants_rows.py`; L-345; L-352.
 
 #### [L-386] The Sun's conversion rows, not yet exported (store, the Sun's slice)
@@ -1226,20 +1315,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 **Gap:** Half 2 (above), after L-322 section 6 pushes; then Tony's decision on the default.
 **Ref:** `documentation/HANDOFF_explorer_symbols_half1_20260926.md` (rev 2); gallery `documentation/patch_solar_system_room_half1_20260926.py`; L-286; L-099; L-322; L-364 to L-367.
 
-#### [L-362] The master plan's two summaries are a month behind the plan (documentation)
-<!-- L:362 status:OPEN upd:2026-09-22 section:A flag: rice: -->
-- **Found 2026-09-22** while restamping the plan to v33.
-  `documentation/MASTER_PLAN_INTERACTIVE_GALLERY_SUMMARY.md` and
-  `documentation/MASTER_PLAN_CRITICAL_PATH_SUMMARY.md` both read "Where we
-  are 8/19/2026" or earlier, while the plan is at v33. The skill says
-  the plan is traced at three levels of zoom -- the plan, its summary,
-  and the critical path -- and restamps once per design build; the two
-  smaller levels have not moved since August 19.
-- **Tony-action (decide):** whether the summaries restamp with the plan
-  from now on, or are retired as dated snapshots with a line saying so.
-**Gap:** The decision above; then either a restamp of both or a retirement line in each.
-**Ref:** `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`; the two summaries; skills/ledger-and-session-records/SKILL.md (The Document Stack).
-
 #### [L-361] An epoch typed in the page, with no store row (gallery, store)
 <!-- L:361 status:OPEN upd:2026-09-22 section:A flag: rice: -->
 - **Recorded, not built.** A class found while building L-322 Stage C2
@@ -1491,61 +1566,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 **Gap:** An orrery-side check, or a ruling that the gallery's is enough.
 **Ref:** L-322; gallery `tools/check_constants_links.py::read_walk`; manifest sec. 11.
 
-#### [L-345] Unit-conversion rows multiply by shell: rows per shell, or the export converts? (store, decide before the next slice)
-<!-- L:345 status:OPEN upd:2026-09-28 section:A flag: rice: -->
-- **DECIDED 2026-09-28, and being built.** Tony: "follow the single
-  source of truth principle. use the single best source for the store
-  with provenance. compute all conversions instead of duplicating. we
-  should build this architecture now. add to the skill if
-  clarification is needed." The count rule followed from Claude Fable
-  5.1's review, which Tony confirmed as the skill's method: a
-  conversion takes its count from its source row alone. Records:
-  `documentation/DESIGN_L345_conversions_computed_20260928.md` and
-  `documentation/RULING_L345_conversion_count_rule_20260928.md`; the
-  ruling replaces the design's section 4 and withdraws its section 7
-  third bullet.
-- **Patch D19 (orrery):** `constants_rows.conversions()`, the export's
-  `"in"` field (schema 6), `test_constants_export.py` check 6,
-  provenance-discipline 2.22, interactive-exhibit 1.5, protocol v3.72.
-- **Still to build:** D20 retires the store's 13 conversion rows and
-  widens the figures checker; then one gallery patch prints from
-  `"in"`. The bow shock's hover then reads 86,000 km (0.00058 AU).
-- **The order, Tony 2026-09-28 ("confirmed as recommended"):** patch
-  D19a, then the gallery patch, then D20. D19a only ADDS
-  `EARTH_STRATOPAUSE_RADIUS_KM` (6428 km) and
-  `EARTH_THERMOPAUSE_RADIUS_KM` (6980 km), so the gallery can move all
-  eleven of its conversion pointers in one patch and every visible
-  change reaches one phone check. Measured before building, the gallery
-  patch moves six hover lines beyond the handoff's seven: the
-  magnetotail's two km and AU figures, the inner belt's AU, the LEO
-  edges' radii, and the two atmosphere radii (1.0078 and 1.094). All
-  six are the 2.22 rule; the list is
-  `documentation/PREBUILD_L345_gallery_hover_changes_20260928.md`.
-- **One finding of the ruling not taken, with the reason.** It said
-  `EARTH_LEO_INNER_KM` and `EARTH_LEO_OUTER_KM` should be exact, because
-  the equatorial radius is exact. The row says otherwise:
-  `EARTH_EQUATORIAL_RADIUS_KM` states 8 figures and an uncertainty of
-  0.0001 km [verified @714293a9]. Tony's ruling of 2026-09-27 made the
-  UNIT exact -- one Earth radius is 1 Earth radius by definition -- not
-  the kilometre value. So the LEO edges' 8 figures stand.
-- **Recorded, not built.** A class found while building L-322 Stage C2
-  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
-  Braid: it waits until the artifact on the critical path reaches it.
-- C2 added a kilometre row and an AU row for each standoff, so the page
-  never converts a rounded number. Every other shell that prints km and
-  AU from a rounded value needs the same. Two ways: a row per conversion
-  per shell, or the export converting each row itself from full digits.
-- **Tony-action (decide), before the next slice:** which of the two.
-  Not decided at C2, on purpose. (Finding 9.)
-- **Also in this class (2026-09-28):** the ORRERY's magnetosphere hover
-  gives its distances in Earth radii only, with no kilometres or AU, in
-  its old lines and the ones D8 added. Each would need a row with a
-  declared count, as the standoffs got at C2, or the export converting.
-  Found 2026-09-25.
-**Gap:** The decision above, then the next slice builds to it.
-**Gap (2026-09-28):** D19a, the gallery patch, then D20; closes when the gallery prints from `"in"` and D20 has landed.
-**Ref:** L-322; `export_constants.py`; `constants_new.py`; manifest sec. 11; L-386; L-387.
-
 #### [L-344] A stated uncertainty computed from a rounded intermediate (store)
 <!-- L:344 status:OPEN upd:2026-09-22 section:A flag: rice: -->
 - **Recorded, not built.** A class found while building L-322 Stage C2
@@ -1742,47 +1762,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
   and the served marker angles), L-291 (the Earth room), interactive-exhibit
   skill (what an exhibit may render and where its numbers come from);
   gallery `gallery/feature_renderers.js` (`infoMarker`), `interactive.html`.
-
-#### [L-333] The master plan's two companion summaries have not moved since August (planning documents)
-<!-- L:333 status:OPEN upd:2026-09-16 section:A flag: rice:2/3/90/2 -->
-- **Found 2026-09-16 in the ledger review.** The plan itself is current
-  (v32, 2026-09-16). Its two companions are not:
-  `documentation/MASTER_PLAN_CRITICAL_PATH_SUMMARY.md` is stamped
-  August 29, 2026 (orrery `688561ef`, gallery `ac9a5c7b`) and says step
-  three is done "for one body"; `MASTER_PLAN_INTERACTIVE_GALLERY_SUMMARY.md`
-  is stamped August 19 (orrery `9ffb9b40`). Since then: Earth shipped
-  as the second room (L-291, 2026-09-10), its magnetosphere landed
-  (L-305), the phone chrome settled (L-316, L-318), units became a
-  field (L-322) and the orrery's hovers joined the braid (L-321).
-  [verified @ `d99d8db1`]
-- **Why it matters.** The ledger skill names the three documents as one
-  plan at three zooms; a reader who opens the critical-path companion
-  for "how far to the end" gets an answer eighteen days old that
-  undercounts the bodies through step three. It is The Correction Does
-  Not Travel on the plan's own companions -- the same file was the
-  founding case for that rule (L-226).
-- **What it is not.** The plan restamps once per DESIGN BUILD (L-296),
-  and that cadence is not staleness. But the companions restamped with
-  v19 and v20 and not with v21 through v32, so the rule that keeps the
-  plan honest has no counterpart for them. Proposed (Claude): the
-  companions restamp when the plan does, in the same patch, and the
-  ledger skill's Document Stack paragraph says so -- a method question,
-  which is the skill's to absorb. Both files keep overtaken claims in
-  place with a bracketed note rather than deleting them, by their own
-  headers; a restamp adds, it does not rewrite.
-- **Note:** RICE 2/3/90/2 -> 2.7 is Claude's proposed score. Not on the
-  critical path; a documentation session, or the next design build.
-**Gap:** restamp both companions to the plan's v32 state, or rule that
-one of them is retired (the critical-path companion answers a question
-the plan's Section 5a now answers itself); then the skill line.
-  **Tony-action (decide):** restamp both, or retire one.
-**Ref:** `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md` (v32),
-`documentation/MASTER_PLAN_CRITICAL_PATH_SUMMARY.md`,
-`documentation/MASTER_PLAN_INTERACTIVE_GALLERY_SUMMARY.md`;
-`skills/ledger-and-session-records/SKILL.md` (The Document Stack);
-L-221 (the plan as sequencing authority), L-296 (restamp per design
-build), L-226 (The Correction Does Not Travel, whose founding case was
-the critical-path companion).
 
 #### [L-331] Visitor-facing text: stale info text, four Sun hovers outside the i-panel move, and hovers in plain language (exhibits)
 <!-- L:331 status:OPEN upd:2026-09-16 section:A flag: rice:3/3/90/2 -->
@@ -9448,12 +9427,24 @@ provenance-discipline went 2.18 to 2.21 across these sessions.
   ledger". Filed together on 2026-09-28: new rows L-368 to L-385; added
   lines on L-243, L-345, L-350, L-351, L-352 and L-360; L-311, L-325 and
   L-342 closed.
-**Gap (2026-09-28):** Stage D's last piece is one gallery patch. It
+**Gap (2026-09-28; SUPERSEDED by the Gap after D20 below):** Stage D's last piece is one gallery patch. It
 carries the unrun gallery patch 4's work (the Earth room prints exact
 rows by their served count) and the Sun room's (the chromosphere and the
 photosphere radii). Finished when the orrery's "Exact rows by the count"
 passes with the gallery beside it and the gallery maintenance run passes
 17 of 17. Then points (2) and (3) of the Gap above.
+- **Note (2026-09-28, patch D20):** Stage D's finishing condition was
+  met at orrery `2a7d26b9` and gallery `52da593c`: "Exact rows by the
+  count" passed with the gallery beside the orrery, and the gallery run
+  passed (19 of 19 by then). Point (2) of the 2026-09-22 Gap is done:
+  L-345 was decided and built, and closed at D20. `closed_slices` is
+  still `["EARTH"]`; the fifteen conversion names D20 made are skipped
+  by the closed-slice gate only after `conversion_problem()` passes each
+  one, and each is named in the output.
+**Gap (2026-09-28, after D20):** point (3), the Sun's slice -- walk each
+Sun row once (L-371), re-home each of its conversion rows to the unit
+its source gives (L-386), give the Sun an explicit slice list in
+`constants_rows.py` (its rows are not all named SUN_), then close it.
 **Ref:** L-305, L-306 (approximations are not promoted), L-314,
 `constants_new.py`, `provenance_scanner.py`, `orrery_maintenance_run.py`,
 `test_status_lines.py`, `celestial_objects.py`, `visualization_core.py`,
@@ -9637,6 +9628,163 @@ skills/gallery-assembler/SKILL.md, skills/interactive-exhibit/SKILL.md.
 ## PENDING ACTION (Tony-side)
 
 ## C. RECONCILED LEDGER -- DONE (closed; for the record, do not re-do)
+
+#### [L-345] Unit-conversion rows multiply by shell: rows per shell, or the export converts? (store, DONE 2026-09-28)
+<!-- L:345 status:DONE upd:2026-09-28 section:C flag: rice: -->
+- **DECIDED 2026-09-28, and being built.** Tony: "follow the single
+  source of truth principle. use the single best source for the store
+  with provenance. compute all conversions instead of duplicating. we
+  should build this architecture now. add to the skill if
+  clarification is needed." The count rule followed from Claude Fable
+  5.1's review, which Tony confirmed as the skill's method: a
+  conversion takes its count from its source row alone. Records:
+  `documentation/DESIGN_L345_conversions_computed_20260928.md` and
+  `documentation/RULING_L345_conversion_count_rule_20260928.md`; the
+  ruling replaces the design's section 4 and withdraws its section 7
+  third bullet.
+- **Patch D19 (orrery):** `constants_rows.conversions()`, the export's
+  `"in"` field (schema 6), `test_constants_export.py` check 6,
+  provenance-discipline 2.22, interactive-exhibit 1.5, protocol v3.72.
+- **Still to build:** D20 retires the store's 13 conversion rows and
+  widens the figures checker; then one gallery patch prints from
+  `"in"`. The bow shock's hover then reads 86,000 km (0.00058 AU).
+- **The order, Tony 2026-09-28 ("confirmed as recommended"):** patch
+  D19a, then the gallery patch, then D20. D19a only ADDS
+  `EARTH_STRATOPAUSE_RADIUS_KM` (6428 km) and
+  `EARTH_THERMOPAUSE_RADIUS_KM` (6980 km), so the gallery can move all
+  eleven of its conversion pointers in one patch and every visible
+  change reaches one phone check. Measured before building, the gallery
+  patch moves six hover lines beyond the handoff's seven: the
+  magnetotail's two km and AU figures, the inner belt's AU, the LEO
+  edges' radii, and the two atmosphere radii (1.0078 and 1.094). All
+  six are the 2.22 rule; the list is
+  `documentation/PREBUILD_L345_gallery_hover_changes_20260928.md`.
+- **One finding of the ruling not taken, with the reason.** It said
+  `EARTH_LEO_INNER_KM` and `EARTH_LEO_OUTER_KM` should be exact, because
+  the equatorial radius is exact. The row says otherwise:
+  `EARTH_EQUATORIAL_RADIUS_KM` states 8 figures and an uncertainty of
+  0.0001 km [verified @714293a9]. Tony's ruling of 2026-09-27 made the
+  UNIT exact -- one Earth radius is 1 Earth radius by definition -- not
+  the kilometre value. So the LEO edges' 8 figures stand.
+- **Recorded, not built.** A class found while building L-322 Stage C2
+  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
+  Braid: it waits until the artifact on the critical path reaches it.
+- C2 added a kilometre row and an AU row for each standoff, so the page
+  never converts a rounded number. Every other shell that prints km and
+  AU from a rounded value needs the same. Two ways: a row per conversion
+  per shell, or the export converting each row itself from full digits.
+- **Tony-action (decide), before the next slice:** which of the two.
+  Not decided at C2, on purpose. (Finding 9.)
+- **Also in this class (2026-09-28):** the ORRERY's magnetosphere hover
+  gives its distances in Earth radii only, with no kilometres or AU, in
+  its old lines and the ones D8 added. Each would need a row with a
+  declared count, as the standoffs got at C2, or the export converting.
+  Found 2026-09-25.
+- **CLOSED 2026-09-28 by orrery patch D20.** The gallery prints every
+  kilometre and AU line from `"in"` (gallery `52da593c`), and
+  `constants_new.py` holds no conversion rows: the fifteen names that
+  were another row in a different unit are marked
+  `# Conversion: of <ROW>`, carry no count, status or source of their
+  own, and are listed under not_exported with the row they are served
+  through. Every stored value is unchanged to the last bit.
+  `test_derived_figures.py` names any row shaped like a conversion that
+  is not marked -- a FAIL inside a closed slice, a named gap outside
+  one -- and it was shown failing on the real store before it was
+  trusted (one marker removed, one pointed at the wrong row). The only
+  such row left is the Sun's `SOLAR_RADIUS_AU`, on L-386. The figures
+  checker also carries provenance-discipline 2.22's widening: a single
+  measured row scaled by an exact number keeps its place, and a place
+  is snapped once. No real row's verdict changed. [verified in the
+  sandbox on 2a7d26b9 plus D20; render-gated on Tony's run]
+- **The crust ruling, completed at D20** (Tony, 2026-09-28: "let's just
+  do it now"). Earth's crust is drawn at the mean radius,
+  `EARTH_MEAN_RADIUS_KM` over the equatorial radius, in the orrery
+  (`shell_configs.py`) as in the gallery since `52da593c`: a sphere at
+  the mean radius stays nearer sea level everywhere, and PREM's surface
+  is the 6,371 km sphere. The Earth radius as a UNIT stays equatorial
+  (Prsa et al. 2016, AJ 152:41, on IAU 2015 Resolution B3). The orrery
+  hover carries the words Tony approved on 2026-09-28 and prints
+  6,371.000 km at the row's seven figures. On the live drawing path,
+  only the crust's hover and size changed across all 124 shells.
+- **Loose ends re-homed** (A Closing Item Re-homes Its Loose Ends):
+  the Sun's conversion rows to L-386; the orrery's own hovers, which
+  still print converted values by a width chosen on the line, and the
+  orrery magnetosphere hover's distances in Earth radii only, to L-387;
+  the class a sandbox exposed in the gallery's export pull, to L-388.
+  The design's section 7 third bullet (the magnetopause radii count)
+  was withdrawn by the ruling, as recorded above.
+**Gap:** none. (Was: D19a, the gallery patch, then D20.)
+**Ref:** L-322; `export_constants.py`; `constants_new.py`; `constants_rows.py`; `test_derived_figures.py`; manifest sec. 11; L-386; L-387; L-388; `documentation/HANDOFF_L345_D20_done_20260928.md`.
+
+#### [L-333] The master plan's two companion summaries have not moved since August (planning documents)
+<!-- L:333 status:DONE upd:2026-09-28 section:C flag: rice:2/3/90/2 -->
+- **Found 2026-09-16 in the ledger review.** The plan itself is current
+  (v32, 2026-09-16). Its two companions are not:
+  `documentation/MASTER_PLAN_CRITICAL_PATH_SUMMARY.md` is stamped
+  August 29, 2026 (orrery `688561ef`, gallery `ac9a5c7b`) and says step
+  three is done "for one body"; `MASTER_PLAN_INTERACTIVE_GALLERY_SUMMARY.md`
+  is stamped August 19 (orrery `9ffb9b40`). Since then: Earth shipped
+  as the second room (L-291, 2026-09-10), its magnetosphere landed
+  (L-305), the phone chrome settled (L-316, L-318), units became a
+  field (L-322) and the orrery's hovers joined the braid (L-321).
+  [verified @ `d99d8db1`]
+- **Why it matters.** The ledger skill names the three documents as one
+  plan at three zooms; a reader who opens the critical-path companion
+  for "how far to the end" gets an answer eighteen days old that
+  undercounts the bodies through step three. It is The Correction Does
+  Not Travel on the plan's own companions -- the same file was the
+  founding case for that rule (L-226).
+- **What it is not.** The plan restamps once per DESIGN BUILD (L-296),
+  and that cadence is not staleness. But the companions restamped with
+  v19 and v20 and not with v21 through v32, so the rule that keeps the
+  plan honest has no counterpart for them. Proposed (Claude): the
+  companions restamp when the plan does, in the same patch, and the
+  ledger skill's Document Stack paragraph says so -- a method question,
+  which is the skill's to absorb. Both files keep overtaken claims in
+  place with a bracketed note rather than deleting them, by their own
+  headers; a restamp adds, it does not rewrite.
+- **Note:** RICE 2/3/90/2 -> 2.7 is Claude's proposed score. Not on the
+  critical path; a documentation session, or the next design build.
+- **CLOSED 2026-09-28 with the master plan's v34** (orrery patch D20),
+  on Tony's ruling of 2026-09-28: "i think we should integrate these
+  reports. the summary as an executive summary. the body should keep
+  its critical path section." The plan now opens with an executive
+  summary, rewritten at every restamp, and keeps the critical path as
+  Section 5a. Both companion files carry a retirement line and are
+  otherwise left as dated records. ledger-and-session-records 1.12
+  writes the rule into The Document Stack. L-333 and L-362 recorded
+  the same problem and close together.
+**Gap:** none.
+**Ref:** `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md` (v34; v32 when opened),
+`documentation/MASTER_PLAN_CRITICAL_PATH_SUMMARY.md`,
+`documentation/MASTER_PLAN_INTERACTIVE_GALLERY_SUMMARY.md`;
+`skills/ledger-and-session-records/SKILL.md` (The Document Stack);
+L-221 (the plan as sequencing authority), L-296 (restamp per design
+build), L-226 (The Correction Does Not Travel, whose founding case was
+the critical-path companion).
+
+#### [L-362] The master plan's two summaries are a month behind the plan (documentation)
+<!-- L:362 status:DONE upd:2026-09-28 section:C flag: rice: -->
+- **Found 2026-09-22** while restamping the plan to v33.
+  `documentation/MASTER_PLAN_INTERACTIVE_GALLERY_SUMMARY.md` and
+  `documentation/MASTER_PLAN_CRITICAL_PATH_SUMMARY.md` both read "Where we
+  are 8/19/2026" or earlier, while the plan is at v33. The skill says
+  the plan is traced at three levels of zoom -- the plan, its summary,
+  and the critical path -- and restamps once per design build; the two
+  smaller levels have not moved since August 19.
+- **Tony-action (decide):** whether the summaries restamp with the plan
+  from now on, or are retired as dated snapshots with a line saying so.
+- **CLOSED 2026-09-28 with the master plan's v34** (orrery patch D20),
+  on Tony's ruling of 2026-09-28: "i think we should integrate these
+  reports. the summary as an executive summary. the body should keep
+  its critical path section." The plan now opens with an executive
+  summary, rewritten at every restamp, and keeps the critical path as
+  Section 5a. Both companion files carry a retirement line and are
+  otherwise left as dated records. ledger-and-session-records 1.12
+  writes the rule into The Document Stack. L-333 and L-362 recorded
+  the same problem and close together.
+**Gap:** none.
+**Ref:** `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`; the two summaries; skills/ledger-and-session-records/SKILL.md (The Document Stack).
 
 #### [L-336] The served cache went out of step with the config, and no check read the file the browser reads (gallery)
 <!-- L:336 status:DONE upd:2026-09-17 section:C flag: rice:4/4/95/2 -->

@@ -1,6 +1,69 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** v33 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
+## Executive summary -- v34, September 28, 2026
+
+Built on orrery `2a7d26b9fc200a1ceae6afb3af541e5d60c33f54` at
+https://github.com/tonylquintanilla/palomas_orrery and gallery
+`a484172fc17ec73ed801fbeab8eae2ebf0c945e1` at
+https://github.com/tonylquintanilla/tonyquintanilla.github.io, read live
+on 2026-09-28. This summary is rewritten at every restamp. It replaces
+`MASTER_PLAN_INTERACTIVE_GALLERY_SUMMARY.md`, and Section 5a of this
+document replaces `MASTER_PLAN_CRITICAL_PATH_SUMMARY.md`; both are kept
+as dated records (Tony's ruling of 2026-09-28, L-333 and L-362).
+
+**What this plan is for.** It is the roadmap for the interactive
+gallery at palomasorrery.com. The end goal is the orrery's own Python,
+running in the browser, serving interactive rooms that anyone can open
+without installing anything (Section 5a, The end goal). The ledger says
+what is done; this plan says what order the work goes in.
+
+**Where we are.**
+
+- Two rooms are live and complete in `interactive.html`: the Sun,
+  since 2026-08-29, and Earth, since 2026-09-10, each accepted on
+  Tony's phone and desktop check (Mode 5).
+- A third, the Solar System room, draws the bodies as symbols on their
+  orbits (L-363). Its first half has shipped; its second half waits on
+  its own item.
+- The numbers reach the gallery through one route. The orrery exports
+  them from `constants_new.py` into `constants_export.json`, with each
+  number's unit and figure count; the gallery pulls that file and writes
+  each number into `objects_config.json` from it. Nobody types a
+  constant into the gallery.
+- Earth is the store's first CLOSED SLICE (2026-09-22). Every number
+  its room prints has a unit, a status, a figure count, and a record of
+  who opened its source. A missing field on an Earth row fails the
+  maintenance run.
+- L-322 Stage D finished on 2026-09-28. Earth's pole is worked out from
+  Horizons for the date shown; an exact number prints the digits it was
+  defined with; and a value in another unit is computed from its one
+  source row instead of being stored twice (L-345). Earth's crust is
+  now drawn at the mean radius in both the orrery and the gallery.
+
+**What comes next, in order.**
+
+1. **The Sun's slice.** Its room is live, so its rows are walked next,
+   the way Earth's were: each row gets its unit, status and count, and
+   each value the Sun's store keeps in a second unit becomes a
+   conversion of its source row (L-371, L-386).
+2. **Jupiter and Saturn, Artifact 2.** Their rings and belts are drawn,
+   the numbers those rooms print are walked, and the artifact is locked
+   and shipped (segments 1, 4 and 5 of Section 5a).
+3. **The Solar System room's second half** (L-363), beside those.
+
+**Open decisions for Tony.** The orrery's Auto view of the Sun opens
+about 31 times wider since Stage D (L-385).
+
+**How to read the rest.** Section 5a is the critical path: the end
+goal, the five segments, the order they are worked in, and a dated
+subsection for each design build. Sections 1 to 4 are the architecture.
+Section 6 is the history of every ruling. Section 7 lists the open
+decisions. The long status block below is the running record the
+restamps have kept since July; this summary is the short form of it.
+
+---
+
+**Status:** v34 -- Phase 2 (solar system assembler) BUILD UNDERWAY;
 **the first feature-bearing exhibit is LIVE AND COMPLETE.** The Sun
 ships at `palomasorrery.com/interactive.html?exhibit=sun`, unlinked
 from the landing page, Mode 5 accepted 2026-08-29 (gallery
@@ -56,8 +119,8 @@ F1a (M2, trust/served_window) fully closed July 21-22: L-149 built, tested
 offline (138/138) AND live -- Layer 2 Steps 1-5 all passed (five dry-runs,
 --first-build, --nightly, resolver date-picker, fetch-cost note). L-118
 closed in the same session.
-**Next: the order is in Section 5a's newest subsection, 2026-09-17 to
-22.** The five-step order dated 2026-09-03 -- the Sun room's phone
+**Next: the order is in the executive summary above and in Section
+5a's newest subsection, 2026-09-23 to 28.** The five-step order dated 2026-09-03 -- the Sun room's phone
 controls, the lobby with its rooms and editor (L-282, L-286, L-287;
 the hall, L-280, was retired 2026-09-04), Earth into the assembler, the
 transport (segment 2) built alongside Earth, then Jupiter and Saturn --
@@ -98,7 +161,16 @@ text here read "enabled with a known open issue", contradicting its own
 header forty lines below. L-151 (gallery-assembler skill) DONE
 2026-07-27; L-150 (multi-orbit binaries) still decided, not yet built.)
 **Date begun:** July 3, 2026
-**Last updated:** September 22, 2026 (v33: a DESIGN BUILD, L-322 Stage
+**Last updated:** September 28, 2026 (v34: a DESIGN BUILD, L-345,
+which finished L-322 Stage D. A value in another unit is computed from
+its one source row and never stored as a second row: the orrery
+exports each row's value in every length unit as "in" (patch D19),
+the gallery prints from it (gallery `52da593c`), and the store's
+fifteen conversion rows became names computed from their rows (patch
+D20). Earth's crust is drawn at the mean radius. The plan gains an
+executive summary and absorbs its two companions, which are retired;
+Section 5a gains the 2026-09-23 to 28 subsection; with Anthropic's
+Claude Opus 5.5. v33, September 22, 2026: a DESIGN BUILD, L-322 Stage
 C2, in two pushes and two models. Earth's magnetosphere rows got their
 figure counts and reads, the two standoffs became arithmetic again with
 Shue's uncertainties propagated (10.3 and 13.5 Earth radii), the dipole
@@ -125,20 +197,7 @@ line, which said v30 under a v31 stamp, now matches. The 2026-09-12
 subsection went in without a stamp; the 2026-09-13/14 sessions (L-305
 item 7) are recorded in the ledger and in
 `HANDOFF_L305_item7_built_20260914.md`, not in Section 5a. Section 5a
-gains the 2026-09-15/16 subsection; with Anthropic's Claude Opus 5.
-v31, September 11, 2026: a DESIGN SESSION, zero code.
-Both magnetosphere papers read from the PDFs and L-305's Gap items 1 and
-2 closed; every computed figure in that item reproduced from the
-published equations. Gap item 3 asked how the drift check treats a
-dimensionless pointer and opened an architecture: units become a
-DECLARED FIELD in the store, the suffix reader is retired, the orrery
-EXPORTS and the gallery stops parsing orrery source, and the join moves
-to the assembler (L-322, nine rulings). `constants_new.py` becomes
-physical values only. A gallery patch extending the suffix table was
-written, tested and HELD UNRUN. One review round with Claude Fable 5.1;
-all nine rulings held and it caught a two-hop error the record had
-collapsed into one. Section 5a gains the 2026-09-11 subsection; with
-Anthropic's Claude Opus 5.)
+gains the 2026-09-15/16 subsection; with Anthropic's Claude Opus 5.)
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
 Claude Opus 5, Claude Opus 5.5, Claude Fable 5, Claude Fable 5.1,
 Claude Sonnet 5, GPT
@@ -889,6 +948,11 @@ This is continuous work, not a gated phase.
 ---
 
 ## Section 5a -- The Critical Path
+
+**Since v34 (2026-09-28) this section is the critical path's only
+home.** `MASTER_PLAN_CRITICAL_PATH_SUMMARY.md`, its readable companion
+since August 16, is retired as a dated record (L-333, L-362); the
+executive summary at the top of this document gives its short form.
 
 **Rewritten 2026-08-16 at `227f5b2`.** The previous 5a was an execution
 map with model assignments and a dependency chain. It had drifted: it
@@ -1959,6 +2023,61 @@ row per shell, or the export converting from full digits. Then the Sun's
 slice, since its room is live, and after it the order of 2026-09-03
 resumes with Jupiter and Saturn. The classes C2 found are L-343 to
 L-361, recorded and not chased.
+
+### 2026-09-23 to 28 -- Stage D closes, and a value in another unit stops being a row
+
+**L-322 Stage D is finished.** It was the last stage of making the
+orrery the producer of the numbers Earth's room prints. Recorded in
+`documentation/HANDOFF_L322_D_print_counts_orrery_done_20260928.md` and
+the handoffs before it:
+
+- Earth's pole moved into the store and is worked out from Horizons for
+  the date the room shows, with the tilt of that date in the hover.
+- An exact number -- a definition or a declared drawing choice --
+  prints the digits it was defined with, not a width chosen on the
+  line. The declared solar wind pressure prints 2 nPa, not 2.0.
+- The finishing check, "Exact rows by the count", passes with the
+  gallery beside the orrery.
+
+**Then the question held since Stage C2 was decided (L-345).** Tony,
+2026-09-28: "follow the single source of truth principle ... compute
+all conversions instead of duplicating." Each quantity is one row, in
+the unit its best source gives it. Its value in any other unit is
+worked out from that row's full digits and rounded once, with a figure
+count taken from the source row alone (provenance-discipline 2.22). It
+was built in four patches, all on 2026-09-28:
+
+- orrery D19: the export serves every length row's value in each
+  length unit, as `"in"`;
+- orrery D19a: kilometre rows for the tops of the lower and upper
+  atmosphere, so the gallery had rows to point at;
+- one gallery patch: the page prints every kilometre and AU line from
+  `"in"` and never converts a served number itself;
+- orrery D20: the fifteen rows that were another row in a different
+  unit became names computed from that row, marked `# Conversion:`, and
+  a check fails on any new one that is not marked.
+
+Fourteen hover lines changed for visitors, each to the count its source
+supports (the list is
+`documentation/PREBUILD_L345_gallery_hover_changes_20260928.md`): the bow shock's 86,200 km became 86,000 km, the
+chromosphere's radius became 1.003 solar radii.
+
+**Earth's crust is drawn at the mean radius** (Tony, 2026-09-28), the
+sphere the interior layers are measured against, in both the orrery and
+the gallery. The Earth radius as a unit stays the equatorial one, as
+the IAU recommends. The difference is about 7 km, invisible at any
+zoom; the hover says why.
+
+**The build's lesson: a pull that cannot fail.** In a sandbox that
+could not reach GitHub, the gallery's export pull reported "no change"
+and the mirror then rewrote the config from an older export on disk.
+It has not happened on Tony's machine. Recorded as its own class on
+the ledger, under A Check That Cannot Fail Is Not Passing.
+
+**Next.** The Sun's slice (L-371, L-386), then Jupiter and Saturn as
+Artifact 2 -- the order in the executive summary. The orrery's own
+hovers still print most converted values by a width chosen on the line
+(L-352, L-387); that class waits for the orrery's display work.
 
 ### What this section deliberately does not carry
 

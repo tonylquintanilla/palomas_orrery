@@ -1752,6 +1752,62 @@ resident.
 (Moved down from the resident protocol on 2026-09-28 when
 v3.72 made a fourth entry.)
 
+v3.70 (September 27, 2026): No rule changed in this document. ONE
+skill bump, provenance-discipline 2.19 -> 2.20 (L-322). WHERE A
+TRAILING ".0" COMES FROM IS WRITTEN DOWN.
+
+WHAT PROMPTED IT. The session that opened the Stage D print-count
+build, manifest section 6, settled the print counts of the seven
+printed exact rows from what each row's own comment says it was chosen
+with: the declared solar wind pressure prints "2 nPa" because Shue's
+paper uses 2 nPa, not "2.0". Tony confirmed that, and asked that the
+claim behind it be checked and put in the skill: that the trailing
+zero in a value like 2.0 comes from Python, not from significant
+figures.
+
+WHAT THE CHECK FOUND. Checked by running Python 3 and Node. The claim
+holds, by three routes rather than one. Python needs a decimal point to
+make a number a float, so rows are typed 200.0, and the stored float
+keeps no record of how it was typed. Python's division always returns
+a float, so 4 / 2 is 2.0. And a float printed without a format,
+including by json.dumps into constants_export.json, always shows ".0".
+The gallery's "2.0 nPa" turned out to be a fourth case: the page's own
+toFixed(1), applied to a value JavaScript had read as plain 2.
+
+WHAT THE SKILL NOW SAYS. Rule 2 gains one paragraph naming the three
+routes and what follows from them: a row's figure count is never read
+from its literal, its printed form or its exported form, which is why
+the count and an exact row's print count are both fields. A choice
+that really was made to a trailing zero says so on its # Declared:
+line.
+
+RULE 7'S EXACT ROW MATCHES THE CODE THAT BUILDS IT, orrery patch D15,
+built the same session. The print count is read only directly after
+"exact --". A declared construction prints the digits of the value its
+rule gives, so the outer belt's midpoint of 4 and 5 prints 4.5. The
+checker refuses a count with more digits than the number has, one too
+small to write it in full, and anything but 1 on a zero. And
+exact_rows_report.py --check fails the maintenance run while a printed
+exact row is not printed by its count. The second refusal and the
+declared construction's count were Claude's additions while building
+D15; Tony approved both on 2026-09-27, on the condition that the code,
+the provenance rules and the significant-figure rules all agree.
+
+THE OBLIGATION TRAVELS, as it always does. This session loaded 2.19,
+and a reinstall cannot be verified from inside the session that makes
+it. The next session confirms its loaded copy reads 2.20 before any
+provenance or constants_new.py work. That session is gallery patch 4,
+the gallery half of section 6.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.67 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-09-28 when
+v3.73 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

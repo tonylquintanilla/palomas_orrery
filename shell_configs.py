@@ -57,6 +57,14 @@ Module updated: September 27, 2026 with Anthropic's Claude Opus 5.5 (L-322
     the LEO tooltip's two altitudes, which are exact rows, print through
     constants_rows.exact_text() at the print count their rows state,
     where they used ":g" and ",.0f". The text does not change.)
+Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5 (L-345,
+    patch D20: Earth's crust draws at the mean radius, EARTH_MEAN_RADIUS_KM
+    over the equatorial radius, where it drew at 1.0 -- Tony's ruling of
+    2026-09-28, matching the gallery. Its hover says so in the words Tony
+    approved, printing 6,371.000 km by the row's count, and credits the
+    NASA fact sheet's volumetric mean radius instead of IERS's equatorial
+    one. The August 26 entry above, "the crust is deliberately untouched",
+    describes that day.)
 """
 
 # Phase C4: Import hover text strings from body shell modules.
@@ -110,9 +118,11 @@ from solar_visualization_shells import (
 # earth_visualization_shells.py does. The tooltip field is dead data (no
 # consumer), kept in agreement with the live hover because a migration
 # would promote it.
-from constants_rows import figures_of, exact_text
+from constants_rows import figures_of, exact_text, format_prints
 from constants_new import (
     EARTH_INNER_CORE_RADII, EARTH_OUTER_CORE_RADII,
+    # L-345, patch D20: the crust draws at the mean radius.
+    EARTH_MEAN_RADIUS_KM,
     EARTH_LOWER_MANTLE_RADII, EARTH_UPPER_MANTLE_RADII,
     # L-291: the Earth tooltips below quote the store, not retyped numbers.
     EARTH_EQUATORIAL_RADIUS_KM,
@@ -1431,14 +1441,19 @@ SHELL_CONFIGS = {
 
         'crust': {
             'name': 'Crust',
-            'radius_fraction': 1.0,
+            # L-345, patch D20 (Tony's ruling, 2026-09-28): drawn at the
+            # mean radius, the sphere PREM's interior layers are measured
+            # against, where it was 1.0, the equatorial radius. Computed
+            # from the two rows, not typed.
+            'radius_fraction': EARTH_MEAN_RADIUS_KM / EARTH_EQUATORIAL_RADIUS_KM,
             'color': 'rgb(70, 120, 160)',
             'opacity': 1.0,
             'geometry_type': 'mesh3d',
             'mesh_resolution': 24,
-            # L-249: the upper mantle draws at 0.9950555 of the surface, so
-            # its cross and this one land 0.49% apart -- about 31 km, two
-            # pixels, one visible marker. Stepping this one 10 degrees puts
+            # L-249: the upper mantle draws 24.4 km below the crust (31 km
+            # until patch D20 moved the crust to the mean radius), so their
+            # crosses land two pixels apart, one visible marker. Stepping
+            # this one 10 degrees puts
             # them ~0.18 R apart. DECLARED drawing parameter (L-240): a
             # choice about the picture, not a measurement, so it stays here
             # and not in constants_new.py. Tony's Mode 5 call, 2026-08-26:
@@ -1451,7 +1466,12 @@ SHELL_CONFIGS = {
                 "oceanic crust (5-10 km thick) made mostly of basalt, and continental crust (30-50 km thick)<br>"
                 "made primarily of granite. The crust contains all known life and the accessible portion<br>"
                 "of Earth's geological resources. Surface temperatures range from -80 degC to 60 degC (-112 degF to 140 degF).<br><br>"
-                "Source (radius): IERS Conventions (2010), TN36 Table 1.1, equatorial radius; "
+                f"Drawn at Earth's mean radius, {format_prints(EARTH_MEAN_RADIUS_KM, figures_of('EARTH_MEAN_RADIUS_KM'), grouping=True)} km: the radius of a ball with the same<br>"
+                "volume as the smooth, slightly flattened shape fitted to sea level. The Earth radius<br>"
+                "used as a unit here is the equatorial radius, as the International Astronomical Union<br>"
+                "recommends, so the crust is drawn a little inside one Earth radius. The ground itself<br>"
+                "rises and falls from this by kilometres.<br><br>"
+                "Source (radius): NASA Planetary Fact Sheet, Earth, volumetric mean radius; "
                 "crust thicknesses: USGS, Interior of the Earth."
             ),
             'tooltip': (
@@ -1459,7 +1479,12 @@ SHELL_CONFIGS = {
                 "oceanic crust (5-10 km thick) made mostly of basalt, and continental crust (30-50 km thick)\n"
                 "made primarily of granite. The crust contains all known life and the accessible portion\n"
                 "of Earth's geological resources. Surface temperatures range from -80 degC to 60 degC (-112 degF to 140 degF).\n\n"
-                "Source (radius): IERS Conventions (2010), TN36 Table 1.1, equatorial radius; "
+                f"Drawn at Earth's mean radius, {format_prints(EARTH_MEAN_RADIUS_KM, figures_of('EARTH_MEAN_RADIUS_KM'), grouping=True)} km: the radius of a ball with the same\n"
+                "volume as the smooth, slightly flattened shape fitted to sea level. The Earth radius\n"
+                "used as a unit here is the equatorial radius, as the International Astronomical Union\n"
+                "recommends, so the crust is drawn a little inside one Earth radius. The ground itself\n"
+                "rises and falls from this by kilometres.\n\n"
+                "Source (radius): NASA Planetary Fact Sheet, Earth, volumetric mean radius; "
                 "crust thicknesses: USGS, Interior of the Earth."
             ),
         },

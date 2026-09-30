@@ -1,3 +1,8 @@
+> **Retired 2026-09-28, with the master plan's v34 (L-333, L-362;
+> Tony's ruling of 2026-09-28).** `MASTER_PLAN_INTERACTIVE_GALLERY.md`
+> now does this document's job: its Section 5a is the critical path and answers "how far to the end". What
+> follows is kept as a dated record and is not updated.
+
 # The critical path -- where we are and what stands between here and the end
 
 **Updated August 29, 2026.** Orrery at

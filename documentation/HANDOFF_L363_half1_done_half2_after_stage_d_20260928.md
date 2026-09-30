@@ -48,7 +48,7 @@ programmer, and for the session that builds Half 2.
 
 ## 1. What Half 1 built, and how each piece was verified
 
-Five gallery patches, each run by Tony, followed by the gallery
+Six gallery patches, each run by Tony, followed by the gallery
 maintenance run, pushed, and checked on his phone. The page, Studio's
 converter and the editor at gallery `a484172f` all carry their changes
 [verified @a484172f].
@@ -60,6 +60,7 @@ converter and the editor at gallery `a484172f` all carry their changes
 | `patch_L363_3_date_line_and_editor_save_check_20260926.py` | The room draws **now**, the minute it is opened, and says so under its title. The gallery editor refuses to save over a file that changed on disk since it loaded it, and names the file it opened. |
 | `patch_L363_4_date_line_every_room_20260927.py` | Every room has the line, shortened ("27 Sep 2026, 13:44 UTC"). The Earth room draws now too. The Sun room's line reads "Long-term averages . no date" (with a middle dot). Each room's note explains the line. |
 | `patch_L363_5_short_scene_titles_20260927.py` | The title inside each scene drops "Paloma's Orrery --". On an upright phone the title and line centre between the zoom buttons and the arrow cross, and move below the cross only if they would still touch a button. Pushed at `a484172f`. Tony's phone: all three rooms correct. |
+| `patch_L363_6_site_credit_and_camera_20260928.py` | (1) Every relayout the rooms and the Explorer make carries the live camera. Tony found the + and - buttons snapping the view back to its opening orientation after a finger turn; framing from the drawer, turning the phone, and the title and credit placement did the same. The rule was already in interactive-exhibit (the touch path) and the drawer label followed it; the zoom code never had. (2) A small grey link, palomasorrery.com, just under the grid chip in every room, drawn as part of the scene so the camera button's picture carries it. Built on `63e657f`; **not yet run** when this handoff was written -- check whether it landed. |
 
 The first four scripts are in the gallery's `documentation/`. Patch 5's
 script was committed in the gallery ROOT at `a484172f`; it moves to
@@ -107,7 +108,9 @@ L-363 to L-367 at orrery `0e3d05f`.
   "Paloma's Orrery" back into the download alone; Tony, 2026-09-28:
   "why would the camera button snapshot something that is not
   displayed?" So it is not added. A credit on a download would first
-  have to be something the scene shows.
+  have to be something the scene shows. Tony then ruled exactly that:
+  a link to palomasorrery.com under the grid chip, in the scene, in
+  every room (patch 6).
 
 ## 3. The lost card, and what now prevents it
 
@@ -224,7 +227,9 @@ note at its next bump (section 8).
 **Ledger, owed by the next session** (one update to L-363, plus notes on
 two existing rows; no new classes):
 
-- L-363 gains: patches 2 to 5 and what each did; the card and where it
+- L-363 gains: patches 2 to 6 and what each did (patch 6 includes the
+  snap-back fix: a rule the skill already had, missed by one caller --
+  worth a line in the skill's touch-path section naming every caller); the card and where it
   sits; the rulings in section 2; the lost card and the editor's save
   check (section 3).
   Its Gap becomes section 5 and 6 of this handoff.

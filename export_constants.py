@@ -86,6 +86,11 @@ served. It goes in not_exported with its reason. So does a row whose
 token is RETIRED (today, "dimensionless"; see constants_tokens.py). The
 list shrinks as each body's slice is walked.
 
+A CONVERSION is not exported either (L-345, patch D20). It is a name the
+orrery's drawing code keeps for a row's value in another unit, marked
+"# Conversion: of <ROW>" in constants_new.py; its value is served as
+that row's "in", so its not_exported reason names the row.
+
 WHAT MAKES IT FAIL (exit 1, and NOTHING is written)
 ---------------------------------------------------
     - a "# Unit:" token that is neither defined nor retired
@@ -94,6 +99,9 @@ WHAT MAKES IT FAIL (exit 1, and NOTHING is written)
       than the digits the number has, too small to write it in full, or
       anything but 1 on a zero
     - a token whose defining_constant is not a row in the store
+    - a row marked "# Conversion:" that constants_rows.conversion_problem()
+      refuses: it names no row, is not that row scaled only by rows that
+      define units, carries a field of its own, or has the wrong value
     - a conversion constants_rows.conversions() cannot make: a dimension
       without exactly one base token, a defining row whose unit is not
       the base, or a value smaller than its own uncertainty in a unit
@@ -144,6 +152,11 @@ Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
 value in every unit of its dimension, computed from full digits by
 constants_rows.conversions(). Tony's ruling of 2026-09-28: a value in
 another unit is computed, never stored. SCHEMA moves to 6.)
+Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
+(L-345, patch L322_D_20: a row marked "# Conversion: of <ROW>" is not
+exported; not_exported names the row it is served through, and a marker
+constants_rows.conversion_problem() refuses stops the export. The schema
+does not change: the file's fields are the same.)
 """
 
 import json
@@ -235,6 +248,19 @@ def build_export(project_dir, tokens=None, retired=None):
     for row in rows:
         if row.unit_error:
             failures.append((row.name, row.unit_error))
+            continue
+        if row.conversion_of is not None or row.conversion_error:
+            # L-345, patch D20: a conversion is served as its source
+            # row's "in", never as a row of its own.
+            problem = constants_rows.conversion_problem(row, by_name, values,
+                                                        tokens)
+            if problem:
+                failures.append((row.name, "marked as a conversion; it "
+                                 + problem))
+            else:
+                not_exported[row.name] = (
+                    "a conversion of %s, served as that row's \"in\""
+                    % row.conversion_of)
             continue
         if row.figures_error:
             failures.append((row.name, row.figures_error))
@@ -356,7 +382,10 @@ def main():
     rows = export["rows"]
     skipped = export["not_exported"]
     no_unit = [n for n, why in skipped.items() if why == "no # Unit: line"]
-    retired = [n for n in skipped if n not in no_unit]
+    converted_names = [n for n, why in skipped.items()
+                       if why.startswith("a conversion of ")]
+    retired = [n for n in skipped
+               if n not in no_unit and n not in converted_names]
     counted = {}
     for name in rows:
         figures = rows[name]["figures"]
@@ -374,6 +403,11 @@ def main():
         print(line)
     print("")
     print("Not exported, %d row(s):" % len(skipped))
+    if converted_names:
+        print("  conversions (%d) -- each served as its source row's \"in\":"
+              % len(converted_names))
+        for line in constants_rows.wrap_names(converted_names):
+            print(line)
     if retired:
         print("  retired unit token (%d) -- replaced at the slice visit:"
               % len(retired))

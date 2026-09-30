@@ -1,3 +1,8 @@
+> **Retired 2026-09-28, with the master plan's v34 (L-333, L-362;
+> Tony's ruling of 2026-09-28).** `MASTER_PLAN_INTERACTIVE_GALLERY.md`
+> now does this document's job: its executive summary answers "what is being tracked right now". What
+> follows is kept as a dated record and is not updated.
+
 Where we are 8/19/2026
 
 Updated 2026-08-19 after the August 18 pilot session. Built on

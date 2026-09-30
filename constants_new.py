@@ -128,6 +128,14 @@ EARTH_THERMOPAUSE_RADIUS_KM (6980 km), each Earth's radius plus the
 altitude. The export works out their values in Earth radii and AU, so
 the gallery can point at them; the two _RADII rows become conversions
 of them at D20.)
+Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
+(L-345, patch L322_D_20: the fifteen names that were a row's value in
+another unit stop being rows. Each keeps its name, its unit and its
+expression -- rewritten over its one source row where it was a sum or
+chained through another conversion -- and carries "# Conversion: of
+<ROW>" instead of a count, a status and a source of its own. Every value
+is unchanged to the last bit. The frame note and EARTH_MEAN_RADIUS_KM's
+note now say the crust is drawn at the mean radius.)
 """
 
 import math
@@ -222,14 +230,18 @@ EARTH_POLAR_RADIUS_KM = 6356.752
 #
 # FRAME NOTE, and it is load-bearing. PREM's radii and the seismological
 # depth scale are both referenced to a MEAN Earth of 6371.0 km. The
-# orrery draws Earth's shells against EARTH_EQUATORIAL_RADIUS_KM
-# (6378.1366), because that is what CENTER_BODY_RADII['Earth'] hands to
-# build_sphere_shell(). Dividing a sourced radius by the equatorial
-# radius therefore draws each boundary at its correct ABSOLUTE radius,
-# and its depth below the DRAWN surface comes out about 7 km greater
-# than the textbook depth. That 7 km is the equatorial-versus-mean
-# difference, not an error in either number. Radius is what PREM
-# measures; depth is derived from it. Radius wins.
+# orrery scales Earth's shells by EARTH_EQUATORIAL_RADIUS_KM (6378.1366),
+# because that is what CENTER_BODY_RADII['Earth'] hands to
+# build_sphere_shell(), and the equatorial radius is the Earth radius
+# used as a unit. Dividing a sourced radius by the equatorial radius
+# therefore draws each boundary at its correct ABSOLUTE radius. Since
+# patch D20 (L-345, Tony's ruling of 2026-09-28) the crust is drawn at
+# the mean radius as well, EARTH_MEAN_RADIUS_KM over the equatorial
+# radius, so a boundary's depth below the DRAWN surface is its textbook
+# depth. Until then the crust was drawn at 1.0, the equatorial radius,
+# and every depth below it came out about 7 km greater -- the
+# equatorial-versus-mean difference, not an error in either number.
+# Radius is what PREM measures; depth is derived from it. Radius wins.
 #
 # PRECISION. The derivations below are held at FULL float precision in
 # code -- rounding a derived constant would introduce error and would
@@ -258,8 +270,10 @@ EARTH_MEAN_RADIUS_KM = 6371.0
 # Source: NASA Planetary Fact Sheet, Earth -- volumetric mean radius
 # Ref: https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html
 # Note: the reference sphere that PREM and the seismological depth scale
-# Note+: are quoted against. NOT the radius the orrery draws to -- see
-# Note+: the frame note above.
+# Note+: are quoted against, and since patch D20 the radius the orrery
+# Note+: draws Earth's crust at (shell_configs.py; Tony's ruling of
+# Note+: 2026-09-28) -- see the frame note above. The Earth radius used as
+# Note+: a unit stays the equatorial one.
 
 EARTH_INNER_CORE_KM = 1221.5
 # Unit: km
@@ -275,10 +289,10 @@ EARTH_INNER_CORE_KM = 1221.5
 # Note+: drawn (Tony's account, 2026-08-26). It drew 1211.8 km.
 EARTH_INNER_CORE_RADII = EARTH_INNER_CORE_KM / EARTH_EQUATORIAL_RADIUS_KM
 # Unit: r_earth
-# Status: derived -- inherits EARTH_INNER_CORE_KM, EARTH_EQUATORIAL_RADIUS_KM
-# Figures: 5 -- set by EARTH_INNER_CORE_KM (1221.5, 5)
-# Derived: 1221.5 / 6378.1366 = 0.19151 -- 5 significant figures, set
-# Derived+: by the numerator. Report no more than that.
+# Conversion: of EARTH_INNER_CORE_KM -- computed from that row, which carries the
+# Conversion+: source and the count; the export serves this value as
+# Conversion+: that row's "in" (provenance-discipline 2.22, Rule 3;
+# Conversion+: L-345, patch D20).
 
 EARTH_OUTER_CORE_KM = 3480.0
 # Unit: km
@@ -303,10 +317,10 @@ EARTH_OUTER_CORE_KM = 3480.0
 # Note+: The 5 km difference is below the drawn resolution either way.
 EARTH_OUTER_CORE_RADII = EARTH_OUTER_CORE_KM / EARTH_EQUATORIAL_RADIUS_KM
 # Unit: r_earth
-# Status: derived -- inherits EARTH_OUTER_CORE_KM, EARTH_EQUATORIAL_RADIUS_KM
-# Figures: 5 -- set by EARTH_OUTER_CORE_KM (3480.0, 5)
-# Derived: 3480 / 6378.1366 = 0.5456 -- 4 significant figures, set by
-# Derived+: the numerator. Report no more than that.
+# Conversion: of EARTH_OUTER_CORE_KM -- computed from that row, which carries the
+# Conversion+: source and the count; the export serves this value as
+# Conversion+: that row's "in" (provenance-discipline 2.22, Rule 3;
+# Conversion+: L-345, patch D20).
 
 EARTH_D660_DEPTH_KM = 660.0
 # Unit: km
@@ -351,12 +365,11 @@ EARTH_LOWER_MANTLE_KM = EARTH_MEAN_RADIUS_KM - EARTH_D660_DEPTH_KM
 # Status: derived -- inherits EARTH_MEAN_RADIUS_KM, EARTH_D660_DEPTH_KM
 # Figures: 3 -- 5710, the tens place, set by EARTH_D660_DEPTH_KM.
 EARTH_LOWER_MANTLE_RADII = EARTH_LOWER_MANTLE_KM / EARTH_EQUATORIAL_RADIUS_KM
-# Derived: 5710 / 6378.1366 = 0.895 -- 3 significant figures, set by
-# Derived+: the numerator. Report no more than that. Corrected 2026-09-19 with
-# Derived+: EARTH_LOWER_MANTLE_KM above.
 # Unit: r_earth
-# Status: derived -- inherits EARTH_LOWER_MANTLE_KM, EARTH_EQUATORIAL_RADIUS_KM
-# Figures: 3 -- set by EARTH_LOWER_MANTLE_KM
+# Conversion: of EARTH_LOWER_MANTLE_KM -- computed from that row, which carries the
+# Conversion+: source and the count; the export serves this value as
+# Conversion+: that row's "in" (provenance-discipline 2.22, Rule 3;
+# Conversion+: L-345, patch D20).
 
 EARTH_UPPER_MANTLE_KM = 6346.6
 # Unit: km
@@ -375,10 +388,10 @@ EARTH_UPPER_MANTLE_KM = 6346.6
 # Note+: precision the boundary does not have.
 EARTH_UPPER_MANTLE_RADII = EARTH_UPPER_MANTLE_KM / EARTH_EQUATORIAL_RADIUS_KM
 # Unit: r_earth
-# Status: derived -- inherits EARTH_UPPER_MANTLE_KM, EARTH_EQUATORIAL_RADIUS_KM
-# Figures: 5 -- set by EARTH_UPPER_MANTLE_KM (6346.6, 5)
-# Derived: 6346.6 / 6378.1366 = 0.99506 -- 5 significant figures, set by
-# Derived+: the numerator. Report no more than that.
+# Conversion: of EARTH_UPPER_MANTLE_KM -- computed from that row, which carries the
+# Conversion+: source and the count; the export serves this value as
+# Conversion+: that row's "in" (provenance-discipline 2.22, Rule 3;
+# Conversion+: L-345, patch D20).
 
 # --- Earth exhibit block (L-291, 2026-09-07) -------------------------------
 # The values below are what the Earth exhibit (interactive.html?exhibit=earth)
@@ -433,10 +446,10 @@ EARTH_GEOSTATIONARY_RADIUS_KM = (EARTH_GM_KM3_S2 / EARTH_ROTATION_RATE_RAD_S ** 
 # Note+: the equatorial radius this file draws to, it is 6.611.
 EARTH_GEOSTATIONARY_RADII = EARTH_GEOSTATIONARY_RADIUS_KM / EARTH_EQUATORIAL_RADIUS_KM
 # Unit: r_earth
-# Status: derived -- inherits EARTH_GEOSTATIONARY_RADIUS_KM,
-# Status+: EARTH_EQUATORIAL_RADIUS_KM
-# Figures: 7 -- set by EARTH_GEOSTATIONARY_RADIUS_KM
-# Derived: 42164.17 / 6378.1366 = 6.6107 -- report no more than five figures.
+# Conversion: of EARTH_GEOSTATIONARY_RADIUS_KM -- computed from that row, which carries the
+# Conversion+: source and the count; the export serves this value as
+# Conversion+: that row's "in" (provenance-discipline 2.22, Rule 3;
+# Conversion+: L-345, patch D20).
 
 # --- Earth's rotation axis and period (L-322 Stage D, 2026-09-23) ------------
 # Three kinds of number live here, and none of them is Earth's tilt.
@@ -657,15 +670,17 @@ EARTH_LEO_OUTER_KM = EARTH_EQUATORIAL_RADIUS_KM + EARTH_LEO_UPPER_ALTITUDE_KM
 # Note+: drawn against. Seven km, below the drawn resolution, but the
 # Note+: hover text quotes those numbers. Follow-on with the migration.
 EARTH_LEO_INNER_RADII = EARTH_LEO_INNER_KM / EARTH_EQUATORIAL_RADIUS_KM
-# Derived: 6578.1366 / 6378.1366 = 1.0313571
 # Unit: r_earth
-# Status: derived -- inherits EARTH_LEO_INNER_KM, EARTH_EQUATORIAL_RADIUS_KM
-# Figures: 8 -- set by EARTH_LEO_INNER_KM
+# Conversion: of EARTH_LEO_INNER_KM -- computed from that row, which carries the
+# Conversion+: source and the count; the export serves this value as
+# Conversion+: that row's "in" (provenance-discipline 2.22, Rule 3;
+# Conversion+: L-345, patch D20).
 EARTH_LEO_OUTER_RADII = EARTH_LEO_OUTER_KM / EARTH_EQUATORIAL_RADIUS_KM
 # Unit: r_earth
-# Status: derived -- inherits EARTH_LEO_OUTER_KM, EARTH_EQUATORIAL_RADIUS_KM
-# Figures: 8 -- set by EARTH_LEO_OUTER_KM
-# Derived: 1.0314 and 1.3136 -- report 1.03 and 1.31, as the hover does.
+# Conversion: of EARTH_LEO_OUTER_KM -- computed from that row, which carries the
+# Conversion+: source and the count; the export serves this value as
+# Conversion+: that row's "in" (provenance-discipline 2.22, Rule 3;
+# Conversion+: L-345, patch D20).
 
 EARTH_STRATOPAUSE_ALTITUDE_KM = 50.0
 # Unit: km
@@ -702,8 +717,8 @@ EARTH_STRATOPAUSE_RADIUS_KM = EARTH_EQUATORIAL_RADIUS_KM + EARTH_STRATOPAUSE_ALT
 # Figures+: kilometre.
 # Note: the top of the lower atmosphere, measured from Earth's centre.
 # Note+: Its value in Earth radii and AU is computed from this row
-# Note+: (L-345); EARTH_STRATOPAUSE_RADII below becomes that conversion
-# Note+: at patch D20. Added at patch D19a.
+# Note+: (L-345); EARTH_STRATOPAUSE_RADII below is that conversion, since
+# Note+: patch D20. Added at patch D19a.
 EARTH_THERMOPAUSE_RADIUS_KM = EARTH_EQUATORIAL_RADIUS_KM + EARTH_THERMOPAUSE_ALTITUDE_KM
 # Derived: 6378.1366 + 600 = 6980 km from Earth's centre. The 600 km
 # Derived+: altitude carries two figures, so the sum is good to tens.
@@ -714,33 +729,25 @@ EARTH_THERMOPAUSE_RADIUS_KM = EARTH_EQUATORIAL_RADIUS_KM + EARTH_THERMOPAUSE_ALT
 # Figures+: tens of kilometres.
 # Note: the top of the upper atmosphere, measured from Earth's centre.
 # Note+: Its value in Earth radii and AU is computed from this row
-# Note+: (L-345); EARTH_THERMOPAUSE_RADII below becomes that conversion
-# Note+: at patch D20. Added at patch D19a.
-EARTH_STRATOPAUSE_RADII = (EARTH_EQUATORIAL_RADIUS_KM + EARTH_STRATOPAUSE_ALTITUDE_KM) / EARTH_EQUATORIAL_RADIUS_KM
-# Derived: (6378.1366 + 50) / 6378.1366 = 1.008. The 50 km altitude
-# Derived+: carries two figures, so its last significant digit is the ones
-# Derived+: place and the sum is good to units: 6428 km.
+# Note+: (L-345); EARTH_THERMOPAUSE_RADII below is that conversion, since
+# Note+: patch D20. Added at patch D19a.
+EARTH_STRATOPAUSE_RADII = EARTH_STRATOPAUSE_RADIUS_KM / EARTH_EQUATORIAL_RADIUS_KM
 # Unit: r_earth
-# Status: derived -- inherits EARTH_EQUATORIAL_RADIUS_KM,
-# Status+: EARTH_STRATOPAUSE_ALTITUDE_KM
-# Figures: 4 -- set by the sum, which EARTH_STRATOPAUSE_ALTITUDE_KM limits.
-EARTH_THERMOPAUSE_RADII = (EARTH_EQUATORIAL_RADIUS_KM + EARTH_THERMOPAUSE_ALTITUDE_KM) / EARTH_EQUATORIAL_RADIUS_KM
-# Derived: (6378.1366 + 600) / 6378.1366 = 1.09. The 600 km altitude
-# Derived+: carries two figures, so its last significant digit is the tens
-# Derived+: place and the sum is good to tens: 6980 km. Corrected 2026-09-19 --
-# Derived+: the old line read 1.0078 and 1.0941, which declared more
-# Derived+: figures than either altitude supports, and covered two rows.
+# Conversion: of EARTH_STRATOPAUSE_RADIUS_KM -- computed from that row, which carries the
+# Conversion+: source and the count; the export serves this value as
+# Conversion+: that row's "in" (provenance-discipline 2.22, Rule 3;
+# Conversion+: L-345, patch D20).
+EARTH_THERMOPAUSE_RADII = EARTH_THERMOPAUSE_RADIUS_KM / EARTH_EQUATORIAL_RADIUS_KM
 # Unit: r_earth
-# Status: derived -- inherits EARTH_EQUATORIAL_RADIUS_KM,
-# Status+: EARTH_THERMOPAUSE_ALTITUDE_KM
-# Figures: 3 -- set by the sum, which EARTH_THERMOPAUSE_ALTITUDE_KM limits.
-# Note: SHELL_CONFIGS['Earth'] draws the lower atmosphere at 1.05 radii
-# Note+: (about 319 km up) and the upper atmosphere at 1.25 radii (about
-# Note+: 1,595 km up) while their own hover text ends at 50 km and about
-# Note+: 1,000 km. Both drawn fractions are visibility choices wearing
-# Note+: physical-looking numbers. Recorded under L-295; the exhibit's
-# Note+: served entry declares the drawn fraction and points here for the
-# Note+: physical one.
+# Conversion: of EARTH_THERMOPAUSE_RADIUS_KM -- computed from that row, which carries the
+# Conversion+: source and the count; the export serves this value as
+# Conversion+: that row's "in" (provenance-discipline 2.22, Rule 3;
+# Conversion+: L-345, patch D20).
+# Note: until L-295 (2026-09-07) SHELL_CONFIGS['Earth'] drew the lower
+# Note+: atmosphere at 1.05 radii and the upper at 1.25, visibility choices
+# Note+: their own hover text contradicted. Both shells now draw at these
+# Note+: two conversions. (Corrected in passing at patch D20: this note
+# Note+: still described the old drawing.)
 
 EARTH_VAN_ALLEN_INNER_RADII = 1.5
 # Unit: r_earth
@@ -1423,35 +1430,22 @@ EARTH_MAGNETOPAUSE_STANDOFF_RADII = (EARTH_MAGNETOPAUSE_SHUE_A1_RADII + EARTH_MA
 # Note+: as the typical subsolar distance, which contains this.
 
 EARTH_MAGNETOPAUSE_STANDOFF_KM = EARTH_MAGNETOPAUSE_STANDOFF_RADII * EARTH_EQUATORIAL_RADIUS_KM
-# Derived: the standoff in Earth radii times Earth's equatorial radius,
-# Derived+: from full digits = 65,000
 # Unit: km
-# Status: derived 2026-09-22 -- inherits EARTH_MAGNETOPAUSE_STANDOFF_RADII,
-# Status+: EARTH_EQUATORIAL_RADIUS_KM
-# Figures: 2 -- uncertainty 850, carried through
-# Figures+: EARTH_MAGNETOPAUSE_STANDOFF_RADII from Shue's five stated
-# Figures+: uncertainties and Earth's radius, recomputed from full digits
-# Figures+: rather than converted from the standoff's rounded 0.13 (Rule 4
-# Figures+: applies to an uncertainty as to a value). The thousands place is
-# Figures+: the one whose implied half-unit, 500 km, is closest, so this
-# Figures+: row carries fewer figures than the standoff it converts: each
-# Figures+: unit is reported by its own uncertainty.
-# Note: exists so that every number the gallery's magnetopause hover prints
-# Note+: is computed here from full digits and rounded once at the export,
-# Note+: instead of the page multiplying a rounded standoff (L-322 C2, Tony's
-# Note+: instruction of 2026-09-20: the single source of truth is this file).
+# Conversion: of EARTH_MAGNETOPAUSE_STANDOFF_RADII -- computed from that row, which carries the
+# Conversion+: source and the count; the export serves this value as
+# Conversion+: that row's "in" (provenance-discipline 2.22, Rule 3;
+# Conversion+: L-345, patch D20).
+# Note: its count follows the standoff's stated uncertainty scaled by
+# Note+: Earth's radius, 850 km, so it is served as 65,000 km at two
+# Note+: figures beside 10.3 Earth radii at three: each unit is reported
+# Note+: by its own uncertainty.
 
-EARTH_MAGNETOPAUSE_STANDOFF_AU = EARTH_MAGNETOPAUSE_STANDOFF_KM / KM_PER_AU
-# Derived: the kilometre row divided by the exact astronomical unit
-# Derived+: = 0.00044
+EARTH_MAGNETOPAUSE_STANDOFF_AU = EARTH_MAGNETOPAUSE_STANDOFF_RADII * EARTH_EQUATORIAL_RADIUS_KM / KM_PER_AU
 # Unit: au
-# Status: derived 2026-09-22 -- inherits EARTH_MAGNETOPAUSE_STANDOFF_KM,
-# Status+: KM_PER_AU
-# Figures: 2 -- uncertainty 0.0000057, carried through
-# Figures+: EARTH_MAGNETOPAUSE_STANDOFF_KM from the same primaries and
-# Figures+: recomputed from full digits; the fifth decimal place is the one
-# Figures+: whose implied half-unit is closest.
-# Note: the AU line of the same hover, for the same reason as the row above.
+# Conversion: of EARTH_MAGNETOPAUSE_STANDOFF_RADII -- computed from that row, which carries the
+# Conversion+: source and the count; the export serves this value as
+# Conversion+: that row's "in" (provenance-discipline 2.22, Rule 3;
+# Conversion+: L-345, patch D20).
 
 EARTH_BOW_SHOCK_JELINEK_SCATTER_RADII = 0.69
 # Unit: r_earth
@@ -1500,28 +1494,21 @@ EARTH_BOW_SHOCK_STANDOFF_RADII = EARTH_BOW_SHOCK_JELINEK_R0_RADII * EARTH_SOLAR_
 # Note+: earth_visualization_shells.py has read this constant since L-291.
 
 EARTH_BOW_SHOCK_STANDOFF_KM = EARTH_BOW_SHOCK_STANDOFF_RADII * EARTH_EQUATORIAL_RADIUS_KM
-# Derived: the standoff in Earth radii times Earth's equatorial radius,
-# Derived+: from full digits = 86,200
 # Unit: km
-# Status: derived 2026-09-22 -- inherits EARTH_BOW_SHOCK_STANDOFF_RADII,
-# Status+: EARTH_EQUATORIAL_RADIUS_KM
-# Figures: 3 -- set by EARTH_BOW_SHOCK_JELINEK_EPS (3) through
-# Figures+: EARTH_BOW_SHOCK_STANDOFF_RADII. Earth's radius in this chain
-# Figures+: states an uncertainty, so propagation also sets a ceiling here;
-# Figures+: it is three as well.
-# Note: exists so the gallery's bow shock hover prints a kilometre figure
-# Note+: computed here from full digits and rounded once at the export
-# Note+: (L-322 C2).
+# Conversion: of EARTH_BOW_SHOCK_STANDOFF_RADII -- computed from that row, which carries the
+# Conversion+: source and the count; the export serves this value as
+# Conversion+: that row's "in" (provenance-discipline 2.22, Rule 3;
+# Conversion+: L-345, patch D20).
+# Note: served as 86,000 km at two figures, not 86,200: the standoff's
+# Note+: last figure is worth 638 km (provenance-discipline 2.22, the
+# Note+: ruling's own case).
 
-EARTH_BOW_SHOCK_STANDOFF_AU = EARTH_BOW_SHOCK_STANDOFF_KM / KM_PER_AU
-# Derived: the kilometre row divided by the exact astronomical unit
-# Derived+: = 0.000576
+EARTH_BOW_SHOCK_STANDOFF_AU = EARTH_BOW_SHOCK_STANDOFF_RADII * EARTH_EQUATORIAL_RADIUS_KM / KM_PER_AU
 # Unit: au
-# Status: derived 2026-09-22 -- inherits EARTH_BOW_SHOCK_STANDOFF_KM,
-# Status+: KM_PER_AU
-# Figures: 3 -- set by EARTH_BOW_SHOCK_JELINEK_EPS through
-# Figures+: EARTH_BOW_SHOCK_STANDOFF_KM; the astronomical unit is exact.
-# Note: the AU line of the same hover, for the same reason as the row above.
+# Conversion: of EARTH_BOW_SHOCK_STANDOFF_RADII -- computed from that row, which carries the
+# Conversion+: source and the count; the export serves this value as
+# Conversion+: that row's "in" (provenance-discipline 2.22, Rule 3;
+# Conversion+: L-345, patch D20).
 
 EARTH_MAGNETOTAIL_OBSERVED_RADII = 220.0
 # Unit: r_earth
@@ -1822,8 +1809,9 @@ CHROMOSPHERE_PHYSICAL_KM = 2000.0
 # Source+: Ch. 11 -- chromosphere extends ~2000 km above the photosphere.
 # Cross-checked: Gemini 2026-08-02 -- Carroll & Ostlie (worksheet_gemini_constants_remaining.md)
 # Note: the PHYSICAL extent, and since 2026-08-16 the drawn one too.
-# Note+: CHROMOSPHERE_PHYSICAL_RADII below converts it to solar radii and
-# Note+: is what the shell draws at. The 1.1 stylization is retired.
+# Note+: CHROMOSPHERE_TOP_KM below adds it to the Sun's radius, and
+# Note+: CHROMOSPHERE_PHYSICAL_RADII, a conversion of that row into solar
+# Note+: radii, is what the shell draws at. The 1.1 stylization is retired.
 
 CHROMOSPHERE_TOP_KM = SUN_RADIUS_KM + CHROMOSPHERE_PHYSICAL_KM
 # Unit: km
@@ -1834,18 +1822,17 @@ CHROMOSPHERE_TOP_KM = SUN_RADIUS_KM + CHROMOSPHERE_PHYSICAL_KM
 # Note: the top of the chromosphere, for the hover's kilometre line.
 # Note+: L-322 Stage D, patch D17.
 
-CHROMOSPHERE_PHYSICAL_RADII = (SUN_RADIUS_KM + CHROMOSPHERE_PHYSICAL_KM) / SUN_RADIUS_KM
+CHROMOSPHERE_PHYSICAL_RADII = CHROMOSPHERE_TOP_KM / SUN_RADIUS_KM
 # Unit: r_sun
-# Status: derived -- inherits SUN_RADIUS_KM, CHROMOSPHERE_PHYSICAL_KM
-# Figures: 4 -- thousandths: thousands place of the sum, set by
-# Figures+: CHROMOSPHERE_PHYSICAL_KM (2000, 1), carried through the exact
-# Figures+: SUN_RADIUS_KM (Rule 3, scaling, provenance-discipline 2.21)
-# Derived: (695700 + 2000) / 695700 = 1.003 solar radii
-# Note: written as the sum over the radius, not 1 + depth / radius: the
-# Note+: unit check refuses a bare 1 added to a ratio, and under 2.21 the
-# Note+: two forms count the same. It stays an expression over the
-# Note+: primaries, not CHROMOSPHERE_TOP_KM / SUN_RADIUS_KM, so the
-# Note+: checker follows it to them (Rule 4). L-322 Stage D, patch D17.
+# Conversion: of CHROMOSPHERE_TOP_KM -- computed from that row, which carries the
+# Conversion+: source and the count; the export serves this value as
+# Conversion+: that row's "in" (provenance-discipline 2.22, Rule 3;
+# Conversion+: L-345, patch D20).
+# Note: served as 1.003 solar radii at four figures, one more than the
+# Note+: kilometre row's three: the sum is good to thousands of km, which
+# Note+: is thousandths of a solar radius (provenance-discipline 2.21 and
+# Note+: 2.22, Rule 3). The shell draws at this value. Until patch D20 it
+# Note+: was its own row, the sum written over the radius (patch D17).
 
 INNER_CORONA_RADII = 3
 # Source: Lamy, Gilardy, Llebaria, Quemerais & Ernandez, "Coronal
@@ -2755,10 +2742,10 @@ EARTH_HILL_SPHERE_KM = KM_PER_AU * (EARTH_GM_KM3_S2 * M3_PER_KM3 / (3.0 * GM_SUN
 # Ref: https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html
 EARTH_HILL_SPHERE_RADII = EARTH_HILL_SPHERE_KM / EARTH_EQUATORIAL_RADIUS_KM
 # Unit: r_earth
-# Status: derived -- inherits EARTH_HILL_SPHERE_KM, EARTH_EQUATORIAL_RADIUS_KM
-# Figures: 3 -- set by EARTH_HILL_SPHERE_KM
-# Derived: 1,496,559 / 6378.1366 = 234.64 -- the "about 235 radii" the
-# Derived+: orrery's Hill sphere shell types as radius_fraction = 235.
+# Conversion: of EARTH_HILL_SPHERE_KM -- computed from that row, which carries the
+# Conversion+: source and the count; the export serves this value as
+# Conversion+: that row's "in" (provenance-discipline 2.22, Rule 3;
+# Conversion+: L-345, patch D20).
 
 SOLAR_MASS_KG = GM_SUN_SI / GRAVITATIONAL_CONSTANT_SI
 # Derived: 1.3271244e20 / 6.67430e-11 = 1.9884098707e30 kg.

@@ -6,8 +6,8 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Skill version: 1.11 | Cut from palomas_orrery @ 1ee1cc61 (v1.11),
-earlier @ 50cbd2df (v1.10), @ 41c0b279 (v1.9), @ 3586970d (v1.8),
+Skill version: 1.12 | Cut from palomas_orrery @ 2a7d26b9 (v1.12),
+earlier @ 1ee1cc61 (v1.11), @ 50cbd2df (v1.10), @ 41c0b279 (v1.9), @ 3586970d (v1.8),
 @ 434a712b (v1.7), @ 305b269 (v1.6), @ 3398970 (v1.5) | September 10,
 2026, with Anthropic's Claude Opus 5
 Sources: LEDGER_CONSOLIDATED.md header, ledger_index.py at HEAD, handoff
@@ -48,7 +48,16 @@ to Tony. v1.11 (L-291) adds A Closing Item Re-homes Its Loose Ends:
 before an item goes DONE, each thing its body records as not done gets
 a home in an open item, or is struck with a reason. Three were found
 riding inside closing items on 2026-09-10, one of them behind a pointer
-to an item that never mentioned it.
+to an item that never mentioned it. v1.12 (L-333, L-362; 2026-09-28,
+with Anthropic's Claude Opus 5.5) changes The Document Stack: the master
+plan is ONE document at two zooms, an executive summary and the body,
+with the critical path inside the body as Section 5a, and the summary
+is rewritten at every restamp. Its two companion files were retired
+with the plan's v34. Tony's ruling of 2026-09-28: "i think we should
+integrate these reports. the summary as an executive summary. the body
+should keep its critical path section." The companions had restamped
+with v19 and v20 and not with v21 through v33, because nothing tied
+them to the plan's own cadence.
 
 Note: READING the ledger at session start is resident Part-1 behavior,
 not this skill's job. This skill carries the maintenance mechanics.
@@ -71,9 +80,16 @@ protocol -> ledger -> handoff -> manifest -> code -> repo -> ledger.
 
 **The master plan is not a rung in that ordering** (Tony's ruling,
 2026-08-20, L-221). It is the ROADMAP -- where we are and where we
-are going, not what is directly in front -- traced at three levels
-of zoom: the full plan, its summary, and the critical path. It
-restamps once per DESIGN BUILD; stepwise updating is the ledger's job.
+are going, not what is directly in front. It is ONE document at two
+zooms (v1.12, Tony's ruling of 2026-09-28, L-333 and L-362): an
+EXECUTIVE SUMMARY at the top, and the body, which keeps the critical
+path as Section 5a. The summary is REWRITTEN from the current state at
+every restamp, never carried forward, so it cannot fall behind the
+body the way the two separate companion files did: they restamped with
+v19 and v20 and then stood still for a month while the plan reached
+v33. Those files, `MASTER_PLAN_INTERACTIVE_GALLERY_SUMMARY.md` and
+`MASTER_PLAN_CRITICAL_PATH_SUMMARY.md`, carry a retirement line and are
+dated records. The plan restamps once per DESIGN BUILD; stepwise updating is the ledger's job.
 That is Tony's ruling of 2026-09-06 (L-296), replacing "at key
 junctures": a juncture is not countable, so the rule could not be
 applied without a judgment call every time, and the call kept landing

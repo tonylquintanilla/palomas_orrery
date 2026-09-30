@@ -50,10 +50,12 @@ WHAT IT CHECKS, per row
          figures among their measured inputs;
          sums and differences are good to the coarsest decimal place
          among their measured inputs;
-         a sum or difference multiplied or divided by an exact number
-         keeps its decimal place, carried through the scaling and
-         snapped to the nearest power of ten (provenance-discipline
-         2.21, Rule 3, scaling); the OK line prints the place it kept;
+         a sum or difference, or a single measured row, multiplied or
+         divided by an exact number keeps its decimal place, carried
+         through the scaling and snapped to the nearest power of ten
+         once, at the end (provenance-discipline 2.21 and 2.22, Rule 3,
+         scaling -- the 2.22 widening to a single row is built at patch
+         D20); the OK line prints the place it kept;
          exact inputs, declared conditions and numbers typed into the
          expression never limit the result.
        A lower declared count is always allowed; Rule 3 asks for one
@@ -103,14 +105,33 @@ WHAT IT CHECKS, per row
     A typed number carrying a "# Derived:" note gets check 1 only: its
     arithmetic lives in prose and there is nothing to follow.
 
+CONVERSIONS (L-345, patch D20; provenance-discipline 2.22, Rule 3)
+
+    A value in another unit is computed, never stored. A name the orrery
+    keeps for one is marked "# Conversion: of <ROW>" and is not judged
+    as a derived row: it declares no count, because its count is its
+    source row's. Instead constants_rows.conversion_problem() checks it
+    (one row, scaled only by rows that define units, in another unit of
+    the same dimension, equal to that row's full digits times the exact
+    factor, carrying no field of its own), and each one is listed by name
+    with its source.
+
+    A row SHAPED like a conversion and not marked is UNMARKED CONVERSION:
+    one row scaled only by rows that define units, or a sum scaled that
+    way, which belongs in its inputs' unit as a row of its own. That is
+    how the store cannot grow one again unnoticed. And a derived row that
+    takes a conversion as an input is refused, because it should be
+    computed from the source row.
+
 WHAT FAILS, and what is a named gap
 
     FAIL   OVER-DECLARED, NAMES A NON-INPUT, NAMES NO INPUT,
            COMMENT DISAGREES, COMMENT OVERSTATES, MALFORMED, CANNOT JUDGE,
            NO UNCERTAINTY FORM, UNCERTAINTY DISAGREES,
-           UNCERTAINTY UNSUPPORTED
+           UNCERTAINTY UNSUPPORTED, CONVERSION WRONG
     gap    NOT YET MIGRATED, INPUT NOT YET MIGRATED, NO DERIVED LINE,
-           UNCERTAINTY IN PROSE (named on the primary, not the row)
+           UNCERTAINTY IN PROSE (named on the primary, not the row),
+           UNMARKED CONVERSION
 
     NAMES A NON-INPUT means a row named on the "# Figures:" line is not
     in the row's CHAIN -- its expression, or a derived row the expression
@@ -149,6 +170,14 @@ Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
 scaling paragraph, and five fixtures test it, including the two forms
 of the chromosphere's arithmetic counting the same and a single measured
 value scaled by an exact number still keeping fewest figures.)
+Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
+(L-345, patch L322_D_20: provenance-discipline 2.22's widening -- a
+single measured row scaled by an exact number keeps its place too, and
+a place is carried through every scaling and snapped once. Conversions
+are checked by constants_rows.conversion_problem() and listed; a row
+shaped like one and not marked is UNMARKED CONVERSION, a named gap that
+fails inside a closed slice. Nine fixtures test both, and the check is
+shown failing on the real store before it is trusted.)
 """
 
 import ast
@@ -158,13 +187,15 @@ import re
 import sys
 
 import constants_rows
+from constants_tokens import TOKENS
 
 FAILING = ("MALFORMED", "CANNOT JUDGE", "OVER-DECLARED",
            "NAMES A NON-INPUT", "NAMES NO INPUT", "COMMENT DISAGREES",
            "COMMENT OVERSTATES", "NO UNCERTAINTY FORM",
-           "UNCERTAINTY DISAGREES", "UNCERTAINTY UNSUPPORTED")
+           "UNCERTAINTY DISAGREES", "UNCERTAINTY UNSUPPORTED",
+           "CONVERSION WRONG")
 GAPS = ("NOT YET MIGRATED", "INPUT NOT YET MIGRATED", "NO DERIVED LINE",
-        "UNCERTAINTY IN PROSE")
+        "UNCERTAINTY IN PROSE", "UNMARKED CONVERSION")
 
 # The field form of a stated uncertainty (provenance-discipline 2.16,
 # Rule 1): the word, then the number, in the row's own unit. The pattern
@@ -403,6 +434,10 @@ class Figures(object):
     def leaf(self, name):
         row = self.by_name[name]
         value = self.values.get(name)
+        if row.conversion_of is not None:
+            raise Stop("CANNOT JUDGE", "input %s is a conversion of %s; "
+                       "compute from %s, which carries the count"
+                       % (name, row.conversion_of, row.conversion_of))
         if row.figures_error:
             raise Stop("MALFORMED", "input %s: %s" % (name, row.figures_error))
         if row.figures is None:
@@ -425,33 +460,38 @@ class Figures(object):
         return self._ev(node)[:3]
 
     def _ev(self, node):
-        """(value, figures or EXACT, place or None, place-governed).
+        """(value, figures or EXACT, place or None, place-governed,
+        place unit or None).
 
         The fourth item is True for a sum or difference with a measured
-        part, and it stays True while the sum is scaled by exact parts:
-        such a value keeps its decimal place, carried through the
-        scaling, not its figure count (provenance-discipline 2.21,
-        Rule 3, scaling). A single measured value is not place-governed:
-        scaled by an exact row it keeps fewest figures, as 2.21 leaves it.
-        L-322 Stage D, patch D17.
+        part, and for a single measured row (provenance-discipline 2.22,
+        Rule 3, the widening built at patch D20); it stays True while the
+        value is scaled by exact parts: such a value keeps its decimal
+        place, carried through the scaling, not its figure count. The
+        fifth item is that place's unit, carried through every scaling
+        UNSNAPPED, so a place scaled twice is snapped once, at the end.
+        L-322 Stage D, patches D17 and D20.
         """
         if isinstance(node, ast.Constant) and isinstance(
                 node.value, (int, float)) and not isinstance(
                 node.value, bool):
-            return float(node.value), EXACT, None, False
+            return float(node.value), EXACT, None, False, None
         if isinstance(node, ast.Name):
             if node.id in self.by_name:
-                return self.leaf(node.id) + (False,)
+                value, figs, place = self.leaf(node.id)
+                if figs is EXACT or place is None:
+                    return value, figs, place, False, None
+                return value, figs, place, True, 10.0 ** place
             if node.id in self.NUMBERS:
-                return self.NUMBERS[node.id], EXACT, None, False
+                return self.NUMBERS[node.id], EXACT, None, False, None
             raise Stop("CANNOT JUDGE", "the name %s" % node.id)
         if isinstance(node, ast.Attribute) and node.attr in self.NUMBERS:
-            return self.NUMBERS[node.attr], EXACT, None, False
+            return self.NUMBERS[node.attr], EXACT, None, False, None
         if isinstance(node, ast.UnaryOp) and isinstance(
                 node.op, (ast.USub, ast.UAdd)):
-            value, figs, place, governed = self._ev(node.operand)
+            value, figs, place, governed, unit = self._ev(node.operand)
             return (-value if isinstance(node.op, ast.USub) else value,
-                    figs, place, governed)
+                    figs, place, governed, unit)
         if isinstance(node, ast.BinOp):
             left = self._ev(node.left)
             right = self._ev(node.right)
@@ -459,15 +499,17 @@ class Figures(object):
             if isinstance(op, (ast.Add, ast.Sub)):
                 value = (left[0] + right[0] if isinstance(op, ast.Add)
                          else left[0] - right[0])
-                places = [p for p in (left[2], right[2]) if p is not None]
-                if not places:
-                    return value, EXACT, None, False
-                place = max(places)
+                units = [(p[4] if p[4] is not None else 10.0 ** p[2])
+                         for p in (left, right) if p[2] is not None]
+                if not units:
+                    return value, EXACT, None, False, None
+                unit = max(units)
+                place = int(math.floor(math.log10(unit) + 0.5))
                 if value == 0:
                     raise Stop("CANNOT JUDGE", "a sum or difference in the "
                                "expression is exactly zero")
                 return (value, max(0, magnitude(value) - place + 1), place,
-                        True)
+                        True, unit)
             if isinstance(op, ast.Mult):
                 value = left[0] * right[0]
             elif isinstance(op, ast.Div):
@@ -480,7 +522,7 @@ class Figures(object):
             scaled = self.scaled_by_exact(value, left, right, op)
             if scaled is not None:
                 return scaled
-            return self.limited(value, [left[1], right[1]]) + (False,)
+            return self.limited(value, [left[1], right[1]]) + (False, None)
         if isinstance(node, ast.Call):
             func = node.func
             fname = (func.attr if isinstance(func, ast.Attribute) else
@@ -489,19 +531,22 @@ class Figures(object):
                 raise Stop("CANNOT JUDGE", "the call %s()" % fname)
             parts = [self._ev(arg) for arg in node.args]
             value = self.FUNCS[fname](*[p[0] for p in parts])
-            return self.limited(value, [p[1] for p in parts]) + (False,)
+            return self.limited(value, [p[1] for p in parts]) + (False, None)
         raise Stop("CANNOT JUDGE", "a %s node" % type(node).__name__)
 
     def scaled_by_exact(self, value, left, right, op):
         """A place-governed part times, or divided by, an exact part.
 
-        provenance-discipline 2.21, Rule 3, scaling: the sum's place unit
-        is carried through the exact factor and snapped to the nearest
-        power of ten on a log scale, a tie going to the coarser place;
-        the count is the figures of the value down to that place. None
-        when the step is not that shape (then fewest figures applies).
-        Only a sum DIVIDED BY an exact part is a scaling; an exact part
-        divided by a sum is not. L-322 Stage D, patch D17.
+        provenance-discipline 2.21 and 2.22, Rule 3, scaling: the place
+        unit of a sum, or of a single measured row, is carried through
+        the exact factor and snapped to the nearest power of ten on a log
+        scale, a tie going to the coarser place; the count is the figures
+        of the value down to that place. None when the step is not that
+        shape (then fewest figures applies). Only a part DIVIDED BY an
+        exact part is a scaling; an exact part divided by a measured one
+        is not. The unsnapped unit is returned too, so a second scaling
+        carries it on rather than a snapped place. L-322 Stage D, patches
+        D17 and D20.
         """
         if isinstance(op, ast.Mult):
             pairs = ((left, right), (right, left))
@@ -515,11 +560,12 @@ class Figures(object):
                     and value != 0):
                 ratio = (abs(factor[0]) if isinstance(op, ast.Mult)
                          else 1.0 / abs(factor[0]))
-                unit = 10.0 ** part[2] * ratio
+                base = part[4] if part[4] is not None else 10.0 ** part[2]
+                unit = base * ratio
                 place = int(math.floor(math.log10(unit) + 0.5))
                 self.places.append(place)
                 return (value, max(1, magnitude(value) - place + 1), place,
-                        True)
+                        True, unit)
         return None
 
     def limited(self, value, counts):
@@ -732,7 +778,7 @@ def ok_detail(row, kind, info):
     ceiling_u = info.get("ceiling_u")
     place = info.get("place")
     scaled = ("" if place is None else
-              "; a sum scaled by an exact row, kept to place 10^%d "
+              "; scaled by an exact number, kept to place 10^%d "
               "(Rule 3, scaling)" % place)
     if ceiling_u is None:
         return ("%s figures, within what its inputs support%s"
@@ -743,15 +789,46 @@ def ok_detail(row, kind, info):
                                      ceiling_u, info["sigma"]))
 
 
-def judge(rows, by_name, values, closed, transitional):
+def unmarked_conversion(row, by_name, tokens):
+    """(verdict, detail) when `row` is shaped like a conversion and not
+    marked as one, or None. L-345, patch D20."""
+    shape, source = constants_rows.conversion_shape(row, by_name, tokens)
+    if shape == "row":
+        return ("UNMARKED CONVERSION", "%s scaled only by rows that define "
+                "units: a value in another unit, stored as a row. Mark it "
+                "'# Conversion: of %s' and drop its own count, status and "
+                "provenance lines (provenance-discipline 2.22, Rule 3)"
+                % (source, source))
+    if shape == "sum":
+        return ("UNMARKED CONVERSION", "a sum scaled only by rows that "
+                "define units. The sum belongs in its inputs' unit as a row "
+                "of its own, and this name becomes a conversion of it "
+                "(provenance-discipline 2.22, Rule 3)")
+    return None
+
+
+def judge(rows, by_name, values, closed, transitional, tokens=None):
     """[(verdict, name, detail, fails, kind)] for every row it reads.
 
     kind is "expression", "transitional" or "typed" for a derived row,
-    and "primary" for a primary named by check 6.
+    "conversion" for a row marked as one, and "primary" for a primary
+    named by check 6.
     """
+    tokens = TOKENS if tokens is None else tokens
     results = []
     reached = []
     for row in rows:
+        if row.conversion_of is not None or row.conversion_error:
+            problem = constants_rows.conversion_problem(row, by_name, values,
+                                                        tokens)
+            if problem:
+                results.append(("CONVERSION WRONG", row.name, problem, True,
+                                "conversion"))
+            else:
+                results.append(("OK", row.name, "a conversion of %s; its "
+                                "count is that row's (Rule 3)"
+                                % row.conversion_of, False, "conversion"))
+            continue
         is_trans = row.name in transitional
         if not (row.kind == "expression" or is_trans
                 or row.derived_text is not None):
@@ -759,6 +836,9 @@ def judge(rows, by_name, values, closed, transitional):
         kind = ("transitional" if is_trans else
                 "expression" if row.kind == "expression" else "typed")
         findings, info = judge_row(row, by_name, values, transitional)
+        unmarked = unmarked_conversion(row, by_name, tokens)
+        if unmarked:
+            findings = [unmarked] + list(findings)
         if row.kind == "expression":
             for name in Chain(by_name, values).primaries(row.name):
                 if name not in reached:
@@ -962,7 +1042,58 @@ FIX_SCALED_TIMES = 2.0 * (FIX_SUN_KM + FIX_SKIN_KM)
 FIX_SINGLE_SCALED = FIX_SKIN_KM * 2.54
 # Figures: 2 -- set by FIX_SKIN_KM
 # Derived: = 5100
+FIX_INCH = 9.0
+# Figures: 1 -- about 9 inches
+FIX_CM_PER_INCH = 2.54
+# Figures: exact -- the inch is defined as 2.54 cm
+FIX_CM = FIX_INCH * FIX_CM_PER_INCH
+# Figures: 2 -- set by FIX_INCH, its units place carried through the exact FIX_CM_PER_INCH
+# Derived: 9 x 2.54 = 23
+FIX_HALF = FIX_A_KM / 2.0
+# Figures: 5 -- set by FIX_A_KM
+# Derived: = 610.8
+FIX_TWICE_SCALED = FIX_SKIN_KM / FIX_SUN_KM * 1000.0
+# Figures: 1 -- set by FIX_SKIN_KM, thousands carried through FIX_SUN_KM and a factor of 1000
+# Derived: = 3
+FIX_UNIT_R_KM = 6378.1366
+# Unit: km
+# Figures: 8 -- a fixture unit, defining r_fix
+FIX_CONV_SRC_KM = 1221.5
+# Unit: km
+# Figures: 5 -- source
+FIX_CONV_OK = FIX_CONV_SRC_KM / FIX_UNIT_R_KM
+# Unit: r_fix
+# Conversion: of FIX_CONV_SRC_KM -- computed from that row
+FIX_CONV_OWN_COUNT = FIX_CONV_SRC_KM / FIX_UNIT_R_KM
+# Unit: r_fix
+# Conversion: of FIX_CONV_SRC_KM -- computed from that row
+# Figures: 5 -- set by FIX_CONV_SRC_KM
+FIX_CONV_OTHER_ROW = FIX_CONV_SRC_KM / FIX_UNIT_R_KM
+# Unit: r_fix
+# Conversion: of FIX_A_KM -- names a row the expression does not scale
+FIX_CONV_NOT_SCALED = FIX_CONV_SRC_KM * 2.0
+# Unit: km
+# Conversion: of FIX_CONV_SRC_KM -- twice it is not a unit change
+FIX_CONV_SAME_UNIT = FIX_CONV_SRC_KM / FIX_UNIT_R_KM
+# Unit: km
+# Conversion: of FIX_CONV_SRC_KM -- in the source's own unit
+FIX_CONV_UNMARKED = FIX_CONV_SRC_KM / FIX_UNIT_R_KM
+# Unit: r_fix
+# Figures: 5 -- set by FIX_CONV_SRC_KM
+# Derived: = 0.19151
+FIX_CONV_SUM = (FIX_CONV_SRC_KM + FIX_ALT_KM) / FIX_UNIT_R_KM
+# Unit: r_fix
+# Figures: 4 -- set by FIX_CONV_SRC_KM
+# Derived: = 0.2229
+FIX_FROM_CONV = FIX_CONV_OK * 2.0
+# Figures: 5 -- set by FIX_CONV_SRC_KM
+# Derived: = 0.38302
 '''
+
+FIXTURE_TOKENS = {
+    "km": {"dimension": "km", "defining_constant": None},
+    "r_fix": {"dimension": "km", "defining_constant": "FIX_UNIT_R_KM"},
+}
 
 FIXTURE_TRANSITIONAL = ("FIX_TRANS", "FIX_TRANS_OVER")
 
@@ -1015,6 +1146,25 @@ FIXTURE_EXPECTED = {
     "FIX_SCALED_OTHER_FORM": ["OK"],
     "FIX_SCALED_TIMES": ["OK"],
     "FIX_SINGLE_SCALED": ["OVER-DECLARED"],
+    # L-345, patch D20: provenance-discipline 2.22's widening. 9 inches
+    # (one figure) is 23 cm (two): the units place carried through the
+    # exact 2.54, the reference page's own case. Fewest figures would
+    # refuse the second figure. Halving 1221.5 keeps tenths: 610.8, four
+    # figures, not five. A place scaled twice is snapped once.
+    "FIX_CM": ["OK"],
+    "FIX_HALF": ["OVER-DECLARED"],
+    "FIX_TWICE_SCALED": ["OK"],
+    "FIX_UNIT_R_KM": [],
+    # Conversions: one sound, four wrong, two unmarked shapes, and a row
+    # computed from a conversion instead of its source.
+    "FIX_CONV_OK": ["OK"],
+    "FIX_CONV_OWN_COUNT": ["CONVERSION WRONG"],
+    "FIX_CONV_OTHER_ROW": ["CONVERSION WRONG"],
+    "FIX_CONV_NOT_SCALED": ["CONVERSION WRONG"],
+    "FIX_CONV_SAME_UNIT": ["CONVERSION WRONG"],
+    "FIX_CONV_UNMARKED": ["UNMARKED CONVERSION"],
+    "FIX_CONV_SUM": ["UNMARKED CONVERSION"],
+    "FIX_FROM_CONV": ["CANNOT JUDGE"],
 }
 
 
@@ -1023,27 +1173,41 @@ def run_fixtures():
     values = {}
     exec(compile(FIXTURE_STORE, "fixture", "exec"), values)
     problems = []
-    results = judge(rows, by_name, values, (), FIXTURE_TRANSITIONAL)
+    results = judge(rows, by_name, values, (), FIXTURE_TRANSITIONAL,
+                    FIXTURE_TOKENS)
     got = {}
     for verdict, name, detail, fails, _kind in results:
         got.setdefault(name, []).append((verdict, detail, fails))
     for name, expected in sorted(FIXTURE_EXPECTED.items()):
+        if not expected:
+            continue
         verdicts = [v for v, _d, _f in got.get(name, [])]
         if verdicts != expected:
             problems.append("%s: expected %s, got %s %s"
                             % (name, expected, verdicts,
                                [d for _v, d, _f in got.get(name, [])]))
     for name in got:
-        if name not in FIXTURE_EXPECTED:
+        if not FIXTURE_EXPECTED.get(name) and name in FIXTURE_EXPECTED:
+            problems.append("%s: judged, but expected to be read by no "
+                            "check" % name)
+        elif name not in FIXTURE_EXPECTED:
             problems.append("%s: judged but has no expected verdict" % name)
     if any(f for _v, _d, f in got.get("FIX_NOT_MIGRATED", [])):
         problems.append("FIX_NOT_MIGRATED: a gap failed outside a closed "
                         "slice")
-    closed = judge(rows, by_name, values, ("FIX",), FIXTURE_TRANSITIONAL)
+    closed = judge(rows, by_name, values, ("FIX",), FIXTURE_TRANSITIONAL,
+                   FIXTURE_TOKENS)
     if not any(fails for v, name, _d, fails, _k in closed
                if name == "FIX_NOT_MIGRATED"):
         problems.append("FIX_NOT_MIGRATED: a gap did not fail inside a "
                         "closed slice")
+    if any(f for _v, _d, f in got.get("FIX_CONV_UNMARKED", [])):
+        problems.append("FIX_CONV_UNMARKED: an unmarked conversion failed "
+                        "outside a closed slice")
+    if not any(fails for v, name, _d, fails, _k in closed
+               if name == "FIX_CONV_UNMARKED"):
+        problems.append("FIX_CONV_UNMARKED: an unmarked conversion did not "
+                        "fail inside a closed slice")
     if any(f for _v, _d, f in got.get("FIX_PROSE_R", [])):
         problems.append("FIX_PROSE_R: unread prose failed outside a closed "
                         "slice")
@@ -1058,12 +1222,14 @@ def run_fixtures():
                         "['FIX_MID']" % constructions)
     for name, words in (("FIX_SHUE_OK", "propagation allows 3"),
                         ("FIX_LEO_OK", "propagation allows 10"),
-                        ("FIX_SCALED_SUM", "kept to place 10^-3")):
+                        ("FIX_SCALED_SUM", "kept to place 10^-3"),
+                        ("FIX_CM", "kept to place 10^0"),
+                        ("FIX_CONV_OK", "a conversion of FIX_CONV_SRC_KM")):
         details = [d for _v, d, _f in got.get(name, [])]
         if not any(words in d for d in details):
             problems.append("%s: its line does not say %r (%s)"
                             % (name, words, details))
-    return problems, len(FIXTURE_EXPECTED)
+    return problems, sum(1 for v in FIXTURE_EXPECTED.values() if v)
 
 
 def main():
@@ -1082,7 +1248,8 @@ def main():
     else:
         print("Fixtures: %d built-in rows gave their expected verdicts, "
               "including a gap failing inside a closed slice, a row passing "
-              "only by the uncertainty route and a declared construction."
+              "only by the uncertainty route, a declared construction, and "
+              "a sound, a wrong and an unmarked conversion."
               % fixture_count)
     print("")
 
@@ -1099,8 +1266,10 @@ def main():
                     constants_rows.TRANSITIONAL)
     names = []
     kinds = {}
+    conversions = [(name, d) for v, name, d, _f, kind in results
+                   if kind == "conversion"]
     for verdict, name, _d, _f, kind in results:
-        if kind == "primary":
+        if kind in ("primary", "conversion"):
             continue
         if kind == "construction":
             kind = "expression"
@@ -1129,11 +1298,18 @@ def main():
           % (len(prose), ":" if prose else "."))
     for line in constants_rows.wrap_names(prose):
         print(line)
+    print("Conversions, each a name computed from one row, not judged as "
+          "rows (%d)%s" % (len(conversions), ":" if conversions else "."))
+    for name, _detail in conversions:
+        row = by_name[name]
+        print("      %-34s of %s" % (name, row.conversion_of))
     print("")
 
     order = FAILING + ("OK",) + GAPS
     grouped = {}
-    for verdict, name, detail, fails, _kind in results:
+    for verdict, name, detail, fails, kind in results:
+        if kind == "conversion" and verdict == "OK":
+            continue
         grouped.setdefault(verdict, []).append((name, detail, fails))
     for verdict in order:
         items = grouped.get(verdict)
@@ -1168,7 +1344,8 @@ def main():
               % (len(failures), len(names), counts))
         return 1
     print("No figure count exceeds its inputs: %d derived row(s) read, "
-          "%d judged OK -- %s." % (len(names), ok, counts))
+          "%d judged OK -- %s; %d conversion(s) checked."
+          % (len(names), ok, counts, len(conversions)))
     return 0
 
 

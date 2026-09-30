@@ -15,6 +15,11 @@ Role: rendering/shells
 Domain: orrery
 
 Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
+(L-345, patch D20: CHROMOSPHERE_PHYSICAL_RADII is a conversion of
+CHROMOSPHERE_TOP_KM now, with no count of its own, so the hover prints
+it through constants_rows.conversion_text(). Same digits, 1.003.)
+
+Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
 (L-322 Stage D, patch D17: the chromosphere hover prints its radius by
 its row's count, 1.003 solar radii (was 1.002875); the Sun's radius
 through exact_text(), 695,700 km as before; and the skin as a share of
@@ -59,7 +64,7 @@ from planet_visualization_utilities import (create_sphere_points, create_streame
                                             AU_PER_LIGHT_YEAR,
                                             CHROMOSPHERE_PHYSICAL_KM, CHROMOSPHERE_PHYSICAL_RADII)
 # L-322 Stage D, patch D17: print rows by the counts their rows state.
-from constants_rows import figures_of, exact_text, format_prints
+from constants_rows import figures_of, exact_text, format_prints, conversion_text
 
 #####################################
 # Sun Visualization Functions
@@ -93,12 +98,13 @@ GRAVITATIONAL_INFLUENCE_SENTENCE = (
 
 # Source: Carroll & Ostlie, An Introduction to Modern Astrophysics, Ch. 11
 # Source+: -- the ~2000 km physical extent above the photosphere, carried
-# Source+: by CHROMOSPHERE_PHYSICAL_KM / CHROMOSPHERE_PHYSICAL_RADII in
-# Source+: constants_new.py. The shell draws at TRUE SCALE as of
+# Source+: by CHROMOSPHERE_PHYSICAL_KM in constants_new.py; the radius
+# Source+: prints through conversion_text(), at the count the top of the
+# Source+: chromosphere, CHROMOSPHERE_TOP_KM, gives it in solar radii. The shell draws at TRUE SCALE as of
 # Source+: 2026-08-16; the 1.1 stylization is retired (L-180 dormant).
 CHROMOSPHERE_RADIUS_LINE = (
     f"* Radius: drawn at true scale, "
-    f"{format_prints(CHROMOSPHERE_PHYSICAL_RADII, figures_of('CHROMOSPHERE_PHYSICAL_RADII'))} solar radii<br>"
+    f"{conversion_text('CHROMOSPHERE_PHYSICAL_RADII')} solar radii<br>"
     f"  (~{SOLAR_RADIUS_AU:.5f} - {CHROMOSPHERE_PHYSICAL_RADII * SOLAR_RADIUS_AU:.5f} AU).<br>"
     f"  The chromosphere is a skin about {CHROMOSPHERE_PHYSICAL_KM:,.0f} km deep on a star "
     f"{exact_text('SUN_RADIUS_KM', grouping=True)} km in radius --<br>"

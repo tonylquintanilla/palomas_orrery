@@ -6,10 +6,18 @@ fires_when: adding or changing an exhibit in interactive.html; any edit to the S
 
 # Interactive Exhibit
 
-Skill version: 1.5 | 2026-09-28, with Anthropic's Claude Opus 5.5, from
-orrery @ 714293a9 and gallery @ 2df02f3b. v1.5 (L-345) adds one rule
-under Provenance is part of the build: a hover prints a number in a unit
-from the served "in" and never converts a served number itself.
+Skill version: 1.6 | 2026-09-28, with Anthropic's Claude Opus 5.5, from
+orrery @ 2a7d26b9 and gallery @ 52da593c. v1.6 (L-345) adds three rules
+under Provenance is part of the build, each what the L-345 gallery patch
+built and Tony approved: where cutting a served AU to three figures
+would round a tie, the served digits print in full and the hover check
+names the case; the mirror writes a slot measured in another unit from
+its row's "in"; and a shell may serve a radius_note, a sentence under
+its radius line.
+Earlier: 1.5 | 2026-09-28, from orrery @ 714293a9 and gallery @
+2df02f3b. v1.5 (L-345) adds one rule under Provenance is part of the
+build: a hover prints a number in a unit from the served "in" and never
+converts a served number itself.
 Earlier: 1.4 | Cut from gallery @ d9d7a48f (interactive.html,
 gallery/arrival.js, gallery/feature_renderers.js, gallery/nav_cluster.js,
 tools/store_writer.py, tools/exhibit_store_editor.py,
@@ -170,6 +178,36 @@ page:
   see. A figure count is READ from the served entry, never recounted
   in the browser. A node with no `"in"` (an unvisited slice) prints as
   it did before.
+- **The AU in brackets prints three figures, or the served count if
+  that is fewer -- unless cutting to three would round a TIE** (v1.6,
+  Tony's ruling of 2026-09-28). Three figures is Rule 7's one named
+  format exception, a comparison aid kept short. But the served value is
+  already rounded, and where the digits a cut to three would drop are
+  exactly a 5 (5, 50, 500 ...) the page cannot know which way the full
+  value leaned. There the served digits print in full. This is Rule 7's
+  main rule -- print the declared count -- with the exception stepping
+  aside, not a new exception. The inner core's 0.000008165 AU is the
+  case. `auServed()` and `auTie()` in `feature_renderers.js` do it, and
+  `documentation/smoke_display_figures.js` works the same test by its
+  own arithmetic and NAMES each served tie in its report, so a new one
+  is seen rather than only passed.
+- **A slot measured in another unit is written from its row's `"in"`**
+  (v1.6). A pointer names the row a number comes from, in the unit its
+  source gives it, even where the slot is drawn in another unit --
+  Earth's geostationary ring is drawn in Earth radii and points at the
+  kilometre row. `tools/mirror_constants.py` writes such a slot from the
+  row's `"in"` entry for the slot's unit: value, figures and print count
+  as served. Nothing is multiplied in the gallery. A pointer is never
+  aimed at a conversion name (`# Conversion:` in `constants_new.py`,
+  orrery patch D20): those are not exported, and the export lists each
+  one under not_exported with the row it is served through.
+- **A shell may serve a `radius_note`** (v1.6): one sentence printed
+  under its radius line, where the number needs a sentence to be read
+  rightly. The crust is the case: drawn at Earth's mean radius, a little
+  less than the one Earth radius used as the unit, which is equatorial
+  (Tony's approved words, 2026-09-28). It is served words, so a change
+  reaches a visitor only after the cache is rebuilt. Neither the mirror
+  nor `store_writer` writes it; a patch does, as pointers are written.
 - The Artifact Bounds the Audit, and The Braid orders it: the new
   exhibit's pointers are the slice; a provenance gap found elsewhere
   while building it is recorded, one ledger row per CLASS, not chased.
