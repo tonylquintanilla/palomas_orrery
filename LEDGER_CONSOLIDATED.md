@@ -190,6 +190,10 @@ slice, then the swap; after the Sun, in outline, the orrery's objects
 rebuilt from its own dictionary and checked against Horizons; L-391 to
 L-395 opened; L-322, L-364, L-365, L-367, L-371 and L-378 noted; master
 plan v35), built on e5c3f92a.
+Module updated: September 30, 2026 with Anthropic's Claude Opus 5.5
+(L-396 opened: Tony's page, documentation/WHERE_WE_ARE.md, first
+written; ledger-and-session-records 1.12 -> 1.13; protocol v3.74),
+built on 5db8bbe0.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -407,7 +411,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*239 live items; 224 need attention (`!`); 188 RICE-scored; 151 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*240 live items; 225 need attention (`!`); 188 RICE-scored; 151 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -557,6 +561,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-393 | Encounter data: dates, spacecraft records centred on their targets, and how far the cache reaches in time (gallery, cache) | OPEN | -- | 2026-09-29 |
 | ! | L-394 | A card cannot say which body it belongs to (gallery, Studio) | OPEN | -- | 2026-09-29 |
 | ! | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | OPEN | -- | 2026-09-29 |
+| ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-09-30 |
 
 ### B. Pending Action (Tony-side)
 
@@ -887,6 +892,32 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-396] Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills)
+<!-- L:396 status:OPEN upd:2026-09-30 section:A flag: rice: -->
+- **Asked 2026-09-30 (Tony).** "i struggle to keep the big picture.
+  it's the old dilemma of loosing the forest for the trees." The master
+  plan's summary and critical path had not really helped. He asked for
+  one running document in documentation/, read at the end of every
+  turn and every session, practical both to write and to read; then
+  for the parts changed this session and the immediate next steps to
+  be highlighted ("attention is a human limitation"); then for bullets
+  in place of paragraphs ("the wall of text even a paragraph is an
+  obstacle"); then for the must-reads in italics.
+- **Built 2026-09-30** by
+  `patch_L396_where_we_are_and_skill_1_13_20260930.py`: the page's first
+  version; ledger-and-session-records 1.13, whose Document Stack now
+  makes updating it part of every session's ledger patch and fixes its
+  shape and marks; protocol v3.74, which records the bump.
+- **The obligation travels.** This session loaded 1.12. The next session
+  confirms its loaded copy reads 1.13 before any ledger, handoff or
+  session-record work.
+- **No check yet.** An unchecked store drifts, as the plan's two
+  companions did (L-333, L-362). Candidate: the orrery maintenance run
+  fails when the page's "Last updated" date is older than the ledger's
+  newest "Module updated" stamp. Recorded, not built.
+**Gap:** the next session confirms 1.13 is loaded; then the check above, or a ruling that the skill rule is enough.
+**Ref:** `documentation/WHERE_WE_ARE.md`; `skills/ledger-and-session-records/SKILL.md` (The Document Stack); `PROJECT_INSTRUCTIONS.md` v3.74; L-363; L-395; L-333; L-362.
 
 #### [L-395] The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects)
 <!-- L:395 status:OPEN upd:2026-09-29 section:A flag: rice: -->

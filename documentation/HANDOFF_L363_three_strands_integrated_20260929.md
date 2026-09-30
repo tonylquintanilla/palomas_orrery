@@ -576,5 +576,130 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
      HANDOFF_L363_three_strands_integrated_20260929.md in
      documentation/, with your local copies of the two
      2026-09-28 handoffs. Commit and push.
-  4. Tell Claude the new orrery SHA. -- 
+  4. Tell Claude the new orrery SHA. -- 5db8bbe0ba1098992329083fda6e3a325fab2da9 and gallery at 0f513fd5d8ad2ce1e3ba5f19ea2f44388484690e
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+=================================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L396_where_we_are_and_skill_1_13_20260930.py
+ok  LEDGER_CONSOLIDATED.md                         header stamp
+ok  LEDGER_CONSOLIDATED.md                         L-396 added
+ok  PROJECT_INSTRUCTIONS.md                        header v3.74, cut from 5db8bbe0
+ok  PROJECT_INSTRUCTIONS.md                        version history: v3.74 entry
+ok  PROJECT_INSTRUCTIONS.md                        version history: v3.71 moved down
+ok  documentation/PROJECT_INSTRUCTIONS_HISTORY.md  PART 1: v3.71 received
+ok  skills/ledger-and-session-records/SKILL.md     description and fires_when name WHERE_WE_ARE.md
+ok  skills/ledger-and-session-records/SKILL.md     version line 1.12 -> 1.13
+ok  skills/ledger-and-session-records/SKILL.md     v1.13 paragraph in the header
+ok  skills/ledger-and-session-records/SKILL.md     The Document Stack: Where We Are added
+ok  documentation/project_instructions_v3_74.md    created
+ok  documentation/WHERE_WE_ARE.md                  replaced your earlier draft
+
+Stamps updated: the skill's version line (1.13), the protocol's
+header (v3.74, cut from 5db8bbe0), the ledger's Module updated.
+
+patch applied (10 edits in 4 files, 2 new files)
+
+NEXT:
+  1. python orrery_maintenance_run.py
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20260930T150604Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 0.8s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.1s  rewrote PROJECT_INSTRUCTIONS.md
+  Constants export             1.1s  unchanged (1 checked, not written)
+  Module atlas                 5.7s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               4.3s  rewrote DATA_INVENTORY.md
+  Exact rows report            1.2s  unchanged (1 checked, not written) -- 8 of
+                                     21 exact rows printed at 19 lines (9 orrery,
+                                     10 gallery); 5 drawn only, 0 not followed, 0
+                                     map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.2s  21 of 21 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.6s  No figure count exceeds its inputs: 29
+                                     derived row(s) read, 17 judged OK -- 17 OK,
+                                     12 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 15 conversion(s)
+                                     checked.
+  Constants export check       0.9s  Export matches the store: sha256
+                                     b6d8bfdb21f6 on both sides; 76 rows re-read,
+                                     66 not exported, 26 tokens; 160 conversions
+                                     re-computed, 10 of 10 worked cases hold.
+  Exact rows by the count      1.0s  PASSING -- 8 printed exact rows each state a
+                                     count; 9 orrery lines print through
+                                     exact_text(); 10 gallery lines are served
+                                     the count
+  Dimensions                   1.0s  No unit contradicts its arithmetic: 44
+                                     derived row(s) read -- 32 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 78 status lines in constants_new.py are
+                                     well formed; 61 rows carry none.
+  Row shape                    0.1s  All 142 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.2s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Reset completeness          16.4s  PASS -- all 309 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  1.6s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Worksheet checker            7.8s  76 of 114 routed, 8 clean
+  Worksheet checker tests     12.8s  All 136 checks passed
+  Worksheet key round trip     0.8s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         17.1s  All 76 checks passed
+  Extractor pins               0.3s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner           8.3s  296 TIER-1 FINDINGS IN THE SCANNED TREE
+
+======================================================================
+  18 of 18 gating checkers passed -- 83.1s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           76 of 114 routed, 8 clean
+    Provenance scanner          296 TIER-1 FINDINGS IN THE SCANNED TREE
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2014 file(s) examined, 8 written, 0 created, 0 removed, 4 rewritten identically
+    written   DATA_INVENTORY.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROJECT_INSTRUCTIONS.md
+    written   PROVENANCE_AUDIT.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      WORKSHEET_CHECK.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Move this script into documentation/. Commit and push. -- 
+  3. Reinstall ledger-and-session-records from skills/ to
+     Settings > Skills.
+  4. Replace the Project's instructions in claude.ai with the new
+     PROJECT_INSTRUCTIONS.md.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 

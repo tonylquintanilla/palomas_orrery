@@ -1808,6 +1808,52 @@ resident.
 (Moved down from the resident protocol on 2026-09-28 when
 v3.73 made a fourth entry.)
 
+v3.71 (September 28, 2026): No rule changed in this document. ONE
+skill bump, provenance-discipline 2.20 -> 2.21 (L-322). A SUM SCALED
+BY AN EXACT NUMBER KEEPS ITS DECIMAL PLACE.
+
+WHAT PROMPTED IT. Settling the Sun room's chromosphere hover, which
+printed its radius as 1.002874802357338 solar radii. The top of the
+chromosphere is the Sun's radius, 695,700 km, exact by the IAU's
+definition, plus a depth Carroll & Ostlie give as about 2,000 km, one
+figure. The sum is good to thousands of kilometres, 698,000 km. Divided
+by the exact solar radius, the counting rule as written gave 1.00:
+three figures, an implied error of about 3,500 km on a 2,000 km layer.
+Written the other way, 1 + 2,000 / 695,700, the same rule gave 1.003,
+and the unit check forced the coarser form. And the export rounds each
+row to its count, so at 1.00 the chromosphere would have been drawn on
+the photosphere, erasing the 2,000 km hairline ruled on 2026-08-16.
+
+WHAT THE SKILL NOW SAYS. Rule 3 gains one paragraph: a sum or
+difference, scaled by an exact row, keeps its decimal place carried
+through the scaling, not its figure count. 1,000 km is 0.0014 solar
+radii, nearest the thousandths, so the chromosphere prints 1.003. The
+reference page, Wikipedia's Significant figures, names this as the
+unit-conversion exception to its multiplication guideline: 8 inches
+becomes 20. cm, not 20 cm. A single measured value scaled by an exact
+row is deliberately left under the fewest-figures rule for now. Rule 1
+gains the form that carries it, the ceiling says a converted place is
+not an implied uncertainty, and Rule 8 specifies the checker, which is
+built with the chromosphere rows.
+
+WHO DECIDED. Claude Fable 5.1 recommended the rule; Tony ruled for it
+on 2026-09-28. Claude Opus 5.5 checked the reference and the numbers
+the same day and added the scope sentence, which Tony confirmed.
+
+THE OBLIGATION TRAVELS. This bump was written in Fable's session and
+lands from this one, which had already shipped 2.20. The next session
+confirms its loaded copy reads 2.21 before any provenance or
+constants_new.py work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.68 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-09-30 when
+v3.74 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

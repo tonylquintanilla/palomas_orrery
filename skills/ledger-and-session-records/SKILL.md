@@ -1,13 +1,13 @@
 ---
 name: ledger-and-session-records
-description: Ledger and session-record conventions for the Paloma's Orrery project. Use when creating, updating, or closing items in LEDGER_CONSOLIDATED.md, running or modifying ledger_index.py, RICE-scoring items, writing or reading session handoffs or build manifests, recording protocol or skill version changes, regenerating MODULE_ATLAS.md via module_atlas.py, or tracing dependencies with dep_trace.py. Trigger words include L-handle references (L-001, L-078...), "ledger", "handoff", "manifest", "RICE", "module atlas", "dependency trace". Do not use for projects other than Paloma's Orrery.
-fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep_trace
+description: Ledger and session-record conventions for the Paloma's Orrery project. Use when creating, updating, or closing items in LEDGER_CONSOLIDATED.md, running or modifying ledger_index.py, RICE-scoring items, writing or reading session handoffs or build manifests, recording protocol or skill version changes, regenerating MODULE_ATLAS.md via module_atlas.py, or tracing dependencies with dep_trace.py. Also use when writing or updating documentation/WHERE_WE_ARE.md, Tony's plain-language page of where the project is and where it is going, which every session updates at its end. Trigger words include L-handle references (L-001, L-078...), "ledger", "handoff", "manifest", "RICE", "module atlas", "dependency trace", "where we are". Do not use for projects other than Paloma's Orrery.
+fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep_trace, WHERE_WE_ARE.md at every session's end
 ---
 
 # Ledger and Session Records
 
-Skill version: 1.12 | Cut from palomas_orrery @ 2a7d26b9 (v1.12),
-earlier @ 1ee1cc61 (v1.11), @ 50cbd2df (v1.10), @ 41c0b279 (v1.9), @ 3586970d (v1.8),
+Skill version: 1.13 | Cut from palomas_orrery @ 5db8bbe0 (v1.13),
+earlier @ 2a7d26b9 (v1.12), @ 1ee1cc61 (v1.11), @ 50cbd2df (v1.10), @ 41c0b279 (v1.9), @ 3586970d (v1.8),
 @ 434a712b (v1.7), @ 305b269 (v1.6), @ 3398970 (v1.5) | September 10,
 2026, with Anthropic's Claude Opus 5
 Sources: LEDGER_CONSOLIDATED.md header, ledger_index.py at HEAD, handoff
@@ -58,6 +58,12 @@ integrate these reports. the summary as an executive summary. the body
 should keep its critical path section." The companions had restamped
 with v19 and v20 and not with v21 through v33, because nothing tied
 them to the plan's own cadence.
+v1.13 (L-396; 2026-09-30, with Anthropic's Claude Opus 5.5) adds Where
+We Are to The Document Stack: `documentation/WHERE_WE_ARE.md`, one page
+written for Tony rather than for the work, rewritten in place inside
+every session's ledger patch, with this session's changes marked and
+the must-reads in italics. Tony, 2026-09-30: "i struggle to keep the
+big picture. it's the old dilemma of loosing the forest for the trees."
 
 Note: READING the ledger at session start is resident Part-1 behavior,
 not this skill's job. This skill carries the maintenance mechanics.
@@ -121,6 +127,51 @@ than resolving it silently. (Origin, 2026-08-20: a document's
 closing section said a decision "belongs to Tony"; the ledger had
 ruled it two sessions earlier and a build step depended on the
 ruling.)
+
+### Where We Are -- Tony's page [QUALITY]
+
+`documentation/WHERE_WE_ARE.md` is the one document written for Tony
+rather than for the work (v1.13, L-396). It is not a rung in the status
+ordering and it is not another zoom of the master plan: the ledger still
+wins on status and the plan on sequencing. It restates both in plain
+words, for a reader who cannot hold the detail. Tony, 2026-09-30: "i
+struggle to keep the big picture. it's the old dilemma of loosing the
+forest for the trees." The plan's summary and critical path had been
+tried for that job and had not really helped, by his account: they are
+written for the work, and they move only at design builds.
+
+- ONE file, rewritten IN PLACE, never versioned. Git holds the
+  history. Old changes drop off the page; the ledger and git keep them.
+- Updated at the END OF EVERY SESSION that changed the picture, inside
+  that session's ledger patch, so it moves in the same transaction and
+  costs Tony no extra run. A session with no patch that still changed
+  the picture delivers a small one. The patch writes the whole file.
+- A FIXED SHAPE that does not grow: the header (the date, and the SHAs
+  it was written at); a READ THIS FIRST box (changed this session, do
+  next, needs you now); how to read the marks; the goal; the road, one
+  numbered line per stage from start to goal, marked [done], [NOW],
+  [next], [later] or [goal]; right now; the next three steps; waiting
+  on you, split into now, at the next design talk, and not urgent; and
+  where the details are.
+- ATTENTION MARKS, cleared and reset at every update so that they
+  always mean "new since you last read this": **>> UPDATED THIS
+  SESSION** beside a changed section's heading; "<< new this session"
+  or "<< moved this session" beside a road stage; and *italics* on the
+  must-reads -- the one next step, anything that needs Tony now, and
+  the [NOW] stage. Tony: "attention is a human limitation."
+- PLAIN WORDS IN SHORT BULLETS, one idea per bullet, no paragraphs.
+  Tony, 2026-09-30: "the wall of text even a paragraph is an obstacle."
+  No ledger handles in the main text; they appear only under where the
+  details are. The Register Rule applies in full: this page is in the
+  chat's register, not the reference register of this skill.
+- At the end of a TURN that changes the picture, Claude's reply closes
+  with two or three bullets under "Where this leaves us", in the page's
+  own words. The page itself moves at session end.
+- NOTHING CHECKS IT YET. An unchecked store drifts, as the plan's two
+  companions did for a month (L-333, L-362). The candidate check is on
+  L-396: the orrery maintenance run fails when the page's date is older
+  than the ledger's newest header stamp. Until it is built, this rule is
+  the only thing keeping the page current.
 
 ## Ledger Block Format
 
