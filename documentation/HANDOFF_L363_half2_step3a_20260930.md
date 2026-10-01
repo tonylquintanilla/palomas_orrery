@@ -598,29 +598,228 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
      skills/ to Settings > Skills. -- done
   4. Replace the Project's instructions in claude.ai with the new
      PROJECT_INSTRUCTIONS.md. -- done
-  5. Then the gallery patch, patch_L398_2, which needs this push.
+  5. Then the gallery patch, patch_L398_2, which needs this push. -- c12994d27e6205371cd463b1b535afd0a2f4dd17
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 2. **The website patch, `patch_L398_2_distance_figures_20261001.py`.** Run it only after the orrery push, because the website fetches the new rows from GitHub. Then the gallery maintenance run, commit and push, then the live check.
 
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L398_2_distance_figures_20261001.py
+ok  data/objects_config.json       nine position_accuracy links, as the mirror writes them
+ok  gallery_maintenance_run.py     checker row: Solar System figures
+ok  gallery_maintenance_run.py     served files: gallery/solar_system_figures.js
+ok  interactive.html               header: L-398 update line
+ok  interactive.html               script tag: solar_system_figures.js
+ok  interactive.html               driver: pass each body's position_accuracy
+ok  interactive.html               compose: distance line from the file, and the sentence
+ok  interactive.html               figures helpers moved out to gallery/solar_system_figures.js
+ok  gallery/solar_system_figures.js new
+ok  documentation/smoke_solar_system_figures.js new
 
+patch applied
+
+NEXT:
+  1. python gallery_maintenance_run.py -- it pulls the orrery's new
+     export first. Every gating checker should pass, including the
+     new one, "Solar System figures", which prints each body's
+     distance and what set its figures.
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.2s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     1.4s  rewrote
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      12.8s  PASS (229 checks, 0 failures)
+  PASS Pole of date              0.2s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.1s  All 64 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served, print count
+                                    written as served, "in" written as
+                                    served and a slot served in
+                                    another unit from it.
+  PASS Store writer suite        4.5s  All 251 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 252 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 74 link(s) compared, store
+                                    089a5baf0101.
+  PASS Pointer join              0.1s  Every link is accounted for: 98
+                                    link(s) against orrery c12994d2,
+                                    20 fallback named; read check: 43
+                                    of 43 measured rows reached carry
+                                    a read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's 19 object(s) and their
+                                    features exactly: 4 object(s) with
+                                    35 named shell(s), in both cache
+                                    files.
+  PASS Feature renderers         1.1s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.1s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.1s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.1s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 57 hover(s) and 296
+                                    number(s) examined; 13 graded, 7
+                                    graded by line, 44 held to the
+                                    fixture ===
+  PASS Solar System figures      0.1s  === PASS: 6 worked cases, 11
+                                    drawer rows matched to their
+                                    accuracy rows, 10 served
+                                    distances; Uranus, Neptune and
+                                    Pluto print to JPL's ten-thousands
+                                    place ===
+  PASS Guest book                0.1s  === GUEST BOOK: all 8 checks
+                                    passed
+  PASS Guest book updater        0.2s  === GUEST BOOK UPDATER: all 43
+                                    checks passed (6 scripted runs,
+                                    self-test first)
+  PASS Daily run steps           0.1s  === DAILY RUN: all 3 step scripts
+                                    found
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: 6 sibling(s), none stale,
+                                    and nothing in data/ the builder
+                                    did not make. The sweep is keeping
+                                    up.
+
+======================================================================
+  20 of 20 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: 6 sibling(s), none stale, and
+  last swap 2026-10-01T16:00:33.623388+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  2. Move this script into documentation/. Commit and push. -- done 58dd8f25ad7f3c01a2e4b03497abaa5091081f98
+  3. python gallery_maintenance_run.py --live
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 14 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+
+  PASS Served reachability       2.6s  all 14 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at c12994d2
+
+  PASS Export freshness          0.1s  the served export is the orrery's
+                                    at c12994d2, byte for byte
+
+  orrery HEAD c12994d2
+  examining 24 of 98 links; the other 74 are served from the export
+    NOT IN STORE  create_sun_galactic_tide default not a top-level constant in the store
+                  /objects/0/features/oort_cloud/galactic_tide/typical_radius
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  24 pointers: 20 match, 0 DRIFT, 0 UNIT MISMATCH, 4 could not be examined.
+
+  PASS Store drift               1.1s  24 pointers against orrery
+                                    c12994d2 -- 20 match, 0 DRIFT, 0
+                                    UNIT MISMATCH, 4 could not be
+                                    examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            24 pointers against orrery c12994d2 --
+  last swap 2026-10-01T16:00:33.623388+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  4. On your phone and desktop, open
+     palomasorrery.com/interactive.html?exhibit=solar-system,
+     tick Pluto, Neptune, Uranus, Jupiter and Apophis, and tap each.
+     Pluto, Neptune and Uranus should end in 0,000 km; Apophis
+     should have the extra line.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
 
 3. **Your phone and desktop.** Open the Solar System room, tick Pluto, Neptune, Uranus, Jupiter and Apophis, and tap each one.
 
 **What you should see (from the 1 October data):**
-- Pluto: 35.6103 AU from the Sun (5,327,220,000 km). Before, it showed ten figures.
-- Neptune: 4,469,690,000 km, and Uranus: 2,908,370,000 km.
-- Jupiter and Saturn end at hundreds of km, for example Jupiter at 793,908,700 km.
-- The inner planets look the same as before.
-- Apophis keeps its distance and adds your line: "JPL's own uncertainty for this position is not yet included."
+- Pluto: 35.6103 AU from the Sun (5,327,220,000 km). Before, it showed ten figures. -- no, 35.6108 AU and 5,327,300,000 km
+- Neptune: 4,469,690,000 km, -- correct
+- and Uranus: 2,908,370,000 km. -- no, 2,908,350,000
+- Jupiter and Saturn end at hundreds of km, for example Jupiter at 793,908,700 km. -- Saturn is 1,411,367,900 km and Jupiter 793,946,800 km and 5.307207 AU
+- - The inner planets look the same as before. -- not verified
+- Apophis keeps its distance and adds your line: "JPL's own uncertainty for this position is not yet included." -- correct
 
 **What the patches contain:**
 - **The orrery's three accuracy rows.** They are cited to JPL's 2014 report, which I opened and read today.
 - **The two skill updates and the protocol entry.** Version 2.23 of the provenance skill, version 1.7 of the room skill, and protocol v3.75.
 - **The website changes.**
-  - Nine bodies get a link to their group's row.
-  - The distance logic moves into its own file.
-  - A new check joins the maintenance run. It fails if Pluto, Uranus or Neptune print finer than ten thousand km. It also fails if the page stops using the file.
+  - Nine bodies get a link to their group's row. -- unclear. the info button does not show a link. now or next?
+  - The distance logic moves into its own file. -- unclear, please clarify
+  - A new check joins the maintenance run. It fails if Pluto, Uranus or Neptune print finer than ten thousand km. It also fails if the page stops using the file. -- please add to the dashboard.
 
 **How I tested them:**
 - I ran both patches on throwaway copies, and each produced exactly the state I had tested.
@@ -631,5 +830,161 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 The notes patch from earlier is still independent of these, so you can run it before or after. Once you have looked on your phone, I'll write the closing patch for the ledger and Where We Are.
 
 Where this leaves us:
-- The distance figures now follow JPL's own accuracy. That takes effect once you run both patches and push.
-- Next come the NASA descriptions and links for each body, then the drawer's new behaviours.
+- The distance figures now follow JPL's own accuracy. That takes effect once you run both patches and push. -- done
+- Next come the NASA descriptions and links for each body, then the drawer's new behaviours. -- okay
+
+=========================================================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L398_ledger_close_20261001.py
+ok  LEDGER_CONSOLIDATED.md  header stamp
+ok  LEDGER_CONSOLIDATED.md  L-401 and L-402 added
+ok  LEDGER_CONSOLIDATED.md  L-398 done
+ok  LEDGER_CONSOLIDATED.md  L-398 close block
+ok  LEDGER_CONSOLIDATED.md  L-363 note
+ok  palomas_orrery_dashboard.py  offline runner's list names the new check
+ok  palomas_orrery_dashboard.py  button: Solar System Figures
+ok  documentation/WHERE_WE_ARE.md  rewritten
+ok  documentation/HANDOFF_L398_distance_figures_20261001.md  new
+
+Stamps updated: the ledger's header line; Where We Are's date.
+patch applied
+
+NEXT:
+  1. python orrery_maintenance_run.py  (rebuilds the ledger index
+     and moves L-398 into the closed section)
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261001T183931Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.1s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.1s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.5s  unchanged (1 checked, not written)
+  Module atlas                 6.2s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.4s  rewrote DATA_INVENTORY.md
+  Exact rows report            1.6s  rewrote EXACT_ROWS_PRINTED.md -- 8 of 24
+                                     exact rows printed at 19 lines (9 orrery, 10
+                                     gallery); 8 drawn only, 0 not followed, 0
+                                     map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.2s  21 of 21 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.7s  No figure count exceeds its inputs: 29
+                                     derived row(s) read, 17 judged OK -- 17 OK,
+                                     12 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 15 conversion(s)
+                                     checked.
+  Constants export check       1.1s  Export matches the store: sha256
+                                     089a5baf0101 on both sides; 79 rows re-read,
+                                     66 not exported, 26 tokens; 172 conversions
+                                     re-computed, 10 of 10 worked cases hold.
+  Exact rows by the count      1.3s  PASSING -- 8 printed exact rows each state a
+                                     count; 9 orrery lines print through
+                                     exact_text(); 10 gallery lines are served
+                                     the count
+  Dimensions                   1.4s  No unit contradicts its arithmetic: 44
+                                     derived row(s) read -- 32 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 81 status lines in constants_new.py are
+                                     well formed; 61 rows carry none.
+  Row shape                    0.1s  All 145 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.2s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Reset completeness          23.8s  PASS -- all 309 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.2s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Worksheet checker            8.9s  76 of 114 routed, 8 clean
+  Worksheet checker tests     17.0s  All 136 checks passed
+  Worksheet key round trip     1.4s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         28.3s  All 76 checks passed
+  Extractor pins               0.6s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          14.8s  296 TIER-1 FINDINGS IN THE SCANNED TREE
+
+======================================================================
+  18 of 18 gating checkers passed -- 118.8s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           76 of 114 routed, 8 clean
+    Provenance scanner          296 TIER-1 FINDINGS IN THE SCANNED TREE
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2022 file(s) examined, 9 written, 0 created, 0 removed, 4 rewritten identically
+    written   DATA_INVENTORY.md
+    written   EXACT_ROWS_PRINTED.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Move this script into documentation/. Commit and push.
+  3. Optional: open the dashboard and press Solar System Figures
+     under Gallery -- checks and data. It should end "=== PASS".
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+=================================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L398_3_dashboard_wrapper_20261001.py
+ok  documentation\run_solar_system_figures.py  new
+
+patch applied
+
+NEXT:
+  1. python documentation/run_solar_system_figures.py -- it should
+     end "=== PASS". (Optional; the dashboard button will do it.)
+
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python documentation/run_solar_system_figures.py
+Self-test: the worked cases fail on a Report test one place too fine, on a rule ignoring JPL's accuracy, and on the sentence printed for a body with a row.
+
+Distances at each body's served minute (data/solar-system/coverage_index.json), 10 bodies:
+  mercury           0.46485980 AU from the Sun (69,542,037 km)  -- set by whole kilometres
+  venus             0.72696293 AU from the Sun (108,752,106 km)  -- set by whole kilometres
+  earth             1.00132586 AU from the Sun (149,796,216 km)  -- set by drift
+  apophis           0.85622593 AU from the Sun (128,089,576 km)  -- set by whole kilometres  + sentence
+  mars              1.55826599 AU from the Sun (233,113,273 km)  -- set by whole kilometres
+  jupiter           5.306952 AU from the Sun (793,908,700 km)  -- set by JPL's accuracy
+  saturn            9.434651 AU from the Sun (1,411,403,600 km)  -- set by JPL's accuracy
+  uranus            19.4413 AU from the Sun (2,908,370,000 km)  -- set by JPL's accuracy
+  neptune           29.8781 AU from the Sun (4,469,690,000 km)  -- set by JPL's accuracy
+  pluto_barycenter  35.6103 AU from the Sun (5,327,220,000 km)  -- set by JPL's accuracy
+
+=== PASS: 6 worked cases, 11 drawer rows matched to their accuracy rows, 10 served distances; Uranus, Neptune and Pluto print to JPL's ten-thousands place ===
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  2. Move this script into documentation/. Commit and push.
+  3. Then the orrery's closing patch, which adds the button.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 

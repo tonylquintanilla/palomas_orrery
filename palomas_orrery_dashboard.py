@@ -335,7 +335,8 @@ LAUNCH_GROUPS = {
         "guest book updater, the Daily Run's steps, the artifact-1 "
         "assembler pin, and cache siblings (report only). Node: feature "
         "renderers, page framing, Sun shells, Earth scene geometry, "
-        "hover budget, arrival, display figures, and the guest book. "
+        "hover budget, arrival, display figures, Solar System figures, "
+        "and the guest book. "
         "Three states rather than two: a suite that could not run -- "
         "Node missing, say -- reports UNREACHABLE and is never counted "
         "as a pass. The indented buttons below launch some of these "
@@ -504,6 +505,24 @@ LAUNCH_GROUPS = {
         GALLERY_REPO_DIR,
         True,
         ["--join"],
+        True),
+        ("Solar System Figures",
+        os.path.join("documentation", "run_solar_system_figures.py"),
+        "Checks the distances the Solar System room prints (L-398). Each "
+        "prints to the place the larger of two errors earns: how far the "
+        "page's arithmetic may have drifted from JPL Horizons, and how "
+        "well JPL knows where the body is at all, from its 2014 ephemeris "
+        "report. Works six distances by hand, matches every body in the "
+        "room's drawer to its group's row, and prints each body's "
+        "distance from the served cache with what set its figures. Fails "
+        "unless Uranus, Neptune and Pluto print to JPL's ten-thousands "
+        "place, and if the page stops using gallery/solar_system_figures.js. "
+        "It breaks that file three ways first, so a pass has shown it can "
+        "fail. The check is Node; this is the Python wrapper the dashboard "
+        "needs. GATES the gallery runner. Runs from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
         True),
         ("Store Editor Suite",
         os.path.join("tools", "test_exhibit_store_editor.py"),

@@ -9,8 +9,8 @@ Rebuilt by `exact_rows_report.py` on every orrery maintenance run. An exact row 
 - 8 printed by at least one display: `SUN_RADIUS_KM`, `EARTH_LEO_UPPER_ALTITUDE_KM`, `EARTH_LEO_LOWER_ALTITUDE_KM`, `EARTH_VAN_ALLEN_OUTER_RADII`, `EARTH_SOLAR_WIND_PRESSURE_NPA`, `EARTH_SOLAR_WIND_BZ_NT`, `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG`, `EARTH_BOW_SHOCK_CUT_ANGLE_DEG`.
 - 19 printing lines: 9 in the orrery, 10 in the gallery.
 - Gallery pointers to exact rows with no PRINTS entry (NOT FOLLOWED): 0.
-- Gallery pointers to exact rows read only to place a drawing (DRAWN, not printed): 5: `SUN_RADIUS_KM`, `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`, `EARTH_MAGNETOTAIL_DRAWN_END_RADII`, `EARTH_POLE_RA_J2000_DEG`, `EARTH_POLE_DEC_J2000_DEG`.
-- PRINTS or DRAWN entries that no longer match a pointer or their line (BROKEN): 1: `position_accuracy` -> `node.value (no pointer reaches it)`.
+- Gallery pointers to exact rows read only to place a drawing (DRAWN, not printed): 8: `SUN_RADIUS_KM`, `DE430_TERRESTRIAL_POSITION_PLACE_KM`, `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`, `EARTH_MAGNETOTAIL_DRAWN_END_RADII`, `EARTH_POLE_RA_J2000_DEG`, `EARTH_POLE_DEC_J2000_DEG`, `DE430_JUPITER_SATURN_POSITION_PLACE_KM`, `DE430_URANUS_NEPTUNE_PLUTO_POSITION_PLACE_KM`.
+- PRINTS or DRAWN entries that no longer match a pointer or their line (BROKEN): 0.
 
 ## Printed by the count
 
@@ -99,8 +99,26 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
 - `EARTH_MAGNETOTAIL_DRAWN_END_RADII`: named on 3 other orrery line(s).
   - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2478 (config `/objects/1/features/earth_magnetosphere/magnetotail/drawn_end`): `var tailEnd = measured(tl.drawn_end, "r_earth", tlWhere + "/drawn_end",`
 - `DE430_TERRESTRIAL_POSITION_PLACE_KM`: named on 0 other orrery line(s).
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 82 (config `/objects/1/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 83 (config `/objects/1/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 82 (config `/objects/4/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 83 (config `/objects/4/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 82 (config `/objects/5/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 83 (config `/objects/5/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 82 (config `/objects/6/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 83 (config `/objects/6/position_accuracy`): `v = node.value;`
 - `DE430_JUPITER_SATURN_POSITION_PLACE_KM`: named on 0 other orrery line(s).
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 82 (config `/objects/2/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 83 (config `/objects/2/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 82 (config `/objects/3/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 83 (config `/objects/3/position_accuracy`): `v = node.value;`
 - `DE430_URANUS_NEPTUNE_PLUTO_POSITION_PLACE_KM`: named on 0 other orrery line(s).
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 82 (config `/objects/7/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 83 (config `/objects/7/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 82 (config `/objects/8/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 83 (config `/objects/8/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 82 (config `/objects/12/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 83 (config `/objects/12/position_accuracy`): `v = node.value;`
 - `GM_SUN_SI`: named on 0 other orrery line(s).
 - `M3_PER_KM3`: named on 0 other orrery line(s).
 
@@ -108,6 +126,6 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
 
 Orrery: every tracked `.py` file outside `documentation/`, except `constants_new.py` and this tool, searched for each exact row's name inside `{...}` in a formatted string, as the argument of `_declared`, `_whole_figures` or `_with_uncertainty`, after `%`, or inside `str(...)` or `format(...)`. Comment lines are skipped.
 
-Gallery: each pointer in `data/objects_config.json` to an exact row, followed to its print lines by the PRINTS table in the tool: the page script, the function and a piece of the print line. A pointer read only to place a drawing is named instead in the DRAWN table, by the line that reads it, and that line must not be a print line. A pointer with no entry, or an entry that matches nothing, is reported above rather than dropped. Page scripts read: `gallery/arrival.js`, `gallery/earth_geometry.js`, `gallery/feature_renderers.js`, `gallery/guestbook.js`, `gallery/nav_cluster.js`, `interactive.html`.
+Gallery: each pointer in `data/objects_config.json` to an exact row, followed to its print lines by the PRINTS table in the tool: the page script, the function and a piece of the print line. A pointer read only to place a drawing is named instead in the DRAWN table, by the line that reads it, and that line must not be a print line. A pointer with no entry, or an entry that matches nothing, is reported above rather than dropped. Page scripts read: `gallery/arrival.js`, `gallery/earth_geometry.js`, `gallery/feature_renderers.js`, `gallery/guestbook.js`, `gallery/nav_cluster.js`, `gallery/solar_system_figures.js`, `interactive.html`.
 
 Not searched: an exact row's value typed into text as words or digits instead of read from the row.

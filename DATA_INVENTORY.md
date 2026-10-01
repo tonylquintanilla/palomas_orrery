@@ -74,7 +74,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 452.9 MB (1138 files)
+**Total size:** 452.9 MB (1142 files)
 
 **GitHub Pages headroom:** 571 MB remaining of 1024 MB ceiling (44.2% used)
 
@@ -85,20 +85,20 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 | .json | 757 | 424.1 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-10-01 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 2 | 6.3 MB | palomas_orrery_logo.png (5.1 MB) | 2026-09-24 |
-| .py | 197 | 4.3 MB | gallery_studio.py (243.1 KB) | 2026-10-01 |
+| .py | 199 | 4.3 MB | gallery_studio.py (243.1 KB) | 2026-10-01 |
 | .jsonl | 107 | 2.7 MB | encke.jsonl (31.8 KB) | 2026-10-01 |
-| .html | 5 | 414.4 KB | index.html (197.7 KB) | 2026-09-30 |
-| .js | 13 | 344.8 KB | feature_renderers.js (131.8 KB) | 2026-09-28 |
+| .html | 5 | 413.5 KB | index.html (197.7 KB) | 2026-10-01 |
+| .js | 15 | 363.2 KB | feature_renderers.js (131.8 KB) | 2026-10-01 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
 | .jpg | 1 | 95.2 KB | palomas_orrery_wall.jpg (95.2 KB) | 2026-09-25 |
-| .md | 4 | 61.3 KB | MODULE_ATLAS.md (42.9 KB) | 2026-10-01 |
+| .md | 4 | 62.2 KB | MODULE_ATLAS.md (43.4 KB) | 2026-10-01 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |
 | .patch | 3 | 11.7 KB | phaseb_studio.patch (7.0 KB) | 2026-07-29 |
 | .txt | 2 | 7.8 KB | requirements.txt (4.2 KB) | 2026-09-04 |
 | .mermaid | 1 | 7.4 KB | gallery_navigation_flowchart.mermaid (7.4 KB) | 2026-03-08 |
 | .bat | 1 | 3.7 KB | _run_local_server.bat (3.7 KB) | 2026-08-24 |
 | .url | 1 | 176.0 B | Paloma's Orrery - Interactive Astronomical Visualizations.url (176.0 B) | 2026-02-27 |
-| .sha | 1 | 41.0 B | constants_export.sha (41.0 B) | 2026-09-30 |
+| .sha | 1 | 41.0 B | constants_export.sha (41.0 B) | 2026-10-01 |
 | (none) | 1 | 17.0 B | CNAME (17.0 B) | 2026-02-13 |
 
 ### Largest files (top 10)

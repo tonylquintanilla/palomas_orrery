@@ -200,6 +200,9 @@ opened; L-392 done; notes on L-385, L-389, L-395), built on 10012821.
 Module updated: October 1, 2026 with Anthropic's Claude Opus 5.5
 (Tony's notes on Where We Are: L-363 front door and orbit marker,
 L-389, L-396 goal line, L-398; L-400 done), built on 7a47269c.
+Module updated: October 1, 2026 with Anthropic's Claude Opus 5.5
+(L-398 done; L-401 and L-402 opened; L-363 note; a dashboard button for
+the Solar System figures check), built on c12994d2.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -417,7 +420,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*241 live items; 226 need attention (`!`); 188 RICE-scored; 154 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*242 live items; 227 need attention (`!`); 188 RICE-scored; 155 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -567,8 +570,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-394 | A card cannot say which body it belongs to (gallery, Studio) | OPEN | -- | 2026-09-29 |
 | ! | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | OPEN | -- | 2026-10-01 |
 | ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-10-01 |
-| ! | L-398 | Distance figures: the source's own accuracy, not only our drift from Horizons (gallery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-399 | Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder) | OPEN | -- | 2026-10-01 |
+| ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-01 |
+| ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 
 ### B. Pending Action (Tony-side)
 
@@ -873,6 +877,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-384 | The scaling rule stops short of a single measured value scaled by an exact row (skills, store) | DONE | -- | 2026-09-28 |
 |  | L-392 | The Solar System room's drawer list is page code, not served data (gallery, exhibits) | DONE | -- | 2026-09-30 |
 |  | L-397 | "Cache in step" compared only bodies with shells; it now compares every object (gallery, checks) | DONE | -- | 2026-09-30 |
+|  | L-398 | Distance figures: the source's own accuracy, not only our drift from Horizons (gallery, provenance) | DONE | -- | 2026-10-01 |
 |  | L-400 | A stray folder "data/solar-system (1)" in Tony's gallery copy (gallery, housekeeping) | DONE | -- | 2026-10-01 |
 
 ### W.Done -- Web Publication track, closed items
@@ -903,6 +908,60 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-402] Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits)
+<!-- L:402 status:OPEN upd:2026-10-01 section:A flag: rice: -->
+- **Tony's idea, 2026-10-01**, prompted by the distance fix (L-398): "we
+  could implement animation and date picking within the propagation
+  range of the cache adjusting the precision with time from the fetched
+  date." Then: "Could we determine the date range based on the selected
+  row instead of all the objects in the room? For example without
+  Mercury or without the Moon to get more range?"
+- **What already exists** [read at gallery 58dd8f25]. Each body's own
+  trust window is in the served cache, as half-widths in days: Mercury
+  88, Venus 225, Earth 365, Apophis 324, Mars 687, Jupiter 4,332, Saturn
+  10,754, Uranus 30,879, Neptune 60,248, the Pluto-Charon barycentre
+  90,143; the Moon 3.4. Each is capped at one orbital period. And a
+  distance already prints fewer figures the further the date is from the
+  elements' date (L-398), so precision follows the date with no new rule.
+- **What stands in the way.** gallery/assembler/resolver.py checks ONE
+  served_window for every scene -- today 88 days either side, Mercury's
+  -- whatever the scene draws. Tony's second sentence answers the
+  question L-150 left open: the range follows the bodies drawn.
+- **For its design talk:** what happens when a ticked body's window does
+  not cover the chosen date (grey its row, refuse the tick, or move the
+  date); what animation costs per frame on a phone, with the orrery's
+  animate_objects as the model; and Tony's ruling of 2026-09-26 that a
+  date control comes to all rooms at once (the Sun room has no date, and
+  Earth's room would be held to the Moon's days only when the Moon is
+  drawn).
+- **When.** Recorded, not scheduled. Claude suggested a design talk once
+  the drawer (L-363 step 3b) is built; not ruled.
+**Gap:** the design talk.
+**Ref:** gallery/assembler/resolver.py (the served_window check);
+tools/gallery_cache_builder.py (trust); L-149; L-150; L-363; L-398.
+
+#### [L-401] The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance)
+<!-- L:401 status:OPEN upd:2026-10-01 section:A flag: rice: -->
+- **Recorded 2026-10-01, closing L-398**, as one row for the class under
+  The Braid: recorded, not chased. provenance-discipline 2.23 says every
+  computed position a display prints goes to the place the larger of
+  its drift and its source's accuracy earns. The orrery's hovers print
+  distances by widths chosen where they are printed [read at orrery
+  c12994d2]: format_detailed_hover_text in visualization_utils.py gives
+  the distance through formatting_utils.format_maybe_float, ten decimal
+  places of an AU, and format_km_float; add_fly_to_object_buttons labels
+  its buttons at ".0f km", ".3f AU" or ".2f AU". These are Rule 7's
+  fixed-width sites, which are listed and assigned when the rule reaches
+  them.
+- Where the orrery's position comes straight from Horizons for the plot
+  date there is no drift, and JPL's accuracy is what applies, through
+  the three DE430 rows in constants_new.py.
+**Gap:** discovery first -- list every orrery site that prints a computed
+distance, by function -- then fix in slices when the work reaches the
+orrery's hovers.
+**Ref:** visualization_utils.py; formatting_utils.py; constants_new.py
+(DE430 rows); provenance-discipline 2.23; L-398.
+
 #### [L-399] Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder)
 <!-- L:399 status:OPEN upd:2026-10-01 section:A flag: rice: -->
 - JPL's planetary report (L-398) gives accuracies for the planets and
@@ -919,47 +978,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
   the source accuracy and the line goes away.
 **Gap:** with the near-Earth asteroid design.
 **Ref:** L-398; L-363; tools/gallery_cache_builder.py (gallery).
-
-#### [L-398] Distance figures: the source's own accuracy, not only our drift from Horizons (gallery, provenance)
-<!-- L:398 status:OPEN upd:2026-10-01 section:A flag: rice: -->
-**Tony:** (on Where We Are, 2026-10-01, beside "with only the
-figures its accuracy earns") "confirm that this is consistent with
-JPL precision"
-**Claude:** Not yet. Today the figures reflect only how closely the
-page matches Horizons. This item's build is what makes them
-consistent with JPL's own accuracy.
-- **Ruled 2026-09-30.** Distances in the Solar System room are written
-  out (no exponents) and printed to "the actual sig figs". Built at step
-  3a (gallery 432435a8): the figures come from the builder's measured
-  drift (error_rate_deg_per_day times the days since the elements'
-  date, as a distance at the body's distance), placed by the Report
-  test, never finer than whole kilometres. Tony confirmed it as the
-  rule for every computed position, to go into provenance-discipline.
-- **Gap found 2026-10-01** by Tony's question, "does Horizons serve the
-  distance to pluto with 9 significant digits?" The drift measures how
-  closely the page reproduces Horizons, not how well JPL knows where
-  the body is. Pluto printed ten figures.
-- **Source read 2026-10-01.** Folkner et al. 2014, IPN Progress Report
-  42-196 (DE430), abstract: the inner planets to subkilometre accuracy;
-  Jupiter and Saturn to tens of kilometres; Uranus, Neptune and Pluto
-  limited to several thousand kilometres. Park et al. 2021, AJ 161:105
-  (DE440, the ephemeris Horizons uses): Jupiter, Saturn and Pluto
-  improved, no new kilometre figures; Uranus and Neptune statistically
-  consistent with DE430. So the 2014 groups are a conservative upper
-  bound. Both read from JPL's own sites (ipnpr.jpl.nasa.gov,
-  ssd.jpl.nasa.gov).
-- **Ruled 2026-10-01.** Use whichever is larger, our drift or the
-  source's accuracy; the three groups are the source accuracy. Apophis
-  keeps its distance with one line (L-399).
-- **Build.** Orrery: three rows in constants_new.py citing the 2014
-  report, each stating the accuracy the source names in words as a
-  place -- a new case for provenance-discipline, which also gains the
-  computed-position rule. Gallery: each served object points at its
-  group's row through orrery_constant and the mirror; the page uses the
-  larger of the two; Apophis's line; interactive-exhibit records the
-  rooms section and the served row words (label, about, source_note).
-**Gap:** the build above, and both skill bumps.
-**Ref:** interactive.html solarSystemDistanceLine (gallery); L-363; L-399; L-345.
 
 #### [L-396] Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills)
 <!-- L:396 status:OPEN upd:2026-10-01 section:A flag: rice: -->
@@ -1573,6 +1591,12 @@ is in the orrery) "photosphere + 10%"
 
 #### [L-363] The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits)
 <!-- L:363 status:OPEN upd:2026-10-01 section:A flag: rice: -->
+- **2026-10-01, L-398 landed** (gallery 58dd8f25). A body's distance now
+  prints to the place the larger of the drift and JPL's own accuracy
+  earns; Uranus, Neptune and Pluto to ten thousand km, Apophis with
+  Tony's sentence. Tony noticed the info panel still has no NASA link for
+  a body: that is L-395, the next step. Order unchanged: L-395, then step
+  3b, then the phone check.
 **Tony:** (on Where We Are, 2026-10-01, beside "The Solar System
 room becomes the front door") "it is an alternate front door. the
 front page or lobby is the same. we will switch this room to be the
@@ -18240,6 +18264,85 @@ radii converts to 86,000 km, two figures. Loose ends: none.
   made while OneDrive was still syncing. The class is L-216's.
 - No loose ends.
 **Ref:** documentation/check_cache_siblings.py (gallery); L-216.
+
+#### [L-398] Distance figures: the source's own accuracy, not only our drift from Horizons (gallery, provenance)
+<!-- L:398 status:DONE upd:2026-10-01 section:C flag: rice: -->
+**Tony:** (on Where We Are, 2026-10-01, beside "with only the
+figures its accuracy earns") "confirm that this is consistent with
+JPL precision"
+**Claude:** Not yet. Today the figures reflect only how closely the
+page matches Horizons. This item's build is what makes them
+consistent with JPL's own accuracy.
+- **Ruled 2026-09-30.** Distances in the Solar System room are written
+  out (no exponents) and printed to "the actual sig figs". Built at step
+  3a (gallery 432435a8): the figures come from the builder's measured
+  drift (error_rate_deg_per_day times the days since the elements'
+  date, as a distance at the body's distance), placed by the Report
+  test, never finer than whole kilometres. Tony confirmed it as the
+  rule for every computed position, to go into provenance-discipline.
+- **Gap found 2026-10-01** by Tony's question, "does Horizons serve the
+  distance to pluto with 9 significant digits?" The drift measures how
+  closely the page reproduces Horizons, not how well JPL knows where
+  the body is. Pluto printed ten figures.
+- **Source read 2026-10-01.** Folkner et al. 2014, IPN Progress Report
+  42-196 (DE430), abstract: the inner planets to subkilometre accuracy;
+  Jupiter and Saturn to tens of kilometres; Uranus, Neptune and Pluto
+  limited to several thousand kilometres. Park et al. 2021, AJ 161:105
+  (DE440, the ephemeris Horizons uses): Jupiter, Saturn and Pluto
+  improved, no new kilometre figures; Uranus and Neptune statistically
+  consistent with DE430. So the 2014 groups are a conservative upper
+  bound. Both read from JPL's own sites (ipnpr.jpl.nasa.gov,
+  ssd.jpl.nasa.gov).
+- **Ruled 2026-10-01.** Use whichever is larger, our drift or the
+  source's accuracy; the three groups are the source accuracy. Apophis
+  keeps its distance with one line (L-399).
+- **Build.** Orrery: three rows in constants_new.py citing the 2014
+  report, each stating the accuracy the source names in words as a
+  place -- a new case for provenance-discipline, which also gains the
+  computed-position rule. Gallery: each served object points at its
+  group's row through orrery_constant and the mirror; the page uses the
+  larger of the two; Apophis's line; interactive-exhibit records the
+  rooms section and the served row words (label, about, source_note).
+- **Method, 2026-10-01** (Tony: "Confirmed as recommended"). An
+  accuracy stated only in words is stored as the place the Report test
+  gives for every value the words can mean, the coarser where they could
+  mean two: 1 km, 100 km and 10,000 km. The last is one place coarser
+  than the Build bullet above planned ("the place the source names").
+- **Built and pushed 2026-10-01.**
+  - Orrery, patch_L398_1_accuracy_rows_and_skills_20261001.py, pushed at
+    c12994d2 with Tony's notes patch: the three DE430 rows,
+    provenance-discipline 2.23, interactive-exhibit 1.7, protocol v3.75,
+    and exact_rows_report.py's DRAWN entry for the new links. Tony's
+    maintenance run: 18 of 18 gating checks.
+  - Gallery, patch_L398_2_distance_figures_20261001.py, pushed at
+    58dd8f25: nine position_accuracy links, the figures logic in
+    gallery/solar_system_figures.js, Apophis's sentence, and a gating
+    check, "Solar System figures". Tony's runs: 20 of 20 offline; live,
+    14 of 14 files served byte-identical and the export at c12994d2.
+- **Tony's phone check, 2026-10-01.** Pluto 35.6108 AU (5,327,300,000
+  km), Neptune 4,469,690,000 km, Uranus 2,908,350,000 km, Saturn
+  1,411,367,900 km, Jupiter 793,946,800 km (5.307207 AU), Apophis with
+  the sentence. Every place is as designed. The digits differ from the
+  patch's examples, which were worked at the cache's own minute
+  (00:01 UTC): the room draws the minute it is opened, and from the
+  served elements Pluto moves outward about 4,300 km an hour, Jupiter
+  outward 2,000, Saturn inward 1,900 and Uranus inward 1,100 -- all four
+  match a look about 18.5 hours later. The inner planets were not looked
+  at.
+- **Tony's notes on the delivery, 2026-10-01.** "Nine bodies get a link"
+  meant a pointer in objects_config.json to the orrery's row, which a
+  visitor never sees; the info panel's NASA link is L-395, next. The new
+  check goes on the dashboard: patch_L398_3_dashboard_wrapper_20261001.py
+  (gallery) and patch_L398_ledger_close_20261001.py (orrery).
+- **Loose ends.** Small bodies' own uncertainty: L-399, already open. The
+  orrery's own distance hovers, which the new rule reaches: L-401, opened
+  by this close. The skill obligation: the next session confirms its
+  loaded copies read provenance-discipline 2.23 and interactive-exhibit
+  1.7; Tony reinstalled both on 2026-10-01, which this session cannot see.
+**Ref:** gallery/solar_system_figures.js,
+documentation/smoke_solar_system_figures.js and
+documentation/run_solar_system_figures.py (gallery); constants_new.py
+DE430 rows; L-363; L-399; L-401; L-345.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
