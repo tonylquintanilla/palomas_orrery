@@ -194,6 +194,9 @@ Module updated: September 30, 2026 with Anthropic's Claude Opus 5.5
 (L-396 opened: Tony's page, documentation/WHERE_WE_ARE.md, first
 written; ledger-and-session-records 1.12 -> 1.13; protocol v3.74),
 built on 5db8bbe0.
+Module updated: October 1, 2026 with Anthropic's Claude Opus 5.5
+(L-363 Half 2 steps 1 to 3a; L-397 done; L-398, L-399, L-400
+opened; L-392 done; notes on L-385, L-389, L-395), built on 10012821.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -411,7 +414,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*240 live items; 225 need attention (`!`); 188 RICE-scored; 151 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*242 live items; 227 need attention (`!`); 188 RICE-scored; 153 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -529,7 +532,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-359 | Served text beside a served number can go stale where no tool may edit it (gallery) | OPEN | -- | 2026-09-22 |
 | ! | L-360 | The hover budget measures recorded payloads, so it cannot see a line added by newly served data (checks) | OPEN | -- | 2026-09-28 |
 | ! | L-361 | An epoch typed in the page, with no store row (gallery, store) | OPEN | -- | 2026-09-22 |
-| ! | L-363 | The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits) | OPEN | -- | 2026-09-29 |
+| ! | L-363 | The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-364 | A comet's own trust window can exclude today while the served window passes the scene (gallery, trust) | OPEN | -- | 2026-09-29 |
 | ! | L-365 | The assembler leaves out a body it cannot draw, without a warning (gallery, assembler) | OPEN | -- | 2026-09-29 |
 | ! | L-366 | An orbit's info marker describes an arbitrary point on the orbit (gallery, assembler) | OPEN | -- | 2026-09-26 |
@@ -550,18 +553,20 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-381 | The uncertainty field's pattern reads a sentence's full stop as a decimal point (export, checks) | OPEN | -- | 2026-09-28 |
 | ! | L-382 | Earth's magnetosphere costs about 42 percent more per orrery animation frame since D8 (orrery, rendering) | OPEN | -- | 2026-09-28 |
 | ! | L-383 | shell_configs.py's magnetosphere tooltip says nothing of the tail and puts the belts at the flux peak (orrery, words) | OPEN | -- | 2026-09-28 |
-| ! | L-385 | The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye) | OPEN | -- | 2026-09-28 |
+| ! | L-385 | The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye) | OPEN | -- | 2026-09-30 |
 | ! | L-386 | The Sun's conversion rows, not yet exported (store, the Sun's slice) | OPEN | -- | 2026-09-28 |
 | ! | L-387 | The orrery's hovers print the conversion names by their own formats, not by the computed count (orrery) | OPEN | -- | 2026-09-28 |
 | ! | L-388 | The gallery's export pull can print success when it could not fetch, and the mirror then writes from the old export (gallery, tooling) | OPEN | -- | 2026-09-28 |
-| ! | L-389 | Earth's atmosphere shells are measured from the equatorial radius, and the crust now sits at the mean radius (store, Tony's eye) | OPEN | -- | 2026-09-28 |
+| ! | L-389 | Earth's atmosphere shells are measured from the equatorial radius, and the crust now sits at the mean radius (store, Tony's eye) | OPEN | -- | 2026-09-30 |
 | ! | L-390 | provenance-discipline does not yet name the conversion marker or say the widening is built (skills) | OPEN | -- | 2026-09-28 |
 | ! | L-391 | Group clouds: the Trojans' sources, and the shapes of the three other groups (gallery, exhibits) | OPEN | -- | 2026-09-29 |
-| ! | L-392 | The Solar System room's drawer list is page code, not served data (gallery, exhibits) | OPEN | -- | 2026-09-29 |
 | ! | L-393 | Encounter data: dates, spacecraft records centred on their targets, and how far the cache reaches in time (gallery, cache) | OPEN | -- | 2026-09-29 |
 | ! | L-394 | A card cannot say which body it belongs to (gallery, Studio) | OPEN | -- | 2026-09-29 |
-| ! | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | OPEN | -- | 2026-09-29 |
+| ! | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | OPEN | -- | 2026-10-01 |
 | ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-09-30 |
+| ! | L-398 | Distance figures: the source's own accuracy, not only our drift from Horizons (gallery, provenance) | OPEN | -- | 2026-10-01 |
+| ! | L-399 | Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder) | OPEN | -- | 2026-10-01 |
+| ! | L-400 | A stray folder "data/solar-system (1)" in Tony's gallery copy (gallery, housekeeping) | OPEN | -- | 2026-09-30 |
 
 ### B. Pending Action (Tony-side)
 
@@ -864,6 +869,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-345 | Unit-conversion rows multiply by shell: rows per shell, or the export converts? (store, DONE 2026-09-28) | DONE | -- | 2026-09-28 |
 |  | L-362 | The master plan's two summaries are a month behind the plan (documentation) | DONE | -- | 2026-09-28 |
 |  | L-384 | The scaling rule stops short of a single measured value scaled by an exact row (skills, store) | DONE | -- | 2026-09-28 |
+|  | L-392 | The Solar System room's drawer list is page code, not served data (gallery, exhibits) | DONE | -- | 2026-09-30 |
+|  | L-397 | "Cache in step" compared only bodies with shells; it now compares every object (gallery, checks) | DONE | -- | 2026-09-30 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -893,6 +900,68 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-400] A stray folder "data/solar-system (1)" in Tony's gallery copy (gallery, housekeeping)
+<!-- L:400 status:OPEN upd:2026-09-30 section:A flag: rice: -->
+- Reported by the gallery maintenance run's Cache siblings check on
+  2026-09-30: one directory in data/ the builder did not make. The name
+  has the shape of a OneDrive conflict copy (the L-216 class). Git
+  ignores it and the check is report-only.
+- Tony-action (do): look inside, then delete it.
+**Gap:** the deletion.
+**Ref:** documentation/check_cache_siblings.py (gallery); L-216.
+
+#### [L-399] Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder)
+<!-- L:399 status:OPEN upd:2026-10-01 section:A flag: rice: -->
+- JPL's planetary report (L-398) gives accuracies for the planets and
+  Pluto only. An asteroid's accuracy is kept per body. Until it is
+  fetched, Apophis's text box carries one line: "JPL's own uncertainty
+  for this position is not yet included." (Tony, 2026-10-01: keep the
+  distance; "We have been computing it all along from Horizons
+  ephemeris." He noted that near-Earth tracking knows these
+  trajectories with high precision; the fetched figure is expected to
+  confirm that.)
+- Candidate: the nightly builder asks Horizons for each small body's
+  range uncertainty (likely the 3-sigma range quantity of an
+  ephemeris query; unverified) and serves it; the page then uses it as
+  the source accuracy and the line goes away.
+**Gap:** with the near-Earth asteroid design.
+**Ref:** L-398; L-363; tools/gallery_cache_builder.py (gallery).
+
+#### [L-398] Distance figures: the source's own accuracy, not only our drift from Horizons (gallery, provenance)
+<!-- L:398 status:OPEN upd:2026-10-01 section:A flag: rice: -->
+- **Ruled 2026-09-30.** Distances in the Solar System room are written
+  out (no exponents) and printed to "the actual sig figs". Built at step
+  3a (gallery 432435a8): the figures come from the builder's measured
+  drift (error_rate_deg_per_day times the days since the elements'
+  date, as a distance at the body's distance), placed by the Report
+  test, never finer than whole kilometres. Tony confirmed it as the
+  rule for every computed position, to go into provenance-discipline.
+- **Gap found 2026-10-01** by Tony's question, "does Horizons serve the
+  distance to pluto with 9 significant digits?" The drift measures how
+  closely the page reproduces Horizons, not how well JPL knows where
+  the body is. Pluto printed ten figures.
+- **Source read 2026-10-01.** Folkner et al. 2014, IPN Progress Report
+  42-196 (DE430), abstract: the inner planets to subkilometre accuracy;
+  Jupiter and Saturn to tens of kilometres; Uranus, Neptune and Pluto
+  limited to several thousand kilometres. Park et al. 2021, AJ 161:105
+  (DE440, the ephemeris Horizons uses): Jupiter, Saturn and Pluto
+  improved, no new kilometre figures; Uranus and Neptune statistically
+  consistent with DE430. So the 2014 groups are a conservative upper
+  bound. Both read from JPL's own sites (ipnpr.jpl.nasa.gov,
+  ssd.jpl.nasa.gov).
+- **Ruled 2026-10-01.** Use whichever is larger, our drift or the
+  source's accuracy; the three groups are the source accuracy. Apophis
+  keeps its distance with one line (L-399).
+- **Build.** Orrery: three rows in constants_new.py citing the 2014
+  report, each stating the accuracy the source names in words as a
+  place -- a new case for provenance-discipline, which also gains the
+  computed-position rule. Gallery: each served object points at its
+  group's row through orrery_constant and the mirror; the page uses the
+  larger of the two; Apophis's line; interactive-exhibit records the
+  rooms section and the served row words (label, about, source_note).
+**Gap:** the build above, and both skill bumps.
+**Ref:** interactive.html solarSystemDistanceLine (gallery); L-363; L-399; L-345.
+
 #### [L-396] Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills)
 <!-- L:396 status:OPEN upd:2026-09-30 section:A flag: rice: -->
 - **Asked 2026-09-30 (Tony).** "i struggle to keep the big picture.
@@ -920,7 +989,16 @@ as an archive of the prioritization thinking -- no cleanup on close.
 **Ref:** `documentation/WHERE_WE_ARE.md`; `skills/ledger-and-session-records/SKILL.md` (The Document Stack); `PROJECT_INSTRUCTIONS.md` v3.74; L-363; L-395; L-333; L-362.
 
 #### [L-395] The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects)
-<!-- L:395 status:OPEN upd:2026-09-29 section:A flag: rice: -->
+<!-- L:395 status:OPEN upd:2026-10-01 section:A flag: rice: -->
+- **2026-10-01, first use and a check.** Tony: each body's description
+  and link in the rooms come from the dictionary, as a standard written
+  into the skill; Pluto's row in the Solar System room uses NASA's
+  Pluto page ("this is what visitors expect"). Three entries had a
+  field written twice -- Earth, Moon, Patroclus-Menoetius Barycenter --
+  the first silently discarded by Python and invisible to the
+  provenance scanner (Earth's discarded line gave the Moon's 27.32-day
+  period). Tony fixed them by hand the same day. The export gets a
+  check that refuses an entry with a duplicated field.
 - **The direction after the Sun, Tony 2026-09-29, in outline.** After
   the Sun's slice and the Solar System room's swap, the gallery grows
   the way the orrery did: symbols with positions from Horizons and
@@ -1045,22 +1123,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 **Gap:** Read the three, then the encounter design round (Voyager 1 first, with L-365).
 **Ref:** gallery `gallery/assembler/`; gallery `tools/gallery_cache_builder.py`; skills/gallery-assembler/SKILL.md; skills/horizons-orbital-mechanics/SKILL.md; L-363; L-364; L-365.
 
-#### [L-392] The Solar System room's drawer list is page code, not served data (gallery, exhibits)
-<!-- L:392 status:OPEN upd:2026-09-29 section:A flag: rice: -->
-- **From the front-door design, 2026-09-29** (question 3). The drawer
-  lists the Sun, the eight planets and Pluto, with a "See more" that
-  adds the groups in place along the spine, outward from the Sun
-  (design section 3, item 4). Today the room's bodies are one list in
-  the page, `SOLAR_SYSTEM_BODIES` in `interactive.html`, and the room
-  has no entry in `data/objects_config.json`. Left that way, every new
-  group means editing the page.
-- L-363's Half 2 needs at least the ten rows, so the shape is chosen
-  there, with room for the spine to grow; whatever Half 2 does not take
-  stays here. Who may write `data/objects_config.json` is in
-  interactive-exhibit.
-**Gap:** A served shape for the spine, groups and "See more"; the page reads it.
-**Ref:** gallery `interactive.html`; gallery `data/objects_config.json`; skills/interactive-exhibit/SKILL.md; L-363.
-
 #### [L-391] Group clouds: the Trojans' sources, and the shapes of the three other groups (gallery, exhibits)
 <!-- L:391 status:OPEN upd:2026-09-29 section:A flag: rice: -->
 - **From the front-door design, 2026-09-29** (its section 5 and
@@ -1109,7 +1171,9 @@ and names `UNMARKED CONVERSION` and `CONVERSION WRONG`.
 `skills/provenance-discipline/SKILL.md` Rules 1, 3 and 8; L-345.
 
 #### [L-389] Earth's atmosphere shells are measured from the equatorial radius, and the crust now sits at the mean radius (store, Tony's eye)
-<!-- L:389 status:OPEN upd:2026-09-28 section:A flag: rice: -->
+<!-- L:389 status:OPEN upd:2026-09-30 section:A flag: rice: -->
+**Tony:** (on Where We Are, 2026-09-30) "this depends on the source. Re
+is based on the equatorial radius. The crust is ~0.99... Re"
 - **Found 2026-09-28 building patch D20.** The tops of the lower and
   upper atmosphere are `EARTH_STRATOPAUSE_RADIUS_KM` and
   `EARTH_THERMOPAUSE_RADIUS_KM`: the EQUATORIAL radius plus an altitude
@@ -1199,7 +1263,9 @@ section 5.
 **Ref:** `constants_new.py`; gallery `data/objects_config.json`; L-345; L-371; L-322.
 
 #### [L-385] The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye)
-<!-- L:385 status:OPEN upd:2026-09-28 section:A flag: rice: -->
+<!-- L:385 status:OPEN upd:2026-09-30 section:A flag: rice: -->
+**Tony:** (on Where We Are, 2026-09-30, how wide the Sun's opening view
+is in the orrery) "photosphere + 10%"
 - **Found 2026-09-24** building L-322 Stage D's orrery autoscale (D4).
   With its inner shells on, the Sun's view opens about 31 times wider
   than before: its half-width goes from 0.0093 AU to 0.29 AU, because
@@ -1486,7 +1552,32 @@ section 5.
 **Ref:** gallery `tools/gallery_cache_builder.py` (served_window, M2 section 5.5); gallery `gallery/assembler/resolver.py`, step 3; skills/gallery-assembler/SKILL.md; L-363.
 
 #### [L-363] The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits)
-<!-- L:363 status:OPEN upd:2026-09-29 section:A flag: rice: -->
+<!-- L:363 status:OPEN upd:2026-10-01 section:A flag: rice: -->
+- **Session 2026-09-30 to 10-01 (Half 2, steps 1 to 3a).** Design talk
+  closed: ticking a planet opens its row; Apophis keeps one See more
+  row; the tick order lives only in the open tab, nothing stored
+  between visits. The room's settings are served in a new "rooms"
+  section of data/objects_config.json (L-392). Step 2
+  (patch_L363_7_half2_config_20260930.py, gallery 1530bb6d): Mercury,
+  Venus, Mars, Uranus, Neptune and the Pluto-Charon barycentre
+  (Horizons 9 about the Sun -- the room's Pluto, by the barycentre rule)
+  served; the whole cache is now trusted +/- 88 days, Mercury's period.
+  Step 3a (patch_L363_8_room_step3a_20260930.py, gallery 432435a8): the
+  room draws its rows from the rooms section, opens on the Sun and
+  Earth with Earth's row highlighted, and prints Tony's approved words
+  -- Pluto named Pluto with his barycenter sentence, the source line
+  with "Horizons id:" and "Julian date" written out, the two panel
+  paragraphs, the Explorer sentence dropped (the Explorer stays, not as
+  a featured card). Orbit crosses name the orbit only. Distances are
+  written out with earned figures (L-398). Colours from the orrery's
+  color_map. Standing rule (Tony): real names are fine in a card once
+  explained, never as shorthand.
+- **Remaining, in Tony's order:** L-398 (figures), L-395 (descriptions
+  and NASA links; Pluto's row uses NASA's Pluto page), then step 3b
+  (See more / See fewer, opened rows with "Enter the Sun room" or "No
+  room or cards yet", tap a body to highlight its row, the Sun's row
+  not tickable, Home walking back through the tick order), then Tony's
+  phone check.
 - **What it is.** A third room in `interactive.html`,
   `?exhibit=solar-system`, titled "The Solar System". It draws the
   bodies as their symbols on their orbits, from the served cache, on
@@ -18040,6 +18131,52 @@ row alone, a single measured value included (provenance-discipline
 2.22, Rule 3). The bow shock is the case that shows it: 13.5 Earth
 radii converts to 86,000 km, two figures. Loose ends: none.
 **Ref:** skills/provenance-discipline/SKILL.md, Rule 3; PROJECT_INSTRUCTIONS.md v3.71; L-322.
+
+#### [L-392] The Solar System room's drawer list is page code, not served data (gallery, exhibits)
+<!-- L:392 status:DONE upd:2026-09-30 section:C flag: rice: -->
+- **Done 2026-09-30.** The list is served: a top-level "rooms" section
+  of data/objects_config.json holds the Solar System room's drawer rows,
+  in order, with See more marked per row, and its opening view (Tony:
+  "confirmed as recommended"). Every reader of the file reads only
+  "objects", checked before it was proposed. Built by
+  patch_L363_7_half2_config_20260930.py; read by the page from
+  patch_L363_8_room_step3a_20260930.py (gallery 432435a8).
+- **From the front-door design, 2026-09-29** (question 3). The drawer
+  lists the Sun, the eight planets and Pluto, with a "See more" that
+  adds the groups in place along the spine, outward from the Sun
+  (design section 3, item 4). Today the room's bodies are one list in
+  the page, `SOLAR_SYSTEM_BODIES` in `interactive.html`, and the room
+  has no entry in `data/objects_config.json`. Left that way, every new
+  group means editing the page.
+- L-363's Half 2 needs at least the ten rows, so the shape is chosen
+  there, with room for the spine to grow; whatever Half 2 does not take
+  stays here. Who may write `data/objects_config.json` is in
+  interactive-exhibit.
+**Gap:** A served shape for the spine, groups and "See more"; the page reads it.
+**Ref:** gallery `interactive.html`; gallery `data/objects_config.json`; skills/interactive-exhibit/SKILL.md; L-363.
+
+#### [L-397] "Cache in step" compared only bodies with shells; it now compares every object (gallery, checks)
+<!-- L:397 status:DONE upd:2026-09-30 section:C flag: rice: -->
+- **Found 2026-09-30** adding five planets and Pluto (L-363):
+  tools/check_cache_in_step.py compared the served cache with
+  data/objects_config.json only for objects serving shells -- the Sun,
+  Earth, Jupiter and Saturn. A body added to the config with no shells
+  could have been pushed without a cache rebuild, and no check would
+  have said so. Tony: "let's do this on a priority basis."
+- **Built** by patch_L397_cache_in_step_all_objects_20260930.py (gallery
+  1530bb6d -> f6d1ca95). Every object in the config must be in both
+  cache files, and nothing may be in either that the config does not
+  list. Seven identity fields must match coverage_index.json: name,
+  Horizons id, category, availability, parent, centre, frame. Each run
+  first shows the comparison can fail, on in-memory copies (an unbuilt
+  object, a changed name). Shown failing against the cache before the
+  step 2 build (0f513fd5), naming the six new bodies in each file.
+  [verified @f6d1ca95: Tony's maintenance run, 19 of 19 gating checks]
+- **Does not check:** orbit numbers (the config holds none), build
+  recency (the trust window and the Daily Run cover it), the rooms
+  section (the page reads it from the config directly).
+**Note:** gallery-cache-builder's description of the check widens at its next bump.
+**Ref:** tools/check_cache_in_step.py (gallery); L-363; L-322.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

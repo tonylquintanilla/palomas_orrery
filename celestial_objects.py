@@ -44,13 +44,13 @@ OBJECT_DEFINITIONS = [
 
     {'name': 'Earth', 'id': '399', 'var_name': 'earth_var', 'color_key': 'Earth', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
-    'mission_info': 'Horizons: 399. Earth orbital period: 27.32 days.', 
-     'mission_url': 'https://science.nasa.gov/earth/', 'mission_info': 'Our home planet.'},
+    'mission_info': 'Horizons: 399. Our home planet.', 
+     'mission_url': 'https://science.nasa.gov/earth/'},
 
     {'name': 'Moon', 'id': '301', 'var_name': 'moon_var', 'color_key': 'Moon', 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 301. Earth orbital period: 27.32 days.', 
-     'mission_url': 'https://science.nasa.gov/moon/', 'mission_info': 'NASA: "The Moon rotates exactly once each time it orbits our planet."'},
+     'mission_info': 'Horizons: 301. NASA: "The Moon rotates exactly once each time it orbits our planet."', 
+     'mission_url': 'https://science.nasa.gov/moon/'},
 
     # Earth-Moon Barycenter - highest mass ratio of any PLANET-moon system (1.23%)
     # Barycenter is INSIDE Earth (~4,670 km from center, ~1,700 km below surface)
@@ -88,7 +88,6 @@ OBJECT_DEFINITIONS = [
      'id_type': 'majorbody',
      'start_date': datetime(2000, 1, 1, 12, 0), 'end_date': datetime(2050, 12, 1, 0, 0),
      'mission_info': 'Center of mass for Patroclus-Menoetius binary Trojan system. Lucy flyby: March 3, 2033.',
-     'mission_info': 'System barycenter. First known binary Jupiter Trojan. Evidence suggests primordial formation ~4.5 Gyr ago.',
      'mission_url': 'https://lucy.swri.edu/targets/Patroclus-Menoetius.html'},
 
     {'name': 'Patroclus', 'id': '920000617', 'var_name': 'patroclus_var', 'color_key': 'Patroclus', 
