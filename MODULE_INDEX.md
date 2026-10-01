@@ -11,24 +11,26 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 141  
-**Total Lines of Code (non-blank):** 113,079  
-**Total Public Functions/Classes:** 1,279
+**Total Python Files:** 142  
+**Total Lines of Code (non-blank):** 113,391  
+**Total Public Functions/Classes:** 1,281
 
 ## Classification Coverage
 
-**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (7).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L363_ledger_half2_step3a_20260930.py`
+- `patch_L363_ledger_tony_notes_20261001.py`
+- `patch_L398_1_accuracy_rows_and_skills_20261001.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (1).** No valid `Domain:` tag.
+**Undetermined domain (2).** No valid `Domain:` tag.
 
-- `patch_L363_ledger_half2_step3a_20260930.py`
+- `patch_L363_ledger_tony_notes_20261001.py`
+- `patch_L398_1_accuracy_rows_and_skills_20261001.py`
 
 
 ---
@@ -125,7 +127,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,249 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (512 lines) |
-| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (2,671 lines) |
+| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (2,742 lines) |
 | `constants_tokens.py` | - what each "# Unit:" token in constants_new.py means. (233 lines) |
 | `earth_pole_of_date.py` | Earth's rotation pole and tilt for the date of a plot. (269 lines) |
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (412 lines) |
@@ -206,7 +208,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `diagnose_bcodmo.py` | Diagnostic script to examine BCO-DMO pH data structure (67 lines) |
 | `doc_index.py` | - regenerate README.md's key-documents table from the documents themselves. (170 lines) |
 | `earth_system_generator.py` | Paloma's Orrery: Earth System Generator Engine Architecture: The Teaser (Plotly) & Blockbuster (KMZ) Pipeline (673 lines) |
-| `exact_rows_report.py` | - which exact rows a display prints, and where. (586 lines) |
+| `exact_rows_report.py` | - which exact rows a display prints, and where. (591 lines) |
 | `examine_hot_csv.py` | Examine the HOT CSV file structure (47 lines) |
 | `export_constants.py` | - write data/constants_export.json from constants_new.py. The orrery is the producer of its numbers; the gallery reads this file and never reads orrery source. (396 lines) |
 | `export_orbit_cache.py` | Phase 1b desktop devtool: read the local orbit caches and write web-servable orbit/position files for the interactive gallery. (617 lines) |
@@ -243,7 +245,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L363_ledger_half2_step3a_20260930.py` | - ORRERY repo. Closes the session of 2026-09-30 and 10-01. (122 lines) |
+| `patch_L363_ledger_tony_notes_20261001.py` | - ORRERY repo. Records Tony's notes on Where We Are of 2026-10-01. (216 lines) |
+| `patch_L398_1_accuracy_rows_and_skills_20261001.py` | - ORRERY repo. The first of two patches for L-398: the distance figures take JPL's own accuracy. (142 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |

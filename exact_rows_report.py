@@ -205,6 +205,11 @@ DRAWN = {
     'solar_wind/sun_radius':
         ('gallery/feature_renderers.js', 'renderShellSet',
          'params.sun_radius'),
+    # L-398 (2026-10-01): JPL's accuracy for a planet's group is read by
+    # the Solar System room only to set the place a computed distance
+    # prints to; the row itself is never printed.
+    'position_accuracy':
+        ('gallery/solar_system_figures.js', 'sourcePlaceKm', 'node.value'),
 }
 
 # A top-level function in a gallery script: two spaces of indent, which

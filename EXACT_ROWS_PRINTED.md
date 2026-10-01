@@ -5,12 +5,12 @@ Rebuilt by `exact_rows_report.py` on every orrery maintenance run. An exact row 
 
 ## Summary
 
-- 21 exact rows in `constants_new.py`.
+- 24 exact rows in `constants_new.py`.
 - 8 printed by at least one display: `SUN_RADIUS_KM`, `EARTH_LEO_UPPER_ALTITUDE_KM`, `EARTH_LEO_LOWER_ALTITUDE_KM`, `EARTH_VAN_ALLEN_OUTER_RADII`, `EARTH_SOLAR_WIND_PRESSURE_NPA`, `EARTH_SOLAR_WIND_BZ_NT`, `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG`, `EARTH_BOW_SHOCK_CUT_ANGLE_DEG`.
 - 19 printing lines: 9 in the orrery, 10 in the gallery.
 - Gallery pointers to exact rows with no PRINTS entry (NOT FOLLOWED): 0.
 - Gallery pointers to exact rows read only to place a drawing (DRAWN, not printed): 5: `SUN_RADIUS_KM`, `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`, `EARTH_MAGNETOTAIL_DRAWN_END_RADII`, `EARTH_POLE_RA_J2000_DEG`, `EARTH_POLE_DEC_J2000_DEG`.
-- PRINTS or DRAWN entries that no longer match a pointer or their line (BROKEN): 0.
+- PRINTS or DRAWN entries that no longer match a pointer or their line (BROKEN): 1: `position_accuracy` -> `node.value (no pointer reaches it)`.
 
 ## Printed by the count
 
@@ -98,6 +98,9 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
   - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2476 (config `/objects/1/features/earth_magnetosphere/magnetotail/drawn_radius`): `var tailRadius = measured(tl.drawn_radius, "r_earth",`
 - `EARTH_MAGNETOTAIL_DRAWN_END_RADII`: named on 3 other orrery line(s).
   - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2478 (config `/objects/1/features/earth_magnetosphere/magnetotail/drawn_end`): `var tailEnd = measured(tl.drawn_end, "r_earth", tlWhere + "/drawn_end",`
+- `DE430_TERRESTRIAL_POSITION_PLACE_KM`: named on 0 other orrery line(s).
+- `DE430_JUPITER_SATURN_POSITION_PLACE_KM`: named on 0 other orrery line(s).
+- `DE430_URANUS_NEPTUNE_PLUTO_POSITION_PLACE_KM`: named on 0 other orrery line(s).
 - `GM_SUN_SI`: named on 0 other orrery line(s).
 - `M3_PER_KM3`: named on 0 other orrery line(s).
 

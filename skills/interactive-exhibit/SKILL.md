@@ -6,7 +6,16 @@ fires_when: adding or changing an exhibit in interactive.html; any edit to the S
 
 # Interactive Exhibit
 
-Skill version: 1.6 | 2026-09-28, with Anthropic's Claude Opus 5.5, from
+Skill version: 1.7 | 2026-10-01, with Anthropic's Claude Opus 5.5, from
+orrery @ 7a47269c and gallery @ c48f9a92. v1.7 (L-398, L-363, L-392)
+records what the Solar System room serves and how it prints a
+distance. A room that is not one body keeps its settings in the
+config's top-level "rooms" section, with the words a visitor sees for
+each drawer row. A computed distance prints by the larger of the drift
+and JPL's own accuracy, served on the object as "position_accuracy";
+a body with none says so in Tony's sentence. And the figures logic is
+the second file moved out of interactive.html under L-338.
+Earlier: 1.6 | 2026-09-28, with Anthropic's Claude Opus 5.5, from
 orrery @ 2a7d26b9 and gallery @ 52da593c. v1.6 (L-345) adds three rules
 under Provenance is part of the build, each what the L-345 gallery patch
 built and Tony approved: where cutting a served AU to three figures
@@ -208,6 +217,23 @@ page:
   (Tony's approved words, 2026-09-28). It is served words, so a change
   reaches a visitor only after the cache is rebuilt. Neither the mirror
   nor `store_writer` writes it; a patch does, as pointers are written.
+- **A computed distance prints by the larger of two errors** (v1.7,
+  L-398; provenance-discipline 2.23, A Computed Position Prints What
+  Its Errors Earn). A body's distance in the Solar System room is
+  worked out in the browser, so no row gives its count. The drift comes
+  from the served cache's trust block; JPL's own accuracy is served on
+  the body's entry in `data/objects_config.json` as
+  `"position_accuracy"`, a link to its group's DE430 row (1 km, 100 km
+  or 10,000 km, the PLACE JPL's words report to), written by the mirror
+  like any other link. The page uses half a unit of that place as the
+  error, takes the larger, and prints the Report test's place, never
+  finer than whole kilometres. A body with no `position_accuracy`
+  prints by drift and adds Tony's sentence of 2026-10-01, "JPL's own
+  uncertainty for this position is not yet included." -- printed
+  exactly when the link is absent, so the words and the data cannot
+  disagree. The room's driver reads the link from the config, as it
+  reads the rooms section; a change to it reaches a visitor on the push
+  alone, with no cache rebuild.
 - The Artifact Bounds the Audit, and The Braid orders it: the new
   exhibit's pointers are the slice; a provenance gap found elsewhere
   while building it is recorded, one ledger row per CLASS, not chased.
@@ -234,6 +260,23 @@ DIRECTLY. Everything else a room draws comes from the served cache under
 `drawn` or `moon` reaches a visitor on the PUSH ALONE, while a change to
 a shell's words does not reach them until the cache has been rebuilt.
 Say which when telling anyone what a change will do.
+
+**A ROOM THAT IS NOT ONE BODY keeps its settings in the config's
+top-level `"rooms"` section** (v1.7; Tony's ruling of 2026-09-30,
+"confirmed as recommended", L-392), keyed by the room's `?exhibit=` key.
+The Solar System room's entry holds `arrival` -- `drawn`, the slugs
+ticked on opening, and `highlight`, the row highlighted and named on the
+closed drawer's handle -- and `drawer.rows`, its rows by slug in order
+outward from the Sun, each optionally `see_more`. A row may carry the
+WORDS a visitor sees for it: `label`, the name shown when it is not the
+served name; `about`, a sentence for the text box and the panel; and
+`source_note`, what the Horizons id in the source line is. Pluto's row
+is the case: label "Pluto", Tony's barycentre sentence, and "the
+Pluto-Charon barycenter". The page reads this section directly, so a
+change reaches a visitor on the push alone. The cache builder, the
+assembler and every check read only `"objects"` and ignore it -- checked
+before the section was added, and the reason it could be added without
+touching them.
 
 ### A shell trace carries its key [CRITICAL]
 `gallery/feature_renderers.js` stamps `meta.shell_key` on every trace
@@ -323,7 +366,12 @@ a comment line moves.
 It is not a call for a general reorganisation. Logic moves out WHEN A
 BUILD ALREADY TOUCHES IT. `gallery/arrival.js` is the first instance:
 118 lines left the page, the smoke check now requires the file, and a
-visitor saw no difference.
+visitor saw no difference. `gallery/solar_system_figures.js` is the
+second (L-398, 2026-10-01): the Solar System room's distance figures,
+checked by `documentation/smoke_solar_system_figures.js`, which breaks
+the real file three ways before trusting a pass. A file the page loads
+by a script tag joins `SERVED_FILES` in `gallery_maintenance_run.py` in
+the same patch.
 
 ONE SCOPE QUESTION IS OPEN and Tony should settle it the first time it
 matters: his reason covers bulk that is not logic at all -- a long block

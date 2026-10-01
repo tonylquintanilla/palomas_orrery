@@ -197,6 +197,9 @@ built on 5db8bbe0.
 Module updated: October 1, 2026 with Anthropic's Claude Opus 5.5
 (L-363 Half 2 steps 1 to 3a; L-397 done; L-398, L-399, L-400
 opened; L-392 done; notes on L-385, L-389, L-395), built on 10012821.
+Module updated: October 1, 2026 with Anthropic's Claude Opus 5.5
+(Tony's notes on Where We Are: L-363 front door and orbit marker,
+L-389, L-396 goal line, L-398; L-400 done), built on 7a47269c.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -414,7 +417,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*242 live items; 227 need attention (`!`); 188 RICE-scored; 153 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*241 live items; 226 need attention (`!`); 188 RICE-scored; 154 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -557,16 +560,15 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-386 | The Sun's conversion rows, not yet exported (store, the Sun's slice) | OPEN | -- | 2026-09-28 |
 | ! | L-387 | The orrery's hovers print the conversion names by their own formats, not by the computed count (orrery) | OPEN | -- | 2026-09-28 |
 | ! | L-388 | The gallery's export pull can print success when it could not fetch, and the mirror then writes from the old export (gallery, tooling) | OPEN | -- | 2026-09-28 |
-| ! | L-389 | Earth's atmosphere shells are measured from the equatorial radius, and the crust now sits at the mean radius (store, Tony's eye) | OPEN | -- | 2026-09-30 |
+| ! | L-389 | Earth's atmosphere shells are measured from the equatorial radius, and the crust now sits at the mean radius (store, Tony's eye) | OPEN | -- | 2026-10-01 |
 | ! | L-390 | provenance-discipline does not yet name the conversion marker or say the widening is built (skills) | OPEN | -- | 2026-09-28 |
 | ! | L-391 | Group clouds: the Trojans' sources, and the shapes of the three other groups (gallery, exhibits) | OPEN | -- | 2026-09-29 |
 | ! | L-393 | Encounter data: dates, spacecraft records centred on their targets, and how far the cache reaches in time (gallery, cache) | OPEN | -- | 2026-09-29 |
 | ! | L-394 | A card cannot say which body it belongs to (gallery, Studio) | OPEN | -- | 2026-09-29 |
 | ! | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | OPEN | -- | 2026-10-01 |
-| ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-09-30 |
+| ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-10-01 |
 | ! | L-398 | Distance figures: the source's own accuracy, not only our drift from Horizons (gallery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-399 | Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder) | OPEN | -- | 2026-10-01 |
-| ! | L-400 | A stray folder "data/solar-system (1)" in Tony's gallery copy (gallery, housekeeping) | OPEN | -- | 2026-09-30 |
 
 ### B. Pending Action (Tony-side)
 
@@ -871,6 +873,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-384 | The scaling rule stops short of a single measured value scaled by an exact row (skills, store) | DONE | -- | 2026-09-28 |
 |  | L-392 | The Solar System room's drawer list is page code, not served data (gallery, exhibits) | DONE | -- | 2026-09-30 |
 |  | L-397 | "Cache in step" compared only bodies with shells; it now compares every object (gallery, checks) | DONE | -- | 2026-09-30 |
+|  | L-400 | A stray folder "data/solar-system (1)" in Tony's gallery copy (gallery, housekeeping) | DONE | -- | 2026-10-01 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -900,16 +903,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
-#### [L-400] A stray folder "data/solar-system (1)" in Tony's gallery copy (gallery, housekeeping)
-<!-- L:400 status:OPEN upd:2026-09-30 section:A flag: rice: -->
-- Reported by the gallery maintenance run's Cache siblings check on
-  2026-09-30: one directory in data/ the builder did not make. The name
-  has the shape of a OneDrive conflict copy (the L-216 class). Git
-  ignores it and the check is report-only.
-- Tony-action (do): look inside, then delete it.
-**Gap:** the deletion.
-**Ref:** documentation/check_cache_siblings.py (gallery); L-216.
-
 #### [L-399] Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder)
 <!-- L:399 status:OPEN upd:2026-10-01 section:A flag: rice: -->
 - JPL's planetary report (L-398) gives accuracies for the planets and
@@ -929,6 +922,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 #### [L-398] Distance figures: the source's own accuracy, not only our drift from Horizons (gallery, provenance)
 <!-- L:398 status:OPEN upd:2026-10-01 section:A flag: rice: -->
+**Tony:** (on Where We Are, 2026-10-01, beside "with only the
+figures its accuracy earns") "confirm that this is consistent with
+JPL precision"
+**Claude:** Not yet. Today the figures reflect only how closely the
+page matches Horizons. This item's build is what makes them
+consistent with JPL's own accuracy.
 - **Ruled 2026-09-30.** Distances in the Solar System room are written
   out (no exponents) and printed to "the actual sig figs". Built at step
   3a (gallery 432435a8): the figures come from the builder's measured
@@ -963,7 +962,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 **Ref:** interactive.html solarSystemDistanceLine (gallery); L-363; L-399; L-345.
 
 #### [L-396] Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills)
-<!-- L:396 status:OPEN upd:2026-09-30 section:A flag: rice: -->
+<!-- L:396 status:OPEN upd:2026-10-01 section:A flag: rice: -->
 - **Asked 2026-09-30 (Tony).** "i struggle to keep the big picture.
   it's the old dilemma of loosing the forest for the trees." The master
   plan's summary and critical path had not really helped. He asked for
@@ -985,7 +984,21 @@ as an archive of the prioritization thinking -- no cleanup on close.
   companions did (L-333, L-362). Candidate: the orrery maintenance run
   fails when the page's "Last updated" date is older than the ledger's
   newest "Module updated" stamp. Recorded, not built.
-**Gap:** the next session confirms 1.13 is loaded; then the check above, or a ruling that the skill rule is enough.
+- **1.13 confirmed loaded** by the session of 2026-09-30 to 10-01 and
+  again on 2026-10-01. The obligation is discharged.
+- **The goal line, 2026-10-01.** Tony, beside the page's goal stage
+  "The orrery's own Python runs in the browser": "this is not
+  clear. One major hurdle is that Horizons cannot be called on
+  demand by a user." Reworded, and confirmed as recommended: "The
+  website does what the desktop orrery does, in the browser, from
+  data fetched from JPL each night, so a visitor never waits on
+  JPL." It is the plain form of the master plan's end goal (Section
+  5a: the Python orrery running in the browser under Pyodide). A
+  visitor's browser cannot call Horizons; the nightly cache builder
+  fetches, and the browser does the orrery's arithmetic on the saved
+  data. The real limit is time: the browser can show only the dates
+  the saved data covers.
+**Gap:** the check above, or a ruling that the skill rule is enough.
 **Ref:** `documentation/WHERE_WE_ARE.md`; `skills/ledger-and-session-records/SKILL.md` (The Document Stack); `PROJECT_INSTRUCTIONS.md` v3.74; L-363; L-395; L-333; L-362.
 
 #### [L-395] The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects)
@@ -1171,7 +1184,11 @@ and names `UNMARKED CONVERSION` and `CONVERSION WRONG`.
 `skills/provenance-discipline/SKILL.md` Rules 1, 3 and 8; L-345.
 
 #### [L-389] Earth's atmosphere shells are measured from the equatorial radius, and the crust now sits at the mean radius (store, Tony's eye)
-<!-- L:389 status:OPEN upd:2026-09-30 section:A flag: rice: -->
+<!-- L:389 status:OPEN upd:2026-10-01 section:A flag: rice: -->
+**Tony:** (on Where We Are, 2026-10-01) "i don't recall this note.
+the sourcing should follow our skill."
+**Claude:** The note below is Tony's annotation on the page of
+2026-09-30, quoted as written.
 **Tony:** (on Where We Are, 2026-09-30) "this depends on the source. Re
 is based on the equatorial radius. The crust is ~0.99... Re"
 - **Found 2026-09-28 building patch D20.** The tops of the lower and
@@ -1183,10 +1200,13 @@ is based on the equatorial radius. The crust is ~0.99... Re"
 - **Why it may be right as it is.** An altitude is measured above sea
   level where you stand, and at the equator sea level IS the equatorial
   radius. 7 km is invisible at any zoom, as the crust's own move was.
-- **Tony-action (decide):** leave the altitudes on the equatorial
-  radius, or measure them from the mean radius as the crust now is.
-  Not on the critical path; recorded so it is not rediscovered.
-**Gap:** the decision above.
+- **No longer a Tony decision (2026-10-01).** Which radius the
+  altitudes are measured from is a sourcing question, so the
+  provenance skill's rules decide it when this item is worked
+  (Method Belongs to the Skill). Not on the critical path; recorded
+  so it is not rediscovered.
+**Gap:** worked by provenance-discipline's rules when the two
+atmosphere rows are next opened.
 **Ref:** `constants_new.py` (the two atmosphere rows); `shell_configs.py`
 (the crust); L-345.
 
@@ -1553,6 +1573,32 @@ is in the orrery) "photosphere + 10%"
 
 #### [L-363] The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits)
 <!-- L:363 status:OPEN upd:2026-10-01 section:A flag: rice: -->
+**Tony:** (on Where We Are, 2026-10-01, beside "The Solar System
+room becomes the front door") "it is an alternate front door. the
+front page or lobby is the same. we will switch this room to be the
+top featured card. we may want to highlight it in some other way
+too." Beside "The front door becomes the page the website opens
+on": "to be determined; see above."
+**Tony:** (same page, on the orbit crosses) "the new solar system
+interactive hover text has the name of the planet and its distance.
+this is okay. do not change. there is no cross. the hover text
+opens when clicking the body. are you adding a cross with the orbit
+name?"
+- **The front door, 2026-10-01.** The lobby (index.html) stays the
+  website's front page. The room's card becomes the top featured
+  card in the lobby, and may be highlighted in some other way too.
+  Where We Are had described the master plan's "swap" as making the
+  room "the page the website opens on". The plan meant something
+  narrower: the page `interactive.html` opens when no room is named,
+  in place of the Explorer. Whether that bare link also switches is
+  open (Tony: "to be determined"). The plan's summary and Section
+  5a take this ruling at its next restamp.
+- **The orbit marker, 2026-10-01.** No cross was added. The
+  assembler has always drawn one tiny info marker on each orbit, by
+  the orrery's one-info-marker convention: size 3, in the orbit's
+  own colour, practically invisible. Step 3a changed only its words,
+  to "Mercury's orbit" and so on. Those words stay; the body's own
+  text box stays as it is. The optional rewording is struck.
 - **Session 2026-09-30 to 10-01 (Half 2, steps 1 to 3a).** Design talk
   closed: ticking a planet opens its row; Apophis keeps one See more
   row; the tick order lives only in the open tab, nothing stored
@@ -18177,6 +18223,23 @@ radii converts to 86,000 km, two figures. Loose ends: none.
   section (the page reads it from the config directly).
 **Note:** gallery-cache-builder's description of the check widens at its next bump.
 **Ref:** tools/check_cache_in_step.py (gallery); L-363; L-322.
+
+#### [L-400] A stray folder "data/solar-system (1)" in Tony's gallery copy (gallery, housekeeping)
+<!-- L:400 status:DONE upd:2026-10-01 section:C flag: rice: -->
+- Reported by the gallery maintenance run's Cache siblings check on
+  2026-09-30: one directory in data/ the builder did not make. The name
+  has the shape of a OneDrive conflict copy (the L-216 class). Git
+  ignores it and the check is report-only.
+- **Done 2026-10-01.** Tony deleted it.
+- **Why it happens** (Tony asked). Most likely OneDrive. The cache
+  builder swaps folders by renaming them. If OneDrive is still
+  syncing the old folder at that moment, it cannot follow the
+  rename, so it keeps both and names the second copy
+  "solar-system (1)". Pausing OneDrive before the build, as the
+  Daily Run asks, prevents it. This copy probably came from a run
+  made while OneDrive was still syncing. The class is L-216's.
+- No loose ends.
+**Ref:** documentation/check_cache_siblings.py (gallery); L-216.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

@@ -9,7 +9,7 @@ Repo copies stale/absent; this reflects the live local stores.
 |---|---|---|---|---|
 | .vot | 4 | 295.1 MB | gaia_data_magnitude.vot (284.4 MB) | 2026-02-08 |
 | .nc | 18 | 161.1 MB | era5_clim_march_day22.nc (27.4 MB) | 2026-04-07 |
-| .json | 53 | 132.5 MB | orbit_paths.json (130.9 MB) | 2026-09-30 |
+| .json | 53 | 132.5 MB | orbit_paths.json (130.9 MB) | 2026-10-01 |
 | .backup | 4 | 131.2 MB | orbit_paths.json.backup (130.9 MB) | 2026-09-25 |
 | .backup_old | 1 | 130.9 MB | orbit_paths.json.backup_old (130.9 MB) | 2026-09-25 |
 | .csv | 15 | 34.9 MB | 3773_v3_niskin_hot001_yr01_to_hot348_yr35.csv (30.8 MB) | 2026-04-07 |
@@ -74,7 +74,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 452.7 MB (1137 files)
+**Total size:** 452.9 MB (1138 files)
 
 **GitHub Pages headroom:** 571 MB remaining of 1024 MB ceiling (44.2% used)
 
@@ -85,7 +85,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 | .json | 757 | 424.1 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-10-01 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 2 | 6.3 MB | palomas_orrery_logo.png (5.1 MB) | 2026-09-24 |
-| .py | 196 | 4.2 MB | gallery_studio.py (243.1 KB) | 2026-10-01 |
+| .py | 197 | 4.3 MB | gallery_studio.py (243.1 KB) | 2026-10-01 |
 | .jsonl | 107 | 2.7 MB | encke.jsonl (31.8 KB) | 2026-10-01 |
 | .html | 5 | 414.4 KB | index.html (197.7 KB) | 2026-09-30 |
 | .js | 13 | 344.8 KB | feature_renderers.js (131.8 KB) | 2026-09-28 |
@@ -129,7 +129,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | repo | served size | ceiling | headroom | used |
 |---|---|---|---|---|
-| gallery | 452.7 MB | 1024 MB | 571 MB | 44.2% |
+| gallery | 452.9 MB | 1024 MB | 571 MB | 44.2% |
 | orrery (gitignored data) | 966.8 MB | n/a (not served) | -- | -- |
 
 Note: orrery data is local/gitignored. If orbit cache files are pushed to either repo for web serving, re-run this inventory to update headroom.

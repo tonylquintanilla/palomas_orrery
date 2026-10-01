@@ -2653,6 +2653,81 @@ spectral_subclass_temps = {
 }
 
 # ============================================================
+# PLANETARY EPHEMERIS ACCURACY (JPL DE430; L-398)
+# How well JPL knows where each planet is, from the report of the
+# ephemeris Horizons serves positions from. The gallery's Solar System
+# room prints a planet's distance to no finer place than its group's
+# row allows (provenance-discipline 2.23, A Computed Position Prints
+# What Its Errors Earn). JPL states each group's accuracy in WORDS, not
+# as a number, so each row stores the PLACE those words report to: the
+# place the Report test gives for every value the words can mean, the
+# coarser where they could mean two. It never stores a number the
+# source does not print. The groups are the 2014 report's. DE440 (Park
+# et al. 2021, AJ 161:105), the ephemeris Horizons uses now, improved
+# Jupiter, Saturn and Pluto and left Uranus and Neptune consistent with
+# DE430, so these rows are a conservative bound for what Horizons
+# serves today (read 2026-10-01, L-398).
+# ============================================================
+
+DE430_TERRESTRIAL_POSITION_PLACE_KM = 1.0
+# Unit: km
+# Status: declared 2026-10-01 -- the reporting place of the source's
+# Status+: words, not a number the source prints
+# Figures: exact -- declared construction: the place every value of
+# Figures+: "a few hundred meters" reports to by the Report test; 0.2 to
+# Figures+: 0.999 km all give whole kilometres
+# Read: abstract, p. 1, 2026-10-01, Claude Opus 5.5
+# Source: Folkner, W. M., Williams, J. G., Boggs, D. H., Park, R. S. &
+# Source+: Kuchynka, P. (2014), "The Planetary and Lunar Ephemerides
+# Source+: DE430 and DE431", IPN Progress Report 42-196 -- abstract: the
+# Source+: inner planets' orbits are known to subkilometer accuracy, and
+# Source+: the frame tie limits the terrestrial planets to orbit
+# Source+: uncertainties of a few hundred meters.
+# Ref: https://ipnpr.jpl.nasa.gov/progress_report/42-196/196C.pdf
+# Declared: the group is Mercury, Venus, Earth and Mars. The place is
+# Declared+: ours, by the rule in the section header; the words are
+# Declared+: JPL's. Whole kilometres is also the finest the Solar System
+# Declared+: room prints, so this row changes nothing a visitor sees
+# Declared+: today; it is the row those four bodies point at.
+
+DE430_JUPITER_SATURN_POSITION_PLACE_KM = 100.0
+# Unit: km
+# Status: declared 2026-10-01 -- the reporting place of the source's
+# Status+: words, not a number the source prints
+# Figures: exact -- declared construction: the coarser of the two places
+# Figures+: "tens of kilometers" reports to by the Report test; 10 to
+# Figures+: 15 km give tens, 16 to 99 km give hundreds
+# Read: abstract, p. 1, 2026-10-01, Claude Opus 5.5
+# Source: Folkner, W. M., Williams, J. G., Boggs, D. H., Park, R. S. &
+# Source+: Kuchynka, P. (2014), "The Planetary and Lunar Ephemerides
+# Source+: DE430 and DE431", IPN Progress Report 42-196 -- abstract: the
+# Source+: orbits of Jupiter and Saturn are determined to accuracies of
+# Source+: tens of kilometers.
+# Ref: https://ipnpr.jpl.nasa.gov/progress_report/42-196/196C.pdf
+# Declared: the group is Jupiter and Saturn. The place is ours, by the
+# Declared+: rule in the section header; the words are JPL's.
+
+DE430_URANUS_NEPTUNE_PLUTO_POSITION_PLACE_KM = 10000.0
+# Unit: km
+# Status: declared 2026-10-01 -- the reporting place of the source's
+# Status+: words, not a number the source prints
+# Figures: exact -- declared construction: the place every value of
+# Figures+: "several thousand kilometers" reports to by the Report test;
+# Figures+: 2,000 to 9,999 km all give ten-thousands
+# Read: abstract, p. 1, 2026-10-01, Claude Opus 5.5
+# Source: Folkner, W. M., Williams, J. G., Boggs, D. H., Park, R. S. &
+# Source+: Kuchynka, P. (2014), "The Planetary and Lunar Ephemerides
+# Source+: DE430 and DE431", IPN Progress Report 42-196 -- abstract: the
+# Source+: orbits of Uranus, Neptune and Pluto are determined mainly
+# Source+: from astrometry, which limits position accuracies to several
+# Source+: thousand kilometers.
+# Ref: https://ipnpr.jpl.nasa.gov/progress_report/42-196/196C.pdf
+# Declared: the group is Uranus, Neptune and Pluto. The gallery draws
+# Declared+: Pluto as the Pluto-Charon barycentre, whose orbit about the
+# Declared+: Sun is the one this sentence is about. The place is ours,
+# Declared+: by the rule in the section header; the words are JPL's.
+
+# ============================================================
 # SAGITTARIUS A* AND GALACTIC-SCALE CONSTANTS
 # Migrated 2026-08-25 from sgr_a_star_data.py under L-247, then sourced
 # and repaired the same day against three independent returns

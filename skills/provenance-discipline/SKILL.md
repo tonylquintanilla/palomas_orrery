@@ -6,13 +6,26 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 2.22 | Cut from palomas_orrery @ 714293a9 (v2.22),
-earlier @ 95b394f8 (v2.21), @ 0e3d05fd (v2.20), @ de4eadc5 (v2.19), @ ac25d4f4 (v2.18), @ 1f6e55a9 (v2.17), @ a7014abb (v2.16), @ 21065c5d (v2.15), @ dfa779bd (v2.14),
+Skill version: 2.23 | Cut from palomas_orrery @ 7a47269c (v2.23),
+earlier @ 714293a9 (v2.22), @ 95b394f8 (v2.21), @ 0e3d05fd (v2.20), @ de4eadc5 (v2.19), @ ac25d4f4 (v2.18), @ 1f6e55a9 (v2.17), @ a7014abb (v2.16), @ 21065c5d (v2.15), @ dfa779bd (v2.14),
 @ ebdc55cc (v2.13), @ bfc0505e (v2.12),
 earlier @ 159c5a2c (v2.11), @ 071a0a65 (v2.10), @ a263f73d (v2.9),
 @ 7f4a2f9f (v2.8), @ 3faa72a0 (v2.7), @ f603be3 (v2.6),
 @ 731066f (v2.5), @ 6b99ace (v2.2), @ 00219d9 (v2.1), @ eb77c83 (v2.0)
-| September 28, 2026
+| October 1, 2026
+v2.23 settles L-398 with one new section, A Computed Position Prints
+What Its Errors Earn. A distance worked out from served elements prints
+to the Report test's place for the LARGER of two errors: how far our
+arithmetic may have drifted from Horizons, and how well JPL knows where
+the body is at all. Tony's ruling, 2026-10-01: "use whichever is
+larger". Drift alone had printed Pluto to ten figures. The section's
+second half is the case the source's accuracy forced: an ACCURACY
+STATED ONLY IN WORDS is stored as the place those words report to --
+the place the Report test gives for every value the words can mean,
+the coarser where they could mean two -- and never as a number the
+source does not print. JPL's 2014 report gives three groups, so 1 km,
+100 km and 10,000 km. The last is one place coarser than the session
+plan of 2026-10-01 said; Tony confirmed it as recommended the same day.
 v2.22 settles L-345: A VALUE IN ANOTHER UNIT IS COMPUTED, NEVER STORED,
 AND ITS COUNT COMES FROM ITS SOURCE ROW ALONE. Each quantity is one row,
 in the unit its best source gives it, with that source. Its value in
@@ -2535,6 +2548,87 @@ chains from it, and under Rule 6 the objection that earned the ruling
 -- sixteen digits copied into a gallery config -- is answered at the
 export instead. The stub stays so a reader who finds L-325 or the two
 literal rows knows what happened to the rule.
+
+## A Computed Position Prints What Its Errors Earn [QUALITY]
+
+A position worked out at display time -- a planet's distance from the
+Sun, propagated in the browser from served elements to the minute the
+room was opened -- is not a store row and has no `# Figures:` line. Its
+count comes from its errors, and two of them bound it:
+
+- **Drift.** How far the worked-out position may have moved from what
+  JPL Horizons itself would give: the builder's measured rate, in
+  degrees per day, times the days since the elements' date, taken as a
+  distance at the body's distance.
+- **The source's own accuracy.** How well JPL knows where the body is
+  at all. A store row per group, served to the page on the object's
+  entry.
+
+**The display prints to the Report test's place (The ceiling, Report)
+for the LARGER of the two**, each unit placed by its own error, never
+finer than a floor the display states (whole kilometres in the Solar
+System room), and never fewer than one figure. Tony's ruling,
+2026-10-01: "use whichever is larger". Drift alone measures how well
+the page reproduces Horizons, not how well Horizons knows the planet,
+and it printed Pluto's distance to ten figures where JPL knows it to
+several thousand kilometres. A body with no source-accuracy row yet
+prints by its drift and SAYS so in the display, in words the display's
+owner approved, and the words appear exactly when the row is absent so
+the two cannot disagree. The asteroids are that case until each body's
+own uncertainty is fetched (L-399).
+
+This applies to every computed position a display prints, in the
+gallery and the orrery. The Solar System room is the first built
+(gallery/solar_system_figures.js, checked by
+documentation/smoke_solar_system_figures.js, gallery repo). The
+orrery's own position hovers are one ledger class, recorded and not
+chased (The Braid).
+
+### An Accuracy Stated in Words Is Stored as the Place It Reports To
+
+Some sources state an accuracy only in words. JPL's 2014 ephemeris
+report (Folkner et al., IPN Progress Report 42-196, abstract) says the
+terrestrial planets' orbit uncertainties are "a few hundred meters",
+Jupiter and Saturn are known to "tens of kilometers", and Uranus,
+Neptune and Pluto to "several thousand kilometers". There is no number
+to store, and choosing one -- 3,000 km, say -- puts in the store a
+value the source never printed: a `# Source:` over a number nobody
+measured, one layer out.
+
+**Store the place.** Run the Report test over every value the words can
+mean. Where they all give one place, that is the row. Where the words
+could give two, take the coarser -- the tie rule of The ceiling,
+extended -- so the row never claims finer than the words allow.
+
+- "a few hundred meters": 0.2 to 0.999 km all report to whole
+  kilometres -> 1 km.
+- "tens of kilometers": 10 to 15 km report to tens, 16 to 99 km to
+  hundreds -> 100 km.
+- "several thousand kilometers": 2,000 to 9,999 km all report to
+  ten-thousands -> 10,000 km.
+
+The tempting reading is the place the words NAME -- thousands for
+"several thousand". It claims +/- 500 km where every value the words
+allow is nearer +/- 5,000, a factor of ten finer than the source. That
+was the session plan of 2026-10-01; this rule replaced it the same
+day, and Tony confirmed it.
+
+**The row.** Value: one unit of the place, in the unit the source
+names. `# Status: declared` -- the pick of the place is ours by this
+rule; the words are the source's -- with a reason that names no
+authority. `# Figures: exact -- declared construction:`, naming the
+words and the range checked, and no print count unless a display
+prints the row. `# Read:`, `# Source:` and `# Ref:` as for any row the
+source was opened for. The three DE430 rows in `constants_new.py` are
+the worked case.
+
+**The display uses half a unit of the place** as the source's error,
+which by the Report test gives back exactly that place; the larger of
+that and the drift then sets the print, as above.
+
+(Tony's ruling of the larger error, 2026-10-01; this method confirmed
+by him "as recommended" the same day, L-398. Built by orrery patch
+patch_L398_1_accuracy_rows_and_skills_20261001.py.)
 
 ## No Shadow Constants [CRITICAL]
 

@@ -1854,6 +1854,66 @@ resident.
 (Moved down from the resident protocol on 2026-09-30 when
 v3.74 made a fourth entry.)
 
+v3.72 (September 28, 2026): No rule changed in this document. TWO
+skill bumps, one version each, for one ruling (L-345):
+provenance-discipline 2.21 -> 2.22 and interactive-exhibit 1.4 -> 1.5.
+A VALUE IN ANOTHER UNIT IS COMPUTED, NEVER STORED.
+
+WHAT PROMPTED IT. Planning the Sun room's chromosphere hover. Served
+from its own kilometre row, the kilometre line would read 698,000 km,
+but the page works out the AU by dividing the kilometre figure it is
+served, and the served figure is already rounded: 0.00467 AU, where
+the full digits give 0.00466. That was ledger item L-345's open
+question -- a second row per unit, or the export doing the
+conversion. And constants_new.py already held 13 rows that were
+another row in a different unit, each stating its own precision a
+second time.
+
+TONY'S RULING, 2026-09-28: "follow the single source of truth
+principle. use the single best source for the store with provenance.
+compute all conversions instead of duplicating. we should build this
+architecture now. add to the skill if clarification is needed." Then,
+on the count rule, after Claude Fable 5.1's review: "confirmed as
+recommended", as the skill's method rather than his judgment.
+
+WHAT THE SKILLS NOW SAY. provenance-discipline Rule 3 gains the rule
+and replaces 2.21's "for now" sentence: each quantity is one row, in
+the unit its best source gives it; its value in any other unit is
+worked out from the row's full digits and rounded once, and its count
+comes from the source row alone -- the source's uncertainty scaled by
+the exact factor, then the Report test's place. The chromosphere
+keeps 1.003 solar radii and 0.00466 AU; the bow shock's 13.5 Earth
+radii becomes 86,000 km, two figures, because its last figure is
+worth 638 km. Rule 8's checker paragraph is widened to match.
+interactive-exhibit gains one rule: a hover prints a unit it is
+served and never converts a served number to print it.
+
+ONE WORDING CORRECTION to Fable's text, recorded in the skill. It said
+"the power of ten nearest that scaled uncertainty"; its own worked
+numbers and the Report test it names compare the uncertainty with
+half a unit in each place. Read literally, the bow shock's AU would
+have kept three figures, against the ruling's own table.
+
+THE BUILD. Orrery patch D19 carries the mechanism with these bumps:
+constants_rows.conversions() and the export's "in" field, schema 6,
+with test_constants_export.py re-computing every served conversion
+and holding eight worked cases. D20 retires the 13 conversion rows;
+one gallery patch then prints from "in".
+
+THE OBLIGATION TRAVELS. This session loaded 2.21 and 1.4. The next
+session confirms its loaded copies read provenance-discipline 2.22 and
+interactive-exhibit 1.5 before any provenance, constants_new.py or
+exhibit work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.69 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-01 when
+v3.75 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================
