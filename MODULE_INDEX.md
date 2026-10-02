@@ -1,7 +1,7 @@
 <!-- Doc-Kind: generated | The human-browsable module index, rebuilt by module_atlas.py alongside the atlas. Do not hand-edit. -->
 # Paloma's Orrery - Module Index
 
-**Generated:** October 01, 2026 by `module_atlas.py`  
+**Generated:** October 02, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -11,24 +11,26 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 143  
-**Total Lines of Code (non-blank):** 113,618  
-**Total Public Functions/Classes:** 1,290
+**Total Python Files:** 144  
+**Total Lines of Code (non-blank):** 116,868  
+**Total Public Functions/Classes:** 1,292
 
 ## Classification Coverage
 
-**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (7).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L395_ledger_close_20261001.py`
+- `patch_L363_9_room_step3b_drawer_20261002.py`
+- `patch_L405_skills_and_ledger_20261002.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (1).** No valid `Domain:` tag.
+**Undetermined domain (2).** No valid `Domain:` tag.
 
-- `patch_L395_ledger_close_20261001.py`
+- `patch_L363_9_room_step3b_drawer_20261002.py`
+- `patch_L405_skills_and_ledger_20261002.py`
 
 
 ---
@@ -245,7 +247,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L395_ledger_close_20261001.py` | - ORRERY repo. Closes the session that connected the orrery's object list to the website (L-395's design talk and first build). (120 lines) |
+| `patch_L363_9_room_step3b_drawer_20261002.py` | - GALLERY repo. The Solar System room's drawer: See more, opened rows with "Enter the Sun room", the Sun's row fixed, a tap on a body finding its row, and Home remembering the order you ticked (L-363 Half 2, step 3b). (2,100 lines) |
+| `patch_L405_skills_and_ledger_20261002.py` | - ORRERY repo. Two skills catch up with this session's builds (L-405): the room skill goes to 1.9 and the ledger skill to 1.14, and the protocol records them as v3.77. And the session is recorded: the Exhibit Store Editor fix (L-404), the Solar System roo... (1,270 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |

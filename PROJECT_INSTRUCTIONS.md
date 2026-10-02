@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.76 | October 1, 2026
+Tony Quintanilla, PE | Claude | v3.77 | October 2, 2026
 
-Cut from feb5e369 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from b3cfc780 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -495,7 +495,7 @@ earth-system-pipeline        1.1  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY
                                   human-cost visualization or text
 gallery-pipeline             1.2  Gallery Studio, json_converter, index.html
                                   viewer, gallery cards
-ledger-and-session-records   1.13 Ledger edits, ledger_index.py, RICE,
+ledger-and-session-records   1.14 Ledger edits, ledger_index.py, RICE,
                                   handoffs, manifests, atlas, dep_trace,
                                   WHERE_WE_ARE.md at every session's end
 gallery-assembler            1.3  render_orbits.py, resolver.py,
@@ -512,7 +512,7 @@ gallery-cache-builder        1.6  Nightly builder, atomic swap and its
                                   under data/, coverage_index, serving cache,
                                   objects_config, dry-run/first-build/nightly,
                                   builder testing layers
-interactive-exhibit          1.8  adding or changing an exhibit in
+interactive-exhibit          1.9  adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -522,7 +522,10 @@ interactive-exhibit          1.8  adding or changing an exhibit in
                                   what a room opens on (arrival block, drawn,
                                   moon); meta.shell_key and the trace stamp;
                                   editing the served words with store_writer or
-                                  exhibit_store_editor; carding an exhibit in
+                                  exhibit_store_editor; the Solar System room's
+                                  drawer, See more, Home's order and its
+                                  framing; testing a room headlessly
+                                  (tools/headless); carding an exhibit in
                                   Studio
 <!-- SKILL-MANIFEST:END -->
 
@@ -1159,6 +1162,46 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.77 (October 2, 2026): No rule changed in this document. TWO
+skill bumps, one version each, for one session (L-405):
+interactive-exhibit 1.8 -> 1.9 and ledger-and-session-records 1.13 ->
+1.14. THE SKILLS CATCH UP WITH THE SESSION'S TWO BUILDS.
+
+WHAT PROMPTED IT. The session made the Exhibit Store Editor list every
+room (L-404) and built the Solar System room's drawer (L-363 step 3b).
+Tony then asked to sort what the session did into method already in
+the skills, method that needed a skill, and drawing decisions and
+judgement -- and, the review done, to "take care of the skills now and
+the numbers in the next session."
+
+WHAT THE SKILLS NOW SAY. interactive-exhibit corrects its sentence that
+every reader of objects_config.json ignores the "rooms" section; says
+what the store writer may change in a room that is not one body, and
+that the editor lists rooms from both places a room can live; records
+the Solar System room's drawer as the shared drawer with four
+additions, and Tony's framing ruling of 2026-10-02 -- where each body
+is now, plus 20%; and gives step 4 the headless test recipe, now filed
+in the gallery's tools/headless/. ledger-and-session-records gains A
+Wrong Sentence in a Skill: Bump Now, or Carry It. The test is what a
+session would do if it followed the sentence: something wrong means
+correct it now, nothing different means carry it on the ledger to the
+next version.
+
+JUDGEMENT KEPT OUT OF THE SKILLS. Five calls Claude made inside the
+drawer build were put to Tony as his, and he confirmed them. They are
+recorded as his rulings on L-363, not written as method.
+
+THE OBLIGATION TRAVELS. This session loaded 1.8 and 1.13. The next
+session confirms its loaded copies read interactive-exhibit 1.9 and
+ledger-and-session-records 1.14 before any exhibit, ledger, handoff or
+session-record work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.74 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.76 (October 1, 2026): No rule changed in this document. TWO
 skill bumps, one version each, for one build (L-395):
 provenance-discipline 2.23 -> 2.24 and interactive-exhibit 1.7 -> 1.8.
@@ -1238,47 +1281,6 @@ exhibit work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.72 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.74 (September 30, 2026): No rule changed in this document. ONE
-skill bump, ledger-and-session-records 1.12 -> 1.13 (L-396). TONY'S
-PAGE: WHERE WE ARE.
-
-WHAT PROMPTED IT. Tony, 2026-09-30: "i struggle to keep the big
-picture. it's the old dilemma of loosing the forest for the trees."
-The master plan's summary and critical path had been tried for that
-and had not really helped: both are written for the work, and both
-move only at design builds. He asked for one running document he can
-read at the end of every turn and every session, practical both to
-write and to read. Then he asked for the parts changed this session
-and the immediate next steps to be marked, because "attention is a
-human limitation", and for bullets in place of paragraphs.
-
-WHAT THE SKILL NOW SAYS. The Document Stack gains Where We Are:
-documentation/WHERE_WE_ARE.md, one file rewritten in place and
-updated inside every session's ledger patch. It has a fixed shape: a
-Read This First box, the road from start to goal, right now, the next
-three steps, and what waits on Tony. This session's changes are
-marked, the must-reads are in italics, and the marks are cleared at
-each update. And a turn that changes the picture ends with two or
-three bullets under "Where this leaves us". Nothing checks the page
-yet; the candidate check is recorded on L-396.
-
-THE SAME SESSION (2026-09-29 and 30) brought three strands of work
-together and recorded Tony's order of work: the Solar System room's
-second half first, then the Sun's numbers, then the room becomes the
-website's home page. After that, the orrery's other objects come to
-the website from its own object list, checked against JPL Horizons
-(L-363, L-395; master plan v35).
-
-THE OBLIGATION TRAVELS. This session loaded 1.12. The next session
-confirms its loaded copy reads 1.13 before any ledger, handoff or
-session-record work -- which every session does at its end.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.71 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

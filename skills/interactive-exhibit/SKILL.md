@@ -1,12 +1,26 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=sun) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; carding an exhibit in Studio
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, See more, Home's order and its framing; testing a room headlessly (tools/headless); carding an exhibit in Studio
 ---
 
 # Interactive Exhibit
 
-Skill version: 1.8 | 2026-10-01, with Anthropic's Claude Opus 5.5, from
+Skill version: 1.9 | 2026-10-02, with Anthropic's Claude Opus 5.5, from
+orrery @ b3cfc780 and gallery @ cfc53490, with gallery patches
+patch_L404_1_rooms_in_store_editor_20261001.py and
+patch_L363_9_room_step3b_drawer_20261002.py. v1.9 (L-405) writes down
+what two builds of one session taught, sorted on Tony's review of
+2026-10-02 into method rather than judgement. The sentence saying every
+reader of data/objects_config.json ignores "rooms" was wrong and is
+corrected. The store writer may change a rooms-section room's `drawn`
+and `highlight`, and the editor lists rooms from both places a room can
+live (L-404). The Solar System room's drawer is recorded as shared
+chrome with four additions, with Tony's framing ruling -- where a body
+is now, plus 20% (L-363 step 3b). And step 4 gains the headless recipe:
+a room's real driver in CPython, the real page in jsdom with a stand-in
+Plotly, and the other rooms compared before and after (tools/headless/).
+Earlier: 1.8 | 2026-10-01, with Anthropic's Claude Opus 5.5, from
 orrery @ feb5e369 and gallery @ 43993b49. v1.8 (L-395) records that a
 body's name, Horizons id, description and NASA link on the website are
 copies written by tools/mirror_objects.py from the orrery's object
@@ -293,10 +307,78 @@ served name; `about`, a sentence for the text box and the panel; and
 `source_note`, what the Horizons id in the source line is. Pluto's row
 is the case: label "Pluto", Tony's barycentre sentence, and "the
 Pluto-Charon barycenter". The page reads this section directly, so a
-change reaches a visitor on the push alone. The cache builder, the
-assembler and every check read only `"objects"` and ignore it -- checked
-before the section was added, and the reason it could be added without
-touching them.
+change reaches a visitor on the push alone. The cache builder and the
+assembler read only `"objects"` and ignore it -- checked before the
+section was added, and the reason it could be added without touching
+them. Other readers have joined since, so do not repeat the older claim
+that EVERY reader ignores it: `tools/mirror_objects.py` reads its rows
+(v1.8, L-395), and `tools/store_writer.py`, `tools/exhibit_store_editor.py`
+and their two suites read it (v1.9, L-404).
+
+WHAT MAY BE EDITED IN A ROOMS-SECTION ROOM (v1.9, L-404): its arrival's
+`drawn` and `highlight`, through the store writer, and nothing else in
+the section. Each must name a drawer row other than the Sun, which is
+the fixed centre and always drawn; the writer refuses anything else,
+because the page would warn about it and highlight nothing. The editor's
+room list is `store_writer.room_ids()`: the body rooms by slug, then the
+section's rooms by key, so a room added in EITHER place appears with
+nothing else to change. Until 2026-10-01 the list read only `objects`,
+and the Solar System room, built the day before, could not be chosen at
+all -- found by Tony at the editor. A row's own words (`label`, `about`,
+`source_note`) are not in the allow list; a change to them comes as a
+patch, and whether the editor should take them is Tony's question.
+
+### The Solar System room's drawer: bodies, not shells [QUALITY]
+v1.9, L-363 step 3b. It is the SAME drawer as the Sun's and Earth's --
+One chrome, many rooms -- with four things added for a room whose rows
+are bodies. A room gets them by handing `drawer` (its served rows and
+opening) back from its `compose`; the page then sets `ssDrawer`, and the
+`ss*` functions above `buildSunDrawer` do the work. In the Sun and Earth
+rooms `ssDrawer` is null and every branch that asks is skipped. Each
+decision is made in `gallery/solar_system_drawer.js`, checked by
+`documentation/smoke_solar_system_drawer.js` (a gating checker that
+breaks the file three ways first); the page only touches the DOM and
+Plotly.
+
+- **The Sun's row is fixed**: no tick box, no GO, never unticked by All
+  / none. It still highlights and opens. The Sun's trace group is
+  `center` (the assembler's centre marker), not its slug.
+- **A row opens.** Tapping a name highlights the row and opens it; a
+  second tap closes it. Ticking a body opens its row too (Tony,
+  2026-09-30). An open row links "Enter the <name> room" where the
+  row's slug is a key in `EXHIBITS`, and says "No room or cards yet"
+  where it is not -- read from the page's own table, so the next room
+  lights its row by itself.
+- **See more / See fewer** for rows served `see_more`. A ticked row
+  never hides; the button is not offered when nothing is behind it.
+- **Home remembers the tick order**, for the open tab only: the last
+  body ticked that is still ticked, at the opening angle, drawer closed,
+  falling back through the order. With nothing ticked it puts back the
+  room's SERVED opening -- the one time Home changes what is drawn.
+- **Selecting moves nothing.** A tap on a body in the picture
+  highlights its row and opens its hover; a name tap highlights and
+  opens the row. Only GO moves the view. (These, the Sun's missing GO,
+  Home's served opening and the opening frame below were Claude's calls
+  inside the build; Tony confirmed all five on 2026-10-02.)
+- **Rows are found by the group they name** (`data-k`), never by their
+  place in the list: opened rows and the See more button sit between
+  them. `renderSunDrawer` does this for every room.
+
+**FRAMING, Tony's ruling of 2026-10-02** ("B but with a buffer of
+20%"): the room frames on how far each body is from the Sun NOW, not
+on its whole orbit, and the farthest body ticked sets the frame. Two
+parameters on the room's `EXHIBITS` row carry it, `frameOnPosition:
+true` and `frameMargin: 1.2`; `sunGroupRadius` then returns the
+position marker's distance (`sunPositionRadius`) and `sunFrameMargin()`
+the 20%. The opening view, Home and GO follow the same rule, and the
+opening has no 1.2 AU minimum. The Sun and Earth rooms keep framing
+whole shapes at 10%. Part of a stretched orbit runs past the box and is
+CUT OFF at its edge until the visitor zooms out: gl-plot3d clips each
+trace to the axis ranges (`clipToBounds`, on by default, read from the
+Plotly 2.35.2 bundle). Put to Tony with each body's numbers, after a
+first summary that said the two framings differ only for stretched
+orbits -- wrong: in a square box they also differ wherever a body sits
+toward a corner, by about a third for Jupiter under the tightest rule.
 
 ### A shell trace carries its key [CRITICAL]
 `gallery/feature_renderers.js` stamps `meta.shell_key` on every trace
@@ -335,7 +417,8 @@ so they cannot come to disagree about the file's layout:
 
 WHAT THE WRITER MAY TOUCH IS AN ALLOW LIST BUILT BY READING THE CONFIG,
 not a list of exceptions -- 204 paths at gallery `d9d7a48f`: a served
-shell's six words, a belt's parallel words, and `drawn` and `moon`. The
+shell's six words, a belt's parallel words, and `drawn` and `moon`; and
+since v1.9 a rooms-section room's `drawn` and `highlight` (above). The
 first design was a refusal list of six field names, and Claude Fable 5.1
 found on 2026-09-18 that it would happily change a room's `slug` to
 "earthx" or a shell's `color` to "zzz". A refusal list has to anticipate
@@ -550,6 +633,33 @@ follow under orrery-coding-conventions 1.9 and L-321.)
    room, and four Sun hovers missed the move to the panel because of it
    (L-331). A checker passes on what it does not look at: when adding a
    room, add it to this suite before trusting its green.
+
+   **THE HEADLESS RECIPE** (v1.9, L-405; first used for L-363 step 3b).
+   The stand-in scene above, made concrete, in `tools/headless/` in the
+   gallery repo. Claude-only: Tony never runs it and the maintenance run
+   does not. jsdom is not in the gallery; `npm install jsdom@24` in a
+   scratch folder and run with `NODE_PATH=<scratch>/node_modules`.
+   - `run_room_driver.py <DRIVER> <EPOCH> <out.json>` runs a room's REAL
+     driver in plain CPython on the served cache. The driver is ordinary
+     Python over `gallery/assembler/`; only Pyodide is missing.
+   - `page_harness.js` boots the REAL `interactive.html` in jsdom with
+     the real gallery files, that payload, and a stand-in Plotly that
+     records restyles and relayouts. It measures the chrome's MECHANISM
+     -- rows, ticks, focus, frames, Home -- and nothing a visitor sees.
+   - `compare_rooms.js <before> <after> <room> <payload>`: when SHARED
+     chrome changes, drive every other room the same way in the old and
+     the new copy -- every row's box in turn, All / none, Home -- and
+     require the two to be identical. "Both rooms are Mode 5 targets"
+     (One chrome, many rooms) still holds; this makes the first pass
+     cheap and exact.
+   - A walk per room (`walk_solar_system_drawer.js`) checks each step
+     against values worked out in the walk itself, not by the page's own
+     helpers, and is run once against a deliberately broken copy to show
+     it can fail. It fixes its own opening, so a change to what the room
+     opens on does not break it.
+   The page's CDN scripts are refused by the harness's loader, which
+   serves the stand-in Plotly instead. Say in the handoff what was run
+   this way and that the phone has not seen it.
 5. Push; `gallery_maintenance_run.py --live`; Store drift reads MATCH
    for the new pointers, by name.
 6. Mode 5 on the phone, sequence above; fix; repeat.
@@ -648,4 +758,6 @@ manifest in PROJECT_INSTRUCTIONS.md carries the version. Per Stale Skill
 = Stop, the session that installs a version cannot verify the install.
 1.0 was confirmed by the Earth sessions; 1.1 and 1.2 by the sessions
 that followed their pushes. The first session after 1.3's push confirms
-its loaded copy reads 1.3 before exhibit work.
+its loaded copy reads 1.3 before exhibit work. 1.9 was cut in the
+session that wrote it, which loaded 1.8; the next session confirms its
+loaded copy reads 1.9 before exhibit work.

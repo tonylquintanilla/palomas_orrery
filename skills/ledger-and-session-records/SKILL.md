@@ -6,8 +6,8 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Skill version: 1.13 | Cut from palomas_orrery @ 5db8bbe0 (v1.13),
-earlier @ 2a7d26b9 (v1.12), @ 1ee1cc61 (v1.11), @ 50cbd2df (v1.10), @ 41c0b279 (v1.9), @ 3586970d (v1.8),
+Skill version: 1.14 | Cut from palomas_orrery @ b3cfc780 (v1.14),
+earlier @ 5db8bbe0 (v1.13), @ 2a7d26b9 (v1.12), @ 1ee1cc61 (v1.11), @ 50cbd2df (v1.10), @ 41c0b279 (v1.9), @ 3586970d (v1.8),
 @ 434a712b (v1.7), @ 305b269 (v1.6), @ 3398970 (v1.5) | September 10,
 2026, with Anthropic's Claude Opus 5
 Sources: LEDGER_CONSOLIDATED.md header, ledger_index.py at HEAD, handoff
@@ -64,6 +64,10 @@ written for Tony rather than for the work, rewritten in place inside
 every session's ledger patch, with this session's changes marked and
 the must-reads in italics. Tony, 2026-09-30: "i struggle to keep the
 big picture. it's the old dilemma of loosing the forest for the trees."
+v1.14 (L-405; 2026-10-02, with Anthropic's Claude Opus 5.5) adds A Wrong
+Sentence in a Skill: Bump Now, or Carry It, under the change log. A
+session had to decide it for itself on 2026-10-01 (L-404); Tony's review
+of 2026-10-02 sorted it as method, so the skill answers it now.
 
 Note: READING the ledger at session start is resident Part-1 behavior,
 not this skill's job. This skill carries the maintenance mechanics.
@@ -471,6 +475,32 @@ regeneration and a reinstall, so splitting them multiplies the
 ceremony and the chances of step 3 not firing -- and it makes the
 version history harder to read, since two entries then describe one
 evening.)
+
+**A WRONG SENTENCE IN A SKILL: BUMP NOW, OR CARRY IT [QUALITY].**
+(v1.14, L-405.) A skill loads every session and is followed without
+being noticed, so the test is what a session would DO if it followed the
+wrong sentence as written.
+
+- **It would do something wrong** -- edit the wrong file, skip or trust
+  the wrong check, write a wrong number, tell Tony something false.
+  Correct it in THIS session. If the session is not otherwise bumping
+  that skill, this is a bump of its own: one wrong instruction is
+  enough to earn one.
+- **It would do nothing different** -- the sentence is a description
+  that has gone out of date, a count or a list that has grown, a claim
+  no step depends on. Carry it on a ledger item for the skill's next
+  version, name it in the patch output (The Correction Does Not
+  Travel), and correct it then. The ceremony of a bump -- a protocol
+  entry, a manifest run, a reinstall -- is not spent on a sentence no
+  one acts on.
+- **If the session is already bumping that skill**, any wrong sentence
+  in it rides that bump, whichever kind it is. One Session, One Bump.
+
+When it is unclear which of the first two a sentence is, treat it as
+the first. The worked case: interactive-exhibit 1.8 said every reader of
+`data/objects_config.json` ignores its `"rooms"` section. A session
+following it would at worst have looked in fewer places for a reader,
+so on 2026-10-01 it was carried (L-404 to L-405), and corrected at 1.9.
 
 **Step 3 is the one that stops firing** (Tony's observation,
 2026-08-23). Steps 1, 2 and 4 are visible -- you are editing the file,

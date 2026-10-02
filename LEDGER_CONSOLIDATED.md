@@ -203,6 +203,11 @@ L-389, L-396 goal line, L-398; L-400 done), built on 7a47269c.
 Module updated: October 1, 2026 with Anthropic's Claude Opus 5.5
 (L-398 done; L-401 and L-402 opened; L-363 note; a dashboard button for
 the Solar System figures check), built on c12994d2.
+Module updated: October 2, 2026 with Anthropic's Claude Opus 5.5
+(L-404 opened: the Exhibit Store Editor lists every room, and can set
+the Solar System room's opening view; L-363 step 3b built, the drawer;
+L-405 opened and built: interactive-exhibit 1.9,
+ledger-and-session-records 1.14, protocol v3.77), built on b3cfc780.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -420,7 +425,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*243 live items; 228 need attention (`!`); 188 RICE-scored; 155 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*245 live items; 230 need attention (`!`); 188 RICE-scored; 155 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -538,7 +543,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-359 | Served text beside a served number can go stale where no tool may edit it (gallery) | OPEN | -- | 2026-09-22 |
 | ! | L-360 | The hover budget measures recorded payloads, so it cannot see a line added by newly served data (checks) | OPEN | -- | 2026-09-28 |
 | ! | L-361 | An epoch typed in the page, with no store row (gallery, store) | OPEN | -- | 2026-09-22 |
-| ! | L-363 | The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits) | OPEN | -- | 2026-10-01 |
+| ! | L-363 | The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits) | OPEN | -- | 2026-10-02 |
 | ! | L-364 | A comet's own trust window can exclude today while the served window passes the scene (gallery, trust) | OPEN | -- | 2026-09-29 |
 | ! | L-365 | The assembler leaves out a body it cannot draw, without a warning (gallery, assembler) | OPEN | -- | 2026-09-29 |
 | ! | L-366 | An orbit's info marker describes an arbitrary point on the orbit (gallery, assembler) | OPEN | -- | 2026-09-26 |
@@ -574,6 +579,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
+| ! | L-404 | The Exhibit Store Editor did not list the Solar System room (gallery, tooling) | OPEN | -- | 2026-10-01 |
+| ! | L-405 | Skill text owed from the editor fix and the drawer build (skills) | OPEN | -- | 2026-10-02 |
 
 ### B. Pending Action (Tony-side)
 
@@ -908,6 +915,103 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-405] Skill text owed from the editor fix and the drawer build (skills)
+<!-- L:405 status:OPEN upd:2026-10-02 section:A flag: rice: -->
+- **From Tony's review of 2026-10-02**, sorting the session into method
+  already in the skills, method needing a skill, and his own drawing
+  decisions. Method that needs writing down, so the next session does
+  not have to rediscover or ask it:
+  - **interactive-exhibit:** (a) the sentence saying every reader of
+    data/objects_config.json ignores "rooms" is wrong -- the store
+    writer, the editor, their suites and tools/mirror_objects.py read
+    it (L-404, L-395); (b) what is editable in a rooms-section room --
+    its arrival's `drawn` and `highlight`, each a drawer row other than
+    the Sun -- and that the editor's room list is read from both places
+    a room can live (L-404); (c) the body drawer as shared chrome: the
+    Sun's fixed row, opened rows, See more, Home's tick order, rows
+    found by the group they name, and the room parameters
+    `frameOnPosition` / `frameMargin` with Tony's 20% (L-363 step 3b);
+    (d) the headless test recipe -- the room's real driver run in
+    CPython on the served cache, the real page booted in jsdom with a
+    stand-in Plotly, and the other rooms driven the same way before and
+    after a shared-chrome change, compared row by row. The harness
+    lives only in a session's scratch space today; whether it is filed
+    in the repo, marked as Claude-only, is part of this item.
+  - **ledger-and-session-records:** when a wrong sentence in a skill
+    earns a version bump, and when it is carried on the ledger to the
+    next bump instead. L-404 chose the second for one sentence; the
+    question recurs, so the skill should answer it.
+- **Built the same session, at Tony's word** ("I would rather take care
+  of the skills now and the numbers in the next session"):
+  interactive-exhibit 1.9 carries (a) to (d); ledger-and-session-records
+  1.14 carries the bump threshold as A Wrong Sentence in a Skill: Bump
+  Now, or Carry It; protocol v3.77 records both. The harness is filed in
+  the gallery's tools/headless/ by patch_L363_9 (four files, Claude-only,
+  not run by the maintenance run). The bump rule's wording is Claude's,
+  shown to Tony in the session.
+**Gap:** The next session confirms its loaded copies read
+interactive-exhibit 1.9 and ledger-and-session-records 1.14, then
+closes this item.
+**Ref:** L-404; L-363; L-395; L-338; skills/interactive-exhibit/SKILL.md;
+skills/ledger-and-session-records/SKILL.md.
+
+#### [L-404] The Exhibit Store Editor did not list the Solar System room (gallery, tooling)
+<!-- L:404 status:OPEN upd:2026-10-01 section:A flag: rice: -->
+- **Tony's question, 2026-10-01**: he went to the editor to make the
+  Solar System room open on the inner planets, and its room list held
+  only Sun and Earth. "shouldn't all interactive rooms be available in
+  the drop down menu as they are created?" Yes.
+- **Cause** [read at gallery cfc53490]. `exhibit_store_editor.rooms()`
+  and `store_writer.editable_paths()` both found a room by one test: an
+  entry in `objects` carrying an arrival block. The Solar System room
+  is not one body, so its settings went into the config's top-level
+  "rooms" section on 2026-09-30 (L-392). Neither tool was taught to look
+  there. Built under L-334, before a second place for rooms existed.
+- **Built** (gallery patch_L404_1_rooms_in_store_editor_20261001.py, on
+  cfc53490). `store_writer.room_ids()` is the one room list, from both
+  places a room can live, so the next room added to either appears with
+  nothing else to change. The writer may change a rooms-section room's
+  `drawn` and `highlight`; each must name a drawer row other than the
+  Sun, which is always drawn. Nothing else in the section is writable.
+  The editor ticks the room's bodies, adds a "Highlighted row" picker,
+  and says in the form that the rows' own words are not edited there.
+- **Checks**. Writer suite check 9 (289 checks) and editor suite check
+  10 (269; 314 with the window walk). The editor's check works out the
+  expected room list from the raw JSON rather than asking the editor,
+  so it cannot agree by sharing the code. Proved able to fail: with
+  room_ids() cut back to the body rooms, both suites named
+  solar-system as missing; with the Sun let through as a tick, five
+  checks named it. Tony's own path was run in a real window headless:
+  pick solar-system, tick Mercury, Venus and Mars, Save -- one line of
+  data/objects_config.json changed, `"drawn": ["mercury", "venus",
+  "earth", "mars"]`. That save was made on a scratch copy only.
+- **Not in this build**, recorded rather than chased (The Braid): the
+  editor does not edit the Solar System room's row words (`label`,
+  `about`, `source_note`). Today a change to them comes as a patch.
+- **The Correction Does Not Travel**: interactive-exhibit 1.8 says the
+  cache builder, the assembler and every check read only "objects" and
+  ignore the rooms section. The store writer and both suites now read
+  it (and tools/mirror_objects.py already read its rows under L-395).
+  That sentence is corrected at the skill's next version, carried on
+  L-405; no bump was made for one sentence.
+- **Skills this session**: interactive-exhibit 1.8 and
+  provenance-discipline 2.24 loaded as the manifest expects, which
+  discharges the obligation v3.76 carried. Also loaded and matching:
+  safe-file-editing 1.11, agentic-pre-test 1.2,
+  ledger-and-session-records 1.13.
+**Gap:**
+- Tony-action (do): gallery -- run the patch; in the editor pick
+  solar-system, tick Mercury, Venus and Mars, Save; run
+  gallery_maintenance_run.py; commit and push. The opening view needs
+  only the push, no cache rebuild.
+- Tony-action (do): orrery -- run patch_L405_skills_and_ledger_20261002.py and
+  orrery_maintenance_run.py; commit and push.
+- Closes when the room opens on the inner planets on the site. The
+  skill sentence above already lives on L-405.
+**Ref:** tools/store_writer.py, tools/exhibit_store_editor.py and their
+two suites (gallery); L-334 (the editor), L-392 (the rooms section),
+L-363 (the room), L-395.
 
 #### [L-403] Numbers in the object list's descriptions carry no source (orrery, provenance)
 <!-- L:403 status:OPEN upd:2026-10-01 section:A flag: rice: -->
@@ -1662,7 +1766,66 @@ is in the orrery) "photosphere + 10%"
 **Ref:** gallery `tools/gallery_cache_builder.py` (served_window, M2 section 5.5); gallery `gallery/assembler/resolver.py`, step 3; skills/gallery-assembler/SKILL.md; L-363.
 
 #### [L-363] The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits)
-<!-- L:363 status:OPEN upd:2026-10-01 section:A flag: rice: -->
+<!-- L:363 status:OPEN upd:2026-10-02 section:A flag: rice: -->
+- **2026-10-02, step 3b built: the drawer.** Gallery
+  patch_L363_9_room_step3b_drawer_20261002.py, on cfc53490, not yet run
+  or seen on a phone. Built from the design's sections 3 and 4 and
+  Tony's answers of 2026-09-30, with no new ruling:
+  - The Sun's row has no tick box and no GO; it still highlights and
+    opens. All / none leaves it alone.
+  - A name tap highlights its row and opens it; a second tap closes it.
+    An open row links "Enter the Sun room" or "Enter the Earth room", or
+    says "No room or cards yet". Whether a body has a room is read from
+    the page's EXHIBITS table, so the next room lights its row by itself.
+  - Ticking draws a body, highlights and opens its row, and frames
+    everything drawn. Apophis waits under See more / See fewer; a ticked
+    row never hides.
+  - A tap on a body in the picture highlights its row and moves nothing
+    (design 3.5). In step 3a it framed the body; GO still does.
+  - Home: the last body ticked that is still ticked, opening angle,
+    drawer closed, frame holding everything drawn, falling back through
+    the tick order (tab only). With nothing ticked it puts back what the
+    room OPENS ON, served -- the design's "ticks Earth again" was written
+    when the room opened on Earth alone, and L-404 made that a setting.
+  - **Framing, Tony's ruling of 2026-10-02: "B but with a buffer of
+    20%".** The room frames on how far each body is from the Sun now,
+    not on its whole orbit (design 4.1 and 4.2): the farthest body
+    ticked, times 1.2. The opening view and Home follow the same rule; GO
+    frames the one body the same way. Part of a stretched orbit may run
+    past the box and is cut off at its edge (Plotly 2.35.2 clips a 3D
+    scene to its axis ranges, read from the bundle) until the visitor
+    zooms out. Today's frames, whole orbit at 10% against now at 20%:
+    Pluto 49.6 to 42.7 AU and Apophis 1.18 to 1.02 AU, tighter; every
+    planet slightly wider, by 2% (Saturn) to 9% (Mercury, Venus). The Sun and Earth rooms keep
+    framing whole shapes at 10%. In step 3a ticking framed whole orbits.
+    The choice was put to Tony with today's numbers, after Claude
+    corrected its own first summary: the two framings differ not only
+    for stretched orbits but wherever a body sits toward a corner of the
+    square box -- Jupiter, by about a third, under the tightest rule,
+    which was offered and ruled out.
+  - **Five calls Claude made inside the build, confirmed by Tony on
+    2026-10-02 ("Confirmed as recommended"):** a tap on a body in the
+    picture does not move the view; tapping a name does not move the
+    view, only GO does; Home with nothing ticked puts back the room's
+    served opening, not Earth alone; the Sun's row has no GO; the
+    room's opening frame follows the 20% rule alone, without step 3a's
+    1.2 AU minimum (Mercury alone would open at 0.56 AU).
+  - The info panel's two paragraphs rewritten to say this. Tony to
+    approve the words before Mode 5 (interactive-exhibit, hover text is
+    written for the visitor).
+  - Logic in gallery/solar_system_drawer.js (L-338), checked by
+    documentation/smoke_solar_system_drawer.js, a new gating checker
+    whose self-test breaks it three ways; the file joins SERVED_FILES.
+  - Tested here [sandbox]: the page booted in jsdom with a stand-in
+    Plotly on the REAL driver payload (the room's driver run in CPython
+    on the served cache): 53 checks walking the drawer, failing as
+    expected on the unpatched page and on a broken frame rule. The Sun
+    and Earth rooms driven the same way before and after: identical
+    rows, ticks, focus, All / none and Home through every row. The walk
+    checks each frame against the body's distance worked out on its own,
+    and fails 7 ways if the room frames whole orbits again. All
+    gating checkers pass but Pole of date, which needs pyerfa the
+    sandbox lacks. No WebGL and no phone: Tony's Mode 5 is the test.
 - **2026-10-01, the front door decided, and the panel's words.** Tony,
   on Where We Are: a bare interactive.html link opens the Solar System
   room ("yes. we reorient the explorer to another url"), and the

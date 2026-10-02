@@ -1960,6 +1960,50 @@ resident.
 (Moved down from the resident protocol on 2026-10-01 when
 v3.76 made a fourth entry.)
 
+v3.74 (September 30, 2026): No rule changed in this document. ONE
+skill bump, ledger-and-session-records 1.12 -> 1.13 (L-396). TONY'S
+PAGE: WHERE WE ARE.
+
+WHAT PROMPTED IT. Tony, 2026-09-30: "i struggle to keep the big
+picture. it's the old dilemma of loosing the forest for the trees."
+The master plan's summary and critical path had been tried for that
+and had not really helped: both are written for the work, and both
+move only at design builds. He asked for one running document he can
+read at the end of every turn and every session, practical both to
+write and to read. Then he asked for the parts changed this session
+and the immediate next steps to be marked, because "attention is a
+human limitation", and for bullets in place of paragraphs.
+
+WHAT THE SKILL NOW SAYS. The Document Stack gains Where We Are:
+documentation/WHERE_WE_ARE.md, one file rewritten in place and
+updated inside every session's ledger patch. It has a fixed shape: a
+Read This First box, the road from start to goal, right now, the next
+three steps, and what waits on Tony. This session's changes are
+marked, the must-reads are in italics, and the marks are cleared at
+each update. And a turn that changes the picture ends with two or
+three bullets under "Where this leaves us". Nothing checks the page
+yet; the candidate check is recorded on L-396.
+
+THE SAME SESSION (2026-09-29 and 30) brought three strands of work
+together and recorded Tony's order of work: the Solar System room's
+second half first, then the Sun's numbers, then the room becomes the
+website's home page. After that, the orrery's other objects come to
+the website from its own object list, checked against JPL Horizons
+(L-363, L-395; master plan v35).
+
+THE OBLIGATION TRAVELS. This session loaded 1.12. The next session
+confirms its loaded copy reads 1.13 before any ledger, handoff or
+session-record work -- which every session does at its end.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.71 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-02 when
+v3.77 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================
