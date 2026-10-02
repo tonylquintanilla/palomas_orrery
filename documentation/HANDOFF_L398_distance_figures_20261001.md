@@ -888,7 +888,8 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  2. Move this script into documentation/; commit and push. -- 
+  2. Move this script into documentation/; commit and push. -- 5ed1101d2ebb606861f0a0e49c999bab3ba55056
   3. Reinstall provenance-discipline and interactive-exhibit from
-     skills/ (Settings > Skills).
+     skills/ (Settings > Skills). -- done
+     -- uploaded new project instructions v3.76
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
