@@ -1914,6 +1914,52 @@ resident.
 (Moved down from the resident protocol on 2026-10-01 when
 v3.75 made a fourth entry.)
 
+v3.73 (September 28, 2026): No rule changed in this document. TWO
+skill bumps, one version each, for one design build (L-345, patch
+D20): ledger-and-session-records 1.11 -> 1.12 and interactive-exhibit
+1.5 -> 1.6.
+
+WHAT PROMPTED IT. Patch D20 finished L-345: the fifteen rows in
+constants_new.py that were another row in a different unit became
+names computed from that row, marked "# Conversion: of <ROW>", with no
+count, status or source of their own, and test_derived_figures.py now
+names any row shaped like a conversion that is not marked. It was
+shown failing on the real store before it was trusted. The same patch
+moved the orrery's crust to Earth's mean radius, in the words Tony
+approved on 2026-09-28, and restamped the master plan to v34.
+
+LEDGER-AND-SESSION-RECORDS 1.12, The Document Stack. The master plan
+is ONE document at two zooms: an executive summary at the top, and the
+body, with the critical path kept inside it as Section 5a. The summary
+is rewritten at every restamp. Tony's ruling of 2026-09-28: "i think we
+should integrate these reports. the summary as an executive summary.
+the body should keep its critical path section." The two companion
+files had not moved since August while the plan went from v21 to v33
+(L-333, L-362); they are retired as dated records.
+
+INTERACTIVE-EXHIBIT 1.6, three rules under Provenance is part of the
+build, each describing what the L-345 gallery patch built. Where
+cutting a served AU to three figures would round a tie, the served
+digits print in full and the hover check names the case (Tony's ruling
+of 2026-09-28; the inner core's 0.000008165 AU). The mirror writes a
+slot measured in another unit from its row's "in". And a shell may
+serve a radius_note, a sentence under its radius line, as the crust
+does.
+
+THE OBLIGATION TRAVELS. This session loaded 1.11 and 1.5. The next
+session confirms its loaded copies read ledger-and-session-records
+1.12 and interactive-exhibit 1.6 before any ledger, handoff or exhibit
+work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.70 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-01 when
+v3.76 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

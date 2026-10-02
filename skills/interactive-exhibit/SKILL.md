@@ -6,7 +6,12 @@ fires_when: adding or changing an exhibit in interactive.html; any edit to the S
 
 # Interactive Exhibit
 
-Skill version: 1.7 | 2026-10-01, with Anthropic's Claude Opus 5.5, from
+Skill version: 1.8 | 2026-10-01, with Anthropic's Claude Opus 5.5, from
+orrery @ feb5e369 and gallery @ 43993b49. v1.8 (L-395) records that a
+body's name, Horizons id, description and NASA link on the website are
+copies written by tools/mirror_objects.py from the orrery's object
+list, and what the Solar System room's info panel shows.
+Earlier: 1.7 | 2026-10-01, with Anthropic's Claude Opus 5.5, from
 orrery @ 7a47269c and gallery @ c48f9a92. v1.7 (L-398, L-363, L-392)
 records what the Solar System room serves and how it prints a
 distance. A room that is not one body keeps its settings in the
@@ -234,6 +239,21 @@ page:
   disagree. The room's driver reads the link from the config, as it
   reads the rooms section; a change to it reaches a visitor on the push
   alone, with no cache rebuild.
+- **A body's words and link come from the orrery's object list** (v1.8,
+  L-395; Tony's rulings of 2026-10-01). On an object in
+  `data/objects_config.json`, `name`, `horizons_id`, `id_type` where the
+  list states one, `description` and `info_url` are COPIES written by
+  `tools/mirror_objects.py` from `data/objects_export.json`, which
+  `tools/pull_objects_export.py` fetches at the orrery's HEAD SHA; never
+  by hand, and the Objects mirror check fails on a hand edit. An object
+  is linked when its slug equals a `'key'` on an entry in the orrery's
+  `celestial_objects.py`; every drawer row of the Solar System room
+  must be linked. The room's info panel shows the row's own `about`
+  where the room serves one (Pluto's barycentre sentence), otherwise
+  the `description`, and links `info_url`; the hover does not carry
+  either. A changed `horizons_id` reaches the served cache only when
+  the builder runs, so Cache in step fails until it has (Apophis,
+  2026-10-01).
 - The Artifact Bounds the Audit, and The Braid orders it: the new
   exhibit's pointers are the slice; a provenance gap found elsewhere
   while building it is recorded, one ledger row per CLASS, not chased.

@@ -420,7 +420,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*242 live items; 227 need attention (`!`); 188 RICE-scored; 155 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*243 live items; 228 need attention (`!`); 188 RICE-scored; 155 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -573,6 +573,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-399 | Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder) | OPEN | -- | 2026-10-01 |
 | ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
+| ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
 
 ### B. Pending Action (Tony-side)
 
@@ -908,6 +909,20 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-403] Numbers in the object list's descriptions carry no source (orrery, provenance)
+<!-- L:403 status:OPEN upd:2026-10-01 section:A flag: rice: -->
+- **Recorded 2026-10-01, from L-395**, one row for the class (The
+  Braid). 135 of the 182 entries in `celestial_objects.py` hold a digit
+  in `mission_info` after its opening "Horizons: ..." sentence: periods,
+  diameters, dates, mass ratios. A description has nowhere to cite a
+  source, so each is sourced or comes out when the website starts
+  serving that entry (provenance-discipline 2.24); the export names
+  every number in a served description by key.
+- The room's eleven were done in L-395's first build: one removed (the
+  barycentre's 6.39 days), one kept and sourced (Apophis's 2029).
+**Gap:** Each slice of objects the website takes on.
+**Ref:** `export_objects.py` (the "numbers" list); `test_objects_export.py`; L-395.
+
 #### [L-402] Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits)
 <!-- L:402 status:OPEN upd:2026-10-01 section:A flag: rice: -->
 - **Tony's idea, 2026-10-01**, prompted by the distance fix (L-398): "we
@@ -1021,6 +1036,59 @@ orrery's hovers.
 
 #### [L-395] The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects)
 <!-- L:395 status:OPEN upd:2026-10-01 section:A flag: rice: -->
+- **2026-10-01, design rulings and the first build** [verified: orrery
+  feb5e369, gallery 43993b49; Tony's runs 22 of 22 gating; his phone:
+  "perfect"]. Tony's rulings, each "confirmed as recommended" unless
+  quoted:
+  - The website keeps COPIES of each served object's identity facts,
+    written by a tool from the orrery's list and checked against it
+    (option B, the constants pattern).
+  - Each served object points at its list entry through a new `'key'`
+    field spelled exactly as the website's slug, never shown. Display
+    names change; Horizons ids repeat (OSIRIS-REx and OSIRIS-APEX share
+    -64); the key does neither.
+  - Tony: "simple errors such as the Apophis naming discrepancy should
+    be fixed and reported." Written into provenance-discipline 2.24.
+  - Tony: "I lean to a clean export and fix the orrery where needed."
+    One description per object, `mission_info`, cleaned in the orrery;
+    the export drops its opening "Horizons: ..." sentence, which stays
+    in the orrery (Tony adds it there on purpose). One link,
+    `mission_url`: the website holds none of its own.
+- **Built.** Orrery: `export_objects.py` writes
+  `data/objects_export.json` from the eleven keyed entries;
+  `test_objects_export.py` checks it against the list and refuses a
+  field written twice in ANY of the 182 entries, both shown able to
+  fail. Gallery: `tools/pull_objects_export.py`,
+  `tools/mirror_objects.py` (writes name, horizons_id, id_type where the
+  list states one, description, info_url; the check fails on any
+  difference), `tools/test_mirror_objects.py`. The Solar System room's
+  panel shows each body's description and "Read more at NASA", the
+  Sun's included; Pluto's row keeps its own sentence; hovers unchanged.
+- **Fixed and reported, in the list:** Mars and Jupiter linked NASA's
+  search page, now their planet pages; the Pluto-Charon barycentre's
+  "System period: 6.39 days" removed (a description has nowhere to cite
+  it) and the barycentre links NASA's Pluto page; a stray space inside
+  the Sun's quotation; Apophis's missing full stop; a dated note in
+  documentation/ORBITAL_MECHANICS_README_v1_4.md that the code gives
+  Haumea 920136108, Haumea itself, not the barycentre id its examples
+  show. In the website, by the mirror: Apophis's Horizons id 99942 ->
+  2004 MN4 (two right names for one Horizons record, "99942 Apophis
+  (2004 MN4)"; the list names every numbered asteroid by its
+  designation, and under B the list's form wins). Cache rebuilt by
+  daily_run.py; Cache in step passes.
+- **Kept, sourced:** Apophis's "close approach in 2029" -- NASA's
+  Apophis Facts page states April 13, 2029 (science.nasa.gov, read
+  2026-10-01, Claude Opus 5.5).
+- **id_type is a convention difference, not an error.** The list leaves
+  it blank for major bodies; the website says "majorbody". The mirror
+  writes id_type only where the list states one.
+- **For stage 7, recorded.** A dwarf planet with moons carries several
+  ids (Haumea: 920136108, the body in its moon system; 2003 EL61, its
+  designation, used for Sun-centred views because the system ids have
+  positions only to about 2030, per the orrery's own code; 136108, its
+  permanent number and Horizons record). A website copy for a
+  Sun-centred room must be the record that runs to 2500. Tony recalled
+  osculating elements as part of the reason; the record does not say.
 - **2026-10-01, first use and a check.** Tony: each body's description
   and link in the rooms come from the dictionary, as a standard written
   into the skill; Pluto's row in the Solar System room uses NASA's
@@ -1110,7 +1178,11 @@ orrery's hovers.
 - **Discovery before remediation** (The Braid): the first run lists
   every disagreement and fixes nothing; each gets a ruling; fixes land
   in slices.
-**Gap:** Its design round, after the Solar System room's swap; it takes in L-391 to L-394.
+**Gap:** The first build is done (the room's eleven bodies). Still open:
+the Horizons cross-check (its first run lists and fixes nothing except
+simple errors, reported); fields the list lacks (a moon's parent, a
+clean kind); the remaining served objects; L-391 to L-394. The numbers
+in the other descriptions are L-403.
 **Ref:** `celestial_objects.py`; gallery `data/objects_config.json`; `export_constants.py`; gallery `tools/pull_constants_export.py` and `tools/mirror_constants.py` (the model); skills/horizons-orbital-mechanics/SKILL.md; L-363; L-364; L-391 to L-394.
 
 #### [L-394] A card cannot say which body it belongs to (gallery, Studio)
@@ -1591,6 +1663,13 @@ is in the orrery) "photosphere + 10%"
 
 #### [L-363] The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits)
 <!-- L:363 status:OPEN upd:2026-10-01 section:A flag: rice: -->
+- **2026-10-01, the front door decided, and the panel's words.** Tony,
+  on Where We Are: a bare interactive.html link opens the Solar System
+  room ("yes. we reorient the explorer to another url"), and the
+  Explorer moves to its own address; the earlier "to be determined" is
+  settled. Not built yet. And L-395's first build put each body's
+  description and NASA link in the room's info panel (gallery
+  43993b49); Tony's phone: "perfect".
 - **2026-10-01, L-398 landed** (gallery 58dd8f25). A body's distance now
   prints to the place the larger of the drift and JPL's own accuracy
   earns; Uranus, Neptune and Pluto to ten thousand km, Apophis with

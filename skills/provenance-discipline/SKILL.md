@@ -6,13 +6,19 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 2.23 | Cut from palomas_orrery @ 7a47269c (v2.23),
-earlier @ 714293a9 (v2.22), @ 95b394f8 (v2.21), @ 0e3d05fd (v2.20), @ de4eadc5 (v2.19), @ ac25d4f4 (v2.18), @ 1f6e55a9 (v2.17), @ a7014abb (v2.16), @ 21065c5d (v2.15), @ dfa779bd (v2.14),
+Skill version: 2.24 | Cut from palomas_orrery @ feb5e369 (v2.24),
+earlier @ 7a47269c (v2.23), @ 714293a9 (v2.22), @ 95b394f8 (v2.21), @ 0e3d05fd (v2.20), @ de4eadc5 (v2.19), @ ac25d4f4 (v2.18), @ 1f6e55a9 (v2.17), @ a7014abb (v2.16), @ 21065c5d (v2.15), @ dfa779bd (v2.14),
 @ ebdc55cc (v2.13), @ bfc0505e (v2.12),
 earlier @ 159c5a2c (v2.11), @ 071a0a65 (v2.10), @ a263f73d (v2.9),
 @ 7f4a2f9f (v2.8), @ 3faa72a0 (v2.7), @ f603be3 (v2.6),
 @ 731066f (v2.5), @ 6b99ace (v2.2), @ 00219d9 (v2.1), @ eb77c83 (v2.0)
 | October 1, 2026
+v2.24 settles L-395 with one new section, A Simple Error a Check Finds
+Is Fixed and Reported. Tony's ruling, 2026-10-01: "simple errors such
+as the Apophis naming discrepancy should be fixed and reported." It
+says what counts as simple, that the fix rides the same patch and is
+named, what comes to Tony instead, how a number in a served description
+is sourced or removed, and how the rule sits beside The Braid.
 v2.23 settles L-398 with one new section, A Computed Position Prints
 What Its Errors Earn. A distance worked out from served elements prints
 to the Report test's place for the LARGER of two errors: how far our
@@ -2629,6 +2635,40 @@ that and the drift then sets the print, as above.
 (Tony's ruling of the larger error, 2026-10-01; this method confirmed
 by him "as recommended" the same day, L-398. Built by orrery patch
 patch_L398_1_accuracy_rows_and_skills_20261001.py.)
+
+## A Simple Error a Check Finds Is Fixed and Reported [QUALITY]
+
+Tony's ruling, 2026-10-01 (L-395): "simple errors such as the Apophis
+naming discrepancy should be fixed and reported." A check that finds
+one does not stop at listing it.
+
+**Simple** means one right answer, settled by an outside source or by
+the file's own evident intent, with no drawing or modelling choice in
+it: a link to a search page where the body's own page exists, a stray
+space inside a quotation, a missing full stop, a field written twice, a
+document example that no longer says what the code does.
+
+**Fixed** means in the same patch as the work that found it. **Reported**
+means the patch's output and the session record name each fix by what
+it changed, so nothing is corrected silently.
+
+**Not simple, so it comes to Tony:** two right answers (Apophis is both
+99942 and 2004 MN4; the one-definition rule then decides it, and the
+patch says so), anything that changes what is drawn or how, and removing
+words a person wrote with a meaning in them. The objects mirror refuses
+to delete a person's words for the same reason.
+
+**A number in a served description** is sourced or comes out, because a
+description has no place for a `# Source:`. It stays when a page the
+project trusts states it and the read is recorded in the ledger
+(Apophis's 2029, NASA's Apophis Facts page, read 2026-10-01); otherwise
+it is removed (the Pluto-Charon barycentre's 6.39 days).
+
+**Beside The Braid.** The Braid governs findings OUTSIDE the slice being
+worked: recorded, one row per class, not chased. This governs findings
+INSIDE it. A discovery run that exists to list -- the first Horizons
+cross-check -- still lists, apart from the simple errors, which it
+fixes and names.
 
 ## No Shadow Constants [CRITICAL]
 

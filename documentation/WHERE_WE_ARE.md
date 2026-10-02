@@ -1,41 +1,40 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, rewritten in place; read it at the end of every session. -->
 # Where We Are
 
-Last updated: October 1, 2026, evening -- **Tony**: comments after em-dash: -- 
-- Written at orrery c12994d2 plus this session's closing patch, and
-  gallery 58dd8f25 plus its small patch.
+Last updated: October 1, 2026, late evening
+- Written at orrery feb5e369 and gallery 43993b49, plus this session's
+  closing patch.
 
 > **READ THIS FIRST**
 >
 > **Changed this session:**
-> - Distances in the Solar System room now show only the figures JPL's
->   own accuracy allows.
-> - Pluto, Uranus and Neptune end at ten thousand km. Jupiter and Saturn
->   end at hundreds of km.
-> - Apophis keeps its distance and says JPL's own uncertainty is not yet
->   included.
-> - A new check guards this in the website's maintenance run, and it
->   gets its own dashboard button.
-> - Your idea is recorded: choose a date, or play time forward, over
->   the range the ticked bodies are trusted for.
+> - The orrery's object list now feeds the website.
+> - Each body in the Solar System room shows NASA's sentence and a
+>   "Read more at NASA" link in its info panel.
+> - Small errors found on the way were fixed and listed: two broken NASA
+>   links, a number with no source, a stray space, a missing full stop.
+> - Apophis now uses the orrery's name for it in JPL, 2004 MN4.
+> - Five new tools have dashboard buttons.
 >
 > **Do next:**
-> - *Each body gets its NASA description and link, taken from the
->   orrery's own object list.*
+> - *The drawer's new behaviours are built.*
 >
 > **Needs you now:**
-> - *Run the small website patch, then this closing patch in the orrery
->   folder, then commit and push both.* -- done
+> - *Run the closing patch in the orrery folder, then the maintenance
+>   run, then commit and push.*
+> - *Reinstall two skills: provenance-discipline and
+>   interactive-exhibit.*
 
 How to read the marks:
 - *Italic* lines are the must-reads.
 - **>> UPDATED THIS SESSION** beside a heading means that section
   changed in the latest session.
+- "<< new this session" beside a road stage marks a change to the road.
 - Sections without a mark are as they were.
 - The marks are cleared and reset at every session's update, so they
   always mean "new since you last read this."
 
-## The goal
+## The goal  **>> UPDATED THIS SESSION**
 
 - Paloma's Orrery on the web.
 - The website does what the desktop orrery does, in the browser, from
@@ -45,8 +44,10 @@ How to read the marks:
   orrery.
 - The one real limit: the browser can show only the dates the saved
   data covers.
+- Within that range, a visitor will be able to choose a date, and
+  perhaps play time forward.
 
-## The road
+## The road  **>> UPDATED THIS SESSION**
 
   1. [done]   The Sun's room is live on the website.
   2. [done]   Earth's room is live, with every number traced to its source.
@@ -57,65 +58,64 @@ How to read the marks:
               body's own room.*
   5. [next]   The Sun's numbers get the same checking Earth's got.
   6. [next]   The Solar System room's card becomes the top featured
-              card in the lobby. The lobby stays the front page.
+              card in the lobby. A bare interactive.html link opens
+              the Solar System room, and the Explorer gets its own
+              address. << new this session
   7. [later]  The rest of the orrery's objects come to the website --
-              dwarf planets, asteroids, moons -- from the orrery's own
-              object list, checked against JPL Horizons.
+              dwarf planets, asteroids, moons -- through the same
+              connection that now carries the room's eleven bodies,
+              checked against JPL Horizons. << new this session
   8. [later]  Encounters: comets and spacecraft shown at the dates
               that matter.
   9. [later]  The planets get their details -- layers, rings, magnetic
               fields -- Jupiter and Saturn first.
  10. [goal]   The website does what the desktop orrery does, from data
-              fetched from JPL each night. -- we can extend this with a date picker within a trust window and maybe animation.
+              fetched from JPL each night, with a date to choose and
+              time to play within the range the data covers.
 
 ## Right now  **>> UPDATED THIS SESSION**
 
 - The Solar System room shows the Sun, all eight planets, Pluto and
   the asteroid Apophis, where they are when you open it.
-- Each text box gives the body's distance in AU and in km, with only
-  the figures JPL's accuracy and the page's arithmetic allow.
-- The digits change from one visit to the next, because the planets
-  move: Pluto moves about 4,300 km further out every hour.
-- The info panel has no NASA link for a body yet. That is the next step.
+- Each body's info panel shows a description and a NASA link.
+- Those words and links come from the orrery's own object list. The
+  website keeps copies, written by a tool, and a check fails if anyone
+  edits them by hand.
+- The rest of the orrery's objects are not connected yet.
 - The drawer's new behaviours have not been built yet.
 
 ## The next three steps  **>> UPDATED THIS SESSION**
 
-1. *Each body gets its NASA description and link, taken from the
-   orrery's own object list.*
-   - It starts with a short design talk about that list.
-   - Pluto's row links to NASA's Pluto page.
-2. The drawer's new behaviours are built.
+1. *The drawer's new behaviours are built.*
    - "See more", "Enter the Sun room", tapping a body to find its row,
      and Home remembering what you ticked.
-3. You check the room on your phone and desktop.
+2. You check the room on your phone and desktop.
+3. The Sun's numbers get the same checking Earth's got.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
-Now: -- done
-- *Run patch_L398_3 in the website folder, then commit and push.*
+Now:
 - *Run the closing patch in the orrery folder, then the maintenance
   run, then commit and push.*
+- *Reinstall provenance-discipline and interactive-exhibit from the
+  repo's skills folder.*
 
 At the next design talk:
-- What the orrery's object list should hold for each body, and what
-  belongs only to the website.
+- Nothing new.
 
 Not urgent:
-- Choosing a date, and animation, your idea of today.
-  - The range would follow only the bodies you tick, so leaving out
-    Mercury or the Moon gives more time.
+- Choosing a date, and animation, your idea of October 1.
+  - The range would follow only the bodies you tick.
   - Talked through once the drawer is built.
-- Whether a bare interactive.html link should open the Solar System
-  room instead of the Explorer. -- yes. we reorient the explorer to another url. 
-  - You said "to be determined". -- decided. 
-  - It comes up again after the Sun's numbers are done. -- decided
+- The full check of the orrery's object list against JPL Horizons.
+  - Its first run lists what disagrees; simple errors get fixed and
+    listed, the rest come to you.
 
 ## Where the details are
 
 - Every item, done and open: `LEDGER_CONSOLIDATED.md`
-  - This session: L-363, L-389, L-396, L-398, L-399, L-400, L-401, L-402.
+  - This session: L-363, L-395, L-403.
 - The reasoning behind the order:
   `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`
 - The latest session record:
-  `documentation/HANDOFF_L398_distance_figures_20261001.md`
+  `documentation/HANDOFF_L395_objects_connection_20261001.md`

@@ -141,6 +141,11 @@ full description staying in the gallery group. Guest Book Checks added
 to the checkers in alphabetical place, on Tony's request. The offline
 runner's description now names all it runs: it said "six Node suites"
 while the runner had eight.
+October 1, 2026 with Anthropic's Claude Opus 5.5 (L-395): added the five
+tools L-395 put in the two maintenance runs, on Tony's question -- Objects
+Export under GENERATORS and Test Objects Export under CHECKERS, and in
+the gallery checks Objects Export Pull, Objects Mirror Check and
+Objects Mirror Suite, each in alphabetical place.
 """
 
 import os
@@ -493,6 +498,40 @@ LAUNCH_GROUPS = {
         True,
         None,
         True),
+        ("Objects Export Pull",
+        os.path.join("tools", "pull_objects_export.py"),
+        "Fetches the orrery's data/objects_export.json at the orrery's "
+        "HEAD SHA and writes it, with that SHA, into the gallery's data/. "
+        "This is how each body's name, Horizons id, description and NASA "
+        "link reach the website from the orrery's object list (L-395). With "
+        "no network it reports N-A and leaves the previous pull alone.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Objects Mirror Check",
+        os.path.join("tools", "mirror_objects.py"),
+        "Lists every field of every linked object in data/objects_config.json "
+        "that differs from the pulled export -- name, Horizons id, id type, "
+        "description, NASA link -- and writes nothing. A difference is a "
+        "hand edit or a pull without a mirror run; the maintenance run's "
+        "Objects mirror writes them. Also refuses a Solar System drawer row "
+        "with no key in the export. GATES the gallery runner.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Objects Mirror Suite",
+        os.path.join("tools", "test_mirror_objects.py"),
+        "Forces each of the objects mirror's writes and refusals on made-up "
+        "configs -- an insert that keeps the file's layout, an id change "
+        "reported, a blank id type left alone, a row without a key, a key "
+        "without an object, a null over held words -- then reads the real "
+        "config. GATES the gallery runner.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
         ("Pointer Join",
         os.path.join("tools", "check_constants_links.py"),
         "Classifies all 70 of the config's links into the store: served "
@@ -705,6 +744,19 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
+        ("Objects Export",
+         "export_objects.py",
+         "Write data/objects_export.json from the object list in "
+         "celestial_objects.py: every entry carrying a 'key', the website's "
+         "name for it, with its name, Horizons id, id type, description "
+         "(without its opening \"Horizons:\" sentence) and NASA link. The "
+         "website pulls this file and never reads orrery source (L-395). "
+         "Lists every number in an exported description. Writes nothing if "
+         "an entry writes a field twice or a key repeats.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
         ("Regenerate Module Atlas",
          "module_atlas.py",
          "Scan codebase, generate MODULE_ATLAS.md. "
@@ -865,6 +917,18 @@ LAUNCH_GROUPS = {
          SCRIPT_DIR,
          True,
          ["--check"],
+         True),
+        ("Test Objects Export",
+         "test_objects_export.py",
+         "Check that data/objects_export.json matches celestial_objects.py, "
+         "entry by entry, and that no entry among all 182 writes a field "
+         "twice -- Python keeps only the second, silently. It first shows "
+         "both checks can fail. Prints the keys it compared and every "
+         "number in an exported description. Run after editing the object "
+         "list; Objects Export first.",
+         SCRIPT_DIR,
+         True,
+         None,
          True),
         ("Test Orbit Cache",
          "test_orbit_cache.py",
