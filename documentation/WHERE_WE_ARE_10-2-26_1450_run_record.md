@@ -1,7 +1,7 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, rewritten in place; read it at the end of every session. -->
 # Where We Are
 
-Last updated: October 2, 2026
+Last updated: October 2, 2026 -- **Tony**: see notes -- 10-2-26 14:33
 - Written at orrery b3cfc780 and gallery cfc53490, plus this session's
   two patches.
 
@@ -12,19 +12,19 @@ Last updated: October 2, 2026
 >   room included, and can set what it opens on.
 > - The Solar System room's drawer is built: See more, rows that open
 >   with a way into the Sun and Earth rooms, and Home remembering what
->   you ticked. Not yet on the website.
+>   you ticked. Not yet on the website. -- it is on the website
 > - Your ruling: the room frames where each body is now, plus 20%,
 >   not its whole orbit. You also confirmed five smaller calls I had
->   made in the build.
+>   made in the build. 
 > - The two skills are updated for this work, with a new rule on when
 >   a skill gets a new version.
 > - The last session's two skill reinstalls are confirmed.
 >
 > **Do next:**
-> - *You check the drawer on your phone, then the desktop.*
+> - *You check the drawer on your phone, then the desktop.* -- confirmed on phone
 >
 > **Needs you now:**
-> - *Read the room's two new info paragraphs and say if they are right.*
+> - *Read the room's two new info paragraphs and say if they are right.* -- yes, as noted
 > - *At your machine: two gallery patches, the editor ticks, one orrery
 >   patch, then reinstall two skills and the Project's instructions.
 >   Each patch prints what to do next.*
@@ -38,7 +38,7 @@ How to read the marks:
 - The marks are cleared and reset at every session's update, so they
   always mean "new since you last read this."
 
-## The goal
+## The goal -- making great progress
 
 - Paloma's Orrery on the web.
 - The website does what the desktop orrery does, in the browser, from
@@ -84,18 +84,18 @@ How to read the marks:
 - It opens on Earth alone until you tick more in the editor.
 - The drawer's new behaviours are built and tested here, not yet on
   the website: See more, rows that open, the Sun's row that cannot be
-  unticked, a tap on a body finding its row, and Home remembering.
+  unticked, a tap on a body finding its row, and Home remembering. -- partially? see notes
 - The room will frame where each body is now, plus 20%. Pluto's orbit
   runs past the edge until you zoom out.
 - Each body's info panel shows a description and a NASA link.
 - Those words and links come from the orrery's own object list. The
   website keeps copies, written by a tool, and a check fails if anyone
-  edits them by hand.
+  edits them by hand. 
 - The editor can set what any room opens on. It cannot yet change the
   words on the Solar System room's rows, such as Pluto's sentence.
 - The rest of the orrery's objects are not connected yet.
 
-## The next three steps  **>> UPDATED THIS SESSION**
+## The next three steps  **>> UPDATED THIS SESSION** -- yes, thanks
 
 1. *You check the drawer on your phone, then the desktop.*
    - Tick and untick bodies, open rows, See more, Enter the Sun room,
@@ -120,14 +120,14 @@ At the next design talk:
 - Nothing new.
 
 Not urgent:
-- Choosing a date, and animation, your idea of October 1.
+- Choosing a date, and animation, your idea of October 1. -- #3
   - The range would follow only the bodies you tick.
   - Talked through once the drawer is built.
-- The full check of the orrery's object list against JPL Horizons.
+- The full check of the orrery's object list against JPL Horizons. -- #1
   - Its first run lists what disagrees; simple errors get fixed and
     listed, the rest come to you.
 - Whether the editor should also edit the words on the Solar System
-  room's rows, such as Pluto's sentence.
+  room's rows, such as Pluto's sentence. -- #2
   - Today a change to them comes as a patch from a session.
 
 ## Where the details are  **>> UPDATED THIS SESSION**
@@ -706,6 +706,8 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
      rebuild is needed for it. -- 555150f1e84f230334b1e214364377b122c642a2
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
 
+-- gallery moved to 0ffa451838dd5753710b3ec77d0d6f2f052f3d96
+-- orrery moved to 
 ===============================================================================
 
 Yes. Two of the three patches change what you see, so they need your eyes. The editor needs a quick look, and the Solar System room needs the full phone check.
@@ -715,24 +717,26 @@ Report anything odd with its conditions: which device, which way up, and what yo
 **1. The editor, at your desktop, before you push**
 - Open the editor and confirm the room list shows sun, earth and solar-system. -- yes
 - Pick solar-system. The middle panel should explain that the rows' words aren't edited here, and nothing from the previous room should be left on screen. -- yes
-- On the right there should be ten bodies to tick (no Sun), with Apophis marked as a See more row, plus the "Highlighted row" picker.
+- On the right there should be ten bodies to tick (no Sun), with Apophis marked as a See more row, plus the "Highlighted row" picker. -- yes
 
 **2. The Solar System room, on your phone held upright, after the push**
-- **Opening:** the four inner planets are drawn, the view holds Mars with a little room to spare, and the closed drawer's handle names Earth.
-- **The Sun's row:** it has no box and no GO. Tapping it opens "Enter the Sun room", and that link takes you into the Sun's room.
-- **Ticking:** tick Jupiter. The view widens to hold it, and Jupiter's row opens saying "No room or cards yet". The drawer stays open.
-- **Pluto:** tick Pluto. You'll see Pluto itself, with its orbit cut off at the box edge on the far side. Press − to see the whole orbit. This is your 20% ruling, so judge whether it looks right.
-- **Name taps:** tap a name. The row opens and the view should not move. Tap it again and the row closes.
-- **See more:** pressing it shows Apophis, and the button changes to "See fewer". Tick Apophis, then press See fewer: Apophis stays, because it's ticked.
-- **Tap a body in the picture:** its hover text opens and its row is highlighted, while the view stays put.
-- **GO:** GO on an unticked body ticks it, closes the drawer and opens its text box.
-- **Home:** it returns to the last body you ticked. Untick that body and press Home again: it falls back to the one before. Untick everything and press Home: the four inner planets come back.
-- **Opened rows on a small screen:** with a row open, check the drawer still fits and scrolls, and that the "Enter" button is easy to hit.
-- **The i-panel:** read the two new paragraphs in place.
-- Then do the same holding the phone sideways, then on the desktop.
+- **Opening:** the four inner planets are drawn, the view holds Mars with a little room to spare, and the closed drawer's handle names Earth. -- yes.
+- **The Sun's row:** it has no box and no GO. Tapping it opens "Enter the Sun room", and that link takes you into the Sun's room. -- yes. great idea! thanks. and earth too. 
+- **Ticking:** tick Jupiter. The view widens to hold it, and Jupiter's row opens saying "No room or cards yet". The drawer stays open. -- yes
+- **Pluto:** tick Pluto. You'll see Pluto itself, with its orbit cut off at the box edge on the far side. Press − to see the whole orbit. This is your 20% ruling, so judge whether it looks right. -- yes, and the - sign shows the whole orbit.
+- **Name taps:** tap a name. The row opens and the view should not move. Tap it again and the row closes. -- correct. suggestion, when a row highlights, could we move the highlighted row to the top of the scene list?
+- **See more:** pressing it shows Apophis, and the button changes to "See fewer". Tick Apophis, then press See fewer: Apophis stays, because it's ticked. -- yes
+- **Tap a body in the picture:** its hover text opens and its row is highlighted, while the view stays put. -- yes
+- **GO:** GO on an unticked body ticks it, closes the drawer and opens its text box. -- yes. suggestion, add an arrow pointer from the text box to the object.
+- **Home:** it returns to the last body you ticked. -- yes 
+Untick that body and press Home again: it falls back to the one before. -- no, previous ticks do not register. let's discuss. one option might be that a second Home tap returns to the original view. 
+Untick everything and press Home: the four inner planets come back. -- yes
+- **Opened rows on a small screen:** with a row open, check the drawer still fits and scrolls, and that the "Enter" button is easy to hit. -- not clear
+- **The i-panel:** read the two new paragraphs in place. -- could you break paragraphs into bulleted lists for readabiliy?
+- Then do the same holding the phone sideways, then on the desktop. -- correct
 
 **3. The Sun and Earth rooms, quickly, because their drawer code is shared**
 - Tick and untick a few rows, use GO on one, try All / none, and press Home.
-- They should behave exactly as before. My headless comparison says they do, but only your eyes can see it.
+- They should behave exactly as before. My headless comparison says they do, but only your eyes can see it. -- correct
 
-The ledger keeps the Solar System room's item open until this check is done. The Sun's numbers wait until after it.
+The ledger keeps the Solar System room's item open until this check is done. The Sun's numbers wait until after it. -- looks great. 
