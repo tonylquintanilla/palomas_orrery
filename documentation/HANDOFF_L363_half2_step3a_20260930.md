@@ -949,9 +949,28 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  2. Move this script into documentation/. Commit and push.
+  2. Move this script into documentation/. Commit and push. -- 6b2ef097da67e67ab8f748b5481c222e5dd34acc
   3. Optional: open the dashboard and press Solar System Figures
-     under Gallery -- checks and data. It should end "=== PASS".
+     under Gallery -- checks and data. It should end "=== PASS". 
+
+Self-test: the worked cases fail on a Report test one place too fine, on a rule ignoring JPL's accuracy, and on the sentence printed for a body with a row.
+
+Distances at each body's served minute (data/solar-system/coverage_index.json), 10 bodies:
+  mercury           0.46485980 AU from the Sun (69,542,037 km)  -- set by whole kilometres
+  venus             0.72696293 AU from the Sun (108,752,106 km)  -- set by whole kilometres
+  earth             1.00132586 AU from the Sun (149,796,216 km)  -- set by drift
+  apophis           0.85622593 AU from the Sun (128,089,576 km)  -- set by whole kilometres  + sentence
+  mars              1.55826599 AU from the Sun (233,113,273 km)  -- set by whole kilometres
+  jupiter           5.306952 AU from the Sun (793,908,700 km)  -- set by JPL's accuracy
+  saturn            9.434651 AU from the Sun (1,411,403,600 km)  -- set by JPL's accuracy
+  uranus            19.4413 AU from the Sun (2,908,370,000 km)  -- set by JPL's accuracy
+  neptune           29.8781 AU from the Sun (4,469,690,000 km)  -- set by JPL's accuracy
+  pluto_barycenter  35.6103 AU from the Sun (5,327,220,000 km)  -- set by JPL's accuracy
+
+=== PASS: 6 worked cases, 11 drawer rows matched to their accuracy rows, 10 served distances; Uranus, Neptune and Pluto print to JPL's ten-thousands place ===
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 =================================================================================
@@ -985,6 +1004,6 @@ Distances at each body's served minute (data/solar-system/coverage_index.json), 
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
-  2. Move this script into documentation/. Commit and push.
-  3. Then the orrery's closing patch, which adds the button.
+  2. Move this script into documentation/. Commit and push. -- 5a38de15d69df48749ba230cdfacf0e9d9e2fb5e
+  3. Then the orrery's closing patch, which adds the button. -- correct
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 

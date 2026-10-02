@@ -538,6 +538,14 @@ Trans-Neptunian Objects with satellites require special handling due to JPL Hori
 }
 ```
 
+**Note, October 1, 2026 (L-395).** `celestial_objects.py` now gives Haumea
+`'id': '920136108'` and `'center_id': '920136108'`: Haumea itself, the main
+body of its moon system (JPL's binary convention: 20XXXXXX is the system
+barycenter, 920XXXXXX the primary, 120XXXXXX the secondary). The examples in
+this README give the barycenter id, `20136108`, as the design was first
+written, and the coverage figures below were recorded for the barycenter
+ids. `helio_id` is unchanged and is still what Sun-centered views fetch.
+
 ### JPL Horizons ID Types and Coverage
 
 | ID Type | Example | Ephemeris Coverage | Use Case |

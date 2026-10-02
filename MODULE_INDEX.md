@@ -11,16 +11,16 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 141  
-**Total Lines of Code (non-blank):** 113,181  
-**Total Public Functions/Classes:** 1,281
+**Total Python Files:** 143  
+**Total Lines of Code (non-blank):** 113,576  
+**Total Public Functions/Classes:** 1,290
 
 ## Classification Coverage
 
 **Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L398_ledger_close_20261001.py`
+- `patch_L395_1_objects_export_20261001.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
@@ -28,7 +28,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 **Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L398_ledger_close_20261001.py`
+- `patch_L395_1_objects_export_20261001.py`
 
 
 ---
@@ -123,7 +123,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,249 lines) |
+| `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,250 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (512 lines) |
 | `constants_new.py` | Verified numeric constants for Paloma's Orrery. (2,742 lines) |
 | `constants_tokens.py` | - what each "# Unit:" token in constants_new.py means. (233 lines) |
@@ -209,13 +209,14 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `exact_rows_report.py` | - which exact rows a display prints, and where. (591 lines) |
 | `examine_hot_csv.py` | Examine the HOT CSV file structure (47 lines) |
 | `export_constants.py` | - write data/constants_export.json from constants_new.py. The orrery is the producer of its numbers; the gallery reads this file and never reads orrery source. (396 lines) |
+| `export_objects.py` | - write data/objects_export.json from the object list in celestial_objects.py. The orrery is the one definition of each object; the gallery reads this file and never reads orrery source. (216 lines) |
 | `export_orbit_cache.py` | Phase 1b desktop devtool: read the local orbit caches and write web-servable orbit/position files for the interactive gallery. (617 lines) |
 | `food_insecurity_generator.py` | IPC acute food-insecurity KMZ layer (Sudan, current period). (702 lines) |
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (129 lines) |
 | `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (974 lines) |
-| `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (589 lines) |
+| `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (600 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,071 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (342 lines) |
@@ -225,6 +226,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_cross_checked.py` | Regression tests for cross-check annotations. (501 lines) |
 | `test_derived_figures.py` | - a derived constant declares no more significant figures than its inputs support, and names every derived row it cannot judge. (1,239 lines) |
 | `test_dimensions.py` | - a derived constant's unit follows from its arithmetic. (591 lines) |
+| `test_objects_export.py` | - data/objects_export.json says what the object list in celestial_objects.py holds, and no entry in the list writes a field twice. (152 lines) |
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (224 lines) |
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (485 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (120 lines) |
@@ -243,7 +245,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L398_ledger_close_20261001.py` | - ORRERY repo. Closes the session of 2026-10-01 (L-398). (129 lines) |
+| `patch_L395_1_objects_export_20261001.py` | - ORRERY repo. The orrery's object list starts feeding the website: the first build of L-395, for the Solar System room's eleven bodies. (144 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |

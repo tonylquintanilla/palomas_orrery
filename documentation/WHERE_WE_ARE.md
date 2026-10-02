@@ -1,7 +1,7 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, rewritten in place; read it at the end of every session. -->
 # Where We Are
 
-Last updated: October 1, 2026, evening
+Last updated: October 1, 2026, evening -- **Tony**: comments after em-dash: -- 
 - Written at orrery c12994d2 plus this session's closing patch, and
   gallery 58dd8f25 plus its small patch.
 
@@ -25,7 +25,7 @@ Last updated: October 1, 2026, evening
 >
 > **Needs you now:**
 > - *Run the small website patch, then this closing patch in the orrery
->   folder, then commit and push both.*
+>   folder, then commit and push both.* -- done
 
 How to read the marks:
 - *Italic* lines are the must-reads.
@@ -66,7 +66,7 @@ How to read the marks:
   9. [later]  The planets get their details -- layers, rings, magnetic
               fields -- Jupiter and Saturn first.
  10. [goal]   The website does what the desktop orrery does, from data
-              fetched from JPL each night.
+              fetched from JPL each night. -- we can extend this with a date picker within a trust window and maybe animation.
 
 ## Right now  **>> UPDATED THIS SESSION**
 
@@ -92,7 +92,7 @@ How to read the marks:
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
-Now:
+Now: -- done
 - *Run patch_L398_3 in the website folder, then commit and push.*
 - *Run the closing patch in the orrery folder, then the maintenance
   run, then commit and push.*
@@ -107,9 +107,9 @@ Not urgent:
     Mercury or the Moon gives more time.
   - Talked through once the drawer is built.
 - Whether a bare interactive.html link should open the Solar System
-  room instead of the Explorer.
-  - You said "to be determined".
-  - It comes up again after the Sun's numbers are done.
+  room instead of the Explorer. -- yes. we reorient the explorer to another url. 
+  - You said "to be determined". -- decided. 
+  - It comes up again after the Sun's numbers are done. -- decided
 
 ## Where the details are
 

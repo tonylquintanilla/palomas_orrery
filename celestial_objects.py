@@ -27,22 +27,22 @@ from datetime import datetime
 
 OBJECT_DEFINITIONS = [
     # Existing Celestial Objects
-    {'name': 'Sun', 'id': '10', 'var_name': 'sun_var', 'color_key': 'Sun', 'symbol': 'circle', 'object_type': 'fixed', 
+    {'name': 'Sun', 'key': 'sun', 'id': '10', 'var_name': 'sun_var', 'color_key': 'Sun', 'symbol': 'circle', 'object_type': 'fixed', 
     'id_type': None, 
-    'mission_info': 'Horizons: 10. NASA: "The Sun\'s gravity holds the solar system together, keeping everything in its orbit. "', 
+    'mission_info': 'Horizons: 10. NASA: "The Sun\'s gravity holds the solar system together, keeping everything in its orbit."', 
     'mission_url': 'https://science.nasa.gov/sun/'},
 
-    {'name': 'Mercury', 'id': '199', 'var_name': 'mercury_var', 'color_key': 'Mercury', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Mercury', 'key': 'mercury', 'id': '199', 'var_name': 'mercury_var', 'color_key': 'Mercury', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
     'mission_info': 'Horizons: 199. NASA: "Mercury is the smallest planet in our solar system and the nearest to the Sun."', 
     'mission_url': 'https://science.nasa.gov/mercury/'},
 
-    {'name': 'Venus', 'id': '299', 'var_name': 'venus_var', 'color_key': 'Venus', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Venus', 'key': 'venus', 'id': '299', 'var_name': 'venus_var', 'color_key': 'Venus', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
     'mission_info': 'Horizons: 299. NASA: "Venus is the second planet from the Sun, and the sixth largest planet. It\'s the hottest planet in our solar system."', 
     'mission_url': 'https://science.nasa.gov/venus/'},
 
-    {'name': 'Earth', 'id': '399', 'var_name': 'earth_var', 'color_key': 'Earth', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Earth', 'key': 'earth', 'id': '399', 'var_name': 'earth_var', 'color_key': 'Earth', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
     'mission_info': 'Horizons: 399. Our home planet.', 
      'mission_url': 'https://science.nasa.gov/earth/'},
@@ -59,15 +59,15 @@ OBJECT_DEFINITIONS = [
      'color_key': 'Earth', 'symbol': 'square-open', 'object_type': 'barycenter',
      'mission_info': 'Center of mass for the Earth-Moon system. Period: 27.32 days. Highest mass ratio (1.23%) of any planet-moon system!'},
 
-    {'name': 'Mars', 'id': '499', 'var_name': 'mars_var', 'color_key': 'Mars', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Mars', 'key': 'mars', 'id': '499', 'var_name': 'mars_var', 'color_key': 'Mars', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
     'mission_info': 'Horizons: 499. NASA: "Mars is one of the easiest planets to spot in the night sky -- it looks like a bright red point of light."', 
-    'mission_url': 'https://science.nasa.gov/?search=mars'},
+    'mission_url': 'https://science.nasa.gov/mars/'},
 
-    {'name': 'Jupiter', 'id': '599', 'var_name': 'jupiter_var', 'color_key': 'Jupiter', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Jupiter', 'key': 'jupiter', 'id': '599', 'var_name': 'jupiter_var', 'color_key': 'Jupiter', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
     'mission_info': 'Horizons: 599. NASA: "Jupiter is the largest and oldest planet in our solar system."', 
-    'mission_url': 'https://science.nasa.gov/?search=Jupiter'},
+    'mission_url': 'https://science.nasa.gov/jupiter/'},
 
     # Trojan Asteroids
     # Lucy L4 Trojan Targets (Leading Jupiter Trojans)
@@ -126,17 +126,17 @@ OBJECT_DEFINITIONS = [
     'mission_info': 'Lucy flyby: Nov 11, 2028. D~51 km, D-type. Last L4 Trojan visit before heading to L5.', 
     'mission_url': 'https://lucy.swri.edu/Orus.html'},
 
-    {'name': 'Saturn', 'id': '699', 'var_name': 'saturn_var', 'color_key': 'Saturn', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Saturn', 'key': 'saturn', 'id': '699', 'var_name': 'saturn_var', 'color_key': 'Saturn', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
     'mission_info': 'Horizons: 699. NASA: "Saturn is the sixth planet from the Sun and the second largest planet in our solar system."', 
     'mission_url': 'https://science.nasa.gov/saturn/'},
 
-    {'name': 'Uranus', 'id': '799', 'var_name': 'uranus_var', 'color_key': 'Uranus', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Uranus', 'key': 'uranus', 'id': '799', 'var_name': 'uranus_var', 'color_key': 'Uranus', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
     'mission_info': 'Horizons: 799. NASA: "Uranus is the seventh planet from the Sun, and the third largest planet in our solar system -- about four times wider than Earth."', 
     'mission_url': 'https://science.nasa.gov/uranus/'},
 
-    {'name': 'Neptune', 'id': '899', 'var_name': 'neptune_var', 'color_key': 'Neptune', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Neptune', 'key': 'neptune', 'id': '899', 'var_name': 'neptune_var', 'color_key': 'Neptune', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
     'mission_info': 'Horizons: 899. NASA: "Dark, cold and whipped by supersonic winds, giant Neptune is the eighth and most distant major planet orbiting our Sun."', 
     'mission_url': 'https://science.nasa.gov/neptune/'},
@@ -164,9 +164,10 @@ OBJECT_DEFINITIONS = [
      'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/'},
 
     # NEW: Pluto-Charon Barycenter
-    {'name': 'Pluto-Charon Barycenter', 'id': '9', 'var_name': 'pluto_barycenter_var', 
+    {'name': 'Pluto-Charon Barycenter', 'key': 'pluto_barycenter', 'id': '9', 'var_name': 'pluto_barycenter_var', 
      'color_key': 'Pluto', 'symbol': 'square-open', 'object_type': 'barycenter',
-     'mission_info': 'Center of mass for Pluto-Charon binary planet system. System period: 6.39 days.'},
+     'mission_info': 'Center of mass for Pluto-Charon binary planet system.',
+     'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/'},
 
     {'name': 'Ceres', 'id': 'A801 AA', 'var_name': 'ceres_var', 'color_key': 'Ceres', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
@@ -399,10 +400,10 @@ OBJECT_DEFINITIONS = [
     'mission_info': 'Horizons: A852 FA. A metal-rich asteroid located in the main asteroid belt. The NASA Psyche mission will reach the asteroid in August 2029', 
     'mission_url': 'https://news.arizona.edu/news/large-craters-offer-clues-origin-asteroid-16-psyche'},
 
-    {'name': 'Apophis', 'id': '2004 MN4', 'var_name': 'apophis_var', 'color_key': 'Apophis', 'symbol': 'circle-open', 'object_type': 'orbital',
+    {'name': 'Apophis', 'key': 'apophis', 'id': '2004 MN4', 'var_name': 'apophis_var', 'color_key': 'Apophis', 'symbol': 'circle-open', 'object_type': 'orbital',
     'id_type': 'smallbody', 
     'center_id': '2099942',  # Numeric ID for use as Horizons center
-    'mission_info': 'Horizons: 2004 MN4. A near-Earth asteroid that will make a close approach in 2029. Future OSIRIS-APEX target', 
+    'mission_info': 'Horizons: 2004 MN4. A near-Earth asteroid that will make a close approach in 2029. Future OSIRIS-APEX target.', 
     'mission_url': 'https://cneos.jpl.nasa.gov/apophis/'},
 
     {'name': 'Bennu', 'id': '1999 RQ36', 'var_name': 'bennu_var', 'color_key': 'Bennu', 'symbol': 'circle-open', 'object_type': 'orbital', 

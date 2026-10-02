@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "source_sha256": "e4052a6a1dd2526912080de6225c365f591845d6a7cb7b54ae2c7e6d71df51f7",
+  "objects": {
+    "sun": {
+      "name": "Sun",
+      "horizons_id": "10",
+      "id_type": null,
+      "description": "NASA: \"The Sun's gravity holds the solar system together, keeping everything in its orbit.\"",
+      "info_url": "https://science.nasa.gov/sun/"
+    },
+    "mercury": {
+      "name": "Mercury",
+      "horizons_id": "199",
+      "id_type": null,
+      "description": "NASA: \"Mercury is the smallest planet in our solar system and the nearest to the Sun.\"",
+      "info_url": "https://science.nasa.gov/mercury/"
+    },
+    "venus": {
+      "name": "Venus",
+      "horizons_id": "299",
+      "id_type": null,
+      "description": "NASA: \"Venus is the second planet from the Sun, and the sixth largest planet. It's the hottest planet in our solar system.\"",
+      "info_url": "https://science.nasa.gov/venus/"
+    },
+    "earth": {
+      "name": "Earth",
+      "horizons_id": "399",
+      "id_type": null,
+      "description": "Our home planet.",
+      "info_url": "https://science.nasa.gov/earth/"
+    },
+    "mars": {
+      "name": "Mars",
+      "horizons_id": "499",
+      "id_type": null,
+      "description": "NASA: \"Mars is one of the easiest planets to spot in the night sky -- it looks like a bright red point of light.\"",
+      "info_url": "https://science.nasa.gov/mars/"
+    },
+    "jupiter": {
+      "name": "Jupiter",
+      "horizons_id": "599",
+      "id_type": null,
+      "description": "NASA: \"Jupiter is the largest and oldest planet in our solar system.\"",
+      "info_url": "https://science.nasa.gov/jupiter/"
+    },
+    "saturn": {
+      "name": "Saturn",
+      "horizons_id": "699",
+      "id_type": null,
+      "description": "NASA: \"Saturn is the sixth planet from the Sun and the second largest planet in our solar system.\"",
+      "info_url": "https://science.nasa.gov/saturn/"
+    },
+    "uranus": {
+      "name": "Uranus",
+      "horizons_id": "799",
+      "id_type": null,
+      "description": "NASA: \"Uranus is the seventh planet from the Sun, and the third largest planet in our solar system -- about four times wider than Earth.\"",
+      "info_url": "https://science.nasa.gov/uranus/"
+    },
+    "neptune": {
+      "name": "Neptune",
+      "horizons_id": "899",
+      "id_type": null,
+      "description": "NASA: \"Dark, cold and whipped by supersonic winds, giant Neptune is the eighth and most distant major planet orbiting our Sun.\"",
+      "info_url": "https://science.nasa.gov/neptune/"
+    },
+    "pluto_barycenter": {
+      "name": "Pluto-Charon Barycenter",
+      "horizons_id": "9",
+      "id_type": null,
+      "description": "Center of mass for Pluto-Charon binary planet system.",
+      "info_url": "https://science.nasa.gov/dwarf-planets/pluto/"
+    },
+    "apophis": {
+      "name": "Apophis",
+      "horizons_id": "2004 MN4",
+      "id_type": "smallbody",
+      "description": "A near-Earth asteroid that will make a close approach in 2029. Future OSIRIS-APEX target.",
+      "info_url": "https://cneos.jpl.nasa.gov/apophis/"
+    }
+  },
+  "numbers": {
+    "apophis": [
+      "2029"
+    ]
+  }
+}

@@ -171,6 +171,12 @@ GENERATORS = [
     # the modules and the data file it adds.
     ('Constants export', ['export_constants.py'],
      ['data/constants_export.json']),
+    # L-395 (2026-10-01): the orrery's object list is the one definition
+    # of each object the website serves. The entries carrying a 'key'
+    # are exported, and the gallery pulls the file as it pulls the
+    # constants export.
+    ('Objects export', ['export_objects.py'],
+     ['data/objects_export.json']),
     ('Module atlas',    ['module_atlas.py'],
      ['MODULE_ATLAS.md', 'MODULE_INDEX.md']),
     ('Data inventory',  ['data_inventory.py'],
@@ -212,6 +218,11 @@ CHECKERS = [
     # The export matches the store it was made from: hash, rows, the
     # not-exported list, and the per-slice gate. L-322.
     ('Constants export check', ['test_constants_export.py'], None),
+    # L-395: the objects export matches the list it was made from, and
+    # no entry in the list writes a field twice. It names every number
+    # in an exported description.
+    ('Objects export check', ['test_objects_export.py'],
+     'OBJECTS EXPORT:'),
     # Rule 7's exact row, built: every printed exact row states a print
     # count, every orrery line prints it through exact_text(), and the
     # gallery serves the count. The same script as the Exact rows report
