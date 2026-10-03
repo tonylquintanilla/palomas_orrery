@@ -25,6 +25,12 @@ Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5
 (L-322 Stage D, patch D3: create_planet_transformation_matrix('Earth')
 draws Earth's pole of the plot's date from earth_pole_of_date.py, and
 the frame's year-2000 axis when Horizons cannot be reached)
+Module updated: October 2, 2026 with Anthropic's Claude Opus 5.5
+(L-406: the pole-to-ecliptic matrix is create_pole_transformation_matrix
+(ra_deg, dec_deg), so a pole that is not a body's -- the galactic pole
+the galactic tide is drawn about -- uses the same construction.
+create_planet_transformation_matrix finds the body's pole and calls it;
+the arithmetic did not change)
 
 Role: computation
 Domain: orrery
@@ -3298,6 +3304,66 @@ def plot_patroclus_barycenter_orbit(fig, object_name, date, color, show_apsidal_
         traceback.print_exc()
     
     return fig
+def create_pole_transformation_matrix(ra_deg, dec_deg):
+    """
+    The matrix that turns coordinates measured about a pole into the
+    drawing's frame, the ecliptic of J2000.
+
+    The pole is given as ICRF right ascension and declination in degrees
+    (equatorial, J2000). Its columns are the basis vectors: x along the
+    ascending node of the pole's equator on the ecliptic, z along the
+    pole, y completing a right-handed set. So matrix @ [x, y, z] takes a
+    point given about the pole into ecliptic coordinates.
+
+    Moved out of create_planet_transformation_matrix on 2026-10-02
+    (L-406) unchanged, so that the galactic pole can use it as a planet's
+    pole does.
+
+    Module updated: October 2, 2026 with Anthropic's Claude Opus 5.5
+    """
+    ra_pole = np.radians(ra_deg)
+    dec_pole = np.radians(dec_deg)
+
+    sin_dec = np.sin(dec_pole)
+    cos_dec = np.cos(dec_pole)
+    sin_ra = np.sin(ra_pole)
+    cos_ra = np.cos(ra_pole)
+
+    # The pole vector -- RA/Dec are EQUATORIAL (J2000) coordinates.
+    x_pole = cos_dec * cos_ra
+    y_pole = cos_dec * sin_ra
+    z_pole = sin_dec
+
+    # U3 fix (June 2026): the visualization frame is ECLIPTIC (J2000), but the pole
+    # above is in the EQUATORIAL frame. Rotate it into ecliptic by the mean obliquity
+    # before building the basis. Omitting this left belts/rings ~23.4 deg off the
+    # (ecliptic-native) moon orbits -- caught by Tony's Mode-5 render, not the container test.
+    # L-322 Stage D (2026-09-23): the angle Horizons builds its ecliptic of
+    # J2000 with, read from constants_new.py. It is the frame's angle, the
+    # IAU 1976 value, not Earth's tilt; the label "IAU 2006" that stood
+    # here named a standard whose value is 84381.406 arcseconds, not this.
+    _OBLIQUITY = np.radians(EARTH_OBLIQUITY_J2000_DEG)
+    _ce, _se = np.cos(_OBLIQUITY), np.sin(_OBLIQUITY)
+    y_pole, z_pole = (y_pole * _ce + z_pole * _se,
+                      -y_pole * _se + z_pole * _ce)
+
+    # Find the ascending node of the pole's equator on the ecliptic
+    # This is perpendicular to the pole and in the ecliptic plane
+    x_node = -y_pole / np.sqrt(x_pole**2 + y_pole**2)
+    y_node = x_pole / np.sqrt(x_pole**2 + y_pole**2)
+    z_node = 0
+
+    # Create orthogonal basis vectors
+    x_basis = np.array([x_node, y_node, z_node])
+    z_basis = np.array([x_pole, y_pole, z_pole])
+    y_basis = np.cross(z_basis, x_basis)
+
+    # Construct the transformation matrix
+    transform_matrix = np.vstack((x_basis, y_basis, z_basis)).T
+
+    return transform_matrix
+
+
 def create_planet_transformation_matrix(planet_name):
     # REVIVED 2026-06-01 (Opus 4.8): math core for orient_to_planet_pole() below,
     # which routes Uranus belt/ring geometry (U3). Was dead after per-planet inline
@@ -3334,48 +3400,9 @@ def create_planet_transformation_matrix(planet_name):
         pole = earth_pole_of_date.pole_of_scene_date()
     else:
         pole = planet_poles[planet_name]
-    ra_pole = np.radians(pole['ra'])
-    dec_pole = np.radians(pole['dec'])
-    
-    # Calculate the rotation matrix from planet's equatorial to ecliptic
-    sin_dec = np.sin(dec_pole)
-    cos_dec = np.cos(dec_pole)
-    sin_ra = np.sin(ra_pole)
-    cos_ra = np.cos(ra_pole)
-    
-    # Planet's north pole vector -- RA/Dec are EQUATORIAL (J2000) coordinates.
-    x_pole = cos_dec * cos_ra
-    y_pole = cos_dec * sin_ra
-    z_pole = sin_dec
-
-    # U3 fix (June 2026): the visualization frame is ECLIPTIC (J2000), but the pole
-    # above is in the EQUATORIAL frame. Rotate it into ecliptic by the mean obliquity
-    # before building the basis. Omitting this left belts/rings ~23.4 deg off the
-    # (ecliptic-native) moon orbits -- caught by Tony's Mode-5 render, not the container test.
-    # L-322 Stage D (2026-09-23): the angle Horizons builds its ecliptic of
-    # J2000 with, read from constants_new.py. It is the frame's angle, the
-    # IAU 1976 value, not Earth's tilt; the label "IAU 2006" that stood
-    # here named a standard whose value is 84381.406 arcseconds, not this.
-    _OBLIQUITY = np.radians(EARTH_OBLIQUITY_J2000_DEG)
-    _ce, _se = np.cos(_OBLIQUITY), np.sin(_OBLIQUITY)
-    y_pole, z_pole = (y_pole * _ce + z_pole * _se,
-                      -y_pole * _se + z_pole * _ce)
-
-    # Find the ascending node of planet's equator on the ecliptic
-    # This is perpendicular to the pole and in the ecliptic plane
-    x_node = -y_pole / np.sqrt(x_pole**2 + y_pole**2)
-    y_node = x_pole / np.sqrt(x_pole**2 + y_pole**2)
-    z_node = 0
-    
-    # Create orthogonal basis vectors
-    x_basis = np.array([x_node, y_node, z_node])
-    z_basis = np.array([x_pole, y_pole, z_pole])
-    y_basis = np.cross(z_basis, x_basis)
-    
-    # Construct the transformation matrix
-    transform_matrix = np.vstack((x_basis, y_basis, z_basis)).T
-    
-    return transform_matrix
+    # L-406 (2026-10-02): the construction lives in
+    # create_pole_transformation_matrix above, unchanged.
+    return create_pole_transformation_matrix(pole['ra'], pole['dec'])
 
 def orient_to_planet_pole(x, y, z, planet_name):
     """

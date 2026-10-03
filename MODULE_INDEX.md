@@ -12,15 +12,15 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 143  
-**Total Lines of Code (non-blank):** 113,968  
-**Total Public Functions/Classes:** 1,290
+**Total Lines of Code (non-blank):** 114,900  
+**Total Public Functions/Classes:** 1,291
 
 ## Classification Coverage
 
 **Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L405_session_close_20261002.py`
+- `patch_L406_1_galactic_tide_orrery_20261002.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
@@ -28,7 +28,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 **Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L405_session_close_20261002.py`
+- `patch_L406_1_galactic_tide_orrery_20261002.py`
 
 
 ---
@@ -92,7 +92,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `planet9_visualization_shells.py` | Hypothetical Planet 9 shell traces. (269 lines) |
 | `pluto_visualization_shells.py` | Pluto interior and atmosphere shell traces. (615 lines) |
 | `saturn_visualization_shells.py` | Saturn interior, ring, and magnetosphere shell traces. (1,088 lines) |
-| `solar_visualization_shells.py` | Sun interior, corona, and heliosphere shell traces. (1,552 lines) |
+| `solar_visualization_shells.py` | Sun interior, corona, and heliosphere shell traces. (1,608 lines) |
 | `uranus_visualization_shells.py` | Uranus interior, ring, and magnetosphere shell traces. (1,083 lines) |
 | `venus_visualization_shells.py` | Venus interior and atmosphere shell traces. (711 lines) |
 
@@ -112,7 +112,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `energy_imbalance.py` | Energy Imbalance Visualization for Paloma's Orrery Modern era (2005-2025) temperature and energy imbalance (841 lines) |
 | `fetch_climate_data.py` | Climate Data Fetcher - Paloma's Orrery Preserves critical climate datasets for future reference (763 lines) |
 | `fetch_paleoclimate_data.py` | Paleoclimate Data Fetcher for Paloma's Orrery Fetches and caches paleoclimate proxy data from authoritative sources (171 lines) |
-| `idealized_orbits.py` | Keplerian orbit ellipse construction and satellite orbit models. Computes and plots idealized (Keplerian) orbit paths from orbital elements, with osculating element support for high-accuracy visualization. Handles elliptical, parabolic, and hyperbolic orbits. Includes specia... (6,622 lines) |
+| `idealized_orbits.py` | Keplerian orbit ellipse construction and satellite orbit models. Computes and plots idealized (Keplerian) orbit paths from orbital elements, with osculating element support for high-accuracy visualization. Handles elliptical, parabolic, and hyperbolic orbits. Includes specia... (6,644 lines) |
 | `object_type_analyzer.py` | Object Type Analysis and Report Generation Module Provides comprehensive analysis of astronomical data including object types, data quality metrics, and full report generation. (756 lines) |
 | `orbital_elements.py` | Standalone data module containing orbital element dictionaries. NO IMPORTS - Pure data only to avoid circular dependencies. (1,296 lines) |
 | `simbad_manager.py` | Enhanced SIMBAD Query Manager with configurable rate limiting and retry logic. This module replaces simbad_test.py and provides robust SIMBAD querying capabilities. (1,030 lines) |
@@ -125,7 +125,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,250 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (512 lines) |
-| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (2,742 lines) |
+| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (2,789 lines) |
 | `constants_tokens.py` | - what each "# Unit:" token in constants_new.py means. (233 lines) |
 | `earth_pole_of_date.py` | Earth's rotation pole and tilt for the date of a plot. (269 lines) |
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (412 lines) |
@@ -245,7 +245,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L405_session_close_20261002.py` | - ORRERY repo. Closes the session of 2026-10-02: L-404 done; Tony's phone check of the Solar System room's drawer recorded on L-363, with the open question about Home and his three suggestions; L-405 pushed, its install checked next session; and Tony's page, ... (470 lines) |
+| `patch_L406_1_galactic_tide_orrery_20261002.py` | - ORRERY repo. The first of two patches for L-406: the galactic tide is drawn in the galaxy's plane. (1,277 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |

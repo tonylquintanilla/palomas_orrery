@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.77 | October 2, 2026
+Tony Quintanilla, PE | Claude | v3.78 | October 2, 2026
 
-Cut from b3cfc780 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 5e42b00b at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -512,7 +512,7 @@ gallery-cache-builder        1.6  Nightly builder, atomic swap and its
                                   under data/, coverage_index, serving cache,
                                   objects_config, dry-run/first-build/nightly,
                                   builder testing layers
-interactive-exhibit          1.9  adding or changing an exhibit in
+interactive-exhibit          1.10 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -526,7 +526,8 @@ interactive-exhibit          1.9  adding or changing an exhibit in
                                   drawer, See more, Home's order and its
                                   framing; testing a room headlessly
                                   (tools/headless); carding an exhibit in
-                                  Studio
+                                  Studio; choosing a feature's info link (NASA
+                                  or Wikipedia)
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1162,6 +1163,42 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.78 (October 2, 2026): No rule changed in this document. ONE
+skill bump, one version (L-406): interactive-exhibit 1.9 -> 1.10.
+THE GALACTIC TIDE IS DRAWN IN THE GALAXY'S PLANE.
+
+WHAT PROMPTED IT. Sorting the Sun room's 43 unlinked numbers (L-371)
+found the galactic tide's words saying its bodies are thinned near the
+galaxy's plane while the drawing thinned them near the ecliptic. Tony's
+ruling of 2026-10-02: fix it now, as a drawing choice made more
+correct. The source then showed the pattern was wrong too: comets the
+tide sends in avoid the galaxy's plane AND its poles. Tony confirmed
+drawing both, and drawing the tide between the outer Oort cloud's two
+stored edges instead of a typed 50,000 AU.
+
+WHAT THE SKILL NOW SAYS. Asked whether the skills cover how a feature's
+hover, info panel and drawing are written, the answer was that the
+hover and the drawing were covered and the info link was not: Tony's
+rule lived only on L-265. interactive-exhibit 1.10 writes it down -- a
+NASA page where one is specific to the feature, otherwise English
+Wikipedia, the corona the one named exception.
+
+THE BUILD. Orrery patch_L406_1 adds the galactic pole of J2000 to
+constants_new.py, gives the pole matrix its own function, and redraws
+the orrery's tide; gallery patch_L406_2 redraws the website's tide in
+Tony's approved words and corrects the check that measured the
+ecliptic under the galactic plane's name.
+
+THE OBLIGATION TRAVELS. This session loaded 1.9. The next session
+confirms its loaded copy reads interactive-exhibit 1.10 before any
+exhibit work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.75 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.77 (October 2, 2026): No rule changed in this document. TWO
 skill bumps, one version each, for one session (L-405):
 interactive-exhibit 1.8 -> 1.9 and ledger-and-session-records 1.13 ->
@@ -1235,52 +1272,6 @@ interactive-exhibit 1.8 before any provenance or exhibit work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.73 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.75 (October 1, 2026): No rule changed in this document. TWO
-skill bumps, one version each, for one build (L-398):
-provenance-discipline 2.22 -> 2.23 and interactive-exhibit 1.6 -> 1.7.
-A COMPUTED DISTANCE PRINTS WHAT ITS ERRORS EARN.
-
-WHAT PROMPTED IT. Tony's question on 2026-10-01 about the Solar System
-room: "does Horizons serve the distance to pluto with 9 significant
-digits?" It did not. The room's figures came from how closely the page
-reproduces Horizons, not from how well JPL knows where the planet is,
-and Pluto printed ten figures where JPL's own report says several
-thousand kilometres.
-
-WHAT THE SKILLS NOW SAY. provenance-discipline gains A Computed
-Position Prints What Its Errors Earn: a distance worked out at display
-time prints to the Report test's place for the LARGER of the measured
-drift and the source's own accuracy (Tony: "use whichever is larger").
-Its second half is the case the source forced: an accuracy stated only
-in words is stored as the place those words report to, the place the
-Report test gives for every value the words can mean, the coarser where
-they could mean two, and never as a number the source does not print.
-JPL's 2014 report gives 1 km, 100 km and 10,000 km for its three groups.
-interactive-exhibit records the rooms section of objects_config.json
-and the words a drawer row may carry, the "position_accuracy" link
-and Tony's sentence for a body with none, and the second file moved
-out of interactive.html.
-
-ONE PLACE COARSER THAN THE PLAN. The session plan said the place the
-words name, thousands for "several thousand". Every value those words
-allow reports to ten-thousands, so that is what the rule gives. Tony
-confirmed it as recommended on 2026-10-01.
-
-THE BUILD. Orrery patch patch_L398_1 adds the three rows to
-constants_new.py; gallery patch patch_L398_2 links nine bodies to them
-and prints by them, with a new gating check.
-
-THE OBLIGATION TRAVELS. This session loaded 2.22 and 1.6. The next
-session confirms its loaded copies read provenance-discipline 2.23 and
-interactive-exhibit 1.7 before any provenance, constants_new.py or
-exhibit work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.72 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

@@ -131,5 +131,5 @@ Not urgent, in your order:
   - This session: L-404 (done), L-405, and the newest notes on L-363.
 - The reasoning behind the order:
   `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`
-- The latest session record: those ledger items. This session wrote no
-  separate handoff.
+- The latest session record:
+  `documentation/HANDOFF_L363_L404_L405_session_20261002.md`

@@ -1,12 +1,21 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=sun) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, See more, Home's order and its framing; testing a room headlessly (tools/headless); carding an exhibit in Studio
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, See more, Home's order and its framing; testing a room headlessly (tools/headless); carding an exhibit in Studio;
+choosing a feature's info link (NASA or Wikipedia)
 ---
 
 # Interactive Exhibit
 
-Skill version: 1.9 | 2026-10-02, with Anthropic's Claude Opus 5.5, from
+Skill version: 1.10 | 2026-10-02, with Anthropic's Claude Opus 5.5, from
+orrery @ 5e42b00b and gallery @ 0ffa4518. v1.10 (L-406) writes down
+Tony's rule for a feature's info link, which lived only on L-265: a
+NASA page where one is specific to the feature, otherwise English
+Wikipedia, with the corona the one named exception. Asked on
+2026-10-02, while the galactic tide was being redrawn, whether the
+skills covered how a feature's hover, info panel and drawing are
+written; the hover and the drawing were covered and the link was not.
+Earlier: 1.9 | 2026-10-02, with Anthropic's Claude Opus 5.5, from
 orrery @ b3cfc780 and gallery @ cfc53490, with gallery patches
 patch_L404_1_rooms_in_store_editor_20261001.py and
 patch_L363_9_room_step3b_drawer_20261002.py. v1.9 (L-405) writes down
@@ -601,6 +610,32 @@ Citations, equations and served caveats live in the i panel, with one
 pointer line under each hover (L-231); the hover is the glance. Reworded
 hovers go to Tony before they ship. (L-331; the orrery's own hovers
 follow under orrery-coding-conventions 1.9 and L-321.)
+
+### A feature's info link: NASA if specific, else Wikipedia [QUALITY]
+Every drawn feature carries exactly one link, its `info_url` in
+`data/objects_config.json` (Earth's two belts carry the parallel list
+`info_urls`), and the i panel shows it as "Read more at NASA" or "Read
+more at Wikipedia". Tony's rule of 2026-09-02, until v1.10 only on the
+ledger (L-265):
+- A NASA page where one is SPECIFIC to the feature. A hub page about
+  the Sun, the atmosphere or the solar system in general does not
+  count.
+- Otherwise the feature's English Wikipedia article.
+- One exception, by his word: the corona shells take Wikipedia's "Solar
+  corona", because NASA's only corona page is Space Place, written for
+  children.
+- Every link is a URL a search or fetch returned live on the day it was
+  chosen. None is recalled.
+WHY A LINK AND NOT PROSE (Tony, 2026-08-30): paragraphs written for the
+panel would be claims crossing to the website, where nothing scores
+them again. A link moves that burden to NASA or Wikipedia, who maintain
+the page. The words a room does serve -- `description`, `about`,
+`note` -- follow the hover rule above, and any number in them carries
+its source.
+A redrawn feature keeps its link while the page still describes what is
+drawn: the galactic tide kept Wikipedia's "Galactic tide" when it was
+redrawn in the galaxy's plane (L-406). Choosing the link is method and
+needs no ruling; whether a feature is drawn at all is Tony's.
 
 ## Adding an exhibit: the order
 

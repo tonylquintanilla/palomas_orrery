@@ -2004,6 +2004,55 @@ resident.
 (Moved down from the resident protocol on 2026-10-02 when
 v3.77 made a fourth entry.)
 
+v3.75 (October 1, 2026): No rule changed in this document. TWO
+skill bumps, one version each, for one build (L-398):
+provenance-discipline 2.22 -> 2.23 and interactive-exhibit 1.6 -> 1.7.
+A COMPUTED DISTANCE PRINTS WHAT ITS ERRORS EARN.
+
+WHAT PROMPTED IT. Tony's question on 2026-10-01 about the Solar System
+room: "does Horizons serve the distance to pluto with 9 significant
+digits?" It did not. The room's figures came from how closely the page
+reproduces Horizons, not from how well JPL knows where the planet is,
+and Pluto printed ten figures where JPL's own report says several
+thousand kilometres.
+
+WHAT THE SKILLS NOW SAY. provenance-discipline gains A Computed
+Position Prints What Its Errors Earn: a distance worked out at display
+time prints to the Report test's place for the LARGER of the measured
+drift and the source's own accuracy (Tony: "use whichever is larger").
+Its second half is the case the source forced: an accuracy stated only
+in words is stored as the place those words report to, the place the
+Report test gives for every value the words can mean, the coarser where
+they could mean two, and never as a number the source does not print.
+JPL's 2014 report gives 1 km, 100 km and 10,000 km for its three groups.
+interactive-exhibit records the rooms section of objects_config.json
+and the words a drawer row may carry, the "position_accuracy" link
+and Tony's sentence for a body with none, and the second file moved
+out of interactive.html.
+
+ONE PLACE COARSER THAN THE PLAN. The session plan said the place the
+words name, thousands for "several thousand". Every value those words
+allow reports to ten-thousands, so that is what the rule gives. Tony
+confirmed it as recommended on 2026-10-01.
+
+THE BUILD. Orrery patch patch_L398_1 adds the three rows to
+constants_new.py; gallery patch patch_L398_2 links nine bodies to them
+and prints by them, with a new gating check.
+
+THE OBLIGATION TRAVELS. This session loaded 2.22 and 1.6. The next
+session confirms its loaded copies read provenance-discipline 2.23 and
+interactive-exhibit 1.7 before any provenance, constants_new.py or
+exhibit work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.72 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-02 when
+v3.78 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

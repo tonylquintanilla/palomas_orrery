@@ -5,7 +5,7 @@ Rebuilt by `exact_rows_report.py` on every orrery maintenance run. An exact row 
 
 ## Summary
 
-- 24 exact rows in `constants_new.py`.
+- 27 exact rows in `constants_new.py`.
 - 8 printed by at least one display: `SUN_RADIUS_KM`, `EARTH_LEO_UPPER_ALTITUDE_KM`, `EARTH_LEO_LOWER_ALTITUDE_KM`, `EARTH_VAN_ALLEN_OUTER_RADII`, `EARTH_SOLAR_WIND_PRESSURE_NPA`, `EARTH_SOLAR_WIND_BZ_NT`, `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG`, `EARTH_BOW_SHOCK_CUT_ANGLE_DEG`.
 - 19 printing lines: 9 in the orrery, 10 in the gallery.
 - Gallery pointers to exact rows with no PRINTS entry (NOT FOLLOWED): 0.
@@ -29,7 +29,7 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 ### `SUN_RADIUS_KM`
 
-- orrery `solar_visualization_shells.py` line 110: `f"{exact_text('SUN_RADIUS_KM', grouping=True)} km in radius --<br>"`
+- orrery `solar_visualization_shells.py` line 122: `f"{exact_text('SUN_RADIUS_KM', grouping=True)} km in radius --<br>"`
 
 ### `EARTH_LEO_UPPER_ALTITUDE_KM`
 
@@ -92,6 +92,9 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
 - `ARCSEC_PER_DEG`: named on 0 other orrery line(s).
 - `EARTH_OBLIQUITY_J2000_ARCSEC`: named on 0 other orrery line(s).
 - `EARTH_OBLIQUITY_J2000_DEG`: named on 7 other orrery line(s).
+- `GALACTIC_NORTH_POLE_RA_J2000_DEG`: named on 3 other orrery line(s).
+- `GALACTIC_NORTH_POLE_DEC_J2000_ARCSEC`: named on 0 other orrery line(s).
+- `GALACTIC_NORTH_POLE_DEC_J2000_DEG`: named on 2 other orrery line(s).
 - `DEG_PER_RAD`: named on 0 other orrery line(s).
 - `EARTH_SOLAR_WIND_SPEED_KM_S`: named on 0 other orrery line(s).
 - `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`: named on 3 other orrery line(s).

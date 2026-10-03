@@ -429,7 +429,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*244 live items; 229 need attention (`!`); 188 RICE-scored; 156 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*244 live items; 229 need attention (`!`); 188 RICE-scored; 157 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -555,7 +555,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-368 | Other bodies' typed poles disagree with their cited table or cite a withdrawn report (orrery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-369 | Earth's obliquity typed outside constants_new.py (orrery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-370 | Jupiter and Saturn numbers typed only in objects_config.json (gallery, store) | OPEN | -- | 2026-09-28 |
-| ! | L-371 | The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice) | OPEN | -- | 2026-09-29 |
+| ! | L-371 | The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice) | OPEN | -- | 2026-10-02 |
 | ! | L-372 | Two drawing settings live in constants_new.py (orrery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-373 | A unit conversion by a bare number inside a constants_new.py expression (store) | OPEN | -- | 2026-09-28 |
 | ! | L-374 | Showing Earth's precession over time (orrery, idea) | OPEN | -- | 2026-09-28 |
@@ -583,7 +583,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
-| ! | L-405 | Skill text owed from the editor fix and the drawer build (skills) | OPEN | -- | 2026-10-02 |
+| ! | L-406 | The galactic tide drawn in the galaxy's plane (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-02 |
 
 ### B. Pending Action (Tony-side)
 
@@ -891,6 +891,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-398 | Distance figures: the source's own accuracy, not only our drift from Horizons (gallery, provenance) | DONE | -- | 2026-10-01 |
 |  | L-400 | A stray folder "data/solar-system (1)" in Tony's gallery copy (gallery, housekeeping) | DONE | -- | 2026-10-01 |
 |  | L-404 | The Exhibit Store Editor did not list the Solar System room (gallery, tooling) | DONE | -- | 2026-10-02 |
+|  | L-405 | Skill text owed from the editor fix and the drawer build (skills) | DONE | -- | 2026-10-02 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -920,50 +921,63 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
-#### [L-405] Skill text owed from the editor fix and the drawer build (skills)
-<!-- L:405 status:OPEN upd:2026-10-02 section:A flag: rice: -->
-- **From Tony's review of 2026-10-02**, sorting the session into method
-  already in the skills, method needing a skill, and his own drawing
-  decisions. Method that needs writing down, so the next session does
-  not have to rediscover or ask it:
-  - **interactive-exhibit:** (a) the sentence saying every reader of
-    data/objects_config.json ignores "rooms" is wrong -- the store
-    writer, the editor, their suites and tools/mirror_objects.py read
-    it (L-404, L-395); (b) what is editable in a rooms-section room --
-    its arrival's `drawn` and `highlight`, each a drawer row other than
-    the Sun -- and that the editor's room list is read from both places
-    a room can live (L-404); (c) the body drawer as shared chrome: the
-    Sun's fixed row, opened rows, See more, Home's tick order, rows
-    found by the group they name, and the room parameters
-    `frameOnPosition` / `frameMargin` with Tony's 20% (L-363 step 3b);
-    (d) the headless test recipe -- the room's real driver run in
-    CPython on the served cache, the real page booted in jsdom with a
-    stand-in Plotly, and the other rooms driven the same way before and
-    after a shared-chrome change, compared row by row. The harness
-    lives only in a session's scratch space today; whether it is filed
-    in the repo, marked as Claude-only, is part of this item.
-  - **ledger-and-session-records:** when a wrong sentence in a skill
-    earns a version bump, and when it is carried on the ledger to the
-    next bump instead. L-404 chose the second for one sentence; the
-    question recurs, so the skill should answer it.
-- **Built the same session, at Tony's word** ("I would rather take care
-  of the skills now and the numbers in the next session"):
-  interactive-exhibit 1.9 carries (a) to (d); ledger-and-session-records
-  1.14 carries the bump threshold as A Wrong Sentence in a Skill: Bump
-  Now, or Carry It; protocol v3.77 records both. The harness is filed in
-  the gallery's tools/headless/ by patch_L363_9 (four files, Claude-only,
-  not run by the maintenance run). The bump rule's wording is Claude's,
-  shown to Tony in the session.
-- **Pushed 2026-10-02** at orrery f7ad52db, with 19 of 19 gating
-  checkers on Tony's machine; Tony reinstalled both skills and replaced
-  the Project's instructions with v3.77. The harness reached the gallery
-  at 3ed96777. Tony was shown the bump rule's wording and asked to
-  confirm it; he pushed it as written and has not commented on it.
-**Gap:** The next session confirms its loaded copies read
-interactive-exhibit 1.9 and ledger-and-session-records 1.14, then
-closes this item.
-**Ref:** L-404; L-363; L-395; L-338; skills/interactive-exhibit/SKILL.md;
-skills/ledger-and-session-records/SKILL.md.
+#### [L-406] The galactic tide drawn in the galaxy's plane (orrery + gallery, the Sun's slice)
+<!-- L:406 status:OPEN upd:2026-10-02 section:A flag: rice: -->
+- **Found 2026-10-02**, sorting the Sun room's 43 unlinked numbers
+  (L-371). The galactic tide's words, on the website and in the orrery,
+  said its bodies are thinned near the galaxy's plane. The drawing
+  thinned them near the ecliptic, the plane of Earth's orbit, and was
+  densest at the ecliptic's poles. A code comment in
+  `gallery/feature_renderers.js` said the hover admitted this; it did
+  not. And the website's gating check
+  `documentation/smoke_sun_shells.js` passed a test named "tide is
+  genuinely thinned at the galactic plane" that measured the ecliptic:
+  the check could not fail on the wrong plane.
+- **Tony's rulings, 2026-10-02.** Fix it now, as a drawing choice made
+  more correct ("this is the session to do any fixing"). Draw it
+  tilted into the galaxy's plane AND with the pattern the source gives:
+  sparse at the galaxy's plane and at its poles, thickest halfway
+  between. Draw it between the outer Oort cloud's two stored edges,
+  20,000 and 100,000 AU, instead of a typed 50,000 AU with a typed
+  spread and cut-offs ("Confirmed as recommended"). The words follow
+  the discipline of the other features: the drawing is a choice resting
+  on the best information we can cite, the hover is basic with any
+  number cited, the info icon links to NASA or Wikipedia. Old and new
+  words were shown side by side and confirmed.
+- **Sources read 2026-10-02 by Claude Opus 5.5.** The pole: Liu, Zhu
+  and Hu, arXiv:1110.6268, eq. (2), the J2000 pole of Murray (1989),
+  the Hipparcos standard. The pattern: Delsemme (1987), A&A 187, 913,
+  summary (aphelia avoid both galactic polar caps and a strip along the
+  galactic equator); Matese and Whitmire, arXiv:1004.4584, sec. 2.2
+  (the dominant tidal term goes as |sin B cos B|, peaks near 45
+  degrees). Dissent, said in the panel: Higuchi (2020), arXiv:2008.04324
+  (AJ 160, 134); Rickman et al. (2008) as Matese and Whitmire report.
+  The info link stays Wikipedia's "Galactic tide", which meets the L-265
+  rule.
+- **Built 2026-10-02.** Orrery `patch_L406_1_galactic_tide_orrery_20261002.py`:
+  three rows in `constants_new.py` (the pole's right ascension in
+  degrees, its declination in arcseconds and, derived, in degrees);
+  `idealized_orbits.create_pole_transformation_matrix(ra_deg, dec_deg)`,
+  the planet matrix's arithmetic moved out unchanged (identical
+  matrices for eight bodies, checked); the orrery's tide redrawn;
+  interactive-exhibit 1.10 with the link rule; protocol v3.78. Gallery
+  `patch_L406_2_galactic_tide_gallery_20261002.py`: the tide's entry
+  in `data/objects_config.json`, its drawing in
+  `gallery/feature_renderers.js`, and the corrected check. Retired: the
+  0.5 asymmetry, the 0.3 spread and the 0.5 and 1.5 cut-offs -- four of
+  L-371's 19 eyeballed numbers -- and the declared 50,000 AU distance.
+- **Fixed in passing, reported:** the Sun's `_comment` in
+  `data/objects_config.json` said the custom geometry is "NOT here";
+  all four shapes have been there since L-234.
+**Gap:** Tony: run patch 1, run `orrery_maintenance_run.py`, commit and
+push the orrery; then patch 2, the cache builder, and
+`gallery_maintenance_run.py`, commit and push the gallery; then look at
+the tide on the phone (Mode 5). The next session confirms its loaded
+interactive-exhibit reads 1.10.
+**Ref:** L-371; L-265; L-386; skills/interactive-exhibit/SKILL.md;
+orrery `solar_visualization_shells.py`, `idealized_orbits.py`,
+`constants_new.py`; gallery `gallery/feature_renderers.js`,
+`documentation/smoke_sun_shells.js`.
 
 #### [L-403] Numbers in the object list's descriptions carry no source (orrery, provenance)
 <!-- L:403 status:OPEN upd:2026-10-01 section:A flag: rice: -->
@@ -1580,7 +1594,7 @@ is in the orrery) "photosphere + 10%"
 **Ref:** `constants_new.py`; `palomas_orrery.py`; `palomas_orrery_helpers.py`.
 
 #### [L-371] The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice)
-<!-- L:371 status:OPEN upd:2026-09-29 section:A flag: rice: -->
+<!-- L:371 status:OPEN upd:2026-10-02 section:A flag: rice: -->
 - **Found 2026-09-22 and 2026-09-28.** In `data/objects_config.json`
   the Sun carries 43 numbers with no link to a store row, not yet sorted
   into measurements and drawing choices (manifest section 2.6). [per
@@ -1595,7 +1609,27 @@ is in the orrery) "photosphere + 10%"
 - **Note (2026-09-29, the order):** the Sun's slice now follows L-363's
   Half 2 through Tony's Mode 5, on his ruling C; see L-322's note of
   the same date.
-**Gap:** The Sun's slice: sort the 43, give each measured one a row and a count, and print by the count.
+- **Sorted 2026-10-02** (Claude Opus 5.5; the test is the skill's --
+  does changing the number move WHERE something is drawn or only HOW
+  it looks). The 43 are exactly the four `drawing` blocks of the Sun's
+  hand-built shapes: streamer belt 18, Hills cloud torus 7, clumpy outer
+  Oort 10, galactic tide 8. None is a measurement, so none needs a row.
+  Rendering settings, 22, stay where they are: the streamer's four point
+  counts, jitter, seed, brightness and two marker sizes; and each Oort
+  shape's point counts, seed, opacity and marker size. Copies of linked
+  rows, 2: the streamer's base radius (the photosphere) and its outer
+  radius, 20.0 typed where the orrery works out 19.9955, past the
+  Alfven surface where nothing shows. Eyeballed shape numbers, 19, do
+  not promote: the streamer's two widths, helmet curve, stalk taper,
+  fade curve, warp and lobe count; the torus's thickness, flattening
+  and 10% scatter (borderline: it pushes points past the stated edges);
+  the clumps' count, two sizes and two concentration numbers; the
+  tide's spread, two cut-offs and asymmetry.
+- **The tide's four went on 2026-10-02 (L-406)**, replaced by sourced
+  rows and a sourced shape. Fifteen eyeballed numbers remain in the
+  streamer belt, the torus and the clumps, to be taken one drawing at a
+  time, each needing its own source hunt.
+**Gap:** The Sun's slice, second half: the numbers already linked -- L-386's rows stored in another unit, and the radius lines that print with no count. Then the fifteen eyeballed shape numbers, one drawing at a time.
 **Ref:** gallery `data/objects_config.json`; gallery `gallery/feature_renderers.js`; L-322 Gap (3); L-345.
 
 #### [L-370] Jupiter and Saturn numbers typed only in objects_config.json (gallery, store)
@@ -18645,6 +18679,54 @@ DE430 rows; L-363; L-399; L-401; L-345.
 **Ref:** tools/store_writer.py, tools/exhibit_store_editor.py and their
 two suites (gallery); L-334 (the editor), L-392 (the rooms section),
 L-363 (the room), L-395.
+
+#### [L-405] Skill text owed from the editor fix and the drawer build (skills)
+<!-- L:405 status:DONE upd:2026-10-02 section:C flag: rice: -->
+- **From Tony's review of 2026-10-02**, sorting the session into method
+  already in the skills, method needing a skill, and his own drawing
+  decisions. Method that needs writing down, so the next session does
+  not have to rediscover or ask it:
+  - **interactive-exhibit:** (a) the sentence saying every reader of
+    data/objects_config.json ignores "rooms" is wrong -- the store
+    writer, the editor, their suites and tools/mirror_objects.py read
+    it (L-404, L-395); (b) what is editable in a rooms-section room --
+    its arrival's `drawn` and `highlight`, each a drawer row other than
+    the Sun -- and that the editor's room list is read from both places
+    a room can live (L-404); (c) the body drawer as shared chrome: the
+    Sun's fixed row, opened rows, See more, Home's tick order, rows
+    found by the group they name, and the room parameters
+    `frameOnPosition` / `frameMargin` with Tony's 20% (L-363 step 3b);
+    (d) the headless test recipe -- the room's real driver run in
+    CPython on the served cache, the real page booted in jsdom with a
+    stand-in Plotly, and the other rooms driven the same way before and
+    after a shared-chrome change, compared row by row. The harness
+    lives only in a session's scratch space today; whether it is filed
+    in the repo, marked as Claude-only, is part of this item.
+  - **ledger-and-session-records:** when a wrong sentence in a skill
+    earns a version bump, and when it is carried on the ledger to the
+    next bump instead. L-404 chose the second for one sentence; the
+    question recurs, so the skill should answer it.
+- **Built the same session, at Tony's word** ("I would rather take care
+  of the skills now and the numbers in the next session"):
+  interactive-exhibit 1.9 carries (a) to (d); ledger-and-session-records
+  1.14 carries the bump threshold as A Wrong Sentence in a Skill: Bump
+  Now, or Carry It; protocol v3.77 records both. The harness is filed in
+  the gallery's tools/headless/ by patch_L363_9 (four files, Claude-only,
+  not run by the maintenance run). The bump rule's wording is Claude's,
+  shown to Tony in the session.
+- **Pushed 2026-10-02** at orrery f7ad52db, with 19 of 19 gating
+  checkers on Tony's machine; Tony reinstalled both skills and replaced
+  the Project's instructions with v3.77. The harness reached the gallery
+  at 3ed96777. Tony was shown the bump rule's wording and asked to
+  confirm it; he pushed it as written and has not commented on it.
+- **Closed 2026-10-02, the next session.** Its loaded copies read
+  interactive-exhibit 1.9 and ledger-and-session-records 1.14, matching
+  the manifest. Nothing in the body is left undone: the harness is
+  filed, and the bump rule stands as pushed. interactive-exhibit went
+  on to 1.10 the same day (L-406).
+**Gap:** None -- closed 2026-10-02.
+**Ref:** L-404; L-363; L-395; L-338; skills/interactive-exhibit/SKILL.md;
+skills/ledger-and-session-records/SKILL.md.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

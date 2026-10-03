@@ -583,6 +583,56 @@ EARTH_OBLIQUITY_J2000_DEG = EARTH_OBLIQUITY_J2000_ARCSEC / ARCSEC_PER_DEG
 # Note+: was wrong: the IAU 2006 value is 84381.406 arcseconds. Not printed
 # Note+: by any display, so it carries no print count.
 
+GALACTIC_NORTH_POLE_RA_J2000_DEG = 192.85948125
+# Unit: deg
+# Status: declared 2026-10-02 -- a frame definition, not a measurement
+# Figures: exact -- a frame definition; the source prints it as
+# Figures+: 12h 51m 26.2755s, which is exactly 192.85948125 degrees.
+# Declared: the right ascension of the north galactic pole of the year
+# Declared+: 2000, the pole of the galactic coordinate system defined by
+# Declared+: the IAU in 1958 and carried to J2000 by Murray's 1989
+# Declared+: transformation, which the Hipparcos team adopted as the
+# Declared+: standard. It sets the plane the galactic tide is drawn
+# Declared+: about (solar_visualization_shells.create_sun_galactic_tide
+# Declared+: and the gallery's tide_field). The source also reports that
+# Declared+: the plane fitted to modern 2MASS and radio catalogues is
+# Declared+: inclined 0.4 to 0.6 degrees more than this one, far below
+# Declared+: anything the drawing shows.
+# Read: eq. (2), sec. 1, of the document named in the Source line,
+# Read+: 2026-10-02, Claude Opus 5.5.
+# Source: Liu, Zhu and Hu, "Constructing a Galactic coordinate system
+# Source+: based on near-infrared and radio catalogs", arXiv:1110.6268,
+# Source+: eq. (2) -- the north galactic pole at J2000.0, alpha =
+# Source+: 12h 51m 26.2755s, delta = +27 deg 07' 41.704", as derived by
+# Source+: Murray (1989) and adopted by the Hipparcos team as the
+# Source+: standard transformation. The layer below: Murray, C. A. 1989,
+# Source+: A&A 218, 325; ESA 1997, The Hipparcos and Tycho Catalogues,
+# Source+: ESA SP-1200.
+# Ref: https://arxiv.org/pdf/1110.6268
+# Note: added 2026-10-02 (L-406). Until then the galactic tide was drawn
+# Note+: about the ecliptic while its words said the galaxy's plane.
+
+GALACTIC_NORTH_POLE_DEC_J2000_ARCSEC = 97661.704
+# Unit: arcsec
+# Status: declared 2026-10-02 -- a frame definition, not a measurement
+# Figures: exact -- a frame definition; the source prints it as
+# Figures+: +27 deg 07' 41.704", which is exactly 97,661.704 arcseconds.
+# Declared: the declination of the north galactic pole of the year 2000,
+# Declared+: the companion of GALACTIC_NORTH_POLE_RA_J2000_DEG. Stored in
+# Declared+: arcseconds because that is exact; in degrees it does not end.
+# Read: as GALACTIC_NORTH_POLE_RA_J2000_DEG, 2026-10-02, Claude Opus 5.5.
+# Source: as GALACTIC_NORTH_POLE_RA_J2000_DEG.
+# Ref: https://arxiv.org/pdf/1110.6268
+
+GALACTIC_NORTH_POLE_DEC_J2000_DEG = GALACTIC_NORTH_POLE_DEC_J2000_ARCSEC / ARCSEC_PER_DEG
+# Derived: the pole's declination in degrees, 97661.704 / 3600
+# Derived+: = 27.128251111...
+# Unit: deg
+# Status: derived 2026-10-02 -- inherits GALACTIC_NORTH_POLE_DEC_J2000_ARCSEC,
+# Status+: ARCSEC_PER_DEG
+# Figures: exact -- both inputs are exact.
+# Note: drawn, never printed, so it carries no print count.
+
 # The pole directions of the bodies the orrery draws with an axis, as ICRF
 # right ascension and declination in degrees. Moved here from
 # idealized_orbits.py on 2026-09-23 (L-322 ruling (a) of 2026-09-14), which

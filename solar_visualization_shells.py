@@ -14,6 +14,15 @@ Consumed by: planet_visualization.py (routing dispatcher),
 Role: rendering/shells
 Domain: orrery
 
+Module updated: October 2, 2026 with Anthropic's Claude Opus 5.5
+(L-406: the galactic tide is drawn tilted into the galaxy's plane, about
+the galactic pole of J2000 from constants_new.py, between the outer Oort
+cloud's two edges, with its density following the tide's strength --
+sparse at the galaxy's plane and poles, thickest halfway between. It had
+been drawn about the ecliptic, densest at the poles, at a typed 50,000
+AU, while its words said the galaxy's plane. Hover rewritten in Tony's
+approved words of 2026-10-02.)
+
 Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
 (L-345, patch D20: CHROMOSPHERE_PHYSICAL_RADII is a conversion of
 CHROMOSPHERE_TOP_KM now, with no count of its own, so the hover prints
@@ -65,6 +74,9 @@ from planet_visualization_utilities import (create_sphere_points, create_streame
                                             CHROMOSPHERE_PHYSICAL_KM, CHROMOSPHERE_PHYSICAL_RADII)
 # L-322 Stage D, patch D17: print rows by the counts their rows state.
 from constants_rows import figures_of, exact_text, format_prints, conversion_text
+# L-406: the pole the galactic tide is drawn about.
+from constants_new import (GALACTIC_NORTH_POLE_RA_J2000_DEG,
+                           GALACTIC_NORTH_POLE_DEC_J2000_DEG)
 
 #####################################
 # Sun Visualization Functions
@@ -1565,39 +1577,84 @@ def create_sun_outer_oort_clumpy(center_position=(0, 0, 0), radius_min=20000, ra
     return [shell_trace, info_trace]
 
 
-def create_sun_galactic_tide(center_position=(0, 0, 0), radius=50000, n_points=2000):
+def create_sun_galactic_tide(center_position=(0, 0, 0), n_points=2000):
     """
-    Create Oort Cloud structure influenced by galactic tidal forces.
-    The galactic plane creates asymmetry in the distribution.
-    FIXED VERSION - Returns proper Plotly trace objects.
+    Where the galaxy's tide sends comets in from: points in the outer Oort
+    cloud, tilted into the galaxy's plane, sparse at the plane and at the
+    galactic poles and thickest halfway between.
+
+    THE DRAWING IS A CHOICE RESTING ON WHAT CAN BE CITED (L-406, Tony's
+    rulings of 2026-10-02):
+    - The plane. Points are placed about the north galactic pole of J2000,
+      GALACTIC_NORTH_POLE_RA_J2000_DEG / _DEC_J2000_DEG in constants_new.py,
+      and turned into the drawing's frame by the same matrix a planet's
+      pole uses (idealized_orbits.create_pole_transformation_matrix).
+    - The density. The number of points per piece of sky goes as
+      |sin b cos b|, b the galactic latitude: none at the plane or the
+      poles, most at 45 degrees. The sources are in the comments beside
+      the code that does it.
+    - The distance. Spread evenly from INNER_OORT_CLOUD_AU to
+      OUTER_OORT_CLOUD_AU, the outer cloud's two edges, the rows the
+      clumpy outer Oort cloud is drawn between. It replaces a typed
+      50,000 AU with a typed spread and cut-offs.
+    - Each point stands for the far end of an orbit. Where any real comet
+      is, is not known and is not claimed.
 
     Parameters:
     - center_position: Sun position tuple (default: (0, 0, 0)).
       Accepted for interface uniformity with the unified dispatch
       contract. Geometry translation deferred to switchover phase.
-    - radius: Typical distance in AU (default: 50000)
-    - n_points: Number of random points (default: 2000)
+    - n_points: Number of random points (default: 2000), a rendering
+      setting.
     """
     # Phase D1: center_position accepted for interface uniformity;
     # geometry translation deferred to switchover phase.
-    r = np.random.normal(radius, radius*0.3, n_points)
-    r = np.clip(r, radius*0.5, radius*1.5)
-    
-    theta = np.random.uniform(0, 2*np.pi, n_points)
-    
-    phi_weights = np.linspace(-np.pi/2, np.pi/2, 100)
-    weights = 1 + 0.5 * np.abs(np.sin(phi_weights))
-    phi = np.random.choice(phi_weights, n_points, p=weights/weights.sum())
-    
-    x = r * np.cos(phi) * np.cos(theta)
-    y = r * np.cos(phi) * np.sin(theta)
-    z = r * np.sin(phi)
+    from idealized_orbits import create_pole_transformation_matrix
+    M = np.asarray(create_pole_transformation_matrix(
+        GALACTIC_NORTH_POLE_RA_J2000_DEG, GALACTIC_NORTH_POLE_DEC_J2000_DEG),
+        dtype=float)
 
+    # Source: Matese and Whitmire, "Persistent Evidence of a Jovian Mass
+    #   Solar Companion in the Oort Cloud", arXiv:1004.4584, sec. 2.2 --
+    #   the dominant disk tidal term goes as |sin B cos B| (Matese et al.
+    #   1999), so if the tide dominates, the aphelia of new comets avoid
+    #   the galactic poles and equator and peak near B = +/-45 degrees.
+    # Source: Delsemme, "Galactic tides affect the Oort cloud: an
+    #   observational confirmation", A&A 187, 913 (1987), summary -- the
+    #   aphelia of 152 comets with periods over ten thousand years avoid
+    #   the two galactic polar caps and a strip along the galactic equator.
+    # Note: not everyone reads it this way. Higuchi, "Anisotropy of
+    #   Long-period Comets Explained by Their Formation Process",
+    #   arXiv:2008.04324 (AJ 160, 134), explains the same depletions by
+    #   comets gathering near the ecliptic and a second plane; and Rickman
+    #   et al. (2008), as Matese and Whitmire report, take the term to go
+    #   as |sin B|.
+    # Galactic latitude by rejection. Drawing sin(b) evenly gives every
+    # piece of sky the same chance; keeping a draw with probability
+    # |2 sin b cos b| = |sin 2b| (at most 1, at b = 45 degrees) makes the
+    # points per piece of sky go as |sin b cos b|.
+    sin_b = np.empty(0)
+    while sin_b.size < n_points:
+        u = np.random.uniform(-1.0, 1.0, 2 * n_points)
+        keep = np.random.uniform(0.0, 1.0, u.size) < 2.0 * np.abs(u) * np.sqrt(1.0 - u * u)
+        sin_b = np.concatenate([sin_b, u[keep]])
+    sin_b = sin_b[:n_points]
+    cos_b = np.sqrt(1.0 - sin_b * sin_b)
+    lon = np.random.uniform(0, 2 * np.pi, n_points)
+    r = np.random.uniform(INNER_OORT_CLOUD_AU, OUTER_OORT_CLOUD_AU, n_points)
+
+    galactic = np.vstack([r * cos_b * np.cos(lon),
+                          r * cos_b * np.sin(lon),
+                          r * sin_b])
+    x, y, z = M @ galactic
+
+    # Tony's approved words, 2026-10-02 (L-406). The distances are the
+    # rows', printed as the clumps' hover prints them.
     tide_hover = (
-        'Galactic Tide Influenced Objects<br>'
-        'Asymmetric distribution due to Milky Way\'s gravity<br>'
-        'Objects avoid galactic plane<br>'
-        '~50,000 AU typical distance'
+        'Galactic Tide: sends comets in from the outer Oort cloud<br>'
+        'Tilted to the galaxy\'s plane, thickest halfway to its poles<br>'
+        f'From {INNER_OORT_CLOUD_AU:,} to {OUTER_OORT_CLOUD_AU:,} AU<br>'
+        'Where the comets really are is not known'
     )
 
     shell_trace = go.Scatter3d(
@@ -1609,7 +1666,7 @@ def create_sun_galactic_tide(center_position=(0, 0, 0), radius=50000, n_points=2
         hoverinfo='skip',
         showlegend=True
     )
-    r_info = radius * 1.5 * 1.05
+    r_info = OUTER_OORT_CLOUD_AU * 1.05
     # Phase 1 re-pipe (May 28, 2026): factory-routed.
     info_trace = create_info_marker(
         0, 0, r_info,
