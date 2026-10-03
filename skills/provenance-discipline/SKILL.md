@@ -1,18 +1,27 @@
 ---
 name: provenance-discipline
-description: Provenance and citation discipline for the Paloma's Orrery project. Use whenever running or discussing provenance_scanner.py, reading PROVENANCE_AUDIT.md, clearing Tier-1 findings, adding or reviewing # Source: citations, editing provenance_exceptions.json, embedding constants or numeric/factual claims in orrery display strings or data modules, or preparing a GitHub push (the gate is Tier-1 = 0 on the active build path, and it binds at EXPORT from the orrery). Also use when composing on-layer or user-facing factual text for any orrery visualization. Do not use for projects other than Paloma's Orrery.
+description: "Provenance and citation discipline for the Paloma's Orrery project. Use whenever running or discussing provenance_scanner.py, reading PROVENANCE_AUDIT.md, clearing Tier-1 findings, adding or reviewing # Source: citations, editing provenance_exceptions.json, embedding constants or numeric/factual claims in orrery display strings or data modules, or preparing a GitHub push (the gate is Tier-1 = 0 on the active build path, and it binds at EXPORT from the orrery). Also use when composing on-layer or user-facing factual text for any orrery visualization. Do not use for projects other than Paloma's Orrery."
 fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on the active build path)
 ---
 
 # Provenance Discipline
 
-Skill version: 2.24 | Cut from palomas_orrery @ feb5e369 (v2.24),
+Skill version: 2.25 | Cut from palomas_orrery @ 94ff6c68 (v2.25),
+@ feb5e369 (v2.24),
 earlier @ 7a47269c (v2.23), @ 714293a9 (v2.22), @ 95b394f8 (v2.21), @ 0e3d05fd (v2.20), @ de4eadc5 (v2.19), @ ac25d4f4 (v2.18), @ 1f6e55a9 (v2.17), @ a7014abb (v2.16), @ 21065c5d (v2.15), @ dfa779bd (v2.14),
 @ ebdc55cc (v2.13), @ bfc0505e (v2.12),
 earlier @ 159c5a2c (v2.11), @ 071a0a65 (v2.10), @ a263f73d (v2.9),
 @ 7f4a2f9f (v2.8), @ 3faa72a0 (v2.7), @ f603be3 (v2.6),
 @ 731066f (v2.5), @ 6b99ace (v2.2), @ 00219d9 (v2.1), @ eb77c83 (v2.0)
 | October 1, 2026
+v2.25 (L-407, 2026-10-02) changes no rule: the header's description is
+put in quotes. Unquoted, the " #" in "# Source: citations" started a
+YAML comment, so Settings read only the description's first 200
+characters, ending "adding or reviewing", and the words after it --
+citations, provenance_exceptions.json, display strings, the GitHub push
+gate, user-facing factual text -- never reached the description the
+skill is chosen by. Found by the header check skills_index.py gained
+the same day.
 v2.24 settles L-395 with one new section, A Simple Error a Check Finds
 Is Fixed and Reported. Tony's ruling, 2026-10-01: "simple errors such
 as the Apophis naming discrepancy should be fixed and reported." It

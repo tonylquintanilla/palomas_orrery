@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.78 | October 2, 2026
+Tony Quintanilla, PE | Claude | v3.79 | October 2, 2026
 
-Cut from 5e42b00b at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 0a5eea0b at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -488,10 +488,10 @@ agentic-pre-test             1.2  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
 horizons-orbital-mechanics   1.1  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning
-provenance-discipline        2.24 Scanner runs, audits, citations, constants,
+provenance-discipline        2.25 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
-earth-system-pipeline        1.1  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY
+earth-system-pipeline        1.2  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY
                                   human-cost visualization or text
 gallery-pipeline             1.2  Gallery Studio, json_converter, index.html
                                   viewer, gallery cards
@@ -1163,6 +1163,43 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.79 (October 2, 2026): No rule changed in this document. TWO
+skill bumps, one version each (L-407): earth-system-pipeline 1.1 ->
+1.2 and provenance-discipline 2.24 -> 2.25. A SKILL'S HEADER IS READ
+AS YAML.
+
+WHAT PROMPTED IT. Settings refused interactive-exhibit 1.10 with
+"malformed YAML frontmatter": patch_L406_1 had put new fires_when words
+on a line of their own; patch_L406_3, pushed at 81e19ef, put them back
+on one line, still 1.10. skills_index.py had read the same header by its
+own looser rules and built the manifest without complaint, and as a
+generator its exit code did not count, so the maintenance run passed 19
+of 19 on a skill that could not be installed. Tony's word, 2026-10-02:
+do L-407 now.
+
+WHAT CHANGED. skills_index.py reads every header as YAML, with PyYAML
+where installed and built-in rules otherwise, names which, and fails on
+a header YAML refuses, one with no name or description as text, or a
+value YAML silently cuts short at " #". orrery_maintenance_run.py runs
+it with --check as the checker Skill headers. The check found two more:
+earth-system-pipeline's description held ": ", which YAML refuses; and
+provenance-discipline's held "# Source:", so YAML read only its first
+200 characters, and the installed skill has been chosen by that cut
+description. Both descriptions are now quoted. No rule in any skill
+changed.
+
+THE OBLIGATION TRAVELS. This session loaded interactive-exhibit 1.9,
+earth-system-pipeline 1.1 and provenance-discipline 2.24. The next
+session confirms its loaded copies read 1.10, 1.2 and 2.25, and that
+provenance-discipline's description no longer ends at "adding or
+reviewing".
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.76 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.78 (October 2, 2026): No rule changed in this document. ONE
 skill bump, one version (L-406): interactive-exhibit 1.9 -> 1.10.
 THE GALACTIC TIDE IS DRAWN IN THE GALAXY'S PLANE.
@@ -1236,42 +1273,6 @@ session-record work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.74 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.76 (October 1, 2026): No rule changed in this document. TWO
-skill bumps, one version each, for one build (L-395):
-provenance-discipline 2.23 -> 2.24 and interactive-exhibit 1.7 -> 1.8.
-THE ORRERY'S OBJECT LIST FEEDS THE WEBSITE.
-
-WHAT PROMPTED IT. The Solar System room's info panel had no description
-and no NASA link, and the website's object facts were typed by hand
-from the orrery's list. Tony's rulings of 2026-10-01: the website keeps
-copies written by a tool and checked (the constants pattern); each
-served entry gains a 'key' spelled as the website's slug; one
-description and one link per object, cleaned in the orrery; and
-"simple errors such as the Apophis naming discrepancy should be fixed
-and reported."
-
-WHAT THE SKILLS NOW SAY. provenance-discipline gains A Simple Error a
-Check Finds Is Fixed and Reported: what counts as simple, that the fix
-rides the same patch and is named, what comes to Tony instead, how a
-number in a served description is sourced or removed, and how this
-sits beside The Braid. interactive-exhibit records that a body's name,
-Horizons id, description and link on the website are copies written by
-tools/mirror_objects.py, and what the room's panel shows.
-
-THE BUILD. Orrery patch_L395_1 adds the key, export_objects.py and its
-check; gallery patch_L395_2 adds the pull, the mirror and its suite,
-and the panel's words and link.
-
-THE OBLIGATION TRAVELS. This session loaded 2.23 and 1.7. The next
-session confirms its loaded copies read provenance-discipline 2.24 and
-interactive-exhibit 1.8 before any provenance or exhibit work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.73 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

@@ -584,7 +584,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-406 | The galactic tide drawn in the galaxy's plane (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-02 |
-| ! | L-407 | A skill's header is not checked as YAML (orrery, skills) | OPEN | -- | 2026-10-02 |
+| ! | L-407 | A skill's header is checked as YAML (orrery, skills) | OPEN | -- | 2026-10-02 |
 
 ### B. Pending Action (Tony-side)
 
@@ -922,26 +922,41 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
-#### [L-407] A skill's header is not checked as YAML (orrery, skills)
+#### [L-407] A skill's header is checked as YAML (orrery, skills)
 <!-- L:407 status:OPEN upd:2026-10-02 section:A flag: rice: -->
 - **Found 2026-10-02** when Settings refused interactive-exhibit 1.10
-  with "malformed YAML frontmatter" (L-406). `skills_index.py` reads
-  each skill's header to build the manifest, and read the broken one
-  without complaint, so the maintenance run passed a skill that could
-  not be installed: a check that cannot fail on the one fault the
-  install step enforces.
-- **The same check finds a second, older case:**
-  `skills/earth-system-pipeline/SKILL.md` has ": " inside its
-  description ("displacement): the restraint discipline"), which strict
-  YAML refuses. Its installed copy matches the repo, so Settings
-  accepted it once, under whatever parser it had then. It loads today;
-  a reinstall may fail. Left as it is, since changing it means a
-  reinstall of a skill nothing else is touching.
-**Gap:** Make `skills_index.py` parse each header as YAML and fail the
-run, naming the skill, when one does not parse or lacks name and
-description; fix earth-system-pipeline's description in the same patch
-(quote it), with Tony's reinstall.
-**Ref:** L-406; `skills_index.py`; `skills/*/SKILL.md`.
+  with "malformed YAML frontmatter" (L-406). `skills_index.py` read each
+  header by its own looser rules and built the manifest from the broken
+  one without complaint; as a generator its exit code did not count. A
+  check that could not fail on the one fault the install step enforces.
+- **Tony's word, 2026-10-02:** "while we are doing this, let's do L407
+  too."
+- **Built the same day,** `patch_L407_2_skill_headers_20261002.py`
+  (patch_L407_1, built on 94ff6c68, refused to run once patch_L406_3
+  had moved the ledger; this one is the same work on 0a5eea0b):
+  `skills_index.py` reads every header as YAML -- PyYAML where it is
+  installed, built-in rules otherwise, and it prints which -- and fails,
+  naming the skill, on a header YAML refuses, one with no name or
+  description as text, or a value YAML silently cuts short at " #".
+  `orrery_maintenance_run.py` runs it with `--check` as the checker
+  Skill headers. Shown failing on the three old headers both ways.
+- **Two more found by the check, fixed in the same patch and
+  reported:** earth-system-pipeline's description held ": "
+  ("displacement): the restraint discipline"), which YAML refuses, so
+  a reinstall would have failed; provenance-discipline's held "# Source:
+  citations", so YAML read only its first 200 characters, ending
+  "adding or reviewing" -- the installed skill has been chosen by that
+  cut description, without the words about citations, display strings
+  and the push gate. Both descriptions are quoted; versions 1.2 and
+  2.25, no rule changed. interactive-exhibit's header was put back on
+  one line by patch_L406_3 (pushed at 81e19ef), still 1.10.
+**Gap:** Tony reinstalls interactive-exhibit, earth-system-pipeline and
+provenance-discipline and replaces the Project's instructions with
+v3.79. The next session confirms its loaded copies read 1.10, 1.2 and
+2.25, and that provenance-discipline's description runs past "adding
+or reviewing", then closes this item.
+**Ref:** L-406; `skills_index.py`; `orrery_maintenance_run.py`;
+`skills/*/SKILL.md`.
 
 #### [L-406] The galactic tide drawn in the galaxy's plane (orrery + gallery, the Sun's slice)
 <!-- L:406 status:OPEN upd:2026-10-02 section:A flag: rice: -->
@@ -1001,11 +1016,11 @@ description; fix earth-system-pipeline's description in the same patch
   which puts the words back on the one line; checked by parsing every
   skill's header as YAML. The version stays 1.10, since 1.10 never
   loaded anywhere.
-**Gap:** Tony: run patch 3, run `orrery_maintenance_run.py`, commit and
-push the orrery, and reinstall interactive-exhibit 1.10; then patch 2, the cache builder, and
-`gallery_maintenance_run.py`, commit and push the gallery; then look at
-the tide on the phone (Mode 5). The next session confirms its loaded
-interactive-exhibit reads 1.10.
+- **Patch 3 pushed at orrery 81e19ef; gallery patch_L406_2 and the
+  cache rebuild pushed at gallery 6ba42f02.**
+**Gap:** Tony: reinstall interactive-exhibit 1.10, and look at the tide
+on the phone and in the orrery (Mode 5). The next session confirms its
+loaded interactive-exhibit reads 1.10.
 **Ref:** L-371; L-265; L-386; skills/interactive-exhibit/SKILL.md;
 orrery `solar_visualization_shells.py`, `idealized_orbits.py`,
 `constants_new.py`; gallery `gallery/feature_renderers.js`,

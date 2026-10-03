@@ -1,12 +1,18 @@
 ---
 name: earth-system-pipeline
-description: Earth System KMZ and climate visualization pipeline for the Paloma's Orrery project. Use for any task touching earth_system_generator.py, earth_system_common.py, food_insecurity_generator.py, the scenarios_* modules (heatwaves, coral bleaching, western heatwave, food insecurity), earth_system_controller.py, or their data sources (ERA5 / Copernicus CDS, Open-Meteo, ERDDAP / Coral Reef Watch, IPC Mapping Tool GeoJSON). Use when building or modifying KMZ layers, Google Earth scenarios, Plotly teasers, intel/legend/encyclopedia cards, or scenario configs -- and for ANY Paloma's Orrery visualization or text where human cost is an element (heat deaths, food insecurity, displacement): the restraint discipline section applies even to prose about these layers. Do not use for projects other than Paloma's Orrery.
+description: "Earth System KMZ and climate visualization pipeline for the Paloma's Orrery project. Use for any task touching earth_system_generator.py, earth_system_common.py, food_insecurity_generator.py, the scenarios_* modules (heatwaves, coral bleaching, western heatwave, food insecurity), earth_system_controller.py, or their data sources (ERA5 / Copernicus CDS, Open-Meteo, ERDDAP / Coral Reef Watch, IPC Mapping Tool GeoJSON). Use when building or modifying KMZ layers, Google Earth scenarios, Plotly teasers, intel/legend/encyclopedia cards, or scenario configs -- and for ANY Paloma's Orrery visualization or text where human cost is an element (heat deaths, food insecurity, displacement): the restraint discipline section applies even to prose about these layers. Do not use for projects other than Paloma's Orrery."
 fires_when: KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY human-cost visualization or text
 ---
 
 # Earth System Pipeline
 
-Skill version: 1.1 | Cut from palomas_orrery @ e83fe9ce | 2026-07-12
+Skill version: 1.2 | 2026-10-02, with Anthropic's Claude Opus 5.5, from
+palomas_orrery @ 94ff6c68. v1.2 (L-407) changes no rule: the header's
+description is put in quotes, because it holds ": " ("displacement):
+the restraint discipline"), which YAML refuses unquoted, so a reinstall
+in Settings would have been refused. Found by the header check
+skills_index.py gained the same day.
+Earlier: 1.1 | Cut from palomas_orrery @ e83fe9ce | 2026-07-12
 Sources: earth_system_generator.py, earth_system_common.py,
 food_insecurity_generator.py, scenarios_* at HEAD; western heatwave handoff
 v9; food insecurity design + build handoffs v2.

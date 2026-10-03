@@ -2053,6 +2053,45 @@ resident.
 (Moved down from the resident protocol on 2026-10-02 when
 v3.78 made a fourth entry.)
 
+v3.76 (October 1, 2026): No rule changed in this document. TWO
+skill bumps, one version each, for one build (L-395):
+provenance-discipline 2.23 -> 2.24 and interactive-exhibit 1.7 -> 1.8.
+THE ORRERY'S OBJECT LIST FEEDS THE WEBSITE.
+
+WHAT PROMPTED IT. The Solar System room's info panel had no description
+and no NASA link, and the website's object facts were typed by hand
+from the orrery's list. Tony's rulings of 2026-10-01: the website keeps
+copies written by a tool and checked (the constants pattern); each
+served entry gains a 'key' spelled as the website's slug; one
+description and one link per object, cleaned in the orrery; and
+"simple errors such as the Apophis naming discrepancy should be fixed
+and reported."
+
+WHAT THE SKILLS NOW SAY. provenance-discipline gains A Simple Error a
+Check Finds Is Fixed and Reported: what counts as simple, that the fix
+rides the same patch and is named, what comes to Tony instead, how a
+number in a served description is sourced or removed, and how this
+sits beside The Braid. interactive-exhibit records that a body's name,
+Horizons id, description and link on the website are copies written by
+tools/mirror_objects.py, and what the room's panel shows.
+
+THE BUILD. Orrery patch_L395_1 adds the key, export_objects.py and its
+check; gallery patch_L395_2 adds the pull, the mirror and its suite,
+and the panel's words and link.
+
+THE OBLIGATION TRAVELS. This session loaded 2.23 and 1.7. The next
+session confirms its loaded copies read provenance-discipline 2.24 and
+interactive-exhibit 1.8 before any provenance or exhibit work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.73 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-02 when
+v3.79 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

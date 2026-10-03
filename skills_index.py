@@ -59,6 +59,20 @@ Usage:
 Module created: July 2026 with Anthropic's Claude Fable 5 (L-097,
 collegial relay; spec by Claude Opus 4.6, integrated by Tony).
 
+Module updated: October 2, 2026 with Anthropic's Claude Opus 5.5
+(L-407: each skill's header is now also read as YAML, the way the
+Settings uploader reads it, and a header YAML refuses -- or one with no
+name or description as text -- is a CONSISTENCY PROBLEM naming the
+skill. On 2026-10-02 Settings refused interactive-exhibit 1.10 for
+"malformed YAML frontmatter" while this tool, reading the header by its
+own looser rules, built the manifest from it without complaint. PyYAML
+does the reading where it is installed; otherwise built-in rules check
+the faults that occur in these headers -- a bare second line, ": " or
+" #" inside an unquoted value, a value opening with a YAML indicator, an
+unclosed quote -- and the output says which of the two read them.
+orrery_maintenance_run.py runs this tool with --check as a checker, so
+a bad header fails the run.)
+
 Role: devtool
 Domain: dev_tools
 """
@@ -122,6 +136,100 @@ def parse_frontmatter(lines):
     return None, 0  # never saw the closing '---'
 
 
+def check_header(lines, label, loose=None):
+    """Read a skill's header the way the Settings uploader does: as YAML.
+
+    Returns ([problems], how), how naming what read it. PyYAML reads it
+    where it is installed. Without PyYAML, built-in rules check the
+    faults these headers have actually had; they are narrower than YAML,
+    and the report says so by naming them. L-407, 2026-10-02.
+    """
+    end = None
+    for i in range(1, len(lines)):
+        if lines[i].strip() == '---':
+            end = i
+            break
+    if end is None:
+        return [f"{label}: header has no closing '---'"], 'no header'
+    raw = lines[1:end]
+    try:
+        import yaml
+    except ImportError:
+        yaml = None
+    if yaml is not None:
+        try:
+            data = yaml.safe_load('\n'.join(raw))
+        except yaml.YAMLError as exc:
+            first = ' '.join(str(exc).split())[:120]
+            return [f"{label}: header is not valid YAML, so Settings will "
+                    f"refuse the file ({first})"], 'PyYAML'
+        problems = []
+        if not isinstance(data, dict):
+            problems.append(f"{label}: header is YAML but not a set of "
+                            f"'key: value' lines")
+        else:
+            for key in ('name', 'description'):
+                value = data.get(key)
+                if not isinstance(value, str) or not value.strip():
+                    problems.append(f"{label}: header has no {key} that "
+                                    f"YAML reads as text")
+            # A header can be valid YAML and still lose words: " #" in an
+            # unquoted value starts a comment, and the rest of the line is
+            # dropped without an error. provenance-discipline's
+            # description was read as its first 200 characters that way
+            # until 2026-10-02 (L-407).
+            for key, raw_value in (loose or {}).items():
+                value = data.get(key)
+                if (isinstance(value, str) and raw_value[:1] not in ('"', "'")
+                        and ' '.join(value.split()) != ' '.join(raw_value.split())):
+                    problems.append(f"{label}: YAML reads {key} as only its "
+                                    f"first {len(value)} characters of "
+                                    f"{len(raw_value)} -- ' #' starts a "
+                                    f"comment; quote the value")
+        return problems, 'PyYAML'
+    problems, entries = [], []
+    for n, line in enumerate(raw, 2):
+        if not line.strip():
+            continue
+        if line[0] in ' \t':
+            if entries:
+                entries[-1][1] += ' ' + line.strip()
+            else:
+                problems.append(f"{label}: header line {n} is indented "
+                                f"with no key above it")
+            continue
+        m = re.match(r'^([A-Za-z_][A-Za-z0-9_]*):(?: (.*))?$', line)
+        if not m:
+            problems.append(f"{label}: header line {n} is neither "
+                            f"'key: value' nor indented, so YAML reads it "
+                            f"as a broken key")
+            continue
+        entries.append([m.group(1), (m.group(2) or '').strip()])
+    for key, value in entries:
+        if value[:1] in ('"', "'"):
+            if len(value) < 2 or value[-1] != value[0]:
+                problems.append(f"{label}: {key} opens a quote it does not "
+                                f"close")
+            continue
+        bad = None
+        if ' #' in value:
+            bad = ("' #' inside an unquoted value, which YAML reads as the "
+                   "start of a comment")
+        elif ': ' in value or value.endswith(':'):
+            bad = "': ' inside an unquoted value"
+        elif value[:1] and value[:1] in '[]{},&*!|>%@`#':
+            bad = "an unquoted value starting with %r" % value[:1]
+        elif value[:2] in ('- ', '? '):
+            bad = "an unquoted value starting with %r" % value[:2]
+        if bad:
+            problems.append(f"{label}: {key} has {bad}; quote the value")
+    keys = [e[0] for e in entries]
+    for key in ('name', 'description'):
+        if key not in keys:
+            problems.append(f"{label}: header has no {key}")
+    return problems, 'built-in rules (PyYAML is not installed)'
+
+
 def first_sentence(text, limit=FALLBACK_TRUNC):
     """First sentence of a description, truncated to ~limit chars (option
     (b) fallback when fires_when is absent)."""
@@ -145,6 +253,8 @@ def parse_skill(skill_dir):
     fm, body_start = parse_frontmatter(lines)
     if fm is None:
         return None, [f"{skill_dir.name}: missing/unterminated frontmatter"], warnings
+    header_problems, header_how = check_header(lines, skill_dir.name, fm)
+    problems.extend(header_problems)
 
     name = fm.get('name', '').strip()
     if not name:
@@ -181,7 +291,8 @@ def parse_skill(skill_dir):
                         f"{NAME_COL_WIDTH - 1}-char name column, table will "
                         f"mis-align")
 
-    return {'name': name, 'version': version, 'fires_when': fires}, problems, warnings
+    return ({'name': name, 'version': version, 'fires_when': fires,
+             'header_how': header_how}, problems, warnings)
 
 
 def check(records, problems):
@@ -331,6 +442,8 @@ def main():
     problems = check(records, problems)
     problems = check_annotation_examples(skills_dir, problems)
 
+    hows = sorted(set(r.get('header_how', '?') for r in records))
+    print(f"Headers: {len(records)} read as YAML by {', '.join(hows)}.")
     if problems:
         print("CONSISTENCY PROBLEMS:")
         for p in problems:

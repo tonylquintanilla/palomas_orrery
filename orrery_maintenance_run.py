@@ -228,6 +228,12 @@ CHECKERS = [
     # gallery serves the count. The same script as the Exact rows report
     # generator, run with --check so its failure fails this run; as a
     # generator its exit code would not count. L-322 Stage D, patch D15.
+    # L-407 (2026-10-02): every skill's header read as YAML, the way the
+    # Settings uploader reads it, plus the tool's own consistency checks.
+    # The same script as the Skill manifest generator, run with --check
+    # so its failure fails this run; as a generator its exit code would
+    # not count, which is how a header Settings refused passed 19 of 19.
+    ('Skill headers', ['skills_index.py', '--check'], 'OK:'),
     ('Exact rows by the count', ['exact_rows_report.py', '--check'],
      'EXACT ROWS BY THE COUNT:'),
     # Each derived row's unit follows from its arithmetic, by astropy

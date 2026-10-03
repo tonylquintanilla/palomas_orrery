@@ -8,7 +8,7 @@ Rebuilt by `exact_rows_report.py` on every orrery maintenance run. An exact row 
 - 27 exact rows in `constants_new.py`.
 - 8 printed by at least one display: `SUN_RADIUS_KM`, `EARTH_LEO_UPPER_ALTITUDE_KM`, `EARTH_LEO_LOWER_ALTITUDE_KM`, `EARTH_VAN_ALLEN_OUTER_RADII`, `EARTH_SOLAR_WIND_PRESSURE_NPA`, `EARTH_SOLAR_WIND_BZ_NT`, `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG`, `EARTH_BOW_SHOCK_CUT_ANGLE_DEG`.
 - 19 printing lines: 9 in the orrery, 10 in the gallery.
-- Gallery pointers to exact rows with no PRINTS entry (NOT FOLLOWED): 0.
+- Gallery pointers to exact rows with no PRINTS entry (NOT FOLLOWED): 2: `GALACTIC_NORTH_POLE_RA_J2000_DEG` at `/objects/0/features/oort_cloud/galactic_tide/galactic_pole/ra`, `GALACTIC_NORTH_POLE_DEC_J2000_DEG` at `/objects/0/features/oort_cloud/galactic_tide/galactic_pole/dec`.
 - Gallery pointers to exact rows read only to place a drawing (DRAWN, not printed): 8: `SUN_RADIUS_KM`, `DE430_TERRESTRIAL_POSITION_PLACE_KM`, `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`, `EARTH_MAGNETOTAIL_DRAWN_END_RADII`, `EARTH_POLE_RA_J2000_DEG`, `EARTH_POLE_DEC_J2000_DEG`, `DE430_JUPITER_SATURN_POSITION_PLACE_KM`, `DE430_URANUS_NEPTUNE_PLUTO_POSITION_PLACE_KM`.
 - PRINTS or DRAWN entries that no longer match a pointer or their line (BROKEN): 0.
 
@@ -35,43 +35,43 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 - orrery `earth_visualization_shells.py` line 1520: `f"Altitude range: {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=True)} km to {exact_tex...`
 - orrery `shell_configs.py` line 2359: `f"Low Earth Orbit (LEO) is the region from roughly {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM',...`
-- gallery `gallery/feature_renderers.js` line 2170 (config `/objects/1/features/earth_orbital_zones/leo_outer/altitude`): `kmAndAu(km.altitudeKm, km.altitudeFigures)) + "<br>";`
+- gallery `gallery/feature_renderers.js` line 2207 (config `/objects/1/features/earth_orbital_zones/leo_outer/altitude`): `kmAndAu(km.altitudeKm, km.altitudeFigures)) + "<br>";`
 
 ### `EARTH_LEO_LOWER_ALTITUDE_KM`
 
 - orrery `earth_visualization_shells.py` line 1520: `f"Altitude range: {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=True)} km to {exact_tex...`
 - orrery `shell_configs.py` line 2359: `f"Low Earth Orbit (LEO) is the region from roughly {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM',...`
-- gallery `gallery/feature_renderers.js` line 2170 (config `/objects/1/features/earth_orbital_zones/leo_inner/altitude`): `kmAndAu(km.altitudeKm, km.altitudeFigures)) + "<br>";`
+- gallery `gallery/feature_renderers.js` line 2207 (config `/objects/1/features/earth_orbital_zones/leo_inner/altitude`): `kmAndAu(km.altitudeKm, km.altitudeFigures)) + "<br>";`
 
 ### `EARTH_VAN_ALLEN_OUTER_RADII`
 
 - orrery `earth_visualization_shells.py` line 1299: `f"ring is the flux peak, L = {exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} -- about {_km_above_...`
 - orrery `earth_visualization_shells.py` line 1305: `f"the L = {_band_low} to {_band_high} band; the drawn {exact_text('EARTH_VAN_ALLEN_OUTER_RADI...`
 - orrery `shell_configs.py` line 2348: `f"{exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} Earth radii out (doi:10.1029/2024JA033504).\n"`
-- gallery `gallery/feature_renderers.js` line 1265 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `? wrapHover("Drawn at " + fmtServed(distances[i], counts[i], 1) +`
-- gallery `gallery/feature_renderers.js` line 1272 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `: "Drawn at " + fmtServed(distances[i], counts[i], 1) + " " +`
-- gallery `gallery/feature_renderers.js` line 1275 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `? SOFT_BR + "(given as L = " + fmtServed(distances[i], counts[i], 1) +`
-- gallery `gallery/feature_renderers.js` line 1279 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `kmAndAu(distances[i] * radiusKm,`
+- gallery `gallery/feature_renderers.js` line 1273 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `? wrapHover("Drawn at " + fmtServed(distances[i], counts[i], 1) +`
+- gallery `gallery/feature_renderers.js` line 1280 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `: "Drawn at " + fmtServed(distances[i], counts[i], 1) + " " +`
+- gallery `gallery/feature_renderers.js` line 1283 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `? SOFT_BR + "(given as L = " + fmtServed(distances[i], counts[i], 1) +`
+- gallery `gallery/feature_renderers.js` line 1287 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `kmAndAu(distances[i] * radiusKm,`
 
 ### `EARTH_SOLAR_WIND_PRESSURE_NPA`
 
 - orrery `earth_visualization_shells.py` line 970: `f"Sun-facing side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_...`
 - orrery `earth_visualization_shells.py` line 1153: `f"side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_NPA')} nPa....`
 - orrery `earth_visualization_shells.py` line 1237: `f"Sun-facing side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_...`
-- gallery `gallery/feature_renderers.js` line 2433 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/pressure`): `" nT, dynamic pressure " + fmtServed(dp, servedFigures(mpS.pressure), 1) +`
-- gallery `gallery/feature_renderers.js` line 2648 (config `/objects/1/features/earth_magnetosphere/bow_shock/surface/pressure`): `fmtServed(bsP, servedFigures(bsS.pressure), 1) +`
+- gallery `gallery/feature_renderers.js` line 2470 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/pressure`): `" nT, dynamic pressure " + fmtServed(dp, servedFigures(mpS.pressure), 1) +`
+- gallery `gallery/feature_renderers.js` line 2685 (config `/objects/1/features/earth_magnetosphere/bow_shock/surface/pressure`): `fmtServed(bsP, servedFigures(bsS.pressure), 1) +`
 
 ### `EARTH_SOLAR_WIND_BZ_NT`
 
-- gallery `gallery/feature_renderers.js` line 2432 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/bz`): `"Bz " + fmtServed(bz, servedFigures(mpS.bz), 1) +`
+- gallery `gallery/feature_renderers.js` line 2469 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/bz`): `"Bz " + fmtServed(bz, servedFigures(mpS.bz), 1) +`
 
 ### `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG`
 
-- gallery `gallery/feature_renderers.js` line 2435 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/cut_angle`): `"Drawn to " + fmtServed(mpCut, servedFigures(mpS.cut_angle), 0) +`
+- gallery `gallery/feature_renderers.js` line 2472 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/cut_angle`): `"Drawn to " + fmtServed(mpCut, servedFigures(mpS.cut_angle), 0) +`
 
 ### `EARTH_BOW_SHOCK_CUT_ANGLE_DEG`
 
-- gallery `gallery/feature_renderers.js` line 2650 (config `/objects/1/features/earth_magnetosphere/bow_shock/surface/cut_angle`): `"Drawn to " + fmtServed(bsCut, servedFigures(bsS.cut_angle), 0) +`
+- gallery `gallery/feature_renderers.js` line 2687 (config `/objects/1/features/earth_magnetosphere/bow_shock/surface/cut_angle`): `"Drawn to " + fmtServed(bsCut, servedFigures(bsS.cut_angle), 0) +`
 
 ## Printed to a terminal only
 
@@ -86,9 +86,9 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
 - `KM_PER_AU`: named on 215 other orrery line(s).
 - `S_PER_HOUR`: named on 0 other orrery line(s).
 - `EARTH_POLE_RA_J2000_DEG`: named on 6 other orrery line(s).
-  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 749 (config `/objects/1/features/orientation/pole/ra`): `var ra = measured(pole.ra, "deg", slug + "/orientation/pole/ra", warn);`
+  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 757 (config `/objects/1/features/orientation/pole/ra`): `var ra = measured(pole.ra, "deg", slug + "/orientation/pole/ra", warn);`
 - `EARTH_POLE_DEC_J2000_DEG`: named on 6 other orrery line(s).
-  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 750 (config `/objects/1/features/orientation/pole/dec`): `var dec = measured(pole.dec, "deg", slug + "/orientation/pole/dec", warn);`
+  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 758 (config `/objects/1/features/orientation/pole/dec`): `var dec = measured(pole.dec, "deg", slug + "/orientation/pole/dec", warn);`
 - `ARCSEC_PER_DEG`: named on 0 other orrery line(s).
 - `EARTH_OBLIQUITY_J2000_ARCSEC`: named on 0 other orrery line(s).
 - `EARTH_OBLIQUITY_J2000_DEG`: named on 7 other orrery line(s).
@@ -98,9 +98,9 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
 - `DEG_PER_RAD`: named on 0 other orrery line(s).
 - `EARTH_SOLAR_WIND_SPEED_KM_S`: named on 0 other orrery line(s).
 - `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`: named on 3 other orrery line(s).
-  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2476 (config `/objects/1/features/earth_magnetosphere/magnetotail/drawn_radius`): `var tailRadius = measured(tl.drawn_radius, "r_earth",`
+  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2513 (config `/objects/1/features/earth_magnetosphere/magnetotail/drawn_radius`): `var tailRadius = measured(tl.drawn_radius, "r_earth",`
 - `EARTH_MAGNETOTAIL_DRAWN_END_RADII`: named on 3 other orrery line(s).
-  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2478 (config `/objects/1/features/earth_magnetosphere/magnetotail/drawn_end`): `var tailEnd = measured(tl.drawn_end, "r_earth", tlWhere + "/drawn_end",`
+  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2515 (config `/objects/1/features/earth_magnetosphere/magnetotail/drawn_end`): `var tailEnd = measured(tl.drawn_end, "r_earth", tlWhere + "/drawn_end",`
 - `DE430_TERRESTRIAL_POSITION_PLACE_KM`: named on 0 other orrery line(s).
   - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 82 (config `/objects/1/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
   - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 83 (config `/objects/1/position_accuracy`): `v = node.value;`
