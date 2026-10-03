@@ -20,20 +20,20 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20261003T030505Z | `94ff6c6` | 143 | 1088 | 297 | 670 | 119 | 2 |
 | 20261003T024721Z | `5e42b00` | 143 | 1088 | 297 | 670 | 119 | 2 |
 | 20261002T201132Z | `bb1b131` | 143 | 1085 | 296 | 668 | 119 | 2 |
 | 20261002T165659Z | `b3cfc78` | 144 | 1085 | 296 | 668 | 119 | 2 |
 | 20261002T034537Z | `feb5e36` | 143 | 1085 | 296 | 668 | 119 | 2 |
 | 20261002T022238Z | `6b2ef09` | 142 | 1085 | 296 | 668 | 119 | 2 |
-| 20261001T201738Z | `c12994d` | 141 | 1085 | 296 | 669 | 118 | 2 |
 
-Change since the previous run: total +3, Tier-1 +1.
+Change since the previous run: total +0, Tier-1 +0.
 
 Tier-1 rose in these files:
 
 | File | Before | After |
 |------|-------:|------:|
-| patch_L406_1_galactic_tide_orrery_20261002.py | 0 | 1 |
+| patch_L406_3_skill_frontmatter_20261002.py | 0 | 1 |
 
 ---
 
@@ -148,7 +148,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `worksheet_request_builder.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `orbital_elements.py` | orrery | 1 | 0 | 0 | 0 | 1 |
-| `patch_L406_1_galactic_tide_orrery_20261002.py` | orrery | 1 | 0 | 0 | 0 | 1 |
+| `patch_L406_3_skill_frontmatter_20261002.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `data_acquisition.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `exoplanet_orbits.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `fetch_paleoclimate_data.py` | earth_science | 1 | 0 | 0 | 0 | 1 |
@@ -192,7 +192,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 - `export_constants.py`
 - `export_objects.py`
 - `orrery_maintenance_run.py`
-- `patch_L406_1_galactic_tide_orrery_20261002.py`
+- `patch_L406_3_skill_frontmatter_20261002.py`
 - `test_dimensions.py`
 - `worksheet_checker.py`
 - `worksheet_key_aliases.py`
@@ -625,11 +625,11 @@ is planned for a future session.
 | 2197 | string | display string @ line 2197 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2332 | string | display string @ line 2332 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 
-### patch_L406_1_galactic_tide_orrery_20261002.py
+### patch_L406_3_skill_frontmatter_20261002.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 70 | dict | BASE[...] | (7 entries) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
+| 49 | dict | BASE[...] | (2 entries) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
 
 ### planet_visualization_utilities.py
 

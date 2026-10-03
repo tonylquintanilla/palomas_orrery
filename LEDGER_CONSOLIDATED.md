@@ -429,7 +429,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*244 live items; 229 need attention (`!`); 188 RICE-scored; 157 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*245 live items; 230 need attention (`!`); 188 RICE-scored; 157 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -584,6 +584,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-406 | The galactic tide drawn in the galaxy's plane (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-02 |
+| ! | L-407 | A skill's header is not checked as YAML (orrery, skills) | OPEN | -- | 2026-10-02 |
 
 ### B. Pending Action (Tony-side)
 
@@ -921,6 +922,27 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-407] A skill's header is not checked as YAML (orrery, skills)
+<!-- L:407 status:OPEN upd:2026-10-02 section:A flag: rice: -->
+- **Found 2026-10-02** when Settings refused interactive-exhibit 1.10
+  with "malformed YAML frontmatter" (L-406). `skills_index.py` reads
+  each skill's header to build the manifest, and read the broken one
+  without complaint, so the maintenance run passed a skill that could
+  not be installed: a check that cannot fail on the one fault the
+  install step enforces.
+- **The same check finds a second, older case:**
+  `skills/earth-system-pipeline/SKILL.md` has ": " inside its
+  description ("displacement): the restraint discipline"), which strict
+  YAML refuses. Its installed copy matches the repo, so Settings
+  accepted it once, under whatever parser it had then. It loads today;
+  a reinstall may fail. Left as it is, since changing it means a
+  reinstall of a skill nothing else is touching.
+**Gap:** Make `skills_index.py` parse each header as YAML and fail the
+run, naming the skill, when one does not parse or lacks name and
+description; fix earth-system-pipeline's description in the same patch
+(quote it), with Tony's reinstall.
+**Ref:** L-406; `skills_index.py`; `skills/*/SKILL.md`.
+
 #### [L-406] The galactic tide drawn in the galaxy's plane (orrery + gallery, the Sun's slice)
 <!-- L:406 status:OPEN upd:2026-10-02 section:A flag: rice: -->
 - **Found 2026-10-02**, sorting the Sun room's 43 unlinked numbers
@@ -969,8 +991,18 @@ as an archive of the prioritization thinking -- no cleanup on close.
 - **Fixed in passing, reported:** the Sun's `_comment` in
   `data/objects_config.json` said the custom geometry is "NOT here";
   all four shapes have been there since L-234.
-**Gap:** Tony: run patch 1, run `orrery_maintenance_run.py`, commit and
-push the orrery; then patch 2, the cache builder, and
+- **Patch 1 ran and was pushed at orrery 94ff6c68, 19 of 19 gating.**
+  The reinstall of interactive-exhibit 1.10 then FAILED: Settings
+  refused the file with "malformed YAML frontmatter". Claude's patch
+  put the new fires_when words on a line of their own, and YAML reads a
+  bare second line as a broken key. Nothing in the run could see it:
+  skills_index.py rebuilt the manifest from the same header without
+  complaint (L-407). Fixed by `patch_L406_3_skill_frontmatter_20261002.py`,
+  which puts the words back on the one line; checked by parsing every
+  skill's header as YAML. The version stays 1.10, since 1.10 never
+  loaded anywhere.
+**Gap:** Tony: run patch 3, run `orrery_maintenance_run.py`, commit and
+push the orrery, and reinstall interactive-exhibit 1.10; then patch 2, the cache builder, and
 `gallery_maintenance_run.py`, commit and push the gallery; then look at
 the tide on the phone (Mode 5). The next session confirms its loaded
 interactive-exhibit reads 1.10.
