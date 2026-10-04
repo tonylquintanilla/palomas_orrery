@@ -555,7 +555,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-368 | Other bodies' typed poles disagree with their cited table or cite a withdrawn report (orrery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-369 | Earth's obliquity typed outside constants_new.py (orrery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-370 | Jupiter and Saturn numbers typed only in objects_config.json (gallery, store) | OPEN | -- | 2026-09-28 |
-| ! | L-371 | The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice) | OPEN | -- | 2026-10-02 |
+| ! | L-371 | The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice) | OPEN | -- | 2026-10-03 |
 | ! | L-372 | Two drawing settings live in constants_new.py (orrery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-373 | A unit conversion by a bare number inside a constants_new.py expression (store) | OPEN | -- | 2026-09-28 |
 | ! | L-374 | Showing Earth's precession over time (orrery, idea) | OPEN | -- | 2026-09-28 |
@@ -950,6 +950,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
   and the push gate. Both descriptions are quoted; versions 1.2 and
   2.25, no rule changed. interactive-exhibit's header was put back on
   one line by patch_L406_3 (pushed at 81e19ef), still 1.10.
+- **patch_L407_2 ran and was pushed at orrery fd508f9.**
 **Gap:** Tony reinstalls interactive-exhibit, earth-system-pipeline and
 provenance-discipline and replaces the Project's instructions with
 v3.79. The next session confirms its loaded copies read 1.10, 1.2 and
@@ -1018,6 +1019,12 @@ or reviewing", then closes this item.
   loaded anywhere.
 - **Patch 3 pushed at orrery 81e19ef; gallery patch_L406_2 and the
   cache rebuild pushed at gallery 6ba42f02.**
+- **Seen on the phone, 2026-10-03:** Tony, of the tide's hover and
+  panel: "The text looks right." The visual pattern -- an X tilted
+  about 60 degrees against the Hills torus -- is not yet reported.
+- **Cross-check:** Portegies Zwart et al. 2021 (A&A 652, A144, sec.
+  3.2) set the ecliptic at 60 degrees to the Galactic plane; the
+  redrawn tide's stored pole gives 60.19 degrees.
 **Gap:** Tony: reinstall interactive-exhibit 1.10, and look at the tide
 on the phone and in the orrery (Mode 5). The next session confirms its
 loaded interactive-exhibit reads 1.10.
@@ -1641,7 +1648,7 @@ is in the orrery) "photosphere + 10%"
 **Ref:** `constants_new.py`; `palomas_orrery.py`; `palomas_orrery_helpers.py`.
 
 #### [L-371] The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice)
-<!-- L:371 status:OPEN upd:2026-10-02 section:A flag: rice: -->
+<!-- L:371 status:OPEN upd:2026-10-03 section:A flag: rice: -->
 - **Found 2026-09-22 and 2026-09-28.** In `data/objects_config.json`
   the Sun carries 43 numbers with no link to a store row, not yet sorted
   into measurements and drawing choices (manifest section 2.6). [per
@@ -1676,7 +1683,29 @@ is in the orrery) "photosphere + 10%"
   rows and a sourced shape. Fifteen eyeballed numbers remain in the
   streamer belt, the torus and the clumps, to be taken one drawing at a
   time, each needing its own source hunt.
-**Gap:** The Sun's slice, second half: the numbers already linked -- L-386's rows stored in another unit, and the radius lines that print with no count. Then the fifteen eyeballed shape numbers, one drawing at a time.
+- **The Sun's distance cards, 2026-10-03.** Tony, on the phone: the
+  km do not follow the figures rule ("= 299,195,741,400 km (2.00e+3
+  AU)"). 18 lines on 15 cards. km at every digit from an AU row (6):
+  Termination Shock, Heliopause, Inner Limit of Oort Cloud, Inner Oort
+  Cloud, Outer Oort Cloud, Gravitational Influence, each with its AU in
+  scientific form. km at every digit from solar radii (6 lines, 5
+  cards): Streamer Belt (two), Inner Corona, Roche Limit (Comets),
+  Alfven Surface, Outer Corona. AU as typed and km at three figures
+  (6 lines, 3 cards): Hills Cloud torus, Outer Oort clumps, Galactic
+  Tide. Cause: the 11 rows behind them carry no figure count, and 10
+  have no Unit line, so they are not exported.
+- **Sources read and Tony's rulings, 2026-10-02/03:** recorded in full
+  in `documentation/HANDOFF_L406_L407_L371_session_20261003.md`,
+  section 3 -- each row's source, what it prints, its figure count;
+  ruling A (draw one end of a range and say so, built by the skill's
+  range rule); the approved notes; Gravitational Influence as the
+  Sun's Hill radius, 0.65 pc (Portegies Zwart et al. 2021), on Tony's
+  correction that a Hill sphere is calculated, not chosen.
+**Gap:** Build the distance cards as the handoff's section 3 says: the
+orrery rows (with L-386's two re-homes, the Heliopause to 121 AU and
+Gravitational Influence to 0.65 pc), the orrery hovers by count, then
+the gallery's notes, mirror and cache. Then the fifteen eyeballed shape
+numbers, one drawing at a time.
 **Ref:** gallery `data/objects_config.json`; gallery `gallery/feature_renderers.js`; L-322 Gap (3); L-345.
 
 #### [L-370] Jupiter and Saturn numbers typed only in objects_config.json (gallery, store)

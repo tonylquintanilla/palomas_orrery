@@ -1,24 +1,28 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, rewritten in place; read it at the end of every session. -->
 # Where We Are
 
-Last updated: October 2, 2026, end of session
-- Written at orrery bb1b1314 and gallery 0ffa4518.
+Last updated: October 3, 2026, end of session
+- Written at orrery fd508f9c and gallery 52659e04.
 
 > **READ THIS FIRST**
 >
 > **Changed this session:**
-> - The Solar System room's drawer is on the website, and your phone
->   check passed nearly everything.
-> - The room opens on the four inner planets, set in the editor, which
->   now lists every room.
-> - The room frames where each body is now, plus 20%: your ruling.
-> - Two skills and the protocol are updated for this work.
+> - The Sun room's galactic tide is now drawn in the galaxy's plane,
+>   sparse at that plane and at its poles. Its words are new, and you
+>   saw them right on the phone.
+> - Every skill's header is now checked the way Settings reads it.
+>   Three were broken; one of them had been cutting
+>   provenance-discipline's description short.
+> - The sources for the Sun's distance cards are read, and you ruled on
+>   how to show the ones given as a range.
 >
 > **Do next:**
-> - *The Sun's numbers get the same checking Earth's got.*
+> - *Build the Sun's distance cards so every number prints at its
+>   source's figures.*
 >
 > **Needs you now:**
-> - *Nothing. At the next design talk: what Home should do.*
+> - *If not done yet: reinstall the three skills and the v3.79
+>   instructions, and look for the tide's X on the phone.*
 
 How to read the marks:
 - *Italic* lines are the must-reads.
@@ -50,9 +54,12 @@ How to read the marks:
               website, and nothing is typed twice.
   4. [NOW]    The Solar System room becomes a second way in: all the
               planets, a drawer to pick them, and a way into each
-              body's own room. << new this session: built and on the
-              website; what Home does is still to settle.
-  5. [next]   *The Sun's numbers get the same checking Earth's got.*
+              body's own room. Built and on the website; what Home
+              does is still to settle.
+  5. [NOW]    *The Sun's numbers get the same checking Earth's got.*
+              << new this session: begun. The 43 drawing numbers are
+              sorted, the galactic tide is redrawn, and the distance
+              cards' sources are read; the build is next.
   6. [next]   The Solar System room's card becomes the top featured
               card in the lobby. A bare interactive.html link opens
               the Solar System room, and the Explorer gets its own
@@ -71,65 +78,60 @@ How to read the marks:
 
 ## Right now  **>> UPDATED THIS SESSION**
 
-- The Solar System room opens on the Sun and the four inner planets,
-  with Earth named on the closed drawer.
-- Its drawer is live: the Sun's row is fixed, rows open with "Enter
-  the Sun room" or "Enter the Earth room", Apophis waits under See
-  more, and a tap on a body finds its row.
-- The view holds every body drawn, where it is now, plus 20%. Pluto's
-  orbit runs past the edge until you press -.
-- Home works, but falling back to an earlier body shows no visible
-  change. That is the open design question below.
-- Each body's info panel shows a description and a NASA link, copied
-  from the orrery's own object list.
-- The editor can set what any room opens on. It cannot yet change the
-  words on the Solar System room's rows, such as Pluto's sentence.
-- The rest of the orrery's objects are not connected yet.
+- The galactic tide is live, tilted into the galaxy's plane. It is
+  drawn between 20,000 and 100,000 AU, the outer Oort cloud's edges.
+- Fourteen other Sun cards print their km with every digit, such as
+  299,195,741,400 km for 2,000 AU. The rows behind them do not yet say
+  how many figures their sources give.
+- The maintenance run now fails if a skill's header would be refused
+  by Settings: 20 checks where there were 19.
+- The Solar System room and its drawer are as they were: Home still
+  shows no visible change when it falls back to an earlier body.
 
 ## The next three steps  **>> UPDATED THIS SESSION**
 
-1. *The Sun's numbers get the same checking Earth's got.*
-2. The drawer's small fixes:
-   - The info panel's two paragraphs become bullet lists, as you
-     asked.
-   - One sentence in the room's settings still says the view fits
-     1.1 times what is drawn; it is 1.2 now.
-   - You look again at an opened row on the phone: does the drawer
-     still fit and scroll, and is "Enter" easy to hit?
+1. *The Sun's distance cards, built:*
+   - Each distance row gets its source's figure count, so the km print
+     at that count.
+   - Where a source gives a range, the card draws one end and says so,
+     as you ruled: for example "Thought to lie between 2,000 and 5,000
+     AU; drawn at 2,000."
+   - The Heliopause moves to 121 AU, and Gravitational Influence to
+     0.65 parsecs: the Sun's Hill radius, calculated.
+2. The drawer's small fixes: the info panel's bullet lists, the 1.1
+   that should say 1.2, and your second look at an opened row.
 3. What Home should do, settled in conversation, then built.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
-Now:
-- Nothing.
+Now, if not done yet:
+- Reinstall three skills in Settings > Skills: interactive-exhibit,
+  earth-system-pipeline and provenance-discipline.
+- Replace the Project's instructions with PROJECT_INSTRUCTIONS.md
+  v3.79.
+- Look at the galactic tide on the phone: tick it and the Hills
+  torus, and turn the view until the tide shows an X tilted against
+  the torus.
 
 At the next design talk:
-- *Home.* My reading of your phone note: Home already names the last
-  body ticked, but it frames everything drawn, so falling back to an
-  earlier body only changes the name on the drawer's handle. You may
-  have expected Home to take the view to that body. Your idea: a
-  second Home tap returns to the opening view.
-- Moving the highlighted row to the top of the list. The list is now
-  in order outward from the Sun, so this changes that order.
-- An arrow from GO's text box to its body. On a phone held upright the
-  text box has no arrow and sits mid-view, by your earlier ruling, so
-  this would change that ruling.
+- *Home.* Home names the last body ticked but frames everything drawn,
+  so falling back only changes the name on the drawer's handle. Your
+  idea: a second Home tap returns to the opening view.
+- Moving the highlighted row to the top of the list.
+- An arrow from GO's text box to its body.
 
 Not urgent, in your order:
 1. The full check of the orrery's object list against JPL Horizons.
-   - Its first run lists what disagrees; simple errors get fixed and
-     listed, the rest come to you.
 2. Whether the editor should also edit the words on the Solar System
-   room's rows, such as Pluto's sentence.
-   - Today a change to them comes as a patch from a session.
-3. Choosing a date, and animation, your idea of October 1.
-   - The range would follow only the bodies you tick.
+   room's rows.
+3. Choosing a date, and animation.
 
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item, done and open: `LEDGER_CONSOLIDATED.md`
-  - This session: L-404 (done), L-405, and the newest notes on L-363.
+  - This session: L-406 (the tide), L-407 (skill headers), L-405
+    (done), and the newest notes on L-371 (the Sun's numbers).
 - The reasoning behind the order:
   `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`
 - The latest session record:
-  `documentation/HANDOFF_L363_L404_L405_session_20261002.md`
+  `documentation/HANDOFF_L406_L407_L371_session_20261003.md`

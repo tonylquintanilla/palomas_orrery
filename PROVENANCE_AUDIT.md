@@ -2,9 +2,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: October 03, 2026
-Files scanned: 143
-Total findings: 1088
-Constants: 167 | Dicts: 45 | Display strings: 876
+Files scanned: 146
+Total findings: 1091
+Constants: 167 | Dicts: 48 | Display strings: 876
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,20 +20,22 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20261004T003952Z | `fd508f9` | 146 | 1091 | 299 | 671 | 119 | 2 |
 | 20261003T141508Z | `0a5eea0` | 143 | 1088 | 297 | 670 | 119 | 2 |
 | 20261003T030505Z | `94ff6c6` | 143 | 1088 | 297 | 670 | 119 | 2 |
 | 20261003T024721Z | `5e42b00` | 143 | 1088 | 297 | 670 | 119 | 2 |
 | 20261002T201132Z | `bb1b131` | 143 | 1085 | 296 | 668 | 119 | 2 |
 | 20261002T165659Z | `b3cfc78` | 144 | 1085 | 296 | 668 | 119 | 2 |
-| 20261002T034537Z | `feb5e36` | 143 | 1085 | 296 | 668 | 119 | 2 |
 
-Change since the previous run: total +0, Tier-1 +0.
+Change since the previous run: total +3, Tier-1 +2.
 
 Tier-1 rose in these files:
 
 | File | Before | After |
 |------|-------:|------:|
-| patch_L407_2_skill_headers_20261002.py | 0 | 1 |
+| patch_L371_session_close_20261003.py | 0 | 1 |
+| patch_L408_L363_phone_rulings_20261003.py | 0 | 1 |
+| patch_L408_galactic_plane_note_20261003.py | 0 | 1 |
 
 ---
 
@@ -64,8 +66,8 @@ Tier-1 rose in these files:
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 297 |
-| 2 | 10-15 | REVIEW | 670 |
+| 1 | 16-20 | FIX NOW | 299 |
+| 2 | 10-15 | REVIEW | 671 |
 | 3 | 5-9 | LOW PRIORITY | 119 |
 | 4 | 1-4 | LOWEST PRIORITY | 2 |
 
@@ -141,6 +143,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `palomas_orrery.py` | orrery | 0 | 0 | 3 | 0 | 3 |
 | `provenance_history.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
 | `exoplanet_systems.py` | stars | 0 | 0 | 3 | 0 | 3 |
+| `patch_L371_session_close_20261003.py` | orrery | 1 | 1 | 0 | 0 | 2 |
 | `energy_imbalance.py` | earth_science | 1 | 1 | 0 | 0 | 2 |
 | `plot_data_report_widget.py` | utilities | 2 | 0 | 0 | 0 | 2 |
 | `sgr_a_visualization_animation.py` | orrery | 1 | 0 | 1 | 0 | 2 |
@@ -148,7 +151,8 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `worksheet_request_builder.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `orbital_elements.py` | orrery | 1 | 0 | 0 | 0 | 1 |
-| `patch_L407_2_skill_headers_20261002.py` | orrery | 1 | 0 | 0 | 0 | 1 |
+| `patch_L408_L363_phone_rulings_20261003.py` | orrery | 1 | 0 | 0 | 0 | 1 |
+| `patch_L408_galactic_plane_note_20261003.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `data_acquisition.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `exoplanet_orbits.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `fetch_paleoclimate_data.py` | earth_science | 1 | 0 | 0 | 0 | 1 |
@@ -177,7 +181,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 50 | 134 | 553 | 72 | 2 | 761 |
+| Orrery (solar system + orbital mechanics) | 52 | 136 | 554 | 72 | 2 | 764 |
 | Earth System | 13 | 149 | 75 | 2 | 0 | 226 |
 | Stars (stellar neighborhood) | 11 | 12 | 42 | 6 | 0 | 60 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 39 | 0 | 39 |
@@ -192,7 +196,9 @@ Same data again, grouped by subject-matter domain rather than by individual file
 - `export_constants.py`
 - `export_objects.py`
 - `orrery_maintenance_run.py`
-- `patch_L407_2_skill_headers_20261002.py`
+- `patch_L371_session_close_20261003.py`
+- `patch_L408_L363_phone_rulings_20261003.py`
+- `patch_L408_galactic_plane_note_20261003.py`
 - `test_dimensions.py`
 - `worksheet_checker.py`
 - `worksheet_key_aliases.py`
@@ -625,11 +631,23 @@ is planned for a future session.
 | 2197 | string | display string @ line 2197 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2332 | string | display string @ line 2332 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 
-### patch_L407_2_skill_headers_20261002.py
+### patch_L371_session_close_20261003.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 71 | dict | BASE[...] | (7 entries) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
+| 43 | dict | BASE[...] | (2 entries) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
+
+### patch_L408_L363_phone_rulings_20261003.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 62 | dict | BASE[...] | (3 entries) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
+
+### patch_L408_galactic_plane_note_20261003.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 43 | dict | BASE[...] | (3 entries) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
 
 ### planet_visualization_utilities.py
 
@@ -1397,6 +1415,12 @@ is planned for a future session.
 | 2303 | string | display string @ line 2303 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2341 | string | display string @ line 2341 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2416 | string | display string @ line 2416 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+
+### patch_L371_session_close_20261003.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 591 | dict | NEW_FILES[...] | (1 entry) | 3 | 5 | **15** | Cited, not independently cross-checked | UNDETERMINED -- could not be classified |
 
 ### planet9_visualization_shells.py
 

@@ -11,24 +11,30 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 143  
-**Total Lines of Code (non-blank):** 114,690  
-**Total Public Functions/Classes:** 1,292
+**Total Python Files:** 146  
+**Total Lines of Code (non-blank):** 116,134  
+**Total Public Functions/Classes:** 1,298
 
 ## Classification Coverage
 
-**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (9).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L407_2_skill_headers_20261002.py`
+- `patch_L371_session_close_20261003.py`
+- `patch_L405_handoff_20261002.py`
+- `patch_L408_L363_phone_rulings_20261003.py`
+- `patch_L408_galactic_plane_note_20261003.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (1).** No valid `Domain:` tag.
+**Undetermined domain (4).** No valid `Domain:` tag.
 
-- `patch_L407_2_skill_headers_20261002.py`
+- `patch_L371_session_close_20261003.py`
+- `patch_L405_handoff_20261002.py`
+- `patch_L408_L363_phone_rulings_20261003.py`
+- `patch_L408_galactic_plane_note_20261003.py`
 
 
 ---
@@ -245,7 +251,10 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L407_2_skill_headers_20261002.py` | - ORRERY repo. A skill's header is read as YAML, the way Settings reads it, and the two headers that still fail are fixed. (952 lines) |
+| `patch_L371_session_close_20261003.py` | - ORRERY repo. Closes the session of 2026-10-02/03: the session record, Where We Are, and the ledger's notes on L-406, L-407 and L-371. (1,402 lines) |
+| `patch_L405_handoff_20261002.py` | - ORRERY repo. Adds the session handoff of 2026-10-02 and points Where We Are at it. (426 lines) |
+| `patch_L408_L363_phone_rulings_20261003.py` | - ORRERY repo. Records what Tony settled from his phone on 2026-10-03, after the session closed: the Galactic Plane toggle and its approved words (L-408), the tide's look moved into that build (L-406), Home and the lobby's Solar System card (L-363). Noth... (344 lines) |
+| `patch_L408_galactic_plane_note_20261003.py` | - ORRERY repo. Records Tony's last request of the session: a Galactic Plane toggle in the Sun room, for the next session to build (L-408). (224 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |
