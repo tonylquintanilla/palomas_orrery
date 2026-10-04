@@ -33,6 +33,11 @@ feature the shell dispatch draws, not only the sphere shells, so a
 rotation axis or dipole cone that reaches past the outermost shell is no
 longer cut off with its hover marker, and the Sun direction arrow is
 fitted inside the cube. Tony's ruling, 2026-09-23.)
+Module updated: October 3, 2026 with Anthropic's Claude Opus 5.5 (L-371:
+the manual-scale tooltip prints the Sun's distances from their rows at
+their counts -- the termination shock at 94.01 AU, the heliopause at
+121 AU where it typed 126, and the gravitational reach as the Sun's
+Hill radius, 134,000 AU, where it printed every digit.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -291,6 +296,8 @@ from constants_new import (
     PARKER_CLOSEST_RADII
 )
 
+# L-371: the Sun's distances printed from their rows at their counts.
+from constants_rows import row_text
 from info_dictionary import INFO
 from palomas_orrery_dashboard import PalomasOrreryDashboardFrame
 
@@ -10366,14 +10373,16 @@ manual_scale_radio.pack(anchor='w')
 CreateToolTip(manual_scale_radio, "Some key mean distances for custom scaling: \n* Mercury: 0.39 AU\n* Venus: 0.72 AU\n* Earth: 1 AU\n"
 "* Mars: 1.52 AU\n* Asteroid Belt: between 2.2 and 3.2 AU\n* Jupiter: 5.2 AU\n* Jupiter System: 0.5 AU\n* Saturn: 9.5 AU\n* Uranus: 19.2 AU\n* Neptune: 30.1 AU\n"
 "* Dwarf Planet Pluto: between 30 and 49 AU.\n* Kuiper Belt: from roughly 30 to 50 AU\n* Dwarf Planet Sedna: currently at about 83.3 AU, ranging from 74 AU to 936 AU, " 
-"with a mean distance of 526 AU\n* Planet 9, use 360 AU for full orbit\n* Solar Wind Termination Shock: 94 AU\n* Heliopause (edge of the Sun's influence): 126 AU\n* Voyager 1: currently over 165 AU\n" 
+f"with a mean distance of 526 AU\n* Planet 9, use 360 AU for full orbit\n* Solar Wind Termination Shock: {row_text('TERMINATION_SHOCK_AU')} AU\n* Heliopause (edge of the Sun's influence): {row_text('HELIOPAUSE_AU')} AU\n* Voyager 1: currently over 165 AU\n" 
 "* Hypothetical \"Planet Nine\" orbit: 600 AU\n"
-"* Inner Limit of Oort Cloud: 2,000 AU\n* Outer Limit of Oort Cloud: 100,000 AU\n"
+f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* Outer Limit of Oort Cloud: {row_text('OUTER_OORT_CLOUD_AU', grouping=True)} AU\n"
 # Source: GRAVITATIONAL_INFLUENCE_AU in constants_new.py, imported above.
 # Source+: Interpolated rather than typed: this site carried a stale 126,000
 # Source+: literal with no link to the store until 2026-08-07 (L-179).
+# Source+: Since 2026-10-03 (L-371) the row is the Sun's Hill radius in
+# Source+: parsecs, GRAVITATIONAL_INFLUENCE_PC, printed here in AU at its count.
 f"* Extent of Solar Gravitational Influence (Hill Sphere): "
-f"{GRAVITATIONAL_INFLUENCE_AU:,.0f} AU\n* Proxima Centauri: 268,585 AU")
+f"{row_text('GRAVITATIONAL_INFLUENCE_PC', 'au', grouping=True)} AU\n* Proxima Centauri: 268,585 AU")
 
 custom_scale_entry = tk.Entry(scale_frame, width=10)
 custom_scale_entry.pack(anchor='w')

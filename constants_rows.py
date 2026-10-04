@@ -133,6 +133,12 @@ Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
 conversion_shape() finds every row shaped like one, conversion_problem()
 is the one check of a marked one, and conversion_text() prints one at
 the count its source row gives it.)
+Module updated: October 3, 2026 with Anthropic's Claude Opus 5.5
+(L-371, the Sun's distance cards: row_text() prints any row at the
+count its row gives it, in its own unit or in another unit of its
+dimension, so an orrery hover need not choose a width. It is the
+general form of exact_text() and conversion_text(), and computes
+through the same conversions() the export serves.)
 """
 
 import ast
@@ -936,4 +942,52 @@ def conversion_text(name, grouping=False, project_dir=None):
         return format_prints(entry["value"], entry["prints"], grouping)
     if not isinstance(entry["figures"], int):
         raise ValueError("%s: its source row declares no count" % name)
+    return format_prints(entry["value"], entry["figures"], grouping)
+
+
+_ROW_TEXT_CACHE = {}
+
+
+def row_text(name, unit=None, grouping=False, project_dir=None):
+    """Row `name` as text, at the count its row gives it.
+
+    In the row's own unit by default, or in `unit`, another token of
+    the same dimension ('km', 'au', 'r_sun', 'pc'), computed by
+    conversions() exactly as the export serves it -- so the orrery and
+    the gallery print the same digits. A measured or derived row prints
+    at its '# Figures:' count; an exact row at its print count. A row
+    with neither raises ValueError where the display is built, instead
+    of a width being chosen for it. L-371, 2026-10-03.
+
+    The store is read once per process and kept, because a hover module
+    calls this many times at import.
+    """
+    project_dir = project_dir or os.path.dirname(os.path.abspath(__file__))
+    cached = _ROW_TEXT_CACHE.get(project_dir)
+    if cached is None:
+        from constants_tokens import TOKENS
+        _text, _rows, by_name = read_store(project_dir)
+        values = load_values(project_dir)
+        units = dict((n, r.unit) for n, r in by_name.items())
+        cached = (by_name, values, units, TOKENS)
+        _ROW_TEXT_CACHE[project_dir] = cached
+    by_name, values, units, tokens = cached
+    row = by_name[name]
+    if unit is None or unit == row.unit:
+        entry = {"value": values[name], "figures": row.figures,
+                 "prints": row.prints}
+    else:
+        entries, problem = conversions(row, values[name], values, units,
+                                       tokens)
+        if problem or not entries or unit not in entries:
+            raise ValueError("%s gives no value in %r (%s)"
+                             % (name, unit, problem))
+        entry = entries[unit]
+    if entry["figures"] == "exact":
+        if entry["prints"] is None:
+            raise ValueError("%s is exact and states no print count; add "
+                             "'prints N' after 'exact --'" % name)
+        return format_prints(entry["value"], entry["prints"], grouping)
+    if not isinstance(entry["figures"], int):
+        raise ValueError("%s declares no figure count" % name)
     return format_prints(entry["value"], entry["figures"], grouping)

@@ -26,7 +26,8 @@ It changes nothing and chooses no width.
 IT IS ALSO A CHECK (patch D15). Rule 7's exact row is built: a printed
 exact row states its print count on its "# Figures:" line, the export
 serves it as "prints", orrery displays print through
-constants_rows.exact_text(), and the gallery prints by the served
+constants_rows.exact_text() or constants_rows.row_text(), and the
+gallery prints by the served
 count. Every run prints the check's verdict, a line beginning "EXACT
 ROWS BY THE COUNT:", and names each failing item. Run with --check,
 
@@ -39,7 +40,8 @@ CHECKERS, as "Exact rows by the count", where it does. The check
 fails when:
 
     - a printed exact row states no print count;
-    - an orrery line prints an exact row any way but exact_text() -- a
+    - an orrery line prints an exact row any way but exact_text() or
+      row_text() -- a
       "{...}" format, _declared, %, str() or format(): a width chosen
       on the line;
     - a gallery pointer to a printed exact row serves no "prints", or
@@ -54,8 +56,9 @@ claiming more.
 THE ORRERY HALF. Every tracked .py file outside documentation/, except
 constants_new.py, is searched for each exact row's name in a printing
 form: inside {...} in a formatted string, as the argument of
-exact_text, _declared, _whole_figures or _with_uncertainty, after %,
-or inside str(...) or format(...). Only exact_text prints by the count.
+exact_text, row_text, _declared, _whole_figures or _with_uncertainty,
+after %, or inside str(...) or format(...). Only exact_text and
+row_text print by the count.
 
 THE GALLERY HALF. The gallery sits beside the orrery on Tony's
 computer, at ../tonyquintanilla.github.io, as data_inventory.py and the
@@ -120,6 +123,12 @@ Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
 (L-322 Stage D, patch D17: the three gallery pointers to SUN_RADIUS_KM,
 an exact row since D17, are in DRAWN: the Sun room reads it only as the
 kilometres per solar radius.)
+Module updated: October 3, 2026 with Anthropic's Claude Opus 5.5
+(L-371: the orrery search also finds constants_rows.row_text(), which
+prints a row by its count in any unit. Without it a hover printing an
+exact row through row_text() was not counted as a print at all, so the
+check could not see it -- found when the patched tree reported fewer
+printed rows than before.)
 """
 
 import os
@@ -253,6 +262,7 @@ def orrery_print_pattern(name):
     return re.compile(
         r'\{\s*%s\b[^}]*\}' % n
         + r'|exact_text\(\s*[\'"]%s[\'"]' % n
+        + r'|row_text\(\s*[\'"]%s[\'"]' % n
         + r'|(?:_declared|_whole_figures|_with_uncertainty)\(\s*[\'"]%s[\'"]' % n
         + r'|%%\s*\(?\s*%s\b' % n
         + r'|(?:str|format)\(\s*%s\b' % n)
@@ -260,7 +270,8 @@ def orrery_print_pattern(name):
 
 def by_count(name, code):
     """True when no print of `name` on this line uses a width of its
-    own: every printing form but exact_text() is one. A name passed to
+    own: every printing form but exact_text() and row_text() is one. A
+    name passed to
     arithmetic on the same line, such as _km_above_surface(NAME, 2), is
     not a print of it."""
     n = re.escape(name)
@@ -523,7 +534,8 @@ def main():
     add('## Printed by the count')
     add('')
     add('Rule 7: each printed exact row states a print count, each orrery '
-        'line prints it through `exact_text()`, and the gallery serves '
+        'line prints it through `exact_text()` or `row_text()`, and the '
+        'gallery serves '
         'the count beside it. **%s**'
         % ('FAILING -- the items below are named.' if failing
            else 'PASSING: %d rows, every one counted, on %d lines.'
@@ -645,7 +657,8 @@ def main():
               'the count' % (len(no_count), len(by_width), len(not_served)))
         return 1 if '--check' in sys.argv[1:] else 0
     print('EXACT ROWS BY THE COUNT: PASSING -- %d printed exact rows each '
-          'state a count; %d orrery lines print through exact_text(); %s'
+          'state a count; %d orrery lines print through exact_text() or '
+          'row_text(); %s'
           % (len(printed), len(o_lines),
              '%d gallery lines are served the count' % len(g_lines)
              if gallery_read else 'the gallery half was not read'))

@@ -14,6 +14,16 @@ Consumed by: planet_visualization.py (routing dispatcher),
 Role: rendering/shells
 Domain: orrery
 
+Module updated: October 3, 2026 with Anthropic's Claude Opus 5.5
+(L-371, the Sun's distance cards: every hover line that states one of
+the Sun's distance rows prints it from the row, at the count its row
+gives it, through constants_rows.row_text() -- the termination shock
+at 94.01 AU, the heliopause at 121 AU, the Oort cloud's edges with
+their ranges, the gravitational reach as the Sun's Hill radius, 0.65
+parsecs, and the corona, helmet cusp and Roche limit by their counts.
+The unsourced 100,000-200,000 AU range is gone with its row. Wording
+changes approved by Tony are listed in the session handoff.)
+
 Module updated: October 2, 2026 with Anthropic's Claude Opus 5.5
 (L-406: the galactic tide is drawn tilted into the galaxy's plane, about
 the galactic pole of J2000 from constants_new.py, between the outer Oort
@@ -69,11 +79,13 @@ from planet_visualization_utilities import (create_sphere_points, create_streame
                                             ROCHE_LIMIT_RADII, ALFVEN_SURFACE_RADII,
                                             TERMINATION_SHOCK_AU, HELIOPAUSE_RADII,
                                             INNER_LIMIT_OORT_CLOUD_AU, INNER_OORT_CLOUD_AU, OUTER_OORT_CLOUD_AU, 
-                                            GRAVITATIONAL_INFLUENCE_AU, GRAVITATIONAL_INFLUENCE_RANGE_AU,
+                                            GRAVITATIONAL_INFLUENCE_AU,
                                             AU_PER_LIGHT_YEAR,
                                             CHROMOSPHERE_PHYSICAL_KM, CHROMOSPHERE_PHYSICAL_RADII)
 # L-322 Stage D, patch D17: print rows by the counts their rows state.
 from constants_rows import figures_of, exact_text, format_prints, conversion_text
+# L-371: every Sun distance row prints at its own count, in any unit.
+from constants_rows import row_text
 # L-406: the pole the galactic tide is drawn about.
 from constants_new import (GALACTIC_NORTH_POLE_RA_J2000_DEG,
                            GALACTIC_NORTH_POLE_DEC_J2000_DEG)
@@ -90,22 +102,39 @@ from constants_new import (GALACTIC_NORTH_POLE_RA_J2000_DEG,
 # statement exists once and cannot drift from the constant or from its
 # own duplicate. Editing the constant updates every display site.
 
-# Source: GRAVITATIONAL_INFLUENCE_AU and GRAVITATIONAL_INFLUENCE_RANGE_AU
-# Source+: in constants_new.py -- approximate Hill sphere of the Sun in the
-# Source+: Milky Way, model-dependent. Published estimates span
-# Source+: 100,000-200,000 AU; the visualization draws the 150,000 AU
-# Source+: midpoint (Tony's ruling, 2026-08-07). Light-year figures derive
-# Source+: from AU_PER_LIGHT_YEAR. NASA Solar System Exploration.
+# The Sun's distances as text, each printed from its row at the count the
+# row gives it (L-371, 2026-10-03). A hover names these, never a typed
+# figure, so the words cannot drift from the drawing or from the store.
+_OORT_INNER_EDGE = row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)
+_OORT_HILLS_EDGE = row_text('INNER_OORT_CLOUD_AU', grouping=True)
+_OORT_OUTER_EDGE = row_text('OUTER_OORT_CLOUD_AU', grouping=True)
+_HELIOPAUSE = row_text('HELIOPAUSE_AU')
+_TERMINATION_SHOCK = row_text('TERMINATION_SHOCK_AU')
+# Tony's approved notes for the two ranged edges, 2026-10-03.
+OORT_INNER_EDGE_NOTE = (
+    f"Thought to lie between "
+    f"{row_text('OORT_CLOUD_INNER_EDGE_LOW_AU', grouping=True)} and "
+    f"{row_text('OORT_CLOUD_INNER_EDGE_HIGH_AU', grouping=True)} AU; "
+    f"drawn at {_OORT_INNER_EDGE}."
+)
+OORT_OUTER_EDGE_NOTE = (
+    f"Thought to lie between "
+    f"{row_text('OORT_CLOUD_OUTER_EDGE_LOW_AU', grouping=True)} and "
+    f"{row_text('OORT_CLOUD_OUTER_EDGE_HIGH_AU', grouping=True)} AU; "
+    f"drawn at {_OORT_OUTER_EDGE}."
+)
+
+# Source: GRAVITATIONAL_INFLUENCE_PC in constants_new.py -- the Sun's
+# Source+: Hill radius in the galaxy, Portegies Zwart et al. (2021). The
+# Source+: AU and light-year figures are computed from it and printed at
+# Source+: its two figures. Words: Tony's approved note of 2026-10-03.
 GRAVITATIONAL_INFLUENCE_SENTENCE = (
-    f"The Sun's gravitational influence extends to roughly "
-    f"{GRAVITATIONAL_INFLUENCE_AU / AU_PER_LIGHT_YEAR:.1f} light-years "
-    f"(~{GRAVITATIONAL_INFLUENCE_AU:,.0f} AU).<br>"
-    f"Published estimates range "
-    f"{GRAVITATIONAL_INFLUENCE_RANGE_AU[0]:,.0f}-"
-    f"{GRAVITATIONAL_INFLUENCE_RANGE_AU[1]:,.0f} AU "
-    f"({GRAVITATIONAL_INFLUENCE_RANGE_AU[0] / AU_PER_LIGHT_YEAR:.1f}-"
-    f"{GRAVITATIONAL_INFLUENCE_RANGE_AU[1] / AU_PER_LIGHT_YEAR:.1f} "
-    f"light-years); this visualization draws the midpoint."
+    "The Sun's Hill radius in the galaxy, calculated where the galaxy's<br>"
+    "tidal pull overtakes the Sun's gravity: about "
+    f"{row_text('GRAVITATIONAL_INFLUENCE_PC')} parsecs<br>"
+    f"({row_text('GRAVITATIONAL_INFLUENCE_PC', 'au', grouping=True)} AU, "
+    f"about {format_prints(GRAVITATIONAL_INFLUENCE_AU / AU_PER_LIGHT_YEAR, figures_of('GRAVITATIONAL_INFLUENCE_PC'))} "
+    "light-years). Calculated, not measured."
 )
 
 # Source: Carroll & Ostlie, An Introduction to Modern Astrophysics, Ch. 11
@@ -133,11 +162,11 @@ gravitational_influence_info = (
             
             "Sun: Outer Limit of Gravitational Influence:<br><br>" 
 
-            "The Solar System\'s extent is actually defined in multiple ways. The Heliopause (120-123 AU):<br>" 
+            f"The Solar System\'s extent is actually defined in multiple ways. The Heliopause ({_HELIOPAUSE} AU):<br>" 
             "Where the solar wind meets interstellar space.<br><br>" 
 
             "Gravitational influence extends much further, including, Sedna\'s orbit (936 AU), the Hills Cloud/Inner<br>" 
-            "Oort Cloud (2,000-20,000 AU), and the Outer Oort Cloud (20,000-100,000 AU).<br><br>" 
+            f"Oort Cloud ({_OORT_INNER_EDGE}-{_OORT_HILLS_EDGE} AU), and the Outer Oort Cloud ({_OORT_HILLS_EDGE}-{_OORT_OUTER_EDGE} AU).<br><br>" 
             + GRAVITATIONAL_INFLUENCE_SENTENCE + "<br><br>"
             
             "While the Heliopause marks where the Sun\'s particle influence ends, its gravitational influence extends much<br>" 
@@ -158,14 +187,16 @@ outer_oort_info = (
             "Oort Cloud: Outer Limit of Outer Oort Cloud:<br><br>"
             
             "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the<br>" 
-            "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.<br><br>"
+            f"Solar System at distances ranging from approximately {_OORT_INNER_EDGE} AU to {_OORT_OUTER_EDGE} AU from the Sun.<br><br>"
 
             "Predominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.<br>" 
             "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
             "periods exceeding 200 years.<br><br>" 
 
-            "Oort Cloud's Outer Edge: At 100,000 AU, it's about 1.58 light-years from the Sun, placing it just<br>" 
-            "beyond the nearest star systems and marking the boundary between the Solar System and interstellar space.<br><br>" 
+            "Oort Cloud's Outer Edge:<br>" 
+            f"{OORT_OUTER_EDGE_NOTE}<br>" 
+            f"At {_OORT_OUTER_EDGE} AU it is about {format_prints(OUTER_OORT_CLOUD_AU / AU_PER_LIGHT_YEAR, 1)} light-years from the Sun, marking the boundary<br>" 
+            "between the Solar System and interstellar space.<br><br>" 
 
             "The Outer Oort Cloud is the primary source of long-period comets. Objects here are more loosely bound and more<br>" 
             "susceptible to external gravitational perturbations."
@@ -176,12 +207,12 @@ inner_oort_info = (
             "Oort Cloud: Outer Limit of Inner Oort Cloud:<br><br>"
 
             "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the<br>" 
-            "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.<br>" 
+            f"Solar System at distances ranging from approximately {_OORT_INNER_EDGE} AU to {_OORT_OUTER_EDGE} AU from the Sun.<br>" 
             "Predominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.<br>" 
             "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
             "periods exceeding 200 years.<br><br>" 
 
-            "Inner Oort Cloud (Hills Cloud): Extends from about 2,000 AU to 20,000 AU. More tightly bound to the<br>" 
+            f"Inner Oort Cloud (Hills Cloud): Extends from about {_OORT_INNER_EDGE} AU to {_OORT_HILLS_EDGE} AU. More tightly bound to the<br>" 
             "Sun. More tightly bound to the Solar System compared to the outer Oort Cloud. It serves as an<br>" 
             "intermediate zone between the Kuiper Belt and the outer Oort Cloud."
         )
@@ -189,14 +220,15 @@ inner_oort_info = (
 # Source: Dones et al. (2004); INNER_LIMIT_OORT_CLOUD_AU=2000 in constants_new.py
 inner_limit_oort_info = (
             "Oort Cloud: Inner Limit:<br><br>"
+            f"{OORT_INNER_EDGE_NOTE}<br><br>"
 
             "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the<br>" 
-            "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.<br>" 
+            f"Solar System at distances ranging from approximately {_OORT_INNER_EDGE} AU to {_OORT_OUTER_EDGE} AU from the Sun.<br>" 
             "Predominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.<br>" 
             "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
             "periods exceeding 200 years.<br><br>" 
 
-            "Inner Oort Cloud (Hills Cloud): Extends from about 2,000 AU to 20,000 AU. More tightly bound to the<br>" 
+            f"Inner Oort Cloud (Hills Cloud): Extends from about {_OORT_INNER_EDGE} AU to {_OORT_HILLS_EDGE} AU. More tightly bound to the<br>" 
             "Sun. More tightly bound to the Solar System compared to the outer Oort Cloud. It serves as an<br>" 
             "intermediate zone between the Kuiper Belt and the outer Oort Cloud."
         )
@@ -208,8 +240,8 @@ hills_cloud_torus_info = (
             "Based on dynamical models showing the inner Oort Cloud is more disk-like due to galactic tides.<br>"
 
             "Structure:<br>" 
-            "* Hills Cloud (Inner Oort): 2,000-20,000 AU, disk-like/toroidal<br>"
-            "* Outer Oort Cloud: 20,000-100,000+ AU, roughly spherical but clumpy<br>" 
+            f"* Hills Cloud (Inner Oort): {_OORT_INNER_EDGE}-{_OORT_HILLS_EDGE} AU, disk-like/toroidal<br>"
+            f"* Outer Oort Cloud: {_OORT_HILLS_EDGE}-{_OORT_OUTER_EDGE}+ AU, roughly spherical but clumpy<br>" 
             "Key Characteristics:<br>" 
             "* Not uniform shells but complex, structured regions<br>" 
             "* Density varies significantly throughout<br>" 
@@ -233,8 +265,8 @@ outer_oort_clumpy_info = (
             "Reflects N-body simulations showing stellar encounters create density variations.<br>"
 
             "Structure:<br>" 
-            "* Hills Cloud (Inner Oort): 2,000-20,000 AU, disk-like/toroidal<br>"
-            "* Outer Oort Cloud: 20,000-100,000+ AU, roughly spherical but clumpy<br>" 
+            f"* Hills Cloud (Inner Oort): {_OORT_INNER_EDGE}-{_OORT_HILLS_EDGE} AU, disk-like/toroidal<br>"
+            f"* Outer Oort Cloud: {_OORT_HILLS_EDGE}-{_OORT_OUTER_EDGE}+ AU, roughly spherical but clumpy<br>" 
             "Key Characteristics:<br>" 
             "* Not uniform shells but complex, structured regions<br>" 
             "* Density varies significantly throughout<br>" 
@@ -262,8 +294,8 @@ galactic_tide_info = (
             "Shows how the Milky Way's gravity creates asymmetries.<br>"
 
             "Structure:<br>" 
-            "* Hills Cloud (Inner Oort): 2,000-20,000 AU, disk-like/toroidal<br>"
-            "* Outer Oort Cloud: 20,000-100,000+ AU, roughly spherical but clumpy<br>" 
+            f"* Hills Cloud (Inner Oort): {_OORT_INNER_EDGE}-{_OORT_HILLS_EDGE} AU, disk-like/toroidal<br>"
+            f"* Outer Oort Cloud: {_OORT_HILLS_EDGE}-{_OORT_OUTER_EDGE}+ AU, roughly spherical but clumpy<br>" 
             "Key Characteristics:<br>" 
             "* Not uniform shells but complex, structured regions<br>" 
             "* Density varies significantly throughout<br>" 
@@ -306,9 +338,10 @@ solar_wind_info = (
             "Voyager Missions: Our most valuable information about the heliosheath comes from the Voyager 1 and Voyager 2 spacecraft,<br>" 
             "which have been traveling through space since 1977. Both probes have crossed the termination shock and are currently<br>" 
             "exploring the heliosheath, sending back valuable data about this mysterious region. Voyager 1 encountered the Heliopause<br>" 
-            "at ~123 AU. This is considered the end of the Sun's influence and the start of interstellar space.<br><br>" 
+            f"at {_HELIOPAUSE} AU. This is considered the end of the Sun's influence and the start of interstellar space.<br><br>" 
             
-            "* The heliosheath extends from ~120 to 150 AU at the Heliopause.<br>"
+            f"* The heliosheath lies between the termination shock ({_TERMINATION_SHOCK} AU) and the heliopause<br>"
+            f"  ({_HELIOPAUSE} AU), on Voyager 1's path.<br>"
             "* Temperature: ~1,000,000K on average.<br>"
             "* Black body radiation at 2.897 nm falls within the X-ray region of the electromagnetic spectrum, which is invisible to the human eye."
         )
@@ -323,7 +356,7 @@ termination_shock_info = (
             "supersonic to subsonic speeds due to interaction with the interstellar<br>"
             "medium. The kinetic energy transfers into heat, increasing abruptly.<br><br>"
 
-            "Voyager 1 encountered the Termination Shock at 94 AU, while Voyager 2 at 84 AU.<br>"
+            f"Voyager 1 encountered the Termination Shock at {_TERMINATION_SHOCK} AU, while Voyager 2 at 84 AU.<br>"
             "After the Termination Shock the speeds slow down to ~100 to 200 km/s."
         )
 
@@ -331,7 +364,8 @@ termination_shock_info = (
 outer_corona_info = (
     "Sun: Extended Corona (F-corona / Outer):<br><br>"
 
-    "This shell marks the extended outer solar corona at ~50 solar radii (~0.23 AU).<br>"
+    f"This shell marks the extended outer solar corona at {row_text('OUTER_CORONA_RADII')} solar radii ({row_text('OUTER_CORONA_RADII', 'au')} AU).<br>"
+    "A boundary chosen for the drawing; the faint outer corona has no sharp edge.<br>"
     "At this distance the corona is extremely tenuous -- the F-corona (dust-scattered<br>"
     "sunlight showing Fraunhofer absorption lines) dominates over the electron K-corona.<br><br>"
 
@@ -340,7 +374,7 @@ outer_corona_info = (
     "* The Alfven surface -- the true corona/solar wind boundary -- is ~10-20 R_sun.<br>"
     f"  Parker Solar Probe measured this at {ALFVEN_SURFACE_RADII} R_sun on April 28, 2021.<br>"
     "* Beyond the Alfven surface, plasma is solar wind, not corona.<br>"
-    "* This 50 R_sun shell represents the faint, extended F-corona envelope.<br><br>"
+    f"* This {row_text('OUTER_CORONA_RADII')} R_sun shell represents the faint, extended F-corona envelope.<br><br>"
 
     "* Temperature: ~1-2 million K (the coronal heating paradox -- hotter than the surface)<br>"
     "* The corona merges gradually into the solar wind beyond ~15-20 R_sun.<br>"
@@ -375,7 +409,7 @@ inner_corona_info = (
             "  * CMEs: These are massive eruptions of plasma and magnetic field from the corona, which can travel through space<br>" 
             "    and impact Earth, disrupting satellites, communication systems, and power grids.<br><br>"
             
-            "* Solar Inner Corona (extends to 2-3 solar radii, ~0.014 AU)<br>"
+            f"* Solar Inner Corona (extends to 2-3 solar radii; drawn at {row_text('INNER_CORONA_RADII')}, about {row_text('INNER_CORONA_RADII', 'au')} AU)<br>"
             "* Temperature: 1-2M K, or an average of about 1.5M K<br>"
             "* It radiates at an average wavelength of 1.93 nm, within the extreme ultraviolet to soft X-ray regions."
         )
@@ -515,11 +549,11 @@ core_info = (
 gravitational_influence_info_hover = (
             "Sun: Outer Limit of Gravitational Influence:<br><br>" 
 
-            "The Solar System\'s extent is actually defined in multiple ways. The Heliopause (120-123 AU):<br>" 
+            f"The Solar System\'s extent is actually defined in multiple ways. The Heliopause ({_HELIOPAUSE} AU):<br>" 
             "Where the solar wind meets interstellar space.<br><br>" 
 
             "Gravitational influence extends much further, including, Sedna\'s orbit (936 AU), the Hills Cloud/Inner<br>" 
-            "Oort Cloud (2,000-20,000 AU), and the Outer Oort Cloud (20,000-100,000 AU).<br><br>" 
+            f"Oort Cloud ({_OORT_INNER_EDGE}-{_OORT_HILLS_EDGE} AU), and the Outer Oort Cloud ({_OORT_HILLS_EDGE}-{_OORT_OUTER_EDGE} AU).<br><br>" 
             + GRAVITATIONAL_INFLUENCE_SENTENCE + "<br><br>"
             
             "While the Heliopause marks where the Sun\'s particle influence ends, its gravitational influence extends much<br>" 
@@ -539,14 +573,16 @@ outer_oort_info_hover = (
             "Oort Cloud: Outer Limit of Outer Oort Cloud:<br><br>"
             
             "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the<br>" 
-            "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.<br><br>"
+            f"Solar System at distances ranging from approximately {_OORT_INNER_EDGE} AU to {_OORT_OUTER_EDGE} AU from the Sun.<br><br>"
 
             "Predominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.<br>" 
             "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
             "periods exceeding 200 years.<br><br>" 
 
-            "Oort Cloud's Outer Edge: At 100,000 AU, it's about 1.58 light-years from the Sun, placing it just<br>" 
-            "beyond the nearest star systems and marking the boundary between the Solar System and interstellar space.<br><br>" 
+            "Oort Cloud's Outer Edge:<br>" 
+            f"{OORT_OUTER_EDGE_NOTE}<br>" 
+            f"At {_OORT_OUTER_EDGE} AU it is about {format_prints(OUTER_OORT_CLOUD_AU / AU_PER_LIGHT_YEAR, 1)} light-years from the Sun, marking the boundary<br>" 
+            "between the Solar System and interstellar space.<br><br>" 
 
             "The Outer Oort Cloud is the primary source of long-period comets. Objects here are more loosely bound and more<br>" 
             "susceptible to external gravitational perturbations."
@@ -556,26 +592,27 @@ inner_oort_info_hover = (
             "Oort Cloud: Outer Limit of Inner Oort Cloud:<br><br>"
 
             "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the<br>" 
-            "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.<br>" 
+            f"Solar System at distances ranging from approximately {_OORT_INNER_EDGE} AU to {_OORT_OUTER_EDGE} AU from the Sun.<br>" 
             "Predominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.<br>" 
             "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
             "periods exceeding 200 years.<br><br>" 
 
-            "Inner Oort Cloud (Hills Cloud): Extends from about 2,000 AU to 20,000 AU. More tightly bound to the<br>" 
+            f"Inner Oort Cloud (Hills Cloud): Extends from about {_OORT_INNER_EDGE} AU to {_OORT_HILLS_EDGE} AU. More tightly bound to the<br>" 
             "Sun. More tightly bound to the Solar System compared to the outer Oort Cloud. It serves as an<br>" 
             "intermediate zone between the Kuiper Belt and the outer Oort Cloud."
         )
 
 inner_limit_oort_info_hover = (
             "Oort Cloud: Inner Limit:<br><br>"
+            f"{OORT_INNER_EDGE_NOTE}<br><br>"
 
             "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the<br>" 
-            "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.<br>" 
+            f"Solar System at distances ranging from approximately {_OORT_INNER_EDGE} AU to {_OORT_OUTER_EDGE} AU from the Sun.<br>" 
             "Predominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.<br>" 
             "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
             "periods exceeding 200 years.<br><br>" 
 
-            "Inner Oort Cloud (Hills Cloud): Extends from about 2,000 AU to 20,000 AU. More tightly bound to the<br>" 
+            f"Inner Oort Cloud (Hills Cloud): Extends from about {_OORT_INNER_EDGE} AU to {_OORT_HILLS_EDGE} AU. More tightly bound to the<br>" 
             "Sun. More tightly bound to the Solar System compared to the outer Oort Cloud. It serves as an<br>" 
             "intermediate zone between the Kuiper Belt and the outer Oort Cloud."
         )
@@ -605,9 +642,10 @@ solar_wind_info_hover = (
             "Voyager Missions: Our most valuable information about the heliosheath comes from the Voyager 1 and Voyager 2 spacecraft,<br>" 
             "which have been traveling through space since 1977. Both probes have crossed the termination shock and are currently<br>" 
             "exploring the heliosheath, sending back valuable data about this mysterious region. Voyager 1 encountered the Heliopause<br>" 
-            "at ~123 AU. This is considered the end of the Sun's influence and the start of interstellar space.<br><br>" 
+            f"at {_HELIOPAUSE} AU. This is considered the end of the Sun's influence and the start of interstellar space.<br><br>" 
             
-            "* The heliosheath extends from ~120 to 150 AU at the Heliopause.<br>"
+            f"* The heliosheath lies between the termination shock ({_TERMINATION_SHOCK} AU) and the heliopause<br>"
+            f"  ({_HELIOPAUSE} AU), on Voyager 1's path.<br>"
             "* Temperature: ~1,000,000K on average.<br>"
             "* Black body radiation at 2.897 nm falls within the X-ray region of the electromagnetic spectrum, which is invisible to the human eye."
         )
@@ -623,22 +661,23 @@ termination_shock_info_hover = (
             "supersonic to subsonic speeds due to interaction with the interstellar<br>"
             "medium. The kinetic energy transfers into heat, increasing abruptly.<br><br>"
 
-            "Voyager 1 encountered the Termination Shock at 94 AU, while Voyager 2 at 84 AU.<br>"
+            f"Voyager 1 encountered the Termination Shock at {_TERMINATION_SHOCK} AU, while Voyager 2 at 84 AU.<br>"
             "After the Termination Shock the speeds slow down to ~100 to 200 km/s."
         )
 
 outer_corona_info_hover = (
     "Sun: Extended Corona (F-corona / Outer):<br><br>"
 
-    "Extended outer solar corona at ~50 solar radii (~0.23 AU).<br>"
+    f"Extended outer solar corona at {row_text('OUTER_CORONA_RADII')} solar radii ({row_text('OUTER_CORONA_RADII', 'au')} AU).<br>"
+    "A boundary chosen for the drawing; the faint outer corona has no sharp edge.<br>"
     "F-corona (dust-scattered sunlight with Fraunhofer lines) dominates at this distance.<br><br>"
 
     "Layer hierarchy within this shell:<br>"
-    "* Visible streamer belt: drawn at 6.0 R_sun, an approximation<br>"
-    "  (see Streamer Belt shell)<br>"
+    f"* Streamer belt: the helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, and the stalk fades out<br>"
+    "  across the Alfven surface (see Streamer Belt shell)<br>"
     "* Alfven surface (corona/solar wind boundary): ~15-20 R_sun (see Alfven Surface shell)<br>"
     f"  Parker Solar Probe first crossing: {ALFVEN_SURFACE_RADII} R_sun, April 28, 2021<br>"
-    "* F-corona (dust-scattered): 3-50+ R_sun -- this shell's extent<br><br>"
+    f"* F-corona (dust-scattered): {row_text('INNER_CORONA_RADII')}-{row_text('OUTER_CORONA_RADII')}+ R_sun -- this shell's extent<br><br>"
 
     "* Temperature: ~1-2 million K (coronal heating paradox)<br>"
     "* Beyond the Alfven surface, plasma is solar wind, not true corona<br>"
@@ -668,11 +707,11 @@ streamer_belt_info = (
 
     "IT HAS NO SINGLE OUTER RADIUS, and since 2026-08-22 it is no longer<br>"
     "drawn as if it did. A streamer is two structures stacked. The HELMET,<br>"
-    "a dome of closed magnetic loops, reaches no higher than 2-4 R_sun.<br>"
+    f"a dome of closed magnetic loops, reaches no higher than {row_text('HELMET_CUSP_LOW_RADII')}-{row_text('HELMET_CUSP_HIGH_RADII')} R_sun.<br>"
     "Above its cusp the field opens and the solar wind draws it out into a<br>"
     "STALK -- a thin current sheet reaching many solar radii, studied<br>"
     "between 2 and 10. The band drawn here is ONE object with both: wide<br>"
-    "and dense at the base, pinching at the cusp at 4.0 R_sun where the<br>"
+    f"and dense at the base, pinching at the cusp at {row_text('HELMET_CUSP_RADII')} R_sun where the<br>"
     "loops open, then thinning and dissolving across the Alfven surface.<br>"
     "It has no drawn outer edge, because there is no edge to draw.<br>"
     "(Suess & Nerney 2004, Adv. Space Res. 33:668; 2005, Solar Wind 11.)<br><br>"
@@ -689,7 +728,7 @@ streamer_belt_info = (
     "* E-corona (emission): Line emission from highly ionized Fe, Ni, Ca atoms. Visible to ~2 R_sun.<br><br>"
 
     "* Helmet streamers: Bottle-shaped, dense magnetic structures. The closed<br>"
-    "  helmet stays below 2-4 R_sun; its stalk continues far beyond.<br>"
+    f"  helmet stays below {row_text('HELMET_CUSP_LOW_RADII')}-{row_text('HELMET_CUSP_HIGH_RADII')} R_sun; its stalk continues far beyond.<br>"
     "  Source of slow solar wind. Visible in coronagraphs and at eclipse.<br>"
     "* Temperature: ~1-2 million K<br>"
     "* MAPS C/2026 A1 was first detected in SOHO/LASCO C3 at ~0.15 AU (~33 R_sun) on April 2, 2026.<br>"
@@ -712,8 +751,8 @@ roche_limit_info = (
 
     "Formula: d = 2.44 x R_sun x (rho_sun / rho_comet)^(1/3)<br>"
     "Solar density: 1,408 kg/m^3 | Comet density: ~500 kg/m^3<br>"
-    "Result: ~3.45 solar radii = ~2,400,165 km from Sun center<br>"
-    "  = ~1,704,465 km from photosphere (~0.0114 AU)<br><br>"
+    f"Result: about {row_text('ROCHE_LIMIT_RADII')} solar radii, about {row_text('ROCHE_LIMIT_RADII', 'km', grouping=True)} km from the Sun's center<br>"
+    f"  ({row_text('ROCHE_LIMIT_RADII', 'au')} AU). The comet density is known to one figure, so the result is too.<br><br>"
 
     "Key physics:<br>"
     "* The Roche limit is NOT absolute. It marks where tidal forces overcome SELF-GRAVITY<br>"
@@ -729,7 +768,7 @@ roche_limit_info = (
     "* MAPS disintegrated at ~8.33 R_sun (0.039 AU) -- OUTSIDE the Roche limit.<br>"
     "* Primary destruction mechanisms: thermal ablation (1-2 million K corona) and<br>"
     "  rotational spin-up from outgassing jets. Tidal forces never acted on MAPS.<br>"
-    "* The debris swept THROUGH the Roche limit (3.45 R_sun, 0.016 AU) to perihelion<br>"
+    f"* The debris swept THROUGH the Roche limit (about {row_text('ROCHE_LIMIT_RADII')} R_sun, {row_text('ROCHE_LIMIT_RADII', 'au')} AU) to perihelion<br>"
     "  at 1.23 R_sun -- but the nucleus was already gone."
 )
 
@@ -741,7 +780,8 @@ roche_limit_info_hover = (
 
     "Formula: d = 2.44 x R_sun x (rho_sun / rho_comet)^(1/3)<br>"
     "Solar density: 1,408 kg/m^3 | Comet density: ~500 kg/m^3<br>"
-    "Result: ~3.45 R_sun (~0.016 AU) from Sun center<br><br>"
+    f"Result: about {row_text('ROCHE_LIMIT_RADII')} R_sun ({row_text('ROCHE_LIMIT_RADII', 'au')} AU) from Sun center;<br>"
+    "the comet density is known to one figure, so the result is too.<br><br>"
 
     "Key physics:<br>"
     "* Roche limit depends on DENSITY RATIO only -- not on nucleus mass or size<br>"
@@ -827,12 +867,12 @@ inner_corona_info_hover = (
     "* Solar flares and CMEs originate here<br><br>"
 
     "Roche limit proximity:<br>"
-    "* The fluid Roche limit for comets (~3.45 R_sun) lies just outside this shell.<br>"
+    f"* The fluid Roche limit for comets (about {row_text('ROCHE_LIMIT_RADII')} R_sun) lies just outside this shell.<br>"
     "* Any Kreutz sungrazer penetrating the inner K-corona is at or inside the tidal<br>"
     "  disruption threshold. MAPS C/2026 A1 perihelion reached 1.23 R_sun --<br>"
     "  deep inside both the inner corona and the Roche limit simultaneously.<br><br>"
 
-    "* Solar Inner Corona (extends to 2-3 solar radii, ~0.014 AU)<br>"
+    f"* Solar Inner Corona (extends to 2-3 solar radii; drawn at {row_text('INNER_CORONA_RADII')}, about {row_text('INNER_CORONA_RADII', 'au')} AU)<br>"
     "* Temperature: 1-2M K, or an average of about 1.5M K<br>"
     "* Radiates at an average wavelength of 1.93 nm, extreme ultraviolet to soft X-ray."
 )
@@ -965,11 +1005,11 @@ hover_text_sun_and_corona = (
     '<b>The Sun and Its Atmosphere</b><br><br>'
     'Five corona/boundary layers now visualized separately:<br>'
     '* Inner Corona (K-corona): 1-3 R_sun, ~1-3 million K<br>'
-    '* Roche Limit: 3.45 R_sun -- tidal disruption threshold for comets<br>'
-    '* Streamer Belt (Visible Corona): drawn at 6.0 R_sun, approximate<br>'
+    f'* Roche Limit: about {row_text('ROCHE_LIMIT_RADII')} R_sun -- tidal disruption threshold for comets<br>'
+    f'* Streamer Belt (Visible Corona): helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, the stalk fades beyond<br>'
     f'* Alfven Surface: ~{ALFVEN_SURFACE_RADII} R_sun -- true corona/solar wind boundary<br>'
     '  (Parker Solar Probe first crossing: April 28, 2021)<br>'
-    '* Extended Corona (F-corona): ~50 R_sun -- faint dust-scattered envelope<br><br>'
+    f'* Extended Corona (F-corona): {row_text('OUTER_CORONA_RADII')} R_sun, a boundary chosen for the drawing<br><br>'
     'Parker Solar Probe closest approach: ~8.8 R_sun (2024)<br><br>'
     'The coronal heating paradox: the corona is 200x hotter than the photosphere<br>'
     'despite being farther from the energy source. Leading theories: Alfven waves,<br>'
@@ -992,11 +1032,11 @@ hover_text_sun_and_corona_tooltip = (
     'The Sun and Its Atmosphere<br><br>'
     'Five corona/boundary layers now visualized separately:<br>'
     '* Inner Corona (K-corona): 1-3 R_sun, ~1-3 million K<br>'
-    '* Roche Limit: 3.45 R_sun -- tidal disruption threshold for comets<br>'
-    '* Streamer Belt (Visible Corona): drawn at 6.0 R_sun, approximate<br>'
+    f'* Roche Limit: about {row_text('ROCHE_LIMIT_RADII')} R_sun -- tidal disruption threshold for comets<br>'
+    f'* Streamer Belt (Visible Corona): helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, the stalk fades beyond<br>'
     f'* Alfven Surface: ~{ALFVEN_SURFACE_RADII} R_sun -- true corona/solar wind boundary<br>'
     '  (Parker Solar Probe first crossing: April 28, 2021)<br>'
-    '* Extended Corona (F-corona): ~50 R_sun -- faint dust-scattered envelope<br><br>'
+    f'* Extended Corona (F-corona): {row_text('OUTER_CORONA_RADII')} R_sun, a boundary chosen for the drawing<br><br>'
     'Parker Solar Probe closest approach: ~8.8 R_sun (2024)<br><br>'
     'The coronal heating paradox: the corona is 200x hotter than the photosphere<br>'
     'despite being farther from the energy source. Leading theories: Alfven waves,<br>'
@@ -1473,7 +1513,7 @@ def create_sun_hills_cloud_torus(center_position=(0, 0, 0), inner_radius=2000, o
 
     hills_hover = (
         'Hills Cloud (Inner Oort): Disk-like structure<br>'
-        '2,000-20,000 AU<br>'
+        f'{_OORT_INNER_EDGE}-{_OORT_HILLS_EDGE} AU<br>'
         'More tightly bound to Solar System<br>'
         'Short-period comets support disk-like structure<br>'
         'Toroidal shape due to galactic tides'
@@ -1551,7 +1591,7 @@ def create_sun_outer_oort_clumpy(center_position=(0, 0, 0), radius_min=20000, ra
 
     clumpy_hover = (
         'Outer Oort Cloud: Clumpy, asymmetric structure<br>'
-        '20,000-100,000+ AU<br>'
+        f'{_OORT_HILLS_EDGE}-{_OORT_OUTER_EDGE}+ AU<br>'
         'Source of long-period comets<br>'
         'Influenced by galactic tides and stellar encounters'
     )
@@ -1653,7 +1693,7 @@ def create_sun_galactic_tide(center_position=(0, 0, 0), n_points=2000):
     tide_hover = (
         'Galactic Tide: sends comets in from the outer Oort cloud<br>'
         'Tilted to the galaxy\'s plane, thickest halfway to its poles<br>'
-        f'From {INNER_OORT_CLOUD_AU:,} to {OUTER_OORT_CLOUD_AU:,} AU<br>'
+        f'From {_OORT_HILLS_EDGE} to {_OORT_OUTER_EDGE} AU<br>'
         'Where the comets really are is not known'
     )
 
@@ -1766,8 +1806,7 @@ def create_sun_streamer_band(center_position=(0, 0, 0)):
     def _km_au(r_solar):
         return (r_solar * SUN_RADIUS_KM, r_solar * SOLAR_RADIUS_AU)
 
-    cusp_km, cusp_au = _km_au(cusp_rs)
-    fade_km, fade_au = _km_au(fade_rs)
+    # L-371: the cusp and the fade print from their rows, at their counts.
     fov_km, fov_au = _km_au(15.0)
 
     # Every line carries its own <br>: in this file the SOURCE wrap and
@@ -1778,8 +1817,8 @@ def create_sun_streamer_band(center_position=(0, 0, 0)):
 
         "CLOSED HELMET -- the dense, wide base. Magnetic arcades stand<br>"
         "over the neutral line, closed at both ends. They reach no<br>"
-        f"higher than 2-4 R_sun, and the band pinches at {cusp_rs:.1f} R_sun<br>"
-        f"({cusp_km:,.0f} km, {cusp_au:.6f} AU) where they open.<br>"
+        f"higher than {row_text('HELMET_CUSP_LOW_RADII')}-{row_text('HELMET_CUSP_HIGH_RADII')} R_sun, and the band pinches at {row_text('HELMET_CUSP_RADII')} R_sun<br>"
+        f"({row_text('HELMET_CUSP_RADII', 'km', grouping=True)} km, {row_text('HELMET_CUSP_RADII', 'au')} AU) where they open.<br>"
         "Source: Suess & Nerney (2004), Adv. Space Res. 33:668-675 --<br>"
         "stated there as established background, not measured by it, so<br>"
         "the pinch is drawn soft rather than sharp.<br><br>"
@@ -1787,7 +1826,7 @@ def create_sun_streamer_band(center_position=(0, 0, 0)):
         "OPEN STALK -- above the pinch. A thin sheet along the current<br>"
         "sheet. It has NO outer edge: it thins into the slow solar wind,<br>"
         "so this drawing dissolves instead of stopping. Nothing is drawn<br>"
-        f"past the Alfven surface at {fade_rs:.1f} R_sun<br>"
+        f"past the Alfven surface at {row_text('ALFVEN_SURFACE_RADII')} R_sun<br>"
         # Source: constants_new.py ALFVEN_SURFACE_RADII -- the km and AU
         #   figures on the next line are COMPUTED from it, not typed, so
         #   this line restates a cited constant rather than making an
@@ -1795,7 +1834,7 @@ def create_sun_streamer_band(center_position=(0, 0, 0)):
         #   (L-209). The comment sits HERE, mid-string, because the
         #   scanner judges citation by line distance and the L-227
         #   re-flow moved this line out of the window (L-229).
-        f"({fade_km:,.0f} km, {fade_au:.6f} AU), where the corona becomes<br>"
+        f"({row_text('ALFVEN_SURFACE_RADII', 'km', grouping=True)} km, {row_text('ALFVEN_SURFACE_RADII', 'au')} AU), where the corona becomes<br>"
         "wind. Beyond that the sheet continues as the heliospheric<br>"
         "current sheet, out to the heliopause.<br><br>"
 

@@ -21,6 +21,10 @@ Consumed by: palomas_orrery.py (plot_objects, animate_objects)
 Role: rendering/shells
 Domain: orrery
 
+Module updated: October 3, 2026 with Anthropic's Claude Opus 5.5 (L-371:
+the MAPS hovers print the helmet cusp, the Roche limit and the inner
+corona from their rows at their counts, through constants_rows.row_text(),
+where they printed widths of their own or typed copies of the rows.)
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
 May 28, 2026: Phase 1 re-pipe (Opus 4.7). 6 live inline info markers
     routed through orrery_rendering.create_info_marker() factory:
@@ -42,6 +46,8 @@ from orrery_rendering import create_info_marker
 from planet_visualization_utilities import (
     KM_PER_AU, SUN_RADIUS_KM, SOLAR_RADIUS_AU,
     ALFVEN_SURFACE_RADII, HELMET_CUSP_RADII)
+# L-371: the Sun's distance rows printed at their counts.
+from constants_rows import row_text
 
 # Comet nucleus sizes (approximate, in km)
 COMET_NUCLEUS_SIZES = {
@@ -545,7 +551,7 @@ def create_maps_disintegration_marker(position_au, comet_name='MAPS'):
         f"({dist_photosphere_au:.6f} AU) = {r_solar_radii:.2f} R_sun<br>"
         f"Layer: between the Alfven Surface (~{ALFVEN_SURFACE_RADII} R_sun, "
         f"~{ALFVEN_SURFACE_RADII * SOLAR_RADIUS_AU:.3f} AU) and the helmet cusp "
-        f"(~{HELMET_CUSP_RADII} R_sun, ~{HELMET_CUSP_RADII * SOLAR_RADIUS_AU:.3f} AU)<br>"
+        f"(~{row_text('HELMET_CUSP_RADII')} R_sun, ~{row_text('HELMET_CUSP_RADII', 'au')} AU)<br>"
     #    f"<br>"
         f"<b>Solar environment:</b><br>"
         f"Corona temperature at this distance: ~1-2 million K<br>"
@@ -553,16 +559,16 @@ def create_maps_disintegration_marker(position_au, comet_name='MAPS'):
         # L-224: was a typed "~6.0 R_sun, ~0.028 AU" plus a typed verdict,
         # both of which would have gone stale silently when the constant
         # moved. Computed from the constant now. No Shadow Constants.
-        f"Inside the helmet cusp (~{HELMET_CUSP_RADII} R_sun, "
-        f"~{HELMET_CUSP_RADII * SOLAR_RADIUS_AU:.3f} AU): {helmet_status}<br>"
-        f"Inside Roche limit (~3.45 R_sun, ~0.016 AU): {roche_status}<br>"
-        f"Inside Inner K-corona (~3.0 R_sun, ~0.014 AU): NO<br>"
+        f"Inside the helmet cusp (~{row_text('HELMET_CUSP_RADII')} R_sun, "
+        f"~{row_text('HELMET_CUSP_RADII', 'au')} AU): {helmet_status}<br>"
+        f"Inside Roche limit (~{row_text('ROCHE_LIMIT_RADII')} R_sun, ~{row_text('ROCHE_LIMIT_RADII', 'au')} AU): {roche_status}<br>"
+        f"Inside Inner K-corona (~{row_text('INNER_CORONA_RADII')} R_sun, ~{row_text('INNER_CORONA_RADII', 'au')} AU): NO<br>"
     #    f"<br>"
         f"<b>Physics of destruction (at 8.3 R_sun, ~0.039 AU):</b><br>"
         f"Primary mechanisms at this distance:<br>"
         f"1. Thermal ablation: 1-2 million K corona vaporizes surface ices<br>"
         f"2. Rotational spin-up: outgassing jets torque the 400 m nucleus to breakup (only meters of surface loss needed)<br>"
-        f"Note: Tidal disruption requires being inside the Roche limit (~3.45 R_sun, ~0.016 AU). MAPS never reached it intact.<br>"
+        f"Note: Tidal disruption requires being inside the Roche limit (~{row_text('ROCHE_LIMIT_RADII')} R_sun, ~{row_text('ROCHE_LIMIT_RADII', 'au')} AU). MAPS never reached it intact.<br>"
         f"The Roche limit, inner K-corona, and perihelion were all crossed by debris only.<br>"
     #    f"The Roche limit marks where tidal forces overcome self-gravity.<br>"
     #    f"Survival inside it depends on tensile strength -- Lovejoy (C/2011 W3,<br>"
@@ -728,8 +734,8 @@ def create_maps_ghost_tail_trace(fig=None):
         "April 4 08:15 UTC to April 6 01:00 UTC (~40 hours)<br>"
         "After disintegration at ~8.33 R_sun (~0.039 AU), debris swept<br>"
         f"inbound through the streamer band, past its helmet cusp<br>"
-        f"({HELMET_CUSP_RADII} R_sun, {HELMET_CUSP_RADII * SOLAR_RADIUS_AU:.3f} AU),<br>"
-        "Roche limit (3.45 R_sun, 0.016 AU), inner K-corona (3.0 R_sun, 0.014 AU),<br>"
+        f"({row_text('HELMET_CUSP_RADII')} R_sun, {row_text('HELMET_CUSP_RADII', 'au')} AU),<br>"
+        f"Roche limit (about {row_text('ROCHE_LIMIT_RADII')} R_sun, {row_text('ROCHE_LIMIT_RADII', 'au')} AU), inner K-corona ({row_text('INNER_CORONA_RADII')} R_sun, {row_text('INNER_CORONA_RADII', 'au')} AU),<br>"
         "and perihelion (1.23 R_sun, 0.006 AU) at 556 km/s. Then outbound<br>"
         "until dispersed to ~29 R_sun (~0.132 AU) by April 6.<br>"
         "SOHO/LASCO tracked ~40h; no ground-based visibility.<br>"

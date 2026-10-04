@@ -30,6 +30,9 @@ Domain: dev_tools
 
 Module created: August 2026 with Anthropic's Claude Opus 5.
 Module updated: August 18, 2026 with Anthropic's Claude Opus 5 (L-207).
+Module updated: October 3, 2026 with Anthropic's Claude Opus 5.5 (L-371:
+HELIOPAUSE_RADII leaves the live-corpus movement pin. Its two cross-check
+legs retired with the value they checked, so no claim attaches to it.)
 """
 
 import json
@@ -541,12 +544,17 @@ def test_display_instructions():
 # THE LIVE CORPUS -- pin what the checker actually finds
 # ============================================================
 
-# All four moved after their worksheets ran, and all four sit in
+# All three moved after their worksheets ran, and all three sit in
 # worksheets whose only verdict column asks about the CITATION. So the
 # tool cannot say whether the movement was a correction or a defect,
 # and says so. Before 2026-08-15 it called all eight rows DRIFTED,
 # which asserted the strongest of the three readings on no evidence.
-UNCHECKED_MOVE_CONSTANTS = ('HELIOPAUSE_RADII', 'BENNU_RADIUS_KM',
+# HELIOPAUSE_RADII was the fourth until 2026-10-03 (L-371): it became a
+# conversion of HELIOPAUSE_AU, read from Gurnett et al. (2013) as 121 AU,
+# and its Cross-checked legs of 2026-08-02 retired with the 121.6 AU they
+# had certified, which the paper does not print. With no annotation on
+# the row there is no claim for the checker to see move.
+UNCHECKED_MOVE_CONSTANTS = ('BENNU_RADIUS_KM',
                             'HAUMEA_RADIUS_KM', 'ARROKOTH_RADIUS_KM')
 
 

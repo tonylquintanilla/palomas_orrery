@@ -49,6 +49,12 @@ Module updated: August 26, 2026 with Anthropic's Claude Opus 5
 boundaries. No pinned values -- derivations against their own
 factors, orderings, and geometric brackets, so a corrected source
 never makes them stale)
+Module updated: October 3, 2026 with Anthropic's Claude Opus 5.5
+(L-371: three relation tests for the Sun's distances -- each ranged
+edge is drawn at an end of its range, the heliopause and the
+gravitational reach are converted from their sources' units rather
+than typed twice, and the unsourced range row stays gone. Still no
+pinned values.)
 
 Role: devtool
 Domain: dev_tools
@@ -85,7 +91,19 @@ from constants_new import (
     INNER_OORT_CLOUD_AU,
     OUTER_OORT_CLOUD_AU,
     GRAVITATIONAL_INFLUENCE_AU,
-    GRAVITATIONAL_INFLUENCE_RANGE_AU,
+    # L-371: the Sun's ranged edges, and the rows in their sources' units
+    OORT_CLOUD_INNER_EDGE_LOW_AU,
+    OORT_CLOUD_INNER_EDGE_HIGH_AU,
+    OORT_CLOUD_OUTER_EDGE_LOW_AU,
+    OORT_CLOUD_OUTER_EDGE_HIGH_AU,
+    HELMET_CUSP_LOW_RADII,
+    HELMET_CUSP_HIGH_RADII,
+    HELIOPAUSE_AU,
+    GRAVITATIONAL_INFLUENCE_PC,
+    PARSEC_TO_AU,
+    KM_PER_PARSEC,
+    KM_PER_AU,
+    SUN_RADIUS_KM,
     # Spacecraft reference
     PARKER_CLOSEST_RADII,
     # Earth interior boundaries (L-249)
@@ -200,6 +218,51 @@ def test_oort_cloud_ordering():
     """Oort cloud radii must nest outward: inner limit < inner < outer < gravitational influence."""
     assert INNER_LIMIT_OORT_CLOUD_AU < INNER_OORT_CLOUD_AU < OUTER_OORT_CLOUD_AU < GRAVITATIONAL_INFLUENCE_AU, \
         "Oort cloud shell ordering violated"
+
+
+def test_sun_ranged_edges_drawn_at_an_end():
+    """L-371: each ranged edge is drawn at the end its row states.
+
+    The Oort cloud's inner edge at the near end of its range and its
+    outer edge at the far end (Tony's ruling A, 2026-10-03), and the
+    helmet cusp at the top of 2-4 solar radii.
+    """
+    assert OORT_CLOUD_INNER_EDGE_LOW_AU < OORT_CLOUD_INNER_EDGE_HIGH_AU
+    assert INNER_LIMIT_OORT_CLOUD_AU == OORT_CLOUD_INNER_EDGE_LOW_AU, \
+        "the inner edge is not drawn at the near end of its range"
+    assert OORT_CLOUD_OUTER_EDGE_LOW_AU < OORT_CLOUD_OUTER_EDGE_HIGH_AU
+    assert OUTER_OORT_CLOUD_AU == OORT_CLOUD_OUTER_EDGE_HIGH_AU, \
+        "the outer edge is not drawn at the far end of its range"
+    assert HELMET_CUSP_LOW_RADII < HELMET_CUSP_HIGH_RADII
+    assert HELMET_CUSP_RADII == HELMET_CUSP_HIGH_RADII, \
+        "the helmet cusp is not drawn at the top of its range"
+
+
+def test_sun_distances_converted_not_typed():
+    """L-371 / L-386: one distance, one row, in its source's unit.
+
+    The heliopause is stored in AU and the gravitational reach in
+    parsecs; the solar-radii and AU names are computed from them.
+    """
+    rel = 1e-12
+    expect = HELIOPAUSE_AU * KM_PER_AU / SUN_RADIUS_KM
+    assert abs(HELIOPAUSE_RADII - expect) <= rel * expect, \
+        f"HELIOPAUSE_RADII {HELIOPAUSE_RADII} is not HELIOPAUSE_AU converted ({expect})"
+    expect = PARSEC_TO_AU * KM_PER_AU
+    assert abs(KM_PER_PARSEC - expect) <= rel * expect, \
+        f"KM_PER_PARSEC {KM_PER_PARSEC} is not PARSEC_TO_AU in km ({expect})"
+    expect = GRAVITATIONAL_INFLUENCE_PC * PARSEC_TO_AU
+    assert abs(GRAVITATIONAL_INFLUENCE_AU - expect) <= rel * expect, \
+        f"GRAVITATIONAL_INFLUENCE_AU {GRAVITATIONAL_INFLUENCE_AU} is not the parsec row in AU ({expect})"
+
+
+def test_unsourced_gravitational_range_stays_gone():
+    """L-371: the 100,000-200,000 AU range had no source and went with
+    the midpoint drawn from it. A row of that name coming back would
+    put an unsourced range back in front of a visitor."""
+    import constants_new
+    assert not hasattr(constants_new, "GRAVITATIONAL_INFLUENCE_RANGE_AU"), \
+        "GRAVITATIONAL_INFLUENCE_RANGE_AU is back in constants_new.py"
 
 
 # ============================================================
