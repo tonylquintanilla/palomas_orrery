@@ -8,7 +8,8 @@ https://github.com/tonylquintanilla/palomas_orrery (branch main). The
 prior version is archived at
 `documentation/README_archived_20260831.md`. The anchor names the state
 this file was written against, not a promise the repository still sits
-there.
+there. Updated October 4, 2026 with Anthropic's Claude Opus 5.5 (L-409):
+the License section's years, and its pointer to `NOTICE.md`.
 
 **What this file is.** The project's front door, in two halves. Part 1
 says what Paloma's Orrery is and where to find the pieces that describe
@@ -183,7 +184,8 @@ further down this file for the rest.
 | [L192_annotated_sites.txt](L192_annotated_sites.txt) | hand-written | The L-192 site store: every annotated provenance site the worksheet checker tracks, anchored by module, enclosing function or constant, and label. Read by test_worksheet_keys.py and test_extractor_pins.py on every maintenance run; edit a row when a site is added, renamed or retired. |
 | [L192_extractor_pins.txt](L192_extractor_pins.txt) | hand-written | Extractor pins for the L-192 corpus: what the instruction filter keeps and drops at each display-string site, frozen by Tony 2026-08-14. Read by test_extractor_pins.py on every maintenance run; regenerate only from that test's REPIN output. |
 | [L192_key_pins.txt](L192_key_pins.txt) | hand-written | Key pins for the L-192 corpus: every worksheet key minted at 305b269, asserted to still resolve by test_worksheet_keys.py on every maintenance run. A rename breaks this loudly; record the alias in worksheet_key_aliases.py, never regenerate to make it quiet. |
-| [LICENSE.md](LICENSE.md) | hand-written | MIT license. |
+| [LICENSE.md](LICENSE.md) | hand-written | The MIT license, as the standard text alone so GitHub recognizes it. Attributions are in NOTICE.md. |
+| [NOTICE.md](NOTICE.md) | hand-written | Data attributions and third-party components, moved out of LICENSE.md so GitHub recognizes the license. |
 | [PROJECT_ORIGIN.md](PROJECT_ORIGIN.md) | hand-written | How the project started, in Tony's own words. |
 | [requirements.txt](requirements.txt) | hand-written | Annotated dependency spec, including the kaleido 0.2.1 pin and the Plotly 5.x constraint. |
 | [RUNNING_A_PATCH_FILE.md](RUNNING_A_PATCH_FILE.md) | hand-written | How to run a delivered patch script, and what its guards mean. |
@@ -209,7 +211,7 @@ The deep-dive documents, which live in `documentation/`:
 ```
 palomas_orrery/                  # this repo
 |- *.py                          # Python modules, all at root
-|- README.md, LICENSE.md         # you are here
+|- README.md, LICENSE.md, NOTICE.md   # you are here
 |- PROJECT_INSTRUCTIONS.md       # the protocol (Part 2)
 |- PROJECT_ORIGIN.md             # how it started
 |- MODULE_INDEX.md               # what every module does (generated)
@@ -612,9 +614,12 @@ not be read as evidence of something else.
 
 ## License
 
+The license file is `LICENSE.md`; data attributions and third-party
+components are in `NOTICE.md`.
+
 MIT License
 
-Copyright (c) 2025-2026 Tony Quintanilla
+Copyright (c) 2024-2026 Tony Quintanilla
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

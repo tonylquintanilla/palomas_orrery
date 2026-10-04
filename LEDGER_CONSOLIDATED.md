@@ -212,6 +212,9 @@ Module updated: October 2, 2026 with Anthropic's Claude Opus 5.5
 (session close: L-404 done; L-363 phone check of step 3b and the Home
 question; L-405 pushed, its install confirmed next session), built on
 bb1b1314.
+Module updated: October 4, 2026 with Anthropic's Claude Opus 5.5
+(L-363: the lobby's wide Solar System card, gallery 3c65b8a7 and
+d4b408e6; L-216: the stray folder again), built on a841ab6e.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -429,7 +432,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*246 live items; 231 need attention (`!`); 188 RICE-scored; 157 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*247 live items; 232 need attention (`!`); 188 RICE-scored; 157 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -466,7 +469,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
-| ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-09-22 |
+| ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-10-04 |
 | ! | L-224 | Streamer belt: one warped band, not a sphere | OPEN | 3.8 | 2026-08-22 |
 |  | L-230 | A skill bump does not reach the protocol's version history | DEFERRED | 3.8 | 2026-08-23 |
 | ! | L-227 | Streamer band hover rendered as one 378-character line | OPEN | 3.8 | 2026-08-23 |
@@ -547,7 +550,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-359 | Served text beside a served number can go stale where no tool may edit it (gallery) | OPEN | -- | 2026-09-22 |
 | ! | L-360 | The hover budget measures recorded payloads, so it cannot see a line added by newly served data (checks) | OPEN | -- | 2026-09-28 |
 | ! | L-361 | An epoch typed in the page, with no store row (gallery, store) | OPEN | -- | 2026-09-22 |
-| ! | L-363 | The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits) | OPEN | -- | 2026-10-03 |
+| ! | L-363 | The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits) | OPEN | -- | 2026-10-04 |
 | ! | L-364 | A comet's own trust window can exclude today while the served window passes the scene (gallery, trust) | OPEN | -- | 2026-09-29 |
 | ! | L-365 | The assembler leaves out a body it cannot draw, without a warning (gallery, assembler) | OPEN | -- | 2026-09-29 |
 | ! | L-366 | An orbit's info marker describes an arbitrary point on the orbit (gallery, assembler) | OPEN | -- | 2026-09-26 |
@@ -586,6 +589,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-406 | The galactic tide drawn in the galaxy's plane (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-02 |
 | ! | L-407 | A skill's header is checked as YAML (orrery, skills) | OPEN | -- | 2026-10-02 |
 | ! | L-408 | A Galactic Plane toggle in the Sun room (gallery, the Sun's slice) | OPEN | -- | 2026-10-03 |
+| ! | L-409 | The licenses: the orrery's recognized by GitHub, the website's written (orrery, gallery) | OPEN | -- | 2026-10-04 |
 
 ### B. Pending Action (Tony-side)
 
@@ -922,6 +926,39 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-409] The licenses: the orrery's recognized by GitHub, the website's written (orrery, gallery)
+<!-- L:409 status:OPEN upd:2026-10-04 section:A flag: rice: -->
+- **Found 2026-10-04,** when Tony asked whether the license was done
+  properly. The orrery's `LICENSE.md` is in the right place, but GitHub's
+  sidebar said "View license", not "MIT license": the file held the
+  Doc-Kind tag and two sections of attributions beside the MIT text. Its
+  year, 2024, disagreed with the README's License section, 2025-2026.
+  The website's repository had no license file; its README said
+  "Licensed MIT, the same as the application repository".
+- **Tony's rulings, 2026-10-04:** the website's code under the MIT
+  License and its content -- words, pictures, artwork, visualizations --
+  under CC BY 4.0; a copyright line on the lobby's About card; his email
+  address as that card's last line. Years 2024-2026, the project having
+  begun in September 2024.
+- **Built:**
+  - Orrery `patch_L409_2`: `LICENSE.md` the standard text alone; its
+    attributions moved word for word to `NOTICE.md`; the README's
+    License years and a pointer to `NOTICE.md`; `doc_index.py`
+    describes `LICENSE.md`, which cannot carry the tag (UNTAGGABLE, one
+    entry, named in its report).
+  - Gallery `patch_L409_1`: `LICENSE` (MIT), `LICENSE-CONTENT.md` (CC BY
+    4.0: what counts as content, a suggested credit, third-party data
+    excluded), `NOTICE.md` (Plotly.js, MIT; Pyodide, MPL-2.0 [verified
+    2026-10-04 against pyodide.org]; data stays under its providers'
+    terms), the README's license line, and the About card's two new
+    lines.
+- Claude said this is practical orientation, not legal advice.
+**Gap:** after both pushes, each repository's GitHub page should say
+"MIT license" in its sidebar -- the one check that the recognition
+worked. **Tony-action (do):** look at both.
+**Ref:** L-085 (LICENSE to repo root); gallery `index.html`, the About
+overlay.
 
 #### [L-408] A Galactic Plane toggle in the Sun room (gallery, the Sun's slice)
 <!-- L:408 status:OPEN upd:2026-10-03 section:A flag: rice: -->
@@ -1883,7 +1920,46 @@ numbers, one drawing at a time.
 **Ref:** gallery `tools/gallery_cache_builder.py` (served_window, M2 section 5.5); gallery `gallery/assembler/resolver.py`, step 3; skills/gallery-assembler/SKILL.md; L-363.
 
 #### [L-363] The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits)
-<!-- L:363 status:OPEN upd:2026-10-03 section:A flag: rice: -->
+<!-- L:363 status:OPEN upd:2026-10-04 section:A flag: rice: -->
+- **2026-10-04, the lobby's wide card: built and on the website.**
+  Gallery `patch_L363_10` (pushed `3c65b8a7`), `patch_L363_11`
+  (`d4b408e6`) and `patch_L363_13` (the wording), in a session running beside the L-371 one, on files the
+  other did not touch. Record:
+  `documentation/HANDOFF_L363_lobby_card_session_20261004.md`.
+  - What it is: sketch C of Tony's canvas. The Solar System card is
+    drawn full width at the top of Featured with its picture, "SOLAR
+    SYSTEM - START HERE", the title "The Solar System, live", its
+    sentence and the Interactive tag; the same card comes first on the
+    door's page. Four new card fields in `gallery_metadata.json` --
+    `wide`, `kicker`, `picture`, `picture_alt` -- and one writer,
+    `wideCardHtml()` in `index.html`. The gallery editor keeps fields
+    it does not show [verified @df8bbab, read].
+  - **Tony's rulings, 2026-10-04:** Claude draws the picture from the
+    room's data rather than Tony taking a screenshot; the sentence is
+    the sketch's, then "Live data from JPL Horizons."; the empty room
+    `solar_system/solar_system` is removed; all three lobby doors drop
+    "rooms under construction" (the door pages keep their counts);
+    after his phone check, the picture zoomed so Mars's orbit spans
+    about 80% of the width, with no grid (version B). Then the
+    sentence's second half became "Daily updates from JPL Horizons."
+    in place of "Live data from JPL Horizons.": the website's data
+    comes from the daily run, not a continuous feed (gallery
+    `patch_L363_13`). The title "The Solar System, live" stays.
+  - The picture: the room's driver run on the served data for noon UTC
+    on 2026-10-04, drawn by Plotly with the room's camera and colours.
+    `tools/headless/draw_room_still.py` (gallery, Claude-only) redraws
+    it exactly. It shows that day's positions; the room shows now.
+  - Tony's phone check, 2026-10-04: doors, tap into the room, the
+    door's page, sideways and desktop correct [render-gated, Tony].
+    His look at the zoomed picture is not recorded.
+  - No gating checker reads `index.html`'s lobby code; the maintenance
+    run's 23 passes cover everything else. Recorded, not chased.
+  - Carried for gallery-pipeline's next version: the wide card's four
+    fields and the picture's tool. No sentence in the skill is wrong
+    now (A Wrong Sentence in a Skill: carry it).
+  - Unchanged: the swap (design section 7) -- a bare `interactive.html`
+    link opening this room, the Explorer at its own address -- after
+    the Sun's slice, per option C of 2026-09-29.
 - **2026-10-03, an opened row with the phone sideways (Tony's Mode 5).**
   The look the 2026-10-02 handoff left open ("not clear"). Sideways, the
   drawer -- at most 40% of the picture's height (`.sun-drawer`
@@ -5142,7 +5218,13 @@ governs a session document contradicting a settled decision, not a
 ledger field that predates the event it is silent about).
 
 #### [L-216] Gallery swap fails under a filesystem lock (OneDrive)
-<!-- L:216 status:OPEN upd:2026-09-22 section:A flag: rice:3/3/85/2 -->
+<!-- L:216 status:OPEN upd:2026-10-04 section:A flag: rice:3/3/85/2 -->
+- **2026-10-04: the stray folder again.** Tony's gallery maintenance
+  run of 2026-10-04 (Cache siblings, report-only) found
+  `data/solar-system (1)` in his gallery copy, the OneDrive shape L-400
+  closed on 2026-10-01 when he deleted the first one. Git ignores it.
+  A recurrence of this class, not a new item.
+  - **Tony-action (do):** delete it, with OneDrive paused, as before.
 - **2026-08-19: the nightly run wiped the served tree.** GitHub Desktop
   showed 56 deletions in the gallery repo and zero additions.
   `data/solar-system/` was absent while BOTH halves of the generation

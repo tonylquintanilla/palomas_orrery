@@ -1,31 +1,30 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, rewritten in place; read it at the end of every session. -->
 # Where We Are
 
-Last updated: October 3, 2026, end of session -- **Tony**: see notes with -- 
-- Written at orrery fd508f9c and gallery 52659e04.
+Last updated: October 4, 2026, end of the lobby-card session -- **Tony**: see notes with -- 
+- Written at orrery a841ab6e and gallery d4b408e6.
+- The Sun's distance cards are still being built in the other session,
+  which updates this page when it ends.
 
 > **READ THIS FIRST**
 >
 > **Changed this session:**
-> - The Sun room's galactic tide is now drawn in the galaxy's plane,
->   sparse at that plane and at its poles. Its words are new, and you
->   saw them right on the phone.
-> - Every skill's header is now checked the way Settings reads it.
->   Three were broken; one of them had been cutting
->   provenance-discipline's description short.
-> - The sources for the Sun's distance cards are read, and you ruled on
->   how to show the ones given as a range.
-> - From your phone afterwards: the Galactic Plane toggle's words,
->   what Home does, and the lobby's new Solar System card.
+> - The lobby now opens with a wide Solar System card at the top of
+>   Featured: a picture of the room, "The Solar System, live", and a
+>   sentence. You checked it on the phone, sideways and on the desktop.
+> - The same card comes first on the Solar System door's page.
+> - The lobby's doors no longer count rooms under construction, and the
+>   empty "solar_system" room is gone.
+> - The card's picture is drawn from the room's own data, zoomed to the
+>   inner planets, with no grid, as you asked.
 >
 > **Do next:**
-> - *Build the Sun's distance cards so every number prints at its
->   source's figures.*
+> - *Finish the Sun's distance cards: the website side, in the other
+>   session.*
 > - *Then the Galactic Plane toggle you asked for.*
 >
 > **Needs you now:**
-> - *Nothing. The skills and instructions were reinstalled and checked
->   on October 3.*
+> - *Nothing.*
 
 How to read the marks:
 - *Italic* lines are the must-reads.
@@ -60,16 +59,13 @@ How to read the marks:
               body's own room. Built and on the website. Home was
               settled on October 3; it is built next.
   5. [NOW]    *The Sun's numbers get the same checking Earth's got.*
-              << new this session: begun. The 43 drawing numbers are
-              sorted, the galactic tide is redrawn, and the distance
-              cards' sources are read; the build is next.
-  6. [next]   The Solar System room's card becomes the top featured
-              card in the lobby, full width with a picture of the
-              room, and first behind the Solar System door too.
-              << new this session: its look chosen on October 3.
-              A bare interactive.html link opens
-              the Solar System room, and the Explorer gets its own
-              address.
+              The 43 drawing numbers are sorted and the galactic tide
+              is redrawn. << new this session: the distance cards'
+              orrery side is pushed; the website side is being built.
+  6. [next]   A bare interactive.html link opens the Solar System room,
+              and the Explorer gets its own address.
+              << new this session: the first half, the lobby's wide
+              Solar System card, is done and on the website.
   7. [later]  The rest of the orrery's objects come to the website --
               dwarf planets, asteroids, moons -- through the same
               connection that now carries the room's eleven bodies,
@@ -84,20 +80,21 @@ How to read the marks:
 
 ## Right now  **>> UPDATED THIS SESSION**
 
+- The lobby opens with the wide Solar System card. Its picture shows
+  the Sun and the four inner planets where they were at noon on
+  October 4; the room itself always shows now.
 - The galactic tide is live, tilted into the galaxy's plane. It is
   drawn between 20,000 and 100,000 AU, the outer Oort cloud's edges.
-- Fourteen other Sun cards print their km with every digit, such as
-  299,195,741,400 km for 2,000 AU. The rows behind them do not yet say
-  how many figures their sources give.
-- The maintenance run now fails if a skill's header would be refused
-  by Settings: 20 checks where there were 19.
+- The Sun's distance cards: the orrery side is pushed. Until the
+  website side lands, the Sun cards print as before, with every digit.
 - The Solar System room and its drawer are as they were: Home still
   shows no visible change when it falls back to an earlier body, and
   with the phone sideways an opened row does not fit in the drawer.
 
 ## The next three steps  **>> UPDATED THIS SESSION**
 
-1. *The Sun's distance cards, built:*
+1. *The Sun's distance cards, finished on the website,* in the other
+   session:
    - Each distance row gets its source's figure count, so the km print
      at that count.
    - Where a source gives a range, the card draws one end and says so,
@@ -111,8 +108,7 @@ How to read the marks:
 3. The drawer's small fixes: the info panel's bullet lists, the 1.1
    that should say 1.2, and an opened row made to fit with the phone
    sideways: its Enter button on the name's line, as you chose.
-   Then Home as you settled it on October 3, and the lobby's new
-   Solar System card.
+   Then Home as you settled it on October 3.
 -- my notes in documentation should not cause a patch to fail. 
 
 
@@ -130,13 +126,19 @@ Not urgent, in your order:
 2. Whether the editor should also edit the words on the Solar System
    room's rows.
 3. Choosing a date, and animation.
+4. New: delete the folder "data/solar-system (1)" in your gallery
+   copy, with OneDrive paused, as you did on October 1. Your
+   maintenance run found it again. Git ignores it, so it does no harm
+   meanwhile.
 
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item, done and open: `LEDGER_CONSOLIDATED.md`
-  - This session: L-406 (the tide), L-407 (skill headers), L-405
-    (done), and the newest notes on L-371 (the Sun's numbers).
+  - This session: L-363 (the lobby card) and a note on L-216 (the
+    stray folder).
+  - The other session: L-371 (the Sun's numbers), L-406 and L-407.
 - The reasoning behind the order:
   `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`
-- The latest session record:
+- The latest session records:
+  `documentation/HANDOFF_L363_lobby_card_session_20261004.md`, and
   `documentation/HANDOFF_L406_L407_L371_session_20261003.md`

@@ -54,6 +54,15 @@ That is skills_index.py's behaviour rather than ledger_index.py's
 fallback insert, and on purpose: guessing where a table belongs in a
 prose document is worse than not writing one.
 
+ONE DOCUMENT CANNOT CARRY THE TAG (L-409)
+-----------------------------------------
+LICENSE.md must hold the standard MIT text alone, or GitHub does not
+recognise the license: on 2026-10-04 its sidebar said "View license",
+while the file also held a tag and two sections of attributions (now
+NOTICE.md). Its row is described in UNTAGGABLE below, and the report
+names it as described there rather than by a tag. It is the only entry;
+a second one is a reason to look again, not a pattern to extend.
+
 UNTAGGED DOCUMENTS ARE REPORTED, NEVER DROPPED
 ----------------------------------------------
 A document with no tag still appears in the table, marked untagged, and
@@ -65,6 +74,8 @@ Role: devtool
 Domain: dev_tools
 
 Module created: September 1, 2026 with Anthropic's Claude Opus 5.
+Module updated: October 4, 2026 with Anthropic's Claude Opus 5.5 (L-409:
+LICENSE.md described here, since it cannot carry the tag).
 """
 
 import re
@@ -87,6 +98,14 @@ KIND_LABEL = {
 KIND_ORDER = {'zoned': 0, 'hand': 1, 'generated': 2, '?': 3}
 
 SCAN_SUFFIXES = ('.md', '.txt')
+
+# L-409: documents whose content must stay exact, so they cannot carry a
+# tag. Described here instead; see the docstring.
+UNTAGGABLE = {
+    'LICENSE.md': ('hand', 'The MIT license, as the standard text alone so '
+                           'GitHub recognizes it. Attributions are in '
+                           'NOTICE.md.'),
+}
 TAG_SCAN_LINES = 40
 
 
@@ -110,6 +129,8 @@ def collect(root):
         if not p.is_file() or p.suffix.lower() not in SCAN_SUFFIXES:
             continue
         kind, purpose = read_tag(p)
+        if kind is None and p.name in UNTAGGABLE:
+            kind, purpose = UNTAGGABLE[p.name]
         docs.append((p.name, kind, purpose))
     return docs
 
@@ -171,6 +192,11 @@ def main():
         if names:
             print('  %-22s %d  %s'
                   % (KIND_LABEL.get(kind, kind), len(names), ', '.join(names)))
+
+    described = [n for n in UNTAGGABLE if (root / n).is_file()]
+    if described:
+        print('  described in doc_index.py, not by a tag: %s'
+              % ', '.join(described))
 
     problems = 0
     if unknown:
