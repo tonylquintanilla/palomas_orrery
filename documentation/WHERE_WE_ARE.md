@@ -15,14 +15,17 @@ Last updated: October 3, 2026, end of session
 >   provenance-discipline's description short.
 > - The sources for the Sun's distance cards are read, and you ruled on
 >   how to show the ones given as a range.
+> - From your phone afterwards: the Galactic Plane toggle's words,
+>   what Home does, and the lobby's new Solar System card.
 >
 > **Do next:**
 > - *Build the Sun's distance cards so every number prints at its
 >   source's figures.*
+> - *Then the Galactic Plane toggle you asked for.*
 >
 > **Needs you now:**
-> - *If not done yet: reinstall the three skills and the v3.79
->   instructions, and look for the tide's X on the phone.*
+> - *Nothing. The skills and instructions were reinstalled and checked
+>   on October 3.*
 
 How to read the marks:
 - *Italic* lines are the must-reads.
@@ -54,14 +57,17 @@ How to read the marks:
               website, and nothing is typed twice.
   4. [NOW]    The Solar System room becomes a second way in: all the
               planets, a drawer to pick them, and a way into each
-              body's own room. Built and on the website; what Home
-              does is still to settle.
+              body's own room. Built and on the website. Home was
+              settled on October 3; it is built next.
   5. [NOW]    *The Sun's numbers get the same checking Earth's got.*
               << new this session: begun. The 43 drawing numbers are
               sorted, the galactic tide is redrawn, and the distance
               cards' sources are read; the build is next.
   6. [next]   The Solar System room's card becomes the top featured
-              card in the lobby. A bare interactive.html link opens
+              card in the lobby, full width with a picture of the
+              room, and first behind the Solar System door too.
+              << new this session: its look chosen on October 3.
+              A bare interactive.html link opens
               the Solar System room, and the Explorer gets its own
               address.
   7. [later]  The rest of the orrery's objects come to the website --
@@ -98,25 +104,20 @@ How to read the marks:
      AU; drawn at 2,000."
    - The Heliopause moves to 121 AU, and Gravitational Influence to
      0.65 parsecs: the Sun's Hill radius, calculated.
-2. The drawer's small fixes: the info panel's bullet lists, the 1.1
+2. *A Galactic Plane toggle in the Sun room, your idea:* a faint ring
+   in the galaxy's plane and the galaxy's pole axis, so the tide's
+   tilt and its X can be seen at a glance. You look for the X then.
+3. The drawer's small fixes: the info panel's bullet lists, the 1.1
    that should say 1.2, and your second look at an opened row.
-3. What Home should do, settled in conversation, then built.
+   Then Home as you settled it on October 3, and the lobby's new
+   Solar System card.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
-Now, if not done yet:
-- Reinstall three skills in Settings > Skills: interactive-exhibit,
-  earth-system-pipeline and provenance-discipline.
-- Replace the Project's instructions with PROJECT_INSTRUCTIONS.md
-  v3.79.
-- Look at the galactic tide on the phone: tick it and the Hills
-  torus, and turn the view until the tide shows an X tilted against
-  the torus.
+Now:
+- Nothing.
 
 At the next design talk:
-- *Home.* Home names the last body ticked but frames everything drawn,
-  so falling back only changes the name on the drawer's handle. Your
-  idea: a second Home tap returns to the opening view.
 - Moving the highlighted row to the top of the list.
 - An arrow from GO's text box to its body.
 

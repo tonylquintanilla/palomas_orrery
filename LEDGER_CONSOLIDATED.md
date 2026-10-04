@@ -429,7 +429,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*245 live items; 230 need attention (`!`); 188 RICE-scored; 157 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*246 live items; 231 need attention (`!`); 188 RICE-scored; 157 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -547,7 +547,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-359 | Served text beside a served number can go stale where no tool may edit it (gallery) | OPEN | -- | 2026-09-22 |
 | ! | L-360 | The hover budget measures recorded payloads, so it cannot see a line added by newly served data (checks) | OPEN | -- | 2026-09-28 |
 | ! | L-361 | An epoch typed in the page, with no store row (gallery, store) | OPEN | -- | 2026-09-22 |
-| ! | L-363 | The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits) | OPEN | -- | 2026-10-02 |
+| ! | L-363 | The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits) | OPEN | -- | 2026-10-03 |
 | ! | L-364 | A comet's own trust window can exclude today while the served window passes the scene (gallery, trust) | OPEN | -- | 2026-09-29 |
 | ! | L-365 | The assembler leaves out a body it cannot draw, without a warning (gallery, assembler) | OPEN | -- | 2026-09-29 |
 | ! | L-366 | An orbit's info marker describes an arbitrary point on the orbit (gallery, assembler) | OPEN | -- | 2026-09-26 |
@@ -585,6 +585,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-406 | The galactic tide drawn in the galaxy's plane (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-02 |
 | ! | L-407 | A skill's header is checked as YAML (orrery, skills) | OPEN | -- | 2026-10-02 |
+| ! | L-408 | A Galactic Plane toggle in the Sun room (gallery, the Sun's slice) | OPEN | -- | 2026-10-03 |
 
 ### B. Pending Action (Tony-side)
 
@@ -922,6 +923,53 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-408] A Galactic Plane toggle in the Sun room (gallery, the Sun's slice)
+<!-- L:408 status:OPEN upd:2026-10-03 section:A flag: rice: -->
+- **Asked 2026-10-03** by Tony, looking for the galactic tide's X on
+  the phone and not finding it at the angle he had: "Could we toggle on
+  the galactic plane and axis?" Claude agreed it earns its place: it
+  makes the tide's tilt legible at a glance, and teaches on its own
+  that the solar system is tipped steeply against the galaxy.
+- **The design Tony confirmed ("Yes please"):** one new row in the
+  Oort Cloud group, "Galactic Plane", off by default; a faint ring in
+  the galaxy's plane at the tide's outer edge (`OUTER_OORT_CLOUD_AU`,
+  100,000 AU) and a line along the galactic pole axis through the Sun;
+  no new numbers -- it reads the same two pole rows the tide reads
+  (`GALACTIC_NORTH_POLE_RA_J2000_DEG`, `_DEC_J2000_DEG`), so the ring
+  and the tide cannot disagree. Left out for now: the direction to the
+  galaxy's centre, which needs one more sourced number.
+- **Words approved 2026-10-03** (Tony: "Approved"), to be served as
+  written:
+  - Row name: "Galactic Plane"
+  - Description: "The plane of the Milky Way's disk, drawn as a ring
+    around the Sun, with a line along the galaxy's north-south axis."
+  - Info panel: "The Milky Way is a flat disk of stars, gas and dust,
+    and the Sun lies inside it. Seen from Earth, that disk is the pale
+    band of the Milky Way across the night sky. The ring shows the
+    disk's plane, and the line through the Sun points to the galaxy's
+    north pole, in the constellation Coma Berenices. The planets'
+    orbits are tipped steeply against it: the two planes meet at
+    [ANGLE] degrees. That tilt is why the galactic tide looks tipped
+    against the Hills cloud, which lies close to the planets' plane."
+  - Note: "The ring is drawn at the outer edge of the Oort cloud, where
+    the tide is drawn, to show the plane's direction. The galaxy's disk
+    reaches far beyond it."
+  - Link: https://en.wikipedia.org/wiki/Galactic_coordinate_system,
+    shown as "Read more at Wikipedia". A search on 2026-10-03 found no
+    NASA page specific to the galactic plane, so Wikipedia applies by
+    the L-265 rule. The article's table also places the north galactic
+    pole in Coma Berenices, which backs that sentence.
+  - [ANGLE] is NOT typed (a hover string that types a number is a
+    store). The renderer works out the angle between the galactic plane
+    and the ecliptic from the two pole rows and the frame angle the
+    tide already uses, and prints it to the nearest degree. The rows
+    give 60.19, so it prints 60; Portegies Zwart et al. 2021 (A&A 652,
+    A144, sec. 3.2) give 60 as the cross-check.
+**Gap:** Build it next session, with the Sun's distance cards (L-371):
+gallery first; whether the orrery gets the same toggle is asked then.
+**Ref:** L-406, L-265; gallery `gallery/feature_renderers.js`,
+`data/objects_config.json`.
+
 #### [L-407] A skill's header is checked as YAML (orrery, skills)
 <!-- L:407 status:OPEN upd:2026-10-02 section:A flag: rice: -->
 - **Found 2026-10-02** when Settings refused interactive-exhibit 1.10
@@ -1025,9 +1073,16 @@ or reviewing", then closes this item.
 - **Cross-check:** Portegies Zwart et al. 2021 (A&A 652, A144, sec.
   3.2) set the ecliptic at 60 degrees to the Galactic plane; the
   redrawn tide's stored pole gives 60.19 degrees.
-**Gap:** Tony: reinstall interactive-exhibit 1.10, and look at the tide
-on the phone and in the orrery (Mode 5). The next session confirms its
-loaded interactive-exhibit reads 1.10.
+- **The look moves to L-408, 2026-10-03.** Tony had already turned the
+  tide on the phone looking for the X and could not find it without a
+  reference; that is why he asked for the Galactic Plane toggle. His
+  screenshot of 2026-10-03 shows an even cloud around the torus, which
+  is what the drawing should look like from most angles. The look is
+  made once L-408's ring is drawn: turn until the ring is edge-on.
+- **Reinstall confirmed, 2026-10-03:** the session of that day loaded
+  interactive-exhibit 1.10.
+**Gap:** The look, on the phone and in the orrery (Mode 5), waits on
+L-408's ring as its reference.
 **Ref:** L-371; L-265; L-386; skills/interactive-exhibit/SKILL.md;
 orrery `solar_visualization_shells.py`, `idealized_orbits.py`,
 `constants_new.py`; gallery `gallery/feature_renderers.js`,
@@ -1828,7 +1883,41 @@ numbers, one drawing at a time.
 **Ref:** gallery `tools/gallery_cache_builder.py` (served_window, M2 section 5.5); gallery `gallery/assembler/resolver.py`, step 3; skills/gallery-assembler/SKILL.md; L-363.
 
 #### [L-363] The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits)
-<!-- L:363 status:OPEN upd:2026-10-02 section:A flag: rice: -->
+<!-- L:363 status:OPEN upd:2026-10-03 section:A flag: rice: -->
+- **2026-10-03, Home settled (Tony, from his phone).** Of three ways,
+  option 2 "as recommended": Home fits every body ticked, by the room's
+  framing rule (where each body is now, plus 20%), at the opening
+  angle, drawer closed. The order bodies were ticked in no longer
+  matters to Home; the drawer's handle keeps naming the last body
+  ticked. With nothing ticked, Home still puts back the served opening.
+  No second tap (Tony: "No"): the way back to the opening is to untick
+  everything and press Home, or reload. GO goes in, Home backs out.
+  interactive-exhibit 1.10's "Home remembers the tick order" describes
+  today's Home; the build corrects it in the skill.
+- **2026-10-03, the lobby's way in (Tony, from his phone).** From a
+  Design canvas of three sketches -- a hero card above the doors; one
+  Solar System door with two buttons; a wide card first in Featured --
+  Tony chose the third: "The Solar System, live", full width at the top
+  of Featured with a picture of the room, above the Sun and Earth cards.
+  His addition: the Solar System door's own page shows the same wide
+  card first under "Exhibits here" (Tony: "Yes, exactly"). This is the
+  2026-10-01 ruling's "highlighted in some other way too". The canvas,
+  private to Tony: https://claude.ai/artifact/ELfZfhvvyHjckJPY9829Ks
+  - Two changes the sketches showed, ruled on 2026-10-03 after the
+    push of 6127f08. The door's line drops "N rooms under construction"
+    (Tony: "okay"). The doors' arrows STAY as they are, the blue
+    buttons iOS draws for U+25B6 (Tony, with a screenshot of them: "The
+    arrows are okay"); the build does not change them.
+  - The picture is a still of the room, not the sketch's drawing; Tony
+    judges it at Mode 5.
+- **Found 2026-10-03, recorded, not chased:** gallery_config.json gives
+  the solar_system door a child room keyed `solar_system`, labelled
+  "solar_system", holding no cards, so the door page lists it under
+  construction. The interactive card sits on the door itself
+  (`"room": "solar_system"`). Tony's reading: the room was made for the
+  interactive card, which never moved into it. With the card wide at
+  the top of the door's page, the empty room is likely not needed; the
+  lobby build settles it.
 - **2026-10-02, step 3b on Tony's phone (Mode 5).** Pushed at gallery
   3ed96777 with 23 of 23 gating checkers; the live run read all 15
   served files SERVED and matching, solar_system_drawer.js among them.

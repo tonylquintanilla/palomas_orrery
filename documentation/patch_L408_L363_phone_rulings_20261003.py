@@ -13,7 +13,9 @@ has already run, this one refuses and writes nothing -- tell the next
 session, which adds the rest by hand.
 
 RUN IT AFTER patch_L371_session_close_20261003.py AND ITS MAINTENANCE
-RUN. It was built on the files those two leave, from orrery
+RUN -- both done and pushed at orrery 6127f083. A first copy of this
+patch was pushed into documentation/ at 6127f083 WITHOUT having run;
+this copy replaces it. It was built on the files those two leave, from orrery
 fd508f9c7794e3a51b22a4e1e3aa3a54c3e339ef
 at https://github.com/tonylquintanilla/palomas_orrery
 (gallery 52659e04b38dd773aa14b6e6e9e1a533bff114e7
@@ -142,16 +144,21 @@ L363_NEW = """\
   card first under "Exhibits here" (Tony: "Yes, exactly"). This is the
   2026-10-01 ruling's "highlighted in some other way too". The canvas,
   private to Tony: https://claude.ai/artifact/ELfZfhvvyHjckJPY9829Ks
-  - In all three sketches but not ruled on separately, so Tony confirms
-    them at the build: the doors' arrow (U+25B6, which iOS draws as a
-    blue emoji button, as his screenshot shows) drawn as a plain SVG
-    chevron; and the door's line dropping "N rooms under construction".
+  - Two changes the sketches showed, ruled on 2026-10-03 after the
+    push of 6127f08. The door's line drops "N rooms under construction"
+    (Tony: "okay"). The doors' arrows STAY as they are, the blue
+    buttons iOS draws for U+25B6 (Tony, with a screenshot of them: "The
+    arrows are okay"); the build does not change them.
   - The picture is a still of the room, not the sketch's drawing; Tony
     judges it at Mode 5.
 - **Found 2026-10-03, recorded, not chased:** gallery_config.json gives
   the solar_system door a child room keyed `solar_system`, labelled
   "solar_system", holding no cards, so the door page lists it under
-  construction. Looked at when the lobby card is built.
+  construction. The interactive card sits on the door itself
+  (`"room": "solar_system"`). Tony's reading: the room was made for the
+  interactive card, which never moved into it. With the card wide at
+  the top of the door's page, the empty room is likely not needed; the
+  lobby build settles it.
 - **2026-10-02, step 3b on Tony's phone (Mode 5).**"""
 
 L406_OLD_GAP = """\
