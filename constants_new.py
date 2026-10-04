@@ -2054,8 +2054,9 @@ ROCHE_LIMIT_RADII = 3.45
 # Figures: 1 -- set by the comet density it is worked out from, "~500"
 # Figures+: kg/m3, one figure (Rule 3; a cube root does not magnify it).
 # Note: its inputs are typed in the Calculation lines below, not rows;
-# Note+: sourcing the comet density is recorded on L-371. Drawn at the
-# Note+: full 3.45, printed at one figure.
+# Note+: sourcing the comet density is recorded on L-371. Printed at one
+# Note+: figure; drawn through ROCHE_LIMIT_DRAWN_RADII below, at its full
+# Note+: digits.
 # Source: Murray & Dermott, "Solar System Dynamics" (1999), Sec. 4.6
 # Derived: Fluid Roche limit formula: d = 2.44 * R * (rho_sun/rho_comet)^(1/3)
 # Calculation: 2.44 * 1.0 * (1408/500)^(1/3) = 3.45 R_sun
@@ -2064,6 +2065,22 @@ ROCHE_LIMIT_RADII = 3.45
 # Cross-checked: GPT 2026-08-02 -- formula verified (constants_new_citation_verification_gpt.md)
 # Note: Roche limit is NOT absolute; tensile strength allows survival
 # Note+: inside it. Ikeya-Seki survived at 1.66 R_sun.
+
+ROCHE_LIMIT_DRAWN_RADII = ROCHE_LIMIT_RADII
+# Derived: where the Roche limit is drawn, its row at full digits = 3.45
+# Unit: r_sun
+# Status: declared 2026-10-03 -- where the shell is drawn, L-371
+# Figures: exact -- prints 3, the digits of the value its rule gives
+# Figures+: (3.45); declared construction: equal to ROCHE_LIMIT_RADII at
+# Figures+: its full digits
+# Declared: the Roche limit is known to one figure, about 3 solar radii,
+# Declared+: the same as the line the inner corona is drawn at, so drawn
+# Declared+: at that value the two shells would sit on top of each other.
+# Declared+: It is drawn at the formula's full answer instead, so the two
+# Declared+: stay apart and the orrery and the gallery draw the same place.
+# Declared+: Which is really further out is not known. Tony's ruling of
+# Declared+: 2026-10-03, option B: an interim, until edges known only as
+# Declared+: ranges are drawn as fuzzy bands (a design item of its own).
 
 ALFVEN_SURFACE_RADII = 19.7
 # Unit: r_sun

@@ -37,6 +37,10 @@ Module updated: August 26, 2026 with Anthropic's Claude Opus 5 (L-249:
     Earth's crust declares info_polar_deg 10.0 so its info marker clears
     the upper mantle's, which it coincided with once the upper mantle
     moved to its sourced radius. Found by Mode 5, not by any checker.)
+Module updated: October 3, 2026 with Anthropic's Claude Opus 5.5 (L-371:
+    the Roche limit shell draws from ROCHE_LIMIT_DRAWN_RADII, the row
+    that says where it is drawn, rather than from the one-figure row it
+    equals. Same radius; the drawing choice now has its own home.)
 Module updated: September 7, 2026 with Anthropic's Claude Fable 5.1 (L-295:
     Earth's two atmosphere shells stop drawing at 1.05 and 1.25 radii,
     which were visibility choices their own hover contradicted, and draw
@@ -119,6 +123,8 @@ from solar_visualization_shells import (
 # consumer), kept in agreement with the live hover because a migration
 # would promote it.
 from constants_rows import figures_of, exact_text, format_prints
+# L-371: the Roche limit draws from the row that says where it is drawn.
+from constants_new import ROCHE_LIMIT_DRAWN_RADII
 from constants_new import (
     EARTH_INNER_CORE_RADII, EARTH_OUTER_CORE_RADII,
     # L-345, patch D20: the crust draws at the mean radius.
@@ -2013,7 +2019,7 @@ SHELL_CONFIGS = {
 
         'roche_limit': {
             'name': 'Roche Limit (Comets)',
-            'radius_au': ROCHE_LIMIT_RADII * SOLAR_RADIUS_AU,
+            'radius_au': ROCHE_LIMIT_DRAWN_RADII * SOLAR_RADIUS_AU,
             'color': 'rgb(200, 60, 60)',
             'opacity': 0.5,
             'n_points': 20,

@@ -54,7 +54,8 @@ Module updated: October 3, 2026 with Anthropic's Claude Opus 5.5
 edge is drawn at an end of its range, the heliopause and the
 gravitational reach are converted from their sources' units rather
 than typed twice, and the unsourced range row stays gone. Still no
-pinned values.)
+pinned values. A fourth the same day: the Roche limit is drawn at its
+own full digits, outside the inner corona.)
 
 Role: devtool
 Domain: dev_tools
@@ -98,6 +99,7 @@ from constants_new import (
     OORT_CLOUD_OUTER_EDGE_HIGH_AU,
     HELMET_CUSP_LOW_RADII,
     HELMET_CUSP_HIGH_RADII,
+    ROCHE_LIMIT_DRAWN_RADII,
     HELIOPAUSE_AU,
     GRAVITATIONAL_INFLUENCE_PC,
     PARSEC_TO_AU,
@@ -254,6 +256,16 @@ def test_sun_distances_converted_not_typed():
     expect = GRAVITATIONAL_INFLUENCE_PC * PARSEC_TO_AU
     assert abs(GRAVITATIONAL_INFLUENCE_AU - expect) <= rel * expect, \
         f"GRAVITATIONAL_INFLUENCE_AU {GRAVITATIONAL_INFLUENCE_AU} is not the parsec row in AU ({expect})"
+
+
+def test_roche_limit_drawn_at_its_full_digits():
+    """L-371, Tony's option B (2026-10-03): the drawn row equals the
+    one-figure row at full digits, and stays outside the inner corona's
+    drawn line, which is why it exists."""
+    assert ROCHE_LIMIT_DRAWN_RADII == ROCHE_LIMIT_RADII, \
+        "the Roche limit is not drawn at its own row's full digits"
+    assert ROCHE_LIMIT_DRAWN_RADII > INNER_CORONA_RADII, \
+        "the drawn Roche limit sits on or inside the inner corona"
 
 
 def test_unsourced_gravitational_range_stays_gone():
