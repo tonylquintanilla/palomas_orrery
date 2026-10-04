@@ -1,7 +1,7 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, rewritten in place; read it at the end of every session. -->
 # Where We Are
 
-Last updated: October 3, 2026, end of session
+Last updated: October 3, 2026, end of session -- **Tony**: see notes with -- 
 - Written at orrery fd508f9c and gallery 52659e04.
 
 > **READ THIS FIRST**
@@ -47,7 +47,7 @@ How to read the marks:
 - The one real limit: the browser can show only the dates the saved
   data covers.
 - Within that range, a visitor will be able to choose a date, and
-  perhaps play time forward.
+  perhaps play time forward. -- we determined that one orbit would work. 
 
 ## The road  **>> UPDATED THIS SESSION**
 
@@ -113,6 +113,8 @@ How to read the marks:
    sideways: its Enter button on the name's line, as you chose.
    Then Home as you settled it on October 3, and the lobby's new
    Solar System card.
+-- my notes in documentation should not cause a patch to fail. 
+
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
