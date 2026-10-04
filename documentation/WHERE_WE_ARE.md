@@ -92,7 +92,8 @@ How to read the marks:
 - The maintenance run now fails if a skill's header would be refused
   by Settings: 20 checks where there were 19.
 - The Solar System room and its drawer are as they were: Home still
-  shows no visible change when it falls back to an earlier body.
+  shows no visible change when it falls back to an earlier body, and
+  with the phone sideways an opened row does not fit in the drawer.
 
 ## The next three steps  **>> UPDATED THIS SESSION**
 
@@ -108,7 +109,8 @@ How to read the marks:
    in the galaxy's plane and the galaxy's pole axis, so the tide's
    tilt and its X can be seen at a glance. You look for the X then.
 3. The drawer's small fixes: the info panel's bullet lists, the 1.1
-   that should say 1.2, and your second look at an opened row.
+   that should say 1.2, and an opened row made to fit with the phone
+   sideways: its Enter button on the name's line, as you chose.
    Then Home as you settled it on October 3, and the lobby's new
    Solar System card.
 

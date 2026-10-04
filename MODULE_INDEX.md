@@ -12,7 +12,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 143  
-**Total Lines of Code (non-blank):** 114,089  
+**Total Lines of Code (non-blank):** 113,833  
 **Total Public Functions/Classes:** 1,292
 
 ## Classification Coverage
@@ -20,7 +20,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 **Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L408_L363_phone_rulings_20261003.py`
+- `patch_L363_opened_row_sideways_20261003.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
@@ -28,7 +28,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 **Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L408_L363_phone_rulings_20261003.py`
+- `patch_L363_opened_row_sideways_20261003.py`
 
 
 ---
@@ -245,7 +245,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L408_L363_phone_rulings_20261003.py` | - ORRERY repo. Records what Tony settled from his phone on 2026-10-03, after the session closed: the Galactic Plane toggle and its approved words (L-408), the tide's look moved into that build (L-406), Home and the lobby's Solar System card (L-363). Noth... (351 lines) |
+| `patch_L363_opened_row_sideways_20261003.py` | - ORRERY repo. Records Tony's Mode 5 look at an opened drawer row with the phone sideways, and his ruling on the fix (L-363). Nothing is built; the fix goes in with the drawer's small fixes. (95 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |

@@ -1884,6 +1884,33 @@ numbers, one drawing at a time.
 
 #### [L-363] The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits)
 <!-- L:363 status:OPEN upd:2026-10-03 section:A flag: rice: -->
+- **2026-10-03, an opened row with the phone sideways (Tony's Mode 5).**
+  The look the 2026-10-02 handoff left open ("not clear"). Sideways, the
+  drawer -- at most 40% of the picture's height (`.sun-drawer`
+  max-height) -- shows about a row and a half, so an opened row, its
+  name line plus "Enter the <n> room", does not fit: Earth's name line
+  is cut off at the top (Tony's screenshot, 4 Oct 2026 01:06 UTC). No
+  code scrolls an opened row into view. Tony's ruling, of three ways:
+  - **Option 3, chosen ("yes, 3"):** sideways, the Enter button sits on
+    the name's line, between the name and GO, so an opened row stays
+    one line tall.
+  - **Option 2, as the backup:** opening a row scrolls it fully into
+    view, upright too. Tony: "even 2 is not enough for landscape view.
+    although it is almost enough. so, as a backup, yes."
+  - Option 1, a taller drawer sideways, not chosen.
+  Built with the drawer's small fixes. What counts as sideways is the
+  build's to propose from the page's own phone test
+  (`sunPhonePortrait`), and Tony judges it at Mode 5.
+- **2026-10-03, a patch must allow Tony's notes.** The first copy of
+  the patch recording the ruling above refused on Tony's machine: it
+  checked the handoff whole, and Tony had written his run record and
+  the pushed SHA into it, as he does. Tony: "wait, so i can't annotate
+  the documentation??" He can; the patch was wrong. Carried to the
+  next ledger-and-session-records version (A Wrong Sentence in a
+  Skill: Carry It): a patch checks the files Tony writes notes into --
+  handoffs, Where We Are -- by the lines it edits, each found exactly
+  once, and refuses if its own text is already there; whole-file
+  fingerprints stay for files only patches and generators write.
 - **2026-10-03, Home settled (Tony, from his phone).** Of three ways,
   option 2 "as recommended": Home fits every body ticked, by the room's
   framing rule (where each body is now, plus 20%), at the opening
