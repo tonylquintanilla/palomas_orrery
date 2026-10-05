@@ -10,8 +10,8 @@ Repo copies stale/absent; this reflects the live local stores.
 | .vot | 4 | 295.1 MB | gaia_data_magnitude.vot (284.4 MB) | 2026-02-08 |
 | .nc | 18 | 161.1 MB | era5_clim_march_day22.nc (27.4 MB) | 2026-04-07 |
 | .json | 54 | 132.5 MB | orbit_paths.json (130.9 MB) | 2026-10-05 |
-| .backup | 4 | 131.2 MB | orbit_paths.json.backup (130.9 MB) | 2026-09-25 |
-| .backup_old | 1 | 130.9 MB | orbit_paths.json.backup_old (130.9 MB) | 2026-09-25 |
+| .backup | 4 | 131.2 MB | orbit_paths.json.backup (130.9 MB) | 2026-10-05 |
+| .backup_old | 1 | 130.9 MB | orbit_paths.json.backup_old (130.9 MB) | 2026-09-29 |
 | .csv | 15 | 34.9 MB | 3773_v3_niskin_hot001_yr01_to_hot348_yr35.csv (30.8 MB) | 2026-04-07 |
 | .pkl | 2 | 33.6 MB | star_properties_magnitude.pkl (31.1 MB) | 2025-09-16 |
 | .png | 159 | 14.6 MB | 2026-03-21_heatmap_western_heatwave_march_21.png (807.0 KB) | 2026-06-30 |
@@ -24,7 +24,7 @@ Repo copies stale/absent; this reflects the live local stores.
 ## orbit_paths.json
 
 - entries: 1501, formats: {'data_points': 1501}
-- points/entry: min 2, max 24479, total 1523394
+- points/entry: min 2, max 24479, total 1523400
 - sample 'Mercury_Sun':
 ```
 {
@@ -74,7 +74,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 448.4 MB (707 files)
+**Total size:** 448.4 MB (708 files)
 
 **GitHub Pages headroom:** 576 MB remaining of 1024 MB ceiling (43.8% used)
 
@@ -85,13 +85,13 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 | .json | 366 | 420.6 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-10-05 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 2 | 6.3 MB | palomas_orrery_logo.png (5.1 MB) | 2026-09-24 |
-| .py | 217 | 5.1 MB | gallery_studio.py (243.1 KB) | 2026-10-05 |
+| .py | 218 | 5.1 MB | gallery_studio.py (243.1 KB) | 2026-10-05 |
 | .jsonl | 35 | 775.0 KB | encke.jsonl (34.1 KB) | 2026-10-05 |
 | .html | 5 | 441.4 KB | interactive.html (208.0 KB) | 2026-10-04 |
 | .js | 20 | 411.4 KB | feature_renderers.js (139.1 KB) | 2026-10-04 |
 | .jpg | 2 | 137.9 KB | palomas_orrery_wall.jpg (95.2 KB) | 2026-10-04 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
-| .md | 6 | 65.7 KB | MODULE_ATLAS.md (44.9 KB) | 2026-10-05 |
+| .md | 6 | 66.6 KB | MODULE_ATLAS.md (45.4 KB) | 2026-10-05 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |
 | .patch | 3 | 11.7 KB | phaseb_studio.patch (7.0 KB) | 2026-07-29 |
 | .txt | 2 | 7.8 KB | requirements.txt (4.2 KB) | 2026-09-04 |

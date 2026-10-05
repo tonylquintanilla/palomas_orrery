@@ -589,6 +589,13 @@ should keep its critical path section." The companions had restamped
 with v19 and v20 and not with v21 through v33, because nothing tied
 them to the plan's own cadence.
 
+v1.13 (L-396; 2026-09-30, with Anthropic's Claude Opus 5.5) adds Where
+We Are to The Document Stack: `documentation/WHERE_WE_ARE.md`, one page
+written for Tony rather than for the work, rewritten in place inside
+every session's ledger patch, with this session's changes marked and
+the must-reads in italics. Tony, 2026-09-30: "i struggle to keep the
+big picture. it's the old dilemma of loosing the forest for the trees."
+
 ## gallery-cache-builder
 
 v1.4 adds Recovery from a failed swap: discard and re-run -- Tony's

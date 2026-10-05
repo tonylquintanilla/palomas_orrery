@@ -424,10 +424,353 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
 -- refused. I am not sure why. i did not modify where we are. i copied it for this run record. also, i though annotations would not be refused. thanks.
 
-6. Move all five into `documentation/`, run `orrery_maintenance_run.py`, look at Earth and the dashboard, then commit and push. -- 
+6. Move all five into `documentation/`, run `orrery_maintenance_run.py`, look at Earth and the dashboard, then commit and push. -- d9f47a875fcd8ac5f793bb4dc397f2baf9108f9f
 7. Gallery: run `patch_L416_2`, try the Sun Shells button, then commit and push.
-8.  Reinstall the six skills, and replace the Project's instructions with v3.81.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L416_2_offline_check_wrapper_20261005.py
+ok  documentation\run_offline_check.py created
+
+patch applied
+
+NEXT:
+  1. Try one from the dashboard: Gallery -- checks and data,
+     Sun Shells. It should end "Sun shells -- PASSED (exit 0)".
+  2. Run Gallery Maintenance Run -- offline. Nothing in it changes;
+     every check should pass as before.
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.3s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     1.0s  rewrote
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.6s  rewrote data/objects_export.sha
+  PASS Objects mirror            0.1s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      14.2s  PASS (229 checks, 0 failures)
+  PASS Pole of date              0.2s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.1s  All 64 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served, print count
+                                    written as served, "in" written as
+                                    served and a slot served in
+                                    another unit from it.
+  PASS Store writer suite        5.7s  All 289 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings, the rooms section's
+                                    included; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 272 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Objects mirror suite      0.1s  MIRROR OBJECTS SUITE: pass
+  PASS Objects mirror check      0.1s  OBJECTS MIRROR: pass
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 101 link(s) compared, store
+                                    9f52e44ed5c4.
+  PASS Pointer join              0.1s  Every link is accounted for: 108
+                                    link(s) against orrery d9f47a87, 4
+                                    fallback named; read check: 43 of
+                                    43 measured rows reached carry a
+                                    read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's 19 object(s) and their
+                                    features exactly: 4 object(s) with
+                                    35 named shell(s), in both cache
+                                    files.
+  PASS Feature renderers         0.8s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 57 hover(s) and 307
+                                    number(s) examined; 13 graded, 7
+                                    graded by line, 44 held to the
+                                    fixture ===
+  PASS Solar System figures      0.1s  === PASS: 6 worked cases, 11
+                                    drawer rows matched to their
+                                    accuracy rows, 10 served
+                                    distances; Uranus, Neptune and
+                                    Pluto print to JPL's ten-thousands
+                                    place ===
+  PASS Solar System drawer       0.1s  === PASS: the Sun is never ticked,
+                                    See more hides only what is not
+                                    ticked, the handle names the last
+                                    body ticked, All / none leaves the
+                                    Sun, rooms are offered only where
+                                    they exist, and the page asks this
+                                    file ===
+  PASS Guest book                0.1s  === GUEST BOOK: all 8 checks
+                                    passed
+  PASS Guest book updater        0.2s  === GUEST BOOK UPDATER: all 43
+                                    checks passed (6 scripted runs,
+                                    self-test first)
+  PASS Daily run steps           0.1s  === DAILY RUN: all 3 step scripts
+                                    found
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: 1 directory in data/ the
+                                    builder did not make: solar-system
+                                    (1). Check whether they belong
+                                    there; the newer .gitignore rules
+                                    keep the known conflict-copy
+                                    shapes out of git but do not
+                                    remove anything.
+
+======================================================================
+  23 of 23 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: 1 directory in data/ the builder
+  last swap 2026-10-05T16:01:39.168352+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  3. Move this script into documentation/; commit and push. -- ed48d078ceb639f5f98f13f4c6abc129f722c566
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+8.  Reinstall the six skills, and replace the Project's instructions with v3.81. -- done 
 
 Where this leaves us:
 - Earth's orrery patch, the dashboard buttons and the skill changes wait on your runs.
 - Next is the Earth website patch or the Horizons design round, in the order you choose. Each has its plan written down.
+
+================================================================================================================================
+
+Done. The rule is now written into the ledger skill, which goes to version 1.16. That also explains the refusal: your early-session notes are exactly what the old check tripped on.
+
+**What the rule says**
+- You write run records, pushed SHAs and comments into Where We Are, the handoffs and the ledger.
+- So a patch checks those three only at the lines it edits, never with a fingerprint of the whole file.
+- When a patch rewrites Where We Are, it first copies every line you changed into the session's handoff, word for word, and prints them.
+- `patch_L413_4` is named in the skill as the worked example.
+
+**What else the patch does**
+- Protocol v3.82 gets a short entry, and v3.79 moves to the history file.
+- The skill's oldest version entry moves to the skill histories file, by the three-entry rule written earlier today.
+- It updates a few lines in the ledger, Where We Are and today's handoff, matched only at those lines, as the new rule says.
+
+**Tested on a copy of your push**
+- Run before `patch_L413_4`, it refuses and says to run that one first.
+- Run after it, with a note of mine added to Where We Are, it worked and the note survived.
+- A second run refuses and writes nothing.
+- The maintenance run passed all 20 checks.
+
+**Your steps**
+1. Delete `patch_L413_3` from the root folder. -- done
+2. Run `patch_L413_4`, 
+   
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L413_4_session_close_20261005.py
+ok  LEDGER_CONSOLIDATED.md                                     header stamp
+ok  LEDGER_CONSOLIDATED.md                                     L-416, L-417, L-418 opened
+ok  LEDGER_CONSOLIDATED.md                                     L-413 progress
+ok  LEDGER_CONSOLIDATED.md                                     L-349 status
+ok  LEDGER_CONSOLIDATED.md                                     L-349 ruling
+ok  LEDGER_CONSOLIDATED.md                                     L-389 closed
+ok  LEDGER_CONSOLIDATED.md                                     L-389 reading
+ok  LEDGER_CONSOLIDATED.md                                     L-292 status
+ok  LEDGER_CONSOLIDATED.md                                     L-292 built
+ok  LEDGER_CONSOLIDATED.md                                     L-369 status
+ok  LEDGER_CONSOLIDATED.md                                     L-369 built
+ok  LEDGER_CONSOLIDATED.md                                     L-410 status
+ok  LEDGER_CONSOLIDATED.md                                     L-410 exosphere
+ok  LEDGER_CONSOLIDATED.md                                     L-395 status
+ok  LEDGER_CONSOLIDATED.md                                     L-395 moved up
+ok  LEDGER_CONSOLIDATED.md                                     L-300 status
+ok  LEDGER_CONSOLIDATED.md                                     L-300 its button
+ok  documentation/WHERE_WE_ARE.md                              rewritten whole
+ok  documentation/HANDOFF_L413_earth_orrery_patch_20261005.md  created
+ok  documentation/HANDOFF_L395_horizons_check_design_20261005.md created
+
+carried 0 line(s) of yours from Where We Are into the handoff
+
+patch applied
+
+NEXT:
+  1. Move this script into documentation/, and delete patch_L413_3
+     from the root folder (it wrote nothing).
+  2. Run orrery_maintenance_run.py. Every gating checker passes; its
+     Ledger index step moves L-389, L-416 and L-417 to the closed
+     section.
+  3. Commit and push.
+  4. When convenient: the teal-circle line, in the "Ecliptic
+     Coordinates (J2000)" box at the plot's left.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+3. then `patch_L419_1`.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L419_1_annotation_rule_20261005.py
+ok  LEDGER_CONSOLIDATED.md                                     header stamp
+ok  LEDGER_CONSOLIDATED.md                                     L-419 written into the skill
+ok  PROJECT_INSTRUCTIONS.md                                    header stamp
+ok  PROJECT_INSTRUCTIONS.md                                    SHA anchor
+ok  PROJECT_INSTRUCTIONS.md                                    v3.82 entry
+ok  PROJECT_INSTRUCTIONS.md                                    v3.79 moves down
+ok  documentation/HANDOFF_L413_earth_orrery_patch_20261005.md  the decision taken
+ok  documentation/PROJECT_INSTRUCTIONS_HISTORY.md              v3.79 received
+ok  documentation/SKILL_HISTORIES.md                           ledger skill: v1.13 received
+ok  documentation/WHERE_WE_ARE.md                              changed this session: the rule
+ok  documentation/WHERE_WE_ARE.md                              needs you now
+ok  documentation/WHERE_WE_ARE.md                              waiting on you, now
+ok  skills/ledger-and-session-records/SKILL.md                 v1.16 entry
+ok  skills/ledger-and-session-records/SKILL.md                 v1.13 moves to SKILL_HISTORIES.md
+ok  skills/ledger-and-session-records/SKILL.md                 the annotation rule (L-419)
+
+patch applied
+
+NEXT:
+  1. Move this script into documentation/.
+  2. Run orrery_maintenance_run.py; every gating checker passes.
+  3. Commit and push.
+  4. Reinstall ledger-and-session-records in Settings > Skills, and
+     replace the Project's instructions with PROJECT_INSTRUCTIONS.md
+     (v3.82).
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+4. Move both into `documentation/`, run `orrery_maintenance_run.py`, 
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261005T213703Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.9s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.2s  rewrote PROJECT_INSTRUCTIONS.md
+  Constants export             0.8s  unchanged (1 checked, not written)
+  Objects export               0.1s  unchanged (1 checked, not written)
+  Module atlas                 7.9s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.3s  rewrote DATA_INVENTORY.md
+  Exact rows report            1.6s  unchanged (1 checked, not written) -- 13 of
+                                     34 exact rows printed at 42 lines (32
+                                     orrery, 10 gallery); 8 drawn only, 11 not
+                                     followed, 0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.2s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.9s  No figure count exceeds its inputs: 34
+                                     derived row(s) read, 24 judged OK -- 24 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       1.3s  Export matches the store: sha256
+                                     9f52e44ed5c4 on both sides; 101 rows
+                                     re-read, 56 not exported, 27 tokens; 310
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.1s  pass
+  Skill headers                0.2s  11 skills parsed, no consistency problems.
+  Exact rows by the count      1.7s  PASSING -- 13 printed exact rows each state
+                                     a count; 32 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.2s  No unit contradicts its arithmetic: 52
+                                     derived row(s) read -- 40 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 101 status lines in constants_new.py are
+                                     well formed; 53 rows carry none.
+  Row shape                    0.1s  All 157 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Reset completeness          19.4s  PASS -- all 310 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.3s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.4s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Worksheet checker           11.0s  74 of 110 routed, 8 clean
+  Worksheet checker tests     19.2s  All 135 checks passed
+  Worksheet key round trip     1.0s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         27.9s  All 76 checks passed
+  Extractor pins               0.5s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          13.8s  296 TIER-1 FINDINGS IN THE SCANNED TREE
+
+======================================================================
+  20 of 20 gating checkers passed -- 120.4s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          296 TIER-1 FINDINGS IN THE SCANNED TREE
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2072 file(s) examined, 10 written, 1 created, 0 removed, 3 rewritten identically
+    written   DATA_INVENTORY.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROJECT_INSTRUCTIONS.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/WHERE_WE_ARE_10-5-26_1627_run_record.md
+    written   documentation/prompts/citation_review.jsonl
+    created   documentation/project_instructions_v3_82.md
+    rewritten with identical bytes, no action needed:
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+then commit and push. -- 
+5. Reinstall ledger-and-session-records, and replace the Project's instructions with v3.82. -- done
+
+Where this leaves us:
+- Today's session closes once these two patches are pushed.
+- The next session confirms the reinstalled skills load at their new versions, then takes Earth's website patch or the Horizons design round, in your order.

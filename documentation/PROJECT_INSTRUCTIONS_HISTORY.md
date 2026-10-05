@@ -2174,6 +2174,46 @@ resident.
 (Moved down from the resident protocol on 2026-10-05 when
 v3.81 made a fourth entry.)
 
+v3.79 (October 2, 2026): No rule changed in this document. TWO
+skill bumps, one version each (L-407): earth-system-pipeline 1.1 ->
+1.2 and provenance-discipline 2.24 -> 2.25. A SKILL'S HEADER IS READ
+AS YAML.
+
+WHAT PROMPTED IT. Settings refused interactive-exhibit 1.10 with
+"malformed YAML frontmatter": patch_L406_1 had put new fires_when words
+on a line of their own; patch_L406_3, pushed at 81e19ef, put them back
+on one line, still 1.10. skills_index.py had read the same header by its
+own looser rules and built the manifest without complaint, and as a
+generator its exit code did not count, so the maintenance run passed 19
+of 19 on a skill that could not be installed. Tony's word, 2026-10-02:
+do L-407 now.
+
+WHAT CHANGED. skills_index.py reads every header as YAML, with PyYAML
+where installed and built-in rules otherwise, names which, and fails on
+a header YAML refuses, one with no name or description as text, or a
+value YAML silently cuts short at " #". orrery_maintenance_run.py runs
+it with --check as the checker Skill headers. The check found two more:
+earth-system-pipeline's description held ": ", which YAML refuses; and
+provenance-discipline's held "# Source:", so YAML read only its first
+200 characters, and the installed skill has been chosen by that cut
+description. Both descriptions are now quoted. No rule in any skill
+changed.
+
+THE OBLIGATION TRAVELS. This session loaded interactive-exhibit 1.9,
+earth-system-pipeline 1.1 and provenance-discipline 2.24. The next
+session confirms its loaded copies read 1.10, 1.2 and 2.25, and that
+provenance-discipline's description no longer ends at "adding or
+reviewing".
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.76 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-05 when
+v3.82 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

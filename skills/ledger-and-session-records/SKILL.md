@@ -6,7 +6,13 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Skill version: 1.15 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.16 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ d9f47a87. v1.16 (L-419) adds one rule under Where We
+Are -- Tony's page: a patch checks a document Tony annotates (this
+page, the handoffs, the ledger) only at the lines it edits, and a
+rewrite of the page carries his notes into the handoff first. The
+rule had lived only in one patch's code and was broken the same day.
+Earlier: 1.15 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 72e3b558. v1.15 (L-418) adds one paragraph under the change log, A skill
 keeps three version entries, which writes down what this version does
 to all six long skills. A contents list now opens the skill, generated from its headings, and
@@ -21,12 +27,6 @@ earlier @ 5db8bbe0 (v1.13), @ 2a7d26b9 (v1.12), @ 1ee1cc61 (v1.11), @ 50cbd2df (
 2026, with Anthropic's Claude Opus 5
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418).
-v1.13 (L-396; 2026-09-30, with Anthropic's Claude Opus 5.5) adds Where
-We Are to The Document Stack: `documentation/WHERE_WE_ARE.md`, one page
-written for Tony rather than for the work, rewritten in place inside
-every session's ledger patch, with this session's changes marked and
-the must-reads in italics. Tony, 2026-09-30: "i struggle to keep the
-big picture. it's the old dilemma of loosing the forest for the trees."
 v1.14 (L-405; 2026-10-02, with Anthropic's Claude Opus 5.5) adds A Wrong
 Sentence in a Skill: Bump Now, or Carry It, under the change log. A
 session had to decide it for itself on 2026-10-01 (L-404); Tony's review
@@ -130,6 +130,20 @@ written for the work, and they move only at design builds.
   that session's ledger patch, so it moves in the same transaction and
   costs Tony no extra run. A session with no patch that still changed
   the picture delivers a small one. The patch writes the whole file.
+- TONY ANNOTATES THIS PAGE, THE HANDOFFS AND THE LEDGER, and a patch
+  never refuses his notes (L-419; Tony, 2026-10-03, and 2026-10-05: "i
+  am using our handoffs or the where we are as run records"). He writes
+  run records, pushed SHAs and comments into them. So a patch checks
+  each of the three only at the lines it edits -- an anchor that must
+  match there -- never by a fingerprint of the whole file. A rewrite of
+  this page, which writes the whole file, first finds every line that
+  differs from the copy the patch was built on, copies those lines word
+  for word into the session's handoff, prints them, and refuses only if
+  the file is not the page it replaces.
+  `documentation/patch_L413_4_session_close_20261005.py` is the worked
+  example. The failure this prevents: patch_L413_3 fingerprinted the
+  whole page and refused on two "-- done" marks; Tony, "i though
+  annotations would not be refused."
 - A FIXED SHAPE that does not grow: the header (the date, and the SHAs
   it was written at); a READ THIS FIRST box (changed this session, do
   next, needs you now); how to read the marks; the goal; the road, one
