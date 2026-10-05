@@ -14,7 +14,7 @@ Consumed by: planet_visualization.py (routing dispatcher),
 Role: rendering/shells
 Domain: orrery
 
-Module updated: October 3, 2026 with Anthropic's Claude Opus 5.5
+Module updated: October 4, 2026 with Anthropic's Claude Opus 5.5
 (L-371, the Sun's distance cards: every hover line that states one of
 the Sun's distance rows prints it from the row, at the count its row
 gives it, through constants_rows.row_text() -- the termination shock
@@ -103,7 +103,7 @@ from constants_new import (GALACTIC_NORTH_POLE_RA_J2000_DEG,
 # own duplicate. Editing the constant updates every display site.
 
 # The Sun's distances as text, each printed from its row at the count the
-# row gives it (L-371, 2026-10-03). A hover names these, never a typed
+# row gives it (L-371, 2026-10-04). A hover names these, never a typed
 # figure, so the words cannot drift from the drawing or from the store.
 _OORT_INNER_EDGE = row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)
 _OORT_HILLS_EDGE = row_text('INNER_OORT_CLOUD_AU', grouping=True)

@@ -49,7 +49,7 @@ Module updated: August 26, 2026 with Anthropic's Claude Opus 5
 boundaries. No pinned values -- derivations against their own
 factors, orderings, and geometric brackets, so a corrected source
 never makes them stale)
-Module updated: October 3, 2026 with Anthropic's Claude Opus 5.5
+Module updated: October 4, 2026 with Anthropic's Claude Opus 5.5
 (L-371: three relation tests for the Sun's distances -- each ranged
 edge is drawn at an end of its range, the heliopause and the
 gravitational reach are converted from their sources' units rather
@@ -259,7 +259,7 @@ def test_sun_distances_converted_not_typed():
 
 
 def test_roche_limit_drawn_at_its_full_digits():
-    """L-371, Tony's option B (2026-10-03): the drawn row equals the
+    """L-371, Tony's option B (2026-10-04): the drawn row equals the
     one-figure row at full digits, and stays outside the inner corona's
     drawn line, which is why it exists."""
     assert ROCHE_LIMIT_DRAWN_RADII == ROCHE_LIMIT_RADII, \

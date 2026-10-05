@@ -2,7 +2,7 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: October 04, 2026
-Files scanned: 144
+Files scanned: 143
 Total findings: 1094
 Constants: 170 | Dicts: 46 | Display strings: 878
 
@@ -20,20 +20,20 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20261005T011351Z | `d7f2a59` | 143 | 1094 | 297 | 677 | 118 | 2 |
 | 20261004T213259Z | `e38b86a` | 144 | 1094 | 298 | 676 | 118 | 2 |
 | 20261004T195005Z | `a841ab6` | 143 | 1093 | 297 | 676 | 118 | 2 |
 | 20261004T174832Z | `17ef666` | 143 | 1093 | 297 | 676 | 118 | 2 |
 | 20261004T013051Z | `4246a1a` | 143 | 1088 | 297 | 670 | 119 | 2 |
 | 20261004T010032Z | `6127f08` | 143 | 1088 | 297 | 670 | 119 | 2 |
-| 20261004T003952Z | `fd508f9` | 146 | 1091 | 299 | 671 | 119 | 2 |
 
-Change since the previous run: total +1, Tier-1 +1.
+Change since the previous run: total +0, Tier-1 -1.
 
 Tier-1 rose in these files:
 
 | File | Before | After |
 |------|-------:|------:|
-| patch_L409_2_orrery_license_recognized_20261004.py | 0 | 2 |
+| patch_L371_4_session_close_orrery_20261004.py | 0 | 1 |
 
 ---
 
@@ -64,8 +64,8 @@ Tier-1 rose in these files:
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 298 |
-| 2 | 10-15 | REVIEW | 676 |
+| 1 | 16-20 | FIX NOW | 297 |
+| 2 | 10-15 | REVIEW | 677 |
 | 3 | 5-9 | LOW PRIORITY | 118 |
 | 4 | 1-4 | LOWEST PRIORITY | 2 |
 
@@ -141,7 +141,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `palomas_orrery.py` | orrery | 0 | 0 | 3 | 0 | 3 |
 | `provenance_history.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
 | `exoplanet_systems.py` | stars | 0 | 0 | 3 | 0 | 3 |
-| `patch_L409_2_orrery_license_recognized_20261004.py` | orrery | 2 | 0 | 0 | 0 | 2 |
+| `patch_L371_4_session_close_orrery_20261004.py` | orrery | 1 | 1 | 0 | 0 | 2 |
 | `energy_imbalance.py` | earth_science | 1 | 1 | 0 | 0 | 2 |
 | `plot_data_report_widget.py` | utilities | 2 | 0 | 0 | 0 | 2 |
 | `sgr_a_visualization_animation.py` | orrery | 1 | 0 | 1 | 0 | 2 |
@@ -177,7 +177,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 50 | 135 | 559 | 71 | 2 | 767 |
+| Orrery (solar system + orbital mechanics) | 50 | 134 | 560 | 71 | 2 | 767 |
 | Earth System | 13 | 149 | 75 | 2 | 0 | 226 |
 | Stars (stellar neighborhood) | 11 | 12 | 42 | 6 | 0 | 60 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 39 | 0 | 39 |
@@ -192,7 +192,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 - `export_constants.py`
 - `export_objects.py`
 - `orrery_maintenance_run.py`
-- `patch_L409_2_orrery_license_recognized_20261004.py`
+- `patch_L371_4_session_close_orrery_20261004.py`
 - `test_dimensions.py`
 - `worksheet_checker.py`
 - `worksheet_key_aliases.py`
@@ -625,12 +625,11 @@ is planned for a future session.
 | 2197 | string | display string @ line 2197 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2332 | string | display string @ line 2332 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 
-### patch_L409_2_orrery_license_recognized_20261004.py
+### patch_L371_4_session_close_orrery_20261004.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 199 | dict | NEW[...] | (1 entry) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
-| 327 | dict | REPLACE_NOTE[...] | (1 entry) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
+| 65 | dict | BASE[...] | (11 entries) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
 
 ### planet_visualization_utilities.py
 
@@ -1402,6 +1401,12 @@ is planned for a future session.
 | 2303 | string | display string @ line 2303 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2341 | string | display string @ line 2341 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2416 | string | display string @ line 2416 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+
+### patch_L371_4_session_close_orrery_20261004.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 727 | dict | NEW_FILES[...] | (1 entry) | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (key) |
 
 ### planet9_visualization_shells.py
 

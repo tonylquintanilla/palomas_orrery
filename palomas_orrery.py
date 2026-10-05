@@ -33,7 +33,7 @@ feature the shell dispatch draws, not only the sphere shells, so a
 rotation axis or dipole cone that reaches past the outermost shell is no
 longer cut off with its hover marker, and the Sun direction arrow is
 fitted inside the cube. Tony's ruling, 2026-09-23.)
-Module updated: October 3, 2026 with Anthropic's Claude Opus 5.5 (L-371:
+Module updated: October 4, 2026 with Anthropic's Claude Opus 5.5 (L-371:
 the manual-scale tooltip prints the Sun's distances from their rows at
 their counts -- the termination shock at 94.01 AU, the heliopause at
 121 AU where it typed 126, and the gravitational reach as the Sun's
@@ -10379,7 +10379,7 @@ f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=T
 # Source: GRAVITATIONAL_INFLUENCE_AU in constants_new.py, imported above.
 # Source+: Interpolated rather than typed: this site carried a stale 126,000
 # Source+: literal with no link to the store until 2026-08-07 (L-179).
-# Source+: Since 2026-10-03 (L-371) the row is the Sun's Hill radius in
+# Source+: Since 2026-10-04 (L-371) the row is the Sun's Hill radius in
 # Source+: parsecs, GRAVITATIONAL_INFLUENCE_PC, printed here in AU at its count.
 f"* Extent of Solar Gravitational Influence (Hill Sphere): "
 f"{row_text('GRAVITATIONAL_INFLUENCE_PC', 'au', grouping=True)} AU\n* Proxima Centauri: 268,585 AU")

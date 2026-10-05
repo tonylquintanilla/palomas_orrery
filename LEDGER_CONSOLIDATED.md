@@ -432,14 +432,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*247 live items; 232 need attention (`!`); 188 RICE-scored; 157 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*246 live items; 231 need attention (`!`); 184 RICE-scored; 161 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-251 | The galactic centre button served a cached HTML for seven months | OPEN | 15.2 | 2026-08-25 |
 | ! | L-238 | radius_fraction > 1.0 assumes every shell is above the surface | OPEN | 14.2 | 2026-08-25 |
-| ! | L-229 | Streamer band drawn in the ecliptic plane, not the solar equator | OPEN | 11.4 | 2026-08-23 |
 | ! | L-235 | Checks that cannot fail, gallery side [three instances] | OPEN | 11.4 | 2026-08-25 |
 | ! | L-252 | L2b's fourth outcome: an INCOMPLETE verdict is not a confirmation | OPEN | 11.4 | 2026-08-25 |
 | ! | L-262 | The framing smoke test has never run against the page | OPEN | 11.4 | 2026-08-30 |
@@ -448,7 +447,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-300 | sweep_collapsed_features.py joins the gallery maintenance runner as a gating checker | OPEN | 8.1 | 2026-09-07 |
 | ! | L-340 | The exhibit store editor: what the first screenshot showed, and the Mode 5 pass | OPEN | 8.1 | 2026-09-22 |
-| ! | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | OPEN | 7.6 | 2026-08-21 |
 | ! | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | OPEN | 6.0 | 2026-08-25 |
 | ! | L-269 | A report names its items, not how many there are | OPEN | 6.0 | 2026-08-30 |
 | ! | L-245 | Constants drift check compares against the last COMMIT, not the last RUN | OPEN | 5.4 | 2026-08-25 |
@@ -470,9 +468,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
 | ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-10-04 |
-| ! | L-224 | Streamer belt: one warped band, not a sphere | OPEN | 3.8 | 2026-08-22 |
 |  | L-230 | A skill bump does not reach the protocol's version history | DEFERRED | 3.8 | 2026-08-23 |
-| ! | L-227 | Streamer band hover rendered as one 378-character line | OPEN | 3.8 | 2026-08-23 |
 | ! | L-241 | Hills torus hover states the cloud bounds, not the drawn ring | OPEN | 3.8 | 2026-08-25 |
 | ! | L-282 | The lobby: the main page as an entrance hall | OPEN | 3.8 | 2026-09-06 |
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
@@ -516,7 +512,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-231 | Radiation belts are drawn in the ecliptic; the magnetic tilt is an unbuilt intent | OPEN | 1.8 | 2026-09-16 |
 |  | L-309 | The exhibit chrome keeps its sun* names after Earth joined it (rename deferred, with its reason) | DEFERRED | 1.8 | 2026-09-09 |
 | ! | L-187 | info_dictionary numeric-overlap enumeration | OPEN | 1.8 | 2026-08-07 |
-| ! | L-228 | Alfven surface latitude ranges: source them or omit them | OPEN [Tony] | 1.8 | 2026-08-23 |
+| ! | L-228 | Alfven surface latitude ranges: source them or omit them | OPEN [Tony] | 1.8 | 2026-10-04 |
 | ! | L-257 | Three enforcement builds the 2.8 skill text defers | OPEN | 1.8 | 2026-08-27 |
 | ! | L-313 | Recenter the camera on a chosen feature in the exhibit rooms | OPEN | 1.8 | 2026-09-10 |
 | ! | L-321 | The orrery's hover text joins the provenance braid, Earth first | OPEN | 1.8 | 2026-09-12 |
@@ -558,7 +554,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-368 | Other bodies' typed poles disagree with their cited table or cite a withdrawn report (orrery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-369 | Earth's obliquity typed outside constants_new.py (orrery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-370 | Jupiter and Saturn numbers typed only in objects_config.json (gallery, store) | OPEN | -- | 2026-09-28 |
-| ! | L-371 | The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice) | OPEN | -- | 2026-10-03 |
+| ! | L-371 | The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
 | ! | L-372 | Two drawing settings live in constants_new.py (orrery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-373 | A unit conversion by a bare number inside a constants_new.py expression (store) | OPEN | -- | 2026-09-28 |
 | ! | L-374 | Showing Earth's precession over time (orrery, idea) | OPEN | -- | 2026-09-28 |
@@ -571,7 +567,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-381 | The uncertainty field's pattern reads a sentence's full stop as a decimal point (export, checks) | OPEN | -- | 2026-09-28 |
 | ! | L-382 | Earth's magnetosphere costs about 42 percent more per orrery animation frame since D8 (orrery, rendering) | OPEN | -- | 2026-09-28 |
 | ! | L-383 | shell_configs.py's magnetosphere tooltip says nothing of the tail and puts the belts at the flux peak (orrery, words) | OPEN | -- | 2026-09-28 |
-| ! | L-385 | The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye) | OPEN | -- | 2026-09-30 |
+| ! | L-385 | The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye) | OPEN | -- | 2026-10-04 |
 | ! | L-386 | The Sun's conversion rows, not yet exported (store, the Sun's slice) | OPEN | -- | 2026-09-28 |
 | ! | L-387 | The orrery's hovers print the conversion names by their own formats, not by the computed count (orrery) | OPEN | -- | 2026-09-28 |
 | ! | L-388 | The gallery's export pull can print success when it could not fetch, and the mirror then writes from the old export (gallery, tooling) | OPEN | -- | 2026-09-28 |
@@ -590,6 +586,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-407 | A skill's header is checked as YAML (orrery, skills) | OPEN | -- | 2026-10-02 |
 | ! | L-408 | A Galactic Plane toggle in the Sun room (gallery, the Sun's slice) | OPEN | -- | 2026-10-03 |
 | ! | L-409 | The licenses: the orrery's recognized by GitHub, the website's written (orrery, gallery) | OPEN | -- | 2026-10-04 |
+| ! | L-410 | Fuzzy boundaries for edges known only as ranges, the outer corona first (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
+| ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
+| ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-04 |
 
 ### B. Pending Action (Tony-side)
 
@@ -768,6 +767,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-306 | Do not promote a drawing approximation into the constants store | DONE | 13.6 | 2026-09-08 |
 |  | L-182 | Mars Hill sphere -- cross-check correction lost across the config pipeline | DONE | 12.0 | 2026-08-05 |
 |  | L-222 | The constants change report fails on every currency stamp | DONE | 11.4 | 2026-08-20 |
+|  | L-229 | Streamer band drawn in the ecliptic plane, not the solar equator | DONE | 11.4 | 2026-10-04 |
 |  | L-264 | One name, two programs: the runners get repo-specific names | DONE | 11.4 | 2026-08-29 |
 |  | L-271 | Patch scripts wrote backups nothing ever removed | DONE | 11.4 | 2026-09-16 |
 |  | L-221 | The master plan is the roadmap, and it outranks RICE | DONE | 10.8 | 2026-08-22 |
@@ -782,6 +782,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-278 | A relayout from inside a Plotly event handler re-enters the update machinery | DONE | 8.1 | 2026-09-16 |
 |  | L-296 | Every design build earns a master plan version number | DONE | 8.1 | 2026-09-07 |
 |  | L-207 | The citation prompt -- the checker asks the fuzzy question | DONE | 7.6 | 2026-08-18 |
+|  | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | DONE | 7.6 | 2026-10-04 |
 |  | L-220 | A patch updates the body but not the anchor, date or description | DONE | 7.6 | 2026-08-20 |
 |  | L-336 | The served cache went out of step with the config, and no check read the file the browser reads (gallery) | DONE | 7.6 | 2026-09-17 |
 |  | L-342 | What C1 put on the live site, and the figure rules repaired | DONE | 7.6 | 2026-09-28 |
@@ -824,8 +825,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-325 | A derived row stores its reported figure, not the arithmetic result | DONE | 4.0 | 2026-09-28 |
 |  | L-326 | provenance-discipline 2.11 -> 2.12, taken before the build it serves | DONE | 4.0 | 2026-09-14 |
 |  | L-214 | The request builder drops the comment lines that matter | DONE | 3.8 | 2026-08-21 |
+|  | L-224 | Streamer belt: one warped band, not a sphere | DONE | 3.8 | 2026-10-04 |
 |  | L-232 | The gallery's served constants carry sources that nothing checks | DONE | 3.8 | 2026-09-16 |
 |  | L-287 | Gallery editor: the room tree, the storage room, the featured flag | DONE | 3.8 | 2026-09-05 |
+|  | L-227 | Streamer band hover rendered as one 378-character line | DONE | 3.8 | 2026-10-04 |
 |  | L-233 | Three dashboard buttons: one fixed, one added, one retired | DONE | 3.8 | 2026-08-24 |
 |  | L-106 | Gallery-cache backup + gitignore discipline | DONE | 3.6 | 2026-07-12 |
 |  | L-115 | Skills v1.1 batch: accuracy fixes + two seed blocks (Fable Mode 7) | DONE | 3.6 | 2026-07-12 |
@@ -1006,6 +1009,78 @@ overlay.
 gallery first; whether the orrery gets the same toggle is asked then.
 **Ref:** L-406, L-265; gallery `gallery/feature_renderers.js`,
 `data/objects_config.json`.
+
+
+#### [L-410] Fuzzy boundaries for edges known only as ranges, the outer corona first (orrery + gallery, the Sun's slice)
+<!-- L:410 status:OPEN upd:2026-10-04 section:A flag: rice: -->
+- **Tony's idea, 2026-10-04**, deciding where the Roche limit is drawn:
+  "What if we draw fuzzy boundaries instead of shells". It is Show the
+  Envelope of the Unknowable as a drawing.
+- **Where it fits.** An edge given as a sourced range becomes a band
+  that fades between the two rows: the inner corona (2-3 solar radii),
+  each Oort edge (L-371's range rows). An edge with no edge at all --
+  the outer corona -- fades by a declared rate, said on its card, as
+  the streamer band already does. A single measured crossing (the
+  termination shock, the heliopause) stays a sharp shell.
+- **The Roche limit needs a source first:** a published range of comet
+  densities. The 2.7 to 4.3 solar radii in the session's chat was
+  arithmetic on a guessed factor of two, not a source.
+- **Order (Tony, 2026-10-04):** the outer corona first, designed WITH
+  the dust cloud (L-131), since its glow is that dust. It is the
+  simplest shape and the website already has the fading machinery. The
+  Oort edges are the biggest payoff after it. Written twice -- Python
+  and JavaScript -- and checked on the phone.
+- **Until then:** the Roche limit stays drawn at 3.45 (L-371, option B),
+  and L-241's torus wording waits for this design.
+**Gap:** a design talk before any build. The Sun slice's ninth item
+(L-412).
+**Ref:** L-131, L-241, L-371; `solar_visualization_shells.py`
+(`create_sun_streamer_band`, the fade to follow); gallery
+`gallery/feature_renderers.js`.
+
+
+#### [L-411] The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice)
+<!-- L:411 status:OPEN upd:2026-10-04 section:A flag: rice: -->
+- **Recorded 2026-10-04** while building L-371. The orrery's Sun
+  hovers, and some of the gallery's served words, still type numbers
+  that no row holds. One row per CLASS (The Braid); the instances live
+  in the code. The kinds, by example: Voyager 2's 84 AU crossing (83.4 in
+  Gurnett et al. 2013, p. 1489); Sedna's 936 AU; "75 to 100 AU" for the
+  termination shock; the Alfven surface's latitude ranges (that part is
+  L-228); the 15 R_sun field of view; temperatures.
+- **One statement that is out of date, not a number:** the heliopause
+  hover says both Voyagers are still in the heliosheath; Voyager 2
+  crossed the heliopause in 2018.
+- **Method:** source it or remove it, one number at a time, under the
+  Fetched vs Recalled rule; wording changes go to Tony.
+**Gap:** the Sun slice's fifth item (L-412), straight after L-228.
+**Ref:** `solar_visualization_shells.py`, `comet_visualization_shells.py`;
+gallery `data/objects_config.json`; L-228, L-371.
+
+
+#### [L-412] The Sun's slice: the order Tony confirmed (the Sun's slice)
+<!-- L:412 status:OPEN upd:2026-10-04 section:A flag: rice: -->
+- **Confirmed by Tony, 2026-10-04**, after a sweep of the open items that
+  touch the Sun room. Smallest and most settled first:
+  1. L-209, the Alfven surface look -- DONE 2026-10-04.
+  2. L-224, L-229, L-227, the streamer band -- DONE 2026-10-04.
+  3. L-385, the orrery's opening view of the Sun (not one line; see it).
+  4. L-228, the Alfven surface's latitude ranges, with L-229's
+     orientation citation.
+  5. L-411, the other typed numbers in the Sun's hovers.
+  6. L-241, the Hills cloud hover, inside L-410's design.
+  7. L-386, the core, radiative zone and photosphere rows.
+  8. L-408, the Galactic Plane toggle.
+  9. L-410 with L-131: the fuzzy outer corona and the dust cloud.
+  10. L-128, the comet ice lines.
+- Beside the list, L-371's own Gap: the exact-rows entries and the
+  fifteen eyeballed shape numbers.
+- **Not this slice:** L-136, the scattered disk, goes to the Solar
+  System room with the Kuiper belt; L-234 (the Sun in the assembler),
+  L-239 (seeding the Oort builders), L-314 (live solar wind) and L-331
+  (Earth and Moon wording) stay where they are.
+**Gap:** work down the list.
+**Ref:** L-371 (the slice's numbers); the handles above.
 
 #### [L-407] A skill's header is checked as YAML (orrery, skills)
 <!-- L:407 status:OPEN upd:2026-10-02 section:A flag: rice: -->
@@ -1585,11 +1660,18 @@ section 5.
 - Each is re-homed to the unit its source gives when the Sun's slice
   walks it; the export then serves its other units as `"in"`.
 - The same class reaches every body not yet walked.
-**Gap:** The Sun's slice.
+- **2026-10-04, two re-homed (L-371):** HELIOPAUSE_AU (121, Gurnett)
+  with HELIOPAUSE_RADII its conversion, and GRAVITATIONAL_INFLUENCE_PC
+  (0.65, Portegies Zwart) with GRAVITATIONAL_INFLUENCE_AU its
+  conversion; KM_PER_PARSEC and the pc token added for it. The Oort
+  edges and the termination shock were already in their sources' unit.
+**Gap:** the core, the radiative zone and the photosphere's AU row
+(CORE_AU, RADIATIVE_ZONE_AU, SOLAR_RADIUS_AU), still unexported: the
+Sun slice's seventh item (L-412).
 **Ref:** `constants_new.py`; gallery `data/objects_config.json`; L-345; L-371; L-322.
 
 #### [L-385] The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye)
-<!-- L:385 status:OPEN upd:2026-09-30 section:A flag: rice: -->
+<!-- L:385 status:OPEN upd:2026-10-04 section:A flag: rice: -->
 **Tony:** (on Where We Are, 2026-09-30, how wide the Sun's opening view
 is in the orrery) "photosphere + 10%"
 - **Found 2026-09-24** building L-322 Stage D's orrery autoscale (D4).
@@ -1603,7 +1685,14 @@ is in the orrery) "photosphere + 10%"
   ledger row; filed 2026-09-28.
 - **Tony-action (decide):** whether the Sun's axis should be drawn
   shorter. A drawing choice for Tony's eye.
-**Gap:** Tony's decision above; if shorter, one change to `half_len_frac` for the Sun.
+- **2026-10-04: not one line.** Planned for this session's close and
+  held back. `half_len_frac` is the rotation axis's length; at 1.1 the
+  axis barely clears the photosphere, and the opening width is then
+  set by whichever shells are on -- the inner corona alone is 3 solar
+  radii. "Photosphere + 10%" needs the autoscale and the default shells
+  read together, and a Mode 5 look. The Sun slice's third item (L-412).
+**Gap:** read the Sun's autoscale with its default shells; propose how
+the view opens at photosphere + 10% and what the axis does; Tony's eye.
 **Ref:** `documentation/HANDOFF_L322_D_orrery_pole_built_20260924.md` sec. 3; L-322.
 
 #### [L-383] shell_configs.py's magnetosphere tooltip says nothing of the tail and puts the belts at the flux peak (orrery, words)
@@ -1740,7 +1829,7 @@ is in the orrery) "photosphere + 10%"
 **Ref:** `constants_new.py`; `palomas_orrery.py`; `palomas_orrery_helpers.py`.
 
 #### [L-371] The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice)
-<!-- L:371 status:OPEN upd:2026-10-03 section:A flag: rice: -->
+<!-- L:371 status:OPEN upd:2026-10-04 section:A flag: rice: -->
 - **Found 2026-09-22 and 2026-09-28.** In `data/objects_config.json`
   the Sun carries 43 numbers with no link to a store row, not yet sorted
   into measurements and drawing choices (manifest section 2.6). [per
@@ -1793,12 +1882,54 @@ is in the orrery) "photosphere + 10%"
   range rule); the approved notes; Gravitational Influence as the
   Sun's Hill radius, 0.65 pc (Portegies Zwart et al. 2021), on Tony's
   correction that a Hill sphere is calculated, not chosen.
-**Gap:** Build the distance cards as the handoff's section 3 says: the
-orrery rows (with L-386's two re-homes, the Heliopause to 121 AU and
-Gravitational Influence to 0.65 pc), the orrery hovers by count, then
-the gallery's notes, mirror and cache. Then the fifteen eyeballed shape
-numbers, one drawing at a time.
-**Ref:** gallery `data/objects_config.json`; gallery `gallery/feature_renderers.js`; L-322 Gap (3); L-345.
+- **2026-10-04, the distance cards BUILT** [verified @ orrery e38b86ad,
+  gallery ba688199]. Three patches: patch_L371_1 (orrery rows, the pc
+  token, `constants_rows.row_text()`, the orrery hovers by count, three
+  relation tests, exact_rows_report seeing `row_text()`), patch_L371_2
+  (ROCHE_LIMIT_DRAWN_RADII), patch_L371_3 (gallery links, Tony's notes
+  with their numbers from served range rows, `drawn_radius`, a far
+  shell's "Radius: <n> AU", the re-recorded hover fixture). Orrery 20
+  of 20, gallery 23 of 23 after the cache rebuild; Tony approved both
+  wording files and confirmed on the phone. Sources re-opened
+  2026-10-04: Stone et al. 2005 (94.01 AU), Gurnett et al. 2013 p. 1489
+  (121 AU; the 121.6 the old comment attributed to it is not in the
+  paper), NASA's Oort Cloud facts page, Portegies Zwart et al. 2021
+  (0.65 pc in the captions of Figs. 2 and 3 and sec. 5 -- not Fig. 4,
+  as the previous handoff said; and sec. 2.2 for the 20,000 AU edge,
+  because Duncan, Quinn and Tremaine's abstract does not print it),
+  Kasper et al. 2021 (19.7; its Table 1 says 19.8). The outer corona's
+  Mann et al. (2004) citation could not be found and is removed.
+- **Tony's rulings this session.** (1) The Roche limit, known to one
+  figure, is DRAWN at its formula's full 3.45 on both sites, option B,
+  because at 3 it would sit on the inner corona's line; which is
+  further out is not known. An interim until L-410. (2) The leading-1
+  shortcut is NOT adopted: the uncertainty test of 2026-09-28 is the
+  rule, and it prints 100,000 AU as 10,000,000,000,000 km and 3 solar
+  radii as 0.01 AU. Tony: "I don't want to violate my own rule!"
+- **Found, recorded, not fixed.** (a) EXACT_ROWS_PRINTED.md lists 11
+  gallery pointers to exact Sun rows as NOT FOLLOWED -- the cusp, the
+  corona, the Oort edges, the drawn Roche row, the galactic pole. The
+  website does print them by the served count, but the check cannot
+  confirm it until each has a PRINTS or DRAWN entry in
+  exact_rows_report.py. (b) The typed numbers left in the Sun's hovers
+  are L-411. (c) This session's rows and credit lines were first
+  stamped 2026-10-03; the work was 2026-10-04. The close patches
+  correct them; the patch file names keep 20261003.
+- **Carried to the skills' next versions.** provenance-discipline
+  cites GRAVITATIONAL_INFLUENCE_AU and its _RANGE_AU row as the worked
+  example of When the Source Gives a Range; the range row is gone, so
+  the example now belongs to the Oort edges or the helmet cusp. A
+  session following the old sentence looks for a row that does not
+  exist and finds the right rule nearby, so it is carried, not bumped.
+  And for any patch's "what the run should say": predict the
+  scanner's CHANGE, not its total (this machine and Tony's differ by
+  one), and expect the patch script itself to be scanned while it sits
+  in the root folder.
+**Gap:** (1) PRINTS or DRAWN entries for the 11 not-followed pointers.
+(2) The fifteen eyeballed shape numbers, one drawing at a time. The
+rest of the Sun's slice is ordered on L-412.
+**Ref:** gallery `data/objects_config.json`; gallery `gallery/feature_renderers.js`; L-322 Gap (3); L-345;
+`documentation/HANDOFF_L371_distance_cards_session_20261004.md`; L-386, L-410, L-411, L-412.
 
 #### [L-370] Jupiter and Saturn numbers typed only in objects_config.json (gallery, store)
 <!-- L:370 status:OPEN upd:2026-09-28 section:A flag: rice: -->
@@ -1960,6 +2091,14 @@ numbers, one drawing at a time.
   - Unchanged: the swap (design section 7) -- a bare `interactive.html`
     link opening this room, the Explorer at its own address -- after
     the Sun's slice, per option C of 2026-09-29.
+- **2026-10-04, the drawer's small fixes and Home, built** by the
+  lobby-card session after its records patch: gallery
+  `patch_L363_14_gallery_drawer_fixes_20261004.py` (the i panel's
+  bullet lists and Home line; sideways, an opened row's Enter button
+  on the name's line; Home backing out to hold every ticked body).
+  Pushed by gallery ac81e7ce. Tony on the phone and the desktop:
+  "correct" [render-gated, Tony; recorded from his run record by the
+  L-371 session's close, which found it unrecorded here].
 - **2026-10-03, an opened row with the phone sideways (Tony's Mode 5).**
   The look the 2026-10-02 handoff left open ("not clear"). Sideways, the
   drawer -- at most 40% of the picture's height (`.sun-drawer`
@@ -5105,118 +5244,6 @@ will need renaming -- and a rename breaks every `# Resolved:` leg
 pointing at it, so name the pilot's return by hand at dispatch time.
 **Ref:** L-200 (the leg that cites the filename); L-186; L-192.
 
-#### [L-209] ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre
-<!-- L:209 status:OPEN upd:2026-08-21 section:A flag: rice:3/3/85/1 -->
-- **The finding, pilot run 2026-08-18.** `ALFVEN_SURFACE_RADII = 18.8`
-  is an ALTITUDE above the photosphere, not a heliocentric radius.
-  Both the Kasper et al. 2021 abstract (13 million km above the
-  photosphere) and the NASA/APL release (8.127 million miles above the
-  solar surface) measure from the surface.
-- **Checkable inside the file, against a sibling.**
-  `PARKER_CLOSEST_RADII = 9.86` IS heliocentric: the mission's 3.8
-  million miles above the surface is 8.86 R_sun of altitude and 9.86
-  from centre. So two constants in one file, describing the same
-  spacecraft, use different origins and differ by exactly 1 R_sun.
-- **Why this is alone rather than with the other pilot findings.** If
-  the Alfven surface is drawn as a shell from Sun centre alongside
-  HELIOPAUSE_RADII and PARKER_CLOSEST_RADII, the render is low by one
-  solar radius and the value should be 19.8. That makes it a rendering
-  defect, not a documentation defect, and it fails Mode 5 in a way no
-  citation error does.
-- **Confirm the dispatch before editing the leaf.** Whether the shell
-  is drawn from centre is the question that decides whether this is a
-  render bug or only a comment bug. Grep for consumers of the constant
-  first.
-- **Two further cautions from the same return, if it IS drawn as a
-  sphere.** The crossing was into a low-Mach-number boundary layer
-  above a pseudostreamer, not a global surface; later PSP work puts
-  the Alfven surface at 10-20 R_sun, non-spherical, and expanding with
-  rising solar activity.
-- **Citation half.** GPT independently marked the citation PARTIAL:
-  Kasper et al. 2021 does not itself print 18.8 R_sun. That figure is
-  from the press release, so the row cites the paper for a number only
-  the release states.
-- **Confirmed, and the render WAS wrong.** `shell_configs.py` builds the
-  Alfven shell as `ALFVEN_SURFACE_RADII * SOLAR_RADIUS_AU`, a sphere
-  centred on the Sun, so the constant is consumed heliocentrically and
-  the shell rendered one solar radius small.
-- **The correction was ALREADY IN THE FILE, on lines the check could not
-  see.** Two comment lines under the constant read "HELIOCENTRIC: from
-  Sun center ... Kasper's paper says 18.4-19.7 R_sun from center." A
-  previous session found the distinction, wrote the paper's own range
-  down, and left the value at 18.8 anyway. See L-214: those lines rode
-  on a bare `Note:` and an invented `HELIOCENTRIC:` label, neither of
-  which the request builder reads, so no responder ever saw them.
-- **Resolved at 19.7** (Tony, 2026-08-19), sourced to the PRL body text
-  rather than to the press release. Two independent routes agree: the
-  paper gives the sub-Alfvenic interval as 19.7 to 18.4 solar radii from
-  the center of the Sun, and converting the release's 18.8 R_sun of
-  altitude gives 19.8. Taking the paper drops the release as an
-  authority, which also answers GPT's separate PARTIAL: the paper does
-  not itself print 18.8.
-- **The two `# Cross-checked:` legs dated 2026-08-02 were stripped with
-  the value.** They certified 18.8. A check of the old value is not a
-  check of the new one -- the exact ride-along the skill warns about.
-  No new leg was written from the pilot: Claude returned APPROX and GPT
-  PARTIAL, neither of which earns one, and Gemini's CONFIRMED rests on
-  a note reading "Recollection of the Parker Solar Probe 8th encounter
-  results."
-- **As built** (`patch_L209_2_alfven_migration.py`). The value and the
-  whole explanation live in `constants_new.py`; every display site now
-  READS the constant rather than holding a copy. 12 typed instances
-  across four modules became imports: 8 interpolations in
-  `solar_visualization_shells.py`, 1 in `comet_visualization_shells.py`,
-  1 in `info_dictionary.py` (which gained its first import), and 2 sites
-  that cannot read a value -- a docstring and a `# Source:` comment --
-  had the figure dropped and now point at the constant. The derived
-  0.087 AU and 13 million km figures are computed from the constant, so
-  they moved with it.
-- **Found and NOT touched, deliberately.** The same display strings hold
-  other typed constants -- `ROCHE_LIMIT_RADII` as "3.45 R_sun", the
-  streamer belt as both "4-6" and "6.0". Migrating them is L-181 and
-  L-191, not this item.
-**Note:** RICE is Claude's proposal, unratified.
-**Gap:** one open, one closed. Read item 2; item 1 is kept as record.
-1. **CITATION DEBT -- DISCHARGED 2026-08-21.** DeForest, Howard &
-   McComas (2014), ApJ 787:124 was removed from `STREAMER_BELT_RADII`
-   on 2026-08-20 at `e1c64dc9` -- its 6 R_sun is an inbound-wave
-   DETECTION THRESHOLD, not a streamer extent -- and its own result
-   belongs to this row. The removal ran; the rehoming did not, and this
-   Gap said "none" for a day because it was written before the debt
-   existed. `patch_L209_4_deforest_rehomed.py` closed it: the paper was
-   read at source, and `# Also+:` legs on `ALFVEN_SURFACE_RADII` now
-   carry it as a 2014 remote LOWER BOUND, superseded by Kasper's 2021
-   in-situ crossing and consistent with it. Nothing further is owed.
-   **The figure changed on the way, and this is the part to remember.**
-   This Gap first stated the bound as 17 R_sun in the streamer belt and
-   12.5 over the poles. The published paper says 15 and 12, in its
-   abstract, its Section 5 and its Section 6. The 12.5/17 pair is the
-   arXiv ABSTRACT METADATA at arxiv.org/abs/1404.3235, which does not
-   match the accepted manuscript arXiv itself serves as the PDF; NASA
-   ADS and Cranmer et al. 2016 (ApJ 828:66) both carry 12 and 15. Two
-   earlier reads reported 17 because both quoted that same listing
-   page. Agreement between two reads of one wrong page is not
-   verification. Do NOT restore 17 anywhere.
-   **The rule it tested.** This row is why the discharge needed a real
-   read rather than the removal worksheet: a removal needs only the
-   ABSENCE of support, a citation needs its PRESENCE. Had the worksheet
-   been reused as the leg, 17 would now be in the code.
-2. **MODE 5, unchanged and still outstanding.** The Alfven shell should
-   render one solar radius larger than before, still nested inside the
-   50 R_sun outer corona. Tony's eyes on a plot, not a build.
-**Ref:** `documentation/PILOT_CONVERGENCE_20260819.md` Part 4;
-`documentation/worksheets/`
-`worksheet_claude-opus-5_pilot_constants_new_20260818.jsonl` R12;
-`documentation/worksheets/`
-`worksheet_gemini-3-1-pro_reconciliation_sources_20260820.md` item 4
-(the checkable, unchecked claim); L-210 (the row DeForest was removed
-from, and the same staleness class corrected one item over on
-2026-08-21); L-214 (the builder gap this exposed); L-181 and L-191 (the
-remaining shadow constants); L-207 (the run that produced it); L-221
-(misapplied against this row before the dates were checked -- it
-governs a session document contradicting a settled decision, not a
-ledger field that predates the event it is silent about).
-
 #### [L-216] Gallery swap fails under a filesystem lock (OneDrive)
 <!-- L:216 status:OPEN upd:2026-10-04 section:A flag: rice:3/3/85/2 -->
 - **2026-10-04: the stray folder again.** Tony's gallery maintenance
@@ -5796,109 +5823,6 @@ Patch Script"; `documentation/patch_L209_2_alfven_migration.py` and
 `documentation/patch_L213_3_cache_line_and_close.py` (the pair that
 exposed it); HANDOFF_20260819_alfven_and_the_swap.md, error 4.
 
-#### [L-224] Streamer belt: one warped band, not a sphere
-<!-- L:224 status:OPEN upd:2026-08-22 section:A flag: rice:3/3/85/2 -->
-- **What is on screen now, and why it is wrong twice.**
-  `create_sun_streamer_belt_shell` draws a full sphere of points at
-  `STREAMER_BELT_RADII = 6.0`. Helmet streamers form only over the
-  magnetic neutral line; the poles carry coronal holes instead. So the
-  sphere asserts helmets exactly where there are none. And 6.0 is not
-  a boundary of anything: L-210 withdrew its 4-6 R_sun range as
-  unsourced and held 6.0 as a declared drawing choice above the closed
-  structure and inside the open one.
-- **The physical split, from Suess & Nerney (2004), Adv. Space Res.
-  33:668-675, bibcode 2004AdSpR..33..668S.** Streamers reach many
-  solar radii but the CLOSED-field helmet reaches no higher than 2-4.
-  Above the cusp there is a stalk -- a thin sheet along the current
-  sheet with no outer edge, thinning into the slow solar wind. Source
-  record: `documentation/SOURCE_suess_nerney_2004_helmet_extent_
-  20260821.md`. The figure is stated there as established background
-  in a modelling paper, NOT measured by it.
-- **DECISION -- one trace, not two.** Both halves are band-shaped, so
-  this is one object whose character changes with radius, not two
-  shells. One legend entry. Splitting the legend would undo the point.
-- **DECISION -- the silhouette carries the physics.** Wide and dense
-  at the base along the neutral line; pinching to a minimum width at
-  the cusp; thin above it. The pinch is where the loops open, which is
-  a claim a paper supports, unlike "where the belt ends." It is also
-  the eclipse silhouette, so it reads as familiar and is correct.
-- **DECISION -- cusp at 4.0 R_sun**, the top of the stated 2-4 range.
-  `STREAMER_BELT_RADII = 6.0` becomes `HELMET_CUSP_RADII = 4.0`. The
-  rename is Tony's call and load-bearing: a constant named for the
-  belt while holding the helmet cusp is the same name-meaning drift
-  that produced the citation failure. Eight live consumers across six
-  modules -- `shell_configs.py`, `comet_visualization_shells.py` and
-  its hover text, `solar_visualization_shells.py`,
-  `test_constants_provenance.py`. MEASURED, not assumed: the suite's
-  ordering assertion holds at 4.0 (3.0 < 3.45 < 4.0 < 19.7 < 50), all
-  15 tests pass with the value substituted.
-- **DECISION -- the stalk attenuates and never terminates.** Opacity
-  AND point density both fall with radius; the outer edge dissolves.
-  This is the one non-negotiable. DeForest's 15 R_sun is the
-  coronagraph's FIELD OF VIEW, not an extent, so drawing an edge there
-  would repeat the withdrawn 4-6 range in pixels. Points generate to
-  roughly 20 R_sun with alpha already at zero before the array ends,
-  so the terminus exists in code and never on screen.
-- **DECISION -- it dissolves across the Alfven surface.** 19.7 R_sun
-  (L-209) is the one real boundary out there. The stalk is seen losing
-  definition as it crosses from corona into wind, which makes the
-  Alfven shell mean something instead of hanging alone. Hover carries
-  what happens next: it does not end, it becomes the heliospheric
-  current sheet and runs to the heliopause.
-- **DECISION -- warp: one configuration near solar minimum**, with the
-  solar-cycle sweep explained in hover rather than drawn. The swept
-  envelope is the more conservative claim but smears the skirt into a
-  torus that teaches nothing, and the skirt's shape is the thing that
-  teaches.
-- **DECISION -- the boundary is drawn, its meaning is labelled.** Two
-  claims ride together and they are not the same kind. That a sharp
-  brightness boundary exists is a coronagraph OBSERVATION and needs no
-  further source. What it divides is an INTERPRETATION -- Suess &
-  Nerney state it is reasonable to ASSUME the boundary separates fast
-  coronal-hole wind from slow, and slow-wind origin is unsettled in
-  the field. So draw the edge; let hover attribute the flow-regime
-  reading to them as a reading. Uncertainty stays first-class.
-- **DECISION -- legend renamed to "Sun: Streamer Belt."** Drop
-  "(Visible Corona)": the visible corona is broader than the belt and
-  separating them is the point. The legendgroup is a key in
-  `shell_configs.py`, the checkbox and the tooltip, so it ripples --
-  but through files this work opens anyway.
-- **Where the generator goes.** `planet_visualization_utilities.py`,
-  beside `create_magnetosphere_shape` and `create_bow_shock_shape`,
-  same signature shape: params dict in, body-frame `(x, y, z)` out,
-  caller places it. The bow-shock generator was extracted in June 2026
-  from four duplicated inline copies precisely so shaped geometry has
-  one home; a one-off in the shells module would undo that.
-- **Mechanism note.** Plotly's `marker.opacity` is scalar, but
-  `marker.color` and `marker.size` both take per-point arrays, so
-  radial fade, size taper and density thinning all fit one trace and
-  one legend entry.
-- **Already true in the hover text, which is ahead of the picture.**
-  The current hover already cites Suess & Nerney for 2-4 R_sun and
-  already says the eclipse edge divides two flow regimes rather than
-  plasma from vacuum. The words describe the band. Only the geometry
-  is still a sphere.
-**Note:** RICE is Claude's proposal, unratified. Confidence 85 rather
-than higher because the fade PROFILE is unsettled -- linear will
-probably read as a smear and something steeper as a stalk. Build it
-adjustable and let Mode 5 pick; that is the render's call, not a
-design one.
-**Gap:** build it. The design is settled and sourced; nothing is
-blocked and no further source read is owed. Two things want the render
-rather than a decision: the fade curve, and whether the cusp pinch
-reads at all at 4.0 against `INNER_CORONA_RADII` at 3.0 and
-`ROCHE_LIMIT_RADII` at 3.45. Marker separation, if needed, is angular
-and never radial.
-**Ref:** `solar_visualization_shells.py::create_sun_streamer_belt_
-shell`; `constants_new.py::STREAMER_BELT_RADII`;
-`planet_visualization_utilities.py::create_magnetosphere_shape` and
-`create_bow_shock_shape` (the pattern to follow);
-`documentation/SOURCE_suess_nerney_2004_helmet_extent_20260821.md`;
-L-210 (the withdrawn range and the held 6.0 this replaces); L-209 (the
-Alfven surface it dissolves across); L-221 (the ruling that sequenced
-it); `orrery-coding-conventions` (single info marker, marker
-separation for near-equal radii, hover AU convention).
-
 #### [L-225] Migrate the comet shell constants into `constants_new.py`, then dispatch
 <!-- L:225 status:DEFERRED upd:2026-08-23 section:A flag: rice:2/3/80/2 -->
 - **Opened 2026-08-23, and late.** The design note of 2026-08-22 cites
@@ -5944,51 +5868,8 @@ separation for near-equal radii, hover AU convention).
   Section 4; `provenance-discipline` 2.6; L-221 (sequencing authority);
   L-224 (the session that surfaced it).
 
-#### [L-227] Streamer band hover rendered as one 378-character line
-<!-- L:227 status:OPEN upd:2026-08-23 section:A flag: rice:2/2/95/1 -->
-- **Found by Mode 5 on 2026-08-23**, hovering the streamer band during
-  the L-224 acceptance pass. The tooltip ran off the viewport.
-- **Measured as rendered:** `band_hover` had EIGHT segments, longest
-  378 characters, six over 98. `streamer_belt_info`, forty lines up in
-  the same file, tops out at 98. After the fix: 29 segments, longest
-  63, none over 98.
-- **Cause.** The string was written as implicitly-concatenated literals
-  wrapped at ~72 characters FOR SOURCE READABILITY, with `<br><br>`
-  only between paragraphs. In this file the source wrap and the
-  rendered wrap are one act, because each older line carries its own
-  `<br>`. L-224 copied the visual habit without the mechanism, so the
-  source looked correctly wrapped and the output was one long run.
-- **Nothing but a person catches this.** No checker reads rendered
-  hover width; the module compiles and the trace builds either way.
-  Third demonstration this month that the render is the gate.
-- **A RE-FLOW IS NOT COSMETIC IN THIS PROJECT** (learned 2026-08-23,
-  after this item shipped). The provenance scanner decides whether a
-  claim is cited by how many LINES away the nearest `# Source:`
-  comment is. Breaking one long line into six moved a computed figure
-  past that window, and the tree count went 292 -> 294 on a change
-  that altered no wording at all. Fixed under L-229. The general
-  form: when line positions move, provenance state can move with
-  them, so re-run the scanner after any re-flow and read the delta.
-- **Breaks only, no wording changed** -- proven mechanically, not
-  asserted: strip every `<br>`, collapse whitespace, compare old to
-  new, byte-identical. The patch re-ran that comparison as a self-check
-  so it could refuse if a word had moved.
-- **Convention recorded:** `orrery-coding-conventions` 1.5, Hover Line
-  Width Is a Convention, Not an Accident. Tony's ruling: this recurs
-  from time to time rather than constantly, which is the kind of thing
-  a person forgets and a written convention does not.
-- **Note:** RICE 2/2/95/1 -> 3.8 is Claude's proposed score.
-  **Tony-action (decide):** confirm or redirect, then re-run
-  `ledger_index.py`.
-- **Tony-action (do):** run `skills_index.py`, reinstall
-  orrery-coding-conventions at Settings > Skills, and hover the band
-  once more to confirm it wraps.
-- **Ref:** `solar_visualization_shells.py::create_sun_streamer_band_shell`;
-  `skills/orrery-coding-conventions/SKILL.md` v1.5; L-224 (the build
-  that introduced it); L-191 (the `<br>`-in-tooltip sweep, separate).
-
 #### [L-228] Alfven surface latitude ranges: source them or omit them
-<!-- L:228 status:OPEN upd:2026-08-23 section:A flag:Tony rice:2/3/60/2 -->
+<!-- L:228 status:OPEN upd:2026-10-04 section:A flag:Tony rice:2/3/60/2 -->
 - **Surfaced 2026-08-23** while reading the hover strings for L-227.
 - **THE DRAWN VALUE IS NOT AT ISSUE.** `ALFVEN_SURFACE_RADII` is
   interpolated into every hover that quotes it, including the derived
@@ -6018,6 +5899,11 @@ separation for near-equal radii, hover AU convention).
   range as prose. If it does not, remove all three ranges and note the
   gap. Do not reconcile them against each other -- three unsourced
   numbers agreeing is not evidence.
+- **2026-10-04: the Sun slice's fourth item (L-412).** Claude does the
+  read of Cranmer et al. (2007) itself, by web, and brings the result
+  and any wording change to Tony. Also carries L-229's loose end: a
+  citation for the streamer belt's orientation about the solar
+  equator, or the drawing stays declared.
 - **Tony-action (do):** the source read. Claude cannot clear this by
   reasoning about it, and guessing here is the failure this week was
   spent on.
@@ -6031,91 +5917,6 @@ separation for near-equal radii, hover AU convention).
   correction and the interpolation leg); L-210;
   `documentation/DESIGN_NOTE_20260822_braid_and_citation_kind.md`
   Section 2 (value, source, KIND).
-
-#### [L-229] Streamer band drawn in the ecliptic plane, not the solar equator
-<!-- L:229 status:OPEN upd:2026-08-23 section:A flag: rice:3/4/95/1 -->
-- **Found by Mode 5 on 2026-08-23.** Tony looked at the render and
-  asked whether the belt should lie in the ecliptic rather than the
-  solar equatorial plane. It should not, and the same figure already
-  carried the proof.
-- **The defect.** `create_streamer_band_shape` returns points whose own
-  docstring says "Positions in SOLAR RADII in the body frame." The
-  caller scaled them and handed them to Plotly with NO rotation, so
-  the band's plane of symmetry landed on the ecliptic. Meanwhile
-  `build_rotation_axis_traces` takes the Sun's spin pole from
-  `create_planet_transformation_matrix('Sun')` and is correctly
-  tilted. The axis leaned; the band lay flat.
-- **Measured, by fitting the point cloud's plane:** before, normal
-  (-0.0003, -0.0004, 1.0000), tilt 0.03 deg from the ecliptic; after,
-  normal (0.1227, -0.0314, 0.9920), tilt 7.27 deg. Angle between the
-  band normal and the Sun's spin pole after the fix: 0.028 deg. The
-  solar equator is inclined 7.25 deg to the ecliptic.
-- **Both traces now read ONE matrix**, so they cannot disagree again.
-  That is the structural half of the fix and it matters more than the
-  seven degrees.
-- **WITHDRAWN 2026-08-23, same day, and left visible.** This entry
-  originally carried a bullet titled "Why the solar equator is the
-  right plane", arguing from the heliospheric current sheet, the
-  solar magnetic equator, and the dipole's alignment with the spin
-  axis near solar minimum. **None of that is sourced anywhere in this
-  project.** Tony asked whether there was a reference for the belt's
-  orientation; a repo-wide search found none -- not for the
-  orientation, not for `warp_amp_deg` = 15.0, not for the two-lobe
-  warp, and not for the hover's existing claim that the tilt sweeps
-  toward the poles across the 11-year cycle. The physics may well be
-  right. It was stated as established, which is the failure the
-  resident rule names: wrong-but-asserted is worse than uncited,
-  because the assertion suppresses the suspicion that would catch it.
-  Recorded rather than deleted, because a claim withdrawn silently
-  leaves the next reader nothing to check against.
-- **What actually justifies the rotation, and needs no physics
-  citation.** `create_streamer_band_shape`'s own docstring says it
-  returns points "in the body frame"; the caller treated them as
-  ecliptic. That is an internal contract violation. The Sun's body
-  frame is DEFINED by its rotation pole, and that pole is sourced
-  (IAU 2018, RA 286.13, dec 63.87). So the band belongs in that frame
-  because it is the frame it was built in. Everything past that --
-  that the belt is organized about the solar equator at all -- is a
-  drawing choice, now declared as one in the code comment and in the
-  hover the reader sees.
-- **Tony-action (do): find a citation for the belt's orientation, or
-  leave it declared.** Same shape as L-228 and the same module. If a
-  source states that the streamer belt / heliospheric current sheet
-  is organized about the solar rotation or magnetic equator, cite it
-  and the ASSUMPTION note comes out. If none is found, the note
-  stays and that is an honest ending, not a failure. Unlike a range,
-  an orientation cannot be omitted -- the band has to be drawn
-  somewhere -- so this falls under Show the Envelope of the
-  Unknowable rather than under omit-if-unsourced.
-- **The info marker rotates with the band.** Rotating one and not the
-  other would leave the marker off the band edge -- geometry right,
-  affordance wrong. Verified unchanged at 2.038e-03 AU to the nearest
-  band point, before and after.
-- **Nothing automated could have caught this.** The module compiles,
-  the trace builds, the geometry is internally consistent, and no
-  checker compares two traces' frames. Fourth instance this month of
-  the render being the only gate: L-227 (hover width), L-224 (band
-  shape), L-209 (shell radius), and now the frame.
-- **Also fixed here (L-227 follow-on):** the L-227 re-flow moved a
-  computed figure out of the scanner's citation window, taking the
-  tree count 292 -> 294. A `# Source:` comment now sits mid-string
-  above that line. Measured on a live scanner run: this file's Tier-1
-  count 7 -> 6. The first attempt used `# Derived:` and did NOT clear
-  it -- that token is worksheet-leg vocabulary, not scanner
-  `SOURCE_PATTERNS`. The two overlap enough to mislead.
-- **Note:** RICE 3/4/95/1 -> 11.4 is Claude's proposed score. Impact 4
-  because a wrong frame is a wrong physical claim on screen, not a
-  cosmetic one. **Tony-action (decide):** confirm or redirect, then
-  re-run `ledger_index.py`.
-- **Tony-action (do): Mode 5.** Relaunch and look at the Sun. The band
-  should lean with the yellow rotation axis instead of lying flat on
-  the ecliptic grid -- about 7 degrees, visible but not dramatic.
-- **Ref:** `solar_visualization_shells.py::create_sun_streamer_band`;
-  `planet_visualization_utilities.py::create_streamer_band_shape` and
-  `build_rotation_axis_traces`;
-  `idealized_orbits.py::create_planet_transformation_matrix` and
-  `planet_poles['Sun']` (IAU 2018); L-224 (the band build); L-227 (the
-  re-flow); L-209 (the Alfven constant this cites).
 
 #### [L-230] A skill bump does not reach the protocol's version history
 <!-- L:230 status:DEFERRED upd:2026-08-23 section:A flag: rice:3/3/85/2 -->
@@ -6551,6 +6352,9 @@ L-241 (same three builders).
   will find they disagree.
 - **Recommendation: say both.** Identical in the assembler; fix both or
   neither.
+- **2026-10-04:** folds into L-410. A fuzzy torus changes what the
+  hover should describe, so the wording waits for that design (the
+  Sun slice's sixth item, L-412).
 **Gap:** minor. Fold into the next touch of either instrument.
 - **Note:** RICE 2/2/95/1 -> 3.8 is Claude's proposed score.
   **Tony-action (decide):** confirm or redirect.
@@ -19001,6 +18805,367 @@ L-363 (the room), L-395.
 **Gap:** None -- closed 2026-10-02.
 **Ref:** L-404; L-363; L-395; L-338; skills/interactive-exhibit/SKILL.md;
 skills/ledger-and-session-records/SKILL.md.
+
+#### [L-209] ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre
+<!-- L:209 status:DONE upd:2026-10-04 section:C flag: rice:3/3/85/1 -->
+- **The finding, pilot run 2026-08-18.** `ALFVEN_SURFACE_RADII = 18.8`
+  is an ALTITUDE above the photosphere, not a heliocentric radius.
+  Both the Kasper et al. 2021 abstract (13 million km above the
+  photosphere) and the NASA/APL release (8.127 million miles above the
+  solar surface) measure from the surface.
+- **Checkable inside the file, against a sibling.**
+  `PARKER_CLOSEST_RADII = 9.86` IS heliocentric: the mission's 3.8
+  million miles above the surface is 8.86 R_sun of altitude and 9.86
+  from centre. So two constants in one file, describing the same
+  spacecraft, use different origins and differ by exactly 1 R_sun.
+- **Why this is alone rather than with the other pilot findings.** If
+  the Alfven surface is drawn as a shell from Sun centre alongside
+  HELIOPAUSE_RADII and PARKER_CLOSEST_RADII, the render is low by one
+  solar radius and the value should be 19.8. That makes it a rendering
+  defect, not a documentation defect, and it fails Mode 5 in a way no
+  citation error does.
+- **Confirm the dispatch before editing the leaf.** Whether the shell
+  is drawn from centre is the question that decides whether this is a
+  render bug or only a comment bug. Grep for consumers of the constant
+  first.
+- **Two further cautions from the same return, if it IS drawn as a
+  sphere.** The crossing was into a low-Mach-number boundary layer
+  above a pseudostreamer, not a global surface; later PSP work puts
+  the Alfven surface at 10-20 R_sun, non-spherical, and expanding with
+  rising solar activity.
+- **Citation half.** GPT independently marked the citation PARTIAL:
+  Kasper et al. 2021 does not itself print 18.8 R_sun. That figure is
+  from the press release, so the row cites the paper for a number only
+  the release states.
+- **Confirmed, and the render WAS wrong.** `shell_configs.py` builds the
+  Alfven shell as `ALFVEN_SURFACE_RADII * SOLAR_RADIUS_AU`, a sphere
+  centred on the Sun, so the constant is consumed heliocentrically and
+  the shell rendered one solar radius small.
+- **The correction was ALREADY IN THE FILE, on lines the check could not
+  see.** Two comment lines under the constant read "HELIOCENTRIC: from
+  Sun center ... Kasper's paper says 18.4-19.7 R_sun from center." A
+  previous session found the distinction, wrote the paper's own range
+  down, and left the value at 18.8 anyway. See L-214: those lines rode
+  on a bare `Note:` and an invented `HELIOCENTRIC:` label, neither of
+  which the request builder reads, so no responder ever saw them.
+- **Resolved at 19.7** (Tony, 2026-08-19), sourced to the PRL body text
+  rather than to the press release. Two independent routes agree: the
+  paper gives the sub-Alfvenic interval as 19.7 to 18.4 solar radii from
+  the center of the Sun, and converting the release's 18.8 R_sun of
+  altitude gives 19.8. Taking the paper drops the release as an
+  authority, which also answers GPT's separate PARTIAL: the paper does
+  not itself print 18.8.
+- **The two `# Cross-checked:` legs dated 2026-08-02 were stripped with
+  the value.** They certified 18.8. A check of the old value is not a
+  check of the new one -- the exact ride-along the skill warns about.
+  No new leg was written from the pilot: Claude returned APPROX and GPT
+  PARTIAL, neither of which earns one, and Gemini's CONFIRMED rests on
+  a note reading "Recollection of the Parker Solar Probe 8th encounter
+  results."
+- **As built** (`patch_L209_2_alfven_migration.py`). The value and the
+  whole explanation live in `constants_new.py`; every display site now
+  READS the constant rather than holding a copy. 12 typed instances
+  across four modules became imports: 8 interpolations in
+  `solar_visualization_shells.py`, 1 in `comet_visualization_shells.py`,
+  1 in `info_dictionary.py` (which gained its first import), and 2 sites
+  that cannot read a value -- a docstring and a `# Source:` comment --
+  had the figure dropped and now point at the constant. The derived
+  0.087 AU and 13 million km figures are computed from the constant, so
+  they moved with it.
+- **Found and NOT touched, deliberately.** The same display strings hold
+  other typed constants -- `ROCHE_LIMIT_RADII` as "3.45 R_sun", the
+  streamer belt as both "4-6" and "6.0". Migrating them is L-181 and
+  L-191, not this item.
+**Note:** RICE is Claude's proposal, unratified.
+**Gap:** one open, one closed. Read item 2; item 1 is kept as record.
+1. **CITATION DEBT -- DISCHARGED 2026-08-21.** DeForest, Howard &
+   McComas (2014), ApJ 787:124 was removed from `STREAMER_BELT_RADII`
+   on 2026-08-20 at `e1c64dc9` -- its 6 R_sun is an inbound-wave
+   DETECTION THRESHOLD, not a streamer extent -- and its own result
+   belongs to this row. The removal ran; the rehoming did not, and this
+   Gap said "none" for a day because it was written before the debt
+   existed. `patch_L209_4_deforest_rehomed.py` closed it: the paper was
+   read at source, and `# Also+:` legs on `ALFVEN_SURFACE_RADII` now
+   carry it as a 2014 remote LOWER BOUND, superseded by Kasper's 2021
+   in-situ crossing and consistent with it. Nothing further is owed.
+   **The figure changed on the way, and this is the part to remember.**
+   This Gap first stated the bound as 17 R_sun in the streamer belt and
+   12.5 over the poles. The published paper says 15 and 12, in its
+   abstract, its Section 5 and its Section 6. The 12.5/17 pair is the
+   arXiv ABSTRACT METADATA at arxiv.org/abs/1404.3235, which does not
+   match the accepted manuscript arXiv itself serves as the PDF; NASA
+   ADS and Cranmer et al. 2016 (ApJ 828:66) both carry 12 and 15. Two
+   earlier reads reported 17 because both quoted that same listing
+   page. Agreement between two reads of one wrong page is not
+   verification. Do NOT restore 17 anywhere.
+   **The rule it tested.** This row is why the discharge needed a real
+   read rather than the removal worksheet: a removal needs only the
+   ABSENCE of support, a citation needs its PRESENCE. Had the worksheet
+   been reused as the leg, 17 would now be in the code.
+2. **MODE 5 -- DONE 2026-10-04.** The Alfven shell should
+   render one solar radius larger than before, still nested inside the
+   50 R_sun outer corona. Tony's eyes on a plot, not a build. Tony on
+   the phone, ?exhibit=sun, after patch_L371_3: "yes, 0.092 au inside
+   0.23 au", and "Beautiful." Nothing re-homed: item 1 was discharged
+   on 2026-08-21.
+**Ref:** `documentation/PILOT_CONVERGENCE_20260819.md` Part 4;
+`documentation/worksheets/`
+`worksheet_claude-opus-5_pilot_constants_new_20260818.jsonl` R12;
+`documentation/worksheets/`
+`worksheet_gemini-3-1-pro_reconciliation_sources_20260820.md` item 4
+(the checkable, unchecked claim); L-210 (the row DeForest was removed
+from, and the same staleness class corrected one item over on
+2026-08-21); L-214 (the builder gap this exposed); L-181 and L-191 (the
+remaining shadow constants); L-207 (the run that produced it); L-221
+(misapplied against this row before the dates were checked -- it
+governs a session document contradicting a settled decision, not a
+ledger field that predates the event it is silent about).
+
+#### [L-224] Streamer belt: one warped band, not a sphere
+<!-- L:224 status:DONE upd:2026-10-04 section:C flag: rice:3/3/85/2 -->
+- **What is on screen now, and why it is wrong twice.**
+  `create_sun_streamer_belt_shell` draws a full sphere of points at
+  `STREAMER_BELT_RADII = 6.0`. Helmet streamers form only over the
+  magnetic neutral line; the poles carry coronal holes instead. So the
+  sphere asserts helmets exactly where there are none. And 6.0 is not
+  a boundary of anything: L-210 withdrew its 4-6 R_sun range as
+  unsourced and held 6.0 as a declared drawing choice above the closed
+  structure and inside the open one.
+- **The physical split, from Suess & Nerney (2004), Adv. Space Res.
+  33:668-675, bibcode 2004AdSpR..33..668S.** Streamers reach many
+  solar radii but the CLOSED-field helmet reaches no higher than 2-4.
+  Above the cusp there is a stalk -- a thin sheet along the current
+  sheet with no outer edge, thinning into the slow solar wind. Source
+  record: `documentation/SOURCE_suess_nerney_2004_helmet_extent_
+  20260821.md`. The figure is stated there as established background
+  in a modelling paper, NOT measured by it.
+- **DECISION -- one trace, not two.** Both halves are band-shaped, so
+  this is one object whose character changes with radius, not two
+  shells. One legend entry. Splitting the legend would undo the point.
+- **DECISION -- the silhouette carries the physics.** Wide and dense
+  at the base along the neutral line; pinching to a minimum width at
+  the cusp; thin above it. The pinch is where the loops open, which is
+  a claim a paper supports, unlike "where the belt ends." It is also
+  the eclipse silhouette, so it reads as familiar and is correct.
+- **DECISION -- cusp at 4.0 R_sun**, the top of the stated 2-4 range.
+  `STREAMER_BELT_RADII = 6.0` becomes `HELMET_CUSP_RADII = 4.0`. The
+  rename is Tony's call and load-bearing: a constant named for the
+  belt while holding the helmet cusp is the same name-meaning drift
+  that produced the citation failure. Eight live consumers across six
+  modules -- `shell_configs.py`, `comet_visualization_shells.py` and
+  its hover text, `solar_visualization_shells.py`,
+  `test_constants_provenance.py`. MEASURED, not assumed: the suite's
+  ordering assertion holds at 4.0 (3.0 < 3.45 < 4.0 < 19.7 < 50), all
+  15 tests pass with the value substituted.
+- **DECISION -- the stalk attenuates and never terminates.** Opacity
+  AND point density both fall with radius; the outer edge dissolves.
+  This is the one non-negotiable. DeForest's 15 R_sun is the
+  coronagraph's FIELD OF VIEW, not an extent, so drawing an edge there
+  would repeat the withdrawn 4-6 range in pixels. Points generate to
+  roughly 20 R_sun with alpha already at zero before the array ends,
+  so the terminus exists in code and never on screen.
+- **DECISION -- it dissolves across the Alfven surface.** 19.7 R_sun
+  (L-209) is the one real boundary out there. The stalk is seen losing
+  definition as it crosses from corona into wind, which makes the
+  Alfven shell mean something instead of hanging alone. Hover carries
+  what happens next: it does not end, it becomes the heliospheric
+  current sheet and runs to the heliopause.
+- **DECISION -- warp: one configuration near solar minimum**, with the
+  solar-cycle sweep explained in hover rather than drawn. The swept
+  envelope is the more conservative claim but smears the skirt into a
+  torus that teaches nothing, and the skirt's shape is the thing that
+  teaches.
+- **DECISION -- the boundary is drawn, its meaning is labelled.** Two
+  claims ride together and they are not the same kind. That a sharp
+  brightness boundary exists is a coronagraph OBSERVATION and needs no
+  further source. What it divides is an INTERPRETATION -- Suess &
+  Nerney state it is reasonable to ASSUME the boundary separates fast
+  coronal-hole wind from slow, and slow-wind origin is unsettled in
+  the field. So draw the edge; let hover attribute the flow-regime
+  reading to them as a reading. Uncertainty stays first-class.
+- **DECISION -- legend renamed to "Sun: Streamer Belt."** Drop
+  "(Visible Corona)": the visible corona is broader than the belt and
+  separating them is the point. The legendgroup is a key in
+  `shell_configs.py`, the checkbox and the tooltip, so it ripples --
+  but through files this work opens anyway.
+- **Where the generator goes.** `planet_visualization_utilities.py`,
+  beside `create_magnetosphere_shape` and `create_bow_shock_shape`,
+  same signature shape: params dict in, body-frame `(x, y, z)` out,
+  caller places it. The bow-shock generator was extracted in June 2026
+  from four duplicated inline copies precisely so shaped geometry has
+  one home; a one-off in the shells module would undo that.
+- **Mechanism note.** Plotly's `marker.opacity` is scalar, but
+  `marker.color` and `marker.size` both take per-point arrays, so
+  radial fade, size taper and density thinning all fit one trace and
+  one legend entry.
+- **Already true in the hover text, which is ahead of the picture.**
+  The current hover already cites Suess & Nerney for 2-4 R_sun and
+  already says the eclipse edge divides two flow regimes rather than
+  plasma from vacuum. The words describe the band. Only the geometry
+  is still a sphere.
+**Note:** RICE is Claude's proposal, unratified. Confidence 85 rather
+than higher because the fade PROFILE is unsettled -- linear will
+probably read as a smear and something steeper as a stalk. Build it
+adjustable and let Mode 5 pick; that is the render's call, not a
+design one.
+- **Closed 2026-10-04** [verified @ orrery e38b86ad]: the band is
+  `create_sun_streamer_band` in `solar_visualization_shells.py`,
+  STREAMER_BELT_RADII is retired, and the cusp is HELMET_CUSP_RADII,
+  now the top of a two-row range (L-371). Nothing left in this item
+  to re-home.
+**Gap:** none. (Was: build it. The design is settled and sourced; nothing is
+blocked and no further source read is owed. Two things want the render
+rather than a decision: the fade curve, and whether the cusp pinch
+reads at all at 4.0 against `INNER_CORONA_RADII` at 3.0 and
+`ROCHE_LIMIT_RADII` at 3.45. Marker separation, if needed, is angular
+and never radial.
+**Ref:** `solar_visualization_shells.py::create_sun_streamer_belt_
+shell`; `constants_new.py::STREAMER_BELT_RADII`;
+`planet_visualization_utilities.py::create_magnetosphere_shape` and
+`create_bow_shock_shape` (the pattern to follow);
+`documentation/SOURCE_suess_nerney_2004_helmet_extent_20260821.md`;
+L-210 (the withdrawn range and the held 6.0 this replaces); L-209 (the
+Alfven surface it dissolves across); L-221 (the ruling that sequenced
+it); `orrery-coding-conventions` (single info marker, marker
+separation for near-equal radii, hover AU convention).
+
+#### [L-227] Streamer band hover rendered as one 378-character line
+<!-- L:227 status:DONE upd:2026-10-04 section:C flag: rice:2/2/95/1 -->
+- **Found by Mode 5 on 2026-08-23**, hovering the streamer band during
+  the L-224 acceptance pass. The tooltip ran off the viewport.
+- **Measured as rendered:** `band_hover` had EIGHT segments, longest
+  378 characters, six over 98. `streamer_belt_info`, forty lines up in
+  the same file, tops out at 98. After the fix: 29 segments, longest
+  63, none over 98.
+- **Cause.** The string was written as implicitly-concatenated literals
+  wrapped at ~72 characters FOR SOURCE READABILITY, with `<br><br>`
+  only between paragraphs. In this file the source wrap and the
+  rendered wrap are one act, because each older line carries its own
+  `<br>`. L-224 copied the visual habit without the mechanism, so the
+  source looked correctly wrapped and the output was one long run.
+- **Nothing but a person catches this.** No checker reads rendered
+  hover width; the module compiles and the trace builds either way.
+  Third demonstration this month that the render is the gate.
+- **A RE-FLOW IS NOT COSMETIC IN THIS PROJECT** (learned 2026-08-23,
+  after this item shipped). The provenance scanner decides whether a
+  claim is cited by how many LINES away the nearest `# Source:`
+  comment is. Breaking one long line into six moved a computed figure
+  past that window, and the tree count went 292 -> 294 on a change
+  that altered no wording at all. Fixed under L-229. The general
+  form: when line positions move, provenance state can move with
+  them, so re-run the scanner after any re-flow and read the delta.
+- **Breaks only, no wording changed** -- proven mechanically, not
+  asserted: strip every `<br>`, collapse whitespace, compare old to
+  new, byte-identical. The patch re-ran that comparison as a self-check
+  so it could refuse if a word had moved.
+- **Convention recorded:** `orrery-coding-conventions` 1.5, Hover Line
+  Width Is a Convention, Not an Accident. Tony's ruling: this recurs
+  from time to time rather than constantly, which is the kind of thing
+  a person forgets and a written convention does not.
+- **Note:** RICE 2/2/95/1 -> 3.8 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect, then re-run
+  `ledger_index.py`.
+- **Tony-action (do):** run `skills_index.py`, reinstall
+  orrery-coding-conventions at Settings > Skills, and hover the band
+  once more to confirm it wraps.
+- **Closed 2026-10-04** [verified @ orrery e38b86ad]: the band's hover
+  wraps at about sixty characters a line. Its Tony-actions are
+  overtaken: orrery-coding-conventions has since reached 1.9 and been
+  reinstalled several times. Nothing re-homed.
+- **Ref:** `solar_visualization_shells.py::create_sun_streamer_band_shell`;
+  `skills/orrery-coding-conventions/SKILL.md` v1.5; L-224 (the build
+  that introduced it); L-191 (the `<br>`-in-tooltip sweep, separate).
+
+#### [L-229] Streamer band drawn in the ecliptic plane, not the solar equator
+<!-- L:229 status:DONE upd:2026-10-04 section:C flag: rice:3/4/95/1 -->
+- **Found by Mode 5 on 2026-08-23.** Tony looked at the render and
+  asked whether the belt should lie in the ecliptic rather than the
+  solar equatorial plane. It should not, and the same figure already
+  carried the proof.
+- **The defect.** `create_streamer_band_shape` returns points whose own
+  docstring says "Positions in SOLAR RADII in the body frame." The
+  caller scaled them and handed them to Plotly with NO rotation, so
+  the band's plane of symmetry landed on the ecliptic. Meanwhile
+  `build_rotation_axis_traces` takes the Sun's spin pole from
+  `create_planet_transformation_matrix('Sun')` and is correctly
+  tilted. The axis leaned; the band lay flat.
+- **Measured, by fitting the point cloud's plane:** before, normal
+  (-0.0003, -0.0004, 1.0000), tilt 0.03 deg from the ecliptic; after,
+  normal (0.1227, -0.0314, 0.9920), tilt 7.27 deg. Angle between the
+  band normal and the Sun's spin pole after the fix: 0.028 deg. The
+  solar equator is inclined 7.25 deg to the ecliptic.
+- **Both traces now read ONE matrix**, so they cannot disagree again.
+  That is the structural half of the fix and it matters more than the
+  seven degrees.
+- **WITHDRAWN 2026-08-23, same day, and left visible.** This entry
+  originally carried a bullet titled "Why the solar equator is the
+  right plane", arguing from the heliospheric current sheet, the
+  solar magnetic equator, and the dipole's alignment with the spin
+  axis near solar minimum. **None of that is sourced anywhere in this
+  project.** Tony asked whether there was a reference for the belt's
+  orientation; a repo-wide search found none -- not for the
+  orientation, not for `warp_amp_deg` = 15.0, not for the two-lobe
+  warp, and not for the hover's existing claim that the tilt sweeps
+  toward the poles across the 11-year cycle. The physics may well be
+  right. It was stated as established, which is the failure the
+  resident rule names: wrong-but-asserted is worse than uncited,
+  because the assertion suppresses the suspicion that would catch it.
+  Recorded rather than deleted, because a claim withdrawn silently
+  leaves the next reader nothing to check against.
+- **What actually justifies the rotation, and needs no physics
+  citation.** `create_streamer_band_shape`'s own docstring says it
+  returns points "in the body frame"; the caller treated them as
+  ecliptic. That is an internal contract violation. The Sun's body
+  frame is DEFINED by its rotation pole, and that pole is sourced
+  (IAU 2018, RA 286.13, dec 63.87). So the band belongs in that frame
+  because it is the frame it was built in. Everything past that --
+  that the belt is organized about the solar equator at all -- is a
+  drawing choice, now declared as one in the code comment and in the
+  hover the reader sees.
+- **Tony-action (do): find a citation for the belt's orientation, or
+  leave it declared.** Same shape as L-228 and the same module. If a
+  source states that the streamer belt / heliospheric current sheet
+  is organized about the solar rotation or magnetic equator, cite it
+  and the ASSUMPTION note comes out. If none is found, the note
+  stays and that is an honest ending, not a failure. Unlike a range,
+  an orientation cannot be omitted -- the band has to be drawn
+  somewhere -- so this falls under Show the Envelope of the
+  Unknowable rather than under omit-if-unsourced.
+- **The info marker rotates with the band.** Rotating one and not the
+  other would leave the marker off the band edge -- geometry right,
+  affordance wrong. Verified unchanged at 2.038e-03 AU to the nearest
+  band point, before and after.
+- **Nothing automated could have caught this.** The module compiles,
+  the trace builds, the geometry is internally consistent, and no
+  checker compares two traces' frames. Fourth instance this month of
+  the render being the only gate: L-227 (hover width), L-224 (band
+  shape), L-209 (shell radius), and now the frame.
+- **Also fixed here (L-227 follow-on):** the L-227 re-flow moved a
+  computed figure out of the scanner's citation window, taking the
+  tree count 292 -> 294. A `# Source:` comment now sits mid-string
+  above that line. Measured on a live scanner run: this file's Tier-1
+  count 7 -> 6. The first attempt used `# Derived:` and did NOT clear
+  it -- that token is worksheet-leg vocabulary, not scanner
+  `SOURCE_PATTERNS`. The two overlap enough to mislead.
+- **Note:** RICE 3/4/95/1 -> 11.4 is Claude's proposed score. Impact 4
+  because a wrong frame is a wrong physical claim on screen, not a
+  cosmetic one. **Tony-action (decide):** confirm or redirect, then
+  re-run `ledger_index.py`.
+- **Tony-action (do): Mode 5.** Relaunch and look at the Sun. The band
+  should lean with the yellow rotation axis instead of lying flat on
+  the ecliptic grid -- about 7 degrees, visible but not dramatic.
+- **Closed 2026-10-04** [verified @ orrery e38b86ad]: the band is
+  turned into the Sun's equatorial frame by
+  `create_planet_transformation_matrix('Sun')`, and Tony saw it lean
+  with the axis. Its one loose end, a citation for the belt's
+  orientation (or leave it declared), is re-homed to L-228: the same
+  module and the same kind of source read.
+- **Ref:** `solar_visualization_shells.py::create_sun_streamer_band`;
+  `planet_visualization_utilities.py::create_streamer_band_shape` and
+  `build_rotation_axis_traces`;
+  `idealized_orbits.py::create_planet_transformation_matrix` and
+  `planet_poles['Sun']` (IAU 2018); L-224 (the band build); L-227 (the
+  re-flow); L-209 (the Alfven constant this cites).
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
@@ -19607,6 +19772,9 @@ itself); L-112 (the remediation pass that verified DP flyby preservation).
   pattern.
 **Gap:** not scoped -- design conversation needed (which species'
 sublimation distances, single vs. multi-shell, data source).
+- **2026-10-04 (Tony):** in the Sun's slice, its tenth item (L-412):
+  a design talk after the dust cloud, since both are about what fills
+  the space around the Sun.
 **Ref:** to_do_ideas.md (pre-ledger, 4/16/26).
 
 #### [L-130] Restore six-elements + M0@J2000 plotting mode (educational, alt)
@@ -19626,8 +19794,15 @@ from git history or needs rebuilding; decide where it lives.
 - **Idea (Tony, 4/17/26, pre-ledger note).** Add a solar shell for the
   zodiacal dust cloud (interplanetary dust concentrated near the ecliptic).
 - **Cross-ref:** groups with L-128, L-136.
+- **2026-10-04, into the Sun's slice (Tony), designed with L-410.**
+  The outer corona's faint glow is sunlight scattered by this same
+  dust, so the outer corona's fuzzy edge may be where the drawing
+  hands over to the dust cloud rather than fading into nothing. The
+  cloud is flattened toward the planets' plane: a thick disk, not a
+  sphere. Tony: this "conforms to our braid principle and grouping of
+  thematic content". The Sun slice's ninth item (L-412).
 **Gap:** not scoped -- design conversation needed (extent, density
-profile, data source).
+profile, data source), with L-410.
 **Ref:** to_do_ideas.md (pre-ledger, 4/17/26).
 
 #### [L-136] Solar "scattered disk" shell
@@ -19636,6 +19811,8 @@ profile, data source).
   scattered disk (dynamically excited trans-Neptunian population, distinct
   from the classical Kuiper Belt).
 - **Cross-ref:** groups with L-128, L-131.
+- **2026-10-04 (Tony):** not the Sun's slice. A population of distant
+  icy bodies belongs with the Kuiper belt in the Solar System room.
 **Gap:** not scoped -- design conversation needed.
 **Ref:** to_do_ideas.md (pre-ledger, 4/18/26).
 

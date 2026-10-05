@@ -37,7 +37,7 @@ Module updated: August 26, 2026 with Anthropic's Claude Opus 5 (L-249:
     Earth's crust declares info_polar_deg 10.0 so its info marker clears
     the upper mantle's, which it coincided with once the upper mantle
     moved to its sourced radius. Found by Mode 5, not by any checker.)
-Module updated: October 3, 2026 with Anthropic's Claude Opus 5.5 (L-371:
+Module updated: October 4, 2026 with Anthropic's Claude Opus 5.5 (L-371:
     the Roche limit shell draws from ROCHE_LIMIT_DRAWN_RADII, the row
     that says where it is drawn, rather than from the one-figure row it
     equals. Same radius; the drawing choice now has its own home.)

@@ -171,14 +171,14 @@ KM_PER_AU = 149597870.7
 
 PARSEC_TO_AU = 206264.806247096
 # Unit: au
-# Status: measured V_CROSS_CHECKED 2026-10-03 -- belongs to no body's slice;
+# Status: measured V_CROSS_CHECKED 2026-10-04 -- belongs to no body's slice;
 # Status+: visited with the Sun's because the Sun's gravitational reach is
 # Status+: stated in parsecs (L-371).
 # Figures: exact -- the notes to IAU 2015 Resolution B2 define one parsec
 # Figures+: as exactly 648000/pi au; the literal carries 15 figures of that
 # Figures+: irrational number.
 # Read: sec. 5 and the appendix's item 2, Prsa et al. (2016), AJ 152, 41,
-# Read+: arXiv:1605.09788, 2026-10-03, Claude Opus 5.5
+# Read+: arXiv:1605.09788, 2026-10-04, Claude Opus 5.5
 # Note: DEFINED, not measured. One parsec is the distance at which one
 # Note+: astronomical unit subtends one arcsecond, so the value is
 # Note+: exactly 648000/pi au and no source publishes it as a
@@ -204,14 +204,14 @@ PARSEC_TO_AU = 206264.806247096
 # Note+: PARSEC_TO_AU / AU_PER_LIGHT_YEAR is 3.2615637772 with the
 # Note+: exact parsec and was 3.2615668 with the rounded one; the
 # Note+: literal 3.26156 that L-248 sweeps is closer to the first.
-# Note: moved here from the galactic-centre block on 2026-10-03 (L-371),
+# Note: moved here from the galactic-centre block on 2026-10-04 (L-371),
 # Note+: so that KM_PER_PARSEC below and the Sun's rows can use it.
 
 KM_PER_PARSEC = PARSEC_TO_AU * KM_PER_AU
 # Unit: km
 # Conversion: of PARSEC_TO_AU -- computed from that row, which carries the
 # Conversion+: source and the count. This is the row that defines the "pc"
-# Conversion+: token in constants_tokens.py (L-371, 2026-10-03).
+# Conversion+: token in constants_tokens.py (L-371, 2026-10-04).
 
 SUN_RADIUS_KM = 695700.0
 # Unit: km
@@ -1958,21 +1958,21 @@ INNER_CORONA_RADII = 3
 
 OUTER_CORONA_RADII = 50
 # Unit: r_sun
-# Status: declared 2026-10-03 -- a boundary chosen for the drawing, L-371
+# Status: declared 2026-10-04 -- a boundary chosen for the drawing, L-371
 # Figures: exact -- prints 2, the digits it was chosen with (50).
 # Declared: the faint outer corona, sunlight scattered by dust, has no
 # Declared+: sharp edge. The shell marks a reach chosen so the drawing
 # Declared+: shows that faint envelope; nothing is measured at 50.
-# Review-note: the citation this row carried until 2026-10-03 could not
+# Review-note: the citation this row carried until 2026-10-04 could not
 # Review-note+: be found saying this. It is recorded on L-371 and
 # Review-note+: deliberately not restated here.
 
 # New shells (added April 2026); renamed and resourced 2026-08-22 (L-224)
 # The helmets' 2-4 solar radii is a range, so it is two rows and the
-# drawn cusp is an expression over them (L-371, 2026-10-03).
+# drawn cusp is an expression over them (L-371, 2026-10-04).
 HELMET_CUSP_LOW_RADII = 2
 # Unit: r_sun
-# Status: measured V_SOURCED 2026-10-03 -- abstract, open
+# Status: measured V_SOURCED 2026-10-04 -- abstract, open
 # Figures: 1 -- the source prints "2-4".
 # Read: abstract, Suess and Nerney (2004), at NASA ADS, 2026-08-21, Tony
 # Read+: Quintanilla; record:
@@ -1986,7 +1986,7 @@ HELMET_CUSP_LOW_RADII = 2
 
 HELMET_CUSP_HIGH_RADII = 4
 # Unit: r_sun
-# Status: measured V_SOURCED 2026-10-03 -- abstract, open
+# Status: measured V_SOURCED 2026-10-04 -- abstract, open
 # Figures: 1 -- the source prints "2-4".
 # Read: as HELMET_CUSP_LOW_RADII, 2026-08-21, Tony Quintanilla.
 # Source: as HELMET_CUSP_LOW_RADII. This row is the high end.
@@ -1995,12 +1995,12 @@ HELMET_CUSP_HIGH_RADII = 4
 HELMET_CUSP_RADII = HELMET_CUSP_HIGH_RADII
 # Derived: the top of the helmets' range = 4
 # Unit: r_sun
-# Status: declared 2026-10-03 -- the top of the range held in the two
+# Status: declared 2026-10-04 -- the top of the range held in the two
 # Status+: rows above, L-371
 # Figures: exact -- prints 1, the digits of the value its rule gives
 # Figures+: (4); declared construction: equal to HELMET_CUSP_HIGH_RADII
 # Declared: the top of the range, so the drawn cusp does not understate
-# Declared+: the helmet. Until 2026-10-03 it was typed 4.0 with the
+# Declared+: the helmet. Until 2026-10-04 it was typed 4.0 with the
 # Declared+: range in the Source line below.
 # Source: Suess & Nerney (2004), Adv. Space Res. 33:668-675, bibcode
 #   2004AdSpR..33..668S -- "the closed field regions, or helmets, reach
@@ -2069,7 +2069,7 @@ ROCHE_LIMIT_RADII = 3.45
 ROCHE_LIMIT_DRAWN_RADII = ROCHE_LIMIT_RADII
 # Derived: where the Roche limit is drawn, its row at full digits = 3.45
 # Unit: r_sun
-# Status: declared 2026-10-03 -- where the shell is drawn, L-371
+# Status: declared 2026-10-04 -- where the shell is drawn, L-371
 # Figures: exact -- prints 3, the digits of the value its rule gives
 # Figures+: (3.45); declared construction: equal to ROCHE_LIMIT_RADII at
 # Figures+: its full digits
@@ -2079,18 +2079,18 @@ ROCHE_LIMIT_DRAWN_RADII = ROCHE_LIMIT_RADII
 # Declared+: It is drawn at the formula's full answer instead, so the two
 # Declared+: stay apart and the orrery and the gallery draw the same place.
 # Declared+: Which is really further out is not known. Tony's ruling of
-# Declared+: 2026-10-03, option B: an interim, until edges known only as
+# Declared+: 2026-10-04, option B: an interim, until edges known only as
 # Declared+: ranges are drawn as fuzzy bands (a design item of its own).
 
 ALFVEN_SURFACE_RADII = 19.7
 # Unit: r_sun
-# Status: measured V_SOURCED 2026-10-03 -- open full text
+# Status: measured V_SOURCED 2026-10-04 -- open full text
 # Figures: 3 -- the source prints 19.7.
 # Read: p. 255101-1, Kasper et al. (2021), the APS article page,
-# Read+: 2026-10-03, Claude Opus 5.5. Table 1 of the same paper lists
+# Read+: 2026-10-04, Claude Opus 5.5. Table 1 of the same paper lists
 # Read+: the interval's start as 19.8; the text's 19.7 is kept.
 # Access: open, https://doi.org/10.1103/PhysRevLett.127.255101
-# Access+: (2026-10-03).
+# Access+: (2026-10-04).
 # Source: Kasper et al. (2021), Phys. Rev. Lett. 127:255101 -- first crossing
 # Source+: 28 April 2021 09:33 UT; the sub-Alfvenic interval spans 19.7 to
 # Source+: 18.4 solar radii from the center of the Sun
@@ -2142,9 +2142,9 @@ ALFVEN_SURFACE_RADII = 19.7
 
 TERMINATION_SHOCK_AU = 94.01
 # Unit: au
-# Status: measured V_SOURCED 2026-10-03 -- abstract, open
+# Status: measured V_SOURCED 2026-10-04 -- abstract, open
 # Figures: 4 -- the source prints 94.01.
-# Read: abstract, Stone et al. (2005), at NASA ADS, 2026-10-03, Claude
+# Read: abstract, Stone et al. (2005), at NASA ADS, 2026-10-04, Claude
 # Read+: Opus 5.5
 # Source: Stone, E. C., Cummings, A. C., McDonald, F. B., Heikkila, B. C.,
 # Source+: Lal, N. and Webber, W. R. (2005), "Voyager 1 explores the
@@ -2153,22 +2153,22 @@ TERMINATION_SHOCK_AU = 94.01
 # Source+: 1 crossed the termination shock on 16 December 2004 at 94.01 AU.
 # Access: abstract, open,
 # Access+: https://ui.adsabs.harvard.edu/abs/2005Sci...309.2017S/abstract
-# Access+: (2026-10-03).
+# Access+: (2026-10-04).
 # Note: one spacecraft's crossing of a surface that is not round; it is
 # Note+: drawn as a sphere at that distance. Voyager 2 crossed nearer the
 # Note+: Sun, which is why the shape is called asymmetric.
-# Corrected: 2026-10-03 (L-371) -- was 94, two figures where the source
+# Corrected: 2026-10-04 (L-371) -- was 94, two figures where the source
 # Corrected+: prints four.
-# Cross-check retired: 2026-10-03 -- the Claude and GPT legs of 2026-08-02
+# Cross-check retired: 2026-10-04 -- the Claude and GPT legs of 2026-08-02
 # Cross-check retired+: checked the value 94; a check of the old value is
 # Cross-check retired+: not a check of the new one.
 
 HELIOPAUSE_AU = 121
 # Unit: au
-# Status: measured V_SOURCED 2026-10-03 -- open full text
+# Status: measured V_SOURCED 2026-10-04 -- open full text
 # Figures: 3 -- the source prints 121.
 # Read: p. 1489, second column, Gurnett et al. (2013), the authors' copy at
-# Read+: space.physics.uiowa.edu, 2026-10-03, Claude Opus 5.5
+# Read+: space.physics.uiowa.edu, 2026-10-04, Claude Opus 5.5
 # Source: Gurnett, D. A., Kurth, W. S., Burlaga, L. F. and Ness, N. F.
 # Source+: (2013), "In situ observations of interstellar plasma with
 # Source+: Voyager 1", Science 341, 1489-1492, doi:10.1126/science.1241681
@@ -2176,14 +2176,14 @@ HELIOPAUSE_AU = 121
 # Source+: at 121 AU; the last of five crossings was on 25 August 2012.
 # Access: open full text,
 # Access+: https://space.physics.uiowa.edu/~dag/publications/2013_InSituObservationsOfInterstellarPlasmaWaveVoyager_Science.pdf
-# Access+: (2026-10-03).
+# Access+: (2026-10-04).
 # Note: one spacecraft's crossing of a surface that is not round; it is
 # Note+: drawn as a sphere at that distance. The paper gives no distance
 # Note+: for 25 August. The 121.6 AU this file's comment attributed to it
-# Note+: until 2026-10-03 is not in it.
+# Note+: until 2026-10-04 is not in it.
 # Note+: Stored in AU, the unit its source gives (L-386); HELIOPAUSE_RADII
 # Note+: below is the same distance in solar radii, computed.
-# Cross-check retired: 2026-10-03 -- the Claude and GPT legs of 2026-08-02,
+# Cross-check retired: 2026-10-04 -- the Claude and GPT legs of 2026-08-02,
 # Cross-check retired+: on HELIOPAUSE_RADII, certified 26148 from 121.6 AU; a
 # Cross-check retired+: check of the old value is not a check of the new one.
 
@@ -2193,10 +2193,10 @@ HELIOPAUSE_RADII = HELIOPAUSE_AU * KM_PER_AU / SUN_RADIUS_KM
 # Conversion+: source and the count; the export serves this value as that
 # Conversion+: row's "in" (provenance-discipline 2.22, Rule 3; L-386).
 # Note: kept under its old name for the code that reads it. Until
-# Note+: 2026-10-03 it was its own row, typed 26148 from 121.6 AU.
+# Note+: 2026-10-04 it was its own row, typed 26148 from 121.6 AU.
 
 # Oort cloud and gravitational influence (in AU)
-# --- the two edges of the Oort cloud, each a range (L-371, 2026-10-03) ---
+# --- the two edges of the Oort cloud, each a range (L-371, 2026-10-04) ---
 # NASA gives both edges as ranges. Each range is two rows; the drawn edge
 # is an expression over them with its reason on the row, and a display
 # prints the range from the rows (provenance-discipline, When the Source
@@ -2205,29 +2205,29 @@ HELIOPAUSE_RADII = HELIOPAUSE_AU * KM_PER_AU / SUN_RADIUS_KM
 
 OORT_CLOUD_INNER_EDGE_LOW_AU = 2000
 # Unit: au
-# Status: measured V_SOURCED 2026-10-03 -- open page
+# Status: measured V_SOURCED 2026-10-04 -- open page
 # Figures: 1 -- the source prints "2,000" as the low end of a range it
 # Figures+: states to thousands; the trailing zeros are placeholders
 # Figures+: (Rule 2).
 # Read: "Oort Cloud Facts", NASA Science, the paragraph on the inner and
-# Read+: outer edges, 2026-10-03, Claude Opus 5.5
+# Read+: outer edges, 2026-10-04, Claude Opus 5.5
 # Source: NASA Science, "Oort Cloud Facts" -- the inner edge of the Oort
 # Source+: cloud is thought to lie between 2,000 and 5,000 AU from the Sun.
 # Access: open, https://science.nasa.gov/solar-system/oort-cloud/facts
-# Access+: (2026-10-03).
+# Access+: (2026-10-04).
 
 OORT_CLOUD_INNER_EDGE_HIGH_AU = 5000
 # Unit: au
-# Status: measured V_SOURCED 2026-10-03 -- open page
+# Status: measured V_SOURCED 2026-10-04 -- open page
 # Figures: 1 -- the source prints "5,000", the high end of the same range.
-# Read: as OORT_CLOUD_INNER_EDGE_LOW_AU, 2026-10-03, Claude Opus 5.5.
+# Read: as OORT_CLOUD_INNER_EDGE_LOW_AU, 2026-10-04, Claude Opus 5.5.
 # Source: as OORT_CLOUD_INNER_EDGE_LOW_AU.
 # Access: as OORT_CLOUD_INNER_EDGE_LOW_AU.
 
 INNER_LIMIT_OORT_CLOUD_AU = OORT_CLOUD_INNER_EDGE_LOW_AU
 # Derived: the low end of the inner edge's range = 2000
 # Unit: au
-# Status: declared 2026-10-03 -- the low end of the range held in the two
+# Status: declared 2026-10-04 -- the low end of the range held in the two
 # Status+: rows above, L-371
 # Figures: exact -- prints 1, the digits of the value its rule gives
 # Figures+: (2000); declared construction: equal to
@@ -2236,51 +2236,51 @@ INNER_LIMIT_OORT_CLOUD_AU = OORT_CLOUD_INNER_EDGE_LOW_AU
 # Declared+: outer edge at the far end, so the cloud is drawn at the widest
 # Declared+: reach its sources allow. The pick is ours (Tony, 2026-10-03,
 # Declared+: ruling A); the hover says the range and the end drawn.
-# Corrected: 2026-10-03 (L-371) -- was typed 2000, citing Hills (1981) and
+# Corrected: 2026-10-04 (L-371) -- was typed 2000, citing Hills (1981) and
 # Corrected+: Oort (1950), which do not print it (Hills' abstract read
 # Corrected+: 2026-10-02).
 
 INNER_OORT_CLOUD_AU = 20000
 # Unit: au
-# Status: measured V_SOURCED 2026-10-03 -- open full text
+# Status: measured V_SOURCED 2026-10-04 -- open full text
 # Figures: 1 -- the source prints "20 000" as a bound, to tens of thousands.
 # Read: sec. 2.2, Portegies Zwart et al. (2021), arXiv:2105.12816v2,
-# Read+: 2026-10-03, Claude Opus 5.5
+# Read+: 2026-10-04, Claude Opus 5.5
 # Source: Portegies Zwart, S., Torres, S., Cai, M. X. and Brown, A. G. A.
 # Source+: (2021), "Oort cloud Ecology II: the chronology of the formation
 # Source+: of the Oort cloud", A&A 652, A144, doi:10.1051/0004-6361/202040096
 # Source+: -- sec. 2.2: the Hills cloud lies between the outer edge of the
 # Source+: parking zone and the inner edge of the Oort cloud, at about
 # Source+: 20,000 au or less.
-# Access: open full text, https://arxiv.org/html/2105.12816v2 (2026-10-03).
+# Access: open full text, https://arxiv.org/html/2105.12816v2 (2026-10-04).
 # Note: the boundary between the inner (Hills) cloud and the outer cloud,
 # Note+: and an uncertain one: the paper says what defines the transition
 # Note+: remains unclear (sec. 2.3).
-# Corrected: 2026-10-03 (L-371) -- cited Hills (1981), which does not
+# Corrected: 2026-10-04 (L-371) -- cited Hills (1981), which does not
 # Corrected+: print it.
 
 OORT_CLOUD_OUTER_EDGE_LOW_AU = 10000
 # Unit: au
-# Status: measured V_SOURCED 2026-10-03 -- open page
+# Status: measured V_SOURCED 2026-10-04 -- open page
 # Figures: 1 -- the source prints "10,000", the low end of a range it
 # Figures+: states to tens of thousands.
-# Read: as OORT_CLOUD_INNER_EDGE_LOW_AU, 2026-10-03, Claude Opus 5.5.
+# Read: as OORT_CLOUD_INNER_EDGE_LOW_AU, 2026-10-04, Claude Opus 5.5.
 # Source: NASA Science, "Oort Cloud Facts" -- the outer edge of the Oort
 # Source+: cloud is thought to lie between 10,000 and 100,000 AU from the Sun.
 # Access: as OORT_CLOUD_INNER_EDGE_LOW_AU.
 
 OORT_CLOUD_OUTER_EDGE_HIGH_AU = 100000
 # Unit: au
-# Status: measured V_SOURCED 2026-10-03 -- open page
+# Status: measured V_SOURCED 2026-10-04 -- open page
 # Figures: 1 -- the source prints "100,000", the high end of the same range.
-# Read: as OORT_CLOUD_INNER_EDGE_LOW_AU, 2026-10-03, Claude Opus 5.5.
+# Read: as OORT_CLOUD_INNER_EDGE_LOW_AU, 2026-10-04, Claude Opus 5.5.
 # Source: as OORT_CLOUD_OUTER_EDGE_LOW_AU.
 # Access: as OORT_CLOUD_INNER_EDGE_LOW_AU.
 
 OUTER_OORT_CLOUD_AU = OORT_CLOUD_OUTER_EDGE_HIGH_AU
 # Derived: the high end of the outer edge's range = 100000
 # Unit: au
-# Status: declared 2026-10-03 -- the high end of the range held in the two
+# Status: declared 2026-10-04 -- the high end of the range held in the two
 # Status+: rows above, L-371
 # Figures: exact -- prints 1, the digits of the value its rule gives
 # Figures+: (100000); declared construction: equal to
@@ -2288,23 +2288,23 @@ OUTER_OORT_CLOUD_AU = OORT_CLOUD_OUTER_EDGE_HIGH_AU
 # Declared: the far end of the range, for the reason on
 # Declared+: INNER_LIMIT_OORT_CLOUD_AU: the cloud is drawn at the widest
 # Declared+: reach its sources allow (Tony, 2026-10-03, ruling A).
-# Corrected: 2026-10-03 (L-371) -- was typed 100000, citing Oort (1950)
+# Corrected: 2026-10-04 (L-371) -- was typed 100000, citing Oort (1950)
 # Corrected+: and Weissman (1996); Oort (1950) does not print it.
 
-# --- the Sun's gravitational reach (L-371, 2026-10-03) ---
+# --- the Sun's gravitational reach (L-371, 2026-10-04) ---
 
 GRAVITATIONAL_INFLUENCE_PC = 0.65
 # Unit: pc
-# Status: measured V_SOURCED 2026-10-03 -- open full text
+# Status: measured V_SOURCED 2026-10-04 -- open full text
 # Figures: 2 -- the source prints 0.65.
 # Read: sec. 2.3, the captions of Figs. 2 and 3, and sec. 5, Portegies
-# Read+: Zwart et al. (2021), arXiv:2105.12816v2, 2026-10-03, Claude Opus 5.5
+# Read+: Zwart et al. (2021), arXiv:2105.12816v2, 2026-10-04, Claude Opus 5.5
 # Source: Portegies Zwart et al. (2021), A&A 652, A144,
 # Source+: doi:10.1051/0004-6361/202040096 -- the Hill radius of the Sun in
 # Source+: the Galactic potential is about 0.65 pc (Fig. 2 and Fig. 3
 # Source+: captions; sec. 5); the outer limit of the Oort cloud is taken to
 # Source+: coincide with it (sec. 2.3).
-# Access: open full text, https://arxiv.org/html/2105.12816v2 (2026-10-03).
+# Access: open full text, https://arxiv.org/html/2105.12816v2 (2026-10-04).
 # Note: CALCULATED, not measured: where the galaxy's tidal pull overtakes
 # Note+: the Sun's gravity, worked out from a model of the galaxy (the
 # Note+: paper's Table 4). It is a published value, which is what
@@ -2321,7 +2321,7 @@ GRAVITATIONAL_INFLUENCE_AU = GRAVITATIONAL_INFLUENCE_PC * KM_PER_PARSEC / KM_PER
 # Conversion+: carries the source and the count; the export serves this
 # Conversion+: value as that row's "in" (provenance-discipline 2.22, Rule 3).
 # Note: kept under its old name for the code that reads it. Until
-# Note+: 2026-10-03 it was typed 150000, the midpoint of an unsourced
+# Note+: 2026-10-04 it was typed 150000, the midpoint of an unsourced
 # Note+: 100,000-200,000 AU range; the range row went with it (L-371,
 # Note+: Tony's correction of 2026-10-03: a Hill radius is calculated, not
 # Note+: chosen).

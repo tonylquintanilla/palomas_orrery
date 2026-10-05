@@ -30,7 +30,7 @@ Domain: dev_tools
 
 Module created: August 2026 with Anthropic's Claude Opus 5.
 Module updated: August 18, 2026 with Anthropic's Claude Opus 5 (L-207).
-Module updated: October 3, 2026 with Anthropic's Claude Opus 5.5 (L-371:
+Module updated: October 4, 2026 with Anthropic's Claude Opus 5.5 (L-371:
 HELIOPAUSE_RADII leaves the live-corpus movement pin. Its two cross-check
 legs retired with the value they checked, so no claim attaches to it.)
 """
@@ -549,7 +549,7 @@ def test_display_instructions():
 # tool cannot say whether the movement was a correction or a defect,
 # and says so. Before 2026-08-15 it called all eight rows DRIFTED,
 # which asserted the strongest of the three readings on no evidence.
-# HELIOPAUSE_RADII was the fourth until 2026-10-03 (L-371): it became a
+# HELIOPAUSE_RADII was the fourth until 2026-10-04 (L-371): it became a
 # conversion of HELIOPAUSE_AU, read from Gurnett et al. (2013) as 121 AU,
 # and its Cross-checked legs of 2026-08-02 retired with the 121.6 AU they
 # had certified, which the paper does not print. With no annotation on

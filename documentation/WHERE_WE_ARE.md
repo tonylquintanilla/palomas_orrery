@@ -1,30 +1,34 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, rewritten in place; read it at the end of every session. -->
 # Where We Are
 
-Last updated: October 4, 2026, end of the lobby-card session -- **Tony**: see notes with -- 
-- Written at orrery a841ab6e and gallery d4b408e6.
-- The Sun's distance cards are still being built in the other session,
-  which updates this page when it ends.
+Last updated: October 4, 2026, end of both of today's sessions.
+- Written at orrery d7f2a594 and gallery ac81e7ce.
+- Two sessions ran today side by side: the Sun's distance cards, and
+  the lobby card. This page now covers both.
 
 > **READ THIS FIRST**
 >
 > **Changed this session:**
-> - The lobby now opens with a wide Solar System card at the top of
->   Featured: a picture of the room, "The Solar System, live", and a
->   sentence. You checked it on the phone, sideways and on the desktop.
-> - The same card comes first on the Solar System door's page.
-> - The lobby's doors no longer count rooms under construction, and the
->   empty "solar_system" room is gone.
-> - The card's picture is drawn from the room's own data, zoomed to the
->   inner planets, with no grid, as you asked.
+> - The Sun's distance cards are built, on the website and in the
+>   orrery. Every distance now comes from a source that was opened and
+>   read, and prints at the figures that source supports.
+> - The heliopause is 121 AU, the termination shock 94.01 AU, and the
+>   Sun's gravitational reach is its Hill radius, 0.65 parsecs.
+> - The Roche limit is drawn at 3.45 solar radii and described as
+>   "about 3", so it doesn't sit on the inner corona.
+> - The Sun's remaining work is now one ordered list of ten items. The
+>   dust cloud joined it.
+> - From the other session: the lobby opens with a wide Solar System
+>   card; the drawer's small fixes and Home are built; both
+>   repositories now show "MIT license" on GitHub, and the website's
+>   content is under CC BY 4.0.
 >
 > **Do next:**
-> - *Finish the Sun's distance cards: the website side, in the other
->   session.*
-> - *Then the Galactic Plane toggle you asked for.*
+> - *The Sun's list, from item 3: the orrery's opening view of the Sun,
+>   then the Alfven surface's unsourced ranges.*
 >
 > **Needs you now:**
-> - *Nothing.*
+> - *Run the two small close patches and push.*
 
 How to read the marks:
 - *Italic* lines are the must-reads.
@@ -35,7 +39,7 @@ How to read the marks:
 - The marks are cleared and reset at every session's update, so they
   always mean "new since you last read this."
 
-## The goal
+## The goal  **>> UPDATED THIS SESSION**
 
 - Paloma's Orrery on the web.
 - The website does what the desktop orrery does, in the browser, from
@@ -45,8 +49,9 @@ How to read the marks:
   orrery.
 - The one real limit: the browser can show only the dates the saved
   data covers.
+- Saved data covering one orbit of each body is enough, as you decided.
 - Within that range, a visitor will be able to choose a date, and
-  perhaps play time forward. -- we determined that one orbit would work. 
+  perhaps play time forward.
 
 ## The road  **>> UPDATED THIS SESSION**
 
@@ -54,18 +59,17 @@ How to read the marks:
   2. [done]   Earth's room is live, with every number traced to its source.
   3. [done]   The numbers come from one place: the orrery feeds the
               website, and nothing is typed twice.
-  4. [NOW]    The Solar System room becomes a second way in: all the
+  4. [done]   The Solar System room becomes a second way in: all the
               planets, a drawer to pick them, and a way into each
-              body's own room. Built and on the website. Home was
-              settled on October 3; it is built next.
+              body's own room. << new this session: the drawer's
+              small fixes and Home are built, and you checked them.
   5. [NOW]    *The Sun's numbers get the same checking Earth's got.*
-              The 43 drawing numbers are sorted and the galactic tide
-              is redrawn. << new this session: the distance cards'
-              orrery side is pushed; the website side is being built.
+              << new this session: the distance cards are done. Ten
+              items remain, in the order you confirmed.
   6. [next]   A bare interactive.html link opens the Solar System room,
-              and the Explorer gets its own address.
-              << new this session: the first half, the lobby's wide
-              Solar System card, is done and on the website.
+              and the Explorer gets its own address, after the Sun's
+              list. << new this session: its first half, the lobby's
+              wide Solar System card, is done and on the website.
   7. [later]  The rest of the orrery's objects come to the website --
               dwarf planets, asteroids, moons -- through the same
               connection that now carries the room's eleven bodies,
@@ -80,44 +84,47 @@ How to read the marks:
 
 ## Right now  **>> UPDATED THIS SESSION**
 
+- On the phone, the Sun's far shells say their radius in AU, then
+  their kilometres, at the figures their sources support.
+- Your notes print under the Oort cloud's two edges, Gravitational
+  Influence, the outer corona and the streamer belt. Their numbers come
+  from the stored rows, not typed into the words.
+- The Alfven surface sits inside the outer corona, as you checked.
+- The orrery's Sun hovers print the same numbers from the same rows.
 - The lobby opens with the wide Solar System card. Its picture shows
-  the Sun and the four inner planets where they were at noon on
-  October 4; the room itself always shows now.
-- The galactic tide is live, tilted into the galaxy's plane. It is
-  drawn between 20,000 and 100,000 AU, the outer Oort cloud's edges.
-- The Sun's distance cards: the orrery side is pushed. Until the
-  website side lands, the Sun cards print as before, with every digit.
-- The Solar System room and its drawer are as they were: Home still
-  shows no visible change when it falls back to an earlier body, and
-  with the phone sideways an opened row does not fit in the drawer.
+  the planets at noon on October 4; the room itself always shows now.
+- In the Solar System room's drawer, an opened row fits with the phone
+  sideways, and Home backs out to keep every ticked body in view.
+- Some kilometre figures look coarse because their source gives one
+  figure: 100,000 AU prints as 10,000,000,000,000 km. That is the rule
+  you set on September 28, and you kept it.
 
 ## The next three steps  **>> UPDATED THIS SESSION**
 
-1. *The Sun's distance cards, finished on the website,* in the other
-   session:
-   - Each distance row gets its source's figure count, so the km print
-     at that count.
-   - Where a source gives a range, the card draws one end and says so,
-     as you ruled: for example "Thought to lie between 2,000 and 5,000
-     AU; drawn at 2,000."
-   - The Heliopause moves to 121 AU, and Gravitational Influence to
-     0.65 parsecs: the Sun's Hill radius, calculated.
-2. *A Galactic Plane toggle in the Sun room, your idea:* a faint ring
-   in the galaxy's plane and the galaxy's pole axis, so the tide's
-   tilt and its X can be seen at a glance. You look for the X then.
-3. The drawer's small fixes: the info panel's bullet lists, the 1.1
-   that should say 1.2, and an opened row made to fit with the phone
-   sideways: its Enter button on the name's line, as you chose.
-   Then Home as you settled it on October 3.
--- my notes in documentation should not cause a patch to fail. 
-
+1. *The orrery's opening view of the Sun.*
+   - You decided "photosphere plus 10%".
+   - It turned out to be more than one line: the axis length and the
+     shells that start switched on both set the width. Proposed to you
+     before it is built.
+2. The Alfven surface's three unsourced ranges.
+   - I read Cranmer et al. (2007). If it states them, they stay with a
+     citation; if not, all three go.
+   - The streamer belt's tilt with the Sun's equator gets the same
+     read.
+3. The other typed numbers in the Sun's hovers, one at a time.
+   - For example Voyager 2's 84 AU, and the heliopause hover saying
+     both Voyagers are still inside, which stopped being true in 2018.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Now:
-- Nothing.
+- Run the two small close patches (orrery, then website) and push.
+- Delete the folder "data/solar-system (1)" in your gallery copy, with
+  OneDrive paused, as you did on October 1. Git ignores it, so it does
+  no harm meanwhile.
 
 At the next design talk:
+- The fuzzy outer corona, designed together with the dust cloud.
 - Moving the highlighted row to the top of the list.
 - An arrow from GO's text box to its body.
 
@@ -126,19 +133,18 @@ Not urgent, in your order:
 2. Whether the editor should also edit the words on the Solar System
    room's rows.
 3. Choosing a date, and animation.
-4. New: delete the folder "data/solar-system (1)" in your gallery
-   copy, with OneDrive paused, as you did on October 1. Your
-   maintenance run found it again. Git ignores it, so it does no harm
-   meanwhile.
+4. The scattered disk, with the Kuiper belt in the Solar System room.
 
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item, done and open: `LEDGER_CONSOLIDATED.md`
-  - This session: L-363 (the lobby card) and a note on L-216 (the
-    stray folder).
-  - The other session: L-371 (the Sun's numbers), L-406 and L-407.
+  - The Sun session: L-371 (the distance cards), L-412 (the Sun's list
+    of ten), L-410 (fuzzy boundaries), L-411 (typed numbers), L-131
+    (the dust cloud). Closed: L-209, L-224, L-227, L-229.
+  - The lobby session: L-363 (the lobby card, the drawer fixes and
+    Home), L-409 (the licenses), L-216 (the stray folder).
 - The reasoning behind the order:
   `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`
 - The latest session records:
-  `documentation/HANDOFF_L363_lobby_card_session_20261004.md`, and
-  `documentation/HANDOFF_L406_L407_L371_session_20261003.md`
+  `documentation/HANDOFF_L371_distance_cards_session_20261004.md`, and
+  `documentation/HANDOFF_L363_lobby_card_session_20261004.md`

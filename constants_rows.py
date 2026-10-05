@@ -133,7 +133,7 @@ Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
 conversion_shape() finds every row shaped like one, conversion_problem()
 is the one check of a marked one, and conversion_text() prints one at
 the count its source row gives it.)
-Module updated: October 3, 2026 with Anthropic's Claude Opus 5.5
+Module updated: October 4, 2026 with Anthropic's Claude Opus 5.5
 (L-371, the Sun's distance cards: row_text() prints any row at the
 count its row gives it, in its own unit or in another unit of its
 dimension, so an orrery hover need not choose a width. It is the
@@ -957,7 +957,7 @@ def row_text(name, unit=None, grouping=False, project_dir=None):
     the gallery print the same digits. A measured or derived row prints
     at its '# Figures:' count; an exact row at its print count. A row
     with neither raises ValueError where the display is built, instead
-    of a width being chosen for it. L-371, 2026-10-03.
+    of a width being chosen for it. L-371, 2026-10-04.
 
     The store is read once per process and kept, because a hover module
     calls this many times at import.

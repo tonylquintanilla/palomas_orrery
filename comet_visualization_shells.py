@@ -21,7 +21,7 @@ Consumed by: palomas_orrery.py (plot_objects, animate_objects)
 Role: rendering/shells
 Domain: orrery
 
-Module updated: October 3, 2026 with Anthropic's Claude Opus 5.5 (L-371:
+Module updated: October 4, 2026 with Anthropic's Claude Opus 5.5 (L-371:
 the MAPS hovers print the helmet cusp, the Roche limit and the inner
 corona from their rows at their counts, through constants_rows.row_text(),
 where they printed widths of their own or typed copies of the rows.)

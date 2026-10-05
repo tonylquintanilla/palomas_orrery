@@ -136,7 +136,7 @@ TOKENS = {
         "defining_constant": "SUN_RADIUS_KM",
         "meaning": "solar radii, IAU nominal",
     },
-    # L-371 (2026-10-03): the Sun's gravitational reach is published
+    # L-371 (2026-10-04): the Sun's gravitational reach is published
     # in parsecs, so its row is stored in parsecs and every length
     # now also converts into them.
     "pc": {

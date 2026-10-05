@@ -123,7 +123,7 @@ Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
 (L-322 Stage D, patch D17: the three gallery pointers to SUN_RADIUS_KM,
 an exact row since D17, are in DRAWN: the Sun room reads it only as the
 kilometres per solar radius.)
-Module updated: October 3, 2026 with Anthropic's Claude Opus 5.5
+Module updated: October 4, 2026 with Anthropic's Claude Opus 5.5
 (L-371: the orrery search also finds constants_rows.row_text(), which
 prints a row by its count in any unit. Without it a hover printing an
 exact row through row_text() was not counted as a print at all, so the
