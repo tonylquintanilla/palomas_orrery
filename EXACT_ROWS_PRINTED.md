@@ -38,21 +38,21 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 ### `EARTH_LEO_UPPER_ALTITUDE_KM`
 
-- orrery `earth_visualization_shells.py` line 1520: `f"Altitude range: {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=True)} km to {exact_tex...`
-- orrery `shell_configs.py` line 2365: `f"Low Earth Orbit (LEO) is the region from roughly {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM',...`
+- orrery `earth_visualization_shells.py` line 1561: `f"Altitude range: {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=True)} km to {exact_tex...`
+- orrery `shell_configs.py` line 2376: `f"Low Earth Orbit (LEO) is the region from roughly {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM',...`
 - gallery `gallery/feature_renderers.js` line 2300 (config `/objects/1/features/earth_orbital_zones/leo_outer/altitude`): `kmAndAu(km.altitudeKm, km.altitudeFigures)) + "<br>";`
 
 ### `EARTH_LEO_LOWER_ALTITUDE_KM`
 
-- orrery `earth_visualization_shells.py` line 1520: `f"Altitude range: {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=True)} km to {exact_tex...`
-- orrery `shell_configs.py` line 2365: `f"Low Earth Orbit (LEO) is the region from roughly {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM',...`
+- orrery `earth_visualization_shells.py` line 1561: `f"Altitude range: {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=True)} km to {exact_tex...`
+- orrery `shell_configs.py` line 2376: `f"Low Earth Orbit (LEO) is the region from roughly {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM',...`
 - gallery `gallery/feature_renderers.js` line 2300 (config `/objects/1/features/earth_orbital_zones/leo_inner/altitude`): `kmAndAu(km.altitudeKm, km.altitudeFigures)) + "<br>";`
 
 ### `EARTH_VAN_ALLEN_OUTER_RADII`
 
-- orrery `earth_visualization_shells.py` line 1299: `f"ring is the flux peak, L = {exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} -- about {_km_above_...`
-- orrery `earth_visualization_shells.py` line 1305: `f"the L = {_band_low} to {_band_high} band; the drawn {exact_text('EARTH_VAN_ALLEN_OUTER_RADI...`
-- orrery `shell_configs.py` line 2354: `f"{exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} Earth radii out (doi:10.1029/2024JA033504).\n"`
+- orrery `earth_visualization_shells.py` line 1340: `f"ring is the flux peak, L = {exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} -- about {_km_above_...`
+- orrery `earth_visualization_shells.py` line 1346: `f"the L = {_band_low} to {_band_high} band; the drawn {exact_text('EARTH_VAN_ALLEN_OUTER_RADI...`
+- orrery `shell_configs.py` line 2365: `f"{exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} Earth radii out (doi:10.1029/2024JA033504).\n"`
 - gallery `gallery/feature_renderers.js` line 1339 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `? wrapHover("Drawn at " + fmtServed(distances[i], counts[i], 1) +`
 - gallery `gallery/feature_renderers.js` line 1346 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `: "Drawn at " + fmtServed(distances[i], counts[i], 1) + " " +`
 - gallery `gallery/feature_renderers.js` line 1349 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `? SOFT_BR + "(given as L = " + fmtServed(distances[i], counts[i], 1) +`
@@ -60,9 +60,9 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 ### `EARTH_SOLAR_WIND_PRESSURE_NPA`
 
-- orrery `earth_visualization_shells.py` line 970: `f"Sun-facing side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_...`
-- orrery `earth_visualization_shells.py` line 1153: `f"side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_NPA')} nPa....`
-- orrery `earth_visualization_shells.py` line 1237: `f"Sun-facing side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_...`
+- orrery `earth_visualization_shells.py` line 1011: `f"Sun-facing side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_...`
+- orrery `earth_visualization_shells.py` line 1194: `f"side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_NPA')} nPa....`
+- orrery `earth_visualization_shells.py` line 1278: `f"Sun-facing side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_...`
 - gallery `gallery/feature_renderers.js` line 2570 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/pressure`): `" nT, dynamic pressure " + fmtServed(dp, servedFigures(mpS.pressure), 1) +`
 - gallery `gallery/feature_renderers.js` line 2785 (config `/objects/1/features/earth_magnetosphere/bow_shock/surface/pressure`): `fmtServed(bsP, servedFigures(bsS.pressure), 1) +`
 
@@ -110,12 +110,12 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 ### `INNER_LIMIT_OORT_CLOUD_AU`
 
-- orrery `palomas_orrery.py` line 10378: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
+- orrery `palomas_orrery.py` line 10394: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
 - orrery `solar_visualization_shells.py` line 108: `_OORT_INNER_EDGE = row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)`
 
 ### `OUTER_OORT_CLOUD_AU`
 
-- orrery `palomas_orrery.py` line 10378: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
+- orrery `palomas_orrery.py` line 10394: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
 - orrery `solar_visualization_shells.py` line 110: `_OORT_OUTER_EDGE = row_text('OUTER_OORT_CLOUD_AU', grouping=True)`
 
 ## Printed to a terminal only
@@ -123,6 +123,7 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 A tool logging a value is not a display a visitor sees, so these are not counted above.
 
 - `KM_PER_AU`: orrery `export_orbit_cache.py` line 385: `print(" constants_new.KM_PER_AU: %s" % KM_PER_AU)`
+- `EARTH_OBLIQUITY_J2000_DEG`: orrery `star_sphere_builder.py` line 493: `print(f" Obliquity: {EARTH_OBLIQUITY_J2000_DEG}\u00b0")`
 
 ## Not printed
 
@@ -137,7 +138,7 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
   - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 824 (config `/objects/1/features/orientation/pole/dec`): `var dec = measured(pole.dec, "deg", slug + "/orientation/pole/dec", warn);`
 - `ARCSEC_PER_DEG`: named on 0 other orrery line(s).
 - `EARTH_OBLIQUITY_J2000_ARCSEC`: named on 0 other orrery line(s).
-- `EARTH_OBLIQUITY_J2000_DEG`: named on 7 other orrery line(s).
+- `EARTH_OBLIQUITY_J2000_DEG`: named on 15 other orrery line(s).
 - `GALACTIC_NORTH_POLE_RA_J2000_DEG`: named on 3 other orrery line(s).
 - `GALACTIC_NORTH_POLE_DEC_J2000_ARCSEC`: named on 0 other orrery line(s).
 - `GALACTIC_NORTH_POLE_DEC_J2000_DEG`: named on 2 other orrery line(s).

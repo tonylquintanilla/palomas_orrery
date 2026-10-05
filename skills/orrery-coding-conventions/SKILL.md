@@ -6,7 +6,15 @@ fires_when: Markers, hover text, axes, shells, legendgroups, docstrings, new vis
 
 # Orrery Coding Conventions
 
-Skill version: 1.9 | Cut from palomas_orrery @ d99d8db1 (v1.9),
+Skill version: 1.10 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 72e3b558. v1.10 (L-418) changes no rule. A contents
+list now opens the skill, generated from its headings, and
+skills_index.py --check fails if the two disagree. Version history
+older than the two entries below moved to
+documentation/SKILL_HISTORIES.md. Both because a plain read of a
+long file shows its start and end and leaves out its middle, where
+the rules are (Tony, 2026-10-05).
+Earlier: 1.9 | Cut from palomas_orrery @ d99d8db1 (v1.9),
 earlier @ 1fa413d9 (v1.8), 04bba3ca (v1.7), 3faa72a0 (v1.6),
 earlier @ 15741822 (v1.5), 86f529a (v1.4), 3398970 (v1.3) | 2026-09-16
 v1.9 (L-331) adds Hover Text Is Written for the Visitor -- Tony's
@@ -21,30 +29,36 @@ Pattern example, which still showed the size-6 white-border style that
 create_info_marker's own docstring records as retired in May 2026.
 Earned when the gallery drew every info marker red for two exhibit
 rooms, because the rule a marker session loads was not in this skill.
-v1.6 (L-249) makes the angular step in Marker Separation for
-Near-Equal Radii an OUTCOME rather than a fixed 20 degrees, with 20 and
-10 recorded as the two worked cases. Earned when Earth's upper mantle
-moved to its sourced radius and its cross vanished under the crust's.
-Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons.
-v1.4 adds Marker Separation for Near-Equal Radii to the Single Info
-Marker Pattern, earned when the chromosphere moved to true scale and its
-marker landed one pixel from the photosphere's; and Harvest the
-Conventions You Find, which is how this skill grows.
-v1.5 (L-227) adds Hover Line Width Is a Convention, Not an Accident,
-found by Mode 5 when a tooltip ran off the viewport: a hover string had
-been wrapped at 72 characters in the SOURCE with no `<br>` on the
-lines, and rendered as one 378-character run. Canonical Text Format
-already governed `\n` versus `<br>` and said nothing about width.
+Older entries are in documentation/SKILL_HISTORIES.md, moved there
+on 2026-10-05 (L-418).
 Criticality tiers ([CRITICAL]/[QUALITY]/[PRACTICE]) are defined in the
 resident protocol, Part 2.
 
-v1.2 adds the conventions earned in the L-156 Phase 2 Batch 1 cross-check
-and the Fable shell-consistency audit (August 3-4, 2026): the
-visualization-constant-vs-range convention, the Hill sphere documentation
-standard (including the measured per-body state, which does NOT yet match
-the intended convention), the canonical `\n` direction for module _info
-strings, dual-pipeline detail added to the shell dispatch section, and
-layer-chain gap handling. Two field notes added.
+
+## Contents
+
+Generated from this file's headings. skills_index.py --check fails
+if this list and the headings disagree (L-418).
+
+- Harvest the Conventions You Find [PRACTICE]
+- Marker Symbol Convention [QUALITY]
+- Single Info Marker Pattern [QUALITY]
+  - Marker Separation for Near-Equal Radii [QUALITY]
+  - Two Standards for the Info Marker's Outline [QUALITY]
+- Hover Text AU Convention [QUALITY]
+- 3D Axis Control Convention [QUALITY]
+- Credit Line Convention [PRACTICE]
+- Module Docstring Standard [PRACTICE]
+- Barycenter Rule [QUALITY]
+- The Live Shell Dispatch (know before editing shells)
+- Visualization Constant vs Range Convention [QUALITY]
+- Hill Sphere Documentation Standard [QUALITY]
+- Canonical Text Format: `\n`, Not `<br>` [QUALITY]
+- Hover Line Width Is a Convention, Not an Accident [QUALITY]
+- Hover Text Is Written for the Visitor [QUALITY]
+- Layer Chain Gap Handling [PRACTICE]
+- Visual Verification Details [QUALITY]
+- Field Notes (technical lessons, earned in this codebase)
 
 ## Harvest the Conventions You Find [PRACTICE]
 

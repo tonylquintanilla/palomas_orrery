@@ -146,6 +146,16 @@ tools L-395 put in the two maintenance runs, on Tony's question -- Objects
 Export under GENERATORS and Test Objects Export under CHECKERS, and in
 the gallery checks Objects Export Pull, Objects Mirror Check and
 Objects Mirror Suite, each in alphabetical place.
+October 5, 2026 with Anthropic's Claude Opus 5.5 (L-416), on Tony's
+question and approval: every step of the two maintenance runs now has
+a button. Added in alphabetical place, under the orrery's checkers,
+Test Skill Headers (skills_index.py --check, L-407); and under the
+gallery checks Arrival, Daily Run Steps, Display Figures, Earth Scene
+Geometry, Feature Renderers, Gallery Module Atlas, Page Framing, Pole
+of Date, Solar System Drawer and Sun Shells. The seven Node checks run
+through the gallery's documentation/run_offline_check.py, which reads
+each command from the gallery runner's own list. The offline runner's
+description names the Solar System drawer, which it had left out.
 """
 
 import os
@@ -341,12 +351,28 @@ LAUNCH_GROUPS = {
         "assembler pin, and cache siblings (report only). Node: feature "
         "renderers, page framing, Sun shells, Earth scene geometry, "
         "hover budget, arrival, display figures, Solar System figures, "
-        "and the guest book. "
+        "the Solar System drawer, and the guest book. "
         "Three states rather than two: a suite that could not run -- "
         "Node missing, say -- reports UNREACHABLE and is never counted "
-        "as a pass. The indented buttons below launch some of these "
-        "one at a time.",
+        "as a pass. Every checker named here also has its own indented "
+        "button below, to run it alone.",
         GALLERY_REPO_DIR,
+        True),
+        ("Arrival",
+        os.path.join("documentation", "run_offline_check.py"),
+        "Both rooms open on the right things (L-334). Builds the Sun "
+        "room's shells and the Earth room's scene with the real "
+        "renderers, applies gallery/arrival.js with the real "
+        "data/objects_config.json, and compares what is drawn on "
+        "opening against its list; it also fails on any trace with no "
+        "shell key. It first makes itself fail on purpose four ways. "
+        "GATES the gallery runner. The check is Node, so this button "
+        "runs it through documentation/run_offline_check.py, which "
+        "reads its command from the gallery runner's own list: the two "
+        "cannot drift. Runs from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Arrival"],
         True),
         ("Artifact 1 Assembler Pin",
         os.path.join("documentation", "pin_artifact1_known_failure.py"),
@@ -433,6 +459,60 @@ LAUNCH_GROUPS = {
         True,
         None,
         True),
+        ("Daily Run Steps",
+        "daily_run.py",
+        "daily_run.py --check: fails if any of the three scripts the "
+        "Daily Run calls is missing, say after a rename, and names it. "
+        "Runs nothing else. GATES the gallery runner.",
+        GALLERY_REPO_DIR,
+        True,
+        ["--check"],
+        True),
+        ("Display Figures",
+        os.path.join("documentation", "run_offline_check.py"),
+        "Every number in an Earth hover shows the figures its source "
+        "supports (L-342). Reads the BUILT hovers from the served "
+        "cache, not the formatting helpers, and fails on any number it "
+        "cannot account for, or if the config and the cache would print "
+        "differently. GATES the gallery runner. The check is Node, so "
+        "this button runs it through "
+        "documentation/run_offline_check.py, which reads its command "
+        "from the gallery runner's own list: the two cannot drift. Runs "
+        "from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Display figures"],
+        True),
+        ("Earth Scene Geometry",
+        os.path.join("documentation", "run_offline_check.py"),
+        "The Earth room's composed scene, headless, on the recorded "
+        "payload documentation/payload_earth_scene.json: the axis tilt "
+        "against the served pole of date, the equator and geostationary "
+        "ring in one plane, the terminator, the subsolar point, the "
+        "Moon's arc and what the room opens on. Every number compared "
+        "is read from the served rows. GATES the gallery runner. The "
+        "check is Node, so this button runs it through "
+        "documentation/run_offline_check.py, which reads its command "
+        "from the gallery runner's own list: the two cannot drift. Runs "
+        "from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Earth scene geometry"],
+        True),
+        ("Feature Renderers",
+        os.path.join("documentation", "run_offline_check.py"),
+        "Smoke test for gallery/feature_renderers.js, the code that "
+        "draws every shell, ring, belt and magnetosphere on the "
+        "website. The geometry checks measure the drawn points, not the "
+        "inputs, so a wrong answer fails. GATES the gallery runner. The "
+        "check is Node, so this button runs it through "
+        "documentation/run_offline_check.py, which reads its command "
+        "from the gallery runner's own list: the two cannot drift. Runs "
+        "from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Feature renderers"],
+        True),
         ("Gallery Builder Offline Tests",
         "test_gallery_cache_builder_offline.py",
         "Offline smoke test for gallery_cache_builder.py: mocks Horizons, "
@@ -447,6 +527,16 @@ LAUNCH_GROUPS = {
         "own _rename seam -- the same name the real build path goes "
         "through. The run itself prints the current count of checks.",
         GALLERY_TOOLS_DIR,
+        True,
+        None,
+        True),
+        ("Gallery Module Atlas",
+        "module_atlas.py",
+        "The gallery repo's own module atlas: regenerates its "
+        "MODULE_ATLAS.md and MODULE_INDEX.md. The gallery runner does "
+        "this first on every run, as a generator. Not the orrery's "
+        "atlas, which has its own button under the maintenance run.",
+        GALLERY_REPO_DIR,
         True,
         None,
         True),
@@ -532,6 +622,19 @@ LAUNCH_GROUPS = {
         True,
         None,
         True),
+        ("Page Framing",
+        os.path.join("documentation", "run_offline_check.py"),
+        "The page's own framing helpers, taken out of the page and run "
+        "against real feature traces; the checks measure the axis "
+        "ranges that result, so a wrong range fails. GATES the gallery "
+        "runner. The check is Node, so this button runs it through "
+        "documentation/run_offline_check.py, which reads its command "
+        "from the gallery runner's own list: the two cannot drift. Runs "
+        "from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Page framing"],
+        True),
         ("Pointer Join",
         os.path.join("tools", "check_constants_links.py"),
         "Classifies all 70 of the config's links into the store: served "
@@ -544,6 +647,33 @@ LAUNCH_GROUPS = {
         GALLERY_REPO_DIR,
         True,
         ["--join"],
+        True),
+        ("Pole of Date",
+        os.path.join("tools", "test_pole_of_date.py"),
+        "Holds the cache builder's copy of the orrery's tilt geometry "
+        "(tools/pole_of_date.py) to the frame angle in the constants "
+        "export, to the orrery's own results on two real Horizons days, "
+        "and to ERFA, the IAU's routines; then reruns each check with "
+        "one input altered, where it must fail. Needs astropy. GATES "
+        "the gallery runner. Runs from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Solar System Drawer",
+        os.path.join("documentation", "run_offline_check.py"),
+        "The Solar System room's drawer does what Tony's design says "
+        "(L-363): worked cases on the real "
+        "gallery/solar_system_drawer.js, the real "
+        "data/objects_config.json's rows, and interactive.html loading "
+        "the file and calling each function it must. GATES the gallery "
+        "runner. The check is Node, so this button runs it through "
+        "documentation/run_offline_check.py, which reads its command "
+        "from the gallery runner's own list: the two cannot drift. Runs "
+        "from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Solar System drawer"],
         True),
         ("Solar System Figures",
         os.path.join("documentation", "run_solar_system_figures.py"),
@@ -593,6 +723,20 @@ LAUNCH_GROUPS = {
         GALLERY_REPO_DIR,
         True,
         None,
+        True),
+        ("Sun Shells",
+        os.path.join("documentation", "run_offline_check.py"),
+        "The Sun room's shells, built by the real renderers from the "
+        "real data/objects_config.json: no input left unread, the "
+        "expected geometry traces, and the shapes that must be thinned "
+        "or tilted measured where they are drawn. GATES the gallery "
+        "runner. The check is Node, so this button runs it through "
+        "documentation/run_offline_check.py, which reads its command "
+        "from the gallery runner's own list: the two cannot drift. Runs "
+        "from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Sun shells"],
         True),
         ("Gallery Maintenance Run -- live, AFTER a push",
         "gallery_maintenance_run.py",
@@ -973,6 +1117,18 @@ LAUNCH_GROUPS = {
          SCRIPT_DIR,
          True,
          None,
+         True),
+        ("Test Skill Headers",
+         "skills_index.py",
+         "skills_index.py --check: reads every skill's header as YAML, "
+         "the way Settings > Skills does, and fails on a header YAML "
+         "refuses, a name or description that is not text, or a value "
+         "YAML would cut short at a space before a # (L-407). The Update "
+         "Skill Manifest button runs the same script without the check, "
+         "and writes the protocol's table.",
+         SCRIPT_DIR,
+         True,
+         ["--check"],
          True),
         ("Test Status Lines",
          "test_status_lines.py",

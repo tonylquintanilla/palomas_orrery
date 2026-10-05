@@ -6,7 +6,15 @@ fires_when: Editing existing files, patch scripts, sed/regex edits, encoding che
 
 # Safe File Editing
 
-Skill version: 1.12 | Cut from palomas_orrery @ 41c1ca7a (v1.12),
+Skill version: 1.13 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 72e3b558. v1.13 (L-418) changes no rule. A contents
+list now opens the skill, generated from its headings, and
+skills_index.py --check fails if the two disagree. Version history
+older than the two entries below moved to
+documentation/SKILL_HISTORIES.md. Both because a plain read of a
+long file shows its start and end and leaves out its middle, where
+the rules are (Tony, 2026-10-05).
+Earlier: 1.12 | Cut from palomas_orrery @ 41c1ca7a (v1.12),
 earlier @ 1fa413d9 (v1.11), ccd1ac96 (v1.10), bfa9de2f (v1.9),
 earlier @ 6d12ecac (v1.8), d424c459 (v1.7), ef3bd13 (v1.6),
 50438c6 (v1.5), a872205 (v1.4), 1ba20c3 (v1.3), 3398970 (v1.2),
@@ -29,31 +37,32 @@ earned when three chained ledger patches all refused: each was
 fingerprinted against the previous one's raw output, while every one of
 them told the operator to run `ledger_index.py` next -- which rewrites
 the zone they were hashing.
-Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;
-v1.1 adds the delivery-format convention from a same-day incident (a
-transactional patch silently never run; see Field Notes). v1.3 adds
-Line Endings Are Not Content, earned when a patch aborted twice on a
-CRLF working copy whose bytes were identical to the repo's. v1.4 adds
-Fix In Passing, Report It, after a patch blocked itself on two Unicode
-arrows that predated it by months, and Naming and Archiving a Patch
-Script, an unstated convention 96 scripts deep that Tony had been
-following alone. v1.5 adds Stamp What You Change (L-220), after Tony
-observed that this project updates bodies more reliably than it updates
-anchors, dates and module descriptions. v1.6 generalises that section to
-every file type, because 1.5's only concrete example was a Python module
-docstring and the rule's founding case was stale Markdown headers -- it
-would not have fired on the files it was written for. v1.7 adds A Paste
-Is An Unverified Transfer (L-223), which extends the delivery rule to
-prose, markdown and ledger files -- every example in 1.6 was code, and
-this project had been hand-editing a 579 KB ledger on that silence.
-v1.8 (L-226) does two things, both from Tony's rulings of 2026-08-23.
-It rescopes the Encoding Gate to say PROSE explicitly, because a
-session read "delivered code" as excluding markdown and left 23
-non-ASCII characters in a file it was already patching. And it adds
-The Correction Does Not Travel, one scope out from Stamp What You
-Change: that section governs the file the patch is editing, this one
-governs the other files quoting the value it just changed.
+Older entries are in documentation/SKILL_HISTORIES.md, moved there
+on 2026-10-05 (L-418).
 Portable: applies to any project, not only Paloma's Orrery.
+
+## Contents
+
+Generated from this file's headings. skills_index.py --check fails
+if this list and the headings disagree (L-418).
+
+- Bottom-Up Editing [QUALITY]
+- Unicode-Safe Editing (binary mode) [QUALITY]
+- Transactional Patching for Clustered Edits
+  - Git Is the Backup [QUALITY]
+  - Line Endings Are Not Content [QUALITY]
+  - A Guard Must Not Fence What a Generator Rewrites [QUALITY]
+- Delivery Format -- Runnable by Tony, Not Just Reviewable [CRITICAL]
+  - Naming and Archiving a Patch Script [QUALITY]
+  - A Paste Is An Unverified Transfer [QUALITY]
+- Encoding Gate [QUALITY]
+  - Fix In Passing, Report It [QUALITY]
+  - Stamp What You Change [QUALITY]
+  - The Correction Does Not Travel [QUALITY]
+- Compare Content, Not Bytes [QUALITY]
+- grep -c in && Chains [QUALITY]
+- Platform Neutrality [QUALITY]
+- Field Notes
 
 ## Bottom-Up Editing [QUALITY]
 

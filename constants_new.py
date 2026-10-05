@@ -136,6 +136,13 @@ chained through another conversion -- and carries "# Conversion: of
 <ROW>" instead of a count, a status and a source of its own. Every value
 is unchanged to the last bit. The frame note and EARTH_MEAN_RADIUS_KM's
 note now say the crust is drawn at the mean radius.)
+Module updated: October 5, 2026 with Anthropic's Claude Opus 5.5
+(L-389: notes on the two atmosphere tops and the two LEO edges say why
+each is the equatorial radius plus its altitude, Tony's reading of
+2026-10-05; the frame note no longer reads a consequence of the
+2026-09-28 crust ruling as the ruling itself; the LEO outer edge's
+stale note is corrected. L-292: the geocorona row's note says the
+orrery now draws it. No value changes.)
 """
 
 import math
@@ -280,9 +287,18 @@ EARTH_POLAR_RADIUS_KM = 6356.752
 # used as a unit. Dividing a sourced radius by the equatorial radius
 # therefore draws each boundary at its correct ABSOLUTE radius. Since
 # patch D20 (L-345, Tony's ruling of 2026-09-28) the crust is drawn at
-# the mean radius as well, EARTH_MEAN_RADIUS_KM over the equatorial
-# radius, so a boundary's depth below the DRAWN surface is its textbook
-# depth. Until then the crust was drawn at 1.0, the equatorial radius,
+# the mean radius, EARTH_MEAN_RADIUS_KM over the equatorial radius,
+# because Earth is drawn as a sphere and a sphere at the mean radius
+# stays nearest sea level everywhere. The equatorial radius stays the
+# standard Earth radius. One consequence follows, and it is not a rule
+# of Tony's: an interior boundary's depth below the drawn crust is now
+# its textbook depth. Heights above the crust are NOT mirrored. The
+# atmosphere tops and the low Earth orbit edges are the equatorial
+# radius plus their altitude, so each sits further above the drawn
+# crust than its altitude, by the difference between the two radii.
+# That is the cost of drawing Earth as a sphere, not an error (Tony,
+# 2026-10-05, L-389; this note had read the consequence as the ruling
+# and was corrected the same day). Until then the crust was drawn at 1.0, the equatorial radius,
 # and every depth below it came out about 7 km greater -- the
 # equatorial-versus-mean difference, not an error in either number.
 # Radius is what PREM measures; depth is derived from it. Radius wins.
@@ -752,6 +768,12 @@ EARTH_LEO_INNER_KM = EARTH_EQUATORIAL_RADIUS_KM + EARTH_LEO_LOWER_ALTITUDE_KM
 # Status: derived -- inherits EARTH_EQUATORIAL_RADIUS_KM,
 # Status+: EARTH_LEO_LOWER_ALTITUDE_KM
 # Figures: 8 -- set by EARTH_EQUATORIAL_RADIUS_KM
+# Note: the altitude is added to the EQUATORIAL radius, the standard
+# Note+: Earth radius, on purpose (Tony, 2026-10-05, L-389). The crust is
+# Note+: drawn at the mean radius only because Earth is drawn as a
+# Note+: sphere, so this edge sits further above the drawn crust than
+# Note+: its altitude, by the difference between the two radii. See the
+# Note+: frame note above the interior boundaries.
 EARTH_LEO_OUTER_KM = EARTH_EQUATORIAL_RADIUS_KM + EARTH_LEO_UPPER_ALTITUDE_KM
 # Unit: km
 # Status: derived -- inherits EARTH_EQUATORIAL_RADIUS_KM,
@@ -759,10 +781,10 @@ EARTH_LEO_OUTER_KM = EARTH_EQUATORIAL_RADIUS_KM + EARTH_LEO_UPPER_ALTITUDE_KM
 # Figures: 8 -- set by EARTH_EQUATORIAL_RADIUS_KM; the 2,000 km IADC
 # Figures+: altitude is exact and does not limit the sum.
 # Derived: 6378.1366 + 200 = 6578.1 km; 6378.1366 + 2000 = 8378.1 km.
-# Note: the orrery's LEO shell types 6571 and 8371 km, which is 6371 + the
-# Note+: altitude -- the mean radius, not the equatorial one the shell is
-# Note+: drawn against. Seven km, below the drawn resolution, but the
-# Note+: hover text quotes those numbers. Follow-on with the migration.
+# Note: the altitude is added to the EQUATORIAL radius, as on the row
+# Note+: above (Tony, 2026-10-05, L-389). Corrected in passing the same
+# Note+: day: this note said the LEO shell's hover typed its distances
+# Note+: from the mean radius; the hover has read this row since L-291.
 EARTH_LEO_INNER_RADII = EARTH_LEO_INNER_KM / EARTH_EQUATORIAL_RADIUS_KM
 # Unit: r_earth
 # Conversion: of EARTH_LEO_INNER_KM -- computed from that row, which carries the
@@ -810,6 +832,12 @@ EARTH_STRATOPAUSE_RADIUS_KM = EARTH_EQUATORIAL_RADIUS_KM + EARTH_STRATOPAUSE_ALT
 # Figures: 4 -- set by EARTH_STRATOPAUSE_ALTITUDE_KM (50, 2), good to the
 # Figures+: kilometre.
 # Note: the top of the lower atmosphere, measured from Earth's centre.
+# Note+: The altitude is added to the EQUATORIAL radius, the standard
+# Note+: Earth radius, on purpose (Tony, 2026-10-05, L-389). The crust is
+# Note+: drawn at the mean radius only because Earth is drawn as a
+# Note+: sphere, so this top sits further above the drawn crust than its
+# Note+: altitude, by the difference between the two radii. That is the
+# Note+: sphere's cost, not an error.
 # Note+: Its value in Earth radii and AU is computed from this row
 # Note+: (L-345); EARTH_STRATOPAUSE_RADII below is that conversion, since
 # Note+: patch D20. Added at patch D19a.
@@ -822,6 +850,8 @@ EARTH_THERMOPAUSE_RADIUS_KM = EARTH_EQUATORIAL_RADIUS_KM + EARTH_THERMOPAUSE_ALT
 # Figures: 3 -- set by EARTH_THERMOPAUSE_ALTITUDE_KM (600, 2), good to
 # Figures+: tens of kilometres.
 # Note: the top of the upper atmosphere, measured from Earth's centre.
+# Note+: The altitude is added to the EQUATORIAL radius, as on the
+# Note+: stratopause row above (Tony, 2026-10-05, L-389).
 # Note+: Its value in Earth radii and AU is computed from this row
 # Note+: (L-345); EARTH_THERMOPAUSE_RADII below is that conversion, since
 # Note+: patch D20. Added at patch D19a.
@@ -1778,6 +1808,9 @@ EARTH_GEOCORONA_RADII = 100.0
 # Note: a detection floor, not an edge -- the hydrogen thins without a
 # Note+: boundary. The shell is drawn at the sourced floor and its hover
 # Note+: says so. It encloses the Moon's orbit at about 60 radii.
+# Note+: The orrery draws it as its own shell since 2026-10-05
+# Note+: (SHELL_CONFIGS['Earth']['geocorona'], L-292), as the website
+# Note+: has since L-291.
 # --- end Earth exhibit block --------------------------------------------------
 
 JUPITER_EQUATORIAL_RADIUS_KM = 71492.0

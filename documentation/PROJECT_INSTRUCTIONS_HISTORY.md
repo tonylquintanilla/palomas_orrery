@@ -2135,6 +2135,45 @@ resident.
 (Moved down from the resident protocol on 2026-10-04 when
 v3.80 made a fourth entry.)
 
+v3.78 (October 2, 2026): No rule changed in this document. ONE
+skill bump, one version (L-406): interactive-exhibit 1.9 -> 1.10.
+THE GALACTIC TIDE IS DRAWN IN THE GALAXY'S PLANE.
+
+WHAT PROMPTED IT. Sorting the Sun room's 43 unlinked numbers (L-371)
+found the galactic tide's words saying its bodies are thinned near the
+galaxy's plane while the drawing thinned them near the ecliptic. Tony's
+ruling of 2026-10-02: fix it now, as a drawing choice made more
+correct. The source then showed the pattern was wrong too: comets the
+tide sends in avoid the galaxy's plane AND its poles. Tony confirmed
+drawing both, and drawing the tide between the outer Oort cloud's two
+stored edges instead of a typed 50,000 AU.
+
+WHAT THE SKILL NOW SAYS. Asked whether the skills cover how a feature's
+hover, info panel and drawing are written, the answer was that the
+hover and the drawing were covered and the info link was not: Tony's
+rule lived only on L-265. interactive-exhibit 1.10 writes it down -- a
+NASA page where one is specific to the feature, otherwise English
+Wikipedia, the corona the one named exception.
+
+THE BUILD. Orrery patch_L406_1 adds the galactic pole of J2000 to
+constants_new.py, gives the pole matrix its own function, and redraws
+the orrery's tide; gallery patch_L406_2 redraws the website's tide in
+Tony's approved words and corrects the check that measured the
+ecliptic under the galactic plane's name.
+
+THE OBLIGATION TRAVELS. This session loaded 1.9. The next session
+confirms its loaded copy reads interactive-exhibit 1.10 before any
+exhibit work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.75 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-05 when
+v3.81 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

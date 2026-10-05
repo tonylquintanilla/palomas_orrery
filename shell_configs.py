@@ -69,6 +69,12 @@ Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5 (L-345,
     NASA fact sheet's volumetric mean radius instead of IERS's equatorial
     one. The August 26 entry above, "the crust is deliberately untouched",
     describes that day.)
+Module updated: October 5, 2026 with Anthropic's Claude Opus 5.5 (L-413's
+    orrery patch: Earth gains its exosphere shell, 'geocorona', drawn at
+    EARTH_GEOCORONA_RADII (L-292); the upper atmosphere's hover and
+    tooltip come from earth_upper_atmosphere_info, the same words; the
+    magnetosphere tooltip's inner belt line says "near their measured
+    flux peak" (L-349). Words approved by Tony, 2026-10-05.)
 """
 
 # Phase C4: Import hover text strings from body shell modules.
@@ -146,6 +152,8 @@ from constants_new import (
 from earth_visualization_shells import (
     earth_inner_core_info, earth_outer_core_info,
     earth_lower_mantle_info, earth_upper_mantle_info,
+    # 2026-10-05: one string each for the tooltip and the hover.
+    earth_upper_atmosphere_info, earth_geocorona_info,
 )
 
 # Phase D1: Import Sun radius constants for radius_au expressions.
@@ -1529,24 +1537,27 @@ SHELL_CONFIGS = {
             'opacity': 0.3,
             'n_points': 20,
             'marker_size': 2.0,
-            'hover_text': (
-                f"The upper atmosphere is drawn from the stratopause ({EARTH_STRATOPAUSE_ALTITUDE_KM:,.0f} km) to the<br>"
-                f"thermopause, about {EARTH_THERMOPAUSE_ALTITUDE_KM:,.0f} km up (NOAA JetStream; NASA). It includes<br>"
-                "the mesosphere where meteors burn up and the thermosphere where the aurora occurs and<br>"
-                "the International Space Station orbits. In the thermosphere, temperatures can reach<br>"
-                "2,000 degC (3,600 degF), though the gas is so thin that it would feel cold to human skin.<br>"
-                "Above the thermopause the exosphere thins into space with no boundary; its hydrogen<br>"
-                f"halo, the geocorona, is detected past {EARTH_GEOCORONA_RADII:.0f} Earth radii."
-            ),
-            'tooltip': (
-                f"The upper atmosphere is drawn from the stratopause ({EARTH_STRATOPAUSE_ALTITUDE_KM:,.0f} km) to the\n"
-                f"thermopause, about {EARTH_THERMOPAUSE_ALTITUDE_KM:,.0f} km up (NOAA JetStream; NASA). It includes\n"
-                "the mesosphere where meteors burn up and the thermosphere where the aurora occurs and\n"
-                "the International Space Station orbits. In the thermosphere, temperatures can reach\n"
-                "2,000 degC (3,600 degF), though the gas is so thin that it would feel cold to human skin.\n"
-                "Above the thermopause the exosphere thins into space with no boundary; its hydrogen\n"
-                f"halo, the geocorona, is detected past {EARTH_GEOCORONA_RADII:.0f} Earth radii."
-            ),
+            # 2026-10-05: the same words as before, now held once in
+            # earth_visualization_shells.py, where the checkbox tooltip
+            # reads them too.
+            'hover_text': earth_upper_atmosphere_info.replace('\n', '<br>'),
+            'tooltip': earth_upper_atmosphere_info,
+        },
+
+        # L-292 (2026-10-05): the exosphere, drawn at the geocorona's
+        # detection floor, as the website draws it since L-291. Colour,
+        # opacity, point count and marker size are rendering settings and
+        # match the website's. A fuzzy edge in place of this sharp shell
+        # is a candidate for L-410 (Tony, 2026-10-05).
+        'geocorona': {
+            'name': 'Exosphere (Geocorona)',
+            'radius_fraction': EARTH_GEOCORONA_RADII,  # the sourced detection floor
+            'color': 'rgb(200, 200, 255)',
+            'opacity': 0.15,
+            'n_points': 20,
+            'marker_size': 3.0,
+            'hover_text': earth_geocorona_info.replace('\n', '<br>'),
+            'tooltip': earth_geocorona_info,
         },
 
         'hill_sphere': {
@@ -2349,7 +2360,7 @@ CUSTOM_SHELLS = {
                 "Bow Shock: The boundary where the supersonic solar wind is first slowed\n"
                 f"by Earth's magnetic field, typically located about {EARTH_BOW_SHOCK_STANDOFF_RADII:.{figures_of('EARTH_BOW_SHOCK_STANDOFF_RADII')}g} Earth radii upstream\n"
                 "from Earth on the Sun-facing side.\n\n"
-                f"Inner Van Allen Belt: trapped protons, drawn at the flux peak {EARTH_VAN_ALLEN_INNER_RADII:g} Earth radii out\n"
+                f"Inner Van Allen Belt: trapped protons, drawn near their measured flux peak, {EARTH_VAN_ALLEN_INNER_RADII:g} Earth radii out\n"
                 "(Baker et al. 2018). Outer Van Allen Belt: trapped electrons, drawn at the flux peak\n"
                 f"{exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} Earth radii out (doi:10.1029/2024JA033504).\n"
                 "Standoffs: Shue et al. (1998); Jelinek et al. (2012).\n\n"

@@ -11,26 +11,24 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 144  
-**Total Lines of Code (non-blank):** 117,606  
-**Total Public Functions/Classes:** 1,301
+**Total Python Files:** 143  
+**Total Lines of Code (non-blank):** 115,342  
+**Total Public Functions/Classes:** 1,303
 
 ## Classification Coverage
 
-**Undetermined role (7).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L133_1_crlf_sweep_20261004.py`
-- `patch_L413_1_ledger_sweep_and_earth_list_20261004.py`
+- `patch_L413_3_session_close_20261005.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (2).** No valid `Domain:` tag.
+**Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L133_1_crlf_sweep_20261004.py`
-- `patch_L413_1_ledger_sweep_and_earth_list_20261004.py`
+- `patch_L413_3_session_close_20261005.py`
 
 
 ---
@@ -42,8 +40,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_controller.py` | KMZ layer selector for Google Earth Pro. (131 lines) |
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,938 lines) |
-| `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,536 lines) |
-| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (1,956 lines) |
+| `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,550 lines) |
+| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (2,112 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
 ---
@@ -70,7 +68,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `sgr_a_visualization_animation.py` | Stage 2: Animated visualization of S-Stars orbiting Sagittarius A*. (345 lines) |
 | `sgr_a_visualization_core.py` | Core visualization module for S-Stars orbiting Sagittarius A*. (561 lines) |
 | `sgr_a_visualization_precession.py` | Stage 3: The Relativistic Rosette (Schwarzschild Precession). (357 lines) |
-| `star_sphere_builder.py` | Build and render celestial sphere for Paloma's Orrery. (924 lines) |
+| `star_sphere_builder.py` | Build and render celestial sphere for Paloma's Orrery. (932 lines) |
 | `visualization_2d.py` | 2D HR diagram (color-magnitude) plot builder. (525 lines) |
 | `visualization_3d.py` | 3D stellar neighborhood and planetarium plot builder. (859 lines) |
 | `visualization_core.py` | Shared data preparation and formatting for star visualizations. (352 lines) |
@@ -84,7 +82,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `asteroid_belt_visualization_shells.py` | Asteroid Belt Visualization Module Functions for creating visualizations of asteroid belt structures in 3D plots. Includes Main Belt, Hildas, Trojans, and Greeks. Also includes helper functions for dynamic Trojan positioning based on Jupiter's location. (403 lines) |
 | `comet_visualization_shells.py` | Comet visual components for 3D orrery plots. (1,884 lines) |
-| `earth_visualization_shells.py` | Earth interior and orbital shell traces. (1,542 lines) |
+| `earth_visualization_shells.py` | Earth interior and orbital shell traces. (1,582 lines) |
 | `eris_visualization_shells.py` | Eris interior and boundary shell traces. (482 lines) |
 | `jupiter_visualization_shells.py` | Jupiter interior, ring, and magnetosphere shell traces. (897 lines) |
 | `mars_visualization_shells.py` | Mars interior and remnant field shell traces. (884 lines) |
@@ -107,7 +105,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `apsidal_markers.py` | Perihelion, aphelion, perigee, and apogee marker generation. (1,739 lines) |
 | `catalog_selection.py` | Unified star selection from Hipparcos and Gaia catalogs. (94 lines) |
 | `celestial_coordinates.py` | Module for calculating and formatting Right Ascension and Declination coordinates for celestial objects in Paloma's Orrery. (456 lines) |
-| `coordinate_system_guide.py` | Educational reference for J2000 Ecliptic Coordinate System (549 lines) |
+| `coordinate_system_guide.py` | Educational reference for J2000 Ecliptic Coordinate System (552 lines) |
 | `data_acquisition.py` | Unified module for both distance- and magnitude-based queries, integrating the simpler logic of data_acquisition_distance.py. (222 lines) |
 | `data_acquisition_distance.py` | Module for fetching stellar data based on distance. (172 lines) |
 | `data_processing.py` | Star catalog data cleaning, merging, and analysis. (436 lines) |
@@ -127,7 +125,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,250 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (512 lines) |
-| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (3,006 lines) |
+| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (3,039 lines) |
 | `constants_tokens.py` | - what each "# Unit:" token in constants_new.py means. (241 lines) |
 | `earth_pole_of_date.py` | Earth's rotation pole and tilt for the date of a plot. (269 lines) |
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (412 lines) |
@@ -136,7 +134,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `info_dictionary.py` | Descriptive text and narrative content for Paloma's Orrery. (2,050 lines) |
 | `messier_catalog.py` | Static catalog of Messier objects and bright deep-sky objects. (406 lines) |
 | `sgr_a_star_data.py` | S-star catalog and orbital mechanics for Sagittarius A*. (590 lines) |
-| `shell_configs.py` | Shell configuration data for all celestial bodies. (2,646 lines) |
+| `shell_configs.py` | Shell configuration data for all celestial bodies. (2,656 lines) |
 | `spacecraft_encounters.py` | Tagged encounter data for spacecraft missions in Paloma's Orrery. (1,298 lines) |
 | `star_notes.py` | Curated hover text annotations for notable stars. (1,158 lines) |
 | `star_properties.py` | SIMBAD stellar property queries with local caching. (340 lines) |
@@ -221,7 +219,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (606 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,071 lines) |
-| `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (451 lines) |
+| `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (605 lines) |
 | `test_citation_inheritance.py` | Regression tests for citation-block inheritance. (516 lines) |
 | `test_constants_export.py` | - data/constants_export.json says what constants_new.py holds. (389 lines) |
 | `test_constants_provenance.py` | Regression tests for verified numeric constants. (476 lines) |
@@ -247,8 +245,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L133_1_crlf_sweep_20261004.py` | - ORRERY repo. L-133: the 22 files still committed with Windows (CRLF) line endings, written LF. (390 lines) |
-| `patch_L413_1_ledger_sweep_and_earth_list_20261004.py` | - ORRERY repo. Closes the ledger-sweep session of 2026-10-04: Earth's list (L-413), the scanner finding (L-414), seven closes, and safe-file-editing 1.12 with protocol v3.80 (L-415, line endings). (3,038 lines) |
+| `patch_L413_3_session_close_20261005.py` | - ORRERY repo. Closes the session of 2026-10-05: the ledger, Where We Are, this session's record and the handoff for the Horizons check. (746 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |

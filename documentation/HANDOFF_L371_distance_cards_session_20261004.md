@@ -170,6 +170,7 @@ sweep's, not his.
 Session written October 2026 with Anthropic's Claude Opus 5.5.
 
 ======================================================================
+**Tony**: run record: 
 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L413_1_ledger_sweep_and_earth_list_20261004.py
 ok  documentation/WHERE_WE_ARE.md  rewritten whole
@@ -357,10 +358,10 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  2. Move this script into documentation/; commit and push.
+  2. Move this script into documentation/; commit and push. -- 72e3b55805c29f1f08a583864bd815a47e7434c6
   3. Reinstall safe-file-editing (Settings > Skills) from
      skills/safe-file-editing/SKILL.md, and replace the Project's
-     instructions with PROJECT_INSTRUCTIONS.md (v3.80).
+     instructions with PROJECT_INSTRUCTIONS.md (v3.80). -- done
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 ===============================================================================
@@ -407,5 +408,5 @@ patch applied
 NEXT:
   1. Run orrery_maintenance_run.py. Every gating check passes.
   2. Move this script into documentation/; commit and push on its
-     own. Every line of the 22 files shows as changed: expected.
+     own. Every line of the 22 files shows as changed: expected. -- 72e3b55805c29f1f08a583864bd815a47e7434c6
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 

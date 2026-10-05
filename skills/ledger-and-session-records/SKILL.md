@@ -6,58 +6,21 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Skill version: 1.14 | Cut from palomas_orrery @ b3cfc780 (v1.14),
+Skill version: 1.15 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 72e3b558. v1.15 (L-418) adds one paragraph under the change log, A skill
+keeps three version entries, which writes down what this version does
+to all six long skills. A contents list now opens the skill, generated from its headings, and
+skills_index.py --check fails if the two disagree. Version history
+older than the two entries below moved to
+documentation/SKILL_HISTORIES.md. Both because a plain read of a
+long file shows its start and end and leaves out its middle, where
+the rules are (Tony, 2026-10-05).
+Earlier: 1.14 | Cut from palomas_orrery @ b3cfc780 (v1.14),
 earlier @ 5db8bbe0 (v1.13), @ 2a7d26b9 (v1.12), @ 1ee1cc61 (v1.11), @ 50cbd2df (v1.10), @ 41c0b279 (v1.9), @ 3586970d (v1.8),
 @ 434a712b (v1.7), @ 305b269 (v1.6), @ 3398970 (v1.5) | September 10,
 2026, with Anthropic's Claude Opus 5
-Sources: LEDGER_CONSOLIDATED.md header, ledger_index.py at HEAD, handoff
-v28 (consolidation) and v29 (cleanup), food insecurity handoffs. v1.3
-adds the Tony-action (do)/(decide) tag convention and its rollup rule,
-surfaced during the L-163 build-prep session (July 24, 2026) when a
-handoff's Tony-only to-do items were found scattered across its body
-with no consistent tag, discovered only because a builder session
-(Opus 5) had to hunt for them by reading the whole document. v1.4
-rewrites the Codebase Tooling ROLE_MAP bullet for L-163 Phase 3: a new
-module is classified by tagging its own docstring, not by hand-adding a
-ROLE_MAP entry, because ROLE_MAP became a regenerated mirror that the
-next module_atlas.py run overwrites. v1.7 adds Cluster the Tail by
-Topic, Not by Age -- Tony's ruling of August 19, 2026, replacing a
-by-age triage, after a measurement found 54 of 107 open items both
-below RICE 3.0 and untouched for a month (L-215). v1.8 adds the
-master plan to The Document Stack as a SEQUENCING authority rather
-than a rung in the status ordering, with Tony's ruling that
-bundling items to complete a planned step supersedes RICE order,
-and extends the status rule from handoff-vs-manifest to any session
-document contradicting a settled ledger decision (both L-221,
-August 20, 2026). v1.9 (L-230) does two things to the Protocol and
-Skills Change Log. It adds the FOURTH step to the binding rule -- a
-skill bump also earns a protocol version-history entry, which is
-Tony's observation of August 23, 2026 that three links of a
-four-link chain were firing. And it corrects that section's own
-opening claim, which still said the protocol's version history lives
-in the ledger appendix five days after v3.41 replaced that appendix
-with a pointer. v1.10 carries THREE changes from one session
-(2026-09-06), which is itself the first of them. ONE SESSION, ONE BUMP
-(L-296): a session does not ship two versions of one skill, so
-everything it decides rides one version. The SECOND ANCHOR LINE for
-relay partners with no resident layer (L-290), in the Anchor
-Requirement section, with two forms and a read-back. And the master
-plan restamps once per DESIGN BUILD (L-296) rather than at "key
-junctures", which was not countable and so kept returning the judgment
-to Tony. v1.11 (L-291) adds A Closing Item Re-homes Its Loose Ends:
-before an item goes DONE, each thing its body records as not done gets
-a home in an open item, or is struck with a reason. Three were found
-riding inside closing items on 2026-09-10, one of them behind a pointer
-to an item that never mentioned it. v1.12 (L-333, L-362; 2026-09-28,
-with Anthropic's Claude Opus 5.5) changes The Document Stack: the master
-plan is ONE document at two zooms, an executive summary and the body,
-with the critical path inside the body as Section 5a, and the summary
-is rewritten at every restamp. Its two companion files were retired
-with the plan's v34. Tony's ruling of 2026-09-28: "i think we should
-integrate these reports. the summary as an executive summary. the body
-should keep its critical path section." The companions had restamped
-with v19 and v20 and not with v21 through v33, because nothing tied
-them to the plan's own cadence.
+Older entries are in documentation/SKILL_HISTORIES.md, moved there
+on 2026-10-05 (L-418).
 v1.13 (L-396; 2026-09-30, with Anthropic's Claude Opus 5.5) adds Where
 We Are to The Document Stack: `documentation/WHERE_WE_ARE.md`, one page
 written for Tony rather than for the work, rewritten in place inside
@@ -71,6 +34,23 @@ of 2026-10-02 sorted it as method, so the skill answers it now.
 
 Note: READING the ledger at session start is resident Part-1 behavior,
 not this skill's job. This skill carries the maintenance mechanics.
+
+## Contents
+
+Generated from this file's headings. skills_index.py --check fails
+if this list and the headings disagree (L-418).
+
+- The Document Stack (the round trip)
+  - Where We Are -- Tony's page [QUALITY]
+- Ledger Block Format
+  - A Closing Item Re-homes Its Loose Ends [QUALITY]
+  - Cluster the Tail by Topic, Not by Age [QUALITY]
+- Anchor Requirement (all outbound documents)
+- Where a File Goes [QUALITY]
+- Handoff Structure (the load-bearing lines)
+- Protocol and Skills Change Log (v3.30 addition)
+- Codebase Tooling
+- Field Notes
 
 ## The Document Stack (the round trip)
 
@@ -447,6 +427,18 @@ SHA it was cut from. The resident protocol's Skill Manifest table states
 the EXPECTED installed versions -- a mismatch STOPS the session under the
 resident Stale Skill = Stop [CRITICAL] gate, which also tells Tony the two
 actions needed (push to skills/, reinstall to the account profile).
+
+**A skill keeps three version entries [QUALITY]** (L-418, Tony,
+2026-10-05). The protocol's own rule, applied to the skills: a SKILL.md
+keeps its three latest version entries under its version line, and the
+patch that adds a fourth moves the oldest, word for word, to the end of
+that skill's section in `documentation/SKILL_HISTORIES.md`. A skill
+over Anthropic's 500-line guideline also opens with a `## Contents` list
+of its headings, which `skills_index.py --check` holds to the headings
+item by item; a patch that adds, removes or renames a heading updates
+the list in the same edit. Both for one reason: a plain read of a long
+file shows its start and end and leaves out its middle, so what opens
+a skill is the one part every session is sure to see.
 
 **Binding rule [QUALITY].** A skill version bump is not done until the
 manifest agrees AND the protocol's history says what changed. FOUR

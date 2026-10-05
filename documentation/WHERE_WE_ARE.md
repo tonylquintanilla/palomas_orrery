@@ -1,7 +1,7 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, rewritten in place; read it at the end of every session. -->
 # Where We Are
 
-Last updated: October 4, 2026, end of the day's third session.
+Last updated: October 4, 2026, end of the day's third session. -- **Tony**: notes 10/5/26 -- 
 - Written at orrery 41c1ca7a and gallery e7ef96eb.
 - This session was a ledger sweep: no code changed. A Fable session
   ran its own sweep beside it, and both were checked against the code.
@@ -29,7 +29,7 @@ Last updated: October 4, 2026, end of the day's third session.
 > - *Your ruling on the inner belt's wording, then Earth's orrery
 >   patch.*
 >
-> **Needs you now:**
+> **Needs you now:** -- done
 > - *Run the ledger patch, then the maintenance run, and push.*
 > - *Reinstall the patch skill and update the Project's instructions.*
 
@@ -126,7 +126,7 @@ How to read the marks:
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
-Now:
+Now: -- done
 - Run the ledger patch, then orrery_maintenance_run.py, and push.
 - Reinstall safe-file-editing in Settings > Skills, and replace the
   Project's instructions with PROJECT_INSTRUCTIONS.md, now v3.80.

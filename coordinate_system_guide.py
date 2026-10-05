@@ -3,6 +3,10 @@ coordinate_system_guide.py - Educational reference for J2000 Ecliptic Coordinate
 
 This module creates an interactive HTML visualization with embedded reference text.
 
+Module updated: October 5, 2026 with Anthropic's Claude Opus 5.5 (L-369:
+the misconception table says Earth's equator is tilted by Earth's axial
+tilt, where it typed the angle. Words approved by Tony.)
+
 Role: computation
 Domain: orrery
 """
@@ -438,7 +442,7 @@ def create_coordinate_system_guide():
 </tr>
 <tr>
 <td style="padding: 8px; border: 1px solid #ccc;">"The ecliptic is Earth's equator."</td>
-<td style="padding: 8px; border: 1px solid #ccc;">FALSE. The ecliptic is Earth's ORBITAL plane. Earth's equator is tilted 23.4° relative to it (causes seasons)</td>
+<td style="padding: 8px; border: 1px solid #ccc;">FALSE. The ecliptic is Earth's ORBITAL plane. Earth's equator is tilted relative to it by Earth's axial tilt, which causes the seasons</td>
 </tr>
 <tr>
 <td style="padding: 8px; border: 1px solid #ccc;">"The +X axis points toward Aries."</td>

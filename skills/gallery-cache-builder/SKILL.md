@@ -6,7 +6,15 @@ fires_when: Nightly builder, atomic swap and its retry/roll-back/swap log, "Acce
 
 # Gallery Cache Builder (Phase 1b data serving)
 
-Skill version: 1.6 | Cut from tonyquintanilla.github.io @ a1a516cf (tools/gallery_cache_builder.py, tools/test_gallery_cache_builder_offline.py, documentation/check_cache_siblings.py, gallery_maintenance_run.py, .gitignore) and palomas_orrery @ ba94e80e (LEDGER_CONSOLIDATED.md L-216) | 2026-09-20, with Anthropic's Claude Opus 5
+Skill version: 1.7 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 72e3b558. v1.7 (L-418) changes no rule. A contents
+list now opens the skill, generated from its headings, and
+skills_index.py --check fails if the two disagree. Version history
+older than the two entries below moved to
+documentation/SKILL_HISTORIES.md. Both because a plain read of a
+long file shows its start and end and leaves out its middle, where
+the rules are (Tony, 2026-10-05).
+Earlier: 1.6 | Cut from tonyquintanilla.github.io @ a1a516cf (tools/gallery_cache_builder.py, tools/test_gallery_cache_builder_offline.py, documentation/check_cache_siblings.py, gallery_maintenance_run.py, .gitignore) and palomas_orrery @ ba94e80e (LEDGER_CONSOLIDATED.md L-216) | 2026-09-20, with Anthropic's Claude Opus 5
 v1.6 records the build that stops a failed swap depending on a person
 noticing (L-216): each rename is retried, a swap that still cannot finish
 puts the previous generation back, and every run that reaches the swap
@@ -23,15 +31,36 @@ REBUILT (L-336). It also corrects this skill's own claim that the failed
 `staging -> live` rename was "one data point" -- there have been three,
 the third on 2026-09-17 -- and writes down the hand routine Tony
 actually uses now.
-v1.4 adds Recovery from a failed swap: discard and re-run -- Tony's
-operational rule of 2026-08-19, after a nightly run wiped the served tree
-and the ~30 quarantine directories turned out to be the same mechanism
-printing harmlessly every night since July 21 (L-216).
+Older entries are in documentation/SKILL_HISTORIES.md, moved there
+on 2026-10-05 (L-418).
 
 The standalone builder that fetches fresh JPL Horizons data and deploys the
 web gallery's served cache. Tony runs it MANUALLY and commits the result
 himself; the scheduled nightly was retired August 10, 2026 (see Operating
 mode below).
+
+## Contents
+
+Generated from this file's headings. skills_index.py --check fails
+if this list and the headings disagree (L-418).
+
+- Operating mode -- manual, as of August 10 2026
+- What it is
+- Swap blast radius [QUALITY]
+- Sibling directory semantics [QUALITY]
+- Recovery ordering (why L-114 mattered twice)
+- The swap retries, rolls back, and leaves a record [QUALITY]
+- Recovery by hand, when the roll-back also fails [QUALITY]
+- The cause, and what is still open
+- Never shutil.rmtree anything in this tree [QUALITY]
+- The sibling report names what the builder did not make [QUALITY]
+- A config change is not deployed until the cache is rebuilt [CRITICAL]
+- Validation stance
+- Commit with round-trip verify
+- The three-layer gate (documentation/TESTING_PROTOCOL.md, orrery repo)
+- Adding a new object -- the full sequence, and where it silently breaks
+- Fetch facts proven live (2026-07-11 gate)
+- Field notes
 
 ## Operating mode -- manual, as of August 10 2026
 

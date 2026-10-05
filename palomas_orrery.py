@@ -38,6 +38,11 @@ the manual-scale tooltip prints the Sun's distances from their rows at
 their counts -- the termination shock at 94.01 AU, the heliopause at
 121 AU where it typed 126, and the gravitational reach as the Sun's
 Hill radius, 134,000 AU, where it printed every digit.)
+Module updated: October 5, 2026 with Anthropic's Claude Opus 5.5 (L-413's
+orrery patch: Earth's "-- Exosphere (Geocorona)" checkbox (L-292); the
+two coordinate hovers and the Celestial Sphere tooltip say the celestial
+equator is tilted by Earth's axial tilt instead of typing it (L-369).
+Words approved by Tony, 2026-10-05.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -267,6 +272,9 @@ from asteroid_belt_visualization_shells import (            # the greyed out imp
     calculate_body_angle,
     estimate_jupiter_angle_from_date
 )
+
+# L-292 (2026-10-05): the tooltip for Earth's exosphere checkbox.
+from earth_visualization_shells import earth_geocorona_info
 
 from constants_new import (
     DEFAULT_MARKER_SIZE,
@@ -2882,6 +2890,8 @@ earth_system_viz_var = tk.IntVar(value=0)
 earth_atmosphere_var = tk.IntVar(value=0)
 # Earth upper atmosphere shell
 earth_upper_atmosphere_var = tk.IntVar(value=0)
+# Earth exosphere / geocorona shell (L-292)
+earth_geocorona_var = tk.IntVar(value=0)
 # Earth LEO shell
 earth_leo_var = tk.IntVar(value=0)
 # Earth magnetosphere shell
@@ -3351,6 +3361,7 @@ earth_shell_vars = {
     'earth_crust': earth_crust_var,
     'earth_atmosphere': earth_atmosphere_var,
     'earth_upper_atmosphere': earth_upper_atmosphere_var,
+    'earth_geocorona': earth_geocorona_var,
     'earth_leo': earth_leo_var,
     'earth_magnetosphere': earth_magnetosphere_var,
     'earth_geostationary_belt': earth_geostationary_belt_var,
@@ -5839,7 +5850,7 @@ def plot_objects():
                             + ("<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(For exoplanets: sky plane, perpendicular to line of sight)</i><br><br>" 
                             if is_exoplanet_mode else "")
 
-                            + "<b>Teal circle:</b> Celestial equator (tilted 23.4&deg;)<br><br>"
+                            + "<b>Teal circle:</b> Celestial equator, tilted from the ecliptic by Earth's axial tilt<br>(Earth's rotation-axis hover gives the angle for this date)<br><br>"
 
                             + "<i>Enable Celestial Grid to see coordinate circles</i>"
                         ),                       
@@ -8070,7 +8081,7 @@ def animate_objects(step, label):
                             "<b>+X:</b> Vernal equinox (VE marker, RA=0h)<br><br>"
                             "<b>+Z:</b> Ecliptic North (NEP)<br><br>"
                             "<b>XY plane:</b> Ecliptic (amber circle)<br>"
-                            "<b>Teal circle:</b> Celestial equator (tilted 23.4&deg;)<br><br>"
+                            "<b>Teal circle:</b> Celestial equator, tilted from the ecliptic by Earth's axial tilt<br>(Earth's rotation-axis hover gives the angle for this date)<br><br>"
                             "<i>Enable Celestial Grid to see coordinate circles</i>" if not is_exoplanet_mode
                             else "<b>Coordinate System (Exoplanet):</b><br><br>"
                             "<b>Origin:</b> Host star at (0, 0, 0)<br><br>"
@@ -8888,7 +8899,7 @@ CreateToolTip(celestial_sphere_frame,
     "Add a star background and/or celestial coordinate grid behind the solar system.\n"
     "Stars are shown as uniform dots at their real sky directions.\n"
     "The grid shows the ecliptic (planet orbital plane) with zodiac labels,\n"
-    "the celestial equator (tilted 23.4 deg), and coordinate poles.\n\n"
+    "the celestial equator (tilted by Earth's axial tilt), and coordinate poles.\n\n"
     "These are cosmetic overlays -- solar system objects are unchanged.")
  
 star_bg_checkbutton = tk.Checkbutton(celestial_sphere_frame,
@@ -9250,6 +9261,11 @@ CreateToolTip(earth_atmosphere_checkbutton, earth_atmosphere_info)
 earth_upper_atmosphere_checkbutton = tk.Checkbutton(earth_shell_options_frame, text="-- Upper Atmosphere", variable=earth_upper_atmosphere_var)
 earth_upper_atmosphere_checkbutton.pack(anchor='w')
 CreateToolTip(earth_upper_atmosphere_checkbutton, earth_upper_atmosphere_info)
+
+# Earth exosphere / geocorona shell (L-292, 2026-10-05)
+earth_geocorona_checkbutton = tk.Checkbutton(earth_shell_options_frame, text="-- Exosphere (Geocorona)", variable=earth_geocorona_var)
+earth_geocorona_checkbutton.pack(anchor='w')
+CreateToolTip(earth_geocorona_checkbutton, earth_geocorona_info)
 
 # Earth LEO shell
 earth_leo_checkbutton = tk.Checkbutton(earth_shell_options_frame, text="-- Low Earth Orbit (LEO)", variable=earth_leo_var)

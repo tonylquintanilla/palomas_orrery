@@ -20,7 +20,14 @@ to re-run (ledger_index.py / module_atlas.py pattern). It also runs a
 consistency check: folder name matches frontmatter name, a version line
 exists, no duplicate names, and every skill has a fires_when field
 (missing fires_when falls back to the first sentence of description,
-truncated, and is reported as a warning).
+truncated, and is reported as a warning). It also holds every header to
+Anthropic's documented limits -- a name of at most 64 characters, only
+lowercase letters, numbers and hyphens, never "anthropic" or "claude";
+a description of at most 1024 characters; no XML tag in either -- and
+warns on a body over Anthropic's 500-line guideline (L-417; the pages
+and the date they were read are beside the constants below).
+A skill over that guideline must open with a '## Contents' list of its
+headings, and any skill's list must match its headings exactly (L-418).
 
 The fires_when frontmatter field is the editorial "Fires when" column of
 the manifest: short trigger phrases, hand-tuned. It is ignored by the
@@ -73,6 +80,23 @@ unclosed quote -- and the output says which of the two read them.
 orrery_maintenance_run.py runs this tool with --check as a checker, so
 a bad header fails the run.)
 
+Module updated: October 5, 2026 with Anthropic's Claude Opus 5.5
+(L-417: Anthropic's documented header limits, read that day from the
+Skills overview and the authoring best practices, are checked -- name
+length, characters and reserved words, description length, no XML tag
+-- and each one broken is a CONSISTENCY PROBLEM, so --check exits 1 and
+the maintenance run's Skill headers row fails. A body over the 500-line
+guideline is a warning. The description is measured as YAML reads it,
+without a quoted value's quote marks. From a Claude Sonnet 5.5 session's
+check of the same day, rebuilt to this project's patch rules and
+without its near-the-limit warning, which rested on a chosen number.)
+
+Module updated: October 5, 2026 with Anthropic's Claude Opus 5.5
+(L-418: the contents check. A plain read of a long file shows its
+start and end and leaves out its middle, so a long skill opens with a
+list of its headings, and this compares the list with the headings item
+by item, skipping fenced code. Six skills gained one the same day.)
+
 Role: devtool
 Domain: dev_tools
 """
@@ -110,6 +134,22 @@ VER_COL_WIDTH = 5     # version field ("1.0  ")
 TEXT_COL = NAME_COL_WIDTH + VER_COL_WIDTH   # fires-when text starts at col 34
 WRAP_WIDTH = 79
 FALLBACK_TRUNC = 60   # chars of description used when fires_when is absent
+
+# Anthropic's documented limits for a skill's header (L-417), read on
+# 2026-10-05 from two pages: the Skills overview, section "Skill
+# structure", and the authoring best practices, sections "YAML
+# frontmatter requirements" and "Token budgets".
+#   https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview
+#   https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
+# The first four are rules, so breaking one is a CONSISTENCY PROBLEM and
+# --check exits 1. The body length is guidance ("Keep SKILL.md body under
+# 500 lines for optimal performance"), so it is a warning.
+NAME_MAX_CHARS = 64
+NAME_CHARS_RE = re.compile(r'[a-z0-9-]+')     # lowercase letters, numbers, hyphens
+NAME_RESERVED_WORDS = ('anthropic', 'claude')
+DESCRIPTION_MAX_CHARS = 1024
+XML_TAG_RE = re.compile(r'<[A-Za-z/][^>]*>')  # neither field may hold an XML tag
+BODY_GUIDELINE_LINES = 500
 
 
 def parse_frontmatter(lines):
@@ -240,6 +280,126 @@ def first_sentence(text, limit=FALLBACK_TRUNC):
     return s
 
 
+def description_value(lines, body_start, loose):
+    """The description as the Settings uploader reads it: the YAML value.
+
+    The loose reader keeps a quoted value's quote marks, which would count
+    two characters too many against the limit (provenance-discipline and
+    earth-system-pipeline are quoted since L-407). PyYAML gives the value
+    itself where it is installed; otherwise one pair of outer quotes is
+    removed, and a double-quoted value's escaped quotes and backslashes
+    are read as single characters, which covers how these headers quote.
+    """
+    try:
+        import yaml
+        data = yaml.safe_load('\n'.join(lines[1:body_start - 1]))
+        value = data.get('description') if isinstance(data, dict) else None
+        if isinstance(value, str):
+            return value.strip()
+    except Exception:
+        pass
+    raw = loose.get('description', '').strip()
+    if len(raw) >= 2 and raw[0] == raw[-1] == '"':
+        return raw[1:-1].replace('\\"', '"').replace('\\\\', '\\')
+    if len(raw) >= 2 and raw[0] == raw[-1] == "'":
+        return raw[1:-1].replace("''", "'")
+    return raw
+
+
+def skill_headings(lines, start):
+    """(level, text) of every ## and ### heading from `start` on, skipping
+    anything inside a fenced code block, where a '## ' line is an example
+    and not a heading."""
+    found, fence = [], False
+    for line in lines[start:]:
+        if line.lstrip().startswith('```'):
+            fence = not fence
+            continue
+        if fence:
+            continue
+        m = re.match(r'^(##|###) (.+?)\s*$', line)
+        if m:
+            found.append((len(m.group(1)), m.group(2)))
+    return found
+
+
+def check_contents(lines, body_start, label, body_lines, problems):
+    """A long skill opens with a contents list, and the list is true (L-418).
+
+    A plain read of a long file shows its start and end and leaves out its
+    middle, so the start is the one part every session sees. The contents
+    list puts every section's name there. It is a copy of the headings,
+    and a copy drifts, so this compares the two item by item: a skill over
+    the 500-line guideline with no list, or any list that disagrees with
+    the headings, is a CONSISTENCY PROBLEM. The list is the '## Contents'
+    section: one '- ' line per ## heading and '  - ' per ### heading,
+    worded exactly as the heading, in the same order.
+    """
+    heads = skill_headings(lines, body_start)
+    has = (2, 'Contents') in heads
+    if not has:
+        if body_lines > BODY_GUIDELINE_LINES:
+            problems.append(f"{label}: {body_lines} lines and no '## Contents' "
+                            f"list; a skill over {BODY_GUIDELINE_LINES} lines "
+                            f"opens with one (L-418)")
+        return
+    listed, inside, fence = [], False, False
+    for line in lines[body_start:]:
+        if line.lstrip().startswith('```'):
+            fence = not fence
+        if fence:
+            continue
+        if line.rstrip() == '## Contents':
+            inside = True
+            continue
+        if inside and re.match(r'^##+ ', line):
+            break
+        if inside:
+            m = re.match(r'^(  )?- (.+?)\s*$', line)
+            if m:
+                listed.append((3 if m.group(1) else 2, m.group(2)))
+    actual = [h for h in heads if h != (2, 'Contents')]
+    if listed == actual:
+        return
+    for n, (a, b) in enumerate(zip(listed, actual), 1):
+        if a != b:
+            problems.append(f"{label}: contents item {n} reads {a[1]!r}; the "
+                            f"heading there is {b[1]!r}")
+            return
+    problems.append(f"{label}: the contents list has {len(listed)} items and "
+                    f"the file {len(actual)} headings")
+
+
+def check_install_limits(name, desc, label, body_lines, problems, warnings):
+    """Anthropic's documented header limits (L-417), checked here so that a
+    skill which breaks one fails the maintenance run before it is pushed or
+    reinstalled, instead of being refused by Settings afterwards. The
+    limits and where they were read are the constants above.
+    """
+    if len(name) > NAME_MAX_CHARS:
+        problems.append(f"{label}: name is {len(name)} characters; Anthropic's "
+                        f"limit is {NAME_MAX_CHARS}")
+    if not NAME_CHARS_RE.fullmatch(name):
+        problems.append(f"{label}: name '{name}' may hold only lowercase "
+                        f"letters, numbers and hyphens")
+    for word in NAME_RESERVED_WORDS:
+        if word in name:
+            problems.append(f"{label}: name contains '{word}', a word "
+                            f"Anthropic reserves")
+    if len(desc) > DESCRIPTION_MAX_CHARS:
+        problems.append(f"{label}: description is {len(desc)} characters; "
+                        f"Anthropic's limit is {DESCRIPTION_MAX_CHARS}")
+    for field, value in (('name', name), ('description', desc)):
+        tag = XML_TAG_RE.search(value)
+        if tag:
+            problems.append(f"{label}: {field} holds an XML tag, "
+                            f"{tag.group(0)!r}, which Anthropic disallows")
+    if body_lines > BODY_GUIDELINE_LINES:
+        warnings.append(f"{label}: SKILL.md body is {body_lines} lines; "
+                        f"Anthropic's guideline is under "
+                        f"{BODY_GUIDELINE_LINES}")
+
+
 def parse_skill(skill_dir):
     """Parse one skills/<name>/SKILL.md.
     Returns (record_dict_or_None, [problems], [warnings])."""
@@ -263,6 +423,14 @@ def parse_skill(skill_dir):
     elif name != skill_dir.name:
         problems.append(f"{skill_dir.name}: frontmatter name '{name}' "
                         f"disagrees with folder name")
+
+    # L-417: Anthropic's documented limits on the header, and the body's
+    # length against its guideline. A file ending in a newline splits to
+    # one empty last item, which is not a line.
+    body_lines = len(lines) - body_start - (1 if text.endswith('\n') else 0)
+    check_install_limits(name, description_value(lines, body_start, fm),
+                         skill_dir.name, body_lines, problems, warnings)
+    check_contents(lines, body_start, skill_dir.name, body_lines, problems)
 
     version = None
     for line in lines[body_start:]:

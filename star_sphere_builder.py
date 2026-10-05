@@ -17,6 +17,11 @@ No network access required -- reads only local cache files.
 # Renderer added: April 13, 2026 with Anthropic's Claude Opus 4.6
 # Part of Paloma's Orrery celestial sphere feature
 
+Module updated: October 5, 2026 with Anthropic's Claude Opus 5.5 (L-369:
+the obliquity is read from constants_new.EARTH_OBLIQUITY_J2000_DEG, the
+frame's defining angle, where it was typed as a shorter copy. The
+saved star file does not need rebuilding.)
+
 Role: rendering
 Domain: stars
 """
@@ -42,8 +47,12 @@ HIP_VOT_CANDIDATES = [
 # SIMBAD properties cache -- maps HIP IDs to star names/designations
 PROPERTIES_PKL = 'star_data/star_properties_magnitude.pkl'
 
-# Earth's axial tilt (obliquity of the ecliptic), J2000
-OBLIQUITY_DEG = 23.4393
+# The angle between the celestial equator and the ecliptic of J2000, the
+# frame every star and grid circle here is drawn in. It was typed here,
+# a shadow copy of the store's row (L-369, 2026-10-05). The row is the
+# frame's defining angle, not Earth's tilt on any date; the two differ
+# by far less than anything drawn here can show.
+from constants_new import EARTH_OBLIQUITY_J2000_DEG
 
 # Zodiac sign boundaries along the ecliptic, in ecliptic longitude (degrees)
 ZODIAC_SIGNS = [
@@ -89,7 +98,7 @@ def equatorial_to_ecliptic_unit_vector(ra_deg, dec_deg):
     """
     ra_rad = np.radians(ra_deg)
     dec_rad = np.radians(dec_deg)
-    eps = np.radians(OBLIQUITY_DEG)
+    eps = np.radians(EARTH_OBLIQUITY_J2000_DEG)
 
     # Equatorial unit vector
     eq_x = np.cos(dec_rad) * np.cos(ra_rad)
@@ -132,7 +141,7 @@ def generate_great_circle_equator(n_points):
     Generate points along the celestial equator in ecliptic coordinates.
     The celestial equator is tilted by -obliquity relative to the ecliptic.
     """
-    eps = np.radians(OBLIQUITY_DEG)
+    eps = np.radians(EARTH_OBLIQUITY_J2000_DEG)
     angles = np.linspace(0, 2 * np.pi, n_points, endpoint=False)
     points = []
     for a in angles:
@@ -158,7 +167,7 @@ def generate_great_circle_prime_meridian(n_points):
 
     In equatorial coordinates this circle lies in the XZ plane (y=0).
     """
-    eps = np.radians(OBLIQUITY_DEG)
+    eps = np.radians(EARTH_OBLIQUITY_J2000_DEG)
     angles = np.linspace(0, 2 * np.pi, n_points, endpoint=False)
     points = []
     for a in angles:
@@ -320,7 +329,7 @@ def build_grid_data():
     grid['ecliptic_south_pole'] = [0.0, 0.0, -1.0]
 
     # Celestial poles (equatorial poles in ecliptic coordinates)
-    eps = np.radians(OBLIQUITY_DEG)
+    eps = np.radians(EARTH_OBLIQUITY_J2000_DEG)
     # North celestial pole: equatorial (0, 0, 1) -> ecliptic
     ncp_x = 0.0
     ncp_y = round(float(np.sin(eps)), 6)
@@ -363,7 +372,7 @@ def build_grid_data():
 
     # Equator tick markers (every 30 deg = every 2h of RA)
     # Tick diamonds along equator -- always visible when grid is on
-    eps = np.radians(OBLIQUITY_DEG)
+    eps = np.radians(EARTH_OBLIQUITY_J2000_DEG)
     equator_tick_markers = []
     for i in range(12):
         ra_deg = i * 30.0  # 0, 30, 60, ... 330 degrees
@@ -481,7 +490,7 @@ def build_grid_data():
     print(f"  PM ticks: {len(grid['pm_tick_markers'])}")
     print(f"  RA hour markers: {len(grid['ra_hour_markers'])}")
     print(f"  Dec degree markers: {len(grid['dec_degree_markers'])}")
-    print(f"  Obliquity: {OBLIQUITY_DEG}\u00b0")
+    print(f"  Obliquity: {EARTH_OBLIQUITY_J2000_DEG}\u00b0")
 
     return grid
 
@@ -632,7 +641,7 @@ def build_json(vot_path):
         'meta': {
             'vmag_limit': VMAG_LIMIT,
             'star_count': len(stars),
-            'obliquity_deg': OBLIQUITY_DEG,
+            'obliquity_deg': EARTH_OBLIQUITY_J2000_DEG,
             'coordinate_frame': 'ecliptic_J2000',
             'source': 'Hipparcos via VizieR VOT cache',
             'format': '[x, y, z, vmag, designation]',

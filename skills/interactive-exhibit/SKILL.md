@@ -6,7 +6,15 @@ fires_when: adding or changing an exhibit in interactive.html; any edit to the S
 
 # Interactive Exhibit
 
-Skill version: 1.10 | 2026-10-02, with Anthropic's Claude Opus 5.5, from
+Skill version: 1.11 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 72e3b558. v1.11 (L-418) changes no rule. A contents
+list now opens the skill, generated from its headings, and
+skills_index.py --check fails if the two disagree. Version history
+older than the two entries below moved to
+documentation/SKILL_HISTORIES.md. Both because a plain read of a
+long file shows its start and end and leaves out its middle, where
+the rules are (Tony, 2026-10-05).
+Earlier: 1.10 | 2026-10-02, with Anthropic's Claude Opus 5.5, from
 orrery @ 5e42b00b and gallery @ 0ffa4518. v1.10 (L-406) writes down
 Tony's rule for a feature's info link, which lived only on L-265: a
 NASA page where one is specific to the feature, otherwise English
@@ -32,82 +40,38 @@ chrome with four additions, with Tony's framing ruling -- where a body
 is now, plus 20% (L-363 step 3b). And step 4 gains the headless recipe:
 a room's real driver in CPython, the real page in jsdom with a stand-in
 Plotly, and the other rooms compared before and after (tools/headless/).
-Earlier: 1.8 | 2026-10-01, with Anthropic's Claude Opus 5.5, from
-orrery @ feb5e369 and gallery @ 43993b49. v1.8 (L-395) records that a
-body's name, Horizons id, description and NASA link on the website are
-copies written by tools/mirror_objects.py from the orrery's object
-list, and what the Solar System room's info panel shows.
-Earlier: 1.7 | 2026-10-01, with Anthropic's Claude Opus 5.5, from
-orrery @ 7a47269c and gallery @ c48f9a92. v1.7 (L-398, L-363, L-392)
-records what the Solar System room serves and how it prints a
-distance. A room that is not one body keeps its settings in the
-config's top-level "rooms" section, with the words a visitor sees for
-each drawer row. A computed distance prints by the larger of the drift
-and JPL's own accuracy, served on the object as "position_accuracy";
-a body with none says so in Tony's sentence. And the figures logic is
-the second file moved out of interactive.html under L-338.
-Earlier: 1.6 | 2026-09-28, with Anthropic's Claude Opus 5.5, from
-orrery @ 2a7d26b9 and gallery @ 52da593c. v1.6 (L-345) adds three rules
-under Provenance is part of the build, each what the L-345 gallery patch
-built and Tony approved: where cutting a served AU to three figures
-would round a tie, the served digits print in full and the hover check
-names the case; the mirror writes a slot measured in another unit from
-its row's "in"; and a shell may serve a radius_note, a sentence under
-its radius line.
-Earlier: 1.5 | 2026-09-28, from orrery @ 714293a9 and gallery @
-2df02f3b. v1.5 (L-345) adds one rule under Provenance is part of the
-build: a hover prints a number in a unit from the served "in" and never
-converts a served number itself.
-Earlier: 1.4 | Cut from gallery @ d9d7a48f (interactive.html,
-gallery/arrival.js, gallery/feature_renderers.js, gallery/nav_cluster.js,
-tools/store_writer.py, tools/exhibit_store_editor.py,
-gallery_maintenance_run.py, documentation/smoke_arrival.js) and orrery @
-e1a79f67 (LEDGER_CONSOLIDATED.md L-334, L-336, L-338, L-339) |
-2026-09-19, with Anthropic's Claude Opus 5
-v1.4 (L-334) carries what a room OPENS on and who may write the file it
-is read from. Five rules: the arrival block is served, not coded; every
-trace belonging to a served shell carries that shell's key, and one that
-loses it is DRAWN rather than hidden; only two tools write
-data/objects_config.json, and each has an allow list rather than a
-refusal list; one check must read the file the browser actually fetches;
-and logic that needs no browser lives in its own file, which is Tony's
-ruling of 2026-09-18. Built through three pushes on 2026-09-18/19,
-Mode 5 on Tony's phone between each.
-v1.3 (L-332) carries the phone chrome as six rounds on Tony's phone left
-it on 2026-09-15/16 (L-316 rounds 3 and 4, L-318 rounds 3 to 6). The
-arrow cross's corner is set by one CSS rule and the method that moves it
-says nothing about the corner; a drawer row has a finger-sized selection
-target and GO on an unticked shell ticks it, amending L-267's G2 in that
-one case; a line break inside a sentence is soft and the phone rejoins
-it; on a portrait phone the text box has no arrow and sits mid-view; and
-a phone tap reaches a shell's marker rather than its dots, through a
-second Plotly rule read from v2.35.2. Step 4 gains the hover budget
-suite. One new rule: hover text is written for the visitor -- Tony's
-standing rule of 2026-09-16, the Register Rule pointed at what a visitor
-reads (L-331). Version 1.2 described the chrome as rounds 1 and 2 left
-it, which was five rounds stale when this was cut.
-Earlier: v1.2 (L-316, L-318) records what the chrome gained after Tony's phone:
-the nav cluster's four arrow buttons and their portrait placement, the
-drawer label, and two Plotly rules the build found by reading v2.35.2's
-source rather than recalling it -- a scene relayout carries the live
-camera, and a hover box keeps its pointer only when it fits to one side.
-Earlier: v1.1 (L-291) corrects what Earth step 3 made untrue and adds what its
-close taught about carding. The page picks a room from an `EXHIBITS`
-table now, not an `EXHIBIT === "<key>"` branch, and four places still
-said branch: the anatomy's switch and class rows, step 3, and step
-7's picker. Step 3 gains the driver rule the build found by running
-the resolver; step 7 gains the check for an existing card and the
-order Studio forces; the rename paragraph points at L-309, which
-deferred it; one field note.
-Earlier: v1.0 cut from gallery @ fc8d9fb3 (interactive.html,
-feature_renderers.js, data/objects_config.json, gallery_maintenance_run.py,
-tools/gallery_studio.py) and orrery @ a57e86b8 (LEDGER_CONSOLIDATED.md
-L-260, L-267, L-278, L-282, L-288, L-289) | 2026-09-06
-Written with Anthropic's Claude Fable 5.1 before the Earth exhibit, on
-Tony's question "do we have a skill that defines how we build
-interactives?" The answer was no; the Sun's pattern lived only as code
-and as ledger history. Everything below was read from those files at
-the pinned SHAs, not recalled.
+Older entries are in documentation/SKILL_HISTORIES.md, moved there
+on 2026-10-05 (L-418).
+
+## Contents
+
+Generated from this file's headings. skills_index.py --check fails
+if this list and the headings disagree (L-418).
+
+- What an exhibit is, and what this skill is not
+- The anatomy of an exhibit (the Sun, read at fc8d9fb3; two rows corrected at 1.1)
+- Rules
+  - Design before code [QUALITY]
+  - One chrome, many rooms [QUALITY]
+  - Provenance is part of the build [CRITICAL]
+  - What a room opens on is SERVED, not coded [QUALITY]
+  - The Solar System room's drawer: bodies, not shells [QUALITY]
+  - A shell trace carries its key [CRITICAL]
+  - Only two tools write the served config [QUALITY]
+  - One check reads the file the browser fetches [CRITICAL]
+  - Logic that needs no browser lives in its own file [QUALITY]
+  - Never mutate a plot from inside a Plotly event handler [CRITICAL]
+  - Scene text is scenery [QUALITY]
+  - The frame zoom and the grid agree [QUALITY]
+  - Aspect is read, not assumed [QUALITY]
+  - Hover text gives km AND AU [QUALITY]
+  - Phone first, and the conditions are stated [QUALITY]
+  - The touch path is not the mouse path [QUALITY]
+  - Hover text is written for the visitor [QUALITY]
+  - A feature's info link: NASA if specific, else Wikipedia [QUALITY]
+- Adding an exhibit: the order
+- Field notes
+- Install and verify
 
 ## What an exhibit is, and what this skill is not
 

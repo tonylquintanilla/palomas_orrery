@@ -6,7 +6,20 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Skill version: 2.25 | Cut from palomas_orrery @ 94ff6c68 (v2.25),
+Skill version: 2.26 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 72e3b558. v2.26 (L-418) changes no rule. A contents
+list now opens the skill, generated from its headings, and
+skills_index.py --check fails if the two disagree. Version history
+older than the two entries below moved to
+documentation/SKILL_HISTORIES.md. Both because a plain read of a
+long file shows its start and end and leaves out its middle, where
+the rules are (Tony, 2026-10-05).
+The sections are also put in order of what must fire: the critical
+rules first, then the quality rules, then those with no tier, then the
+two long procedures, Report to the Figures You Have and the
+Review-Repair Protocol for Cross-Checked Annotations, and the field
+notes last. Every section's text is unchanged.
+Earlier: 2.25 | Cut from palomas_orrery @ 94ff6c68 (v2.25),
 @ feb5e369 (v2.24),
 earlier @ 7a47269c (v2.23), @ 714293a9 (v2.22), @ 95b394f8 (v2.21), @ 0e3d05fd (v2.20), @ de4eadc5 (v2.19), @ ac25d4f4 (v2.18), @ 1f6e55a9 (v2.17), @ a7014abb (v2.16), @ 21065c5d (v2.15), @ dfa779bd (v2.14),
 @ ebdc55cc (v2.13), @ bfc0505e (v2.12),
@@ -28,451 +41,60 @@ as the Apophis naming discrepancy should be fixed and reported." It
 says what counts as simple, that the fix rides the same patch and is
 named, what comes to Tony instead, how a number in a served description
 is sourced or removed, and how the rule sits beside The Braid.
-v2.23 settles L-398 with one new section, A Computed Position Prints
-What Its Errors Earn. A distance worked out from served elements prints
-to the Report test's place for the LARGER of two errors: how far our
-arithmetic may have drifted from Horizons, and how well JPL knows where
-the body is at all. Tony's ruling, 2026-10-01: "use whichever is
-larger". Drift alone had printed Pluto to ten figures. The section's
-second half is the case the source's accuracy forced: an ACCURACY
-STATED ONLY IN WORDS is stored as the place those words report to --
-the place the Report test gives for every value the words can mean,
-the coarser where they could mean two -- and never as a number the
-source does not print. JPL's 2014 report gives three groups, so 1 km,
-100 km and 10,000 km. The last is one place coarser than the session
-plan of 2026-10-01 said; Tony confirmed it as recommended the same day.
-v2.22 settles L-345: A VALUE IN ANOTHER UNIT IS COMPUTED, NEVER STORED,
-AND ITS COUNT COMES FROM ITS SOURCE ROW ALONE. Each quantity is one row,
-in the unit its best source gives it, with that source. Its value in
-any other unit is worked out from the row's full digits and rounded
-once, by constants_rows.conversions(), and the export serves it as
-"in" (schema 6); no second row states it. The count: the source row's
-uncertainty -- stated, or half a unit of its last declared place, or
-half a unit of the last place of an exact row's print count -- scaled
-by the exact factor, then the Report test's place. It replaces 2.21's
-"for now" sentence, so a single measured value scaled by an exact row
-is no longer left under fewest figures. It cuts both ways: the
-chromosphere keeps 1.003 solar radii, and the bow shock's 13.5 Earth
-radii is 86,000 km (two figures), not 86,200. Rule 8's checker
-paragraph is widened to match. Tony's ruling, 2026-09-28, on Claude
-Fable 5.1's recommendation; handle L-345.
-v2.21 adds one paragraph to Rule 3: a value good to a decimal place,
-scaled by an exact row, keeps its place and not its figure count. A
-sum good to thousands of kilometres divided by the nominal solar
-radius is good to thousandths of a solar radius; counted by fewest
-figures it would keep three, and three figures of 1.003 is a factor
-of seven coarser than three figures of 698,000, because the leading
-digit went from 6 to 1. The reference page names the case as its
-unit-conversion exception (8 inches converts to 20. cm, not 20 cm).
-It reaches sums and differences only; a single measured value scaled
-by an exact row stays under fewest figures for now.
-Rule 1 gains the seventh form that carries it; the ceiling's
-implied-uncertainty bullet says a converted place is not that; the
-Report bullet cross-links; Rule 8 says how the checker finds the
-place and prints it. The worked case is the top of the chromosphere,
-which prints 1.003 and not 1.00: at 1.00 the export, which rounds to
-the count, would have drawn it on the photosphere and erased the
-2,000 km hairline promoted on 2026-08-16. Before this the two forms
-of the same expression counted differently, 1.00 sum-first and 1.003
-divide-first, and the unit check forced the coarser. Tony's ruling,
-2026-09-28, on Claude Fable 5.1's recommendation, checked against
-the reference page the same day. Handle L-322.
-v2.20 writes down where a trailing ".0" comes from, in Rule 2. It is
-Python, by three routes, and none of them is a statement about
-significant figures: a decimal point is typed to make a number a
-float, Python's division always returns a float, and a float printed
-without a format always shows ".0". So a row's figure count is never
-read from its literal, its printed form or its exported form, which is
-why the count and an exact row's print count are both fields. Tony
-asked for the claim to be checked and added on 2026-09-27, when the
-Stage D print counts were settled from what each row says it was
-chosen with. Checked by running Python 3 and Node. RULE 7'S EXACT ROW
-is brought into line with the code that builds it, orrery patch D15:
-the print count is read only directly after "exact --"; a declared
-construction prints the digits of the value its rule gives, so the
-outer belt's midpoint of 4 and 5 prints 4.5; the checker refuses a
-count with more digits than the number has, one too small to write it
-in full, and anything but 1 on a zero; and exact_rows_report.py
---check fails the maintenance run while any printed exact row is not
-printed by its count. The last two are Claude Opus 5.5's additions in
-building D15, approved by Tony the same day. Handle L-322.
-v2.19 replaces one worked example that had gone stale. Rule 7's exact
-row said Earth's obliquity "prints 23.439291 degrees". Since the Stage
-D manifest's revision 3 (2026-09-23) no display prints the obliquity:
-the axis hovers print the tilt of date, worked out from the pole
-Horizons serves, and the obliquity row is used only as the angle that
-defines the ecliptic frame. The rule itself stands; the example now is
-the gallery's magnetopause hover, which prints the exact row
-EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG today with a width chosen at the call
-site. Found carried in two handoffs; checked against the skill, the
-manifest and the code on 2026-09-25, where every consumer of the
-obliquity was also confirmed to use the right value for the right job.
-Handle L-322.
-v2.18 settles where a drawing number lives and how an exact number
-prints, before L-322 Stage D builds on both. THE SCOPE BOUNDARY in One
-Value, One Home becomes THREE KINDS OF DRAWING NUMBER, Tony's ruling
-of 2026-09-22: a physical value (a size, an edge, a cut angle) lives
-in constants_new.py, sourced or declared; an eyeballed value does not
-promote and is cleaned up as the braid reaches it; a rendering setting
-(point count, opacity, colour, marker, font) stays in the drawing
-code. The test is whether changing the number moves WHERE something
-is drawn. This removes a contradiction: A Drawing Approximation Does
-Not Promote said opacity and point count stay in the store, while One
-Value, One Home kept them in the drawing code. RULE 7 GAINS THE EXACT
-ROW: an exact quantity is stored in the form its definition prints,
-every exact row a display prints states a print count as a field, and
-the page prints by that count instead of by a width chosen at each
-call site. RULE 1 gains the sixth form that carries it. RULE 3 GAINS
-THE CONVERSION ROW: a unit conversion inside an expression is an
-exact row with a compound-unit token, never a bare 3600, because the
-unit check converts units by itself. WHEN THE SOURCE GIVES A RANGE
-gains its default: the midpoint, unless the row states a reason for
-an end. Worked cases: Earth's obliquity, which Horizons defines as
-84381.448 arcseconds, and Earth's sidereal rotation period, whose
-bare-divisor draft failed the unit check while the figures check
-passed it. From Claude Fable 5.1's review of the Stage D manifest and
-Claude Opus 5.5's answers to it, 2026-09-23; every form was run
-through both checkers on a throwaway copy at ac25d4f4. Handle L-322.
-v2.17 closes the gap a display decision opened. Asked whether Earth's
-dipole tilt should print 9.4 or 9.4105, a reviewer offered a
-readability call; Tony asked what the basis was -- "the basis should
-be in the skill not arbitrary" -- and there was none: Rule 7
-permitted a shorter display and gave no method. RULE 7 IS REPLACED
-WHOLE: a display prints the declared count and never chooses fewer;
-a number that reads as too many figures is a finding about the ROW,
-fixed under Rule 3, never by the page. RULE 2 GAINS THE DECLARED
-CONSTRUCTION: a drawing value that is a stated rule over measured
-rows is exact as a construction, the checker accepts exact on it
-only when its status begins declared, and the export serves it
-unrounded so every consumer draws the same value. RULE 3 GAINS two
-rules for a derived quantity: a rate is written as the derivative,
-never as a difference of two evaluations, because the difference
-form takes its count from the largest inputs rather than from the
-quantities the rate rests on; and an angle computed from a pure
-number multiplies by the exact row DEG_PER_RAD instead of calling
-degrees, because the unit check sees a bare number and refuses the
-call. SHOW OR CAP gains the snapshot of a moving quantity: where the
-source publishes the rate, the store holds its inputs and the page
-shows the epoch and the rate. RULE 6 says a whole the source defines
-from parts it prints is a derived row over rows for the parts, never
-a typed result with its working in a comment. WHEN THE SOURCE GIVES A
-RANGE says a pick typed as a literal with its range in prose does not
-meet it. The worked cases: Earth's dipole tilt, which IGRF-13 does
-not print and which the store held at 9.6, a figure in no epoch of
-the cited source; its rate; and the outer belt's peak, a midpoint of
-the L = 4 to 5 band typed as a literal with the band in prose. Five
-documents by Claude Fable 5.1 and Claude Opus 5 on 2026-09-21, each
-tested against the checkers before the next was written; GPT 6
-reviewed one round. Handle L-322.
-v2.16 writes down how a stated uncertainty decides a figure count,
-before L-322 Stage C2 builds the check for it. Rule 3 already said the
-uncertainty decides and counting is the fallback, and the procedure it
-was adopted from says to propagate; neither said how, and the checker
-counts only. On Tony's instruction of 2026-09-20, "See the Skill on
-significant digits", the magnetopause standoff was worked by the rule:
-Shue's five coefficient uncertainties propagate to +/- 0.13 Earth
-radii, which the reference page's single-number rule reports to
-tenths, 10.3 -- the stored 10.25 was a figure too many. RULE 3 GAINS
-THE CEILING, in five parts: which uncertainty is propagated (the
-inputs', not a model's scatter about its data); show or cap for an
-approximate relation; when propagation sets the ceiling and when
-counting does; how to propagate (central difference, root-sum-square,
-from full digits, independence stated with its bound, an implied
-half-unit for a primary that states none); and how to report, with
-the page's words kept apart from the log-scale measure this project
-adds. RULE 1 gains the field form of an uncertainty, so a checker
-reads a field and never prose. RULE 8 gains the ceiling check,
-specified here and built at C2. Claude Fable 5.1 reviewed the text
-twice before it was cut; its second look found that an earlier form
-of the ceiling rule would have failed fifteen finished C1 rows, and
-the rule now fails a row only for claiming more than its uncertainty
-supports. Handle L-322.
-v2.15 repairs the figure rules against the source they cite, after
-Claude Fable 5.1's review of L-322 Stage C1 found the walk deciding a
-rule inside one constant's comment. RULE 2 GAINS THE CONDITION IT HAD
-DROPPED: a trailing zero after a decimal point is significant when it
-falls within the source's reporting resolution, which is what the cited
-page says and what makes 1500 m two figures rather than four. Without
-it the rule was simply wrong, and the walk's invented alternative --
-that a padded zero never counts -- was wrong the other way. RULE 3
-GAINS a sentence it never had: a row may declare FEWER figures than its
-inputs support when the relation is itself approximate, with the reason
-in words on the row. Earth's Hill sphere is the case; it declared seven
-and told the reader to report three. THE ASTM REFERENCE IS DEMOTED TO
-AN ASIDE on Tony's ruling of 2026-09-19: E29 costs $86, so a rule this
-project works from could not be opened by anybody in the loop, which
-fails our own Access Standard; and its scope is conformance with
-specification limits, which the orrery does not have. Two stale
-examples are corrected. Handle L-342.
-v2.14 writes down L-322 ruling (b), the read. It has been a ruling
-since 2026-09-11 and lived only in the ledger, and a convention that is
-not in the skill does not travel -- the protocol has recorded that
-lesson three times. The Status Line gains The Read Field: a
-"# Read: <page or table>, <date>, <reader>" line on a measured row
-whose value is DRAWN in a published exhibit, or that feeds one. WHO
-DOES THE READING IS DECIDED BY ACCESS, on Tony's ruling of 2026-09-19,
-so the builder reads what it can open and names itself, a row only Tony
-can open goes to him in a FILE and never as a list in chat, and a
-source neither can open fails The Access Standard. A model's read
-counts and the line says so; a read reconstructed from training is
-worse than no read, because it stops the next reader from looking. The
-Unit Field now points at constants_tokens.py, which owns the token
-table, the RETIRED_TOKENS list and the "named number" marker, and names
-"# Read:" among the fields a row's single slice visit writes. Rule 8's
-enumeration names BOTH routes to a derived row -- its arithmetic and
-its "# Derived:" line -- because a typed number carrying a
-"# Derived:" note is a literal whose arithmetic lives in prose, and the
-checker must still name it. The worksheet schema gains the "Read by"
-column promised on 2026-09-11 and missed by 2.13. Handle L-322.
-v2.13 settles L-322 (d), significant figures, on Tony's rulings of
-2026-09-16. The Figure Count Is a Declared Field [QUALITY] joins
-Report to the Figures You Have: a "# Figures:" line beside every
-value, counted by the standard rules (fewest figures for products
-and quotients, coarsest decimal place for sums and differences,
-exact and declared numbers never limit a result), computed from the
-primary inputs at full precision and rounded ONCE at the reporting
-step, half to even. A Derived Row Stores the Figure Its Sources
-Support [CRITICAL] is WITHDRAWN on Tony's word of the same day: a
-rounded literal at rest is a rounded intermediate for every row that
-chains from it, which is the error the procedure exists to prevent.
-The store holds the derivation; the export rounds. The Status Line
-gains The Unit Field, carrying L-322 ruling 1 into the skill, where
-it had not travelled. Handles L-322, L-325, L-335.
-v2.12 adds five rules from the L-321 cross-check round and one
-carried from L-325's Gap. Worksheet Types gains the row-job
-vocabulary the round actually ran -- [CITATION] and [DISCOVERY] --
-with the schema that carries it, and two rules that depend on it: A
-Negative Verdict Shows Its Search [CRITICAL], because UNSOURCED is
-the one token pointing at no document anybody can open, and Route
-the Effort Tier by Job Type [QUALITY], Tony's ruling of 2026-09-13.
-The Access Standard gains a source names what was OPENED, after a
-checker returned the right URLs under the wrong author names. Step 1
-of the Review-Repair Protocol gains A Link Is an Object, Not Text
-[QUALITY] and the three things the prompt must require. The roster
-records that Gemini's fetching is tier-dependent, so L-276's
-constraint is about the interface and the tier rather than the
-vendor, and that a checker inside the Project is not independent for
-a rerun. A Derived Row Stores the Figure Its Sources Support
-[CRITICAL] joins The Store Carries the Verified Figure, closing the
-Gap L-325 parked for this bump. Handles L-321, L-325, L-314.
-v2.11 adds A Drawing Approximation Does Not Promote [CRITICAL],
-directly after Measured Is the Goal, Declared Is the Fallback,
-whose direction of travel it bounds. That section says a declared
-value is promoted to a measured one as soon as it can be; this one
-says a number that was never a value -- a shape typed into a
-renderer because the render looked right -- has nothing to promote
-and must not be moved into the store. Founding case: Earth's
-magnetosphere, where a half ellipsoid with typed axes, a conic
-eccentricity typed at the call site and a sweep cap the code itself
-labels a MODE-5 KNOB were all candidates for promotion into
-constants_new.py, and Tony refused it -- "we are not promoting
-Mode 5 approximations." Handle L-306.
-v2.10 adds The Store Carries the Verified Figure [CRITICAL] under
-Report to the Figures You Have, which governed REPORTING and left
-the stored value uncovered. Founding case: RADIATIVE_ZONE_AU held
-0.7 beside its own comment saying it rounded 0.713 -- the store
-recording that it was rounding, and rounding anyway, in a value
-drawn on a public page. The rule is narrowed in the same breath
-against the two cases it would damage: a pick from a range stays
-a declared choice, and a visibility stylization promotes when the
-physical value becomes drawable rather than for want of digits.
-Tony's ruling, 2026-08-29, and the reason it is a SKILL rule and
-not a decision: it resolves the same way next month, for a
-different constant, in a different file. Handle L-258.
-v2.9 moves the gate UPSTREAM, from serving to export, on Tony's
-ruling of 2026-08-28. 2.8 put it where the harm lands; 2.9 puts it
-where a check can still run. `provenance_scanner.py` exists only in
-the orrery repo, and `gallery_cache_builder.py` lives in the gallery
-repo and scores nothing, so a gate at serving sits downstream of the
-last checker in existence and across a repository boundary. The WHY
-is unchanged and the WHERE is separated from it explicitly, so the
-gate cannot drift back on the reasoning that publication is where a
-visitor is harmed. One section rewritten, nothing else touched.
-v2.8 adds nine sections and revises four passages, from Tony's
-rulings of 2026-08-27 and the two independent Mode 7 reviews of the
-same date. The Gate Binds at SERVING [CRITICAL] moves the binding
-point from drawing to publication. The Access Standard [CRITICAL]
-makes reachability a precondition of a citation -- no paywalls.
-The Status Line [CRITICAL] has each value declare its own provenance
-state so the scanner reads instead of inferring. Measured Is the
-Goal, Declared Is the Fallback [CRITICAL] carries the range rule.
-The Exhibit Requirement [CRITICAL] makes a verdict without a
-quotation UNVERIFIED. A Cross-Check Retires With Its Value or Its
-Citation [CRITICAL], Observations Are Sourced Facts [CRITICAL],
-Uncited Goes to the Ledger [QUALITY], and Examples Go Stale Like
-Values [QUALITY] complete the set. Revised: the exhibit's reader,
-Gemini's book access (demoted to lead generation), the
-two-annotation criterion for V_CROSS_CHECKED (retired -- it measures
-concurrence), and one stale worked example. Handle L-256.
-v2.7 adds three sections from Tony's rulings of 2026-08-26, each of
-them a gap this skill had rather than a refinement of something it
-said. One Value, One Home [CRITICAL] states positively what No Shadow
-Constants only prohibited, and extends it to prose and to dead code.
-Report to the Figures You Have [QUALITY] had no home in any skill.
-A Breadcrumb Must Not Cite [CRITICAL] records why an honest
-"pending sourcing" note cannot carry its own references (L-253).
-Founding case for the first two: Earth's four interior hover strings
-typed their boundary figures for months beside a radius_fraction that
-disagreed with them by up to 297 km, and nothing here covered it.
-v2.6 adds The Two-Dispatch Rule [CRITICAL] under Model Roles in the
-Competitive Pattern -- L-217, after a Mode 7 review prompt asked two
-model legs to answer Part A before reading Part B, which neither could
-do and neither answer could be distinguished on.
-Source: project_instructions_v3_29.md Part 3 (Provenance Audit, Fetched vs
-Recalled) + food insecurity build handoff + scanner source at HEAD. v1.1
-adds the report domain-classification mechanics, the Review-Repair
-Protocol (promoted from documentation/provenance_audit_handoff_v4.md),
-and field notes from the F1 provenance-cleanup groundwork session (July
-2026): the by-file/by-file-type report breakdown, a self-referential
-scanning quirk, and a stale-audit-doc near-miss. v1.2 updates the
-role-driven-inclusion bullet for L-163 Phase 3: a coverage gap is
-resolved by tagging the module's own docstring, since ROLE_MAP is now a
-regenerated mirror rather than a hand-maintained dict. MODULE_DOMAIN_MAP
-and classify_domain() are unaffected and remain hand-maintained. v1.3
-adds No Shadow Constants [CRITICAL]: local copies of constants_new.py
-values must be deleted and replaced with proper imports -- a frozen copy
-bypasses the citation chain and drifts silently, same failure class as
-citing over recalled data. v1.4 rewrites Review-Repair Protocol step 2:
-cross-checking is the competitive pattern (same worksheet, independent
-models, Tony compares), not one model reviewing another's output.
-v1.5 adds Model Roles (tested roles for Claude, GPT, Gemini, Fable in
-the competitive pattern -- emerged from the Mars and constants_new.py
-cross-check sessions, August 2026), two worksheet types (value
-verification vs citation verification), the Cross-checked annotation
-format, and the Batch Worksheet Workflow. v1.6 adds two rounds to that
-workflow (blind source lookup and the Fable consistency audit), the
-model-credit convention, the retirement of the `# Verified:` stamp
-format, Geometry Constants as First-Class Claims, and three field notes
--- all earned in the L-156 Phase 2 Batch 1 cross-check and the Fable
-shell-consistency audit, August 3-4, 2026. v1.8 adds Worksheet First,
-Annotation Second (an annotation naming a worksheet that does not exist
-is cite-to-clear in the annotation's own format) and the field note that
-an evidence artifact is filed as received -- both earned August 10, 2026,
-when a recovered worksheet proved an annotation true that the session had
-already talked itself into calling fabricated.
-v1.9 narrows The Goal State to the ACTIVE BUILD PATH gate Tony
-ratified 2026-08-05 (L-184), keeping global Tier-1 = 0 as the
-stated destination rather than the firing rule. The skill had
-carried the retired global gate for a week; caught by Fable's
-document-layer claim audit, finding F1, August 11, 2026.
+Older entries are in documentation/SKILL_HISTORIES.md, moved there
+on 2026-10-05 (L-418).
 
-v2.0 (August 12, 2026) replaced the annotation grammar: checker first,
-optional ` -- <source>` clause, and the retired source-first order now
-REFUSED as `legacy_source_first` rather than reconstructed. The old
-order was ambiguous by construction -- a source carrying its own
-publication year ate the check date, so the model name landed outside
-the checker identity and two annotations by two DIFFERENT models read
-as one checker written twice. All 134 lines were migrated. The
-store-binding check lives in skills_index.py, which asserts that every
-annotation example in every SKILL.md parses as the scanner reads it --
-placed there because it runs at the moment a skill changes, which is
-the moment the drift is introduced.
+## Contents
 
-v2.1 (August 13, 2026) extends Worksheet First, Annotation Second with
-two clauses about what the worksheet has to CONTAIN, and specifies the
-worksheet table schema and verdict vocabulary at the prompt so the
-evidence arrives usable. Earned August 12-13: two annotations in
-constants_new.py credited a worksheet for checks it explicitly did not
-perform, and one cited worksheet was prose a tool cannot read. Tony's
-ruling -- we do not have to accept and interpret incomplete or
-malformed answers -- is the second clause, and the session that
-produced the evidence can be reopened to finish the job.
+Generated from this file's headings. skills_index.py --check fails
+if this list and the headings disagree (L-418).
 
-v2.2 (August 13, 2026) defines DERIVED, which v2.1 listed in the
-verdict vocabulary without ever saying what it meant, and separates
-two things the send-back rule had run together. A row that is
-INCOMPLETE goes back to its originator. A row that is COMPLETE and
-disagrees with the code is a FINDING and comes to conversation,
-because the disagreement may be a convention mismatch rather than an
-error in either place. Earned August 13 on the Eris and Pluto Hill
-sphere rows, where checkers computing at semimajor axis disagreed
-with code computing at perihelion and nobody had done bad
-arithmetic. Tony's rulings: PARTIAL and APPROX return
-unconditionally, and an adjudication is recorded with its reason so
-the next run does not re-raise it.
-
-The resident protocol carries the two governing principles as CRITICAL
-gates: Fetched-vs-Recalled (a citation is a provenance claim that must be
-TRUE; source-then-cite, never cite-to-clear) and Show the Envelope of the
-Unknowable. This skill carries the working procedures and the scanner's
-mechanics. If this skill and the resident gates ever seem to disagree, the
-gates win -- flag it.
-
-
-v2.4 (August 17, 2026) carries three changes, all earned the same day.
-The annotation grammar now accepts a `.jsonl` or `.json` worksheet
-reference as well as `.md` (L-204). The `.md` condition did two jobs:
-it required the parenthetical to name a FILE rather than free prose,
-which is the anti-gaming half of L-186 and does not move, and it
-pinned the only worksheet format that existed in August 2026. The JSON
-return format (L-202) landed 2026-08-17, and a returned verdict could
-then be built, carried, filled, checked and routed -- and refused by
-that one condition when somebody wrote it back into the code. Found by
-an integration test, not by a reading. The Resolved Leg section is new
-(L-200): a record-only leg saying which returned verdict caused an
-edit. And The Visibility Convention is new (L-203), promoting a
-one-off ruling about the request builder into the general rule it was
-always an instance of.
-
-v2.5 (August 18, 2026) adds Extend a Boundary Before Adding a Path,
-the rule an external review proposed on 2026-08-18 and Tony adopted
-the same day. It lives here rather than in the resident protocol
-because it fires while a provenance feature is being designed, which
-is when this skill loads. L-207, the citation prompt, was the first
-item checked against it rather than assumed to pass.
-
-## Extend a Boundary Before Adding a Path [QUALITY]
-
-**Before building a new provenance feature, ask whether it can be
-expressed by extending a data boundary that already exists, rather
-than by adding another checking path.**
-
-The reason is a measurement rather than a preference. By August 2026
-the verification infrastructure had a larger state space than a person
-can hold in mind at once, and the project had more epistemic
-INFRASTRUCTURE than epistemic COVERAGE: Tier-1 findings stood at 289
-and were rising, because every improvement to the scanner's reach
-exposed claims that had been invisible rather than sound. Machinery
-that grows faster than the coverage it produces stops being read, and
-a check nobody reads is a check that cannot fail.
-
-Three shapes the extension usually takes, in the order to try them:
-
-- AN EMITTER over a structure the run already builds. L-207's citation
-  prompt reads the Table the checker assembles for its numerical
-  layers and writes a second artifact from it -- no second parse, no
-  new verdict class, no routing change.
-- AN ADAPTER converting a new input into the structure the existing
-  layers already read. The JSON worksheet reader (L-202) is the
-  precedent: it synthesizes the same Table the markdown parser
-  produces, so match, integrity, drift and verdict all ran unchanged
-  against a format that did not exist when they were written. The
-  alternative -- a second checker for JSON returns -- is the parallel
-  pipeline this project has a rule about.
-- A FIELD on a record that already travels. Cheaper than a new record,
-  and it arrives everywhere that record already goes.
-
-The rule does NOT forbid a new path. It requires that the question be
-asked out loud and the answer written down, because the failure mode
-is not one bad decision. It is a dozen locally reasonable ones, each
-adding a layer nobody would have approved as a whole.
-
-State the honest cost of the extension too. L-207 gives the checker a
-second artifact type, and two outputs are more surface than one. That
-was weighed and accepted; what it avoided was a second reader of the
-corpus.
-
-**And the test that comes after.** Once the machinery can answer the
-question it was built for, the default question stops being "what does
-the provenance system need next" and becomes "which outstanding claim
-can this now settle." Stated so it can fail: the next provenance
-feature should be one an actual RUN exposed the need for, not one a
-design conversation invented.
-
-(Proposed by an external review, 2026-08-18, and adopted by Tony the
-same day. Marked QUALITY rather than CRITICAL because no failure has
-yet shown it load-bearing -- it was adopted from a prediction, and the
-tiers move on evidence.)
+- The Visibility Convention [CRITICAL]
+- The Gate Binds at EXPORT [CRITICAL]
+- The Access Standard [CRITICAL]
+- Measured Is the Goal, Declared Is the Fallback [CRITICAL]
+  - When the source gives a range
+- A Drawing Approximation Does Not Promote [CRITICAL]
+- The Status Line [CRITICAL]
+  - The Unit Field
+  - The Read Field
+  - Geometry Constants Are First-Class Claims
+- One Value, One Home [CRITICAL]
+- Observations Are Sourced Facts, and They Migrate [CRITICAL]
+- No Shadow Constants [CRITICAL]
+  - A Breadcrumb Must Not Cite [CRITICAL]
+- Extend a Boundary Before Adding a Path [QUALITY]
+- Uncited Goes to the Ledger, Not the Bin [QUALITY]
+- A Computed Position Prints What Its Errors Earn [QUALITY]
+  - An Accuracy Stated in Words Is Stored as the Place It Reports To
+- A Simple Error a Check Finds Is Fixed and Reported [QUALITY]
+- Examples Go Stale Like Values [QUALITY]
+- The Goal State
+- Clearing a Flagged Claim (the only two moves)
+- Scanner Mechanics (not obvious from the output)
+- Report Domain Classification (Findings by File / File Type)
+- Fetched vs Recalled -- the working procedure
+- Composed vs Transcribed On-Layer Text
+- Report to the Figures You Have [QUALITY]
+  - The Figure Count Is a Declared Field [QUALITY]
+  - The Store Carries the Verified Figure [CRITICAL]
+  - A Derived Row Stores the Figure Its Sources Support -- WITHDRAWN
+- Review-Repair Protocol for Cross-Checked Annotations
+  - A Link Is an Object, Not Text [QUALITY]
+  - Three Things the Prompt Must Require [QUALITY]
+  - Model Roles in the Competitive Pattern
+  - The Two-Dispatch Rule [CRITICAL]
+  - Worksheet Types
+  - A Negative Verdict Shows Its Search [CRITICAL]
+  - Route the Effort Tier by Job Type [QUALITY]
+  - Quoting a Worksheet Is Transcription, Not Interpretation [CRITICAL]
+  - Cross-Checked Annotation Format [CRITICAL]
+  - The Exhibit Requirement [CRITICAL]
+  - A Cross-Check Retires With Its Value or Its Citation [CRITICAL]
+  - Retired: `# Verified: April 2026 via Gemini fact-check`
+  - Batch Worksheet Workflow
+  - Model Credit in Annotations [PRACTICE]
+- Field Notes
 
 ## The Visibility Convention [CRITICAL]
 
@@ -505,38 +127,6 @@ behaviour is to refuse.
 (Tony's ruling, 2026-08-17, settling an L-196 question as a convention
 rather than a one-off, because the same distinction governs every
 future case of the same shape.)
-
-## The Goal State
-
-**The push gate is Tier-1 = 0 ON THE ACTIVE BUILD PATH** -- the
-files the project is currently building. As of August 2026 that is
-the interactive gallery build path (Tony ratified 2026-08-05;
-recorded in L-184). The scope MOVES with the work: when
-Earth-science visualization work resumes, those files become the
-gated path in turn.
-
-**Global Tier-1 = 0 is the destination, not the current gate.** It
-was suspended, not retired. At 206 Tier-1 findings a global gate
-blocks every push forever, and a rule nobody can obey stops being
-read as a rule at all. The global number is approached by clearing
-paths as they go active -- which is why the gate is written
-active-path rather than pinned to one named path.
-
-Do not enforce the global form on a push outside the active path,
-and do not read a bare "Tier-1 = 0" anywhere in this project as
-the global form unless it says so. (Tony's ruling 2026-08-11, on
-Fable audit finding F1: this skill and the protocol's manifest row
-carried the global gate for a week after the ratification narrowed
-it, while Tony pushed five times in one evening against it. A gate
-that is routinely and correctly ignored is worse than a wrong
-number -- it teaches the reader to ignore gates.)
-
-A clean audit can rest on honest
-removals: "Tier-1 = 0" does not imply "every claim sourced" -- it can mean
-unsourceable claims were correctly stripped pending real sourcing. Record
-which. The scanner must stay maintainable with accepted false positives,
-not require regular manual intervention.
-
 
 ## The Gate Binds at EXPORT [CRITICAL]
 
@@ -609,17 +199,6 @@ holding 19 distinct values. Each measured field carries both a `source`
 string and an `orrery_constant` pointer, and nine of nine served numbers
 checked matched the store constant they name. That is a closed slice.)
 
-## Clearing a Flagged Claim (the only two moves)
-
-1. Cite to where the data ACTUALLY came from, or
-2. REMOVE the claim and NOTE the gap.
-
-Never cite-to-clear. A # Source: over recalled data passes the check while
-asserting a provenance that does not exist -- wrong-but-cited is worse than
-uncited, because the citation suppresses the suspicion that would catch it.
-A blank with a flag is honest; an unsourced assertion is not.
-
-
 ## The Access Standard [CRITICAL]
 
 **A citation clears only if its text can be reached and read. No
@@ -689,34 +268,6 @@ the served hover shows a visitor becomes one the visitor can open.
 (Tony's ruling, 2026-08-27: "If we can't access from an open paper, an
 abstract or a google scholar search with context then the citation
 fails. No paywalls. I don't have access to a research library.")
-
-## Uncited Goes to the Ledger, Not the Bin [QUALITY]
-
-When a claim outside the current slice has no citation, the disposition
-is a DOCUMENTED LEDGER ROW for later sourcing -- not deletion.
-
-Fetched-vs-Recalled's third branch (remove the claim and note the gap)
-governs a claim that cannot be sourced against any authority. It does
-not govern a claim nobody has sourced YET. Those are different states
-and treating them alike destroys content that is merely waiting its
-turn.
-
-Per the braid: ONE ledger row per CLASS, never one per instance, so the
-backlog grows by kinds rather than by counts.
-
-**Before recording anything as uncited, check whether it is cited
-ELSEWHERE in the same file.** The scanner reads a fixed lookback window,
-so a real citation two hundred lines away reads as absent. A run of bare
-string globals can sit far below the Source comments that cover them,
-and the remedy there is to ATTACH the existing citation, not to drop the
-sentence.
-
-(Tony's ruling, 2026-08-27: "not eliminated -- documented for citation,
-just not today." Worked case: `solar_visualization_shells.py` carries 26
-Source blocks, 22 of which already name their store constant, while six
-display-string findings 250 lines below them read as uncited. Tree-wide
-the display-string class is 284 Tier-1 findings holding 553 claims,
-which is why it is recorded by class and worked in slices.)
 
 ## Measured Is the Goal, Declared Is the Fallback [CRITICAL]
 
@@ -1041,6 +592,1131 @@ Record the derivation in the comment, so the next reader can re-run it:
 ```python
 'radius_fraction': 0.828,  # 2,020 km / 2,439.7 km (Hauck et al. 2013)
 ```
+
+## One Value, One Home [CRITICAL]
+
+**A numeric value has exactly one home -- `constants_new.py`, with its
+source. Everything else references it: the drawing, the hover string,
+the tooltip, the comment. A number typed anywhere else is a second
+store, whether or not it currently agrees.**
+
+This is the POSITIVE form of the section below, and the difference is
+not stylistic. No Shadow Constants forbids copying a value that ALREADY
+lives in `constants_new.py`. It says nothing about where a value's first
+home is when a new feature introduces one, and a new feature is exactly
+where the second store gets created.
+
+**Prose counts.** A hover string that types `1,220 km` is a store. Build
+the sentence so the number interpolates:
+
+```python
+f"The inner core is {EARTH_INNER_CORE_KM:,.1f} km in radius."
+```
+
+Two strings that both interpolate the same constant cannot disagree
+numerically, which is why prose duplication and value duplication are
+different problems -- the first is L-191, the second is this rule.
+
+**Dead code counts.** A literal in a function nothing calls is still a
+store, and it reads as authoritative to whoever finds it next. Wire it
+or delete it; do not leave it because it cannot run. (L-254.)
+
+**THE SCOPE BOUNDARY, and it must be stated in the same breath:
+THREE KINDS OF DRAWING NUMBER** (v2.18, Tony's ruling of 2026-09-22).
+Every number a drawing uses is one of three kinds, and each kind has
+one home.
+
+- **A PHYSICAL value** -- a size, an edge, a distance, a cut angle, a
+  width -- lives in `constants_new.py`. A measured one is sourced. A
+  decided one is declared, with its reason and the range it was picked
+  from on the row (When the Source Gives a Range).
+- **An EYEBALLED value** -- a physical value chosen because the render
+  looked right, usually before the sourcing rules existed -- does not
+  promote (A Drawing Approximation Does Not Promote). It is replaced by
+  one of that section's three outcomes as the braid reaches it, and a
+  published room is reached first.
+- **A RENDERING SETTING** -- `n_points`, `n_rings`, `marker_size`,
+  marker type, `opacity`, colour, font, `mesh_resolution`, an angular
+  marker step -- makes no claim about the object. It stays in the
+  drawing code where it is drawn. Tony: "these are defined in the code
+  not in constants new."
+
+**The test between the first kind and the third: does changing the
+number move WHERE something is drawn, or only change HOW it looks?**
+Earth's radiation-belt thickness of 0.5 Earth radii was the case that
+needed the test. It looks like a drawing setting, but it moves where the
+rings sit, so it is physical; with no recorded origin it is eyeballed,
+and Stage D replaces it by the belts' served edges. A point count only
+makes the same ring smoother.
+
+Two notes on the third kind. A colour is a rendering setting, but a
+hover sentence saying what colour the object IS is a claim and needs a
+source like any other. And two rendering settings were still in
+`constants_new.py` when this was written, `DEFAULT_MARKER_SIZE` and
+`CENTER_MARKER_SIZE`; they are one ledger class and move to the drawing
+code when their files are next touched.
+
+This is L-240's split, sharpened. Without it "only store" reads as
+hauling 25 and 3.4 into `constants_new.py`, which buries the values
+that matter under the ones that do not.
+
+**IN TIME: forward-going on every file touched.** The standing backlog
+carries the sweep -- L-181 is the parent, with L-243, L-244 and L-248 as
+open slices. This rule does NOT open a repo-wide sweep on the day it is
+adopted; that is the denominator that grows whenever someone thinks of
+something. (The Braid, resident protocol Part 3.)
+
+(Tony's ruling, 2026-08-26, stated as general and confirmed with the
+boundary above in the same exchange.)
+
+## Observations Are Sourced Facts, and They Migrate [CRITICAL]
+
+An observed event figure is a measured value with a source, and its home
+is `constants_new.py` like any other.
+
+A disintegration radius, a spacecraft's closest approach, a crossing
+distance, a perihelion -- these read as narrative rather than as
+constants, so they get typed into prose and stay there. They are
+observations of the physical world with an authority behind them, and
+One Value, One Home applies to them without exception.
+
+The scope boundary is unchanged: MEASURED values migrate, DECLARED
+drawing parameters stay where they are drawn.
+
+The practical consequence is an ordering one. A citation cannot move
+into the store ahead of the value it cites, because a citation with no
+value beside it has nowhere to sit. So the migration is: value first,
+then its source line, then the prose references the constant.
+
+(Tony's ruling, 2026-08-27. Founding case: MAPS C/2026 A1's
+disintegration at 8.33 R_sun is cited to SOHO/CCOR-1 observations at
+`solar_visualization_shells.py` line 1226, and the figure itself lives
+only in display strings.)
+
+## No Shadow Constants [CRITICAL]
+
+Modules must not carry local copies of values that exist in constants_new.py. Import through the established shim (planet_visualization_utilities) or directly from constants_new.py. A local literal that numerically matches a tracked constant is a frozen copy -- it won't follow if the source value updates, and it bypasses the scanner's citation chain even when the number is correct today.
+
+This is the code-side complement to the scanner's build_pinned_values() check: the scanner can flag a suspicious match, but the standing rule is that these should never be introduced in the first place. When found, delete the local definition and replace it with a proper import -- do not add a # Source: comment to the local copy, because that would cite-to-clear a structural problem rather than fix it.
+
+Known precedent (FIXED in L-156 1f; kept as history): comet_visualization_shells.py lines 492-493 once hardcoded SUN_RADIUS_KM and KM_PER_AU despite KM_PER_AU already being imported, with line 602 deriving SUN_RADIUS_AU from the two local copies. Those lines now carry the fix comment recording the removal -- a reader sent to find shadow constants there will find the repair, not the defect. Same failure class as the close_approach_data.py stale-copy bug that originally motivated test_constants_provenance.py.
+
+### A Breadcrumb Must Not Cite [CRITICAL]
+
+Citations attach at BLOCK level over a thirty-line lookback, and
+`SOURCE_PATTERNS` counts `# Source:`, `# Ref:`, a bare `https://` URL,
+`doi`, `arXiv` and agency names (IAU, JPL, NASA, ESA, NIST, NOAA...) as
+citations. All of that is in the section above. The consequence is not
+obvious and it bites in one specific place.
+
+**An honest "unsourced, pending research" note cannot carry its own
+candidate references.** Put the papers next to the value and the scanner
+reads them as that value's citation, and the unit ends up looking better
+sourced than it is -- which is the wrong-but-cited failure, rebuilt
+deliberately by someone trying to be careful.
+
+So the code carries a HANDLE and nothing else:
+
+```python
+# Review-note: two figures for this boundary's variation, and the
+# Review-note+: papers that may support them, are held in L-253 --
+# Review-note+: unsourced, unused, deliberately not restated here.
+```
+
+The figures, the DOIs and where each actually came from live in the
+ledger row, which is searchable by handle, holds "pending sourcing" as a
+native state, is RICE-scorable against everything else, and sits outside
+the audit entirely. The trail is preserved at zero cost to the
+denominator.
+
+(Tony's ruling, 2026-08-26. Founding case L-253: `EARTH_D660_DEPTH_KM`
+carried a real, correctly transcribed reference to Ishii et al. 2019 --
+true of the 660 km depth, and not the source of either figure in the
+note beneath it. That paper is about the discontinuity's sharpness.)
+
+## Extend a Boundary Before Adding a Path [QUALITY]
+
+**Before building a new provenance feature, ask whether it can be
+expressed by extending a data boundary that already exists, rather
+than by adding another checking path.**
+
+The reason is a measurement rather than a preference. By August 2026
+the verification infrastructure had a larger state space than a person
+can hold in mind at once, and the project had more epistemic
+INFRASTRUCTURE than epistemic COVERAGE: Tier-1 findings stood at 289
+and were rising, because every improvement to the scanner's reach
+exposed claims that had been invisible rather than sound. Machinery
+that grows faster than the coverage it produces stops being read, and
+a check nobody reads is a check that cannot fail.
+
+Three shapes the extension usually takes, in the order to try them:
+
+- AN EMITTER over a structure the run already builds. L-207's citation
+  prompt reads the Table the checker assembles for its numerical
+  layers and writes a second artifact from it -- no second parse, no
+  new verdict class, no routing change.
+- AN ADAPTER converting a new input into the structure the existing
+  layers already read. The JSON worksheet reader (L-202) is the
+  precedent: it synthesizes the same Table the markdown parser
+  produces, so match, integrity, drift and verdict all ran unchanged
+  against a format that did not exist when they were written. The
+  alternative -- a second checker for JSON returns -- is the parallel
+  pipeline this project has a rule about.
+- A FIELD on a record that already travels. Cheaper than a new record,
+  and it arrives everywhere that record already goes.
+
+The rule does NOT forbid a new path. It requires that the question be
+asked out loud and the answer written down, because the failure mode
+is not one bad decision. It is a dozen locally reasonable ones, each
+adding a layer nobody would have approved as a whole.
+
+State the honest cost of the extension too. L-207 gives the checker a
+second artifact type, and two outputs are more surface than one. That
+was weighed and accepted; what it avoided was a second reader of the
+corpus.
+
+**And the test that comes after.** Once the machinery can answer the
+question it was built for, the default question stops being "what does
+the provenance system need next" and becomes "which outstanding claim
+can this now settle." Stated so it can fail: the next provenance
+feature should be one an actual RUN exposed the need for, not one a
+design conversation invented.
+
+(Proposed by an external review, 2026-08-18, and adopted by Tony the
+same day. Marked QUALITY rather than CRITICAL because no failure has
+yet shown it load-bearing -- it was adopted from a prediction, and the
+tiers move on evidence.)
+
+## Uncited Goes to the Ledger, Not the Bin [QUALITY]
+
+When a claim outside the current slice has no citation, the disposition
+is a DOCUMENTED LEDGER ROW for later sourcing -- not deletion.
+
+Fetched-vs-Recalled's third branch (remove the claim and note the gap)
+governs a claim that cannot be sourced against any authority. It does
+not govern a claim nobody has sourced YET. Those are different states
+and treating them alike destroys content that is merely waiting its
+turn.
+
+Per the braid: ONE ledger row per CLASS, never one per instance, so the
+backlog grows by kinds rather than by counts.
+
+**Before recording anything as uncited, check whether it is cited
+ELSEWHERE in the same file.** The scanner reads a fixed lookback window,
+so a real citation two hundred lines away reads as absent. A run of bare
+string globals can sit far below the Source comments that cover them,
+and the remedy there is to ATTACH the existing citation, not to drop the
+sentence.
+
+(Tony's ruling, 2026-08-27: "not eliminated -- documented for citation,
+just not today." Worked case: `solar_visualization_shells.py` carries 26
+Source blocks, 22 of which already name their store constant, while six
+display-string findings 250 lines below them read as uncited. Tree-wide
+the display-string class is 284 Tier-1 findings holding 553 claims,
+which is why it is recorded by class and worked in slices.)
+
+## A Computed Position Prints What Its Errors Earn [QUALITY]
+
+A position worked out at display time -- a planet's distance from the
+Sun, propagated in the browser from served elements to the minute the
+room was opened -- is not a store row and has no `# Figures:` line. Its
+count comes from its errors, and two of them bound it:
+
+- **Drift.** How far the worked-out position may have moved from what
+  JPL Horizons itself would give: the builder's measured rate, in
+  degrees per day, times the days since the elements' date, taken as a
+  distance at the body's distance.
+- **The source's own accuracy.** How well JPL knows where the body is
+  at all. A store row per group, served to the page on the object's
+  entry.
+
+**The display prints to the Report test's place (The ceiling, Report)
+for the LARGER of the two**, each unit placed by its own error, never
+finer than a floor the display states (whole kilometres in the Solar
+System room), and never fewer than one figure. Tony's ruling,
+2026-10-01: "use whichever is larger". Drift alone measures how well
+the page reproduces Horizons, not how well Horizons knows the planet,
+and it printed Pluto's distance to ten figures where JPL knows it to
+several thousand kilometres. A body with no source-accuracy row yet
+prints by its drift and SAYS so in the display, in words the display's
+owner approved, and the words appear exactly when the row is absent so
+the two cannot disagree. The asteroids are that case until each body's
+own uncertainty is fetched (L-399).
+
+This applies to every computed position a display prints, in the
+gallery and the orrery. The Solar System room is the first built
+(gallery/solar_system_figures.js, checked by
+documentation/smoke_solar_system_figures.js, gallery repo). The
+orrery's own position hovers are one ledger class, recorded and not
+chased (The Braid).
+
+### An Accuracy Stated in Words Is Stored as the Place It Reports To
+
+Some sources state an accuracy only in words. JPL's 2014 ephemeris
+report (Folkner et al., IPN Progress Report 42-196, abstract) says the
+terrestrial planets' orbit uncertainties are "a few hundred meters",
+Jupiter and Saturn are known to "tens of kilometers", and Uranus,
+Neptune and Pluto to "several thousand kilometers". There is no number
+to store, and choosing one -- 3,000 km, say -- puts in the store a
+value the source never printed: a `# Source:` over a number nobody
+measured, one layer out.
+
+**Store the place.** Run the Report test over every value the words can
+mean. Where they all give one place, that is the row. Where the words
+could give two, take the coarser -- the tie rule of The ceiling,
+extended -- so the row never claims finer than the words allow.
+
+- "a few hundred meters": 0.2 to 0.999 km all report to whole
+  kilometres -> 1 km.
+- "tens of kilometers": 10 to 15 km report to tens, 16 to 99 km to
+  hundreds -> 100 km.
+- "several thousand kilometers": 2,000 to 9,999 km all report to
+  ten-thousands -> 10,000 km.
+
+The tempting reading is the place the words NAME -- thousands for
+"several thousand". It claims +/- 500 km where every value the words
+allow is nearer +/- 5,000, a factor of ten finer than the source. That
+was the session plan of 2026-10-01; this rule replaced it the same
+day, and Tony confirmed it.
+
+**The row.** Value: one unit of the place, in the unit the source
+names. `# Status: declared` -- the pick of the place is ours by this
+rule; the words are the source's -- with a reason that names no
+authority. `# Figures: exact -- declared construction:`, naming the
+words and the range checked, and no print count unless a display
+prints the row. `# Read:`, `# Source:` and `# Ref:` as for any row the
+source was opened for. The three DE430 rows in `constants_new.py` are
+the worked case.
+
+**The display uses half a unit of the place** as the source's error,
+which by the Report test gives back exactly that place; the larger of
+that and the drift then sets the print, as above.
+
+(Tony's ruling of the larger error, 2026-10-01; this method confirmed
+by him "as recommended" the same day, L-398. Built by orrery patch
+patch_L398_1_accuracy_rows_and_skills_20261001.py.)
+
+## A Simple Error a Check Finds Is Fixed and Reported [QUALITY]
+
+Tony's ruling, 2026-10-01 (L-395): "simple errors such as the Apophis
+naming discrepancy should be fixed and reported." A check that finds
+one does not stop at listing it.
+
+**Simple** means one right answer, settled by an outside source or by
+the file's own evident intent, with no drawing or modelling choice in
+it: a link to a search page where the body's own page exists, a stray
+space inside a quotation, a missing full stop, a field written twice, a
+document example that no longer says what the code does.
+
+**Fixed** means in the same patch as the work that found it. **Reported**
+means the patch's output and the session record name each fix by what
+it changed, so nothing is corrected silently.
+
+**Not simple, so it comes to Tony:** two right answers (Apophis is both
+99942 and 2004 MN4; the one-definition rule then decides it, and the
+patch says so), anything that changes what is drawn or how, and removing
+words a person wrote with a meaning in them. The objects mirror refuses
+to delete a person's words for the same reason.
+
+**A number in a served description** is sourced or comes out, because a
+description has no place for a `# Source:`. It stays when a page the
+project trusts states it and the read is recorded in the ledger
+(Apophis's 2029, NASA's Apophis Facts page, read 2026-10-01); otherwise
+it is removed (the Pluto-Charon barycentre's 6.39 days).
+
+**Beside The Braid.** The Braid governs findings OUTSIDE the slice being
+worked: recorded, one row per class, not chased. This governs findings
+INSIDE it. A discovery run that exists to list -- the first Horizons
+cross-check -- still lists, apart from the simple errors, which it
+fixes and names.
+
+## Examples Go Stale Like Values [QUALITY]
+
+**A worked example in a skill is a claim about the codebase, and it
+decays the same way a constant does.**
+
+This skill taught the chromosphere drawn at 1.1 solar radii as its model
+of a declared visualization boundary, for eleven days after the code
+promoted that exact value to the physical figure. A skill loads every
+session and is normative, so a stale example there is worse than a stale
+line in a plan document: it teaches the retired state as the pattern. A
+session read it and reported the retired value to Tony as current.
+
+When a bump touches a section, re-read its examples against the file.
+When a value moves, grep the skills for it in the same patch. This is
+The Correction Does Not Travel, applied to the skill layer.
+
+## The Goal State
+
+**The push gate is Tier-1 = 0 ON THE ACTIVE BUILD PATH** -- the
+files the project is currently building. As of August 2026 that is
+the interactive gallery build path (Tony ratified 2026-08-05;
+recorded in L-184). The scope MOVES with the work: when
+Earth-science visualization work resumes, those files become the
+gated path in turn.
+
+**Global Tier-1 = 0 is the destination, not the current gate.** It
+was suspended, not retired. At 206 Tier-1 findings a global gate
+blocks every push forever, and a rule nobody can obey stops being
+read as a rule at all. The global number is approached by clearing
+paths as they go active -- which is why the gate is written
+active-path rather than pinned to one named path.
+
+Do not enforce the global form on a push outside the active path,
+and do not read a bare "Tier-1 = 0" anywhere in this project as
+the global form unless it says so. (Tony's ruling 2026-08-11, on
+Fable audit finding F1: this skill and the protocol's manifest row
+carried the global gate for a week after the ratification narrowed
+it, while Tony pushed five times in one evening against it. A gate
+that is routinely and correctly ignored is worse than a wrong
+number -- it teaches the reader to ignore gates.)
+
+A clean audit can rest on honest
+removals: "Tier-1 = 0" does not imply "every claim sourced" -- it can mean
+unsourceable claims were correctly stripped pending real sourcing. Record
+which. The scanner must stay maintainable with accepted false positives,
+not require regular manual intervention.
+
+
+## Clearing a Flagged Claim (the only two moves)
+
+1. Cite to where the data ACTUALLY came from, or
+2. REMOVE the claim and NOTE the gap.
+
+Never cite-to-clear. A # Source: over recalled data passes the check while
+asserting a provenance that does not exist -- wrong-but-cited is worse than
+uncited, because the citation suppresses the suspicion that would catch it.
+A blank with a flag is honest; an unsourced assertion is not.
+
+
+## Scanner Mechanics (not obvious from the output)
+
+- Flags by NUMERIC token (number + unit) via NUMERIC_CLAIM_RE. The unit
+  vocabulary covers physical units (AU, km, deg, K, masses, radii, time
+  units...) AND humanitarian units (people, persons, percent, %).
+- A citation must sit WITHIN the LOOKBACK WINDOW of the flagged token and
+  use the `# Source:` comment form. In-string "Source:" prose and distant
+  comments do NOT count. A real citation outside the window, or in the
+  wrong form, reads as uncited.
+- File inclusion is role-driven (L-078): a module's display strings are
+  extracted when its module_atlas.py ROLE_MAP role is in NARRATIVE_ROLES
+  ({data, scenario, rendering, rendering/shells, computation}), OR its
+  name is in the legacy narrative_files allow-list, OR it is a
+  *_visualization_shells file. The allow-list is additive (a safety net)
+  until ROLE_MAP is complete. A coverage-gap check reports modules the
+  gate cannot classify -- resolve those by adding the Role:/Domain: tag to
+  the module's own docstring, not by editing the scanner and not by
+  hand-adding a ROLE_MAP entry (since L-163 Phase 3, ROLE_MAP is a
+  generated mirror of those tags; the next module_atlas.py run overwrites
+  anything hand-added).
+- Loads data/provenance_exceptions.json for accepted residuals
+  (suppression checks both context_text and raw_value). Run from a tree
+  WITHOUT that file (e.g. a bare /mnt/project/ snapshot) and the count
+  OVER-REPORTS. The confirming re-run is Tony-side, where the exceptions
+  file lives.
+- False positives get provenance_exceptions.json entries, not code
+  workarounds.
+
+## Report Domain Classification (Findings by File / File Type)
+
+Since July 2026, `PROVENANCE_AUDIT.md` breaks findings down two ways ahead
+of the per-tier detail: **Findings by File** (every file with a finding,
+tier counts, sorted worst-first) and **Findings by File Type** (the same
+data rolled up by subject-matter domain).
+
+Domain is a *report-only* grouping -- it answers "what part of the project
+is this," not "what does this module do" (that's module_atlas.py's
+ROLE_MAP, a different axis entirely; a module's functional role and its
+domain are independent). Domain classification never affects which files
+get scanned or how a finding scores.
+
+Six domains: **orrery** (solar system bodies, orbital mechanics, core
+app -- also the default catch-all), **earth_science**, **gallery**,
+**stars** (stellar neighborhood, exoplanets, HR/planetarium), **utilities**
+(genuinely cross-domain shared helpers), **dev_tools** (audit,
+diagnostics, one-shot infra). The last two didn't exist before this round
+-- they were split out, with the four-domain original (orrery, earth
+science, gallery, stars) proving too coarse for files that don't belong to
+any single subject-matter area.
+
+Mechanics: `MODULE_DOMAIN_MAP` (a module-name-to-domain dict) plus
+`classify_domain()` in provenance_scanner.py. Unmapped files default to
+`orrery` and are tracked and surfaced in a "Domain coverage gap" note in
+the report -- mirroring the existing ROLE_MAP coverage-gap pattern -- so a
+new file with findings doesn't silently drift into the wrong bucket
+forever. Extend `MODULE_DOMAIN_MAP` directly (not a heuristic) when a new
+file needs a home; explicit mapping was chosen over name-pattern guessing
+because domain assignment involves real judgment calls (several file
+categorizations were confirmed with Tony directly rather than inferred).
+
+**Gallery will usually read near-zero.** The gallery ASSEMBLER pipeline
+(resolver.py, cache_reader.py, gallery_studio.py, json_converter.py,
+render_orbits.py, etc.) lives in the separate tonyquintanilla.github.io
+repo, entirely outside this scanner's reach. Only gallery-adjacent files
+that live IN the palomas_orrery repo (currently just social_media_export.py)
+can ever populate that domain here. Do not read a 0 there as "gallery has
+no provenance debt" -- it means "gallery isn't scanned from here."
+
+## Fetched vs Recalled -- the working procedure
+
+Data from authoritative pipelines: trusted. Data from Claude's training
+memory: verify or source -- and there is a THIRD branch: if a claim cannot
+be sourced against an authority, REMOVE it and note the gap. Never embed
+lookup tables from training memory. Tony's professional default: prefer
+removing an unsourceable claim over citing it incorrectly.
+
+Where a value is genuinely UNKNOWABLE (fixed by an input the model cannot
+recover -- a rotation phase, an instantaneous azimuth): show the ENVELOPE
+of possibilities as the honest object, and SAY SO in the hover where a
+shape is approximate. Faking an unknowable value is the same failure
+class as citing over recalled data. (Full treatment: resident protocol,
+Show the Envelope.)
+
+## Composed vs Transcribed On-Layer Text
+
+For user-facing factual sentences (KMZ framing text, cards, briefings),
+split by how the words get authority:
+- TRANSCRIBED tier: the source's own words, lifted and attributed. Safe
+  by construction.
+- COMPOSED tier: sentences we write because no single source line says
+  them. These get the strict treatment: BUILD the sentence in generator
+  code with every numeric token carrying a `# Source:` comment within the
+  scanner's lookback -- never pasted as a finished string into a template,
+  and never living only inside an output artifact (a .kmz) where the
+  scanner cannot see it. It must be scanner-visible at the construction
+  site and clear by TRUE sourcing. A composed sentence that cannot be
+  sourced does not ship.
+
+## Report to the Figures You Have [QUALITY]
+
+**Compute at full precision. Report to the significant figures the least
+precise input supports.** The two halves are separate and a careless
+reader can make them contradict each other, so they are stated together.
+
+Rounding a derived constant in code introduces error AND creates a
+rounded second store of a value that lives elsewhere, so the derivation
+stays symbolic:
+
+```python
+EARTH_INNER_CORE_RADII = EARTH_INNER_CORE_KM / EARTH_EQUATORIAL_RADIUS_KM
+# Figures: 5 -- set by EARTH_INNER_CORE_KM (1221.5, 5)
+# Derived: 1221.5 / 6378.1366 = 0.19151
+```
+
+Significant figures govern REPORTING: every quotient stated in a
+comment, a hover string or a tooltip carries no more figures than the
+row's `# Figures:` line declares. The count is a field, not prose, so
+the next reader does not re-derive it and a checker can read it; the
+section below says how the field is written and counted.
+
+**A subtraction is governed by decimal PLACES, not significant figures.**
+`6371.0 - 660` is good to TENS, because its 660 km input is good to
+tens, so 5710 and not 5711.
+
+The failure this catches is quiet. Stating `0.8953994` when the inputs
+support `0.8954` is not a small error in the last digits -- it is six
+digits the value was never entitled to, and it reads as a measurement.
+(Tony's ruling, 2026-08-26, after exactly that appeared in a table.)
+
+### The Figure Count Is a Declared Field [QUALITY]
+
+Python can round a number to N figures but cannot count them through
+arithmetic, so the count is declared per row, the way the unit is.
+These are the textbook rules, written down once so they resolve the
+same way for every row. The reference is **Wikipedia, Significant
+figures**, which Tony named and which is open: every rule below can be
+checked against it by anybody, which is the point. The same rules
+appear in ASTM E29, but that is an aside and NOT the reference we work
+from -- it costs $86, so a rule the project depends on could not be
+opened by any of us, which fails our own Access Standard; and its scope
+is conformance with specification limits, which this store has none of.
+(Tony's ruling, 2026-09-19, L-342.)
+
+**Where a rule below states a condition, the condition is load-bearing
+and is not to be trimmed.** v2.14's Rule 2 said trailing zeros after a
+decimal point count, full stop. The page says they count WHEN THEY ARE
+WITHIN THE REPORTING RESOLUTION. Dropping four words made the rule
+wrong, and nobody could see it without opening the source -- which is
+the argument for citing something openable rather than for copying a
+standard verbatim.
+
+**Rule 1. `# Figures:` is a comment key beside the value.** Seven forms:
+
+```
+# Figures: 5 -- set by EARTH_INNER_CORE_KM (1221.5, 5)
+# Figures: 5 -- PREM reports to 0.1 km, so 3480.0's trailing zero counts
+# Figures: exact -- IAU 2012 definition
+# Figures: exact -- prints 8, the definition's own digits (84381.448)
+# Figures: 4 -- Table 1 prints 10.22, uncertainty 0.10
+# Figures: 3 -- uncertainty 0.13, root-sum-square of Shue's a1 to a5
+# Figures: 4 -- thousandths: thousands place of the sum, set by CHROMOSPHERE_PHYSICAL_KM (2000, 1), carried through the exact SUN_RADIUS_KM
+```
+
+A derived row names the input that set its count. A place-governed
+row scaled by an exact row names the place it keeps, the input that
+set the place, and the exact row it was scaled by (Rule 3, scaling). A measured row
+states what the source supports, and says in words whether a trailing
+zero counts, because an integer literal cannot. A defined constant says
+`exact`, and when a display prints it, also how many figures it prints
+(`prints N`, Rule 7's exact row). A measured row whose source STATES an uncertainty writes it
+as a FIELD: the word `uncertainty` followed directly by the number, in
+the row's own unit, on its `# Figures:` line. A checker reads that
+field and never the prose around it, so "an uncertainty of 0.1 m" in
+words is not read. A derived row writes the uncertainty form only when
+it declares more figures than counting alone allows, and then the
+number is the one recomputed from full digits (Rule 3, The ceiling). The field is needed because a float cannot hold a significant
+trailing zero (13.50 is stored as 13.5) and the export would otherwise
+lose the count.
+
+**Rule 2. Counting a literal follows the standard rules.** Non-zero
+digits count; zeros between them count; leading zeros never count;
+trailing zeros in an integer count only if the source says so. An exact
+number has unlimited figures.
+
+**Trailing zeros after a decimal point count WHEN THEY FALL WITHIN THE
+SOURCE'S MEASUREMENT OR REPORTING RESOLUTION**, and that condition is
+the rule, not a refinement of it. 1500 m measured to a resolution of
+100 m has TWO figures, not four, and the page lists exactly that case
+among the digits which are not significant: trailing zeros serving as
+placeholders. So the question to ask of a row is never "where does the
+last digit fall" but "to what resolution does this source report". PREM
+Table I reports every boundary radius to 0.1 km, so `3480.0` carries
+five. The NASA fact sheet prints `6371.000` in a block that also prints
+3485, 5513, 20.4 and 11.186, so it is not padding and the value carries
+seven. A DECLARED drawing condition (a chosen solar wind pressure, a
+chosen cut angle) is exact for counting: it is a choice, not a
+measurement, so all of its digits are known.
+
+**A trailing `.0` in this store is Python's, not a figure** (v2.20).
+The digits of a choice are the digits it was chosen with, and a decimal
+point Python needs is not one of them. A trailing `.0` reaches this
+store and its displays by three routes, and none of them says anything
+about significant figures:
+
+- **Typing.** Python treats a number written with a decimal point as a
+  float and one without as a whole number, so rows are typed `200.0`
+  to make them floats. `200`, `200.0` and `200.00` are the same stored
+  number; the float keeps no record of how it was typed. That is also
+  why `13.50` is stored as `13.5` (Rule 1).
+- **Arithmetic.** Division in Python always returns a float, even
+  between whole numbers: `4 / 2` is `2.0`. A derived row can gain a
+  `.0` from its expression without anyone typing one.
+- **Printing.** A float printed with no format always shows at least
+  one decimal place, so a whole-number float prints as `2.0`. That
+  covers `str()`, a bare f-string `{x}`, and `json.dumps`, which
+  writes `constants_export.json`. A format can remove it (`:g` prints
+  `2`) and a page can put it back: the gallery printed the declared
+  solar wind pressure as "2.0 nPa" by its own `toFixed(1)`, from a
+  value JavaScript had read out of the export as plain 2.
+
+So the literal, the printed value, the exported value and the page's
+output cannot say which trailing zeros are meant. For a measured row
+the source's reporting resolution says (above). For an exact row the
+digits it was defined or chosen with say: the declared pressure is
+2 nPa because Shue et al. (1998) use Dp = 2 nPa, and the `.0` in
+`2.0` is Python's. That is why the count is a field on the
+`# Figures:` line and an exact row's print count is a field too
+(Rule 7), never read from the value. A choice that really was made to
+a trailing zero says so on its `# Declared:` line, and its print count
+states it. (Checked by running Python 3 and Node on 2026-09-27, at
+Tony's request, when the Stage D print counts were settled. Handle
+L-322.)
+
+**A DECLARED CONSTRUCTION is exact in the same way** (v2.17). A drawing
+value that is a stated rule over measured rows -- the midpoint of a
+sourced band, the top of a sourced range -- is a choice, not a
+measurement, and its `# Figures:` line names the rule and the rows:
+`exact -- declared construction: midpoint of <row>, <row>`. The
+checker accepts `exact` only on a row whose `# Status:` begins
+`declared` (not `declared pending`), with every named row in the
+expression; a `measured` or `derived` row cannot declare exact over a
+measured input. The export serves an exact row unrounded, so every
+consumer draws the same value. The alternative was measured before
+this was written: counted to its rows' one figure, the outer belt's
+4.5 exported as 4.0 for the gallery while the orrery drew 4.5 from
+the float -- two consumers, two rings. The construction is not a
+measurement and the hover does not print it as one: it shows the
+range from the rows and states the rule (When the source gives a
+range). The checker lists every declared construction by name in its
+output, so each use is seen. Earth's outer-belt peak is the case
+(L-322 C2).
+
+**Rule 3. A derived row's count is set by its least precise MEASURED
+input.** Products and quotients keep the fewest figures among the
+inputs. Sums and differences are good to the coarsest decimal place
+among the inputs (`6371.0 - 660` is good to tens: 5710, because its
+660 km input carries two figures). Exact inputs
+and declared conditions are skipped when finding the minimum. For a
+power, an exponential or another function, the fewest-figures rule is
+the default; where the function magnifies the input's uncertainty (an
+exponent above one in magnitude), drop a figure and say why on the
+row. Where an input carries a stated uncertainty, the uncertainty
+decides instead and counting is the fallback; how is set out under The
+ceiling, below.
+
+**A place-governed value scaled by an exact row keeps its place, not
+its count** (v2.21). A sum or difference is good to a decimal place
+(above). Multiplying or dividing it by an exact row -- a unit
+conversion, a nominal radius -- moves that place with the value, and
+the row keeps the place the scaling gives: a sum good to thousands of
+kilometres, divided by 695,700 km per solar radius, is good to
+thousandths of a solar radius, because 1,000 km is 0.0014 solar
+radii. Counting the quotient by fewest figures instead keeps three on
+either side of the division, and three figures of 698,000 is
++/- 500 km while three figures of 1.003 is +/- 3,500 km: the leading
+digit went from 6 to 1 and the count lost a factor of seven. The
+reference page names this case. Its arithmetic guidelines do not
+ensure the result's implied uncertainty is close to the measured one,
+it says the problem shows up in unit conversion, and its example is
+8 inches (+/- 0.5 in) converted by the guideline to 20 cm (+/- 5 cm)
+when the proper result is 20. cm (+/- 0.5 cm). The place kept is the
+power of ten nearest, on a log scale, to the sum's place unit carried
+through the scaling, a tie going to the coarser -- the same measure
+the Report bullet under The ceiling uses: 1,000 km / 695,700 km is
+0.0014, nearer 0.001 than 0.01, so thousandths. The row states the
+place it keeps, the input that set the sum's place, and the exact row
+it was scaled by (Rule 1, seventh form). The two forms of one
+expression now count the same: 1 + 2000 / 695700 and
+(695700 + 2000) / 695700 both keep thousandths, so whichever form the
+unit check accepts, the count is 4. This is not an implied
+uncertainty raising a count; it is the sum's own place, converted,
+and it reaches nothing but a sum or difference scaled by exact rows.
+A product or quotient of measured quantities keeps fewest figures as
+before, and Jelinek's bow shock stays 13.5.
+
+**A value in another unit is computed, never stored, and its count
+comes from its source row alone** (v2.22). Each quantity is ONE row,
+in the unit its best source gives it, carrying that source. Its value
+in any other unit is not a row: `constants_rows.conversions()` works it
+out from the source row's full digits times the exact factor, rounds
+once, and the export serves it as `"in"` (schema 6). A name the
+orrery's drawing code keeps for such a value is computed from the one
+row and states no precision of its own. A conversion has no chain. Its
+uncertainty is its source row's, scaled by the exact factor: the stated
+uncertainty, where the source's figures field has one; otherwise half a
+unit of the source's last declared place; for an exact source, half a
+unit of the last place of its print count. The place printed is the one
+whose implied uncertainty, half a unit in that place, is nearest that
+scaled uncertainty on a log scale, a tie going to the coarser -- the
+Report test under The ceiling. Where the uncertainty is half a unit of
+a place, that is the same as carrying the place itself through the
+factor to the nearest power of ten, which is the measure the paragraph
+above uses. The count is the figures of the full-digit value down to
+that place, and never fewer than one: where the place is coarser than
+the value's leading digit, the value keeps its one leading figure
+(a one-figure 100 Earth radii is 0.004 AU, not 0.00). An exact source's
+conversions are exact, unrounded, with a print count found the same
+way; the row that defines a unit is 1 in that unit, printing 1. The
+sum rule above is one instance of this: a sum's declared place is the
+place its count names. This reads a row's declared precision; it never
+sets a row's ceiling from its chain, so the implied-uncertainty bullet
+under The ceiling stands and Jelinek's bow shock stays 13.5 Earth
+radii. The exception cuts both ways. The chromosphere gains a figure
+(698,000 km at three, 1.003 solar radii at four); the bow shock loses
+one (13.5 Earth radii at three, 86,000 km at two, because the source's
+last figure is worth 638 km and "86,200" would claim fifty). A
+conversion whose source row is wrong is fixed at the source row, once.
+(Tony's ruling, 2026-09-28, on Claude Fable 5.1's recommendation;
+L-345. Fable's text said "the power of ten nearest that scaled
+uncertainty"; its own worked numbers, and the Report test it names,
+compare the uncertainty with half a unit in each place, which is the
+wording here. Read the other way, the bow shock's AU would print
+0.000576 at three figures, against the ruling's 0.00058.)
+
+The top of the chromosphere is the worked case. `SUN_RADIUS_KM +
+CHROMOSPHERE_PHYSICAL_KM` is good to thousands, set by the depth
+Carroll & Ostlie give as about 2,000 km (one figure), so 698,000 km at
+three figures; divided by the exact `SUN_RADIUS_KM` it keeps
+thousandths, 1.003 at four figures -- one more figure than the
+kilometre line, and the figure the drawing needs. The export rounds
+to the count (Rule 6): at three figures the served value is 1.00,
+which draws the chromosphere on the photosphere and erases the
+2,000 km hairline promoted on 2026-08-16; at 1.003 it draws 2,087 km
+above the photosphere, inside the source's "about". The hover still
+says about 2,000 km deep, and the radius line no longer contradicts
+it with an implied +/- 3,500 km. Before this paragraph the rule as
+written gave 1.00 by the sum-first form and 1.003 by the divide-first
+form, and the unit check forced the first. (Tony's ruling,
+2026-09-28, confirming Claude Fable 5.1's recommendation, checked
+against the reference page the same day. Handle L-322.)
+
+**A row may declare FEWER figures than its inputs support when the
+RELATION ITSELF is approximate, with the reason in words on the row.**
+Counting governs how precision flows through arithmetic; it says
+nothing about a formula that is an idealisation to begin with. Earth's
+Hill sphere is the case: every input is exact or carries nine figures,
+so counting gives seven, but substituting Earth's perihelion distance
+for its mean distance moves the answer by more than one percent. Seven
+figures would claim a precision the relation cannot deliver whatever
+its inputs carry. This is a floor on honesty, not a licence to round to
+taste: the row must say WHICH approximation caps it and by roughly how
+much. (L-342, Fable's review of C1, Finding 3.)
+
+**A rate or other derivative row is written as the derivative
+expression over the rows, never as a difference of two evaluations**
+(v2.17). The difference form is counted by decimal place from the two
+evaluated values, whose places come from the largest inputs, so the
+quantities the rate rests on set no count and the row claims a
+precision it borrowed. Earth's dipole tilt rate is the case: as a
+one-year difference of two tilts it would carry the main field's
+places; as the derivative over the six IGRF-13 rows it carries three
+figures, set by the sum inside it, -0.0493 degrees per year.
+Time-rate rows use time-rate tokens (`nt_per_year`, `deg_per_year`).
+
+**An angle computed from a pure number never applies `degrees` to the
+result.** An inverse trigonometric function of a ratio, or a rate
+derived from one, comes out of the arithmetic as a bare number or an
+inverse time. The unit check reduces a ratio whose units cancel to a
+plain float before the function, so `degrees` of the result is a bare
+number declared in `deg`, a MISMATCH; `degrees` of an inverse time it
+refuses outright, CANNOT EVALUATE, which fails inside a closed slice.
+The row multiplies by the exact row `DEG_PER_RAD` instead, whose unit
+is `deg` and which carries the radian, so the unit check follows the
+chain to degrees, or degrees per time, with no equivalency. Both the
+tilt and its rate are written this way, and both were run through
+both checkers before this was written. `DEG_PER_RAD` has no store
+inputs, so neither checker judges it and its unit is asserted; the
+row says so in words, as a definition.
+
+**A unit conversion inside an expression is an exact row, never a bare
+number** (v2.18). The unit check converts units by itself, so dividing
+seconds by a bare 3600 leaves seconds. Earth's sidereal rotation period
+was drafted as `2 * math.pi / EARTH_ROTATION_RATE_RAD_S / 3600.0` and
+declared in hours; the unit check failed it as a MISMATCH, the
+arithmetic giving 0.006648 hours against 23.93447 stored, while the
+figures check passed the same row. The conversion is an exact row with
+a compound-unit token -- `S_PER_HOUR` in `s_per_h`, `ARCSEC_PER_DEG` in
+`arcsec_per_deg` -- and the expression divides by the row. A pure number
+that belongs to the physics, like the two pi in a period, stays bare,
+because the token it meets already treats the radian as dimensionless;
+giving it a unit fails the check the other way ("declares s; the
+arithmetic gives rad s"). Both forms were run through both checkers
+before this was written. (Claude Fable 5.1's review of the Stage D
+manifest, Finding 1, re-run by Claude Opus 5.5 at ac25d4f4. Other rows
+that convert by a bare number, such as `LIGHT_MINUTES_PER_AU`, are one
+ledger class.)
+
+**The ceiling: where an uncertainty is stated, propagate it** (v2.16).
+The procedure these rules were adopted from says it in one line:
+"Where any input carries a stated uncertainty, propagate that instead
+and let it decide." Five parts make that usable. What the reference
+page says is kept apart from what this project adds, and the project's
+part is marked as its own.
+
+- **Which uncertainty.** Propagate the stated uncertainties of the
+  INPUTS: how well each was measured or fitted. A model's scatter about
+  the data it was fitted to is a different quantity. It describes the
+  real thing around the model, and it is shown beside the value, not
+  propagated into it.
+- **Show or cap.** Where the source publishes the size of a relation's
+  mismatch as a number the store can hold and the page can show, show
+  it beside the value: real magnetopause crossings scatter 1.23 Earth
+  radii about Shue's model, and the hover says so. Where it does not,
+  cap the count and say why on the row, as the Hill sphere's is in the
+  paragraph above. This decides which of the two answers applies. It
+  also decides a snapshot of a quantity that moves (v2.17): where the
+  source publishes the rate, the store holds the rate's inputs and the
+  page shows the epoch and the rate beside the value; where it does
+  not, the count is capped to the place the movement over the model's
+  validity span supports. Earth's dipole tilt is the case: IGRF-13
+  prints the secular variation, so the tilt prints at its full count
+  with its epoch and its rate.
+- **When propagation sets the ceiling.** A derived row's ceiling -- the
+  most figures it may declare -- is set by propagation whenever at
+  least one measured primary in its chain STATES an uncertainty, and by
+  counting otherwise. A row may always declare its ceiling or fewer. It
+  writes the uncertainty form of Rule 1 only when it declares MORE than
+  counting alone allows, so the reason for the extra figures is on the
+  row; a row that counts and stays within its ceiling keeps its
+  counting line. Implied uncertainties alone never set a ceiling:
+  Jelinek's bow shock standoff, whose chain states none, is 13.5 by
+  counting and would be 13.51 if they did. A place carried through an
+  exact scaling is not this: it is the sum's own place, converted
+  (Rule 3, scaling).
+- **Propagate.** Trace the row to its primaries. Move each up and down
+  by its uncertainty and take the half-difference, a central
+  difference; a one-sided step gives a different answer wherever the
+  relation curves (Shue's standoff gives 0.129 up and 0.136 down).
+  Combine by root-sum-square, re-evaluating through the chain from full
+  digits: Rule 4 applies to an uncertainty exactly as to a value, and
+  an uncertainty converted from a rounded one is the same failure.
+  Root-sum-square assumes independent inputs; where the source gives no
+  correlations the row says so, and where the reported place would not
+  survive the plain sum of the effects, the row gives both numbers. A
+  primary that states no uncertainty contributes its implied one, half
+  a unit in its last significant place, as the page allows; that is a
+  full half-width rather than a standard deviation, so it errs large.
+  Declared conditions and exact numbers contribute nothing.
+- **Report. What the page says:** to report a single number, choose
+  the one whose implied range is close to the measured range, since
+  going coarser loses a lot of information; its examples are
+  3.78 +/- 0.07 kg and 3.78 +/- 0.09 kg, both best quoted as 3.8 kg.
+  Where the uncertainty is printed beside the value, it takes one or
+  two figures and the value ends in the same place. **What this project
+  adds, and why:** "close" is measured on a log scale, because implied
+  uncertainties step by factors of ten, and a tie goes to the coarser
+  place; a linear measure would keep the tenths place up to +/- 0.27
+  and overstate the precision five-fold. Each unit is reported by its
+  own uncertainty, so a value and its conversion can carry different
+  counts; the page warns of exactly this for unit conversions, and on
+  the counting route the same exception is Rule 3's scaling
+  paragraph.
+
+The magnetopause standoff is the worked case. Shue's Table 1 states a
+standard deviation on every coefficient; propagated at the declared
+solar wind they give 10.2518729724 +/- 0.1326 Earth radii, reported
+10.3 -- the tenths place implies +/- 0.05 and the units place +/- 0.5,
+and the tenths is closer. The store had carried 10.25, a figure too
+many even by the largest single effect, +/- 0.09. In kilometres the
+same uncertainty is +/- 846 km, so 65,000 km at two figures; in AU,
+0.00044. The plain sum of the effects is 0.25 and the tenths place
+holds only to 0.158, which the row states. (Tony's instruction of
+2026-09-20, "See the Skill on significant digits"; worked in
+`documentation/BUILD_MANIFEST_L322_C2_magnetosphere_20260920.md`,
+section 2.1, and reviewed twice by Claude Fable 5.1. Handle L-322.)
+
+**Rule 4. Compute from the PRIMARY inputs at full precision; round
+once.** A derived row that feeds a second derived row does not chain
+through a rounded copy. The second row's `# Derived:` line goes back to
+the measured primaries. Rounding an intermediate puts a rounding error
+inside the store.
+
+**Rule 5. Round half to even**, implemented as `float("%.*g" % (n, x))`.
+This is what Python's `round()` and `%g` already do; the schoolroom
+half-away-from-zero is not, so the rule is named to avoid an argument
+with the interpreter.
+
+**Rule 6. The store holds the derivation, never a rounded copy.** A
+derived row stays an expression at full float precision and follows its
+inputs automatically. Rounding happens at the reporting step, and the
+EXPORT is a reporting step: it rounds each value to its declared count
+and carries the count beside the value and the unit, so the gallery
+formats without guessing and no downstream copy holds digits the row
+never had. (This is what Tony's 2026-09-12 objection was about --
+sixteen digits copied into a gallery config -- and Rule 6 answers it at
+the boundary rather than at rest.) The two magnetosphere standoffs
+stored as literals under the withdrawn ruling stay literals until the
+export lands and the gallery stops parsing the store (L-322 ruling 6);
+they revert to expressions at their slice visit.
+
+**Where a source prints the parts and states the relation that makes
+the whole, the whole is a derived row over measured rows for the
+parts** (v2.17) -- never a typed result with its working in a comment,
+which a closed slice does not accept (Rule 8 names that shape).
+IGRF-13 prints the three degree-1 coefficients and says the pole is
+computed from them, so Earth's dipole tilt is an expression over
+three coefficient rows; the stored 9.6 it replaced was in no epoch of
+the cited source.
+
+**Rule 7. A display prints the declared count, never more, and never
+chooses fewer** (v2.17). A hover formats to the served count. A display
+with more figures than the row declares is the failure. A display that
+reads as too many figures is a finding about the ROW, not the page:
+the row's count comes down under Rule 3 -- by the ceiling where an
+uncertainty is stated, or by a cap with the reason on the row where
+the relation is approximate and its mismatch cannot be shown -- and
+the page then prints the shorter count because the row declares it.
+The page never shortens on its own, because a shortening the row does
+not record is a judgment nobody can find later, and the served count
+is what every checker reads. One format exception, named where it
+occurs: a display of fixed width truncates a longer served count and
+says so in its comment; the gallery's AU line at min(3, count) is
+that case. A display that FORMATS by a fixed number of places or
+figures rather than by the served count is not that exception; it is
+a site to be listed and assigned when the rule reaches it, as the
+orrery's Earth hovers were at L-322 C2: 47 sites, four kinds, one
+ledger class with no automated coverage, and the four that print more
+than the row declares pulled into the build. (Until v2.17 this rule
+let a display show fewer with no method for choosing, and every use
+of that permission reached Tony as a readability call. Tony,
+2026-09-21: "the basis should be in the skill not arbitrary.")
+
+**An exact row prints the digits its definition states** (v2.18). An
+exact quantity has unlimited figures, so a served count of `exact`
+cannot tell a page how many to print. Until v2.18 the gallery's
+`fmtServed` printed every exact row with `toFixed` and a number of
+places chosen at each of its call sites, which is the page choice this
+rule forbids; nobody noticed while the exact rows were numbers like
+2.0 and 120. The parts:
+
+- **Stored in the form its definition prints.** A quantity defined in
+  arcseconds is a row in arcseconds, and its degree form is an
+  expression over it and an exact conversion row (Rule 3). Horizons
+  defines its ecliptic of J2000 by an obliquity of 84381.448
+  arcseconds, so `EARTH_OBLIQUITY_J2000_ARCSEC` holds that and
+  `EARTH_OBLIQUITY_J2000_DEG` divides it by `ARCSEC_PER_DEG`. The unit
+  check then judges the degree row, instead of trusting a literal that
+  has no inputs.
+- **The print count is a field.** Every exact row a display prints
+  states it on its `# Figures:` line directly after `exact --`, as
+  `exact -- prints N`. That is the only place a checker reads it:
+  measured rows' lines say "the source prints 1.5" in prose, and
+  prose is never read. It has to be a field because the literal cannot
+  carry it. A trailing `.0` is Python's, not a figure (Rule 2), and for
+  a declared pick there is no source resolution to say whether a zero
+  counts, so a count read from the literal would print a floor chosen
+  as 200 km as "200.0 km". The count is the digits the definition or
+  the choice was stated with: 3 for that floor, 1 for Shue's 2 nPa. An
+  exact row defined from another exact row writes its defining input's
+  count on its own line; nothing carries a count between rows. A
+  DECLARED CONSTRUCTION (Rule 2) prints the digits of the value its
+  rule gives, not the counts of the measured rows its rule is over,
+  which are figure counts and not print counts: the midpoint of 4 and
+  5 prints 4.5, two figures. Its line carries both fields:
+  `exact -- prints 2, the digits of the value its rule gives (4.5);
+  declared construction: midpoint of <row>, <row>`.
+- **The checker refuses three counts** (v2.20). A count with more
+  digits than the number has: for a typed number, the digits of the
+  literal as written, trailing zeros included, so 200.0 allows up to
+  four; for an expression, the digits of the value it computes. A
+  count too small to write the number out in full, because an exact
+  number printed rounded is a different number: 105 at two figures
+  would print 100. And any count but 1 on a zero, which prints as 0.
+  `constants_rows.print_count_problem()` makes all three, and the
+  export stops on any of them. An exact row no display prints carries
+  no print count. A display that reaches an exact row with none
+  reports it rather than choosing a width: in the orrery,
+  `constants_rows.exact_text()` raises where the display is built.
+  `exact_rows_report.py --check` fails, naming each item, when a
+  printed exact row states no count, when an orrery line prints one
+  any way but `exact_text()`, or when the gallery does not serve the
+  count beside it; the maintenance run runs it as "Exact rows by the
+  count".
+- **The export carries it and the page prints by it.** The export
+  serves the print count beside the value, and the page prints an
+  exact row to that many significant figures. `toFixed` goes for exact
+  rows. The gallery's magnetopause hover is the case: it prints
+  `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG`, a declared limit typed 120.0, as
+  "Drawn to 120 degrees", until Stage D by a width of 0 decimals chosen
+  at the call site. Under this rule the row states `exact -- prints 3`
+  and the page prints three figures; counted from the literal it would
+  print "120.0".
+- **Earth's obliquity carries no print count.** It is the row this
+  rule was first written on, and it was the example until v2.19. Since
+  the Stage D manifest's revision 3 no display prints it: the axis
+  hovers print the tilt of date, worked out from Horizons' pole, and
+  `EARTH_OBLIQUITY_J2000_DEG` is used only as the angle that defines
+  the ecliptic frame. An exact row no display prints carries no print
+  count, as the second part above says.
+
+(Claude Fable 5.1's review of the Stage D manifest, 2026-09-23,
+Finding 2; the print-count field is Claude Opus 5.5's amendment to it
+in the same round, because Fable's form counted from the literal.
+Tony accepted both on 2026-09-23. The checker, the export and the page
+implement this in the Stage D build.)
+
+**Rule 8. The checker reads the field and names every derived row it
+cannot see.** `test_derived_figures.py` checks the DECLARATION rather
+than a rounded literal: a derived row's count may not exceed the least
+count among the non-exact inputs it names, each named input appears in
+the expression, and a `# Derived:` row with no `# Figures:` line prints
+NOT YET MIGRATED with its name -- a FAIL inside a closed slice, a named
+gap outside one. ENUMERATION NAMES BOTH ROUTES TO A DERIVED ROW, never
+a `# Status:` word: a row whose right-hand side is ARITHMETIC over other
+store rows, and a row carrying a `# Derived:` line. They are not the
+same set. `constants_rows.py` treats a typed number with a `# Derived:`
+note as a LITERAL whose arithmetic lives in prose rather than in the
+expression, so it is invisible to a walk that looks only at right-hand
+sides -- and the two `TRANSITIONAL` standoffs are exactly that shape
+until they revert. The checker names rows found by either route, and an
+expression with no `# Derived:` line is itself a named gap. (At 2.12
+enumeration went by Status and saw 2 of 27.)
+
+**The checker also enforces the ceiling of Rule 3.** It is specified
+here at 2.16 and built at L-322 Stage C2; until that build the checker
+counts only, and a row relying on the uncertainty route fails it. For
+every derived row it works out the ceiling -- by propagation where any
+measured primary in the chain states an uncertainty in the field
+form, by counting otherwise -- and FAILS a row only for declaring MORE
+than its ceiling; where the two ceilings differ it prints both. A row
+declaring more than counting allows must carry the uncertainty form,
+and its stated number must match the recomputed one to the digits
+stated, which is how a one-sided step or a rounded intermediate is
+caught. It reads uncertainties only from the field, never from prose,
+and names any primary whose figures line mentions an uncertainty in
+words without the field, so the blind spot announces.
+
+**The checker also applies Rule 3's scaling paragraph** (v2.21,
+specified here and built with the chromosphere row; widened at v2.22).
+For a derived row that is a source row, or a sum or difference of
+rows, scaled only by exact rows, the ceiling by counting is not the
+fewest figures among the inputs but the place: the source's
+uncertainty, or the coarsest last place among the sum's measured
+inputs, carried through the exact factors and placed by the conversion
+rule in Rule 3; the count is the figures of the computed value down to
+that place. It prints the place it found beside the count, so a wrong
+ceiling is visible and not only a pass. The widening is built with the
+patch that retires the store's conversion rows (L-345, D20), because
+until then those rows declare counts the widened check would refuse.
+The export's conversions are checked separately, value and count, by
+`test_constants_export.py` check 6.
+
+(Tony's rulings, 2026-09-16, adopting the procedure in
+`documentation/DESIGN_L322_d_significant_figures_20260916.md` "as
+recommended" and withdrawing the ruling of 2026-09-12 in the same
+message. Handle L-322 (d).)
+
+### The Store Carries the Verified Figure [CRITICAL]
+
+**Where a source gives a verified figure more precise than the stored
+value, the store carries the verified figure. Rounding happens at the
+reporting step, never at rest.**
+
+The section above governs how many figures a hover, tooltip or comment
+STATES. This governs what the store HOLDS, and the answer is every
+figure the source supports.
+
+A rounded value at rest is a second, less precise store of a number that
+already exists -- the same failure as a shadow constant, one digit at a
+time. It also reads as a measurement to everything downstream: the
+served cache copies it, the assembler draws it, and no layer below the
+orrery knows it was rounded.
+
+**The tell is a value whose own comment names a figure more precise than
+the value beside it.**
+
+```python
+RADIATIVE_ZONE_AU = 0.7 * SOLAR_RADIUS_AU
+# Visualization boundary; rounds the helioseismic tachocline at ~0.713
+```
+
+The store recorded that it was rounding, and rounded anyway. Held from
+first writing until 2026-08-29, in a value drawn on a public page.
+
+**How many figures is set by the source's uncertainty, not by taste.**
+0.713 +/- 0.003 supports three decimal places. Adopting a later,
+tighter figure from a different work is not a precision improvement --
+it changes which work the row cites, and that is a re-sourcing with its
+own access check.
+
+**Two neighbouring cases are NOT this one**, and applying this rule to
+them would be wrong:
+
+- **A pick from a range** is a declared choice and stays one. The range
+  carries the citation; the pick carries its reason. Adding digits to a
+  midpoint does not make it measured.
+- **A visibility stylization** promotes on its own terms, when the
+  physical value becomes drawable -- not because it had too few digits.
+  The chromosphere's 1.1 went to 1.002875 for that reason, on
+  2026-08-16.
+
+The question this rule answers is method, not judgement: it resolves the
+same way next month, for a different constant, in a different file. It
+does not go to Tony. (His ruling, 2026-08-29, sending exactly that
+question back: "we established the rule that significant figures where
+verified should be used.")
+
+### A Derived Row Stores the Figure Its Sources Support -- WITHDRAWN
+
+Ruled by Tony on 2026-09-12 (L-325) and WITHDRAWN by him on 2026-09-16
+as counter-productive under The Figure Count Is a Declared Field. The
+rule said a derived row stores a literal rounded to its declared count,
+so that a test could announce when an input moved. Under Rule 4 a
+rounded literal at rest is a rounded intermediate for every row that
+chains from it, and under Rule 6 the objection that earned the ruling
+-- sixteen digits copied into a gallery config -- is answered at the
+export instead. The stub stays so a reader who finds L-325 or the two
+literal rows knows what happened to the rule.
 
 ## Review-Repair Protocol for Cross-Checked Annotations
 
@@ -1804,1007 +2480,6 @@ Full multi-session history of this protocol (numbered Tier-1 items closed
 via web_search + Gemini cross-check): `documentation/HANDOFF_provenance_
 phase1_v17.md` and related handoffs. The originating rationale:
 `documentation/provenance_audit_handoff_v4.md`.
-
-## Scanner Mechanics (not obvious from the output)
-
-- Flags by NUMERIC token (number + unit) via NUMERIC_CLAIM_RE. The unit
-  vocabulary covers physical units (AU, km, deg, K, masses, radii, time
-  units...) AND humanitarian units (people, persons, percent, %).
-- A citation must sit WITHIN the LOOKBACK WINDOW of the flagged token and
-  use the `# Source:` comment form. In-string "Source:" prose and distant
-  comments do NOT count. A real citation outside the window, or in the
-  wrong form, reads as uncited.
-- File inclusion is role-driven (L-078): a module's display strings are
-  extracted when its module_atlas.py ROLE_MAP role is in NARRATIVE_ROLES
-  ({data, scenario, rendering, rendering/shells, computation}), OR its
-  name is in the legacy narrative_files allow-list, OR it is a
-  *_visualization_shells file. The allow-list is additive (a safety net)
-  until ROLE_MAP is complete. A coverage-gap check reports modules the
-  gate cannot classify -- resolve those by adding the Role:/Domain: tag to
-  the module's own docstring, not by editing the scanner and not by
-  hand-adding a ROLE_MAP entry (since L-163 Phase 3, ROLE_MAP is a
-  generated mirror of those tags; the next module_atlas.py run overwrites
-  anything hand-added).
-- Loads data/provenance_exceptions.json for accepted residuals
-  (suppression checks both context_text and raw_value). Run from a tree
-  WITHOUT that file (e.g. a bare /mnt/project/ snapshot) and the count
-  OVER-REPORTS. The confirming re-run is Tony-side, where the exceptions
-  file lives.
-- False positives get provenance_exceptions.json entries, not code
-  workarounds.
-
-## One Value, One Home [CRITICAL]
-
-**A numeric value has exactly one home -- `constants_new.py`, with its
-source. Everything else references it: the drawing, the hover string,
-the tooltip, the comment. A number typed anywhere else is a second
-store, whether or not it currently agrees.**
-
-This is the POSITIVE form of the section below, and the difference is
-not stylistic. No Shadow Constants forbids copying a value that ALREADY
-lives in `constants_new.py`. It says nothing about where a value's first
-home is when a new feature introduces one, and a new feature is exactly
-where the second store gets created.
-
-**Prose counts.** A hover string that types `1,220 km` is a store. Build
-the sentence so the number interpolates:
-
-```python
-f"The inner core is {EARTH_INNER_CORE_KM:,.1f} km in radius."
-```
-
-Two strings that both interpolate the same constant cannot disagree
-numerically, which is why prose duplication and value duplication are
-different problems -- the first is L-191, the second is this rule.
-
-**Dead code counts.** A literal in a function nothing calls is still a
-store, and it reads as authoritative to whoever finds it next. Wire it
-or delete it; do not leave it because it cannot run. (L-254.)
-
-**THE SCOPE BOUNDARY, and it must be stated in the same breath:
-THREE KINDS OF DRAWING NUMBER** (v2.18, Tony's ruling of 2026-09-22).
-Every number a drawing uses is one of three kinds, and each kind has
-one home.
-
-- **A PHYSICAL value** -- a size, an edge, a distance, a cut angle, a
-  width -- lives in `constants_new.py`. A measured one is sourced. A
-  decided one is declared, with its reason and the range it was picked
-  from on the row (When the Source Gives a Range).
-- **An EYEBALLED value** -- a physical value chosen because the render
-  looked right, usually before the sourcing rules existed -- does not
-  promote (A Drawing Approximation Does Not Promote). It is replaced by
-  one of that section's three outcomes as the braid reaches it, and a
-  published room is reached first.
-- **A RENDERING SETTING** -- `n_points`, `n_rings`, `marker_size`,
-  marker type, `opacity`, colour, font, `mesh_resolution`, an angular
-  marker step -- makes no claim about the object. It stays in the
-  drawing code where it is drawn. Tony: "these are defined in the code
-  not in constants new."
-
-**The test between the first kind and the third: does changing the
-number move WHERE something is drawn, or only change HOW it looks?**
-Earth's radiation-belt thickness of 0.5 Earth radii was the case that
-needed the test. It looks like a drawing setting, but it moves where the
-rings sit, so it is physical; with no recorded origin it is eyeballed,
-and Stage D replaces it by the belts' served edges. A point count only
-makes the same ring smoother.
-
-Two notes on the third kind. A colour is a rendering setting, but a
-hover sentence saying what colour the object IS is a claim and needs a
-source like any other. And two rendering settings were still in
-`constants_new.py` when this was written, `DEFAULT_MARKER_SIZE` and
-`CENTER_MARKER_SIZE`; they are one ledger class and move to the drawing
-code when their files are next touched.
-
-This is L-240's split, sharpened. Without it "only store" reads as
-hauling 25 and 3.4 into `constants_new.py`, which buries the values
-that matter under the ones that do not.
-
-**IN TIME: forward-going on every file touched.** The standing backlog
-carries the sweep -- L-181 is the parent, with L-243, L-244 and L-248 as
-open slices. This rule does NOT open a repo-wide sweep on the day it is
-adopted; that is the denominator that grows whenever someone thinks of
-something. (The Braid, resident protocol Part 3.)
-
-(Tony's ruling, 2026-08-26, stated as general and confirmed with the
-boundary above in the same exchange.)
-
-## Observations Are Sourced Facts, and They Migrate [CRITICAL]
-
-An observed event figure is a measured value with a source, and its home
-is `constants_new.py` like any other.
-
-A disintegration radius, a spacecraft's closest approach, a crossing
-distance, a perihelion -- these read as narrative rather than as
-constants, so they get typed into prose and stay there. They are
-observations of the physical world with an authority behind them, and
-One Value, One Home applies to them without exception.
-
-The scope boundary is unchanged: MEASURED values migrate, DECLARED
-drawing parameters stay where they are drawn.
-
-The practical consequence is an ordering one. A citation cannot move
-into the store ahead of the value it cites, because a citation with no
-value beside it has nowhere to sit. So the migration is: value first,
-then its source line, then the prose references the constant.
-
-(Tony's ruling, 2026-08-27. Founding case: MAPS C/2026 A1's
-disintegration at 8.33 R_sun is cited to SOHO/CCOR-1 observations at
-`solar_visualization_shells.py` line 1226, and the figure itself lives
-only in display strings.)
-
-## Report to the Figures You Have [QUALITY]
-
-**Compute at full precision. Report to the significant figures the least
-precise input supports.** The two halves are separate and a careless
-reader can make them contradict each other, so they are stated together.
-
-Rounding a derived constant in code introduces error AND creates a
-rounded second store of a value that lives elsewhere, so the derivation
-stays symbolic:
-
-```python
-EARTH_INNER_CORE_RADII = EARTH_INNER_CORE_KM / EARTH_EQUATORIAL_RADIUS_KM
-# Figures: 5 -- set by EARTH_INNER_CORE_KM (1221.5, 5)
-# Derived: 1221.5 / 6378.1366 = 0.19151
-```
-
-Significant figures govern REPORTING: every quotient stated in a
-comment, a hover string or a tooltip carries no more figures than the
-row's `# Figures:` line declares. The count is a field, not prose, so
-the next reader does not re-derive it and a checker can read it; the
-section below says how the field is written and counted.
-
-**A subtraction is governed by decimal PLACES, not significant figures.**
-`6371.0 - 660` is good to TENS, because its 660 km input is good to
-tens, so 5710 and not 5711.
-
-The failure this catches is quiet. Stating `0.8953994` when the inputs
-support `0.8954` is not a small error in the last digits -- it is six
-digits the value was never entitled to, and it reads as a measurement.
-(Tony's ruling, 2026-08-26, after exactly that appeared in a table.)
-
-### The Figure Count Is a Declared Field [QUALITY]
-
-Python can round a number to N figures but cannot count them through
-arithmetic, so the count is declared per row, the way the unit is.
-These are the textbook rules, written down once so they resolve the
-same way for every row. The reference is **Wikipedia, Significant
-figures**, which Tony named and which is open: every rule below can be
-checked against it by anybody, which is the point. The same rules
-appear in ASTM E29, but that is an aside and NOT the reference we work
-from -- it costs $86, so a rule the project depends on could not be
-opened by any of us, which fails our own Access Standard; and its scope
-is conformance with specification limits, which this store has none of.
-(Tony's ruling, 2026-09-19, L-342.)
-
-**Where a rule below states a condition, the condition is load-bearing
-and is not to be trimmed.** v2.14's Rule 2 said trailing zeros after a
-decimal point count, full stop. The page says they count WHEN THEY ARE
-WITHIN THE REPORTING RESOLUTION. Dropping four words made the rule
-wrong, and nobody could see it without opening the source -- which is
-the argument for citing something openable rather than for copying a
-standard verbatim.
-
-**Rule 1. `# Figures:` is a comment key beside the value.** Seven forms:
-
-```
-# Figures: 5 -- set by EARTH_INNER_CORE_KM (1221.5, 5)
-# Figures: 5 -- PREM reports to 0.1 km, so 3480.0's trailing zero counts
-# Figures: exact -- IAU 2012 definition
-# Figures: exact -- prints 8, the definition's own digits (84381.448)
-# Figures: 4 -- Table 1 prints 10.22, uncertainty 0.10
-# Figures: 3 -- uncertainty 0.13, root-sum-square of Shue's a1 to a5
-# Figures: 4 -- thousandths: thousands place of the sum, set by CHROMOSPHERE_PHYSICAL_KM (2000, 1), carried through the exact SUN_RADIUS_KM
-```
-
-A derived row names the input that set its count. A place-governed
-row scaled by an exact row names the place it keeps, the input that
-set the place, and the exact row it was scaled by (Rule 3, scaling). A measured row
-states what the source supports, and says in words whether a trailing
-zero counts, because an integer literal cannot. A defined constant says
-`exact`, and when a display prints it, also how many figures it prints
-(`prints N`, Rule 7's exact row). A measured row whose source STATES an uncertainty writes it
-as a FIELD: the word `uncertainty` followed directly by the number, in
-the row's own unit, on its `# Figures:` line. A checker reads that
-field and never the prose around it, so "an uncertainty of 0.1 m" in
-words is not read. A derived row writes the uncertainty form only when
-it declares more figures than counting alone allows, and then the
-number is the one recomputed from full digits (Rule 3, The ceiling). The field is needed because a float cannot hold a significant
-trailing zero (13.50 is stored as 13.5) and the export would otherwise
-lose the count.
-
-**Rule 2. Counting a literal follows the standard rules.** Non-zero
-digits count; zeros between them count; leading zeros never count;
-trailing zeros in an integer count only if the source says so. An exact
-number has unlimited figures.
-
-**Trailing zeros after a decimal point count WHEN THEY FALL WITHIN THE
-SOURCE'S MEASUREMENT OR REPORTING RESOLUTION**, and that condition is
-the rule, not a refinement of it. 1500 m measured to a resolution of
-100 m has TWO figures, not four, and the page lists exactly that case
-among the digits which are not significant: trailing zeros serving as
-placeholders. So the question to ask of a row is never "where does the
-last digit fall" but "to what resolution does this source report". PREM
-Table I reports every boundary radius to 0.1 km, so `3480.0` carries
-five. The NASA fact sheet prints `6371.000` in a block that also prints
-3485, 5513, 20.4 and 11.186, so it is not padding and the value carries
-seven. A DECLARED drawing condition (a chosen solar wind pressure, a
-chosen cut angle) is exact for counting: it is a choice, not a
-measurement, so all of its digits are known.
-
-**A trailing `.0` in this store is Python's, not a figure** (v2.20).
-The digits of a choice are the digits it was chosen with, and a decimal
-point Python needs is not one of them. A trailing `.0` reaches this
-store and its displays by three routes, and none of them says anything
-about significant figures:
-
-- **Typing.** Python treats a number written with a decimal point as a
-  float and one without as a whole number, so rows are typed `200.0`
-  to make them floats. `200`, `200.0` and `200.00` are the same stored
-  number; the float keeps no record of how it was typed. That is also
-  why `13.50` is stored as `13.5` (Rule 1).
-- **Arithmetic.** Division in Python always returns a float, even
-  between whole numbers: `4 / 2` is `2.0`. A derived row can gain a
-  `.0` from its expression without anyone typing one.
-- **Printing.** A float printed with no format always shows at least
-  one decimal place, so a whole-number float prints as `2.0`. That
-  covers `str()`, a bare f-string `{x}`, and `json.dumps`, which
-  writes `constants_export.json`. A format can remove it (`:g` prints
-  `2`) and a page can put it back: the gallery printed the declared
-  solar wind pressure as "2.0 nPa" by its own `toFixed(1)`, from a
-  value JavaScript had read out of the export as plain 2.
-
-So the literal, the printed value, the exported value and the page's
-output cannot say which trailing zeros are meant. For a measured row
-the source's reporting resolution says (above). For an exact row the
-digits it was defined or chosen with say: the declared pressure is
-2 nPa because Shue et al. (1998) use Dp = 2 nPa, and the `.0` in
-`2.0` is Python's. That is why the count is a field on the
-`# Figures:` line and an exact row's print count is a field too
-(Rule 7), never read from the value. A choice that really was made to
-a trailing zero says so on its `# Declared:` line, and its print count
-states it. (Checked by running Python 3 and Node on 2026-09-27, at
-Tony's request, when the Stage D print counts were settled. Handle
-L-322.)
-
-**A DECLARED CONSTRUCTION is exact in the same way** (v2.17). A drawing
-value that is a stated rule over measured rows -- the midpoint of a
-sourced band, the top of a sourced range -- is a choice, not a
-measurement, and its `# Figures:` line names the rule and the rows:
-`exact -- declared construction: midpoint of <row>, <row>`. The
-checker accepts `exact` only on a row whose `# Status:` begins
-`declared` (not `declared pending`), with every named row in the
-expression; a `measured` or `derived` row cannot declare exact over a
-measured input. The export serves an exact row unrounded, so every
-consumer draws the same value. The alternative was measured before
-this was written: counted to its rows' one figure, the outer belt's
-4.5 exported as 4.0 for the gallery while the orrery drew 4.5 from
-the float -- two consumers, two rings. The construction is not a
-measurement and the hover does not print it as one: it shows the
-range from the rows and states the rule (When the source gives a
-range). The checker lists every declared construction by name in its
-output, so each use is seen. Earth's outer-belt peak is the case
-(L-322 C2).
-
-**Rule 3. A derived row's count is set by its least precise MEASURED
-input.** Products and quotients keep the fewest figures among the
-inputs. Sums and differences are good to the coarsest decimal place
-among the inputs (`6371.0 - 660` is good to tens: 5710, because its
-660 km input carries two figures). Exact inputs
-and declared conditions are skipped when finding the minimum. For a
-power, an exponential or another function, the fewest-figures rule is
-the default; where the function magnifies the input's uncertainty (an
-exponent above one in magnitude), drop a figure and say why on the
-row. Where an input carries a stated uncertainty, the uncertainty
-decides instead and counting is the fallback; how is set out under The
-ceiling, below.
-
-**A place-governed value scaled by an exact row keeps its place, not
-its count** (v2.21). A sum or difference is good to a decimal place
-(above). Multiplying or dividing it by an exact row -- a unit
-conversion, a nominal radius -- moves that place with the value, and
-the row keeps the place the scaling gives: a sum good to thousands of
-kilometres, divided by 695,700 km per solar radius, is good to
-thousandths of a solar radius, because 1,000 km is 0.0014 solar
-radii. Counting the quotient by fewest figures instead keeps three on
-either side of the division, and three figures of 698,000 is
-+/- 500 km while three figures of 1.003 is +/- 3,500 km: the leading
-digit went from 6 to 1 and the count lost a factor of seven. The
-reference page names this case. Its arithmetic guidelines do not
-ensure the result's implied uncertainty is close to the measured one,
-it says the problem shows up in unit conversion, and its example is
-8 inches (+/- 0.5 in) converted by the guideline to 20 cm (+/- 5 cm)
-when the proper result is 20. cm (+/- 0.5 cm). The place kept is the
-power of ten nearest, on a log scale, to the sum's place unit carried
-through the scaling, a tie going to the coarser -- the same measure
-the Report bullet under The ceiling uses: 1,000 km / 695,700 km is
-0.0014, nearer 0.001 than 0.01, so thousandths. The row states the
-place it keeps, the input that set the sum's place, and the exact row
-it was scaled by (Rule 1, seventh form). The two forms of one
-expression now count the same: 1 + 2000 / 695700 and
-(695700 + 2000) / 695700 both keep thousandths, so whichever form the
-unit check accepts, the count is 4. This is not an implied
-uncertainty raising a count; it is the sum's own place, converted,
-and it reaches nothing but a sum or difference scaled by exact rows.
-A product or quotient of measured quantities keeps fewest figures as
-before, and Jelinek's bow shock stays 13.5.
-
-**A value in another unit is computed, never stored, and its count
-comes from its source row alone** (v2.22). Each quantity is ONE row,
-in the unit its best source gives it, carrying that source. Its value
-in any other unit is not a row: `constants_rows.conversions()` works it
-out from the source row's full digits times the exact factor, rounds
-once, and the export serves it as `"in"` (schema 6). A name the
-orrery's drawing code keeps for such a value is computed from the one
-row and states no precision of its own. A conversion has no chain. Its
-uncertainty is its source row's, scaled by the exact factor: the stated
-uncertainty, where the source's figures field has one; otherwise half a
-unit of the source's last declared place; for an exact source, half a
-unit of the last place of its print count. The place printed is the one
-whose implied uncertainty, half a unit in that place, is nearest that
-scaled uncertainty on a log scale, a tie going to the coarser -- the
-Report test under The ceiling. Where the uncertainty is half a unit of
-a place, that is the same as carrying the place itself through the
-factor to the nearest power of ten, which is the measure the paragraph
-above uses. The count is the figures of the full-digit value down to
-that place, and never fewer than one: where the place is coarser than
-the value's leading digit, the value keeps its one leading figure
-(a one-figure 100 Earth radii is 0.004 AU, not 0.00). An exact source's
-conversions are exact, unrounded, with a print count found the same
-way; the row that defines a unit is 1 in that unit, printing 1. The
-sum rule above is one instance of this: a sum's declared place is the
-place its count names. This reads a row's declared precision; it never
-sets a row's ceiling from its chain, so the implied-uncertainty bullet
-under The ceiling stands and Jelinek's bow shock stays 13.5 Earth
-radii. The exception cuts both ways. The chromosphere gains a figure
-(698,000 km at three, 1.003 solar radii at four); the bow shock loses
-one (13.5 Earth radii at three, 86,000 km at two, because the source's
-last figure is worth 638 km and "86,200" would claim fifty). A
-conversion whose source row is wrong is fixed at the source row, once.
-(Tony's ruling, 2026-09-28, on Claude Fable 5.1's recommendation;
-L-345. Fable's text said "the power of ten nearest that scaled
-uncertainty"; its own worked numbers, and the Report test it names,
-compare the uncertainty with half a unit in each place, which is the
-wording here. Read the other way, the bow shock's AU would print
-0.000576 at three figures, against the ruling's 0.00058.)
-
-The top of the chromosphere is the worked case. `SUN_RADIUS_KM +
-CHROMOSPHERE_PHYSICAL_KM` is good to thousands, set by the depth
-Carroll & Ostlie give as about 2,000 km (one figure), so 698,000 km at
-three figures; divided by the exact `SUN_RADIUS_KM` it keeps
-thousandths, 1.003 at four figures -- one more figure than the
-kilometre line, and the figure the drawing needs. The export rounds
-to the count (Rule 6): at three figures the served value is 1.00,
-which draws the chromosphere on the photosphere and erases the
-2,000 km hairline promoted on 2026-08-16; at 1.003 it draws 2,087 km
-above the photosphere, inside the source's "about". The hover still
-says about 2,000 km deep, and the radius line no longer contradicts
-it with an implied +/- 3,500 km. Before this paragraph the rule as
-written gave 1.00 by the sum-first form and 1.003 by the divide-first
-form, and the unit check forced the first. (Tony's ruling,
-2026-09-28, confirming Claude Fable 5.1's recommendation, checked
-against the reference page the same day. Handle L-322.)
-
-**A row may declare FEWER figures than its inputs support when the
-RELATION ITSELF is approximate, with the reason in words on the row.**
-Counting governs how precision flows through arithmetic; it says
-nothing about a formula that is an idealisation to begin with. Earth's
-Hill sphere is the case: every input is exact or carries nine figures,
-so counting gives seven, but substituting Earth's perihelion distance
-for its mean distance moves the answer by more than one percent. Seven
-figures would claim a precision the relation cannot deliver whatever
-its inputs carry. This is a floor on honesty, not a licence to round to
-taste: the row must say WHICH approximation caps it and by roughly how
-much. (L-342, Fable's review of C1, Finding 3.)
-
-**A rate or other derivative row is written as the derivative
-expression over the rows, never as a difference of two evaluations**
-(v2.17). The difference form is counted by decimal place from the two
-evaluated values, whose places come from the largest inputs, so the
-quantities the rate rests on set no count and the row claims a
-precision it borrowed. Earth's dipole tilt rate is the case: as a
-one-year difference of two tilts it would carry the main field's
-places; as the derivative over the six IGRF-13 rows it carries three
-figures, set by the sum inside it, -0.0493 degrees per year.
-Time-rate rows use time-rate tokens (`nt_per_year`, `deg_per_year`).
-
-**An angle computed from a pure number never applies `degrees` to the
-result.** An inverse trigonometric function of a ratio, or a rate
-derived from one, comes out of the arithmetic as a bare number or an
-inverse time. The unit check reduces a ratio whose units cancel to a
-plain float before the function, so `degrees` of the result is a bare
-number declared in `deg`, a MISMATCH; `degrees` of an inverse time it
-refuses outright, CANNOT EVALUATE, which fails inside a closed slice.
-The row multiplies by the exact row `DEG_PER_RAD` instead, whose unit
-is `deg` and which carries the radian, so the unit check follows the
-chain to degrees, or degrees per time, with no equivalency. Both the
-tilt and its rate are written this way, and both were run through
-both checkers before this was written. `DEG_PER_RAD` has no store
-inputs, so neither checker judges it and its unit is asserted; the
-row says so in words, as a definition.
-
-**A unit conversion inside an expression is an exact row, never a bare
-number** (v2.18). The unit check converts units by itself, so dividing
-seconds by a bare 3600 leaves seconds. Earth's sidereal rotation period
-was drafted as `2 * math.pi / EARTH_ROTATION_RATE_RAD_S / 3600.0` and
-declared in hours; the unit check failed it as a MISMATCH, the
-arithmetic giving 0.006648 hours against 23.93447 stored, while the
-figures check passed the same row. The conversion is an exact row with
-a compound-unit token -- `S_PER_HOUR` in `s_per_h`, `ARCSEC_PER_DEG` in
-`arcsec_per_deg` -- and the expression divides by the row. A pure number
-that belongs to the physics, like the two pi in a period, stays bare,
-because the token it meets already treats the radian as dimensionless;
-giving it a unit fails the check the other way ("declares s; the
-arithmetic gives rad s"). Both forms were run through both checkers
-before this was written. (Claude Fable 5.1's review of the Stage D
-manifest, Finding 1, re-run by Claude Opus 5.5 at ac25d4f4. Other rows
-that convert by a bare number, such as `LIGHT_MINUTES_PER_AU`, are one
-ledger class.)
-
-**The ceiling: where an uncertainty is stated, propagate it** (v2.16).
-The procedure these rules were adopted from says it in one line:
-"Where any input carries a stated uncertainty, propagate that instead
-and let it decide." Five parts make that usable. What the reference
-page says is kept apart from what this project adds, and the project's
-part is marked as its own.
-
-- **Which uncertainty.** Propagate the stated uncertainties of the
-  INPUTS: how well each was measured or fitted. A model's scatter about
-  the data it was fitted to is a different quantity. It describes the
-  real thing around the model, and it is shown beside the value, not
-  propagated into it.
-- **Show or cap.** Where the source publishes the size of a relation's
-  mismatch as a number the store can hold and the page can show, show
-  it beside the value: real magnetopause crossings scatter 1.23 Earth
-  radii about Shue's model, and the hover says so. Where it does not,
-  cap the count and say why on the row, as the Hill sphere's is in the
-  paragraph above. This decides which of the two answers applies. It
-  also decides a snapshot of a quantity that moves (v2.17): where the
-  source publishes the rate, the store holds the rate's inputs and the
-  page shows the epoch and the rate beside the value; where it does
-  not, the count is capped to the place the movement over the model's
-  validity span supports. Earth's dipole tilt is the case: IGRF-13
-  prints the secular variation, so the tilt prints at its full count
-  with its epoch and its rate.
-- **When propagation sets the ceiling.** A derived row's ceiling -- the
-  most figures it may declare -- is set by propagation whenever at
-  least one measured primary in its chain STATES an uncertainty, and by
-  counting otherwise. A row may always declare its ceiling or fewer. It
-  writes the uncertainty form of Rule 1 only when it declares MORE than
-  counting alone allows, so the reason for the extra figures is on the
-  row; a row that counts and stays within its ceiling keeps its
-  counting line. Implied uncertainties alone never set a ceiling:
-  Jelinek's bow shock standoff, whose chain states none, is 13.5 by
-  counting and would be 13.51 if they did. A place carried through an
-  exact scaling is not this: it is the sum's own place, converted
-  (Rule 3, scaling).
-- **Propagate.** Trace the row to its primaries. Move each up and down
-  by its uncertainty and take the half-difference, a central
-  difference; a one-sided step gives a different answer wherever the
-  relation curves (Shue's standoff gives 0.129 up and 0.136 down).
-  Combine by root-sum-square, re-evaluating through the chain from full
-  digits: Rule 4 applies to an uncertainty exactly as to a value, and
-  an uncertainty converted from a rounded one is the same failure.
-  Root-sum-square assumes independent inputs; where the source gives no
-  correlations the row says so, and where the reported place would not
-  survive the plain sum of the effects, the row gives both numbers. A
-  primary that states no uncertainty contributes its implied one, half
-  a unit in its last significant place, as the page allows; that is a
-  full half-width rather than a standard deviation, so it errs large.
-  Declared conditions and exact numbers contribute nothing.
-- **Report. What the page says:** to report a single number, choose
-  the one whose implied range is close to the measured range, since
-  going coarser loses a lot of information; its examples are
-  3.78 +/- 0.07 kg and 3.78 +/- 0.09 kg, both best quoted as 3.8 kg.
-  Where the uncertainty is printed beside the value, it takes one or
-  two figures and the value ends in the same place. **What this project
-  adds, and why:** "close" is measured on a log scale, because implied
-  uncertainties step by factors of ten, and a tie goes to the coarser
-  place; a linear measure would keep the tenths place up to +/- 0.27
-  and overstate the precision five-fold. Each unit is reported by its
-  own uncertainty, so a value and its conversion can carry different
-  counts; the page warns of exactly this for unit conversions, and on
-  the counting route the same exception is Rule 3's scaling
-  paragraph.
-
-The magnetopause standoff is the worked case. Shue's Table 1 states a
-standard deviation on every coefficient; propagated at the declared
-solar wind they give 10.2518729724 +/- 0.1326 Earth radii, reported
-10.3 -- the tenths place implies +/- 0.05 and the units place +/- 0.5,
-and the tenths is closer. The store had carried 10.25, a figure too
-many even by the largest single effect, +/- 0.09. In kilometres the
-same uncertainty is +/- 846 km, so 65,000 km at two figures; in AU,
-0.00044. The plain sum of the effects is 0.25 and the tenths place
-holds only to 0.158, which the row states. (Tony's instruction of
-2026-09-20, "See the Skill on significant digits"; worked in
-`documentation/BUILD_MANIFEST_L322_C2_magnetosphere_20260920.md`,
-section 2.1, and reviewed twice by Claude Fable 5.1. Handle L-322.)
-
-**Rule 4. Compute from the PRIMARY inputs at full precision; round
-once.** A derived row that feeds a second derived row does not chain
-through a rounded copy. The second row's `# Derived:` line goes back to
-the measured primaries. Rounding an intermediate puts a rounding error
-inside the store.
-
-**Rule 5. Round half to even**, implemented as `float("%.*g" % (n, x))`.
-This is what Python's `round()` and `%g` already do; the schoolroom
-half-away-from-zero is not, so the rule is named to avoid an argument
-with the interpreter.
-
-**Rule 6. The store holds the derivation, never a rounded copy.** A
-derived row stays an expression at full float precision and follows its
-inputs automatically. Rounding happens at the reporting step, and the
-EXPORT is a reporting step: it rounds each value to its declared count
-and carries the count beside the value and the unit, so the gallery
-formats without guessing and no downstream copy holds digits the row
-never had. (This is what Tony's 2026-09-12 objection was about --
-sixteen digits copied into a gallery config -- and Rule 6 answers it at
-the boundary rather than at rest.) The two magnetosphere standoffs
-stored as literals under the withdrawn ruling stay literals until the
-export lands and the gallery stops parsing the store (L-322 ruling 6);
-they revert to expressions at their slice visit.
-
-**Where a source prints the parts and states the relation that makes
-the whole, the whole is a derived row over measured rows for the
-parts** (v2.17) -- never a typed result with its working in a comment,
-which a closed slice does not accept (Rule 8 names that shape).
-IGRF-13 prints the three degree-1 coefficients and says the pole is
-computed from them, so Earth's dipole tilt is an expression over
-three coefficient rows; the stored 9.6 it replaced was in no epoch of
-the cited source.
-
-**Rule 7. A display prints the declared count, never more, and never
-chooses fewer** (v2.17). A hover formats to the served count. A display
-with more figures than the row declares is the failure. A display that
-reads as too many figures is a finding about the ROW, not the page:
-the row's count comes down under Rule 3 -- by the ceiling where an
-uncertainty is stated, or by a cap with the reason on the row where
-the relation is approximate and its mismatch cannot be shown -- and
-the page then prints the shorter count because the row declares it.
-The page never shortens on its own, because a shortening the row does
-not record is a judgment nobody can find later, and the served count
-is what every checker reads. One format exception, named where it
-occurs: a display of fixed width truncates a longer served count and
-says so in its comment; the gallery's AU line at min(3, count) is
-that case. A display that FORMATS by a fixed number of places or
-figures rather than by the served count is not that exception; it is
-a site to be listed and assigned when the rule reaches it, as the
-orrery's Earth hovers were at L-322 C2: 47 sites, four kinds, one
-ledger class with no automated coverage, and the four that print more
-than the row declares pulled into the build. (Until v2.17 this rule
-let a display show fewer with no method for choosing, and every use
-of that permission reached Tony as a readability call. Tony,
-2026-09-21: "the basis should be in the skill not arbitrary.")
-
-**An exact row prints the digits its definition states** (v2.18). An
-exact quantity has unlimited figures, so a served count of `exact`
-cannot tell a page how many to print. Until v2.18 the gallery's
-`fmtServed` printed every exact row with `toFixed` and a number of
-places chosen at each of its call sites, which is the page choice this
-rule forbids; nobody noticed while the exact rows were numbers like
-2.0 and 120. The parts:
-
-- **Stored in the form its definition prints.** A quantity defined in
-  arcseconds is a row in arcseconds, and its degree form is an
-  expression over it and an exact conversion row (Rule 3). Horizons
-  defines its ecliptic of J2000 by an obliquity of 84381.448
-  arcseconds, so `EARTH_OBLIQUITY_J2000_ARCSEC` holds that and
-  `EARTH_OBLIQUITY_J2000_DEG` divides it by `ARCSEC_PER_DEG`. The unit
-  check then judges the degree row, instead of trusting a literal that
-  has no inputs.
-- **The print count is a field.** Every exact row a display prints
-  states it on its `# Figures:` line directly after `exact --`, as
-  `exact -- prints N`. That is the only place a checker reads it:
-  measured rows' lines say "the source prints 1.5" in prose, and
-  prose is never read. It has to be a field because the literal cannot
-  carry it. A trailing `.0` is Python's, not a figure (Rule 2), and for
-  a declared pick there is no source resolution to say whether a zero
-  counts, so a count read from the literal would print a floor chosen
-  as 200 km as "200.0 km". The count is the digits the definition or
-  the choice was stated with: 3 for that floor, 1 for Shue's 2 nPa. An
-  exact row defined from another exact row writes its defining input's
-  count on its own line; nothing carries a count between rows. A
-  DECLARED CONSTRUCTION (Rule 2) prints the digits of the value its
-  rule gives, not the counts of the measured rows its rule is over,
-  which are figure counts and not print counts: the midpoint of 4 and
-  5 prints 4.5, two figures. Its line carries both fields:
-  `exact -- prints 2, the digits of the value its rule gives (4.5);
-  declared construction: midpoint of <row>, <row>`.
-- **The checker refuses three counts** (v2.20). A count with more
-  digits than the number has: for a typed number, the digits of the
-  literal as written, trailing zeros included, so 200.0 allows up to
-  four; for an expression, the digits of the value it computes. A
-  count too small to write the number out in full, because an exact
-  number printed rounded is a different number: 105 at two figures
-  would print 100. And any count but 1 on a zero, which prints as 0.
-  `constants_rows.print_count_problem()` makes all three, and the
-  export stops on any of them. An exact row no display prints carries
-  no print count. A display that reaches an exact row with none
-  reports it rather than choosing a width: in the orrery,
-  `constants_rows.exact_text()` raises where the display is built.
-  `exact_rows_report.py --check` fails, naming each item, when a
-  printed exact row states no count, when an orrery line prints one
-  any way but `exact_text()`, or when the gallery does not serve the
-  count beside it; the maintenance run runs it as "Exact rows by the
-  count".
-- **The export carries it and the page prints by it.** The export
-  serves the print count beside the value, and the page prints an
-  exact row to that many significant figures. `toFixed` goes for exact
-  rows. The gallery's magnetopause hover is the case: it prints
-  `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG`, a declared limit typed 120.0, as
-  "Drawn to 120 degrees", until Stage D by a width of 0 decimals chosen
-  at the call site. Under this rule the row states `exact -- prints 3`
-  and the page prints three figures; counted from the literal it would
-  print "120.0".
-- **Earth's obliquity carries no print count.** It is the row this
-  rule was first written on, and it was the example until v2.19. Since
-  the Stage D manifest's revision 3 no display prints it: the axis
-  hovers print the tilt of date, worked out from Horizons' pole, and
-  `EARTH_OBLIQUITY_J2000_DEG` is used only as the angle that defines
-  the ecliptic frame. An exact row no display prints carries no print
-  count, as the second part above says.
-
-(Claude Fable 5.1's review of the Stage D manifest, 2026-09-23,
-Finding 2; the print-count field is Claude Opus 5.5's amendment to it
-in the same round, because Fable's form counted from the literal.
-Tony accepted both on 2026-09-23. The checker, the export and the page
-implement this in the Stage D build.)
-
-**Rule 8. The checker reads the field and names every derived row it
-cannot see.** `test_derived_figures.py` checks the DECLARATION rather
-than a rounded literal: a derived row's count may not exceed the least
-count among the non-exact inputs it names, each named input appears in
-the expression, and a `# Derived:` row with no `# Figures:` line prints
-NOT YET MIGRATED with its name -- a FAIL inside a closed slice, a named
-gap outside one. ENUMERATION NAMES BOTH ROUTES TO A DERIVED ROW, never
-a `# Status:` word: a row whose right-hand side is ARITHMETIC over other
-store rows, and a row carrying a `# Derived:` line. They are not the
-same set. `constants_rows.py` treats a typed number with a `# Derived:`
-note as a LITERAL whose arithmetic lives in prose rather than in the
-expression, so it is invisible to a walk that looks only at right-hand
-sides -- and the two `TRANSITIONAL` standoffs are exactly that shape
-until they revert. The checker names rows found by either route, and an
-expression with no `# Derived:` line is itself a named gap. (At 2.12
-enumeration went by Status and saw 2 of 27.)
-
-**The checker also enforces the ceiling of Rule 3.** It is specified
-here at 2.16 and built at L-322 Stage C2; until that build the checker
-counts only, and a row relying on the uncertainty route fails it. For
-every derived row it works out the ceiling -- by propagation where any
-measured primary in the chain states an uncertainty in the field
-form, by counting otherwise -- and FAILS a row only for declaring MORE
-than its ceiling; where the two ceilings differ it prints both. A row
-declaring more than counting allows must carry the uncertainty form,
-and its stated number must match the recomputed one to the digits
-stated, which is how a one-sided step or a rounded intermediate is
-caught. It reads uncertainties only from the field, never from prose,
-and names any primary whose figures line mentions an uncertainty in
-words without the field, so the blind spot announces.
-
-**The checker also applies Rule 3's scaling paragraph** (v2.21,
-specified here and built with the chromosphere row; widened at v2.22).
-For a derived row that is a source row, or a sum or difference of
-rows, scaled only by exact rows, the ceiling by counting is not the
-fewest figures among the inputs but the place: the source's
-uncertainty, or the coarsest last place among the sum's measured
-inputs, carried through the exact factors and placed by the conversion
-rule in Rule 3; the count is the figures of the computed value down to
-that place. It prints the place it found beside the count, so a wrong
-ceiling is visible and not only a pass. The widening is built with the
-patch that retires the store's conversion rows (L-345, D20), because
-until then those rows declare counts the widened check would refuse.
-The export's conversions are checked separately, value and count, by
-`test_constants_export.py` check 6.
-
-(Tony's rulings, 2026-09-16, adopting the procedure in
-`documentation/DESIGN_L322_d_significant_figures_20260916.md` "as
-recommended" and withdrawing the ruling of 2026-09-12 in the same
-message. Handle L-322 (d).)
-
-### The Store Carries the Verified Figure [CRITICAL]
-
-**Where a source gives a verified figure more precise than the stored
-value, the store carries the verified figure. Rounding happens at the
-reporting step, never at rest.**
-
-The section above governs how many figures a hover, tooltip or comment
-STATES. This governs what the store HOLDS, and the answer is every
-figure the source supports.
-
-A rounded value at rest is a second, less precise store of a number that
-already exists -- the same failure as a shadow constant, one digit at a
-time. It also reads as a measurement to everything downstream: the
-served cache copies it, the assembler draws it, and no layer below the
-orrery knows it was rounded.
-
-**The tell is a value whose own comment names a figure more precise than
-the value beside it.**
-
-```python
-RADIATIVE_ZONE_AU = 0.7 * SOLAR_RADIUS_AU
-# Visualization boundary; rounds the helioseismic tachocline at ~0.713
-```
-
-The store recorded that it was rounding, and rounded anyway. Held from
-first writing until 2026-08-29, in a value drawn on a public page.
-
-**How many figures is set by the source's uncertainty, not by taste.**
-0.713 +/- 0.003 supports three decimal places. Adopting a later,
-tighter figure from a different work is not a precision improvement --
-it changes which work the row cites, and that is a re-sourcing with its
-own access check.
-
-**Two neighbouring cases are NOT this one**, and applying this rule to
-them would be wrong:
-
-- **A pick from a range** is a declared choice and stays one. The range
-  carries the citation; the pick carries its reason. Adding digits to a
-  midpoint does not make it measured.
-- **A visibility stylization** promotes on its own terms, when the
-  physical value becomes drawable -- not because it had too few digits.
-  The chromosphere's 1.1 went to 1.002875 for that reason, on
-  2026-08-16.
-
-The question this rule answers is method, not judgement: it resolves the
-same way next month, for a different constant, in a different file. It
-does not go to Tony. (His ruling, 2026-08-29, sending exactly that
-question back: "we established the rule that significant figures where
-verified should be used.")
-
-### A Derived Row Stores the Figure Its Sources Support -- WITHDRAWN
-
-Ruled by Tony on 2026-09-12 (L-325) and WITHDRAWN by him on 2026-09-16
-as counter-productive under The Figure Count Is a Declared Field. The
-rule said a derived row stores a literal rounded to its declared count,
-so that a test could announce when an input moved. Under Rule 4 a
-rounded literal at rest is a rounded intermediate for every row that
-chains from it, and under Rule 6 the objection that earned the ruling
--- sixteen digits copied into a gallery config -- is answered at the
-export instead. The stub stays so a reader who finds L-325 or the two
-literal rows knows what happened to the rule.
-
-## A Computed Position Prints What Its Errors Earn [QUALITY]
-
-A position worked out at display time -- a planet's distance from the
-Sun, propagated in the browser from served elements to the minute the
-room was opened -- is not a store row and has no `# Figures:` line. Its
-count comes from its errors, and two of them bound it:
-
-- **Drift.** How far the worked-out position may have moved from what
-  JPL Horizons itself would give: the builder's measured rate, in
-  degrees per day, times the days since the elements' date, taken as a
-  distance at the body's distance.
-- **The source's own accuracy.** How well JPL knows where the body is
-  at all. A store row per group, served to the page on the object's
-  entry.
-
-**The display prints to the Report test's place (The ceiling, Report)
-for the LARGER of the two**, each unit placed by its own error, never
-finer than a floor the display states (whole kilometres in the Solar
-System room), and never fewer than one figure. Tony's ruling,
-2026-10-01: "use whichever is larger". Drift alone measures how well
-the page reproduces Horizons, not how well Horizons knows the planet,
-and it printed Pluto's distance to ten figures where JPL knows it to
-several thousand kilometres. A body with no source-accuracy row yet
-prints by its drift and SAYS so in the display, in words the display's
-owner approved, and the words appear exactly when the row is absent so
-the two cannot disagree. The asteroids are that case until each body's
-own uncertainty is fetched (L-399).
-
-This applies to every computed position a display prints, in the
-gallery and the orrery. The Solar System room is the first built
-(gallery/solar_system_figures.js, checked by
-documentation/smoke_solar_system_figures.js, gallery repo). The
-orrery's own position hovers are one ledger class, recorded and not
-chased (The Braid).
-
-### An Accuracy Stated in Words Is Stored as the Place It Reports To
-
-Some sources state an accuracy only in words. JPL's 2014 ephemeris
-report (Folkner et al., IPN Progress Report 42-196, abstract) says the
-terrestrial planets' orbit uncertainties are "a few hundred meters",
-Jupiter and Saturn are known to "tens of kilometers", and Uranus,
-Neptune and Pluto to "several thousand kilometers". There is no number
-to store, and choosing one -- 3,000 km, say -- puts in the store a
-value the source never printed: a `# Source:` over a number nobody
-measured, one layer out.
-
-**Store the place.** Run the Report test over every value the words can
-mean. Where they all give one place, that is the row. Where the words
-could give two, take the coarser -- the tie rule of The ceiling,
-extended -- so the row never claims finer than the words allow.
-
-- "a few hundred meters": 0.2 to 0.999 km all report to whole
-  kilometres -> 1 km.
-- "tens of kilometers": 10 to 15 km report to tens, 16 to 99 km to
-  hundreds -> 100 km.
-- "several thousand kilometers": 2,000 to 9,999 km all report to
-  ten-thousands -> 10,000 km.
-
-The tempting reading is the place the words NAME -- thousands for
-"several thousand". It claims +/- 500 km where every value the words
-allow is nearer +/- 5,000, a factor of ten finer than the source. That
-was the session plan of 2026-10-01; this rule replaced it the same
-day, and Tony confirmed it.
-
-**The row.** Value: one unit of the place, in the unit the source
-names. `# Status: declared` -- the pick of the place is ours by this
-rule; the words are the source's -- with a reason that names no
-authority. `# Figures: exact -- declared construction:`, naming the
-words and the range checked, and no print count unless a display
-prints the row. `# Read:`, `# Source:` and `# Ref:` as for any row the
-source was opened for. The three DE430 rows in `constants_new.py` are
-the worked case.
-
-**The display uses half a unit of the place** as the source's error,
-which by the Report test gives back exactly that place; the larger of
-that and the drift then sets the print, as above.
-
-(Tony's ruling of the larger error, 2026-10-01; this method confirmed
-by him "as recommended" the same day, L-398. Built by orrery patch
-patch_L398_1_accuracy_rows_and_skills_20261001.py.)
-
-## A Simple Error a Check Finds Is Fixed and Reported [QUALITY]
-
-Tony's ruling, 2026-10-01 (L-395): "simple errors such as the Apophis
-naming discrepancy should be fixed and reported." A check that finds
-one does not stop at listing it.
-
-**Simple** means one right answer, settled by an outside source or by
-the file's own evident intent, with no drawing or modelling choice in
-it: a link to a search page where the body's own page exists, a stray
-space inside a quotation, a missing full stop, a field written twice, a
-document example that no longer says what the code does.
-
-**Fixed** means in the same patch as the work that found it. **Reported**
-means the patch's output and the session record name each fix by what
-it changed, so nothing is corrected silently.
-
-**Not simple, so it comes to Tony:** two right answers (Apophis is both
-99942 and 2004 MN4; the one-definition rule then decides it, and the
-patch says so), anything that changes what is drawn or how, and removing
-words a person wrote with a meaning in them. The objects mirror refuses
-to delete a person's words for the same reason.
-
-**A number in a served description** is sourced or comes out, because a
-description has no place for a `# Source:`. It stays when a page the
-project trusts states it and the read is recorded in the ledger
-(Apophis's 2029, NASA's Apophis Facts page, read 2026-10-01); otherwise
-it is removed (the Pluto-Charon barycentre's 6.39 days).
-
-**Beside The Braid.** The Braid governs findings OUTSIDE the slice being
-worked: recorded, one row per class, not chased. This governs findings
-INSIDE it. A discovery run that exists to list -- the first Horizons
-cross-check -- still lists, apart from the simple errors, which it
-fixes and names.
-
-## No Shadow Constants [CRITICAL]
-
-Modules must not carry local copies of values that exist in constants_new.py. Import through the established shim (planet_visualization_utilities) or directly from constants_new.py. A local literal that numerically matches a tracked constant is a frozen copy -- it won't follow if the source value updates, and it bypasses the scanner's citation chain even when the number is correct today.
-
-This is the code-side complement to the scanner's build_pinned_values() check: the scanner can flag a suspicious match, but the standing rule is that these should never be introduced in the first place. When found, delete the local definition and replace it with a proper import -- do not add a # Source: comment to the local copy, because that would cite-to-clear a structural problem rather than fix it.
-
-Known precedent (FIXED in L-156 1f; kept as history): comet_visualization_shells.py lines 492-493 once hardcoded SUN_RADIUS_KM and KM_PER_AU despite KM_PER_AU already being imported, with line 602 deriving SUN_RADIUS_AU from the two local copies. Those lines now carry the fix comment recording the removal -- a reader sent to find shadow constants there will find the repair, not the defect. Same failure class as the close_approach_data.py stale-copy bug that originally motivated test_constants_provenance.py.
-
-### A Breadcrumb Must Not Cite [CRITICAL]
-
-Citations attach at BLOCK level over a thirty-line lookback, and
-`SOURCE_PATTERNS` counts `# Source:`, `# Ref:`, a bare `https://` URL,
-`doi`, `arXiv` and agency names (IAU, JPL, NASA, ESA, NIST, NOAA...) as
-citations. All of that is in the section above. The consequence is not
-obvious and it bites in one specific place.
-
-**An honest "unsourced, pending research" note cannot carry its own
-candidate references.** Put the papers next to the value and the scanner
-reads them as that value's citation, and the unit ends up looking better
-sourced than it is -- which is the wrong-but-cited failure, rebuilt
-deliberately by someone trying to be careful.
-
-So the code carries a HANDLE and nothing else:
-
-```python
-# Review-note: two figures for this boundary's variation, and the
-# Review-note+: papers that may support them, are held in L-253 --
-# Review-note+: unsourced, unused, deliberately not restated here.
-```
-
-The figures, the DOIs and where each actually came from live in the
-ledger row, which is searchable by handle, holds "pending sourcing" as a
-native state, is RICE-scorable against everything else, and sits outside
-the audit entirely. The trail is preserved at zero cost to the
-denominator.
-
-(Tony's ruling, 2026-08-26. Founding case L-253: `EARTH_D660_DEPTH_KM`
-carried a real, correctly transcribed reference to Ishii et al. 2019 --
-true of the 660 km depth, and not the source of either figure in the
-note beneath it. That paper is about the discontinuity's sharpness.)
-
-## Report Domain Classification (Findings by File / File Type)
-
-Since July 2026, `PROVENANCE_AUDIT.md` breaks findings down two ways ahead
-of the per-tier detail: **Findings by File** (every file with a finding,
-tier counts, sorted worst-first) and **Findings by File Type** (the same
-data rolled up by subject-matter domain).
-
-Domain is a *report-only* grouping -- it answers "what part of the project
-is this," not "what does this module do" (that's module_atlas.py's
-ROLE_MAP, a different axis entirely; a module's functional role and its
-domain are independent). Domain classification never affects which files
-get scanned or how a finding scores.
-
-Six domains: **orrery** (solar system bodies, orbital mechanics, core
-app -- also the default catch-all), **earth_science**, **gallery**,
-**stars** (stellar neighborhood, exoplanets, HR/planetarium), **utilities**
-(genuinely cross-domain shared helpers), **dev_tools** (audit,
-diagnostics, one-shot infra). The last two didn't exist before this round
--- they were split out, with the four-domain original (orrery, earth
-science, gallery, stars) proving too coarse for files that don't belong to
-any single subject-matter area.
-
-Mechanics: `MODULE_DOMAIN_MAP` (a module-name-to-domain dict) plus
-`classify_domain()` in provenance_scanner.py. Unmapped files default to
-`orrery` and are tracked and surfaced in a "Domain coverage gap" note in
-the report -- mirroring the existing ROLE_MAP coverage-gap pattern -- so a
-new file with findings doesn't silently drift into the wrong bucket
-forever. Extend `MODULE_DOMAIN_MAP` directly (not a heuristic) when a new
-file needs a home; explicit mapping was chosen over name-pattern guessing
-because domain assignment involves real judgment calls (several file
-categorizations were confirmed with Tony directly rather than inferred).
-
-**Gallery will usually read near-zero.** The gallery ASSEMBLER pipeline
-(resolver.py, cache_reader.py, gallery_studio.py, json_converter.py,
-render_orbits.py, etc.) lives in the separate tonyquintanilla.github.io
-repo, entirely outside this scanner's reach. Only gallery-adjacent files
-that live IN the palomas_orrery repo (currently just social_media_export.py)
-can ever populate that domain here. Do not read a 0 there as "gallery has
-no provenance debt" -- it means "gallery isn't scanned from here."
-
-## Fetched vs Recalled -- the working procedure
-
-Data from authoritative pipelines: trusted. Data from Claude's training
-memory: verify or source -- and there is a THIRD branch: if a claim cannot
-be sourced against an authority, REMOVE it and note the gap. Never embed
-lookup tables from training memory. Tony's professional default: prefer
-removing an unsourceable claim over citing it incorrectly.
-
-Where a value is genuinely UNKNOWABLE (fixed by an input the model cannot
-recover -- a rotation phase, an instantaneous azimuth): show the ENVELOPE
-of possibilities as the honest object, and SAY SO in the hover where a
-shape is approximate. Faking an unknowable value is the same failure
-class as citing over recalled data. (Full treatment: resident protocol,
-Show the Envelope.)
-
-## Composed vs Transcribed On-Layer Text
-
-For user-facing factual sentences (KMZ framing text, cards, briefings),
-split by how the words get authority:
-- TRANSCRIBED tier: the source's own words, lifted and attributed. Safe
-  by construction.
-- COMPOSED tier: sentences we write because no single source line says
-  them. These get the strict treatment: BUILD the sentence in generator
-  code with every numeric token carrying a `# Source:` comment within the
-  scanner's lookback -- never pasted as a finished string into a template,
-  and never living only inside an output artifact (a .kmz) where the
-  scanner cannot see it. It must be scanner-visible at the construction
-  site and clear by TRUE sourcing. A composed sentence that cannot be
-  sourced does not ship.
-
-## Examples Go Stale Like Values [QUALITY]
-
-**A worked example in a skill is a claim about the codebase, and it
-decays the same way a constant does.**
-
-This skill taught the chromosphere drawn at 1.1 solar radii as its model
-of a declared visualization boundary, for eleven days after the code
-promoted that exact value to the physical figure. A skill loads every
-session and is normative, so a stale example there is worse than a stale
-line in a plan document: it teaches the retired state as the pattern. A
-session read it and reported the retired value to Tony as current.
-
-When a bump touches a section, re-read its examples against the file.
-When a value moves, grep the skills for it in the same patch. This is
-The Correction Does Not Travel, applied to the skill layer.
 
 ## Field Notes
 

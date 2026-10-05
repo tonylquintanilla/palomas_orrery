@@ -94,6 +94,13 @@ September 27, 2026 (L-322 Stage D, patch D15, Opus 5.5): the six hover
     states, where they used a width chosen on the line (":g", ",.0f").
     The text shown does not change.
 Module updated: September 27, 2026 with Anthropic's Claude Opus 5.5
+October 5, 2026 (L-413's orrery patch, Opus 5.5): earth_geocorona_info,
+    the words for Earth's new exosphere shell (L-292), printing the
+    geocorona row at its count in Earth radii, km and AU; the upper
+    atmosphere's tooltip shows its hover's words, where it typed a
+    different top for the layer; the inner belt says it is drawn near
+    the measured proton flux peak (L-349). Words approved by Tony.
+Module updated: October 5, 2026 with Anthropic's Claude Opus 5.5
 """
 import numpy as np
 import math
@@ -143,10 +150,15 @@ from constants_new import (
     EARTH_LEO_LOWER_ALTITUDE_KM, EARTH_LEO_UPPER_ALTITUDE_KM,
     EARTH_GEOSTATIONARY_RADIUS_KM, EARTH_GEOSTATIONARY_RADII,
     EARTH_HILL_SPHERE_KM, EARTH_HILL_SPHERE_RADII,
+    # 2026-10-05: the upper atmosphere's tooltip reads the same rows as
+    # its hover (it typed a different top for the layer), and the
+    # geocorona gets a shell.
+    EARTH_STRATOPAUSE_ALTITUDE_KM, EARTH_THERMOPAUSE_ALTITUDE_KM,
+    EARTH_GEOCORONA_RADII,
 )
 from orrery_rendering import rotate_to_sunward, create_info_marker
 import constants_new as _store
-from constants_rows import figures_of, uncertainty_of, exact_text
+from constants_rows import figures_of, uncertainty_of, exact_text, row_text
 
 
 def _declared(name):
@@ -857,12 +869,41 @@ def create_earth_atmosphere_shell(center_position=(0, 0, 0)):
 
 # Source: NOAA, NASA Earth Fact Sheet
 # Verified: April 2026 via Gemini fact-check
+# 2026-10-05: the checkbox tooltip shows the plot hover's words, so the
+# two cannot disagree again; it had typed a different top for the layer
+# from the one the shell is drawn to. shell_configs.py now derives the
+# hover from this string. The altitudes and the geocorona's floor are
+# read from constants_new.py, where each row carries its own source.
 earth_upper_atmosphere_info = (
-            "The upper atmosphere extends from 50 km to about 1,000 km altitude. It includes\n"
-            "the mesosphere where meteors burn up, the thermosphere where the aurora occurs and\n"
-            "the International Space Station orbits, and the exosphere which gradually transitions\n"
-            "to space. In the thermosphere, temperatures can reach 2,000 degC (3,600 degF), though the\n"
-            "gas is so thin that it would feel cold to human skin."
+            f"The upper atmosphere is drawn from the stratopause ({EARTH_STRATOPAUSE_ALTITUDE_KM:,.0f} km) to the\n"
+            f"thermopause, about {EARTH_THERMOPAUSE_ALTITUDE_KM:,.0f} km up (NOAA JetStream; NASA). It includes\n"
+            "the mesosphere where meteors burn up and the thermosphere where the aurora occurs and\n"
+            "the International Space Station orbits. In the thermosphere, temperatures can reach\n"
+            "2,000 degC (3,600 degF), though the gas is so thin that it would feel cold to human skin.\n"
+            "Above the thermopause the exosphere thins into space with no boundary; its hydrogen\n"
+            f"halo, the geocorona, is detected past {EARTH_GEOCORONA_RADII:.0f} Earth radii."
+)
+
+# L-292 (2026-10-05): Earth's exosphere, drawn as its own shell at the
+# geocorona's detection floor. Tony approved these words on 2026-10-05;
+# Source: every figure below is read from EARTH_GEOCORONA_RADII in
+# Source+: constants_new.py, and the words follow that row's source,
+# Source+: Baliukin et al. (2019), J. Geophys. Res. Space Physics 124,
+# Source+: 861-885, doi:10.1029/2018JA026136 -- its title (Lyman-alpha,
+# Source+: the ultraviolet glow) and abstract (detected to at least 100
+# Source+: Earth radii, encompassing the orbit of the Moon).
+# they follow the website's for the same shell. One string for the
+# checkbox tooltip and the plot hover (shell_configs.py derives <br>).
+earth_geocorona_info = (
+            "Exosphere / Geocorona: a faint halo of hydrogen gas around Earth, the outermost\n"
+            "trace of the atmosphere. The exosphere has no top; it simply thins into space.\n"
+            "Its hydrogen glows faintly in ultraviolet light, a halo called the geocorona.\n"
+            f"The shell is drawn at {row_text('EARTH_GEOCORONA_RADII')} Earth radii, "
+            f"about {row_text('EARTH_GEOCORONA_RADII', 'km', grouping=True)} km "
+            f"({row_text('EARTH_GEOCORONA_RADII', 'au')} AU), where that\n"
+            "glow has been detected. That is not where the atmosphere ends, and it reaches\n"
+            "beyond the Moon's orbit. Zoom out past the Moon to see it.\n"
+            "Source: Baliukin et al. (2019), J. Geophys. Res. Space Physics 124:861."
 )
 
 def create_earth_upper_atmosphere_shell(center_position=(0, 0, 0)):
@@ -1286,8 +1327,8 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
         f"Inner Van Allen Belt: Region of trapped charged particles (mainly protons).<br>"
         "The belt is one continuous region. The rings only mark its extent: they<br>"
         "are evenly spaced from its inner edge to its outer edge, and the brighter<br>"
-        f"ring is the flux peak, {EARTH_VAN_ALLEN_INNER_RADII:g} Earth radii from Earth's centre, about<br>"
-        f"{_km_above_surface(EARTH_VAN_ALLEN_INNER_RADII, 2):,} km above the surface at the equator.<br>"
+        f"ring is near the measured proton flux peak, {EARTH_VAN_ALLEN_INNER_RADII:g} Earth radii from<br>"
+        f"Earth's centre, about {_km_above_surface(EARTH_VAN_ALLEN_INNER_RADII, 2):,} km above the surface at the equator.<br>"
         f"The belt spans about {EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE:g} to {EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE:g} Earth radii in the geomagnetic<br>"
         f"equatorial plane -- roughly {_km_above_surface(EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE, 2):,} to {_km_above_surface(EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE, 1):,} km above the surface<br>"
         f"(every kilometre figure here converted from Earth radii).<br>"
