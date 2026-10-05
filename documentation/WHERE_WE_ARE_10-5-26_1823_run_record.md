@@ -217,8 +217,31 @@ NEXT:
   3. Start the two sessions, each from its handoff.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
-2. Move it into `documentation/`, then commit and push. No maintenance run is needed. -- 
+2. Move it into `documentation/`, then commit and push. No maintenance run is needed. -- 0493fad007456fe68a7690a2400af2c2d185a410
 3. Start each session with one line, for example: "Start from `documentation/HANDOFF_L413_earth_orrery_patch_20261005.md`" and "Start from `documentation/HANDOFF_L395_horizons_check_design_20261005.md`."
 
 Where this leaves us:
 - After this push, Earth's website patch and the Horizons design round can start side by side, each from its own handoff.
+
+=============================================================================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L420_1_galactic_plane_item_20261005.py
+ok  LEDGER_CONSOLIDATED.md                                       header stamp
+ok  LEDGER_CONSOLIDATED.md                                       L-420 opened
+ok  documentation/HANDOFF_L413_earth_orrery_patch_20261005.md    L-420 for Where We Are
+
+patch applied
+
+NEXT:
+  1. Move this script into documentation/. -- done
+  2. Run orrery_maintenance_run.py: its Ledger index step adds
+     L-420 to the index.
+
+OK: 415 L-blocks parsed, no consistency problems.
+Index regenerated (243 live items) in C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\LEDGER_CONSOLIDATED.md.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  3. Commit and push. Run it before the website session's patch if
+     you can; either order works.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 

@@ -167,3 +167,7 @@ the overlap. The Horizons session's handoff carries the same three.
 - One cost Tony carries: two threads to bring results between. A
   session that finds itself asking Tony for more than one thing at a
   time waits for the other to finish.
+- When this session rewrites Where We Are, it adds L-420, opened after
+  this record: the galactic plane and its poles in the Celestial Grid,
+  and the galactic centre in the star background, for a build session
+  after this one and the Horizons round.

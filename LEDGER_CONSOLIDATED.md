@@ -233,6 +233,9 @@ d9f47a87.
 Module updated: October 5, 2026 with Anthropic's Claude Opus 5.5
 (L-419: the annotation rule written into ledger-and-session-records
 1.16, protocol v3.82), built on patch_L413_4's tree over d9f47a87.
+Module updated: October 5, 2026 with Anthropic's Claude Opus 5.5
+(L-420 opened: the galactic plane in the Celestial Grid, the galactic
+centre in the star background, as Tony ruled), built on 0493fad0.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -450,7 +453,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*242 live items; 226 need attention (`!`); 181 RICE-scored; 172 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*243 live items; 227 need attention (`!`); 181 RICE-scored; 172 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -606,6 +609,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-415 | A patch writes LF and reports: safe-file-editing 1.12 (skills) | OPEN | -- | 2026-10-04 |
 | ! | L-418 | Long skills open with their contents, and keep three version entries (skills) | OPEN | -- | 2026-10-05 |
 | ! | L-419 | A patch checks a file Tony annotates only at the lines it edits (patches, skills) | OPEN | -- | 2026-10-05 |
+| ! | L-420 | The galactic plane in the Celestial Grid, the galactic centre in the star background (orrery, sky) | OPEN | -- | 2026-10-05 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1103,6 +1107,40 @@ confirms its loaded copy reads 1.12 before any patch work, then closes
 this item.
 **Ref:** skills/safe-file-editing/SKILL.md; PROJECT_INSTRUCTIONS.md;
 L-026; L-133; L-351.
+
+#### [L-420] The galactic plane in the Celestial Grid, the galactic centre in the star background (orrery, sky)
+<!-- L:420 status:OPEN upd:2026-10-05 section:A flag: rice: -->
+- **Tony, 2026-10-05:** "in the celestial grid, could we add the galactic
+  plane? this is relevant to the galactic tide in particular." Then, on
+  where the galactic centre goes: "we could put the plane and poles in
+  the Celestial Grid and the galactic centre in the star background."
+- **The design, as ruled:**
+  - Celestial Grid (`star_sphere_builder.py`): a third great circle, the
+    galactic plane, in its own colour beside the amber ecliptic and the
+    teal celestial equator; the north and south galactic poles marked
+    and labelled NGP and SGP, as the grid marks NCP/SCP and NEP/SEP; a
+    line in the "Ecliptic Coordinates (J2000)" box naming the circle.
+  - Star Background: the direction of the galactic centre, Sagittarius
+    A*, as a sky object among the stars, not a grid line.
+- **What the store already holds:** the north galactic pole,
+  `GALACTIC_NORTH_POLE_RA_J2000_DEG` and `GALACTIC_NORTH_POLE_DEC_J2000_DEG`,
+  sourced to Liu, Zhu and Hu, arXiv:1110.6268, eq. (2), added for the
+  galactic tide (L-406). The plane is the great circle 90 degrees from
+  it, so the plane and both poles need no new number. Worked from those
+  rows on 2026-10-05: the plane is tilted about 60 degrees to the
+  ecliptic and about 63 to the celestial equator; any hover that prints
+  either needs a derived row first.
+- **What it does not hold:** the galactic centre's position.
+  `sgr_a_star_data.py` carries the S-star orbits, not Sgr A*'s place on
+  the sky. The build sources a row first (a published position of Sgr
+  A*, or the frame's own definition of galactic longitude zero from the
+  same family of sources as the pole), never a recalled number.
+- **Scope:** the orrery only; the website has no celestial grid yet. It
+  touches neither of the two sessions running on 2026-10-05.
+**Gap:** a build session after Earth's website patch and the Horizons
+round: source the galactic centre's row, build both, Tony's look (Mode 5).
+**Ref:** `star_sphere_builder.py`; `constants_new.py` (the galactic pole
+rows); `solar_visualization_shells.create_sun_galactic_tide`; L-406.
 
 #### [L-419] A patch checks a file Tony annotates only at the lines it edits (patches, skills)
 <!-- L:419 status:OPEN upd:2026-10-05 section:A flag: rice: -->
