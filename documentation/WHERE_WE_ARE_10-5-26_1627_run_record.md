@@ -768,7 +768,7 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-then commit and push. -- 
+then commit and push. -- be67ca39c5866aa91a8cd140c987add9c007e1aa
 5. Reinstall ledger-and-session-records, and replace the Project's instructions with v3.82. -- done
 
 Where this leaves us:

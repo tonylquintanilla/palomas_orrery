@@ -138,7 +138,32 @@ Then Tony's look on the phone.
 
 - Confirms its loaded copies read provenance-discipline 2.26,
   interactive-exhibit 1.11, safe-file-editing 1.13,
-  orrery-coding-conventions 1.10, ledger-and-session-records 1.15 and
+  orrery-coding-conventions 1.10, ledger-and-session-records 1.16 and
   gallery-cache-builder 1.7, each opening with its contents list.
-- Then the website patch above, or the Horizons design round, in
-  Tony's order.
+  (1.16, not 1.15: patch_L419_1 bumped the ledger skill after this
+  record was written.)
+- Then the website patch above.
+
+## Running beside the Horizons session (Tony, 2026-10-05)
+
+Tony asked that the website patch and the Horizons design round run as
+two sessions at once. They touch different things; three rules cover
+the overlap. The Horizons session's handoff carries the same three.
+
+- THIS SESSION OWNS WHERE WE ARE this round. It is the only one that
+  rewrites the page. The Horizons session leaves the page alone and
+  puts its updates in its own handoff; this session's rewrite, or the
+  next one after it, picks them up from there.
+- THIS SESSION DOES THE OPENING CHECKS: it confirms the reinstalled
+  skills' versions above, closes L-418 and L-419 when they read right,
+  and closes L-369 on Tony's look at the coordinate box, 2026-10-05:
+  the "Ecliptic Coordinates (J2000)" box showed the new teal-circle
+  line, and Tony wrote "beautiful".
+- PULL AGAIN BEFORE THE FINAL PATCH. Both sessions start from orrery
+  be67ca39. Before building its last patch, each re-reads HEAD, builds
+  on whatever the other has pushed, and names that commit. Ledger
+  edits match only the lines they change (L-419), so two ledger patches
+  apply in either order; each touches only its own items.
+- One cost Tony carries: two threads to bring results between. A
+  session that finds itself asking Tony for more than one thing at a
+  time waits for the other to finish.

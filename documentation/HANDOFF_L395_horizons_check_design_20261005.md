@@ -79,6 +79,29 @@ ledger-and-session-records (1.15 if reinstalled). Written October 5,
   recorded on L-395, its own round.
 - The numbers inside descriptions: L-403.
 
+## Running beside the website session (Tony, 2026-10-05)
+
+Tony asked that this design round and Earth's website patch run as two
+sessions at once. The website session's handoff,
+`documentation/HANDOFF_L413_earth_orrery_patch_20261005.md`, carries the
+same three rules.
+
+- DO NOT REWRITE WHERE WE ARE. The website session owns the page this
+  round. Put this session's updates for the page in this session's
+  handoff, under a heading saying so; the next rewrite picks them up.
+- THE OPENING CHECKS ARE THE WEBSITE SESSION'S. This session reads the
+  version of each skill it loads and compares it with the protocol's
+  manifest, as always, but leaves closing L-369, L-418 and L-419 to the
+  website session. In the ledger it edits only L-395, and any item it
+  opens.
+- PULL AGAIN BEFORE ANY PATCH. Both sessions start from orrery
+  be67ca39. Before building a patch, re-read HEAD, build on whatever the
+  website session has pushed, and name that commit. Ledger edits match
+  only the lines they change (L-419), so the two sessions' ledger
+  patches apply in either order.
+- A design round is conversation first. Tony carries two threads; one
+  question at a time.
+
 ## Tony-actions
 
 (decide)
