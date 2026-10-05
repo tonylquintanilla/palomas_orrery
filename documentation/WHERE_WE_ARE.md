@@ -1,7 +1,9 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, rewritten in place; read it at the end of every session. -->
 # Where We Are
 
-Last updated: October 4, 2026, end of both of today's sessions.
+**Tony**: see my notes -- 
+
+Last updated: October 4, 2026, end of both of today's sessions. 
 - Written at orrery d7f2a594 and gallery ac81e7ce.
 - Two sessions ran today side by side: the Sun's distance cards, and
   the lobby card. This page now covers both.
@@ -25,10 +27,10 @@ Last updated: October 4, 2026, end of both of today's sessions.
 >
 > **Do next:**
 > - *The Sun's list, from item 3: the orrery's opening view of the Sun,
->   then the Alfven surface's unsourced ranges.*
+>   then the Alfven surface's unsourced ranges.* -- updated to cleanup Earth's old items first. 
 >
 > **Needs you now:**
-> - *Run the two small close patches and push.*
+> - *Run the two small close patches and push.* -- done
 
 How to read the marks:
 - *Italic* lines are the must-reads.
@@ -69,7 +71,7 @@ How to read the marks:
   6. [next]   A bare interactive.html link opens the Solar System room,
               and the Explorer gets its own address, after the Sun's
               list. << new this session: its first half, the lobby's
-              wide Solar System card, is done and on the website.
+              wide Solar System card, is done and on the website. -- add ledger cleanup to the next items following the braid and theme group principles. 
   7. [later]  The rest of the orrery's objects come to the website --
               dwarf planets, asteroids, moons -- through the same
               connection that now carries the room's eleven bodies,
@@ -121,19 +123,19 @@ Now:
 - Run the two small close patches (orrery, then website) and push.
 - Delete the folder "data/solar-system (1)" in your gallery copy, with
   OneDrive paused, as you did on October 1. Git ignores it, so it does
-  no harm meanwhile.
+  no harm meanwhile. -- done
 
 At the next design talk:
 - The fuzzy outer corona, designed together with the dust cloud.
 - Moving the highlighted row to the top of the list.
-- An arrow from GO's text box to its body.
+- An arrow from GO's text box to its body. -- the problem with this last time is that it moved the text box from the center. the text box needs to remain in the center. if not possible, don't implement the arrow. 
 
 Not urgent, in your order:
 1. The full check of the orrery's object list against JPL Horizons.
 2. Whether the editor should also edit the words on the Solar System
    room's rows.
 3. Choosing a date, and animation.
-4. The scattered disk, with the Kuiper belt in the Solar System room.
+4. The scattered disk, with the Kuiper belt in the Solar System room. -- is this the fuzzy boundary idea?
 
 ## Where the details are  **>> UPDATED THIS SESSION**
 
