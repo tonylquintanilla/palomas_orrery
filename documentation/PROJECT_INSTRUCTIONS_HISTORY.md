@@ -2092,6 +2092,49 @@ resident.
 (Moved down from the resident protocol on 2026-10-02 when
 v3.79 made a fourth entry.)
 
+v3.77 (October 2, 2026): No rule changed in this document. TWO
+skill bumps, one version each, for one session (L-405):
+interactive-exhibit 1.8 -> 1.9 and ledger-and-session-records 1.13 ->
+1.14. THE SKILLS CATCH UP WITH THE SESSION'S TWO BUILDS.
+
+WHAT PROMPTED IT. The session made the Exhibit Store Editor list every
+room (L-404) and built the Solar System room's drawer (L-363 step 3b).
+Tony then asked to sort what the session did into method already in
+the skills, method that needed a skill, and drawing decisions and
+judgement -- and, the review done, to "take care of the skills now and
+the numbers in the next session."
+
+WHAT THE SKILLS NOW SAY. interactive-exhibit corrects its sentence that
+every reader of objects_config.json ignores the "rooms" section; says
+what the store writer may change in a room that is not one body, and
+that the editor lists rooms from both places a room can live; records
+the Solar System room's drawer as the shared drawer with four
+additions, and Tony's framing ruling of 2026-10-02 -- where each body
+is now, plus 20%; and gives step 4 the headless test recipe, now filed
+in the gallery's tools/headless/. ledger-and-session-records gains A
+Wrong Sentence in a Skill: Bump Now, or Carry It. The test is what a
+session would do if it followed the sentence: something wrong means
+correct it now, nothing different means carry it on the ledger to the
+next version.
+
+JUDGEMENT KEPT OUT OF THE SKILLS. Five calls Claude made inside the
+drawer build were put to Tony as his, and he confirmed them. They are
+recorded as his rulings on L-363, not written as method.
+
+THE OBLIGATION TRAVELS. This session loaded 1.8 and 1.13. The next
+session confirms its loaded copies read interactive-exhibit 1.9 and
+ledger-and-session-records 1.14 before any exhibit, ledger, handoff or
+session-record work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.74 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-04 when
+v3.80 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

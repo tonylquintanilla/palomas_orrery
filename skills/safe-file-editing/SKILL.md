@@ -6,11 +6,24 @@ fires_when: Editing existing files, patch scripts, sed/regex edits, encoding che
 
 # Safe File Editing
 
-Skill version: 1.11 | Cut from palomas_orrery @ 1fa413d9 (v1.11),
-earlier @ ccd1ac96 (v1.10), bfa9de2f (v1.9),
+Skill version: 1.12 | Cut from palomas_orrery @ 41c1ca7a (v1.12),
+earlier @ 1fa413d9 (v1.11), ccd1ac96 (v1.10), bfa9de2f (v1.9),
 earlier @ 6d12ecac (v1.8), d424c459 (v1.7), ef3bd13 (v1.6),
 50438c6 (v1.5), a872205 (v1.4), 1ba20c3 (v1.3), 3398970 (v1.2),
-bdaaa0c (v1.1) | August 29, 2026, with Anthropic's Claude Opus 5
+bdaaa0c (v1.1) | October 4, 2026, with Anthropic's Claude Opus 5.5
+(v1.12); August 29, 2026, with Anthropic's Claude Opus 5 (v1.11)
+v1.12 (L-415) makes the skill agree with itself about line endings.
+Fix In Passing listed "CRLF where the repo is LF" as a violation to
+fix, while Line Endings Are Not Content and Compare Content, Not Bytes
+told a patch to write each file back in the style it found. Tony asked
+why a patch was leaving Windows line endings in place: "I thought the
+rule was to convert to lf when found and report." The preserve rule's
+reason -- that flipping the endings shows every line changed -- was
+tested on 2026-10-04 and is false wherever the repo normalizes
+(`* text=auto eol=lf`, both of this project's repos): a CRLF working
+copy shows as modified with nothing inside it, and writing it LF clears
+that mark. It holds only for a file whose COMMITTED copy is CRLF. So a
+patch now writes LF and reports, except for those files.
 v1.11 (L-315) adds A Guard Must Not Fence What a Generator Rewrites,
 earned when three chained ledger patches all refused: each was
 fingerprinted against the previous one's raw output, while every one of
@@ -152,19 +165,37 @@ fingerprint calls that "BASE MOVED" and sends everyone hunting for an
 edit that was never made. The delta is exactly one byte per line, which
 is the tell: compare sizes before assuming content drift.
 
-**Translate anchors to the file's own convention.** Anchors are written
-LF; a CRLF file matches none of them and the patch aborts on a file it
-could have edited safely. Detect per file and convert both sides:
+**Normalize, match, and write LF.** Anchors are written LF; a CRLF
+file matches none of them and the patch aborts on a file it could have
+edited safely. So read the file, turn CRLF into LF, match the LF anchors
+against that, and write the result as LF:
 
 ```python
-is_crlf = data.count(b'\r\n') > 0
-if is_crlf:
-    old = old.replace(b'\n', b'\r\n')
-    new = new.replace(b'\n', b'\r\n')
+raw = open(path, 'rb').read()
+was_crlf = b'\r\n' in raw
+text = raw.replace(b'\r\n', b'\n')
+# ... edits against LF anchors ...
+open(path, 'wb').write(text)          # LF, the repo's convention
+if was_crlf:
+    print('note: %s was CRLF in the working copy; written LF' % path)
 ```
 
-Preserve what the file already uses rather than converting it. The patch
-is there to make one change, not to also silently restyle 11,000 lines.
+This is Fix In Passing applied to line endings, and it is the default
+(1.12). In a repo with `* text=auto eol=lf` -- both of this project's --
+git stores LF whatever the working copy holds. A CRLF working copy
+therefore shows in GitHub Desktop as modified with no change inside it,
+and writing it LF clears that false mark rather than creating a diff.
+Tested 2026-10-04 on a scratch repository with the same setting.
+
+**The exception: a file whose COMMITTED copy is CRLF.** Some files went
+in before the normalizing rule existed, and git still holds them CRLF
+(`git ls-files --eol` shows `i/crlf`). Writing one of those LF changes
+the ending of every line in the commit, which buries the edit that
+matters. The patch author checks at build time, from the repo pull;
+for such a file the patch keeps CRLF, says so, and names the file as
+one for the one-time sweep, done as a commit of its own. In this project
+that sweep is L-133. The test is the committed copy, never the working
+copy -- a CRLF working copy alone is not this case.
 
 **Files in one repo can disagree.** Do not detect once and apply the
 answer everywhere. In the case that produced this note, four files were
@@ -218,11 +249,12 @@ with open(target, 'w', encoding='utf-8', newline='') as f:
 a comment. `ledger_index.py` had not, and that is half of why the three
 patches above refused; it was matched at `1fa413d9`.
 
-**The asymmetry with Line Endings Are Not Content is deliberate.** A
-PATCH preserves what the file already uses, because it is there to make
-one change and not to restyle 11,000 lines. A GENERATOR that rewrites the
-whole file holds the repo's convention, because rewriting the file IS the
-job. Do not "fix" either one to match the other.
+**Patches and generators now agree (1.12).** Both write the repo's
+convention, LF. The earlier wording called it a deliberate asymmetry,
+with patches preserving what they found; that rested on the
+every-line-changed claim Line Endings Are Not Content now corrects. The
+one exception, a file committed CRLF, is the patch author's to spot
+there.
 
 ## Delivery Format -- Runnable by Tony, Not Just Reviewable [CRITICAL]
 
@@ -548,7 +580,8 @@ whether the documents describing the code kept up.)
 A guard, a diff or a reachability check that compares RAW BYTES
 across a Windows working copy will refuse or cry wolf on files
 nobody has changed. Compare the LF-normalised content instead, and
-write each file back in the line-ending style you found it in.
+write it back as LF (1.12; the one exception is in Line Endings Are
+Not Content).
 
 ```python
 raw = open(path, "rb").read()
@@ -556,7 +589,7 @@ was_crlf = b"\r\n" in raw
 content = raw.replace(b"\r\n", b"\n") if was_crlf else raw
 actual = hashlib.md5(content).hexdigest()      # guard on THIS
 ...
-final = out.replace(b"\n", b"\r\n") if was_crlf else out
+final = out                       # LF; report was_crlf, never hide it
 ```
 
 **Why the two copies legitimately differ.** Any tool that writes in
@@ -573,10 +606,15 @@ working copy is CRLF)" on a row rather than a bare match. Silently
 swallowing the difference trades a false alarm for a blind spot,
 which is the worse of the two.
 
-**Preserve the style on write.** Flipping a 700 KB file's line
-endings shows in a git GUI as every line changed, which buries the
-eight edits that actually matter. This half is not cosmetic: a diff
-nobody can read is a diff nobody reviews.
+**Write LF, and say so (corrected 1.12).** This paragraph used to say
+"preserve the style on write", because flipping a 700 KB file's line
+endings would show every line changed and bury the eight edits that
+matter. Under `* text=auto eol=lf` that does not happen: git compares
+normalized content, so the edits are all a reviewer sees. It does
+happen for a file COMMITTED CRLF, which is why that one case keeps its
+endings until its own sweep. A diff nobody can read is still a diff
+nobody reviews; the rule now protects that where it is actually at
+risk.
 
 **[QUALITY] rather than [CRITICAL], deliberately.** Both failure
 directions are LOUD -- a guard refuses, or a check reports stale --

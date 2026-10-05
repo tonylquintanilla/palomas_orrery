@@ -215,6 +215,15 @@ bb1b1314.
 Module updated: October 4, 2026 with Anthropic's Claude Opus 5.5
 (L-363: the lobby's wide Solar System card, gallery 3c65b8a7 and
 d4b408e6; L-216: the stray folder again), built on a841ab6e.
+Module updated: October 4, 2026 with Anthropic's Claude Opus 5.5
+(ledger sweep and Earth's list: L-413, L-414 and L-415 opened; L-409,
+L-407, L-350, L-406, L-305, L-234 closed; L-383 folded into L-181;
+safe-file-editing 1.12; with the Claude Fable 5.1 sweep of the same
+day), built on 41c1ca7a. The three sessions before this one added no
+stamp; this one does not restate them.
+Module updated: October 4, 2026 with Anthropic's Claude Opus 5.5
+(L-133 closed: the 22 committed-CRLF files written LF by
+patch_L133_1), built on patch_L413_1's tree over 41c1ca7a.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -432,7 +441,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*246 live items; 231 need attention (`!`); 184 RICE-scored; 161 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*241 live items; 225 need attention (`!`); 181 RICE-scored; 169 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -445,9 +454,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-237 | Artifact 1's golden record is stale and needs re-cutting | OPEN | 10.8 | 2026-09-10 |
 | ! | L-266 | Nothing checks that a cited link still resolves | OPEN | 9.0 | 2026-08-30 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
-| ! | L-300 | sweep_collapsed_features.py joins the gallery maintenance runner as a gating checker | OPEN | 8.1 | 2026-09-07 |
+| ! | L-300 | sweep_collapsed_features.py joins the gallery maintenance runner as a gating checker | OPEN | 8.1 | 2026-10-04 |
 | ! | L-340 | The exhibit store editor: what the first screenshot showed, and the Mode 5 pass | OPEN | 8.1 | 2026-09-22 |
-| ! | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | OPEN | 6.0 | 2026-08-25 |
 | ! | L-269 | A report names its items, not how many there are | OPEN | 6.0 | 2026-08-30 |
 | ! | L-245 | Constants drift check compares against the last COMMIT, not the last RUN | OPEN | 5.4 | 2026-08-25 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
@@ -469,7 +477,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
 | ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-10-04 |
 |  | L-230 | A skill bump does not reach the protocol's version history | DEFERRED | 3.8 | 2026-08-23 |
-| ! | L-241 | Hills torus hover states the cloud bounds, not the drawn ring | OPEN | 3.8 | 2026-08-25 |
+| ! | L-241 | Hills torus hover states the cloud bounds, not the drawn ring | OPEN | 3.8 | 2026-10-04 |
 | ! | L-282 | The lobby: the main page as an entrance hall | OPEN | 3.8 | 2026-09-06 |
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
 | ! | L-210 | Pilot citation findings -- four rows in constants_new.py | OPEN | 3.6 | 2026-08-21 |
@@ -477,11 +485,11 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-239 | Seed the three Oort builders so a render is reproducible | OPEN | 3.6 | 2026-08-25 |
 | ! | L-285 | index.html adopts the shared navigation cluster; the fake-wheel dolly retires | OPEN | 3.6 | 2026-09-04 |
 | ! | L-324 | One assignment per line in constants_new.py | OPEN | 3.6 | 2026-09-12 |
-| ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-09-12 |
+| ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-10-04 |
 | ! | L-286 | Rooms in four levels: drill-down, short-name breadcrumb, Home stays a scene reset | OPEN | 3.5 | 2026-09-24 |
 | ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
 | ! | L-312 | The gallery editor's copy and file slots make cards the viewer misreads; two portrait titles to retype | OPEN | 3.4 | 2026-09-10 |
-| ! | L-292 | Earth shells the orrery does not draw | OPEN | 3.4 | 2026-09-08 |
+| ! | L-292 | Earth shells the orrery does not draw | OPEN | 3.4 | 2026-10-04 |
 | ! | L-283 | Visual theme: dark wall, paper placards, record mode | OPEN | 3.2 | 2026-09-24 |
 | ! | L-256 | provenance-discipline 2.8, and the status pass it enables | OPEN | 3.1 | 2026-08-27 |
 | ! | L-288 | Gallery Studio creates and edits live-scene cards | OPEN | 3.1 | 2026-09-10 |
@@ -500,7 +508,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 |  | L-225 | Migrate the comet shell constants into `constants_new.py`, then dispatch | DEFERRED | 2.4 | 2026-08-23 |
 | ! | L-293 | Lunar standstill: an exhibit made of four dated orbits | OPEN | 2.4 | 2026-09-06 |
-| ! | L-305 | Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together | OPEN | 2.4 | 2026-09-16 |
 | ! | L-322 | Units declared in the store, and the orrery as producer | OPEN | 2.3 | 2026-09-29 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
@@ -512,19 +519,21 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-231 | Radiation belts are drawn in the ecliptic; the magnetic tilt is an unbuilt intent | OPEN | 1.8 | 2026-09-16 |
 |  | L-309 | The exhibit chrome keeps its sun* names after Earth joined it (rename deferred, with its reason) | DEFERRED | 1.8 | 2026-09-09 |
 | ! | L-187 | info_dictionary numeric-overlap enumeration | OPEN | 1.8 | 2026-08-07 |
-| ! | L-228 | Alfven surface latitude ranges: source them or omit them | OPEN [Tony] | 1.8 | 2026-10-04 |
+| ! | L-228 | Alfven surface latitude ranges: source them or omit them | OPEN | 1.8 | 2026-10-04 |
 | ! | L-257 | Three enforcement builds the 2.8 skill text defers | OPEN | 1.8 | 2026-08-27 |
 | ! | L-313 | Recenter the camera on a chosen feature in the exhibit rooms | OPEN | 1.8 | 2026-09-10 |
 | ! | L-321 | The orrery's hover text joins the provenance braid, Earth first | OPEN | 1.8 | 2026-09-12 |
-| ! | L-330 | Belt shape: rings at the peaks, not the served region (Earth exhibit) | OPEN | 1.8 | 2026-09-15 |
+| ! | L-330 | Belt shape: rings at the peaks, not the served region (Earth exhibit) | OPEN | 1.8 | 2026-10-04 |
 | ! | L-337 | A centre marker for bodies without shells in the exhibit rooms | OPEN | 1.8 | 2026-09-19 |
 |  | L-194 | Text-only assertions -- claims the scanner cannot see | DEFERRED | 1.4 | 2026-08-15 |
 | ! | L-297 | Earth-Moon Lagrange points: serving path sized, deferred from the Earth exhibit | OPEN | 1.4 | 2026-09-07 |
-| ! | L-314 | Live solar wind conditions for the magnetosphere shells (SWPC through the nightly builder) | OPEN | 1.3 | 2026-09-12 |
+| ! | L-314 | Live solar wind conditions for the magnetosphere shells (SWPC through the nightly builder) | OPEN | 1.3 | 2026-10-04 |
 | ! | L-253 | The 660 discontinuity's depth variation -- held unsourced | OPEN | 1.2 | 2026-08-26 |
-| ! | L-308 | A shell-legend surface for static cards (deferred, with its trigger) | OPEN | 1.2 | 2026-09-08 |
+|  | L-308 | A shell-legend surface for static cards (deferred, with its trigger) | DEFERRED | 1.2 | 2026-10-04 |
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
+| ! | L-128 | Comet sublimation shell(s) -- solar-distance chemistry zones | OPEN | 1.0 | 2026-10-04 |
 | ! | L-129 | Cometary structure constants -- periodic maintenance sweep | OPEN | 1.0 | 2026-07-17 |
+| ! | L-131 | Zodiacal dust solar shell | OPEN | 1.0 | 2026-10-04 |
 | ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 0.9 | 2026-07-16 |
 | ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-06-24 |
 | ! | L-319 | Focusing a smaller shell cuts larger lit shells flat at the frame's box | OPEN | 0.7 | 2026-09-10 |
@@ -534,8 +543,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-347 | The page re-derives the bow shock standoff to draw its shape (gallery) | OPEN | -- | 2026-09-22 |
 | ! | L-348 | Derived rows outside Earth were counted, not propagated (store) | OPEN | -- | 2026-09-22 |
 | ! | L-349 | The inner belt's hover says "where the measured particle flux peaks" (words, Tony's) | OPEN | -- | 2026-09-22 |
-| ! | L-350 | The magnetotail's observed extent is served and shown nowhere (gallery) | OPEN | -- | 2026-09-28 |
-| ! | L-351 | Rules learned at C2, owed to the next bumps of their stores (skills, protocol) | OPEN | -- | 2026-09-28 |
+| ! | L-351 | Rules learned at C2, owed to the next bumps of their stores (skills, protocol) | OPEN | -- | 2026-10-04 |
 | ! | L-352 | The orrery's display sites format by fixed width, with no check reading them (orrery) | OPEN | -- | 2026-09-28 |
 | ! | L-353 | A count taken from a file's print resolution where a published error budget exists unopened (store) | OPEN | -- | 2026-09-22 |
 | ! | L-354 | Declared picks with their range in prose, on other bodies (store) | OPEN | -- | 2026-09-22 |
@@ -550,15 +558,15 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-364 | A comet's own trust window can exclude today while the served window passes the scene (gallery, trust) | OPEN | -- | 2026-09-29 |
 | ! | L-365 | The assembler leaves out a body it cannot draw, without a warning (gallery, assembler) | OPEN | -- | 2026-09-29 |
 | ! | L-366 | An orbit's info marker describes an arbitrary point on the orbit (gallery, assembler) | OPEN | -- | 2026-09-26 |
-| ! | L-367 | No checker opens a new room (checks, gallery) | OPEN | -- | 2026-09-29 |
+| ! | L-367 | No checker opens a new room (checks, gallery) | OPEN | -- | 2026-10-04 |
 | ! | L-368 | Other bodies' typed poles disagree with their cited table or cite a withdrawn report (orrery, store) | OPEN | -- | 2026-09-28 |
-| ! | L-369 | Earth's obliquity typed outside constants_new.py (orrery, store) | OPEN | -- | 2026-09-28 |
+| ! | L-369 | Earth's obliquity typed outside constants_new.py (orrery, store) | OPEN | -- | 2026-10-04 |
 | ! | L-370 | Jupiter and Saturn numbers typed only in objects_config.json (gallery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-371 | The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
 | ! | L-372 | Two drawing settings live in constants_new.py (orrery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-373 | A unit conversion by a bare number inside a constants_new.py expression (store) | OPEN | -- | 2026-09-28 |
 | ! | L-374 | Showing Earth's precession over time (orrery, idea) | OPEN | -- | 2026-09-28 |
-| ! | L-375 | Earth's eccentric dipole offset is not drawn (store, Earth) | OPEN | -- | 2026-09-28 |
+| ! | L-375 | Earth's eccentric dipole offset is not drawn (store, Earth) | OPEN | -- | 2026-10-04 |
 | ! | L-376 | Other bodies' dipole-cone hovers: typed offsets and abbreviated radii (orrery, words) | OPEN | -- | 2026-09-28 |
 | ! | L-377 | The provenance scanner's proximity rule can count a string as cited by a neighbour's source (checks) | OPEN | -- | 2026-09-28 |
 | ! | L-378 | Phone behaviour of the rooms has no automated check (checks, gallery) | OPEN | -- | 2026-09-29 |
@@ -566,9 +574,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-380 | The gallery maintenance routine pulls the constants export after the cache build (gallery, routine) | OPEN | -- | 2026-09-28 |
 | ! | L-381 | The uncertainty field's pattern reads a sentence's full stop as a decimal point (export, checks) | OPEN | -- | 2026-09-28 |
 | ! | L-382 | Earth's magnetosphere costs about 42 percent more per orrery animation frame since D8 (orrery, rendering) | OPEN | -- | 2026-09-28 |
-| ! | L-383 | shell_configs.py's magnetosphere tooltip says nothing of the tail and puts the belts at the flux peak (orrery, words) | OPEN | -- | 2026-09-28 |
 | ! | L-385 | The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye) | OPEN | -- | 2026-10-04 |
-| ! | L-386 | The Sun's conversion rows, not yet exported (store, the Sun's slice) | OPEN | -- | 2026-09-28 |
+| ! | L-386 | The Sun's conversion rows, not yet exported (store, the Sun's slice) | OPEN | -- | 2026-10-04 |
 | ! | L-387 | The orrery's hovers print the conversion names by their own formats, not by the computed count (orrery) | OPEN | -- | 2026-09-28 |
 | ! | L-388 | The gallery's export pull can print success when it could not fetch, and the mirror then writes from the old export (gallery, tooling) | OPEN | -- | 2026-09-28 |
 | ! | L-389 | Earth's atmosphere shells are measured from the equatorial radius, and the crust now sits at the mean radius (store, Tony's eye) | OPEN | -- | 2026-10-01 |
@@ -577,18 +584,18 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-393 | Encounter data: dates, spacecraft records centred on their targets, and how far the cache reaches in time (gallery, cache) | OPEN | -- | 2026-09-29 |
 | ! | L-394 | A card cannot say which body it belongs to (gallery, Studio) | OPEN | -- | 2026-09-29 |
 | ! | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | OPEN | -- | 2026-10-01 |
-| ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-10-01 |
+| ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-10-04 |
 | ! | L-399 | Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder) | OPEN | -- | 2026-10-01 |
 | ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
-| ! | L-406 | The galactic tide drawn in the galaxy's plane (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-02 |
-| ! | L-407 | A skill's header is checked as YAML (orrery, skills) | OPEN | -- | 2026-10-02 |
-| ! | L-408 | A Galactic Plane toggle in the Sun room (gallery, the Sun's slice) | OPEN | -- | 2026-10-03 |
-| ! | L-409 | The licenses: the orrery's recognized by GitHub, the website's written (orrery, gallery) | OPEN | -- | 2026-10-04 |
+| ! | L-408 | A Galactic Plane toggle in the Sun room (gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
 | ! | L-410 | Fuzzy boundaries for edges known only as ranges, the outer corona first (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
 | ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-04 |
+| ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-04 |
+| ! | L-414 | The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling) | OPEN | -- | 2026-10-04 |
+| ! | L-415 | A patch writes LF and reports: safe-file-editing 1.12 (skills) | OPEN | -- | 2026-10-04 |
 
 ### B. Pending Action (Tony-side)
 
@@ -613,7 +620,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-171 | patch_ledger_index_retired_handles.py breaks L-163's zero-undetermined close | OPEN | 1.8 | 2026-07-29 |
 | ! | L-025 (#N7) | Reduced to custom-geometry inline markers only | OPEN | 1.5 | 2026-06-18 |
 | ! | L-068 | Static/animation pipeline consolidation -- remaining residuals (umbrella) | OPEN | 1.5 | 2026-06-23 |
-| ! | L-133 | Codebase-wide CRLF sweep (beyond L-026) | OPEN | 1.0 | 2026-07-17 |
 | ! | L-135 | Basic-plot file-size bloat (non-shell) -- Mercury-alone example | OPEN | 1.0 | 2026-07-17 |
 | ! | L-015 (#5) | _info import cleanup (~89+87 imports, 2 files) | OPEN | 0.9 | 2026-06-18 |
 | ! | L-016 (#6) | Archive dead shell functions | OPEN | 0.9 | 2026-06-18 |
@@ -648,10 +654,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-044 (#22) | Satellite (and minor-body) internal-structure shells | OPEN | 2.7 | 2026-06-21 |
-| ! | L-128 | Comet sublimation shell(s) -- solar-distance chemistry zones | OPEN | 1.0 | 2026-07-17 |
 | ! | L-130 | Restore six-elements + M0@J2000 plotting mode (educational, alt) | OPEN | 1.0 | 2026-07-17 |
-| ! | L-131 | Zodiacal dust solar shell | OPEN | 1.0 | 2026-07-17 |
-| ! | L-136 | Solar "scattered disk" shell | OPEN | 1.0 | 2026-07-17 |
+| ! | L-136 | Solar "scattered disk" shell | OPEN | 1.0 | 2026-10-04 |
 | ! | L-045 (#N14) | Miranda inclination tooltip | OPEN | 0.9 | 2026-06-23 |
 
 ### D.Feature-C -- Bucket C (architecture)
@@ -789,6 +793,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-249 | The Earth slice of L-181: interior boundaries as sourced constants | DONE | 7.2 | 2026-09-19 |
 |  | L-338 | Logic that needs no browser lives in its own file (Tony's rule, 2026-09-18) | DONE | 7.2 | 2026-09-19 |
 |  | L-317 | The interactive's info markers lacked the orrery's two-standards outline | DONE | 6.4 | 2026-09-11 |
+|  | L-234 | Reopen Artifact 1: recreate the orrery's Sun in the assembler | DONE | 6.0 | 2026-10-04 |
 |  | L-204 | The worksheet reference may be JSON | DONE | 5.7 | 2026-08-18 |
 |  | L-263 | The served chromosphere value is a rounded copy | DONE | 5.7 | 2026-08-29 |
 |  | L-270 | README.md is a stale live store, and a gate depended on it | DONE | 5.7 | 2026-08-31 |
@@ -849,6 +854,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-333 | The master plan's two companion summaries have not moved since August (planning documents) | DONE | 2.7 | 2026-09-28 |
 |  | L-116 | New skill: gallery-cache-builder (Move 2 of the skills update) | DONE | 2.5 | 2026-07-12 |
 |  | L-255 | Skill bumps of 2026-08-26 -- handle reserved, block never written | DONE | 2.4 | 2026-08-28 |
+|  | L-305 | Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together | DONE | 2.4 | 2026-10-04 |
 |  | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | DONE | 2.2 | 2026-07-15 |
 |  | L-202 | JSON worksheet format, with markdown as fallback | DONE | 2.2 | 2026-08-18 |
 |  | L-213 | Orbit cache backup fires on IMPORT, not on cache write | DONE | 2.2 | 2026-08-19 |
@@ -867,6 +873,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-047 (#N10) | Note-composition structural refactor (behind N6) | DONE | 1.0 | 2026-06-23 |
 |  | L-050 (#N9) | white -> red orbit-marker switch (osculating marker intentionally stays white) | DONE | 1.0 | 2026-06-23 |
 |  | L-100 | Gallery feature-render surface: shells gallery-side vs interactive-side (OPEN QUESTION) | DONE | 1.0 | 2026-08-25 |
+|  | L-133 | Codebase-wide CRLF sweep (beyond L-026) | DONE | 1.0 | 2026-10-04 |
 |  | L-134 | Dashboard developer-tools audit | DONE | 1.0 | 2026-07-17 |
 |  | L-138 | Candidate objects & presets for the Objects menu (running list) -- superseded | DONE | 1.0 | 2026-07-17 |
 |  | L-020 (#26) | CUSTOM_SHELLS tooltip verification | DONE | 0.9 | 2026-06-22 |
@@ -893,7 +900,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-057 | Animation auto-scale-vs-shells + Phase 3 tier decision -- CLOSED | DONE | -- | 2026-06-11 |
 |  | L-223 | A paste into the ledger is an unverified transfer | DONE | -- | 2026-08-21 |
 |  | L-345 | Unit-conversion rows multiply by shell: rows per shell, or the export converts? (store, DONE 2026-09-28) | DONE | -- | 2026-09-28 |
+|  | L-350 | The magnetotail's observed extent is served and shown nowhere (gallery) | DONE | -- | 2026-10-04 |
 |  | L-362 | The master plan's two summaries are a month behind the plan (documentation) | DONE | -- | 2026-09-28 |
+|  | L-383 | shell_configs.py's magnetosphere tooltip says nothing of the tail and puts the belts at the flux peak (orrery, words) | DONE | -- | 2026-10-04 |
 |  | L-384 | The scaling rule stops short of a single measured value scaled by an exact row (skills, store) | DONE | -- | 2026-09-28 |
 |  | L-392 | The Solar System room's drawer list is page code, not served data (gallery, exhibits) | DONE | -- | 2026-09-30 |
 |  | L-397 | "Cache in step" compared only bodies with shells; it now compares every object (gallery, checks) | DONE | -- | 2026-09-30 |
@@ -901,6 +910,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-400 | A stray folder "data/solar-system (1)" in Tony's gallery copy (gallery, housekeeping) | DONE | -- | 2026-10-01 |
 |  | L-404 | The Exhibit Store Editor did not list the Solar System room (gallery, tooling) | DONE | -- | 2026-10-02 |
 |  | L-405 | Skill text owed from the editor fix and the drawer build (skills) | DONE | -- | 2026-10-02 |
+|  | L-406 | The galactic tide drawn in the galaxy's plane (orrery + gallery, the Sun's slice) | DONE | -- | 2026-10-04 |
+|  | L-407 | A skill's header is checked as YAML (orrery, skills) | DONE | -- | 2026-10-04 |
+|  | L-409 | The licenses: the orrery's recognized by GitHub, the website's written (orrery, gallery) | DONE | -- | 2026-10-04 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -930,41 +942,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
-#### [L-409] The licenses: the orrery's recognized by GitHub, the website's written (orrery, gallery)
-<!-- L:409 status:OPEN upd:2026-10-04 section:A flag: rice: -->
-- **Found 2026-10-04,** when Tony asked whether the license was done
-  properly. The orrery's `LICENSE.md` is in the right place, but GitHub's
-  sidebar said "View license", not "MIT license": the file held the
-  Doc-Kind tag and two sections of attributions beside the MIT text. Its
-  year, 2024, disagreed with the README's License section, 2025-2026.
-  The website's repository had no license file; its README said
-  "Licensed MIT, the same as the application repository".
-- **Tony's rulings, 2026-10-04:** the website's code under the MIT
-  License and its content -- words, pictures, artwork, visualizations --
-  under CC BY 4.0; a copyright line on the lobby's About card; his email
-  address as that card's last line. Years 2024-2026, the project having
-  begun in September 2024.
-- **Built:**
-  - Orrery `patch_L409_2`: `LICENSE.md` the standard text alone; its
-    attributions moved word for word to `NOTICE.md`; the README's
-    License years and a pointer to `NOTICE.md`; `doc_index.py`
-    describes `LICENSE.md`, which cannot carry the tag (UNTAGGABLE, one
-    entry, named in its report).
-  - Gallery `patch_L409_1`: `LICENSE` (MIT), `LICENSE-CONTENT.md` (CC BY
-    4.0: what counts as content, a suggested credit, third-party data
-    excluded), `NOTICE.md` (Plotly.js, MIT; Pyodide, MPL-2.0 [verified
-    2026-10-04 against pyodide.org]; data stays under its providers'
-    terms), the README's license line, and the About card's two new
-    lines.
-- Claude said this is practical orientation, not legal advice.
-**Gap:** after both pushes, each repository's GitHub page should say
-"MIT license" in its sidebar -- the one check that the recognition
-worked. **Tony-action (do):** look at both.
-**Ref:** L-085 (LICENSE to repo root); gallery `index.html`, the About
-overlay.
-
 #### [L-408] A Galactic Plane toggle in the Sun room (gallery, the Sun's slice)
-<!-- L:408 status:OPEN upd:2026-10-03 section:A flag: rice: -->
+<!-- L:408 status:OPEN upd:2026-10-04 section:A flag: rice: -->
 - **Asked 2026-10-03** by Tony, looking for the galactic tide's X on
   the phone and not finding it at the angle he had: "Could we toggle on
   the galactic plane and axis?" Claude agreed it earns its place: it
@@ -1005,8 +984,12 @@ overlay.
     tide already uses, and prints it to the nearest degree. The rows
     give 60.19, so it prints 60; Portegies Zwart et al. 2021 (A&A 652,
     A144, sec. 3.2) give 60 as the cross-check.
-**Gap:** Build it next session, with the Sun's distance cards (L-371):
-gallery first; whether the orrery gets the same toggle is asked then.
+- **2026-10-04:** not built with L-371, as the Gap had planned; it is
+  the Sun slice's eighth item (L-412). It also carries the look at the
+  galactic tide's X that L-406 handed over when it closed: turn until
+  the ring is edge-on.
+**Gap:** the Sun slice's eighth item (L-412): gallery first; whether
+the orrery gets the same toggle is asked then; then the tide's look.
 **Ref:** L-406, L-265; gallery `gallery/feature_renderers.js`,
 `data/objects_config.json`.
 
@@ -1053,10 +1036,150 @@ gallery first; whether the orrery gets the same toggle is asked then.
   crossed the heliopause in 2018.
 - **Method:** source it or remove it, one number at a time, under the
   Fetched vs Recalled rule; wording changes go to Tony.
+- **2026-10-04, one more instance, and it is Claude's own.** The
+  credit line at the top of `solar_visualization_shells.py` names
+  94.01 AU, 121 AU and 0.65 parsecs in prose, and the scanner reads the
+  module docstring as a display string with eight uncited claims
+  (`PROVENANCE_AUDIT.md`, line 1) [verified @ cbde99dc]. Written by the
+  L-371 session, which caught the same mistake in
+  `comet_visualization_shells.py` and missed it here. The other six
+  Tier-1 findings in that file are the date-sensitive hovers this item
+  already holds.
 **Gap:** the Sun slice's fifth item (L-412), straight after L-228.
 **Ref:** `solar_visualization_shells.py`, `comet_visualization_shells.py`;
 gallery `data/objects_config.json`; L-228, L-371.
 
+
+#### [L-415] A patch writes LF and reports: safe-file-editing 1.12 (skills)
+<!-- L:415 status:OPEN upd:2026-10-04 section:A flag: rice: -->
+- **Asked 2026-10-04** by Tony, after patch_L413_1's test notes said a
+  CRLF copy of the ledger kept its CRLF: "why do we leave windows line
+  endings uncorrected. I thought the rule was to convert to lf when
+  found and report." He was right about the rule: LF is the standard
+  (L-026, L-133), and safe-file-editing's Fix In Passing lists "CRLF
+  where the repo is LF" as a violation to fix. Two other sections of
+  the same skill, Line Endings Are Not Content and Compare Content, Not
+  Bytes, said to write each file back in the style found, and that is
+  what the patch followed. The skill disagreed with itself.
+- **The preserve rule's reason, tested.** It said flipping a file's
+  endings shows every line changed in a git GUI. On a scratch repo with
+  `* text=auto eol=lf`, the setting both of this project's repos have
+  [verified @ orrery 41c1ca7a, gallery e7ef96eb]: a CRLF working copy
+  shows as modified with an empty diff, and writing it back LF clears
+  the mark. The reason holds only for a file whose COMMITTED copy is
+  CRLF.
+- **Tony's word, 2026-10-04:** "Yes", to bumping the skill now under A
+  Wrong Sentence in a Skill: Bump Now, or Carry It -- a session
+  following the old sentences writes CRLF back.
+- **Built in patch_L413_1:** safe-file-editing 1.11 -> 1.12 (a patch
+  writes LF and reports; a file committed CRLF keeps its endings, is
+  named, and waits for L-133's sweep); protocol v3.80. The patch itself
+  follows the new rule.
+- **The committed-CRLF files, measured** (`git ls-files --eol`,
+  `i/crlf`, at 41c1ca7a), 22: .gitignore, catalog_selection.py, create_cache_backups.py, data_acquisition.py, data_acquisition_distance.py, data_processing.py, formatting_utils.py, hr_diagram_apparent_magnitude.py, hr_diagram_distance.py, messier_object_data_handler.py, object_type_analyzer.py, planetarium_apparent_magnitude.py, planetarium_distance.py, report_manager.py, shutdown_handler.py, star_notes.py, star_properties.py, stellar_data_patches.py, stellar_parameters.py, visualization_2d.py, visualization_3d.py, visualization_core.py. These are L-133's.
+- **2026-10-04: L-133's sweep done the same session**
+  (`patch_L133_1`), so 1.12's exception for committed-CRLF files has
+  no instance left in the orrery. It stays in the skill: the gallery
+  repo, or a file added from elsewhere, can still meet it.
+**Gap:** Tony reinstalls safe-file-editing (Settings > Skills) and
+replaces the Project's instructions with v3.80. The next session
+confirms its loaded copy reads 1.12 before any patch work, then closes
+this item.
+**Ref:** skills/safe-file-editing/SKILL.md; PROJECT_INSTRUCTIONS.md;
+L-026; L-133; L-351.
+
+#### [L-413] Earth's list: the old Earth items, in the order Tony confirmed (Earth room)
+<!-- L:413 status:OPEN upd:2026-10-04 section:A flag: rice: -->
+- **Confirmed by Tony, 2026-10-04,** after a sweep of the open items
+  that touch the Earth room, read against the code at orrery cbde99dc
+  and gallery e7ef96eb, and checked against the Claude Fable 5.1 ledger
+  sweep of the same day
+  (`documentation/LEDGER_SWEEP_review_20261004.md`). It goes BEFORE the
+  Sun slice's item 3 (L-412). It is the first of the room-by-room
+  ledger cleanups Tony asked for: items grouped by the files the work
+  opens, and only what the room shows is in scope.
+- **First, Tony's ruling:** L-349, the inner belt's "where the measured
+  particle flux peaks". Once ruled, its wording rides both patches
+  below.
+- **The orrery patch** (`shell_configs.py`, `constants_new.py`,
+  `palomas_orrery.py`, `star_sphere_builder.py`,
+  `coordinate_system_guide.py`, `earth_visualization_shells.py`):
+  1. L-292, the orrery's geocorona shell at `EARTH_GEOCORONA_RADII`. The
+     GPS shell and Earth's Roche limit stay parked in it.
+  2. L-369, Earth's obliquity typed in five places.
+  3. L-389, the atmosphere shells measured from the equatorial radius
+     while the crust is drawn at the mean radius, worked by
+     provenance-discipline's rules.
+  4. L-349's wording on the orrery side (and the dead tooltip copy kept
+     in step, L-181).
+  Then Tony's look on screen (Mode 5).
+- **The website patch** (`gallery/feature_renderers.js`,
+  `documentation/payload_earth_scene.json` and the smoke suites that
+  read it, `gallery_maintenance_run.py`):
+  1. L-349's wording on the website.
+  2. L-379, re-record the saved Earth scene from the current cache; the
+     overlays retire.
+  3. L-300, register `sweep_collapsed_features.py` in the maintenance
+     run (it passes today: 0 unclassified).
+  Then Tony's look on the phone.
+- **Tony's look, no build:** L-382, the magnetosphere's cost per
+  orrery animation frame, whenever he next runs an Earth animation.
+- **Design talks, in this order,** interleaved with the Sun's list
+  rather than blocking it:
+  1. L-330, the belts' shape (unblocked: L-231 is done for Earth).
+  2. L-356 and L-375 together, IGRF-14 and the dipole's offset, since
+     both change the same field rows; L-375 also carries whether the
+     website draws the dipole cone (re-homed from L-234).
+  3. L-321, the orrery's Earth hover strings into the cross-check.
+  4. L-314, live solar wind, now carrying the aberration decision
+     (re-homed from L-305).
+  5. L-297 and L-294, the Lagrange points and Earth's heliocentric
+     view, after Tony's ruling on the Explorer room.
+  6. L-374 and L-061, precession over time and the seasonal roll:
+     recorded ideas.
+- **What the reading changed, against the L-371 handoff's sweep:**
+  L-305 closed (only the aberration was left, now on L-314); L-350
+  closed (the hover prints it); L-234 closed (the Earth half is
+  served); L-383 folded into L-181 (dead data); L-231 is Jupiter's
+  only; L-292 is still open in the orrery; L-369 is five places, not
+  four.
+- **Not on this list:** the four Earth rows the scanner scores Tier 1,
+  which are a scanner question (L-414); L-001, L-060 (the Earth System
+  climate track), L-157, L-173, L-186, L-252 (the cross-check
+  programme), L-177 (Mercury), L-347, L-348, L-360, L-367 (general
+  checks).
+**Gap:** Tony's ruling on L-349, then the orrery patch, the website
+patch, and the design talks in the order above.
+**Ref:** L-412 (the Sun's list, which resumes after this); the handles
+above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
+
+#### [L-414] The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling)
+<!-- L:414 status:OPEN upd:2026-10-04 section:A flag: rice: -->
+- **Found 2026-10-04,** checking why `constants_new.py` went from 0 to
+  4 Tier-1 findings between mid-August and now. The four rows are not
+  uncited.
+  - `EARTH_MEAN_RADIUS_KM` carries `# Source: NASA Planetary Fact
+    Sheet, Earth` -- 16 lines below the assignment, after a Figures
+    block that grew on 2026-09-19. The scanner's constant context looks
+    15 lines ahead (`get_context_block(..., lookback=30,
+    lookahead=15)`). Tested at cbde99dc: at 15 the Source line is not
+    in the context, at 16 it is.
+  - `EARTH_SOLAR_WIND_PRESSURE_NPA`, `_BZ_NT` and `_SPEED_KM_S` each
+    carry `# Status: declared pending` and a `# Declared:` reason (the
+    speed's reason says plainly it is not yet written). The scanner
+    does not count a declared status as provenance, and its name rules
+    call them MEASURED.
+- So the count rose for a reason that is not about provenance -- A
+  Check That Cannot Fail Is Not Passing, from the other side: a check
+  that fails on a cited row costs trust in every finding.
+- **Method, not Tony's:** whether to move Source lines up, widen the
+  window to the attached comment run, or teach the scanner the declared
+  status is provenance-discipline's to settle. L-351 points here for
+  that skill's next version.
+**Gap:** the fix, by provenance-discipline's method; then the scanner's
+count for `constants_new.py` should name these four as gone.
+**Ref:** `provenance_scanner.py`; `constants_new.py`;
+`PROVENANCE_AUDIT.md`; L-305; L-314; L-351.
 
 #### [L-412] The Sun's slice: the order Tony confirmed (the Sun's slice)
 <!-- L:412 status:OPEN upd:2026-10-04 section:A flag: rice: -->
@@ -1079,126 +1202,23 @@ gallery `data/objects_config.json`; L-228, L-371.
   System room with the Kuiper belt; L-234 (the Sun in the assembler),
   L-239 (seeding the Oort builders), L-314 (live solar wind) and L-331
   (Earth and Moon wording) stay where they are.
-**Gap:** work down the list.
-**Ref:** L-371 (the slice's numbers); the handles above.
-
-#### [L-407] A skill's header is checked as YAML (orrery, skills)
-<!-- L:407 status:OPEN upd:2026-10-02 section:A flag: rice: -->
-- **Found 2026-10-02** when Settings refused interactive-exhibit 1.10
-  with "malformed YAML frontmatter" (L-406). `skills_index.py` read each
-  header by its own looser rules and built the manifest from the broken
-  one without complaint; as a generator its exit code did not count. A
-  check that could not fail on the one fault the install step enforces.
-- **Tony's word, 2026-10-02:** "while we are doing this, let's do L407
-  too."
-- **Built the same day,** `patch_L407_2_skill_headers_20261002.py`
-  (patch_L407_1, built on 94ff6c68, refused to run once patch_L406_3
-  had moved the ledger; this one is the same work on 0a5eea0b):
-  `skills_index.py` reads every header as YAML -- PyYAML where it is
-  installed, built-in rules otherwise, and it prints which -- and fails,
-  naming the skill, on a header YAML refuses, one with no name or
-  description as text, or a value YAML silently cuts short at " #".
-  `orrery_maintenance_run.py` runs it with `--check` as the checker
-  Skill headers. Shown failing on the three old headers both ways.
-- **Two more found by the check, fixed in the same patch and
-  reported:** earth-system-pipeline's description held ": "
-  ("displacement): the restraint discipline"), which YAML refuses, so
-  a reinstall would have failed; provenance-discipline's held "# Source:
-  citations", so YAML read only its first 200 characters, ending
-  "adding or reviewing" -- the installed skill has been chosen by that
-  cut description, without the words about citations, display strings
-  and the push gate. Both descriptions are quoted; versions 1.2 and
-  2.25, no rule changed. interactive-exhibit's header was put back on
-  one line by patch_L406_3 (pushed at 81e19ef), still 1.10.
-- **patch_L407_2 ran and was pushed at orrery fd508f9.**
-**Gap:** Tony reinstalls interactive-exhibit, earth-system-pipeline and
-provenance-discipline and replaces the Project's instructions with
-v3.79. The next session confirms its loaded copies read 1.10, 1.2 and
-2.25, and that provenance-discipline's description runs past "adding
-or reviewing", then closes this item.
-**Ref:** L-406; `skills_index.py`; `orrery_maintenance_run.py`;
-`skills/*/SKILL.md`.
-
-#### [L-406] The galactic tide drawn in the galaxy's plane (orrery + gallery, the Sun's slice)
-<!-- L:406 status:OPEN upd:2026-10-02 section:A flag: rice: -->
-- **Found 2026-10-02**, sorting the Sun room's 43 unlinked numbers
-  (L-371). The galactic tide's words, on the website and in the orrery,
-  said its bodies are thinned near the galaxy's plane. The drawing
-  thinned them near the ecliptic, the plane of Earth's orbit, and was
-  densest at the ecliptic's poles. A code comment in
-  `gallery/feature_renderers.js` said the hover admitted this; it did
-  not. And the website's gating check
-  `documentation/smoke_sun_shells.js` passed a test named "tide is
-  genuinely thinned at the galactic plane" that measured the ecliptic:
-  the check could not fail on the wrong plane.
-- **Tony's rulings, 2026-10-02.** Fix it now, as a drawing choice made
-  more correct ("this is the session to do any fixing"). Draw it
-  tilted into the galaxy's plane AND with the pattern the source gives:
-  sparse at the galaxy's plane and at its poles, thickest halfway
-  between. Draw it between the outer Oort cloud's two stored edges,
-  20,000 and 100,000 AU, instead of a typed 50,000 AU with a typed
-  spread and cut-offs ("Confirmed as recommended"). The words follow
-  the discipline of the other features: the drawing is a choice resting
-  on the best information we can cite, the hover is basic with any
-  number cited, the info icon links to NASA or Wikipedia. Old and new
-  words were shown side by side and confirmed.
-- **Sources read 2026-10-02 by Claude Opus 5.5.** The pole: Liu, Zhu
-  and Hu, arXiv:1110.6268, eq. (2), the J2000 pole of Murray (1989),
-  the Hipparcos standard. The pattern: Delsemme (1987), A&A 187, 913,
-  summary (aphelia avoid both galactic polar caps and a strip along the
-  galactic equator); Matese and Whitmire, arXiv:1004.4584, sec. 2.2
-  (the dominant tidal term goes as |sin B cos B|, peaks near 45
-  degrees). Dissent, said in the panel: Higuchi (2020), arXiv:2008.04324
-  (AJ 160, 134); Rickman et al. (2008) as Matese and Whitmire report.
-  The info link stays Wikipedia's "Galactic tide", which meets the L-265
-  rule.
-- **Built 2026-10-02.** Orrery `patch_L406_1_galactic_tide_orrery_20261002.py`:
-  three rows in `constants_new.py` (the pole's right ascension in
-  degrees, its declination in arcseconds and, derived, in degrees);
-  `idealized_orbits.create_pole_transformation_matrix(ra_deg, dec_deg)`,
-  the planet matrix's arithmetic moved out unchanged (identical
-  matrices for eight bodies, checked); the orrery's tide redrawn;
-  interactive-exhibit 1.10 with the link rule; protocol v3.78. Gallery
-  `patch_L406_2_galactic_tide_gallery_20261002.py`: the tide's entry
-  in `data/objects_config.json`, its drawing in
-  `gallery/feature_renderers.js`, and the corrected check. Retired: the
-  0.5 asymmetry, the 0.3 spread and the 0.5 and 1.5 cut-offs -- four of
-  L-371's 19 eyeballed numbers -- and the declared 50,000 AU distance.
-- **Fixed in passing, reported:** the Sun's `_comment` in
-  `data/objects_config.json` said the custom geometry is "NOT here";
-  all four shapes have been there since L-234.
-- **Patch 1 ran and was pushed at orrery 94ff6c68, 19 of 19 gating.**
-  The reinstall of interactive-exhibit 1.10 then FAILED: Settings
-  refused the file with "malformed YAML frontmatter". Claude's patch
-  put the new fires_when words on a line of their own, and YAML reads a
-  bare second line as a broken key. Nothing in the run could see it:
-  skills_index.py rebuilt the manifest from the same header without
-  complaint (L-407). Fixed by `patch_L406_3_skill_frontmatter_20261002.py`,
-  which puts the words back on the one line; checked by parsing every
-  skill's header as YAML. The version stays 1.10, since 1.10 never
-  loaded anywhere.
-- **Patch 3 pushed at orrery 81e19ef; gallery patch_L406_2 and the
-  cache rebuild pushed at gallery 6ba42f02.**
-- **Seen on the phone, 2026-10-03:** Tony, of the tide's hover and
-  panel: "The text looks right." The visual pattern -- an X tilted
-  about 60 degrees against the Hills torus -- is not yet reported.
-- **Cross-check:** Portegies Zwart et al. 2021 (A&A 652, A144, sec.
-  3.2) set the ecliptic at 60 degrees to the Galactic plane; the
-  redrawn tide's stored pole gives 60.19 degrees.
-- **The look moves to L-408, 2026-10-03.** Tony had already turned the
-  tide on the phone looking for the X and could not find it without a
-  reference; that is why he asked for the Galactic Plane toggle. His
-  screenshot of 2026-10-03 shows an even cloud around the torus, which
-  is what the drawing should look like from most angles. The look is
-  made once L-408's ring is drawn: turn until the ring is edge-on.
-- **Reinstall confirmed, 2026-10-03:** the session of that day loaded
-  interactive-exhibit 1.10.
-**Gap:** The look, on the phone and in the orrery (Mode 5), waits on
-L-408's ring as its reference.
-**Ref:** L-371; L-265; L-386; skills/interactive-exhibit/SKILL.md;
-orrery `solar_visualization_shells.py`, `idealized_orbits.py`,
-`constants_new.py`; gallery `gallery/feature_renderers.js`,
-`documentation/smoke_sun_shells.js`.
+- **2026-10-04, Tony's notes on Where We Are and the order he
+  confirmed that evening.** Earth's old items go FIRST (L-413), then
+  this list resumes at item 3. After it: the gallery's checks as a
+  short ordered list, before the swap (L-363), because one of them
+  (L-367) is that no checker boots a new room, and the swap changes the
+  front door. Tony also asked for ledger cleanup to be a standing step
+  in the road, room by room under The Braid and Cluster the Tail by
+  Files Touched (ledger-and-session-records); L-413 is the first.
+- **Raised by the Fable 5.1 ledger sweep, for Tony one at a time:**
+  (a) whether an item inside an ordered list like this one needs a RICE
+  score, since the plan's sequencing outranks the score (L-221) -- all
+  67 unscored live items are L-343 onward; (b) the scores it proposes
+  (L-131 and L-128 at 3/3/70/2; L-216 lowered or DEFERRED; L-228, L-241,
+  L-292 confirmed; L-252 re-scored).
+**Gap:** after L-413, work down the list from item 3.
+**Ref:** L-371 (the slice's numbers); the handles above; L-413;
+`documentation/LEDGER_SWEEP_review_20261004.md`.
 
 #### [L-403] Numbers in the object list's descriptions carry no source (orrery, provenance)
 <!-- L:403 status:OPEN upd:2026-10-01 section:A flag: rice: -->
@@ -1286,7 +1306,7 @@ orrery's hovers.
 **Ref:** L-398; L-363; tools/gallery_cache_builder.py (gallery).
 
 #### [L-396] Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills)
-<!-- L:396 status:OPEN upd:2026-10-01 section:A flag: rice: -->
+<!-- L:396 status:OPEN upd:2026-10-04 section:A flag: rice: -->
 - **Asked 2026-09-30 (Tony).** "i struggle to keep the big picture.
   it's the old dilemma of loosing the forest for the trees." The master
   plan's summary and critical path had not really helped. He asked for
@@ -1322,6 +1342,13 @@ orrery's hovers.
   fetches, and the browser does the orrery's arithmetic on the saved
   data. The real limit is time: the browser can show only the dates
   the saved data covers.
+- **2026-10-04, before the check is built** (Fable 5.1 ledger sweep):
+  the ledger's header stamps lagged by three sessions -- the last one
+  was the lobby-card session's at a841ab6e, and the L-406/L-407 pushes,
+  the L-371 patches and the L-371 close added none. A check comparing
+  the page's date with the newest stamp would then pass on a stale
+  page. Either every ledger patch stamps the header (patch_L413_1 does),
+  or the check reads the newest `upd` field instead.
 **Gap:** the check above, or a ruling that the skill rule is enough.
 **Ref:** `documentation/WHERE_WE_ARE.md`; `skills/ledger-and-session-records/SKILL.md` (The Document Stack); `PROJECT_INSTRUCTIONS.md` v3.74; L-363; L-395; L-333; L-362.
 
@@ -1649,7 +1676,7 @@ section 5.
 **Ref:** `shell_configs.py`; `earth_visualization_shells.py`; `constants_rows.py`; L-345; L-352.
 
 #### [L-386] The Sun's conversion rows, not yet exported (store, the Sun's slice)
-<!-- L:386 status:OPEN upd:2026-09-28 section:A flag: rice: -->
+<!-- L:386 status:OPEN upd:2026-10-04 section:A flag: rice: -->
 - **Recorded, not built.** Under Tony's ruling of 2026-09-28 (L-345) a
   value in another unit is computed, never stored. The Sun's rows are
   not exported yet, and several are another row in a different unit:
@@ -1694,18 +1721,6 @@ is in the orrery) "photosphere + 10%"
 **Gap:** read the Sun's autoscale with its default shells; propose how
 the view opens at photosphere + 10% and what the axis does; Tony's eye.
 **Ref:** `documentation/HANDOFF_L322_D_orrery_pole_built_20260924.md` sec. 3; L-322.
-
-#### [L-383] shell_configs.py's magnetosphere tooltip says nothing of the tail and puts the belts at the flux peak (orrery, words)
-<!-- L:383 status:OPEN upd:2026-09-28 section:A flag: rice: -->
-- **Found 2026-09-25** building L-322 D8 to D10. `shell_configs.py`
-  holds a copy of the magnetosphere tooltip that no display reads, kept
-  in step with its live twin by hand. It says nothing about the
-  magnetotail, which D8 now draws, and still says both Van Allen belts
-  are "drawn at the flux peak" (lines 2321 and 2322 at orrery
-  `a7868eee`). [verified @a7868eee]
-- The same wording question is open for the gallery on L-349.
-**Gap:** Bring the copy into line when L-349's wording is ruled, or retire the copy.
-**Ref:** `shell_configs.py`; `earth_visualization_shells.py`; L-349; L-322.
 
 #### [L-382] Earth's magnetosphere costs about 42 percent more per orrery animation frame since D8 (orrery, rendering)
 <!-- L:382 status:OPEN upd:2026-09-28 section:A flag: rice: -->
@@ -1787,7 +1802,7 @@ the view opens at photosphere + 10% and what the axis does; Tony's eye.
 **Ref:** `planet_visualization_utilities.py`; L-352; L-322.
 
 #### [L-375] Earth's eccentric dipole offset is not drawn (store, Earth)
-<!-- L:375 status:OPEN upd:2026-09-28 section:A flag: rice: -->
+<!-- L:375 status:OPEN upd:2026-10-04 section:A flag: rice: -->
 - **Found 2026-09-24** building L-322 D5. Earth's magnetic dipole sits
   off the planet's centre. A source to start from: Koochak and
   Fraser-Smith (2017), Earth and Space Science 4, 626,
@@ -1796,7 +1811,13 @@ the view opens at photosphere + 10% and what the axis does; Tony's eye.
   nothing has been read yet.
 - Drawing it also needs Earth's rotation phase, which the orrery does
   not model.
-**Gap:** Read the source; then decide how, or whether, to show an offset that depends on a rotation phase the orrery does not model.
+- **2026-10-04, re-homed from L-234 at its close:** the website does
+  not draw the dipole cone at all; the orrery does, as the swept
+  envelope of every azimuth. No ruling against drawing it on the
+  website was found. Same question as the offset: what to show when
+  the instant depends on a rotation phase neither instrument models.
+  Earth's list, design talks (L-413).
+**Gap:** Read the source; then decide how, or whether, to show an offset that depends on a rotation phase the orrery does not model; and whether the website draws the cone.
 **Ref:** `earth_visualization_shells.py`; `constants_new.py`; L-356 (IGRF-14).
 
 #### [L-374] Showing Earth's precession over time (orrery, idea)
@@ -1944,7 +1965,7 @@ rest of the Sun's slice is ordered on L-412.
 **Ref:** gallery `data/objects_config.json`; L-231; L-322.
 
 #### [L-369] Earth's obliquity typed outside constants_new.py (orrery, store)
-<!-- L:369 status:OPEN upd:2026-09-28 section:A flag: rice: -->
+<!-- L:369 status:OPEN upd:2026-10-04 section:A flag: rice: -->
 - **Found 2026-09-22.** The obliquity is typed by hand in five places
   that do not read the store row: `star_sphere_builder.py` line 46
   (`OBLIQUITY_DEG = 23.4393`); visitor text saying "23.4" in
@@ -1953,6 +1974,10 @@ rest of the Sun's slice is ordered on L-412.
   manifest's line numbers were from an older tree]
 - The store row itself is used correctly everywhere it is read
   (protocol v3.69's entry).
+- **2026-10-04, all five still typed** [verified @ cbde99dc]:
+  `palomas_orrery.py` lines 5842, 8073 and 8891; `star_sphere_builder.py`
+  line 46; `coordinate_system_guide.py` line 441. Earth's list, item 2
+  (L-413).
 **Gap:** Point each at the store row; the visitor text says "about 23.4" from the row.
 **Ref:** `constants_new.py`; `star_sphere_builder.py`; `palomas_orrery.py`; `coordinate_system_guide.py`.
 
@@ -1970,7 +1995,7 @@ rest of the Sun's slice is ordered on L-412.
 **Ref:** `idealized_orbits.py`; `documentation/BUILD_MANIFEST_L322_D_earth_pole_20260922.md` sec. 2.5 and 7; L-322.
 
 #### [L-367] No checker opens a new room (checks, gallery)
-<!-- L:367 status:OPEN upd:2026-09-29 section:A flag: rice: -->
+<!-- L:367 status:OPEN upd:2026-10-04 section:A flag: rice: -->
 - **Found 2026-09-26** delivering L-363. The gallery maintenance run
   passed 16 of 16 on the patched copy, and none of its checkers boots a
   room from the page's `EXHIBITS` table. They read recorded payloads
@@ -1988,7 +2013,12 @@ rest of the Sun's slice is ordered on L-412.
 - **2026-09-29:** meanwhile the rooms were checked by the headless
   recipe in `documentation/HANDOFF_L363_half1_done_half2_after_stage_d_20260928.md`,
   section 7. L-363's Half 2 drawer enters the same blind spot.
-**Gap:** A check that lists `EXHIBITS` and fails on a room no checker boots, or one smoke that boots every room.
+- **2026-10-04, re-homed from L-363:** no gating checker reads
+  `index.html`'s lobby code either (recorded at the lobby card,
+  2026-10-04). And this item is why the gallery's checks come before
+  the swap in Tony's order of 2026-10-04 (L-412): the swap changes the
+  front door.
+**Gap:** A check that lists `EXHIBITS` and fails on a room no checker boots, or one smoke that boots every room; and something that reads the lobby code.
 **Ref:** gallery `gallery_maintenance_run.py`; gallery `documentation/smoke_*.js`; L-363.
 
 #### [L-366] An orbit's info marker describes an arbitrary point on the orbit (gallery, assembler)
@@ -2085,6 +2115,7 @@ rest of the Sun's slice is ordered on L-412.
     His look at the zoomed picture is not recorded.
   - No gating checker reads `index.html`'s lobby code; the maintenance
     run's 23 passes cover everything else. Recorded, not chased.
+    Re-homed to L-367 on 2026-10-04, with the rooms no checker boots.
   - Carried for gallery-pipeline's next version: the wide card's four
     fields and the picture's tool. No sentence in the skill is wrong
     now (A Wrong Sentence in a Skill: carry it).
@@ -2466,15 +2497,32 @@ name?"
   (L-394). The five planets and Pluto remain, inside the design's list,
   Pluto last. The comets and Voyager 1 are part of the room's future
   (L-364, L-365).
-- **Tony-action (decide), at Half 2:** whether ticking a drawer row
-  also opens it (design question 13).
-- **Tony-action (decide), at Half 2:** Apophis is drawn today but has
-  no place in the ten-row drawer: one row under "See more" until the
-  near-Earth asteroids round, or out of Half 2 until then.
+- ~~Tony-action (decide), at Half 2: whether ticking a drawer row
+  also opens it (design question 13).~~ Settled at the design talk of
+  2026-09-30 and built.
+- ~~Tony-action (decide), at Half 2: Apophis is drawn today but has
+  no place in the ten-row drawer.~~ Settled: one row under "See more",
+  built.
+- **Tony's ruling, 2026-10-04 (his note on Where We Are), on the
+  arrow from GO's text box to its body:** "the problem with this last
+  time is that it moved the text box from the center. the text box
+  needs to remain in the center. if not possible, don't implement the
+  arrow." So the arrow may not amend L-318's mid-view ruling, which the
+  2026-10-02 note had allowed for.
 - **For Half 2's Mode 5:** on a phone with many bodies ticked, a tap
   may pick the wrong one (design question 7).
 **Gap (2026-09-26; SUPERSEDED):** Half 2 (above), after L-322 section 6 pushes; then Tony's decision on the default.
-**Gap (2026-09-29):** Half 2 as section 4 of `documentation/HANDOFF_L363_three_strands_integrated_20260929.md` sets it out, from step 1 (step 0 was this entry): a short design round, the five planets and one cache rebuild, the drawer, Tony's Mode 5. The swap after the Sun's slice closes.
+**Gap (2026-09-29; SUPERSEDED 2026-10-04):** Half 2 as section 4 of `documentation/HANDOFF_L363_three_strands_integrated_20260929.md` sets it out. All of it is built.
+**Gap (2026-10-04):** (a) the swap: a bare `interactive.html` link
+opens this room and the Explorer gets its own address, after the Sun's
+slice and the gallery's checks (L-412); (b) the arrival block's
+`_declared` sentence still says the view fits "1.1 times the largest
+distance" where the rule is 1.2 [verified @ gallery e7ef96eb,
+`data/objects_config.json`] -- listed as a small fix on 2026-10-02, it
+did not ride patch_L363_14; (c) the design-talk items: the highlighted
+row at the top of the list, and GO's arrow only if the text box stays
+centred; (d) whether the editor edits the rows' own words, re-homed
+from L-404.
 **Ref:** `documentation/HANDOFF_L363_three_strands_integrated_20260929.md`; `documentation/DESIGN_solar_system_room_front_door_20260929.md`; `documentation/HANDOFF_L363_half1_done_half2_after_stage_d_20260928.md`; `documentation/HANDOFF_explorer_symbols_half1_20260926.md` (rev 2); gallery `documentation/patch_solar_system_room_half1_20260926.py` and `patch_L363_2` to `_6`; L-286; L-099; L-322; L-364 to L-367; L-391 to L-395.
 
 #### [L-361] An epoch typed in the page, with no store row (gallery, store)
@@ -2623,7 +2671,7 @@ name?"
 **Ref:** `earth_visualization_shells.py`; `planet_visualization_utilities.py`; `documentation/NOTE_L322_C2a_orrery_words_20260922.md`; manifest sec. 17.7.
 
 #### [L-351] Rules learned at C2, owed to the next bumps of their stores (skills, protocol)
-<!-- L:351 status:OPEN upd:2026-09-28 section:A flag: rice: -->
+<!-- L:351 status:OPEN upd:2026-10-04 section:A flag: rice: -->
 - **Recorded, not built.** A class found while building L-322 Stage C2
   (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
   Braid: it waits until the artifact on the critical path reaches it.
@@ -2652,29 +2700,25 @@ name?"
   comparing the scanner's findings as a SET of names cannot see a second
   finding that looks like one already there. D8's result stood because
   the scanner's own count agreed; D9 and D10 compared counted lists.
+- **2026-10-04: this item becomes the one place** for what each skill
+  is owed at its next version, so a session bumping a skill reads one
+  block, not five (Fable 5.1 ledger sweep; method). Pointers by source
+  handle; the sentence itself is in that item:
+  - gallery-cache-builder: the `[SWAP]` line, the run order and the
+    empty "(N)" folders (L-216).
+  - provenance-discipline: the range rule's example names a removed
+    range row; a patch's "what the run should say" predicts the
+    scanner's CHANGE, not its total (both L-371); the conversion marker
+    and the widening (L-390); the scanner's window and declared rows
+    (L-414, if the fix is method there).
+  - gallery-pipeline: the wide card's four fields and the picture's
+    tool (L-363).
+  - ledger-and-session-records: a patch checks files Tony annotates by
+    the lines it edits, never by a whole-file fingerprint (Tony,
+    2026-10-03); and Tony's documentation-folder practice (above).
+  - interactive-exhibit and the protocol: as above.
 **Gap:** Each lands with its store's next bump.
-**Ref:** skills/interactive-exhibit/SKILL.md; skills/ledger-and-session-records/SKILL.md; PROJECT_INSTRUCTIONS.md.
-
-#### [L-350] The magnetotail's observed extent is served and shown nowhere (gallery)
-<!-- L:350 status:OPEN upd:2026-09-28 section:A flag: rice: -->
-- **Recorded, not built.** A class found while building L-322 Stage C2
-  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
-  Braid: it waits until the artifact on the critical path reaches it.
-- `EARTH_MAGNETOTAIL_OBSERVED_RADII` (220, Slavin et al. 1983, read
-  2026-09-22) reaches the served config and no hover or panel prints
-  it. A served number nobody sees is either a missing line or a row the
-  gallery does not need.
-- **Three things about the same hover (2026-09-28).** The magnetotail's
-  hover is at the hover budget's ceiling of 17 lines, so printing the
-  observed extent means taking a line away. There is no Wikipedia
-  article for the magnetotail; its link is the Magnetosphere article
-  [verified @2df02f3b]. And the drawn tail widens about 44 percent from
-  20 to 120 Earth radii behind Earth at its central width, 32 percent at
-  its low end, against the 1983 "about 30 percent"; the 1983 figure is
-  inside the 1985 envelope, so the construction stands, and the note is
-  on the flare-end row in `constants_new.py`. [per chain]
-**Gap:** Decide whether the magnetotail hover should print it; if not, stop serving it.
-**Ref:** L-305; gallery `data/objects_config.json`; `documentation/L322_earth_read_record_C2_20260922.md`.
+**Ref:** skills/interactive-exhibit/SKILL.md; skills/ledger-and-session-records/SKILL.md; PROJECT_INSTRUCTIONS.md; L-216, L-363, L-371, L-390, L-414.
 
 #### [L-349] The inner belt's hover says "where the measured particle flux peaks" (words, Tony's)
 <!-- L:349 status:OPEN upd:2026-09-22 section:A flag: rice: -->
@@ -3082,7 +3126,7 @@ one of the four).
 (STILL OPEN, item 1c).
 
 #### [L-330] Belt shape: rings at the peaks, not the served region (Earth exhibit)
-<!-- L:330 status:OPEN upd:2026-09-15 section:A flag: rice:3/3/60/3 -->
+<!-- L:330 status:OPEN upd:2026-10-04 section:A flag: rice:3/3/60/3 -->
 - **Separate from L-231 on purpose.** L-231 is which PLANE the belts sit
   in and is ruled. This is what SHAPE they are. They were separated so that
   the plane fix, which is nearly free and corrects something visible, is
@@ -3121,8 +3165,11 @@ one of the four).
   wrong whatever shape is drawn.
 **Note:** RICE 3/3/60/3 -> 1.8 is Claude's proposed score. Confidence 60
 because the physics is settled and the readability is not.
-**Gap:** build L-231 first. Then a design round on this, then a decision,
-then both instruments in one pass.
+- **2026-10-04:** L-231 is built for Earth (its Gap now holds only
+  Jupiter's belts), so this item's prerequisite is met. First of
+  Earth's design talks (L-413).
+**Gap:** a design round, then a decision, then both instruments in one
+pass.
 **Ref:** L-231 (the plane, ruled) is the prerequisite. L-181 for the belt
 and torus numbers being function-local literals. Raised 2026-09-15 from
 Fable's review of the plane question.
@@ -3544,7 +3591,7 @@ Perihelion is the project convention for Eris and Pluto.
 **Ref:** ASBUILT_geometry_and_br_fix.md, Batch 1 worksheets.
 
 #### [L-181] Complete the single-source-of-truth constant layer
-<!-- L:181 status:OPEN upd:2026-09-12 section:A flag: rice:5/5/70/5 -->
+<!-- L:181 status:OPEN upd:2026-10-04 section:A flag: rice:5/5/70/5 -->
 - Fable audit established the structural problem: up to six independent
   storage locations for one physical value (radius_fraction, hover_text,
   dead tooltip, module _info, CUSTOM_SHELLS tooltip, legacy inline
@@ -3674,7 +3721,8 @@ before build, in order: (a) **(decide)** ratify fetch-and-import;
 (b) **(design)** the `FEATURE_REGISTRY` shape covering rings, belt sets
 and tori; (c) **(design)** the migration shape and per-body sequence;
 (d) decide on the 124 dead tooltip fields. L-184's build path cannot be
-defined until this settles.
+defined until this settles. (2026-10-04: L-383, the Earth
+magnetosphere's tooltip copy, is folded in here as one of the 124.)
 - **FABLE DESIGN REVIEWS, ROUNDS 1 AND 2, AUGUST 2026** (built on orrery `ee0da47c` /
   gallery `61a78c0`; zero code). Architecture ENDORSED: one store, three
   zones per entry, provenance as data, derivation instead of annotation,
@@ -5251,7 +5299,8 @@ pointing at it, so name the pilot's return by hand at dispatch time.
   `data/solar-system (1)` in his gallery copy, the OneDrive shape L-400
   closed on 2026-10-01 when he deleted the first one. Git ignores it.
   A recurrence of this class, not a new item.
-  - **Tony-action (do):** delete it, with OneDrive paused, as before.
+  - **Tony-action (do) -- DONE 2026-10-04** (Tony's note on Where We
+    Are): deleted.
 - **2026-08-19: the nightly run wiped the served tree.** GitHub Desktop
   showed 56 deletions in the gallery repo and zero additions.
   `data/solar-system/` was absent while BOTH halves of the generation
@@ -5869,7 +5918,7 @@ exposed it); HANDOFF_20260819_alfven_and_the_swap.md, error 4.
   L-224 (the session that surfaced it).
 
 #### [L-228] Alfven surface latitude ranges: source them or omit them
-<!-- L:228 status:OPEN upd:2026-10-04 section:A flag:Tony rice:2/3/60/2 -->
+<!-- L:228 status:OPEN upd:2026-10-04 section:A flag: rice:2/3/60/2 -->
 - **Surfaced 2026-08-23** while reading the hover strings for L-227.
 - **THE DRAWN VALUE IS NOT AT ISSUE.** `ALFVEN_SURFACE_RADII` is
   interpolated into every hover that quotes it, including the derived
@@ -5904,9 +5953,10 @@ exposed it); HANDOFF_20260819_alfven_and_the_swap.md, error 4.
   and any wording change to Tony. Also carries L-229's loose end: a
   citation for the streamer belt's orientation about the solar
   equator, or the drawing stays declared.
-- **Tony-action (do):** the source read. Claude cannot clear this by
-  reasoning about it, and guessing here is the failure this week was
-  spent on.
+- ~~Tony-action (do): the source read.~~ Struck 2026-10-04: the note
+  above it (2026-10-04) has Claude do the read by web, and the two
+  disagreed (Fable 5.1 ledger sweep). The flag that put "[Tony]" on the
+  index row goes with it; the RICE (decide) below stays.
 - **Note:** RICE 2/3/60/2 -> 3.0 is Claude's proposed score.
   Confidence is 60 because whether Cranmer carries the claim is
   unknown until somebody reads it. **Tony-action (decide):** confirm
@@ -6142,87 +6192,6 @@ was drafted as L-330 on 2026-09-14 and withdrawn unrun.
   `gallery/feature_renderers.js::renderBelts`; L-229 (the genuine frame
   defect this was mistaken for); L-154.
 
-#### [L-234] Reopen Artifact 1: recreate the orrery's Sun in the assembler
-<!-- L:234 status:OPEN upd:2026-08-25 section:A flag: rice:4/5/90/3 -->
-- **Tony's ruling, 2026-08-25, in three parts.** (1) The artifact ladder
-  has a SECOND AXIS that was never sequenced. The seven golden artifacts
-  are seven PROPAGATION shapes -- conic, planetocentric, mean elements,
-  spacecraft arc, barycentric binary -- and that ladder is complete and
-  good. What the orrery DRAWS is a different axis entirely: interiors,
-  atmospheres, magnetospheres, belts, tori, rings, comae, solar shells,
-  Hill spheres. Nothing in the five segments or the seven artifacts
-  sequences that axis. (2) Nobody ever decided that some structures
-  would be shown and others not; L-100 carried that as an inherited
-  default, never a ruling. (3) Artifacts REOPEN: reopen Artifact 1, get
-  it right, then Artifact 2, and so on. "Right" means the orrery
-  recreated in the assembler as far as possible. Re-locking is normal,
-  not a failure, and the orrery may improve on the way -- as it did with
-  the streamer belt.
-- **Tony, verbatim:** "it is not my intent. The general intent is to
-  redo the orrery in the assembler. Part by part."
-- **The consequence that arrives first.** The resolver requests EVERY
-  feature key the cache carries for an object, and the golden record
-  hashes `feature_keys`, `trace_role_counts` and `legend_groups`. So
-  adding a feature family to a body FAILS every locked artifact
-  containing it. Under part-by-part that is the normal event, not an
-  edge case.
-- **Sun half: DONE 2026-08-25.** 19 shells in the assembler, 14 spheres
-  and 5 custom. Six gallery-side patches, `patch_L234_1` through `_6`:
-  Sun entry plus builder skip and three gates taught; centre features
-  dispatched; the 14 spheres drawn; the L-227 hover-wrap fix with scoped
-  smoke assertions; IAU solar pole plus the streamer band; the three
-  Oort custom shells (torus, clumps, galactic tide). Also delivered:
-  `smoke_sun_shells.js` (30 checks) and the two payload fixtures
-  `payload_earth.json` and `payload_jupiter_saturn.json`, which had never
-  been committed and without which the two existing smoke suites could
-  not run at all.
-- **Mode 5 passed twice.** 2026-08-24 on the 14 spheres; 2026-08-25 on
-  the complete Sun ("looks great"). 44 traces from 8 requests -- Earth's
-  4 geometry and 4 markers, the Sun's 18 and 18 -- reconciling exactly
-  against the config. Two things the render confirmed that no unit test
-  could: the band reads as a helmet and stalk tilted off the ecliptic,
-  which is what the 7.225 degree plane fit predicted (L-229); and Frame
-  on Sun returned a half-span of 0.279 AU, 1.2 times the outer corona at
-  0.2326 AU, which is the legendonly skip in `frameLayout` working --
-  without it the frame would have ranged to the gravitational influence
-  at 150,000 AU and the Sun would have vanished into a pixel.
-- **Three things the build discovered.** (a) THE SUN WAS NOT AN OBJECT:
-  twelve entries in `objects_config.json` and none of them the Sun,
-  which existed only as a scene centre drawn as a yellow marker, with no
-  catalogue record and therefore no `features` key. (b) `frame-origin`
-  IS LOAD-BEARING, NOT A LABEL: `served_window` is computed from every
-  object whose `canonical_frame` is `heliocentric`, and a participant
-  with no trust measurement NULLS that window for the whole cache,
-  silently disabling the resolver's propagation bound site-wide --
-  tested both ways. (c) THREE BUILDER GATES WOULD HAVE ABORTED THE
-  NIGHTLY and reading the code found none of them; `assert_structural`
-  invariant #3 aborts on any non-spacecraft with no osculating block,
-  which would have killed every build, not just first ones.
-- **Not on this path:** segment 2 (transport), the general provenance
-  audit, L-225, L-231, and the barycentric solar scene (L-137).
-**Gap:** the EARTH half. Inventory measured at orrery HEAD. Already
-served: `atmosphere_shell` (1.05, 1.25) and `van_allen_belts`.
-Interiors, not served: inner_core 0.19, outer_core 0.55, lower_mantle
-0.85, upper_mantle 0.98, crust 1.0. Also not served: hill_sphere 235.0.
-Custom, not served: rotation_axis, dipole_cone, magnetosphere, leo,
-geostationary_belt. Missing: an `orientation` key -- Earth's pole is
-RA 0, Dec 90 (IAU 2018, J2000 celestial north). Two shapes the Sun did
-not need: five of the six new sphere entries sit BELOW the surface, so
-L-238 is the first patch; and the magnetosphere is genuinely new
-geometry -- not a sphere, not a torus, not a band. Earth's block in
-`shell_configs.py` carries a block-level `# Source:` header naming USGS,
-NASA Earth Fact Sheet, NOAA/NCEI and the Van Allen Probes, verified in
-the April 2026 provenance audit; those are the sources the config
-entries should carry, with an `orrery_constant` pointer, same pattern as
-the Sun's.
-- **Note:** RICE 4/5/90/3 -> 6.0 is Claude's proposed score.
-  **Tony-action (decide):** confirm or redirect, then re-run
-  `ledger_index.py`.
-**Ref:** HANDOFF 2026-08-25 (orrery `4ad78a01`, gallery `64201783` ->
-`88633707`); L-100 (closed by this ruling); L-235, L-237, L-238 (the
-work in front); L-229 (the solar pole the band needed); L-239, L-240,
-L-241 (orrery-side findings); L-080 (the artifact fingerprint's fields).
-
 #### [L-235] Checks that cannot fail, gallery side [three instances]
 <!-- L:235 status:OPEN upd:2026-08-25 section:A flag: rice:3/4/95/1 -->
 - **Found 2026-08-25 while building the Sun.** Three instances of the
@@ -6342,7 +6311,7 @@ L-241 (same three builders).
 **Ref:** L-181; L-190; L-232; gallery `data/objects_config.json`.
 
 #### [L-241] Hills torus hover states the cloud bounds, not the drawn ring
-<!-- L:241 status:OPEN upd:2026-08-25 section:A flag: rice:2/2/95/1 -->
+<!-- L:241 status:OPEN upd:2026-10-04 section:A flag: rice:2/2/95/1 -->
 - **`create_sun_hills_cloud_torus` hovers "2,000 to 20,000 AU".** The
   drawn surface runs 5,570 to 16,953 AU about a ring at 11,000, because
   a torus built from an inner and an outer bound puts its surface at the
@@ -8254,7 +8223,7 @@ card in the grid), tools/gallery_studio.py, tools/json_converter.py,
 interactive.html.
 
 #### [L-292] Earth shells the orrery does not draw
-<!-- L:292 status:OPEN upd:2026-09-08 section:A flag: rice:3/3/75/2 -->
+<!-- L:292 status:OPEN upd:2026-10-04 section:A flag: rice:3/3/75/2 -->
 - **Opened 2026-09-06** during the Earth design round. One row per The
   Braid: the class is "Earth shells worth adding to the orrery", not
   one item per shell.
@@ -8285,9 +8254,16 @@ interactive.html.
   as a detected extent rather than an edge. The ORRERY still folds the
   exosphere into the upper-atmosphere hover and draws no shell of its
   own; that is the remaining half.
+- **2026-10-04, the orrery half is still unbuilt** [verified @
+  cbde99dc]: Earth's shells in `shell_configs.py` are Inner Core, Outer
+  Core, Lower Mantle, Upper Mantle, Crust, Lower Atmosphere, Upper
+  Atmosphere and Hill Sphere; the geocorona is a sentence inside the
+  Upper Atmosphere hover. The L-371 handoff's "an exosphere shell
+  naming the geocorona now exists" is the website's row. Earth's list,
+  item 1 (L-413).
 **Gap:** the orrery's exosphere/geocorona shell in
 `SHELL_CONFIGS['Earth']` at `EARTH_GEOCORONA_RADII`; the other two
-when a build already has the file open.
+when a build already has the file open. L-413's orrery patch.
 **Ref:** L-291, L-295, earth_visualization_shells.py,
 mercury_visualization_shells.py (the exosphere precedent).
 
@@ -8469,7 +8445,7 @@ SKILL.md ("A Breadcrumb Must Not Cite" -- the Source line must be TRUE,
 so it is scoped).
 
 #### [L-300] sweep_collapsed_features.py joins the gallery maintenance runner as a gating checker
-<!-- L:300 status:OPEN upd:2026-09-07 section:A flag: rice:3/3/90/1 -->
+<!-- L:300 status:OPEN upd:2026-10-04 section:A flag: rice:3/3/90/1 -->
 - **Tony's question, 2026-09-07:** runner or dashboard? **Ruling, on
   Claude's recommendation: the runner, gating.** The script already has
   the right shape: it exits 2 only on a feature group it cannot classify
@@ -8480,536 +8456,19 @@ so it is scoped).
 - Earth's step 2 splits the magnetosphere into four served rows, which
   retires four of L-268's sixteen; with the sweep in the routine, that
   delta appears by name the day it lands.
+- **2026-10-04.** The script is in the gallery's ROOT folder, not
+  `tools/` as the Ref said; the new row's working folder is ".".
+  Run on gallery e7ef96eb: exit 0, "33 stored as themselves, 16
+  collapsed, 0 unclassified" -- Earth's two belts, Jupiter's three belts
+  and four rings, Saturn's seven rings. So registering it cannot turn
+  the run red today. **Placed by Tony's order of 2026-10-04 in Earth's
+  website patch (L-413),** which ends with a gallery maintenance run
+  anyway; it adds the runner's file to that patch.
 **Gap:** one small patch to `gallery_maintenance_run.py` registering the
 checker; then a run to confirm it appears in the CHECKERS list with its
-verdict line. Not yet written.
-**Ref:** L-268, gallery `tools/sweep_collapsed_features.py`,
-`gallery_maintenance_run.py`.
-
-#### [L-305] Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together
-<!-- L:305 status:OPEN upd:2026-09-16 section:A flag: rice:4/4/60/4 -->
-- **2026-09-12, Gap item 4 LANDED** (`patch_L305_magnetosphere_constants.py`,
-  four files, eighteen edits, pushed at `5b88007f`). Fifteen rows added
-  -- Shue's eight coefficients, Jelinek's R0 / eps / lambda, the bow
-  shock cut angle, three declared solar wind conditions. Both standoffs
-  superseded: the magnetopause to 10.251872972379905 as a typed literal
-  (the gallery's store parser evaluates only + - * / and **, so a tanh
-  assignment leaves the CHECKED set and reports NOT IN STORE under a
-  wrong reason), the bow shock to an EXPRESSION over the new rows.
-  Every row written carries a `# Unit:` and a `# Status:` line.
-  Removed: the Lugaz-midpoint derivation, the Farris & Russell "Model
-  form" miscitation, the stale shell-migration Note.
-  RIDING WITH IT, on Tony's rulings: six `:g` quotes became `:.4g` so
-  the hovers report 10.25 and 13.51 rather than six figures; the
-  Lugaz-midpoint SENTENCE was deleted from the bow shock hover and its
-  attribution moved to Jelinek, because the new number made a cited
-  sentence arithmetically false and a patch may not leave its own
-  output untrue; `RADIATIVE_ZONE_AU`'s rung was added in passing.
-  `test_status_lines.py` shipped with it and is wired into the
-  maintenance run.
-  **The lesson, and it is a convention nothing states.** The bow shock
-  expression was first written as a parenthesised assignment over three
-  lines -- the only multi-line assignment among 88 rows -- and
-  `constants_change_report.py`, which matches `NAME = value` on ONE
-  line, reported the constant REMOVED. See L-324.
-  **Still open:** items 5 (the port), 6 (the gallery config, which
-  carries THREE retired claims: the Lugaz midpoint, Farris & Russell,
-  and the magnetotail's "past 1,000 radii"), 7 (the hovers, after
-  L-321's verdicts), 8 (store drift then Mode 5, phone first).
-- **Where this came from.** A design round on 2026-09-08 opened with one
-  hover requirement from the L-291 handoff -- say that the tail is drawn
-  to 100 radii against a real one past 1,000 -- and ended with two stored
-  constants superseded, a miscitation found, and step 3 split. The
-  handoff had framed the magnetosphere renderer as a small step-3 item.
-  It is not, and the next session will read that framing first.
-- **What was checked, at orrery `af4c604e`.** The orrery does NOT use
-  Shue for the magnetopause. `create_magnetosphere_shape` is a half
-  ELLIPSOID -- sunward 10, equatorial radius 12, polar radius 10 -- so
-  not even a surface of revolution, with a separate flared cylinder tail
-  (base 15, end 25, length 100) butted on at the terminator. The bow
-  shock is a conic through `create_bow_shock_shape` with
-  `eccentricity=1.05` typed at the call site and a sweep capped at 0.92
-  of the asymptote, a literal the code itself labels a MODE-5 KNOB. An
-  11 degree dipole tilt is applied via `rotate_to_sunward`. Seven drawn
-  numbers there have no store name; L-291's "no drawn literal remains"
-  was true of the shells, not of the magnetosphere.
-- **Tony's ruling: none of that gets promoted.** Those are Mode 5
-  approximations -- shapes chosen because they looked right. Promoting
-  them into `constants_new.py` would launder an approximation into a
-  sourced constant. See L-306, which is that rule stated generally.
-- **Farris & Russell (1994) is a MISCITATION for a shape.** The bow
-  shock constant's Note cites it as "Model form". Its abstract is a
-  semiempirical Mach-number relation for the STANDOFF DISTANCE; obstacle
-  shape is an input to it, not an output. Remove the claim.
-- **The model taken: Jelinek, Nemecek and Safrankova.** ONE functional
-  form fits BOTH boundaries from Themis crossings, parabolic coordinates
-  with a per-boundary scaling factor. The conference proceeding (WDS'10)
-  reports lambda_y = 1.17 for the bow shock and 1.54 for the
-  magnetopause, R_MP = 12.82 p^(-1/5.26) and R_BS = 15.02 p^(-1/6.55)
-  with R0 at 1 nPa -- about 11.2 and 13.5 R_E at the 2 nPa the store
-  already names. CITE THE PEER-REVIEWED VERSION, Jelinek et al. 2012,
-  JGR 117, doi:10.1029/2011JA017252, read from that paper: its fitted
-  parameters may differ and the numbers above were read from the
-  proceeding.
-- **Why Jelinek and not Lin.** Lin et al. 2010 (JGR 115, A04207,
-  doi:10.1029/2009JA014235) is the better physics -- three-dimensional,
-  asymmetric, parameterized by pressure, IMF Bz AND dipole tilt, and its
-  abstract says the extrapolation for the distant tail magnetopause is
-  considered, so tilt and tail are reconciled inside one published
-  model. It is DEFERRED ON PORTABILITY, not rejected. Jelinek is one
-  formulation for two surfaces, so one function ported twice instead of
-  two; it is simple enough that the port can be checked by eye against
-  the published figures, which matters when the same mathematics has to
-  live in Python and JavaScript and stay identical. Lin's ten-ish
-  coefficients cannot be checked that way, and an unverifiable port in
-  two languages is a defect generator. Tony's framing settled it: this
-  is a layperson's learning tool, not a research tool.
-- **The 11 degree tilt is DROPPED, and that is a correction.** Jelinek
-  assumes a symmetric magnetosphere in GSE. A later study notes that in
-  Lin2010 the dipole tilt does not affect the EQUATORIAL magnetopause at
-  all -- it drives north-south asymmetry and cusp location. So the old
-  drawing's leaning magnetosphere was conveying something the literature
-  does not support.
-- **The tail is drawn, with its extent sourced.** Not omitted: Tony's
-  correction, and the pattern is already in the store -- the geocorona
-  is drawn at a sourced DETECTION FLOOR with the hover saying it is not
-  an edge. Jelinek is a DAYSIDE fit (within about +/- 7 hours of local
-  time around noon); extrapolating its paraboloid to x = -100 R_E gives
-  a cylindrical radius near 46 R_E, well outside what the fit supports.
-  So the tail gets its OWN citation for extent and cross-section, drawn
-  to the sourced figure, with the hover stating where the drawn surface
-  stops against the real one. That citation is not yet fetched.
-- **The flaring parameter is SERVED, not hardcoded** (Tony's ruling the
-  same evening, before the model changed). A shape parameter with a
-  citation behind it belongs in the store with value / source /
-  `orrery_constant`, not in `feature_renderers.js`. The VALIDITY RANGE
-  travels with it, or the Mode-5 knob has simply moved from Python to
-  JavaScript.
-- **Before the config change: read how `check_store_drift` treats a
-  DIMENSIONLESS pointer.** Its unit table is all lengths. A pointer it
-  cannot examine looks exactly like one that passed, which is what the
-  runner's three states exist to prevent.
-- **Orrery and assembler move TOGETHER -- the braid** (Tony's ruling).
-  `EARTH_MAGNETOPAUSE_STANDOFF_RADII` is quoted to the visitor in two
-  hover strings in `earth_visualization_shells.py`. Changing the
-  constant while the old ellipsoid still draws makes the text and the
-  geometry disagree, which is worse than either being stale.
-- **2026-09-10, the paper read: gap item 1 closes by reading.** The
-  peer-reviewed parameters are IDENTICAL to the WDS'10 numbers above:
-  R_MP = 12.82 p^(-1/5.26), R_BS = 15.02 p^(-1/6.55), lambda_MP = 1.54,
-  lambda_BS = 1.17, R0 at p = 1 nPa (eqs. 13-16). The surfaces in
-  aberrated GSE are x = R0 p^(-1/eps) - tau^2/2,
-  R_yz = sqrt(2 R0 p^(-1/eps)) tau / lambda. The paper states its own
-  envelope: dayside only, within +/- 7 h of local noon; solar wind
-  dynamic pressure 0.6-11 nPa; rotational symmetry assumed; no IMF Bz,
-  dipole tilt or Mach dependence (sec. 3, 6, 7). Sec. 7 says parabolic
-  coordinates suit the bow shock and that elliptical coordinates would
-  describe the magnetopause better. [read from Tony's uploaded PDF by a
-  Claude Fable 5.1 session, 2026-09-10; confirmed against the PDF
-  2026-09-11, see the dated group below]
-- **The reference, and how it is reached.** Jelinek, K., Z. Nemecek,
-  and J. Safrankova (2012), A new approach to magnetopause and bow
-  shock modeling based on automated region identification, J. Geophys.
-  Res. 117, A05208, doi:10.1029/2011JA017252. The Wiley DOI page
-  refuses sandbox fetches. A web search the same day listed the article
-  as free access at
-  https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2011JA017252
-  -- search-result metadata; nobody opened that page. Whether the
-  citation meets the Access Standard is settled when its store row is
-  written.
-- **Tony's ruling (2026-09-10): use each model for the part it fits
-  best, and state the reason.** The magnetopause moves to Shue et al.
-  (1998), doi:10.1029/98JA01103 -- the source the served row ALREADY
-  cites for its standoff: r = r0 (2 / (1 + cos theta))^alpha,
-  r0 = (10.22 + 1.29 tanh(0.184 (Bz + 8.14))) Dp^(-1/6.6),
-  alpha = (0.58 - 0.007 Bz)(1 + 0.024 ln Dp). The bow shock stays
-  Jelinek 2012. This AMENDS the ruling above that one formulation
-  serves both boundaries (under "Why Jelinek and not Lin"). Why it
-  holds against that ruling's own reason (portability): Shue is two
-  lines and eight published coefficients, checkable by eye against the
-  paper's figures, so the bar that deferred Lin is still met. Why it is
-  worth a second function: the tail. At p = 2 nPa, Bz = 0, the
-  cross-section radius at x = -100 R_E is 28.9 R_E under Shue and 45.9
-  under the Jelinek paraboloid (the 46 recorded above), and the paper's
-  own sec. 7 concedes the parabola for the magnetopause. Shue's tail
-  still flares (alpha = 0.59 > 0.5), slowly; it does not close.
-  [computed; reproduced 2026-09-10 by the patch that landed this. The
-  r0 line matches the Source already on
-  `EARTH_MAGNETOPAUSE_STANDOFF_RADII`; the alpha line appears nowhere
-  in the repo and was not read this round -- Gap item 1]
-- **The tail therefore needs no geometry citation of its own.** The
-  "tail gets its OWN citation for extent and cross-section" bullet
-  above narrows to EXTENT only: Shue's surface is drawn to the served
-  100 R_E and the hover says the drawn surface stops there against a
-  real tail past 1,000 R_E, and that Shue was fitted on near-Earth
-  crossings, not the distant tail (Show the Envelope). Two parts of
-  that hover are not yet sourced. The 1,000 R_E entered with L-291's
-  hover requirement and sits in the served magnetotail row's
-  `_declared` text with no citation (Gap item 2); the fitting range
-  comes from the Shue read (Gap item 1). The row's `base_radii` (15)
-  and `end_radii` (25) retire with the old tail, since Shue's surface
-  sets the cross-section. [row verified @57fd93c6, unchanged @4506fb48]
-- **The bow shock stops at the fit limit, and says so.** Jelinek's
-  surface is drawn from the nose to 105 degrees from the nose (the
-  +/- 7 h local-time envelope). At p = 2 nPa that is x = -7.8 R_E,
-  R_yz = 29.0 R_E. Beyond it a paraboloid is unsupported (67 R_E at
-  x = -100) and the real shock follows a Mach cone the paper does not
-  model. The cut angle is SERVED with the shape parameters, per the
-  "flaring parameter is SERVED" ruling above; the hover names it.
-  [computed; reproduced 2026-09-10]
-- **The seam at the nose, stated in the hover.** At p = 2 nPa, Bz = 0:
-  Shue magnetopause nose 10.25 R_E; Jelinek bow shock nose 13.51 R_E;
-  subsolar sheath 3.3 R_E where Jelinek's own pair gives 2.3 (his
-  magnetopause at 2 nPa is 11.24). The two magnetopause noses differ by
-  about 1 R_E against a fit scatter of about 0.7-0.8 R_E (Jelinek
-  Fig. 7, per the read). The two hovers name both papers and the 1 R_E
-  disagreement rather than let the pair read as one measurement.
-  [computed; reproduced 2026-09-10]
-- **Supersessions now fixed in number**, both called for above:
-  `EARTH_MAGNETOPAUSE_STANDOFF_RADII` 10.0 -> 10.25 (Shue at the
-  declared conditions; the served row's source string and the
-  constant's own Source both say 10.2 while the value says 10.0 -- a
-  drift inside one row, cleared by this).
-  `EARTH_BOW_SHOCK_STANDOFF_RADII` 12.5 -> 13.51 (Jelinek at 2 nPa);
-  the bow shock's Lugaz-midpoint derivation and the Farris & Russell
-  "Model form" Note go. New store names, each with value / source /
-  orrery_constant: Shue's eight coefficients; Jelinek's R0, eps and
-  lambda for the bow shock (3); the bow-shock cut angle (105 deg,
-  source: the paper's stated local-time envelope); and the MODEL
-  CONDITIONS p = 2 nPa, Bz = 0 nT, v_sw = 400 km/s, status declared
-  pending -- L-314, stated in every hover as the condition, not a
-  measurement. Each pick's reason goes on its row: 2 nPa is the
-  pressure the store's Shue Source already uses; the reason for
-  400 km/s is not yet written. L-314 replaces the three with measured
-  values. [constant verified @5fea1795; served row @57fd93c6]
-- **Aberration is applied, declared.** Both fits are ABERRATED:
-  Shue in aberrated GSM, Jelinek in aberrated GSE (this line read
-  "both fits are in ABERRATED GSE" until 2026-09-11; see the frame
-  correction in the dated group below, which is why it does not
-  change the geometry).
-  The Sun direction is already in the Earth driver's payload
-  (`payload.sun.dir`, from Earth's served osculating elements)
-  [verified @57fd93c6]; the nose is rotated from it by
-  atan(v_orbit / v_sw), about 4.3 deg at 400 km/s, in the ecliptic
-  plane against Earth's motion. v_sw is one of the declared conditions
-  above. **Tony-action (decide):** apply the 4.3 degrees at the
-  declared 400 km/s (this record's choice, because both models are
-  defined in the aberrated frame), or draw un-aberrated and say so in
-  the hover.
-- **The dipole tilt stays dropped** (ruling above). Shue is also
-  symmetric about the aberrated x axis; nothing in either model draws a
-  lean. The desktop drawing still applies it -- `magnetic_tilt_deg=11`
-  in the `rotate_to_sunward` call at `earth_visualization_shells.py:785`
-  [verified @5fea1795] -- so its removal stays in the Gap.
-- **That removal should not wait, and here is why (2026-09-15).** The call
-  is now at `earth_visualization_shells.py:865` and still carries
-  `magnetic_tilt_deg=11` [verified @695f1f04]. The BOW SHOCK call sixty
-  lines below passes no tilt at all [verified @695f1f04]. So the desktop
-  currently draws a magnetopause leaning eleven degrees inside an upright
-  bow shock: one drawing, two answers, and the lean is the one with no
-  citation behind it. Found by Fable, 2026-09-15, checking a brief that
-  wrongly told it this was already built. The web renderer built the same
-  evening applies no tilt, so the two instruments will disagree until the
-  desktop call is changed.
-- **Arrival: both shells are drawer rows.** The Earth room's floor is
-  6.155e-5 AU, the LEO outer edge [verified @57fd93c6]; the bow shock
-  nose is ten times that. L-291's arrival policy applies without a
-  new ruling. When either row is lit the view rescales to hold it,
-  which is the existing drawer behaviour. `earth_geometry.js` already
-  names the group as an ABSENCE in the drawer until a renderer
-  exists; the new renderer replaces that line, and the i-panel's "The
-  magnetosphere is not drawn yet" paragraph comes out in the same
-  patch (EARTH_INFO_HTML, interactive.html). [both still present
-  @4506fb48]
-- **Still open, unchanged:** how `check_store_drift` treats a
-  DIMENSIONLESS pointer (eps, lambda, alpha, the cut angle, Bz in nT,
-  v_sw in km/s -- its unit table is all lengths). Read before the
-  config change, per the bullet above.
-- **Note:** landed 2026-09-10 by `patch_L305_amendment.py` (Claude
-  Opus 5) from the Fable session's design record, which could not be
-  pasted as written. Corrections, each named: the new solar-wind item
-  is L-314, not L-313 (L-310's patch had already opened L-313 for
-  recentering); the record's replacement Gap had dropped two lines of
-  the old one, the tilt removal and the tail extent citation, and both
-  are restored; Shue's alpha is tagged as not read; the standoff
-  quotes are named by line (four quotes in three strings, where the
-  record said two strings); the model conditions use
-  provenance-discipline's "declared pending" status; a ruling quoted
-  in words that do not appear above is paraphrased. The two earlier
-  L-305 patches, a brief for the read and the reference, never landed
-  and are superseded by the two bullets that open this group. The
-  match with the WDS'10 numbers is not an independent check, because
-  the reading session had this block open; Gap item 1 confirms the
-  values against the PDF before the store takes them. L-315 records
-  why the earlier patches refused.
-- **2026-09-11, both papers read from the PDFs: Gap items 1 and 2
-  close.** Shue's equations 10 and 11 and Table 1 ("After Fit") are
-  confirmed at pp. 17,697-17,698, with the standard deviations from 200
-  Monte Carlo refits: a1 10.22 +/- 0.10, a2 1.29 +/- 0.06, a3 0.184
-  +/- 0.007, a4 8.14 +/- 0.39, a5 6.6 +/- 0.5, a6 0.58 +/- 0.01,
-  a7 -0.007 +/- 0.0005, a8 0.024 +/- 0.0004. Bz in nT, Dp in nPa, r0 in
-  R_E, theta the solar zenith angle from the aberrated Sun-Earth line.
-  The alpha line previously tagged "not read" matches the paper
-  exactly. Jelinek's six values are confirmed at eqs. 13-16 and sec. 4:
-  R_MP = 12.82 p^(-1/5.26), R_BS = 15.02 p^(-1/6.55), lambda_MP = 1.54,
-  lambda_BS = 1.17. [read from Tony's uploaded PDFs, 2026-09-11]
-- **Every computed figure in this item reproduces from the published
-  equations.** Recomputed 2026-09-11 from the papers rather than from
-  this block: Shue r0 = 10.2519 and alpha = 0.5896 at p = 2 nPa,
-  Bz = 0; Shue's cross-section 28.88 R_E at x = -100; Jelinek noses
-  13.5117 (bow shock) and 11.2372 (magnetopause); the 105 degree cut at
-  x = -7.77, R_yz = 28.99; the Jelinek paraboloids at x = -100 giving
-  66.95 (bow shock) and 45.92 (magnetopause). This IS independent of
-  the 2026-09-10 read, which had this block open; this one ran from the
-  equations. [computed 2026-09-11]
-- **Correction: the two fits are NOT in the same frame.** Shue is in
-  aberrated GSM (figs. 2 and 4 captions; cylindric symmetry about the
-  aberrated Sun-Earth line, p. 17,692). Jelinek is in aberrated GSE
-  (sec. 3). The aberration bullet above said both were GSE and is
-  corrected in place. It does not change what is drawn -- the two
-  frames share the X axis and both surfaces are rotationally symmetric
-  about it -- so a later session must not "fix" a frame mismatch that
-  has no geometric effect.
-- **The Shue validity range is readable in the 1998 paper, so Shue
-  (1997) is not needed for it.** P. 17,693 states the fitted ranges as
-  -18 nT < Bz < 15 nT and 0.5 nPa < Dp < 8.5 nPa, over the ISEE 1 and
-  2, AMPTE/IRM and IMP 8 crossings that the 1998 refit reuses. The
-  improved nonlinear forms exist so that extrapolation past that range
-  stays physical (figs. 10 and 13 run to 50-60 nPa), which is an
-  argument about behaviour and not a wider fitted range. The declared
-  conditions p = 2 nPa, Bz = 0 sit inside it.
-- **What supports the tail hover's "fitted on near-Earth crossings".**
-  The paper states no angular range for its crossings. Fig. 6 evaluates
-  the model's own uncertainty against solar zenith angle out to 120
-  degrees at Dp = 2 nPa, and the text says that uncertainty rises
-  rapidly with the angle (p. 17,695). That supports the hover wording
-  already chosen, which carries no number. No number is therefore owed
-  and Shue (1997) stays unread with no gap behind it.
-- **2 nPa is the paper's own average; Bz = 0 and 400 km/s are not.**
-  Shue p. 17,695 uses Dp = 2 nPa as an average value, which is a
-  paper-internal reason for the store's declared pressure. Its average
-  Bz is +/- 4 nT (northward / southward), not 0, so the store's Bz = 0
-  is a neutral midpoint chosen here and its row must say so. The
-  410 km/s on p. 17,694 is the speed during one January 1997 event and
-  does NOT source a nominal 400 km/s; that reason is still unwritten
-  (L-314).
-- **Dp includes helium, by the factor (1 + 0.04 N_alpha).** Shue's
-  fig. 1 caption (p. 17,692) states that the solar wind dynamic
-  pressure includes the helium contribution by a factor
-  (1 + 0.04 N_alpha), where N_alpha is the He++ concentration, an
-  average value of 4 percent being used when N_alpha is missing.
-  N_alpha is a PERCENTAGE, not a fraction: at the paper's own 4 the
-  factor is 1.16, which is the four proton masses per helium nucleus
-  at 4 percent number density. L-314 derives p from SWPC density and
-  speed and inherits this as a declared assumption -- whether that
-  feed carries N_alpha decides between a measured correction and the
-  4 percent default, and which density it reports is a question for
-  that item. [read from the caption, 2026-09-11]
-- **Do not pick up Jelinek's equations 17 and 18.** R_MP = 12.90
-  p^(-1/4.92) and R_BS = 14.94 p^(-1/6.62) are the validation refit
-  against observed crossings (sec. 5.2), not the model. The model is
-  eqs. 13-16. The two pairs are close enough to be mistaken for one
-  another by a session reading the paper quickly.
-- **Shue's own scatter is the larger of the two, which strengthens the
-  seam bullet above.** The improved model's standard deviation against
-  the observed crossings is 1.23 R_E (p. 17,697); Jelinek's
-  magnetopause scatter is 0.76 R_E (fig. 7). So the roughly 1 R_E
-  disagreement between the two magnetopause noses sits inside Shue's
-  scatter alone.
-- **Access routes, for the store rows.** Shue et al. (1998),
-  doi:10.1029/98JA01103 -- OPEN FULL TEXT, Tony's download via Wiley
-  (Readcube), 2026-09-11; sandbox fetches of the DOI page are refused
-  by bot detection, which is not a paywall. Jelinek et al. (2012),
-  doi:10.1029/2011JA017252 -- OPEN FULL TEXT, same route, 2026-09-10.
-  Ness et al. (1967), doi:10.1029/JZ072i015p03769 -- ABSTRACT, open;
-  full text walled (Tony's check, 2026-09-11). Per-row pointers: r0
-  from eq. 10 with Table 1 rows a1-a5; alpha from eq. 11 with rows
-  a6-a8; Jelinek R0 and eps from eqs. 13-14; lambda from sec. 4; the
-  surface from eqs. 15-16; the cut angle from the +/- 7 h local-time
-  envelope, sec. 2 para. 9; the 0.6-11 nPa envelope from the
-  conclusion, para. 30.
-- **Gap item 2, the tail extent: 1,000 R_E is sourced, and the figure
-  changes.** Ness, N. F., C. S. Scearce and S. C. Cantarano (1967),
-  Probable observations of the geomagnetic tail at 10^3 Earth radii by
-  Pioneer 7, J. Geophys. Res. 72(15), 3769-3776,
-  doi:10.1029/JZ072i015p03769. The abstract states that Pioneer 7
-  passed through the downstream interaction region at 900-1,050 R_E
-  (26 September to 3 October 1966); that the field measurements suggest
-  certain lines of force there connect to Earth through the tail; that
-  a coherent, well-ordered tail with an embedded neutral sheet does NOT
-  appear to have been observed; and that the geometry becomes a complex
-  set of intermingled filamentary flux tubes at several hundred R_E.
-  So "past 1,000 R_E" becomes "to about 1,000 R_E" -- the source is a
-  crossing band, not a lower bound -- and the qualifier travels with
-  the figure in the hover: the drawn surface stops at the served
-  100 R_E, the tail's signature reaches roughly ten times that, and by
-  then it is filaments rather than a sheet. The paper's own title says
-  "probable". The served magnetotail row's `_declared` 1,000 R_E takes
-  this row as its source, declared -> V_SOURCED (abstract, open), with
-  the qualifier in the row's note so a later session does not strip it.
-  A fuller-text authority restating the Pioneer 7 result would let the
-  hover drop "probable"; that is a nicety, not a gap.
-- **2026-09-11, two things this item carries from the L-322 design
-  round.** Each new constant gets a `# Unit:` line as it is written --
-  the export will require one and writing it at creation is free. And
-  the bow shock standoff is an EXPRESSION, not a typed 13.51: the
-  store's own parser evaluates `15.02 * 2 ** (-1 / 6.55)` to 13.5117
-  [computed 2026-09-11]. Shue's magnetopause standoff cannot follow --
-  it needs a hyperbolic tangent, and the parser allows only add,
-  subtract, multiply, divide and power, so the assignment is DROPPED
-  silently. It stays a literal carrying a `# Calculation:` line until
-  L-322 retires that parser. **Tony's ruling (2026-09-11):** a cited
-  value is a new constant unless it can be derived.
-**Gap:** (1) CLOSED 2026-09-11 by the dated group above -- both papers
-read from the PDFs, every coefficient confirmed against the published
-tables, per-row equation numbers and access routes recorded, and the
-figures recomputed from the equations. The **Tony-action (do)** to keep
-the Jelinek PDF available is discharged. (2) CLOSED 2026-09-11 -- the
-tail extent is sourced to Ness et al. (1967) on the abstract route and
-the figure becomes "to about 1,000 R_E" carrying its qualifier, per the
-dated group above; the served row's status moves declared -> V_SOURCED
-when item (6) writes it. (3) CLOSED 2026-09-11 by
-reading the code. `check_store_drift` infers a constant's unit from a
-SUFFIX on its name and knows four (`_RADII`, `_AU`, `_KM`, and an
-Earth-radii special case); everything else returns NO UNIT, which is
-printed and counted as unexaminable but does NOT fail the run, since
-only DRIFT fails. Measured against this item's fifteen new pointers:
-3 MATCH, 12 NO UNIT. The REMEDIATION half of this item, "extend its
-table", is SUPERSEDED and re-homed to L-322: units are being declared
-in the store instead and the suffix reader retired, so the patch that
-would have extended the gallery's table is HELD UNRUN and is not to be
-run. Until L-322 lands the twelve report NO UNIT, recorded as one class
-row THERE, not fifteen here (Tony's sequencing ruling, 2026-09-11). (4) In `constants_new.py`,
-the single value home: supersede the two standoff constants, add the
-store names listed above, remove the bow shock's Lugaz-midpoint
-derivation and the Farris & Russell "Model form" claim, and clear its
-Note's "the shell's 15 is a migration item" (line 825 of the shells
-file already reads the store). (5) Port Shue (magnetopause, to
-100 R_E) and Jelinek (bow shock, to the 105 deg cut) to
-`planet_visualization_utilities.py` AND `gallery/feature_renderers.js`
-in one patch, with the aberration from `payload.sun.dir` on the
-gallery side and from the orrery's own Sun direction on the desktop
-side; drop the tilt (`magnetic_tilt_deg=11`,
-`earth_visualization_shells.py:785`). (6) Serve the shape parameters,
-the cut angle, the declared conditions and the validity range in
-`data/objects_config.json`; retire the magnetotail row's `base_radii`
-and `end_radii`. BOUNDARY (2026-09-12, adopted from the review of
-L-323's design revision): item 6 does NOT touch the belt `note`
-fields in that same file that repeat the span prose. Those change at
-item 7 with the edge rows. Editing them at item 6 and again at item 7
-is the double-store failure L-323 names, performed on the fix.
-**Note (2026-09-14) -- item 7 in three parts, and what has landed.**
-PART 1, the store, landed at `773e5c2d` via
-`patch_L305_item7_belt_rows.py`: four belt edge rows in geocentric
-equatorial Earth radii, `EARTH_MAGNETOTAIL_OBSERVED_RADII` at 220 on
-Slavin et al. (1983), and the two peak rows corrected -- the outer moves
-to `# Unit: l_shell` with `# Status: declared` because 4.5 is a midpoint
-of an L band, and Baker comes OFF its citation, his figure 30 using
-L* = 4.5 as a selected analysis location rather than a universal peak.
-`test_status_lines.py` went 19 status lines to 26, none malformed; the
-provenance scanner reported Tier-1 unchanged. [verified @773e5c2d]
-PART 2, the strings, is `patch_L305_item7_strings.py`, pre-tested and
-delivered. The four typed extents and both typed altitude pairs become
-arithmetic on the rows through one helper whose `sig` argument is
-REQUIRED, so a call site that forgets raises rather than inheriting a
-choice. Two claims the L-321 round did not support are gone: "making
-complex life possible" (three legs returned NO against Griessmeier et al.
-2016) and "protects Earth from solar radiation", which reads as sunlight
-rather than particles.
-PART 3, the gallery's belt `note` fields in `data/objects_config.json`,
-is the half item 6 was fenced off so they are edited once.
-**Note (2026-09-14) -- two corrections to what item 5 owns.** Read while
-building item 7 and recorded because a session that reads only item 7 will
-get both wrong. The drawn shape parameters -- the half-ellipsoid axes, the
-conic eccentricity, the tail's length and radii, the 0.92 flank cap -- are
-NOT a settled convention to protect; item 5 retires them when it ports
-Shue and Jelinek into the renderer. And item 5 says DROP
-`magnetic_tilt_deg=11`; it is not a candidate for a store row, because
-both fits are symmetric about the aberrated Sun-Earth line and the dipole
-tilt is not part of that geometry.
-(7) Hover text in `earth_visualization_shells.py`
-for the new models, naming both papers and the seam:
-`earth_magnetosphere_info` (standoff quotes at lines 729 and 734),
-`magnetosphere_text` (792), `bow_shock_text` (847, and the Lugaz
-midpoint sentence at 848, which goes) [lines @5fea1795]; the quotes
-follow the constants on their own, the surrounding sentences do not.
-Delete the drawer's magnetosphere absence and the i-panel paragraph.
-(8) Live store-drift run reads MATCH by name for every new pointer;
-then Mode 5 on both, phone first.
-**Note (2026-09-12) -- item 6 is split, and 6a has landed.** 6a is the
-half that was wrong TODAY, independent of anything the L-321
-worksheets return, and it is in the gallery at `0f51ce4f`. Two values
-that had drifted from the store they point at:
-`EARTH_MAGNETOPAUSE_STANDOFF_RADII` served 10.0 against a stored
-10.25, and `EARTH_BOW_SHOCK_STANDOFF_RADII` served 12.5 against a
-stored 13.51. Both now serve the stored figure exactly, which is what
-the drift check compares. Three retired claims went with them: the bow
-shock's source said the value was drawn at the midpoint of Lugaz's
-11-14 R_E, and now names Jelinek eq. 14 with Lugaz as corroboration;
-its note cited Farris & Russell (1994) for the model FORM, which is a
-miscitation because that paper is a standoff relation taking obstacle
-shape as an INPUT; and the magnetotail's `_declared` asserted an
-observed extent for the real tail.
-The tail retirement RESTATES NO FIGURE, on purpose. Writing the old
-number into the served prose to explain its removal would leave the
-same figure in the same place with nothing able to check it, which is
-the failure being fixed. The observed extent arrives at item 7, from a
-store row.
-**Note (2026-09-12) -- verified by the run, not by the patch.** The
-live gallery run at `0f51ce4f`: Served reachability passes with all
-eight probed files byte-identical to the working copy, and Store drift
-reports 48 MATCH, 0 DRIFT, 0 UNIT MISMATCH against orrery `77eb1439`,
-up from 46 MATCH and 2 DRIFT before the patch. The 5 pointers it could
-not examine are the same five L-322 measured on 2026-09-11 -- four
-`planet_poles` entries and a function default, none of them top-level
-constants -- and are unchanged by this work. A first live run was
-inconclusive rather than wrong: three files came back STALE because
-the gallery had not been pushed, and the run declined to call itself a
-pass.
-**Note (2026-09-12) -- Gap (2)'s closing plan is SUPERSEDED by L-323.**
-Gap (2) was closed on 2026-09-11 expecting item 6 to write the
-magnetotail figure as "to about 1,000 R_E" carrying its qualifier, and
-to move the served row from declared to V_SOURCED. L-323's design
-revision of 2026-09-12, reviewed twice, puts that figure in a STORE row
-at item 7 instead, in a different form: ONE SCALAR read "observed to at
-least", because Ness reports one crossing at an uncertain distance and
-a stated extent would assert two edges the source never gives. Serving
-it from prose at item 6 is the shape L-323 exists to remove. Two plans
-for one number were sitting in this block; the later one wins, and 6a
-has already acted on it.
-**Note (2026-09-12) -- what 6b still owes, and what it waits on.**
-Serve the shape parameters, the cut angle, the declared conditions and
-the validity range, and retire the magnetotail row's `base_radii` and
-`end_radii`. All of it describes the Shue and Jelinek models on the
-SERVED side, and `gallery/feature_renderers.js` has no magnetosphere
-code at all yet -- that is item 5, the port. Serving parameters nothing
-reads would publish a claim no one can see. 6b follows item 5.
-The BOUNDARY above held: `van_allen_belts` is byte-identical before and
-after 6a, and so are the magnetotail's drawing parameters. Checked by
-comparing the parsed structures, not by reading the diff.
-**Note (2026-09-16) -- items 5 and 6b shipped on 2026-09-15**
-[per `documentation/HANDOFF_L231_L305_magnetosphere_and_belts_20260915.md`].
-The renderer draws Shue's magnetopause and Jelinek's bow shock from
-eleven served rows, with no number typed into it; the magnetopause stops
-at 120 degrees from the nose, the furthest the authors plot their own
-model, declared rather than measured. That session measured each nose on
-its served standoff within a fifth of a percent, each cut within half a
-degree, and each surface a true surface of revolution about the Sun line.
-Since then the Earth scene checker passes with the magnetosphere drawn
-and 20 drawer groups [verified @ gallery `97867f3e`, and on every patched
-tree through `52e953a7`], and Tony opened the magnetopause's text box on
-the phone on 2026-09-16: "all look good". What else item 6b owes was not
-re-derived here; read that handoff's STILL OPEN list before working this
-item.
-**Ref:** L-291, L-292, L-298 (the orrery-vs-exhibit gap, made concrete),
-L-306, L-314, L-315, `constants_new.py`, `earth_visualization_shells.py`,
-`planet_visualization_utilities.py`, `gallery/feature_renderers.js`,
-`data/objects_config.json` (gallery), skills/interactive-exhibit/SKILL.md;
-Jelinek et al. (2012), JGR 117, A05208, doi:10.1029/2011JA017252 (read
-from the PDF, 2026-09-10); Shue et al. (1998), JGR 103:17691,
-doi:10.1029/98JA01103; EARTH_DRIVER and EARTH_INFO_HTML in
-interactive.html; gallery/earth_geometry.js (composeScene, the absence
-list).
+verdict line. Rides L-413's website patch.
+**Ref:** L-268, gallery `sweep_collapsed_features.py` (root folder),
+`gallery_maintenance_run.py`; L-413.
 
 #### [L-307] Export-age reporting for the static cards that are not migrating
 <!-- L:307 status:OPEN upd:2026-09-08 section:A flag: rice:3/3/70/2 -->
@@ -9051,7 +8510,7 @@ first.
 `tools/json_converter.py`, earth-system-pipeline SKILL.md.
 
 #### [L-308] A shell-legend surface for static cards (deferred, with its trigger)
-<!-- L:308 status:OPEN upd:2026-09-08 section:A flag: rice:2/3/60/3 -->
+<!-- L:308 status:DEFERRED upd:2026-10-04 section:A flag: rice:2/3/60/3 -->
 - **The problem, Tony 2026-09-08.** On a phone, a static card of a
   shell-heavy body -- Earth with its interior stack -- shows the inner
   shells completely obscured and not selectable, not even for their
@@ -9081,7 +8540,9 @@ first.
   happens, this is never built. Recorded so the question is not
   re-derived.
 **Gap:** none until the trigger fires. Not a design decision awaiting
-Tony; an option with a stated condition.
+Tony; an option with a stated condition. (2026-10-04: status OPEN ->
+DEFERRED, so the index stops showing it as a gap; the trigger above is
+unchanged.)
 **Ref:** L-286, L-303, L-307, index.html (`sweepWanted`, `applySweep`),
 skills/gallery-pipeline/SKILL.md.
 
@@ -9181,7 +8642,7 @@ patch, shared chrome.
 index.html (the Featured rule), `tools/sweep_report.py`.
 
 #### [L-314] Live solar wind conditions for the magnetosphere shells (SWPC through the nightly builder)
-<!-- L:314 status:OPEN upd:2026-09-12 section:A flag: rice:3/3/60/4 -->
+<!-- L:314 status:OPEN upd:2026-10-04 section:A flag: rice:3/3/60/4 -->
 - **Where this came from.** L-305's 2026-09-10 design round fixed the
   magnetosphere shells at DECLARED conditions -- p = 2 nPa, Bz = 0 nT,
   v_sw = 400 km/s -- because that is what the store can source today.
@@ -9257,7 +8718,15 @@ written for a pressure that changes rarely and deliberately. A feed changes
 it on a schedule, and a test that fails every time the wind blows is a test
 nobody reads. Re-examine both when this item is designed, not when it is
 built.
-**Gap:** the whole item; sequenced after L-305 closes.
+- **2026-10-04, re-homed from L-305 at its close: the aberration.**
+  Both fits are defined in aberrated frames: because Earth moves along
+  its orbit, the solar wind arrives slightly from the side, and the
+  nose turns by atan(v_orbit / v_sw), about 4.3 degrees at the declared
+  400 km/s. Neither instrument applies it or says it does not.
+  **Tony-action (decide):** apply it, or draw un-aberrated and say so
+  in the hover. Here because the angle follows the solar wind's speed.
+**Gap:** the whole item, now that L-305 has closed (2026-10-04); and
+the aberration decision above. On Earth's list (L-413), design talks.
 **Ref:** L-305, tools/gallery_cache_builder.py, data/objects_config.json,
 gallery/feature_renderers.js, skills/gallery-cache-builder/SKILL.md.
 
@@ -19166,6 +18635,896 @@ separation for near-equal radii, hover AU convention).
   `idealized_orbits.py::create_planet_transformation_matrix` and
   `planet_poles['Sun']` (IAU 2018); L-224 (the band build); L-227 (the
   re-flow); L-209 (the Alfven constant this cites).
+
+#### [L-133] Codebase-wide CRLF sweep (beyond L-026)
+<!-- L:133 status:DONE upd:2026-10-04 section:C flag: rice:2/2/50/2 -->
+- **Idea (Tony, 4/17/26, pre-ledger note).** Review the codebase for any
+  remaining CRLF endings beyond palomas_orrery_helpers.py (L-026, DONE
+  2026-07-15). LF is the project standard.
+- **Note (Claude, 2026-07-17):** .gitattributes (`* text=auto eol=lf`)
+  added at repo root -- normalizes CRLF to LF automatically on `git add`
+  going forward (root cause: text pasted from chat/browser lands as
+  CRLF; without a git-level rule, a single pasted chunk could flip a
+  whole file's save-time EOL). This closes the recurring-drift half of
+  the problem.
+- **2026-10-04, measured** (`git ls-files --eol` at 41c1ca7a): 22
+  files are still committed CRLF -- .gitignore, catalog_selection.py, create_cache_backups.py, data_acquisition.py, data_acquisition_distance.py, data_processing.py, formatting_utils.py, hr_diagram_apparent_magnitude.py, hr_diagram_distance.py, messier_object_data_handler.py, object_type_analyzer.py, planetarium_apparent_magnitude.py, planetarium_distance.py, report_manager.py, shutdown_handler.py, star_notes.py, star_properties.py, stellar_data_patches.py, stellar_parameters.py, visualization_2d.py, visualization_3d.py, visualization_core.py. safe-file-editing 1.12 (L-415)
+  makes a patch keep their endings and name them here, so the sweep
+  stays one commit of its own, as L-026 was.
+- **2026-10-04, DONE on Tony's word** ("Let's take care of L133 now
+  and take this off the backlog"): `patch_L133_1_crlf_sweep_20261004.py`
+  wrote all 22 files LF, each first checked to hold the content
+  committed at 41c1ca7a. Only line endings changed, with one exception
+  fixed in passing under the same harness and named in the patch's
+  output: two pairs of curly quotes in a comment at `star_properties.py`
+  line 63 became plain quotes. All 21 Python files compile. Committed
+  on its own, apart from this entry, Where We Are and the handoff.
+  - The check that it worked: `git ls-files --eol` shows `i/lf` for
+    all 22 after the push, so no committed file in the orrery is CRLF.
+    Claude reads it from a fresh clone at the next session's pull.
+**Gap:** none.
+**Ref:** to_do_ideas.md (pre-ledger, 4/17/26); companion to L-026, L-087.
+
+#### [L-234] Reopen Artifact 1: recreate the orrery's Sun in the assembler
+<!-- L:234 status:DONE upd:2026-10-04 section:C flag: rice:4/5/90/3 -->
+- **Tony's ruling, 2026-08-25, in three parts.** (1) The artifact ladder
+  has a SECOND AXIS that was never sequenced. The seven golden artifacts
+  are seven PROPAGATION shapes -- conic, planetocentric, mean elements,
+  spacecraft arc, barycentric binary -- and that ladder is complete and
+  good. What the orrery DRAWS is a different axis entirely: interiors,
+  atmospheres, magnetospheres, belts, tori, rings, comae, solar shells,
+  Hill spheres. Nothing in the five segments or the seven artifacts
+  sequences that axis. (2) Nobody ever decided that some structures
+  would be shown and others not; L-100 carried that as an inherited
+  default, never a ruling. (3) Artifacts REOPEN: reopen Artifact 1, get
+  it right, then Artifact 2, and so on. "Right" means the orrery
+  recreated in the assembler as far as possible. Re-locking is normal,
+  not a failure, and the orrery may improve on the way -- as it did with
+  the streamer belt.
+- **Tony, verbatim:** "it is not my intent. The general intent is to
+  redo the orrery in the assembler. Part by part."
+- **The consequence that arrives first.** The resolver requests EVERY
+  feature key the cache carries for an object, and the golden record
+  hashes `feature_keys`, `trace_role_counts` and `legend_groups`. So
+  adding a feature family to a body FAILS every locked artifact
+  containing it. Under part-by-part that is the normal event, not an
+  edge case.
+- **Sun half: DONE 2026-08-25.** 19 shells in the assembler, 14 spheres
+  and 5 custom. Six gallery-side patches, `patch_L234_1` through `_6`:
+  Sun entry plus builder skip and three gates taught; centre features
+  dispatched; the 14 spheres drawn; the L-227 hover-wrap fix with scoped
+  smoke assertions; IAU solar pole plus the streamer band; the three
+  Oort custom shells (torus, clumps, galactic tide). Also delivered:
+  `smoke_sun_shells.js` (30 checks) and the two payload fixtures
+  `payload_earth.json` and `payload_jupiter_saturn.json`, which had never
+  been committed and without which the two existing smoke suites could
+  not run at all.
+- **Mode 5 passed twice.** 2026-08-24 on the 14 spheres; 2026-08-25 on
+  the complete Sun ("looks great"). 44 traces from 8 requests -- Earth's
+  4 geometry and 4 markers, the Sun's 18 and 18 -- reconciling exactly
+  against the config. Two things the render confirmed that no unit test
+  could: the band reads as a helmet and stalk tilted off the ecliptic,
+  which is what the 7.225 degree plane fit predicted (L-229); and Frame
+  on Sun returned a half-span of 0.279 AU, 1.2 times the outer corona at
+  0.2326 AU, which is the legendonly skip in `frameLayout` working --
+  without it the frame would have ranged to the gravitational influence
+  at 150,000 AU and the Sun would have vanished into a pixel.
+- **Three things the build discovered.** (a) THE SUN WAS NOT AN OBJECT:
+  twelve entries in `objects_config.json` and none of them the Sun,
+  which existed only as a scene centre drawn as a yellow marker, with no
+  catalogue record and therefore no `features` key. (b) `frame-origin`
+  IS LOAD-BEARING, NOT A LABEL: `served_window` is computed from every
+  object whose `canonical_frame` is `heliocentric`, and a participant
+  with no trust measurement NULLS that window for the whole cache,
+  silently disabling the resolver's propagation bound site-wide --
+  tested both ways. (c) THREE BUILDER GATES WOULD HAVE ABORTED THE
+  NIGHTLY and reading the code found none of them; `assert_structural`
+  invariant #3 aborts on any non-spacecraft with no osculating block,
+  which would have killed every build, not just first ones.
+- **Not on this path:** segment 2 (transport), the general provenance
+  audit, L-225, L-231, and the barycentric solar scene (L-137).
+**Gap:** the EARTH half. Inventory measured at orrery HEAD. Already
+served: `atmosphere_shell` (1.05, 1.25) and `van_allen_belts`.
+Interiors, not served: inner_core 0.19, outer_core 0.55, lower_mantle
+0.85, upper_mantle 0.98, crust 1.0. Also not served: hill_sphere 235.0.
+Custom, not served: rotation_axis, dipole_cone, magnetosphere, leo,
+geostationary_belt. Missing: an `orientation` key -- Earth's pole is
+RA 0, Dec 90 (IAU 2018, J2000 celestial north). Two shapes the Sun did
+not need: five of the six new sphere entries sit BELOW the surface, so
+L-238 is the first patch; and the magnetosphere is genuinely new
+geometry -- not a sphere, not a torus, not a band. Earth's block in
+`shell_configs.py` carries a block-level `# Source:` header naming USGS,
+NASA Earth Fact Sheet, NOAA/NCEI and the Van Allen Probes, verified in
+the April 2026 provenance audit; those are the sources the config
+entries should carry, with an `orrery_constant` pointer, same pattern as
+the Sun's.
+- **Note:** RICE 4/5/90/3 -> 6.0 is Claude's proposed score.
+  **Tony-action (decide):** confirm or redirect, then re-run
+  `ledger_index.py`.
+**Note (2026-10-04) -- CLOSED: the Earth half is served** [verified @
+gallery e7ef96eb, `data/objects_config.json`]. Earth's feature groups:
+earth_interior (inner core, outer core, lower mantle, upper mantle,
+crust), earth_atmosphere, earth_exosphere (the geocorona),
+earth_orbital_zones (LEO), earth_geostationary, earth_magnetosphere
+(magnetopause, bow shock, magnetotail), van_allen_belts, hill_sphere,
+and orientation (the pole and rotation period, from which the room
+draws the rotation axis). The Fable 5.1 sweep listed the Hill sphere as
+missing; it is its own group.
+One loose end, re-homed: **the dipole cone is not drawn on the
+website**, and no ruling against it was found. It depends on a
+rotation phase the website does not model, the same question L-375
+asks of the dipole's offset, so it goes to L-375.
+The RICE (decide) above lapses with the item.
+**Gap:** none.
+**Ref:** HANDOFF 2026-08-25 (orrery `4ad78a01`, gallery `64201783` ->
+`88633707`); L-100 (closed by this ruling); L-235, L-237, L-238 (the
+work in front); L-229 (the solar pole the band needed); L-239, L-240,
+L-241 (orrery-side findings); L-080 (the artifact fingerprint's fields).
+
+#### [L-305] Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together
+<!-- L:305 status:DONE upd:2026-10-04 section:C flag: rice:4/4/60/4 -->
+- **2026-09-12, Gap item 4 LANDED** (`patch_L305_magnetosphere_constants.py`,
+  four files, eighteen edits, pushed at `5b88007f`). Fifteen rows added
+  -- Shue's eight coefficients, Jelinek's R0 / eps / lambda, the bow
+  shock cut angle, three declared solar wind conditions. Both standoffs
+  superseded: the magnetopause to 10.251872972379905 as a typed literal
+  (the gallery's store parser evaluates only + - * / and **, so a tanh
+  assignment leaves the CHECKED set and reports NOT IN STORE under a
+  wrong reason), the bow shock to an EXPRESSION over the new rows.
+  Every row written carries a `# Unit:` and a `# Status:` line.
+  Removed: the Lugaz-midpoint derivation, the Farris & Russell "Model
+  form" miscitation, the stale shell-migration Note.
+  RIDING WITH IT, on Tony's rulings: six `:g` quotes became `:.4g` so
+  the hovers report 10.25 and 13.51 rather than six figures; the
+  Lugaz-midpoint SENTENCE was deleted from the bow shock hover and its
+  attribution moved to Jelinek, because the new number made a cited
+  sentence arithmetically false and a patch may not leave its own
+  output untrue; `RADIATIVE_ZONE_AU`'s rung was added in passing.
+  `test_status_lines.py` shipped with it and is wired into the
+  maintenance run.
+  **The lesson, and it is a convention nothing states.** The bow shock
+  expression was first written as a parenthesised assignment over three
+  lines -- the only multi-line assignment among 88 rows -- and
+  `constants_change_report.py`, which matches `NAME = value` on ONE
+  line, reported the constant REMOVED. See L-324.
+  **Still open:** items 5 (the port), 6 (the gallery config, which
+  carries THREE retired claims: the Lugaz midpoint, Farris & Russell,
+  and the magnetotail's "past 1,000 radii"), 7 (the hovers, after
+  L-321's verdicts), 8 (store drift then Mode 5, phone first).
+- **Where this came from.** A design round on 2026-09-08 opened with one
+  hover requirement from the L-291 handoff -- say that the tail is drawn
+  to 100 radii against a real one past 1,000 -- and ended with two stored
+  constants superseded, a miscitation found, and step 3 split. The
+  handoff had framed the magnetosphere renderer as a small step-3 item.
+  It is not, and the next session will read that framing first.
+- **What was checked, at orrery `af4c604e`.** The orrery does NOT use
+  Shue for the magnetopause. `create_magnetosphere_shape` is a half
+  ELLIPSOID -- sunward 10, equatorial radius 12, polar radius 10 -- so
+  not even a surface of revolution, with a separate flared cylinder tail
+  (base 15, end 25, length 100) butted on at the terminator. The bow
+  shock is a conic through `create_bow_shock_shape` with
+  `eccentricity=1.05` typed at the call site and a sweep capped at 0.92
+  of the asymptote, a literal the code itself labels a MODE-5 KNOB. An
+  11 degree dipole tilt is applied via `rotate_to_sunward`. Seven drawn
+  numbers there have no store name; L-291's "no drawn literal remains"
+  was true of the shells, not of the magnetosphere.
+- **Tony's ruling: none of that gets promoted.** Those are Mode 5
+  approximations -- shapes chosen because they looked right. Promoting
+  them into `constants_new.py` would launder an approximation into a
+  sourced constant. See L-306, which is that rule stated generally.
+- **Farris & Russell (1994) is a MISCITATION for a shape.** The bow
+  shock constant's Note cites it as "Model form". Its abstract is a
+  semiempirical Mach-number relation for the STANDOFF DISTANCE; obstacle
+  shape is an input to it, not an output. Remove the claim.
+- **The model taken: Jelinek, Nemecek and Safrankova.** ONE functional
+  form fits BOTH boundaries from Themis crossings, parabolic coordinates
+  with a per-boundary scaling factor. The conference proceeding (WDS'10)
+  reports lambda_y = 1.17 for the bow shock and 1.54 for the
+  magnetopause, R_MP = 12.82 p^(-1/5.26) and R_BS = 15.02 p^(-1/6.55)
+  with R0 at 1 nPa -- about 11.2 and 13.5 R_E at the 2 nPa the store
+  already names. CITE THE PEER-REVIEWED VERSION, Jelinek et al. 2012,
+  JGR 117, doi:10.1029/2011JA017252, read from that paper: its fitted
+  parameters may differ and the numbers above were read from the
+  proceeding.
+- **Why Jelinek and not Lin.** Lin et al. 2010 (JGR 115, A04207,
+  doi:10.1029/2009JA014235) is the better physics -- three-dimensional,
+  asymmetric, parameterized by pressure, IMF Bz AND dipole tilt, and its
+  abstract says the extrapolation for the distant tail magnetopause is
+  considered, so tilt and tail are reconciled inside one published
+  model. It is DEFERRED ON PORTABILITY, not rejected. Jelinek is one
+  formulation for two surfaces, so one function ported twice instead of
+  two; it is simple enough that the port can be checked by eye against
+  the published figures, which matters when the same mathematics has to
+  live in Python and JavaScript and stay identical. Lin's ten-ish
+  coefficients cannot be checked that way, and an unverifiable port in
+  two languages is a defect generator. Tony's framing settled it: this
+  is a layperson's learning tool, not a research tool.
+- **The 11 degree tilt is DROPPED, and that is a correction.** Jelinek
+  assumes a symmetric magnetosphere in GSE. A later study notes that in
+  Lin2010 the dipole tilt does not affect the EQUATORIAL magnetopause at
+  all -- it drives north-south asymmetry and cusp location. So the old
+  drawing's leaning magnetosphere was conveying something the literature
+  does not support.
+- **The tail is drawn, with its extent sourced.** Not omitted: Tony's
+  correction, and the pattern is already in the store -- the geocorona
+  is drawn at a sourced DETECTION FLOOR with the hover saying it is not
+  an edge. Jelinek is a DAYSIDE fit (within about +/- 7 hours of local
+  time around noon); extrapolating its paraboloid to x = -100 R_E gives
+  a cylindrical radius near 46 R_E, well outside what the fit supports.
+  So the tail gets its OWN citation for extent and cross-section, drawn
+  to the sourced figure, with the hover stating where the drawn surface
+  stops against the real one. That citation is not yet fetched.
+- **The flaring parameter is SERVED, not hardcoded** (Tony's ruling the
+  same evening, before the model changed). A shape parameter with a
+  citation behind it belongs in the store with value / source /
+  `orrery_constant`, not in `feature_renderers.js`. The VALIDITY RANGE
+  travels with it, or the Mode-5 knob has simply moved from Python to
+  JavaScript.
+- **Before the config change: read how `check_store_drift` treats a
+  DIMENSIONLESS pointer.** Its unit table is all lengths. A pointer it
+  cannot examine looks exactly like one that passed, which is what the
+  runner's three states exist to prevent.
+- **Orrery and assembler move TOGETHER -- the braid** (Tony's ruling).
+  `EARTH_MAGNETOPAUSE_STANDOFF_RADII` is quoted to the visitor in two
+  hover strings in `earth_visualization_shells.py`. Changing the
+  constant while the old ellipsoid still draws makes the text and the
+  geometry disagree, which is worse than either being stale.
+- **2026-09-10, the paper read: gap item 1 closes by reading.** The
+  peer-reviewed parameters are IDENTICAL to the WDS'10 numbers above:
+  R_MP = 12.82 p^(-1/5.26), R_BS = 15.02 p^(-1/6.55), lambda_MP = 1.54,
+  lambda_BS = 1.17, R0 at p = 1 nPa (eqs. 13-16). The surfaces in
+  aberrated GSE are x = R0 p^(-1/eps) - tau^2/2,
+  R_yz = sqrt(2 R0 p^(-1/eps)) tau / lambda. The paper states its own
+  envelope: dayside only, within +/- 7 h of local noon; solar wind
+  dynamic pressure 0.6-11 nPa; rotational symmetry assumed; no IMF Bz,
+  dipole tilt or Mach dependence (sec. 3, 6, 7). Sec. 7 says parabolic
+  coordinates suit the bow shock and that elliptical coordinates would
+  describe the magnetopause better. [read from Tony's uploaded PDF by a
+  Claude Fable 5.1 session, 2026-09-10; confirmed against the PDF
+  2026-09-11, see the dated group below]
+- **The reference, and how it is reached.** Jelinek, K., Z. Nemecek,
+  and J. Safrankova (2012), A new approach to magnetopause and bow
+  shock modeling based on automated region identification, J. Geophys.
+  Res. 117, A05208, doi:10.1029/2011JA017252. The Wiley DOI page
+  refuses sandbox fetches. A web search the same day listed the article
+  as free access at
+  https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2011JA017252
+  -- search-result metadata; nobody opened that page. Whether the
+  citation meets the Access Standard is settled when its store row is
+  written.
+- **Tony's ruling (2026-09-10): use each model for the part it fits
+  best, and state the reason.** The magnetopause moves to Shue et al.
+  (1998), doi:10.1029/98JA01103 -- the source the served row ALREADY
+  cites for its standoff: r = r0 (2 / (1 + cos theta))^alpha,
+  r0 = (10.22 + 1.29 tanh(0.184 (Bz + 8.14))) Dp^(-1/6.6),
+  alpha = (0.58 - 0.007 Bz)(1 + 0.024 ln Dp). The bow shock stays
+  Jelinek 2012. This AMENDS the ruling above that one formulation
+  serves both boundaries (under "Why Jelinek and not Lin"). Why it
+  holds against that ruling's own reason (portability): Shue is two
+  lines and eight published coefficients, checkable by eye against the
+  paper's figures, so the bar that deferred Lin is still met. Why it is
+  worth a second function: the tail. At p = 2 nPa, Bz = 0, the
+  cross-section radius at x = -100 R_E is 28.9 R_E under Shue and 45.9
+  under the Jelinek paraboloid (the 46 recorded above), and the paper's
+  own sec. 7 concedes the parabola for the magnetopause. Shue's tail
+  still flares (alpha = 0.59 > 0.5), slowly; it does not close.
+  [computed; reproduced 2026-09-10 by the patch that landed this. The
+  r0 line matches the Source already on
+  `EARTH_MAGNETOPAUSE_STANDOFF_RADII`; the alpha line appears nowhere
+  in the repo and was not read this round -- Gap item 1]
+- **The tail therefore needs no geometry citation of its own.** The
+  "tail gets its OWN citation for extent and cross-section" bullet
+  above narrows to EXTENT only: Shue's surface is drawn to the served
+  100 R_E and the hover says the drawn surface stops there against a
+  real tail past 1,000 R_E, and that Shue was fitted on near-Earth
+  crossings, not the distant tail (Show the Envelope). Two parts of
+  that hover are not yet sourced. The 1,000 R_E entered with L-291's
+  hover requirement and sits in the served magnetotail row's
+  `_declared` text with no citation (Gap item 2); the fitting range
+  comes from the Shue read (Gap item 1). The row's `base_radii` (15)
+  and `end_radii` (25) retire with the old tail, since Shue's surface
+  sets the cross-section. [row verified @57fd93c6, unchanged @4506fb48]
+- **The bow shock stops at the fit limit, and says so.** Jelinek's
+  surface is drawn from the nose to 105 degrees from the nose (the
+  +/- 7 h local-time envelope). At p = 2 nPa that is x = -7.8 R_E,
+  R_yz = 29.0 R_E. Beyond it a paraboloid is unsupported (67 R_E at
+  x = -100) and the real shock follows a Mach cone the paper does not
+  model. The cut angle is SERVED with the shape parameters, per the
+  "flaring parameter is SERVED" ruling above; the hover names it.
+  [computed; reproduced 2026-09-10]
+- **The seam at the nose, stated in the hover.** At p = 2 nPa, Bz = 0:
+  Shue magnetopause nose 10.25 R_E; Jelinek bow shock nose 13.51 R_E;
+  subsolar sheath 3.3 R_E where Jelinek's own pair gives 2.3 (his
+  magnetopause at 2 nPa is 11.24). The two magnetopause noses differ by
+  about 1 R_E against a fit scatter of about 0.7-0.8 R_E (Jelinek
+  Fig. 7, per the read). The two hovers name both papers and the 1 R_E
+  disagreement rather than let the pair read as one measurement.
+  [computed; reproduced 2026-09-10]
+- **Supersessions now fixed in number**, both called for above:
+  `EARTH_MAGNETOPAUSE_STANDOFF_RADII` 10.0 -> 10.25 (Shue at the
+  declared conditions; the served row's source string and the
+  constant's own Source both say 10.2 while the value says 10.0 -- a
+  drift inside one row, cleared by this).
+  `EARTH_BOW_SHOCK_STANDOFF_RADII` 12.5 -> 13.51 (Jelinek at 2 nPa);
+  the bow shock's Lugaz-midpoint derivation and the Farris & Russell
+  "Model form" Note go. New store names, each with value / source /
+  orrery_constant: Shue's eight coefficients; Jelinek's R0, eps and
+  lambda for the bow shock (3); the bow-shock cut angle (105 deg,
+  source: the paper's stated local-time envelope); and the MODEL
+  CONDITIONS p = 2 nPa, Bz = 0 nT, v_sw = 400 km/s, status declared
+  pending -- L-314, stated in every hover as the condition, not a
+  measurement. Each pick's reason goes on its row: 2 nPa is the
+  pressure the store's Shue Source already uses; the reason for
+  400 km/s is not yet written. L-314 replaces the three with measured
+  values. [constant verified @5fea1795; served row @57fd93c6]
+- **Aberration is applied, declared.** Both fits are ABERRATED:
+  Shue in aberrated GSM, Jelinek in aberrated GSE (this line read
+  "both fits are in ABERRATED GSE" until 2026-09-11; see the frame
+  correction in the dated group below, which is why it does not
+  change the geometry).
+  The Sun direction is already in the Earth driver's payload
+  (`payload.sun.dir`, from Earth's served osculating elements)
+  [verified @57fd93c6]; the nose is rotated from it by
+  atan(v_orbit / v_sw), about 4.3 deg at 400 km/s, in the ecliptic
+  plane against Earth's motion. v_sw is one of the declared conditions
+  above. **Tony-action (decide):** apply the 4.3 degrees at the
+  declared 400 km/s (this record's choice, because both models are
+  defined in the aberrated frame), or draw un-aberrated and say so in
+  the hover.
+- **The dipole tilt stays dropped** (ruling above). Shue is also
+  symmetric about the aberrated x axis; nothing in either model draws a
+  lean. The desktop drawing still applies it -- `magnetic_tilt_deg=11`
+  in the `rotate_to_sunward` call at `earth_visualization_shells.py:785`
+  [verified @5fea1795] -- so its removal stays in the Gap.
+- **That removal should not wait, and here is why (2026-09-15).** The call
+  is now at `earth_visualization_shells.py:865` and still carries
+  `magnetic_tilt_deg=11` [verified @695f1f04]. The BOW SHOCK call sixty
+  lines below passes no tilt at all [verified @695f1f04]. So the desktop
+  currently draws a magnetopause leaning eleven degrees inside an upright
+  bow shock: one drawing, two answers, and the lean is the one with no
+  citation behind it. Found by Fable, 2026-09-15, checking a brief that
+  wrongly told it this was already built. The web renderer built the same
+  evening applies no tilt, so the two instruments will disagree until the
+  desktop call is changed.
+- **Arrival: both shells are drawer rows.** The Earth room's floor is
+  6.155e-5 AU, the LEO outer edge [verified @57fd93c6]; the bow shock
+  nose is ten times that. L-291's arrival policy applies without a
+  new ruling. When either row is lit the view rescales to hold it,
+  which is the existing drawer behaviour. `earth_geometry.js` already
+  names the group as an ABSENCE in the drawer until a renderer
+  exists; the new renderer replaces that line, and the i-panel's "The
+  magnetosphere is not drawn yet" paragraph comes out in the same
+  patch (EARTH_INFO_HTML, interactive.html). [both still present
+  @4506fb48]
+- **Still open, unchanged:** how `check_store_drift` treats a
+  DIMENSIONLESS pointer (eps, lambda, alpha, the cut angle, Bz in nT,
+  v_sw in km/s -- its unit table is all lengths). Read before the
+  config change, per the bullet above.
+- **Note:** landed 2026-09-10 by `patch_L305_amendment.py` (Claude
+  Opus 5) from the Fable session's design record, which could not be
+  pasted as written. Corrections, each named: the new solar-wind item
+  is L-314, not L-313 (L-310's patch had already opened L-313 for
+  recentering); the record's replacement Gap had dropped two lines of
+  the old one, the tilt removal and the tail extent citation, and both
+  are restored; Shue's alpha is tagged as not read; the standoff
+  quotes are named by line (four quotes in three strings, where the
+  record said two strings); the model conditions use
+  provenance-discipline's "declared pending" status; a ruling quoted
+  in words that do not appear above is paraphrased. The two earlier
+  L-305 patches, a brief for the read and the reference, never landed
+  and are superseded by the two bullets that open this group. The
+  match with the WDS'10 numbers is not an independent check, because
+  the reading session had this block open; Gap item 1 confirms the
+  values against the PDF before the store takes them. L-315 records
+  why the earlier patches refused.
+- **2026-09-11, both papers read from the PDFs: Gap items 1 and 2
+  close.** Shue's equations 10 and 11 and Table 1 ("After Fit") are
+  confirmed at pp. 17,697-17,698, with the standard deviations from 200
+  Monte Carlo refits: a1 10.22 +/- 0.10, a2 1.29 +/- 0.06, a3 0.184
+  +/- 0.007, a4 8.14 +/- 0.39, a5 6.6 +/- 0.5, a6 0.58 +/- 0.01,
+  a7 -0.007 +/- 0.0005, a8 0.024 +/- 0.0004. Bz in nT, Dp in nPa, r0 in
+  R_E, theta the solar zenith angle from the aberrated Sun-Earth line.
+  The alpha line previously tagged "not read" matches the paper
+  exactly. Jelinek's six values are confirmed at eqs. 13-16 and sec. 4:
+  R_MP = 12.82 p^(-1/5.26), R_BS = 15.02 p^(-1/6.55), lambda_MP = 1.54,
+  lambda_BS = 1.17. [read from Tony's uploaded PDFs, 2026-09-11]
+- **Every computed figure in this item reproduces from the published
+  equations.** Recomputed 2026-09-11 from the papers rather than from
+  this block: Shue r0 = 10.2519 and alpha = 0.5896 at p = 2 nPa,
+  Bz = 0; Shue's cross-section 28.88 R_E at x = -100; Jelinek noses
+  13.5117 (bow shock) and 11.2372 (magnetopause); the 105 degree cut at
+  x = -7.77, R_yz = 28.99; the Jelinek paraboloids at x = -100 giving
+  66.95 (bow shock) and 45.92 (magnetopause). This IS independent of
+  the 2026-09-10 read, which had this block open; this one ran from the
+  equations. [computed 2026-09-11]
+- **Correction: the two fits are NOT in the same frame.** Shue is in
+  aberrated GSM (figs. 2 and 4 captions; cylindric symmetry about the
+  aberrated Sun-Earth line, p. 17,692). Jelinek is in aberrated GSE
+  (sec. 3). The aberration bullet above said both were GSE and is
+  corrected in place. It does not change what is drawn -- the two
+  frames share the X axis and both surfaces are rotationally symmetric
+  about it -- so a later session must not "fix" a frame mismatch that
+  has no geometric effect.
+- **The Shue validity range is readable in the 1998 paper, so Shue
+  (1997) is not needed for it.** P. 17,693 states the fitted ranges as
+  -18 nT < Bz < 15 nT and 0.5 nPa < Dp < 8.5 nPa, over the ISEE 1 and
+  2, AMPTE/IRM and IMP 8 crossings that the 1998 refit reuses. The
+  improved nonlinear forms exist so that extrapolation past that range
+  stays physical (figs. 10 and 13 run to 50-60 nPa), which is an
+  argument about behaviour and not a wider fitted range. The declared
+  conditions p = 2 nPa, Bz = 0 sit inside it.
+- **What supports the tail hover's "fitted on near-Earth crossings".**
+  The paper states no angular range for its crossings. Fig. 6 evaluates
+  the model's own uncertainty against solar zenith angle out to 120
+  degrees at Dp = 2 nPa, and the text says that uncertainty rises
+  rapidly with the angle (p. 17,695). That supports the hover wording
+  already chosen, which carries no number. No number is therefore owed
+  and Shue (1997) stays unread with no gap behind it.
+- **2 nPa is the paper's own average; Bz = 0 and 400 km/s are not.**
+  Shue p. 17,695 uses Dp = 2 nPa as an average value, which is a
+  paper-internal reason for the store's declared pressure. Its average
+  Bz is +/- 4 nT (northward / southward), not 0, so the store's Bz = 0
+  is a neutral midpoint chosen here and its row must say so. The
+  410 km/s on p. 17,694 is the speed during one January 1997 event and
+  does NOT source a nominal 400 km/s; that reason is still unwritten
+  (L-314).
+- **Dp includes helium, by the factor (1 + 0.04 N_alpha).** Shue's
+  fig. 1 caption (p. 17,692) states that the solar wind dynamic
+  pressure includes the helium contribution by a factor
+  (1 + 0.04 N_alpha), where N_alpha is the He++ concentration, an
+  average value of 4 percent being used when N_alpha is missing.
+  N_alpha is a PERCENTAGE, not a fraction: at the paper's own 4 the
+  factor is 1.16, which is the four proton masses per helium nucleus
+  at 4 percent number density. L-314 derives p from SWPC density and
+  speed and inherits this as a declared assumption -- whether that
+  feed carries N_alpha decides between a measured correction and the
+  4 percent default, and which density it reports is a question for
+  that item. [read from the caption, 2026-09-11]
+- **Do not pick up Jelinek's equations 17 and 18.** R_MP = 12.90
+  p^(-1/4.92) and R_BS = 14.94 p^(-1/6.62) are the validation refit
+  against observed crossings (sec. 5.2), not the model. The model is
+  eqs. 13-16. The two pairs are close enough to be mistaken for one
+  another by a session reading the paper quickly.
+- **Shue's own scatter is the larger of the two, which strengthens the
+  seam bullet above.** The improved model's standard deviation against
+  the observed crossings is 1.23 R_E (p. 17,697); Jelinek's
+  magnetopause scatter is 0.76 R_E (fig. 7). So the roughly 1 R_E
+  disagreement between the two magnetopause noses sits inside Shue's
+  scatter alone.
+- **Access routes, for the store rows.** Shue et al. (1998),
+  doi:10.1029/98JA01103 -- OPEN FULL TEXT, Tony's download via Wiley
+  (Readcube), 2026-09-11; sandbox fetches of the DOI page are refused
+  by bot detection, which is not a paywall. Jelinek et al. (2012),
+  doi:10.1029/2011JA017252 -- OPEN FULL TEXT, same route, 2026-09-10.
+  Ness et al. (1967), doi:10.1029/JZ072i015p03769 -- ABSTRACT, open;
+  full text walled (Tony's check, 2026-09-11). Per-row pointers: r0
+  from eq. 10 with Table 1 rows a1-a5; alpha from eq. 11 with rows
+  a6-a8; Jelinek R0 and eps from eqs. 13-14; lambda from sec. 4; the
+  surface from eqs. 15-16; the cut angle from the +/- 7 h local-time
+  envelope, sec. 2 para. 9; the 0.6-11 nPa envelope from the
+  conclusion, para. 30.
+- **Gap item 2, the tail extent: 1,000 R_E is sourced, and the figure
+  changes.** Ness, N. F., C. S. Scearce and S. C. Cantarano (1967),
+  Probable observations of the geomagnetic tail at 10^3 Earth radii by
+  Pioneer 7, J. Geophys. Res. 72(15), 3769-3776,
+  doi:10.1029/JZ072i015p03769. The abstract states that Pioneer 7
+  passed through the downstream interaction region at 900-1,050 R_E
+  (26 September to 3 October 1966); that the field measurements suggest
+  certain lines of force there connect to Earth through the tail; that
+  a coherent, well-ordered tail with an embedded neutral sheet does NOT
+  appear to have been observed; and that the geometry becomes a complex
+  set of intermingled filamentary flux tubes at several hundred R_E.
+  So "past 1,000 R_E" becomes "to about 1,000 R_E" -- the source is a
+  crossing band, not a lower bound -- and the qualifier travels with
+  the figure in the hover: the drawn surface stops at the served
+  100 R_E, the tail's signature reaches roughly ten times that, and by
+  then it is filaments rather than a sheet. The paper's own title says
+  "probable". The served magnetotail row's `_declared` 1,000 R_E takes
+  this row as its source, declared -> V_SOURCED (abstract, open), with
+  the qualifier in the row's note so a later session does not strip it.
+  A fuller-text authority restating the Pioneer 7 result would let the
+  hover drop "probable"; that is a nicety, not a gap.
+- **2026-09-11, two things this item carries from the L-322 design
+  round.** Each new constant gets a `# Unit:` line as it is written --
+  the export will require one and writing it at creation is free. And
+  the bow shock standoff is an EXPRESSION, not a typed 13.51: the
+  store's own parser evaluates `15.02 * 2 ** (-1 / 6.55)` to 13.5117
+  [computed 2026-09-11]. Shue's magnetopause standoff cannot follow --
+  it needs a hyperbolic tangent, and the parser allows only add,
+  subtract, multiply, divide and power, so the assignment is DROPPED
+  silently. It stays a literal carrying a `# Calculation:` line until
+  L-322 retires that parser. **Tony's ruling (2026-09-11):** a cited
+  value is a new constant unless it can be derived.
+**Gap:** (1) CLOSED 2026-09-11 by the dated group above -- both papers
+read from the PDFs, every coefficient confirmed against the published
+tables, per-row equation numbers and access routes recorded, and the
+figures recomputed from the equations. The **Tony-action (do)** to keep
+the Jelinek PDF available is discharged. (2) CLOSED 2026-09-11 -- the
+tail extent is sourced to Ness et al. (1967) on the abstract route and
+the figure becomes "to about 1,000 R_E" carrying its qualifier, per the
+dated group above; the served row's status moves declared -> V_SOURCED
+when item (6) writes it. (3) CLOSED 2026-09-11 by
+reading the code. `check_store_drift` infers a constant's unit from a
+SUFFIX on its name and knows four (`_RADII`, `_AU`, `_KM`, and an
+Earth-radii special case); everything else returns NO UNIT, which is
+printed and counted as unexaminable but does NOT fail the run, since
+only DRIFT fails. Measured against this item's fifteen new pointers:
+3 MATCH, 12 NO UNIT. The REMEDIATION half of this item, "extend its
+table", is SUPERSEDED and re-homed to L-322: units are being declared
+in the store instead and the suffix reader retired, so the patch that
+would have extended the gallery's table is HELD UNRUN and is not to be
+run. Until L-322 lands the twelve report NO UNIT, recorded as one class
+row THERE, not fifteen here (Tony's sequencing ruling, 2026-09-11). (4) In `constants_new.py`,
+the single value home: supersede the two standoff constants, add the
+store names listed above, remove the bow shock's Lugaz-midpoint
+derivation and the Farris & Russell "Model form" claim, and clear its
+Note's "the shell's 15 is a migration item" (line 825 of the shells
+file already reads the store). (5) Port Shue (magnetopause, to
+100 R_E) and Jelinek (bow shock, to the 105 deg cut) to
+`planet_visualization_utilities.py` AND `gallery/feature_renderers.js`
+in one patch, with the aberration from `payload.sun.dir` on the
+gallery side and from the orrery's own Sun direction on the desktop
+side; drop the tilt (`magnetic_tilt_deg=11`,
+`earth_visualization_shells.py:785`). (6) Serve the shape parameters,
+the cut angle, the declared conditions and the validity range in
+`data/objects_config.json`; retire the magnetotail row's `base_radii`
+and `end_radii`. BOUNDARY (2026-09-12, adopted from the review of
+L-323's design revision): item 6 does NOT touch the belt `note`
+fields in that same file that repeat the span prose. Those change at
+item 7 with the edge rows. Editing them at item 6 and again at item 7
+is the double-store failure L-323 names, performed on the fix.
+**Note (2026-09-14) -- item 7 in three parts, and what has landed.**
+PART 1, the store, landed at `773e5c2d` via
+`patch_L305_item7_belt_rows.py`: four belt edge rows in geocentric
+equatorial Earth radii, `EARTH_MAGNETOTAIL_OBSERVED_RADII` at 220 on
+Slavin et al. (1983), and the two peak rows corrected -- the outer moves
+to `# Unit: l_shell` with `# Status: declared` because 4.5 is a midpoint
+of an L band, and Baker comes OFF its citation, his figure 30 using
+L* = 4.5 as a selected analysis location rather than a universal peak.
+`test_status_lines.py` went 19 status lines to 26, none malformed; the
+provenance scanner reported Tier-1 unchanged. [verified @773e5c2d]
+PART 2, the strings, is `patch_L305_item7_strings.py`, pre-tested and
+delivered. The four typed extents and both typed altitude pairs become
+arithmetic on the rows through one helper whose `sig` argument is
+REQUIRED, so a call site that forgets raises rather than inheriting a
+choice. Two claims the L-321 round did not support are gone: "making
+complex life possible" (three legs returned NO against Griessmeier et al.
+2016) and "protects Earth from solar radiation", which reads as sunlight
+rather than particles.
+PART 3, the gallery's belt `note` fields in `data/objects_config.json`,
+is the half item 6 was fenced off so they are edited once.
+**Note (2026-09-14) -- two corrections to what item 5 owns.** Read while
+building item 7 and recorded because a session that reads only item 7 will
+get both wrong. The drawn shape parameters -- the half-ellipsoid axes, the
+conic eccentricity, the tail's length and radii, the 0.92 flank cap -- are
+NOT a settled convention to protect; item 5 retires them when it ports
+Shue and Jelinek into the renderer. And item 5 says DROP
+`magnetic_tilt_deg=11`; it is not a candidate for a store row, because
+both fits are symmetric about the aberrated Sun-Earth line and the dipole
+tilt is not part of that geometry.
+(7) Hover text in `earth_visualization_shells.py`
+for the new models, naming both papers and the seam:
+`earth_magnetosphere_info` (standoff quotes at lines 729 and 734),
+`magnetosphere_text` (792), `bow_shock_text` (847, and the Lugaz
+midpoint sentence at 848, which goes) [lines @5fea1795]; the quotes
+follow the constants on their own, the surrounding sentences do not.
+Delete the drawer's magnetosphere absence and the i-panel paragraph.
+(8) Live store-drift run reads MATCH by name for every new pointer;
+then Mode 5 on both, phone first.
+**Note (2026-09-12) -- item 6 is split, and 6a has landed.** 6a is the
+half that was wrong TODAY, independent of anything the L-321
+worksheets return, and it is in the gallery at `0f51ce4f`. Two values
+that had drifted from the store they point at:
+`EARTH_MAGNETOPAUSE_STANDOFF_RADII` served 10.0 against a stored
+10.25, and `EARTH_BOW_SHOCK_STANDOFF_RADII` served 12.5 against a
+stored 13.51. Both now serve the stored figure exactly, which is what
+the drift check compares. Three retired claims went with them: the bow
+shock's source said the value was drawn at the midpoint of Lugaz's
+11-14 R_E, and now names Jelinek eq. 14 with Lugaz as corroboration;
+its note cited Farris & Russell (1994) for the model FORM, which is a
+miscitation because that paper is a standoff relation taking obstacle
+shape as an INPUT; and the magnetotail's `_declared` asserted an
+observed extent for the real tail.
+The tail retirement RESTATES NO FIGURE, on purpose. Writing the old
+number into the served prose to explain its removal would leave the
+same figure in the same place with nothing able to check it, which is
+the failure being fixed. The observed extent arrives at item 7, from a
+store row.
+**Note (2026-09-12) -- verified by the run, not by the patch.** The
+live gallery run at `0f51ce4f`: Served reachability passes with all
+eight probed files byte-identical to the working copy, and Store drift
+reports 48 MATCH, 0 DRIFT, 0 UNIT MISMATCH against orrery `77eb1439`,
+up from 46 MATCH and 2 DRIFT before the patch. The 5 pointers it could
+not examine are the same five L-322 measured on 2026-09-11 -- four
+`planet_poles` entries and a function default, none of them top-level
+constants -- and are unchanged by this work. A first live run was
+inconclusive rather than wrong: three files came back STALE because
+the gallery had not been pushed, and the run declined to call itself a
+pass.
+**Note (2026-09-12) -- Gap (2)'s closing plan is SUPERSEDED by L-323.**
+Gap (2) was closed on 2026-09-11 expecting item 6 to write the
+magnetotail figure as "to about 1,000 R_E" carrying its qualifier, and
+to move the served row from declared to V_SOURCED. L-323's design
+revision of 2026-09-12, reviewed twice, puts that figure in a STORE row
+at item 7 instead, in a different form: ONE SCALAR read "observed to at
+least", because Ness reports one crossing at an uncertain distance and
+a stated extent would assert two edges the source never gives. Serving
+it from prose at item 6 is the shape L-323 exists to remove. Two plans
+for one number were sitting in this block; the later one wins, and 6a
+has already acted on it.
+**Note (2026-09-12) -- what 6b still owes, and what it waits on.**
+Serve the shape parameters, the cut angle, the declared conditions and
+the validity range, and retire the magnetotail row's `base_radii` and
+`end_radii`. All of it describes the Shue and Jelinek models on the
+SERVED side, and `gallery/feature_renderers.js` has no magnetosphere
+code at all yet -- that is item 5, the port. Serving parameters nothing
+reads would publish a claim no one can see. 6b follows item 5.
+The BOUNDARY above held: `van_allen_belts` is byte-identical before and
+after 6a, and so are the magnetotail's drawing parameters. Checked by
+comparing the parsed structures, not by reading the diff.
+**Note (2026-09-16) -- items 5 and 6b shipped on 2026-09-15**
+[per `documentation/HANDOFF_L231_L305_magnetosphere_and_belts_20260915.md`].
+The renderer draws Shue's magnetopause and Jelinek's bow shock from
+eleven served rows, with no number typed into it; the magnetopause stops
+at 120 degrees from the nose, the furthest the authors plot their own
+model, declared rather than measured. That session measured each nose on
+its served standoff within a fifth of a percent, each cut within half a
+degree, and each surface a true surface of revolution about the Sun line.
+Since then the Earth scene checker passes with the magnetosphere drawn
+and 20 drawer groups [verified @ gallery `97867f3e`, and on every patched
+tree through `52e953a7`], and Tony opened the magnetopause's text box on
+the phone on 2026-09-16: "all look good". What else item 6b owes was not
+re-derived here; read that handoff's STILL OPEN list before working this
+item.
+**Note (2026-10-04) -- CLOSED, read against the code** [verified @
+orrery cbde99dc, gallery e7ef96eb]. Items (4) to (8) have landed.
+The orrery draws Shue's magnetopause and Jelinek's bow shock from the
+store (`earth_visualization_shells.py`, `_shue_radius`,
+`_shue_flaring`; L-322 Stage D patch D8), and `magnetic_tilt_deg=11` is
+gone from its call. The website draws the same two surfaces and the
+Slavin tail from served rows; the magnetotail's old `base_radii` and
+`end_radii` are retired; the i panel's "not drawn yet" paragraph is
+gone. The 2026-09-15 handoff's three interface items were settled
+later: the drawer row by L-318 round 3 (Tony's five rulings of
+2026-09-15, which withdrew the one-target row), the navigation cross by
+L-316 round 4, and the i-panel text by item (7). Both instruments were
+The website's surfaces were seen by Tony on the phone (2026-09-16, "all
+look good"); the orrery's D8 drawing went through Stage D's own
+checks.
+Loose ends, each re-homed (A Closing Item Re-homes Its Loose Ends):
+- **The aberration, never decided and never built.** The
+  Tony-action (decide) above -- apply the 4.3 degrees at the declared
+  400 km/s, or draw un-aberrated and say so -- has no ruling, and
+  neither instrument applies it or says it does not ("aberrat" appears
+  in neither renderer). Moved to L-314, because the angle is set by the
+  solar wind's speed, which L-314 makes live.
+- L-350 pointed here; it closed the same day (its hover prints the
+  observed extent).
+- The four Earth rows the scanner scores Tier 1 (the mean radius and
+  the three declared solar wind conditions) are not this item's: see
+  L-414.
+**Gap:** none.
+**Ref:** L-291, L-292, L-298 (the orrery-vs-exhibit gap, made concrete),
+L-306, L-314, L-315, `constants_new.py`, `earth_visualization_shells.py`,
+`planet_visualization_utilities.py`, `gallery/feature_renderers.js`,
+`data/objects_config.json` (gallery), skills/interactive-exhibit/SKILL.md;
+Jelinek et al. (2012), JGR 117, A05208, doi:10.1029/2011JA017252 (read
+from the PDF, 2026-09-10); Shue et al. (1998), JGR 103:17691,
+doi:10.1029/98JA01103; EARTH_DRIVER and EARTH_INFO_HTML in
+interactive.html; gallery/earth_geometry.js (composeScene, the absence
+list).
+
+#### [L-350] The magnetotail's observed extent is served and shown nowhere (gallery)
+<!-- L:350 status:DONE upd:2026-10-04 section:C flag: rice: -->
+- **Recorded, not built.** A class found while building L-322 Stage C2
+  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
+  Braid: it waits until the artifact on the critical path reaches it.
+- `EARTH_MAGNETOTAIL_OBSERVED_RADII` (220, Slavin et al. 1983, read
+  2026-09-22) reaches the served config and no hover or panel prints
+  it. A served number nobody sees is either a missing line or a row the
+  gallery does not need.
+- **Three things about the same hover (2026-09-28).** The magnetotail's
+  hover is at the hover budget's ceiling of 17 lines, so printing the
+  observed extent means taking a line away. There is no Wikipedia
+  article for the magnetotail; its link is the Magnetosphere article
+  [verified @2df02f3b]. And the drawn tail widens about 44 percent from
+  20 to 120 Earth radii behind Earth at its central width, 32 percent at
+  its low end, against the 1983 "about 30 percent"; the 1983 figure is
+  inside the 1985 envelope, so the construction stands, and the note is
+  on the flare-end row in `constants_new.py`. [per chain]
+- **2026-10-04, CLOSED: the premise is gone.** The website's
+  magnetotail hover prints the observed extent: "The drawing stops at
+  220 Earth radii, which is how far the spacecraft went, not where the
+  tail ends." (`gallery/feature_renderers.js`, read from
+  `tl.observed_extent` with its served figure count) [verified @
+  gallery e7ef96eb]. Added by L-322 Stage D gallery patch 3, after this
+  item was written. Found by the Fable 5.1 ledger sweep; confirmed by
+  the Opus 5.5 session the same day. Not checked: whether that hover is
+  still inside the hover budget's ceiling; the budget suite gates that
+  on every run.
+**Gap:** none.
+**Ref:** L-305; gallery `data/objects_config.json`; `documentation/L322_earth_read_record_C2_20260922.md`.
+
+#### [L-383] shell_configs.py's magnetosphere tooltip says nothing of the tail and puts the belts at the flux peak (orrery, words)
+<!-- L:383 status:DONE upd:2026-10-04 section:C flag: rice: -->
+- **Found 2026-09-25** building L-322 D8 to D10. `shell_configs.py`
+  holds a copy of the magnetosphere tooltip that no display reads, kept
+  in step with its live twin by hand. It says nothing about the
+  magnetotail, which D8 now draws, and still says both Van Allen belts
+  are "drawn at the flux peak" (lines 2321 and 2322 at orrery
+  `a7868eee`). [verified @a7868eee]
+- The same wording question is open for the gallery on L-349.
+- **2026-10-04, CLOSED by folding into L-181.** The magnetosphere's
+  `tooltip` sits in `CUSTOM_SHELLS['Earth']` in `shell_configs.py`, and
+  no code reads a config `tooltip` field: checkbox tooltips come from
+  the `<body>_<suffix>_info` variables through `tooltips_dict`
+  (`celestial_objects.build_shell_checkboxes`) [verified @ cbde99dc].
+  orrery-coding-conventions already names all 124 such fields dead
+  data, says delete-or-wire is L-181's decision, and says to keep each
+  in agreement with its live twin until then. So this copy is one of
+  L-181's 124, not an item of its own. When L-349's wording is ruled,
+  the build that carries it keeps this copy in step, as the skill says.
+**Gap:** none here; L-181 (d).
+**Ref:** `shell_configs.py`; `earth_visualization_shells.py`; L-349; L-322.
+
+#### [L-406] The galactic tide drawn in the galaxy's plane (orrery + gallery, the Sun's slice)
+<!-- L:406 status:DONE upd:2026-10-04 section:C flag: rice: -->
+- **Found 2026-10-02**, sorting the Sun room's 43 unlinked numbers
+  (L-371). The galactic tide's words, on the website and in the orrery,
+  said its bodies are thinned near the galaxy's plane. The drawing
+  thinned them near the ecliptic, the plane of Earth's orbit, and was
+  densest at the ecliptic's poles. A code comment in
+  `gallery/feature_renderers.js` said the hover admitted this; it did
+  not. And the website's gating check
+  `documentation/smoke_sun_shells.js` passed a test named "tide is
+  genuinely thinned at the galactic plane" that measured the ecliptic:
+  the check could not fail on the wrong plane.
+- **Tony's rulings, 2026-10-02.** Fix it now, as a drawing choice made
+  more correct ("this is the session to do any fixing"). Draw it
+  tilted into the galaxy's plane AND with the pattern the source gives:
+  sparse at the galaxy's plane and at its poles, thickest halfway
+  between. Draw it between the outer Oort cloud's two stored edges,
+  20,000 and 100,000 AU, instead of a typed 50,000 AU with a typed
+  spread and cut-offs ("Confirmed as recommended"). The words follow
+  the discipline of the other features: the drawing is a choice resting
+  on the best information we can cite, the hover is basic with any
+  number cited, the info icon links to NASA or Wikipedia. Old and new
+  words were shown side by side and confirmed.
+- **Sources read 2026-10-02 by Claude Opus 5.5.** The pole: Liu, Zhu
+  and Hu, arXiv:1110.6268, eq. (2), the J2000 pole of Murray (1989),
+  the Hipparcos standard. The pattern: Delsemme (1987), A&A 187, 913,
+  summary (aphelia avoid both galactic polar caps and a strip along the
+  galactic equator); Matese and Whitmire, arXiv:1004.4584, sec. 2.2
+  (the dominant tidal term goes as |sin B cos B|, peaks near 45
+  degrees). Dissent, said in the panel: Higuchi (2020), arXiv:2008.04324
+  (AJ 160, 134); Rickman et al. (2008) as Matese and Whitmire report.
+  The info link stays Wikipedia's "Galactic tide", which meets the L-265
+  rule.
+- **Built 2026-10-02.** Orrery `patch_L406_1_galactic_tide_orrery_20261002.py`:
+  three rows in `constants_new.py` (the pole's right ascension in
+  degrees, its declination in arcseconds and, derived, in degrees);
+  `idealized_orbits.create_pole_transformation_matrix(ra_deg, dec_deg)`,
+  the planet matrix's arithmetic moved out unchanged (identical
+  matrices for eight bodies, checked); the orrery's tide redrawn;
+  interactive-exhibit 1.10 with the link rule; protocol v3.78. Gallery
+  `patch_L406_2_galactic_tide_gallery_20261002.py`: the tide's entry
+  in `data/objects_config.json`, its drawing in
+  `gallery/feature_renderers.js`, and the corrected check. Retired: the
+  0.5 asymmetry, the 0.3 spread and the 0.5 and 1.5 cut-offs -- four of
+  L-371's 19 eyeballed numbers -- and the declared 50,000 AU distance.
+- **Fixed in passing, reported:** the Sun's `_comment` in
+  `data/objects_config.json` said the custom geometry is "NOT here";
+  all four shapes have been there since L-234.
+- **Patch 1 ran and was pushed at orrery 94ff6c68, 19 of 19 gating.**
+  The reinstall of interactive-exhibit 1.10 then FAILED: Settings
+  refused the file with "malformed YAML frontmatter". Claude's patch
+  put the new fires_when words on a line of their own, and YAML reads a
+  bare second line as a broken key. Nothing in the run could see it:
+  skills_index.py rebuilt the manifest from the same header without
+  complaint (L-407). Fixed by `patch_L406_3_skill_frontmatter_20261002.py`,
+  which puts the words back on the one line; checked by parsing every
+  skill's header as YAML. The version stays 1.10, since 1.10 never
+  loaded anywhere.
+- **Patch 3 pushed at orrery 81e19ef; gallery patch_L406_2 and the
+  cache rebuild pushed at gallery 6ba42f02.**
+- **Seen on the phone, 2026-10-03:** Tony, of the tide's hover and
+  panel: "The text looks right." The visual pattern -- an X tilted
+  about 60 degrees against the Hills torus -- is not yet reported.
+- **Cross-check:** Portegies Zwart et al. 2021 (A&A 652, A144, sec.
+  3.2) set the ecliptic at 60 degrees to the Galactic plane; the
+  redrawn tide's stored pole gives 60.19 degrees.
+- **The look moves to L-408, 2026-10-03.** Tony had already turned the
+  tide on the phone looking for the X and could not find it without a
+  reference; that is why he asked for the Galactic Plane toggle. His
+  screenshot of 2026-10-03 shows an even cloud around the torus, which
+  is what the drawing should look like from most angles. The look is
+  made once L-408's ring is drawn: turn until the ring is edge-on.
+- **Reinstall confirmed, 2026-10-03:** the session of that day loaded
+  interactive-exhibit 1.10.
+- **2026-10-04, CLOSED.** Built and pushed on both sides. Its one open
+  step, the look at the tide's X, is L-408's purpose and is recorded
+  there (Fable 5.1 ledger sweep, 2026-10-04).
+**Gap:** none here; the look is in L-408.
+**Ref:** L-371; L-265; L-386; skills/interactive-exhibit/SKILL.md;
+orrery `solar_visualization_shells.py`, `idealized_orbits.py`,
+`constants_new.py`; gallery `gallery/feature_renderers.js`,
+`documentation/smoke_sun_shells.js`.
+
+#### [L-407] A skill's header is checked as YAML (orrery, skills)
+<!-- L:407 status:DONE upd:2026-10-04 section:C flag: rice: -->
+- **Found 2026-10-02** when Settings refused interactive-exhibit 1.10
+  with "malformed YAML frontmatter" (L-406). `skills_index.py` read each
+  header by its own looser rules and built the manifest from the broken
+  one without complaint; as a generator its exit code did not count. A
+  check that could not fail on the one fault the install step enforces.
+- **Tony's word, 2026-10-02:** "while we are doing this, let's do L407
+  too."
+- **Built the same day,** `patch_L407_2_skill_headers_20261002.py`
+  (patch_L407_1, built on 94ff6c68, refused to run once patch_L406_3
+  had moved the ledger; this one is the same work on 0a5eea0b):
+  `skills_index.py` reads every header as YAML -- PyYAML where it is
+  installed, built-in rules otherwise, and it prints which -- and fails,
+  naming the skill, on a header YAML refuses, one with no name or
+  description as text, or a value YAML silently cuts short at " #".
+  `orrery_maintenance_run.py` runs it with `--check` as the checker
+  Skill headers. Shown failing on the three old headers both ways.
+- **Two more found by the check, fixed in the same patch and
+  reported:** earth-system-pipeline's description held ": "
+  ("displacement): the restraint discipline"), which YAML refuses, so
+  a reinstall would have failed; provenance-discipline's held "# Source:
+  citations", so YAML read only its first 200 characters, ending
+  "adding or reviewing" -- the installed skill has been chosen by that
+  cut description, without the words about citations, display strings
+  and the push gate. Both descriptions are quoted; versions 1.2 and
+  2.25, no rule changed. interactive-exhibit's header was put back on
+  one line by patch_L406_3 (pushed at 81e19ef), still 1.10.
+- **patch_L407_2 ran and was pushed at orrery fd508f9.**
+- **2026-10-04, CLOSED.** The Fable 5.1 ledger sweep of 2026-10-04
+  loaded provenance-discipline 2.25, earth-system-pipeline 1.2 and
+  interactive-exhibit 1.10; provenance-discipline's description runs to
+  "Do not use for projects other than Paloma's Orrery", past the old
+  cut. The resident protocol is v3.79. The L-371 handoff's "no load to
+  confirm next session" was true of that session's own skills; this
+  obligation from 2026-10-02 was the one still open.
+**Gap:** none.
+**Ref:** L-406; `skills_index.py`; `orrery_maintenance_run.py`;
+`skills/*/SKILL.md`.
+
+#### [L-409] The licenses: the orrery's recognized by GitHub, the website's written (orrery, gallery)
+<!-- L:409 status:DONE upd:2026-10-04 section:C flag: rice: -->
+- **Found 2026-10-04,** when Tony asked whether the license was done
+  properly. The orrery's `LICENSE.md` is in the right place, but GitHub's
+  sidebar said "View license", not "MIT license": the file held the
+  Doc-Kind tag and two sections of attributions beside the MIT text. Its
+  year, 2024, disagreed with the README's License section, 2025-2026.
+  The website's repository had no license file; its README said
+  "Licensed MIT, the same as the application repository".
+- **Tony's rulings, 2026-10-04:** the website's code under the MIT
+  License and its content -- words, pictures, artwork, visualizations --
+  under CC BY 4.0; a copyright line on the lobby's About card; his email
+  address as that card's last line. Years 2024-2026, the project having
+  begun in September 2024.
+- **Built:**
+  - Orrery `patch_L409_2`: `LICENSE.md` the standard text alone; its
+    attributions moved word for word to `NOTICE.md`; the README's
+    License years and a pointer to `NOTICE.md`; `doc_index.py`
+    describes `LICENSE.md`, which cannot carry the tag (UNTAGGABLE, one
+    entry, named in its report).
+  - Gallery `patch_L409_1`: `LICENSE` (MIT), `LICENSE-CONTENT.md` (CC BY
+    4.0: what counts as content, a suggested credit, third-party data
+    excluded), `NOTICE.md` (Plotly.js, MIT; Pyodide, MPL-2.0 [verified
+    2026-10-04 against pyodide.org]; data stays under its providers'
+    terms), the README's license line, and the About card's two new
+    lines.
+- Claude said this is practical orientation, not legal advice.
+- **2026-10-04, CLOSED.** Both repositories' GitHub pages say "MIT
+  license" in the sidebar: read from github.com by the Claude Fable 5.1
+  ledger sweep of 2026-10-04
+  (`documentation/LEDGER_SWEEP_review_20261004.md`), and Tony's page
+  says the same. The Gap's one check has passed.
+**Gap:** none.
+**Ref:** L-085 (LICENSE to repo root); gallery `index.html`, the About
+overlay.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
@@ -19480,22 +19839,6 @@ color-accuracy pass, if one is ever undertaken); `_make_dict_unit`,
 wide, high confidence, small effort -- documentation only) -- yours to
 finalize.
 
-#### [L-133] Codebase-wide CRLF sweep (beyond L-026)
-<!-- L:133 status:OPEN upd:2026-07-17 section:D.Structural flag: rice:2/2/50/2 -->
-- **Idea (Tony, 4/17/26, pre-ledger note).** Review the codebase for any
-  remaining CRLF endings beyond palomas_orrery_helpers.py (L-026, DONE
-  2026-07-15). LF is the project standard.
-- **Note (Claude, 2026-07-17):** .gitattributes (`* text=auto eol=lf`)
-  added at repo root -- normalizes CRLF to LF automatically on `git add`
-  going forward (root cause: text pasted from chat/browser lands as
-  CRLF; without a git-level rule, a single pasted chunk could flip a
-  whole file's save-time EOL). This closes the recurring-drift half of
-  the problem.
-**Gap:** narrower now -- a one-time sweep of files already CRLF in the
-repo from before this rule existed (the .gitattributes fix doesn't
-retroactively touch files it hasn't seen re-added).
-**Ref:** to_do_ideas.md (pre-ledger, 4/17/26); companion to L-026, L-087.
-
 #### [L-135] Basic-plot file-size bloat (non-shell) -- Mercury-alone example
 <!-- L:135 status:OPEN upd:2026-07-17 section:D.Structural flag: rice:2/2/50/2 -->
 - **Bug/idea (Tony, 4/17/26, pre-ledger note -- two entries merged).**
@@ -19760,7 +20103,7 @@ itself); L-112 (the remediation pass that verified DP flyby preservation).
   distances appear. `[per chain]`
 
 #### [L-128] Comet sublimation shell(s) -- solar-distance chemistry zones
-<!-- L:128 status:OPEN upd:2026-07-17 section:D.Feature-B flag: rice:2/2/50/2 -->
+<!-- L:128 status:OPEN upd:2026-10-04 section:A flag: rice:2/2/50/2 -->
 - **Idea (Tony, 4/16/26, pre-ledger note).** Add a solar shell (or set of
   concentric shells) marking heliocentric distances at which different
   comet ices begin to sublimate (CO/CO2 far out, water ice closer in) --
@@ -19790,7 +20133,7 @@ from git history or needs rebuilding; decide where it lives.
 **Ref:** to_do_ideas.md (pre-ledger, 4/16/26).
 
 #### [L-131] Zodiacal dust solar shell
-<!-- L:131 status:OPEN upd:2026-07-17 section:D.Feature-B flag: rice:2/2/50/2 -->
+<!-- L:131 status:OPEN upd:2026-10-04 section:A flag: rice:2/2/50/2 -->
 - **Idea (Tony, 4/17/26, pre-ledger note).** Add a solar shell for the
   zodiacal dust cloud (interplanetary dust concentrated near the ecliptic).
 - **Cross-ref:** groups with L-128, L-136.
@@ -19801,20 +20144,29 @@ from git history or needs rebuilding; decide where it lives.
   cloud is flattened toward the planets' plane: a thick disk, not a
   sphere. Tony: this "conforms to our braid principle and grouping of
   thematic content". The Sun slice's ninth item (L-412).
+- **2026-10-04:** moved to section A; it is the Sun slice's ninth
+  item, with L-410 (L-412). Its July score was set as a loose idea; a
+  re-score is among the questions L-412 records.
 **Gap:** not scoped -- design conversation needed (extent, density
 profile, data source), with L-410.
 **Ref:** to_do_ideas.md (pre-ledger, 4/17/26).
 
 #### [L-136] Solar "scattered disk" shell
-<!-- L:136 status:OPEN upd:2026-07-17 section:D.Feature-B flag: rice:2/2/50/2 -->
+<!-- L:136 status:OPEN upd:2026-10-04 section:D.Feature-B flag: rice:2/2/50/2 -->
 - **Idea (Tony, 4/18/26, pre-ledger note).** Add a shell/region for the
   scattered disk (dynamically excited trans-Neptunian population, distinct
   from the classical Kuiper Belt).
 - **Cross-ref:** groups with L-128, L-131.
 - **2026-10-04 (Tony):** not the Sun's slice. A population of distant
   icy bodies belongs with the Kuiper belt in the Solar System room.
+- **2026-10-04, Tony's question on Where We Are:** is this the fuzzy
+  boundary idea? No. This item is a population to draw as a region;
+  L-410 is a way of drawing any edge known only as a range. They meet
+  in one place: the scattered disk's edges are themselves ranges, so
+  when this is designed, L-410's drawing rule applies to it.
 **Gap:** not scoped -- design conversation needed.
-**Ref:** to_do_ideas.md (pre-ledger, 4/18/26).
+**Ref:** to_do_ideas.md (pre-ledger, 4/18/26); L-363 (the Solar System
+room); L-410.
 
 ### D.Feature -- Bucket C (architecture; design-before-code)
 

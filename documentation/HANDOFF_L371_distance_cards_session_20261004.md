@@ -168,3 +168,244 @@ Tony orders the list when it is put to him; the order above is the
 sweep's, not his.
 
 Session written October 2026 with Anthropic's Claude Opus 5.5.
+
+======================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L413_1_ledger_sweep_and_earth_list_20261004.py
+ok  documentation/WHERE_WE_ARE.md  rewritten whole
+ok  LEDGER_CONSOLIDATED.md         L-409: status line
+ok  LEDGER_CONSOLIDATED.md         L-409: closed on the sidebar check
+ok  LEDGER_CONSOLIDATED.md         L-407: status line
+ok  LEDGER_CONSOLIDATED.md         L-407: closed on the load check
+ok  LEDGER_CONSOLIDATED.md         L-350: status line
+ok  LEDGER_CONSOLIDATED.md         L-350: closed, the hover prints it
+ok  LEDGER_CONSOLIDATED.md         L-406: status line
+ok  LEDGER_CONSOLIDATED.md         L-406: closed, the look is L-408's
+ok  LEDGER_CONSOLIDATED.md         L-305: status line
+ok  LEDGER_CONSOLIDATED.md         L-305: closed, loose ends re-homed
+ok  LEDGER_CONSOLIDATED.md         L-234: status line
+ok  LEDGER_CONSOLIDATED.md         L-234: closed, the Earth half is served
+ok  LEDGER_CONSOLIDATED.md         L-383: status line
+ok  LEDGER_CONSOLIDATED.md         L-383: folded into L-181
+ok  LEDGER_CONSOLIDATED.md         L-228: status line
+ok  LEDGER_CONSOLIDATED.md         L-228: the (do) struck
+ok  LEDGER_CONSOLIDATED.md         L-408: status line
+ok  LEDGER_CONSOLIDATED.md         L-408: the Gap made current
+ok  LEDGER_CONSOLIDATED.md         L-412: status line
+ok  LEDGER_CONSOLIDATED.md         L-412: Earth's list first
+ok  LEDGER_CONSOLIDATED.md         L-216: the stray folder deleted
+ok  LEDGER_CONSOLIDATED.md         L-363: status line
+ok  LEDGER_CONSOLIDATED.md         L-363: lobby checker re-homed
+ok  LEDGER_CONSOLIDATED.md         L-363: two decides struck, GO arrow ruled, Gap rewritten
+ok  LEDGER_CONSOLIDATED.md         L-363: Gap
+ok  LEDGER_CONSOLIDATED.md         L-411: status line
+ok  LEDGER_CONSOLIDATED.md         L-411: the credit line
+ok  LEDGER_CONSOLIDATED.md         L-136: status line
+ok  LEDGER_CONSOLIDATED.md         L-136: scattered disk vs fuzzy boundaries
+ok  LEDGER_CONSOLIDATED.md         L-300: status line
+ok  LEDGER_CONSOLIDATED.md         L-300: path corrected, placed
+ok  LEDGER_CONSOLIDATED.md         L-396: status line
+ok  LEDGER_CONSOLIDATED.md         L-396: the stamp the check would read
+ok  LEDGER_CONSOLIDATED.md         L-351: status line
+ok  LEDGER_CONSOLIDATED.md         L-351: the one place for owed skill sentences
+ok  LEDGER_CONSOLIDATED.md         L-314: status line
+ok  LEDGER_CONSOLIDATED.md         L-314: carries the aberration
+ok  LEDGER_CONSOLIDATED.md         L-181: status line
+ok  LEDGER_CONSOLIDATED.md         L-181: L-383 folded in
+ok  LEDGER_CONSOLIDATED.md         L-292: status line
+ok  LEDGER_CONSOLIDATED.md         L-292: the orrery half stands
+ok  LEDGER_CONSOLIDATED.md         L-369: status line
+ok  LEDGER_CONSOLIDATED.md         L-369: line numbers at HEAD
+ok  LEDGER_CONSOLIDATED.md         L-131: status line
+ok  LEDGER_CONSOLIDATED.md         L-131: in the active slice
+ok  LEDGER_CONSOLIDATED.md         L-128: status line
+ok  LEDGER_CONSOLIDATED.md         L-386: status line
+ok  LEDGER_CONSOLIDATED.md         L-241: status line
+ok  LEDGER_CONSOLIDATED.md         L-308: status line
+ok  LEDGER_CONSOLIDATED.md         L-308: DEFERRED with its trigger
+ok  LEDGER_CONSOLIDATED.md         L-375: status line
+ok  LEDGER_CONSOLIDATED.md         L-375: the dipole cone on the website
+ok  LEDGER_CONSOLIDATED.md         L-367: status line
+ok  LEDGER_CONSOLIDATED.md         L-367: lobby code re-homed
+ok  LEDGER_CONSOLIDATED.md         L-330: status line
+ok  LEDGER_CONSOLIDATED.md         L-330: unblocked
+ok  LEDGER_CONSOLIDATED.md         L-413 and L-414: opened
+ok  LEDGER_CONSOLIDATED.md         header stamp
+ok  LEDGER_CONSOLIDATED.md         L-415: opened
+ok  LEDGER_CONSOLIDATED.md         L-133: status line
+ok  LEDGER_CONSOLIDATED.md         L-133: the 22 files named
+ok  PROJECT_INSTRUCTIONS.md        header and anchor
+ok  PROJECT_INSTRUCTIONS.md        v3.80 entry
+ok  PROJECT_INSTRUCTIONS.md        v3.77 moved down
+ok  documentation/PROJECT_INSTRUCTIONS_HISTORY.md v3.77 received
+ok  skills/safe-file-editing/SKILL.md version line
+ok  skills/safe-file-editing/SKILL.md date and v1.12 paragraph
+ok  skills/safe-file-editing/SKILL.md Line Endings: write LF, except committed CRLF
+ok  skills/safe-file-editing/SKILL.md Guard section: patches and generators agree
+ok  skills/safe-file-editing/SKILL.md Compare Content: write LF
+ok  skills/safe-file-editing/SKILL.md Compare Content: code
+ok  skills/safe-file-editing/SKILL.md Compare Content: the corrected paragraph
+ok  documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md created
+
+Stamps updated: the ledger's header (October 4, built on 41c1ca7a);
+safe-file-editing's version line, cut-from list, date and v1.12
+paragraph; the protocol's header, anchor and v3.80 entry; Where We
+Are's date and SHAs.
+
+patch applied
+
+NEXT:
+  1. Run orrery_maintenance_run.py. Every gating check passes; the
+     Ledger index step moves seven closed items to section C, and
+     the Skill manifest step writes 1.12 into the protocol.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261005T011351Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.4s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.2s  rewrote PROJECT_INSTRUCTIONS.md
+  Constants export             0.8s  unchanged (1 checked, not written)
+  Objects export               0.1s  unchanged (1 checked, not written)
+  Module atlas                 6.9s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.2s  rewrote DATA_INVENTORY.md
+  Exact rows report            1.8s  unchanged (1 checked, not written) -- 13 of
+                                     34 exact rows printed at 42 lines (32
+                                     orrery, 10 gallery); 8 drawn only, 11 not
+                                     followed, 0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.2s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.8s  No figure count exceeds its inputs: 34
+                                     derived row(s) read, 24 judged OK -- 24 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       1.3s  Export matches the store: sha256
+                                     9ecbd38ff122 on both sides; 101 rows
+                                     re-read, 56 not exported, 27 tokens; 310
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.1s  pass
+  Skill headers                0.2s  11 skills parsed, no consistency problems.
+  Exact rows by the count      1.6s  PASSING -- 13 printed exact rows each state
+                                     a count; 32 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.8s  No unit contradicts its arithmetic: 52
+                                     derived row(s) read -- 40 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.3s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.2s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.2s  All 101 status lines in constants_new.py are
+                                     well formed; 53 rows carry none.
+  Row shape                    0.1s  All 157 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.4s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Reset completeness          24.1s  PASS -- all 309 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.4s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Worksheet checker           10.1s  74 of 110 routed, 8 clean
+  Worksheet checker tests     15.9s  All 135 checks passed
+  Worksheet key round trip     1.1s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         24.4s  All 76 checks passed
+  Extractor pins               0.5s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          12.0s  298 TIER-1 FINDINGS IN THE SCANNED TREE
+
+======================================================================
+  20 of 20 gating checkers passed -- 114.8s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          298 TIER-1 FINDINGS IN THE SCANNED TREE
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2059 file(s) examined, 9 written, 0 created, 0 removed, 3 rewritten identically
+    written   DATA_INVENTORY.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROJECT_INSTRUCTIONS.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Move this script into documentation/; commit and push.
+  3. Reinstall safe-file-editing (Settings > Skills) from
+     skills/safe-file-editing/SKILL.md, and replace the Project's
+     instructions with PROJECT_INSTRUCTIONS.md (v3.80).
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+===============================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L133_1_crlf_sweep_20261004.py
+ok  .gitignore                                   line endings: CRLF -> LF
+ok  LEDGER_CONSOLIDATED.md                       L-133: status line
+ok  LEDGER_CONSOLIDATED.md                       L-133: done
+ok  LEDGER_CONSOLIDATED.md                       L-415: L-133 done the same session
+ok  LEDGER_CONSOLIDATED.md                       header stamp
+ok  catalog_selection.py                         line endings: CRLF -> LF
+ok  create_cache_backups.py                      line endings: CRLF -> LF
+ok  data_acquisition.py                          line endings: CRLF -> LF
+ok  data_acquisition_distance.py                 line endings: CRLF -> LF
+ok  data_processing.py                           line endings: CRLF -> LF
+ok  documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md item 5
+ok  documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md tony-actions
+ok  documentation/WHERE_WE_ARE.md                changed this session
+ok  documentation/WHERE_WE_ARE.md                waiting on you: the 22 files done
+ok  documentation/WHERE_WE_ARE.md                where the details are
+ok  formatting_utils.py                          line endings: CRLF -> LF
+ok  hr_diagram_apparent_magnitude.py             line endings: CRLF -> LF
+ok  hr_diagram_distance.py                       line endings: CRLF -> LF
+ok  messier_object_data_handler.py               line endings: CRLF -> LF
+ok  object_type_analyzer.py                      line endings: CRLF -> LF
+ok  planetarium_apparent_magnitude.py            line endings: CRLF -> LF
+ok  planetarium_distance.py                      line endings: CRLF -> LF
+ok  report_manager.py                            line endings: CRLF -> LF
+ok  shutdown_handler.py                          line endings: CRLF -> LF
+ok  star_notes.py                                line endings: CRLF -> LF
+ok  star_properties.py                           line endings: CRLF -> LF
+ok  star_properties.py                           line 63 comment: two curly quote pairs made ASCII
+ok  stellar_data_patches.py                      line endings: CRLF -> LF
+ok  stellar_parameters.py                        line endings: CRLF -> LF
+ok  visualization_2d.py                          line endings: CRLF -> LF
+ok  visualization_3d.py                          line endings: CRLF -> LF
+ok  visualization_core.py                        line endings: CRLF -> LF
+
+All 21 Python files compile.
+Stamps updated: the ledger's header (L-133 closed).
+
+patch applied
+
+NEXT:
+  1. Run orrery_maintenance_run.py. Every gating check passes.
+  2. Move this script into documentation/; commit and push on its
+     own. Every line of the 22 files shows as changed: expected.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 

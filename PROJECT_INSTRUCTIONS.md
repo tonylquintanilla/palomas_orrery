@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.79 | October 2, 2026
+Tony Quintanilla, PE | Claude | v3.80 | October 4, 2026
 
-Cut from 0a5eea0b at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 41c1ca7a at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -482,7 +482,7 @@ what it is.
 Skill                        Ver  Fires when
 orrery-coding-conventions    1.9  Markers, hover text, axes, shells,
                                   legendgroups, docstrings, new visuals
-safe-file-editing            1.11 Editing existing files, patch scripts,
+safe-file-editing            1.12 Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
 agentic-pre-test             1.2  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
@@ -1163,6 +1163,39 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.80 (October 4, 2026): No rule changed in this document. ONE
+skill bump, one version (L-415): safe-file-editing 1.11 -> 1.12. A
+PATCH WRITES LF AND SAYS SO.
+
+WHAT PROMPTED IT. A ledger patch's test notes said a CRLF copy of the
+ledger kept its CRLF. Tony: "why do we leave windows line endings
+uncorrected. I thought the rule was to convert to lf when found and
+report." The skill said both: Fix In Passing lists CRLF as a violation
+to fix, while Line Endings Are Not Content and Compare Content, Not
+Bytes said to write each file back in the style found, because
+flipping the endings shows every line changed.
+
+WHAT THE TEST SHOWED. Under `* text=auto eol=lf`, which both repos
+carry, that reason is false: a CRLF working copy shows as modified with
+nothing inside it, and writing it LF clears the mark. The reason holds
+only for a file committed CRLF before the rule existed; 22 such files
+remain, named on L-133.
+
+WHAT THE SKILL NOW SAYS. A patch writes LF and reports a file that
+arrived CRLF. A file committed CRLF keeps its endings, is named, and
+waits for L-133's one-commit sweep. Patches and generators now follow
+the same convention.
+
+THE OBLIGATION TRAVELS. This session loaded 1.11. The next session
+confirms its loaded copy reads safe-file-editing 1.12 before any patch
+work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.77 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.79 (October 2, 2026): No rule changed in this document. TWO
 skill bumps, one version each (L-407): earth-system-pipeline 1.1 ->
 1.2 and provenance-discipline 2.24 -> 2.25. A SKILL'S HEADER IS READ
@@ -1233,46 +1266,6 @@ exhibit work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.75 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.77 (October 2, 2026): No rule changed in this document. TWO
-skill bumps, one version each, for one session (L-405):
-interactive-exhibit 1.8 -> 1.9 and ledger-and-session-records 1.13 ->
-1.14. THE SKILLS CATCH UP WITH THE SESSION'S TWO BUILDS.
-
-WHAT PROMPTED IT. The session made the Exhibit Store Editor list every
-room (L-404) and built the Solar System room's drawer (L-363 step 3b).
-Tony then asked to sort what the session did into method already in
-the skills, method that needed a skill, and drawing decisions and
-judgement -- and, the review done, to "take care of the skills now and
-the numbers in the next session."
-
-WHAT THE SKILLS NOW SAY. interactive-exhibit corrects its sentence that
-every reader of objects_config.json ignores the "rooms" section; says
-what the store writer may change in a room that is not one body, and
-that the editor lists rooms from both places a room can live; records
-the Solar System room's drawer as the shared drawer with four
-additions, and Tony's framing ruling of 2026-10-02 -- where each body
-is now, plus 20%; and gives step 4 the headless test recipe, now filed
-in the gallery's tools/headless/. ledger-and-session-records gains A
-Wrong Sentence in a Skill: Bump Now, or Carry It. The test is what a
-session would do if it followed the sentence: something wrong means
-correct it now, nothing different means carry it on the ledger to the
-next version.
-
-JUDGEMENT KEPT OUT OF THE SKILLS. Five calls Claude made inside the
-drawer build were put to Tony as his, and he confirmed them. They are
-recorded as his rulings on L-363, not written as method.
-
-THE OBLIGATION TRAVELS. This session loaded 1.8 and 1.13. The next
-session confirms its loaded copies read interactive-exhibit 1.9 and
-ledger-and-session-records 1.14 before any exhibit, ledger, handoff or
-session-record work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.74 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

@@ -60,7 +60,7 @@ def parse_magnitude(value):
     if isinstance(value, (int, float)):
         return float(value)
     value_str = str(value)
-    # remove anything like “ [~]” or “[some text]”
+    # remove anything like " [~]" or "[some text]"
     cleaned = re.sub(r"\[.*?\]", "", value_str).strip()
     try:
         return float(cleaned)
