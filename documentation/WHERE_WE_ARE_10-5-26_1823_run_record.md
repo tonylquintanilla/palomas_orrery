@@ -800,8 +800,8 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  3. Commit and push. -- 
+  3. Commit and push. -- d5c6179381a5dd6b8ab54dc2dcc10fc9914016e0
   4. Reinstall interactive-exhibit in Settings > Skills (1.12), and
      replace the Project's instructions with PROJECT_INSTRUCTIONS.md,
-     now v3.84.
+     now v3.84. -- done
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 

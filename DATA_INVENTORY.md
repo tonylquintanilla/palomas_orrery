@@ -91,7 +91,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 | .js | 20 | 414.8 KB | feature_renderers.js (141.1 KB) | 2026-10-06 |
 | .jpg | 2 | 137.9 KB | palomas_orrery_wall.jpg (95.2 KB) | 2026-10-04 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
-| .md | 6 | 67.5 KB | MODULE_ATLAS.md (46.0 KB) | 2026-10-06 |
+| .md | 6 | 66.5 KB | MODULE_ATLAS.md (45.3 KB) | 2026-10-06 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |
 | .patch | 3 | 11.7 KB | phaseb_studio.patch (7.0 KB) | 2026-07-29 |
 | .txt | 2 | 7.8 KB | requirements.txt (4.2 KB) | 2026-09-04 |

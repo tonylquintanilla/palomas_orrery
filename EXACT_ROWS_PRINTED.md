@@ -7,14 +7,14 @@ Rebuilt by `exact_rows_report.py` on every orrery maintenance run. An exact row 
 
 - 34 exact rows in `constants_new.py`.
 - 13 printed by at least one display: `SUN_RADIUS_KM`, `EARTH_LEO_UPPER_ALTITUDE_KM`, `EARTH_LEO_LOWER_ALTITUDE_KM`, `EARTH_VAN_ALLEN_OUTER_RADII`, `EARTH_SOLAR_WIND_PRESSURE_NPA`, `EARTH_SOLAR_WIND_BZ_NT`, `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG`, `EARTH_BOW_SHOCK_CUT_ANGLE_DEG`, `INNER_CORONA_RADII`, `OUTER_CORONA_RADII`, `HELMET_CUSP_RADII`, `INNER_LIMIT_OORT_CLOUD_AU`, `OUTER_OORT_CLOUD_AU`.
-- 41 printing lines: 32 in the orrery, 9 in the gallery.
+- 42 printing lines: 32 in the orrery, 10 in the gallery.
 - Gallery pointers to exact rows with no PRINTS entry (NOT FOLLOWED): 11: `HELMET_CUSP_RADII` at `/objects/0/features/solar_atmosphere/streamer_belt/cusp_radius`, `INNER_CORONA_RADII` at `/objects/0/features/solar_atmosphere/inner_corona`, `ROCHE_LIMIT_DRAWN_RADII` at `/objects/0/features/solar_atmosphere/roche_limit/drawn_radius`, `OUTER_CORONA_RADII` at `/objects/0/features/solar_atmosphere/outer_corona`, `INNER_LIMIT_OORT_CLOUD_AU` at `/objects/0/features/oort_cloud/hills_cloud_torus/inner_radius`, `OUTER_OORT_CLOUD_AU` at `/objects/0/features/oort_cloud/outer_oort_clumpy/outer_radius`, `OUTER_OORT_CLOUD_AU` at `/objects/0/features/oort_cloud/galactic_tide/outer_radius`, `GALACTIC_NORTH_POLE_RA_J2000_DEG` at `/objects/0/features/oort_cloud/galactic_tide/galactic_pole/ra`, `GALACTIC_NORTH_POLE_DEC_J2000_DEG` at `/objects/0/features/oort_cloud/galactic_tide/galactic_pole/dec`, `INNER_LIMIT_OORT_CLOUD_AU` at `/objects/0/features/oort_cloud/inner_oort_limit`, `OUTER_OORT_CLOUD_AU` at `/objects/0/features/oort_cloud/outer_oort`.
 - Gallery pointers to exact rows read only to place a drawing (DRAWN, not printed): 8: `SUN_RADIUS_KM`, `DE430_TERRESTRIAL_POSITION_PLACE_KM`, `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`, `EARTH_MAGNETOTAIL_DRAWN_END_RADII`, `EARTH_POLE_RA_J2000_DEG`, `EARTH_POLE_DEC_J2000_DEG`, `DE430_JUPITER_SATURN_POSITION_PLACE_KM`, `DE430_URANUS_NEPTUNE_PLUTO_POSITION_PLACE_KM`.
 - PRINTS or DRAWN entries that no longer match a pointer or their line (BROKEN): 0.
 
 ## Printed by the count
 
-Rule 7: each printed exact row states a print count, each orrery line prints it through `exact_text()` or `row_text()`, and the gallery serves the count beside it. **PASSING: 13 rows, every one counted, on 41 lines.**
+Rule 7: each printed exact row states a print count, each orrery line prints it through `exact_text()` or `row_text()`, and the gallery serves the count beside it. **PASSING: 13 rows, every one counted, on 42 lines.**
 
 - `SUN_RADIUS_KM`: prints 4
 - `EARTH_LEO_UPPER_ALTITUDE_KM`: prints 4
@@ -53,6 +53,7 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 - orrery `earth_visualization_shells.py` line 1340: `f"ring is the flux peak, L = {exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} -- about {_km_above_...`
 - orrery `earth_visualization_shells.py` line 1346: `f"the L = {_band_low} to {_band_high} band; the drawn {exact_text('EARTH_VAN_ALLEN_OUTER_RADI...`
 - orrery `shell_configs.py` line 2365: `f"{exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} Earth radii out (doi:10.1029/2024JA033504).\n"`
+- gallery `gallery/feature_renderers.js` line 1361 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `var at = "Drawn at " + fmtServed(distances[i], counts[i], 1) +`
 - gallery `gallery/feature_renderers.js` line 1372 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `? wrapHover("Drawn at " + fmtServed(distances[i], counts[i], 1) +`
 - gallery `gallery/feature_renderers.js` line 1381 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `? SOFT_BR + "(given as L = " + fmtServed(distances[i], counts[i], 1) +`
 - gallery `gallery/feature_renderers.js` line 1385 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `kmAndAu(distances[i] * radiusKm,`
