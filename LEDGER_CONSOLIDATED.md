@@ -236,6 +236,13 @@ Module updated: October 5, 2026 with Anthropic's Claude Opus 5.5
 Module updated: October 5, 2026 with Anthropic's Claude Opus 5.5
 (L-420 opened: the galactic plane in the Celestial Grid, the galactic
 centre in the star background, as Tony ruled), built on 0493fad0.
+Module updated: October 6, 2026 with Anthropic's Claude Opus 5.5
+(L-420 built: the galactic plane, its poles and Sgr A* in the orrery;
+Sgr A*'s position sourced), built on 51436054.
+Module updated: October 6, 2026 with Anthropic's Claude Opus 5.5
+(L-027 built: the panel colour restored as PANEL_BG = 'gray90';
+agentic-pre-test 1.3, protocol v3.83), built on patch_L420_3's tree
+over 51436054.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -609,7 +616,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-415 | A patch writes LF and reports: safe-file-editing 1.12 (skills) | OPEN | -- | 2026-10-04 |
 | ! | L-418 | Long skills open with their contents, and keep three version entries (skills) | OPEN | -- | 2026-10-05 |
 | ! | L-419 | A patch checks a file Tony annotates only at the lines it edits (patches, skills) | OPEN | -- | 2026-10-05 |
-| ! | L-420 | The galactic plane in the Celestial Grid, the galactic centre in the star background (orrery, sky) | OPEN | -- | 2026-10-05 |
+| ! | L-420 | The galactic plane in the Celestial Grid, the galactic centre in the star background (orrery, sky) | OPEN | -- | 2026-10-06 |
 
 ### B. Pending Action (Tony-side)
 
@@ -630,7 +637,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### D.Structural -- Dead code / honest shells
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-027 (#61) | Platform Neutrality (SystemButtonFace) | OPEN | 2.2 | 2026-06-18 |
+| ! | L-027 (#61) | Platform Neutrality (SystemButtonFace) | OPEN | 2.2 | 2026-10-06 |
 | ! | L-171 | patch_ledger_index_retired_handles.py breaks L-163's zero-undetermined close | OPEN | 1.8 | 2026-07-29 |
 | ! | L-025 (#N7) | Reduced to custom-geometry inline markers only | OPEN | 1.5 | 2026-06-18 |
 | ! | L-068 | Static/animation pipeline consolidation -- remaining residuals (umbrella) | OPEN | 1.5 | 2026-06-23 |
@@ -1109,7 +1116,7 @@ this item.
 L-026; L-133; L-351.
 
 #### [L-420] The galactic plane in the Celestial Grid, the galactic centre in the star background (orrery, sky)
-<!-- L:420 status:OPEN upd:2026-10-05 section:A flag: rice: -->
+<!-- L:420 status:OPEN upd:2026-10-06 section:A flag: rice: -->
 - **Tony, 2026-10-05:** "in the celestial grid, could we add the galactic
   plane? this is relevant to the galactic tide in particular." Then, on
   where the galactic centre goes: "we could put the plane and poles in
@@ -1137,10 +1144,48 @@ L-026; L-133; L-351.
   same family of sources as the pole), never a recalled number.
 - **Scope:** the orrery only; the website has no celestial grid yet. It
   touches neither of the two sessions running on 2026-10-05.
-**Gap:** a build session after Earth's website patch and the Horizons
-round: source the galactic centre's row, build both, Tony's look (Mode 5).
-**Ref:** `star_sphere_builder.py`; `constants_new.py` (the galactic pole
-rows); `solar_visualization_shells.create_sun_galactic_tide`; L-406.
+- **Built 2026-10-06** at orrery 51436054, in a session of its own,
+  after Tony confirmed the plan and the words ("Yes, confirmed as
+  recommended"): `patch_L420_2_galactic_plane_and_centre_20261006.py`.
+  - The galactic centre's row, sourced: Sgr A*'s position from Liu,
+    Zhu and Hu, arXiv:1110.6268, eq. (8), the VLBA position of Reid and
+    Brunthaler (2004), read 2026-10-06 by Claude Opus 5.5.
+    `SGR_A_STAR_RA_ICRS_ARCSEC` and `SGR_A_STAR_DEC_ICRS_ARCSEC` hold it
+    in arcseconds, exact as printed; their degree rows are derived.
+  - A check on the pole row: the same paper's eq. (7), the point the
+    frame defines as galactic longitude zero, lies on the plane drawn
+    from the store's pole to a hundred-millionth of a degree. Sgr A*
+    sits 0.05 degrees from that plane, far below what the drawing shows.
+  - The plane, NGP and SGP are computed when the plot is drawn
+    (`star_sphere_builder.build_galactic_grid`), so the saved star file
+    is not rebuilt.
+  - Words shown to Tony and approved: the Sgr A* hover ("Sagittarius
+    A*" / "The black hole at the centre of our galaxy" / "Its
+    direction from the Sun, among the stars"); the galactic pole
+    hovers ("North Galactic Pole (NGP)" / "Perpendicular to the disk
+    of our galaxy"); the box line ("Violet circle: Galactic plane, the
+    disk of the Milky Way (NGP, SGP its poles)"). The four tooltips
+    name the plane, its poles and Sgr A*.
+  - Fixed in passing and reported: with Labels on, the celestial and
+    ecliptic pole hovers showed "NCP" where the full name was meant.
+  - No angle is printed, so the tilts (about 60 degrees to the
+    ecliptic) needed no derived row.
+  - Checked in the sandbox: the maintenance run gives the same verdicts
+    as at 51436054, and the scanner's Tier-1 findings are the same 296,
+    file by file. The two new measured rows score 15, cited and not yet
+    cross-checked, as the pole rows do. Reset completeness fails in the
+    sandbox at 51436054 too: a Tk colour only Windows has.
+  - Where We Are was left alone: the website session owns it this
+    round. Its lines are in
+    `documentation/HANDOFF_L420_galactic_plane_20261006.md`.
+**Gap:** Tony runs patch_L420_2, patch_L420_3 and the maintenance run,
+pushes, and looks (Mode 5): the violet colour, the marker sizes, where
+the labels sit. Then close.
+**Ref:** `star_sphere_builder.py` (`build_galactic_grid`);
+`constants_new.py` (the galactic pole and Sgr A* rows);
+`palomas_orrery.py` (the two coordinate boxes, the four tooltips);
+`solar_visualization_shells.create_sun_galactic_tide`; L-406;
+`documentation/HANDOFF_L420_galactic_plane_20261006.md`.
 
 #### [L-419] A patch checks a file Tony annotates only at the lines it edits (patches, skills)
 <!-- L:419 status:OPEN upd:2026-10-05 section:A flag: rice: -->
@@ -19936,13 +19981,41 @@ OLD inline-marker definitions left OUTSIDE a custom-geometry builder -- straggle
 sweep missed. None found -> close. (Deferred until run.)
 
 #### [L-027 | #61] Platform Neutrality (SystemButtonFace)
-<!-- L:027 status:OPEN upd:2026-06-18 section:D.Structural flag: rice:3/2/75/2 -->
+<!-- L:027 status:OPEN upd:2026-10-06 section:D.Structural flag: rice:3/2/75/2 -->
 26 occurrences of the Tk color name SystemButtonFace in palomas_orrery.py.
 Resolves on Windows; fails on Linux/macOS. The xvfb pre-test sed swap is
 a workaround, not a fix. Options: hex literal '#F0F0F0', platform
 detection (sys.platform), or ttk styling.
-**Gap:** choose replacement strategy, then sweep. Design decision before
-build. Moderate scope (26 sites); low functional risk (cosmetic only).
+- **Corrected and built, 2026-10-06.** The two lines above were wrong.
+  Not cosmetic: on Linux, Tk stops with `unknown color name
+  "SystemButtonFace"` at the first panel, so the window never opens
+  (checked in the sandbox). And not the starting state. Tony's commit
+  dff2d03 of 2026-01-09, "cross-platform refactor", had replaced all
+  22 with `gray90`, and he tested the orrery on Linux and macOS while
+  it held. Commit ec333df of 2026-06-12, "animation refactor phase 4",
+  changed all 26 `gray90` to `SystemButtonFace`: the reverse of the
+  pre-test's colour swap, on the real file, three days after L-003
+  recorded the rule against it. This item (2026-06-18) and
+  agentic-pre-test 1.1 (L-115, 2026-07-12) then read the damaged file
+  as the original. The pre-test's swap also hid it: every headless run
+  passed because the test removed the colour from its copy first.
+  Tony, 2026-10-06: "We should not have any windows only requirements.
+  This is a cross platform project."; "I did test palomas_orrery.py in
+  both Linux and MacOS but maybe six months ago so it is very stale.";
+  on restoring gray90 as one name, "Confirmed as recommended. And
+  should we improve the skill also?"
+  `patch_L027_1_panel_colour_20261006.py`: palomas_orrery.py defines
+  `PANEL_BG = 'gray90'` after the root window and uses it at the 23
+  sites; agentic-pre-test 1.3 runs the headless test on an unedited
+  copy and records the founding case as the history shows it;
+  protocol v3.83.
+**Gap:** Tony runs the patch and the maintenance run, looks at the
+panels on Windows (back to the grey of January to June, a shade
+darker than Windows' own), and reinstalls agentic-pre-test; the next
+session confirms its loaded copy reads 1.3. A run on a Mac would
+settle the last system; macOS has not been tried since Tony's test.
+**Ref:** commits dff2d03, ec333df; L-003; L-115; L-026;
+`skills/agentic-pre-test/SKILL.md`.
 **Platform neutrality:** same goal as L-026 (the LF sweep) -- pair them. This is the Tk
 color-name half (SystemButtonFace -> hex literal / sys.platform detection / ttk).
 

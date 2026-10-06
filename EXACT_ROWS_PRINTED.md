@@ -110,12 +110,12 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 ### `INNER_LIMIT_OORT_CLOUD_AU`
 
-- orrery `palomas_orrery.py` line 10394: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
+- orrery `palomas_orrery.py` line 10420: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
 - orrery `solar_visualization_shells.py` line 108: `_OORT_INNER_EDGE = row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)`
 
 ### `OUTER_OORT_CLOUD_AU`
 
-- orrery `palomas_orrery.py` line 10394: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
+- orrery `palomas_orrery.py` line 10420: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
 - orrery `solar_visualization_shells.py` line 110: `_OORT_OUTER_EDGE = row_text('OUTER_OORT_CLOUD_AU', grouping=True)`
 
 ## Printed to a terminal only
@@ -123,7 +123,7 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 A tool logging a value is not a display a visitor sees, so these are not counted above.
 
 - `KM_PER_AU`: orrery `export_orbit_cache.py` line 385: `print(" constants_new.KM_PER_AU: %s" % KM_PER_AU)`
-- `EARTH_OBLIQUITY_J2000_DEG`: orrery `star_sphere_builder.py` line 493: `print(f" Obliquity: {EARTH_OBLIQUITY_J2000_DEG}\u00b0")`
+- `EARTH_OBLIQUITY_J2000_DEG`: orrery `star_sphere_builder.py` line 507: `print(f" Obliquity: {EARTH_OBLIQUITY_J2000_DEG}\u00b0")`
 
 ## Not printed
 
@@ -139,9 +139,9 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
 - `ARCSEC_PER_DEG`: named on 0 other orrery line(s).
 - `EARTH_OBLIQUITY_J2000_ARCSEC`: named on 0 other orrery line(s).
 - `EARTH_OBLIQUITY_J2000_DEG`: named on 15 other orrery line(s).
-- `GALACTIC_NORTH_POLE_RA_J2000_DEG`: named on 3 other orrery line(s).
+- `GALACTIC_NORTH_POLE_RA_J2000_DEG`: named on 5 other orrery line(s).
 - `GALACTIC_NORTH_POLE_DEC_J2000_ARCSEC`: named on 0 other orrery line(s).
-- `GALACTIC_NORTH_POLE_DEC_J2000_DEG`: named on 2 other orrery line(s).
+- `GALACTIC_NORTH_POLE_DEC_J2000_DEG`: named on 4 other orrery line(s).
 - `DEG_PER_RAD`: named on 0 other orrery line(s).
 - `EARTH_SOLAR_WIND_SPEED_KM_S`: named on 0 other orrery line(s).
 - `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`: named on 3 other orrery line(s).

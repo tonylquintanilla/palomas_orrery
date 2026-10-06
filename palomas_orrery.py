@@ -43,6 +43,16 @@ orrery patch: Earth's "-- Exosphere (Geocorona)" checkbox (L-292); the
 two coordinate hovers and the Celestial Sphere tooltip say the celestial
 equator is tilted by Earth's axial tilt instead of typing it (L-369).
 Words approved by Tony, 2026-10-05.)
+Module updated: October 6, 2026 with Anthropic's Claude Opus 5.5 (L-420:
+both "Ecliptic Coordinates (J2000)" boxes name the galactic plane's
+violet circle, and the Celestial Sphere, Star Background, Celestial Grid
+and Labels tooltips name the galactic plane, its poles and Sagittarius
+A*, which star_sphere_builder.py now draws. Words approved by Tony,
+2026-10-06.)
+Module updated: October 6, 2026 with Anthropic's Claude Opus 5.5 (L-027:
+the panels' background is one name, PANEL_BG = 'gray90', in place of
+the Windows-only SystemButtonFace at 23 sites, so the window opens on
+Linux and macOS as well. Tony's colour of January 2026, restored.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -1048,6 +1058,15 @@ root = tk.Tk()                                                                  
                                                                                 # is started. 
 root.title("Paloma's Orrery -- Updated: January 26, 2026")
 
+# The background of the control panels, frames and buttons: one name
+# for every site (L-027). gray90 is a colour name Tk knows on Windows,
+# macOS and Linux alike. The Windows-only name SystemButtonFace stops
+# Tk on Linux with "unknown color name", so the window never opens.
+# gray90 was Tony's fix of 2026-01-09, tested then on all three
+# systems; a test colour swap undid it on 2026-06-12, and L-027
+# restored it here on 2026-10-06.
+PANEL_BG = 'gray90'
+
 # ============================================================================
 # WINDOW GEOMETRY AND CONFIG MANAGEMENT
 # ============================================================================
@@ -1139,7 +1158,7 @@ today = datetime.today()
 STATIC_TODAY = today
 
 # Middle column - Controls
-controls_container = tk.Frame(main_paned, bg='SystemButtonFace')
+controls_container = tk.Frame(main_paned, bg=PANEL_BG)
 #controls_container.pack_propagate(False)
 #controls_container.config(width=450, height=750)
 
@@ -1147,7 +1166,7 @@ controls_container.pack_propagate(True)  # Allow container to resize
 # Remove the fixed width - let PanedWindow control it
 
 # Create a canvas inside the container
-controls_canvas = tk.Canvas(controls_container, bg='SystemButtonFace')
+controls_canvas = tk.Canvas(controls_container, bg=PANEL_BG)
 # controls_scrollbar = tk.Scrollbar(controls_container, orient="vertical", command=controls_canvas.yview, width=16)
 controls_scrollbar = ttk.Scrollbar(controls_container, orient="vertical", command=controls_canvas.yview)
 
@@ -1157,12 +1176,12 @@ controls_canvas.pack(side="left", fill="both", expand=True)
 controls_scrollbar.pack(side="right", fill="y")
 
 # Create the frame that will contain all the controls
-controls_frame = tk.Frame(controls_canvas, bg='SystemButtonFace')
+controls_frame = tk.Frame(controls_canvas, bg=PANEL_BG)
 
 # Add these lines after controls_frame is created
-controls_container.configure(bg='SystemButtonFace')
-controls_canvas.configure(bg='SystemButtonFace')
-controls_frame.configure(bg='SystemButtonFace')
+controls_container.configure(bg=PANEL_BG)
+controls_canvas.configure(bg=PANEL_BG)
+controls_frame.configure(bg=PANEL_BG)
 
 # Update the canvas window creation with explicit width
 controls_window = controls_canvas.create_window(
@@ -1179,7 +1198,7 @@ scroll_message = tk.Label(
     controls_frame,
     text="SCROLL DOWN TO SEE ALL PLOTTING OPTIONS",
     fg='red',
-    bg='SystemButtonFace',
+    bg=PANEL_BG,
     font=("Arial", 10, 
     #      "bold"
           )
@@ -2768,7 +2787,7 @@ controls_canvas.config(width=430, height=710)  # 450 container - 16 scrollbar - 
 orbit_paths_over_time = None  # Will be set by orbit_data_manager
 
 # After creating the status_display widget, initialize the orbit_data_manager
-status_display = tk.Label(root, text="Data Fetching Status", font=("Arial", 10), bg='SystemButtonFace', fg='black')
+status_display = tk.Label(root, text="Data Fetching Status", font=("Arial", 10), bg=PANEL_BG, fg='black')
 
 # orbit_paths_over_time = orbit_data_manager.initialize(status_display)  # removed because it is redundant
 
@@ -3499,7 +3518,7 @@ class ScrollableFrame(tk.Frame):
         super().__init__(container, *args, **kwargs)
 
         # Canvas and Scrollbar
-        self.canvas = tk.Canvas(self, bg='SystemButtonFace')
+        self.canvas = tk.Canvas(self, bg=PANEL_BG)
         self.scrollbar = ttk.Scrollbar(self, orient="vertical", command=self.canvas.yview)
         self.canvas.configure(yscrollcommand=self.scrollbar.set) 
 
@@ -3508,7 +3527,7 @@ class ScrollableFrame(tk.Frame):
         self.scrollbar.pack(side="right", fill="y")
 
         # Scrollable Frame
-        self.scrollable_frame = tk.Frame(self.canvas, bg='SystemButtonFace')
+        self.scrollable_frame = tk.Frame(self.canvas, bg=PANEL_BG)
         self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
 
         # Bind mousewheel to the canvas
@@ -3566,7 +3585,7 @@ class ScrollableFrame(tk.Frame):
         event.widget.unbind_all("<Button-5>")
 
 # Left column - Object selection
-input_frame = tk.Frame(main_paned, bg='SystemButtonFace')
+input_frame = tk.Frame(main_paned, bg=PANEL_BG)
 
 # Configure grid weights within input_frame for proper spacing
 input_frame.grid_rowconfigure(0, weight=0)  # Row for date inputs
@@ -5852,6 +5871,8 @@ def plot_objects():
 
                             + "<b>Teal circle:</b> Celestial equator, tilted from the ecliptic by Earth's axial tilt<br>(Earth's rotation-axis hover gives the angle for this date)<br><br>"
 
+                            + "<b>Violet circle:</b> Galactic plane, the disk of the Milky Way (NGP, SGP its poles)<br><br>"
+
                             + "<i>Enable Celestial Grid to see coordinate circles</i>"
                         ),                       
 
@@ -8082,6 +8103,7 @@ def animate_objects(step, label):
                             "<b>+Z:</b> Ecliptic North (NEP)<br><br>"
                             "<b>XY plane:</b> Ecliptic (amber circle)<br>"
                             "<b>Teal circle:</b> Celestial equator, tilted from the ecliptic by Earth's axial tilt<br>(Earth's rotation-axis hover gives the angle for this date)<br><br>"
+                            "<b>Violet circle:</b> Galactic plane, the disk of the Milky Way (NGP, SGP its poles)<br><br>"
                             "<i>Enable Celestial Grid to see coordinate circles</i>" if not is_exoplanet_mode
                             else "<b>Coordinate System (Exoplanet):</b><br><br>"
                             "<b>Origin:</b> Host star at (0, 0, 0)<br><br>"
@@ -8899,7 +8921,8 @@ CreateToolTip(celestial_sphere_frame,
     "Add a star background and/or celestial coordinate grid behind the solar system.\n"
     "Stars are shown as uniform dots at their real sky directions.\n"
     "The grid shows the ecliptic (planet orbital plane) with zodiac labels,\n"
-    "the celestial equator (tilted by Earth's axial tilt), and coordinate poles.\n\n"
+    "the celestial equator (tilted by Earth's axial tilt), the galactic plane\n"
+    "(the disk of the Milky Way), and coordinate poles.\n\n"
     "These are cosmetic overlays -- solar system objects are unchanged.")
  
 star_bg_checkbutton = tk.Checkbutton(celestial_sphere_frame,
@@ -8908,7 +8931,9 @@ star_bg_checkbutton.pack(anchor='w')
 CreateToolTip(star_bg_checkbutton,
     "Show ~288 stars brighter than magnitude 3.5 as uniform dots\n"
     "on a sphere scaled to the current axis range.\n"
-    "Stars are at their real RA/Dec sky positions (ecliptic frame).")
+    "Stars are at their real RA/Dec sky positions (ecliptic frame).\n"
+    "Also marks Sagittarius A* (Sgr A*), the black hole at the\n"
+    "centre of our galaxy.")
  
 # Star names sub-checkbox (indented, only meaningful when stars are on)
 star_names_checkbutton = tk.Checkbutton(celestial_sphere_frame,
@@ -8938,7 +8963,8 @@ CreateToolTip(celestial_grid_checkbutton,
     "- Ecliptic plane (amber) with tick marks every 30 deg\n"
     "- Celestial equator (teal) with RA tick marks every 2h\n"
     "- Prime meridian (gray) with Dec tick marks every 30 deg\n"
-    "- Celestial and ecliptic poles, vernal equinox marker\n\n"
+    "- Galactic plane (violet), the disk of the Milky Way\n"
+    "- Celestial, ecliptic and galactic poles, vernal equinox marker\n\n"
     "The ecliptic is the XY plane in the orrery's coordinate system --\n"
     "the plane in which the planets orbit.")
 
@@ -8951,7 +8977,7 @@ CreateToolTip(celestial_grid_labels_checkbutton,
     "- 12 zodiac constellation names along the ecliptic\n"
     "- Right ascension labels (0h-22h) on the celestial equator\n"
     "- Declination labels (0 deg to +/-90 deg) on the prime meridian\n"
-    "- Full pole names (North/South Celestial/Ecliptic Pole)\n\n"
+    "- Full pole names (North/South Celestial/Ecliptic/Galactic Pole)\n\n"
     "Requires Celestial Grid to be enabled.")
 
 
@@ -10792,7 +10818,7 @@ CreateToolTip(orbit_path_frame,
 )
 
 # After orbit_path_frame, where you want to position the status frame:
-status_frame = tk.LabelFrame(controls_frame, text="Data Fetching Status and Output Messages", padx=10, pady=10, bg='SystemButtonFace', fg='black')
+status_frame = tk.LabelFrame(controls_frame, text="Data Fetching Status and Output Messages", padx=10, pady=10, bg=PANEL_BG, fg='black')
 status_frame.pack(pady=(5, 5), fill='x')
 
 # NOW create the output_label inside the status_frame
@@ -10800,7 +10826,7 @@ output_label = tk.Label(
     status_frame,
     text="Will fetch live data from NASA's Jet Propulsion Laboratory at Caltech. Please be patient ...",
     fg='red',
-    bg='SystemButtonFace',  # Match the background of the LabelFrame
+    bg=PANEL_BG,  # Match the background of the LabelFrame
     wraplength=300,  # Increased wraplength for better readability
     justify='left',
     anchor='w'
@@ -10819,7 +10845,7 @@ status_display = tk.Label(
     status_frame, 
     text="Data Fetching Status", 
 #    font=("Arial", 10), 
-    bg='SystemButtonFace', 
+    bg=PANEL_BG, 
     fg='green'
 )
 status_display.pack(anchor='w', padx=5, pady=5)
@@ -10913,7 +10939,7 @@ plot_button = tk.Button(
     command=plot_objects, 
     width=BUTTON_WIDTH, 
     font=BUTTON_FONT, 
-    bg='SystemButtonFace', 
+    bg=PANEL_BG, 
     fg='blue'
 )
 plot_button.pack(side='left', padx=(0, 5), pady=(5, 0))
@@ -10926,7 +10952,7 @@ social_export_button = tk.Button(
     command=export_social_view,
     width=BUTTON_WIDTH,
     font=BUTTON_FONT,
-    bg='SystemButtonFace',
+    bg=PANEL_BG,
     fg='blue'
 )
 social_export_button.pack(side='left', padx=(0, 5), pady=(5, 0))
@@ -10984,7 +11010,7 @@ animate_minute_button = tk.Button(
     command=animate_one_minute,
     width=BUTTON_WIDTH, 
     font=BUTTON_FONT, 
-    bg='SystemButtonFace', 
+    bg=PANEL_BG, 
     fg='blue'
 )
 animate_minute_button.grid(row=0, column=0, padx=(0, 5), pady=(5, 0))
@@ -10998,27 +11024,27 @@ animate_hour_button = tk.Button(
     command=animate_one_hour,
     width=BUTTON_WIDTH, 
     font=BUTTON_FONT, 
-    bg='SystemButtonFace', 
+    bg=PANEL_BG, 
     fg='blue'
 )
 animate_hour_button.grid(row=0, column=1, padx=(0, 5), pady=(5, 0))
 CreateToolTip(animate_hour_button, "Animate the motion over hours. Shows position every hour.")
 
 # First Row of Animate Buttons: "Animate Days" and "Animate Weeks"
-animate_day_button = tk.Button(advance_buttons_frame, text="Animate Days", command=animate_one_day, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='SystemButtonFace', fg='blue')
+animate_day_button = tk.Button(advance_buttons_frame, text="Animate Days", command=animate_one_day, width=BUTTON_WIDTH, font=BUTTON_FONT, bg=PANEL_BG, fg='blue')
 animate_day_button.grid(row=1, column=0, padx=(0, 5), pady=(5, 0))
 CreateToolTip(animate_day_button, "Animate the motion over days. This may take a while due to the large number of positions fetched.")
 
-animate_week_button = tk.Button(advance_buttons_frame, text="Animate Weeks", command=animate_one_week, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='SystemButtonFace', fg='blue')
+animate_week_button = tk.Button(advance_buttons_frame, text="Animate Weeks", command=animate_one_week, width=BUTTON_WIDTH, font=BUTTON_FONT, bg=PANEL_BG, fg='blue')
 animate_week_button.grid(row=1, column=1, padx=(5, 0), pady=(5, 0))
 CreateToolTip(animate_week_button, "Animate the motion over weeks. This may take a while due to the large number of positions fetched.")
 
 # Second Row of Animate Buttons: "Animate Months" and "Animate Years"
-animate_month_button = tk.Button(advance_buttons_frame, text="Animate Months", command=animate_one_month, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='SystemButtonFace', fg='blue')
+animate_month_button = tk.Button(advance_buttons_frame, text="Animate Months", command=animate_one_month, width=BUTTON_WIDTH, font=BUTTON_FONT, bg=PANEL_BG, fg='blue')
 animate_month_button.grid(row=2, column=0, padx=(0, 5), pady=(5, 0))
 CreateToolTip(animate_month_button, "Animate the motion over months. This may take a while due to the large number of positions fetched.")
 
-animate_year_button = tk.Button(advance_buttons_frame, text="Animate Years", command=animate_one_year, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='SystemButtonFace', fg='blue')
+animate_year_button = tk.Button(advance_buttons_frame, text="Animate Years", command=animate_one_year, width=BUTTON_WIDTH, font=BUTTON_FONT, bg=PANEL_BG, fg='blue')
 animate_year_button.grid(row=2, column=1, padx=(5, 0), pady=(5, 0))
 CreateToolTip(animate_year_button, "Animate the motion over years. This may take a while due to the large number of positions fetched.")
 
@@ -11136,7 +11162,7 @@ orbital_viz_button.grid(row=3, column=0, columnspan=2, padx=(0, 0), pady=(5, 0))
 CreateToolTip(orbital_viz_button, "Open an interactive visualization of orbital parameter transformations.")
 
 # Right column - Dashboard (imported from palomas_orrery_dashboard.py)
-note_frame = tk.Frame(main_paned, bg='SystemButtonFace')
+note_frame = tk.Frame(main_paned, bg=PANEL_BG)
 
 dashboard_panel = PalomasOrreryDashboardFrame(note_frame, status_position="bottom")
 dashboard_panel.pack(expand=True, fill='both')

@@ -171,3 +171,7 @@ the overlap. The Horizons session's handoff carries the same three.
   this record: the galactic plane and its poles in the Celestial Grid,
   and the galactic centre in the star background, for a build session
   after this one and the Horizons round.
+  It was built on 2026-10-06 in a session of its own, which left
+  Where We Are alone; take its lines for the page from
+  `documentation/HANDOFF_L420_galactic_plane_20261006.md`, under
+  "For the next Where We Are".

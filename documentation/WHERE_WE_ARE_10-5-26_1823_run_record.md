@@ -2,7 +2,7 @@
 # Where We Are
 
 Last updated: October 5, 2026, end of the session held mostly from
-your phone.
+your phone. -- **Tony**: notes 10-5 and 10-6-2026 -- 
 - Written at orrery d9f47a87 and gallery ed48d078, after your runs.
 
 > **READ THIS FIRST**
@@ -243,5 +243,194 @@ Index regenerated (243 live items) in C:\Users\tonyq\OneDrive\Desktop\python_wor
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
   3. Commit and push. Run it before the website session's patch if
-     you can; either order works.
+     you can; either order works. -- 51436054330aefd6be2a7efd93ebd58f06c4a2d2
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+=====================================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L420_2_galactic_plane_and_centre_20261006.py
+ok  constants_new.py         docstring stamp (L-420)
+ok  constants_new.py         Sgr A* position rows
+ok  palomas_orrery.py        docstring stamp (L-420)
+ok  palomas_orrery.py        static plot box: violet circle line
+ok  palomas_orrery.py        animation box: violet circle line
+ok  palomas_orrery.py        Celestial Sphere tooltip
+ok  palomas_orrery.py        Star Background tooltip
+ok  palomas_orrery.py        Celestial Grid tooltip
+ok  palomas_orrery.py        Labels tooltip
+ok  star_sphere_builder.py   docstring stamp (L-420)
+ok  star_sphere_builder.py   import the galactic rows
+ok  star_sphere_builder.py   build_galactic_grid()
+ok  star_sphere_builder.py   Sgr A* marker in the Star Background
+ok  star_sphere_builder.py   galactic plane circle
+ok  star_sphere_builder.py   NGP and SGP markers
+ok  star_sphere_builder.py   celestial pole hover shows the full name (in passing)
+ok  star_sphere_builder.py   ecliptic pole hover shows the full name (in passing)
+
+stamps updated: the docstrings of constants_new.py, star_sphere_builder.py and palomas_orrery.py
+patch applied (17 edits in 3 files)
+
+NEXT:
+  1. Run patch_L420_3_session_close_20261006.py the same way.
+  2. Run orrery_maintenance_run.py. Constants export rewrites
+     data/constants_export.json: 105 rows exported, up from 101.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261005T230218Z, 1 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 2.1s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.4s  rewrote PROJECT_INSTRUCTIONS.md
+  Constants export             2.2s  rewrote data/constants_export.json
+  Objects export               0.1s  unchanged (1 checked, not written)
+  Module atlas                10.0s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.7s  rewrote DATA_INVENTORY.md
+  Exact rows report            1.9s  rewrote EXACT_ROWS_PRINTED.md -- 13 of 34
+                                     exact rows printed at 42 lines (32 orrery,
+                                     10 gallery); 8 drawn only, 11 not followed,
+                                     0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.4s  2 derived line(s): 0 changed, 2 added, 0
+                                     removed
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.9s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       1.3s  Export matches the store: sha256
+                                     3b7000e368d1 on both sides; 105 rows
+                                     re-read, 56 not exported, 27 tokens; 310
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.1s  pass
+  Skill headers                0.2s  11 skills parsed, no consistency problems.
+  Exact rows by the count      1.6s  PASSING -- 13 printed exact rows each state
+                                     a count; 32 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.7s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 105 status lines in constants_new.py are
+                                     well formed; 53 rows carry none.
+  Row shape                    0.1s  All 161 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Reset completeness          26.6s  PASS -- all 310 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.1s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Worksheet checker            9.6s  74 of 110 routed, 8 clean
+  Worksheet checker tests     17.3s  All 135 checks passed
+  Worksheet key round trip     1.1s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         26.9s  All 76 checks passed
+  Extractor pins               0.5s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          11.6s  298 TIER-1 FINDINGS IN THE SCANNED TREE
+
+======================================================================
+  20 of 20 gating checkers passed -- 125.8s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          298 TIER-1 FINDINGS IN THE SCANNED TREE
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2079 file(s) examined, 11 written, 0 created, 0 removed, 3 rewritten identically
+    written   DATA_INVENTORY.md
+    written   EXACT_ROWS_PRINTED.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROJECT_INSTRUCTIONS.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/constants_export.json
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  3. Move both patch scripts into documentation/, commit and push.
+  4. Your look: plot with Star Background, Celestial Grid and Labels on.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+=================================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L420_3_session_close_20261006.py
+ok  LEDGER_CONSOLIDATED.md                                     header stamp
+ok  LEDGER_CONSOLIDATED.md                                     L-420 date
+ok  LEDGER_CONSOLIDATED.md                                     L-420 built, Gap and Ref
+ok  documentation/HANDOFF_L413_earth_orrery_patch_20261005.md  L-420 built: where its page lines are
+ok  documentation/HANDOFF_L420_galactic_plane_20261006.md      created
+
+stamps updated: the ledger's header stamp; the new handoff opens with its anchor
+patch applied
+
+NEXT:
+  1. Run orrery_maintenance_run.py. Its Ledger index step updates
+     L-420's row; its Constants export step writes the four new rows.
+  2. Move both L420 patch scripts into documentation/, commit and push.
+  3. Your look: plot with Star Background, Celestial Grid and Labels on.
+     The violet colour, the marker sizes, where the labels sit.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+===================================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L027_1_panel_colour_20261006.py
+ok  LEDGER_CONSOLIDATED.md                           header stamp
+ok  LEDGER_CONSOLIDATED.md                           L-027 date
+ok  LEDGER_CONSOLIDATED.md                           L-027 corrected and built
+ok  PROJECT_INSTRUCTIONS.md                          header stamp
+ok  PROJECT_INSTRUCTIONS.md                          SHA anchor
+ok  PROJECT_INSTRUCTIONS.md                          v3.83 entry
+ok  PROJECT_INSTRUCTIONS.md                          v3.80 moves down
+ok  documentation/HANDOFF_L420_galactic_plane_20261006.md L-027 section
+ok  documentation/HANDOFF_L420_galactic_plane_20261006.md L-027 Where We Are lines
+ok  documentation/HANDOFF_L420_galactic_plane_20261006.md L-027 Tony-actions
+ok  documentation/HANDOFF_L420_galactic_plane_20261006.md L-027 next session
+ok  documentation/PROJECT_INSTRUCTIONS_HISTORY.md    receives v3.80
+ok  palomas_orrery.py                                docstring stamp
+ok  palomas_orrery.py                                PANEL_BG defined after the root window
+ok  palomas_orrery.py                                the 23 SystemButtonFace sites use PANEL_BG
+ok  skills/agentic-pre-test/SKILL.md                 description: the throwaway rule, unnamed
+ok  skills/agentic-pre-test/SKILL.md                 v1.3 entry
+ok  skills/agentic-pre-test/SKILL.md                 Standard Test without the swap
+ok  skills/agentic-pre-test/SKILL.md                 the throwaway section, with its true founding case
+
+patch applied
+
+NEXT:
+  1. Run orrery_maintenance_run.py. Every checker should pass,
+     Reset completeness included; Skill manifest rewrites the
+     agentic-pre-test row in PROJECT_INSTRUCTIONS.md to 1.3.
+  2. Open the orrery and look at the panels: a shade darker grey.
+  3. Move this script into documentation/, commit and push.
+  4. Reinstall agentic-pre-test in Settings > Skills, and replace
+     the Project's instructions with PROJECT_INSTRUCTIONS.md (v3.83).
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 

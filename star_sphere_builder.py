@@ -22,6 +22,16 @@ the obliquity is read from constants_new.EARTH_OBLIQUITY_J2000_DEG, the
 frame's defining angle, where it was typed as a shorter copy. The
 saved star file does not need rebuilding.)
 
+Module updated: October 6, 2026 with Anthropic's Claude Opus 5.5 (L-420:
+the Celestial Grid draws the galactic plane, a violet circle, and marks
+the north and south galactic poles NGP and SGP; the Star Background
+marks Sagittarius A*, the direction of the galactic centre. Both are
+computed when the plot is drawn, by build_galactic_grid() and from the
+Sgr A* rows, out of constants_new.py, so the saved star file does not
+need rebuilding. Fixed in passing: with Labels on, the celestial and
+ecliptic pole hovers showed the short label, "NCP", where the full name
+was meant. Words approved by Tony, 2026-10-06.)
+
 Role: rendering
 Domain: stars
 """
@@ -53,6 +63,10 @@ PROPERTIES_PKL = 'star_data/star_properties_magnitude.pkl'
 # frame's defining angle, not Earth's tilt on any date; the two differ
 # by far less than anything drawn here can show.
 from constants_new import EARTH_OBLIQUITY_J2000_DEG
+# L-420: the galactic plane's pole, and the galactic centre's direction.
+from constants_new import (GALACTIC_NORTH_POLE_RA_J2000_DEG,
+                           GALACTIC_NORTH_POLE_DEC_J2000_DEG,
+                           SGR_A_STAR_RA_ICRS_DEG, SGR_A_STAR_DEC_ICRS_DEG)
 
 # Zodiac sign boundaries along the ecliptic, in ecliptic longitude (degrees)
 ZODIAC_SIGNS = [
@@ -680,6 +694,41 @@ def build_json(vot_path):
 _star_sphere_cache = None
 
 
+def build_galactic_grid(n_points=CIRCLE_POINTS):
+    """
+    The galactic plane and its two poles, as unit vectors in the ecliptic
+    frame (L-420, 2026-10-06).
+
+    Computed from constants_new.py when the plot is drawn, not stored in
+    the saved star file, so the file needs no rebuilding and the drawing
+    cannot fall behind the rows.
+
+    The plane is the great circle whose pole is the north galactic pole
+    of J2000, the same pole the Sun's galactic tide is drawn about
+    (solar_visualization_shells.create_sun_galactic_tide). The circle
+    starts where it crosses the ecliptic; the starting point means
+    nothing else, because the circle carries no ticks.
+
+    Returns a dict: 'galactic_plane' (n_points [x, y, z] lists),
+    'galactic_north_pole' and 'galactic_south_pole' ([x, y, z]).
+    """
+    ngp = np.array(equatorial_to_ecliptic_unit_vector(
+        GALACTIC_NORTH_POLE_RA_J2000_DEG, GALACTIC_NORTH_POLE_DEC_J2000_DEG))
+    # Two directions in the plane: where it meets the ecliptic, and the
+    # direction 90 degrees on from that.
+    u = np.cross([0.0, 0.0, 1.0], ngp)
+    u = u / np.linalg.norm(u)
+    v = np.cross(ngp, u)
+    angles = np.linspace(0, 2 * np.pi, n_points, endpoint=False)
+    plane = [[float(np.cos(a) * u[i] + np.sin(a) * v[i]) for i in range(3)]
+             for a in angles]
+    return {
+        'galactic_plane': plane,
+        'galactic_north_pole': [float(c) for c in ngp],
+        'galactic_south_pole': [float(-c) for c in ngp],
+    }
+
+
 def load_star_sphere_data():
     """
     Load celestial sphere JSON data, caching in memory after first load.
@@ -766,6 +815,29 @@ def add_celestial_sphere_traces(fig, axis_range, show_stars, show_names,
                 name='_star_background'
             ))
 
+        # Sagittarius A*, the direction of the galactic centre (L-420).
+        # A celestial object, so a circle; always labelled and hoverable,
+        # unlike the stars, so a visitor can find it. Position from the
+        # store's Sgr A* rows (constants_new.py).
+        gx, gy, gz = equatorial_to_ecliptic_unit_vector(
+            SGR_A_STAR_RA_ICRS_DEG, SGR_A_STAR_DEC_ICRS_DEG)
+        sgra_hover = ('Sagittarius A*<br>'
+                      'The black hole at the centre of our galaxy<br>'
+                      'Its direction from the Sun, among the stars')
+        fig.add_trace(go.Scatter3d(
+            x=[gx * R], y=[gy * R], z=[gz * R],
+            mode='markers+text',
+            marker=dict(size=4, color='rgba(205, 165, 255, 0.95)',
+                        symbol='circle'),
+            text=['Sgr A*'],
+            textfont=dict(color='rgba(205, 165, 255, 0.75)', size=9),
+            textposition='top center',
+            customdata=[sgra_hover],
+            hovertemplate='%{customdata}<extra></extra>',
+            showlegend=False,
+            name='_sgr_a_star'
+        ))
+
     # ---- Celestial Grid ----
     if not show_grid:
         # Even without grid, constellation names may be active
@@ -843,6 +915,23 @@ def add_celestial_sphere_traces(fig, axis_range, show_stars, show_names,
             showlegend=False,
             name='_prime_meridian'
         ))
+
+    # Galactic plane (violet), computed from the store's galactic pole
+    # when the plot is drawn (L-420). No ticks; the NGP and SGP markers
+    # below carry its words.
+    galactic = build_galactic_grid()
+    gal_pts = galactic['galactic_plane']
+    gal_closed = gal_pts + [gal_pts[0]]
+    fig.add_trace(go.Scatter3d(
+        x=[p[0] * R for p in gal_closed],
+        y=[p[1] * R for p in gal_closed],
+        z=[p[2] * R for p in gal_closed],
+        mode='lines',
+        line=dict(color='rgba(175, 135, 235, 0.40)', width=1.5),
+        hoverinfo='skip',
+        showlegend=False,
+        name='_galactic_plane'
+    ))
 
     # ---- Tick markers (always visible when grid is on) ----
     # + markers at every 30 deg. When Labels is on, ticks carry hovertext.
@@ -947,7 +1036,7 @@ def add_celestial_sphere_traces(fig, axis_range, show_stars, show_names,
             pole_hover = ['North Celestial Pole (NCP)',
                           'South Celestial Pole (SCP)']
             pole_hinfo = None
-            pole_tpl = '%{text}<extra></extra>'
+            pole_tpl = '%{customdata}<extra></extra>'
         fig.add_trace(go.Scatter3d(
             x=[ncp[0] * R, scp[0] * R],
             y=[ncp[1] * R, scp[1] * R],
@@ -976,7 +1065,7 @@ def add_celestial_sphere_traces(fig, axis_range, show_stars, show_names,
             epole_hover = ['North Ecliptic Pole (NEP)',
                            'South Ecliptic Pole (SEP)']
             epole_hinfo = None
-            epole_tpl = '%{text}<extra></extra>'
+            epole_tpl = '%{customdata}<extra></extra>'
         fig.add_trace(go.Scatter3d(
             x=[enp[0] * R, esp[0] * R],
             y=[enp[1] * R, esp[1] * R],
@@ -993,6 +1082,36 @@ def add_celestial_sphere_traces(fig, axis_range, show_stars, show_names,
             showlegend=False,
             name='_ecliptic_poles'
         ))
+
+    # Galactic poles (L-420), drawn as the celestial and ecliptic poles are
+    ngp = galactic['galactic_north_pole']
+    sgp = galactic['galactic_south_pole']
+    gpole_hover = None
+    gpole_hinfo = 'skip'
+    gpole_tpl = None
+    if show_labels:
+        gpole_hover = ['North Galactic Pole (NGP)<br>'
+                       'Perpendicular to the disk of our galaxy',
+                       'South Galactic Pole (SGP)<br>'
+                       'Perpendicular to the disk of our galaxy']
+        gpole_hinfo = None
+        gpole_tpl = '%{customdata}<extra></extra>'
+    fig.add_trace(go.Scatter3d(
+        x=[ngp[0] * R, sgp[0] * R],
+        y=[ngp[1] * R, sgp[1] * R],
+        z=[ngp[2] * R, sgp[2] * R],
+        mode='markers+text',
+        marker=dict(size=4, color='rgba(175, 135, 235, 0.6)',
+                    symbol='cross'),
+        text=['NGP', 'SGP'],
+        textfont=dict(color='rgba(175, 135, 235, 0.5)', size=8),
+        textposition='top center',
+        customdata=gpole_hover,
+        hovertemplate=gpole_tpl,
+        hoverinfo=gpole_hinfo,
+        showlegend=False,
+        name='_galactic_poles'
+    ))
 
     # ---- Dense labels (only when Labels checkbox is on) ----
     if show_labels:

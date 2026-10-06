@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.82 | October 5, 2026
+Tony Quintanilla, PE | Claude | v3.83 | October 6, 2026
 
-Cut from d9f47a87 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 51436054 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -484,7 +484,7 @@ orrery-coding-conventions    1.10 Markers, hover text, axes, shells,
                                   legendgroups, docstrings, new visuals
 safe-file-editing            1.13 Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
-agentic-pre-test             1.2  BEFORE delivering complete files/agentic
+agentic-pre-test             1.3  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
 horizons-orbital-mechanics   1.1  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning
@@ -1163,6 +1163,40 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.83 (October 6, 2026): No rule changed in this document. ONE
+skill bump, one version (L-027): agentic-pre-test 1.2 -> 1.3. THE
+PRE-TEST RUNS THE FILE AS IT IS.
+
+WHAT PROMPTED IT. A session reported that the maintenance run's Reset
+completeness check fails in the sandbox because it needs a screen
+colour only Windows has. Tony: "We should not have any windows only
+requirements. This is a cross platform project." The file history
+showed it was a regression, not the starting state: Tony's commit of
+2026-01-09 had replaced the Windows-only Tk colour name
+SystemButtonFace with gray90, and commit ec333df of 2026-06-12 swapped
+all 26 back -- the reverse of the pre-test's own colour swap, applied
+to the real file. Since then the orrery's window could not open on
+Linux, and every headless run passed because the test swapped the
+colour out of its copy first.
+
+WHAT CHANGED. patch_L027_1 names the colour once in palomas_orrery.py,
+PANEL_BG = 'gray90', at all 23 sites. agentic-pre-test 1.3 drops the
+swap: the headless run uses an unedited copy, and an error naming
+something only one system has is a finding to fix, never to swap past.
+Its throwaway rule keeps its place, with the founding case as the
+history shows it. Tony, on the colour: "Confirmed as recommended. And
+should we improve the skill also?"
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+agentic-pre-test 1.3 before any pre-test.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.80 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.82 (October 5, 2026): No rule changed in this document. ONE
 skill bump, one version (L-419): ledger-and-session-records 1.15 ->
 1.16. A PATCH NEVER REFUSES TONY'S NOTES.
@@ -1238,39 +1272,6 @@ scheduled.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.78 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.80 (October 4, 2026): No rule changed in this document. ONE
-skill bump, one version (L-415): safe-file-editing 1.11 -> 1.12. A
-PATCH WRITES LF AND SAYS SO.
-
-WHAT PROMPTED IT. A ledger patch's test notes said a CRLF copy of the
-ledger kept its CRLF. Tony: "why do we leave windows line endings
-uncorrected. I thought the rule was to convert to lf when found and
-report." The skill said both: Fix In Passing lists CRLF as a violation
-to fix, while Line Endings Are Not Content and Compare Content, Not
-Bytes said to write each file back in the style found, because
-flipping the endings shows every line changed.
-
-WHAT THE TEST SHOWED. Under `* text=auto eol=lf`, which both repos
-carry, that reason is false: a CRLF working copy shows as modified with
-nothing inside it, and writing it LF clears the mark. The reason holds
-only for a file committed CRLF before the rule existed; 22 such files
-remain, named on L-133.
-
-WHAT THE SKILL NOW SAYS. A patch writes LF and reports a file that
-arrived CRLF. A file committed CRLF keeps its endings, is named, and
-waits for L-133's one-commit sweep. Patches and generators now follow
-the same convention.
-
-THE OBLIGATION TRAVELS. This session loaded 1.11. The next session
-confirms its loaded copy reads safe-file-editing 1.12 before any patch
-work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.77 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

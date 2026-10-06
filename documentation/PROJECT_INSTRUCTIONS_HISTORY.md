@@ -2214,6 +2214,42 @@ resident.
 (Moved down from the resident protocol on 2026-10-05 when
 v3.82 made a fourth entry.)
 
+v3.80 (October 4, 2026): No rule changed in this document. ONE
+skill bump, one version (L-415): safe-file-editing 1.11 -> 1.12. A
+PATCH WRITES LF AND SAYS SO.
+
+WHAT PROMPTED IT. A ledger patch's test notes said a CRLF copy of the
+ledger kept its CRLF. Tony: "why do we leave windows line endings
+uncorrected. I thought the rule was to convert to lf when found and
+report." The skill said both: Fix In Passing lists CRLF as a violation
+to fix, while Line Endings Are Not Content and Compare Content, Not
+Bytes said to write each file back in the style found, because
+flipping the endings shows every line changed.
+
+WHAT THE TEST SHOWED. Under `* text=auto eol=lf`, which both repos
+carry, that reason is false: a CRLF working copy shows as modified with
+nothing inside it, and writing it LF clears the mark. The reason holds
+only for a file committed CRLF before the rule existed; 22 such files
+remain, named on L-133.
+
+WHAT THE SKILL NOW SAYS. A patch writes LF and reports a file that
+arrived CRLF. A file committed CRLF keeps its endings, is named, and
+waits for L-133's one-commit sweep. Patches and generators now follow
+the same convention.
+
+THE OBLIGATION TRAVELS. This session loaded 1.11. The next session
+confirms its loaded copy reads safe-file-editing 1.12 before any patch
+work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.77 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-06 when
+v3.83 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

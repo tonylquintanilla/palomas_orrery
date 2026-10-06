@@ -143,6 +143,11 @@ each is the equatorial radius plus its altitude, Tony's reading of
 2026-09-28 crust ruling as the ruling itself; the LEO outer edge's
 stale note is corrected. L-292: the geocorona row's note says the
 orrery now draws it. No value changes.)
+Module updated: October 6, 2026 with Anthropic's Claude Opus 5.5
+(L-420: Sgr A*'s position on the sky, SGR_A_STAR_RA_ICRS_ARCSEC and
+SGR_A_STAR_DEC_ICRS_ARCSEC, read from Liu, Zhu and Hu, arXiv:1110.6268,
+eq. (8), with their degree rows derived. The Star Background marks it
+as the direction of the galactic centre.)
 """
 
 import math
@@ -691,6 +696,65 @@ GALACTIC_NORTH_POLE_DEC_J2000_DEG = GALACTIC_NORTH_POLE_DEC_J2000_ARCSEC / ARCSE
 # Status: derived 2026-10-02 -- inherits GALACTIC_NORTH_POLE_DEC_J2000_ARCSEC,
 # Status+: ARCSEC_PER_DEG
 # Figures: exact -- both inputs are exact.
+# Note: drawn, never printed, so it carries no print count.
+
+SGR_A_STAR_RA_ICRS_ARCSEC = 959100.6
+# Unit: arcsec
+# Status: measured V_SOURCED 2026-10-06
+# Figures: 9 -- the source prints 17h 45m 40.0400s, to a ten-thousandth
+# Figures+: of a second of time, and the two trailing zeros are printed
+# Figures+: digits within that resolution, so they count. Times 15, an
+# Figures+: exact conversion, that is 959,100.600 arcseconds.
+# Read: eq. (8), sec. 3.2, of the document named in the Source line, read
+# Read+: as the ar5iv HTML rendering, 2026-10-06, Claude Opus 5.5.
+# Source: Liu, Zhu and Hu, "Constructing a Galactic coordinate system
+# Source+: based on near-infrared and radio catalogs", arXiv:1110.6268,
+# Source+: sec. 3.2, eq. (8) -- the absolute position of Sgr A*, referred
+# Source+: to the ICRS, derived by Reid and Brunthaler from Very Long
+# Source+: Baseline Array measurements: alpha = 17h 45m 40.0400s,
+# Source+: delta = -29 deg 00' 28.138". The layer below: Reid, M. J. and
+# Source+: Brunthaler, A. 2004, ApJ 616, 872.
+# Ref: https://ar5iv.arxiv.org/html/1110.6268
+# Note: added 2026-10-06 (L-420), the direction of the galactic centre
+# Note+: in the Star Background. The same paper's eq. (7) gives the point
+# Note+: the frame defines as galactic longitude zero, 17h 45m 37.1991s,
+# Note+: -28 deg 56' 10.221"; it lies on the plane of
+# Note+: GALACTIC_NORTH_POLE_RA_J2000_DEG to a hundred-millionth of a
+# Note+: degree, checked 2026-10-06, and Sgr A* sits 0.05 degrees from
+# Note+: it, far below anything the drawing shows. The ICRS and the
+# Note+: J2000 frame the orrery draws in differ by a few hundredths of an
+# Note+: arcsecond, also far below it.
+
+SGR_A_STAR_DEC_ICRS_ARCSEC = -104428.138
+# Unit: arcsec
+# Status: measured V_SOURCED 2026-10-06
+# Figures: 9 -- the source prints -29 deg 00' 28.138", to a thousandth
+# Figures+: of an arcsecond, which is exactly -104,428.138 arcseconds.
+# Read: as SGR_A_STAR_RA_ICRS_ARCSEC, 2026-10-06, Claude Opus 5.5.
+# Source: as SGR_A_STAR_RA_ICRS_ARCSEC.
+# Ref: https://ar5iv.arxiv.org/html/1110.6268
+# Note: stored in arcseconds because that is exact; in degrees it does
+# Note+: not end. Its companion is SGR_A_STAR_RA_ICRS_ARCSEC. The paper
+# Note+: prints no error bar for either.
+
+SGR_A_STAR_RA_ICRS_DEG = SGR_A_STAR_RA_ICRS_ARCSEC / ARCSEC_PER_DEG
+# Derived: Sgr A*'s right ascension in degrees, 959100.6 / 3600
+# Derived+: = 266.416833, to the row's nine figures
+# Unit: deg
+# Status: derived 2026-10-06 -- inherits SGR_A_STAR_RA_ICRS_ARCSEC,
+# Status+: ARCSEC_PER_DEG
+# Figures: 9 -- set by SGR_A_STAR_RA_ICRS_ARCSEC (959100.6, 9); the
+# Figures+: divisor is exact.
+# Note: drawn, never printed, so it carries no print count.
+
+SGR_A_STAR_DEC_ICRS_DEG = SGR_A_STAR_DEC_ICRS_ARCSEC / ARCSEC_PER_DEG
+# Derived: Sgr A*'s declination in degrees, -104428.138 / 3600
+# Derived+: = -29.0078161, to the row's nine figures
+# Unit: deg
+# Status: derived 2026-10-06 -- inherits SGR_A_STAR_DEC_ICRS_ARCSEC,
+# Status+: ARCSEC_PER_DEG
+# Figures: 9 -- set by SGR_A_STAR_DEC_ICRS_ARCSEC (-104428.138, 9); the
+# Figures+: divisor is exact.
 # Note: drawn, never printed, so it carries no print count.
 
 # The pole directions of the bodies the orrery draws with an axis, as ICRF
