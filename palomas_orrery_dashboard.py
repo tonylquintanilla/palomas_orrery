@@ -156,6 +156,10 @@ of Date, Solar System Drawer and Sun Shells. The seven Node checks run
 through the gallery's documentation/run_offline_check.py, which reads
 each command from the gallery runner's own list. The offline runner's
 description names the Solar System drawer, which it had left out.
+October 6, 2026 with Anthropic's Claude Opus 5.5 (L-300): added
+Collapsed Features under the gallery checks, in alphabetical place,
+for the checker the gallery runner gained that day; the offline
+runner's description names it.
 """
 
 import os
@@ -347,6 +351,7 @@ LAUNCH_GROUPS = {
         "one line each. Python: the cache builder suite, pole of date, "
         "the mirror suite, the store writer and store editor suites, "
         "the config mirror check, the pointer join, cache in step, the "
+        "collapsed-features sweep, the "
         "guest book updater, the Daily Run's steps, the artifact-1 "
         "assembler pin, and cache siblings (report only). Node: feature "
         "renderers, page framing, Sun shells, Earth scene geometry, "
@@ -417,6 +422,17 @@ LAUNCH_GROUPS = {
         "and held the only copy of 38 days of run history, now kept at "
         "documentation/cache_run_history/. Judge a copy by what is inside "
         "it, not by its name.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Collapsed Features",
+        "sweep_collapsed_features.py",
+        "Sorts every served feature group: a shell stored as itself, or a "
+        "known group collapsed into parallel lists (belts, rings), each "
+        "named. It exits 2 only on a group it cannot classify, which is "
+        "the case that should stop a push. GATES the gallery runner "
+        "(L-300). Runs from the gallery repo ROOT and changes nothing.",
         GALLERY_REPO_DIR,
         True,
         None,

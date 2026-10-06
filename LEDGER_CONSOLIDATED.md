@@ -243,6 +243,11 @@ Module updated: October 6, 2026 with Anthropic's Claude Opus 5.5
 (L-027 built: the panel colour restored as PANEL_BG = 'gray90';
 agentic-pre-test 1.3, protocol v3.83), built on patch_L420_3's tree
 over 51436054.
+Module updated: October 6, 2026 with Anthropic's Claude Opus 5.5
+(Earth's website patch built: L-349, L-379, L-300 and L-292 worked;
+L-369, L-415 and L-419 closed; L-421 opened, the typed facts;
+interactive-exhibit 1.12, protocol v3.84; L-349, L-300 closed on
+Tony's runs; Tony's look at L-420 recorded), built on e7073fce.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -460,7 +465,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*243 live items; 227 need attention (`!`); 181 RICE-scored; 172 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*239 live items; 223 need attention (`!`); 180 RICE-scored; 177 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -473,7 +478,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-237 | Artifact 1's golden record is stale and needs re-cutting | OPEN | 10.8 | 2026-09-10 |
 | ! | L-266 | Nothing checks that a cited link still resolves | OPEN | 9.0 | 2026-08-30 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
-| ! | L-300 | sweep_collapsed_features.py joins the gallery maintenance runner as a gating checker | OPEN | 8.1 | 2026-10-05 |
 | ! | L-340 | The exhibit store editor: what the first screenshot showed, and the Mode 5 pass | OPEN | 8.1 | 2026-09-22 |
 | ! | L-269 | A report names its items, not how many there are | OPEN | 6.0 | 2026-08-30 |
 | ! | L-245 | Constants drift check compares against the last COMMIT, not the last RUN | OPEN | 5.4 | 2026-08-25 |
@@ -561,7 +565,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-346 | A derived row with empty inputs is invisible to a walk by inputs (checks) | OPEN | -- | 2026-09-22 |
 | ! | L-347 | The page re-derives the bow shock standoff to draw its shape (gallery) | OPEN | -- | 2026-09-22 |
 | ! | L-348 | Derived rows outside Earth were counted, not propagated (store) | OPEN | -- | 2026-09-22 |
-| ! | L-349 | The inner belt's hover says "where the measured particle flux peaks" (words, Tony's) | OPEN | -- | 2026-10-05 |
 | ! | L-351 | Rules learned at C2, owed to the next bumps of their stores (skills, protocol) | OPEN | -- | 2026-10-04 |
 | ! | L-352 | The orrery's display sites format by fixed width, with no check reading them (orrery) | OPEN | -- | 2026-09-28 |
 | ! | L-353 | A count taken from a file's print resolution where a published error budget exists unopened (store) | OPEN | -- | 2026-09-22 |
@@ -579,7 +582,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-366 | An orbit's info marker describes an arbitrary point on the orbit (gallery, assembler) | OPEN | -- | 2026-09-26 |
 | ! | L-367 | No checker opens a new room (checks, gallery) | OPEN | -- | 2026-10-04 |
 | ! | L-368 | Other bodies' typed poles disagree with their cited table or cite a withdrawn report (orrery, store) | OPEN | -- | 2026-09-28 |
-| ! | L-369 | Earth's obliquity typed outside constants_new.py (orrery, store) | OPEN | -- | 2026-10-05 |
 | ! | L-370 | Jupiter and Saturn numbers typed only in objects_config.json (gallery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-371 | The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
 | ! | L-372 | Two drawing settings live in constants_new.py (orrery, store) | OPEN | -- | 2026-09-28 |
@@ -589,7 +591,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-376 | Other bodies' dipole-cone hovers: typed offsets and abbreviated radii (orrery, words) | OPEN | -- | 2026-09-28 |
 | ! | L-377 | The provenance scanner's proximity rule can count a string as cited by a neighbour's source (checks) | OPEN | -- | 2026-09-28 |
 | ! | L-378 | Phone behaviour of the rooms has no automated check (checks, gallery) | OPEN | -- | 2026-09-29 |
-| ! | L-379 | The recorded Earth scene payload is aging, and three checks patch it piece by piece (checks, gallery) | OPEN | -- | 2026-09-28 |
+| ! | L-379 | The recorded Earth scene payload is aging, and three checks patch it piece by piece (checks, gallery) | OPEN | -- | 2026-10-06 |
 | ! | L-380 | The gallery maintenance routine pulls the constants export after the cache build (gallery, routine) | OPEN | -- | 2026-09-28 |
 | ! | L-381 | The uncertainty field's pattern reads a sentence's full stop as a decimal point (export, checks) | OPEN | -- | 2026-09-28 |
 | ! | L-382 | Earth's magnetosphere costs about 42 percent more per orrery animation frame since D8 (orrery, rendering) | OPEN | -- | 2026-09-28 |
@@ -611,12 +613,11 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-410 | Fuzzy boundaries for edges known only as ranges, the outer corona first (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-05 |
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
 | ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-04 |
-| ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-04 |
+| ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-06 |
 | ! | L-414 | The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling) | OPEN | -- | 2026-10-04 |
-| ! | L-415 | A patch writes LF and reports: safe-file-editing 1.12 (skills) | OPEN | -- | 2026-10-04 |
-| ! | L-418 | Long skills open with their contents, and keep three version entries (skills) | OPEN | -- | 2026-10-05 |
-| ! | L-419 | A patch checks a file Tony annotates only at the lines it edits (patches, skills) | OPEN | -- | 2026-10-05 |
+| ! | L-418 | Long skills open with their contents, and keep three version entries (skills) | OPEN | -- | 2026-10-06 |
 | ! | L-420 | The galactic plane in the Celestial Grid, the galactic centre in the star background (orrery, sky) | OPEN | -- | 2026-10-06 |
+| ! | L-421 | Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words) | OPEN | -- | 2026-10-06 |
 
 ### B. Pending Action (Tony-side)
 
@@ -806,6 +807,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-260 | Sun exhibit finishing items: axis units and the phone | DONE | 8.1 | 2026-09-04 |
 |  | L-278 | A relayout from inside a Plotly event handler re-enters the update machinery | DONE | 8.1 | 2026-09-16 |
 |  | L-296 | Every design build earns a master plan version number | DONE | 8.1 | 2026-09-07 |
+|  | L-300 | sweep_collapsed_features.py joins the gallery maintenance runner as a gating checker | DONE | 8.1 | 2026-10-06 |
 |  | L-207 | The citation prompt -- the checker asks the fuzzy question | DONE | 7.6 | 2026-08-18 |
 |  | L-209 | ALFVEN_SURFACE_RADII -- origin mismatch, photosphere vs Sun centre | DONE | 7.6 | 2026-10-04 |
 |  | L-220 | A patch updates the body but not the anchor, date or description | DONE | 7.6 | 2026-08-20 |
@@ -921,8 +923,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-057 | Animation auto-scale-vs-shells + Phase 3 tier decision -- CLOSED | DONE | -- | 2026-06-11 |
 |  | L-223 | A paste into the ledger is an unverified transfer | DONE | -- | 2026-08-21 |
 |  | L-345 | Unit-conversion rows multiply by shell: rows per shell, or the export converts? (store, DONE 2026-09-28) | DONE | -- | 2026-09-28 |
+|  | L-349 | The inner belt's hover says "where the measured particle flux peaks" (words, Tony's) | DONE | -- | 2026-10-06 |
 |  | L-350 | The magnetotail's observed extent is served and shown nowhere (gallery) | DONE | -- | 2026-10-04 |
 |  | L-362 | The master plan's two summaries are a month behind the plan (documentation) | DONE | -- | 2026-09-28 |
+|  | L-369 | Earth's obliquity typed outside constants_new.py (orrery, store) | DONE | -- | 2026-10-06 |
 |  | L-383 | shell_configs.py's magnetosphere tooltip says nothing of the tail and puts the belts at the flux peak (orrery, words) | DONE | -- | 2026-10-04 |
 |  | L-384 | The scaling rule stops short of a single measured value scaled by an exact row (skills, store) | DONE | -- | 2026-09-28 |
 |  | L-389 | Earth's atmosphere shells are measured from the equatorial radius, and the crust now sits at the mean radius (store, Tony's eye) | DONE | -- | 2026-10-05 |
@@ -935,8 +939,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-406 | The galactic tide drawn in the galaxy's plane (orrery + gallery, the Sun's slice) | DONE | -- | 2026-10-04 |
 |  | L-407 | A skill's header is checked as YAML (orrery, skills) | DONE | -- | 2026-10-04 |
 |  | L-409 | The licenses: the orrery's recognized by GitHub, the website's written (orrery, gallery) | DONE | -- | 2026-10-04 |
+|  | L-415 | A patch writes LF and reports: safe-file-editing 1.12 (skills) | DONE | -- | 2026-10-06 |
 |  | L-416 | Every maintenance-run step has a dashboard button (dashboard, both repos) | DONE | -- | 2026-10-05 |
 |  | L-417 | The Skill headers check enforces Anthropic's documented limits (skills, checks) | DONE | -- | 2026-10-05 |
+|  | L-419 | A patch checks a file Tony annotates only at the lines it edits (patches, skills) | DONE | -- | 2026-10-06 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1077,43 +1083,37 @@ the orrery gets the same toggle is asked then; then the tide's look.
 gallery `data/objects_config.json`; L-228, L-371.
 
 
-#### [L-415] A patch writes LF and reports: safe-file-editing 1.12 (skills)
-<!-- L:415 status:OPEN upd:2026-10-04 section:A flag: rice: -->
-- **Asked 2026-10-04** by Tony, after patch_L413_1's test notes said a
-  CRLF copy of the ledger kept its CRLF: "why do we leave windows line
-  endings uncorrected. I thought the rule was to convert to lf when
-  found and report." He was right about the rule: LF is the standard
-  (L-026, L-133), and safe-file-editing's Fix In Passing lists "CRLF
-  where the repo is LF" as a violation to fix. Two other sections of
-  the same skill, Line Endings Are Not Content and Compare Content, Not
-  Bytes, said to write each file back in the style found, and that is
-  what the patch followed. The skill disagreed with itself.
-- **The preserve rule's reason, tested.** It said flipping a file's
-  endings shows every line changed in a git GUI. On a scratch repo with
-  `* text=auto eol=lf`, the setting both of this project's repos have
-  [verified @ orrery 41c1ca7a, gallery e7ef96eb]: a CRLF working copy
-  shows as modified with an empty diff, and writing it back LF clears
-  the mark. The reason holds only for a file whose COMMITTED copy is
-  CRLF.
-- **Tony's word, 2026-10-04:** "Yes", to bumping the skill now under A
-  Wrong Sentence in a Skill: Bump Now, or Carry It -- a session
-  following the old sentences writes CRLF back.
-- **Built in patch_L413_1:** safe-file-editing 1.11 -> 1.12 (a patch
-  writes LF and reports; a file committed CRLF keeps its endings, is
-  named, and waits for L-133's sweep); protocol v3.80. The patch itself
-  follows the new rule.
-- **The committed-CRLF files, measured** (`git ls-files --eol`,
-  `i/crlf`, at 41c1ca7a), 22: .gitignore, catalog_selection.py, create_cache_backups.py, data_acquisition.py, data_acquisition_distance.py, data_processing.py, formatting_utils.py, hr_diagram_apparent_magnitude.py, hr_diagram_distance.py, messier_object_data_handler.py, object_type_analyzer.py, planetarium_apparent_magnitude.py, planetarium_distance.py, report_manager.py, shutdown_handler.py, star_notes.py, star_properties.py, stellar_data_patches.py, stellar_parameters.py, visualization_2d.py, visualization_3d.py, visualization_core.py. These are L-133's.
-- **2026-10-04: L-133's sweep done the same session**
-  (`patch_L133_1`), so 1.12's exception for committed-CRLF files has
-  no instance left in the orrery. It stays in the skill: the gallery
-  repo, or a file added from elsewhere, can still meet it.
-**Gap:** Tony reinstalls safe-file-editing (Settings > Skills) and
-replaces the Project's instructions with v3.80. The next session
-confirms its loaded copy reads 1.12 before any patch work, then closes
-this item.
-**Ref:** skills/safe-file-editing/SKILL.md; PROJECT_INSTRUCTIONS.md;
-L-026; L-133; L-351.
+#### [L-421] Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words)
+<!-- L:421 status:OPEN upd:2026-10-06 section:A flag: rice: -->
+- **Found 2026-10-06**, on Tony's question: "where are the facts for the
+  info panel stored, the code itself? Shouldn't the data and sources use
+  the store?" Both rooms were built headless twice, once as served and
+  once with every served word replaced by a marker; a sentence still
+  present was typed. 17 found: 13 in Earth's room (the rotation axis,
+  the pole of date, the geostationary ring, the magnetopause, the bow
+  shock, the magnetotail, the belts, the day-night line, the Moon's arc,
+  the Sun direction) and 4 in the Sun's (the inner and outer Oort cloud,
+  the galactic tide, the streamer belt). Listed with a decision each in
+  `documentation/MANIFEST_L421_typed_facts_20261006.md`.
+- **Tony's ruling, the same day:** handled now, not backlogged -- "the
+  work is here. We should handle it now. What we are doing is working
+  to make the earth and sun slices complete, following the braid."
+  Claude had proposed a ledger row; the rooms are the current slice, so
+  that was the Braid read backwards. The plan, including where the
+  drawn guides' words go, "Approved as recommended"; its build moves to
+  a fresh session, "Confirmed as recommended".
+- **The rule** went into interactive-exhibit 1.12: code types only
+  sentences about the picture; a fact about nature, about a paper, or a
+  source is served with its feature's words.
+- **Its own question, not yet checked:** whether the citation in the
+  gallery's `data/objects_config.json` and the one in `constants_new.py`
+  agree for each served number. The checks compare the numbers.
+**Gap:** the build, from the manifest, in a fresh session; then Tony's
+look on the phone; then the survey as a gating check.
+**Ref:** L-413; L-349 (`flux_peak_of`, the first case); L-322 (the
+IGRF epoch, a class); gallery `gallery/feature_renderers.js`,
+`gallery/earth_geometry.js`, `data/objects_config.json`;
+skills/interactive-exhibit/SKILL.md.
 
 #### [L-420] The galactic plane in the Celestial Grid, the galactic centre in the star background (orrery, sky)
 <!-- L:420 status:OPEN upd:2026-10-06 section:A flag: rice: -->
@@ -1178,45 +1178,22 @@ L-026; L-133; L-351.
   - Where We Are was left alone: the website session owns it this
     round. Its lines are in
     `documentation/HANDOFF_L420_galactic_plane_20261006.md`.
-**Gap:** Tony runs patch_L420_2, patch_L420_3 and the maintenance run,
-pushes, and looks (Mode 5): the violet colour, the marker sizes, where
-the labels sit. Then close.
+- **Run and pushed at e7073fce, 2026-10-06.** Tony's look, from his run
+  record: "looks great. some issues: a) galactic tide is very faint
+  and the X is not discernible b) can we move the coordinate circle
+  descriptions to hovertext markers on the circles"; and on the
+  colour, sizes and labels, "looks good". Recorded by the website
+  session's closing patch; the two requests are this item's to work.
+**Gap:** Tony's two requests above, then close. (Was: Tony's runs and
+look.)
 **Ref:** `star_sphere_builder.py` (`build_galactic_grid`);
 `constants_new.py` (the galactic pole and Sgr A* rows);
 `palomas_orrery.py` (the two coordinate boxes, the four tooltips);
 `solar_visualization_shells.create_sun_galactic_tide`; L-406;
 `documentation/HANDOFF_L420_galactic_plane_20261006.md`.
 
-#### [L-419] A patch checks a file Tony annotates only at the lines it edits (patches, skills)
-<!-- L:419 status:OPEN upd:2026-10-05 section:A flag: rice: -->
-- **Tony's rule, 2026-10-03:** he writes his own notes into handoffs and
-  Where We Are (run records, pushed SHAs, comments) and will keep doing
-  so, so a patch checks those files only at the lines it edits, never by
-  a whole-file fingerprint ("wait, so i can't annotate the
-  documentation??").
-- **Broken 2026-10-05.** `patch_L413_3_session_close_20261005.py`
-  guarded `documentation/WHERE_WE_ARE.md` by a whole-file fingerprint
-  and refused, because Tony had marked two lines "-- done" and dated
-  the header. Tony: "i thought annotations would not be refused." The
-  rule lived only in an earlier patch's code and in Claude's memory, not
-  in a skill, so a later session did not have it.
-- **Repaired:** `patch_L413_4_session_close_20261005.py` checks only
-  that the file is the Where We Are it replaces, and carries every line
-  Tony changed into the session's handoff before rewriting the page.
-- **Written into the skill, 2026-10-05,** on Tony's word: "yes because
-  I am using our handoffs or the where we are as run records." Also
-  Tony: "I remember that I did annotate the where we are early in the
-  session so the patch found it that way."
-  `patch_L419_1_annotation_rule_20261005.py`: ledger-and-session-records
-  1.16, under Where We Are -- Tony's page; protocol v3.82.
-**Gap:** Tony runs the patch, reinstalls the skill and replaces the
-Project's instructions; the next session confirms its loaded copy
-reads 1.16.
-**Ref:** `patch_L413_1_ledger_sweep_and_earth_list_20261004.py`
-(ANCHOR_ONLY); L-396.
-
 #### [L-418] Long skills open with their contents, and keep three version entries (skills)
-<!-- L:418 status:OPEN upd:2026-10-05 section:A flag: rice: -->
+<!-- L:418 status:OPEN upd:2026-10-06 section:A flag: rice: -->
 - **Found 2026-10-05**, reviewing a Claude Sonnet 5.5 session's check of
   the skills against Anthropic's limits. Five skills are over
   Anthropic's 500-line guideline. Measured: a plain read of a long file
@@ -1251,14 +1228,16 @@ reads 1.16.
   because where a rule lives decides whether it fires.
 - **Run and pushed, 2026-10-05,** at orrery d9f47a87. Tony reinstalled
   the six skills and replaced the Project's instructions ("done").
-**Gap:** the next session confirms its six loaded copies read their new
-versions and open with their contents; then the split above, when a
-design talk reaches it.
+- **2026-10-06, versions confirmed.** The six loaded copies read
+  their new versions, open with their contents, and match the repo
+  byte for byte. The item stays open only for the split.
+**Gap:** the split above, when a design talk reaches it. (Was: also
+the next session's version check, done 2026-10-06.)
 **Ref:** `skills_index.py`; `documentation/SKILL_HISTORIES.md`;
 `documentation/HANDOFF_L413_earth_orrery_patch_20261005.md`; L-417.
 
 #### [L-413] Earth's list: the old Earth items, in the order Tony confirmed (Earth room)
-<!-- L:413 status:OPEN upd:2026-10-04 section:A flag: rice: -->
+<!-- L:413 status:OPEN upd:2026-10-06 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-04,** after a sweep of the open items
   that touch the Earth room, read against the code at orrery cbde99dc
   and gallery e7ef96eb, and checked against the Claude Fable 5.1 ledger
@@ -1327,8 +1306,19 @@ design talk reaches it.
   teal line refers to. otherwise correct." The line is in the
   "Ecliptic Coordinates (J2000)" box at the plot's left, a box and not
   a hover; the step had named it wrongly.
-**Gap:** Tony's look at that box; then the website patch; then the
-design talks in the order above.
+- **Tony's look at that box, 2026-10-05:** "beautiful" (L-369 closed).
+- **2026-10-06, the website patch built:**
+  `patch_L413_6_earth_website_20261006.py` (gallery) -- L-349, L-379
+  and L-300 as planned, the geocorona note (L-292), and three hovers
+  fitted to the phone's 17-line limit in Tony's approved changes.
+  Record: `documentation/HANDOFF_L413_earth_website_20261006.md`.
+  Run and pushed at gallery 38f1e7b0; Tony's look on the phone:
+  "correct".
+- **Added to the list, 2026-10-06:** L-421, the facts typed in the
+  rooms' code, on Tony's ruling that it is part of finishing the Earth
+  and Sun slices.
+**Gap:** L-421 from its manifest; then the design talks in the order
+above.
 **Ref:** L-412 (the Sun's list, which resumes after this); the handles
 above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 
@@ -1916,7 +1906,7 @@ the view opens at photosphere + 10% and what the axis does; Tony's eye.
 **Ref:** gallery `gallery_maintenance_run.py`; gallery `tools/gallery_cache_builder.py`; L-322.
 
 #### [L-379] The recorded Earth scene payload is aging, and three checks patch it piece by piece (checks, gallery)
-<!-- L:379 status:OPEN upd:2026-09-28 section:A flag: rice: -->
+<!-- L:379 status:OPEN upd:2026-10-06 section:A flag: rice: -->
 - **Found 2026-09-25, grown 2026-09-26.** Gallery
   `documentation/payload_earth_scene.json` was recorded 2026-09-08. It
   predates Earth's pole of date and the new magnetosphere, and still
@@ -1928,7 +1918,26 @@ the view opens at photosphere + 10% and what the axis does; Tony's eye.
   adds another overlay. [per chain]
 - Related, not the same: L-360 (the hover budget reads recorded
   payloads) and L-367 (no checker boots a new room).
-**Gap:** Recapture the payload from the current cache; the overlays then retire.
+- **2026-10-06, built** in gallery
+  `patch_L413_6_earth_website_20261006.py`. The new
+  `tools/record_earth_scene.py` runs the Earth room's own Python, read
+  out of `interactive.html`, against the served cache, and refuses to
+  write a recording missing the Sun direction, the Moon's arc or the
+  pole of date. Re-recorded from the cache of 2026-10-05; the overlays
+  in the geometry check and the hover budget are gone.
+- **What it uncovered:** measured on the live scene, the rotation axis
+  hover was 21 lines and the outer belt's 18, over the 17-line limit,
+  both already live. With Tony's approved changes of 2026-10-06 (the
+  axis's layout, no word changed; one shorter sentence on both belts)
+  all three tall hovers are 17.
+- **Not covered:** `documentation/payload_earth.json`, the older
+  fixture of the features alone, still ages; and the recorder may
+  duplicate `tools/headless/` (L-421's manifest asks).
+- **Run and pushed at gallery 38f1e7b0, 2026-10-06;** Tony's look:
+  "correct".
+**Gap:** `documentation/payload_earth.json`, the features-only fixture,
+when a build next opens it. (Was: recapture the payload; the
+overlays retire.)
 **Ref:** gallery `documentation/payload_earth_scene.json`; gallery `documentation/smoke_*.js`; L-360; L-367.
 
 #### [L-378] Phone behaviour of the rooms has no automated check (checks, gallery)
@@ -2124,35 +2133,6 @@ rest of the Sun's slice is ordered on L-412.
   purpose. [verified @2df02f3b]
 **Gap:** Jupiter's and Saturn's slices.
 **Ref:** gallery `data/objects_config.json`; L-231; L-322.
-
-#### [L-369] Earth's obliquity typed outside constants_new.py (orrery, store)
-<!-- L:369 status:OPEN upd:2026-10-05 section:A flag: rice: -->
-- **Found 2026-09-22.** The obliquity is typed by hand in five places
-  that do not read the store row: `star_sphere_builder.py` line 46
-  (`OBLIQUITY_DEG = 23.4393`); visitor text saying "23.4" in
-  `palomas_orrery.py` lines 5835, 8066 and 8884; and
-  `coordinate_system_guide.py` line 441. [verified @a7868eee; the
-  manifest's line numbers were from an older tree]
-- The store row itself is used correctly everywhere it is read
-  (protocol v3.69's entry).
-- **2026-10-04, all five still typed** [verified @ cbde99dc]:
-  `palomas_orrery.py` lines 5842, 8073 and 8891; `star_sphere_builder.py`
-  line 46; `coordinate_system_guide.py` line 441. Earth's list, item 2
-  (L-413).
-- **2026-10-05, built** in `patch_L413_2_earth_orrery_20261005.py`. The
-  plan to print "about 23.4" from the row could not stand:
-  `EARTH_OBLIQUITY_J2000_DEG` is the frame's defining angle, not
-  Earth's tilt, and provenance-discipline's Rule 7 lets no page round
-  a stored number on its own. Tony approved the words instead: the two
-  coordinate hovers, the Celestial Sphere tooltip and the coordinate
-  guide say "Earth's axial tilt", the hovers pointing at Earth's
-  rotation-axis hover for the angle of the date. `star_sphere_builder.py`
-  reads the frame angle from the store, where it typed a shorter copy.
-  Run and pushed at d9f47a87.
-**Gap:** Tony's look at the "Ecliptic Coordinates (J2000)" box at the
-plot's left, where the teal-circle line is. (Was: point each at the
-store row.)
-**Ref:** `constants_new.py`; `star_sphere_builder.py`; `palomas_orrery.py`; `coordinate_system_guide.py`.
 
 #### [L-368] Other bodies' typed poles disagree with their cited table or cite a withdrawn report (orrery, store)
 <!-- L:368 status:OPEN upd:2026-09-28 section:A flag: rice: -->
@@ -2892,41 +2872,6 @@ from L-404.
   - interactive-exhibit and the protocol: as above.
 **Gap:** Each lands with its store's next bump.
 **Ref:** skills/interactive-exhibit/SKILL.md; skills/ledger-and-session-records/SKILL.md; PROJECT_INSTRUCTIONS.md; L-216, L-363, L-371, L-390, L-414.
-
-#### [L-349] The inner belt's hover says "where the measured particle flux peaks" (words, Tony's)
-<!-- L:349 status:OPEN upd:2026-10-05 section:A flag: rice: -->
-- **Recorded, not built.** A class found while building L-322 Stage C2
-  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
-  Braid: it waits until the artifact on the critical path reaches it.
-- The OUTER belt's version of this line was replaced at C2-b with the
-  words Tony approved on 2026-09-22, because its drawn distance became a
-  declared midpoint. The INNER belt keeps the line. Whether its drawn
-  1.5 Earth radii is a measured peak or a declared pick is a question
-  about its store row; the wording, once that is known, is Tony's.
-- **2026-10-05, the row read and the words ruled.**
-  `EARTH_VAN_ALLEN_INNER_RADII` is MEASURED, not a declared pick:
-  Baker et al. (2018) sec. 2, inner-zone PROTON fluxes peak NEAR
-  geocentric r ~ 1.5 R_E, read from the open full text on 2026-09-21.
-  So the claim stands and three words tighten. Tony, "Confirmed as
-  recommended":
-  - website hover: "Drawn at 1.5 Earth radii from Earth's centre, at
-    the magnetic equator: near where the measured flux of trapped
-    protons is greatest."
-  - orrery hover: "...and the brighter ring is near the measured
-    proton flux peak, 1.5 Earth radii from Earth's centre..."
-  - orrery tooltip: "Inner Van Allen Belt: trapped protons, drawn near
-    their measured flux peak, 1.5 Earth radii out (Baker et al. 2018)."
-- **Found:** the website's sentence is generic. It prints "where the
-  measured particle flux peaks" for any belt with no band, Jupiter's
-  included, whose distances (1.5, 3 and 6) are typed with no source
-  (L-181). The website patch prints the measured wording only for a
-  belt whose row has a source. The approved words name protons, true
-  of this belt only, so how the renderer knows that is that patch's
-  first question.
-- **Orrery side built** in `patch_L413_2_earth_orrery_20261005.py`, run
-  and pushed at d9f47a87; Tony's look: correct.
-**Gap:** the website side, in Earth's website patch (L-413).
-**Ref:** L-330; gallery `gallery/feature_renderers.js::renderBelts`; `documentation/NOTE_L322_C2b_gallery_words_20260922.md`.
 
 #### [L-348] Derived rows outside Earth were counted, not propagated (store)
 <!-- L:348 status:OPEN upd:2026-09-22 section:A flag: rice: -->
@@ -8464,6 +8409,9 @@ interactive.html.
   candidate for a fuzzy boundary (L-410). The GPS shell and Earth's
   Roche limit stay parked here.
   Run and pushed at d9f47a87; Tony's look: correct.
+- **2026-10-06:** the website's geocorona note no longer says the
+  orrery has no shell of its own (gallery
+  `patch_L413_6_earth_website_20261006.py`).
 **Gap:** the GPS shell and Earth's Roche limit, when a build has the
 file open. (Was: the orrery's shell at `EARTH_GEOCORONA_RADII`; the
 other two when a build already has the file open.)
@@ -8646,34 +8594,6 @@ orrery-coding-conventions session opens; then the per-body slices.
 **Ref:** L-291, orrery-coding-conventions SKILL.md, provenance-discipline
 SKILL.md ("A Breadcrumb Must Not Cite" -- the Source line must be TRUE,
 so it is scoped).
-
-#### [L-300] sweep_collapsed_features.py joins the gallery maintenance runner as a gating checker
-<!-- L:300 status:OPEN upd:2026-10-05 section:A flag: rice:3/3/90/1 -->
-- **Tony's question, 2026-09-07:** runner or dashboard? **Ruling, on
-  Claude's recommendation: the runner, gating.** The script already has
-  the right shape: it exits 2 only on a feature group it cannot classify
-  -- exactly the case that should stop a push -- and a non-zero
-  collapsed count exits 0 and prints the names, so the sixteen known
-  items report without gating. A check in a store nobody opens cannot
-  fail; the runner is the store that gets opened.
-- Earth's step 2 splits the magnetosphere into four served rows, which
-  retires four of L-268's sixteen; with the sweep in the routine, that
-  delta appears by name the day it lands.
-- **2026-10-04.** The script is in the gallery's ROOT folder, not
-  `tools/` as the Ref said; the new row's working folder is ".".
-  Run on gallery e7ef96eb: exit 0, "33 stored as themselves, 16
-  collapsed, 0 unclassified" -- Earth's two belts, Jupiter's three belts
-  and four rings, Saturn's seven rings. So registering it cannot turn
-  the run red today. **Placed by Tony's order of 2026-10-04 in Earth's
-  website patch (L-413),** which ends with a gallery maintenance run
-  anyway; it adds the runner's file to that patch.
-- **2026-10-05:** when the sweep is registered, it also gets a dashboard
-  button (L-416, closed, every step of both runs has one).
-**Gap:** one small patch to `gallery_maintenance_run.py` registering the
-checker; then a run to confirm it appears in the CHECKERS list with its
-verdict line. Rides L-413's website patch.
-**Ref:** L-268, gallery `sweep_collapsed_features.py` (root folder),
-`gallery_maintenance_run.py`; L-413.
 
 #### [L-307] Export-age reporting for the static cards that are not migrating
 <!-- L:307 status:OPEN upd:2026-09-08 section:A flag: rice:3/3/70/2 -->
@@ -19818,6 +19738,185 @@ that registers it; that leftover is on L-300.
   passed on Tony's maintenance run.
 **Gap:** none.
 **Ref:** `skills_index.py`; L-407; L-418.
+
+#### [L-300] sweep_collapsed_features.py joins the gallery maintenance runner as a gating checker
+<!-- L:300 status:DONE upd:2026-10-06 section:C flag: rice:3/3/90/1 -->
+- **Tony's question, 2026-09-07:** runner or dashboard? **Ruling, on
+  Claude's recommendation: the runner, gating.** The script already has
+  the right shape: it exits 2 only on a feature group it cannot classify
+  -- exactly the case that should stop a push -- and a non-zero
+  collapsed count exits 0 and prints the names, so the sixteen known
+  items report without gating. A check in a store nobody opens cannot
+  fail; the runner is the store that gets opened.
+- Earth's step 2 splits the magnetosphere into four served rows, which
+  retires four of L-268's sixteen; with the sweep in the routine, that
+  delta appears by name the day it lands.
+- **2026-10-04.** The script is in the gallery's ROOT folder, not
+  `tools/` as the Ref said; the new row's working folder is ".".
+  Run on gallery e7ef96eb: exit 0, "33 stored as themselves, 16
+  collapsed, 0 unclassified" -- Earth's two belts, Jupiter's three belts
+  and four rings, Saturn's seven rings. So registering it cannot turn
+  the run red today. **Placed by Tony's order of 2026-10-04 in Earth's
+  website patch (L-413),** which ends with a gallery maintenance run
+  anyway; it adds the runner's file to that patch.
+- **2026-10-05:** when the sweep is registered, it also gets a dashboard
+  button (L-416, closed, every step of both runs has one).
+- **2026-10-06, built:** the "Collapsed features" checker, in gallery
+  `patch_L413_6_earth_website_20261006.py`, gating, its verdict the
+  count line ("33 stored as themselves, 16 collapsed, 0
+  unclassified."); the run counts 24. Its dashboard button,
+  "Collapsed Features", in orrery
+  `patch_L413_7_session_close_20261006.py`.
+- **Run and pushed at gallery 38f1e7b0:** "PASS Collapsed features
+  ... 33 stored as themselves, 16 collapsed, 0 unclassified", 24 of
+  24. Closed with the button's patch.
+**Gap:** none. (Was: register the checker.)
+**Ref:** L-268, gallery `sweep_collapsed_features.py` (root folder),
+`gallery_maintenance_run.py`; L-413.
+
+#### [L-349] The inner belt's hover says "where the measured particle flux peaks" (words, Tony's)
+<!-- L:349 status:DONE upd:2026-10-06 section:C flag: rice: -->
+- **Recorded, not built.** A class found while building L-322 Stage C2
+  (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
+  Braid: it waits until the artifact on the critical path reaches it.
+- The OUTER belt's version of this line was replaced at C2-b with the
+  words Tony approved on 2026-09-22, because its drawn distance became a
+  declared midpoint. The INNER belt keeps the line. Whether its drawn
+  1.5 Earth radii is a measured peak or a declared pick is a question
+  about its store row; the wording, once that is known, is Tony's.
+- **2026-10-05, the row read and the words ruled.**
+  `EARTH_VAN_ALLEN_INNER_RADII` is MEASURED, not a declared pick:
+  Baker et al. (2018) sec. 2, inner-zone PROTON fluxes peak NEAR
+  geocentric r ~ 1.5 R_E, read from the open full text on 2026-09-21.
+  So the claim stands and three words tighten. Tony, "Confirmed as
+  recommended":
+  - website hover: "Drawn at 1.5 Earth radii from Earth's centre, at
+    the magnetic equator: near where the measured flux of trapped
+    protons is greatest."
+  - orrery hover: "...and the brighter ring is near the measured
+    proton flux peak, 1.5 Earth radii from Earth's centre..."
+  - orrery tooltip: "Inner Van Allen Belt: trapped protons, drawn near
+    their measured flux peak, 1.5 Earth radii out (Baker et al. 2018)."
+- **Found:** the website's sentence is generic. It prints "where the
+  measured particle flux peaks" for any belt with no band, Jupiter's
+  included, whose distances (1.5, 3 and 6) are typed with no source
+  (L-181). The website patch prints the measured wording only for a
+  belt whose row has a source. The approved words name protons, true
+  of this belt only, so how the renderer knows that is that patch's
+  first question.
+- **Orrery side built** in `patch_L413_2_earth_orrery_20261005.py`, run
+  and pushed at d9f47a87; Tony's look: correct.
+- **2026-10-06, the website side built** in gallery
+  `patch_L413_6_earth_website_20261006.py`. The renderer prints
+  "measured" only for a belt whose row has a source, and names the
+  particles from a new served parallel list, `flux_peak_of`
+  ("trapped protons" for the inner belt), on Claude's recommendation
+  and Tony's frame: the facts and sources come from the store, "not
+  from the code". Jupiter's three belts make no claim. Tested whole:
+  24 of 24.
+- **Run and pushed at gallery 38f1e7b0, 2026-10-06:** 24 of 24 after
+  the cache build. Tony's look on the phone: "correct". Jupiter's
+  inner belt is in no website room yet ("Jupiter inner belt not in
+  the room yet. correct in the orrery."); its website words are held
+  by the hover fixture until a Jupiter room draws them. Closed.
+**Gap:** none. (Was: the website side.)
+**Ref:** L-330; gallery `gallery/feature_renderers.js::renderBelts`; `documentation/NOTE_L322_C2b_gallery_words_20260922.md`.
+
+#### [L-369] Earth's obliquity typed outside constants_new.py (orrery, store)
+<!-- L:369 status:DONE upd:2026-10-06 section:C flag: rice: -->
+- **Found 2026-09-22.** The obliquity is typed by hand in five places
+  that do not read the store row: `star_sphere_builder.py` line 46
+  (`OBLIQUITY_DEG = 23.4393`); visitor text saying "23.4" in
+  `palomas_orrery.py` lines 5835, 8066 and 8884; and
+  `coordinate_system_guide.py` line 441. [verified @a7868eee; the
+  manifest's line numbers were from an older tree]
+- The store row itself is used correctly everywhere it is read
+  (protocol v3.69's entry).
+- **2026-10-04, all five still typed** [verified @ cbde99dc]:
+  `palomas_orrery.py` lines 5842, 8073 and 8891; `star_sphere_builder.py`
+  line 46; `coordinate_system_guide.py` line 441. Earth's list, item 2
+  (L-413).
+- **2026-10-05, built** in `patch_L413_2_earth_orrery_20261005.py`. The
+  plan to print "about 23.4" from the row could not stand:
+  `EARTH_OBLIQUITY_J2000_DEG` is the frame's defining angle, not
+  Earth's tilt, and provenance-discipline's Rule 7 lets no page round
+  a stored number on its own. Tony approved the words instead: the two
+  coordinate hovers, the Celestial Sphere tooltip and the coordinate
+  guide say "Earth's axial tilt", the hovers pointing at Earth's
+  rotation-axis hover for the angle of the date. `star_sphere_builder.py`
+  reads the frame angle from the store, where it typed a shorter copy.
+  Run and pushed at d9f47a87.
+- **Tony's look, 2026-10-05:** the "Ecliptic Coordinates (J2000)"
+  box showed the new teal-circle line; Tony: "beautiful". Closed
+  2026-10-06.
+**Gap:** none. (Was: Tony's look at that box.)
+**Ref:** `constants_new.py`; `star_sphere_builder.py`; `palomas_orrery.py`; `coordinate_system_guide.py`.
+
+#### [L-415] A patch writes LF and reports: safe-file-editing 1.12 (skills)
+<!-- L:415 status:DONE upd:2026-10-06 section:C flag: rice: -->
+- **Asked 2026-10-04** by Tony, after patch_L413_1's test notes said a
+  CRLF copy of the ledger kept its CRLF: "why do we leave windows line
+  endings uncorrected. I thought the rule was to convert to lf when
+  found and report." He was right about the rule: LF is the standard
+  (L-026, L-133), and safe-file-editing's Fix In Passing lists "CRLF
+  where the repo is LF" as a violation to fix. Two other sections of
+  the same skill, Line Endings Are Not Content and Compare Content, Not
+  Bytes, said to write each file back in the style found, and that is
+  what the patch followed. The skill disagreed with itself.
+- **The preserve rule's reason, tested.** It said flipping a file's
+  endings shows every line changed in a git GUI. On a scratch repo with
+  `* text=auto eol=lf`, the setting both of this project's repos have
+  [verified @ orrery 41c1ca7a, gallery e7ef96eb]: a CRLF working copy
+  shows as modified with an empty diff, and writing it back LF clears
+  the mark. The reason holds only for a file whose COMMITTED copy is
+  CRLF.
+- **Tony's word, 2026-10-04:** "Yes", to bumping the skill now under A
+  Wrong Sentence in a Skill: Bump Now, or Carry It -- a session
+  following the old sentences writes CRLF back.
+- **Built in patch_L413_1:** safe-file-editing 1.11 -> 1.12 (a patch
+  writes LF and reports; a file committed CRLF keeps its endings, is
+  named, and waits for L-133's sweep); protocol v3.80. The patch itself
+  follows the new rule.
+- **The committed-CRLF files, measured** (`git ls-files --eol`,
+  `i/crlf`, at 41c1ca7a), 22: .gitignore, catalog_selection.py, create_cache_backups.py, data_acquisition.py, data_acquisition_distance.py, data_processing.py, formatting_utils.py, hr_diagram_apparent_magnitude.py, hr_diagram_distance.py, messier_object_data_handler.py, object_type_analyzer.py, planetarium_apparent_magnitude.py, planetarium_distance.py, report_manager.py, shutdown_handler.py, star_notes.py, star_properties.py, stellar_data_patches.py, stellar_parameters.py, visualization_2d.py, visualization_3d.py, visualization_core.py. These are L-133's.
+- **2026-10-04: L-133's sweep done the same session**
+  (`patch_L133_1`), so 1.12's exception for committed-CRLF files has
+  no instance left in the orrery. It stays in the skill: the gallery
+  repo, or a file added from elsewhere, can still meet it.
+- **2026-10-06, confirmed and closed.** The session's loaded copy read
+  safe-file-editing 1.13, which carries 1.12's rule unchanged, byte for
+  byte the repo's copy.
+**Gap:** none.
+**Ref:** skills/safe-file-editing/SKILL.md; PROJECT_INSTRUCTIONS.md;
+L-026; L-133; L-351.
+
+#### [L-419] A patch checks a file Tony annotates only at the lines it edits (patches, skills)
+<!-- L:419 status:DONE upd:2026-10-06 section:C flag: rice: -->
+- **Tony's rule, 2026-10-03:** he writes his own notes into handoffs and
+  Where We Are (run records, pushed SHAs, comments) and will keep doing
+  so, so a patch checks those files only at the lines it edits, never by
+  a whole-file fingerprint ("wait, so i can't annotate the
+  documentation??").
+- **Broken 2026-10-05.** `patch_L413_3_session_close_20261005.py`
+  guarded `documentation/WHERE_WE_ARE.md` by a whole-file fingerprint
+  and refused, because Tony had marked two lines "-- done" and dated
+  the header. Tony: "i thought annotations would not be refused." The
+  rule lived only in an earlier patch's code and in Claude's memory, not
+  in a skill, so a later session did not have it.
+- **Repaired:** `patch_L413_4_session_close_20261005.py` checks only
+  that the file is the Where We Are it replaces, and carries every line
+  Tony changed into the session's handoff before rewriting the page.
+- **Written into the skill, 2026-10-05,** on Tony's word: "yes because
+  I am using our handoffs or the where we are as run records." Also
+  Tony: "I remember that I did annotate the where we are early in the
+  session so the patch found it that way."
+  `patch_L419_1_annotation_rule_20261005.py`: ledger-and-session-records
+  1.16, under Where We Are -- Tony's page; protocol v3.82.
+- **2026-10-06, confirmed and closed.** The session's loaded copy read
+  ledger-and-session-records 1.16, byte for byte the repo's copy.
+**Gap:** none.
+**Ref:** `patch_L413_1_ledger_sweep_and_earth_list_20261004.py`
+(ANCHOR_ONLY); L-396.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

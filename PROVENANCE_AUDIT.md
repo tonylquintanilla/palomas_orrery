@@ -2,9 +2,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: October 06, 2026
-Files scanned: 145
-Total findings: 1096
-Constants: 174 | Dicts: 46 | Display strings: 876
+Files scanned: 142
+Total findings: 1094
+Constants: 174 | Dicts: 44 | Display strings: 876
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,21 +20,16 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20261006T184704Z | `e7073fc` | 142 | 1094 | 296 | 675 | 121 | 2 |
 | 20261006T163329Z | `5143605` | 145 | 1096 | 298 | 675 | 121 | 2 |
 | 20261005T230218Z | `d9f47a8` | 142 | 1092 | 296 | 673 | 121 | 2 |
 | 20261005T213703Z | `72e3b55` | 143 | 1093 | 296 | 673 | 122 | 2 |
 | 20261005T161059Z | `41c1ca7` | 144 | 1095 | 298 | 677 | 118 | 2 |
 | 20261005T011351Z | `d7f2a59` | 143 | 1094 | 297 | 677 | 118 | 2 |
-| 20261004T213259Z | `e38b86a` | 144 | 1094 | 298 | 676 | 118 | 2 |
 
-Change since the previous run: total +4, Tier-1 +2.
+Change since the previous run: total -2, Tier-1 -2.
 
-Tier-1 rose in these files:
-
-| File | Before | After |
-|------|-------:|------:|
-| patch_L027_1_panel_colour_20261006.py | 0 | 1 |
-| patch_L420_2_galactic_plane_and_centre_20261006.py | 0 | 1 |
+No file's Tier-1 count rose.
 
 ---
 
@@ -65,7 +60,7 @@ Tier-1 rose in these files:
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 298 |
+| 1 | 16-20 | FIX NOW | 296 |
 | 2 | 10-15 | REVIEW | 675 |
 | 3 | 5-9 | LOW PRIORITY | 121 |
 | 4 | 1-4 | LOWEST PRIORITY | 2 |
@@ -149,8 +144,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `worksheet_request_builder.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `orbital_elements.py` | orrery | 1 | 0 | 0 | 0 | 1 |
-| `patch_L027_1_panel_colour_20261006.py` | orrery | 1 | 0 | 0 | 0 | 1 |
-| `patch_L420_2_galactic_plane_and_centre_20261006.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `data_acquisition.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `exoplanet_orbits.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `fetch_paleoclimate_data.py` | earth_science | 1 | 0 | 0 | 0 | 1 |
@@ -179,7 +172,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 51 | 135 | 559 | 71 | 2 | 767 |
+| Orrery (solar system + orbital mechanics) | 49 | 133 | 559 | 71 | 2 | 765 |
 | Earth System | 13 | 149 | 75 | 2 | 0 | 226 |
 | Stars (stellar neighborhood) | 11 | 12 | 41 | 6 | 0 | 59 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 42 | 0 | 42 |
@@ -194,8 +187,6 @@ Same data again, grouped by subject-matter domain rather than by individual file
 - `export_constants.py`
 - `export_objects.py`
 - `orrery_maintenance_run.py`
-- `patch_L027_1_panel_colour_20261006.py`
-- `patch_L420_2_galactic_plane_and_centre_20261006.py`
 - `test_dimensions.py`
 - `worksheet_checker.py`
 - `worksheet_key_aliases.py`
@@ -627,18 +618,6 @@ is planned for a future session.
 | 2174 | string | display string @ line 2174 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2197 | string | display string @ line 2197 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2332 | string | display string @ line 2332 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-
-### patch_L027_1_panel_colour_20261006.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 67 | dict | BASE[...] | (4 entries) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
-
-### patch_L420_2_galactic_plane_and_centre_20261006.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 72 | dict | BASE[...] | (3 entries) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
 
 ### planet_visualization_utilities.py
 
@@ -1895,10 +1874,10 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 188 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 189 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 1284 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 1415 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 192 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 193 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 1300 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 1431 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### planet_visualization_utilities.py
 

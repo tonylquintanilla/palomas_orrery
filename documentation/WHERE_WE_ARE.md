@@ -1,39 +1,39 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, rewritten in place; read it at the end of every session. -->
 # Where We Are
 
-Last updated: October 5, 2026, end of the session held mostly from
-your phone.
-- Written at orrery d9f47a87 and gallery ed48d078, after your runs.
+Last updated: October 6, 2026, end of the Earth website session.
+- Written at orrery e7073fce and gallery 38f1e7b0, after your runs of
+  the website patch and of the galactic-plane and panel-colour patches.
 
 > **READ THIS FIRST**
 >
 > **Changed this session:**
-> - Earth's orrery patch is in: the geocorona has its own shell,
->   Earth's tilt is said in words where "23.4" was typed, and the inner
->   belt's words say "near the measured proton flux peak", as you ruled.
-> - The atmosphere and low Earth orbit heights stay measured from the
->   equatorial radius, as you clarified. Notes on those rows now say why.
-> - Every step of both maintenance runs gets a dashboard button: eleven
->   new ones.
-> - The skill check now enforces Anthropic's written limits on a
->   skill's name and description.
-> - Six long skills now open with a list of their contents, kept true by
->   that check, and their old history moved to its own file.
->   provenance-discipline's rules now come before its long procedures.
-> - The check of the object list against JPL Horizons has its own
->   handoff, for a fresh session.
-> - Your notes in this page, the handoffs and the ledger are protected
->   by a written rule now: a patch checks only the lines it edits.
+> - Earth's website patch is live, and your look on the phone found it
+>   correct. The inner belt says "trapped protons", in your words, and
+>   Jupiter's belts no longer claim a measured distance.
+> - The saved Earth scene the checks use is re-recorded from the real
+>   data, with a tool that can remake it. That showed two hovers on the
+>   live site were already too tall for the phone; with your approved
+>   changes all three tall ones fit.
+> - A search of both rooms found 17 facts typed in the code instead of
+>   served with their sources. You ruled they are fixed now, as part of
+>   finishing the Earth and Sun rooms. The plan is written down for a
+>   fresh session.
+> - A written rule now says code may type only words about our picture;
+>   facts, papers and sources are served.
+> - In the orrery, from a session of its own: the Celestial Grid draws
+>   the galactic plane, a violet circle, with its poles, and the Star
+>   Background marks Sagittarius A*, the galaxy's centre.
+> - The desktop orrery opens on Linux and macOS again: its panels use
+>   one grey, gray90, that every system knows.
 >
 > **Do next:**
-> - *The website patch for Earth, or the Horizons design round, in the
->   order you choose.*
+> - *The typed facts, in a fresh session, from the plan written today.*
 >
 > **Needs you now:**
-> - *Look at the "Ecliptic Coordinates (J2000)" box at the plot's left:
->   its teal-circle line. The rest of your look was correct.*
-> - *Run the skill patch, reinstall ledger-and-session-records, and
->   replace the Project's instructions with v3.82.*
+> - *Run this closing patch in the orrery repo, reinstall
+>   interactive-exhibit, and replace the Project's instructions with
+>   v3.84.*
 
 How to read the marks:
 - *Italic* lines are the must-reads.
@@ -68,76 +68,77 @@ How to read the marks:
               planets, a drawer to pick them, and a way into each
               body's own room.
   5. [NOW]    *Earth's old items are finished, in the order you
-              confirmed.* << this session: the orrery patch is built;
-              the website patch and the design talks remain.
-  6. [next]   The Sun's numbers get the same checking Earth's got: the
+              confirmed.* << this session: the website patch is live;
+              the typed facts are the last part, with the design talks.
+  6. [next]   The facts typed in the Earth and Sun rooms' code move into
+              the served data, with their sources. << new this session
+  7. [next]   The Sun's numbers get the same checking Earth's got: the
               Sun's list, from its opening view.
-  7. [next]   The served objects are checked against JPL Horizons, the
+  8. [next]   The served objects are checked against JPL Horizons, the
               way the numbers are checked against their sources.
-              << new this session: moved up from "not urgent", because
-              it verifies what the website already serves.
-  8. [next]   The website's checks get a short list of their own, so a
+  9. [next]   The website's checks get a short list of their own, so a
               new room or a moved front door can't break unnoticed.
-  9. [next]   A bare interactive.html link opens the Solar System room,
+ 10. [next]   A bare interactive.html link opens the Solar System room,
               and the Explorer gets its own address. The lobby's wide
               Solar System card, its first half, is done.
- 10. [later]  The rest of the orrery's objects come to the website --
+ 11. [later]  The rest of the orrery's objects come to the website --
               dwarf planets, asteroids, moons -- through the same
               connection that now carries the room's eleven bodies,
               checked against JPL Horizons.
- 11. [later]  Encounters: comets and spacecraft shown at the dates
+ 12. [later]  Encounters: comets and spacecraft shown at the dates
               that matter.
- 12. [later]  The planets get their details -- layers, rings, magnetic
+ 13. [later]  The planets get their details -- layers, rings, magnetic
               fields -- Jupiter and Saturn first.
- 13. [goal]   The website does what the desktop orrery does, from data
+ 14. [goal]   The website does what the desktop orrery does, from data
               fetched from JPL each night, with a date to choose and
               time to play within the range the data covers.
 
 ## Right now  **>> UPDATED THIS SESSION**
 
-- Earth's orrery patch is in, and your look found it correct.
-  - A new checkbox, "-- Exosphere (Geocorona)", draws a faint shell at
-    100 Earth radii, in the website's colour, with the words you
-    approved.
-  - The two coordinate hovers, the Celestial Sphere tooltip and the
-    coordinate guide say "Earth's axial tilt" instead of typing 23.4.
-    Earth's rotation-axis hover already gives the angle for the date.
-  - The Upper Atmosphere tooltip said the layer reaches 1,000 km; it
-    now shows the hover's words, which say 600 km, the height drawn.
-- The website still says the inner belt sits "where the measured
-  particle flux peaks", and it says the same of Jupiter's belts, whose
-  distances have no source. The website patch fixes both.
-- The skills: each long one opens with its contents, and the check
-  fails if a list stops matching its headings. Five skills are still
-  longer than Anthropic's 500-line guideline; splitting
-  provenance-discipline's two long procedures into separate files is
-  recorded, not scheduled.
-- This chat cannot reach JPL. The Horizons check will run on your
-  machine, unless you allow JPL in this chat's network settings.
-- My closing patch refused to rewrite this page because of your
-  "-- done" marks. That broke your rule that you can annotate the
-  documents; the new closing patch keeps your notes instead.
-- The ledger holds 242 open items: L-418 and L-419 opened; L-389, L-416
-  and L-417 closed.
+- Earth's website patch is live: 24 of 24 checks after the cache build,
+  and your look on the phone found it correct.
+  - The inner belt reads in your approved words, and the word
+    "protons" comes from the served data, not the code.
+  - Jupiter's three belts say only where they are drawn.
+  - The geocorona note no longer says the orrery lacks its shell.
+  - The collapsed-features check now runs in the website's maintenance
+    run, so it counts 24, with its own dashboard button.
+- The saved Earth scene was five weeks old. A new tool remakes it the
+  way the page makes it, and the checks now see the live site as it is.
+  - Seen that way, the rotation axis hover was 21 lines and the outer
+    belt's 18, on the live site, over the phone's 17-line limit.
+  - Your approved changes bring all three tall hovers to 17: the axis's
+    layout, and one shorter sentence on both belts.
+- The 17 typed facts: 13 in Earth's room, 4 in the Sun's. Most are
+  already backed by a served source and only need moving; six need a
+  source found and read, or removal with the gap noted.
+- Jupiter's inner belt isn't in a website room yet, so its new words
+  wait for a Jupiter room; the orrery's are correct, as you saw.
+- The galactic plane in the orrery is in, and you found it good. Your
+  two requests are recorded with it: the galactic tide is very faint
+  and its X can't be made out, and the coordinate circles' descriptions
+  could move to hover markers on the circles.
+- The panels' grey: a shade darker than before, the grey of January to
+  June. A look on Windows, and a run on a Mac when convenient.
+- The skill copies this session loaded all matched the repo, and the
+  ones you reinstalled read their new versions.
 
 ## The next three steps  **>> UPDATED THIS SESSION**
 
-1. *Your look at the coordinate box's teal-circle line.*
-2. Earth's website patch, then your look on the phone.
-   - The inner belt's words, and no "measured" claim for Jupiter's.
-   - The geocorona note corrected.
-   - The saved Earth test scene re-recorded from today's data.
-   - The collapsed-features check added to the website's maintenance
-     run, with its own button.
-3. The Horizons check: a design round first, in a fresh session, from
+1. *Your run of this closing patch, and the reinstall.*
+2. The typed facts move into the served data, in a fresh session, from
+   `documentation/MANIFEST_L421_typed_facts_20261006.md`.
+3. The Horizons check's design round, in its own session, from
    `documentation/HANDOFF_L395_horizons_check_design_20261005.md`.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Now:
-- The coordinate box's teal-circle line, in the orrery.
-- Run patch_L419_1, reinstall ledger-and-session-records, and replace
-  the Project's instructions with PROJECT_INSTRUCTIONS.md, now v3.82.
+- Run this closing patch, run orrery_maintenance_run.py, commit and
+  push.
+- Reinstall interactive-exhibit (1.12) and replace the Project's
+  instructions with PROJECT_INSTRUCTIONS.md, now v3.84.
+- A look at the orrery's panels on Windows; a Mac run when convenient.
 
 At the Horizons design round:
 - What Horizons can confirm, what counts as agreement, where the check
@@ -168,16 +169,21 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item, done and open: `LEDGER_CONSOLIDATED.md`
-  - This session: L-413 (Earth's list, the orrery patch), L-418 (the
-    skills' contents and histories), L-419 (your notes in documents),
-    L-395 (the Horizons check moved up). Closed: L-389, L-416 (dashboard
-    buttons), L-417 (the skill limits).
-- Your run record for this session:
-  `documentation/WHERE_WE_ARE_10-5-26_1627_run_record.md`
-  - The Sun's list: L-412.
+  - This session: L-413 (Earth's list), L-349 (the belt's words),
+    L-379 (the saved scene), L-300 (the collapsed-features check), L-292
+    (the geocorona note), L-421 (the typed facts, opened). Closed: L-349
+    (the belt's words), L-300 (the collapsed-features check), L-369
+    (Earth's tilt in words), L-415 and L-419 (skill rules confirmed).
+  - L-418 stays open only for splitting provenance-discipline's two
+    long procedures into their own files.
+  - The galactic plane: L-420; the panel colour: L-027; their record:
+    `documentation/HANDOFF_L420_galactic_plane_20261006.md`.
+- The plan for the typed facts:
+  `documentation/MANIFEST_L421_typed_facts_20261006.md`
+- This session's record:
+  `documentation/HANDOFF_L413_earth_website_20261006.md`
 - The skills' old version history: `documentation/SKILL_HISTORIES.md`
 - The reasoning behind the order:
   `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`
-- The latest session records:
-  `documentation/HANDOFF_L413_earth_orrery_patch_20261005.md`, and for
-  the next round, `documentation/HANDOFF_L395_horizons_check_design_20261005.md`
+- For the Horizons round:
+  `documentation/HANDOFF_L395_horizons_check_design_20261005.md`

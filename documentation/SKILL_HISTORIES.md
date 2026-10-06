@@ -485,6 +485,20 @@ Tony's question "do we have a skill that defines how we build
 interactives?" The answer was no; the Sun's pattern lived only as code
 and as ledger history. Everything below was read from those files at
 the pinned SHAs, not recalled.
+Earlier: 1.9 | 2026-10-02, with Anthropic's Claude Opus 5.5, from
+orrery @ b3cfc780 and gallery @ cfc53490, with gallery patches
+patch_L404_1_rooms_in_store_editor_20261001.py and
+patch_L363_9_room_step3b_drawer_20261002.py. v1.9 (L-405) writes down
+what two builds of one session taught, sorted on Tony's review of
+2026-10-02 into method rather than judgement. The sentence saying every
+reader of data/objects_config.json ignores "rooms" was wrong and is
+corrected. The store writer may change a rooms-section room's `drawn`
+and `highlight`, and the editor lists rooms from both places a room can
+live (L-404). The Solar System room's drawer is recorded as shared
+chrome with four additions, with Tony's framing ruling -- where a body
+is now, plus 20% (L-363 step 3b). And step 4 gains the headless recipe:
+a room's real driver in CPython, the real page in jsdom with a stand-in
+Plotly, and the other rooms compared before and after (tools/headless/).
 
 ## safe-file-editing
 

@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.84 | October 6, 2026
+Tony Quintanilla, PE | Claude | v3.83 | October 6, 2026
 
-Cut from e7073fce at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 51436054 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -512,7 +512,7 @@ gallery-cache-builder        1.7  Nightly builder, atomic swap and its
                                   under data/, coverage_index, serving cache,
                                   objects_config, dry-run/first-build/nightly,
                                   builder testing layers
-interactive-exhibit          1.12 adding or changing an exhibit in
+interactive-exhibit          1.11 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -1163,37 +1163,6 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
-v3.84 (October 6, 2026): No rule changed in this document. ONE
-skill bump, one version (L-421): interactive-exhibit 1.11 -> 1.12. A
-FACT ABOUT A FEATURE IS SERVED, NOT TYPED.
-
-WHAT PROMPTED IT. Building Earth's website patch, Claude told Tony the
-skill already required the inner belt's word "protons" to be served.
-It did not: it required served numbers, and let page text carry its
-source in the page. Tony: "I thought the only source of truth is the
-constants py and the objects list ... not from the code." Asked then
-where the info panel's facts are stored, a search of both rooms found
-17 facts typed in code. Tony ruled them part of finishing the Earth and
-Sun slices, "the work is here", not backlog.
-
-WHAT CHANGED. interactive-exhibit, under Provenance is part of the
-build: code may type only sentences about the picture; a fact about
-nature, about a paper, or a source is served on its feature's row and
-printed as given. Its v1.9 entry moved to
-documentation/SKILL_HISTORIES.md, by the three-entry rule. The 17 are
-listed in documentation/MANIFEST_L421_typed_facts_20261006.md, for a
-fresh session to build.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copy reads
-interactive-exhibit 1.12 before any exhibit work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.81 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
 v3.83 (October 6, 2026): No rule changed in this document. ONE
 skill bump, one version (L-027): agentic-pre-test 1.2 -> 1.3. THE
 PRE-TEST RUNS THE FILE AS IT IS.
@@ -1256,6 +1225,53 @@ v3.81 named.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.79 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+v3.81 (October 5, 2026): No rule changed in this document. SIX
+skill bumps, one version each (L-418): provenance-discipline 2.25 ->
+2.26, interactive-exhibit 1.10 -> 1.11, safe-file-editing 1.12 ->
+1.13, orrery-coding-conventions 1.9 -> 1.10,
+ledger-and-session-records 1.14 -> 1.15 and gallery-cache-builder 1.6
+-> 1.7. A LONG SKILL OPENS WITH ITS CONTENTS.
+
+WHAT PROMPTED IT. A Claude Sonnet 5.5 session checked the skills
+against Anthropic's documented limits. All eleven pass the hard rules,
+which skills_index.py --check now enforces (L-417). Five are over
+Anthropic's 500-line guideline, provenance-discipline almost six times.
+Measured here: a plain read of a file that long shows its start and its
+end and leaves out the middle, and provenance-discipline's first 423
+lines were version history, so a plain read showed the history and the
+field notes and none of the rules. Tony asked whether a contents
+section would help, and that the sections be arranged so more of them
+are read whole; then that all five be done, and gallery-cache-builder
+with them, which is under 500 lines but long enough to be cut the same
+way.
+
+WHAT CHANGED. Each of the six opens with a contents list of its
+headings, and skills_index.py --check fails a skill over 500 lines that
+has none, and any skill whose list and headings disagree. Version
+history older than three entries moved, word for word, to
+documentation/SKILL_HISTORIES.md. provenance-discipline's sections are
+ordered critical, then quality, then untiered, then its two long
+procedures, then the field notes; every section's text was checked
+unchanged. One rule is new, in ledger-and-session-records: a skill
+keeps three version entries, and a long skill keeps its contents list
+true. No other skill's rules changed.
+
+THE OBLIGATION TRAVELS. This session's loaded copies were the versions
+before these. The next session confirms its loaded copies read
+provenance-discipline 2.26, interactive-exhibit 1.11, safe-file-editing
+1.13, orrery-coding-conventions 1.10, ledger-and-session-records 1.15
+and gallery-cache-builder 1.7, and that each opens with its contents.
+
+STILL OPEN. Moving provenance-discipline's two long procedures into
+reference files loaded only when needed is recorded on L-418, not
+scheduled.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.78 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

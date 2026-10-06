@@ -11,28 +11,19 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 145  
-**Total Lines of Code (non-blank):** 115,806  
-**Total Public Functions/Classes:** 1,308
+**Total Python Files:** 142  
+**Total Lines of Code (non-blank):** 114,806  
+**Total Public Functions/Classes:** 1,300
 
 ## Classification Coverage
 
-**Undetermined role (8).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L027_1_panel_colour_20261006.py`
-- `patch_L420_2_galactic_plane_and_centre_20261006.py`
-- `patch_L420_3_session_close_20261006.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
-
-**Undetermined domain (3).** No valid `Domain:` tag.
-
-- `patch_L027_1_panel_colour_20261006.py`
-- `patch_L420_2_galactic_plane_and_centre_20261006.py`
-- `patch_L420_3_session_close_20261006.py`
 
 
 ---
@@ -45,7 +36,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,938 lines) |
 | `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,574 lines) |
-| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (2,112 lines) |
+| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (2,128 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
 ---
@@ -249,9 +240,6 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L027_1_panel_colour_20261006.py` | - ORRERY repo. Restores the desktop orrery's panel colour as one name that every system knows, so its window opens on Linux and macOS as well as Windows (L-027), and takes the colour swap out of the pre-test (agentic-pre-test 1.3). (214 lines) |
-| `patch_L420_2_galactic_plane_and_centre_20261006.py` | - ORRERY repo. L-420: the galactic plane in the Celestial Grid, and the galactic centre in the Star Background. (557 lines) |
-| `patch_L420_3_session_close_20261006.py` | - ORRERY repo. L-420's session record: the ledger's L-420 block and header stamp, a line in the website session's handoff, and this session's handoff, documentation/HANDOFF_L420_galactic_plane_20261006.md. (245 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |

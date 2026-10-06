@@ -6,7 +6,18 @@ fires_when: adding or changing an exhibit in interactive.html; any edit to the S
 
 # Interactive Exhibit
 
-Skill version: 1.11 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.12 | 2026-10-06, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 51436054 and gallery @ ed48d078. v1.12 (L-421, L-349)
+draws the line the provenance rule left open: a fact about one feature
+is served with that feature's words, never typed in a renderer, and
+code may type only sentences about the picture. Found when Claude told
+Tony this skill already required the inner belt's "protons" to be
+served; it required served NUMBERS, and let page text carry its source
+in the page, which Claude read as allowing a typed fact. Tony: "I
+thought the only source of truth is the constants py and the objects
+list ... not from the code." A search the same day found 17 such facts
+in the two rooms (documentation/MANIFEST_L421_typed_facts_20261006.md).
+Earlier: 1.11 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 72e3b558. v1.11 (L-418) changes no rule. A contents
 list now opens the skill, generated from its headings, and
 skills_index.py --check fails if the two disagree. Version history
@@ -26,20 +37,6 @@ The same day Settings refused the first copy ("malformed YAML
 frontmatter"): the new fires_when words sat on a line of their own.
 They are back on the one line, and the version stays 1.10, which never
 loaded anywhere (L-406, L-407).
-Earlier: 1.9 | 2026-10-02, with Anthropic's Claude Opus 5.5, from
-orrery @ b3cfc780 and gallery @ cfc53490, with gallery patches
-patch_L404_1_rooms_in_store_editor_20261001.py and
-patch_L363_9_room_step3b_drawer_20261002.py. v1.9 (L-405) writes down
-what two builds of one session taught, sorted on Tony's review of
-2026-10-02 into method rather than judgement. The sentence saying every
-reader of data/objects_config.json ignores "rooms" was wrong and is
-corrected. The store writer may change a rooms-section room's `drawn`
-and `highlight`, and the editor lists rooms from both places a room can
-live (L-404). The Solar System room's drawer is recorded as shared
-chrome with four additions, with Tony's framing ruling -- where a body
-is now, plus 20% (L-363 step 3b). And step 4 gains the headless recipe:
-a room's real driver in CPython, the real page in jsdom with a stand-in
-Plotly, and the other rooms compared before and after (tools/headless/).
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418).
 
@@ -162,10 +159,23 @@ page:
   the DECLARED zone (master plan Section 7 decision 18): style, no
   source expected. Match the orrery's palette so the legend reads the
   same.
-- Text CLAIMS the page makes -- the i-panel copy, the frame note --
-  carry their source in the page itself, because the assembler does not
-  pass through the provenance scanner. The frame note's NAIF citation
-  is the form.
+- Text CLAIMS the page makes about ITSELF -- a room's own i-panel
+  copy, the frame note -- carry their source in the page itself,
+  because the assembler does not pass through the provenance scanner.
+  The frame note's NAIF citation is the form.
+- **A fact about one feature is served with that feature's words,
+  never typed in a renderer** (v1.12, L-421). Code may type a sentence
+  only when it is about the picture: a drawing choice ("drawn round",
+  "our choice for the picture"), a frame limit, or how to use the
+  page. A sentence about nature, about a paper, or naming a source --
+  which particles a belt holds, how far a paper plots its model, the
+  paper's name -- is served on the feature's row with its source, and
+  the renderer prints what it is given. Where such a fact has no
+  served row, the fix is a served row, not a typed line. The first
+  case is Earth's inner belt: its "trapped protons" is the served
+  `flux_peak_of`, beside the belts' other words. The rest found in the
+  Earth and Sun rooms on 2026-10-06 are listed in
+  documentation/MANIFEST_L421_typed_facts_20261006.md.
 - Where a value is unknowable or stylized (a dipole azimuth, the
   streamer belt's warp), the hover says so; silence reads as precision
   the model lacks (Show the Envelope of the Unknowable).
