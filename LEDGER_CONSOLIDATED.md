@@ -251,6 +251,8 @@ Tony's runs; Tony's look at L-420 recorded), built on e7073fce.
 Module updated: October 6, 2026 with Anthropic's Claude Opus 5.5
 (L-420 after Tony's look: the circles' hovers, the brighter tide and
 its cone; L-408 told the orrery has them), built on fbd223ee.
+Module updated: October 7, 2026 with Anthropic's Claude Opus 5.5
+(L-420 closed on Tony's look), built on 12693a53.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -468,7 +470,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*239 live items; 223 need attention (`!`); 180 RICE-scored; 177 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*238 live items; 222 need attention (`!`); 180 RICE-scored; 178 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -619,7 +621,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-06 |
 | ! | L-414 | The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling) | OPEN | -- | 2026-10-04 |
 | ! | L-418 | Long skills open with their contents, and keep three version entries (skills) | OPEN | -- | 2026-10-06 |
-| ! | L-420 | The galactic plane in the Celestial Grid, the galactic centre in the star background (orrery, sky) | OPEN | -- | 2026-10-06 |
 | ! | L-421 | Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words) | OPEN | -- | 2026-10-06 |
 
 ### B. Pending Action (Tony-side)
@@ -946,6 +947,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-416 | Every maintenance-run step has a dashboard button (dashboard, both repos) | DONE | -- | 2026-10-05 |
 |  | L-417 | The Skill headers check enforces Anthropic's documented limits (skills, checks) | DONE | -- | 2026-10-05 |
 |  | L-419 | A patch checks a file Tony annotates only at the lines it edits (patches, skills) | DONE | -- | 2026-10-06 |
+|  | L-420 | The galactic plane in the Celestial Grid, the galactic centre in the star background (orrery, sky, DONE 2026-10-07) | DONE | -- | 2026-10-07 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1126,125 +1128,6 @@ look on the phone; then the survey as a gating check.
 IGRF epoch, a class); gallery `gallery/feature_renderers.js`,
 `gallery/earth_geometry.js`, `data/objects_config.json`;
 skills/interactive-exhibit/SKILL.md.
-
-#### [L-420] The galactic plane in the Celestial Grid, the galactic centre in the star background (orrery, sky)
-<!-- L:420 status:OPEN upd:2026-10-06 section:A flag: rice: -->
-- **Tony, 2026-10-05:** "in the celestial grid, could we add the galactic
-  plane? this is relevant to the galactic tide in particular." Then, on
-  where the galactic centre goes: "we could put the plane and poles in
-  the Celestial Grid and the galactic centre in the star background."
-- **The design, as ruled:**
-  - Celestial Grid (`star_sphere_builder.py`): a third great circle, the
-    galactic plane, in its own colour beside the amber ecliptic and the
-    teal celestial equator; the north and south galactic poles marked
-    and labelled NGP and SGP, as the grid marks NCP/SCP and NEP/SEP; a
-    line in the "Ecliptic Coordinates (J2000)" box naming the circle.
-  - Star Background: the direction of the galactic centre, Sagittarius
-    A*, as a sky object among the stars, not a grid line.
-- **What the store already holds:** the north galactic pole,
-  `GALACTIC_NORTH_POLE_RA_J2000_DEG` and `GALACTIC_NORTH_POLE_DEC_J2000_DEG`,
-  sourced to Liu, Zhu and Hu, arXiv:1110.6268, eq. (2), added for the
-  galactic tide (L-406). The plane is the great circle 90 degrees from
-  it, so the plane and both poles need no new number. Worked from those
-  rows on 2026-10-05: the plane is tilted about 60 degrees to the
-  ecliptic and about 63 to the celestial equator; any hover that prints
-  either needs a derived row first.
-- **What it does not hold:** the galactic centre's position.
-  `sgr_a_star_data.py` carries the S-star orbits, not Sgr A*'s place on
-  the sky. The build sources a row first (a published position of Sgr
-  A*, or the frame's own definition of galactic longitude zero from the
-  same family of sources as the pole), never a recalled number.
-- **Scope:** the orrery only; the website has no celestial grid yet. It
-  touches neither of the two sessions running on 2026-10-05.
-- **Built 2026-10-06** at orrery 51436054, in a session of its own,
-  after Tony confirmed the plan and the words ("Yes, confirmed as
-  recommended"): `patch_L420_2_galactic_plane_and_centre_20261006.py`.
-  - The galactic centre's row, sourced: Sgr A*'s position from Liu,
-    Zhu and Hu, arXiv:1110.6268, eq. (8), the VLBA position of Reid and
-    Brunthaler (2004), read 2026-10-06 by Claude Opus 5.5.
-    `SGR_A_STAR_RA_ICRS_ARCSEC` and `SGR_A_STAR_DEC_ICRS_ARCSEC` hold it
-    in arcseconds, exact as printed; their degree rows are derived.
-  - A check on the pole row: the same paper's eq. (7), the point the
-    frame defines as galactic longitude zero, lies on the plane drawn
-    from the store's pole to a hundred-millionth of a degree. Sgr A*
-    sits 0.05 degrees from that plane, far below what the drawing shows.
-  - The plane, NGP and SGP are computed when the plot is drawn
-    (`star_sphere_builder.build_galactic_grid`), so the saved star file
-    is not rebuilt.
-  - Words shown to Tony and approved: the Sgr A* hover ("Sagittarius
-    A*" / "The black hole at the centre of our galaxy" / "Its
-    direction from the Sun, among the stars"); the galactic pole
-    hovers ("North Galactic Pole (NGP)" / "Perpendicular to the disk
-    of our galaxy"); the box line ("Violet circle: Galactic plane, the
-    disk of the Milky Way (NGP, SGP its poles)"). The four tooltips
-    name the plane, its poles and Sgr A*.
-  - Fixed in passing and reported: with Labels on, the celestial and
-    ecliptic pole hovers showed "NCP" where the full name was meant.
-  - No angle is printed, so the tilts (about 60 degrees to the
-    ecliptic) needed no derived row.
-  - Checked in the sandbox: the maintenance run gives the same verdicts
-    as at 51436054, and the scanner's Tier-1 findings are the same 296,
-    file by file. The two new measured rows score 15, cited and not yet
-    cross-checked, as the pole rows do. Reset completeness fails in the
-    sandbox at 51436054 too: a Tk colour only Windows has.
-  - Where We Are was left alone: the website session owns it this
-    round. Its lines are in
-    `documentation/HANDOFF_L420_galactic_plane_20261006.md`.
-- **Run and pushed at e7073fce, 2026-10-06.** Tony's look, from his run
-  record: "looks great. some issues: a) galactic tide is very faint
-  and the X is not discernible b) can we move the coordinate circle
-  descriptions to hovertext markers on the circles"; and on the
-  colour, sizes and labels, "looks good". Recorded by the website
-  session's closing patch; the two requests are this item's to work.
-- **The tide's X.** A brighter tide alone would not show an X: seen
-  from the side, the layers at 45 degrees flatten into two lobes with
-  an empty strip along the plane, which a sketch showed. Tony chose
-  "brighter plus cone": 5,000 points, twice the size and twice the
-  opacity, and a faint double cone between the Oort cloud's two edges
-  at the latitude where |sin b cos b| peaks, computed as arctan(1),
-  not typed. From the side it reads as an hourglass. One hover line
-  names it.
-- **The point count, held down.** 10,000 points was built first, about
-  0.34 MB in a saved plot against 0.07 MB at 2,000. Tony: "i don't
-  want to regress into memory heavy renders. We worked hard to reduce
-  memory overhead a few months ago."; then "I could not discern the X
-  at All before even faulty. Let's try 5000". 5,000 adds about
-  0.17 MB, only when the tide is on, and once per plot: the animation
-  does not copy shells into its frames. The cone adds about 0.02 MB.
-- **The circles' words move to the circles.** One hover cross per
-  circle, through create_info_marker, in its circle's colour (amber
-  outlined white, teal and violet red), shown whenever the grid is on,
-  each placed far from the other two circles' crossings. Both
-  coordinate boxes keep the axes and point to the crosses.
-- **Words approved by Tony, 2026-10-06 ("Confirmed").** Tide hover,
-  new line: "The pink cone marks that halfway line, where the tide /
-  changes comets' orbits the most". Ecliptic: "Ecliptic (amber
-  circle) / The plane of Earth's orbit around the Sun, / and the
-  plot's XY plane". Equator: "Celestial equator (teal circle) /
-  Earth's equator carried out onto the sky / Tilted from the ecliptic
-  by Earth's axial tilt; / Earth's rotation-axis hover gives the angle
-  for this date". Galactic plane: "Galactic plane (violet circle) / The
-  disk of the Milky Way, seen from the Sun / Its poles are marked NGP
-  and SGP". Box: "XY plane: Ecliptic" and "Enable Celestial Grid to
-  see the coordinate circles; hover the + on each circle to see what
-  it is".
-  `patch_L420_4_circle_hovers_and_tide_20261006.py`.
-- **The phone.** Tony: "galactic plane and Sag A* are shown in
-  celestial coordinates, but only in the orrery, not in phone. so
-  that's a design decision." Recorded on L-408; nothing on the
-  website changed.
-- **298 in Tony's run, 296 at the push.** The scanner counted two
-  patch scripts' fingerprint tables while they sat in the repo root;
-  the pushed tree e7073fce scans 296, the same list as before.
-**Gap:** Tony runs patch_L420_4 and the maintenance run, pushes, and
-looks (Mode 5): the tide from the side with the violet circle edge-on,
-the cone's faintness, the three crosses' places and colours. Then
-close.
-**Ref:** `star_sphere_builder.py` (`build_galactic_grid`);
-`constants_new.py` (the galactic pole and Sgr A* rows);
-`palomas_orrery.py` (the two coordinate boxes, the four tooltips);
-`solar_visualization_shells.create_sun_galactic_tide`; L-406;
-`documentation/HANDOFF_L420_galactic_plane_20261006.md`.
 
 #### [L-418] Long skills open with their contents, and keep three version entries (skills)
 <!-- L:418 status:OPEN upd:2026-10-06 section:A flag: rice: -->
@@ -19971,6 +19854,139 @@ L-026; L-133; L-351.
 **Gap:** none.
 **Ref:** `patch_L413_1_ledger_sweep_and_earth_list_20261004.py`
 (ANCHOR_ONLY); L-396.
+
+#### [L-420] The galactic plane in the Celestial Grid, the galactic centre in the star background (orrery, sky, DONE 2026-10-07)
+<!-- L:420 status:DONE upd:2026-10-07 section:C flag: rice: -->
+- **Tony, 2026-10-05:** "in the celestial grid, could we add the galactic
+  plane? this is relevant to the galactic tide in particular." Then, on
+  where the galactic centre goes: "we could put the plane and poles in
+  the Celestial Grid and the galactic centre in the star background."
+- **The design, as ruled:**
+  - Celestial Grid (`star_sphere_builder.py`): a third great circle, the
+    galactic plane, in its own colour beside the amber ecliptic and the
+    teal celestial equator; the north and south galactic poles marked
+    and labelled NGP and SGP, as the grid marks NCP/SCP and NEP/SEP; a
+    line in the "Ecliptic Coordinates (J2000)" box naming the circle.
+  - Star Background: the direction of the galactic centre, Sagittarius
+    A*, as a sky object among the stars, not a grid line.
+- **What the store already holds:** the north galactic pole,
+  `GALACTIC_NORTH_POLE_RA_J2000_DEG` and `GALACTIC_NORTH_POLE_DEC_J2000_DEG`,
+  sourced to Liu, Zhu and Hu, arXiv:1110.6268, eq. (2), added for the
+  galactic tide (L-406). The plane is the great circle 90 degrees from
+  it, so the plane and both poles need no new number. Worked from those
+  rows on 2026-10-05: the plane is tilted about 60 degrees to the
+  ecliptic and about 63 to the celestial equator; any hover that prints
+  either needs a derived row first.
+- **What it does not hold:** the galactic centre's position.
+  `sgr_a_star_data.py` carries the S-star orbits, not Sgr A*'s place on
+  the sky. The build sources a row first (a published position of Sgr
+  A*, or the frame's own definition of galactic longitude zero from the
+  same family of sources as the pole), never a recalled number.
+- **Scope:** the orrery only; the website has no celestial grid yet. It
+  touches neither of the two sessions running on 2026-10-05.
+- **Built 2026-10-06** at orrery 51436054, in a session of its own,
+  after Tony confirmed the plan and the words ("Yes, confirmed as
+  recommended"): `patch_L420_2_galactic_plane_and_centre_20261006.py`.
+  - The galactic centre's row, sourced: Sgr A*'s position from Liu,
+    Zhu and Hu, arXiv:1110.6268, eq. (8), the VLBA position of Reid and
+    Brunthaler (2004), read 2026-10-06 by Claude Opus 5.5.
+    `SGR_A_STAR_RA_ICRS_ARCSEC` and `SGR_A_STAR_DEC_ICRS_ARCSEC` hold it
+    in arcseconds, exact as printed; their degree rows are derived.
+  - A check on the pole row: the same paper's eq. (7), the point the
+    frame defines as galactic longitude zero, lies on the plane drawn
+    from the store's pole to a hundred-millionth of a degree. Sgr A*
+    sits 0.05 degrees from that plane, far below what the drawing shows.
+  - The plane, NGP and SGP are computed when the plot is drawn
+    (`star_sphere_builder.build_galactic_grid`), so the saved star file
+    is not rebuilt.
+  - Words shown to Tony and approved: the Sgr A* hover ("Sagittarius
+    A*" / "The black hole at the centre of our galaxy" / "Its
+    direction from the Sun, among the stars"); the galactic pole
+    hovers ("North Galactic Pole (NGP)" / "Perpendicular to the disk
+    of our galaxy"); the box line ("Violet circle: Galactic plane, the
+    disk of the Milky Way (NGP, SGP its poles)"). The four tooltips
+    name the plane, its poles and Sgr A*.
+  - Fixed in passing and reported: with Labels on, the celestial and
+    ecliptic pole hovers showed "NCP" where the full name was meant.
+  - No angle is printed, so the tilts (about 60 degrees to the
+    ecliptic) needed no derived row.
+  - Checked in the sandbox: the maintenance run gives the same verdicts
+    as at 51436054, and the scanner's Tier-1 findings are the same 296,
+    file by file. The two new measured rows score 15, cited and not yet
+    cross-checked, as the pole rows do. Reset completeness fails in the
+    sandbox at 51436054 too: a Tk colour only Windows has.
+  - Where We Are was left alone: the website session owns it this
+    round. Its lines are in
+    `documentation/HANDOFF_L420_galactic_plane_20261006.md`.
+- **Run and pushed at e7073fce, 2026-10-06.** Tony's look, from his run
+  record: "looks great. some issues: a) galactic tide is very faint
+  and the X is not discernible b) can we move the coordinate circle
+  descriptions to hovertext markers on the circles"; and on the
+  colour, sizes and labels, "looks good". Recorded by the website
+  session's closing patch; the two requests are this item's to work.
+- **The tide's X.** A brighter tide alone would not show an X: seen
+  from the side, the layers at 45 degrees flatten into two lobes with
+  an empty strip along the plane, which a sketch showed. Tony chose
+  "brighter plus cone": 5,000 points, twice the size and twice the
+  opacity, and a faint double cone between the Oort cloud's two edges
+  at the latitude where |sin b cos b| peaks, computed as arctan(1),
+  not typed. From the side it reads as an hourglass. One hover line
+  names it.
+- **The point count, held down.** 10,000 points was built first, about
+  0.34 MB in a saved plot against 0.07 MB at 2,000. Tony: "i don't
+  want to regress into memory heavy renders. We worked hard to reduce
+  memory overhead a few months ago."; then "I could not discern the X
+  at All before even faulty. Let's try 5000". 5,000 adds about
+  0.17 MB, only when the tide is on, and once per plot: the animation
+  does not copy shells into its frames. The cone adds about 0.02 MB.
+- **The circles' words move to the circles.** One hover cross per
+  circle, through create_info_marker, in its circle's colour (amber
+  outlined white, teal and violet red), shown whenever the grid is on,
+  each placed far from the other two circles' crossings. Both
+  coordinate boxes keep the axes and point to the crosses.
+- **Words approved by Tony, 2026-10-06 ("Confirmed").** Tide hover,
+  new line: "The pink cone marks that halfway line, where the tide /
+  changes comets' orbits the most". Ecliptic: "Ecliptic (amber
+  circle) / The plane of Earth's orbit around the Sun, / and the
+  plot's XY plane". Equator: "Celestial equator (teal circle) /
+  Earth's equator carried out onto the sky / Tilted from the ecliptic
+  by Earth's axial tilt; / Earth's rotation-axis hover gives the angle
+  for this date". Galactic plane: "Galactic plane (violet circle) / The
+  disk of the Milky Way, seen from the Sun / Its poles are marked NGP
+  and SGP". Box: "XY plane: Ecliptic" and "Enable Celestial Grid to
+  see the coordinate circles; hover the + on each circle to see what
+  it is".
+  `patch_L420_4_circle_hovers_and_tide_20261006.py`.
+- **The phone.** Tony: "galactic plane and Sag A* are shown in
+  celestial coordinates, but only in the orrery, not in phone. so
+  that's a design decision." Recorded on L-408; nothing on the
+  website changed.
+- **298 in Tony's run, 296 at the push.** The scanner counted two
+  patch scripts' fingerprint tables while they sat in the repo root;
+  the pushed tree e7073fce scans 296, the same list as before.
+- **Run and pushed at 12693a53, 2026-10-07.** Tony's look: "correct";
+  "images look great at 5000. the X is clearly visible even without
+  the cone."
+- **Corrected: the tide's X.** The bullet above said a brighter tide
+  alone would not show an X. Tony's render shows it does. Most likely
+  because the points are spread evenly in distance from the Sun, so
+  they crowd near it, where the layers at 45 degrees read as an X. The
+  flat sketch spread them too evenly to show it. The render wins.
+- **The cone stays.** Tony: "I think the cone is useful to illustrate
+  the tidal influence as physics."
+- **Loose ends, where they went.** The phone's question: L-408, whose
+  Gap names the galactic plane, Sgr A*, and the tide's cone and
+  brightness (checked at 12693a53). The 297 in Tony's run was again
+  this item's patch script in the repo root; the pushed tree scans
+  296. This closing patch's NEXT moves the script before the run.
+- **Closed 2026-10-07.**
+**Gap:** none. (Was: Tony's run and look at patch_L420_4.)
+**Ref:** `star_sphere_builder.py` (`build_galactic_grid`);
+`constants_new.py` (the galactic pole and Sgr A* rows);
+`palomas_orrery.py` (the two coordinate boxes, the four tooltips);
+`solar_visualization_shells.create_sun_galactic_tide`; L-406;
+`documentation/HANDOFF_L420_galactic_plane_20261006.md`.
+
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

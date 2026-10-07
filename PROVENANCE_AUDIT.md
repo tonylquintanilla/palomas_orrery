@@ -2,9 +2,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: October 07, 2026
-Files scanned: 143
-Total findings: 1098
-Constants: 177 | Dicts: 45 | Display strings: 876
+Files scanned: 142
+Total findings: 1097
+Constants: 177 | Dicts: 44 | Display strings: 876
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,20 +20,16 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20261007T191217Z | `12693a5` | 142 | 1097 | 296 | 675 | 121 | 5 |
 | 20261007T134806Z | `fbd223e` | 143 | 1098 | 297 | 675 | 121 | 5 |
 | 20261006T190614Z | `d5c6179` | 142 | 1094 | 296 | 675 | 121 | 2 |
 | 20261006T184704Z | `e7073fc` | 142 | 1094 | 296 | 675 | 121 | 2 |
 | 20261006T163329Z | `5143605` | 145 | 1096 | 298 | 675 | 121 | 2 |
 | 20261005T230218Z | `d9f47a8` | 142 | 1092 | 296 | 673 | 121 | 2 |
-| 20261005T213703Z | `72e3b55` | 143 | 1093 | 296 | 673 | 122 | 2 |
 
-Change since the previous run: total +4, Tier-1 +1.
+Change since the previous run: total -1, Tier-1 -1.
 
-Tier-1 rose in these files:
-
-| File | Before | After |
-|------|-------:|------:|
-| patch_L420_4_circle_hovers_and_tide_20261006.py | 0 | 1 |
+No file's Tier-1 count rose.
 
 ---
 
@@ -64,7 +60,7 @@ Tier-1 rose in these files:
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 297 |
+| 1 | 16-20 | FIX NOW | 296 |
 | 2 | 10-15 | REVIEW | 675 |
 | 3 | 5-9 | LOW PRIORITY | 121 |
 | 4 | 1-4 | LOWEST PRIORITY | 5 |
@@ -148,7 +144,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `worksheet_request_builder.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `orbital_elements.py` | orrery | 1 | 0 | 0 | 0 | 1 |
-| `patch_L420_4_circle_hovers_and_tide_20261006.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `data_acquisition.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `exoplanet_orbits.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `fetch_paleoclimate_data.py` | earth_science | 1 | 0 | 0 | 0 | 1 |
@@ -177,7 +172,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 50 | 134 | 559 | 71 | 2 | 766 |
+| Orrery (solar system + orbital mechanics) | 49 | 133 | 559 | 71 | 2 | 765 |
 | Earth System | 13 | 149 | 75 | 2 | 0 | 226 |
 | Stars (stellar neighborhood) | 11 | 12 | 41 | 6 | 3 | 62 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 42 | 0 | 42 |
@@ -192,7 +187,6 @@ Same data again, grouped by subject-matter domain rather than by individual file
 - `export_constants.py`
 - `export_objects.py`
 - `orrery_maintenance_run.py`
-- `patch_L420_4_circle_hovers_and_tide_20261006.py`
 - `test_dimensions.py`
 - `worksheet_checker.py`
 - `worksheet_key_aliases.py`
@@ -624,12 +618,6 @@ is planned for a future session.
 | 2174 | string | display string @ line 2174 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2197 | string | display string @ line 2197 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2332 | string | display string @ line 2332 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-
-### patch_L420_4_circle_hovers_and_tide_20261006.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 57 | dict | BASE[...] | (3 entries) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
 
 ### planet_visualization_utilities.py
 

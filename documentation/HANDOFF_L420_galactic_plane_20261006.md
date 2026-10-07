@@ -123,6 +123,10 @@ not touched). Pushed at: (Tony writes the SHA here.)
 - Needs Tony: a look at the tide from the side, and a design decision
   on whether the phone gets the galactic plane, Sgr A* and the cone
   (L-408).
+- Changed (2026-10-07): the galactic plane work in the orrery is
+  finished. The tide shows its X, and the cone marks where the tide
+  works hardest. Your look on the tide is done.
+- Still waiting: the phone's design decision (L-408).
 
 ## Later the same session: L-027, the panel colour
 
@@ -163,6 +167,16 @@ not touched). Pushed at: (Tony writes the SHA here.)
 - Tony noted the phone shows none of this; that design decision is
   recorded on L-408.
 
+## Closed, 2026-10-07
+
+- Pushed at 12693a53. Tony's look: "correct"; "images look great at
+  5000. the X is clearly visible even without the cone."
+- The points alone show the X, which the sketch had said they would
+  not. The cone stays: "I think the cone is useful to illustrate the
+  tidal influence as physics."
+- L-420 closed by `patch_L420_5_close_20261007.py`. The phone's
+  question stays on L-408.
+
 ## Tony-actions
 
 (do)
@@ -192,8 +206,7 @@ not touched). Pushed at: (Tony writes the SHA here.)
 
 ## Next session
 
-- Close L-420 on Tony's look at patch_L420_4, or adjust what he
-  names.
+- L-420 closed 2026-10-07.
 - Close L-027 on Tony's run and look; confirm agentic-pre-test 1.3
   loaded.
 - Nothing else is opened by this session.
