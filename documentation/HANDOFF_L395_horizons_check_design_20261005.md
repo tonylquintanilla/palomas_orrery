@@ -107,3 +107,123 @@ same three rules.
 (decide)
 - At the design round: the five questions above, one at a time.
 - Where the check runs: Tony's machine, or this chat with JPL allowed.
+
+============================================================================
+**Tony**: run record:
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L395_3_horizons_check_design_20261007.py
+ok  LEDGER_CONSOLIDATED.md   header stamp
+ok  LEDGER_CONSOLIDATED.md   L-395 date
+ok  LEDGER_CONSOLIDATED.md   L-395 design round and Gap
+ok  LEDGER_CONSOLIDATED.md   L-395 Ref
+ok  documentation/DESIGN_L395_horizons_check_20261007.md created (336 lines)
+ok  documentation/HORIZONS_ANSWERS_L395_20261007.md created (679 lines)
+
+patch applied
+
+NEXT:
+  1. Run orrery_maintenance_run.py -- it rebuilds the ledger's index.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261007T191217Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.5s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.2s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             0.7s  unchanged (1 checked, not written)
+  Objects export               0.1s  unchanged (1 checked, not written)
+  Module atlas                 6.5s  unchanged (2 of 2 rewritten, content
+                                     identical)
+  Data inventory               5.3s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Exact rows report            2.3s  unchanged (1 checked, not written) -- 13 of
+                                     34 exact rows printed at 42 lines (32
+                                     orrery, 10 gallery); 8 drawn only, 11 not
+                                     followed, 0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.3s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.9s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       1.5s  Export matches the store: sha256
+                                     3b7000e368d1 on both sides; 105 rows
+                                     re-read, 56 not exported, 27 tokens; 310
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.1s  pass
+  Skill headers                0.2s  11 skills parsed, no consistency problems.
+  Exact rows by the count      1.7s  PASSING -- 13 printed exact rows each state
+                                     a count; 32 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.7s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.2s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.2s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 105 status lines in constants_new.py are
+                                     well formed; 53 rows carry none.
+  Row shape                    0.1s  All 161 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Reset completeness          17.0s  PASS -- all 310 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.2s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.4s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Worksheet checker           10.0s  74 of 110 routed, 8 clean
+  Worksheet checker tests     15.3s  All 135 checks passed
+  Worksheet key round trip     1.0s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         27.7s  All 76 checks passed
+  Extractor pins               0.5s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          15.2s  296 TIER-1 FINDINGS IN THE SCANNED TREE
+
+======================================================================
+  20 of 20 gating checkers passed -- 113.3s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          296 TIER-1 FINDINGS IN THE SCANNED TREE
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2093 file(s) examined, 4 written, 0 created, 0 removed, 8 rewritten identically
+    written   LEDGER_CONSOLIDATED.md
+    written   PROVENANCE_AUDIT.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      DATA_INVENTORY.md
+      MODULE_ATLAS.md
+      MODULE_INDEX.md
+      PROJECT_INSTRUCTIONS.md
+      WORKSHEET_CHECK.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Move this script into documentation/; commit and push. -- 
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 

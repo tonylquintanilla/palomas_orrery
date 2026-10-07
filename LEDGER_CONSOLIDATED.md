@@ -253,6 +253,9 @@ Module updated: October 6, 2026 with Anthropic's Claude Opus 5.5
 its cone; L-408 told the orrery has them), built on fbd223ee.
 Module updated: October 7, 2026 with Anthropic's Claude Opus 5.5
 (L-420 closed on Tony's look), built on 12693a53.
+Module updated: October 7, 2026 with Anthropic's Claude Opus 5.5
+(L-395: the Horizons check designed and tested by hand; Encke's list
+entry ruled), built on 12693a53.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -608,7 +611,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-391 | Group clouds: the Trojans' sources, and the shapes of the three other groups (gallery, exhibits) | OPEN | -- | 2026-09-29 |
 | ! | L-393 | Encounter data: dates, spacecraft records centred on their targets, and how far the cache reaches in time (gallery, cache) | OPEN | -- | 2026-09-29 |
 | ! | L-394 | A card cannot say which body it belongs to (gallery, Studio) | OPEN | -- | 2026-09-29 |
-| ! | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | OPEN | -- | 2026-10-05 |
+| ! | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | OPEN | -- | 2026-10-07 |
 | ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-10-04 |
 | ! | L-399 | Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder) | OPEN | -- | 2026-10-01 |
 | ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-01 |
@@ -1459,7 +1462,7 @@ orrery's hovers.
 **Ref:** `documentation/WHERE_WE_ARE.md`; `skills/ledger-and-session-records/SKILL.md` (The Document Stack); `PROJECT_INSTRUCTIONS.md` v3.74; L-363; L-395; L-333; L-362.
 
 #### [L-395] The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects)
-<!-- L:395 status:OPEN upd:2026-10-05 section:A flag: rice: -->
+<!-- L:395 status:OPEN upd:2026-10-07 section:A flag: rice: -->
 - **2026-10-01, design rulings and the first build** [verified: orrery
   feb5e369, gallery 43993b49; Tony's runs 22 of 22 gating; his phone:
   "perfect"]. Tony's rulings, each "confirmed as recommended" unless
@@ -1611,12 +1614,62 @@ orrery's hovers.
   Horizons API query was refused, `x-deny-reason: host_not_allowed`.
   The check runs on Tony's machine, or Tony allows `ssd.jpl.nasa.gov`
   in the chat's network settings. A (decide) for the design round.
+- **2026-10-07, the Horizons check designed** [tested by hand: Tony ran
+  28 queries against JPL's Lookup and main Horizons services; every
+  answer is in `documentation/HORIZONS_ANSWERS_L395_20261007.md`].
+  Tony's rulings, each "confirmed" or "confirmed as recommended", in
+  full in `documentation/DESIGN_L395_horizons_check_20261007.md`:
+  - JPL confirms that an entry names exactly one object, and its name,
+    type and designation. A bare number is ambiguous both ways: "499"
+    also finds asteroid 499 Venusia, and "9" finds three spacecraft
+    with 9 in their names. So the check searches the index `id_type`
+    points at and keeps only the match whose primary id (major bodies)
+    or primary designation (small bodies) equals the entry's `id`.
+  - Compared: `id`, `id_type` (found in its index and not the other),
+    a new `horizons_name` exactly, and `object_type` only where it
+    means something. Not compared: descriptions and links.
+  - `horizons_name` is JPL's exact name, added beside the orrery's own
+    `name`, which stays untouched. Tony asked to conform the list to
+    Horizons; renaming instead would touch "Pluto-Charon Barycenter"
+    37 times in 8 modules, so the rename waits for the round that
+    stops names being keys.
+  - The check runs in the gallery repo as Daily Run step 2, before the
+    cache builder (Tony's placement), reading the pulled export. An
+    offline checker in the gallery maintenance run fails on an entry
+    never confirmed, overdue, or changed since confirmed. Every 30
+    days and at once after a change; one query at a time, no rapid
+    retries; an unreachable JPL never passes. The chat's network
+    setting is not needed.
+  - Pinned records are invisible to the Lookup, so they are checked
+    through Horizons' main service: the record must exist under its
+    `horizons_name` and be the newest for its comet; a newer one is
+    reported for Tony, never re-pinned. Both pins are current: Halley
+    `90000030` newest of 30, Encke `90000091` newest of 61. JPL
+    updates a record's solution in place (Encke's, 2026-Oct-01).
+  - Each run names every disagreement with the list's value, JPL's
+    value and the query used; it never edits the list. Its offline
+    tests include deliberately wrong entries it must catch.
+  - Tony: Encke gets a list entry ("we could add a new object for Encke
+    in the objects list using your new method"): `id` `90000091`,
+    `horizons_name` "2P/Encke", `key` "encke".
+  - MAPS and 3I/ATLAS (Tony's additions): tested cases now, checked
+    live when served or at stage 9. JPL holds one MAPS record and no
+    fragment records.
+- **Found the same day:** Encke is served by the gallery with no list
+  entry; the gallery's Encke note says "2022-epoch", JPL says 2023;
+  eight served objects carry gallery-defined identity facts (Moon, Io,
+  Titan, Pluto, Charon, Voyager 1, Halley, Encke); JPL's Lookup
+  documentation gives an out-of-date id for Apophis.
+- (decide) At the build: whether Halley is keyed and checked too; and
+  Encke's description and link.
 **Gap:** The first build is done (the room's eleven bodies). Still open:
-the Horizons cross-check (its first run lists and fixes nothing except
-simple errors, reported); fields the list lacks (a moon's parent, a
+the Horizons cross-check, designed 2026-10-07 and built next from
+`documentation/DESIGN_L395_horizons_check_20261007.md` (its first run
+lists and fixes nothing except simple errors, reported); Encke's list
+entry; fields the list lacks (a moon's parent, a
 clean kind); the remaining served objects; L-391 to L-394. The numbers
 in the other descriptions are L-403.
-**Ref:** `celestial_objects.py`; gallery `data/objects_config.json`; `export_constants.py`; gallery `tools/pull_constants_export.py` and `tools/mirror_constants.py` (the model); skills/horizons-orbital-mechanics/SKILL.md; L-363; L-364; L-391 to L-394.
+**Ref:** `documentation/DESIGN_L395_horizons_check_20261007.md`; `documentation/HORIZONS_ANSWERS_L395_20261007.md`; `celestial_objects.py`; gallery `data/objects_config.json`; `export_constants.py`; gallery `tools/pull_constants_export.py` and `tools/mirror_constants.py` (the model); skills/horizons-orbital-mechanics/SKILL.md; L-363; L-364; L-391 to L-394.
 
 #### [L-394] A card cannot say which body it belongs to (gallery, Studio)
 <!-- L:394 status:OPEN upd:2026-09-29 section:A flag: rice: -->
