@@ -53,6 +53,11 @@ Module updated: October 6, 2026 with Anthropic's Claude Opus 5.5 (L-027:
 the panels' background is one name, PANEL_BG = 'gray90', in place of
 the Windows-only SystemButtonFace at 23 sites, so the window opens on
 Linux and macOS as well. Tony's colour of January 2026, restored.)
+Module updated: October 6, 2026 with Anthropic's Claude Opus 5.5 (L-420,
+after Tony's look: both "Ecliptic Coordinates (J2000)" boxes keep the
+axes and drop the three circle lines, which move to a hover cross on
+each circle in star_sphere_builder.py. Words approved by Tony,
+2026-10-06.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -5865,15 +5870,13 @@ def plot_objects():
                             + ("<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(For exoplanets: line of sight from star to Earth)</i><br><br>" 
                             if is_exoplanet_mode else "<br>")
 
-                            + "<b>XY plane:</b> Ecliptic (amber circle)<br>"
+                            + "<b>XY plane:</b> Ecliptic<br>"
                             + ("<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(For exoplanets: sky plane, perpendicular to line of sight)</i><br><br>" 
-                            if is_exoplanet_mode else "")
+                            if is_exoplanet_mode else "<br>")
 
-                            + "<b>Teal circle:</b> Celestial equator, tilted from the ecliptic by Earth's axial tilt<br>(Earth's rotation-axis hover gives the angle for this date)<br><br>"
-
-                            + "<b>Violet circle:</b> Galactic plane, the disk of the Milky Way (NGP, SGP its poles)<br><br>"
-
-                            + "<i>Enable Celestial Grid to see coordinate circles</i>"
+                            # L-420: the circles' own lines moved to a hover cross on
+                            # each circle (star_sphere_builder.py). Tony, 2026-10-06.
+                            + "<i>Enable Celestial Grid to see the coordinate circles;<br>hover the + on each circle to see what it is</i>"
                         ),                       
 
                         xref='paper',
@@ -8101,10 +8104,8 @@ def animate_objects(step, label):
                         text="<b>Ecliptic Coordinates (J2000):</b><br><br>"
                             "<b>+X:</b> Vernal equinox (VE marker, RA=0h)<br><br>"
                             "<b>+Z:</b> Ecliptic North (NEP)<br><br>"
-                            "<b>XY plane:</b> Ecliptic (amber circle)<br>"
-                            "<b>Teal circle:</b> Celestial equator, tilted from the ecliptic by Earth's axial tilt<br>(Earth's rotation-axis hover gives the angle for this date)<br><br>"
-                            "<b>Violet circle:</b> Galactic plane, the disk of the Milky Way (NGP, SGP its poles)<br><br>"
-                            "<i>Enable Celestial Grid to see coordinate circles</i>" if not is_exoplanet_mode
+                            "<b>XY plane:</b> Ecliptic<br><br>"
+                            "<i>Enable Celestial Grid to see the coordinate circles;<br>hover the + on each circle to see what it is</i>" if not is_exoplanet_mode
                             else "<b>Coordinate System (Exoplanet):</b><br><br>"
                             "<b>Origin:</b> Host star at (0, 0, 0)<br><br>"
                             "<b>XY plane:</b> Sky plane (perpendicular to Earth)<br><br>"

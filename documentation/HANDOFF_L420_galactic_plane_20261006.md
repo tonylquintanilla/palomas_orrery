@@ -118,6 +118,11 @@ not touched). Pushed at: (Tony writes the SHA here.)
   panels use one grey, gray90, that every system knows (L-027).
 - Needs Tony: a look at the panels on Windows, a shade darker than
   before; and, when convenient, a run on a Mac.
+- Changed: each coordinate circle says what it is in a hover cross,
+  and the galactic tide is brighter, with a cone showing its shape.
+- Needs Tony: a look at the tide from the side, and a design decision
+  on whether the phone gets the galactic plane, Sgr A* and the cone
+  (L-408).
 
 ## Later the same session: L-027, the panel colour
 
@@ -145,6 +150,19 @@ not touched). Pushed at: (Tony writes the SHA here.)
   this patch refuses at the header line and writes nothing; it then
   needs rebuilding on the new protocol.
 
+## After Tony's look: the circles' hovers, the brighter tide
+
+- Pushed at e7073fce. Tony's look: "looks great", with two notes --
+  the galactic tide is very faint and its X cannot be made out, and
+  the circles' descriptions should move from the box to hover
+  markers on the circles.
+- Found: a brighter tide alone shows two lobes, not an X. Tony chose
+  a brighter tide plus a faint double cone where its strength peaks.
+- Built: `patch_L420_4_circle_hovers_and_tide_20261006.py`, on
+  e7073fce. The words Tony approved are on L-420.
+- Tony noted the phone shows none of this; that design decision is
+  recorded on L-408.
+
 ## Tony-actions
 
 (do)
@@ -165,10 +183,17 @@ not touched). Pushed at: (Tony writes the SHA here.)
    others.
 9. Reinstall agentic-pre-test in Settings > Skills, and replace the
    Project's instructions with PROJECT_INSTRUCTIONS.md (v3.83).
+10. Run `patch_L420_4_circle_hovers_and_tide_20261006.py`, then the
+    maintenance run; move the script into `documentation/`, commit
+    and push.
+11. Plot the Sun with Galactic Tide, Celestial Grid and Star
+    Background on. Turn until the violet circle is edge-on, and look
+    at the tide and its cone; hover the three circles' crosses.
 
 ## Next session
 
-- Close L-420 on Tony's look, or adjust what he names.
+- Close L-420 on Tony's look at patch_L420_4, or adjust what he
+  names.
 - Close L-027 on Tony's run and look; confirm agentic-pre-test 1.3
   loaded.
 - Nothing else is opened by this session.

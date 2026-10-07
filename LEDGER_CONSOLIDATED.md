@@ -248,6 +248,9 @@ Module updated: October 6, 2026 with Anthropic's Claude Opus 5.5
 L-369, L-415 and L-419 closed; L-421 opened, the typed facts;
 interactive-exhibit 1.12, protocol v3.84; L-349, L-300 closed on
 Tony's runs; Tony's look at L-420 recorded), built on e7073fce.
+Module updated: October 6, 2026 with Anthropic's Claude Opus 5.5
+(L-420 after Tony's look: the circles' hovers, the brighter tide and
+its cone; L-408 told the orrery has them), built on fbd223ee.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -609,7 +612,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
-| ! | L-408 | A Galactic Plane toggle in the Sun room (gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
+| ! | L-408 | A Galactic Plane toggle in the Sun room (gallery, the Sun's slice) | OPEN | -- | 2026-10-06 |
 | ! | L-410 | Fuzzy boundaries for edges known only as ranges, the outer corona first (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-05 |
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
 | ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-04 |
@@ -973,7 +976,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
 #### [L-408] A Galactic Plane toggle in the Sun room (gallery, the Sun's slice)
-<!-- L:408 status:OPEN upd:2026-10-04 section:A flag: rice: -->
+<!-- L:408 status:OPEN upd:2026-10-06 section:A flag: rice: -->
 - **Asked 2026-10-03** by Tony, looking for the galactic tide's X on
   the phone and not finding it at the angle he had: "Could we toggle on
   the galactic plane and axis?" Claude agreed it earns its place: it
@@ -1018,8 +1021,17 @@ as an archive of the prioritization thinking -- no cleanup on close.
   the Sun slice's eighth item (L-412). It also carries the look at the
   galactic tide's X that L-406 handed over when it closed: turn until
   the ring is edge-on.
-**Gap:** the Sun slice's eighth item (L-412): gallery first; whether
-the orrery gets the same toggle is asked then; then the tide's look.
+- **2026-10-06: the orrery has them now.** L-420 draws the galactic
+  plane, its poles NGP and SGP, and Sagittarius A* in the orrery's
+  Celestial Grid and Star Background, and, after Tony's look, a
+  brighter tide with a cone where its strength peaks. Tony: "galactic
+  plane and Sag A* are shown in celestial coordinates, but only in the
+  orrery, not in phone. so that's a design decision." The orrery half
+  of the toggle question below is answered; the tide's look is being
+  made there (L-420).
+**Gap:** the Sun slice's eighth item (L-412): Tony's design decision
+on whether the phone draws the galactic plane, Sgr A*, and the tide's
+cone and brightness; then the gallery build.
 **Ref:** L-406, L-265; gallery `gallery/feature_renderers.js`,
 `data/objects_config.json`.
 
@@ -1184,8 +1196,50 @@ skills/interactive-exhibit/SKILL.md.
   descriptions to hovertext markers on the circles"; and on the
   colour, sizes and labels, "looks good". Recorded by the website
   session's closing patch; the two requests are this item's to work.
-**Gap:** Tony's two requests above, then close. (Was: Tony's runs and
-look.)
+- **The tide's X.** A brighter tide alone would not show an X: seen
+  from the side, the layers at 45 degrees flatten into two lobes with
+  an empty strip along the plane, which a sketch showed. Tony chose
+  "brighter plus cone": 5,000 points, twice the size and twice the
+  opacity, and a faint double cone between the Oort cloud's two edges
+  at the latitude where |sin b cos b| peaks, computed as arctan(1),
+  not typed. From the side it reads as an hourglass. One hover line
+  names it.
+- **The point count, held down.** 10,000 points was built first, about
+  0.34 MB in a saved plot against 0.07 MB at 2,000. Tony: "i don't
+  want to regress into memory heavy renders. We worked hard to reduce
+  memory overhead a few months ago."; then "I could not discern the X
+  at All before even faulty. Let's try 5000". 5,000 adds about
+  0.17 MB, only when the tide is on, and once per plot: the animation
+  does not copy shells into its frames. The cone adds about 0.02 MB.
+- **The circles' words move to the circles.** One hover cross per
+  circle, through create_info_marker, in its circle's colour (amber
+  outlined white, teal and violet red), shown whenever the grid is on,
+  each placed far from the other two circles' crossings. Both
+  coordinate boxes keep the axes and point to the crosses.
+- **Words approved by Tony, 2026-10-06 ("Confirmed").** Tide hover,
+  new line: "The pink cone marks that halfway line, where the tide /
+  changes comets' orbits the most". Ecliptic: "Ecliptic (amber
+  circle) / The plane of Earth's orbit around the Sun, / and the
+  plot's XY plane". Equator: "Celestial equator (teal circle) /
+  Earth's equator carried out onto the sky / Tilted from the ecliptic
+  by Earth's axial tilt; / Earth's rotation-axis hover gives the angle
+  for this date". Galactic plane: "Galactic plane (violet circle) / The
+  disk of the Milky Way, seen from the Sun / Its poles are marked NGP
+  and SGP". Box: "XY plane: Ecliptic" and "Enable Celestial Grid to
+  see the coordinate circles; hover the + on each circle to see what
+  it is".
+  `patch_L420_4_circle_hovers_and_tide_20261006.py`.
+- **The phone.** Tony: "galactic plane and Sag A* are shown in
+  celestial coordinates, but only in the orrery, not in phone. so
+  that's a design decision." Recorded on L-408; nothing on the
+  website changed.
+- **298 in Tony's run, 296 at the push.** The scanner counted two
+  patch scripts' fingerprint tables while they sat in the repo root;
+  the pushed tree e7073fce scans 296, the same list as before.
+**Gap:** Tony runs patch_L420_4 and the maintenance run, pushes, and
+looks (Mode 5): the tide from the side with the violet circle edge-on,
+the cone's faintness, the three crosses' places and colours. Then
+close.
 **Ref:** `star_sphere_builder.py` (`build_galactic_grid`);
 `constants_new.py` (the galactic pole and Sgr A* rows);
 `palomas_orrery.py` (the two coordinate boxes, the four tooltips);
@@ -20108,11 +20162,13 @@ detection (sys.platform), or ttk styling.
   sites; agentic-pre-test 1.3 runs the headless test on an unedited
   copy and records the founding case as the history shows it;
   protocol v3.83.
-**Gap:** Tony runs the patch and the maintenance run, looks at the
-panels on Windows (back to the grey of January to June, a shade
-darker than Windows' own), and reinstalls agentic-pre-test; the next
-session confirms its loaded copy reads 1.3. A run on a Mac would
-settle the last system; macOS has not been tried since Tony's test.
+- **Run, pushed at e7073fce and reinstalled, 2026-10-06** (Tony's run
+  record).
+**Gap:** Tony's look at the panels on Windows (back to the grey of
+January to June, a shade darker than Windows' own); the next session
+confirms its loaded copy of agentic-pre-test reads 1.3. A run on a
+Mac would settle the last system; macOS has not been tried since
+Tony's test.
 **Ref:** commits dff2d03, ec333df; L-003; L-115; L-026;
 `skills/agentic-pre-test/SKILL.md`.
 **Platform neutrality:** same goal as L-026 (the LF sweep) -- pair them. This is the Tk

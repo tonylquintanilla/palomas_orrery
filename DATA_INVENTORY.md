@@ -74,24 +74,24 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 448.8 MB (715 files)
+**Total size:** 449.3 MB (721 files)
 
-**GitHub Pages headroom:** 575 MB remaining of 1024 MB ceiling (43.8% used)
+**GitHub Pages headroom:** 575 MB remaining of 1024 MB ceiling (43.9% used)
 
 ### By extension
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 371 | 420.7 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-10-06 |
+| .json | 376 | 420.7 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-10-07 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .png | 2 | 6.3 MB | palomas_orrery_logo.png (5.1 MB) | 2026-09-24 |
-| .py | 220 | 5.4 MB | patch_L413_6_earth_website_20261006.py (290.0 KB) | 2026-10-06 |
-| .jsonl | 35 | 797.7 KB | encke.jsonl (34.8 KB) | 2026-10-06 |
+| .py | 221 | 5.8 MB | patch_L421_1_served_hover_words_20261006.py (419.6 KB) | 2026-10-07 |
+| .jsonl | 35 | 820.3 KB | encke.jsonl (35.4 KB) | 2026-10-07 |
 | .html | 5 | 441.4 KB | interactive.html (208.0 KB) | 2026-10-04 |
-| .js | 20 | 414.8 KB | feature_renderers.js (141.1 KB) | 2026-10-06 |
+| .js | 20 | 416.6 KB | feature_renderers.js (142.3 KB) | 2026-10-07 |
 | .jpg | 2 | 137.9 KB | palomas_orrery_wall.jpg (95.2 KB) | 2026-10-04 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
-| .md | 6 | 66.5 KB | MODULE_ATLAS.md (45.3 KB) | 2026-10-06 |
+| .md | 6 | 67.4 KB | MODULE_ATLAS.md (46.0 KB) | 2026-10-07 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |
 | .patch | 3 | 11.7 KB | phaseb_studio.patch (7.0 KB) | 2026-07-29 |
 | .txt | 2 | 7.8 KB | requirements.txt (4.2 KB) | 2026-09-04 |
@@ -99,7 +99,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 | .bat | 1 | 3.7 KB | _run_local_server.bat (3.7 KB) | 2026-08-24 |
 | (none) | 2 | 1.1 KB | LICENSE (1.1 KB) | 2026-10-04 |
 | .url | 1 | 176.0 B | Paloma's Orrery - Interactive Astronomical Visualizations.url (176.0 B) | 2026-02-27 |
-| .sha | 2 | 82.0 B | constants_export.sha (41.0 B) | 2026-10-06 |
+| .sha | 2 | 82.0 B | constants_export.sha (41.0 B) | 2026-10-07 |
 
 ### Largest files (top 10)
 
@@ -129,7 +129,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | repo | served size | ceiling | headroom | used |
 |---|---|---|---|---|
-| gallery | 448.8 MB | 1024 MB | 575 MB | 43.8% |
+| gallery | 449.3 MB | 1024 MB | 575 MB | 43.9% |
 | orrery (gitignored data) | 966.9 MB | n/a (not served) | -- | -- |
 
 Note: orrery data is local/gitignored. If orbit cache files are pushed to either repo for web serving, re-run this inventory to update headroom.

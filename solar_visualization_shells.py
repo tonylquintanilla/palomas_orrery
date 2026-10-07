@@ -14,6 +14,13 @@ Consumed by: planet_visualization.py (routing dispatcher),
 Role: rendering/shells
 Domain: orrery
 
+Module updated: October 6, 2026 with Anthropic's Claude Opus 5.5
+(L-420, after Tony's look: the galactic tide is drawn brighter, with
+5,000 points, and with a faint double cone where the tide's
+strength peaks, halfway between the galaxy's plane and its poles,
+so its shape reads from the side as an hourglass. One hover line
+names the cone. Words approved by Tony, 2026-10-06.)
+
 Module updated: October 4, 2026 with Anthropic's Claude Opus 5.5
 (L-371, the Sun's distance cards: every hover line that states one of
 the Sun's distance rows prints it from the row, at the count its row
@@ -1617,7 +1624,7 @@ def create_sun_outer_oort_clumpy(center_position=(0, 0, 0), radius_min=20000, ra
     return [shell_trace, info_trace]
 
 
-def create_sun_galactic_tide(center_position=(0, 0, 0), n_points=2000):
+def create_sun_galactic_tide(center_position=(0, 0, 0), n_points=5000):
     """
     Where the galaxy's tide sends comets in from: points in the outer Oort
     cloud, tilted into the galaxy's plane, sparse at the plane and at the
@@ -1639,13 +1646,18 @@ def create_sun_galactic_tide(center_position=(0, 0, 0), n_points=2000):
       50,000 AU with a typed spread and cut-offs.
     - Each point stands for the far end of an orbit. Where any real comet
       is, is not known and is not claimed.
+    - The cone (L-420, Tony's choice of 2026-10-06). A faint double cone
+      through the Sun, at the galactic latitude where |sin b cos b| is
+      largest, between the same two edges. It marks where the density
+      above peaks, so the shape reads from the side as an hourglass.
+      It is not a surface any comet is on.
 
     Parameters:
     - center_position: Sun position tuple (default: (0, 0, 0)).
       Accepted for interface uniformity with the unified dispatch
       contract. Geometry translation deferred to switchover phase.
-    - n_points: Number of random points (default: 2000), a rendering
-      setting.
+    - n_points: Number of random points (default: 5000, up from 2000
+      after Tony's look of 2026-10-06), a rendering setting.
     """
     # Phase D1: center_position accepted for interface uniformity;
     # geometry translation deferred to switchover phase.
@@ -1693,6 +1705,8 @@ def create_sun_galactic_tide(center_position=(0, 0, 0), n_points=2000):
     tide_hover = (
         'Galactic Tide: sends comets in from the outer Oort cloud<br>'
         'Tilted to the galaxy\'s plane, thickest halfway to its poles<br>'
+        'The pink cone marks that halfway line, where the tide<br>'
+        'changes comets\' orbits the most<br>'
         f'From {_OORT_HILLS_EDGE} to {_OORT_OUTER_EDGE} AU<br>'
         'Where the comets really are is not known'
     )
@@ -1700,12 +1714,46 @@ def create_sun_galactic_tide(center_position=(0, 0, 0), n_points=2000):
     shell_trace = go.Scatter3d(
         x=x, y=y, z=z,
         mode='markers',
-        marker=dict(size=0.8, color='rgb(255, 182, 193)', opacity=0.2, symbol='circle'),
+        # Size and opacity doubled, and two and a half times the points,
+        # after Tony's look of 2026-10-06: the tide was too faint to read.
+        marker=dict(size=1.6, color='rgb(255, 182, 193)', opacity=0.45, symbol='circle'),
         name='Sun: Galactic Tide Region',
         legendgroup='Sun: Galactic Tide Region',
         hoverinfo='skip',
         showlegend=True
     )
+    # The cone (L-420, 2026-10-06). |sin b cos b| is largest where
+    # sin b equals cos b, so at b = arctan(1), north and south. Each half
+    # is a band of triangles between the two edges the points use,
+    # turned by the same matrix M. Faint, no hover: the tide's info
+    # marker carries its words. It toggles with the tide.
+    b_peak = np.arctan(1.0)
+    n_around = 72                      # a rendering setting
+    phi = np.linspace(0, 2 * np.pi, n_around, endpoint=False)
+    cone_traces = []
+    for sign in (1.0, -1.0):
+        b = sign * b_peak
+        ring = np.concatenate([
+            np.vstack([edge * np.cos(b) * np.cos(phi),
+                       edge * np.cos(b) * np.sin(phi),
+                       edge * np.sin(b) * np.ones(n_around)])
+            for edge in (INNER_OORT_CLOUD_AU, OUTER_OORT_CLOUD_AU)], axis=1)
+        cx, cy, cz = M @ ring
+        nxt = (np.arange(n_around) + 1) % n_around
+        here = np.arange(n_around)
+        cone_traces.append(go.Mesh3d(
+            x=cx, y=cy, z=cz,
+            i=np.concatenate([here, nxt]),
+            j=np.concatenate([nxt, n_around + nxt]),
+            k=np.concatenate([n_around + here, n_around + here]),
+            color='rgb(255, 182, 193)',
+            opacity=0.12,
+            flatshading=True,
+            hoverinfo='skip',
+            name='Sun: Galactic Tide Region',
+            legendgroup='Sun: Galactic Tide Region',
+            showlegend=False))
+
     r_info = OUTER_OORT_CLOUD_AU * 1.05
     # Phase 1 re-pipe (May 28, 2026): factory-routed.
     info_trace = create_info_marker(
@@ -1715,7 +1763,7 @@ def create_sun_galactic_tide(center_position=(0, 0, 0), n_points=2000):
         'Sun: Galactic Tide Region',
         customdata='Galactic Tide Region'
     )
-    return [shell_trace, info_trace]
+    return [shell_trace] + cone_traces + [info_trace]
 
 
 # =========================================================================

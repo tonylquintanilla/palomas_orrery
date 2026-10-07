@@ -1,7 +1,7 @@
 <!-- Doc-Kind: generated | The human-browsable module index, rebuilt by module_atlas.py alongside the atlas. Do not hand-edit. -->
 # Paloma's Orrery - Module Index
 
-**Generated:** October 06, 2026 by `module_atlas.py`  
+**Generated:** October 07, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -11,19 +11,24 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 142  
-**Total Lines of Code (non-blank):** 114,806  
-**Total Public Functions/Classes:** 1,300
+**Total Python Files:** 143  
+**Total Lines of Code (non-blank):** 115,145  
+**Total Public Functions/Classes:** 1,304
 
 ## Classification Coverage
 
-**Undetermined role (5).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
+- `patch_L420_4_circle_hovers_and_tide_20261006.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
+
+**Undetermined domain (1).** No valid `Domain:` tag.
+
+- `patch_L420_4_circle_hovers_and_tide_20261006.py`
 
 
 ---
@@ -35,7 +40,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_controller.py` | KMZ layer selector for Google Earth Pro. (131 lines) |
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,938 lines) |
-| `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,574 lines) |
+| `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,577 lines) |
 | `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (2,128 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
@@ -63,7 +68,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `sgr_a_visualization_animation.py` | Stage 2: Animated visualization of S-Stars orbiting Sagittarius A*. (345 lines) |
 | `sgr_a_visualization_core.py` | Core visualization module for S-Stars orbiting Sagittarius A*. (561 lines) |
 | `sgr_a_visualization_precession.py` | Stage 3: The Relativistic Rosette (Schwarzschild Precession). (357 lines) |
-| `star_sphere_builder.py` | Build and render celestial sphere for Paloma's Orrery. (1,042 lines) |
+| `star_sphere_builder.py` | Build and render celestial sphere for Paloma's Orrery. (1,107 lines) |
 | `visualization_2d.py` | 2D HR diagram (color-magnitude) plot builder. (525 lines) |
 | `visualization_3d.py` | 3D stellar neighborhood and planetarium plot builder. (859 lines) |
 | `visualization_core.py` | Shared data preparation and formatting for star visualizations. (352 lines) |
@@ -87,7 +92,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `planet9_visualization_shells.py` | Hypothetical Planet 9 shell traces. (269 lines) |
 | `pluto_visualization_shells.py` | Pluto interior and atmosphere shell traces. (615 lines) |
 | `saturn_visualization_shells.py` | Saturn interior, ring, and magnetosphere shell traces. (1,088 lines) |
-| `solar_visualization_shells.py` | Sun interior, corona, and heliosphere shell traces. (1,645 lines) |
+| `solar_visualization_shells.py` | Sun interior, corona, and heliosphere shell traces. (1,691 lines) |
 | `uranus_visualization_shells.py` | Uranus interior, ring, and magnetosphere shell traces. (1,083 lines) |
 | `venus_visualization_shells.py` | Venus interior and atmosphere shell traces. (711 lines) |
 
@@ -240,6 +245,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
+| `patch_L420_4_circle_hovers_and_tide_20261006.py` | - ORRERY repo. Tony's look at L-420, built: each coordinate circle says what it is in a hover cross, the coordinate boxes keep only the axes, and the galactic tide is drawn brighter with a faint cone that shows its shape from the side. (225 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |

@@ -32,6 +32,13 @@ need rebuilding. Fixed in passing: with Labels on, the celestial and
 ecliptic pole hovers showed the short label, "NCP", where the full name
 was meant. Words approved by Tony, 2026-10-06.)
 
+Module updated: October 6, 2026 with Anthropic's Claude Opus 5.5 (L-420,
+after Tony's look: each of the three circles, the ecliptic, the
+celestial equator and the galactic plane, carries one hover cross
+that says what it is, whenever the Celestial Grid is on. The words
+move here from the coordinate box in palomas_orrery.py. Words
+approved by Tony, 2026-10-06.)
+
 Role: rendering
 Domain: stars
 """
@@ -694,6 +701,33 @@ def build_json(vot_path):
 _star_sphere_cache = None
 
 
+# Where each circle's hover cross sits along its circle, in degrees
+# (L-420, after Tony's look of 2026-10-06). Rendering settings, an
+# angular marker step, not facts about the sky: each is placed far
+# from where the other two circles cross it, and off the ticks, so the
+# cross reads as its own marker.
+ECLIPTIC_INFO_MARKER_LON = 142.5   # ecliptic longitude
+EQUATOR_INFO_MARKER_RA = 52.5      # right ascension, in degrees
+GALACTIC_INFO_MARKER_LON = 110.0   # galactic longitude
+
+# What each circle is, for its hover cross. Words approved by Tony,
+# 2026-10-06; until then they sat in the coordinate box at the plot's
+# left (palomas_orrery.py).
+CIRCLE_INFO_ECLIPTIC = (
+    'Ecliptic (amber circle)<br>'
+    'The plane of Earth\'s orbit around the Sun,<br>'
+    'and the plot\'s XY plane')
+CIRCLE_INFO_EQUATOR = (
+    'Celestial equator (teal circle)<br>'
+    'Earth\'s equator carried out onto the sky<br>'
+    'Tilted from the ecliptic by Earth\'s axial tilt;<br>'
+    'Earth\'s rotation-axis hover gives the angle for this date')
+CIRCLE_INFO_GALACTIC = (
+    'Galactic plane (violet circle)<br>'
+    'The disk of the Milky Way, seen from the Sun<br>'
+    'Its poles are marked NGP and SGP')
+
+
 def build_galactic_grid(n_points=CIRCLE_POINTS):
     """
     The galactic plane and its two poles, as unit vectors in the ecliptic
@@ -710,7 +744,10 @@ def build_galactic_grid(n_points=CIRCLE_POINTS):
     nothing else, because the circle carries no ticks.
 
     Returns a dict: 'galactic_plane' (n_points [x, y, z] lists),
-    'galactic_north_pole' and 'galactic_south_pole' ([x, y, z]).
+    'galactic_north_pole' and 'galactic_south_pole' ([x, y, z]), and
+    'galactic_plane_info' ([x, y, z]), where the plane's hover cross
+    sits: galactic longitude GALACTIC_INFO_MARKER_LON, counted
+    from the direction of Sagittarius A* (the SGR_A_STAR rows).
     """
     ngp = np.array(equatorial_to_ecliptic_unit_vector(
         GALACTIC_NORTH_POLE_RA_J2000_DEG, GALACTIC_NORTH_POLE_DEC_J2000_DEG))
@@ -722,10 +759,20 @@ def build_galactic_grid(n_points=CIRCLE_POINTS):
     angles = np.linspace(0, 2 * np.pi, n_points, endpoint=False)
     plane = [[float(np.cos(a) * u[i] + np.sin(a) * v[i]) for i in range(3)]
              for a in angles]
+    # The hover cross's place on the plane (L-420): Sgr A*'s direction
+    # laid into the plane gives longitude zero.
+    sgr = np.array(equatorial_to_ecliptic_unit_vector(
+        SGR_A_STAR_RA_ICRS_DEG, SGR_A_STAR_DEC_ICRS_DEG))
+    l0 = sgr - np.dot(sgr, ngp) * ngp
+    l0 = l0 / np.linalg.norm(l0)
+    l90 = np.cross(ngp, l0)
+    lon = np.radians(GALACTIC_INFO_MARKER_LON)
+    info = np.cos(lon) * l0 + np.sin(lon) * l90
     return {
         'galactic_plane': plane,
         'galactic_north_pole': [float(c) for c in ngp],
         'galactic_south_pole': [float(-c) for c in ngp],
+        'galactic_plane_info': [float(c) for c in info],
     }
 
 
@@ -932,6 +979,29 @@ def add_celestial_sphere_traces(fig, axis_range, show_stars, show_names,
         showlegend=False,
         name='_galactic_plane'
     ))
+
+    # ---- One hover cross per circle (L-420, 2026-10-06) ----
+    # The circles themselves skip hover; each carries one cross, in the
+    # circle's own colour, through the orrery's info-marker factory.
+    # Shown whenever the grid is on, not only with Labels, since it
+    # replaces the coordinate box's lines. Amber is a saturated warm
+    # fill, so its outline is white; teal and violet keep red.
+    from orrery_rendering import create_info_marker
+    ecl_info = ecliptic_longitude_to_unit_vector(ECLIPTIC_INFO_MARKER_LON)
+    eq_info = equatorial_to_ecliptic_unit_vector(EQUATOR_INFO_MARKER_RA, 0.0)
+    gal_info = galactic['galactic_plane_info']
+    for point, colour, border, words, label in (
+            (ecl_info, 'rgb(239, 159, 39)', 'white', CIRCLE_INFO_ECLIPTIC,
+             '_ecliptic_info'),
+            (eq_info, 'rgb(93, 202, 165)', 'red', CIRCLE_INFO_EQUATOR,
+             '_celestial_equator_info'),
+            (gal_info, 'rgb(175, 135, 235)', 'red', CIRCLE_INFO_GALACTIC,
+             '_galactic_plane_info')):
+        cross = create_info_marker(
+            float(point[0]) * R, float(point[1]) * R, float(point[2]) * R,
+            colour, words, label, border_color=border)
+        cross.name = label
+        fig.add_trace(cross)
 
     # ---- Tick markers (always visible when grid is on) ----
     # + markers at every 30 deg. When Labels is on, ticks carry hovertext.
