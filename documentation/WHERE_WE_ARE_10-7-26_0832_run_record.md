@@ -690,6 +690,247 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
      be easier to read.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
 
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L421_3_guide_links_20261006.py
+ok  documentation/payload_earth_scene.json           re-recorded whole
+ok  data/objects_config.json                         L-421: "_comment": "L-421 (2026-10-06): the sentences the Earth roo
+ok  data/objects_config.json                         L-421: "source": "Sense of rotation: Archinal et al. (2019), Correc
+ok  data/objects_config.json                         L-421: "source": "U.S. Naval Observatory, Astronomical Applications
+ok  data/objects_config.json                         L-421: "source": "The terminator, 'the boundary between the illumin
+ok  data/objects_config.json                         L-421: "source": "Williams (1994), Astron. J. 108:711, doi:10.1086/
+ok  documentation/smoke_earth_geometry.js            L-421: // L-421 (Tony, 2026-10-06, from the phone: the Sun Directio
+ok  gallery/earth_geometry.js                        L-421: * changed. Later the same day, from Tony's phone: each guide
+ok  gallery/earth_geometry.js                        L-421: // A guide's link, its entry's served info_url (L-421): the 
+ok  gallery/earth_geometry.js                        L-421: info_url: guideLink("sense"),
+ok  gallery/earth_geometry.js                        L-421: info_url: guideLink("subsolar"),
+ok  gallery/earth_geometry.js                        L-421: info_url: guideLink("terminator"),
+ok  gallery/earth_geometry.js                        L-421: info_url: guideLink("moon_arc"),
+ok  interactive.html                                 L-421: // L-421 (2026-10-06): a link or a source only an info marke
+
+patch applied
+
+NEXT:
+  1. Run the cache builder: the dashboard button 'Gallery Cache Builder
+     -- Manual Run', or tools/gallery_cache_builder.py from this folder.
+     Read its [SWAP] line.
+
+======================================================================
+  DAILY RUN -- Wednesday October 07, 2026  20:33
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io
+======================================================================
+Daily Run steps, from C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io:
+  1. Guest book updater                 tools\guestbook_updater.py  found
+  2. Cache builder                      tools\gallery_cache_builder.py  found
+  3. Gallery maintenance run, offline   gallery_maintenance_run.py  found
+=== DAILY RUN: all 3 step scripts found
+Last cache build: 2026-10-07 14:31 UTC, ok, 0 days ago.
+
+======================================================================
+  DAILY RUN step 1 of 3: Guest book updater
+======================================================================
+======================================================================
+  guest book updater -- C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io
+======================================================================
+1 entry in the guest book; 171 gallery pages a link may point at.
+
+Fetching the form's responses...
+No new messages.
+
+w write, r reply, x remove, p pin/unpin, f form address, s sheet address, q finish > q
+
+======================================================================
+  approved 0, declined 0, waiting 0; the guest book now has 1 entry
+  No change to data/guestbook.json.
+======================================================================
+
+======================================================================
+  Before the cache build: PAUSE ONEDRIVE and note the time.
+  (OneDrive icon in the taskbar > Pause syncing > 2 hours.)
+======================================================================
+Press Enter when OneDrive is paused, or type s to skip the build today >
+OneDrive paused at 20:33; the pause lasts until about 22:33.
+
+======================================================================
+  DAILY RUN step 2 of 3: Cache builder
+======================================================================
+[RECOVER] removed retained data\solar-system.prev (cleared read-only on 6 entries)
+[sweep] no sibling directories present
+[POLE] earth: pole of 2026-10-08 served (RA 0.70771, Dec 89.85003 deg); tilt 23.43809 deg
+[SWAP] the new cache is in place; every rename worked on the first try. Recorded in data/cache_swap_log.jsonl
+[warn] sun: features-only entry; no Horizons fetch
+[done] run 20261008T013323Z (nightly): 19 objects
+
+----------------------------------------------------------------------
+WHAT TO DO NEXT, before you commit anything:
+
+  1. Run the gallery maintenance run, from this same folder:
+         python gallery_maintenance_run.py
+     Every gating checker should pass. Its LAST line reads the
+     swap log back and should agree with the [SWAP] line above.
+  2. In GitHub Desktop, look at the change list. A good build
+     shows changed and added files and NO pile of deletions.
+  3. Commit and push.
+  4. After the push, check what the live site serves:
+         python gallery_maintenance_run.py --live
+
+TONY-ACTION ROLLUP for this run:
+  (do)     steps 1 to 4 above, in that order.
+----------------------------------------------------------------------
+
+The builder's next steps start with the maintenance run.
+The Daily Run runs it now.
+
+======================================================================
+  DAILY RUN step 3 of 3: Gallery maintenance run, offline
+======================================================================
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              2.2s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     1.0s  rewrote data/constants_export.sha
+  PASS Config mirror             0.2s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.7s  rewrote data/objects_export.sha
+  PASS Objects mirror            0.2s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      19.7s  PASS (229 checks, 0 failures)
+  PASS Pole of date              0.3s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.1s  All 64 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served, print count
+                                    written as served, "in" written as
+                                    served and a slot served in
+                                    another unit from it.
+  PASS Store writer suite       11.9s  All 322 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings, the rooms section's
+                                    included; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.2s  All 305 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Objects mirror suite      0.2s  MIRROR OBJECTS SUITE: pass
+  PASS Objects mirror check      0.1s  OBJECTS MIRROR: pass
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 101 link(s) compared, store
+                                    3b7000e368d1.
+  PASS Pointer join              0.1s  Every link is accounted for: 108
+                                    link(s) against orrery f5e44b98, 4
+                                    fallback named; read check: 43 of
+                                    43 measured rows reached carry a
+                                    read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's 19 object(s) and their
+                                    features exactly: 4 object(s) with
+                                    35 named shell(s), in both cache
+                                    files.
+  PASS Collapsed features        0.1s  33 stored as themselves, 16
+                                    collapsed, 0 unclassified.
+  PASS Feature renderers         1.3s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.3s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.3s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.3s  === PASS: 57 hover(s) and 307
+                                    number(s) examined; 13 graded, 7
+                                    graded by line, 44 held to the
+                                    fixture ===
+  PASS Solar System figures      0.1s  === PASS: 6 worked cases, 11
+                                    drawer rows matched to their
+                                    accuracy rows, 10 served
+                                    distances; Uranus, Neptune and
+                                    Pluto print to JPL's ten-thousands
+                                    place ===
+  PASS Solar System drawer       0.1s  === PASS: the Sun is never ticked,
+                                    See more hides only what is not
+                                    ticked, the handle names the last
+                                    body ticked, All / none leaves the
+                                    Sun, rooms are offered only where
+                                    they exist, and the page asks this
+                                    file ===
+  PASS Guest book                0.1s  === GUEST BOOK: all 8 checks
+                                    passed
+  PASS Guest book updater        0.3s  === GUEST BOOK UPDATER: all 43
+                                    checks passed (6 scripted runs,
+                                    self-test first)
+  PASS Daily run steps           0.1s  === DAILY RUN: all 3 step scripts
+                                    found
+  PASS Artifact 1 assembler      0.3s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: 2 directories in data/ the
+                                    builder did not make: solar-system
+                                    (1), solar-system (2). Check
+                                    whether they belong there; the
+                                    newer .gitignore rules keep the
+                                    known conflict-copy shapes out of
+                                    git but do not remove anything.
+
+======================================================================
+  24 of 24 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: 2 directories in data/ the
+  last swap 2026-10-08T01:33:54.118488+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+======================================================================
+  DAILY RUN -- summary
+======================================================================
+  Guest book updater           ok
+  Cache builder                ok
+  Maintenance run, offline     ok
+
+  NEXT:
+    1. GitHub Desktop: look at the change list, then commit and push.
+    2. Then the dashboard's Gallery Maintenance Run -- live, AFTER a push.
+    3. Resume OneDrive.
+======================================================================
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  2. Run gallery_maintenance_run.py. Expect 24 of 24. A red Cache in
+     step means step 1 has not run.
+  3. Move this script into documentation/. Commit the config and the
+     cache together, and push. -- ab66aba70a5874b033742a8428070b5889484490
+  4. On your phone, in Earth's room, open the panel on the Sun
+     Direction, the rotation axis, the terminator and the Moon: each
+     should show a Read more link and its source line.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
 ===============================================================================
 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L420_4_circle_hovers_and_tide_20261006.py
