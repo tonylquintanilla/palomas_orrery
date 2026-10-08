@@ -118,6 +118,8 @@ not touched). Pushed at: (Tony writes the SHA here.)
   panels use one grey, gray90, that every system knows (L-027).
 - Needs Tony: a look at the panels on Windows, a shade darker than
   before; and, when convenient, a run on a Mac.
+- Done (2026-10-07): the panels' grey confirmed. The phone's
+  galactic-plane question waits for the design talk.
 - Changed: each coordinate circle says what it is in a hover cross,
   and the galactic tide is brighter, with a cone showing its shape.
 - Needs Tony: a look at the tide from the side, and a design decision
@@ -207,8 +209,8 @@ not touched). Pushed at: (Tony writes the SHA here.)
 ## Next session
 
 - L-420 closed 2026-10-07.
-- Close L-027 on Tony's run and look; confirm agentic-pre-test 1.3
-  loaded.
+- Confirm the loaded agentic-pre-test reads 1.3, then close L-027;
+  Tony confirmed the panels 2026-10-07.
 - Nothing else is opened by this session.
 
 Session written October 2026 with Anthropic's Claude Opus 5.5.

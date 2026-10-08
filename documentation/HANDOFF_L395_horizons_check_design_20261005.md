@@ -225,5 +225,5 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  2. Move this script into documentation/; commit and push. -- 
+  2. Move this script into documentation/; commit and push. -- 8653ef1b593aaf3835ecbcf2186b9e3e28a28089
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 

@@ -74,9 +74,9 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 449.6 MB (725 files)
+**Total size:** 450.1 MB (727 files)
 
-**GitHub Pages headroom:** 574 MB remaining of 1024 MB ceiling (43.9% used)
+**GitHub Pages headroom:** 574 MB remaining of 1024 MB ceiling (44.0% used)
 
 ### By extension
 
@@ -84,8 +84,8 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 |---|---|---|---|---|
 | .json | 379 | 420.8 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-10-07 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
+| .py | 224 | 6.6 MB | patch_L421_1_served_hover_words_20261006.py (419.6 KB) | 2026-10-07 |
 | .png | 2 | 6.3 MB | palomas_orrery_logo.png (5.1 MB) | 2026-09-24 |
-| .py | 222 | 6.1 MB | patch_L421_1_served_hover_words_20261006.py (419.6 KB) | 2026-10-07 |
 | .jsonl | 35 | 831.7 KB | encke.jsonl (35.8 KB) | 2026-10-07 |
 | .html | 5 | 441.6 KB | interactive.html (208.3 KB) | 2026-10-07 |
 | .js | 20 | 419.4 KB | feature_renderers.js (142.5 KB) | 2026-10-07 |
@@ -129,7 +129,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | repo | served size | ceiling | headroom | used |
 |---|---|---|---|---|
-| gallery | 449.6 MB | 1024 MB | 574 MB | 43.9% |
+| gallery | 450.1 MB | 1024 MB | 574 MB | 44.0% |
 | orrery (gitignored data) | 966.9 MB | n/a (not served) | -- | -- |
 
 Note: orrery data is local/gitignored. If orbit cache files are pushed to either repo for web serving, re-run this inventory to update headroom.

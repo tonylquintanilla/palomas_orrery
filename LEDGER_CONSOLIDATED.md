@@ -256,6 +256,9 @@ Module updated: October 7, 2026 with Anthropic's Claude Opus 5.5
 Module updated: October 7, 2026 with Anthropic's Claude Opus 5.5
 (L-395: the Horizons check designed and tested by hand; Encke's list
 entry ruled), built on 12693a53.
+Module updated: October 7, 2026 with Anthropic's Claude Opus 5.5
+(L-027: the panels' grey confirmed; L-408 waits for the design talk),
+built on 8653ef1b.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -645,7 +648,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### D.Structural -- Dead code / honest shells
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-027 (#61) | Platform Neutrality (SystemButtonFace) | OPEN | 2.2 | 2026-10-06 |
+| ! | L-027 (#61) | Platform Neutrality (SystemButtonFace) | OPEN | 2.2 | 2026-10-07 |
 | ! | L-171 | patch_ledger_index_retired_handles.py breaks L-163's zero-undetermined close | OPEN | 1.8 | 2026-07-29 |
 | ! | L-025 (#N7) | Reduced to custom-geometry inline markers only | OPEN | 1.5 | 2026-06-18 |
 | ! | L-068 | Static/animation pipeline consolidation -- remaining residuals (umbrella) | OPEN | 1.5 | 2026-06-23 |
@@ -1034,9 +1037,11 @@ as an archive of the prioritization thinking -- no cleanup on close.
   orrery, not in phone. so that's a design decision." The orrery half
   of the toggle question below is answered; the tide's look is being
   made there (L-420).
-**Gap:** the Sun slice's eighth item (L-412): Tony's design decision
-on whether the phone draws the galactic plane, Sgr A*, and the tide's
-cone and brightness; then the gallery build.
+- **2026-10-07:** Tony, on the phone's question: "awaits the design
+  talk."
+**Gap:** the Sun slice's eighth item (L-412): Tony's design decision,
+at the design talk, on whether the phone draws the galactic plane,
+Sgr A*, and the tide's cone and brightness; then the gallery build.
 **Ref:** L-406, L-265; gallery `gallery/feature_renderers.js`,
 `data/objects_config.json`.
 
@@ -20203,7 +20208,7 @@ OLD inline-marker definitions left OUTSIDE a custom-geometry builder -- straggle
 sweep missed. None found -> close. (Deferred until run.)
 
 #### [L-027 | #61] Platform Neutrality (SystemButtonFace)
-<!-- L:027 status:OPEN upd:2026-10-06 section:D.Structural flag: rice:3/2/75/2 -->
+<!-- L:027 status:OPEN upd:2026-10-07 section:D.Structural flag: rice:3/2/75/2 -->
 26 occurrences of the Tk color name SystemButtonFace in palomas_orrery.py.
 Resolves on Windows; fails on Linux/macOS. The xvfb pre-test sed swap is
 a workaround, not a fix. Options: hex literal '#F0F0F0', platform
@@ -20233,11 +20238,16 @@ detection (sys.platform), or ttk styling.
   protocol v3.83.
 - **Run, pushed at e7073fce and reinstalled, 2026-10-06** (Tony's run
   record).
-**Gap:** Tony's look at the panels on Windows (back to the grey of
-January to June, a shade darker than Windows' own); the next session
-confirms its loaded copy of agentic-pre-test reads 1.3. A run on a
-Mac would settle the last system; macOS has not been tried since
-Tony's test.
+- **The panels' grey confirmed, 2026-10-07.** Tony: "gray90 is
+  confirmed."
+- **A run on a Mac, struck as a condition for closing.** gray90 is a
+  colour name Tk knows on every system, it is the grey Tony ran on
+  macOS while it held from January to June, and the headless
+  pre-test now fails if a one-system colour name returns. A Mac run
+  is still welcome; nothing waits on it.
+**Gap:** a later session confirms its loaded copy of agentic-pre-test
+reads 1.3, then closes this item. The session that bumped it loaded
+1.2 and cannot see the reinstall.
 **Ref:** commits dff2d03, ec333df; L-003; L-115; L-026;
 `skills/agentic-pre-test/SKILL.md`.
 **Platform neutrality:** same goal as L-026 (the LF sweep) -- pair them. This is the Tk
