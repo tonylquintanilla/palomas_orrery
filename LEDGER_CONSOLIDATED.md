@@ -249,6 +249,9 @@ L-369, L-415 and L-419 closed; L-421 opened, the typed facts;
 interactive-exhibit 1.12, protocol v3.84; L-349, L-300 closed on
 Tony's runs; Tony's look at L-420 recorded), built on e7073fce.
 Module updated: October 6, 2026 with Anthropic's Claude Opus 5.5
+(L-418: the provenance-discipline split designed and ruled; the
+install trial set), built on fbd223ee.
+Module updated: October 6, 2026 with Anthropic's Claude Opus 5.5
 (L-420 after Tony's look: the circles' hovers, the brighter tide and
 its cone; L-408 told the orrery has them), built on fbd223ee.
 Module updated: October 7, 2026 with Anthropic's Claude Opus 5.5
@@ -1176,6 +1179,29 @@ skills/interactive-exhibit/SKILL.md.
 - **2026-10-06, versions confirmed.** The six loaded copies read
   their new versions, open with their contents, and match the repo
   byte for byte. The item stays open only for the split.
+- **2026-10-06, the split designed and ruled.** A design session at
+  orrery fbd223ee measured the skill: 137,837 characters, of which a
+  single read shows 16,000. The design is
+  `documentation/PREDESIGN_L418_provenance_skill_split_20261006.md`;
+  the record is `documentation/HANDOFF_L418_skill_split_design_20261006.md`.
+- **Tony's ruling, 2026-10-06 ("Read and confirmed"), all five
+  points:** a new skill, provenance-cross-check, holds the
+  Review-Repair Protocol, except A Cross-Check Retires With Its Value
+  or Its Citation and the retired `# Verified:` stamp, which stay
+  because they fire on ordinary edits; Rules 1 to 8 of the figure
+  count go to `references/figures.md` and the field notes to
+  `references/field-notes.md`; the withdrawn derived-row rule goes to
+  `documentation/SKILL_HISTORIES.md`; skills_index.py writes a read
+  plan at the top of every skill over 16,000 characters, and its
+  check fails on a part over 16,000 or a line left uncovered, and on
+  a reference file that is named and missing or present and unnamed;
+  the scanner and push gate are NOT split off; the install trial
+  comes first. No rule is reworded.
+- **The trial:** `install-probe.zip`, a throwaway skill with one extra
+  file. The next session checks it; Tony then deletes it.
+- **Still open:** the build, in a fresh session after the trial
+  passes. Versions to cut: provenance-discipline 2.27,
+  provenance-cross-check 1.0, ledger-and-session-records 1.17.
 **Gap:** the split above, when a design talk reaches it. (Was: also
 the next session's version check, done 2026-10-06.)
 **Ref:** `skills_index.py`; `documentation/SKILL_HISTORIES.md`;

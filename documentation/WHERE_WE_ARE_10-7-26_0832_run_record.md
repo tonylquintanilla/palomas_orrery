@@ -1082,17 +1082,55 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  3. Commit and push. -- 
+  3. Commit and push. -- 3f4c01e287ce3fd265d60bce0a3ec00321900785
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 2. **patch_L418_2** (Opus, the split design closed). It rewrites the page whole, so it goes before anything else that touches the page.
-3. **patch_L001_1** (mine, the Earth System track). Adds road stage 14 at an anchor the step-2 page still has; tested in that order.
-4. **patch_L412_1** (mine, the RICE ruling). Records only.
-5. **patch_L216_1** (mine, the hand run). Records only.
-6. **patch_L422_1** (mine, the skill at 1.17 and the page). It checks that 1 through 5 have run and refuses otherwise.
-7. **orrery_maintenance_run.py**, once. The manifest table goes to 1.17; the index step moves L-071 and L-077 to the closed section.
-8. **Commit and push.** Then the two account steps: reinstall ledger-and-session-records, replace the Project's instructions with v3.85.
-9. **Paste the note into the four sessions.** Only now, because it tells them to read the skill and the page from HEAD.
-10. **Anything the fourth session closes with** is built after step 9, by section, against the new page.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L418_2_split_design_close_20261006.py
+  ok  ledger: L-418
+  ok  ledger: header stamp
+  ok  Where We Are: header
+  ok  Where We Are: Read this first
+  ok  Where We Are: road mark cleared
+  ok  Where We Are: road stage 5 mark cleared
+  ok  Where We Are: road stage 6 mark cleared
+  ok  Where We Are: Right now
+  ok  Where We Are: next steps, item 1
+  ok  Where We Are: next steps, the split
+  ok  Where We Are: Waiting on you
+  ok  Where We Are: details, handles
+  ok  Where We Are: details, records
+  ok  documentation/PREDESIGN_L418_provenance_skill_split_20261006.md: already the ruled copy
+  ok  documentation/HANDOFF_L418_skill_split_design_20261006.md: written
+Notes of yours carried into the handoff: 0
+Stamps updated: the ledger's header stamp; Where We Are's 'Last updated' lines.
+patch applied (1509431 bytes in 3 files)
+NEXT
+1. Move this script into documentation/.
+2. Run orrery_maintenance_run.py. This patch touches only the ledger
+   and three documents, so it should report as it did before.
+
+OK: 416 L-blocks parsed, no consistency problems.
+Index regenerated (238 live items) in C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\LEDGER_CONSOLIDATED.md.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+3. Commit and push. -- 
+4. Install the trial skill: in Settings, under Skills, Upload skill,
+   and choose install-probe.zip. Keep the ZIP OUT of the repo folder;
+   inside skills/ it would be added to the manifest.
+5. Open a fresh chat in this Project and say: check the install probe.
+6. After that check, delete install-probe from Settings.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+1. **patch_L001_1** (mine, the Earth System track). Adds road stage 14 at an anchor the step-2 page still has; tested in that order.
+2. **patch_L412_1** (mine, the RICE ruling). Records only.
+3. **patch_L216_1** (mine, the hand run). Records only.
+4. **patch_L422_1** (mine, the skill at 1.17 and the page). It checks that 1 through 5 have run and refuses otherwise.
+5. **orrery_maintenance_run.py**, once. The manifest table goes to 1.17; the index step moves L-071 and L-077 to the closed section.
+6. **Commit and push.** Then the two account steps: reinstall ledger-and-session-records, replace the Project's instructions with v3.85.
+7. **Paste the note into the four sessions.** Only now, because it tells them to read the skill and the page from HEAD.
+8.  **Anything the fourth session closes with** is built after step 9, by section, against the new page.
 
 Steps 1 to 5 can be in any order among themselves; I tested the pairs. The two that must hold are 2 before 3, so the road edit lands on the rewritten page, and 6 last.

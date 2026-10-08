@@ -1,39 +1,34 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, rewritten in place; read it at the end of every session. -->
 # Where We Are
 
-Last updated: October 6, 2026, end of the Earth website session.
-- Written at orrery e7073fce and gallery 38f1e7b0, after your runs of
-  the website patch and of the galactic-plane and panel-colour patches.
+Last updated: October 6, 2026, end of the skills sweep session.
+- Written at orrery fbd223ee. This session only designed: no code and
+  no skill changed.
 
 > **READ THIS FIRST**
 >
 > **Changed this session:**
-> - Earth's website patch is live, and your look on the phone found it
->   correct. The inner belt says "trapped protons", in your words, and
->   Jupiter's belts no longer claim a measured distance.
-> - The saved Earth scene the checks use is re-recorded from the real
->   data, with a tool that can remake it. That showed two hovers on the
->   live site were already too tall for the phone; with your approved
->   changes all three tall ones fit.
-> - A search of both rooms found 17 facts typed in the code instead of
->   served with their sources. You ruled they are fixed now, as part of
->   finishing the Earth and Sun rooms. The plan is written down for a
->   fresh session.
-> - A written rule now says code may type only words about our picture;
->   facts, papers and sources are served.
-> - In the orrery, from a session of its own: the Celestial Grid draws
->   the galactic plane, a violet circle, with its poles, and the Star
->   Background marks Sagittarius A*, the galaxy's centre.
-> - The desktop orrery opens on Linux and macOS again: its panels use
->   one grey, gray90, that every system knows.
+> - All eleven skills were checked against the repo and the manifest.
+>   All match, including the three new versions you installed.
+> - The longest skill, provenance-discipline, is too long to be read
+>   whole: one read of a file shows 16,000 characters, and the skill
+>   has 137,837. The skill that guards facts and sources is the one
+>   least likely to be read in full.
+> - You confirmed a design to split it. The cross-checking procedure
+>   becomes its own skill, two long sections move into files inside
+>   the skill's folder, and a read plan at the top says which lines to
+>   read in turn. No rule is reworded.
+> - No skill is retired: every one has open work behind it.
 >
 > **Do next:**
-> - *The typed facts, in a fresh session, from the plan written today.*
+> - *Install the trial skill, then check it in a fresh session.*
+> - *The typed facts, in a fresh session, from the plan written on
+>   October 6.*
 >
 > **Needs you now:**
-> - *Run this closing patch in the orrery repo, reinstall
->   interactive-exhibit, and replace the Project's instructions with
->   v3.84.*
+> - *Run this closing patch, then the maintenance run, and push.*
+> - *Install install-probe.zip from Settings, and keep it out of the
+>   repo.*
 
 How to read the marks:
 - *Italic* lines are the must-reads.
@@ -58,7 +53,7 @@ How to read the marks:
 - Within that range, a visitor will be able to choose a date, and
   perhaps play time forward.
 
-## The road  **>> UPDATED THIS SESSION**
+## The road
 
   1. [done]   The Sun's room is live on the website.
   2. [done]   Earth's room is live, with every number traced to its source.
@@ -68,10 +63,10 @@ How to read the marks:
               planets, a drawer to pick them, and a way into each
               body's own room.
   5. [NOW]    *Earth's old items are finished, in the order you
-              confirmed.* << this session: the website patch is live;
-              the typed facts are the last part, with the design talks.
+              confirmed.* The website patch is live; the typed facts
+              are the last part, with the design talks.
   6. [next]   The facts typed in the Earth and Sun rooms' code move into
-              the served data, with their sources. << new this session
+              the served data, with their sources.
   7. [next]   The Sun's numbers get the same checking Earth's got: the
               Sun's list, from its opening view.
   8. [next]   The served objects are checked against JPL Horizons, the
@@ -120,24 +115,38 @@ How to read the marks:
   could move to hover markers on the circles.
 - The panels' grey: a shade darker than before, the grey of January to
   June. A look on Windows, and a run on a Mac when convenient.
-- The skill copies this session loaded all matched the repo, and the
-  ones you reinstalled read their new versions.
+- The skills: all eleven match the repo and the manifest at fbd223ee.
+  - provenance-discipline is 137,837 characters, and one read shows
+    16,000, so most of its rules are not seen on a plain read.
+  - The split you confirmed takes it to about 61,000 characters and
+    moves the cross-checking procedure into a new skill,
+    provenance-cross-check.
+  - A read plan at the top of each long skill will say which lines to
+    read in turn, so the rest is read whole.
+  - First, a throwaway skill tests whether your account keeps the
+    extra files in a skill's folder.
 
 ## The next three steps  **>> UPDATED THIS SESSION**
 
-1. *Your run of this closing patch, and the reinstall.*
+1. *Your run of this closing patch, and the trial skill's install.*
 2. The typed facts move into the served data, in a fresh session, from
    `documentation/MANIFEST_L421_typed_facts_20261006.md`.
 3. The Horizons check's design round, in its own session, from
    `documentation/HANDOFF_L395_horizons_check_design_20261005.md`.
+
+The provenance-discipline split is built in its own fresh session
+once the trial passes, from
+`documentation/PREDESIGN_L418_provenance_skill_split_20261006.md`.
+It can go before or after the two above; the order is yours.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Now:
 - Run this closing patch, run orrery_maintenance_run.py, commit and
   push.
-- Reinstall interactive-exhibit (1.12) and replace the Project's
-  instructions with PROJECT_INSTRUCTIONS.md, now v3.84.
+- Install the trial skill, install-probe.zip, from Settings. Keep the
+  ZIP out of the repo: inside skills/ it would join the manifest.
+- After the next session checks it, delete install-probe.
 - A look at the orrery's panels on Windows; a Mac run when convenient.
 
 At the Horizons design round:
@@ -169,18 +178,22 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item, done and open: `LEDGER_CONSOLIDATED.md`
-  - This session: L-413 (Earth's list), L-349 (the belt's words),
-    L-379 (the saved scene), L-300 (the collapsed-features check), L-292
-    (the geocorona note), L-421 (the typed facts, opened). Closed: L-349
-    (the belt's words), L-300 (the collapsed-features check), L-369
-    (Earth's tilt in words), L-415 and L-419 (skill rules confirmed).
-  - L-418 stays open only for splitting provenance-discipline's two
-    long procedures into their own files.
+  - This session: L-418, the provenance-discipline split, designed and
+    confirmed. It stays open until the split is built.
+  - Earth's website session: L-413 (Earth's list), L-349 (the belt's
+    words), L-379 (the saved scene), L-300 (the collapsed-features
+    check), L-292 (the geocorona note), L-421 (the typed facts,
+    opened). Closed: L-349, L-300, L-369 (Earth's tilt in words), L-415
+    and L-419 (skill rules confirmed).
   - The galactic plane: L-420; the panel colour: L-027; their record:
     `documentation/HANDOFF_L420_galactic_plane_20261006.md`.
 - The plan for the typed facts:
   `documentation/MANIFEST_L421_typed_facts_20261006.md`
 - This session's record:
+  `documentation/HANDOFF_L418_skill_split_design_20261006.md`
+- The split's design:
+  `documentation/PREDESIGN_L418_provenance_skill_split_20261006.md`
+- Earth's website session's record:
   `documentation/HANDOFF_L413_earth_website_20261006.md`
 - The skills' old version history: `documentation/SKILL_HISTORIES.md`
 - The reasoning behind the order:
