@@ -11,26 +11,24 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 144  
-**Total Lines of Code (non-blank):** 115,808  
-**Total Public Functions/Classes:** 1,305
+**Total Python Files:** 143  
+**Total Lines of Code (non-blank):** 115,013  
+**Total Public Functions/Classes:** 1,301
 
 ## Classification Coverage
 
-**Undetermined role (7).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
 - `patch_L395_3_horizons_check_design_20261007.py`
-- `patch_L422_1_skill_1_17_and_tonys_page_20261007.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (2).** No valid `Domain:` tag.
+**Undetermined domain (1).** No valid `Domain:` tag.
 
 - `patch_L395_3_horizons_check_design_20261007.py`
-- `patch_L422_1_skill_1_17_and_tonys_page_20261007.py`
 
 
 ---
@@ -248,7 +246,6 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
 | `patch_L395_3_horizons_check_design_20261007.py` | - ORRERY repo. Writes down L-395's design round of 2026-10-07: the check of the orrery's object list against JPL Horizons. (93 lines) |
-| `patch_L422_1_skill_1_17_and_tonys_page_20261007.py` | - ORRERY repo. Closes the Fable 5.1 ledger-sweep session of October 4 to 7, 2026: it writes Tony's rulings of October 7 into ledger-and-session-records 1.17, records the bump in the protocol (v3.85), puts Where We Are into the shape Tony confirm... (795 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |

@@ -610,6 +610,17 @@ every session's ledger patch, with this session's changes marked and
 the must-reads in italics. Tony, 2026-09-30: "i struggle to keep the
 big picture. it's the old dilemma of loosing the forest for the trees."
 
+The skill's v1.14 entry, moved here word for word on 2026-10-07 when
+v1.17 made a fourth entry (L-422):
+Earlier: 1.14 | Cut from palomas_orrery @ b3cfc780 (v1.14),
+earlier @ 5db8bbe0 (v1.13), @ 2a7d26b9 (v1.12), @ 1ee1cc61 (v1.11), @ 50cbd2df (v1.10), @ 41c0b279 (v1.9), @ 3586970d (v1.8),
+@ 434a712b (v1.7), @ 305b269 (v1.6), @ 3398970 (v1.5) | September 10,
+2026, with Anthropic's Claude Opus 5
+v1.14 (L-405; 2026-10-02, with Anthropic's Claude Opus 5.5) adds A Wrong
+Sentence in a Skill: Bump Now, or Carry It, under the change log. A
+session had to decide it for itself on 2026-10-01 (L-404); Tony's review
+of 2026-10-02 sorted it as method, so the skill answers it now.
+
 ## gallery-cache-builder
 
 v1.4 adds Recovery from a failed swap: discard and re-run -- Tony's

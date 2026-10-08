@@ -274,6 +274,11 @@ Module updated: October 7, 2026 with Anthropic's Claude Fable 5.1
 (L-216: the daily hand run stands as Tony's practice, pausing OneDrive
 24 hours first; the swap retry proven twice in the log; a close for
 Tony to decide), built on 8653ef1b.
+Module updated: October 7, 2026 with Anthropic's Claude Fable 5.1
+(L-422 opened: ledger-and-session-records 1.17, protocol v3.85; Where
+We Are in the shape Tony confirmed, with his run-record zone; L-412's
+rule landed; L-396's check gains the cap), built on 8653ef1b, after
+the day's five patches.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -491,7 +496,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*236 live items; 220 need attention (`!`); 178 RICE-scored; 180 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*237 live items; 221 need attention (`!`); 178 RICE-scored; 180 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -628,7 +633,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-393 | Encounter data: dates, spacecraft records centred on their targets, and how far the cache reaches in time (gallery, cache) | OPEN | -- | 2026-09-29 |
 | ! | L-394 | A card cannot say which body it belongs to (gallery, Studio) | OPEN | -- | 2026-09-29 |
 | ! | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | OPEN | -- | 2026-10-07 |
-| ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-10-04 |
+| ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-10-07 |
 | ! | L-399 | Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder) | OPEN | -- | 2026-10-01 |
 | ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
@@ -641,6 +646,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-414 | The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling) | OPEN | -- | 2026-10-04 |
 | ! | L-418 | Long skills open with their contents, and keep three version entries (skills) | OPEN | -- | 2026-10-06 |
 | ! | L-421 | Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words) | OPEN | -- | 2026-10-06 |
+| ! | L-422 | ledger-and-session-records 1.17: Tony's page by section, the run-record zone, labels on handles, RICE for lists, where a record goes (skills, documentation) | OPEN | -- | 2026-10-07 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1120,6 +1126,55 @@ Sgr A*, and the tide's cone and brightness; then the gallery build.
 gallery `data/objects_config.json`; L-228, L-371.
 
 
+#### [L-422] ledger-and-session-records 1.17: Tony's page by section, the run-record zone, labels on handles, RICE for lists, where a record goes (skills, documentation)
+<!-- L:422 status:OPEN upd:2026-10-07 section:A flag: rice: -->
+- **Built 2026-10-07** (Fable 5.1 ledger-sweep session) by
+  `documentation/patch_L422_1_skill_1_17_and_tonys_page_20261007.py`,
+  from four of Tony's rulings that day, each method and so a skill rule
+  (Method Belongs to the Skill):
+  - **The page's shape.** Tony: "Confirmed." Each fact once; the READ
+    THIS FIRST box is the page; the done road stages fold into one
+    line; SETTLED and SIGNALS added; the goal, right now, the next
+    three steps and the marks legend cut as repeats. The mock he read
+    became the page, written whole this once because the shape
+    changed; from here a patch edits the page by section.
+  - **The run-record zone.** Tony: "I use the where we are to record
+    the run record and rename it with a time stamp." The page ends
+    with a marker; below it is his; no patch edits it; the cap
+    excludes it; the close reads his latest timestamped copy and names
+    it. No subfolder for the copies: "I already mix handoffs,
+    patches, design documents. Subfolders are more steps and also I
+    scan the files to see what the recent changes were."
+  - **Labels on handles.** Tony: "all ledger L-xxx items should have
+    a brief parenthetical label." On the page, in handoffs, in chat.
+  - **RICE for list items** (L-412, ruled 2026-10-07): no score inside
+    an ordered list; carried on L-351 for a day, now landed.
+  - **Where a record goes** (Tony, 2026-09-22, carried on L-351 since):
+    the orrery's documentation/ for all documentation, the gallery's
+    for its patch files and the tool inputs its run reads; flat.
+- **In the same commit:** protocol v3.85 (the entry; v3.82 moved to
+  PROJECT_INSTRUCTIONS_HISTORY.md); the skill's v1.14 entry moved to
+  SKILL_HISTORIES.md by the three-entry rule (L-418);
+  documentation/WHERE_WE_ARE.md in the new shape, the page it replaced
+  copied into this session's handoff; the handoff itself.
+- **This bump takes 1.17.** L-418's split build, which expected to cut
+  the ledger skill at 1.17, cuts it at 1.18. L-412 and L-351 say so.
+- **The obligation travels.** This session's installed copy was bound
+  at 1.14 when the conversation began (before the 1.16 push), and it
+  read 1.16 from the repo at HEAD. The next session confirms its
+  loaded copy reads 1.17 before any ledger, handoff or session-record
+  work.
+- **Tony-action (do):** reinstall ledger-and-session-records (1.17)
+  from skills/ in Settings > Skills; replace the Project's instructions
+  with PROJECT_INSTRUCTIONS.md, now v3.85.
+**Gap:** the loaded-copy confirmation above; then CLOSE. The check
+(date and cap) is L-396's to build, not this item's.
+**Ref:** `skills/ledger-and-session-records/SKILL.md`;
+`documentation/WHERE_WE_ARE.md`;
+`documentation/HANDOFF_L422_fable_sweep_close_20261007.md`;
+`documentation/LEDGER_SWEEP_review_20261007.md`; L-396, L-412, L-351,
+L-418, L-419.
+
 #### [L-421] Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words)
 <!-- L:421 status:OPEN upd:2026-10-06 section:A flag: rice: -->
 - **Found 2026-10-06**, on Tony's question: "where are the facts for the
@@ -1377,6 +1432,9 @@ count for `constants_new.py` should name these four as gone.
   records at its next version, 1.17, which L-418's build cuts, and is
   carried on L-351 until then. Question (b), the proposed scores, is
   still open.
+- **2026-10-07, later the same day:** the rule landed in
+  ledger-and-session-records 1.17 (L-422), not at L-418's build.
+  Question (b) is still open.
 **Gap:** after L-413, work down the list from item 3.
 **Ref:** L-371 (the slice's numbers); the handles above; L-413;
 `documentation/LEDGER_SWEEP_review_20261004.md`.
@@ -1467,7 +1525,7 @@ orrery's hovers.
 **Ref:** L-398; L-363; tools/gallery_cache_builder.py (gallery).
 
 #### [L-396] Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills)
-<!-- L:396 status:OPEN upd:2026-10-04 section:A flag: rice: -->
+<!-- L:396 status:OPEN upd:2026-10-07 section:A flag: rice: -->
 - **Asked 2026-09-30 (Tony).** "i struggle to keep the big picture.
   it's the old dilemma of loosing the forest for the trees." The master
   plan's summary and critical path had not really helped. He asked for
@@ -1510,7 +1568,17 @@ orrery's hovers.
   the page's date with the newest stamp would then pass on a stale
   page. Either every ledger patch stamps the header (patch_L413_1 does),
   or the check reads the newest `upd` field instead.
-**Gap:** the check above, or a ruling that the skill rule is enough.
+- **2026-10-07 (Fable 5.1 sweep): the page's shape changed, and the
+  check gains a second half.** Tony confirmed the redesign -- each
+  fact once, Settled, Signals, and a run-record zone at the end that
+  is his, which he saves as a timestamped copy. ledger-and-session-
+  records 1.17 writes it down (L-422). The check to build: the page's
+  date older than the ledger's newest stamp, OR more than 130 lines
+  above the run-record marker; it targets WHERE_WE_ARE.md by exact
+  name, never the timestamped copies. The doc indexer should know a
+  copy by its `_run_record` ending instead of listing it as the page.
+**Gap:** build the check (date and cap), or rule that the skill rule
+is enough. L-422 holds the shape; this item holds the check.
 **Ref:** `documentation/WHERE_WE_ARE.md`; `skills/ledger-and-session-records/SKILL.md` (The Document Stack); `PROJECT_INSTRUCTIONS.md` v3.74; L-363; L-395; L-333; L-362.
 
 #### [L-395] The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects)
@@ -2908,13 +2976,10 @@ from L-404.
     (L-414, if the fix is method there).
   - gallery-pipeline: the wide card's four fields and the picture's
     tool (L-363).
-  - ledger-and-session-records, at 1.17 (L-418's build): an item
-    inside an ordered list needs no RICE score, the list's order being
-    its priority under the plan's sequencing authority; items outside
-    a list keep RICE (Tony, 2026-10-07, L-412). And Tony's
-    documentation-folder practice (above). The by-the-lines check of
-    Tony-annotated files landed at 1.16 on 2026-10-05 (L-419) and is
-    struck here.
+  - ledger-and-session-records: nothing owed. The RICE rule for list
+    items (L-412) and Tony's documentation-folder practice (above)
+    landed at 1.17 on 2026-10-07 (L-422), with the Where We Are rules
+    of that day. L-418's split cuts this skill at 1.18.
   - interactive-exhibit and the protocol: as above.
 **Gap:** Each lands with its store's next bump.
 **Ref:** skills/interactive-exhibit/SKILL.md; skills/ledger-and-session-records/SKILL.md; PROJECT_INSTRUCTIONS.md; L-216, L-363, L-371, L-390, L-414.

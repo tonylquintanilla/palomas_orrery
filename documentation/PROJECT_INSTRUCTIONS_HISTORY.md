@@ -2300,6 +2300,40 @@ resident.
 (Moved down from the resident protocol on 2026-10-06 when
 v3.84 made a fourth entry.)
 
+v3.82 (October 5, 2026): No rule changed in this document. ONE
+skill bump, one version (L-419): ledger-and-session-records 1.15 ->
+1.16. A PATCH NEVER REFUSES TONY'S NOTES.
+
+WHAT PROMPTED IT. The session's closing patch, patch_L413_3, guarded
+documentation/WHERE_WE_ARE.md by a fingerprint of the whole file and
+refused: Tony had marked two lines "-- done" and dated the header.
+Tony: "i though annotations would not be refused." His rule of
+2026-10-03 had said exactly that, but it lived only in one earlier
+patch's code, so a later session did not have it. Asked whether it goes
+into the skill now or later: "yes because I am using our handoffs or
+the where we are as run records."
+
+WHAT CHANGED. ledger-and-session-records, under Where We Are: a patch
+checks Where We Are, a handoff or the ledger only at the lines it
+edits, never by a whole-file fingerprint; a rewrite of Where We Are
+first copies every line Tony changed into the session's handoff and
+prints them. patch_L413_4 is the worked example. Its v1.13 entry moved
+to documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+ledger-and-session-records 1.16, along with the five other skills
+v3.81 named.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.79 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-07 when
+v3.85 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

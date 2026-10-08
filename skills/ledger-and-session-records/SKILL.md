@@ -6,7 +6,18 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Skill version: 1.16 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.17 | 2026-10-07, with Anthropic's Claude Fable 5.1, at
+palomas_orrery @ 8653ef1b. v1.17 (L-422) carries four of Tony's rulings
+from one session. Under Where We Are -- Tony's page: the page's new
+shape (each fact once; the box is the page; Settled; Signals), a
+run-record zone at its end that no patch edits and that the close
+reads from his timestamped copy, patches editing the page by section,
+every ledger handle on the page carrying a short label, and the check
+to build (date, and a cap of 130 lines above the marker). Under Ledger
+Block Format: an item inside an ordered list needs no RICE score
+(L-412). Under Where a File Goes: which repository a record goes to,
+and that documentation/ stays flat.
+Earlier: 1.16 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ d9f47a87. v1.16 (L-419) adds one rule under Where We
 Are -- Tony's page: a patch checks a document Tony annotates (this
 page, the handoffs, the ledger) only at the lines it edits, and a
@@ -21,16 +32,8 @@ older than the two entries below moved to
 documentation/SKILL_HISTORIES.md. Both because a plain read of a
 long file shows its start and end and leaves out its middle, where
 the rules are (Tony, 2026-10-05).
-Earlier: 1.14 | Cut from palomas_orrery @ b3cfc780 (v1.14),
-earlier @ 5db8bbe0 (v1.13), @ 2a7d26b9 (v1.12), @ 1ee1cc61 (v1.11), @ 50cbd2df (v1.10), @ 41c0b279 (v1.9), @ 3586970d (v1.8),
-@ 434a712b (v1.7), @ 305b269 (v1.6), @ 3398970 (v1.5) | September 10,
-2026, with Anthropic's Claude Opus 5
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-05 (L-418).
-v1.14 (L-405; 2026-10-02, with Anthropic's Claude Opus 5.5) adds A Wrong
-Sentence in a Skill: Bump Now, or Carry It, under the change log. A
-session had to decide it for itself on 2026-10-01 (L-404); Tony's review
-of 2026-10-02 sorted it as method, so the skill answers it now.
+on 2026-10-05 (L-418) and 2026-10-07 (L-422).
 
 Note: READING the ledger at session start is resident Part-1 behavior,
 not this skill's job. This skill carries the maintenance mechanics.
@@ -124,33 +127,70 @@ forest for the trees." The plan's summary and critical path had been
 tried for that job and had not really helped, by his account: they are
 written for the work, and they move only at design builds.
 
-- ONE file, rewritten IN PLACE, never versioned. Git holds the
-  history. Old changes drop off the page; the ledger and git keep them.
+- ONE file, edited IN PLACE, never versioned. Git holds the history.
+  Old changes drop off the page; the ledger and git keep them.
 - Updated at the END OF EVERY SESSION that changed the picture, inside
   that session's ledger patch, so it moves in the same transaction and
   costs Tony no extra run. A session with no patch that still changed
-  the picture delivers a small one. The patch writes the whole file.
+  the picture delivers a small one.
+- A PATCH EDITS THE PAGE BY SECTION, AT EACH SECTION'S OWN ANCHOR
+  (v1.17, L-422), never by rewriting the whole page. Two sessions
+  closing the same day then each change their own lines and neither
+  loses the other's. The failure this prevents: patch_L418_2, built on
+  fbd223ee before the Horizons design session, rewrote the page whole
+  and left it saying that design round was still ahead after it had
+  happened. A whole-page rewrite is the exception, for a change of the
+  page's SHAPE, and it copies every line of the page it replaces into
+  the session's handoff first.
+- THE RUN-RECORD ZONE (v1.17; Tony, 2026-10-07: "I use the where we are
+  to record the run record and rename it with a time stamp."). The
+  page ends with the marker line `--- Your run record below this line`,
+  and everything under it is Tony's. He pastes the patch output and the
+  test checklist there and answers each line in place ("-- yes", "--
+  not clear", "-- let's discuss"), then saves the whole page as a
+  timestamped copy, `documentation/WHERE_WE_ARE_<m-d-yy>_<hhmm>_run_record.md`,
+  flat beside the live page (no subfolder: "I already mix handoffs,
+  patches, design documents. Subfolders are more steps and also I scan
+  the files to see what the recent changes were."). Three rules
+  follow. No patch edits below the marker. The length cap counts only
+  the lines above it. And a session's close READS HIS LATEST COPY
+  before it writes anything: his verdicts there are the primary record
+  of his rulings, so the ledger quotes them from the copy and names the
+  copy, instead of re-pasting them into the handoff. His "-- not
+  clear" and "-- let's discuss" lines are the open design items in his
+  own words and go onto the page's design-talk list verbatim, with the
+  date. Once read, the close empties the live zone; the copy is the
+  record.
 - TONY ANNOTATES THIS PAGE, THE HANDOFFS AND THE LEDGER, and a patch
   never refuses his notes (L-419; Tony, 2026-10-03, and 2026-10-05: "i
-  am using our handoffs or the where we are as run records"). He writes
-  run records, pushed SHAs and comments into them. So a patch checks
-  each of the three only at the lines it edits -- an anchor that must
-  match there -- never by a fingerprint of the whole file. A rewrite of
-  this page, which writes the whole file, first finds every line that
-  differs from the copy the patch was built on, copies those lines word
-  for word into the session's handoff, prints them, and refuses only if
-  the file is not the page it replaces.
-  `documentation/patch_L413_4_session_close_20261005.py` is the worked
-  example. The failure this prevents: patch_L413_3 fingerprinted the
-  whole page and refused on two "-- done" marks; Tony, "i though
-  annotations would not be refused."
-- A FIXED SHAPE that does not grow: the header (the date, and the SHAs
-  it was written at); a READ THIS FIRST box (changed this session, do
-  next, needs you now); how to read the marks; the goal; the road, one
-  numbered line per stage from start to goal, marked [done], [NOW],
-  [next], [later] or [goal]; right now; the next three steps; waiting
-  on you, split into now, at the next design talk, and not urgent; and
-  where the details are.
+  am using our handoffs or the where we are as run records"). So a
+  patch checks each of the three only at the lines it edits -- an
+  anchor that must match there -- never by a fingerprint of the whole
+  file. `documentation/patch_L413_4_session_close_20261005.py` is the
+  worked example of carrying his notes; the failure it answers:
+  patch_L413_3 fingerprinted the whole page and refused on two "--
+  done" marks; Tony, "i though annotations would not be refused."
+- A FIXED SHAPE that does not grow (v1.17 shape, L-422; Tony:
+  "Confirmed"). EACH FACT APPEARS ONCE. In order: the header (the date,
+  and the SHAs it was written at); the READ THIS FIRST box, which IS
+  the page -- changed since you last read this, do next, needs you now;
+  one line on the marks; THE ROAD, one numbered line per stage, the
+  done stages folded into one line, marked [done], [NOW], [next],
+  [later] or [goal]; SETTLED, one dated line per standing ruling from
+  the last few sessions so a session does not re-raise it, each line
+  leaving after a few weeks once it is habit; SIGNALS, three numbers
+  READ FROM FILES when the page is written, never typed from memory --
+  the last cache build and whether a rename needed a retry (gallery
+  `data/cache_swap_log.jsonl`), the Tier-1 count on the files the push
+  gate watches (`PROVENANCE_AUDIT.md`; until a tool prints the
+  gate-path figure the line says so), and the page's own date against
+  the ledger's newest stamp; WAITING ON YOU, split into at the next
+  design talk, decisions one at a time, and not urgent in his order --
+  the "now" half lives in the box; WHERE THE DETAILS ARE, last and
+  short; then the marker and the run-record zone. The sections this
+  replaced -- the goal, right now, the next three steps, six lines on
+  the marks -- each repeated something the box or the road already
+  said. About 110 lines above the marker; the check below holds it.
 - ATTENTION MARKS, cleared and reset at every update so that they
   always mean "new since you last read this": **>> UPDATED THIS
   SESSION** beside a changed section's heading; "<< new this session"
@@ -159,17 +199,27 @@ written for the work, and they move only at design builds.
   the [NOW] stage. Tony: "attention is a human limitation."
 - PLAIN WORDS IN SHORT BULLETS, one idea per bullet, no paragraphs.
   Tony, 2026-09-30: "the wall of text even a paragraph is an obstacle."
-  No ledger handles in the main text; they appear only under where the
-  details are. The Register Rule applies in full: this page is in the
-  chat's register, not the reference register of this skill.
+  A LEDGER HANDLE ON THIS PAGE ALWAYS CARRIES A SHORT LABEL IN
+  PARENTHESES -- "L-421 (the typed facts)", never a bare L-421 --
+  wherever it appears (Tony, 2026-10-07: "all ledger L-xxx items
+  should have a brief parenthetical label"). Prefer the plain name in
+  the body, and the handle where he will go and look the item up. The
+  same holds in handoffs and in chat: a handle is the name of a thing,
+  and only one of us can read it (the Register Rule). The Register
+  Rule applies in full: this page is in the chat's register, not the
+  reference register of this skill.
 - At the end of a TURN that changes the picture, Claude's reply closes
   with two or three bullets under "Where this leaves us", in the page's
   own words. The page itself moves at session end.
-- NOTHING CHECKS IT YET. An unchecked store drifts, as the plan's two
-  companions did for a month (L-333, L-362). The candidate check is on
-  L-396: the orrery maintenance run fails when the page's date is older
-  than the ledger's newest header stamp. Until it is built, this rule is
-  the only thing keeping the page current.
+- THE CHECK, recorded on L-396 and not yet built (v1.17 form): the
+  orrery maintenance run fails when the page's "Last updated" date is
+  older than the ledger's newest header stamp, OR when more than 130
+  lines stand above the run-record marker. It targets the exact
+  filename `WHERE_WE_ARE.md`, so a timestamped copy cannot stand in for
+  the page; the doc indexer knows a copy by its `_run_record` ending.
+  An unchecked store drifts, as the plan's two companions did for a
+  month (L-333, L-362). Until the check is built, this rule is the only
+  thing keeping the page current and short.
 
 ## Ledger Block Format
 
@@ -226,6 +276,13 @@ scores, verification results, corrections, open questions for Tony).
 - RICE: rice:R/I/C/E with / separators (decimals allowed).
   Score = R x I x (C/100) / E. Scored items sort to the top of their
   section descending; unscored show --.
+  AN ITEM INSIDE AN ORDERED LIST NEEDS NO RICE SCORE (v1.17; Tony's
+  ruling of 2026-10-07, L-412). A list such as the Sun's slice (L-412)
+  or Earth's list (L-413) IS the priority, under the master plan's
+  sequencing authority (L-221), and a score beside it would only
+  disagree with it. An item outside any list keeps RICE, and gets a
+  coarse score when it is next opened rather than at creation. The
+  index shows -- for the unscored; for list items that is expected.
 - New items get the NEXT L-handle; NOTHING is ever renumbered. Reference
   work by L-handle, never by per-handoff item numbers (handoff numbering
   gets rebased across versions and items LEAK at the rebase -- the v23-v27
@@ -391,6 +448,22 @@ Applied:
   pinned key lists, site lists  -> documentation/worksheets/
 - handoffs, as-builts, manifests, design reviews, spent patch scripts,
   archived protocol copies                      -> documentation/
+
+WHICH REPOSITORY, AND NO SUBFOLDERS (v1.17, L-422). Tony's practice,
+stated 2026-09-22: "my practice is to put all documentation in the
+orrery documentation/ folder. i reserve the gallery documentation/
+folder for the patch files." So every RECORD -- a handoff, a
+manifest, a design note, a session record, a timestamped run-record
+copy of Where We Are -- goes to the ORRERY's documentation/, whichever
+repository the work touched; a spent GALLERY patch script goes to the
+gallery's documentation/. The gallery's documentation/ also holds the
+tool inputs its maintenance run reads (smoke suites, fixtures,
+recorded payloads): those are inputs by the test above and stay where
+the code reads them. And documentation/ stays FLAT. Tony, 2026-10-07,
+declining a run_records/ folder: "I already mix handoffs, patches,
+design documents. Subfolders are more steps and also I scan the files
+to see what the recent changes were." A file's name carries its kind;
+the folder does not.
 
 Two consequences worth stating.
 

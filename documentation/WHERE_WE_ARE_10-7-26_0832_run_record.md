@@ -1582,10 +1582,148 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  3. Commit and push. -- 
+  3. Commit and push. -- 4aa84ae342cab18bf802de73118bccd4cd740d2d
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 4. **patch_L422_1** (mine, the skill at 1.17 and the page). It checks that 1 through 5 have run and refuses otherwise.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L422_1_skill_1_17_and_tonys_page_20261007.py
+ok  skills/ledger-and-session-records/SKILL.md           version 1.17
+ok  skills/ledger-and-session-records/SKILL.md           Where We Are section
+ok  skills/ledger-and-session-records/SKILL.md           RICE bullet
+ok  skills/ledger-and-session-records/SKILL.md           Where a File Goes
+ok  documentation/SKILL_HISTORIES.md                     v1.14 entry moved in
+ok  PROJECT_INSTRUCTIONS.md                              header v3.85 and anchor
+ok  PROJECT_INSTRUCTIONS.md                              v3.85 entry
+ok  PROJECT_INSTRUCTIONS.md                              v3.82 moved down
+ok  documentation/PROJECT_INSTRUCTIONS_HISTORY.md        v3.82 entry moved in
+ok  LEDGER_CONSOLIDATED.md                               header stamp
+ok  LEDGER_CONSOLIDATED.md                               L-422 opened
+ok  LEDGER_CONSOLIDATED.md                               L-351 ledger skill line
+ok  LEDGER_CONSOLIDATED.md                               L-412 rule landed
+ok  LEDGER_CONSOLIDATED.md                               L-396 date
+ok  LEDGER_CONSOLIDATED.md                               L-396 the check gains the cap
+ok  documentation/WHERE_WE_ARE.md                        rewritten whole in the new shape
+ok  documentation/HANDOFF_L422_fable_sweep_close_20261007.md created
+
+carried 207 line(s) of the old Where We Are into the handoff
+
+patch applied
+
+NEXT:
+  1. Move this script into documentation/.
+  2. Run orrery_maintenance_run.py. Its Skill manifest step rewrites
+     the protocol's table to read ledger-and-session-records 1.17;
+     its Ledger index step moves L-071 and L-077 to the closed
+     section (from the Earth System patch; expected).
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261008T010756Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.2s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.1s  rewrote PROJECT_INSTRUCTIONS.md
+  Constants export             0.7s  unchanged (1 checked, not written)
+  Objects export               0.1s  unchanged (1 checked, not written)
+  Module atlas                 5.9s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               4.9s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Exact rows report            1.5s  unchanged (1 checked, not written) -- 13 of
+                                     34 exact rows printed at 42 lines (32
+                                     orrery, 10 gallery); 8 drawn only, 11 not
+                                     followed, 0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.2s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.7s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       1.1s  Export matches the store: sha256
+                                     3b7000e368d1 on both sides; 105 rows
+                                     re-read, 56 not exported, 27 tokens; 310
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.1s  pass
+  Skill headers                0.1s  11 skills parsed, no consistency problems.
+  Exact rows by the count      1.3s  PASSING -- 13 printed exact rows each state
+                                     a count; 32 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.1s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 105 status lines in constants_new.py are
+                                     well formed; 53 rows carry none.
+  Row shape                    0.1s  All 161 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.2s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Reset completeness          12.5s  PASS -- all 310 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.1s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Worksheet checker            9.1s  74 of 110 routed, 8 clean
+  Worksheet checker tests     14.9s  All 135 checks passed
+  Worksheet key round trip     0.8s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         18.4s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner           9.0s  296 TIER-1 FINDINGS IN THE SCANNED TREE
+
+======================================================================
+  20 of 20 gating checkers passed -- 87.4s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          296 TIER-1 FINDINGS IN THE SCANNED TREE
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2107 file(s) examined, 8 written, 0 created, 0 removed, 4 rewritten identically
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROJECT_INSTRUCTIONS.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      DATA_INVENTORY.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  3. Commit and push. -- 
+  4. Reinstall ledger-and-session-records (1.17) from skills/ in
+     Settings > Skills, and replace the Project's instructions with
+     PROJECT_INSTRUCTIONS.md, now v3.85.
+  5. Paste today's run record below the marker at the end of Where
+     We Are, as you do, and save your timestamped copy.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
 5. **orrery_maintenance_run.py**, once. The manifest table goes to 1.17; the index step moves L-071 and L-077 to the closed section.
 6. **Commit and push.** Then the two account steps: reinstall ledger-and-session-records, replace the Project's instructions with v3.85.
 7. **Paste the note into the four sessions.** Only now, because it tells them to read the skill and the page from HEAD.

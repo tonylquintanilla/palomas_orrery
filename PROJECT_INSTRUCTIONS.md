@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.84 | October 6, 2026
+Tony Quintanilla, PE | Claude | v3.85 | October 7, 2026
 
-Cut from e7073fce at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 8653ef1b at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -495,7 +495,7 @@ earth-system-pipeline        1.2  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY
                                   human-cost visualization or text
 gallery-pipeline             1.2  Gallery Studio, json_converter, index.html
                                   viewer, gallery cards
-ledger-and-session-records   1.16 Ledger edits, ledger_index.py, RICE,
+ledger-and-session-records   1.17 Ledger edits, ledger_index.py, RICE,
                                   handoffs, manifests, atlas, dep_trace,
                                   WHERE_WE_ARE.md at every session's end
 gallery-assembler            1.3  render_orbits.py, resolver.py,
@@ -1163,6 +1163,45 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.85 (October 7, 2026): No rule changed in this document. ONE
+skill bump, one version (L-422): ledger-and-session-records 1.16 ->
+1.17. TONY'S PAGE IS EDITED BY SECTION, AND ITS END IS HIS.
+
+WHAT PROMPTED IT. The Fable 5.1 ledger sweep of October 4 to 7 read
+Where We Are and found the same facts in four sections, and found that
+a closing patch built before a parallel session had rewritten the page
+whole and erased that session's lines. Tony then said how he uses the
+page: "I use the where we are to record the run record and rename it
+with a time stamp." His timestamped copies hold the patch output and
+his verdict beside each test line -- the primary record of his rulings.
+
+WHAT CHANGED. ledger-and-session-records, under Where We Are -- Tony's
+page: each fact once, the READ THIS FIRST box is the page, Settled and
+Signals added; a patch edits the page by section, never whole; the page
+ends with a marker, and below it is Tony's run-record zone, which no
+patch edits and which the close reads from his latest timestamped copy;
+every ledger handle on the page carries a short label ("all ledger
+L-xxx items should have a brief parenthetical label"); the check to
+build is the date and a cap of 130 lines above the marker. Under Ledger
+Block Format: an item inside an ordered list needs no RICE score, his
+ruling of the same day (L-412). Under Where a File Goes: records go to
+the orrery's documentation/, flat, no subfolders ("Subfolders are more
+steps and also I scan the files to see what the recent changes were").
+The skill's v1.14 entry moved to documentation/SKILL_HISTORIES.md, by
+the three-entry rule. Where We Are itself was rewritten in the new
+shape, this once, the page it replaced copied into the handoff.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+ledger-and-session-records 1.17 before any ledger, handoff or
+session-record work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.82 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.84 (October 6, 2026): No rule changed in this document. ONE
 skill bump, one version (L-421): interactive-exhibit 1.11 -> 1.12. A
 FACT ABOUT A FEATURE IS SERVED, NOT TYPED.
@@ -1225,37 +1264,6 @@ agentic-pre-test 1.3 before any pre-test.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.80 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.82 (October 5, 2026): No rule changed in this document. ONE
-skill bump, one version (L-419): ledger-and-session-records 1.15 ->
-1.16. A PATCH NEVER REFUSES TONY'S NOTES.
-
-WHAT PROMPTED IT. The session's closing patch, patch_L413_3, guarded
-documentation/WHERE_WE_ARE.md by a fingerprint of the whole file and
-refused: Tony had marked two lines "-- done" and dated the header.
-Tony: "i though annotations would not be refused." His rule of
-2026-10-03 had said exactly that, but it lived only in one earlier
-patch's code, so a later session did not have it. Asked whether it goes
-into the skill now or later: "yes because I am using our handoffs or
-the where we are as run records."
-
-WHAT CHANGED. ledger-and-session-records, under Where We Are: a patch
-checks Where We Are, a handoff or the ledger only at the lines it
-edits, never by a whole-file fingerprint; a rewrite of Where We Are
-first copies every line Tony changed into the session's handoff and
-prints them. patch_L413_4 is the worked example. Its v1.13 entry moved
-to documentation/SKILL_HISTORIES.md, by the three-entry rule.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copy reads
-ledger-and-session-records 1.16, along with the five other skills
-v3.81 named.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.79 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 
