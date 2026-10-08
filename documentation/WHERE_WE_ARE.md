@@ -1,37 +1,39 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 8, 2026, end of the galactic plane session.
-- Written at orrery 1ba72f7f and gallery ab66aba0, before your run of
+Last updated: October 8, 2026, end of the typed facts session.
+- Written at orrery 36176d50 and gallery ab66aba7, before your run of
   this closing patch.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The galactic plane work in the desktop orrery is finished, and you
->   found it correct: the violet circle with its poles, Sagittarius A*,
->   a hover cross on each coordinate circle, and a brighter galactic
->   tide with its cone.
-> - The orrery's panels use one grey, gray90, on every system. You
->   confirmed it, and L-027 (the panel colour) is closed.
-> - L-422 (the ledger skill at 1.17) is closed: the skill copy this
->   session loads reads 1.17, and this page was edited under it.
+> - 15 of the 17 typed facts are served with their sources and live,
+>   in three website patches. You found every hover's words correct.
+> - Earth's four drawn guides have Read more links: the Sun
+>   Direction, the rotation axis, the day-night line and the Moon.
+> - Their sources reach the panel now; they had been served but not
+>   shown. The panel's words and footer are brighter.
+> - The inner Oort cloud is drawn flat, but a 2025 paper finds it
+>   tilted about 30 degrees. You ruled it is redrawn now, as part of
+>   the Sun's slice.
 >
-> **Do next:** *the typed facts, in a fresh session, from the plan.*
+> **Do next:** *finish the typed facts: the inner Oort cloud redrawn
+> tilted, then the check that keeps facts out of the code.*
 >
 > **Needs you now:**
 > - *Run this closing patch, then orrery_maintenance_run.py, and push.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
-## The road
+## The road  **>> UPDATED THIS SESSION**
 
   1-4. [done]  The Sun, Earth and Solar System rooms are live; the orrery
                feeds the website and nothing is typed twice.
   5.   [NOW]   *Earth's old items are finished, in your order.* The
-               website patch is live; the typed facts are the last part.
-  6.   [next]  The 17 facts typed in the Earth and Sun rooms' code move
-               into the served data, with their sources.
+               website patch and Earth's typed facts are live.
+  6.   [next]  The typed facts: 15 of 17 served. Left: the inner Oort
+               cloud, redrawn tilted, and the check. << moved this session
   7.   [next]  The Sun's numbers get the checking Earth's got.
   8.   [next]  The served objects are checked against JPL Horizons.
                Designed; build next.
@@ -58,8 +60,10 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - Items in an ordered list carry no RICE score. (Oct 7)
 - Every ledger handle on this page carries a short label. (Oct 7)
 - Code types only words about our picture; facts are served. (Oct 6)
+- The inner Oort cloud is redrawn from the 2025 paper now, as part of
+  the Sun's slice, not deferred. (Oct 6)
 
-## Signals  **>> UPDATED THIS SESSION**
+## Signals
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261008T013323Z, ok, one attempt. Last retry: the
@@ -79,6 +83,8 @@ At the next design talk:
 - Whether the phone's Sun room gets the galactic plane, its poles,
   Sgr A* and the tide's cone: L-408 (the galactic plane on the phone).
   You: "awaits the design talk." (Oct 7)
+- The inner Oort cloud's tilted disk: its words, and whether its outer
+  edge moves from 20,000 au to the paper's 10,000.
 
 Decisions, one at a time:
 - Whether L-216 (the swap retry) closes. Recommended: yes.
@@ -104,7 +110,9 @@ Not urgent, in your order:
   galactic plane), L-027 (the panel colour);
   `documentation/HANDOFF_L420_galactic_plane_20261006.md`
 - The sweep's report: `documentation/LEDGER_SWEEP_review_20261007.md`
-- The typed facts plan: `documentation/MANIFEST_L421_typed_facts_20261006.md`
+- The typed facts: plan
+  `documentation/MANIFEST_L421_typed_facts_20261006.md`; record
+  `documentation/HANDOFF_L421_typed_facts_20261008.md`
 - The Horizons check design:
   `documentation/DESIGN_L395_horizons_check_20261007.md`
 - The reasoning behind the order:

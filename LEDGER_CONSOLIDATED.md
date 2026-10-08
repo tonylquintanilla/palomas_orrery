@@ -282,6 +282,10 @@ the day's five patches.
 Module updated: October 8, 2026 with Anthropic's Claude Opus 5.5
 (L-027 and L-422 closed on the loaded skill copies; Where We Are
 edited by section at the L-420 session's close), built on 1ba72f7f.
+Module updated: October 8, 2026 with Anthropic's Claude Opus 5.5
+(L-421: three gallery patches served 15 of the 17 typed facts with
+their sources; L-351 gains the served-hover method), built on
+36176d50.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -648,7 +652,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-06 |
 | ! | L-414 | The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling) | OPEN | -- | 2026-10-04 |
 | ! | L-418 | Long skills open with their contents, and keep three version entries (skills) | OPEN | -- | 2026-10-06 |
-| ! | L-421 | Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words) | OPEN | -- | 2026-10-06 |
+| ! | L-421 | Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words) | OPEN | -- | 2026-10-08 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1130,7 +1134,7 @@ gallery `data/objects_config.json`; L-228, L-371.
 
 
 #### [L-421] Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words)
-<!-- L:421 status:OPEN upd:2026-10-06 section:A flag: rice: -->
+<!-- L:421 status:OPEN upd:2026-10-08 section:A flag: rice: -->
 - **Found 2026-10-06**, on Tony's question: "where are the facts for the
   info panel stored, the code itself? Shouldn't the data and sources use
   the store?" Both rooms were built headless twice, once as served and
@@ -1154,8 +1158,60 @@ gallery `data/objects_config.json`; L-228, L-371.
 - **Its own question, not yet checked:** whether the citation in the
   gallery's `data/objects_config.json` and the one in `constants_new.py`
   agree for each served number. The checks compare the numbers.
-**Gap:** the build, from the manifest, in a fresh session; then Tony's
-look on the phone; then the survey as a gating check.
+- **Sources, read 2026-10-06** (Round 1, recorded in
+  `documentation/L421_round1_sources_20261006.md`): five of the six
+  unsourced facts were sourced from what was read that day -- the
+  USNO Almanac glossary, USNO's Rise, Set and Twilight Definitions,
+  NASA Earth Observatory's Catalog of Earth Satellite Orbits, and
+  Williams (1994). The sense of rotation now cites Archinal et al.
+  (2019), the correction (Fig. 1, from the PDF Tony supplied), and the
+  glossary's diurnal and direct motion; the 2018 report was not
+  re-read, so it is no longer cited. The sixth, the inner Oort cloud
+  drawn flat in the ecliptic, is contradicted by Nesvorny et al.
+  (2025, ApJ 983), which finds a slightly warped disk tilted about 30
+  degrees to the ecliptic.
+- **Tony's ruling, 2026-10-06:** the inner Oort cloud is redrawn from
+  the 2025 paper as part of the Sun slice -- "remember this is part
+  of the sun slice not deferred."
+- **Built, run and pushed, gallery** (no word a visitor reads
+  changed; each patch reproduced on a fresh clone, 24 of 24):
+  - `patch_L421_1_served_hover_words_20261006.py`, at 6fae15e0: the
+    geostationary ring, magnetopause, bow shock, magnetotail and both
+    belts print a served `hover` word, `{name}` filled from served
+    rows (E5 to E10). Tony on the phone: "correct".
+  - `patch_L421_2_served_guide_words_20261006.py`, at 4cfeca27: the
+    axis, Sun line, terminator and Moon arc print served words from
+    Earth's `orientation.words`, each with its source; the pole of
+    date's source prints from the cache builder's record; the Sun's
+    clumps and tide print served words (E1 to E4, E11 to E13, S2,
+    S3); the panel's words and footer move to the paragraph grey.
+    Tony: "All type is correct."
+  - `patch_L421_3_guide_links_20261006.py`, at ab66aba7: the four
+    guides get Read more links (Wikipedia: Earth's rotation, Subsolar
+    point, Terminator (solar), Orbit of the Moon), and the panel now
+    fills an empty link or source from any trace in a group -- the
+    sources patch 2 served had not reached the panel until then.
+    Tony: each link "correct".
+  Verdicts quoted from
+  `documentation/WHERE_WE_ARE_10-7-26_0832_run_record.md` and chat.
+- **E10 as built:** "2020" and "IGRF-13 model" are served words in
+  the belts' `hovers_plane`, citing the tilt row's source, not fields
+  read from `constants_new.py`. L-322 (the IGRF epoch, a class) is
+  unchanged by this.
+- **S4 stays typed**, as the manifest ruled: the streamer belt's
+  caveat is a drawing choice.
+**Gap:** two parts of the Sun slice, then the check. (1) The inner
+Oort cloud redrawn as the 2025 paper's tilted disk, with the tilt's
+range as an envelope: its words come to Tony before they ship, and
+one question first -- the paper puts the disk at 1,000 to 10,000 au,
+where the served cloud runs 2,000 to 20,000 au from NASA and
+Portegies Zwart (2021), so trace what uses the outer edge before
+asking whether it moves. Then Tony's look. (2) The survey as a
+gating check in the gallery run, shown failing on a planted typed
+sentence first. Still unchecked: whether each served number's
+citation in `data/objects_config.json` agrees with its row's in
+`constants_new.py`. The L-363 `_declared` "1.1 times" fix did not
+ride these patches and is still owed there.
 **Ref:** L-413; L-349 (`flux_peak_of`, the first case); L-322 (the
 IGRF epoch, a class); gallery `gallery/feature_renderers.js`,
 `gallery/earth_geometry.js`, `data/objects_config.json`;
@@ -2901,6 +2957,17 @@ from L-404.
   printed from the served `"in"`, never computed in the page. What
   remains is the first half for arithmetic that is not a unit
   conversion, such as an altitude from a radius.
+- **interactive-exhibit, next bump -- how a hover's facts are served
+  (L-421, built 2026-10-06):** a shell's facts go in its `hover` word
+  (a belt's in the parallel lists `hovers_band`, `hovers_rings`,
+  `hovers_plane`); a new line starts a new hover line and `{name}`
+  is a value the renderer fills from a served row; `servedHover()`
+  prints it, and a missing word or a blank with no value warns and
+  prints nothing. The drawn guides keep theirs on the body's
+  `orientation.words`, each entry with its `source` and `info_url`.
+  A link or source carried only on an info marker reaches the panel.
+  Written here rather than bumped mid-session, to ride the skill's
+  next version.
 - **ledger-and-session-records, next bump -- Tony's practice, stated
   2026-09-22:** "my practice is to put all documentation in the orrery
   documentation/ folder. i reserve the gallery documentation/ folder
