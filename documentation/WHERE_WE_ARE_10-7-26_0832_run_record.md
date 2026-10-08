@@ -1716,12 +1716,12 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  3. Commit and push. -- 
+  3. Commit and push. -- 7cb7f67d22762ceda3c5164b44fa777f371a6be0
   4. Reinstall ledger-and-session-records (1.17) from skills/ in
      Settings > Skills, and replace the Project's instructions with
-     PROJECT_INSTRUCTIONS.md, now v3.85.
+     PROJECT_INSTRUCTIONS.md, now v3.85. -- done
   5. Paste today's run record below the marker at the end of Where
-     We Are, as you do, and save your timestamped copy.
+     We Are, as you do, and save your timestamped copy. -- this file. 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 5. **orrery_maintenance_run.py**, once. The manifest table goes to 1.17; the index step moves L-071 and L-077 to the closed section.
