@@ -1,5 +1,5 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
-# Where We Are
+# Where We Are -- **Tony**: notes and run record --
 
 Last updated: October 8, 2026, after the Horizons design's close.
 - Written at orrery 3b36b3bf and gallery ab66aba7, before your run of
@@ -22,7 +22,7 @@ Last updated: October 8, 2026, after the Horizons design's close.
 > tilted, then the check that keeps facts out of the code.*
 >
 > **Needs you now:**
-> - *Run this closing patch, then orrery_maintenance_run.py, and push.*
+> - *Run this closing patch, then orrery_maintenance_run.py, and push.* -- everthing has run and pushed. 
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -126,9 +126,9 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-=====================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Horizons check**
+**Session: DONE: 10-8-26 1314: Opus: Horizons check design handoff documentation**
 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L395_4_run_confirmed_and_page_20261008.py
 ok  LEDGER_CONSOLIDATED.md         header stamp
@@ -243,7 +243,56 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  2. Move this script into documentation/; commit and push. -- 
+  2. Move this script into documentation/; commit and push. -- cdb99833b657c2298c333b2200e634db9854fe31
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
-=================================================================================
+Where this leaves us
+
+The served objects are checked against JPL Horizons: designed and recorded; build next, with Encke added to the orrery’s list.
+At that build, you decide whether Halley is checked too, and Encke’s description and link.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Session: DONE: 10-8-26 1442: Opus: Updating skills for Claude Opus 5.5 compatibility**
+
+The handoff is written: `HANDOFF_L418_split_build_brief_20261008.md`, for the orrery's `documentation/` folder. It's built on your push at `cdb99833`. I read the ledger skill at 1.17, and this session's loaded copy matches the repo.
+
+**What the new session will find**
+- **The trial skill has not been checked yet.** This session's list of installed skills has no install-probe. So either it was never uploaded, or it was deleted before a check. I've re-sent the ZIP in case you need it.
+- **The ledger skill is now cut at 1.18, not 1.17.** The Fable sweep took it to 1.17, as your run record noted.
+- **Nothing else the split touches has changed** since the design. The design's sizes still hold.
+- **A measurement to redo first.** The design assumed one read of a file shows 16,000 characters. This session's file reader is documented as showing 2,000 lines instead. The new session measures its own reader before writing the read plan, so the plan fits the tool actually in use.
+- **One thing to watch at the trial.** Your eleven skills arrive marked as installed through a plugin. If the trial skill arrives marked differently, uploading a ZIP may not be the same route as your usual install. The brief says to report that plainly.
+
+**One decision for you, which the new session will ask before building**
+- Three sentence fixes are owed to provenance-discipline. The question is whether they ride the split's version.
+- I recommend:
+  - the two small ones go in with the split: L-371 (the Sun room's served numbers) and L-390 (the conversion marker);
+  - L-414 (the scanner's window and declared rows) gets its own session, because it changes the scanner itself.
+- You can answer "as recommended" or "split only" when the new session asks.
+
+Is the trial skill uploaded, or should that be your first step?
+
+**Where this leaves us:** the split is designed, ruled and briefed. Next, a fresh session checks the trial skill and then builds the split in one patch.
+
+==============================================================
+
+Good. Uploading it before anything else is right, because the build depends on the result.
+
+**The steps**
+1. Save `install-probe.zip` somewhere outside the repo folder, such as Downloads.
+2. In Settings, under Skills, choose Upload skill and pick the ZIP.
+3. Open a **fresh** chat in this Project and say: "check the install probe." A chat that was already open won't see the new skill.
+4. That session reports one of three results:
+   - **PASS:** the extra file arrived.
+   - **FAIL:** only the main file arrived. The split is not built, and we redesign.
+   - **NOT INSTALLED:** nothing was found.
+
+   It also reports how the skill is marked compared with your eleven, which tells us whether the trial speaks for them.
+5. After that check, delete install-probe from Settings.
+
+If it passes, the split build goes to another fresh session, started from the brief in `documentation/`.
+
+**Where this leaves us:** you upload the trial skill next, then a fresh chat checks it. The split build waits on that result.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
