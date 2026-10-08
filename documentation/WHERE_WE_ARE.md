@@ -1,38 +1,30 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 7, 2026, end of the Fable ledger sweep.
-- Written at orrery 8653ef1b and gallery 4cfeca27, after the day's five
-  patches and before your run of this closing one.
+Last updated: October 8, 2026, end of the galactic plane session.
+- Written at orrery 1ba72f7f and gallery ab66aba0, before your run of
+  this closing patch.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - This page has a new shape, the one you confirmed: each fact once,
->   this box is the page, and the end of the page is yours. Paste your
->   run record below the marker at the bottom, as you do.
-> - The Horizons check is designed, in one session with its own file.
->   What it checks, what counts as agreement, where it runs: settled.
->   The build is next.
-> - The Earth System work is ordered: central, but behind the orrery
->   website; the gallery cards stand in meanwhile. The 2026 heat-dome
->   items close, because the event is over.
-> - The daily hand run stands: four checks, first thing, no automating
->   for now. Daily Run pauses OneDrive for 24 hours, not 2.
-> - The swap log proves the retry fix: two of your hand builds needed a
->   second attempt and both succeeded. "Took 2 attempts" is normal.
-> - Items inside an ordered list need no RICE score; the rest keep it.
->   That rule, and this page's rules, are in the ledger skill, now 1.17.
+> - The galactic plane work in the desktop orrery is finished, and you
+>   found it correct: the violet circle with its poles, Sagittarius A*,
+>   a hover cross on each coordinate circle, and a brighter galactic
+>   tide with its cone.
+> - The orrery's panels use one grey, gray90, on every system. You
+>   confirmed it, and L-027 (the panel colour) is closed.
+> - L-422 (the ledger skill at 1.17) is closed: the skill copy this
+>   session loads reads 1.17, and this page was edited under it.
 >
 > **Do next:** *the typed facts, in a fresh session, from the plan.*
 >
 > **Needs you now:**
-> - *Run orrery_maintenance_run.py and push. Reinstall the ledger skill
->   (1.17) and replace the Project's instructions with v3.85.*
+> - *Run this closing patch, then orrery_maintenance_run.py, and push.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
-## The road  **>> UPDATED THIS SESSION**
+## The road
 
   1-4. [done]  The Sun, Earth and Solar System rooms are live; the orrery
                feeds the website and nothing is typed twice.
@@ -42,7 +34,7 @@ Last updated: October 7, 2026, end of the Fable ledger sweep.
                into the served data, with their sources.
   7.   [next]  The Sun's numbers get the checking Earth's got.
   8.   [next]  The served objects are checked against JPL Horizons.
-               Designed; build next. << moved this session
+               Designed; build next.
   9.   [next]  The website's checks get a short list of their own.
  10.   [next]  A bare interactive.html link opens the Solar System room;
                the Explorer gets its own address.
@@ -56,6 +48,9 @@ Last updated: October 7, 2026, end of the Fable ledger sweep.
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
+- The galactic tide keeps its cone, to show its pull as physics. (Oct 7)
+- No colour or other name that only one system knows. The panels'
+  grey is one name, gray90. (Oct 6)
 - The daily hand run stays a hand run. (Oct 7)
 - OneDrive: pause 24 hours before a build; the retry absorbs the lock
   either way. Empty "solar-system (N)" folders are harmless; delete by
@@ -67,12 +62,12 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261007T143110Z, ok, one attempt. Last retry: the
+- Last cache build: 20261008T013323Z, ok, one attempt. Last retry: the
   Oct 6 18:20 hand build, two attempts, ok.
 - Tier-1 findings, whole tree: 296, unchanged since Oct 6. No tool yet
   prints the number on the gate path alone; that is owed on the
   provenance-discipline bump.
-- This page's date and the ledger's newest stamp: both Oct 7. Agree.
+- This page's date and the ledger's newest stamp: both Oct 8. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
@@ -81,12 +76,14 @@ At the next design talk:
 - Moving the highlighted row to the top of the list.
 - GO's arrow, only if the text box stays centred.
 - Earth's design talks, the belts' shape first.
+- Whether the phone's Sun room gets the galactic plane, its poles,
+  Sgr A* and the tide's cone: L-408 (the galactic plane on the phone).
+  You: "awaits the design talk." (Oct 7)
 
 Decisions, one at a time:
 - Whether L-216 (the swap retry) closes. Recommended: yes.
 - The handful of RICE scores the sweep proposes.
 - Whether the gallery-checks list becomes a ledger item before building.
-- L-027 (the panel colour) closes once its confirming patch has run.
 
 Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows.
@@ -95,14 +92,17 @@ Not urgent, in your order:
 
 ## Where the details are  **>> UPDATED THIS SESSION**
 
-- Every item: `LEDGER_CONSOLIDATED.md`. This session: L-422 (the ledger
+- Every item: `LEDGER_CONSOLIDATED.md`. The Fable sweep: L-422 (the ledger
   skill at 1.17 and this page), L-001 (the Earth System track), L-071
   and L-077 (the 2026 heat domes, closed), L-216 (the swap retry and
   the hand run), L-412 (the RICE ruling), L-395 (the Horizons check,
   designed). Open for build: L-421 (the typed facts), L-418 (splitting
   provenance-discipline).
-- This session's record:
+- The Fable sweep's record:
   `documentation/HANDOFF_L422_fable_sweep_close_20261007.md`
+- The galactic plane and the panel colour, both closed: L-420 (the
+  galactic plane), L-027 (the panel colour);
+  `documentation/HANDOFF_L420_galactic_plane_20261006.md`
 - The sweep's report: `documentation/LEDGER_SWEEP_review_20261007.md`
 - The typed facts plan: `documentation/MANIFEST_L421_typed_facts_20261006.md`
 - The Horizons check design:

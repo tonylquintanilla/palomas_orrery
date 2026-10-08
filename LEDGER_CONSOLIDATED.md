@@ -279,6 +279,9 @@ Module updated: October 7, 2026 with Anthropic's Claude Fable 5.1
 We Are in the shape Tony confirmed, with his run-record zone; L-412's
 rule landed; L-396's check gains the cap), built on 8653ef1b, after
 the day's five patches.
+Module updated: October 8, 2026 with Anthropic's Claude Opus 5.5
+(L-027 and L-422 closed on the loaded skill copies; Where We Are
+edited by section at the L-420 session's close), built on 1ba72f7f.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -496,7 +499,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*237 live items; 221 need attention (`!`); 178 RICE-scored; 180 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*235 live items; 219 need attention (`!`); 177 RICE-scored; 182 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -646,7 +649,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-414 | The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling) | OPEN | -- | 2026-10-04 |
 | ! | L-418 | Long skills open with their contents, and keep three version entries (skills) | OPEN | -- | 2026-10-06 |
 | ! | L-421 | Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words) | OPEN | -- | 2026-10-06 |
-| ! | L-422 | ledger-and-session-records 1.17: Tony's page by section, the run-record zone, labels on handles, RICE for lists, where a record goes (skills, documentation) | OPEN | -- | 2026-10-07 |
 
 ### B. Pending Action (Tony-side)
 
@@ -667,7 +669,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### D.Structural -- Dead code / honest shells
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-027 (#61) | Platform Neutrality (SystemButtonFace) | OPEN | 2.2 | 2026-10-07 |
 | ! | L-171 | patch_ledger_index_retired_handles.py breaks L-163's zero-undetermined close | OPEN | 1.8 | 2026-07-29 |
 | ! | L-025 (#N7) | Reduced to custom-geometry inline markers only | OPEN | 1.5 | 2026-06-18 |
 | ! | L-068 | Static/animation pipeline consolidation -- remaining residuals (umbrella) | OPEN | 1.5 | 2026-06-23 |
@@ -909,6 +910,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-255 | Skill bumps of 2026-08-26 -- handle reserved, block never written | DONE | 2.4 | 2026-08-28 |
 |  | L-305 | Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together | DONE | 2.4 | 2026-10-04 |
 |  | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | DONE | 2.2 | 2026-07-15 |
+|  | L-027 (#61) | Platform Neutrality (SystemButtonFace) | DONE | 2.2 | 2026-10-08 |
 |  | L-202 | JSON worksheet format, with markdown as fallback | DONE | 2.2 | 2026-08-18 |
 |  | L-213 | Orbit cache backup fires on IMPORT, not on cache write | DONE | 2.2 | 2026-08-19 |
 |  | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | DONE | 2.2 | 2026-10-07 |
@@ -975,6 +977,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-417 | The Skill headers check enforces Anthropic's documented limits (skills, checks) | DONE | -- | 2026-10-05 |
 |  | L-419 | A patch checks a file Tony annotates only at the lines it edits (patches, skills) | DONE | -- | 2026-10-06 |
 |  | L-420 | The galactic plane in the Celestial Grid, the galactic centre in the star background (orrery, sky, DONE 2026-10-07) | DONE | -- | 2026-10-07 |
+|  | L-422 | ledger-and-session-records 1.17: Tony's page by section, the run-record zone, labels on handles, RICE for lists, where a record goes (skills, documentation) | DONE | -- | 2026-10-08 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1125,55 +1128,6 @@ Sgr A*, and the tide's cone and brightness; then the gallery build.
 **Ref:** `solar_visualization_shells.py`, `comet_visualization_shells.py`;
 gallery `data/objects_config.json`; L-228, L-371.
 
-
-#### [L-422] ledger-and-session-records 1.17: Tony's page by section, the run-record zone, labels on handles, RICE for lists, where a record goes (skills, documentation)
-<!-- L:422 status:OPEN upd:2026-10-07 section:A flag: rice: -->
-- **Built 2026-10-07** (Fable 5.1 ledger-sweep session) by
-  `documentation/patch_L422_1_skill_1_17_and_tonys_page_20261007.py`,
-  from four of Tony's rulings that day, each method and so a skill rule
-  (Method Belongs to the Skill):
-  - **The page's shape.** Tony: "Confirmed." Each fact once; the READ
-    THIS FIRST box is the page; the done road stages fold into one
-    line; SETTLED and SIGNALS added; the goal, right now, the next
-    three steps and the marks legend cut as repeats. The mock he read
-    became the page, written whole this once because the shape
-    changed; from here a patch edits the page by section.
-  - **The run-record zone.** Tony: "I use the where we are to record
-    the run record and rename it with a time stamp." The page ends
-    with a marker; below it is his; no patch edits it; the cap
-    excludes it; the close reads his latest timestamped copy and names
-    it. No subfolder for the copies: "I already mix handoffs,
-    patches, design documents. Subfolders are more steps and also I
-    scan the files to see what the recent changes were."
-  - **Labels on handles.** Tony: "all ledger L-xxx items should have
-    a brief parenthetical label." On the page, in handoffs, in chat.
-  - **RICE for list items** (L-412, ruled 2026-10-07): no score inside
-    an ordered list; carried on L-351 for a day, now landed.
-  - **Where a record goes** (Tony, 2026-09-22, carried on L-351 since):
-    the orrery's documentation/ for all documentation, the gallery's
-    for its patch files and the tool inputs its run reads; flat.
-- **In the same commit:** protocol v3.85 (the entry; v3.82 moved to
-  PROJECT_INSTRUCTIONS_HISTORY.md); the skill's v1.14 entry moved to
-  SKILL_HISTORIES.md by the three-entry rule (L-418);
-  documentation/WHERE_WE_ARE.md in the new shape, the page it replaced
-  copied into this session's handoff; the handoff itself.
-- **This bump takes 1.17.** L-418's split build, which expected to cut
-  the ledger skill at 1.17, cuts it at 1.18. L-412 and L-351 say so.
-- **The obligation travels.** This session's installed copy was bound
-  at 1.14 when the conversation began (before the 1.16 push), and it
-  read 1.16 from the repo at HEAD. The next session confirms its
-  loaded copy reads 1.17 before any ledger, handoff or session-record
-  work.
-- **Tony-action (do):** reinstall ledger-and-session-records (1.17)
-  from skills/ in Settings > Skills; replace the Project's instructions
-  with PROJECT_INSTRUCTIONS.md, now v3.85.
-**Gap:** the loaded-copy confirmation above; then CLOSE. The check
-(date and cap) is L-396's to build, not this item's.
-**Ref:** `skills/ledger-and-session-records/SKILL.md`;
-`documentation/WHERE_WE_ARE.md`;
-`documentation/HANDOFF_L422_fable_sweep_close_20261007.md`;
-`documentation/LEDGER_SWEEP_review_20261007.md`; L-396, L-412, L-351,
-L-418, L-419.
 
 #### [L-421] Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words)
 <!-- L:421 status:OPEN upd:2026-10-06 section:A flag: rice: -->
@@ -20231,6 +20185,115 @@ module once ERA5T coverage reached the event window.)
 **Ref:** NOAA WPC; Copernicus C3S/ECMWF CDS ERA5T docs (retrieved 2026-06-30);
 design conversation this session; cross-ref L-071 (sibling pattern, not
 parent), L-060 (El Nino context, no causal claim).
+
+#### [L-027 | #61] Platform Neutrality (SystemButtonFace)
+<!-- L:027 status:DONE upd:2026-10-08 section:C flag: rice:3/2/75/2 -->
+26 occurrences of the Tk color name SystemButtonFace in palomas_orrery.py.
+Resolves on Windows; fails on Linux/macOS. The xvfb pre-test sed swap is
+a workaround, not a fix. Options: hex literal '#F0F0F0', platform
+detection (sys.platform), or ttk styling.
+- **Corrected and built, 2026-10-06.** The two lines above were wrong.
+  Not cosmetic: on Linux, Tk stops with `unknown color name
+  "SystemButtonFace"` at the first panel, so the window never opens
+  (checked in the sandbox). And not the starting state. Tony's commit
+  dff2d03 of 2026-01-09, "cross-platform refactor", had replaced all
+  22 with `gray90`, and he tested the orrery on Linux and macOS while
+  it held. Commit ec333df of 2026-06-12, "animation refactor phase 4",
+  changed all 26 `gray90` to `SystemButtonFace`: the reverse of the
+  pre-test's colour swap, on the real file, three days after L-003
+  recorded the rule against it. This item (2026-06-18) and
+  agentic-pre-test 1.1 (L-115, 2026-07-12) then read the damaged file
+  as the original. The pre-test's swap also hid it: every headless run
+  passed because the test removed the colour from its copy first.
+  Tony, 2026-10-06: "We should not have any windows only requirements.
+  This is a cross platform project."; "I did test palomas_orrery.py in
+  both Linux and MacOS but maybe six months ago so it is very stale.";
+  on restoring gray90 as one name, "Confirmed as recommended. And
+  should we improve the skill also?"
+  `patch_L027_1_panel_colour_20261006.py`: palomas_orrery.py defines
+  `PANEL_BG = 'gray90'` after the root window and uses it at the 23
+  sites; agentic-pre-test 1.3 runs the headless test on an unedited
+  copy and records the founding case as the history shows it;
+  protocol v3.83.
+- **Run, pushed at e7073fce and reinstalled, 2026-10-06** (Tony's run
+  record).
+- **The panels' grey confirmed, 2026-10-07.** Tony: "gray90 is
+  confirmed."
+- **A run on a Mac, struck as a condition for closing.** gray90 is a
+  colour name Tk knows on every system, it is the grey Tony ran on
+  macOS while it held from January to June, and the headless
+  pre-test now fails if a one-system colour name returns. A Mac run
+  is still welcome; nothing waits on it.
+- **Closed 2026-10-08.** The loaded copy of agentic-pre-test reads
+  1.3. It was read from the skills this conversation loads, after its
+  environment was rebuilt on 2026-10-08, and it is byte for byte the
+  repo's `skills/agentic-pre-test/SKILL.md` at 1ba72f7f. The bytes
+  were the check, not the word that the skill was reinstalled. Tony's
+  verdict on the panels, from
+  `documentation/WHERE_WE_ARE_10-7-26_0832_run_record.md`:
+  "-- confirmed."
+**Gap:** none. (Was: a later session confirms its loaded copy of
+agentic-pre-test reads 1.3.)
+**Ref:** commits dff2d03, ec333df; L-003; L-115; L-026;
+`skills/agentic-pre-test/SKILL.md`.
+**Platform neutrality:** same goal as L-026 (the LF sweep) -- pair them. This is the Tk
+color-name half (SystemButtonFace -> hex literal / sys.platform detection / ttk).
+
+#### [L-422] ledger-and-session-records 1.17: Tony's page by section, the run-record zone, labels on handles, RICE for lists, where a record goes (skills, documentation)
+<!-- L:422 status:DONE upd:2026-10-08 section:C flag: rice: -->
+- **Built 2026-10-07** (Fable 5.1 ledger-sweep session) by
+  `documentation/patch_L422_1_skill_1_17_and_tonys_page_20261007.py`,
+  from four of Tony's rulings that day, each method and so a skill rule
+  (Method Belongs to the Skill):
+  - **The page's shape.** Tony: "Confirmed." Each fact once; the READ
+    THIS FIRST box is the page; the done road stages fold into one
+    line; SETTLED and SIGNALS added; the goal, right now, the next
+    three steps and the marks legend cut as repeats. The mock he read
+    became the page, written whole this once because the shape
+    changed; from here a patch edits the page by section.
+  - **The run-record zone.** Tony: "I use the where we are to record
+    the run record and rename it with a time stamp." The page ends
+    with a marker; below it is his; no patch edits it; the cap
+    excludes it; the close reads his latest timestamped copy and names
+    it. No subfolder for the copies: "I already mix handoffs,
+    patches, design documents. Subfolders are more steps and also I
+    scan the files to see what the recent changes were."
+  - **Labels on handles.** Tony: "all ledger L-xxx items should have
+    a brief parenthetical label." On the page, in handoffs, in chat.
+  - **RICE for list items** (L-412, ruled 2026-10-07): no score inside
+    an ordered list; carried on L-351 for a day, now landed.
+  - **Where a record goes** (Tony, 2026-09-22, carried on L-351 since):
+    the orrery's documentation/ for all documentation, the gallery's
+    for its patch files and the tool inputs its run reads; flat.
+- **In the same commit:** protocol v3.85 (the entry; v3.82 moved to
+  PROJECT_INSTRUCTIONS_HISTORY.md); the skill's v1.14 entry moved to
+  SKILL_HISTORIES.md by the three-entry rule (L-418);
+  documentation/WHERE_WE_ARE.md in the new shape, the page it replaced
+  copied into this session's handoff; the handoff itself.
+- **This bump takes 1.17.** L-418's split build, which expected to cut
+  the ledger skill at 1.17, cuts it at 1.18. L-412 and L-351 say so.
+- **The obligation travels.** This session's installed copy was bound
+  at 1.14 when the conversation began (before the 1.16 push), and it
+  read 1.16 from the repo at HEAD. The next session confirms its
+  loaded copy reads 1.17 before any ledger, handoff or session-record
+  work.
+- **Tony-action (do):** reinstall ledger-and-session-records (1.17)
+  from skills/ in Settings > Skills; replace the Project's instructions
+  with PROJECT_INSTRUCTIONS.md, now v3.85.
+- **Confirmed and closed, 2026-10-08,** by the L-420 (galactic plane)
+  session. The loaded copy of ledger-and-session-records reads 1.17,
+  byte for byte the repo's at 1ba72f7f, read from the skills this
+  conversation loads after its environment was rebuilt. That
+  session's close then edited Where We Are by section under it.
+  Tony's reinstall and v3.85, from
+  `documentation/WHERE_WE_ARE_10-7-26_0832_run_record.md`: "-- done".
+**Gap:** none. The check (date and cap) is L-396's to build, not
+this item's. (Was: the loaded-copy confirmation; then close.)
+**Ref:** `skills/ledger-and-session-records/SKILL.md`;
+`documentation/WHERE_WE_ARE.md`;
+`documentation/HANDOFF_L422_fable_sweep_close_20261007.md`;
+`documentation/LEDGER_SWEEP_review_20261007.md`; L-396, L-412, L-351,
+L-418, L-419.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
@@ -20392,52 +20455,6 @@ shells (rings, magnetospheres, belts) keep their markers inline because they nee
 special positioning. This item just greps the *_visualization_shells.py files for any
 OLD inline-marker definitions left OUTSIDE a custom-geometry builder -- stragglers the
 sweep missed. None found -> close. (Deferred until run.)
-
-#### [L-027 | #61] Platform Neutrality (SystemButtonFace)
-<!-- L:027 status:OPEN upd:2026-10-07 section:D.Structural flag: rice:3/2/75/2 -->
-26 occurrences of the Tk color name SystemButtonFace in palomas_orrery.py.
-Resolves on Windows; fails on Linux/macOS. The xvfb pre-test sed swap is
-a workaround, not a fix. Options: hex literal '#F0F0F0', platform
-detection (sys.platform), or ttk styling.
-- **Corrected and built, 2026-10-06.** The two lines above were wrong.
-  Not cosmetic: on Linux, Tk stops with `unknown color name
-  "SystemButtonFace"` at the first panel, so the window never opens
-  (checked in the sandbox). And not the starting state. Tony's commit
-  dff2d03 of 2026-01-09, "cross-platform refactor", had replaced all
-  22 with `gray90`, and he tested the orrery on Linux and macOS while
-  it held. Commit ec333df of 2026-06-12, "animation refactor phase 4",
-  changed all 26 `gray90` to `SystemButtonFace`: the reverse of the
-  pre-test's colour swap, on the real file, three days after L-003
-  recorded the rule against it. This item (2026-06-18) and
-  agentic-pre-test 1.1 (L-115, 2026-07-12) then read the damaged file
-  as the original. The pre-test's swap also hid it: every headless run
-  passed because the test removed the colour from its copy first.
-  Tony, 2026-10-06: "We should not have any windows only requirements.
-  This is a cross platform project."; "I did test palomas_orrery.py in
-  both Linux and MacOS but maybe six months ago so it is very stale.";
-  on restoring gray90 as one name, "Confirmed as recommended. And
-  should we improve the skill also?"
-  `patch_L027_1_panel_colour_20261006.py`: palomas_orrery.py defines
-  `PANEL_BG = 'gray90'` after the root window and uses it at the 23
-  sites; agentic-pre-test 1.3 runs the headless test on an unedited
-  copy and records the founding case as the history shows it;
-  protocol v3.83.
-- **Run, pushed at e7073fce and reinstalled, 2026-10-06** (Tony's run
-  record).
-- **The panels' grey confirmed, 2026-10-07.** Tony: "gray90 is
-  confirmed."
-- **A run on a Mac, struck as a condition for closing.** gray90 is a
-  colour name Tk knows on every system, it is the grey Tony ran on
-  macOS while it held from January to June, and the headless
-  pre-test now fails if a one-system colour name returns. A Mac run
-  is still welcome; nothing waits on it.
-**Gap:** a later session confirms its loaded copy of agentic-pre-test
-reads 1.3, then closes this item. The session that bumped it loaded
-1.2 and cannot see the reinstall.
-**Ref:** commits dff2d03, ec333df; L-003; L-115; L-026;
-`skills/agentic-pre-test/SKILL.md`.
-**Platform neutrality:** same goal as L-026 (the LF sweep) -- pair them. This is the Tk
-color-name half (SystemButtonFace -> hex literal / sys.platform detection / ttk).
 
 ### D.Cosmetic -- polish (bundle when convenient)
 

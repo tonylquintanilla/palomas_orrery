@@ -206,11 +206,32 @@ not touched). Pushed at: (Tony writes the SHA here.)
     Background on. Turn until the violet circle is edge-on, and look
     at the tide and its cone; hover the three circles' crosses.
 
+## Session closed, 2026-10-08
+
+- Pushes, in order: e7073fce (L-420 and L-027 built), 12693a53 (the
+  circles' hovers and the tide), 8c457b7d (L-420 closed), 3f4c01e2
+  (the panels confirmed). Tony's verdicts are in
+  `documentation/WHERE_WE_ARE_10-7-26_0832_run_record.md`.
+- L-027 (the panel colour) closed by
+  `patch_L420_6_session_close_20261008.py`. This conversation's
+  environment was rebuilt on 2026-10-08, and the skill copies it
+  loads then read agentic-pre-test 1.3 and
+  ledger-and-session-records 1.17, byte for byte the repo's at
+  1ba72f7f. That discharges both travelling obligations, and L-422
+  (the ledger skill at 1.17) closes on the same read.
+- Where We Are edited by section under 1.17: the box, Settled,
+  Signals, Waiting on you and the details; nothing below the marker.
+- Lesson: twice this session a patch was built on a commit the repo
+  had moved past while other sessions pushed. The guards refused and
+  nothing broke, but the fix is to read the repo's head just before
+  handing over any patch, which the later patches did.
+
 ## Next session
 
-- L-420 closed 2026-10-07.
-- Confirm the loaded agentic-pre-test reads 1.3, then close L-027;
-  Tony confirmed the panels 2026-10-07.
+- L-420 (the galactic plane) closed 2026-10-07; L-027 (the panel
+  colour) and L-422 (the ledger skill at 1.17) closed 2026-10-08.
+- The phone's galactic plane waits for the design talk, on L-408
+  (the galactic plane on the phone).
 - Nothing else is opened by this session.
 
 Session written October 2026 with Anthropic's Claude Opus 5.5.
