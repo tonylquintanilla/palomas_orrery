@@ -266,6 +266,10 @@ Module updated: October 7, 2026 with Anthropic's Claude Fable 5.1
 (L-001: the Earth System track ruled central and behind the website
 build, on the road as stage 14; L-071 and L-077 closed, the events
 over), built on 8653ef1b.
+Module updated: October 7, 2026 with Anthropic's Claude Fable 5.1
+(L-412: Tony's ruling, an item inside an ordered list needs no RICE
+score; carried to ledger-and-session-records 1.17 on L-351), built on
+8653ef1b.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -581,7 +585,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-346 | A derived row with empty inputs is invisible to a walk by inputs (checks) | OPEN | -- | 2026-09-22 |
 | ! | L-347 | The page re-derives the bow shock standoff to draw its shape (gallery) | OPEN | -- | 2026-09-22 |
 | ! | L-348 | Derived rows outside Earth were counted, not propagated (store) | OPEN | -- | 2026-09-22 |
-| ! | L-351 | Rules learned at C2, owed to the next bumps of their stores (skills, protocol) | OPEN | -- | 2026-10-04 |
+| ! | L-351 | Rules learned at C2, owed to the next bumps of their stores (skills, protocol) | OPEN | -- | 2026-10-07 |
 | ! | L-352 | The orrery's display sites format by fixed width, with no check reading them (orrery) | OPEN | -- | 2026-09-28 |
 | ! | L-353 | A count taken from a file's print resolution where a published error budget exists unopened (store) | OPEN | -- | 2026-09-22 |
 | ! | L-354 | Declared picks with their range in prose, on other bodies (store) | OPEN | -- | 2026-09-22 |
@@ -628,7 +632,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-408 | A Galactic Plane toggle in the Sun room (gallery, the Sun's slice) | OPEN | -- | 2026-10-06 |
 | ! | L-410 | Fuzzy boundaries for edges known only as ranges, the outer corona first (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-05 |
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
-| ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-04 |
+| ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-07 |
 | ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-06 |
 | ! | L-414 | The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling) | OPEN | -- | 2026-10-04 |
 | ! | L-418 | Long skills open with their contents, and keep three version entries (skills) | OPEN | -- | 2026-10-06 |
@@ -1326,7 +1330,7 @@ count for `constants_new.py` should name these four as gone.
 `PROVENANCE_AUDIT.md`; L-305; L-314; L-351.
 
 #### [L-412] The Sun's slice: the order Tony confirmed (the Sun's slice)
-<!-- L:412 status:OPEN upd:2026-10-04 section:A flag: rice: -->
+<!-- L:412 status:OPEN upd:2026-10-07 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-04**, after a sweep of the open items that
   touch the Sun room. Smallest and most settled first:
   1. L-209, the Alfven surface look -- DONE 2026-10-04.
@@ -1360,6 +1364,15 @@ count for `constants_new.py` should name these four as gone.
   67 unscored live items are L-343 onward; (b) the scores it proposes
   (L-131 and L-128 at 3/3/70/2; L-216 lowered or DEFERRED; L-228, L-241,
   L-292 confirmed; L-252 re-scored).
+- **Tony's ruling on (a), 2026-10-07:** an item inside an ordered
+  list -- this one, L-413, and any list like them -- needs no RICE
+  score. The list's order is its priority, under the master plan's
+  sequencing authority (L-221). An item outside a list keeps RICE,
+  and gets a coarse score when it is next opened. The rule is method
+  (Method Belongs to the Skill): it goes into ledger-and-session-
+  records at its next version, 1.17, which L-418's build cuts, and is
+  carried on L-351 until then. Question (b), the proposed scores, is
+  still open.
 **Gap:** after L-413, work down the list from item 3.
 **Ref:** L-371 (the slice's numbers); the handles above; L-413;
 `documentation/LEDGER_SWEEP_review_20261004.md`.
@@ -2849,7 +2862,7 @@ from L-404.
 **Ref:** `earth_visualization_shells.py`; `planet_visualization_utilities.py`; `documentation/NOTE_L322_C2a_orrery_words_20260922.md`; manifest sec. 17.7.
 
 #### [L-351] Rules learned at C2, owed to the next bumps of their stores (skills, protocol)
-<!-- L:351 status:OPEN upd:2026-10-04 section:A flag: rice: -->
+<!-- L:351 status:OPEN upd:2026-10-07 section:A flag: rice: -->
 - **Recorded, not built.** A class found while building L-322 Stage C2
   (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
   Braid: it waits until the artifact on the critical path reaches it.
@@ -2891,9 +2904,13 @@ from L-404.
     (L-414, if the fix is method there).
   - gallery-pipeline: the wide card's four fields and the picture's
     tool (L-363).
-  - ledger-and-session-records: a patch checks files Tony annotates by
-    the lines it edits, never by a whole-file fingerprint (Tony,
-    2026-10-03); and Tony's documentation-folder practice (above).
+  - ledger-and-session-records, at 1.17 (L-418's build): an item
+    inside an ordered list needs no RICE score, the list's order being
+    its priority under the plan's sequencing authority; items outside
+    a list keep RICE (Tony, 2026-10-07, L-412). And Tony's
+    documentation-folder practice (above). The by-the-lines check of
+    Tony-annotated files landed at 1.16 on 2026-10-05 (L-419) and is
+    struck here.
   - interactive-exhibit and the protocol: as above.
 **Gap:** Each lands with its store's next bump.
 **Ref:** skills/interactive-exhibit/SKILL.md; skills/ledger-and-session-records/SKILL.md; PROJECT_INSTRUCTIONS.md; L-216, L-363, L-371, L-390, L-414.
