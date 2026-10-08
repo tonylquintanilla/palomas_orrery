@@ -262,6 +262,10 @@ entry ruled), built on 12693a53.
 Module updated: October 7, 2026 with Anthropic's Claude Opus 5.5
 (L-027: the panels' grey confirmed; L-408 waits for the design talk),
 built on 8653ef1b.
+Module updated: October 7, 2026 with Anthropic's Claude Fable 5.1
+(L-001: the Earth System track ruled central and behind the website
+build, on the road as stage 14; L-071 and L-077 closed, the events
+over), built on 8653ef1b.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -479,7 +483,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*238 live items; 222 need attention (`!`); 180 RICE-scored; 178 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*236 live items; 220 need attention (`!`); 178 RICE-scored; 180 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -503,7 +507,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
 | ! | L-327 | Tool repairs from the rules-vs-reasoning round (tooling track) | OPEN | 4.8 | 2026-09-14 |
 | ! | L-268 | Sweep: features collapsed out of their own identity | OPEN | 4.5 | 2026-08-30 |
-| ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
+| ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-10-07 |
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-09-28 |
 | ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-25 |
 | ! | L-281 | The guest book: no-account comments, approve-before-show | OPEN | 4.2 | 2026-09-27 |
@@ -538,15 +542,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-08-07 |
 | ! | L-244 | Sweep for replicated conversion factors as a class [Fable candidate] | OPEN | 2.8 | 2026-08-25 |
 | ! | L-323 | A figure in prose needs a home (the Note is not a store) | OPEN | 2.8 | 2026-09-12 |
-| ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
+| ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-10-07 |
 | ! | L-298 | Seeing the gap between what the orrery draws and what an exhibit serves | OPEN | 2.7 | 2026-09-07 |
 | ! | L-248 | The parsec-to-light-year factor is typed 36 times across the star pipeline | OPEN | 2.5 | 2026-08-25 |
 | ! | L-273 | A document indexer, so the README's document table stops being hand-maintained | OPEN | 2.5 | 2026-09-01 |
-| ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 |  | L-225 | Migrate the comet shell constants into `constants_new.py`, then dispatch | DEFERRED | 2.4 | 2026-08-23 |
 | ! | L-293 | Lunar standstill: an exhibit made of four dated orbits | OPEN | 2.4 | 2026-09-06 |
 | ! | L-322 | Units declared in the store, and the orrery as producer | OPEN | 2.3 | 2026-09-29 |
-| ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-192 | Worksheet checker -- verify a value against its own evidence | OPEN | 2.1 | 2026-08-15 |
 | ! | L-328 | Subtraction pass on the skill layer (protocol/skills track) | OPEN | 2.1 | 2026-09-14 |
 | ! | L-183 | Stars / stellar neighbourhood skill (coverage gap) | OPEN | 2.1 | 2026-08-05 |
@@ -572,7 +574,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-129 | Cometary structure constants -- periodic maintenance sweep | OPEN | 1.0 | 2026-07-17 |
 | ! | L-131 | Zodiacal dust solar shell | OPEN | 1.0 | 2026-10-04 |
 | ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 0.9 | 2026-07-16 |
-| ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-06-24 |
+| ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-10-07 |
 | ! | L-319 | Focusing a smaller shell cuts larger lit shells flat at the frame's box | OPEN | 0.7 | 2026-09-10 |
 | ! | L-343 | A figure count can describe the arithmetic and not the claim (store) | OPEN | -- | 2026-09-22 |
 | ! | L-344 | A stated uncertainty computed from a rounded intermediate (store) | OPEN | -- | 2026-09-22 |
@@ -889,11 +891,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-110 | GPT competitive cross-check remediation (builder Pass 4) | DONE | 2.7 | 2026-07-10 |
 |  | L-333 | The master plan's two companion summaries have not moved since August (planning documents) | DONE | 2.7 | 2026-09-28 |
 |  | L-116 | New skill: gallery-cache-builder (Move 2 of the skills update) | DONE | 2.5 | 2026-07-12 |
+|  | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | DONE | 2.5 | 2026-10-07 |
 |  | L-255 | Skill bumps of 2026-08-26 -- handle reserved, block never written | DONE | 2.4 | 2026-08-28 |
 |  | L-305 | Earth's magnetosphere rebuilt on a sourced model, orrery and assembler together | DONE | 2.4 | 2026-10-04 |
 |  | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | DONE | 2.2 | 2026-07-15 |
 |  | L-202 | JSON worksheet format, with markdown as fallback | DONE | 2.2 | 2026-08-18 |
 |  | L-213 | Orbit cache backup fires on IMPORT, not on cache write | DONE | 2.2 | 2026-08-19 |
+|  | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | DONE | 2.2 | 2026-10-07 |
 |  | L-318 | Reading a shell's hover text on the phone: taps miss in the mesh, and labels mid-screen lose their pointer | DONE | 2.1 | 2026-09-16 |
 |  | L-063 | Orrery GUI Note text update | DONE | 2.0 | 2026-07-17 |
 |  | L-072 | Gallery Studio WYSIWYG preview -- render through the real index.html viewer | DONE | 2.0 | 2026-06-26 |
@@ -3336,7 +3340,7 @@ and torus numbers being function-local literals. Raised 2026-09-15 from
 Fable's review of the plane question.
 
 #### [L-001] Food Insecurity (Earth System track)
-<!-- L:001 status:OPEN upd:2026-06-30 section:A flag: rice:3/3/95/2 -->
+<!-- L:001 status:OPEN upd:2026-10-07 section:A flag: rice:3/3/95/2 -->
 - **Phase-1 build COMPLETE, render-confirmed (Mode-5, ge_sudan.jpg, built on
   03630ae).** Module: food_insecurity_generator.py -- new dedicated vector/
   categorical generator (NOT a bend of run_scenario); 189 area polygons, full
@@ -3397,11 +3401,28 @@ Fable's review of the plane question.
 - **Still open under this track:** Deferred sub-layers split out: Phase-5 reveal
   -> L-069; 39 IPC call-out points (HFA-bag/IDP symbols) and the Jun-Sep /
   Oct-Jan projections remain deferred per original scope.
+- **Tony's ruling, 2026-10-07, on the Earth System track as a whole:**
+  "The earth system track is central but behind the orrery website
+  build. In the meantime the cards in the gallery work." So the
+  track is neither parked nor retired: it is sequenced behind the
+  website build, and the gallery's static Earth System cards and
+  lobby door carry it to visitors until then. It now has a stage on
+  the road in `documentation/WHERE_WE_ARE.md` (stage 14, [later]).
+  This row is the one place for that ruling; L-060 and L-070 point
+  here. The two dated 2026 heat-dome scenarios, L-071 and L-077,
+  closed the same day: "They can close for practical reasons the
+  event is over."
+- **Re-homed from L-071 at its close, optional and for when the
+  track resumes:** (a) the WWA attribution watch across the
+  europe_* series, if a study publishes; (b) a Sentinel-3 LST
+  surface snapshot as a separate artifact.
 **Ref:** MANIFEST_food_insecurity_sudan_v2.md; HANDOFF_food_insecurity_build_v2.md
-(built on 03630ae); cross-ref L-064, L-069.
+(built on 03630ae); cross-ref L-064, L-069; L-060, L-070 (the track's
+other open rows); L-071, L-077 (closed 2026-10-07);
+`documentation/WHERE_WE_ARE.md` (the road, stage 14).
 
 #### [L-060] ENSO Standalone Chart (Earth System track)
-<!-- L:060 status:OPEN upd:2026-06-18 section:A flag: rice:3/3/75/2.5 -->
+<!-- L:060 status:OPEN upd:2026-10-07 section:A flag: rice:3/3/75/2.5 -->
 - **ENSO standalone gallery chart (design locked, build next session).** Earth
   System track, not the orrery refactor. Single-unit (deg C) chart leading with
   RONI so El Nino / La Nina state reads honestly in a warming climate; ONI as a
@@ -3433,10 +3454,13 @@ Fable's review of the plane question.
   rationale) + add 2026 band provisional-with-flagging. Split to own L-handle if
   it risks leaking when L-060 closes.
 **Gap:** build next session. One genuine open call left (build, not design): confirm ONI file URL + IRI plume parse / skill-calibration params at HEAD before hardcoding (cached-CSV fallback if scrape unstable; model-spread band fallback if calibration params unavailable). Provenance-scan new module (Tier-1=0) before push. Resolved: plume=calibrated Gaussian envelope; schematic=Plotly; 2026 band=provisional-now; no extra traces.
-**Ref:** ENSO_chart_spec.md v2 (design spec, this session); cross-ref L-001 (Food Insecurity, same Earth System track); energy_imbalance.py (Phase 2 target).
+- **2026-10-07:** the Earth System track is ruled central and
+  sequenced behind the website build; the ruling is on L-001. This
+  item waits there, not as a tail item.
+**Ref:** ENSO_chart_spec.md v2 (design spec, this session); cross-ref L-001 (Food Insecurity, same Earth System track; the track's ruling of 2026-10-07); energy_imbalance.py (Phase 2 target).
 
 #### [L-070] Food Insecurity -- regional multi-country assembly (Sudan crisis shed)
-<!-- L:070 status:OPEN upd:2026-06-24 section:A flag: rice:2/3/45/3 -->
+<!-- L:070 status:OPEN upd:2026-10-07 section:A flag: rice:2/3/45/3 -->
 - **Extend the food-insecurity view across the Sudan-war refugee shed:** Sudan
   (have, SD) + South Sudan (SS) + Chad (TD) + CAR (CF) + Ethiopia (ET). Each is a
   SEPARATE IPC analysis / separate manual Mapping Tool fetch (bot-block wall) with
@@ -3448,49 +3472,9 @@ Fable's review of the plane question.
   L-069 P5 dots).
 **Gap:** DATA-ACQUISITION GATED. Confirm current IPC availability + period per
 neighbor at fetch time (Tony, manual). Scope: which neighbors in v1.
-**Ref:** L-001 (parent), L-069 (P5 dots reused per country); food_insecurity_generator.py.
-
-#### [L-071] 2026 European heat dome -- track to resolution (dated scenario series)
-<!-- L:071 status:OPEN upd:2026-06-25 section:A flag: rice:3/3/70/2.5 -->
-- **Follow the ongoing 2026 European heat dome across its lifetime as a dated
-  scenario series** -- the Western Heat Dome (Mar 14/17/18) pattern: one new dated
-  europe_* scenario per captured day, NOT one scenario auto-advancing its date.
-  Same chassis as europe_2026 (wet-bulb spine + C-only air-temp pins,
-  fetch_era5_heatwave / Open-Meteo archive). europe_2026 (21 Jun) is entry #1,
-  built and closed under L-065.
-- **Next:** a new dated scenario for the 27-28 Jun peak, once Open-Meteo's archive
-  reaches those dates (a few days' lag). New date = fresh fetch, no cache collision.
-- **Carried forward from L-065 (closed):** (a) WWA attribution watch -- update the
-  line across the series if a study publishes; (b) Sentinel-3 LST surface snapshot --
-  optional separate artifact.
-- **Close when:** the dome resolves and the series is complete.
-**Ref:** L-065 (build + chassis, closed); scenarios_heatwaves.py; Western
-dated-series precedent (scenarios_western_heatwave_march_2026.py).
-
-#### [L-077] 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario
-<!-- L:077 status:OPEN upd:2026-06-30 section:A flag: rice:3/3/60/2.5 -->
-- New L-item (not a sibling of L-071) -- the migrating centroid plus the
-  advancing reanalysis/forecast seam is its own design object, not another
-  dated snapshot. Track: Gulf Coast bullseye -> St. Louis (~Jul 1) ->
-  Chicago (~Jul 4) -> forecast retreat into the High Plains.
-- ERA5T lag confirmed ~5 days behind real-time, D-5 typically by 12 UTC
-  (Copernicus C3S / ECMWF CDS docs, retrieved 2026-06-30) -- so today there
-  is no observed wet-bulb field yet for the June 27-Jul 1 peak.
-- Design: ongoing scenario per the L-071 pattern (one dated scenario per
-  captured day, chassis shared with europe_2026/scenarios_heatwaves.py),
-  but with the forward/migrating segment shown as a forecast ENVELOPE
-  (Show-the-Envelope convention) and the already-happened segment as solid
-  reanalysis once ERA5T catches up -- the advancing seam is the honest,
-  teachable object.
-- El Nino backdrop noted as context only (L-060) -- causal restraint, no
-  drawn connection.
-**Gap:** scaffold the dated-scenario module once ERA5T coverage reaches the
-event window (NOAA WPC June 27-29 peak + ~5-day lag -> earliest observed
-coverage ~early July). Forecast-vs-reanalysis visual treatment is the open
-design detail at build time.
-**Ref:** NOAA WPC; Copernicus C3S/ECMWF CDS ERA5T docs (retrieved 2026-06-30);
-design conversation this session; cross-ref L-071 (sibling pattern, not
-parent), L-060 (El Nino context, no causal claim).
+- **2026-10-07:** the Earth System track is ruled central and
+  sequenced behind the website build; the ruling is on L-001.
+**Ref:** L-001 (parent; the track's ruling of 2026-10-07), L-069 (P5 dots reused per country); food_insecurity_generator.py.
 
 #### [L-078] Provenance scanner: systematic coverage via module_atlas role classification
 <!-- L:078 status:OPEN upd:2026-07-16 section:A flag: rice:2/2/70/3 -->
@@ -20071,6 +20055,60 @@ L-026; L-133; L-351.
 `solar_visualization_shells.create_sun_galactic_tide`; L-406;
 `documentation/HANDOFF_L420_galactic_plane_20261006.md`.
 
+
+#### [L-071] 2026 European heat dome -- track to resolution (dated scenario series)
+<!-- L:071 status:DONE upd:2026-10-07 section:C flag: rice:3/3/70/2.5 -->
+- **Follow the ongoing 2026 European heat dome across its lifetime as a dated
+  scenario series** -- the Western Heat Dome (Mar 14/17/18) pattern: one new dated
+  europe_* scenario per captured day, NOT one scenario auto-advancing its date.
+  Same chassis as europe_2026 (wet-bulb spine + C-only air-temp pins,
+  fetch_era5_heatwave / Open-Meteo archive). europe_2026 (21 Jun) is entry #1,
+  built and closed under L-065.
+- **Next:** a new dated scenario for the 27-28 Jun peak, once Open-Meteo's archive
+  reaches those dates (a few days' lag). New date = fresh fetch, no cache collision.
+- **Carried forward from L-065 (closed):** (a) WWA attribution watch -- update the
+  line across the series if a study publishes; (b) Sentinel-3 LST surface snapshot --
+  optional separate artifact.
+- **Close when:** the dome resolves and the series is complete.
+- **CLOSED 2026-10-07 (Tony):** "They can close for practical reasons
+  the event is over." The series stands at its one entry,
+  europe_2026 (21 Jun, L-065); the 27-28 Jun peak scenario was not
+  captured and is not owed, the event having passed. Loose ends
+  re-homed to L-001, the Earth System track's one place: the WWA
+  attribution watch and the Sentinel-3 LST snapshot, both optional.
+**Ref:** L-065 (build + chassis, closed); scenarios_heatwaves.py; Western
+dated-series precedent (scenarios_western_heatwave_march_2026.py);
+L-001 (the track's ruling of 2026-10-07).
+
+#### [L-077] 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario
+<!-- L:077 status:DONE upd:2026-10-07 section:C flag: rice:3/3/60/2.5 -->
+- New L-item (not a sibling of L-071) -- the migrating centroid plus the
+  advancing reanalysis/forecast seam is its own design object, not another
+  dated snapshot. Track: Gulf Coast bullseye -> St. Louis (~Jul 1) ->
+  Chicago (~Jul 4) -> forecast retreat into the High Plains.
+- ERA5T lag confirmed ~5 days behind real-time, D-5 typically by 12 UTC
+  (Copernicus C3S / ECMWF CDS docs, retrieved 2026-06-30) -- so today there
+  is no observed wet-bulb field yet for the June 27-Jul 1 peak.
+- Design: ongoing scenario per the L-071 pattern (one dated scenario per
+  captured day, chassis shared with europe_2026/scenarios_heatwaves.py),
+  but with the forward/migrating segment shown as a forecast ENVELOPE
+  (Show-the-Envelope convention) and the already-happened segment as solid
+  reanalysis once ERA5T catches up -- the advancing seam is the honest,
+  teachable object.
+- El Nino backdrop noted as context only (L-060) -- causal restraint, no
+  drawn connection.
+- **CLOSED 2026-10-07 (Tony):** "They can close for practical reasons
+  the event is over." The scenario was never scaffolded, and is not
+  owed: a migrating-centroid scenario needs the event live, and this
+  one has passed. Struck with that reason. The DESIGN above -- the
+  forecast envelope ahead of the advancing reanalysis seam, under
+  Show the Envelope -- stays recorded here as the pattern for the
+  next such event, when the Earth System track resumes (L-001).
+**Gap:** none; closed by Tony's ruling. (Was: scaffold the dated-scenario
+module once ERA5T coverage reached the event window.)
+**Ref:** NOAA WPC; Copernicus C3S/ECMWF CDS ERA5T docs (retrieved 2026-06-30);
+design conversation this session; cross-ref L-071 (sibling pattern, not
+parent), L-060 (El Nino context, no causal claim).
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

@@ -84,7 +84,12 @@ How to read the marks:
               that matter.
  13. [later]  The planets get their details -- layers, rings, magnetic
               fields -- Jupiter and Saturn first.
- 14. [goal]   The website does what the desktop orrery does, from data
+ 14. [later]  The Earth System layers -- heat, food insecurity, the
+              oceans -- come to the website from their generators and
+              sources, the way the orrery's numbers do. Until then the
+              gallery's Earth System cards carry them, as you ruled.
+              << new this session
+ 15. [goal]   The website does what the desktop orrery does, from data
               fetched from JPL each night, with a date to choose and
               time to play within the range the data covers.
 

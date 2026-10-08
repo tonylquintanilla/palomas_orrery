@@ -11,16 +11,15 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 147  
-**Total Lines of Code (non-blank):** 116,269  
-**Total Public Functions/Classes:** 1,309
+**Total Python Files:** 146  
+**Total Lines of Code (non-blank):** 116,068  
+**Total Public Functions/Classes:** 1,307
 
 ## Classification Coverage
 
-**Undetermined role (10).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (9).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L001_1_earth_system_track_20261007.py`
 - `patch_L216_1_hand_run_stands_20261007.py`
 - `patch_L395_3_horizons_check_design_20261007.py`
 - `patch_L412_1_rice_ruling_20261007.py`
@@ -30,9 +29,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (5).** No valid `Domain:` tag.
+**Undetermined domain (4).** No valid `Domain:` tag.
 
-- `patch_L001_1_earth_system_track_20261007.py`
 - `patch_L216_1_hand_run_stands_20261007.py`
 - `patch_L395_3_horizons_check_design_20261007.py`
 - `patch_L412_1_rice_ruling_20261007.py`
@@ -253,7 +251,6 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L001_1_earth_system_track_20261007.py` | - ORRERY repo. Records Tony's rulings of 2026-10-07 on the Earth System track: central, behind the website build, the gallery's cards serving meanwhile; and the two 2026 heat-dome scenarios closed because the events are over. (201 lines) |
 | `patch_L216_1_hand_run_stands_20261007.py` | - ORRERY repo. Records Tony's two statements of 2026-10-07 on L-216: the daily hand run, with its four checks, is his working practice, with no automation planned; and the Daily Run now pauses OneDrive before the cache build. Sessions stop proposing a sch... (134 lines) |
 | `patch_L395_3_horizons_check_design_20261007.py` | - ORRERY repo. Writes down L-395's design round of 2026-10-07: the check of the orrery's object list against JPL Horizons. (93 lines) |
 | `patch_L412_1_rice_ruling_20261007.py` | - ORRERY repo. Records Tony's ruling of 2026-10-07: an item inside an ordered list needs no RICE score. The rule goes to ledger-and-session-records at its next version; until then it is carried on L-351. (126 lines) |
