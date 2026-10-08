@@ -270,6 +270,10 @@ Module updated: October 7, 2026 with Anthropic's Claude Fable 5.1
 (L-412: Tony's ruling, an item inside an ordered list needs no RICE
 score; carried to ledger-and-session-records 1.17 on L-351), built on
 8653ef1b.
+Module updated: October 7, 2026 with Anthropic's Claude Fable 5.1
+(L-216: the daily hand run stands as Tony's practice, pausing OneDrive
+24 hours first; the swap retry proven twice in the log; a close for
+Tony to decide), built on 8653ef1b.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -520,7 +524,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
-| ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-10-04 |
+| ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-10-07 |
 |  | L-230 | A skill bump does not reach the protocol's version history | DEFERRED | 3.8 | 2026-08-23 |
 | ! | L-241 | Hills torus hover states the cloud bounds, not the drawn ring | OPEN | 3.8 | 2026-10-04 |
 | ! | L-282 | The lobby: the main page as an entrance hall | OPEN | 3.8 | 2026-09-06 |
@@ -5455,7 +5459,7 @@ pointing at it, so name the pilot's return by hand at dispatch time.
 **Ref:** L-200 (the leg that cites the filename); L-186; L-192.
 
 #### [L-216] Gallery swap fails under a filesystem lock (OneDrive)
-<!-- L:216 status:OPEN upd:2026-10-04 section:A flag: rice:3/3/85/2 -->
+<!-- L:216 status:OPEN upd:2026-10-07 section:A flag: rice:3/3/85/2 -->
 - **2026-10-04: the stray folder again.** Tony's gallery maintenance
   run of 2026-10-04 (Cache siblings, report-only) found
   `data/solar-system (1)` in his gallery copy, the OneDrive shape L-400
@@ -5776,9 +5780,45 @@ THAT TOOK MORE THAN ONE ATTEMPT -- the builder's `[SWAP]` line now says it
 on screen, and the maintenance run's last line reads it back from the
 log. That is the fix doing its job, and until one appears the retry is
 unproven. The empty " (N)" folders are a second, smaller symptom with the
-same suspected cause and no known harm. The move off OneDrive is Tony's
-and is UNDECIDED; the analysis, the inventory and what a move would need
-first are in the 2026-09-20 notes above.
+same suspected cause and no known harm.
+**Tony, 2026-10-07:** "on the daily run it now includes four checks I
+run first thing. I don't plan on automating any time soon." And on
+the swap: "the daily run now checks that one drive is paused before
+committing the cache build."
+Tony pauses for 24 hours, not two: "2 hours can accidentally
+expire."
+**Note (2026-10-07):** so the hand run is the working practice, by
+choice, not a stopgap. The move off OneDrive and a restored schedule
+are NOT to be proposed again unless Tony raises them; the 2026-09-20
+analysis stays above for that day. The pause is part of the routine
+itself: gallery `daily_run.py` step 2 stops before the cache build,
+asks for OneDrive to be paused and records the time [verified @
+gallery 4cfeca27]. Its printed words still say two hours ("Pause
+syncing > 2 hours", and the expiry time it prints adds two hours),
+against Tony's 24; owed to the next gallery patch that opens the
+file: say 24 hours, or ask how long.
+**THE RETRY IS PROVEN (2026-10-07, read from the swap log at gallery
+4cfeca27).** `data/cache_swap_log.jsonl` holds 29 lines, all outcome
+`ok`, and TWO show `staging_to_live` taking 2 attempts: runs
+20261004T205153Z and 20261006T182032Z, both Tony's hand builds,
+both with OneDrive paused. So the lock recurred twice in three days
+at the rename it always catches, the retry absorbed it both times,
+and the pause does not prevent the lock -- the retry does. This is
+the evidence the 2026-09-20 build said would be the only kind there
+is. The 2026-09-21 Gap's "until one appears the retry is unproven"
+no longer holds.
+**Tony-action (decide):** whether this item CLOSES on that evidence.
+The fix works, the routine stands, the cause (a OneDrive or Windows
+lock on the live directory) is outside the project and is not being
+chased. If it closes, the two owed items stay named in L-351: the
+gallery-cache-builder skill's next version (the `[SWAP]` line, the
+run order, the empty "(N)" folders, and now the two proven retries)
+and the "conflict copies" wording still in four places (`.gitignore`,
+`check_cache_siblings.py`, the orrery dashboard,
+`L342_install_test_run_sequence.md`; all still there at HEAD).
+(The Fable 5.1 review of 2026-10-07 had counted the daily run as the
+project's largest standing claim on Tony's time; Tony's word is the
+answer to that.)
 **Ref:** `tools/gallery_cache_builder.py` `atomic_swap_dir` (~1176),
 `recover_incomplete_swap` (~1223), `_sweep_siblings` (~1241) in the
 gallery repo; run records `20260819T214723Z.json` (failed) and
