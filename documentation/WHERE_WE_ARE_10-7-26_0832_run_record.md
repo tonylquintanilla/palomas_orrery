@@ -1335,8 +1335,14 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  3. Commit and push. -- 
+  3. Commit and push. -- 3b36b3bf7fb7f0b040e9246b87359a8f112a1c88
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+Where this leaves us
+
+15 of the 17 typed facts are served with their sources and live, and you found every one correct.
+Next: the inner Oort cloud redrawn tilted, as part of the Sun’s slice, then the check.
+One question comes first in that session: whether the cloud’s outer edge moves from 20,000 au to the paper’s 10,000.
 
 ================================================================
 

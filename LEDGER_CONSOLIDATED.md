@@ -286,6 +286,9 @@ Module updated: October 8, 2026 with Anthropic's Claude Opus 5.5
 (L-421: three gallery patches served 15 of the 17 typed facts with
 their sources; L-351 gains the served-hover method), built on
 36176d50.
+Module updated: October 8, 2026 with Anthropic's Claude Opus 5.5
+(L-395: Tony's run of the Horizons design patch recorded from his
+run record), built on 3b36b3bf.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -639,7 +642,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-391 | Group clouds: the Trojans' sources, and the shapes of the three other groups (gallery, exhibits) | OPEN | -- | 2026-09-29 |
 | ! | L-393 | Encounter data: dates, spacecraft records centred on their targets, and how far the cache reaches in time (gallery, cache) | OPEN | -- | 2026-09-29 |
 | ! | L-394 | A card cannot say which body it belongs to (gallery, Studio) | OPEN | -- | 2026-09-29 |
-| ! | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | OPEN | -- | 2026-10-07 |
+| ! | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | OPEN | -- | 2026-10-08 |
 | ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-10-07 |
 | ! | L-399 | Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder) | OPEN | -- | 2026-10-01 |
 | ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-01 |
@@ -1592,7 +1595,7 @@ is enough. L-422 holds the shape; this item holds the check.
 **Ref:** `documentation/WHERE_WE_ARE.md`; `skills/ledger-and-session-records/SKILL.md` (The Document Stack); `PROJECT_INSTRUCTIONS.md` v3.74; L-363; L-395; L-333; L-362.
 
 #### [L-395] The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects)
-<!-- L:395 status:OPEN upd:2026-10-07 section:A flag: rice: -->
+<!-- L:395 status:OPEN upd:2026-10-08 section:A flag: rice: -->
 - **2026-10-01, design rulings and the first build** [verified: orrery
   feb5e369, gallery 43993b49; Tony's runs 22 of 22 gating; his phone:
   "perfect"]. Tony's rulings, each "confirmed as recommended" unless
@@ -1792,6 +1795,13 @@ is enough. L-422 holds the shape; this item holds the check.
   documentation gives an out-of-date id for Apophis.
 - (decide) At the build: whether Halley is keyed and checked too; and
   Encke's description and link.
+- **Tony's run of patch_L395_3, 2026-10-07** [his run record, written
+  at the foot of
+  `documentation/HANDOFF_L395_horizons_check_design_20261005.md`]:
+  all four ledger edits and both new files ok; the maintenance run
+  20 of 20 gating; pushed at 8653ef1b. A second run on 2026-10-08,
+  from a leftover copy in the orrery root, refused as designed and
+  wrote nothing; the leftover is deleted by hand.
 **Gap:** The first build is done (the room's eleven bodies). Still open:
 the Horizons cross-check, designed 2026-10-07 and built next from
 `documentation/DESIGN_L395_horizons_check_20261007.md` (its first run
