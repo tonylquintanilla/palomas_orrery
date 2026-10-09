@@ -1119,7 +1119,7 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-2. Move the patch into documentation/, then commit and push.
+2. Move the patch into documentation/, then commit and push. -- ea2c0e16c2955a626816b03687a82d45c588e2c0
 3. Zip and install the three skills: provenance-discipline, provenance-cross-check and ledger-and-session-records.
 4. Replace the Project's instructions with PROJECT_INSTRUCTIONS.md.
 
