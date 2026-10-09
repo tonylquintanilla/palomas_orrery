@@ -289,6 +289,11 @@ their sources; L-351 gains the served-hover method), built on
 Module updated: October 8, 2026 with Anthropic's Claude Opus 5.5
 (L-395: Tony's run of the Horizons design patch recorded from his
 run record), built on 3b36b3bf.
+Module updated: October 8, 2026 with Anthropic's Claude Opus 5.5
+(the decisions session of 2026-10-08: L-216 and L-252 closed;
+L-423 opened, the website's checks; rulings on L-395, L-418 and
+L-412's question (b); scores struck on list members), built on
+b0b3df82.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -506,17 +511,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*235 live items; 219 need attention (`!`); 177 RICE-scored; 182 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*234 live items; 218 need attention (`!`); 167 RICE-scored; 184 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-251 | The galactic centre button served a cached HTML for seven months | OPEN | 15.2 | 2026-08-25 |
 | ! | L-238 | radius_fraction > 1.0 assumes every shell is above the surface | OPEN | 14.2 | 2026-08-25 |
-| ! | L-235 | Checks that cannot fail, gallery side [three instances] | OPEN | 11.4 | 2026-08-25 |
-| ! | L-252 | L2b's fourth outcome: an INCOMPLETE verdict is not a confirmation | OPEN | 11.4 | 2026-08-25 |
-| ! | L-262 | The framing smoke test has never run against the page | OPEN | 11.4 | 2026-08-30 |
-| ! | L-237 | Artifact 1's golden record is stale and needs re-cutting | OPEN | 10.8 | 2026-09-10 |
 | ! | L-266 | Nothing checks that a cited link still resolves | OPEN | 9.0 | 2026-08-30 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-340 | The exhibit store editor: what the first screenshot showed, and the Mode 5 pass | OPEN | 8.1 | 2026-09-22 |
@@ -539,9 +540,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
-| ! | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | OPEN | 3.8 | 2026-10-07 |
 |  | L-230 | A skill bump does not reach the protocol's version history | DEFERRED | 3.8 | 2026-08-23 |
-| ! | L-241 | Hills torus hover states the cloud bounds, not the drawn ring | OPEN | 3.8 | 2026-10-04 |
 | ! | L-282 | The lobby: the main page as an entrance hall | OPEN | 3.8 | 2026-09-06 |
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
 | ! | L-210 | Pilot citation findings -- four rows in constants_new.py | OPEN | 3.6 | 2026-08-21 |
@@ -553,7 +552,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-286 | Rooms in four levels: drill-down, short-name breadcrumb, Home stays a scene reset | OPEN | 3.5 | 2026-09-24 |
 | ! | L-219 | Patch-script naming cannot express a cross-handle run order | OPEN | 3.4 | 2026-08-19 |
 | ! | L-312 | The gallery editor's copy and file slots make cards the viewer misreads; two portrait titles to retype | OPEN | 3.4 | 2026-09-10 |
-| ! | L-292 | Earth shells the orrery does not draw | OPEN | 3.4 | 2026-10-05 |
 | ! | L-283 | Visual theme: dark wall, paper placards, record mode | OPEN | 3.2 | 2026-09-24 |
 | ! | L-256 | provenance-discipline 2.8, and the status pass it enables | OPEN | 3.1 | 2026-08-27 |
 | ! | L-288 | Gallery Studio creates and edits live-scene cards | OPEN | 3.1 | 2026-09-10 |
@@ -581,7 +579,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-231 | Radiation belts are drawn in the ecliptic; the magnetic tilt is an unbuilt intent | OPEN | 1.8 | 2026-09-16 |
 |  | L-309 | The exhibit chrome keeps its sun* names after Earth joined it (rename deferred, with its reason) | DEFERRED | 1.8 | 2026-09-09 |
 | ! | L-187 | info_dictionary numeric-overlap enumeration | OPEN | 1.8 | 2026-08-07 |
-| ! | L-228 | Alfven surface latitude ranges: source them or omit them | OPEN | 1.8 | 2026-10-04 |
 | ! | L-257 | Three enforcement builds the 2.8 skill text defers | OPEN | 1.8 | 2026-08-27 |
 | ! | L-313 | Recenter the camera on a chosen feature in the exhibit rooms | OPEN | 1.8 | 2026-09-10 |
 | ! | L-321 | The orrery's hover text joins the provenance braid, Earth first | OPEN | 1.8 | 2026-09-12 |
@@ -593,33 +590,39 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-253 | The 660 discontinuity's depth variation -- held unsourced | OPEN | 1.2 | 2026-08-26 |
 |  | L-308 | A shell-legend surface for static cards (deferred, with its trigger) | DEFERRED | 1.2 | 2026-10-04 |
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
-| ! | L-128 | Comet sublimation shell(s) -- solar-distance chemistry zones | OPEN | 1.0 | 2026-10-04 |
 | ! | L-129 | Cometary structure constants -- periodic maintenance sweep | OPEN | 1.0 | 2026-07-17 |
-| ! | L-131 | Zodiacal dust solar shell | OPEN | 1.0 | 2026-10-04 |
 | ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 0.9 | 2026-07-16 |
 | ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-10-07 |
 | ! | L-319 | Focusing a smaller shell cuts larger lit shells flat at the frame's box | OPEN | 0.7 | 2026-09-10 |
+| ! | L-128 | Comet sublimation shell(s) -- solar-distance chemistry zones | OPEN | -- | 2026-10-08 |
+| ! | L-131 | Zodiacal dust solar shell | OPEN | -- | 2026-10-08 |
+| ! | L-228 | Alfven surface latitude ranges: source them or omit them | OPEN | -- | 2026-10-08 |
+| ! | L-235 | Checks that cannot fail, gallery side [three instances] | OPEN | -- | 2026-10-08 |
+| ! | L-237 | Artifact 1's golden record is stale and needs re-cutting | OPEN | -- | 2026-10-08 |
+| ! | L-241 | Hills torus hover states the cloud bounds, not the drawn ring | OPEN | -- | 2026-10-08 |
+| ! | L-262 | The framing smoke test has never run against the page | OPEN | -- | 2026-10-08 |
+| ! | L-292 | Earth shells the orrery does not draw | OPEN | -- | 2026-10-08 |
 | ! | L-343 | A figure count can describe the arithmetic and not the claim (store) | OPEN | -- | 2026-09-22 |
 | ! | L-344 | A stated uncertainty computed from a rounded intermediate (store) | OPEN | -- | 2026-09-22 |
 | ! | L-346 | A derived row with empty inputs is invisible to a walk by inputs (checks) | OPEN | -- | 2026-09-22 |
 | ! | L-347 | The page re-derives the bow shock standoff to draw its shape (gallery) | OPEN | -- | 2026-09-22 |
 | ! | L-348 | Derived rows outside Earth were counted, not propagated (store) | OPEN | -- | 2026-09-22 |
-| ! | L-351 | Rules learned at C2, owed to the next bumps of their stores (skills, protocol) | OPEN | -- | 2026-10-07 |
+| ! | L-351 | Rules learned at C2, owed to the next bumps of their stores (skills, protocol) | OPEN | -- | 2026-10-08 |
 | ! | L-352 | The orrery's display sites format by fixed width, with no check reading them (orrery) | OPEN | -- | 2026-09-28 |
 | ! | L-353 | A count taken from a file's print resolution where a published error budget exists unopened (store) | OPEN | -- | 2026-09-22 |
 | ! | L-354 | Declared picks with their range in prose, on other bodies (store) | OPEN | -- | 2026-09-22 |
 | ! | L-355 | Rate rows and angle rows on other bodies follow the two Rule 3 forms (store) | OPEN | -- | 2026-09-22 |
 | ! | L-356 | IGRF-14 as a re-sourcing of the six coefficient rows (store) | OPEN | -- | 2026-09-22 |
-| ! | L-357 | Stale gallery artifacts that no check reads (gallery) | OPEN | -- | 2026-09-22 |
+| ! | L-357 | Stale gallery artifacts that no check reads (gallery) | OPEN | -- | 2026-10-08 |
 | ! | L-358 | The constants change report cannot read a formula that calls a function, or a literal that became a formula (checks) | OPEN | -- | 2026-09-22 |
 | ! | L-359 | Served text beside a served number can go stale where no tool may edit it (gallery) | OPEN | -- | 2026-09-22 |
-| ! | L-360 | The hover budget measures recorded payloads, so it cannot see a line added by newly served data (checks) | OPEN | -- | 2026-09-28 |
+| ! | L-360 | The hover budget measures recorded payloads, so it cannot see a line added by newly served data (checks) | OPEN | -- | 2026-10-08 |
 | ! | L-361 | An epoch typed in the page, with no store row (gallery, store) | OPEN | -- | 2026-09-22 |
 | ! | L-363 | The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits) | OPEN | -- | 2026-10-04 |
 | ! | L-364 | A comet's own trust window can exclude today while the served window passes the scene (gallery, trust) | OPEN | -- | 2026-09-29 |
 | ! | L-365 | The assembler leaves out a body it cannot draw, without a warning (gallery, assembler) | OPEN | -- | 2026-09-29 |
 | ! | L-366 | An orbit's info marker describes an arbitrary point on the orbit (gallery, assembler) | OPEN | -- | 2026-09-26 |
-| ! | L-367 | No checker opens a new room (checks, gallery) | OPEN | -- | 2026-10-04 |
+| ! | L-367 | No checker opens a new room (checks, gallery) | OPEN | -- | 2026-10-08 |
 | ! | L-368 | Other bodies' typed poles disagree with their cited table or cite a withdrawn report (orrery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-370 | Jupiter and Saturn numbers typed only in objects_config.json (gallery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-371 | The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
@@ -629,15 +632,15 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-375 | Earth's eccentric dipole offset is not drawn (store, Earth) | OPEN | -- | 2026-10-04 |
 | ! | L-376 | Other bodies' dipole-cone hovers: typed offsets and abbreviated radii (orrery, words) | OPEN | -- | 2026-09-28 |
 | ! | L-377 | The provenance scanner's proximity rule can count a string as cited by a neighbour's source (checks) | OPEN | -- | 2026-09-28 |
-| ! | L-378 | Phone behaviour of the rooms has no automated check (checks, gallery) | OPEN | -- | 2026-09-29 |
+| ! | L-378 | Phone behaviour of the rooms has no automated check (checks, gallery) | OPEN | -- | 2026-10-08 |
 | ! | L-379 | The recorded Earth scene payload is aging, and three checks patch it piece by piece (checks, gallery) | OPEN | -- | 2026-10-06 |
-| ! | L-380 | The gallery maintenance routine pulls the constants export after the cache build (gallery, routine) | OPEN | -- | 2026-09-28 |
+| ! | L-380 | The gallery maintenance routine pulls the constants export after the cache build (gallery, routine) | OPEN | -- | 2026-10-08 |
 | ! | L-381 | The uncertainty field's pattern reads a sentence's full stop as a decimal point (export, checks) | OPEN | -- | 2026-09-28 |
 | ! | L-382 | Earth's magnetosphere costs about 42 percent more per orrery animation frame since D8 (orrery, rendering) | OPEN | -- | 2026-09-28 |
 | ! | L-385 | The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye) | OPEN | -- | 2026-10-04 |
 | ! | L-386 | The Sun's conversion rows, not yet exported (store, the Sun's slice) | OPEN | -- | 2026-10-04 |
 | ! | L-387 | The orrery's hovers print the conversion names by their own formats, not by the computed count (orrery) | OPEN | -- | 2026-09-28 |
-| ! | L-388 | The gallery's export pull can print success when it could not fetch, and the mirror then writes from the old export (gallery, tooling) | OPEN | -- | 2026-09-28 |
+| ! | L-388 | The gallery's export pull can print success when it could not fetch, and the mirror then writes from the old export (gallery, tooling) | OPEN | -- | 2026-10-08 |
 | ! | L-390 | provenance-discipline does not yet name the conversion marker or say the widening is built (skills) | OPEN | -- | 2026-09-28 |
 | ! | L-391 | Group clouds: the Trojans' sources, and the shapes of the three other groups (gallery, exhibits) | OPEN | -- | 2026-09-29 |
 | ! | L-393 | Encounter data: dates, spacecraft records centred on their targets, and how far the cache reaches in time (gallery, cache) | OPEN | -- | 2026-09-29 |
@@ -651,11 +654,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-408 | A Galactic Plane toggle in the Sun room (gallery, the Sun's slice) | OPEN | -- | 2026-10-06 |
 | ! | L-410 | Fuzzy boundaries for edges known only as ranges, the outer corona first (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-05 |
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
-| ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-07 |
+| ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-08 |
 | ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-06 |
-| ! | L-414 | The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling) | OPEN | -- | 2026-10-04 |
-| ! | L-418 | Long skills open with their contents, and keep three version entries (skills) | OPEN | -- | 2026-10-06 |
+| ! | L-414 | The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling) | OPEN | -- | 2026-10-08 |
+| ! | L-418 | Long skills open with their contents, and keep three version entries (skills) | OPEN | -- | 2026-10-08 |
 | ! | L-421 | Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words) | OPEN | -- | 2026-10-08 |
+| ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-08 |
 
 ### B. Pending Action (Tony-side)
 
@@ -831,6 +835,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-182 | Mars Hill sphere -- cross-check correction lost across the config pipeline | DONE | 12.0 | 2026-08-05 |
 |  | L-222 | The constants change report fails on every currency stamp | DONE | 11.4 | 2026-08-20 |
 |  | L-229 | Streamer band drawn in the ecliptic plane, not the solar equator | DONE | 11.4 | 2026-10-04 |
+|  | L-252 | L2b's fourth outcome: an INCOMPLETE verdict is not a confirmation | DONE | 11.4 | 2026-10-08 |
 |  | L-264 | One name, two programs: the runners get repo-specific names | DONE | 11.4 | 2026-08-29 |
 |  | L-271 | Patch scripts wrote backups nothing ever removed | DONE | 11.4 | 2026-09-16 |
 |  | L-221 | The master plan is the roadmap, and it outranks RICE | DONE | 10.8 | 2026-08-22 |
@@ -890,6 +895,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-325 | A derived row stores its reported figure, not the arithmetic result | DONE | 4.0 | 2026-09-28 |
 |  | L-326 | provenance-discipline 2.11 -> 2.12, taken before the build it serves | DONE | 4.0 | 2026-09-14 |
 |  | L-214 | The request builder drops the comment lines that matter | DONE | 3.8 | 2026-08-21 |
+|  | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | DONE | 3.8 | 2026-10-08 |
 |  | L-224 | Streamer belt: one warped band, not a sphere | DONE | 3.8 | 2026-10-04 |
 |  | L-232 | The gallery's served constants carry sources that nothing checks | DONE | 3.8 | 2026-09-16 |
 |  | L-287 | Gallery editor: the room tree, the storage room, the featured flag | DONE | 3.8 | 2026-09-05 |
@@ -1221,7 +1227,49 @@ IGRF epoch, a class); gallery `gallery/feature_renderers.js`,
 skills/interactive-exhibit/SKILL.md.
 
 #### [L-418] Long skills open with their contents, and keep three version entries (skills)
-<!-- L:418 status:OPEN upd:2026-10-06 section:A flag: rice: -->
+<!-- L:418 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+- **2026-10-08, the split brief's section 4 decision, ruled** in the
+  decisions session of 2026-10-08 (Tony: "As recommended? -- yes"):
+  L-371 (the Sun room's served numbers) and L-390 (the conversion
+  marker) ride provenance-discipline 2.27 with the split; L-414 (the
+  scanner's window) gets its own session, which cuts 2.28, before the
+  Sun's list reaches L-228 (the Alfven surface's ranges). Carried to
+  the split session, already running, by
+  `documentation/NOTE_for_split_session_L252_paragraph_20261008.md`.
+- **2026-10-08, one approved paragraph rides the split too,** from
+  L-252 (closed). Tony: "Concur with B" (the exact words now, carried
+  by the split, not a bump of its own); on the wording, "Approved".
+  It goes right after the send-back rule ("PARTIAL and APPROX return
+  to the originator for completion", and its "Ask for a NEW file"
+  paragraph), before "A Complete Row That Disagrees Is a Finding". If
+  the split moves that section to provenance-cross-check 1.0, the
+  paragraph goes with it; placement is the split session's call. If
+  the split shipped without it, it rides L-414's 2.28. The text,
+  word for word (indented four spaces here; the text starts at the
+  bold line):
+
+    **What the checker reports is a different list** (L-252, Tony,
+    2026-10-08). `worksheet_checker.py` compares the code against a
+    worksheet and reports one of four outcomes. They are the checker's
+    words, not worksheet tokens, and never belong in a verdict cell.
+
+    - DRIFTED -- the worksheet confirmed a value and the code left it, or
+      called it APPROX or PARTIAL and the code moved somewhere the
+      worksheet never named. The only defect of the four; routed to
+      conversation.
+    - CORRECTED -- the worksheet rejected the value and the code moved.
+      Recorded, not routed.
+    - COMPLETED -- the worksheet called it APPROX or PARTIAL and supplied a
+      value, and the code now reads exactly that value. Recorded, not
+      routed.
+    - UNCHECKED_MOVE -- the code moved and the worksheet carries no value
+      verdict. Routed, because nobody has established anything.
+
+    COMPLETED says only that the code took the value the worksheet
+    supplied. It is not a confirmation. The row is still APPROX or
+    PARTIAL, it earns no leg toward the cross-checked rung, and the
+    send-back rule above is unchanged.
+
 - **Found 2026-10-05**, reviewing a Claude Sonnet 5.5 session's check of
   the skills against Anthropic's limits. Five skills are over
   Anthropic's 500-line guideline. Measured: a plain read of a long file
@@ -1374,7 +1422,12 @@ above.
 above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 
 #### [L-414] The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling)
-<!-- L:414 status:OPEN upd:2026-10-04 section:A flag: rice: -->
+<!-- L:414 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+- **2026-10-08:** Tony ruled that this item gets its own session,
+  which cuts provenance-discipline 2.28, before the Sun's list
+  reaches L-228 (the Alfven surface's ranges); it does not ride the
+  split (L-418). If the split shipped 2.27 without L-252's approved
+  paragraph (on L-418), that paragraph rides this item's 2.28.
 - **Found 2026-10-04,** checking why `constants_new.py` went from 0 to
   4 Tier-1 findings between mid-August and now. The four rows are not
   uncited.
@@ -1401,8 +1454,43 @@ count for `constants_new.py` should name these four as gone.
 **Ref:** `provenance_scanner.py`; `constants_new.py`;
 `PROVENANCE_AUDIT.md`; L-305; L-314; L-351.
 
+#### [L-423] The website's checks: the order Tony confirmed (checks, gallery)
+<!-- L:423 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+- **Confirmed by Tony, 2026-10-08**, in the decisions session of
+  2026-10-08: "Yes open it now"; on the order, "The order is okay".
+  This is road stage 9 on Where We Are. It comes before the front-door
+  swap, L-363 (the Solar System room as front door), as Tony asked on
+  2026-10-04 (L-412): one member, L-367, is that no checker opens a
+  new room, and the swap changes the front door. Smallest and most
+  settled first:
+  1. L-262, the framing test. Both of its one-line fixes are already
+     in, at gallery ab66aba7. Confirm the Page framing row passes on
+     the next gallery maintenance run, then close it; its residual
+     (the live room's framing has no test) moves into L-367.
+  2. L-380 and L-388, the export pull, as one patch: pull before the
+     cache build, and fail by name when the pull cannot fetch.
+  3. L-357, stale leftovers: delete the unreferenced hover fixture
+     (Tony, 2026-10-08: yes) and correct two code comments.
+  4. L-235 with L-237, the Earth golden record, as a pair: the check
+     reads the stored record, then the record is re-cut.
+  5. L-360, the hover-length check, measured from the live config.
+  6. L-367, a checker that opens every room and reads the lobby code.
+     Finishes before L-363.
+  7. L-378, the phone check: automate it, or decide it stays Tony's
+     manual check. Decided after item 6 shows what a headless browser
+     can see. May follow L-363.
+- Members carry no RICE score: the list's order is its priority
+  (Tony's rule of 2026-10-07, L-412). The scores L-235, L-237 and
+  L-262 carried are struck.
+- **Not a member:** L-379 (the aging Earth recording). Its only
+  remaining piece, `documentation/payload_earth.json`, waits for a
+  build that opens that file.
+**Gap:** work down the list from item 1.
+**Ref:** L-412; L-363; the members above;
+`documentation/HANDOFF_decisions_20261008.md`.
+
 #### [L-412] The Sun's slice: the order Tony confirmed (the Sun's slice)
-<!-- L:412 status:OPEN upd:2026-10-07 section:A flag: rice: -->
+<!-- L:412 status:OPEN upd:2026-10-08 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-04**, after a sweep of the open items that
   touch the Sun room. Smallest and most settled first:
   1. L-209, the Alfven surface look -- DONE 2026-10-04.
@@ -1448,6 +1536,15 @@ count for `constants_new.py` should name these four as gone.
 - **2026-10-07, later the same day:** the rule landed in
   ledger-and-session-records 1.17 (L-422), not at L-418's build.
   Question (b) is still open.
+- **2026-10-08, question (b) answered** in the decisions session of
+  2026-10-08. Under the ruling on (a), the scores proposed for L-131
+  and L-128 (this list's items 9 and 10), L-228 and L-241 (items 4
+  and 6) and L-292 (a member of L-413) do not apply, and the scores
+  they carried are struck. L-216 (the swap retry) closed. L-252 (an
+  incomplete verdict is not a confirmation), the one live score,
+  closed too: its fix was built in August, and its wording question
+  became a paragraph for provenance-discipline (L-418). The gallery's
+  checks, the list after this one, are now L-423.
 **Gap:** after L-413, work down the list from item 3.
 **Ref:** L-371 (the slice's numbers); the handles above; L-413;
 `documentation/LEDGER_SWEEP_review_20261004.md`.
@@ -1794,7 +1891,7 @@ is enough. L-422 holds the shape; this item holds the check.
   Titan, Pluto, Charon, Voyager 1, Halley, Encke); JPL's Lookup
   documentation gives an out-of-date id for Apophis.
 - (decide) At the build: whether Halley is keyed and checked too; and
-  Encke's description and link.
+  Encke's description and link. DECIDED 2026-10-08; see below.
 - **Tony's run of patch_L395_3, 2026-10-07** [his run record, written
   at the foot of
   `documentation/HANDOFF_L395_horizons_check_design_20261005.md`]:
@@ -1802,6 +1899,43 @@ is enough. L-422 holds the shape; this item holds the check.
   20 of 20 gating; pushed at 8653ef1b. A second run on 2026-10-08,
   from a leftover copy in the orrery root, refused as designed and
   wrote nothing; the leftover is deleted by hand.
+- **2026-10-08, the two build questions ruled** in the decisions
+  session of 2026-10-08, Tony on his phone:
+  - Halley is keyed and checked too. Tony: "yes, and follow the new
+    url rule." Its link moves from Tony's own Halley page
+    (sites.google.com/view/tony-quintanilla/comets/halley-1986) to
+    NASA's 1P/Halley page,
+    https://science.nasa.gov/solar-system/comets/1p-halley/ -- the
+    rule is a NASA page where one is specific, else Wikipedia
+    (interactive-exhibit, A feature's info link), and the list's one
+    link field carries it in both the orrery and the website.
+  - Encke's new entry links NASA's 2P/Encke page,
+    https://science.nasa.gov/solar-system/comets/2p-encke/ . Both URLs
+    fetched live 2026-10-08.
+  - The words. Tony: "No numbers unless they come from the store."
+    Halley's period is in the store only as a drawing value
+    (`KNOWN_ORBITAL_PERIODS` in `constants_new.py`), which a
+    description cannot read; Encke has none. So no numbers. After
+    each entry's own "Horizons: ..." opening sentence (kept in the
+    orrery, dropped by the export):
+    - Halley: "The most famous periodic comet. Its orbit runs
+      backward compared with the planets, and its dust gives two
+      meteor showers each year, the Eta Aquarids and the Orionids."
+    - Encke: "A short-period comet whose dust trail is the source of
+      the Taurid meteor showers."
+    Checked against the two NASA pages, read 2026-10-08. Halley's
+    old words ("returned in 1986 and will return in 2061", and
+    "Retrograde" twice) are replaced. Left out on purpose: the Encke
+    page's "shortest orbital period of any known comet". Claude's
+    recollection, not checked, is that comets found since are
+    shorter, and the same page gives a stale last perihelion, 2015.
+- **2026-10-08, the `daily_run.py` OneDrive line, re-homed from L-216
+  (closed):** gallery `daily_run.py` step 2 says the pause lasts 2
+  hours and prints an expiry two hours on. Tony pauses 24, and on
+  2026-10-08 ran a build without pausing, as a trial ("With the
+  retry as the fail safe do I need the pause?"). So this build's fix
+  is no longer only "say 24 hours": ask Tony then whether the pause
+  step becomes optional or goes.
 **Gap:** The first build is done (the room's eleven bodies). Still open:
 the Horizons cross-check, designed 2026-10-07 and built next from
 `documentation/DESIGN_L395_horizons_check_20261007.md` (its first run
@@ -1900,7 +2034,9 @@ and names `UNMARKED CONVERSION` and `CONVERSION WRONG`.
 `skills/provenance-discipline/SKILL.md` Rules 1, 3 and 8; L-345.
 
 #### [L-388] The gallery's export pull can print success when it could not fetch, and the mirror then writes from the old export (gallery, tooling)
-<!-- L:388 status:OPEN upd:2026-09-28 section:A flag: rice: -->
+<!-- L:388 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+- **2026-10-08:** item 2 of L-423 (the website's checks), one
+  patch with L-380.
 - **Found 2026-09-28** building the L-345 gallery patch. In a sandbox
   that could not reach GitHub, the gallery maintenance run's "Constants
   export pull" reported PASS "no change", with an N-A inside it, and
@@ -2026,7 +2162,9 @@ the view opens at photosphere + 10% and what the axis does; Tony's eye.
 **Ref:** `constants_rows.py`; `export_constants.py`; `test_constants_export.py`; L-322.
 
 #### [L-380] The gallery maintenance routine pulls the constants export after the cache build (gallery, routine)
-<!-- L:380 status:OPEN upd:2026-09-28 section:A flag: rice: -->
+<!-- L:380 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+- **2026-10-08:** item 2 of L-423 (the website's checks), one
+  patch with L-388.
 - **Found 2026-09-25** at gallery `ce09f789`. The routine builds the
   served cache and then pulls `constants_export.json` from the orrery,
   so the served `frame_constants.orrery_sha` names the export from
@@ -2071,7 +2209,11 @@ overlays retire.)
 **Ref:** gallery `documentation/payload_earth_scene.json`; gallery `documentation/smoke_*.js`; L-360; L-367.
 
 #### [L-378] Phone behaviour of the rooms has no automated check (checks, gallery)
-<!-- L:378 status:OPEN upd:2026-09-29 section:A flag: rice: -->
+<!-- L:378 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+- **2026-10-08:** item 7 of L-423 (the website's checks). The
+  choice in the Gap -- automate it, or a stated decision that it
+  stays manual -- waits until item 6 (L-367) shows what a
+  headless browser can see. May follow L-363.
 - **Found 2026-09-25.** The phone tap lag fixed at gallery `ce09f789`
   was found and measured only in a headless browser with WebGL. The
   maintenance run has no such browser, so nothing in it would see a
@@ -2278,7 +2420,10 @@ rest of the Sun's slice is ordered on L-412.
 **Ref:** `idealized_orbits.py`; `documentation/BUILD_MANIFEST_L322_D_earth_pole_20260922.md` sec. 2.5 and 7; L-322.
 
 #### [L-367] No checker opens a new room (checks, gallery)
-<!-- L:367 status:OPEN upd:2026-10-04 section:A flag: rice: -->
+<!-- L:367 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+- **2026-10-08:** item 6 of L-423 (the website's checks). Takes
+  L-262's residual (the live room's framing has no test) when
+  L-262 closes. Finishes before L-363.
 - **Found 2026-09-26** delivering L-363. The gallery maintenance run
   passed 16 of 16 on the patched copy, and none of its checkers boots a
   room from the page's `EXHIBITS` table. They read recorded payloads
@@ -2821,7 +2966,8 @@ from L-404.
 **Ref:** gallery `gallery/feature_renderers.js::renderBelts`; `constants_new.py`; L-356.
 
 #### [L-360] The hover budget measures recorded payloads, so it cannot see a line added by newly served data (checks)
-<!-- L:360 status:OPEN upd:2026-09-28 section:A flag: rice: -->
+<!-- L:360 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+- **2026-10-08:** item 5 of L-423 (the website's checks).
 - **Recorded, not built.** A class found while building L-322 Stage C2
   (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
   Braid: it waits until the artifact on the critical path reaches it.
@@ -2866,7 +3012,7 @@ from L-404.
 **Ref:** `constants_change_report.py`; `documentation/RUN_RECORD_L322_C2a_20260922.md` sec. 5.
 
 #### [L-357] Stale gallery artifacts that no check reads (gallery)
-<!-- L:357 status:OPEN upd:2026-09-22 section:A flag: rice: -->
+<!-- L:357 status:OPEN upd:2026-10-08 section:A flag: rice: -->
 - **Recorded, not built.** A class found while building L-322 Stage C2
   (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
   Braid: it waits until the artifact on the critical path reaches it.
@@ -2879,7 +3025,10 @@ from L-404.
   as the gallery's folder; under Tony's practice (L-351) the note lives
   in the ORRERY's documentation/. In `gallery/feature_renderers.js`
   and `documentation/smoke_display_figures.js`.
-**Gap:** **Tony-action (decide):** whether the unreferenced fixture is deleted. The card exports and the two comments go with the next patch that opens those files.
+**Gap:** **Tony-action (decide) -- DECIDED 2026-10-08: delete it.**
+Tony: "yes" (the unreferenced `documentation/fixture_hovers_cdfa74c3.json`,
+still present at gallery ab66aba7). It goes in item 3 of L-423 (the
+website's checks). The card exports and the two comments go with the next patch that opens those files.
 **Ref:** gallery `documentation/`; gallery `gallery/feature_renderers.js`; manifest sec. 17.7.
 
 #### [L-356] IGRF-14 as a re-sourcing of the six coefficient rows (store)
@@ -2954,7 +3103,7 @@ from L-404.
 **Ref:** `earth_visualization_shells.py`; `planet_visualization_utilities.py`; `documentation/NOTE_L322_C2a_orrery_words_20260922.md`; manifest sec. 17.7.
 
 #### [L-351] Rules learned at C2, owed to the next bumps of their stores (skills, protocol)
-<!-- L:351 status:OPEN upd:2026-10-07 section:A flag: rice: -->
+<!-- L:351 status:OPEN upd:2026-10-08 section:A flag: rice: -->
 - **Recorded, not built.** A class found while building L-322 Stage C2
   (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
   Braid: it waits until the artifact on the critical path reaches it.
@@ -2999,7 +3148,18 @@ from L-404.
   block, not five (Fable 5.1 ledger sweep; method). Pointers by source
   handle; the sentence itself is in that item:
   - gallery-cache-builder: the `[SWAP]` line, the run order and the
-    empty "(N)" folders (L-216).
+    empty "(N)" folders (L-216); and, re-homed 2026-10-08 when L-216
+    closed, the two proven retries (runs 20261004T205153Z and
+    20261006T182032Z, each `staging_to_live` on its second attempt,
+    both with OneDrive paused), and that Tony is trying builds
+    without the pause. Also from L-216: the "conflict copies" wording
+    for the empty " (N)" folders, which the 2026-09-21 report does
+    not support, in four places -- the comment above the two rules in
+    the gallery's `.gitignore`, the docstring of the gallery's
+    `documentation/check_cache_siblings.py`, the orrery dashboard's
+    Cache Siblings description, and the orrery's
+    `documentation/L342_install_test_run_sequence.md`; for a pass
+    that touches them anyway.
   - provenance-discipline: the range rule's example names a removed
     range row; a patch's "what the run should say" predicts the
     scanner's CHANGE, not its total (both L-371); the conversion marker
@@ -5554,373 +5714,6 @@ will need renaming -- and a rename breaks every `# Resolved:` leg
 pointing at it, so name the pilot's return by hand at dispatch time.
 **Ref:** L-200 (the leg that cites the filename); L-186; L-192.
 
-#### [L-216] Gallery swap fails under a filesystem lock (OneDrive)
-<!-- L:216 status:OPEN upd:2026-10-07 section:A flag: rice:3/3/85/2 -->
-- **2026-10-04: the stray folder again.** Tony's gallery maintenance
-  run of 2026-10-04 (Cache siblings, report-only) found
-  `data/solar-system (1)` in his gallery copy, the OneDrive shape L-400
-  closed on 2026-10-01 when he deleted the first one. Git ignores it.
-  A recurrence of this class, not a new item.
-  - **Tony-action (do) -- DONE 2026-10-04** (Tony's note on Where We
-    Are): deleted.
-- **2026-08-19: the nightly run wiped the served tree.** GitHub Desktop
-  showed 56 deletions in the gallery repo and zero additions.
-  `data/solar-system/` was absent while BOTH halves of the generation
-  survived: `solar-system.prev` (the previous generation) and
-  `.staging_solar-system_20260819T214723Z` (the new one). Nothing was
-  committed and nothing was lost.
-- **The zero-additions reading was an artifact.** The gallery
-  `.gitignore` hides `data/.staging_*/`, `data/solar-system.prev/` and
-  `data/solar-system.quarantine_*/`, so a half-completed swap looks
-  exactly like total loss.
-- **The build was clean; only the swap failed.** Run record
-  `20260819T214723Z.json`: `structural_validation: pass`,
-  `guard_warnings: []`, finished 13.8 s after start. Good data that
-  never landed -- not the guard catching a bad build.
-- **Reproduced the same evening, and it named itself.** A manual re-run
-  printed: `[RECOVER] could not remove retained data\solar-system.prev
-  ([WinError 5] Access is denied: data\solar-system.prev\raw\elements);
-  swap will quarantine it`. The lock is real and persistent. The repo
-  lives under `C:\Users\tonyq\OneDrive\...`, and a sync engine holding
-  a handle on a directory is what makes a rename fail.
-- **WHICH rename it catches is the whole difference.** The re-run hit
-  the CLEANUP rmtree, which the code handles by design -- quarantine
-  and carry on -- and the swap completed. The failing run hit
-  `staging -> live`, which has no in-run recovery and leaves the live
-  directory missing. Same cause, different victim.
-- **The pile was the signal all along.** ~30 `solar-system.quarantine_*`
-  directories run back to 2026-07-21, one per night. Each is a run
-  where the retained `.prev` could not be removed. The mechanism has
-  been printing every night for a month and reading as normal, because
-  the builder is built to survive it.
-- **Recovery, and it is the operational rule (Tony, 2026-08-19):** for
-  a cache hiccup, DISCARD the deletions in GitHub Desktop and RE-RUN.
-  Discard restores the live tree from HEAD byte for byte; the re-run
-  builds a fresh generation. Three conditions make it safe and they
-  should travel with the rule: the live tree is committed, the swap is
-  all-or-nothing so a failure leaves a COMPLETE `.prev` or staging and
-  never a mixed one, and nothing reaches the remote until Tony commits.
-  Running with `--commit` would break the third.
-- **The visibility gap, and it comes BEFORE the swap fix.** The run
-  record is written INSIDE the generation, so a run whose swap fails
-  strands its own record in a directory `.gitignore` hides. The
-  committed history will show the 18th, the 19th 23:10 run, and no sign
-  that a run in between lost its data. The swap OUTCOME needs recording
-  outside the generation, or every recurrence costs another evening of
-  inference. Same Visibility Convention shape as L-214, one layer out.
-- **Then the cause.** Retry the renames with backoff if the lock is
-  transient at the moment of the swap, or move the repo off OneDrive if
-  it is not. WinError 5 on the cleanup proves persistence at run START;
-  it does not prove the swap window is equally exposed.
-- **Tony-action (do):** the operational rule above belongs in
-  `gallery-cache-builder`, which would be 1.4. NOT bumped tonight:
-  `ledger-and-session-records` went to 1.7 today and that reinstall is
-  unverified from inside this session. Discharge that first, then bump
-  this one. Same pattern as the dispatch-hygiene rule on 2026-08-19.
-**Note:** RICE is Claude's proposal, unratified.
-**Note (2026-09-17) -- THIRD OCCURRENCE, and the Gap's "One data point"
-is now false.** The swap failed again at `staging -> live` with "Access is
-denied", during the cache rebuild that the L-322 deployment fault made
-necessary. It left the working copy with no served cache and GitHub
-Desktop offering 67 changes, most of them deletions. Tony did not push.
-Tony: "This is like the third time."
-THE RECOVERY was the operational rule above, with ONE STEP ADDED, because
-the same change list also held the arrival work: commit the NON-CACHE
-files first, then discard the rest, then re-run. A blanket discard would
-have thrown away committed-worthy work sitting beside the wreckage.
-TONY'S CURRENT PRACTICE, and it is deliberate: the scheduled nightly run
-is SUSPENDED and he builds by hand, pausing OneDrive syncing first and
-watching GitHub Desktop's change list, stopping if the commit does not
-form correctly. Pausing sync before the re-run worked.
-MOVING THE REPOSITORIES OUT OF ONEDRIVE was raised as the lasting fix.
-Tony, 2026-09-17: "not at this time." It is a change to his machine
-outside his usual working set and needs its steps and risks written out
-before he decides.
-**Tony-action (do) -- DONE 2026-09-19:** gallery-cache-builder 1.5 now
-says three occurrences and that the exposure is established rather than
-unlucky, and carries the hand routine above, including the step that
-commits non-cache files before discarding. This item stays OPEN for the
-CAUSE, not for the record of it.
-**Note (2026-09-20) -- OCCURRENCES FOUR AND FIVE, and the OneDrive
-question written out so it need not be argued from memory again.** The
-swap failed twice more on 2026-09-20, both times at `staging -> live`
-with "Access is denied", and both times with OneDrive syncing PAUSED.
-Pausing is therefore not a reliable cure. The two staging directories
-are 1 hour 57 minutes apart and a OneDrive pause lasts 2 hours, so the
-pause may have expired about when the second run reached its swap. That
-is a possibility worth carrying, not a finding; nobody checked the clock
-at the time.
-THE ONLY BARRIER SO FAR HAS BEEN A PERSON NOTICING, AND IT HAS ALREADY
-FAILED ONCE. Tony, 2026-09-20: "catching the failures depended on me
-stopping with the malformed commit lists, but the fix was not obvious."
-The four occurrences from 2026-08-19 onward were each caught that way --
-Tony read GitHub Desktop's change list and declined to commit, on a run
-he had started himself. THE FIRST ONE WAS NOT. The 2026-07-24 run was
-SCHEDULED, nobody knew a build was in flight, and the mass deletion was
-read as routine cleanup: it was committed and pushed, then reverted
-after the fact. The account is in the gallery repo, in the Origin
-paragraph of `documentation/AS_BUILT_L173_numbering_fix.md` and in the
-`verify_promoted_data` docstring in `tools/gallery_cache_builder.py`.
-Retiring the schedule on 2026-08-10 is what made Tony present for every
-run since. It is still one person looking, with nothing behind him, and
-that is what stage B of the build manifest removes.
-A SECOND RECOVERY ROUTE WAS MEASURED. Tony renamed the staging folder to
-`solar-system` by hand in File Explorer, minutes after Python had been
-refused, and it worked. So the lock is brief. The rule of 2026-08-19 --
-discard the deletions in GitHub Desktop and re-run -- is unchanged and
-still sound; this is a second way out, not a replacement for it.
-THREE OPTIONS WERE WEIGHED, 2026-09-20.
-- ONE, harden the swap. Retry each rename, put the old cache back if the
-  swap still fails, and record every swap's outcome in a tracked file
-  outside the generation. Makes a failure rare, and makes it visible
-  without anyone having to notice anything. Does NOT remove the cause.
-- TWO, keep the repositories under OneDrive and have the builder avoid
-  the swap altogether. Not favoured. The all-or-nothing swap is the
-  builder's main protection -- it is what guarantees that a failure
-  leaves a complete old generation or a complete new one and never a
-  mixture -- and the conflict copies dated 2026-09-05 onward show
-  OneDrive fighting that folder independently of the builder anyway.
-- THREE, move both repositories out of OneDrive. Removes the cause.
-WHAT STANDS IN THE WAY OF THREE. GitHub holds everything that is
-committed. OneDrive is today the only second copy of what `.gitignore`
-excludes. `DATA_INVENTORY.md`, generated 2026-09-20, counts 966.8 MB of
-local orrery data, including the Gaia star tables (`.vot`, 295.1 MB),
-the star property files (`.pkl`, 33.6 MB), `orbit_paths.json`
-(130.9 MB), the ERA5 climate files (`.nc`, 161.1 MB), and the `papers/`
-folder. Tony, 2026-09-20: the large star data files are "difficult to
-rebuild". A move needs a backup plan for these BEFORE it happens.
-TWO FACTS THAT BEAR ON IT, Tony, 2026-09-20. He works on the repositories
-from one computer. A Mac kept for Mac and Linux Python is rarely used and
-its copy is badly stale. So OneDrive is not carrying the work between
-machines; here it is buying a second copy, not portability.
-**Tony's ruling, 2026-09-20:** "let's put your analysis in the ledger, do
-option 1, and take it from there as needed." Option THREE is NOT decided
-and is not to be pressed. If Tony raises it, what he wants first is the
-inventory, a backup plan for the files above, the steps in GitHub
-Desktop's own terms, and what could go wrong at each step -- all written
-out before he decides anything.
-
-**Note (2026-09-20) -- the committed run history has a 38-day hole, and
-the only copy of it sits inside the conflict copy the build manifest
-proposes to delete.** Measured at gallery `1061ae4d`.
-`data/solar-system/raw/runs/` holds 37 run records: 2026-07-11 to
-2026-07-28, then nothing at all until 2026-09-05, then near-daily to
-2026-09-20. The TRACKED conflict copy
-`data/1260806133443-solar-system/raw/runs/` holds 42 run records,
-2026-07-29 to 2026-09-04, and not one of them appears in the live tree.
-The two sets are disjoint and the second exactly fills the first's hole.
-That window contains the 2026-08-19 occurrence and the whole of the
-L-274 silent-sweep period.
-WHY IT BEARS ON THE DECISION IN STAGE B. The manifest recommends
-deleting `data/1260806133443-solar-system/` as 42 published files that
-serve nothing. Serving nothing is correct -- they are records, not
-served data. Deleting them would destroy the only committed evidence for
-exactly the stretch this item is investigating, inside the build whose
-stated purpose is that a recurrence should stop costing an evening of
-inference.
-HOW IT CAME TO BE RECOMMENDED is an instance of a rule this project
-already holds. The manifest described the folder by a COUNT and its
-author had not opened the files. Fable 5.1, reviewing this patch on
-2026-09-20: "I counted the files and never opened them... I gave you a
-count." A Report Names Its Items, measured once more.
-**Claude's recommendation, for Tony to rule on:** keep the records and
-move them. Copy the 42 files to `documentation/cache_run_history/` in
-the gallery repo -- a name that is not a cache sibling, so it stops
-reading as a stray generation and is not caught by the new ignore rules
--- and then delete the folder. Putting them back inside the live cache
-is the worse option: nothing should write into that tree by hand.
-**Tony-action (decide)**, due with stage B.
-
-**Note (2026-09-20) -- AS BUILT.** The build in
-`documentation/BUILD_MANIFEST_L216_cache_swap_20260920.md` is done, in
-three gallery pushes: `d0317aa3` (the hardening), then `a1a516cf` (the
-run history moved and the conflict copy removed). Built by Claude Opus 5
-from a manifest written by Claude Fable 5.1, Tony integrating.
-WHAT THE BUILDER DOES NOW. Each rename inside the swap is retried six
-times over about fifty seconds. A swap that still cannot finish renames
-`.prev` back to live, so the working copy is never left without a served
-cache and GitHub Desktop never shows the pile of deletions; the staging
-directory is kept. Every run that reaches the swap writes ONE line to
-`data/cache_swap_log.jsonl` -- tracked, and a sibling of the served
-directory rather than part of it -- appended as `started` before the swap
-and rewritten with the outcome after. A dry run writes nothing. When the
-roll-back also fails the builder prints, in plain words, that nothing is
-lost and which two hand recoveries to use; it never says "will self-heal"
-without saying what Tony does.
-HOW WE WILL KNOW IT WORKS, and it is the only evidence there is, because
-a retry that worked looks exactly like a run with no problem: A LINE IN
-THE LOG WITH MORE THAN ONE ATTEMPT AND OUTCOME `ok` IS A FAILURE THIS
-BUILD ABSORBED. `gallery_maintenance_run.py` prints the last line's
-verdict at the end of its summary. If the log only ever shows one
-attempt, the lock has not recurred and nothing is proven either way.
-TESTED. The offline suite went from 167 checks to 190. Each of the three
-pieces was then removed on purpose and the matching checks went red BY
-NAME -- 4 for the retry, 5 for the roll-back, 7 for the log. One of those
-runs found a real weakness first: a missing log crashed the suite instead
-of failing a named check, which is the blind spot not announcing, and it
-was fixed before delivery.
-PIECE 4. `.gitignore` gains `data/solar-system (*)/` and
-`data/[0-9]*-solar-system/`, and `documentation/check_cache_siblings.py`
-now classifies EVERY directory in `data/` and names anything the builder
-did not make. It found four on Tony's machine at the first run, having
-reported "no sibling directories" the day before.
-THE RUN HISTORY IS KEPT. The 42 records are at
-`documentation/cache_run_history/` in the gallery repo with a README, and
-`data/1260806133443-solar-system/` is gone.
-**Note (2026-09-20) -- two mistakes made during this build, both recorded
-because they are the same shape.** A patch script called plain
-`shutil.rmtree` on the cache tree and was refused by the Windows
-read-only attribute -- the exact failure `_rmtree_force` was written for,
-in a docstring the session had read an hour earlier. Nothing was lost
-(rmtree unlinks files before removing directories, and it failed at the
-rmdir of a folder it had just emptied), but a second patch was needed to
-finish. And the build manifest described the conflict copy by a COUNT,
-"42 published files that serve nothing", written by an author who had not
-opened them. Fable 5.1 named its own error on review: "I counted the
-files and never opened them." Knowledge that lives only inside a function
-does not fire, and a count does not say what is there. Both rules are now
-in `gallery-cache-builder` 1.6.
-**Tony-action (do) -- carried, not cleared:** this session loaded
-gallery-cache-builder 1.5 and bumped it to 1.6. A reinstall cannot be
-verified from inside the session that makes it. The next session confirms
-its loaded copy reads 1.6 before cache work.
-**Note (2026-09-21) -- the first real build on the new code, and what it
-does and does not prove.** Run `20260921T173303Z`, a hand build with
-OneDrive paused beforehand, pushed at gallery `39bde09d`. Its swap log
-line reads one attempt on each rename and outcome `ok`. The change list
-held 25 changed files and 2 added -- this run's own record and the swap
-log itself -- and no deletions. WHAT IT PROVES: the new code works on
-Tony's machine. The swap log was written where it should be, as a tracked
-file, one line; the `started` line was rewritten in place with the
-outcome, which until then had only been tested in a sandbox; the
-run-start recovery and the sweep each cleared the read-only bit on 6
-entries and said so; and the live check confirmed the site serves the new
-cache byte for byte. WHAT IT DOES NOT PROVE: the retry or the roll-back
-against a real refusal, because nothing was refused. The only evidence of
-those is still a line with more than one attempt.
-**Note (2026-09-21) -- the empty "solar-system (N)" folders, measured.**
-Four sat beside the cache, `(1)` to `(4)`; `(4)` appeared the same
-afternoon as the build above. A report-only script,
-`report_L216_stray_folders_20260921.py` in the gallery, captured what
-only the folders could say before they were deleted. ALL FOUR WERE EMPTY,
-hidden and system files counted, and each was empty from the start:
-created at most four minutes before it was last modified, so nothing was
-made at the swap and emptied later. EACH WAS CREATED 36 TO 39 MINUTES
-AFTER A BUILD STARTED -- 36.9, 35.9, 38.6 and 38.2 minutes, after the
-builds of 2026-09-05, 09-10, 09-18 and 09-21 -- on 4 of the 26 builds since
-2026-09-05, with no pattern in the time of day. NOT TIED TO A COMMIT: the
-nearest preceding commit was 2.7 minutes, 35.1 minutes, 11 seconds and
-14.1 minutes earlier, and on 09-10 there was no commit anywhere near. NOT
-MADE BY OUR CODE: Python never names a folder with " (N)", and nothing in
-either repository creates a folder beside the cache; only Windows and
-OneDrive name folders that way. PAUSING DOES NOT PREVENT IT: `(4)`
-appeared with syncing paused the whole time. Every one carried OneDrive's
-"always keep on this device" flag, but so does the live cache folder, so
-the flag does not settle who made them.
-CAUSE: UNDETERMINED. The strongest suspect is OneDrive, or the Windows
-cloud-files layer beneath it, catching up on the swap after a delay.
-That is a suspicion, not a finding. They are harmless as measured --
-empty, kept out of git by `data/solar-system (*)/`, and named by the
-sibling report whenever one appears -- so expect another now and then.
-Tony was cleared to delete these four by hand on 2026-09-21, once the
-report had been sent. IF THEY BECOME A NUISANCE, the choice is Tony's:
-delete them by hand, or let the builder's sweep remove EMPTY ones -- which
-would change the rule that the sweep never touches what the builder did
-not make, the rule that kept the 42 run records safe. Not pressed.
-A WRONG CLAIM, recorded because it nearly landed here. Claude told Tony
-that OneDrive made `(4)` when his sync pause ran out. His pause never ran
-out; it was a guess stated as likely. It was withdrawn, with the patch
-that carried it, before that patch ran.
-THREE CHANGES FOLLOWED THE AS-BUILT, recorded here so this block is
-complete. PATCH 5, orrery `ac397e52`: the dashboard's descriptions of
-three buttons, which the build never opened and so still described the
-tools as they were the morning before. PATCH 6, gallery `06fdad8c`, Fable
-5.1's final line break in `.gitignore`: stage B had kept the file's
-missing final newline, which left the new `data/[0-9]*-solar-system/`
-rule as the unterminated last line, so the next line anyone appended
-would have joined it and broken it silently. PATCH 7, gallery `8a38a917`,
-on Tony's two requests of 2026-09-21: the builder prints a `[SWAP]` line
-after every good swap, so a clean swap is SAID rather than silent; it
-ends a good hand run with its own numbered next steps, the maintenance
-run BEFORE the commit; and the maintenance run's swap line reads EVERY
-rename. Stage B's version read only `staging -> live`, so a refusal the
-retry absorbed on the `.prev` cleanup -- the rename the lock catches most
--- would have printed "succeeded first time". A named check now fails if
-that code comes back. The offline suite is at 201.
-**Owed to gallery-cache-builder's next bump** (ONE SESSION, ONE BUMP --
-this session already shipped 1.6). The routine should say the builder now
-prints a `[SWAP]` line and its own next steps; that the maintenance run
-comes BEFORE the commit; and that its last line should agree with the
-`[SWAP]` line. "Reading the log" should say the maintenance run reads
-every rename, not only the last. And the sibling-report section should
-say the " (N)" folders measured on 2026-09-21 are empty and appear on a
-delay after some builds -- it currently calls them conflict copies, which
-the report does not support. The builder's printout and the dashboard
-carry the routine meanwhile.
-**The same "conflict copy" wording lives in four more places**, found by
-search on 2026-09-21 and left for a pass that touches them anyway: the
-comment above the two rules in the gallery's `.gitignore`; the docstring
-of the gallery's `documentation/check_cache_siblings.py`; the orrery
-dashboard's Cache Siblings description; and
-`documentation/L342_install_test_run_sequence.md` in the orrery. It is
-right for `1260806133443-solar-system`, which held real run records, and
-unsupported for the empty " (N)" folders, whose maker is unknown.
-**Note (2026-09-22) -- the first real build on the hardened swap.** Run
-`20260922T233338Z`, by hand during L-322 C2-b, OneDrive paused: the swap
-log reads one attempt for each rename and outcome `ok`. One attempt proves
-nothing either way -- no lock was there to absorb. The sweep kept one
-sibling as an autopsy, `.staging_solar-system_20260920T150019Z`, and
-Cache siblings reported none stale.
-**Gap (corrected 2026-09-21):** the CAUSE, unchanged. WATCH FOR A SWAP
-THAT TOOK MORE THAN ONE ATTEMPT -- the builder's `[SWAP]` line now says it
-on screen, and the maintenance run's last line reads it back from the
-log. That is the fix doing its job, and until one appears the retry is
-unproven. The empty " (N)" folders are a second, smaller symptom with the
-same suspected cause and no known harm.
-**Tony, 2026-10-07:** "on the daily run it now includes four checks I
-run first thing. I don't plan on automating any time soon." And on
-the swap: "the daily run now checks that one drive is paused before
-committing the cache build."
-Tony pauses for 24 hours, not two: "2 hours can accidentally
-expire."
-**Note (2026-10-07):** so the hand run is the working practice, by
-choice, not a stopgap. The move off OneDrive and a restored schedule
-are NOT to be proposed again unless Tony raises them; the 2026-09-20
-analysis stays above for that day. The pause is part of the routine
-itself: gallery `daily_run.py` step 2 stops before the cache build,
-asks for OneDrive to be paused and records the time [verified @
-gallery 4cfeca27]. Its printed words still say two hours ("Pause
-syncing > 2 hours", and the expiry time it prints adds two hours),
-against Tony's 24; owed to the next gallery patch that opens the
-file: say 24 hours, or ask how long.
-**THE RETRY IS PROVEN (2026-10-07, read from the swap log at gallery
-4cfeca27).** `data/cache_swap_log.jsonl` holds 29 lines, all outcome
-`ok`, and TWO show `staging_to_live` taking 2 attempts: runs
-20261004T205153Z and 20261006T182032Z, both Tony's hand builds,
-both with OneDrive paused. So the lock recurred twice in three days
-at the rename it always catches, the retry absorbed it both times,
-and the pause does not prevent the lock -- the retry does. This is
-the evidence the 2026-09-20 build said would be the only kind there
-is. The 2026-09-21 Gap's "until one appears the retry is unproven"
-no longer holds.
-**Tony-action (decide):** whether this item CLOSES on that evidence.
-The fix works, the routine stands, the cause (a OneDrive or Windows
-lock on the live directory) is outside the project and is not being
-chased. If it closes, the two owed items stay named in L-351: the
-gallery-cache-builder skill's next version (the `[SWAP]` line, the
-run order, the empty "(N)" folders, and now the two proven retries)
-and the "conflict copies" wording still in four places (`.gitignore`,
-`check_cache_siblings.py`, the orrery dashboard,
-`L342_install_test_run_sequence.md`; all still there at HEAD).
-(The Fable 5.1 review of 2026-10-07 had counted the daily run as the
-project's largest standing claim on Tony's time; Tony's word is the
-answer to that.)
-**Ref:** `tools/gallery_cache_builder.py` `atomic_swap_dir` (~1176),
-`recover_incomplete_swap` (~1223), `_sweep_siblings` (~1241) in the
-gallery repo; run records `20260819T214723Z.json` (failed) and
-`20260819T231042Z.json` (recovered); gallery at `8a4aa41`; L-098 (the
-builder); L-214 (the same visibility shape).
-
 #### [L-215] Ledger cleanup by topic, not by age
 <!-- L:215 status:OPEN upd:2026-08-19 section:A flag: rice:3/3/80/2 -->
 - **Tony, 2026-08-19:** "Can we do a cleanup run to move the items that
@@ -6216,7 +6009,10 @@ exposed it); HANDOFF_20260819_alfven_and_the_swap.md, error 4.
   L-224 (the session that surfaced it).
 
 #### [L-228] Alfven surface latitude ranges: source them or omit them
-<!-- L:228 status:OPEN upd:2026-10-04 section:A flag: rice:2/3/60/2 -->
+<!-- L:228 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+- **Note (2026-10-08):** RICE struck (was 2/3/60/2). This item is item 4 of L-412 (the Sun's slice),
+  and an item in an ordered list carries no score; the list's
+  order is its priority (Tony's rule of 2026-10-07, L-412).
 - **Surfaced 2026-08-23** while reading the hover strings for L-227.
 - **THE DRAWN VALUE IS NOT AT ISSUE.** `ALFVEN_SURFACE_RADII` is
   interpolated into every hover that quotes it, including the derived
@@ -6491,7 +6287,13 @@ was drafted as L-330 on 2026-09-14 and withdrawn unrun.
   defect this was mistaken for); L-154.
 
 #### [L-235] Checks that cannot fail, gallery side [three instances]
-<!-- L:235 status:OPEN upd:2026-08-25 section:A flag: rice:3/4/95/1 -->
+<!-- L:235 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+- **2026-10-08:** item 4 of L-423 (the website's checks), with
+  L-237. Instance 1 is still there at gallery ab66aba7
+  (`fp.compare(golden, golden)`).
+- **Note (2026-10-08):** RICE struck (was 3/4/95/1). This item is item 4 of L-423 (the website's checks),
+  and an item in an ordered list carries no score; the list's
+  order is its priority (Tony's rule of 2026-10-07, L-412).
 - **Found 2026-08-25 while building the Sun.** Three instances of the
   resident gate A Check That Cannot Fail Is Not Passing, all in the
   gallery repo, each reporting exactly what a real pass reports.
@@ -6519,7 +6321,12 @@ buys very little.
 Cannot Fail Is Not Passing; L-236; L-237.
 
 #### [L-237] Artifact 1's golden record is stale and needs re-cutting
-<!-- L:237 status:OPEN upd:2026-09-10 section:A flag: rice:3/4/90/1 -->
+<!-- L:237 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+- **2026-10-08:** item 4 of L-423 (the website's checks), with
+  L-235.
+- **Note (2026-10-08):** RICE struck (was 3/4/90/1). This item is item 4 of L-423 (the website's checks),
+  and an item in an ordered list carries no score; the list's
+  order is its priority (Tony's rule of 2026-10-07, L-412).
 - **Unblocked 2026-08-25:** Mode 5 passed on the complete Sun, so the
   gate this was waiting on is discharged.
 - **Cut 2026-07-11; it differs from today in four fields,** three of
@@ -6609,7 +6416,10 @@ L-241 (same three builders).
 **Ref:** L-181; L-190; L-232; gallery `data/objects_config.json`.
 
 #### [L-241] Hills torus hover states the cloud bounds, not the drawn ring
-<!-- L:241 status:OPEN upd:2026-10-04 section:A flag: rice:2/2/95/1 -->
+<!-- L:241 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+- **Note (2026-10-08):** RICE struck (was 2/2/95/1). This item is item 6 of L-412 (the Sun's slice),
+  and an item in an ordered list carries no score; the list's
+  order is its priority (Tony's rule of 2026-10-07, L-412).
 - **`create_sun_hills_cloud_torus` hovers "2,000 to 20,000 AU".** The
   drawn surface runs 5,570 to 16,953 AU about a ring at 11,000, because
   a torus built from an inner and an outer bound puts its surface at the
@@ -7045,47 +6855,6 @@ reads it now, and deleting it is Tony's call.
 Pipelines [CRITICAL]; Verify Execution, Not Appearance [CRITICAL];
 Observation Override (Tony's eyes won twice here).
 
-#### [L-252] L2b's fourth outcome: an INCOMPLETE verdict is not a confirmation
-<!-- L:252 status:OPEN upd:2026-08-25 section:A flag: rice:3/4/95/1 -->
-- **Found by the pin that exists to be read.** After the L-247 repair,
-  `test_worksheet_checker.py` failed with `no live claim is called
-  DRIFTED without a value verdict -- got: ['PARSEC_TO_AU']`. That
-  check's own comment says a DRIFTED here means a real defect is being
-  reported: read it, do not relax it.
-- **Reading it.** `worksheet_checker.py` maps APPROX and PARTIAL to
-  `V_INCOMPLETE`, then fires DRIFTED for `V_CONFIRMED` and
-  `V_INCOMPLETE` alike -- while its own comment defines DRIFTED as "the
-  worksheet confirmed that value; the code left it anyway." An APPROX
-  worksheet did not confirm anything. It said the number was
-  approximate and supplied the exact one. Three returns verdicted
-  206265.0 APPROX and gave 648000/pi; L-247 took that value; the tool
-  called it drift. A `# Resolved:` leg does not clear it -- that is a
-  separate mechanism.
-- **The same mistake the block already fixed one case over.** Its
-  comment records that all eight L-192 findings were corrections
-  reported as drift, and that "the information needed to tell them
-  apart was already in the matched row." It is here too, in the
-  supplied-value column, read at L2a sixteen lines up.
-- **The fix** (`patch_L252_1_incomplete_outcome.py`, Tony's ruling
-  2026-08-25): a fourth outcome, COMPLETED -- the worksheet called it
-  APPROX or PARTIAL and supplied a value, and the code now reads
-  exactly that. Recorded, not routed.
-- **Narrow on purpose, and pinned in both directions.** INCOMPLETE
-  alone does not earn COMPLETED; the code must equal the value THAT
-  worksheet supplied, by the same `compare()` L2a uses. An APPROX
-  verdict where the code moved somewhere the worksheet never named
-  still reports DRIFTED. Two synthetic checks, one per direction, take
-  the suite 134 -> 136. Widening it to "INCOMPLETE and the code moved"
-  would have made it unfailable, which is not a verdict.
-**Gap:** none in the tool. Whether the four outcomes want a matching
-line in provenance-discipline's verdict vocabulary is unruled --
-COMPLETED is a checker outcome, not a worksheet token, and the two
-vocabularies have stayed separate so far.
-- **Note:** RICE 3/4/95/1 is Claude's proposed score.
-  **Tony-action (decide):** confirm or redirect.
-**Ref:** L-192 (the three outcomes this extends); L-247 (the founding
-case); A Check That Cannot Fail Is Not Passing [CRITICAL].
-
 #### [L-253] The 660 discontinuity's depth variation -- held unsourced
 <!-- L:253 status:OPEN upd:2026-08-26 section:A flag: rice:2/2/60/2 -->
 - **This row IS the breadcrumb.** Tony's ruling, 2026-08-26: keep the
@@ -7336,7 +7105,18 @@ status pass; (b) and (c) are gated on it.
 resident protocol Part 3.
 
 #### [L-262] The framing smoke test has never run against the page
-<!-- L:262 status:OPEN upd:2026-08-30 section:A flag: rice:3/4/95/1 -->
+<!-- L:262 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+- **2026-10-08, checked at gallery ab66aba7:** both one-line fixes
+  below are in. The gallery maintenance run's Page framing row passes
+  `gallery/solar_system_earth_test2.html` and
+  `gallery/feature_renderers.js`, and `smoke_framing.js` reads
+  `documentation/payload_jupiter_saturn.json`. Left: confirm the row
+  passes on the next run, and the residual -- the live room's
+  framing, `sunRefitFrame` in `interactive.html`, has no test -- which
+  moves into L-367 when this item closes.
+- **Note (2026-10-08):** RICE struck (was 3/4/95/1). This item is item 1 of L-423 (the website's checks),
+  and an item in an ordered list carries no score; the list's
+  order is its priority (Tony's rule of 2026-10-07, L-412).
 - **Found by the gallery maintenance runner's first execution**
   (L-236), 2026-08-29, which is the argument for the runner made by
   the runner.
@@ -8521,7 +8301,10 @@ card in the grid), tools/gallery_studio.py, tools/json_converter.py,
 interactive.html.
 
 #### [L-292] Earth shells the orrery does not draw
-<!-- L:292 status:OPEN upd:2026-10-05 section:A flag: rice:3/3/75/2 -->
+<!-- L:292 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+- **Note (2026-10-08):** RICE struck (was 3/3/75/2). This item is a member of L-413 (Earth's list),
+  and an item in an ordered list carries no score; the list's
+  order is its priority (Tony's rule of 2026-10-07, L-412).
 - **Opened 2026-09-06** during the Earth design round. One row per The
   Braid: the class is "Earth shells worth adding to the orrery", not
   one item per shell.
@@ -20371,6 +20154,439 @@ this item's. (Was: the loaded-copy confirmation; then close.)
 `documentation/HANDOFF_L422_fable_sweep_close_20261007.md`;
 `documentation/LEDGER_SWEEP_review_20261007.md`; L-396, L-412, L-351,
 L-418, L-419.
+
+#### [L-216] Gallery swap fails under a filesystem lock (OneDrive)
+<!-- L:216 status:DONE upd:2026-10-08 section:C flag: rice:3/3/85/2 -->
+- **2026-10-04: the stray folder again.** Tony's gallery maintenance
+  run of 2026-10-04 (Cache siblings, report-only) found
+  `data/solar-system (1)` in his gallery copy, the OneDrive shape L-400
+  closed on 2026-10-01 when he deleted the first one. Git ignores it.
+  A recurrence of this class, not a new item.
+  - **Tony-action (do) -- DONE 2026-10-04** (Tony's note on Where We
+    Are): deleted.
+- **2026-08-19: the nightly run wiped the served tree.** GitHub Desktop
+  showed 56 deletions in the gallery repo and zero additions.
+  `data/solar-system/` was absent while BOTH halves of the generation
+  survived: `solar-system.prev` (the previous generation) and
+  `.staging_solar-system_20260819T214723Z` (the new one). Nothing was
+  committed and nothing was lost.
+- **The zero-additions reading was an artifact.** The gallery
+  `.gitignore` hides `data/.staging_*/`, `data/solar-system.prev/` and
+  `data/solar-system.quarantine_*/`, so a half-completed swap looks
+  exactly like total loss.
+- **The build was clean; only the swap failed.** Run record
+  `20260819T214723Z.json`: `structural_validation: pass`,
+  `guard_warnings: []`, finished 13.8 s after start. Good data that
+  never landed -- not the guard catching a bad build.
+- **Reproduced the same evening, and it named itself.** A manual re-run
+  printed: `[RECOVER] could not remove retained data\solar-system.prev
+  ([WinError 5] Access is denied: data\solar-system.prev\raw\elements);
+  swap will quarantine it`. The lock is real and persistent. The repo
+  lives under `C:\Users\tonyq\OneDrive\...`, and a sync engine holding
+  a handle on a directory is what makes a rename fail.
+- **WHICH rename it catches is the whole difference.** The re-run hit
+  the CLEANUP rmtree, which the code handles by design -- quarantine
+  and carry on -- and the swap completed. The failing run hit
+  `staging -> live`, which has no in-run recovery and leaves the live
+  directory missing. Same cause, different victim.
+- **The pile was the signal all along.** ~30 `solar-system.quarantine_*`
+  directories run back to 2026-07-21, one per night. Each is a run
+  where the retained `.prev` could not be removed. The mechanism has
+  been printing every night for a month and reading as normal, because
+  the builder is built to survive it.
+- **Recovery, and it is the operational rule (Tony, 2026-08-19):** for
+  a cache hiccup, DISCARD the deletions in GitHub Desktop and RE-RUN.
+  Discard restores the live tree from HEAD byte for byte; the re-run
+  builds a fresh generation. Three conditions make it safe and they
+  should travel with the rule: the live tree is committed, the swap is
+  all-or-nothing so a failure leaves a COMPLETE `.prev` or staging and
+  never a mixed one, and nothing reaches the remote until Tony commits.
+  Running with `--commit` would break the third.
+- **The visibility gap, and it comes BEFORE the swap fix.** The run
+  record is written INSIDE the generation, so a run whose swap fails
+  strands its own record in a directory `.gitignore` hides. The
+  committed history will show the 18th, the 19th 23:10 run, and no sign
+  that a run in between lost its data. The swap OUTCOME needs recording
+  outside the generation, or every recurrence costs another evening of
+  inference. Same Visibility Convention shape as L-214, one layer out.
+- **Then the cause.** Retry the renames with backoff if the lock is
+  transient at the moment of the swap, or move the repo off OneDrive if
+  it is not. WinError 5 on the cleanup proves persistence at run START;
+  it does not prove the swap window is equally exposed.
+- **Tony-action (do):** the operational rule above belongs in
+  `gallery-cache-builder`, which would be 1.4. NOT bumped tonight:
+  `ledger-and-session-records` went to 1.7 today and that reinstall is
+  unverified from inside this session. Discharge that first, then bump
+  this one. Same pattern as the dispatch-hygiene rule on 2026-08-19.
+**Note:** RICE is Claude's proposal, unratified.
+**Note (2026-09-17) -- THIRD OCCURRENCE, and the Gap's "One data point"
+is now false.** The swap failed again at `staging -> live` with "Access is
+denied", during the cache rebuild that the L-322 deployment fault made
+necessary. It left the working copy with no served cache and GitHub
+Desktop offering 67 changes, most of them deletions. Tony did not push.
+Tony: "This is like the third time."
+THE RECOVERY was the operational rule above, with ONE STEP ADDED, because
+the same change list also held the arrival work: commit the NON-CACHE
+files first, then discard the rest, then re-run. A blanket discard would
+have thrown away committed-worthy work sitting beside the wreckage.
+TONY'S CURRENT PRACTICE, and it is deliberate: the scheduled nightly run
+is SUSPENDED and he builds by hand, pausing OneDrive syncing first and
+watching GitHub Desktop's change list, stopping if the commit does not
+form correctly. Pausing sync before the re-run worked.
+MOVING THE REPOSITORIES OUT OF ONEDRIVE was raised as the lasting fix.
+Tony, 2026-09-17: "not at this time." It is a change to his machine
+outside his usual working set and needs its steps and risks written out
+before he decides.
+**Tony-action (do) -- DONE 2026-09-19:** gallery-cache-builder 1.5 now
+says three occurrences and that the exposure is established rather than
+unlucky, and carries the hand routine above, including the step that
+commits non-cache files before discarding. This item stays OPEN for the
+CAUSE, not for the record of it.
+**Note (2026-09-20) -- OCCURRENCES FOUR AND FIVE, and the OneDrive
+question written out so it need not be argued from memory again.** The
+swap failed twice more on 2026-09-20, both times at `staging -> live`
+with "Access is denied", and both times with OneDrive syncing PAUSED.
+Pausing is therefore not a reliable cure. The two staging directories
+are 1 hour 57 minutes apart and a OneDrive pause lasts 2 hours, so the
+pause may have expired about when the second run reached its swap. That
+is a possibility worth carrying, not a finding; nobody checked the clock
+at the time.
+THE ONLY BARRIER SO FAR HAS BEEN A PERSON NOTICING, AND IT HAS ALREADY
+FAILED ONCE. Tony, 2026-09-20: "catching the failures depended on me
+stopping with the malformed commit lists, but the fix was not obvious."
+The four occurrences from 2026-08-19 onward were each caught that way --
+Tony read GitHub Desktop's change list and declined to commit, on a run
+he had started himself. THE FIRST ONE WAS NOT. The 2026-07-24 run was
+SCHEDULED, nobody knew a build was in flight, and the mass deletion was
+read as routine cleanup: it was committed and pushed, then reverted
+after the fact. The account is in the gallery repo, in the Origin
+paragraph of `documentation/AS_BUILT_L173_numbering_fix.md` and in the
+`verify_promoted_data` docstring in `tools/gallery_cache_builder.py`.
+Retiring the schedule on 2026-08-10 is what made Tony present for every
+run since. It is still one person looking, with nothing behind him, and
+that is what stage B of the build manifest removes.
+A SECOND RECOVERY ROUTE WAS MEASURED. Tony renamed the staging folder to
+`solar-system` by hand in File Explorer, minutes after Python had been
+refused, and it worked. So the lock is brief. The rule of 2026-08-19 --
+discard the deletions in GitHub Desktop and re-run -- is unchanged and
+still sound; this is a second way out, not a replacement for it.
+THREE OPTIONS WERE WEIGHED, 2026-09-20.
+- ONE, harden the swap. Retry each rename, put the old cache back if the
+  swap still fails, and record every swap's outcome in a tracked file
+  outside the generation. Makes a failure rare, and makes it visible
+  without anyone having to notice anything. Does NOT remove the cause.
+- TWO, keep the repositories under OneDrive and have the builder avoid
+  the swap altogether. Not favoured. The all-or-nothing swap is the
+  builder's main protection -- it is what guarantees that a failure
+  leaves a complete old generation or a complete new one and never a
+  mixture -- and the conflict copies dated 2026-09-05 onward show
+  OneDrive fighting that folder independently of the builder anyway.
+- THREE, move both repositories out of OneDrive. Removes the cause.
+WHAT STANDS IN THE WAY OF THREE. GitHub holds everything that is
+committed. OneDrive is today the only second copy of what `.gitignore`
+excludes. `DATA_INVENTORY.md`, generated 2026-09-20, counts 966.8 MB of
+local orrery data, including the Gaia star tables (`.vot`, 295.1 MB),
+the star property files (`.pkl`, 33.6 MB), `orbit_paths.json`
+(130.9 MB), the ERA5 climate files (`.nc`, 161.1 MB), and the `papers/`
+folder. Tony, 2026-09-20: the large star data files are "difficult to
+rebuild". A move needs a backup plan for these BEFORE it happens.
+TWO FACTS THAT BEAR ON IT, Tony, 2026-09-20. He works on the repositories
+from one computer. A Mac kept for Mac and Linux Python is rarely used and
+its copy is badly stale. So OneDrive is not carrying the work between
+machines; here it is buying a second copy, not portability.
+**Tony's ruling, 2026-09-20:** "let's put your analysis in the ledger, do
+option 1, and take it from there as needed." Option THREE is NOT decided
+and is not to be pressed. If Tony raises it, what he wants first is the
+inventory, a backup plan for the files above, the steps in GitHub
+Desktop's own terms, and what could go wrong at each step -- all written
+out before he decides anything.
+
+**Note (2026-09-20) -- the committed run history has a 38-day hole, and
+the only copy of it sits inside the conflict copy the build manifest
+proposes to delete.** Measured at gallery `1061ae4d`.
+`data/solar-system/raw/runs/` holds 37 run records: 2026-07-11 to
+2026-07-28, then nothing at all until 2026-09-05, then near-daily to
+2026-09-20. The TRACKED conflict copy
+`data/1260806133443-solar-system/raw/runs/` holds 42 run records,
+2026-07-29 to 2026-09-04, and not one of them appears in the live tree.
+The two sets are disjoint and the second exactly fills the first's hole.
+That window contains the 2026-08-19 occurrence and the whole of the
+L-274 silent-sweep period.
+WHY IT BEARS ON THE DECISION IN STAGE B. The manifest recommends
+deleting `data/1260806133443-solar-system/` as 42 published files that
+serve nothing. Serving nothing is correct -- they are records, not
+served data. Deleting them would destroy the only committed evidence for
+exactly the stretch this item is investigating, inside the build whose
+stated purpose is that a recurrence should stop costing an evening of
+inference.
+HOW IT CAME TO BE RECOMMENDED is an instance of a rule this project
+already holds. The manifest described the folder by a COUNT and its
+author had not opened the files. Fable 5.1, reviewing this patch on
+2026-09-20: "I counted the files and never opened them... I gave you a
+count." A Report Names Its Items, measured once more.
+**Claude's recommendation, for Tony to rule on:** keep the records and
+move them. Copy the 42 files to `documentation/cache_run_history/` in
+the gallery repo -- a name that is not a cache sibling, so it stops
+reading as a stray generation and is not caught by the new ignore rules
+-- and then delete the folder. Putting them back inside the live cache
+is the worse option: nothing should write into that tree by hand.
+**Tony-action (decide)**, due with stage B.
+
+**Note (2026-09-20) -- AS BUILT.** The build in
+`documentation/BUILD_MANIFEST_L216_cache_swap_20260920.md` is done, in
+three gallery pushes: `d0317aa3` (the hardening), then `a1a516cf` (the
+run history moved and the conflict copy removed). Built by Claude Opus 5
+from a manifest written by Claude Fable 5.1, Tony integrating.
+WHAT THE BUILDER DOES NOW. Each rename inside the swap is retried six
+times over about fifty seconds. A swap that still cannot finish renames
+`.prev` back to live, so the working copy is never left without a served
+cache and GitHub Desktop never shows the pile of deletions; the staging
+directory is kept. Every run that reaches the swap writes ONE line to
+`data/cache_swap_log.jsonl` -- tracked, and a sibling of the served
+directory rather than part of it -- appended as `started` before the swap
+and rewritten with the outcome after. A dry run writes nothing. When the
+roll-back also fails the builder prints, in plain words, that nothing is
+lost and which two hand recoveries to use; it never says "will self-heal"
+without saying what Tony does.
+HOW WE WILL KNOW IT WORKS, and it is the only evidence there is, because
+a retry that worked looks exactly like a run with no problem: A LINE IN
+THE LOG WITH MORE THAN ONE ATTEMPT AND OUTCOME `ok` IS A FAILURE THIS
+BUILD ABSORBED. `gallery_maintenance_run.py` prints the last line's
+verdict at the end of its summary. If the log only ever shows one
+attempt, the lock has not recurred and nothing is proven either way.
+TESTED. The offline suite went from 167 checks to 190. Each of the three
+pieces was then removed on purpose and the matching checks went red BY
+NAME -- 4 for the retry, 5 for the roll-back, 7 for the log. One of those
+runs found a real weakness first: a missing log crashed the suite instead
+of failing a named check, which is the blind spot not announcing, and it
+was fixed before delivery.
+PIECE 4. `.gitignore` gains `data/solar-system (*)/` and
+`data/[0-9]*-solar-system/`, and `documentation/check_cache_siblings.py`
+now classifies EVERY directory in `data/` and names anything the builder
+did not make. It found four on Tony's machine at the first run, having
+reported "no sibling directories" the day before.
+THE RUN HISTORY IS KEPT. The 42 records are at
+`documentation/cache_run_history/` in the gallery repo with a README, and
+`data/1260806133443-solar-system/` is gone.
+**Note (2026-09-20) -- two mistakes made during this build, both recorded
+because they are the same shape.** A patch script called plain
+`shutil.rmtree` on the cache tree and was refused by the Windows
+read-only attribute -- the exact failure `_rmtree_force` was written for,
+in a docstring the session had read an hour earlier. Nothing was lost
+(rmtree unlinks files before removing directories, and it failed at the
+rmdir of a folder it had just emptied), but a second patch was needed to
+finish. And the build manifest described the conflict copy by a COUNT,
+"42 published files that serve nothing", written by an author who had not
+opened them. Fable 5.1 named its own error on review: "I counted the
+files and never opened them." Knowledge that lives only inside a function
+does not fire, and a count does not say what is there. Both rules are now
+in `gallery-cache-builder` 1.6.
+**Tony-action (do) -- carried, not cleared:** this session loaded
+gallery-cache-builder 1.5 and bumped it to 1.6. A reinstall cannot be
+verified from inside the session that makes it. The next session confirms
+its loaded copy reads 1.6 before cache work.
+**Note (2026-09-21) -- the first real build on the new code, and what it
+does and does not prove.** Run `20260921T173303Z`, a hand build with
+OneDrive paused beforehand, pushed at gallery `39bde09d`. Its swap log
+line reads one attempt on each rename and outcome `ok`. The change list
+held 25 changed files and 2 added -- this run's own record and the swap
+log itself -- and no deletions. WHAT IT PROVES: the new code works on
+Tony's machine. The swap log was written where it should be, as a tracked
+file, one line; the `started` line was rewritten in place with the
+outcome, which until then had only been tested in a sandbox; the
+run-start recovery and the sweep each cleared the read-only bit on 6
+entries and said so; and the live check confirmed the site serves the new
+cache byte for byte. WHAT IT DOES NOT PROVE: the retry or the roll-back
+against a real refusal, because nothing was refused. The only evidence of
+those is still a line with more than one attempt.
+**Note (2026-09-21) -- the empty "solar-system (N)" folders, measured.**
+Four sat beside the cache, `(1)` to `(4)`; `(4)` appeared the same
+afternoon as the build above. A report-only script,
+`report_L216_stray_folders_20260921.py` in the gallery, captured what
+only the folders could say before they were deleted. ALL FOUR WERE EMPTY,
+hidden and system files counted, and each was empty from the start:
+created at most four minutes before it was last modified, so nothing was
+made at the swap and emptied later. EACH WAS CREATED 36 TO 39 MINUTES
+AFTER A BUILD STARTED -- 36.9, 35.9, 38.6 and 38.2 minutes, after the
+builds of 2026-09-05, 09-10, 09-18 and 09-21 -- on 4 of the 26 builds since
+2026-09-05, with no pattern in the time of day. NOT TIED TO A COMMIT: the
+nearest preceding commit was 2.7 minutes, 35.1 minutes, 11 seconds and
+14.1 minutes earlier, and on 09-10 there was no commit anywhere near. NOT
+MADE BY OUR CODE: Python never names a folder with " (N)", and nothing in
+either repository creates a folder beside the cache; only Windows and
+OneDrive name folders that way. PAUSING DOES NOT PREVENT IT: `(4)`
+appeared with syncing paused the whole time. Every one carried OneDrive's
+"always keep on this device" flag, but so does the live cache folder, so
+the flag does not settle who made them.
+CAUSE: UNDETERMINED. The strongest suspect is OneDrive, or the Windows
+cloud-files layer beneath it, catching up on the swap after a delay.
+That is a suspicion, not a finding. They are harmless as measured --
+empty, kept out of git by `data/solar-system (*)/`, and named by the
+sibling report whenever one appears -- so expect another now and then.
+Tony was cleared to delete these four by hand on 2026-09-21, once the
+report had been sent. IF THEY BECOME A NUISANCE, the choice is Tony's:
+delete them by hand, or let the builder's sweep remove EMPTY ones -- which
+would change the rule that the sweep never touches what the builder did
+not make, the rule that kept the 42 run records safe. Not pressed.
+A WRONG CLAIM, recorded because it nearly landed here. Claude told Tony
+that OneDrive made `(4)` when his sync pause ran out. His pause never ran
+out; it was a guess stated as likely. It was withdrawn, with the patch
+that carried it, before that patch ran.
+THREE CHANGES FOLLOWED THE AS-BUILT, recorded here so this block is
+complete. PATCH 5, orrery `ac397e52`: the dashboard's descriptions of
+three buttons, which the build never opened and so still described the
+tools as they were the morning before. PATCH 6, gallery `06fdad8c`, Fable
+5.1's final line break in `.gitignore`: stage B had kept the file's
+missing final newline, which left the new `data/[0-9]*-solar-system/`
+rule as the unterminated last line, so the next line anyone appended
+would have joined it and broken it silently. PATCH 7, gallery `8a38a917`,
+on Tony's two requests of 2026-09-21: the builder prints a `[SWAP]` line
+after every good swap, so a clean swap is SAID rather than silent; it
+ends a good hand run with its own numbered next steps, the maintenance
+run BEFORE the commit; and the maintenance run's swap line reads EVERY
+rename. Stage B's version read only `staging -> live`, so a refusal the
+retry absorbed on the `.prev` cleanup -- the rename the lock catches most
+-- would have printed "succeeded first time". A named check now fails if
+that code comes back. The offline suite is at 201.
+**Owed to gallery-cache-builder's next bump** (ONE SESSION, ONE BUMP --
+this session already shipped 1.6). The routine should say the builder now
+prints a `[SWAP]` line and its own next steps; that the maintenance run
+comes BEFORE the commit; and that its last line should agree with the
+`[SWAP]` line. "Reading the log" should say the maintenance run reads
+every rename, not only the last. And the sibling-report section should
+say the " (N)" folders measured on 2026-09-21 are empty and appear on a
+delay after some builds -- it currently calls them conflict copies, which
+the report does not support. The builder's printout and the dashboard
+carry the routine meanwhile.
+**The same "conflict copy" wording lives in four more places**, found by
+search on 2026-09-21 and left for a pass that touches them anyway: the
+comment above the two rules in the gallery's `.gitignore`; the docstring
+of the gallery's `documentation/check_cache_siblings.py`; the orrery
+dashboard's Cache Siblings description; and
+`documentation/L342_install_test_run_sequence.md` in the orrery. It is
+right for `1260806133443-solar-system`, which held real run records, and
+unsupported for the empty " (N)" folders, whose maker is unknown.
+**Note (2026-09-22) -- the first real build on the hardened swap.** Run
+`20260922T233338Z`, by hand during L-322 C2-b, OneDrive paused: the swap
+log reads one attempt for each rename and outcome `ok`. One attempt proves
+nothing either way -- no lock was there to absorb. The sweep kept one
+sibling as an autopsy, `.staging_solar-system_20260920T150019Z`, and
+Cache siblings reported none stale.
+**Gap:** none. CLOSED 2026-10-08 in the decisions session of
+2026-10-08, on the evidence below (the retry proven twice, read from
+the swap log). Tony: "Yes, close it with those comments." The
+cause, a OneDrive or Windows lock on the live folder, is outside the
+project and is not chased. Loose ends re-homed (A Closing Item
+Re-homes Its Loose Ends): the gallery-cache-builder owed items, now
+with the two proven retries, and the "conflict copies" wording in
+four places, to L-351; the `daily_run.py` OneDrive-pause line to
+L-395. (Was, 2026-09-21: the CAUSE, unchanged; watch for a swap that
+took more than one attempt. Two have since appeared.)
+**Tony, 2026-10-07:** "on the daily run it now includes four checks I
+run first thing. I don't plan on automating any time soon." And on
+the swap: "the daily run now checks that one drive is paused before
+committing the cache build."
+Tony pauses for 24 hours, not two: "2 hours can accidentally
+expire."
+**Note (2026-10-07):** so the hand run is the working practice, by
+choice, not a stopgap. The move off OneDrive and a restored schedule
+are NOT to be proposed again unless Tony raises them; the 2026-09-20
+analysis stays above for that day. The pause is part of the routine
+itself: gallery `daily_run.py` step 2 stops before the cache build,
+asks for OneDrive to be paused and records the time [verified @
+gallery 4cfeca27]. Its printed words still say two hours ("Pause
+syncing > 2 hours", and the expiry time it prints adds two hours),
+against Tony's 24; owed to the next gallery patch that opens the
+file: say 24 hours, or ask how long.
+**THE RETRY IS PROVEN (2026-10-07, read from the swap log at gallery
+4cfeca27).** `data/cache_swap_log.jsonl` holds 29 lines, all outcome
+`ok`, and TWO show `staging_to_live` taking 2 attempts: runs
+20261004T205153Z and 20261006T182032Z, both Tony's hand builds,
+both with OneDrive paused. So the lock recurred twice in three days
+at the rename it always catches, the retry absorbed it both times,
+and the pause does not prevent the lock -- the retry does. This is
+the evidence the 2026-09-20 build said would be the only kind there
+is. The 2026-09-21 Gap's "until one appears the retry is unproven"
+no longer holds.
+**Tony-action (decide) -- DECIDED 2026-10-08: it closes.** Whether
+this item CLOSES on that evidence.
+The fix works, the routine stands, the cause (a OneDrive or Windows
+lock on the live directory) is outside the project and is not being
+chased. If it closes, the two owed items stay named in L-351: the
+gallery-cache-builder skill's next version (the `[SWAP]` line, the
+run order, the empty "(N)" folders, and now the two proven retries)
+and the "conflict copies" wording still in four places (`.gitignore`,
+`check_cache_siblings.py`, the orrery dashboard,
+`L342_install_test_run_sequence.md`; all still there at HEAD).
+(The Fable 5.1 review of 2026-10-07 had counted the daily run as the
+project's largest standing claim on Tony's time; Tony's word is the
+answer to that.)
+**Note (2026-10-08) -- Tony is trying builds without the OneDrive
+pause.** Tony: "Today I ran the daily run without pausing the sync.
+With the retry as the fail safe do I need the pause?" Claude's
+answer: probably not. The pause has never prevented the lock -- both
+proven retries, and two outright September failures, happened while
+paused -- and the retry, then the roll-back, are what protect the
+served cache. What is not known is whether sync running makes a lock
+outlast the retry's six tries over about fifty seconds; a few weeks
+of runs will say. The swap log shows it either way: a line with more
+than one attempt is the retry absorbing a lock. That run had not been
+pushed when this was written; the log's newest line was
+20261008T013323Z. This also changes the `daily_run.py` fix carried on
+L-395.
+**Ref:** `tools/gallery_cache_builder.py` `atomic_swap_dir` (~1176),
+`recover_incomplete_swap` (~1223), `_sweep_siblings` (~1241) in the
+gallery repo; run records `20260819T214723Z.json` (failed) and
+`20260819T231042Z.json` (recovered); gallery at `8a4aa41`; L-098 (the
+builder); L-214 (the same visibility shape).
+
+#### [L-252] L2b's fourth outcome: an INCOMPLETE verdict is not a confirmation
+<!-- L:252 status:DONE upd:2026-10-08 section:C flag: rice:3/4/95/1 -->
+- **Found by the pin that exists to be read.** After the L-247 repair,
+  `test_worksheet_checker.py` failed with `no live claim is called
+  DRIFTED without a value verdict -- got: ['PARSEC_TO_AU']`. That
+  check's own comment says a DRIFTED here means a real defect is being
+  reported: read it, do not relax it.
+- **Reading it.** `worksheet_checker.py` maps APPROX and PARTIAL to
+  `V_INCOMPLETE`, then fires DRIFTED for `V_CONFIRMED` and
+  `V_INCOMPLETE` alike -- while its own comment defines DRIFTED as "the
+  worksheet confirmed that value; the code left it anyway." An APPROX
+  worksheet did not confirm anything. It said the number was
+  approximate and supplied the exact one. Three returns verdicted
+  206265.0 APPROX and gave 648000/pi; L-247 took that value; the tool
+  called it drift. A `# Resolved:` leg does not clear it -- that is a
+  separate mechanism.
+- **The same mistake the block already fixed one case over.** Its
+  comment records that all eight L-192 findings were corrections
+  reported as drift, and that "the information needed to tell them
+  apart was already in the matched row." It is here too, in the
+  supplied-value column, read at L2a sixteen lines up.
+- **The fix** (`patch_L252_1_incomplete_outcome.py`, Tony's ruling
+  2026-08-25): a fourth outcome, COMPLETED -- the worksheet called it
+  APPROX or PARTIAL and supplied a value, and the code now reads
+  exactly that. Recorded, not routed.
+- **Narrow on purpose, and pinned in both directions.** INCOMPLETE
+  alone does not earn COMPLETED; the code must equal the value THAT
+  worksheet supplied, by the same `compare()` L2a uses. An APPROX
+  verdict where the code moved somewhere the worksheet never named
+  still reports DRIFTED. Two synthetic checks, one per direction, take
+  the suite 134 -> 136. Widening it to "INCOMPLETE and the code moved"
+  would have made it unfailable, which is not a verdict.
+**Gap:** none. CLOSED 2026-10-08 in the decisions session of
+2026-10-08. The fix is in the code at b0b3df82: the four L2b
+outcomes in `worksheet_checker.py`, both directions pinned in
+`test_worksheet_checker.py`, `patch_L252_1` archived. The open
+wording question (was: "whether the four outcomes want a matching
+line in provenance-discipline's verdict vocabulary is unruled") was
+explained to Tony and settled: the skill names the checker's four
+outcomes in one paragraph, and says COMPLETED is not a confirmation
+and the send-back rule still applies. Tony: "Agree. But we should
+add the skill update in this session." Offered a bump now (2.27,
+the split renumbered to 2.28) or the exact words now, carried by the
+split; Tony: "Concur with B." The wording: "Approved". Re-homed, word
+for word, to L-418. The RICE question this block carried is moot.
+**Ref:** L-192 (the three outcomes this extends); L-247 (the founding
+case); A Check That Cannot Fail Is Not Passing [CRITICAL].
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
@@ -20938,7 +21154,10 @@ itself); L-112 (the remediation pass that verified DP flyby preservation).
   distances appear. `[per chain]`
 
 #### [L-128] Comet sublimation shell(s) -- solar-distance chemistry zones
-<!-- L:128 status:OPEN upd:2026-10-04 section:A flag: rice:2/2/50/2 -->
+<!-- L:128 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+- **Note (2026-10-08):** RICE struck (was 2/2/50/2). This item is item 10 of L-412 (the Sun's slice),
+  and an item in an ordered list carries no score; the list's
+  order is its priority (Tony's rule of 2026-10-07, L-412).
 - **Idea (Tony, 4/16/26, pre-ledger note).** Add a solar shell (or set of
   concentric shells) marking heliocentric distances at which different
   comet ices begin to sublimate (CO/CO2 far out, water ice closer in) --
@@ -20968,7 +21187,10 @@ from git history or needs rebuilding; decide where it lives.
 **Ref:** to_do_ideas.md (pre-ledger, 4/16/26).
 
 #### [L-131] Zodiacal dust solar shell
-<!-- L:131 status:OPEN upd:2026-10-04 section:A flag: rice:2/2/50/2 -->
+<!-- L:131 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+- **Note (2026-10-08):** RICE struck (was 2/2/50/2). This item is item 9 of L-412 (the Sun's slice),
+  and an item in an ordered list carries no score; the list's
+  order is its priority (Tony's rule of 2026-10-07, L-412).
 - **Idea (Tony, 4/17/26, pre-ledger note).** Add a solar shell for the
   zodiacal dust cloud (interplanetary dust concentrated near the ecliptic).
 - **Cross-ref:** groups with L-128, L-136.

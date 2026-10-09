@@ -128,6 +128,62 @@ Not urgent, in your order:
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+**Session: OPEN: 10-8-26 1451: Fable: Opus design and build coordination**
+
+I'll read the project's preferences and principles files, then pull the repo at HEAD to ground the review before suggesting anything.
+
+Ground truth first, then the suggestion.
+
+**What I checked**
+- The orrery repo is at `b0b3df82`, pushed at 14:49 today. That commit holds Opus's split brief (`HANDOFF_L418_split_build_brief_20261008.md`) and your 14:06 run record. The gallery is at `ab66aba7`, unchanged. So everything in your run record is pushed; nothing is waiting on you from the last two sessions.
+- At HEAD, the protocol reads v3.85 and the ledger skill reads 1.17. I have not loaded my account copy of the ledger skill, because this session writes no ledger or page edits. If that changes I will check it first.
+- The install probe is not in this session's skill list either. That agrees with Opus's finding: it has not been uploaded yet, or was deleted before a check.
+
+**Where things stand, in one line each**
+- L-421 (the typed facts): 15 of 17 served. Left: the inner Oort cloud redrawn tilted, then the gating check, then the citation-agreement check.
+- L-418 (splitting provenance-discipline): fully briefed, blocked only on the install trial.
+- L-395 (the Horizons check): designed; build is next on the road.
+- L-414 (the scanner's window): owed before the Sun's list reaches L-228 (the Alfven ranges).
+- Four decisions sit with no session attached: L-216 (the swap retry) closing, the RICE scores, the gallery-checks list as a ledger item, and L-371/L-390 riding the split.
+
+**Suggested order of sessions**
+
+1. **You, now, no session:** upload `install-probe.zip` from Settings > Skills. Keep the ZIP outside the repo.
+
+2. **Opus session A: the probe check and the split build, in one session.** Open a fresh chat, say "check the install probe." If it passes, the same session measures the read limit and builds the split from the brief, rather than handing off to yet another fresh session. The brief is complete and nothing has changed under it, so a second handoff would be overhead. It will ask one decision: whether L-371 (the Sun room's served numbers) and L-390 (the conversion marker) ride version 2.27. Opus recommended yes, with L-414 (the scanner's window) kept for its own session; I agree. After the run: maintenance run, push, upload the three ZIPs, delete install-probe.
+   - Why this before the Oort cloud: the Oort cloud build is citation-heavy, and the part of provenance-discipline it most needs (the cross-check procedure) is the part a plain read currently never reaches. The split fixes that. The protocol's own rule is skill bumps before builds.
+
+3. **Opus session B: finish L-421 (the typed facts).** The inner Oort cloud redrawn from Nesvorny et al. 2025 as a tilted disk, its words brought to you before they ship, and the outer-edge question (20,000 au served vs the paper's 10,000) traced before it is asked. Then the survey as a gating check, shown failing on a planted sentence first. Two small owed fixes should ride this session because it touches the same files: the gallery's `_declared` "1.1 times" fix, and the citation-agreement check between `objects_config.json` and `constants_new.py`. Have the paper ready to upload from `papers/`. This session confirms its loaded skills read 2.27, 1.0 and 1.18.
+
+4. **Opus session C: build L-395 (the Horizons check)** as a Daily Run step, with Encke added. Carry the one-line `daily_run.py` fix (it still says the OneDrive pause is 2 hours; you pause 24) under L-216 (the swap retry), since the session is in that file anyway. Decisions it will ask: whether Halley is checked, and Encke's description and link.
+
+5. **After that:** the Sun's list from item 3, L-385 (the Sun's opening view); then L-414 (the scanner's window) as its own session cutting provenance-discipline 2.28, before L-228.
+
+The three loose decisions (L-216 close, the RICE scores, the gallery-checks ledger item) can be ruled whenever you like and recorded by whichever session closes next; none of them blocks the order above. The design talks (the fuzzy corona, the belts' shape, L-408 the galactic plane on the phone) stay parked until you want a design session.
+
+One session at a time is my recommendation, since each closes by editing the ledger and your page.
+
+**My one question:** does this order stand, or do you want the Oort cloud (session B) ahead of the split (session A)?
+
+**Tony**: decision session instead
+
+I'll pull the exact wording of each open decision from the ledger and the sweep report, so the handoff carries the options as they stand rather than from memory.
+
+I have what I need. Writing the handoff now.
+
+The brief is `HANDOFF_decisions_session_brief_20261008.md`, anchored on orrery `b0b3df82` and gallery `ab66aba7`.
+
+**What it sets up**
+- A phone session: Opus presents one decision per message, you rule, and nothing in it asks you to run, upload or push. The patch and the handoff come out as files for when you are at your machine.
+- Six decisions, smallest first: L-216 (the swap retry) closing; the RICE scores; the gallery-checks list as a ledger item; Halley and Encke's words for L-395 (the Horizons check); what rides the split's version 2.27 for L-418; and the order of the next three sessions.
+- One thing I found while writing it: most of the proposed RICE scores are moot under your own October 7 ruling, because those items sit inside ordered lists. The real question left there is L-252 (an INCOMPLETE verdict is not a confirmation), which still carries the second-highest score in the ledger with an empty Gap. The brief says so, and asks Opus to strike the dead scores so the index matches the rule.
+
+To open the session, attach the file to a fresh Opus chat in this Project and paste:
+
+> Decisions session, from the attached brief. No build, no design. Read back the version of ledger-and-session-records you loaded, then present decision 1.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 **Session: DONE: 10-8-26 1314: Opus: Horizons check design handoff documentation**
 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L395_4_run_confirmed_and_page_20261008.py
@@ -296,3 +352,193 @@ If it passes, the split build goes to another fresh session, started from the br
 **Where this leaves us:** you upload the trial skill next, then a fresh chat checks it. The split build waits on that result.
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Session: OPEN: 10-8-26 1657: Opus: Ledger-session-records decisions**
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L412_2_decisions_20261008.py
+ok  LEDGER                   header stamp
+ok  LEDGER                   L-216 closed
+ok  LEDGER                   L-216 decide line marked decided
+ok  LEDGER                   L-216 Gap closed
+ok  LEDGER                   L-216 no-pause trial note
+ok  LEDGER                   L-252 closed
+ok  LEDGER                   L-252 Gap closed, paragraph re-homed
+ok  LEDGER                   L-423 opened before L-412
+ok  LEDGER                   L-412 date
+ok  LEDGER                   L-412 question (b) answered
+ok  LEDGER                   L-131 RICE struck
+ok  LEDGER                   L-131 struck-score note
+ok  LEDGER                   L-128 RICE struck
+ok  LEDGER                   L-128 struck-score note
+ok  LEDGER                   L-228 RICE struck
+ok  LEDGER                   L-228 struck-score note
+ok  LEDGER                   L-241 RICE struck
+ok  LEDGER                   L-241 struck-score note
+ok  LEDGER                   L-292 RICE struck
+ok  LEDGER                   L-292 struck-score note
+ok  LEDGER                   L-235 RICE struck
+ok  LEDGER                   L-235 struck-score note
+ok  LEDGER                   L-237 RICE struck
+ok  LEDGER                   L-237 struck-score note
+ok  LEDGER                   L-262 RICE struck
+ok  LEDGER                   L-262 struck-score note
+ok  LEDGER                   L-262 fixes found already in
+ok  LEDGER                   L-367 date
+ok  LEDGER                   L-367 list membership
+ok  LEDGER                   L-378 date
+ok  LEDGER                   L-378 list membership
+ok  LEDGER                   L-360 date
+ok  LEDGER                   L-360 list membership
+ok  LEDGER                   L-380 date
+ok  LEDGER                   L-380 list membership
+ok  LEDGER                   L-388 date
+ok  LEDGER                   L-388 list membership
+ok  LEDGER                   L-235 date
+ok  LEDGER                   L-235 list membership
+ok  LEDGER                   L-237 date
+ok  LEDGER                   L-237 list membership
+ok  LEDGER                   L-357 date
+ok  LEDGER                   L-357 delete ruling
+ok  LEDGER                   L-351 date
+ok  LEDGER                   L-351 gallery-cache-builder owed items
+ok  LEDGER                   L-395 date
+ok  LEDGER                   L-395 decide line marked decided
+ok  LEDGER                   L-395 rulings recorded before the Gap
+ok  LEDGER                   L-418 date
+ok  LEDGER                   L-418 2.27 ruling and the approved paragraph
+ok  LEDGER                   L-414 date
+ok  LEDGER                   L-414 own session, 2.28
+ok  WHERE_WE_ARE             header date
+ok  WHERE_WE_ARE             box: old changed line 1  (removed)
+ok  WHERE_WE_ARE             box: old changed line 2  (removed)
+ok  WHERE_WE_ARE             box: old changed line 3  (removed)
+ok  WHERE_WE_ARE             box: old changed line 4  (removed)
+ok  WHERE_WE_ARE             box: changed since
+ok  WHERE_WE_ARE             box: do next (the confirmed order)
+ok  WHERE_WE_ARE             box: old needs-you line  (removed)
+ok  WHERE_WE_ARE             box: needs you now
+ok  WHERE_WE_ARE             road: stage 6 mark cleared
+ok  WHERE_WE_ARE             road: stage 8
+ok  WHERE_WE_ARE             road: stage 9
+ok  WHERE_WE_ARE             settled: OneDrive, and no numbers in object words
+ok  WHERE_WE_ARE             waiting: decisions cleared
+ok  WHERE_WE_ARE             details: this session
+
+New item: L-423 (the website's checks).
+Stamps updated: LEDGER_CONSOLIDATED.md header stamp; WHERE_WE_ARE.md "Last updated" lines.
+Where We Are: 126 lines above the run-record marker (cap 130); nothing below it touched.
+
+patch applied
+
+NEXT:
+  1. Run orrery_maintenance_run.py -- it rebuilds the ledger's index
+     and moves L-216 and L-252 into the closed section.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261008T192100Z, 1 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.5s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.2s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.4s  unchanged (1 checked, not written)
+  Objects export               0.1s  unchanged (1 checked, not written)
+  Module atlas                 7.5s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.0s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Exact rows report            2.2s  unchanged (1 checked, not written) -- 13 of
+                                     34 exact rows printed at 42 lines (32
+                                     orrery, 10 gallery); 8 drawn only, 11 not
+                                     followed, 0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.3s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.0s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       1.5s  Export matches the store: sha256
+                                     3b7000e368d1 on both sides; 105 rows
+                                     re-read, 56 not exported, 27 tokens; 310
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.1s  pass
+  Skill headers                0.2s  11 skills parsed, no consistency problems.
+  Exact rows by the count      1.7s  PASSING -- 13 printed exact rows each state
+                                     a count; 32 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.4s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 105 status lines in constants_new.py are
+                                     well formed; 53 rows carry none.
+  Row shape                    0.1s  All 161 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.2s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Reset completeness          18.8s  PASS -- all 310 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  1.9s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Worksheet checker            9.9s  74 of 110 routed, 8 clean
+  Worksheet checker tests     15.4s  All 135 checks passed
+  Worksheet key round trip     0.9s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         20.5s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner           8.5s  296 TIER-1 FINDINGS IN THE SCANNED TREE
+
+======================================================================
+  20 of 20 gating checkers passed -- 101.6s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          296 TIER-1 FINDINGS IN THE SCANNED TREE
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2118 file(s) examined, 6 written, 0 created, 0 removed, 6 rewritten identically
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      DATA_INVENTORY.md
+      PROJECT_INSTRUCTIONS.md
+      WORKSHEET_CHECK.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Move this script into documentation/, with these two files from
+     the decisions session: HANDOFF_decisions_20261008.md and
+     NOTE_for_split_session_L252_paragraph_20261008.md, and the
+     brief HANDOFF_decisions_brief_20261008.md if it is not there.
+  3. Commit and push.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
