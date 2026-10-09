@@ -353,7 +353,7 @@ If it passes, the split build goes to another fresh session, started from the br
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: OPEN: 10-8-26 1657: Opus: Ledger-session-records decisions**
+**Session: OPEN: 10-8-26 1624: Opus: Ledger-session-records decisions**
 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L412_2_decisions_20261008.py
 ok  LEDGER                   header stamp
@@ -553,7 +553,7 @@ Next is the typed facts, then the Horizons check build, then the Sun’s list.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: OPEN: 10-8-26 1748: Opus: Install probe and split build**
+**Session: DONE: 10-8-26 2209: Opus: Install probe and split build**
 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L418_3_split_build_20261008.py
 patch_L418_3 -- built on orrery b0b3df82
@@ -1355,7 +1355,44 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  2. Move this script into documentation/; commit and push.
+  2. Move this script into documentation/; commit and push. -- 1e309533118120df942a484aafa8c7c66902aaf3
   3. Start a fresh session for tests A3 to A6 of
      documentation/TESTING_PROTOCOL_provenance_skills_20261008.md.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+What it records:
+
+Your run, from your run record: the two .bak files you deleted, the maintenance run passing 20 of 20, and both pushes.
+This session could already see the installed skills: 2.27, 1.0 and 1.18, with their reference files. That’s tests A1 and A2. The protocol says a mid-session install can’t be seen. This one was, so it’s noted on L-351 (what each skill and the protocol owe at their next version) for the protocol’s next update.
+L-425 (citation location checks) opens with the measurements and the three options, waiting on your decision.
+I found a contradiction in the ledger skill. It says no patch edits below the run-record marker, and also that the close empties that zone. So this patch leaves your run-record zone alone, and the contradiction is noted on L-351 for the skill’s next version. -- the run record is documented only in this timestamped copy not in the original WHERE WE ARE
+
+After you run it: run the maintenance run, move the patch into documentation/, then commit and push.
+
+For the next fresh session, a prompt you can paste:
+
+Run tests A3 to A6 of documentation/TESTING_PROTOCOL_provenance_skills_20261008.md and report what you find.
+
+Optional: the two ZIPs in skills/ can go. The install is done, and they’ll be out of date the next time either skill changes. -- done
+
+Where this leaves us:
+
+The provenance split is built, pushed and installed; L-418 closes after the four tests.
+Two decisions wait for you, one at a time: L-425 (citation location checks), and L-424 (whether the checker itself prints two different words).
+
+**Fable review:**
+
+Nothing has to precede the testing session. Part A (tests A3 to A6) needs only a fresh session, and the installs are confirmed.
+
+But the “citation locator” test needs a different shape than the page suggests. The page asks you to decide L-425 now and test afterwards. I would do it the other way round:
+
+Today there is no locator check to test for robustness. Section B2 of the testing protocol is a reading of the code: it says the scanner checks that a citation is near a number, not where it points, and that nothing checks a dead link or a record file that is missing. That table is a claim, not a measurement.
+The honest test is a planted-fault run. On a throwaway copy, plant one of each failure the protocol names: a # Source: line removed near a number; a # Cross-checked: line naming a worksheet that was renamed away; a # Read: line naming a record file that is not there; a # Access: address changed to a dead one; and a # Read: locator pointing at the wrong table. Then run orrery_maintenance_run.py and record which of the five fires. The expectation from the table is two caught and three silent. If that is what happens, you decide L-425 on evidence; if something else happens, the table was wrong and we learn it before building on it.
+The fifth fault, a locator that points at the wrong place in a real paper, is the one no tool can catch. The only test of that is a person or a model opening the page. If you want it measured, bound it to the rows the Sun and Earth rooms serve and do it in a session with a browser, as its own small job after the planted-fault run.
+
+So the order I suggest: the fresh testing session runs A3 to A6 and the planted-fault run in one sitting, writes the results into L-425’s block, and then asks you which of the three checks to build. L-424 can wait for that same session’s findings, since the checker is in its hands anyway.
+
+Do you want the planted-fault run in the testing session, so L-425 is decided on evidence? If yes, I will write the session’s brief.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
