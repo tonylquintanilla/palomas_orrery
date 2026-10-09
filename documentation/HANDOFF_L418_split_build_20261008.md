@@ -111,4 +111,32 @@ for its swap log only and not changed.
 - None: this patch edits the page by section, and no line it edits
   carried a note.
 
+## After the run, 2026-10-08 -- patch_L418_4 (the close)
+
+Pushed at e5cc4bb21cdb69afe1393d394df704700f50f716 at
+https://github.com/tonylquintanilla/palomas_orrery.
+
+- Tony's run, from his run record
+  (`documentation/WHERE_WE_ARE_10-8-26_1406_run_record.md`): all 13
+  files written. The new check failed once, on two untracked
+  `SKILL.md.bak` files in the orrery-coding-conventions and
+  safe-file-editing folders on his machine. He deleted them, and the
+  maintenance run passed 20 of 20, Skill headers 12. Pushed at
+  ea2c0e16; skills installed; the Project's instructions replaced;
+  pushed at e5cc4bb2.
+- After the install, this session's mounted skills read
+  provenance-discipline 2.27, provenance-cross-check 1.0 and
+  ledger-and-session-records 1.18, with the three reference files.
+  Tests A1 and A2 pass. The protocol says a mid-session install cannot
+  be seen; this one was. Recorded on L-351.
+- Delivered: `documentation/TESTING_PROTOCOL_provenance_skills_20261008.md`.
+- Opened: L-425 (citation location checks), Tony to decide which to
+  build.
+- Two skill ZIPs were committed into skills/ (682c5395). Harmless to the
+  check; recommended for deletion, because they go stale.
+- Next session: tests A3 to A6. Then L-418 closes.
+
+Tony-actions now: (do) run patch_L418_4, the maintenance run, push;
+(decide) L-425; (decide) L-424; optional (do) delete the two ZIPs.
+
 Session record written October 2026 with Anthropic's Claude Opus 5.5.

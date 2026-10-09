@@ -1,45 +1,32 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 8, 2026, after the provenance split's build.
-- Written at orrery b0b3df82 and gallery ab66aba7, before your run of
-  patch_L418_3.
+Last updated: October 8, 2026, at the provenance split's close.
+- Written at orrery e5cc4bb2 and gallery ab66aba7, before your run of
+  patch_L418_4.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The provenance skill is split in two, so each part can be read
->   whole. A new skill, provenance-cross-check, holds the procedure
->   for checks by other models. Nothing in either was reworded.
-> - Three small fixes ride along: two from L-371 (the Sun room's
->   served numbers), one from L-390 (the conversion marker), and
->   your L-252 paragraph on the checker's four outcomes.
-> - Long skill files now open with a reading plan, and the check
->   fails when one is missing or wrong. Four long skills get theirs
->   at their next version.
-> - New item: L-424 (the checker's one word for two cases).
-> - L-216 (the swap retry) is closed. You are trying builds without
->   the OneDrive pause; the swap log shows any retry.
-> - L-252 (an incomplete verdict is not a confirmation) is closed. Its
->   approved paragraph rides the split.
-> - The website's checks are an ordered list: L-423 (the website's checks).
-> - Halley is checked too; both comets get NASA pages and no numbers.
-> - The split carries L-371 (the Sun room's served numbers) and L-390
->   (the conversion marker); L-414 (the scanner's window) waits.
+> - The provenance split ran, all 20 checks pass, and the three
+>   skills are installed. This session could already see them:
+>   2.27, 1.0 and 1.18, with their reference files.
+> - A testing protocol for the new skills is in documentation/.
+>   Four of its tests need a fresh session.
+> - Nothing checks where a citation points: not a missing access
+>   line, not a dead link. L-425 (citation location checks) has the
+>   measurements and three options.
 >
-> **Do next:** *the split session (running now) finishes first. Then,
-> as you confirmed: the typed facts (the inner Oort cloud, then the
+> **Do next:** *a fresh session runs the split's four tests
+> (A3 to A6 in the testing protocol). Then, as you confirmed: the typed facts (the inner Oort cloud, then the
 > check); the Horizons check build; the Sun's list from item 3, with
 > the scanner's window session before the Alfven surface's ranges.*
 >
 > **Needs you now:**
-> - *Run patch_L418_3, then orrery_maintenance_run.py, and push.*
-> - *Install three skills: provenance-discipline,
->   provenance-cross-check (new) and ledger-and-session-records.
->   Then replace the Project's instructions with
->   PROJECT_INSTRUCTIONS.md.*
-> - *Run patch_L412_2_decisions_20261008.py, then
->   orrery_maintenance_run.py, and push.*
+> - *Run patch_L418_4, then orrery_maintenance_run.py, and push.*
+> - *Decide L-425 (citation location checks): which of its three
+>   checks to build. Recommended: the first two together.*
+> - Optional: delete the two ZIPs in skills/; they go stale.
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -112,7 +99,8 @@ At the next design talk:
   edge moves from 20,000 au to the paper's 10,000.
 
 Decisions, one at a time:
-- None waiting. All were ruled on Oct 8.
+- L-424 (the checker's one word for two cases): whether the
+  checker itself prints two different words.
 
 Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows.
@@ -141,8 +129,9 @@ Not urgent, in your order:
 - The Horizons check design:
   `documentation/DESIGN_L395_horizons_check_20261007.md`
 - The provenance split: L-418 (splitting provenance-discipline),
-  built and waiting on your run; record
-  `documentation/HANDOFF_L418_split_build_20261008.md`
+  run and pushed; record
+  `documentation/HANDOFF_L418_split_build_20261008.md`; tests
+  `documentation/TESTING_PROTOCOL_provenance_skills_20261008.md`
 - The reasoning behind the order:
   `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`
 

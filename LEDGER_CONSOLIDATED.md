@@ -299,6 +299,10 @@ Module updated: October 8, 2026 with Anthropic's Claude Opus 5.5
 provenance-cross-check 1.0, ledger-and-session-records 1.18,
 protocol v3.86; L-390 closed; L-371 and L-351 updated; L-424 opened,
 the checker's one word for two cases), built on b0b3df82.
+Module updated: October 8, 2026 with Anthropic's Claude Opus 5.5
+(L-418: the split run and pushed, the installed copies read; L-425
+opened, citation location checks; L-351 two owed notes), built on
+e5cc4bb2.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -516,7 +520,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*234 live items; 218 need attention (`!`); 167 RICE-scored; 185 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*235 live items; 219 need attention (`!`); 167 RICE-scored; 185 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -665,6 +669,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-421 | Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words) | OPEN | -- | 2026-10-08 |
 | ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-08 |
 | ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-08 |
+| ! | L-425 | A citation's location record is checked only in part (provenance tooling) | OPEN | -- | 2026-10-08 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1368,15 +1373,66 @@ skills/interactive-exhibit/SKILL.md.
   L-252 paragraph both fall inside moved text, so instead the final
   check proves each section equals its original with exactly the listed
   edits applied.
-**Gap:** Tony runs the patch and orrery_maintenance_run.py, pushes,
-installs three skills (provenance-discipline, provenance-cross-check,
-ledger-and-session-records) and replaces the Project's instructions with
-PROJECT_INSTRUCTIONS.md v3.86. The next session confirms its loaded
-copies read 2.27, 1.0 and 1.18, finds both skills' reference files,
-and on its first figures task says whether it opened the figures
-reference file first; then this item closes.
+- **2026-10-08, run and pushed** (Tony's run record,
+  `documentation/WHERE_WE_ARE_10-8-26_1406_run_record.md`). The patch
+  wrote all 13 files. Its last check failed on its first run, on two
+  untracked `SKILL.md.bak` files sitting in the orrery-coding-conventions
+  and safe-file-editing folders on Tony's machine: a stray file in a
+  skill folder would ride into an install. Tony deleted them; the
+  maintenance run then passed 20 of 20, Skill headers 12 skills. Pushed
+  at ea2c0e16. Tony installed the three skills and replaced the
+  Project's instructions ("done"); pushed at e5cc4bb2.
+- **2026-10-08, the installed copies read in the same session.** After
+  the install, this session's mounted skills showed
+  provenance-discipline 2.27, provenance-cross-check 1.0 and
+  ledger-and-session-records 1.18, with all three reference files: tests
+  A1 and A2 of the testing protocol. The protocol's Stale Skill gate says
+  a mid-session install cannot be seen; this one could. Recorded on
+  L-351 for the protocol's next bump; the gate's rule stands until then.
+- **2026-10-08, the testing protocol:**
+  `documentation/TESTING_PROTOCOL_provenance_skills_20261008.md`. Part
+  A tests that the skills load and fire; Part B measures what checks a
+  citation's location record today (L-425).
+- **Two skill ZIPs were committed into `skills/`** (682c5395),
+  `provenance-cross-check.zip` and `provenance-discipline.zip`. They are
+  not skill folders, so the check passes, but each goes stale the next
+  time its skill changes. Recommended: delete them; the install is done.
+**Gap:** the next fresh session runs tests A3 to A6 of the testing
+protocol and says what it found; then this item closes.
 **Ref:** `skills_index.py`; `documentation/SKILL_HISTORIES.md`;
 `documentation/HANDOFF_L413_earth_orrery_patch_20261005.md`; L-417.
+
+#### [L-425] A citation's location record is checked only in part (provenance tooling)
+<!-- L:425 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+- **Measured 2026-10-08** at orrery e5cc4bb2, for Tony's question: "how
+  do we ensure that a citation's location record is correct and not
+  broken or missing. is this check included in the scanner?" The answer
+  is no: the scanner checks that a citation sits near a number, not
+  where it points. The full table is section B of
+  `documentation/TESTING_PROTOCOL_provenance_skills_20261008.md`.
+- What is checked: a missing Source line (scanner, Tier-1, gates the
+  push); a V_SOURCED row with no Source line (test_status_lines.py,
+  gates); a worksheet named in a Cross-checked line and missing
+  (worksheet_checker.py layer L0, report-only).
+- What is not: a missing Access line (20 of 61 sourced or cross-checked
+  rows in constants_new.py have none, among them KM_PER_AU and
+  SUN_RADIUS_KM); a missing Read line (4 of 61); a record file named on
+  a Read line and missing (17 named, all present today); a web address
+  that no longer opens (40 distinct addresses, never tested); and
+  whether the page says the number, which no tool can check.
+- **Three levels proposed, cheapest first:** (1) every file a citation
+  names exists, failing the run; (2) every sourced row carries an Access
+  line with an address and a date, reported by name first and failing
+  only after Tony rules which rows are excused; (3) a link check that
+  visits each address, run on Tony's machine, report-only. (1) and (2)
+  would be rules in test_status_lines.py, which the maintenance run
+  already has.
+  **Tony-action (decide):** which to build. Recommended: (1) and (2)
+  together in one session; (3) later, as its own small tool.
+**Gap:** Tony's decision above.
+**Ref:** `documentation/TESTING_PROTOCOL_provenance_skills_20261008.md`;
+`provenance_scanner.py`; `test_status_lines.py`; `worksheet_checker.py`;
+L-418.
 
 #### [L-424] The checker reports one word for two different cases (worksheet checker)
 <!-- L:424 status:OPEN upd:2026-10-08 section:A flag: rice: -->
@@ -3183,6 +3239,12 @@ website's checks). The card exports and the two comments go with the next patch 
 - **The protocol, next bump touching Stale Skill = Stop:** a running
   session's mounted skills stay at the version it started with, while
   the project instructions in its context refresh.
+  **Counter-case, 2026-10-08 (L-418):** skills installed during the
+  split session appeared in that same session's mounted skills, new
+  versions and reference files both. So "cannot be verified from
+  inside the session" is not always true; the next protocol bump
+  should say it MAY appear, and that a session which sees the new
+  copy may read it, while the next-session confirmation stays.
 - **provenance-discipline, scanner mechanics, if it recurs (2026-09-28):**
   comparing the scanner's findings as a SET of names cannot see a second
   finding that looks like one already there. D8's result stood because
@@ -3214,7 +3276,9 @@ website's checks). The card exports and the two comments go with the next patch 
     items (L-412) and Tony's documentation-folder practice (above)
     landed at 1.17 on 2026-10-07 (L-422), with the Where We Are rules
     of that day. 1.18 (L-418, 2026-10-08) carried the read plan and
-    reference-file conventions; nothing is owed.
+    reference-file conventions. Owed (found 2026-10-08): who empties
+    the run-record zone. The skill says both "no patch edits below
+    the marker" and "once read, the close empties the live zone".
   - gallery-cache-builder, interactive-exhibit,
     orrery-coding-conventions, safe-file-editing: a read plan at the
     next version, and the skill comes off PLAN_NOT_YET in
