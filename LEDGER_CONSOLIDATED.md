@@ -294,6 +294,11 @@ Module updated: October 8, 2026 with Anthropic's Claude Opus 5.5
 L-423 opened, the website's checks; rulings on L-395, L-418 and
 L-412's question (b); scores struck on list members), built on
 b0b3df82.
+Module updated: October 8, 2026 with Anthropic's Claude Opus 5.5
+(L-418: the provenance-discipline split built -- 2.27,
+provenance-cross-check 1.0, ledger-and-session-records 1.18,
+protocol v3.86; L-390 closed; L-371 and L-351 updated; L-424 opened,
+the checker's one word for two cases), built on b0b3df82.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -511,7 +516,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*234 live items; 218 need attention (`!`); 167 RICE-scored; 184 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*234 live items; 218 need attention (`!`); 167 RICE-scored; 185 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -625,7 +630,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-367 | No checker opens a new room (checks, gallery) | OPEN | -- | 2026-10-08 |
 | ! | L-368 | Other bodies' typed poles disagree with their cited table or cite a withdrawn report (orrery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-370 | Jupiter and Saturn numbers typed only in objects_config.json (gallery, store) | OPEN | -- | 2026-09-28 |
-| ! | L-371 | The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
+| ! | L-371 | The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice) | OPEN | -- | 2026-10-08 |
 | ! | L-372 | Two drawing settings live in constants_new.py (orrery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-373 | A unit conversion by a bare number inside a constants_new.py expression (store) | OPEN | -- | 2026-09-28 |
 | ! | L-374 | Showing Earth's precession over time (orrery, idea) | OPEN | -- | 2026-09-28 |
@@ -641,7 +646,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-386 | The Sun's conversion rows, not yet exported (store, the Sun's slice) | OPEN | -- | 2026-10-04 |
 | ! | L-387 | The orrery's hovers print the conversion names by their own formats, not by the computed count (orrery) | OPEN | -- | 2026-09-28 |
 | ! | L-388 | The gallery's export pull can print success when it could not fetch, and the mirror then writes from the old export (gallery, tooling) | OPEN | -- | 2026-10-08 |
-| ! | L-390 | provenance-discipline does not yet name the conversion marker or say the widening is built (skills) | OPEN | -- | 2026-09-28 |
 | ! | L-391 | Group clouds: the Trojans' sources, and the shapes of the three other groups (gallery, exhibits) | OPEN | -- | 2026-09-29 |
 | ! | L-393 | Encounter data: dates, spacecraft records centred on their targets, and how far the cache reaches in time (gallery, cache) | OPEN | -- | 2026-09-29 |
 | ! | L-394 | A card cannot say which body it belongs to (gallery, Studio) | OPEN | -- | 2026-09-29 |
@@ -660,6 +664,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-418 | Long skills open with their contents, and keep three version entries (skills) | OPEN | -- | 2026-10-08 |
 | ! | L-421 | Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words) | OPEN | -- | 2026-10-08 |
 | ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-08 |
+| ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-08 |
 
 ### B. Pending Action (Tony-side)
 
@@ -976,6 +981,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-383 | shell_configs.py's magnetosphere tooltip says nothing of the tail and puts the belts at the flux peak (orrery, words) | DONE | -- | 2026-10-04 |
 |  | L-384 | The scaling rule stops short of a single measured value scaled by an exact row (skills, store) | DONE | -- | 2026-09-28 |
 |  | L-389 | Earth's atmosphere shells are measured from the equatorial radius, and the crust now sits at the mean radius (store, Tony's eye) | DONE | -- | 2026-10-05 |
+|  | L-390 | provenance-discipline does not yet name the conversion marker or say the widening is built (skills) | DONE | -- | 2026-10-08 |
 |  | L-392 | The Solar System room's drawer list is page code, not served data (gallery, exhibits) | DONE | -- | 2026-09-30 |
 |  | L-397 | "Cache in step" compared only bodies with shells; it now compares every object (gallery, checks) | DONE | -- | 2026-09-30 |
 |  | L-398 | Distance figures: the source's own accuracy, not only our drift from Horizons (gallery, provenance) | DONE | -- | 2026-10-01 |
@@ -1330,10 +1336,67 @@ skills/interactive-exhibit/SKILL.md.
 - **Still open:** the build, in a fresh session after the trial
   passes. Versions to cut: provenance-discipline 2.27,
   provenance-cross-check 1.0, ledger-and-session-records 1.17.
-**Gap:** the split above, when a design talk reaches it. (Was: also
-the next session's version check, done 2026-10-06.)
+- **2026-10-08, the install trial passed.** install-probe arrived with
+  its `references/probe.md`, md5 dc4f6011467ccc53f5b84f8a776b352b, the
+  recorded sentence, and the same "plugin" marking as Tony's eleven
+  skills, so the result speaks for them. Tony then deleted it.
+- **2026-10-08, the read limit measured.** This session's Read tool
+  stops at 25,000 tokens and says so: lines 1 to 1,106 of 2.26, 55,748
+  characters. The design's viewer showed 16,000 characters from the
+  start and the end. A read plan's parts stay under both: 16,000
+  characters and 2,000 lines.
+- **2026-10-08, the split built** at orrery b0b3df82:
+  `patch_L418_3_split_build_20261008.py`. provenance-discipline 2.27,
+  provenance-cross-check 1.0, ledger-and-session-records 1.18, protocol
+  v3.86. Fifteen sections moved and each checked whole; 23 listed edits,
+  each printed before and after; a final check that every section is
+  its original plus exactly those edits. skills_index.py writes the
+  read plans and checks them and the reference files; each new check
+  was shown failing on a throwaway copy before it was trusted.
+- **Tony's rulings of 2026-10-08, riding the build.** L-371 (the Sun
+  room's served numbers) and L-390 (the conversion marker) ride 2.27
+  ("As recommended? -- yes"). The L-252 paragraph, the checker's four
+  outcomes, goes beside the send-back rule in provenance-cross-check
+  ("Approved"), with its UNCHECKED_MOVE bullet split into its two cases
+  ("approved as recommended"). The four other long skills --
+  gallery-cache-builder, interactive-exhibit, orrery-coding-conventions,
+  safe-file-editing -- get their read plans at their next version, and
+  skills_index.py names them on PLAN_NOT_YET every run ("confirmed as
+  recommended").
+- **One departure from the brief, recorded.** The brief said a phase-2
+  edit inside a moved section is refused. L-390's sentences and the
+  L-252 paragraph both fall inside moved text, so instead the final
+  check proves each section equals its original with exactly the listed
+  edits applied.
+**Gap:** Tony runs the patch and orrery_maintenance_run.py, pushes,
+installs three skills (provenance-discipline, provenance-cross-check,
+ledger-and-session-records) and replaces the Project's instructions with
+PROJECT_INSTRUCTIONS.md v3.86. The next session confirms its loaded
+copies read 2.27, 1.0 and 1.18, finds both skills' reference files,
+and on its first figures task says whether it opened the figures
+reference file first; then this item closes.
 **Ref:** `skills_index.py`; `documentation/SKILL_HISTORIES.md`;
 `documentation/HANDOFF_L413_earth_orrery_patch_20261005.md`; L-417.
+
+#### [L-424] The checker reports one word for two different cases (worksheet checker)
+<!-- L:424 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+- **Found 2026-10-08,** building L-418, while checking the L-252
+  paragraph against `worksheet_checker.py` at b0b3df82. UNCHECKED_MOVE
+  is reported for two different cases: the worksheet has no value
+  verdict (it checked only the citation, or the value cell is blank,
+  holds a word outside the vocabulary, or holds DERIVED), and the value
+  verdict is UNVERIFIED, which the checker reads as ABSENT. Tony: "they
+  are not the same."
+- **Settled in the skill:** provenance-cross-check 1.0 defines the two
+  cases separately (Tony, 2026-10-08, "approved as recommended").
+- **Not built:** whether the checker itself prints two different words.
+  That is a change to `worksheet_checker.py` and its tests, for a
+  session of its own.
+  **Tony-action (decide):** whether the checker splits the word.
+**Gap:** Tony's decision above; if yes, a session builds it with a test
+for each case and updates the skill's bullet to match.
+**Ref:** `worksheet_checker.py` (the L2b block); `test_worksheet_checker.py`;
+L-252; L-418.
 
 #### [L-413] Earth's list: the old Earth items, in the order Tony confirmed (Earth room)
 <!-- L:413 status:OPEN upd:2026-10-06 section:A flag: rice: -->
@@ -2010,29 +2073,6 @@ in the other descriptions are L-403.
 **Gap:** The Trojans round, then one round per group.
 **Ref:** gallery `data/objects_config.json` (the Oort cloud's shapes); skills/provenance-discipline/SKILL.md; skills/interactive-exhibit/SKILL.md; L-363.
 
-#### [L-390] provenance-discipline does not yet name the conversion marker or say the widening is built (skills)
-<!-- L:390 status:OPEN upd:2026-09-28 section:A flag: rice: -->
-- **Found 2026-09-28 building patch D20.** D20 made a new comment key in
-  `constants_new.py`, `# Conversion: of <ROW>`, and a rule for it: a
-  conversion carries no `# Figures:`, `# Status:`, `# Derived:`,
-  `# Source:`, `# Read:` or `# Cross-checked:` line, and is one row
-  scaled only by rows that define units. The rule lives in
-  `constants_rows.py` (`conversion_problem()`) and its docstring, and in
-  `test_derived_figures.py`. provenance-discipline 2.22 says a
-  conversion name "states no precision of its own" but names no marker,
-  and its Rule 8 still says the widening "is built with the patch that
-  retires the store's conversion rows (L-345, D20)", in the future.
-- It is method, so it belongs in the skill (Method Belongs to the
-  Skill). It was not bumped at D20 because the handoff scoped that
-  patch to two bumps, and adding a third would have expanded scope
-  without Tony's word.
-**Gap:** at provenance-discipline's next bump: Rule 1 gains the
-`# Conversion:` form beside the seven `# Figures:` forms, and Rule 8
-says the widening and the conversion check are built (orrery patch D20)
-and names `UNMARKED CONVERSION` and `CONVERSION WRONG`.
-**Ref:** `constants_rows.py`; `test_derived_figures.py`;
-`skills/provenance-discipline/SKILL.md` Rules 1, 3 and 8; L-345.
-
 #### [L-388] The gallery's export pull can print success when it could not fetch, and the mirror then writes from the old export (gallery, tooling)
 <!-- L:388 status:OPEN upd:2026-10-08 section:A flag: rice: -->
 - **2026-10-08:** item 2 of L-423 (the website's checks), one
@@ -2292,7 +2332,7 @@ overlays retire.)
 **Ref:** `constants_new.py`; `palomas_orrery.py`; `palomas_orrery_helpers.py`.
 
 #### [L-371] The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice)
-<!-- L:371 status:OPEN upd:2026-10-04 section:A flag: rice: -->
+<!-- L:371 status:OPEN upd:2026-10-08 section:A flag: rice: -->
 - **Found 2026-09-22 and 2026-09-28.** In `data/objects_config.json`
   the Sun carries 43 numbers with no link to a store row, not yet sorted
   into measurements and drawing choices (manifest section 2.6). [per
@@ -2388,6 +2428,10 @@ overlays retire.)
   scanner's CHANGE, not its total (this machine and Tony's differ by
   one), and expect the patch script itself to be scanned while it sits
   in the root folder.
+- **2026-10-08, the two skill sentences landed** in
+  provenance-discipline 2.27 (L-418): the range rule's worked pair is
+  the helmet cusp's two rows, and a patch predicts the scanner's change,
+  not its total.
 **Gap:** (1) PRINTS or DRAWN entries for the 11 not-followed pointers.
 (2) The fifteen eyeballed shape numbers, one drawing at a time. The
 rest of the Sun's slice is ordered on L-412.
@@ -3160,17 +3204,21 @@ website's checks). The card exports and the two comments go with the next patch 
     Cache Siblings description, and the orrery's
     `documentation/L342_install_test_run_sequence.md`; for a pass
     that touches them anyway.
-  - provenance-discipline: the range rule's example names a removed
-    range row; a patch's "what the run should say" predicts the
-    scanner's CHANGE, not its total (both L-371); the conversion marker
-    and the widening (L-390); the scanner's window and declared rows
-    (L-414, if the fix is method there).
+  - provenance-discipline: the scanner's window and declared rows
+    (L-414, if the fix is method there). The range rule's example and
+    the scanner's change (both L-371) and the conversion marker (L-390)
+    landed at 2.27 on 2026-10-08 (L-418).
   - gallery-pipeline: the wide card's four fields and the picture's
     tool (L-363).
   - ledger-and-session-records: nothing owed. The RICE rule for list
     items (L-412) and Tony's documentation-folder practice (above)
     landed at 1.17 on 2026-10-07 (L-422), with the Where We Are rules
-    of that day. L-418's split cuts this skill at 1.18.
+    of that day. 1.18 (L-418, 2026-10-08) carried the read plan and
+    reference-file conventions; nothing is owed.
+  - gallery-cache-builder, interactive-exhibit,
+    orrery-coding-conventions, safe-file-editing: a read plan at the
+    next version, and the skill comes off PLAN_NOT_YET in
+    skills_index.py in the same patch (L-418; Tony, 2026-10-08).
   - interactive-exhibit and the protocol: as above.
 **Gap:** Each lands with its store's next bump.
 **Ref:** skills/interactive-exhibit/SKILL.md; skills/ledger-and-session-records/SKILL.md; PROJECT_INSTRUCTIONS.md; L-216, L-363, L-371, L-390, L-414.
@@ -20587,6 +20635,33 @@ split; Tony: "Concur with B." The wording: "Approved". Re-homed, word
 for word, to L-418. The RICE question this block carried is moot.
 **Ref:** L-192 (the three outcomes this extends); L-247 (the founding
 case); A Check That Cannot Fail Is Not Passing [CRITICAL].
+
+#### [L-390] provenance-discipline does not yet name the conversion marker or say the widening is built (skills)
+<!-- L:390 status:DONE upd:2026-10-08 section:C flag: rice: -->
+- **Found 2026-09-28 building patch D20.** D20 made a new comment key in
+  `constants_new.py`, `# Conversion: of <ROW>`, and a rule for it: a
+  conversion carries no `# Figures:`, `# Status:`, `# Derived:`,
+  `# Source:`, `# Read:` or `# Cross-checked:` line, and is one row
+  scaled only by rows that define units. The rule lives in
+  `constants_rows.py` (`conversion_problem()`) and its docstring, and in
+  `test_derived_figures.py`. provenance-discipline 2.22 says a
+  conversion name "states no precision of its own" but names no marker,
+  and its Rule 8 still says the widening "is built with the patch that
+  retires the store's conversion rows (L-345, D20)", in the future.
+- It is method, so it belongs in the skill (Method Belongs to the
+  Skill). It was not bumped at D20 because the handoff scoped that
+  patch to two bumps, and adding a third would have expanded scope
+  without Tony's word.
+- **Landed 2026-10-08** in provenance-discipline 2.27 (L-418),
+  `patch_L418_3_split_build_20261008.py`. Rule 1 shows the
+  `# Conversion:` form and says what a conversion carries and what it
+  does not; Rule 3 says a conversion is marked; Rule 8 says the
+  widening and the conversion check were built with D20 and names
+  `UNMARKED CONVERSION` and `CONVERSION WRONG`. The three rules now live
+  in the skill's `references/figures.md`. Nothing is left open.
+**Gap:** none.
+**Ref:** `constants_rows.py`; `test_derived_figures.py`;
+`skills/provenance-discipline/SKILL.md` Rules 1, 3 and 8; L-345.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

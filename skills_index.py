@@ -97,6 +97,23 @@ start and end and leaves out its middle, so a long skill opens with a
 list of its headings, and this compares the list with the headings item
 by item, skipping fenced code. Six skills gained one the same day.)
 
+Module updated: October 8, 2026 with Anthropic's Claude Opus 5.5
+(L-418, the provenance-discipline split: two new checks and the read
+plan. A skill folder may now hold reference files in references/,
+opened only when the skill says to. Every file a SKILL.md names under
+references/ must exist, and every file in the folder must be named by
+it; nothing else may sit in a skill folder. A long file -- a SKILL.md or
+a reference file over one read -- carries a READ PLAN as its first line
+after the title, "Read this file in N parts: lines a-b, c-d, ...",
+which this tool writes: run it after putting the seed line "Read this
+file in parts." where the plan goes. --check fails on a part over one
+read, on a line no part covers, on a seed not yet filled, and on a long
+file with no plan unless its skill is on the named PLAN_NOT_YET list.
+In write mode the tool rewrites every plan it finds before reading the
+skills, and names each one it changed. Annotation examples are now also
+read from reference files. A SKILL.md must not write another skill's
+references/ path, because the check would read it as its own.)
+
 Role: devtool
 Domain: dev_tools
 """
@@ -123,6 +140,7 @@ SKILL_ORDER = [
     'agentic-pre-test',
     'horizons-orbital-mechanics',
     'provenance-discipline',
+    'provenance-cross-check',
     'earth-system-pipeline',
     'gallery-pipeline',
     'ledger-and-session-records',
@@ -150,6 +168,38 @@ NAME_RESERVED_WORDS = ('anthropic', 'claude')
 DESCRIPTION_MAX_CHARS = 1024
 XML_TAG_RE = re.compile(r'<[A-Za-z/][^>]*>')  # neither field may hold an XML tag
 BODY_GUIDELINE_LINES = 500
+
+# One read of a file, measured (L-418). Two readers have been measured,
+# and a read plan's parts must fit the smaller of each:
+#   2026-10-06, the design session's file viewer: 16,000 characters,
+#     taken from the start and the end, the middle cut silently.
+#   2026-10-08, this build session's Read tool: the first 25,000 tokens
+#     and no more, with a notice saying so. On provenance-discipline
+#     2.26 that was lines 1 to 1,106, 55,748 characters. Its documented
+#     line limit is 2,000 lines.
+# So a part is at most 16,000 characters and at most 2,000 lines.
+# Characters are counted with each line's newline.
+READ_PART_MAX_CHARS = 16000
+READ_PART_MAX_LINES = 2000
+PLAN_SEED = 'Read this file in parts.'
+PLAN_RE = re.compile(r'^Read this file in (\d+) parts?: lines (.+)\.$')
+PLAN_ANY_RE = re.compile(r'^Read this file in ')
+REFERENCES_DIRNAME = 'references'
+REFERENCE_NAME_RE = re.compile(r'references/([A-Za-z0-9_.-]+\.md)')
+
+# Long skills that have no read plan yet and get one at their next
+# version, so that adding the line costs no extra reinstall now. Each is
+# named in the --check output every run, so the list cannot be forgotten.
+# A skill not on this list fails --check when it is long and has no plan.
+PLAN_NOT_YET = [
+    # Tony, 2026-10-08: these get their plans at their next version.
+    # Each was under one read of the reader measured that day (about
+    # 55,000 characters), so none is cut today.
+    'gallery-cache-builder',
+    'interactive-exhibit',
+    'orrery-coding-conventions',
+    'safe-file-editing',
+]
 
 
 def parse_frontmatter(lines):
@@ -370,6 +420,203 @@ def check_contents(lines, body_start, label, body_lines, problems):
                     f"the file {len(actual)} headings")
 
 
+def file_lines(text):
+    """A file's lines as a reader numbers them: a final newline does not
+    make an empty last line."""
+    lines = text.split('\n')
+    if text.endswith('\n'):
+        lines = lines[:-1]
+    return lines
+
+
+def size_of(lines):
+    """Characters, each line counted with its newline."""
+    return sum(len(line) + 1 for line in lines)
+
+
+def is_long(lines):
+    return (size_of(lines) > READ_PART_MAX_CHARS
+            or len(lines) > READ_PART_MAX_LINES)
+
+
+def plan_line_index(lines):
+    """Index of the read plan line, or its seed, or None. Only the first
+    twenty lines are looked at: a plan is only any use at the top, inside
+    the part every read shows."""
+    for i, line in enumerate(lines[:20]):
+        if PLAN_ANY_RE.match(line):
+            return i
+    return None
+
+
+def compute_parts(lines):
+    """Split a file into parts that each fit one read (L-418).
+
+    Each part is at most READ_PART_MAX_CHARS characters and
+    READ_PART_MAX_LINES lines. It ends just before a heading where one
+    falls inside it, else just before a blank line, else where the limit
+    falls; never inside fenced code unless no other place exists.
+    Returns [(first, last)], 1-based and inclusive.
+    """
+    headings, blanks, fence = set(), set(), False
+    for i, line in enumerate(lines):
+        if line.lstrip().startswith('```'):
+            fence = not fence
+            continue
+        if fence:
+            continue
+        if re.match(r'^#{1,4} ', line):
+            headings.add(i)
+        elif not line.strip():
+            blanks.add(i)
+    parts, start, n = [], 0, len(lines)
+    while start < n:
+        chars, end = 0, start
+        while (end < n and end - start < READ_PART_MAX_LINES
+               and chars + len(lines[end]) + 1 <= READ_PART_MAX_CHARS):
+            chars += len(lines[end]) + 1
+            end += 1
+        if end >= n:
+            parts.append((start + 1, n))
+            break
+        if end == start:          # one line longer than a read; the check names it
+            end = start + 1
+        # A heading is the best place to end a part, but not at the cost
+        # of a part less than half full: then a blank line is used.
+        half = start + (end - start) // 2
+        cut = max((c for c in headings if half < c <= end), default=None)
+        if cut is None:
+            cut = max((c for c in blanks if start < c <= end), default=None)
+        if cut is None:
+            cut = end
+        parts.append((start + 1, cut))
+        start = cut
+    return parts
+
+
+def plan_text(parts):
+    spans = ', '.join('%d-%d' % p for p in parts)
+    word = 'part' if len(parts) == 1 else 'parts'
+    return f"Read this file in {len(parts)} {word}: lines {spans}."
+
+
+def write_read_plan(path):
+    """Rewrite the read plan in a file that has one (or its seed). The
+    plan is one line, so writing it moves no other line; it is computed
+    again until it no longer changes, since its own length counts in the
+    first part. Returns the plan written, or None when nothing changed
+    or the file has no plan line."""
+    text = path.read_text(encoding='utf-8')
+    lines = file_lines(text)
+    i = plan_line_index(lines)
+    if i is None:
+        return None
+    for _ in range(5):
+        new = plan_text(compute_parts(lines))
+        if lines[i] == new:
+            break
+        lines[i] = new
+    out = '\n'.join(lines) + ('\n' if text.endswith('\n') else '')
+    if out == text:
+        return None
+    with open(path, 'w', encoding='utf-8', newline='') as f:
+        f.write(out)
+    return lines[i]
+
+
+def read_plan_problems(lines, label, required):
+    """Check one file's read plan (L-418). Returns ([problems], summary).
+
+    A plan must name parts that start at line 1, follow on with no gap
+    and no overlap, end at the file's last line, and each fit one read.
+    A seed not yet filled fails. A long file with no plan fails when
+    `required`. summary is the text --check prints for a file that passes,
+    so a pass carries what was compared.
+    """
+    problems = []
+    i = plan_line_index(lines)
+    if i is None:
+        if is_long(lines) and required:
+            problems.append(
+                f"{label}: {size_of(lines):,} characters in {len(lines)} lines "
+                f"and no read plan; a file longer than one read "
+                f"({READ_PART_MAX_CHARS:,} characters or "
+                f"{READ_PART_MAX_LINES:,} lines) opens with one (L-418)")
+        return problems, None
+    line = lines[i]
+    if line == PLAN_SEED:
+        return [f"{label}: the read plan is still the seed; run "
+                f"skills_index.py to write it"], None
+    m = PLAN_RE.match(line)
+    if not m:
+        return [f"{label}: read plan line does not parse: {line!r}"], None
+    spans = []
+    for item in m.group(2).split(','):
+        sm = re.fullmatch(r'\s*(\d+)-(\d+)\s*', item)
+        if not sm:
+            return [f"{label}: read plan part {item.strip()!r} is not "
+                    f"'first-last'"], None
+        spans.append((int(sm.group(1)), int(sm.group(2))))
+    if int(m.group(1)) != len(spans):
+        problems.append(f"{label}: read plan says {m.group(1)} parts and "
+                        f"lists {len(spans)}")
+    expected, n = 1, len(lines)
+    for k, (a, b) in enumerate(spans, 1):
+        if a > expected:
+            problems.append(f"{label}: lines {expected}-{a - 1} are in no "
+                            f"part of the read plan")
+        elif a < expected:
+            problems.append(f"{label}: read plan part {k} starts at line {a}, "
+                            f"inside the part before it")
+        if b < a:
+            problems.append(f"{label}: read plan part {k} ends before it "
+                            f"starts ({a}-{b})")
+        if b > n:
+            problems.append(f"{label}: read plan part {k} ends at line {b}; "
+                            f"the file has {n}")
+        chunk = lines[a - 1:min(b, n)]
+        if size_of(chunk) > READ_PART_MAX_CHARS or len(chunk) > READ_PART_MAX_LINES:
+            problems.append(f"{label}: read plan part {k} (lines {a}-{b}) is "
+                            f"{size_of(chunk):,} characters in {len(chunk)} "
+                            f"lines; one read is {READ_PART_MAX_CHARS:,} "
+                            f"characters and {READ_PART_MAX_LINES:,} lines")
+        expected = max(expected, b + 1)
+    if expected <= n:
+        problems.append(f"{label}: lines {expected}-{n} are in no part of "
+                        f"the read plan")
+    return problems, f"{label} {len(spans)} part{'' if len(spans) == 1 else 's'}"
+
+
+def check_references(skill_dir, text, problems):
+    """Every reference file named and present, and nothing else in the
+    folder (L-418). Today a pointer to a missing file would pass silently,
+    because only SKILL.md was read. Returns the reference files present."""
+    label = skill_dir.name
+    named = set(REFERENCE_NAME_RE.findall(text))
+    present = []
+    for p in sorted(skill_dir.iterdir()):
+        if p.name == 'SKILL.md':
+            continue
+        if p.is_dir() and p.name == REFERENCES_DIRNAME:
+            for q in sorted(p.iterdir()):
+                if q.is_file() and q.suffix == '.md':
+                    present.append(q)
+                else:
+                    problems.append(f"{label}: {REFERENCES_DIRNAME}/{q.name} "
+                                    f"is not a .md file")
+            continue
+        problems.append(f"{label}: {p.name} sits in the skill folder; only "
+                        f"SKILL.md and {REFERENCES_DIRNAME}/ may")
+    names = {q.name for q in present}
+    for n in sorted(named - names):
+        problems.append(f"{label}: SKILL.md names {REFERENCES_DIRNAME}/{n}, "
+                        f"which is not in the folder")
+    for n in sorted(names - named):
+        problems.append(f"{label}: {REFERENCES_DIRNAME}/{n} is in the folder "
+                        f"and SKILL.md never names it")
+    return present
+
+
 def check_install_limits(name, desc, label, body_lines, problems, warnings):
     """Anthropic's documented header limits (L-417), checked here so that a
     skill which breaks one fails the maintenance run before it is pushed or
@@ -432,6 +679,30 @@ def parse_skill(skill_dir):
                          skill_dir.name, body_lines, problems, warnings)
     check_contents(lines, body_start, skill_dir.name, body_lines, problems)
 
+    # L-418: reference files, and a read plan on every long file.
+    plans = []
+    on_list = skill_dir.name in PLAN_NOT_YET
+    probs, summary = read_plan_problems(file_lines(text),
+                                        f"{skill_dir.name}/SKILL.md",
+                                        required=not on_list)
+    problems.extend(probs)
+    if summary:
+        plans.append(summary)
+        if on_list:
+            problems.append(f"{skill_dir.name}: has a read plan and is still "
+                            f"on PLAN_NOT_YET; take it off the list")
+    elif on_list and is_long(file_lines(text)):
+        warnings.append(f"{skill_dir.name}: long and no read plan yet; on "
+                        f"PLAN_NOT_YET, so it gets one at its next version")
+    for ref in check_references(skill_dir, text, problems):
+        ref_lines = file_lines(ref.read_text(encoding='utf-8'))
+        probs, summary = read_plan_problems(
+            ref_lines, f"{skill_dir.name}/{REFERENCES_DIRNAME}/{ref.name}",
+            required=True)
+        problems.extend(probs)
+        if summary:
+            plans.append(summary)
+
     version = None
     for line in lines[body_start:]:
         m = VERSION_RE.match(line)
@@ -460,7 +731,7 @@ def parse_skill(skill_dir):
                         f"mis-align")
 
     return ({'name': name, 'version': version, 'fires_when': fires,
-             'header_how': header_how}, problems, warnings)
+             'header_how': header_how, 'plans': plans}, problems, warnings)
 
 
 def check(records, problems):
@@ -504,40 +775,49 @@ def check_annotation_examples(skills_dir, problems):
         return problems
 
     for skill_dir in sorted(p for p in skills_dir.iterdir() if p.is_dir()):
-        path = skill_dir / 'SKILL.md'
-        if not path.is_file():
-            continue
-        text = path.read_text(encoding='utf-8', errors='replace')
-        for line in text.splitlines():
-            stripped = line.strip()
-            if not stripped.startswith('# Cross-checked:') or '<' in stripped:
+        # L-418: reference files are read too. A rule that moved out of
+        # SKILL.md must not take its examples out of the check with it.
+        paths = [skill_dir / 'SKILL.md']
+        ref_dir = skill_dir / REFERENCES_DIRNAME
+        if ref_dir.is_dir():
+            paths.extend(sorted(ref_dir.glob('*.md')))
+        for path in paths:
+            if not path.is_file():
                 continue
-            records, issues = parse_cross_checks(stripped)
-            if len(records) != 1:
-                problems.append(
-                    f"{skill_dir.name}: annotation example does not parse "
-                    f"({issues or 'no record'}): {stripped}")
-                continue
-            identity = records[0][0]
-            runs = ''.join(c if c.isdigit() else ' ' for c in identity).split()
-            if any(len(run) >= 4 for run in runs):
-                problems.append(
-                    f"{skill_dir.name}: annotation example's checker carries "
-                    f"a year, so the date was parsed from the source: "
-                    f"{stripped}")
+            label = skill_dir.name
+            if path.name != 'SKILL.md':
+                label += f"/{REFERENCES_DIRNAME}/{path.name}"
+            text = path.read_text(encoding='utf-8', errors='replace')
+            for line in text.splitlines():
+                stripped = line.strip()
+                if not stripped.startswith('# Cross-checked:') or '<' in stripped:
+                    continue
+                records, issues = parse_cross_checks(stripped)
+                if len(records) != 1:
+                    problems.append(
+                        f"{label}: annotation example does not parse "
+                        f"({issues or 'no record'}): {stripped}")
+                    continue
+                identity = records[0][0]
+                runs = ''.join(c if c.isdigit() else ' ' for c in identity).split()
+                if any(len(run) >= 4 for run in runs):
+                    problems.append(
+                        f"{label}: annotation example's checker carries "
+                        f"a year, so the date was parsed from the source: "
+                        f"{stripped}")
 
-        # The Resolved leg (L-200) is checked the same way and for the
-        # same reason. A skill that teaches a leg the parser refuses is
-        # the L-186 defect in a second grammar.
-        for line in text.splitlines():
-            stripped = line.strip()
-            if not stripped.startswith('# Resolved:') or '<' in stripped:
-                continue
-            records, issues = parse_resolved(stripped)
-            if len(records) != 1:
-                problems.append(
-                    f"{skill_dir.name}: Resolved example does not parse "
-                    f"({issues or 'no record'}): {stripped}")
+            # The Resolved leg (L-200) is checked the same way and for the
+            # same reason. A skill that teaches a leg the parser refuses is
+            # the L-186 defect in a second grammar.
+            for line in text.splitlines():
+                stripped = line.strip()
+                if not stripped.startswith('# Resolved:') or '<' in stripped:
+                    continue
+                records, issues = parse_resolved(stripped)
+                if len(records) != 1:
+                    problems.append(
+                        f"{label}: Resolved example does not parse "
+                        f"({issues or 'no record'}): {stripped}")
     return problems
 
 
@@ -600,6 +880,22 @@ def main():
         print(f"ERROR: {skills_dir} not found; run from the repo root.")
         sys.exit(2)
 
+    # L-418: in write mode, rewrite every read plan before the skills are
+    # read, so the check below reads what was written. Each change is
+    # named; a plan already right is left alone.
+    if not check_only:
+        for skill_dir in sorted(p for p in skills_dir.iterdir() if p.is_dir()):
+            paths = [skill_dir / 'SKILL.md']
+            ref_dir = skill_dir / REFERENCES_DIRNAME
+            if ref_dir.is_dir():
+                paths.extend(sorted(ref_dir.glob('*.md')))
+            for path in paths:
+                if path.is_file():
+                    written = write_read_plan(path)
+                    if written:
+                        rel = path.relative_to(skills_dir).as_posix()
+                        print(f"Read plan written: {rel}: {written}")
+
     records, problems, warnings = [], [], []
     for skill_dir in sorted(p for p in skills_dir.iterdir() if p.is_dir()):
         rec, probs, warns = parse_skill(skill_dir)
@@ -618,6 +914,12 @@ def main():
             print(f"  - {p}")
     else:
         print(f"OK: {len(records)} skills parsed, no consistency problems.")
+    plans = [p for r in records for p in r.get('plans', [])]
+    print(f"Read plans checked ({len(plans)}): "
+          f"{', '.join(plans) if plans else 'none'}.")
+    if PLAN_NOT_YET:
+        print(f"Long skills with no read plan yet, by PLAN_NOT_YET "
+              f"({len(PLAN_NOT_YET)}): {', '.join(PLAN_NOT_YET)}.")
     for w in warnings:
         print(f"  WARNING: {w}")
 

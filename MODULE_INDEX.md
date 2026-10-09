@@ -12,15 +12,15 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 143  
-**Total Lines of Code (non-blank):** 115,573  
-**Total Public Functions/Classes:** 1,317
+**Total Lines of Code (non-blank):** 116,477  
+**Total Public Functions/Classes:** 1,331
 
 ## Classification Coverage
 
 **Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L412_2_decisions_20261008.py`
+- `patch_L418_3_split_build_20261008.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
@@ -28,7 +28,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 **Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L412_2_decisions_20261008.py`
+- `patch_L418_3_split_build_20261008.py`
 
 
 ---
@@ -219,7 +219,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (606 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,071 lines) |
-| `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (605 lines) |
+| `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (882 lines) |
 | `test_citation_inheritance.py` | Regression tests for citation-block inheritance. (516 lines) |
 | `test_constants_export.py` | - data/constants_export.json says what constants_new.py holds. (389 lines) |
 | `test_constants_provenance.py` | Regression tests for verified numeric constants. (476 lines) |
@@ -245,7 +245,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L412_2_decisions_20261008.py` | Records the rulings of the decisions session of October 8, 2026 in LEDGER_CONSOLIDATED.md and on documentation/WHERE_WE_ARE.md. Records only: no code file, no skill and no served file is touched. (653 lines) |
+| `patch_L418_3_split_build_20261008.py` | - splits provenance-discipline (L-418, the long skills' contents, history and split). (1,280 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |

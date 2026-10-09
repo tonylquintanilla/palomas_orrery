@@ -1,13 +1,23 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 8, 2026, after the decisions session.
+Last updated: October 8, 2026, after the provenance split's build.
 - Written at orrery b0b3df82 and gallery ab66aba7, before your run of
-  patch_L412_2_decisions_20261008.py.
+  patch_L418_3.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
+> - The provenance skill is split in two, so each part can be read
+>   whole. A new skill, provenance-cross-check, holds the procedure
+>   for checks by other models. Nothing in either was reworded.
+> - Three small fixes ride along: two from L-371 (the Sun room's
+>   served numbers), one from L-390 (the conversion marker), and
+>   your L-252 paragraph on the checker's four outcomes.
+> - Long skill files now open with a reading plan, and the check
+>   fails when one is missing or wrong. Four long skills get theirs
+>   at their next version.
+> - New item: L-424 (the checker's one word for two cases).
 > - L-216 (the swap retry) is closed. You are trying builds without
 >   the OneDrive pause; the swap log shows any retry.
 > - L-252 (an incomplete verdict is not a confirmation) is closed. Its
@@ -23,6 +33,11 @@ Last updated: October 8, 2026, after the decisions session.
 > the scanner's window session before the Alfven surface's ranges.*
 >
 > **Needs you now:**
+> - *Run patch_L418_3, then orrery_maintenance_run.py, and push.*
+> - *Install three skills: provenance-discipline,
+>   provenance-cross-check (new) and ledger-and-session-records.
+>   Then replace the Project's instructions with
+>   PROJECT_INSTRUCTIONS.md.*
 > - *Run patch_L412_2_decisions_20261008.py, then
 >   orrery_maintenance_run.py, and push.*
 
@@ -54,6 +69,10 @@ Last updated: October 8, 2026, after the decisions session.
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
+- Small fixes owed to a skill ride the version a session is already
+  making; a change to a checker gets its own session. (Oct 8)
+- A long skill gets its reading plan at its next version, not in a
+  bump of its own. (Oct 8)
 - The galactic tide keeps its cone, to show its pull as physics. (Oct 7)
 - No colour or other name that only one system knows. The panels'
   grey is one name, gray90. (Oct 6)
@@ -75,8 +94,8 @@ Read from files when this page was written, not typed from memory.
 - Last cache build: 20261008T013323Z, ok, one attempt. Last retry: the
   Oct 6 18:20 hand build, two attempts, ok.
 - Tier-1 findings, whole tree: 296, unchanged since Oct 6. No tool yet
-  prints the number on the gate path alone; that is owed on the
-  provenance-discipline bump.
+  prints the number on the gate path alone; that is owed to L-414
+  (the scanner's window), not to the split.
 - This page's date and the ledger's newest stamp: both Oct 8. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
@@ -121,6 +140,9 @@ Not urgent, in your order:
   `documentation/HANDOFF_L421_typed_facts_20261008.md`
 - The Horizons check design:
   `documentation/DESIGN_L395_horizons_check_20261007.md`
+- The provenance split: L-418 (splitting provenance-discipline),
+  built and waiting on your run; record
+  `documentation/HANDOFF_L418_split_build_20261008.md`
 - The reasoning behind the order:
   `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`
 

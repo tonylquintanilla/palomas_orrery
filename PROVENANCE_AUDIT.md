@@ -3,8 +3,8 @@
 
 Generated: October 08, 2026
 Files scanned: 143
-Total findings: 1098
-Constants: 178 | Dicts: 44 | Display strings: 876
+Total findings: 1099
+Constants: 179 | Dicts: 44 | Display strings: 876
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,12 +20,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |
 |-----------|------|------:|------:|---:|---:|---:|---:|
+| 20261009T014206Z | `c921ef8` | 143 | 1099 | 296 | 675 | 123 | 5 |
 | 20261009T012542Z | `b0b3df8` | 143 | 1098 | 296 | 676 | 121 | 5 |
 | 20261008T192100Z | `3b36b3b` | 143 | 1097 | 296 | 675 | 121 | 5 |
 | 20261008T190120Z | `36176d5` | 142 | 1097 | 296 | 675 | 121 | 5 |
 | 20261008T175918Z | `1ba72f7` | 142 | 1097 | 296 | 675 | 121 | 5 |
 | 20261008T011446Z | `4aa84ae` | 143 | 1098 | 296 | 676 | 121 | 5 |
-| 20261008T010756Z | `9d5db07` | 144 | 1098 | 296 | 676 | 121 | 5 |
 
 Change since the previous run: total +1, Tier-1 +0.
 
@@ -61,8 +61,8 @@ No file's Tier-1 count rose.
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 296 |
-| 2 | 10-15 | REVIEW | 676 |
-| 3 | 5-9 | LOW PRIORITY | 121 |
+| 2 | 10-15 | REVIEW | 675 |
+| 3 | 5-9 | LOW PRIORITY | 123 |
 | 4 | 1-4 | LOWEST PRIORITY | 5 |
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
@@ -106,11 +106,11 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `pluto_visualization_shells.py` | orrery | 0 | 0 | 11 | 0 | 11 |
 | `saturn_visualization_shells.py` | orrery | 1 | 9 | 0 | 0 | 10 |
 | `food_insecurity_generator.py` | earth_science | 5 | 2 | 2 | 0 | 9 |
+| `skills_index.py` | dev_tools | 0 | 0 | 9 | 0 | 9 |
 | `eris_visualization_shells.py` | orrery | 2 | 4 | 2 | 0 | 8 |
 | `asteroid_belt_visualization_shells.py` | orrery | 0 | 7 | 0 | 0 | 7 |
 | `spacecraft_encounters.py` | orrery | 0 | 7 | 0 | 0 | 7 |
 | `star_sphere_builder.py` | stars | 0 | 1 | 3 | 3 | 7 |
-| `skills_index.py` | dev_tools | 0 | 0 | 7 | 0 | 7 |
 | `sgr_a_star_data.py` | orrery | 3 | 3 | 0 | 0 | 6 |
 | `celestial_coordinates.py` | orrery | 4 | 2 | 0 | 0 | 6 |
 | `paleoclimate_visualization.py` | earth_science | 6 | 0 | 0 | 0 | 6 |
@@ -153,7 +153,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `visualization_core.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `visualization_utils.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `earth_pole_live_check.py` | orrery | 0 | 1 | 0 | 0 | 1 |
-| `patch_L412_2_decisions_20261008.py` | orrery | 0 | 1 | 0 | 0 | 1 |
 | `add_docstrings.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `data_inventory.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `export_constants.py` | orrery | 0 | 0 | 1 | 0 | 1 |
@@ -173,10 +172,10 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 50 | 133 | 560 | 71 | 2 | 766 |
+| Orrery (solar system + orbital mechanics) | 49 | 133 | 559 | 71 | 2 | 765 |
 | Earth System | 13 | 149 | 75 | 2 | 0 | 226 |
 | Stars (stellar neighborhood) | 11 | 12 | 41 | 6 | 3 | 62 |
-| Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 42 | 0 | 42 |
+| Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 44 | 0 | 44 |
 | Utilities (cross-domain shared helpers) | 1 | 2 | 0 | 0 | 0 | 2 |
 | Gallery | 0 | 0 | 0 | 0 | 0 | 0 |
 
@@ -188,7 +187,6 @@ Same data again, grouped by subject-matter domain rather than by individual file
 - `export_constants.py`
 - `export_objects.py`
 - `orrery_maintenance_run.py`
-- `patch_L412_2_decisions_20261008.py`
 - `test_dimensions.py`
 - `worksheet_checker.py`
 - `worksheet_key_aliases.py`
@@ -1394,12 +1392,6 @@ is planned for a future session.
 | 2341 | string | display string @ line 2341 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2416 | string | display string @ line 2416 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
-### patch_L412_2_decisions_20261008.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 55 | constant | CAP | 130 | 3 | 5 | **15** | Cited, not independently cross-checked | UNDETERMINED -- could not be classified |
-
 ### planet9_visualization_shells.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
@@ -1956,13 +1948,15 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 132 | constant | NAME_COL_WIDTH | 29 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
-| 133 | constant | VER_COL_WIDTH | 5 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
-| 135 | constant | WRAP_WIDTH | 79 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
-| 136 | constant | FALLBACK_TRUNC | 60 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
-| 147 | constant | NAME_MAX_CHARS | 64 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
-| 150 | constant | DESCRIPTION_MAX_CHARS | 1024 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
-| 152 | constant | BODY_GUIDELINE_LINES | 500 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 150 | constant | NAME_COL_WIDTH | 29 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 151 | constant | VER_COL_WIDTH | 5 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 153 | constant | WRAP_WIDTH | 79 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 154 | constant | FALLBACK_TRUNC | 60 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 165 | constant | NAME_MAX_CHARS | 64 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 168 | constant | DESCRIPTION_MAX_CHARS | 1024 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 170 | constant | BODY_GUIDELINE_LINES | 500 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 182 | constant | READ_PART_MAX_CHARS | 16000 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 183 | constant | READ_PART_MAX_LINES | 2000 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
 
 ### star_sphere_builder.py
 

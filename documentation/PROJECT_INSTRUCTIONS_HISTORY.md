@@ -2334,6 +2334,43 @@ resident.
 (Moved down from the resident protocol on 2026-10-07 when
 v3.85 made a fourth entry.)
 
+v3.83 (October 6, 2026): No rule changed in this document. ONE
+skill bump, one version (L-027): agentic-pre-test 1.2 -> 1.3. THE
+PRE-TEST RUNS THE FILE AS IT IS.
+
+WHAT PROMPTED IT. A session reported that the maintenance run's Reset
+completeness check fails in the sandbox because it needs a screen
+colour only Windows has. Tony: "We should not have any windows only
+requirements. This is a cross platform project." The file history
+showed it was a regression, not the starting state: Tony's commit of
+2026-01-09 had replaced the Windows-only Tk colour name
+SystemButtonFace with gray90, and commit ec333df of 2026-06-12 swapped
+all 26 back -- the reverse of the pre-test's own colour swap, applied
+to the real file. Since then the orrery's window could not open on
+Linux, and every headless run passed because the test swapped the
+colour out of its copy first.
+
+WHAT CHANGED. patch_L027_1 names the colour once in palomas_orrery.py,
+PANEL_BG = 'gray90', at all 23 sites. agentic-pre-test 1.3 drops the
+swap: the headless run uses an unedited copy, and an error naming
+something only one system has is a finding to fix, never to swap past.
+Its throwaway rule keeps its place, with the founding case as the
+history shows it. Tony, on the colour: "Confirmed as recommended. And
+should we improve the skill also?"
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+agentic-pre-test 1.3 before any pre-test.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.80 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-08 when
+v3.86 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

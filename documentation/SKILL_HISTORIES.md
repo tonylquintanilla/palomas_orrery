@@ -407,6 +407,31 @@ because it fires while a provenance feature is being designed, which
 is when this skill loads. L-207, the citation prompt, was the first
 item checked against it rather than assumed to pass.
 
+The skill's v2.24 entry, moved here word for word on 2026-10-08 when
+v2.27 made a fourth entry (L-418):
+v2.24 settles L-395 with one new section, A Simple Error a Check Finds
+Is Fixed and Reported. Tony's ruling, 2026-10-01: "simple errors such
+as the Apophis naming discrepancy should be fixed and reported." It
+says what counts as simple, that the fix rides the same patch and is
+named, what comes to Tony instead, how a number in a served description
+is sourced or removed, and how the rule sits beside The Braid.
+
+A section withdrawn on 2026-09-16, moved here word for word on
+2026-10-08 when v2.27 split the skill (L-418). It stood under Report
+to the Figures You Have, after The Store Carries the Verified Figure:
+
+### A Derived Row Stores the Figure Its Sources Support -- WITHDRAWN
+
+Ruled by Tony on 2026-09-12 (L-325) and WITHDRAWN by him on 2026-09-16
+as counter-productive under The Figure Count Is a Declared Field. The
+rule said a derived row stores a literal rounded to its declared count,
+so that a test could announce when an input moved. Under Rule 4 a
+rounded literal at rest is a rounded intermediate for every row that
+chains from it, and under Rule 6 the objection that earned the ruling
+-- sixteen digits copied into a gallery config -- is answered at the
+export instead. The stub stays so a reader who finds L-325 or the two
+literal rows knows what happened to the rule.
+
 ## interactive-exhibit
 
 Earlier: 1.8 | 2026-10-01, with Anthropic's Claude Opus 5.5, from
@@ -620,6 +645,18 @@ v1.14 (L-405; 2026-10-02, with Anthropic's Claude Opus 5.5) adds A Wrong
 Sentence in a Skill: Bump Now, or Carry It, under the change log. A
 session had to decide it for itself on 2026-10-01 (L-404); Tony's review
 of 2026-10-02 sorted it as method, so the skill answers it now.
+
+The skill's v1.15 entry, moved here word for word on 2026-10-08 when
+v1.18 made a fourth entry (L-418):
+Earlier: 1.15 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 72e3b558. v1.15 (L-418) adds one paragraph under the change log, A skill
+keeps three version entries, which writes down what this version does
+to all six long skills. A contents list now opens the skill, generated from its headings, and
+skills_index.py --check fails if the two disagree. Version history
+older than the two entries below moved to
+documentation/SKILL_HISTORIES.md. Both because a plain read of a
+long file shows its start and end and leaves out its middle, where
+the rules are (Tony, 2026-10-05).
 
 ## gallery-cache-builder
 

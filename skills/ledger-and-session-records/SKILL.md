@@ -6,7 +6,17 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Skill version: 1.17 | 2026-10-07, with Anthropic's Claude Fable 5.1, at
+Read this file in 3 parts: lines 1-224, 225-500, 501-677.
+
+Skill version: 1.18 | 2026-10-08, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ b0b3df82. v1.18 (L-418) records two conventions the
+provenance-discipline split brought in, under A skill keeps three
+version entries: a file longer than one read opens with a read plan
+that skills_index.py writes, and a skill's extra files live in its
+references folder, each named in its SKILL.md. The Anchor Requirement
+names provenance-cross-check for a review prompt carried to another
+model.
+Earlier: 1.17 | 2026-10-07, with Anthropic's Claude Fable 5.1, at
 palomas_orrery @ 8653ef1b. v1.17 (L-422) carries four of Tony's rulings
 from one session. Under Where We Are -- Tony's page: the page's new
 shape (each fact once; the box is the page; Settled; Signals), a
@@ -23,17 +33,8 @@ Are -- Tony's page: a patch checks a document Tony annotates (this
 page, the handoffs, the ledger) only at the lines it edits, and a
 rewrite of the page carries his notes into the handoff first. The
 rule had lived only in one patch's code and was broken the same day.
-Earlier: 1.15 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 72e3b558. v1.15 (L-418) adds one paragraph under the change log, A skill
-keeps three version entries, which writes down what this version does
-to all six long skills. A contents list now opens the skill, generated from its headings, and
-skills_index.py --check fails if the two disagree. Version history
-older than the two entries below moved to
-documentation/SKILL_HISTORIES.md. Both because a plain read of a
-long file shows its start and end and leaves out its middle, where
-the rules are (Tony, 2026-10-05).
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-05 (L-418) and 2026-10-07 (L-422).
+on 2026-10-05 (L-418), 2026-10-07 (L-422) and 2026-10-08 (L-418).
 
 Note: READING the ledger at session start is resident Part-1 behavior,
 not this skill's job. This skill carries the maintenance mechanics.
@@ -386,8 +387,9 @@ the code with none of the conventions governing how the work is done.
 NAME THE SKILLS THE TASK FIRES, not a blanket list. Same judgment the
 resident protocol already asks for under "Relevant skill unfired ->
 Load it by name": a provenance review needs provenance-discipline, a
-patch needs safe-file-editing, and sending all ten teaches the partner
-to skim.
+review prompt carried to another model needs provenance-cross-check
+beside it, a patch needs safe-file-editing, and sending them all
+teaches the partner to skim.
 
 The wording depends on what the partner can actually do:
 
@@ -523,9 +525,22 @@ that skill's section in `documentation/SKILL_HISTORIES.md`. A skill
 over Anthropic's 500-line guideline also opens with a `## Contents` list
 of its headings, which `skills_index.py --check` holds to the headings
 item by item; a patch that adds, removes or renames a heading updates
-the list in the same edit. Both for one reason: a plain read of a long
-file shows its start and end and leaves out its middle, so what opens
-a skill is the one part every session is sure to see.
+the list in the same edit. A file longer than one read -- 16,000
+characters or 2,000 lines, the smaller of the two readers measured --
+opens, just under its title, with a READ PLAN naming the line ranges
+to read it in, one read each (v1.18, L-418). A patch puts the seed
+line there, `Read this file in parts.`, and `skills_index.py` writes
+the plan; `--check` fails on a long file with none, a part over one
+read, or a line no part covers. A long skill still waiting for its
+plan is named on the list `PLAN_NOT_YET` in `skills_index.py`, which
+every run prints; it gets the plan at its next version, and comes off
+the list in the same patch. A skill's extra files live in its
+`references/` folder, each named in its SKILL.md with the moment to
+open it; `--check` fails on one named and missing, or present and
+never named. All of this for one reason: a plain read of a long file
+shows only part of it -- its start and end in one reader, its start
+alone in another -- so what opens a skill is the one part every
+session is sure to see.
 
 **Binding rule [QUALITY].** A skill version bump is not done until the
 manifest agrees AND the protocol's history says what changed. FOUR

@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.85 | October 7, 2026
+Tony Quintanilla, PE | Claude | v3.86 | October 8, 2026
 
-Cut from 8653ef1b at https://github.com/tonylquintanilla/palomas_orrery
+Cut from b0b3df82 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -488,14 +488,17 @@ agentic-pre-test             1.3  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
 horizons-orbital-mechanics   1.1  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning
-provenance-discipline        2.26 Scanner runs, audits, citations, constants,
+provenance-discipline        2.27 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
+provenance-cross-check       1.0  Cross-check worksheets and relay prompts,
+                                  adjudicating returns, writing Cross-checked
+                                  and Resolved lines
 earth-system-pipeline        1.2  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY
                                   human-cost visualization or text
 gallery-pipeline             1.2  Gallery Studio, json_converter, index.html
                                   viewer, gallery cards
-ledger-and-session-records   1.17 Ledger edits, ledger_index.py, RICE,
+ledger-and-session-records   1.18 Ledger edits, ledger_index.py, RICE,
                                   handoffs, manifests, atlas, dep_trace,
                                   WHERE_WE_ARE.md at every session's end
 gallery-assembler            1.3  render_orbits.py, resolver.py,
@@ -1163,6 +1166,51 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.86 (October 8, 2026): No rule changed in this document. THREE
+skills, one version each (L-418): provenance-discipline 2.26 -> 2.27,
+the new skill provenance-cross-check 1.0, and
+ledger-and-session-records 1.17 -> 1.18. PROVENANCE-DISCIPLINE IS
+SPLIT, AND A LONG FILE CARRIES ITS READ PLAN.
+
+WHAT PROMPTED IT. provenance-discipline was 137,837 characters in 2,590
+lines, and one read of a file does not show that much. The design
+session's viewer showed 16,000 characters, from the start and the end;
+this session's reader showed the first 1,106 lines and said it had
+stopped. So the skill that guards facts and sources was the one least
+likely to be read whole. Tony ruled the split on 2026-10-06 ("Read and
+confirmed"), and a trial skill showed on 2026-10-08 that an installed
+skill keeps the extra files in its folder.
+
+WHAT CHANGED. The relay procedure, the Review-Repair Protocol, is the
+new skill provenance-cross-check, with its worksheet sections in a
+reference file. provenance-discipline keeps its rules, with the
+figure-count rules and the field notes in two reference files, each
+opened when its pointer says. Every moved section is word for word
+apart from the edits the patch lists, and the patch proves it. Riding
+2.27: L-371 (the Sun room's served numbers), L-390 (the conversion
+marker) and L-252 (the checker's fourth outcome). skills_index.py
+writes a read plan into every file longer than one read, and its
+--check fails on a part too long, a line no part covers, or a reference
+file named and missing or present and never named.
+ledger-and-session-records 1.18 records those two conventions and names
+provenance-cross-check for review prompts. Four other long skills get
+their read plans at their next version, by Tony's ruling of the same
+day, and skills_index.py names them on every run. The manifest has a
+twelfth row.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+provenance-discipline 2.27, provenance-cross-check 1.0 and
+ledger-and-session-records 1.18; lists both skill folders and finds
+their reference files; and, on its first figures task, says whether it
+opened the figures reference file before writing a figure count.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.83 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.85 (October 7, 2026): No rule changed in this document. ONE
 skill bump, one version (L-422): ledger-and-session-records 1.16 ->
 1.17. TONY'S PAGE IS EDITED BY SECTION, AND ITS END IS HIS.
@@ -1230,40 +1278,6 @@ interactive-exhibit 1.12 before any exhibit work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.81 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.83 (October 6, 2026): No rule changed in this document. ONE
-skill bump, one version (L-027): agentic-pre-test 1.2 -> 1.3. THE
-PRE-TEST RUNS THE FILE AS IT IS.
-
-WHAT PROMPTED IT. A session reported that the maintenance run's Reset
-completeness check fails in the sandbox because it needs a screen
-colour only Windows has. Tony: "We should not have any windows only
-requirements. This is a cross platform project." The file history
-showed it was a regression, not the starting state: Tony's commit of
-2026-01-09 had replaced the Windows-only Tk colour name
-SystemButtonFace with gray90, and commit ec333df of 2026-06-12 swapped
-all 26 back -- the reverse of the pre-test's own colour swap, applied
-to the real file. Since then the orrery's window could not open on
-Linux, and every headless run passed because the test swapped the
-colour out of its copy first.
-
-WHAT CHANGED. patch_L027_1 names the colour once in palomas_orrery.py,
-PANEL_BG = 'gray90', at all 23 sites. agentic-pre-test 1.3 drops the
-swap: the headless run uses an unedited copy, and an error naming
-something only one system has is a finding to fix, never to swap past.
-Its throwaway rule keeps its place, with the founding case as the
-history shows it. Tony, on the colour: "Confirmed as recommended. And
-should we improve the skill also?"
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copy reads
-agentic-pre-test 1.3 before any pre-test.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.80 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 
