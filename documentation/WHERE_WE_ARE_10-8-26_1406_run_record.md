@@ -1396,3 +1396,153 @@ Do you want the planted-fault run in the testing session, so L-425 is decided on
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+**Session: OPEN: 10-8-26 1105: Opus: Testing session brief**
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L418_5_testing_close_20261009.py
+patch_L418_5 -- built on orrery 08f0375
+
+ok  LEDGER_CONSOLIDATED.md         L-418: A1 to A6 recorded; loose ends re-homed; Gap none
+ok  LEDGER_CONSOLIDATED.md         L-418: metadata -> DONE, section C, date
+ok  LEDGER_CONSOLIDATED.md         L-425: the scanner bullet corrected by measurement
+ok  LEDGER_CONSOLIDATED.md         L-425: planted-fault results, quote count, the question
+ok  LEDGER_CONSOLIDATED.md         L-425: Ref
+ok  LEDGER_CONSOLIDATED.md         L-425: metadata -> date
+ok  LEDGER_CONSOLIDATED.md         L-426: opened, the checker's small-number comparison
+ok  LEDGER_CONSOLIDATED.md         L-424: F7a seen on a served row; carry L-426
+ok  LEDGER_CONSOLIDATED.md         L-424: metadata -> date
+ok  LEDGER_CONSOLIDATED.md         L-414: the window credits a neighbour's citation
+ok  LEDGER_CONSOLIDATED.md         L-414: metadata -> date
+ok  LEDGER_CONSOLIDATED.md         L-386: SOLAR_RADIUS_AU's marker shown working
+ok  LEDGER_CONSOLIDATED.md         L-386: metadata -> date
+ok  LEDGER_CONSOLIDATED.md         L-351: Tony's note on the run-record zone
+ok  LEDGER_CONSOLIDATED.md         L-351: metadata -> date
+ok  LEDGER_CONSOLIDATED.md         header stamp
+ok  documentation/WHERE_WE_ARE.md  header
+ok  documentation/WHERE_WE_ARE.md  box: changed since you last read this
+ok  documentation/WHERE_WE_ARE.md  box: do next
+ok  documentation/WHERE_WE_ARE.md  box: needs you now
+ok  documentation/WHERE_WE_ARE.md  marks: the road cleared
+ok  documentation/WHERE_WE_ARE.md  marks: stage 8 cleared
+ok  documentation/WHERE_WE_ARE.md  marks: stage 9 cleared
+ok  documentation/WHERE_WE_ARE.md  marks: settled cleared
+ok  documentation/WHERE_WE_ARE.md  marks: waiting cleared
+ok  documentation/WHERE_WE_ARE.md  marks: signals
+ok  documentation/WHERE_WE_ARE.md  signals: the cache build, from the swap log
+ok  documentation/WHERE_WE_ARE.md  signals: the dates
+ok  documentation/WHERE_WE_ARE.md  details: L-418 no longer open
+ok  documentation/WHERE_WE_ARE.md  details: the tests
+ok  documentation/WHERE_WE_ARE.md  details: the decisions line dated
+ok  documentation/WHERE_WE_ARE.md  details: three closed items out, for the cap (the ledger keeps them)
+ok  documentation/WHERE_WE_ARE.md  128 lines above the run-record marker (cap 130)
+ok  documentation/HANDOFF_L418_testing_20261009.md already in place, identical; left as it is
+
+patch applied: 2 files written (LEDGER_CONSOLIDATED.md, documentation/WHERE_WE_ARE.md)
+New item: L-426 (the checker's small-number comparison).
+
+NEXT:
+  1. Run orrery_maintenance_run.py -- it rebuilds the ledger's index
+     and moves L-418 into the closed section.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261009T032035Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.9s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.3s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.6s  unchanged (1 checked, not written)
+  Objects export               0.1s  unchanged (1 checked, not written)
+  Module atlas                 8.1s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.3s  rewrote DATA_INVENTORY.md
+  Exact rows report            2.1s  unchanged (1 checked, not written) -- 13 of
+                                     34 exact rows printed at 42 lines (32
+                                     orrery, 10 gallery); 8 drawn only, 11 not
+                                     followed, 0 map entries broken
+  Document index               0.2s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.2s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.8s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       1.3s  Export matches the store: sha256
+                                     3b7000e368d1 on both sides; 105 rows
+                                     re-read, 56 not exported, 27 tokens; 310
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.1s  pass
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      1.6s  PASSING -- 13 printed exact rows each state
+                                     a count; 32 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.2s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 105 status lines in constants_new.py are
+                                     well formed; 53 rows carry none.
+  Row shape                    0.1s  All 161 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Reset completeness          20.7s  PASS -- all 310 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.0s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Worksheet checker            9.4s  74 of 110 routed, 8 clean
+  Worksheet checker tests     16.4s  All 135 checks passed
+  Worksheet key round trip     1.0s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         22.6s  All 76 checks passed
+  Extractor pins               0.6s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          11.1s  296 TIER-1 FINDINGS IN THE SCANNED TREE
+
+======================================================================
+  20 of 20 gating checkers passed -- 109.8s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          296 TIER-1 FINDINGS IN THE SCANNED TREE
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2127 file(s) examined, 8 written, 1 created, 1 removed, 4 rewritten identically
+    written   DATA_INVENTORY.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    created   documentation/patch_L418_5_testing_close_20261009.py
+    removed   patch_L418_5_testing_close_20261009.py
+    rewritten with identical bytes, no action needed:
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Move this script into documentation/; commit and push.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 

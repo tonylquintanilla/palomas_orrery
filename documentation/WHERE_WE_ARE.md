@@ -1,36 +1,34 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 8, 2026, at the provenance split's close.
-- Written at orrery e5cc4bb2 and gallery ab66aba7, before your run of
-  patch_L418_4.
+Last updated: October 9, 2026, at the provenance tests' close.
+- Written at orrery 08f0375 and gallery b50f8bd, before your run of
+  patch_L418_5.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The provenance split ran, all 20 checks pass, and the three
->   skills are installed. This session could already see them:
->   2.27, 1.0 and 1.18, with their reference files.
-> - A testing protocol for the new skills is in documentation/.
->   Four of its tests need a fresh session.
-> - Nothing checks where a citation points: not a missing access
->   line, not a dead link. L-425 (citation location checks) has the
->   measurements and three options.
+> - The four tests of the new provenance skills passed; L-418
+>   (splitting provenance-discipline) is closed.
+> - A planted-fault run: four of seven citation faults went
+>   unnoticed, as expected; three were caught, more weakly than thought.
+> - L-426 (the checker's small-number comparison): the worksheet
+>   checker treats very small numbers as equal.
+> - Your quote question, measured: 38 of the 40 measured numbers
+>   the Sun and Earth rooms serve say where they were read.
 >
-> **Do next:** *a fresh session runs the split's four tests
-> (A3 to A6 in the testing protocol). Then, as you confirmed: the typed facts (the inner Oort cloud, then the
+> **Do next:** *as you confirmed: the typed facts (the inner Oort cloud, then the
 > check); the Horizons check build; the Sun's list from item 3, with
 > the scanner's window session before the Alfven surface's ranges.*
 >
 > **Needs you now:**
-> - *Run patch_L418_4, then orrery_maintenance_run.py, and push.*
-> - *Decide L-425 (citation location checks): which of its three
->   checks to build. Recommended: the first two together.*
-> - Optional: delete the two ZIPs in skills/; they go stale.
+> - *Run patch_L418_5, then orrery_maintenance_run.py, and push.*
+> - *Decide L-425 (citation location checks): which checks to build,
+>   on the run's results (on L-425 and in the handoff).*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
-## The road  **>> UPDATED THIS SESSION**
+## The road
 
   1-4. [done]  The Sun, Earth and Solar System rooms are live; the orrery
                feeds the website and nothing is typed twice.
@@ -41,9 +39,9 @@ Last updated: October 8, 2026, at the provenance split's close.
   7.   [next]  The Sun's numbers get the checking Earth's got.
   8.   [next]  The served objects are checked against JPL Horizons.
                Designed and recorded; build next, with Encke added
-               and Halley checked too. << new this session
+               and Halley checked too.
   9.   [next]  The website's checks, in the order you confirmed:
-               L-423 (the website's checks). << new this session
+               L-423 (the website's checks).
  10.   [next]  A bare interactive.html link opens the Solar System room;
                the Explorer gets its own address.
  11.   [later] The rest of the orrery's objects come to the website.
@@ -53,7 +51,7 @@ Last updated: October 8, 2026, at the provenance split's close.
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
 
-## Settled  **>> UPDATED THIS SESSION**
+## Settled
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
 - Small fixes owed to a skill ride the version a session is already
@@ -75,17 +73,17 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - The inner Oort cloud is redrawn from the 2025 paper now, as part of
   the Sun's slice, not deferred. (Oct 6)
 
-## Signals
+## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261008T013323Z, ok, one attempt. Last retry: the
-  Oct 6 18:20 hand build, two attempts, ok.
+- Last cache build: 20261008T180043Z, ok. Its last rename took two
+  attempts, and the retry absorbed it.
 - Tier-1 findings, whole tree: 296, unchanged since Oct 6. No tool yet
   prints the number on the gate path alone; that is owed to L-414
   (the scanner's window), not to the split.
-- This page's date and the ledger's newest stamp: both Oct 8. Agree.
+- This page's date and the ledger's newest stamp: both Oct 9. Agree.
 
-## Waiting on you  **>> UPDATED THIS SESSION**
+## Waiting on you
 
 At the next design talk:
 - The fuzzy outer corona, with the dust cloud; the exosphere the same way.
@@ -109,29 +107,22 @@ Not urgent, in your order:
 
 ## Where the details are  **>> UPDATED THIS SESSION**
 
-- Today's decisions: `documentation/HANDOFF_decisions_20261008.md`.
+- The Oct 8 decisions: `documentation/HANDOFF_decisions_20261008.md`.
   The new list: L-423 (the website's checks).
 - Every item: `LEDGER_CONSOLIDATED.md`. The Fable sweep: L-422 (the ledger
   skill at 1.17 and this page), L-001 (the Earth System track), L-071
   and L-077 (the 2026 heat domes, closed), L-216 (the swap retry and
   the hand run), L-412 (the RICE ruling), L-395 (the Horizons check,
-  designed). Open for build: L-421 (the typed facts), L-418 (splitting
-  provenance-discipline).
-- The Fable sweep's record:
-  `documentation/HANDOFF_L422_fable_sweep_close_20261007.md`
-- The galactic plane and the panel colour, both closed: L-420 (the
-  galactic plane), L-027 (the panel colour);
-  `documentation/HANDOFF_L420_galactic_plane_20261006.md`
-- The sweep's report: `documentation/LEDGER_SWEEP_review_20261007.md`
+  designed). Open for build: L-421 (the typed facts).
 - The typed facts: plan
   `documentation/MANIFEST_L421_typed_facts_20261006.md`; record
   `documentation/HANDOFF_L421_typed_facts_20261008.md`
 - The Horizons check design:
   `documentation/DESIGN_L395_horizons_check_20261007.md`
-- The provenance split: L-418 (splitting provenance-discipline),
-  run and pushed; record
-  `documentation/HANDOFF_L418_split_build_20261008.md`; tests
-  `documentation/TESTING_PROTOCOL_provenance_skills_20261008.md`
+- The split's tests and the citation checks: L-418 (splitting
+  provenance-discipline, closed), L-425 (citation location checks),
+  L-426 (the checker's small-number comparison); record
+  `documentation/HANDOFF_L418_testing_20261009.md`
 - The reasoning behind the order:
   `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`
 

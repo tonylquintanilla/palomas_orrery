@@ -303,6 +303,11 @@ Module updated: October 8, 2026 with Anthropic's Claude Opus 5.5
 (L-418: the split run and pushed, the installed copies read; L-425
 opened, citation location checks; L-351 two owed notes), built on
 e5cc4bb2.
+Module updated: October 9, 2026 with Anthropic's Claude Opus 5.5
+(L-418 closed on tests A1 to A6; L-425 gains the planted-fault run
+and the quote count; L-426 opened, the checker's small-number
+comparison; L-424, L-414, L-386 and L-351 updated), built on
+08f0375.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -520,7 +525,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*235 live items; 219 need attention (`!`); 167 RICE-scored; 185 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*235 live items; 219 need attention (`!`); 167 RICE-scored; 186 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -616,7 +621,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-346 | A derived row with empty inputs is invisible to a walk by inputs (checks) | OPEN | -- | 2026-09-22 |
 | ! | L-347 | The page re-derives the bow shock standoff to draw its shape (gallery) | OPEN | -- | 2026-09-22 |
 | ! | L-348 | Derived rows outside Earth were counted, not propagated (store) | OPEN | -- | 2026-09-22 |
-| ! | L-351 | Rules learned at C2, owed to the next bumps of their stores (skills, protocol) | OPEN | -- | 2026-10-08 |
+| ! | L-351 | Rules learned at C2, owed to the next bumps of their stores (skills, protocol) | OPEN | -- | 2026-10-09 |
 | ! | L-352 | The orrery's display sites format by fixed width, with no check reading them (orrery) | OPEN | -- | 2026-09-28 |
 | ! | L-353 | A count taken from a file's print resolution where a published error budget exists unopened (store) | OPEN | -- | 2026-09-22 |
 | ! | L-354 | Declared picks with their range in prose, on other bodies (store) | OPEN | -- | 2026-09-22 |
@@ -647,7 +652,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-381 | The uncertainty field's pattern reads a sentence's full stop as a decimal point (export, checks) | OPEN | -- | 2026-09-28 |
 | ! | L-382 | Earth's magnetosphere costs about 42 percent more per orrery animation frame since D8 (orrery, rendering) | OPEN | -- | 2026-09-28 |
 | ! | L-385 | The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye) | OPEN | -- | 2026-10-04 |
-| ! | L-386 | The Sun's conversion rows, not yet exported (store, the Sun's slice) | OPEN | -- | 2026-10-04 |
+| ! | L-386 | The Sun's conversion rows, not yet exported (store, the Sun's slice) | OPEN | -- | 2026-10-09 |
 | ! | L-387 | The orrery's hovers print the conversion names by their own formats, not by the computed count (orrery) | OPEN | -- | 2026-09-28 |
 | ! | L-388 | The gallery's export pull can print success when it could not fetch, and the mirror then writes from the old export (gallery, tooling) | OPEN | -- | 2026-10-08 |
 | ! | L-391 | Group clouds: the Trojans' sources, and the shapes of the three other groups (gallery, exhibits) | OPEN | -- | 2026-09-29 |
@@ -664,12 +669,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
 | ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-08 |
 | ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-06 |
-| ! | L-414 | The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling) | OPEN | -- | 2026-10-08 |
-| ! | L-418 | Long skills open with their contents, and keep three version entries (skills) | OPEN | -- | 2026-10-08 |
+| ! | L-414 | The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling) | OPEN | -- | 2026-10-09 |
 | ! | L-421 | Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words) | OPEN | -- | 2026-10-08 |
 | ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-08 |
-| ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-08 |
-| ! | L-425 | A citation's location record is checked only in part (provenance tooling) | OPEN | -- | 2026-10-08 |
+| ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-09 |
+| ! | L-425 | A citation's location record is checked only in part (provenance tooling) | OPEN | -- | 2026-10-09 |
+| ! | L-426 | The worksheet checker compares very small numbers as equal (worksheet checker) | OPEN | -- | 2026-10-09 |
 
 ### B. Pending Action (Tony-side)
 
@@ -999,6 +1004,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-415 | A patch writes LF and reports: safe-file-editing 1.12 (skills) | DONE | -- | 2026-10-06 |
 |  | L-416 | Every maintenance-run step has a dashboard button (dashboard, both repos) | DONE | -- | 2026-10-05 |
 |  | L-417 | The Skill headers check enforces Anthropic's documented limits (skills, checks) | DONE | -- | 2026-10-05 |
+|  | L-418 | Long skills open with their contents, and keep three version entries (skills) | DONE | -- | 2026-10-09 |
 |  | L-419 | A patch checks a file Tony annotates only at the lines it edits (patches, skills) | DONE | -- | 2026-10-06 |
 |  | L-420 | The galactic plane in the Celestial Grid, the galactic centre in the star background (orrery, sky, DONE 2026-10-07) | DONE | -- | 2026-10-07 |
 |  | L-422 | ledger-and-session-records 1.17: Tony's page by section, the run-record zone, labels on handles, RICE for lists, where a record goes (skills, documentation) | DONE | -- | 2026-10-08 |
@@ -1237,173 +1243,8 @@ IGRF epoch, a class); gallery `gallery/feature_renderers.js`,
 `gallery/earth_geometry.js`, `data/objects_config.json`;
 skills/interactive-exhibit/SKILL.md.
 
-#### [L-418] Long skills open with their contents, and keep three version entries (skills)
-<!-- L:418 status:OPEN upd:2026-10-08 section:A flag: rice: -->
-- **2026-10-08, the split brief's section 4 decision, ruled** in the
-  decisions session of 2026-10-08 (Tony: "As recommended? -- yes"):
-  L-371 (the Sun room's served numbers) and L-390 (the conversion
-  marker) ride provenance-discipline 2.27 with the split; L-414 (the
-  scanner's window) gets its own session, which cuts 2.28, before the
-  Sun's list reaches L-228 (the Alfven surface's ranges). Carried to
-  the split session, already running, by
-  `documentation/NOTE_for_split_session_L252_paragraph_20261008.md`.
-- **2026-10-08, one approved paragraph rides the split too,** from
-  L-252 (closed). Tony: "Concur with B" (the exact words now, carried
-  by the split, not a bump of its own); on the wording, "Approved".
-  It goes right after the send-back rule ("PARTIAL and APPROX return
-  to the originator for completion", and its "Ask for a NEW file"
-  paragraph), before "A Complete Row That Disagrees Is a Finding". If
-  the split moves that section to provenance-cross-check 1.0, the
-  paragraph goes with it; placement is the split session's call. If
-  the split shipped without it, it rides L-414's 2.28. The text,
-  word for word (indented four spaces here; the text starts at the
-  bold line):
-
-    **What the checker reports is a different list** (L-252, Tony,
-    2026-10-08). `worksheet_checker.py` compares the code against a
-    worksheet and reports one of four outcomes. They are the checker's
-    words, not worksheet tokens, and never belong in a verdict cell.
-
-    - DRIFTED -- the worksheet confirmed a value and the code left it, or
-      called it APPROX or PARTIAL and the code moved somewhere the
-      worksheet never named. The only defect of the four; routed to
-      conversation.
-    - CORRECTED -- the worksheet rejected the value and the code moved.
-      Recorded, not routed.
-    - COMPLETED -- the worksheet called it APPROX or PARTIAL and supplied a
-      value, and the code now reads exactly that value. Recorded, not
-      routed.
-    - UNCHECKED_MOVE -- the code moved and the worksheet carries no value
-      verdict. Routed, because nobody has established anything.
-
-    COMPLETED says only that the code took the value the worksheet
-    supplied. It is not a confirmation. The row is still APPROX or
-    PARTIAL, it earns no leg toward the cross-checked rung, and the
-    send-back rule above is unchanged.
-
-- **Found 2026-10-05**, reviewing a Claude Sonnet 5.5 session's check of
-  the skills against Anthropic's limits. Five skills are over
-  Anthropic's 500-line guideline. Measured: a plain read of a long file
-  shows its start and its end and leaves out the middle (this chat's
-  file viewer cuts everything past 16,000 characters from the middle),
-  and provenance-discipline's first 423 lines were version history, so
-  a plain read saw history and field notes and none of the rules.
-- **Tony's rulings, 2026-10-05.** Move the history out; a contents
-  section at the top ("Would adding a contents section help to find
-  what you need?"); arrange the sections so more are read whole; do all
-  five long skills, and gallery-cache-builder too, which is under 500
-  lines but long enough to be cut ("Do all including gallery cache
-  builder").
-- **Built:** `patch_L418_1_skill_contents_and_histories_20261005.py`.
-  Each of the six opens with a `## Contents` list of its headings;
-  history older than three entries moved word for word to
-  `documentation/SKILL_HISTORIES.md`; provenance-discipline's sections
-  ordered critical, quality, untiered, then Report to the Figures You
-  Have and the Review-Repair Protocol, then the field notes, every
-  section's text checked unchanged; `skills_index.py --check` fails a
-  skill over 500 lines with no list and any list that disagrees with
-  its headings, shown failing before it was trusted;
-  ledger-and-session-records gains "A skill keeps three version
-  entries". Versions: provenance-discipline 2.26, interactive-exhibit
-  1.11, safe-file-editing 1.13, orrery-coding-conventions 1.10,
-  ledger-and-session-records 1.15, gallery-cache-builder 1.7; protocol
-  v3.81.
-- **Still open, recorded, not scheduled:** moving
-  provenance-discipline's two long procedures (Review-Repair, 763
-  lines; Report to the Figures You Have, 631) into reference files
-  loaded only when needed, Anthropic's pattern. It needs a design talk,
-  because where a rule lives decides whether it fires.
-- **Run and pushed, 2026-10-05,** at orrery d9f47a87. Tony reinstalled
-  the six skills and replaced the Project's instructions ("done").
-- **2026-10-06, versions confirmed.** The six loaded copies read
-  their new versions, open with their contents, and match the repo
-  byte for byte. The item stays open only for the split.
-- **2026-10-06, the split designed and ruled.** A design session at
-  orrery fbd223ee measured the skill: 137,837 characters, of which a
-  single read shows 16,000. The design is
-  `documentation/PREDESIGN_L418_provenance_skill_split_20261006.md`;
-  the record is `documentation/HANDOFF_L418_skill_split_design_20261006.md`.
-- **Tony's ruling, 2026-10-06 ("Read and confirmed"), all five
-  points:** a new skill, provenance-cross-check, holds the
-  Review-Repair Protocol, except A Cross-Check Retires With Its Value
-  or Its Citation and the retired `# Verified:` stamp, which stay
-  because they fire on ordinary edits; Rules 1 to 8 of the figure
-  count go to `references/figures.md` and the field notes to
-  `references/field-notes.md`; the withdrawn derived-row rule goes to
-  `documentation/SKILL_HISTORIES.md`; skills_index.py writes a read
-  plan at the top of every skill over 16,000 characters, and its
-  check fails on a part over 16,000 or a line left uncovered, and on
-  a reference file that is named and missing or present and unnamed;
-  the scanner and push gate are NOT split off; the install trial
-  comes first. No rule is reworded.
-- **The trial:** `install-probe.zip`, a throwaway skill with one extra
-  file. The next session checks it; Tony then deletes it.
-- **Still open:** the build, in a fresh session after the trial
-  passes. Versions to cut: provenance-discipline 2.27,
-  provenance-cross-check 1.0, ledger-and-session-records 1.17.
-- **2026-10-08, the install trial passed.** install-probe arrived with
-  its `references/probe.md`, md5 dc4f6011467ccc53f5b84f8a776b352b, the
-  recorded sentence, and the same "plugin" marking as Tony's eleven
-  skills, so the result speaks for them. Tony then deleted it.
-- **2026-10-08, the read limit measured.** This session's Read tool
-  stops at 25,000 tokens and says so: lines 1 to 1,106 of 2.26, 55,748
-  characters. The design's viewer showed 16,000 characters from the
-  start and the end. A read plan's parts stay under both: 16,000
-  characters and 2,000 lines.
-- **2026-10-08, the split built** at orrery b0b3df82:
-  `patch_L418_3_split_build_20261008.py`. provenance-discipline 2.27,
-  provenance-cross-check 1.0, ledger-and-session-records 1.18, protocol
-  v3.86. Fifteen sections moved and each checked whole; 23 listed edits,
-  each printed before and after; a final check that every section is
-  its original plus exactly those edits. skills_index.py writes the
-  read plans and checks them and the reference files; each new check
-  was shown failing on a throwaway copy before it was trusted.
-- **Tony's rulings of 2026-10-08, riding the build.** L-371 (the Sun
-  room's served numbers) and L-390 (the conversion marker) ride 2.27
-  ("As recommended? -- yes"). The L-252 paragraph, the checker's four
-  outcomes, goes beside the send-back rule in provenance-cross-check
-  ("Approved"), with its UNCHECKED_MOVE bullet split into its two cases
-  ("approved as recommended"). The four other long skills --
-  gallery-cache-builder, interactive-exhibit, orrery-coding-conventions,
-  safe-file-editing -- get their read plans at their next version, and
-  skills_index.py names them on PLAN_NOT_YET every run ("confirmed as
-  recommended").
-- **One departure from the brief, recorded.** The brief said a phase-2
-  edit inside a moved section is refused. L-390's sentences and the
-  L-252 paragraph both fall inside moved text, so instead the final
-  check proves each section equals its original with exactly the listed
-  edits applied.
-- **2026-10-08, run and pushed** (Tony's run record,
-  `documentation/WHERE_WE_ARE_10-8-26_1406_run_record.md`). The patch
-  wrote all 13 files. Its last check failed on its first run, on two
-  untracked `SKILL.md.bak` files sitting in the orrery-coding-conventions
-  and safe-file-editing folders on Tony's machine: a stray file in a
-  skill folder would ride into an install. Tony deleted them; the
-  maintenance run then passed 20 of 20, Skill headers 12 skills. Pushed
-  at ea2c0e16. Tony installed the three skills and replaced the
-  Project's instructions ("done"); pushed at e5cc4bb2.
-- **2026-10-08, the installed copies read in the same session.** After
-  the install, this session's mounted skills showed
-  provenance-discipline 2.27, provenance-cross-check 1.0 and
-  ledger-and-session-records 1.18, with all three reference files: tests
-  A1 and A2 of the testing protocol. The protocol's Stale Skill gate says
-  a mid-session install cannot be seen; this one could. Recorded on
-  L-351 for the protocol's next bump; the gate's rule stands until then.
-- **2026-10-08, the testing protocol:**
-  `documentation/TESTING_PROTOCOL_provenance_skills_20261008.md`. Part
-  A tests that the skills load and fire; Part B measures what checks a
-  citation's location record today (L-425).
-- **Two skill ZIPs were committed into `skills/`** (682c5395),
-  `provenance-cross-check.zip` and `provenance-discipline.zip`. They are
-  not skill folders, so the check passes, but each goes stale the next
-  time its skill changes. Recommended: delete them; the install is done.
-**Gap:** the next fresh session runs tests A3 to A6 of the testing
-protocol and says what it found; then this item closes.
-**Ref:** `skills_index.py`; `documentation/SKILL_HISTORIES.md`;
-`documentation/HANDOFF_L413_earth_orrery_patch_20261005.md`; L-417.
-
 #### [L-425] A citation's location record is checked only in part (provenance tooling)
-<!-- L:425 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+<!-- L:425 status:OPEN upd:2026-10-09 section:A flag: rice: -->
 - **Measured 2026-10-08** at orrery e5cc4bb2, for Tony's question: "how
   do we ensure that a citation's location record is correct and not
   broken or missing. is this check included in the scanner?" The answer
@@ -1414,6 +1255,11 @@ protocol and says what it found; then this item closes.
   push); a V_SOURCED row with no Source line (test_status_lines.py,
   gates); a worksheet named in a Cross-checked line and missing
   (worksheet_checker.py layer L0, report-only).
+- **Corrected 2026-10-09, by the planted-fault run below:** in
+  constants_new.py the scanner does NOT catch a removed Source line
+  when the row above is cited within its 30-line look-back (F1), and
+  the L0 finding is named only in WORKSHEET_CHECK.md, never in the
+  maintenance run's summary line (F4).
 - What is not: a missing Access line (20 of 61 sourced or cross-checked
   rows in constants_new.py have none, among them KM_PER_AU and
   SUN_RADIUS_KM); a missing Read line (4 of 61); a record file named on
@@ -1427,15 +1273,95 @@ protocol and says what it found; then this item closes.
   visits each address, run on Tony's machine, report-only. (1) and (2)
   would be rules in test_status_lines.py, which the maintenance run
   already has.
-  **Tony-action (decide):** which to build. Recommended: (1) and (2)
-  together in one session; (3) later, as its own small tool.
+- **2026-10-09, the planted-fault run** (record: `documentation/HANDOFF_L418_testing_20261009.md`, Part 2, with
+  every checker's line word for word). Throwaway clone of orrery
+  1e30953; a baseline run first; each fault on its own served row.
+  - F1, `# Source:` removed from EARTH_THERMOPAUSE_ALTITUDE_KM
+    (V_SOURCED): caught by test_status_lines.py alone, which gates. The
+    scanner was silent: the stratopause row's citation, within its
+    look-back, was credited to it (removing that too gave 296 to 298).
+    On L-414.
+  - F2, `# Access:` removed from TERMINATION_SHOCK_AU: silent.
+  - F3, HELMET_CUSP_LOW_RADII's record file renamed to a missing one:
+    silent, and the broken path is copied into constants_export.json.
+  - F4, EARTH_POLAR_RADIUS_KM's worksheet renamed to a missing one:
+    MISSING_WORKSHEET in WORKSHEET_CHECK.md, report-only; the summary
+    line stayed "74 of 110 routed, 8 clean".
+  - F5, EARTH_VAN_ALLEN_OUTER_BAND_LOW_L's address changed to a missing
+    page: silent.
+  - F6, EARTH_MAGNETOPAUSE_SHUE_A1_RADII's Read moved from Table 1 to
+    Table 7: silent, and copied into constants_export.json.
+  - F7a, SUN_RADIUS_KM's value moved alone: constants_change_report.py
+    ("VALUE MOVED ALONE"), test_constants_provenance.py and
+    test_constants_export.py fail, all gating; the worksheet checker
+    printed UNCHECKED_MOVE, not DRIFTED (on L-424).
+  - F7b, GRAVITATIONAL_CONSTANT_SI's value moved alone (not served; its
+    worksheets say value YES): constants_change_report.py only; the
+    worksheet checker saw no drift (L-426).
+  - constants_change_report.py compares against the last commit, so it
+    guards a moved value only until the commit.
+  - Against the three levels above: (1) would have caught F3 and F4,
+    failing the run; (2) F2; (3) F5. Nothing proposed catches F6.
+- **2026-10-09, the quote idea measured** (record, Part 3). Bound: the
+  rows the gallery's objects_config.json points at, Sun 25 and Earth
+  50. 40 are measured; 38 carry a Read line (not RADIATIVE_ZONE_AU,
+  SUN_RADIUS_KM). Of the 38: 23 name text (a sentence, section, page or
+  abstract), 19 of them with an Access address; 11 name a table, figure
+  or equation; 4 say "as" another row. Six tries, through the fetch
+  tool, which passes a page through a small model and caps a quote at
+  125 characters: INNER_OORT_CLOUD_AU, GRAVITATIONAL_INFLUENCE_PC,
+  OORT_CLOUD_INNER_EDGE_LOW_AU, EARTH_VAN_ALLEN_OUTER_BAND_LOW_L and
+  EARTH_MAGNETOTAIL_OBSERVED_RADII found; TERMINATION_SHOCK_AU
+  unreachable (NASA ADS refuses automated fetches). The tries show the
+  number's printed form varies (20\,000; 2,000), a small number turns
+  up by accident (L = 4 and 5) and a sign can differ (-220). For
+  GRAVITATIONAL_INFLUENCE_PC the tool found 0.65 in the Fig. 2 and 3
+  captions and not in sec. 5, which the Read line also names: a lead,
+  not proof.
+- **The quote question, for Tony, not answered here:** should a
+  `# Quote:` line become a fourth level; does it live beside `# Read:`
+  in constants_new.py or in the record file the Read line names; and
+  is it required of new rows only, or backfilled for the served slice
+  (38 rows, 23 quotable as text)? Its limits: a quote can be invented
+  as easily as a citation; only the online check on Tony's machine,
+  reading the page itself, can tell; a quote written in a Claude
+  session is a model's transcription until then; stored and never
+  checked, it is a check that cannot fail.
+  **Tony-action (decide):** which of the levels to build, on the
+  measured results; and the quote question, with the count. The
+  recommendation above, (1) and (2) together and (3) later, stands.
 **Gap:** Tony's decision above.
 **Ref:** `documentation/TESTING_PROTOCOL_provenance_skills_20261008.md`;
 `provenance_scanner.py`; `test_status_lines.py`; `worksheet_checker.py`;
-L-418.
+L-418; L-414; L-424; L-426; `documentation/HANDOFF_L418_testing_20261009.md`.
+
+#### [L-426] The worksheet checker compares very small numbers as equal (worksheet checker)
+<!-- L:426 status:OPEN upd:2026-10-09 section:A flag: rice: -->
+- **Found 2026-10-09** by the planted-fault run (F7b; record `documentation/HANDOFF_L418_testing_20261009.md`).
+  `compare()` in `worksheet_checker.py` rounds the code's value and the
+  worksheet's to the coarser of their DECIMAL PLACES. For numbers near
+  1e-11 both round to 0, so any two of them match. Probe at 1e30953:
+  1e-11, 9.9e-11, 6.674e-11 and 2e-7 each "MATCH" 6.67430e-11, while
+  7.0e-5 against 7.292115e-5 is still a MISMATCH. Both drift (L2b) and
+  agreement (L2a) use `compare()`, so a moved value on such a row is
+  invisible. The one row it reaches today is GRAVITATIONAL_CONSTANT_SI,
+  the only constants row this session found whose worksheets give a
+  value verdict of YES.
+- The rounding is on purpose -- 243 in the code must match 243.0226 in a
+  worksheet -- so the fix is to round to significant figures rather than
+  to decimal places, not to drop the rounding. Method, not Tony's: he
+  asked on 2026-10-09 whether to compare at full digits, and this was
+  the answer.
+- A change to a checker gets its own session (Where We Are, Settled,
+  2026-10-08). L-424's session opens the same function; carry both,
+  with a test that fails on the probe values first.
+**Gap:** the fix and its test; then the probe values report MISMATCH
+and 6.67430e-11 still matches 6.6743e-11.
+**Ref:** `worksheet_checker.py` (`compare`, `displayed_precision`,
+`float_precision`); `test_worksheet_checker.py`; L-424; L-425.
 
 #### [L-424] The checker reports one word for two different cases (worksheet checker)
-<!-- L:424 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+<!-- L:424 status:OPEN upd:2026-10-09 section:A flag: rice: -->
 - **Found 2026-10-08,** building L-418, while checking the L-252
   paragraph against `worksheet_checker.py` at b0b3df82. UNCHECKED_MOVE
   is reported for two different cases: the worksheet has no value
@@ -1449,6 +1375,16 @@ L-418.
   That is a change to `worksheet_checker.py` and its tests, for a
   session of its own.
   **Tony-action (decide):** whether the checker splits the word.
+- **2026-10-09, seen on a served row** (planted-fault run, F7a; record
+  `documentation/HANDOFF_L418_testing_20261009.md`). SUN_RADIUS_KM's value moved alone, and both its legs
+  printed "UNCHECKED_MOVE -- code now 696340.0, checker read 695700.0;
+  this worksheet carries no value verdict": the no-value-verdict case,
+  named in the line. Every served row's cross-check worksheet records
+  only a citation verdict, so this is the case a drift on a served row
+  reaches. The summary moved from 74 to 76 routed and named nothing.
+- The session that builds this item opens `compare()`, the same
+  function as L-426 (the checker's small-number comparison); carry
+  both.
 **Gap:** Tony's decision above; if yes, a session builds it with a test
 for each case and updates the skill's bullet to match.
 **Ref:** `worksheet_checker.py` (the L2b block); `test_worksheet_checker.py`;
@@ -1541,7 +1477,7 @@ above.
 above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 
 #### [L-414] The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling)
-<!-- L:414 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+<!-- L:414 status:OPEN upd:2026-10-09 section:A flag: rice: -->
 - **2026-10-08:** Tony ruled that this item gets its own session,
   which cuts provenance-discipline 2.28, before the Sun's list
   reaches L-228 (the Alfven surface's ranges); it does not ride the
@@ -1568,6 +1504,16 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
   window to the attached comment run, or teach the scanner the declared
   status is provenance-discipline's to settle. L-351 points here for
   that skill's next version.
+- **2026-10-09, the window's other face** (planted-fault run, F1;
+  record `documentation/HANDOFF_L418_testing_20261009.md`). With EARTH_THERMOPAUSE_ALTITUDE_KM's own Source
+  lines removed, the scanner still scored it "Cited, not independently
+  cross-checked": the stratopause row's Source and Ref lines, a few
+  lines above, fell inside its 30-line look-back. Removing those as
+  well made both rows Tier-1 (296 to 298). So the window both misses a
+  row's own late Source line (above) and credits a neighbour's; in
+  constants_new.py, where rows sit close, a removed Source line is
+  caught only by test_status_lines.py rule 4, on rows that declare a
+  sourced rung.
 **Gap:** the fix, by provenance-discipline's method; then the scanner's
 count for `constants_new.py` should name these four as gone.
 **Ref:** `provenance_scanner.py`; `constants_new.py`;
@@ -2189,7 +2135,7 @@ section 5.
 **Ref:** `shell_configs.py`; `earth_visualization_shells.py`; `constants_rows.py`; L-345; L-352.
 
 #### [L-386] The Sun's conversion rows, not yet exported (store, the Sun's slice)
-<!-- L:386 status:OPEN upd:2026-10-04 section:A flag: rice: -->
+<!-- L:386 status:OPEN upd:2026-10-09 section:A flag: rice: -->
 - **Recorded, not built.** Under Tony's ruling of 2026-09-28 (L-345) a
   value in another unit is computed, never stored. The Sun's rows are
   not exported yet, and several are another row in a different unit:
@@ -2205,6 +2151,12 @@ section 5.
   (0.65, Portegies Zwart) with GRAVITATIONAL_INFLUENCE_AU its
   conversion; KM_PER_PARSEC and the pc token added for it. The Oort
   edges and the termination shock were already in their sources' unit.
+- **2026-10-09, SOLAR_RADIUS_AU's marker shown working** (test A3;
+  record `documentation/HANDOFF_L418_testing_20261009.md`). On a throwaway, replacing its two `# Derived:` lines
+  with `# Unit: au` and `# Conversion: of SUN_RADIUS_KM -- computed from
+  that row, which carries the source and the count.` cleared the one
+  UNMARKED CONVERSION test_derived_figures.py prints; 19 conversions
+  checked, none wrong. Not applied: that session edited no deliverable.
 **Gap:** the core, the radiative zone and the photosphere's AU row
 (CORE_AU, RADIATIVE_ZONE_AU, SOLAR_RADIUS_AU), still unexported: the
 Sun slice's seventh item (L-412).
@@ -3203,7 +3155,7 @@ website's checks). The card exports and the two comments go with the next patch 
 **Ref:** `earth_visualization_shells.py`; `planet_visualization_utilities.py`; `documentation/NOTE_L322_C2a_orrery_words_20260922.md`; manifest sec. 17.7.
 
 #### [L-351] Rules learned at C2, owed to the next bumps of their stores (skills, protocol)
-<!-- L:351 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+<!-- L:351 status:OPEN upd:2026-10-09 section:A flag: rice: -->
 - **Recorded, not built.** A class found while building L-322 Stage C2
   (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
   Braid: it waits until the artifact on the critical path reaches it.
@@ -3279,6 +3231,9 @@ website's checks). The card exports and the two comments go with the next patch 
     reference-file conventions. Owed (found 2026-10-08): who empties
     the run-record zone. The skill says both "no patch edits below
     the marker" and "once read, the close empties the live zone".
+    Tony, beside that note in his run record of 2026-10-08: "the run
+    record is documented only in this timestamped copy not in the
+    original WHERE WE ARE".
   - gallery-cache-builder, interactive-exhibit,
     orrery-coding-conventions, safe-file-editing: a read plan at the
     next version, and the skill comes off PLAN_NOT_YET in
@@ -20726,6 +20681,192 @@ case); A Check That Cannot Fail Is Not Passing [CRITICAL].
 **Gap:** none.
 **Ref:** `constants_rows.py`; `test_derived_figures.py`;
 `skills/provenance-discipline/SKILL.md` Rules 1, 3 and 8; L-345.
+
+#### [L-418] Long skills open with their contents, and keep three version entries (skills)
+<!-- L:418 status:DONE upd:2026-10-09 section:C flag: rice: -->
+- **2026-10-08, the split brief's section 4 decision, ruled** in the
+  decisions session of 2026-10-08 (Tony: "As recommended? -- yes"):
+  L-371 (the Sun room's served numbers) and L-390 (the conversion
+  marker) ride provenance-discipline 2.27 with the split; L-414 (the
+  scanner's window) gets its own session, which cuts 2.28, before the
+  Sun's list reaches L-228 (the Alfven surface's ranges). Carried to
+  the split session, already running, by
+  `documentation/NOTE_for_split_session_L252_paragraph_20261008.md`.
+- **2026-10-08, one approved paragraph rides the split too,** from
+  L-252 (closed). Tony: "Concur with B" (the exact words now, carried
+  by the split, not a bump of its own); on the wording, "Approved".
+  It goes right after the send-back rule ("PARTIAL and APPROX return
+  to the originator for completion", and its "Ask for a NEW file"
+  paragraph), before "A Complete Row That Disagrees Is a Finding". If
+  the split moves that section to provenance-cross-check 1.0, the
+  paragraph goes with it; placement is the split session's call. If
+  the split shipped without it, it rides L-414's 2.28. The text,
+  word for word (indented four spaces here; the text starts at the
+  bold line):
+
+    **What the checker reports is a different list** (L-252, Tony,
+    2026-10-08). `worksheet_checker.py` compares the code against a
+    worksheet and reports one of four outcomes. They are the checker's
+    words, not worksheet tokens, and never belong in a verdict cell.
+
+    - DRIFTED -- the worksheet confirmed a value and the code left it, or
+      called it APPROX or PARTIAL and the code moved somewhere the
+      worksheet never named. The only defect of the four; routed to
+      conversation.
+    - CORRECTED -- the worksheet rejected the value and the code moved.
+      Recorded, not routed.
+    - COMPLETED -- the worksheet called it APPROX or PARTIAL and supplied a
+      value, and the code now reads exactly that value. Recorded, not
+      routed.
+    - UNCHECKED_MOVE -- the code moved and the worksheet carries no value
+      verdict. Routed, because nobody has established anything.
+
+    COMPLETED says only that the code took the value the worksheet
+    supplied. It is not a confirmation. The row is still APPROX or
+    PARTIAL, it earns no leg toward the cross-checked rung, and the
+    send-back rule above is unchanged.
+
+- **Found 2026-10-05**, reviewing a Claude Sonnet 5.5 session's check of
+  the skills against Anthropic's limits. Five skills are over
+  Anthropic's 500-line guideline. Measured: a plain read of a long file
+  shows its start and its end and leaves out the middle (this chat's
+  file viewer cuts everything past 16,000 characters from the middle),
+  and provenance-discipline's first 423 lines were version history, so
+  a plain read saw history and field notes and none of the rules.
+- **Tony's rulings, 2026-10-05.** Move the history out; a contents
+  section at the top ("Would adding a contents section help to find
+  what you need?"); arrange the sections so more are read whole; do all
+  five long skills, and gallery-cache-builder too, which is under 500
+  lines but long enough to be cut ("Do all including gallery cache
+  builder").
+- **Built:** `patch_L418_1_skill_contents_and_histories_20261005.py`.
+  Each of the six opens with a `## Contents` list of its headings;
+  history older than three entries moved word for word to
+  `documentation/SKILL_HISTORIES.md`; provenance-discipline's sections
+  ordered critical, quality, untiered, then Report to the Figures You
+  Have and the Review-Repair Protocol, then the field notes, every
+  section's text checked unchanged; `skills_index.py --check` fails a
+  skill over 500 lines with no list and any list that disagrees with
+  its headings, shown failing before it was trusted;
+  ledger-and-session-records gains "A skill keeps three version
+  entries". Versions: provenance-discipline 2.26, interactive-exhibit
+  1.11, safe-file-editing 1.13, orrery-coding-conventions 1.10,
+  ledger-and-session-records 1.15, gallery-cache-builder 1.7; protocol
+  v3.81.
+- **Still open, recorded, not scheduled:** moving
+  provenance-discipline's two long procedures (Review-Repair, 763
+  lines; Report to the Figures You Have, 631) into reference files
+  loaded only when needed, Anthropic's pattern. It needs a design talk,
+  because where a rule lives decides whether it fires.
+- **Run and pushed, 2026-10-05,** at orrery d9f47a87. Tony reinstalled
+  the six skills and replaced the Project's instructions ("done").
+- **2026-10-06, versions confirmed.** The six loaded copies read
+  their new versions, open with their contents, and match the repo
+  byte for byte. The item stays open only for the split.
+- **2026-10-06, the split designed and ruled.** A design session at
+  orrery fbd223ee measured the skill: 137,837 characters, of which a
+  single read shows 16,000. The design is
+  `documentation/PREDESIGN_L418_provenance_skill_split_20261006.md`;
+  the record is `documentation/HANDOFF_L418_skill_split_design_20261006.md`.
+- **Tony's ruling, 2026-10-06 ("Read and confirmed"), all five
+  points:** a new skill, provenance-cross-check, holds the
+  Review-Repair Protocol, except A Cross-Check Retires With Its Value
+  or Its Citation and the retired `# Verified:` stamp, which stay
+  because they fire on ordinary edits; Rules 1 to 8 of the figure
+  count go to `references/figures.md` and the field notes to
+  `references/field-notes.md`; the withdrawn derived-row rule goes to
+  `documentation/SKILL_HISTORIES.md`; skills_index.py writes a read
+  plan at the top of every skill over 16,000 characters, and its
+  check fails on a part over 16,000 or a line left uncovered, and on
+  a reference file that is named and missing or present and unnamed;
+  the scanner and push gate are NOT split off; the install trial
+  comes first. No rule is reworded.
+- **The trial:** `install-probe.zip`, a throwaway skill with one extra
+  file. The next session checks it; Tony then deletes it.
+- **Still open:** the build, in a fresh session after the trial
+  passes. Versions to cut: provenance-discipline 2.27,
+  provenance-cross-check 1.0, ledger-and-session-records 1.17.
+- **2026-10-08, the install trial passed.** install-probe arrived with
+  its `references/probe.md`, md5 dc4f6011467ccc53f5b84f8a776b352b, the
+  recorded sentence, and the same "plugin" marking as Tony's eleven
+  skills, so the result speaks for them. Tony then deleted it.
+- **2026-10-08, the read limit measured.** This session's Read tool
+  stops at 25,000 tokens and says so: lines 1 to 1,106 of 2.26, 55,748
+  characters. The design's viewer showed 16,000 characters from the
+  start and the end. A read plan's parts stay under both: 16,000
+  characters and 2,000 lines.
+- **2026-10-08, the split built** at orrery b0b3df82:
+  `patch_L418_3_split_build_20261008.py`. provenance-discipline 2.27,
+  provenance-cross-check 1.0, ledger-and-session-records 1.18, protocol
+  v3.86. Fifteen sections moved and each checked whole; 23 listed edits,
+  each printed before and after; a final check that every section is
+  its original plus exactly those edits. skills_index.py writes the
+  read plans and checks them and the reference files; each new check
+  was shown failing on a throwaway copy before it was trusted.
+- **Tony's rulings of 2026-10-08, riding the build.** L-371 (the Sun
+  room's served numbers) and L-390 (the conversion marker) ride 2.27
+  ("As recommended? -- yes"). The L-252 paragraph, the checker's four
+  outcomes, goes beside the send-back rule in provenance-cross-check
+  ("Approved"), with its UNCHECKED_MOVE bullet split into its two cases
+  ("approved as recommended"). The four other long skills --
+  gallery-cache-builder, interactive-exhibit, orrery-coding-conventions,
+  safe-file-editing -- get their read plans at their next version, and
+  skills_index.py names them on PLAN_NOT_YET every run ("confirmed as
+  recommended").
+- **One departure from the brief, recorded.** The brief said a phase-2
+  edit inside a moved section is refused. L-390's sentences and the
+  L-252 paragraph both fall inside moved text, so instead the final
+  check proves each section equals its original with exactly the listed
+  edits applied.
+- **2026-10-08, run and pushed** (Tony's run record,
+  `documentation/WHERE_WE_ARE_10-8-26_1406_run_record.md`). The patch
+  wrote all 13 files. Its last check failed on its first run, on two
+  untracked `SKILL.md.bak` files sitting in the orrery-coding-conventions
+  and safe-file-editing folders on Tony's machine: a stray file in a
+  skill folder would ride into an install. Tony deleted them; the
+  maintenance run then passed 20 of 20, Skill headers 12 skills. Pushed
+  at ea2c0e16. Tony installed the three skills and replaced the
+  Project's instructions ("done"); pushed at e5cc4bb2.
+- **2026-10-08, the installed copies read in the same session.** After
+  the install, this session's mounted skills showed
+  provenance-discipline 2.27, provenance-cross-check 1.0 and
+  ledger-and-session-records 1.18, with all three reference files: tests
+  A1 and A2 of the testing protocol. The protocol's Stale Skill gate says
+  a mid-session install cannot be seen; this one could. Recorded on
+  L-351 for the protocol's next bump; the gate's rule stands until then.
+- **2026-10-08, the testing protocol:**
+  `documentation/TESTING_PROTOCOL_provenance_skills_20261008.md`. Part
+  A tests that the skills load and fire; Part B measures what checks a
+  citation's location record today (L-425).
+- **Two skill ZIPs were committed into `skills/`** (682c5395),
+  `provenance-cross-check.zip` and `provenance-discipline.zip`. They are
+  not skill folders, so the check passes, but each goes stale the next
+  time its skill changes. Recommended: delete them; the install is done.
+- **2026-10-09, tests A1 to A6 pass in a fresh session** (record:
+  `documentation/HANDOFF_L418_testing_20261009.md`, Part 1; tests on orrery 1e30953). The loaded copies read
+  provenance-discipline 2.27, provenance-cross-check 1.0 and
+  ledger-and-session-records 1.18, matching the manifest and the repo
+  byte for byte, and both skill folders hold their reference files
+  (A1, A2). A6: the read plan named five parts and all five were read
+  in order with the file reader. A5: an ordinary citation edit (an
+  Access line on SUN_RADIUS_KM) was governed by provenance-discipline
+  alone. A3: `references/figures.md` was opened before the line was
+  written, and it changed the answer -- SOLAR_RADIUS_AU takes a
+  Conversion line, not a Figures line (carried to L-386). A4: a relay
+  prompt for GPT loaded provenance-cross-check and opened
+  `references/worksheets.md` first, and carried the schema, the
+  verdict words, bare addresses, a pre-flight fetch and a model-and-tier
+  header. The limit, stated in the record: the session knew the
+  expected answers from the brief.
+- **Loose ends, re-homed at the close.** Moving the two long procedures
+  into reference files: done by this item's split at 2.27, struck. The
+  four other long skills' read plans: L-351 carries them, and
+  skills_index.py names them on PLAN_NOT_YET every run. The two skill
+  ZIPs: deleted by Tony ("-- done", his run record), absent at 08f0375.
+  L-414's 2.28: on L-414.
+**Gap:** none. Closed 2026-10-09.
+**Ref:** `skills_index.py`; `documentation/SKILL_HISTORIES.md`;
+`documentation/HANDOFF_L413_earth_orrery_patch_20261005.md`; L-417.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
