@@ -573,10 +573,9 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  2. Move this script into documentation/; commit and push.
+  2. Move this script into documentation/; commit and push. -- dfe4a8737025717d68f96e2dd59aff15290b3164
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 **End Run Record**
-
 
 Separately, your L-414 (the scanner's window) run is now recorded on that item: 21 of 21 checks passed, and the push gate reads 0. I didn't close the item, because its next step needs the provenance skill, which this session didn't load.
 
