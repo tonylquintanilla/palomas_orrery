@@ -1,26 +1,26 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 9, 2026, at the lobby build.
-- Written at orrery b6652f9 and gallery 5ec4739, before your runs.
+Last updated: October 10, 2026, at the lobby's second round.
+- Written at orrery 04d1733 and gallery 2aab10f, before your runs.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - L-428 (the lobby's way in) is built: the lobby opens on the Solar
->   System room's picture and one Enter button. Not pushed yet.
-> - "Doors" is now "Or explore by subject". The Solar System card left
->   Featured, since it now opens the page.
+> - L-428 (the lobby's way in) is live. Your two asks are built: the
+>   start card is see-through, and the grey type is brighter.
+> - L-429 (the room button on the row): the Sun and Earth show "Enter
+>   the ... room" on their own row in the Solar System room's list.
 >
 > **Do next:** *as you confirmed: the typed facts (the inner Oort
 > cloud, then the check); the Horizons check build; the Sun's list
 > from item 3.*
 >
 > **Needs you now:**
-> - *Gallery: run patch_L428_1, push, look on the phone (close the
->   Home Screen clip's tab first). Orrery: run patch_L428_2, then the
->   maintenance run, and push.*
-> - Reinstall provenance-discipline 2.28, if not done yet.
+> - *Gallery: run patch_L428_3_L429_1, the maintenance run, push; look
+>   on the phone. Orrery: run patch_L429_2, the maintenance run, push.*
+> - Reinstall interactive-exhibit (1.13), and provenance-discipline
+>   (2.28) if not done yet; the Project's instructions to v3.88.
 > - *Decide L-425 (citation location checks): which checks to build,
 >   on the run's results (on L-425 and in the handoff).*
 
@@ -52,7 +52,8 @@ Last updated: October 9, 2026, at the lobby build.
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
-- The lobby opens on the Solar System room, then the subjects. (Oct 9)
+- The lobby opens on the Solar System room, then the subjects. In
+  that room's list a room's button sits on its row. (Oct 9, Oct 10)
 - A row's sources come only from its own comment block. (Oct 9)
 - Small fixes owed to a skill ride the version a session is already
   making; a change to a checker gets its own session. (Oct 8)
@@ -78,8 +79,8 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261009T190335Z, ok, no retry.
 - Tier-1 on the gate path: 0, by name, in PROVENANCE_AUDIT.md at
-  b6652f9. Whole tree: 293.
-- This page's date and the ledger's newest stamp: both Oct 9. Agree.
+  04d1733. Whole tree: 293.
+- This page's date and the ledger's newest stamp: both Oct 10. Agree.
 
 ## Waiting on you
 
@@ -105,7 +106,7 @@ Not urgent, in your order:
 
 ## Where the details are  **>> UPDATED THIS SESSION**
 
-- The lobby: L-428 (its way in); `HANDOFF_lobby_option_E_20261009.md`
+- The lobby, the room button: L-428, L-429; `HANDOFF_L428_L429_round2_20261010.md`
 - Scanner window: L-414 (the scanner's window), L-427 (rows a neighbour
   had credited); `documentation/HANDOFF_L414_scanner_window_20261009.md`
 - The Oct 8 decisions: `documentation/HANDOFF_decisions_20261008.md`.

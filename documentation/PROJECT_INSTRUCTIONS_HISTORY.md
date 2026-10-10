@@ -2405,6 +2405,48 @@ resident.
 (Moved down from the resident protocol on 2026-10-09 when
 v3.87 made a fourth entry.)
 
+v3.85 (October 7, 2026): No rule changed in this document. ONE
+skill bump, one version (L-422): ledger-and-session-records 1.16 ->
+1.17. TONY'S PAGE IS EDITED BY SECTION, AND ITS END IS HIS.
+
+WHAT PROMPTED IT. The Fable 5.1 ledger sweep of October 4 to 7 read
+Where We Are and found the same facts in four sections, and found that
+a closing patch built before a parallel session had rewritten the page
+whole and erased that session's lines. Tony then said how he uses the
+page: "I use the where we are to record the run record and rename it
+with a time stamp." His timestamped copies hold the patch output and
+his verdict beside each test line -- the primary record of his rulings.
+
+WHAT CHANGED. ledger-and-session-records, under Where We Are -- Tony's
+page: each fact once, the READ THIS FIRST box is the page, Settled and
+Signals added; a patch edits the page by section, never whole; the page
+ends with a marker, and below it is Tony's run-record zone, which no
+patch edits and which the close reads from his latest timestamped copy;
+every ledger handle on the page carries a short label ("all ledger
+L-xxx items should have a brief parenthetical label"); the check to
+build is the date and a cap of 130 lines above the marker. Under Ledger
+Block Format: an item inside an ordered list needs no RICE score, his
+ruling of the same day (L-412). Under Where a File Goes: records go to
+the orrery's documentation/, flat, no subfolders ("Subfolders are more
+steps and also I scan the files to see what the recent changes were").
+The skill's v1.14 entry moved to documentation/SKILL_HISTORIES.md, by
+the three-entry rule. Where We Are itself was rewritten in the new
+shape, this once, the page it replaced copied into the handoff.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+ledger-and-session-records 1.17 before any ledger, handoff or
+session-record work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.82 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-10 when
+v3.88 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

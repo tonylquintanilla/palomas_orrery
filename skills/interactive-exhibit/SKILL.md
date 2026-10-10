@@ -6,7 +6,18 @@ fires_when: adding or changing an exhibit in interactive.html; any edit to the S
 
 # Interactive Exhibit
 
-Skill version: 1.12 | 2026-10-06, with Anthropic's Claude Opus 5.5, at
+Read this file in 4 parts: lines 1-138, 139-372, 373-620, 621-781.
+
+Skill version: 1.13 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 04d17331 and gallery @ 2aab10fd. v1.13 (L-429)
+corrects the Solar System room's drawer as built: a body with a room
+shows its "Enter the <name> room" button on its own row, before GO,
+always, on every screen; a body with none still opens to "No room or
+cards yet". Tony, 2026-10-10: "so the visitor does not need to tap the
+row to see the button then tap again to enter the room." The skill
+also gets its read plan, at its next version as Tony ruled on
+2026-10-08 (L-418).
+Earlier: 1.12 | 2026-10-06, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 51436054 and gallery @ ed48d078. v1.12 (L-421, L-349)
 draws the line the provenance rule left open: a fact about one feature
 is served with that feature's words, never typed in a renderer, and
@@ -25,20 +36,8 @@ older than the two entries below moved to
 documentation/SKILL_HISTORIES.md. Both because a plain read of a
 long file shows its start and end and leaves out its middle, where
 the rules are (Tony, 2026-10-05).
-Earlier: 1.10 | 2026-10-02, with Anthropic's Claude Opus 5.5, from
-orrery @ 5e42b00b and gallery @ 0ffa4518. v1.10 (L-406) writes down
-Tony's rule for a feature's info link, which lived only on L-265: a
-NASA page where one is specific to the feature, otherwise English
-Wikipedia, with the corona the one named exception. Asked on
-2026-10-02, while the galactic tide was being redrawn, whether the
-skills covered how a feature's hover, info panel and drawing are
-written; the hover and the drawing were covered and the link was not.
-The same day Settings refused the first copy ("malformed YAML
-frontmatter"): the new fires_when words sat on a line of their own.
-They are back on the one line, and the version stays 1.10, which never
-loaded anywhere (L-406, L-407).
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-05 (L-418).
+on 2026-10-05 (L-418) and 2026-10-10 (L-429).
 
 ## Contents
 
@@ -329,12 +328,17 @@ Plotly.
 - **The Sun's row is fixed**: no tick box, no GO, never unticked by All
   / none. It still highlights and opens. The Sun's trace group is
   `center` (the assembler's centre marker), not its slug.
-- **A row opens.** Tapping a name highlights the row and opens it; a
-  second tap closes it. Ticking a body opens its row too (Tony,
-  2026-09-30). An open row links "Enter the <name> room" where the
-  row's slug is a key in `EXHIBITS`, and says "No room or cards yet"
-  where it is not -- read from the page's own table, so the next room
-  lights its row by itself.
+- **A row opens, and a room is one tap away.** Tapping a name
+  highlights the row and opens it; a second tap closes it. Ticking a
+  body opens its row too (Tony, 2026-09-30). A body whose slug is a key
+  in `EXHIBITS` shows "Enter the <name> room" on its OWN row, before
+  GO, always and on every screen, so one tap enters the room (L-429;
+  Tony, 2026-10-10: "so the visitor does not need to tap the row to see
+  the button then tap again"). The Sun's row keeps GO's space, hidden,
+  so its button lines up. A body with no room opens to "No room or
+  cards yet": under the row upright, on the name's line with the phone
+  sideways (Tony, 2026-10-03). Both are read from the page's own table,
+  so the next room lights its row by itself.
 - **See more / See fewer** for rows served `see_more`. A ticked row
   never hides; the button is not offered when nothing is behind it.
 - **Home remembers the tick order**, for the open tab only: the last
@@ -772,4 +776,6 @@ manifest in PROJECT_INSTRUCTIONS.md carries the version. Per Stale Skill
 that followed their pushes. The first session after 1.3's push confirms
 its loaded copy reads 1.3 before exhibit work. 1.9 was cut in the
 session that wrote it, which loaded 1.8; the next session confirms its
-loaded copy reads 1.9 before exhibit work.
+loaded copy reads 1.9 before exhibit work. 1.13 was cut in a session
+that loaded 1.12; the next session confirms its loaded copy reads 1.13
+before exhibit work.

@@ -543,6 +543,18 @@ chrome with four additions, with Tony's framing ruling -- where a body
 is now, plus 20% (L-363 step 3b). And step 4 gains the headless recipe:
 a room's real driver in CPython, the real page in jsdom with a stand-in
 Plotly, and the other rooms compared before and after (tools/headless/).
+Earlier: 1.10 | 2026-10-02, with Anthropic's Claude Opus 5.5, from
+orrery @ 5e42b00b and gallery @ 0ffa4518. v1.10 (L-406) writes down
+Tony's rule for a feature's info link, which lived only on L-265: a
+NASA page where one is specific to the feature, otherwise English
+Wikipedia, with the corona the one named exception. Asked on
+2026-10-02, while the galactic tide was being redrawn, whether the
+skills covered how a feature's hover, info panel and drawing are
+written; the hover and the drawing were covered and the link was not.
+The same day Settings refused the first copy ("malformed YAML
+frontmatter"): the new fires_when words sat on a line of their own.
+They are back on the one line, and the version stays 1.10, which never
+loaded anywhere (L-406, L-407).
 
 ## safe-file-editing
 

@@ -196,7 +196,7 @@ PLAN_NOT_YET = [
     # Each was under one read of the reader measured that day (about
     # 55,000 characters), so none is cut today.
     'gallery-cache-builder',
-    'interactive-exhibit',
+    # interactive-exhibit left on 2026-10-10 with its 1.13 (L-429).
     'orrery-coding-conventions',
     'safe-file-editing',
 ]

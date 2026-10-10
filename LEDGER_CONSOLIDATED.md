@@ -316,6 +316,10 @@ been crediting; L-351 and L-184 updated), built on aa46bb10.
 Module updated: October 9, 2026 with Anthropic's Claude Opus 5.5
 (L-428 opened and built: the lobby's way in, option E; L-282, L-363,
 L-367 and L-414 updated), built on b6652f9.
+Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5
+(L-428 round 2, from Tony's run record of 2026-10-09; L-429 opened
+and built, the room button on the row; interactive-exhibit 1.13,
+protocol v3.88; L-363 updated), built on 04d17331.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -533,7 +537,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*237 live items; 221 need attention (`!`); 167 RICE-scored; 186 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*238 live items; 222 need attention (`!`); 167 RICE-scored; 186 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -684,7 +688,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-425 | A citation's location record is checked only in part (provenance tooling) | OPEN | -- | 2026-10-09 |
 | ! | L-426 | The worksheet checker compares very small numbers as equal (worksheet checker) | OPEN | -- | 2026-10-09 |
 | ! | L-427 | Rows a neighbour's citation had been crediting (store) | OPEN | -- | 2026-10-09 |
-| ! | L-428 | The lobby's way in: the Solar System room first (gallery, lobby) | OPEN | -- | 2026-10-09 |
+| ! | L-428 | The lobby's way in: the Solar System room first (gallery, lobby) | OPEN | -- | 2026-10-10 |
+| ! | L-429 | The room button on the row, in the Solar System room's list (gallery, exhibits) | OPEN | -- | 2026-10-10 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1253,8 +1258,42 @@ IGRF epoch, a class); gallery `gallery/feature_renderers.js`,
 `gallery/earth_geometry.js`, `data/objects_config.json`;
 skills/interactive-exhibit/SKILL.md.
 
+#### [L-429] The room button on the row, in the Solar System room's list (gallery, exhibits)
+<!-- L:429 status:OPEN upd:2026-10-10 section:A flag: rice: -->
+- **Asked 2026-10-10, 00:08,** by Tony with a phone screenshot of the
+  Solar System room: "Can we put the 'Enter the ___ room' button on the
+  same row with the Go button rather than below? So the visitor does
+  not need to tap the row to see the button then tap again to enter the
+  room."
+- **Built 2026-10-10, NOT yet run** [render-gated]: gallery
+  `patch_L428_3_L429_1_lobby_contrast_drawer_button.py`, on 2aab10f.
+  A body with a room in `EXHIBITS` (today the Sun and Earth) shows
+  "Enter the <name> room" on its own row, before GO, always, on every
+  screen. A body with none still opens to "No room or cards yet". The
+  Sun's row keeps GO's space, hidden, so the two buttons line up. The
+  info panel's line: "Tap a body's name to select it. A body with a
+  room of its own has a button on its row to enter it." The Claude-only
+  walk, `tools/headless/walk_solar_system_drawer.js`, checks it.
+- Verified on a throwaway copy: the walk passes 67 checks and fails 7
+  on the old page; the drawer smoke passes; a real render at 390 x
+  844, 844 x 390 and 1280 x 800 lines the buttons up before GO with no
+  name cut; one tap on "Enter the Earth room" opens the Earth room.
+- **interactive-exhibit 1.12 -> 1.13**, its drawer bullet corrected,
+  by the rule for a wrong sentence in a skill: a session following the
+  old one would have told Tony the button shows only on an opened row.
+  It gets its read plan at this version, as Tony ruled on 2026-10-08.
+  Protocol v3.88 records it.
+- Tony-action (do): run the gallery patch, the maintenance run, push;
+  look on the phone; reinstall interactive-exhibit; replace the
+  Project's instructions with v3.88.
+**Gap:** Tony's look on the phone. Then this item closes. The next
+session confirms its loaded interactive-exhibit reads 1.13.
+**Ref:** L-363 (the Solar System room's drawer, step 3b); L-428 (the
+lobby's way in); gallery `interactive.html`;
+`documentation/HANDOFF_L428_L429_round2_20261010.md`.
+
 #### [L-428] The lobby's way in: the Solar System room first (gallery, lobby)
-<!-- L:428 status:OPEN upd:2026-10-09 section:A flag: rice: -->
+<!-- L:428 status:OPEN upd:2026-10-10 section:A flag: rice: -->
 - **Asked 2026-10-09, 17:10,** by Tony with a phone screenshot of the
   live lobby: a friend shown the site "was confused on where to go. He
   started with the rooms and cards but still unsure. Can you use design
@@ -1289,7 +1328,27 @@ skills/interactive-exhibit/SKILL.md.
   the Home Screen clip's tab closed first; run this records patch, the
   maintenance run, push.
 - Tony-action (decide), after the look: close, or change first.
-**Gap:** Tony's run and his look on the phone. Then this item closes.
+- **Round 1 run and looked at, 2026-10-09**, read from Tony's copy
+  `documentation/WHERE_WE_ARE_10-9-26_2307_run_record.md`: gallery
+  pushed at 2aab10f; the card drawn once, the door counts, the door's
+  page, Enter and the picture all "correct" or "yes". His gallery
+  maintenance run: 1 of 24 failed, Artifact 1 assembler, recorded on
+  L-237. Two asks: "could you give this card the same semi-transparent
+  opacity that the other interactive cards have? The doves allude to
+  'Paloma'"; and "Brighten the grey type to white or blue or another
+  color if you need contrast with the existing white type. grey is too
+  dim", which also answers the heading over the doves ("yes, see my
+  note above").
+- **Round 2 built 2026-10-10, NOT yet run** [render-gated]: gallery
+  `patch_L428_3_L429_1_lobby_contrast_drawer_button.py`, on 2aab10f.
+  The start card takes the other lobby cards' see-through blue; the
+  picture stays solid. In the lobby only, the headings are blue and the
+  grey lines near white, with the guest book's soft shadow. Record:
+  `documentation/HANDOFF_L428_L429_round2_20261010.md`.
+- Tony-action (do): `patch_L428_1_lobby_option_e.py` was committed at
+  the gallery's root; move it, and round 2's patch, into the gallery's
+  `documentation/`.
+**Gap:** Tony's look on the phone after round 2. Then this item closes.
 **Ref:** L-282 (the lobby); L-363 (the Solar System room and the front
 door); L-367 (no checker opens a room); L-423 (the website's checks);
 gallery `index.html`, `gallery/gallery_config.json`,
@@ -2702,6 +2761,9 @@ rest of the Sun's slice is ordered on L-412.
 
 #### [L-363] The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits)
 <!-- L:363 status:OPEN upd:2026-10-09 section:A flag: rice: -->
+- **2026-10-10, the drawer's room button moves onto its row, under
+  L-429 (the room button on the row):** a body with a room shows
+  "Enter the ... room" beside GO, always.
 - **2026-10-09, the card moves, under L-428 (the lobby's way in):** the
   lobby no longer draws it under Featured; it opens the lobby, as the
   start block. Its sentence is now "Today's planets in 3D. Turn it with

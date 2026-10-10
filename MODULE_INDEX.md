@@ -1,7 +1,7 @@
 <!-- Doc-Kind: generated | The human-browsable module index, rebuilt by module_atlas.py alongside the atlas. Do not hand-edit. -->
 # Paloma's Orrery - Module Index
 
-**Generated:** October 09, 2026 by `module_atlas.py`  
+**Generated:** October 10, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -12,7 +12,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 144  
-**Total Lines of Code (non-blank):** 116,402  
+**Total Lines of Code (non-blank):** 116,528  
 **Total Public Functions/Classes:** 1,339
 
 ## Classification Coverage
@@ -20,7 +20,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 **Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L428_2_records_20261009.py`
+- `patch_L429_2_records_20261010.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
@@ -28,7 +28,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 **Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L428_2_records_20261009.py`
+- `patch_L429_2_records_20261010.py`
 
 
 ---
@@ -246,7 +246,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L428_2_records_20261009.py` | - records for L-428 (the lobby's way in). (282 lines) |
+| `patch_L429_2_records_20261010.py` | - records for L-428 round 2 and L-429. (408 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |

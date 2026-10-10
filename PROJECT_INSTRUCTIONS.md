@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.87 | October 9, 2026
+Tony Quintanilla, PE | Claude | v3.88 | October 10, 2026
 
-Cut from aa46bb10 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 04d17331 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -515,7 +515,7 @@ gallery-cache-builder        1.7  Nightly builder, atomic swap and its
                                   under data/, coverage_index, serving cache,
                                   objects_config, dry-run/first-build/nightly,
                                   builder testing layers
-interactive-exhibit          1.12 adding or changing an exhibit in
+interactive-exhibit          1.13 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -1166,6 +1166,36 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.88 (October 10, 2026): No rule changed in this document. ONE
+skill bump, one version (L-429): interactive-exhibit 1.12 -> 1.13. A
+ROOM IS ONE TAP AWAY IN THE SOLAR SYSTEM ROOM'S LIST.
+
+WHAT PROMPTED IT. Tony, on the phone, 2026-10-10: "Can we put the
+'Enter the ___ room' button on the same row with the Go button rather
+than below? So the visitor does not need to tap the row to see the
+button then tap again to enter the room." Gallery patch_L428_3_L429_1
+builds it. The skill described the old list, where the button showed
+only on an opened row, so a session following it would have told Tony
+the wrong thing about the room.
+
+WHAT CHANGED. interactive-exhibit, under The Solar System room's
+drawer: a body with a room shows its button on its own row, before GO,
+always, on every screen; a body with none still opens to "No room or
+cards yet". The skill gets its read plan, at its next version as Tony
+ruled on 2026-10-08, and leaves skills_index.py's PLAN_NOT_YET list.
+Its v1.10 entry moved to documentation/SKILL_HISTORIES.md, by the
+three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+interactive-exhibit 1.13 before any exhibit work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.85 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.87 (October 9, 2026): No rule changed in this document. ONE
 skill bump, one version (L-414): provenance-discipline 2.27 -> 2.28.
 THE SCANNER READS A ROW'S OWN COMMENT BLOCK, AND PRINTS THE GATE BY
@@ -1245,45 +1275,6 @@ opened the figures reference file before writing a figure count.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.83 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.85 (October 7, 2026): No rule changed in this document. ONE
-skill bump, one version (L-422): ledger-and-session-records 1.16 ->
-1.17. TONY'S PAGE IS EDITED BY SECTION, AND ITS END IS HIS.
-
-WHAT PROMPTED IT. The Fable 5.1 ledger sweep of October 4 to 7 read
-Where We Are and found the same facts in four sections, and found that
-a closing patch built before a parallel session had rewritten the page
-whole and erased that session's lines. Tony then said how he uses the
-page: "I use the where we are to record the run record and rename it
-with a time stamp." His timestamped copies hold the patch output and
-his verdict beside each test line -- the primary record of his rulings.
-
-WHAT CHANGED. ledger-and-session-records, under Where We Are -- Tony's
-page: each fact once, the READ THIS FIRST box is the page, Settled and
-Signals added; a patch edits the page by section, never whole; the page
-ends with a marker, and below it is Tony's run-record zone, which no
-patch edits and which the close reads from his latest timestamped copy;
-every ledger handle on the page carries a short label ("all ledger
-L-xxx items should have a brief parenthetical label"); the check to
-build is the date and a cap of 130 lines above the marker. Under Ledger
-Block Format: an item inside an ordered list needs no RICE score, his
-ruling of the same day (L-412). Under Where a File Goes: records go to
-the orrery's documentation/, flat, no subfolders ("Subfolders are more
-steps and also I scan the files to see what the recent changes were").
-The skill's v1.14 entry moved to documentation/SKILL_HISTORIES.md, by
-the three-entry rule. Where We Are itself was rewritten in the new
-shape, this once, the page it replaced copied into the handoff.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copy reads
-ledger-and-session-records 1.17 before any ledger, handoff or
-session-record work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.82 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 
