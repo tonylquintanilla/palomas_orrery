@@ -308,7 +308,14 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
+-- orrery moved to d83cc5eff9c02ea1eaceeecf9e4e85f83715f3fc
 
+==========================================================================
+
+Next:
+
+(do) Orrery: move the patch into documentation/, then commit and push. -- 
+(do) Gallery: run patch_L395_6_horizons_check_gallery_20261010.py from the gallery root, then follow the steps it prints. They start with the offline maintenance run and then the Daily Run.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
