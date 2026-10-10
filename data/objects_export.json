@@ -1,83 +1,123 @@
 {
   "schema": 1,
-  "source_sha256": "e4052a6a1dd2526912080de6225c365f591845d6a7cb7b54ae2c7e6d71df51f7",
+  "source_sha256": "57ba8161e6f0a2104ed556a7cbf7cbaa46b3f7d95aa1e93da4c7dd412d12cc24",
   "objects": {
     "sun": {
       "name": "Sun",
       "horizons_id": "10",
+      "horizons_name": "Sun",
       "id_type": null,
+      "object_type": "fixed",
       "description": "NASA: \"The Sun's gravity holds the solar system together, keeping everything in its orbit.\"",
       "info_url": "https://science.nasa.gov/sun/"
     },
     "mercury": {
       "name": "Mercury",
       "horizons_id": "199",
+      "horizons_name": "Mercury",
       "id_type": null,
+      "object_type": "orbital",
       "description": "NASA: \"Mercury is the smallest planet in our solar system and the nearest to the Sun.\"",
       "info_url": "https://science.nasa.gov/mercury/"
     },
     "venus": {
       "name": "Venus",
       "horizons_id": "299",
+      "horizons_name": "Venus",
       "id_type": null,
+      "object_type": "orbital",
       "description": "NASA: \"Venus is the second planet from the Sun, and the sixth largest planet. It's the hottest planet in our solar system.\"",
       "info_url": "https://science.nasa.gov/venus/"
     },
     "earth": {
       "name": "Earth",
       "horizons_id": "399",
+      "horizons_name": "Earth",
       "id_type": null,
+      "object_type": "orbital",
       "description": "Our home planet.",
       "info_url": "https://science.nasa.gov/earth/"
     },
     "mars": {
       "name": "Mars",
       "horizons_id": "499",
+      "horizons_name": "Mars",
       "id_type": null,
+      "object_type": "orbital",
       "description": "NASA: \"Mars is one of the easiest planets to spot in the night sky -- it looks like a bright red point of light.\"",
       "info_url": "https://science.nasa.gov/mars/"
     },
     "jupiter": {
       "name": "Jupiter",
       "horizons_id": "599",
+      "horizons_name": "Jupiter",
       "id_type": null,
+      "object_type": "orbital",
       "description": "NASA: \"Jupiter is the largest and oldest planet in our solar system.\"",
       "info_url": "https://science.nasa.gov/jupiter/"
     },
     "saturn": {
       "name": "Saturn",
       "horizons_id": "699",
+      "horizons_name": "Saturn",
       "id_type": null,
+      "object_type": "orbital",
       "description": "NASA: \"Saturn is the sixth planet from the Sun and the second largest planet in our solar system.\"",
       "info_url": "https://science.nasa.gov/saturn/"
     },
     "uranus": {
       "name": "Uranus",
       "horizons_id": "799",
+      "horizons_name": "Uranus",
       "id_type": null,
+      "object_type": "orbital",
       "description": "NASA: \"Uranus is the seventh planet from the Sun, and the third largest planet in our solar system -- about four times wider than Earth.\"",
       "info_url": "https://science.nasa.gov/uranus/"
     },
     "neptune": {
       "name": "Neptune",
       "horizons_id": "899",
+      "horizons_name": "Neptune",
       "id_type": null,
+      "object_type": "orbital",
       "description": "NASA: \"Dark, cold and whipped by supersonic winds, giant Neptune is the eighth and most distant major planet orbiting our Sun.\"",
       "info_url": "https://science.nasa.gov/neptune/"
     },
     "pluto_barycenter": {
       "name": "Pluto-Charon Barycenter",
       "horizons_id": "9",
+      "horizons_name": "Pluto Barycenter",
       "id_type": null,
+      "object_type": "barycenter",
       "description": "Center of mass for Pluto-Charon binary planet system.",
       "info_url": "https://science.nasa.gov/dwarf-planets/pluto/"
     },
     "apophis": {
       "name": "Apophis",
       "horizons_id": "2004 MN4",
+      "horizons_name": "99942 Apophis",
       "id_type": "smallbody",
+      "object_type": "orbital",
       "description": "A near-Earth asteroid that will make a close approach in 2029. Future OSIRIS-APEX target.",
       "info_url": "https://cneos.jpl.nasa.gov/apophis/"
+    },
+    "halley": {
+      "name": "Halley",
+      "horizons_id": "90000030",
+      "horizons_name": "1P/Halley",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "The most famous periodic comet. Its orbit runs backward compared with the planets, and its dust gives two meteor showers each year, the Eta Aquarids and the Orionids.",
+      "info_url": "https://science.nasa.gov/solar-system/comets/1p-halley/"
+    },
+    "encke": {
+      "name": "Encke",
+      "horizons_id": "90000091",
+      "horizons_name": "2P/Encke",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "A short-period comet whose dust trail is the source of the Taurid meteor showers.",
+      "info_url": "https://science.nasa.gov/solar-system/comets/2p-encke/"
     }
   },
   "numbers": {

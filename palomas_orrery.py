@@ -58,6 +58,10 @@ after Tony's look: both "Ecliptic Coordinates (J2000)" boxes keep the
 axes and drop the three circle lines, which move to a hover cross on
 each circle in star_sphere_builder.py. Words approved by Tony,
 2026-10-06.)
+Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5 (L-395:
+an "Encke" checkbox under Halley's, for the list's new Encke entry,
+record 90000091; its tooltip dates come from JPL's answers of
+2026-10-07.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -3191,6 +3195,8 @@ comet_ikeya_seki_var = tk.IntVar(value=0)
 comet_west_var = tk.IntVar(value=0)
 
 comet_halley_var = tk.IntVar(value=0)
+
+comet_encke_var = tk.IntVar(value=0)
 
 comet_hyakutake_var = tk.IntVar(value=0)
 
@@ -9997,6 +10003,10 @@ create_comet_checkbutton("Tempel 2", comet_tempel2_var, "(1873-present, periodic
 create_comet_checkbutton("Halley", comet_halley_var, "(1900-1-1 to 1994-1-11)",      
                          # data arc: 1835-08-21 to 1994-01-11
                          "February 8, 1986")    # 1986-Feb-08.1983372075
+
+create_comet_checkbutton("Encke", comet_encke_var, "(1786-present, periodic)",
+                         # 1786: the epoch-year of the first of JPL's 61 records for 2P (L-395, answer G4)
+                         "October 22, 2023")    # TP of record 90000091, 2023-Oct-22.53 (L-395, answer G3)
 
 create_comet_checkbutton("Schaumasse", comet_schaumasse_var, "(1911-present, periodic)",
                          "January 8, 2026")  # 24P, 8.25-year period

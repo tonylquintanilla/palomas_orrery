@@ -33,6 +33,13 @@ One JSON file, data/objects_export.json:
     objects         one entry per key, in list order:
                       name         the entry's 'name'
                       horizons_id  the entry's 'id'
+                      horizons_name the entry's 'horizons_name', JPL's
+                                   exact name for the object. Only the
+                                   gallery's Horizons check reads it
+                                   (L-395)
+                      object_type  the entry's 'object_type'. The check
+                                   compares it for "barycenter" and the
+                                   Sun's "fixed" only
                       id_type      the entry's 'id_type', or null where
                                    the entry leaves it blank. A blank is
                                    not a value: the gallery keeps its own
@@ -61,6 +68,9 @@ WHAT MAKES IT FAIL (exit 1, and NOTHING is written)
       two entries with the same key
     - a keyed entry whose name, id, mission_info or mission_url is not a
       plain literal
+    - a keyed entry with no 'horizons_name', or one that is not a
+      non-empty string: the gallery's Horizons check has nothing to
+      compare JPL's name with (L-395)
     - an exported description that still says "Horizons:"
 
 The list is read with Python's own parser (ast), not imported, so the
@@ -79,6 +89,9 @@ Domain: dev_tools
 Module created: October 1, 2026 with Anthropic's Claude Opus 5.5
 (L-395, the first build: the Solar System room's eleven bodies take
 their names, Horizons ids, descriptions and NASA links from the orrery).
+Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5 (L-395,
+the Horizons check: each object carries horizons_name and object_type,
+and a keyed entry without a horizons_name is refused).
 """
 
 import ast
@@ -94,7 +107,8 @@ SCHEMA = 1
 KEY_PATTERN = re.compile(r"^[a-z][a-z0-9_]*$")
 OPENING = re.compile(r"^Horizons:[^.]*\.\s*")
 NUMBER = re.compile(r"\d[\d,.]*\d|\d")
-FIELDS = ("name", "id", "id_type", "mission_info", "mission_url")
+FIELDS = ("name", "id", "id_type", "mission_info", "mission_url",
+          "horizons_name", "object_type")
 
 
 class ExportError(Exception):
@@ -186,6 +200,11 @@ def build_export(text):
         if key in objects:
             raise ExportError("key '%s' is on two entries (%s and %s)"
                               % (key, objects[key]["name"], f.get("name")))
+        horizons_name = f.get("horizons_name")
+        if not isinstance(horizons_name, str) or not horizons_name.strip():
+            raise ExportError("%s: key '%s' has no horizons_name (JPL's "
+                              "exact name, which the gallery's Horizons "
+                              "check compares)" % (f.get("name"), key))
         description = description_of(f.get("mission_info"))
         if "Horizons:" in description:
             raise ExportError("%s: its description still says 'Horizons:' "
@@ -193,7 +212,9 @@ def build_export(text):
         objects[key] = {
             "name": f.get("name"),
             "horizons_id": None if f.get("id") is None else str(f["id"]),
+            "horizons_name": horizons_name,
             "id_type": f.get("id_type"),
+            "object_type": f.get("object_type"),
             "description": description or None,
             "info_url": f.get("mission_url"),
         }

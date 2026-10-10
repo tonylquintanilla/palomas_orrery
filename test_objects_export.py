@@ -29,14 +29,19 @@ WHAT IT CHECKS
     every number in an exported description by key, so a pass names
     what it looked at.
 
-    Before any of that it shows that checks 1 and 2 can fail: it feeds a
-    list with a repeated field and an export with one changed word, and
-    each must be refused. If either is not, the run fails.
+    4. Every keyed entry carries a horizons_name, JPL's exact name, which
+       the gallery's Horizons check compares (L-395); the run prints
+       each one beside its key.
+    Before any of that it shows that checks 1, 2 and 4 can fail: it
+    feeds a list with a repeated field, an export with one changed word,
+    and a keyed entry with no horizons_name, and each must be refused.
+    If any is not, the run fails.
 
 WHAT MAKES IT FAIL
     - a field written twice in any entry
     - the export is missing, is not JSON, or is stale
     - any exported entry differs from what the list gives now
+    - a keyed entry has no horizons_name
     - the self-test did not produce the refusals it must
 
 Role: devtool
@@ -44,6 +49,9 @@ Domain: dev_tools
 
 Module created: October 1, 2026 with Anthropic's Claude Opus 5.5
 (L-395, the first build).
+Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5 (L-395,
+the Horizons check: a keyed entry without a horizons_name fails, shown
+failing on a planted entry first).
 """
 
 import json
@@ -55,7 +63,7 @@ import export_objects as ex
 
 SELF_TEST_LIST = (
     "OBJECT_DEFINITIONS = [\n"
-    "    {'name': 'Mars', 'key': 'mars', 'id': '499',\n"
+    "    {'name': 'Mars', 'key': 'mars', 'id': '499', 'horizons_name': 'Mars',\n"
     "     'mission_info': 'Horizons: 499. Red.', 'id': '4'},\n"
     "]\n")
 
@@ -78,6 +86,15 @@ def self_test():
     altered["objects"]["mars"]["description"] = "Blue."
     if not differences(altered, export):
         problems.append("a changed description was not noticed")
+    nameless = good.replace(" 'horizons_name': 'Mars',", "")
+    try:
+        ex.build_export(nameless)
+        problems.append("a keyed entry with no horizons_name was not "
+                        "refused")
+    except ex.ExportError as exc:
+        if "no horizons_name" not in str(exc):
+            problems.append("the entry with no horizons_name was refused "
+                            "for the wrong reason: %s" % exc)
     return problems
 
 
@@ -148,13 +165,17 @@ def main():
     if held is not None and fresh is not None:
         failures.extend(differences(held, fresh))
 
-    print("Self-test: a repeated field and a changed word were each refused.")
+    print("Self-test: a repeated field, a changed word and a keyed entry "
+          "with no horizons_name were each refused.")
     print("Scanned %d entries in OBJECT_DEFINITIONS for repeated fields: "
           "%d found." % (scanned, len(repeats)))
     if fresh is not None:
         keys = list(fresh["objects"])
         print("Compared %d keyed entries with the export: %s."
               % (len(keys), ", ".join(keys)))
+        print("JPL names (horizons_name): %s." % "; ".join(
+            "%s = %s" % (k, fresh["objects"][k]["horizons_name"])
+            for k in keys))
         if fresh["numbers"]:
             print("Numbers in exported descriptions: %s." % "; ".join(
                 "%s: %s" % (k, ", ".join(v))

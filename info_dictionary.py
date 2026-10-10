@@ -29,6 +29,9 @@ Orcus-Vanth Barycenter (mass ratio 16%->14.2%), Dysnomia (diameter 700->150-400 
 uncertain), Gonggong (aphelion rewritten, 52.7->~89 AU current), Pioneer 10 (last
 signal March->April 27 2002), Gaia (end date corrected to Jan 15 2025).
 Provenance audit identified by Anthropic's Claude Opus 4.7.
+Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5 (L-395:
+INFO['Encke'] for the list's new Encke entry, in the words Tony approved
+on 2026-10-08.)
 """
 
 # Shell radii are read from constants_new.py, never retyped here (L-209).
@@ -2160,8 +2163,8 @@ INFO = {
         'the Big Dipper is located). On October 16, it will pass close to the star Cor Caroli.',
 
         'Wierzchos': 'Horizons: C/2024 E1. CO2-driven (unusual), maximum Vmag ~6.8, perihelion 0.56 AU, passed 0.19 AU from Venus.\n' 
-        'Comet C/2024 E1 (Wierzchoś) is a fascinating object, especially right now since it just recently passed its perihelion and its closest approach to Earth. ' 
-        '* Discovered on March 3, 2024, by Polish astronomer Kacper Wierzchoś during a Mt. Lemmon survey.\n' 
+        'Comet C/2024 E1 (Wierzchos) is a fascinating object, especially right now since it just recently passed its perihelion and its closest approach to Earth. ' 
+        '* Discovered on March 3, 2024, by Polish astronomer Kacper Wierzchos during a Mt. Lemmon survey.\n' 
         '* Hyperbolic long-period comet originating from the Oort Cloud.\n' 
         '* Perihelion: It reached its closest approach to the Sun (approx 0.566 AU) on January 20, 2026.\n' 
         '* Perigee: It made its closest approach to Earth on February 17, 2026, passing at a distance of roughly 1.01 AU (about 94 million miles).\n' 
@@ -2178,6 +2181,8 @@ INFO = {
         '* Eccentricity: >1, currently hyperbolic due to planetary perturbations in the inner solar system. Since the comet is now outbound, its eccentricity will ' 
         'eventually settle back just below 1 once it clears the planetary region, putting it on a highly elliptical outbound orbit with a period estimated at ' 
         'around 200,000 years.', 
+
+        'Encke': 'Horizons: 2P/Encke. A short-period comet whose dust trail is the source of the Taurid meteor showers.',
 
         'Schaumasse': '8.25-year period, mag ~9, passed near Jupiter Oct 2025, near Ceres in 2010',
 

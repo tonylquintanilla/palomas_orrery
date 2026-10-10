@@ -110,12 +110,12 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 ### `INNER_LIMIT_OORT_CLOUD_AU`
 
-- orrery `palomas_orrery.py` line 10421: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
+- orrery `palomas_orrery.py` line 10431: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
 - orrery `solar_visualization_shells.py` line 115: `_OORT_INNER_EDGE = row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)`
 
 ### `OUTER_OORT_CLOUD_AU`
 
-- orrery `palomas_orrery.py` line 10421: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
+- orrery `palomas_orrery.py` line 10431: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
 - orrery `solar_visualization_shells.py` line 117: `_OORT_OUTER_EDGE = row_text('OUTER_OORT_CLOUD_AU', grouping=True)`
 
 ## Printed to a terminal only

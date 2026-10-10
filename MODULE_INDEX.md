@@ -12,15 +12,15 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 144  
-**Total Lines of Code (non-blank):** 116,548  
-**Total Public Functions/Classes:** 1,339
+**Total Lines of Code (non-blank):** 116,565  
+**Total Public Functions/Classes:** 1,337
 
 ## Classification Coverage
 
 **Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L429_4_records_20261010.py`
+- `patch_L395_5_horizons_name_and_encke_20261010.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
@@ -28,7 +28,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 **Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L429_4_records_20261010.py`
+- `patch_L395_5_horizons_name_and_encke_20261010.py`
 
 
 ---
@@ -40,7 +40,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_controller.py` | KMZ layer selector for Google Earth Pro. (131 lines) |
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,938 lines) |
-| `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,577 lines) |
+| `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,585 lines) |
 | `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (2,128 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
@@ -123,7 +123,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,250 lines) |
+| `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,270 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (512 lines) |
 | `constants_new.py` | Verified numeric constants for Paloma's Orrery. (3,099 lines) |
 | `constants_tokens.py` | - what each "# Unit:" token in constants_new.py means. (241 lines) |
@@ -131,7 +131,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (412 lines) |
 | `exoplanet_stellar_properties.py` | Stellar Properties for Exoplanet Host Stars (484 lines) |
 | `exoplanet_systems.py` | Hardcoded Exoplanet System Catalog (572 lines) |
-| `info_dictionary.py` | Descriptive text and narrative content for Paloma's Orrery. (2,050 lines) |
+| `info_dictionary.py` | Descriptive text and narrative content for Paloma's Orrery. (2,054 lines) |
 | `messier_catalog.py` | Static catalog of Messier objects and bright deep-sky objects. (406 lines) |
 | `sgr_a_star_data.py` | S-star catalog and orbital mechanics for Sagittarius A*. (590 lines) |
 | `shell_configs.py` | Shell configuration data for all celestial bodies. (2,656 lines) |
@@ -209,7 +209,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `exact_rows_report.py` | - which exact rows a display prints, and where. (604 lines) |
 | `examine_hot_csv.py` | Examine the HOT CSV file structure (47 lines) |
 | `export_constants.py` | - write data/constants_export.json from constants_new.py. The orrery is the producer of its numbers; the gallery reads this file and never reads orrery source. (396 lines) |
-| `export_objects.py` | - write data/objects_export.json from the object list in celestial_objects.py. The orrery is the one definition of each object; the gallery reads this file and never reads orrery source. (216 lines) |
+| `export_objects.py` | - write data/objects_export.json from the object list in celestial_objects.py. The orrery is the one definition of each object; the gallery reads this file and never reads orrery source. (237 lines) |
 | `export_orbit_cache.py` | Phase 1b desktop devtool: read the local orbit caches and write web-servable orbit/position files for the interactive gallery. (617 lines) |
 | `food_insecurity_generator.py` | IPC acute food-insecurity KMZ layer (Sudan, current period). (702 lines) |
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
@@ -226,7 +226,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_cross_checked.py` | Regression tests for cross-check annotations. (501 lines) |
 | `test_derived_figures.py` | - a derived constant declares no more significant figures than its inputs support, and names every derived row it cannot judge. (1,239 lines) |
 | `test_dimensions.py` | - a derived constant's unit follows from its arithmetic. (591 lines) |
-| `test_objects_export.py` | - data/objects_export.json says what the object list in celestial_objects.py holds, and no entry in the list writes a field twice. (152 lines) |
+| `test_objects_export.py` | - data/objects_export.json says what the object list in celestial_objects.py holds, and no entry in the list writes a field twice. (173 lines) |
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (224 lines) |
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (485 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (120 lines) |
@@ -246,7 +246,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L429_4_records_20261010.py` | - records for round 3 of L-429, with L-428 closed, L-237 and L-216 updated, interactive-exhibit 1.14, gallery-cache-builder 1.8 and protocol v3.89. (428 lines) |
+| `patch_L395_5_horizons_name_and_encke_20261010.py` | - the orrery half of the Horizons check (L-395): JPL's exact name on each keyed entry, Halley keyed, Encke's own entry, and the export that carries them. (371 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |

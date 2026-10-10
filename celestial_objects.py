@@ -1,9 +1,14 @@
 """
 celestial_objects.py - Celestial object definitions for Paloma's Orrery.
 
-Master catalog of ~179 objects queried from JPL Horizons. Each entry is a
+Master catalog of 183 objects queried from JPL Horizons. Each entry is a
 dict carrying the Horizons ID, object type, display symbol, hover text, and
-URL. Separated from the GUI so palomas_orrery.py stays clean. Covers planets,
+URL. An entry the website serves also carries 'key', the website's name
+for it (export_objects.py writes only keyed entries), and 'horizons_name',
+JPL's exact name for the object, which nothing in the orrery reads: the
+gallery's Horizons check compares it with JPL's answer (L-395). 'name'
+stays the orrery's own choice. Separated from the GUI so palomas_orrery.py
+stays clean. Covers planets,
 moons, dwarf planets, Lagrange points, Kuiper Belt / TNOs, comets (periodic,
 long-period, interstellar, sungrazers), spacecraft, and asteroids. Also
 provides shell checkbox builders for the visualization GUI.
@@ -20,6 +25,10 @@ Role: data
 Domain: orrery
 
 Module updated: April 2026 with Anthropic's Claude Sonnet 4.6 with Gemini 3.5 Pro review
+Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5 (L-395,
+the Horizons check: 'horizons_name' on the thirteen keyed entries; Halley
+keyed, with Tony's words of 2026-10-08 and NASA's 1P/Halley page; Encke's
+own entry, record 90000091, which until now only the website defined).
 """
 
 from datetime import datetime
@@ -27,22 +36,22 @@ from datetime import datetime
 
 OBJECT_DEFINITIONS = [
     # Existing Celestial Objects
-    {'name': 'Sun', 'key': 'sun', 'id': '10', 'var_name': 'sun_var', 'color_key': 'Sun', 'symbol': 'circle', 'object_type': 'fixed', 
+    {'name': 'Sun', 'key': 'sun', 'id': '10', 'horizons_name': 'Sun', 'var_name': 'sun_var', 'color_key': 'Sun', 'symbol': 'circle', 'object_type': 'fixed', 
     'id_type': None, 
     'mission_info': 'Horizons: 10. NASA: "The Sun\'s gravity holds the solar system together, keeping everything in its orbit."', 
     'mission_url': 'https://science.nasa.gov/sun/'},
 
-    {'name': 'Mercury', 'key': 'mercury', 'id': '199', 'var_name': 'mercury_var', 'color_key': 'Mercury', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Mercury', 'key': 'mercury', 'id': '199', 'horizons_name': 'Mercury', 'var_name': 'mercury_var', 'color_key': 'Mercury', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
     'mission_info': 'Horizons: 199. NASA: "Mercury is the smallest planet in our solar system and the nearest to the Sun."', 
     'mission_url': 'https://science.nasa.gov/mercury/'},
 
-    {'name': 'Venus', 'key': 'venus', 'id': '299', 'var_name': 'venus_var', 'color_key': 'Venus', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Venus', 'key': 'venus', 'id': '299', 'horizons_name': 'Venus', 'var_name': 'venus_var', 'color_key': 'Venus', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
     'mission_info': 'Horizons: 299. NASA: "Venus is the second planet from the Sun, and the sixth largest planet. It\'s the hottest planet in our solar system."', 
     'mission_url': 'https://science.nasa.gov/venus/'},
 
-    {'name': 'Earth', 'key': 'earth', 'id': '399', 'var_name': 'earth_var', 'color_key': 'Earth', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Earth', 'key': 'earth', 'id': '399', 'horizons_name': 'Earth', 'var_name': 'earth_var', 'color_key': 'Earth', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
     'mission_info': 'Horizons: 399. Our home planet.', 
      'mission_url': 'https://science.nasa.gov/earth/'},
@@ -59,12 +68,12 @@ OBJECT_DEFINITIONS = [
      'color_key': 'Earth', 'symbol': 'square-open', 'object_type': 'barycenter',
      'mission_info': 'Center of mass for the Earth-Moon system. Period: 27.32 days. Highest mass ratio (1.23%) of any planet-moon system!'},
 
-    {'name': 'Mars', 'key': 'mars', 'id': '499', 'var_name': 'mars_var', 'color_key': 'Mars', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Mars', 'key': 'mars', 'id': '499', 'horizons_name': 'Mars', 'var_name': 'mars_var', 'color_key': 'Mars', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
     'mission_info': 'Horizons: 499. NASA: "Mars is one of the easiest planets to spot in the night sky -- it looks like a bright red point of light."', 
     'mission_url': 'https://science.nasa.gov/mars/'},
 
-    {'name': 'Jupiter', 'key': 'jupiter', 'id': '599', 'var_name': 'jupiter_var', 'color_key': 'Jupiter', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Jupiter', 'key': 'jupiter', 'id': '599', 'horizons_name': 'Jupiter', 'var_name': 'jupiter_var', 'color_key': 'Jupiter', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
     'mission_info': 'Horizons: 599. NASA: "Jupiter is the largest and oldest planet in our solar system."', 
     'mission_url': 'https://science.nasa.gov/jupiter/'},
@@ -126,17 +135,17 @@ OBJECT_DEFINITIONS = [
     'mission_info': 'Lucy flyby: Nov 11, 2028. D~51 km, D-type. Last L4 Trojan visit before heading to L5.', 
     'mission_url': 'https://lucy.swri.edu/Orus.html'},
 
-    {'name': 'Saturn', 'key': 'saturn', 'id': '699', 'var_name': 'saturn_var', 'color_key': 'Saturn', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Saturn', 'key': 'saturn', 'id': '699', 'horizons_name': 'Saturn', 'var_name': 'saturn_var', 'color_key': 'Saturn', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
     'mission_info': 'Horizons: 699. NASA: "Saturn is the sixth planet from the Sun and the second largest planet in our solar system."', 
     'mission_url': 'https://science.nasa.gov/saturn/'},
 
-    {'name': 'Uranus', 'key': 'uranus', 'id': '799', 'var_name': 'uranus_var', 'color_key': 'Uranus', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Uranus', 'key': 'uranus', 'id': '799', 'horizons_name': 'Uranus', 'var_name': 'uranus_var', 'color_key': 'Uranus', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
     'mission_info': 'Horizons: 799. NASA: "Uranus is the seventh planet from the Sun, and the third largest planet in our solar system -- about four times wider than Earth."', 
     'mission_url': 'https://science.nasa.gov/uranus/'},
 
-    {'name': 'Neptune', 'key': 'neptune', 'id': '899', 'var_name': 'neptune_var', 'color_key': 'Neptune', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Neptune', 'key': 'neptune', 'id': '899', 'horizons_name': 'Neptune', 'var_name': 'neptune_var', 'color_key': 'Neptune', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
     'mission_info': 'Horizons: 899. NASA: "Dark, cold and whipped by supersonic winds, giant Neptune is the eighth and most distant major planet orbiting our Sun."', 
     'mission_url': 'https://science.nasa.gov/neptune/'},
@@ -164,7 +173,7 @@ OBJECT_DEFINITIONS = [
      'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/'},
 
     # NEW: Pluto-Charon Barycenter
-    {'name': 'Pluto-Charon Barycenter', 'key': 'pluto_barycenter', 'id': '9', 'var_name': 'pluto_barycenter_var', 
+    {'name': 'Pluto-Charon Barycenter', 'key': 'pluto_barycenter', 'id': '9', 'horizons_name': 'Pluto Barycenter', 'var_name': 'pluto_barycenter_var', 
      'color_key': 'Pluto', 'symbol': 'square-open', 'object_type': 'barycenter',
      'mission_info': 'Center of mass for Pluto-Charon binary planet system.',
      'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/'},
@@ -400,7 +409,7 @@ OBJECT_DEFINITIONS = [
     'mission_info': 'Horizons: A852 FA. A metal-rich asteroid located in the main asteroid belt. The NASA Psyche mission will reach the asteroid in August 2029', 
     'mission_url': 'https://news.arizona.edu/news/large-craters-offer-clues-origin-asteroid-16-psyche'},
 
-    {'name': 'Apophis', 'key': 'apophis', 'id': '2004 MN4', 'var_name': 'apophis_var', 'color_key': 'Apophis', 'symbol': 'circle-open', 'object_type': 'orbital',
+    {'name': 'Apophis', 'key': 'apophis', 'id': '2004 MN4', 'horizons_name': '99942 Apophis', 'var_name': 'apophis_var', 'color_key': 'Apophis', 'symbol': 'circle-open', 'object_type': 'orbital',
     'id_type': 'smallbody', 
     'center_id': '2099942',  # Numeric ID for use as Horizons center
     'mission_info': 'Horizons: 2004 MN4. A near-Earth asteroid that will make a close approach in 2029. Future OSIRIS-APEX target.', 
@@ -532,12 +541,24 @@ OBJECT_DEFINITIONS = [
     'mission_info': 'Horizons: C/1995 O1. Visible to the naked eye for a record 18 months.', 
     'mission_url': 'https://science.nasa.gov/solar-system/comets/c-1995-o1-hale-bopp/'},
 
-    {'name': 'Halley', 'id': '90000030', 'var_name': 'comet_halley_var', 'color_key': 'Halley', 'symbol': 'diamond',
+    {'name': 'Halley', 'key': 'halley', 'id': '90000030', 'horizons_name': '1P/Halley', 'var_name': 'comet_halley_var', 'color_key': 'Halley', 'symbol': 'diamond',
     'object_type': 'orbital', 'id_type': 'smallbody', 
     #'start_date': datetime(1900, 1, 1), 'end_date': datetime(1994, 1, 11), 
     # data arc: 1835-08-21 to 1994-01-11; 1P/Halley requires the record number to fetch position data for the 1986 apparition.
-    'mission_info': 'Horizons: 1P/Halley. Retrograde. Most famous comet, returned in 1986 and will return in 2061. Retrograde (left-handed) orbit.', 
-    'mission_url': 'https://sites.google.com/view/tony-quintanilla/comets/halley-1986'},
+    # Pinned record: the newest of 30 Horizons records for 1P (L-395; documentation/HORIZONS_ANSWERS_L395_20261007.md, G1 and G2).
+    # The gallery's Horizons check reports a newer record for a person to decide; it never re-pins.
+    # Words and link, Tony 2026-10-08: no numbers unless they come from the store; NASA's page (L-395).
+    'mission_info': 'Horizons: 1P/Halley. The most famous periodic comet. Its orbit runs backward compared with the planets, and its dust gives two meteor showers each year, the Eta Aquarids and the Orionids.', 
+    'mission_url': 'https://science.nasa.gov/solar-system/comets/1p-halley/'},
+
+    {'name': 'Encke', 'key': 'encke', 'id': '90000091', 'horizons_name': '2P/Encke', 'var_name': 'comet_encke_var', 'color_key': 'Encke', 'symbol': 'diamond',
+    'object_type': 'orbital', 'id_type': 'smallbody',
+    # Pinned record: 90000091, the 2023 apparition, the newest of 61 Horizons records for 2P; '2P' alone is
+    # ambiguous (L-395; documentation/HORIZONS_ANSWERS_L395_20261007.md, G3 and G4). JPL re-solves the record
+    # in place; the gallery's Horizons check reports a newer record for a person to decide; it never re-pins.
+    # Added 2026-10-10 (L-395): the website served Encke before this list held it. Words and link, Tony 2026-10-08.
+    'mission_info': 'Horizons: 2P/Encke. A short-period comet whose dust trail is the source of the Taurid meteor showers.',
+    'mission_url': 'https://science.nasa.gov/solar-system/comets/2p-encke/'},
 
     {'name': 'Hyakutake', 'id': 'C/1996 B2', 'var_name': 'comet_hyakutake_var', 'color_key': 'Hyakutake', 'symbol': 'diamond', 
     'object_type': 'orbital', 'id_type': 'smallbody', 

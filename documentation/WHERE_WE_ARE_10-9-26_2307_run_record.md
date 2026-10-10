@@ -150,7 +150,7 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: OPEN: 10-9-26 2303: Opus: Build session lobby option E**
+**Session: DONE: 10-10-26 1358: Opus: Build session lobby option E**
 
 I'll load the three skills the brief names, pin both repos' HEADs, and then build the lobby change on a throwaway clone.
 
@@ -1637,10 +1637,10 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  2. Move this script into documentation/; commit and push. -- 
+  2. Move this script into documentation/; commit and push. -- ca5bbe12cb8f1c48b134f6aadaa700d45ae9e39d
   3. Upload interactive-exhibit's and gallery-cache-builder's SKILL.md
      (Settings > Skills), and replace the Project's instructions with
-     PROJECT_INSTRUCTIONS.md (v3.89).
+     PROJECT_INSTRUCTIONS.md (v3.89). -- done
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 **End Run Record**
@@ -1653,3 +1653,21 @@ Files are in the gallery and orrery repo folders:
 
 Screenshot:
 - goto_earth_room_wrapped_phone.png
+
+Where this leaves us:
+
+The lobby (L-428) is closed. The site opens on the Solar System picture with one Enter button, and the type over the doves is now readable.
+The room button item (L-429) can close too. Every room’s list now has “Go To” in the middle, the room button after it, and names in full. Your “correct” verdicts are in your run-record copy. The next session’s records patch can close it, so you don’t need to run another patch today.
+Two skills are now at new versions: interactive-exhibit 1.14 and gallery-cache-builder 1.8. A session can’t see a skill you reinstall while it’s still running. So the next session that loads either one will first confirm it got the new version before doing any work with it.
+
+**Fable:**
+
+Everything in the record landed, and the picture is cleaner than it was last night. Orrery HEAD is ca5bbe1, gallery 050637c; the instructions here read v3.89.
+
+What closed today
+
+L-428 (the lobby’s way in) is done: the start card see-through, the type brightened, and after your look, L-429 (the room button on the row) built in two rounds: the room button always on its row, then Go To in the middle with the room button after it, names wrapping.
+The red gate is gone. The Artifact 1 check now takes its date from the “today” the cache stores for Earth, so the moving window cannot leave it behind again. L-237 (Artifact 1’s stale record) got its fix without a session of its own, which answers the question I asked you last night.
+The Daily Run no longer pauses OneDrive, and gallery-cache-builder 1.8 says so. L-216 (the swap retry) is done.
+
+One process note, already recorded by Opus, no action needed. interactive-exhibit went 1.12 to 1.13 to 1.14 in one session, against the one-version-per-session rule, because 1.13 was installed before your Go To ruling came. It is named in the v3.89 entry, so the record is honest.
