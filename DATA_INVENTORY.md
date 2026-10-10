@@ -74,7 +74,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 449.9 MB (732 files)
+**Total size:** 449.9 MB (733 files)
 
 **GitHub Pages headroom:** 574 MB remaining of 1024 MB ceiling (43.9% used)
 
@@ -84,14 +84,14 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 |---|---|---|---|---|
 | .json | 385 | 420.8 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-10-09 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
-| .py | 223 | 6.3 MB | patch_L421_1_served_hover_words_20261006.py (419.6 KB) | 2026-10-07 |
+| .py | 224 | 6.4 MB | patch_L421_1_served_hover_words_20261006.py (419.6 KB) | 2026-10-09 |
 | .png | 2 | 6.3 MB | palomas_orrery_logo.png (5.1 MB) | 2026-09-24 |
 | .jsonl | 35 | 865.7 KB | encke.jsonl (36.8 KB) | 2026-10-09 |
-| .html | 5 | 442.2 KB | interactive.html (208.9 KB) | 2026-10-07 |
+| .html | 5 | 448.1 KB | index.html (209.5 KB) | 2026-10-09 |
 | .js | 20 | 420.9 KB | feature_renderers.js (142.5 KB) | 2026-10-07 |
 | .jpg | 2 | 137.9 KB | palomas_orrery_wall.jpg (95.2 KB) | 2026-10-04 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
-| .md | 6 | 66.5 KB | MODULE_ATLAS.md (45.3 KB) | 2026-10-09 |
+| .md | 6 | 67.1 KB | MODULE_ATLAS.md (45.8 KB) | 2026-10-09 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |
 | .patch | 3 | 11.7 KB | phaseb_studio.patch (7.0 KB) | 2026-07-29 |
 | .txt | 2 | 7.8 KB | requirements.txt (4.2 KB) | 2026-09-04 |

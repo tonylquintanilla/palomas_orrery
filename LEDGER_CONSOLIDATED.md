@@ -313,6 +313,9 @@ Module updated: October 9, 2026 with Anthropic's Claude Opus 5.5
 declared rows and prints the gate path by name; provenance-discipline
 2.28, protocol v3.87; L-427 opened, rows a neighbour's citation had
 been crediting; L-351 and L-184 updated), built on aa46bb10.
+Module updated: October 9, 2026 with Anthropic's Claude Opus 5.5
+(L-428 opened and built: the lobby's way in, option E; L-282, L-363,
+L-367 and L-414 updated), built on b6652f9.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -530,7 +533,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*236 live items; 220 need attention (`!`); 167 RICE-scored; 186 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*237 live items; 221 need attention (`!`); 167 RICE-scored; 186 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -560,7 +563,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-10-09 |
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
 |  | L-230 | A skill bump does not reach the protocol's version history | DEFERRED | 3.8 | 2026-08-23 |
-| ! | L-282 | The lobby: the main page as an entrance hall | OPEN | 3.8 | 2026-09-06 |
+| ! | L-282 | The lobby: the main page as an entrance hall | OPEN | 3.8 | 2026-10-09 |
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
 | ! | L-210 | Pilot citation findings -- four rows in constants_new.py | OPEN | 3.6 | 2026-08-21 |
 | ! | L-215 | Ledger cleanup by topic, not by age | OPEN | 3.6 | 2026-08-19 |
@@ -637,11 +640,11 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-359 | Served text beside a served number can go stale where no tool may edit it (gallery) | OPEN | -- | 2026-09-22 |
 | ! | L-360 | The hover budget measures recorded payloads, so it cannot see a line added by newly served data (checks) | OPEN | -- | 2026-10-08 |
 | ! | L-361 | An epoch typed in the page, with no store row (gallery, store) | OPEN | -- | 2026-09-22 |
-| ! | L-363 | The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits) | OPEN | -- | 2026-10-04 |
+| ! | L-363 | The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits) | OPEN | -- | 2026-10-09 |
 | ! | L-364 | A comet's own trust window can exclude today while the served window passes the scene (gallery, trust) | OPEN | -- | 2026-09-29 |
 | ! | L-365 | The assembler leaves out a body it cannot draw, without a warning (gallery, assembler) | OPEN | -- | 2026-09-29 |
 | ! | L-366 | An orbit's info marker describes an arbitrary point on the orbit (gallery, assembler) | OPEN | -- | 2026-09-26 |
-| ! | L-367 | No checker opens a new room (checks, gallery) | OPEN | -- | 2026-10-08 |
+| ! | L-367 | No checker opens a new room (checks, gallery) | OPEN | -- | 2026-10-09 |
 | ! | L-368 | Other bodies' typed poles disagree with their cited table or cite a withdrawn report (orrery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-370 | Jupiter and Saturn numbers typed only in objects_config.json (gallery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-371 | The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice) | OPEN | -- | 2026-10-08 |
@@ -681,6 +684,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-425 | A citation's location record is checked only in part (provenance tooling) | OPEN | -- | 2026-10-09 |
 | ! | L-426 | The worksheet checker compares very small numbers as equal (worksheet checker) | OPEN | -- | 2026-10-09 |
 | ! | L-427 | Rows a neighbour's citation had been crediting (store) | OPEN | -- | 2026-10-09 |
+| ! | L-428 | The lobby's way in: the Solar System room first (gallery, lobby) | OPEN | -- | 2026-10-09 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1249,6 +1253,48 @@ IGRF epoch, a class); gallery `gallery/feature_renderers.js`,
 `gallery/earth_geometry.js`, `data/objects_config.json`;
 skills/interactive-exhibit/SKILL.md.
 
+#### [L-428] The lobby's way in: the Solar System room first (gallery, lobby)
+<!-- L:428 status:OPEN upd:2026-10-09 section:A flag: rice: -->
+- **Asked 2026-10-09, 17:10,** by Tony with a phone screenshot of the
+  live lobby: a friend shown the site "was confused on where to go. He
+  started with the rooms and cards but still unsure. Can you use design
+  to make the solar system interactive as the clear starting point?"
+  On the phone the three doors filled the first screen and the Solar
+  System card started below it, under Featured.
+- **Designed the same day** (section 11 of
+  `documentation/DESIGN_L421_inner_oort_tilt_20261009.md`). Tony picked
+  option E, "the picture is the way in" (17:23), and confirmed both new
+  sentences, "Use the new wording" (17:25). The canvas is "Lobby: the
+  Solar System way in", artboard E.
+- **Built 2026-10-09, NOT yet run or pushed** [render-gated]: gallery
+  `patch_L428_1_lobby_option_e.py`, on gallery 5ec4739. The lobby opens
+  on the room's picture (edge to edge on a phone), the title "Start
+  with the Solar System, live", the card's sentence and one Enter
+  button; then "Or explore by subject" (was "Doors") with the three
+  doors unchanged; then Featured, without the Solar System card, and
+  the guest book. The welcome line is served from
+  `gallery/gallery_config.json` (`sentence`), the card's sentence from
+  `gallery/gallery_metadata.json` (card `solar_system`).
+- Two calls the build made: the title is typed in `index.html`, beside
+  the id of the card it is written for, because the card's served title
+  also heads its door's page and the menu; and the block's order follows
+  the artboard Tony chose (picture, then title), not the brief's list
+  (title, then picture).
+- Verified headless at 390 x 844 and 1280 x 800 on a throwaway copy:
+  the Enter button ends at 573 px on the phone; the card is drawn once;
+  the door counts are unchanged; the door's page still opens on the
+  card; Enter and the picture open the room. Record:
+  `documentation/HANDOFF_lobby_option_E_20261009.md`.
+- Tony-action (do): run the gallery patch, push, look on the phone with
+  the Home Screen clip's tab closed first; run this records patch, the
+  maintenance run, push.
+- Tony-action (decide), after the look: close, or change first.
+**Gap:** Tony's run and his look on the phone. Then this item closes.
+**Ref:** L-282 (the lobby); L-363 (the Solar System room and the front
+door); L-367 (no checker opens a room); L-423 (the website's checks);
+gallery `index.html`, `gallery/gallery_config.json`,
+`gallery/gallery_metadata.json`.
+
 #### [L-427] Rows a neighbour's citation had been crediting (store)
 <!-- L:427 status:OPEN upd:2026-10-09 section:A flag: rice: -->
 - **Recorded, not chased** (The Braid: one row per class). Found by
@@ -1592,6 +1638,14 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 - Tony-action (do): run the patch, then orrery_maintenance_run.py;
   move the script into documentation/; commit and push; reinstall
   provenance-discipline from its ZIP.
+- **Tony's run, read 2026-10-09 by the lobby session (L-428)** from his
+  copy `documentation/WHERE_WE_ARE_10-8-26_1406_run_record.md`: the
+  maintenance run ended "21 of 21 gating checkers passed -- 112.0s
+  total", its scanner row reading "0 TIER-1 -- the push gate holds";
+  pushed in b6652f9. `PROVENANCE_AUDIT.md` at b6652f9 reads "GATE PATH:
+  0 TIER-1 -- the push gate holds." Not closed by that session: it did
+  not load provenance-discipline, and the next provenance session
+  confirms its loaded copy reads 2.28.
 **Gap:** Tony's run. The maintenance run should end on "GATE PATH: 0
 TIER-1 -- the push gate holds" and "21 of 21 gating checkers passed".
 Then this item closes.
@@ -2553,7 +2607,7 @@ rest of the Sun's slice is ordered on L-412.
 **Ref:** `idealized_orbits.py`; `documentation/BUILD_MANIFEST_L322_D_earth_pole_20260922.md` sec. 2.5 and 7; L-322.
 
 #### [L-367] No checker opens a new room (checks, gallery)
-<!-- L:367 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+<!-- L:367 status:OPEN upd:2026-10-09 section:A flag: rice: -->
 - **2026-10-08:** item 6 of L-423 (the website's checks). Takes
   L-262's residual (the live room's framing has no test) when
   L-262 closes. Finishes before L-363.
@@ -2579,6 +2633,11 @@ rest of the Sun's slice is ordered on L-412.
   2026-10-04). And this item is why the gallery's checks come before
   the swap in Tony's order of 2026-10-04 (L-412): the swap changes the
   front door.
+- **2026-10-09, met again at L-428 (the lobby's way in):** the gallery
+  maintenance run gave the same verdicts, row for row, on the patched
+  copy and on the base, and no row draws the lobby. Its checks were a
+  headless render at 390 x 844 and 1280 x 800; the script is in
+  `documentation/HANDOFF_lobby_option_E_20261009.md`.
 **Gap:** A check that lists `EXHIBITS` and fails on a room no checker boots, or one smoke that boots every room; and something that reads the lobby code.
 **Ref:** gallery `gallery_maintenance_run.py`; gallery `documentation/smoke_*.js`; L-363.
 
@@ -2642,7 +2701,12 @@ rest of the Sun's slice is ordered on L-412.
 **Ref:** gallery `tools/gallery_cache_builder.py` (served_window, M2 section 5.5); gallery `gallery/assembler/resolver.py`, step 3; skills/gallery-assembler/SKILL.md; L-363.
 
 #### [L-363] The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits)
-<!-- L:363 status:OPEN upd:2026-10-04 section:A flag: rice: -->
+<!-- L:363 status:OPEN upd:2026-10-09 section:A flag: rice: -->
+- **2026-10-09, the card moves, under L-428 (the lobby's way in):** the
+  lobby no longer draws it under Featured; it opens the lobby, as the
+  start block. Its sentence is now "Today's planets in 3D. Turn it with
+  your finger, tap a planet, step into the Sun and Earth." The door's
+  page still shows it first, unchanged. Not the address swap below.
 - **2026-10-04, the lobby's wide card: built and on the website.**
   Gallery `patch_L363_10` (pushed `3c65b8a7`), `patch_L363_11`
   (`d4b408e6`) and `patch_L363_13` (the wording), in a session running beside the L-371 one, on files the
@@ -7802,7 +7866,7 @@ as "Paloma's Orrery Guest Book". Kept for the record:
 https://cusdis.com/; https://github.com/djyde/cusdis.
 
 #### [L-282] The lobby: the main page as an entrance hall
-<!-- L:282 status:OPEN upd:2026-09-06 section:A flag: rice:5/4/75/4 -->
+<!-- L:282 status:OPEN upd:2026-10-09 section:A flag: rice:5/4/75/4 -->
 - **DESIGN CLOSED 2026-09-04** (design session, zero code; the reasoning
   trail is HANDOFF 2026-09-04, "the lobby splits by subject"). Nine
   rounds, each simpler. What replaced proposal 1 below:
@@ -7994,6 +8058,10 @@ existing cards; then the collections room. Mode 5 on phone first.
   link. Tony, desktop and phone 2026-09-06: works.
 - **Tony-action (do):** the old-card cleanup in the editor (remove or
   fix), separate from this item.
+- **2026-10-09: the lobby's way in, L-428.** A friend shown the site on
+  a phone did not know where to start. The lobby now opens on the Solar
+  System room's picture and one Enter button, then the doors under "Or
+  explore by subject". Its own item, L-428.
 **Ref:** L-286 (rooms, drill-down, breadcrumb), L-287 (editor and room
 tree), L-283, L-281, L-266; HANDOFF 2026-09-04 (design session: the
 lobby splits by subject); index.html; interactive.html;

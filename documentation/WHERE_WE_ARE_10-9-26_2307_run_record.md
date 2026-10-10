@@ -1,0 +1,589 @@
+<!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
+# Where We Are
+
+Last updated: October 9, 2026, at the scanner window build.
+- Written at orrery aa46bb1 and gallery 5ec4739b, before your run of
+  patch_L414_1.
+
+> **READ THIS FIRST**
+>
+> **Changed since you last read this:**
+> - L-414 (the scanner's window) is built: a row's sources are read
+>   only from its own comment block; declared rows are named.
+> - The scanner prints the push gate's number, naming each finding:
+>   0 on a copy; it was 4, all the scanner's own faults.
+> - L-427 (rows a neighbour had been crediting): one row lost a
+>   borrowed citation; it is off the gate path.
+>
+> **Do next:** *as you confirmed: the typed facts (the inner Oort
+> cloud, then the check); the Horizons check build; the Sun's list
+> from item 3.*
+>
+> **Needs you now:**
+> - *Run patch_L414_1, then orrery_maintenance_run.py, and push. Then
+>   reinstall provenance-discipline from its ZIP.*
+> - *Decide L-425 (citation location checks): which checks to build,
+>   on the run's results (on L-425 and in the handoff).*
+
+*Italic* lines are the must-reads. Marks reset at every update.
+
+## The road
+
+  1-4. [done]  The Sun, Earth and Solar System rooms are live; the orrery
+               feeds the website and nothing is typed twice.
+  5.   [NOW]   *Earth's old items are finished, in your order.* The
+               website patch and Earth's typed facts are live.
+  6.   [next]  The typed facts: 15 of 17 served. Left: the inner Oort
+               cloud, redrawn tilted, and the check.
+  7.   [next]  The Sun's numbers get the checking Earth's got.
+  8.   [next]  The served objects are checked against JPL Horizons.
+               Designed and recorded; build next, with Encke added
+               and Halley checked too.
+  9.   [next]  The website's checks, in the order you confirmed:
+               L-423 (the website's checks).
+ 10.   [next]  A bare interactive.html link opens the Solar System room;
+               the Explorer gets its own address.
+ 11.   [later] The rest of the orrery's objects come to the website.
+ 12.   [later] Encounters: comets and spacecraft at the dates that matter.
+ 13.   [later] The planets get their details, Jupiter and Saturn first.
+ 14.   [later] The Earth System layers; the gallery's cards meanwhile.
+ 15.   [goal]  The website does what the desktop orrery does, with a date
+               to choose, within the range the data covers.
+
+## Settled  **>> UPDATED THIS SESSION**
+
+Standing rulings. A line leaves after a few weeks, once it is habit.
+- A row's sources come only from its own comment block. (Oct 9)
+- Small fixes owed to a skill ride the version a session is already
+  making; a change to a checker gets its own session. (Oct 8)
+- A long skill gets its reading plan at its next version, not in a
+  bump of its own. (Oct 8)
+- The galactic tide keeps its cone, to show its pull as physics. (Oct 7)
+- No colour or other name that only one system knows. The panels'
+  grey is one name, gray90. (Oct 6)
+- The daily hand run stays a hand run. (Oct 7)
+- OneDrive: you are trying builds without the pause; the retry absorbs
+  the lock, and the swap log shows any retry. Empty "solar-system (N)"
+  folders are harmless; delete by hand. (Oct 8)
+- An object's words in the list carry no numbers unless they come
+  from the store. (Oct 8)
+- Items in an ordered list carry no RICE score. (Oct 7)
+- Every ledger handle on this page carries a short label. (Oct 7)
+- Code types only words about our picture; facts are served. (Oct 6)
+- The inner Oort cloud is redrawn from the 2025 paper now, as part of
+  the Sun's slice, not deferred. (Oct 6)
+
+## Signals  **>> UPDATED THIS SESSION**
+
+Read from files when this page was written, not typed from memory.
+- Last cache build: 20261008T180043Z, ok. Its last rename took two
+  attempts, and the retry absorbed it.
+- Tier-1 on the gate path: 0 on a copy with patch_L414_1 applied;
+  your run prints it as GATE PATH. Whole tree: 293 there, 296 in
+  PROVENANCE_AUDIT.md at aa46bb1.
+- This page's date and the ledger's newest stamp: both Oct 9. Agree.
+
+## Waiting on you
+
+At the next design talk:
+- The fuzzy outer corona, with the dust cloud; the exosphere the same way.
+- Moving the highlighted row to the top of the list.
+- GO's arrow, only if the text box stays centred.
+- Earth's design talks, the belts' shape first.
+- Whether the phone's Sun room gets the galactic plane, its poles,
+  Sgr A* and the tide's cone: L-408 (the galactic plane on the phone).
+  You: "awaits the design talk." (Oct 7)
+- The inner Oort cloud's tilted disk: its words, and whether its outer
+  edge moves from 20,000 au to the paper's 10,000.
+
+Decisions, one at a time:
+- L-424 (the checker's one word for two cases): whether the
+  checker itself prints two different words.
+
+Not urgent, in your order:
+1. Whether the editor also edits the Solar System room's rows.
+2. Choosing a date, and animation.
+3. The scattered disk, with the Kuiper belt. Not the fuzzy-boundary idea.
+
+## Where the details are  **>> UPDATED THIS SESSION**
+
+- Scanner window: L-414 (the scanner's window), L-427 (rows a neighbour
+  had credited); `documentation/HANDOFF_L414_scanner_window_20261009.md`
+- The Oct 8 decisions: `documentation/HANDOFF_decisions_20261008.md`.
+  The new list: L-423 (the website's checks).
+- Every item: `LEDGER_CONSOLIDATED.md`. The Fable sweep: L-422 (the ledger
+  skill at 1.17 and this page), L-001 (the Earth System track), L-071
+  and L-077 (the 2026 heat domes, closed), L-216 (the swap retry and
+  the hand run), L-412 (the RICE ruling), L-395 (the Horizons check,
+  designed). Open for build: L-421 (the typed facts).
+- The typed facts: plan
+  `documentation/MANIFEST_L421_typed_facts_20261006.md`; record
+  `documentation/HANDOFF_L421_typed_facts_20261008.md`
+- The Horizons check design:
+  `documentation/DESIGN_L395_horizons_check_20261007.md`
+- The split's tests and the citation checks: L-418 (splitting
+  provenance-discipline, closed), L-425 (citation location checks),
+  L-426 (the checker's small-number comparison); record
+  `documentation/HANDOFF_L418_testing_20261009.md`
+- The reasoning behind the order:
+  `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`
+
+--- Your run record below this line. No patch edits it; the length cap
+--- stops here; the close reads your timestamped copy and clears this.
+
+**Tony**: Run record:
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L395_4_run_confirmed_and_page_20261008.py
+ok  LEDGER_CONSOLIDATED.md         header stamp
+ok  LEDGER_CONSOLIDATED.md         L-395 date
+ok  LEDGER_CONSOLIDATED.md         L-395 Tony's run
+ok  WHERE_WE_ARE.md                header date
+ok  WHERE_WE_ARE.md                road stage 8
+ok  WHERE_WE_ARE.md                decisions: the Horizons build
+
+patch applied
+
+NEXT:
+  1. Run orrery_maintenance_run.py -- it rebuilds the ledger's index.
+  2. Move this script into documentation/; commit and push.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Session: OPEN: 10-9-26 2303: Opus: Build session lobby option E**
+
+I'll load the three skills the brief names, pin both repos' HEADs, and then build the lobby change on a throwaway clone.
+
+**Skills loaded, and each matches its manifest row:**
+- gallery-pipeline 1.2
+- safe-file-editing 1.13
+- ledger-and-session-records 1.18
+
+**Both repos pinned at the start of this session:**
+- Orrery: `b6652f9` ("L414 L421"). Your L-414 push has landed, so the protocol is v3.87.
+- Gallery: `5ec4739` ("daily run 10-9-26"). This is the same commit the brief was written on.
+
+The design record in the orrery at `b6652f9` is byte-for-byte the copy you attached.
+
+I'm building now on a throwaway clone of the gallery.
+
+Now the patch script.
+
+Now the headless render of the patched copy.
+
+Now the records patch.
+
+The lobby change is built and checked, but not pushed yet. On a phone, the lobby now opens on the Solar System picture, the title "Start with the Solar System, live", your new sentence, and a gold "Enter" button. The button ends at 573 px, well inside the first 844 px.
+
+**What I need from you:** in the gallery folder, open `patch_L428_1_lobby_option_e.py`, press Run, then push. Then look on the phone, with the Home Screen clip's tab closed first. I've already put both patches in the root folder of the right repo on your computer.
+
+**Run Record:**
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L428_1_lobby_option_e.py
+ok  index.html: lobby click handler for the start card
+ok  index.html: Featured skips the start card
+ok  index.html: start card drawn first; Doors renamed
+ok  index.html: startCardHtml() added
+ok  index.html: start card CSS
+ok  index.html: header comment stamp
+ok  gallery_config.json: welcome sentence added
+ok  gallery_metadata.json: card solar_system description
+note: gallery_config.json was CRLF in the working copy; written LF
+stamps updated: index.html header comment (October 9, 2026, L-428)
+patch applied (index.html 214552 bytes, gallery_config.json 4516 bytes, gallery_metadata.json 77035 bytes)
+
+Next: commit and push the gallery in GitHub Desktop, then look on
+the phone (close the Home Screen clip's tab first so the phone
+fetches the new page). Then move this script into documentation/.
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.5s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     0.8s  rewrote data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.6s  rewrote data/objects_export.sha
+  PASS Objects mirror            0.1s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      15.0s  PASS (229 checks, 0 failures)
+  PASS Pole of date              0.2s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.1s  All 64 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served, print count
+                                    written as served, "in" written as
+                                    served and a slot served in
+                                    another unit from it.
+  PASS Store writer suite        8.5s  All 322 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings, the rooms section's
+                                    included; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.2s  All 305 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Objects mirror suite      0.1s  MIRROR OBJECTS SUITE: pass
+  PASS Objects mirror check      0.1s  OBJECTS MIRROR: pass
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 101 link(s) compared, store
+                                    3b7000e368d1.
+  PASS Pointer join              0.1s  Every link is accounted for: 108
+                                    link(s) against orrery b6652f9a, 4
+                                    fallback named; read check: 43 of
+                                    43 measured rows reached carry a
+                                    read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's 19 object(s) and their
+                                    features exactly: 4 object(s) with
+                                    35 named shell(s), in both cache
+                                    files.
+  PASS Collapsed features        0.1s  33 stored as themselves, 16
+                                    collapsed, 0 unclassified.
+  PASS Feature renderers         0.9s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 57 hover(s) and 307
+                                    number(s) examined; 13 graded, 7
+                                    graded by line, 44 held to the
+                                    fixture ===
+  PASS Solar System figures      0.1s  === PASS: 6 worked cases, 11
+                                    drawer rows matched to their
+                                    accuracy rows, 10 served
+                                    distances; Uranus, Neptune and
+                                    Pluto print to JPL's ten-thousands
+                                    place ===
+  PASS Solar System drawer       0.1s  === PASS: the Sun is never ticked,
+                                    See more hides only what is not
+                                    ticked, the handle names the last
+                                    body ticked, All / none leaves the
+                                    Sun, rooms are offered only where
+                                    they exist, and the page asks this
+                                    file ===
+  PASS Guest book                0.1s  === GUEST BOOK: all 8 checks
+                                    passed
+  PASS Guest book updater        0.2s  === GUEST BOOK UPDATER: all 43
+                                    checks passed (6 scripted runs,
+                                    self-test first)
+  PASS Daily run steps           0.1s  === DAILY RUN: all 3 step scripts
+                                    found
+  FAIL Artifact 1 assembler      0.2s  === FAILURES: the Artifact 1
+                                    verdicts are not what was pinned
+                                    ===
+  PASS Cache siblings            0.1s  RESULT: 2 directories in data/ the
+                                    builder did not make: solar-system
+                                    (1), solar-system (2). Check
+                                    whether they belong there; the
+                                    newer .gitignore rules keep the
+                                    known conflict-copy shapes out of
+                                    git but do not remove anything.
+
+======================================================================
+  1 of 24 gating checkers FAILED
+  Artifact 1 assembler
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: 2 directories in data/ the
+  last swap 2026-10-09T19:03:59.631510+00:00: succeeded first time
+======================================================================
+
+----------------------------------------------------------------------
+Artifact 1 assembler -- === FAILURES: the Artifact 1 verdicts are not what was pinned ===
+----------------------------------------------------------------------
+PIN -- Artifact 1 assembler verdicts
+  ran: python.exe -m assembler.tests.test_artifact1_earth   (cwd gallery/)
+  the test's own exit code was 1, which is expected and is NOT the verdict here
+
+  ok   T1  expected OK      got OK      as_of_today cross-check agrees with the cached position
+  MISS T2  expected OK      NOT PRINTED
+  MISS T3  expected FAIL    NOT PRINTED
+  MISS T4  expected RAISED  NOT PRINTED
+  MISS T5  expected OK      NOT PRINTED
+  MISS T3 detail  could not parse the feature set
+
+=== FAILURES: the Artifact 1 verdicts are not what was pinned ===
+  T2 -- no verdict line found in the test's output at all
+  T3 -- no verdict line found in the test's output at all
+  T4 -- no verdict line found in the test's output at all
+  T5 -- no verdict line found in the test's output at all
+  T3 -- its line could not be parsed for the feature set; the pin cannot confirm the failure is the known one
+
+  This is the pin doing its job. Something moved.
+  If L-237 was just fixed, update PINNED in this file in the
+  same commit. Otherwise investigate before pushing.
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+**Claude:**
+You can commit and push the gallery. The one failing check isn't caused by the lobby patch.
+
+**What failed and why.** The Artifact 1 check builds a test scene at a fixed date, July 13, 2026. The site's data only covers a moving window of dates, and that window moves forward each time the cache is rebuilt. Today's rebuild, at 2:03 pm your time, moved the window's start to about 8 hours after July 13. So the test now asks for a date the data no longer covers, and it stops after its first step.
+
+**Why it isn't the lobby.** I ran the same test on the gallery as it was before the patch, and it fails in exactly the same way. It doesn't read any of the three files the patch changed.
+
+**It will stay red on every run.** The window only moves forward, so the check fails until the test's date is moved. That work already sits on your list: L-237 (Artifact 1's record, item 4 of the website's checks). I added a dated line there saying why it went red today, so the failure has a name. I put the updated records patch back in your orrery folder, so there's nothing extra for you to do.
+
+Everything else passed, including the Pole of date check that failed in my sandbox. The two "solar-system (1)" and "(2)" folders are the harmless OneDrive copies you ruled on before.
+
+Your next steps are the same as before:
+1. Commit and push the gallery. -- 2aab10fdead213ade0cc9c8bdbfe1a6bc03c30b5
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 15 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   gallery/solar_system_drawer.js                 matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+
+  PASS Served reachability       2.0s  all 15 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at b6652f9a
+
+  PASS Export freshness          0.1s  the served export is the orrery's
+                                    at b6652f9a, byte for byte
+
+  orrery HEAD b6652f9a
+  examining 7 of 108 links; the other 101 are served from the export
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  7 pointers: 4 match, 0 DRIFT, 0 UNIT MISMATCH, 3 could not be examined.
+
+  PASS Store drift               1.0s  7 pointers against orrery b6652f9a
+                                    -- 4 match, 0 DRIFT, 0 UNIT
+                                    MISMATCH, 3 could not be examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            7 pointers against orrery b6652f9a -- 4
+  last swap 2026-10-09T19:03:59.631510+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+2. Look at the lobby on the phone, with the Home Screen clip's tab closed first. -- 2aab10fdead213ade0cc9c8bdbfe1a6bc03c30b5
+3. In the orrery folder, run `patch_L428_2_records_20261009.py`, then `orrery_maintenance_run.py`, and push.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+**End Run Record**
+
+What the check showed, on a throwaway copy:
+- The Solar System card appears once, at the top. It no longer shows up again under Featured. -- correct. (Minor: could you give this card the same semi-transparent opacity that the other interactive cards have? The doves allude to "Paloma".)
+- The door counts are the same as before: 33, 57 and 9 on the phone, and 36, 57 and 9 on desktop. -- yes
+- The Solar System door's page still opens with that card first, now with the new sentence. -- yes
+- Tapping the picture and tapping Enter both open the Solar System room. No script errors. -- correct
+- The gallery's own check suite gives the same results with and without the patch. Three checks fail both ways here because this sandbox is missing packages they need. None of the checks looks at the lobby. That gap was already on the ledger, so I added a dated line there rather than building a check.
+
+**Tony:** -- Brighten the grey type to white or blue or another color if you need contrast with the existing white type. grey is too dim. 
+
+**Two decisions I made, which you can reverse:**
+- **The title is typed into the page, not stored on the card.** The card's own title also appears on its door's page and in the menu, where "Start with…" would read oddly.
+- **The picture comes before the title.** That follows the E sketch you picked; the brief listed them the other way. Swapping them is one line.
+
+**Things to look at on the phone, not questions:**
+- "Turn it with your finger" is phone wording. The desktop screenshot shows how it reads with a mouse.
+- The "Or explore by subject" heading now sits lower, over the doves in the background. It may be hard to read. -- yes, see my note above. 
+
+**After the phone look:** in the orrery folder, run `patch_L428_2_records_20261009.py`, then `orrery_maintenance_run.py`, then push. It opens the new ledger item, L-428 (the lobby's way in), and updates your Where We Are page above the run-record line only. It also writes the session handoff. I tried both patches on copies of your working files and both ran cleanly. Your gallery config file has Windows line endings, and the patch will say it saved it with Unix ones.
+
+**Run Record:**
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L428_2_records_20261009.py
+ok  LEDGER_CONSOLIDATED.md  L-282 line
+ok  LEDGER_CONSOLIDATED.md  L-282 date
+ok  LEDGER_CONSOLIDATED.md  L-363 line
+ok  LEDGER_CONSOLIDATED.md  L-363 date
+ok  LEDGER_CONSOLIDATED.md  L-367 line
+ok  LEDGER_CONSOLIDATED.md  L-367 date
+ok  LEDGER_CONSOLIDATED.md  L-414 Tony's run
+ok  LEDGER_CONSOLIDATED.md  L-428 opened
+ok  LEDGER_CONSOLIDATED.md  header stamp
+ok  WHERE_WE_ARE.md         where the details are
+ok  WHERE_WE_ARE.md         signals
+ok  WHERE_WE_ARE.md         settled
+ok  WHERE_WE_ARE.md         needs you now
+ok  WHERE_WE_ARE.md         changed since
+ok  WHERE_WE_ARE.md         date line
+ok  documentation/HANDOFF_lobby_option_E_20261009.md created
+note: WHERE_WE_ARE.md has 129 lines above the run-record marker (the cap is 130)
+stamps updated: LEDGER_CONSOLIDATED.md header; WHERE_WE_ARE.md date line
+patch applied
+
+NEXT:
+  1. Run orrery_maintenance_run.py -- it rebuilds the ledger's index.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261010T013213Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.7s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.2s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.4s  unchanged (1 checked, not written)
+  Objects export               0.1s  unchanged (1 checked, not written)
+  Module atlas                 7.3s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.0s  rewrote DATA_INVENTORY.md
+  Exact rows report            1.9s  rewrote EXACT_ROWS_PRINTED.md -- 13 of 34
+                                     exact rows printed at 42 lines (32 orrery,
+                                     10 gallery); 8 drawn only, 11 not followed,
+                                     0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.2s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.0s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       1.4s  Export matches the store: sha256
+                                     3b7000e368d1 on both sides; 105 rows
+                                     re-read, 56 not exported, 27 tokens; 310
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.1s  pass
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      1.6s  PASSING -- 13 printed exact rows each state
+                                     a count; 32 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.4s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.2s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.2s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 105 status lines in constants_new.py are
+                                     well formed; 53 rows carry none.
+  Row shape                    0.1s  All 161 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.3s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          25.2s  PASS -- all 310 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.2s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.4s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Worksheet checker           13.3s  74 of 110 routed, 8 clean
+  Worksheet checker tests     17.4s  All 135 checks passed
+  Worksheet key round trip     1.0s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         26.4s  All 76 checks passed
+  Extractor pins               0.6s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          11.9s  0 TIER-1 -- the push gate holds
+
+======================================================================
+  21 of 21 gating checkers passed -- 123.4s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2138 file(s) examined, 9 written, 0 created, 0 removed, 5 rewritten identically
+    written   DATA_INVENTORY.md
+    written   EXACT_ROWS_PRINTED.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   data/provenance_history.json
+    written   documentation/WHERE_WE_ARE_10-9-26_2307_run_record.md
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      PROJECT_INSTRUCTIONS.md
+      WORKSHEET_CHECK.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Move this script into documentation/; commit and push.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+**End Run Record**
+
+
+Separately, your L-414 (the scanner's window) run is now recorded on that item: 21 of 21 checks passed, and the push gate reads 0. I didn't close the item, because its next step needs the provenance skill, which this session didn't load.
+
+Files are in the gallery and orrery repo folders:
+- patch_L428_1_lobby_option_e.py
+- patch_L428_2_records_20261009.py
+
+Screenshots:
+- lobby_E_phone_390x844.png
+- lobby_E_desktop_1280x800.png

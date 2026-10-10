@@ -3,8 +3,8 @@
 
 Generated: October 09, 2026
 Files scanned: 144
-Total findings: 1083
-Constants: 161 | Dicts: 46 | Display strings: 876
+Total findings: 1081
+Constants: 161 | Dicts: 44 | Display strings: 876
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,14 +20,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|---:|---:|---:|--------:|
+| 20261010T045744Z | `b6652f9` | 144 | 1081 | 293 | 659 | 124 | 5 | 0 |
 | 20261010T013213Z | `aa46bb1` | 144 | 1083 | 293 | 661 | 124 | 5 | 0 |
 | 20261009T195753Z | `08f0375` | 142 | 1099 | 296 | 675 | 123 | 5 | -- |
 | 20261009T032035Z | `e5cc4bb` | 143 | 1099 | 296 | 675 | 123 | 5 | -- |
 | 20261009T030211Z | `682c539` | 142 | 1099 | 296 | 675 | 123 | 5 | -- |
 | 20261009T014206Z | `c921ef8` | 143 | 1099 | 296 | 675 | 123 | 5 | -- |
-| 20261009T012542Z | `b0b3df8` | 143 | 1098 | 296 | 676 | 121 | 5 | -- |
 
-Change since the previous run: total -16, Tier-1 -3.
+Change since the previous run: total -2, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -61,7 +61,7 @@ No file's Tier-1 count rose.
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 293 |
-| 2 | 10-15 | REVIEW | 661 |
+| 2 | 10-15 | REVIEW | 659 |
 | 3 | 5-9 | LOW PRIORITY | 124 |
 | 4 | 1-4 | LOWEST PRIORITY | 5 |
 
@@ -180,7 +180,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `energy_imbalance.py` | earth_science | 1 | 1 | 0 | 0 | 2 |
 | `plot_data_report_widget.py` | utilities | 2 | 0 | 0 | 0 | 2 |
 | `sgr_a_visualization_animation.py` | orrery | 1 | 0 | 1 | 0 | 2 |
-| `patch_L414_1_scanner_window_20261009.py` | orrery | 0 | 2 | 0 | 0 | 2 |
 | `close_approach_data.py` | orrery | 0 | 1 | 1 | 0 | 2 |
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `worksheet_request_builder.py` | orrery | 0 | 0 | 2 | 0 | 2 |
@@ -213,7 +212,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 50 | 130 | 545 | 71 | 2 | 748 |
+| Orrery (solar system + orbital mechanics) | 49 | 130 | 543 | 71 | 2 | 746 |
 | Earth System | 13 | 149 | 75 | 2 | 0 | 226 |
 | Stars (stellar neighborhood) | 11 | 12 | 41 | 6 | 3 | 62 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 45 | 0 | 45 |
@@ -228,7 +227,6 @@ Same data again, grouped by subject-matter domain rather than by individual file
 - `export_constants.py`
 - `export_objects.py`
 - `orrery_maintenance_run.py`
-- `patch_L414_1_scanner_window_20261009.py`
 - `test_dimensions.py`
 - `worksheet_checker.py`
 - `worksheet_key_aliases.py`
@@ -1414,13 +1412,6 @@ is planned for a future session.
 | 2303 | string | display string @ line 2303 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2341 | string | display string @ line 2341 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2416 | string | display string @ line 2416 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-
-### patch_L414_1_scanner_window_20261009.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 276 | dict | BASE_MD5[...] | (5 entries) | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | UNDETERMINED -- could not be classified |
-| 284 | dict | NEW_FILES[...] | (2 entries) | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | UNDETERMINED -- could not be classified |
 
 ### planet9_visualization_shells.py
 

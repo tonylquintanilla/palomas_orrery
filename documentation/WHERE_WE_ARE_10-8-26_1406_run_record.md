@@ -353,7 +353,7 @@ If it passes, the split build goes to another fresh session, started from the br
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: OPEN: 10-8-26 1624: Opus: Ledger-session-records decisions**
+**Session: DONE: 10-8-26 1818: Opus: Ledger-session-records decisions**
 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L412_2_decisions_20261008.py
 ok  LEDGER                   header stamp
@@ -1396,7 +1396,7 @@ Do you want the planted-fault run in the testing session, so L-425 is decided on
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: OPEN: 10-8-26 1105: Opus: Testing session brief**
+**Session: DONE: 10-9-26 1505: Opus: Testing session brief**
 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L418_5_testing_close_20261009.py
 patch_L418_5 -- built on orrery 08f0375
@@ -1632,7 +1632,7 @@ One caution for when you are back: both sessions will hand you a closing patch t
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: OPUS: 10-9-26 1521: Opus: L-414 scanner window session**
+**Session: DONE: 10-9-26 1735: Opus: L-414 scanner window session**
 
 When the patch runs, it prints your steps: run orrery_maintenance_run.py, then commit and push. After that, reinstall provenance-discipline from a ZIP, and replace the Project’s instructions with the new PROJECT_INSTRUCTIONS.md (v3.87).
 
@@ -1877,15 +1877,23 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  2. Move this script into documentation/; commit and push. -- 
+  2. Move this script into documentation/; commit and push. -- b6652f9ad7bb96aea06be416d398f3234a91ca93
   3. Make a ZIP of skills/provenance-discipline (in File Explorer,
      right-click the folder, Send to, Compressed (zipped) folder). Keep
      the ZIP out of the repo folder. In Settings, under Skills, install
-     it, replacing the installed provenance-discipline.
+     it, replacing the installed provenance-discipline. -- done
   4. Replace the Project's instructions with PROJECT_INSTRUCTIONS.md
-     (now v3.87).
+     (now v3.87). -- done
 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+When the patch runs, it prints your steps: run orrery_maintenance_run.py, then commit and push. After that, reinstall provenance-discipline from a ZIP, and replace the Project’s instructions with the new PROJECT_INSTRUCTIONS.md (v3.87).
+
+Where this leaves us:
+
+The scanner session is done, waiting only on your run.
+The Oort cloud build (the typed facts) can rely on the gate to catch a removed Source line.
+Next, as you confirmed: the typed facts, then the Horizons check build.
 
 **Fable:**
 

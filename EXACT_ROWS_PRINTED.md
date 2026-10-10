@@ -171,7 +171,7 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
   - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 82 (config `/objects/12/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
   - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 83 (config `/objects/12/position_accuracy`): `v = node.value;`
 - `GM_SUN_SI`: named on 0 other orrery line(s).
-- `M3_PER_KM3`: named on 0 other orrery line(s).
+- `M3_PER_KM3`: named on 1 other orrery line(s).
 
 ## How the search works
 
