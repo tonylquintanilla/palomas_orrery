@@ -555,6 +555,14 @@ The same day Settings refused the first copy ("malformed YAML
 frontmatter"): the new fires_when words sat on a line of their own.
 They are back on the one line, and the version stays 1.10, which never
 loaded anywhere (L-406, L-407).
+Earlier: 1.11 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 72e3b558. v1.11 (L-418) changes no rule. A contents
+list now opens the skill, generated from its headings, and
+skills_index.py --check fails if the two disagree. Version history
+older than the two entries below moved to
+documentation/SKILL_HISTORIES.md. Both because a plain read of a
+long file shows its start and end and leaves out its middle, where
+the rules are (Tony, 2026-10-05).
 
 ## safe-file-editing
 
@@ -695,3 +703,10 @@ v1.4 adds Recovery from a failed swap: discard and re-run -- Tony's
 operational rule of 2026-08-19, after a nightly run wiped the served tree
 and the ~30 quarantine directories turned out to be the same mechanism
 printing harmlessly every night since July 21 (L-216).
+v1.5 adds the rule the project did not have written down anywhere until
+a config change reached the live site ahead of the cache and broke both
+exhibit rooms: A CONFIG CHANGE IS NOT DEPLOYED UNTIL THE CACHE IS
+REBUILT (L-336). It also corrects this skill's own claim that the failed
+`staging -> live` rename was "one data point" -- there have been three,
+the third on 2026-09-17 -- and writes down the hand routine Tony
+actually uses now.

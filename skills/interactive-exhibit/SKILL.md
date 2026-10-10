@@ -6,9 +6,16 @@ fires_when: adding or changing an exhibit in interactive.html; any edit to the S
 
 # Interactive Exhibit
 
-Read this file in 4 parts: lines 1-138, 139-372, 373-620, 621-781.
+Read this file in 4 parts: lines 1-137, 138-373, 374-621, 622-783.
 
-Skill version: 1.13 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.14 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ a6678b0f and gallery @ cb9038cc. v1.14 (L-429) records
+Tony's rulings of the same day, after 1.13 was installed: every room's
+row puts GO TO in its true middle, the Solar System room's room button
+to its right, and a long name wraps rather than being cut. A second
+version in one session, against One Session, One Bump, because the
+ruling came after 1.13 was in use.
+Earlier: 1.13 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 04d17331 and gallery @ 2aab10fd. v1.13 (L-429)
 corrects the Solar System room's drawer as built: a body with a room
 shows its "Enter the <name> room" button on its own row, before GO,
@@ -28,14 +35,6 @@ in the page, which Claude read as allowing a typed fact. Tony: "I
 thought the only source of truth is the constants py and the objects
 list ... not from the code." A search the same day found 17 such facts
 in the two rooms (documentation/MANIFEST_L421_typed_facts_20261006.md).
-Earlier: 1.11 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 72e3b558. v1.11 (L-418) changes no rule. A contents
-list now opens the skill, generated from its headings, and
-skills_index.py --check fails if the two disagree. Version history
-older than the two entries below moved to
-documentation/SKILL_HISTORIES.md. Both because a plain read of a
-long file shows its start and end and leaves out its middle, where
-the rules are (Tony, 2026-10-05).
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418) and 2026-10-10 (L-429).
 
@@ -101,7 +100,7 @@ the new exhibit brings its own.
 | Feature handoff: `GalleryFeatures.buildFeatureTraces(features, positions, {sceneHalfRangeAu})`; anything larger than the frame goes to the drawer, not dropped | feature_renderers.js | shared |
 | Arrival frame: measure every trace once (`sunTraceExtentAu`), half-range = 1.1 x the largest visible, floored at the body's constant (`SUN_HALF_RANGE_AU` 0.25) | initSunExhibit | mechanism shared; the floor and what is visible on arrival are per-body rulings |
 | Layout builder: aspect 1:1:1 unless the body's physics says otherwise (the Sun's shells are spheres); axes state their unit; `tick0` 0 and `dtick` from `sunGridDtick(span)` | `buildSunLayout()` | per-body values, shared rules |
-| Drawer replacing the legend: rows from `legendgroup`, `legendonly` hides, All / none, focus row. A row's whole left end -- edge, box and colour dot, the full row height, about 65 px -- ticks and unticks; rows are at least 44 px tall; the name or GO on an UNTICKED shell ticks it and then frames it (L-318 round 3, amending L-267's G2 in that one case; GO still never hides anything). Naming a DRAWN shell also opens its hover text as a text box: on the desktop and a landscape phone a scene annotation pinned to its info marker with an arrow; on a portrait phone (`sunPhonePortrait()`) a page annotation centred in the view with no arrow, same text and width (L-318 round 5). A tap in the scene, on the box, or on the backdrop closes it; the backdrop also closes the drawer; unticking closes it too (L-318) | `buildSunDrawer`, `sunApplyVisibility`, `sunFocusOn`, `sunLabelShow`, `sunLabelInstall`, `sunPhonePortrait`; knobs `SUN_LABEL_WRAP_CHARS` (34), `SUN_LABEL_PHONE_X` / `_Y` (0.5), `SUN_LABEL_FONT_PX` (12) | shared |
+| Drawer replacing the legend: rows from `legendgroup`, `legendonly` hides, All / none, focus row. A row's whole left end -- edge, box and colour dot, the full row height, about 65 px -- ticks and unticks; rows are at least 44 px tall; the name or GO on an UNTICKED shell ticks it and then frames it (L-318 round 3, amending L-267's G2 in that one case; GO still never hides anything). Since L-429 (Tony, 2026-10-10: "For uniformity rename the Go buttons in all rooms to Go To and center") the button reads GO TO and sits in the true middle of every room's row: the row is a three-column grid, the left end and the name in the first, Go To in the second, the room button (Solar System room) in the third; a long name wraps onto more lines rather than being cut. Naming a DRAWN shell also opens its hover text as a text box: on the desktop and a landscape phone a scene annotation pinned to its info marker with an arrow; on a portrait phone (`sunPhonePortrait()`) a page annotation centred in the view with no arrow, same text and width (L-318 round 5). A tap in the scene, on the box, or on the backdrop closes it; the backdrop also closes the drawer; unticking closes it too (L-318) | `buildSunDrawer`, `sunApplyVisibility`, `sunFocusOn`, `sunLabelShow`, `sunLabelInstall`, `sunPhonePortrait`; knobs `SUN_LABEL_WRAP_CHARS` (34), `SUN_LABEL_PHONE_X` / `_Y` (0.5), `SUN_LABEL_FONT_PX` (12) | shared |
 | Nav cluster: + / - / Home = FRAME zoom (range and dtick change together; the grid re-labels), plus four arrow buttons that turn the camera by a step scaled to the live eye distance, so a tap moves the same slice of screen at any zoom (L-310); on a portrait phone 768 px or narrower the arrow cross, Home with it, moves apart from + and - into its own holder, and the in-frame title stays (L-316). WHICH corner is set only by the `.nav-cross-apart` CSS rule in `nav_cluster.js` -- top right since round 4, after a round at the bottom left -- and the method that moves it, `crossApart(on)`, says nothing about the corner, so the next move is one CSS edit. The open drawer hides the cluster and the holder both. The page decides WHEN: `navPlaceCross()` asks `sunPhonePortrait()`, the same test the text box uses | gallery/nav_cluster.js (`crossApart`, `.nav-cross-apart`), `navFrameZoom`, `navHome`, `navCameraStep`, `navPlaceCross`, `sunPhonePortrait` | shared |
 | Click deferral: `plotly_click` -> `setTimeout(0)` -> focus | initSunExhibit | shared, CRITICAL (L-278) |
 | i-panel follows the focus; curated link per feature stamped into trace `meta` by `stampLink` | `renderSunInfo`, feature_renderers.js | shared mechanism; per-body copy and links |
@@ -331,11 +330,13 @@ Plotly.
 - **A row opens, and a room is one tap away.** Tapping a name
   highlights the row and opens it; a second tap closes it. Ticking a
   body opens its row too (Tony, 2026-09-30). A body whose slug is a key
-  in `EXHIBITS` shows "Enter the <name> room" on its OWN row, before
-  GO, always and on every screen, so one tap enters the room (L-429;
-  Tony, 2026-10-10: "so the visitor does not need to tap the row to see
-  the button then tap again"). The Sun's row keeps GO's space, hidden,
-  so its button lines up. A body with no room opens to "No room or
+  in `EXHIBITS` shows "Enter the <name> room" on its OWN row, to the
+  right of Go To, always and on every screen, so one tap enters the
+  room (L-429; Tony, 2026-10-10: "so the visitor does not need to tap
+  the row to see the button then tap again"; and "Go To, takes them
+  the orbit and hovertext. if there is a room, it opens the room. in
+  that order"). The Sun's row keeps Go To's space, hidden, so its
+  button lines up. A body with no room opens to "No room or
   cards yet": under the row upright, on the name's line with the phone
   sideways (Tony, 2026-10-03). Both are read from the page's own table,
   so the next room lights its row by itself.
@@ -778,4 +779,5 @@ its loaded copy reads 1.3 before exhibit work. 1.9 was cut in the
 session that wrote it, which loaded 1.8; the next session confirms its
 loaded copy reads 1.9 before exhibit work. 1.13 was cut in a session
 that loaded 1.12; the next session confirms its loaded copy reads 1.13
-before exhibit work.
+before exhibit work. 1.14 followed in the same session, after 1.13 was
+installed; the next session confirms its loaded copy reads 1.14.

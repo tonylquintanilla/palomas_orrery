@@ -1,26 +1,26 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 10, 2026, at the lobby's second round.
-- Written at orrery 04d1733 and gallery 2aab10f, before your runs.
+Last updated: October 10, 2026, at the lobby's third round.
+- Written at orrery a6678b0 and gallery cb9038c, before your runs.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - L-428 (the lobby's way in) is live. Your two asks are built: the
->   start card is see-through, and the grey type is brighter.
-> - L-429 (the room button on the row): the Sun and Earth show "Enter
->   the ... room" on their own row in the Solar System room's list.
+> - L-429 (the room button on the row): Go To sits in the middle of
+>   every room's list, the room button after it; long names wrap.
+> - Artifact 1 passes again; the Daily Run no longer pauses OneDrive.
+>   L-428 (the lobby's way in) is closed.
 >
 > **Do next:** *as you confirmed: the typed facts (the inner Oort
 > cloud, then the check); the Horizons check build; the Sun's list
 > from item 3.*
 >
 > **Needs you now:**
-> - *Gallery: run patch_L428_3_L429_1, the maintenance run, push; look
->   on the phone. Orrery: run patch_L429_2, the maintenance run, push.*
-> - Reinstall interactive-exhibit (1.13), and provenance-discipline
->   (2.28) if not done yet; the Project's instructions to v3.88.
+> - *Gallery: run patch_L429_3, the maintenance run, push; look on the
+>   phone. Orrery: run patch_L429_4, the maintenance run, push.*
+> - Upload interactive-exhibit (1.14) and gallery-cache-builder (1.8);
+>   the Project's instructions to v3.89.
 > - *Decide L-425 (citation location checks): which checks to build,
 >   on the run's results (on L-425 and in the handoff).*
 
@@ -52,8 +52,8 @@ Last updated: October 10, 2026, at the lobby's second round.
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
-- The lobby opens on the Solar System room, then the subjects. In
-  that room's list a room's button sits on its row. (Oct 9, Oct 10)
+- The lobby opens on the Solar System room, then the subjects. Every
+  room's list: Go To in the middle, then the room's button. (Oct 10)
 - A row's sources come only from its own comment block. (Oct 9)
 - Small fixes owed to a skill ride the version a session is already
   making; a change to a checker gets its own session. (Oct 8)
@@ -63,9 +63,9 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - No colour or other name that only one system knows. The panels'
   grey is one name, gray90. (Oct 6)
 - The daily hand run stays a hand run. (Oct 7)
-- OneDrive: you are trying builds without the pause; the retry absorbs
-  the lock, and the swap log shows any retry. Empty "solar-system (N)"
-  folders are harmless; delete by hand. (Oct 8)
+- OneDrive: no pause before a build; the retry is sufficient, and the
+  swap log shows any retry. Empty "solar-system (N)" folders are
+  harmless; delete by hand. (Oct 8, Oct 10)
 - An object's words in the list carry no numbers unless they come
   from the store. (Oct 8)
 - Items in an ordered list carry no RICE score. (Oct 7)
@@ -77,9 +77,9 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261009T190335Z, ok, no retry.
+- Last cache build: 20261010T135737Z, ok, no retry.
 - Tier-1 on the gate path: 0, by name, in PROVENANCE_AUDIT.md at
-  04d1733. Whole tree: 293.
+  a6678b0. Whole tree: 293.
 - This page's date and the ledger's newest stamp: both Oct 10. Agree.
 
 ## Waiting on you
@@ -106,7 +106,7 @@ Not urgent, in your order:
 
 ## Where the details are  **>> UPDATED THIS SESSION**
 
-- The lobby, the room button: L-428, L-429; `HANDOFF_L428_L429_round2_20261010.md`
+- The lobby, the room button: L-428, L-429; `HANDOFF_L429_round3_20261010.md`
 - Scanner window: L-414 (the scanner's window), L-427 (rows a neighbour
   had credited); `documentation/HANDOFF_L414_scanner_window_20261009.md`
 - The Oct 8 decisions: `documentation/HANDOFF_decisions_20261008.md`.

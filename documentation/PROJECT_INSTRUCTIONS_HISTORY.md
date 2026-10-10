@@ -2447,6 +2447,54 @@ resident.
 (Moved down from the resident protocol on 2026-10-10 when
 v3.88 made a fourth entry.)
 
+v3.86 (October 8, 2026): No rule changed in this document. THREE
+skills, one version each (L-418): provenance-discipline 2.26 -> 2.27,
+the new skill provenance-cross-check 1.0, and
+ledger-and-session-records 1.17 -> 1.18. PROVENANCE-DISCIPLINE IS
+SPLIT, AND A LONG FILE CARRIES ITS READ PLAN.
+
+WHAT PROMPTED IT. provenance-discipline was 137,837 characters in 2,590
+lines, and one read of a file does not show that much. The design
+session's viewer showed 16,000 characters, from the start and the end;
+this session's reader showed the first 1,106 lines and said it had
+stopped. So the skill that guards facts and sources was the one least
+likely to be read whole. Tony ruled the split on 2026-10-06 ("Read and
+confirmed"), and a trial skill showed on 2026-10-08 that an installed
+skill keeps the extra files in its folder.
+
+WHAT CHANGED. The relay procedure, the Review-Repair Protocol, is the
+new skill provenance-cross-check, with its worksheet sections in a
+reference file. provenance-discipline keeps its rules, with the
+figure-count rules and the field notes in two reference files, each
+opened when its pointer says. Every moved section is word for word
+apart from the edits the patch lists, and the patch proves it. Riding
+2.27: L-371 (the Sun room's served numbers), L-390 (the conversion
+marker) and L-252 (the checker's fourth outcome). skills_index.py
+writes a read plan into every file longer than one read, and its
+--check fails on a part too long, a line no part covers, or a reference
+file named and missing or present and never named.
+ledger-and-session-records 1.18 records those two conventions and names
+provenance-cross-check for review prompts. Four other long skills get
+their read plans at their next version, by Tony's ruling of the same
+day, and skills_index.py names them on every run. The manifest has a
+twelfth row.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+provenance-discipline 2.27, provenance-cross-check 1.0 and
+ledger-and-session-records 1.18; lists both skill folders and finds
+their reference files; and, on its first figures task, says whether it
+opened the figures reference file before writing a figure count.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.83 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-10 when
+v3.89 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

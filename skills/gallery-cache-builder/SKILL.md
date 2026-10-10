@@ -6,7 +6,16 @@ fires_when: Nightly builder, atomic swap and its retry/roll-back/swap log, "Acce
 
 # Gallery Cache Builder (Phase 1b data serving)
 
-Skill version: 1.7 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
+Read this file in 2 parts: lines 1-268, 269-448.
+
+Skill version: 1.8 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ a6678b0f and gallery @ cb9038cc. v1.8 (L-216) retires
+the hand routine's OneDrive pause, on Tony's word of 2026-10-10: "you
+can remove the pause check from the daily run. the retry is
+sufficient." A session following the old step would have told him to
+pause. The skill also gets its read plan, at its next version as Tony
+ruled on 2026-10-08 (L-418).
+Earlier: 1.7 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 72e3b558. v1.7 (L-418) changes no rule. A contents
 list now opens the skill, generated from its headings, and
 skills_index.py --check fails if the two disagree. Version history
@@ -24,13 +33,6 @@ not prevent the last two. It adds what Tony does before and after a hand
 build, and it writes down two things that had lived only in code or only
 in a ledger block: never `shutil.rmtree` anything in this tree, and judge
 a conflict copy by what is inside it.
-v1.5 adds the rule the project did not have written down anywhere until
-a config change reached the live site ahead of the cache and broke both
-exhibit rooms: A CONFIG CHANGE IS NOT DEPLOYED UNTIL THE CACHE IS
-REBUILT (L-336). It also corrects this skill's own claim that the failed
-`staging -> live` rename was "one data point" -- there have been three,
-the third on 2026-09-17 -- and writes down the hand routine Tony
-actually uses now.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418).
 
@@ -185,7 +187,9 @@ its summary, so it lands on a screen Tony already reads.
 
 WHAT TONY DOES, and it is a routine rather than a judgement call:
 
-  1. Pause OneDrive syncing, and NOTE THE TIME. A pause lasts 2 hours.
+  1. RETIRED 2026-10-10: no OneDrive pause. Tony: "the retry is
+     sufficient." The builder retries a refused rename and the swap log
+     records it; the Daily Run no longer asks (L-216).
   2. Run the builder by hand -- see Operating mode.
   3. Watch GitHub Desktop's change list; do not commit if it looks wrong.
   4. Afterwards, read the last line of `data/cache_swap_log.jsonl`.
@@ -248,8 +252,8 @@ THE LAST TWO HAPPENED WITH SYNCING PAUSED. Both 2026-09-20 failures came
 with OneDrive paused, so pausing is not a reliable cure. Unconfirmed and
 worth carrying: the two staging directories are 1 hour 57 minutes apart
 and a pause lasts 2 hours, so the pause may have expired about when the
-second run reached its swap. That is why step 1 of the routine above says
-to note the time.
+second run reached its swap. That is why step 1 of the routine above said
+to note the time, until the pause was retired on 2026-10-10.
 
 MOVING THE REPOSITORIES OFF ONEDRIVE is the lasting fix and it is
 UNDECIDED. Tony, 2026-09-17: "not at this time"; on 2026-09-20, having

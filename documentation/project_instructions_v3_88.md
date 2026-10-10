@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.89 | October 10, 2026
+Tony Quintanilla, PE | Claude | v3.88 | October 10, 2026
 
-Cut from a6678b0f at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 04d17331 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -510,12 +510,12 @@ gallery-assembler            1.3  render_orbits.py, resolver.py,
                                   unresponsive, it worked yesterday, a console
                                   error appears, or Claude is about to hand
                                   Tony a test to run
-gallery-cache-builder        1.8  Nightly builder, atomic swap and its
+gallery-cache-builder        1.7  Nightly builder, atomic swap and its
                                   retry/roll-back/swap log, "Access is denied"
                                   under data/, coverage_index, serving cache,
                                   objects_config, dry-run/first-build/nightly,
                                   builder testing layers
-interactive-exhibit          1.14 adding or changing an exhibit in
+interactive-exhibit          1.13 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -1166,39 +1166,6 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
-v3.89 (October 10, 2026): No rule changed in this document. TWO
-skills, one version each: interactive-exhibit 1.13 -> 1.14 (L-429) and
-gallery-cache-builder 1.7 -> 1.8 (L-216). GO TO IN THE MIDDLE OF EVERY
-ROW, AND NO ONEDRIVE PAUSE.
-
-WHAT PROMPTED IT. Tony, after a look on the phone, 2026-10-10: "For
-uniformity rename the Go buttons in all rooms to Go To and center",
-with the room button to its right; shown that this cut most layer
-names on an upright phone, he confirmed letting them wrap. And on the
-Daily Run: "you can remove the pause check from the daily run. the
-retry is sufficient." Gallery patch_L429_3 builds both, with the
-Artifact 1 test's date (L-237).
-
-WHAT CHANGED. interactive-exhibit, in the drawer's anatomy row and the
-Solar System room's drawer: the three-column row, Go To in the true
-middle, the room button after it, names that wrap. A second version in
-one session, against One Session, One Bump, because 1.13 was installed
-before the ruling came. gallery-cache-builder: the routine's pause step
-is retired, and the skill gets its read plan and leaves PLAN_NOT_YET.
-Their v1.11 and v1.5 entries moved to documentation/SKILL_HISTORIES.md,
-by the three-entry rule.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copies read
-interactive-exhibit 1.14 and gallery-cache-builder 1.8 before exhibit
-or cache-builder work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.86 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
 v3.88 (October 10, 2026): No rule changed in this document. ONE
 skill bump, one version (L-429): interactive-exhibit 1.12 -> 1.13. A
 ROOM IS ONE TAP AWAY IN THE SOLAR SYSTEM ROOM'S LIST.
@@ -1263,6 +1230,51 @@ provenance-discipline 2.28 before any provenance work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.84 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+v3.86 (October 8, 2026): No rule changed in this document. THREE
+skills, one version each (L-418): provenance-discipline 2.26 -> 2.27,
+the new skill provenance-cross-check 1.0, and
+ledger-and-session-records 1.17 -> 1.18. PROVENANCE-DISCIPLINE IS
+SPLIT, AND A LONG FILE CARRIES ITS READ PLAN.
+
+WHAT PROMPTED IT. provenance-discipline was 137,837 characters in 2,590
+lines, and one read of a file does not show that much. The design
+session's viewer showed 16,000 characters, from the start and the end;
+this session's reader showed the first 1,106 lines and said it had
+stopped. So the skill that guards facts and sources was the one least
+likely to be read whole. Tony ruled the split on 2026-10-06 ("Read and
+confirmed"), and a trial skill showed on 2026-10-08 that an installed
+skill keeps the extra files in its folder.
+
+WHAT CHANGED. The relay procedure, the Review-Repair Protocol, is the
+new skill provenance-cross-check, with its worksheet sections in a
+reference file. provenance-discipline keeps its rules, with the
+figure-count rules and the field notes in two reference files, each
+opened when its pointer says. Every moved section is word for word
+apart from the edits the patch lists, and the patch proves it. Riding
+2.27: L-371 (the Sun room's served numbers), L-390 (the conversion
+marker) and L-252 (the checker's fourth outcome). skills_index.py
+writes a read plan into every file longer than one read, and its
+--check fails on a part too long, a line no part covers, or a reference
+file named and missing or present and never named.
+ledger-and-session-records 1.18 records those two conventions and names
+provenance-cross-check for review prompts. Four other long skills get
+their read plans at their next version, by Tony's ruling of the same
+day, and skills_index.py names them on every run. The manifest has a
+twelfth row.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+provenance-discipline 2.27, provenance-cross-check 1.0 and
+ledger-and-session-records 1.18; lists both skill folders and finds
+their reference files; and, on its first figures task, says whether it
+opened the figures reference file before writing a figure count.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.83 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 
