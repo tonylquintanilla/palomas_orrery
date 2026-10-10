@@ -1544,5 +1544,349 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  2. Move this script into documentation/; commit and push.
+  2. Move this script into documentation/; commit and push. -- aa46bb102a351984ba800cbfbd0d801853110b9f
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+Where this leaves us:
+
+The provenance split is built, installed and tested; L-418 is closed.
+L-425 (citation location checks) is the one decision waiting, now with measured results. Of the planted faults, check 1 would have caught two (the missing record file and the missing worksheet), check 2 one (the missing access line) and check 3 one (the dead address); the wrong table number gets past all three. The quote question sits beside it, with the count.
+Next, as you confirmed: the typed facts (the inner Oort cloud, then the check), then the Horizons check build.
+
+Thank you, it was a good session. Your run record shows it all landed:
+
+The patch: it wrote the ledger and Where We Are, and left your saved handoff alone because it was identical.
+The maintenance run: all 20 checks passed, and the scanner still counts 296 findings, so nothing moved that shouldn’t have.
+The push: GitHub’s HEAD is now aa46bb10, the same commit your record names.
+
+Where this leaves us:
+
+L-418 (splitting provenance-discipline) is closed.
+L-425 (citation location checks) is the one decision waiting, with the measured results and the quote question beside it.
+Next, as you confirmed: the typed facts (the inner Oort cloud, then the check), then the Horizons check build.
+
+**Fable:**
+
+The testing session landed cleanly: orrery HEAD is `aa46bb1`, matching your record; L-418 (splitting provenance-discipline) is closed; L-426 (the checker's small-number comparison) is open. Here is what the results change, then the order I would run next.
+
+**What the planted-fault run found that matters**
+- The push gate has a hole. Removing a `# Source:` line from a served row (F1) was missed by the scanner, because the row above it was cited within the scanner's 30-line look-back and that citation was credited to the wrong row. Only test_status_lines.py caught it, and only because the row was marked V_SOURCED. A row without that mark and without a source could pass both. This is L-414 (the scanner's window), and it is now a measured gate failure, not a tidy-up.
+- A broken record path (F3) and a wrong table number (F6) were copied straight into constants_export.json and served to the website. Nothing refuses them.
+- The worksheet checker names its findings only in WORKSHEET_CHECK.md; the summary line stayed at "74 of 110 routed" for a missing worksheet and moved to 76 for a drifted value without naming a row. That is the count-only report the protocol's critical gate warns about.
+- On the quote idea, the count is in: 38 served rows carry a `# Read:` line, 23 of them point at text. The six fetch tries show the weak spot: the number's printed form varies ("20 000" against "20,000"), a small number matches by accident, a sign can differ. So the offline half of the quote check (the quote contains the number) would be fragile; most of the value is in the online half, which runs on your machine.
+
+**Order I suggest**
+1. **You decide L-425 (citation location checks).** Two lines would settle it. My recommendation: build levels 1 and 2 together, and have level 1 also make the export refuse a `# Read:` path that does not exist, since F3 showed the export copies it. Defer the `# Quote:` line until the link check (level 3) exists, because stored and unfetched it is a check that cannot fail; when it comes, require it of new rows only.
+2. **L-414 (the scanner's window) moves ahead of the Oort cloud build.** The confirmed order had it before L-228 (the Alfven surface's ranges). The Oort cloud build adds sourced rows to constants_new.py and relies on the scanner's gate, and the gate was just shown to miss a removed source. One session, cutting provenance-discipline 2.28, carrying the neighbour-credit case F1 found.
+3. **Then L-421 (the typed facts): the Oort cloud design talk, then the build.** The design talk still works from your phone.
+4. **Then the L-395 (the Horizons check) build**, as confirmed.
+5. **Then one small checker session for L-424 (the one word for two cases) and L-426 (the small-number comparison)**, which open the same function, with the summary line made to name its rows while it is open.
+6. The L-425 build fits wherever you want it after step 2; it is rules in a checker the maintenance run already has.
+
+The one change from what you confirmed is step 2. Everything else keeps its place.
+
+Do you want L-414 ahead of the Oort cloud build, for the reason above?
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Session: DONE: 10-9-26 1725: Opus: L-421 inner Oort cloud design**
+
+I've recorded the new wording, so both of my drafts go on the lobby. Two things the build will show you, not new questions:
+
+- **"Turn it with your finger"** is phone wording. On a desktop it's a mouse, so the build will show you that screen too.
+- **"Daily updates from JPL Horizons"** leaves the front card. The Solar System room still names its source.
+
+The session record, `DESIGN_L421_inner_oort_tilt_20261009.md`, is ready to move into `documentation/`. It has every ruling from today and nothing left pending. Nothing was built or patched. The ledger entries and Where We Are get updated by the build session's patch, from this record.
+
+**Where this leaves us**
+- *Inner Oort cloud:* it fades into the outer cloud between 10,000 and 20,000 AU. It's drawn as dots along orbits from the 2025 paper, which gives the two arms and a tilt near 30 degrees. All its words are confirmed.
+- *Galactic plane:* the ring, its poles and Sgr A* join the same build, with the outdated sentence rewritten.
+- *Lobby:* option E, the Solar System picture up top with one "Enter" button, using the new words.
+- *Next:* the brief for the scanner fix (L-414) says it builds before the Oort cloud. The Oort cloud, galactic plane and lobby build comes after it.
+
+**Fable:**
+
+The Oort cloud design talk: settled, and it grew. Four things came out of it, and they are not all one build:
+
+The Hills cloud itself: a fuzzy band from 10,000 to 20,000 au, the arms drawn from orbits picked inside the paper’s ranges (your option A), hover, panel words and note confirmed. One question the record leaves open for the build’s first message: the paper says the disk is “roughly 15,000 au across”, which is a radius near 7,500, while you confirmed “full out to 10,000”. The build has to pick before it draws.
+L-408 (the galactic plane in the Sun room) rides the same build, with the poles and Sagittarius A*, and its one wrong sentence rewritten. Sensible: same room, same files.
+
+The lobby, option E (the picture is the way in). This is a different artifact and different files, with no provenance rows. It should not ride the Oort cloud build. It needs its own ledger item and its own short session.
+A verification worth writing into the build: option A claims the 30-degree tilt will “come out of the orbits”. Before anything is drawn, the build computes the mean tilt of the sampled orbits to the ecliptic and prints it. If it is not near 30, the ranges or the frame transform are wrong, and the picture would have looked fine anyway.
+
+Fresh session, the lobby, from HANDOFF_lobby_option_E_brief_20261009.md: one gallery patch, your phone look, one records patch.
+
+Paste to open the lobby session:
+
+Build session, from the attached brief: the lobby, option E. Read back the versions of the skills you loaded, pin both repos’ HEADs, then build.
+
+And the Oort cloud session:
+
+Build session, from the attached brief: L-421 (the typed facts), the inner Oort cloud, orrery side. Read back the versions of the skills you loaded, confirm provenance-discipline reads 2.28, then ask me the one question in section 2 before building.
+
+Away session, from your phone: the inner Oort cloud design talk, under L-421 (the typed facts). Same prompt as yesterday, with today’s anchor:
+
+Design talk only, no build, no patch. Orrery at aa46bb1, gallery at 5ec4739. Subject: L-421 (the typed facts), the inner Oort cloud redrawn tilted from Nesvorny et al. 2025. Read L-421’s Gap in the ledger and documentation/L421_round1_sources_20261006.md. First trace what in both repos uses the inner Oort cloud’s outer edge (20,000 au), then bring me the words for the hover and the outer-edge question, one at a time. Read back which version of ledger-and-session-records you loaded. Write the record as a file for documentation/; I will move it in when I am at my machine.
+
+One caution for when you are back: both sessions will hand you a closing patch that edits the ledger and your page. Each edits only its own lines, so either can run first, but run them one after the other, not both before the maintenance run. The order is yours.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Session: OPUS: 10-9-26 1521: Opus: L-414 scanner window session**
+
+When the patch runs, it prints your steps: run orrery_maintenance_run.py, then commit and push. After that, reinstall provenance-discipline from a ZIP, and replace the Project’s instructions with the new PROJECT_INSTRUCTIONS.md (v3.87).
+
+Where this leaves us:
+
+The scanner session is done, waiting only on your run.
+The Oort cloud build (the typed facts) can rely on the gate to catch a removed Source line.
+Next, as you confirmed: the typed facts, then the Horizons check build.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L414_1_scanner_window_20261009.py
+patch_L414_1 -- built on orrery aa46bb10
+
+ok  base: 5 files match orrery aa46bb10
+ok  the ledger, Where We Are, the protocol and the history files are checked at the lines edited
+
+ok  provenance_scanner.py                            line 3438: L-414: the banner now leads with the GATE PATH fi
+ok  provenance_scanner.py                            line 2995: ---- Gate path (L-414) ----
+ok  provenance_scanner.py                            line 2886: tier1_by_file, gate_tier1=gate_names)
+ok  provenance_scanner.py                            line 2881: L-414: the gate-path Tier-1 findings BY NAME go i
+ok  provenance_scanner.py                            line 2847: orphan_annotations=None, gate_path=None,
+ok  provenance_scanner.py                            line 2832: started=run_started,
+ok  provenance_scanner.py                            line 2799: L-414: what leaves the orrery, and which scored u
+ok  provenance_scanner.py                            line 2742: del DECLARED_ROWS[:]
+ok  provenance_scanner.py                            line 2371: ---- Declared rows (L-414) ----
+ok  provenance_scanner.py                            line 2227: if constant_has_own_citation(lines_c, node.lineno
+ok  provenance_scanner.py                            line 2113: if constant_has_own_citation(lines_c, node.lineno
+ok  provenance_scanner.py                            line 2058: pattern; `end_lineno`, when given, is the stateme
+ok  provenance_scanner.py                            line 2031: def constant_has_own_citation(lines_c, lineno, so
+ok  provenance_scanner.py                            line 1856: attached_text=att_text,
+ok  provenance_scanner.py                            line 1820: if fname in ROW_CONVENTION_FILES:
+ok  provenance_scanner.py                            line 1755: if fname in ROW_CONVENTION_FILES:
+ok  provenance_scanner.py                            line 1617: =================================================
+ok  provenance_scanner.py                            line 348: V_DECLARED      = 0   # L-414: a declared row with
+ok  provenance_scanner.py                            line 308: import json
+ok  provenance_scanner.py                            line 301: Module updated: October 9, 2026 with Anthropic's C
+ok  provenance_scanner.py                            line 24: A row in constants_new.py is read through its OWN c
+ok  provenance_history.py                            line 438: gate = delta['gate']
+ok  provenance_history.py                            line 418: tiers.get('3', 0), tiers.get('4', 0),
+ok  provenance_history.py                            line 406: lines.append('| Run (UTC) | HEAD | Files | Total |
+ok  provenance_history.py                            line 327: lines.extend(gate_delta_lines(prev, cur, delta['ga
+ok  provenance_history.py                            line 273: 'gate': gate,
+ok  provenance_history.py                            line 268: L-414: the gate path by name. Unlike the per-file 
+ok  provenance_history.py                            line 237: record['gate_tier1'] = (None if gate_tier1 is None
+ok  provenance_history.py                            line 221: gate_tier1 (L-414) is the list of gate-path Tier-1
+ok  provenance_history.py                            line 214: tier1_by_file, mode='scan', gate_tier1=None):
+ok  provenance_history.py                            line 37: Module updated: October 9, 2026 with Anthropic's Cl
+ok  provenance_history.py                            line 15: - the run-to-run comparison and its console renderi
+ok  orrery_maintenance_run.py                        line 270: L-414: the hint reads the GATE PATH line, the push
+ok  orrery_maintenance_run.py                        line 251: L-414: each constants_new.py row reads only its ow
+ok  orrery_maintenance_run.py                        line 148: Module updated: October 9, 2026 with Anthropic's C
+ok  orrery_maintenance_run.py                        line 87: Twenty-one checkers are pass/fail: a problem makes 
+ok  orrery_maintenance_run.py                        line 61: The scanner stays LAST deliberately. Its GATE PATH 
+ok  orrery_maintenance_run.py                        line 19: Runs the eight GENERATORS, then the CHECKERS, and p
+ok  skills/provenance-discipline/SKILL.md            line 1001: - **A row in `constants_new.py` is read through i
+ok  skills/provenance-discipline/SKILL.md            line 978: **Where the path is read from (v2.28, L-414).** Th
+ok  skills/provenance-discipline/SKILL.md            line 710: Citations attach at BLOCK level over a thirty-line
+ok  skills/provenance-discipline/SKILL.md            line 467: As built at v2.28 (L-414): the scanner reads each 
+ok  skills/provenance-discipline/SKILL.md            line 39: on 2026-10-05 and 2026-10-08 (L-418) and 2026-10-09
+ok  skills/provenance-discipline/SKILL.md            line 9: Skill version: 2.28 | 2026-10-09, with Anthropic's C
+ok  skills/provenance-discipline/references/field-notes.md line 77: - **A window measured in lines does not know where 
+ok  LEDGER_CONSOLIDATED.md                           line 4472: - **2026-10-09, L-414:** the path is now computed
+ok  LEDGER_CONSOLIDATED.md                           line 4429: <!-- L:184 status:OPEN upd:2026-10-09 section:A f
+ok  LEDGER_CONSOLIDATED.md                           line 3219: - provenance-discipline: nothing owed. The scanne
+ok  LEDGER_CONSOLIDATED.md                           line 3202: The gate path's run history (L-414, 2026-10-09) c
+ok  LEDGER_CONSOLIDATED.md                           line 1515: - **2026-10-09, BUILT** (patch_L414_1_scanner_win
+ok  LEDGER_CONSOLIDATED.md                           line 1478: <!-- L:414 status:PENDING-GATE upd:2026-10-09 sec
+ok  LEDGER_CONSOLIDATED.md                           line 1244: [L-427] Rows a neighbour's citation had been cred
+ok  LEDGER_CONSOLIDATED.md                           line 309: Module updated: October 9, 2026 with Anthropic's C
+ok  documentation/WHERE_WE_ARE.md                    line 108: - Scanner window: L-414 (the scanner's window), L-
+ok  documentation/WHERE_WE_ARE.md                    line 79: - Tier-1 on the gate path: 0 on a copy with patch_L
+ok  documentation/WHERE_WE_ARE.md                    line 52: Settled  **>> UPDATED THIS SESSION**
+ok  documentation/WHERE_WE_ARE.md                    line 2: Last updated: October 9, 2026, at the scanner window
+ok  PROJECT_INSTRUCTIONS.md                          line 1251
+ok  PROJECT_INSTRUCTIONS.md                          line 1167: v3.87 (October 9, 2026): No rule changed in this 
+ok  PROJECT_INSTRUCTIONS.md                          line 1: Tony Quintanilla, PE | Claude | v3.87 | October 9, 2
+ok  documentation/PROJECT_INSTRUCTIONS_HISTORY.md    line 2372: v3.84 (October 6, 2026): No rule changed in this 
+ok  documentation/SKILL_HISTORIES.md                 line 433: The skill's v2.25 entry, moved here word for word 
+ok  test_row_run.py                                  (new)
+ok  documentation/HANDOFF_L414_scanner_window_20261009.md (new)
+
+patch applied: 12 files written:
+  provenance_scanner.py
+  provenance_history.py
+  orrery_maintenance_run.py
+  skills/provenance-discipline/SKILL.md
+  skills/provenance-discipline/references/field-notes.md
+  LEDGER_CONSOLIDATED.md
+  documentation/WHERE_WE_ARE.md
+  PROJECT_INSTRUCTIONS.md
+  documentation/PROJECT_INSTRUCTIONS_HISTORY.md
+  documentation/SKILL_HISTORIES.md
+  test_row_run.py
+  documentation/HANDOFF_L414_scanner_window_20261009.md
+
+skills_index.py -- writes the read plan and the manifest row:
+
+Read plan written: provenance-discipline/SKILL.md: Read this file in 5 parts: lines 1-301, 302-605, 606-863, 864-1151, 1152-1305.
+Headers: 12 read as YAML by PyYAML.
+OK: 12 skills parsed, no consistency problems.
+Read plans checked (4): ledger-and-session-records/SKILL.md 3 parts, provenance-cross-check/SKILL.md 2 parts, provenance-discipline/SKILL.md 5 parts, provenance-discipline/references/figures.md 3 parts.
+Long skills with no read plan yet, by PLAN_NOT_YET (4): gallery-cache-builder, interactive-exhibit, orrery-coding-conventions, safe-file-editing.
+  WARNING: gallery-cache-builder: long and no read plan yet; on PLAN_NOT_YET, so it gets one at its next version
+  WARNING: interactive-exhibit: SKILL.md body is 770 lines; Anthropic's guideline is under 500
+  WARNING: interactive-exhibit: long and no read plan yet; on PLAN_NOT_YET, so it gets one at its next version
+  WARNING: ledger-and-session-records: SKILL.md body is 672 lines; Anthropic's guideline is under 500
+  WARNING: orrery-coding-conventions: SKILL.md body is 650 lines; Anthropic's guideline is under 500
+  WARNING: orrery-coding-conventions: long and no read plan yet; on PLAN_NOT_YET, so it gets one at its next version
+  WARNING: provenance-cross-check: SKILL.md body is 561 lines; Anthropic's guideline is under 500
+  WARNING: provenance-discipline: SKILL.md body is 1300 lines; Anthropic's guideline is under 500
+  WARNING: safe-file-editing: SKILL.md body is 714 lines; Anthropic's guideline is under 500
+  WARNING: safe-file-editing: long and no read plan yet; on PLAN_NOT_YET, so it gets one at its next version
+MANIFEST WAS STALE -- corrected below:
+  - provenance-discipline: manifest said 2.27, SKILL.md says 2.28
+  Commit the protocol copies together with the SKILL.md
+  change -- see the binding rule in ledger-and-session-records.
+Skill Manifest regenerated (12 skills) in PROJECT_INSTRUCTIONS.md.
+
+skills_index.py --check:
+
+Headers: 12 read as YAML by PyYAML.
+OK: 12 skills parsed, no consistency problems.
+Read plans checked (4): ledger-and-session-records/SKILL.md 3 parts, provenance-cross-check/SKILL.md 2 parts, provenance-discipline/SKILL.md 5 parts, provenance-discipline/references/figures.md 3 parts.
+Long skills with no read plan yet, by PLAN_NOT_YET (4): gallery-cache-builder, interactive-exhibit, orrery-coding-conventions, safe-file-editing.
+  WARNING: gallery-cache-builder: long and no read plan yet; on PLAN_NOT_YET, so it gets one at its next version
+  WARNING: interactive-exhibit: SKILL.md body is 770 lines; Anthropic's guideline is under 500
+  WARNING: interactive-exhibit: long and no read plan yet; on PLAN_NOT_YET, so it gets one at its next version
+  WARNING: ledger-and-session-records: SKILL.md body is 672 lines; Anthropic's guideline is under 500
+  WARNING: orrery-coding-conventions: SKILL.md body is 650 lines; Anthropic's guideline is under 500
+  WARNING: orrery-coding-conventions: long and no read plan yet; on PLAN_NOT_YET, so it gets one at its next version
+  WARNING: provenance-cross-check: SKILL.md body is 561 lines; Anthropic's guideline is under 500
+  WARNING: provenance-discipline: SKILL.md body is 1300 lines; Anthropic's guideline is under 500
+  WARNING: safe-file-editing: SKILL.md body is 714 lines; Anthropic's guideline is under 500
+  WARNING: safe-file-editing: long and no read plan yet; on PLAN_NOT_YET, so it gets one at its next version
+
+NEXT:
+  1. Run orrery_maintenance_run.py. Expect "21 of 21 gating checkers
+     passed", and the Provenance scanner line to read "GATE PATH: 0
+     TIER-1 -- the push gate holds". Its run history will say the
+     previous run predates L-414; that is expected, once.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261009T195753Z, 1 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 2.5s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.2s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.0s  unchanged (1 checked, not written)
+  Objects export               0.1s  unchanged (1 checked, not written)
+  Module atlas                 8.0s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.4s  rewrote DATA_INVENTORY.md
+  Exact rows report            1.6s  unchanged (1 checked, not written) -- 13 of
+                                     34 exact rows printed at 42 lines (32
+                                     orrery, 10 gallery); 8 drawn only, 11 not
+                                     followed, 0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.9s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       2.1s  Export matches the store: sha256
+                                     3b7000e368d1 on both sides; 105 rows
+                                     re-read, 56 not exported, 27 tokens; 310
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.2s  pass
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      1.8s  PASSING -- 13 printed exact rows each state
+                                     a count; 32 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.5s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.2s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 105 status lines in constants_new.py are
+                                     well formed; 53 rows carry none.
+  Row shape                    0.1s  All 161 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.3s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          16.6s  PASS -- all 310 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.2s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Worksheet checker           10.9s  74 of 110 routed, 8 clean
+  Worksheet checker tests     20.8s  All 135 checks passed
+  Worksheet key round trip     1.1s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         21.2s  All 76 checks passed
+  Extractor pins               0.5s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          11.4s  0 TIER-1 -- the push gate holds
+
+======================================================================
+  21 of 21 gating checkers passed -- 112.0s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2132 file(s) examined, 10 written, 0 created, 0 removed, 4 rewritten identically
+    written   DATA_INVENTORY.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/WHERE_WE_ARE_10-8-26_1406_run_record.md
+    written   documentation/prompts/citation_review.jsonl
+    written   module_atlas.py
+    rewritten with identical bytes, no action needed:
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Move this script into documentation/; commit and push. -- 
+  3. Make a ZIP of skills/provenance-discipline (in File Explorer,
+     right-click the folder, Send to, Compressed (zipped) folder). Keep
+     the ZIP out of the repo folder. In Settings, under Skills, install
+     it, replacing the installed provenance-discipline.
+  4. Replace the Project's instructions with PROJECT_INSTRUCTIONS.md
+     (now v3.87).
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+**Fable:**
+
+So: run it as its steps say, then the maintenance run, push, the ZIP reinstall, and the v3.87 instructions. The two briefs I sent assume exactly this patch, including test_row_run.py at the repo root as the sign that L-414 landed.

@@ -2371,6 +2371,40 @@ resident.
 (Moved down from the resident protocol on 2026-10-08 when
 v3.86 made a fourth entry.)
 
+v3.84 (October 6, 2026): No rule changed in this document. ONE
+skill bump, one version (L-421): interactive-exhibit 1.11 -> 1.12. A
+FACT ABOUT A FEATURE IS SERVED, NOT TYPED.
+
+WHAT PROMPTED IT. Building Earth's website patch, Claude told Tony the
+skill already required the inner belt's word "protons" to be served.
+It did not: it required served numbers, and let page text carry its
+source in the page. Tony: "I thought the only source of truth is the
+constants py and the objects list ... not from the code." Asked then
+where the info panel's facts are stored, a search of both rooms found
+17 facts typed in code. Tony ruled them part of finishing the Earth and
+Sun slices, "the work is here", not backlog.
+
+WHAT CHANGED. interactive-exhibit, under Provenance is part of the
+build: code may type only sentences about the picture; a fact about
+nature, about a paper, or a source is served on its feature's row and
+printed as given. Its v1.9 entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. The 17 are
+listed in documentation/MANIFEST_L421_typed_facts_20261006.md, for a
+fresh session to build.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+interactive-exhibit 1.12 before any exhibit work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.81 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-09 when
+v3.87 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

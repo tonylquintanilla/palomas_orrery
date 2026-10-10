@@ -18,7 +18,7 @@ Run it after any edit session and before a push.
 
 WHAT IT DOES
 ------------
-Runs the seven GENERATORS, then the CHECKERS, and prints one summary at
+Runs the eight GENERATORS, then the CHECKERS, and prints one summary at
 the end. Nothing stops on a failure -- every tool runs every time, so a
 single pass shows the whole picture rather than the first problem in it.
 
@@ -60,9 +60,10 @@ whatever it finds, and exits 1 only when it could not run. Its one
 summary line carries a denominator, so the number moves when something
 moves; findings go to WORKSHEET_CHECK.md.
 
-The scanner stays LAST deliberately. Its Tier-1 count is the number the
+The scanner stays LAST deliberately. Its GATE PATH line -- the Tier-1
+findings on what leaves the orrery, by name (L-414) -- is the number the
 push call turns on, and a report-only tool printing after it pushes that
-number up the screen.
+line up the screen.
 
 WHAT IS DELIBERATELY NOT HERE
 -----------------------------
@@ -86,11 +87,11 @@ artifact, and it is short enough to copy.
 
 GATING AND REPORT-ONLY
 ----------------------
-Eighteen checkers are pass/fail: a problem makes them exit non-zero.
+Twenty-one checkers are pass/fail: a problem makes them exit non-zero.
 Two are REPORT-ONLY -- worksheet_checker.py and provenance_scanner.py
 exit 0 whatever they find, and exit 1 only when they could not run.
 They are marked in the CHECKERS table, and the summary counts the
-gating eighteen in its headline and quotes the two report-only verdicts
+gating twenty-one in its headline and quotes the two report-only verdicts
 underneath.
 
 The block quotes each tool's own note rather than restating it. A
@@ -147,6 +148,15 @@ exact_rows_report.py --check, so a printed exact row with no print count,
 or printed by a width of its own, fails the run; as a generator the same
 script's exit code did not count. The gating count above said sixteen,
 one behind since patch D3 added Earth pole of date; it is eighteen.)
+Module updated: October 9, 2026 with Anthropic's Claude Opus 5.5 (L-414,
+patch_L414_1_scanner_window_20261009.py: CHECKERS gains Scanner row run
+(L-414), test_row_run.py, and the scanner's verdict hint reads its new
+GATE PATH line instead of the whole-tree Tier-1 banner, so the summary
+says whether the push gate holds and names what fails it. The counts
+above had drifted again and are corrected in passing: eight generators,
+not seven, since Objects export (L-395); twenty gating checkers before
+this patch, not eighteen, since Objects export check and Skill headers;
+twenty-one with it.)
 """
 
 import hashlib
@@ -250,6 +260,11 @@ CHECKERS = [
     # not be told from a guard that never ran. L-324.
     ('Row shape', ['test_status_lines.py', '--shape-only'], None),
     ('Scanner recognition 1d/1e', ['test_provenance_1d.py'], None),
+    # L-414: each constants_new.py row reads only its own comment run,
+    # declared rows are their own kind, and the gate path is read from
+    # the exports and recorded by name. Fifteen of its sixteen pins
+    # fail against the scanner before L-414.
+    ('Scanner row run (L-414)', ['test_row_run.py'], 'ROW RUN:'),
     ('Reset completeness', ['test_reset_completeness.py'],
      'RESET COMPLETENESS:'),
     ('Orbit cache', ['test_orbit_cache.py'], None),
@@ -269,7 +284,10 @@ CHECKERS = [
     ('Worksheet key round trip', ['test_worksheet_keys.py'], None),
     ('Builder marker join', ['test_worksheet_request_builder.py'], None),
     ('Extractor pins', ['test_extractor_pins.py'], None),
-    ('Provenance scanner', ['provenance_scanner.py'], 'TIER-1 FINDINGS',
+    # L-414: the hint reads the GATE PATH line, the push gate's own
+    # figure with what fails it named; it used to read the whole-tree
+    # Tier-1 banner, which said itself that it was not the gate.
+    ('Provenance scanner', ['provenance_scanner.py'], 'GATE PATH:',
      True),
 ]
 

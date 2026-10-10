@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.86 | October 8, 2026
+Tony Quintanilla, PE | Claude | v3.87 | October 9, 2026
 
-Cut from b0b3df82 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from aa46bb10 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -488,7 +488,7 @@ agentic-pre-test             1.3  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
 horizons-orbital-mechanics   1.1  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning
-provenance-discipline        2.27 Scanner runs, audits, citations, constants,
+provenance-discipline        2.28 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
 provenance-cross-check       1.0  Cross-check worksheets and relay prompts,
@@ -1166,6 +1166,43 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.87 (October 9, 2026): No rule changed in this document. ONE
+skill bump, one version (L-414): provenance-discipline 2.27 -> 2.28.
+THE SCANNER READS A ROW'S OWN COMMENT BLOCK, AND PRINTS THE GATE BY
+NAME.
+
+WHAT PROMPTED IT. The scanner read a constant's sources through a
+fixed window, 30 lines above and 15 below. In constants_new.py, where
+rows sit with no blank line between them, it failed both ways: it
+missed EARTH_MEAN_RADIUS_KM's own Source line 16 lines down
+(2026-10-04), and when the planted-fault run of 2026-10-09 removed the
+thermopause row's Source lines it credited the stratopause row's
+instead. It scored three declared rows as uncited measurements. And no
+tool printed the push gate's own figure: the console said its count
+was not the gate and named nothing.
+
+WHAT CHANGED. provenance-discipline, under Scanner Mechanics and The
+Goal State: a constants_new.py row is read through its own comment
+run; a declared row with its reason written down is named and never
+Tier-1; the gate path is read from data/constants_export.json and
+data/objects_export.json and printed by name, on the console, in the
+audit and in the run history. provenance_scanner.py and
+provenance_history.py build it; test_row_run.py pins it, and
+orrery_maintenance_run.py runs those pins and quotes the GATE PATH
+line. Measured at aa46bb10: whole-tree Tier-1 296 to 293; gate path 4
+to 0, the four being the scanner's own faults. CENTER_BODY_RADII
+entered Tier-1 off the gate path (L-427).
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+provenance-discipline 2.28 before any provenance work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.84 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.86 (October 8, 2026): No rule changed in this document. THREE
 skills, one version each (L-418): provenance-discipline 2.26 -> 2.27,
 the new skill provenance-cross-check 1.0, and
@@ -1247,37 +1284,6 @@ session-record work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.82 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.84 (October 6, 2026): No rule changed in this document. ONE
-skill bump, one version (L-421): interactive-exhibit 1.11 -> 1.12. A
-FACT ABOUT A FEATURE IS SERVED, NOT TYPED.
-
-WHAT PROMPTED IT. Building Earth's website patch, Claude told Tony the
-skill already required the inner belt's word "protons" to be served.
-It did not: it required served numbers, and let page text carry its
-source in the page. Tony: "I thought the only source of truth is the
-constants py and the objects list ... not from the code." Asked then
-where the info panel's facts are stored, a search of both rooms found
-17 facts typed in code. Tony ruled them part of finishing the Earth and
-Sun slices, "the work is here", not backlog.
-
-WHAT CHANGED. interactive-exhibit, under Provenance is part of the
-build: code may type only sentences about the picture; a fact about
-nature, about a paper, or a source is served on its feature's row and
-printed as given. Its v1.9 entry moved to
-documentation/SKILL_HISTORIES.md, by the three-entry rule. The 17 are
-listed in documentation/MANIFEST_L421_typed_facts_20261006.md, for a
-fresh session to build.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copy reads
-interactive-exhibit 1.12 before any exhibit work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.81 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

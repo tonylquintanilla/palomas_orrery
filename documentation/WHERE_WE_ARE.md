@@ -1,28 +1,27 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 9, 2026, at the provenance tests' close.
-- Written at orrery 08f0375 and gallery b50f8bd, before your run of
-  patch_L418_5.
+Last updated: October 9, 2026, at the scanner window build.
+- Written at orrery aa46bb1 and gallery 5ec4739b, before your run of
+  patch_L414_1.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The four tests of the new provenance skills passed; L-418
->   (splitting provenance-discipline) is closed.
-> - A planted-fault run: four of seven citation faults went
->   unnoticed, as expected; three were caught, more weakly than thought.
-> - L-426 (the checker's small-number comparison): the worksheet
->   checker treats very small numbers as equal.
-> - Your quote question, measured: 38 of the 40 measured numbers
->   the Sun and Earth rooms serve say where they were read.
+> - L-414 (the scanner's window) is built: a row's sources are read
+>   only from its own comment block; declared rows are named.
+> - The scanner prints the push gate's number, naming each finding:
+>   0 on a copy; it was 4, all the scanner's own faults.
+> - L-427 (rows a neighbour had been crediting): one row lost a
+>   borrowed citation; it is off the gate path.
 >
-> **Do next:** *as you confirmed: the typed facts (the inner Oort cloud, then the
-> check); the Horizons check build; the Sun's list from item 3, with
-> the scanner's window session before the Alfven surface's ranges.*
+> **Do next:** *as you confirmed: the typed facts (the inner Oort
+> cloud, then the check); the Horizons check build; the Sun's list
+> from item 3.*
 >
 > **Needs you now:**
-> - *Run patch_L418_5, then orrery_maintenance_run.py, and push.*
+> - *Run patch_L414_1, then orrery_maintenance_run.py, and push. Then
+>   reinstall provenance-discipline from its ZIP.*
 > - *Decide L-425 (citation location checks): which checks to build,
 >   on the run's results (on L-425 and in the handoff).*
 
@@ -51,9 +50,10 @@ Last updated: October 9, 2026, at the provenance tests' close.
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
 
-## Settled
+## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
+- A row's sources come only from its own comment block. (Oct 9)
 - Small fixes owed to a skill ride the version a session is already
   making; a change to a checker gets its own session. (Oct 8)
 - A long skill gets its reading plan at its next version, not in a
@@ -78,9 +78,9 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261008T180043Z, ok. Its last rename took two
   attempts, and the retry absorbed it.
-- Tier-1 findings, whole tree: 296, unchanged since Oct 6. No tool yet
-  prints the number on the gate path alone; that is owed to L-414
-  (the scanner's window), not to the split.
+- Tier-1 on the gate path: 0 on a copy with patch_L414_1 applied;
+  your run prints it as GATE PATH. Whole tree: 293 there, 296 in
+  PROVENANCE_AUDIT.md at aa46bb1.
 - This page's date and the ledger's newest stamp: both Oct 9. Agree.
 
 ## Waiting on you
@@ -107,6 +107,8 @@ Not urgent, in your order:
 
 ## Where the details are  **>> UPDATED THIS SESSION**
 
+- Scanner window: L-414 (the scanner's window), L-427 (rows a neighbour
+  had credited); `documentation/HANDOFF_L414_scanner_window_20261009.md`
 - The Oct 8 decisions: `documentation/HANDOFF_decisions_20261008.md`.
   The new list: L-423 (the website's checks).
 - Every item: `LEDGER_CONSOLIDATED.md`. The Fable sweep: L-422 (the ledger

@@ -6,9 +6,23 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Read this file in 5 parts: lines 1-303, 304-601, 602-904, 905-1201, 1202-1255.
+Read this file in 5 parts: lines 1-301, 302-605, 606-863, 864-1151, 1152-1305.
 
-Skill version: 2.27 | 2026-10-08, with Anthropic's Claude Opus 5.5, at
+Skill version: 2.28 | 2026-10-09, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ aa46bb10. v2.28 (L-414) settles how the scanner reads
+a row, under Scanner Mechanics and The Goal State. A row in
+constants_new.py is read through its own comment run, not a window of
+30 lines back and 15 ahead: the window missed EARTH_MEAN_RADIUS_KM's own
+Source line 16 lines down (2026-10-04), and credited the stratopause
+row's Source to the thermopause row when a planted-fault run removed
+the thermopause's own (2026-10-09). A declared row with its reason
+written down is its own kind, named and never Tier-1. The gate-path
+figure is read from the two exports and printed by name, on the
+console, in the audit and in the run history. The two measurements are
+field notes. Riding this version: The Status Line says what the
+scanner now reads, and A Breadcrumb Must Not Cite says where the window
+still applies.
+Earlier: 2.27 | 2026-10-08, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ b0b3df82. v2.27 (L-418) splits the skill, and no rule is
 reworded. The relay procedure, the Review-Repair Protocol, is now the
 skill provenance-cross-check. Rules 1 to 8 of the figure count moved to
@@ -38,24 +52,8 @@ rules first, then the quality rules, then those with no tier, then the
 two long procedures, Report to the Figures You Have and the
 Review-Repair Protocol for Cross-Checked Annotations, and the field
 notes last. Every section's text is unchanged.
-Earlier: 2.25 | Cut from palomas_orrery @ 94ff6c68 (v2.25),
-@ feb5e369 (v2.24),
-earlier @ 7a47269c (v2.23), @ 714293a9 (v2.22), @ 95b394f8 (v2.21), @ 0e3d05fd (v2.20), @ de4eadc5 (v2.19), @ ac25d4f4 (v2.18), @ 1f6e55a9 (v2.17), @ a7014abb (v2.16), @ 21065c5d (v2.15), @ dfa779bd (v2.14),
-@ ebdc55cc (v2.13), @ bfc0505e (v2.12),
-earlier @ 159c5a2c (v2.11), @ 071a0a65 (v2.10), @ a263f73d (v2.9),
-@ 7f4a2f9f (v2.8), @ 3faa72a0 (v2.7), @ f603be3 (v2.6),
-@ 731066f (v2.5), @ 6b99ace (v2.2), @ 00219d9 (v2.1), @ eb77c83 (v2.0)
-| October 1, 2026
-v2.25 (L-407, 2026-10-02) changes no rule: the header's description is
-put in quotes. Unquoted, the " #" in "# Source: citations" started a
-YAML comment, so Settings read only the description's first 200
-characters, ending "adding or reviewing", and the words after it --
-citations, provenance_exceptions.json, display strings, the GitHub push
-gate, user-facing factual text -- never reached the description the
-skill is chosen by. Found by the header check skills_index.py gained
-the same day.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-05 and 2026-10-08 (L-418).
+on 2026-10-05 and 2026-10-08 (L-418) and 2026-10-09 (L-414).
 
 ## Contents
 
@@ -466,6 +464,12 @@ matching the citation pattern, a bare URL in a breadcrumb scoring as a
 source, and orphan section-header annotations all trace to the scanner
 guessing.
 
+As built at v2.28 (L-414): the scanner reads each row's own comment
+run, so the thirty-line lookback no longer reaches a neighbour, and it
+reads the declared kind (Scanner Mechanics). It does not yet read a
+measured row's rung: a measured row still scores by whether its own run
+carries a citation.
+
 ### The Unit Field
 
 **A unit is a declared field beside the value, `# Unit:`, never a
@@ -709,8 +713,9 @@ Known precedent (FIXED in L-156 1f; kept as history): comet_visualization_shells
 
 ### A Breadcrumb Must Not Cite [CRITICAL]
 
-Citations attach at BLOCK level over a thirty-line lookback, and
-`SOURCE_PATTERNS` counts `# Source:`, `# Ref:`, a bare `https://` URL,
+Citations attach at BLOCK level over a thirty-line lookback (in
+`constants_new.py`, since v2.28, over the row's own comment run
+instead), and `SOURCE_PATTERNS` counts `# Source:`, `# Ref:`, a bare `https://` URL,
 `doi`, `arXiv` and agency names (IAU, JPL, NASA, ESA, NIST, NOAA...) as
 citations. All of that is in the section above. The consequence is not
 obvious and it bites in one specific place.
@@ -977,6 +982,18 @@ it, while Tony pushed five times in one evening against it. A gate
 that is routinely and correctly ignored is worse than a wrong
 number -- it teaches the reader to ignore gates.)
 
+**Where the path is read from (v2.28, L-414).** The active build path
+is what leaves the orrery, read from the two files the maintenance run
+rewrites before the scanner runs: `data/constants_export.json` (its
+rows: the constants_new.py rows the website is served) and
+`data/objects_export.json` (its objects: the celestial_objects.py
+entries it serves). That is The Gate Binds at EXPORT made countable,
+and it settles where L-184 left the path undefined: no import walk and
+no hand list. An exported row computed from other rows is not scored
+itself; its inputs are, where they are typed. A file-by-file measure,
+such as L-184's Artifact-2 list, is not what the figure counts. When the
+exports grow, the path grows with them, by construction.
+
 A clean audit can rest on honest
 removals: "Tier-1 = 0" does not imply "every claim sourced" -- it can mean
 unsourceable claims were correctly stripped pending real sourcing. Record
@@ -1000,10 +1017,43 @@ A blank with a flag is honest; an unsourced assertion is not.
 - Flags by NUMERIC token (number + unit) via NUMERIC_CLAIM_RE. The unit
   vocabulary covers physical units (AU, km, deg, K, masses, radii, time
   units...) AND humanitarian units (people, persons, percent, %).
-- A citation must sit WITHIN the LOOKBACK WINDOW of the flagged token and
-  use the `# Source:` comment form. In-string "Source:" prose and distant
+- **A row in `constants_new.py` is read through its OWN COMMENT RUN**
+  (v2.28, L-414): the comment lines directly below the assignment, up
+  to the first blank line or line of code, and a run directly above it
+  only when a blank line, or the top of the file, fences that run off
+  from the code before it. A run wedged between two packed rows belongs
+  to the row above, because this file writes citations below. Nothing
+  is read across a blank line. So a row's own Source line counts however
+  far down its Figures block pushes it, and a neighbour's never counts.
+  The shadow detector's own-citation predicate reads the same run, so
+  the two cannot disagree. A section-header citation does not cover the
+  rows under it; each row carries its own, as The Status Line requires.
+- **Everywhere else the window still applies.** A display string, or a
+  constant in another module, is cited only by a `# Source:`-form
+  comment WITHIN the LOOKBACK WINDOW of the flagged token, or by its
+  enclosing block's citation. In-string "Source:" prose and distant
   comments do NOT count. A real citation outside the window, or in the
-  wrong form, reads as uncited.
+  wrong form, reads as uncited. The string extractor's window is pinned
+  separately, in test_extractor_pins.py.
+- **A declared row is not scored** (v2.28, L-414). A `# Status:
+  declared` line, or `declared pending`, in a row's own run, with the
+  reason written down, makes the row DECLARED: no rung, no tier, never
+  Tier-1, named under Declared Rows in the audit. The reason is a
+  `# Declared:` line, or the words after `--` on the Status line itself,
+  which is where the Status Line grammar puts a pointer and where this
+  skill's own example writes one. A bare ledger handle there is not a
+  reason. A row that says declared and gives no reason is scored as any
+  other row and named as reasonless. Worked cases: the three solar-wind
+  rows (a `# Declared:` line) and M3_PER_KM3 (the Status line).
+- **The gate-path figure is printed by name** (v2.28, L-414). Every run
+  ends with a GATE PATH line: the Tier-1 findings on what leaves the
+  orrery (The Goal State says where that is read from), each named by
+  file and row, with what was examined to reach the figure. The
+  maintenance run's summary quotes that line. An export the scanner
+  cannot read makes the figure UNKNOWN, never 0, and an exported row it
+  did not score is named as a blind spot. The run history records the
+  names, so one finding cleared and another gained shows at an equal
+  count. Its pins are test_row_run.py.
 - File inclusion is role-driven (L-078): a module's display strings are
   extracted when its module_atlas.py ROLE_MAP role is in NARRATIVE_ROLES
   ({data, scenario, rendering, rendering/shells, computation}), OR its

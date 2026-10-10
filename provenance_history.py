@@ -14,7 +14,8 @@ which commit is itself provenance (Tony's call, 2026-08-07).
 What lives here:
     - the on-disk shape and the ring buffer
     - the repo HEAD read, done without shelling out to git
-    - the run-to-run comparison and its console rendering
+    - the run-to-run comparison and its console rendering, including
+      the gate path compared by name (L-414)
     - the Run History table for PROVENANCE_AUDIT.md
     - is_overdue(), which nothing in this repo calls yet -- see below
 
@@ -36,10 +37,18 @@ Role: devtool
 Domain: dev_tools
 
 Module created: August 2026 with Anthropic's Claude Opus 5 (L-189).
+Module updated: October 9, 2026 with Anthropic's Claude Opus 5.5 (L-414:
+each run record carries gate_tier1, the gate-path Tier-1 findings by
+name; compare() reports which entered and which left, and the console
+and the Run History table show them. A count alone cannot tell one
+finding cleared and another gained from no change. Records from before
+L-414 have no such field and are reported as not comparable, never as
+zero.)
 """
 
 import json
 import os
+from collections import Counter
 from datetime import datetime, timedelta, timezone
 
 SCHEMA_VERSION = 1
@@ -213,15 +222,22 @@ def run_id_for(moment):
 
 def make_run_record(started, finished, project_dir, files_scanned,
                     total_findings, tier_counts, domain_counts,
-                    tier1_by_file, mode='scan'):
+                    tier1_by_file, mode='scan', gate_tier1=None):
     """Assemble one run record.
 
     tier_counts is keyed by int tier; it is stored keyed by string
     because JSON has no integer keys and a silent int-to-string
     conversion on save would make loaded records disagree with fresh
     ones.
+
+    gate_tier1 (L-414) is the list of gate-path Tier-1 findings BY
+    NAME, 'file::name', or None when the scanner could not read the
+    gate path. Stored as names, not a count: a run that clears one
+    finding and gains another has the same count and different names,
+    and only the names show it. Records written before L-414 have no
+    such field; compare() says so rather than reading it as zero.
     """
-    return {
+    record = {
         'run_id': run_id_for(started),
         'started': started.isoformat(),
         'finished': finished.isoformat(),
@@ -236,6 +252,9 @@ def make_run_record(started, finished, project_dir, files_scanned,
         'tier1_by_file': {str(k): int(v)
                           for k, v in sorted(tier1_by_file.items())},
     }
+    record['gate_tier1'] = (None if gate_tier1 is None
+                            else sorted(str(n) for n in gate_tier1))
+    return record
 
 
 # ============================================================
@@ -267,11 +286,32 @@ def compare(prev, cur):
         if after > before:
             risen.append((fname, before, after))
 
+    # L-414: the gate path by name. Unlike the per-file Tier-1 above,
+    # a finding that LEFT is named too: on the gate path a cleared
+    # finding and a new one at equal count is the case the count hides.
+    # 'known' is False when either record has no names to compare --
+    # a record from before L-414, or a run that could not read the
+    # gate path -- and the console says so instead of printing nothing.
+    prev_gate = (prev or {}).get('gate_tier1')
+    cur_gate = cur.get('gate_tier1')
+    gate = {'known': prev_gate is not None and cur_gate is not None,
+            'entered': [], 'left': []}
+    if gate['known']:
+        # Compared as a MULTISET, not a set: a second finding under a
+        # name already on the list (a row assigned twice) is one more
+        # entry, and a set would fold it into the first (L-351, the
+        # 2026-09-28 note on comparing findings as a set of names).
+        before = Counter(prev_gate)
+        after = Counter(cur_gate)
+        gate['entered'] = sorted((after - before).elements())
+        gate['left'] = sorted((before - after).elements())
+
     return {
         'total_delta': int(cur.get('total_findings', 0))
         - int((prev or {}).get('total_findings', 0)),
         'tier_delta': tier_delta,
         'risen': risen,
+        'gate': gate,
     }
 
 
@@ -326,7 +366,28 @@ def console_lines(history, cur, first_run_note=True):
         for fname, before, after in delta['risen']:
             lines.append('      %-44s %d -> %d  (+%d)'
                          % (fname[:44], before, after, after - before))
+    lines.extend(gate_delta_lines(prev, cur, delta['gate']))
     return lines
+
+
+def gate_delta_lines(prev, cur, gate):
+    """Console lines for the gate-path delta, by name (L-414)."""
+    if cur.get('gate_tier1') is None:
+        return ['  gate path: not read this run -- no names to compare.']
+    if not gate['known']:
+        return ['  gate path: the previous run recorded no gate-path names'
+                ' (it predates L-414),',
+                '  so this run\'s %d cannot be compared by name yet.'
+                % len(cur['gate_tier1'])]
+    if not gate['entered'] and not gate['left']:
+        return ['  gate path: the same %d Tier-1 finding(s) by name as the'
+                ' previous run.' % len(cur['gate_tier1'])]
+    out = []
+    for n in gate['entered']:
+        out.append('  gate path ENTERED Tier-1: %s' % n.replace('::', '  '))
+    for n in gate['left']:
+        out.append('  gate path left Tier-1:    %s' % n.replace('::', '  '))
+    return out
 
 
 # ============================================================
@@ -405,19 +466,23 @@ def history_table(history):
         lines.append('')
         return lines
 
-    lines.append('| Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 |')
-    lines.append('|-----------|------|------:|------:|---:|---:|---:|---:|')
+    lines.append('| Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 '
+                 '| Gate T1 |')
+    lines.append('|-----------|------|------:|------:|---:|---:|---:|---:'
+                 '|--------:|')
 
     for rec in reversed(runs):
         tiers = rec.get('tier_counts', {})
+        gate = rec.get('gate_tier1')
         lines.append(
-            '| %s | `%s` | %d | %d | %s | %s | %s | %s |'
+            '| %s | `%s` | %d | %d | %s | %s | %s | %s | %s |'
             % (rec.get('run_id', '?'),
                short_sha(rec.get('head_sha')),
                int(rec.get('files_scanned', 0)),
                int(rec.get('total_findings', 0)),
                tiers.get('1', 0), tiers.get('2', 0),
-               tiers.get('3', 0), tiers.get('4', 0)))
+               tiers.get('3', 0), tiers.get('4', 0),
+               '--' if gate is None else len(gate)))
 
     lines.append('')
 
@@ -437,6 +502,15 @@ def history_table(history):
         else:
             lines.append('')
             lines.append('No file\'s Tier-1 count rose.')
+        gate = delta['gate']
+        if gate['known'] and (gate['entered'] or gate['left']):
+            lines.append('')
+            lines.append('On the gate path, by name:')
+            lines.append('')
+            for n in gate['entered']:
+                lines.append('- entered Tier-1: `%s`' % n)
+            for n in gate['left']:
+                lines.append('- left Tier-1: `%s`' % n)
 
     lines.append('')
     lines.append('---')

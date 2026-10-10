@@ -308,6 +308,11 @@ Module updated: October 9, 2026 with Anthropic's Claude Opus 5.5
 and the quote count; L-426 opened, the checker's small-number
 comparison; L-424, L-414, L-386 and L-351 updated), built on
 08f0375.
+Module updated: October 9, 2026 with Anthropic's Claude Opus 5.5
+(L-414 built: the scanner reads a row's own comment run, names
+declared rows and prints the gate path by name; provenance-discipline
+2.28, protocol v3.87; L-427 opened, rows a neighbour's citation had
+been crediting; L-351 and L-184 updated), built on aa46bb10.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -525,7 +530,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*235 live items; 219 need attention (`!`); 167 RICE-scored; 186 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*236 live items; 220 need attention (`!`); 167 RICE-scored; 186 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -552,7 +557,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-247 | Sgr A* constants migrated to the single source of truth | OPEN | 4.0 | 2026-08-25 |
 | ! | L-331 | Visitor-facing text: stale info text, four Sun hovers outside the i-panel move, and hovers in plain language (exhibits) | OPEN | 4.0 | 2026-09-16 |
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
-| ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-08-06 |
+| ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-10-09 |
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
 |  | L-230 | A skill bump does not reach the protocol's version history | DEFERRED | 3.8 | 2026-08-23 |
 | ! | L-282 | The lobby: the main page as an entrance hall | OPEN | 3.8 | 2026-09-06 |
@@ -669,12 +674,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
 | ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-08 |
 | ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-06 |
-| ! | L-414 | The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling) | OPEN | -- | 2026-10-09 |
+| ! | L-414 | The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling) | PENDING-GATE | -- | 2026-10-09 |
 | ! | L-421 | Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words) | OPEN | -- | 2026-10-08 |
 | ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-08 |
 | ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-09 |
 | ! | L-425 | A citation's location record is checked only in part (provenance tooling) | OPEN | -- | 2026-10-09 |
 | ! | L-426 | The worksheet checker compares very small numbers as equal (worksheet checker) | OPEN | -- | 2026-10-09 |
+| ! | L-427 | Rows a neighbour's citation had been crediting (store) | OPEN | -- | 2026-10-09 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1243,6 +1249,25 @@ IGRF epoch, a class); gallery `gallery/feature_renderers.js`,
 `gallery/earth_geometry.js`, `data/objects_config.json`;
 skills/interactive-exhibit/SKILL.md.
 
+#### [L-427] Rows a neighbour's citation had been crediting (store)
+<!-- L:427 status:OPEN upd:2026-10-09 section:A flag: rice: -->
+- **Recorded, not chased** (The Braid: one row per class). Found by
+  L-414's discovery on 2026-10-09: when the scanner stopped reading a
+  fixed window, rows in `constants_new.py` lost a citation that was
+  never theirs. One is a claim and is this item:
+  - CENTER_BODY_RADII -- now Tier-1, off the gate path. Its one typed
+    number is Planet 9's 24,000 km, with the note "Model estimate
+    (Batygin & Brown; 5-10 M_Earth assumption)": no year, no Source
+    line. It had been credited by ARROKOTH_RADIUS_KM's Source across a
+    blank line.
+- Not this item: DEFAULT_MARKER_SIZE and CENTER_MARKER_SIZE lost the
+  same kind of borrowed credit (the light-year row's Source). They are
+  rendering settings and need no source; L-372 moves them to the
+  drawing code.
+**Gap:** Planet 9's figure sourced, or removed with the gap noted.
+**Ref:** L-414; L-372; L-159 (Planet 9 left a raw literal);
+`constants_new.py`; `PROVENANCE_AUDIT.md`.
+
 #### [L-425] A citation's location record is checked only in part (provenance tooling)
 <!-- L:425 status:OPEN upd:2026-10-09 section:A flag: rice: -->
 - **Measured 2026-10-08** at orrery e5cc4bb2, for Tony's question: "how
@@ -1477,7 +1502,7 @@ above.
 above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 
 #### [L-414] The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling)
-<!-- L:414 status:OPEN upd:2026-10-09 section:A flag: rice: -->
+<!-- L:414 status:PENDING-GATE upd:2026-10-09 section:A flag: rice: -->
 - **2026-10-08:** Tony ruled that this item gets its own session,
   which cuts provenance-discipline 2.28, before the Sun's list
   reaches L-228 (the Alfven surface's ranges); it does not ride the
@@ -1514,10 +1539,66 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
   constants_new.py, where rows sit close, a removed Source line is
   caught only by test_status_lines.py rule 4, on rows that declare a
   sourced rung.
-**Gap:** the fix, by provenance-discipline's method; then the scanner's
-count for `constants_new.py` should name these four as gone.
-**Ref:** `provenance_scanner.py`; `constants_new.py`;
-`PROVENANCE_AUDIT.md`; L-305; L-314; L-351.
+- **2026-10-09, BUILT** (patch_L414_1_scanner_window_20261009.py, on
+  aa46bb10; provenance-discipline 2.28, protocol v3.87). One mechanism,
+  not three fixes: a row in `constants_new.py` is read through its OWN
+  comment run -- the run directly below the assignment, and a run
+  directly above only when a blank line fences it off from the code
+  before it. A run between two packed rows is the row above's. The
+  shadow detector's own-citation predicate reads the same run. A
+  declared row with its reason written down is DECLARED: unscored,
+  never Tier-1, named in the audit. The gate path is read from
+  `data/constants_export.json` and `data/objects_export.json` and
+  printed by name on the console, in the audit and in the run history
+  (names, compared as a multiset). Display strings and other modules
+  keep their window. Pins: `test_row_run.py`, 16, a new gating checker;
+  15 of the 16 fail against the scanner at aa46bb10.
+- **Discovery, by name** (throwaway copy of aa46bb10):
+  - Left Tier-1 (4): EARTH_MEAN_RADIUS_KM (now cited);
+    EARTH_SOLAR_WIND_PRESSURE_NPA, EARTH_SOLAR_WIND_BZ_NT,
+    EARTH_SOLAR_WIND_SPEED_KM_S (now declared pending, L-314).
+  - Entered Tier-1 (1): CENTER_BODY_RADII, off the gate path. L-427.
+  - Lost neighbour credit, Tier 4 (2): DEFAULT_MARKER_SIZE,
+    CENTER_MARKER_SIZE. Rendering settings, which need no source;
+    L-372 already moves them to the drawing code.
+  - Now DECLARED (19): S_PER_HOUR, EARTH_POLE_RA_J2000_DEG,
+    EARTH_POLE_DEC_J2000_DEG, ARCSEC_PER_DEG,
+    EARTH_OBLIQUITY_J2000_ARCSEC, GALACTIC_NORTH_POLE_RA_J2000_DEG,
+    GALACTIC_NORTH_POLE_DEC_J2000_ARCSEC, EARTH_LEO_LOWER_ALTITUDE_KM,
+    the three solar-wind rows, EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG,
+    EARTH_BOW_SHOCK_CUT_ANGLE_DEG, INNER_CORONA_RADII,
+    OUTER_CORONA_RADII, the three DE430_*_POSITION_PLACE_KM rows,
+    M3_PER_KM3.
+  - Whole tree 296 -> 293 Tier-1. Gate path 4 -> 0: at aa46bb10 the
+    push gate was failing on exactly the four rows above, all the
+    scanner's own faults, and no tool printed it.
+- **One method call beyond the brief, settled in the skill:** a
+  declared row's reason may sit after `--` on its Status line, as
+  well as on a `# Declared:` line. The brief named only the second;
+  that would have put M3_PER_KM3, which is exported, into gate-path
+  Tier-1 for a reason the row writes plainly ("an exact unit
+  conversion"). A bare ledger handle there is not a reason.
+- **Planted faults, on copies, each failing before and passing
+  after:** F1 (the thermopause row's Source removed -> Tier-1);
+  EARTH_MEAN_RADIUS_KM's Source 16 lines down -> cited; the three
+  solar-wind rows -> DECLARED; the stratopause row's own Source and
+  Ref removed, neighbours untouched -> Tier-1.
+- **Which cases the recognition pins cover:** the 27 pins of
+  `test_provenance_1d.py` all hold. Its four contiguity pins (citation
+  below, citation above, a blank ends the run below, preceding code
+  ends the run above) are the row run's rule for single rows; no pin
+  covered a section-header citation over several rows, and under the
+  row run a header covers only the row it touches.
+- Tony-action (do): run the patch, then orrery_maintenance_run.py;
+  move the script into documentation/; commit and push; reinstall
+  provenance-discipline from its ZIP.
+**Gap:** Tony's run. The maintenance run should end on "GATE PATH: 0
+TIER-1 -- the push gate holds" and "21 of 21 gating checkers passed".
+Then this item closes.
+**Ref:** `provenance_scanner.py`; `provenance_history.py`;
+`test_row_run.py`; `orrery_maintenance_run.py`; `constants_new.py`;
+`PROVENANCE_AUDIT.md`; `documentation/HANDOFF_L414_scanner_window_20261009.md`;
+L-305; L-314; L-351; L-184; L-427.
 
 #### [L-423] The website's checks: the order Tony confirmed (checks, gallery)
 <!-- L:423 status:OPEN upd:2026-10-08 section:A flag: rice: -->
@@ -3201,6 +3282,8 @@ website's checks). The card exports and the two comments go with the next patch 
   comparing the scanner's findings as a SET of names cannot see a second
   finding that looks like one already there. D8's result stood because
   the scanner's own count agreed; D9 and D10 compared counted lists.
+  The gate path's run history (L-414, 2026-10-09) compares its names
+  as a multiset, so it does not recur there.
 - **2026-10-04: this item becomes the one place** for what each skill
   is owed at its next version, so a session bumping a skill reads one
   block, not five (Fable 5.1 ledger sweep; method). Pointers by source
@@ -3218,10 +3301,10 @@ website's checks). The card exports and the two comments go with the next patch 
     Cache Siblings description, and the orrery's
     `documentation/L342_install_test_run_sequence.md`; for a pass
     that touches them anyway.
-  - provenance-discipline: the scanner's window and declared rows
-    (L-414, if the fix is method there). The range rule's example and
-    the scanner's change (both L-371) and the conversion marker (L-390)
-    landed at 2.27 on 2026-10-08 (L-418).
+  - provenance-discipline: nothing owed. The scanner's window and
+    declared rows landed at 2.28 on 2026-10-09 (L-414). The range
+    rule's example and the scanner's change (both L-371) and the
+    conversion marker (L-390) landed at 2.27 on 2026-10-08 (L-418).
   - gallery-pipeline: the wide card's four fields and the picture's
     tool (L-363).
   - ledger-and-session-records: nothing owed. The RICE rule for list
@@ -4428,7 +4511,7 @@ acquisition and caching discipline.
 **Ref:** FABLE_skills_layer_review_report.md Job 1 #1, Job 3 #4.
 
 #### [L-184] Interactive build-path push gate
-<!-- L:184 status:OPEN upd:2026-08-06 section:A flag: rice:4/4/75/3 -->
+<!-- L:184 status:OPEN upd:2026-10-09 section:A flag: rice:4/4/75/3 -->
 - Tony ratified 2026-08-05: the global "Tier-1 = 0" push gate becomes
   "Tier-1 = 0 on the interactive build path" for this phase. The global
   gate was unreachable in practice -- of 206 Tier-1 findings measured at
@@ -4471,6 +4554,14 @@ acquisition and caching discipline.
 **Gap:** 2b blocked on the L-181 architecture review (Fable, sent
 2026-08-06). The build path cannot be defined until the cross-repo data
 flow is decided.
+- **2026-10-09, L-414:** the path is now computed, and from the
+  exports rather than an import walk: the rows in
+  `data/constants_export.json` and the served entries in
+  `data/objects_export.json`, which is where The Gate Binds at EXPORT
+  (Tony, 2026-08-28) puts the gate. The scanner prints it by name on
+  every run. That answers Task 2b's question; the Artifact-2 file list
+  above is a different measure and is not what the figure counts.
+  **Note:** proposed closed with L-414 once Tony's run confirms it.
 **Ref:** HANDOFF_next_session_masterplan_v16.md Task 2;
 MASTER_PLAN_INTERACTIVE_GALLERY.md v16, *New in v16* block.
 

@@ -11,16 +11,16 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 143  
-**Total Lines of Code (non-blank):** 115,864  
-**Total Public Functions/Classes:** 1,319
+**Total Python Files:** 144  
+**Total Lines of Code (non-blank):** 116,495  
+**Total Public Functions/Classes:** 1,339
 
 ## Classification Coverage
 
 **Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L418_5_testing_close_20261009.py`
+- `patch_L414_1_scanner_window_20261009.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_worksheet_keys.py`
@@ -28,7 +28,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 **Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L418_5_testing_close_20261009.py`
+- `patch_L414_1_scanner_window_20261009.py`
 
 
 ---
@@ -216,9 +216,9 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (129 lines) |
 | `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (976 lines) |
-| `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (606 lines) |
-| `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (357 lines) |
-| `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,071 lines) |
+| `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (624 lines) |
+| `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (427 lines) |
+| `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,535 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (882 lines) |
 | `test_citation_inheritance.py` | Regression tests for citation-block inheritance. (516 lines) |
 | `test_constants_export.py` | - data/constants_export.json says what constants_new.py holds. (389 lines) |
@@ -230,6 +230,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (224 lines) |
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (485 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (120 lines) |
+| `test_row_run.py` | Pins for L-414: a row's citation context is its own comment run, declared rows are their own kind, and the gate-path figure is computed and recorded by name. (370 lines) |
 | `test_status_lines.py` | Enforce the Status Line grammar in constants_new.py. (372 lines) |
 | `test_worksheet_checker.py` | - L-192. Can each layer actually fail? (1,003 lines) |
 | `test_worksheet_request_builder.py` | - L-195 / L-192. Does the marker join actually join, and can it fail? (439 lines) |
@@ -245,7 +246,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L418_5_testing_close_20261009.py` | - the close of the testing session after the provenance split (L-418). (667 lines) |
+| `patch_L414_1_scanner_window_20261009.py` | - the provenance scanner reads a row's own comment block, names declared rows, and prints the push gate's number by name (L-414, the scanner's window). (376 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |

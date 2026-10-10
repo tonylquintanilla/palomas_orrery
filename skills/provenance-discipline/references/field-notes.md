@@ -76,6 +76,25 @@ unverified. Moved here from provenance-discipline 2.26 on 2026-10-08
   than exotic -- a HEAD that looks wrong may be the OTHER repo's HEAD.
   Check both before concluding anything.
 
+- **A window measured in lines does not know where a row ends** (the
+  founding cases of v2.28, L-414). On 2026-10-04 constants_new.py had
+  gone from 0 to 4 Tier-1 findings since mid-August, and none of the
+  four was uncited. EARTH_MEAN_RADIUS_KM's own `# Source:` sat 16 lines
+  below the assignment after its Figures block grew on 2026-09-19, and
+  the constant window looked 15 ahead: tested at cbde99dc, not in
+  context at 15, in it at 16. The three solar-wind rows carried
+  `# Status: declared pending` and a `# Declared:` reason, which the
+  scanner did not read. On 2026-10-09 the planted-fault run (F1)
+  removed EARTH_THERMOPAUSE_ALTITUDE_KM's own Source lines and the row
+  still scored "Cited", on the stratopause row's Source and Ref a few
+  lines above it inside the 30-line look-back; removing those as well
+  made both rows Tier-1, 296 to 298. One window, failing in both
+  directions in the one file where rows sit packed. Fixing it moved
+  CENTER_BODY_RADII into Tier-1 -- its Planet 9 literal had been cited
+  by Arrokoth's Source across a blank line -- and measured the gate
+  path at aa46bb10 as 4 Tier-1 before and 0 after: the push gate had
+  been failing on the scanner's own faults, and nothing printed the
+  figure to say so.
 - The scanner took ~10 sessions and multiple Gemini cross-checks to
   harden -- treat scanner changes as shared-CI changes with family-wide
   ripple (extending the unit vocabulary once exposed a pre-existing

@@ -24,6 +24,21 @@ Architecture: "unit of provenance"
     If `color_map` is defined in the same file but not imported
     anywhere, it is not C=5 just because its module is.
 
+    A row in constants_new.py is read through its OWN comment run
+    (L-414): the comment lines directly below the assignment, and a run
+    directly above it only when a blank line fences that run off from
+    the code before it. Nothing is read across a blank line, and a run
+    wedged between two packed rows belongs to the row above. A row
+    whose run says "# Status: declared" with its reason written down is
+    reported by name as DECLARED and is not scored. Display strings and
+    constants in other modules keep their own context rules.
+
+    Every run ends with the GATE PATH line: the Tier-1 findings on what
+    leaves the orrery -- the rows in data/constants_export.json and the
+    served entries in data/objects_export.json -- named one by one,
+    with what was examined to reach the figure (L-414). An export it
+    cannot read makes the figure UNKNOWN, never zero.
+
 Companion tools:
     module_atlas.py               -- shared dependency graph
     test_constants_provenance.py  -- pins specific verified values
@@ -300,6 +315,15 @@ and two entries removed for smoke_* files no longer in the repo.
 Module updated: August 21, 2026 with Anthropic's Claude Opus 5 (L-214).
 Module updated: September 16, 2026 with Anthropic's Claude Opus 5 (L-273: the output opens with a Doc-Kind: generated tag, read by
 doc_index.py; hand-editing the output is an error the tag now names).
+Module updated: October 9, 2026 with Anthropic's Claude Opus 5.5 (L-414,
+patch_L414_1_scanner_window_20261009.py: a constants_new.py row's
+citation context is its own comment run, not a 30-back/15-ahead window
+-- row_comment_indices(), shared by scoring and by
+constant_has_own_citation(); a declared row with its reason is
+V_DECLARED, unscored, and listed under Declared Rows; the gate path is
+read from the two exports and printed by name, in the audit, on the
+console and in the run history. Measured on the tree at aa46bb10:
+whole-tree Tier-1 296 -> 293, gate path 4 -> 0.)
 Report-only grouping -- no scanning or scoring behaviour changed).
 
 Role: devtool
@@ -307,6 +331,7 @@ Domain: dev_tools
 """
 
 import ast
+import json
 import os
 import re
 import sys
@@ -347,6 +372,11 @@ V_SOURCED       = 3   # Cited, but never independently cross-checked.
                       # Absorbs the former V_STALE rung -- see the reason
                       # strings in score_unit for the retained distinction.
 V_RECALLED      = 4   # From model training data, no citation
+V_DECLARED      = 0   # L-414: a declared row with its reason written
+                      # down. Not a rung on the ladder above -- a choice
+                      # is not a measurement -- so it scores 0, is not a
+                      # finding, and is listed by name under DECLARED
+                      # ROWS in the audit.
 
 # Retained alias. V_STALE and V_SOURCED are the same rung as of L-156; the
 # name is kept because the accepted-residuals prose and the exceptions file
@@ -1616,6 +1646,132 @@ def attached_block(lines, spans, anchors, line_start):
     return ''.join(lines[i] for i in idx), tuple(i + 1 for i in idx)
 
 
+# ============================================================
+# A ROW'S OWN COMMENT RUN (L-414)
+# ============================================================
+# In constants_new.py a row is an assignment and the comment block
+# written for it: "# Unit:", "# Status:", "# Figures:", "# Read:",
+# "# Source:", "# Ref:", "# Declared:", "# Note:" and their "+"
+# continuations. That block is the row's whole provenance record, and
+# the row's citation context is that block and nothing else.
+#
+# Until L-414 a constant's context was a fixed window, 30 lines back
+# and 15 ahead. Measured in lines, it did not know where one row's
+# block ended and the next began, and it failed both ways in this
+# file, where rows sit with no blank line between them:
+#   - EARTH_MEAN_RADIUS_KM's own Source line, 16 lines down after a
+#     Figures block that grew, was outside the 15-line look-ahead, so a
+#     cited row scored uncited (2026-10-04).
+#   - With EARTH_THERMOPAUSE_ALTITUDE_KM's own Source lines removed,
+#     the stratopause row's Source and Ref, a few lines above, were
+#     inside the 30-line look-back, so an uncited row scored cited
+#     (planted fault F1, 2026-10-09).
+#
+# The rule. A row owns the comment run that starts directly below its
+# statement and ends at the first blank line or line of code. It also
+# owns a comment run directly ABOVE its statement, but only when that
+# run is fenced off above by a blank line or the top of the file. A run
+# that touches code above it is that code's trailing block. So a run
+# between two packed rows belongs to the row above it -- this file's
+# convention puts citations below -- and is never read for the row
+# below. Nothing is read across a blank line in either direction.
+#
+# Scope: the files in ROW_CONVENTION_FILES, for constant and dict
+# units. Display strings, and constants in every other module, keep
+# their own context rules (the window above, the block table, the
+# string extractor's 60-line window); L-414 did not need to touch them.
+ROW_CONVENTION_FILES = ('constants_new.py',)
+
+# A declared row: "# Status: declared ..." (or "declared pending ...")
+# with its reason written in the row's own run. Provenance of its own
+# kind -- a choice with its reason written down, not a measurement
+# missing its source -- reported by name, never scored (L-414).
+#
+# The reason is a "# Declared:" line, or the words after "--" on the
+# Status line itself, which is where the Status Line grammar puts a
+# pointer and where provenance-discipline's own example writes one
+# ("# Status: declared 2026-08-28 -- top of measured 2-4 range"). A
+# bare ledger handle there is a pointer to backlog, not a reason.
+# M3_PER_KM3 is the worked case: "-- an exact unit conversion,
+# 1 km^3 = 1e9 m^3", and no "# Declared:" line.
+DECLARED_STATUS_RE = re.compile(
+    r'^\s*#\s*Status:\s*declared(\s+pending)?\b', re.IGNORECASE)
+DECLARED_REASON_RE = re.compile(r'^\s*#\s*Declared:', re.IGNORECASE)
+LEDGER_HANDLE_RE = re.compile(r'\bL-\d+\b')
+
+# Rows reported as DECLARED, and rows whose run says "declared" with no
+# reason. Collected during scoring, reported after it. Entries:
+# (file, line, name, status_line[, where the reason is written]).
+DECLARED_ROWS = []
+DECLARED_WITHOUT_REASON = []
+
+
+def row_comment_indices(lines, first_line, last_line):
+    """0-based indices of the comment run a row owns (L-414).
+
+    `first_line` and `last_line` are the 1-based first and last lines
+    of the row's statement. Below: the run starting on the next line.
+    Above: the run ending on the line before, kept only when the line
+    above that run is blank or the run starts the file -- a run that
+    touches code above belongs to that code, not to this row.
+    """
+    below = comment_run_below(lines, last_line)
+    above = comment_run_above(lines, first_line)
+    if above:
+        top = min(above)
+        if top > 0 and lines[top - 1].strip():
+            above = []
+    return sorted(above) + below
+
+
+def row_comment_run(lines, first_line, last_line):
+    """(text, 1-based line numbers) of the comment run a row owns."""
+    idx = row_comment_indices(lines, first_line, last_line)
+    return ''.join(lines[i] for i in idx), tuple(i + 1 for i in idx)
+
+
+def status_line_reason(status_line):
+    """The reason written after "--" on a Status line, or ''.
+
+    A bare ledger handle is not a reason: "-- L-314" points at backlog
+    and says nothing about why the value was chosen.
+    """
+    if '--' not in status_line:
+        return ''
+    tail = status_line.split('--', 1)[1]
+    words = LEDGER_HANDLE_RE.sub('', tail)
+    return tail.strip() if re.search(r'[A-Za-z]', words) else ''
+
+
+def declared_status(run_text):
+    """(kind, reason_where, status_line) or None.
+
+    Reads the row's own run only. A "# Status: declared" line makes the
+    row a declared row. `kind` is 'declared' or 'declared pending'.
+    `reason_where` is 'Declared line', 'Status line', or None when the
+    run gives no reason at all.
+    """
+    status = None
+    declared_line = False
+    for line in (run_text or '').splitlines():
+        m = DECLARED_STATUS_RE.match(line)
+        if m and status is None:
+            status = line.strip()
+        if DECLARED_REASON_RE.match(line):
+            declared_line = True
+    if status is None:
+        return None
+    if declared_line:
+        has_reason = 'Declared line'
+    elif status_line_reason(status):
+        has_reason = 'Status line'
+    else:
+        has_reason = None
+    kind = 'declared pending' if re.search(
+        r'declared\s+pending', status, re.IGNORECASE) else 'declared'
+    return kind, has_reason, status
+
+
 def collect_orphan_annotations(lines, fname, units):
     """Annotation lines whose comment run touches no code at all.
 
@@ -1754,10 +1910,17 @@ def extract_units_from_file(filepath, module_name, role):
 
         line_start = node.lineno
         line_end = getattr(node, 'end_lineno', line_start) or line_start
-        context_text = get_context_block(lines, line_start, line_end,
-                                         lookback=30, lookahead=15)
-        att_text, att_lines = attached_block(lines, spans, anchors,
-                                             line_start)
+        if fname in ROW_CONVENTION_FILES:
+            # L-414: the row's own comment run is its whole context --
+            # for its citation, its declared status and its annotations.
+            att_text, att_lines = row_comment_run(lines, line_start,
+                                                  line_end)
+            context_text = ''.join(lines[line_start - 1:line_end]) + att_text
+        else:
+            context_text = get_context_block(lines, line_start, line_end,
+                                             lookback=30, lookahead=15)
+            att_text, att_lines = attached_block(lines, spans, anchors,
+                                                 line_start)
 
         units.append(ProvenanceUnit(
             kind='constant',
@@ -1819,11 +1982,17 @@ def _make_dict_unit(assign_node, name, lines, module_name, fname, role,
     # For dicts the interior is captured separately; use the declaration
     # line as both start/end for lookahead so we catch trailing
     # `# Source:` comments that follow the closing brace.
-    context_text = get_context_block(lines, line_start, line_end,
-                                     lookback=30, lookahead=10)
     interior_text = get_unit_interior(lines, line_start, line_end)
-    att_text, att_lines = attached_block(lines, spans, anchors or {},
-                                         line_start)
+    if fname in ROW_CONVENTION_FILES:
+        # L-414: a dict row's context is its own comment run plus its
+        # interior, as for a constant row.
+        att_text, att_lines = row_comment_run(lines, line_start, line_end)
+        context_text = att_text
+    else:
+        context_text = get_context_block(lines, line_start, line_end,
+                                         lookback=30, lookahead=10)
+        att_text, att_lines = attached_block(lines, spans, anchors or {},
+                                             line_start)
 
     entries = []
     for key, val in zip(dict_node.keys, dict_node.values):
@@ -1855,6 +2024,8 @@ def _make_dict_unit(assign_node, name, lines, module_name, fname, role,
         name=name,
         line_start=line_start,
         line_end=line_end,
+        attached_text=att_text,
+        attached_lines=att_lines,
         context_text=context_text + '\n' + interior_text,
         entries=entries,
         role=role,
@@ -2030,7 +2201,7 @@ def _numeric_from_node(node):
     return None
 
 
-def constant_has_own_citation(lines_c, lineno, source_re):
+def constant_has_own_citation(lines_c, lineno, source_re, end_lineno=None):
     """Does the constant assigned at `lineno` carry its OWN citation?
 
     Single source of truth for this question. Both build_pinned_values()
@@ -2057,26 +2228,26 @@ def constant_has_own_citation(lines_c, lineno, source_re):
 
     `lines_c` is the file's lines with line endings kept; `lineno` is the
     1-based AST line number; `source_re` is the caller's citation
-    pattern.
+    pattern; `end_lineno`, when given, is the statement's last line, so
+    a multi-line assignment's run is read from below its end (L-414).
+
+    Since L-414 this is the same rule scoring reads constants_new.py
+    rows by, row_comment_indices(), so the shadow detector and the
+    audit cannot disagree about which rows are cited.
     """
-    # Below: a comment run starting on the very next line. No blank may
-    # intervene -- that is what keeps the next constant's citation out.
-    idx = lineno
-    while idx < len(lines_c) and lines_c[idx].lstrip().startswith('#'):
+    # L-414: the row's own comment run, the same rule the scanner
+    # scores constants_new.py rows by (row_comment_indices). Below: the
+    # run starting on the very next line. Above: the run ending on the
+    # line before, only when a blank line or the top of the file fences
+    # it off -- a run touching the previous assignment is that
+    # assignment's, which is what keeps a neighbour's citation out.
+    # Until L-414 the walk above also stepped over blank lines and
+    # through the previous row's trailing block, so in constants_new.py,
+    # where rows are packed, a row with no Source of its own counted as
+    # cited on its neighbour's.
+    for idx in row_comment_indices(lines_c, lineno, end_lineno or lineno):
         if source_re.search(lines_c[idx]):
             return True
-        idx += 1
-
-    # Above: walk up through comments and blanks, stopping at the first
-    # line of code, which is the previous assignment.
-    idx = lineno - 2
-    while idx >= 0:
-        line = lines_c[idx]
-        if source_re.search(line):
-            return True
-        if line.strip() and not line.lstrip().startswith('#'):
-            break
-        idx -= 1
 
     return False
 
@@ -2112,7 +2283,8 @@ def build_cited_constant_names(project_dir):
         num = _numeric_from_node(node.value)
         if num is None:
             continue
-        if constant_has_own_citation(lines_c, node.lineno, source_re):
+        if constant_has_own_citation(lines_c, node.lineno, source_re,
+                                     getattr(node, 'end_lineno', None)):
             named[target.id] = num
     return named
 
@@ -2226,7 +2398,8 @@ def build_pinned_values(project_dir):
         # reach past this constant onto a neighbour's citation. Now the
         # same predicate build_cited_constant_names() uses, so the two
         # cannot disagree about what "cited" means.
-        if constant_has_own_citation(lines_c, node.lineno, SOURCE_RE):
+        if constant_has_own_citation(lines_c, node.lineno, SOURCE_RE,
+                                     getattr(node, 'end_lineno', None)):
             # Store at multiple precisions to match how hover text rounds
             for prec in (0, 1, 2, 3):
                 pinned.add(round(num, prec))
@@ -2370,6 +2543,36 @@ def score_unit(unit, imported_names):
     claim? Nothing else may substitute for it. Two mechanisms that once
     did were retired in D8.5 -- see the note above the ladder below.
     """
+    # ---- Declared rows (L-414) ----
+    # In a row-convention file a row whose own run says "# Status:
+    # declared" and gives a "# Declared:" reason is provenance of its
+    # own kind. It is not scored: no rung, no tier, never Tier-1. It is
+    # reported by name under DECLARED ROWS instead. A row that says
+    # declared with no reason (no "# Declared:" line and nothing but a
+    # handle after "--") is scored as any other row and named in the
+    # same section, so the missing reason is visible.
+    if (unit.kind in ('constant', 'dict')
+            and unit.file in ROW_CONVENTION_FILES):
+        dec = declared_status(unit.attached_text)
+        if dec is not None:
+            kind, has_reason, status_line = dec
+            if has_reason:
+                unit.vuln = V_DECLARED
+                handle = LEDGER_HANDLE_RE.search(status_line)
+                unit.vuln_reason = (
+                    "Declared pending (%s)" % handle.group(0)
+                    if kind == 'declared pending' and handle
+                    else ("Declared pending" if kind == 'declared pending'
+                          else "Declared"))
+                unit.crit, unit.crit_reason = classify_criticality(unit)
+                unit.score = 0
+                DECLARED_ROWS.append(
+                    (unit.file, unit.line_start, unit.name, status_line,
+                     has_reason))
+                return
+            DECLARED_WITHOUT_REASON.append(
+                (unit.file, unit.line_start, unit.name, status_line))
+
     # ---- Vulnerability ----
     text = unit.context_text or ''
     is_doc = bool(unit.is_docstring)
@@ -2741,6 +2944,8 @@ def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
     del SHADOW_CONSTANTS[:]
     del CROSS_CHECK_ISSUES[:]
     del ORPHAN_ANNOTATIONS[:]
+    del DECLARED_ROWS[:]
+    del DECLARED_WITHOUT_REASON[:]
 
     suppressed_fingerprints, accepted_residuals = load_exceptions(project_dir)
 
@@ -2798,6 +3003,10 @@ def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
 
     consistent_dups, inconsistencies = find_cross_file_issues(all_units)
 
+    # L-414: what leaves the orrery, and which scored units are on it.
+    gate_path = load_gate_path(project_dir)
+    gate_units = gate_path_units(all_units, gate_path, project_dir)
+
     if SCOPE_DECLARED_BLOCKS:
         print(f"{len(SCOPE_DECLARED_BLOCKS)} block(s) carry a scope-limited "
               f"citation -- inheritance declined, see audit")
@@ -2831,9 +3040,219 @@ def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
                     shadow_constants=list(SHADOW_CONSTANTS),
                     cross_check_issues=list(CROSS_CHECK_ISSUES),
                     orphan_annotations=list(ORPHAN_ANNOTATIONS),
-                    started=run_started)
+                    started=run_started,
+                    gate_path=gate_path, gate_units=gate_units,
+                    declared_rows=list(DECLARED_ROWS),
+                    declared_without_reason=list(DECLARED_WITHOUT_REASON))
 
     return all_units, consistent_dups, inconsistencies
+
+
+# ============================================================
+# THE GATE PATH (L-414)
+# ============================================================
+# The push gate is Tier-1 = 0 on the active build path. The gate binds
+# at EXPORT (provenance-discipline, The Gate Binds at EXPORT), so the
+# path is read from the two files through which values leave the
+# orrery, both written by the maintenance run before this scanner runs:
+#
+#   data/constants_export.json  its "rows": the constants_new.py rows
+#                               the website is served (export_constants)
+#   data/objects_export.json    its "objects": the celestial_objects.py
+#                               entries the website serves, by key
+#                               (export_objects)
+#
+# A scored unit is on the gate path when it is one of those rows, or a
+# display string inside one of those entries. Until L-414 no tool
+# computed this set: the console said the whole-tree count was not the
+# gate and pointed at the audit, which did not compute it either.
+#
+# Nothing here touches the exit code. The figure is printed by name so
+# the maintenance run's last lines say whether the gate holds and why,
+# and the run history records the names, so a run that clears one row
+# and gains another shows both.
+
+GATE_CONSTANTS_EXPORT = os.path.join('data', 'constants_export.json')
+GATE_OBJECTS_EXPORT = os.path.join('data', 'objects_export.json')
+GATE_OBJECTS_SOURCE = 'celestial_objects.py'
+GATE_CONSTANTS_SOURCE = 'constants_new.py'
+
+
+def _read_json(path):
+    with open(path, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+
+def load_gate_path(project_dir):
+    """Read what leaves the orrery. Returns a dict:
+
+        rows      set of constants_new.py row names exported
+        objects   {key: (first_line, last_line)} of each served entry
+                  in celestial_objects.py
+        computed  exported rows that are not scored as units because
+                  they are computed from other rows (the scanner scores
+                  their inputs) -- filled in by gate_path_units()
+        problems  list of strings. Anything the scanner could not read
+                  is a problem, and a problem makes the figure UNKNOWN
+                  rather than zero.
+    """
+    gp = {'rows': set(), 'objects': {}, 'computed': [], 'unscored': [],
+          'problems': []}
+
+    cpath = os.path.join(project_dir, GATE_CONSTANTS_EXPORT)
+    try:
+        rows = _read_json(cpath).get('rows')
+        if not isinstance(rows, dict):
+            raise ValueError('it has no "rows" object')
+        gp['rows'] = set(rows)
+    except (OSError, ValueError, AttributeError) as exc:
+        gp['problems'].append('%s could not be read: %s'
+                              % (GATE_CONSTANTS_EXPORT.replace(os.sep, '/'),
+                                 exc))
+
+    opath = os.path.join(project_dir, GATE_OBJECTS_EXPORT)
+    keys = set()
+    try:
+        objs = _read_json(opath).get('objects')
+        if not isinstance(objs, dict):
+            raise ValueError('it has no "objects" object')
+        keys = set(objs)
+    except (OSError, ValueError, AttributeError) as exc:
+        gp['problems'].append('%s could not be read: %s'
+                              % (GATE_OBJECTS_EXPORT.replace(os.sep, '/'),
+                                 exc))
+
+    if keys:
+        spath = os.path.join(project_dir, GATE_OBJECTS_SOURCE)
+        found = {}
+        try:
+            with open(spath, 'rb') as f:
+                tree = ast.parse(f.read())
+            for node in ast.walk(tree):
+                if not (isinstance(node, ast.Assign) and any(
+                        getattr(t, 'id', None) == 'OBJECT_DEFINITIONS'
+                        for t in node.targets)):
+                    continue
+                for entry in getattr(node.value, 'elts', []):
+                    if not isinstance(entry, ast.Dict):
+                        continue
+                    for k, v in zip(entry.keys, entry.values):
+                        if (isinstance(k, ast.Constant) and k.value == 'key'
+                                and isinstance(v, ast.Constant)
+                                and v.value in keys):
+                            found[v.value] = (
+                                entry.lineno,
+                                getattr(entry, 'end_lineno', entry.lineno))
+        except (OSError, SyntaxError, ValueError) as exc:
+            gp['problems'].append('%s could not be read: %s'
+                                  % (GATE_OBJECTS_SOURCE, exc))
+        missing = sorted(keys - set(found))
+        if missing and not gp['problems']:
+            gp['problems'].append(
+                'served object(s) with no entry in %s: %s'
+                % (GATE_OBJECTS_SOURCE, ', '.join(missing)))
+        gp['objects'] = found
+    return gp
+
+
+def _store_expressions(project_dir):
+    """{name: is_typed_number} for top-level assignments in the store."""
+    out = {}
+    try:
+        with open(os.path.join(project_dir, GATE_CONSTANTS_SOURCE),
+                  'rb') as f:
+            tree = ast.parse(f.read())
+    except (OSError, SyntaxError, ValueError):
+        return out
+    for node in ast.iter_child_nodes(tree):
+        if (isinstance(node, ast.Assign) and len(node.targets) == 1
+                and isinstance(node.targets[0], ast.Name)):
+            typed = not any(isinstance(n, ast.Name)
+                            for n in ast.walk(node.value))
+            out[node.targets[0].id] = typed
+    return out
+
+
+def gate_path_units(units, gp, project_dir):
+    """The scored units on the gate path, and what was examined.
+
+    An exported row that is not a unit is either computed from other
+    rows (its inputs are scored where they are typed) or a blind spot.
+    A blind spot is named in gp['unscored'] and in gp['problems'], so
+    the figure cannot read as a pass while something went unexamined.
+    """
+    on = []
+    unit_rows = set()
+    for u in units:
+        if (u.file == GATE_CONSTANTS_SOURCE and u.kind in ('constant', 'dict')
+                and u.name in gp['rows']):
+            on.append(u)
+            unit_rows.add(u.name)
+        elif (u.file == GATE_OBJECTS_SOURCE and u.kind == 'string'
+              and any(a <= u.line_start <= b
+                      for a, b in gp['objects'].values())):
+            on.append(u)
+    exprs = _store_expressions(project_dir)
+    for name in sorted(gp['rows'] - unit_rows):
+        if exprs.get(name) is False:
+            gp['computed'].append(name)
+        else:
+            gp['unscored'].append(name)
+    if gp['unscored']:
+        gp['problems'].append(
+            'exported row(s) the scanner did not score: %s'
+            % ', '.join(gp['unscored']))
+    return on
+
+
+def gate_path_names(gate_units):
+    """'file::name' for each Tier-1 unit on the gate path, sorted.
+
+    A display string has no name of its own; it is named by its line,
+    which is what the audit's tables already call it.
+    """
+    names = []
+    for u in gate_units:
+        if u.score and action_tier(u.score) == 1:
+            label = u.name if u.kind != 'string' else (
+                'string@%d' % u.line_start)
+            names.append('%s::%s' % (u.file, label))
+    return sorted(names)
+
+
+def gate_path_lines(gp, gate_units, whole_tree_tier1):
+    """The console block that ends a scanner run. Names every gate-path
+    Tier-1 finding, and says what was examined to reach the figure."""
+    bar = "=" * 70
+    names = gate_path_names(gate_units)
+    out = [bar]
+    if gp['problems']:
+        out.append("  GATE PATH: UNKNOWN -- the scanner could not read what")
+        out.append("  leaves the orrery, so it will not print a number:")
+        for p in gp['problems']:
+            out.append("    - %s" % p)
+    elif names:
+        out.append("  GATE PATH: %d TIER-1 -- the push gate FAILS on:"
+                   % len(names))
+        for n in names:
+            out.append("    %s" % n.replace('::', '  '))
+    else:
+        out.append("  GATE PATH: 0 TIER-1 -- the push gate holds")
+    n_rows = sum(1 for u in gate_units if u.file == GATE_CONSTANTS_SOURCE)
+    n_str = len(gate_units) - n_rows
+    out.append("")
+    out.append("  Examined: %d of %d exported rows (constants_export.json),"
+               % (n_rows, len(gp['rows'])))
+    out.append("  %d more computed from other rows, whose inputs are scored;"
+               % len(gp['computed']))
+    out.append("  %d display string(s) in %d served object(s)"
+               " (objects_export.json)." % (n_str, len(gp['objects'])))
+    out.append("")
+    out.append("  Whole tree: %d Tier-1. Informational; the gate is the"
+               % whole_tree_tier1)
+    out.append("  GATE PATH line above. Nothing here sets the exit code.")
+    out.append(bar)
+    return out
 
 
 # ============================================================
@@ -2846,7 +3265,9 @@ def generate_report(units, consistent_dups, inconsistencies,
                     scope_declared=None, shadowed=None,
                     deep_citations=None, shadow_constants=None,
                     cross_check_issues=None, started=None,
-                    orphan_annotations=None):
+                    orphan_annotations=None, gate_path=None,
+                    gate_units=None, declared_rows=None,
+                    declared_without_reason=None):
     """Write PROVENANCE_AUDIT.md."""
     now = datetime.now().strftime('%B %d, %Y')
 
@@ -2880,12 +3301,23 @@ def generate_report(units, consistent_dups, inconsistencies,
         if action_tier(u.score) == 1:
             tier1_by_file[u.file] += 1
 
+    # L-414: the gate-path Tier-1 findings BY NAME go into the record,
+    # so the next run's delta can say which entered and which left --
+    # a count alone cannot tell "cleared one, gained one" from "no
+    # change". None when the gate path could not be read.
+    gp = gate_path or {'rows': set(), 'objects': {}, 'computed': [],
+                       'unscored': [],
+                       'problems': ['the scanner was given no gate path']}
+    gate_units = gate_units or []
+    gate_names = (None if gp['problems']
+                  else gate_path_names(gate_units))
+
     history = provenance_history.load_history(project_dir)
     run_record = provenance_history.make_run_record(
         started or provenance_history.utc_now(),
         provenance_history.utc_now(), project_dir,
         files_scanned, len(scored), tier_counts, domain_counts,
-        tier1_by_file)
+        tier1_by_file, gate_tier1=gate_names)
 
     # A copy for the table, so `history` still holds the PREVIOUS
     # state when the console delta is computed further down.
@@ -2994,6 +3426,87 @@ def generate_report(units, consistent_dups, inconsistencies,
     out.append("strings, or known scanner limitations. No action required unless a new")
     out.append("uncited entry appears. See Accepted Residuals block below for details.")
     out.append("")
+    out.append("---")
+    out.append("")
+
+    # ---- Gate path (L-414) ----
+    out.append("## Gate Path: Tier-1 on What Leaves the Orrery")
+    out.append("")
+    out.append("The push gate is Tier-1 = 0 on the active build path, and "
+               "it binds at export. This section reads the path from "
+               "`data/constants_export.json` (the constants_new.py rows "
+               "the website is served) and `data/objects_export.json` "
+               "(the celestial_objects.py entries it serves), and names "
+               "every Tier-1 finding on it.")
+    out.append("")
+    gate_names = gate_path_names(gate_units)
+    if gp['problems']:
+        out.append("**GATE PATH: UNKNOWN.** The scanner could not read "
+                   "what leaves the orrery, so it prints no number:")
+        out.append("")
+        for p in gp['problems']:
+            out.append("- %s" % p)
+    elif gate_names:
+        out.append("**GATE PATH: %d TIER-1 -- the push gate fails on:**"
+                   % len(gate_names))
+        out.append("")
+        out.append("| File | Finding |")
+        out.append("|------|---------|")
+        for n in gate_names:
+            gfile, gname = n.split('::', 1)
+            out.append("| `%s` | `%s` |" % (gfile, gname))
+    else:
+        out.append("**GATE PATH: 0 TIER-1 -- the push gate holds.**")
+    out.append("")
+    n_rows = sum(1 for u in gate_units if u.file == GATE_CONSTANTS_SOURCE)
+    out.append("Examined: %d of %d exported rows; %d more are computed "
+               "from other rows, whose inputs are scored where they are "
+               "typed; %d display string(s) in %d served object(s). The "
+               "whole tree holds %d Tier-1 findings, most of them off "
+               "this path."
+               % (n_rows, len(gp['rows']), len(gp['computed']),
+                  len(gate_units) - n_rows, len(gp['objects']),
+                  tier_counts.get(1, 0)))
+    out.append("")
+    if gp['computed']:
+        out.append("Exported rows computed from other rows (%d): "
+                   % len(gp['computed'])
+                   + ", ".join("`%s`" % n for n in gp['computed']) + ".")
+        out.append("")
+    out.append("---")
+    out.append("")
+
+    # ---- Declared rows (L-414) ----
+    declared_rows = declared_rows or []
+    declared_without_reason = declared_without_reason or []
+    out.append("## Declared Rows (%d)" % len(declared_rows))
+    out.append("")
+    out.append("Rows whose own comment block says `# Status: declared` "
+               "and gives the reason, on a `# Declared:` line or after "
+               "`--` on the Status line. A declared value is a choice "
+               "with its reason written down, not a measurement missing "
+               "its source, so it is not scored and never counts as "
+               "Tier-1. Listed by name so the set stays visible; "
+               "`declared pending` rows are backlog and carry a ledger "
+               "handle (provenance-discipline, Measured Is the Goal).")
+    out.append("")
+    if declared_rows:
+        out.append("| File | Line | Row | Status | Reason on |")
+        out.append("|------|-----:|-----|--------|-----------|")
+        for entry in sorted(declared_rows):
+            dfile, dline, dname, dstatus, dwhere = entry
+            dstatus = dstatus.lstrip('#').strip().replace('|', r'\|')
+            out.append("| `%s` | %d | `%s` | %s | %s |"
+                       % (dfile, dline, dname, dstatus[:90], dwhere))
+        out.append("")
+    if declared_without_reason:
+        out.append("**Declared with no reason (%d)** -- scored as any "
+                   "other row until a reason is written:"
+                   % len(declared_without_reason))
+        out.append("")
+        for dfile, dline, dname, dstatus in sorted(declared_without_reason):
+            out.append("- `%s:%d` `%s`" % (dfile, dline, dname))
+        out.append("")
     out.append("---")
     out.append("")
 
@@ -3437,22 +3950,16 @@ def generate_report(units, consistent_dups, inconsistencies,
     # (HANDOFF_phase1_1d_to_1f.md at HEAD describes a deferred exit-gate
     # flip. That is the superseded Fable design; do not revive it from
     # that document.)
-    tier1 = tier_counts.get(1, 0)
-    if tier1:
-        bar = "=" * 70
-        print()
-        print(bar)
-        print(f"  {tier1} TIER-1 FINDINGS IN THE SCANNED TREE")
-        print()
-        print("  Informational only. This does not affect the exit code,")
-        print("  and it is NOT the push gate. The gate is Tier-1 = 0 on")
-        print("  the ACTIVE BUILD PATH (provenance-discipline 2.3,")
-        print("  L-184). This line does not compute that subset -- it")
-        print("  counts every Tier-1 finding anywhere in the tree, most")
-        print("  of them off the path the gate judges. Read")
-        print("  PROVENANCE_AUDIT.md for the build-path findings.")
-        print("  The call is yours.")
-        print(bar)
+    #
+    # L-414: the banner now leads with the GATE PATH figure, by name,
+    # and prints on every run, a passing one included -- "0 TIER-1"
+    # with what was examined is evidence; silence is not. The old
+    # banner printed only when the whole tree had Tier-1 findings, said
+    # it did not compute the gate path, and named nothing. The
+    # maintenance run's verdict hint reads the GATE PATH line.
+    print()
+    for _line in gate_path_lines(gp, gate_units, tier_counts.get(1, 0)):
+        print(_line)
 
     if inconsistencies:
         print()
