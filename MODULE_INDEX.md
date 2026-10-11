@@ -12,7 +12,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 150  
-**Total Lines of Code (non-blank):** 118,118  
+**Total Lines of Code (non-blank):** 118,202  
 **Total Public Functions/Classes:** 1,356
 
 ## Classification Coverage
@@ -21,7 +21,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 - `earth_pole_live_check.py`
 - `patch_L395_5_horizons_name_and_encke_20261010.py`
-- `patch_L421_6_drawings_export_20261011.py`
+- `patch_L421_9_close_20261011.py`
 - `test_drawings_export.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
@@ -32,7 +32,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 **Undetermined domain (2).** No valid `Domain:` tag.
 
 - `patch_L395_5_horizons_name_and_encke_20261010.py`
-- `patch_L421_6_drawings_export_20261011.py`
+- `patch_L421_9_close_20261011.py`
 
 
 ---
@@ -45,7 +45,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,938 lines) |
 | `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,594 lines) |
-| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (2,234 lines) |
+| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (2,267 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
 ---
@@ -222,7 +222,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (129 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (979 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (980 lines) |
 | `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (649 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (427 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,535 lines) |
@@ -254,7 +254,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
 | `patch_L395_5_horizons_name_and_encke_20261010.py` | - the orrery half of the Horizons check (L-395): JPL's exact name on each keyed entry, Halley keyed, Encke's own entry, and the export that carries them. (371 lines) |
-| `patch_L421_6_drawings_export_20261011.py` | - L-421 (the typed facts), the inner Oort cloud, the website half, step 1 of 2: the orrery writes the Hills cloud's dots to a file the website will pull and draw (Tony's option A, 2026-10-11). (124 lines) |
+| `patch_L421_9_close_20261011.py` | - L-421 (the typed facts), the close of the inner Oort cloud's website half, with L-408 (the galactic plane in the Sun room). (174 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (173 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |

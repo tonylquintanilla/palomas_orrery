@@ -1,25 +1,25 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 11, 2026, after your notes in the run record.
-- Written at orrery 6fc3648 and gallery fd17abf.
+Last updated: October 11, 2026, at the inner Oort cloud's website close.
+- Written at orrery 1bbd9fe and gallery e5a3d13.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Your notes in the run record are in the ledger, each on its item.
->   Your order after the Sun and Earth rooms: L-433 (the road after).
-> - Two checks had no dashboard button; both have one now.
-> - Objects that fall to the default goldenrod are listed: L-432
->   (default colours). Encke first.
-> - Orbital periods are written up: L-431 (orbital periods).
+> - The website draws the inner Oort cloud as the orrery does: the
+>   Hills cloud from the orrery's own dots. L-421 (the typed facts).
+> - The Galactic Plane row is in the Sun room: L-408 (the galactic
+>   plane), closed on your look.
+> - One check failed on Windows only; its fix waits for you.
 >
 > **Do next:** *the orbital periods design talk, then its build, as you
 > asked: `DESIGN_L431_orbital_periods_20261011.md`, section 7.*
 >
 > **Needs you now:**
-> - *Orrery: run patch_L431_2, then the maintenance run (22 of 22),
->   push.*
+> - *Gallery: patch_L421_8, maintenance run, push. Orrery:
+>   patch_L421_9, maintenance run, push. Then upload
+>   ledger-and-session-records (1.20) and the instructions (v3.91).*
 > - *Decide L-425 (citation location checks): which checks to build,
 >   on the run's results (on L-425 and in the handoff).*
 
@@ -31,8 +31,8 @@ Last updated: October 11, 2026, after your notes in the run record.
                feeds the website and nothing is typed twice.
   5.   [NOW]   *Earth's old items are finished, in your order.* The
                website patch and Earth's typed facts are live.
-  6.   [next]  The typed facts: the inner Oort cloud is drawn in the
-               orrery; the website next, then the check.
+  6.   [next]  The typed facts: the inner Oort cloud is drawn on the
+               website too. Left: the check. << moved this session
   6a.  [next]  *Orbital periods from JPL for every body, printed by
                their errors: design talk first.*
   7.   [next]  The Sun's numbers get the checking Earth's got.
@@ -45,7 +45,7 @@ Last updated: October 11, 2026, after your notes in the run record.
  11.   [later] The rest of the orrery's objects come to the website.
  12.   [later] Encounters: comets and spacecraft at the dates that matter.
  13.   [later] The planets get their details, Jupiter and Saturn first;
-               you lean to the inner planets (L-433). << new this session
+               you lean to the inner planets (L-433).
  14.   [later] The Earth System layers; the gallery's cards meanwhile.
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
@@ -53,6 +53,8 @@ Last updated: October 11, 2026, after your notes in the run record.
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
+- Scattered dots are placed by the orrery and stored for the website;
+  a shape that is a formula is worked out on each side. (Oct 11)
 - Orbital periods: JPL's own (PR), for every body that has one; the
   hover shows it, not the typed table; digits by the errors. (Oct 10)
 - Comets listed by first apparition, oldest first. A colour is a
@@ -65,11 +67,8 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - The lobby opens on the Solar System room, then the subjects. Every
   room's list: Go To in the middle, then the room's button. (Oct 10)
 - Website names: Halley and Encke; JPL's "1P/Halley" stays in the list. (Oct 10)
-- A row's sources come only from its own comment block. (Oct 9)
 - Small fixes owed to a skill ride the version a session is already
   making; a change to a checker gets its own session. (Oct 8)
-- No colour or other name that only one system knows. The panels'
-  grey is one name, gray90. (Oct 6)
 - OneDrive: no pause before a build; the retry is sufficient, and the
   swap log shows any retry. Empty "solar-system (N)" folders are
   harmless; delete by hand. (Oct 8, Oct 10)
@@ -77,9 +76,9 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261011T134230Z, ok, no retry.
+- Last cache build: 20261011T183843Z, ok, no retry.
 - Tier-1 on the gate path: 0, by name, in PROVENANCE_AUDIT.md at
-  6fc3648 (your run of 2026-10-11). Whole tree: 292.
+  1bbd9fe (your run of 2026-10-11). Whole tree: 292.
 - This page's date and the ledger's newest stamp: both Oct 11. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
@@ -97,8 +96,9 @@ At the next design talk:
 - Moving the highlighted row to the top of the list.
 - GO's arrow, only if the text box stays centred.
 - Earth's design talks, the belts' shape first.
-- The tide's cone and brightness on the phone: L-408 (the galactic
-  plane on the phone). The rest is ruled; it waits only on the build.
+- The tide's cone and brightness on the phone: L-412 (the Sun's list),
+  from L-408 (the galactic plane), now closed.
+- Stored drawings for the other dot clouds: L-434 (stored drawings).
 
 Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows.
@@ -107,7 +107,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`. Open for build: L-421 (the
-  typed facts), its website side.
+  typed facts), its check.
 - Orbital periods: design
   `documentation/DESIGN_L431_orbital_periods_20261011.md`
 - Your notes of Oct 10: `WHERE_WE_ARE_10-10-26_2019_run_record.md`
@@ -115,8 +115,8 @@ Not urgent, in your order:
   `documentation/MANIFEST_L421_typed_facts_20261006.md`; record
   `documentation/HANDOFF_L421_typed_facts_20261008.md`
 - The inner Oort cloud: design
-  `documentation/DESIGN_L421_inner_oort_tilt_20261009.md`; record
-  `documentation/HANDOFF_L421_oort_orrery_20261010.md`
+  `documentation/DESIGN_L421_inner_oort_tilt_20261009.md`; records
+  `HANDOFF_L421_oort_orrery_20261010.md`, `..._gallery_20261011.md`
 - The Horizons check: design
   `documentation/DESIGN_L395_horizons_check_20261007.md`; record
   `documentation/HANDOFF_L395_horizons_check_build_20261010.md`

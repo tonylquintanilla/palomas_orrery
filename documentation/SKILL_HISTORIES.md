@@ -706,6 +706,20 @@ page, the handoffs, the ledger) only at the lines it edits, and a
 rewrite of the page carries his notes into the handoff first. The
 rule had lived only in one patch's code and was broken the same day.
 
+The skill's v1.17 entry, moved here word for word on 2026-10-11 when
+v1.20 made a fourth entry (L-421):
+Earlier: 1.17 | 2026-10-07, with Anthropic's Claude Fable 5.1, at
+palomas_orrery @ 8653ef1b. v1.17 (L-422) carries four of Tony's rulings
+from one session. Under Where We Are -- Tony's page: the page's new
+shape (each fact once; the box is the page; Settled; Signals), a
+run-record zone at its end that no patch edits and that the close
+reads from his timestamped copy, patches editing the page by section,
+every ledger handle on the page carrying a short label, and the check
+to build (date, and a cap of 130 lines above the marker). Under Ledger
+Block Format: an item inside an ordered list needs no RICE score
+(L-412). Under Where a File Goes: which repository a record goes to,
+and that documentation/ stays flat.
+
 ## gallery-cache-builder
 
 v1.4 adds Recovery from a failed swap: discard and re-run -- Tony's

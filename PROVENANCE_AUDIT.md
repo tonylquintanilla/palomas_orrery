@@ -2,9 +2,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: October 11, 2026
-Files scanned: 149
-Total findings: 1094
-Constants: 173 | Dicts: 44 | Display strings: 877
+Files scanned: 150
+Total findings: 1096
+Constants: 174 | Dicts: 45 | Display strings: 877
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,14 +20,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|---:|---:|---:|--------:|
+| 20261011T192114Z | `1bbd9fe` | 150 | 1096 | 292 | 674 | 125 | 5 | 0 |
+| 20261011T184520Z | `1bbd9fe` | 149 | 1094 | 292 | 672 | 125 | 5 | 0 |
 | 20261011T182057Z | `84d329a` | 149 | 1094 | 292 | 672 | 125 | 5 | 0 |
 | 20261011T141323Z | `6fc3648` | 147 | 1093 | 292 | 672 | 124 | 5 | 0 |
 | 20261011T134721Z | `9f15478` | 148 | 1094 | 292 | 673 | 124 | 5 | 0 |
 | 20261011T012535Z | `32619f8` | 149 | 1094 | 292 | 673 | 124 | 5 | 0 |
-| 20261010T213809Z | `ca5bbe1` | 144 | 1081 | 293 | 659 | 124 | 5 | 0 |
-| 20261010T183950Z | `a6678b0` | 144 | 1081 | 293 | 659 | 124 | 5 | 0 |
 
-Change since the previous run: total +1, Tier-1 +0.
+Change since the previous run: total +2, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -61,7 +61,7 @@ No file's Tier-1 count rose.
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 292 |
-| 2 | 10-15 | REVIEW | 672 |
+| 2 | 10-15 | REVIEW | 674 |
 | 3 | 5-9 | LOW PRIORITY | 125 |
 | 4 | 1-4 | LOWEST PRIORITY | 5 |
 
@@ -184,6 +184,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `energy_imbalance.py` | earth_science | 1 | 1 | 0 | 0 | 2 |
 | `plot_data_report_widget.py` | utilities | 2 | 0 | 0 | 0 | 2 |
 | `sgr_a_visualization_animation.py` | orrery | 1 | 0 | 1 | 0 | 2 |
+| `patch_L421_9_close_20261011.py` | orrery | 0 | 2 | 0 | 0 | 2 |
 | `close_approach_data.py` | orrery | 0 | 1 | 1 | 0 | 2 |
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `worksheet_request_builder.py` | orrery | 0 | 0 | 2 | 0 | 2 |
@@ -218,7 +219,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 51 | 129 | 556 | 72 | 2 | 759 |
+| Orrery (solar system + orbital mechanics) | 52 | 129 | 558 | 72 | 2 | 761 |
 | Earth System | 13 | 149 | 75 | 2 | 0 | 226 |
 | Stars (stellar neighborhood) | 11 | 12 | 41 | 6 | 3 | 62 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 45 | 0 | 45 |
@@ -235,6 +236,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 - `export_objects.py`
 - `hills_cloud_sampler.py`
 - `orrery_maintenance_run.py`
+- `patch_L421_9_close_20261011.py`
 - `test_dimensions.py`
 - `worksheet_checker.py`
 - `worksheet_key_aliases.py`
@@ -1437,6 +1439,13 @@ is planned for a future session.
 | 2341 | string | display string @ line 2341 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2416 | string | display string @ line 2416 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
+### patch_L421_9_close_20261011.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 61 | dict | NEW_FILES[...] | (1 entry) | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | UNDETERMINED -- could not be classified |
+| 63 | constant | PLANNED | 434 | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | UNDETERMINED -- could not be classified |
+
 ### planet9_visualization_shells.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
@@ -1926,10 +1935,10 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 210 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 211 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 1406 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 1537 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 215 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 216 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 1439 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 1570 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### planet_visualization_utilities.py
 

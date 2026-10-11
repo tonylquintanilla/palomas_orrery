@@ -178,6 +178,11 @@ October 11, 2026 with Anthropic's Claude Opus 5.5 (L-421, the website
 half): Drawings Export under the generators and Test Drawings Export
 under the checkers, in the same patch as the two scripts, so the new
 check has its button from the start.
+October 11, 2026 with Anthropic's Claude Opus 5.5 (L-421, the close, on
+Tony's note in his run record: "please add this and any other new checks
+to the dashboard"): Drawings Check and Drawings Pull under the gallery's
+checks and data, in alphabetical place, for tools/check_drawings.py and
+tools/pull_drawings.py; the offline runner's description names both.
 """
 
 import os
@@ -383,12 +388,13 @@ LAUNCH_GROUPS = {
         "The gallery repo's own runner (L-236), before you commit. "
         "Regenerates the module atlas, pulls the orrery's constants "
         "export at its HEAD SHA and mirrors the served numbers into "
-        "data/objects_config.json, then runs every checker and prints "
+        "data/objects_config.json, pulls the orrery's stored drawings, "
+        "then runs every checker and prints "
         "one line each. Python: the cache builder suite, pole of date, "
         "the mirror suite, the store writer and store editor suites, "
         "the config mirror check, the Horizons check suite, Horizons "
-        "confirmations, the pointer join, cache in step, the "
-        "collapsed-features sweep, the "
+        "confirmations, the pointer join, cache in step, the drawings "
+        "check, the collapsed-features sweep, the "
         "guest book updater, the Daily Run's steps, the artifact-1 "
         "assembler pin, and cache siblings (report only). Node: feature "
         "renderers, page framing, Sun shells, Earth scene geometry, "
@@ -535,6 +541,33 @@ LAUNCH_GROUPS = {
         GALLERY_REPO_DIR,
         True,
         ["Display figures"],
+        True),
+        ("Drawings Check",
+        os.path.join("tools", "check_drawings.py"),
+        "Every stored drawing the config names -- today the Hills cloud's "
+        "3,600 dots, placed by the orrery -- is pulled into data/drawings/, "
+        "served byte for byte in data/solar-system/drawings/, and tilted as "
+        "its file records: the plane through the served dots is fitted "
+        "again here, by this check's own arithmetic. Three faults are "
+        "planted first and each must be caught. Red right after a pull that "
+        "moved the dots, until the cache builder runs (L-421). GATES the "
+        "gallery runner.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Drawings Pull",
+        os.path.join("tools", "pull_drawings.py"),
+        "Fetches each stored drawing the config names from the orrery's "
+        "data/drawings/ at the orrery's HEAD SHA and writes it, with that "
+        "SHA, into the gallery's data/drawings/. This is how the Hills "
+        "cloud's dots reach the website: the orrery places them and the "
+        "website draws them as given (L-421, Tony's option A). The cache "
+        "builder then serves them. With no network it reports N-A and "
+        "leaves the previous pull alone.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
         True),
         ("Earth Scene Geometry",
         os.path.join("documentation", "run_offline_check.py"),

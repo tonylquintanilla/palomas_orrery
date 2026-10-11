@@ -344,6 +344,10 @@ Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5
 (Tony's notes in his run record of 2026-10-10 and 11: L-432 and L-433
 opened; L-395, L-408, L-410, L-416, L-424, L-431, L-136 and L-351
 updated; two dashboard buttons), built on 6fc36483.
+Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5
+(L-421's website half, built and looked at; L-408 closed on Tony's look;
+L-434 opened, stored drawings for the other dot-cloud shells; L-239,
+L-351, L-363, L-412 and L-416 updated), built on 1bbd9fe1.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -561,7 +565,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*240 live items; 224 need attention (`!`); 167 RICE-scored; 188 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*240 live items; 224 need attention (`!`); 167 RICE-scored; 189 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -595,7 +599,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
 | ! | L-210 | Pilot citation findings -- four rows in constants_new.py | OPEN | 3.6 | 2026-08-21 |
 | ! | L-215 | Ledger cleanup by topic, not by age | OPEN | 3.6 | 2026-08-19 |
-| ! | L-239 | Seed the three Oort builders so a render is reproducible | OPEN | 3.6 | 2026-08-25 |
+| ! | L-239 | Seed the three Oort builders so a render is reproducible | OPEN | 3.6 | 2026-10-11 |
 | ! | L-285 | index.html adopts the shared navigation cluster; the fake-wheel dolly retires | OPEN | 3.6 | 2026-09-04 |
 | ! | L-324 | One assignment per line in constants_new.py | OPEN | 3.6 | 2026-09-12 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-10-04 |
@@ -668,7 +672,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-359 | Served text beside a served number can go stale where no tool may edit it (gallery) | OPEN | -- | 2026-09-22 |
 | ! | L-360 | The hover budget measures recorded payloads, so it cannot see a line added by newly served data (checks) | OPEN | -- | 2026-10-08 |
 | ! | L-361 | An epoch typed in the page, with no store row (gallery, store) | OPEN | -- | 2026-09-22 |
-| ! | L-363 | The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits) | OPEN | -- | 2026-10-09 |
+| ! | L-363 | The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits) | OPEN | -- | 2026-10-11 |
 | ! | L-364 | A comet's own trust window can exclude today while the served window passes the scene (gallery, trust) | OPEN | -- | 2026-09-29 |
 | ! | L-365 | The assembler leaves out a body it cannot draw, without a warning (gallery, assembler) | OPEN | -- | 2026-09-29 |
 | ! | L-366 | An orbit's info marker describes an arbitrary point on the orbit (gallery, assembler) | OPEN | -- | 2026-09-26 |
@@ -700,10 +704,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
-| ! | L-408 | A Galactic Plane toggle in the Sun room (gallery, the Sun's slice) | OPEN | -- | 2026-10-11 |
 | ! | L-410 | Fuzzy boundaries for edges known only as ranges, the outer corona first (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-11 |
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
-| ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-08 |
+| ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-11 |
 | ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-06 |
 | ! | L-421 | Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words) | OPEN | -- | 2026-10-11 |
 | ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-08 |
@@ -716,6 +719,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-431 | Orbital periods from JPL, for every body, printed by their errors (orrery, provenance) | OPEN | -- | 2026-10-11 |
 | ! | L-432 | Objects drawn in the default goldenrod (orrery, colours) | OPEN | -- | 2026-10-11 |
 | ! | L-433 | The road after the Sun and Earth rooms, in Tony's words (planning) | OPEN | -- | 2026-10-11 |
+| ! | L-434 | Stored drawings for the other dot-cloud shells (orrery + gallery) | OPEN | -- | 2026-10-11 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1041,6 +1045,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-405 | Skill text owed from the editor fix and the drawer build (skills) | DONE | -- | 2026-10-02 |
 |  | L-406 | The galactic tide drawn in the galaxy's plane (orrery + gallery, the Sun's slice) | DONE | -- | 2026-10-04 |
 |  | L-407 | A skill's header is checked as YAML (orrery, skills) | DONE | -- | 2026-10-04 |
+|  | L-408 | A Galactic Plane toggle in the Sun room (gallery, the Sun's slice) | DONE | -- | 2026-10-11 |
 |  | L-409 | The licenses: the orrery's recognized by GitHub, the website's written (orrery, gallery) | DONE | -- | 2026-10-04 |
 |  | L-414 | The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling) | DONE | -- | 2026-10-10 |
 |  | L-415 | A patch writes LF and reports: safe-file-editing 1.12 (skills) | DONE | -- | 2026-10-06 |
@@ -1079,88 +1084,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
-
-#### [L-408] A Galactic Plane toggle in the Sun room (gallery, the Sun's slice)
-<!-- L:408 status:OPEN upd:2026-10-11 section:A flag: rice: -->
-- **Asked 2026-10-03** by Tony, looking for the galactic tide's X on
-  the phone and not finding it at the angle he had: "Could we toggle on
-  the galactic plane and axis?" Claude agreed it earns its place: it
-  makes the tide's tilt legible at a glance, and teaches on its own
-  that the solar system is tipped steeply against the galaxy.
-- **The design Tony confirmed ("Yes please"):** one new row in the
-  Oort Cloud group, "Galactic Plane", off by default; a faint ring in
-  the galaxy's plane at the tide's outer edge (`OUTER_OORT_CLOUD_AU`,
-  100,000 AU) and a line along the galactic pole axis through the Sun;
-  no new numbers -- it reads the same two pole rows the tide reads
-  (`GALACTIC_NORTH_POLE_RA_J2000_DEG`, `_DEC_J2000_DEG`), so the ring
-  and the tide cannot disagree. Left out for now: the direction to the
-  galaxy's centre, which needs one more sourced number.
-- **Words approved 2026-10-03** (Tony: "Approved"), to be served as
-  written:
-  - Row name: "Galactic Plane"
-  - Description: "The plane of the Milky Way's disk, drawn as a ring
-    around the Sun, with a line along the galaxy's north-south axis."
-  - Info panel: "The Milky Way is a flat disk of stars, gas and dust,
-    and the Sun lies inside it. Seen from Earth, that disk is the pale
-    band of the Milky Way across the night sky. The ring shows the
-    disk's plane, and the line through the Sun points to the galaxy's
-    north pole, in the constellation Coma Berenices. The planets'
-    orbits are tipped steeply against it: the two planes meet at
-    [ANGLE] degrees. That tilt is why the galactic tide looks tipped
-    against the Hills cloud, which lies close to the planets' plane."
-  - Note: "The ring is drawn at the outer edge of the Oort cloud, where
-    the tide is drawn, to show the plane's direction. The galaxy's disk
-    reaches far beyond it."
-  - Link: https://en.wikipedia.org/wiki/Galactic_coordinate_system,
-    shown as "Read more at Wikipedia". A search on 2026-10-03 found no
-    NASA page specific to the galactic plane, so Wikipedia applies by
-    the L-265 rule. The article's table also places the north galactic
-    pole in Coma Berenices, which backs that sentence.
-  - [ANGLE] is NOT typed (a hover string that types a number is a
-    store). The renderer works out the angle between the galactic plane
-    and the ecliptic from the two pole rows and the frame angle the
-    tide already uses, and prints it to the nearest degree. The rows
-    give 60.19, so it prints 60; Portegies Zwart et al. 2021 (A&A 652,
-    A144, sec. 3.2) give 60 as the cross-check.
-- **2026-10-04:** not built with L-371, as the Gap had planned; it is
-  the Sun slice's eighth item (L-412). It also carries the look at the
-  galactic tide's X that L-406 handed over when it closed: turn until
-  the ring is edge-on.
-- **2026-10-06: the orrery has them now.** L-420 draws the galactic
-  plane, its poles NGP and SGP, and Sagittarius A* in the orrery's
-  Celestial Grid and Star Background, and, after Tony's look, a
-  brighter tide with a cone where its strength peaks. Tony: "galactic
-  plane and Sag A* are shown in celestial coordinates, but only in the
-  orrery, not in phone. so that's a design decision." The orrery half
-  of the toggle question below is answered; the tide's look is being
-  made there (L-420).
-- **2026-10-07:** Tony, on the phone's question: "awaits the design
-  talk."
-- **2026-10-09, the design talk** (record
-  `documentation/DESIGN_L421_inner_oort_tilt_20261009.md`, sections 6
-  and 10). Tony: "On the galactic plane ring and sentence rewrite, yes,
-  and include the poles and *SagA location." So the phone draws the
-  ring, the pole line, both poles and the direction of Sgr A*, in the
-  same gallery build as the inner Oort cloud (L-421). Sgr A* needs no
-  new number: L-420's rows answer it. The approved sentence "That tilt
-  is why the galactic tide looks tipped against the Hills cloud, which
-  lies close to the planets' plane" is wrong once the Hills cloud is
-  tilted; its rewrite, the description extended for the poles and Sgr
-  A*, the note's added sentence and the markers' words, all in the
-  record's section 10, Tony confirmed ("Yes", 17:07). Sgr A*'s marker
-  leaves out "black hole" until a source for it is read. The link
-  stays Wikipedia, "Galactic coordinate system".
-- **2026-10-10:** the orrery side of the inner Oort cloud is built
-  (L-421); this rides the gallery session that follows it.
-- **Tony, 2026-10-10, in his run record** (`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md` at 6fc3648), beside "awaits the
-  design talk": "yes. it awaited only for implementation not in
-  principle."
-**Gap:** the gallery build, with the inner Oort cloud's gallery side
-(L-421), in the words confirmed 2026-10-09; then Tony's look on the
-phone. The tide's cone and brightness on the phone were not part of
-the 2026-10-09 ruling and stay a question.
-**Ref:** L-406, L-265, L-420, L-421; gallery `gallery/feature_renderers.js`,
-`data/objects_config.json`.
 
 
 #### [L-410] Fuzzy boundaries for edges known only as ranges, the outer corona first (orrery + gallery, the Sun's slice)
@@ -1364,21 +1287,99 @@ gallery `data/objects_config.json`; L-228, L-371.
   outside; the hovers): each marked correct. Asked whether
   `hills_cloud_sampler.py` is used once: no, it draws the cloud every
   time the box is ticked; only the patches are one-time.
-**Gap:** the orrery side is built and looked at. Still open: the gallery side (the mirror,
-the renderers, the served words with the changed clause, the cache
-rebuild, the phone look), with L-408; the survey as a gating check in
-the gallery run, shown failing on a planted typed sentence first; and
-whether each served number's citation in `data/objects_config.json`
-agrees with its row's in `constants_new.py`. The L-363 `_declared`
-"1.1 times" fix is still owed to the gallery session. The orrery's
-other uncited Oort lines are L-430.
+- **2026-10-11, the website half, built and live.** Tony chose how the
+  website gets the dots, from three ways put to him: "A" -- the orrery
+  places them and the website draws them as given, rather than a copy
+  of the sampler in the gallery (B) or a second one in JavaScript (C).
+  Asked whether the approach suits other shells: yes for scattered-dot
+  shapes, no for formula shapes; "Confirmed as recommended", with the
+  folder `data/drawings/` in both repositories and L-434 for the rest.
+  - Orrery, `patch_L421_6_drawings_export_20261011.py`, pushed at
+    1bbd9fe1: `drawn_hills_cloud()` holds the drawing's settings once
+    (600 orbits of 6 dots, seed 421), so every plot is the same cloud
+    (L-239); `export_drawings.py` writes `data/drawings/hills_cloud.json`
+    (the ninth generator) and `test_drawings_export.py` checks it, three
+    faults planted first (the 23rd gating checker); two dashboard
+    buttons.
+  - Gallery, `patch_L421_7_oort_gallery_20261011.py`, pushed at
+    e5a3d13f: the Hills cloud drawn from the served dots ("Hills Cloud
+    (tilted disk)", shape `served_dots`), its hover, description, about
+    and note in Tony's confirmed words with {tilt}, {near} and {far}
+    filled from rows; the clumps and the tide from 10,000 au, full by
+    20,000; the Inner Oort Cloud sphere's note names the band; L-408's
+    Galactic Plane; `HILLS_CAVEAT` and the torus gone;
+    `tools/pull_drawings.py`, `tools/check_drawings.py` (gating) and the
+    builder's `serve_drawings()`; L-363's "1.2 times".
+  - The changed clause, "picked where the model's orbits lie (its Fig.
+    3)": Tony, "correct".
+  - Measured before delivery: the drawn cloud's plane 30.9 degrees from
+    the ecliptic, fitted twice by separate arithmetic (the paper: about
+    30). The typed-facts survey's method of 2026-10-06, run by hand on
+    the Sun room before and after: one typed fact about nature before
+    (the Hills caveat's "as the inner cloud is thought to be"), none
+    after; every typed line left is about the picture.
+- **Tony's runs and look, 2026-10-11** (`documentation/WHERE_WE_ARE_10-11-26_1311_run_record.md`): the orrery, "23 of 23
+  gating checkers passed", gate path 0; the gallery's Daily Run, 26 of
+  27. The one red was the cache builder suite's new check, "every named
+  drawing served byte for byte": the suite wrote its stand-in drawing
+  as text, which Windows writes CRLF, and the builder serves LF, as it
+  should. Gallery `patch_L421_8_suite_line_endings_20261011.py` writes
+  it as bytes and adds a check that a CRLF drawing is served LF (234
+  checks). The phone, all four looks "correct": the tilted disk with
+  its arms, the text box's three distances and "about 30 degrees", the
+  clumps and the tide thin inside the sphere, the Galactic Plane edge-on
+  with its poles and "60 degrees". Tony: "beautiful. thanks."
+**Gap:** the website side is built and looked at. Still open: part 2,
+the survey as a gating check in the gallery run, shown failing on a
+planted typed sentence first (its method, run by hand on 2026-10-11, is
+in the website half's build record); part 3, whether each served
+number's citation in `data/objects_config.json` agrees with its row's
+in `constants_new.py`. The orrery's other uncited Oort lines are L-430;
+the other dot-cloud shells, L-434.
 **Ref:** L-413; L-349 (`flux_peak_of`, the first case); L-322 (the
 IGRF epoch, a class); L-408; L-430;
 `documentation/DESIGN_L421_inner_oort_tilt_20261009.md`,
-`documentation/HANDOFF_L421_oort_orrery_20261010.md`;
-`hills_cloud_sampler.py`; gallery `gallery/feature_renderers.js`,
+`documentation/HANDOFF_L421_oort_orrery_20261010.md`,
+`documentation/HANDOFF_L421_oort_gallery_20261011.md`;
+`hills_cloud_sampler.py`, `export_drawings.py`; gallery
+`tools/pull_drawings.py`, `tools/check_drawings.py`,
+`gallery/feature_renderers.js`,
 `gallery/earth_geometry.js`, `data/objects_config.json`;
 skills/interactive-exhibit/SKILL.md.
+
+#### [L-434] Stored drawings for the other dot-cloud shells (orrery + gallery)
+<!-- L:434 status:OPEN upd:2026-10-11 section:A flag: rice: -->
+- **Tony's question, 2026-10-11**, having chosen for the Hills cloud
+  that the orrery places the dots and the website draws them as given
+  (L-421): "would this approach of stored drawings apply to other
+  complex 'shells' especially clouds, toruses, rings, and fuzzy
+  boundaries." Claude's answer: yes for shapes drawn as scattered dots
+  placed by random numbers or by a model; no for shapes that are a few
+  numbers and a formula -- spheres, rings, belts, the atmosphere shells,
+  the magnetosphere -- where the numbers already are the drawing. A
+  fuzzy boundary drawn as thinning dots is the first kind; drawn as
+  nested fading shells, the second. Tony: "Confirmed as recommended".
+- **The candidates, read at gallery fd17abf1:** the website re-draws
+  four scattered-dot shapes in JavaScript with its own seeded
+  generator, "the same SHAPE from the same parameters with different
+  individual points" (`gallery/feature_renderers.js`): the Sun's
+  streamer band (L-224) and three Oort shapes. The Hills cloud is done
+  (L-421); the outer cloud's clumps and the galactic tide remain.
+- **The mechanism is built** (L-421): `export_drawings.py` and
+  `test_drawings_export.py` in the orrery; `tools/pull_drawings.py`,
+  the cache builder's `serve_drawings()` and `tools/check_drawings.py`
+  in the gallery; a feature names its drawing as `drawing.dots`. A new
+  drawing is one entry in `export_drawings.DRAWINGS` and one served
+  name.
+- **Two things first.** The orrery still draws the clumps and the tide
+  from fresh random numbers, so each plot differs (L-239). And each
+  file is about 58 kB per 3,600 dots at whole AU, fetched by the phone
+  with the room.
+**Gap:** a design talk on which shapes, in what order; L-239 for the
+clumps and the tide; then each shape's export, its served name and the
+website drawing it, with Tony's look.
+**Ref:** L-421; L-239; L-224; L-410; L-351 (the served-drawing contract,
+owed to interactive-exhibit); `documentation/HANDOFF_L421_oort_gallery_20261011.md`.
 
 #### [L-433] The road after the Sun and Earth rooms, in Tony's words (planning)
 <!-- L:433 status:OPEN upd:2026-10-11 section:A flag: rice: -->
@@ -1850,7 +1851,7 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 `documentation/HANDOFF_decisions_20261008.md`.
 
 #### [L-412] The Sun's slice: the order Tony confirmed (the Sun's slice)
-<!-- L:412 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+<!-- L:412 status:OPEN upd:2026-10-11 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-04**, after a sweep of the open items that
   touch the Sun room. Smallest and most settled first:
   1. L-209, the Alfven surface look -- DONE 2026-10-04.
@@ -1905,6 +1906,9 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
   closed too: its fix was built in August, and its wording question
   became a paragraph for provenance-discipline (L-418). The gallery's
   checks, the list after this one, are now L-423.
+- **2026-10-11, from L-408 at its close:** the galactic tide's cone and
+  its brightness on the phone were never ruled (L-408's Gap). Recorded
+  here for the Sun's list, at Tony's word.
 **Gap:** after L-413, work down the list from item 3.
 **Ref:** L-371 (the slice's numbers); the handles above; L-413;
 `documentation/LEDGER_SWEEP_review_20261004.md`.
@@ -2941,7 +2945,7 @@ rest of the Sun's slice is ordered on L-412.
 **Ref:** gallery `tools/gallery_cache_builder.py` (served_window, M2 section 5.5); gallery `gallery/assembler/resolver.py`, step 3; skills/gallery-assembler/SKILL.md; L-363.
 
 #### [L-363] The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits)
-<!-- L:363 status:OPEN upd:2026-10-09 section:A flag: rice: -->
+<!-- L:363 status:OPEN upd:2026-10-11 section:A flag: rice: -->
 - **2026-10-10, the drawer's room button moves onto its row, under
   L-429 (the room button on the row):** a body with a room shows
   "Enter the ... room" beside GO, always.
@@ -3387,7 +3391,8 @@ slice and the gallery's checks (L-412); (b) the arrival block's
 `_declared` sentence still says the view fits "1.1 times the largest
 distance" where the rule is 1.2 [verified @ gallery e7ef96eb,
 `data/objects_config.json`] -- listed as a small fix on 2026-10-02, it
-did not ride patch_L363_14; (c) the design-talk items: the highlighted
+did not ride patch_L363_14; FIXED 2026-10-11, one word, by gallery
+patch_L421_7, pushed at e5a3d13f; (c) the design-talk items: the highlighted
 row at the top of the list, and GO's arrow only if the text box stays
 centred; (d) whether the editor edits the rows' own words, re-homed
 from L-404.
@@ -3638,6 +3643,16 @@ website's checks). The card exports and the two comments go with the next patch 
       the local files should be included in the handoff header along
       with the github info"). The folders themselves are in the skill
       since 1.19 (Tony's Local Folders); the header line is not.
+      LANDED at 1.20 on 2026-10-11 (L-421), the one version Tony asked
+      for; the run-record zone question above stays owed.
+  - **2026-10-11, interactive-exhibit, next bump (L-421):** the
+    served-drawing contract. A feature may name a stored drawing as
+    `drawing.dots`; the cache builder serves it in
+    `data/solar-system/drawings/`; the page fetches each named drawing
+    and hands it over with `GalleryFeatures.setDrawings()` before the
+    room is drawn; the renderer draws the dots as given and places
+    none. The skill says nothing wrong today; it does not describe
+    this, so it is carried here, not bumped (L-434).
     - safe-file-editing: a patch that creates a file accepts one
       already there with identical content and says so; different
       content still refuses. Tony: "if i have already downloaded a
@@ -6869,7 +6884,7 @@ layers.
 `documentation/TESTING_PROTOCOL.md`; L-234 (the Earth half).
 
 #### [L-239] Seed the three Oort builders so a render is reproducible
-<!-- L:239 status:OPEN upd:2026-08-25 section:A flag: rice:2/2/90/1 -->
+<!-- L:239 status:OPEN upd:2026-10-11 section:A flag: rice:2/2/90/1 -->
 - **Orrery-side recommendation from assembler work, 2026-08-25.**
   `create_sun_hills_cloud_torus`, `create_sun_outer_oort_clumpy` and
   `create_sun_galactic_tide` in `solar_visualization_shells.py` draw
@@ -6880,8 +6895,13 @@ layers.
 - **Recommendation:** seed all three in the orrery with the same pattern
   -- a `RandomState` local to the builder, seed in the config -- so the
   two instruments agree about whether a render is reproducible.
-**Gap:** nothing depends on it today. It will matter the first time an
-Oort scene is fingerprinted.
+- **2026-10-11, the Hills cloud is seeded** (L-421, Tony's option A):
+  `hills_cloud_sampler.drawn_hills_cloud()` draws 600 orbits of 6 dots
+  from seed 421, the orrery window and the exported file alike, so the
+  website draws the orrery's own dots. Orrery 1bbd9fe1. The clumps and
+  the tide still draw from the global random generator.
+**Gap:** the clumps and the tide. L-434 (stored drawings for the other
+dot-cloud shells) needs them seeded first.
 - **Note:** RICE 2/2/90/1 -> 3.6 is Claude's proposed score.
   **Tony-action (decide):** confirm or redirect.
 **Ref:** `solar_visualization_shells.py` lines ~1411, ~1475, ~1551
@@ -20162,6 +20182,11 @@ two atmosphere rows are next opened.)
   version (L-351). A checker that compares the two lists would make the
   rule unforgettable; that is a change to a checker, for a session of
   its own, if Tony wants it.
+- **2026-10-11, Tony's note in his run record** (`documentation/WHERE_WE_ARE_10-11-26_1311_run_record.md`), beside "Open
+  tools/pull_drawings.py and click Run": "please add this and any other
+  new checks to the dashboard." The orrery's two (Drawings Export, Test
+  Drawings Export) came with patch_L421_6; the gallery's two (Drawings
+  Pull, Drawings Check) come with patch_L421_9, the close.
 **Gap:** none here. L-300's sweep gets its button with the website patch
 that registers it; that leftover is on L-300.
 **Ref:** `palomas_orrery_dashboard.py`; gallery
@@ -21499,6 +21524,100 @@ gallery `index.html`, `gallery/gallery_config.json`,
 `test_row_run.py`; `orrery_maintenance_run.py`; `constants_new.py`;
 `PROVENANCE_AUDIT.md`; `documentation/HANDOFF_L414_scanner_window_20261009.md`;
 L-305; L-314; L-351; L-184; L-427.
+
+#### [L-408] A Galactic Plane toggle in the Sun room (gallery, the Sun's slice)
+<!-- L:408 status:DONE upd:2026-10-11 section:C flag: rice: -->
+- **Asked 2026-10-03** by Tony, looking for the galactic tide's X on
+  the phone and not finding it at the angle he had: "Could we toggle on
+  the galactic plane and axis?" Claude agreed it earns its place: it
+  makes the tide's tilt legible at a glance, and teaches on its own
+  that the solar system is tipped steeply against the galaxy.
+- **The design Tony confirmed ("Yes please"):** one new row in the
+  Oort Cloud group, "Galactic Plane", off by default; a faint ring in
+  the galaxy's plane at the tide's outer edge (`OUTER_OORT_CLOUD_AU`,
+  100,000 AU) and a line along the galactic pole axis through the Sun;
+  no new numbers -- it reads the same two pole rows the tide reads
+  (`GALACTIC_NORTH_POLE_RA_J2000_DEG`, `_DEC_J2000_DEG`), so the ring
+  and the tide cannot disagree. Left out for now: the direction to the
+  galaxy's centre, which needs one more sourced number.
+- **Words approved 2026-10-03** (Tony: "Approved"), to be served as
+  written:
+  - Row name: "Galactic Plane"
+  - Description: "The plane of the Milky Way's disk, drawn as a ring
+    around the Sun, with a line along the galaxy's north-south axis."
+  - Info panel: "The Milky Way is a flat disk of stars, gas and dust,
+    and the Sun lies inside it. Seen from Earth, that disk is the pale
+    band of the Milky Way across the night sky. The ring shows the
+    disk's plane, and the line through the Sun points to the galaxy's
+    north pole, in the constellation Coma Berenices. The planets'
+    orbits are tipped steeply against it: the two planes meet at
+    [ANGLE] degrees. That tilt is why the galactic tide looks tipped
+    against the Hills cloud, which lies close to the planets' plane."
+  - Note: "The ring is drawn at the outer edge of the Oort cloud, where
+    the tide is drawn, to show the plane's direction. The galaxy's disk
+    reaches far beyond it."
+  - Link: https://en.wikipedia.org/wiki/Galactic_coordinate_system,
+    shown as "Read more at Wikipedia". A search on 2026-10-03 found no
+    NASA page specific to the galactic plane, so Wikipedia applies by
+    the L-265 rule. The article's table also places the north galactic
+    pole in Coma Berenices, which backs that sentence.
+  - [ANGLE] is NOT typed (a hover string that types a number is a
+    store). The renderer works out the angle between the galactic plane
+    and the ecliptic from the two pole rows and the frame angle the
+    tide already uses, and prints it to the nearest degree. The rows
+    give 60.19, so it prints 60; Portegies Zwart et al. 2021 (A&A 652,
+    A144, sec. 3.2) give 60 as the cross-check.
+- **2026-10-04:** not built with L-371, as the Gap had planned; it is
+  the Sun slice's eighth item (L-412). It also carries the look at the
+  galactic tide's X that L-406 handed over when it closed: turn until
+  the ring is edge-on.
+- **2026-10-06: the orrery has them now.** L-420 draws the galactic
+  plane, its poles NGP and SGP, and Sagittarius A* in the orrery's
+  Celestial Grid and Star Background, and, after Tony's look, a
+  brighter tide with a cone where its strength peaks. Tony: "galactic
+  plane and Sag A* are shown in celestial coordinates, but only in the
+  orrery, not in phone. so that's a design decision." The orrery half
+  of the toggle question below is answered; the tide's look is being
+  made there (L-420).
+- **2026-10-07:** Tony, on the phone's question: "awaits the design
+  talk."
+- **2026-10-09, the design talk** (record
+  `documentation/DESIGN_L421_inner_oort_tilt_20261009.md`, sections 6
+  and 10). Tony: "On the galactic plane ring and sentence rewrite, yes,
+  and include the poles and *SagA location." So the phone draws the
+  ring, the pole line, both poles and the direction of Sgr A*, in the
+  same gallery build as the inner Oort cloud (L-421). Sgr A* needs no
+  new number: L-420's rows answer it. The approved sentence "That tilt
+  is why the galactic tide looks tipped against the Hills cloud, which
+  lies close to the planets' plane" is wrong once the Hills cloud is
+  tilted; its rewrite, the description extended for the poles and Sgr
+  A*, the note's added sentence and the markers' words, all in the
+  record's section 10, Tony confirmed ("Yes", 17:07). Sgr A*'s marker
+  leaves out "black hole" until a source for it is read. The link
+  stays Wikipedia, "Galactic coordinate system".
+- **2026-10-10:** the orrery side of the inner Oort cloud is built
+  (L-421); this rides the gallery session that follows it.
+- **Tony, 2026-10-10, in his run record** (`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md` at 6fc3648), beside "awaits the
+  design talk": "yes. it awaited only for implementation not in
+  principle."
+- **2026-10-11, built and looked at.** Gallery
+  `patch_L421_7_oort_gallery_20261011.py`, pushed at e5a3d13f: a
+  "Galactic Plane" row in the Sun room's Oort cloud group, off by
+  default; a faint violet ring at `OUTER_OORT_CLOUD_AU` in the plane of
+  the served galactic pole, a line through the Sun along that pole, the
+  poles marked (NGP filled, SGP open), and the direction of Sgr A*
+  from its two degree rows. The words of section 10 of the design
+  record, word for word, each marker's served; {angle} worked out from
+  the pole and printed to the nearest degree, 60; the link answered on
+  2026-10-11 and still places the pole in Coma Berenices. Tony's look
+  (`documentation/WHERE_WE_ARE_10-11-26_1311_run_record.md`): "Tick Galactic Plane and turn the view until the ring is
+  edge-on. Tap a pole marker, then open the i panel, which should say
+  '60 degrees'. -- correct"; and of the room, "beautiful".
+- **Loose end, re-homed at the close:** the tide's cone and its
+  brightness on the phone, never ruled, go to L-412 (the Sun's list).
+**Gap:** none. Closed on Tony's look, 2026-10-11.
+**Ref:** L-406, L-265, L-420, L-421; gallery `gallery/feature_renderers.js`,
+`data/objects_config.json`.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

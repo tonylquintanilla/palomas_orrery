@@ -6,9 +6,17 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Read this file in 3 parts: lines 1-226, 227-521, 522-698.
+Read this file in 3 parts: lines 1-223, 224-526, 527-718.
 
-Skill version: 1.19 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.20 | 2026-10-11, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 1bbd9fe1. v1.20 (L-351, L-421), on Tony's request: every
+handoff, brief and design record names his two local repository folders
+in its header, beside the GitHub line, so a session linked to his
+computer saves its patch where he runs it (Anchor Requirement, Handoff
+Structure, Tony's Local Folders). Tony, 2026-10-10: "since we are using
+cowork, the location of the local files should be included in the
+handoff header along with the github info."
+Earlier: 1.19 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 32619f8d. v1.19 (L-395), on Tony's request: Tony's
 Local Folders, under Where a File Goes, names the two repositories'
 folders on his machine, so a session linked to it saves a patch where
@@ -22,20 +30,9 @@ that skills_index.py writes, and a skill's extra files live in its
 references folder, each named in its SKILL.md. The Anchor Requirement
 names provenance-cross-check for a review prompt carried to another
 model.
-Earlier: 1.17 | 2026-10-07, with Anthropic's Claude Fable 5.1, at
-palomas_orrery @ 8653ef1b. v1.17 (L-422) carries four of Tony's rulings
-from one session. Under Where We Are -- Tony's page: the page's new
-shape (each fact once; the box is the page; Settled; Signals), a
-run-record zone at its end that no patch edits and that the close
-reads from his timestamped copy, patches editing the page by section,
-every ledger handle on the page carrying a short label, and the check
-to build (date, and a cap of 130 lines above the marker). Under Ledger
-Block Format: an item inside an ordered list needs no RICE score
-(L-412). Under Where a File Goes: which repository a record goes to,
-and that documentation/ stays flat.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-05 (L-418), 2026-10-07 (L-422), 2026-10-08 (L-418) and
-2026-10-10 (L-395).
+on 2026-10-05 (L-418), 2026-10-07 (L-422), 2026-10-08 (L-418),
+2026-10-10 (L-395) and 2026-10-11 (L-421).
 
 Note: READING the ledger at session start is resident Part-1 behavior,
 not this skill's job. This skill carries the maintenance mechanics.
@@ -379,6 +376,24 @@ This is the document-layer form of the protocol's SHA Round Trip
 CRITICAL gate -- applies uniformly regardless of document type or
 audience.
 
+**Every handoff, brief and design record also names Tony's two local
+repository folders, beside the GitHub line** (v1.20; Tony, 2026-10-10:
+"since we are using cowork, the location of the local files should be
+included in the handoff header along with the github info"):
+
+    Tony's local folders: orrery
+    C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\
+    gallery
+    C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\
+
+The GitHub line says which bytes; this line says where on his machine
+they live. A session linked to his computer reads it from the document
+it was handed and saves its patch in that repository's root folder,
+where Tony runs it, with no question asked and no folder guessed
+(Tony's Local Folders, below). A document carried to a partner outside
+this Project keeps the line too: it costs nothing and tells the partner
+which machine the work runs on.
+
 **A document leaving this Project needs a SECOND anchor line** when the
 receiving partner has no resident protocol and no installed skills --
 true for GPT, Gemini, and any Claude session outside this account and
@@ -496,6 +511,9 @@ Both repositories are clones on Tony's Windows machine, under
   `palomas_orrery` beside it are not the repository.
 - gallery: `tonyquintanilla.github.io\`
 
+Every handoff, brief and design record names both folders in its
+header, beside the GitHub line (v1.20; Anchor Requirement, above).
+
 When the session is linked to his computer, a patch is saved straight
 into that repository's root folder, and Tony runs it there from VS
 Code. When it is not linked, the patch goes as an attachment and Tony
@@ -510,6 +528,8 @@ is the repo folder.")
 
 Every handoff opens with:
 - Base SHA and URL per the Anchor Requirement above.
+- Tony's two local repository folders, beside the SHA line (v1.20;
+  Tony's Local Folders).
 - Type declaration: BUILD / DESIGN SESSION (zero code) / DOCUMENTATION.
 - Supersedes / companion lines (what this replaces; which manifest pairs
   with it). Superseded handoffs remain authoritative AS SESSION RECORDS

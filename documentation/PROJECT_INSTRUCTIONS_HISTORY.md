@@ -2535,6 +2535,39 @@ resident.
 (Moved down from the resident protocol on 2026-10-10 when
 v3.90 made a fourth entry.)
 
+v3.88 (October 10, 2026): No rule changed in this document. ONE
+skill bump, one version (L-429): interactive-exhibit 1.12 -> 1.13. A
+ROOM IS ONE TAP AWAY IN THE SOLAR SYSTEM ROOM'S LIST.
+
+WHAT PROMPTED IT. Tony, on the phone, 2026-10-10: "Can we put the
+'Enter the ___ room' button on the same row with the Go button rather
+than below? So the visitor does not need to tap the row to see the
+button then tap again to enter the room." Gallery patch_L428_3_L429_1
+builds it. The skill described the old list, where the button showed
+only on an opened row, so a session following it would have told Tony
+the wrong thing about the room.
+
+WHAT CHANGED. interactive-exhibit, under The Solar System room's
+drawer: a body with a room shows its button on its own row, before GO,
+always, on every screen; a body with none still opens to "No room or
+cards yet". The skill gets its read plan, at its next version as Tony
+ruled on 2026-10-08, and leaves skills_index.py's PLAN_NOT_YET list.
+Its v1.10 entry moved to documentation/SKILL_HISTORIES.md, by the
+three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+interactive-exhibit 1.13 before any exhibit work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.85 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-11 when
+v3.91 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.90 | October 10, 2026
+Tony Quintanilla, PE | Claude | v3.91 | October 11, 2026
 
-Cut from 32619f8d at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 1bbd9fe1 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -498,7 +498,7 @@ earth-system-pipeline        1.2  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY
                                   human-cost visualization or text
 gallery-pipeline             1.2  Gallery Studio, json_converter, index.html
                                   viewer, gallery cards
-ledger-and-session-records   1.19 Ledger edits, ledger_index.py, RICE,
+ledger-and-session-records   1.20 Ledger edits, ledger_index.py, RICE,
                                   handoffs, manifests, atlas, dep_trace,
                                   WHERE_WE_ARE.md at every session's end
 gallery-assembler            1.3  render_orbits.py, resolver.py,
@@ -1166,6 +1166,35 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.91 (October 11, 2026): No rule changed in this document. ONE
+skill bump, one version (L-351, L-421): ledger-and-session-records
+1.19 -> 1.20. YOUR TWO FOLDERS IN EVERY HEADER.
+
+WHAT PROMPTED IT. Tony, in his run record of 2026-10-10: "since we
+are using cowork, the location of the local files should be included
+in the handoff header along with the github info." 1.19 named the
+folders under Where a File Goes; a session reading a brief cold did
+not see them there. The brief for the inner Oort cloud's website half
+carried them in its header, and its session saved both patches where
+Tony runs them. Tony asked for this version at that session's close,
+one version only.
+
+WHAT CHANGED. ledger-and-session-records, under Anchor Requirement,
+Handoff Structure and Tony's Local Folders: every handoff, brief and
+design record names both folders beside the GitHub line. Its v1.17
+entry moved to documentation/SKILL_HISTORIES.md, by the three-entry
+rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+ledger-and-session-records 1.20 before ledger or handoff work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.88 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.90 (October 10, 2026): No rule changed in this document. TWO
 skills, one version each: ledger-and-session-records 1.18 -> 1.19 and
 horizons-orbital-mechanics 1.1 -> 1.2 (L-395). TONY'S FOLDERS ARE
@@ -1230,36 +1259,6 @@ or cache-builder work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.86 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.88 (October 10, 2026): No rule changed in this document. ONE
-skill bump, one version (L-429): interactive-exhibit 1.12 -> 1.13. A
-ROOM IS ONE TAP AWAY IN THE SOLAR SYSTEM ROOM'S LIST.
-
-WHAT PROMPTED IT. Tony, on the phone, 2026-10-10: "Can we put the
-'Enter the ___ room' button on the same row with the Go button rather
-than below? So the visitor does not need to tap the row to see the
-button then tap again to enter the room." Gallery patch_L428_3_L429_1
-builds it. The skill described the old list, where the button showed
-only on an opened row, so a session following it would have told Tony
-the wrong thing about the room.
-
-WHAT CHANGED. interactive-exhibit, under The Solar System room's
-drawer: a body with a room shows its button on its own row, before GO,
-always, on every screen; a body with none still opens to "No room or
-cards yet". The skill gets its read plan, at its next version as Tony
-ruled on 2026-10-08, and leaves skills_index.py's PLAN_NOT_YET list.
-Its v1.10 entry moved to documentation/SKILL_HISTORIES.md, by the
-three-entry rule.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copy reads
-interactive-exhibit 1.13 before any exhibit work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.85 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 
