@@ -1700,10 +1700,10 @@ FILES WRITTEN THIS RUN
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
    3. Move the patch, and `patch_L421_6` if it's still in the main folder, into `documentation/`.
-   4. Commit and push. -- 
+   4. Commit and push. -- f7c6f41d1b6a0931fd0c369c30c8e8867712b214
 3. **Settings:**
-   - Upload `skills/ledger-and-session-records/SKILL.md`, which is now version 1.20, in Settings > Skills.
-   - Replace the Project instructions with `PROJECT_INSTRUCTIONS.md`, which is now v3.91.
+   - Upload `skills/ledger-and-session-records/SKILL.md`, which is now version 1.20, in Settings > Skills. -- done
+   - Replace the Project instructions with `PROJECT_INSTRUCTIONS.md`, which is now v3.91. -- done
 
 **Where this leaves us:**
 - The website now draws the Hills cloud from the orrery's own 3,600 dots. The clumps and the galactic tide fade in between 10,000 and 20,000 AU. The galactic plane is live, and the galactic plane task (L-408) is done.
