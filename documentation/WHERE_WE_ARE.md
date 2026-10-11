@@ -1,25 +1,24 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 11, 2026, at the inner Oort cloud's website close.
-- Written at orrery 1bbd9fe and gallery e5a3d13.
+Last updated: October 11, 2026, at the orbital periods design talk.
+- Written at orrery 324a574 and gallery e3536c8.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The website draws the inner Oort cloud as the orrery does: the
->   Hills cloud from the orrery's own dots. L-421 (the typed facts).
-> - The Galactic Plane row is in the Sun room: L-408 (the galactic
->   plane), closed on your look.
-> - One check failed on Windows only; its fix waits for you.
+> - Orbital periods are designed, every question settled: L-431
+>   (orbital periods). Each body's period comes from JPL, around the
+>   centre that moves less, with the digits its errors earn.
+> - Periods go on the website too, right after the orrery.
+> - Mercury checked: around the Sun its period moves 4 seconds a year.
 >
-> **Do next:** *the orbital periods design talk, then its build, as you
-> asked: `DESIGN_L431_orbital_periods_20261011.md`, section 7.*
+> **Do next:** *build 1 of L-431 (orbital periods): the period in the
+> orrery's hovers, then your look at Encke, Sedna and Mercury.*
 >
 > **Needs you now:**
-> - *Gallery: patch_L421_8, maintenance run, push. Orrery:
->   patch_L421_9, maintenance run, push. Then upload
->   ledger-and-session-records (1.20) and the instructions (v3.91).*
+> - *Orrery: patch_L431_3, maintenance run, push. If not done yet,
+>   upload ledger-and-session-records (1.20).*
 > - *Decide L-425 (citation location checks): which checks to build,
 >   on the run's results (on L-425 and in the handoff).*
 
@@ -32,9 +31,10 @@ Last updated: October 11, 2026, at the inner Oort cloud's website close.
   5.   [NOW]   *Earth's old items are finished, in your order.* The
                website patch and Earth's typed facts are live.
   6.   [next]  The typed facts: the inner Oort cloud is drawn on the
-               website too. Left: the check. << moved this session
-  6a.  [next]  *Orbital periods from JPL for every body, printed by
-               their errors: design talk first.*
+               website too. Left: the check.
+  6a.  [next]  *Orbital periods from JPL: designed. Three builds: the
+               orrery's hovers, then the drawn orbits, then the
+               website.* << moved this session
   7.   [next]  The Sun's numbers get the checking Earth's got.
   8.   [done]  The served objects are checked against JPL Horizons
                every day, in the Daily Run.
@@ -55,8 +55,9 @@ Last updated: October 11, 2026, at the inner Oort cloud's website close.
 Standing rulings. A line leaves after a few weeks, once it is habit.
 - Scattered dots are placed by the orrery and stored for the website;
   a shape that is a formula is worked out on each side. (Oct 11)
-- Orbital periods: JPL's own (PR), for every body that has one; the
-  hover shows it, not the typed table; digits by the errors. (Oct 10)
+- Orbital periods: JPL's own, every body, orrery and website; the
+  centre that moves less in a year, digits by the larger error, the
+  drawn orbit and markers alike; typed table last, marked. (Oct 11)
 - Comets listed by first apparition, oldest first. A colour is a
   drawing choice, to tell apart bodies drawn together; switch it up
   from the default goldenrod. (Oct 10)
@@ -78,14 +79,12 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261011T183843Z, ok, no retry.
 - Tier-1 on the gate path: 0, by name, in PROVENANCE_AUDIT.md at
-  1bbd9fe (your run of 2026-10-11). Whole tree: 292.
+  f7c6f41 (your run of 2026-10-11). Whole tree: 292.
 - This page's date and the ledger's newest stamp: both Oct 11. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 At the next design talk:
-- *Orbital periods first (L-431): which centre, the drawn ellipse,
-  the typed table, the apsidal markers.*
 - Your order after the Sun and Earth rooms (L-433), in your words of
   Oct 10; the road changes when you confirm it.
 - L-424 (the checker's one word for two cases): you marked it
@@ -108,8 +107,9 @@ Not urgent, in your order:
 
 - Every item: `LEDGER_CONSOLIDATED.md`. Open for build: L-421 (the
   typed facts), its check.
-- Orbital periods: design
-  `documentation/DESIGN_L431_orbital_periods_20261011.md`
+- Orbital periods: rulings
+  `documentation/DESIGN_L431_orbital_periods_rulings_20261011.md`;
+  first findings `documentation/DESIGN_L431_orbital_periods_20261011.md`
 - Your notes of Oct 10: `WHERE_WE_ARE_10-10-26_2019_run_record.md`
 - The typed facts: plan
   `documentation/MANIFEST_L421_typed_facts_20261006.md`; record

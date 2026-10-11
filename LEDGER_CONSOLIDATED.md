@@ -348,6 +348,10 @@ Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5
 (L-421's website half, built and looked at; L-408 closed on Tony's look;
 L-434 opened, stored drawings for the other dot-cloud shells; L-239,
 L-351, L-363, L-412 and L-416 updated), built on 1bbd9fe1.
+Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5
+(L-431's design talk: Tony's rulings on the period's source, centre,
+digits, fallback, the website, the drawn orbit and the markers; the
+three builds' order; its design record), built on 324a574f.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1472,11 +1476,48 @@ L-395.
   barycenter. we should also implement this because it matters for
   orbital periods, especially highly perturbed ones." On the proposed
   rule: "for discussion".
-**Gap:** the design talk, then the build. Seven questions in the
-design record's section 7: the astroquery column; which centre; moons
-and the Pluto system; the drawn ellipse's same dependence on the
-centre; queries per refresh; the typed table; the apsidal markers.
-**Ref:** `documentation/DESIGN_L431_orbital_periods_20261011.md`;
+- **Ruled at the design talk, 2026-10-11** (record
+  `documentation/DESIGN_L431_orbital_periods_rulings_20261011.md`):
+  - The period comes from the Horizons fetch (PR), for every body that
+    has one; the typed table only when nothing was fetched. Tony:
+    "Confirmed. I agree with this approach."
+  - Centre: ask for the Sun and the barycentre, at the plot date and a
+    year later; use the one whose period moves less, and name it in the
+    hover. Tony: "Confirmed as recommended".
+  - Digits: the larger of the year's movement and SBDB's sigma, years
+    and days each by its own error; a body with no SBDB entry prints by
+    the year's movement and says so. Tony: "Confirmed".
+  - Fallback order: a fresh fetch; then the last fetched period, saved
+    in the orbit cache (`data/osculating_cache.json`) with centre, date
+    and error; then the typed table, with a note such as "typed value,
+    not fetched from JPL". Not written back into `constants_new.py`.
+    Tony: "Confirmed".
+  - The website: "periods are basic data, for all bodies and should be
+    part of the hover text." Its step follows the orrery builds
+    directly, and the Daily Run's Horizons check compares the period.
+  - The drawn ellipse follows the period's centre, and the perihelion
+    and aphelion markers use the fetched period; one build, one look.
+    Tony: "Confirmed. This is the best solution."
+  - Mercury, read 2026-10-11: around the Sun its period moved 3.65 s in
+    a year (87.9688 days); around the barycentre it reads 90.8 then
+    90.0 days. The test picks the Sun.
+  - ledger-and-session-records 1.20, asked for at this session's
+    opening, was cut by the inner Oort cloud's website session at
+    1bbd9fe1; this session cut no second version.
+**Gap:** three builds, in order (the record's section 3):
+1. The period in the orrery: keep PR, store it with centre, date and
+   error, the two-centre test at first fetch, the fallback order in the
+   hover, the parameters window and the fetch's record. Tony's look at
+   Encke, Sedna and Mercury.
+2. The drawn ellipse around the period's centre, and the markers from
+   the fetched period (Mode 5, Tony's look).
+3. The website: the export carries each period; every room's hover
+   prints it; the Horizons check compares it.
+At build 1's close the two-centre test goes to
+horizons-orbital-mechanics as method. The typed table's 132 unsourced
+entries stay one class, not chased.
+**Ref:** `documentation/DESIGN_L431_orbital_periods_rulings_20261011.md`;
+`documentation/DESIGN_L431_orbital_periods_20261011.md`;
 `visualization_utils.py` (`format_detailed_hover_text`);
 `palomas_orrery.py`; `orbital_param_viz.py`; `apsidal_markers.py`;
 `idealized_orbits.py`; `orbit_data_manager.py`

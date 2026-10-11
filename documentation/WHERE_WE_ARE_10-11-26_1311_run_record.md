@@ -149,7 +149,7 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: OPEN: 10-11-26 1026: Opus: Session build with repository management**
+**Session: DONE: 10-11-26 1355: Opus: Session build with repository management**
 
 Where the drawing files go. Each repository gets the file in the same place:
 
@@ -1716,7 +1716,161 @@ The build record is `documentation/HANDOFF_L421_oort_gallery_20261011.md`. The o
 
 I'm not committing or pushing, and nothing is lost by leaving it that way. The uncommitted changes are on my test copy of the orrery in the session workspace, where I tried the close patch before handing it to you. That copy isn't your repository, and you're the only one who commits and pushes.
 
-The real changes reach GitHub when you run `patch_L421_9_close_20261011.py` in your orrery folder and push it yourself.
+The real changes reach GitHub when you run `patch_L421_9_close_20261011.py` in your orrery folder and push it yourself. -- 324a574f4dd50f8acdea211b1d814f577343f927
 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+**Session: OPEN: 10-11-26 1200: Opus: L-431 orbital periods design**
+
+Now saving the record and the patch into your orrery folder.
+
+All seven rulings are settled and written into a design record. Both files are saved in your orrery folder: the record in `documentation/`, and the close patch in the root, where you run it.
+
+**The skill version.** This session loaded ledger-and-session-records 1.19. The 1.20 you asked for, with your folders in every header, had already been cut by the session building the Oort cloud's website side, at 1bbd9fe. You asked for one version only, so I didn't cut a second. My record and patch both follow 1.20's header rule. The next session should confirm that its loaded copy reads 1.20.
+
+**What the patch does.** It adds your rulings to L-431 (orbital periods from JPL), with the three builds in order as its next steps. It also updates your Where We Are page section by section, and doesn't touch anything below your run-record marker. It changes no code. I ran it against copies of your own ledger and page: every edit matched, and the ledger's index rebuilds cleanly. The page sits at 129 lines, under its limit of 130.
+
+**Your steps:**
+1. Run `patch_L431_3_design_close_20261011.py` from VS Code. It accepts the design record already sitting in `documentation/` as identical.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L431_3_design_close_20261011.py
+ok  LEDGER_CONSOLIDATED.md             L-431 rulings and Gap
+ok  LEDGER_CONSOLIDATED.md             header stamp
+ok  documentation/WHERE_WE_ARE.md      Where the details are
+ok  documentation/WHERE_WE_ARE.md      Waiting on you
+ok  documentation/WHERE_WE_ARE.md      Signals
+ok  documentation/WHERE_WE_ARE.md      Settled
+ok  documentation/WHERE_WE_ARE.md      road 6 and 6a
+ok  documentation/WHERE_WE_ARE.md      the box
+ok  documentation/WHERE_WE_ARE.md      header date
+ok  documentation/DESIGN_L431_orbital_periods_rulings_20261011.md already there, identical; left as it is
+note: WHERE_WE_ARE.md has 129 lines above the run-record marker (the cap is 130)
+stamps updated: the ledger header; WHERE_WE_ARE.md date line
+patch applied: 9 edits in 2 files, 1 file(s) created or confirmed.
+
+NEXT:
+  1. Run orrery_maintenance_run.py. Expect every gating checker to pass and "GATE PATH: 0 TIER-1 -- the push gate holds". It rebuilds the ledger index.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261011T192114Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.4s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Skill manifest               0.2s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.3s  unchanged (1 checked, not written)
+  Objects export               0.1s  unchanged (1 checked, not written)
+  Drawings export              0.4s  unchanged (1 checked, not written)
+  Module atlas                 6.2s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               4.8s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Exact rows report            1.9s  unchanged (1 checked, not written) -- 13 of
+                                     38 exact rows printed at 43 lines (33
+                                     orrery, 10 gallery); 8 drawn only, 14 not
+                                     followed, 0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.2s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.8s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       1.4s  Export matches the store: sha256
+                                     9d79d8797a22 on both sides; 120 rows
+                                     re-read, 56 not exported, 29 tokens; 315
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.1s  pass
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      1.8s  PASSING -- 13 printed exact rows each state
+                                     a count; 33 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.5s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 119 status lines in constants_new.py are
+                                     well formed; 54 rows carry none.
+  Row shape                    0.1s  All 176 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.2s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          18.7s  PASS -- all 311 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  1.7s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.4s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.5s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check        0.5s  PASS -- 3 of 3 planted faults caught;
+                                     hills_cloud 3600 dots, tilt 30.9 deg, sha256
+                                     a51e93118069
+  Worksheet checker            9.8s  74 of 110 routed, 8 clean
+  Worksheet checker tests     16.4s  All 135 checks passed
+  Worksheet key round trip     1.1s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         20.7s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          11.6s  0 TIER-1 -- the push gate holds
+
+======================================================================
+  23 of 23 gating checkers passed -- 105.3s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2173 file(s) examined, 5 written, 0 created, 0 removed, 7 rewritten identically
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      DATA_INVENTORY.md
+      LEDGER_CONSOLIDATED.md
+      PROJECT_INSTRUCTIONS.md
+      WORKSHEET_CHECK.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Move this script into documentation/; commit and push.
+  3. If not done yet, upload ledger-and-session-records 1.20 to Settings > Skills.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. Run `orrery_maintenance_run.py`, move the patch into `documentation/`, then commit and push.
+3. If you haven't yet, upload ledger-and-session-records 1.20 in Settings > Skills.
+
+**Where this leaves us**
+- Orbital periods are fully designed. Each body's period comes from JPL, around whichever centre is steadier, the Sun or the solar system's centre of mass, and prints only the digits its errors allow.
+- Next is the first build: the period in the orrery's hovers, then your look at Encke, Sedna and Mercury.
+- After that come the drawn orbits and their closest and farthest-point markers, with your look. Then the website, where every body's hover will show its period.
 

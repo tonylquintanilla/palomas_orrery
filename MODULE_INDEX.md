@@ -12,8 +12,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 150  
-**Total Lines of Code (non-blank):** 118,202  
-**Total Public Functions/Classes:** 1,356
+**Total Lines of Code (non-blank):** 118,157  
+**Total Public Functions/Classes:** 1,359
 
 ## Classification Coverage
 
@@ -21,7 +21,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 - `earth_pole_live_check.py`
 - `patch_L395_5_horizons_name_and_encke_20261010.py`
-- `patch_L421_9_close_20261011.py`
+- `patch_L431_3_design_close_20261011.py`
 - `test_drawings_export.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
@@ -32,7 +32,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 **Undetermined domain (2).** No valid `Domain:` tag.
 
 - `patch_L395_5_horizons_name_and_encke_20261010.py`
-- `patch_L421_9_close_20261011.py`
+- `patch_L431_3_design_close_20261011.py`
 
 
 ---
@@ -254,7 +254,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
 | `patch_L395_5_horizons_name_and_encke_20261010.py` | - the orrery half of the Horizons check (L-395): JPL's exact name on each keyed entry, Halley keyed, Encke's own entry, and the export that carries them. (371 lines) |
-| `patch_L421_9_close_20261011.py` | - L-421 (the typed facts), the close of the inner Oort cloud's website half, with L-408 (the galactic plane in the Sun room). (174 lines) |
+| `patch_L431_3_design_close_20261011.py` | - the close of L-431's design talk (orbital periods from JPL): Tony's rulings onto L-431, the design record, and Where We Are by section. (129 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (173 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
