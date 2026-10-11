@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.89 | October 10, 2026
+Tony Quintanilla, PE | Claude | v3.90 | October 10, 2026
 
-Cut from a6678b0f at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 32619f8d at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -486,7 +486,7 @@ safe-file-editing            1.13 Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
 agentic-pre-test             1.3  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
-horizons-orbital-mechanics   1.1  Horizons queries, centers, frames, osculating
+horizons-orbital-mechanics   1.2  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning
 provenance-discipline        2.28 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
@@ -498,7 +498,7 @@ earth-system-pipeline        1.2  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY
                                   human-cost visualization or text
 gallery-pipeline             1.2  Gallery Studio, json_converter, index.html
                                   viewer, gallery cards
-ledger-and-session-records   1.18 Ledger edits, ledger_index.py, RICE,
+ledger-and-session-records   1.19 Ledger edits, ledger_index.py, RICE,
                                   handoffs, manifests, atlas, dep_trace,
                                   WHERE_WE_ARE.md at every session's end
 gallery-assembler            1.3  render_orbits.py, resolver.py,
@@ -1166,6 +1166,40 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.90 (October 10, 2026): No rule changed in this document. TWO
+skills, one version each: ledger-and-session-records 1.18 -> 1.19 and
+horizons-orbital-mechanics 1.1 -> 1.2 (L-395). TONY'S FOLDERS ARE
+NAMED, AND A COMET'S RECORD NUMBER IS NOT A NAME.
+
+WHAT PROMPTED IT. The Horizons check was built and ran live for the
+first time: 13 of 13 served objects agree with JPL. Two things came out
+of the session. Tony asked that his local folders be written into the
+handoff skill, after a session had held a patch back because three
+folders could have been the orrery: "palomas_orrery_for_github is the
+repo folder." And re-fetching JPL's answers showed record 90004956
+holding MAPS on 2026-10-07 and another comet three days later.
+
+WHAT CHANGED. ledger-and-session-records gains Tony's Local Folders,
+under Where a File Goes. horizons-orbital-mechanics gains Checking an
+Entry Against JPL: the Lookup cannot see record numbers, the three-step
+find, JPL's names, a recent comet's record number moving, and live
+answers over documented ones; and two corrected lines under Small-Body
+Record Pinning. The brief for this build asked for at most one skill
+version; Tony's request made it two. Their v1.16 entry (the ledger
+skill) moved to documentation/SKILL_HISTORIES.md, by the three-entry
+rule; the Horizons skill had one entry.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+ledger-and-session-records 1.19 and horizons-orbital-mechanics 1.2
+before ledger or Horizons work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.87 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.89 (October 10, 2026): No rule changed in this document. TWO
 skills, one version each: interactive-exhibit 1.13 -> 1.14 (L-429) and
 gallery-cache-builder 1.7 -> 1.8 (L-216). GO TO IN THE MIDDLE OF EVERY
@@ -1226,43 +1260,6 @@ interactive-exhibit 1.13 before any exhibit work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.85 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.87 (October 9, 2026): No rule changed in this document. ONE
-skill bump, one version (L-414): provenance-discipline 2.27 -> 2.28.
-THE SCANNER READS A ROW'S OWN COMMENT BLOCK, AND PRINTS THE GATE BY
-NAME.
-
-WHAT PROMPTED IT. The scanner read a constant's sources through a
-fixed window, 30 lines above and 15 below. In constants_new.py, where
-rows sit with no blank line between them, it failed both ways: it
-missed EARTH_MEAN_RADIUS_KM's own Source line 16 lines down
-(2026-10-04), and when the planted-fault run of 2026-10-09 removed the
-thermopause row's Source lines it credited the stratopause row's
-instead. It scored three declared rows as uncited measurements. And no
-tool printed the push gate's own figure: the console said its count
-was not the gate and named nothing.
-
-WHAT CHANGED. provenance-discipline, under Scanner Mechanics and The
-Goal State: a constants_new.py row is read through its own comment
-run; a declared row with its reason written down is named and never
-Tier-1; the gate path is read from data/constants_export.json and
-data/objects_export.json and printed by name, on the console, in the
-audit and in the run history. provenance_scanner.py and
-provenance_history.py build it; test_row_run.py pins it, and
-orrery_maintenance_run.py runs those pins and quotes the GATE PATH
-line. Measured at aa46bb10: whole-tree Tier-1 296 to 293; gate path 4
-to 0, the four being the scanner's own faults. CENTER_BODY_RADII
-entered Tier-1 off the gate path (L-427).
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copy reads
-provenance-discipline 2.28 before any provenance work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.84 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

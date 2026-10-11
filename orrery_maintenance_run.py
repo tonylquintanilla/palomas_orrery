@@ -87,11 +87,11 @@ artifact, and it is short enough to copy.
 
 GATING AND REPORT-ONLY
 ----------------------
-Twenty-one checkers are pass/fail: a problem makes them exit non-zero.
+Twenty-two checkers are pass/fail: a problem makes them exit non-zero.
 Two are REPORT-ONLY -- worksheet_checker.py and provenance_scanner.py
 exit 0 whatever they find, and exit 1 only when they could not run.
 They are marked in the CHECKERS table, and the summary counts the
-gating twenty-one in its headline and quotes the two report-only verdicts
+gating twenty-two in its headline and quotes the two report-only verdicts
 underneath.
 
 The block quotes each tool's own note rather than restating it. A
@@ -157,6 +157,11 @@ above had drifted again and are corrected in passing: eight generators,
 not seven, since Objects export (L-395); twenty gating checkers before
 this patch, not eighteen, since Objects export check and Skill headers;
 twenty-one with it.)
+Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5 (L-421,
+the inner Oort cloud: CHECKERS gains Hills cloud sampler (L-421),
+test_hills_cloud_sampler.py, which plants a fault for each of the
+sampler's three checks -- the frame, the reading of Fig. 3, the tilt --
+before judging the real rows. Twenty-two gating checkers.)
 """
 
 import hashlib
@@ -273,6 +278,11 @@ CHECKERS = [
     # L-322 Stage D, patch D3.
     ('Earth pole of date', ['test_earth_pole_of_date.py'],
      'EARTH POLE OF DATE:'),
+    # L-421: the Hills cloud's frame, its reading of the paper's Fig. 3
+    # and its tilt, each shown failing on a planted fault before the real
+    # rows are judged.
+    ('Hills cloud sampler (L-421)', ['test_hills_cloud_sampler.py'],
+     'HILLS CLOUD:'),
     # A fourth field marks a tool REPORT-ONLY: it exits 0 whatever it
     # finds, so "passed" says only that it ran. Exactly two are, and
     # both are deliberate -- their numbers are the verdict, not their

@@ -2,7 +2,8 @@
 solar_visualization_shells.py - Sun interior, corona, and heliosphere shell traces.
 
 The largest shell module: 14 sphere shells from core to gravitational
-influence boundary, plus custom geometry for Hills Cloud torus, Oort Cloud
+influence boundary, plus custom geometry for the Hills Cloud (a tilted
+disk of dots along orbits, from hills_cloud_sampler.py), Oort Cloud
 clumpy distribution, and galactic tide shell. Includes the v3.18 solar
 shell refactor: single-info-marker pattern, n_points=20/25, and the
 three inner corona shells (Streamer Belt, Roche Limit, Alfven Surface)
@@ -13,6 +14,19 @@ Consumed by: planet_visualization.py (routing dispatcher),
 
 Role: rendering/shells
 Domain: orrery
+
+Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5
+(L-421, the inner Oort cloud: the Hills cloud is drawn as dots along
+orbits following Nesvorny et al. (2025) -- a disk tilted about 30
+degrees, with two arms -- from hills_cloud_sampler.py, its typed 2,000
+and 20,000 AU defaults gone, and the clumpy outer cloud's typed 20,000
+and 100,000 AU defaults too. The inner cloud gives way to the round
+outer cloud across a band from INNER_OORT_DISK_OUTER_AU to
+INNER_OORT_CLOUD_AU: the Hills cloud thins out across it, the clumps and
+the galactic tide fill in across it, and every string that printed the
+single edge says the band. The Hills cloud's words are Tony's confirmed
+words of 2026-10-09 with the citation; two comments that named Hills
+(1981) name the rows' real sources.)
 
 Module updated: October 6, 2026 with Anthropic's Claude Opus 5.5
 (L-420, after Tony's look: the galactic tide is drawn brighter, with
@@ -96,6 +110,9 @@ from constants_rows import row_text
 # L-406: the pole the galactic tide is drawn about.
 from constants_new import (GALACTIC_NORTH_POLE_RA_J2000_DEG,
                            GALACTIC_NORTH_POLE_DEC_J2000_DEG)
+# L-421: the near end of the band where the inner cloud's disk gives way
+# to the round outer cloud.
+from constants_new import INNER_OORT_DISK_OUTER_AU
 
 #####################################
 # Sun Visualization Functions
@@ -114,6 +131,18 @@ from constants_new import (GALACTIC_NORTH_POLE_RA_J2000_DEG,
 # figure, so the words cannot drift from the drawing or from the store.
 _OORT_INNER_EDGE = row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)
 _OORT_HILLS_EDGE = row_text('INNER_OORT_CLOUD_AU', grouping=True)
+# L-421 (2026-10-10): the inner cloud gives way to the round outer cloud
+# across a band, from INNER_OORT_DISK_OUTER_AU (Nesvorny et al. 2025) to
+# INNER_OORT_CLOUD_AU (Portegies Zwart et al. 2021), Tony's ruling of
+# 2026-10-09. The Hills cloud's tilt is HILLS_CLOUD_TILT_DEG (Nesvorny et
+# al. 2025). Each printed from its row; the sources are on the rows.
+_OORT_DISK_EDGE = row_text('INNER_OORT_DISK_OUTER_AU', grouping=True)
+_HILLS_TILT = row_text('HILLS_CLOUD_TILT_DEG')
+OORT_BAND_SENTENCE = f"between {_OORT_DISK_EDGE} and {_OORT_HILLS_EDGE} AU"
+INNER_OORT_BAND_NOTE = (
+    f"The inner cloud gives way to the round outer cloud {OORT_BAND_SENTENCE};<br>"
+    f"this sphere is drawn at {_OORT_HILLS_EDGE} AU, the far end."
+)
 _OORT_OUTER_EDGE = row_text('OUTER_OORT_CLOUD_AU', grouping=True)
 _HELIOPAUSE = row_text('HELIOPAUSE_AU')
 _TERMINATION_SHOCK = row_text('TERMINATION_SHOCK_AU')
@@ -173,7 +202,8 @@ gravitational_influence_info = (
             "Where the solar wind meets interstellar space.<br><br>" 
 
             "Gravitational influence extends much further, including, Sedna\'s orbit (936 AU), the Hills Cloud/Inner<br>" 
-            f"Oort Cloud ({_OORT_INNER_EDGE}-{_OORT_HILLS_EDGE} AU), and the Outer Oort Cloud ({_OORT_HILLS_EDGE}-{_OORT_OUTER_EDGE} AU).<br><br>" 
+            f"Oort Cloud (from {_OORT_INNER_EDGE} AU), and the Outer Oort Cloud (to {_OORT_OUTER_EDGE} AU), one giving way to the<br>" 
+            f"other {OORT_BAND_SENTENCE}.<br><br>" 
             + GRAVITATIONAL_INFLUENCE_SENTENCE + "<br><br>"
             
             "While the Heliopause marks where the Sun\'s particle influence ends, its gravitational influence extends much<br>" 
@@ -209,9 +239,14 @@ outer_oort_info = (
             "susceptible to external gravitational perturbations."
         )
 
-# Source: Hills (1981); INNER_OORT_CLOUD_AU=20000 in constants_new.py
+# Source: INNER_OORT_CLOUD_AU (Portegies Zwart et al. 2021) and
+# Source+: INNER_OORT_DISK_OUTER_AU (Nesvorny et al. 2025) in constants_new.py,
+# Source+: the band's two ends; the comment here named Hills (1981), which
+# Source+: does not print the number (corrected L-421, 2026-10-10, as L-371
+# Source+: corrected the row).
 inner_oort_info = (
             "Oort Cloud: Outer Limit of Inner Oort Cloud:<br><br>"
+            f"{INNER_OORT_BAND_NOTE}<br><br>"
 
             "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the<br>" 
             f"Solar System at distances ranging from approximately {_OORT_INNER_EDGE} AU to {_OORT_OUTER_EDGE} AU from the Sun.<br>" 
@@ -219,7 +254,8 @@ inner_oort_info = (
             "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
             "periods exceeding 200 years.<br><br>" 
 
-            f"Inner Oort Cloud (Hills Cloud): Extends from about {_OORT_INNER_EDGE} AU to {_OORT_HILLS_EDGE} AU. More tightly bound to the<br>" 
+            f"Inner Oort Cloud (Hills Cloud): Extends from about {_OORT_INNER_EDGE} AU and gives way to the round outer cloud<br>" 
+            f"{OORT_BAND_SENTENCE}. More tightly bound to the<br>" 
             "Sun. More tightly bound to the Solar System compared to the outer Oort Cloud. It serves as an<br>" 
             "intermediate zone between the Kuiper Belt and the outer Oort Cloud."
         )
@@ -235,34 +271,51 @@ inner_limit_oort_info = (
             "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
             "periods exceeding 200 years.<br><br>" 
 
-            f"Inner Oort Cloud (Hills Cloud): Extends from about {_OORT_INNER_EDGE} AU to {_OORT_HILLS_EDGE} AU. More tightly bound to the<br>" 
+            f"Inner Oort Cloud (Hills Cloud): Extends from about {_OORT_INNER_EDGE} AU and gives way to the round outer cloud<br>" 
+            f"{OORT_BAND_SENTENCE}. More tightly bound to the<br>" 
             "Sun. More tightly bound to the Solar System compared to the outer Oort Cloud. It serves as an<br>" 
             "intermediate zone between the Kuiper Belt and the outer Oort Cloud."
         )
 
-# Source: Hills (1981) AJ; INNER_OORT_CLOUD_AU=20000, INNER_LIMIT_OORT_CLOUD_AU=2000 in constants_new.py
+# Source: Nesvorny, D., Dones, L., Vokrouhlicky, D., Levison, H. F., Beauge, C.,
+# Source+: Faherty, J., Emmart, C. and Parker, J. P. (2025), "A Spiral Structure
+# Source+: in the Inner Oort Cloud", arXiv:2502.11252v1 -- sec. 1, p. 1 (inferred
+# Source+: from long-period comets), p. 2 (more strongly bound; long portrayed
+# Source+: as a flat disk along the ecliptic, Levison et al. 2001), p. 3 (a
+# Source+: slightly warped disk inclined about 30 deg to the ecliptic, nearly
+# Source+: polar to the galaxy, a spiral with two twisted arms); sec. 2,
+# Source+: pp. 3-4 (shaped by the Galactic tide, persisting over billions of
+# Source+: years); sec. 5, p. 12 (indirectly detected). The distances and the
+# Source+: tilt print from INNER_LIMIT_OORT_CLOUD_AU, INNER_OORT_DISK_OUTER_AU,
+# Source+: INNER_OORT_CLOUD_AU and HILLS_CLOUD_TILT_DEG, each sourced on its row.
+# Words: Tony's confirmed hover, panel and note, 2026-10-09 (design record
+# Words+: sections 4, 5 and 9), in the orrery's convention: the citation sits
+# Words+: here. Replaces the "Hills Cloud Torus" text, its doughnut shape and
+# Words+: its uncited list (L-421, 2026-10-10).
 hills_cloud_torus_info = (
-            "Oort Cloud: Hills Cloud Torus:<br><br>"
+            "Oort Cloud: Hills Cloud (tilted disk):<br><br>"
 
-            "Based on dynamical models showing the inner Oort Cloud is more disk-like due to galactic tides.<br>"
+            "The inner part of the Oort cloud: icy bodies far beyond the planets,<br>"
+            "gathered in a slightly warped disk.<br><br>"
 
-            "Structure:<br>" 
-            f"* Hills Cloud (Inner Oort): {_OORT_INNER_EDGE}-{_OORT_HILLS_EDGE} AU, disk-like/toroidal<br>"
-            f"* Outer Oort Cloud: {_OORT_HILLS_EDGE}-{_OORT_OUTER_EDGE}+ AU, roughly spherical but clumpy<br>" 
-            "Key Characteristics:<br>" 
-            "* Not uniform shells but complex, structured regions<br>" 
-            "* Density varies significantly throughout<br>" 
-            "* Influenced by galactic tides and stellar encounters<br>" 
-            "* Contains an estimated 1-100 trillion objects >1km<br><br>" 
-            "Scientific Evidence:<br>" 
-            "* Comet orbital inclinations suggest spherical outer region<br>" 
-            "* Short-period comet inclinations suggest disk-like inner region<br>" 
-            "* Computer simulations show tidal sculpting effects<br>" 
-            "* Stellar encounter models predict clumpy structure<br>" 
-            "Recent Discoveries:<br>" 
-            "* Objects like Sedna may be inner Oort Cloud members<br>" 
-            "* 2012 VP113 provides evidence for inner Oort population<br>" 
-            "* NEOWISE survey improving population estimates"
+            f"From {_OORT_INNER_EDGE} AU to {_OORT_DISK_EDGE} AU, thinning out by {_OORT_HILLS_EDGE} AU.<br><br>"
+
+            "The Oort cloud is a vast swarm of icy bodies surrounding the solar system, the source<br>"
+            "of the long-period comets. Its inner part, the Hills cloud, is more tightly bound to the<br>"
+            "Sun. It was long pictured as a fairly flat disk lying along the ecliptic. A 2025 computer<br>"
+            f"model finds instead a slightly warped disk tilted about {_HILLS_TILT} degrees to the ecliptic,<br>"
+            "nearly at right angles to the plane of the Milky Way. Seen from far away it would look<br>"
+            "like a spiral with two twisted arms. The Milky Way's tide shapes it over billions of<br>"
+            "years. No one has seen it directly; its shape shows only indirectly, in the orbits of<br>"
+            "some long-period comets.<br><br>"
+
+            "Drawn as dots along orbits picked where the model's orbits lie (its Fig. 3), so the<br>"
+            "tilt and the two arms come out of the orbits. How stretched the orbits are is chosen<br>"
+            f"for the picture: the model shows it only as a plot. The dots thin out between<br>"
+            f"{_OORT_DISK_EDGE} and {_OORT_HILLS_EDGE} AU.<br><br>"
+
+            "Nesvorny, D., et al. (2025), A Spiral Structure in the Inner Oort Cloud,<br>"
+            "arXiv:2502.11252."
         )
 
 # Source: Dones et al. (2004); OUTER_OORT_CLOUD_AU=100000 in constants_new.py
@@ -272,8 +325,9 @@ outer_oort_clumpy_info = (
             "Reflects N-body simulations showing stellar encounters create density variations.<br>"
 
             "Structure:<br>" 
-            f"* Hills Cloud (Inner Oort): {_OORT_INNER_EDGE}-{_OORT_HILLS_EDGE} AU, disk-like/toroidal<br>"
-            f"* Outer Oort Cloud: {_OORT_HILLS_EDGE}-{_OORT_OUTER_EDGE}+ AU, roughly spherical but clumpy<br>" 
+            f"* Hills Cloud (Inner Oort): from {_OORT_INNER_EDGE} AU, a disk tilted about {_HILLS_TILT} degrees to the ecliptic<br>"
+            f"* Outer Oort Cloud: to {_OORT_OUTER_EDGE}+ AU, roughly spherical but clumpy<br>" 
+            f"* The two give way to each other {OORT_BAND_SENTENCE}<br>" 
             "Key Characteristics:<br>" 
             "* Not uniform shells but complex, structured regions<br>" 
             "* Density varies significantly throughout<br>" 
@@ -301,8 +355,9 @@ galactic_tide_info = (
             "Shows how the Milky Way's gravity creates asymmetries.<br>"
 
             "Structure:<br>" 
-            f"* Hills Cloud (Inner Oort): {_OORT_INNER_EDGE}-{_OORT_HILLS_EDGE} AU, disk-like/toroidal<br>"
-            f"* Outer Oort Cloud: {_OORT_HILLS_EDGE}-{_OORT_OUTER_EDGE}+ AU, roughly spherical but clumpy<br>" 
+            f"* Hills Cloud (Inner Oort): from {_OORT_INNER_EDGE} AU, a disk tilted about {_HILLS_TILT} degrees to the ecliptic<br>"
+            f"* Outer Oort Cloud: to {_OORT_OUTER_EDGE}+ AU, roughly spherical but clumpy<br>" 
+            f"* The two give way to each other {OORT_BAND_SENTENCE}<br>" 
             "Key Characteristics:<br>" 
             "* Not uniform shells but complex, structured regions<br>" 
             "* Density varies significantly throughout<br>" 
@@ -560,7 +615,8 @@ gravitational_influence_info_hover = (
             "Where the solar wind meets interstellar space.<br><br>" 
 
             "Gravitational influence extends much further, including, Sedna\'s orbit (936 AU), the Hills Cloud/Inner<br>" 
-            f"Oort Cloud ({_OORT_INNER_EDGE}-{_OORT_HILLS_EDGE} AU), and the Outer Oort Cloud ({_OORT_HILLS_EDGE}-{_OORT_OUTER_EDGE} AU).<br><br>" 
+            f"Oort Cloud (from {_OORT_INNER_EDGE} AU), and the Outer Oort Cloud (to {_OORT_OUTER_EDGE} AU), one giving way to the<br>" 
+            f"other {OORT_BAND_SENTENCE}.<br><br>" 
             + GRAVITATIONAL_INFLUENCE_SENTENCE + "<br><br>"
             
             "While the Heliopause marks where the Sun\'s particle influence ends, its gravitational influence extends much<br>" 
@@ -597,6 +653,7 @@ outer_oort_info_hover = (
 
 inner_oort_info_hover = (
             "Oort Cloud: Outer Limit of Inner Oort Cloud:<br><br>"
+            f"{INNER_OORT_BAND_NOTE}<br><br>"
 
             "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the<br>" 
             f"Solar System at distances ranging from approximately {_OORT_INNER_EDGE} AU to {_OORT_OUTER_EDGE} AU from the Sun.<br>" 
@@ -604,7 +661,8 @@ inner_oort_info_hover = (
             "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
             "periods exceeding 200 years.<br><br>" 
 
-            f"Inner Oort Cloud (Hills Cloud): Extends from about {_OORT_INNER_EDGE} AU to {_OORT_HILLS_EDGE} AU. More tightly bound to the<br>" 
+            f"Inner Oort Cloud (Hills Cloud): Extends from about {_OORT_INNER_EDGE} AU and gives way to the round outer cloud<br>" 
+            f"{OORT_BAND_SENTENCE}. More tightly bound to the<br>" 
             "Sun. More tightly bound to the Solar System compared to the outer Oort Cloud. It serves as an<br>" 
             "intermediate zone between the Kuiper Belt and the outer Oort Cloud."
         )
@@ -619,7 +677,8 @@ inner_limit_oort_info_hover = (
             "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
             "periods exceeding 200 years.<br><br>" 
 
-            f"Inner Oort Cloud (Hills Cloud): Extends from about {_OORT_INNER_EDGE} AU to {_OORT_HILLS_EDGE} AU. More tightly bound to the<br>" 
+            f"Inner Oort Cloud (Hills Cloud): Extends from about {_OORT_INNER_EDGE} AU and gives way to the round outer cloud<br>" 
+            f"{OORT_BAND_SENTENCE}. More tightly bound to the<br>" 
             "Sun. More tightly bound to the Solar System compared to the outer Oort Cloud. It serves as an<br>" 
             "intermediate zone between the Kuiper Belt and the outer Oort Cloud."
         )
@@ -1484,71 +1543,91 @@ def create_sun_core_shell():
 # Point density is unchanged (it defines the visual character of these objects).
 # ============================================================================
 
-def create_sun_hills_cloud_torus(center_position=(0, 0, 0), inner_radius=2000, outer_radius=20000, thickness_ratio=0.3):
+def create_sun_hills_cloud_torus(center_position=(0, 0, 0)):
     """
-    Create a toroidal (doughnut-shaped) Hills Cloud structure.
-    FIXED VERSION - Returns proper Plotly trace objects.
-    
+    The Hills cloud, the inner Oort cloud, as dots along orbits following
+    Nesvorny et al. (2025): a slightly warped disk tilted about 30 degrees
+    to the ecliptic, with two spiral arms (L-421, 2026-10-10).
+
+    The name is kept, because the dispatch (CUSTOM_SHELLS['Sun']
+    ['hills_cloud_torus'], and planet_visualization.py) calls it by it;
+    what it draws is no longer a torus. The dots come from
+    hills_cloud_sampler.sample_hills_cloud(), which reads every number
+    from constants_new.py: the paper's Fig. 3, read into a table, for
+    where the orbits' planes lie; its Fig. 2 caption for the two arms;
+    the band from INNER_OORT_DISK_OUTER_AU to INNER_OORT_CLOUD_AU, across
+    which the disk thins out; and a declared eccentricity. The tilt is
+    not set: it comes out of the orbits, and hills_cloud_sampler.py
+    prints it. The typed 2,000 and 20,000 AU defaults this replaced are
+    gone (the design record of 2026-10-09, section 2).
+
     Parameters:
     - center_position: Sun position tuple (default: (0, 0, 0)).
       Accepted for interface uniformity with the unified dispatch
       contract. Geometry translation deferred to switchover phase.
-    - inner_radius: Inner boundary in AU (default: 2000)
-    - outer_radius: Outer boundary in AU (default: 20000)
-    - thickness_ratio: Ratio of torus thickness to major radius (default: 0.3)
     """
     # Phase D1: center_position accepted for interface uniformity;
     # geometry translation deferred to switchover phase.
-    major_radius = (inner_radius + outer_radius) / 2
-    minor_radius = (outer_radius - inner_radius) / 2 * thickness_ratio
-    
-    n_points = 60
-    u = np.linspace(0, 2*np.pi, n_points)
-    v = np.linspace(0, 2*np.pi, n_points)
-    u, v = np.meshgrid(u, v)
-    
-    noise_factor = 0.1
-    radius_variation = 1 + noise_factor * np.random.normal(0, 1, u.shape)
-    
-    x = (major_radius + minor_radius * np.cos(u)) * np.cos(v) * radius_variation
-    y = (major_radius + minor_radius * np.cos(u)) * np.sin(v) * radius_variation
-    z = minor_radius * np.sin(u) * radius_variation * 0.5
-    
-    x_flat = x.flatten()
-    y_flat = y.flatten()
-    z_flat = z.flatten()
+    from hills_cloud_sampler import sample_hills_cloud
+    # 600 orbits of 6 dots: 3,600, the torus's count (render size, Tony's
+    # standing concern). A rendering setting, kept here where it is drawn.
+    dots = sample_hills_cloud(600, 6)
+    x_flat, y_flat, z_flat = dots['x'], dots['y'], dots['z']
 
+    # Tony's confirmed words, 2026-10-09 (design record sections 4 and 9),
+    # with the citation, as the orrery's hovers carry it. The distances
+    # and the tilt print from their rows; AU with km beside, by the hover
+    # AU convention.
     hills_hover = (
-        'Hills Cloud (Inner Oort): Disk-like structure<br>'
-        f'{_OORT_INNER_EDGE}-{_OORT_HILLS_EDGE} AU<br>'
-        'More tightly bound to Solar System<br>'
-        'Short-period comets support disk-like structure<br>'
-        'Toroidal shape due to galactic tides'
+        'The inner part of the Oort cloud: icy bodies far beyond the planets,<br>'
+        'gathered in a slightly warped disk.<br><br>'
+        f'From {_OORT_INNER_EDGE} AU ({row_text("INNER_LIMIT_OORT_CLOUD_AU", unit="km", grouping=True)} km)<br>'
+        f'to {_OORT_DISK_EDGE} AU ({row_text("INNER_OORT_DISK_OUTER_AU", unit="km", grouping=True)} km),<br>'
+        f'thinning out by {_OORT_HILLS_EDGE} AU ({row_text("INNER_OORT_CLOUD_AU", unit="km", grouping=True)} km).<br>'
+        'A 2025 computer model (Nesvorny and others) finds the disk tilted<br>'
+        f'about {_HILLS_TILT} degrees to the ecliptic, the plane of Earth\'s orbit, with<br>'
+        'two spiral arms. The dots follow orbits like the model\'s; how stretched<br>'
+        'the orbits are is chosen for the picture.<br><br>'
+        'Nesvorny, D., et al. (2025), A Spiral Structure in the Inner Oort Cloud,<br>'
+        'arXiv:2502.11252'
     )
 
     shell_trace = go.Scatter3d(
         x=x_flat, y=y_flat, z=z_flat,
         mode='markers',
         marker=dict(size=1.5, color='rgb(173, 216, 230)', opacity=0.4, symbol='circle'),
-        name='Sun: Hills Cloud (Inner Oort - Toroidal)',
-        legendgroup='Sun: Hills Cloud (Inner Oort - Toroidal)',
+        name='Sun: Hills Cloud (tilted disk)',
+        legendgroup='Sun: Hills Cloud (tilted disk)',
         hoverinfo='skip',
         showlegend=True
     )
-    # Info marker at north pole of torus (z = minor_radius above major_radius)
-    r_info = major_radius + minor_radius * 1.05
+    # The info marker sits above the disk's middle, on the ecliptic pole
+    # at the band's near end: clear of the dots, which crowd toward the
+    # disk's plane.
+    r_info = INNER_OORT_DISK_OUTER_AU
     # Phase 1 re-pipe (May 28, 2026): factory-routed.
     info_trace = create_info_marker(
         0, 0, r_info,
         'rgb(173, 216, 230)',
-        f"Sun: Hills Cloud (Inner Oort - Toroidal)<br><br>{hills_hover}",
-        'Sun: Hills Cloud (Inner Oort - Toroidal)',
+        f"Sun: Hills Cloud (tilted disk)<br><br>{hills_hover}",
+        'Sun: Hills Cloud (tilted disk)',
         customdata='Hills Cloud Torus'
     )
     return [shell_trace, info_trace]
 
 
-def create_sun_outer_oort_clumpy(center_position=(0, 0, 0), radius_min=20000, radius_max=100000, n_clumps=15):
+def _outer_cloud_keep(distance):
+    """Chance of keeping a point of the round outer cloud at `distance`
+    AU (L-421, 2026-10-10): nothing at the band's near end,
+    INNER_OORT_DISK_OUTER_AU, rising evenly to all of them at its far end,
+    INNER_OORT_CLOUD_AU, and all of them beyond. The Hills cloud thins out
+    across the same band, so the two overlap inside it (Tony's ruling of
+    2026-10-09, a fuzzy boundary)."""
+    near, far = float(INNER_OORT_DISK_OUTER_AU), float(INNER_OORT_CLOUD_AU)
+    return np.clip((np.asarray(distance, dtype=float) - near) / (far - near), 0.0, 1.0)
+
+
+def create_sun_outer_oort_clumpy(center_position=(0, 0, 0), radius_min=None, radius_max=None, n_clumps=15):
     """
     Create a clumpy, asymmetric outer Oort Cloud with density variations.
     FIXED VERSION - Returns proper Plotly trace objects.
@@ -1557,16 +1636,27 @@ def create_sun_outer_oort_clumpy(center_position=(0, 0, 0), radius_min=20000, ra
     - center_position: Sun position tuple (default: (0, 0, 0)).
       Accepted for interface uniformity with the unified dispatch
       contract. Geometry translation deferred to switchover phase.
-    - radius_min: Inner boundary in AU (default: 20000)
-    - radius_max: Outer boundary in AU (default: 100000)
+    - radius_min: Inner boundary in AU (default: INNER_OORT_DISK_OUTER_AU,
+      the near end of the band where the outer cloud begins thin)
+    - radius_max: Outer boundary in AU (default: OUTER_OORT_CLOUD_AU)
     - n_clumps: Number of density clumps (default: 15)
+
+    L-421 (2026-10-10): the defaults were typed, 20000 and 100000; they
+    read the rows now. The cloud is thin at the band's near end and full
+    by its far end, INNER_OORT_CLOUD_AU (_outer_cloud_keep): a clump's
+    centre and each of its points are kept with that chance. The clumps'
+    sizes and point counts are unchanged, a drawing choice.
     """
     # Phase D1: center_position accepted for interface uniformity;
     # geometry translation deferred to switchover phase.
+    radius_min = INNER_OORT_DISK_OUTER_AU if radius_min is None else radius_min
+    radius_max = OUTER_OORT_CLOUD_AU if radius_max is None else radius_max
     points_x, points_y, points_z = [], [], []
     
     for i in range(n_clumps):
         clump_radius = np.random.uniform(radius_min, radius_max)
+        while np.random.random() >= _outer_cloud_keep(clump_radius):
+            clump_radius = np.random.uniform(radius_min, radius_max)
         theta = np.random.uniform(0, 2*np.pi)
         phi = np.random.uniform(-np.pi/2, np.pi/2)
         
@@ -1587,7 +1677,8 @@ def create_sun_outer_oort_clumpy(center_position=(0, 0, 0), radius_min=20000, ra
             z = clump_center_z + r * np.sin(phi_local)
             
             distance = np.sqrt(x**2 + y**2 + z**2)
-            if radius_min <= distance <= radius_max:
+            if (radius_min <= distance <= radius_max
+                    and np.random.random() < _outer_cloud_keep(distance)):
                 points_x.append(x)
                 points_y.append(y)
                 points_z.append(z)
@@ -1598,7 +1689,8 @@ def create_sun_outer_oort_clumpy(center_position=(0, 0, 0), radius_min=20000, ra
 
     clumpy_hover = (
         'Outer Oort Cloud: Clumpy, asymmetric structure<br>'
-        f'{_OORT_HILLS_EDGE}-{_OORT_OUTER_EDGE}+ AU<br>'
+        f'From {_OORT_DISK_EDGE} AU, filling in by {_OORT_HILLS_EDGE} AU, to {_OORT_OUTER_EDGE}+ AU<br>'
+        'It begins where the inner cloud\'s disk thins out<br>'
         'Source of long-period comets<br>'
         'Influenced by galactic tides and stellar encounters'
     )
@@ -1640,10 +1732,12 @@ def create_sun_galactic_tide(center_position=(0, 0, 0), n_points=5000):
       |sin b cos b|, b the galactic latitude: none at the plane or the
       poles, most at 45 degrees. The sources are in the comments beside
       the code that does it.
-    - The distance. Spread evenly from INNER_OORT_CLOUD_AU to
-      OUTER_OORT_CLOUD_AU, the outer cloud's two edges, the rows the
-      clumpy outer Oort cloud is drawn between. It replaces a typed
-      50,000 AU with a typed spread and cut-offs.
+    - The distance. From INNER_OORT_DISK_OUTER_AU, thin there and full
+      by INNER_OORT_CLOUD_AU, the band where the inner cloud's disk gives
+      way to the round outer cloud (L-421, 2026-10-10), then evenly to
+      OUTER_OORT_CLOUD_AU; the clumpy outer Oort cloud uses the same band.
+      It replaced a typed 50,000 AU with a typed spread and cut-offs
+      (L-406).
     - Each point stands for the far end of an orbit. Where any real comet
       is, is not known and is not claimed.
     - The cone (L-420, Tony's choice of 2026-10-06). A faint double cone
@@ -1693,7 +1787,14 @@ def create_sun_galactic_tide(center_position=(0, 0, 0), n_points=5000):
     sin_b = sin_b[:n_points]
     cos_b = np.sqrt(1.0 - sin_b * sin_b)
     lon = np.random.uniform(0, 2 * np.pi, n_points)
-    r = np.random.uniform(INNER_OORT_CLOUD_AU, OUTER_OORT_CLOUD_AU, n_points)
+    # L-421 (2026-10-10): from the band's near end, INNER_OORT_DISK_OUTER_AU,
+    # thin there and full by INNER_OORT_CLOUD_AU (_outer_cloud_keep), the
+    # same band the Hills cloud thins out across. Same number of points.
+    r = np.empty(0)
+    while r.size < n_points:
+        draw = np.random.uniform(INNER_OORT_DISK_OUTER_AU, OUTER_OORT_CLOUD_AU, 2 * n_points)
+        r = np.concatenate([r, draw[np.random.uniform(0.0, 1.0, draw.size) < _outer_cloud_keep(draw)]])
+    r = r[:n_points]
 
     galactic = np.vstack([r * cos_b * np.cos(lon),
                           r * cos_b * np.sin(lon),
@@ -1707,7 +1808,7 @@ def create_sun_galactic_tide(center_position=(0, 0, 0), n_points=5000):
         'Tilted to the galaxy\'s plane, thickest halfway to its poles<br>'
         'The pink cone marks that halfway line, where the tide<br>'
         'changes comets\' orbits the most<br>'
-        f'From {_OORT_HILLS_EDGE} to {_OORT_OUTER_EDGE} AU<br>'
+        f'From {_OORT_DISK_EDGE} AU, filling in by {_OORT_HILLS_EDGE} AU, to {_OORT_OUTER_EDGE} AU<br>'
         'Where the comets really are is not known'
     )
 

@@ -697,6 +697,15 @@ documentation/SKILL_HISTORIES.md. Both because a plain read of a
 long file shows its start and end and leaves out its middle, where
 the rules are (Tony, 2026-10-05).
 
+The skill's v1.16 entry, moved here word for word on 2026-10-10 when
+v1.19 made a fourth entry (L-395):
+Earlier: 1.16 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ d9f47a87. v1.16 (L-419) adds one rule under Where We
+Are -- Tony's page: a patch checks a document Tony annotates (this
+page, the handoffs, the ledger) only at the lines it edits, and a
+rewrite of the page carries his notes into the handoff first. The
+rule had lived only in one patch's code and was broken the same day.
+
 ## gallery-cache-builder
 
 v1.4 adds Recovery from a failed swap: discard and re-run -- Tony's

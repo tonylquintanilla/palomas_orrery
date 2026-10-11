@@ -6,7 +6,16 @@ fires_when: Horizons queries, centers, frames, osculating elements, encounters, 
 
 # Horizons and Orbital Mechanics Reference
 
-Skill version: 1.1 | Cut from palomas_orrery @ e83fe9ce | 2026-07-12
+Skill version: 1.2 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 32619f8d and gallery @ a7d1a542. v1.2 (L-395) adds
+Checking an Entry Against JPL, what the Horizons check's build learned:
+JPL's Lookup cannot see record numbers; a bare number also finds
+asteroids and spacecraft, so an entry is found in three steps; JPL
+re-solves a record in place; and a recent comet's record number can be
+given to another comet. It corrects two lines under Small-Body Record
+Pinning: Encke's pin now lives in the orrery's list, and what a pin
+does not follow is a NEWER record, not a new solution.
+Earlier: 1.1 | Cut from palomas_orrery @ e83fe9ce | 2026-07-12
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons.
 
 ## Horizons Center Body Rules
@@ -36,11 +45,53 @@ periodic comets:
   required DES= key only for id_type='designation'/'name', never for
   'smallbody'.
 - House pattern: pin the specific current record, no apparition flag
-  needed. Halley id='90000030' (celestial_objects.py); Encke '90000091'
-  (gallery objects_config.json). Proven live 2026-07-11.
-- Cost of pinning: a pinned record does NOT auto-track a future JPL
-  solution update. Recheck pinned records periodically, like any frozen
-  upstream identifier.
+  needed. Halley id='90000030' and Encke '90000091', both in
+  celestial_objects.py since 2026-10-10 (L-395). Proven live 2026-07-11.
+- Cost of pinning: JPL re-solves a record IN PLACE (Encke's 90000091
+  took new solutions on 2026-10-01 and 2026-10-09 under the same
+  number), so a pin fixes the apparition, not the numbers. What a pin
+  does not follow is a NEWER record, which JPL adds for a new
+  apparition. The gallery's Horizons check (tools/horizons_check.py,
+  the Daily Run's step 2) confirms every 30 days that each pin is still
+  the newest record for its comet and reports a newer one for Tony; it
+  never re-pins.
+
+## Checking an Entry Against JPL (L-395)
+
+Learned building the Horizons check, 2026-10-07 to 2026-10-10. The
+design and every answer it rests on are in the orrery's documentation/:
+DESIGN_L395_horizons_check_20261007.md and
+HORIZONS_ANSWERS_L395_20261007.md.
+
+- Two services. The Lookup (`api/horizons_lookup.api`) turns a name or
+  number into the objects it matches. Horizons' main service
+  (`api/horizons.api`) answers about one record (COMMAND='<record>') or
+  lists every record for a designation (COMMAND='DES=<desig>;').
+- The Lookup cannot see record numbers: "90000030" and "90000091" both
+  give "no matches found". A pinned record is checked through the main
+  service.
+- A bare number is ambiguous. "499" also finds asteroid 499 Venusia;
+  "9" finds the Pluto barycentre, asteroid 9 Metis and spacecraft with
+  9 in their names. So an entry is found in three steps: search the
+  index its id_type points at (group=mb for a blank, group=sb for
+  "smallbody"); keep the match whose primary SPKID (major bodies) or
+  primary designation (small bodies) equals the id; exactly one must
+  remain. The other index must find nothing, or the id_type is wrong.
+- JPL's names are not the orrery's. A comet carries its designation in
+  brackets ("MAPS (C/2026 A1)", "ATLAS (C/2025 N1)"); the main service
+  names a pinned periodic record "1P/Halley". The list keeps JPL's exact
+  form in `horizons_name` and its own in `name`.
+- A RECENT comet's record number is not stable. 90004956 held MAPS
+  (C/2026 A1) on 2026-10-07 and another comet, PANSTARRS (C/2025 Y3),
+  on 2026-10-10; MAPS had moved to 90004957. Halley's and Encke's
+  numbers did not move. So find a comet with a single record by its
+  designation, as the orrery finds MAPS, and pin a record number only
+  for a periodic comet with many records, where the designation alone
+  is ambiguous. A pin is checked by its record's name as well as its
+  number, which is how a record that changed hands shows.
+- Read JPL's live answers, not its documentation's examples: the
+  Lookup's documentation gives Apophis's primary SPKID as 2099942,
+  while the live answer is 20099942, with 2099942 an older alias.
 
 ## Reference Frame Diagnostic
 

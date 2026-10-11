@@ -160,6 +160,15 @@ October 6, 2026 with Anthropic's Claude Opus 5.5 (L-300): added
 Collapsed Features under the gallery checks, in alphabetical place,
 for the checker the gallery runner gained that day; the offline
 runner's description names it.
+October 10, 2026 with Anthropic's Claude Opus 5.5 (L-395), on Tony's
+request: Horizons Check in the Daily Run group, after the guest book,
+as the Daily Run's step 2; Horizons Check Suite and Horizons
+Confirmations under the gallery checks, in alphabetical place; the
+offline runner's description names both. Fixed in passing, because they
+no longer said what the code does: the Daily Run button and the cache
+builder's routine still told Tony to pause OneDrive (retired 2026-10-10,
+L-216), Daily Run Steps still said three scripts, and Objects Export
+did not name the export's two new fields.
 """
 
 import os
@@ -267,17 +276,18 @@ LAUNCH_GROUPS = {
          "What the gallery needs once a day, in one window, in this order "
          "(L-281, Tony's design of 2026-09-27). First the Guest Book "
          "Updater: approve or decline each new message, and write entries "
-         "or replies if you like. Then it asks you to pause OneDrive and "
-         "note the time, and runs the Gallery Cache Builder; type s at "
-         "that question to skip the build today. Then the Gallery "
-         "Maintenance Run, offline, which the builder's own next steps "
-         "ask for before a commit. A step that reports a problem does not "
-         "stop the next one. It ends with one summary naming each step's "
-         "result and what is left for you: commit and push in GitHub "
-         "Desktop, the live maintenance run, and resuming OneDrive. It "
-         "opens by saying when the last cache build was, so a missed day "
-         "shows. It never commits or pushes. Everything indented below is "
-         "included in it and can still be run on its own.",
+         "or replies if you like. Then the Horizons Check: JPL confirms "
+         "the website's objects that are due (L-395). Then the Gallery "
+         "Cache Builder, with no OneDrive pause since 2026-10-10 (L-216: "
+         "the retry is sufficient). Then the Gallery Maintenance Run, "
+         "offline, which the builder's own next steps ask for before a "
+         "commit. A step that reports a problem does not stop the next "
+         "one. It ends with one summary naming each step's result and "
+         "what is left for you: commit and push in GitHub Desktop, and "
+         "the live maintenance run. It opens by saying when the last "
+         "cache build was, so a missed day shows. It never commits or "
+         "pushes. Everything indented below is included in it and can "
+         "still be run on its own.",
          GALLERY_REPO_DIR,
          True),
         ("Guest Book Updater",
@@ -300,6 +310,23 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
+        ("Horizons Check",
+         os.path.join("tools", "horizons_check.py"),
+         "The Daily Run's second step (L-395). Asks JPL Horizons whether "
+         "each object the website takes from the orrery's list is still "
+         "the object the list says -- the same id, the same index, JPL's "
+         "exact name -- for the entries that are due: each every 30 days, "
+         "and at once after its entry changes. A pinned comet record "
+         "(Halley, Encke) must still be JPL's newest. One line per entry; "
+         "for each disagreement the list's value, JPL's value and the "
+         "query to paste into a browser. Records each confirmation in "
+         "data/horizons_confirmations.json and never edits the list. "
+         "Needs the internet; if JPL cannot be reached it says so and "
+         "asks nothing more. Runs from the gallery repo ROOT.",
+         GALLERY_REPO_DIR,
+         True,
+         None,
+         True),
         ("Gallery Cache Builder -- Manual Run",
          os.path.join("tools", "gallery_cache_builder.py"),
          "Manual serving-cache build. Runs from the gallery repo ROOT: the "
@@ -314,8 +341,8 @@ LAUNCH_GROUPS = {
          "if you want a flagged re-run (--dry-run --object <slug>, "
          "--first-build).\n"
          "\n"
-         "THE ROUTINE (L-216). Pause OneDrive syncing and NOTE THE TIME -- "
-         "a pause lasts 2 hours -- then run the build. It ends with a "
+         "THE ROUTINE (L-216). Run the build: no OneDrive pause since "
+         "2026-10-10, the retry is sufficient. It ends with a "
          "[SWAP] line saying how the swap went, and then prints its own "
          "numbered next steps. Follow them: run Gallery Maintenance Run -- "
          "offline BEFORE you commit, and check that its last line agrees "
@@ -331,7 +358,7 @@ LAUNCH_GROUPS = {
          True),
         ("Gallery Maintenance Run -- offline",
          "gallery_maintenance_run.py",
-         "The Daily Run's third step: the same button as Gallery "
+         "The Daily Run's fourth step: the same button as Gallery "
          "Maintenance Run -- offline under Gallery -- checks and data, "
          "which describes it in full. Run after the build and before you "
          "commit.",
@@ -350,7 +377,8 @@ LAUNCH_GROUPS = {
         "data/objects_config.json, then runs every checker and prints "
         "one line each. Python: the cache builder suite, pole of date, "
         "the mirror suite, the store writer and store editor suites, "
-        "the config mirror check, the pointer join, cache in step, the "
+        "the config mirror check, the Horizons check suite, Horizons "
+        "confirmations, the pointer join, cache in step, the "
         "collapsed-features sweep, the "
         "guest book updater, the Daily Run's steps, the artifact-1 "
         "assembler pin, and cache siblings (report only). Node: feature "
@@ -477,7 +505,7 @@ LAUNCH_GROUPS = {
         True),
         ("Daily Run Steps",
         "daily_run.py",
-        "daily_run.py --check: fails if any of the three scripts the "
+        "daily_run.py --check: fails if any of the four scripts the "
         "Daily Run calls is missing, say after a rename, and names it. "
         "Runs nothing else. GATES the gallery runner.",
         GALLERY_REPO_DIR,
@@ -569,6 +597,29 @@ LAUNCH_GROUPS = {
         "refuse rather than guess. Each suite first proves it can fail. "
         "The first is Node; this is the Python wrapper the dashboard "
         "needs. GATES the gallery runner.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Horizons Check Suite",
+        os.path.join("tools", "test_horizons_check.py"),
+        "The Horizons check on JPL's recorded answers, with no network "
+        "(documentation/horizons_answers_L395.json, each answer with its "
+        "source): every served entry agrees, and each planted mistake -- a "
+        "wrong id, the wrong index, a name off by one letter, a stale pin, "
+        "a record number JPL gave to another comet, JPL unreachable -- is "
+        "caught by name (L-395). GATES the gallery runner.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Horizons Confirmations",
+        os.path.join("tools", "check_horizons_confirmations.py"),
+        "Reads data/horizons_confirmations.json offline and fails on any "
+        "served object never confirmed against JPL, confirmed 30 or more "
+        "days ago, or changed since it was confirmed -- so a Horizons "
+        "Check that stopped running shows (L-395). GATES the gallery "
+        "runner.",
         GALLERY_REPO_DIR,
         True,
         None,
@@ -908,11 +959,12 @@ LAUNCH_GROUPS = {
          "export_objects.py",
          "Write data/objects_export.json from the object list in "
          "celestial_objects.py: every entry carrying a 'key', the website's "
-         "name for it, with its name, Horizons id, id type, description "
-         "(without its opening \"Horizons:\" sentence) and NASA link. The "
-         "website pulls this file and never reads orrery source (L-395). "
-         "Lists every number in an exported description. Writes nothing if "
-         "an entry writes a field twice or a key repeats.",
+         "name for it, with its name, Horizons id, JPL's exact name, id "
+         "type, object type, description (without its opening "
+         "\"Horizons:\" sentence) and NASA link. The website pulls this "
+         "file and never reads orrery source (L-395). Lists every number in "
+         "an exported description. Writes nothing if an entry writes a "
+         "field twice, a key repeats, or a keyed entry has no JPL name.",
          SCRIPT_DIR,
          True,
          None,

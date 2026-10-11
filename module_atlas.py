@@ -165,9 +165,11 @@ ROLE_MAP = {
     'energy_imbalance':                       'computation',
     'fetch_climate_data':                     'computation',
     'fetch_paleoclimate_data':                'computation',
+    'hills_cloud_sampler':                    'computation',
     'idealized_orbits':                       'computation',
     'object_type_analyzer':                   'computation',
     'orbital_elements':                       'computation',
+    'pole_frames':                            'computation',
     'simbad_manager':                         'computation',
 
     # data

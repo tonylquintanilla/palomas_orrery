@@ -1,26 +1,31 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 10, 2026, at the lobby's third round.
-- Written at orrery a6678b0 and gallery cb9038c, before your runs.
+Last updated: October 10, 2026, at the inner Oort cloud build (orrery).
+- Written at orrery 32619f8 with patch_L395_7 applied, and gallery a7d1a54.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - L-429 (the room button on the row): Go To sits in the middle of
->   every room's list, the room button after it; long names wrap.
-> - Artifact 1 passes again; the Daily Run no longer pauses OneDrive.
->   L-428 (the lobby's way in) is closed.
+> - The Daily Run checks the website's objects against JPL (step 2).
+>   First run: all 13 agree. L-395 (the Horizons check).
+> - Encke has its own entry in the orrery. L-414 (the scanner's window)
+>   is closed.
+> - The orrery draws the Hills cloud as a disk of dots along orbits,
+>   following the paper's Fig. 3: tilted 34 degrees; the paper says
+>   about 30. The inner cloud gives way to the outer across 10,000 to
+>   20,000 AU. L-421 (the typed facts).
 >
-> **Do next:** *as you confirmed: the typed facts (the inner Oort
-> cloud, then the check); the Horizons check build; the Sun's list
-> from item 3.*
+> **Do next:** *the website's side of the inner Oort cloud, with the
+> galactic plane (L-408); then the typed facts' check.*
 >
 > **Needs you now:**
-> - *Gallery: run patch_L429_3, the maintenance run, push; look on the
->   phone. Orrery: run patch_L429_4, the maintenance run, push.*
-> - Upload interactive-exhibit (1.14) and gallery-cache-builder (1.8);
->   the Project's instructions to v3.89.
+> - *Orrery: run patch_L395_7, then patch_L421_5, the maintenance run
+>   (22 of 22), push.*
+> - Upload ledger-and-session-records (1.19) and
+>   horizons-orbital-mechanics (1.2); the Project's instructions to v3.90.
+> - *In the orrery window, look at Encke and Halley (four checks) and
+>   the Hills cloud (three checks); both build records list them.*
 > - *Decide L-425 (citation location checks): which checks to build,
 >   on the run's results (on L-425 and in the handoff).*
 
@@ -32,12 +37,11 @@ Last updated: October 10, 2026, at the lobby's third round.
                feeds the website and nothing is typed twice.
   5.   [NOW]   *Earth's old items are finished, in your order.* The
                website patch and Earth's typed facts are live.
-  6.   [next]  The typed facts: 15 of 17 served. Left: the inner Oort
-               cloud, redrawn tilted, and the check.
+  6.   [next]  The typed facts: the inner Oort cloud is drawn in the
+               orrery; the website next, then the check. << moved
   7.   [next]  The Sun's numbers get the checking Earth's got.
-  8.   [next]  The served objects are checked against JPL Horizons.
-               Designed and recorded; build next, with Encke added
-               and Halley checked too.
+  8.   [done]  The served objects are checked against JPL Horizons
+               every day, in the Daily Run. << moved this session
   9.   [next]  The website's checks, in the order you confirmed:
                L-423 (the website's checks).
  10.   [next]  A bare interactive.html link opens the Solar System room;
@@ -52,8 +56,11 @@ Last updated: October 10, 2026, at the lobby's third round.
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
+- The Hills cloud follows the paper: drawn from its Fig. 3, described
+  from its text, everything cited. Full to 10,000 AU. (Oct 10)
 - The lobby opens on the Solar System room, then the subjects. Every
   room's list: Go To in the middle, then the room's button. (Oct 10)
+- Website names: Halley and Encke; JPL's "1P/Halley" stays in the list. (Oct 10)
 - A row's sources come only from its own comment block. (Oct 9)
 - Small fixes owed to a skill ride the version a session is already
   making; a change to a checker gets its own session. (Oct 8)
@@ -71,29 +78,24 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - Items in an ordered list carry no RICE score. (Oct 7)
 - Every ledger handle on this page carries a short label. (Oct 7)
 - Code types only words about our picture; facts are served. (Oct 6)
-- The inner Oort cloud is redrawn from the 2025 paper now, as part of
-  the Sun's slice, not deferred. (Oct 6)
 
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261010T135737Z, ok, no retry.
+- Last cache build: 20261010T221109Z, ok, no retry; the one before retried once.
 - Tier-1 on the gate path: 0, by name, in PROVENANCE_AUDIT.md at
-  a6678b0. Whole tree: 293.
+  32619f8 with both patches (sandbox run). Whole tree: 292 (was 293).
 - This page's date and the ledger's newest stamp: both Oct 10. Agree.
 
-## Waiting on you
+## Waiting on you  **>> UPDATED THIS SESSION**
 
 At the next design talk:
 - The fuzzy outer corona, with the dust cloud; the exosphere the same way.
 - Moving the highlighted row to the top of the list.
 - GO's arrow, only if the text box stays centred.
 - Earth's design talks, the belts' shape first.
-- Whether the phone's Sun room gets the galactic plane, its poles,
-  Sgr A* and the tide's cone: L-408 (the galactic plane on the phone).
-  You: "awaits the design talk." (Oct 7)
-- The inner Oort cloud's tilted disk: its words, and whether its outer
-  edge moves from 20,000 au to the paper's 10,000.
+- The tide's cone and brightness on the phone: L-408 (the galactic
+  plane on the phone). The ring, poles and Sgr A* were ruled Oct 9.
 
 Decisions, one at a time:
 - L-424 (the checker's one word for two cases): whether the
@@ -107,20 +109,17 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - The lobby, the room button: L-428, L-429; `HANDOFF_L429_round3_20261010.md`
-- Scanner window: L-414 (the scanner's window), L-427 (rows a neighbour
-  had credited); `documentation/HANDOFF_L414_scanner_window_20261009.md`
-- The Oct 8 decisions: `documentation/HANDOFF_decisions_20261008.md`.
-  The new list: L-423 (the website's checks).
-- Every item: `LEDGER_CONSOLIDATED.md`. The Fable sweep: L-422 (the ledger
-  skill at 1.17 and this page), L-001 (the Earth System track), L-071
-  and L-077 (the 2026 heat domes, closed), L-216 (the swap retry and
-  the hand run), L-412 (the RICE ruling), L-395 (the Horizons check,
-  designed). Open for build: L-421 (the typed facts).
+- Every item: `LEDGER_CONSOLIDATED.md`. Open for build: L-421 (the
+  typed facts), its website side.
 - The typed facts: plan
   `documentation/MANIFEST_L421_typed_facts_20261006.md`; record
   `documentation/HANDOFF_L421_typed_facts_20261008.md`
-- The Horizons check design:
-  `documentation/DESIGN_L395_horizons_check_20261007.md`
+- The inner Oort cloud: design
+  `documentation/DESIGN_L421_inner_oort_tilt_20261009.md`; record
+  `documentation/HANDOFF_L421_oort_orrery_20261010.md`
+- The Horizons check: design
+  `documentation/DESIGN_L395_horizons_check_20261007.md`; record
+  `documentation/HANDOFF_L395_horizons_check_build_20261010.md`
 - The split's tests and the citation checks: L-418 (splitting
   provenance-discipline, closed), L-425 (citation location checks),
   L-426 (the checker's small-number comparison); record

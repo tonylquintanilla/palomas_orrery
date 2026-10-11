@@ -325,6 +325,17 @@ Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5
 closed; L-237 the Artifact 1 date; L-216 the OneDrive pause retired;
 interactive-exhibit 1.14, gallery-cache-builder 1.8, protocol v3.89),
 built on a6678b0f.
+Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5
+(L-395 built: the Horizons check, Daily Run step 2, its first live run
+13 of 13; Encke's list entry; Halley keyed; L-414 closed on the 2.28
+read-back; ledger-and-session-records 1.19, horizons-orbital-mechanics
+1.2, protocol v3.90), built on 32619f8d.
+Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5
+(L-421, the inner Oort cloud, orrery side: the Hills cloud drawn as dots
+along orbits following Nesvorny et al. (2025) Fig. 3, the band from
+10,000 to 20,000 au, the new rows and the sampler; L-408 gains the
+design talk of 2026-10-09; L-430 opened), built on 32619f8d with
+patch_L395_7 applied.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -542,7 +553,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*237 live items; 221 need attention (`!`); 167 RICE-scored; 187 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*237 live items; 221 need attention (`!`); 167 RICE-scored; 188 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -675,25 +686,25 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-391 | Group clouds: the Trojans' sources, and the shapes of the three other groups (gallery, exhibits) | OPEN | -- | 2026-09-29 |
 | ! | L-393 | Encounter data: dates, spacecraft records centred on their targets, and how far the cache reaches in time (gallery, cache) | OPEN | -- | 2026-09-29 |
 | ! | L-394 | A card cannot say which body it belongs to (gallery, Studio) | OPEN | -- | 2026-09-29 |
-| ! | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | OPEN | -- | 2026-10-08 |
+| ! | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | OPEN | -- | 2026-10-10 |
 | ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-10-07 |
 | ! | L-399 | Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder) | OPEN | -- | 2026-10-01 |
 | ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
-| ! | L-408 | A Galactic Plane toggle in the Sun room (gallery, the Sun's slice) | OPEN | -- | 2026-10-06 |
+| ! | L-408 | A Galactic Plane toggle in the Sun room (gallery, the Sun's slice) | OPEN | -- | 2026-10-10 |
 | ! | L-410 | Fuzzy boundaries for edges known only as ranges, the outer corona first (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-05 |
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
 | ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-08 |
 | ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-06 |
-| ! | L-414 | The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling) | PENDING-GATE | -- | 2026-10-09 |
-| ! | L-421 | Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words) | OPEN | -- | 2026-10-08 |
+| ! | L-421 | Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words) | OPEN | -- | 2026-10-10 |
 | ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-08 |
 | ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-09 |
 | ! | L-425 | A citation's location record is checked only in part (provenance tooling) | OPEN | -- | 2026-10-09 |
 | ! | L-426 | The worksheet checker compares very small numbers as equal (worksheet checker) | OPEN | -- | 2026-10-09 |
 | ! | L-427 | Rows a neighbour's citation had been crediting (store) | OPEN | -- | 2026-10-09 |
 | ! | L-429 | The room button on the row, in the Solar System room's list (gallery, exhibits) | OPEN | -- | 2026-10-10 |
+| ! | L-430 | Uncited lines in the orrery's Oort cloud tooltips and the Sun's reach text (orrery, words) | OPEN | -- | 2026-10-10 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1020,6 +1031,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-406 | The galactic tide drawn in the galaxy's plane (orrery + gallery, the Sun's slice) | DONE | -- | 2026-10-04 |
 |  | L-407 | A skill's header is checked as YAML (orrery, skills) | DONE | -- | 2026-10-04 |
 |  | L-409 | The licenses: the orrery's recognized by GitHub, the website's written (orrery, gallery) | DONE | -- | 2026-10-04 |
+|  | L-414 | The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling) | DONE | -- | 2026-10-10 |
 |  | L-415 | A patch writes LF and reports: safe-file-editing 1.12 (skills) | DONE | -- | 2026-10-06 |
 |  | L-416 | Every maintenance-run step has a dashboard button (dashboard, both repos) | DONE | -- | 2026-10-05 |
 |  | L-417 | The Skill headers check enforces Anthropic's documented limits (skills, checks) | DONE | -- | 2026-10-05 |
@@ -1058,7 +1070,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
 #### [L-408] A Galactic Plane toggle in the Sun room (gallery, the Sun's slice)
-<!-- L:408 status:OPEN upd:2026-10-06 section:A flag: rice: -->
+<!-- L:408 status:OPEN upd:2026-10-10 section:A flag: rice: -->
 - **Asked 2026-10-03** by Tony, looking for the galactic tide's X on
   the phone and not finding it at the angle he had: "Could we toggle on
   the galactic plane and axis?" Claude agreed it earns its place: it
@@ -1113,10 +1125,27 @@ as an archive of the prioritization thinking -- no cleanup on close.
   made there (L-420).
 - **2026-10-07:** Tony, on the phone's question: "awaits the design
   talk."
-**Gap:** the Sun slice's eighth item (L-412): Tony's design decision,
-at the design talk, on whether the phone draws the galactic plane,
-Sgr A*, and the tide's cone and brightness; then the gallery build.
-**Ref:** L-406, L-265; gallery `gallery/feature_renderers.js`,
+- **2026-10-09, the design talk** (record
+  `documentation/DESIGN_L421_inner_oort_tilt_20261009.md`, sections 6
+  and 10). Tony: "On the galactic plane ring and sentence rewrite, yes,
+  and include the poles and *SagA location." So the phone draws the
+  ring, the pole line, both poles and the direction of Sgr A*, in the
+  same gallery build as the inner Oort cloud (L-421). Sgr A* needs no
+  new number: L-420's rows answer it. The approved sentence "That tilt
+  is why the galactic tide looks tipped against the Hills cloud, which
+  lies close to the planets' plane" is wrong once the Hills cloud is
+  tilted; its rewrite, the description extended for the poles and Sgr
+  A*, the note's added sentence and the markers' words, all in the
+  record's section 10, Tony confirmed ("Yes", 17:07). Sgr A*'s marker
+  leaves out "black hole" until a source for it is read. The link
+  stays Wikipedia, "Galactic coordinate system".
+- **2026-10-10:** the orrery side of the inner Oort cloud is built
+  (L-421); this rides the gallery session that follows it.
+**Gap:** the gallery build, with the inner Oort cloud's gallery side
+(L-421), in the words confirmed 2026-10-09; then Tony's look on the
+phone. The tide's cone and brightness on the phone were not part of
+the 2026-10-09 ruling and stay a question.
+**Ref:** L-406, L-265, L-420, L-421; gallery `gallery/feature_renderers.js`,
 `data/objects_config.json`.
 
 
@@ -1180,7 +1209,7 @@ gallery `data/objects_config.json`; L-228, L-371.
 
 
 #### [L-421] Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words)
-<!-- L:421 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+<!-- L:421 status:OPEN upd:2026-10-10 section:A flag: rice: -->
 - **Found 2026-10-06**, on Tony's question: "where are the facts for the
   info panel stored, the code itself? Shouldn't the data and sources use
   the store?" Both rooms were built headless twice, once as served and
@@ -1246,22 +1275,108 @@ gallery `data/objects_config.json`; L-228, L-371.
   unchanged by this.
 - **S4 stays typed**, as the manifest ruled: the streamer belt's
   caveat is a drawing choice.
-**Gap:** two parts of the Sun slice, then the check. (1) The inner
-Oort cloud redrawn as the 2025 paper's tilted disk, with the tilt's
-range as an envelope: its words come to Tony before they ship, and
-one question first -- the paper puts the disk at 1,000 to 10,000 au,
-where the served cloud runs 2,000 to 20,000 au from NASA and
-Portegies Zwart (2021), so trace what uses the outer edge before
-asking whether it moves. Then Tony's look. (2) The survey as a
-gating check in the gallery run, shown failing on a planted typed
-sentence first. Still unchecked: whether each served number's
-citation in `data/objects_config.json` agrees with its row's in
-`constants_new.py`. The L-363 `_declared` "1.1 times" fix did not
-ride these patches and is still owed there.
+- **The design talk, 2026-10-09** (Claude Opus 5.5; record
+  `documentation/DESIGN_L421_inner_oort_tilt_20261009.md`). The paper
+  read in full: the inner cloud a slightly warped disk tilted about 30
+  degrees to the ecliptic, nearly polar to the galaxy, with two spiral
+  arms; the round outer cloud beyond about 10,000 au. Tony's rulings,
+  in order:
+  - The boundary: "would a fuzzy boundary work?", then "Yes": the inner
+    cloud gives way to the outer across a band from 10,000 au
+    (Nesvorny et al. 2025) to 20,000 au (Portegies Zwart et al. 2021).
+  - The hover: "say 'about' in the hover and draw 30 Degrees and say so
+    with the citation"; the hover, the panel's `about` and `note`
+    confirmed (16:33, 16:42).
+  - The arms: "Please draw the arms." The method: "A. And it's
+    consistent with 'about' 30 degrees" -- dots along orbits, so the
+    tilt and the arms come out of the orbits. The revised hover and note
+    confirmed, with one phrase cut (17:03).
+  - The tilt's "range as an envelope" in the Gap above is not in the
+    paper, which gives "about 30" only; struck.
+- **2026-10-10, the orrery side built** (Claude Opus 5.5, from
+  `documentation/HANDOFF_L421_oort_orrery_build_brief_20261009.md`;
+  record `documentation/HANDOFF_L421_oort_orrery_20261010.md`).
+  - Tony's answers: the band's near end stays at 10,000 au, not the
+    7,500 au "roughly 15,000 au across" might mean ("Confirmed as
+    recommended"). Then the tilt check failed before anything was
+    drawn: orbits spread evenly over the captions' ranges tilt about
+    40 degrees. Tony attached the paper and ruled: "follow the paper.
+    Draw following figure 3 and describe following the text. And cite
+    everything."
+  - Fig. 3 read into a table by
+    `documentation/L421_fig3_reading_20261010.py`: 203 cells, 2,052
+    dots, the axes checked against the figure's own lines, overlaps
+    estimated, its solid-black core held at the method's cap and said
+    so on the row.
+  - Rows added to `constants_new.py`: `INNER_OORT_DISK_OUTER_AU`,
+    `HILLS_CLOUD_TILT_DEG`, `ECLIPTIC_NODE_GALACTIC_LON_DEG`, the four
+    `HILLS_CLOUD_PERI_ARG_BAND*` rows, `HILLS_CLOUD_NODE_LOW_DEG` and
+    `_HIGH_DEG`, `HILLS_CLOUD_INCL_GAL_LOW_DEG` and `_HIGH_DEG`
+    (measured, each read from the paper); `HILLS_CLOUD_PLANES_READ`,
+    its two cell rows and `HILLS_CLOUD_ECCENTRICITY` (declared, each
+    with its reason). Tokens `eccentricity` and `dot_count`.
+  - New modules: `hills_cloud_sampler.py` (the dots, and three checks:
+    the frame, the reading, the tilt), `pole_frames.py` (the pole
+    matrix, moved unchanged from `idealized_orbits.py`),
+    `test_hills_cloud_sampler.py` (each check shown failing on a planted
+    fault), the 22nd gating checker of the maintenance run.
+  - Rewritten: `create_sun_hills_cloud_torus` reads the sampler, its
+    typed 2,000 and 20,000 au defaults gone; `create_sun_outer_oort_clumpy`
+    reads the rows for its typed 20,000 and 100,000 au; the clumps and
+    the tide fill in across the band; every string that printed the
+    single edge says the band; the Hills cloud's words are Tony's
+    confirmed words with the citation; two comments citing Hills (1981)
+    corrected; the checkbox reads "Hills Cloud (tilted disk)".
+  - Measured in the sandbox: the plane through the dots 34.1 degrees
+    from the ecliptic (the paper: about 30); the arms near the
+    ecliptic; Sgr A* within half a degree of where the frame puts the
+    galaxy's centre; the maintenance run 22 of 22, gate path 0 Tier-1.
+  - Two departures from the brief, with reasons in the record: a new
+    row for 10,000 au rather than a second source on NASA's outer-edge
+    row (a different quantity that prints the same number), and the
+    node as a measured row the sampler checks rather than a derived one.
+  - One confirmed clause changed to say what is drawn: the note's
+    "picked within the ranges the model gives" became "picked where the
+    model's orbits lie (its Fig. 3)". It comes to Tony with the gallery
+    words.
+**Gap:** the orrery side is built. Still open: Tony's look in the
+orrery window (the record's section 7); the gallery side (the mirror,
+the renderers, the served words with the changed clause, the cache
+rebuild, the phone look), with L-408; the survey as a gating check in
+the gallery run, shown failing on a planted typed sentence first; and
+whether each served number's citation in `data/objects_config.json`
+agrees with its row's in `constants_new.py`. The L-363 `_declared`
+"1.1 times" fix is still owed to the gallery session. The orrery's
+other uncited Oort lines are L-430.
 **Ref:** L-413; L-349 (`flux_peak_of`, the first case); L-322 (the
-IGRF epoch, a class); gallery `gallery/feature_renderers.js`,
+IGRF epoch, a class); L-408; L-430;
+`documentation/DESIGN_L421_inner_oort_tilt_20261009.md`,
+`documentation/HANDOFF_L421_oort_orrery_20261010.md`;
+`hills_cloud_sampler.py`; gallery `gallery/feature_renderers.js`,
 `gallery/earth_geometry.js`, `data/objects_config.json`;
 skills/interactive-exhibit/SKILL.md.
+
+#### [L-430] Uncited lines in the orrery's Oort cloud tooltips and the Sun's reach text (orrery, words)
+<!-- L:430 status:OPEN upd:2026-10-10 section:A flag: rice: -->
+- **Found 2026-10-10** building L-421 (the typed facts), in strings that
+  build already opened in `solar_visualization_shells.py`, and recorded
+  as one class, not chased (The Braid). The tooltips
+  `outer_oort_clumpy_info` and `galactic_tide_info` carry a list with no
+  source: "Contains an estimated 1-100 trillion objects >1km", "2012
+  VP113 provides evidence for inner Oort population", "NEOWISE survey
+  improving population estimates", "Short-period comet inclinations
+  suggest disk-like inner region", and "Objects like Sedna may be inner
+  Oort Cloud members". `gravitational_influence_info` and its hover
+  print "Sedna's orbit (936 AU)" typed. The inner cloud's and inner
+  limit's texts repeat "More tightly bound" twice in one sentence.
+- L-421 replaced the same list in `hills_cloud_torus_info` with Tony's
+  confirmed words; these strings kept it, and changed only where they
+  printed the inner cloud's edge.
+**Gap:** each line sourced (to a row, if it is a number) or removed
+with the gap noted, when these strings are next opened for the Sun's
+numbers (road stage 7, the Sun's numbers get Earth's checking).
+**Ref:** L-421; L-411 (the typed numbers left in the Sun's hovers);
+`solar_visualization_shells.py`.
 
 #### [L-429] The room button on the row, in the Solar System room's list (gallery, exhibits)
 <!-- L:429 status:OPEN upd:2026-10-10 section:A flag: rice: -->
@@ -1568,113 +1683,6 @@ above.
 **Ref:** L-412 (the Sun's list, which resumes after this); the handles
 above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 
-#### [L-414] The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling)
-<!-- L:414 status:PENDING-GATE upd:2026-10-09 section:A flag: rice: -->
-- **2026-10-08:** Tony ruled that this item gets its own session,
-  which cuts provenance-discipline 2.28, before the Sun's list
-  reaches L-228 (the Alfven surface's ranges); it does not ride the
-  split (L-418). If the split shipped 2.27 without L-252's approved
-  paragraph (on L-418), that paragraph rides this item's 2.28.
-- **Found 2026-10-04,** checking why `constants_new.py` went from 0 to
-  4 Tier-1 findings between mid-August and now. The four rows are not
-  uncited.
-  - `EARTH_MEAN_RADIUS_KM` carries `# Source: NASA Planetary Fact
-    Sheet, Earth` -- 16 lines below the assignment, after a Figures
-    block that grew on 2026-09-19. The scanner's constant context looks
-    15 lines ahead (`get_context_block(..., lookback=30,
-    lookahead=15)`). Tested at cbde99dc: at 15 the Source line is not
-    in the context, at 16 it is.
-  - `EARTH_SOLAR_WIND_PRESSURE_NPA`, `_BZ_NT` and `_SPEED_KM_S` each
-    carry `# Status: declared pending` and a `# Declared:` reason (the
-    speed's reason says plainly it is not yet written). The scanner
-    does not count a declared status as provenance, and its name rules
-    call them MEASURED.
-- So the count rose for a reason that is not about provenance -- A
-  Check That Cannot Fail Is Not Passing, from the other side: a check
-  that fails on a cited row costs trust in every finding.
-- **Method, not Tony's:** whether to move Source lines up, widen the
-  window to the attached comment run, or teach the scanner the declared
-  status is provenance-discipline's to settle. L-351 points here for
-  that skill's next version.
-- **2026-10-09, the window's other face** (planted-fault run, F1;
-  record `documentation/HANDOFF_L418_testing_20261009.md`). With EARTH_THERMOPAUSE_ALTITUDE_KM's own Source
-  lines removed, the scanner still scored it "Cited, not independently
-  cross-checked": the stratopause row's Source and Ref lines, a few
-  lines above, fell inside its 30-line look-back. Removing those as
-  well made both rows Tier-1 (296 to 298). So the window both misses a
-  row's own late Source line (above) and credits a neighbour's; in
-  constants_new.py, where rows sit close, a removed Source line is
-  caught only by test_status_lines.py rule 4, on rows that declare a
-  sourced rung.
-- **2026-10-09, BUILT** (patch_L414_1_scanner_window_20261009.py, on
-  aa46bb10; provenance-discipline 2.28, protocol v3.87). One mechanism,
-  not three fixes: a row in `constants_new.py` is read through its OWN
-  comment run -- the run directly below the assignment, and a run
-  directly above only when a blank line fences it off from the code
-  before it. A run between two packed rows is the row above's. The
-  shadow detector's own-citation predicate reads the same run. A
-  declared row with its reason written down is DECLARED: unscored,
-  never Tier-1, named in the audit. The gate path is read from
-  `data/constants_export.json` and `data/objects_export.json` and
-  printed by name on the console, in the audit and in the run history
-  (names, compared as a multiset). Display strings and other modules
-  keep their window. Pins: `test_row_run.py`, 16, a new gating checker;
-  15 of the 16 fail against the scanner at aa46bb10.
-- **Discovery, by name** (throwaway copy of aa46bb10):
-  - Left Tier-1 (4): EARTH_MEAN_RADIUS_KM (now cited);
-    EARTH_SOLAR_WIND_PRESSURE_NPA, EARTH_SOLAR_WIND_BZ_NT,
-    EARTH_SOLAR_WIND_SPEED_KM_S (now declared pending, L-314).
-  - Entered Tier-1 (1): CENTER_BODY_RADII, off the gate path. L-427.
-  - Lost neighbour credit, Tier 4 (2): DEFAULT_MARKER_SIZE,
-    CENTER_MARKER_SIZE. Rendering settings, which need no source;
-    L-372 already moves them to the drawing code.
-  - Now DECLARED (19): S_PER_HOUR, EARTH_POLE_RA_J2000_DEG,
-    EARTH_POLE_DEC_J2000_DEG, ARCSEC_PER_DEG,
-    EARTH_OBLIQUITY_J2000_ARCSEC, GALACTIC_NORTH_POLE_RA_J2000_DEG,
-    GALACTIC_NORTH_POLE_DEC_J2000_ARCSEC, EARTH_LEO_LOWER_ALTITUDE_KM,
-    the three solar-wind rows, EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG,
-    EARTH_BOW_SHOCK_CUT_ANGLE_DEG, INNER_CORONA_RADII,
-    OUTER_CORONA_RADII, the three DE430_*_POSITION_PLACE_KM rows,
-    M3_PER_KM3.
-  - Whole tree 296 -> 293 Tier-1. Gate path 4 -> 0: at aa46bb10 the
-    push gate was failing on exactly the four rows above, all the
-    scanner's own faults, and no tool printed it.
-- **One method call beyond the brief, settled in the skill:** a
-  declared row's reason may sit after `--` on its Status line, as
-  well as on a `# Declared:` line. The brief named only the second;
-  that would have put M3_PER_KM3, which is exported, into gate-path
-  Tier-1 for a reason the row writes plainly ("an exact unit
-  conversion"). A bare ledger handle there is not a reason.
-- **Planted faults, on copies, each failing before and passing
-  after:** F1 (the thermopause row's Source removed -> Tier-1);
-  EARTH_MEAN_RADIUS_KM's Source 16 lines down -> cited; the three
-  solar-wind rows -> DECLARED; the stratopause row's own Source and
-  Ref removed, neighbours untouched -> Tier-1.
-- **Which cases the recognition pins cover:** the 27 pins of
-  `test_provenance_1d.py` all hold. Its four contiguity pins (citation
-  below, citation above, a blank ends the run below, preceding code
-  ends the run above) are the row run's rule for single rows; no pin
-  covered a section-header citation over several rows, and under the
-  row run a header covers only the row it touches.
-- Tony-action (do): run the patch, then orrery_maintenance_run.py;
-  move the script into documentation/; commit and push; reinstall
-  provenance-discipline from its ZIP.
-- **Tony's run, read 2026-10-09 by the lobby session (L-428)** from his
-  copy `documentation/WHERE_WE_ARE_10-8-26_1406_run_record.md`: the
-  maintenance run ended "21 of 21 gating checkers passed -- 112.0s
-  total", its scanner row reading "0 TIER-1 -- the push gate holds";
-  pushed in b6652f9. `PROVENANCE_AUDIT.md` at b6652f9 reads "GATE PATH:
-  0 TIER-1 -- the push gate holds." Not closed by that session: it did
-  not load provenance-discipline, and the next provenance session
-  confirms its loaded copy reads 2.28.
-**Gap:** Tony's run. The maintenance run should end on "GATE PATH: 0
-TIER-1 -- the push gate holds" and "21 of 21 gating checkers passed".
-Then this item closes.
-**Ref:** `provenance_scanner.py`; `provenance_history.py`;
-`test_row_run.py`; `orrery_maintenance_run.py`; `constants_new.py`;
-`PROVENANCE_AUDIT.md`; `documentation/HANDOFF_L414_scanner_window_20261009.md`;
-L-305; L-314; L-351; L-184; L-427.
-
 #### [L-423] The website's checks: the order Tony confirmed (checks, gallery)
 <!-- L:423 status:OPEN upd:2026-10-08 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-08**, in the decisions session of
@@ -1913,7 +1921,7 @@ is enough. L-422 holds the shape; this item holds the check.
 **Ref:** `documentation/WHERE_WE_ARE.md`; `skills/ledger-and-session-records/SKILL.md` (The Document Stack); `PROJECT_INSTRUCTIONS.md` v3.74; L-363; L-395; L-333; L-362.
 
 #### [L-395] The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects)
-<!-- L:395 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+<!-- L:395 status:OPEN upd:2026-10-10 section:A flag: rice: -->
 - **2026-10-01, design rulings and the first build** [verified: orrery
   feb5e369, gallery 43993b49; Tony's runs 22 of 22 gating; his phone:
   "perfect"]. Tony's rulings, each "confirmed as recommended" unless
@@ -2156,15 +2164,73 @@ is enough. L-422 holds the shape; this item holds the check.
   2026-10-08 ran a build without pausing, as a trial ("With the
   retry as the fail safe do I need the pause?"). So this build's fix
   is no longer only "say 24 hours": ask Tony then whether the pause
-  step becomes optional or goes.
-**Gap:** The first build is done (the room's eleven bodies). Still open:
-the Horizons cross-check, designed 2026-10-07 and built next from
-`documentation/DESIGN_L395_horizons_check_20261007.md` (its first run
-lists and fixes nothing except simple errors, reported); Encke's list
-entry; fields the list lacks (a moon's parent, a
-clean kind); the remaining served objects; L-391 to L-394. The numbers
-in the other descriptions are L-403.
-**Ref:** `documentation/DESIGN_L395_horizons_check_20261007.md`; `documentation/HORIZONS_ANSWERS_L395_20261007.md`; `celestial_objects.py`; gallery `data/objects_config.json`; `export_constants.py`; gallery `tools/pull_constants_export.py` and `tools/mirror_constants.py` (the model); skills/horizons-orbital-mechanics/SKILL.md; L-363; L-364; L-391 to L-394.
+  step becomes optional or goes. ANSWERED 2026-10-10 before this
+  build reached it: Tony retired the pause ("the retry is
+  sufficient"), and gallery patch_L429_3 took the step out of
+  `daily_run.py` (L-216, L-429). Struck here.
+- **2026-10-10, the Horizons check built** (Claude Opus 5.5, from
+  `documentation/HANDOFF_L395_horizons_check_build_brief_20261010.md`;
+  record `documentation/HANDOFF_L395_horizons_check_build_20261010.md`).
+  - Orrery, `patch_L395_5_horizons_name_and_encke_20261010.py`:
+    `horizons_name`, JPL's exact name, on the thirteen keyed entries;
+    Halley keyed (`halley`) with Tony's words of 2026-10-08 and NASA's
+    1P/Halley page; Encke's own entry (`encke`, record 90000091,
+    "2P/Encke") with a checkbox under Halley's and INFO['Encke']; the
+    export carries `horizons_name` and `object_type` and refuses a
+    keyed entry without a `horizons_name`, shown failing on a planted
+    entry. Fixed in passing: the two s-acute letters of "Wierzchos" in
+    `info_dictionary.py`, the file's only non-ASCII. Pushed in d83cc5e.
+  - Gallery, `patch_L395_6_horizons_check_gallery_20261010.py`:
+    `tools/horizons_check.py` (Daily Run step 2, before the cache
+    builder), `tools/check_horizons_confirmations.py` and
+    `tools/test_horizons_check.py` (two gating rows of the maintenance
+    run), `documentation/horizons_answers_L395.json` (the tests'
+    answers, each with its source); Encke's wrong "2022-epoch" note
+    gone. The tests catch, by entry and field, a wrong id, either wrong
+    index, a name off by one letter, a stale pin, a record number given
+    to another comet, a wrong barycentre type, JPL unreachable and an
+    answer that is not JPL's; the offline checker fails on a
+    confirmation deleted, one overdue and one changed. Pushed in
+    4a34221 and a7d1a54.
+  - Tested in the sandbox, which cannot reach JPL: the orrery window
+    headless with Encke ticked (JPL asked for record 90000091 as a
+    small body; Encke, its orbit and its tail drawn), the orrery
+    maintenance run 21 of 21, the gallery's 26 rows with the two
+    expected reds.
+- **Tony's runs, 2026-10-10**, from his copy
+  `documentation/WHERE_WE_ARE_10-10-26_1426_run_record.md`: the orrery
+  maintenance run "21 of 21 gating checkers passed"; the gallery run
+  before the Daily Run, the two expected reds ("Horizons
+  confirmations", "Cache in step" on the two comets' names); then the
+  Daily Run, whose step 2 was the check's FIRST LIVE RUN: "Examined 13
+  entries: 13 due, 26 queries asked of JPL", every entry "agrees",
+  Halley's pin "the newest of 30", Encke's "the newest of 61" with
+  solution date 2026-Oct-09_14:41:02, and "HORIZONS CHECK: PASS -- 13
+  checked today, 0 not due". After its cache build: "26 of 26 gating
+  checkers passed"; the live run "2 of 2". Tony: "correct."
+- **Ruled 2026-10-10:** the website's names for the two comets.
+  Asked whether the website should show "Halley and Encke" (the list's
+  names) or "1P/Halley and 2P/Encke", Tony chose "Halley and Encke
+  (Recommended)". JPL's form stays in `horizons_name`.
+- **Found re-fetching JPL's answers, 2026-10-10** (through the chat's
+  web-fetch tool, fields compared, not bytes): record 90004956 held
+  MAPS (C/2026 A1) on 2026-10-07 and PANSTARRS (C/2025 Y3) on
+  2026-10-10, MAPS having moved to 90004957 -- a recent comet's record
+  number is not stable (the orrery finds MAPS by designation, so it is
+  unaffected; it is a test case now). JPL re-solved Encke's record on
+  2026-10-09. The recorded "sstr=9" answer is identical to the
+  major-body-only answer and is probably a paste slip: live, "9" also
+  finds asteroid 9 Metis, so the design's note that it found no
+  asteroid was wrong; the check searches each index apart and is
+  unaffected. horizons-orbital-mechanics 1.2 records all three.
+**Gap:** The check is built and runs every day. Still open: fields the
+list lacks (a moon's parent, a clean kind); the remaining served
+objects (moon, io, titan, pluto, charon, voyager_1, which have no key
+yet); the display-name rename; MAPS and 3I/ATLAS checked live when
+served; L-391 to L-394. The numbers in the other descriptions are
+L-403. Tony's look at Encke and Halley in the orrery's window (four
+checks in the build record).
+**Ref:** `documentation/DESIGN_L395_horizons_check_20261007.md`; `documentation/HORIZONS_ANSWERS_L395_20261007.md`; `documentation/HANDOFF_L395_horizons_check_build_20261010.md`; gallery `tools/horizons_check.py`, `tools/check_horizons_confirmations.py`, `tools/test_horizons_check.py`, `data/horizons_confirmations.json`; `celestial_objects.py`; gallery `data/objects_config.json`; `export_constants.py`; gallery `tools/pull_constants_export.py` and `tools/mirror_constants.py` (the model); skills/horizons-orbital-mechanics/SKILL.md; L-363; L-364; L-391 to L-394.
 
 #### [L-394] A card cannot say which body it belongs to (gallery, Studio)
 <!-- L:394 status:OPEN upd:2026-09-29 section:A flag: rice: -->
@@ -21137,6 +21203,121 @@ case); A Check That Cannot Fail Is Not Passing [CRITICAL].
 door); L-367 (no checker opens a room); L-423 (the website's checks);
 gallery `index.html`, `gallery/gallery_config.json`,
 `gallery/gallery_metadata.json`.
+
+#### [L-414] The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling)
+<!-- L:414 status:DONE upd:2026-10-10 section:C flag: rice: -->
+- **2026-10-08:** Tony ruled that this item gets its own session,
+  which cuts provenance-discipline 2.28, before the Sun's list
+  reaches L-228 (the Alfven surface's ranges); it does not ride the
+  split (L-418). If the split shipped 2.27 without L-252's approved
+  paragraph (on L-418), that paragraph rides this item's 2.28.
+- **Found 2026-10-04,** checking why `constants_new.py` went from 0 to
+  4 Tier-1 findings between mid-August and now. The four rows are not
+  uncited.
+  - `EARTH_MEAN_RADIUS_KM` carries `# Source: NASA Planetary Fact
+    Sheet, Earth` -- 16 lines below the assignment, after a Figures
+    block that grew on 2026-09-19. The scanner's constant context looks
+    15 lines ahead (`get_context_block(..., lookback=30,
+    lookahead=15)`). Tested at cbde99dc: at 15 the Source line is not
+    in the context, at 16 it is.
+  - `EARTH_SOLAR_WIND_PRESSURE_NPA`, `_BZ_NT` and `_SPEED_KM_S` each
+    carry `# Status: declared pending` and a `# Declared:` reason (the
+    speed's reason says plainly it is not yet written). The scanner
+    does not count a declared status as provenance, and its name rules
+    call them MEASURED.
+- So the count rose for a reason that is not about provenance -- A
+  Check That Cannot Fail Is Not Passing, from the other side: a check
+  that fails on a cited row costs trust in every finding.
+- **Method, not Tony's:** whether to move Source lines up, widen the
+  window to the attached comment run, or teach the scanner the declared
+  status is provenance-discipline's to settle. L-351 points here for
+  that skill's next version.
+- **2026-10-09, the window's other face** (planted-fault run, F1;
+  record `documentation/HANDOFF_L418_testing_20261009.md`). With EARTH_THERMOPAUSE_ALTITUDE_KM's own Source
+  lines removed, the scanner still scored it "Cited, not independently
+  cross-checked": the stratopause row's Source and Ref lines, a few
+  lines above, fell inside its 30-line look-back. Removing those as
+  well made both rows Tier-1 (296 to 298). So the window both misses a
+  row's own late Source line (above) and credits a neighbour's; in
+  constants_new.py, where rows sit close, a removed Source line is
+  caught only by test_status_lines.py rule 4, on rows that declare a
+  sourced rung.
+- **2026-10-09, BUILT** (patch_L414_1_scanner_window_20261009.py, on
+  aa46bb10; provenance-discipline 2.28, protocol v3.87). One mechanism,
+  not three fixes: a row in `constants_new.py` is read through its OWN
+  comment run -- the run directly below the assignment, and a run
+  directly above only when a blank line fences it off from the code
+  before it. A run between two packed rows is the row above's. The
+  shadow detector's own-citation predicate reads the same run. A
+  declared row with its reason written down is DECLARED: unscored,
+  never Tier-1, named in the audit. The gate path is read from
+  `data/constants_export.json` and `data/objects_export.json` and
+  printed by name on the console, in the audit and in the run history
+  (names, compared as a multiset). Display strings and other modules
+  keep their window. Pins: `test_row_run.py`, 16, a new gating checker;
+  15 of the 16 fail against the scanner at aa46bb10.
+- **Discovery, by name** (throwaway copy of aa46bb10):
+  - Left Tier-1 (4): EARTH_MEAN_RADIUS_KM (now cited);
+    EARTH_SOLAR_WIND_PRESSURE_NPA, EARTH_SOLAR_WIND_BZ_NT,
+    EARTH_SOLAR_WIND_SPEED_KM_S (now declared pending, L-314).
+  - Entered Tier-1 (1): CENTER_BODY_RADII, off the gate path. L-427.
+  - Lost neighbour credit, Tier 4 (2): DEFAULT_MARKER_SIZE,
+    CENTER_MARKER_SIZE. Rendering settings, which need no source;
+    L-372 already moves them to the drawing code.
+  - Now DECLARED (19): S_PER_HOUR, EARTH_POLE_RA_J2000_DEG,
+    EARTH_POLE_DEC_J2000_DEG, ARCSEC_PER_DEG,
+    EARTH_OBLIQUITY_J2000_ARCSEC, GALACTIC_NORTH_POLE_RA_J2000_DEG,
+    GALACTIC_NORTH_POLE_DEC_J2000_ARCSEC, EARTH_LEO_LOWER_ALTITUDE_KM,
+    the three solar-wind rows, EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG,
+    EARTH_BOW_SHOCK_CUT_ANGLE_DEG, INNER_CORONA_RADII,
+    OUTER_CORONA_RADII, the three DE430_*_POSITION_PLACE_KM rows,
+    M3_PER_KM3.
+  - Whole tree 296 -> 293 Tier-1. Gate path 4 -> 0: at aa46bb10 the
+    push gate was failing on exactly the four rows above, all the
+    scanner's own faults, and no tool printed it.
+- **One method call beyond the brief, settled in the skill:** a
+  declared row's reason may sit after `--` on its Status line, as
+  well as on a `# Declared:` line. The brief named only the second;
+  that would have put M3_PER_KM3, which is exported, into gate-path
+  Tier-1 for a reason the row writes plainly ("an exact unit
+  conversion"). A bare ledger handle there is not a reason.
+- **Planted faults, on copies, each failing before and passing
+  after:** F1 (the thermopause row's Source removed -> Tier-1);
+  EARTH_MEAN_RADIUS_KM's Source 16 lines down -> cited; the three
+  solar-wind rows -> DECLARED; the stratopause row's own Source and
+  Ref removed, neighbours untouched -> Tier-1.
+- **Which cases the recognition pins cover:** the 27 pins of
+  `test_provenance_1d.py` all hold. Its four contiguity pins (citation
+  below, citation above, a blank ends the run below, preceding code
+  ends the run above) are the row run's rule for single rows; no pin
+  covered a section-header citation over several rows, and under the
+  row run a header covers only the row it touches.
+- Tony-action (do): run the patch, then orrery_maintenance_run.py;
+  move the script into documentation/; commit and push; reinstall
+  provenance-discipline from its ZIP.
+- **Tony's run, read 2026-10-09 by the lobby session (L-428)** from his
+  copy `documentation/WHERE_WE_ARE_10-8-26_1406_run_record.md`: the
+  maintenance run ended "21 of 21 gating checkers passed -- 112.0s
+  total", its scanner row reading "0 TIER-1 -- the push gate holds";
+  pushed in b6652f9. `PROVENANCE_AUDIT.md` at b6652f9 reads "GATE PATH:
+  0 TIER-1 -- the push gate holds." Not closed by that session: it did
+  not load provenance-discipline, and the next provenance session
+  confirms its loaded copy reads 2.28.
+- **Closed 2026-10-10** in the L-395 build session (Claude Opus 5.5),
+  whose first reply read back its loaded provenance-discipline as 2.28,
+  matching the manifest: the obligation this item carried is
+  discharged. That session's maintenance run on a copy at ca5bbe12
+  plus its patch, and Tony's own run of 2026-10-10 (his copy
+  `documentation/WHERE_WE_ARE_10-10-26_1426_run_record.md`), both end
+  on "21 of 21 gating checkers passed" with the scanner row "0 TIER-1
+  -- the push gate holds". Loose ends were re-homed when they were
+  found: CENTER_BODY_RADII to L-427, the two marker sizes to L-372,
+  the solar-wind rows to L-314, the status reading to L-351.
+**Gap:** none. DONE 2026-10-10.
+**Ref:** `provenance_scanner.py`; `provenance_history.py`;
+`test_row_run.py`; `orrery_maintenance_run.py`; `constants_new.py`;
+`PROVENANCE_AUDIT.md`; `documentation/HANDOFF_L414_scanner_window_20261009.md`;
+L-305; L-314; L-351; L-184; L-427.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

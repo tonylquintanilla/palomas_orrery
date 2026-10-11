@@ -148,6 +148,13 @@ Module updated: October 6, 2026 with Anthropic's Claude Opus 5.5
 SGR_A_STAR_DEC_ICRS_ARCSEC, read from Liu, Zhu and Hu, arXiv:1110.6268,
 eq. (8), with their degree rows derived. The Star Background marks it
 as the direction of the galactic centre.)
+Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5
+(L-421, the inner Oort cloud as a tilted disk: rows read from Nesvorny
+et al. (2025), arXiv:2502.11252v1 -- where the disk gives way to the
+round outer cloud, its tilt, the ecliptic's node in galactic longitude,
+the two arms' argument-of-perihelion bands and Fig. 3's caption ranges
+-- and three declared rows: the reading of Fig. 3 the Hills cloud is
+drawn from, its two cell sizes, and the drawn orbits' eccentricity.)
 """
 
 import math
@@ -2353,6 +2360,9 @@ INNER_OORT_CLOUD_AU = 20000
 # Note: the boundary between the inner (Hills) cloud and the outer cloud,
 # Note+: and an uncertain one: the paper says what defines the transition
 # Note+: remains unclear (sec. 2.3).
+# Note+: Since 2026-10-10 (L-421) it is also the far end of the band
+# Note+: where the inner cloud's disk gives way to the round outer cloud;
+# Note+: INNER_OORT_DISK_OUTER_AU is the band's near end.
 # Corrected: 2026-10-04 (L-371) -- cited Hills (1981), which does not
 # Corrected+: print it.
 
@@ -2387,6 +2397,433 @@ OUTER_OORT_CLOUD_AU = OORT_CLOUD_OUTER_EDGE_HIGH_AU
 # Declared+: reach its sources allow (Tony, 2026-10-03, ruling A).
 # Corrected: 2026-10-04 (L-371) -- was typed 100000, citing Oort (1950)
 # Corrected+: and Weissman (1996); Oort (1950) does not print it.
+
+# --- the inner Oort cloud, a tilted disk (L-421, 2026-10-10) ---
+# Nesvorny et al. (2025) find the inner Oort cloud a slightly warped disk
+# tilted about 30 degrees to the ecliptic, nearly upright to the galaxy's
+# plane, with two spiral arms. The Hills cloud is drawn as dots along
+# orbits following the paper's Fig. 3 (hills_cloud_sampler.py), so the
+# tilt and the arms come out of the orbits. Tony's rulings of 2026-10-09
+# and 2026-10-10: the inner cloud gives way to the round outer cloud
+# across a band from INNER_OORT_DISK_OUTER_AU to INNER_OORT_CLOUD_AU;
+# "follow the paper. Draw following figure 3 and describe following the
+# text. And cite everything."
+
+INNER_OORT_DISK_OUTER_AU = 10000
+# Unit: au
+# Status: measured V_SOURCED 2026-10-10 -- open full text
+# Figures: 1 -- the source prints "10,000" as the outer end of a range it
+# Figures+: states to thousands; the trailing zeros are placeholders
+# Figures+: (Rule 2).
+# Read: sec. 1, p. 2 (two sentences), of the document named in the Source
+# Read+: line, 2026-10-10, Claude Opus 5.5
+# Source: Nesvorny, D., Dones, L., Vokrouhlicky, D., Levison, H. F.,
+# Source+: Beauge, C., Faherty, J., Emmart, C. and Parker, J. P. (2025),
+# Source+: "A Spiral Structure in the Inner Oort Cloud", arXiv:2502.11252v1
+# Source+: -- sec. 1, p. 2: simulations form the inner Oort cloud at
+# Source+: 1,000 < r < 10,000 au; and the new long-period comets' nearly
+# Source+: isotropic inclinations suggest the outer Oort cloud at
+# Source+: r > 10,000 au is roughly spherical.
+# Access: open full text, https://arxiv.org/pdf/2502.11252v1 (2026-10-10).
+# Note: where the inner cloud's disk gives way to the round outer cloud:
+# Note+: the near end of the band whose far end is INNER_OORT_CLOUD_AU.
+# Note+: Not the same quantity as OORT_CLOUD_OUTER_EDGE_LOW_AU, NASA's low
+# Note+: end of the whole cloud's outer edge, which happens to print the
+# Note+: same number; each keeps its own source (One Value, One Home).
+
+HILLS_CLOUD_TILT_DEG = 30
+# Unit: deg
+# Status: measured V_SOURCED 2026-10-10 -- open full text
+# Figures: 1 -- the source prints "i ~ 30", an approximate figure to tens
+# Figures+: of degrees; the trailing zero is a placeholder (Rule 2).
+# Read: sec. 1, p. 3, of the document named in the Source line,
+# Read+: 2026-10-10, Claude Opus 5.5
+# Source: Nesvorny, D., Dones, L., Vokrouhlicky, D., Levison, H. F.,
+# Source+: Beauge, C., Faherty, J., Emmart, C. and Parker, J. P. (2025),
+# Source+: "A Spiral Structure in the Inner Oort Cloud", arXiv:2502.11252v1
+# Source+: -- sec. 1, p. 3: the inner Oort cloud is a slightly warped disk,
+# Source+: roughly 15,000 au across, inclined i ~ 30 deg to the ecliptic
+# Source+: (nearly polar in the Galactic reference system).
+# Access: open full text, https://arxiv.org/pdf/2502.11252v1 (2026-10-10).
+# Note: printed by the hover as "about 30 degrees". The drawing's tilt is
+# Note+: not set to it; it comes out of the orbits, and
+# Note+: hills_cloud_sampler.py prints it (Tony, 2026-10-09: "consistent
+# Note+: with 'about' 30 degrees").
+
+ECLIPTIC_NODE_GALACTIC_LON_DEG = 186
+# Unit: deg
+# Status: measured V_SOURCED 2026-10-10 -- open full text
+# Figures: 3 -- the source prints "l = 186", to whole degrees.
+# Read: the caption of Fig. 3, p. 19, and sec. 2, p. 5, of the document
+# Read+: named in the Source line, 2026-10-10, Claude Opus 5.5
+# Source: Nesvorny, D., Dones, L., Vokrouhlicky, D., Levison, H. F.,
+# Source+: Beauge, C., Faherty, J., Emmart, C. and Parker, J. P. (2025),
+# Source+: "A Spiral Structure in the Inner Oort Cloud", arXiv:2502.11252v1
+# Source+: -- Fig. 3 caption, p. 19: the ascending node of the ecliptic is
+# Source+: at the Galactic longitude l = 186 deg; sec. 2, p. 5, the same,
+# Source+: "near" l = 186 deg.
+# Access: open full text, https://arxiv.org/pdf/2502.11252v1 (2026-10-10).
+# Note: turns the paper's galactic longitudes into the frame
+# Note+: pole_frames.create_pole_transformation_matrix builds about the
+# Note+: galactic pole, whose x axis is the line of the two planes' nodes.
+# Note+: Checked by hills_cloud_sampler.py: with this row, Sgr A* (the rows
+# Note+: SGR_A_STAR_RA_ICRS_ARCSEC and _DEC_) falls within a degree of
+# Note+: galactic longitude 0, where the frame puts the galaxy's centre.
+
+HILLS_CLOUD_PERI_ARG_BAND1_LOW_DEG = 70
+# Unit: deg
+# Status: measured V_SOURCED 2026-10-10 -- open full text
+# Figures: 1 -- the source prints "70-180", to tens of degrees; the
+# Figures+: trailing zero is a placeholder (Rule 2).
+# Read: the caption of Fig. 2, p. 18, of the document named in the Source
+# Read+: line, 2026-10-10, Claude Opus 5.5
+# Source: Nesvorny, D., Dones, L., Vokrouhlicky, D., Levison, H. F.,
+# Source+: Beauge, C., Faherty, J., Emmart, C. and Parker, J. P. (2025),
+# Source+: "A Spiral Structure in the Inner Oort Cloud", arXiv:2502.11252v1
+# Source+: -- Fig. 2 caption, p. 18: most orbits in the inner Oort cloud
+# Source+: are expected to have omega_G = 70-180 deg or omega_G = 250-360
+# Source+: deg; these two broad concentrations appear as two spiral arms.
+# Access: open full text, https://arxiv.org/pdf/2502.11252v1 (2026-10-10).
+# Note: omega_G is the argument of perihelion in the galactic frame. The
+# Note+: two bands are the two arms; the sampler draws half its orbits in
+# Note+: each.
+
+HILLS_CLOUD_PERI_ARG_BAND1_HIGH_DEG = 180
+# Unit: deg
+# Status: measured V_SOURCED 2026-10-10 -- open full text
+# Figures: 2 -- the source prints "180" in a range stated to tens.
+# Read: as HILLS_CLOUD_PERI_ARG_BAND1_LOW_DEG, 2026-10-10, Claude Opus 5.5.
+# Source: as HILLS_CLOUD_PERI_ARG_BAND1_LOW_DEG.
+# Access: open full text, https://arxiv.org/pdf/2502.11252v1 (2026-10-10).
+
+HILLS_CLOUD_PERI_ARG_BAND2_LOW_DEG = 250
+# Unit: deg
+# Status: measured V_SOURCED 2026-10-10 -- open full text
+# Figures: 2 -- the source prints "250" in a range stated to tens.
+# Read: as HILLS_CLOUD_PERI_ARG_BAND1_LOW_DEG, 2026-10-10, Claude Opus 5.5.
+# Source: as HILLS_CLOUD_PERI_ARG_BAND1_LOW_DEG.
+# Access: open full text, https://arxiv.org/pdf/2502.11252v1 (2026-10-10).
+
+HILLS_CLOUD_PERI_ARG_BAND2_HIGH_DEG = 360
+# Unit: deg
+# Status: measured V_SOURCED 2026-10-10 -- open full text
+# Figures: 2 -- the source prints "360" in a range stated to tens.
+# Read: as HILLS_CLOUD_PERI_ARG_BAND1_LOW_DEG, 2026-10-10, Claude Opus 5.5.
+# Source: as HILLS_CLOUD_PERI_ARG_BAND1_LOW_DEG.
+# Access: open full text, https://arxiv.org/pdf/2502.11252v1 (2026-10-10).
+
+HILLS_CLOUD_NODE_LOW_DEG = 120
+# Unit: deg
+# Status: measured V_SOURCED 2026-10-10 -- open full text
+# Figures: 2 -- the source prints "120-180", to tens of degrees.
+# Read: the caption of Fig. 3, p. 19, of the document named in the Source
+# Read+: line, 2026-10-10, Claude Opus 5.5
+# Source: Nesvorny, D., Dones, L., Vokrouhlicky, D., Levison, H. F.,
+# Source+: Beauge, C., Faherty, J., Emmart, C. and Parker, J. P. (2025),
+# Source+: "A Spiral Structure in the Inner Oort Cloud", arXiv:2502.11252v1
+# Source+: -- Fig. 3 caption, p. 19: bodies in the inner Oort cloud are
+# Source+: expected to have nearly polar orbits in the Galactic frame
+# Source+: (i_G = 75-90 deg) and orbital planes only slightly rotated away
+# Source+: from the ecliptic (Omega_G = 120-180 deg).
+# Access: open full text, https://arxiv.org/pdf/2502.11252v1 (2026-10-10).
+# Note: the caption's words for where Fig. 3's dots gather. Not drawn
+# Note+: from: the drawing follows the figure itself (HILLS_CLOUD_PLANES_READ),
+# Note+: and hills_cloud_sampler.py checks the reading against these four
+# Note+: rows, so a misread figure shows.
+
+HILLS_CLOUD_NODE_HIGH_DEG = 180
+# Unit: deg
+# Status: measured V_SOURCED 2026-10-10 -- open full text
+# Figures: 2 -- the source prints "180" in a range stated to tens.
+# Read: as HILLS_CLOUD_NODE_LOW_DEG, 2026-10-10, Claude Opus 5.5.
+# Source: as HILLS_CLOUD_NODE_LOW_DEG.
+# Access: open full text, https://arxiv.org/pdf/2502.11252v1 (2026-10-10).
+
+HILLS_CLOUD_INCL_GAL_LOW_DEG = 75
+# Unit: deg
+# Status: measured V_SOURCED 2026-10-10 -- open full text
+# Figures: 2 -- the source prints "75-90", to whole degrees.
+# Read: as HILLS_CLOUD_NODE_LOW_DEG, 2026-10-10, Claude Opus 5.5.
+# Source: as HILLS_CLOUD_NODE_LOW_DEG.
+# Access: open full text, https://arxiv.org/pdf/2502.11252v1 (2026-10-10).
+
+HILLS_CLOUD_INCL_GAL_HIGH_DEG = 90
+# Unit: deg
+# Status: measured V_SOURCED 2026-10-10 -- open full text
+# Figures: 2 -- the source prints "90" in a range stated to whole degrees,
+# Figures+: so its trailing zero counts (Rule 2).
+# Read: as HILLS_CLOUD_NODE_LOW_DEG, 2026-10-10, Claude Opus 5.5.
+# Source: as HILLS_CLOUD_NODE_LOW_DEG.
+# Access: open full text, https://arxiv.org/pdf/2502.11252v1 (2026-10-10).
+
+HILLS_CLOUD_PLANES_NODE_CELL_DEG = 10
+# Unit: deg
+# Status: declared 2026-10-10 -- the width of a cell in the reading of
+# Status+: Fig. 3, along galactic nodal longitude
+# Figures: exact -- a choice of the reading, not a measurement.
+# Declared: HILLS_CLOUD_PLANES_READ counts the figure's dots in cells this
+# Declared+: wide in Omega_G and HILLS_CLOUD_PLANES_INCL_CELL_DEG high in i_G;
+# Declared+: a cell's key is its low corner. Chosen so the figure's dense
+# Declared+: part spans several cells either way.
+
+HILLS_CLOUD_PLANES_INCL_CELL_DEG = 5
+# Unit: deg
+# Status: declared 2026-10-10 -- the height of a cell in the reading of
+# Status+: Fig. 3, along galactic inclination
+# Figures: exact -- a choice of the reading, not a measurement.
+# Declared: as HILLS_CLOUD_PLANES_NODE_CELL_DEG.
+
+HILLS_CLOUD_PLANES_READ = {
+    '0,35': 1,
+    '0,45': 2,
+    '0,50': 2,
+    '0,95': 4,
+    '10,35': 1,
+    '10,80': 1,
+    '10,85': 2,
+    '20,80': 3,
+    '20,85': 7,
+    '20,95': 1,
+    '30,75': 1,
+    '30,80': 4,
+    '30,85': 7,
+    '30,90': 2,
+    '30,100': 1,
+    '30,125': 1,
+    '40,75': 3,
+    '40,80': 1,
+    '40,85': 1,
+    '40,95': 1,
+    '50,45': 1,
+    '50,70': 1,
+    '50,75': 2,
+    '50,80': 5,
+    '50,85': 7,
+    '60,70': 1,
+    '60,75': 3,
+    '60,80': 8,
+    '60,85': 2,
+    '60,100': 1,
+    '70,60': 1,
+    '70,70': 1,
+    '70,75': 4,
+    '70,80': 4,
+    '70,85': 1,
+    '70,90': 1,
+    '80,45': 1,
+    '80,55': 1,
+    '80,65': 1,
+    '80,70': 1,
+    '80,75': 3,
+    '80,80': 7,
+    '90,35': 1,
+    '90,65': 1,
+    '90,70': 5,
+    '90,75': 4,
+    '90,80': 9,
+    '90,85': 4,
+    '90,95': 1,
+    '90,100': 1,
+    '100,10': 2,
+    '100,35': 2,
+    '100,60': 2,
+    '100,65': 1,
+    '100,70': 2,
+    '100,75': 8,
+    '100,80': 22,
+    '100,85': 9,
+    '110,40': 1,
+    '110,60': 2,
+    '110,65': 1,
+    '110,70': 1,
+    '110,75': 14,
+    '110,80': 19,
+    '110,85': 13,
+    '110,90': 1,
+    '110,95': 1,
+    '120,50': 1,
+    '120,55': 2,
+    '120,70': 2,
+    '120,75': 8,
+    '120,80': 38,
+    '120,85': 13,
+    '120,90': 8,
+    '120,100': 1,
+    '120,105': 1,
+    '130,25': 1,
+    '130,55': 2,
+    '130,65': 2,
+    '130,70': 2,
+    '130,75': 19,
+    '130,80': 57,
+    '130,85': 55,
+    '130,90': 7,
+    '130,95': 1,
+    '140,50': 2,
+    '140,55': 2,
+    '140,60': 1,
+    '140,65': 1,
+    '140,70': 3,
+    '140,75': 22,
+    '140,80': 130,
+    '140,85': 176,
+    '140,90': 3,
+    '140,95': 2,
+    '150,20': 1,
+    '150,25': 3,
+    '150,30': 1,
+    '150,50': 1,
+    '150,55': 1,
+    '150,60': 3,
+    '150,65': 5,
+    '150,70': 8,
+    '150,75': 46,
+    '150,80': 111,
+    '150,85': 176,
+    '150,90': 13,
+    '150,95': 3,
+    '150,135': 1,
+    '160,10': 1,
+    '160,35': 1,
+    '160,50': 2,
+    '160,60': 5,
+    '160,65': 6,
+    '160,70': 20,
+    '160,75': 31,
+    '160,80': 105,
+    '160,85': 176,
+    '160,90': 8,
+    '160,95': 1,
+    '160,100': 1,
+    '160,105': 2,
+    '170,30': 2,
+    '170,35': 2,
+    '170,40': 2,
+    '170,45': 1,
+    '170,50': 1,
+    '170,55': 1,
+    '170,60': 2,
+    '170,65': 7,
+    '170,70': 13,
+    '170,75': 28,
+    '170,80': 119,
+    '170,85': 72,
+    '170,90': 5,
+    '170,95': 1,
+    '170,110': 1,
+    '180,35': 1,
+    '180,50': 1,
+    '180,55': 1,
+    '180,60': 3,
+    '180,65': 7,
+    '180,70': 15,
+    '180,75': 22,
+    '180,80': 25,
+    '180,85': 40,
+    '180,90': 13,
+    '180,100': 1,
+    '180,105': 1,
+    '190,15': 1,
+    '190,50': 1,
+    '190,55': 1,
+    '190,60': 3,
+    '190,65': 9,
+    '190,70': 7,
+    '190,75': 10,
+    '190,80': 15,
+    '190,85': 14,
+    '190,90': 4,
+    '190,95': 2,
+    '200,15': 1,
+    '200,30': 1,
+    '200,45': 2,
+    '200,55': 1,
+    '200,75': 1,
+    '200,80': 2,
+    '200,85': 12,
+    '200,90': 4,
+    '200,95': 1,
+    '200,100': 1,
+    '200,105': 1,
+    '210,15': 1,
+    '210,20': 2,
+    '210,60': 1,
+    '210,70': 3,
+    '210,75': 2,
+    '210,80': 2,
+    '210,85': 2,
+    '210,110': 1,
+    '220,70': 1,
+    '220,75': 2,
+    '220,100': 1,
+    '230,45': 1,
+    '230,95': 1,
+    '250,5': 2,
+    '250,75': 2,
+    '260,110': 1,
+    '270,75': 1,
+    '280,70': 3,
+    '280,100': 1,
+    '290,70': 1,
+    '290,75': 1,
+    '300,75': 2,
+    '300,105': 1,
+    '300,110': 1,
+    '320,105': 1,
+    '330,70': 1,
+    '340,110': 1,
+    '340,125': 1,
+    '350,45': 1,
+    '350,50': 2,
+    '350,75': 2,
+    '350,145': 2,
+}
+# Unit: dot_count
+# Status: declared 2026-10-10 -- a reading of the paper's Fig. 3, which
+# Status+: plots one dot per orbit and prints no numbers for them
+# Figures: exact -- each count is stored as the reading gave it.
+# Declared: the estimated number of the figure's dots in each cell, keyed
+# Declared+: "Omega_G,i_G" in degrees at the cell's low corner, cells
+# Declared+: HILLS_CLOUD_PLANES_NODE_CELL_DEG by HILLS_CLOUD_PLANES_INCL_CELL_DEG;
+# Declared+: 203 cells, 2052 dots. Read by the script
+# Declared+: documentation/L421_fig3_reading_20261010.py from the figure as
+# Declared+: the PDF stores it (a 714 x 551 pixel JPEG), its axes checked
+# Declared+: against the figure's own lines (the ecliptic node at 186, the
+# Declared+: ecliptic plane at 60, the polar orbits at 90 degrees, each read
+# Declared+: within half a degree), and overlapping dots estimated from how
+# Declared+: much of each cell is inked. THE FIGURE CANNOT SAY how many dots
+# Declared+: are in its solid-black core: the cells 140,85, 150,85 and
+# Declared+: 160,85 are held at the most the method gives, so the core, if
+# Declared+: anything, has too little weight here. Dots under the figure's
+# Declared+: labels, arrows and star are lost; those parts are sparse.
+# Read: Fig. 3 and its caption, p. 19, of the document named in the Source
+# Read+: line, read by the script above, 2026-10-10, Claude Opus 5.5
+# Source: Nesvorny, D., Dones, L., Vokrouhlicky, D., Levison, H. F.,
+# Source+: Beauge, C., Faherty, J., Emmart, C. and Parker, J. P. (2025),
+# Source+: "A Spiral Structure in the Inner Oort Cloud", arXiv:2502.11252v1
+# Source+: -- Fig. 3, p. 19: the orbital elements of bodies in the inner
+# Source+: Oort cloud (a ~ 3,000 au), galactic nodal longitude against
+# Source+: galactic inclination.
+# Access: open full text, https://arxiv.org/pdf/2502.11252v1 (2026-10-10).
+# Note: 67% of the dots fall inside the caption's ranges
+# Note+: (HILLS_CLOUD_NODE_LOW_DEG to _HIGH_, HILLS_CLOUD_INCL_GAL_LOW_DEG to
+# Note+: _HIGH_); sec. 2, p. 5, says the orbits' nodes turn away from the
+# Note+: ecliptic's by a rotation broadly centered at about 30 deg, which
+# Note+: is where the reading's densest cells sit.
+
+HILLS_CLOUD_ECCENTRICITY = 0.8
+# Unit: eccentricity
+# Status: declared 2026-10-10 -- chosen for the picture; the paper shows
+# Status+: today's eccentricities only as a plot
+# Figures: exact -- a choice, not a measurement; drawn, never printed.
+# Declared: how stretched the drawn orbits are, one value for all of
+# Declared+: them. The paper prints no eccentricity for today's inner Oort
+# Declared+: cloud; Fig. 6 (p. 22) plots its evolution. 0.8 is high enough
+# Declared+: that the dots, placed along each orbit evenly in time, gather
+# Declared+: at the orbits' far ends, which is where the two arms are.
+# Declared+: Tony's confirmed words, 2026-10-09: "how stretched the orbits
+# Declared+: are is chosen for the picture: the model shows it only as a
+# Declared+: plot."
 
 # --- the Sun's gravitational reach (L-371, 2026-10-04) ---
 

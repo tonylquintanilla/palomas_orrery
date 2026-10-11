@@ -11,24 +11,29 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 144  
-**Total Lines of Code (non-blank):** 116,565  
-**Total Public Functions/Classes:** 1,337
+**Total Python Files:** 149  
+**Total Lines of Code (non-blank):** 117,965  
+**Total Public Functions/Classes:** 1,354
 
 ## Classification Coverage
 
-**Undetermined role (6).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (9).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
 - `patch_L395_5_horizons_name_and_encke_20261010.py`
+- `patch_L395_7_records_20261010.py`
+- `patch_L421_5_oort_orrery_20261010.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
+- `test_hills_cloud_sampler.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (1).** No valid `Domain:` tag.
+**Undetermined domain (3).** No valid `Domain:` tag.
 
 - `patch_L395_5_horizons_name_and_encke_20261010.py`
+- `patch_L395_7_records_20261010.py`
+- `patch_L421_5_oort_orrery_20261010.py`
 
 
 ---
@@ -40,8 +45,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_controller.py` | KMZ layer selector for Google Earth Pro. (131 lines) |
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,938 lines) |
-| `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,585 lines) |
-| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (2,128 lines) |
+| `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,589 lines) |
+| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (2,180 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
 ---
@@ -92,7 +97,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `planet9_visualization_shells.py` | Hypothetical Planet 9 shell traces. (269 lines) |
 | `pluto_visualization_shells.py` | Pluto interior and atmosphere shell traces. (615 lines) |
 | `saturn_visualization_shells.py` | Saturn interior, ring, and magnetosphere shell traces. (1,088 lines) |
-| `solar_visualization_shells.py` | Sun interior, corona, and heliosphere shell traces. (1,691 lines) |
+| `solar_visualization_shells.py` | Sun interior, corona, and heliosphere shell traces. (1,788 lines) |
 | `uranus_visualization_shells.py` | Uranus interior, ring, and magnetosphere shell traces. (1,083 lines) |
 | `venus_visualization_shells.py` | Venus interior and atmosphere shell traces. (711 lines) |
 
@@ -112,9 +117,11 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `energy_imbalance.py` | Energy Imbalance Visualization for Paloma's Orrery Modern era (2005-2025) temperature and energy imbalance (841 lines) |
 | `fetch_climate_data.py` | Climate Data Fetcher - Paloma's Orrery Preserves critical climate datasets for future reference (763 lines) |
 | `fetch_paleoclimate_data.py` | Paleoclimate Data Fetcher for Paloma's Orrery Fetches and caches paleoclimate proxy data from authoritative sources (171 lines) |
-| `idealized_orbits.py` | Keplerian orbit ellipse construction and satellite orbit models. Computes and plots idealized (Keplerian) orbit paths from orbital elements, with osculating element support for high-accuracy visualization. Handles elliptical, parabolic, and hyperbolic orbits. Includes specia... (6,644 lines) |
+| `hills_cloud_sampler.py` | The Hills cloud (the inner Oort cloud) as dots along orbits, following Nesvorny et al. (2025), Fig. 3. (282 lines) |
+| `idealized_orbits.py` | Keplerian orbit ellipse construction and satellite orbit models. Computes and plots idealized (Keplerian) orbit paths from orbital elements, with osculating element support for high-accuracy visualization. Handles elliptical, parabolic, and hyperbolic orbits. Includes specia... (6,604 lines) |
 | `object_type_analyzer.py` | Object Type Analysis and Report Generation Module Provides comprehensive analysis of astronomical data including object types, data quality metrics, and full report generation. (756 lines) |
 | `orbital_elements.py` | Standalone data module containing orbital element dictionaries. NO IMPORTS - Pure data only to avoid circular dependencies. (1,296 lines) |
+| `pole_frames.py` | The matrix that turns coordinates measured about a pole into the drawing's frame, the ecliptic of J2000. (72 lines) |
 | `simbad_manager.py` | Enhanced SIMBAD Query Manager with configurable rate limiting and retry logic. This module replaces simbad_test.py and provides robust SIMBAD querying capabilities. (1,030 lines) |
 
 ---
@@ -125,8 +132,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,270 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (512 lines) |
-| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (3,099 lines) |
-| `constants_tokens.py` | - what each "# Unit:" token in constants_new.py means. (241 lines) |
+| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (3,520 lines) |
+| `constants_tokens.py` | - what each "# Unit:" token in constants_new.py means. (258 lines) |
 | `earth_pole_of_date.py` | Earth's rotation pole and tilt for the date of a plot. (269 lines) |
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (412 lines) |
 | `exoplanet_stellar_properties.py` | Stellar Properties for Exoplanet Host Stars (484 lines) |
@@ -216,7 +223,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (129 lines) |
 | `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (977 lines) |
-| `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (624 lines) |
+| `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (634 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (427 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,535 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (882 lines) |
@@ -247,8 +254,11 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
 | `patch_L395_5_horizons_name_and_encke_20261010.py` | - the orrery half of the Horizons check (L-395): JPL's exact name on each keyed entry, Halley keyed, Encke's own entry, and the export that carries them. (371 lines) |
+| `patch_L395_7_records_20261010.py` | - the close of the L-395 build: the ledger, Tony's page, the build record, the dashboard's Horizons buttons, ledger-and-session-records 1.19, horizons-orbital-mechanics 1.2 and protocol v3.90. (254 lines) |
+| `patch_L421_5_oort_orrery_20261010.py` | - L-421 (the typed facts), the inner Oort cloud, orrery side: the Hills cloud drawn as dots along orbits following Nesvorny et al. (2025) Fig. 3, the band from 10,000 to 20,000 au where the inner cloud gives way to the round outer cloud, the new rows, the sam... (162 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
+| `test_hills_cloud_sampler.py` | The Hills cloud's three checks, and proof that each one can fail. (69 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |
 

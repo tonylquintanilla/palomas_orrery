@@ -6,9 +6,15 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Read this file in 3 parts: lines 1-224, 225-500, 501-677.
+Read this file in 3 parts: lines 1-226, 227-521, 522-698.
 
-Skill version: 1.18 | 2026-10-08, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.19 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 32619f8d. v1.19 (L-395), on Tony's request: Tony's
+Local Folders, under Where a File Goes, names the two repositories'
+folders on his machine, so a session linked to it saves a patch where
+he runs it. Tony, 2026-10-10: "palomas_orrery_for_github is the repo
+folder."
+Earlier: 1.18 | 2026-10-08, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ b0b3df82. v1.18 (L-418) records two conventions the
 provenance-discipline split brought in, under A skill keeps three
 version entries: a file longer than one read opens with a read plan
@@ -27,14 +33,9 @@ to build (date, and a cap of 130 lines above the marker). Under Ledger
 Block Format: an item inside an ordered list needs no RICE score
 (L-412). Under Where a File Goes: which repository a record goes to,
 and that documentation/ stays flat.
-Earlier: 1.16 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ d9f47a87. v1.16 (L-419) adds one rule under Where We
-Are -- Tony's page: a patch checks a document Tony annotates (this
-page, the handoffs, the ledger) only at the lines it edits, and a
-rewrite of the page carries his notes into the handoff first. The
-rule had lived only in one patch's code and was broken the same day.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-05 (L-418), 2026-10-07 (L-422) and 2026-10-08 (L-418).
+on 2026-10-05 (L-418), 2026-10-07 (L-422), 2026-10-08 (L-418) and
+2026-10-10 (L-395).
 
 Note: READING the ledger at session start is resident Part-1 behavior,
 not this skill's job. This skill carries the maintenance mechanics.
@@ -51,6 +52,7 @@ if this list and the headings disagree (L-418).
   - Cluster the Tail by Topic, Not by Age [QUALITY]
 - Anchor Requirement (all outbound documents)
 - Where a File Goes [QUALITY]
+  - Tony's Local Folders [QUALITY]
 - Handoff Structure (the load-bearing lines)
 - Protocol and Skills Change Log (v3.30 addition)
 - Codebase Tooling
@@ -484,6 +486,25 @@ hundred spent patch scripts. Tony moved them and named the reason. The
 wording here is the corrected form of his rule -- his "live versus
 finished" cut would have sent the worksheets themselves the other
 way.)
+
+### Tony's Local Folders [QUALITY]
+
+Both repositories are clones on Tony's Windows machine, under
+`C:\Users\tonyq\OneDrive\Desktop\python_work\` (Tony, 2026-10-10):
+
+- orrery: `palomas_orrery_for_github\`. The folders named `orrery` and
+  `palomas_orrery` beside it are not the repository.
+- gallery: `tonyquintanilla.github.io\`
+
+When the session is linked to his computer, a patch is saved straight
+into that repository's root folder, and Tony runs it there from VS
+Code. When it is not linked, the patch goes as an attachment and Tony
+saves it there. Either way the patch still checks the files it edits,
+so a copy saved in the wrong folder refuses rather than editing it.
+
+(Tony's request, 2026-10-10, after a session had held a patch back
+because three folders could have been the orrery: "palomas_orrery_for_github
+is the repo folder.")
 
 ## Handoff Structure (the load-bearing lines)
 

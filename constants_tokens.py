@@ -87,6 +87,9 @@ Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5
 (L-322 Stage D: four tokens. arcsec and hours for the frame's obliquity
 and Earth's rotation period, and arcsec_per_deg and s_per_h for the two
 exact conversion rows those are converted through.)
+Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5
+(L-421: two named numbers, eccentricity and dot_count, for the Hills
+cloud drawn as dots along orbits following Nesvorny et al. (2025).)
 """
 
 TOKENS = {
@@ -245,6 +248,20 @@ TOKENS = {
         "dimension": "s / h",
         "defining_constant": None,
         "meaning": "seconds per hour, an exact unit conversion",
+    },
+    # L-421 (2026-10-10): two named pure numbers for the Hills cloud,
+    # drawn as dots along orbits following Nesvorny et al. (2025), Fig. 3.
+    "eccentricity": {
+        "dimension": "named number",
+        "defining_constant": None,
+        "meaning": ("an orbit's eccentricity: 0 for a circle, nearer 1 the "
+                    "more stretched the ellipse"),
+    },
+    "dot_count": {
+        "dimension": "named number",
+        "defining_constant": None,
+        "meaning": ("a count of the dots a published figure plots in one "
+                    "cell, estimated by reading the figure"),
     },
 }
 

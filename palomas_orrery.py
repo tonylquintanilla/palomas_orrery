@@ -62,6 +62,10 @@ Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5 (L-395:
 an "Encke" checkbox under Halley's, for the list's new Encke entry,
 record 90000091; its tooltip dates come from JPL's answers of
 2026-10-07.)
+Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5 (L-421:
+the Hills cloud checkbox reads "Hills Cloud (tilted disk)"; it is drawn
+as dots along orbits following Nesvorny et al. (2025), no longer as a
+torus.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -9194,7 +9198,7 @@ sun_inner_oort_limit_checkbutton = tk.Checkbutton(shell_options_frame, text="-- 
 sun_inner_oort_limit_checkbutton.pack(anchor='w')
 CreateToolTip(sun_inner_oort_limit_checkbutton, inner_limit_oort_info)
 
-sun_hills_cloud_torus_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Hills Cloud Torus", variable=sun_hills_cloud_torus_var)
+sun_hills_cloud_torus_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Hills Cloud (tilted disk)", variable=sun_hills_cloud_torus_var)  # L-421: no longer drawn as a torus
 sun_hills_cloud_torus_checkbutton.pack(anchor='w')
 CreateToolTip(sun_hills_cloud_torus_checkbutton, hills_cloud_torus_info)
 

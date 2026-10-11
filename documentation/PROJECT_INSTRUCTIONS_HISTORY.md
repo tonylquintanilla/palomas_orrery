@@ -2495,6 +2495,46 @@ resident.
 (Moved down from the resident protocol on 2026-10-10 when
 v3.89 made a fourth entry.)
 
+v3.87 (October 9, 2026): No rule changed in this document. ONE
+skill bump, one version (L-414): provenance-discipline 2.27 -> 2.28.
+THE SCANNER READS A ROW'S OWN COMMENT BLOCK, AND PRINTS THE GATE BY
+NAME.
+
+WHAT PROMPTED IT. The scanner read a constant's sources through a
+fixed window, 30 lines above and 15 below. In constants_new.py, where
+rows sit with no blank line between them, it failed both ways: it
+missed EARTH_MEAN_RADIUS_KM's own Source line 16 lines down
+(2026-10-04), and when the planted-fault run of 2026-10-09 removed the
+thermopause row's Source lines it credited the stratopause row's
+instead. It scored three declared rows as uncited measurements. And no
+tool printed the push gate's own figure: the console said its count
+was not the gate and named nothing.
+
+WHAT CHANGED. provenance-discipline, under Scanner Mechanics and The
+Goal State: a constants_new.py row is read through its own comment
+run; a declared row with its reason written down is named and never
+Tier-1; the gate path is read from data/constants_export.json and
+data/objects_export.json and printed by name, on the console, in the
+audit and in the run history. provenance_scanner.py and
+provenance_history.py build it; test_row_run.py pins it, and
+orrery_maintenance_run.py runs those pins and quotes the GATE PATH
+line. Measured at aa46bb10: whole-tree Tier-1 296 to 293; gate path 4
+to 0, the four being the scanner's own faults. CENTER_BODY_RADII
+entered Tier-1 off the gate path (L-427).
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+provenance-discipline 2.28 before any provenance work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.84 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-10 when
+v3.90 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================
