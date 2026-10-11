@@ -1862,8 +1862,8 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  2. Move this script into documentation/; commit and push.
-  3. If not done yet, upload ledger-and-session-records 1.20 to Settings > Skills.
+  2. Move this script into documentation/; commit and push. -- 9802e04d17ded2f7b58bdea32ad21841e460e45f
+  3. If not done yet, upload ledger-and-session-records 1.20 to Settings > Skills. -- was done already
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 2. Run `orrery_maintenance_run.py`, move the patch into `documentation/`, then commit and push.
