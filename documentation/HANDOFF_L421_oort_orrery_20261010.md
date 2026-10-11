@@ -303,3 +303,26 @@ degrees to the ecliptic" where it said "disk-like/toroidal".
 - Next on the road: the gallery side of the inner Oort cloud, with
   L-408, then L-421's check (part 2) and the citation agreement (part
   3).
+
+## 12. The close, October 11, 2026
+
+Built on orrery 9f1547821a1957544f0ae94a77cc64c5a3ab4114 (Tony's push
+of patch_L395_7 and patch_L421_5) and gallery a7d1a54, read, not
+touched. Delivered as `patch_L431_1_close_20261011.py`.
+
+- Tony's runs and looks of 2026-10-10, from his run record attached in
+  chat: both patches ran, 22 of 22 gating, the gate path at 0, pushed
+  at 9f15478; the skills and the protocol uploaded. Every Mode 5 check
+  correct: Encke and Halley's four (L-395's record, section 6), the
+  Hills cloud's three (section 7 above). Recorded on L-395 and L-421.
+- Encke moves to the top of the comet list: the list runs in order of
+  first apparition (Tony). `palomas_orrery.py` only.
+- Encke's hover has no orbital period. Tony ruled that the orrery take
+  every body's period from JPL and print it by its errors, and asked to
+  start the next session there. The design record is
+  `documentation/DESIGN_L431_orbital_periods_20261011.md`; the item is
+  L-431 (orbital periods from JPL).
+- What travels: no skill version changed. The next session confirms its
+  loaded copies read ledger-and-session-records 1.19 and
+  horizons-orbital-mechanics 1.2 (both uploaded 2026-10-10), then opens
+  the L-431 design talk.

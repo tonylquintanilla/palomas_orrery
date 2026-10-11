@@ -336,6 +336,10 @@ along orbits following Nesvorny et al. (2025) Fig. 3, the band from
 10,000 to 20,000 au, the new rows and the sampler; L-408 gains the
 design talk of 2026-10-09; L-430 opened), built on 32619f8d with
 patch_L395_7 applied.
+Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5
+(L-431 opened, orbital periods from JPL, its design record; Tony's runs
+and looks of 2026-10-10 on L-395 and L-421; Encke first in the comet
+list), built on 9f154782.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -553,7 +557,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*237 live items; 221 need attention (`!`); 167 RICE-scored; 188 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*238 live items; 222 need attention (`!`); 167 RICE-scored; 188 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -686,7 +690,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-391 | Group clouds: the Trojans' sources, and the shapes of the three other groups (gallery, exhibits) | OPEN | -- | 2026-09-29 |
 | ! | L-393 | Encounter data: dates, spacecraft records centred on their targets, and how far the cache reaches in time (gallery, cache) | OPEN | -- | 2026-09-29 |
 | ! | L-394 | A card cannot say which body it belongs to (gallery, Studio) | OPEN | -- | 2026-09-29 |
-| ! | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | OPEN | -- | 2026-10-10 |
+| ! | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | OPEN | -- | 2026-10-11 |
 | ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-10-07 |
 | ! | L-399 | Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder) | OPEN | -- | 2026-10-01 |
 | ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-01 |
@@ -697,7 +701,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
 | ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-08 |
 | ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-06 |
-| ! | L-421 | Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words) | OPEN | -- | 2026-10-10 |
+| ! | L-421 | Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words) | OPEN | -- | 2026-10-11 |
 | ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-08 |
 | ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-09 |
 | ! | L-425 | A citation's location record is checked only in part (provenance tooling) | OPEN | -- | 2026-10-09 |
@@ -705,6 +709,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-427 | Rows a neighbour's citation had been crediting (store) | OPEN | -- | 2026-10-09 |
 | ! | L-429 | The room button on the row, in the Solar System room's list (gallery, exhibits) | OPEN | -- | 2026-10-10 |
 | ! | L-430 | Uncited lines in the orrery's Oort cloud tooltips and the Sun's reach text (orrery, words) | OPEN | -- | 2026-10-10 |
+| ! | L-431 | Orbital periods from JPL, for every body, printed by their errors (orrery, provenance) | OPEN | -- | 2026-10-11 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1209,7 +1214,7 @@ gallery `data/objects_config.json`; L-228, L-371.
 
 
 #### [L-421] Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words)
-<!-- L:421 status:OPEN upd:2026-10-10 section:A flag: rice: -->
+<!-- L:421 status:OPEN upd:2026-10-11 section:A flag: rice: -->
 - **Found 2026-10-06**, on Tony's question: "where are the facts for the
   info panel stored, the code itself? Shouldn't the data and sources use
   the store?" Both rooms were built headless twice, once as served and
@@ -1339,8 +1344,15 @@ gallery `data/objects_config.json`; L-228, L-371.
     "picked within the ranges the model gives" became "picked where the
     model's orbits lie (its Fig. 3)". It comes to Tony with the gallery
     words.
-**Gap:** the orrery side is built. Still open: Tony's look in the
-orrery window (the record's section 7); the gallery side (the mirror,
+- **Tony's run and look, 2026-10-10**, from his run record attached in
+  chat that evening: patch_L421_5 and the maintenance run, "22 of 22
+  gating checkers passed", the gate path at 0; pushed at 9f154782. The
+  three checks of the build record's section 7 (the disk tipped with
+  its two arms; the clumps and the tide thin inside 20,000 au and full
+  outside; the hovers): each marked correct. Asked whether
+  `hills_cloud_sampler.py` is used once: no, it draws the cloud every
+  time the box is ticked; only the patches are one-time.
+**Gap:** the orrery side is built and looked at. Still open: the gallery side (the mirror,
 the renderers, the served words with the changed clause, the cache
 rebuild, the phone look), with L-408; the survey as a gating check in
 the gallery run, shown failing on a planted typed sentence first; and
@@ -1355,6 +1367,52 @@ IGRF epoch, a class); L-408; L-430;
 `hills_cloud_sampler.py`; gallery `gallery/feature_renderers.js`,
 `gallery/earth_geometry.js`, `data/objects_config.json`;
 skills/interactive-exhibit/SKILL.md.
+
+#### [L-431] Orbital periods from JPL, for every body, printed by their errors (orrery, provenance)
+<!-- L:431 status:OPEN upd:2026-10-11 section:A flag: rice: -->
+- **Opened 2026-10-10** from Tony's look at Encke: its hover has no
+  orbital period, because the hover's "Known Orbital Period" reads only
+  `KNOWN_ORBITAL_PERIODS` in `constants_new.py`, a typed table that
+  never had Encke. Tony's rulings, in his words:
+  - "the sidereal orbit period in seconds (PR) is available from the
+    osculating ephemeris"
+  - "we should implement this as a general update not just for encke,
+    but for all objects with PR."
+  - the hover shows the fetched PR, not the fallback: yes.
+  - "can you determine the correct number of significant digits? Encke
+    is one thing, Sedna is another, for example."
+  - "i would want to start with this issue. it is important for how we
+    model the orbital periods for all bodies, especially highly
+    perturbed ones."
+- **Found 2026-10-10 and 11** [Horizons elements tables, read through
+  the chat's web-fetch tool; the heliocentric 2026 values match Tony's
+  two attached files]. A distant body's osculating period depends on
+  the centre: Sedna's, around the Sun, was 12,917 years on 2025-10-10
+  and 12,547 on 2026-10-10; around the solar system's barycentre,
+  11,389.74 and 11,389.72. Encke's is steady around the Sun (0.29 days
+  in the year) and not around the barycentre (7.75 days). SBDB's
+  sigmas: Encke 0.00021413 d, Sedna 1864 d.
+- **Proposed, for the next session** (not ruled): use the centre whose
+  period moves less over a year; print to the larger of SBDB's sigma
+  and that year's change, each unit placed apart (provenance-discipline,
+  "A Computed Position Prints What Its Errors Earn"): Encke "3.303
+  years (1206 days)", Sedna "11,390 years (4,160,000 days)".
+- **One class, recorded and not chased (The Braid):** the 132 typed
+  periods in `KNOWN_ORBITAL_PERIODS` (13 of them None) carry no Source
+  line. Once the fetched period is in the hover the table is only a
+  fallback; whether it prints at all is the design's question 6.
+**Gap:** the design talk, then the build. Seven questions in the
+design record's section 7: the astroquery column; which centre; moons
+and the Pluto system; the drawn ellipse's same dependence on the
+centre; queries per refresh; the typed table; the apsidal markers.
+**Ref:** `documentation/DESIGN_L431_orbital_periods_20261011.md`;
+`visualization_utils.py` (`format_detailed_hover_text`);
+`palomas_orrery.py`; `orbital_param_viz.py`; `apsidal_markers.py`;
+`idealized_orbits.py`; `orbit_data_manager.py`
+(`query_horizons_elements`); `osculating_cache_manager.py`;
+`constants_new.py` (`KNOWN_ORBITAL_PERIODS`); L-395; L-401 (the
+orrery's distance hovers, the same rule); L-399 (each small body's own
+uncertainty); skills/horizons-orbital-mechanics/SKILL.md.
 
 #### [L-430] Uncited lines in the orrery's Oort cloud tooltips and the Sun's reach text (orrery, words)
 <!-- L:430 status:OPEN upd:2026-10-10 section:A flag: rice: -->
@@ -1921,7 +1979,7 @@ is enough. L-422 holds the shape; this item holds the check.
 **Ref:** `documentation/WHERE_WE_ARE.md`; `skills/ledger-and-session-records/SKILL.md` (The Document Stack); `PROJECT_INSTRUCTIONS.md` v3.74; L-363; L-395; L-333; L-362.
 
 #### [L-395] The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects)
-<!-- L:395 status:OPEN upd:2026-10-10 section:A flag: rice: -->
+<!-- L:395 status:OPEN upd:2026-10-11 section:A flag: rice: -->
 - **2026-10-01, design rulings and the first build** [verified: orrery
   feb5e369, gallery 43993b49; Tony's runs 22 of 22 gating; his phone:
   "perfect"]. Tony's rulings, each "confirmed as recommended" unless
@@ -2223,13 +2281,29 @@ is enough. L-422 holds the shape; this item holds the check.
   finds asteroid 9 Metis, so the design's note that it found no
   asteroid was wrong; the check searches each index apart and is
   unaffected. horizons-orbital-mechanics 1.2 records all three.
+- **Tony's runs and look, 2026-10-10**, from his run record attached
+  in chat that evening (after his copy
+  `documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md`):
+  patch_L395_7 and the maintenance run, "22 of 22 gating checkers
+  passed"; pushed at 9f154782; both skills and the protocol (v3.90)
+  uploaded, "done". The four checks of the build record's section 6
+  (Encke's checkbox and tooltip, its marker, orbit and tail, Go:
+  Perihelion, Halley's words and link): each marked correct.
+  - The comet list: "i order the comets by date of first apparition by
+    this Horizons Id." Encke, from 1786, moves to the top
+    (`palomas_orrery.py`, in `patch_L431_1_close_20261011.py`).
+  - Encke's colour: the colour dictionary "is mostly a drawing choice
+    to distinguish objects commonly drawn together". Encke keeps the
+    default goldenrod; no row is owed.
+  - Encke's hover has no orbital period, because the typed table never
+    had Encke. Tony's rulings on that are L-431 (orbital periods from
+    JPL).
 **Gap:** The check is built and runs every day. Still open: fields the
 list lacks (a moon's parent, a clean kind); the remaining served
 objects (moon, io, titan, pluto, charon, voyager_1, which have no key
 yet); the display-name rename; MAPS and 3I/ATLAS checked live when
 served; L-391 to L-394. The numbers in the other descriptions are
-L-403. Tony's look at Encke and Halley in the orrery's window (four
-checks in the build record).
+L-403. Encke's period is L-431.
 **Ref:** `documentation/DESIGN_L395_horizons_check_20261007.md`; `documentation/HORIZONS_ANSWERS_L395_20261007.md`; `documentation/HANDOFF_L395_horizons_check_build_20261010.md`; gallery `tools/horizons_check.py`, `tools/check_horizons_confirmations.py`, `tools/test_horizons_check.py`, `data/horizons_confirmations.json`; `celestial_objects.py`; gallery `data/objects_config.json`; `export_constants.py`; gallery `tools/pull_constants_export.py` and `tools/mirror_constants.py` (the model); skills/horizons-orbital-mechanics/SKILL.md; L-363; L-364; L-391 to L-394.
 
 #### [L-394] A card cannot say which body it belongs to (gallery, Studio)

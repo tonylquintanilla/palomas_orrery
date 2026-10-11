@@ -66,6 +66,9 @@ Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5 (L-421:
 the Hills cloud checkbox reads "Hills Cloud (tilted disk)"; it is drawn
 as dots along orbits following Nesvorny et al. (2025), no longer as a
 torus.)
+Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5 (L-395:
+Encke's checkbox moves to the top of the comet list, which runs in order
+of first apparition, Tony 2026-10-10.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -10001,16 +10004,18 @@ def create_comet_checkbutton(name, variable, dates, perihelion):
                       f"Scale and date range auto-calculated from orbital elements")
     
 
+# Comets in order of first apparition, by the date in each label (Tony,
+# 2026-10-10): Encke first, from 1786 (L-395).
+create_comet_checkbutton("Encke", comet_encke_var, "(1786-present, periodic)",
+                         # 1786: the epoch-year of the first of JPL's 61 records for 2P (L-395, answer G4)
+                         "October 22, 2023")    # TP of record 90000091, 2023-Oct-22.53 (L-395, answer G3)
+
 create_comet_checkbutton("Tempel 2", comet_tempel2_var, "(1873-present, periodic)",
                          "August 2, 2026")  # 10P, 5.37-year period, Deep Space 1 flyby 2001
 
 create_comet_checkbutton("Halley", comet_halley_var, "(1900-1-1 to 1994-1-11)",      
                          # data arc: 1835-08-21 to 1994-01-11
                          "February 8, 1986")    # 1986-Feb-08.1983372075
-
-create_comet_checkbutton("Encke", comet_encke_var, "(1786-present, periodic)",
-                         # 1786: the epoch-year of the first of JPL's 61 records for 2P (L-395, answer G4)
-                         "October 22, 2023")    # TP of record 90000091, 2023-Oct-22.53 (L-395, answer G3)
 
 create_comet_checkbutton("Schaumasse", comet_schaumasse_var, "(1911-present, periodic)",
                          "January 8, 2026")  # 24P, 8.25-year period

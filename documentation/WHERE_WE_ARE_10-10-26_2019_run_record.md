@@ -48,6 +48,9 @@ Last updated: October 10, 2026, at the lobby's third round.
  14.   [later] The Earth System layers; the gallery's cards meanwhile.
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
+-- a couple of things to keep in mind. before we close the sun and earth rooms, i would like to implement fuzzy boundaries. and in the last session we found something important. the orbital periods dictionary is hand maintained and instead should be fetched from Horizons along with the other osculating data. however, there is a wrinkle: the center body for the data matters: the sun or the solar barycenter. we should also implement this because it matters for orbital periods, especially highly perturbed ones. 
+-- the near term goal is to complete the sun and earth room thoroughly as a template for other body rooms. then add the symbols for most if not all the orrery's objects list. then we can decide on priorities. the "golden artifacts" are one path, but not the only one. I would be inclined to work on the inner planets after that. and we should not forget the earth science part. 
+
 
 ## Settled  **>> UPDATED THIS SESSION**
 
@@ -73,6 +76,11 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - Code types only words about our picture; facts are served. (Oct 6)
 - The inner Oort cloud is redrawn from the 2025 paper now, as part of
   the Sun's slice, not deferred. (Oct 6)
+-- something to keep in mind. the color dictionary is a drawing choice and kept by hand. the default color is often goldenrod, but we should switch it up to avoid clashing with nearby objects. small, but it matter for the render. 
+-- since we are using cowork, the location of the local files should be included in the handoff header along with the github info. this has already been added to the skill. 
+-- another cowork glitch: if i have already downloaded a design document or handoff to documentations/ and the patch creates it again, the patch will refuse. i have to go back and delete the download, then the patch runs. 
+-- add new checks to the dashboard. this should be part of the skill. 
+
 
 ## Signals  **>> UPDATED THIS SESSION**
 
@@ -91,18 +99,18 @@ At the next design talk:
 - Earth's design talks, the belts' shape first.
 - Whether the phone's Sun room gets the galactic plane, its poles,
   Sgr A* and the tide's cone: L-408 (the galactic plane on the phone).
-  You: "awaits the design talk." (Oct 7)
+  You: "awaits the design talk." (Oct 7) -- yes. it awaited only for implementation not in principle. 
 - The inner Oort cloud's tilted disk: its words, and whether its outer
-  edge moves from 20,000 au to the paper's 10,000.
+  edge moves from 20,000 au to the paper's 10,000. -- i think this is settled. and we opted for a fuzzy boundary. please check.
 
 Decisions, one at a time:
 - L-424 (the checker's one word for two cases): whether the
-  checker itself prints two different words.
+  checker itself prints two different words. -- unclear
 
 Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows.
 2. Choosing a date, and animation.
-3. The scattered disk, with the Kuiper belt. Not the fuzzy-boundary idea.
+3. The scattered disk, with the Kuiper belt. Not the fuzzy-boundary idea. -- we should decide this. i lean yes. 
 
 ## Where the details are  **>> UPDATED THIS SESSION**
 
@@ -309,10 +317,20 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  2. Move this script into documentation/; commit and push. -- 
-  3. Upload the two skills' SKILL.md (Settings > Skills): ledger-and-session-records and horizons-orbital-mechanics; and replace the Project's instructions with PROJECT_INSTRUCTIONS.md (now v3.90).
-  4. The Mode 5 look at Encke and Halley in the orrery window, when you like: four checks in the build record.
+  2. Move this script into documentation/; commit and push. -- 9f1547821a1957544f0ae94a77cc64c5a3ab4114
+  3. Upload the two skills' SKILL.md (Settings > Skills): ledger-and-session-records and horizons-orbital-mechanics; and replace the Project's instructions with PROJECT_INSTRUCTIONS.md (now v3.90). -- done
+  4. The Mode 5 look at Encke and Halley in the orrery window, when you like: four checks in the build record. 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+These are the four checks from last session's build record (section 6 of documentation/HANDOFF_L395_horizons_check_build_20261010.md):
+
+1. **The checkbox and its tooltip.** Under Comets, just below Halley, there is a new checkbox: "Encke (1786-present, periodic)". Hover over it. The tooltip should read "Horizons: 2P/Encke. A short-period comet whose dust trail is the source of the Taurid meteor showers." and "Perihelion: October 22, 2023". -- correct. could you reorder to put Encke at the top of the list? i order the comets by date of first apparition by this Horizons Id. 
+
+2. **Encke draws.** Tick only Encke, centre on the Sun, set today's date, and plot. You should see its marker, its orbit and its tail. The marker is goldenrod, the default colour, because Encke has no colour of its own yet. Giving it one is a one-line change in constants_new.py, if you want it. -- correct. there is a color dictionary, which is mostly a drawing choice to distinguish objects commonly drawn together. 
+
+3. **Its perihelion button.** Under Encke, use "Go: Perihelion". The view should jump to Encke's October 2023 perihelion. This one needs the internet, so it couldn't be tested in the sandbox. -- correct. the only missing data is the orbital period, which is available from Horizons. this information is in it's own dictionary. please discuss best approaches going forward. 
+
+4. **Halley's hover.** Plot Halley and hover over it. It should show its new words and a link to NASA's 1P/Halley page. -- correct
 
 ===============================================================================
 
@@ -379,16 +397,506 @@ stamps updated: the ledger header; module docstrings of constants_new.py, consta
 patch applied: 52 edits in 8 files, and 5 new files.
 
 NEXT:
-  1. Run hills_cloud_sampler.py if you like: it prints the drawn tilt (about 34 degrees), the arms, and three checks ending "PASS".
-  2. Run orrery_maintenance_run.py. Expect "22 of 22 gating checkers passed" and "GATE PATH: 0 TIER-1 -- the push gate holds". The whole tree's Tier-1 count goes from 293 to 292: the shells module's docstring now names a paper, so the scanner reads its numbers as cited (the build record, section 5).
-  3. Look in the orrery window: centre on the Sun, tick the Hills Cloud (tilted disk), the clumpy outer Oort cloud, the galactic tide and the Inner Oort Cloud sphere; plot and turn it. Three checks in documentation/HANDOFF_L421_oort_orrery_20261010.md, section 7.
-  4. Move this script (and patch_L395_7, if still in the root) into documentation/; commit and push.
+  1. Run hills_cloud_sampler.py if you like: it prints the drawn tilt (about 34 degrees), the arms, and three checks ending "PASS". -- is this a one-time use script?
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/hills_cloud_sampler.py
+Hills cloud, as drawn: 600 orbits, 3600 dots
+Judged on a larger sample (4000 orbits, 24000 dots):
+  plane through the dots: tilted 34.1 deg to the ecliptic (the paper: about 30)
+  the orbits' own tilts: mean 40.8 deg, spread 16.3 deg
+  arm 1 (omega_G 70-180 deg): toward ecliptic longitude 22, latitude -8 deg
+  arm 2 (omega_G 250-360 deg): toward ecliptic longitude 203, latitude 6 deg
+  dots inside the inner edge: 12%; beyond the band's near end: 20%
+  frame: Sgr A* at galactic longitude -0.44, latitude -0.05 deg
+  reading: 67% of Fig. 3's dots inside its caption's ranges
+PASS: frame, reading and tilt
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+  2. Run orrery_maintenance_run.py. Expect "22 of 22 gating checkers passed" and "GATE PATH: 0 TIER-1 -- the push gate holds". The whole tree's Tier-1 count goes from 293 to 292: the shells module's docstring now names a paper, so the scanner reads its numbers as cited (the build record, section 5). -- done
+  3. Look in the orrery window: centre on the Sun, tick the Hills Cloud (tilted disk), -- correct
+  4. the clumpy outer Oort cloud, -- correct
+  5. the galactic tide and -- correct
+  6. the Inner Oort Cloud sphere; plot and turn it.  -- correct
+  7. Three checks in documentation/HANDOFF_L421_oort_orrery_20261010.md, section 7.
+
+**Tony:** -- correct
+## 7. Mode 5, Tony's look in the orrery window
+
+Centre on the Sun; under the Sun's shells tick Hills Cloud (tilted
+disk), the clumpy outer Oort cloud, the galactic tide and the Inner
+Oort Cloud sphere; plot, and turn it.
+1. The Hills cloud is a disk tipped against the planets' plane, its
+   dots thickest along two opposite arms near the ecliptic.
+2. The clumps and the tide begin thin inside the Inner Oort Cloud
+   sphere (20,000 au) and are full outside it.
+3. The hovers read as in section 8.
+Looks wrong? The frame is the suspect first: the galactic pole rows
+and the node row.
+
+  8. Move this script (and patch_L395_7, if still in the root) into documentation/; commit and push. -- 9f1547821a1957544f0ae94a77cc64c5a3ab4114
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 Where this leaves us
 
 The orrery draws the inner Oort cloud from the paper; the website follows in the next session, together with the galactic plane (L-408).
 Still open after that: the typed facts’ check, and whether each served number’s citation in the gallery config matches its row in the constants file.
+
+**Follow up**
+Everything in your run record checks out. Both patches ran and all 22 checks passed, every look you made came back correct, and your push is on GitHub at 9f15478.
+
+**Is hills_cloud_sampler.py one-time?** No, it's permanent. The orrery calls it every time it draws the Hills cloud. Running it directly is optional: it only prints the checks. Only the patch scripts are one-time.
+
+**Encke to the top of the comet list:** yes. That's a small change, and it goes in the next patch. That patch also records your verdicts from this run record.
+
+**The orbital period, which is what you asked to discuss.** The orrery gets periods today from one hand-typed table, `KNOWN_ORBITAL_PERIODS` in constants_new.py. It has about 150 entries. Some were copied from Horizons with a date, some are rounded or marked "estimate", and none carries a source. A typed period also goes stale: JPL re-solved Encke's orbit twice this month.
+
+There is a second route already in the code. When the orrery fetches an object's orbit from Horizons, it gets the semi-major axis, which is the orbit's average distance from the Sun. Kepler's third law turns that into a period. The orrery already does this for some objects; it just checks the table first.
+
+Three ways forward:
+
+1. **Type Encke's period into the table from Horizons, as Halley's was.** This takes minutes. But it adds one more typed number that drifts.
+2. **Work the period out from the fetched orbit whenever there is one, and keep the table only as a fallback for when the orrery is offline.** No comet with fetched elements needs a typed period, and each one follows JPL's newest solution automatically. The cost is a change to the few places in palomas_orrery.py that read the table, and testing them.
+3. **Give each object its period in its own entry in the orrery's object list, with a source,** the way the JPL names went in this session. The website's daily Horizons check could then confirm it. This is the most work, but it makes periods ready for the website.
+
+I recommend **2**. It fixes Encke and every other comet with fetched elements at once, and it replaces typed numbers with JPL's own. The rest of the table would be recorded as one ledger item for a later cleanup, not chased now. Option 3 can follow when the website needs periods.
+
+Which way do you want to go?
+
+=========================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L431_1_close_20261011.py
+ok  palomas_orrery.py                  line 10009
+ok  palomas_orrery.py                  line 10003
+ok  palomas_orrery.py                  line 68
+ok  LEDGER_CONSOLIDATED.md             line 2230
+ok  LEDGER_CONSOLIDATED.md             line 2225
+ok  LEDGER_CONSOLIDATED.md             line 1923
+ok  LEDGER_CONSOLIDATED.md             line 1356
+ok  LEDGER_CONSOLIDATED.md             line 1341
+ok  LEDGER_CONSOLIDATED.md             line 1211
+ok  LEDGER_CONSOLIDATED.md             line 338
+ok  documentation/WHERE_WE_ARE.md      line 110
+ok  documentation/WHERE_WE_ARE.md      line 92
+ok  documentation/WHERE_WE_ARE.md      line 86
+ok  documentation/WHERE_WE_ARE.md      line 77
+ok  documentation/WHERE_WE_ARE.md      line 71
+ok  documentation/WHERE_WE_ARE.md      line 58
+ok  documentation/WHERE_WE_ARE.md      line 40
+ok  documentation/WHERE_WE_ARE.md      line 33
+ok  documentation/WHERE_WE_ARE.md      line 9
+ok  documentation/WHERE_WE_ARE.md      line 3
+ok  documentation/HANDOFF_L421_oort_orrery_20261010.md line 305
+ok  documentation/DESIGN_L431_orbital_periods_20261011.md created
+note: WHERE_WE_ARE.md has 129 lines above the run-record marker (the cap is 130)
+stamps updated: the ledger header; the module docstring of palomas_orrery.py; WHERE_WE_ARE.md date line
+patch applied: 21 edits in 4 files, and 1 new file.
+
+NEXT:
+  1. Run orrery_maintenance_run.py. Expect "22 of 22 gating checkers passed" and "GATE PATH: 0 TIER-1 -- the push gate holds". It rebuilds the ledger index with L-431.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261011T012535Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.8s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.4s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.0s  unchanged (1 checked, not written)
+  Objects export               0.1s  unchanged (1 checked, not written)
+  Module atlas                 8.8s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.6s  rewrote DATA_INVENTORY.md
+  Exact rows report            2.8s  rewrote EXACT_ROWS_PRINTED.md -- 13 of 38
+                                     exact rows printed at 43 lines (33 orrery,
+                                     10 gallery); 8 drawn only, 11 not followed,
+                                     0 map entries broken
+  Document index               0.2s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.3s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.8s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       1.4s  Export matches the store: sha256
+                                     9d79d8797a22 on both sides; 120 rows
+                                     re-read, 56 not exported, 29 tokens; 315
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.1s  pass
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      1.9s  PASSING -- 13 printed exact rows each state
+                                     a count; 33 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.2s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 119 status lines in constants_new.py are
+                                     well formed; 54 rows carry none.
+  Row shape                    0.1s  All 176 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.3s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          31.8s  PASS -- all 311 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  3.1s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.4s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.8s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Worksheet checker           10.7s  74 of 110 routed, 8 clean
+  Worksheet checker tests     22.2s  All 135 checks passed
+  Worksheet key round trip     1.4s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         33.4s  All 76 checks passed
+  Extractor pins               0.6s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          14.2s  0 TIER-1 -- the push gate holds
+
+======================================================================
+  22 of 22 gating checkers passed -- 146.3s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2161 file(s) examined, 10 written, 0 created, 0 removed, 4 rewritten identically
+    written   DATA_INVENTORY.md
+    written   EXACT_ROWS_PRINTED.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. If you like, open the orrery window: Encke is now the first comet. -- done. looks great. 
+  3. Move this script, and patch_L395_5_horizons_name_and_encke_20261010.py (still in the root), into documentation/. If you saved last night's annotated run record as a timestamped copy, it goes in this commit too. Commit and push.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+=================================================================================
+
+======================================================================
+  DAILY RUN -- Sunday October 11, 2026  08:42
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io
+======================================================================
+Daily Run steps, from C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io:
+  1. Guest book updater                 tools\guestbook_updater.py  found
+  2. Horizons check                     tools\horizons_check.py  found
+  3. Cache builder                      tools\gallery_cache_builder.py  found
+  4. Gallery maintenance run, offline   gallery_maintenance_run.py  found
+=== DAILY RUN: all 4 step scripts found
+Last cache build: 2026-10-10 22:11 UTC, ok, 0 days ago.
+
+======================================================================
+  DAILY RUN step 1 of 4: Guest book updater
+======================================================================
+======================================================================
+  guest book updater -- C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io
+======================================================================
+1 entry in the guest book; 171 gallery pages a link may point at.
+
+Fetching the form's responses...
+No new messages.
+
+w write, r reply, x remove, p pin/unpin, f form address, s sheet address, q finish > q
+
+======================================================================
+  approved 0, declined 0, waiting 0; the guest book now has 1 entry
+  No change to data/guestbook.json.
+======================================================================
+
+======================================================================
+  DAILY RUN step 2 of 4: Horizons check
+======================================================================
+======================================================================
+  HORIZONS CHECK -- 2026-10-11
+======================================================================
+Checked data/objects_export.json, pulled from orrery 32619f8d.
+Examined 13 entries: 0 due, 0 queries asked of JPL.
+
+  sun                not due (confirmed on 2026-10-10, 1 day ago)
+  mercury            not due (confirmed on 2026-10-10, 1 day ago)
+  venus              not due (confirmed on 2026-10-10, 1 day ago)
+  earth              not due (confirmed on 2026-10-10, 1 day ago)
+  mars               not due (confirmed on 2026-10-10, 1 day ago)
+  jupiter            not due (confirmed on 2026-10-10, 1 day ago)
+  saturn             not due (confirmed on 2026-10-10, 1 day ago)
+  uranus             not due (confirmed on 2026-10-10, 1 day ago)
+  neptune            not due (confirmed on 2026-10-10, 1 day ago)
+  pluto_barycenter   not due (confirmed on 2026-10-10, 1 day ago)
+  apophis            not due (confirmed on 2026-10-10, 1 day ago)
+  halley             not due (confirmed on 2026-10-10, 1 day ago)
+  encke              not due (confirmed on 2026-10-10, 1 day ago)
+
+HORIZONS CHECK: PASS -- 0 checked today, 13 not due
+
+======================================================================
+  DAILY RUN step 3 of 4: Cache builder
+======================================================================
+[RECOVER] removed retained data\solar-system.prev (cleared read-only on 6 entries)
+[sweep] no sibling directories present
+[POLE] earth: pole of 2026-10-11 served (RA 0.70066, Dec 89.85003 deg); tilt 23.43807 deg
+[SWAP] the new cache is in place; every rename worked on the first try. Recorded in data/cache_swap_log.jsonl
+[warn] sun: features-only entry; no Horizons fetch
+[done] run 20261011T134230Z (nightly): 19 objects
+
+----------------------------------------------------------------------
+WHAT TO DO NEXT, before you commit anything:
+
+  1. Run the gallery maintenance run, from this same folder:
+         python gallery_maintenance_run.py
+     Every gating checker should pass. Its LAST line reads the
+     swap log back and should agree with the [SWAP] line above.
+  2. In GitHub Desktop, look at the change list. A good build
+     shows changed and added files and NO pile of deletions.
+  3. Commit and push.
+  4. After the push, check what the live site serves:
+         python gallery_maintenance_run.py --live
+
+TONY-ACTION ROLLUP for this run:
+  (do)     steps 1 to 4 above, in that order.
+----------------------------------------------------------------------
+
+The builder's next steps start with the maintenance run.
+The Daily Run runs it now.
+
+======================================================================
+  DAILY RUN step 4 of 4: Gallery maintenance run, offline
+======================================================================
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.7s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     1.1s  rewrote
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.6s  rewrote data/objects_export.sha
+  PASS Objects mirror            0.1s  no change to
+                                    data/objects_config.json
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      17.6s  PASS (229 checks, 0 failures)
+  PASS Pole of date              0.3s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.1s  All 64 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served, print count
+                                    written as served, "in" written as
+                                    served and a slot served in
+                                    another unit from it.
+  PASS Store writer suite        9.5s  All 322 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings, the rooms section's
+                                    included; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 305 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Objects mirror suite      0.1s  MIRROR OBJECTS SUITE: pass
+  PASS Objects mirror check      0.1s  OBJECTS MIRROR: pass
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 101 link(s) compared, store
+                                    9d79d8797a22.
+  PASS Horizons check suite      0.3s  HORIZONS CHECK SUITE: pass
+  PASS Horizons confirmations    0.1s  HORIZONS CONFIRMATIONS: pass -- 13
+                                    of 13 confirmed within 30 days
+  PASS Pointer join              0.1s  Every link is accounted for: 108
+                                    link(s) against orrery 9f154782, 4
+                                    fallback named; read check: 43 of
+                                    43 measured rows reached carry a
+                                    read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's 19 object(s) and their
+                                    features exactly: 4 object(s) with
+                                    35 named shell(s), in both cache
+                                    files.
+  PASS Collapsed features        0.1s  33 stored as themselves, 16
+                                    collapsed, 0 unclassified.
+  PASS Feature renderers         1.5s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.2s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.3s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 57 hover(s) and 307
+                                    number(s) examined; 13 graded, 7
+                                    graded by line, 44 held to the
+                                    fixture ===
+  PASS Solar System figures      0.1s  === PASS: 6 worked cases, 11
+                                    drawer rows matched to their
+                                    accuracy rows, 10 served
+                                    distances; Uranus, Neptune and
+                                    Pluto print to JPL's ten-thousands
+                                    place ===
+  PASS Solar System drawer       0.1s  === PASS: the Sun is never ticked,
+                                    See more hides only what is not
+                                    ticked, the handle names the last
+                                    body ticked, All / none leaves the
+                                    Sun, rooms are offered only where
+                                    they exist, and the page asks this
+                                    file ===
+  PASS Guest book                0.1s  === GUEST BOOK: all 8 checks
+                                    passed
+  PASS Guest book updater        0.3s  === GUEST BOOK UPDATER: all 43
+                                    checks passed (6 scripted runs,
+                                    self-test first)
+  PASS Daily run steps           0.1s  === DAILY RUN: all 4 step scripts
+                                    found
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: no sibling directories and
+                                    nothing in data/ the builder did
+                                    not make.
+
+======================================================================
+  26 of 26 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories and
+  last swap 2026-10-11T13:43:06.145694+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+======================================================================
+  DAILY RUN -- summary
+======================================================================
+  Guest book updater           ok
+  Horizons check               ok
+  Cache builder                ok
+  Maintenance run, offline     ok
+
+  NEXT:
+    1. GitHub Desktop: look at the change list, then commit and push. -- fd17abf1cf99169289acfeb0a45f84365265c255
+    2. Then the dashboard's Gallery Maintenance Run -- live, AFTER a push.
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 15 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   gallery/solar_system_drawer.js                 matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+
+  PASS Served reachability       2.0s  all 15 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 9f154782
+
+  PASS Export freshness          0.1s  the served export is the orrery's
+                                    at 9f154782, byte for byte
+
+  orrery HEAD 9f154782
+  examining 7 of 108 links; the other 101 are served from the export
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  7 pointers: 4 match, 0 DRIFT, 0 UNIT MISMATCH, 3 could not be examined.
+
+  PASS Store drift               1.1s  7 pointers against orrery 9f154782
+                                    -- 4 match, 0 DRIFT, 0 UNIT
+                                    MISMATCH, 3 could not be examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            7 pointers against orrery 9f154782 -- 4
+  last swap 2026-10-11T13:43:06.145694+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+======================================================================
+
+Where this leaves us
+
+The Hills cloud and Encke are done and looked at.
+Next session starts with the orbital periods design talk, as you asked.
+The website’s side of the inner Oort cloud comes after that.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

@@ -1,8 +1,8 @@
 <!-- Doc-Kind: generated | The provenance audit: every numeric claim scored against its citation, rebuilt by provenance_scanner.py on each run. Do not hand-edit. -->
 # Paloma's Orrery -- Provenance Audit
 
-Generated: October 10, 2026
-Files scanned: 149
+Generated: October 11, 2026
+Files scanned: 148
 Total findings: 1094
 Constants: 172 | Dicts: 45 | Display strings: 877
 
@@ -20,14 +20,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|---:|---:|---:|--------:|
+| 20261011T134721Z | `9f15478` | 148 | 1094 | 292 | 673 | 124 | 5 | 0 |
 | 20261011T012535Z | `32619f8` | 149 | 1094 | 292 | 673 | 124 | 5 | 0 |
 | 20261010T213809Z | `ca5bbe1` | 144 | 1081 | 293 | 659 | 124 | 5 | 0 |
 | 20261010T183950Z | `a6678b0` | 144 | 1081 | 293 | 659 | 124 | 5 | 0 |
 | 20261010T140119Z | `04d1733` | 143 | 1081 | 293 | 659 | 124 | 5 | 0 |
 | 20261010T045744Z | `b6652f9` | 144 | 1081 | 293 | 659 | 124 | 5 | 0 |
-| 20261010T013213Z | `aa46bb1` | 144 | 1083 | 293 | 661 | 124 | 5 | 0 |
 
-Change since the previous run: total +13, Tier-1 -1.
+Change since the previous run: total +0, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -197,7 +197,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `visualization_core.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `visualization_utils.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `earth_pole_live_check.py` | orrery | 0 | 1 | 0 | 0 | 1 |
-| `patch_L421_5_oort_orrery_20261010.py` | orrery | 0 | 1 | 0 | 0 | 1 |
+| `patch_L431_1_close_20261011.py` | orrery | 0 | 1 | 0 | 0 | 1 |
 | `hills_cloud_sampler.py` | orrery | 0 | 1 | 0 | 0 | 1 |
 | `add_docstrings.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `data_inventory.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
@@ -234,7 +234,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 - `export_objects.py`
 - `hills_cloud_sampler.py`
 - `orrery_maintenance_run.py`
-- `patch_L421_5_oort_orrery_20261010.py`
+- `patch_L431_1_close_20261011.py`
 - `test_dimensions.py`
 - `worksheet_checker.py`
 - `worksheet_key_aliases.py`
@@ -1437,11 +1437,11 @@ is planned for a future session.
 | 2341 | string | display string @ line 2341 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2416 | string | display string @ line 2416 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
-### patch_L421_5_oort_orrery_20261010.py
+### patch_L431_1_close_20261011.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 80 | dict | NEW_FILES[...] | (5 entries) | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | UNDETERMINED -- could not be classified |
+| 56 | dict | NEW_FILES[...] | (1 entry) | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (key) |
 
 ### planet9_visualization_shells.py
 
@@ -1918,9 +1918,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 2170 | constant | PERFRAME_INDICATOR_RADIUS_FACTOR | 100.0 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2203 | constant | PERFRAME_COORD_DECIMALS | 7 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 3804 | constant | BUTTON_WIDTH | 14 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2173 | constant | PERFRAME_INDICATOR_RADIUS_FACTOR | 100.0 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2206 | constant | PERFRAME_COORD_DECIMALS | 7 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 3807 | constant | BUTTON_WIDTH | 14 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
 
 ### palomas_orrery_dashboard.py
 

@@ -110,13 +110,13 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 ### `INNER_LIMIT_OORT_CLOUD_AU`
 
-- orrery `palomas_orrery.py` line 10435: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
+- orrery `palomas_orrery.py` line 10440: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
 - orrery `solar_visualization_shells.py` line 132: `_OORT_INNER_EDGE = row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)`
 - orrery `solar_visualization_shells.py` line 1584: `f'From {_OORT_INNER_EDGE} AU ({row_text("INNER_LIMIT_OORT_CLOUD_AU", unit="km", grouping=True...`
 
 ### `OUTER_OORT_CLOUD_AU`
 
-- orrery `palomas_orrery.py` line 10435: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
+- orrery `palomas_orrery.py` line 10440: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
 - orrery `solar_visualization_shells.py` line 146: `_OORT_OUTER_EDGE = row_text('OUTER_OORT_CLOUD_AU', grouping=True)`
 
 ## Printed to a terminal only
@@ -139,10 +139,10 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
   - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 879 (config `/objects/1/features/orientation/pole/dec`): `var dec = measured(pole.dec, "deg", slug + "/orientation/pole/dec", warn);`
 - `ARCSEC_PER_DEG`: named on 0 other orrery line(s).
 - `EARTH_OBLIQUITY_J2000_ARCSEC`: named on 0 other orrery line(s).
-- `EARTH_OBLIQUITY_J2000_DEG`: named on 14 other orrery line(s).
-- `GALACTIC_NORTH_POLE_RA_J2000_DEG`: named on 5 other orrery line(s).
+- `EARTH_OBLIQUITY_J2000_DEG`: named on 18 other orrery line(s).
+- `GALACTIC_NORTH_POLE_RA_J2000_DEG`: named on 9 other orrery line(s).
 - `GALACTIC_NORTH_POLE_DEC_J2000_ARCSEC`: named on 0 other orrery line(s).
-- `GALACTIC_NORTH_POLE_DEC_J2000_DEG`: named on 4 other orrery line(s).
+- `GALACTIC_NORTH_POLE_DEC_J2000_DEG`: named on 8 other orrery line(s).
 - `DEG_PER_RAD`: named on 0 other orrery line(s).
 - `EARTH_SOLAR_WIND_SPEED_KM_S`: named on 0 other orrery line(s).
 - `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`: named on 3 other orrery line(s).
@@ -150,10 +150,10 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
 - `EARTH_MAGNETOTAIL_DRAWN_END_RADII`: named on 3 other orrery line(s).
   - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2691 (config `/objects/1/features/earth_magnetosphere/magnetotail/drawn_end`): `var tailEnd = measured(tl.drawn_end, "r_earth", tlWhere + "/drawn_end",`
 - `ROCHE_LIMIT_DRAWN_RADII`: named on 6 other orrery line(s).
-- `HILLS_CLOUD_PLANES_NODE_CELL_DEG`: named on 0 other orrery line(s).
-- `HILLS_CLOUD_PLANES_INCL_CELL_DEG`: named on 0 other orrery line(s).
-- `HILLS_CLOUD_PLANES_READ`: named on 0 other orrery line(s).
-- `HILLS_CLOUD_ECCENTRICITY`: named on 0 other orrery line(s).
+- `HILLS_CLOUD_PLANES_NODE_CELL_DEG`: named on 3 other orrery line(s).
+- `HILLS_CLOUD_PLANES_INCL_CELL_DEG`: named on 3 other orrery line(s).
+- `HILLS_CLOUD_PLANES_READ`: named on 6 other orrery line(s).
+- `HILLS_CLOUD_ECCENTRICITY`: named on 3 other orrery line(s).
 - `DE430_TERRESTRIAL_POSITION_PLACE_KM`: named on 0 other orrery line(s).
   - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 82 (config `/objects/1/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
   - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 83 (config `/objects/1/position_accuracy`): `v = node.value;`
