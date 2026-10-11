@@ -18,7 +18,7 @@ Run it after any edit session and before a push.
 
 WHAT IT DOES
 ------------
-Runs the eight GENERATORS, then the CHECKERS, and prints one summary at
+Runs the nine GENERATORS, then the CHECKERS, and prints one summary at
 the end. Nothing stops on a failure -- every tool runs every time, so a
 single pass shows the whole picture rather than the first problem in it.
 
@@ -87,11 +87,11 @@ artifact, and it is short enough to copy.
 
 GATING AND REPORT-ONLY
 ----------------------
-Twenty-two checkers are pass/fail: a problem makes them exit non-zero.
+Twenty-three checkers are pass/fail: a problem makes them exit non-zero.
 Two are REPORT-ONLY -- worksheet_checker.py and provenance_scanner.py
 exit 0 whatever they find, and exit 1 only when they could not run.
 They are marked in the CHECKERS table, and the summary counts the
-gating twenty-two in its headline and quotes the two report-only verdicts
+gating twenty-three in its headline and quotes the two report-only verdicts
 underneath.
 
 The block quotes each tool's own note rather than restating it. A
@@ -162,6 +162,11 @@ the inner Oort cloud: CHECKERS gains Hills cloud sampler (L-421),
 test_hills_cloud_sampler.py, which plants a fault for each of the
 sampler's three checks -- the frame, the reading of Fig. 3, the tilt --
 before judging the real rows. Twenty-two gating checkers.)
+Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5 (L-421,
+the website half: GENERATORS gains Drawings export, export_drawings.py,
+which writes data/drawings/hills_cloud.json, the Hills cloud's dots for
+the website to draw; CHECKERS gains Drawings export check,
+test_drawings_export.py. Nine generators, twenty-three gating checkers.)
 """
 
 import hashlib
@@ -192,6 +197,11 @@ GENERATORS = [
     # constants export.
     ('Objects export', ['export_objects.py'],
      ['data/objects_export.json']),
+    # L-421 (2026-10-11, Tony's option A): the orrery places the Hills
+    # cloud's dots and the website draws the same dots, pulled from
+    # data/drawings/ as it pulls the two exports above.
+    ('Drawings export', ['export_drawings.py'],
+     ['data/drawings/hills_cloud.json']),
     ('Module atlas',    ['module_atlas.py'],
      ['MODULE_ATLAS.md', 'MODULE_INDEX.md']),
     ('Data inventory',  ['data_inventory.py'],
@@ -283,6 +293,11 @@ CHECKERS = [
     # rows are judged.
     ('Hills cloud sampler (L-421)', ['test_hills_cloud_sampler.py'],
      'HILLS CLOUD:'),
+    # L-421, the website half (2026-10-11): each stored drawing in
+    # data/drawings/ is the drawing its rows give today, git tracks it,
+    # and each check is first shown able to fail.
+    ('Drawings export check', ['test_drawings_export.py'],
+     'DRAWINGS EXPORT:'),
     # A fourth field marks a tool REPORT-ONLY: it exits 0 whatever it
     # finds, so "passed" says only that it ran. Exactly two are, and
     # both are deliberate -- their numbers are the verdict, not their

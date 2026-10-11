@@ -174,6 +174,10 @@ note in his run record: "add new checks to the dashboard"): Test Hills
 Cloud Sampler (L-421) and Test Scanner Row Run (L-414) under the
 orrery's checkers, in alphabetical place. Both checkers were in the
 maintenance run with no button.
+October 11, 2026 with Anthropic's Claude Opus 5.5 (L-421, the website
+half): Drawings Export under the generators and Test Drawings Export
+under the checkers, in the same patch as the two scripts, so the new
+check has its button from the start.
 """
 
 import os
@@ -960,6 +964,17 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
+        ("Drawings Export",
+         "export_drawings.py",
+         "Write data/drawings/hills_cloud.json: the Hills cloud's 3,600 "
+         "dots, placed by hills_cloud_sampler.py from its rows with a "
+         "fixed seed, the same dots the orrery window draws. The website "
+         "pulls this file and draws these dots rather than placing its own "
+         "(L-421, Tony's option A). Writes only when the dots change.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
         ("Objects Export",
          "export_objects.py",
          "Write data/objects_export.json from the object list in "
@@ -1108,6 +1123,19 @@ LAUNCH_GROUPS = {
          "converting into it. Rows with no unit yet are named, not "
          "failed, outside a finished slice. A built-in set of test rows "
          "runs first and must give every verdict.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Test Drawings Export",
+         "test_drawings_export.py",
+         "Check that each stored drawing in data/drawings/ (today the Hills "
+         "cloud's dots, which the website draws) is exactly the drawing its "
+         "rows in constants_new.py give, that git does not ignore it, and "
+         "that its plane's tilt matches. Three faults are planted first -- "
+         "a dot moved, the eccentricity row changed, the file reported "
+         "ignored -- and each must be caught. Ends on \"DRAWINGS EXPORT: "
+         "PASS\" (L-421). Run after Drawings Export.",
          SCRIPT_DIR,
          True,
          None,

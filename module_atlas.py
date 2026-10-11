@@ -234,6 +234,7 @@ ROLE_MAP = {
     'exact_rows_report':                      'devtool',
     'examine_hot_csv':                        'devtool',
     'export_constants':                       'devtool',
+    'export_drawings':                        'devtool',
     'export_objects':                         'devtool',
     'export_orbit_cache':                     'devtool',
     'food_insecurity_generator':              'devtool',

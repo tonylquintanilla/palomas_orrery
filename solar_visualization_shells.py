@@ -15,6 +15,11 @@ Consumed by: planet_visualization.py (routing dispatcher),
 Role: rendering/shells
 Domain: orrery
 
+Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5
+(L-421, the website half: the Hills cloud draws
+hills_cloud_sampler.drawn_hills_cloud(), seeded, so every plot is the
+same cloud and the website draws the same dots from
+data/drawings/hills_cloud.json.)
 Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5
 (L-421, the inner Oort cloud: the Hills cloud is drawn as dots along
 orbits following Nesvorny et al. (2025) -- a disk tilted about 30
@@ -1568,10 +1573,14 @@ def create_sun_hills_cloud_torus(center_position=(0, 0, 0)):
     """
     # Phase D1: center_position accepted for interface uniformity;
     # geometry translation deferred to switchover phase.
-    from hills_cloud_sampler import sample_hills_cloud
+    from hills_cloud_sampler import drawn_hills_cloud
     # 600 orbits of 6 dots: 3,600, the torus's count (render size, Tony's
-    # standing concern). A rendering setting, kept here where it is drawn.
-    dots = sample_hills_cloud(600, 6)
+    # standing concern), from a fixed seed. The settings live in
+    # hills_cloud_sampler.py, because the website draws the same dots
+    # from data/drawings/hills_cloud.json (L-421, 2026-10-11): one place,
+    # so the two cannot come to differ. Seeded, every plot is the same
+    # cloud (L-239, for this builder).
+    dots = drawn_hills_cloud()
     x_flat, y_flat, z_flat = dots['x'], dots['y'], dots['z']
 
     # Tony's confirmed words, 2026-10-09 (design record sections 4 and 9),

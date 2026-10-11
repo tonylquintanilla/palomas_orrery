@@ -158,7 +158,7 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: OPEN: 10-10-26 1749: Opus: L-421 orrery build session**
+**Session: DONE: 10-11-26 0859: Opus: L-421 orrery build session**
 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L395_7_records_20261010.py
 ok  LEDGER_CONSOLIDATED.md                           header stamp
@@ -1114,8 +1114,26 @@ FILES WRITTEN THIS RUN
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
   2. If you like, open the dashboard: Test Hills Cloud Sampler and Test Scanner Row Run are under the orrery checks; each should end on PASS.
-  3. Move this script into documentation/; commit and push. -- 
+  3. Move this script into documentation/; commit and push. -- 84d329a12575d923daa06ffa104012ce11abc925
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+Where each of your notes went:
+
+Your order after the Sun and Earth rooms: recorded word for word as a new ledger item, L-433 (the road after), for the design talk. That covers fuzzy boundaries first, then symbols for most objects, inner planets, and not forgetting the earth science part. One conflict to settle there: the road says “Jupiter and Saturn first”, and you lean to the inner planets.
+Colours: 27 object names in the orrery have no colour of their own, so they can fall to the default goldenrod. They’re listed in a new item, L-432 (default colours), with Encke first. Some of them, the barycentres and the exoplanet systems, may get their colour elsewhere; I haven’t traced that. Picking colours is your call by eye.
+Your Oort cloud question: yes, it’s settled. The band from 10,000 to 20,000 AU was ruled on October 9 and is now drawn.
+L-424 (the checker’s one word for two cases): you marked it unclear, so it moves to the design-talk list. I’ll explain it in plain words there before you decide.
+Scattered disk: your “i lean yes” is recorded, and the item moves to the design-talk list.
+Three rules owed to the skills, recorded for their next versions:
+Dashboard: every new check gets its button in the same patch.
+Handoff header: your local folders go beside the GitHub line. The skill already lists the folders, but it doesn’t yet say they belong in the header.
+Downloaded files: a patch accepts a file you’ve already downloaded if it’s identical, instead of refusing. This patch already works that way; I tested it, including on a copy saved with Windows line endings.
+
+Where this leaves us
+
+Everything from the session and your notes is recorded.
+The next session opens with the orbital periods design talk.
+Then your order for after the Sun and Earth rooms, and the L-424 explanation.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

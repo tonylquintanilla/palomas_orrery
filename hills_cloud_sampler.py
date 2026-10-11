@@ -47,8 +47,21 @@ Pure Python and numpy: no Plotly, no Tk. The gallery's builder computes
 served geometry in Python too, so this module can be carried there; which
 way the gallery takes it is the gallery session's decision.
 
+THE DRAWING, ONE PLACE FOR ITS SETTINGS (L-421, 2026-10-11). The orrery
+window and the website draw the same dots. drawn_hills_cloud() is the
+drawing: 600 orbits of 6 dots, from a fixed seed, its settings written
+once, as drawn_hills_cloud()'s defaults, so every plot shows the same
+cloud. The orrery's
+shell builder calls it, and export_drawings.py writes its dots to
+data/drawings/hills_cloud.json, which the website pulls and draws (Tony's
+ruling of 2026-10-11, option A: the website draws the orrery's dots, it
+does not re-sample them). Before this the orrery drew fresh random dots
+on every plot (L-239). The three settings are drawing choices, not
+measurements.
+
 Key functions:
     sample_hills_cloud() - the dots, in AU, in the drawing frame
+    drawn_hills_cloud() - the dots as drawn, with the settings above
     describe() - what a sample looks like: counts, tilt, arms
     check() - the three checks above, as a list of failures
 
@@ -56,12 +69,16 @@ Run it to print the description and the checks:
     python hills_cloud_sampler.py
 
 Consumed by: solar_visualization_shells.py (create_sun_hills_cloud_torus),
+             export_drawings.py, test_drawings_export.py,
              test_hills_cloud_sampler.py
 
 Role: computation
 Domain: orrery
 
 Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5 (L-421)
+Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5 (L-421,
+the website half: drawn_hills_cloud() and its three settings, so the
+orrery and the website draw the same seeded dots)
 """
 import math
 
@@ -186,6 +203,21 @@ def sample_hills_cloud(n_orbits, points_per_orbit, rows=None, seed=None):
             'normal': m @ normal, 'aphelion_dir': m @ (-p_vec)}
 
 
+def drawn_hills_cloud(rows=None, n_orbits=600, points_per_orbit=6, seed=421):
+    """The Hills cloud as drawn, in the orrery window and on the website:
+    sample_hills_cloud() with the drawing's settings, from a fixed seed,
+    so every plot and the exported file hold the same dots. The three
+    settings are drawing choices, not measurements, written only here,
+    as this module keeps its other settings (check()'s seed and
+    tolerances): 600 orbits of 6 dots is the old torus's count (render
+    size), and the seed is any fixed number. Every caller takes the
+    defaults. The returned dict also carries them, as 'settings'."""
+    dots = sample_hills_cloud(n_orbits, points_per_orbit, rows, seed=seed)
+    dots['settings'] = {'n_orbits': n_orbits,
+                        'points_per_orbit': points_per_orbit, 'seed': seed}
+    return dots
+
+
 def plane_tilt_deg(x, y, z):
     """Tilt to the ecliptic of the plane through the dots: the plane whose
     normal is the direction they spread least along."""
@@ -294,7 +326,7 @@ def check(rows=None, seed=421, frame_tolerance_deg=1.0, tilt_tolerance_deg=10.0)
 
 def main():
     rows = rows_from_store()
-    drawn = describe(sample_hills_cloud(600, 6, rows), rows)
+    drawn = describe(drawn_hills_cloud(rows), rows)
     print('Hills cloud, as drawn: %d orbits, %d dots' % (drawn['orbits'], drawn['dots']))
     failures, info = check(rows)
     print('Judged on a larger sample (%d orbits, %d dots):' % (info['orbits'], info['dots']))

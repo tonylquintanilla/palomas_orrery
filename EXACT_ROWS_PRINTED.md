@@ -34,7 +34,7 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 ### `SUN_RADIUS_KM`
 
-- orrery `solar_visualization_shells.py` line 187: `f"{exact_text('SUN_RADIUS_KM', grouping=True)} km in radius --<br>"`
+- orrery `solar_visualization_shells.py` line 192: `f"{exact_text('SUN_RADIUS_KM', grouping=True)} km in radius --<br>"`
 
 ### `EARTH_LEO_UPPER_ALTITUDE_KM`
 
@@ -82,18 +82,18 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 - orrery `comet_visualization_shells.py` line 565: `f"Inside Inner K-corona (~{row_text('INNER_CORONA_RADII')} R_sun, ~{row_text('INNER_CORONA_RA...`
 - orrery `comet_visualization_shells.py` line 738: `f"Roche limit (about {row_text('ROCHE_LIMIT_RADII')} R_sun, {row_text('ROCHE_LIMIT_RADII', 'a...`
-- orrery `solar_visualization_shells.py` line 474: `f"* Solar Inner Corona (extends to 2-3 solar radii; drawn at {row_text('INNER_CORONA_RADII')}...`
-- orrery `solar_visualization_shells.py` line 746: `f"* F-corona (dust-scattered): {row_text('INNER_CORONA_RADII')}-{row_text('OUTER_CORONA_RADII...`
-- orrery `solar_visualization_shells.py` line 941: `f"* Solar Inner Corona (extends to 2-3 solar radii; drawn at {row_text('INNER_CORONA_RADII')}...`
+- orrery `solar_visualization_shells.py` line 479: `f"* Solar Inner Corona (extends to 2-3 solar radii; drawn at {row_text('INNER_CORONA_RADII')}...`
+- orrery `solar_visualization_shells.py` line 751: `f"* F-corona (dust-scattered): {row_text('INNER_CORONA_RADII')}-{row_text('OUTER_CORONA_RADII...`
+- orrery `solar_visualization_shells.py` line 946: `f"* Solar Inner Corona (extends to 2-3 solar radii; drawn at {row_text('INNER_CORONA_RADII')}...`
 
 ### `OUTER_CORONA_RADII`
 
-- orrery `solar_visualization_shells.py` line 429: `f"This shell marks the extended outer solar corona at {row_text('OUTER_CORONA_RADII')} solar ...`
-- orrery `solar_visualization_shells.py` line 439: `f"* This {row_text('OUTER_CORONA_RADII')} R_sun shell represents the faint, extended F-corona...`
-- orrery `solar_visualization_shells.py` line 737: `f"Extended outer solar corona at {row_text('OUTER_CORONA_RADII')} solar radii ({row_text('OUT...`
-- orrery `solar_visualization_shells.py` line 746: `f"* F-corona (dust-scattered): {row_text('INNER_CORONA_RADII')}-{row_text('OUTER_CORONA_RADII...`
-- orrery `solar_visualization_shells.py` line 1078: `f'* Extended Corona (F-corona): {row_text('OUTER_CORONA_RADII')} R_sun, a boundary chosen for...`
-- orrery `solar_visualization_shells.py` line 1105: `f'* Extended Corona (F-corona): {row_text('OUTER_CORONA_RADII')} R_sun, a boundary chosen for...`
+- orrery `solar_visualization_shells.py` line 434: `f"This shell marks the extended outer solar corona at {row_text('OUTER_CORONA_RADII')} solar ...`
+- orrery `solar_visualization_shells.py` line 444: `f"* This {row_text('OUTER_CORONA_RADII')} R_sun shell represents the faint, extended F-corona...`
+- orrery `solar_visualization_shells.py` line 742: `f"Extended outer solar corona at {row_text('OUTER_CORONA_RADII')} solar radii ({row_text('OUT...`
+- orrery `solar_visualization_shells.py` line 751: `f"* F-corona (dust-scattered): {row_text('INNER_CORONA_RADII')}-{row_text('OUTER_CORONA_RADII...`
+- orrery `solar_visualization_shells.py` line 1083: `f'* Extended Corona (F-corona): {row_text('OUTER_CORONA_RADII')} R_sun, a boundary chosen for...`
+- orrery `solar_visualization_shells.py` line 1110: `f'* Extended Corona (F-corona): {row_text('OUTER_CORONA_RADII')} R_sun, a boundary chosen for...`
 
 ### `HELMET_CUSP_RADII`
 
@@ -101,23 +101,23 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 - orrery `comet_visualization_shells.py` line 562: `f"Inside the helmet cusp (~{row_text('HELMET_CUSP_RADII')} R_sun, "`
 - orrery `comet_visualization_shells.py` line 563: `f"~{row_text('HELMET_CUSP_RADII', 'au')} AU): {helmet_status}<br>"`
 - orrery `comet_visualization_shells.py` line 737: `f"({row_text('HELMET_CUSP_RADII')} R_sun, {row_text('HELMET_CUSP_RADII', 'au')} AU),<br>"`
-- orrery `solar_visualization_shells.py` line 742: `f"* Streamer belt: the helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, and the stalk ...`
-- orrery `solar_visualization_shells.py` line 780: `f"and dense at the base, pinching at the cusp at {row_text('HELMET_CUSP_RADII')} R_sun where ...`
-- orrery `solar_visualization_shells.py` line 1075: `f'* Streamer Belt (Visible Corona): helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, t...`
-- orrery `solar_visualization_shells.py` line 1102: `f'* Streamer Belt (Visible Corona): helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, t...`
-- orrery `solar_visualization_shells.py` line 1969: `f"higher than {row_text('HELMET_CUSP_LOW_RADII')}-{row_text('HELMET_CUSP_HIGH_RADII')} R_sun,...`
-- orrery `solar_visualization_shells.py` line 1970: `f"({row_text('HELMET_CUSP_RADII', 'km', grouping=True)} km, {row_text('HELMET_CUSP_RADII', 'a...`
+- orrery `solar_visualization_shells.py` line 747: `f"* Streamer belt: the helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, and the stalk ...`
+- orrery `solar_visualization_shells.py` line 785: `f"and dense at the base, pinching at the cusp at {row_text('HELMET_CUSP_RADII')} R_sun where ...`
+- orrery `solar_visualization_shells.py` line 1080: `f'* Streamer Belt (Visible Corona): helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, t...`
+- orrery `solar_visualization_shells.py` line 1107: `f'* Streamer Belt (Visible Corona): helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, t...`
+- orrery `solar_visualization_shells.py` line 1978: `f"higher than {row_text('HELMET_CUSP_LOW_RADII')}-{row_text('HELMET_CUSP_HIGH_RADII')} R_sun,...`
+- orrery `solar_visualization_shells.py` line 1979: `f"({row_text('HELMET_CUSP_RADII', 'km', grouping=True)} km, {row_text('HELMET_CUSP_RADII', 'a...`
 
 ### `INNER_LIMIT_OORT_CLOUD_AU`
 
 - orrery `palomas_orrery.py` line 10440: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
-- orrery `solar_visualization_shells.py` line 132: `_OORT_INNER_EDGE = row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)`
-- orrery `solar_visualization_shells.py` line 1584: `f'From {_OORT_INNER_EDGE} AU ({row_text("INNER_LIMIT_OORT_CLOUD_AU", unit="km", grouping=True...`
+- orrery `solar_visualization_shells.py` line 137: `_OORT_INNER_EDGE = row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)`
+- orrery `solar_visualization_shells.py` line 1593: `f'From {_OORT_INNER_EDGE} AU ({row_text("INNER_LIMIT_OORT_CLOUD_AU", unit="km", grouping=True...`
 
 ### `OUTER_OORT_CLOUD_AU`
 
 - orrery `palomas_orrery.py` line 10440: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
-- orrery `solar_visualization_shells.py` line 146: `_OORT_OUTER_EDGE = row_text('OUTER_OORT_CLOUD_AU', grouping=True)`
+- orrery `solar_visualization_shells.py` line 151: `_OORT_OUTER_EDGE = row_text('OUTER_OORT_CLOUD_AU', grouping=True)`
 
 ## Printed to a terminal only
 
