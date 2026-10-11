@@ -602,7 +602,7 @@ FILES WRITTEN THIS RUN
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
   2. If you like, open the orrery window: Encke is now the first comet. -- done. looks great. 
-  3. Move this script, and patch_L395_5_horizons_name_and_encke_20261010.py (still in the root), into documentation/. If you saved last night's annotated run record as a timestamped copy, it goes in this commit too. Commit and push.
+  3. Move this script, and patch_L395_5_horizons_name_and_encke_20261010.py (still in the root), into documentation/. If you saved last night's annotated run record as a timestamped copy, it goes in this commit too. Commit and push. -- d3c4c3854277c25ab8d494c95521f7958e0384d1
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 =================================================================================
@@ -891,6 +891,71 @@ LIVE -- what the deployed site actually serves
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 ======================================================================
+
+**Opus:**
+
+Where it lands. Four places in the orrery read a period today, and all four would use the fetched one first:
+
+the period shown in an object’s hover;
+the period in the orbital parameters window;
+the warning about how many orbits a date range covers;
+the period worked out when a position is fetched.
+
+The website is not affected. Its export script reads the table only to print a check, not to serve data.
+
+What changes for each object. The period arrives the next time its orbit is fetched or refreshed from Horizons. Until then, the hand-typed table still answers. Objects the orrery never fetches keep their table value. The table’s unsourced entries become one ledger item, to be cleaned up later.
+
+Yes. The project already has the rule for this: a worked-out number prints only as many digits as its errors allow, judged by the larger error. That is how the Solar System room prints distances. A period has two errors, and which one is larger depends on the object.
+
+1. How well JPL knows the orbit. JPL’s small-body database publishes a one-sigma uncertainty for each object’s period. As read today, through a summary that I’d re-read exactly in the build:
+
+Encke: period about 1,210 days, uncertainty 0.00011 days, roughly ten seconds. That supports eight figures.
+Sedna: period about 4,630,000 days, uncertainty 1,900 days, roughly five years. That supports three figures in days, about 12,700 years.
+
+2. How much the fetched period itself moves. Horizons gives the period of the orbit at the plotted date, and the planets keep changing it. For Encke that is under a day: your file showed 1,206.3 days for this October, against 3.30485 years (1,207.1 days) at the record’s 2023 date. So eight figures would claim far more than the next return will show. Encke really earns about four figures: 3.303 years, or 1,206 days.
+
+For a distant body like Sedna, there’s an extra effect. The Sun itself wobbles around the solar system’s centre of mass, which makes a period measured from the Sun swing much more. The period measured from that centre of mass, the barycentre, is the steadier one. I’d measure both rather than guess the gap.
+
+So the rule: print to the larger of the two errors, with each unit (days, years) placed separately. In the build:
+
+the first error comes from JPL’s published uncertainty;
+the second comes from comparing the period on two dates a year apart. For a distant object, that comparison would also use the barycentre.
+
+For planets and moons, JPL’s database publishes no uncertainty, so the second error alone sets the digits.
+
+This extends an existing rule rather than making a new one, so it goes into the provenance skill and the build follows it. Build it this way? -- for discussion
+
+The Sun-based figure swings by 2,000 years in eight years because the Sun itself circles the barycentre, pulled mostly by Jupiter. Sedna doesn’t feel that wobble. The barycentre figure is steady, and it is the real one: about 11,390 years. JPL’s published uncertainty for Sedna’s orbit, about 5 years, then decides the digits, so four figures.
+
+Encke is the opposite case. It orbits close in, so the Sun-based period is the right one. What limits it is the planets’ pull, which moves it by about a day over a few years: 1,206 days, or 3.303 years.
+
+So the rule now has two parts:
+
+Which centre. Ask Horizons for the period from both the Sun and the barycentre, a year apart, and use whichever moves less.
+How many digits. Print to the larger of two errors: how much that period moved in a year, and JPL’s published uncertainty for the orbit, where one exists. Days and years are each printed to their own digits.
+
+That means four or five extra Horizons questions each time an object’s orbit is refreshed, plus a change to the provenance skill, plus the four places in the orrery that read a period.
+
+The orbital-period work is written up, and the session’s close is in one patch, patch_L431_1_close_20261011.py. The one thing to do: run it from the orrery folder, then the maintenance run (expect 22 of 22), then commit and push. I ran both on a copy here and both passed.
+
+What the patch does:
+
+Comet list: Encke moves to the top of the list, so it runs oldest first.
+Your looks: the Encke and Halley checks and the Hills cloud checks are recorded in the ledger as correct. So is your note that a colour is a drawing choice.
+New ledger item: L-431 (orbital periods from JPL) is opened with your rulings. It also notes that none of the 132 periods typed by hand in the orrery’s table cite a source.
+Design record: DESIGN_L431_orbital_periods_20261011.md holds JPL’s numbers and the questions for the next session.
+
+The main finding. For a distant body, the period depends on what you measure it around. I fetched JPL’s numbers for a year ago and today:
+
+Sedna: measured around the Sun, its period went from 12,917 years to 12,547 years in that one year. Measured around the solar system’s centre of mass, it stayed at 11,390 years, changing by only 7 days.
+Encke: the opposite. Around the Sun it changed by a third of a day; around the centre of mass, by almost 8 days.
+
+Proposed rule, for you to rule on next session: -- for discussion
+
+Which centre: use the one whose period changes less over a year.
+How many digits: print only what the larger of two uncertainties allows. One is JPL’s own stated uncertainty; the other is how much the period moves in a year. Encke would read “3.303 years” and Sedna “11,390 years”.
+
+A related question for the next session. The orrery draws Sedna’s orbit from its elements around the Sun, so the drawn orbit’s size moves from year to year the same way the period does.
 
 Where this leaves us
 
