@@ -90,6 +90,9 @@ exact conversion rows those are converted through.)
 Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5
 (L-421: two named numbers, eccentricity and dot_count, for the Hills
 cloud drawn as dots along orbits following Nesvorny et al. (2025).)
+Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5
+(L-431: d_per_yr, for D_PER_JULIAN_YEAR, the exact conversion an
+orbital period's years go through.)
 """
 
 TOKENS = {
@@ -248,6 +251,13 @@ TOKENS = {
         "dimension": "s / h",
         "defining_constant": None,
         "meaning": "seconds per hour, an exact unit conversion",
+    },
+    # L-431 (2026-10-11): days per Julian year, the conversion an orbital
+    # period's years go through.
+    "d_per_yr": {
+        "dimension": "d / yr",
+        "defining_constant": None,
+        "meaning": "days per Julian year, an exact unit conversion",
     },
     # L-421 (2026-10-10): two named pure numbers for the Hills cloud,
     # drawn as dots along orbits following Nesvorny et al. (2025), Fig. 3.

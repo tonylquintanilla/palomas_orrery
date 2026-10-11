@@ -12,6 +12,11 @@ Design Philosophy:
 
 Part of Paloma's Orrery - Tony's astronomical visualization suite.
 Created: November 18, 2025
+Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5 (L-431,
+build 1: a fetch made through get_elements_with_prompt also saves the
+body's orbital period beside its elements, under 'period', with the
+centre it was taken around, its date and its error (orbital_period.py).
+The elements are unchanged, so nothing drawn moves.)
 
 Role: cache
 Domain: orrery
@@ -364,7 +369,8 @@ def check_cache_status(obj_name, center_body=None):
 # ============================================================================
 
 #def fetch_osculating_elements(obj_name, horizons_id=None, id_type='smallbody', date=None):
-def fetch_osculating_elements(obj_name, horizons_id=None, id_type='smallbody', date=None, center_body=None):
+def fetch_osculating_elements(obj_name, horizons_id=None, id_type='smallbody', date=None, center_body=None,
+                              with_period=False):
     """
     Fetch osculating elements from JPL Horizons.
     
@@ -377,6 +383,11 @@ def fetch_osculating_elements(obj_name, horizons_id=None, id_type='smallbody', d
         date (datetime, optional): Date for osculating elements (default: today)
         center_body (str, optional): Override center body (e.g., '@9' for Pluto barycenter)
                                      If None, auto-detects based on object ID.
+        with_period (bool): also fetch the orbital period record (L-431):
+                            two to three more Horizons queries and one
+                            Small-Body Database query. Default False, so
+                            the direct fetches in idealized_orbits.py and
+                            spacecraft_encounters.py cost what they did.
     
     Returns:
         dict: Cache entry with elements and metadata, or None if fetch fails
@@ -447,6 +458,32 @@ def fetch_osculating_elements(obj_name, horizons_id=None, id_type='smallbody', d
         if 'arc_days' in result:
             cache_entry['metadata']['arc_days'] = result['arc_days']
         
+        # L-431 (orbital periods from JPL), build 1: the period record, kept
+        # beside the elements and read only to SHOW a period. The elements
+        # above are untouched, so nothing drawn moves. A failed period query
+        # keeps the last fetched period, the fallback order's second step.
+        if with_period:
+            previous = None
+            try:
+                previous = (load_cache().get(get_cache_key(obj_name, center_body)) or {}).get('period')
+            except Exception:
+                previous = None
+            try:
+                from orbital_period import build_period_record
+                cache_entry['period'] = build_period_record(
+                    query_id, id_type, date_str,
+                    cache_entry['metadata']['center_body'],
+                    previous=previous,
+                    elements_p_days=result.get('P_days'))
+                _rec = cache_entry['period']
+                print(f"[OK] Period for {obj_name}: {_rec['days']} d around {_rec['center']} "
+                      f"(change in a year {_rec['year_change_days']} d; {_rec['sbdb_status']})", flush=True)
+            except Exception as ex:
+                print(f"[WARN] Period not fetched for {obj_name} ({ex})"
+                      f"{'; keeping the last fetched period' if previous else ''}", flush=True)
+                if previous:
+                    cache_entry['period'] = previous
+
         print(f"[OK] Fetched elements (solution date: {cache_entry['metadata']['solution_date']})", flush=True)
         return cache_entry
         
@@ -793,7 +830,8 @@ def get_elements_with_prompt(obj_name, horizons_id=None, id_type='smallbody', pl
             horizons_id=horizons_id, 
             id_type=id_type,
             date=plot_date,
-            center_body=center_body
+            center_body=center_body,
+            with_period=True,   # L-431: the hover's period is saved with the elements
         )
 
         if fresh_entry:

@@ -4,6 +4,11 @@ orbit_data_manager.py - Advanced orbit data caching and management
 This module handles the efficient storage and retrieval of orbital path data,
 using an incremental approach to minimize API calls and processing time.
 
+Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5 (L-431:
+query_horizons_elements keeps Horizons' PR, the sidereal orbit period, in
+days, as 'P_days' in its result; an open orbit's placeholder is kept as
+nothing. The elements it returns are unchanged.)
+
 Role: cache
 Domain: orrery
 """
@@ -1839,6 +1844,17 @@ def query_horizons_elements(horizons_id, id_type='smallbody', date_str=None, cen
         except KeyError:
             ta_val = None
 
+        # L-431: keep Horizons' PR, the sidereal orbit period. astroquery's
+        # elements() asks for AU-D units and names PR 'P', in days. Horizons
+        # prints 9.999E+99 for an open orbit; that is kept as None.
+        try:
+            from orbital_period import OPEN_ORBIT_PLACEHOLDER_FLOOR
+            p_val = float(row['P']) if 'P' in row.colnames else None
+            if p_val is not None and not (abs(p_val) < OPEN_ORBIT_PLACEHOLDER_FLOOR):
+                p_val = None
+        except Exception:
+            p_val = None
+
         # --- Unit Conversion (KM -> AU) ---
         # Horizons returns elements in either AU or KM depending on object type.
         # CRITICAL: Use perihelion distance (q) to determine units, NOT semi-major
@@ -1898,6 +1914,8 @@ def query_horizons_elements(horizons_id, id_type='smallbody', date_str=None, cen
         # Store q if we have it (already converted above)
         if q_val is not None:
             result['q'] = q_val
+        if p_val is not None:
+            result['P_days'] = p_val  # L-431: Horizons' PR, days
         
         return result
         

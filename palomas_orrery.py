@@ -69,6 +69,10 @@ torus.)
 Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5 (L-395:
 Encke's checkbox moves to the top of the comet list, which runs in order
 of first apparition, Tony 2026-10-10.)
+Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5 (L-431,
+build 1: the precession note's orbit count and fetch_position's period
+record read the period fetched from JPL first and the typed table last,
+through orbital_period.py. Nothing drawn changes.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -1022,7 +1026,11 @@ def calculate_satellite_precession_info(selected_objects, start_date, end_date, 
             max_days = int(max_years * 365.25)
             
             # Get orbital period for additional context
-            orbital_period_days = KNOWN_ORBITAL_PERIODS.get(obj_name, 1.0)
+            # L-431: the period fetched from JPL first, the typed table last
+            from orbital_period import resolve_display_period
+            orbital_period_days = resolve_display_period(
+                obj_name, center_object_name=center_object_name,
+                typed_table=KNOWN_ORBITAL_PERIODS)['days'] or 1.0
             orbits_in_range = days_to_plot / orbital_period_days
             recommended_orbits = max_days / orbital_period_days
             
@@ -1298,9 +1306,13 @@ def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_
                 is_satellite = True
                 break
 
-        # Get the known orbital period if available
-        if obj_name in KNOWN_ORBITAL_PERIODS:
-            known_value = KNOWN_ORBITAL_PERIODS[obj_name]
+        # The orbital period (L-431): the period fetched from JPL and saved
+        # with the elements first, the typed table only when none was.
+        from orbital_period import resolve_display_period
+        _period = (resolve_display_period(obj_name, typed_table=KNOWN_ORBITAL_PERIODS)
+                   if obj_name else {'kind': 'none'})
+        if _period['kind'] != 'none':
+            known_value = _period['days']
 
             # Check if the value is None (hyperbolic objects)
             if known_value is None:

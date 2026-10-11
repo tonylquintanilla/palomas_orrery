@@ -155,6 +155,11 @@ round outer cloud, its tilt, the ecliptic's node in galactic longitude,
 the two arms' argument-of-perihelion bands and Fig. 3's caption ranges
 -- and three declared rows: the reading of Fig. 3 the Hills cloud is
 drawn from, its two cell sizes, and the drawn orbits' eccentricity.)
+Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5
+(L-431, orbital periods from JPL, build 1: D_PER_JULIAN_YEAR, an exact
+conversion read from the IAU Style Manual, so the period's years and its
+one-year test step go through a row; a note above KNOWN_ORBITAL_PERIODS
+says it is now the last fallback for showing a period. No value changes.)
 """
 
 import math
@@ -550,6 +555,22 @@ S_PER_HOUR = 3600.0
 # Note+: (provenance-discipline 2.18, a unit conversion inside an
 # Note+: expression is an exact row). Neither checker judges this row; its
 # Note+: unit is asserted here, as DEG_PER_RAD's is.
+
+D_PER_JULIAN_YEAR = 365.25
+# Unit: d_per_yr
+# Status: declared 2026-10-11 -- an exact unit conversion, days in one
+# Status+: Julian year. Belongs to no body's slice.
+# Figures: exact -- a definition, not a measurement.
+# Read: Table 5 and sec. 5.15, IAU Style Manual, "SI Units" page,
+# Read+: 2026-10-11, Claude Opus 5.5, through the chat's web-fetch tool
+# Source: IAU Style Manual, SI Units, Table 5 (non-SI units recognised for
+# Source+: use in astronomy) -- year (Julian), a, 31.5576 Ms = 365.25 d;
+# Source+: sec. 5.15 regards a year as a Julian year of 365.25 days.
+# Ref: https://www.iau.org/publications/proceedings_rules/units/
+# Note: L-431. The orbital period's years convert through this row, and
+# Note+: the period's one-year test steps by it (orbital_period.py), so
+# Note+: neither divides by a bare 365.25. The older bare 365.25s in other
+# Note+: modules are one class on L-431, not chased.
 
 EARTH_SIDEREAL_ROTATION_PERIOD_H = 2.0 * math.pi / EARTH_ROTATION_RATE_RAD_S / S_PER_HOUR
 # Derived: one full turn, two pi radians, divided by the angular rate, in
@@ -3033,6 +3054,12 @@ CENTER_BODY_RADII = {       # km (equatorial for major bodies, volumetric for sm
     'Planet 9': 24000       # Model estimate (Batygin & Brown; 5-10 M_Earth assumption)
 }
 
+# L-431 (2026-10-11): the LAST fallback for showing a period. A period
+# fetched with a body's elements and saved in data/osculating_cache.json
+# comes first (orbital_period.py), and a hover that reaches this table
+# says the value is typed. Its rows carry no source line: one class on
+# L-431, not chased. The drawn orbits and the markers still read it until
+# L-431's second build.
 KNOWN_ORBITAL_PERIODS = {
     # Planets (converted from years to days)
     'Mercury':  87.969,      

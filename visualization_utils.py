@@ -18,6 +18,11 @@ Module updated: June 2026 with Anthropic's Claude Opus 4.8. Added
     build_scene/build_scene_axes/build_scene_axis -- single source of truth
     for the static and animation main scene dicts (item 19.3 Phase 1);
     Phase 2 adds auto_dtick + autorange suppression for close-approach grids.
+Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5 (L-431,
+    build 1: the hover's orbital period is the one fetched from JPL and
+    saved with the elements, around the centre it is steadiest about, to
+    the digits its errors earn; the typed table only when nothing was
+    fetched, and the hover then says it is typed. orbital_period.py.)
 
 Role: rendering
 Domain: stars
@@ -863,34 +868,22 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
 #                'years': known_value / 365.25
 #            }
     
-    # Get known orbital period if available
-    # Context-aware: Pluto uses barycentric period (6.387 days) when centered on Pluto-Charon Barycenter
+    # The orbital period to show (L-431, build 1). A period fetched from JPL
+    # Horizons and saved with the elements in the orbit cache comes first,
+    # around the centre it is steadiest about, to the digits the larger of
+    # its errors earns; the typed table KNOWN_ORBITAL_PERIODS only when
+    # nothing was fetched, and the hover then says so (orbital_period.py).
+    # Context-aware: Pluto viewed from the Pluto-Charon Barycenter keeps its
+    # old typed value, 6.387 days, as its typed fallback in that view.
+    from orbital_period import resolve_display_period, period_hover_lines
+    _typed_override = None
     if obj_name == 'Pluto' and center_object_name == 'Pluto-Charon Barycenter':
-        # Pluto orbits the barycenter with the same period as Charon (6.387 days)
-        known_value = 6.387  # Binary orbital period, same as Charon
-        known_period = {
-            'days': known_value,
-            'years': known_value / 365.25
-        }
-    elif obj_name in KNOWN_ORBITAL_PERIODS:
-        known_value = KNOWN_ORBITAL_PERIODS[obj_name]
-        
-        if known_value is None:
-            # Handle hyperbolic/parabolic objects
-            known_period = "N/A (hyperbolic/parabolic orbit)"
-        else:
-            known_period = {
-                'days': known_value,
-                'years': known_value / 365.25
-            }
-
-    # Format known period
-    if isinstance(known_period, dict):
-        known_years = known_period.get('years')
-        known_days = known_period.get('days')
-        known_period_str = f"{known_years:.4f} Earth years ({known_days:.2f} days)"
-    else:
-        known_period_str = str(known_period)
+        _typed_override = 6.387  # typed: Pluto around the barycenter, as Charon
+    _resolved_period = resolve_display_period(
+        obj_name, center_object_name=center_object_name,
+        parent_name=planet if is_satellite else None,
+        typed_table=KNOWN_ORBITAL_PERIODS, typed_override=_typed_override)
+    known_period_str = period_hover_lines(_resolved_period)
     
     # Find the object's info in the objects list
     obj_info = next((o for o in objects if o['name'] == obj_name), None)
@@ -940,8 +933,8 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
             f"Velocity: {velocity_km_hr} km/hr ({velocity_km_sec} km/sec)<br>"
         )
     
-    # Add orbital period information (known period only)
-    full_hover_text += f"Known Orbital Period: {known_period_str}"
+    # Add orbital period information (L-431: fetched first, typed last and marked)
+    full_hover_text += known_period_str
     
     # Add derivation note for Orcus when derived from Vanth
     if obj_data.get('derived_from_vanth'):

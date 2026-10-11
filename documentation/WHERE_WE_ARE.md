@@ -1,24 +1,24 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 11, 2026, at the orbital periods design talk.
-- Written at orrery 324a574 and gallery e3536c8.
+Last updated: October 11, 2026, at build 1 of orbital periods.
+- Written at orrery 41e9a1d and gallery e3536c8.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Orbital periods are designed, every question settled: L-431
->   (orbital periods). Each body's period comes from JPL, around the
->   centre that moves less, with the digits its errors earn.
-> - Periods go on the website too, right after the orrery.
-> - Mercury checked: around the Sun its period moves 4 seconds a year.
+> - Orbital periods, build 1 is built: L-431 (orbital periods). The
+>   orrery's hovers show each body's period from JPL, the centre it
+>   was taken around, the date, and only the digits its errors earn.
+> - A period from the typed table now says it is typed.
+> - Nothing drawn moves yet. The orbits and markers are build 2.
 >
-> **Do next:** *build 1 of L-431 (orbital periods): the period in the
-> orrery's hovers, then your look at Encke, Sedna and Mercury.*
+> **Do next:** *your look at Encke, Sedna and Mercury, and your word
+> on the hover's wording (the build record, section 4).*
 >
 > **Needs you now:**
-> - *Orrery: patch_L431_3, maintenance run, push. If not done yet,
->   upload ledger-and-session-records (1.20).*
+> - *Orrery: patch_L431_4 (it asks JPL for four periods as it ends),
+>   patch_L431_5, maintenance run, your look, push.*
 > - *Decide L-425 (citation location checks): which checks to build,
 >   on the run's results (on L-425 and in the handoff).*
 
@@ -32,9 +32,9 @@ Last updated: October 11, 2026, at the orbital periods design talk.
                website patch and Earth's typed facts are live.
   6.   [next]  The typed facts: the inner Oort cloud is drawn on the
                website too. Left: the check.
-  6a.  [next]  *Orbital periods from JPL: designed. Three builds: the
-               orrery's hovers, then the drawn orbits, then the
-               website.* << moved this session
+  6a.  [next]  *Orbital periods from JPL: build 1, the orrery's hovers,
+               is built and waits for your look. Then the drawn
+               orbits, then the website.* << moved this session
   7.   [next]  The Sun's numbers get the checking Earth's got.
   8.   [done]  The served objects are checked against JPL Horizons
                every day, in the Daily Run.
@@ -50,7 +50,7 @@ Last updated: October 11, 2026, at the orbital periods design talk.
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
 
-## Settled  **>> UPDATED THIS SESSION**
+## Settled
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
 - Scattered dots are placed by the orrery and stored for the website;
@@ -79,10 +79,10 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261011T183843Z, ok, no retry.
 - Tier-1 on the gate path: 0, by name, in PROVENANCE_AUDIT.md at
-  f7c6f41 (your run of 2026-10-11). Whole tree: 292.
+  9802e04 (your run of 2026-10-11). Whole tree: 292.
 - This page's date and the ledger's newest stamp: both Oct 11. Agree.
 
-## Waiting on you  **>> UPDATED THIS SESSION**
+## Waiting on you
 
 At the next design talk:
 - Your order after the Sun and Earth rooms (L-433), in your words of
@@ -109,8 +109,8 @@ Not urgent, in your order:
   typed facts), its check.
 - Orbital periods: rulings
   `documentation/DESIGN_L431_orbital_periods_rulings_20261011.md`;
-  first findings `documentation/DESIGN_L431_orbital_periods_20261011.md`
-- Your notes of Oct 10: `WHERE_WE_ARE_10-10-26_2019_run_record.md`
+  build 1 `documentation/HANDOFF_L431_period_build1_20261011.md`
+- Your notes of Oct 11: `WHERE_WE_ARE_10-11-26_1311_run_record.md`
 - The typed facts: plan
   `documentation/MANIFEST_L421_typed_facts_20261006.md`; record
   `documentation/HANDOFF_L421_typed_facts_20261008.md`

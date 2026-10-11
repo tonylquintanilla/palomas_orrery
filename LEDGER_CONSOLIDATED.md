@@ -352,6 +352,9 @@ Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5
 (L-431's design talk: Tony's rulings on the period's source, centre,
 digits, fallback, the website, the drawn orbit and the markers; the
 three builds' order; its design record), built on 324a574f.
+Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5
+(L-431 build 1: the period in the orrery's hovers, from JPL, by the
+larger error; patch_L431_4; its record), built on 41e9a1d5.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1504,20 +1507,83 @@ L-395.
   - ledger-and-session-records 1.20, asked for at this session's
     opening, was cut by the inner Oort cloud's website session at
     1bbd9fe1; this session cut no second version.
+- **Tony's run of the design close, 2026-10-11** (his copy
+  `documentation/WHERE_WE_ARE_10-11-26_1311_run_record.md`):
+  patch_L431_3 run and pushed at 9802e04; ledger-and-session-records
+  1.20 "was done already". The build session loaded 1.20, matching the
+  manifest, so the obligation the design session carried is discharged.
+- **2026-10-11, build 1 built** (Claude Opus 5.5, at 41e9a1d5; record
+  `documentation/HANDOFF_L431_period_build1_20261011.md`), by
+  `patch_L431_4_period_in_hovers_20261011.py`:
+  - New `orbital_period.py`. One Horizons query per centre asks for PR
+    at the plot date and a Julian year later (a year earlier if
+    refused). The two-centre test runs at a body's first fetch and its
+    choice is saved; a refresh asks only the chosen centre, and runs the
+    test again if that centre moved more than the other did when
+    chosen (method 5, the build's choice). SBDB's sigma for small
+    bodies; a pinned record number is looked up by the name Horizons
+    gives it (2P/Encke -> 2P). Digits by the Report test on the larger
+    error, years and days apart. The fallback order for showing.
+  - The orbit cache keeps a `period` record beside each entry's
+    elements, written only by a fetch accepted in the "Update Orbital
+    Elements?" box; the direct fetches in `idealized_orbits.py` and
+    `spacecraft_encounters.py` cost what they did. A failed period
+    query keeps the last fetched record. The elements are unchanged.
+  - Readers: the hover (`format_detailed_hover_text`: the static plot,
+    the animation, the social export), the parameters window's Orbital
+    Period row, the precession note's orbit count, `fetch_position`'s
+    period record. The elements fetch keeps PR as `P_days`, and the
+    record says whether it agrees with the period query.
+  - `D_PER_JULIAN_YEAR` (365.25 d, exact; IAU Style Manual, SI Units,
+    Table 5, read 2026-10-11) and the token `d_per_yr`. The export
+    carries both, as it carries `S_PER_HOUR`; the gallery's 27 offline
+    checks pass with that export in place (sandbox, at e3536c87).
+  - Confirmed before building, through the chat's web-fetch tool:
+    Horizons labels the period PR and prints 9.999E+99 for C/2025 N1's
+    open orbit; SBDB gives `per` with its sigma; astroquery 0.4.11 maps
+    PR to `P` in days (its source). The end-to-end live check is Tony's:
+    the patch asks JPL for Encke, Sedna, Mercury and 3I/ATLAS as it ends.
+  - Tested in the sandbox, which cannot reach JPL, with JPL faked from
+    the rulings record's section 5: the hovers print that table's three
+    lines exactly; Sedna around the barycentre, Mercury and Encke
+    around the Sun; 3I/ATLAS "none (open orbit)"; the Moon around
+    Earth with no test; a refresh asks only the chosen centre; a failed
+    query keeps the last record; Pluto from the Pluto-Charon
+    barycentre keeps its typed 6.387 days, marked. The window opens
+    headless; maintenance run 23 of 23, gate path 0, whole tree 292
+    (no change).
+- **Found in build 1, recorded and not chased (The Braid):**
+  - 39 moons' `mission_info` in `celestial_objects.py` type a period
+    ("Saturn orbital period: 0.94 Earth days"); those hovers show it
+    under the fetched one. One class.
+  - SBDB's 2P solution is not record 90000091: its `per` sigma read
+    0.00011075 d on 2026-10-11, where this item recorded 0.00021413 d.
+    Both are far below Encke's year change, 0.29 d; the print holds.
+  - `VIEW_TO_OSCULATING_CENTRE` in `orbital_period.py` copies the
+    `osculating_center_body` block in `palomas_orrery.py` (checked equal
+    in the pre-test). Build 2 works on that path and gives it one home.
+  - On the typed period until build 2: the parameters window's
+    estimated apsis dates (it fills `params['period']`),
+    `apsidal_markers.py`, `idealized_orbits.py`.
+  - `get_fallback_elements` reads the plain cache key, not the
+    centre-aware one. Build 2 works on that path.
+  - The bare 365.25s in other modules. One class.
 **Gap:** three builds, in order (the record's section 3):
-1. The period in the orrery: keep PR, store it with centre, date and
-   error, the two-centre test at first fetch, the fallback order in the
-   hover, the parameters window and the fetch's record. Tony's look at
-   Encke, Sedna and Mercury.
+1. The period in the orrery: BUILT 2026-10-11. Waits for Tony's run
+   (its live check of four bodies) and his look at Encke, Sedna and
+   Mercury, where he approves the hover's words (the build record's
+   section 4).
 2. The drawn ellipse around the period's centre, and the markers from
    the fetched period (Mode 5, Tony's look).
 3. The website: the export carries each period; every room's hover
    prints it; the Horizons check compares it.
-At build 1's close the two-centre test goes to
-horizons-orbital-mechanics as method. The typed table's 132 unsourced
-entries stay one class, not chased.
+Owed to horizons-orbital-mechanics once Tony's run shows build 1
+working against JPL: the two-centre test, its choice saved at first
+fetch, SBDB's lookup of a pinned record by Horizons' name. The typed
+table's 132 unsourced entries stay one class, not chased.
 **Ref:** `documentation/DESIGN_L431_orbital_periods_rulings_20261011.md`;
 `documentation/DESIGN_L431_orbital_periods_20261011.md`;
+`documentation/HANDOFF_L431_period_build1_20261011.md`; `orbital_period.py`;
 `visualization_utils.py` (`format_detailed_hover_text`);
 `palomas_orrery.py`; `orbital_param_viz.py`; `apsidal_markers.py`;
 `idealized_orbits.py`; `orbit_data_manager.py`

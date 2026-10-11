@@ -16,6 +16,11 @@ Role: gui
 Domain: orrery
 
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
+Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5 (L-431,
+build 1: the window's Orbital Period row shows the period fetched from
+JPL, to the digits its errors earn, or the typed value marked as typed.
+The estimated perihelion and aphelion dates still use the typed period
+until L-431's second build.)
 """
 import numpy as np
 import plotly.graph_objs as go
@@ -24,6 +29,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import datetime as dt
 from constants_new import KNOWN_ORBITAL_PERIODS, color_map
+from orbital_period import resolve_display_period, period_panel_text  # L-431
 from shutdown_handler import show_figure_safely # Add this line
 from apsidal_markers import add_perihelion_marker, add_apohelion_marker, calculate_apsidal_dates
 from idealized_orbits import planetary_params, parent_planets
@@ -1993,7 +1999,7 @@ def create_orbital_viz_window(root, objects, planetary_params, parent_planets=No
         ('i', 'Inclination:', ' deg'),
         ('omega', 'Arg. of Periapsis (omega):', ' deg'),
         ('Omega', 'Long. of Asc. Node (Omega):', ' deg'),
-        ('period', 'Orbital Period:', 'days')
+        ('period', 'Orbital Period:', '')   # L-431: the text carries its units
     ]
     
     for idx, (key, label, unit) in enumerate(param_names):
@@ -2009,6 +2015,11 @@ def create_orbital_viz_window(root, objects, planetary_params, parent_planets=No
     if "Earth" in planetary_params:
         params = planetary_params["Earth"]
         for key, label in param_labels.items():
+            if key == 'period':
+                # L-431: the period fetched from JPL, else typed and marked
+                label.config(text=period_panel_text(resolve_display_period(
+                    "Earth", typed_table=KNOWN_ORBITAL_PERIODS)))
+                continue
             if key in params:
                 value = params[key]
                 if isinstance(value, float):
@@ -2031,6 +2042,11 @@ def create_orbital_viz_window(root, objects, planetary_params, parent_planets=No
             if selected_obj in planetary_params:
                 params = planetary_params[selected_obj]
                 for key, label in param_labels.items():
+                    if key == 'period':
+                        # L-431: the period fetched from JPL, else typed and marked
+                        label.config(text=period_panel_text(resolve_display_period(
+                            selected_obj, typed_table=KNOWN_ORBITAL_PERIODS)))
+                        continue
                     if key in params:
                         value = params[key]
                         if isinstance(value, float):

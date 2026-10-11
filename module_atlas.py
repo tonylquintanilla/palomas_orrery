@@ -169,6 +169,7 @@ ROLE_MAP = {
     'idealized_orbits':                       'computation',
     'object_type_analyzer':                   'computation',
     'orbital_elements':                       'computation',
+    'orbital_period':                         'computation',
     'pole_frames':                            'computation',
     'simbad_manager':                         'computation',
 
