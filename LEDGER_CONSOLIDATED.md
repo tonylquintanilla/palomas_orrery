@@ -340,6 +340,10 @@ Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5
 (L-431 opened, orbital periods from JPL, its design record; Tony's runs
 and looks of 2026-10-10 on L-395 and L-421; Encke first in the comet
 list), built on 9f154782.
+Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5
+(Tony's notes in his run record of 2026-10-10 and 11: L-432 and L-433
+opened; L-395, L-408, L-410, L-416, L-424, L-431, L-136 and L-351
+updated; two dashboard buttons), built on 6fc36483.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -557,7 +561,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*238 live items; 222 need attention (`!`); 167 RICE-scored; 188 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*240 live items; 224 need attention (`!`); 167 RICE-scored; 188 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -653,7 +657,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-346 | A derived row with empty inputs is invisible to a walk by inputs (checks) | OPEN | -- | 2026-09-22 |
 | ! | L-347 | The page re-derives the bow shock standoff to draw its shape (gallery) | OPEN | -- | 2026-09-22 |
 | ! | L-348 | Derived rows outside Earth were counted, not propagated (store) | OPEN | -- | 2026-09-22 |
-| ! | L-351 | Rules learned at C2, owed to the next bumps of their stores (skills, protocol) | OPEN | -- | 2026-10-09 |
+| ! | L-351 | Rules learned at C2, owed to the next bumps of their stores (skills, protocol) | OPEN | -- | 2026-10-11 |
 | ! | L-352 | The orrery's display sites format by fixed width, with no check reading them (orrery) | OPEN | -- | 2026-09-28 |
 | ! | L-353 | A count taken from a file's print resolution where a published error budget exists unopened (store) | OPEN | -- | 2026-09-22 |
 | ! | L-354 | Declared picks with their range in prose, on other bodies (store) | OPEN | -- | 2026-09-22 |
@@ -696,20 +700,22 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
-| ! | L-408 | A Galactic Plane toggle in the Sun room (gallery, the Sun's slice) | OPEN | -- | 2026-10-10 |
-| ! | L-410 | Fuzzy boundaries for edges known only as ranges, the outer corona first (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-05 |
+| ! | L-408 | A Galactic Plane toggle in the Sun room (gallery, the Sun's slice) | OPEN | -- | 2026-10-11 |
+| ! | L-410 | Fuzzy boundaries for edges known only as ranges, the outer corona first (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-11 |
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
 | ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-08 |
 | ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-06 |
 | ! | L-421 | Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words) | OPEN | -- | 2026-10-11 |
 | ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-08 |
-| ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-09 |
+| ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-11 |
 | ! | L-425 | A citation's location record is checked only in part (provenance tooling) | OPEN | -- | 2026-10-09 |
 | ! | L-426 | The worksheet checker compares very small numbers as equal (worksheet checker) | OPEN | -- | 2026-10-09 |
 | ! | L-427 | Rows a neighbour's citation had been crediting (store) | OPEN | -- | 2026-10-09 |
 | ! | L-429 | The room button on the row, in the Solar System room's list (gallery, exhibits) | OPEN | -- | 2026-10-10 |
 | ! | L-430 | Uncited lines in the orrery's Oort cloud tooltips and the Sun's reach text (orrery, words) | OPEN | -- | 2026-10-10 |
 | ! | L-431 | Orbital periods from JPL, for every body, printed by their errors (orrery, provenance) | OPEN | -- | 2026-10-11 |
+| ! | L-432 | Objects drawn in the default goldenrod (orrery, colours) | OPEN | -- | 2026-10-11 |
+| ! | L-433 | The road after the Sun and Earth rooms, in Tony's words (planning) | OPEN | -- | 2026-10-11 |
 
 ### B. Pending Action (Tony-side)
 
@@ -768,7 +774,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-044 (#22) | Satellite (and minor-body) internal-structure shells | OPEN | 2.7 | 2026-06-21 |
 | ! | L-130 | Restore six-elements + M0@J2000 plotting mode (educational, alt) | OPEN | 1.0 | 2026-07-17 |
-| ! | L-136 | Solar "scattered disk" shell | OPEN | 1.0 | 2026-10-04 |
+| ! | L-136 | Solar "scattered disk" shell | OPEN | 1.0 | 2026-10-11 |
 | ! | L-045 (#N14) | Miranda inclination tooltip | OPEN | 0.9 | 2026-06-23 |
 
 ### D.Feature-C -- Bucket C (architecture)
@@ -1038,7 +1044,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-409 | The licenses: the orrery's recognized by GitHub, the website's written (orrery, gallery) | DONE | -- | 2026-10-04 |
 |  | L-414 | The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling) | DONE | -- | 2026-10-10 |
 |  | L-415 | A patch writes LF and reports: safe-file-editing 1.12 (skills) | DONE | -- | 2026-10-06 |
-|  | L-416 | Every maintenance-run step has a dashboard button (dashboard, both repos) | DONE | -- | 2026-10-05 |
+|  | L-416 | Every maintenance-run step has a dashboard button (dashboard, both repos) | DONE | -- | 2026-10-11 |
 |  | L-417 | The Skill headers check enforces Anthropic's documented limits (skills, checks) | DONE | -- | 2026-10-05 |
 |  | L-418 | Long skills open with their contents, and keep three version entries (skills) | DONE | -- | 2026-10-09 |
 |  | L-419 | A patch checks a file Tony annotates only at the lines it edits (patches, skills) | DONE | -- | 2026-10-06 |
@@ -1075,7 +1081,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
 #### [L-408] A Galactic Plane toggle in the Sun room (gallery, the Sun's slice)
-<!-- L:408 status:OPEN upd:2026-10-10 section:A flag: rice: -->
+<!-- L:408 status:OPEN upd:2026-10-11 section:A flag: rice: -->
 - **Asked 2026-10-03** by Tony, looking for the galactic tide's X on
   the phone and not finding it at the angle he had: "Could we toggle on
   the galactic plane and axis?" Claude agreed it earns its place: it
@@ -1146,6 +1152,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
   stays Wikipedia, "Galactic coordinate system".
 - **2026-10-10:** the orrery side of the inner Oort cloud is built
   (L-421); this rides the gallery session that follows it.
+- **Tony, 2026-10-10, in his run record** (`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md` at 6fc3648), beside "awaits the
+  design talk": "yes. it awaited only for implementation not in
+  principle."
 **Gap:** the gallery build, with the inner Oort cloud's gallery side
 (L-421), in the words confirmed 2026-10-09; then Tony's look on the
 phone. The tide's cone and brightness on the phone were not part of
@@ -1155,7 +1164,7 @@ the 2026-10-09 ruling and stay a question.
 
 
 #### [L-410] Fuzzy boundaries for edges known only as ranges, the outer corona first (orrery + gallery, the Sun's slice)
-<!-- L:410 status:OPEN upd:2026-10-05 section:A flag: rice: -->
+<!-- L:410 status:OPEN upd:2026-10-11 section:A flag: rice: -->
 - **Tony's idea, 2026-10-04**, deciding where the Roche limit is drawn:
   "What if we draw fuzzy boundaries instead of shells". It is Show the
   Envelope of the Unknowable as a drawing.
@@ -1178,6 +1187,9 @@ the 2026-10-09 ruling and stay a question.
 - **Tony, 2026-10-05:** "the exosphere would be another good candidate
   for a fuzzy boundary" -- Earth's geocorona, drawn as a sharp shell at
   its detection floor of 100 Earth radii (L-292), has no edge at all.
+- **Tony, 2026-10-10, in his run record** (`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md` at 6fc3648): "before we close the
+  sun and earth rooms, i would like to implement fuzzy boundaries."
+  So this item belongs to finishing those two rooms (L-433).
 **Gap:** a design talk before any build. The Sun slice's ninth item
 (L-412).
 **Ref:** L-131, L-241, L-371; `solar_visualization_shells.py`
@@ -1368,6 +1380,57 @@ IGRF epoch, a class); L-408; L-430;
 `gallery/earth_geometry.js`, `data/objects_config.json`;
 skills/interactive-exhibit/SKILL.md.
 
+#### [L-433] The road after the Sun and Earth rooms, in Tony's words (planning)
+<!-- L:433 status:OPEN upd:2026-10-11 section:A flag: rice: -->
+- **Tony, 2026-10-10, in his run record** (`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md` at 6fc3648), two notes:
+  - "a couple of things to keep in mind. before we close the sun and
+    earth rooms, i would like to implement fuzzy boundaries. and in the
+    last session we found something important. the orbital periods
+    dictionary is hand maintained and instead should be fetched from
+    Horizons along with the other osculating data." (L-410, L-431.)
+  - "the near term goal is to complete the sun and earth room
+    thoroughly as a template for other body rooms. then add the symbols
+    for most if not all the orrery's objects list. then we can decide on
+    priorities. the "golden artifacts" are one path, but not the only
+    one. I would be inclined to work on the inner planets after that.
+    and we should not forget the earth science part."
+- **Against Where We Are's road, as it stood at 6fc3648:** the Sun and
+  Earth rooms (stages 5 to 7) and the objects (stage 11) agree. Stage 13
+  reads "The planets get their details, Jupiter and Saturn first";
+  Tony's note leans to the inner planets. Stage 14 is the Earth System
+  layers, his "earth science part".
+**Gap:** at the next design talk after the orbital periods: Tony
+confirms the order, and the road and the master plan's critical path
+(`documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`, Section 5a) are
+rewritten to it. Until then the road stands, with his lean noted.
+**Ref:** L-410; L-431; L-412; L-413; L-221 (the master plan is the
+roadmap); `documentation/WHERE_WE_ARE.md`.
+
+#### [L-432] Objects drawn in the default goldenrod (orrery, colours)
+<!-- L:432 status:OPEN upd:2026-10-11 section:A flag: rice: -->
+- **Tony, 2026-10-10, in his run record** (`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md` at 6fc3648): "the color dictionary
+  is a drawing choice and kept by hand. the default color is often
+  goldenrod, but we should switch it up to avoid clashing with nearby
+  objects. small, but it matter for the render."
+- **Discovery, 2026-10-11, at 6fc3648** (a list, nothing fixed; The
+  Braid). `color_map()` in `constants_new.py` returns 'goldenrod' for a
+  name it does not hold, and the orrery calls it by display name. Of
+  the 191 entries in `celestial_objects.py`, 27 names are not in it:
+  Encke; OSIRISREx, OSIRISAPE, Bennu/OSIRIS; Earth-Moon Barycenter,
+  Patroclus-Menoetius Barycenter, Pluto-Charon Barycenter, Haumea
+  System Barycenter, Eris-Dysnomia Barycenter, Eris/Dysnomia,
+  Gonggong-Xiangliu Barycenter; TRAPPIST-1 and its planets b to h,
+  TOI-1338 A/B, TOI-1338 A (G-type), TOI-1338 B (M-type), TOI-1338 b
+  and c, Proxima Centauri, Proxima Centauri b and d. Encke is seen
+  goldenrod in the render (L-395). The barycentres and the exoplanet
+  systems may be coloured by other code; not traced.
+- A colour is a drawing choice (Tony), so no row needs a source. Each
+  pick is Mode 5: Tony's eye on the bodies it is drawn beside.
+**Gap:** trace which of the 27 actually draw goldenrod; then Tony picks
+colours, Encke first, beside Halley and the other comets.
+**Ref:** `constants_new.py` (`color_map`); `celestial_objects.py`;
+L-395.
+
 #### [L-431] Orbital periods from JPL, for every body, printed by their errors (orrery, provenance)
 <!-- L:431 status:OPEN upd:2026-10-11 section:A flag: rice: -->
 - **Opened 2026-10-10** from Tony's look at Encke: its hover has no
@@ -1401,6 +1464,13 @@ skills/interactive-exhibit/SKILL.md.
   periods in `KNOWN_ORBITAL_PERIODS` (13 of them None) carry no Source
   line. Once the fetched period is in the hover the table is only a
   fallback; whether it prints at all is the design's question 6.
+- **Tony's note in his run record of 2026-10-10** (`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md` at 6fc3648): "the orbital
+  periods dictionary is hand maintained and instead should be fetched
+  from Horizons along with the other osculating data. however, there is
+  a wrinkle: the center body for the data matters: the sun or the solar
+  barycenter. we should also implement this because it matters for
+  orbital periods, especially highly perturbed ones." On the proposed
+  rule: "for discussion".
 **Gap:** the design talk, then the build. Seven questions in the
 design record's section 7: the astroquery column; which centre; moons
 and the Pluto system; the drawn ellipse's same dependence on the
@@ -1626,7 +1696,7 @@ and 6.67430e-11 still matches 6.6743e-11.
 `float_precision`); `test_worksheet_checker.py`; L-424; L-425.
 
 #### [L-424] The checker reports one word for two different cases (worksheet checker)
-<!-- L:424 status:OPEN upd:2026-10-09 section:A flag: rice: -->
+<!-- L:424 status:OPEN upd:2026-10-11 section:A flag: rice: -->
 - **Found 2026-10-08,** building L-418, while checking the L-252
   paragraph against `worksheet_checker.py` at b0b3df82. UNCHECKED_MOVE
   is reported for two different cases: the worksheet has no value
@@ -1650,6 +1720,9 @@ and 6.67430e-11 still matches 6.6743e-11.
 - The session that builds this item opens `compare()`, the same
   function as L-426 (the checker's small-number comparison); carry
   both.
+- **Tony, 2026-10-10, in his run record** (`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md` at 6fc3648), on the decision:
+  "unclear". It moves to the design-talk list, to be explained there in
+  plain words before he decides.
 **Gap:** Tony's decision above; if yes, a session builds it with a test
 for each case and updates the skill's bullet to match.
 **Ref:** `worksheet_checker.py` (the L2b block); `test_worksheet_checker.py`;
@@ -2294,7 +2367,13 @@ is enough. L-422 holds the shape; this item holds the check.
     (`palomas_orrery.py`, in `patch_L431_1_close_20261011.py`).
   - Encke's colour: the colour dictionary "is mostly a drawing choice
     to distinguish objects commonly drawn together". Encke keeps the
-    default goldenrod; no row is owed.
+    default goldenrod for now. AMENDED 2026-10-11 by Tony's note in
+    his run record (`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md` at 6fc3648): "the default color is often goldenrod, but we
+    should switch it up to avoid clashing with nearby objects. small,
+    but it matter for the render." The objects that fall to the
+    default are L-432.
+  - Encke first in the comet list, in the orrery window: "done. looks
+    great." Pushed at d3c4c385.
   - Encke's hover has no orbital period, because the typed table never
     had Encke. Tony's rulings on that are L-431 (orbital periods from
     JPL).
@@ -3464,7 +3543,7 @@ website's checks). The card exports and the two comments go with the next patch 
 **Ref:** `earth_visualization_shells.py`; `planet_visualization_utilities.py`; `documentation/NOTE_L322_C2a_orrery_words_20260922.md`; manifest sec. 17.7.
 
 #### [L-351] Rules learned at C2, owed to the next bumps of their stores (skills, protocol)
-<!-- L:351 status:OPEN upd:2026-10-09 section:A flag: rice: -->
+<!-- L:351 status:OPEN upd:2026-10-11 section:A flag: rice: -->
 - **Recorded, not built.** A class found while building L-322 Stage C2
   (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
   Braid: it waits until the artifact on the critical path reaches it.
@@ -3550,6 +3629,23 @@ website's checks). The card exports and the two comments go with the next patch 
     next version, and the skill comes off PLAN_NOT_YET in
     skills_index.py in the same patch (L-418; Tony, 2026-10-08).
   - interactive-exhibit and the protocol: as above.
+  - **2026-10-11, from Tony's notes in his run record** (`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md` at 6fc3648):
+    - agentic-pre-test: a new checker in either maintenance run gets
+      its dashboard button in the same patch (Tony: "add new checks to
+      the dashboard. this should be part of the skill."; L-416).
+    - ledger-and-session-records: the handoff header names Tony's
+      local folders beside the GitHub anchor (Tony: "the location of
+      the local files should be included in the handoff header along
+      with the github info"). The folders themselves are in the skill
+      since 1.19 (Tony's Local Folders); the header line is not.
+    - safe-file-editing: a patch that creates a file accepts one
+      already there with identical content and says so; different
+      content still refuses. Tony: "if i have already downloaded a
+      design document or handoff to documentations/ and the patch
+      creates it again, the patch will refuse. i have to go back and
+      delete the download, then the patch runs."
+      `patch_L431_2_run_record_notes_20261011.py` already works this
+      way.
 **Gap:** Each lands with its store's next bump.
 **Ref:** skills/interactive-exhibit/SKILL.md; skills/ledger-and-session-records/SKILL.md; PROJECT_INSTRUCTIONS.md; L-216, L-363, L-371, L-390, L-414.
 
@@ -20034,7 +20130,7 @@ two atmosphere rows are next opened.)
 (the crust); L-345.
 
 #### [L-416] Every maintenance-run step has a dashboard button (dashboard, both repos)
-<!-- L:416 status:DONE upd:2026-10-05 section:C flag: rice: -->
+<!-- L:416 status:DONE upd:2026-10-11 section:C flag: rice: -->
 - **Tony's question, 2026-10-05:** was the new check added to the runner
   and the dashboard? Skill headers (L-407) was in the runner with no
   button. Matched against both runners' own lists: eleven steps had
@@ -20055,6 +20151,17 @@ two atmosphere rows are next opened.)
   are byte for byte what was tested, where all 92 buttons found their
   scripts. Tony's gallery maintenance run passed 23 of 23, Daily run
   steps and Pole of date among them.
+- **2026-10-11, Tony's note in his run record** (`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md` at 6fc3648): "add new
+  checks to the dashboard. this should be part of the skill." Matched
+  again against the orrery runner's own list: two checkers had no
+  button -- Hills cloud sampler (L-421, `test_hills_cloud_sampler.py`,
+  whose build of 2026-10-10 missed the button) and Scanner row run
+  (L-414, `test_row_run.py`, 2026-10-09). Both added in
+  `patch_L431_2_run_record_notes_20261011.py`. The gallery runner's 27
+  checks all have buttons. The rule is owed to agentic-pre-test's next
+  version (L-351). A checker that compares the two lists would make the
+  rule unforgettable; that is a change to a checker, for a session of
+  its own, if Tony wants it.
 **Gap:** none here. L-300's sweep gets its button with the website patch
 that registers it; that leftover is on L-300.
 **Ref:** `palomas_orrery_dashboard.py`; gallery
@@ -22014,7 +22121,7 @@ profile, data source), with L-410.
 **Ref:** to_do_ideas.md (pre-ledger, 4/17/26).
 
 #### [L-136] Solar "scattered disk" shell
-<!-- L:136 status:OPEN upd:2026-10-04 section:D.Feature-B flag: rice:2/2/50/2 -->
+<!-- L:136 status:OPEN upd:2026-10-11 section:D.Feature-B flag: rice:2/2/50/2 -->
 - **Idea (Tony, 4/18/26, pre-ledger note).** Add a shell/region for the
   scattered disk (dynamically excited trans-Neptunian population, distinct
   from the classical Kuiper Belt).
@@ -22026,6 +22133,9 @@ profile, data source), with L-410.
   L-410 is a way of drawing any edge known only as a range. They meet
   in one place: the scattered disk's edges are themselves ranges, so
   when this is designed, L-410's drawing rule applies to it.
+- **Tony, 2026-10-10, in his run record** (`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md` at 6fc3648), on Where We Are's
+  "The scattered disk, with the Kuiper belt": "we should decide this. i
+  lean yes." Moved to the design-talk list.
 **Gap:** not scoped -- design conversation needed.
 **Ref:** to_do_ideas.md (pre-ledger, 4/18/26); L-363 (the Solar System
 room); L-410.

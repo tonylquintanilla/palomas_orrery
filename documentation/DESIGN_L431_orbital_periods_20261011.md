@@ -7,6 +7,9 @@ gallery a7d1a542ae5b6d26dc3c658c339fcf721d181780 at
 https://github.com/tonylquintanilla/tonyquintanilla.github.io, read,
 not touched. Written October 10-11, 2026 with Anthropic's Claude Opus
 5.5, at the close of the L-421 (the typed facts) orrery session.
+Tony's local folders: orrery
+`C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\`;
+gallery `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\`.
 
 - Type: DESIGN RECORD (zero code). The build is the next session's.
 - Tony, 2026-10-10: "i would want to start with this issue. it is

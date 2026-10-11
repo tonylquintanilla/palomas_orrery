@@ -963,5 +963,159 @@ The Hills cloud and Encke are done and looked at.
 Next session starts with the orbital periods design talk, as you asked.
 The website’s side of the inner Oort cloud comes after that.
 
+==================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L431_2_run_record_notes_20261011.py
+ok  palomas_orrery_dashboard.py        line 1184
+ok  palomas_orrery_dashboard.py        line 1132
+ok  palomas_orrery_dashboard.py        line 171
+ok  LEDGER_CONSOLIDATED.md             line 22028
+ok  LEDGER_CONSOLIDATED.md             line 22016
+ok  LEDGER_CONSOLIDATED.md             line 20057
+ok  LEDGER_CONSOLIDATED.md             line 20036
+ok  LEDGER_CONSOLIDATED.md             line 3552
+ok  LEDGER_CONSOLIDATED.md             line 3466
+ok  LEDGER_CONSOLIDATED.md             line 2296
+ok  LEDGER_CONSOLIDATED.md             line 1652
+ok  LEDGER_CONSOLIDATED.md             line 1628
+ok  LEDGER_CONSOLIDATED.md             line 1403
+ok  LEDGER_CONSOLIDATED.md             line 1370
+ok  LEDGER_CONSOLIDATED.md             line 1180
+ok  LEDGER_CONSOLIDATED.md             line 1157
+ok  LEDGER_CONSOLIDATED.md             line 1148
+ok  LEDGER_CONSOLIDATED.md             line 1077
+ok  LEDGER_CONSOLIDATED.md             line 342
+ok  documentation/WHERE_WE_ARE.md      line 113
+ok  documentation/WHERE_WE_ARE.md      line 105
+ok  documentation/WHERE_WE_ARE.md      line 96
+ok  documentation/WHERE_WE_ARE.md      line 91
+ok  documentation/WHERE_WE_ARE.md      line 81
+ok  documentation/WHERE_WE_ARE.md      line 74
+ok  documentation/WHERE_WE_ARE.md      line 66
+ok  documentation/WHERE_WE_ARE.md      line 57
+ok  documentation/WHERE_WE_ARE.md      line 46
+ok  documentation/WHERE_WE_ARE.md      line 36
+ok  documentation/WHERE_WE_ARE.md      line 20
+ok  documentation/WHERE_WE_ARE.md      line 9
+ok  documentation/WHERE_WE_ARE.md      line 3
+ok  documentation/DESIGN_L431_orbital_periods_20261011.md line 9
+ok  documentation/HANDOFF_L421_oort_orrery_20261010.md line 328
+note: WHERE_WE_ARE.md has 129 lines above the run-record marker (the cap is 130)
+stamps updated: the ledger header; the module docstring of palomas_orrery_dashboard.py; WHERE_WE_ARE.md date line
+patch applied: 34 edits in 5 files.
+
+NEXT:
+  1. Run orrery_maintenance_run.py. Expect "22 of 22 gating checkers passed" and "GATE PATH: 0 TIER-1 -- the push gate holds". It rebuilds the ledger index with L-432 and L-433.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261011T134721Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.8s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.2s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             2.2s  unchanged (1 checked, not written)
+  Objects export               0.2s  unchanged (1 checked, not written)
+  Module atlas                 8.5s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.4s  rewrote DATA_INVENTORY.md
+  Exact rows report            2.4s  unchanged (1 checked, not written) -- 13 of
+                                     38 exact rows printed at 43 lines (33
+                                     orrery, 10 gallery); 8 drawn only, 11 not
+                                     followed, 0 map entries broken
+  Document index               0.2s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.3s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.9s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       1.6s  Export matches the store: sha256
+                                     9d79d8797a22 on both sides; 120 rows
+                                     re-read, 56 not exported, 29 tokens; 315
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.1s  pass
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      1.8s  PASSING -- 13 printed exact rows each state
+                                     a count; 33 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.3s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.2s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.2s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 119 status lines in constants_new.py are
+                                     well formed; 54 rows carry none.
+  Row shape                    0.1s  All 176 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.3s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          24.2s  PASS -- all 311 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.2s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.4s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.5s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Worksheet checker           10.0s  74 of 110 routed, 8 clean
+  Worksheet checker tests     16.9s  All 135 checks passed
+  Worksheet key round trip     1.1s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         23.5s  All 76 checks passed
+  Extractor pins               0.5s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          10.8s  0 TIER-1 -- the push gate holds
+
+======================================================================
+  22 of 22 gating checkers passed -- 118.6s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2162 file(s) examined, 9 written, 0 created, 0 removed, 4 rewritten identically
+    written   DATA_INVENTORY.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. If you like, open the dashboard: Test Hills Cloud Sampler and Test Scanner Row Run are under the orrery checks; each should end on PASS.
+  3. Move this script into documentation/; commit and push. -- 
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

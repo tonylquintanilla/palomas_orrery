@@ -169,6 +169,11 @@ no longer said what the code does: the Daily Run button and the cache
 builder's routine still told Tony to pause OneDrive (retired 2026-10-10,
 L-216), Daily Run Steps still said three scripts, and Objects Export
 did not name the export's two new fields.
+October 11, 2026 with Anthropic's Claude Opus 5.5 (L-416, on Tony's
+note in his run record: "add new checks to the dashboard"): Test Hills
+Cloud Sampler (L-421) and Test Scanner Row Run (L-414) under the
+orrery's checkers, in alphabetical place. Both checkers were in the
+maintenance run with no button.
 """
 
 import os
@@ -1130,6 +1135,17 @@ LAUNCH_GROUPS = {
          True,
          ["--check"],
          True),
+        ("Test Hills Cloud Sampler",
+         "test_hills_cloud_sampler.py",
+         "The Hills cloud's three checks, each first shown able to fail: "
+         "four faults are planted (the galactic pole's RA and Dec swapped, "
+         "the ecliptic node set to 0, the paper's Fig. 3 reading moved, the "
+         "tilt pushed to 60 degrees) and each must be caught, then the real "
+         "rows must pass. Ends on \"HILLS CLOUD: PASS\" (L-421).",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
         ("Test Objects Export",
          "test_objects_export.py",
          "Check that data/objects_export.json matches celestial_objects.py, "
@@ -1182,6 +1198,16 @@ LAUNCH_GROUPS = {
          "that is too loose clears findings by matching what it should "
          "not, and the Tier-1 count then falls, which looks like progress. "
          "Ledger L-156, sub-steps 1d and 1e.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Test Scanner Row Run",
+         "test_row_run.py",
+         "Pins for the provenance scanner (L-414): a row's citation is read "
+         "from its own comment run, declared rows are named as their own "
+         "kind, and the gate-path figure is computed and recorded by name. "
+         "Run after editing provenance_scanner.py.",
          SCRIPT_DIR,
          True,
          None,

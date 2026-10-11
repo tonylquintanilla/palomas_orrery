@@ -326,3 +326,35 @@ touched. Delivered as `patch_L431_1_close_20261011.py`.
   loaded copies read ledger-and-session-records 1.19 and
   horizons-orbital-mechanics 1.2 (both uploaded 2026-10-10), then opens
   the L-431 design talk.
+
+## 13. Tony's notes in the run record, October 11, 2026
+
+Built on orrery 6fc36483ffc630f1f618f60317761add3c7cc4eb (Tony's push of his run record) at
+https://github.com/tonylquintanilla/palomas_orrery and gallery fd17abf
+at https://github.com/tonylquintanilla/tonyquintanilla.github.io.
+Tony's local folders: orrery
+`C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\`;
+gallery `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\`.
+Delivered as `patch_L431_2_run_record_notes_20261011.py`.
+
+Tony wrote notes on the page part of his timestamped copy,
+`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md`, after the
+close patch had been built. Each went to its item:
+
+- Fuzzy boundaries before the Sun and Earth rooms close: L-410.
+- The road after those rooms, inner planets leaning first, and the
+  earth science part not forgotten: L-433 (new), for the design talk.
+- The orbital periods and the centre: L-431.
+- Colours: switch up the default goldenrod. 27 names fall to it; L-432
+  (new) lists them. Encke's line on L-395 is amended.
+- Local folders in the handoff header; a patch refusing a file Tony
+  already downloaded; new checks on the dashboard: owed to three
+  skills' next versions (L-351). This patch already accepts an
+  identical file, and adds the two missing dashboard buttons (L-416):
+  Test Hills Cloud Sampler, missed by this session's build, and Test
+  Scanner Row Run, missed by L-414's.
+- L-408: "it awaited only for implementation not in principle."
+- The Oort edge question: settled on 2026-10-09 (the band from 10,000
+  to 20,000 au) and built here; already off the page.
+- L-424: "unclear"; to the design-talk list, to be explained.
+- The scattered disk (L-136): "i lean yes"; to the design-talk list.
