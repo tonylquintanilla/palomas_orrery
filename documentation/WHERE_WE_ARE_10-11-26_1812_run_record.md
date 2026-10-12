@@ -584,10 +584,8 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  3. Move this script into documentation/; commit and push. -- 
+  3. Move this script into documentation/; commit and push. -- 4c22b33b570a3a47a7f782da1fc675bd7b1c2da8
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
-
-Move the patch into documentation/, commit and push.
 
 Where this leaves us
 
