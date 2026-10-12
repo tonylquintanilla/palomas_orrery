@@ -2568,6 +2568,42 @@ resident.
 (Moved down from the resident protocol on 2026-10-11 when
 v3.91 made a fourth entry.)
 
+v3.89 (October 10, 2026): No rule changed in this document. TWO
+skills, one version each: interactive-exhibit 1.13 -> 1.14 (L-429) and
+gallery-cache-builder 1.7 -> 1.8 (L-216). GO TO IN THE MIDDLE OF EVERY
+ROW, AND NO ONEDRIVE PAUSE.
+
+WHAT PROMPTED IT. Tony, after a look on the phone, 2026-10-10: "For
+uniformity rename the Go buttons in all rooms to Go To and center",
+with the room button to its right; shown that this cut most layer
+names on an upright phone, he confirmed letting them wrap. And on the
+Daily Run: "you can remove the pause check from the daily run. the
+retry is sufficient." Gallery patch_L429_3 builds both, with the
+Artifact 1 test's date (L-237).
+
+WHAT CHANGED. interactive-exhibit, in the drawer's anatomy row and the
+Solar System room's drawer: the three-column row, Go To in the true
+middle, the room button after it, names that wrap. A second version in
+one session, against One Session, One Bump, because 1.13 was installed
+before the ruling came. gallery-cache-builder: the routine's pause step
+is retired, and the skill gets its read plan and leaves PLAN_NOT_YET.
+Their v1.11 and v1.5 entries moved to documentation/SKILL_HISTORIES.md,
+by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+interactive-exhibit 1.14 and gallery-cache-builder 1.8 before exhibit
+or cache-builder work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.86 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-12 when
+v3.92 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

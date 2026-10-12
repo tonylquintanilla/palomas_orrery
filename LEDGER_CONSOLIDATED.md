@@ -359,6 +359,11 @@ Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5
 (L-401 promoted to next and designed with three outside reviews, the
 typed sky-position table settled with it; L-431 build 1 confirmed
 against JPL; L-399, L-412 and L-413 updated), built on 28a4636.
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5
+(L-401 build 1, the body hover printed by JPL's errors, and the
+October 11 speed ruling; L-431's period sentence reworded; L-399, the
+orrery now fetches a small body's own uncertainty;
+horizons-orbital-mechanics 1.3), built on 47815de2.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -709,10 +714,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-391 | Group clouds: the Trojans' sources, and the shapes of the three other groups (gallery, exhibits) | OPEN | -- | 2026-09-29 |
 | ! | L-393 | Encounter data: dates, spacecraft records centred on their targets, and how far the cache reaches in time (gallery, cache) | OPEN | -- | 2026-09-29 |
 | ! | L-394 | A card cannot say which body it belongs to (gallery, Studio) | OPEN | -- | 2026-09-29 |
-| ! | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | OPEN | -- | 2026-10-11 |
+| ! | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | OPEN | -- | 2026-10-12 |
 | ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-10-07 |
 | ! | L-399 | Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder) | OPEN | -- | 2026-10-01 |
-| ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-11 |
+| ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-12 |
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-410 | Fuzzy boundaries for edges known only as ranges, the outer corona first (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-11 |
@@ -727,7 +732,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-427 | Rows a neighbour's citation had been crediting (store) | OPEN | -- | 2026-10-09 |
 | ! | L-429 | The room button on the row, in the Solar System room's list (gallery, exhibits) | OPEN | -- | 2026-10-10 |
 | ! | L-430 | Uncited lines in the orrery's Oort cloud tooltips and the Sun's reach text (orrery, words) | OPEN | -- | 2026-10-10 |
-| ! | L-431 | Orbital periods from JPL, for every body, printed by their errors (orrery, provenance) | OPEN | -- | 2026-10-11 |
+| ! | L-431 | Orbital periods from JPL, for every body, printed by their errors (orrery, provenance) | OPEN | -- | 2026-10-12 |
 | ! | L-432 | Objects drawn in the default goldenrod (orrery, colours) | OPEN | -- | 2026-10-11 |
 | ! | L-433 | The road after the Sun and Earth rooms, in Tony's words (planning) | OPEN | -- | 2026-10-11 |
 | ! | L-434 | Stored drawings for the other dot-cloud shells (orrery + gallery) | OPEN | -- | 2026-10-11 |
@@ -1444,7 +1449,7 @@ colours, Encke first, beside Halley and the other comets.
 L-395.
 
 #### [L-431] Orbital periods from JPL, for every body, printed by their errors (orrery, provenance)
-<!-- L:431 status:OPEN upd:2026-10-11 section:A flag: rice: -->
+<!-- L:431 status:OPEN upd:2026-10-12 section:A flag: rice: -->
 - **Opened 2026-10-10** from Tony's look at Encke: its hover has no
   orbital period, because the hover's "Known Orbital Period" reads only
   `KNOWN_ORBITAL_PERIODS` in `constants_new.py`, a typed table that
@@ -1586,18 +1591,30 @@ L-395.
   lists no orbit uncertainty for this body" is false of JPL for a
   planet; JPL states the planets' accuracy in the 2014 report. Its
   wording waits for Tony's word, with the rest of the hover's words.
+- **2026-10-12, reworded in L-401's build 1** (patch_L401_3): where
+  the year's change governs and the Small-Body Database gave no sigma,
+  the hover says why, in true words, from the record's saved status:
+  "JPL's small-body database has no entry for this body" (a planet or
+  moon, or a body it does not hold), or that it gives no uncertainty
+  for this period, gives no period, found more than one match, or
+  could not be reached. Tony's word on it comes at L-401's look.
+- **Found 2026-10-12 (L-401's review):** `_is_small_body` reads id_type
+  only, so C/2025_K1 (record 90004912, id_type 'id') is not asked of
+  SBDB, and its hover says the database "has no entry". One class,
+  with build 2's work on that path.
+- **2026-10-12, owed to the skill, paid:** horizons-orbital-mechanics
+  1.3 carries the two-centre test with its saved choice and SBDB's
+  lookup of a pinned record by Horizons' name, in one version with
+  L-401's 2xr method.
 **Gap:** three builds, in order (the record's section 3):
 1. The period in the orrery: BUILT and working against JPL
    (2026-10-11). Open: Tony's word on the hover's wording, with the
-   corrected sentence for a planet (L-401's design record, section 5).
+   reworded sentence, at L-401's look (2026-10-12).
 2. The drawn ellipse around the period's centre, and the markers from
    the fetched period (Mode 5, Tony's look).
 3. The website: the export carries each period; every room's hover
    prints it; the Horizons check compares it.
-Owed to horizons-orbital-mechanics, now that build 1 works against JPL,
-in one version with L-401's method: the two-centre test, its choice saved at first
-fetch, SBDB's lookup of a pinned record by Horizons' name. The typed
-table's 132 unsourced entries stay one class, not chased.
+The typed table's 132 unsourced entries stay one class, not chased.
 **Ref:** `documentation/DESIGN_L431_orbital_periods_rulings_20261011.md`;
 `documentation/DESIGN_L431_orbital_periods_20261011.md`;
 `documentation/HANDOFF_L431_period_build1_20261011.md`; `orbital_period.py`;
@@ -2090,7 +2107,7 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 tools/gallery_cache_builder.py (trust); L-149; L-150; L-363; L-398.
 
 #### [L-401] The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance)
-<!-- L:401 status:OPEN upd:2026-10-11 section:A flag: rice: -->
+<!-- L:401 status:OPEN upd:2026-10-12 section:A flag: rice: -->
 - **Recorded 2026-10-01, closing L-398**, as one row for the class under
   The Braid: recorded, not chased. provenance-discipline 2.23 says every
   computed position a display prints goes to the place the larger of
@@ -2151,16 +2168,123 @@ tools/gallery_cache_builder.py (trust); L-149; L-150; L-363; L-398.
   `fetch_radec_for_hover` asks from Earth's centre (Fable). Kept for
   later: Fable's sourced figure for a planet, worked out from its
   position row and its distance from Earth.
-**Gap:** three questions at the next talk (the record's section 5):
-the box's shape (one light-time line, the surface line only where the
-centre has a surface, plain numbers); L-431's planet sentence; the
-speed of a body whose distance has no stated error. Then the first
-build, the body hover, with the sky-position table's removal.
+- **Ruled 2026-10-11, after the design record was pushed** (brief
+  `documentation/HANDOFF_L401_distance_build1_brief_20261011.md`,
+  section 2): the speed of a body whose distance has no stated error
+  gets a floor of its own, one meter per second, printed as 0.001 km/s,
+  with the sentence "JPL states no uncertainty for this body's speed".
+  Tony: "approved as recommended". Sources read for it by the Fable
+  5.1 coordination session, 2026-10-11 (the brief's section 8): Park et
+  al. 2021 (DE440, AJ 161:105), range residuals only; the Horizons
+  manual, statistical uncertainties "for asteroids and comets only" and
+  "n.a." otherwise; Horizons' object pages for Voyager 1, New Horizons
+  and Titan; JPL's satellite-ephemeris listing; Vallisneri et al. 2020
+  (arXiv:2001.00595); Fayolle et al. 2023 (A&A 676 L6). No published
+  velocity error bar exists for the planets, the Moon, the planets'
+  moons, spacecraft, Lagrange points or barycentres.
+- **2026-10-12, build 1 built: the body hover** (Claude Opus 5.5, at
+  47815de2; record `documentation/HANDOFF_L401_distance_build1_20261012.md`),
+  by `patch_L401_3_body_hover_20261012.py`:
+  - New `position_accuracy.py`: the error for one body, centre and
+    date, in one place the hover reads. A planet or Pluto: its DE430
+    row; the Moon: its new row; a small body: JPL's 3-sigma from the
+    position query (`VEC_TABLE='2xr'`, a direct call, columns by name);
+    anything else: the no-error state. The centre joins by the larger
+    of two; a moon seen from the Sun uses its planet's row as a floor
+    and says so.
+  - The hover prints AU, kilometers, one light-time line and the
+    surface line (only where the centre has a solid surface) to the
+    Report test's place of the error, never finer than whole
+    kilometers; the speed by Reading 1, a small body's velocity sigma,
+    or the 0.001 km/s floor; plain numbers; a sentence saying which
+    kind of figure it is.
+  - `constants_new.py` gains `DE430_MOON_POSITION_PLACE_KM` (the 2014
+    report's abstract, "known to submeter accuracy", read 2026-10-12)
+    and `S_PER_DAY` (NIST SP 811, Table 6, read 2026-10-12), with the
+    token `s_per_d`.
+  - `celestial_coordinates.py`: `MAJOR_BODY_UNCERTAINTIES` and the
+    "typical" fallbacks are gone; the sky line says "as seen from
+    Earth", and that JPL gives no uncertainty where it gives none.
+  - `fetch_position` asks a small body's position with its 2xr
+    uncertainty in the same query; if that fails it fetches the
+    position the old way and the hover says the uncertainty is not
+    included.
+  - New checker `test_position_digits.py`, "Position digits (L-401)"
+    in the maintenance run, with its dashboard button: eleven planted
+    faults each caught by name, then 23 hovers and 165 lines judged
+    against errors it works out itself, five pairs the same from either
+    end, and every listed object hovered from the Sun, Earth and
+    Neptune (496 hovers).
+  - Method decided in the build (recorded in the handoff, section 3):
+    a body with no stated error takes its centre's error when that
+    error is larger than the kilometer floor, and otherwise keeps none;
+    an unstated error is not called a large one (Tony, 2026-10-12: "we
+    know spacecraft distance to fine precision because of signal travel
+    time, not to 10,000 km"), so "may be larger" is said only where a
+    figure JPL gives is not included or the position is not JPL's; the Sun adds nothing on either side, so the Sun seen
+    from a planet prints by that planet's published accuracy; a
+    small-body record number counts as a small body whatever its
+    id_type; animation frames that are not JPL's for their date (worked
+    out from elements, interpolated, or copied) state no accuracy.
+  - **The Voyagers' data sheets, ruled 2026-10-12** (Tony, "A", after
+    Claude Fable 5.1 read the Voyager 2 sheet; survey of all 26 sheets
+    `documentation/SURVEY_L401_spacecraft_data_sheets_20261012.md`):
+    only the Voyagers' sheets state a trajectory uncertainty, a
+    predicted pointing angle seen from Earth for 2030 (1.701/1.535 and
+    4.718/3.715 arcseconds), on a 2022 refit of tracking that ended in
+    1992, and none for the distance. Four rows in `constants_new.py`;
+    the hover converts the larger angle at the distance from Earth
+    (quantity 20, same query) and says the conversion is ours. The
+    other 24 state none. Twelve sheets were revised in 2026; their
+    30-day re-read goes on the Horizons check, by Tony's word (L-395).
+  - A cold review by a separate Claude agent, before delivery, found
+    seven faults in the first draft, each fixed and given a fixture or
+    a planted fault in the checker (the handoff, section 5).
+  - Tested in the sandbox, which cannot reach JPL: the window opens
+    headless; the five bodies of the look through the real
+    `fetch_position` and `add_celestial_object`, with JPL's answers
+    stubbed from ones recorded 2026-10-12; maintenance run 24 of 24,
+    gate path 0, whole tree 288 Tier-1 (292 before; the typed sky
+    table's four findings gone).
+- **Found in build 1, recorded and not chased (The Braid):**
+  - The animation's positions come from `fetch_trajectory`, which does
+    not ask for 2xr; a small body's animation hover says its
+    uncertainty is not included. One class with the other slices.
+  - The DE430 rows are today's accuracy, applied to every date. Near a
+    flyby the spacecraft's tracking tied the planet to it (Voyager 2 at
+    Neptune, 1989), so the hover is coarser than JPL knew there: the
+    safe direction. With the encounter markers' slice.
+  - From a centre other than the Sun, an entry with a small-body
+    `helio_id` (Makemake, Eris, Haumea, Gonggong, Quaoar, Orcus) is
+    fetched by its system record, which has no 2xr; its hover says
+    JPL's figure is not included. One class with the animation's 2xr.
+  - `orbital_period._is_small_body` reads id_type only, so a comet
+    pinned by record number with id_type 'id' (C/2025_K1, 90004912) is
+    not asked of the Small-Body Database, and its period line says the
+    database "has no entry". Recorded on L-431.
+  - The RA and Dec themselves print to fixed widths
+    (`extract_jpl_radec`). One class with the sky line's sourced
+    figure for a planet, kept for later.
+  - `format_maybe_float` and `format_km_float` are unchanged; the hover
+    no longer calls them, and their other callers are the other
+    slices' sites.
+**Gap:** Tony's run of patch_L401_3 (its live check asks JPL for the
+five bodies) and his look at the five hovers, where he gives his word
+on the words: the no-error sentences, the speed sentence, the reworded
+period sentence, the light-time line, the surface line's presence or
+absence. Then the other slices, one class (the record's section 3):
+the apsidal and encounter markers (with L-431's build 2), the orbit
+hovers in `idealized_orbits.py`, the fly-to buttons, the parameters
+window, the animation's 2xr.
 **Ref:** `documentation/DESIGN_L401_distance_digits_rulings_20261011.md`;
 `documentation/REVIEW_L401_distance_digits_comparison_20261011.md`;
-visualization_utils.py; formatting_utils.py; constants_new.py (DE430
-rows); palomas_orrery.py (`fetch_position`); provenance-discipline
-2.28; L-398; L-399; L-431; `celestial_coordinates.py`.
+`documentation/HANDOFF_L401_distance_build1_brief_20261011.md`;
+`documentation/HANDOFF_L401_distance_build1_20261012.md`;
+position_accuracy.py; test_position_digits.py; visualization_utils.py;
+formatting_utils.py; constants_new.py (DE430 rows); palomas_orrery.py
+(`fetch_position`); provenance-discipline 2.28;
+horizons-orbital-mechanics 1.3; L-398; L-399; L-431;
+`celestial_coordinates.py`.
 
 #### [L-399] Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder)
 <!-- L:399 status:OPEN upd:2026-10-01 section:A flag: rice: -->
@@ -2181,7 +2305,12 @@ rows); palomas_orrery.py (`fetch_position`); provenance-discipline
   uncertainties with the position (Fable, re-run by Claude). The
   orrery builds it first (L-401); the website's builder can ask the
   same way.
-**Gap:** with the near-Earth asteroid design; the route is L-401's.
+- **2026-10-12, the orrery now fetches it** (L-401 build 1,
+  `position_accuracy.fetch_small_body_state`): a small body's position
+  and its 2xr uncertainty in one query, read by column name; the hover
+  prints by its 3-sigma. The builder's half stays open here.
+**Gap:** the website's half: the builder asks the same way and the
+Solar System room prints by it; with the near-Earth asteroid design.
 **Ref:** L-398; L-363; tools/gallery_cache_builder.py (gallery).
 
 #### [L-396] Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills)
@@ -2242,7 +2371,7 @@ is enough. L-422 holds the shape; this item holds the check.
 **Ref:** `documentation/WHERE_WE_ARE.md`; `skills/ledger-and-session-records/SKILL.md` (The Document Stack); `PROJECT_INSTRUCTIONS.md` v3.74; L-363; L-395; L-333; L-362.
 
 #### [L-395] The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects)
-<!-- L:395 status:OPEN upd:2026-10-11 section:A flag: rice: -->
+<!-- L:395 status:OPEN upd:2026-10-12 section:A flag: rice: -->
 - **2026-10-01, design rulings and the first build** [verified: orrery
   feb5e369, gallery 43993b49; Tony's runs 22 of 22 gating; his phone:
   "perfect"]. Tony's rulings, each "confirmed as recommended" unless
@@ -2567,7 +2696,18 @@ is enough. L-422 holds the shape; this item holds the check.
   - Encke's hover has no orbital period, because the typed table never
     had Encke. Tony's rulings on that are L-431 (orbital periods from
     JPL).
-**Gap:** The check is built and runs every day. Still open: fields the
+- **2026-10-12, a new duty, ruled (from L-401):** the survey of the 26
+  spacecraft data sheets (`documentation/SURVEY_L401_spacecraft_data_sheets_20261012.md`)
+  found twelve revised in 2026, and the orrery now stores the Voyagers'
+  data-sheet figures as rows. Tony: "agree. let's add it to the horizons
+  check that runs every 30 days i believe." The check re-reads each
+  spacecraft's sheet on its 30-day cycle and reports, for a person, a
+  sheet whose "Revised:" date moved or whose stated uncertainty
+  changed; it never edits a row. Built in its own session (a change to
+  a checker gets its own session, Oct 8); which repository keeps the
+  sheet dates is that session's first question.
+**Gap:** The check is built and runs every day. Still open: the
+spacecraft data sheets' 30-day re-read (above); fields the
 list lacks (a moon's parent, a clean kind); the remaining served
 objects (moon, io, titan, pluto, charon, voyager_1, which have no key
 yet); the display-name rename; MAPS and 3I/ATLAS checked live when

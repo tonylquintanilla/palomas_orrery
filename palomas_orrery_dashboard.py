@@ -183,6 +183,9 @@ Tony's note in his run record: "please add this and any other new checks
 to the dashboard"): Drawings Check and Drawings Pull under the gallery's
 checks and data, in alphabetical place, for tools/check_drawings.py and
 tools/pull_drawings.py; the offline runner's description names both.
+October 12, 2026 with Anthropic's Claude Opus 5.5 (L-401, build 1): Test
+Position Digits under the orrery's checkers, in alphabetical place, in
+the same patch as the checker, so it has its button from the start.
 """
 
 import os
@@ -1223,6 +1226,21 @@ LAUNCH_GROUPS = {
          "test_orbit_cache.py",
          "Comprehensive test suite for orbit data caching, format conversion, "
          "and repair. Run alongside Verify Orbit Cache when the cache looks off.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Test Position Digits",
+         "test_position_digits.py",
+         "Check that the orrery's body hover prints each distance and speed "
+         "to the digits JPL's errors earn: a planet by its published row, a "
+         "small body by JPL's own uncertainty for the date, anything else at "
+         "whole kilometers with a sentence saying JPL states none. Builds its "
+         "hovers offline and judges them against errors it works out itself, "
+         "checks each pair prints the same from either end, and hovers every "
+         "listed object from the Sun, Earth and Neptune. Eleven faults are "
+         "planted first and each must be caught by name. "
+         "Ends on \"POSITION DIGITS: PASS\" (L-401).",
          SCRIPT_DIR,
          True,
          None,

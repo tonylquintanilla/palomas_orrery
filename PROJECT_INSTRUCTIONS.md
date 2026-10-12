@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.91 | October 11, 2026
+Tony Quintanilla, PE | Claude | v3.92 | October 12, 2026
 
-Cut from 1bbd9fe1 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 47815de2 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -486,8 +486,9 @@ safe-file-editing            1.13 Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
 agentic-pre-test             1.3  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
-horizons-orbital-mechanics   1.2  Horizons queries, centers, frames, osculating
-                                  elements, encounters, comet record pinning
+horizons-orbital-mechanics   1.3  Horizons queries, centers, frames, osculating
+                                  elements, encounters, comet record pinning,
+                                  2xr uncertainties, periods
 provenance-discipline        2.28 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
@@ -1166,6 +1167,33 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.92 (October 12, 2026): No rule changed in this document. ONE
+skill bump, one version (L-401, L-431): horizons-orbital-mechanics
+1.2 -> 1.3. A SMALL BODY'S UNCERTAINTY COMES WITH ITS POSITION.
+
+WHAT PROMPTED IT. Build 1 of L-401 (the distance digits), the orrery's
+body hover, asks Horizons for a small body's position and JPL's own
+uncertainty for the date in one query, VEC_TABLE='2xr', which
+astroquery cannot ask for or read. L-431 (orbital periods) owed the
+skill its two-centre test and the Small-Body Database's lookup of a
+pinned record. Both items asked for one version between them.
+
+WHAT CHANGED. horizons-orbital-mechanics gains A Small Body's
+Uncertainty Comes With Its Position and A Period Depends on Its
+Centre, and Small-Body Record Pinning gains the Small-Body Database's
+lookup by the name Horizons gives a record. It keeps three version
+entries, 1.3, 1.2 and 1.1, so none moves.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+horizons-orbital-mechanics 1.3 before Horizons work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.89 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.91 (October 11, 2026): No rule changed in this document. ONE
 skill bump, one version (L-351, L-421): ledger-and-session-records
 1.19 -> 1.20. YOUR TWO FOLDERS IN EVERY HEADER.
@@ -1226,39 +1254,6 @@ before ledger or Horizons work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.87 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.89 (October 10, 2026): No rule changed in this document. TWO
-skills, one version each: interactive-exhibit 1.13 -> 1.14 (L-429) and
-gallery-cache-builder 1.7 -> 1.8 (L-216). GO TO IN THE MIDDLE OF EVERY
-ROW, AND NO ONEDRIVE PAUSE.
-
-WHAT PROMPTED IT. Tony, after a look on the phone, 2026-10-10: "For
-uniformity rename the Go buttons in all rooms to Go To and center",
-with the room button to its right; shown that this cut most layer
-names on an upright phone, he confirmed letting them wrap. And on the
-Daily Run: "you can remove the pause check from the daily run. the
-retry is sufficient." Gallery patch_L429_3 builds both, with the
-Artifact 1 test's date (L-237).
-
-WHAT CHANGED. interactive-exhibit, in the drawer's anatomy row and the
-Solar System room's drawer: the three-column row, Go To in the true
-middle, the room button after it, names that wrap. A second version in
-one session, against One Session, One Bump, because 1.13 was installed
-before the ruling came. gallery-cache-builder: the routine's pause step
-is retired, and the skill gets its read plan and leaves PLAN_NOT_YET.
-Their v1.11 and v1.5 entries moved to documentation/SKILL_HISTORIES.md,
-by the three-entry rule.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copies read
-interactive-exhibit 1.14 and gallery-cache-builder 1.8 before exhibit
-or cache-builder work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.86 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

@@ -23,6 +23,13 @@ Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5 (L-431,
     saved with the elements, around the centre it is steadiest about, to
     the digits its errors earn; the typed table only when nothing was
     fetched, and the hover then says it is typed. orbital_period.py.)
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-401,
+    build 1: the hover's distances and speeds are printed to the digits
+    JPL's errors earn -- a planet's published row, a small body's own 2xr
+    uncertainty, or whole kilometers with a sentence where JPL states
+    none -- each unit by its own Report test, one light-time line, the
+    surface line only where the centre has a solid surface, plain numbers.
+    position_accuracy.py works out the error and the lines.)
 
 Role: rendering
 Domain: stars
@@ -790,37 +797,21 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
     Returns:
         tuple: (full_hover_text, minimal_hover_text, satellite_note)
     """
-    # Calculate distance from center
+    # Distance and speed, printed to the digits JPL's errors earn (L-401,
+    # build 1; position_accuracy.py). The error is worked out once for
+    # this body, this centre and this date -- a planet's published row, a
+    # small body's own 2xr uncertainty fetched with its position, or the
+    # no-error state -- and every unit is placed by its own Report test.
+    from position_accuracy import resolve_accuracy, distance_speed_lines
     distance_from_origin = np.sqrt(obj_data['x']**2 + obj_data['y']**2 + obj_data['z']**2)
-    
-    # Format values with proper formatting functions
-    distance_au = format_maybe_float(distance_from_origin)
-    distance_km = format_km_float(distance_from_origin * KM_PER_AU)
-    distance_lm = format_maybe_float(distance_from_origin * LIGHT_MINUTES_PER_AU)
-    distance_lh = format_maybe_float(distance_from_origin * LIGHT_MINUTES_PER_AU / 60)
-    velocity_au = format_maybe_float(obj_data.get('velocity', 'N/A'))
-    
-    # Calculate velocity in km/hr and km/sec
-    velocity_km_hr = "N/A"
-    velocity_km_sec = "N/A"
-    if isinstance(obj_data.get('velocity'), (int, float)):
-        vel_km_hr_val = obj_data.get('velocity') * KM_PER_AU / 24
-        vel_km_sec_val = vel_km_hr_val / 3600
-        velocity_km_hr = f"{vel_km_hr_val:,.2f}"
-        velocity_km_sec = f"{vel_km_sec_val:.3f}"
-    
-    # Calculate surface distance if we have valid distance data
-    center_radius_km = CENTER_BODY_RADII.get(center_object_name, 0)  # Default to 0 if center body not found
-    surface_distance_str = "N/A"
-    
-#    if isinstance(distance_from_origin * KM_PER_AU, (int, float)) and (distance_from_origin * KM_PER_AU) > center_radius_km:
-    if isinstance(distance_from_origin * KM_PER_AU, (int, float)):
-        surface_distance_km = (distance_from_origin * KM_PER_AU) - center_radius_km
-        surface_distance_str = format_km_float(surface_distance_km)
-
-    # Add an explanatory note for negative values
-    if surface_distance_km < 0:
-        surface_distance_str += " (below mean datum)"       # This applies to the Mars Rover that is sitting below the datum.
+    _accuracy = resolve_accuracy(obj_name, center_object_name, obj_data,
+                                 objects, parent_planets)
+    _velocity = obj_data.get('velocity', 'N/A')
+    _dist_lines = distance_speed_lines(
+        _accuracy, float(distance_from_origin),
+        _velocity if isinstance(_velocity, (int, float)) else None,
+        center_object_name, CENTER_BODY_RADII.get(center_object_name))
+    distance_block = '<br>'.join(_dist_lines) + '<br>'
     
     # Check if this is a planetary satellite
     is_satellite = False
@@ -911,13 +902,7 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
             f"<b>{obj_name}</b><br>"  # <- Note: Changed from "<br><br>" to "<br>"
             f"{position_date_str}"  # <- NEW LINE: Position timestamp
             f"{radec_component}<br><br>"  # <- NEW LINE: RA/Dec info
-            f"Distance from Center: {distance_au} AU<br>"
-            f"Distance: {distance_km} kilometers<br>"
-            f"Distance: {distance_lm} light-minutes<br>"
-            f"Distance: {distance_lh} light-hours<br>"
-            f"Distance to Center Surface: {surface_distance_str} kilometers<br>"
-            f"Velocity: {velocity_au} AU/day<br>"
-            f"Velocity: {velocity_km_hr} km/hr ({velocity_km_sec} km/sec)<br>"
+            f"{distance_block}"
         )
     
     else:
@@ -925,12 +910,7 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
         full_hover_text = (
             f"<b>{obj_name}</b><br><br>"
             f"{position_date_str}<br>"  # <- NEW LINE: Position timestamp
-            f"Distance from Center: {distance_au} AU<br>"
-            f"Distance: {distance_km} kilometers<br>"
-            f"Distance: {distance_lm} light-minutes<br>"
-            f"Distance to Center Surface: {surface_distance_str} kilometers<br>"
-            f"Velocity: {velocity_au} AU/day<br>"
-            f"Velocity: {velocity_km_hr} km/hr ({velocity_km_sec} km/sec)<br>"
+            f"{distance_block}"
         )
     
     # Add orbital period information (L-431: fetched first, typed last and marked)

@@ -171,6 +171,7 @@ ROLE_MAP = {
     'orbital_elements':                       'computation',
     'orbital_period':                         'computation',
     'pole_frames':                            'computation',
+    'position_accuracy':                      'computation',
     'simbad_manager':                         'computation',
 
     # data
@@ -255,6 +256,7 @@ ROLE_MAP = {
     'test_dimensions':                        'devtool',
     'test_objects_export':                    'devtool',
     'test_orbit_cache':                       'devtool',
+    'test_position_digits':                   'devtool',
     'test_provenance_1d':                     'devtool',
     'test_reset_completeness':                'devtool',
     'test_row_run':                           'devtool',

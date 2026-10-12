@@ -160,6 +160,14 @@ Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5
 conversion read from the IAU Style Manual, so the period's years and its
 one-year test step go through a row; a note above KNOWN_ORBITAL_PERIODS
 says it is now the last fallback for showing a period. No value changes.)
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5
+(L-401, the distance digits, build 1: DE430_MOON_POSITION_PLACE_KM, the
+place the 2014 report's "known to submeter accuracy" reports to, read in
+its abstract, and S_PER_DAY, an exact conversion read from NIST SP 811,
+which the body hover's speed goes through; and the Voyagers' predicted
+pointing uncertainties, four rows read from their Horizons data sheets,
+the only spacecraft sheets of the 26 the orrery draws that state one.
+No value changes.)
 """
 
 import math
@@ -555,6 +563,20 @@ S_PER_HOUR = 3600.0
 # Note+: (provenance-discipline 2.18, a unit conversion inside an
 # Note+: expression is an exact row). Neither checker judges this row; its
 # Note+: unit is asserted here, as DEG_PER_RAD's is.
+
+S_PER_DAY = 86400.0
+# Unit: s_per_d
+# Status: declared 2026-10-12 -- an exact unit conversion, seconds in one
+# Status+: day. Belongs to no body's slice.
+# Figures: exact -- a definition, not a measurement.
+# Read: Table 6, sec. 5.1.1, NIST Guide to the SI (SP 811), chapter 5,
+# Read+: 2026-10-12, Claude Opus 5.5, through the chat's web-fetch tool
+# Source: NIST Special Publication 811, Guide for the Use of the SI, sec.
+# Source+: 5.1.1, Table 6 (units the CIPM accepts for use with the SI) --
+# Source+: the day is 24 hours, 86 400 seconds, by definition.
+# Ref: https://www.nist.gov/pml/special-publication-811/nist-guide-si-chapter-5-units-outside-si
+# Note: L-401. The body hover's speed converts from AU per day through
+# Note+: this row (position_accuracy.py), not a bare 24 or 86400.
 
 D_PER_JULIAN_YEAR = 365.25
 # Unit: d_per_yr
@@ -3592,6 +3614,90 @@ DE430_URANUS_NEPTUNE_PLUTO_POSITION_PLACE_KM = 10000.0
 # Declared+: Pluto as the Pluto-Charon barycentre, whose orbit about the
 # Declared+: Sun is the one this sentence is about. The place is ours,
 # Declared+: by the rule in the section header; the words are JPL's.
+
+DE430_MOON_POSITION_PLACE_KM = 0.001
+# Unit: km
+# Status: declared 2026-10-12 -- the reporting place of the source's
+# Status+: words, not a number the source prints
+# Figures: exact -- declared construction: the coarser of the places
+# Figures+: "submeter" reports to by the Report test; 0.2 to 0.999 m give
+# Figures+: whole meters, 0.1 to 0.15 m give tenths, finer values finer
+# Figures+: still, so the row is one meter, written in kilometers
+# Read: abstract, p. 1, 2026-10-12, Claude Opus 5.5, through the chat's
+# Read+: web-fetch tool
+# Source: Folkner, W. M., Williams, J. G., Boggs, D. H., Park, R. S. &
+# Source+: Kuchynka, P. (2014), "The Planetary and Lunar Ephemerides
+# Source+: DE430 and DE431", IPN Progress Report 42-196 -- abstract: the
+# Source+: present-day lunar orbit is known to submeter accuracy through
+# Source+: fitting lunar laser ranging data.
+# Ref: https://ipnpr.jpl.nasa.gov/progress_report/42-196/196C.pdf
+# Declared: the Moon's orbit about Earth. The place is ours, by the rule
+# Declared+: in the section header; the words are JPL's. Kilometers, as
+# Declared+: the three rows above are, so the orrery's hover reads all
+# Declared+: four the same way (L-401, build 1).
+
+# ============================================================
+# SPACECRAFT TRAJECTORY UNCERTAINTY (JPL Horizons data sheets; L-401)
+# What each spacecraft's own Horizons data sheet states about how well
+# JPL knows its trajectory. A survey of the sheets of all 26 spacecraft
+# the orrery draws (2026-10-12; documentation/
+# SURVEY_L401_spacecraft_data_sheets_20261012.md) found a figure on two:
+# the Voyagers, as a predicted pointing uncertainty seen from Earth, an
+# angle, for 2030-Jan-1. Neither sheet states an uncertainty in the
+# distance, nor the sigma level. The orrery's hover converts the larger
+# of the two angles at the spacecraft's distance from Earth and says that
+# the conversion is ours (Tony, 2026-10-12, option A).
+# ============================================================
+
+VOYAGER_1_POINTING_RA_2030_ARCSEC = 1.701
+# Unit: arcsec
+# Status: measured V_SOURCED 2026-10-12 -- a predicted figure JPL prints
+# Figures: 4 -- the sheet prints 1.701
+# Read: data sheet, the uncertainty paragraph, 2026-10-12, Claude Opus 5.5
+# Read+: through the chat's web-fetch tool; Claude Fable 5.1 through the
+# Read+: browser pane the same day
+# Source: JPL Horizons, spacecraft data sheet for Voyager 1 (-31),
+# Source+: revised Aug 19, 2022 -- "Formal predicted geocentric pointing
+# Source+: uncertainty on 2030-Jan-1: RA +/- 1.701 arcseconds, DEC +/- 1.535
+# Source+: arcseconds"; trajectory a 2022 refit by R. Jacobson; "there has
+# Source+: been no new tracking data possible since 1992".
+# Ref: https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-31'&OBJ_DATA='YES'&MAKE_EPHEM='NO'
+
+VOYAGER_1_POINTING_DEC_2030_ARCSEC = 1.535
+# Unit: arcsec
+# Status: measured V_SOURCED 2026-10-12 -- a predicted figure JPL prints
+# Figures: 4 -- the sheet prints 1.535
+# Read: data sheet, the uncertainty paragraph, 2026-10-12, Claude Opus 5.5
+# Read+: through the chat's web-fetch tool
+# Source: JPL Horizons, spacecraft data sheet for Voyager 1 (-31),
+# Source+: revised Aug 19, 2022 -- "DEC +/- 1.535 arcseconds", in the same
+# Source+: sentence as the RA figure above.
+# Ref: https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-31'&OBJ_DATA='YES'&MAKE_EPHEM='NO'
+
+VOYAGER_2_POINTING_RA_2030_ARCSEC = 4.718
+# Unit: arcsec
+# Status: measured V_SOURCED 2026-10-12 -- a predicted figure JPL prints
+# Figures: 4 -- the sheet prints 4.718
+# Read: data sheet, the uncertainty paragraph, 2026-10-12, Claude Opus 5.5
+# Read+: through the chat's web-fetch tool; Claude Fable 5.1 through the
+# Read+: browser pane the same day
+# Source: JPL Horizons, spacecraft data sheet for Voyager 2 (-32),
+# Source+: revised Aug 19, 2022 -- "Formal predicted geocentric pointing
+# Source+: uncertainty on 2030-Jan-1: RA +/- 4.718 arcseconds, DEC +/- 3.715
+# Source+: arcseconds"; trajectory a 2022 refit by R. Jacobson of tracking
+# Source+: from the Neptune encounter to 1992.
+# Ref: https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-32'&OBJ_DATA='YES'&MAKE_EPHEM='NO'
+
+VOYAGER_2_POINTING_DEC_2030_ARCSEC = 3.715
+# Unit: arcsec
+# Status: measured V_SOURCED 2026-10-12 -- a predicted figure JPL prints
+# Figures: 4 -- the sheet prints 3.715
+# Read: data sheet, the uncertainty paragraph, 2026-10-12, Claude Opus 5.5
+# Read+: through the chat's web-fetch tool
+# Source: JPL Horizons, spacecraft data sheet for Voyager 2 (-32),
+# Source+: revised Aug 19, 2022 -- "DEC +/- 3.715 arcseconds", in the same
+# Source+: sentence as the RA figure above.
+# Ref: https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-32'&OBJ_DATA='YES'&MAKE_EPHEM='NO'
 
 # ============================================================
 # SAGITTARIUS A* AND GALACTIC-SCALE CONSTANTS

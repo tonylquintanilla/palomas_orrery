@@ -87,11 +87,11 @@ artifact, and it is short enough to copy.
 
 GATING AND REPORT-ONLY
 ----------------------
-Twenty-three checkers are pass/fail: a problem makes them exit non-zero.
+Twenty-four checkers are pass/fail: a problem makes them exit non-zero.
 Two are REPORT-ONLY -- worksheet_checker.py and provenance_scanner.py
 exit 0 whatever they find, and exit 1 only when they could not run.
 They are marked in the CHECKERS table, and the summary counts the
-gating twenty-three in its headline and quotes the two report-only verdicts
+gating twenty-four in its headline and quotes the two report-only verdicts
 underneath.
 
 The block quotes each tool's own note rather than restating it. A
@@ -167,6 +167,11 @@ the website half: GENERATORS gains Drawings export, export_drawings.py,
 which writes data/drawings/hills_cloud.json, the Hills cloud's dots for
 the website to draw; CHECKERS gains Drawings export check,
 test_drawings_export.py. Nine generators, twenty-three gating checkers.)
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-401,
+build 1: CHECKERS gains Position digits (L-401), test_position_digits.py,
+which builds the body hover offline and judges every distance and speed
+line against the error it works out itself, after eleven planted faults
+are each caught by name. Twenty-four gating checkers.)
 """
 
 import hashlib
@@ -298,6 +303,11 @@ CHECKERS = [
     # and each check is first shown able to fail.
     ('Drawings export check', ['test_drawings_export.py'],
      'DRAWINGS EXPORT:'),
+    # L-401, build 1: the body hover prints each distance and speed to
+    # the digits JPL's errors earn, judged against errors worked out in
+    # the checker itself; eleven faults planted first, each caught by name.
+    ('Position digits (L-401)', ['test_position_digits.py'],
+     'POSITION DIGITS:'),
     # A fourth field marks a tool REPORT-ONLY: it exits 0 whatever it
     # finds, so "passed" says only that it ran. Exactly two are, and
     # both are deliberate -- their numbers are the verdict, not their

@@ -35,6 +35,12 @@ Domain: orrery
 
 Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5 (L-431,
 new module).
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-401,
+build 1: the hover's sentence "JPL lists no orbit uncertainty for this
+body", false of JPL for a planet, now says what is true: JPL's small-body
+database has no entry for the body, or why it gave no uncertainty.
+report_exponent and format_by_error are now also used by
+position_accuracy.py.)
 """
 
 import math
@@ -440,6 +446,21 @@ def _typed_strings(days):
     return years_s, days_s
 
 
+def _sbdb_words(status):
+    """Why JPL's small-body database gave no period uncertainty, in true
+    words, from the status build_period_record saved (L-401, build 1)."""
+    status = status or ''
+    if status.startswith('SBDB gives no sigma'):
+        return "JPL's small-body database gives no uncertainty for this period."
+    if status.startswith('SBDB not reached'):
+        return "JPL's small-body database could not be reached when this was fetched."
+    if status.startswith('SBDB gives no period'):
+        return "JPL's small-body database gives no period for this body."
+    if status.startswith('SBDB found several'):
+        return "JPL's small-body database found more than one match for this body."
+    return "JPL's small-body database has no entry for this body."
+
+
 def period_hover_lines(resolved):
     """
     The hover's period lines, each ending in <br> except the last, every
@@ -470,8 +491,12 @@ def period_hover_lines(resolved):
     elif governs == 'year_change' and rec.get('sbdb_sigma_days') is not None:
         why = 'Rounded to how much the period changes in a year.'
     elif governs == 'year_change':
+        # L-401 build 1: say what is true. "JPL lists no orbit uncertainty"
+        # was false of JPL for a planet, whose orbit accuracy the 2014
+        # DE430 report states; what is missing is an entry in JPL's
+        # small-body database, which states the period's own uncertainty.
         why = ('Rounded to how much the period changes in a year;<br>'
-               'JPL lists no orbit uncertainty for this body.')
+               + _sbdb_words(rec.get('sbdb_status')))
     else:
         why = 'No error was measured, so the digits are not rounded to one.'
     return ('Orbital period: %s years (%s days)<br>%s<br>%s'

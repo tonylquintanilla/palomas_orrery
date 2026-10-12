@@ -1,12 +1,20 @@
 ---
 name: horizons-orbital-mechanics
-description: JPL Horizons API and orbital mechanics reference for the Paloma's Orrery project (astroquery Horizons queries, orbit_data_manager, osculating_cache_manager, idealized_orbits, apsidal_markers, spacecraft_encounters, close_approach_data). Use for any Paloma's Orrery task involving Horizons queries or ephemerides, coordinate center bodies, reference frames, osculating elements, orbit caches, encounter or flyby resolution, or whenever a rendered orbit looks wrong or an ephemeris API returns empty. Do not use for projects other than Paloma's Orrery.
-fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning
+description: JPL Horizons API and orbital mechanics reference for the Paloma's Orrery project (astroquery Horizons queries, orbit_data_manager, osculating_cache_manager, idealized_orbits, apsidal_markers, spacecraft_encounters, close_approach_data, position_accuracy, orbital_period). Use for any Paloma's Orrery task involving Horizons queries or ephemerides, coordinate center bodies, reference frames, osculating elements, orbit caches, a small body's position uncertainty (VEC_TABLE 2xr), orbital periods and the centre they are taken around, encounter or flyby resolution, or whenever a rendered orbit looks wrong or an ephemeris API returns empty. Do not use for projects other than Paloma's Orrery.
+fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods
 ---
 
 # Horizons and Orbital Mechanics Reference
 
-Skill version: 1.2 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.3 | 2026-10-12, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 47815de2. v1.3 (L-401, L-431) adds what two builds
+learned, in one version as both items asked: A Small Body's
+Uncertainty Comes With Its Position (VEC_TABLE='2xr', which astroquery
+0.4.11 cannot ask for or read, so a direct call read by column name);
+A Period Depends on Its Centre (the two-centre test and its saved
+choice); and the Small-Body Database's lookup of a pinned record by
+the name Horizons gives it, under Small-Body Record Pinning.
+Earlier: 1.2 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 32619f8d and gallery @ a7d1a542. v1.2 (L-395) adds
 Checking an Entry Against JPL, what the Horizons check's build learned:
 JPL's Lookup cannot see record numbers; a bare number also finds
@@ -55,6 +63,68 @@ periodic comets:
   the Daily Run's step 2) confirms every 30 days that each pin is still
   the newest record for its comet and reports a newer one for Tony; it
   never re-pins.
+- The Small-Body Database (SBDB) cannot find a Horizons record number,
+  as JPL's Lookup cannot (below). Ask it by the name Horizons gives the record: "2P/Encke"
+  becomes "2P", and a name ending in a bracketed designation, such as
+  "MAPS (C/2026 A1)", becomes that designation
+  (`orbital_period.sbdb_search_string`, L-431). SBDB's solution may not
+  be the pinned record's: its sigma for 2P's period read 0.00011075 d on
+  2026-10-11, where an earlier read had 0.00021413 d.
+
+## A Small Body's Uncertainty Comes With Its Position (L-401)
+
+Learned building the orrery's body hover, 2026-10-11 and 12. Design:
+documentation/DESIGN_L401_distance_digits_rulings_20261011.md; build:
+documentation/HANDOFF_L401_distance_build1_20261012.md.
+
+- Horizons' vector query with VEC_TABLE='2xr' returns, beside the
+  state, its 1-sigma uncertainties: X_s, Y_s, Z_s, VX_s, VY_s, VZ_s,
+  and the same in the RTN frame, R_s, T_s, N_s, VR_s, VT_s, VN_s. R
+  points "from coordinate origin to target point", so 3 x R_s is the
+  3-sigma of the distance from whatever centre was asked, not only the
+  Sun (read 2026-10-12 with the centre at Earth). Units follow
+  OUT_UNITS: AU and AU/day with 'AU-D'.
+- For asteroids and comets only. Read a missing column or "n.a." as
+  MISSING, never as zero.
+- Table 2 has no light time, range or range rate; work range and range
+  rate out from the state.
+- astroquery 0.4.11 cannot do this. Its request sets no VEC_TABLE, and
+  its parser has no unit for the extra columns (a KeyError) and fills
+  "n.a." with 0. So take astroquery's own request
+  (`vectors(get_query_payload=True)`), add VEC_TABLE, send it directly,
+  and read the columns BY NAME, never by position
+  (`position_accuracy.fetch_small_body_state`). The header's first
+  column reads "JDTDB,".
+- It is the position query, not an extra one. If it fails, fetch the
+  position the old way and record the uncertainty as missing; the
+  display then says it is not included. Never a tiny invented figure.
+- Write the sigma level into every field name (`range_3sigma_km`), and
+  key the figure by body, centre and date.
+- A check that it is the right figure: 3 x R_s matches the observer
+  table's quantity 39 (RNG_3sigma). Sedna from the Sun, 2026-10-12:
+  257,820 km against 257,817.569 km.
+- A speed's bound: VR_s, VT_s and VN_s combined by root-sum-square,
+  times 3 (ruled 2026-10-11).
+
+## A Period Depends on Its Centre (L-431)
+
+Learned building orbital periods, 2026-10-10 and 11. Rulings:
+documentation/DESIGN_L431_orbital_periods_rulings_20261011.md.
+
+- A distant body's osculating period depends on the centre it is taken
+  around. Sedna around the Sun: 12,917 years (2025-10-10) and 12,547
+  (2026-10-10); around the solar system's barycentre, 11,389.74 and
+  11,389.72. Encke is steady around the Sun (0.29 d in a year) and not
+  around the barycentre (7.75 d).
+- The two-centre test: ask Horizons' PR at the plot date and a Julian
+  year later (a year earlier if refused), around '@sun' and '@0'; keep
+  the centre whose period moved less. The choice is saved with the
+  period record in the orbit cache; a refresh asks only the chosen
+  centre, and runs the test again if that centre moved more than the
+  other did when it was chosen. Moons and the Pluto system keep the
+  centre the orrery gives them (`orbital_period.build_period_record`).
+- Horizons prints PR as 9.999E+99 for an open orbit; astroquery 0.4.11
+  maps PR to `P`, in days.
 
 ## Checking an Entry Against JPL (L-395)
 

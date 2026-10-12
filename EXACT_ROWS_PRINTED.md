@@ -5,7 +5,7 @@ Rebuilt by `exact_rows_report.py` on every orrery maintenance run. An exact row 
 
 ## Summary
 
-- 39 exact rows in `constants_new.py`.
+- 41 exact rows in `constants_new.py`.
 - 13 printed by at least one display: `SUN_RADIUS_KM`, `EARTH_LEO_UPPER_ALTITUDE_KM`, `EARTH_LEO_LOWER_ALTITUDE_KM`, `EARTH_VAN_ALLEN_OUTER_RADII`, `EARTH_SOLAR_WIND_PRESSURE_NPA`, `EARTH_SOLAR_WIND_BZ_NT`, `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG`, `EARTH_BOW_SHOCK_CUT_ANGLE_DEG`, `INNER_CORONA_RADII`, `OUTER_CORONA_RADII`, `HELMET_CUSP_RADII`, `INNER_LIMIT_OORT_CLOUD_AU`, `OUTER_OORT_CLOUD_AU`.
 - 43 printing lines: 33 in the orrery, 10 in the gallery.
 - Gallery pointers to exact rows with no PRINTS entry (NOT FOLLOWED): 14: `HELMET_CUSP_RADII` at `/objects/0/features/solar_atmosphere/streamer_belt/cusp_radius`, `INNER_CORONA_RADII` at `/objects/0/features/solar_atmosphere/inner_corona`, `ROCHE_LIMIT_DRAWN_RADII` at `/objects/0/features/solar_atmosphere/roche_limit/drawn_radius`, `OUTER_CORONA_RADII` at `/objects/0/features/solar_atmosphere/outer_corona`, `INNER_LIMIT_OORT_CLOUD_AU` at `/objects/0/features/oort_cloud/hills_cloud_torus/inner_radius`, `OUTER_OORT_CLOUD_AU` at `/objects/0/features/oort_cloud/outer_oort_clumpy/outer_radius`, `OUTER_OORT_CLOUD_AU` at `/objects/0/features/oort_cloud/galactic_tide/outer_radius`, `GALACTIC_NORTH_POLE_RA_J2000_DEG` at `/objects/0/features/oort_cloud/galactic_tide/galactic_pole/ra`, `GALACTIC_NORTH_POLE_DEC_J2000_DEG` at `/objects/0/features/oort_cloud/galactic_tide/galactic_pole/dec`, `OUTER_OORT_CLOUD_AU` at `/objects/0/features/oort_cloud/galactic_plane/ring_radius`, `GALACTIC_NORTH_POLE_RA_J2000_DEG` at `/objects/0/features/oort_cloud/galactic_plane/galactic_pole/ra`, `GALACTIC_NORTH_POLE_DEC_J2000_DEG` at `/objects/0/features/oort_cloud/galactic_plane/galactic_pole/dec`, `INNER_LIMIT_OORT_CLOUD_AU` at `/objects/0/features/oort_cloud/inner_oort_limit`, `OUTER_OORT_CLOUD_AU` at `/objects/0/features/oort_cloud/outer_oort`.
@@ -110,13 +110,13 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 ### `INNER_LIMIT_OORT_CLOUD_AU`
 
-- orrery `palomas_orrery.py` line 10452: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
+- orrery `palomas_orrery.py` line 10502: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
 - orrery `solar_visualization_shells.py` line 137: `_OORT_INNER_EDGE = row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)`
 - orrery `solar_visualization_shells.py` line 1593: `f'From {_OORT_INNER_EDGE} AU ({row_text("INNER_LIMIT_OORT_CLOUD_AU", unit="km", grouping=True...`
 
 ### `OUTER_OORT_CLOUD_AU`
 
-- orrery `palomas_orrery.py` line 10452: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
+- orrery `palomas_orrery.py` line 10502: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
 - orrery `solar_visualization_shells.py` line 151: `_OORT_OUTER_EDGE = row_text('OUTER_OORT_CLOUD_AU', grouping=True)`
 
 ## Printed to a terminal only
@@ -130,9 +130,10 @@ A tool logging a value is not a display a visitor sees, so these are not counted
 
 No display prints these exact rows. Under Rule 7 they carry no print count. The number is how many other orrery lines name the row, so a use that prints it through another name can still be found by reading those lines.
 
-- `KM_PER_AU`: named on 218 other orrery line(s).
+- `KM_PER_AU`: named on 214 other orrery line(s).
 - `PARSEC_TO_AU`: named on 10 other orrery line(s).
 - `S_PER_HOUR`: named on 0 other orrery line(s).
+- `S_PER_DAY`: named on 1 other orrery line(s).
 - `D_PER_JULIAN_YEAR`: named on 8 other orrery line(s).
 - `EARTH_POLE_RA_J2000_DEG`: named on 6 other orrery line(s).
   - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 925 (config `/objects/1/features/orientation/pole/ra`): `var ra = measured(pole.ra, "deg", slug + "/orientation/pole/ra", warn);`
@@ -176,6 +177,7 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
   - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 83 (config `/objects/8/position_accuracy`): `v = node.value;`
   - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 82 (config `/objects/12/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
   - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 83 (config `/objects/12/position_accuracy`): `v = node.value;`
+- `DE430_MOON_POSITION_PLACE_KM`: named on 0 other orrery line(s).
 - `GM_SUN_SI`: named on 0 other orrery line(s).
 - `M3_PER_KM3`: named on 1 other orrery line(s).
 

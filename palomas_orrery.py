@@ -73,6 +73,14 @@ Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5 (L-431,
 build 1: the precession note's orbit count and fetch_position's period
 record read the period fetched from JPL first and the typed table last,
 through orbital_period.py. Nothing drawn changes.)
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-401,
+build 1: fetch_position asks for a small body's position with JPL's own
+uncertainty for the date, VEC_TABLE='2xr', in the same query, through
+position_accuracy.fetch_small_body_state; the hover prints by it.
+fetch_radec_for_hover also returns the distance from Earth (quantity 20,
+same query), which turns a spacecraft's data-sheet angle into km. The
+animation's analytical positions are marked as such, so their hover
+states no accuracy. Nothing drawn changes.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -1264,23 +1272,50 @@ def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_
         else:
             location = '@' + str(center_id)
 
-        # Query the Horizons system with coordinates relative to location
-        obj = Horizons(id=object_id, id_type=id_type, location=location, epochs=epochs)
-        vectors = obj.vectors()
+        # A small body's position comes with JPL's own uncertainty for this
+        # date, from the same vector query (VEC_TABLE='2xr'), by a direct
+        # call because astroquery cannot ask for it (L-401, build 1;
+        # position_accuracy.py). No extra query. If that call fails, the
+        # position is fetched as before and the hover says the uncertainty
+        # is not included -- never a tiny invented one.
+        from position_accuracy import fetch_small_body_state, is_small_body_fetch
+        position_uncertainty = None
+        direct_state = None
+        if is_small_body_fetch(object_id, id_type):
+            try:
+                direct_state, position_uncertainty = fetch_small_body_state(
+                    object_id, id_type, location, epochs[0])
+            except Exception as ex:
+                print(f"[L-401] {object_id}: the vector query with JPL's uncertainty "
+                      f"failed ({ex}); fetching the position without it", flush=True)
+                position_uncertainty = {
+                    'missing': str(ex)[:200],
+                    'key': {'body': str(object_id), 'center': str(location),
+                            'jd': epochs[0]}}
 
-        if len(vectors) == 0:
-            print(f"No data returned for object {object_id} on {date_obj}", flush=True)
-            return None
+        if direct_state is not None:
+            x, y, z = direct_state['x'], direct_state['y'], direct_state['z']
+            range_ = direct_state['range']            # AU, from the plot's centre
+            range_rate = direct_state['range_rate']   # AU/day
+            vx, vy, vz = direct_state['vx'], direct_state['vy'], direct_state['vz']
+        else:
+            # Query the Horizons system with coordinates relative to location
+            obj = Horizons(id=object_id, id_type=id_type, location=location, epochs=epochs)
+            vectors = obj.vectors()
 
-        # Extract desired fields with error handling
-        x = float(vectors['x'][0]) if 'x' in vectors.colnames else None
-        y = float(vectors['y'][0]) if 'y' in vectors.colnames else None
-        z = float(vectors['z'][0]) if 'z' in vectors.colnames else None
-        range_ = float(vectors['range'][0]) if 'range' in vectors.colnames else None  # Distance in AU from the Sun
-        range_rate = float(vectors['range_rate'][0]) if 'range_rate' in vectors.colnames else None  # AU/day
-        vx = float(vectors['vx'][0]) if 'vx' in vectors.colnames else None  # AU/day
-        vy = float(vectors['vy'][0]) if 'vy' in vectors.colnames else None
-        vz = float(vectors['vz'][0]) if 'vz' in vectors.colnames else None
+            if len(vectors) == 0:
+                print(f"No data returned for object {object_id} on {date_obj}", flush=True)
+                return None
+
+            # Extract desired fields with error handling
+            x = float(vectors['x'][0]) if 'x' in vectors.colnames else None
+            y = float(vectors['y'][0]) if 'y' in vectors.colnames else None
+            z = float(vectors['z'][0]) if 'z' in vectors.colnames else None
+            range_ = float(vectors['range'][0]) if 'range' in vectors.colnames else None  # Distance in AU from the Sun
+            range_rate = float(vectors['range_rate'][0]) if 'range_rate' in vectors.colnames else None  # AU/day
+            vx = float(vectors['vx'][0]) if 'vx' in vectors.colnames else None  # AU/day
+            vy = float(vectors['vy'][0]) if 'vy' in vectors.colnames else None
+            vz = float(vectors['vz'][0]) if 'vz' in vectors.colnames else None
         velocity = np.sqrt(vx**2 + vy**2 + vz**2) if vx is not None and vy is not None and vz is not None else 'N/A'
 
         # Calculate distance in light-minutes and light-hours
@@ -1359,6 +1394,7 @@ def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_
             'distance_lm': distance_lm,
             'distance_lh': distance_lh,
             'mission_info': mission_info,  # Include mission info if available
+            'position_uncertainty': position_uncertainty,  # L-401: a small body's 2xr record, or None
             'calculated_orbital_period': calculated_orbital_period,  # New: separated calculated period
             'known_orbital_period': known_orbital_period,  # New: added known period from reference data
             'orbital_period': orbital_period  # Original variable preserved for backward compatibility
@@ -1795,14 +1831,16 @@ def calculate_analytical_position(obj_name, date_obj, center_id='Sun'):
 
 def fetch_radec_for_hover(object_id, date_obj, id_type=None):
     """
-    Fetch RA/Dec and uncertainties for hover text
+    Fetch RA/Dec and uncertainties for hover text, and the distance from
+    Earth (L-401: a spacecraft's data-sheet uncertainty is an angle seen
+    from Earth, converted at this distance; quantity 20, same query).
     
     Returns:
-        tuple: (ra_deg, dec_deg, ra_3sigma, dec_3sigma)
+        tuple: (ra_deg, dec_deg, ra_3sigma, dec_3sigma, earth_distance_au)
     """
     try:
         if object_id == '399':  # Earth doesn't have Earth-centered coordinates
-            return None, None, None, None
+            return None, None, None, None, None
             
         times = Time([date_obj])
         epochs = times.jd.tolist()
@@ -1813,14 +1851,16 @@ def fetch_radec_for_hover(object_id, date_obj, id_type=None):
         # Request ephemerides with extra precision columns
         # The quantities parameter requests specific columns including uncertainties
         try:
-            ephemerides = earth_obj.ephemerides(quantities='1,2,36,37')
-            # 1=RA, 2=DEC, 36=RA_3sigma, 37=DEC_3sigma (check JPL docs for exact numbers)
+            ephemerides = earth_obj.ephemerides(quantities='1,2,20,36,37')
+            # 1 and 2 = RA/DEC, 36 and 37 = JPL's 3-sigma sky-position
+            # uncertainties (as before); 20 = the distance from the observer,
+            # astroquery's 'delta' in AU (L-401)
         except:
             # Fallback to basic ephemerides if enhanced request fails
             ephemerides = earth_obj.ephemerides()
         
         if len(ephemerides) == 0:
-            return None, None, None, None
+            return None, None, None, None, None
             
         # Look for apparent coordinates
         ra_deg = None
@@ -1856,11 +1896,18 @@ def fetch_radec_for_hover(object_id, date_obj, id_type=None):
             except:
                 dec_3sigma = None
             
-        return ra_deg, dec_deg, ra_3sigma, dec_3sigma
+        earth_distance_au = None
+        if 'delta' in ephemerides.colnames:
+            try:
+                earth_distance_au = float(ephemerides['delta'][0])
+            except Exception:
+                earth_distance_au = None
+
+        return ra_deg, dec_deg, ra_3sigma, dec_3sigma, earth_distance_au
         
     except Exception as e:
         print(f"Could not fetch RA/Dec for {object_id}: {e}", flush=True)
-        return None, None, None, None
+        return None, None, None, None, None
     
 
 def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_size=DEFAULT_MARKER_SIZE, 
@@ -1887,11 +1934,13 @@ def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_siz
         if hover_data == "Full Object Info":
 
             # Fetch RA/Dec and uncertainties - NOW RECEIVING 4 VALUES
-            ra_deg, dec_deg, ra_3sigma, dec_3sigma = fetch_radec_for_hover(
+            ra_deg, dec_deg, ra_3sigma, dec_3sigma, earth_distance_au = fetch_radec_for_hover(
                 obj_info['id'], 
                 get_date_from_gui(), 
                 obj_info.get('id_type')
             )
+            if earth_distance_au is not None:
+                obj_data['earth_distance_au'] = earth_distance_au   # L-401
             
             if ra_deg is not None and dec_deg is not None:
                 # Add RA/Dec and uncertainties to obj_data for hover text formatting
@@ -6886,7 +6935,8 @@ def animate_objects(step, label):
                                             'z': z_final,
                                             'velocity': v_au_day,  # AU/day - expected by hover text
                                             'range': r,
-                                            'date': anim_date
+                                            'date': anim_date,
+                                            'analytical_position': True,  # L-401: not JPL's; no accuracy stated
                                         })
 
                                     positions_over_time[obj['name']] = analytical_positions

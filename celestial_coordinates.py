@@ -5,6 +5,12 @@ for celestial objects in Paloma's Orrery.
 
 Role: computation
 Domain: orrery
+
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-401,
+build 1: the typed sky-position table MAJOR_BODY_UNCERTAINTIES and its
+"typical" fallbacks are removed; the hover prints only JPL's fetched
+3-sigma figure, says "as seen from Earth", and says in words when JPL
+gives none.)
 """
 
 import numpy as np
@@ -132,277 +138,42 @@ def add_radec_to_hover_text(hover_text, obj_data, obj_name=None, insert_after_li
     return hover_text
 
 
-# Add this to celestial_coordinates.py
-
-# High-precision uncertainty values for solar system bodies
-# Based on DE440/441 planetary ephemeris and mission data
-# Values in arcseconds (3-sigma)
-MAJOR_BODY_UNCERTAINTIES = {
-    # ========== PLANETS ==========
-    'Mercury': 0.005,
-    'Venus': 0.003,
-    'Mars': 0.002,
-    'Jupiter': 0.05,
-    'Saturn': 0.1,
-    'Uranus': 0.3,
-    'Neptune': 0.5,
-    
-    # ========== DWARF PLANETS ==========
-    'Ceres': 0.01,      # Dawn mission
-    'Pluto': 0.8,       # New Horizons
-    'Eris': 5.0,
-    'Makemake': 3.0,
-    'Haumea': 2.0,
-    'Gonggong': 5.0,    # 2007 OR10
-    'Quaoar': 3.0,
-    'Sedna': 10.0,
-    'Orcus': 3.0,
-    'Salacia': 5.0,
-    'Varuna': 5.0,
-    'Ixion': 5.0,
-    '2002 MS4': 8.0,
-    'Varda': 8.0,
-    
-    # ========== EARTH'S MOON ==========
-    'Moon': 0.0001,     # Lunar laser ranging
-    
-    # ========== MARTIAN MOONS ==========
-    'Phobos': 0.01,
-    'Deimos': 0.02,
-    
-    # ========== JOVIAN MOONS ==========
-    'Io': 0.01,
-    'Europa': 0.01,
-    'Ganymede': 0.01,
-    'Callisto': 0.01,
-    'Amalthea': 0.05,
-    'Himalia': 0.1,
-    'Thebe': 0.05,
-    'Metis': 0.05,
-    'Adrastea': 0.05,
-    'Pasiphae': 0.5,
-    'Sinope': 0.5,
-    'Lysithea': 0.5,
-    'Carme': 0.5,
-    'Ananke': 0.5,
-    'Leda': 0.5,
-    'Elara': 0.3,
-    
-    # ========== SATURNIAN MOONS ==========
-    'Mimas': 0.05,
-    'Enceladus': 0.05,
-    'Tethys': 0.05,
-    'Dione': 0.05,
-    'Rhea': 0.05,
-    'Titan': 0.05,
-    'Hyperion': 0.1,
-    'Iapetus': 0.1,
-    'Phoebe': 0.2,
-    'Janus': 0.05,
-    'Epimetheus': 0.05,
-    'Helene': 0.1,
-    'Telesto': 0.1,
-    'Calypso': 0.1,
-    'Atlas': 0.05,
-    'Prometheus': 0.05,
-    'Pandora': 0.05,
-    'Pan': 0.05,
-    'Daphnis': 0.05,
-    
-    # ========== URANIAN MOONS ==========
-    'Ariel': 0.3,
-    'Umbriel': 0.3,
-    'Titania': 0.3,
-    'Oberon': 0.3,
-    'Miranda': 0.3,
-    'Puck': 0.5,
-    'Cordelia': 0.5,
-    'Ophelia': 0.5,
-    'Bianca': 0.5,
-    'Cressida': 0.5,
-    'Desdemona': 0.5,
-    'Juliet': 0.5,
-    'Portia': 0.5,
-    'Rosalind': 0.5,
-    'Belinda': 0.5,
-    
-    # ========== NEPTUNIAN MOONS ==========
-    'Triton': 0.5,
-    'Nereid': 1.0,
-    'Proteus': 0.8,
-    'Larissa': 0.8,
-    'Galatea': 0.8,
-    'Despina': 0.8,
-    'Thalassa': 0.8,
-    'Naiad': 0.8,
-    
-    # ========== PLUTONIAN SYSTEM ==========
-    'Charon': 1.0,
-    'Nix': 2.0,
-    'Hydra': 2.0,
-    'Kerberos': 3.0,
-    'Styx': 3.0,
-    
-    # ========== MAIN BELT ASTEROIDS (DE440 perturbers) ==========
-    'Vesta': 0.01,      # Dawn mission
-    'Pallas': 0.05,
-    'Juno': 0.1,
-    'Hygiea': 0.2,
-    'Davida': 0.2,
-    'Interamnia': 0.3,
-    'Europa (asteroid)': 0.3,  # 52 Europa
-    'Eunomia': 0.2,
-    'Psyche': 0.1,      # Upcoming mission
-    'Euphrosyne': 0.3,
-    'Cybele': 0.3,
-    'Sylvia': 0.2,
-    'Thisbe': 0.3,
-    'Camilla': 0.3,
-    'Herculina': 0.3,
-    'Doris': 0.3,
-    
-    # ========== MISSION-VISITED ASTEROIDS ==========
-    'Bennu': 0.001,     # OSIRIS-REx
-    'Ryugu': 0.001,     # Hayabusa2
-    'Eros': 0.001,      # NEAR Shoemaker
-    'Itokawa': 0.001,   # Hayabusa
-    'Mathilde': 0.01,   # NEAR flyby
-    'Ida': 0.01,        # Galileo
-    'Dactyl': 0.02,     # Ida's moon
-    'Gaspra': 0.01,     # Galileo
-    'Lutetia': 0.01,    # Rosetta
-    'Steins': 0.01,     # Rosetta
-    'Annefrank': 0.05,  # Stardust
-    'Braille': 0.05,    # Deep Space 1
-    'Toutatis': 0.001,  # Radar + Chang'e 2
-    'Didymos': 0.01,    # DART impact
-    'Dimorphos': 0.02,  # Didymos moon
-    'Arrokoth': 1.0,    # New Horizons (2014 MU69)
-    
-    # ========== NEAR-EARTH ASTEROIDS (Radar observed) ==========
-    'Apophis': 0.001,
-    '2005 YU55': 0.01,
-    '1999 JM8': 0.01,
-    '2004 BL86': 0.01,
-    '2000 DP107': 0.01,
-    '1998 KY26': 0.01,
-    '2017 YE5': 0.01,
-    '1999 KW4': 0.01,
-    '2003 YT1': 0.01,
-    '2014 HQ124': 0.01,
-    '2014 JO25': 0.01,
-    '2015 TB145': 0.01,
-    
-    # ========== TROJAN ASTEROIDS ==========
-    'Patroclus': 1.0,   # Lucy target (binary)
-    'Menoetius': 1.0,   # Patroclus companion
-    'Eurybates': 1.0,   # Lucy target
-    'Polymele': 1.0,    # Lucy target
-    'Leucus': 1.0,      # Lucy target
-    'Orus': 1.0,        # Lucy target
-    'Donald Johanson': 1.0,  # Lucy target
-    'Hektor': 0.5,      # Largest trojan
-    'Agamemnon': 1.0,
-    'Achilles': 1.0,
-    'Nestor': 1.0,
-    'Diomedes': 1.0,
-    
-    # ========== CENTAURS ==========
-    'Chiron': 2.0,
-    'Pholus': 5.0,
-    'Nessus': 8.0,
-    'Asbolus': 8.0,
-    'Chariklo': 3.0,    # Has rings
-    'Hylonome': 10.0,
-    'Bienor': 10.0,
-    'Amycus': 10.0,
-    
-    # ========== COMET NUCLEI ==========
-    'Halley': 10.0,     # Currently distant
-    'Encke': 1.0,       # Short period
-    'Tempel 1': 0.5,    # Deep Impact
-    'Wild 2': 0.01,     # Stardust
-    'Borrelly': 0.01,   # Deep Space 1
-    'Churyumov-Gerasimenko': 0.001,  # Rosetta (67P)
-    '67P/Churyumov-Gerasimenko': 0.001,  # Alternative designation
-    'Hartley 2': 0.01,  # EPOXI
-    'Giacobini-Zinner': 1.0,  # ICE
-    'Grigg-Skjellerup': 1.0,   # Giotto
-    'Wirtanen': 0.5,    # Original Rosetta target
-    'Schwassmann-Wachmann 3': 2.0,
-    'Holmes': 5.0,
-    'Hale-Bopp': 20.0,  # Currently very distant
-    'Hyakutake': 15.0,
-    'McNaught': 10.0,
-    'ISON': 10.0,       # Destroyed
-    'Lovejoy': 5.0,
-    'NEOWISE': 3.0,
-    'PanSTARRS': 5.0,
-    'Borisov': 10.0,    # Interstellar
-    
-    # ========== SPACECRAFT (when tracked as objects) ==========
-    'Voyager 1': 100.0,
-    'Voyager 2': 100.0,
-    'New Horizons': 10.0,
-    'Pioneer 10': 1000.0,  # Contact lost
-    'Pioneer 11': 1000.0,  # Contact lost
-    'Cassini': 0.1,        # When active
-    'Juno': 0.01,          # Currently at Jupiter
-    'Dawn': 0.01,          # Mission ended at Ceres
-    'OSIRIS-REx': 0.01,
-    'Hayabusa2': 0.01,
-    'Parker Solar Probe': 0.001,
-    'Solar Orbiter': 0.01,
-    'BepiColombo': 0.01,
-    'JUICE': 0.01,
-    'Europa Clipper': 0.01,
-    'Lucy': 0.01,
-    'Psyche (spacecraft)': 0.01,
-    'Dragonfly': 0.1,      # Future
-    
-    # ========== SPECIAL OBJECTS ==========
-    'Sun': 0.001,       # Barycenter position
-    'Earth-Moon Barycenter': 0.0001,
-    'Pluto-Charon Barycenter': 0.5,
-    
-    # ========== ARTIFICIAL SATELLITES (if tracking) ==========
-    'ISS': 0.001,       # International Space Station
-    'HST': 0.001,       # Hubble Space Telescope
-    'JWST': 0.01,       # James Webb Space Telescope
-    'Gaia': 0.001,
-    'TESS': 0.001,
-    'Spitzer': 0.01,
-    'Kepler': 0.01,
-    'WMAP': 0.1,
-    'Planck': 0.1,
-    
-    # ========== METEOR SHOWER PARENTS ==========
-    'Swift-Tuttle': 5.0,    # Perseids
-    'Tempel-Tuttle': 3.0,   # Leonids
-    'Thatcher': 10.0,       # Lyrids
-    'Phaethon': 0.1,        # Geminids (asteroid)
-}
+# The sky position's uncertainty (L-401, build 1, 2026-10-12). Only JPL's
+# own 3-sigma figures, fetched with the position, are printed. The typed
+# table of planet and moon uncertainties that stood here, and its fallbacks
+# marked "typical" for everything else, had no source line and are removed: the
+# DE440 paper gives no angular accuracy for a planet (read by GPT, Claude
+# Fable 5.1 and Claude Opus 5.5, 2026-10-11). Where Horizons gives no
+# figure the hover says so in words ("Horizons gives no uncertainty with
+# it": a spacecraft's data sheet may state one). A sourced figure for a
+# planet, worked
+# out from its position row and its distance from Earth, is kept for later
+# on L-401.
 
 def get_precision_note(obj_data, obj_name=None):
     """
-    Get precision estimate - prefer actual JPL uncertainties, 
-    then use known values for major bodies, finally fall back to estimates.
-    
+    JPL's 3-sigma sky-position uncertainty as fetched with the position,
+    e.g. "+/-0.5 arcsec", or None when Horizons gave none.
+
     Parameters:
-        obj_data (dict): Object data containing possible uncertainty values
-        obj_name (str): Name of the object (optional but recommended)
-        
+        obj_data (dict): Object data, with 'ra_3sigma' and 'dec_3sigma' in
+            arcseconds where fetch_radec_for_hover found them
+        obj_name (str): unused; kept so existing callers need not change
+
     Returns:
-        str: Formatted precision string (e.g., "+/-0.5 arcsec" or "+/-10 arcsec")
+        str or None
     """
-    
-    # 1. Check for actual 3-sigma uncertainties from JPL
     if 'ra_3sigma' in obj_data and obj_data['ra_3sigma'] is not None:
         ra_sigma = obj_data['ra_3sigma']  # in arcseconds
         dec_sigma = obj_data.get('dec_3sigma', ra_sigma)  # in arcseconds
         
         # Use the larger of the two for a conservative estimate
         max_sigma = max(ra_sigma, dec_sigma) if dec_sigma is not None else ra_sigma
+        try:
+            if not math.isfinite(float(max_sigma)):
+                return None   # a masked "n.a." read as nan is no figure
+        except (TypeError, ValueError):
+            return None
         
         # Format based on magnitude
         if max_sigma < 0.001:
@@ -417,50 +188,19 @@ def get_precision_note(obj_data, obj_name=None):
             return f"+/-{max_sigma:.1f} arcsec"
         else:
             return f"+/-{max_sigma:.0f} arcsec"
-    
-    # 2. Check if this is a known major body
-    if obj_name and obj_name in MAJOR_BODY_UNCERTAINTIES:
-        uncertainty = MAJOR_BODY_UNCERTAINTIES[obj_name]
-        
-        # Format based on magnitude
-        if uncertainty < 0.001:
-            return f"+/-{uncertainty:.4f} arcsec"
-        elif uncertainty < 0.01:
-            return f"+/-{uncertainty:.3f} arcsec"
-        elif uncertainty < 0.1:
-            return f"+/-{uncertainty:.2f} arcsec"
-        elif uncertainty < 1:
-            return f"+/-{uncertainty:.1f} arcsec"
-        else:
-            return f"+/-{uncertainty:.0f} arcsec"
-    
-    # 3. Fallback to type-based estimates
-    obj_type = obj_data.get('object_type', 'unknown')
-    
-    if obj_type == 'satellite':
-        return "+/-0.1 arcsec"  # Most moons are well-tracked
-    elif obj_type == 'orbital':
-        # Check if it might be an asteroid/comet by name pattern
-        if obj_name:
-            # Common patterns for minor bodies
-            if any(char.isdigit() for char in obj_name[:4]):  # Starts with number (e.g., "2023 FY")
-                return "+/-10 arcsec"  # New discovery uncertainty
-            elif '/' in obj_name:  # Comet designation (e.g., "C/2023 A1")
-                return "+/-5 arcsec"
-        return "+/-1 arcsec"  # Default for established orbital bodies
-    elif obj_type == 'trajectory':
-        return "+/-5 arcsec"  # Spacecraft, comets
-    else:
-        return "+/-10 arcsec"  # Unknown/other
+    return None
 
 
 def format_radec_hover_component(obj_data, obj_name=None, compact=False):
     """
-    Format RA/Dec for hover text with actual uncertainties when available.
+    Format RA/Dec for hover text, with JPL's fetched uncertainty where
+    Horizons gives one and a plain sentence where it does not. The
+    position is asked from Earth's centre (fetch_radec_for_hover), so the
+    line says "as seen from Earth".
     
     Parameters:
         obj_data (dict): Object data possibly containing JPL uncertainties
-        obj_name (str): Name of the object (optional but recommended)
+        obj_name (str): Name of the object (optional)
         compact (bool): Whether to use compact formatting
         
     Returns:
@@ -472,25 +212,21 @@ def format_radec_hover_component(obj_data, obj_name=None, compact=False):
     if not ra_string or not dec_string:
         return ""
     
-    # Get precision note - will check JPL data, then major body lookup, then estimates
     precision_note = get_precision_note(obj_data, obj_name)
-    
-    # Add source indicator for transparency
-    source_note = ""
-    if 'ra_3sigma' in obj_data and obj_data['ra_3sigma'] is not None:
-        source_note = ", JPL Horizons 3-sigma"
-    elif obj_name and obj_name in MAJOR_BODY_UNCERTAINTIES:
-        source_note = ", JPL DE440/441 ephemeris"
+    if precision_note:
+        note = f"apparent, as seen from Earth, {precision_note}, JPL Horizons 3-sigma"
     else:
-        source_note = ", typical"
+        # The query returned none. Not "JPL gives none": a spacecraft's data
+        # sheet can state one (the Voyagers, read 2026-10-12, L-401).
+        note = "apparent, as seen from Earth; Horizons gives no uncertainty with it"
     
     if compact:
-        return f"RA/Dec: {ra_string}, {dec_string} (apparent, {precision_note}{source_note})"
+        return f"RA/Dec: {ra_string}, {dec_string}<br>({note})"
     else:
         return (f"Right Ascension: {ra_string}<br>"
-                f"  (apparent, {precision_note}{source_note})<br>"
+                f"  ({note})<br>"
                 f"Declination: {dec_string}<br>"
-                f"  (apparent, {precision_note}{source_note})")
+                f"  ({note})")
 
 
 def determine_coordinate_precision(obj_data, obj_name):

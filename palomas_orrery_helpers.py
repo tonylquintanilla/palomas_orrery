@@ -15,6 +15,10 @@ Role: utility
 Domain: orrery
 
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-401,
+build 1: fetch_trajectory marks a frame it interpolated, or copied from
+another date, 'not_fetched_for_date', so the body hover states no
+accuracy for it.)
 """
 #Paloma's Orrery - Solar System Visualization Tool
 
@@ -515,7 +519,10 @@ def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None,
                         'distance_km': interp_distance_km,
                         'distance_lm': interp_distance_lm,
                         'distance_lh': interp_distance_lh,
-                        'date': dates_list[i]
+                        'date': dates_list[i],
+                        # L-401: not JPL's position for this date, so the
+                        # hover states no accuracy for it.
+                        'not_fetched_for_date': True
                     }
                     interpolated_count += 1
                     
@@ -523,10 +530,12 @@ def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None,
                 elif prev_idx >= 0:
                     positions[i] = positions[prev_idx].copy()
                     positions[i]['date'] = dates_list[i]
+                    positions[i]['not_fetched_for_date'] = True   # L-401
                     interpolated_count += 1
                 elif next_idx < len(positions):
                     positions[i] = positions[next_idx].copy()
                     positions[i]['date'] = dates_list[i]
+                    positions[i]['not_fetched_for_date'] = True   # L-401
                     interpolated_count += 1
 
         print(f"Interpolated positions: {interpolated_count}")

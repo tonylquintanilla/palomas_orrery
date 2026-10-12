@@ -93,6 +93,9 @@ cloud drawn as dots along orbits following Nesvorny et al. (2025).)
 Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5
 (L-431: d_per_yr, for D_PER_JULIAN_YEAR, the exact conversion an
 orbital period's years go through.)
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5
+(L-401: s_per_d, for S_PER_DAY, the exact conversion the body hover's
+speed in AU per day goes through.)
 """
 
 TOKENS = {
@@ -258,6 +261,13 @@ TOKENS = {
         "dimension": "d / yr",
         "defining_constant": None,
         "meaning": "days per Julian year, an exact unit conversion",
+    },
+    # L-401 (2026-10-12): seconds per day, the conversion the body hover's
+    # speed in AU per day goes through.
+    "s_per_d": {
+        "dimension": "s / d",
+        "defining_constant": None,
+        "meaning": "seconds per day, an exact unit conversion",
     },
     # L-421 (2026-10-10): two named pure numbers for the Hills cloud,
     # drawn as dots along orbits following Nesvorny et al. (2025), Fig. 3.
