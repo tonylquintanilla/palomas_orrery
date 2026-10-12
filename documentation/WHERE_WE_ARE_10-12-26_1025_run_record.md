@@ -458,9 +458,215 @@ CHECKERS -- the verdict informs the push call
   Maintenance run, offline     ok
 
   NEXT:
-    1. GitHub Desktop: look at the change list, then commit and push.
+    1. GitHub Desktop: look at the change list, then commit and push. -- orrery: e6a7e8a671b45b1a69dee0f2b824f55899ef6d89 gallery: f9453ddbc8b29ed15550a4e980bf3688eed79c82
     2. Then the dashboard's Gallery Maintenance Run -- live, AFTER a push.
+
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
 ======================================================================
 
+LIVE -- what the deployed site actually serves
+
+  fetching 16 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   gallery/solar_system_drawer.js                 matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+    SERVED   data/solar-system/drawings/hills_cloud.json    matches the working copy
+
+  PASS Served reachability       2.4s  all 16 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 15f61d73
+
+  PASS Export freshness          0.2s  the served export is the orrery's
+                                    at 15f61d73, byte for byte
+
+  orrery HEAD e6a7e8a6
+  examining 7 of 119 links; the other 112 are served from the export
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  7 pointers: 4 match, 0 DRIFT, 0 UNIT MISMATCH, 3 could not be examined.
+
+  PASS Store drift               1.4s  7 pointers against orrery e6a7e8a6
+                                    -- 4 match, 0 DRIFT, 0 UNIT
+                                    MISMATCH, 3 could not be examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            7 pointers against orrery e6a7e8a6 -- 4
+  last swap 2026-10-12T18:33:15.404579+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+======================================================================
+
+The look is your eyes on the hovers: the numbers come from JPL, but whether the words read right is your call. It's the same list as section 6 of the L-401 handoff.
+
+**Before you look**
+1. Run `patch_L401_3_body_hover_20261012.py` from the orrery folder. At the end it asks JPL for the five bodies at today's date, 00:00 UTC, and prints each hover the way the orrery will show it. -- done
+2. Run `orrery_maintenance_run.py`. Expect 24 of 24 and "0 TIER-1 -- the push gate holds".
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261012T183806Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 2.0s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Skill manifest               0.2s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.2s  unchanged (1 checked, not written)
+  Objects export               0.1s  unchanged (1 checked, not written)
+  Drawings export              0.4s  unchanged (1 checked, not written)
+  Module atlas                 7.7s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.6s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Exact rows report            2.0s  rewrote EXACT_ROWS_PRINTED.md -- 13 of 41
+                                     exact rows printed at 43 lines (33 orrery,
+                                     10 gallery); 8 drawn only, 14 not followed,
+                                     0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.2s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.3s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       1.6s  Export matches the store: sha256
+                                     2a1211f8cce2 on both sides; 127 rows
+                                     re-read, 56 not exported, 31 tokens; 320
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.1s  pass
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      2.2s  PASSING -- 13 printed exact rows each state
+                                     a count; 33 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.7s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.2s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 126 status lines in constants_new.py are
+                                     well formed; 54 rows carry none.
+  Row shape                    0.1s  All 183 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.2s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          18.2s  PASS -- all 311 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.4s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.4s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check        0.4s  PASS -- 3 of 3 planted faults caught;
+                                     hills_cloud 3600 dots, tilt 30.9 deg, sha256
+                                     a51e93118069
+  Position digits (L-401)      2.3s  PASS -- 11 of 11 planted faults caught by
+                                     name; 23 hovers examined, 165 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name
+  Worksheet checker           10.5s  74 of 110 routed, 8 clean
+  Worksheet checker tests     19.5s  All 135 checks passed
+  Worksheet key round trip     1.3s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         32.7s  All 76 checks passed
+  Extractor pins               0.7s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          17.9s  0 TIER-1 -- the push gate holds
+
+======================================================================
+  24 of 24 gating checkers passed -- 134.4s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2195 file(s) examined, 7 written, 0 created, 0 removed, 6 rewritten identically
+    written   EXACT_ROWS_PRINTED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      DATA_INVENTORY.md
+      LEDGER_CONSOLIDATED.md
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+**The look**
+3. Open the orrery fresh and set the time to 00:00, so the numbers match the patch's printout.
+4. Plot Mercury, Sedna and Encke from the Sun, Io from Jupiter, and Voyager 1. Hover each one and compare it with the printout line by line.
+
+**What each should show**
+- **Mercury:** whole kilometers and AU to eight decimals. No surface line, because the Sun has no solid surface. It says the distance is rounded to JPL's published accuracy for Mercury's orbit. The speed is about six decimals in km/s. -- 
+- **Sedna:** kilometers to the nearest million and AU to two decimals. It says the figure is JPL's uncertainty for this position on this date, at three standard deviations. The speed is to three decimals in km/s.
+- **Encke:** kilometers to the nearest thousand, with the same sentences as Sedna.
+- **Io from Jupiter:** whole kilometers and no surface line. It says JPL states no accuracy for this position and no uncertainty for its speed.
+- **Voyager 1:** kilometers to the nearest million and AU to three decimals. It says the distance is rounded to JPL's predicted sky-position uncertainty for 2030, 1.701 arcseconds seen from Earth, and that the conversion to kilometers is ours.
+- **Every sky line** says "as seen from Earth". Sedna's and Encke's show JPL's figure. The planets' and Voyager's say Horizons gives no uncertainty with it.
+
+**Your verdicts**, in your run record: "-- correct" or "-- not clear" for each of these:
+- the no-error sentences
+- the Voyager sentence
+- the speed sentences
+- the reworded period sentence
+- the sky line's words
+- the light-time line
+- whether the surface line is there or not
+
+Then move the patch into `documentation/`, commit and push.
+
+I'm still leaving those changes uncommitted, for the same reason as before. They're the L-401 build in my working copy, and the patch in your orrery folder carries exactly the same changes. Committing and pushing them is yours to do, after you've run the patch and looked at the five hovers.
 
