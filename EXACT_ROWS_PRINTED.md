@@ -133,7 +133,7 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
 - `KM_PER_AU`: named on 218 other orrery line(s).
 - `PARSEC_TO_AU`: named on 10 other orrery line(s).
 - `S_PER_HOUR`: named on 0 other orrery line(s).
-- `D_PER_JULIAN_YEAR`: named on 1 other orrery line(s).
+- `D_PER_JULIAN_YEAR`: named on 8 other orrery line(s).
 - `EARTH_POLE_RA_J2000_DEG`: named on 6 other orrery line(s).
   - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 925 (config `/objects/1/features/orientation/pole/ra`): `var ra = measured(pole.ra, "deg", slug + "/orientation/pole/ra", warn);`
 - `EARTH_POLE_DEC_J2000_DEG`: named on 6 other orrery line(s).

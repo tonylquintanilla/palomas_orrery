@@ -382,8 +382,8 @@ FILES WRITTEN THIS RUN
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
   3. Open the orrery, tick Encke, Sedna and Mercury, press Plot, answer
-     Yes to each "Update Orbital Elements?" box, and hover each body.
-  4. Move both patch scripts into documentation/; commit and push. -- 
+     Yes to each "Update Orbital Elements?" box, and hover each body. -- the interactive just says update from JPL Horizons
+  4. Move both patch scripts into documentation/; commit and push. -- 28a4636717920e86965f2e1777f3bf92386d1bb6
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 =================================================================================
@@ -407,7 +407,189 @@ NEXT:
   1. Run orrery_maintenance_run.py -- it rebuilds the ledger's index.
      Expect 23 of 23 and "0 TIER-1 -- the push gate holds". -- done 
   2. Your look: the four checks in the build record, section 4.
-  3. Move both patch scripts into documentation/; commit and push.
+  3. Move both patch scripts into documentation/; commit and push. -- 28a4636717920e86965f2e1777f3bf92386d1bb6
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+**Session: OPEN: 10-11-26 1653: Opus: L-431 orbital periods build**
+
+Paste each into its own model as a separate conversation. All three ask the same nine questions; only the opening differs:
+
+Fable and GPT are asked to read the project’s rules and skills from GitHub at your latest push, 28a4636.
+Gemini can’t read GitHub links, so it is told to work from its own imported copy of the orrery. Re-import the orrery into Gemini before you send it; an older copy won’t contain this evening’s period code.
+
+What they’re asked:
+
+The questions cover where each kind of body’s error comes from and what to print when there is no stated error. They also cover velocity, plots not centered on the Sun, the typed table of sky-position accuracies, and the cost of the extra query to JPL.
+I left out my own leanings so the three answers stay independent of me and of each other.
+Each must open by naming its model, its effort setting, and the rule files it actually read. It must also quote one sentence from JPL’s Horizons manual, which shows whether it can open web pages at all.
+Every source it cites needs a link and a short quote, and any claim that no source exists must list its searches.
+
+Where the three agree, or an earlier ruling of yours already decides it:
+
+The planets keep the 2014 report figures. Neither of the reviewers who checked found a newer source with figures for the planets’ position accuracy.
+The Moon gets its own row from the same report, which says its orbit is known to under a meter.
+Small bodies use JPL’s own figure at three standard deviations (3-sigma), as JPL’s 3-sigma columns are given.
+No stated error: a number JPL gives no figure for prints to whole kilometers, with a plain sentence saying so. Never ten digits, and never a dropped line.
+Two bodies, two errors: when the plot is centered on another body, the larger of the two errors applies. That’s your ruling of October 1.
+Same error, every unit: the AU, kilometer and light-time lines all carry the same error, each rounded for its own unit.
+
+Planets, moons and spacecraft: there’s nothing to go on. The three honest options:
+Same precision as the distance. Print the speed to the same relative precision as the distance, and say so. Fable notes this would give Mercury more digits than today (about 41.9240 km/s), because Mercury’s distance is known so well.
+
+The sky-position line is now part of L-401 (the distance digits), not a separate item. I replaced the close patch in your orrery folder with a revised version under the same name, patch_L401_2_design_close_20261011.py. You hadn’t run the first version yet, so nothing needs undoing.
+
+To finish (the steps are unchanged):
+
+Delete patch_L401_1_on_the_room_lists_20261011.py. -- done
+Run patch_L401_2_design_close_20261011.py, then orrery_maintenance_run.py.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L401_2_design_close_20261011.py
+ok  LEDGER_CONSOLIDATED.md             header stamp
+ok  LEDGER_CONSOLIDATED.md             L-431 build 1 confirmed
+ok  LEDGER_CONSOLIDATED.md             L-431 owed to the skill
+ok  LEDGER_CONSOLIDATED.md             L-401 date
+ok  LEDGER_CONSOLIDATED.md             L-401 designed
+ok  LEDGER_CONSOLIDATED.md             L-399 route found
+ok  LEDGER_CONSOLIDATED.md             L-413 date
+ok  LEDGER_CONSOLIDATED.md             L-413 L-401 first
+ok  LEDGER_CONSOLIDATED.md             L-412 L-401 first
+ok  documentation/WHERE_WE_ARE.md      header date
+ok  documentation/WHERE_WE_ARE.md      the box
+ok  documentation/WHERE_WE_ARE.md      road stage 5
+ok  documentation/WHERE_WE_ARE.md      road stage 6a
+ok  documentation/WHERE_WE_ARE.md      Settled
+ok  documentation/WHERE_WE_ARE.md      Signals
+ok  documentation/WHERE_WE_ARE.md      Waiting mark
+ok  documentation/WHERE_WE_ARE.md      Details
+ok  documentation/WHERE_WE_ARE.md      Details: Horizons check out
+ok  documentation/DESIGN_L401_distance_digits_rulings_20261011.md created
+
+patch applied
+
+NEXT:
+  1. Delete patch_L401_1_on_the_room_lists_20261011.py (never run). -- done
+  2. Run orrery_maintenance_run.py -- it rebuilds the ledger's index.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261011T233024Z, 1 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.7s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.2s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.5s  unchanged (1 checked, not written)
+  Objects export               0.1s  unchanged (1 checked, not written)
+  Drawings export              0.4s  unchanged (1 checked, not written)
+  Module atlas                 7.2s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               4.6s  rewrote DATA_INVENTORY.md
+  Exact rows report            2.1s  rewrote EXACT_ROWS_PRINTED.md -- 13 of 39
+                                     exact rows printed at 43 lines (33 orrery,
+                                     10 gallery); 8 drawn only, 14 not followed,
+                                     0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.9s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       1.7s  Export matches the store: sha256
+                                     06428b0d7008 on both sides; 121 rows
+                                     re-read, 56 not exported, 30 tokens; 315
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.1s  pass
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      1.9s  PASSING -- 13 printed exact rows each state
+                                     a count; 33 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.5s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 120 status lines in constants_new.py are
+                                     well formed; 54 rows carry none.
+  Row shape                    0.1s  All 177 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.4s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.3s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          23.6s  PASS -- all 311 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.5s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.4s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.9s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check        0.9s  PASS -- 3 of 3 planted faults caught;
+                                     hills_cloud 3600 dots, tilt 30.9 deg, sha256
+                                     a51e93118069
+  Worksheet checker           11.7s  74 of 110 routed, 8 clean
+  Worksheet checker tests     17.9s  All 135 checks passed
+  Worksheet key round trip     1.0s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         21.0s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner           8.8s  0 TIER-1 -- the push gate holds
+
+======================================================================
+  23 of 23 gating checkers passed -- 114.9s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2188 file(s) examined, 9 written, 0 created, 0 removed, 6 rewritten identically
+    written   DATA_INVENTORY.md
+    written   EXACT_ROWS_PRINTED.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      documentation/REVIEW_L401_distance_digits_comparison_20261011.md
+      test_output/test_orbit_paths.json
+      window_config.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  3. Move this script into documentation/; commit and push. -- 
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+Move the patch into documentation/, commit and push.
+
+Where this leaves us
+
+L-401 (the distance digits) is next. Three short questions remain, then its first build: the body hover, with the sky-position table removed.
+Build 1 of the orbital periods works against JPL. Only your word on its wording is open.

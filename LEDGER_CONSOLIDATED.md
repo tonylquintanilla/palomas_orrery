@@ -355,6 +355,10 @@ three builds' order; its design record), built on 324a574f.
 Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5
 (L-431 build 1: the period in the orrery's hovers, from JPL, by the
 larger error; patch_L431_4; its record), built on 41e9a1d5.
+Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5
+(L-401 promoted to next and designed with three outside reviews, the
+typed sky-position table settled with it; L-431 build 1 confirmed
+against JPL; L-399, L-412 and L-413 updated), built on 28a4636.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -708,13 +712,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | OPEN | -- | 2026-10-11 |
 | ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-10-07 |
 | ! | L-399 | Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder) | OPEN | -- | 2026-10-01 |
-| ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-01 |
+| ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-11 |
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-410 | Fuzzy boundaries for edges known only as ranges, the outer corona first (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-11 |
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
 | ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-11 |
-| ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-06 |
+| ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-11 |
 | ! | L-421 | Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words) | OPEN | -- | 2026-10-11 |
 | ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-08 |
 | ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-11 |
@@ -1568,17 +1572,30 @@ L-395.
   - `get_fallback_elements` reads the plain cache key, not the
     centre-aware one. Build 2 works on that path.
   - The bare 365.25s in other modules. One class.
+- **2026-10-11, build 1 confirmed working** (record:
+  `documentation/DESIGN_L401_distance_digits_rulings_20261011.md`,
+  section 7). Pushed at 28a4636. The patch's live check (Tony's copy
+  `documentation/WHERE_WE_ARE_10-11-26_1812_run_record.md`): Encke's
+  and Mercury's elements fetch and period query "agree"; 3I/ATLAS
+  "none (open orbit)". His plot saved records for Mercury (Sun, year
+  change 31 s), Sedna (barycentre, SBDB sigma 1,864 d) and Encke (Sun,
+  year change 0.15 d). Tony: "the orbital periods look reasonable".
+  His first screenshots showed the old hover only because the orrery
+  window was open before the patch ran.
+- **Found by Fable's review (L-401), 2026-10-11:** the hover's "JPL
+  lists no orbit uncertainty for this body" is false of JPL for a
+  planet; JPL states the planets' accuracy in the 2014 report. Its
+  wording waits for Tony's word, with the rest of the hover's words.
 **Gap:** three builds, in order (the record's section 3):
-1. The period in the orrery: BUILT 2026-10-11. Waits for Tony's run
-   (its live check of four bodies) and his look at Encke, Sedna and
-   Mercury, where he approves the hover's words (the build record's
-   section 4).
+1. The period in the orrery: BUILT and working against JPL
+   (2026-10-11). Open: Tony's word on the hover's wording, with the
+   corrected sentence for a planet (L-401's design record, section 5).
 2. The drawn ellipse around the period's centre, and the markers from
    the fetched period (Mode 5, Tony's look).
 3. The website: the export carries each period; every room's hover
    prints it; the Horizons check compares it.
-Owed to horizons-orbital-mechanics once Tony's run shows build 1
-working against JPL: the two-centre test, its choice saved at first
+Owed to horizons-orbital-mechanics, now that build 1 works against JPL,
+in one version with L-401's method: the two-centre test, its choice saved at first
 fetch, SBDB's lookup of a pinned record by Horizons' name. The typed
 table's 132 unsourced entries stay one class, not chased.
 **Ref:** `documentation/DESIGN_L431_orbital_periods_rulings_20261011.md`;
@@ -1837,7 +1854,7 @@ for each case and updates the skill's bullet to match.
 L-252; L-418.
 
 #### [L-413] Earth's list: the old Earth items, in the order Tony confirmed (Earth room)
-<!-- L:413 status:OPEN upd:2026-10-06 section:A flag: rice: -->
+<!-- L:413 status:OPEN upd:2026-10-11 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-04,** after a sweep of the open items
   that touch the Earth room, read against the code at orrery cbde99dc
   and gallery e7ef96eb, and checked against the Claude Fable 5.1 ledger
@@ -1917,8 +1934,11 @@ L-252; L-418.
 - **Added to the list, 2026-10-06:** L-421, the facts typed in the
   rooms' code, on Tony's ruling that it is part of finishing the Earth
   and Sun slices.
-**Gap:** L-421 from its manifest; then the design talks in the order
-above.
+- **Added 2026-10-11, first:** L-401, the orrery's distance digits.
+  Tony: "actually, let's promote L401 to next. accuracy and precision
+  are fundamental."
+**Gap:** L-401 first; then L-421's check; then the design talks in the
+order above.
 **Ref:** L-412 (the Sun's list, which resumes after this); the handles
 above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 
@@ -2016,6 +2036,9 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 - **2026-10-11, from L-408 at its close:** the galactic tide's cone and
   its brightness on the phone were never ruled (L-408's Gap). Recorded
   here for the Sun's list, at Tony's word.
+- **Added 2026-10-11:** L-401 (the orrery's distance digits) goes
+  first, ahead of both lists, on Tony's word; worked once for both
+  rooms.
 **Gap:** after L-413, work down the list from item 3.
 **Ref:** L-371 (the slice's numbers); the handles above; L-413;
 `documentation/LEDGER_SWEEP_review_20261004.md`.
@@ -2067,7 +2090,7 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 tools/gallery_cache_builder.py (trust); L-149; L-150; L-363; L-398.
 
 #### [L-401] The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance)
-<!-- L:401 status:OPEN upd:2026-10-01 section:A flag: rice: -->
+<!-- L:401 status:OPEN upd:2026-10-11 section:A flag: rice: -->
 - **Recorded 2026-10-01, closing L-398**, as one row for the class under
   The Braid: recorded, not chased. provenance-discipline 2.23 says every
   computed position a display prints goes to the place the larger of
@@ -2082,11 +2105,62 @@ tools/gallery_cache_builder.py (trust); L-149; L-150; L-363; L-398.
 - Where the orrery's position comes straight from Horizons for the plot
   date there is no drift, and JPL's accuracy is what applies, through
   the three DE430 rows in constants_new.py.
-**Gap:** discovery first -- list every orrery site that prints a computed
-distance, by function -- then fix in slices when the work reaches the
-orrery's hovers.
-**Ref:** visualization_utils.py; formatting_utils.py; constants_new.py
-(DE430 rows); provenance-discipline 2.23; L-398.
+- **2026-10-11, promoted to next and designed** (record
+  `documentation/DESIGN_L401_distance_digits_rulings_20261011.md`).
+  Tony, after his look at L-431's hover: "the orbital periods look
+  reasonable, but not the distances"; then "It should be included as
+  part of the braid and theme work for the sun and earth rooms"; then
+  "actually, let's promote L401 to next. accuracy and precision are
+  fundamental. let's do it here. we have room." It goes first on
+  L-413 and L-412.
+- **Discovery done:** 376 fixed-width sites in 110 functions across 34
+  files, sorted by kind in the record's section 3. The first slice is
+  the body hover, `format_detailed_hover_text` and its two formatters.
+- **Three outside reviews** (Tony: "This is highly technical and my
+  instinct only partially helpful"): Claude Fable 5.1 and GPT-6 read
+  the rules at 28a4636 and opened their sources; Gemini 2.5 Pro
+  opened nothing, so its numbers are not used. Requests, returns and
+  the comparison: `documentation/REVIEW_L401_distance_digits_*`.
+- **Settled** by their agreement or an earlier ruling: the planets
+  keep the 2014 rows; the Moon gets a 1 metre row from the same
+  report; small bodies take JPL's own 3-sigma; a number with no
+  stated error prints to whole kilometres with a plain sentence, never
+  ten figures, and "no error" is its own state in the code; another
+  centre takes the larger error (Tony, 2026-10-01); every unit carries
+  the same error, placed by its own Report test.
+- **Fable's finding, re-run by Claude:** Horizons' vector query with
+  `VEC_TABLE='2xr'` returns a small body's 1-sigma position and
+  velocity uncertainties with the position (Sedna, 2026-10-12, from
+  the Sun: R_s 85,939.995 km; three times, 257,820 km, against
+  quantity 39's 257,817.569 km). No extra query; astroquery cannot
+  ask for it, so a direct call.
+- **Ruled 2026-10-11:** the speed ("Reading 1"): a small body's speed
+  by JPL's velocity uncertainties combined; any other body's to its
+  distance's relative precision, said in the box, with no separate
+  floor.
+- **The sky-position line, settled with this item** (Tony: "let's
+  follow Fable's recommendation", then "i think we should settle this
+  now too"). The hover prints a planet's RA and Dec "+/-0.005 arcsec,
+  JPL DE440/441 ephemeris" from `MAJOR_BODY_UNCERTAINTIES` in
+  `celestial_coordinates.py`, a typed table with no source line; the
+  DE440 paper gives no angular accuracy for a planet (read by GPT,
+  Fable and Claude). `get_precision_note` also prints ", typical"
+  fallbacks. Both come out; where Horizons gives no figure the line
+  says plainly that JPL gives none; the small bodies' fetched 3-sigma
+  figures stay; the line says "as seen from Earth", since
+  `fetch_radec_for_hover` asks from Earth's centre (Fable). Kept for
+  later: Fable's sourced figure for a planet, worked out from its
+  position row and its distance from Earth.
+**Gap:** three questions at the next talk (the record's section 5):
+the box's shape (one light-time line, the surface line only where the
+centre has a surface, plain numbers); L-431's planet sentence; the
+speed of a body whose distance has no stated error. Then the first
+build, the body hover, with the sky-position table's removal.
+**Ref:** `documentation/DESIGN_L401_distance_digits_rulings_20261011.md`;
+`documentation/REVIEW_L401_distance_digits_comparison_20261011.md`;
+visualization_utils.py; formatting_utils.py; constants_new.py (DE430
+rows); palomas_orrery.py (`fetch_position`); provenance-discipline
+2.28; L-398; L-399; L-431; `celestial_coordinates.py`.
 
 #### [L-399] Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder)
 <!-- L:399 status:OPEN upd:2026-10-01 section:A flag: rice: -->
@@ -2102,7 +2176,12 @@ orrery's hovers.
   range uncertainty (likely the 3-sigma range quantity of an
   ephemeris query; unverified) and serves it; the page then uses it as
   the source accuracy and the line goes away.
-**Gap:** with the near-Earth asteroid design.
+- **2026-10-11, the route found** under L-401: Horizons' vector query
+  with `VEC_TABLE='2xr'` returns a small body's position and velocity
+  uncertainties with the position (Fable, re-run by Claude). The
+  orrery builds it first (L-401); the website's builder can ask the
+  same way.
+**Gap:** with the near-Earth asteroid design; the route is L-401's.
 **Ref:** L-398; L-363; tools/gallery_cache_builder.py (gallery).
 
 #### [L-396] Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills)

@@ -11,16 +11,17 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 150  
-**Total Lines of Code (non-blank):** 118,575  
-**Total Public Functions/Classes:** 1,365
+**Total Python Files:** 151  
+**Total Lines of Code (non-blank):** 118,725  
+**Total Public Functions/Classes:** 1,366
 
 ## Classification Coverage
 
-**Undetermined role (8).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (9).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
 - `patch_L395_5_horizons_name_and_encke_20261010.py`
+- `patch_L401_2_design_close_20261011.py`
 - `test_drawings_export.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
@@ -28,9 +29,10 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (1).** No valid `Domain:` tag.
+**Undetermined domain (2).** No valid `Domain:` tag.
 
 - `patch_L395_5_horizons_name_and_encke_20261010.py`
+- `patch_L401_2_design_close_20261011.py`
 
 
 ---
@@ -221,7 +223,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (129 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (980 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (981 lines) |
 | `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (649 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (427 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,535 lines) |
@@ -253,6 +255,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
 | `patch_L395_5_horizons_name_and_encke_20261010.py` | - the orrery half of the Horizons check (L-395): JPL's exact name on each keyed entry, Halley keyed, Encke's own entry, and the export that carries them. (371 lines) |
+| `patch_L401_2_design_close_20261011.py` | - the close of the session of 2026-10-11: L-401 (the orrery's distance digits) promoted to next and designed with three outside reviews, the typed sky-position table settled with it; L-431 build 1 (orbital periods) recorded as working against JPL. (149 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (173 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |

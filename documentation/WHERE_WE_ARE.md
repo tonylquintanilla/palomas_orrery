@@ -1,24 +1,23 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 11, 2026, at build 1 of orbital periods.
-- Written at orrery 41e9a1d and gallery e3536c8.
+Last updated: October 11, 2026, at the L-401 design talk.
+- Written at orrery 28a4636 and gallery e3536c8.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Orbital periods, build 1 is built: L-431 (orbital periods). The
->   orrery's hovers show each body's period from JPL, the centre it
->   was taken around, the date, and only the digits its errors earn.
-> - A period from the typed table now says it is typed.
-> - Nothing drawn moves yet. The orbits and markers are build 2.
+> - Orbital periods, build 1 works against JPL: L-431 (orbital periods).
+> - L-401 (the distance digits) is next, by your word; three reviewers
+>   answered, most of it is settled. Speeds follow their distance's
+>   precision; the typed sky-position table comes out with it.
 >
-> **Do next:** *your look at Encke, Sedna and Mercury, and your word
-> on the hover's wording (the build record, section 4).*
+> **Do next:** *L-401's three last questions, then its first build:
+> the body hover.*
 >
 > **Needs you now:**
-> - *Orrery: patch_L431_4 (it asks JPL for four periods as it ends),
->   patch_L431_5, maintenance run, your look, push.*
+> - *Orrery: delete patch_L401_1 (never run); run patch_L401_2,
+>   the maintenance run, push.*
 > - *Decide L-425 (citation location checks): which checks to build,
 >   on the run's results (on L-425 and in the handoff).*
 
@@ -28,13 +27,13 @@ Last updated: October 11, 2026, at build 1 of orbital periods.
 
   1-4. [done]  The Sun, Earth and Solar System rooms are live; the orrery
                feeds the website and nothing is typed twice.
-  5.   [NOW]   *Earth's old items are finished, in your order.* The
-               website patch and Earth's typed facts are live.
+  5.   [NOW]   *L-401 (the distance digits) first, then Earth's
+               remaining items, in your order.* << moved this session
   6.   [next]  The typed facts: the inner Oort cloud is drawn on the
                website too. Left: the check.
-  6a.  [next]  *Orbital periods from JPL: build 1, the orrery's hovers,
-               is built and waits for your look. Then the drawn
-               orbits, then the website.* << moved this session
+  6a.  [next]  Orbital periods from JPL: build 1 works; your word on
+               its words is open. Then the drawn orbits, then the
+               website.
   7.   [next]  The Sun's numbers get the checking Earth's got.
   8.   [done]  The served objects are checked against JPL Horizons
                every day, in the Daily Run.
@@ -50,9 +49,11 @@ Last updated: October 11, 2026, at build 1 of orbital periods.
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
 
-## Settled
+## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
+- Digits by the error JPL states; whole km and a plain sentence where it
+  states none; speeds to their distance's precision. (Oct 11)
 - Scattered dots are placed by the orrery and stored for the website;
   a shape that is a formula is worked out on each side. (Oct 11)
 - Orbital periods: JPL's own, every body, orrery and website; the
@@ -79,12 +80,13 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261011T183843Z, ok, no retry.
 - Tier-1 on the gate path: 0, by name, in PROVENANCE_AUDIT.md at
-  9802e04 (your run of 2026-10-11). Whole tree: 292.
+  28a4636 (your run of 2026-10-11). Whole tree: 292.
 - This page's date and the ledger's newest stamp: both Oct 11. Agree.
 
-## Waiting on you
+## Waiting on you  **>> UPDATED THIS SESSION**
 
 At the next design talk:
+- L-401's three last questions (its record, section 5).
 - Your order after the Sun and Earth rooms (L-433), in your words of
   Oct 10; the road changes when you confirm it.
 - L-424 (the checker's one word for two cases): you marked it
@@ -110,16 +112,15 @@ Not urgent, in your order:
 - Orbital periods: rulings
   `documentation/DESIGN_L431_orbital_periods_rulings_20261011.md`;
   build 1 `documentation/HANDOFF_L431_period_build1_20261011.md`
-- Your notes of Oct 11: `WHERE_WE_ARE_10-11-26_1311_run_record.md`
+- The distance digits: `DESIGN_L401_distance_digits_rulings_20261011.md`;
+  the reviews `REVIEW_L401_distance_digits_comparison_20261011.md`
+- Your notes of Oct 11: `WHERE_WE_ARE_10-11-26_1812_run_record.md`
 - The typed facts: plan
   `documentation/MANIFEST_L421_typed_facts_20261006.md`; record
   `documentation/HANDOFF_L421_typed_facts_20261008.md`
 - The inner Oort cloud: design
   `documentation/DESIGN_L421_inner_oort_tilt_20261009.md`; records
   `HANDOFF_L421_oort_orrery_20261010.md`, `..._gallery_20261011.md`
-- The Horizons check: design
-  `documentation/DESIGN_L395_horizons_check_20261007.md`; record
-  `documentation/HANDOFF_L395_horizons_check_build_20261010.md`
 - The split's tests and the citation checks: L-418 (splitting
   provenance-discipline, closed), L-425 (citation location checks),
   L-426 (the checker's small-number comparison); record
