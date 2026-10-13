@@ -81,6 +81,12 @@ fetch_radec_for_hover also returns the distance from Earth (quantity 20,
 same query), which turns a spacecraft's data-sheet angle into km. The
 animation's analytical positions are marked as such, so their hover
 states no accuracy. Nothing drawn changes.)
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-431,
+build 2: the static plot and the animation read the view's osculating
+centre from orbital_period.VIEW_TO_OSCULATING_CENTRE, its one home, in
+place of two copies of the block, the animation's lacking Orcus; each
+body's position record travels with its position to the orbit drawing,
+so an orbit's markers print the body's digits (L-401's second slice).)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -4547,27 +4553,12 @@ def plot_objects():
     center_object_name = center_object_var.get()
     
     # Determine center_body for osculating elements based on view
-    # This affects which reference frame the elements use
-    if center_object_name == 'Pluto-Charon Barycenter':
-        osculating_center_body = '@9'  # Barycentric elements
-    elif center_object_name == 'Pluto':
-        osculating_center_body = '@999'  # Pluto-centered elements
-
-    elif center_object_name == 'Orcus-Vanth Barycenter':
-        osculating_center_body = '@20090482'  # Orcus-Vanth satellite solution barycenter
-    elif center_object_name == 'Orcus':
-        osculating_center_body = '@920090482'  # Orcus PRIMARY body (not small body)
-
-    elif center_object_name == 'Patroclus-Menoetius Barycenter':
-        osculating_center_body = '@20000617'  # Patroclus-Menoetius satellite solution barycenter
-
-    elif center_object_name == 'Earth-Moon Barycenter':
-        osculating_center_body = '@3'  # Earth-Moon system barycenter
-    elif center_object_name == 'Earth':
-        osculating_center_body = '@399'  # Earth body center (for Moon's osculating elements)
-
-    else:
-        osculating_center_body = None  # Default (heliocentric or auto-detect)
+    # This affects which reference frame the elements use. The map has one
+    # home, orbital_period.VIEW_TO_OSCULATING_CENTRE, which the animation
+    # and the hover read too (L-431, build 2); None is the default
+    # (heliocentric or auto-detect).
+    from orbital_period import osculating_centre_for_view
+    osculating_center_body = osculating_centre_for_view(center_object_name)
 
     # Get the plot date for osculating elements
     try:
@@ -5806,13 +5797,17 @@ def plot_objects():
                 positions[obj['name']] = obj_data
 
             # ADD THIS: Convert positions to the format needed by idealized_orbits
+            # L-431 build 2 / L-401: 'record' carries the whole position
+            # record, with its uncertainty for the date, so an orbit's markers
+            # print their distances to the same digits as the body's hover.
             current_positions = {}
             for obj_name, pos_data in positions.items():
                 if pos_data and 'x' in pos_data:
                     current_positions[obj_name] = {
                         'x': pos_data['x'],
                         'y': pos_data['y'],
-                        'z': pos_data['z']
+                        'z': pos_data['z'],
+                        'record': pos_data,
                     }
 
             for obj in objects:
@@ -6310,21 +6305,13 @@ def animate_objects(step, label):
     center_object_name = center_object_var.get()
     
     # Determine center_body for osculating elements based on view
-    # This affects which reference frame the elements use
-    if center_object_name == 'Pluto-Charon Barycenter':
-        osculating_center_body = '@9'  # Barycentric elements
-    elif center_object_name == 'Pluto':
-        osculating_center_body = '@999'  # Pluto-centered elements
-    elif center_object_name == 'Orcus-Vanth Barycenter':
-        osculating_center_body = '@20090482'  # Orcus-Vanth satellite solution barycenter
-    elif center_object_name == 'Patroclus-Menoetius Barycenter':
-        osculating_center_body = '@20000617'  # Patroclus-Menoetius satellite solution barycenter        
-    elif center_object_name == 'Earth-Moon Barycenter':
-        osculating_center_body = '@3'  # Earth-Moon system barycenter
-    elif center_object_name == 'Earth':
-        osculating_center_body = '@399'  # Earth body center (for Moon's osculating elements)
-    else:
-        osculating_center_body = None  # Default (heliocentric or auto-detect)
+    # This affects which reference frame the elements use. The map has one
+    # home, orbital_period.VIEW_TO_OSCULATING_CENTRE, which the static plot
+    # and the hover read too (L-431, build 2); this copy used to lack
+    # Orcus. None is the default
+    # (heliocentric or auto-detect).
+    from orbital_period import osculating_centre_for_view
+    osculating_center_body = osculating_centre_for_view(center_object_name)
 
     # Get the animation start date for osculating elements
     try:
@@ -6951,7 +6938,10 @@ def animate_objects(step, label):
                         initial_positions[obj_name] = {
                             'x': initial_pos['x'],
                             'y': initial_pos['y'],
-                            'z': initial_pos['z']
+                            'z': initial_pos['z'],
+                            # L-431 build 2 / L-401: the frame's record, so
+                            # the markers print by the same error as its hover
+                            'record': initial_pos,
                         }
             
             # Add center object position

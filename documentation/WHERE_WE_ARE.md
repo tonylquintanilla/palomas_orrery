@@ -1,25 +1,25 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 12, 2026, evening: six rulings made in chat.
-- Written at orrery c5dff25 and gallery f9453dd.
+Last updated: October 12, 2026, night: L-431 build 2 built, with L-401's.
+- Written at orrery c9722520 and gallery f9453dd.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - L-401 (the distance digits), build 1: your look is done; its
->   three fixes are in patch_L401_4.
-> - Six rulings in chat, away from your machine, clear the design-talk
->   list: the road after the rooms, the scattered disk, L-424, L-425,
->   the dashboard's labels, the Horizons check's clearing rule.
+> - Each orbit is drawn around its period's center (Sedna's around the
+>   center of mass, smaller); markers dated from JPL's period; every
+>   orbit and marker hover by the body hover's digits rule.
+> - Your Settled question: 3 of 12 lines are in a skill; L-435 (the
+>   rulings held only here) carries the rest.
 >
-> **Do next:** *L-431 (orbital periods) build 2, the drawn orbits and
-> markers; the four briefed sessions beside it, in your order.*
+> **Do next:** *your look at build 2; then L-431's website build, and
+> the four briefed sessions beside it, in your order.*
 >
 > **Needs you now:**
-> - *Orrery: run patch_L401_4, then patch_L433_1 (this page), the
->   maintenance run; hover Io from Jupiter once; commit the new
->   documentation files; push.*
+> - *Run patch_L431_6 and the maintenance run; do the look (the
+>   handoff's section 7); reinstall horizons-orbital-mechanics 1.4;
+>   the Project's instructions to v3.93; push.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -27,20 +27,20 @@ Last updated: October 12, 2026, evening: six rulings made in chat.
 
   1-4. [done]  The Sun, Earth and Solar System rooms are live; the orrery
                feeds the website and nothing is typed twice.
-  5.   [NOW]   *L-401 (the distance digits): build 1 accepted at your
-               look; its other slices come later. Then Earth's
-               remaining items, in your order.* << moved this session
-  5b.  [NOW]   *The scaffolding checks (L-424, L-425, L-426, the
-               dashboard) clear beside the slices, not after.* << new
+  5.   [NOW]   *L-401 (the distance digits): build 2 built with L-431's;
+               your look; build 3 later. Then Earth's remaining items.*
+               << moved this session
+  5b.  [NOW]   The scaffolding checks (L-424, L-425, L-426, the
+               dashboard) clear beside the slices, not after.
   6.   [next]  The typed facts: the inner Oort cloud is drawn on the
                website too. Left: the check.
-  6a.  [next]  *Orbital periods from JPL: build 1 works; build 2, the
-               drawn orbits and markers, is next.* Then the website.
+  6a.  [NOW]   *Orbital periods from JPL: build 2 done, the drawn orbits
+               and markers, waiting for your look; the website next.*
                << moved this session
   7.   [next]  The Sun's numbers get the checking Earth's got; the Solar
-               System room's features close with these rooms. << changed
+               System room's features close with these rooms.
   8.   [done]  The served objects are checked against JPL Horizons.
-               Next: the check moves to the orrery. << moved this session
+               Next: the check moves to the orrery.
   9.   [next]  The website's checks, in the order you confirmed:
                L-423 (the website's checks).
  10.   [next]  A bare interactive.html link opens the Solar System room;
@@ -48,13 +48,13 @@ Last updated: October 12, 2026, evening: six rulings made in chat.
  11.   [later] The rest of the orrery's objects come to the website.
  12.   [later] Encounters: comets and spacecraft at the dates that matter.
  13.   [later] The inner planets' rooms (Mercury, Venus, Mars), from the
-               template; Jupiter and Saturn follow (L-433). << changed
+               template; Jupiter and Saturn follow (L-433).
  14.   [later] The Earth System layers, beside 13, not after it; the
-               gallery's cards meanwhile. << changed
+               gallery's cards meanwhile.
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
 
-## Settled  **>> UPDATED THIS SESSION**
+## Settled
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
 - Digits by the error JPL states; whole km and a plain sentence where it
@@ -88,14 +88,18 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261012T183311Z, ok, no retry.
+- Last cache build: 20261012T183311Z, ok, no retry (gallery f9453dd).
 - Tier-1 on the gate path: 0, by name, in PROVENANCE_AUDIT.md at
-  c5dff25 (your run of 2026-10-12). Whole tree: 288.
+  c9722520 (your run of 2026-10-12). Whole tree: 288; this patch takes
+  it to 280 (measured in the sandbox).
 - This page's date and the ledger's newest stamp: both Oct 12. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 At the next design talk:
+- L-401 (the distance digits): a model with no stated accuracy (the
+  Moon's analytical orbit) still reads as km precision at the floor;
+  numbers that are not distances have no digits rule. << new
 - The fuzzy outer corona, with the dust cloud; the exosphere the same way.
 - Moving the highlighted row to the top of the list.
 - GO's arrow, only if the text box stays centred.
@@ -111,22 +115,18 @@ Not urgent, in your order:
 
 - Every item: `LEDGER_CONSOLIDATED.md`. Open for build: L-421 (the
   typed facts), its check.
-- Orbital periods: `DESIGN_L431_orbital_periods_rulings_20261011.md`;
-  build 1 `HANDOFF_L431_period_build1_20261011.md`
+- Orbital periods: rulings `DESIGN_L431_..._rulings_20261011.md`; build 2,
+  your look: `HANDOFF_L431_build2_orbits_markers_20261012.md` section 7
 - The distance digits: `DESIGN_L401_distance_digits_rulings_20261011.md`;
   reviews `REVIEW_L401_..._comparison_20261011.md`; build 1
   `HANDOFF_L401_distance_build1_20261012.md`
 - The Horizons check's move: `HANDOFF_L395_horizons_check_move_brief_20261012.md`
-- Your notes of Oct 12: `WHERE_WE_ARE_10-12-26_1025_run_record.md`
-- The typed facts: plan `MANIFEST_L421_typed_facts_20261006.md`; record
-  `HANDOFF_L421_typed_facts_20261008.md`
-- The inner Oort cloud: `DESIGN_L421_inner_oort_tilt_20261009.md`;
-  `HANDOFF_L421_oort_orrery_20261010.md`, `..._gallery_20261011.md`
-- Your six rulings of Oct 12: `DESIGN_rulings_20261012.md`; the briefs
-  `HANDOFF_dashboard_labels_brief_20261012.md` (and its audit),
-  `..._L425_citation_locations_brief_...`, `..._L424_L426_worksheet_checker_brief_...`
-- The reasoning behind the order:
-  `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`
+- Your notes of Oct 12: `WHERE_WE_ARE_10-12-26_2212_run_record.md`
+- L-421 (typed facts, inner Oort): `MANIFEST_L421_typed_facts_20261006.md`,
+  `HANDOFF_L421_typed_facts_20261008.md`, `HANDOFF_L421_oort_*`
+- Your six rulings of Oct 12: `DESIGN_rulings_20261012.md`; the briefs for the
+  dashboard's labels, L-425, L-424 with L-426 (`HANDOFF_..._brief_20261012.md`)
+- The reasoning behind the order: `MASTER_PLAN_INTERACTIVE_GALLERY.md`
 
 --- Your run record below this line. No patch edits it; the length cap
 --- stops here; the close reads your timestamped copy and clears this.

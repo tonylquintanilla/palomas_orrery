@@ -17,6 +17,11 @@ build 1: a fetch made through get_elements_with_prompt also saves the
 body's orbital period beside its elements, under 'period', with the
 centre it was taken around, its date and its error (orbital_period.py).
 The elements are unchanged, so nothing drawn moves.)
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-431,
+build 2: get_fallback_elements reads the same centre-aware key the fetch
+writes, so a declined update keeps elements around the view's centre;
+the period record now also keeps the elements around its own centre,
+which the drawing reads through orbital_period.drawing_orbit.)
 
 Role: cache
 Domain: orrery
@@ -482,6 +487,13 @@ def fetch_osculating_elements(obj_name, horizons_id=None, id_type='smallbody', d
                 print(f"[WARN] Period not fetched for {obj_name} ({ex})"
                       f"{'; keeping the last fetched period' if previous else ''}", flush=True)
                 if previous:
+                    # The last fetched period is kept (the fallback order's
+                    # second step), but what it says about THIS fetch's
+                    # elements is updated, so it is never paired with older
+                    # ones (L-431, build 2)
+                    previous = dict(previous)
+                    previous['elements_fetch_days'] = result.get('P_days')
+                    previous['elements_fetch_center'] = cache_entry['metadata']['center_body']
                     cache_entry['period'] = previous
 
         print(f"[OK] Fetched elements (solution date: {cache_entry['metadata']['solution_date']})", flush=True)
@@ -849,32 +861,38 @@ def get_elements_with_prompt(obj_name, horizons_id=None, id_type='smallbody', pl
         else:
             # Fetch failed - fall back
             print(f"[WARN] Fetch failed - falling back to cached/manual elements")
-            return get_fallback_elements(obj_name)
-        
+            return get_fallback_elements(obj_name, center_body)
+
     else:  # User clicked NO
         print(f"User chose to use existing elements for {obj_name}")
-        return get_fallback_elements(obj_name)
+        return get_fallback_elements(obj_name, center_body)
 
-def get_fallback_elements(obj_name):
+def get_fallback_elements(obj_name, center_body=None):
     """
     Get elements from cache or manual dictionary (fallback).
-    
+
     Parameters:
         obj_name (str): Name of object
-    
+        center_body (str, optional): the centre the view fetches around
+            (e.g. '@9'). The cache is read under the same centre-aware key
+            the fetch writes (L-431, build 2), so declining an update keeps
+            elements around the view's centre: Charon@9, not Charon around
+            the Sun. Osculating elements must match the viewing centre.
+
     Returns:
         dict: Orbital elements
-    
+
     Raises:
         ValueError: If no elements available
     """
-    # Try cache first
+    # Try cache first, under the view's own key
     cache = load_cache()
-    if obj_name in cache and not obj_name.startswith('_'):
-        age = calculate_age_days(cache[obj_name])
+    cache_key = get_cache_key(obj_name, center_body)
+    if cache_key in cache and not cache_key.startswith('_'):
+        age = calculate_age_days(cache[cache_key])
         age_str = format_age_string(age) if age else "unknown age"
-        print(f"[OK] Using cached elements ({age_str})")
-        return cache[obj_name]['elements']
+        print(f"[OK] Using cached elements for {cache_key} ({age_str})")
+        return cache[cache_key]['elements']
     
     # Try manual dictionary
     if obj_name in FALLBACK_ELEMENTS:

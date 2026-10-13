@@ -2604,6 +2604,43 @@ resident.
 (Moved down from the resident protocol on 2026-10-12 when
 v3.92 made a fourth entry.)
 
+v3.90 (October 10, 2026): No rule changed in this document. TWO
+skills, one version each: ledger-and-session-records 1.18 -> 1.19 and
+horizons-orbital-mechanics 1.1 -> 1.2 (L-395). TONY'S FOLDERS ARE
+NAMED, AND A COMET'S RECORD NUMBER IS NOT A NAME.
+
+WHAT PROMPTED IT. The Horizons check was built and ran live for the
+first time: 13 of 13 served objects agree with JPL. Two things came out
+of the session. Tony asked that his local folders be written into the
+handoff skill, after a session had held a patch back because three
+folders could have been the orrery: "palomas_orrery_for_github is the
+repo folder." And re-fetching JPL's answers showed record 90004956
+holding MAPS on 2026-10-07 and another comet three days later.
+
+WHAT CHANGED. ledger-and-session-records gains Tony's Local Folders,
+under Where a File Goes. horizons-orbital-mechanics gains Checking an
+Entry Against JPL: the Lookup cannot see record numbers, the three-step
+find, JPL's names, a recent comet's record number moving, and live
+answers over documented ones; and two corrected lines under Small-Body
+Record Pinning. The brief for this build asked for at most one skill
+version; Tony's request made it two. Their v1.16 entry (the ledger
+skill) moved to documentation/SKILL_HISTORIES.md, by the three-entry
+rule; the Horizons skill had one entry.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+ledger-and-session-records 1.19 and horizons-orbital-mechanics 1.2
+before ledger or Horizons work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.87 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-12 when
+v3.93 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

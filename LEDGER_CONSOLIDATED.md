@@ -369,6 +369,10 @@ Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5
 period sentence for planets and moons, the sky position under one
 heading; L-431, L-034 noted; L-395, the Horizons check moves to the
 orrery's maintenance run, ruled and briefed), built on c5dff250.
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5
+(L-431 build 2 built, with L-401's second slice and ruling 7's four
+in-passing fixes; horizons-orbital-mechanics 1.4, protocol v3.93; L-435
+opened from Tony's question on Settled), built on c9722520.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -586,7 +590,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*240 live items; 224 need attention (`!`); 167 RICE-scored; 189 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*241 live items; 225 need attention (`!`); 167 RICE-scored; 189 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -741,6 +745,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-432 | Objects drawn in the default goldenrod (orrery, colours) | OPEN | -- | 2026-10-11 |
 | ! | L-433 | The road after the Sun and Earth rooms, in Tony's words (planning) | OPEN | -- | 2026-10-11 |
 | ! | L-434 | Stored drawings for the other dot-cloud shells (orrery + gallery) | OPEN | -- | 2026-10-11 |
+| ! | L-435 | Standing rulings that are method, held only on Tony's page (skills, records) | OPEN | -- | 2026-10-12 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1368,6 +1373,34 @@ IGRF epoch, a class); L-408; L-430;
 `gallery/earth_geometry.js`, `data/objects_config.json`;
 skills/interactive-exhibit/SKILL.md.
 
+#### [L-435] Standing rulings that are method, held only on Tony's page (skills, records)
+<!-- L:435 status:OPEN upd:2026-10-12 section:A flag: rice: -->
+- **Opened 2026-10-12** from Tony's note on the Settled section of his
+  page (run record `documentation/WHERE_WE_ARE_10-12-26_2212_run_record.md`):
+  "are these rulings included in a skill or only here?"
+- **Read at c9722520, against skills/*/SKILL.md:** three of the twelve
+  Settled lines are in a skill: orbital periods (horizons-orbital-mechanics,
+  1.4 adds the drawn orbit), the OneDrive pause (gallery-cache-builder
+  1.8), and the digits rule's principle (provenance-discipline 2.28, A
+  Computed Position Prints What Its Errors Earn). The rest live only on
+  the page and in their design records and ledger items.
+- **Method, owed to a skill** (Method Belongs to the Skill: the answer
+  would be the same next month): the no-error sentence, the speed rule
+  and the one-meter-per-second floor (provenance-discipline); the
+  spacecraft data sheets (horizons-orbital-mechanics); "surface" as one
+  radius (orrery-coding-conventions); a checker's word naming its case
+  and every new check getting its dashboard button
+  (ledger-and-session-records or the dashboard's skill); dots placed by
+  the orrery and stored for the website (interactive-exhibit).
+- **Tony's decisions about the project, which stay on the page and the
+  plan:** the scattered disk; the fuzzy boundaries before the rooms
+  close; the comets' order and colours; the Hills cloud following its
+  paper; where the Horizons check lives.
+**Gap:** each method line rides its skill's next version (One Session,
+One Bump), and leaves the page's Settled list once it is in the skill.
+**Ref:** `documentation/WHERE_WE_ARE.md` (Settled); L-401; L-395; L-421;
+L-424; L-434; skills/*/SKILL.md.
+
 #### [L-434] Stored drawings for the other dot-cloud shells (orrery + gallery)
 <!-- L:434 status:OPEN upd:2026-10-11 section:A flag: rice: -->
 - **Tony's question, 2026-10-11**, having chosen for the Hills cloud
@@ -1618,13 +1651,59 @@ L-395.
   1.3 carries the two-centre test with its saved choice and SBDB's
   lookup of a pinned record by Horizons' name, in one version with
   L-401's 2xr method.
+- **2026-10-12, build 2 built** (Claude Opus 5.5, at c9722520; record
+  `documentation/HANDOFF_L431_build2_orbits_markers_20261012.md`; brief
+  `documentation/HANDOFF_L431_build2_orbits_markers_brief_20261012.md`,
+  Claude Fable 5.1), by `patch_L431_6_orbits_markers_20261012.py`, with
+  L-401's second slice:
+  - The period record keeps the elements Horizons gave around its own
+    centre (the period query already returns them). New
+    `orbital_period.drawing_orbit()` draws a Sun-centred body's ellipse
+    around the period's centre: Sedna's around the solar system's
+    barycentre, moved so its focus sits there (the body's position from
+    both element sets at one date gives where), Mercury's and Encke's
+    around the Sun. The orbit's hover names the centre.
+  - The markers' dates come from the period of the drawn elements, by
+    the fallback order (fetched, then the typed table marked, then
+    Kepler around the Sun only, marked); a date stepped from a period
+    carries its error, stated over a day (Sedna's aphelion, about 930
+    days). The Keplerian position moves by the same period. The Moon's
+    typed 27.321661 default and the satellites' typed-first read are
+    gone; the parameters window takes the period of its own elements
+    (`period_for_elements`).
+  - `VIEW_TO_OSCULATING_CENTRE` is the one home of the view map; the
+    static plot and the animation read it (the animation's copy lacked
+    Orcus, which its per-object choice never used). `_is_small_body`
+    counts a pinned record number as a small body, so C/2025_K1 is asked
+    of SBDB. `get_fallback_elements` reads the centre-aware key.
+  - New checker `test_orbit_markers.py`, "Orbit markers (L-431, L-401)"
+    in the maintenance run and "Orbit Markers" on the dashboard (no
+    "Test", by ruling 5 of 2026-10-12): nine faults planted in copies of
+    the real source, each caught by name, the brief's four among them.
+  - A cold review by a separate Claude agent found six faults in the
+    first draft; all fixed and rechecked (the handoff, section 6).
+  - Tested in the sandbox: the window opens headless; Plot and Animate
+    through the real dispatch draw Sedna to 936.5 au, not 1,004 (a
+    sandbox fixture for its center-of-mass elements, worked out from
+    astropy's built-in ephemeris, a 506.45 au, period 4,160,226 days
+    against JPL's 4,160,096).
+  - horizons-orbital-mechanics 1.4 gains The Drawn Orbit Follows the
+    Period's Centre; protocol v3.93.
+- **Found in build 2, recorded and not chased (The Braid):** the
+  analytical-position fallback in `palomas_orrery.py` (MK2, Xiangliu,
+  Vanth; four sites) times its positions by a typed or Kepler period.
+  One class. The barycentre hovers' typed periods and separations
+  (`BINARY_PARAMS`) wait, by ruling 7 of 2026-10-12, for this item to
+  fetch them.
 **Gap:** three builds, in order (the record's section 3):
 1. The period in the orrery: BUILT and working against JPL
    (2026-10-11); its words settled at L-401's look (2026-10-12).
 2. The drawn ellipse around the period's centre, and the markers from
-   the fetched period (Mode 5, Tony's look).
-3. The website: the export carries each period; every room's hover
-   prints it; the Horizons check compares it.
+   the fetched period: BUILT (2026-10-12); waits for Tony's run, the
+   live check and his look (Mode 5).
+3. The website, next: the export carries each period and the elements
+   around its centre; every room's hover prints it and draws the orbit
+   around that centre; the Horizons check compares it.
 The typed table's 132 unsourced entries stay one class, not chased.
 **Ref:** `documentation/DESIGN_L431_orbital_periods_rulings_20261011.md`;
 `documentation/DESIGN_L431_orbital_periods_20261011.md`;
@@ -2335,12 +2414,47 @@ tools/gallery_cache_builder.py (trust); L-149; L-150; L-363; L-398.
   `test_position_digits.py` (13 planted faults, each caught by name; a
   period-sentence check of six statuses). Maintenance run 24 of 24,
   0 Tier-1 on the gate path.
-**Gap:** Build 1 is accepted, with the look's three fixes; a glance at
-the new sky heading and the giants' surface line after patch_L401_4.
-Then the other slices, one class (the record's section 3):
-the apsidal and encounter markers (with L-431's build 2), the orbit
-hovers in `idealized_orbits.py`, the fly-to buttons, the parameters
-window, the animation's 2xr.
+- **2026-10-12, the second slice built with L-431 build 2** (record
+  `documentation/HANDOFF_L431_build2_orbits_markers_20261012.md`): the
+  markers' hovers in `apsidal_markers.py` (perihelion, aphelion, the
+  actual apsides, the Keplerian position, the closest plotted point)
+  and the orbit hovers in `idealized_orbits.py` (the Sun-centred
+  branch, the moons', the barycentre systems', the Moon, the hyperbolic
+  and perihelion osculating orbits, the mean orbit) print every
+  distance and speed they compute through `position_accuracy`, the body
+  hover's rule and formatter, and every element they repeat (a, e, i,
+  omega, Omega) as given. A marker on a position JPL gave for an apsis
+  date prints by that position's own uncertainty. The typed "Accuracy:
+  +/-0.002 AU" notes, which no source stated, are gone, replaced by the
+  body hover's sentence.
+- **Ruling 7's four in-passing fixes, by name** (`data/provenance_exceptions.json`):
+  "Theoretical minimum distance (theta=0 deg)" and "Theoretical maximum
+  distance (theta=180 deg)", geometry; the console prints "Transformation
+  applied: Mars with Y-axis rotation of 25.19 deg" and "...Triton with
+  Neptune pole orientation + 3 deg", rendering settings. The Mars entry
+  also covers Jupiter's "(3.13 deg X-rotation)" print 44 lines below,
+  the same kind, because the scanner matches an exception within a
+  60-line window. Whole tree 288 -> 280 Tier-1: those five, and the
+  three typed accuracy notes; none added. Gate path 0.
+- **Found in the second slice, recorded and not chased:**
+  - Not opened (neither file is this slice's): the encounter hovers in
+    `spacecraft_encounters.py` and the close-approach hover in
+    `close_approach_data.py`. `apsidal_markers.add_encounter_marker` and
+    `add_actual_apsidal_markers` have no caller.
+  - The parameters window's fallback "estimate" dates, the plot date
+    plus a quarter and three quarters of a period, have no basis; with
+    the window's slice.
+  - For a ruling (on Tony's page, design talk): a number worked out
+    from a model with no stated accuracy (the analytical Moon's a)
+    gets the whole-kilometer floor and its sentence, which still reads
+    as kilometer precision; computed numbers that are not distances or
+    speeds (an eccentricity difference, an angular shift, the
+    analytical Moon's e and i) have no rule and are left as they were.
+**Gap:** Builds 1 and 2 are built; build 2 waits for Tony's look with
+L-431's. Left, build 3: the fly-to buttons, the parameters window, the
+animation's 2xr; and the encounter slice (`spacecraft_encounters.py`,
+`close_approach_data.py`). The two questions above go to the design
+talk.
 **Ref:** `documentation/DESIGN_L401_distance_digits_rulings_20261011.md`;
 `documentation/REVIEW_L401_distance_digits_comparison_20261011.md`;
 `documentation/HANDOFF_L401_distance_build1_brief_20261011.md`;

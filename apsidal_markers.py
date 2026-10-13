@@ -29,6 +29,18 @@ point hover labels to prevent overflow beyond plot boundaries)
 Module updated: May 8, 2026 with Anthropic's Claude 4.6 and 4.7
 - trace_qualifier parameter, deconflicted labels
 
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5
+(L-431 build 2, with L-401's second slice. The markers' dates come from
+the period JPL gave, through orbital_period's fallback order: the fetched
+record, then the typed table, marked "typed value, not fetched from JPL",
+then Kepler's law from the orbit's size, marked; a date stepped from a
+period carries that period's error, stated where it is more than a day.
+Every distance a marker prints goes through position_accuracy, the body
+hover's formatter, so a marker and its body print the same digits; the
+typed "Accuracy: +/-0.002 AU" notes, which no source stated, are gone,
+replaced by the body hover's own sentence. calculate_keplerian_position
+takes the period that belongs to the elements it is given.)
+
 Role: computation
 Domain: orrery
 """
@@ -36,6 +48,9 @@ Domain: orrery
 import numpy as np
 import plotly.graph_objects as go
 from constants_new import KNOWN_ORBITAL_PERIODS, color_map, CENTER_BODY_RADII, KM_PER_AU
+from constants_new import D_PER_JULIAN_YEAR, S_PER_DAY
+import position_accuracy as _pa       # L-401: the body hover's formatter
+import orbital_period as _op          # L-431: the period's fallback order
 from datetime import datetime, timedelta
 
 # ADD THIS TO YOUR apsidal_markers.py FILE
@@ -141,27 +156,30 @@ def calculate_orbital_angle_shift(ideal_pos, actual_pos):
 
 def create_enhanced_apsidal_hover_text(obj_name, marker_type, date, actual_pos, 
                                        ideal_pos=None, params=None, is_perihelion=True,
-                                       center_body='Sun'):
+                                       center_body='Sun', acc=None):
     """
     Create informative hover text for apsidal markers with perturbation notes.
+
+    acc is the accuracy of actual_pos, a position JPL gave for that date
+    (position_accuracy.resolve_accuracy); every distance prints by it, as
+    the body hover would print that position (L-401's second slice).
     """
     import numpy as np
+    if acc is None:
+        acc = _pa.accuracy_for(obj_name, str(center_body), actual_pos)
     
     # Base hover text
     actual_r = np.sqrt(actual_pos['x']**2 + actual_pos['y']**2 + actual_pos['z']**2)
     
     hover_text = f"<b>{obj_name} {marker_type}</b><br>"
     hover_text += f"Date: {date}<br>"        
-#    hover_text += f"Distance from {center_body}: {actual_r:.6f} AU<br>"
-    hover_text += f"Distance from center: {actual_r:.9f} AU<br>"
+    hover_text += f"Distance from center: {_pa.distance_text(acc, actual_r)}<br>"
         
     # Add distance from surface for perihelion if center body radius is known
-    if is_perihelion and center_body in CENTER_BODY_RADII:
-        center_radius_km = CENTER_BODY_RADII[center_body]
-        center_radius_au = center_radius_km / KM_PER_AU  # km to AU
-        surface_distance_au = actual_r - center_radius_au
-        surface_distance_km = surface_distance_au * KM_PER_AU
-        hover_text += f"Distance from surface: {surface_distance_au:.6f} AU ({surface_distance_km:,.0f} km)<br>"
+    if is_perihelion:
+        surf = _pa.surface_text(acc, actual_r, str(center_body))
+        if surf:
+            hover_text += f"Distance from surface: {surf}<br>"
     
     # DEBUG: Log all conditions for perturbation analysis
 
@@ -196,9 +214,9 @@ def create_enhanced_apsidal_hover_text(obj_name, marker_type, date, actual_pos,
                 hover_text += f"Angular shift: {angle_deg:.3f} deg (low)<br>"
             
             # Add distance comparison
-            hover_text += f"Keplerian distance: {ideal_r:.6f} AU<br>"
-            hover_text += f"Actual distance: {actual_r:.6f} AU<br>"
-            hover_text += f"Difference: {delta_r:.6f} AU<br>"
+            hover_text += f"Keplerian distance: {_pa.au_text(acc, ideal_r)}<br>"
+            hover_text += f"Actual distance: {_pa.au_text(acc, actual_r)}<br>"
+            hover_text += f"Difference: {_pa.au_text(acc, delta_r)}<br>"
             
             # Add explanation based on time span
             if is_perihelion and 'TP' in params:
@@ -222,13 +240,15 @@ def create_enhanced_apsidal_hover_text(obj_name, marker_type, date, actual_pos,
             hover_text += "<br><b>Perturbation Analysis:</b><br>"
             hover_text += f"Keplerian orbit epoch: {epoch}<br>"
             hover_text += f"Angular shift: {angle_deg:.3f} deg (low)<br>"
-            hover_text += f"Keplerian distance: {ideal_r:.6f} AU<br>"
-            hover_text += f"Actual distance: {actual_r:.6f} AU<br>"
-            hover_text += f"Difference: {delta_r:.6f} AU<br>"
+            hover_text += f"Keplerian distance: {_pa.au_text(acc, ideal_r)}<br>"
+            hover_text += f"Actual distance: {_pa.au_text(acc, actual_r)}<br>"
+            hover_text += f"Difference: {_pa.au_text(acc, delta_r)}<br>"
             hover_text += "<i>Note: Low deviation expected near epoch.<br>"
             hover_text += "Osculating orbit is calibrated to match<br>"
             hover_text += "position & velocity at this moment.</i><br>"
 
+    # The body hover's own sentence: which kind of figure these are (L-401)
+    hover_text += '<br>'.join(_pa.accuracy_lines(acc))
     return hover_text
 
 def add_actual_apsidal_markers_enhanced(fig, obj_name, params, date_range, positions_dict, 
@@ -891,7 +911,22 @@ def fetch_positions_for_apsidal_dates(obj_id, params, date_range, center_id='Sun
     
     return positions
 
-def get_orbital_period_days(body_name, semi_major_axis_au=None):
+def get_orbital_period(body_name, semi_major_axis_au=None, center_name=None):
+    """
+    The period to work a marker's date out from, by orbital_period's
+    fallback order (L-431, build 2): the period fetched from JPL and saved
+    in the orbit cache for this view's centre; then the typed table,
+    marked; then, around the Sun only, Kepler's third law from the
+    orbit's size, marked. A dict:
+    {'days', 'err_days', 'kind', 'center', 'label', 'record'}.
+    """
+    # Kepler's law from the orbit's size is the last step only around the
+    # Sun: with the Sun's mass it would be wrong for a moon, which gets no
+    # date instead (the old code gave it one, unmarked).
+    return _op.period_for_computation(body_name, center_name, a_au=semi_major_axis_au)
+
+
+def get_orbital_period_days(body_name, semi_major_axis_au=None, center_name=None):
     """
     Get orbital period in Earth days for a given body.
     
@@ -901,30 +936,19 @@ def get_orbital_period_days(body_name, semi_major_axis_au=None):
         Name of the celestial body
     semi_major_axis_au : float, optional
         Semi-major axis in AU (used for unknown bodies via Kepler's third law)
+    center_name : str, optional
+        The view's centre, so the period is the one fetched around it
     
     Returns:
     --------
     float
-        Orbital period in Earth days
+        Orbital period in Earth days, by get_orbital_period's fallback
+        order (L-431, build 2; until then the typed table came first)
     """
-    if body_name in KNOWN_ORBITAL_PERIODS:
-        period = KNOWN_ORBITAL_PERIODS[body_name]
-        # Handle special cases (hyperbolic/parabolic objects)
-        if period is None:
-            if semi_major_axis_au:
-                # For hyperbolic/parabolic orbits, use Kepler's third law
-                # This gives a notional period for visualization purposes
-                return 365.25 * np.sqrt(abs(semi_major_axis_au)**3)
-            else:
-                raise ValueError(f"{body_name} has no defined orbital period (hyperbolic/parabolic orbit)")
-        return period
-    elif semi_major_axis_au:
-        # Use Kepler's third law as fallback for unknown bodies
-        # P^2 = a (where P is in years and a is in AU)
-        # So P_days = 365.25 * sqrt(a)
-        return 365.25 * np.sqrt(abs(semi_major_axis_au)**3)
-    else:
-        raise ValueError(f"Unknown body {body_name} and no semi-major axis provided")
+    p = get_orbital_period(body_name, semi_major_axis_au, center_name)
+    if p['days'] is None:
+        raise ValueError(f"{body_name} has no defined orbital period (open orbit, or no period known)")
+    return p['days']
 
 def calculate_true_anomaly_from_position(x, y, z, a, e, i, omega, Omega):
     """
@@ -1054,7 +1078,8 @@ def calculate_time_to_anomaly(current_M, target_M, orbital_period_days):
     return days_to_target
 
 
-def calculate_apsidal_dates(date, current_x, current_y, current_z, a, e, i, omega, Omega, body_name="Object"):
+def calculate_apsidal_dates(date, current_x, current_y, current_z, a, e, i, omega, Omega, body_name="Object",
+                            center_name=None, period_days=None):
     """
     Calculate dates for perihelion/apohelion (or perigee/apogee for satellites).
     
@@ -1067,6 +1092,11 @@ def calculate_apsidal_dates(date, current_x, current_y, current_z, a, e, i, omeg
         omega: Argument of periapsis (degrees)
         Omega: Longitude of ascending node (degrees)
         body_name: Name of the body (for error messages)
+        center_name: The view's centre, so the period is the one fetched
+            around it (L-431, build 2)
+        period_days: the period belonging to these elements, when the
+            caller has it (orbital_period.period_for_elements); then
+            center_name is not used
     
     Returns:
         tuple: (perihelion_date, apohelion_date) or (None, None) if calculation fails
@@ -1098,11 +1128,19 @@ def calculate_apsidal_dates(date, current_x, current_y, current_z, a, e, i, omeg
         # For elliptical orbits
         # Get orbital period using the helper function
         try:
-            orbital_period_days = get_orbital_period_days(body_name, a)
+            if period_days:
+                orbital_period_days = period_days
+            else:
+                orbital_period_days = get_orbital_period_days(body_name, a, center_name)
         except ValueError:
+            if not _op._orbits_the_sun(body_name, center_name):
+                # A moon with no period known: Kepler's law with the Sun's
+                # mass would be wrong for it, so no date (L-431, build 2)
+                print(f"Warning: no period known for {body_name} around {center_name}", flush=True)
+                return None, None
             # If body not found and no semi-major axis, use default
             print(f"Warning: Using Kepler's law for unknown body {body_name}", flush=True)
-            orbital_period_days = 365.25 * np.sqrt(abs(a)**3)
+            orbital_period_days = D_PER_JULIAN_YEAR * np.sqrt(abs(a)**3)
 
         # Convert current position to mean anomaly
         E_current = true_to_eccentric_anomaly(current_theta, e)
@@ -1123,8 +1161,51 @@ def calculate_apsidal_dates(date, current_x, current_y, current_z, a, e, i, omeg
         return None, None
 
 
+def _marker_date(obj_name, orbital_params, a, e, date, current_position, center_body,
+                 near=True):
+    """
+    The date line for a Keplerian periapsis or apoapsis marker, worked out
+    from the period by the fallback order (L-431, build 2), and the lines
+    that say where that period came from and how uncertain the date is.
+    Returns (date_line or None, note_lines, period).
+
+    With TP the date is TP plus whole periods (and half of one for the
+    apoapsis), so it carries that many periods' error; without TP it is
+    worked out from the body's place on the orbit now, a fraction of one
+    period away, and carries that fraction of the error.
+    """
+    from astropy.time import Time
+    period = get_orbital_period(obj_name, orbital_params.get('a', a), center_body)
+    if date is None or current_position is None or e >= 1 or not period['days']:
+        return None, [], period
+    peri_date, apo_date = calculate_apsidal_dates(
+        date,
+        current_position['x'], current_position['y'], current_position['z'],
+        orbital_params.get('a', a), orbital_params.get('e', e),
+        orbital_params.get('i', 0), orbital_params.get('omega', 0),
+        orbital_params.get('Omega', 0), obj_name, center_name=center_body)
+    est = peri_date if near else apo_date
+    if est is None:
+        return None, [], period
+    p_days = period['days']
+    if 'TP' in orbital_params and period['kind'] in (_op.KIND_FETCHED, _op.KIND_TYPED):
+        precise = Time(orbital_params['TP'], format='jd').datetime
+        steps = 0.0
+        if not near:
+            precise += timedelta(days=p_days / 2)
+            steps = 0.5
+        while precise < date:
+            precise += timedelta(days=p_days)
+            steps += 1.0
+        line = f"Date: {precise.strftime('%Y-%m-%d %H:%M:%S')} UTC"
+    else:
+        steps = abs((est - date).total_seconds()) / S_PER_DAY / p_days
+        line = f"Date: {est.strftime('%Y-%m-%d')}"
+    return line, _op.date_note_lines(period, _op.carried_error_days(period, steps)), period
+
+
 def add_perihelion_marker(fig, x, y, z, obj_name, a, e, date, current_position, 
-                        orbital_params, color_map, q=None, center_body='Sun'):
+                        orbital_params, color_map, q=None, center_body='Sun', acc=None):
     """
     Add a perihelion/perigee marker with accurate date calculation.
     Now handles full datetime precision from TP and uses proper apsidal terminology.
@@ -1141,6 +1222,9 @@ def add_perihelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
         color_map: Function to get color for object
         q: Periapsis distance (calculated if None)
         center_body: Name or ID of central body (Sun, Earth, Jupiter, etc.)
+        acc: the body's accuracy (position_accuracy.resolve_accuracy); when
+            None it is worked out for the body and centre without a
+            position record (L-401's second slice)
     """
     # Get proper apsidal terminology
     near_term, far_term = get_apsidal_terms(center_body)
@@ -1148,95 +1232,35 @@ def add_perihelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
     # Calculate perihelion distance if not provided
     if q is None:
         q = a * (1 - e)
-    
-    # Calculate perihelion date
-    perihelion_date_str = ""
-    if date is not None and current_position is not None and e < 1:
-        perihelion_date, aphelion_date = calculate_apsidal_dates(
-            date,
-            current_position['x'],
-            current_position['y'],
-            current_position['z'],
-            orbital_params.get('a', a),
-            orbital_params.get('e', e),
-            orbital_params.get('i', 0),
-            orbital_params.get('omega', 0),
-            orbital_params.get('Omega', 0),
-            obj_name
-        )
-        
-        if perihelion_date is not None:
-            # For elliptical orbits with TP, we can calculate precise perihelion time
-            if 'TP' in orbital_params and obj_name in KNOWN_ORBITAL_PERIODS:
-                period_days = KNOWN_ORBITAL_PERIODS[obj_name]
-                if period_days and period_days not in [None, 1e99]:  # Valid period
-                    from astropy.time import Time
-                    from datetime import timedelta
-                    tp_time = Time(orbital_params['TP'], format='jd')
-                    tp_datetime = tp_time.datetime
-                    
-                    # Find the next perihelion after the current date
-                    precise_perihelion = tp_datetime
-                    while precise_perihelion < date:
-                        precise_perihelion += timedelta(days=period_days)
-                    
-                    perihelion_date_str = f"<br>Date: {precise_perihelion.strftime('%Y-%m-%d %H:%M:%S')} UTC"
-                else:
-                    # For objects without precise period info
-                    perihelion_date_str = f"<br>Date: {perihelion_date.strftime('%Y-%m-%d')}"
-            else:
-                # No TP available, use calculated date
-                perihelion_date_str = f"<br>Date: {perihelion_date.strftime('%Y-%m-%d')}"
+    if acc is None:
+        acc = _pa.accuracy_for(obj_name, str(center_body))
 
-    # For hyperbolic orbits, use TP if available
-    elif 'TP' in orbital_params and e >= 1:
+    # The date, from the period by the fallback order (L-431, build 2)
+    date_line, note_lines, _period = _marker_date(
+        obj_name, orbital_params, a, e, date, current_position, center_body, near=True)
+    if date_line is None and 'TP' in orbital_params and e >= 1:
+        # For hyperbolic orbits, use TP if available
         from astropy.time import Time
-        tp_time = Time(orbital_params['TP'], format='jd')
-        tp_datetime = tp_time.datetime
-        perihelion_date_str = f"<br>Date: {tp_datetime.strftime('%Y-%m-%d %H:%M:%S')} UTC"
-    elif date is not None:
-        perihelion_date_str = f"<br>Date: {date.strftime('%Y-%m-%d')}"
-    
-    # Accuracy note
-    accuracy_note = ""
-    if e > 0.15:  # High eccentricity
-        accuracy_note = "<br><i>Accuracy: +/-0.002 AU (strong perturbations)</i>"
-    elif e > 0.05:  # Moderate eccentricity
-        accuracy_note = "<br><i>Accuracy: +/-0.001 AU (moderate perturbations)</i>"
-    else:  # Low eccentricity
-        accuracy_note = "<br><i>Accuracy: +/-0.0005 AU (minimal perturbations)</i>"
-    
-    # SAFETY: Ensure we always have some date string
-    if perihelion_date_str == "":
-        perihelion_date_str = "<br>Date: Not calculated"
+        tp_datetime = Time(orbital_params['TP'], format='jd').datetime
+        date_line = f"Date: {tp_datetime.strftime('%Y-%m-%d %H:%M:%S')} UTC"
+    elif date_line is None and date is not None and current_position is None:
+        date_line = f"Date: {date.strftime('%Y-%m-%d')}"
+    if date_line is None:
+        date_line = "Date: Not calculated"
         print(f"WARNING: Could not calculate {near_term} date for {obj_name}", flush=True)
     
     # Use proper terminology for this central body
     label = f"Keplerian {near_term}"
     
-    # Create hover text with all information
-    # Ensure q is properly formatted
-    try:
-        q_str = f"{q:.6f}"
-    except:
-        q_str = str(q)
-        print(f"WARNING: Could not format q value for {obj_name}: {q}", flush=True)
-    
-    # Calculate distance from surface if center body radius is known
-    surface_distance_text = ""
-    print(f"DEBUG SURFACE: center_body='{center_body}', in CENTER_BODY_RADII={center_body in CENTER_BODY_RADII}", flush=True)  # TEMP DEBUG
-    if center_body in CENTER_BODY_RADII:
-        center_radius_km = CENTER_BODY_RADII[center_body]
-        center_radius_au = center_radius_km / KM_PER_AU  # km to AU
-        surface_distance_au = q - center_radius_au
-        surface_distance_km = surface_distance_au * KM_PER_AU
-        surface_distance_text = f"<br>Distance from surface: {surface_distance_au:.6f} AU ({surface_distance_km:,.0f} km)"
-    
-    hover_text = f"<b>{obj_name} {label}</b>{perihelion_date_str}<br>q={q_str} AU{surface_distance_text}{accuracy_note}"
-#    hover_text = f"<b>{obj_name} {label}</b>{perihelion_date_str}<br>q={q_str} AU{accuracy_note}"
-    
-    # DEBUG: Uncomment these lines to diagnose hover text issues
-    print(f"DEBUG: {obj_name} {label} hover text: {hover_text}", flush=True)
+    # Every distance by the body hover's rule and formatter (L-401). The
+    # typed "Accuracy: +/-0.002 AU" notes that stood here had no source.
+    lines = [f"<b>{obj_name} {label}</b>", date_line] + note_lines
+    lines.append(f"q = {_pa.distance_text(acc, q)}")
+    surf = _pa.surface_text(acc, q, str(center_body))
+    if surf:
+        lines.append(f"Distance from surface: {surf}")
+    lines += _pa.accuracy_lines(acc)
+    hover_text = '<br>'.join(lines)
     
     fig.add_trace(
         go.Scatter3d(
@@ -1260,7 +1284,7 @@ def add_perihelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
 
 
 def add_apohelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
-                        orbital_params, color_map, center_body='Sun'):
+                        orbital_params, color_map, center_body='Sun', acc=None):
     """
     Add an apohelion/apogee marker to the plot with accurate date calculation.
     Now handles full datetime precision from TP and uses proper apsidal terminology.
@@ -1276,6 +1300,7 @@ def add_apohelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
         orbital_params: Full orbital parameters dictionary
         color_map: Function to get color for object
         center_body: Name or ID of central body (Sun, Earth, Jupiter, etc.)
+        acc: the body's accuracy, as for add_perihelion_marker
     """
     # Get proper apsidal terminology
     near_term, far_term = get_apsidal_terms(center_body)
@@ -1286,86 +1311,30 @@ def add_apohelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
     else:
         # No aphelion for hyperbolic orbits
         return
-    
-    # Calculate aphelion date
-    aphelion_date_str = ""
-    if date is not None and current_position is not None and e < 1:
-        perihelion_date, aphelion_date = calculate_apsidal_dates(
-            date,
-            current_position['x'],
-            current_position['y'],
-            current_position['z'],
-            orbital_params.get('a', a),
-            orbital_params.get('e', e),
-            orbital_params.get('i', 0),
-            orbital_params.get('omega', 0),
-            orbital_params.get('Omega', 0),
-            obj_name
-        )
-        
-        if aphelion_date is not None:
-            # For elliptical orbits with TP, we can calculate precise aphelion time
-            if 'TP' in orbital_params and obj_name in KNOWN_ORBITAL_PERIODS:
-                period_days = KNOWN_ORBITAL_PERIODS[obj_name]
-                if period_days and period_days != 1e99:  # Not a hyperbolic placeholder
-                    from astropy.time import Time
-                    from datetime import timedelta
-                    tp_time = Time(orbital_params['TP'], format='jd')
-                    tp_datetime = tp_time.datetime
-                    # Aphelion is half period after perihelion
-                    precise_aphelion = tp_datetime + timedelta(days=period_days/2)
-                    # Adjust for multiple orbits if needed
-                    while precise_aphelion < date:
-                        precise_aphelion += timedelta(days=period_days)
-                    aphelion_date_str = f"<br>Date: {precise_aphelion.strftime('%Y-%m-%d %H:%M:%S')} UTC"
-                else:
-                    aphelion_date_str = f"<br>Date: {aphelion_date.strftime('%Y-%m-%d')}"
-            else:
-                aphelion_date_str = f"<br>Date: {aphelion_date.strftime('%Y-%m-%d')}"
-    elif date is not None:
-        aphelion_date_str = f"<br>Date: {date.strftime('%Y-%m-%d')}"
-    
-    # Accuracy note
-    accuracy_note = ""
-    if e > 0.15:  # High eccentricity
-        accuracy_note = "<br><i>Accuracy: +/-0.002 AU (strong perturbations)</i>"
-    elif e > 0.05:  # Moderate eccentricity
-        accuracy_note = "<br><i>Accuracy: +/-0.001 AU (moderate perturbations)</i>"
-    else:  # Low eccentricity
-        accuracy_note = "<br><i>Accuracy: +/-0.0005 AU (minimal perturbations)</i>"
-    
-    # SAFETY: Ensure we always have some date string
-    if aphelion_date_str == "":
-        aphelion_date_str = "<br>Date: Not calculated"
+    if acc is None:
+        acc = _pa.accuracy_for(obj_name, str(center_body))
+
+    # The date, from the period by the fallback order (L-431, build 2)
+    date_line, note_lines, _period = _marker_date(
+        obj_name, orbital_params, a, e, date, current_position, center_body, near=False)
+    if date_line is None and date is not None and current_position is None:
+        date_line = f"Date: {date.strftime('%Y-%m-%d')}"
+    if date_line is None:
+        date_line = "Date: Not calculated"
         print(f"WARNING: Could not calculate {far_term} date for {obj_name}", flush=True)
     
     # Use proper terminology for this central body
     label = f"Keplerian {far_term}"
-        
 
-    
-    # Create hover text
-    # Ensure Q is properly formatted
-    try:
-        Q_str = f"{Q:.6f}"
-    except:
-        Q_str = str(Q)
-        print(f"WARNING: Could not format Q value for {obj_name}: {Q}", flush=True)
-    
-    # Calculate distance from surface if center body radius is known
-    surface_distance_text = ""
-    if center_body in CENTER_BODY_RADII:
-        center_radius_km = CENTER_BODY_RADII[center_body]
-        center_radius_au = center_radius_km / KM_PER_AU  # km to AU
-        surface_distance_au = Q - center_radius_au
-        surface_distance_km = surface_distance_au * KM_PER_AU
-        surface_distance_text = f"<br>Distance from surface: {surface_distance_au:.6f} AU ({surface_distance_km:,.0f} km)"
-    
-    hover_text = f"<b>{obj_name} {label}</b>{aphelion_date_str}<br>Q={Q_str} AU{surface_distance_text}{accuracy_note}"
-#    hover_text = f"<b>{obj_name} {label}</b>{aphelion_date_str}<br>Q={Q_str} AU{accuracy_note}"
-
-    # DEBUG: Uncomment these lines to diagnose hover text issues
-    print(f"DEBUG: {obj_name} {label} hover text: {hover_text}", flush=True)
+    # Every distance by the body hover's rule and formatter (L-401). The
+    # typed "Accuracy: +/-0.002 AU" notes that stood here had no source.
+    lines = [f"<b>{obj_name} {label}</b>", date_line] + note_lines
+    lines.append(f"Q = {_pa.distance_text(acc, Q)}")
+    surf = _pa.surface_text(acc, Q, str(center_body))
+    if surf:
+        lines.append(f"Distance from surface: {surf}")
+    lines += _pa.accuracy_lines(acc)
+    hover_text = '<br>'.join(lines)
    
     fig.add_trace(
         go.Scatter3d(
@@ -1489,44 +1458,28 @@ def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, colo
     else:
         label = f"Closest Plotted Point"
 
-    # Create comprehensive hover text
-    km_distance = closest_distance * KM_PER_AU  # AU to km
-    
-    # Use appropriate precision based on distance scale
-    if closest_distance < 0.0001:  # Less than ~15,000 km - show scientific notation
-        au_str = f"{closest_distance:.2e} AU"
-    elif closest_distance < 0.001:  # Less than ~150,000 km - show 8 decimal places
-        au_str = f"{closest_distance:.8f} AU"
-    else:
-        au_str = f"{closest_distance:.6f} AU"
-    
-    # Show km with appropriate precision
-    if km_distance < 10:
-        km_str = f"{km_distance:.2f} km"
-    elif km_distance < 1000:
-        km_str = f"{km_distance:.1f} km"
-    else:
-        km_str = f"{km_distance:,.0f} km"
-        
+    # Create comprehensive hover text. L-401's second slice: the distances
+    # print by the body hover's rule and formatter, from the plotted
+    # position's own record (a trajectory point, which carries no small-body
+    # uncertainty, so a small body says JPL's figure is not included here,
+    # as its animation hover does). The widths chosen by scale are gone.
+    acc = _pa.accuracy_for(obj_name, str(center_body), closest_pos)
     hover_text = (
         f"<b>{obj_name} {label}</b><br>"
         f"Date: {date_str_formatted}<br>"
-        f"Distance from center: {au_str}<br>"
-        f"Distance from center: {km_str}"
+        f"Distance from center: {_pa.distance_text(acc, closest_distance)}"
     )
 
     # Add center body radius and surface distance if known
     if center_body in CENTER_BODY_RADII:
         center_radius_km = CENTER_BODY_RADII[center_body]
         center_radius_au = center_radius_km / KM_PER_AU
-        surface_km = km_distance - center_radius_km
-        surface_au = closest_distance - center_radius_au
         hover_text += (
             f"<br>{center_body} radius: {center_radius_km:,.0f} km"
             f" ({center_radius_au:.6f} AU)"
-            f"<br>Distance from surface: {surface_km:,.0f} km"
-            f" ({surface_au:.6f} AU)"
+            f"<br>Distance from surface: {_pa.surface_text(acc, closest_distance, str(center_body))}"
         )
+    hover_text += '<br>' + '<br>'.join(_pa.accuracy_lines(acc))
 
     # Append mission context if available (spacecraft encounter infrastructure)
     if obj_info:
@@ -1617,7 +1570,7 @@ def eccentric_to_true_anomaly(E, e):
     return theta
 
 
-def calculate_keplerian_position(orbital_params, current_datetime, rotate_points):
+def calculate_keplerian_position(orbital_params, current_datetime, rotate_points, period_days=None):
     """
     Calculate the Keplerian (analytical) position of an object at a given time.
     
@@ -1635,6 +1588,10 @@ def calculate_keplerian_position(orbital_params, current_datetime, rotate_points
             - epoch: Epoch date string (e.g., "2026-01-10 osc.")
         current_datetime: datetime object for the desired time
         rotate_points: Function to rotate points in 3D space
+        period_days: the period that belongs to these elements, around the
+            same centre (L-431, build 2: orbital_period.drawing_orbit gives
+            it); when None, orbital_params['orbital_period_days'], then
+            Kepler's third law from a, as before
         
     Returns:
         dict: {'x': float, 'y': float, 'z': float, 'distance': float, 
@@ -1682,16 +1639,18 @@ def calculate_keplerian_position(orbital_params, current_datetime, rotate_points
             return None
         
         # Calculate time elapsed since epoch (in days)
-        delta_t_days = (current_datetime - epoch_datetime).total_seconds() / 86400.0
+        delta_t_days = (current_datetime - epoch_datetime).total_seconds() / S_PER_DAY
         
-        # Get orbital period to calculate mean motion
-        # Try to get from params first, then from KNOWN_ORBITAL_PERIODS
-        period_days = orbital_params.get('orbital_period_days')
+        # Get orbital period to calculate mean motion: the period that belongs
+        # to these elements when the caller has it (L-431, build 2), then
+        # from params, then Kepler's third law
+        if period_days is None:
+            period_days = orbital_params.get('orbital_period_days')
         if period_days is None:
             # Calculate from semi-major axis using Kepler's 3rd law
             # P^2 = a^3 (for heliocentric, P in years, a in AU)
             period_years = np.sqrt(a**3)
-            period_days = period_years * 365.25
+            period_days = period_years * D_PER_JULIAN_YEAR
         
         # Calculate mean motion (radians per day)
         n = 2 * np.pi / period_days
@@ -1754,7 +1713,8 @@ def calculate_keplerian_position(orbital_params, current_datetime, rotate_points
 
 
 def add_keplerian_position_marker(fig, obj_name, orbital_params, current_datetime, 
-                                   rotate_points, center_body='Sun'):
+                                   rotate_points, center_body='Sun', period_days=None,
+                                   offset_au=(0.0, 0.0, 0.0), acc=None, centre_words=None):
     """
     Add a Keplerian (analytical) current position marker to the plot.
     
@@ -1774,6 +1734,14 @@ def add_keplerian_position_marker(fig, obj_name, orbital_params, current_datetim
         current_datetime: datetime for position calculation
         rotate_points: Function to rotate points in 3D space
         center_body: Name of central body (for terminology)
+        period_days: the period belonging to orbital_params (L-431, build 2)
+        offset_au: where the elements' centre sits in the plot, from the
+            plot's centre (orbital_period.drawing_orbit); the marker is
+            moved by it, as the drawn ellipse is
+        acc: the body's accuracy, so the distance prints to the body's
+            digits (L-401); worked out without a record when None
+        centre_words: the centre the elements are around, named in the
+            hover when it is not the plot's centre
         
     Returns:
         bool: True if marker was added, False otherwise
@@ -1782,11 +1750,19 @@ def add_keplerian_position_marker(fig, obj_name, orbital_params, current_datetim
     import numpy as np
     
     # Calculate the Keplerian position
-    position = calculate_keplerian_position(orbital_params, current_datetime, rotate_points)
+    position = calculate_keplerian_position(orbital_params, current_datetime, rotate_points,
+                                            period_days=period_days)
     
     if position is None:
         print(f"[KEPLERIAN POS] Could not calculate position for {obj_name}", flush=True)
         return False
+    dx, dy, dz = offset_au
+    position['x'] += dx
+    position['y'] += dy
+    position['z'] += dz
+    position['distance'] = float(np.sqrt(position['x']**2 + position['y']**2 + position['z']**2))
+    if acc is None:
+        acc = _pa.accuracy_for(obj_name, str(center_body))
     
     # Get epoch for label
     epoch_str = orbital_params.get('epoch', 'unknown')
@@ -1800,8 +1776,10 @@ def add_keplerian_position_marker(fig, obj_name, orbital_params, current_datetim
         f"<i>(Calculated from osculating elements)</i><br>"
         f"<br>"
         f"Current time: {current_str}<br>"
-        f"Distance from center: {position['distance']:.6f} AU<br>"
-        f"<br>"
+        f"Distance from center: {_pa.distance_text(acc, position['distance'])}<br>"
+        + ''.join(line + '<br>' for line in _pa.accuracy_lines(acc))
+        + (f"Orbit taken around {centre_words}.<br>" if centre_words else "")
+        + f"<br>"
         f"<b>Calculation Details:</b><br>"
         f"{position['calculation_details']}<br>"
         f"<br>"

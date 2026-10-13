@@ -35,6 +35,17 @@ Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5
 (L-421: create_pole_transformation_matrix moved unchanged to
 pole_frames.py and imported here, so the Hills cloud's orbit sampler can
 use it without Plotly or Tk)
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5
+(L-431 build 2, with L-401's second slice. A Sun-centred body's ellipse
+is drawn around the same centre as its period, through
+orbital_period.drawing_orbit: Sedna's around the solar system's
+barycentre, moved so its focus sits there; its markers move with it and
+take their dates from the period of the drawn elements, the aphelion's
+with that period's error where it is more than a day. The Moon's and the
+satellites' periods follow the same fallback order; the typed 27.321661
+default is gone. Every orbit hover prints the elements it repeats from
+Horizons as given, and every distance or speed it computes by the body
+hover's rule and formatter (position_accuracy).)
 
 Role: computation
 Domain: orrery
@@ -46,7 +57,10 @@ import plotly.graph_objs as go
 import traceback  # Add this import
 from datetime import datetime, timedelta
 from osculating_cache_manager import get_elements_with_prompt
+import position_accuracy as _pa   # L-401: the body hover's formatter
+import orbital_period as _op      # L-431: the period's centre and fallback order
 from constants_new import color_map, KNOWN_ORBITAL_PERIODS, KM_PER_AU, EARTH_OBLIQUITY_J2000_DEG
+from constants_new import D_PER_JULIAN_YEAR
 from orbital_elements import planetary_params as ORIGINAL_planetary_params
 from apsidal_markers import (
     add_perihelion_marker,
@@ -198,7 +212,7 @@ def get_planet_perturbation_note(obj_name, orbit_source="Keplerian"):
     )
     
     return perturbation_notes.get(obj_name, default_note)
-def get_mean_vs_osculating_assessment(obj_name, osc_params, mean_params):
+def get_mean_vs_osculating_assessment(obj_name, osc_params, mean_params, acc=None):
     """
     Compare osculating vs mean orbital elements and return perturbation assessment HTML.
     
@@ -253,11 +267,11 @@ def get_mean_vs_osculating_assessment(obj_name, osc_params, mean_params):
             osc_q = abs(osc_a) * abs(osc_e - 1)
             mean_q = abs(mean_a) * abs(mean_e - 1)
             delta_q = osc_q - mean_q
-            delta_a_text = f"<br>Delta-q: {delta_q:+.6f} AU"
+            delta_a_text = f"<br>Delta-q: {'+' if delta_q >= 0 else ''}{_pa.au_text(acc, delta_q)}"
         else:
             delta_a = osc_a - mean_a
             pct_a = abs(delta_a / mean_a * 100)
-            delta_a_text = f"<br>Delta-a: {delta_a:+.6f} AU ({pct_a:.1f}%)"
+            delta_a_text = f"<br>Delta-a: {'+' if delta_a >= 0 else ''}{_pa.au_text(acc, delta_a)} ({pct_a:.1f}%)"
     
     epoch_str = mean_params.get('epoch', 'N/A')
     
@@ -314,7 +328,7 @@ def add_mean_orbit_trace(fig, obj_name, mean_params, color_func):
                 mean_a, mean_e, mean_i, mean_omega, mean_Omega, rotate_points
             )
             orbit_type = "Hyperbolic"
-            orbit_info = f"q={q_mean:.6f} AU"
+            orbit_info = f"q={_pa.au_text(_pa.accuracy_for(obj_name, 'Sun'), q_mean)}"
         elif mean_e >= 0:
             # Elliptical mean orbit
             if mean_e > 0.99:
@@ -338,14 +352,14 @@ def add_mean_orbit_trace(fig, obj_name, mean_params, color_func):
             x_mean, y_mean, z_mean = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
             
             orbit_type = "Elliptical"
-            orbit_info = f"a={mean_a:.6f} AU"
+            orbit_info = f"a={_pa.as_given(mean_a)} AU"
         else:
             return False
         
         # Build hover text
         hover_text = (
             f"{obj_name} Mean Orbit (Epoch: {epoch_str})"
-            f"<br>{orbit_type}: e={mean_e:.6f}, {orbit_info}"
+            f"<br>{orbit_type}: e={_pa.as_given(mean_e)}, {orbit_info}"
             f"<br>i={mean_i:.2f} deg"
             f"<br><br><i>Mean elements = JPL long-term solution."
             f"<br>Compare with osculating orbit to see perturbation effects.</i>"
@@ -1145,6 +1159,41 @@ def debug_satellite_systems():
     )
     
     fig.show()
+def _shift_apsides(apsides, off):
+    """
+    Apsides moved by off, the place of the orbit's own centre in the plot
+    (orbital_period.drawing_orbit; L-431 build 2), so the markers sit on
+    the drawn ellipse. Each keeps 'q_or_Q', its distance from that centre,
+    and 'distance' is left as it was.
+    """
+    for key in ('periapsis', 'apoapsis'):
+        p = (apsides or {}).get(key)
+        if p:
+            p['q_or_Q'] = p['distance']
+            p['x'] = p['x'] + off[0]
+            p['y'] = p['y'] + off[1]
+            p['z'] = p['z'] + off[2]
+    return apsides
+
+
+def _plotted_r(p):
+    """A marker's distance from the plot's centre, where it is drawn."""
+    return math.sqrt(p['x'] ** 2 + p['y'] ** 2 + p['z'] ** 2)
+
+
+def _around_line(orbit, symbol):
+    """One line naming the centre q or Q is measured from, when that is not
+    the plot's centre (L-431 build 2); empty otherwise."""
+    if orbit and any(orbit.get('offset_au') or ()) and orbit.get('label'):
+        return f"<br>{symbol} is measured from {orbit['label']}."
+    return ""
+
+
+def _accuracy_tail(acc):
+    """The body hover's sentence under a marker's distances (L-401)."""
+    return ''.join('<br>' + line for line in _pa.accuracy_lines(acc))
+
+
 def rotate_points(x, y, z, angle, axis='z'):
     """
     Rotates points (x,y,z) about the given axis by 'angle' radians.
@@ -1318,9 +1367,9 @@ def plot_jupiter_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
             f"<b>{satellite_name} Osculating Orbit</b><br>"
             f"JPL Horizons snapshot<br>"
             f"Epoch: {epoch}<br>"
-            f"a={a:.6f} AU<br>"
-            f"e={e:.6f}<br>"
-            f"i={i:.4f} deg (ecliptic)"
+            f"a={_pa.as_given(a)} AU<br>"
+            f"e={_pa.as_given(e)}<br>"
+            f"i={_pa.as_given(i)} deg (ecliptic)"
             f"{osculating_note}"
         )
         
@@ -1465,9 +1514,9 @@ def plot_saturn_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
             hover_text_osc = (
                 f"<b>{satellite_name} Osculating Orbit</b><br>"
                 f"Epoch: {epoch}<br>"
-                f"a={a:.6f} AU, e={e:.6f}<br>"
-                f"i={i:.4f} deg (retrograde, J2000 ecliptic)<br>"
-                f"omega={omega:.2f} deg, Omega={Omega:.2f} deg<br>"
+                f"a={_pa.as_given(a)} AU, e={_pa.as_given(e)}<br>"
+                f"i={_pa.as_given(i)} deg (retrograde, J2000 ecliptic)<br>"
+                f"omega={_pa.as_given(omega)} deg, Omega={_pa.as_given(Omega)} deg<br>"
                 f"<br><i>Phoebe: Irregular retrograde satellite<br>"
                 f"Period: ~550 days | Discovered: 1899<br>"
                 f"Osculating elements from JPL Horizons.</i>"
@@ -1476,9 +1525,9 @@ def plot_saturn_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
             hover_text_osc = (
                 f"<b>{satellite_name} Osculating Orbit</b><br>"
                 f"Epoch: {epoch}<br>"
-                f"a={a:.6f} AU, e={e:.6f}<br>"
-                f"i={i:.4f} deg (J2000 ecliptic)<br>"
-                f"omega={omega:.2f} deg, Omega={Omega:.2f} deg<br>"
+                f"a={_pa.as_given(a)} AU, e={_pa.as_given(e)}<br>"
+                f"i={_pa.as_given(i)} deg (J2000 ecliptic)<br>"
+                f"omega={_pa.as_given(omega)} deg, Omega={_pa.as_given(Omega)} deg<br>"
                 f"<br><i>Osculating = instantaneous Keplerian fit<br>"
                 f"from JPL Horizons orbital elements.<br>"
                 f"Saturn analytical orbits not shown due to<br>"
@@ -1589,9 +1638,9 @@ def plot_uranus_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
         hover_text_osc = (
             f"<b>{satellite_name} Osculating Orbit</b><br>"
             f"Epoch: {epoch}<br>"
-            f"a={a:.6f} AU, e={e:.6f}<br>"
-            f"i={i:.4f} deg (J2000 ecliptic)<br>"
-            f"omega={omega:.2f} deg, Omega={Omega:.2f} deg<br>"
+            f"a={_pa.as_given(a)} AU, e={_pa.as_given(e)}<br>"
+            f"i={_pa.as_given(i)} deg (J2000 ecliptic)<br>"
+            f"omega={_pa.as_given(omega)} deg, Omega={_pa.as_given(Omega)} deg<br>"
             f"<br><i>Osculating = instantaneous Keplerian fit<br>"
             f"from JPL Horizons orbital elements.<br>"
             f"Uranus analytical orbits not shown due to<br>"
@@ -1709,9 +1758,9 @@ def plot_neptune_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
             hover_text_osc = (
                 f"<b>{satellite_name} Osculating Orbit</b><br>"
                 f"Epoch: {epoch}<br>"
-                f"a={a:.6f} AU, e={e:.6f}<br>"
-                f"i={i:.4f} deg (retrograde, J2000 ecliptic)<br>"
-                f"omega={omega:.2f} deg, Omega={Omega:.2f} deg<br>"
+                f"a={_pa.as_given(a)} AU, e={_pa.as_given(e)}<br>"
+                f"i={_pa.as_given(i)} deg (retrograde, J2000 ecliptic)<br>"
+                f"omega={_pa.as_given(omega)} deg, Omega={_pa.as_given(Omega)} deg<br>"
                 f"<br><i>Triton: Neptune's largest moon<br>"
                 f"Retrograde orbit - likely captured Kuiper Belt object<br>"
                 f"Spiraling inward, will break up in ~3.6 billion years<br>"
@@ -1721,9 +1770,9 @@ def plot_neptune_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
             hover_text_osc = (
                 f"<b>{satellite_name} Osculating Orbit</b><br>"
                 f"Epoch: {epoch}<br>"
-                f"a={a:.6f} AU, e={e:.6f}<br>"
-                f"i={i:.4f} deg (J2000 ecliptic)<br>"
-                f"omega={omega:.2f} deg, Omega={Omega:.2f} deg<br>"
+                f"a={_pa.as_given(a)} AU, e={_pa.as_given(e)}<br>"
+                f"i={_pa.as_given(i)} deg (J2000 ecliptic)<br>"
+                f"omega={_pa.as_given(omega)} deg, Omega={_pa.as_given(Omega)} deg<br>"
                 f"<br><i>Nereid: Highly eccentric orbit (e~0.75)<br>"
                 f"Most eccentric known moon in solar system<br>"
                 f"Likely perturbed by Triton's capture</i>"
@@ -1732,9 +1781,9 @@ def plot_neptune_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
             hover_text_osc = (
                 f"<b>{satellite_name} Osculating Orbit</b><br>"
                 f"Epoch: {epoch}<br>"
-                f"a={a:.6f} AU, e={e:.6f}<br>"
-                f"i={i:.4f} deg (J2000 ecliptic)<br>"
-                f"omega={omega:.2f} deg, Omega={Omega:.2f} deg<br>"
+                f"a={_pa.as_given(a)} AU, e={_pa.as_given(e)}<br>"
+                f"i={_pa.as_given(i)} deg (J2000 ecliptic)<br>"
+                f"omega={_pa.as_given(omega)} deg, Omega={_pa.as_given(Omega)} deg<br>"
                 f"<br><i>Osculating = instantaneous Keplerian fit<br>"
                 f"from JPL Horizons orbital elements.<br>"
                 f"Neptune analytical orbits not shown due to<br>"
@@ -2282,11 +2331,11 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
             f"Epoch: {epoch}<br>"
             f"<br>"
             f"<b>Orbital Elements:</b><br>"
-            f"a = {a:.6f} AU ({a * KM_PER_AU:.0f} km)<br>"
-            f"e = {e:.4f}<br>"
-            f"i = {i:.2f} deg<br>"
-            f"omega = {omega:.2f} deg<br>"
-            f"Omega = {Omega:.2f} deg<br>"
+            f"a = {_pa.as_given(a)} AU ({_pa.km_text(_pa.accuracy_for(satellite_name, parent_name), a * KM_PER_AU)})<br>"
+            f"e = {_pa.as_given(e)}<br>"
+            f"i = {_pa.as_given(i)} deg<br>"
+            f"omega = {_pa.as_given(omega)} deg<br>"
+            f"Omega = {_pa.as_given(Omega)} deg<br>"
             f"<br>"
             f"<i>{orbit_source}</i>"
         )
@@ -2378,15 +2427,17 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
         return fig
 def _build_barycenter_mode_hover_text(object_name, a, e, i, epoch, binary_params):
     """Build hover text for barycenter-centered view."""
+    # L-401's second slice: a computed distance by the body hover's rule
+    _acc_o = _pa.accuracy_for(object_name, 'Pluto-Charon Barycenter')
     
     if object_name == 'Pluto':
         return (
             f"<b>Pluto's Osculating Orbit around Barycenter</b><br>"
             f"<i>The smaller orbit of the binary pair</i><br><br>"
             f"<b>Orbital Elements (Epoch: {epoch}):</b><br>"
-            f"a = {a:.7f} AU ({a * KM_PER_AU:.0f} km) <i>[calculated]</i><br>"
-            f"e = {e:.4f} (nearly circular)<br>"
-            f"i = {i:.1f} deg to ecliptic <i>[osculating]</i><br>"
+            f"a = {_pa.distance_text(_acc_o, a)} <i>[calculated]</i><br>"
+            f"e = {_pa.as_given(e)} (nearly circular)<br>"
+            f"i = {_pa.as_given(i)} deg to ecliptic <i>[osculating]</i><br>"
             f"Period: {binary_params['period_days']:.3f} days<br><br>"
             f"<b>Why Pluto's orbit is smaller:</b><br>"
             f"<i>Pluto is ~8x more massive than Charon,<br>"
@@ -2407,9 +2458,9 @@ def _build_barycenter_mode_hover_text(object_name, a, e, i, epoch, binary_params
             f"<b>Charon's Osculating Orbit around Barycenter</b><br>"
             f"<i>The larger orbit of the binary pair</i><br><br>"
             f"<b>Orbital Elements (Epoch: {epoch}):</b><br>"
-            f"a = {a:.7f} AU ({a * KM_PER_AU:.0f} km) <i>[calculated]</i><br>"
-            f"e = {e:.4f} (nearly circular)<br>"
-            f"i = {i:.1f} deg to ecliptic <i>[osculating]</i><br>"
+            f"a = {_pa.distance_text(_acc_o, a)} <i>[calculated]</i><br>"
+            f"e = {_pa.as_given(e)} (nearly circular)<br>"
+            f"i = {_pa.as_given(i)} deg to ecliptic <i>[osculating]</i><br>"
             f"Period: {binary_params['period_days']:.3f} days<br><br>"
             f"<b>Why Charon's orbit is larger:</b><br>"
             f"<i>Charon is only 12% of Pluto's mass,<br>"
@@ -2431,9 +2482,9 @@ def _build_barycenter_mode_hover_text(object_name, a, e, i, epoch, binary_params
         return (
             f"<b>{object_name} Orbit</b><br>"
             f"<i>(around Pluto-Charon barycenter)</i><br><br>"
-            f"a = {a:.7f} AU ({a * KM_PER_AU:.0f} km)<br>"
-            f"e = {e:.4f}<br>"
-            f"i = {i:.2f} deg to ecliptic<br><br>"
+            f"a = {_pa.as_given(a)} AU ({_pa.km_text(_acc_o, a * KM_PER_AU)})<br>"
+            f"e = {_pa.as_given(e)}<br>"
+            f"i = {_pa.as_given(i)} deg to ecliptic<br><br>"
             f"<b>Orbital Resonance:</b><br>"
             f"<i>The outer moons orbit in near-resonance<br>"
             f"with Charon's 6.387-day period:<br>"
@@ -2454,8 +2505,8 @@ def _build_pluto_centered_hover_text(object_name, a, e, i, epoch):
             f"<b>Charon Osculating Orbit</b><br>"
             f"<i>(around Pluto center)</i><br><br>"
             f"Epoch: {epoch}<br>"
-            f"a = {a:.6f} AU, e = {e:.6f}<br>"
-            f"i = {i:.4f} deg (J2000 ecliptic)<br>"
+            f"a = {_pa.as_given(a)} AU, e = {_pa.as_given(e)}<br>"
+            f"i = {_pa.as_given(i)} deg (J2000 ecliptic)<br>"
             f"Period: 6.387 days (tidally locked)<br><br>"
             f"<b>Why orbit appears non-circular:</b><br>"
             f"<i>Charon's orbit is nearly circular (e~0.0002),<br>"
@@ -2469,8 +2520,8 @@ def _build_pluto_centered_hover_text(object_name, a, e, i, epoch):
             f"<b>{object_name} Osculating Orbit</b><br>"
             f"<i>(around Pluto center)</i><br><br>"
             f"Epoch: {epoch}<br>"
-            f"a = {a:.6f} AU, e = {e:.6f}<br>"
-            f"i = {i:.4f} deg (J2000 ecliptic)<br><br>"
+            f"a = {_pa.as_given(a)} AU, e = {_pa.as_given(e)}<br>"
+            f"i = {_pa.as_given(i)} deg (J2000 ecliptic)<br><br>"
             f"<b>Why orbits diverge:</b><br>"
             f"<i>'Osculating' means 'kissing' - this ellipse<br>"
             f"matches position & velocity at epoch only.<br>"
@@ -2685,10 +2736,10 @@ def plot_orcus_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
             if object_name == 'Orcus':
                 hover_text_osc = (
                     f"<b>{object_name} ALMA Orbit (Brown & Butler 2023)</b><br>"
-                    f"<br>Orbital radius: {a:.7f} AU ({a * KM_PER_AU:.1f} km)<br>"
+                    f"<br>Orbital radius: {_pa.distance_text(_pa.accuracy_for(object_name, center_id), a)}<br>"
                     f"Period: {BINARY_PARAMS['period_days']:.2f} days<br>"
                     f"Eccentricity: ~0.007 (nearly circular)<br>"
-                    f"Inclination: {i:.1f} deg, Omega: {Omega:.1f} deg<br>"
+                    f"Inclination: {_pa.as_given(i)} deg, Omega: {_pa.as_given(Omega)} deg<br>"
                     f"<br><b>Binary System - Highest Mass Ratio Known!</b><br>"
                     f"Mass ratio (Vanth/Orcus): 0.16 +/- 0.02<br>"
                     f"(Charon/Pluto is only 0.12)<br>"
@@ -2709,10 +2760,10 @@ def plot_orcus_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
             else:  # Vanth
                 hover_text_osc = (
                     f"<b>{object_name} ALMA Orbit (Brown & Butler 2023)</b><br>"
-                    f"<br>Orbital radius: {a:.7f} AU ({a * KM_PER_AU:.1f} km)<br>"
+                    f"<br>Orbital radius: {_pa.distance_text(_pa.accuracy_for(object_name, center_id), a)}<br>"
                     f"Period: {BINARY_PARAMS['period_days']:.2f} days<br>"
                     f"Eccentricity: ~0.007 (nearly circular)<br>"
-                    f"Inclination: {i:.1f} deg, Omega: {Omega:.1f} deg<br>"
+                    f"Inclination: {_pa.as_given(i)} deg, Omega: {_pa.as_given(Omega)} deg<br>"
                     f"<br><b>Binary System - Highest Mass Ratio Known!</b><br>"
                     f"Mass ratio (Vanth/Orcus): 0.16 +/- 0.02<br>"
                     f"(Charon/Pluto is only 0.12)<br>"
@@ -2734,9 +2785,9 @@ def plot_orcus_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
             hover_text_osc = (
                 f"<b>{object_name} Osculating Orbit</b><br>"
                 f"Epoch: {epoch}<br>"
-                f"<br>a={a:.7f} AU ({a * KM_PER_AU:.1f} km)<br>"
-                f"e={e:.6f}<br>"
-                f"i={i:.2f} deg"
+                f"<br>a={_pa.as_given(a)} AU ({_pa.km_text(_pa.accuracy_for(object_name, center_id), a * KM_PER_AU)})<br>"
+                f"e={_pa.as_given(e)}<br>"
+                f"i={_pa.as_given(i)} deg"
             )
                 
         # Determine line style
@@ -2931,10 +2982,10 @@ def plot_gonggong_xiangliu_orbit(fig, object_name, date, color, show_apsidal_mar
         hover_text = (
             f"<b>Xiangliu Analytical Orbit</b><br>"
             f"Orbit around Gonggong<br>"
-            f"<br>a = {a*KM_PER_AU:.1f} km ({a:.2e} AU)<br>"
+            f"<br>a = {_pa.km_text(_pa.accuracy_for('Xiangliu', 'Gonggong'), a*KM_PER_AU)} ({_pa.as_given(a)} AU)<br>"
             f"P = {period:.2f} days<br>"
-            f"e = {e:.2f} (highly eccentric - unusual for TNO binaries)<br>"
-            f"i = {i:.1f} deg (to ecliptic, nearly pole-on)<br>"
+            f"e = {_pa.as_given(e)} (highly eccentric - unusual for TNO binaries)<br>"
+            f"i = {_pa.as_given(i)} deg (to ecliptic, nearly pole-on)<br>"
             f"<br><b>Xiangliu</b><br>"
             f"Diameter: ~100 km (upper limit from tidal evolution)<br>"
             f"Nine-headed serpent minister of water god Gonggong<br>"
@@ -2992,8 +3043,8 @@ def plot_gonggong_xiangliu_orbit(fig, object_name, date, color, show_apsidal_mar
             
             peri_hover = (
                 f"<b>Xiangliu Keplerian Periapsis</b><br>"
-                f"q = {peri_r:.7f} AU ({peri_r * KM_PER_AU:.1f} km)<br>"
-                f"e = {e:.2f}"
+                f"q = {_pa.distance_text(_pa.accuracy_for('Xiangliu', 'Gonggong'), peri_r)}<br>"
+                f"e = {_pa.as_given(e)}"
             )
             
             fig.add_trace(go.Scatter3d(
@@ -3023,8 +3074,8 @@ def plot_gonggong_xiangliu_orbit(fig, object_name, date, color, show_apsidal_mar
             
             apo_hover = (
                 f"<b>Xiangliu Keplerian Apoapsis</b><br>"
-                f"Q = {apo_r:.7f} AU ({apo_r * KM_PER_AU:.1f} km)<br>"
-                f"e = {e:.2f}"
+                f"Q = {_pa.distance_text(_pa.accuracy_for('Xiangliu', 'Gonggong'), apo_r)}<br>"
+                f"e = {_pa.as_given(e)}"
             )
             
             fig.add_trace(go.Scatter3d(
@@ -3216,10 +3267,10 @@ def plot_patroclus_barycenter_orbit(fig, object_name, date, color, show_apsidal_
         hover_text = (
             f"<b>{object_name} Analytical Orbit</b><br>"
             f"Binary orbit around barycenter<br>"
-            f"a = {a*KM_PER_AU:.1f} km ({a:.2e} AU)<br>"
+            f"a = {_pa.km_text(_pa.accuracy_for(object_name, center_id), a*KM_PER_AU)} ({_pa.au_text(_pa.accuracy_for(object_name, center_id), a)})<br>"
             f"P = {period:.3f} days<br>"
-            f"e = {e:.4f}<br>"
-            f"i = {i:.1f} deg (to ecliptic)<br>"
+            f"e = {_pa.as_given(e)}<br>"
+            f"i = {_pa.as_given(i)} deg (to ecliptic)<br>"
             f"Source: Brozovic et al. 2024 (AJ 167:104)"
         )
         
@@ -3281,8 +3332,8 @@ def plot_patroclus_barycenter_orbit(fig, object_name, date, color, show_apsidal_
             pos_hover = (
                 f"<b>{object_name} Keplerian Position</b><br>"
                 f"Phase: {current_phase % 360:.1f} deg<br>"
-                f"r = {r_current*KM_PER_AU:.1f} km ({r_current:.2e} AU)<br>"
-                f"e = {e:.4f} (nearly circular)<br>"
+                f"r = {_pa.km_text(_pa.accuracy_for(object_name, center_id), r_current*KM_PER_AU)} ({_pa.au_text(_pa.accuracy_for(object_name, center_id), r_current)})<br>"
+                f"e = {_pa.as_given(e)} (nearly circular)<br>"
                 f"<i>Note: For nearly circular orbits, periapsis is undefined.</i><br>"
                 f"<i>This marker shows the current calculated position,</i><br>"
                 f"<i>which should match the Horizons actual position.</i>"
@@ -3428,17 +3479,15 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
             if 'orbital_period_days' in orbital_params:
                 period_days = orbital_params['orbital_period_days']
             else:
-                # Use KNOWN_ORBITAL_PERIODS from constants_new.py
-                from constants_new import KNOWN_ORBITAL_PERIODS
-                
-                if satellite_name in KNOWN_ORBITAL_PERIODS:
-                    period_value = KNOWN_ORBITAL_PERIODS[satellite_name]
-                    if period_value is None:
-                        # Handle hyperbolic/parabolic objects - use Kepler's law
-                        period_days = 365.25 * np.sqrt(abs(a)**3) if a else 365.25
-                    else:
-                        # Already in days
-                        period_days = period_value
+                # L-431 build 2: the period JPL gave, saved in the orbit cache
+                # for this view, then the typed table KNOWN_ORBITAL_PERIODS,
+                # by orbital_period's fallback order (the typed table came
+                # first until build 2)
+                _p = _op.period_for_computation(satellite_name, parent_planet)
+                if _p['days'] is not None:
+                    period_days = _p['days']
+                    if _p['kind'] == _op.KIND_TYPED:
+                        print(f"  {satellite_name}: typed period, not fetched from JPL", flush=True)
                 else:
                     # Fallback for unknown satellites
                     print(f"  Warning: No known period for {satellite_name}, using default", flush=True)
@@ -3795,9 +3844,9 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
             hover_text = (
                 f"{satellite_name} Analytical Orbit<br>"
                 f"Elements calculated for: {date_str}<br>"
-                f"a={a:.6f} AU<br>"
-                f"e={e:.6f}<br>"
-                f"i={i:.2f} deg"
+                f"a={_pa.as_given(a)} AU<br>"
+                f"e={_pa.as_given(e)}<br>"
+                f"i={_pa.as_given(i)} deg"
                 f"{analytical_note}"
             )
             # Check if epoch exists in orbital_params (from planetary_params)
@@ -3830,9 +3879,9 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 f"{satellite_name} Analytical Orbit<br>"
                 f"Mean elements (Jupiter equatorial frame)<br>"
                 f"Calculation date: {date_str}<br>"
-                f"a={a:.6f} AU<br>"
-                f"e={e:.6f}<br>"
-                f"i={i:.2f} deg (before transform)"
+                f"a={_pa.as_given(a)} AU<br>"
+                f"e={_pa.as_given(e)}<br>"
+                f"i={_pa.as_given(i)} deg (before transform)"
                 f"{analytical_note}"
             )
             
@@ -3847,11 +3896,11 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
             # All other satellites - use epoch from data if it exists
             if epoch_from_data:
                 # Epoch exists in data - use it
-                hover_text = f"{satellite_name} Analytical Orbit<br>Epoch: {epoch_from_data}<br>a={a:.6f} AU<br>e={e:.6f}<br>i={i:.2f} deg"
+                hover_text = f"{satellite_name} Analytical Orbit<br>Epoch: {epoch_from_data}<br>a={_pa.as_given(a)} AU<br>e={_pa.as_given(e)}<br>i={_pa.as_given(i)} deg"
                 orbit_label = f"{satellite_name} Analytical Orbit (Epoch: {epoch_from_data})"
             else:
                 # No epoch in data - don't show one
-                hover_text = f"{satellite_name} Analytical Orbit<br>a={a:.6f} AU<br>e={e:.6f}<br>i={i:.2f} deg"
+                hover_text = f"{satellite_name} Analytical Orbit<br>a={_pa.as_given(a)} AU<br>e={_pa.as_given(e)}<br>i={_pa.as_given(i)} deg"
                 orbit_label = f"{satellite_name} Analytical Orbit"
         # Add the orbit trace to the figure
         fig.add_trace(
@@ -4094,9 +4143,9 @@ def plot_mars_moon_osculating_orbit(fig, satellite_name, horizons_id, date, colo
     hover_text_osc = (
         f"{satellite_name} Osculating Orbit<br>"
         f"Epoch: {epoch_osc}<br>"
-        f"a={a_osc:.6f} AU<br>"
-        f"e={e_osc:.6f}<br>"
-        f"i={i_osc:.2f} deg"
+        f"a={_pa.as_given(a_osc)} AU<br>"
+        f"e={_pa.as_given(e_osc)}<br>"
+        f"i={_pa.as_given(i_osc)} deg"
         f"{osculating_note}"
     )
     
@@ -4159,7 +4208,15 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
     # not the traveled path. Partial arcs require TA offset to start at the
     # body's current position, but full ellipses are visually correct regardless.
     if days_to_plot is not None and days_to_plot > 0:
-        moon_period_days = KNOWN_ORBITAL_PERIODS.get('Moon', 27.321661)
+        # L-431 build 2: the Moon's period by the fallback order -- fetched
+        # around Earth if it has been, then the typed table, marked. The
+        # typed 27.321661 that stood here as a default was a second typed
+        # copy, disagreeing with the table's 27.321582.
+        _p = _op.period_for_computation('Moon', center_object_name)
+        moon_period_days = _p['days']
+        if moon_period_days is None:
+            print("  [WARN] No period for the Moon: drawing one orbit", flush=True)
+            moon_period_days = days_to_plot
         orbital_fraction = max(1.0, days_to_plot / moon_period_days)
     else:
         orbital_fraction = 1.0
@@ -4214,7 +4271,7 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
         "<br>Shows general orbital geometry valid<br>"
         "over months for this epoch.</i>"
     )
-    hover_text_ana = f"Moon Analytical Orbit<br>Date: {date_str}<br>a={a_ana:.6f} AU<br>e={e_ana:.6f}<br>i={i_ana:.2f} deg{analytical_note}"
+    hover_text_ana = f"Moon Analytical Orbit<br>Date: {date_str}<br>a={_pa.au_text({'state': 'none', 'reason': 'not_from_jpl'}, a_ana)}<br>e={e_ana:.6f}<br>i={i_ana:.2f} deg<br>" + '<br>'.join(_pa.accuracy_lines({'state': 'none', 'reason': 'not_from_jpl'})) + f"{analytical_note}"
     
     # Add analytical trace
     fig.add_trace(
@@ -4291,7 +4348,7 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
             "<br>It fits only the present position, not past or future positions.<br>"
             "<br>See 'Orbital Parameter Visualization' for equatorial bulge details</i>"
         )
-        hover_text_osc = f"Moon Osculating Orbit<br>Epoch: {epoch_osc}<br>a={a_osc:.6f} AU<br>e={e_osc:.6f}<br>i={i_osc:.2f} deg{osculating_note}"
+        hover_text_osc = f"Moon Osculating Orbit<br>Epoch: {epoch_osc}<br>a={_pa.as_given(a_osc)} AU<br>e={_pa.as_given(e_osc)}<br>i={_pa.as_given(i_osc)} deg{osculating_note}"
         
         # Add osculating trace with different line style
         fig.add_trace(
@@ -4546,9 +4603,9 @@ def plot_earth_moon_barycenter_orbit(fig, object_name, date, color, show_apsidal
                     f"<b>Earth's Osculating Orbit around Barycenter</b><br>"
                     f"<i>The tiny wobble of our home planet</i><br><br>"
                     f"<b>Orbital Elements (Epoch: {epoch}):</b><br>"
-                    f"a = {a:.7f} AU ({a * KM_PER_AU:.0f} km) <i>[calculated]</i><br>"
-                    f"e = {e:.4f}<br>"
-                    f"i = {i:.1f} deg to ecliptic <i>[osculating]</i><br>"
+                    f"a = {_pa.distance_text(_pa.accuracy_for(object_name, center_id), a)} <i>[calculated]</i><br>"
+                    f"e = {_pa.as_given(e)}<br>"
+                    f"i = {_pa.as_given(i)} deg to ecliptic <i>[osculating]</i><br>"
                     f"Period: {BINARY_PARAMS['period_days']:.2f} days<br><br>"
                     f"<b>Why Earth's orbit is tiny:</b><br>"
                     f"<i>Earth is ~81x more massive than the Moon,<br>"
@@ -4568,9 +4625,9 @@ def plot_earth_moon_barycenter_orbit(fig, object_name, date, color, show_apsidal
                     f"<b>Moon's Osculating Orbit around Barycenter</b><br>"
                     f"<i>The larger orbit of the pair</i><br><br>"
                     f"<b>Orbital Elements (Epoch: {epoch}):</b><br>"
-                    f"a = {a:.7f} AU ({a * KM_PER_AU:.0f} km) <i>[calculated]</i><br>"
-                    f"e = {e:.4f}<br>"
-                    f"i = {i:.1f} deg to ecliptic <i>[osculating]</i><br>"
+                    f"a = {_pa.distance_text(_pa.accuracy_for(object_name, center_id), a)} <i>[calculated]</i><br>"
+                    f"e = {_pa.as_given(e)}<br>"
+                    f"i = {_pa.as_given(i)} deg to ecliptic <i>[osculating]</i><br>"
                     f"Period: {BINARY_PARAMS['period_days']:.2f} days<br><br>"
                     f"<b>Why Moon's orbit is larger:</b><br>"
                     f"<i>The Moon is only 1.23% of Earth's mass,<br>"
@@ -4588,15 +4645,15 @@ def plot_earth_moon_barycenter_orbit(fig, object_name, date, color, show_apsidal
                 hover_text_osc = (
                     f"<b>{object_name} Osculating Orbit</b><br>"
                     f"Epoch: {epoch}<br>"
-                    f"a={a:.7f} AU, e={e:.6f}, i={i:.2f} deg"
+                    f"a={_pa.as_given(a)} AU, e={_pa.as_given(e)}, i={_pa.as_given(i)} deg"
                 )
         else:
             hover_text_osc = (
                 f"<b>{object_name} Osculating Orbit</b><br>"
                 f"<i>(around Earth center)</i><br><br>"
                 f"Epoch: {epoch}<br>"
-                f"a = {a:.6f} AU, e = {e:.6f}<br>"
-                f"i = {i:.4f} deg (J2000 ecliptic)"
+                f"a = {_pa.as_given(a)} AU, e = {_pa.as_given(e)}<br>"
+                f"i = {_pa.as_given(i)} deg (J2000 ecliptic)"
             )
         
         # Determine line style
@@ -5379,6 +5436,43 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 print(f"[WARN] Skipping {obj_name}: No parameters found", flush=True)
                 skipped['no_params'].append(obj_name)
                 continue
+            # L-431 build 2 (ruling 7): the ellipse is drawn around the same
+            # centre as the body's period. Where the period record names the
+            # solar system's barycentre and holds Horizons' elements around
+            # it for this date (Sedna), those are drawn, moved so their focus
+            # sits at the barycentre; otherwise the fetched elements are.
+            # The period that belongs to the drawn elements times the markers.
+            try:
+                _orbit = _op.drawing_orbit(obj_name, center_id, params)
+            except Exception as _ex:
+                # Never let one body's record stop every orbit in the plot;
+                # say so loudly and draw from the fetched elements, with no
+                # period to time the markers by.
+                print(f"[L-431 orbit] ERROR: drawing_orbit failed for {obj_name} ({_ex}); "
+                      f"drawn from the fetched elements", flush=True)
+                _orbit = {'elements': params, 'center': None, 'label': None,
+                          'offset_au': (0.0, 0.0, 0.0), 'note': None,
+                          'period': {'days': None, 'err_days': None, 'kind': 'none',
+                                     'center': None, 'label': None, 'record': None}}
+            if _orbit['elements'] is not params:
+                params = dict(_orbit['elements'])
+                a = params.get('a', 0)
+                e = params.get('e', 0)
+                i = params.get('i', 0)
+                omega = params.get('omega', 0)
+                Omega = params.get('Omega', 0)
+                print(f"[L-431 orbit] {obj_name}: drawn around {_orbit['center']} "
+                      f"(a={a} AU), offset {_orbit['offset_au']} AU", flush=True)
+            _off = _orbit['offset_au']
+            # L-401's second slice: the body's own accuracy, from its position
+            # record, so the orbit's markers print the body's digits
+            _rec = (current_pos or {}).get('record') if isinstance(current_pos, dict) else None
+            try:
+                _acc = _pa.accuracy_for(obj_name, center_id, _rec, objects, parent_planets)
+            except Exception as _ex:
+                print(f"[L-401 digits] ERROR: no accuracy for {obj_name} ({_ex}); "
+                      f"distances shown to the whole kilometer", flush=True)
+                _acc = None
             # Add this debug line
             print(f"\n[DEBUG] Processing {obj_name}", flush=True)
             print(f"[DEBUG] params keys: {params.keys()}", flush=True)            
@@ -5412,9 +5506,9 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     hyp_info_idx = len(x_final) // 4
                     hyp_hover_text = (
                         f"{obj_name} Hyperbolic Orbit<br>"
-                        f"e={e:.6f}<br>q={q:.6f} AU"
+                        f"e={_pa.as_given(e)}<br>q = {_pa.distance_text(_acc, q)}"
                         f"{get_planet_perturbation_note(obj_name)}"
-                        f"{get_mean_vs_osculating_assessment(obj_name, params, ORIGINAL_planetary_params.get(obj_name, {}))}"
+                        f"{get_mean_vs_osculating_assessment(obj_name, planetary_params[obj_name], ORIGINAL_planetary_params.get(obj_name, {}), _acc)}"
                     )
                     fig.add_trace(
                         go.Scatter3d(
@@ -5497,10 +5591,11 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                             hover_text = (
                                 f"<b>{obj_name} Keplerian Periapsis</b>"
                                 f"{kep_date_str}"
-                                f"<br>q={peri['distance']:.6f} AU"
+                                f"<br>q = {_pa.distance_text(_acc, peri['distance'])}"
                                 f"<br>Gravity-only orbit (osculating conic at perihelion epoch)"
                                 f"<br>One-time passage (hyperbolic)"
                                 f"{accuracy_note}"
+                                + _accuracy_tail(_acc)
                             )
  
                             fig.add_trace(
@@ -5610,10 +5705,12 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                     if pos_data and 'x' in pos_data:
                                         print(f"  SUCCESS: Got position ({pos_data['x']:.3f}, {pos_data['y']:.3f}, {pos_data['z']:.3f})", flush=True)
                                         
-                                        # Calculate distance for hover text
+                                        # Calculate distance for hover text, by the
+                                        # body hover's rule, from this position's
+                                        # own record (L-401's second slice)
                                         import numpy as np
                                         distance_au = np.sqrt(pos_data['x']**2 + pos_data['y']**2 + pos_data['z']**2)
-                                        distance_km = distance_au * KM_PER_AU
+                                        _pacc = _pa.accuracy_for(obj_name, center_id, pos_data, objects, parent_planets)
                                         
                                         # Manually add the actual perihelion marker
                                         fig.add_trace(
@@ -5633,8 +5730,9 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                                     f"<b>{obj_name} at Perihelion (Actual)</b><br>"
                                                     f"Date/Time: {perihelion_full} UTC<br>"
                                                     f"Source: {actual_tp_source if actual_tp_source else 'osculating elements'}<br>"
-                                                    f"Distance from {center_id}: {distance_au:.6f} AU ({distance_km:.0f} km)"
-                                                    f"{_nongrav_marker_note}"
+                                                    f"Distance from {center_id}: {_pa.distance_text(_pacc, distance_au)}"
+                                                    f"{_nongrav_marker_note}<br>"
+                                                    + '<br>'.join(_pa.accuracy_lines(_pacc))
                                                 ],  # Full hover content in text
                                                 customdata=[f"{obj_name} Actual Perihelion"],  # Added customdata
                                                 hovertemplate='%{text}<extra></extra>',  # Standard template
@@ -5704,6 +5802,9 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
             x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
             # Then rotate by longitude of ascending node (Omega) around z-axis
             x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
+            # L-431 build 2: an ellipse taken around another centre (the
+            # solar system's barycentre) is moved so its focus sits there
+            x_final, y_final, z_final = x_final + _off[0], y_final + _off[1], z_final + _off[2]
             # ADD THIS CODE to check for epoch
             epoch_str = ""
             if 'epoch' in params:
@@ -5725,11 +5826,16 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
             )
             # Single info marker for Keplerian orbit (opposite perihelion for clarity)
             kep_info_idx = len(x_final) // 4  # ~aphelion region, away from apsidal markers
+            # The elements are repeated from Horizons, so they print as given
+            # (L-401's second slice); the centre is named (L-431 build 2)
             kep_hover_text = (
                 f"{obj_name} Keplerian Orbit<br>"
-                f"a={a:.6f} AU, e={e:.6f}, i={i:.2f} deg"
+                + (f"Drawn around {_orbit['label']}.<br>" if _orbit.get('label') else "")
+                + (f"{_orbit['note']}<br>" if _orbit.get('note') else "")
+                + f"a={_pa.as_given(a)} AU, e={_pa.as_given(e)},<br>"
+                f"i={_pa.as_given(i)} deg"
                 f"{get_planet_perturbation_note(obj_name)}"
-                f"{get_mean_vs_osculating_assessment(obj_name, params, ORIGINAL_planetary_params.get(obj_name, {}))}"
+                f"{get_mean_vs_osculating_assessment(obj_name, planetary_params[obj_name], ORIGINAL_planetary_params.get(obj_name, {}), _acc)}"
             )
             fig.add_trace(
                 go.Scatter3d(
@@ -5749,8 +5855,8 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
             )
             # ========== CALCULATE EXACT APSIDES AT THETA=0 AND THETA=PI ==========
             from apsidal_markers import calculate_exact_apsides, compute_apsidal_dates_from_tp
-            # Calculate exact apsidal positions
-            apsides = calculate_exact_apsides(a, e, i, omega, Omega, rotate_points)
+            # Calculate exact apsidal positions, moved with the drawn ellipse
+            apsides = _shift_apsides(calculate_exact_apsides(a, e, i, omega, Omega, rotate_points), _off)
             # Get dates for the apsides
             if 'TP' in params:
                 next_perihelion, next_aphelion = compute_apsidal_dates_from_tp(
@@ -5784,24 +5890,24 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
             #            f"{accuracy_note}"
             #        )
                     
-                    # Calculate distance from surface if center body radius is known
-                    from constants_new import CENTER_BODY_RADII
+                    # Distances by the body hover's rule (L-401's second slice).
+                    # q is measured from the orbit's own centre; the surface
+                    # distance from the plotted point, one radius out.
                     surface_distance_text = ""
-                    if center_id in CENTER_BODY_RADII:
-                        center_radius_km = CENTER_BODY_RADII[center_id]
-                        center_radius_au = center_radius_km / KM_PER_AU
-                        surface_distance_au = peri['distance'] - center_radius_au
-                        surface_distance_km = surface_distance_au * KM_PER_AU
-                        surface_distance_text = f"<br>Distance from surface: {surface_distance_au:.6f} AU ({surface_distance_km:,.0f} km)"
+                    _surf = _pa.surface_text(_acc, _plotted_r(peri), center_id)
+                    if _surf:
+                        surface_distance_text = f"<br>Distance from surface: {_surf}"
                     
                     hover_text = (
                         f"<b>{obj_name} Keplerian Periapsis</b>"
                         f"{date_str}"
-                        f"<br>q={peri['distance']:.6f} AU"
+                        f"<br>q = {_pa.distance_text(_acc, peri['q_or_Q'])}"
+                        + _around_line(_orbit, 'q') +
                         f"{surface_distance_text}"
                         f"<br>Theoretical minimum distance (theta=0 deg)"
                         f"<br>Unperturbed Keplerian position at actual periapsis time"
                         f"{accuracy_note}"
+                        + _accuracy_tail(_acc)
                     )
                     fig.add_trace(
                         go.Scatter3d(
@@ -5836,15 +5942,17 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                         date_str = f"<br>Date: {next_aphelion.strftime('%Y-%m-%d %H:%M:%S')} UTC"
                         position_description = "<br>Unperturbed Keplerian position at actual apoapsis time"
                     elif e < 1 and 'TP' in params:
-                        # Calculate Keplerian aphelion date if no Tapo provided
+                        # Calculate Keplerian aphelion date if no Tapo provided,
+                        # from the period that belongs to the drawn elements, by
+                        # the fallback order (L-431 build 2; it read the typed
+                        # table KNOWN_ORBITAL_PERIODS first until then)
                         from astropy.time import Time
                         from datetime import timedelta
-                        from constants_new import KNOWN_ORBITAL_PERIODS
                         
-                        # NOW check if obj_name is in it
-                        if obj_name in KNOWN_ORBITAL_PERIODS:
-                            period_days = KNOWN_ORBITAL_PERIODS.get(obj_name)
-                            if period_days and period_days not in [None, 1e99]:
+                        _p = _orbit['period']
+                        if _p['days'] is not None:
+                            period_days = _p['days']
+                            if period_days:
                                 tp_time = Time(params['TP'], format='jd')
                                 tp_datetime = tp_time.datetime
                                 # SAFE CALCULATION WITH OVERFLOW PROTECTION
@@ -5854,12 +5962,16 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                     # Test if calculation would work
                                     keplerian_aphelion = tp_datetime + timedelta(days=half_period_days)
                                     date_str = f"<br>Date: {keplerian_aphelion.strftime('%Y-%m-%d %H:%M:%S')} UTC (Keplerian estimate)"
+                                    date_str += ''.join('<br>' + _l for _l in _op.date_note_lines(
+                                        _p, _op.carried_error_days(_p, 0.5)))
                                     position_description = "<br>Unperturbed Keplerian position at Keplerian apoapsis time"
                                     
                                 except (OverflowError, ValueError, OSError):
                                     # Handle overflow gracefully for extremely long periods
-                                    years_to_aphelion = int(half_period_days / 365.25)
+                                    years_to_aphelion = int(half_period_days / D_PER_JULIAN_YEAR)
                                     date_str = f"<br>Date: Far future aphelion (~{years_to_aphelion:,} years after perihelion)"
+                                    date_str += ''.join('<br>' + _l for _l in _op.date_note_lines(
+                                        _p, _op.carried_error_days(_p, 0.5)))
                                     position_description = "<br>Aphelion date beyond calculation range"
                                     print(f"  Aphelion date overflow for {obj_name} - using fallback message", flush=True)
                 # CONTEXT: This fix ensures that:
@@ -5880,24 +5992,22 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
             #            f"{accuracy_note}"
             #        )
                     
-                    # Calculate distance from surface if center body radius is known
-                    from constants_new import CENTER_BODY_RADII
+                    # Distances by the body hover's rule (L-401's second slice)
                     surface_distance_text = ""
-                    if center_id in CENTER_BODY_RADII:
-                        center_radius_km = CENTER_BODY_RADII[center_id]
-                        center_radius_au = center_radius_km / KM_PER_AU
-                        surface_distance_au = apo['distance'] - center_radius_au
-                        surface_distance_km = surface_distance_au * KM_PER_AU
-                        surface_distance_text = f"<br>Distance from surface: {surface_distance_au:.6f} AU ({surface_distance_km:,.0f} km)"
+                    _surf = _pa.surface_text(_acc, _plotted_r(apo), center_id)
+                    if _surf:
+                        surface_distance_text = f"<br>Distance from surface: {_surf}"
                     
                     hover_text = (
                         f"<b>{obj_name} Keplerian Apoapsis</b>"
                         f"{date_str}"
-                        f"<br>Q={apo['distance']:.6f} AU"
+                        f"<br>Q = {_pa.distance_text(_acc, apo['q_or_Q'])}"
+                        + _around_line(_orbit, 'Q') +
                         f"{surface_distance_text}"
                         f"<br>Theoretical maximum distance (theta=180 deg)"
                         f"{position_description}"
                         f"{accuracy_note}"
+                        + _accuracy_tail(_acc)
                     )
                     fig.add_trace(
                         go.Scatter3d(
@@ -5981,14 +6091,14 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                             print("ERROR: fetch_position not provided to plot_idealized_orbits", flush=True)
                         else:
                             # Calculate apsides HERE, right before use
-                            apsides = calculate_exact_apsides(
+                            apsides = _shift_apsides(calculate_exact_apsides(
                                 params.get('a', a),
                                 params.get('e', e),
                                 params.get('i', i),
                                 params.get('omega', omega),
                                 params.get('Omega', Omega),
                                 rotate_points
-                            )
+                            ), _off)
                                                 
                             # Resolve center_id to numeric for Horizons queries
                             center_id_numeric = None
@@ -6099,7 +6209,13 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                         params,
                         date,  # Current datetime
                         rotate_points,
-                        center_body=center_id
+                        center_body=center_id,
+                        # L-431 build 2: the period and the place of the
+                        # drawn elements; L-401: the body's digits
+                        period_days=_orbit['period']['days'],
+                        offset_au=_off,
+                        acc=_acc,
+                        centre_words=(_orbit['label'] if any(_off) else None),
                     )
                 except Exception as kep_err:
                     print(f"[KEPLERIAN POS] Error adding marker for {obj_name}: {kep_err}", flush=True)
@@ -7034,11 +7150,11 @@ def plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_m
         f"<b>{obj_name} Osculating Orbit (Hyperbola)</b><br>"
         f"Epoch: {epoch_osc}<br>"
         f"Center: {center_id}<br>"
-        f"e = {e_osc:.6f} (hyperbolic)<br>"
-        f"a = {a_osc:.8f} AU (negative = hyperbola)<br>"
-        f"q = {q_osc:.9f} AU<br>"
-        f"q = {q_osc * KM_PER_AU:,.1f} km (center-to-center)<br>"
-        f"i = {i_osc:.2f} deg<br>"
+        f"e = {_pa.as_given(e_osc)} (hyperbolic)<br>"
+        f"a = {_pa.as_given(a_osc)} AU (negative = hyperbola)<br>"
+        f"q = {_pa.au_text(_pa.accuracy_for(obj_name, center_id), q_osc)}<br>"
+        f"q = {_pa.km_text(_pa.accuracy_for(obj_name, center_id), q_osc * KM_PER_AU)} (center-to-center)<br>"
+        f"i = {_pa.as_given(i_osc)} deg<br>"
         f"Asymptotic half-angle: {asymptote_deg:.1f} deg"
         f"{pert_note}"
     )
@@ -7267,10 +7383,10 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
         r_full = r_full[valid]
         asymptote_deg = np.degrees(asymptote_angle)
         type_detail = (
-            f"e = {e_osc:.6f} (hyperbolic)<br>"
-            f"a = {a_osc:.8f} AU (negative = hyperbola)<br>"
+            f"e = {_pa.as_given(e_osc)} (hyperbolic)<br>"
+            f"a = {_pa.as_given(a_osc)} AU (negative = hyperbola)<br>"
             f"Asymptotic half-angle: {asymptote_deg:.1f} deg<br>"
-            f"Perihelion velocity: {v_perihelion_km_s:,.1f} km/s ({v_perihelion_au_day:.4f} AU/day)"
+            f"Perihelion velocity: {_pa.speed_text(_pa.accuracy_for(obj_name, 'Sun'), v_perihelion_km_s, q_osc * KM_PER_AU)}"
             f"{nongrav_note}"
         )
     else:
@@ -7324,10 +7440,10 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
         theta_full = theta_full[valid]
         r_full = r_full[valid]
         type_detail = (
-            f"e = {e_osc:.6f} (elliptical)<br>"
-            f"a = {a_osc:.8f} AU<br>"
-            f"Aphelion: {r_apo:.4f} AU = {r_apo * KM_PER_AU:,.0f} km<br>"
-            f"Perihelion velocity: {v_perihelion_km_s:,.1f} km/s ({v_perihelion_au_day:.4f} AU/day)"
+            f"e = {_pa.as_given(e_osc)} (elliptical)<br>"
+            f"a = {_pa.as_given(a_osc)} AU<br>"
+            f"Aphelion: {_pa.au_text(_pa.accuracy_for(obj_name, 'Sun'), r_apo)} = {_pa.km_text(_pa.accuracy_for(obj_name, 'Sun'), r_apo * KM_PER_AU)}<br>"
+            f"Perihelion velocity: {_pa.speed_text(_pa.accuracy_for(obj_name, 'Sun'), v_perihelion_km_s, q_osc * KM_PER_AU)}"
             f"{nongrav_note}"
         )
     # ---- Convert to Cartesian in perifocal frame -----------------------------
@@ -7355,9 +7471,9 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
         f"Epoch: {epoch_osc}<br>"
         f"Center: Sun<br>"
         f"{type_detail}<br>"
-        f"q = {q_osc:.9f} AU<br>"
-        f"q = {q_osc * KM_PER_AU:,.1f} km (perihelion distance)<br>"
-        f"i = {i_osc:.2f} deg"
+        f"q = {_pa.au_text(_pa.accuracy_for(obj_name, 'Sun'), q_osc)}<br>"
+        f"q = {_pa.km_text(_pa.accuracy_for(obj_name, 'Sun'), q_osc * KM_PER_AU)} (perihelion distance)<br>"
+        f"i = {_pa.as_given(i_osc)} deg"
         f"{pert_note}"
     )
     orbit_label = f"{obj_name} Perihelion Osc. Orbit (Epoch: {epoch_osc})"

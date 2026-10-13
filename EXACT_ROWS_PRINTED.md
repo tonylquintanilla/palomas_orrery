@@ -110,13 +110,13 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 ### `INNER_LIMIT_OORT_CLOUD_AU`
 
-- orrery `palomas_orrery.py` line 10502: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
+- orrery `palomas_orrery.py` line 10492: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
 - orrery `solar_visualization_shells.py` line 137: `_OORT_INNER_EDGE = row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)`
 - orrery `solar_visualization_shells.py` line 1593: `f'From {_OORT_INNER_EDGE} AU ({row_text("INNER_LIMIT_OORT_CLOUD_AU", unit="km", grouping=True...`
 
 ### `OUTER_OORT_CLOUD_AU`
 
-- orrery `palomas_orrery.py` line 10502: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
+- orrery `palomas_orrery.py` line 10492: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
 - orrery `solar_visualization_shells.py` line 151: `_OORT_OUTER_EDGE = row_text('OUTER_OORT_CLOUD_AU', grouping=True)`
 
 ## Printed to a terminal only
@@ -130,11 +130,11 @@ A tool logging a value is not a display a visitor sees, so these are not counted
 
 No display prints these exact rows. Under Rule 7 they carry no print count. The number is how many other orrery lines name the row, so a use that prints it through another name can still be found by reading those lines.
 
-- `KM_PER_AU`: named on 231 other orrery line(s).
+- `KM_PER_AU`: named on 218 other orrery line(s).
 - `PARSEC_TO_AU`: named on 10 other orrery line(s).
 - `S_PER_HOUR`: named on 3 other orrery line(s).
-- `S_PER_DAY`: named on 6 other orrery line(s).
-- `D_PER_JULIAN_YEAR`: named on 8 other orrery line(s).
+- `S_PER_DAY`: named on 10 other orrery line(s).
+- `D_PER_JULIAN_YEAR`: named on 14 other orrery line(s).
 - `EARTH_POLE_RA_J2000_DEG`: named on 6 other orrery line(s).
   - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 925 (config `/objects/1/features/orientation/pole/ra`): `var ra = measured(pole.ra, "deg", slug + "/orientation/pole/ra", warn);`
 - `EARTH_POLE_DEC_J2000_DEG`: named on 6 other orrery line(s).

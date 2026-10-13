@@ -1,12 +1,20 @@
 ---
 name: horizons-orbital-mechanics
-description: JPL Horizons API and orbital mechanics reference for the Paloma's Orrery project (astroquery Horizons queries, orbit_data_manager, osculating_cache_manager, idealized_orbits, apsidal_markers, spacecraft_encounters, close_approach_data, position_accuracy, orbital_period). Use for any Paloma's Orrery task involving Horizons queries or ephemerides, coordinate center bodies, reference frames, osculating elements, orbit caches, a small body's position uncertainty (VEC_TABLE 2xr), orbital periods and the centre they are taken around, encounter or flyby resolution, or whenever a rendered orbit looks wrong or an ephemeris API returns empty. Do not use for projects other than Paloma's Orrery.
-fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods
+description: JPL Horizons API and orbital mechanics reference for the Paloma's Orrery project (astroquery Horizons queries, orbit_data_manager, osculating_cache_manager, idealized_orbits, apsidal_markers, spacecraft_encounters, close_approach_data, position_accuracy, orbital_period). Use for any Paloma's Orrery task involving Horizons queries or ephemerides, coordinate center bodies, reference frames, osculating elements, orbit caches, a small body's position uncertainty (VEC_TABLE 2xr), orbital periods and the centre they are taken around, the drawn orbit and its markers' dates, encounter or flyby resolution, or whenever a rendered orbit looks wrong or an ephemeris API returns empty. Do not use for projects other than Paloma's Orrery.
+fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre
 ---
 
 # Horizons and Orbital Mechanics Reference
 
-Skill version: 1.3 | 2026-10-12, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.4 | 2026-10-12, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ c9722520. v1.4 (L-431, with L-401) adds The Drawn Orbit
+Follows the Period's Centre, what L-431's second build learned: the
+period record keeps Horizons' elements around its own centre, a
+barycentre ellipse in a Sun-centred plot is moved to where the
+barycentre is, found from the body's two element sets at one date, a
+marker's date comes from the period of the drawn elements, and a date
+stepped from a period carries that period's error.
+Earlier: 1.3 | 2026-10-12, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 47815de2. v1.3 (L-401, L-431) adds what two builds
 learned, in one version as both items asked: A Small Body's
 Uncertainty Comes With Its Position (VEC_TABLE='2xr', which astroquery
@@ -23,8 +31,8 @@ re-solves a record in place; and a recent comet's record number can be
 given to another comet. It corrects two lines under Small-Body Record
 Pinning: Encke's pin now lives in the orrery's list, and what a pin
 does not follow is a NEWER record, not a new solution.
-Earlier: 1.1 | Cut from palomas_orrery @ e83fe9ce | 2026-07-12
-Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons.
+Older entries are in documentation/SKILL_HISTORIES.md, moved there
+on 2026-10-12 (L-431).
 
 ## Horizons Center Body Rules
 
@@ -125,6 +133,43 @@ documentation/DESIGN_L431_orbital_periods_rulings_20261011.md.
   centre the orrery gives them (`orbital_period.build_period_record`).
 - Horizons prints PR as 9.999E+99 for an open orbit; astroquery 0.4.11
   maps PR to `P`, in days.
+
+## The Drawn Orbit Follows the Period's Centre (L-431, build 2)
+
+Learned building the drawn ellipse and its markers, 2026-10-12. Ruling
+7 of documentation/DESIGN_L431_orbital_periods_rulings_20261011.md;
+build: documentation/HANDOFF_L431_build2_orbits_markers_20261012.md.
+
+- The ellipse is drawn around the same centre as the period, so the
+  hover and the drawing describe one orbit. The period query already
+  returns the elements around its centre at the plot date; the period
+  record keeps them, and `orbital_period.drawing_orbit` hands them to
+  the drawing. No extra query.
+- In a Sun-centred plot an ellipse around the solar system's
+  barycentre is moved so its focus sits at the barycentre. Where that
+  is, seen from the Sun, is the body's position from its Sun-centred
+  elements minus its position from its barycentric elements, both at
+  the one date; the two ellipses then meet at the body. For Sedna on
+  2026-10-12 the shift was about 0.005 au (the Sun's distance from the
+  barycentre, astropy's built-in ephemeris), three times its 3-sigma
+  position uncertainty, so the move shows in the digits.
+- Pair a record's elements with the plot's only when their dates
+  match. A record from another date, or one saved before build 2 with
+  no elements, leaves the drawing around its own centre, says so in the
+  orbit's hover, and times its markers by the period the elements fetch
+  gave around that centre, then the typed table, marked.
+- A marker's date is worked out from the period that belongs to the
+  drawn elements, never a period around another centre: TP plus whole
+  periods, and half of one for an aphelion. A Keplerian position's mean
+  motion likewise. Mixing them describes two orbits.
+- A date stepped from a period carries that period's error times the
+  number of periods stepped, stated in the hover where it is more than
+  a day: Sedna's aphelion, half of SBDB's 1,864-day sigma, about 930
+  days.
+- Comparing the osculating orbit with JPL's mean elements keeps the
+  Sun-centred elements, because the mean elements are Sun-centred: a
+  barycentre ellipse against them reports a perturbation that is only
+  the change of centre.
 
 ## Checking an Entry Against JPL (L-395)
 

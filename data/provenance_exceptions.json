@@ -150,6 +150,30 @@
       "fingerprint": "S62_discovery",
       "line_hint": 664,
       "reason": "Dict key string, not display text"
+    },
+    {
+      "file": "idealized_orbits.py",
+      "fingerprint": "Theoretical minimum distance (theta=0 deg)",
+      "line_hint": 5889,
+      "reason": "Geometry, not a claim: periapsis is where the true anomaly is 0 deg, by definition. Ruled 2026-10-12 (documentation/DESIGN_rulings_20261012.md, ruling 7); added by L-431 build 2."
+    },
+    {
+      "file": "idealized_orbits.py",
+      "fingerprint": "Theoretical maximum distance (theta=180 deg)",
+      "line_hint": 5987,
+      "reason": "Geometry, not a claim: apoapsis is where the true anomaly is 180 deg, by definition. Ruled 2026-10-12 (ruling 7); added by L-431 build 2."
+    },
+    {
+      "file": "idealized_orbits.py",
+      "fingerprint": "Transformation applied: Mars with Y-axis rotation",
+      "line_hint": 3617,
+      "reason": "A console print of a rendering setting, the tilt this test transform applies; not a display string. Ruled 2026-10-12 (ruling 7); added by L-431 build 2."
+    },
+    {
+      "file": "idealized_orbits.py",
+      "fingerprint": "Transformation applied: Triton with Neptune pole",
+      "line_hint": 3791,
+      "reason": "A console print of a rendering setting, the angle this transform adjusts by; not a display string. Ruled 2026-10-12 (ruling 7); added by L-431 build 2."
     }
   ],
 

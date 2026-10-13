@@ -1,10 +1,10 @@
 <!-- Doc-Kind: generated | The provenance audit: every numeric claim scored against its citation, rebuilt by provenance_scanner.py on each run. Do not hand-edit. -->
 # Paloma's Orrery -- Provenance Audit
 
-Generated: October 12, 2026
-Files scanned: 154
-Total findings: 1110
-Constants: 187 | Dicts: 50 | Display strings: 873
+Generated: October 13, 2026
+Files scanned: 153
+Total findings: 1114
+Constants: 188 | Dicts: 60 | Display strings: 866
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,20 +20,16 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|---:|---:|---:|--------:|
+| 20261013T132327Z | `c972252` | 153 | 1114 | 280 | 683 | 144 | 7 | 0 |
 | 20261013T013654Z | `c5dff25` | 154 | 1110 | 289 | 683 | 132 | 6 | 0 |
 | 20261012T184717Z | `e6a7e8a` | 152 | 1108 | 288 | 682 | 132 | 6 | 0 |
 | 20261012T183806Z | `e6a7e8a` | 153 | 1109 | 288 | 683 | 132 | 6 | 0 |
 | 20261012T030638Z | `28a4636` | 151 | 1097 | 292 | 674 | 125 | 6 | 0 |
 | 20261011T233024Z | `41e9a1d` | 150 | 1097 | 292 | 674 | 125 | 6 | 0 |
-| 20261011T214246Z | `324a574` | 150 | 1095 | 292 | 673 | 125 | 5 | 0 |
 
-Change since the previous run: total +2, Tier-1 +1.
+Change since the previous run: total +4, Tier-1 -9.
 
-Tier-1 rose in these files:
-
-| File | Before | After |
-|------|-------:|------:|
-| patch_L433_1_where_we_are_20261012.py | 0 | 1 |
+No file's Tier-1 count rose.
 
 ---
 
@@ -64,10 +60,10 @@ Tier-1 rose in these files:
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 289 |
+| 1 | 16-20 | FIX NOW | 280 |
 | 2 | 10-15 | REVIEW | 683 |
-| 3 | 5-9 | LOW PRIORITY | 132 |
-| 4 | 1-4 | LOWEST PRIORITY | 6 |
+| 3 | 5-9 | LOW PRIORITY | 144 |
+| 4 | 1-4 | LOWEST PRIORITY | 7 |
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
 accepted residuals -- cited constants, V_STALE staleness flags on verified
@@ -82,7 +78,7 @@ The push gate is Tier-1 = 0 on the active build path, and it binds at export. Th
 
 **GATE PATH: 0 TIER-1 -- the push gate holds.**
 
-Examined: 102 of 127 exported rows; 25 more are computed from other rows, whose inputs are scored where they are typed; 0 display string(s) in 13 served object(s). The whole tree holds 289 Tier-1 findings, most of them off this path.
+Examined: 102 of 127 exported rows; 25 more are computed from other rows, whose inputs are scored where they are typed; 0 display string(s) in 13 served object(s). The whole tree holds 280 Tier-1 findings, most of them off this path.
 
 Exported rows computed from other rows (25): `CHROMOSPHERE_TOP_KM`, `DEG_PER_RAD`, `EARTH_BOW_SHOCK_STANDOFF_RADII`, `EARTH_DIPOLE_TILT_DEG`, `EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR`, `EARTH_GEOSTATIONARY_RADIUS_KM`, `EARTH_HILL_SPHERE_KM`, `EARTH_LEO_INNER_KM`, `EARTH_LEO_OUTER_KM`, `EARTH_LOWER_MANTLE_KM`, `EARTH_MAGNETOPAUSE_STANDOFF_RADII`, `EARTH_MAGNETOTAIL_DRAWN_END_RADII`, `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`, `EARTH_OBLIQUITY_J2000_DEG`, `EARTH_SIDEREAL_ROTATION_PERIOD_H`, `EARTH_STRATOPAUSE_RADIUS_KM`, `EARTH_THERMOPAUSE_RADIUS_KM`, `EARTH_VAN_ALLEN_OUTER_RADII`, `GALACTIC_NORTH_POLE_DEC_J2000_DEG`, `HELMET_CUSP_RADII`, `INNER_LIMIT_OORT_CLOUD_AU`, `OUTER_OORT_CLOUD_AU`, `ROCHE_LIMIT_DRAWN_RADII`, `SGR_A_STAR_DEC_ICRS_DEG`, `SGR_A_STAR_RA_ICRS_DEG`.
 
@@ -135,9 +131,9 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `paleoclimate_wet_bulb_full.py` | earth_science | 44 | 22 | 0 | 0 | 66 |
 | `celestial_objects.py` | orrery | 0 | 48 | 0 | 0 | 48 |
 | `paleoclimate_human_origins_full.py` | earth_science | 40 | 6 | 0 | 0 | 46 |
-| `idealized_orbits.py` | orrery | 29 | 12 | 0 | 0 | 41 |
 | `solar_visualization_shells.py` | orrery | 6 | 32 | 0 | 0 | 38 |
 | `star_notes.py` | stars | 1 | 37 | 0 | 0 | 38 |
+| `idealized_orbits.py` | orrery | 24 | 12 | 0 | 0 | 36 |
 | `paleoclimate_visualization_full.py` | earth_science | 28 | 6 | 0 | 0 | 34 |
 | `neptune_visualization_shells.py` | orrery | 0 | 28 | 0 | 0 | 28 |
 | `comet_visualization_shells.py` | orrery | 4 | 22 | 0 | 0 | 26 |
@@ -148,6 +144,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `provenance_scanner.py` | dev_tools | 0 | 0 | 17 | 0 | 17 |
 | `venus_visualization_shells.py` | orrery | 3 | 4 | 6 | 0 | 13 |
 | `scenarios_heatwaves.py` | earth_science | 3 | 9 | 0 | 0 | 12 |
+| `test_orbit_markers.py` | orrery | 0 | 0 | 12 | 0 | 12 |
 | `scenarios_western_heatwave_march_2026.py` | earth_science | 10 | 1 | 0 | 0 | 11 |
 | `sgr_a_grand_tour.py` | orrery | 8 | 0 | 3 | 0 | 11 |
 | `mars_visualization_shells.py` | orrery | 4 | 3 | 4 | 0 | 11 |
@@ -171,7 +168,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `fetch_climate_data.py` | earth_science | 0 | 5 | 0 | 0 | 5 |
 | `planet9_visualization_shells.py` | orrery | 0 | 5 | 0 | 0 | 5 |
 | `worksheet_checker.py` | orrery | 0 | 0 | 5 | 0 | 5 |
-| `apsidal_markers.py` | orrery | 3 | 1 | 0 | 0 | 4 |
 | `coordinate_system_guide.py` | orrery | 2 | 2 | 0 | 0 | 4 |
 | `sgr_a_visualization_precession.py` | orrery | 4 | 0 | 0 | 0 | 4 |
 | `orrery_maintenance_run.py` | orrery | 0 | 0 | 4 | 0 | 4 |
@@ -193,11 +189,11 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `energy_imbalance.py` | earth_science | 1 | 1 | 0 | 0 | 2 |
 | `plot_data_report_widget.py` | utilities | 2 | 0 | 0 | 0 | 2 |
 | `sgr_a_visualization_animation.py` | orrery | 1 | 0 | 1 | 0 | 2 |
+| `apsidal_markers.py` | orrery | 0 | 2 | 0 | 0 | 2 |
 | `close_approach_data.py` | orrery | 0 | 1 | 1 | 0 | 2 |
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `worksheet_request_builder.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `orbital_elements.py` | orrery | 1 | 0 | 0 | 0 | 1 |
-| `patch_L433_1_where_we_are_20261012.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `data_acquisition.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `exoplanet_orbits.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `fetch_paleoclimate_data.py` | earth_science | 1 | 0 | 0 | 0 | 1 |
@@ -207,7 +203,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `visualization_core.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `visualization_utils.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `earth_pole_live_check.py` | orrery | 0 | 1 | 0 | 0 | 1 |
-| `patch_L401_4_look_close_20261012.py` | orrery | 0 | 1 | 0 | 0 | 1 |
 | `celestial_coordinates.py` | orrery | 0 | 1 | 0 | 0 | 1 |
 | `hills_cloud_sampler.py` | orrery | 0 | 1 | 0 | 0 | 1 |
 | `add_docstrings.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
@@ -221,6 +216,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `worksheet_key_aliases.py` | orrery | 0 | 0 | 1 | 0 | 1 |
 | `worksheet_keys.py` | orrery | 0 | 0 | 1 | 0 | 1 |
 | `export_orbit_cache.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
+| `patch_L431_6_orbits_markers_20261012.py` | orrery | 0 | 0 | 0 | 1 | 1 |
 
 ---
 
@@ -230,7 +226,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 56 | 126 | 567 | 79 | 3 | 775 |
+| Orrery (solar system + orbital mechanics) | 56 | 117 | 567 | 91 | 4 | 779 |
 | Earth System | 13 | 149 | 75 | 2 | 0 | 226 |
 | Stars (stellar neighborhood) | 11 | 12 | 41 | 6 | 3 | 62 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 45 | 0 | 45 |
@@ -248,10 +244,10 @@ Same data again, grouped by subject-matter domain rather than by individual file
 - `hills_cloud_sampler.py`
 - `orbital_period.py`
 - `orrery_maintenance_run.py`
-- `patch_L401_4_look_close_20261012.py`
-- `patch_L433_1_where_we_are_20261012.py`
+- `patch_L431_6_orbits_markers_20261012.py`
 - `position_accuracy.py`
 - `test_dimensions.py`
+- `test_orbit_markers.py`
 - `test_position_digits.py`
 - `worksheet_checker.py`
 - `worksheet_key_aliases.py`
@@ -341,14 +337,6 @@ is planned for a future session.
 
 ## Tier 1: FIX NOW (Score 16-20)
 
-### apsidal_markers.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 1203 | string | display string @ line 1203 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1205 | string | display string @ line 1205 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1207 | string | display string @ line 1207 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-
 ### comet_visualization_shells.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
@@ -432,35 +420,30 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 129 | string | display string @ line 129 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 144 | string | display string @ line 144 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 172 | string | display string @ line 172 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 143 | string | display string @ line 143 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 158 | string | display string @ line 158 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 186 | string | display string @ line 186 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1411 | string | display string @ line 1411 | (4 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1470 | string | display string @ line 1470 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1481 | string | display string @ line 1481 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1594 | string | display string @ line 1594 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1714 | string | display string @ line 1714 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 2390 | string | display string @ line 2390 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 2413 | string | display string @ line 2413 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 2436 | string | display string @ line 2436 | (4 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 2458 | string | display string @ line 2458 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 2473 | string | display string @ line 2473 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 2484 | string | display string @ line 2484 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 2517 | string | display string @ line 2517 | (4 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 2815 | string | display string @ line 2815 | (3 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 2937 | string | display string @ line 2937 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 3569 | string | display string @ line 3569 | (1 claim) | 4 | 4 | **16** | No source citation; date-sensitive (recalled) | Public-facing display string (hover/INFO) |
-| 3613 | string | display string @ line 3613 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 3743 | string | display string @ line 3743 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 3816 | string | display string @ line 3816 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 4285 | string | display string @ line 4285 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 4552 | string | display string @ line 4552 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 4574 | string | display string @ line 4574 | (3 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 4638 | string | display string @ line 4638 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 4672 | string | display string @ line 4672 | (4 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 5802 | string | display string @ line 5802 | (1 claim) | 4 | 4 | **16** | No source citation; date-sensitive (recalled) | Public-facing display string (hover/INFO) |
-| 5898 | string | display string @ line 5898 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 200 | string | display string @ line 200 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1460 | string | display string @ line 1460 | (4 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1519 | string | display string @ line 1519 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1530 | string | display string @ line 1530 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1643 | string | display string @ line 1643 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1763 | string | display string @ line 1763 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 2441 | string | display string @ line 2441 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 2464 | string | display string @ line 2464 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 2487 | string | display string @ line 2487 | (4 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 2509 | string | display string @ line 2509 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 2524 | string | display string @ line 2524 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 2535 | string | display string @ line 2535 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 2568 | string | display string @ line 2568 | (4 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 2866 | string | display string @ line 2866 | (3 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 2988 | string | display string @ line 2988 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 3865 | string | display string @ line 3865 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 4342 | string | display string @ line 4342 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 4609 | string | display string @ line 4609 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 4631 | string | display string @ line 4631 | (3 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 4695 | string | display string @ line 4695 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 4729 | string | display string @ line 4729 | (4 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 
 ### info_dictionary.py
 
@@ -672,12 +655,6 @@ is planned for a future session.
 | 2197 | string | display string @ line 2197 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2332 | string | display string @ line 2332 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 
-### patch_L433_1_where_we_are_20261012.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 47 | constant | CAP | 130 | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
-
 ### planet_visualization_utilities.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
@@ -868,7 +845,8 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 1857 | constant | ENCOUNTER_THRESHOLD_AU | 0.5 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1835 | constant | ENCOUNTER_THRESHOLD_AU | 0.5 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1 | string | display string @ line 1 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
 ### asteroid_belt_visualization_shells.py
 
@@ -1166,18 +1144,18 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 1520 | string | display string @ line 1520 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1633 | string | display string @ line 1633 | (4 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1776 | string | display string @ line 1776 | (8 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1843 | string | display string @ line 1843 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2551 | string | display string @ line 2551 | (8 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2691 | string | display string @ line 2691 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2715 | string | display string @ line 2715 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2782 | string | display string @ line 2782 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2848 | string | display string @ line 2848 | (6 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 3049 | string | display string @ line 3049 | (11 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 3684 | string | display string @ line 3684 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 4390 | string | display string @ line 4390 | (12 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1569 | string | display string @ line 1569 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1682 | string | display string @ line 1682 | (4 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1825 | string | display string @ line 1825 | (8 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1892 | string | display string @ line 1892 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2602 | string | display string @ line 2602 | (8 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2742 | string | display string @ line 2742 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2766 | string | display string @ line 2766 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2833 | string | display string @ line 2833 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2899 | string | display string @ line 2899 | (6 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 3100 | string | display string @ line 3100 | (11 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 3733 | string | display string @ line 3733 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 4447 | string | display string @ line 4447 | (12 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
 ### info_dictionary.py
 
@@ -1397,8 +1375,8 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 60 | constant | OPEN_ORBIT_PLACEHOLDER_FLOOR | 1e+90 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
-| 75 | dict | VIEW_TO_OSCULATING_CENTRE[...] | (7 entries) | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
+| 77 | constant | OPEN_ORBIT_PLACEHOLDER_FLOOR | 1e+90 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
+| 92 | dict | VIEW_TO_OSCULATING_CENTRE[...] | (7 entries) | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
 
 ### orrery_rendering.py
 
@@ -1461,12 +1439,6 @@ is planned for a future session.
 | 2341 | string | display string @ line 2341 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2416 | string | display string @ line 2416 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
-### patch_L401_4_look_close_20261012.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 183 | dict | CREATED[...] | (1 entry) | 3 | 5 | **15** | Cited, not independently cross-checked | UNDETERMINED -- could not be classified |
-
 ### planet9_visualization_shells.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
@@ -1498,11 +1470,11 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 126 | constant | SHEET_FIGURES | 4 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
-| 131 | constant | HALF_UNIT | 0.5 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
-| 137 | constant | SIGMA_MULTIPLE | 3 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
-| 144 | constant | DISTANCE_FLOOR_EXPONENT_KM | 0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 151 | constant | SPEED_FLOOR_EXPONENT_KM_S | -3 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
+| 133 | constant | SHEET_FIGURES | 4 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
+| 138 | constant | HALF_UNIT | 0.5 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
+| 144 | constant | SIGMA_MULTIPLE | 3 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
+| 151 | constant | DISTANCE_FLOOR_EXPONENT_KM | 0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 158 | constant | SPEED_FLOOR_EXPONENT_KM_S | -3 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
 
 ### saturn_visualization_shells.py
 
@@ -1919,9 +1891,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 106 | dict | ROLE_MAP[...] | (144 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 391 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 414 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 106 | dict | ROLE_MAP[...] | (145 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 392 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 415 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 
@@ -1943,33 +1915,33 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 329 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 392 | constant | HASH_LIMIT_BYTES | 2 * 1024 * 1024 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 511 | constant | NOTE_WIDTH | 44 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 512 | constant | NOTE_INDENT | 37 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 341 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 404 | constant | HASH_LIMIT_BYTES | 2 * 1024 * 1024 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 523 | constant | NOTE_WIDTH | 44 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 524 | constant | NOTE_INDENT | 37 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### osculating_cache_manager.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 87 | dict | REFRESH_INTERVALS[...] | (14 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'cache') |
+| 92 | dict | REFRESH_INTERVALS[...] | (14 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'cache') |
 
 ### palomas_orrery.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 2234 | constant | PERFRAME_INDICATOR_RADIUS_FACTOR | 100.0 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2267 | constant | PERFRAME_COORD_DECIMALS | 7 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 3868 | constant | BUTTON_WIDTH | 14 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2240 | constant | PERFRAME_INDICATOR_RADIUS_FACTOR | 100.0 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2273 | constant | PERFRAME_COORD_DECIMALS | 7 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 3874 | constant | BUTTON_WIDTH | 14 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
 
 ### palomas_orrery_dashboard.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 218 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 219 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 1457 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 1588 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 223 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 224 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 1478 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 1609 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### planet_visualization_utilities.py
 
@@ -1997,7 +1969,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 93 | dict | PUBLISHED_ROW_NAMES[...] | (9 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal use (name vocabulary) |
+| 100 | dict | PUBLISHED_ROW_NAMES[...] | (9 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal use (name vocabulary) |
 
 ### provenance_history.py
 
@@ -2071,6 +2043,23 @@ is planned for a future session.
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 125 | constant | REL_TOL | 1e-09 | 4 | 2 | **8** | No source citation; date-sensitive (recalled) | Internal (role 'devtool') |
 
+### test_orbit_markers.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 106 | dict | MERCURY[...] | (8 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 109 | dict | ENCKE[...] | (8 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 112 | dict | SEDNA[...] | (8 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 116 | dict | SEDNA_BARY[...] | (9 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 120 | dict | IO[...] | (9 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 124 | dict | EARTH[...] | (9 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 128 | dict | MOON[...] | (9 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 176 | constant | SEDNA_SIGMA_KM | 3 * 85939.995 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 181 | constant | FLOOR_KM | 0.5 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 187 | dict | APSIS_SIGMA_KM[...] | (2 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 285 | dict | FETCHED_DAYS[...] | (3 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 287 | dict | FETCHED_ERR[...] | (3 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+
 ### test_position_digits.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
@@ -2143,7 +2132,13 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 86 | dict | CENTRE_LABELS[...] | (23 entries) | 3 | 1 | **3** | Cited, not independently cross-checked | Cosmetic (name vocabulary) |
+| 103 | dict | CENTRE_LABELS[...] | (23 entries) | 3 | 1 | **3** | Cited, not independently cross-checked | Cosmetic (name vocabulary) |
+
+### patch_L431_6_orbits_markers_20261012.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 527 | dict | CREATED[...] | (2 entries) | 3 | 1 | **3** | Cited, not cross-checked; date-sensitive | Cosmetic (key vocabulary) |
 
 ### star_sphere_builder.py
 

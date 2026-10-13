@@ -45,12 +45,15 @@ Key functions:
     resolve_accuracy() - the error state for one body, centre and date
     distance_speed_lines() - the hover's distance and speed lines, with
         the sentence that says which kind of figure they are
+    distance_text(), surface_text(), as_given() - the same rule for the
+        orbits' and markers' hovers (L-401's second slice)
     fetch_small_body_state() - a small body's position with its 2xr
         uncertainties, by a direct call to the Horizons API
 
 Consumed by: visualization_utils.format_detailed_hover_text (the static
-plot, the animation and the social export) and palomas_orrery.fetch_position;
-checked by test_position_digits.py.
+plot, the animation and the social export), palomas_orrery.fetch_position,
+idealized_orbits.py and apsidal_markers.py (the orbits and markers);
+checked by test_position_digits.py and test_orbit_markers.py.
 
 Role: computation
 Domain: orrery
@@ -60,6 +63,10 @@ build 1, the body hover).
 Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-401,
 Tony's look: the surface line is back for every centre with a radius,
 the Sun and the giant planets included, measured from one radius).
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-401's
+second slice, with L-431 build 2: as_given, accuracy_for, distance_text,
+surface_text and accuracy_lines, so the orbits' and markers' hovers print
+by the same rule and the same formatter as the body hover).
 """
 
 import math
@@ -595,6 +602,112 @@ def distance_speed_lines(acc, distance_au, speed_au_per_day, center_name,
     if speed_from is not None:
         lines += _speed_sentence(acc, speed_from)
     return lines
+
+
+# ============================================================================
+# ORBITS AND MARKERS (L-401's second slice, with L-431 build 2)
+# ============================================================================
+#
+# A marker on an orbit prints its distances to the same digits as the body
+# it belongs to, by the same formatter as the body hover, so the two never
+# disagree. An element the orbit merely repeats from Horizons (a, e, i,
+# omega, Omega, Tp) is printed as Horizons gave it: never re-rounded, never
+# widened (the L-431 build 2 brief, section 2a).
+
+def as_given(x):
+    """An element repeated from Horizons, printed as given: the shortest
+    plain decimal that reads back to the stored number, so no digit is
+    dropped and none is added. A value that is not a finite number is
+    printed as it is."""
+    try:
+        v = float(x)
+    except (TypeError, ValueError):
+        return str(x)
+    if not math.isfinite(v):
+        return str(x)
+    import numpy as np
+    return np.format_float_positional(v, unique=True, trim='-')
+
+
+def accuracy_for(obj_name, center_name, obj_data=None, objects=None,
+                 parent_planets=None):
+    """resolve_accuracy for a hover built where the object list and the
+    parent map are not passed in: they default to the orrery's own
+    (celestial_objects.OBJECT_DEFINITIONS, orbital_elements.parent_planets).
+    obj_data is the body's position record, which carries a small body's
+    uncertainty for its date; without it a small body's figure is "not
+    included here", as in the animation's body hover."""
+    if objects is None:
+        from celestial_objects import OBJECT_DEFINITIONS as objects
+    if parent_planets is None:
+        from orbital_elements import parent_planets
+    return resolve_accuracy(obj_name, center_name, obj_data, objects, parent_planets)
+
+
+def _err_km(acc):
+    if acc is None or acc.get('state') in ('none', 'center'):
+        return _floor_err_km()
+    return max(acc['err_km'], _floor_err_km())
+
+
+def au_text(acc, distance_au):
+    """A computed distance in AU, to the place its error earns; 'N/A AU'
+    for a value that is not a finite number, as the body hover prints it."""
+    if not _finite(distance_au):
+        return 'N/A AU'
+    return '%s AU' % _fmt(float(distance_au), _err_km(acc) / KM_PER_AU)
+
+
+def km_text(acc, distance_km):
+    """A computed distance in kilometers, to the place its error earns,
+    never finer than whole kilometers; 'N/A km' for a value that is not
+    a finite number."""
+    if not _finite(distance_km):
+        return 'N/A km'
+    return '%s km' % _fmt(float(distance_km), _err_km(acc))
+
+
+def distance_text(acc, distance_au):
+    """'X AU (Y km)': one computed distance in both units, each placed by
+    its own Report test of the same error, as the body hover does."""
+    km = float(distance_au) * KM_PER_AU if _finite(distance_au) else None
+    return '%s (%s)' % (au_text(acc, distance_au), km_text(acc, km))
+
+
+def surface_text(acc, distance_au, center_name):
+    """'X AU (Y km)' from the centre's surface, one radius out, as the
+    body hover measures it (Tony's ruling, restated 2026-10-12); None when
+    the centre has no radius in CENTER_BODY_RADII."""
+    from constants_new import CENTER_BODY_RADII
+    radius_km = CENTER_BODY_RADII.get(center_name)
+    if not radius_km or not _finite(distance_au):
+        return None
+    surf_km = float(distance_au) * KM_PER_AU - radius_km
+    s = distance_text(acc, surf_km / KM_PER_AU)
+    if surf_km < 0:
+        s += ' (below mean datum)'
+    return s
+
+
+def speed_text(acc, speed_km_s, distance_km):
+    """'X km/s (Y AU/day)': a computed speed, by the body hover's speed rule
+    (Reading 1: the distance's relative precision, or the one meter per
+    second floor where the distance has no stated error)."""
+    if not _finite(speed_km_s):
+        return 'N/A km/s (N/A AU/day)'
+    v_err, _from = speed_error_km_s(acc or {'state': 'none'}, distance_km, float(speed_km_s))
+    return '%s km/s (%s AU/day)' % (
+        _fmt(float(speed_km_s), v_err),
+        _fmt(float(speed_km_s) * S_PER_DAY / KM_PER_AU, v_err * S_PER_DAY / KM_PER_AU))
+
+
+def accuracy_lines(acc):
+    """The body hover's own sentence saying which kind of figure the
+    distances are, each line without <br>. A marker carries it under its
+    distances, in the words approved at L-401's look."""
+    if acc is None:
+        return []
+    return _distance_sentence(acc)
 
 
 # ============================================================================

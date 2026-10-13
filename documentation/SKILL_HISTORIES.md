@@ -733,3 +733,8 @@ REBUILT (L-336). It also corrects this skill's own claim that the failed
 `staging -> live` rename was "one data point" -- there have been three,
 the third on 2026-09-17 -- and writes down the hand routine Tony
 actually uses now.
+
+## horizons-orbital-mechanics
+
+Earlier: 1.1 | Cut from palomas_orrery @ e83fe9ce | 2026-07-12
+Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons.

@@ -21,6 +21,11 @@ build 1: the window's Orbital Period row shows the period fetched from
 JPL, to the digits its errors earn, or the typed value marked as typed.
 The estimated perihelion and aphelion dates still use the typed period
 until L-431's second build.)
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-431,
+build 2: the estimated perihelion and aphelion dates use the period that
+belongs to the window's elements, orbital_period.period_for_elements: the
+one JPL gave with them, saved in the orbit cache, then the typed table,
+marked; never a barycentre view's period.)
 """
 import numpy as np
 import plotly.graph_objs as go
@@ -284,12 +289,17 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
     
     params = planetary_params[obj_name]
     
-    # Add period if missing but object is known in KNOWN_ORBITAL_PERIODS
-    if 'period' not in params and obj_name in KNOWN_ORBITAL_PERIODS:
-        period_value = KNOWN_ORBITAL_PERIODS[obj_name]
-        if period_value is not None:  # Some objects might have None (hyperbolic)
-            params['period'] = period_value
-            print(f"Added known period for {obj_name}: {params['period']:.1f} days")
+    # The period that belongs to these elements (L-431 build 2): the one JPL
+    # gave with them, saved in the orbit cache, then the typed table
+    # KNOWN_ORBITAL_PERIODS, marked. Never a period around another centre,
+    # such as a barycentre view's (the typed table was the only source until
+    # build 2). Read once, for the period fill and the apsis dates below.
+    from orbital_period import period_for_elements
+    _own_period = period_for_elements(obj_name, params)
+    if 'period' not in params:
+        if _own_period['days'] is not None and _own_period['kind'] in ('fetched', 'typed'):
+            params['period'] = _own_period['days']
+            print(f"Added {_own_period['kind']} period for {obj_name}: {params['period']:.1f} days")
 
     
     # Extract orbital elements
@@ -852,7 +862,8 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
                 i,
                 omega,
                 Omega,
-                obj_name
+                obj_name,
+                period_days=_own_period['days'],   # L-431 build 2: these elements' period
             )
             print(f"  Calculated dates - Perihelion: {perihelion_date}, Aphelion: {aphelion_date}")
             if perihelion_date:

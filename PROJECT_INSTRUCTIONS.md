@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.92 | October 12, 2026
+Tony Quintanilla, PE | Claude | v3.93 | October 12, 2026
 
-Cut from 47815de2 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from c9722520 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -486,9 +486,10 @@ safe-file-editing            1.13 Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
 agentic-pre-test             1.3  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
-horizons-orbital-mechanics   1.3  Horizons queries, centers, frames, osculating
+horizons-orbital-mechanics   1.4  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning,
-                                  2xr uncertainties, periods
+                                  2xr uncertainties, periods, the drawn orbit's
+                                  centre
 provenance-discipline        2.28 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
@@ -1167,6 +1168,37 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.93 (October 12, 2026): No rule changed in this document. ONE
+skill bump, one version (L-431, with L-401): horizons-orbital-mechanics
+1.3 -> 1.4. THE DRAWN ORBIT FOLLOWS THE PERIOD'S CENTRE.
+
+WHAT PROMPTED IT. L-431's second build draws each body's ellipse
+around the same centre as its period and dates the perihelion and
+aphelion markers from the period JPL gave (Tony's ruling 7 of
+2026-10-11); it carried L-401's second slice, the markers' and orbit
+hovers' digits. Its brief asked for one version if the build added
+method, and it did.
+
+WHAT CHANGED. horizons-orbital-mechanics gains The Drawn Orbit Follows
+the Period's Centre: the period record keeps Horizons' elements around
+its own centre; a barycentre ellipse in a Sun-centred plot is moved to
+where the barycentre is, found from the body's two element sets at one
+date; a record from another date is not paired; a marker's date comes
+from the period of the drawn elements; a date carries its period's
+error; and the comparison with mean elements stays Sun-centred. Its
+v1.1 entry moved to documentation/SKILL_HISTORIES.md, by the
+three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+horizons-orbital-mechanics 1.4 before Horizons work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.90 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.92 (October 12, 2026): No rule changed in this document. ONE
 skill bump, one version (L-401, L-431): horizons-orbital-mechanics
 1.2 -> 1.3. A SMALL BODY'S UNCERTAINTY COMES WITH ITS POSITION.
@@ -1220,40 +1252,6 @@ ledger-and-session-records 1.20 before ledger or handoff work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.88 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.90 (October 10, 2026): No rule changed in this document. TWO
-skills, one version each: ledger-and-session-records 1.18 -> 1.19 and
-horizons-orbital-mechanics 1.1 -> 1.2 (L-395). TONY'S FOLDERS ARE
-NAMED, AND A COMET'S RECORD NUMBER IS NOT A NAME.
-
-WHAT PROMPTED IT. The Horizons check was built and ran live for the
-first time: 13 of 13 served objects agree with JPL. Two things came out
-of the session. Tony asked that his local folders be written into the
-handoff skill, after a session had held a patch back because three
-folders could have been the orrery: "palomas_orrery_for_github is the
-repo folder." And re-fetching JPL's answers showed record 90004956
-holding MAPS on 2026-10-07 and another comet three days later.
-
-WHAT CHANGED. ledger-and-session-records gains Tony's Local Folders,
-under Where a File Goes. horizons-orbital-mechanics gains Checking an
-Entry Against JPL: the Lookup cannot see record numbers, the three-step
-find, JPL's names, a recent comet's record number moving, and live
-answers over documented ones; and two corrected lines under Small-Body
-Record Pinning. The brief for this build asked for at most one skill
-version; Tony's request made it two. Their v1.16 entry (the ledger
-skill) moved to documentation/SKILL_HISTORIES.md, by the three-entry
-rule; the Horizons skill had one entry.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copies read
-ledger-and-session-records 1.19 and horizons-orbital-mechanics 1.2
-before ledger or Horizons work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.87 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

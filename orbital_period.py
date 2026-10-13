@@ -16,19 +16,29 @@ The fallback order for SHOWING a period (Tony's ruling 5):
        carried forward when a later fetch could not get one;
     3. the typed table KNOWN_ORBITAL_PERIODS (constants_new.py), printed
        as typed with the note "typed value, not fetched from JPL".
-The cache's 'elements' are not changed by any of this, so the drawn
-ellipse and the perihelion and aphelion markers do not move (build 2).
+The cache's 'elements' are not changed by any of this.
+
+Since build 2 the period also sets what is DRAWN (ruling 7). The period
+record keeps the elements Horizons gave around the period's own centre,
+and drawing_orbit() hands the drawing those elements, so the ellipse is
+taken around the same centre as the period: Sedna's around the solar
+system's barycentre, Mercury's and Encke's around the Sun. The markers'
+dates are worked out from the period that belongs to the drawn elements,
+by the same fallback order, and a date carries the period's error.
 
 Key functions:
     build_period_record() - Horizons + SBDB queries -> the cache's period record
     resolve_display_period() - the fallback order, for one body and one view
+    drawing_orbit() - the elements to draw, their centre, and their period
+    period_for_computation() - the period a marker's date is worked out from
+    osculating_centre_for_view() - the one home of the view-to-centre map
     period_hover_lines() - the hover's period lines, <br>-joined
     period_panel_text() - one short line for the orbital parameters window
     report_exponent() - the Report test's place for an error
 
 Consumed by: osculating_cache_manager.fetch_osculating_elements (writes),
-visualization_utils.format_detailed_hover_text, orbital_param_viz.py and
-palomas_orrery.py (read).
+visualization_utils.format_detailed_hover_text, orbital_param_viz.py,
+palomas_orrery.py, idealized_orbits.py and apsidal_markers.py (read).
 
 Role: computation
 Domain: orrery
@@ -45,6 +55,13 @@ Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-401,
 Tony's look: a planet or a moon, which JPL's small-body database does not
 hold, no longer mentions it; the clause stays for an asteroid or comet
 whose lookup gave no uncertainty.)
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-431,
+build 2: the period record keeps the chosen centre's elements, and
+drawing_orbit() and period_for_computation() hand them, with their
+period, to the drawing and the markers; VIEW_TO_OSCULATING_CENTRE is the
+one home of the view-to-centre map, which palomas_orrery.py now reads;
+_is_small_body counts a pinned record number as a small body whatever
+its id_type, so C/2025_K1 is asked of the Small-Body Database.)
 """
 
 import math
@@ -68,10 +85,10 @@ HELIOCENTRIC_FORMS = ('@sun', '@10', 'sun', '10')
 SBDB_API_URL = 'https://ssd-api.jpl.nasa.gov/sbdb.api'
 
 # The view centres that make palomas_orrery.py fetch an object's elements
-# around another centre. A COPY of the block that sets
-# osculating_center_body in palomas_orrery.py (search for
-# "osculating_center_body = '@9'"). Build 2 edits that path and folds this
-# copy into one home there (L-431). The pre-test checks the two agree.
+# around another centre. The ONE home of this map (L-431, build 2): both
+# of palomas_orrery.py's plot paths, the static plot and the animation,
+# read it through osculating_centre_for_view(), and so does the hover.
+# Until build 2 the animation kept its own copy, which lacked Orcus.
 VIEW_TO_OSCULATING_CENTRE = {
     'Pluto-Charon Barycenter': '@9',
     'Pluto': '@999',
@@ -102,6 +119,13 @@ CENTRE_LABELS = {
     '599': 'Jupiter', '699': 'Saturn', '799': 'Uranus', '899': 'Neptune',
     '999': 'Pluto',
 }
+
+
+def osculating_centre_for_view(center_object_name):
+    """The Horizons centre a view fetches its system's elements around,
+    such as '@9' for the Pluto-Charon barycentre, or None for the default
+    (the Sun, or the centre Horizons picks for a moon)."""
+    return VIEW_TO_OSCULATING_CENTRE.get(center_object_name)
 
 
 def centre_label(location, parent_name=None):
@@ -199,10 +223,45 @@ def query_period_pair(horizons_id, id_type, date_str, location):
             return {
                 'p1': p1, 'p2': p2, 'step_days': step, 'e': e_val,
                 'targetname': str(el[0]['targetname']) if 'targetname' in el.colnames else None,
+                'elements': _elements_from_row(el[0], date_str),
             }
         except Exception as ex:          # try the other side of the year
             last_error = ex
     raise last_error
+
+
+# The element columns kept from the period query's first row, under the
+# names the orbit cache uses (orbit_data_manager.query_horizons_elements
+# reads the same columns). astroquery 0.4.11 asks for AU-D units.
+ELEMENT_COLUMNS = (
+    ('a', ('a',)), ('e', ('e',)), ('i', ('incl',)), ('omega', ('w',)),
+    ('Omega', ('Omega',)), ('TP', ('Tp_jd',)), ('MA', ('M',)),
+    ('TA', ('nu',)), ('q', ('q',)),
+)
+
+
+def _elements_from_row(row, date_str):
+    """The osculating elements of one Horizons elements row, around the
+    centre the query asked, at the plot date (L-431, build 2: the drawn
+    ellipse is taken around the period's centre). None when a column is
+    missing; the drawing then keeps the elements it already has."""
+    out = {}
+    names = getattr(row, 'colnames', ())
+    for key, candidates in ELEMENT_COLUMNS:
+        col = next((c for c in candidates if c in names), None)
+        if col is None:
+            if key == 'q':
+                continue
+            return None
+        try:
+            v = float(row[col])
+        except (TypeError, ValueError):
+            return None
+        if not math.isfinite(v):
+            return None
+        out[key] = v
+    out['epoch'] = '%s osc.' % date_str
+    return out
 
 
 def sbdb_search_string(horizons_id, targetname=None):
@@ -251,9 +310,13 @@ def fetch_sbdb_period_sigma(search):
 
 
 def _is_small_body(horizons_id, id_type):
+    """An asteroid or comet, by its id_type, or by a pinned Horizons
+    small-body record number (9 followed by seven digits), whatever its
+    id_type: C/2025_K1 is listed as record 90004912 with id_type 'id'
+    (L-431, build 2; found at L-401's review)."""
     if id_type in ('smallbody', 'designation', 'asteroid_name', 'comet_name'):
         return not str(horizons_id).startswith('-')
-    return False
+    return bool(re.match(r'^9\d{7}$', str(horizons_id).strip()))
 
 
 def build_period_record(horizons_id, id_type, date_str, location, previous=None,
@@ -354,6 +417,13 @@ def build_period_record(horizons_id, id_type, date_str, location, previous=None,
         'test': test,
         'horizons_targetname': pair.get('targetname'),
         'agrees_with_elements_fetch': agrees,
+        # L-431, build 2: the elements around the chosen centre at the plot
+        # date, so the drawing can be taken around the period's centre;
+        # and the period the elements fetch itself gave, around its own
+        # centre, for the drawing that cannot be (drawing_orbit).
+        'elements': pair.get('elements'),
+        'elements_fetch_days': elements_p_days,
+        'elements_fetch_center': location,
     }
 
 
@@ -533,3 +603,266 @@ def period_panel_text(resolved):
     years_s = format_by_error(rec['days'] / D_PER_JULIAN_YEAR,
                               err / D_PER_JULIAN_YEAR if err else None)
     return '%s days (%s yr), JPL, around %s' % (days_s, years_s, resolved['label'])
+
+
+# ============================================================================
+# COMPUTING WITH A PERIOD (L-431, build 2: the drawn ellipse and the markers)
+# ============================================================================
+#
+# Ruling 7 (2026-10-11): the drawn ellipse is taken around the same centre
+# as the period, and the perihelion and aphelion markers use the fetched
+# period in the same fallback order. The period a marker's date is worked
+# out from must belong to the elements that draw the orbit, or the date and
+# the drawing describe two orbits; drawing_orbit() keeps the two together.
+
+KIND_FETCHED = 'fetched'
+KIND_TYPED = 'typed'
+KIND_KEPLER = 'kepler'
+KIND_NONE = 'none'
+
+# The words a marker carries when its date did not come from JPL's period.
+# "Typed value, not fetched from JPL" is the body hover's own (build 1,
+# approved at its look); the Kepler sentence is new in build 2 and goes to
+# Tony at its look.
+TYPED_PERIOD_WORDS = 'From a typed period: typed value, not fetched from JPL.'
+KEPLER_PERIOD_WORDS = ("From a period worked out from the orbit's size,<br>"
+                       'not fetched from JPL.')
+
+
+def _strip_osc(epoch):
+    return str(epoch or '').replace(' osc.', '').strip()
+
+
+def _same_centre(a, b):
+    """Two Horizons centre strings name the same centre ('@sun' and '@10',
+    '@599' and '599')."""
+    if a is None or b is None:
+        return False
+    if _is_heliocentric(a) and _is_heliocentric(b):
+        return True
+    return str(a).lstrip('@').lower() == str(b).lstrip('@').lower()
+
+
+def _period(days, err, kind, center=None, record=None, parent_name=None):
+    return {'days': days, 'err_days': err, 'kind': kind, 'center': center,
+            'label': centre_label(center, parent_name) if center else None,
+            'record': record}
+
+
+def _orbits_the_sun(obj_name, center_object_name):
+    """Around the Sun: a Sun-centred view (or none named) and a body that
+    is not a moon or a member of a binary system (orbital_elements'
+    parent_planets lists those). Only then may Kepler's law with the Sun's
+    mass stand in for a period."""
+    if center_object_name not in (None, 'Sun'):
+        return False
+    try:
+        from orbital_elements import parent_planets
+    except Exception:
+        return True
+    return not any(obj_name in members for members in parent_planets.values())
+
+
+def _typed_or_kepler(obj_name, typed_table, a_au, heliocentric):
+    """The last two steps of the fallback order, for computing: the typed
+    table, marked; then, for an orbit around the Sun only, Kepler's third
+    law from the orbit's size, marked. A moon gets neither: Kepler's law
+    with the Sun's mass would be wrong for it."""
+    if typed_table is None:
+        from constants_new import KNOWN_ORBITAL_PERIODS as typed_table
+    days = typed_table.get(obj_name) if obj_name else None
+    if days is not None and math.isfinite(float(days)) and float(days) < OPEN_ORBIT_PLACEHOLDER_FLOOR:
+        return _period(float(days), None, KIND_TYPED)
+    if heliocentric and a_au is not None and a_au > 0:
+        return _period(D_PER_JULIAN_YEAR * math.sqrt(a_au ** 3), None, KIND_KEPLER, CENTRE_SUN)
+    return _period(None, None, KIND_NONE)
+
+
+def period_for_computation(obj_name, center_object_name=None, a_au=None,
+                           typed_table=None, cache=None, parent_name=None):
+    """
+    The period to WORK OUT a marker's date from, by the fallback order:
+    the fetched record in the orbit cache (a fresh fetch writes it, so the
+    last fetched record is the same step), then the typed table, marked,
+    then Kepler's third law from a, marked, for an orbit around the Sun.
+
+    For a view whose elements and period share one centre: a moon, the
+    Pluto system, or any body whose record names the centre its elements
+    were fetched around. drawing_orbit() is the caller for a Sun-centred
+    view, where the two can differ.
+
+    Returns {'days', 'err_days', 'kind', 'center', 'label', 'record'};
+    kind is 'fetched', 'typed', 'kepler' or 'none'.
+    """
+    resolved = resolve_display_period(obj_name, center_object_name, parent_name,
+                                      typed_table={}, cache=cache)
+    rec = resolved.get('record')
+    if resolved['kind'] == 'fetched' and rec.get('days') is not None:
+        return _period(rec['days'], rec.get('error_days'), KIND_FETCHED,
+                       rec.get('center'), rec, parent_name)
+    if resolved['kind'] == 'fetched':
+        return _period(None, None, KIND_NONE, rec.get('center'), rec, parent_name)
+    return _typed_or_kepler(obj_name, typed_table, a_au,
+                            _orbits_the_sun(obj_name, center_object_name))
+
+
+def _rotate(x, y, z, angle, axis):
+    """The rotation idealized_orbits.rotate_points applies, for one point."""
+    c, s = math.cos(angle), math.sin(angle)
+    if axis == 'z':
+        return x * c - y * s, x * s + y * c, z
+    return x, y * c - z * s, y * s + z * c
+
+
+def position_from_elements(el):
+    """The body's position at its elements' epoch, from a, e, i, omega,
+    Omega and the true anomaly TA, in the rotation order the orrery draws
+    its ellipses in (omega about z, i about x, Omega about z). AU."""
+    a, e, nu = el['a'], el['e'], math.radians(el['TA'])
+    r = a * (1.0 - e * e) / (1.0 + e * math.cos(nu))
+    x, y, z = r * math.cos(nu), r * math.sin(nu), 0.0
+    x, y, z = _rotate(x, y, z, math.radians(el['omega']), 'z')
+    x, y, z = _rotate(x, y, z, math.radians(el['i']), 'x')
+    return _rotate(x, y, z, math.radians(el['Omega']), 'z')
+
+
+def _elements_usable(el):
+    """Every element position_from_elements needs is a finite number (the
+    cache stores None for a column Horizons did not send)."""
+    for k in ('a', 'e', 'i', 'omega', 'Omega', 'TA'):
+        v = el.get(k)
+        if isinstance(v, bool) or not isinstance(v, (int, float)) or not math.isfinite(v):
+            return False
+    return el['e'] < 1.0
+
+
+def period_for_elements(obj_name, params, cache=None, typed_table=None):
+    """
+    The period that belongs to the elements in hand, for a window that
+    draws them as given (the orbital parameters window). The record is
+    read under the plain key, the one a Sun-centred or a moon's own fetch
+    writes; a view-keyed record (Earth@3, Pluto@9) is around another
+    centre and never pairs with these elements. When the record's centre
+    differs, the period the same elements fetch gave is used, then the
+    typed table, marked.
+    """
+    return drawing_orbit(obj_name, None, params, cache=cache, typed_table=typed_table,
+                         allow_move=False)['period']
+
+
+def drawing_orbit(obj_name, center_object_name, params, cache=None,
+                  typed_table=None, parent_name=None, allow_move=True):
+    """
+    The elements to DRAW a body's orbit with, the centre they are taken
+    around, and the period that belongs to them (ruling 7).
+
+    params are the elements the view fetched (planetary_params[obj_name]).
+    When the body's period record names a different centre (Sedna's names
+    the solar system's barycentre, while the plot asks around the Sun) and
+    holds the elements Horizons gave around that centre at the same date,
+    those are drawn, moved so their focus sits where that centre is: the
+    body's position from both element sets at the one date gives where the
+    barycentre is seen from the Sun, so the two ellipses meet at the body.
+
+    Returns a dict:
+        elements   a, e, i, omega, Omega, TP, MA, TA, epoch to draw from
+        center     the Horizons centre they are around, or None if unknown
+        label      the hover's words for that centre, or None
+        offset_au  (dx, dy, dz): that centre seen from the plot's centre
+        period     the period to compute with (as period_for_computation)
+        note       None, or a sentence for the orbit's hover when the
+                   period's centre could not be drawn
+
+    allow_move=False keeps params as they are and returns the period that
+    belongs to them (period_for_elements), for a window that draws the
+    elements it was given.
+    """
+    out = {'elements': params, 'center': None, 'label': None,
+           'offset_au': (0.0, 0.0, 0.0), 'note': None}
+    a_au = (params or {}).get('a')
+    if cache is None:
+        cache = _load_cache_quietly()
+    entry = _cache_entry_for(obj_name, center_object_name, cache) if obj_name else None
+    entry = entry if isinstance(entry, dict) else {}
+    rec = entry.get('period') if isinstance(entry.get('period'), dict) else None
+    same_fetch = bool(entry.get('elements')) and params is not None and (
+        _strip_osc(entry['elements'].get('epoch')) == _strip_osc(params.get('epoch')))
+    params_centre = (entry.get('metadata') or {}).get('center_body', CENTRE_SUN) if same_fetch else None
+    if params_centre:
+        out['center'] = params_centre
+        out['label'] = centre_label(params_centre, parent_name)
+
+    if rec is None or 'days' not in rec:
+        out['period'] = _typed_or_kepler(obj_name, typed_table, a_au,
+                                         _orbits_the_sun(obj_name, center_object_name))
+        return out
+    if rec.get('days') is None:
+        # An open orbit: nothing to time by a period.
+        out['period'] = _period(None, None, KIND_NONE, rec.get('center'), rec, parent_name)
+        return out
+    fetched = _period(rec['days'], rec.get('error_days'), KIND_FETCHED,
+                      rec.get('center'), rec, parent_name)
+    sun_view = center_object_name in (None, 'Sun')
+    if params_centre is None and sun_view and not _is_heliocentric(rec.get('center')):
+        # Elements from somewhere other than this fetch, around the Sun,
+        # and a period around another centre: they cannot be paired.
+        out['period'] = _typed_or_kepler(obj_name, typed_table, a_au,
+                                         _orbits_the_sun(obj_name, center_object_name))
+        return out
+    if params_centre is None or _same_centre(rec.get('center'), params_centre):
+        # The record and the drawn elements share a centre (Mercury, Encke,
+        # a moon), or the drawn elements are not this fetch's and the
+        # record's centre is the view's.
+        out['period'] = fetched
+        return out
+    el = rec.get('elements')
+    if (allow_move and isinstance(el, dict)
+            and _strip_osc(el.get('epoch')) == _strip_osc(params.get('epoch'))
+            and _elements_usable(params) and _elements_usable(el)):
+        hx, hy, hz = position_from_elements(params)
+        bx, by, bz = position_from_elements(el)
+        out.update({'elements': el, 'center': rec.get('center'),
+                    'label': centre_label(rec.get('center'), parent_name),
+                    'offset_au': (hx - bx, hy - by, hz - bz), 'period': fetched})
+        return out
+    # The record names another centre but holds no elements around it for
+    # this date (a record saved before build 2): the drawing stays around
+    # its own centre, and its markers use the period the elements fetch
+    # gave around that centre, or the typed table, marked.
+    out['note'] = ('Drawn around %s; the period above is around %s.<br>'
+                   'Update the orbital elements to draw it around that center.'
+                   % (out['label'], centre_label(rec.get('center'), parent_name)))
+    own = rec.get('elements_fetch_days')
+    if own is not None and _same_centre(rec.get('elements_fetch_center'), params_centre):
+        out['period'] = _period(own, None, KIND_FETCHED, params_centre, None, parent_name)
+    else:
+        out['period'] = _typed_or_kepler(obj_name, typed_table, a_au,
+                                         _orbits_the_sun(obj_name, center_object_name))
+    return out
+
+
+def carried_error_days(period, periods=1.0):
+    """The error a date carries from the period it was worked out from:
+    the period's error times the number of periods stepped (half of one
+    for an aphelion after a perihelion). None when the period has none."""
+    err = (period or {}).get('err_days')
+    if err is None:
+        return None
+    return abs(periods) * err
+
+
+def date_note_lines(period, carried_days):
+    """The hover lines a computed date carries: where its period came from
+    when that is not JPL's, and its uncertainty where that is more than a
+    day (L-431 brief, section 2b). Each line without <br>."""
+    lines = []
+    kind = (period or {}).get('kind')
+    if kind == KIND_TYPED:
+        lines.append(TYPED_PERIOD_WORDS)
+    elif kind == KIND_KEPLER:
+        lines.extend(KEPLER_PERIOD_WORDS.split('<br>'))
+    if carried_days is not None and carried_days > 1.0:
+        v = float('%.2g' % carried_days)
+        s = '{:,}'.format(int(round(v))) if v >= 10 else ('%g' % v)
+        lines.append("Uncertain by about %s days, from the period's uncertainty." % s)
+    return lines

@@ -186,6 +186,11 @@ tools/pull_drawings.py; the offline runner's description names both.
 October 12, 2026 with Anthropic's Claude Opus 5.5 (L-401, build 1): Test
 Position Digits under the orrery's checkers, in alphabetical place, in
 the same patch as the checker, so it has its button from the start.
+October 12, 2026 with Anthropic's Claude Opus 5.5 (L-431, build 2): Orbit
+Markers under the orrery's checkers, in the same patch as the checker.
+Its label carries no "Test", by Tony's ruling 5 of 2026-10-12; it sits
+after Test Orbit Cache, which is its alphabetical place once the other
+labels lose the word.
 """
 
 import os
@@ -1226,6 +1231,22 @@ LAUNCH_GROUPS = {
          "test_orbit_cache.py",
          "Comprehensive test suite for orbit data caching, format conversion, "
          "and repair. Run alongside Verify Orbit Cache when the cache looks off.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Orbit Markers",
+         "test_orbit_markers.py",
+         "Check that each orbit is drawn around the same center as its period "
+         "(Sedna's around the solar system's center of mass, Mercury's and "
+         "Encke's around the Sun), that each perihelion and aphelion marker is "
+         "dated from the period JPL gave, with that period's uncertainty where "
+         "it is more than a day, and that every orbit and marker hover prints "
+         "its distances to the digits JPL's errors earn. Runs the real orbit "
+         "drawing offline on recorded inputs and judges it with arithmetic of "
+         "its own. Nine faults are planted first, each in a copy of the real "
+         "code, and each must be caught by name. "
+         "Ends on \"ORBIT MARKERS: PASS\" (L-431, L-401).",
          SCRIPT_DIR,
          True,
          None,

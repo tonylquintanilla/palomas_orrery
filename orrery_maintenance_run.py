@@ -87,11 +87,11 @@ artifact, and it is short enough to copy.
 
 GATING AND REPORT-ONLY
 ----------------------
-Twenty-four checkers are pass/fail: a problem makes them exit non-zero.
+Twenty-five checkers are pass/fail: a problem makes them exit non-zero.
 Two are REPORT-ONLY -- worksheet_checker.py and provenance_scanner.py
 exit 0 whatever they find, and exit 1 only when they could not run.
 They are marked in the CHECKERS table, and the summary counts the
-gating twenty-four in its headline and quotes the two report-only verdicts
+gating twenty-five in its headline and quotes the two report-only verdicts
 underneath.
 
 The block quotes each tool's own note rather than restating it. A
@@ -172,6 +172,12 @@ build 1: CHECKERS gains Position digits (L-401), test_position_digits.py,
 which builds the body hover offline and judges every distance and speed
 line against the error it works out itself, after eleven planted faults
 are each caught by name. Twenty-four gating checkers.)
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-431,
+build 2, with L-401's second slice: CHECKERS gains Orbit markers (L-431,
+L-401), test_orbit_markers.py, which runs the real orbit drawing offline
+and judges each ellipse's centre, each marker's date and every printed
+distance, after nine faults planted in copies of the real source are each
+caught by name. Twenty-five gating checkers.)
 """
 
 import hashlib
@@ -308,6 +314,12 @@ CHECKERS = [
     # the checker itself; eleven faults planted first, each caught by name.
     ('Position digits (L-401)', ['test_position_digits.py'],
      'POSITION DIGITS:'),
+    # L-431 build 2, with L-401's second slice: each orbit drawn around its
+    # period's centre, each marker dated from the period JPL gave, and
+    # every orbit and marker hover printed by the errors JPL states; nine
+    # faults planted first in copies of the real source, each caught by name.
+    ('Orbit markers (L-431, L-401)', ['test_orbit_markers.py'],
+     'ORBIT MARKERS:'),
     # A fourth field marks a tool REPORT-ONLY: it exits 0 whatever it
     # finds, so "passed" says only that it ran. Exactly two are, and
     # both are deliberate -- their numbers are the verdict, not their
