@@ -19,7 +19,7 @@ Last updated: October 12, 2026, evening: six rulings made in chat.
 > **Needs you now:**
 > - *Orrery: run patch_L401_4, then patch_L433_1 (this page), the
 >   maintenance run; hover Io from Jupiter once; commit the new
->   documentation files; push.* -- done 
+>   documentation files; push.* -- done 4037362b82853d48e1dd978e40f4be7ec68118f3
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -54,7 +54,7 @@ Last updated: October 12, 2026, evening: six rulings made in chat.
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
 
-## Settled  **>> UPDATED THIS SESSION**
+## Settled  **>> UPDATED THIS SESSION** -- are these rulings included in a skill or only here?
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
 - Digits by the error JPL states; whole km and a plain sentence where it
@@ -148,5 +148,21 @@ NEXT:
   2. Move this script into documentation/; commit and push.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+Let me read what L-401's remaining slices are, as the ledger now states them, before recommending an order.
+
+**Recommended: L-431 build 2 next, carrying L-401's second slice inside it, with the four scaffolding sessions beside it in any order.**
+
+Why that pairing. L-401's remaining slices, as the ledger now lists them, are the plot's markers (perihelion, aphelion, closest approach, encounters), the orbit hovers in `idealized_orbits.py`, the fly-to buttons, the parameters window, and the animation's small-body uncertainty. L-431 build 2 is the drawn orbits and their markers from the fetched periods, and it opens exactly the two files the first two of those slices live in: `apsidal_markers.py` and `idealized_orbits.py`. Doing them in one session means one patch, one pre-test and one look for both items, and the four in-passing fixes you confirmed today ride the same patch. That is the ledger skill's own rule: cluster by the files a job already opens.
+
+So the order I'd suggest:
+
+1. **L-431 build 2 with L-401 slice 2** (markers and orbit hovers). Its brief is not written yet; the design was settled on October 11, so the brief is mostly scope and build notes. This is the "Do next" on your page.
+2. **The four briefed scaffolding sessions**, between or after, as your energy allows: the dashboard's labels, L-425, L-424 with L-426, the Horizons move. None touches L-431's files, so they don't collide.
+3. **L-401 build 3** afterwards: the fly-to buttons, the parameters window, the animation's uncertainty. Small, and its own session.
+
+One question: shall I write the L-431 build 2 brief now, with the L-401 slice folded in, or leave it for tomorrow?
+
+==========================================================================
 
