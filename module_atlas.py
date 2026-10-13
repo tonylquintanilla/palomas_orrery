@@ -269,9 +269,6 @@ ROLE_MAP = {
     'worksheet_checker':                      'devtool',
     'worksheet_keys':                         'devtool',
     'worksheet_request_builder':              'devtool',
-
-    # patch
-    'patch_L437_1_tier1_by_domain_20261013':  'patch',
 }
 # ROLE-MAP:END
 

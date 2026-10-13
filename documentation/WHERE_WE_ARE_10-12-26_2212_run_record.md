@@ -1952,3 +1952,45 @@ The patch is saved in your orrery folder as patch_L269_1_scanner_breakdown_20261
 If any file’s count goes up, that last line names the file with its old and new counts. If the run can’t find the breakdown in the scanner’s output, it says “NOT READ” rather than leaving the line out. -- correct
 
 There’s a new check for this, “Maintenance report”, with its own dashboard button. It plants three faults and catches each one by name. That makes 26 checks in the maintenance run, and all 26 passed on the clean copy.
+
+================================================================
+
+Your run matched the prediction exactly, so L-437 (the Tier-1 total split by domain) is done. I've saved a small closing patch, `patch_L437_2_close_20261013.py`, in your orrery folder. Please run it.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L437_2_close_20261013.py
+ok  LEDGER_CONSOLIDATED.md                                  header: one stamp line
+ok  LEDGER_CONSOLIDATED.md                                  L-437 title: DONE
+ok  LEDGER_CONSOLIDATED.md                                  L-437 status: DONE, section C
+ok  LEDGER_CONSOLIDATED.md                                  L-437: the run, the loose ends
+ok  LEDGER_CONSOLIDATED.md                                  L-269: a Note on its unrun patch
+ok  documentation/WHERE_WE_ARE.md                           Signals: the Tier-1 line, from your run
+ok  documentation/HANDOFF_L437_tier1_by_domain_20261013.md  section 11: your run and the close
+
+patch applied (7 edits in 3 files)
+Stamps updated: the ledger; the handoff gains section 11.
+WHERE_WE_ARE.md: 130 lines above the run-record marker (cap 130).
+
+NEXT:
+  1. Run orrery_maintenance_run.py. Its Ledger index moves L-437 into
+     section C. Nothing else should change: every gating checker passes.
+
+
+
+  2. Move this script into documentation/; commit and push.
+  3. patch_L269_1 in this folder will refuse (four anchors moved under it).
+     When you next open its session, paste it the note in section 11 of
+     documentation/HANDOFF_L437_tier1_by_domain_20261013.md. -- done
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+**What your run showed.** All 26 pass/fail checks passed, and the new Domain Split check caught all 6 of its planted faults. The scanner row read "Whole tree, Tier-1: 281: orrery 116, Earth System 149, stars 13, utilities 2, unclassified 1", the same as on my test copy. You pushed it at f59c84b2.
+
+**What the closing patch does.** It changes only records, no code:
+- It marks L-437 done in the ledger. The maintenance run then moves the entry into the closed section.
+- It points the Signals line on your Where We Are page at your own run's audit instead of my test copy.
+- It adds your run to the handoff.
+
+I tried it on a spare copy of f59c84b2, and it applied cleanly.
+
+**Heads-up about the L-269 patch** (the other session's maintenance summary breakdown). `patch_L269_1_scanner_breakdown_20261013.py`, also in your root folder, will refuse to run and write nothing. It was built on the same starting point as L-437, and L-437 ran first, so four of the places it looks for have changed. Half of what it does is now a duplicate: L-437 already prints the whole-tree line with its domains on the scanner's row. Its other half is new and worth keeping, which is naming each file whose Tier-1 count rose since the last run. A ready-to-paste note for that session is in section 11 of the handoff, and the same note is in the ledger on L-269. Paste it in when you next open that session.
+
+After the closing patch, run the maintenance run, move the patch into `documentation/`, and commit and push.

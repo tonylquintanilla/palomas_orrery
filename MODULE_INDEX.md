@@ -11,15 +11,11 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 156  
-**Total Lines of Code (non-blank):** 122,385  
-**Total Public Functions/Classes:** 1,457
+**Total Python Files:** 155  
+**Total Lines of Code (non-blank):** 122,005  
+**Total Public Functions/Classes:** 1,455
 
 ## Classification Coverage
-
-**Patch scripts awaiting archive (1).** A `Role: patch` module is a one-shot script that has already run. Its base fingerprint no longer matches, so it cannot run again. Move each into `documentation/`. While one sits in the scanned tree it inflates the module count here and the file count in the provenance audit.
-
-- `patch_L437_1_tier1_by_domain_20261013.py`
 
 **Undetermined role (9).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
@@ -228,7 +224,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (129 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (984 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (987 lines) |
 | `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (708 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (505 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,528 lines) |
@@ -254,14 +250,6 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `worksheet_checker.py` | - L-192. Does the worksheet say what the annotation claims it says? (2,151 lines) |
 | `worksheet_keys.py` | Worksheet row keys -- one owner for the syntax and the resolution. (551 lines) |
 | `worksheet_request_builder.py` | Worksheet request builder -- ask the question the checker can read. (652 lines) |
-
----
-
-## Patch Scripts (transient -- awaiting archive)
-
-| Module | Description |
-|--------|-------------|
-| `patch_L437_1_tier1_by_domain_20261013.py` | - L-437: the provenance scanner's whole-tree Tier-1 total prints with its domain split, and a module's domain is read from its own docstring Domain: tag. (383 lines) |
 
 ---
 

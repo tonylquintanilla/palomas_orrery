@@ -258,4 +258,54 @@ a virtual display.
   2.29 before provenance work.
 - (decide) Nothing.
 
+## 11. Your run, and the close
+
+Added by `patch_L437_2_close_20261013.py`, built on f59c84b2 (this
+build's patch run and pushed).
+
+Read from your run record,
+`documentation/WHERE_WE_ARE_10-12-26_2212_run_record.md`:
+- The patch applied: 69 edits in 11 files and 2 new files.
+- The maintenance run passed 26 of 26 gating checkers. Domain Split:
+  "PASS -- 6 of 6 planted faults caught". The scanner row: "0 TIER-1 --
+  the push gate holds; Whole tree, Tier-1: 281: orrery 116, Earth System
+  149, stars 13, utilities 2, unclassified 1." Exactly as predicted.
+- You reinstalled provenance-discipline 2.29, copied the instructions
+  to v3.95 and pushed at f59c84b2.
+
+L-437 is DONE. The maintenance run's Ledger index moves its block to
+section C.
+
+**The L-269 patch in your root folder will refuse.** It was built on
+70202e3b beside this one, and this one ran first. Four of its anchors
+moved: the maintenance run's docstring end, the Orbit markers row, the
+dashboard's docstring end, and the ledger's header stamp. It writes
+nothing when it refuses, so running it is safe, but it does nothing.
+
+Half of it is now a duplicate. It reads the scanner's per-domain
+console lines and prints a whole-tree line under the scanner's row;
+L-437 already prints that line, on the row itself. The other half --
+naming each file whose Tier-1 rose since the previous run -- L-437 does
+not do, and it is worth keeping. A note for its session, also on L-269
+in the ledger:
+
+    patch_L269_1 refuses at f59c84b2 on four anchors (the maintenance
+    run's docstring end, the Orbit markers row, the dashboard's
+    docstring end, the ledger's header stamp): L-437 ran first. L-437
+    already quotes "Whole tree, Tier-1: 281: orrery 116, ..." on the
+    Provenance scanner row. Re-anchor on f59c84b2, keep the risen-files
+    lines, drop the whole-tree line, and restate the GATING AND
+    REPORT-ONLY count, which says twenty-five while the run has
+    twenty-six gating checkers.
+
+The obligation travels: provenance-discipline 2.29 was installed during
+this session, which loaded 2.28. The next session confirms its loaded
+copy reads 2.29 before provenance work.
+
+For Tony:
+- (do) Run `patch_L437_2_close_20261013.py`, then
+  `orrery_maintenance_run.py` (it moves L-437 into section C); move the
+  patch into `documentation/`; commit and push.
+- (do) When you next open the L-269 session, paste it the note above.
+
 Session record written October 2026 with Anthropic's Claude Opus 5.5.
