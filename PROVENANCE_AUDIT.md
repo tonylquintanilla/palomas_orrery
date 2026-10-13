@@ -2,7 +2,7 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: October 13, 2026
-Files scanned: 156
+Files scanned: 155
 Total findings: 1116
 Constants: 189 | Dicts: 61 | Display strings: 866
 
@@ -20,14 +20,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261013T192756Z | `082dbb1` | 155 | 1116 | 281 | orrery 116, Earth System 149, stars 13, utilities 2, unclassified 1 | 684 | 145 | 6 | 0 |
 | 20261013T190348Z | `a246b86` | 156 | 1116 | 281 | orrery 116, Earth System 149, stars 13, utilities 2, unclassified 1 | 684 | 145 | 6 | 0 |
 | 20261013T175754Z | `4da3d7c` | 153 | 1114 | 281 | -- | 683 | 144 | 6 | 0 |
 | 20261013T174809Z | `400a961` | 154 | 1114 | 281 | -- | 683 | 144 | 6 | 0 |
 | 20261013T163342Z | `87a5470` | 153 | 1114 | 280 | -- | 684 | 144 | 6 | 0 |
 | 20261013T132327Z | `c972252` | 153 | 1114 | 280 | -- | 683 | 144 | 7 | 0 |
-| 20261013T013654Z | `c5dff25` | 154 | 1110 | 289 | -- | 683 | 132 | 6 | 0 |
 
-Change since the previous run: total +2, Tier-1 +0.
+Change since the previous run: total +0, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -1892,9 +1892,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 106 | dict | ROLE_MAP[...] | (147 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 396 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 419 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 106 | dict | ROLE_MAP[...] | (146 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 393 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 416 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 
