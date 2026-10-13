@@ -451,6 +451,22 @@ gate, user-facing factual text -- never reached the description the
 skill is chosen by. Found by the header check skills_index.py gained
 the same day.
 
+The skill's v2.26 entry, moved here word for word on 2026-10-13 when
+v2.29 made a fourth entry (L-437):
+Earlier: 2.26 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 72e3b558. v2.26 (L-418) changes no rule. A contents
+list now opens the skill, generated from its headings, and
+skills_index.py --check fails if the two disagree. Version history
+older than the two entries below moved to
+documentation/SKILL_HISTORIES.md. Both because a plain read of a
+long file shows its start and end and leaves out its middle, where
+the rules are (Tony, 2026-10-05).
+The sections are also put in order of what must fire: the critical
+rules first, then the quality rules, then those with no tier, then the
+two long procedures, Report to the Figures You Have and the
+Review-Repair Protocol for Cross-Checked Annotations, and the field
+notes last. Every section's text is unchanged.
+
 ## interactive-exhibit
 
 Earlier: 1.8 | 2026-10-01, with Anthropic's Claude Opus 5.5, from

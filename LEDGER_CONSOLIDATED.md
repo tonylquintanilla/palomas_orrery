@@ -380,6 +380,10 @@ Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5
 (L-431: Tony's ruling, no perturbation lines for an orbit drawn around
 the barycentre; horizons-orbital-mechanics 1.5, protocol v3.94), built
 on 400a9615.
+Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5
+(L-437 opened and built: the whole-tree Tier-1 total prints with its
+domain split, and a module's domain is read from its docstring tag;
+provenance-discipline 2.29, protocol v3.95), built on 70202e3b.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -597,7 +601,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*241 live items; 225 need attention (`!`); 167 RICE-scored; 189 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*242 live items; 226 need attention (`!`); 167 RICE-scored; 189 closed (section C + O.Done/W.Done); 6 retired (never reused): L-059, L-081-084, L-436. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -753,6 +757,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-433 | The road after the Sun and Earth rooms, in Tony's words (planning) | OPEN | -- | 2026-10-11 |
 | ! | L-434 | Stored drawings for the other dot-cloud shells (orrery + gallery) | OPEN | -- | 2026-10-11 |
 | ! | L-435 | Standing rulings that are method, held only on Tony's page (skills, records) | OPEN | -- | 2026-10-12 |
+| ! | L-437 | The whole-tree Tier-1 total prints with its domains; a module's domain has one home (provenance tooling) | OPEN | -- | 2026-10-13 |
 
 ### B. Pending Action (Tony-side)
 
@@ -11114,6 +11119,93 @@ skills/gallery-assembler/SKILL.md, skills/interactive-exhibit/SKILL.md.
   `ledger_index.py` as the two working precedents; A Report Names Its
   Items, resident protocol Part 3 -- the indexer's summary names what
   moved rather than printing a count.
+
+#### [L-437] The whole-tree Tier-1 total prints with its domains; a module's domain has one home (provenance tooling)
+<!-- L:437 status:OPEN upd:2026-10-13 section:A flag: rice: -->
+- **Opened and built 2026-10-13** from Tony's ask of 2026-10-12: "the
+  provenance checker is still reporting 288 tier 1 items. Can we
+  separate this into meaningful groups, like orrery, earth science and
+  stars in the checker report?" Brief:
+  `documentation/HANDOFF_L437_tier1_by_domain_brief_20261013.md` (cut at
+  400a9615; it replaces section 3d of L-425's brief). Ruling record:
+  `documentation/DESIGN_rulings_20261012.md`, ruling 2, last bullet.
+  Report-only: no finding moves between tiers.
+- **Measured at 70202e3b, before building.** Whole tree 281 Tier-1,
+  gate path 0. By the scanner's hand list: orrery 118, Earth System 149,
+  stars 12, utilities 2. By each module's docstring Domain: tag: orrery
+  116, Earth System 149, stars 13, utilities 2, and 1 in a file with no
+  tag. The two homes disagreed on 14 files with findings:
+  `data_acquisition.py` (tagged stars, its one Tier-1 counted as
+  orrery); `patch_L436_1_idea_20261013.py` (no tag, its one Tier-1
+  counted as orrery); and twelve dev tools filed as orrery, none with a
+  Tier-1 -- `test_orbit_markers.py`, `test_position_digits.py`,
+  `worksheet_checker.py`, `orrery_maintenance_run.py`, `doc_index.py`,
+  `worksheet_request_builder.py`, `export_constants.py`,
+  `export_drawings.py`, `export_objects.py`, `test_dimensions.py`,
+  `worksheet_key_aliases.py`, `worksheet_keys.py`. Eighteen files with
+  findings were in no list at all and printed as the "Domain coverage
+  gap". Every root module but the unrun L-436 patch carries a tag, and
+  only the six words are in use.
+- **Built** by `patch_L437_1_tier1_by_domain_20261013.py`:
+  - `provenance_scanner.py`: MODULE_DOMAIN_MAP is gone. classify_domain()
+    reads the module's own Domain: tag through
+    module_atlas.classify_domain(). A file with no tag, or a tag outside
+    the six, is counted as UNCLASSIFIED -- its own row in Findings by
+    File Type, shown at zero when clean -- and named in the coverage-gap
+    note with its reason; never defaulted into orrery. The whole-tree
+    total prints with its split on the console ("Whole tree, Tier-1:
+    281: orrery 116, Earth System 149, stars 13, utilities 2,
+    unclassified 1."), in the audit's Priority Summary and Gate Path
+    section, all from one count, tier1_by_domain().
+  - `provenance_history.py`: each run record carries tier1_by_domain
+    beside domain_counts, which keeps its meaning and now says so.
+    compare() names a domain whose Tier-1 count moved, so one finding
+    moved between domains at an unchanged total shows; the Run History
+    table gains a "T1 by domain" column. A record from before L-437
+    reads "--", never zero.
+  - `orrery_maintenance_run.py`: the Provenance scanner row quotes the
+    GATE PATH verdict first and the whole-tree line after it (a verdict
+    hint may now be a tuple; a line it names that the output lacks is
+    said to be missing). New gating row "Domain Split".
+  - `test_domain_split.py`, new: six checks on small synthetic trees
+    scanned in a temporary folder, after six planted faults are each
+    caught by a check that passes without them (the hand list back; an
+    untagged file defaulted to orrery; the total without its split; the
+    history without tier1_by_domain; the history blind to domains; the
+    row quoting the gate only). Dashboard button "Domain Split", the
+    run's own name for it.
+  - provenance-discipline 2.29 (Report Domain Classification rewritten;
+    a Scanner Mechanics bullet) with protocol v3.95.
+- **The near-miss, named.** `data/provenance_history.json` already had
+  `domain_counts` per run, but it is the ALL-TIER count per domain
+  (orrery 779, Earth System 226 at 70202e3b), not the Tier-1 split. A
+  reader of the history would take it for the split. It keeps its
+  meaning, with a comment; the split is the new field.
+- **Predicted change at Tony's run:** no Tier-1 count moves.
+  data_acquisition.py's one Tier-1 moves from orrery to stars;
+  patch_L436_1's moves from orrery to unclassified while that patch sits
+  in the root (filed in documentation/ it leaves the scan). The twelve
+  dev tools' 38 findings, all Tier 3, move from orrery to dev tools.
+  This patch's own docstring declares Domain: dev_tools.
+- **Recorded, not edited here** (The Correction Does Not Travel; this
+  build edits only its own ledger lines): L-183's note that "the
+  remaining unmapped-root-modules question still rides with this item"
+  is answered by L-437 -- no module is mapped by hand any more. L-163's
+  deferred Domain half (retiring MODULE_DOMAIN_MAP) is done here. The
+  count of gating checkers in orrery_maintenance_run.py's GATING
+  section still reads twenty-five; the dashboard-labels and L-425
+  patches add rows beside this one, and the last to run restates it.
+**Gap:** Tony runs the patch and the maintenance run; reads the scanner
+row and the audit's Priority Summary; pushes. Then DONE.
+**Tony-action (do):** run `patch_L437_1_tier1_by_domain_20261013.py`,
+then `orrery_maintenance_run.py`; reinstall provenance-discipline 2.29;
+copy PROJECT_INSTRUCTIONS.md (v3.95) to the Project's instructions and
+to `documentation/project_instructions_v3_95.md`; move the patch into
+`documentation/`; commit and push.
+**Ref:** `documentation/HANDOFF_L437_tier1_by_domain_20261013.md`; L-425
+(the brief this was lifted from), L-163, L-183, L-184 (Task 2a, the
+console's per-tier split), L-189 (the run history), L-414 (the gate
+path by name).
 
 ## PENDING ACTION (Tony-side)
 

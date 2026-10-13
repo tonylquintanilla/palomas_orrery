@@ -6,9 +6,22 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Read this file in 5 parts: lines 1-301, 302-605, 606-863, 864-1151, 1152-1305.
+Read this file in 5 parts: lines 1-302, 303-606, 607-864, 865-1144, 1145-1328.
 
-Skill version: 2.28 | 2026-10-09, with Anthropic's Claude Opus 5.5, at
+Skill version: 2.29 | 2026-10-13, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 70202e3b. v2.29 (L-437) gives a module's domain one
+home and makes the whole-tree Tier-1 total travel with its split.
+Report Domain Classification is rewritten: the scanner reads each
+module's docstring Domain: tag through module_atlas.py's reader, the
+hand list MODULE_DOMAIN_MAP is gone, and a file with no tag the report
+knows is counted as unclassified and named, never defaulted into
+orrery. Scanner Mechanics gains a bullet: the whole-tree total prints
+as "281: orrery 116, Earth System 149, ..." on the console, in the
+audit and in the run history, where tier1_by_domain is the Tier-1
+split and domain_counts stays the all-tier count. Tony, 2026-10-12:
+"Can we separate this into meaningful groups, like orrery, earth
+science and stars in the checker report?"
+Earlier: 2.28 | 2026-10-09, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ aa46bb10. v2.28 (L-414) settles how the scanner reads
 a row, under Scanner Mechanics and The Goal State. A row in
 constants_new.py is read through its own comment run, not a window of
@@ -39,21 +52,9 @@ scanner's change rather than its total (both L-371); Rule 1 names the
 conversion marker and Rule 8 records the widening as built (L-390); and
 the examples in The Status Line and Report to the Figures You Have name
 rows as they now stand.
-Earlier: 2.26 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 72e3b558. v2.26 (L-418) changes no rule. A contents
-list now opens the skill, generated from its headings, and
-skills_index.py --check fails if the two disagree. Version history
-older than the two entries below moved to
-documentation/SKILL_HISTORIES.md. Both because a plain read of a
-long file shows its start and end and leaves out its middle, where
-the rules are (Tony, 2026-10-05).
-The sections are also put in order of what must fire: the critical
-rules first, then the quality rules, then those with no tier, then the
-two long procedures, Report to the Figures You Have and the
-Review-Repair Protocol for Cross-Checked Annotations, and the field
-notes last. Every section's text is unchanged.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-05 and 2026-10-08 (L-418) and 2026-10-09 (L-414).
+on 2026-10-05 and 2026-10-08 (L-418), 2026-10-09 (L-414) and
+2026-10-13 (L-437).
 
 ## Contents
 
@@ -1054,6 +1055,20 @@ A blank with a flag is honest; an unsourced assertion is not.
   did not score is named as a blind spot. The run history records the
   names, so one finding cleared and another gained shows at an equal
   count. Its pins are test_row_run.py.
+- **The whole-tree total prints with its domain split** (v2.29,
+  L-437), everywhere it prints: the console's "Whole tree, Tier-1:"
+  line, the audit's Priority Summary and Gate Path section, the run
+  history, and the maintenance run's scanner row, which quotes it
+  after the GATE PATH line. The form is `281: orrery 116, Earth System
+  149, stars 13, utilities 2`, domains at zero left out of the line and
+  kept in the audit's table. It is informational; the gate stays the
+  GATE PATH line. In `data/provenance_history.json`, `tier1_by_domain`
+  is the TIER-1 count per domain and `domain_counts` is the count of
+  findings of ALL tiers per domain -- two fields, two questions, and
+  the second is not the split. The history names a domain whose
+  Tier-1 count moved, so one finding moved between domains at an
+  unchanged total still shows. Its checks, with six planted faults,
+  are test_domain_split.py.
 - File inclusion is role-driven (L-078): a module's display strings are
   extracted when its module_atlas.py ROLE_MAP role is in NARRATIVE_ROLES
   ({data, scenario, rendering, rendering/shells, computation}), OR its
@@ -1084,32 +1099,40 @@ A blank with a flag is honest; an unsourced assertion is not.
 Since July 2026, `PROVENANCE_AUDIT.md` breaks findings down two ways ahead
 of the per-tier detail: **Findings by File** (every file with a finding,
 tier counts, sorted worst-first) and **Findings by File Type** (the same
-data rolled up by subject-matter domain).
+data rolled up by subject-matter domain). Since v2.29 the whole-tree
+Tier-1 total also prints with its domain split wherever it prints
+(Scanner Mechanics).
 
 Domain is a *report-only* grouping -- it answers "what part of the project
-is this," not "what does this module do" (that's module_atlas.py's
-ROLE_MAP, a different axis entirely; a module's functional role and its
-domain are independent). Domain classification never affects which files
-get scanned or how a finding scores.
+is this," not "what does this module do" (that's the module's Role, a
+different axis entirely; a module's functional role and its domain are
+independent). Domain classification never affects which files get scanned
+or how a finding scores.
 
 Six domains: **orrery** (solar system bodies, orbital mechanics, core
-app -- also the default catch-all), **earth_science**, **gallery**,
-**stars** (stellar neighborhood, exoplanets, HR/planetarium), **utilities**
-(genuinely cross-domain shared helpers), **dev_tools** (audit,
-diagnostics, one-shot infra). The last two didn't exist before this round
--- they were split out, with the four-domain original (orrery, earth
-science, gallery, stars) proving too coarse for files that don't belong to
-any single subject-matter area.
+app), **earth_science**, **gallery**, **stars** (stellar neighborhood,
+exoplanets, HR/planetarium), **utilities** (genuinely cross-domain shared
+helpers), **dev_tools** (audit, diagnostics, one-shot infra). Those six
+words are the tag's whole vocabulary; the audit's table uses them.
 
-Mechanics: `MODULE_DOMAIN_MAP` (a module-name-to-domain dict) plus
-`classify_domain()` in provenance_scanner.py. Unmapped files default to
-`orrery` and are tracked and surfaced in a "Domain coverage gap" note in
-the report -- mirroring the existing ROLE_MAP coverage-gap pattern -- so a
-new file with findings doesn't silently drift into the wrong bucket
-forever. Extend `MODULE_DOMAIN_MAP` directly (not a heuristic) when a new
-file needs a home; explicit mapping was chosen over name-pattern guessing
-because domain assignment involves real judgment calls (several file
-categorizations were confirmed with Tony directly rather than inferred).
+**The store is the module's own docstring** (v2.29, L-437): a
+`Domain:` line beside its `Role:` line, written by `add_docstrings.py`
+and read by `module_atlas.classify_domain()`. `provenance_scanner.py`
+reads the tag through that same reader. `MODULE_DOMAIN_MAP`, the
+scanner's hand list, is gone: it was a second store of the same
+property -- One Value, One Home, on a property -- and at c5dff25 the two
+disagreed on 12 files, eleven dev tools filed as orrery and
+`data_acquisition.py`, tagged stars, whose Tier-1 finding counted as
+orrery.
+
+**A file with no tag, or a tag outside the six, is UNCLASSIFIED** --
+never defaulted into orrery, which is what the hand list's catch-all
+did. It has its own row in the Findings by File Type table, shown at
+zero when clean, and the "Domain coverage gap" note names each such
+file with its reason. The fix is the tag in the module's own docstring;
+nothing in the scanner is edited to give a file a home. A spent patch
+script left in the root is the usual case: it carries findings and,
+unless its docstring declares `Domain: dev_tools`, no tag.
 
 **Gallery will usually read near-zero.** The gallery ASSEMBLER pipeline
 (resolver.py, cache_reader.py, gallery_studio.py, json_converter.py,

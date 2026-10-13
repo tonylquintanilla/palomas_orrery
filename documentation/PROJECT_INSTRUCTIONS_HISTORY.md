@@ -2673,6 +2673,36 @@ resident.
 (Moved down from the resident protocol on 2026-10-13 when
 v3.94 made a fourth entry.)
 
+v3.92 (October 12, 2026): No rule changed in this document. ONE
+skill bump, one version (L-401, L-431): horizons-orbital-mechanics
+1.2 -> 1.3. A SMALL BODY'S UNCERTAINTY COMES WITH ITS POSITION.
+
+WHAT PROMPTED IT. Build 1 of L-401 (the distance digits), the orrery's
+body hover, asks Horizons for a small body's position and JPL's own
+uncertainty for the date in one query, VEC_TABLE='2xr', which
+astroquery cannot ask for or read. L-431 (orbital periods) owed the
+skill its two-centre test and the Small-Body Database's lookup of a
+pinned record. Both items asked for one version between them.
+
+WHAT CHANGED. horizons-orbital-mechanics gains A Small Body's
+Uncertainty Comes With Its Position and A Period Depends on Its
+Centre, and Small-Body Record Pinning gains the Small-Body Database's
+lookup by the name Horizons gives a record. It keeps three version
+entries, 1.3, 1.2 and 1.1, so none moves.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+horizons-orbital-mechanics 1.3 before Horizons work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.89 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-13 when
+v3.95 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

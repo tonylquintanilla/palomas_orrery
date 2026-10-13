@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.94 | October 13, 2026
+Tony Quintanilla, PE | Claude | v3.95 | October 13, 2026
 
-Cut from 400a9615 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 70202e3b at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -490,7 +490,7 @@ horizons-orbital-mechanics   1.5  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning,
                                   2xr uncertainties, periods, the drawn orbit's
                                   centre
-provenance-discipline        2.28 Scanner runs, audits, citations, constants,
+provenance-discipline        2.29 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
 provenance-cross-check       1.0  Cross-check worksheets and relay prompts,
@@ -1168,6 +1168,36 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.95 (October 13, 2026): No rule changed in this document. ONE
+skill bump, one version (L-437): provenance-discipline 2.28 -> 2.29.
+THE TIER-1 TOTAL PRINTS WITH ITS DOMAINS.
+
+WHAT PROMPTED IT. Tony, 2026-10-12: "the provenance checker is still
+reporting 288 tier 1 items. Can we separate this into meaningful
+groups, like orrery, earth science and stars in the checker report?"
+The split was in the audit's table and nowhere the total printed. And
+a module's domain had two homes, the scanner's hand list and the
+module's own docstring tag, which disagreed on 12 files at c5dff25.
+
+WHAT CHANGED. provenance-discipline rewrites Report Domain
+Classification -- the docstring Domain: tag is the store, the hand list
+is gone, and a file with no tag the report knows is counted as
+unclassified and named -- and Scanner Mechanics gains a bullet: the
+whole-tree total prints with its split everywhere it prints, and in
+the run history tier1_by_domain is the Tier-1 split while domain_counts
+stays the all-tier count. Its v2.26 entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+provenance-discipline 2.29 before provenance work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.92 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.94 (October 13, 2026): No rule changed in this document. ONE
 skill bump, one version (L-431): horizons-orbital-mechanics 1.4 -> 1.5.
 NO PERTURBATION LINES FOR AN ORBIT DRAWN AROUND THE BARYCENTRE.
@@ -1229,33 +1259,6 @@ horizons-orbital-mechanics 1.4 before Horizons work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.90 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.92 (October 12, 2026): No rule changed in this document. ONE
-skill bump, one version (L-401, L-431): horizons-orbital-mechanics
-1.2 -> 1.3. A SMALL BODY'S UNCERTAINTY COMES WITH ITS POSITION.
-
-WHAT PROMPTED IT. Build 1 of L-401 (the distance digits), the orrery's
-body hover, asks Horizons for a small body's position and JPL's own
-uncertainty for the date in one query, VEC_TABLE='2xr', which
-astroquery cannot ask for or read. L-431 (orbital periods) owed the
-skill its two-centre test and the Small-Body Database's lookup of a
-pinned record. Both items asked for one version between them.
-
-WHAT CHANGED. horizons-orbital-mechanics gains A Small Body's
-Uncertainty Comes With Its Position and A Period Depends on Its
-Centre, and Small-Body Record Pinning gains the Small-Body Database's
-lookup by the name Horizons gives a record. It keeps three version
-entries, 1.3, 1.2 and 1.1, so none moves.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copy reads
-horizons-orbital-mechanics 1.3 before Horizons work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.89 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

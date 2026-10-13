@@ -39,6 +39,13 @@ Architecture: "unit of provenance"
     with what was examined to reach the figure (L-414). An export it
     cannot read makes the figure UNKNOWN, never zero.
 
+    The whole-tree Tier-1 total, which is informational, prints with its
+    domain split wherever it prints (L-437): "281: orrery 116, Earth
+    System 149, stars 13, utilities 2". A module's domain is read from
+    its own docstring "Domain:" tag, the reader module_atlas.py uses;
+    a file with no tag the report knows is counted as unclassified and
+    named in the audit.
+
 Companion tools:
     module_atlas.py               -- shared dependency graph
     test_constants_provenance.py  -- pins specific verified values
@@ -312,6 +319,7 @@ Module updated: August 2026 with Anthropic's Claude Opus 5 (Task 2a:
 per-domain split printed under each console tier line;
 MODULE_DOMAIN_MAP entries added for orrery_rendering and shell_configs,
 and two entries removed for smoke_* files no longer in the repo.
+Report-only grouping -- no scanning or scoring behaviour changed).
 Module updated: August 21, 2026 with Anthropic's Claude Opus 5 (L-214).
 Module updated: September 16, 2026 with Anthropic's Claude Opus 5 (L-273: the output opens with a Doc-Kind: generated tag, read by
 doc_index.py; hand-editing the output is an error the tag now names).
@@ -324,7 +332,19 @@ V_DECLARED, unscored, and listed under Declared Rows; the gate path is
 read from the two exports and printed by name, in the audit, on the
 console and in the run history. Measured on the tree at aa46bb10:
 whole-tree Tier-1 296 -> 293, gate path 4 -> 0.)
-Report-only grouping -- no scanning or scoring behaviour changed).
+Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5 (L-437,
+patch_L437_1_tier1_by_domain_20261013.py: the whole-tree Tier-1 total
+prints with its domain split -- "281: orrery 116, Earth System 149, ..."
+-- on the console, in the audit's Priority Summary and Gate Path
+section, and in the run history as tier1_by_domain. A module's domain
+is now read from its own docstring Domain: tag through
+module_atlas.classify_domain(); MODULE_DOMAIN_MAP is retired, and a
+file with no tag or an unknown one is counted UNCLASSIFIED and named
+with its reason, never defaulted into orrery. Report-only: no finding
+moves between tiers. Measured at 70202e3b: whole tree 281 either way;
+data_acquisition.py's one Tier-1 moves from orrery to stars, and the
+unrun patch_L436_1 in the root, which has no tag, moves from orrery to
+unclassified.)
 
 Role: devtool
 Domain: dev_tools
@@ -338,8 +358,11 @@ import sys
 from collections import defaultdict
 from datetime import datetime
 
-# Reuse the atlas dependency graph builder
+# Reuse the atlas dependency graph builder, and its docstring-tag
+# reader for a module's domain (L-437: one home for the domain).
 from module_atlas import build_dependency_graph, classify_role
+from module_atlas import classify_domain as _atlas_classify_domain
+from module_atlas import UNDETERMINED as ATLAS_UNDETERMINED
 
 # L-189: run history and run-to-run delta. Informational only --
 # nothing imported here touches the exit code.
@@ -470,37 +493,33 @@ def action_tier(score):
 # ============================================================
 # DOMAIN CLASSIFICATION (report grouping, not scanning behavior)
 # ============================================================
-# Maps module names (no .py) to a subject-matter domain, purely for the
-# "Findings by File Type" report breakdown -- distinct from module_atlas's
-# ROLE_MAP, which classifies functional role (data/rendering/devtool/...)
-# and drives which files get SCANNED at all. Domain answers "what part of
-# the project is this," not "what does this module do."
+# A subject-matter domain per module, purely for the report: the
+# "Findings by File Type" table and the whole-tree Tier-1 split. It is
+# distinct from the functional ROLE, which drives which files get
+# SCANNED at all. Domain answers "what part of the project is this,"
+# not "what does this module do," and it never changes a score.
 #
-# Six domains, confirmed with Tony (F1 provenance-cleanup groundwork
-# session, July 2026), expanding the original four (orrery, earth science,
-# gallery, stars) after four ambiguous clusters were resolved:
-#   - Sgr A*/Galactic Center family -> orrery
-#   - devtools/one-shot infra       -> new "dev tools" bucket
-#   - social_media_export.py       -> gallery
-#   - cross-cutting reference-frame/utility cluster, split three ways:
-#       celestial_coordinates, coordinate_system_guide      -> orrery
-#       visualization_utils / _2d / _3d / _core             -> stars
-#       shared_utilities, formatting_utils, save_utils,
-#       report_manager, plot_data_exchange,
-#       plot_data_report_widget                             -> new
-#                                                                "utilities"
-#                                                                bucket
+# L-437 (2026-10-13): ONE HOME. Each module declares its domain in its
+# own docstring, on a "Domain:" line, and this scanner reads that tag
+# through module_atlas.classify_domain(), the reader the atlas uses.
+# The hand list this section used to carry, MODULE_DOMAIN_MAP, is
+# retired: it was a second store of the same property, and at c5dff25
+# the two disagreed on 12 files -- eleven dev tools filed as orrery, and
+# data_acquisition.py, tagged stars, whose Tier-1 finding was counted
+# as orrery -- while every new module defaulted to orrery and sat in a
+# "coverage gap" until someone typed it in.
+#
+# The six domains are the tag's vocabulary, confirmed with Tony in July
+# 2026 (the F1 groundwork session). A file whose tag is missing, or is
+# not one of the six, is counted as UNCLASSIFIED -- never guessed into
+# orrery -- and named, with which of the two it is, in the audit's
+# Domain coverage gap note. The fix is the module's own tag, not an
+# edit here.
 #
 # Note: the gallery ASSEMBLER pipeline (resolver.py, cache_reader.py,
-# gallery_studio.py, json_converter.py, render_orbits.py, etc.) lives in
-# the separate tonyquintanilla.github.io repo and is not scanned by this
-# tool at all -- "gallery" here only ever covers gallery-adjacent files
-# that live IN this repo (currently just social_media_export.py).
-#
-# Anything not listed here defaults to 'orrery' (the original catch-all)
-# and is tracked as an unmapped module so new files don't silently drift
-# into the wrong bucket forever -- see the Domain Coverage Gaps note in
-# generate_report().
+# render_orbits.py, etc.) lives in the separate tonyquintanilla.github.io
+# repo and is not scanned by this tool at all -- "gallery" here only
+# ever covers gallery-adjacent files that live IN this repo.
 DOMAIN_LABELS = {
     'orrery':        'Orrery (solar system + orbital mechanics)',
     'earth_science': 'Earth System',
@@ -510,131 +529,76 @@ DOMAIN_LABELS = {
     'dev_tools':     'Dev Tools (audit, diagnostics, one-shot scripts)',
 }
 
-MODULE_DOMAIN_MAP = {
-    # --- orrery: solar system bodies, orbital mechanics, core app ---
-    'info_dictionary': 'orrery',
-    'celestial_objects': 'orrery',
-    'idealized_orbits': 'orrery',
-    'solar_visualization_shells': 'orrery',
-    # Added August 2026 (Task 2a): both carried findings with no
-    # entry and defaulted to 'orrery' via the coverage-gap path.
-    # shell_configs is on the interactive build path, so an
-    # accidental default is the one case worth ruling out by hand.
-    'orrery_rendering': 'orrery',
-    'shell_configs': 'orrery',
-    'constants_new': 'orrery',
-    'neptune_visualization_shells': 'orrery',
-    'uranus_visualization_shells': 'orrery',
-    'comet_visualization_shells': 'orrery',
-    'planet_visualization_utilities': 'orrery',
-    'jupiter_visualization_shells': 'orrery',
-    'sgr_a_grand_tour': 'orrery',
-    'sgr_a_star_data': 'orrery',
-    'sgr_a_visualization_core': 'orrery',
-    'sgr_a_visualization_core_arcs': 'orrery',
-    'sgr_a_visualization_animation': 'orrery',
-    'sgr_a_visualization_precession': 'orrery',
-    'pluto_visualization_shells': 'orrery',
-    'saturn_visualization_shells': 'orrery',
-    'spacecraft_encounters': 'orrery',
-    'mercury_visualization_shells': 'orrery',
-    'asteroid_belt_visualization_shells': 'orrery',
-    'celestial_coordinates': 'orrery',
-    'venus_visualization_shells': 'orrery',
-    'planet9_visualization_shells': 'orrery',
-    'apsidal_markers': 'orrery',
-    'eris_visualization_shells': 'orrery',
-    'mars_visualization_shells': 'orrery',
-    'moon_visualization_shells': 'orrery',
-    'coordinate_system_guide': 'orrery',
-    'palomas_orrery': 'orrery',
-    'palomas_orrery_dashboard': 'orrery',
-    'close_approach_data': 'orrery',
-    'orbit_data_manager': 'orrery',
-    'data_acquisition': 'orrery',
-    'data_acquisition_distance': 'orrery',
-    'orbital_elements': 'orrery',
-    'osculating_cache_manager': 'orrery',
-    'object_type_analyzer': 'orrery',
+UNCLASSIFIED = 'unclassified'
 
-    # --- earth_science ---
-    'earth_visualization_shells': 'earth_science',
-    'paleoclimate_wet_bulb_full': 'earth_science',
-    'paleoclimate_human_origins_full': 'earth_science',
-    'scenarios_western_heatwave_march_2026': 'earth_science',
-    'scenarios_heatwaves': 'earth_science',
-    'paleoclimate_visualization_full': 'earth_science',
-    'paleoclimate_visualization': 'earth_science',
-    'scenarios_coral_bleaching': 'earth_science',
-    'food_insecurity_generator': 'earth_science',
-    'earth_system_generator': 'earth_science',
-    'paleoclimate_dual_scale': 'earth_science',
-    'energy_imbalance': 'earth_science',
-    'fetch_paleoclimate_data': 'earth_science',
-    'fetch_climate_data': 'earth_science',
-    'climate_cache_manager': 'earth_science',
-
-    # --- gallery (gallery-adjacent files that live in THIS repo only) ---
-    'social_media_export': 'gallery',
-
-    # --- stars: stellar neighborhood, exoplanets, HR/planetarium ---
-    'star_notes': 'stars',
-    'star_properties': 'stars',
-    'stellar_data_patches': 'stars',
-    'stellar_parameters': 'stars',
-    'exoplanet_coordinates': 'stars',
-    'exoplanet_stellar_properties': 'stars',
-    'star_sphere_builder': 'stars',
-    'exoplanet_systems': 'stars',
-    'exoplanet_orbits': 'stars',
-    'hr_diagram_distance': 'stars',
-    'hr_diagram_apparent_magnitude': 'stars',
-    'planetarium_distance': 'stars',
-    'planetarium_apparent_magnitude': 'stars',
-    'simbad_manager': 'stars',
-    'messier_catalog': 'stars',
-    'messier_object_data_handler': 'stars',
-    'visualization_utils': 'stars',
-    'visualization_2d': 'stars',
-    'visualization_3d': 'stars',
-    'visualization_core': 'stars',
-
-    # --- utilities: genuinely cross-domain shared helpers (new bucket) ---
-    'plot_data_report_widget': 'utilities',
-    'shared_utilities': 'utilities',
-    'formatting_utils': 'utilities',
-    'save_utils': 'utilities',
-    'report_manager': 'utilities',
-    'plot_data_exchange': 'utilities',
-
-    # --- dev_tools: audit/diagnostic/one-shot infra (new bucket) ---
-    'provenance_scanner': 'dev_tools',
-    'provenance_history': 'dev_tools',
-    'skills_index': 'dev_tools',
-    'dep_trace': 'dev_tools',
-    'ledger_index': 'dev_tools',
-    'measure_perframe_elements': 'dev_tools',
-    'module_atlas': 'dev_tools',
-    'add_docstrings': 'dev_tools',
-    'data_inventory': 'dev_tools',
-    'test_reset_completeness': 'dev_tools',
-    'test_constants_provenance': 'dev_tools',
-    'test_orbit_cache': 'dev_tools',
-    'verify_orbit_cache': 'dev_tools',
-    'create_cache_backups': 'dev_tools',
-    'create_ephemeris_database': 'dev_tools',
-    'convert_hot_ph_to_json': 'dev_tools',
-    'diagnose_bcodmo': 'dev_tools',
-    'examine_hot_csv': 'dev_tools',
-    'export_orbit_cache': 'dev_tools',
-}
+# The short names the whole-tree line prints, in the order it prints
+# them. Fixed, so two runs' lines can be read against each other by eye.
+DOMAIN_SHORT = (
+    ('orrery', 'orrery'),
+    ('earth_science', 'Earth System'),
+    ('stars', 'stars'),
+    ('utilities', 'utilities'),
+    ('dev_tools', 'dev tools'),
+    ('gallery', 'gallery'),
+    (UNCLASSIFIED, 'unclassified'),
+)
+DOMAIN_ORDER = tuple(key for key, _short in DOMAIN_SHORT)
 
 
-def classify_domain(module_name):
-    """Classify a module's report domain. Returns (domain, was_mapped)."""
-    if module_name in MODULE_DOMAIN_MAP:
-        return MODULE_DOMAIN_MAP[module_name], True
-    return 'orrery', False  # catch-all default; flagged as unmapped
+def classify_domain(module_name, filepath=None):
+    """A module's report domain, read from its docstring Domain: tag.
+
+    Returns (domain, problem). problem is None when the tag is one of
+    the six; otherwise domain is UNCLASSIFIED and problem says why --
+    no tag, or a tag outside the vocabulary -- so the audit can name
+    the file and the reason. Pass filepath when you have it: the reader
+    then opens that file and not a same-named one in another tree.
+    """
+    tag = _atlas_classify_domain(module_name, filepath)
+    if tag in DOMAIN_LABELS:
+        return tag, None
+    if tag == ATLAS_UNDETERMINED:
+        return UNCLASSIFIED, 'no Domain: tag in its docstring'
+    return UNCLASSIFIED, ('Domain: %s is not one of the six (%s)'
+                          % (tag, ', '.join(sorted(DOMAIN_LABELS))))
+
+
+def file_domain(fname, project_dir):
+    """classify_domain() for a scanned file name, in the scanned tree."""
+    stem = fname[:-3] if fname.endswith('.py') else fname
+    return classify_domain(stem, os.path.join(project_dir, fname))
+
+
+def tier1_by_domain(scored, project_dir):
+    """Tier-1 findings per domain, every domain present, in DOMAIN_ORDER.
+
+    The one count behind every place the whole-tree split prints: the
+    console, the audit and the run history all take it from here, so
+    they cannot disagree with each other.
+    """
+    split = dict((key, 0) for key in DOMAIN_ORDER)
+    for u in scored:
+        if u.score and action_tier(u.score) == 1:
+            split[file_domain(u.file, project_dir)[0]] += 1
+    return split
+
+
+def whole_tree_split_text(total, split):
+    """'281: orrery 116, Earth System 149, stars 13, utilities 2'.
+
+    Domains at zero are left out of the line (the audit's table keeps
+    them). If the domains do not sum to the total the line says so
+    rather than printing a split that does not add up.
+    """
+    if split is None:
+        return '%d (no domain split was computed)' % total
+    parts = ['%s %d' % (short, split.get(key, 0))
+             for key, short in DOMAIN_SHORT if split.get(key, 0)]
+    summed = sum(int(v) for v in split.values())
+    text = '%d: %s' % (total, ', '.join(parts)) if parts else '%d' % total
+    if summed != total:
+        text += ' -- BUT THE DOMAINS SUM TO %d, NOT %d' % (summed, total)
+    return text
 
 
 # ============================================================
@@ -3220,9 +3184,13 @@ def gate_path_names(gate_units):
     return sorted(names)
 
 
-def gate_path_lines(gp, gate_units, whole_tree_tier1):
+def gate_path_lines(gp, gate_units, whole_tree_tier1, split=None):
     """The console block that ends a scanner run. Names every gate-path
-    Tier-1 finding, and says what was examined to reach the figure."""
+    Tier-1 finding, and says what was examined to reach the figure.
+
+    split (L-437) is tier1_by_domain()'s count; the whole-tree line
+    prints it beside the total. Without one the line says so.
+    """
     bar = "=" * 70
     names = gate_path_names(gate_units)
     out = [bar]
@@ -3248,9 +3216,10 @@ def gate_path_lines(gp, gate_units, whole_tree_tier1):
     out.append("  %d display string(s) in %d served object(s)"
                " (objects_export.json)." % (n_str, len(gp['objects'])))
     out.append("")
-    out.append("  Whole tree: %d Tier-1. Informational; the gate is the"
-               % whole_tree_tier1)
-    out.append("  GATE PATH line above. Nothing here sets the exit code.")
+    out.append("  Whole tree, Tier-1: %s."
+               % whole_tree_split_text(whole_tree_tier1, split))
+    out.append("  Informational; the gate is the GATE PATH line above.")
+    out.append("  Nothing here sets the exit code.")
     out.append(bar)
     return out
 
@@ -3292,14 +3261,21 @@ def generate_report(units, consistent_dups, inconsistencies,
     # rollup near the end of this function walks it for a different
     # cut (by tier, not by file), and merging them would mean
     # editing working code to save one pass over an in-memory list.
+    #
+    # domain_counts is ALL TIERS per domain; it keeps that meaning.
+    # tier1_split (L-437) is TIER-1 per domain, the split Tony asked to
+    # see beside the whole-tree total. Two fields, two questions: a
+    # reader of the history must not take the first for the second.
     domain_counts = defaultdict(int)
     tier1_by_file = defaultdict(int)
     for u in scored:
-        stem = u.file[:-3] if u.file.endswith('.py') else u.file
-        dom, _mapped = classify_domain(stem)
+        dom = file_domain(u.file, project_dir)[0]
         domain_counts[dom] += 1
         if action_tier(u.score) == 1:
             tier1_by_file[u.file] += 1
+    tier1_split = tier1_by_domain(scored, project_dir)
+    whole_tree_text = whole_tree_split_text(tier_counts.get(1, 0),
+                                            tier1_split)
 
     # L-414: the gate-path Tier-1 findings BY NAME go into the record,
     # so the next run's delta can say which entered and which left --
@@ -3317,7 +3293,8 @@ def generate_report(units, consistent_dups, inconsistencies,
         started or provenance_history.utc_now(),
         provenance_history.utc_now(), project_dir,
         files_scanned, len(scored), tier_counts, domain_counts,
-        tier1_by_file, gate_tier1=gate_names)
+        tier1_by_file, gate_tier1=gate_names,
+        tier1_by_domain=tier1_split)
 
     # A copy for the table, so `history` still holds the PREVIOUS
     # state when the console delta is computed further down.
@@ -3421,6 +3398,14 @@ def generate_report(units, consistent_dups, inconsistencies,
         count = tier_counts.get(tier, 0)
         out.append(f"| {tier} | {score_range} | {action} | {count} |")
     out.append("")
+    # L-437: the whole-tree Tier-1 total travels with its domain split,
+    # here and everywhere else it prints. Findings by File Type below is
+    # the full breakdown, all tiers and all domains.
+    out.append(f"**Whole tree, Tier-1: {whole_tree_text}.** By each "
+               "file's docstring `Domain:` tag; Findings by File Type "
+               "below has every tier and every domain. The push gate is "
+               "the Gate Path section, not this total.")
+    out.append("")
     out.append("**Tier 2 note (April 2026 audit):** All Tier-2 findings are documented")
     out.append("accepted residuals -- cited constants, V_STALE staleness flags on verified")
     out.append("strings, or known scanner limitations. No action required unless a new")
@@ -3462,11 +3447,11 @@ def generate_report(units, consistent_dups, inconsistencies,
     out.append("Examined: %d of %d exported rows; %d more are computed "
                "from other rows, whose inputs are scored where they are "
                "typed; %d display string(s) in %d served object(s). The "
-               "whole tree holds %d Tier-1 findings, most of them off "
+               "whole tree's Tier-1 count is %s; most of them are off "
                "this path."
                % (n_rows, len(gp['rows']), len(gp['computed']),
                   len(gate_units) - n_rows, len(gp['objects']),
-                  tier_counts.get(1, 0)))
+                  whole_tree_text))
     out.append("")
     if gp['computed']:
         out.append("Exported rows computed from other rows (%d): "
@@ -3520,13 +3505,15 @@ def generate_report(units, consistent_dups, inconsistencies,
     file_tier_counts = defaultdict(lambda: defaultdict(int))
     for u in scored:
         file_tier_counts[u.file][action_tier(u.score)] += 1
-    unmapped_files = set()
+    # L-437: the domain is the file's own docstring tag. A file with no
+    # tag, or one outside the six, is UNCLASSIFIED and named below with
+    # its reason -- never defaulted into orrery.
+    unclassified_files = {}
 
     def _domain_for(fname):
-        stem = fname[:-3] if fname.endswith('.py') else fname
-        domain, was_mapped = classify_domain(stem)
-        if not was_mapped:
-            unmapped_files.add(fname)
+        domain, problem = file_domain(fname, project_dir)
+        if problem:
+            unclassified_files[fname] = problem
         return domain
 
     out.append("| File | Domain | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |")
@@ -3548,9 +3535,12 @@ def generate_report(units, consistent_dups, inconsistencies,
     out.append("")
     out.append("Same data again, grouped by subject-matter domain rather than "
                "by individual file -- orrery, earth science, gallery, stars, "
-               "utilities, dev tools. Domain is a report-only grouping "
-               "(see MODULE_DOMAIN_MAP / classify_domain()); it does not "
-               "affect which files get scanned or scored.")
+               "utilities, dev tools. Domain is a report-only grouping, "
+               "read from each module's own docstring `Domain:` tag "
+               "(classify_domain(), through module_atlas.py's reader); "
+               "it does not affect which files get scanned or scored. "
+               "The Tier 1 column sums to the whole-tree split in the "
+               "Priority Summary.")
     out.append("")
     domain_tier_counts = defaultdict(lambda: defaultdict(int))
     domain_file_counts = defaultdict(set)
@@ -3563,26 +3553,36 @@ def generate_report(units, consistent_dups, inconsistencies,
     out.append("|--------|------:|-------:|-------:|-------:|-------:|------:|")
     # Show all six domains, including any with zero current findings --
     # a domain going quiet (e.g. gallery) is itself worth seeing, not
-    # worth silently dropping from the table.
+    # worth silently dropping from the table. The unclassified row is
+    # shown too, at zero when clean: a row that vanished when clean
+    # could not be told from one that broke (L-437).
     all_domains = sorted(DOMAIN_LABELS.keys(),
                          key=lambda d: -sum(domain_tier_counts[d].values()))
+    all_domains.append(UNCLASSIFIED)
     for domain in all_domains:
         counts = domain_tier_counts[domain]
         total = sum(counts.values())
-        label = DOMAIN_LABELS.get(domain, domain)
+        label = DOMAIN_LABELS.get(
+            domain, 'Unclassified (no Domain: tag, or one outside the six)')
         out.append(f"| {label} | {len(domain_file_counts[domain])} | "
                    f"{counts.get(1, 0)} | {counts.get(2, 0)} | "
                    f"{counts.get(3, 0)} | {counts.get(4, 0)} | {total} |")
     out.append("")
-    if unmapped_files:
-        out.append("**Domain coverage gap:** the following files have findings "
-                   "but no entry in `MODULE_DOMAIN_MAP` -- defaulted to "
-                   "`orrery` rather than guessed into a more specific bucket. "
-                   "Add each to `MODULE_DOMAIN_MAP` in provenance_scanner.py "
-                   "with its real domain so this stops silently defaulting:")
+    if unclassified_files:
+        out.append("**Domain coverage gap (%d):** these files have findings "
+                   "and no `Domain:` tag the report knows, so they are "
+                   "counted as unclassified rather than guessed into a "
+                   "domain. Add the tag to each module's own docstring "
+                   "(one of the six above); nothing in "
+                   "provenance_scanner.py needs editing:"
+                   % len(unclassified_files))
         out.append("")
-        for fname in sorted(unmapped_files):
-            out.append(f"- `{fname}`")
+        for fname in sorted(unclassified_files):
+            out.append(f"- `{fname}` -- {unclassified_files[fname]}")
+        out.append("")
+    else:
+        out.append("**Domain coverage:** all %d files with findings declare "
+                   "a `Domain:` tag the report knows." % len(file_tier_counts))
         out.append("")
     out.append("---")
     out.append("")
@@ -3910,8 +3910,7 @@ def generate_report(units, consistent_dups, inconsistencies,
     # scoring.
     domain_by_tier = defaultdict(lambda: defaultdict(int))
     for u in scored:
-        stem = u.file[:-3] if u.file.endswith('.py') else u.file
-        dom, _mapped = classify_domain(stem)
+        dom = file_domain(u.file, project_dir)[0]
         domain_by_tier[action_tier(u.score)][dom] += 1
 
     print("Priority summary:")
@@ -3958,7 +3957,8 @@ def generate_report(units, consistent_dups, inconsistencies,
     # it did not compute the gate path, and named nothing. The
     # maintenance run's verdict hint reads the GATE PATH line.
     print()
-    for _line in gate_path_lines(gp, gate_units, tier_counts.get(1, 0)):
+    for _line in gate_path_lines(gp, gate_units, tier_counts.get(1, 0),
+                                 split=tier1_split):
         print(_line)
 
     if inconsistencies:

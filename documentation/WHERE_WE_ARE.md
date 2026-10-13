@@ -89,9 +89,9 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261013T132123Z, ok, no retry (gallery 924977a3).
-- Tier-1 on the gate path: 0, by name, in PROVENANCE_AUDIT.md at
-  87a54704 (your run of 2026-10-12). Whole tree: 280, as build 2
-  predicted.
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 70202e3b).
+  Whole tree: 281: orrery 116, Earth System 149, stars 13, utilities 2,
+  unclassified 1 (domain-split pre-test; the 1 is unrun patch_L436_1).
 - This page's date and the ledger's newest stamp: both Oct 13. Agree.
 
 ## Waiting on you

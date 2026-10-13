@@ -178,6 +178,18 @@ L-401), test_orbit_markers.py, which runs the real orbit drawing offline
 and judges each ellipse's centre, each marker's date and every printed
 distance, after nine faults planted in copies of the real source are each
 caught by name. Twenty-five gating checkers.)
+Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5 (L-437,
+patch_L437_1_tier1_by_domain_20261013.py: the Provenance scanner row
+quotes two lines, the GATE PATH verdict first and then the whole-tree
+Tier-1 line with its domain split, so the split reaches the summary
+without displacing the gate; a verdict hint may now be a tuple, read by
+verdict_from(), and a line it names that the output lacks is said to be
+missing. CHECKERS gains Domain Split, test_domain_split.py, which plants
+six faults and shows each caught by a check that passes without it.
+One more gating checker. The count under GATING AND REPORT-ONLY is not
+edited here:
+the dashboard-labels and L-425 patches also add rows beside this one,
+and the patch that runs last restates it.)
 """
 
 import hashlib
@@ -320,6 +332,10 @@ CHECKERS = [
     # faults planted first in copies of the real source, each caught by name.
     ('Orbit markers (L-431, L-401)', ['test_orbit_markers.py'],
      'ORBIT MARKERS:'),
+    # L-437: the whole-tree Tier-1 split, read from each module's own
+    # Domain: tag, prints the same in the console line, the audit and
+    # the run history; six faults planted, each caught by name.
+    ('Domain Split', ['test_domain_split.py'], 'DOMAIN SPLIT:'),
     # A fourth field marks a tool REPORT-ONLY: it exits 0 whatever it
     # finds, so "passed" says only that it ran. Exactly two are, and
     # both are deliberate -- their numbers are the verdict, not their
@@ -334,8 +350,11 @@ CHECKERS = [
     # L-414: the hint reads the GATE PATH line, the push gate's own
     # figure with what fails it named; it used to read the whole-tree
     # Tier-1 banner, which said itself that it was not the gate.
-    ('Provenance scanner', ['provenance_scanner.py'], 'GATE PATH:',
-     True),
+    # L-437: a second hint quotes the whole-tree line after it, with its
+    # domain split, so the split reaches the summary without displacing
+    # the gate. The gate's line stays first.
+    ('Provenance scanner', ['provenance_scanner.py'],
+     ('GATE PATH:', 'Whole tree, Tier-1:'), True),
 ]
 
 TOOL_TIMEOUT_SECONDS = 900
@@ -564,6 +583,34 @@ def fit(text, width=44):
     return cut + '...'
 
 
+def verdict_from(output, hint):
+    """The row's note, read from a tool's output by its verdict hint.
+
+    The row already carries the label; a verdict that opens by
+    repeating the hint spends the column on it twice. Stripped only
+    when the hint is a genuine prefix, so a hint matched mid-line (the
+    scanner's 'TIER-1 FINDINGS') is left exactly as printed.
+
+    A hint may be a tuple (L-437): the first line is the verdict and
+    each later line is quoted after it as printed, joined by '; '. A
+    later line the output does not carry is said to be missing rather
+    than dropped, so a row cannot quietly lose half its note.
+    """
+    if not hint:
+        return ''
+    hints = hint if isinstance(hint, tuple) else (hint,)
+    verdict = line_containing(output, hints[0])
+    if verdict.startswith(hints[0]):
+        verdict = verdict[len(hints[0]):].strip()
+    if len(hints) == 1:
+        return verdict
+    parts = [verdict or 'no "%s" line printed' % hints[0].rstrip(':')]
+    for extra in hints[1:]:
+        line = line_containing(output, extra)
+        parts.append(line or 'no "%s" line printed' % extra.rstrip(':'))
+    return '; '.join(parts)
+
+
 def run_tool(project_dir, argv_tail):
     """Run one tool with this interpreter. Returns (rc, output, seconds)."""
     started = time.time()
@@ -672,13 +719,7 @@ def main():
         label, argv_tail, hint = entry[0], entry[1], entry[2]
         report_only = entry[3] if len(entry) > 3 else False
         rc, output, seconds = run_tool(project_dir, argv_tail)
-        verdict = line_containing(output, hint) if hint else ''
-        # The row already carries the label; a verdict that opens by
-        # repeating the hint spends the column on it twice. Stripped only
-        # when the hint is a genuine prefix, so a hint matched mid-line
-        # (the scanner's 'TIER-1 FINDINGS') is left exactly as printed.
-        if hint and verdict.startswith(hint):
-            verdict = verdict[len(hint):].strip()
+        verdict = verdict_from(output, hint)
         if rc is None:
             note = 'DID NOT RUN'
         elif rc == 0:

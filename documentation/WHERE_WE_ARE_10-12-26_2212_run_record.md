@@ -1663,3 +1663,281 @@ FILES WRITTEN THIS RUN
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Session: OPEN: 10-13-26 1309: Opus: L-437 session build with domain split**
+
+I'll pull the orrery at HEAD, read the two handoffs, load the four skills and check their versions, then measure and build L-437.
+
+All four skills match the manifest (provenance-discipline 2.28, safe-file-editing 1.13, agentic-pre-test 1.3, ledger-and-session-records 1.20).
+
+Now I'll write the new domain section into the build copy, replacing the hand list.
+
+Now the run history: the new field, the domain delta, and the table column.
+
+Now the maintenance run's scanner row, quoting the whole-tree line as its second part.
+
+Now the skill edits: the version entry, the two sections, and the moved entry.
+
+The patch is ready and saved in your orrery folder. It makes the scanner print the Tier-1 total with its split by domain, and I tested it on a spare copy of the repo, where it passed. What you need to do is run it.
+
+After the patch, the scanner's last block and the maintenance run's scanner row both read:
+
+> 0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 281: orrery 116, Earth System 149, stars 13, utilities 2, unclassified 1.
+
+The same split now appears in four places that always agree: the scanner's on-screen summary, the top of `PROVENANCE_AUDIT.md`, the run history, and the maintenance run.
+
+- **No Tier-1 count changes.** Two findings change domain:
+  - `data_acquisition.py`'s one finding moves from orrery to stars. Its own docstring says stars, but the scanner's hand-typed list of domains said orrery.
+  - The "unclassified 1" is `patch_L436_1_idea_20261013.py`, which sits unrun in your folder and has no domain line. Once it is filed in `documentation/`, the total is 280.
+- **Each module's domain now comes only from the `Domain:` line in its own docstring.** The hand-typed list is gone. At HEAD the list and the docstrings disagreed on 14 files. A file with no domain line is now named in the audit, not quietly counted as orrery.
+- **New check, "Domain Split".** It has a row in the maintenance run and a button on the dashboard with the same name. It plants six deliberate faults and catches every one.
+- **Test results.** On the spare copy, 26 of 26 pass/fail checks passed and the dashboard opened without errors. The patch left your Where We Are page at its 130-line limit.
+- **Skill and instructions.** The provenance-discipline skill goes to 2.29, and the Project instructions go to v3.95.
+
+**One thing about another session's patch:** `patch_L436_1` will refuse to run as it stands. It looks for a spot in the ledger's header that has moved since it was written. That patch belongs to its own session to fix; this one doesn't depend on it.
+
+What to do:
+1. Run `patch_L437_1_tier1_by_domain_20261013.py` with VS Code's Run button.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L437_1_tier1_by_domain_20261013.py
+ok  provenance_scanner.py                         line 3961: for _line in gate_path_lines(gp, gate_units, tier_
+ok  provenance_scanner.py                         line 3913: stem = u.file[:-3] if u.file.endswith('.py') else 
+ok  provenance_scanner.py                         line 3584: for fname in sorted(unmapped_files):
+ok  provenance_scanner.py                         line 3577: if unmapped_files:
+ok  provenance_scanner.py                         line 3572: label = DOMAIN_LABELS.get(domain, domain)
+ok  provenance_scanner.py                         line 3569: for domain in all_domains:
+ok  provenance_scanner.py                         line 3566: # worth silently dropping from the table.
+ok  provenance_scanner.py                         line 3551: "utilities, dev tools. Domain is a report-only gro
+ok  provenance_scanner.py                         line 3526: stem = fname[:-3] if fname.endswith('.py') else fn
+ok  provenance_scanner.py                         line 3523: unmapped_files = set()
+ok  provenance_scanner.py                         line 3469: tier_counts.get(1, 0)))
+ok  provenance_scanner.py                         line 3465: "whole tree holds %d Tier-1 findings, most of them
+ok  provenance_scanner.py                         line 3424: out.append("**Tier 2 note (April 2026 audit):** Al
+ok  provenance_scanner.py                         line 3320: tier1_by_file, gate_tier1=gate_names)
+ok  provenance_scanner.py                         line 3303: 
+ok  provenance_scanner.py                         line 3298: stem = u.file[:-3] if u.file.endswith('.py') else 
+ok  provenance_scanner.py                         line 3295: domain_counts = defaultdict(int)
+ok  provenance_scanner.py                         line 3251: out.append("  Whole tree: %d Tier-1. Informational
+ok  provenance_scanner.py                         line 3225: Tier-1 finding, and says what was examined to reac
+ok  provenance_scanner.py                         line 3223: def gate_path_lines(gp, gate_units, whole_tree_tie
+ok  provenance_scanner.py                         line 633: def classify_domain(module_name):
+ok  provenance_scanner.py                         line 560: # --- earth_science ---
+ok  provenance_scanner.py                         line 513: MODULE_DOMAIN_MAP = {
+ok  provenance_scanner.py                         line 495: # gallery_studio.py, json_converter.py, render_orb
+ok  provenance_scanner.py                         line 479: # Six domains, confirmed with Tony (F1 provenance-
+ok  provenance_scanner.py                         line 473: # Maps module names (no .py) to a subject-matter d
+ok  provenance_scanner.py                         line 343: 
+ok  provenance_scanner.py                         line 341: # Reuse the atlas dependency graph builder
+ok  provenance_scanner.py                         line 327: Report-only grouping -- no scanning or scoring beh
+ok  provenance_scanner.py                         line 315: Module updated: August 21, 2026 with Anthropic's C
+ok  provenance_scanner.py                         line 41: 
+ok  provenance_history.py                         line 505: gate = delta['gate']
+ok  provenance_history.py                         line 483: tiers.get('1', 0), tiers.get('2', 0),
+ok  provenance_history.py                         line 478: '| %s | `%s` | %d | %d | %s | %s | %s | %s | %s |'
+ok  provenance_history.py                         line 469: lines.append('| Run (UTC) | HEAD | Files | Total |
+ok  provenance_history.py                         line 369: lines.extend(gate_delta_lines(prev, cur, delta['ga
+ok  provenance_history.py                         line 315: }
+ok  provenance_history.py                         line 309: return {
+ok  provenance_history.py                         line 257: return record
+ok  provenance_history.py                         line 250: 'domain_counts': {str(k): int(v)
+ok  provenance_history.py                         line 239: """
+ok  provenance_history.py                         line 225: tier1_by_file, mode='scan', gate_tier1=None):
+ok  provenance_history.py                         line 47: """
+ok  provenance_history.py                         line 18: the gate path compared by name (L-414)
+ok  skills/provenance-discipline/SKILL.md         line 1104: Mechanics: `MODULE_DOMAIN_MAP` (a module-name-to-d
+ok  skills/provenance-discipline/SKILL.md         line 1096: app -- also the default catch-all), **earth_scienc
+ok  skills/provenance-discipline/SKILL.md         line 1090: is this," not "what does this module do" (that's m
+ok  skills/provenance-discipline/SKILL.md         line 1087: data rolled up by subject-matter domain).
+ok  skills/provenance-discipline/SKILL.md         line 1057: - File inclusion is role-driven (L-078): a module'
+ok  skills/provenance-discipline/SKILL.md         line 56: on 2026-10-05 and 2026-10-08 (L-418) and 2026-10-0
+ok  skills/provenance-discipline/SKILL.md         line 42: Earlier: 2.26 | 2026-10-05, with Anthropic's Claud
+ok  skills/provenance-discipline/SKILL.md         line 11: Skill version: 2.28 | 2026-10-09, with Anthropic's
+ok  skills/provenance-discipline/references/field-notes.md line 111: string constant to the scanner (e.g. MODULE_DOMAIN
+ok  LEDGER_CONSOLIDATED.md                        header: one stamp line
+ok  LEDGER_CONSOLIDATED.md                        L-437 block at the end of section A
+ok  documentation/WHERE_WE_ARE.md                 Signals: the Tier-1 line
+ok  orrery_maintenance_run.py                     docstring: L-437 stamp
+ok  orrery_maintenance_run.py                     Provenance scanner row: two lines
+ok  orrery_maintenance_run.py                     CHECKERS: the Domain Split row
+ok  orrery_maintenance_run.py                     verdict_from(), before run_tool
+ok  orrery_maintenance_run.py                     checker loop reads verdict_from
+ok  PROJECT_INSTRUCTIONS.md                       header: v3.95
+ok  PROJECT_INSTRUCTIONS.md                       anchor: cut from 70202e3b
+ok  PROJECT_INSTRUCTIONS.md                       version history: v3.95 entry
+ok  PROJECT_INSTRUCTIONS.md                       version history: v3.92 moves down
+ok  documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1: v3.92, moved down
+ok  documentation/SKILL_HISTORIES.md              provenance-discipline: v2.26 entry
+ok  palomas_orrery_dashboard.py                   checkers: the Domain Split button
+ok  palomas_orrery_dashboard.py                   docstring: L-437 stamp
+ok  test_domain_split.py                          new file
+ok  documentation/HANDOFF_L437_tier1_by_domain_20261013.md new file
+
+patch applied (69 edits in 11 files, 2 new files)
+Stamps updated: provenance_scanner.py, provenance_history.py,
+orrery_maintenance_run.py, palomas_orrery_dashboard.py, the skill's
+version line, the protocol's header and anchor, the ledger.
+Fixed in passing: in provenance_scanner.py's docstring, the closing line
+of the August Task 2a stamp, which sat below the L-414 stamp, is back
+under Task 2a.
+WHERE_WE_ARE.md: 130 lines above the run-record marker (cap 130).
+
+NEXT:
+  1. Run orrery_maintenance_run.py. Expect every gating checker to pass (26 at 70202e3b
+     with this patch; more if another session's patch has added rows), "Domain Split"
+     with 6 of 6 planted faults caught, and the Provenance scanner row reading:
+       0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 281: orrery 116,
+       Earth System 149, stars 13, utilities 2, unclassified 1.
+     No Tier-1 count moves. data_acquisition.py's one moves from orrery to stars;
+     the unclassified 1 is patch_L436_1, which has no Domain: tag, while it sits
+     in this folder. The run also rewrites the Skill Manifest to
+     provenance-discipline 2.29.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261013T175754Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 2.0s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.5s  rewrote PROJECT_INSTRUCTIONS.md
+  Constants export             1.7s  unchanged (1 checked, not written)
+  Objects export               0.1s  unchanged (1 checked, not written)
+  Drawings export              0.6s  unchanged (1 checked, not written)
+  Module atlas                 8.0s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               6.0s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Exact rows report            2.5s  unchanged (1 checked, not written) -- 13 of
+                                     41 exact rows printed at 43 lines (33
+                                     orrery, 10 gallery); 8 drawn only, 14 not
+                                     followed, 0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.2s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.0s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       1.6s  Export matches the store: sha256
+                                     2a1211f8cce2 on both sides; 127 rows
+                                     re-read, 56 not exported, 31 tokens; 320
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.1s  pass
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      1.9s  PASSING -- 13 printed exact rows each state
+                                     a count; 33 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.7s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 126 status lines in constants_new.py are
+                                     well formed; 54 rows carry none.
+  Row shape                    0.1s  All 183 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.2s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          23.7s  PASS -- all 311 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.2s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.5s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check        0.5s  PASS -- 3 of 3 planted faults caught;
+                                     hills_cloud 3600 dots, tilt 30.9 deg, sha256
+                                     a51e93118069
+  Position digits (L-401)      3.5s  PASS -- 13 of 13 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 6 period sentences
+  Orbit markers (L-431, L-401)   13.1s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.6s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Worksheet checker           10.7s  74 of 110 routed, 8 clean
+  Worksheet checker tests     20.7s  All 135 checks passed
+  Worksheet key round trip     1.4s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         30.1s  All 76 checks passed
+  Extractor pins               0.5s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          69.1s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 281: orrery 116, Earth System 149,
+                                     stars 13, utilities 2, unclassified 1.
+
+======================================================================
+  26 of 26 gating checkers passed -- 206.1s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 281: orrery 116, Earth System 149, stars 13, utilities 2, unclassified 1.
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2224 file(s) examined, 11 written, 1 created, 0 removed, 4 rewritten identically
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROJECT_INSTRUCTIONS.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/WHERE_WE_ARE_10-12-26_2212_run_record.md
+    written   documentation/prompts/citation_review.jsonl
+    written   module_atlas.py
+    written   skills/provenance-discipline/SKILL.md
+    created   documentation/project_instructions_v3_95.md
+    rewritten with identical bytes, no action needed:
+      DATA_INVENTORY.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Reinstall provenance-discipline 2.29 (Settings > Skills); copy
+     PROJECT_INSTRUCTIONS.md (v3.95) to the Project's instructions and to
+     documentation/project_instructions_v3_95.md. -- done
+  3. Move this script into documentation/; commit and push. -- 
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. Run `orrery_maintenance_run.py`. Check that the scanner row reads like the quote above.
+3. Reinstall provenance-discipline 2.29 in Settings > Skills.
+4. Copy `PROJECT_INSTRUCTIONS.md` into the Project's instructions and to `documentation/project_instructions_v3_95.md`.
+5. Move the patch into `documentation/`, then commit and push.
+
+The full record is in `documentation/HANDOFF_L437_tier1_by_domain_20261013.md`, which the patch writes.

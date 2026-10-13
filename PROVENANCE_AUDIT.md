@@ -2,9 +2,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: October 13, 2026
-Files scanned: 153
-Total findings: 1114
-Constants: 189 | Dicts: 59 | Display strings: 866
+Files scanned: 156
+Total findings: 1116
+Constants: 189 | Dicts: 61 | Display strings: 866
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -18,16 +18,16 @@ The last 6 recorded scanner runs, newest first. Written by provenance_history.py
 
 A run is expected every 1 day(s). Nothing here affects the exit code -- the delta informs the push call, it does not make it.
 
-| Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 | Gate T1 |
-|-----------|------|------:|------:|---:|---:|---:|---:|--------:|
-| 20261013T175754Z | `4da3d7c` | 153 | 1114 | 281 | 683 | 144 | 6 | 0 |
-| 20261013T174809Z | `400a961` | 154 | 1114 | 281 | 683 | 144 | 6 | 0 |
-| 20261013T163342Z | `87a5470` | 153 | 1114 | 280 | 684 | 144 | 6 | 0 |
-| 20261013T132327Z | `c972252` | 153 | 1114 | 280 | 683 | 144 | 7 | 0 |
-| 20261013T013654Z | `c5dff25` | 154 | 1110 | 289 | 683 | 132 | 6 | 0 |
-| 20261012T184717Z | `e6a7e8a` | 152 | 1108 | 288 | 682 | 132 | 6 | 0 |
+| Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
+|-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261013T190348Z | `a246b86` | 156 | 1116 | 281 | orrery 116, Earth System 149, stars 13, utilities 2, unclassified 1 | 684 | 145 | 6 | 0 |
+| 20261013T175754Z | `4da3d7c` | 153 | 1114 | 281 | -- | 683 | 144 | 6 | 0 |
+| 20261013T174809Z | `400a961` | 154 | 1114 | 281 | -- | 683 | 144 | 6 | 0 |
+| 20261013T163342Z | `87a5470` | 153 | 1114 | 280 | -- | 684 | 144 | 6 | 0 |
+| 20261013T132327Z | `c972252` | 153 | 1114 | 280 | -- | 683 | 144 | 7 | 0 |
+| 20261013T013654Z | `c5dff25` | 154 | 1110 | 289 | -- | 683 | 132 | 6 | 0 |
 
-Change since the previous run: total +0, Tier-1 +0.
+Change since the previous run: total +2, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -61,9 +61,11 @@ No file's Tier-1 count rose.
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 281 |
-| 2 | 10-15 | REVIEW | 683 |
-| 3 | 5-9 | LOW PRIORITY | 144 |
+| 2 | 10-15 | REVIEW | 684 |
+| 3 | 5-9 | LOW PRIORITY | 145 |
 | 4 | 1-4 | LOWEST PRIORITY | 6 |
+
+**Whole tree, Tier-1: 281: orrery 116, Earth System 149, stars 13, utilities 2, unclassified 1.** By each file's docstring `Domain:` tag; Findings by File Type below has every tier and every domain. The push gate is the Gate Path section, not this total.
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
 accepted residuals -- cited constants, V_STALE staleness flags on verified
@@ -78,7 +80,7 @@ The push gate is Tier-1 = 0 on the active build path, and it binds at export. Th
 
 **GATE PATH: 0 TIER-1 -- the push gate holds.**
 
-Examined: 102 of 127 exported rows; 25 more are computed from other rows, whose inputs are scored where they are typed; 0 display string(s) in 13 served object(s). The whole tree holds 281 Tier-1 findings, most of them off this path.
+Examined: 102 of 127 exported rows; 25 more are computed from other rows, whose inputs are scored where they are typed; 0 display string(s) in 13 served object(s). The whole tree's Tier-1 count is 281: orrery 116, Earth System 149, stars 13, utilities 2, unclassified 1; most of them are off this path.
 
 Exported rows computed from other rows (25): `CHROMOSPHERE_TOP_KM`, `DEG_PER_RAD`, `EARTH_BOW_SHOCK_STANDOFF_RADII`, `EARTH_DIPOLE_TILT_DEG`, `EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR`, `EARTH_GEOSTATIONARY_RADIUS_KM`, `EARTH_HILL_SPHERE_KM`, `EARTH_LEO_INNER_KM`, `EARTH_LEO_OUTER_KM`, `EARTH_LOWER_MANTLE_KM`, `EARTH_MAGNETOPAUSE_STANDOFF_RADII`, `EARTH_MAGNETOTAIL_DRAWN_END_RADII`, `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`, `EARTH_OBLIQUITY_J2000_DEG`, `EARTH_SIDEREAL_ROTATION_PERIOD_H`, `EARTH_STRATOPAUSE_RADIUS_KM`, `EARTH_THERMOPAUSE_RADIUS_KM`, `EARTH_VAN_ALLEN_OUTER_RADII`, `GALACTIC_NORTH_POLE_DEC_J2000_DEG`, `HELMET_CUSP_RADII`, `INNER_LIMIT_OORT_CLOUD_AU`, `OUTER_OORT_CLOUD_AU`, `ROCHE_LIMIT_DRAWN_RADII`, `SGR_A_STAR_DEC_ICRS_DEG`, `SGR_A_STAR_RA_ICRS_DEG`.
 
@@ -141,10 +143,10 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `earth_visualization_shells.py` | earth_science | 0 | 20 | 0 | 0 | 20 |
 | `jupiter_visualization_shells.py` | orrery | 0 | 19 | 0 | 0 | 19 |
 | `planet_visualization_utilities.py` | orrery | 4 | 12 | 1 | 0 | 17 |
-| `provenance_scanner.py` | dev_tools | 0 | 0 | 17 | 0 | 17 |
+| `provenance_scanner.py` | dev_tools | 0 | 0 | 16 | 0 | 16 |
 | `venus_visualization_shells.py` | orrery | 3 | 4 | 6 | 0 | 13 |
 | `scenarios_heatwaves.py` | earth_science | 3 | 9 | 0 | 0 | 12 |
-| `test_orbit_markers.py` | orrery | 0 | 0 | 12 | 0 | 12 |
+| `test_orbit_markers.py` | dev_tools | 0 | 0 | 12 | 0 | 12 |
 | `scenarios_western_heatwave_march_2026.py` | earth_science | 10 | 1 | 0 | 0 | 11 |
 | `sgr_a_grand_tour.py` | orrery | 8 | 0 | 3 | 0 | 11 |
 | `mars_visualization_shells.py` | orrery | 4 | 3 | 4 | 0 | 11 |
@@ -162,16 +164,17 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `sgr_a_star_data.py` | orrery | 3 | 3 | 0 | 0 | 6 |
 | `paleoclimate_visualization.py` | earth_science | 6 | 0 | 0 | 0 | 6 |
 | `position_accuracy.py` | orrery | 0 | 5 | 1 | 0 | 6 |
-| `test_position_digits.py` | orrery | 0 | 0 | 6 | 0 | 6 |
+| `test_position_digits.py` | dev_tools | 0 | 0 | 6 | 0 | 6 |
 | `exoplanet_coordinates.py` | stars | 5 | 0 | 0 | 0 | 5 |
 | `earth_pole_of_date.py` | orrery | 0 | 5 | 0 | 0 | 5 |
 | `fetch_climate_data.py` | earth_science | 0 | 5 | 0 | 0 | 5 |
 | `planet9_visualization_shells.py` | orrery | 0 | 5 | 0 | 0 | 5 |
-| `worksheet_checker.py` | orrery | 0 | 0 | 5 | 0 | 5 |
+| `worksheet_checker.py` | dev_tools | 0 | 0 | 5 | 0 | 5 |
 | `coordinate_system_guide.py` | orrery | 2 | 2 | 0 | 0 | 4 |
 | `sgr_a_visualization_precession.py` | orrery | 4 | 0 | 0 | 0 | 4 |
-| `orrery_maintenance_run.py` | orrery | 0 | 0 | 4 | 0 | 4 |
+| `orrery_maintenance_run.py` | dev_tools | 0 | 0 | 4 | 0 | 4 |
 | `palomas_orrery_dashboard.py` | orrery | 0 | 0 | 4 | 0 | 4 |
+| `provenance_history.py` | dev_tools | 0 | 0 | 4 | 0 | 4 |
 | `object_type_analyzer.py` | orrery | 3 | 0 | 0 | 0 | 3 |
 | `orrery_rendering.py` | orrery | 2 | 1 | 0 | 0 | 3 |
 | `scenarios_coral_bleaching.py` | earth_science | 1 | 2 | 0 | 0 | 3 |
@@ -179,12 +182,11 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `orbital_period.py` | orrery | 0 | 2 | 0 | 1 | 3 |
 | `visualization_3d.py` | stars | 0 | 3 | 0 | 0 | 3 |
 | `dep_trace.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
-| `doc_index.py` | orrery | 0 | 0 | 3 | 0 | 3 |
+| `doc_index.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
 | `ledger_index.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
 | `measure_perframe_elements.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
 | `module_atlas.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
 | `palomas_orrery.py` | orrery | 0 | 0 | 3 | 0 | 3 |
-| `provenance_history.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
 | `exoplanet_systems.py` | stars | 0 | 0 | 3 | 0 | 3 |
 | `energy_imbalance.py` | earth_science | 1 | 1 | 0 | 0 | 2 |
 | `plot_data_report_widget.py` | utilities | 2 | 0 | 0 | 0 | 2 |
@@ -192,10 +194,10 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `apsidal_markers.py` | orrery | 0 | 2 | 0 | 0 | 2 |
 | `close_approach_data.py` | orrery | 0 | 1 | 1 | 0 | 2 |
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
-| `worksheet_request_builder.py` | orrery | 0 | 0 | 2 | 0 | 2 |
+| `worksheet_request_builder.py` | dev_tools | 0 | 0 | 2 | 0 | 2 |
 | `orbital_elements.py` | orrery | 1 | 0 | 0 | 0 | 1 |
-| `patch_L436_1_idea_20261013.py` | orrery | 1 | 0 | 0 | 0 | 1 |
-| `data_acquisition.py` | orrery | 1 | 0 | 0 | 0 | 1 |
+| `patch_L436_1_idea_20261013.py` | unclassified | 1 | 0 | 0 | 0 | 1 |
+| `data_acquisition.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `exoplanet_orbits.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `fetch_paleoclimate_data.py` | earth_science | 1 | 0 | 0 | 0 | 1 |
 | `hr_diagram_distance.py` | stars | 1 | 0 | 0 | 0 | 1 |
@@ -204,55 +206,42 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `visualization_core.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `visualization_utils.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `earth_pole_live_check.py` | orrery | 0 | 1 | 0 | 0 | 1 |
+| `patch_L269_1_scanner_breakdown_20261013.py` | unclassified | 0 | 1 | 0 | 0 | 1 |
 | `celestial_coordinates.py` | orrery | 0 | 1 | 0 | 0 | 1 |
 | `hills_cloud_sampler.py` | orrery | 0 | 1 | 0 | 0 | 1 |
 | `add_docstrings.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `data_inventory.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
-| `export_constants.py` | orrery | 0 | 0 | 1 | 0 | 1 |
-| `export_drawings.py` | orrery | 0 | 0 | 1 | 0 | 1 |
-| `export_objects.py` | orrery | 0 | 0 | 1 | 0 | 1 |
+| `export_constants.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
+| `export_drawings.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
+| `export_objects.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `osculating_cache_manager.py` | orrery | 0 | 0 | 1 | 0 | 1 |
-| `test_dimensions.py` | orrery | 0 | 0 | 1 | 0 | 1 |
+| `test_dimensions.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
+| `test_domain_split.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `test_reset_completeness.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
-| `worksheet_key_aliases.py` | orrery | 0 | 0 | 1 | 0 | 1 |
-| `worksheet_keys.py` | orrery | 0 | 0 | 1 | 0 | 1 |
+| `worksheet_key_aliases.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
+| `worksheet_keys.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `export_orbit_cache.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 
 ---
 
 ## Findings by File Type
 
-Same data again, grouped by subject-matter domain rather than by individual file -- orrery, earth science, gallery, stars, utilities, dev tools. Domain is a report-only grouping (see MODULE_DOMAIN_MAP / classify_domain()); it does not affect which files get scanned or scored.
+Same data again, grouped by subject-matter domain rather than by individual file -- orrery, earth science, gallery, stars, utilities, dev tools. Domain is a report-only grouping, read from each module's own docstring `Domain:` tag (classify_domain(), through module_atlas.py's reader); it does not affect which files get scanned or scored. The Tier 1 column sums to the whole-tree split in the Priority Summary.
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 56 | 118 | 567 | 91 | 3 | 779 |
+| Orrery (solar system + orbital mechanics) | 42 | 116 | 567 | 53 | 3 | 739 |
 | Earth System | 13 | 149 | 75 | 2 | 0 | 226 |
-| Stars (stellar neighborhood) | 11 | 12 | 41 | 6 | 3 | 62 |
-| Dev Tools (audit, diagnostics, one-shot scripts) | 11 | 0 | 0 | 45 | 0 | 45 |
+| Dev Tools (audit, diagnostics, one-shot scripts) | 24 | 0 | 0 | 84 | 0 | 84 |
+| Stars (stellar neighborhood) | 12 | 13 | 41 | 6 | 3 | 63 |
 | Utilities (cross-domain shared helpers) | 1 | 2 | 0 | 0 | 0 | 2 |
 | Gallery | 0 | 0 | 0 | 0 | 0 | 0 |
+| Unclassified (no Domain: tag, or one outside the six) | 2 | 1 | 1 | 0 | 0 | 2 |
 
-**Domain coverage gap:** the following files have findings but no entry in `MODULE_DOMAIN_MAP` -- defaulted to `orrery` rather than guessed into a more specific bucket. Add each to `MODULE_DOMAIN_MAP` in provenance_scanner.py with its real domain so this stops silently defaulting:
+**Domain coverage gap (2):** these files have findings and no `Domain:` tag the report knows, so they are counted as unclassified rather than guessed into a domain. Add the tag to each module's own docstring (one of the six above); nothing in provenance_scanner.py needs editing:
 
-- `doc_index.py`
-- `earth_pole_live_check.py`
-- `earth_pole_of_date.py`
-- `export_constants.py`
-- `export_drawings.py`
-- `export_objects.py`
-- `hills_cloud_sampler.py`
-- `orbital_period.py`
-- `orrery_maintenance_run.py`
-- `patch_L436_1_idea_20261013.py`
-- `position_accuracy.py`
-- `test_dimensions.py`
-- `test_orbit_markers.py`
-- `test_position_digits.py`
-- `worksheet_checker.py`
-- `worksheet_key_aliases.py`
-- `worksheet_keys.py`
-- `worksheet_request_builder.py`
+- `patch_L269_1_scanner_breakdown_20261013.py` -- no Domain: tag in its docstring
+- `patch_L436_1_idea_20261013.py` -- no Domain: tag in its docstring
 
 ---
 
@@ -1445,6 +1434,12 @@ is planned for a future session.
 | 2341 | string | display string @ line 2341 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2416 | string | display string @ line 2416 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
+### patch_L269_1_scanner_breakdown_20261013.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 94 | dict | CREATED[...] | (2 entries) | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | UNDETERMINED -- could not be classified |
+
 ### planet9_visualization_shells.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
@@ -1897,9 +1892,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 106 | dict | ROLE_MAP[...] | (145 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 392 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 415 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 106 | dict | ROLE_MAP[...] | (147 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 396 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 419 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 
@@ -1921,10 +1916,10 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 341 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 404 | constant | HASH_LIMIT_BYTES | 2 * 1024 * 1024 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 523 | constant | NOTE_WIDTH | 44 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 524 | constant | NOTE_INDENT | 37 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 360 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 423 | constant | HASH_LIMIT_BYTES | 2 * 1024 * 1024 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 542 | constant | NOTE_WIDTH | 44 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 543 | constant | NOTE_INDENT | 37 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### osculating_cache_manager.py
 
@@ -1944,10 +1939,10 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 225 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 226 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 1480 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 1611 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 230 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 231 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 1499 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 1630 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### planet_visualization_utilities.py
 
@@ -1981,31 +1976,31 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 54 | constant | SCHEMA_VERSION | 1 | 4 | 2 | **8** | No source citation; date-sensitive (recalled) | Internal (role 'devtool') |
-| 59 | constant | MAX_RUNS | 6 | 4 | 2 | **8** | No source citation; date-sensitive (recalled) | Internal (role 'devtool') |
-| 65 | constant | EXPECTED_CADENCE_DAYS | 1 | 4 | 2 | **8** | No source citation; date-sensitive (recalled) | Internal (role 'devtool') |
+| 63 | constant | SCHEMA_VERSION | 1 | 4 | 2 | **8** | No source citation; date-sensitive (recalled) | Internal (role 'devtool') |
+| 68 | constant | MAX_RUNS | 6 | 4 | 2 | **8** | No source citation; date-sensitive (recalled) | Internal (role 'devtool') |
+| 74 | constant | EXPECTED_CADENCE_DAYS | 1 | 4 | 2 | **8** | No source citation; date-sensitive (recalled) | Internal (role 'devtool') |
+| 361 | dict | DOMAIN_SHORT_NAMES[...] | (7 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### provenance_scanner.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 361 | constant | V_FETCHED | 1 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 362 | constant | V_CROSS_CHECKED | 2 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 371 | constant | V_SOURCED | 3 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 374 | constant | V_RECALLED | 4 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 375 | constant | V_DECLARED | 0 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 388 | constant | C_COSMETIC | 1 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 389 | constant | C_INTERNAL | 2 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 390 | constant | C_LOADBEARING | 3 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 391 | constant | C_PUBLIC | 4 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 392 | constant | C_PROPAGATING | 5 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 397 | constant | C_RELATIONAL | 4 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 398 | constant | C_MEASURED | 5 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 403 | constant | C_UNDETERMINED | 5 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 504 | dict | DOMAIN_LABELS[...] | (6 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 513 | dict | MODULE_DOMAIN_MAP[...] | (101 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 1170 | constant | CITATION_LOOKBACK_BLOCK | 15 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
-| 2187 | constant | SHADOW_DERIVED_MIN_MAGNITUDE | 100.0 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 384 | constant | V_FETCHED | 1 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 385 | constant | V_CROSS_CHECKED | 2 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 394 | constant | V_SOURCED | 3 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 397 | constant | V_RECALLED | 4 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 398 | constant | V_DECLARED | 0 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 411 | constant | C_COSMETIC | 1 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 412 | constant | C_INTERNAL | 2 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 413 | constant | C_LOADBEARING | 3 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 414 | constant | C_PUBLIC | 4 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 415 | constant | C_PROPAGATING | 5 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 420 | constant | C_RELATIONAL | 4 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 421 | constant | C_MEASURED | 5 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 426 | constant | C_UNDETERMINED | 5 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 523 | dict | DOMAIN_LABELS[...] | (6 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 1134 | constant | CITATION_LOOKBACK_BLOCK | 15 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 2151 | constant | SHADOW_DERIVED_MIN_MAGNITUDE | 100.0 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
 
 ### sgr_a_grand_tour.py
 
@@ -2048,6 +2043,12 @@ is planned for a future session.
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 125 | constant | REL_TOL | 1e-09 | 4 | 2 | **8** | No source citation; date-sensitive (recalled) | Internal (role 'devtool') |
+
+### test_domain_split.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 104 | dict | NOTES[...] | (4 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### test_orbit_markers.py
 

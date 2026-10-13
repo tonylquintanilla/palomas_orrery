@@ -108,7 +108,8 @@ unverified. Moved here from provenance-discipline 2.26 on 2026-10-08
 - Derive from known quantities; don't estimate manually.
 - **The scanner scans itself, so editing provenance_scanner.py nudges its
   own self-scan numbers.** Adding a new module-level dict or descriptive
-  string constant to the scanner (e.g. MODULE_DOMAIN_MAP, DOMAIN_LABELS)
+  string constant to the scanner (e.g. DOMAIN_LABELS, or the retired
+  MODULE_DOMAIN_MAP while it stood)
   gets picked up as a claim-shaped unit in provenance_scanner.py's own
   audit entry, same as in any other file. This is correct behavior, not a
   bug -- but before assuming a total-findings delta after a scanner change

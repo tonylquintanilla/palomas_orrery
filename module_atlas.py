@@ -254,6 +254,7 @@ ROLE_MAP = {
     'test_cross_checked':                     'devtool',
     'test_derived_figures':                   'devtool',
     'test_dimensions':                        'devtool',
+    'test_domain_split':                      'devtool',
     'test_objects_export':                    'devtool',
     'test_orbit_cache':                       'devtool',
     'test_orbit_markers':                     'devtool',
@@ -268,6 +269,9 @@ ROLE_MAP = {
     'worksheet_checker':                      'devtool',
     'worksheet_keys':                         'devtool',
     'worksheet_request_builder':              'devtool',
+
+    # patch
+    'patch_L437_1_tier1_by_domain_20261013':  'patch',
 }
 # ROLE-MAP:END
 

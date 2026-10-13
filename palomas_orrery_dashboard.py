@@ -193,6 +193,11 @@ after Test Orbit Cache, which is its alphabetical place once the other
 labels lose the word.
 October 13, 2026 with Anthropic's Claude Opus 5.5 (L-431, after build 2's
 look): Orbit Markers' description counts twelve planted faults, not nine.
+October 13, 2026 with Anthropic's Claude Opus 5.5 (L-437): Domain Split
+under the orrery's checkers, in the same patch as its checker
+test_domain_split.py, with the same name as its maintenance-run row (the
+button is named what the run prints). It sits before Drawings Export,
+its alphabetical place once the labels lose "Test".
 """
 
 import os
@@ -1166,6 +1171,20 @@ LAUNCH_GROUPS = {
          "converting into it. Rows with no unit yet are named, not "
          "failed, outside a finished slice. A built-in set of test rows "
          "runs first and must give every verdict.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Domain Split",
+         "test_domain_split.py",
+         "Check that the provenance scanner's whole-tree Tier-1 total prints "
+         "with its split by domain (orrery, Earth System, stars, ...), the "
+         "same on the console, in PROVENANCE_AUDIT.md and in the run history; "
+         "that each module's domain is read from the Domain: tag in its own "
+         "docstring; and that a file with no tag is named, not counted as "
+         "orrery. Scans small made-up modules in a temporary folder and writes "
+         "nothing in the project. Six faults are planted first, each caught by "
+         "name. Ends on \"DOMAIN SPLIT: PASS\" (L-437).",
          SCRIPT_DIR,
          True,
          None,

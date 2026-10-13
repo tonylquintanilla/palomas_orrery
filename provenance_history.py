@@ -15,7 +15,8 @@ What lives here:
     - the on-disk shape and the ring buffer
     - the repo HEAD read, done without shelling out to git
     - the run-to-run comparison and its console rendering, including
-      the gate path compared by name (L-414)
+      the gate path compared by name (L-414) and the whole-tree Tier-1
+      split by domain (L-437)
     - the Run History table for PROVENANCE_AUDIT.md
     - is_overdue(), which nothing in this repo calls yet -- see below
 
@@ -44,6 +45,14 @@ and the Run History table show them. A count alone cannot tell one
 finding cleared and another gained from no change. Records from before
 L-414 have no such field and are reported as not comparable, never as
 zero.)
+Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5 (L-437:
+each run record also carries tier1_by_domain, the whole-tree Tier-1
+count per domain, beside domain_counts, which is the ALL-TIER count per
+domain and keeps that meaning. compare() reports a domain whose Tier-1
+count moved; the console prints the split and the move, and the Run
+History table gains the split as a column. One finding moved between
+domains at an unchanged total shows here. Records from before L-437
+have no split and are reported as not comparable, never as zero.)
 """
 
 import json
@@ -222,7 +231,8 @@ def run_id_for(moment):
 
 def make_run_record(started, finished, project_dir, files_scanned,
                     total_findings, tier_counts, domain_counts,
-                    tier1_by_file, mode='scan', gate_tier1=None):
+                    tier1_by_file, mode='scan', gate_tier1=None,
+                    tier1_by_domain=None):
     """Assemble one run record.
 
     tier_counts is keyed by int tier; it is stored keyed by string
@@ -236,6 +246,12 @@ def make_run_record(started, finished, project_dir, files_scanned,
     finding and gains another has the same count and different names,
     and only the names show it. Records written before L-414 have no
     such field; compare() says so rather than reading it as zero.
+
+    domain_counts is the count of findings of ALL TIERS per domain.
+    tier1_by_domain (L-437) is the count of TIER-1 findings per domain:
+    the split the whole-tree total prints with. They answer different
+    questions, and the first is not the second. None when the scanner
+    gave no split; compare() then says the domains cannot be compared.
     """
     record = {
         'run_id': run_id_for(started),
@@ -247,6 +263,8 @@ def make_run_record(started, finished, project_dir, files_scanned,
         'total_findings': total_findings,
         'tier_counts': {str(t): int(tier_counts.get(int(t), 0))
                         for t in TIER_KEYS},
+        # ALL tiers per domain -- not the Tier-1 split, which is the
+        # field below (L-437).
         'domain_counts': {str(k): int(v)
                           for k, v in sorted(domain_counts.items())},
         'tier1_by_file': {str(k): int(v)
@@ -254,6 +272,11 @@ def make_run_record(started, finished, project_dir, files_scanned,
     }
     record['gate_tier1'] = (None if gate_tier1 is None
                             else sorted(str(n) for n in gate_tier1))
+    # Kept in the order the scanner gives (its fixed domain order), so
+    # the JSON reads the same way the printed line does.
+    record['tier1_by_domain'] = (None if tier1_by_domain is None
+                                 else dict((str(k), int(v)) for k, v
+                                           in tier1_by_domain.items()))
     return record
 
 
@@ -306,13 +329,67 @@ def compare(prev, cur):
         gate['entered'] = sorted((after - before).elements())
         gate['left'] = sorted((before - after).elements())
 
+    # L-437: the whole-tree Tier-1 split, domain by domain. A domain
+    # whose count moved is named with both counts, so one finding moved
+    # from orrery to stars at an unchanged total still shows -- a total
+    # alone cannot. 'known' is False when either record has no split.
+    prev_split = (prev or {}).get('tier1_by_domain')
+    cur_split = cur.get('tier1_by_domain')
+    domains = {'known': prev_split is not None and cur_split is not None,
+               'moved': []}
+    if domains['known']:
+        keys = list(cur_split) + [k for k in prev_split if k not in cur_split]
+        for key in keys:
+            before = int(prev_split.get(key, 0))
+            after = int(cur_split.get(key, 0))
+            if before != after:
+                domains['moved'].append((key, before, after))
+
     return {
         'total_delta': int(cur.get('total_findings', 0))
         - int((prev or {}).get('total_findings', 0)),
         'tier_delta': tier_delta,
         'risen': risen,
         'gate': gate,
+        'domains': domains,
     }
+
+
+# The short names the scanner prints (provenance_scanner.DOMAIN_SHORT).
+# Not imported: the scanner imports this module, and the names here are
+# only for display -- an unknown key prints as itself.
+DOMAIN_SHORT_NAMES = {
+    'orrery': 'orrery', 'earth_science': 'Earth System',
+    'stars': 'stars', 'utilities': 'utilities', 'dev_tools': 'dev tools',
+    'gallery': 'gallery', 'unclassified': 'unclassified',
+}
+
+
+def split_text(split):
+    """'orrery 116, Earth System 149, ...' for a record's Tier-1 split,
+    domains at zero left out; '--' when the record has none."""
+    if split is None:
+        return '--'
+    parts = ['%s %d' % (DOMAIN_SHORT_NAMES.get(k, k), int(v))
+             for k, v in split.items() if int(v)]
+    return ', '.join(parts) if parts else 'none'
+
+
+def domain_delta_lines(prev, cur, domains):
+    """Console lines for the Tier-1 split, and what moved (L-437)."""
+    if cur.get('tier1_by_domain') is None:
+        return ['  Tier-1 by domain: not computed this run.']
+    out = ['  Tier-1 by domain: %s' % split_text(cur['tier1_by_domain'])]
+    if not domains['known']:
+        out.append('  the previous run recorded no split (it predates'
+                   ' L-437), so no domain can be compared yet.')
+    elif not domains['moved']:
+        out.append('  no domain\'s Tier-1 count moved.')
+    else:
+        out.append('  Tier-1 MOVED by domain: %s' % ', '.join(
+            '%s %d -> %d' % (DOMAIN_SHORT_NAMES.get(k, k), b, a)
+            for k, b, a in domains['moved']))
+    return out
 
 
 def _age_phrase(prev, cur):
@@ -366,6 +443,7 @@ def console_lines(history, cur, first_run_note=True):
         for fname, before, after in delta['risen']:
             lines.append('      %-44s %d -> %d  (+%d)'
                          % (fname[:44], before, after, after - before))
+    lines.extend(domain_delta_lines(prev, cur, delta['domains']))
     lines.extend(gate_delta_lines(prev, cur, delta['gate']))
     return lines
 
@@ -466,21 +544,24 @@ def history_table(history):
         lines.append('')
         return lines
 
-    lines.append('| Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 '
-                 '| Gate T1 |')
-    lines.append('|-----------|------|------:|------:|---:|---:|---:|---:'
-                 '|--------:|')
+    # L-437: the T1 column's total travels with its split by domain;
+    # '--' for a run recorded before the split existed.
+    lines.append('| Run (UTC) | HEAD | Files | Total | T1 | T1 by domain '
+                 '| T2 | T3 | T4 | Gate T1 |')
+    lines.append('|-----------|------|------:|------:|---:|--------------'
+                 '|---:|---:|---:|--------:|')
 
     for rec in reversed(runs):
         tiers = rec.get('tier_counts', {})
         gate = rec.get('gate_tier1')
         lines.append(
-            '| %s | `%s` | %d | %d | %s | %s | %s | %s | %s |'
+            '| %s | `%s` | %d | %d | %s | %s | %s | %s | %s | %s |'
             % (rec.get('run_id', '?'),
                short_sha(rec.get('head_sha')),
                int(rec.get('files_scanned', 0)),
                int(rec.get('total_findings', 0)),
-               tiers.get('1', 0), tiers.get('2', 0),
+               tiers.get('1', 0), split_text(rec.get('tier1_by_domain')),
+               tiers.get('2', 0),
                tiers.get('3', 0), tiers.get('4', 0),
                '--' if gate is None else len(gate)))
 
@@ -502,6 +583,11 @@ def history_table(history):
         else:
             lines.append('')
             lines.append('No file\'s Tier-1 count rose.')
+        if delta['domains']['moved']:
+            lines.append('')
+            lines.append('Tier-1 moved by domain: %s.' % ', '.join(
+                '%s %d -> %d' % (DOMAIN_SHORT_NAMES.get(k, k), b, a)
+                for k, b, a in delta['domains']['moved']))
         gate = delta['gate']
         if gate['known'] and (gate['entered'] or gate['left']):
             lines.append('')
