@@ -200,6 +200,189 @@ the handoff, and Where We Are by section.
 
 One thing for your next commit: this brief and nothing else is new on your disk since the push, so it is a one-file commit whenever you next open GitHub Desktop.
 
+=================================================================================
+
+The patch is saved at the root of your orrery folder as `patch_L276_2_gemini_recheck_20261013.py`. It adds one Note to L-276 recording both tests and their result, moves L-276's date, and stamps the ledger header. One file, three edits, no code touched.
+
+It runs after `patch_L436_1`, and it checks: if that patch's header stamp is not in the ledger yet, it refuses and tells you to run that one first. Tested on a throwaway copy: refuses before L-436, applies after it, refuses a second run, handles a CRLF working copy, all ASCII.
+
+Your closing machine list, in order:
+
+1. Run `patch_L436_1_idea_20261013.py`.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L436_1_idea_20261013.py
+ok  LEDGER_CONSOLIDATED.md       header stamp
+ok  LEDGER_CONSOLIDATED.md       L-436 block at the end of Bucket C
+ok  documentation/WHERE_WE_ARE.md not urgent: L-436
+ok  documentation/WHERE_WE_ARE.md settled: the comets line, three lines to two
+ok  documentation/WHERE_WE_ARE.md details: L-436 note, two lines made one
+
+patch applied (5 edits in 2 files); 130 lines above the page marker (cap 130)
+Stamps updated: the ledger header.
+
+NEXT:
+  1. Paste this output into your run record.
+  2. Run orrery_maintenance_run.py (the Ledger index rebuilds; L-436 appears
+     in section D.Feature-C with no score).
+  3. Move this script into documentation/; commit with the note; push.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. Run `patch_L276_2_gemini_recheck_20261013.py`.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L276_2_gemini_recheck_20261013.py
+ok  LEDGER_CONSOLIDATED.md       header stamp (requires patch_L436_1 to have run)
+ok  LEDGER_CONSOLIDATED.md       L-276 upd date
+ok  LEDGER_CONSOLIDATED.md       L-276 Note before its Gap line
+
+patch applied (3 edits in 1 file)
+Stamps updated: the ledger header.
+
+NEXT:
+  1. Paste this output into your run record.
+  2. Run orrery_maintenance_run.py (the Ledger index rebuilds).
+  3. Move this script into documentation/; commit with the note; push.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+3. Run `orrery_maintenance_run.py`.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261013T192756Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 2.2s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.2s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.0s  unchanged (1 checked, not written)
+  Objects export               0.1s  unchanged (1 checked, not written)
+  Drawings export              0.3s  unchanged (1 checked, not written)
+  Module atlas                 7.6s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               4.8s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Exact rows report            1.9s  unchanged (1 checked, not written) -- 13 of
+                                     41 exact rows printed at 43 lines (33
+                                     orrery, 10 gallery); 8 drawn only, 14 not
+                                     followed, 0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.2s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.0s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       1.7s  Export matches the store: sha256
+                                     2a1211f8cce2 on both sides; 127 rows
+                                     re-read, 56 not exported, 31 tokens; 320
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.1s  pass
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      2.0s  PASSING -- 13 printed exact rows each state
+                                     a count; 33 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.4s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 126 status lines in constants_new.py are
+                                     well formed; 54 rows carry none.
+  Row shape                    0.1s  All 183 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.2s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.2s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          16.8s  PASS -- all 311 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.0s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.4s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.5s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check        0.5s  PASS -- 3 of 3 planted faults caught;
+                                     hills_cloud 3600 dots, tilt 30.9 deg, sha256
+                                     a51e93118069
+  Position digits (L-401)      2.9s  PASS -- 13 of 13 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 6 period sentences
+  Orbit markers (L-431, L-401)   11.7s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.5s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Worksheet checker            7.7s  74 of 110 routed, 8 clean
+  Worksheet checker tests     16.5s  All 135 checks passed
+  Worksheet key round trip     1.1s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         21.8s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          54.9s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 280: orrery 116, Earth System 149,
+                                     stars 13, utilities 2.
+
+======================================================================
+  26 of 26 gating checkers passed -- 164.0s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 280: orrery 116, Earth System 149, stars 13, utilities 2.
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2229 file(s) examined, 7 written, 0 created, 0 removed, 5 rewritten identically
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      DATA_INVENTORY.md
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+4. Reinstall provenance-discipline 2.29 in Settings > Skills; copy PROJECT_INSTRUCTIONS v3.95 to the Project. -- done
+5. Hold `patch_L269_1` until its session confirms it still stands beside L-437.
+6. Move both patch scripts into `documentation/`; commit the new documentation files (build 3, L-438, L-437, the coordination note, the L-425 update, the L-436 note, the restamp brief) with them; push.
+
+The protocol's Mode 7 line about how Gemini reads the repo is now stale for this surface; the Note says it is corrected at the next protocol restamp rather than in a patch of its own. Good night, Tony.
+
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 **Session: OPEN: 10-12-26 2232: Opus: L-431 build 2 session**

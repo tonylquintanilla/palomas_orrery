@@ -76,9 +76,8 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - Orbital periods: JPL's own, every body, orrery and website; the
   centre that moves less in a year, digits by the larger error, the
   drawn orbit and markers alike; typed table last, marked. (Oct 11)
-- Comets listed by first apparition, oldest first. A colour is a
-  drawing choice, to tell apart bodies drawn together; switch it up
-  from the default goldenrod. (Oct 10)
+- Comets by first apparition, oldest first. A colour is a drawing
+  choice, to tell bodies apart; not the default goldenrod. (Oct 10)
 - Fuzzy boundaries come before the Sun and Earth rooms close. Every
   new check gets its dashboard button. (Oct 10)
 - The Hills cloud follows its paper (Fig. 3, its text), cited; to 10,000 AU. (Oct 10)
@@ -110,6 +109,7 @@ At the next design talk:
 Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows.
 2. Choosing a date, and animation.
+3. The orrery from your phone: L-436 (away from the machine), an idea.
 
 ## Where the details are  **>> UPDATED THIS SESSION**
 
@@ -122,8 +122,8 @@ Not urgent, in your order:
   `HANDOFF_L401_distance_build1_20261012.md`
 - The Horizons check's move: `HANDOFF_L395_horizons_check_move_brief_20261012.md`
 - Your notes of Oct 12: `WHERE_WE_ARE_10-12-26_2212_run_record.md`
-- L-421 (typed facts, inner Oort): `MANIFEST_L421_typed_facts_20261006.md`,
-  `HANDOFF_L421_typed_facts_20261008.md`, `HANDOFF_L421_oort_*`
+- L-421 (typed facts, inner Oort): `MANIFEST_L421_typed_facts_20261006.md`, `HANDOFF_L421_*`
+- L-436 (away from the machine): `DESIGN_L436_orrery_away_from_the_machine_20261013.md`
 - Your six rulings of Oct 12: `DESIGN_rulings_20261012.md`; the briefs for the
   dashboard's labels, L-425, L-424 with L-426 (`HANDOFF_..._brief_20261012.md`)
 - The reasoning behind the order: `MASTER_PLAN_INTERACTIVE_GALLERY.md`

@@ -387,6 +387,12 @@ provenance-discipline 2.29, protocol v3.95), built on 70202e3b.
 Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5
 (L-437 closed on Tony's run; a Note on L-269's unrun patch), built on
 f59c84b2.
+Module updated: October 13, 2026 with Anthropic's Claude Fable 5.1
+(L-436 opened: the orrery away from the machine, an idea on record),
+built on 28e1b7d.
+Module updated: October 13, 2026 with Anthropic's Claude Fable 5.1
+(L-276 Note: Gemini re-checked, no repository access on this surface),
+built on 28e1b7d.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -604,7 +610,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*241 live items; 225 need attention (`!`); 167 RICE-scored; 190 closed (section C + O.Done/W.Done); 6 retired (never reused): L-059, L-081-084, L-436. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*242 live items; 226 need attention (`!`); 167 RICE-scored; 190 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -828,6 +834,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-017 (#7) | Tooltip rewiring globals() -> config fields | OPEN | 1.0 | 2026-06-21 |
 | ! | L-067 | measure_animation_html.py file-browser dialog (B5) | OPEN | 0.8 | 2026-06-23 |
 | ! | L-014 (#2) | Asteroid-belt migration decision | OPEN | 0.4 | 2026-06-20 |
+| ! | L-436 | The orrery away from the machine: the linked session from the phone; not Pyodide (idea) | OPEN | -- | 2026-10-13 |
 
 ### D.Loose end to reconcile
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -941,7 +948,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-221 | The master plan is the roadmap, and it outranks RICE | DONE | 10.8 | 2026-08-22 |
 |  | L-290 | Relay anchors must name the protocol and skills, not the code SHA alone | DONE | 10.8 | 2026-09-07 |
 |  | L-198 | Claim vocabulary: the units the scanner could not see | DONE | 10.2 | 2026-08-17 |
-|  | L-276 | Mode 7 tells relay partners they cannot read the repo, and they can | DONE | 8.5 | 2026-09-03 |
+|  | L-276 | Mode 7 tells relay partners they cannot read the repo, and they can | DONE | 8.5 | 2026-10-13 |
 |  | L-341 | The dashboard: a search that names the group, and two rulings | DONE | 8.5 | 2026-09-19 |
 |  | L-259 | The Sun exhibit ships -- the assembler runs in a visitor's browser | DONE | 8.3 | 2026-08-29 |
 |  | L-217 | The Part A / Part B dispatch split is a check that cannot fail | DONE | 8.1 | 2026-08-19 |
@@ -15717,7 +15724,7 @@ corrections in view; L-278; PROJECT_INSTRUCTIONS.md Part 3 A Check That
 Cannot Fail Is Not Passing.
 
 #### [L-276] Mode 7 tells relay partners they cannot read the repo, and they can
-<!-- L:276 status:DONE upd:2026-09-03 section:C flag: rice:3/3/95/1 -->
+<!-- L:276 status:DONE upd:2026-10-13 section:C flag: rice:3/3/95/1 -->
 - **The sentence.** PROJECT_INSTRUCTIONS.md Part 1, Mode 7, Documents as
   handoffs: "the receiving AI has zero independent repo access, so an
   un-anchored document is unverifiable input."
@@ -15751,6 +15758,33 @@ trusting a handoff over the render, one layer up.
   is fetched at a SHA; commit history is not visible; not available on
   mobile. Written into Mode 7's AI Roles so it does not have to be
   rediscovered. Gemini is the second case in the corrected clause.
+**Note (2026-10-13): Gemini re-checked, and this surface has no repository
+access by any route.** Tony ran two tests against Gemini ("Argon") in the
+Gemini web app, written in the coordination session of 2026-10-12 and 13
+so that a model answering from memory could not pass: the HEAD SHA and
+subject of both repositories, a line of a file at HEAD, and the
+provenance-discipline version line at HEAD (2.29) and at 400a9615 (2.28).
+First with the repository root URLs: every item "cannot fetch"; the root
+pages opened but returned an empty page shell, and it reported that it
+can open only a URL pasted whole and cannot build one. Second with every
+URL given whole (raw.githubusercontent.com at main and at the pinned
+SHA, api.github.com for the commits): every item "cannot fetch"; all
+five addresses were refused before any content arrived
+(URL_FETCH_STATUS_MISC_ERROR). No import of a repository and no GitHub
+integration were offered in that session. It invented nothing and
+offered to work from pasted text. So the Gemini import described at
+this item's close (checked 2026-09-03) is not what this surface does;
+whether it still exists in another Gemini app is not known. For Gemini,
+a Mode 7 document carries the text it is to read, and the anchor says
+which commit that text came from -- the second case of the clause
+above, unchanged. Attachments DO work, including a whole repository as
+a zip (Tony, 2026-10-13: "it can accept attachments even large repos"),
+so the working form for Gemini is: attach the files or the zip, and the
+anchor says which commit they were taken from. GitHub serves a zip of
+any commit at github.com/<user>/<repo>/archive/<SHA>.zip, which makes
+the anchor exact. No rule changes; Mode 7's AI Roles line on how Gemini
+reads the repo is stale for this surface and is corrected at the
+protocol's next restamp, not in a patch of its own.
 **Gap:** none. The UI copy of PROJECT_INSTRUCTIONS.md is the third
 store; Tony re-uploads it after the push.
 **Ref:** PROJECT_INSTRUCTIONS.md Part 1 Mode 7 (v3.53);
@@ -23027,6 +23061,48 @@ of globals(), so a rename surfaces as a missing key, not a silent drop.
   path. Small, isolated tooling.
 **Gap:** add filedialog.askopenfilename to measure_animation_html.py.
 **Ref:** spun out of L-048 (closed 2026-06-23).
+
+#### [L-436] The orrery away from the machine: the linked session from the phone; not Pyodide (idea)
+<!-- L:436 status:OPEN upd:2026-10-13 section:D.Feature-C flag: rice: -->
+- **Opened 2026-10-13 on first mention, an idea and not a plan.** Tony,
+  on what drives it: "i am often away from my machine." Three questions
+  across 2026-10-12 and 13: could the dashboard be operated from the
+  phone through the linked session; could a patch and the maintenance
+  run be run that way, stopping at the push; could the orrery itself be
+  run from the phone (the Sun, Mercury, Venus, Sedna and Voyager 1 at 0
+  hours, the hovers read back); and could the orrery's window be
+  converted to Pyodide to run it remotely.
+- **What the linked session can do today** (measured in that session):
+  read and write files in the repository folder (done: patches and
+  briefs saved straight into it on 2026-10-12 and 13); run a command on
+  the computer (not yet tried; the first test is the maintenance run
+  alone). It cannot click a window, cannot see a render, and the push
+  stays in GitHub Desktop by Tony's choice. So "run the patch and the
+  maintenance run, stop at the push" works for the mechanical steps;
+  the look (Mode 5) and the push wait for the machine.
+- **Not Pyodide.** The window is tkinter and would be rebuilt as a page;
+  Horizons does not permit a browser page to call it, so a relay would
+  be hosted; the caches are hundreds of megabytes read from disk. The
+  protocol's own words: the assembler exists because the orrery's Python
+  requirement is a wall; the website IS the orrery running remotely,
+  and stage 15 of the road is that goal. A port would be a second
+  attempt at it with the hard parts left in.
+- **Two routes that fit, if taken up:** a headless hover script in the
+  orrery (names and a date in; the hovers printed through the same
+  dispatch the plot uses; the HTML saved), which the linked session can
+  run from the phone, giving the words and digits but not the render;
+  and the website's rooms, which already open on the phone and which
+  L-431 build 3 and stage 11 are filling.
+  **Tony-action (decide, not urgent):** whether the hover script joins
+  L-401 build 3's scope or waits. Default: waits; a convenience, not a
+  slice.
+  **Tony-action (do, when convenient):** the first command from the
+  phone, the maintenance run alone, its output read back.
+**Gap:** not scoped; an idea on record. Unscored until opened (an item
+outside any list gets a coarse score then).
+**Ref:** `documentation/DESIGN_L436_orrery_away_from_the_machine_20261013.md`;
+PROJECT_INSTRUCTIONS.md, The Orrery and the Assembler; L-401 (build 3's
+slices); L-431 (build 3, the website); L-363 (the Solar System room).
 
 ### D.Parked (Tony's explicit call) `[per chain]`
 
