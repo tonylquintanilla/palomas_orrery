@@ -1932,7 +1932,7 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
   2. Reinstall provenance-discipline 2.29 (Settings > Skills); copy
      PROJECT_INSTRUCTIONS.md (v3.95) to the Project's instructions and to
      documentation/project_instructions_v3_95.md. -- done
-  3. Move this script into documentation/; commit and push. -- 
+  3. Move this script into documentation/; commit and push. -- f59c84b2d00ccdb0d5fb8fcf2c5d075189cf9c72
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 2. Run `orrery_maintenance_run.py`. Check that the scanner row reads like the quote above.
@@ -1941,3 +1941,14 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 5. Move the patch into `documentation/`, then commit and push.
 
 The full record is in `documentation/HANDOFF_L437_tier1_by_domain_20261013.md`, which the patch writes.
+
+The patch is saved in your orrery folder as patch_L269_1_scanner_breakdown_20261013.py. After it, the maintenance run’s summary shows the breakdown under the scanner’s line. When I ran it on a clean copy of your repo, the bottom looked like this:
+
+    Provenance scanner          0 TIER-1 -- the push gate holds
+      Whole tree, Tier-1: 281 -- earth_science 149, orrery 118,
+      stars 12, utilities 2
+      No file's Tier-1 count rose since the previous run.
+
+If any file’s count goes up, that last line names the file with its old and new counts. If the run can’t find the breakdown in the scanner’s output, it says “NOT READ” rather than leaving the line out. -- correct
+
+There’s a new check for this, “Maintenance report”, with its own dashboard button. It plants three faults and catches each one by name. That makes 26 checks in the maintenance run, and all 26 passed on the clean copy.
