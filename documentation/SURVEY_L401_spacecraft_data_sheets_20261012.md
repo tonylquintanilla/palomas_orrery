@@ -83,6 +83,9 @@ Horizons' "2.3045(10)^6 km" (the sheet's way of writing 2.3045 x 10^6).
   every 30 days i believe." Recorded on L-395 (the Horizons check), to
   be built in its own session: on its 30-day cycle the check re-reads
   each sheet and reports a moved "Revised:" date or a changed stated
-  uncertainty, for a person; it never edits a row.
+  uncertainty, for a person; it never edits a row. The same day Tony
+  ruled that the check moves into the orrery's maintenance run, beside
+  the objects export; the brief is
+  `documentation/HANDOFF_L395_horizons_check_move_brief_20261012.md`.
 
 Survey written October 2026 with Anthropic's Claude Opus 5.5.

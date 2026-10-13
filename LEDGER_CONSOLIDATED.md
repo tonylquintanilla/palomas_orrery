@@ -364,6 +364,11 @@ Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5
 October 11 speed ruling; L-431's period sentence reworded; L-399, the
 orrery now fetches a small body's own uncertainty;
 horizons-orbital-mechanics 1.3), built on 47815de2.
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5
+(L-401 build 1's look: the surface line back with its old ruling, the
+period sentence for planets and moons, the sky position under one
+heading; L-431, L-034 noted; L-395, the Horizons check moves to the
+orrery's maintenance run, ruled and briefed), built on c5dff250.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -772,7 +777,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-125 | Color/RGB values excluded from provenance-scanner claims -- report-level disclosure (project-wide) | OPEN | 3.8 | 2026-07-16 |
 | ! | L-032 (#41) | Sun legend ordering (ordered dispatch iteration; no manual fix) | OPEN | 1.5 | - |
 | ! | L-033 | Comet plotted-period trace visibility (line weight/color; O6b) | OPEN | 1.5 | 2026-06-10 |
-| ! | L-034 | Center-body hover "Distance to Center Surface" negative-radius formatting | OPEN | 1.5 | 2026-06-21 |
+| ! | L-034 | Center-body hover "Distance to Center Surface" negative-radius formatting | OPEN | 1.5 | 2026-10-12 |
 | ! | L-030 (#17) | GEO info-marker position | OPEN | 1.0 | - |
 | ! | L-031 (#18) | Uranus gossamer ring visibility | OPEN | 0.9 | - |
 | ! | L-037 | WARNING: Unknown object type 'satellite' (spurious; handled downstream) | OPEN | 0.9 | 2026-06-15 |
@@ -1598,6 +1603,13 @@ L-395.
   moon, or a body it does not hold), or that it gives no uncertainty
   for this period, gives no period, found more than one match, or
   could not be reached. Tony's word on it comes at L-401's look.
+- **2026-10-12, Tony's word at L-401's look:** "unclear. why mention
+  the small body data base it does not apply." A planet or a moon now
+  reads only "Rounded to how much the period changes in a year." The
+  database clause stays for an asteroid or comet whose lookup gave no
+  uncertainty (`orbital_period._sbdb_asked`). Confirmed as recommended;
+  test_position_digits.py checks both cases and catches a planted
+  return of the old wording.
 - **Found 2026-10-12 (L-401's review):** `_is_small_body` reads id_type
   only, so C/2025_K1 (record 90004912, id_type 'id') is not asked of
   SBDB, and its hover says the database "has no entry". One class,
@@ -1608,8 +1620,7 @@ L-395.
   L-401's 2xr method.
 **Gap:** three builds, in order (the record's section 3):
 1. The period in the orrery: BUILT and working against JPL
-   (2026-10-11). Open: Tony's word on the hover's wording, with the
-   reworded sentence, at L-401's look (2026-10-12).
+   (2026-10-11); its words settled at L-401's look (2026-10-12).
 2. The drawn ellipse around the period's centre, and the markers from
    the fetched period (Mode 5, Tony's look).
 3. The website: the export carries each period; every room's hover
@@ -2268,11 +2279,65 @@ tools/gallery_cache_builder.py (trust); L-149; L-150; L-363; L-398.
   - `format_maybe_float` and `format_km_float` are unchanged; the hover
     no longer calls them, and their other callers are the other
     slices' sites.
-**Gap:** Tony's run of patch_L401_3 (its live check asks JPL for the
-five bodies) and his look at the five hovers, where he gives his word
-on the words: the no-error sentences, the speed sentence, the reworded
-period sentence, the light-time line, the surface line's presence or
-absence. Then the other slices, one class (the record's section 3):
+- **2026-10-12, Tony's run and look** [his run record,
+  `WHERE_WE_ARE_10-12-26_1025_run_record.md`; patch_L401_3 applied
+  (67 edits, 4 files created), the maintenance run 24 of 24, 0 Tier-1;
+  pushed at 686b2d6 and c5dff250; his plots of the Sun view (Mercury,
+  Sedna, Encke, Voyager 1) and of Io from the Sun and from Jupiter,
+  read hover by hover]. His verdicts, line by line in chat:
+  - The no-error sentences, the Voyager sentence, the speed sentences
+    and the one light-time line: "yes" to each.
+  - The period sentence: "unclear. why mention the small body data
+    base it does not apply." Fixed on L-431: a planet or moon no
+    longer names the database.
+  - The sky line: "unclear. what is the sky line ... are the two forms
+    clear side by side? -- no. we should discuss." Ruled, option B,
+    "Confirmed": a heading "Sky position seen from Earth:", the two
+    coordinates, one uncertainty line, "Uncertainty: +/-0.10 arcsec
+    (JPL, 3-sigma)" or "Uncertainty: none given by JPL with this
+    position". The last word was "for this body" as offered; changed
+    in the build, because the Voyagers' sheets do state a figure, for
+    2030, so "none for this body" would be false for them.
+  - **The surface line, an old ruling restored.** Build 1 had dropped
+    it for the Sun, Jupiter, Saturn, Uranus, Neptune and Planet 9, on
+    the three reviewers' proposal ("only where the centre has a solid
+    surface"), which the design record left for this look. Tony:
+    "previously we measured from 1 radius", and "we decided 'surface'
+    meant the solid surface or the gas surface as defined as one
+    radius" -- decided "more than a year ago before the ledger
+    started". Restored for every centre with a radius in
+    `CENTER_BODY_RADII`, worded as before; the checker plants its loss
+    and catches it ("SURFACE LINE DROPPED").
+  - **What one radius is, for a body without a solid surface**
+    (confirmed as recommended): a giant planet's radius is measured to
+    the level where the pressure is 1 bar; IAU 2015 Resolution B3: its
+    nominal Jupiter radii "correspond respectively to the one-bar
+    equatorial and polar radii of Jupiter". The Sun's is the
+    photosphere, where the gas turns opaque: the same resolution, its
+    nominal solar radius "corresponds to the solar photospheric radius"
+    (arXiv:1510.07674, read 2026-10-12, Claude Opus 5.5). Saturn's,
+    Uranus's and Neptune's rows cite Archinal et al. 2018; that the
+    report states 1 bar itself is NOT yet confirmed. The units, kept
+    apart (Tony asked for 1 atm): 1 bar = 100,000 Pa exactly; 1 atm
+    (one standard atmosphere) = 101,325 Pa exactly, CGPM 1954
+    Resolution 4 (via Wikipedia, "Standard atmosphere (unit)", read
+    2026-10-12); 1 atm is about 1.3% more than 1 bar. The convention
+    is 1 bar. The orrery's own shell texts for Saturn, Uranus and
+    Neptune already say 1 bar.
+  - **The lesson, for the record:** a decision older than the ledger
+    lives only in what the code does. When a build would remove
+    something the orrery already does, it treats that as an old
+    decision and asks first.
+- **2026-10-12, the look's fixes built** (patch_L401_4, built on
+  c5dff250): `position_accuracy.py` (the surface line for every centre
+  with a radius), `orbital_period.py` (the database clause for
+  asteroids and comets only), `celestial_coordinates.py` (option B),
+  `test_position_digits.py` (13 planted faults, each caught by name; a
+  period-sentence check of six statuses). Maintenance run 24 of 24,
+  0 Tier-1 on the gate path.
+**Gap:** Build 1 is accepted, with the look's three fixes; a glance at
+the new sky heading and the giants' surface line after patch_L401_4.
+Then the other slices, one class (the record's section 3):
 the apsidal and encounter markers (with L-431's build 2), the orbit
 hovers in `idealized_orbits.py`, the fly-to buttons, the parameters
 window, the animation's 2xr.
@@ -2704,16 +2769,38 @@ is enough. L-422 holds the shape; this item holds the check.
   spacecraft's sheet on its 30-day cycle and reports, for a person, a
   sheet whose "Revised:" date moved or whose stated uncertainty
   changed; it never edits a row. Built in its own session (a change to
-  a checker gets its own session, Oct 8); which repository keeps the
-  sheet dates is that session's first question.
-**Gap:** The check is built and runs every day. Still open: the
-spacecraft data sheets' 30-day re-read (above); fields the
+  a checker gets its own session, Oct 8).
+- **2026-10-12, the check moves to the orrery, ruled** (in the L-401
+  build session). Tony: "shouldn't the horizons check live in the
+  orrery repo? the orrery stores and serves the data not the other way
+  around." Then: "can we make the Horizons check part of the exporter
+  routine?" The shape, confirmed "Yes":
+  - a row of the orrery's maintenance run, beside `export_objects.py`,
+    asking JPL only about the entries that are due, so most runs ask
+    nothing; the sheets' 30-day re-read rides the same row;
+  - the confirmations live in the orrery's `data/` and the export
+    carries them, so the website's copy says when JPL last confirmed
+    each object;
+  - the website's daily run loses step 2; its offline check stays and
+    reads the dates from the pulled export. This replaces Tony's
+    placement of 2026-10-07.
+  On JPL being down: "Horizons seldom is down. The last time was the
+  Pasadena wild fire last year." On the orrery's run going unrun for a
+  while -- the website's daily check goes red on the day a
+  confirmation turns 30 days old, names the objects, and still builds
+  and serves -- Tony: "Yes that works."
+  Brief: `documentation/HANDOFF_L395_horizons_check_move_brief_20261012.md`,
+  with two (decide) items for that session: how a changed sheet is
+  cleared, and whether the identity check widens past the thirteen.
+**Gap:** The check is built and runs every day. Still open: moving it
+into the orrery's maintenance run with the spacecraft data sheets'
+30-day re-read (the brief above); fields the
 list lacks (a moon's parent, a clean kind); the remaining served
 objects (moon, io, titan, pluto, charon, voyager_1, which have no key
 yet); the display-name rename; MAPS and 3I/ATLAS checked live when
 served; L-391 to L-394. The numbers in the other descriptions are
 L-403. Encke's period is L-431.
-**Ref:** `documentation/DESIGN_L395_horizons_check_20261007.md`; `documentation/HORIZONS_ANSWERS_L395_20261007.md`; `documentation/HANDOFF_L395_horizons_check_build_20261010.md`; gallery `tools/horizons_check.py`, `tools/check_horizons_confirmations.py`, `tools/test_horizons_check.py`, `data/horizons_confirmations.json`; `celestial_objects.py`; gallery `data/objects_config.json`; `export_constants.py`; gallery `tools/pull_constants_export.py` and `tools/mirror_constants.py` (the model); skills/horizons-orbital-mechanics/SKILL.md; L-363; L-364; L-391 to L-394.
+**Ref:** `documentation/HANDOFF_L395_horizons_check_move_brief_20261012.md`; `documentation/DESIGN_L395_horizons_check_20261007.md`; `documentation/HORIZONS_ANSWERS_L395_20261007.md`; `documentation/HANDOFF_L395_horizons_check_build_20261010.md`; gallery `tools/horizons_check.py`, `tools/check_horizons_confirmations.py`, `tools/test_horizons_check.py`, `data/horizons_confirmations.json`; `celestial_objects.py`; gallery `data/objects_config.json`; `export_constants.py`; gallery `tools/pull_constants_export.py` and `tools/mirror_constants.py` (the model); skills/horizons-orbital-mechanics/SKILL.md; L-363; L-364; L-391 to L-394.
 
 #### [L-394] A card cannot say which body it belongs to (gallery, Studio)
 <!-- L:394 status:OPEN upd:2026-09-29 section:A flag: rice: -->
@@ -22127,7 +22214,7 @@ sweep missed. None found -> close. (Deferred until run.)
 - Comet plotted-period trace visibility (line weight/color; O6b June 10).
 
 #### [L-034] Center-body hover "Distance to Center Surface" negative-radius formatting
-<!-- L:034 status:OPEN upd:2026-06-21 section:D.Cosmetic flag: rice:1/1/75/0.5 -->
+<!-- L:034 status:OPEN upd:2026-10-12 section:D.Cosmetic flag: rice:1/1/75/0.5 -->
 - **What it is.** The detailed hover already shows two distances correctly: a
   distance to the center body's CENTER (r=0) and a distance to its SURFACE. The
   bug is only on the CENTER BODY'S OWN hover: because the formatter treats the
@@ -22138,7 +22225,11 @@ sweep missed. None found -> close. (Deferred until run.)
 - **Fix.** In format_detailed_hover_text, special-case the center body so its own
   surface line reads sensibly (drop the misleading minus, or relabel). Mode-5 to
   confirm the exact wording you want.
-**Gap:** decide display wording (Mode-5), then a targeted edit to format_detailed_hover_text. Cosmetic; zero functional risk.
+- **2026-10-12, L-401 build 1:** the centre body's own hover no longer
+  prints a surface line at all; it says "This body is the center of the
+  plot." (`position_accuracy.distance_speed_lines`). Tony saw it on the
+  Sun and on Jupiter at build 1's look and raised nothing.
+**Gap:** Tony's word that build 1's wording settles it; then close.
 
 #### [L-035] Solar shell hovertext <br> vs \n context mismatch (C6b)
 <!-- L:035 status:OPEN upd:2026-06-11 section:D.Cosmetic flag: rice:2/2/100/1 -->

@@ -285,4 +285,52 @@ window's hover.
 - (do) Reinstall horizons-orbital-mechanics 1.3 to the account
   (Settings > Skills) from `skills/horizons-orbital-mechanics/SKILL.md`.
 
+## 8. Tony's look, and its fixes (added 2026-10-12, at c5dff250)
+
+Tony ran patch_L401_3 and the maintenance run (24 of 24, 0 Tier-1) and
+pushed at c5dff250; his run record is
+`documentation/WHERE_WE_ARE_10-12-26_1025_run_record.md`. He plotted the
+Sun view (Mercury, Sedna, Encke, Voyager 1) and Io from the Sun and from
+Jupiter, and sent the files; each hover was read out of them and matched
+section 6. Io's 423,260 km was checked against its plotted position:
+423,260.07 km. His verdicts, line by line in chat:
+
+- The no-error sentences, the Voyager sentence, the speed sentences, the
+  one light-time line: "yes".
+- **The surface line, restored.** "previously we measured from 1
+  radius"; "we decided 'surface' meant the solid surface or the gas
+  surface as defined as one radius", more than a year ago, before the
+  ledger. Build 1 had dropped it for the Sun and the giant planets on
+  the reviewers' proposal. Now every centre with a radius gets it, as
+  before. One radius is the 1-bar level for a giant planet and the
+  photosphere for the Sun (IAU 2015 Resolution B3); 1 bar = 100,000 Pa,
+  1 atm = 101,325 Pa (CGPM 1954), the convention is 1 bar. That
+  Archinal et al. 2018 states 1 bar for Saturn, Uranus and Neptune is
+  not yet confirmed. Detail on L-401.
+- **The period sentence.** "why mention the small body data base it
+  does not apply." A planet or moon now reads only "Rounded to how much
+  the period changes in a year." Confirmed as recommended.
+- **The sky line.** "are the two forms clear side by side? -- no."
+  Option B, confirmed: "Sky position seen from Earth:", the two
+  coordinates, one uncertainty line. The words offered were "none given
+  by JPL for this body"; built as "none given by JPL with this
+  position", because the Voyagers' sheets give a figure for 2030.
+
+The lesson: a decision older than the ledger lives only in what the
+code does. When a build would remove something the orrery already
+does, it treats that as an old decision and asks first.
+
+Also ruled in this session, on L-395 (the Horizons check): the check
+moves into the orrery's maintenance run, beside the objects export.
+Brief: `documentation/HANDOFF_L395_horizons_check_move_brief_20261012.md`.
+
+Built by `patch_L401_4_look_close_20261012.py`: `position_accuracy.py`,
+`orbital_period.py`, `celestial_coordinates.py`,
+`test_position_digits.py` (13 planted faults, and a check of the period
+sentence for six database statuses), and the records. Maintenance run
+24 of 24, 0 Tier-1 on the gate path.
+
+- (do) Run patch_L401_4, then the maintenance run; hover Io from
+  Jupiter once; push.
+
 Session record written October 2026 with Anthropic's Claude Opus 5.5.

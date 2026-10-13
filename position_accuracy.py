@@ -57,6 +57,9 @@ Domain: orrery
 
 Module created: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-401,
 build 1, the body hover).
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-401,
+Tony's look: the surface line is back for every centre with a radius,
+the Sun and the giant planets included, measured from one radius).
 """
 
 import math
@@ -151,9 +154,13 @@ SPEED_FLOOR_EXPONENT_KM_S = -3
 # Source+: recommended") -- one meter per second, printed as 0.001 km/s,
 # Source+: for a speed with no stated error. The exponent of ten in km/s.
 
-# Centres with no solid surface: the surface line is left out for them,
-# all three reviewers agreeing (brief section 1). Words, not values.
-NO_SOLID_SURFACE = {'Sun', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Planet 9'}
+# The surface line: every centre with a radius in CENTER_BODY_RADII gets
+# one, as the orrery always did. "Surface" is the solid surface, or for a
+# body without one, one radius: the 1-bar level of a giant planet, the
+# photosphere of the Sun. Tony's ruling, made more than a year before the
+# ledger began and restated at build 1's look, 2026-10-12 (L-401). Build 1
+# had left the line out for the Sun and the giant planets on the
+# reviewers' word; the look put it back.
 
 # The one local pair JPL states an accuracy for: the Moon's orbit about
 # Earth (and so about the Earth-Moon barycentre).
@@ -561,8 +568,7 @@ def distance_speed_lines(acc, distance_au, speed_au_per_day, center_name,
         else:
             lines.append('Distance: %s light-hours' % _fmt(
                 dist_km * lh_per_km, err_km * lh_per_km))
-        if (not is_center and center_radius_km
-                and center_name not in NO_SOLID_SURFACE):
+        if not is_center and center_radius_km:
             surf = dist_km - center_radius_km
             s = _fmt(surf, err_km)
             if surf < 0:

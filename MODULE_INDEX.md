@@ -11,16 +11,18 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 152  
-**Total Lines of Code (non-blank):** 119,903  
-**Total Public Functions/Classes:** 1,389
+**Total Python Files:** 154  
+**Total Lines of Code (non-blank):** 120,442  
+**Total Public Functions/Classes:** 1,392
 
 ## Classification Coverage
 
-**Undetermined role (8).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (10).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
 - `patch_L395_5_horizons_name_and_encke_20261010.py`
+- `patch_L401_4_look_close_20261012.py`
+- `patch_L433_1_where_we_are_20261012.py`
 - `test_drawings_export.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
@@ -28,9 +30,11 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (1).** No valid `Domain:` tag.
+**Undetermined domain (3).** No valid `Domain:` tag.
 
 - `patch_L395_5_horizons_name_and_encke_20261010.py`
+- `patch_L401_4_look_close_20261012.py`
+- `patch_L433_1_where_we_are_20261012.py`
 
 
 ---
@@ -106,7 +110,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `apsidal_markers.py` | Perihelion, aphelion, perigee, and apogee marker generation. (1,739 lines) |
 | `catalog_selection.py` | Unified star selection from Hipparcos and Gaia catalogs. (94 lines) |
-| `celestial_coordinates.py` | Module for calculating and formatting Right Ascension and Declination coordinates for celestial objects in Paloma's Orrery. (216 lines) |
+| `celestial_coordinates.py` | Module for calculating and formatting Right Ascension and Declination coordinates for celestial objects in Paloma's Orrery. (225 lines) |
 | `coordinate_system_guide.py` | Educational reference for J2000 Ecliptic Coordinate System (552 lines) |
 | `data_acquisition.py` | Unified module for both distance- and magnitude-based queries, integrating the simpler logic of data_acquisition_distance.py. (222 lines) |
 | `data_acquisition_distance.py` | Module for fetching stellar data based on distance. (172 lines) |
@@ -118,9 +122,9 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `idealized_orbits.py` | Keplerian orbit ellipse construction and satellite orbit models. Computes and plots idealized (Keplerian) orbit paths from orbital elements, with osculating element support for high-accuracy visualization. Handles elliptical, parabolic, and hyperbolic orbits. Includes specia... (6,604 lines) |
 | `object_type_analyzer.py` | Object Type Analysis and Report Generation Module Provides comprehensive analysis of astronomical data including object types, data quality metrics, and full report generation. (756 lines) |
 | `orbital_elements.py` | Standalone data module containing orbital element dictionaries. NO IMPORTS - Pure data only to avoid circular dependencies. (1,296 lines) |
-| `orbital_period.py` | A body's orbital period from JPL, printed to the digits its errors earn. (458 lines) |
+| `orbital_period.py` | A body's orbital period from JPL, printed to the digits its errors earn. (470 lines) |
 | `pole_frames.py` | The matrix that turns coordinates measured about a pole into the drawing's frame, the ecliptic of J2000. (72 lines) |
-| `position_accuracy.py` | How well JPL knows a plotted position, and the hover's distances and speeds printed to the digits that knowledge earns. (630 lines) |
+| `position_accuracy.py` | How well JPL knows a plotted position, and the hover's distances and speeds printed to the digits that knowledge earns. (636 lines) |
 | `simbad_manager.py` | Enhanced SIMBAD Query Manager with configurable rate limiting and retry logic. This module replaces simbad_test.py and provides robust SIMBAD querying capabilities. (1,030 lines) |
 
 ---
@@ -235,7 +239,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_dimensions.py` | - a derived constant's unit follows from its arithmetic. (591 lines) |
 | `test_objects_export.py` | - data/objects_export.json says what the object list in celestial_objects.py holds, and no entry in the list writes a field twice. (173 lines) |
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (224 lines) |
-| `test_position_digits.py` | The orrery's body hover prints each distance and speed to the digits JPL's errors earn, and proof that this check can fail. (733 lines) |
+| `test_position_digits.py` | The orrery's body hover prints each distance and speed to the digits JPL's errors earn, and proof that this check can fail. (806 lines) |
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (485 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (120 lines) |
 | `test_row_run.py` | Pins for L-414: a row's citation context is its own comment run, declared rows are their own kind, and the gate-path figure is computed and recorded by name. (370 lines) |
@@ -255,6 +259,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
 | `patch_L395_5_horizons_name_and_encke_20261010.py` | - the orrery half of the Horizons check (L-395): JPL's exact name on each keyed entry, Halley keyed, Encke's own entry, and the export that carries them. (371 lines) |
+| `patch_L401_4_look_close_20261012.py` | - Tony's look at build 1 of L-401 (the orrery's distance digits), and its three fixes; with the brief for moving the Horizons check into the orrery (L-395). (240 lines) |
+| `patch_L433_1_where_we_are_20261012.py` | - Where We Are, after the six rulings of October 12, 2026 (L-433 the road; also L-136, L-424, L-425, the dashboard's labels, the Horizons check's clearing rule). (199 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (173 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |

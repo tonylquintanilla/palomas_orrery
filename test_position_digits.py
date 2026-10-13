@@ -27,6 +27,8 @@ right finding, by name:
     a no-error body ignoring its centre's error  NO-ERROR BODY IGNORES ITS CENTRE
     a zero sigma taken as a figure               ZERO SIGMA TAKEN AS A FIGURE
     the Voyagers' data-sheet figures dropped     SPACECRAFT DATA-SHEET FIGURE IGNORED
+    the surface line dropped for a giant planet  SURFACE LINE DROPPED
+    the small-body database named for a planet   DATABASE MENTIONED FOR A PLANET OR MOON
 
 The last five go beyond the brief's six. The first two prove the static
 plot still asks for a small body's uncertainty and reads Horizons'
@@ -36,7 +38,11 @@ pair must print the same digits from either end, and every listed
 object is hovered from the Sun, Earth and Neptune. The fifth comes
 from Tony's ruling of the same day (option A): a spacecraft whose
 Horizons data sheet states a predicted pointing angle (the Voyagers)
-prints by that angle at its distance from Earth.
+prints by that angle at its distance from Earth. The twelfth comes from
+Tony's look at build 1 (2026-10-12): every centre with a radius gets the
+surface line, measured from one radius, the Sun and the giant planets
+included; and the period sentence does not name JPL's small-body
+database for a planet or a moon, which it does not hold.
 
 Then it judges the real code. The last line starts "POSITION DIGITS:",
 which the maintenance run quotes, and says what was compared and how many
@@ -53,6 +59,10 @@ Domain: dev_tools
 
 Module created: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-401,
 build 1).
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-401,
+Tony's look: the surface line for every centre with a radius, and the
+period sentence's database clause for asteroids and comets only, each
+with a planted fault).
 """
 import math
 import os
@@ -70,6 +80,7 @@ import position_accuracy as pa
 from celestial_objects import OBJECT_DEFINITIONS
 from orbital_elements import parent_planets
 from visualization_utils import format_detailed_hover_text
+import orbital_period
 
 # ============================================================================
 # THE CHECKER'S OWN ARITHMETIC (shares nothing with position_accuracy.py)
@@ -332,18 +343,25 @@ def judge_fixture(fx, findings, counts):
     else:
         distance_lines.append(('light-hours', r'Distance: ([-\d,.]+) light-hours$',
                                lm / 60, err_lm / 60))
+    # Every centre with a radius gets the surface line, measured from one
+    # radius: the solid surface, or the 1-bar level of a giant planet and
+    # the Sun's photosphere (Tony's ruling, restated 2026-10-12, L-401).
     radius = cn.CENTER_BODY_RADII.get(centre)
-    if radius and centre not in ('Sun', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Planet 9'):
+    if radius:
         distance_lines.append(('surface', r'Distance to Center Surface: ([-\d,.]+)',
                                dist_km - radius, err_km))
     elif _find(lines, r'Distance to Center Surface'):
-        findings.append(('SURFACE LINE WITHOUT A SURFACE', '%s: %s has no solid surface'
-                         % (tag, centre)))
+        findings.append(('SURFACE LINE WITHOUT A RADIUS', '%s: %s has no radius in '
+                         'CENTER_BODY_RADII' % (tag, centre)))
 
     for unit, pat, value, err in distance_lines:
         m = _find(lines, pat)
         if not m:
-            findings.append(('LINE DROPPED', '%s: no %s line' % (tag, unit)))
+            if unit == 'surface':
+                findings.append(('SURFACE LINE DROPPED', '%s: no surface line, though '
+                                 '%s has a radius' % (tag, centre)))
+            else:
+                findings.append(('LINE DROPPED', '%s: no %s line' % (tag, unit)))
             continue
         counts['lines'] += 1
         p = expected_place(value, err)
@@ -424,19 +442,25 @@ def judge_fixture(fx, findings, counts):
         if w in flat:
             findings.append(('FALSE OR MISSING WORDS', '%s: says "%s"' % (tag, w)))
 
-    # The sky position: JPL's fetched figure, or plain words; never a typed value.
-    note = [ln for ln in lines if ln.strip().startswith('(apparent')]
-    if not note:
-        findings.append(('LINE DROPPED', '%s: no sky-position note' % tag))
+    # The sky position (Tony's look, 2026-10-12, option B): one heading, the
+    # two coordinates, one uncertainty line -- JPL's fetched figure, or
+    # plain words; never a typed value.
+    if 'Sky position seen from Earth:' not in lines:
+        findings.append(('WRONG SKY NOTE', '%s: no "Sky position seen from Earth:" heading'
+                         % tag))
+    note = [ln for ln in lines if ln.strip().startswith('Uncertainty:')]
+    if len(note) != 1:
+        findings.append(('LINE DROPPED', '%s: %d sky-position uncertainty lines, expected 1'
+                         % (tag, len(note))))
     else:
         counts['lines'] += 1
         if od.get('ra_3sigma') is None:
-            if any('+/-' in n for n in note) or not all('Horizons gives no uncertainty with it' in n for n in note):
+            if '+/-' in note[0] or note[0].strip() != 'Uncertainty: none given by JPL with this position':
                 findings.append(('TYPED SKY VALUE', '%s: %s' % (tag, note[0].strip())))
-        elif not all('JPL Horizons 3-sigma' in n for n in note):
+        elif not note[0].strip().endswith('(JPL, 3-sigma)'):
             findings.append(('WRONG SKY NOTE', '%s: %s' % (tag, note[0].strip())))
-        if not all('as seen from Earth' in n for n in note):
-            findings.append(('WRONG SKY NOTE', '%s: does not say "as seen from Earth"' % tag))
+    if any('(apparent' in ln for ln in lines):
+        findings.append(('WRONG SKY NOTE', '%s: the old note in parentheses is back' % tag))
 
 
 def scan_sources(findings, sky_source=None, orrery_source=None):
@@ -620,11 +644,43 @@ def check_odd_inputs(findings, counts):
                                  % name))
 
 
+# The period sentence's database clause (Tony's look, 2026-10-12): a
+# planet or a moon is not in JPL's small-body database and the hover does
+# not mention it; an asteroid or comet whose lookup gave no uncertainty
+# says why. (status saved by build_period_record, expect the clause)
+PERIOD_CASES = [
+    ('not a small body; SBDB not asked', False),
+    ('open orbit; SBDB not asked', False),
+    (None, False),
+    ('SBDB not reached (ConnectionError)', True),
+    ('SBDB gives no sigma for the period', True),
+    ("SBDB has no entry for '2026 XY1'", True),
+]
+
+
+def check_period_sentence(findings, counts):
+    for status, want in PERIOD_CASES:
+        rec = {'days': 87.9691, 'error_days': 0.001, 'error_from': 'year_change',
+               'sbdb_sigma_days': None, 'sbdb_status': status, 'fetched': '2026-10-12'}
+        text = orbital_period.period_hover_lines(
+            {'kind': 'fetched', 'days': 87.9691, 'record': rec, 'label': 'the Sun'})
+        has = 'small-body database' in text
+        counts['period'] = counts.get('period', 0) + 1
+        if has and not want:
+            findings.append(('DATABASE MENTIONED FOR A PLANET OR MOON',
+                             'status %r: %s' % (status, text.replace('<br>', ' / '))))
+        elif want and not has:
+            findings.append(('DATABASE REASON DROPPED',
+                             'status %r: %s' % (status, text.replace('<br>', ' / '))))
+
+
 def run_checks(sky_source=None, orrery_source=None):
     findings = []
-    counts = {'hovers': 0, 'lines': 0, 'answers': 0, 'pairs': 0, 'sweep': 0, 'odd': 0}
+    counts = {'hovers': 0, 'lines': 0, 'answers': 0, 'pairs': 0, 'sweep': 0, 'odd': 0,
+              'period': 0}
     for fx in FIXTURES:
         judge_fixture(fx, findings, counts)
+    check_period_sentence(findings, counts)
     check_odd_inputs(findings, counts)
     check_symmetry(findings, counts)
     check_every_object(findings, counts)
@@ -738,6 +794,28 @@ def _body_none_ignores_centre():
 
 
 @contextmanager
+def _surface_dropped_for_giants():
+    """Build 1's first form: no surface line for the Sun or a giant planet."""
+    real = pa.distance_speed_lines
+    giants = {'Sun', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Planet 9'}
+
+    def lines(acc, distance_au, speed_au_per_day, center_name, center_radius_km):
+        out = real(acc, distance_au, speed_au_per_day, center_name, center_radius_km)
+        if center_name in giants:
+            out = [ln for ln in out if not ln.startswith('Distance to Center Surface')]
+        return out
+    with _patched(pa, 'distance_speed_lines', lines):
+        yield
+
+
+@contextmanager
+def _database_for_planets():
+    """Build 1's first form: every body told about the small-body database."""
+    with _patched(orbital_period, '_sbdb_asked', lambda status: True):
+        yield
+
+
+@contextmanager
 def _sheet_ignored():
     with _patched(pa, 'SPACECRAFT_SHEET_ROWS', {}):
         yield
@@ -784,6 +862,10 @@ PLANTS = [
     ('a zero sigma taken as a figure', _zero_sigma_kept, {}, 'ZERO SIGMA TAKEN AS A FIGURE'),
     ("the Voyagers' data-sheet figures dropped", _sheet_ignored, {},
      'SPACECRAFT DATA-SHEET FIGURE IGNORED'),
+    ('the surface line dropped for a giant planet', _surface_dropped_for_giants, {},
+     'SURFACE LINE DROPPED'),
+    ('the small-body database named for a planet', _database_for_planets, {},
+     'DATABASE MENTIONED FOR A PLANET OR MOON'),
 ]
 
 
@@ -829,9 +911,9 @@ def main():
     print('POSITION DIGITS: PASS -- %d of %d planted faults caught by name; %d hovers '
           'examined, %d lines compared against their errors; %d pairs printed the same '
           'from either end; %d hovers of every listed object from the Sun, Earth and '
-          'Neptune; %d recorded 2xr answers read by column name'
+          'Neptune; %d recorded 2xr answers read by column name; %d period sentences'
           % (len(PLANTS), len(PLANTS), counts['hovers'], counts['lines'], counts['pairs'],
-             counts['sweep'], counts['answers']))
+             counts['sweep'], counts['answers'], counts['period']))
     return 0
 
 

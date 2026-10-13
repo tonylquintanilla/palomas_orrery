@@ -11,6 +11,10 @@ build 1: the typed sky-position table MAJOR_BODY_UNCERTAINTIES and its
 "typical" fallbacks are removed; the hover prints only JPL's fetched
 3-sigma figure, says "as seen from Earth", and says in words when JPL
 gives none.)
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-401,
+Tony's look, option B: the sky position under one heading, "Sky position
+seen from Earth:", with one uncertainty line in the same form for every
+body, in place of a note in parentheses on each coordinate.)
 """
 
 import numpy as np
@@ -193,10 +197,10 @@ def get_precision_note(obj_data, obj_name=None):
 
 def format_radec_hover_component(obj_data, obj_name=None, compact=False):
     """
-    Format RA/Dec for hover text, with JPL's fetched uncertainty where
-    Horizons gives one and a plain sentence where it does not. The
-    position is asked from Earth's centre (fetch_radec_for_hover), so the
-    line says "as seen from Earth".
+    Format RA/Dec for hover text: a heading, "Sky position seen from
+    Earth:" (fetch_radec_for_hover asks from Earth's centre), the two
+    coordinates, and one uncertainty line -- JPL's fetched 3-sigma figure
+    where Horizons gives one, plain words where it does not.
     
     Parameters:
         obj_data (dict): Object data possibly containing JPL uncertainties
@@ -212,21 +216,26 @@ def format_radec_hover_component(obj_data, obj_name=None, compact=False):
     if not ra_string or not dec_string:
         return ""
     
+    # Tony's look at L-401 build 1 (2026-10-12, option B): one heading that
+    # says what the two numbers are, the two coordinates, and one
+    # uncertainty line in the same form for every body.
     precision_note = get_precision_note(obj_data, obj_name)
     if precision_note:
-        note = f"apparent, as seen from Earth, {precision_note}, JPL Horizons 3-sigma"
+        uncertainty = f"Uncertainty: {precision_note} (JPL, 3-sigma)"
     else:
-        # The query returned none. Not "JPL gives none": a spacecraft's data
-        # sheet can state one (the Voyagers, read 2026-10-12, L-401).
-        note = "apparent, as seen from Earth; Horizons gives no uncertainty with it"
+        # "With this position": the query returned none. A spacecraft's
+        # data sheet can state a predicted one for another date (the
+        # Voyagers, for 2030, read 2026-10-12, L-401).
+        uncertainty = "Uncertainty: none given by JPL with this position"
     
     if compact:
-        return f"RA/Dec: {ra_string}, {dec_string}<br>({note})"
+        return (f"Sky position seen from Earth: RA {ra_string}, Dec {dec_string}<br>"
+                f"{uncertainty}")
     else:
-        return (f"Right Ascension: {ra_string}<br>"
-                f"  ({note})<br>"
+        return (f"Sky position seen from Earth:<br>"
+                f"Right Ascension: {ra_string}<br>"
                 f"Declination: {dec_string}<br>"
-                f"  ({note})")
+                f"{uncertainty}")
 
 
 def determine_coordinate_precision(obj_data, obj_name):

@@ -670,3 +670,269 @@ Then move the patch into `documentation/`, commit and push.
 
 I'm still leaving those changes uncommitted, for the same reason as before. They're the L-401 build in my working copy, and the patch in your orrery folder carries exactly the same changes. Committing and pushing them is yours to do, after you've run the patch and looked at the five hovers.
 
+Here are the six, each with the words exactly as your plots show them and what you’re judging.
+
+1. The no-error sentences. These appear when JPL states no accuracy for a position. Io from Jupiter:
+
+JPL states no accuracy for this position, so distances are shown to the whole kilometer. -- yes
+JPL states no uncertainty for this body’s speed. -- yes
+
+Io from the Sun, where Jupiter’s accuracy is known but Io’s orbit around Jupiter has none stated:
+
+These distances are rounded to JPL’s published accuracy for Jupiter’s orbit; JPL states no accuracy for Io’s orbit around Jupiter.
+Part of this speed has no stated uncertainty, so it is shown to the meter per second. -- yes
+
+Judging: do they explain the digits without suggesting the number is wrong? -- yes
+
+2. The Voyager sentence.
+
+These distances are rounded to JPL’s predicted sky-position uncertainty for Voyager 1 in 2030, 1.701 arcseconds seen from Earth: about 210,000 km at its distance. JPL states none for the distance itself, so this conversion is ours. -- yes
+
+Judging: is it clear that the angle is JPL’s and the kilometers are our conversion? -- yes
+
+3. The speed sentences. Mercury, Jupiter and Voyager:
+
+The speed is rounded to the same relative precision as the distance. -- yes
+
+Sedna and Encke:
+
+The speed is rounded to JPL’s uncertainty in its velocity. -- yes
+
+Judging: does each say plainly where the speed’s digits come from? -- yes
+
+4. The reworded period sentence. It used to say “JPL lists no orbit uncertainty for this body”, which was false for a planet, since JPL publishes the planets’ accuracy. Now, for Mercury, Jupiter and Io:
+
+Rounded to how much the period changes in a year; JPL’s small-body database has no entry for this body. -- unclear. why mention the small body data base it does not apply. why only mercury, jupiter and io?
+
+Judging: is it true and clear? It’s the database for asteroids and comets, so a planet or moon isn’t in it. -- see above
+
+5. The sky line’s words. Before, the planets showed a “typical” uncertainty taken from a typed table, which is now removed. Now Mercury, Jupiter and Voyager:
+
+(apparent, as seen from Earth; Horizons gives no uncertainty with it) -- unclear. what is the sky line, the direct line? where does that enter?
+
+Sedna and Encke:
+
+(apparent, as seen from Earth, +/-0.10 arcsec, JPL Horizons 3-sigma)
+
+Judging: are the two forms clear side by side? -- no. we should discuss.
+
+6. The light-time line. Before, the hover showed both light-minutes and light-hours. Now it shows one: light-minutes under an hour (Mercury, 3.6382621 light-minutes) and light-hours above (Voyager, 23.845 light-hours).  -- yes
+
+Judging: is one line enough? -- yes
+
+About the other message, about uncommitted changes: it’s an automatic reminder from this workspace, not something for you to do. I answer it each time so you can see why I don’t push. Your patch-and-push routine is the only way changes reach your repository.
+
+===============================================================================================
+
+Your run, in order, all in the orrery repo folder:
+
+1. Run `patch_L401_4_look_close_20261012.py` (VS Code, Run). Expect 42 ok lines and "patch applied".
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L401_4_look_close_20261012.py
+ok  position_accuracy.py                          line 60: Module updated: October 12, 2026 with Anthro
+ok  position_accuracy.py                          line 154: # The surface line: every centre with a radi
+ok  position_accuracy.py                          line 564: if not is_center and center_radius_km:
+ok  orbital_period.py                             line 44: Module updated: October 12, 2026 with Anthro
+ok  orbital_period.py                             line 464: def _sbdb_asked(status):
+ok  orbital_period.py                             line 493: elif governs == 'year_change' and not _sbdb_
+ok  celestial_coordinates.py                      line 14: Module updated: October 12, 2026 with Anthro
+ok  celestial_coordinates.py                      line 196: Format RA/Dec for hover text: a heading, "Sk
+ok  celestial_coordinates.py                      line 215: # Tony's look at L-401 build 1 (2026-10-12, 
+ok  test_position_digits.py                       line 30: the surface line dropped for a giant planet 
+ok  test_position_digits.py                       line 39: prints by that angle at its distance from Ea
+ok  test_position_digits.py                       line 56: Module updated: October 12, 2026 with Anthro
+ok  test_position_digits.py                       line 73: import orbital_period
+ok  test_position_digits.py                       line 335: # Every centre with a radius gets the surfac
+ok  test_position_digits.py                       line 340: findings.append(('SURFACE LINE WITHOUT A RAD
+ok  test_position_digits.py                       line 346: if unit == 'surface':
+ok  test_position_digits.py                       line 427: # The sky position (Tony's look, 2026-10-12,
+ok  test_position_digits.py                       line 434: if '+/-' in note[0] or note[0].strip() != 'U
+ok  test_position_digits.py                       line 623: # The period sentence's database clause (Ton
+ok  test_position_digits.py                       line 741: def _surface_dropped_for_giants():
+ok  test_position_digits.py                       line 787: ('the surface line dropped for a giant plane
+ok  test_position_digits.py                       line 832: 'Neptune; %d recorded 2xr answers read by co
+ok  LEDGER_CONSOLIDATED.md                        line 367: Module updated: October 12, 2026 with Anthro
+ok  LEDGER_CONSOLIDATED.md                        line 1601: - **2026-10-12, Tony's word at L-401's look:
+ok  LEDGER_CONSOLIDATED.md                        line 1611: (2026-10-11); its words settled at L-401's l
+ok  LEDGER_CONSOLIDATED.md                        line 2271: - **2026-10-12, Tony's run and look** [his r
+ok  LEDGER_CONSOLIDATED.md                        line 2707: a checker gets its own session, Oct 8).
+ok  LEDGER_CONSOLIDATED.md                        line 2716: **Ref:** `documentation/HANDOFF_L395_horizon
+ok  LEDGER_CONSOLIDATED.md                        line 22130: <!-- L:034 status:OPEN upd:2026-10-12 sectio
+ok  LEDGER_CONSOLIDATED.md                        line 22141: - **2026-10-12, L-401 build 1:** the centre 
+ok  documentation/WHERE_WE_ARE.md                 line 4: Last updated: October 12, 2026, at your look
+ok  documentation/WHERE_WE_ARE.md                 line 10: > - L-401 (the distance digits), build 1: yo
+ok  documentation/WHERE_WE_ARE.md                 line 30: 5.   [NOW]   *L-401 (the distance digits): b
+ok  documentation/WHERE_WE_ARE.md                 line 39: 8.   [done]  The served objects are checked 
+ok  documentation/WHERE_WE_ARE.md                 line 61: - "Surface": the solid surface, or one radiu
+ok  documentation/WHERE_WE_ARE.md                 line 71: - The Hills cloud follows its paper (Fig. 3,
+ok  documentation/WHERE_WE_ARE.md                 line 80: - Last cache build: 20261012T183311Z, ok, no
+ok  documentation/WHERE_WE_ARE.md                 line 99: - The tide's cone and brightness on the phon
+ok  documentation/WHERE_WE_ARE.md                 line 117: - The Horizons check's move: `HANDOFF_L395_h
+ok  documentation/WHERE_WE_ARE.md                 line 124: - The citation checks: L-425 (citation locat
+ok  documentation/HANDOFF_L401_distance_build1_20261012.md line 288: ## 8. Tony's look, and its fixes (added 2026
+ok  documentation/SURVEY_L401_spacecraft_data_sheets_20261012.md line 86: uncertainty, for a person; it never edits a 
+ok  documentation/HANDOFF_L395_horizons_check_move_brief_20261012.md created
+
+patch applied (42 edits in 8 files, 1 files created)
+Stamps updated: the docstrings of every edited module and the ledger.
+
+NEXT:
+  1. Paste this output into your run record.
+  2. Run orrery_maintenance_run.py: expect 24 of 24, "Position digits"
+     with 13 of 13 planted faults, and "0 TIER-1 -- the push gate holds".
+  3. Open the orrery fresh; plot Io from Jupiter; hover it once: the
+     "Sky position seen from Earth:" heading, and the surface line.
+  4. Move this script into documentation/; commit and push.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. Run `patch_L433_1_where_we_are_20261012.py`. Expect 10 ok lines and "130 lines above the marker".
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L433_1_where_we_are_20261012.py
+ok  header: Last updated                    
+ok  box: changed, do next, needs you now    
+ok  road: stage 5b added                    
+ok  road: stage 7                           
+ok  road: stages 13 and 14                  
+ok  settled: four lines of Oct 12           
+ok  waiting: three items decided            
+ok  details: periods and digits, shorter    
+ok  details: the record and the briefs      
+ok  details: inner Oort cloud, shorter      
+
+patch applied (10 edits in 1 file); 130 lines above the marker (cap 130)
+Stamp updated: the page's "Last updated" line.
+
+NEXT:
+  1. Paste this output into your run record.
+  2. Run orrery_maintenance_run.py as patch_L401_4 asked.
+  3. Commit, with the five new files in documentation/ (the rulings
+     record, the audit, the three briefs); move this script and
+     patch_L401_4 into documentation/; push.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+3. Run `orrery_maintenance_run.py`. Expect 24 of 24, "Position digits" with 13 of 13 planted faults, and "0 TIER-1 -- the push gate holds".
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261012T184717Z, 1 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.5s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.2s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.6s  unchanged (1 checked, not written)
+  Objects export               0.1s  unchanged (1 checked, not written)
+  Drawings export              0.4s  unchanged (1 checked, not written)
+  Module atlas                 6.9s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               6.1s  rewrote DATA_INVENTORY.md
+  Exact rows report            2.2s  unchanged (1 checked, not written) -- 13 of
+                                     41 exact rows printed at 43 lines (33
+                                     orrery, 10 gallery); 8 drawn only, 14 not
+                                     followed, 0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.2s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.0s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       1.6s  Export matches the store: sha256
+                                     2a1211f8cce2 on both sides; 127 rows
+                                     re-read, 56 not exported, 31 tokens; 320
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.1s  pass
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      1.8s  PASSING -- 13 printed exact rows each state
+                                     a count; 33 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.4s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 126 status lines in constants_new.py are
+                                     well formed; 54 rows carry none.
+  Row shape                    0.1s  All 183 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.2s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.2s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          22.3s  PASS -- all 311 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  1.9s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.5s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check        0.5s  PASS -- 3 of 3 planted faults caught;
+                                     hills_cloud 3600 dots, tilt 30.9 deg, sha256
+                                     a51e93118069
+  Position digits (L-401)      4.1s  PASS -- 13 of 13 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 6 period sentences
+  Worksheet checker            9.3s  74 of 110 routed, 8 clean
+  Worksheet checker tests     17.3s  All 135 checks passed
+  Worksheet key round trip     1.1s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         21.7s  All 76 checks passed
+  Extractor pins               0.5s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          10.9s  0 TIER-1 -- the push gate holds
+
+======================================================================
+  24 of 24 gating checkers passed -- 116.8s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2203 file(s) examined, 8 written, 0 created, 0 removed, 5 rewritten identically
+    written   DATA_INVENTORY.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+      window_config.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+4. Open the orrery fresh, plot Io from Jupiter, hover it once: the "Sky position seen from Earth:" heading and the surface line.
+5. Paste the two patch outputs into your run record on the page.
+6. Move both patch scripts into `documentation/`.
+7. In GitHub Desktop, commit everything, including the six new files in `documentation/` (the rulings record, the dashboard audit, and the four briefs), and push.
+
+After the push, two reinstalls when convenient: replace this Project's instructions with the repo's `PROJECT_INSTRUCTIONS.md` (v3.92), and reinstall horizons-orbital-mechanics from the repo (Settings > Skills), so it reads 1.3. Then any of the briefed sessions can start with its prompt.
+

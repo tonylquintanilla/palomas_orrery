@@ -41,6 +41,10 @@ body", false of JPL for a planet, now says what is true: JPL's small-body
 database has no entry for the body, or why it gave no uncertainty.
 report_exponent and format_by_error are now also used by
 position_accuracy.py.)
+Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-401,
+Tony's look: a planet or a moon, which JPL's small-body database does not
+hold, no longer mentions it; the clause stays for an asteroid or comet
+whose lookup gave no uncertainty.)
 """
 
 import math
@@ -461,6 +465,13 @@ def _sbdb_words(status):
     return "JPL's small-body database has no entry for this body."
 
 
+def _sbdb_asked(status):
+    """True when the database was asked, which happens only for an
+    asteroid or comet with a closed orbit (build_period_record). A record
+    saved with no status is treated as not asked."""
+    return bool(status) and not status.endswith('SBDB not asked')
+
+
 def period_hover_lines(resolved):
     """
     The hover's period lines, each ending in <br> except the last, every
@@ -490,11 +501,14 @@ def period_hover_lines(resolved):
         why = "Rounded to JPL's stated uncertainty in the orbit."
     elif governs == 'year_change' and rec.get('sbdb_sigma_days') is not None:
         why = 'Rounded to how much the period changes in a year.'
+    elif governs == 'year_change' and not _sbdb_asked(rec.get('sbdb_status')):
+        # Tony's look at L-401 build 1 (2026-10-12): a planet or a moon is
+        # not in JPL's small-body database, so the database is not
+        # mentioned. Only the yearly change sets its digits.
+        why = 'Rounded to how much the period changes in a year.'
     elif governs == 'year_change':
-        # L-401 build 1: say what is true. "JPL lists no orbit uncertainty"
-        # was false of JPL for a planet, whose orbit accuracy the 2014
-        # DE430 report states; what is missing is an entry in JPL's
-        # small-body database, which states the period's own uncertainty.
+        # L-401 build 1: say what is true. An asteroid or comet whose
+        # database lookup gave no uncertainty says why, in plain words.
         why = ('Rounded to how much the period changes in a year;<br>'
                + _sbdb_words(rec.get('sbdb_status')))
     else:
