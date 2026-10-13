@@ -42,6 +42,13 @@ coordination session of October 12.
 - The four in-passing exception entries of ruling 7 belong to build 2,
   not to L-425. L-425's brief says nothing about them; this note says
   so to stop both from adding them.
+- Added 2026-10-13, 15:30: the Horizons check's move (L-395, item 4
+  below) now rides L-431 build 3, the website
+  (`HANDOFF_L431_build3_website_brief_20261013.md`, section 2d),
+  because build 3 has the check compare the period and the move puts
+  the check where that comparison belongs. Its prompt below is
+  withdrawn; the scaffolding list is three: the dashboard, L-425,
+  L-424 with L-426. L-437 landed the same day.
 - Added 2026-10-13: the Tier-1 domain split, once L-425's section 3d,
   is its own parallel session, L-437
   (`HANDOFF_L437_tier1_by_domain_brief_20261013.md`). L-425's brief
@@ -68,12 +75,10 @@ and with each other:
    `worksheet_checker.py`, `test_worksheet_checker.py`, the
    provenance-cross-check skill, the ledger and the page. No overlap
    with build 2 or the dashboard build beyond the records.
-4. **The Horizons check's move** last: it touches both repositories,
-   the maintenance run (a network row), the dashboard, `data/`,
-   `export_objects.py` and `test_objects_export.py`, and it benefits
-   from the dashboard rule and the L-425 network-row convention being
-   settled first (L-425's brief, section 3c, says whichever lands
-   first sets the convention; with this order it is L-425).
+4. **The Horizons check's move**: WITHDRAWN from this list on
+   2026-10-13; it rides L-431 build 3 (see section 1). The network-row
+   convention is therefore set by that build, and L-425's link check
+   matches it.
 
 ## 3. Rules for a patch built while another session's patch is unpushed
 
@@ -200,36 +205,10 @@ Project.
     the ledger, with the handoff and Where We Are by section, within
     its 130-line cap.
 
-### The Horizons check's move (L-395)
+### The Horizons check's move (L-395): withdrawn, rides L-431 build 3
 
-    Build session for L-395, moving the Horizons check into the
-    orrery's maintenance run. Read
-    documentation/HANDOFF_scaffolding_sessions_coordination_20261013.md
-    first, then documentation/HANDOFF_L395_horizons_check_move_brief_20261012.md
-    and documentation/DESIGN_rulings_20261012.md (ruling 6: a changed
-    data sheet is cleared by the row, option A) in the orrery repo.
-    Pull the orrery at HEAD and pin the SHA; pull the gallery at HEAD
-    and pin its SHA separately, since this build touches both. Build
-    on HEAD and edit the records at your own items' anchors only. If
-    L-425 has landed, match its network-row convention; if not, set it
-    and say so.
-
-    Load horizons-orbital-mechanics (confirm it reads 1.3),
-    gallery-cache-builder, safe-file-editing, agentic-pre-test and
-    ledger-and-session-records, and confirm each loaded version against
-    the manifest in the repo's PROJECT_INSTRUCTIONS.md before using it.
-
-    The first section 5 decision is ruled (option A). Bring me the
-    second only if you need it now; its default is no. Then build: the
-    check and its suite moved into the orrery with their recorded
-    answers, the confirmations carried over with their dates, the
-    sheets' record seeded from the survey, the export carrying the
-    dates, the website's daily run losing step 2 and its offline check
-    reading the dates from the pulled export, every network answer in
-    the tests recorded and every fault planted first, one patch per
-    repository, each pre-tested on a throwaway copy. Close with L-395's
-    ledger block, the handoff, Where We Are by section within its
-    130-line cap, and the skill bumps under One Session, One Bump.
+    (No separate prompt. Use the build 3 prompt in this session's chat
+    or the brief's own header.)
 
 ### L-437, the Tier-1 total with its domains (parallel; may run beside the dashboard build)
 

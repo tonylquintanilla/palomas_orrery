@@ -2,8 +2,10 @@
 mention: the orrery away from Tony's machine (the linked session from
 the phone; why not Pyodide; the two routes that fit).
 
-Built on orrery 87a5470 at
-https://github.com/tonylquintanilla/palomas_orrery (v3.93). The gallery
+Built on orrery 28e1b7d at
+https://github.com/tonylquintanilla/palomas_orrery ("maintenance", after
+L-437's close). Re-anchored 2026-10-13 15:10 from 87a5470: its ledger
+header anchor had moved under two L-437 stamps; nothing else changed. The gallery
 is not touched.
 Tony's local folders: orrery
 C:\\Users\\tonyq\\OneDrive\\Desktop\\python_work\\palomas_orrery_for_github\\;
@@ -93,8 +95,8 @@ slices); L-431 (build 3, the website); L-363 (the Solar System room).
 
 EDITS = [
     ('LEDGER_CONSOLIDATED.md', 'header stamp',
-     "opened from Tony's question on Settled), built on c9722520.\nReview and RICE update Tony 6-21-2026\n",
-     "opened from Tony's question on Settled), built on c9722520.\nModule updated: October 13, 2026 with Anthropic's Claude Fable 5.1\n(L-436 opened: the orrery away from the machine, an idea on record),\nbuilt on 87a5470.\nReview and RICE update Tony 6-21-2026\n"),
+     "(L-437 closed on Tony's run; a Note on L-269's unrun patch), built on\nf59c84b2.\nReview and RICE update Tony 6-21-2026\n",
+     "(L-437 closed on Tony's run; a Note on L-269's unrun patch), built on\nf59c84b2.\nModule updated: October 13, 2026 with Anthropic's Claude Fable 5.1\n(L-436 opened: the orrery away from the machine, an idea on record),\nbuilt on 28e1b7d.\nReview and RICE update Tony 6-21-2026\n"),
     ('LEDGER_CONSOLIDATED.md', 'L-436 block at the end of Bucket C',
      "**Gap:** add filedialog.askopenfilename to measure_animation_html.py.\n**Ref:** spun out of L-048 (closed 2026-06-23).\n\n### D.Parked",
      "**Gap:** add filedialog.askopenfilename to measure_animation_html.py.\n**Ref:** spun out of L-048 (closed 2026-06-23).\n\n" + L436 + "### D.Parked"),
