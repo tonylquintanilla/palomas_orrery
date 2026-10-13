@@ -2,7 +2,7 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: October 13, 2026
-Files scanned: 154
+Files scanned: 153
 Total findings: 1114
 Constants: 189 | Dicts: 59 | Display strings: 866
 
@@ -20,20 +20,16 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|---:|---:|---:|--------:|
+| 20261013T175754Z | `4da3d7c` | 153 | 1114 | 281 | 683 | 144 | 6 | 0 |
 | 20261013T174809Z | `400a961` | 154 | 1114 | 281 | 683 | 144 | 6 | 0 |
 | 20261013T163342Z | `87a5470` | 153 | 1114 | 280 | 684 | 144 | 6 | 0 |
 | 20261013T132327Z | `c972252` | 153 | 1114 | 280 | 683 | 144 | 7 | 0 |
 | 20261013T013654Z | `c5dff25` | 154 | 1110 | 289 | 683 | 132 | 6 | 0 |
 | 20261012T184717Z | `e6a7e8a` | 152 | 1108 | 288 | 682 | 132 | 6 | 0 |
-| 20261012T183806Z | `e6a7e8a` | 153 | 1109 | 288 | 683 | 132 | 6 | 0 |
 
-Change since the previous run: total +0, Tier-1 +1.
+Change since the previous run: total +0, Tier-1 +0.
 
-Tier-1 rose in these files:
-
-| File | Before | After |
-|------|-------:|------:|
-| patch_L436_1_idea_20261013.py | 0 | 1 |
+No file's Tier-1 count rose.
 
 ---
 

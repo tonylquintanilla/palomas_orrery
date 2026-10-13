@@ -11,16 +11,15 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 154  
-**Total Lines of Code (non-blank):** 121,516  
-**Total Public Functions/Classes:** 1,441
+**Total Python Files:** 153  
+**Total Lines of Code (non-blank):** 121,304  
+**Total Public Functions/Classes:** 1,439
 
 ## Classification Coverage
 
-**Undetermined role (9).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (8).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L431_8_no_bary_perturbation_20261013.py`
 - `patch_L436_1_idea_20261013.py`
 - `test_drawings_export.py`
 - `test_earth_pole_of_date.py`
@@ -29,9 +28,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (2).** No valid `Domain:` tag.
+**Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L431_8_no_bary_perturbation_20261013.py`
 - `patch_L436_1_idea_20261013.py`
 
 
@@ -257,7 +255,6 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L431_8_no_bary_perturbation_20261013.py` | - L-431 (orbital periods from JPL): Tony's ruling of 2026-10-13, no perturbation lines for an orbit drawn around the solar system's barycentre; horizons-orbital-mechanics 1.5 and protocol v3.94 record it. (212 lines) |
 | `patch_L436_1_idea_20261013.py` | - opens L-436, an idea recorded on first mention: the orrery away from Tony's machine (the linked session from the phone; why not Pyodide; the two routes that fit). (162 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (173 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
