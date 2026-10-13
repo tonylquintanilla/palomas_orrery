@@ -150,7 +150,7 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: OPEN: 10-12-26 0931: Opus: L-401 distance build 1**
+**Session: DONE: 10-12-26 1603: Opus: L-401 distance build 1**
 
 First, run and push the L-401 patch before I build anything for L-395. Moving the check edits some of the same orrery files that patch edits: the maintenance run, the dashboard and the ledger. If I build on a patch you haven’t run, and your look sends L-401 back for changes, the second patch stops fitting. If you push first, I fetch the new state and build on it. That also keeps L-395 as its own patch, which is the reason behind your October 8 rule.
 
@@ -932,7 +932,25 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 4. Open the orrery fresh, plot Io from Jupiter, hover it once: the "Sky position seen from Earth:" heading and the surface line.
 5. Paste the two patch outputs into your run record on the page.
 6. Move both patch scripts into `documentation/`.
-7. In GitHub Desktop, commit everything, including the six new files in `documentation/` (the rulings record, the dashboard audit, and the four briefs), and push.
+7. In GitHub Desktop, commit everything, including the six new files in `documentation/` (the rulings record, the dashboard audit, and the four briefs), and push. -- 3fec6997f798065b0f947674d6aed02acbdf9dac
 
-After the push, two reinstalls when convenient: replace this Project's instructions with the repo's `PROJECT_INSTRUCTIONS.md` (v3.92), and reinstall horizons-orbital-mechanics from the repo (Settings > Skills), so it reads 1.3. Then any of the briefed sessions can start with its prompt.
+After the push, two reinstalls when convenient: replace this Project's instructions with the repo's `PROJECT_INSTRUCTIONS.md` (v3.92), and reinstall horizons-orbital-mechanics from the repo (Settings > Skills), so it reads 1.3. -- done
+
+Then any of the briefed sessions can start with its prompt.
+
+====================================================================
+
+Everything in the record passed as expected. I'll confirm the push against the repo and read the Io hover out of your plot.
+
+**The push landed and the Io hover shows all three fixes.** The repo's HEAD is 3fec6997, the SHA your record names, so the round trip closes.
+
+Io from Jupiter, read out of your plot: the heading "Sky position seen from Earth:" with the two coordinates under it and one line, "Uncertainty: none given by JPL with this position". The surface line is back: 420,348 km from the centre, 348,856 km to the surface, which is exactly one Jupiter radius of 71,492 km less. The period sentence reads "Rounded to how much the period changes in a year." with no mention of the small-body database. Your maintenance run agrees: 24 of 24, the digits checker catching 13 of 13, the push gate holding.
+
+So build 1 of L-401 is accepted, and both reinstalls are done; the next session that loads the Horizons skill confirms it reads 1.3 on its own.
+
+One thing I noticed in the same hover, not a fault in today's work: the last lines still carry the typed "Jupiter orbital period: 1.77 Earth days" from the old table, beside the fetched 1.7714 days above it. That is the typed table L-431 recorded as staying for now; its build 2 is where it goes.
+
+Where this leaves us:
+- The four briefed sessions can start from their prompts, in your order: the dashboard's labels, L-425, L-424 with L-426, the Horizons check's move. L-431 build 2 is next on the road and still needs its brief.
+- Nothing is waiting on your machine tonight.
 
