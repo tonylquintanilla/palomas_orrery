@@ -1201,9 +1201,133 @@ NEXT:
   1. Run orrery_maintenance_run.py: expect 25 of 25 gating checkers, "Orbit markers"
      with 12 of 12 planted faults, and "0 TIER-1 -- the push gate holds".
 
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261013T132327Z, 0 day(s) ago).
 
-     
-  2. Move this script into documentation/; commit and push.
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 2.0s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.3s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.3s  unchanged (1 checked, not written)
+  Objects export               0.1s  unchanged (1 checked, not written)
+  Drawings export              0.3s  unchanged (1 checked, not written)
+  Module atlas                 8.2s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.3s  rewrote DATA_INVENTORY.md
+  Exact rows report            2.3s  rewrote EXACT_ROWS_PRINTED.md -- 13 of 41
+                                     exact rows printed at 43 lines (33 orrery,
+                                     10 gallery); 8 drawn only, 14 not followed,
+                                     0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.3s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.2s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       2.0s  Export matches the store: sha256
+                                     2a1211f8cce2 on both sides; 127 rows
+                                     re-read, 56 not exported, 31 tokens; 320
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.1s  pass
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      2.4s  PASSING -- 13 printed exact rows each state
+                                     a count; 33 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.5s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.2s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.2s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 126 status lines in constants_new.py are
+                                     well formed; 54 rows carry none.
+  Row shape                    0.1s  All 183 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.2s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          20.0s  PASS -- all 311 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.2s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.4s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.6s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check        0.6s  PASS -- 3 of 3 planted faults caught;
+                                     hills_cloud 3600 dots, tilt 30.9 deg, sha256
+                                     a51e93118069
+  Position digits (L-401)      4.5s  PASS -- 13 of 13 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 6 period sentences
+  Orbit markers (L-431, L-401)   12.0s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 54
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation blocks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Worksheet checker            9.2s  74 of 110 routed, 8 clean
+  Worksheet checker tests     17.6s  All 135 checks passed
+  Worksheet key round trip     1.2s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         22.5s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner           9.9s  0 TIER-1 -- the push gate holds
+
+======================================================================
+  25 of 25 gating checkers passed -- 129.9s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2213 file(s) examined, 8 written, 0 created, 0 removed, 5 rewritten identically
+    written   DATA_INVENTORY.md
+    written   EXACT_ROWS_PRINTED.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      PROJECT_INSTRUCTIONS.md
+      WORKSHEET_CHECK.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Move this script into documentation/; commit and push. -- 924977a353b6c3e7d50e360e840fe176685f97c9
   No look is needed. To see the fixes anyway: plot Sedna and Encke from the Sun;
   the frame ends near 1,030 au, and Sedna's orbit hover says "both around the Sun".
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
@@ -1221,3 +1345,191 @@ Where this leaves us:
 - Orbital periods, parts 1 and 2, and the distance digits, parts 1 and 2, are all accepted.
 - Next is part 3 of the orbital periods work, the website. The four briefed sessions go beside it, in your order.
 - The next session checks that it loads the horizons skill as version 1.4 before any Horizons work.
+
+===========================================================================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L431_8_no_bary_perturbation_20261013.py
+ok  idealized_orbits.py                           line 53: block says it compares the Sun-centred eleme
+ok  idealized_orbits.py                           line 224: return perturbation_notes.get(obj_name, defa
+ok  idealized_orbits.py                           line 237: osc_params (dict): Current osculating parame
+ok  idealized_orbits.py                           line 253: if not mean_params:
+ok  idealized_orbits.py                           line 306: epoch_str = mean_params.get('epoch', 'N/A')
+ok  idealized_orbits.py                           line 5485: 'period': {'days': None, 'err_days': None, '
+ok  idealized_orbits.py                           line 5870: f"i={_pa.as_given(i)} deg"
+ok  test_orbit_markers.py                         line 40: the perihelion osculating orbit's hover with
+ok  test_orbit_markers.py                         line 86: the drawn orbit. A whole number's trailing z
+ok  test_orbit_markers.py                         line 115: from celestial_objects import OBJECT_DEFINIT
+ok  test_orbit_markers.py                         line 735: def judge_comparison(fig, findings, counts):
+ok  test_orbit_markers.py                         line 901: ('idealized_orbits', "        f\"{_accuracy_
+ok  test_orbit_markers.py                         line 968: 'year on against the drawn elements\' period
+ok  test_orbit_markers.py                         line 983: 'drawn points on their period\'s centre; %d 
+ok  skills/horizons-orbital-mechanics/SKILL.md    line 9: Skill version: 1.5 | 2026-10-13, with Anthro
+ok  skills/horizons-orbital-mechanics/SKILL.md    line 32: 
+ok  skills/horizons-orbital-mechanics/SKILL.md    line 33: on 2026-10-12 and 2026-10-13 (L-431).
+ok  skills/horizons-orbital-mechanics/SKILL.md    line 167: - An orbit drawn around the barycentre gets 
+ok  PROJECT_INSTRUCTIONS.md                       line 3: Tony Quintanilla, PE | Claude | v3.94 | Octo
+ok  PROJECT_INSTRUCTIONS.md                       line 5: Cut from 400a9615 at https://github.com/tony
+ok  PROJECT_INSTRUCTIONS.md                       line 1170: v3.94 (October 13, 2026): No rule changed in
+ok  PROJECT_INSTRUCTIONS.md                       line 1262: 
+ok  documentation/PROJECT_INSTRUCTIONS_HISTORY.md line 2642: v3.91 (October 11, 2026): No rule changed in
+ok  documentation/SKILL_HISTORIES.md              line 738: Earlier: 1.2 | 2026-10-10, with Anthropic's 
+ok  LEDGER_CONSOLIDATED.md                        line 378: Module updated: October 13, 2026 with Anthro
+ok  LEDGER_CONSOLIDATED.md                        line 1726: and prints the elements it compared. SUPERSE
+ok  LEDGER_CONSOLIDATED.md                        line 1731: - **2026-10-13, Tony's ruling on the perturb
+ok  LEDGER_CONSOLIDATED.md                        line 1765: patch_L431_7 (run, pushed at 400a9615); the 
+ok  documentation/WHERE_WE_ARE.md                 line 4: Last updated: October 13, 2026, afternoon: n
+ok  documentation/WHERE_WE_ARE.md                 line 12: > - Fixes from your saved plot: Encke's whit
+ok  documentation/WHERE_WE_ARE.md                 line 20: > - *Run patch_L431_8 and the maintenance ru
+ok  documentation/HANDOFF_L431_build2_look_fixes_20261013.md line 115: [Superseded by section 6: patch_L431_8 bumps
+
+patch applied (32 edits in 9 files)
+Stamps updated: idealized_orbits.py, test_orbit_markers.py, the skill's version
+line, the protocol's header, the ledger.
+
+What changed in the plot: Sedna's orbit hover now reads
+  "Perturbation (osculating vs mean): not shown."
+  "This orbit is drawn around the solar system's center of mass."
+  "Compared around the Sun, the difference would mostly show"
+  "the Sun's own wobble, not the pull of the planets."
+Mercury and every orbit drawn around the Sun keep their comparison.
+
+NEXT:
+  1. Run orrery_maintenance_run.py: expect 25 of 25 gating checkers, "Orbit markers"
+     with 12 of 12 planted faults, and "0 TIER-1 -- the push gate holds". It also
+     rewrites the Skill Manifest to horizons-orbital-mechanics 1.5.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261013T163342Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 2.1s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Skill manifest               0.2s  rewrote PROJECT_INSTRUCTIONS.md
+  Constants export             1.0s  unchanged (1 checked, not written)
+  Objects export               0.1s  unchanged (1 checked, not written)
+  Drawings export              0.3s  unchanged (1 checked, not written)
+  Module atlas                 9.2s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               4.8s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Exact rows report            2.0s  unchanged (1 checked, not written) -- 13 of
+                                     41 exact rows printed at 43 lines (33
+                                     orrery, 10 gallery); 8 drawn only, 14 not
+                                     followed, 0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              0.9s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       1.6s  Export matches the store: sha256
+                                     2a1211f8cce2 on both sides; 127 rows
+                                     re-read, 56 not exported, 31 tokens; 320
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.1s  pass
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      1.9s  PASSING -- 13 printed exact rows each state
+                                     a count; 33 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.2s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 126 status lines in constants_new.py are
+                                     well formed; 54 rows carry none.
+  Row shape                    0.1s  All 183 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.2s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.2s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          18.1s  PASS -- all 311 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  1.7s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.4s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check        0.5s  PASS -- 3 of 3 planted faults caught;
+                                     hills_cloud 3600 dots, tilt 30.9 deg, sha256
+                                     a51e93118069
+  Position digits (L-401)      3.6s  PASS -- 13 of 13 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 6 period sentences
+  Orbit markers (L-431, L-401)   11.9s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Worksheet checker            8.4s  74 of 110 routed, 8 clean
+  Worksheet checker tests     17.3s  All 135 checks passed
+  Worksheet key round trip     1.0s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         22.9s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner           8.9s  0 TIER-1 -- the push gate holds
+
+======================================================================
+  25 of 25 gating checkers passed -- 122.2s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2218 file(s) examined, 7 written, 0 created, 0 removed, 5 rewritten identically
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROJECT_INSTRUCTIONS.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      DATA_INVENTORY.md
+      LEDGER_CONSOLIDATED.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Reinstall horizons-orbital-mechanics 1.5 (Settings > Skills); copy
+     PROJECT_INSTRUCTIONS.md (v3.94) to the Project's instructions and to
+     documentation/project_instructions_v3_94.md. -- done
+  3. Move this script, patch_L431_7_look_fixes_20261013.py and
+     patch_L436_1_idea_20261013.py into documentation/; commit and push. -- 
+     
+     The maintenance run will say "Tier-1 rose" in patch_L436_1 while it sits in
+     the root folder (281 in the whole tree); filed in documentation/, it is 280.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 

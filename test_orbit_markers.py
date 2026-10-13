@@ -39,8 +39,8 @@ right finding, by name:
       view's period
     the perihelion osculating orbit's hover without  DISTANCES WITHOUT THEIR ACCURACY SENTENCE
       its accuracy sentence
-    Sedna's perturbation block not naming the        PERTURBATION COMPARED WITHOUT ITS CENTRE
-      centre it compared around
+    Sedna's perturbation block printed while its     PERTURBATION SHOWN FOR A BARYCENTRE ORBIT
+      orbit is drawn around the barycentre
     the plot's frame sized from the Sun-centred      FRAME SIZED FROM ANOTHER ORBIT
       orbit while Sedna is drawn around the
       barycentre
@@ -85,6 +85,10 @@ saved plot showed -- the perihelion osculating orbit's accuracy sentence,
 Sedna's perturbation block naming its centre, and the frame sized from
 the drawn orbit. A whole number's trailing zeros are no longer called
 coarse, since its place cannot be read from the print.)
+Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5 (L-431,
+Tony's ruling of the same day: Sedna's perturbation block is not printed
+at all while its orbit is drawn around the barycentre; the judge and its
+planted fault say so, and Mercury must keep its comparison.)
 """
 import contextlib
 import copy
@@ -110,7 +114,6 @@ import orbital_period
 import osculating_cache_manager
 from celestial_objects import OBJECT_DEFINITIONS
 from orbital_elements import parent_planets
-from orbital_elements import planetary_params as MEAN_ELEMENTS
 
 # ============================================================================
 # THE RECORDED INPUTS (see the docstring for where each comes from)
@@ -731,33 +734,26 @@ def judge_dispatch(findings, counts, orrery_source=None):
 
 
 def judge_comparison(fig, findings, counts):
-    """The perturbation block compares the Sun-centred osculating elements
-    with the mean ones, which are around the Sun. Where the drawn orbit is
-    around another centre (Sedna), the block must say so and print the
-    elements it compared, and its Delta-a must be their difference
-    (worked out here); where it is not, it must not claim a centre."""
-    mean_a = MEAN_ELEMENTS['Sedna']['a']
-    for body in ('Sedna', 'Mercury', 'Encke'):
+    """An orbit drawn around another centre than the Sun (Sedna, around
+    the solar system's center of mass) gets no osculating-vs-mean
+    comparison, only a sentence saying why (Tony's ruling, 2026-10-13):
+    no Delta line, and the drawn centre named. An orbit drawn around the
+    Sun (Mercury) keeps its comparison."""
+    for body, drawn_around in (('Sedna', "the solar system's center of mass"),
+                               ('Mercury', None)):
         tr = traces(fig, body)
         info = tr['info'].text[0] if 'info' in tr else ''
-        if 'Perturbation (osculating vs mean' not in info:
-            continue
         counts['comparisons'] += 1
-        named = 'both around the Sun' in info
-        if body != 'Sedna':
-            if named:
-                findings.append(('PERTURBATION COMPARED WITHOUT ITS CENTRE',
-                                 '%s is drawn around the Sun and its block names a centre' % body))
-            continue
-        if not named or ('Osculating around the Sun: a=%r AU' % SEDNA['a']) not in info:
-            findings.append(('PERTURBATION COMPARED WITHOUT ITS CENTRE',
-                             'Sedna is drawn around the barycentre (a=%r) and its block does not '
-                             'say it compares the Sun-centred a=%r' % (SEDNA_BARY['a'], SEDNA['a'])))
-        m = re.search(r'Delta-a: \+?(%s) AU' % NUM, info)
-        if not m or abs(float(m.group(1)) - (SEDNA['a'] - mean_a)) > 0.01:
-            findings.append(('PERTURBATION COMPARED WITHOUT ITS CENTRE',
-                             'Sedna Delta-a %s is not the Sun-centred a minus the mean a (%.2f)'
-                             % (m.group(1) if m else 'missing', SEDNA['a'] - mean_a)))
+        deltas = re.findall(r'Delta-[aeiq]:', info)
+        if drawn_around:
+            if deltas or 'not shown' not in info or drawn_around not in info:
+                findings.append(('PERTURBATION SHOWN FOR A BARYCENTRE ORBIT',
+                                 '%s is drawn around %s and its hover prints %s'
+                                 % (body, drawn_around, ', '.join(deltas) or
+                                    'no sentence saying why the comparison is not shown')))
+        elif not deltas:
+            findings.append(('PERTURBATION SHOWN FOR A BARYCENTRE ORBIT',
+                             '%s is drawn around the Sun and lost its comparison' % body))
 
 
 def judge_periosc(io_mod, findings, counts):
@@ -904,9 +900,9 @@ PLANTS = [
     ("the perihelion osculating orbit's hover without its accuracy sentence",
      ('idealized_orbits', "        f\"{_accuracy_tail(_pa.accuracy_for(obj_name, 'Sun'))}\"\n", ""),
      'DISTANCES WITHOUT THEIR ACCURACY SENTENCE'),
-    ("Sedna's perturbation block not naming the centre it compared around",
-     ('idealized_orbits', "_acc, _compared_around)}\"", "_acc)}\""),
-     'PERTURBATION COMPARED WITHOUT ITS CENTRE'),
+    ("Sedna's perturbation block printed while drawn around the barycentre",
+     ('idealized_orbits', "_acc, _drawn_around)}\"", "_acc)}\""),
+     'PERTURBATION SHOWN FOR A BARYCENTRE ORBIT'),
     ("the frame sized from the Sun-centred orbit",
      ('palomas_orrery', "                        aphelion = _drawn_far\n",
       "                        pass\n"),
@@ -971,8 +967,8 @@ def main():
           'floor for Io); the elements against the values given; the Keplerian position half a '
           'year on against the drawn elements\' period; a pre-build-2 record\'s drawing '
           'and dates; the parameters window\'s apsis dates against Earth\'s own period; '
-          'the Moon\'s arc against its fetched period; Sedna\'s perturbation block against '
-          'the Sun-centred a minus the mean a; Encke\'s perihelion osculating orbit against the '
+          'the Moon\'s arc against its fetched period; Sedna\'s orbit hover for no perturbation '
+          'block (drawn around the barycentre) and Mercury\'s for one; Encke\'s perihelion osculating orbit against the '
           'whole-kilometer floor and its sentence; the frame against Sedna\'s drawn far end; '
           'and the dispatch in palomas_orrery.py')
     print('examined: Mercury, Encke and Sedna from the Sun (ellipse, orbit hover, periapsis, '
@@ -986,7 +982,7 @@ def main():
     print('ORBIT MARKERS: PASS -- %d of %d planted faults caught by name; %d ellipses, %d '
           'drawn points on their period\'s centre; %d markers, %d dates, %d printed distances '
           'against their errors; %d elements as given; %d Keplerian positions half a year '
-          'on; %d parameters-window date pairs; %d Moon arcs; %d perturbation blocks; '
+          'on; %d parameters-window date pairs; %d Moon arcs; %d perturbation checks; '
           '%d perihelion osculating orbits; %d frames; %d sources read'
           % (len(PLANTS), len(PLANTS), counts['bodies'], counts['points'], counts['markers'],
              counts['dates'], counts['numbers'], counts['elements'], counts['kpos'],

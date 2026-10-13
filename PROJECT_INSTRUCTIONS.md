@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.93 | October 12, 2026
+Tony Quintanilla, PE | Claude | v3.94 | October 13, 2026
 
-Cut from c9722520 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 400a9615 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -486,7 +486,7 @@ safe-file-editing            1.13 Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
 agentic-pre-test             1.3  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
-horizons-orbital-mechanics   1.4  Horizons queries, centers, frames, osculating
+horizons-orbital-mechanics   1.5  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning,
                                   2xr uncertainties, periods, the drawn orbit's
                                   centre
@@ -1168,6 +1168,39 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.94 (October 13, 2026): No rule changed in this document. ONE
+skill bump, one version (L-431): horizons-orbital-mechanics 1.4 -> 1.5.
+NO PERTURBATION LINES FOR AN ORBIT DRAWN AROUND THE BARYCENTRE.
+
+WHAT PROMPTED IT. Tony's look at L-431's second build was accepted; his
+saved plot showed Sedna's orbit hover comparing its orbit around the
+Sun with a stored "mean" orbit, beneath elements drawn around the
+barycentre. The first fix labelled the comparison "both around the
+Sun". Tony asked why, when Sedna is worked out around the barycentre.
+For a body that far out the orbit around the Sun moves with the Sun's
+own wobble about the barycentre. Sedna's stored elements are JPL's
+around the Sun at its 2018 solution epoch (Tony's Horizons file showed
+the centre and the epoch), so the difference from today's mostly shows
+that wobble, not a change in Sedna's path.
+His ruling, 2026-10-13: remove the lines for orbits drawn around the
+barycentre.
+
+WHAT CHANGED. horizons-orbital-mechanics 1.5 replaces 1.4's bullet
+"the comparison with mean elements stays Sun-centred" with the ruling.
+A second version in one session, as interactive-exhibit 1.14 was,
+because the ruling came after 1.4 was installed. Its v1.2 entry moved
+to documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+horizons-orbital-mechanics 1.5 before Horizons work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.91 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.93 (October 12, 2026): No rule changed in this document. ONE
 skill bump, one version (L-431, with L-401): horizons-orbital-mechanics
 1.3 -> 1.4. THE DRAWN ORBIT FOLLOWS THE PERIOD'S CENTRE.
@@ -1223,35 +1256,6 @@ horizons-orbital-mechanics 1.3 before Horizons work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.89 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.91 (October 11, 2026): No rule changed in this document. ONE
-skill bump, one version (L-351, L-421): ledger-and-session-records
-1.19 -> 1.20. YOUR TWO FOLDERS IN EVERY HEADER.
-
-WHAT PROMPTED IT. Tony, in his run record of 2026-10-10: "since we
-are using cowork, the location of the local files should be included
-in the handoff header along with the github info." 1.19 named the
-folders under Where a File Goes; a session reading a brief cold did
-not see them there. The brief for the inner Oort cloud's website half
-carried them in its header, and its session saved both patches where
-Tony runs them. Tony asked for this version at that session's close,
-one version only.
-
-WHAT CHANGED. ledger-and-session-records, under Anchor Requirement,
-Handoff Structure and Tony's Local Folders: every handoff, brief and
-design record names both folders beside the GitHub line. Its v1.17
-entry moved to documentation/SKILL_HISTORIES.md, by the three-entry
-rule.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copy reads
-ledger-and-session-records 1.20 before ledger or handoff work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.88 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

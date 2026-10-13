@@ -42,6 +42,12 @@ coordination session of October 12.
 - The four in-passing exception entries of ruling 7 belong to build 2,
   not to L-425. L-425's brief says nothing about them; this note says
   so to stop both from adding them.
+- Added 2026-10-13: the Tier-1 domain split, once L-425's section 3d,
+  is its own parallel session, L-437
+  (`HANDOFF_L437_tier1_by_domain_brief_20261013.md`). L-425's brief
+  now points there and does not build it. L-437 overlaps the others
+  only on the maintenance run's scanner row, the ledger and the page's
+  Signals line; its brief's section 3 says how.
 
 ## 2. The running order, Tony's choice
 
@@ -167,9 +173,8 @@ Project.
     recommendation per class. Then build: one new checker with its
     planted-fault tests, three maintenance-run rows and buttons named
     what they print, the link check with its 30-day record in data/,
-    the Tier-1 domain split printed beside the total everywhere it
-    prints and the scanner reading each module's docstring Domain tag
-    (section 3d), one patch script, pre-tested on a throwaway copy.
+    one patch script, pre-tested on a throwaway copy. The domain split
+    is L-437's session, not this one's.
     Close with L-425's ledger block, the handoff, and Where We Are by
     section, within its 130-line cap.
 
@@ -225,5 +230,33 @@ Project.
     repository, each pre-tested on a throwaway copy. Close with L-395's
     ledger block, the handoff, Where We Are by section within its
     130-line cap, and the skill bumps under One Session, One Bump.
+
+### L-437, the Tier-1 total with its domains (parallel; may run beside the dashboard build)
+
+    Build session for L-437, the provenance scanner's Tier-1 total
+    printed with its domain split. Read
+    documentation/HANDOFF_scaffolding_sessions_coordination_20261013.md
+    first, then documentation/HANDOFF_L437_tier1_by_domain_brief_20261013.md
+    in the orrery repo. Pull the orrery at HEAD and pin the SHA; the
+    brief was cut at 400a9615. The gallery is not touched. Other
+    sessions have unpushed patches: build on HEAD, edit the ledger and
+    Where We Are at your own lines' anchors only (the Signals line on
+    the page; a new L-437 block and one stamp line in the ledger), and
+    change only the scanner row's wording in the maintenance run.
+
+    Load provenance-discipline, safe-file-editing, agentic-pre-test and
+    ledger-and-session-records, and confirm each loaded version against
+    the manifest in the repo's PROJECT_INSTRUCTIONS.md before using it.
+
+    Nothing waits on me. Measure at HEAD, then build: the split on every
+    line that prints the whole-tree total (console, audit, run history
+    as a Tier-1 field beside the all-tier one, the maintenance run's
+    scanner row, the page's Signals line), the scanner reading each
+    module's docstring Domain tag through the atlas's reader with the
+    hand list retired, the planted faults in the brief shown caught, a
+    checker named what it prints with its row and button, one patch
+    script pre-tested on a throwaway copy, and the skill's two
+    sections in one version. Close with L-437's ledger block, the
+    handoff, and the page's Signals line, within its 130-line cap.
 
 Coordination note written October 2026 with Anthropic's Claude Fable 5.1.

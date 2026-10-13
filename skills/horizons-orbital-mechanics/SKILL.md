@@ -6,7 +6,14 @@ fires_when: Horizons queries, centers, frames, osculating elements, encounters, 
 
 # Horizons and Orbital Mechanics Reference
 
-Skill version: 1.4 | 2026-10-12, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.5 | 2026-10-13, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 400a9615. v1.5 (L-431) corrects one bullet of 1.4, by
+Tony's ruling of 2026-10-13: an orbit drawn around the solar system's
+barycentre gets no comparison with the stored mean elements. 1.4 said
+the comparison stays Sun-centred; for a body as far out as Sedna that
+mostly measures the Sun's own wobble. A second version in one session, as interactive-exhibit 1.14
+was, because the ruling came after 1.4 was installed.
+Earlier: 1.4 | 2026-10-12, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ c9722520. v1.4 (L-431, with L-401) adds The Drawn Orbit
 Follows the Period's Centre, what L-431's second build learned: the
 period record keeps Horizons' elements around its own centre, a
@@ -22,17 +29,8 @@ Uncertainty Comes With Its Position (VEC_TABLE='2xr', which astroquery
 A Period Depends on Its Centre (the two-centre test and its saved
 choice); and the Small-Body Database's lookup of a pinned record by
 the name Horizons gives it, under Small-Body Record Pinning.
-Earlier: 1.2 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 32619f8d and gallery @ a7d1a542. v1.2 (L-395) adds
-Checking an Entry Against JPL, what the Horizons check's build learned:
-JPL's Lookup cannot see record numbers; a bare number also finds
-asteroids and spacecraft, so an entry is found in three steps; JPL
-re-solves a record in place; and a recent comet's record number can be
-given to another comet. It corrects two lines under Small-Body Record
-Pinning: Encke's pin now lives in the orrery's list, and what a pin
-does not follow is a NEWER record, not a new solution.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-12 (L-431).
+on 2026-10-12 and 2026-10-13 (L-431).
 
 ## Horizons Center Body Rules
 
@@ -166,10 +164,19 @@ build: documentation/HANDOFF_L431_build2_orbits_markers_20261012.md.
   number of periods stepped, stated in the hover where it is more than
   a day: Sedna's aphelion, half of SBDB's 1,864-day sigma, about 930
   days.
-- Comparing the osculating orbit with JPL's mean elements keeps the
-  Sun-centred elements, because the mean elements are Sun-centred: a
-  barycentre ellipse against them reports a perturbation that is only
-  the change of centre.
+- An orbit drawn around the barycentre gets no comparison with the
+  stored "mean" elements; the hover says why in one sentence (Tony's
+  ruling, 2026-10-13). Around the Sun, a body this far out has elements
+  that move with the Sun's own wobble about the barycentre, which the
+  planets cause by pulling on the Sun (Sedna's period around the Sun
+  moved 370 years in one year). The stored "mean" elements are JPL's
+  elements around the Sun at the orbit solution's epoch, not means:
+  Sedna's are at 2018 (a = 481 au; its `epoch` field holds the date
+  Tony downloaded them, 2025). Against today's Sun-centred a of 540 au
+  the difference mostly shows the wobble, not a change in Sedna's path.
+  An orbit drawn around the Sun keeps its comparison. (1.4 said the
+  comparison stays Sun-centred; a label saying so was built and then
+  removed the same day.)
 
 ## Checking an Entry Against JPL (L-395)
 

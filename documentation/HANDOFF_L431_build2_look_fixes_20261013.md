@@ -113,3 +113,61 @@ is 50,654,700).
 Nothing here bumps a skill or the protocol. The next session confirms
 its loaded horizons-orbital-mechanics reads 1.4 before Horizons work
 (this session loaded 1.3, and was the one that bumped it).
+[Superseded by section 6: patch_L431_8 bumps it to 1.5.]
+
+## 6. Afterwards: no perturbation lines for a barycentre orbit
+
+Added by `patch_L431_8_no_bary_perturbation_20261013.py`, built on
+400a9615 (patch_L431_7 run and pushed).
+
+Tony read fix 2 above and asked why Sedna's comparison was around the
+Sun, when Sedna is worked out around the barycentre. The answer
+changed the fix:
+- The stored "mean" elements (`orbital_elements.py`) are JPL's
+  elements around the Sun at the orbit solution's epoch. Claude first
+  said their centre was never recorded and their dates disagreed; Tony
+  corrected it with the Horizons file they came from: "2018 is the
+  epoch of the mean elements. 2025 is when i downloaded the
+  ephemeris." The file's header reads "helio. ecliptic osc. elements",
+  epoch 2018. So both sides of the comparison are around the Sun,
+  eight years apart: a = 481 au then, 540 au now.
+- Around the Sun, a body as far out as Sedna has elements that move
+  with the Sun's own wobble about the barycentre, which the planets
+  cause by pulling on the Sun: its period around the Sun moved 370
+  years in one year (horizons-orbital-mechanics, A Period Depends on
+  Its Centre). So "+58.56 AU (12.2%)" was mostly that wobble, not a
+  change in Sedna's path.
+
+Tony's ruling, 2026-10-13: remove the lines for orbits drawn around the
+barycentre. Now Sedna's orbit hover reads "Perturbation (osculating vs
+mean): not shown.", names the centre it is drawn around, and says the
+comparison around the Sun would mostly show the Sun's own wobble, not a
+change in this body's path.
+Mercury and every other orbit drawn around the Sun keep their
+comparison (Encke has no stored elements to compare with). The "both
+around the Sun" label is gone.
+
+The checker's planted fault for this now prints the block for Sedna and
+must be caught as PERTURBATION SHOWN FOR A BARYCENTRE ORBIT; it also
+fails if Mercury loses its comparison. Still twelve planted faults.
+
+horizons-orbital-mechanics 1.4 said the comparison stays Sun-centred.
+That would lead a session to rebuild the misleading lines, so 1.5
+corrects it, a second version in one session (the ruling came after
+1.4 was installed), with protocol v3.94. The next session confirms its
+loaded copy reads 1.5 before Horizons work.
+
+Recorded, not chased: the stored "mean" elements are JPL's
+solution-epoch elements around the Sun, and their `epoch` field holds
+the download date; what "mean" and that field should say is one class
+on L-431.
+
+For Tony:
+- (do) Run `patch_L431_8_no_bary_perturbation_20261013.py` (VS Code,
+  Run), then `orrery_maintenance_run.py`: 25 of 25, Orbit markers 12 of
+  12; it also rewrites the Skill Manifest to 1.5.
+- (do) Reinstall horizons-orbital-mechanics 1.5 (Settings > Skills);
+  copy PROJECT_INSTRUCTIONS.md (v3.94) to the Project's instructions and
+  to `documentation/project_instructions_v3_94.md`.
+- (do) Move patch_L431_7 and patch_L431_8 into `documentation/`; commit
+  and push.

@@ -163,44 +163,16 @@ with `test_status_lines.parse_rows`:
   is the evidence Tony asked for before deciding on a `# Quote:` line.
   This build records what each page returned, nothing more.
 
-### 3d. The audit's domain split travels with the total (added 2026-10-12, Tony's decision in the same chat)
+### 3d. The audit's domain split: MOVED to its own session (2026-10-13)
 
-Tony: "the provenance checker is still reporting 288 tier 1 items. Can
-we separate this into meaningful groups, like orrery, earth science and
-stars in the checker report?" It already is, in `PROVENANCE_AUDIT.md`'s
-"Findings by File Type" table (provenance-discipline, Report Domain
-Classification); what reaches him is the total alone. At c5dff25: Earth
-System 149 in 11 files (three paleoclimate modules carry 112), orrery
-125 in 25 files (`shell_configs.py` 35 and `idealized_orbits.py` 29),
-stars 12 in 8 files (`exoplanet_coordinates.py` 5), utilities 2, dev
-tools and gallery 0. Two fixes, both method, report-only:
-
-- **The split prints wherever the total prints:** the scanner's
-  console summary, the maintenance run's summary line, the run history
-  (`provenance_history.py`), and the Signals line of
-  `documentation/WHERE_WE_ARE.md`, in the form "288: orrery 125, Earth
-  System 149, stars 12, utilities 2". Names beside the count, as the
-  gate-path line already does.
-- **One home for a module's domain.** `provenance_scanner.py` keeps its
-  own hand list, `MODULE_DOMAIN_MAP`, while every module but two
-  declares `Domain:` in its docstring, in the same six-word vocabulary,
-  and `module_atlas.classify_domain` reads it. At c5dff25 the two
-  disagree on 12 files (eleven dev tools filed as orrery, and
-  `data_acquisition.py`, tagged stars, whose one Tier-1 finding is
-  counted as orrery), and 15 files with findings are in no list and
-  default to orrery. The scanner reads the docstring tag through the
-  atlas's function and the hand list goes; the "Domain coverage gap"
-  note then names only a module with no tag, which is the atlas's
-  existing coverage-gap meaning. One Value, One Home, on a property.
-  The skill's Report Domain Classification section is rewritten to say
-  the tag is the store; that rides the same version as 3c's sentence.
-- Plant it: a file whose tag and the old list disagree, shown filed by
-  its tag; a file with no tag, shown named in the gap. The skill's
-  Scanner Mechanics bullet on role-driven inclusion is the model.
-
-Planning reading, for the handoff: the 149 Earth System findings are
-stage 14 on the road and off the active path; the orrery's 125 sit
-mostly in two files; the stars are nearly clean.
+This section carried the Tier-1 domain split (the total printed with
+orrery, Earth System, stars beside it; the scanner reading each
+module's docstring `Domain:` tag). On 2026-10-13 Tony asked for it as
+its own parallel session; it is now
+`documentation/HANDOFF_L437_tier1_by_domain_brief_20261013.md` (L-437).
+THIS SESSION DOES NOT BUILD IT. If the L-437 session bumps
+provenance-discipline before this one closes, this session's skill
+sentence rides a later version; say which in the handoff.
 
 ## 4. Build notes (method; the build session settles these and records them)
 
@@ -232,9 +204,8 @@ mostly in two files; the stars are nearly clean.
   builder's call, said in the handoff).
 - What is permanent after the patch is spent: the checker and its
   tests, the excuse file, the link-confirmations record in `data/`, the
-  three run rows and buttons, the skill sentence; and from 3d, the
-  domain split on every line that prints the total, and the scanner
-  reading the docstring `Domain:` tag.
+  three run rows and buttons, the skill sentence. (The domain split,
+  once 3d, is L-437's.)
 
 ## 5. For Tony, one at a time, in the build session
 
@@ -258,7 +229,6 @@ mostly in two files; the stars are nearly clean.
   order.
 - (decide) The items in section 5, in that session.
 - (do) Run the patch and the maintenance run; read the three new rows'
-  names, the first level-2 list, the first level-3 answers, and the
-  Tier-1 total with its split beside it; push.
+  names, the first level-2 list, and the first level-3 answers; push.
 
 Brief written October 2026 with Anthropic's Claude Fable 5.1.

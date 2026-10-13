@@ -52,6 +52,10 @@ accuracy sentence under its distances, as every other marker's does; and
 where the drawn orbit is around another centre (Sedna), the perturbation
 block says it compares the Sun-centred elements with the mean ones and
 prints them, so its Delta-a is not read against the drawn a.)
+Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5 (L-431,
+Tony's ruling of the same day: an orbit drawn around another centre than
+the Sun gets no osculating-vs-mean comparison, only a sentence saying
+why; the "both around the Sun" label is gone.)
 
 Role: computation
 Domain: orrery
@@ -219,7 +223,7 @@ def get_planet_perturbation_note(obj_name, orbit_source="Keplerian"):
     
     return perturbation_notes.get(obj_name, default_note)
 def get_mean_vs_osculating_assessment(obj_name, osc_params, mean_params, acc=None,
-                                      compared_around=None):
+                                      drawn_around=None):
     """
     Compare osculating vs mean orbital elements and return perturbation assessment HTML.
     
@@ -232,18 +236,31 @@ def get_mean_vs_osculating_assessment(obj_name, osc_params, mean_params, acc=Non
         obj_name (str): Object name
         osc_params (dict): Current osculating parameters (a, e, i, omega, Omega)
         mean_params (dict): Mean parameters from orbital_elements.py
-        compared_around (str): the centre's words, given when the drawn
-            orbit is around another centre than osc_params (L-431 build 2:
-            Sedna is drawn around the solar system's center of mass, and
-            compared around the Sun, where the mean elements are). The
-            block then names the centre and prints the elements it
-            compared, so its deltas are not read against the drawn ones.
+        drawn_around (str): the centre's words, given when the drawn orbit
+            is around another centre than the Sun (Sedna, around the solar
+            system's center of mass). No comparison is printed then, only
+            a sentence saying why (Tony's ruling, 2026-10-13). The stored
+            "mean" elements are JPL's elements around the Sun at its orbit
+            solution's epoch (Sedna's, 2018); around the Sun such a body's
+            elements move with the Sun's own wobble about the center of
+            mass, which the planets cause by pulling on the Sun, so the
+            difference would mostly show that, not a change in the body's
+            path.
     
     Returns:
         str: HTML-formatted perturbation assessment, or empty string if not available
     """
     if not mean_params:
         return ""
+    # FIXED (L-431, Tony's ruling of 2026-10-13): an orbit drawn around the
+    # solar system's center of mass gets no osculating-vs-mean comparison.
+    # The first fix (patch_L431_7) labelled the comparison "both around
+    # the Sun"; that made it clearer but not true, so it is removed.
+    if drawn_around:
+        return ("<br><br><b>Perturbation (osculating vs mean):</b> not shown."
+                f"<br>This orbit is drawn around {drawn_around}."
+                "<br>Compared around the Sun, the difference would mostly show"
+                "<br>the Sun's own wobble, not a change in this body's path.")
     
     osc_e = osc_params.get('e', 0)
     mean_e = mean_params.get('e', 0)
@@ -288,18 +305,8 @@ def get_mean_vs_osculating_assessment(obj_name, osc_params, mean_params, acc=Non
     
     epoch_str = mean_params.get('epoch', 'N/A')
     
-    # FIXED (L-431, after build 2's look): when the drawn orbit is around
-    # another centre, say which elements were compared, so "+58.56 AU"
-    # is not read against the drawn a.
-    if compared_around:
-        heading = (f"<br><br><b>Perturbation (osculating vs mean, both around "
-                   f"{compared_around}):</b>"
-                   f"<br>Osculating around {compared_around}: a={_pa.as_given(osc_a)} AU, "
-                   f"e={_pa.as_given(osc_e)}")
-    else:
-        heading = f"<br><br><b>Perturbation (osculating vs mean):</b>"
     assessment = (
-        f"{heading}"
+        f"<br><br><b>Perturbation (osculating vs mean):</b>"
         f"<br>Delta-e: {delta_e:+.8f} ({qual_e})"
         f"{delta_a_text}"
         f"<br>Delta-i: {delta_i:+.4f} deg"
@@ -5477,9 +5484,10 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                           'offset_au': (0.0, 0.0, 0.0), 'note': None,
                           'period': {'days': None, 'err_days': None, 'kind': 'none',
                                      'center': None, 'label': None, 'record': None}}
-            # The mean elements are around the Sun, so the comparison stays
-            # there; when the drawn orbit is not, the comparison says so.
-            _compared_around = 'the Sun' if _orbit['elements'] is not params else None
+            # An orbit drawn around another centre gets no comparison with the
+            # stored mean elements (Tony's ruling, 2026-10-13).
+            _drawn_around = (_orbit.get('label') or 'another centre') \
+                if _orbit['elements'] is not params else None
             if _orbit['elements'] is not params:
                 params = dict(_orbit['elements'])
                 a = params.get('a', 0)
@@ -5861,7 +5869,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 + f"a={_pa.as_given(a)} AU, e={_pa.as_given(e)},<br>"
                 f"i={_pa.as_given(i)} deg"
                 f"{get_planet_perturbation_note(obj_name)}"
-                f"{get_mean_vs_osculating_assessment(obj_name, planetary_params[obj_name], ORIGINAL_planetary_params.get(obj_name, {}), _acc, _compared_around)}"
+                f"{get_mean_vs_osculating_assessment(obj_name, planetary_params[obj_name], ORIGINAL_planetary_params.get(obj_name, {}), _acc, _drawn_around)}"
             )
             fig.add_trace(
                 go.Scatter3d(

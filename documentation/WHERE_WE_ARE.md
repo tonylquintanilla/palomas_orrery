@@ -1,25 +1,25 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 13, 2026: L-431 build 2 accepted at your look; three fixes.
-- Written at orrery 87a54704 and gallery 924977a3.
+Last updated: October 13, 2026, afternoon: no perturbation lines for Sedna.
+- Written at orrery 400a9615 and gallery 924977a3.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
 > - Your look at the drawn orbits and markers: accepted ("bottom line:
 >   looks good").
-> - Three fixes from your saved plot: Encke's white arc's accuracy line;
->   Sedna's perturbation lines say "around the Sun"; the frame fits
->   Sedna's drawn orbit (1,030 au, not 1,104).
+> - Fixes from your saved plot: Encke's white arc's accuracy line; the
+>   frame fits Sedna (1,030 au, not 1,104); by your ruling, no
+>   perturbation lines for orbits drawn around the barycentre.
 >
 > **Do next:** *L-431's website build, and the four briefed sessions
 > beside it, in your order.*
 >
 > **Needs you now:**
-> - *Run patch_L431_7 and the maintenance run (25 of 25, Orbit markers
->   12 of 12); move the patch into documentation/; push. No look
->   needed.*
+> - *Run patch_L431_8 and the maintenance run (25 of 25); reinstall
+>   horizons-orbital-mechanics 1.5; the Project's instructions to
+>   v3.94; move both patches into documentation/; push.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 

@@ -2641,6 +2641,38 @@ resident.
 (Moved down from the resident protocol on 2026-10-12 when
 v3.93 made a fourth entry.)
 
+v3.91 (October 11, 2026): No rule changed in this document. ONE
+skill bump, one version (L-351, L-421): ledger-and-session-records
+1.19 -> 1.20. YOUR TWO FOLDERS IN EVERY HEADER.
+
+WHAT PROMPTED IT. Tony, in his run record of 2026-10-10: "since we
+are using cowork, the location of the local files should be included
+in the handoff header along with the github info." 1.19 named the
+folders under Where a File Goes; a session reading a brief cold did
+not see them there. The brief for the inner Oort cloud's website half
+carried them in its header, and its session saved both patches where
+Tony runs them. Tony asked for this version at that session's close,
+one version only.
+
+WHAT CHANGED. ledger-and-session-records, under Anchor Requirement,
+Handoff Structure and Tony's Local Folders: every handoff, brief and
+design record names both folders beside the GitHub line. Its v1.17
+entry moved to documentation/SKILL_HISTORIES.md, by the three-entry
+rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+ledger-and-session-records 1.20 before ledger or handoff work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.88 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-13 when
+v3.94 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

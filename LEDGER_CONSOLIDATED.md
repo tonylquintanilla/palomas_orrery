@@ -376,6 +376,10 @@ opened from Tony's question on Settled), built on c9722520.
 Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5
 (L-431 build 2 accepted at Tony's look, with L-401's second slice; the
 three findings read from his saved plot fixed), built on 87a54704.
+Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5
+(L-431: Tony's ruling, no perturbation lines for an orbit drawn around
+the barycentre; horizons-orbital-mechanics 1.5, protocol v3.94), built
+on 400a9615.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1719,19 +1723,47 @@ L-395.
     center of mass) above a perturbation block that compared the
     Sun-centred a (539.87 au) with the mean, so "+58.56 AU (12.2%)"
     read as the drawn orbit's. The block now says "both around the Sun"
-    and prints the elements it compared.
+    and prints the elements it compared. SUPERSEDED the same day, below.
   - The plot's frame was sized from the Sun-centred aphelion, 1,004
     au, so it reached 1,104 au around a drawn ellipse ending at 937.
     `calculate_axis_range_from_orbits`, which the static plot and the
     animation share, now reads the drawn far end
     (`orbital_period.drawn_aphelion_distance`): 1,030 au.
+- **2026-10-13, Tony's ruling on the perturbation lines** (in chat,
+  after patch_L431_7 ran and was pushed at 400a9615). He asked why
+  Sedna's comparison was around the Sun when Sedna is worked out
+  around the barycentre. Claude first told him the stored "mean"
+  elements had no recorded centre and a mismatched date; Tony corrected
+  that with the Horizons file they came from
+  (`horizons_results_sedna.txt`, uploaded in chat): "2018 is the epoch of
+  the mean elements. 2025 is when i downloaded the ephemeris." Its
+  header reads "IAU76/J2000 helio. ecliptic osc. elements", EPOCH
+  2018-Oct-20 in JPL's current solution (the stored set, 2018-May-16,
+  is from an earlier one). So both sides were around the Sun, eight
+  years apart: a = 481 au then, 540 au now. Around the Sun, Sedna's
+  elements move with the Sun's own wobble about the barycentre, which
+  the planets cause by pulling on the Sun (its period around the Sun
+  moved 370 years in one year), so the "+58.56 AU (12.2%)" mostly
+  showed that wobble, not a change in Sedna's path. Tony: remove the
+  lines for orbits drawn around the barycentre. `patch_L431_8_no_bary_perturbation_20261013.py`
+  does: the hover says "not shown" and why; Mercury and every orbit
+  drawn around the Sun keep theirs. The checker's planted fault now
+  prints the block for Sedna. horizons-orbital-mechanics 1.5 replaces
+  1.4's "the comparison stays Sun-centred"; protocol v3.94.
+- **Found, recorded and not chased (The Braid):** the stored "mean"
+  elements in `orbital_elements.py` are JPL's elements around the Sun at
+  each orbit solution's epoch, not means; their `epoch` field holds the
+  date they were downloaded, and their centre is not written beside
+  them. The comparison still runs for every orbit drawn around the Sun.
+  One class: what the word "mean" and the epoch field should say.
 **Gap:** three builds, in order (the record's section 3):
 1. The period in the orrery: BUILT and working against JPL
    (2026-10-11); its words settled at L-401's look (2026-10-12).
 2. The drawn ellipse around the period's centre, and the markers from
    the fetched period: BUILT (2026-10-12) and ACCEPTED at Tony's look
    (2026-10-13). The three findings from his saved plot are fixed in
-   patch_L431_7, which waits for his run.
+   patch_L431_7 (run, pushed at 400a9615); the perturbation lines are
+   removed for barycentre orbits in patch_L431_8, which waits for his run.
 3. The website, next: the export carries each period and the elements
    around its centre; every room's hover prints it and draws the orbit
    around that centre; the Horizons check compares it.

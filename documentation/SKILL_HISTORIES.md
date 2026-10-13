@@ -736,5 +736,16 @@ actually uses now.
 
 ## horizons-orbital-mechanics
 
+Earlier: 1.2 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 32619f8d and gallery @ a7d1a542. v1.2 (L-395) adds
+Checking an Entry Against JPL, what the Horizons check's build learned:
+JPL's Lookup cannot see record numbers; a bare number also finds
+asteroids and spacecraft, so an entry is found in three steps; JPL
+re-solves a record in place; and a recent comet's record number can be
+given to another comet. It corrects two lines under Small-Body Record
+Pinning: Encke's pin now lives in the orrery's list, and what a pin
+does not follow is a NEWER record, not a new solution.
+(Moved down 2026-10-13, when 1.5 made a fourth entry.)
+
 Earlier: 1.1 | Cut from palomas_orrery @ e83fe9ce | 2026-07-12
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons.
