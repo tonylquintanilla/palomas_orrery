@@ -574,8 +574,559 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
   3. Open the orrery fresh and do the look in section 7 of
      documentation/HANDOFF_L431_build2_orbits_markers_20261012.md. Answer Yes to
      Sedna's update box, so its record carries the center-of-mass elements.
+
+## 7. Your look (Mode 5; your eyes are the acceptance)
+
+- Run the patch. At its end it asks JPL for Sedna, Encke and Mercury at
+  today's date, 00:00 UTC, and prints each body's drawn centre and its
+  marker dates beside the dates the typed table would have given. It
+  writes nothing. -- done
+- Run the maintenance run (section 9). -- done
+- Open the orrery fresh. Set the time to 00:00. Tick Sedna, Encke,
+  Mercury and Venus, Sun at the centre, apsidal markers on, Plot.
+  Answer Yes to Sedna's, Encke's and Mercury's update boxes and No to
+  Venus's, so Venus shows the typed fallback once.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/palomas_orrery.py
+Working directory set to: c:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github
+Interpreter: C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe
+Working directory: c:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github
+Window config file: c:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\window_config.json
+Restored window geometry: 1536x793+0+5
+Window will be maximized
+
+============================================================
+LOADING ORBIT CACHE FROM: data/orbit_paths.json
+============================================================
+
+Cache loaded successfully: 1502 valid entries
+
+[CACHE HEALTH SUMMARY]
+Total cached orbits: 1502
+Orbits by center object:
+  3I/ATLAS: 5 orbits
+  Apophis: 2 orbits
+  Arrokoth: 6 orbits
+  Bennu: 2 orbits
+  Bennu/OSIRIS: 1 orbits
+  Earth: 135 orbits
+  Earth-Moon Barycenter: 3 orbits
+  Eris: 2 orbits
+  Eris-Dysnomia Barycenter: 4 orbits
+  Eris/Dysnomia: 101 orbits
+  Haumea: 11 orbits
+  Haumea System Barycenter: 3 orbits
+  Juno: 4 orbits
+  Jupiter: 104 orbits
+  K1: 2 orbits
+  K1-B: 1 orbits
+  K1-C: 1 orbits
+  K1-D: 1 orbits
+  L1: 2 orbits
+  L2: 3 orbits
+  Leucus: 1 orbits
+  Makemake: 1 orbits
+  Mars: 106 orbits
+  Menoetius: 2 orbits
+  Mercury: 102 orbits
+  Moon: 112 orbits
+  Neptune: 101 orbits
+  Orcus: 3 orbits
+  Orcus-Vanth Barycenter: 3 orbits
+  Patroclus: 2 orbits
+  Patroclus-Menoetius Barycenter: 4 orbits
+  Phobos: 6 orbits
+  Planet 9: 5 orbits
+  Pluto: 102 orbits
+  Pluto-Charon Barycenter: 9 orbits
+  Polymele: 1 orbits
+  Quaoar: 1 orbits
+  Quaoar-Weywot Barycenter: 2 orbits
+  R2: 1 orbits
+  Saturn: 101 orbits
+  Sun: 157 orbits
+  Uranus: 101 orbits
+  Vanth: 2 orbits
+  Venus: 101 orbits
+
+Note: Cache can only be manually deleted by removing 'data/orbit_paths.json' file
+Cache and restore points (date = when that content was written):
+  data/orbit_paths.json: 131.1 MB, written 2026-10-12 20:49
+  data/orbit_paths.json.backup: 131.1 MB, written 2026-10-12 14:06
+  data/orbit_paths.json.backup_old: 131.1 MB, written 2026-10-12 13:52
+--------------------------------------------------
+[DEBUG] Sun can be center (numeric ID: 10)
+[DEBUG] Mercury can be center (numeric ID: 199)
+[DEBUG] Venus can be center (numeric ID: 299)
+[DEBUG] Apophis can be center (has center_id)
+[DEBUG] Earth can be center (numeric ID: 399)
+[DEBUG] Moon can be center (numeric ID: 301)
+[DEBUG] Earth-Moon Barycenter can be center (numeric ID: 3)
+[DEBUG] EM-L1 can be center (numeric ID: 3011)
+[DEBUG] EM-L2 can be center (numeric ID: 3012)
+[DEBUG] EM-L3 can be center (numeric ID: 3013)
+[DEBUG] EM-L4 can be center (numeric ID: 3014)
+[DEBUG] EM-L5 can be center (numeric ID: 3015)
+[DEBUG] L1 can be center (numeric ID: 31)
+[DEBUG] L2 can be center (numeric ID: 32)
+[DEBUG] L3 can be center (numeric ID: 33)
+[DEBUG] L4 can be center (numeric ID: 34)
+[DEBUG] L5 can be center (numeric ID: 35)
+[DEBUG] Bennu can be center (has center_id)
+[DEBUG] Itokawa can be center (has center_id)
+[DEBUG] Ryugu can be center (has center_id)
+[DEBUG] Eros can be center (has center_id)
+[DEBUG] Mars can be center (numeric ID: 499)
+[DEBUG] Phobos can be center (numeric ID: 401)
+[DEBUG] Deimos can be center (numeric ID: 402)
+[DEBUG] Dinkinesh can be center (has center_id)
+[DEBUG] Vesta can be center (has center_id)
+[DEBUG] Donaldjohanson can be center (has center_id)
+[DEBUG] Ceres can be center (has center_id)
+[DEBUG] 16 Psyche can be center (has center_id)
+[DEBUG] Orus can be center (has center_id)
+[DEBUG] Polymele can be center (has center_id)
+[DEBUG] Eurybates can be center (has center_id)
+[DEBUG] Patroclus-Menoetius Barycenter can be center (numeric ID: 20000617)
+[DEBUG] Patroclus can be center (has center_id)
+[DEBUG] Menoetius can be center (has center_id)
+[DEBUG] Leucus can be center (has center_id)
+[DEBUG] Jupiter can be center (numeric ID: 599)
+[DEBUG] Metis can be center (numeric ID: 516)
+[DEBUG] Adrastea can be center (numeric ID: 515)
+[DEBUG] Amalthea can be center (numeric ID: 505)
+[DEBUG] Thebe can be center (numeric ID: 514)
+[DEBUG] Io can be center (numeric ID: 501)
+[DEBUG] Europa can be center (numeric ID: 502)
+[DEBUG] Ganymede can be center (numeric ID: 503)
+[DEBUG] Callisto can be center (numeric ID: 504)
+[DEBUG] Saturn can be center (numeric ID: 699)
+[DEBUG] Pan can be center (numeric ID: 618)
+[DEBUG] Daphnis can be center (numeric ID: 635)
+[DEBUG] Prometheus can be center (numeric ID: 616)
+[DEBUG] Pandora can be center (numeric ID: 617)
+[DEBUG] Mimas can be center (numeric ID: 601)
+[DEBUG] Enceladus can be center (numeric ID: 602)
+[DEBUG] Tethys can be center (numeric ID: 603)
+[DEBUG] Dione can be center (numeric ID: 604)
+[DEBUG] Rhea can be center (numeric ID: 605)
+[DEBUG] Titan can be center (numeric ID: 606)
+[DEBUG] Hyperion can be center (numeric ID: 607)
+[DEBUG] Iapetus can be center (numeric ID: 608)
+[DEBUG] Phoebe can be center (numeric ID: 609)
+[DEBUG] Uranus can be center (numeric ID: 799)
+[DEBUG] Ariel can be center (numeric ID: 701)
+[DEBUG] Umbriel can be center (numeric ID: 702)
+[DEBUG] Titania can be center (numeric ID: 703)
+[DEBUG] Oberon can be center (numeric ID: 704)
+[DEBUG] Miranda can be center (numeric ID: 705)
+[DEBUG] Portia can be center (numeric ID: 712)
+[DEBUG] Mab can be center (numeric ID: 726)
+[DEBUG] Neptune can be center (numeric ID: 899)
+[DEBUG] Triton can be center (numeric ID: 801)
+[DEBUG] Despina can be center (numeric ID: 805)
+[DEBUG] Galatea can be center (numeric ID: 806)
+[DEBUG] Pluto-Charon Barycenter can be center (numeric ID: 9)
+[DEBUG] Pluto can be center (numeric ID: 999)
+[DEBUG] Charon can be center (numeric ID: 901)
+[DEBUG] Styx can be center (numeric ID: 905)
+[DEBUG] Nix can be center (numeric ID: 902)
+[DEBUG] Kerberos can be center (numeric ID: 904)
+[DEBUG] Hydra can be center (numeric ID: 903)
+[DEBUG] Orcus-Vanth Barycenter can be center (numeric ID: 20090482)
+[DEBUG] Orcus can be center (has center_id)
+[DEBUG] Vanth can be center (has center_id)
+[DEBUG] Haumea can be center (has center_id)
+[DEBUG] Hi'iaka can be center (has center_id)
+[DEBUG] Namaka can be center (has center_id)
+[DEBUG] Quaoar can be center (has center_id)
+[DEBUG] Weywot can be center (has center_id)
+[DEBUG] Arrokoth can be center (has center_id)
+[DEBUG] Makemake can be center (numeric ID: 20136472)
+[DEBUG] MK2 can be center (numeric ID: 120136472)
+[DEBUG] Gonggong can be center (has center_id)
+[DEBUG] Xiangliu can be center (has center_id)
+[DEBUG] Eris can be center (has center_id)
+[DEBUG] Dysnomia can be center (has center_id)
+[CENTER MENU] Dynamic center dropdown initialized (starts with Sun only)
+[DASHBOARD] Dashboard ready.
+[CENTER MENU] Added traces to 183 object variables
+Restored sash positions: [489, 1013]
+[DEBUG] Sun can be center (numeric ID: 10)
+[CENTER MENU] Dynamic centers: Sun + ['Sun']
+[DEBUG] Sun can be center (numeric ID: 10)
+[DEBUG] Mercury can be center (numeric ID: 199)
+[CENTER MENU] Dynamic centers: Sun + ['Sun', 'Mercury']
+[DEBUG] Sun can be center (numeric ID: 10)
+[DEBUG] Mercury can be center (numeric ID: 199)
+[DEBUG] Venus can be center (numeric ID: 299)
+[CENTER MENU] Dynamic centers: Sun + ['Sun', 'Mercury', 'Venus']
+[DEBUG] Sun can be center (numeric ID: 10)
+[DEBUG] Mercury can be center (numeric ID: 199)
+[DEBUG] Venus can be center (numeric ID: 299)
+[CENTER MENU] Dynamic centers: Sun + ['Sun', 'Mercury', 'Venus']
+[DEBUG] Sun can be center (numeric ID: 10)
+[DEBUG] Mercury can be center (numeric ID: 199)
+[DEBUG] Venus can be center (numeric ID: 299)
+[DEBUG] Encke can be center (numeric ID: 90000091)
+[CENTER MENU] Dynamic centers: Sun + ['Sun', 'Mercury', 'Venus', 'Encke']
+[PRE-FETCH] Checking osculating elements for 4 objects...
+User chose to update Mercury
+  Using Horizons ID: 199 (id_type: None)
+[...] Fetching osculating elements for Mercury from JPL Horizons...
+   Using Horizons ID: 199 (id_type: None)
+  [Horizons Query] ID: 199 | Type: None | Location: @sun | Date: 2026-10-13 08:30
+  [L-431 period] 199: the elements fetch gave PR 87.9688203 d, the period query 87.9688203 d -- agree
+[OK] Period for Mercury: 87.96882030278451 d around @sun (change in a year 0.00036931457614741703 d; not a small body; SBDB not asked)
+[OK] Fetched elements (solution date: 2026-10-13)
+  Rotated: osculating_cache_backup.json [OK] osculating_cache_backup_old.json
+  Backed up: osculating_cache.json [OK] osculating_cache_backup.json
+[OK] Saved: osculating_cache.json (2-gen protected)
+[SUCCESS] Mercury fetched fresh data (e=0.2056387074252793)
+[PRE-FETCH] OK: Mercury: Updated
+User chose to use existing elements for Venus
+[OK] Using cached elements for Venus (2 months ago)
+[PRE-FETCH] OK: Venus: Updated
+User chose to update Sedna
+  Using Horizons ID: 2003 VB12 (id_type: smallbody)
+[...] Fetching osculating elements for Sedna from JPL Horizons...
+   Using Horizons ID: 2003 VB12 (id_type: smallbody)
+  [Horizons Query] ID: 2003 VB12 | Type: smallbody | Location: @sun | Date: 2026-10-13 08:30
+[OK] Period for Sedna: 4160095.697859893 d around @0 (change in a year 11.097265525255352 d; SBDB sigma)
+[OK] Fetched elements (solution date: 2026-10-13)
+  Rotated: osculating_cache_backup.json [OK] osculating_cache_backup_old.json
+  Backed up: osculating_cache.json [OK] osculating_cache_backup.json
+[OK] Saved: osculating_cache.json (2-gen protected)
+[PRE-FETCH] OK: Sedna: Updated
+User chose to update Encke
+  Using Horizons ID: 90000091 (id_type: smallbody)
+[...] Fetching osculating elements for Encke from JPL Horizons...
+   Using Horizons ID: 90000091 (id_type: smallbody)
+  [Horizons Query] ID: 90000091 | Type: smallbody | Location: @sun | Date: 2026-10-13 08:30
+  [L-431 period] 90000091: the elements fetch gave PR 1206.320224 d, the period query 1206.320224 d -- agree
+[OK] Period for Encke: 1206.320223793072 d around @sun (change in a year 0.15083758920104628 d; SBDB sigma)
+[OK] Fetched elements (solution date: 2026-10-13)
+  Rotated: osculating_cache_backup.json [OK] osculating_cache_backup_old.json
+  Backed up: osculating_cache.json [OK] osculating_cache_backup.json
+[OK] Saved: osculating_cache.json (2-gen protected)
+[PRE-FETCH] OK: Encke: Updated
+[get_interval_settings] Read days_to_plot: 28
+[SYSTEM SCOPE] Center: Sun, System: solar
+Encke: Need 2 days from 2026-11-09 00:00:00 to 2026-11-10 08:29:00
+Checking orbit data for updates to 2026-11-10...
+Fetching 2 days for Encke (gap in cache)
+Fetching orbit data for Encke from 2026-11-09 to 2026-11-10
+  Rotated: orbit_paths.json.backup [OK] orbit_paths.json.backup_old
+  Backed up: orbit_paths.json [OK] orbit_paths.json.backup
+[OK] Saved: orbit_paths.json (2-gen protected)
+Smart fetch complete: Updated 1 orbits with minimal data fetching. Saved approximately 0.3 hours of fetch time.
+  Raw days_to_plot from entry: 28
+  Settings days_to_plot: 28.0
+  Orbital period: 88.0 days
+  Requested days: 28.0
+  Plot days (NO LIMIT): 28.0
+  Final days for dates_list: 28.0
+  Dates list spans: 28 days
+  First date: 2026-10-13 08:29:00
+  Last date: 2026-11-10 08:29:00
+Mercury (orbital): 51 dates from 2026-10-13 08:29:00 to 2026-11-10 08:29:00 (28 days)
+  Raw days_to_plot from entry: 28
+  Settings days_to_plot: 28.0
+  Orbital period: 224.7 days
+  Requested days: 28.0
+  Plot days (NO LIMIT): 28.0
+  Final days for dates_list: 28.0
+  Dates list spans: 28 days
+  First date: 2026-10-13 08:29:00
+  Last date: 2026-11-10 08:29:00
+Venus (orbital): 51 dates from 2026-10-13 08:29:00 to 2026-11-10 08:29:00 (28 days)
+  Raw days_to_plot from entry: 28
+  Settings days_to_plot: 28.0
+  Orbital period: 4581642.5 days
+  Requested days: 28.0
+  Plot days (NO LIMIT): 28.0
+  Final days for dates_list: 28.0
+  Dates list spans: 28 days
+  First date: 2026-10-13 08:29:00
+  Last date: 2026-11-10 08:29:00
+Sedna (orbital): 51 dates from 2026-10-13 08:29:00 to 2026-11-10 08:29:00 (28 days)
+  Raw days_to_plot from entry: 28
+  Settings days_to_plot: 28.0
+  Orbital period: 1206.3 days
+  Requested days: 28.0
+  Plot days (NO LIMIT): 28.0
+  Final days for dates_list: 28.0
+  Dates list spans: 28 days
+  First date: 2026-10-13 08:29:00
+  Last date: 2026-11-10 08:29:00
+Encke (orbital): 51 dates from 2026-10-13 08:29:00 to 2026-11-10 08:29:00 (28 days)
+
+Current Object Positions:
+==================================================
+Sun             Position: (   0.000,    0.000,    0.000) AU   Distance from center: Distance data unavailable
+Mercury         Position: (   0.239,   -0.356,   -0.051) AU   Distance from center:    0.432 AU
+Venus           Position: (   0.706,    0.165,   -0.038) AU   Distance from center:    0.726 AU
+Sedna           Position: (  38.688,   71.240,  -16.994) AU   Distance from center:   82.829 AU
+Encke           Position: (   1.926,    0.557,    0.270) AU   Distance from center:    2.023 AU
+==================================================
+Mercury: Elliptical orbit - a=0.387097 AU, e=0.2056, aphelion=0.466700 AU
+Venus: Elliptical orbit - a=0.723328 AU, e=0.0068, aphelion=0.728231 AU
+Sedna: Elliptical orbit - a=539.867662 AU, e=0.8589, aphelion=1003.568167 AU
+Encke: Elliptical orbit - a=2.217734 AU, e=0.8473, aphelion=4.096863 AU
+
+Automatic scaling calculation:
+  Maximum orbital distance: 1003.568167 AU
+  Buffer factor: 1.1
+  Final axis range: +/-1103.924983 AU
+[NORMAL MODE] Using dates_lists for plot_actual_orbits
+[NORMAL MODE] Mercury: 51 dates from 2026-10-13 08:29:00 to 2026-11-10 08:29:00
+
+Processing trajectory for 199:
+Requested epochs: 51
+Returned vectors: 51
+Direct position matches: 51
+Interpolated positions: 0
+Final coverage: 51/51 epochs
+[NORMAL MODE] Plotted Mercury orbit with 51 points
+-> Added closest plotted marker for Mercury to Sun: 0.307496 AU on 2026-11-10 08:29:00 UTC
+[NORMAL MODE] Venus: 51 dates from 2026-10-13 08:29:00 to 2026-11-10 08:29:00
+
+Processing trajectory for 299:
+Requested epochs: 51
+Returned vectors: 51
+Direct position matches: 51
+Interpolated positions: 0
+Final coverage: 51/51 epochs
+[NORMAL MODE] Plotted Venus orbit with 51 points
+-> Added closest plotted marker for Venus to Sun: 0.721937 AU on 2026-11-10 08:29:00 UTC
+[NORMAL MODE] Sedna: 51 dates from 2026-10-13 08:29:00 to 2026-11-10 08:29:00
+
+Processing trajectory for 2003 VB12:
+Requested epochs: 51
+Returned vectors: 51
+Direct position matches: 51
+Interpolated positions: 0
+Final coverage: 51/51 epochs
+[NORMAL MODE] Plotted Sedna orbit with 51 points
+-> Added closest plotted marker for Sedna to Sun: 82.809115 AU on 2026-11-10 08:29:00 UTC
+[NORMAL MODE] Encke: 51 dates from 2026-10-13 08:29:00 to 2026-11-10 08:29:00
+
+Processing trajectory for 90000091:
+Requested epochs: 51
+Returned vectors: 51
+Direct position matches: 51
+Interpolated positions: 0
+Final coverage: 51/51 epochs
+[NORMAL MODE] Plotted Encke orbit with 51 points
+-> Added closest plotted marker for Encke to Sun: 1.703278 AU on 2026-11-10 08:29:00 UTC
+Full hover text: <b>Sun</b><br>Sky position seen from Earth:<br>Right Ascension: 13h 13m 57.672s<br>Declination: -7 deg 49' 43.28"<br>Uncertainty: none given by JPL with this position<br><br>Distance from Center: 0.00000000 AU<br>Distance: 0 kilometers<br>Distance: 0.0000000 light-minutes<br>Velocity: N/A AU/day<br>Velocity: N/A km/hr (N/A km/sec)<br>This body is the center of the plot.<br>Orbital period: N/A<br>Horizons: 10. NASA: "The Sun's gravity holds the solar system together, keeping<br>everything in its orbit."
+Minimal hover text: <b>Sun</b><br>Sky position seen from Earth: RA 13h 13m 57.672s, Dec -7 deg 49' 43.28"<br>Uncertainty: none given by JPL with this position
+Full hover text: <b>Mercury</b><br>Position at: 2026-10-13 08:29:00 UTC<br>Sky position seen from Earth:<br>Right Ascension: 14h 46m 28.308s<br>Declination: -19 deg 10' 08.87"<br>Uncertainty: none given by JPL with this position<br><br>Distance from Center: 0.43197627 AU<br>Distance: 64,622,730 kilometers<br>Distance: 3.5926371 light-minutes<br>Distance to Center Surface: 63,927,030 kilometers<br>Velocity: 0.024608955 AU/day<br>Velocity: 153,393.635 km/hr (42.609343 km/sec)<br>These distances are rounded to JPL's published accuracy for<br>Mercury's orbit.<br>The speed is rounded to the same relative precision as the distance.<br>Orbital period: 0.240846 years (87.969 days)<br>Around the Sun, from JPL Horizons, fetched 2026-10-13.<br>Rounded to how much the period changes in a year.<br>Horizons: 199. NASA: "Mercury is the smallest planet in our solar system and<br>the nearest to the Sun."
+Minimal hover text: <b>Mercury</b><br>Sky position seen from Earth: RA 14h 46m 28.308s, Dec -19 deg 10' 08.87"<br>Uncertainty: none given by JPL with this position
+Full hover text: <b>Venus</b><br>Position at: 2026-10-13 08:29:00 UTC<br>Sky position seen from Earth:<br>Right Ascension: 14h 06m 06.036s<br>Declination: -20 deg 48' 24.26"<br>Uncertainty: none given by JPL with this position<br><br>Distance from Center: 0.72564279 AU<br>Distance: 108,554,616 kilometers<br>Distance: 6.0349870 light-minutes<br>Distance to Center Surface: 107,858,916 kilometers<br>Velocity: 0.0201617771 AU/day<br>Velocity: 125,673.289 km/hr (34.909247 km/sec)<br>These distances are rounded to JPL's published accuracy for<br>Venus's orbit.<br>The speed is rounded to the same relative precision as the distance.<br>Orbital period: 0.615198 years (224.701 days)<br>Typed value, not fetched from JPL.<br>Horizons: 299. NASA: "Venus is the second planet from the Sun, and the sixth<br>largest planet. It's the hottest planet in our solar system."
+Minimal hover text: <b>Venus</b><br>Sky position seen from Earth: RA 14h 06m 06.036s, Dec -20 deg 48' 24.26"<br>Uncertainty: none given by JPL with this position
+Full hover text: <b>Sedna</b><br>Position at: 2026-10-13 08:29:00 UTC<br>Sky position seen from Earth:<br>Right Ascension: 04h 10m 33.730s<br>Declination: +08 deg 54' 33.84"<br>Uncertainty: +/-0.10 arcsec (JPL, 3-sigma)<br><br>Distance from Center: 82.83 AU<br>Distance: 12,391,000,000 kilometers<br>Distance: 11.481 light-hours<br>Distance to Center Surface: 12,390,000,000 kilometers<br>Velocity: 0.0025685 AU/day<br>Velocity: 16,010 km/hr (4.447 km/sec)<br>These distances are rounded to JPL's uncertainty for Sedna's position<br>on this date, at three standard deviations.<br>The speed is rounded to JPL's uncertainty in its velocity.<br>Orbital period: 11,390 years (4,160,000 days)<br>Around the solar system's center of mass, from JPL Horizons, fetched 2026-10-13.<br>Rounded to JPL's stated uncertainty in the orbit.<br>Horizons: 2003 VB12. A distant trans-Neptunian dwarf planet with an extremely<br>long orbit.
+Minimal hover text: <b>Sedna</b><br>Sky position seen from Earth: RA 04h 10m 33.730s, Dec +08 deg 54' 33.84"<br>Uncertainty: +/-0.10 arcsec (JPL, 3-sigma)
+Full hover text: <b>Encke</b><br>Position at: 2026-10-13 08:29:00 UTC<br>Sky position seen from Earth:<br>Right Ascension: 00h 23m 33.634s<br>Declination: +18 deg 51' 10.30"<br>Uncertainty: +/-0.22 arcsec (JPL, 3-sigma)<br><br>Distance from Center: 2.02331 AU<br>Distance: 302,683,000 kilometers<br>Distance: 16.8274 light-minutes<br>Distance to Center Surface: 301,988,000 kilometers<br>Velocity: 0.0126124 AU/day<br>Velocity: 78,616 km/hr (21.8378 km/sec)<br>These distances are rounded to JPL's uncertainty for Encke's position<br>on this date, at three standard deviations.<br>The speed is rounded to JPL's uncertainty in its velocity.<br>Orbital period: 3.303 years (1206.3 days)<br>Around the Sun, from JPL Horizons, fetched 2026-10-13.<br>Rounded to how much the period changes in a year.<br>Horizons: 2P/Encke. A short-period comet whose dust trail is the source of the<br>Taurid meteor showers.
+Minimal hover text: <b>Encke</b><br>Sky position seen from Earth: RA 00h 23m 33.634s, Dec +18 deg 51' 10.30"<br>Uncertainty: +/-0.22 arcsec (JPL, 3-sigma)
+
+[DEBUG] Processing Mercury
+[DEBUG] params keys: dict_keys(['a', 'e', 'i', 'omega', 'Omega', 'epoch', 'TP', 'MA', 'TA'])
+  Mercury: Using TP for perihelion: 2026-11-10 08:29:21
+  Mercury: No Tapo provided - actual aphelion marker will not be plotted
+  Added Keplerian periapsis for Mercury at distance 0.307495 AU
+  Added Keplerian apoapsis for Mercury at distance 0.466700 AU
+  Mercury: Using TP for perihelion: 2026-11-10 08:29:21
+  Mercury: No Tapo provided - actual aphelion marker will not be plotted
+  Next perihelion: 2026-11-10 08:29:21
+
+[DEBUG] Found apsidal dates for Mercury
+  Perihelion dates: ['2026-11-10 08:29:21']
+  Aphelion dates: []
+    Fetched position for 2026-11-10 08:29:21
+  Fetched positions: 1 dates
+[DEBUG] Calling enhanced markers for Mercury:
+  params has epoch: True
+  epoch value: 2026-10-13 08:30 osc.
+  ideal_apsides is None: False
+  ideal_apsides keys: dict_keys(['periapsis', 'apoapsis'])
+[HOVER DEBUG] Mercury Keplerian Perihelion (Epoch: 2026-10-13 08:30 osc.):
+  ideal_pos is not None: True
+  params is not None: True
+  'epoch' in params: True
+  epoch value: 2026-10-13 08:30 osc.
+  angle_deg: 0.000 deg
+[KEPLERIAN POS] Added marker for Mercury at distance 0.431976 AU (TA=226.4 deg)
+  Added mean orbit trace for Mercury (e=0.205646, Elliptical, epoch=2025-11-19 osc.)
+
+[DEBUG] Processing Venus
+[DEBUG] params keys: dict_keys(['a', 'e', 'i', 'omega', 'Omega', 'epoch', 'TP', 'MA', 'TA'])
+  Venus: Using TP for perihelion: 2026-05-15 02:34:19
+  Venus: No Tapo provided - actual aphelion marker will not be plotted
+  Added Keplerian periapsis for Venus at distance 0.718425 AU
+  Added Keplerian apoapsis for Venus at distance 0.728231 AU
+  Venus: Using TP for perihelion: 2026-05-15 02:34:19
+  Venus: No Tapo provided - actual aphelion marker will not be plotted
+  Next perihelion: 2026-05-15 02:34:19
+
+[DEBUG] Found apsidal dates for Venus
+  Perihelion dates: ['2026-05-15 02:34:19']
+  Aphelion dates: []
+    Fetched position for 2026-05-15 02:34:19
+  Fetched positions: 1 dates
+[DEBUG] Calling enhanced markers for Venus:
+  params has epoch: True
+  epoch value: 2026-08-04 19:57 osc.
+  ideal_apsides is None: False
+  ideal_apsides keys: dict_keys(['periapsis', 'apoapsis'])
+[HOVER DEBUG] Venus Keplerian Perihelion (Epoch: 2026-08-04 19:57 osc.):
+  ideal_pos is not None: True
+  params is not None: True
+  'epoch' in params: True
+  epoch value: 2026-08-04 19:57 osc.
+  angle_deg: 0.001 deg
+[KEPLERIAN POS] Added marker for Venus at distance 0.725632 AU (TA=241.6 deg)
+  Added mean orbit trace for Venus (e=0.006777, Elliptical, epoch=2024-08-03)
+[L-431 orbit] Sedna: drawn around @0 (a=506.4431683682394 AU), offset (0.0011707884916773992, 0.005108814055233779, -9.306479548243374e-05) AU
+
+[DEBUG] Processing Sedna
+[DEBUG] params keys: dict_keys(['a', 'e', 'i', 'omega', 'Omega', 'TP', 'MA', 'TA', 'q', 'epoch'])
+  Sedna: Using TP for perihelion: 2076-02-14 06:59:18
+  Sedna: No Tapo provided - actual aphelion marker will not be plotted
+  Added Keplerian periapsis for Sedna at distance 76.191500 AU
+  Added Keplerian apoapsis for Sedna at distance 936.694837 AU
+  Sedna: Using TP for perihelion: 2076-02-14 06:59:18
+  Sedna: No Tapo provided - actual aphelion marker will not be plotted
+  Next perihelion: 2076-02-14 06:59:18
+
+[DEBUG] Found apsidal dates for Sedna
+  Perihelion dates: ['2076-02-14 06:59:18']
+  Aphelion dates: []
+    Fetched position for 2076-02-14 06:59:18
+  Fetched positions: 1 dates
+[DEBUG] Calling enhanced markers for Sedna:
+  params has epoch: True
+  epoch value: 2026-10-13 08:30 osc.
+  ideal_apsides is None: False
+  ideal_apsides keys: dict_keys(['periapsis', 'apoapsis'])
+[HOVER DEBUG] Sedna Keplerian Perihelion (Epoch: 2026-10-13 08:30 osc.):
+  ideal_pos is not None: True
+  params is not None: True
+  'epoch' in params: True
+  epoch value: 2026-10-13 08:30 osc.
+  angle_deg: 0.006 deg
+[KEPLERIAN POS] Added marker for Sedna at distance 82.828706 AU (TA=325.7 deg)
+  Added mean orbit trace for Sedna (e=0.841899, Elliptical, epoch=2025-08-12)
+
+[DEBUG] Processing Encke
+[DEBUG] params keys: dict_keys(['a', 'e', 'i', 'omega', 'Omega', 'epoch', 'TP', 'MA', 'TA'])
+  Encke: Using TP for perihelion: 2027-02-10 05:28:59
+  Encke: No Tapo provided - actual aphelion marker will not be plotted
+  Added Keplerian periapsis for Encke at distance 0.338605 AU
+  Added Keplerian apoapsis for Encke at distance 4.096863 AU
+  Encke: Using TP for perihelion: 2027-02-10 05:28:59
+  Encke: No Tapo provided - actual aphelion marker will not be plotted
+  Next perihelion: 2027-02-10 05:28:59
+
+[DEBUG] Found apsidal dates for Encke
+  Perihelion dates: ['2027-02-10 05:28:59']
+  Aphelion dates: []
+    Fetched position for 2027-02-10 05:28:59
+  Fetched positions: 1 dates
+[DEBUG] Calling enhanced markers for Encke:
+  params has epoch: True
+  epoch value: 2026-10-13 08:30 osc.
+  ideal_apsides is None: False
+  ideal_apsides keys: dict_keys(['periapsis', 'apoapsis'])
+[HOVER DEBUG] Encke Keplerian Perihelion (Epoch: 2026-10-13 08:30 osc.):
+  ideal_pos is not None: True
+  params is not None: True
+  'epoch' in params: True
+  epoch value: 2026-10-13 08:30 osc.
+  angle_deg: 0.014 deg
+[KEPLERIAN POS] Added marker for Encke at distance 2.023313 AU (TA=215.4 deg)
+
+Keplerian Orbit Summary:
+Plotted Keplerian orbits for 4 objects:
+  - Mercury
+  - Venus
+  - Sedna
+  - Encke
+
+Skipped Keplerian orbits for:
+
+No_params (1):
+  - Sun
+
+[PeriOsc] Processing comet Encke for perihelion osculating orbit
+[RESOLVE TP] Encke: Path 2 (live fetch)...
+[SOLUTION TP] Encke: JD 2460240.0284552039 = 2023-10-22 12:40:58.530 UTC
+[SOLUTION TP] Rec #:90000091 (+COV) Soln.date: 2026-Oct-09_14:41:02   # obs: 1057 (2018-2026)
+[SOLUTION TP] Cached solution_TP for Encke: JD 2460240.0284552039
+  Rotated: osculating_cache_backup.json [OK] osculating_cache_backup_old.json
+  Backed up: osculating_cache.json [OK] osculating_cache_backup.json
+[OK] Saved: osculating_cache.json (2-gen protected)
+
+[PeriOsc] Perihelion osculating orbit for Encke
+  Tp: 2023-10-22 12:40:58 UTC (JD 2460240.0284552039)
+  Tp source: solution TP (live fetch)
+[...] Fetching osculating elements for Encke from JPL Horizons...
+   Using Horizons ID: 90000091 (id_type: smallbody)
+  [Horizons Query] Using explicit center_body override: @10
+  [Horizons Query] ID: 90000091 | Type: smallbody | Location: @10 | Date: 2023-10-22 12:42
+[OK] Fetched elements (solution date: 2026-10-13)
+[PeriOsc] Elements at perihelion epoch:
+  e=0.846933 (Elliptical), a=2.21862483 AU
+  i=11.34 deg, omega=187.29, Omega=334.02
+  q=0.339597608 AU = 50,803,079.0 km
+[PeriOsc] Perihelion velocity: 69.5 km/s (0.040117 AU/day, 250,057 km/hr)
+  [PeriOsc] Non-grav delta: 0.1 min (later)
+    Solution TP:  JD 2460240.0284552039
+    Osculating TP (at Tp): JD 2460240.0283694551
+[PeriOsc] Axis half-width: 1103.9250 AU
+[PeriOsc] Full ellipse fits within clip distance (aphelion 4.0977 AU <= clip 1655.8875 AU)
+[PeriOsc] Added elliptical perihelion osculating orbit for Encke: e=0.8469, q=0.339597608 AU (50,803,079.0 km)
+[Camera Buttons] Auto-detected 4 target objects from positions
+[Camera Buttons] Added dropdown with 5 view options
+[Fly To Buttons] Auto-detected 4 target objects from positions
+[Fly To Buttons] Added dropdown with 5 fly-to options
+Processing comet tails for Encke...
+[COMET VIZ] Encke not in database, using default parameters
+
+[COMET VIZ] Encke at 2.02 AU from Sun
+  Nucleus: [OK] Always visible
+  Coma: [OK] Visible
+  Dust tail: [OK] Visible
+  Ion tail: [OK] Visible
+Sun direction indicator: Using shell radius 0.022684822560770295, scale = 0.02609 AU
+  [OK] Activity factor: 17.0%
+  [OK] Added 9 visualization traces
+Visualization opened in browser
+Saving HTML (~10 KB + plot data, needs internet) to C:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_images/solar_system_20261013_0829.html...
+HTML saved successfully.
+Window config saved to c:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\window_config.json
+
+- What to see:
+  - Sedna: its ellipse visibly smaller, its far end near 937 au from the
+    Sun instead of about 1,004; its orbit hover, "Drawn around the solar
+    system's center of mass."; its perihelion marker in 2076, "q is
+    measured from the solar system's center of mass."; its aphelion
+    around the year 7771 with "Uncertain by about 930 days". Distances to
+    about the nearest million km, as its body hover prints. -- correct.
+  - Encke and Mercury: "Drawn around the Sun."; the markers where they
+    were; Encke now has an aphelion date (the typed table never had
+    Encke); Mercury's aphelion moves by seconds. -- correct
+  - Venus: its aphelion line "From a typed period: typed value, not
+    fetched from JPL." -- yes
+  - Every marker: the "q =" or "Q =" line in AU and km, the surface
+    line, and the body hover's sentence under them; no "Accuracy: +/-"
+    line. -- yes
+- Your verdicts, in your run record, one per line: the ellipse; the
+  orbit hover's centre line; the marker dates and the uncertainty line;
+  the new Kepler sentence; the distances' digits. -- correct
+
   4. Reinstall horizons-orbital-mechanics 1.4 (Settings > Skills); copy
      PROJECT_INSTRUCTIONS.md (v3.93) to the Project's instructions and to
-     documentation/project_instructions_v3_93.md.
-  5. Move this script into documentation/; commit and push.
+     documentation/project_instructions_v3_93.md. -- done
+  5. Move this script into documentation/; commit and push. -- 6bb8ef6f5bc51cf491a652309b1e9ecc0b3c360c
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 

@@ -7,38 +7,38 @@
   },
   "Mercury": {
     "elements": {
-      "a": 0.3870973829982185,
-      "e": 0.2056387447714802,
-      "i": 7.003372107877269,
-      "omega": 29.20131193894946,
-      "Omega": 48.29727562895222,
-      "epoch": "2026-10-12 00:01 osc.",
-      "TP": 2461354.853725812,
-      "MA": 239.8768490224104,
-      "TA": 222.1149278972467
+      "a": 0.3870973974099114,
+      "e": 0.2056387074252793,
+      "i": 7.003371896375679,
+      "omega": 29.20131028257546,
+      "Omega": 48.29726978781827,
+      "epoch": "2026-10-13 08:30 osc.",
+      "TP": 2461354.853725976,
+      "MA": 245.4157493912693,
+      "TA": 226.4124374773949
     },
     "metadata": {
-      "fetched": "2026-10-12T13:52:01.518400",
+      "fetched": "2026-10-13T08:31:10.523436",
       "source": "JPL Horizons",
-      "solution_date": "2026-10-12",
+      "solution_date": "2026-10-13",
       "horizons_id": "199",
       "display_name": "Mercury",
       "refresh_interval_days": 7,
       "center_body": "@sun"
     },
     "period": {
-      "days": 87.96881539014642,
+      "days": 87.96882030278451,
       "open_orbit": false,
       "center": "@sun",
-      "epoch": "2026-10-12 00:01",
-      "fetched": "2026-10-12",
+      "epoch": "2026-10-13 08:30",
+      "fetched": "2026-10-13",
       "source": "JPL Horizons PR (sidereal orbit period)",
-      "year_change_days": 0.0003637054403924367,
+      "year_change_days": 0.00036931457614741703,
       "year_step_days": 365.25,
       "sbdb_sigma_days": null,
       "sbdb_status": "not a small body; SBDB not asked",
       "sbdb_fullname": null,
-      "error_days": 0.0003637054403924367,
+      "error_days": 0.00036931457614741703,
       "error_from": "year_change",
       "test": {
         "@sun": 0.0003627265252816869,
@@ -46,7 +46,21 @@
         "run": "2026-10-11"
       },
       "horizons_targetname": "Mercury (199)",
-      "agrees_with_elements_fetch": true
+      "agrees_with_elements_fetch": true,
+      "elements": {
+        "a": 0.3870973974099114,
+        "e": 0.2056387074252793,
+        "i": 7.003371896375679,
+        "omega": 29.20131028257546,
+        "Omega": 48.29726978781827,
+        "TP": 2461354.853725976,
+        "MA": 245.4157493912693,
+        "TA": 226.4124374773949,
+        "q": 0.3074951889588476,
+        "epoch": "2026-10-13 08:30 osc."
+      },
+      "elements_fetch_days": 87.96882030278451,
+      "elements_fetch_center": "@sun"
     }
   },
   "Venus": {
@@ -246,33 +260,33 @@
   },
   "Sedna": {
     "elements": {
-      "a": 539.9028380449447,
-      "e": 0.8589239330257514,
-      "i": 11.92504808967517,
-      "omega": 311.1460209612461,
-      "Omega": 144.515501575658,
-      "epoch": "2026-10-12 00:01 osc.",
-      "TP": 2479295.630885726,
-      "MA": 358.5881717038998,
-      "TA": 325.6820662877274
+      "a": 539.86766160435,
+      "e": 0.8589151344821513,
+      "i": 11.92504465447922,
+      "omega": 311.1465469274596,
+      "Omega": 144.5156403933569,
+      "epoch": "2026-10-13 08:30 osc.",
+      "TP": 2479295.979438646,
+      "MA": 358.5881126742782,
+      "TA": 325.6837181683986
     },
     "metadata": {
-      "fetched": "2026-10-12T13:52:04.033327",
+      "fetched": "2026-10-13T08:31:14.245586",
       "source": "JPL Horizons",
-      "solution_date": "2026-10-12",
+      "solution_date": "2026-10-13",
       "horizons_id": "2003 VB12",
       "display_name": "Sedna",
       "refresh_interval_days": 30,
       "center_body": "@sun"
     },
     "period": {
-      "days": 4160095.730593757,
+      "days": 4160095.697859893,
       "open_orbit": false,
       "center": "@0",
-      "epoch": "2026-10-12 00:01",
-      "fetched": "2026-10-12",
+      "epoch": "2026-10-13 08:30",
+      "fetched": "2026-10-13",
       "source": "JPL Horizons PR (sidereal orbit period)",
-      "year_change_days": 11.082124161999673,
+      "year_change_days": 11.097265525255352,
       "year_step_days": 365.25,
       "sbdb_sigma_days": 1864.0,
       "sbdb_status": "SBDB sigma",
@@ -285,7 +299,21 @@
         "run": "2026-10-11"
       },
       "horizons_targetname": "90377 Sedna (2003 VB12)",
-      "agrees_with_elements_fetch": null
+      "agrees_with_elements_fetch": null,
+      "elements": {
+        "a": 506.4431683682394,
+        "e": 0.8495556766736537,
+        "i": 11.9285243144565,
+        "omega": 311.2847686456936,
+        "Omega": 144.4015796171602,
+        "TP": 2479347.791187431,
+        "MA": 358.4405317092074,
+        "TA": 325.6561038249131,
+        "q": 76.19149976841034,
+        "epoch": "2026-10-13 08:30 osc."
+      },
+      "elements_fetch_days": 4581728.994986143,
+      "elements_fetch_center": "@sun"
     }
   },
   "Halley": {
@@ -2604,39 +2632,39 @@
   },
   "Encke": {
     "elements": {
-      "a": 2.217733604200496,
-      "e": 0.8473190141121133,
-      "i": 11.34776503248648,
-      "omega": 187.2878283735506,
-      "Omega": 334.0190533905403,
-      "epoch": "2026-10-12 00:01 osc.",
-      "TP": 2461446.72851751,
-      "MA": 323.822186585531,
-      "TA": 215.1239258277475,
+      "a": 2.2177339995884,
+      "e": 0.8473192969120388,
+      "i": 11.3477679349911,
+      "omega": 187.2878429358795,
+      "Omega": 334.0190669262349,
+      "epoch": "2026-10-13 08:30 osc.",
+      "TP": 2461446.728467565,
+      "MA": 324.2261254747133,
+      "TA": 215.3797954248334,
       "solution_TP": 2460240.028455204
     },
     "metadata": {
-      "fetched": "2026-10-12T13:52:08.678985",
+      "fetched": "2026-10-13T08:31:16.769709",
       "source": "JPL Horizons",
-      "solution_date": "2026-10-12",
+      "solution_date": "2026-10-13",
       "horizons_id": "90000091",
       "display_name": "Encke",
       "refresh_interval_days": 30,
       "center_body": "@sun"
     },
     "period": {
-      "days": 1206.31990119054,
+      "days": 1206.320223793072,
       "open_orbit": false,
       "center": "@sun",
-      "epoch": "2026-10-12 00:01",
-      "fetched": "2026-10-12",
+      "epoch": "2026-10-13 08:30",
+      "fetched": "2026-10-13",
       "source": "JPL Horizons PR (sidereal orbit period)",
-      "year_change_days": 0.14979585173000487,
+      "year_change_days": 0.15083758920104628,
       "year_step_days": 365.25,
       "sbdb_sigma_days": 0.0006574,
       "sbdb_status": "SBDB sigma",
       "sbdb_fullname": "2P/Encke",
-      "error_days": 0.14979585173000487,
+      "error_days": 0.15083758920104628,
       "error_from": "year_change",
       "test": {
         "@sun": 0.1496537241050646,
@@ -2644,7 +2672,21 @@
         "run": "2026-10-11"
       },
       "horizons_targetname": "2P/Encke",
-      "agrees_with_elements_fetch": true
+      "agrees_with_elements_fetch": true,
+      "elements": {
+        "a": 2.2177339995884,
+        "e": 0.8473192969120388,
+        "i": 11.3477679349911,
+        "omega": 187.2878429358795,
+        "Omega": 334.0190669262349,
+        "TP": 2461446.728467565,
+        "MA": 324.2261254747133,
+        "TA": 215.3797954248334,
+        "q": 0.3386051863192332,
+        "epoch": "2026-10-13 08:30 osc."
+      },
+      "elements_fetch_days": 1206.320223793072,
+      "elements_fetch_center": "@sun"
     }
   }
 }
