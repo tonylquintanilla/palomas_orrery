@@ -62,6 +62,10 @@ period, to the drawing and the markers; VIEW_TO_OSCULATING_CENTRE is the
 one home of the view-to-centre map, which palomas_orrery.py now reads;
 _is_small_body counts a pinned record number as a small body whatever
 its id_type, so C/2025_K1 is asked of the Small-Body Database.)
+Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5 (L-431,
+after build 2's look: drawn_aphelion_distance(), how far a drawn ellipse
+moved to another centre reaches from the plot's centre, so the frame is
+sized from the orbit as drawn.)
 """
 
 import math
@@ -839,6 +843,29 @@ def drawing_orbit(obj_name, center_object_name, params, cache=None,
         out['period'] = _typed_or_kepler(obj_name, typed_table, a_au,
                                          _orbits_the_sun(obj_name, center_object_name))
     return out
+
+
+def drawn_aphelion_distance(obj_name, center_object_name, params, cache=None):
+    """
+    How far the drawn ellipse's aphelion is from the plot's centre, in AU,
+    when drawing_orbit draws the body around another centre (Sedna, around
+    the solar system's barycentre); None when the fetched elements are
+    drawn as they are, so the caller keeps its own a(1+e).
+
+    The plot's frame is sized from this (palomas_orrery.py,
+    calculate_axis_range_from_orbits): sized from the Sun-centred a(1+e),
+    Sedna's frame reached well past the end of its drawn ellipse (found
+    at build 2's look, 2026-10-13; the figures are in the handoff).
+    """
+    o = drawing_orbit(obj_name, center_object_name, params, cache=cache)
+    el = o['elements']
+    if el is params or not _elements_usable(el):
+        return None
+    far = dict(el)
+    far['TA'] = 180.0
+    x, y, z = position_from_elements(far)
+    dx, dy, dz = o['offset_au']
+    return math.sqrt((x + dx) ** 2 + (y + dy) ** 2 + (z + dz) ** 2)
 
 
 def carried_error_days(period, periods=1.0):

@@ -1130,3 +1130,94 @@ Window config saved to c:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrer
      documentation/project_instructions_v3_93.md. -- done
   5. Move this script into documentation/; commit and push. -- 6bb8ef6f5bc51cf491a652309b1e9ecc0b3c360c
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+=====================================================================================
+
+Fix 1: the perihelion osculating orbit's hover gets its accuracy sentence.
+
+Already moved; fixing the NEXT lines and the handoff to say only this script.
+
+Byte-identical, and a second run refuses. Now the maintenance run on the patched clone.
+
+Your look is recorded as accepted, and I've fixed the three problems I found in your saved plot. The fix is saved in your orrery folder as `patch_L431_7_look_fixes_20261013.py`.
+
+**What I need from you:** run the patch with the Run button. Then run `orrery_maintenance_run.py`; it should pass 25 of 25 checks, with "Orbit markers" catching 12 of 12 planted faults. Then move the patch into `documentation/`, commit and push. You don't need to do another look.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L431_7_look_fixes_20261013.py
+ok  orbital_period.py                             line 63: _is_small_body counts a pinned record number
+ok  orbital_period.py                             line 846: def drawn_aphelion_distance(obj_name, center
+ok  idealized_orbits.py                           line 47: Horizons as given, and every distance or spe
+ok  idealized_orbits.py                           line 219: return perturbation_notes.get(obj_name, defa
+ok  idealized_orbits.py                           line 233: osc_params (dict): Current osculating parame
+ok  idealized_orbits.py                           line 289: epoch_str = mean_params.get('epoch', 'N/A')
+ok  idealized_orbits.py                           line 5478: 'period': {'days': None, 'err_days': None, '
+ok  idealized_orbits.py                           line 5862: f"i={_pa.as_given(i)} deg"
+ok  idealized_orbits.py                           line 7501: f"q = {_pa.km_text(_pa.accuracy_for(obj_name
+ok  palomas_orrery.py                             line 88: body's position record travels with its posi
+ok  palomas_orrery.py                             line 836: else:
+ok  test_orbit_markers.py                         line 38: the parameters window dated from a barycentr
+ok  test_orbit_markers.py                         line 50: next two cover the moons' marker path and th
+ok  test_orbit_markers.py                         line 80: Module created: October 12, 2026 with Anthro
+ok  test_orbit_markers.py                         line 111: from celestial_objects import OBJECT_DEFINIT
+ok  test_orbit_markers.py                         line 438: findings.append(('DISTANCE FINER THAN ITS ER
+ok  test_orbit_markers.py                         line 731: def judge_comparison(fig, findings, counts):
+ok  test_orbit_markers.py                         line 843: findings = []
+ok  test_orbit_markers.py                         line 902: "                center_name=center_object,"
+ok  test_orbit_markers.py                         line 923: def _orrery_planted(old, new):
+ok  test_orbit_markers.py                         line 939: if plant == 'orrery':
+ok  test_orbit_markers.py                         line 972: 'year on against the drawn elements\' period
+ok  test_orbit_markers.py                         line 987: 'drawn points on their period\'s centre; %d 
+ok  palomas_orrery_dashboard.py                   line 192: after Test Orbit Cache, which is its alphabe
+ok  palomas_orrery_dashboard.py                   line 1247: "its distances to the digits JPL's errors ea
+ok  LEDGER_CONSOLIDATED.md                        line 375: Module updated: October 13, 2026 with Anthro
+ok  LEDGER_CONSOLIDATED.md                        line 1493: <!-- L:431 status:OPEN upd:2026-10-13 sectio
+ok  LEDGER_CONSOLIDATED.md                        line 1700: - **2026-10-13, build 2 accepted at Tony's l
+ok  LEDGER_CONSOLIDATED.md                        line 1732: the fetched period: BUILT (2026-10-12) and A
+ok  LEDGER_CONSOLIDATED.md                        line 1741: `documentation/HANDOFF_L431_period_build1_20
+ok  LEDGER_CONSOLIDATED.md                        line 2233: <!-- L:401 status:OPEN upd:2026-10-13 sectio
+ok  LEDGER_CONSOLIDATED.md                        line 2486: - **2026-10-13, the second slice accepted** 
+ok  documentation/WHERE_WE_ARE.md                 line 4: Last updated: October 13, 2026: L-431 build 
+ok  documentation/WHERE_WE_ARE.md                 line 10: > - Your look at the drawn orbits and marker
+ok  documentation/WHERE_WE_ARE.md                 line 16: > **Do next:** *L-431's website build, and t
+ok  documentation/WHERE_WE_ARE.md                 line 20: > - *Run patch_L431_7 and the maintenance ru
+ok  documentation/WHERE_WE_ARE.md                 line 30: 5.   [NOW]   *L-401 (the distance digits): b
+ok  documentation/WHERE_WE_ARE.md                 line 37: 6a.  [NOW]   *Orbital periods from JPL: buil
+ok  documentation/WHERE_WE_ARE.md                 line 91: - Last cache build: 20261013T132123Z, ok, no
+ok  documentation/WHERE_WE_ARE.md                 line 93: 87a54704 (your run of 2026-10-12). Whole tre
+ok  documentation/WHERE_WE_ARE.md                 line 97: ## Waiting on you
+ok  documentation/WHERE_WE_ARE.md                 line 102: numbers that are not distances have no digit
+ok  documentation/WHERE_WE_ARE.md                 line 118: - Orbital periods: rulings `DESIGN_L431_..._
+ok  documentation/HANDOFF_L431_build2_look_fixes_20261013.md created
+
+patch applied (43 edits in 7 files, 1 file created)
+Stamps updated: the docstrings of every edited module, the ledger.
+
+The three fixes from your saved plot:
+  - Encke's perihelion osculating orbit (the white arc): its hover now ends its distances with the sentence saying which figure they are rounded to.
+  - Sedna's orbit hover: the perturbation lines now read "both around the Sun" and print the Sun-centred a and e they compare, so "+58.56 AU" is not read against the drawn a of 506.44 au.
+  - The frame: sized from Sedna's drawn far end, 937 au from the Sun, so it reaches about 1,030 au in the static plot and the animation, not 1,104.
+
+NEXT:
+  1. Run orrery_maintenance_run.py: expect 25 of 25 gating checkers, "Orbit markers"
+     with 12 of 12 planted faults, and "0 TIER-1 -- the push gate holds".
+
+
+     
+  2. Move this script into documentation/; commit and push.
+  No look is needed. To see the fixes anyway: plot Sedna and Encke from the Sun;
+  the frame ends near 1,030 au, and Sedna's orbit hover says "both around the Sun".
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+The three fixes:
+- **Encke's white arc:** its hover now has the line saying how its distances are rounded.
+- **Sedna's orbit hover:** the lines that compare its current orbit with its average one now say "both around the Sun". They also show the orbit around the Sun that they compared, so the +58.56 au difference no longer looks like it belongs to the drawn orbit.
+- **The frame:** it now fits the orbit as drawn. With Sedna, the plot and the animation now reach about 1,030 au instead of 1,104.
+
+Each fix has a new planted fault in the checker, and the checker catches all of them. I ran the patch on a clean copy of your repo and the maintenance run passed. The scanner still finds no problems in what goes to the website, and the count for the rest of the code stays at 280.
+
+The patch also updates the ledger: both items record that your look accepted the work, and both now show the next build as the open work. It also adds a short handoff and updates Where We Are by section. The patch leaves your run-record area on that page alone.
+
+Where this leaves us:
+- Orbital periods, parts 1 and 2, and the distance digits, parts 1 and 2, are all accepted.
+- Next is part 3 of the orbital periods work, the website. The four briefed sessions go beside it, in your order.
+- The next session checks that it loads the horizons skill as version 1.4 before any Horizons work.

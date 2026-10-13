@@ -87,6 +87,11 @@ centre from orbital_period.VIEW_TO_OSCULATING_CENTRE, its one home, in
 place of two copies of the block, the animation's lacking Orcus; each
 body's position record travels with its position to the orbit drawing,
 so an orbit's markers print the body's digits (L-401's second slice).)
+Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5 (L-431,
+after build 2's look: calculate_axis_range_from_orbits sizes the frame
+from each ellipse as drawn, so Sedna's, drawn around the solar system's
+center of mass, frames to its 937 au far end, not the 1,004 au of its
+Sun-centred elements. Both the static plot and the animation use it.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -830,8 +835,23 @@ def calculate_axis_range_from_orbits(selected_objects, positions, planetary_para
                         print(f"{obj_name}: Elliptical orbit - a={a:.6f} AU, e={e:.4f}, aphelion={aphelion:.6f} AU", flush=True)
                 else:
                     aphelion = a * (1 + e)
-                    max_distances.append(abs(aphelion))  # Use abs to handle any edge cases
                     print(f"{obj_name}: Elliptical orbit - a={a:.6f} AU, e={e:.4f}, aphelion={aphelion:.6f} AU", flush=True)
+                    # FIXED (L-431, after build 2's look): the frame is sized
+                    # from the ellipse as DRAWN. Sedna is drawn around the
+                    # solar system's center of mass, so its far end is 937 au
+                    # from the Sun, not the 1,004 of the Sun-centred elements.
+                    try:
+                        from orbital_period import drawn_aphelion_distance
+                        _drawn_far = drawn_aphelion_distance(obj_name, center_object_name, params)
+                    except Exception as _ex:
+                        print(f"[L-431 orbit] ERROR: could not size {obj_name} from its drawn "
+                              f"orbit ({_ex}); using the fetched elements", flush=True)
+                        _drawn_far = None
+                    if _drawn_far is not None:
+                        aphelion = _drawn_far
+                        print(f"{obj_name}: drawn around another centre; its drawn aphelion is "
+                              f"{aphelion:.6f} AU from the Sun", flush=True)
+                    max_distances.append(abs(aphelion))  # Use abs to handle any edge cases
             
         else:
             # Fall back to current position data for objects without orbital parameters

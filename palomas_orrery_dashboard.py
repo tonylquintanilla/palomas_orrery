@@ -191,6 +191,8 @@ Markers under the orrery's checkers, in the same patch as the checker.
 Its label carries no "Test", by Tony's ruling 5 of 2026-10-12; it sits
 after Test Orbit Cache, which is its alphabetical place once the other
 labels lose the word.
+October 13, 2026 with Anthropic's Claude Opus 5.5 (L-431, after build 2's
+look): Orbit Markers' description counts twelve planted faults, not nine.
 """
 
 import os
@@ -1244,7 +1246,7 @@ LAUNCH_GROUPS = {
          "it is more than a day, and that every orbit and marker hover prints "
          "its distances to the digits JPL's errors earn. Runs the real orbit "
          "drawing offline on recorded inputs and judges it with arithmetic of "
-         "its own. Nine faults are planted first, each in a copy of the real "
+         "its own. Twelve faults are planted first, each in a copy of the real "
          "code, and each must be caught by name. "
          "Ends on \"ORBIT MARKERS: PASS\" (L-431, L-401).",
          SCRIPT_DIR,

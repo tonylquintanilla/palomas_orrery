@@ -46,6 +46,12 @@ satellites' periods follow the same fallback order; the typed 27.321661
 default is gone. Every orbit hover prints the elements it repeats from
 Horizons as given, and every distance or speed it computes by the body
 hover's rule and formatter (position_accuracy).)
+Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5 (L-431,
+after build 2's look: the perihelion osculating orbit's hover carries the
+accuracy sentence under its distances, as every other marker's does; and
+where the drawn orbit is around another centre (Sedna), the perturbation
+block says it compares the Sun-centred elements with the mean ones and
+prints them, so its Delta-a is not read against the drawn a.)
 
 Role: computation
 Domain: orrery
@@ -212,7 +218,8 @@ def get_planet_perturbation_note(obj_name, orbit_source="Keplerian"):
     )
     
     return perturbation_notes.get(obj_name, default_note)
-def get_mean_vs_osculating_assessment(obj_name, osc_params, mean_params, acc=None):
+def get_mean_vs_osculating_assessment(obj_name, osc_params, mean_params, acc=None,
+                                      compared_around=None):
     """
     Compare osculating vs mean orbital elements and return perturbation assessment HTML.
     
@@ -225,6 +232,12 @@ def get_mean_vs_osculating_assessment(obj_name, osc_params, mean_params, acc=Non
         obj_name (str): Object name
         osc_params (dict): Current osculating parameters (a, e, i, omega, Omega)
         mean_params (dict): Mean parameters from orbital_elements.py
+        compared_around (str): the centre's words, given when the drawn
+            orbit is around another centre than osc_params (L-431 build 2:
+            Sedna is drawn around the solar system's center of mass, and
+            compared around the Sun, where the mean elements are). The
+            block then names the centre and prints the elements it
+            compared, so its deltas are not read against the drawn ones.
     
     Returns:
         str: HTML-formatted perturbation assessment, or empty string if not available
@@ -275,8 +288,18 @@ def get_mean_vs_osculating_assessment(obj_name, osc_params, mean_params, acc=Non
     
     epoch_str = mean_params.get('epoch', 'N/A')
     
+    # FIXED (L-431, after build 2's look): when the drawn orbit is around
+    # another centre, say which elements were compared, so "+58.56 AU"
+    # is not read against the drawn a.
+    if compared_around:
+        heading = (f"<br><br><b>Perturbation (osculating vs mean, both around "
+                   f"{compared_around}):</b>"
+                   f"<br>Osculating around {compared_around}: a={_pa.as_given(osc_a)} AU, "
+                   f"e={_pa.as_given(osc_e)}")
+    else:
+        heading = f"<br><br><b>Perturbation (osculating vs mean):</b>"
     assessment = (
-        f"<br><br><b>Perturbation (osculating vs mean):</b>"
+        f"{heading}"
         f"<br>Delta-e: {delta_e:+.8f} ({qual_e})"
         f"{delta_a_text}"
         f"<br>Delta-i: {delta_i:+.4f} deg"
@@ -5454,6 +5477,9 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                           'offset_au': (0.0, 0.0, 0.0), 'note': None,
                           'period': {'days': None, 'err_days': None, 'kind': 'none',
                                      'center': None, 'label': None, 'record': None}}
+            # The mean elements are around the Sun, so the comparison stays
+            # there; when the drawn orbit is not, the comparison says so.
+            _compared_around = 'the Sun' if _orbit['elements'] is not params else None
             if _orbit['elements'] is not params:
                 params = dict(_orbit['elements'])
                 a = params.get('a', 0)
@@ -5835,7 +5861,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 + f"a={_pa.as_given(a)} AU, e={_pa.as_given(e)},<br>"
                 f"i={_pa.as_given(i)} deg"
                 f"{get_planet_perturbation_note(obj_name)}"
-                f"{get_mean_vs_osculating_assessment(obj_name, planetary_params[obj_name], ORIGINAL_planetary_params.get(obj_name, {}), _acc)}"
+                f"{get_mean_vs_osculating_assessment(obj_name, planetary_params[obj_name], ORIGINAL_planetary_params.get(obj_name, {}), _acc, _compared_around)}"
             )
             fig.add_trace(
                 go.Scatter3d(
@@ -7474,6 +7500,10 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
         f"q = {_pa.au_text(_pa.accuracy_for(obj_name, 'Sun'), q_osc)}<br>"
         f"q = {_pa.km_text(_pa.accuracy_for(obj_name, 'Sun'), q_osc * KM_PER_AU)} (perihelion distance)<br>"
         f"i = {_pa.as_given(i_osc)} deg"
+        # FIXED (L-401, after build 2's look): the distances above are
+        # printed by the digits rule, so the hover says which figure they
+        # are rounded to, as every other marker's does.
+        f"{_accuracy_tail(_pa.accuracy_for(obj_name, 'Sun'))}"
         f"{pert_note}"
     )
     orbit_label = f"{obj_name} Perihelion Osc. Orbit (Epoch: {epoch_osc})"

@@ -373,6 +373,9 @@ Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5
 (L-431 build 2 built, with L-401's second slice and ruling 7's four
 in-passing fixes; horizons-orbital-mechanics 1.4, protocol v3.93; L-435
 opened from Tony's question on Settled), built on c9722520.
+Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5
+(L-431 build 2 accepted at Tony's look, with L-401's second slice; the
+three findings read from his saved plot fixed), built on 87a54704.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -726,7 +729,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | OPEN | -- | 2026-10-12 |
 | ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-10-07 |
 | ! | L-399 | Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder) | OPEN | -- | 2026-10-01 |
-| ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-12 |
+| ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-13 |
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-410 | Fuzzy boundaries for edges known only as ranges, the outer corona first (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-11 |
@@ -741,7 +744,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-427 | Rows a neighbour's citation had been crediting (store) | OPEN | -- | 2026-10-09 |
 | ! | L-429 | The room button on the row, in the Solar System room's list (gallery, exhibits) | OPEN | -- | 2026-10-10 |
 | ! | L-430 | Uncited lines in the orrery's Oort cloud tooltips and the Sun's reach text (orrery, words) | OPEN | -- | 2026-10-10 |
-| ! | L-431 | Orbital periods from JPL, for every body, printed by their errors (orrery, provenance) | OPEN | -- | 2026-10-12 |
+| ! | L-431 | Orbital periods from JPL, for every body, printed by their errors (orrery, provenance) | OPEN | -- | 2026-10-13 |
 | ! | L-432 | Objects drawn in the default goldenrod (orrery, colours) | OPEN | -- | 2026-10-11 |
 | ! | L-433 | The road after the Sun and Earth rooms, in Tony's words (planning) | OPEN | -- | 2026-10-11 |
 | ! | L-434 | Stored drawings for the other dot-cloud shells (orrery + gallery) | OPEN | -- | 2026-10-11 |
@@ -1487,7 +1490,7 @@ colours, Encke first, beside Halley and the other comets.
 L-395.
 
 #### [L-431] Orbital periods from JPL, for every body, printed by their errors (orrery, provenance)
-<!-- L:431 status:OPEN upd:2026-10-12 section:A flag: rice: -->
+<!-- L:431 status:OPEN upd:2026-10-13 section:A flag: rice: -->
 - **Opened 2026-10-10** from Tony's look at Encke: its hover has no
   orbital period, because the hover's "Known Orbital Period" reads only
   `KNOWN_ORBITAL_PERIODS` in `constants_new.py`, a typed table that
@@ -1695,19 +1698,49 @@ L-395.
   One class. The barycentre hovers' typed periods and separations
   (`BINARY_PARAMS`) wait, by ruling 7 of 2026-10-12, for this item to
   fetch them.
+- **2026-10-13, build 2 accepted at Tony's look** (pushed at 6bb8ef6f;
+  his run record `documentation/WHERE_WE_ARE_10-12-26_2212_run_record.md`,
+  at 87a54704). The patch ran clean; the live check asked JPL and
+  printed Sedna's aphelion in 7771 "Uncertain by about 930 days" beside
+  the typed table's 7776; the maintenance run passed 25 of 25 with the
+  gate path at 0 and the whole tree at 280, as predicted. His verdicts
+  on the look, in his words: Sedna "correct."; Encke and Mercury
+  "correct"; Venus's typed line "yes"; every marker's lines "yes"; the
+  ellipse, the centre line, the dates, the Kepler sentence and the
+  digits "correct". In chat: "bottom line: looks good."
+- **Three findings read from his saved plot** (Claude read
+  `solar_system_20261013_0829.html` and the console), fixed in
+  `patch_L431_7_look_fixes_20261013.py`, each with a planted fault in
+  `test_orbit_markers.py` (now twelve):
+  - Encke's perihelion osculating orbit printed its distances by the
+    digits rule without the sentence saying which figure they are
+    rounded to (L-401's slice; the one hover build 2 missed).
+  - Sedna's orbit hover showed the drawn a (506.44 au, around the
+    center of mass) above a perturbation block that compared the
+    Sun-centred a (539.87 au) with the mean, so "+58.56 AU (12.2%)"
+    read as the drawn orbit's. The block now says "both around the Sun"
+    and prints the elements it compared.
+  - The plot's frame was sized from the Sun-centred aphelion, 1,004
+    au, so it reached 1,104 au around a drawn ellipse ending at 937.
+    `calculate_axis_range_from_orbits`, which the static plot and the
+    animation share, now reads the drawn far end
+    (`orbital_period.drawn_aphelion_distance`): 1,030 au.
 **Gap:** three builds, in order (the record's section 3):
 1. The period in the orrery: BUILT and working against JPL
    (2026-10-11); its words settled at L-401's look (2026-10-12).
 2. The drawn ellipse around the period's centre, and the markers from
-   the fetched period: BUILT (2026-10-12); waits for Tony's run, the
-   live check and his look (Mode 5).
+   the fetched period: BUILT (2026-10-12) and ACCEPTED at Tony's look
+   (2026-10-13). The three findings from his saved plot are fixed in
+   patch_L431_7, which waits for his run.
 3. The website, next: the export carries each period and the elements
    around its centre; every room's hover prints it and draws the orbit
    around that centre; the Horizons check compares it.
 The typed table's 132 unsourced entries stay one class, not chased.
 **Ref:** `documentation/DESIGN_L431_orbital_periods_rulings_20261011.md`;
 `documentation/DESIGN_L431_orbital_periods_20261011.md`;
-`documentation/HANDOFF_L431_period_build1_20261011.md`; `orbital_period.py`;
+`documentation/HANDOFF_L431_period_build1_20261011.md`;
+`documentation/HANDOFF_L431_build2_orbits_markers_20261012.md`;
+`documentation/HANDOFF_L431_build2_look_fixes_20261013.md`; `orbital_period.py`;
 `visualization_utils.py` (`format_detailed_hover_text`);
 `palomas_orrery.py`; `orbital_param_viz.py`; `apsidal_markers.py`;
 `idealized_orbits.py`; `orbit_data_manager.py`
@@ -2197,7 +2230,7 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 tools/gallery_cache_builder.py (trust); L-149; L-150; L-363; L-398.
 
 #### [L-401] The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance)
-<!-- L:401 status:OPEN upd:2026-10-12 section:A flag: rice: -->
+<!-- L:401 status:OPEN upd:2026-10-13 section:A flag: rice: -->
 - **Recorded 2026-10-01, closing L-398**, as one row for the class under
   The Braid: recorded, not chased. provenance-discipline 2.23 says every
   computed position a display prints goes to the place the larger of
@@ -2450,8 +2483,11 @@ tools/gallery_cache_builder.py (trust); L-149; L-150; L-363; L-398.
     as kilometer precision; computed numbers that are not distances or
     speeds (an eccentricity difference, an angular shift, the
     analytical Moon's e and i) have no rule and are left as they were.
-**Gap:** Builds 1 and 2 are built; build 2 waits for Tony's look with
-L-431's. Left, build 3: the fly-to buttons, the parameters window, the
+- **2026-10-13, the second slice accepted** at Tony's look with
+  L-431's build 2 ("the distances' digits. -- correct"). The perihelion
+  osculating orbit's hover now carries the accuracy sentence it lacked
+  (patch_L431_7; L-431 records it).
+**Gap:** Builds 1 and 2 are built and accepted. Left, build 3: the fly-to buttons, the parameters window, the
 animation's 2xr; and the encounter slice (`spacecraft_encounters.py`,
 `close_approach_data.py`). The two questions above go to the design
 talk.

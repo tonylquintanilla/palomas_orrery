@@ -37,12 +37,21 @@ right finding, by name:
       not its own date's
     the parameters window dated from a barycentre    PARAMETERS WINDOW PERIOD FROM ANOTHER CENTRE
       view's period
+    the perihelion osculating orbit's hover without  DISTANCES WITHOUT THEIR ACCURACY SENTENCE
+      its accuracy sentence
+    Sedna's perturbation block not naming the        PERTURBATION COMPARED WITHOUT ITS CENTRE
+      centre it compared around
+    the plot's frame sized from the Sun-centred      FRAME SIZED FROM ANOTHER ORBIT
+      orbit while Sedna is drawn around the
+      barycentre
 
 The first four are the brief's (documentation/
 HANDOFF_L431_build2_orbits_markers_brief_20261012.md, section 4); the
 next two cover the moons' marker path and the map's one home; the last
 three come from a cold review of the build (2026-10-12), which showed the
-first draft of this file could not fail on them. It also runs a record
+first draft of this file could not fail on them; the three after them
+come from Tony's look at build 2 (2026-10-13), where the saved plot showed
+each one. It also runs a record
 saved before build 2 (Sedna stays around the Sun and says why) and the
 Keplerian position half a year after its epoch, where the period shows.
 
@@ -70,6 +79,12 @@ Domain: dev_tools
 
 Module created: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-431,
 build 2, with L-401's second slice).
+Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5 (L-431,
+after build 2's look: three judges and three planted faults for what the
+saved plot showed -- the perihelion osculating orbit's accuracy sentence,
+Sedna's perturbation block naming its centre, and the frame sized from
+the drawn orbit. A whole number's trailing zeros are no longer called
+coarse, since its place cannot be read from the print.)
 """
 import contextlib
 import copy
@@ -95,6 +110,7 @@ import orbital_period
 import osculating_cache_manager
 from celestial_objects import OBJECT_DEFINITIONS
 from orbital_elements import parent_planets
+from orbital_elements import planetary_params as MEAN_ELEMENTS
 
 # ============================================================================
 # THE RECORDED INPUTS (see the docstring for where each comes from)
@@ -421,6 +437,12 @@ def judge_digits(body, text, err_km, findings, counts, where):
             if got < want:
                 findings.append(('DISTANCE FINER THAN ITS ERROR', '%s %s: %s %s printed to 1e%d, '
                                  'its error earns 1e%d' % (body, where, val, unit, got, want)))
+            elif got > want and '.' not in val:
+                # A whole number's trailing zeros may be digits it earned:
+                # 50,654,699.7 km to the whole kilometer is 50,654,700.
+                # Its place cannot be read from the print, so it is not
+                # called coarse.
+                pass
             elif got > want:
                 findings.append(('DISTANCE COARSER THAN ITS ERROR', '%s %s: %s %s printed to 1e%d, '
                                  'its error earns 1e%d' % (body, where, val, unit, got, want)))
@@ -708,6 +730,108 @@ def judge_dispatch(findings, counts, orrery_source=None):
                          'the Pluto-Charon view'))
 
 
+def judge_comparison(fig, findings, counts):
+    """The perturbation block compares the Sun-centred osculating elements
+    with the mean ones, which are around the Sun. Where the drawn orbit is
+    around another centre (Sedna), the block must say so and print the
+    elements it compared, and its Delta-a must be their difference
+    (worked out here); where it is not, it must not claim a centre."""
+    mean_a = MEAN_ELEMENTS['Sedna']['a']
+    for body in ('Sedna', 'Mercury', 'Encke'):
+        tr = traces(fig, body)
+        info = tr['info'].text[0] if 'info' in tr else ''
+        if 'Perturbation (osculating vs mean' not in info:
+            continue
+        counts['comparisons'] += 1
+        named = 'both around the Sun' in info
+        if body != 'Sedna':
+            if named:
+                findings.append(('PERTURBATION COMPARED WITHOUT ITS CENTRE',
+                                 '%s is drawn around the Sun and its block names a centre' % body))
+            continue
+        if not named or ('Osculating around the Sun: a=%r AU' % SEDNA['a']) not in info:
+            findings.append(('PERTURBATION COMPARED WITHOUT ITS CENTRE',
+                             'Sedna is drawn around the barycentre (a=%r) and its block does not '
+                             'say it compares the Sun-centred a=%r' % (SEDNA_BARY['a'], SEDNA['a'])))
+        m = re.search(r'Delta-a: \+?(%s) AU' % NUM, info)
+        if not m or abs(float(m.group(1)) - (SEDNA['a'] - mean_a)) > 0.01:
+            findings.append(('PERTURBATION COMPARED WITHOUT ITS CENTRE',
+                             'Sedna Delta-a %s is not the Sun-centred a minus the mean a (%.2f)'
+                             % (m.group(1) if m else 'missing', SEDNA['a'] - mean_a)))
+
+
+def judge_periosc(io_mod, findings, counts):
+    """The perihelion osculating orbit (Encke's white arc) prints its
+    distances by the digits rule, so it says which figure they are
+    rounded to. Run offline: its perihelion time and its elements at that
+    time are the recorded ones."""
+    from constants_new import color_map
+    info = next(o for o in OBJECT_DEFINITIONS if o['name'] == 'Encke')
+    old_tp = osculating_cache_manager.resolve_tp
+    old_fetch = osculating_cache_manager.fetch_osculating_elements
+    osculating_cache_manager.resolve_tp = lambda name, obj_info=None: (ENCKE['TP'], 'fixture')
+    osculating_cache_manager.fetch_osculating_elements = lambda **kw: {'elements': dict(ENCKE)}
+    fig = go.Figure()
+    try:
+        with contextlib.redirect_stdout(io.StringIO()):
+            io_mod.plot_perihelion_osculating_orbit(fig, 'Encke', info, color_map, PLOT_DATE, True)
+    finally:
+        osculating_cache_manager.resolve_tp = old_tp
+        osculating_cache_manager.fetch_osculating_elements = old_fetch
+    texts = [t.text if isinstance(t.text, str) else t.text[0]
+             for t in fig.data if t.text is not None and 'Osculating Orbit' in str(t.text)]
+    if not texts:
+        findings.append(('MARKER MISSING', "Encke's perihelion osculating orbit has no hover"))
+        return
+    text = texts[0]
+    counts['periosc'] += 1
+    judge_digits('Encke', text, FLOOR_KM, findings, counts, 'perihelion osculating orbit')
+    if re.search(r'%s km' % NUM, text) and 'shown to the whole kilometer' not in text:
+        findings.append(('DISTANCES WITHOUT THEIR ACCURACY SENTENCE',
+                         "Encke's perihelion osculating orbit prints distances to the whole "
+                         'kilometer and does not say why'))
+
+
+def _axis_range_function(orrery_source):
+    """palomas_orrery.calculate_axis_range_from_orbits, compiled alone from
+    the source, so the frame is judged without opening the orrery's
+    window."""
+    import ast
+    tree = ast.parse(orrery_source)
+    fn = next(n for n in tree.body if isinstance(n, ast.FunctionDef)
+              and n.name == 'calculate_axis_range_from_orbits')
+    ns = {}
+    exec(compile(ast.Module(body=[fn], type_ignores=[]), 'palomas_orrery.py', 'exec'), ns)
+    return ns['calculate_axis_range_from_orbits']
+
+
+def judge_frame(findings, counts, orrery_source=None):
+    """The plot's frame is sized from the ellipses as drawn: Sedna's far end
+    is its barycentre aphelion moved by the barycentre's place (worked out
+    here), times the 1.1 margin the orrery gives beyond 100 au."""
+    if orrery_source is None:
+        with open(os.path.join(HERE, 'palomas_orrery.py'), encoding='utf-8') as f:
+            orrery_source = f.read()
+    fn = _axis_range_function(orrery_source)
+    el, off = DRAWN['Sedna']
+    far = math.sqrt(sum((a + b) ** 2 for a, b in zip(at_anomaly(el, 180.0), off)))
+    with cache_is(fixture_cache()), contextlib.redirect_stdout(io.StringIO()):
+        rng = fn([{'name': 'Sedna'}], {}, {'Sedna': dict(SEDNA)}, parent_planets, 'Sun')
+    counts['frames'] += 1
+    if abs(rng[1] - 1.1 * far) > 1e-6 * far:
+        findings.append(('FRAME SIZED FROM ANOTHER ORBIT',
+                         "the frame reaches %.2f au; Sedna's drawn ellipse ends %.2f au from the "
+                         'Sun, so it should reach %.2f' % (rng[1], far, 1.1 * far)))
+    # A body drawn as fetched keeps a(1+e).
+    with cache_is(fixture_cache()), contextlib.redirect_stdout(io.StringIO()):
+        rng = fn([{'name': 'Mercury'}], {}, {'Mercury': dict(MERCURY)}, parent_planets, 'Sun')
+    want = 1.3 * MERCURY['a'] * (1 + MERCURY['e'])
+    counts['frames'] += 1
+    if abs(rng[1] - want) > 1e-9:
+        findings.append(('FRAME SIZED FROM ANOTHER ORBIT',
+                         "Mercury's frame reaches %.6f au, want %.6f" % (rng[1], want)))
+
+
 def run_checks(io_mod=None, ap_mod=None, pv_mod=None, orrery_source=None):
     import idealized_orbits
     import apsidal_markers
@@ -718,9 +842,13 @@ def run_checks(io_mod=None, ap_mod=None, pv_mod=None, orrery_source=None):
     pv_mod = pv_mod or orbital_param_viz
     findings = []
     counts = {'bodies': 0, 'points': 0, 'markers': 0, 'numbers': 0, 'dates': 0,
-              'elements': 0, 'moon': 0, 'sources': 0, 'kpos': 0, 'window': 0}
+              'elements': 0, 'moon': 0, 'sources': 0, 'kpos': 0, 'window': 0,
+              'comparisons': 0, 'periosc': 0, 'frames': 0}
     fig = draw_sun_view(io_mod, fixture_cache(), ap_mod=planted_ap)
     judge_sun_view(fig, findings, counts)
+    judge_comparison(fig, findings, counts)
+    judge_periosc(io_mod, findings, counts)
+    judge_frame(findings, counts, orrery_source)
     judge_actual_markers(fig, findings, counts)
     judge_kepler_position(io_mod, findings, counts)
     judge_old_record(io_mod, findings, counts)
@@ -773,6 +901,16 @@ PLANTS = [
      ('orbital_param_viz', "                period_days=_own_period['days'],",
       "                center_name=center_object,"),
      'PARAMETERS WINDOW PERIOD FROM ANOTHER CENTRE'),
+    ("the perihelion osculating orbit's hover without its accuracy sentence",
+     ('idealized_orbits', "        f\"{_accuracy_tail(_pa.accuracy_for(obj_name, 'Sun'))}\"\n", ""),
+     'DISTANCES WITHOUT THEIR ACCURACY SENTENCE'),
+    ("Sedna's perturbation block not naming the centre it compared around",
+     ('idealized_orbits', "_acc, _compared_around)}\"", "_acc)}\""),
+     'PERTURBATION COMPARED WITHOUT ITS CENTRE'),
+    ("the frame sized from the Sun-centred orbit",
+     ('palomas_orrery', "                        aphelion = _drawn_far\n",
+      "                        pass\n"),
+     'FRAME SIZED FROM ANOTHER ORBIT'),
 ]
 
 
@@ -784,6 +922,15 @@ def _orrery_with_copy():
                        "'Pluto-Charon Barycenter' else None\n", 1)
 
 
+def _orrery_planted(old, new):
+    with open(os.path.join(HERE, 'palomas_orrery.py'), encoding='utf-8') as f:
+        src = f.read()
+    n = src.count(old)
+    if n != 1:
+        raise RuntimeError('PLANT ANCHOR: %r found %d times in palomas_orrery' % (old[:60], n))
+    return src.replace(old, new)
+
+
 def main():
     problems = []
     for label, plant, expected in PLANTS:
@@ -791,6 +938,8 @@ def main():
         try:
             if plant == 'orrery':
                 kw['orrery_source'] = _orrery_with_copy()
+            elif plant[0] == 'palomas_orrery':
+                kw['orrery_source'] = _orrery_planted(plant[1], plant[2])
             else:
                 module, old, new = plant
                 key = {'idealized_orbits': 'io_mod', 'apsidal_markers': 'ap_mod',
@@ -822,21 +971,27 @@ def main():
           'floor for Io); the elements against the values given; the Keplerian position half a '
           'year on against the drawn elements\' period; a pre-build-2 record\'s drawing '
           'and dates; the parameters window\'s apsis dates against Earth\'s own period; '
-          'the Moon\'s arc against its fetched period; and the dispatch in palomas_orrery.py')
+          'the Moon\'s arc against its fetched period; Sedna\'s perturbation block against '
+          'the Sun-centred a minus the mean a; Encke\'s perihelion osculating orbit against the '
+          'whole-kilometer floor and its sentence; the frame against Sedna\'s drawn far end; '
+          'and the dispatch in palomas_orrery.py')
     print('examined: Mercury, Encke and Sedna from the Sun (ellipse, orbit hover, periapsis, '
           'apoapsis, actual perihelion, Keplerian position); Sedna with a pre-build-2 record; '
           'Earth in the orbital parameters window; the Moon from Earth; Io\'s perijove and '
-          'apojove from Jupiter; palomas_orrery.py and idealized_orbits.py')
+          'apojove from Jupiter; Encke\'s perihelion osculating orbit; the frame for Sedna and '
+          'for Mercury; palomas_orrery.py and idealized_orbits.py')
     if problems:
         print('ORBIT MARKERS: FAIL -- %d problem(s)' % len(problems))
         return 1
     print('ORBIT MARKERS: PASS -- %d of %d planted faults caught by name; %d ellipses, %d '
           'drawn points on their period\'s centre; %d markers, %d dates, %d printed distances '
           'against their errors; %d elements as given; %d Keplerian positions half a year '
-          'on; %d parameters-window date pairs; %d Moon arcs; %d sources read'
+          'on; %d parameters-window date pairs; %d Moon arcs; %d perturbation blocks; '
+          '%d perihelion osculating orbits; %d frames; %d sources read'
           % (len(PLANTS), len(PLANTS), counts['bodies'], counts['points'], counts['markers'],
              counts['dates'], counts['numbers'], counts['elements'], counts['kpos'],
-             counts['window'], counts['moon'], counts['sources']))
+             counts['window'], counts['moon'], counts['comparisons'], counts['periosc'],
+             counts['frames'], counts['sources']))
     return 0
 
 

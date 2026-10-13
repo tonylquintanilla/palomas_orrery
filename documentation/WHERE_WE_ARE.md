@@ -1,25 +1,25 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 12, 2026, night: L-431 build 2 built, with L-401's.
-- Written at orrery c9722520 and gallery f9453dd.
+Last updated: October 13, 2026: L-431 build 2 accepted at your look; three fixes.
+- Written at orrery 87a54704 and gallery 924977a3.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Each orbit is drawn around its period's center (Sedna's around the
->   center of mass, smaller); markers dated from JPL's period; every
->   orbit and marker hover by the body hover's digits rule.
-> - Your Settled question: 3 of 12 lines are in a skill; L-435 (the
->   rulings held only here) carries the rest.
+> - Your look at the drawn orbits and markers: accepted ("bottom line:
+>   looks good").
+> - Three fixes from your saved plot: Encke's white arc's accuracy line;
+>   Sedna's perturbation lines say "around the Sun"; the frame fits
+>   Sedna's drawn orbit (1,030 au, not 1,104).
 >
-> **Do next:** *your look at build 2; then L-431's website build, and
-> the four briefed sessions beside it, in your order.*
+> **Do next:** *L-431's website build, and the four briefed sessions
+> beside it, in your order.*
 >
 > **Needs you now:**
-> - *Run patch_L431_6 and the maintenance run; do the look (the
->   handoff's section 7); reinstall horizons-orbital-mechanics 1.4;
->   the Project's instructions to v3.93; push.*
+> - *Run patch_L431_7 and the maintenance run (25 of 25, Orbit markers
+>   12 of 12); move the patch into documentation/; push. No look
+>   needed.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -27,15 +27,15 @@ Last updated: October 12, 2026, night: L-431 build 2 built, with L-401's.
 
   1-4. [done]  The Sun, Earth and Solar System rooms are live; the orrery
                feeds the website and nothing is typed twice.
-  5.   [NOW]   *L-401 (the distance digits): build 2 built with L-431's;
-               your look; build 3 later. Then Earth's remaining items.*
+  5.   [NOW]   *L-401 (the distance digits): builds 1 and 2 accepted;
+               build 3 later. Then Earth's remaining items.*
                << moved this session
   5b.  [NOW]   The scaffolding checks (L-424, L-425, L-426, the
                dashboard) clear beside the slices, not after.
   6.   [next]  The typed facts: the inner Oort cloud is drawn on the
                website too. Left: the check.
-  6a.  [NOW]   *Orbital periods from JPL: build 2 done, the drawn orbits
-               and markers, waiting for your look; the website next.*
+  6a.  [NOW]   *Orbital periods from JPL: builds 1 and 2 accepted, the
+               hovers, the drawn orbits and markers; the website next.*
                << moved this session
   7.   [next]  The Sun's numbers get the checking Earth's got; the Solar
                System room's features close with these rooms.
@@ -88,18 +88,18 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261012T183311Z, ok, no retry (gallery f9453dd).
+- Last cache build: 20261013T132123Z, ok, no retry (gallery 924977a3).
 - Tier-1 on the gate path: 0, by name, in PROVENANCE_AUDIT.md at
-  c9722520 (your run of 2026-10-12). Whole tree: 288; this patch takes
-  it to 280 (measured in the sandbox).
-- This page's date and the ledger's newest stamp: both Oct 12. Agree.
+  87a54704 (your run of 2026-10-12). Whole tree: 280, as build 2
+  predicted.
+- This page's date and the ledger's newest stamp: both Oct 13. Agree.
 
-## Waiting on you  **>> UPDATED THIS SESSION**
+## Waiting on you
 
 At the next design talk:
 - L-401 (the distance digits): a model with no stated accuracy (the
   Moon's analytical orbit) still reads as km precision at the floor;
-  numbers that are not distances have no digits rule. << new
+  numbers that are not distances have no digits rule.
 - The fuzzy outer corona, with the dust cloud; the exosphere the same way.
 - Moving the highlighted row to the top of the list.
 - GO's arrow, only if the text box stays centred.
@@ -115,8 +115,8 @@ Not urgent, in your order:
 
 - Every item: `LEDGER_CONSOLIDATED.md`. Open for build: L-421 (the
   typed facts), its check.
-- Orbital periods: rulings `DESIGN_L431_..._rulings_20261011.md`; build 2,
-  your look: `HANDOFF_L431_build2_orbits_markers_20261012.md` section 7
+- Orbital periods: rulings `DESIGN_L431_..._rulings_20261011.md`; build 2's
+  look and fixes `HANDOFF_L431_build2_look_fixes_20261013.md`
 - The distance digits: `DESIGN_L401_distance_digits_rulings_20261011.md`;
   reviews `REVIEW_L401_..._comparison_20261011.md`; build 1
   `HANDOFF_L401_distance_build1_20261012.md`
