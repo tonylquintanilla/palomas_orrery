@@ -393,6 +393,9 @@ built on 28e1b7d.
 Module updated: October 13, 2026 with Anthropic's Claude Fable 5.1
 (L-276 Note: Gemini re-checked, no repository access on this surface),
 built on 28e1b7d.
+Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5
+(L-431: build 2 closed, accepted at Tony's look with its four fixes run;
+build 3 briefed), built on 869b8c22.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1771,17 +1774,39 @@ L-395.
   date they were downloaded, and their centre is not written beside
   them. The comparison still runs for every orbit drawn around the Sun.
   One class: what the word "mean" and the epoch field should say.
+- **2026-10-13, build 2 CLOSED.** Accepted at Tony's look, and all four
+  fixes from his saved plot are in: patch_L431_7 pushed at 400a9615,
+  patch_L431_8 at 4da3d7cc. Tony, closing it: "Build 2 is accepted at
+  my look." Build 3, the website, is briefed in
+  `documentation/HANDOFF_L431_build3_website_brief_20261013.md`
+  (written in the coordination session at 28e1b7d1).
+- **For build 3, confirmed by Tony and not yet in the brief's export
+  list.** A body drawn around the barycentre is placed in a Sun-centred
+  scene by pairing its two element sets at one date (horizons-orbital-
+  mechanics, The Drawn Orbit Follows the Period's Centre). The orrery
+  fetches its Sun-centred elements every time and keeps the barycentre
+  ones in the period record. So the website needs the Sun-centred
+  elements (or the body's Sun-centred position on that date) as well
+  as the barycentre ones, or it cannot place the orbit. Tony,
+  2026-10-13, asked whether the heliocentric data should also be
+  fetched; told it already is and that build 3 must export both:
+  "confirmed." The brief's section 2a lists only "the elements around
+  that centre". (This line was in a later copy of patch_L431_8 than the
+  one that ran.)
 **Gap:** three builds, in order (the record's section 3):
 1. The period in the orrery: BUILT and working against JPL
    (2026-10-11); its words settled at L-401's look (2026-10-12).
 2. The drawn ellipse around the period's centre, and the markers from
    the fetched period: BUILT (2026-10-12) and ACCEPTED at Tony's look
-   (2026-10-13). The three findings from his saved plot are fixed in
-   patch_L431_7 (run, pushed at 400a9615); the perturbation lines are
-   removed for barycentre orbits in patch_L431_8, which waits for his run.
-3. The website, next: the export carries each period and the elements
-   around its centre; every room's hover prints it and draws the orbit
-   around that centre; the Horizons check compares it.
+   (2026-10-13), and CLOSED: the three findings from his saved plot
+   (patch_L431_7, pushed at 400a9615) and no perturbation lines for
+   barycentre orbits (patch_L431_8, pushed at 4da3d7cc).
+3. The website, NEXT, briefed in
+   `documentation/HANDOFF_L431_build3_website_brief_20261013.md`: the
+   export carries each period and the elements around its centre, and
+   for a barycentre body the Sun-centred elements too (above); every
+   room's hover prints it and draws the orbit around that centre; the
+   Horizons check compares it.
 The typed table's 132 unsourced entries stay one class, not chased.
 **Ref:** `documentation/DESIGN_L431_orbital_periods_rulings_20261011.md`;
 `documentation/DESIGN_L431_orbital_periods_20261011.md`;

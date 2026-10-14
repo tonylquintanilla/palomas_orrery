@@ -11,16 +11,17 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 154  
-**Total Lines of Code (non-blank):** 121,841  
-**Total Public Functions/Classes:** 1,454
+**Total Python Files:** 155  
+**Total Lines of Code (non-blank):** 121,961  
+**Total Public Functions/Classes:** 1,456
 
 ## Classification Coverage
 
-**Undetermined role (8).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (9).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
 - `patch_L269_1_scanner_breakdown_20261013.py`
+- `patch_L431_9_close_20261013.py`
 - `test_drawings_export.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
@@ -28,9 +29,10 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (1).** No valid `Domain:` tag.
+**Undetermined domain (2).** No valid `Domain:` tag.
 
 - `patch_L269_1_scanner_breakdown_20261013.py`
+- `patch_L431_9_close_20261013.py`
 
 
 ---
@@ -257,6 +259,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
 | `patch_L269_1_scanner_breakdown_20261013.py` | - L-269 (a report names its items): the maintenance run's summary prints the provenance scanner's whole-tree Tier-1 by kind of code, and names every file whose Tier-1 rose since the previous run. (165 lines) |
+| `patch_L431_9_close_20261013.py` | - closes L-431's build 2 (orbital periods: the drawn orbits and markers). Records only, no code. (120 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (173 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |

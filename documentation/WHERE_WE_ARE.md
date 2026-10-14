@@ -1,25 +1,21 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 13, 2026, afternoon: no perturbation lines for Sedna.
-- Written at orrery 400a9615 and gallery 924977a3.
+Last updated: October 13, 2026, night: orbital periods' build 2 closed.
+- Written at orrery 869b8c22 and gallery 924977a3.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Your look at the drawn orbits and markers: accepted ("bottom line:
->   looks good").
-> - Fixes from your saved plot: Encke's white arc's accuracy line; the
->   frame fits Sedna (1,030 au, not 1,104); by your ruling, no
->   perturbation lines for orbits drawn around the barycentre.
+> - Orbital periods, build 2 (the drawn orbits and markers): accepted
+>   at your look and closed; all four fixes from your plot are in.
 >
-> **Do next:** *L-431's website build, and the four briefed sessions
-> beside it, in your order.*
+> **Do next:** *L-431's website build, from its brief (in Where the
+> details are), and the briefed sessions beside it.*
 >
 > **Needs you now:**
-> - *Run patch_L431_8 and the maintenance run (25 of 25); reinstall
->   horizons-orbital-mechanics 1.5; the Project's instructions to
->   v3.94; move both patches into documentation/; push.*
+> - *Run patch_L431_9 and the maintenance run; move the patch into
+>   documentation/; push.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -34,8 +30,8 @@ Last updated: October 13, 2026, afternoon: no perturbation lines for Sedna.
                dashboard) clear beside the slices, not after.
   6.   [next]  The typed facts: the inner Oort cloud is drawn on the
                website too. Left: the check.
-  6a.  [NOW]   *Orbital periods from JPL: builds 1 and 2 accepted, the
-               hovers, the drawn orbits and markers; the website next.*
+  6a.  [NOW]   *Orbital periods from JPL: builds 1 and 2 accepted and
+               closed; build 3, the website, briefed and next.*
                << moved this session
   7.   [next]  The Sun's numbers get the checking Earth's got; the Solar
                System room's features close with these rooms.
@@ -116,7 +112,8 @@ Not urgent, in your order:
 - Every item: `LEDGER_CONSOLIDATED.md`. Open for build: L-421 (the
   typed facts), its check.
 - Orbital periods: rulings `DESIGN_L431_..._rulings_20261011.md`; build 2's
-  look and fixes `HANDOFF_L431_build2_look_fixes_20261013.md`
+  look and fixes `HANDOFF_L431_build2_look_fixes_20261013.md`; build 3's
+  brief `HANDOFF_L431_build3_website_brief_20261013.md`
 - The distance digits: `DESIGN_L401_distance_digits_rulings_20261011.md`;
   reviews `REVIEW_L401_..._comparison_20261011.md`; build 1
   `HANDOFF_L401_distance_build1_20261012.md`
